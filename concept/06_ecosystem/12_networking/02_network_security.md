@@ -385,7 +385,7 @@ rustc 1.97.0 实测：两者逻辑结果一致（`assert_eq!` 通过），但反
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
-- **P0 官方**: [std::net — Rust 标准库网络模块（官方 API 文档）](https://doc.rust-lang.org/std/net/index.html)
+- **P0 官方**: [std::net — Rust 标准库网络模块（Module）（官方 API 文档）](https://doc.rust-lang.org/std/net/index.html)
 
 ## 🧭 思维导图（Mindmap）
 

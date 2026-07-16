@@ -251,9 +251,9 @@ fn upcast(dog: &dyn Dog) -> &dyn Animal {
 类型擦除把「编译期已知的具体类型」替换为「运行期统一的接口类型」，Rust 的两种模式：
 
 - **`Box<dyn Trait>`（2.1）**：标准模式——具体类型擦除为「数据指针 + vtable 指针」的胖指针，方法调用经 vtable 间接分发。适用：异构集合（`Vec<Box<dyn Widget>>`）、插件、回调存储；
-- **自定义类型擦除（2.2）**：`Any` 路线（`Box<dyn Any>` + `TypeId` 查询，保留向下转换能力）、手写 vtable（`no_std`/FFI 场景，如 `dyn Trait` 不可用时）、`erased-serde` 模式（宏生成「薄壳 trait → 擦除 trait」的桥接层）。
+- **自定义类型擦除（2.2）**：`Any` 路线（`Box<dyn Any>` + `TypeId` 查询，保留向下转换能力）、手写 vtable（`no_std`/FFI 场景，如 `dyn Trait` 不可用时）、`erased-serde` 模式（宏（Macro）生成「薄壳 trait → 擦除 trait」的桥接层）。
 
-选型判定：需要方法调用 ⟹ `dyn Trait`；需要类型查询/存储 ⟹ `Any`；需要零依赖/`no_std` ⟹ 手写。擦除的代价统一是「静态信息丢失」——编译器优化（内联、单态化）在擦除边界终止。
+选型判定：需要方法调用 ⟹ `dyn Trait`；需要类型查询/存储 ⟹ `Any`；需要零依赖/`no_std` ⟹ 手写。擦除的代价统一是「静态信息丢失」——编译器优化（内联、单态化（Monomorphization））在擦除边界终止。
 
 ### 2.1 Box<dyn Trait>
 >
@@ -623,7 +623,7 @@ graph TD
 
 ## 十、边界测试：类型擦除的编译错误
 
-本节把「类型擦除与动态分发」的规则推到编译器与运行时的边界上逐一实测：边界测试：`dyn Trait` 的大小未知（编译错误）、边界测试：trait object 的方法返回 `Self`（编译错误）、边界测试：`Any` 的 `downcast_ref` 与生命周期（编…、边界测试：vtable 与对象安全的隐性约束（编译错误）等方面。每个用例标注预期结果（编译错误 / 运行时 panic / 逻辑错误），并用 rustc 1.97 验证：能复现的给出诊断信息与触发条件，不能复现的说明原因。这些用例共同回答一个问题——规则在极限处是否仍然成立，以及违反时编译器能否兜底。
+本节把「类型擦除与动态分发」的规则推到编译器与运行时（Runtime）的边界上逐一实测：边界测试：`dyn Trait` 的大小未知（编译错误）、边界测试：trait object 的方法返回 `Self`（编译错误）、边界测试：`Any` 的 `downcast_ref` 与生命周期（编…、边界测试：vtable 与对象安全的隐性约束（编译错误）等方面。每个用例标注预期结果（编译错误 / 运行时 panic / 逻辑错误），并用 rustc 1.97 验证：能复现的给出诊断信息与触发条件，不能复现的说明原因。这些用例共同回答一个问题——规则在极限处是否仍然成立，以及违反时编译器能否兜底。
 
 ### 10.1 边界测试：`dyn Trait` 的大小未知（编译错误）
 
@@ -898,7 +898,7 @@ fn main() {
 - **下位（实例）**：`Box<dyn Trait>`、vtable、自定义类型擦除模式。
 - **对偶**：静态分发（泛型单态化）⇄ 动态分发（类型擦除）。
 - **组合**：与 [RTTI 与动态类型识别](../../02_intermediate/04_types_and_conversions/05_rtti_and_dynamic_typing.md)、[Async Trait 对象安全](../01_async/13_async_trait_object_safety.md) 组合。
-- **依赖**：依赖 [类型系统基础](../../01_foundation/02_type_system/01_type_system.md)。
+- **依赖**：依赖 [类型系统（Type System）基础](../../01_foundation/02_type_system/01_type_system.md)。
 
 ---
 

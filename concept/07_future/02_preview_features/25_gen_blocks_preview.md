@@ -72,7 +72,7 @@
 
 ## 一、核心概念
 
-Gen Blocks 是「从 async 到 gen 的泛化」的产物：async/await 把**异步状态机**糖化为顺序代码，`gen` 把**迭代器状态机**糖化为顺序代码——两者共享同一编译器机制（协程/生成器转换）。
+Gen Blocks 是「从 async 到 gen 的泛化」的产物：async/await 把**异步状态机**糖化为顺序代码，`gen` 把**迭代器（Iterator）状态机**糖化为顺序代码——两者共享同一编译器机制（协程/生成器转换）。
 
 语法与语义：
 
@@ -179,9 +179,9 @@ graph TD
 
 技术细节的三层结构：
 
-1. **生成器状态机**：`gen` 块编译为枚举状态机——`yield` 点切分为状态，局部变量提升为结构体字段；与 async 的区别在「恢复驱动者」：迭代器由 `next()` 同步拉取，async 由执行器 `poll` 驱动。借用跨越 `yield` 时，被借用数据必须进入状态机（与 async 跨 await 借用同规则，可能触发相同的借用检查错误）。
-2. **与 Stream 的协同**：`async gen` 返回 `impl Stream`，补上了「手写 Stream 实现」的痛点（此前需 `async_stream` crate 的 `stream!` 宏模拟）；`yield` 在 async gen 中可出现在 `.await` 之后，背压由拉取语义自然提供。
-3. **与 Pin 的关系**：跨 yield 的自引用（局部变量间引用）使生成器 `!Unpin`，消费侧需注意固定（pin）要求——这是边界测试中 Pin 错误的来源。
+1. **生成器状态机**：`gen` 块编译为枚举（Enum）状态机——`yield` 点切分为状态，局部变量提升为结构体（Struct）字段；与 async 的区别在「恢复驱动者」：迭代器由 `next()` 同步拉取，async 由执行器 `poll` 驱动。借用（Borrowing）跨越 `yield` 时，被借用数据必须进入状态机（与 async 跨 await 借用同规则，可能触发相同的借用检查错误）。
+2. **与 Stream 的协同**：`async gen` 返回 `impl Stream`，补上了「手写 Stream 实现」的痛点（此前需 `async_stream` crate 的 `stream!` 宏（Macro）模拟）；`yield` 在 async gen 中可出现在 `.await` 之后，背压由拉取语义自然提供。
+3. **与 Pin 的关系**：跨 yield 的自引用（Reference）（局部变量间引用）使生成器 `!Unpin`，消费侧需注意固定（pin）要求——这是边界测试中 Pin 错误的来源。
 
 判定依据：稳定前用 `async_stream` 宏获得等价能力；迁移成本仅语法层。
 
@@ -259,7 +259,7 @@ fn main() {
 }
 ```
 
-异步生成器（`async gen`）概念示例：
+异步（Async）生成器（`async gen`）概念示例：
 
 ```rust,ignore
 #![feature(gen_blocks)]
@@ -496,7 +496,7 @@ graph TD
 | 用例 | 冲突机制 | 期望结果 |
 |:---|:---|:---|
 | `gen` 与 `Iterator` 自动实现 | `Iterator::next` 签名 vs 生成器挂起 | 类型不匹配或需显式桥接 |
-| 借用生命周期 | 局部借用穿越 `yield` | 借用检查器拒绝或要求重排 |
+| 借用生命周期（Lifetimes） | 局部借用穿越 `yield` | 借用检查器拒绝或要求重排 |
 | `Pin` 隐式需求 | 状态机自引用时的固定 | 要求 `pin!`/`Box::pin` |
 | 异常控制流 | `return`/`break` 作用于挂起状态机 | 编译错误或受限语义 |
 
@@ -680,7 +680,7 @@ fn early_return() -> impl Iterator<Item = i32> {
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
-- **P1 学术/形式化**: [Anton & Thiemann: Deriving Type Systems and Implementations for Coroutines（APLAS 2010, LNCS 6461；协程/生成器类型系统的学术推导）](https://link.springer.com/chapter/10.1007/978-3-642-17164-2_5)（2026-07-12 验证 HTTP 200）
+- **P1 学术/形式化**: [Anton & Thiemann: Deriving Type Systems and Implementations for Coroutines（APLAS 2010, LNCS 6461；协程/生成器类型系统（Type System）的学术推导）](https://link.springer.com/chapter/10.1007/978-3-642-17164-2_5)（2026-07-12 验证 HTTP 200）
 - **P2 生态/社区**: [docs.rs/hyper — 生态权威 API 文档](https://docs.rs/hyper) · [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio)
 
 ## 🧭 思维导图（Mindmap）

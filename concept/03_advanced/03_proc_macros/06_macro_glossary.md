@@ -17,7 +17,7 @@
 
 **最后更新**: 2025-12-11
 
-本文档汇总了 Rust 宏系统中的核心术语和概念。
+本文档汇总了 Rust 宏（Macro）系统中的核心术语和概念。
 
 ---
 
@@ -72,7 +72,7 @@
 
 本页是宏系统术语的权威速查表。宏类型三个核心术语的精确定义：
 
-- **Macro（宏）**：编译期执行的「代码生成规则/程序」，输入语法结构、输出代码。Rust 宏的统一特征：在解析后展开、输出必须是合法 token 树、遵循卫生性规则。与「函数」的分界线是执行时机（编译期 vs 运行期），与「泛型」的分界线是「生成代码 vs 实例化代码」。
+- **Macro（宏）**：编译期执行的「代码生成规则/程序」，输入语法结构、输出代码。Rust 宏的统一特征：在解析后展开、输出必须是合法 token 树、遵循卫生性规则。与「函数」的分界线是执行时机（编译期 vs 运行期），与「泛型（Generics）」的分界线是「生成代码 vs 实例化代码」。
 - **Declarative Macro（声明宏）**：`macro_rules!` 定义的宏——「声明」指其定义形式是「一组模式-转录规则的陈述」而非算法。别名「示例宏」（macro by example, MBE）更贴近其本质：每条规则是一个「输入示例 → 输出示例」的模板。能力边界：只能做语法结构变换，不能分析语义（看不到类型、看不到值）。
 - **Procedural Macro（过程宏）**：以 Rust 函数（过程）实现的宏——「过程」指其定义是命令式算法。编译为编译器插件动态库，在展开阶段执行。三种注册形式（derive/attribute/function-like）决定「它能标注/出现在什么语法位置」，不决定能力（三者都操作完整 TokenStream）。
 
@@ -163,7 +163,7 @@ macro_rules! say_hello {
 
 <!-- glossary-waive: Pattern Matching — 本处为宏领域特指义项（macro_rules! 参数匹配），区别于语言级模式匹配，后者以 concept/00_meta/01_terminology/01_terminology_glossary.md 权威定义为准 -->
 
-宏的参数匹配规则（`macro_rules!` 领域特指；语言级“解构值并根据结构执行分支”的模式匹配见权威术语表）。
+宏的参数匹配规则（`macro_rules!` 领域特指；语言级“解构值并根据结构执行分支”的模式匹配（Pattern Matching）见权威术语表）。
 
 **片段说明符** (Fragment Specifiers):
 
@@ -235,9 +235,9 @@ create_var!(x, 42); // let x = 42;
 - **TokenStream**：过程宏的输入输出类型——token 序列（标识符/字面量/标点/组），携带 span 信息；`proc_macro::TokenStream`（编译器接口）与 `proc_macro2::TokenStream`（可测试的镜像）的区分是过程宏测试的前提；
 - **三种宏形态**：Derive（`#[proc_macro_derive(Name, attributes(...))]`，附加到类型定义）、Attribute（`#[proc_macro_attribute]`，替换被标注项）、Function-like（`#[proc_macro]`，`name!(...)` 调用）——形态决定输入形态与输出位置；
 - **syn**：`TokenStream` → AST 的解析库——`parse_macro_input!` 宏、`DeriveInput`/`ItemFn` 等语法树类型、`Error` 诊断体系；
-- **quote**：AST → `TokenStream` 的生成库——准引用语法与 `#var` 插值。
+- **quote**：AST → `TokenStream` 的生成库——准引用（Reference）语法与 `#var` 插值。
 
-配套概念：过程宏在**编译期独立 crate 中执行**——这解释了「为什么宏 crate 不能 `use` 自己」「为什么宏依赖不进入下游运行时依赖」。
+配套概念：过程宏在**编译期独立 crate 中执行**——这解释了「为什么宏 crate 不能 `use` 自己」「为什么宏依赖不进入下游运行时（Runtime）依赖」。
 
 ### TokenStream
 

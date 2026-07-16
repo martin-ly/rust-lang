@@ -42,7 +42,7 @@
 
 ## 设计模式基础
 
-术语表的起点是两个基础定义：设计模式指“在特定上下文中反复出现的设计问题的可复用解决方案”，强调上下文-问题-解三元组而非代码模板；GoF 指 1994 年《Design Patterns》四位作者及其 23 个经典模式（创建型/结构型/行为型），它们诞生于 C++/Java 的类继承语境。理解 Rust 模式的前提是识别 GoF 模式中有多少是“弥补语言缺陷”（如 Visitor 之于无模式匹配），有多少是真正的设计思想。
+术语表的起点是两个基础定义：设计模式指“在特定上下文中反复出现的设计问题的可复用解决方案”，强调上下文-问题-解三元组而非代码模板；GoF 指 1994 年《Design Patterns》四位作者及其 23 个经典模式（创建型/结构型/行为型），它们诞生于 C++/Java 的类继承语境。理解 Rust 模式的前提是识别 GoF 模式中有多少是“弥补语言缺陷”（如 Visitor 之于无模式匹配（Pattern Matching）），有多少是真正的设计思想。
 
 ### 设计模式 (Design Pattern)
 
@@ -75,7 +75,7 @@
 | | Flyweight | `Arc` + 共享不可变数据 | [Pattern Implementation Comparison](09_pattern_implementation_comparison.md) |
 | | Proxy | trait object / 生命周期（Lifetimes）守卫 | [Design Patterns](01_patterns.md) |
 | **行为型** | Observer | `Weak<dyn Fn>` / broadcast channel | [Design Patterns](01_patterns.md) |
-| | Strategy | 泛型单态化（Monomorphization） / `dyn Trait` | [Pattern Implementation Comparison](09_pattern_implementation_comparison.md) |
+| | Strategy | 泛型（Generics）单态化（Monomorphization） / `dyn Trait` | [Pattern Implementation Comparison](09_pattern_implementation_comparison.md) |
 | | State | enum + `match` / Typestate | [Design Patterns](01_patterns.md) |
 | | Command | trait + `Vec<Box<dyn Command>>` | [Design Patterns](01_patterns.md) |
 | | Chain of Responsibility | `Iterator` + `and_then` | [Design Patterns](01_patterns.md) |
@@ -90,7 +90,7 @@
 
 ## Rust 特有概念
 
-Rust 特有概念是模式词汇表的增量部分：Trait 对象（`dyn Trait` 动态分派，异构集合的唯一手段）、Typestate（用类型编码状态机，非法转换编译期拒绝）、零成本抽象（高层抽象编译为等价手写代码，Rust 模式设计的第一约束）、`OnceLock`/`LazyLock`（标准库化的懒初始化，取代 lazy_static 宏）。这些概念使许多 GoF 模式在 Rust 中要么消失（被语言特性吸收），要么变形（借类型系统获得更强保证）。ock / LazyLock。
+Rust 特有概念是模式词汇表的增量部分：Trait 对象（`dyn Trait` 动态分派，异构集合的唯一手段）、Typestate（用类型编码状态机，非法转换编译期拒绝）、零成本抽象（Zero-Cost Abstraction）（高层抽象编译为等价手写代码，Rust 模式设计的第一约束）、`OnceLock`/`LazyLock`（标准库化的懒初始化，取代 lazy_static 宏（Macro））。这些概念使许多 GoF 模式在 Rust 中要么消失（被语言特性吸收），要么变形（借类型系统（Type System）获得更强保证）。ock / LazyLock。
 
 ### Trait 对象
 
@@ -146,7 +146,7 @@ impl Email<Verified> {
 
 ### 零成本抽象 (Zero-Cost Abstraction)
 
-高级语言特性编译后不产生运行时开销的设计原则；泛型单态化（Monomorphization）、迭代器（Iterator）链、`const` 计算均遵循此原则。详见 [零成本抽象（Zero-Cost Abstraction）](../../01_foundation/00_start/02_zero_cost_abstractions.md)。
+高级语言特性编译后不产生运行时（Runtime）开销的设计原则；泛型单态化（Monomorphization）、迭代器（Iterator）链、`const` 计算均遵循此原则。详见 [零成本抽象（Zero-Cost Abstraction）](../../01_foundation/00_start/02_zero_cost_abstractions.md)。
 
 ### OnceLock / LazyLock
 

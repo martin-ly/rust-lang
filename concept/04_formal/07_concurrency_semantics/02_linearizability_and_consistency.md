@@ -8,7 +8,7 @@
 > **受众**: [进阶 / 研究者]
 > **内容分级**: [专家级]
 > **Bloom 层级**: L4-L5
-> **权威来源**: 本文件为 `concept/` 权威页：线性化形式定义与一致性谱系的唯一深度解释；[L3 谱系页](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) §6.2 仅保留导航式概览并链接回本页。
+> **权威来源**: 本文件为 `concept/` 权威页：线性化形式定义与一致性（Coherence）谱系的唯一深度解释；[L3 谱系页](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) §6.2 仅保留导航式概览并链接回本页。
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×Ana — 分析并发对象正确性条件及其证明方法
 > **前置概念**: [L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · [L3 无锁结构谱系](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) · [L4 Hoare 逻辑](../03_operational_semantics/02_hoare_logic.md)
@@ -296,7 +296,7 @@ fn pop_wrong(&self) -> Option<T> {
 
 ### 边界：ABA 与内存回收
 
-教学骨架省略了 ABA 问题（head 被 pop 又 push 回同一地址时 CAS 误判）与安全内存回收（pop 后 `Box::from_raw` 时他线程仍可能持有该指针）。工程实现必须用 `crossbeam-epoch` 的世代回收或 tagged pointer——这属于实现细节，不改变线性化点的位置，但决定代码的**内存安全性**。
+教学骨架省略了 ABA 问题（head 被 pop 又 push 回同一地址时 CAS 误判）与安全内存回收（pop 后 `Box::from_raw` 时他线程仍可能持有该指针）。工程实现必须用 `crossbeam-epoch` 的世代回收或 tagged pointer——这属于实现细节，不改变线性化点的位置，但决定代码的**内存安全（Memory Safety）性**。
 
 ---
 
@@ -325,7 +325,7 @@ fn pop_wrong(&self) -> Option<T> {
 
 > **认知路径**: 历史与实时序 ⟹ (L1)(L2)(L3) 三条件 ⟹ 线性化点法 ⟹ 谱系与 CAP ⟹ Treiber 实例 ⟹ 反例。
 
-学习顺序建议：先掌握 [L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) 的原子操作与内存序（happens-before 是线性化的基础设施），再读本页定义；§5 的实例建议逐行对照 §3.1 的三条论证；
+学习顺序建议：先掌握 [L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) 的原子操作（Atomic Operations）与内存序（happens-before 是线性化的基础设施），再读本页定义；§5 的实例建议逐行对照 §3.1 的三条论证；
 最后经 [L6 CRDT 谱系](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md) 看谱系最弱端如何靠数学结构（半格）重新获得可证明的收敛。
 
 **核心推理链**: 顺序规约 ⟹ 线性化定义 ⟹ 线性化点 ⟹ 实现正确性——这条链是工业界审查一切无锁代码的默认推理模板。

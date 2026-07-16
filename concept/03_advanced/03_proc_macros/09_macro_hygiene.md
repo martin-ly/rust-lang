@@ -18,7 +18,7 @@
 **最后更新**: 2025-12-11
 **适用版本**: Rust 1.97.0+
 
-本文档详细说明 Rust 宏的卫生性(Hygiene)机制、作用域规则和最佳实践。
+本文档详细说明 Rust 宏（Macro）的卫生性(Hygiene)机制、作用域规则和最佳实践。
 
 ---
 
@@ -761,7 +761,7 @@ fn main() {
 对照要点（呼应 §1–§3）：
 
 - **类型/函数/宏** 等条目名在 `macro_rules!` 中是 call-site 解析（非卫生）——上例 `$name` 按调用处可见性生成 `fn answer`；
-- **局部变量、生命周期、标签** 是 def-site 卫生——这是上例成立的依据；
+- **局部变量、生命周期（Lifetimes）、标签** 是 def-site 卫生——这是上例成立的依据；
 - 需要刻意跨边界时，用 `$crate` 引用定义处条目（见 §3 过程宏 Span 的对照）；过程宏则通过 `Span::call_site()` / `Span::def_site()`（nightly）显式控制。
 
 > **权威来源**: [Rust Reference — Macros By Example: Hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene) · [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)（链接 2026-07-12 curl 实测 200；代码 rustc 1.97.0 实测）

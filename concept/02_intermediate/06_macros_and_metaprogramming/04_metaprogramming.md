@@ -888,7 +888,7 @@ fn main() {
 | 属性 | 取值 / 判定 | 依据 |
 |---|---|---|
 | 手段谱系 | 声明宏、过程宏（derive/attr/fn）、build.rs 三族 | 编译管线 |
-| 求值时机 | 全部在编译期；运行时无元编程能力 | 语言边界 |
+| 求值时机 | 全部在编译期；运行时（Runtime）无元编程能力 | 语言边界 |
 | 输入输出 | `TokenStream` → `TokenStream`（过程宏） | proc_macro API |
 | 能力边界 | 无任意反射；以语法扩展为主 | 设计约束 |
 | 工具 | `syn` / `quote` / `cargo-expand` 生态支撑 | 生态 |

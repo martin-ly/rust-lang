@@ -44,7 +44,7 @@
 
 - **创建型**：对象构造复杂（多可选字段）→ Builder；构造协议有顺序约束 → Typestate Builder；需运行期决定具体类型 → Factory/Abstract Factory；全局唯一且需懒加载 → `OnceLock`/`LazyLock`（拒绝手写 Singleton）。
 - **结构型**：跨不兼容接口 → Adapter；运行期叠加行为 → Decorator（Rust 中常用 newtype + Deref）；共享细粒度对象 → Flyweight。
-- **行为型**：算法可替换 → Strategy（泛型优先）；状态驱动行为 → State（`enum` + `match` 优先于类层次）；事件广播 → Observer（Rust 中常用 channel/watch）。
+- **行为型**：算法可替换 → Strategy（泛型（Generics）优先）；状态驱动行为 → State（`enum` + `match` 优先于类层次）；事件广播 → Observer（Rust 中常用 channel/watch）。
 
 元规则：**先问「Rust 语言机制是否已内建该模式」**——Visitor 被 `match` 吸收、Iterator 被 `Iterator` trait 吸收，照搬 GoF 类层次是 Rust 新手最大的模式误用。
 
@@ -463,7 +463,7 @@ impl BulletPool {
 
 1. **过度工程**：为「将来可能的变化」引入抽象层——Rust 重构成本低（编译器全程护航），YAGNI 原则在 Rust 中比动态语言更成立；三层以内能解决就不上六边形架构。
 2. **Trait Object 滥用**：`Box<dyn Trait>` 遍地导致优化阻断与对象安全限制（不能返回 `Self`/泛型方法）；默认用泛型，仅在异构集合/运行期插件场景装箱。
-3. **忽略所有权**：用 `Rc<RefCell<T>>` 重建 Java 式对象图——共享可变状态的每个 `RefCell` 都是潜在 `BorrowMutError` panic 点；先尝试所有权重组（拆分结构、传递 ID），最后才上内部可变性。
+3. **忽略所有权（Ownership）**：用 `Rc<RefCell<T>>` 重建 Java 式对象图——共享可变状态的每个 `RefCell` 都是潜在 `BorrowMutError` panic 点；先尝试所有权重组（拆分结构、传递 ID），最后才上内部可变性。
 4. **锁粒度过大**：`Mutex<BigStruct>` 保护一切，把并发程序退化为串行；按数据分区加锁（`DashMap`、分片计数器），或改消息传递。
 
 判定依据：Code review 中凡出现「以后可能会用到」的抽象，要求作者现场演示一个真实调用场景。
@@ -655,9 +655,9 @@ pub fn http_client_example() {
 
 Rust 特有的模式选择考量围绕三个语言约束：
 
-1. **所有权与生命周期**：模式不能假设共享引用存在——GoF 中「多个对象持同一对象引用」的结构（如 Observer 的 subject 回引）必须显式设计为 `Weak` 引用、ID 索引或消息传递，借用检查会拒绝隐式共享。
-2. **`Send + Sync` 边界**：跨线程模式（生产者-消费者、线程池）的类型自动带上 `Send` 约束；`Rc`/`Cell` 在异步上下文中意外出现会导致 `!Send` future 编译错误——选择并发模式前先确认数据类型的 auto trait 实现。
-3. **错误处理**：`Result` 传播改变了「异常安全」设计——没有栈展开隐藏路径，但 `?` 使提前返回无处不在；模式中的不变量恢复应依赖 RAII（`Drop`）而非 try/finally 思维。
+1. **所有权与生命周期（Lifetimes）**：模式不能假设共享引用（Reference）存在——GoF 中「多个对象持同一对象引用」的结构（如 Observer 的 subject 回引）必须显式设计为 `Weak` 引用、ID 索引或消息传递，借用（Borrowing）检查会拒绝隐式共享。
+2. **`Send + Sync` 边界**：跨线程模式（生产者-消费者、线程池）的类型自动带上 `Send` 约束；`Rc`/`Cell` 在异步（Async）上下文中意外出现会导致 `!Send` future 编译错误——选择并发模式前先确认数据类型的 auto trait 实现。
+3. **错误处理（Error Handling）**：`Result` 传播改变了「异常安全」设计——没有栈展开隐藏路径，但 `?` 使提前返回无处不在；模式中的不变量恢复应依赖 RAII（`Drop`）而非 try/finally 思维。
 
 判定依据：把 Java/C++ 模式移植到 Rust 时，先画所有权图再谈结构；`Send`/`Sync` 错误信息就是并发模式的选型提示。
 
@@ -721,7 +721,7 @@ pub enum PatternError {
 
 ## 7. 生产环境指南
 
-生产落地的四张清单按优先级排序：安全性先行（unsafe 边界、Send/Sync 约束、依赖审计不过不能上线）；性能其次（热路径零分配、避免锁竞争、基准回归监控）；可维护性兜底（模式数量克制、新成员 onboarding 成本、编译时间预算）。模式选择优先级的总原则：能用语言机制（泛型、trait）就不用运行时技巧，能用标准库就不用自建抽象，能用简单模式就不用 GoF 全家桶。
+生产落地的四张清单按优先级排序：安全性先行（unsafe 边界、Send/Sync 约束、依赖审计不过不能上线）；性能其次（热路径零分配、避免锁竞争、基准回归监控）；可维护性兜底（模式数量克制、新成员 onboarding 成本、编译时间预算）。模式选择优先级的总原则：能用语言机制（泛型、trait）就不用运行时（Runtime）技巧，能用标准库就不用自建抽象，能用简单模式就不用 GoF 全家桶。
 
 ### 7.1 性能检查清单
 

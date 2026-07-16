@@ -63,7 +63,7 @@ embedded-hal 1.0 的解决:
 
 1.0 的三项核心变化都指向同一目标：**让驱动作者不必为每个 HAL 实现写特例**：
 
-- **错误类型统一**: 每个 trait 族定义关联 `Error` 类型 + `ErrorKind` 枚举（如 `spi::ErrorKind::Overrun`），驱动可对错误类别做可移植处理，同时保留 HAL 特定错误的扩展通道；0.2 时代各 HAL 自定义错误类型导致驱动无法统一处理。
+- **错误类型统一**: 每个 trait 族定义关联 `Error` 类型 + `ErrorKind` 枚举（Enum）（如 `spi::ErrorKind::Overrun`），驱动可对错误类别做可移植处理，同时保留 HAL 特定错误的扩展通道；0.2 时代各 HAL 自定义错误类型导致驱动无法统一处理。
 - **SpiDevice vs SpiBus 分离**: 把“独占总线”（`SpiBus`：transfer/write/read 整批事务）与“共享总线上的设备”（`SpiDevice`：transaction 组合多操作并自动管理 CS 片选）拆为两个 trait——多设备共享 SPI 总线的正确性从“调用方自觉”变为类型保证。
 - **异步 HAL（embedded-hal-async）**: 数字 I/O、SPI、I2C、串口的 async 版本独立成 crate（1.0 同步 trait 的镜像），与 Embassy 等执行器配套；异步 trait 的稳定化使驱动可一套代码服务同步/异步两种 HAL。
 
@@ -139,7 +139,7 @@ async fn read_sensor(spi: &mut impl SpiDevice<u8>, drdy: &mut impl Wait) {
 
 ## 三、Embassy v0.5 生产就绪状态
 
-Embassy 是嵌入式 Rust 的异步运行时 + HAL 套件，v0.5 标志着其从“实验先锋”进入生产可选区间：
+Embassy 是嵌入式 Rust 的异步（Async）运行时（Runtime） + HAL 套件，v0.5 标志着其从“实验先锋”进入生产可选区间：
 
 - **Embassy 是什么**: 三件套——`embassy-executor`（无堆、静态任务分配的 async 执行器，中断即任务）、`embassy-hal`（主流 MCU 的 async HAL 实现）、`embassy-net`/`embassy-usb` 等协议栈；设计哲学是“中断驱动的协作调度”，无 RTOS 内核的抢占开销。
 - **v0.5 关键特性**: 网络/USB 协议栈的 API 稳定化、更多 MCU 家族的 HAL 覆盖、`waker` 与任务模型的打磨；版本号仍为 0.x 反映“快速演进”的自我定位，但核心 executor 已多年无破坏性变化。

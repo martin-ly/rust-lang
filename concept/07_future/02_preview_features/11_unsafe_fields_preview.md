@@ -174,7 +174,7 @@ Rust unsafe 模型的演进层次:
 
 ## 二、技术细节
 
-Unsafe Fields 提案把 `unsafe` 从“块级/函数级”细化到“字段级”：某些字段的读写本身就违反类型不变量（如 `Vec` 的 `len` 字段、自引用结构的指针字段），应当每次访问都显式 `unsafe`，而非依赖模块级约定。本节技术细节围绕这一粒度变化展开。
+Unsafe Fields 提案把 `unsafe` 从“块级/函数级”细化到“字段级”：某些字段的读写本身就违反类型不变量（如 `Vec` 的 `len` 字段、自引用（Reference）结构的指针字段），应当每次访问都显式 `unsafe`，而非依赖模块（Module）级约定。本节技术细节围绕这一粒度变化展开。
 
 三个技术层面的相互关系：
 
@@ -503,7 +503,7 @@ Unsafe Fields 的边界测试聚焦“字段级危险”与“类型级机制”
 | 与 Drop 的交互 | 析构时按字段 unsafe 顺序释放，手动 Drop 易违反 | 运行期 UB 风险，需 Miri 验证 |
 | 与 `#[repr(C)]` 的交互 | FFI 布局类型标记 unsafe 字段后 C 侧语义 | 编译期布局不变，但访问约定不对称 |
 | 不变式文档化 | unsafe 字段无 Safety Tag 注释 | lint/审计工具应告警 |
-| 第五组 | 泛型代码中 unsafe 字段的传导 | 约束传播规则的边界 |
+| 第五组 | 泛型（Generics）代码中 unsafe 字段的传导 | 约束传播规则的边界 |
 
 测试基于 nightly + `feature(unsafe_fields)` 实测；stable 1.97 上相关语法全部报 feature-gate 错误。
 

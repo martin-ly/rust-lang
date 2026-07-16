@@ -137,7 +137,7 @@ graph TD
 
 ## 三、WASI 架构与能力安全
 
-WASI 的三层架构自底向上是：Wasm 核心运行时（线性内存与 trap 语义）、WASI ABI（witx/component 类型定义的系统接口）、宿主实现（wasmtime/wasmer 把接口映射到真实 OS）。能力安全模型是其设计核心：模块默认无任何外部能力，文件描述符以“目录句柄 + 相对路径”形式预授权（preopen），无法沙箱逃逸到授权目录之外——这与 POSIX 的全局命名空间（任意绝对路径）形成根本对比。
+WASI 的三层架构自底向上是：Wasm 核心运行时（Runtime）（线性内存与 trap 语义）、WASI ABI（witx/component 类型定义的系统接口）、宿主实现（wasmtime/wasmer 把接口映射到真实 OS）。能力安全模型是其设计核心：模块（Module）默认无任何外部能力，文件描述符以“目录句柄 + 相对路径”形式预授权（preopen），无法沙箱逃逸到授权目录之外——这与 POSIX 的全局命名空间（任意绝对路径）形成根本对比。
 
 ### 3.1 WASI 的三层架构
 >
@@ -296,7 +296,7 @@ World = 导入接口集 + 导出接口集
 
 ## 五、Rust `wasm32-wasip1` 或 `wasm32-wasip2` 目标
 
-`wasm32-wasip1`（及 wasip2 组件模型）目标上的 Rust 开发有两组实践约束：`no_std` 场景下 std 的 IO/线程/时间 API 全部不可用，需用 `core` + WASI 原生接口替代（p1 有 std 支持但受能力模型裁剪）；错误处理跨边界时 Rust 的 `Result` 必须映射到 Wasm 的 trap 或 wit 定义的 error 变体，`panic!` 默认 abort 且无法跨边界捕获。wasip2 的 component model 进一步用 WIT 接口类型使跨语言调用类型安全。
+`wasm32-wasip1`（及 wasip2 组件模型）目标上的 Rust 开发有两组实践约束：`no_std` 场景下 std 的 IO/线程/时间 API 全部不可用，需用 `core` + WASI 原生接口替代（p1 有 std 支持但受能力模型裁剪）；错误处理（Error Handling）跨边界时 Rust 的 `Result` 必须映射到 Wasm 的 trap 或 wit 定义的 error 变体，`panic!` 默认 abort 且无法跨边界捕获。wasip2 的 component model 进一步用 WIT 接口类型使跨语言调用类型安全。
 
 ### 5.1 `no_std` + `wasm32` 的约束与模式
 >
@@ -447,7 +447,7 @@ fn escape_sandbox() {
 ```
 
 > **运行时（Runtime）错误**: WASI 能力检查器返回 `ENOTCAPABLE`（无能力）。
-> **与 Rust 所有权的同构**: 这类似于 Rust 编译器阻止无所有权变量的访问——WASI 在运行时（Runtime）强制执行相同的逻辑，但边界是"能力句柄"而非"所有权变量"。
+> **与 Rust 所有权（Ownership）的同构**: 这类似于 Rust 编译器阻止无所有权变量的访问——WASI 在运行时（Runtime）强制执行相同的逻辑，但边界是"能力句柄"而非"所有权变量"。
 > **关键洞察**: Rust 的所有权检查在编译期，WASI 的能力检查在运行时（Runtime），二者形成**互补的安全层**。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ### 8.4 反例：WIT 类型不匹配导致组件组合失败

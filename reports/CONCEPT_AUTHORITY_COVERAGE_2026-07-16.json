@@ -1,0 +1,186 @@
+{
+  "date": "2026-07-16",
+  "scanned": 500,
+  "coverage": {
+    "P0": [
+      495,
+      99.0
+    ],
+    "P1": [
+      458,
+      91.6
+    ],
+    "P2": [
+      424,
+      84.8
+    ],
+    "any": [
+      500,
+      100.0
+    ],
+    "none": 0
+  },
+  "content_scope": {
+    "scanned": 414,
+    "P0": [
+      414,
+      100.0
+    ],
+    "P1": [
+      405,
+      97.8
+    ],
+    "P2": [
+      407,
+      98.3
+    ],
+    "any": [
+      414,
+      100.0
+    ],
+    "gaps_p1": [
+      "concept/01_foundation/04_control_flow/03_let_chains.md",
+      "concept/02_intermediate/01_generics/05_const_generics_and_trait_objects.md",
+      "concept/03_advanced/00_concurrency/04_send_sync_boundaries.md",
+      "concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md",
+      "concept/03_advanced/04_ffi/04_async_ffi_boundary.md",
+      "concept/03_advanced/04_ffi/05_unsafe_extern_blocks.md",
+      "concept/06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md",
+      "concept/07_future/00_version_tracking/rust_1_98_stabilized.md",
+      "concept/07_future/02_preview_features/19_const_trait_preview.md"
+    ],
+    "gaps_p2": [
+      "concept/02_intermediate/01_generics/05_const_generics_and_trait_objects.md",
+      "concept/03_advanced/00_concurrency/04_send_sync_boundaries.md",
+      "concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md",
+      "concept/03_advanced/04_ffi/05_unsafe_extern_blocks.md",
+      "concept/06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md",
+      "concept/07_future/00_version_tracking/rust_1_98_stabilized.md",
+      "concept/07_future/02_preview_features/19_const_trait_preview.md"
+    ]
+  },
+  "by_layer": {
+    "L0": {
+      "n": 63,
+      "P0": 63,
+      "any": 63
+    },
+    "L1": {
+      "n": 56,
+      "P0": 56,
+      "any": 56
+    },
+    "L2": {
+      "n": 39,
+      "P0": 39,
+      "any": 39
+    },
+    "L3": {
+      "n": 70,
+      "P0": 70,
+      "any": 70
+    },
+    "L4": {
+      "n": 55,
+      "P0": 55,
+      "any": 55
+    },
+    "L5": {
+      "n": 20,
+      "P0": 20,
+      "any": 20
+    },
+    "L6": {
+      "n": 128,
+      "P0": 124,
+      "any": 128
+    },
+    "L7": {
+      "n": 66,
+      "P0": 65,
+      "any": 66
+    },
+    "L?": {
+      "n": 3,
+      "P0": 3,
+      "any": 3
+    }
+  },
+  "core_gaps_l1_l4_no_p0": [],
+  "none_any": [],
+  "crates_docs": {
+    "total": 568,
+    "kinds": {
+      "stub": 504,
+      "content": 62,
+      "index_readme": 2
+    },
+    "content": 62,
+    "covered": 62,
+    "pct": 100.0,
+    "gaps": [],
+    "per_crate": {
+      "c01_ownership_borrow_scope": {
+        "content": 5,
+        "covered": 5
+      },
+      "c02_type_system": {
+        "content": 4,
+        "covered": 4
+      },
+      "c03_control_fn": {
+        "content": 5,
+        "covered": 5
+      },
+      "c04_generic": {
+        "content": 2,
+        "covered": 2
+      },
+      "c05_threads": {
+        "content": 4,
+        "covered": 4
+      },
+      "c06_async": {
+        "content": 4,
+        "covered": 4
+      },
+      "c07_process": {
+        "content": 13,
+        "covered": 13
+      },
+      "c08_algorithms": {
+        "content": 6,
+        "covered": 6
+      },
+      "c09_design_pattern": {
+        "content": 4,
+        "covered": 4
+      },
+      "c10_networks": {
+        "content": 10,
+        "covered": 10
+      },
+      "c11_macro_system_proc": {
+        "content": 1,
+        "covered": 1
+      },
+      "c12_wasm": {
+        "content": 3,
+        "covered": 3
+      },
+      "c17_resolver_v3_public_demo": {
+        "content": 1,
+        "covered": 1
+      }
+    },
+    "skipped": {
+      "index_readme": [
+        "crates/c15_verification_tools/docs/README.md",
+        "crates/c16_gui/docs/README.md"
+      ],
+      "code_listing": [],
+      "quiz": []
+    },
+    "dead_canonical": []
+  }
+}

@@ -278,7 +278,7 @@ let tx_offset = offset_of!(UartRegs, tx); // 编译期常量
 | 第三步 | RFC 起草/合并 | rust-lang/rfcs 仓库 PR 状态 |
 | 长期 | 与 Pinned Places 收敛为统一的 pin 人机工学方案 | 两份设计文档交叉引用收敛 |
 
-相关已稳定特性（`pin!` 宏 1.68、`Pin` 方法集）提供现状基线；本页时间轴只登记已发生的里程碑，⏳ 项表示等待官方更新，不作时间预测。
+相关已稳定特性（`pin!` 宏（Macro） 1.68、`Pin` 方法集）提供现状基线；本页时间轴只登记已发生的里程碑，⏳ 项表示等待官方更新，不作时间预测。
 
 ### 5.1 2026 年官方三步计划（Rust Project Goals 2026 — Beyond the `&`）
 

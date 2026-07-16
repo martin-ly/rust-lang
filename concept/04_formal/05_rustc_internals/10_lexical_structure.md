@@ -219,7 +219,7 @@ Token Stream → Parser      → AST
 
 ## 九、Token Tree 与宏
 
-过程宏和声明宏（Declarative Macro）操作的单位是 **Token Tree（TokenTree）**：
+过程宏（Procedural Macro）和声明宏（Declarative Macro）操作的单位是 **Token Tree（TokenTree）**：
 
 ```bnf
 TokenTree ::= Token | DelimitedTree
@@ -236,7 +236,7 @@ DelimitedTree ::= "(" TokenTree* ")"
 |:---|:---|
 | [Names and Resolution](06_names_and_resolution.md) | token 之上进行名称解析 |
 | [Items Reference](11_items_reference.md) | item 语法基于 token 流构建 |
-| [Macros](../../03_advanced/03_proc_macros/01_macros.md) | 宏在 token tree 层面操作 |
+| [Macros](../../03_advanced/03_proc_macros/01_macros.md) | 宏（Macro）在 token tree 层面操作 |
 | [Keywords](../../01_foundation/00_start/06_keywords.md) | 关键字是特殊 token |
 | [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) | `unsafe` 是词法关键字，触发特殊解析上下文 |
 

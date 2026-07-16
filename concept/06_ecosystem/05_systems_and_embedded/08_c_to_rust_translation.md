@@ -120,7 +120,7 @@ Verified Lifting = 形式化方法 + 程序分析 + 大语言模型（LLM）
 
 ## 三、学术研究前沿
 
-C→Rust 自动翻译是当前程序语言研究的热点方向，前沿工作按技术路线分三类：基于类型推断的所有权重构（Scylla 等尝试从 C 指针用法推断 Rust 所有权与生命周期）、基于大模型的语义翻译（His2Trans 等用 LLM 生成 idiomatic Rust 再验证）、混合方法（先 C2Rust 机械翻译 unsafe Rust，再用程序分析逐步消除 unsafe）。评估核心指标是 safe 代码占比与功能等价性，尚无工具能在大型真实项目上同时拿高分。st：C++ → Safe Rust 的自动翻译（PLDI…等5个方面。
+C→Rust 自动翻译是当前程序语言研究的热点方向，前沿工作按技术路线分三类：基于类型推断（Type Inference）的所有权（Ownership）重构（Scylla 等尝试从 C 指针用法推断 Rust 所有权与生命周期（Lifetimes））、基于大模型的语义翻译（His2Trans 等用 LLM 生成 idiomatic Rust 再验证）、混合方法（先 C2Rust 机械翻译 unsafe Rust，再用程序分析逐步消除 unsafe）。评估核心指标是 safe 代码占比与功能等价性，尚无工具能在大型真实项目上同时拿高分。st：C++ → Safe Rust 的自动翻译（PLDI…等5个方面。
 
 ### 3.1 Scylla（OOPSLA 2026）
 

@@ -94,7 +94,7 @@ Rust 网络编程建立在三个核心抽象之上，本节目的定义其语义
 
 - **`TcpStream`/`TcpListener`**：阻塞式 TCP 的字节流抽象——`Read`/`Write` trait 实现使其与文件、管道共享同一套 IO 组合子；`set_nodelay`（禁用 Nagle）、`set_ttl`、`shutdown` 是流控制的标准旋钮；
 - **`UdpSocket`**：无连接数据报抽象——`send_to`/`recv_from` 保留消息边界（与 TCP 流的根本差异），单 socket 可 `connect` 绑定默认对端；
-- **`SocketAddr` 与解析**：`ToSocketAddrs` trait 统一「字符串/元组/迭代器」形式的地址输入，DNS 解析是**阻塞系统调用**——异步代码中必须用 `tokio::net::lookup_host` 而非 std 版本。
+- **`SocketAddr` 与解析**：`ToSocketAddrs` trait 统一「字符串/元组/迭代器（Iterator）」形式的地址输入，DNS 解析是**阻塞系统调用**——异步（Async）代码中必须用 `tokio::net::lookup_host` 而非 std 版本。
 
 权威参考：[std::net 文档](https://doc.rust-lang.org/std/net/index.html)、[Beej's Guide to Network Programming](https://beej.us/guide/bgnet/)（socket 概念的语言无关经典）。
 
@@ -245,7 +245,7 @@ TCP vs UDP 语义矩阵:
 
 ## 十、边界测试：网络编程的编译错误
 
-本节把「Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象」的规则推到编译器与运行时的边界上逐一实测：边界测试：`TcpStream` 的 `move` 与分裂（编译错误） 与 边界测试：套接字地址类型不匹配（编译错误）。每个用例标注预期结果（编译错误 / 运行时 panic / 逻辑错误），并用 rustc 1.97 验证：能复现的给出诊断信息与触发条件，不能复现的说明原因。这些用例共同回答一个问题——规则在极限处是否仍然成立，以及违反时编译器能否兜底。
+本节把「Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象」的规则推到编译器与运行时（Runtime）的边界上逐一实测：边界测试：`TcpStream` 的 `move` 与分裂（编译错误） 与 边界测试：套接字地址类型不匹配（编译错误）。每个用例标注预期结果（编译错误 / 运行时 panic / 逻辑错误），并用 rustc 1.97 验证：能复现的给出诊断信息与触发条件，不能复现的说明原因。这些用例共同回答一个问题——规则在极限处是否仍然成立，以及违反时编译器能否兜底。
 
 ### 10.1 边界测试：`TcpStream` 的 `move` 与分裂（编译错误）
 

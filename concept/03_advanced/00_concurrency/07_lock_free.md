@@ -821,7 +821,7 @@ fn main() {}
 
 ## 嵌入式测验
 
-本组测验围绕测验 1：CAS 循环（记忆层）、测验 2：ABA 问题（理解层）、测验 3：Treiber Stack 实现（应用层）与测验 4：Hazard Pointer vs Epoch-Based（…设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用检查」或「运行时行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
+本组测验围绕测验 1：CAS 循环（记忆层）、测验 2：ABA 问题（理解层）、测验 3：Treiber Stack 实现（应用层）与测验 4：Hazard Pointer vs Epoch-Based（…设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用（Borrowing）检查」或「运行时行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
 
 ### 测验 1：CAS 循环（记忆层）
 
@@ -1232,7 +1232,7 @@ hp[0].store(null_mut(), Ordering::SeqCst);
 | 属性 | 取值 / 判定 | 依据 |
 |---|---|---|
 | 定义 | 无锁：至少一个线程在有限步内推进 | 并发理论的进展保证分级 |
-| 基石 | 原子操作 + CAS 循环 | `std::sync::atomic` |
+| 基石 | 原子操作（Atomic Operations） + CAS 循环 | `std::sync::atomic` |
 | 内存序 | `Relaxed`/`Acquire`/`Release`/`AcqRel`/`SeqCst` 五档 | 继承 C++11 内存模型 |
 | ABA 问题 | 无锁结构经典陷阱，需版本戳或 hazard pointer | 并发文献 |
 | 生态 | `crossbeam` / `arc-swap` 等成熟结构 | crates.io |

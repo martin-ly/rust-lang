@@ -96,7 +96,7 @@
 2. **Reactive Streams**（JVM 规范，后影响各语言）：定义**背压感知的异步数据流**四接口——`Publisher`/`Subscriber`/`Subscription`/`Processor`，核心创新是 `Subscription.request(n)` 让下游控制流速。
 3. **FRP（函数式响应编程）**：源于 Elliott & Hudak（1997），用**连续时间语义**建模行为（Behavior）与事件（Event），是声明式编程范式。
 
-对应到 Rust：Reactive Streams ≈ `futures::Stream` + `poll_next` 的拉取模型；FRP 在 Rust 中因所有权与连续语义的冲突只有离散近似（`tokio::sync::watch`、信号库 `futures-signals`）。
+对应到 Rust：Reactive Streams ≈ `futures::Stream` + `poll_next` 的拉取模型；FRP 在 Rust 中因所有权（Ownership）与连续语义的冲突只有离散近似（`tokio::sync::watch`、信号库 `futures-signals`）。
 
 判定依据：讨论「响应式」时先声明指哪一层——架构宣言、流规范还是 FRP 范式。
 
@@ -476,7 +476,7 @@ FRP（Functional Reactive Programming）把**随时间变化的值**提升为一
 
 - **Signal vs Event**: Signal 是“任意时刻有值的连续量”（如鼠标位置），Event 是“离散发生的瞬间”（如点击）；FRP 系统通常同时提供两者及相互转换（`sample`、`hold`）。
 - **连续语义 vs 离散语义**: 连续语义允许按任意时间点采样，实现上仍离散化（帧/滴答驱动），但组合语义更清晰。
-- **Rust 中的限制**: FRP 依赖高阶闭包共享与动态依赖图，与所有权模型存在张力——信号图通常需要 `Rc<RefCell<_>>` 或 arena 索引，纯函数式 FRP 在 Rust 中工程成本偏高。
+- **Rust 中的限制**: FRP 依赖高阶闭包（Closures）共享与动态依赖图，与所有权模型存在张力——信号图通常需要 `Rc<RefCell<_>>` 或 arena 索引，纯函数式 FRP 在 Rust 中工程成本偏高。
 
 判定依据：UI 状态绑定类需求用 `tokio::sync::watch` 或框架自带响应式原语即可，不必引入完整 FRP。
 
@@ -885,7 +885,7 @@ async fn send_alert(log: &LogEntry) -> Result<(), AlertError> {
 
 ## 九、边界测试
 
-响应式边界测试验证三类失效：无背压时生产速度超过消费速度，事件在 channel 中无界累积直到 OOM（运行时错误，必须用有界 channel 或采样）；跨线程发送含非 `Send` 捕获的 Stream（`Rc` 捕获变量）在编译期被拦截；FRP 信号图中的循环依赖导致运行时死锁或栈溢出。三类用例分别对应流量控制、并发安全与图结构约束，是响应式系统上线前的最低验证集。信号循环引用导致死锁（运行时错误）。
+响应式边界测试验证三类失效：无背压时生产速度超过消费速度，事件在 channel 中无界累积直到 OOM（运行时错误，必须用有界 channel 或采样）；跨线程发送含非 `Send` 捕获的 Stream（`Rc` 捕获变量）在编译期被拦截；FRP 信号图中的循环依赖导致运行时死锁或栈溢出。三类用例分别对应流量控制、并发安全（Concurrency Safety）与图结构约束，是响应式系统上线前的最低验证集。信号循环引用导致死锁（运行时错误）。
 
 ### 9.1 边界测试：无背压导致内存溢出（运行时错误）
 

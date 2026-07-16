@@ -12,13 +12,13 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: R×Und — 建立五模型的区分性理解
 > **前置概念**: [L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · [L4 进程代数与 Rust](../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md)
-> **后置概念**: [L5 执行模型同构性矩阵](02_execution_model_isomorphism.md) · [L4 线性化与一致性谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) · [L6 CRDT 谱系](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md)
+> **后置概念**: [L5 执行模型同构性矩阵](02_execution_model_isomorphism.md) · [L4 线性化与一致性（Coherence）谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) · [L6 CRDT 谱系](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md)
 
 ---
 
 ## 一、为什么需要一页式定义矩阵
 
-「同步/并发/并行/异步/分布式」五个词在日常讨论中高度混用（「异步并发」「并行同步」），但每个词在形式文献中有**精确且互不相同的**定义。混用的代价是选型错误：把「需要并发」的问题用「并行」工具解（线程爆炸），或把「分布式」问题按「并发」假设建模（忽略部分失败）。
+「同步/并发/并行/异步（Async）/分布式」五个词在日常讨论中高度混用（「异步并发」「并行同步」），但每个词在形式文献中有**精确且互不相同的**定义。混用的代价是选型错误：把「需要并发」的问题用「并行」工具解（线程爆炸），或把「分布式」问题按「并发」假设建模（忽略部分失败）。
 
 本页是**纯导航页**：每个模型给出定义、形式根基、Rust 载体、典型原语、失效模式各一行，全部深度内容链接到对应权威页。
 
@@ -32,7 +32,7 @@
 |:---|:---|:---|:---|:---|:---|
 | **定义** | 调用者阻塞直到被调用者返回；控制流串行 | 多个任务**在时间段上重叠**（逻辑同时性），可在单核交错 | 多个计算**在物理上同时**执行（需多核/多机） | 任务发起与完成解耦；发起方不阻塞，经回调/poll 获知结果 | 多个**故障独立**的节点经网络通信协作；无共享内存、无全局时钟 |
 | **形式根基** | λ 演算求值序（见 [L4 求值策略](../../04_formal/03_operational_semantics/04_evaluation_strategies.md)） | 进程代数 CSP/CCS/π（见 [L4 进程代数](../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md)）；线性化（见 [L4 一致性谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md)） | 工作度量（Work-Span，Blelloch） | 无栈协程 / CPS（见 [L5 同构性矩阵 §11](02_execution_model_isomorphism.md)） | Lamport 偏序（见 [L6 因果序与向量时钟](../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md)）；CAP（见 [L4 一致性谱系 §4](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md)） |
-| **判定问题** | 调用返回前调用者是否阻塞？ | 任务生命周期是否在时间段上重叠？ | 是否有 ≥2 个硬件执行单元同时推进计算？ | 发起方是否在结果就绪前继续执行？ | 节点是否可独立失败、通信是否必经网络？ |
+| **判定问题** | 调用返回前调用者是否阻塞？ | 任务生命周期（Lifetimes）是否在时间段上重叠？ | 是否有 ≥2 个硬件执行单元同时推进计算？ | 发起方是否在结果就绪前继续执行？ | 节点是否可独立失败、通信是否必经网络？ |
 | **Rust 载体** | 普通函数调用、`for` 循环 | `std::thread` + `Mutex`/`mpsc`（见 [L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md)） | `rayon` 并行迭代、`rayon::join` | `async fn` + `Future` + executor（tokio，见 [L3 异步编程](../../03_advanced/01_async/01_async.md)） | RPC/消息（tonic、ractor cluster）；CRDT（见 [L6 CRDT 谱系](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md)） |
 | **典型原语** | 调用栈、返回值 | `Mutex`/`RwLock`/`Atomic`、`mpsc::channel`、`select!` | `par_iter`、`join`、`scope` | `.await`、`Waker`、`Pin`、`select!` | 消息传递、向量时钟、共识（见 [L6 分布式共识](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md)）、Actor（见 [L4 Actor 语义](../../04_formal/07_concurrency_semantics/03_actor_semantics.md)） |
 | **失效模式** | 无并发错误；性能瓶颈 = 调用链延迟 | 数据竞争（Rust 中 ⟹ 编译期拒绝）、死锁、饥饿 | 任务粒度过细 ⟹ 调度开销反超；负载不均 | `!Send` 跨 `.await`、Waker 丢失 ⟹ 任务永不唤醒、取消语义误用 | 部分失败、网络分区、消息乱序/丢失、时钟漂移、并发写发散 |
@@ -136,7 +136,7 @@ flowchart TD
 **修正对照**：判定一个模型属于哪类，问三个问题——
 
 1. 释放时机是否由程序结构静态确定？（RAII：是；GC：否）
-2. 是否存在运行时回收线程/写屏障开销？（RAII：否；GC：是）
+2. 是否存在运行时（Runtime）回收线程/写屏障开销？（RAII：否；GC：是）
 3. 析构顺序是否可依赖？（RAII：可；GC：不可）
 
 **陷阱要点**：矩阵中的五模型（手动/RAII/GC/RC/区域）是正交的资源管理策略；把 RAII 叫「静态 GC」会抹掉确定性这一最关键的工程差异（实时/嵌入式场景的可用性分界）。

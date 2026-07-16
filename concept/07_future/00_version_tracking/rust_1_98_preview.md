@@ -44,7 +44,7 @@
 
 | 特性 | 状态 | 跟踪链接 |
 |:---|:---|:---|
-| `Panic[Hook]Info` 中 `Location<'_>` 生命周期改为 `'static` | stabilized in 1.98 beta | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
+| `Panic[Hook]Info` 中 `Location<'_>` 生命周期（Lifetimes）改为 `'static` | stabilized in 1.98 beta | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
 | mingw-w64 C 工具链更新 | stabilized in 1.98 beta | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
 | 移除 Solaris 上 `File::lock` 实现（语义错误） | stabilized in 1.98 beta | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
 | 移除 `-Zemscripten-wasm-eh` | stabilized in 1.98 beta | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
@@ -76,11 +76,11 @@
 
 ## 一、语言特性预览
 
-1.98 预览的语言特性围绕一个长期主题：**让 `Pin` 与自引用类型可用**。六项提案按解决同一问题的不同侧面组织：
+1.98 预览的语言特性围绕一个长期主题：**让 `Pin` 与自引用（Reference）类型可用**。六项提案按解决同一问题的不同侧面组织：
 
-- **Pin Ergonomics（`&pin mut`/`&pin const`）**: 为固定引用引入专用类型构造器，消除 `Pin::new`/`as_mut` 的样板噪声，让“被固定的借用”在类型层面一等公民化。
+- **Pin Ergonomics（`&pin mut`/`&pin const`）**: 为固定引用引入专用类型构造器，消除 `Pin::new`/`as_mut` 的样板噪声，让“被固定的借用（Borrowing）”在类型层面一等公民化。
 - **Reborrow Traits**: 把“从 `&mut T` 得到 `&mut T` 的重借用”抽象为 trait，支撑 Pin API 的人体工学改进。
-- **Field Projections**: 对 `Pin<&mut Struct>` 安全地投影到字段（`Pin<&mut Field>`），当前只能手写 unsafe——是自引用结构体（如手写字节码解释器的状态）的刚需。
+- **Field Projections**: 对 `Pin<&mut Struct>` 安全地投影到字段（`Pin<&mut Field>`），当前只能手写 unsafe——是自引用结构体（Struct）（如手写字节码解释器的状态）的刚需。
 - **Return Type Notation (RTN)**: `fn foo() -> impl Trait<method(): Send>` 式地约束返回类型的关联项，缓解 `impl Trait` 无法表达“返回的 future 必须 Send”的痛点。
 
 判定依据：全部为预览级提案，手写 async runtime/嵌入式执行器的团队应跟踪，业务代码无需预留。
@@ -388,8 +388,8 @@ fn demo_stable_apis() {
 
 编译器与工具链的四项预览按“用户可感知度”排序：
 
-- **Cranelift Backend（生产级）**: 基于 Cranelift 的代码生成后端达到生产可用——调试构建速度提升 20–40%，代价是运行时性能略逊 LLVM（5–15%）；定位明确：dev 用 Cranelift，release 用 LLVM。
-- **Parallel Frontend**: 编译前端并行化（类型检查、宏展开的并行调度），大 workspace 的全量构建时间显著下降；默认启用计划与具体提速数据以官方公告为准。
+- **Cranelift Backend（生产级）**: 基于 Cranelift 的代码生成后端达到生产可用——调试构建速度提升 20–40%，代价是运行时（Runtime）性能略逊 LLVM（5–15%）；定位明确：dev 用 Cranelift，release 用 LLVM。
+- **Parallel Frontend**: 编译前端并行化（类型检查、宏（Macro）展开的并行调度），大 workspace 的全量构建时间显著下降；默认启用计划与具体提速数据以官方公告为准。
 - **build-std**: 从源码构建标准库（`-Zbuild-std` 的稳定化路径），解锁自定义 target、`panic=abort` 全栈一致、标准库 LTO 等能力，嵌入式与 `-Zbuild-std-features=panic_immediate_abort` 类场景受益最大。
 - **Next-Generation Trait Solver**: 新 trait 求解器取代旧实现，修复长期存在的关联类型/高阶约束边角案例，并为 GAT/TAIT 的完整语义奠基。
 
@@ -476,7 +476,7 @@ Cargo 与生态的四项预览聚焦**依赖关系的精确表达与合规**：
 - **Public/Private Dependencies（RFC #3516）**: 区分“出现在公共 API 中的依赖”与“纯实现细节依赖”，让 cargo 能在依赖变化是否构成 SemVer 破坏上给出机器可判定的答案——库作者的版本纪律从此可验证。
 - **Cargo SBOM Precursor**: 软件物料清单（SBOM）生成的前置能力，把依赖图、来源、许可证导出为标准格式（SPDX/CycloneDX），响应欧美供应链合规法规（如 CRA）的强制披露要求。
 - **cargo-script 稳定化**: 单文件 Rust 脚本（frontmatter 内嵌 `[dependencies]`）从 nightly 走向稳定，定位为构建脚本、CI 小工具、教学示例的轻量载体。
-- **Sized Hierarchy / const Sized**: 放宽 `Sized` 约束的层级关系，服务 `extern type` 与更精细的 unsized 抽象，属类型系统底层的铺路基。
+- **Sized Hierarchy / const Sized**: 放宽 `Sized` 约束的层级关系，服务 `extern type` 与更精细的 unsized 抽象，属类型系统（Type System）底层的铺路基。
 
 判定依据：SBOM 能力对受监管行业是刚需，应提前验证工具链；public/private 依赖一旦可用，库的 SemVer 检查（`cargo-semver-checks`）精度将显著提升。
 

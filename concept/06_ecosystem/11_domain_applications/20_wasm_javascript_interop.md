@@ -82,7 +82,7 @@
 Rust↔JavaScript 互操作的知识结构可按四个维度建立完整概念地图：
 
 - **概念定义**：互操作（interop）指 WASM 模块与 JS 宿主间的双向调用机制；`wasm-bindgen` 是生成这层胶水的事实标准工具，自 Rust 1.30 起可用。
-- **属性特征**：核心是**类型安全**（编译期检查签名）与**自动转换**（`String`/`Vec`/结构体的编解码）；性能特征是每次跨界调用有序列化开销，决定了“粗粒度接口”设计原则。
+- **属性特征**：核心是**类型安全**（编译期检查签名）与**自动转换**（`String`/`Vec`/结构体（Struct）的编解码）；性能特征是每次跨界调用有序列化开销，决定了“粗粒度接口”设计原则。
 - **关系连接**：互操作层位于 Rust 业务逻辑与 Web API（DOM、fetch、WebGL）之间；WASM 线性内存是双方共享数据的唯一通道。
 - **思维导图**：将上述维度可视化，标注 wasm-bindgen、wasm-pack、js-sys、web-sys 之间的依赖关系。
 
@@ -196,7 +196,7 @@ const result = wasmModule.greet("World")
 
 ## ⚛️ React 集成
 
-React 集成 WASM 的推荐模式是**把 WASM 模块封装为自定义 Hook**，隔离异步初始化与组件生命周期：
+React 集成 WASM 的推荐模式是**把 WASM 模块封装为自定义 Hook**，隔离异步（Async）初始化与组件生命周期（Lifetimes）：
 
 ```text
 useWasm() → { ready, api }   // api 在 ready 前为 null
@@ -504,7 +504,7 @@ let mut_raw_ref = union.get_integer_mut_raw();
 **外部资源**:
 
 - [wasm-bindgen Book](https://rustwasm.github.io/docs/wasm-bindgen/)
-- [Web APIs](https://rustwasm.github.io/wasm-bindgen/web-sys/index.html)
+- [Web APIs (`web-sys`)](https://rustwasm.github.io/docs/wasm-bindgen/web-sys/index.html)
 
 ---
 

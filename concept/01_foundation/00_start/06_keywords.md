@@ -177,7 +177,7 @@ fn main() {
 | 关键字分档 | 当前使用关键字 / 保留关键字 / 弱关键字三档 | 本文 §二–§三 |
 | 转义机制 | `r#` raw identifier 允许把关键字用作标识符 | 本文 §四 |
 | Edition 演化 | 新关键字按 edition 引入（如 `gen` 保留），raw id 保证跨 edition 互操作 | 本文 §三–§四 |
-| 语法地位 | 关键字不可作为普通标识符，宏卫生需特殊处理 | Rust Reference 词法章 |
+| 语法地位 | 关键字不可作为普通标识符，宏（Macro）卫生需特殊处理 | Rust Reference 词法章 |
 
 ## 🔗 概念关系
 
@@ -247,7 +247,7 @@ let ok = r#try(input);
 
 - A. 既然 `r#` 允许，项目内应优先用关键字命名标识符以节省词汇
 - B. 宏（Macro）接收用户输入并需生成以关键字命名的字段/变量时，可能需要 raw identifier；但常规代码应避免用关键字作标识符
-- C. raw identifier 可以在运行时动态生成
+- C. raw identifier 可以在运行时（Runtime）动态生成
 - D. 跨 edition 依赖无需关心保留关键字变化
 
 <details>

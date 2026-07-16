@@ -425,8 +425,8 @@ time = { version = "0.3.53", features = ["serde", "macros"] }
 
 # 2025-12-11: 其他常用库最新稳定版本
 # uuid: UUID生成和解析库，支持多种UUID版本
-# 2026-06-25: cargo update 1.23.3 -> 1.23.4
-uuid = { version = "1.23.4", features = ["v4", "serde"] }
+# 2026-07-16: cargo update 1.23.5 -> 1.24.0
+uuid = { version = "1.24.0", features = ["v4", "serde"] }
 # url: URL解析和操作库
 url = "2.5.8"
 # bytes: 字节缓冲区处理库，提供高效的字节操作
@@ -464,9 +464,9 @@ memoffset = "0.9.1"
 # 2025-12-11: 数据库和存储最新稳定版本
 # sea-orm: 异步动态ORM，支持多种数据库后端
 # 2026-06-19: 2.0.0-rc.40 -> 2.0.0-rc.41
-# 2026-07-09: cargo update 自动解析至 2.0.0-rc.42
+# 2026-07-16: cargo update 自动解析至 2.0.0-rc.43
 # 2026-07-09: Sea-ORM 2.0 stable 仍未发布（crates.io max_stable_version = 1.1.20）
-sea-orm = { version = "2.0.0-rc.42", features = [
+sea-orm = { version = "2.0.0-rc.43", features = [
     "sqlx-postgres",      # PostgreSQL支持
     "runtime-tokio-rustls", # tokio运行时和rustls支持
 ], default-features = false }
@@ -568,8 +568,8 @@ png = "0.18.1"
 # tiff: TIFF图像格式支持
 tiff = "0.11.3"
 # bitflags: 位标志宏 - 2026-02-13: 2.10.0 -> 2.11.0 (cargo update)
-# 2026-06-06: cargo update 2.12.1 -> 2.13.0
-bitflags = "2.13.0"
+# 2026-07-16: cargo update 2.13.0 -> 2.13.1
+bitflags = "2.13.1"
 # hashbrown: 高性能HashMap实现
 hashbrown = "0.17.1"  # 2026-05-09: cargo update
 # itertools: 迭代器工具库
@@ -639,9 +639,9 @@ nix = "0.31.3"
 # 传递依赖显式声明 - 用于版本控制和统一管理
 
 # clap 系列 - 命令行参数解析
-# 2026-05-19: 已升级至 4.6.x (cargo update 成功解析)
-clap = { version = "4.6.1", default-features = false }
-clap_builder = { version = "4.6.0", default-features = false }
+# 2026-07-16: cargo update 4.6.1 -> 4.6.2
+clap = { version = "4.6.2", default-features = false }
+clap_builder = { version = "4.6.2", default-features = false }
 clap_complete = "4.6.5"
 clap_derive = "4.6.1"
 

@@ -44,8 +44,8 @@
 
 | 特性 | 影响面 | 受益场景 | 权威源 |
 |:---|:---|:---|:---|
-| `assert_matches!` / `debug_assert_matches!`（§1.1） | 标准库 / 测试 | 模式匹配断言，替代手写 `assert!(matches!(...))` | [Release Blog](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) · [assert_matches](../../02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md) |
-| `expr` metavariable 传入 `cfg`（§1.2） | 语言 / 宏 | 宏展开结果参与条件编译判定 | [releases.rs](https://releases.rs/docs/1.96.0/) · [01 macros](../../03_advanced/03_proc_macros/01_macros.md) · [01 macros](../../03_advanced/03_proc_macros/01_macros.md) |
+| `assert_matches!` / `debug_assert_matches!`（§1.1） | 标准库 / 测试 | 模式匹配（Pattern Matching）断言，替代手写 `assert!(matches!(...))` | [Release Blog](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) · [assert_matches](../../02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md) |
+| `expr` metavariable 传入 `cfg`（§1.2） | 语言 / 宏（Macro） | 宏展开结果参与条件编译判定 | [releases.rs](https://releases.rs/docs/1.96.0/) · [01 macros](../../03_advanced/03_proc_macros/01_macros.md) · [01 macros](../../03_advanced/03_proc_macros/01_macros.md) |
 | `core::range` Copy 类型（§2.1） | 标准库 | `Range`/`RangeFrom`/`RangeToInclusive` 及迭代器 Copy 化 | [releases.rs](https://releases.rs/docs/1.96.0/) · [迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) · [01 iterator patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) |
 | `NonZero` 范围迭代（§2.2） | 标准库 | 非零整数范围直接迭代 | [releases.rs](https://releases.rs/docs/1.96.0/) |
 | `From<T>` for `AssertUnwindSafe` / `LazyCell` / `LazyLock`（§2.3） | 标准库 | 一键构造包装类型 | [releases.rs](https://releases.rs/docs/1.96.0/) · [02 interior mutability](../../02_intermediate/02_memory_management/02_interior_mutability.md) · [02 interior mutability](../../02_intermediate/02_memory_management/02_interior_mutability.md) |
@@ -60,7 +60,7 @@
 
 - **`assert_matches!` / `debug_assert_matches!`**: 用模式而非布尔表达式断言值结构，`assert_matches!(resp, Ok(Status::Success { .. }))` 比手写 `match` + `panic!` 更精确地表达意图，失败信息自动打印实际值。
 - **`expr` 元变量在 `cfg` 中的应用**: 宏规则（macro_rules）中 `expr` 片段可与 `#[cfg(...)]` 条件组合，减少为不同平台复制整条规则的需要。
-- **s390x 内联汇编向量寄存器**: 平台特定能力补齐，`asm!` 在 IBM Z 上可使用向量寄存器约束，仅影响该架构的底层库。
+- **s390x 内联汇编（Inline Assembly）向量寄存器**: 平台特定能力补齐，`asm!` 在 IBM Z 上可使用向量寄存器约束，仅影响该架构的底层库。
 
 判定依据：前两项面向所有开发者，可立即采用；第三项仅在 s390x 目标上相关。
 
@@ -96,9 +96,9 @@ debug_assert_matches!(result, Ok(n) if n > 0);
 
 标准库层的四个变更都指向同一主题：**让常用类型更“好用”而不破坏既有语义**。
 
-- **`core::range` Copy 类型**: 新范围类型实现 `Copy`，在泛型算法中传递不再触发移动语义问题。
+- **`core::range` Copy 类型**: 新范围类型实现 `Copy`，在泛型（Generics）算法中传递不再触发移动语义问题。
 - **`NonZero` 范围迭代**: `NonZeroU32` 等可直接参与范围迭代，省去手动偏移 + unwrap 的样板。
-- **`From<T>` 扩展**: 常用转换覆盖更多整数/引用组合，减少显式 `as` 强转（强转会静默截断）。
+- **`From<T>` 扩展**: 常用转换覆盖更多整数/引用（Reference）组合，减少显式 `as` 强转（强转会静默截断）。
 - **`valid for read/write` 定义重构**: 指针有效性（validity）契约的措辞澄清，影响 unsafe 代码的未定义行为（UB）判定边界——写 unsafe 代码者应重读该节。
 
 判定依据：前三项是便利性提升，升级即受益；第四项是语义澄清，unsafe 代码需对照自查。
@@ -402,7 +402,7 @@ mindmap
 
 ## ⚠️ 反例与陷阱
 
-升级到新稳定版不会让借用检查失效：借用存活期间赋值一律被拒。
+升级到新稳定版不会让借用（Borrowing）检查失效：借用存活期间赋值一律被拒。
 
 ### 反例：借用存活期间重新赋值（rustc 1.97.0，--edition 2024 实测）
 

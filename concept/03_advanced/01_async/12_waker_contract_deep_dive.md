@@ -10,15 +10,15 @@
 > **权威来源**: 本文件为 `concept/` 权威页（Waker 实现层与契约违反目录视角）。
 > **分工声明**: Waker 的**契约概述**（poll⟹Pending⟹已注册、活性三反例、活性调试决策树）与 **VTable 概念性代码**统一维护在 [Async/Await §8.8/§8.9](01_async.md#88-waker-契约与活性)，[Async 高级主题 §8.8/8.9](02_async_advanced.md) 为其高级摘要。本页只做两件事：① `RawWakerVTable` 手工实现的**正确模式全集**（全部 rustc 1.97 实测可编译）；② 契约违反的**反例目录**（时序图 / loom 思路 / miri 思路）。凡涉及「Waker 契约是什么」的问题以 01 为准，本页不重复推导（AGENTS.md §2 Canonical 规则）。
 > **A/S/P 标记**: **S** — Structure
-> **双维定位**: C×Ana — 分析 Waker 类型擦除结构下引用计数记账与活性契约的保持与破坏条件
+> **双维定位**: C×Ana — 分析 Waker 类型擦除结构下引用（Reference）计数记账与活性契约的保持与破坏条件
 > **定位**: `Waker` 是 async Rust 唯一的唤醒原语，也是唯一要求程序员手写 unsafe 才能自造的核心抽象。本页把「正确实现」变成查表，把「错误实现」变成可识别的反例指纹。
 > **前置概念**: [Async/Await](01_async.md) · [Future 与 Executor 机制](04_future_and_executor_mechanisms.md) · [Pin 与 Unpin](08_pin_unpin.md)
-> **后置概念**: [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) · [Tokio 运行时内部机制](../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md) · [Unsafe](../02_unsafe/01_unsafe.md)
+> **后置概念**: [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) · [Tokio 运行时（Runtime）内部机制](../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md) · [Unsafe](../02_unsafe/01_unsafe.md)
 
 ---
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **来源**: [std::task::Wake](https://doc.rust-lang.org/std/task/trait.Wake.html) · [std::task::RawWakerVTable](https://doc.rust-lang.org/std/task/struct.RawWakerVTable.html) · [async-book ch2 — Wakers](https://rust-lang.github.io/async-book/02_execution/03_wakeups.html) · [futures task 模块](https://docs.rs/futures/latest/futures/task/)（以上 2026-07-12 curl 实测 HTTP 200）
+> **来源**: [std::task::Wake](https://doc.rust-lang.org/std/task/trait.Wake.html) · [std::task::RawWakerVTable](https://doc.rust-lang.org/std/task/struct.RawWakerVTable.html) · [async-book ch2 — Wakers](https://rust-lang.github.io/async-book/02_execution/03_wakeups.html) · [futures task 模块（Module）](https://docs.rs/futures/latest/futures/task/)（以上 2026-07-12 curl 实测 HTTP 200）
 > **国际权威来源（2026-07-13 补录）**: **P1** [Jung et al. — RustBelt（POPL 2018）](https://plv.mpi-sws.org/rustbelt/popl18/)（unsafe 契约与手工 vtable 协议的形式化判据；curl 200 实测 2026-07-13）
 > **对应 Crate**: [`c06_async`](../../../crates/c06_async)
 > **对应练习**: [`exercises/src/async_programming/`](../../../exercises/src/async_programming)
@@ -75,7 +75,7 @@ flowchart TD
 |---|---|---|
 | `clone` | 复制 waker，返回新 RawWaker | **+1**（新返回的 data 是一份独立持有权） |
 | `wake` | 唤醒，**消耗**本次持有权 | **-1**（函数返回后 data 不可再用） |
-| `wake_by_ref` | 唤醒，**不消耗**持有权 | **0**（借用语义） |
+| `wake_by_ref` | 唤醒，**不消耗**持有权 | **0**（借用（Borrowing）语义） |
 | `drop` | 释放一份持有权 | **-1** |
 
 > **关键洞察**：`RawWakerVTable` 的契约本质是一条**守恒律**——`Waker` 句柄的总数（显式 clone 产生 +1，`wake`/`drop` 消耗 -1）必须等于底层对象引用计数的净变化。任何一条函数的实现破坏守恒，结果就是泄漏（计数偏多）或 double-free / use-after-free（计数偏少），§5-C2 给出 miri 视角的完整推导。
@@ -215,7 +215,7 @@ fn demo(tx: SyncSender<i32>) {
 
 ### 3.3 模式 P3：无计数变体（`&'static` / arena 数据）
 
-嵌入式执行器（如 embassy）常用「任务永不析构」的 arena 模型：data 是 `&'static Task` 或任务索引，`clone` 直接复制 `RawWaker::new(data, &VTABLE)`，`wake`/`wake_by_ref` 只做入队，`drop` 为 no-op。守恒律依然成立（持有权无成本、无限可复制），但**合法性依赖一条外部不变量**：data 指向的对象在整个执行器生命周期内有效。这条不变量超出类型系统表达能力，必须在 SAFETY 注释中显式论证——这正是 `Waker::from_raw` 是 unsafe 的原因。
+嵌入式执行器（如 embassy）常用「任务永不析构」的 arena 模型：data 是 `&'static Task` 或任务索引，`clone` 直接复制 `RawWaker::new(data, &VTABLE)`，`wake`/`wake_by_ref` 只做入队，`drop` 为 no-op。守恒律依然成立（持有权无成本、无限可复制），但**合法性依赖一条外部不变量**：data 指向的对象在整个执行器生命周期（Lifetimes）内有效。这条不变量超出类型系统（Type System）表达能力，必须在 SAFETY 注释中显式论证——这正是 `Waker::from_raw` 是 unsafe 的原因。
 
 ## 四、wake / wake_by_ref 契约的精确语义
 
@@ -225,7 +225,7 @@ fn demo(tx: SyncSender<i32>) {
 |:---:|---|---|
 | R1 | **wake ⟹ 必须重新 poll** | 执行器收到 wake 后唯一合法的响应是把对应任务重新入队并最终 `poll`。`wake` 不是「数据就绪」的承诺，只是「值得再 poll 一次」的提示。§3.1 的 `block_on` 即最小演示。 |
 | R2 | **spurious wake 合法** | 任何时候、任何次数、对任何状态的 waker 调用 wake 都是合法的；最坏代价是一次空转 poll。Future 的 `poll` 因此必须是幂等可重入的：被「无理由」地 poll 不得出错。 |
-| R3 | **wake 消耗 / wake_by_ref 借用** | `Waker::wake(self)` 转移所有权（等价于先 wake_by_ref 再 drop）；vtable 层面对应 §2 的 -1 / 0 记账。用错的后果不是活性问题而是内存问题（§5-C2）。 |
+| R3 | **wake 消耗 / wake_by_ref 借用** | `Waker::wake(self)` 转移所有权（Ownership）（等价于先 wake_by_ref 再 drop）；vtable 层面对应 §2 的 -1 / 0 记账。用错的后果不是活性问题而是内存问题（§5-C2）。 |
 | R4 | **Pending 之前的最后一次 waker 才有效** | 每次 poll 都传入新的 `Context`；资源方必须保存**最近一次** poll 收到的 waker 克隆，旧的可以被丢弃。executor 允许每次 poll 更换 waker（例如任务迁移到别的 worker）。 |
 
 > **R2 的工程推论**：测试唤醒逻辑时，「多 wake 几次」永远不能作为 bug 依据；「少 wake 一次」才是。这也解释了为什么 tokio 的 `Notify` 采用「许可（permit）合并」语义——多次 wake 合并为一次通知是合法的。

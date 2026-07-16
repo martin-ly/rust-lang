@@ -225,8 +225,8 @@
 
 Kotlin 与 Rust 同为“现代语言”但设计重心不同（开发者体验 vs 系统控制），三个特性对比最能体现分歧：
 
-- **类型推断与泛型**: 两者都有局部类型推断与泛型；Kotlin 的泛型有型变标注（`in`/`out` 声明处型变）但类型擦除导致运行期无法区分 `List<String>`/`List<Int>`；Rust 泛型单态化——无擦除、无运行期开销，`impl Trait`/GAT 提供 Scala 式的抽象能力但无 HKT。
-- **扩展函数 vs Trait**: Kotlin 扩展函数是静态分派的语法糖（不能覆写、不参与多态），适合给第三方类加便捷方法；Rust trait 是完全的多态机制（泛型约束 + 动态分派两吃），且受孤儿规则约束防止生态冲突——表达力 trait 胜，临时便利性扩展函数胜。
+- **类型推断与泛型**: 两者都有局部类型推断与泛型；Kotlin 的泛型有型变标注（`in`/`out` 声明处型变）但类型擦除导致运行期无法区分 `List<String>`/`List<Int>`；Rust 泛型单态化（Monomorphization）——无擦除、无运行期开销，`impl Trait`/GAT 提供 Scala 式的抽象能力但无 HKT。
+- **扩展函数 vs Trait**: Kotlin 扩展函数是静态分派的语法糖（不能覆写、不参与多态），适合给第三方类加便捷方法；Rust trait 是完全的多态机制（泛型约束 + 动态分派两吃），且受孤儿规则（Orphan Rule）约束防止生态冲突——表达力 trait 胜，临时便利性扩展函数胜。
 - **协程 vs async/await**: Kotlin 协程是库实现（kotlinx.coroutines）的挂起函数，`suspend` 染色与调度器分离设计成熟；Rust `async/.await` 编译为状态机、零分配、无运行时预设——更底层但生态（tokio）承担调度角色，两者心智模型高度同构。
 
 判定依据：Kotlin 的设计优化“写得快”，Rust 优化“运行得准”——选型按场景的失败成本定。
@@ -342,7 +342,7 @@ Kotlin 与 Rust 同为“现代语言”但设计重心不同（开发者体验 
 工程实践差异的三个维度决定团队的长期效率曲线：
 
 - **构建系统**: Gradle（Kotlin）灵活但配置即代码（Kotlin DSL）的复杂度随项目增长，构建缓存与增量编译需主动调优；Cargo 约定优于配置，90% 项目只需声明依赖——但定制构建逻辑（代码生成、多阶段）时 Gradle 的表达能力更强。
-- **互操作性**: Kotlin 与 Java 双向无缝（同一 JVM、共享类型系统），Android 生态是其主场；Rust 的互操作经 C ABI 与绑定生成器（`uniffi` 可为 Kotlin/Swift/Python 生成绑定）——Kotlin Multiplatform 与 Rust + uniffi 是“跨平台共享逻辑”的两条竞争路线。
+- **互操作性**: Kotlin 与 Java 双向无缝（同一 JVM、共享类型系统（Type System）），Android 生态是其主场；Rust 的互操作经 C ABI 与绑定生成器（`uniffi` 可为 Kotlin/Swift/Python 生成绑定）——Kotlin Multiplatform 与 Rust + uniffi 是“跨平台共享逻辑”的两条竞争路线。
 - **工具链**: Kotlin 的 IDE 支持（JetBrains 同源）是行业标杆，调试体验成熟；Rust 的 rust-analyzer 近年快速逼近， Miri（UB 检测）与 Kani（模型检查）等验证工具是 Kotlin 侧没有的能力维度。
 
 判定依据：Android/JVM 后端选 Kotlin；共享逻辑需触达嵌入式/高性能场景选 Rust + uniffi。
@@ -621,11 +621,11 @@ fn main() {
 
 ## 十、边界测试：Rust 与 Kotlin 的编译错误对比
 
-边界测试（Boundary Testing）的目标是构造**最小可复现反例**：在 Kotlin 中合法、惯用的写法，平移到 Rust 后应被编译器在类型检查或借用检查阶段拒绝。每个用例采用三段式结构：
+边界测试（Boundary Testing）的目标是构造**最小可复现反例**：在 Kotlin 中合法、惯用的写法，平移到 Rust 后应被编译器在类型检查或借用（Borrowing）检查阶段拒绝。每个用例采用三段式结构：
 
 1. **Kotlin 侧**：给出可编译的惯用代码及其运行时行为；
 2. **Rust 侧**：给出语义等价的尝试及其在 rustc 1.97（Edition 2024）下的精确报错；
-3. **判定依据**：指出差异来自类型系统（可空类型 vs `Option<T>`）、内存模型（GC vs 所有权）还是运行时（协程调度 vs `async`/await）。
+3. **判定依据**：指出差异来自类型系统（可空类型 vs `Option<T>`）、内存模型（GC vs 所有权（Ownership））还是运行时（协程调度 vs `async`/await）。
 
 | 用例 | Kotlin 依赖的机制 | Rust 的拦截点 |
 |:---|:---|:---|

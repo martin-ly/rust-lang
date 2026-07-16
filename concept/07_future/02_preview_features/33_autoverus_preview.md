@@ -57,7 +57,7 @@
 ## 四、生态集成动向
 
 - **Safety Tags**：安全标签若成为 unsafe 契约的机器可读格式，可为 Verus 规格提供自动生成来源，参见 [Safety Tags 预览](03_safety_tags_preview.md)。
-- **Kani / BorrowSanitizer**：模型检查与动态别名验证覆盖 Verus 不擅长的有界状态与运行时别名场景，三者互补而非竞争，参见 [BorrowSanitizer](24_borrow_sanitizer.md) 与 [Miri](../../04_formal/04_model_checking/08_miri.md)。
+- **Kani / BorrowSanitizer**：模型检查与动态别名验证覆盖 Verus 不擅长的有界状态与运行时（Runtime）别名场景，三者互补而非竞争，参见 [BorrowSanitizer](24_borrow_sanitizer.md) 与 [Miri](../../04_formal/04_model_checking/08_miri.md)。
 - **Rust Project Goals**：截至 2026-07 未见将 SMT 验证纳入官方目标，跟踪 [rust-project-goals](https://rust-lang.github.io/rust-project-goals/) 后续周期。
 
 ---
@@ -92,7 +92,7 @@ verus! {
 fn main() {}
 ```
 
-`verus!` 宏与 `requires`/`ensures` 子语言由 Verus 编译器前端提供；普通 rustc 不认识该宏，验证条件注释在标准工具链下无法编译，必须使用 `verus` 命令。
+`verus!` 宏（Macro）与 `requires`/`ensures` 子语言由 Verus 编译器前端提供；普通 rustc 不认识该宏，验证条件注释在标准工具链下无法编译，必须使用 `verus` 命令。
 
 **修正**：
 

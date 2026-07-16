@@ -79,6 +79,7 @@
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
     - [反例：声明宏中拼接标识符（rustc 1.97.0 实测）](#反例声明宏中拼接标识符rustc-1970-实测)
     - [✅ 修正：显式传完整名称，或用 `paste`  crate / 过程宏](#-修正显式传完整名称或用-paste--crate--过程宏)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -150,7 +151,7 @@ pub fn my_trait(input: TokenStream) -> TokenStream {
 syn 的解析 API 按「输入语法类别」分层，四个常用入口：
 
 - **`parse_macro_input!`**：过程宏入口的标准宏——`parse_macro_input!(tokens as T)` 等价于「`T::parse(tokens)` 失败时 `return err.to_compile_error().into()`」。它强制了「解析错误 = 编译错误」的正确流向，避免新手把解析失败写成 panic（宏 panic 会显示为「proc macro panicked」的无信息错误）。
-- **`DeriveInput`**：derive 宏的输入类型——三字段覆盖全部信息：`ident`（类型名）、`generics`（泛型参数 + where 子句，生成 impl 时用 `split_for_impl()` 拆成 `impl_generics`/`ty_generics`/`where_clause` 三件套）、`data`（`Data::Struct`/`Enum`/`Union` 的字段/变体详情）。derive 宏 80% 的逻辑是「遍历 `data` 的字段，为每个字段生成一段代码」。
+- **`DeriveInput`**：derive 宏的输入类型——三字段覆盖全部信息：`ident`（类型名）、`generics`（泛型（Generics）参数 + where 子句，生成 impl 时用 `split_for_impl()` 拆成 `impl_generics`/`ty_generics`/`where_clause` 三件套）、`data`（`Data::Struct`/`Enum`/`Union` 的字段/变体详情）。derive 宏 80% 的逻辑是「遍历 `data` 的字段，为每个字段生成一段代码」。
 - **`ItemFn`**：属性宏标注函数时的输入——`sig`（签名：`fn` 名、参数、返回类型）、`block`（函数体）、`attrs`/`vis`（外层属性与可见性）。典型改写模式：保留 `sig`，把 `block` 包进「前置逻辑 + 原调用 + 后置逻辑」（`#[instrument]` 的 tracing 注入即此模式）。
 - **自定义解析**：DSL 式属性参数（`#[my(key = "val", list(a, b))]`）需实现 `Parse` trait——`ParseStream` 提供 `parse::<Ident>()`、`peek`/`lookahead1()` 前瞻、`parse_terminated` 列表解析等组合子，错误经 `lookahead.error()` 生成带 span 的诊断。
 
@@ -341,7 +342,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 
 ## 3. syn 数据结构
 
-`syn` 把 Rust 语法表示为一棵**完整但无损的 AST**：每个语法节点是一个枚举或结构体，完整保留 token 级信息（包括 `Span`），这是它区别于 rustc 内部 AST 的关键——后者为有损降低。
+`syn` 把 Rust 语法表示为一棵**完整但无损的 AST**：每个语法节点是一个枚举（Enum）或结构体（Struct），完整保留 token 级信息（包括 `Span`），这是它区别于 rustc 内部 AST 的关键——后者为有损降低。
 
 核心类型分三层：
 
@@ -563,7 +564,7 @@ pub fn my_attr(attr: TokenStream, item: TokenStream) -> TokenStream {
 
 ## 5. quote 库概述
 
-`quote!` 是代码生成的标准工具，把「准引用语法」转换为 `TokenStream` 构造代码。核心机制三条：
+`quote!` 是代码生成的标准工具，把「准引用（Reference）语法」转换为 `TokenStream` 构造代码。核心机制三条：
 
 1. **准引用**：`quote! { fn #name() { #body } }`——`#var` 插值任何实现了 `ToTokens` 的值（syn AST 节点、`Ident`、`Literal`、原始 token 流），其余部分按字面 token 输出；
 2. **重复**：`#(#items),*` 语法处理列表——`#(...)*` 内可含多个变量（要求同长度迭代），分隔符紧跟 `*` 前（`,`/`;` 或无）；
@@ -767,9 +768,9 @@ fn generate_impl(input: &syn::DeriveInput) -> proc_macro2::TokenStream {
 
 - **已实现类型**：所有 syn AST 节点、`Ident`、`Literal`、`Punct`、`&T`/`Box<T>`（委托）、`Option<T>`（`None` 输出空）；
 - **自定义实现**：包装类型（如「带前缀的标识符生成器」）实现 `ToTokens` 后可直接在 `quote!` 中插值，避免重复样板；
-- **生命周期注意**：`to_tokens` 接收 `&mut TokenStream` 追加 token，`to_token_stream()` 便捷方法分配新流——热路径上应优先前者。
+- **生命周期（Lifetimes）注意**：`to_tokens` 接收 `&mut TokenStream` 追加 token，`to_token_stream()` 便捷方法分配新流——热路径上应优先前者。
 
-边界：插值是按**值**进行的——`#(#items)*` 要求 `items` 是可迭代引用（`&Vec<T>` 或 `slice`）；插值一个未实现 `ToTokens` 的类型是编译错误（E0277），不是运行时失败。
+边界：插值是按**值**进行的——`#(#items)*` 要求 `items` 是可迭代引用（`&Vec<T>` 或 `slice`）；插值一个未实现 `ToTokens` 的类型是编译错误（E0277），不是运行时（Runtime）失败。
 
 ### 8.1 实现 ToTokens
 
@@ -1111,7 +1112,7 @@ pub fn derive_type_name(input: TokenStream) -> TokenStream {
 
 工程要点（与 §1–§6 API 参照）：
 
-- `parse_macro_input!` 在解析失败时自动生成 `compile_error!` 输出，是过程宏错误处理的标准入口；
+- `parse_macro_input!` 在解析失败时自动生成 `compile_error!` 输出，是过程宏错误处理（Error Handling）的标准入口；
 - `quote!` 的 `#ident` 插值自动处理 `ToTokens`；重复插值用 `#(...)*` 配合分隔符；
 - 生产级 derive 应处理 `ast.generics`（用 `split_for_impl()` 拆出 `impl_generics/ty_generics/where_clause`），本骨架为最小形式；
 - 错误诊断建议配合 `syn::Error::new_spanned` 定位到具体 token（参见 [生产级宏开发](05_production_grade_macro_development.md) 与 [宏调试与诊断](04_macro_debugging_and_diagnostics.md)）。

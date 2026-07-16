@@ -260,7 +260,7 @@ let value = queue.pop();
 
 ## 四、L2 单机消息传递模式
 
-消息传递模式用通信替代共享：执行单元各自持有私有状态，通过通道交换不可变或转移所有权的消息。本层谱系覆盖：
+消息传递模式用通信替代共享：执行单元各自持有私有状态，通过通道交换不可变或转移所有权（Ownership）的消息。本层谱系覆盖：
 
 - **CSP 通道**：`std::mpsc`/`crossbeam` 的点对点与广播——`Sender: Send` 使生产者可跨线程，`Receiver` 单消费者语义由类型保证；
 - **Actor 模型**：邮箱 + 消息循环的封装形态，状态完全私有化——适合故障隔离与热升级场景；
@@ -544,7 +544,7 @@ Rust 生态映射:
 
 本节收集并行/分布式模式的典型失败案例，按「安全代码中不可能发生 vs 仍需程序员负责」分类：
 
-- **类型系统已排除**：数据竞争（`Send`/`Sync` 拒绝）、悬垂的线程引用（`thread::scope` 前需 `'static`）——这些在 Rust 中根本写不出；
+- **类型系统已排除**：数据竞争（`Send`/`Sync` 拒绝）、悬垂的线程引用（Reference）（`thread::scope` 前需 `'static`）——这些在 Rust 中根本写不出；
 - **仍需程序员负责**：死锁（锁顺序环）、活锁（重试风暴）、惊群（多 worker 抢同一唤醒）、ABA 问题（无锁算法的版本号缺失）、以及分布式特有的拜占庭/网络分区假设错误。
 
 每个反例给出最小复现与判定准则。核心教训：Rust 保证「无数据竞争」不等于「无并发 bug」——活性（liveness）问题与分布式一致性仍需形式化推理或模型检验（如 TLA+）兜底。
@@ -678,7 +678,7 @@ fn crdt_commutativity() {
 本节的边界用例展示「类型系统作为并发规则执行者」的具体表现：
 
 - **`Rc`/`RefCell` 跨线程**：`thread::spawn` 要求闭包 `Send + 'static`，捕获 `Rc` 直接触发 E0277——编译器代替你执行了「无数据竞争」检查；
-- **`&mut` 跨 `join`**：`rayon::join` 的两个闭包同时可变借用同一变量被拒绝（E0524）—— disjoint 字段借用或 `split_at_mut` 是标准修复；
+- **`&mut` 跨 `join`**：`rayon::join` 的两个闭包同时可变借用（Mutable Borrow）同一变量被拒绝（E0524）—— disjoint 字段借用或 `split_at_mut` 是标准修复；
 - **非 `'static` 引用逃逸**：scoped threads（1.63+）之前，`thread::spawn` 捕获局部引用是编译错误——`thread::scope` 用生命周期编码「join 先于作用域结束」；
 - **`MutexGuard` 跨 `.await`**：异步上下文中持锁挂起使 `Future` 非 `Send`（`std::MutexGuard: !Send`）——需 `tokio::sync::Mutex` 或缩短临界区。
 

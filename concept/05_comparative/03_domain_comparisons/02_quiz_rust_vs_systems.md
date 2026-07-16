@@ -32,7 +32,7 @@
 
 ## 一、内存安全对比
 
-本节围绕「内存安全对比」展开，覆盖 Q1. 以下 C 代码有什么问题？Rust 如何防止同样的问题？ 与  Q2. 以下 Go 代码有什么问题？Rust 如何处理同样的场景？ 两个方面。
+本节围绕「内存安全（Memory Safety）对比」展开，覆盖 Q1. 以下 C 代码有什么问题？Rust 如何防止同样的问题？ 与  Q2. 以下 Go 代码有什么问题？Rust 如何处理同样的场景？ 两个方面。
 
 ### Q1. 🟡 以下 C 代码有什么问题？Rust 如何防止同样的问题？
 
@@ -304,7 +304,7 @@ async fn main() {
 
 ## 三、错误处理对比
 
-「错误处理对比」部分的核心主题是 Q5. 以下 C 代码的错误处理有什么问题？Rust 的 `Resul…，本节展开说明。
+「错误处理（Error Handling）对比」部分的核心主题是 Q5. 以下 C 代码的错误处理有什么问题？Rust 的 `Resul…，本节展开说明。
 
 ### Q5. 🟡 以下 C 代码的错误处理有什么问题？Rust 的 `Result` 如何改进？
 
@@ -367,7 +367,7 @@ fn main() {
 
 ## 四、抽象与零成本
 
-「抽象与零成本」部分的核心主题是 Q6. 以下 C++ 模板和 Rust 泛型的输出是否相同？零成本抽象…，本节展开说明。
+「抽象与零成本」部分的核心主题是 Q6. 以下 C++ 模板和 Rust 泛型（Generics）的输出是否相同？零成本抽象（Zero-Cost Abstraction）…，本节展开说明。
 
 ### Q6. 🟡 以下 C++ 模板和 Rust 泛型的输出是否相同？零成本抽象的含义是什么？
 
@@ -426,7 +426,7 @@ fn add_generic<T: Add>(a: T, b: T) -> T { a + b }
 
 ## 五、综合对比
 
-「综合对比」涉及 Q7. 以下代码在 C、C++、Go、Rust 中的行为对比、Q8. 以下场景最适合哪种语言？为什么？、Q9. 以下代码在 Rust 和 C++ 中的生命周期管理对比与Q10. 以下代码在 Rust、Go、C++ 中的错误处理哲学对比，本节逐一说明其要点。
+「综合对比」涉及 Q7. 以下代码在 C、C++、Go、Rust 中的行为对比、Q8. 以下场景最适合哪种语言？为什么？、Q9. 以下代码在 Rust 和 C++ 中的生命周期（Lifetimes）管理对比与Q10. 以下代码在 Rust、Go、C++ 中的错误处理哲学对比，本节逐一说明其要点。
 
 ### Q7. 🔴 以下代码在 C、C++、Go、Rust 中的行为对比
 
@@ -668,8 +668,8 @@ fn read_config() -> Result<i32, Box<dyn std::error::Error>> {
 ### Q11. 🟡【单选】Rust 与 Go 在并发安全上的根本区别是？
 
 - A. Go 有垃圾回收，所以天然没有数据竞争
-- B. Rust 通过所有权 + `Send`/`Sync` 在编译期杜绝数据竞争；Go 依赖运行时检测（`-race`）与程序员纪律
-- C. 两者提供的并发安全保证完全相同
+- B. Rust 通过所有权（Ownership） + `Send`/`Sync` 在编译期杜绝数据竞争；Go 依赖运行时检测（`-race`）与程序员纪律
+- C. 两者提供的并发安全（Concurrency Safety）保证完全相同
 - D. Go 的并发一定比 Rust 安全
 
 <details>
@@ -695,7 +695,7 @@ fn read_config() -> Result<i32, Box<dyn std::error::Error>> {
 
 **答案：A**
 
-**解析**：`fn f<T: Display>(x: T)` 在定义时就承诺"只用 `Display` 的能力"，调用非 `Display` 类型时报错指向调用点、信息简短；传统 C++ 模板把检查推迟到实例化，错误嵌套在展开后的模板栈里。C++20 concepts 把 C++ 拉到了与 trait bound 相似的位置。C、D 错：两者都是编译期单态化、静态分发。
+**解析**：`fn f<T: Display>(x: T)` 在定义时就承诺"只用 `Display` 的能力"，调用非 `Display` 类型时报错指向调用点、信息简短；传统 C++ 模板把检查推迟到实例化，错误嵌套在展开后的模板栈里。C++20 concepts 把 C++ 拉到了与 trait bound 相似的位置。C、D 错：两者都是编译期单态化（Monomorphization）、静态分发。
 
 </details>
 
@@ -706,7 +706,7 @@ fn read_config() -> Result<i32, Box<dyn std::error::Error>> {
 - A. 你不使用的抽象，不付出任何代价
 - B. 你使用的抽象，无法用手写底层代码做得更好（Stroustrup 原则的 Rust 继承）
 - C. 抽象在任何维度上都没有成本
-- D. Rust 迭代器是零成本抽象的标志性例子
+- D. Rust 迭代器（Iterator）是零成本抽象的标志性例子
 
 <details>
 <summary>✅ 答案与解析</summary>
@@ -739,7 +739,7 @@ fn read_config() -> Result<i32, Box<dyn std::error::Error>> {
 
 **答案：错**
 
-**解析**：Rust 同样可能泄漏：`std::mem::forget` 显式放弃值、`Rc`/`Arc` 循环引用、永久 park 的线程、`Box::leak` 故意泄漏——而且 `mem::forget` 是**安全**函数：Rust 的安全保证明确**不包含**防泄漏（泄漏不会导致内存不安全）。GC 与非 GC 的区别只在"不可达对象能否被回收"，goroutine/线程仍在"可达"集中，任何方案都救不了永久阻塞的任务。
+**解析**：Rust 同样可能泄漏：`std::mem::forget` 显式放弃值、`Rc`/`Arc` 循环引用（Reference）、永久 park 的线程、`Box::leak` 故意泄漏——而且 `mem::forget` 是**安全**函数：Rust 的安全保证明确**不包含**防泄漏（泄漏不会导致内存不安全）。GC 与非 GC 的区别只在"不可达对象能否被回收"，goroutine/线程仍在"可达"集中，任何方案都救不了永久阻塞的任务。
 
 </details>
 

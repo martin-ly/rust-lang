@@ -125,7 +125,7 @@ const fn function_name(args) -> ReturnType { body }
 | 可变性 | 永远不可变 | 无 `const mut` | Reference |
 | 作用域 | 遵循项作用域 | 模块（Module）级或局部 | Reference |
 | 函数常量性 | `const fn` 可在 const 上下文调用 | `const fn add(a: i32, b: i32) -> i32 { a + b }` | Reference |
-| 限制 | 不能使用堆分配、I/O、随机数等运行时操作 | `const fn` 体受限 | Reference |
+| 限制 | 不能使用堆分配、I/O、随机数等运行时（Runtime）操作 | `const fn` 体受限 | Reference |
 
 ---
 
@@ -133,9 +133,9 @@ const fn function_name(args) -> ReturnType { body }
 
 本节展开常量与常量函数的三个技术要点：
 
-- **`const` 项的求值模型**：`const X: T = expr;` 中 `expr` 在**编译期**求值（CTFE，编译期函数求值），每处使用独立内联——`const` 数组/结构体在使用点完整构造，无共享存储；
+- **`const` 项的求值模型**：`const X: T = expr;` 中 `expr` 在**编译期**求值（CTFE，编译期函数求值），每处使用独立内联——`const` 数组/结构体（Struct）在使用点完整构造，无共享存储；
 - **`const fn` 的双重身份**：同一函数可在编译期（常量上下文中调用）与运行期（普通调用）执行——`const fn` 约束的是「编译期可调用的子集」：无堆分配（逐步放开中）、无 `Drop` 类型的析构运行、控制流限于 `if`/`match`/`while`/`loop`；
-- **常量上下文清单**：`const`/`static` 初始化、数组长度 `[T; N]`、`const` 泛型参数、枚举判别值、`match` 范围模式端点——这些位置的表达式必须 const-evaluable。
+- **常量上下文清单**：`const`/`static` 初始化、数组长度 `[T; N]`、`const` 泛型参数、枚举（Enum）判别值、`match` 范围模式端点——这些位置的表达式必须 const-evaluable。
 
 判定准则：计算结果依赖运行期输入 ⟹ 普通 `fn`；需要在数组长度或泛型参数中使用 ⟹ 必须 `const fn`；`const fn` 签名变更（加非 const 操作）是 semver 破坏性变更。
 
@@ -219,7 +219,7 @@ fn main() {
 
 ## 四、示例与反例
 
-本节用三组对照说明「常量项与常量函数（Const Items and Const Functions）」：正确示例：编译期配置计算、反例：在 `const fn` 中分配堆内存与反例：试图修改 `const`。每组先给正确示例并标注其成立的类型系统依据，再给反例并标注编译器诊断（E0xxx）或运行时后果，最后给出修正方案。判读标准：正确示例应能通过 rustc 1.97 编译且无 clippy 警告，反例的失败点必须可定位到具体规则。
+本节用三组对照说明「常量项与常量函数（Const Items and Const Functions）」：正确示例：编译期配置计算、反例：在 `const fn` 中分配堆内存与反例：试图修改 `const`。每组先给正确示例并标注其成立的类型系统（Type System）依据，再给反例并标注编译器诊断（E0xxx）或运行时后果，最后给出修正方案。判读标准：正确示例应能通过 rustc 1.97 编译且无 clippy 警告，反例的失败点必须可定位到具体规则。
 
 ### 4.1 正确示例：编译期配置计算
 
@@ -403,7 +403,7 @@ graph TD
 本节测验覆盖常量机制的三个核心判别点：
 
 - **理解层**：`const` 项 vs `static` 项的存储差异——`const` 内联无地址唯一性，`static` 单例有固定地址；
-- **应用层**：`const fn` 的可调用集合判定——给定函数体判断哪些操作（循环/匹配/算术/切片索引）允许、哪些（堆分配/`Drop`/trait 方法）在稳定版禁止；
+- **应用层**：`const fn` 的可调用集合判定——给定函数体判断哪些操作（循环/匹配/算术/切片（Slice）索引）允许、哪些（堆分配/`Drop`/trait 方法）在稳定版禁止；
 - **分析层**：编译期断言模式——`const _: () = assert!(size_of::<T>() <= 8);` 如何把布局约束变成编译期检查（`assert!` 在 const 上下文 1.57+ 可用）。
 
 作答建议：测验 3 的模式在 API 设计中极实用（把「调用方类型必须满足的布局约束」编码进类型签名），建议实际写一例验证。

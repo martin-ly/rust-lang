@@ -14,7 +14,11 @@
 > **前置概念**: [Authority Source Map](01_authority_source_map.md) · [Sources](03_sources.md) · [Topic-Authority Alignment Map](04_topic_authority_alignment_map.md)
 > **后置概念**: [Concept Index](../04_navigation/03_concept_index.md) · [Knowledge Mindmap](../00_framework/knowledge_mindmap.md)
 >
-> **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)
+> **来源**:
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
+> [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)
 
 ---
 
@@ -91,7 +95,9 @@
 
 ## 三、工业与生态库
 
-本节聚焦「工业与生态库」，覆盖异步与网络、数据库与 ORM、并发与并行、GUI 与跨平台等方面。论述顺序由定义到边界：先明确「工业与生态库」在「International Authority Index（国际化权威来源索引）」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「工业与生态库」的判定标准，并指出它在全页论证链中的位置。
+本节聚焦「工业与生态库」，覆盖异步与网络、数据库与 ORM、并发与并行、GUI 与跨平台等方面。
+论述顺序由定义到边界：先明确「工业与生态库」在「International Authority Index（国际化权威来源索引）」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。
+读完后应能用一句话复述「工业与生态库」的判定标准，并指出它在全页论证链中的位置。
 
 ### 异步与网络
 
@@ -180,7 +186,9 @@
 
 ## 四、跨语言权威入口
 
-本节聚焦「跨语言权威入口」，覆盖C++、Haskell、Go与学术通用。论述顺序由定义到边界：先明确「跨语言权威入口」在「International Authority Index（国际化权威来源索引）」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「跨语言权威入口」的判定标准，并指出它在全页论证链中的位置。
+本节聚焦「跨语言权威入口」，覆盖C++、Haskell、Go与学术通用。
+论述顺序由定义到边界：先明确「跨语言权威入口」在「International Authority Index（国际化权威来源索引）」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。
+读完后应能用一句话复述「跨语言权威入口」的判定标准，并指出它在全页论证链中的位置。
 
 ### C++
 

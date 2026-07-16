@@ -20,8 +20,8 @@
 > **主要来源**:
 > [Rust Reference — If let expressions](https://doc.rust-lang.org/reference/expressions/if-expr.html#if-let-expressions) ·
 > [Rust Reference — Match expressions](https://doc.rust-lang.org/reference/expressions/match-expr.html) ·
-> [RFC 2497 — if-let-guard](https://rust-lang.github.io/rfcs/2497-if-let-guard.html) ·
-> [RFC 2294 — if-let-chains](https://rust-lang.github.io/rfcs/2294-if-let-chains.html) ·
+> [RFC 2294 — if-let-guard](https://rust-lang.github.io/rfcs/2294-if-let-guard.html) ·
+> [RFC 2497 — if-let-chains](https://rust-lang.github.io/rfcs/2497-if-let-chains.html) ·
 > [TRPL — Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html) ·
 > [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
 > [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/)
@@ -61,7 +61,7 @@ mindmap
 
 ## 一、核心概念
 
-**链式 let（`let chains`）** 允许在单个 `if`/`while` 条件中把多个 `let` 模式匹配与布尔表达式用 `&&` 串起来，绑定在后续条件中可见。
+**链式 let（`let chains`）** 允许在单个 `if`/`while` 条件中把多个 `let` 模式匹配（Pattern Matching）与布尔表达式用 `&&` 串起来，绑定在后续条件中可见。
 
 ```rust
 fn main() {
@@ -118,7 +118,7 @@ if let Some(x) = a {
 
 ### 2.2 绑定模式
 
-`let chains` 支持所有可反驳模式，包括元组、枚举变体、字面量、引用模式等。
+`let chains` 支持所有可反驳模式，包括元组、枚举（Enum）变体、字面量、引用（Reference）模式等。
 
 ```rust
 fn main() {

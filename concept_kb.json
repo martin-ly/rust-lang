@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 505,
-    "generated_at": "2026-07-15T13:09:31.701273+00:00"
+    "generated_at": "2026-07-16T02:31:17.411642+00:00"
   },
   "files": [
     {
@@ -1333,7 +1333,7 @@
       "layer": "L0",
       "title": "权威来源映射表（Authority Source Map）",
       "positioning": "",
-      "line_count": 216,
+      "line_count": 217,
       "theorem_chains": [
         {
           "text": "| Authority Source Map 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
@@ -1442,7 +1442,7 @@
       "layer": "L0",
       "title": "权威来源清单与知识来源关系分析",
       "positioning": "本文件维护 Rust 概念知识体系的所有权威来源，构建如实的知识来源关系网络。所有 `concept/` 下的概念文件引用来源时，应优先引用本清单中的条目。",
-      "line_count": 493,
+      "line_count": 495,
       "theorem_chains": [
         {
           "text": "| 来源标注 ⟹ 可信度可分级 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
@@ -1478,7 +1478,7 @@
       "layer": "L0",
       "title": "主题-权威来源对齐图谱 (Topic-Authority Alignment Map)",
       "positioning": "",
-      "line_count": 388,
+      "line_count": 393,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -1502,7 +1502,7 @@
       "layer": "L0",
       "title": "International Authority Index（国际化权威来源索引）",
       "positioning": "集中维护 Rust 知识体系所需的国际权威来源 URL，便于 concept/、knowledge/、docs/ 各层统一引用，避免重复搜索与链接失效。",
-      "line_count": 243,
+      "line_count": 251,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -1534,7 +1534,7 @@
       "layer": "L0",
       "title": "Concept Audit Guide（概念审计指南）",
       "positioning": "",
-      "line_count": 107,
+      "line_count": 109,
       "theorem_chains": [
         {
           "text": "| 08 Concept Audit Guide 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
@@ -1613,7 +1613,7 @@
       "layer": "L0",
       "title": "概念一致性检查清单（Concept Consistency Audit Checklist）",
       "positioning": "本文件定义 `concept/` 知识体系的**质量门禁**，用于定期审计概念文件的一致性、完备性和关系清晰度。",
-      "line_count": 476,
+      "line_count": 484,
       "theorem_chains": [
         {
           "text": "- **方向正确性**：⟹（充分条件）与 ⟸（必要条件/逆推）不得混用——「A ⟹ B」声称「A 成立则 B 成立」，审查时构造「A 真 B 假」的反例尝试，存在即链条错误；",
@@ -8672,7 +8672,7 @@
           "type": "table_row"
         },
         {
-          "text": "| 只需读取、无需取得所有权 | 不可变借用 `&T`，可多个共存 | 借用规则（详见 [02_borrowing.md](02_borrowing.md)） | 借用存活期间 move 所有者 ⟹ 编译错误（§5.2 B1） |",
+          "text": "| 只需读取、无需取得所有权 | 不可变借用（Mutable Borrow） `&T`，可多个共存 | 借用规则（详见 [02_borrowing.md](02_borrowing.md)） | 借用存活期间 move 所有者 ⟹ 编译错误（§5.2 B1） |",
           "type": "table_row"
         },
         {
@@ -9647,7 +9647,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.1 引理：引用不能比数据活得更久 ⟹ 悬垂指针在编译期被消除](#41-引理引用不能比数据活得更久--悬垂指针在编译期被消除)",
+          "text": "- [4.1 引理：引用（Reference）不能比数据活得更久 ⟹ 悬垂指针在编译期被消除](#41-引理引用不能比数据活得更久--悬垂指针在编译期被消除)",
           "type": "paragraph"
         },
         {
@@ -10640,7 +10640,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.1 引理：ADT（枚举 + 结构体）⟹ 代数数据类型完备性](#41-引理adt枚举--结构体-代数数据类型完备性)",
+          "text": "- [4.1 引理：ADT（枚举（Enum） + 结构体（Struct））⟹ 代数数据类型完备性](#41-引理adt枚举--结构体-代数数据类型完备性)",
           "type": "paragraph"
         },
         {
@@ -10652,11 +10652,11 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.4 定理：类型推断完备性 ⟹ Principal type property](#44-定理类型推断完备性--principal-type-property)",
+          "text": "- [4.4 定理：类型推断（Type Inference）完备性 ⟹ Principal type property](#44-定理类型推断完备性--principal-type-property)",
           "type": "paragraph"
         },
         {
-          "text": "- [4.5 定理：类型一致性（Progress + Preservation）⟹ 运行时无类型错误](#45-定理类型一致性progress--preservation-运行时无类型错误)",
+          "text": "- [4.5 定理：类型一致性（Progress + Preservation）⟹ 运行时（Runtime）无类型错误](#45-定理类型一致性progress--preservation-运行时无类型错误)",
           "type": "paragraph"
         },
         {
@@ -13299,7 +13299,7 @@
       "layer": "L1",
       "title": "高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析",
       "positioning": "深入分析 Rust **标准库高级集合类型**的设计权衡——从 BTreeMap/BTreeSet 的有序关联容器，到 HashMap 自定义 hasher，再到 VecDeque 的双端队列与 BinaryHeap 的优先队列，揭示每种数据结构的所有权（Ownership）语义、性能特征、内存布局与选型策略。",
-      "line_count": 1066,
+      "line_count": 1067,
       "theorem_chains": [
         {
           "text": "- **反命题 1：「`HashMap` 总是比 `BTreeMap` 快」** —— 有边界。小键集（<50 项）时 B 树的缓存友好性常反超哈希计算成本；有序遍历、范围查询、前缀扫描场景 B 树是唯一选择；哈希的另一隐性成本是 DoS 抗性（`HashMap` 默认 SipHash 有防护，换 `FxHash` 提速即放弃防护）。判定准则：需要顺序 ⟹ B 树；纯点查且规模大 ⟹ 哈希。",
@@ -13641,7 +13641,7 @@
       "layer": "L1",
       "title": "字符串与编码：Rust 的文本处理类型系统",
       "positioning": "系统分析 Rust **字符串类型体系**的设计——String 与 str 的所有权（Ownership）语义、UTF-8 编码约束、OsString/OsStr 的平台抽象、CString/CStr 的 FFI 互操作，以及 grapheme clusters、unicode normalization 等高级文本处理概念。",
-      "line_count": 902,
+      "line_count": 908,
       "theorem_chains": [
         {
           "text": "- **反命题 2：「`from_utf8_lossy` 是安全的默认选择」** —— 有代价：损失转换静默替换无效字节，数据完整性场景（哈希、加密、协议解析）中静默损坏比报错更糟。判定准则：数据必须完整 ⟹ `from_utf8` 返回 `Result`；仅展示用途 ⟹ lossy 可接受。",
@@ -14070,7 +14070,7 @@
       "line_count": 434,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将函数签名、所有权移动与借用（Borrowing）规则串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将函数签名、所有权（Ownership）移动与借用（Borrowing）规则串联起来。",
           "type": "paragraph"
         },
         {
@@ -14334,7 +14334,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **定理 3** [Tier 1]: 结构体更新语法 `..old` 会移动未显式指定字段的所有权 ⟹ 若字段未实现 `Copy`，原实例将部分失效。",
+          "text": "> **定理 3** [Tier 1]: 结构体更新语法 `..old` 会移动未显式指定字段的所有权（Ownership） ⟹ 若字段未实现 `Copy`，原实例将部分失效。",
           "type": "paragraph"
         },
         {
@@ -14354,7 +14354,7 @@
           "type": "table_row"
         },
         {
-          "text": "| 跨模块访问字段 | 字段显式标 `pub` | 定理 2 | 默认私有 ⟹ `field is private`（反向推理 1） |",
+          "text": "| 跨模块（Module）访问字段 | 字段显式标 `pub` | 定理 2 | 默认私有 ⟹ `field is private`（反向推理 1） |",
           "type": "table_row"
         }
       ],
@@ -14457,7 +14457,7 @@
       "line_count": 392,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将枚举、模式匹配与错误处理（Error Handling）规则串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将枚举、模式匹配（Pattern Matching）与错误处理（Error Handling）规则串联起来。",
           "type": "paragraph"
         },
         {
@@ -14473,7 +14473,7 @@
           "type": "paragraph"
         },
         {
-          "text": "| 一组互斥状态 | 枚举（带标签联合） | 定理 1 | 状态可组合共存 ⟹ 用结构体或位标志 |",
+          "text": "| 一组互斥状态 | 枚举（带标签联合） | 定理 1 | 状态可组合共存 ⟹ 用结构体（Struct）或位标志 |",
           "type": "table_row"
         },
         {
@@ -14489,7 +14489,7 @@
           "type": "table_row"
         },
         {
-          "text": "| 匹配后仍需使用原值 | 引用匹配（`ref`/`&`） | §6.3 | 按值匹配 ⟹ 变体数据被 move |",
+          "text": "| 匹配后仍需使用原值 | 引用（Reference）匹配（`ref`/`&`） | §6.3 | 按值匹配 ⟹ 变体数据被 move |",
           "type": "table_row"
         }
       ],
@@ -15172,7 +15172,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"源文件越多，编译后的 crate 越多\" ⟹ 不成立。一个 crate 由单个 crate root 与若干模块源文件组成，最终输出仍是一个编译单元。",
+          "text": "> **反命题 3**: \"源文件越多，编译后的 crate 越多\" ⟹ 不成立。一个 crate 由单个 crate root 与若干模块（Module）源文件组成，最终输出仍是一个编译单元。",
           "type": "paragraph"
         }
       ],
@@ -15282,7 +15282,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"模块中的 item 默认对外可见\" ⟹ 不成立。Item 默认私有，必须通过 `pub` 显式公开。",
+          "text": "> **反命题 3**: \"模块（Module）中的 item 默认对外可见\" ⟹ 不成立。Item 默认私有，必须通过 `pub` 显式公开。",
           "type": "paragraph"
         }
       ],
@@ -17225,7 +17225,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.4 Trait + 泛型 ⟹ 零成本抽象](#44-trait--泛型--零成本抽象)",
+          "text": "- [4.4 Trait + 泛型（Generics） ⟹ 零成本抽象（Zero-Cost Abstraction）](#44-trait--泛型--零成本抽象)",
           "type": "paragraph"
         },
         {
@@ -18904,7 +18904,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.2 定理：单态化 ⟹ 零成本抽象 ⟹ 语义保持](#42-定理单态化--零成本抽象--语义保持)",
+          "text": "- [4.2 定理：单态化（Monomorphization） ⟹ 零成本抽象（Zero-Cost Abstraction） ⟹ 语义保持](#42-定理单态化--零成本抽象--语义保持)",
           "type": "paragraph"
         },
         {
@@ -18924,7 +18924,7 @@
           "type": "paragraph"
         },
         {
-          "text": "3. **推论（Const Generics ⟹ 类型级编程）**：把值（如数组长度 `N`）提升为类型参数，使「定长数组运算」「维度检查」等性质进入类型系统，编译期即可排除维度不匹配。",
+          "text": "3. **推论（Const Generics ⟹ 类型级编程）**：把值（如数组长度 `N`）提升为类型参数，使「定长数组运算」「维度检查」等性质进入类型系统（Type System），编译期即可排除维度不匹配。",
           "type": "paragraph"
         },
         {
@@ -20074,7 +20074,7 @@
       "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\01_generics\\05_const_generics_and_trait_objects.md",
       "layer": "L2",
       "title": "常量泛型与 Trait 对象：静态分发与动态分发的交叉边界",
-      "positioning": "解释 Rust 中 `const N: usize` 等编译期常量参数与 `dyn Trait` 动态分发之间的限制、 workaround 与设计模式。const generic 要求编译期已知，而 trait object 要求运行时抹除类型信息，两者在 vtable 层面存在根本张力。",
+      "positioning": "解释 Rust 中 `const N: usize` 等编译期常量参数与 `dyn Trait` 动态分发之间的限制、 workaround 与设计模式。const generic 要求编译期已知，而 trait object 要求运行时（Runtime）抹除类型信息，两者在 vtable 层面存在根本张力。",
       "line_count": 235,
       "theorem_chains": [],
       "anti_propositions": [
@@ -20125,7 +20125,7 @@
       "matrix_rows": 8,
       "pre_post": {
         "pre": [
-          "[Generics](01_generics.md) · [Const Generics](02_const_generics.md) · [Traits](../00_traits/01_traits.md) · [Dispatch Mechanisms](../00_traits/02_dispatch_mechanisms.md) · [类型系统基础](../../01_foundation/02_type_system/01_type_system.md)"
+          "[Generics](01_generics.md) · [Const Generics](02_const_generics.md) · [Traits](../00_traits/01_traits.md) · [Dispatch Mechanisms](../00_traits/02_dispatch_mechanisms.md) · [类型系统（Type System）基础](../../01_foundation/02_type_system/01_type_system.md)"
         ],
         "post": [
           "[Generic Associated Types](../00_traits/07_generic_associated_types.md) · [Type-Level Programming](03_type_level_programming.md)"
@@ -20146,15 +20146,15 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.1 引理：Box ⟹ 堆分配 + 唯一所有权](#41-引理box--堆分配--唯一所有权)",
+          "text": "- [4.1 引理：Box ⟹ 堆分配 + 唯一所有权（Ownership）](#41-引理box--堆分配--唯一所有权)",
           "type": "paragraph"
         },
         {
-          "text": "- [4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用计数）](#42-定理rcarc--共享所有权安全引用计数)",
+          "text": "- [4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用（Reference）计数）](#42-定理rcarc--共享所有权安全引用计数)",
           "type": "paragraph"
         },
         {
-          "text": "- [4.3 推论：RefCell ⟹ 内部可变性运行时检查](#43-推论refcell--内部可变性运行时检查)",
+          "text": "- [4.3 推论：RefCell ⟹ 内部可变性运行时（Runtime）检查](#43-推论refcell--内部可变性运行时检查)",
           "type": "paragraph"
         },
         {
@@ -20689,7 +20689,7 @@
       "line_count": 973,
       "theorem_chains": [
         {
-          "text": "| 独占访问即可满足可变性 | 外部可变性（`&mut`），编译期安全零开销 | §4.1 反命题树 TRUE | 共享所有权下 ⟹ 编译拒绝 |",
+          "text": "| 独占访问即可满足可变性 | 外部可变性（`&mut`），编译期安全零开销 | §4.1 反命题树 TRUE | 共享所有权（Ownership）下 ⟹ 编译拒绝 |",
           "type": "table_row"
         },
         {
@@ -20709,7 +20709,7 @@
           "type": "table_row"
         },
         {
-          "text": "| 对外暴露的 API | 内部可变性封装在模块内，暴露 safe API | 最佳实践 | `RefCell` 泄漏到公共接口 ⟹ 设计意图存疑 |",
+          "text": "| 对外暴露的 API | 内部可变性封装在模块（Module）内，暴露 safe API | 最佳实践 | `RefCell` 泄漏到公共接口 ⟹ 设计意图存疑 |",
           "type": "table_row"
         },
         {
@@ -20988,7 +20988,7 @@
           "type": "table_row"
         },
         {
-          "text": "| 单线程共享可变 | `Rc<RefCell<T>>` | §三 选型决策矩阵 | 重复 `borrow_mut` ⟹ 运行时 panic（§4.2 边界 2） |",
+          "text": "| 单线程共享可变 | `Rc<RefCell<T>>` | §三 选型决策矩阵 | 重复 `borrow_mut` ⟹ 运行时（Runtime） panic（§4.2 边界 2） |",
           "type": "table_row"
         },
         {
@@ -21398,7 +21398,7 @@
           "type": "inline"
         },
         {
-          "text": "4. **`From`/`Into` 转换在 `?` 处显式发生** ⟹ 错误类型收敛点（通常是 crate 根的错误枚举或 `Box<dyn Error>`）由程序员显式设计；",
+          "text": "4. **`From`/`Into` 转换在 `?` 处显式发生** ⟹ 错误类型收敛点（通常是 crate 根的错误枚举（Enum）或 `Box<dyn Error>`）由程序员显式设计；",
           "type": "inline"
         },
         {
@@ -24036,7 +24036,7 @@
       "line_count": 875,
       "theorem_chains": [
         {
-          "text": "- **反命题 2：「`macro_rules!` 能做到过程宏的一切」** —— 错误。`macro_rules!` 只有模式匹配与 token 替换——无法分析类型信息（不知道 `$x` 是不是结构体）、无法访问外部状态、无法生成标识符拼接（`concat_idents!` 仍 nightly）。需要语义分析 ⟹ 过程宏 + syn。",
+          "text": "- **反命题 2：「`macro_rules!` 能做到过程宏的一切」** —— 错误。`macro_rules!` 只有模式匹配（Pattern Matching）与 token 替换——无法分析类型信息（不知道 `$x` 是不是结构体（Struct））、无法访问外部状态、无法生成标识符拼接（`concat_idents!` 仍 nightly）。需要语义分析 ⟹ 过程宏 + syn。",
           "type": "paragraph"
         },
         {
@@ -25128,7 +25128,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- `T: Sync` 不要求 `T` 自身可变——`&T` 只允许读，**除非** `T` 有内部可变性（Interior Mutability）。因此 `Sync` 的实质是\"**内部可变性的线程安全性审查**\"：`Mutex<T>` 用互斥锁使内部可变安全 ⟹ `Sync`；`RefCell<T>` 的运行时借用检查不是线程安全的 ⟹ `!Sync`。",
+          "text": "- `T: Sync` 不要求 `T` 自身可变——`&T` 只允许读，**除非** `T` 有内部可变性（Interior Mutability）。因此 `Sync` 的实质是\"**内部可变性的线程安全性审查**\"：`Mutex<T>` 用互斥锁使内部可变安全 ⟹ `Sync`；`RefCell<T>` 的运行时（Runtime）借用检查不是线程安全的 ⟹ `!Sync`。",
           "type": "paragraph"
         },
         {
@@ -28075,7 +28075,7 @@
       "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\01_async\\06_async_boundary_panorama.md",
       "layer": "L3",
       "title": "Async 边界全景（Async Boundary Panorama）",
-      "positioning": "汇总 Rust 异步编程全部**语义边界**——await 点两侧什么成立/什么不成立、取消何时安全、自引用何时合法、Future 何时可跨线程、运行时契约何时被打破、async trait 何时可对象化。每一节给出**边界陈述 → 反例 → 判定条件**三段式。",
+      "positioning": "汇总 Rust 异步编程全部**语义边界**——await 点两侧什么成立/什么不成立、取消何时安全、自引用（Reference）何时合法、Future 何时可跨线程、运行时（Runtime）契约何时被打破、async trait 何时可对象化。每一节给出**边界陈述 → 反例 → 判定条件**三段式。",
       "line_count": 544,
       "theorem_chains": [
         {
@@ -28087,7 +28087,7 @@
           "type": "paragraph"
         },
         {
-          "text": "| Q-A1 | 跨 await 点保持活跃的引用数是否 ≥1 个？ | ≥1 ⟹ 进入生命周期子判定 | 编译期阻止悬垂 |",
+          "text": "| Q-A1 | 跨 await 点保持活跃的引用数是否 ≥1 个？ | ≥1 ⟹ 进入生命周期（Lifetimes）子判定 | 编译期阻止悬垂 |",
           "type": "table_row"
         },
         {
@@ -28914,7 +28914,7 @@
           "type": "paragraph"
         },
         {
-          "text": "调度公平性的类型级前提：多线程 worker 可窃取任何任务 ⟹ 任务必须 `Send`。类型系统把这条调度不变量提前到编译期：",
+          "text": "调度公平性的类型级前提：多线程 worker 可窃取任何任务 ⟹ 任务必须 `Send`。类型系统（Type System）把这条调度不变量提前到编译期：",
           "type": "paragraph"
         },
         {
@@ -28994,7 +28994,7 @@
       "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\01_async\\11_pin_projection_counterexamples.md",
       "layer": "L3",
       "title": "Pin 投射反例集：unsafe 结构投射的 UB 目录与正确模式库",
-      "positioning": "`Pin<&mut Self>` 保证了「整体不动」，但业务需要的是「字段级访问」——结构投射（structural projection）就是跨越这道缝的技术。本页系统枚举手写投射的全部 UB 模式与全部正确模式，让 unsafe 决策变成查表。",
+      "positioning": "`Pin<&mut Self>` 保证了「整体不动」，但业务需要的是「字段级访问」——结构投射（structural projection）就是跨越这道缝的技术。本页系统枚举（Enum）手写投射的全部 UB 模式与全部正确模式，让 unsafe 决策变成查表。",
       "line_count": 456,
       "theorem_chains": [
         {
@@ -29002,7 +29002,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **定理 T1（投射守恒）**：结构投射是可靠的，当且仅当：① 任何 `!Unpin` 字段始终以 `Pin<&mut Field>` 形式暴露，且其地址在 `Self` 生命周期内不变 ⟹ ② 非 pin 字段可以 `&mut` 自由访问，但**移动它们不得间接触发 pin 字段的移动** ⟹ ③ `Drop` 与 `project_replace` 等整体操作中，pin 字段的析构发生在原处。三条任破其一 ⟹ UB（§3 逐一对应）。",
+          "text": "> **定理 T1（投射守恒）**：结构投射是可靠的，当且仅当：① 任何 `!Unpin` 字段始终以 `Pin<&mut Field>` 形式暴露，且其地址在 `Self` 生命周期（Lifetimes）内不变 ⟹ ② 非 pin 字段可以 `&mut` 自由访问，但**移动它们不得间接触发 pin 字段的移动** ⟹ ③ `Drop` 与 `project_replace` 等整体操作中，pin 字段的析构发生在原处。三条任破其一 ⟹ UB（§3 逐一对应）。",
           "type": "paragraph"
         },
         {
@@ -29228,7 +29228,7 @@
           "[Async/Await](01_async.md) · [Future 与 Executor 机制](04_future_and_executor_mechanisms.md) · [Pin 与 Unpin](08_pin_unpin.md)"
         ],
         "post": [
-          "[Executor 公平性与调度](10_executor_fairness_and_scheduling.md) · [Tokio 运行时内部机制](../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md) · [Unsafe](../02_unsafe/01_unsafe.md)"
+          "[Executor 公平性与调度](10_executor_fairness_and_scheduling.md) · [Tokio 运行时（Runtime）内部机制](../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md) · [Unsafe](../02_unsafe/01_unsafe.md)"
         ]
       },
       "backward_chains": 0,
@@ -29238,7 +29238,7 @@
       "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\01_async\\13_async_trait_object_safety.md",
       "layer": "L3",
       "title": "Async Trait 对象安全：dyn 兼容解决方案谱系与选型矩阵",
-      "positioning": "`async fn` in trait（1.75 stable）解决了静态分发，却留下 Rust async 最著名的缺口：`Box<dyn Trait>` 不可用。本页把社区四年积累的五条路线（宏装箱 / 手写装箱 / erased 类型 / RTN / 原生 dyn async）整理为可查表的选型矩阵。",
+      "positioning": "`async fn` in trait（1.75 stable）解决了静态分发，却留下 Rust async 最著名的缺口：`Box<dyn Trait>` 不可用。本页把社区四年积累的五条路线（宏（Macro）装箱 / 手写装箱 / erased 类型 / RTN / 原生 dyn async）整理为可查表的选型矩阵。",
       "line_count": 353,
       "theorem_chains": [
         {
@@ -29246,7 +29246,7 @@
           "type": "inline"
         },
         {
-          "text": "与方案 A 同开销、同 MSRV；代价是**签名噪音**（`Pin<Box<dyn Future + Send + '_>>` 每处重复）与手写生命周期标注（`+ '_` 不能漏，否则捕获 `&self` 的实现无法通过借用检查）。判据：宏依赖敏感（编译时间、no-proc-macro 环境）且方法数少 ⟹ 方案 B；否则方案 A。",
+          "text": "与方案 A 同开销、同 MSRV；代价是**签名噪音**（`Pin<Box<dyn Future + Send + '_>>` 每处重复）与手写生命周期（Lifetimes）标注（`+ '_` 不能漏，否则捕获 `&self` 的实现无法通过借用（Borrowing）检查）。判据：宏依赖敏感（编译时间、no-proc-macro 环境）且方法数少 ⟹ 方案 B；否则方案 A。",
           "type": "inline"
         },
         {
@@ -29326,7 +29326,7 @@
       "matrix_rows": 25,
       "pre_post": {
         "pre": [
-          "[Traits](../../02_intermediate/00_traits/01_traits.md)（L2 向下引用：对象安全规则） · [Async/Await](01_async.md) · [Async 边界全景](06_async_boundary_panorama.md)"
+          "[Traits](../../02_intermediate/00_traits/01_traits.md)（L2 向下引用（Reference）：对象安全规则） · [Async/Await](01_async.md) · [Async 边界全景](06_async_boundary_panorama.md)"
         ],
         "post": [
           "[Async Closures](07_async_closures.md) · [Waker 契约深度解析](12_waker_contract_deep_dive.md)"
@@ -29498,7 +29498,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [7.3 定理一致性矩阵（⟹ 推理链）](#73-定理一致性矩阵-推理链)",
+          "text": "- [7.3 定理一致性（Coherence）矩阵（⟹ 推理链）](#73-定理一致性矩阵-推理链)",
           "type": "paragraph"
         },
         {
@@ -30123,7 +30123,7 @@
           "type": "table_row"
         },
         {
-          "text": "| Q-M3 | unsafe 模块中 SIMD/asm!/真实 FFI 调用点数是否 ≥1 个？ | ≥1 ⟹ 该点超出 Miri 管辖，需人工论证 | 🟡 工具边界 |",
+          "text": "| Q-M3 | unsafe 模块（Module）中 SIMD/asm!/真实 FFI 调用点数是否 ≥1 个？ | ≥1 ⟹ 该点超出 Miri 管辖，需人工论证 | 🟡 工具边界 |",
           "type": "table_row"
         },
         {
@@ -30711,7 +30711,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **边界**：`#[repr(align(N))]` 可以把对齐**抬高**到超过原子自然对齐，这总是安全的（更强对齐 ⟹ 仍满足较弱要求）；危险的是反过来——当一个值的**实际对齐低于**原子操作所需对齐时对其执行原子操作，是 UB（本文 §八）。`cfg(...)` 的用途正是让代码在“目标不保证自然对齐”时**拒绝或改走保守路径**，而非“修复”对齐。",
+          "text": "> **边界**：`#[repr(align(N))]` 可以把对齐**抬高**到超过原子自然对齐，这总是安全的（更强对齐 ⟹ 仍满足较弱要求）；危险的是反过来——当一个值的**实际对齐低于**原子操作（Atomic Operations）所需对齐时对其执行原子操作，是 UB（本文 §八）。`cfg(...)` 的用途正是让代码在“目标不保证自然对齐”时**拒绝或改走保守路径**，而非“修复”对齐。",
           "type": "paragraph"
         }
       ],
@@ -31099,7 +31099,7 @@
           "type": "inline"
         },
         {
-          "text": "| 普通计算逻辑 | 函数 / 泛型 | §5.1 决策树 A3 | 用宏 ⟹ 错误延迟到展开后、信息晦涩（§5.2 F3） |",
+          "text": "| 普通计算逻辑 | 函数 / 泛型（Generics） | §5.1 决策树 A3 | 用宏 ⟹ 错误延迟到展开后、信息晦涩（§5.2 F3） |",
           "type": "table_row"
         },
         {
@@ -31942,7 +31942,7 @@
           "type": "table_row"
         },
         {
-          "text": "> **反命题 1**: \"可以用常规 debugger 调试过程宏（Procedural Macro）\" ⟹ 不成立。宏在编译期执行，运行时调试器无法介入。",
+          "text": "> **反命题 1**: \"可以用常规 debugger 调试过程宏（Procedural Macro）\" ⟹ 不成立。宏在编译期执行，运行时（Runtime）调试器无法介入。",
           "type": "paragraph"
         },
         {
@@ -34950,7 +34950,7 @@
       "line_count": 923,
       "theorem_chains": [
         {
-          "text": "选型判定：需要方法调用 ⟹ `dyn Trait`；需要类型查询/存储 ⟹ `Any`；需要零依赖/`no_std` ⟹ 手写。擦除的代价统一是「静态信息丢失」——编译器优化（内联、单态化）在擦除边界终止。",
+          "text": "选型判定：需要方法调用 ⟹ `dyn Trait`；需要类型查询/存储 ⟹ `Any`；需要零依赖/`no_std` ⟹ 手写。擦除的代价统一是「静态信息丢失」——编译器优化（内联、单态化（Monomorphization））在擦除边界终止。",
           "type": "inline"
         },
         {
@@ -36755,7 +36755,7 @@
           "type": "table_row"
         },
         {
-          "text": "> **反命题 1**: \"Rust 的内存安全保证已经让沙箱多余\" ⟹ 不成立。Rust 无法限制运行时特权、网络访问或文件系统操作。",
+          "text": "> **反命题 1**: \"Rust 的内存安全（Memory Safety）保证已经让沙箱多余\" ⟹ 不成立。Rust 无法限制运行时（Runtime）特权、网络访问或文件系统操作。",
           "type": "paragraph"
         },
         {
@@ -37138,7 +37138,7 @@
           "type": "table_row"
         },
         {
-          "text": "| tokio::process ⟹ 异步生态集成 | 与 Tokio 运行时无缝协作 | 高并发异步服务中减少阻塞 |",
+          "text": "| tokio::process ⟹ 异步生态集成 | 与 Tokio 运行时（Runtime）无缝协作 | 高并发异步服务中减少阻塞 |",
           "type": "table_row"
         },
         {
@@ -37643,7 +37643,7 @@
           "type": "inline"
         },
         {
-          "text": "技术细节附「为什么 `&mut` 必须不变」的完整反例推导（可变引用协变 ⟹ 类型混淆攻击）。",
+          "text": "技术细节附「为什么 `&mut` 必须不变」的完整反例推导（可变引用（Mutable Reference）协变 ⟹ 类型混淆攻击）。",
           "type": "inline"
         },
         {
@@ -38925,7 +38925,7 @@
           "type": "table_row"
         },
         {
-          "text": "| **T5**: 别名模型安全 | Stacked/Tree Borrows ⟹ 引用使用合法 | 别名模型公理（SB/TB） | 引用解引用行为符合内存模型假设 | T3（区域约束）、C2（内部可变性） | 模型假设被突破（如 `unsafe` 构造非法别名），Miri 报错 | [unsafe / raw pointer] `miri` 检测 |",
+          "text": "| **T5**: 别名模型安全 | Stacked/Tree Borrows ⟹ 引用（Reference）使用合法 | 别名模型公理（SB/TB） | 引用解引用行为符合内存模型假设 | T3（区域约束）、C2（内部可变性） | 模型假设被突破（如 `unsafe` 构造非法别名），Miri 报错 | [unsafe / raw pointer] `miri` 检测 |",
           "type": "table_row"
         },
         {
@@ -39681,7 +39681,7 @@
       "line_count": 871,
       "theorem_chains": [
         {
-          "text": "2. **Frame 规则**：`{P} C {Q}` ⟹ `{P ∗ R} C {Q ∗ R}`（当 C 不修改 R 涉及的变量）——局部推理的形式化：只规约被触及的内存，其余自动保持；Rust 借用检查的「`&mut` 独占期间其余引用休眠」正是 frame 规则的类型化版本；",
+          "text": "2. **Frame 规则**：`{P} C {Q}` ⟹ `{P ∗ R} C {Q ∗ R}`（当 C 不修改 R 涉及的变量）——局部推理的形式化：只规约被触及的内存，其余自动保持；Rust 借用（Borrowing）检查的「`&mut` 独占期间其余引用休眠」正是 frame 规则的类型化版本；",
           "type": "inline"
         },
         {
@@ -40128,7 +40128,7 @@
       "layer": "L4",
       "title": "操作语义：程序行为的形式化定义",
       "positioning": "介绍 **操作语义（Operational Semantics）**——通过形式化规则定义程序的执行步骤，分析小步语义（Small-Step）与大步语义（Big-Step）的对比，以及 Rust 的所有权（Ownership）、借用（Borrowing）和并发操作的形式化建模方法。",
-      "line_count": 1123,
+      "line_count": 1124,
       "theorem_chains": [
         {
           "text": "| 操作语义：程序行为的形式化定义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -40434,7 +40434,7 @@
           "type": "paragraph"
         },
         {
-          "text": "3. **框架规则链**：修改集合（modifies clause）+ frame ⟹ 「未提及状态自动保持」 ⟹ Prusti 中可变引用参数即「隐式 modifies」——借用检查保证了 frame 条件的成立（无别名绕过）；",
+          "text": "3. **框架规则链**：修改集合（modifies clause）+ frame ⟹ 「未提及状态自动保持」 ⟹ Prusti 中可变引用（Mutable Reference）参数即「隐式 modifies」——借用检查保证了 frame 条件的成立（无别名绕过）；",
           "type": "inline"
         },
         {
@@ -41840,7 +41840,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **定理 2** [Tier 2]: MIR 经过借用检查与优化后再 lower 到 codegen ⟹ 后端无需重新理解 Rust 的高层语法与所有权（Ownership）规则。",
+          "text": "> **定理 2** [Tier 2]: MIR 经过借用（Borrowing）检查与优化后再 lower 到 codegen ⟹ 后端无需重新理解 Rust 的高层语法与所有权（Ownership）规则。",
           "type": "paragraph"
         },
         {
@@ -42330,11 +42330,11 @@
       "line_count": 242,
       "theorem_chains": [
         {
-          "text": "- **定义**：`Send` = 值可安全跨线程**转移**（`T: Send` ⟹ 可在另一线程 drop）；`Sync` = 值可安全跨线程**共享引用**（`T: Sync` ⟺ `&T: Send`）——两定义的正交性：`Rc<T>` 既不 Send 也不 Sync，`Mutex<T>` 若 `T: Send` 则 `Sync`；",
+          "text": "- **定义**：`Send` = 值可安全跨线程**转移**（`T: Send` ⟹ 可在另一线程 drop）；`Sync` = 值可安全跨线程**共享引用（Reference）**（`T: Sync` ⟺ `&T: Send`）——两定义的正交性：`Rc<T>` 既不 Send 也不 Sync，`Mutex<T>` 若 `T: Send` 则 `Sync`；",
           "type": "paragraph"
         },
         {
-          "text": "- **auto trait 机制**：编译器按结构自动推导（所有字段 Send ⟹ 结构 Send）——`unsafe impl` 用于「结构规则不足表达安全性」的类型（`Mutex`/`Arc`）；错误的 `unsafe impl Send/Sync` 是数据竞争的唯一类型系统入口（健全性责任转移点）；",
+          "text": "- **auto trait 机制**：编译器按结构自动推导（所有字段 Send ⟹ 结构 Send）——`unsafe impl` 用于「结构规则不足表达安全性」的类型（`Mutex`/`Arc`）；错误的 `unsafe impl Send/Sync` 是数据竞争的唯一类型系统（Type System）入口（健全性责任转移点）；",
           "type": "paragraph"
         }
       ],
@@ -42651,7 +42651,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 2**: \"忽略条目参考的细节也能写出正确代码\" ⟹ 不成立。item 可见性、泛型参数和 trait 实现规则错误会直接导致编译失败。",
+          "text": "> **反命题 2**: \"忽略条目参考的细节也能写出正确代码\" ⟹ 不成立。item 可见性、泛型（Generics）参数和 trait 实现规则错误会直接导致编译失败。",
           "type": "paragraph"
         },
         {
@@ -42991,7 +42991,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **反命题 3**: \"其他语言对模式参考的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）移动、引用模式和 `@` 绑定具有语言特有语义。",
+          "text": "> **反命题 3**: \"其他语言对模式参考的处理方式可以直接迁移到 Rust\" ⟹ 不成立。Rust 的所有权（Ownership）移动、引用（Reference）模式和 `@` 绑定具有语言特有语义。",
           "type": "paragraph"
         }
       ],
@@ -43483,7 +43483,7 @@
           "[L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · [L4 线性逻辑](../01_ownership_logic/01_linear_logic.md) · [L4 Lambda 演算](../00_type_theory/05_lambda_calculus.md)"
         ],
         "post": [
-          "[线性化与一致性谱系](02_linearizability_and_consistency.md) · [Actor 形式语义](03_actor_semantics.md) · [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md)"
+          "[线性化与一致性（Coherence）谱系](02_linearizability_and_consistency.md) · [Actor 形式语义](03_actor_semantics.md) · [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md)"
         ]
       },
       "backward_chains": 0,
@@ -43613,7 +43613,7 @@
           "type": "paragraph"
         },
         {
-          "text": "**任其崩溃（let it crash）**哲学：不防御式地处理所有错误路径，而是让错误使 actor 崩溃、由监督者把状态重置到已知良好初值 ⟹ 错误处理代码从指数级的防御分支收敛为一条重启边。",
+          "text": "**任其崩溃（let it crash）**哲学：不防御式地处理所有错误路径，而是让错误使 actor 崩溃、由监督者把状态重置到已知良好初值 ⟹ 错误处理（Error Handling）代码从指数级的防御分支收敛为一条重启边。",
           "type": "paragraph"
         },
         {
@@ -43739,7 +43739,7 @@
           "[L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · [L4 进程代数与 Rust](01_process_calculi_for_rust.md) · [L3 谱系页 §4.1](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md)"
         ],
         "post": [
-          "[线性化与一致性谱系](02_linearizability_and_consistency.md) · [L6 分布式共识](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) · [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md)"
+          "[线性化与一致性（Coherence）谱系](02_linearizability_and_consistency.md) · [L6 分布式共识](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) · [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md)"
         ]
       },
       "backward_chains": 0,
@@ -44212,7 +44212,7 @@
           "[L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · [L4 进程代数与 Rust](../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md)"
         ],
         "post": [
-          "[L5 执行模型同构性矩阵](02_execution_model_isomorphism.md) · [L4 线性化与一致性谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) · [L6 CRDT 谱系](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md)"
+          "[L5 执行模型同构性矩阵](02_execution_model_isomorphism.md) · [L4 线性化与一致性（Coherence）谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) · [L6 CRDT 谱系](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md)"
         ]
       },
       "backward_chains": 0,
@@ -45940,7 +45940,7 @@
           "type": "table_row"
         },
         {
-          "text": "| **safe Rust 保证内存安全（Memory Safety）** | 所有权+借用+生命周期（Lifetimes） ⟹ | 无UAF/无数据竞争 | 逻辑错误未覆盖 | 默认编程模式 |",
+          "text": "| **safe Rust 保证内存安全（Memory Safety）** | 所有权（Ownership）+借用+生命周期（Lifetimes） ⟹ | 无UAF/无数据竞争 | 逻辑错误未覆盖 | 默认编程模式 |",
           "type": "table_row"
         },
         {
@@ -56198,7 +56198,7 @@
           "type": "paragraph"
         },
         {
-          "text": "**核心推理链**: 交换/结合/幂等 ⟹ 唯一 join ⟹ 无需协调的收敛 ⟹ AP 可用性——CRDT 用代数性质把「冲突解决」从运行时协议问题变成了编译期（类型层）的设计问题。",
+          "text": "**核心推理链**: 交换/结合/幂等 ⟹ 唯一 join ⟹ 无需协调的收敛 ⟹ AP 可用性——CRDT 用代数性质把「冲突解决」从运行时（Runtime）协议问题变成了编译期（类型层）的设计问题。",
           "type": "paragraph"
         }
       ],
@@ -56287,7 +56287,7 @@
       "matrix_rows": 27,
       "pre_post": {
         "pre": [
-          "[L4 线性化与一致性谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) · [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md) · [L3 谱系页 §5.3](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md)"
+          "[L4 线性化与一致性（Coherence）谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) · [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md) · [L3 谱系页 §5.3](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md)"
         ],
         "post": [
           "[L6 因果序与向量时钟](09_causal_ordering_vector_clocks.md) · [L6 分布式共识](06_distributed_consensus.md) · [L6 数据工程](05_data_engineering.md)"
@@ -56381,7 +56381,7 @@
       "matrix_rows": 17,
       "pre_post": {
         "pre": [
-          "[L4 线性化与一致性谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) · [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md) · [L3 并发编程（共享内存 happens-before）](../../03_advanced/00_concurrency/01_concurrency.md)"
+          "[L4 线性化与一致性（Coherence）谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) · [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md) · [L3 并发编程（共享内存 happens-before）](../../03_advanced/00_concurrency/01_concurrency.md)"
         ],
         "post": [
           "[L6 CRDT 谱系](08_crdt_type_zoo.md) · [L6 分布式共识](06_distributed_consensus.md) · [L6 流处理生态](03_stream_processing_ecosystem.md)"
@@ -57639,7 +57639,7 @@
       "line_count": 972,
       "theorem_chains": [
         {
-          "text": "- **内存安全 ⟹ 合约漏洞类别消除**: 重入攻击之外的溢出、越界、use-after-free 是 EVM/Solidity 合约的经典损失来源（整数溢出曾导致多起代币事件）；Rust 的借用检查 + 默认溢出检查（debug panic / release 可配置）把这些类别在编译期或运行早期暴露，而非审计期事后发现。",
+          "text": "- **内存安全（Memory Safety） ⟹ 合约漏洞类别消除**: 重入攻击之外的溢出、越界、use-after-free 是 EVM/Solidity 合约的经典损失来源（整数溢出曾导致多起代币事件）；Rust 的借用（Borrowing）检查 + 默认溢出检查（debug panic / release 可配置）把这些类别在编译期或运行早期暴露，而非审计期事后发现。",
           "type": "paragraph"
         },
         {
@@ -57655,7 +57655,7 @@
           "type": "table_row"
         },
         {
-          "text": "- **漏洞类别消除矩阵**: 整数溢出/下溢（Rust 默认检查 ⟹ 消除）、越界访问（借用检查 ⟹ 消除）、未初始化状态（类型系统强制初始化 ⟹ 消除）；但**重入攻击**（合约回调中状态未更新）是逻辑层漏洞，Rust 不自动消除——对策是 checks-effects-interactions 模式与账户租约锁，仍需人工纪律。逻辑错误（错误的清算公式、预言机价格操纵）两种语言同样暴露。",
+          "text": "- **漏洞类别消除矩阵**: 整数溢出/下溢（Rust 默认检查 ⟹ 消除）、越界访问（借用检查 ⟹ 消除）、未初始化状态（类型系统（Type System）强制初始化 ⟹ 消除）；但**重入攻击**（合约回调中状态未更新）是逻辑层漏洞，Rust 不自动消除——对策是 checks-effects-interactions 模式与账户租约锁，仍需人工纪律。逻辑错误（错误的清算公式、预言机价格操纵）两种语言同样暴露。",
           "type": "paragraph"
         },
         {
@@ -59088,11 +59088,11 @@
       "line_count": 290,
       "theorem_chains": [
         {
-          "text": "| Rust 内存安全（Memory Safety） ⟹ 更少并发 bug | 所有权与借用检查 | 降低新算法实现风险 |",
+          "text": "| Rust 内存安全（Memory Safety） ⟹ 更少并发 bug | 所有权（Ownership）与借用（Borrowing）检查 | 降低新算法实现风险 |",
           "type": "table_row"
         },
         {
-          "text": "| 类型系统 ⟹ 不变量强制 | 将算法前提编码为类型 | 编译期排除非法状态 |",
+          "text": "| 类型系统（Type System） ⟹ 不变量强制 | 将算法前提编码为类型 | 编译期排除非法状态 |",
           "type": "table_row"
         },
         {
@@ -61047,7 +61047,7 @@
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\13_quizzes\\01_quiz_networking_async_ecosystem.md",
       "layer": "L6",
       "title": "测验：网络与异步生态（L6）",
-      "positioning": "验证学习者对 L6 网络与异步子领域生态格局（框架、运行时、协议）的掌握。",
+      "positioning": "验证学习者对 L6 网络与异步子领域生态格局（框架、运行时（Runtime）、协议）的掌握。",
       "line_count": 334,
       "theorem_chains": [],
       "anti_propositions": [],
@@ -61210,7 +61210,7 @@
       "line_count": 335,
       "theorem_chains": [
         {
-          "text": "**解析**：权威页的漏洞对照表：所有权 + `&mut` 独占访问 ⟹ 重入攻击在编译期不可表达；`u64`/`u128` 默认 overflow panic + `checked_add` 显式处理 ⟹ 整数溢出显式化；`Option<T>` + 编译期初始化检查 ⟹ 不存在未初始化存储指针。核心洞察是\"让整类漏洞在编译期成为不可类型化的程序\"。A 是 Solidity 的运行时路线；D 与区块链确定性执行要求矛盾（无 GC 才保证确定性）。",
+          "text": "**解析**：权威页的漏洞对照表：所有权（Ownership） + `&mut` 独占访问 ⟹ 重入攻击在编译期不可表达；`u64`/`u128` 默认 overflow panic + `checked_add` 显式处理 ⟹ 整数溢出显式化；`Option<T>` + 编译期初始化检查 ⟹ 不存在未初始化存储指针。核心洞察是\"让整类漏洞在编译期成为不可类型化的程序\"。A 是 Solidity 的运行时路线；D 与区块链确定性执行要求矛盾（无 GC 才保证确定性）。",
           "type": "paragraph"
         }
       ],
@@ -68100,7 +68100,7 @@
       "path": "E:\\_src\\rust-lang\\concept\\07_future\\02_preview_features\\37_default_field_values_preview.md",
       "layer": "L7",
       "title": "Default Field Values 预研：结构体字段默认值",
-      "positioning": "跟踪 [RFC 3681](https://rust-lang.github.io/rfcs/3681-default-field-values.html) 引入的结构体字段默认值语法，说明其与函数式记录更新（Functional Record Update, FRU）、`Default` trait 及私有字段的交互。",
+      "positioning": "跟踪 [RFC 3681](https://rust-lang.github.io/rfcs/3681-default-field-values.html) 引入的结构体（Struct）字段默认值语法，说明其与函数式记录更新（Functional Record Update, FRU）、`Default` trait 及私有字段的交互。",
       "line_count": 156,
       "theorem_chains": [],
       "anti_propositions": [
@@ -68379,7 +68379,7 @@
           "type": "table_row"
         },
         {
-          "text": "| **所有权对应分离合取** | 编译器类型检查 ⟹ | `P * Q` 自动证明 | 功能正确性除外 | §4 核心论断 |",
+          "text": "| **所有权（Ownership）对应分离合取** | 编译器类型检查 ⟹ | `P * Q` 自动证明 | 功能正确性除外 | §4 核心论断 |",
           "type": "table_row"
         },
         {
@@ -68721,7 +68721,7 @@
           "type": "table_row"
         },
         {
-          "text": "| Rust for Linux ：操作系统内核中的内存安全 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |",
+          "text": "| Rust for Linux ：操作系统内核中的内存安全（Memory Safety） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |",
           "type": "table_row"
         },
         {

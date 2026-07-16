@@ -51,7 +51,7 @@
 ### 隐式声明的实体
 
 - 语言 prelude：`bool`、`char`、`str`、整数类型、浮点类型、`usize`/`isize`。
-- 内置属性、标准库 prelude 项/属性/宏、标准库 crate、外部链接 crate、工具属性、lint、derive 辅助属性。
+- 内置属性、标准库 prelude 项/属性/宏（Macro）、标准库 crate、外部链接 crate、工具属性、lint、derive 辅助属性。
 - `'static` 生命周期（Lifetimes）。
 
 ### 形式化表示
@@ -71,9 +71,9 @@ ItemDecl    ::= ModDecl | ExternCrate | UseDecl | FnDecl
 | 命名空间 | 包含实体 | 示例冲突规则 |
 |:---|:---|:---|
 | 值命名空间（value namespace） | 函数、变量、`const`、`static`、关联函数 | 同一作用域不可重复 |
-| 类型命名空间（type namespace） | 结构体（Struct）、枚举（Enum）、trait、类型别名、模块 | 可与值命名空间同名 |
+| 类型命名空间（type namespace） | 结构体（Struct）、枚举（Enum）、trait、类型别名、模块（Module） | 可与值命名空间同名 |
 | 宏命名空间（macro namespace） | `macro_rules!`、过程宏（Procedural Macro） | 通过 `name!()` 调用 |
-| 生命周期命名空间（lifetime namespace） | 生命周期参数 `'a` | 独立解析 |
+| 生命周期（Lifetimes）命名空间（lifetime namespace） | 生命周期参数 `'a` | 独立解析 |
 
 例如，可以同时定义一个名为 `Foo` 的模块和一个名为 `Foo` 的函数，因为它们处于不同命名空间：
 
@@ -89,7 +89,7 @@ fn main() {
 
 ## 三、作用域（Scopes）
 
-作用域是源代码区域，在该区域内某个名称可以被引用。Rust 中的作用域包括：
+作用域是源代码区域，在该区域内某个名称可以被引用（Reference）。Rust 中的作用域包括：
 
 | 作用域类型 | 范围 | 典型示例 |
 |:---|:---|:---|

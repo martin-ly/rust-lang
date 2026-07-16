@@ -41,7 +41,7 @@
 
 ## 一、核心概念
 
-SVE（Scalable Vector Extensions）与 SME（Scalable Matrix Extensions）代表 ARM 对 SIMD 的范式重定义：向量长度不再是指令集常量，而是运行时可变的硬件参数。本节核心概念回答“这对编程模型意味着什么”。
+SVE（Scalable Vector Extensions）与 SME（Scalable Matrix Extensions）代表 ARM 对 SIMD 的范式重定义：向量长度不再是指令集常量，而是运行时（Runtime）可变的硬件参数。本节核心概念回答“这对编程模型意味着什么”。
 
 三个概念的递进：
 
@@ -136,11 +136,11 @@ SME 在 SVE 基础上增加**二维可伸缩矩阵运算**：
 
 ## 三、技术挑战
 
-SVE/SME 进入 Rust 的障碍不在 LLVM，而在 Rust 的类型系统与 ABI 模型都预设了“类型大小是编译期常量”。本节技术挑战逐项分析这一预设被打破后的连锁反应。
+SVE/SME 进入 Rust 的障碍不在 LLVM，而在 Rust 的类型系统（Type System）与 ABI 模型都预设了“类型大小是编译期常量”。本节技术挑战逐项分析这一预设被打破后的连锁反应。
 
 三类挑战的关联：
 
-1. **类型系统适配**：可伸缩向量类型的大小是运行时值，意味着 `size_of::<T>()` 不再是 const——数组、结构体布局、`mem::transmute` 的安全性论证全部受影响，当前倾向是禁止可伸缩类型作为结构体字段直接嵌入；
+1. **类型系统适配**：可伸缩向量类型的大小是运行时值，意味着 `size_of::<T>()` 不再是 const——数组、结构体（Struct）布局、`mem::transmute` 的安全性论证全部受影响，当前倾向是禁止可伸缩类型作为结构体字段直接嵌入；
 2. **ABI 与调用约定**：AAPCS64 的 SVE 变体规定了谓词/向量寄存器的保存责任，Rust 的 `extern "C"` 需要对应扩展，且 `#[target_feature(enable = "sve")]` 函数的调用边界需要编译器插入状态保存；
 3. **SME 的额外复杂度**：ZA 阵列与流式 SVE 模式（streaming mode）是进程级状态，函数进出流式模式的切换成本与 ABI 影响远大于 SVE 本身，这也是 SME 支持落后于 SVE 的原因。
 

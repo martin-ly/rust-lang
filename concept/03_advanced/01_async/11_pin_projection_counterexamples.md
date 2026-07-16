@@ -11,7 +11,7 @@
 > **分工声明**: Pin/Unpin 的**契约推导与 API**（为什么需要 Pin、`Pin<&mut T>` 的保证、Unpin auto trait）留在 [Pin 与 Unpin](08_pin_unpin.md)。本页只做两件事：① unsafe 手写结构投射的 **UB 反例目录**（每条附 miri 思路）；② pin-project/pin-project-lite 的**正确模式全集**。凡涉及「Pin 是什么/为什么」的问题以 08 为准，本页不重复推导（AGENTS.md §2 Canonical 规则）。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 pin 不变量在字段级投射下的保持与破坏条件
-> **定位**: `Pin<&mut Self>` 保证了「整体不动」，但业务需要的是「字段级访问」——结构投射（structural projection）就是跨越这道缝的技术。本页系统枚举手写投射的全部 UB 模式与全部正确模式，让 unsafe 决策变成查表。
+> **定位**: `Pin<&mut Self>` 保证了「整体不动」，但业务需要的是「字段级访问」——结构投射（structural projection）就是跨越这道缝的技术。本页系统枚举（Enum）手写投射的全部 UB 模式与全部正确模式，让 unsafe 决策变成查表。
 > **前置概念**: [Pin 与 Unpin](08_pin_unpin.md) · [Async/Await](01_async.md) · [Future 与 Executor 机制](04_future_and_executor_mechanisms.md)
 > **后置概念**: [Unsafe](../02_unsafe/01_unsafe.md) · [Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md) · [Async 取消安全](05_async_cancellation_safety.md)
 
@@ -73,9 +73,9 @@ flowchart TD
 
 [Pin 与 Unpin](08_pin_unpin.md) 确立的契约：`Pin<&mut T>` 承诺 `T` 的**整体**不再被移动。但实现 `Future::poll`、超时包装、biased select 这类适配器时，必须访问**字段**——把 `Pin<&mut Self>` 拆成「pin 字段的 `Pin<&mut Field>`」+「非 pin 字段的 `&mut Field`」，这就是**结构投射（structural projection）**。
 
-> **定理 T1（投射守恒）**：结构投射是可靠的，当且仅当：① 任何 `!Unpin` 字段始终以 `Pin<&mut Field>` 形式暴露，且其地址在 `Self` 生命周期内不变 ⟹ ② 非 pin 字段可以 `&mut` 自由访问，但**移动它们不得间接触发 pin 字段的移动** ⟹ ③ `Drop` 与 `project_replace` 等整体操作中，pin 字段的析构发生在原处。三条任破其一 ⟹ UB（§3 逐一对应）。
+> **定理 T1（投射守恒）**：结构投射是可靠的，当且仅当：① 任何 `!Unpin` 字段始终以 `Pin<&mut Field>` 形式暴露，且其地址在 `Self` 生命周期（Lifetimes）内不变 ⟹ ② 非 pin 字段可以 `&mut` 自由访问，但**移动它们不得间接触发 pin 字段的移动** ⟹ ③ `Drop` 与 `project_replace` 等整体操作中，pin 字段的析构发生在原处。三条任破其一 ⟹ UB（§3 逐一对应）。
 
-关键洞察：**`Pin` 的契约在类型系统边界之外**。`unsafe { pin.get_unchecked_mut() }` 之后，编译器不再知道任何 pin 不变量，全部责任转移到程序员——这就是反例目录存在的理由。
+关键洞察：**`Pin` 的契约在类型系统（Type System）边界之外**。`unsafe { pin.get_unchecked_mut() }` 之后，编译器不再知道任何 pin 不变量，全部责任转移到程序员——这就是反例目录存在的理由。
 
 ## 三、UB 反例目录
 
@@ -150,7 +150,7 @@ fn main() {
 }
 ```
 
-**违反**：Rust 引用规则的独占公理（与 pin 无关但常与手写投射结伴出现——`get_unchecked_mut` 是混叠的常见入口）。**正确替代**：需要同时改两个字段就用一次 `project()` 拿到结构化的投射体，字段间是**拆分借用（split borrow）**而非混叠。
+**违反**：Rust 引用（Reference）规则的独占公理（与 pin 无关但常与手写投射结伴出现——`get_unchecked_mut` 是混叠的常见入口）。**正确替代**：需要同时改两个字段就用一次 `project()` 拿到结构化的投射体，字段间是**拆分借用（split borrow）**而非混叠。
 
 ### 3.3 反例 UB-3：Drop 顺序违反
 
@@ -258,7 +258,7 @@ pin-project 的设计让「移动 pin 字段」在类型层面无路径可走：
 
 ## 五、正确模式全集：pin-project
 
-pin-project 以过程宏生成**唯一可靠**的投射代码，模式全集如下：
+pin-project 以过程宏（Procedural Macro）生成**唯一可靠**的投射代码，模式全集如下：
 
 | 模式 | 方法 | 返回 | 用途 |
 |---|---|---|---|
@@ -328,7 +328,7 @@ async fn main() {
 
 ### 6.1 pin-project-lite：声明式宏等价物
 
-不需要枚举变体投射、`#[pinned_drop]`、`project_replace` 时，pin-project-lite 以声明宏提供同一安全保证，编译成本显著低于过程宏：
+不需要枚举变体投射、`#[pinned_drop]`、`project_replace` 时，pin-project-lite 以声明宏（Declarative Macro）提供同一安全保证，编译成本显著低于过程宏：
 
 ```rust
 use pin_project_lite::pin_project;
@@ -430,7 +430,7 @@ unsafe 投射的 SAFETY 注释检查清单（每条对应一个 §3 反例）：
 - [Async 取消安全](05_async_cancellation_safety.md) — drop 即取消路径上的析构顺序（与 UB-3 同族）
 - [Async 边界全景](06_async_boundary_panorama.md) — Pin 边界的全景汇总视角
 - [Unsafe](../02_unsafe/01_unsafe.md) — unsafe 论证义务的一般框架
-- [Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md) — 移动/析构/借用规则的 L2 权威页（向下引用）
+- [Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md) — 移动/析构/借用（Borrowing）规则的 L2 权威页（向下引用）
 
 ## 九、来源
 

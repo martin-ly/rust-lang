@@ -11,8 +11,8 @@
 > **分工声明**: 「RPITIT 使 trait 非 dyn 兼容」的**边界陈述与反例**（三段式）保留在 [Async 边界全景 §9](06_async_boundary_panorama.md)（该节已摘要化并回链本页）；trait 对象安全的一般理论（vtable、auto trait、关联类型规则）属于 [Traits](../../02_intermediate/00_traits/01_traits.md)。本页只做**解决方案谱系 + 选型矩阵 + 演进跟踪**，不重复边界推导与一般对象安全理论（AGENTS.md §2 Canonical 规则）。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析「不可命名的 Future 返回类型」与「vtable 动态分发」之间的结构性冲突及其各路解法
-> **定位**: `async fn` in trait（1.75 stable）解决了静态分发，却留下 Rust async 最著名的缺口：`Box<dyn Trait>` 不可用。本页把社区四年积累的五条路线（宏装箱 / 手写装箱 / erased 类型 / RTN / 原生 dyn async）整理为可查表的选型矩阵。
-> **前置概念**: [Traits](../../02_intermediate/00_traits/01_traits.md)（L2 向下引用：对象安全规则） · [Async/Await](01_async.md) · [Async 边界全景](06_async_boundary_panorama.md)
+> **定位**: `async fn` in trait（1.75 stable）解决了静态分发，却留下 Rust async 最著名的缺口：`Box<dyn Trait>` 不可用。本页把社区四年积累的五条路线（宏（Macro）装箱 / 手写装箱 / erased 类型 / RTN / 原生 dyn async）整理为可查表的选型矩阵。
+> **前置概念**: [Traits](../../02_intermediate/00_traits/01_traits.md)（L2 向下引用（Reference）：对象安全规则） · [Async/Await](01_async.md) · [Async 边界全景](06_async_boundary_panorama.md)
 > **后置概念**: [Async Closures](07_async_closures.md) · [Waker 契约深度解析](12_waker_contract_deep_dive.md)
 
 ---
@@ -152,7 +152,7 @@ async fn main() {
 
 ### 3.2 方案 B：手写 boxed future（去宏化）
 
-等价于 `async_trait` 的展开结果，但无过程宏依赖、签名完全可见：
+等价于 `async_trait` 的展开结果，但无过程宏（Procedural Macro）依赖、签名完全可见：
 
 ```rust
 //! 手写 boxed future：rustc 1.97.0 实测（std-only + tokio rmeta）
@@ -176,7 +176,7 @@ async fn main() {
 }
 ```
 
-与方案 A 同开销、同 MSRV；代价是**签名噪音**（`Pin<Box<dyn Future + Send + '_>>` 每处重复）与手写生命周期标注（`+ '_` 不能漏，否则捕获 `&self` 的实现无法通过借用检查）。判据：宏依赖敏感（编译时间、no-proc-macro 环境）且方法数少 ⟹ 方案 B；否则方案 A。
+与方案 A 同开销、同 MSRV；代价是**签名噪音**（`Pin<Box<dyn Future + Send + '_>>` 每处重复）与手写生命周期（Lifetimes）标注（`+ '_` 不能漏，否则捕获 `&self` 的实现无法通过借用（Borrowing）检查）。判据：宏依赖敏感（编译时间、no-proc-macro 环境）且方法数少 ⟹ 方案 B；否则方案 A。
 
 ### 3.3 方案 C：enum 分派（封闭类型集的零成本逃逸）
 
@@ -262,10 +262,10 @@ async fn spawnable<R: IntFactory + 'static>(r: R) -> i32 {
 
 | 场景 | 推荐方案 | 每次调用开销 | MSRV | 说明 |
 |---|---|---|:---:|---|
-| 泛型能覆盖（静态分发） | **RPITIT 原生** | 0 | 1.75 | 永远的首选；`dyn` 是退而求其次 |
+| 泛型（Generics）能覆盖（静态分发） | **RPITIT 原生** | 0 | 1.75 | 永远的首选；`dyn` 是退而求其次 |
 | 插件/扩展点，调用频率 < 10⁵/s | **async_trait（方案 A）** | 1 Box + 1 间接 | 低 | 事实标准，生态兼容最好 |
 | 同上但 no-proc-macro 环境 | **手写 boxed（方案 B）** | 1 Box + 1 间接 | 低 | 签名噪音换零宏依赖 |
-| 单线程运行时 + `!Send` 状态 | **async_trait(?Send)** | 1 Box + 1 间接 | 低 | 去掉 `Send` bound，可捕获 `Rc`/`RefCell` |
+| 单线程运行时（Runtime） + `!Send` 状态 | **async_trait(?Send)** | 1 Box + 1 间接 | 低 | 去掉 `Send` bound，可捕获 `Rc`/`RefCell` |
 | 实现集合封闭 + 热路径 | **enum 分派（方案 C）** | 0 | 任意 | 严格最优；不可扩展是硬边界 |
 | 库需静态/动态双模 | **dynosaur（方案 F）** | 1 Box + 1 间接 | 1.75+ | 一份定义两种消费 |
 | 需 `spawn` 但坚持 RPITIT | **RTN（方案 D）** | 0（静态分发） | nightly | 等稳定；stable 替代见下 |
@@ -329,7 +329,7 @@ flowchart TD
 
 ## 🔗 概念关系
 
-- **上位（is-a）**：[Traits](../../02_intermediate/00_traits/01_traits.md) 对象安全性的异步专题。
+- **上位（is-a）**：[Traits](../../02_intermediate/00_traits/01_traits.md) 对象安全性的异步（Async）专题。
 - **下位（实例）**：方案 A–F 六条 dyn 兼容路线（本文 §三）。
 - **对偶**：静态分派（RPITIT，零成本）⇄ 动态分派（`dyn` + boxed future，一次分配）。
 - **组合**：与 [GAT](../../02_intermediate/00_traits/07_generic_associated_types.md)、[类型擦除](../06_low_level_patterns/03_type_erasure.md)、[Async Closures](07_async_closures.md) 组合。

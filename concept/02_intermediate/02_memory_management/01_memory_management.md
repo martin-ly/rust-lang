@@ -398,10 +398,10 @@ graph TD
 
 本节按「分配方式 → 正确用例 → 反例」组织内存管理的实践知识，覆盖四类典型场景：
 
-- **栈分配优先**：小尺寸、短生命周期数据默认在栈上——反例是把大数组直接声明为局部变量导致栈溢出（应改用 `Vec` 或 `Box<[T]>`）；
+- **栈分配优先**：小尺寸、短生命周期（Lifetimes）数据默认在栈上——反例是把大数组直接声明为局部变量导致栈溢出（应改用 `Vec` 或 `Box<[T]>`）；
 - **堆分配显式化**：`Box`/`Vec`/`Rc`/`Arc` 的分配点都在源码可见——反例是热路径上无意间的 `clone`/`to_string` 触发分配，用 `cargo flamegraph` 或 `dhat` 可定位；
 - **引用计数环泄漏**：`Rc` + `RefCell` 互指造成永不释放——判定准则是「只要所有权图有环就必须有一处 `Weak`」；
-- **arena/pool 分配**：批量同生命周期对象用 arena（如 `bumpalo`）把 N 次分配降为 1 次——反例是把 arena 引用逃逸到 arena 生命周期之外（借用检查会拒绝，正是类型系统在兜底）。
+- **arena/pool 分配**：批量同生命周期对象用 arena（如 `bumpalo`）把 N 次分配降为 1 次——反例是把 arena 引用逃逸到 arena 生命周期之外（借用检查会拒绝，正是类型系统（Type System）在兜底）。
 
 每个反例附可复现代码与修复 diff，建议按「预测 → 运行 → 对照」顺序练习。
 
@@ -1138,7 +1138,7 @@ c.borrow_mut().push_str("hello");     // 运行时检查的可变借用
 | 多线程共享所有权 | `Arc<T>` | 定理 4.2 | 单线程使用 ⟹ 原子开销浪费 |
 | 单线程共享 + 可变 | `RefCell<T>` | 推论 4.3 | 借用冲突 ⟹ 运行时 panic（§5.5） |
 | 资源确定性释放 | RAII + `Drop` | 定理 4.4 | `mem::forget`/`ManuallyDrop` 抑制释放 |
-| 多线程共享可变状态 | `Arc<Mutex<T>>` | §六 并发安全决策树 | 死锁不可编译期判定，需锁顺序约定与 `try_lock` |
+| 多线程共享可变状态 | `Arc<Mutex<T>>` | §六 并发安全（Concurrency Safety）决策树 | 死锁不可编译期判定，需锁顺序约定与 `try_lock` |
 
 ## 十、相关概念链接
 
@@ -1664,7 +1664,7 @@ Box<MaybeUninit<T>>.field → Box<MaybeUninit<FieldType>>
 
 ## 十二、演进方向
 
-内存管理子系统的演进聚焦「让零成本抽象覆盖更多场景」，三条主线：
+内存管理子系统的演进聚焦「让零成本抽象（Zero-Cost Abstraction）覆盖更多场景」，三条主线：
 
 1. **分配器接口稳定化**：`Allocator` API（`allocator_api` feature，仍 nightly）允许 `Vec<T, A>`/`Box<T, A>` 自定义分配器，embedded 与高性能场景（hugepage、arena、NUMA 绑定）不再需要 fork 标准库；全局分配器 `#[global_allocator]` 已稳定，`std::alloc::System` 之外可用 `jemalloc`/`mimalloc`；
 2. **pin 与自引用结构**：`Pin` 语义稳定后，`pin-project` 模式与 `MaybeUninit` 的逐步完善（`offset_of!` 1.77、`MaybeUninit` 数组工具）让手写 intrusive 数据结构更安全；

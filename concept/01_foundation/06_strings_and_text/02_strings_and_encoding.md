@@ -896,7 +896,7 @@ fn main() {
 | `CString`/`CStr` | NUL 结尾 C 字符串互操作 | `std::ffi` |
 | 编码转换 | `from_utf8` / `from_utf8_lossy` 显式转换 | 标准库 |
 | 不变量分层 | `String`（UTF-8）严于 `OsStr`（平台编码）严于裸字节 | 类型层级 |
-| 格式化 | `fmt` 宏族经 `Display`/`Debug` trait 分派 | `std::fmt` |
+| 格式化 | `fmt` 宏（Macro）族经 `Display`/`Debug` trait 分派 | `std::fmt` |
 
 ## 🔗 概念关系
 

@@ -70,9 +70,9 @@ struct User {
 | 比较 | `PartialEq`/`Eq`/`PartialOrd`/`Ord` | 派生实现按**字段声明序**字典序比较；`Eq` 是自反性标记（浮点不可派生） |
 | 复制 | `Clone`/`Copy` | `Copy` 要求所有字段 `Copy` 且类型不实现 `Drop`；`Clone` 逐字段克隆 |
 | 哈希 | `Hash` | 派生版按字段序喂入 hasher——`Eq` 与 `Hash` 必须一致（相等 ⟹ 同哈希），自定义一个就必须同步另一个 |
-| 调试与默认 | `Debug`/`Default` | `Debug` 输出结构化表示；`Default` 逐字段取默认值（枚举需 `#[default]` 标注变体，1.62+） |
+| 调试与默认 | `Debug`/`Default` | `Debug` 输出结构化表示；`Default` 逐字段取默认值（枚举（Enum）需 `#[default]` 标注变体，1.62+） |
 
-派生的共同机制：编译器为泛型参数自动加约束（`#[derive(Clone)] struct S<T>` 生成 `impl<T: Clone> Clone for S<T>`）——注意这是**语法级**约束添加，字段实际不需要 `T: Clone` 时（如 `PhantomData<T>`）会过度约束，需手写 impl。
+派生的共同机制：编译器为泛型（Generics）参数自动加约束（`#[derive(Clone)] struct S<T>` 生成 `impl<T: Clone> Clone for S<T>`）——注意这是**语法级**约束添加，字段实际不需要 `T: Clone` 时（如 `PhantomData<T>`）会过度约束，需手写 impl。
 
 ### `Debug` — 调试输出
 
@@ -92,7 +92,7 @@ println!("{:?}", p); // Point { x: 1, y: 2 }
 
 ### `PartialEq` / `Eq` — 相等性比较
 
-相等性 trait 对是 Rust 类型系统「用标记 trait 编码数学性质」的范例：
+相等性 trait 对是 Rust 类型系统（Type System）「用标记 trait 编码数学性质」的范例：
 
 - **`PartialEq`**：定义 `==`/`!=`——只承诺对称性与传递性，**不承诺自反性**（`x == x` 可能为假，`f64` 的 NaN 是标准例子）；
 - **`Eq`**：无方法的标记 trait——`impl Eq` 即声明「我的 `PartialEq` 满足自反性」。它是 `HashMap` 键、`BTreeMap` 语义健全性的前提；
@@ -161,7 +161,7 @@ struct Version { major: u32, minor: u32, patch: u32 }
 
 ### `Clone` / `Copy` — 复制值
 
-复制 trait 对定义了 Rust 的两种复制语义，是所有权模型的「减压阀」：
+复制 trait 对定义了 Rust 的两种复制语义，是所有权（Ownership）模型的「减压阀」：
 
 - **`Clone`**：显式深复制——`x.clone()` 是程序员可见的操作，可能昂贵（堆分配、递归克隆）；`Clone` 的存在不改变 move 语义（默认仍 move）；
 - **`Copy`**：隐式位复制——`Copy` 类型的「move」退化为按位拷贝且源保持有效（`let y = x;` 后 `x` 仍可用）。约束：所有字段 `Copy` + 类型不实现 `Drop`（E0184——位复制 + 析构 = double-free 风险，编译器强制排除）；
@@ -306,7 +306,7 @@ struct User {
 
 `#[derive(Debug, Clone, PartialEq)]` 作用于 struct 时，编译器如何生成实现？
 
-- A. 调用运行时反射生成
+- A. 调用运行时（Runtime）反射生成
 - B. 使用默认实现，行为基于字段的逐字段/逐变体推导
 - C. 复制标准库中同名类型的实现
 - D. 生成空实现，待运行时填充
@@ -358,7 +358,7 @@ struct User {
 
 | 属性 | 取值 / 判定 | 依据 |
 |---|---|---|
-| 机制 | `#[derive]` 在编译期按字段递归生成 impl | 内置宏 |
+| 机制 | `#[derive]` 在编译期按字段递归生成 impl | 内置宏（Macro） |
 | 覆盖范围 | `Debug`/`Clone`/`Copy`/`PartialEq`/`Eq`/`PartialOrd`/`Ord`/`Hash`/`Default` 等 | std |
 | 条件 | 所有字段均实现目标 trait 才可派生 | 生成规则 |
 | 不可派生 | `Display` 等需手写或第三方宏 crate | 生态惯例 |

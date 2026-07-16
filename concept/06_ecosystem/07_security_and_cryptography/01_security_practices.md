@@ -246,7 +246,7 @@ Rust 供应链风险:
 
 ## 二、技术细节
 
-Rust 安全实践的技术细节分三组：输入验证（类型驱动解析——用 `serde`/newtype 把“已验证”编码进类型，解析即验证而非先解析后检查）、加密原语（只用 RustCrypto/`ring` 等经过审计的实现，自研密码学是头号禁忌；常量时间比较用 `subtle`）、审计工具链（`cargo audit` 查 RUSTSEC 数据库、`cargo geiger` 统计 unsafe 密度、`cargo vet` 做供应链评审）。三组的共同原则：安全属性尽量由类型系统与工具强制执行，而非依赖开发者纪律。
+Rust 安全实践的技术细节分三组：输入验证（类型驱动解析——用 `serde`/newtype 把“已验证”编码进类型，解析即验证而非先解析后检查）、加密原语（只用 RustCrypto/`ring` 等经过审计的实现，自研密码学是头号禁忌；常量时间比较用 `subtle`）、审计工具链（`cargo audit` 查 RUSTSEC 数据库、`cargo geiger` 统计 unsafe 密度、`cargo vet` 做供应链评审）。三组的共同原则：安全属性尽量由类型系统（Type System）与工具强制执行，而非依赖开发者纪律。
 
 ### 2.1 输入验证与清洗
 >

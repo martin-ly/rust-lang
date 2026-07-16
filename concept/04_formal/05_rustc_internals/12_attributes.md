@@ -84,13 +84,13 @@ struct Point { x: i32, y: i32 }
 | `#[derive(Trait)]` | 派生 | 自动生成 trait 实现 |
 | `#[inline]` | 代码生成 | 建议内联 |
 | `#[repr(C)]` | 代码生成 | C 兼容布局 |
-| `#[must_use]` | 类型系统 | 忽略返回值时警告 |
+| `#[must_use]` | 类型系统（Type System） | 忽略返回值时警告 |
 | `#[non_exhaustive]` | 类型系统 | 禁止外部 crate 穷尽匹配 |
 | `#[deprecated]` | 诊断 | 标记弃用 API |
 | `#[cfg(...)]` | 条件编译 | 按条件包含代码 |
 | `#[path = "..."]` | 模块（Module） | 指定模块文件路径 |
 | `#[no_mangle]` | 代码生成 | 禁用符号名修饰 |
-| `#[global_allocator]` | 运行时 | 指定全局分配器 |
+| `#[global_allocator]` | 运行时（Runtime） | 指定全局分配器 |
 
 ## 五、条件编译属性
 
@@ -166,7 +166,7 @@ RFC 3416 为 `#![feature(...)]` 属性引入**结构化元数据**要求：night
 | 概念 | 关系 |
 |:---|:---|
 | [Items Reference](11_items_reference.md) | 属性修饰 item |
-| [Macros](../../03_advanced/03_proc_macros/01_macros.md) | 属性宏在宏展开阶段执行 |
+| [Macros](../../03_advanced/03_proc_macros/01_macros.md) | 属性宏（Macro）在宏展开阶段执行 |
 | [Conditional Compilation](../../03_advanced/03_proc_macros/11_conditional_compilation.md) | `#[cfg]` 控制条件编译 |
 | [Generics Compiler Behavior](15_generics_compiler_behavior.md) | `#[inline]` 影响单态化（Monomorphization）代码生成 |
 | [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) | `#[no_mangle]`、`#[link]` 用于 unsafe/FFI 场景 |

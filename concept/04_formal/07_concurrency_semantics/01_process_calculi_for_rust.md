@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×Ana — 分析并发通信的形式根基在 Rust 中的工程投影
 > **前置概念**: [L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · [L4 线性逻辑](../01_ownership_logic/01_linear_logic.md) · [L4 Lambda 演算](../00_type_theory/05_lambda_calculus.md)
-> **后置概念**: [线性化与一致性谱系](02_linearizability_and_consistency.md) · [Actor 形式语义](03_actor_semantics.md) · [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md)
+> **后置概念**: [线性化与一致性（Coherence）谱系](02_linearizability_and_consistency.md) · [Actor 形式语义](03_actor_semantics.md) · [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md)
 
 ---
 
@@ -140,7 +140,7 @@ P ::= 0 | x(y).P | x̄⟨y⟩.P | P | Q | (νx)P | !P
   !P         -- 复制：无限多个 P 并行
 ```
 
-**移动性（mobility）**的含义：系统的**通信拓扑在运行时改变**——A 把私有通道 c 发给 B 之后，B 才获得与 A 私下通信的能力。这使得 π 演算能直接建模「把工作交接给新 actor」「传递 channel 句柄」这类模式。
+**移动性（mobility）**的含义：系统的**通信拓扑在运行时（Runtime）改变**——A 把私有通道 c 发给 B 之后，B 才获得与 A 私下通信的能力。这使得 π 演算能直接建模「把工作交接给新 actor」「传递 channel 句柄」这类模式。
 
 Rust 中最接近移动性的工程事实：`Sender<T>` 本身是**值**，可以被移动或克隆进其他 channel 的消息里——
 
@@ -172,7 +172,7 @@ assert_eq!(work_rx.recv().unwrap(), 42);
 | 并行组合 `P ∥ Q` | `thread::spawn` / `tokio::spawn` | 高 | CSP 并行隐含共享事件握手；Rust 线程默认**无共享事件**，同步靠显式原语 |
 | 同步通道 `c!v` / `c?x` | `mpsc::sync_channel(0)` | 高 | Rust 默认 `channel()` 是**无界缓冲**，不是会合；需显式 `sync_channel(0)` |
 | 外部选择 `P [] Q` | `crossbeam::select!` / `tokio::select!` | 高 | Rust select 混合了「就绪优先级/随机」策略；无 CSP 的对称性保证 |
-| 隐藏 `P \ A` / 限制 `(νx)P` | 作用域 + `move` 闭包 | 中 | Rust 用**词法作用域与所有权**近似 π 演算的名字限制；但 `Sender` 可克隆逃逸 |
+| 隐藏 `P \ A` / 限制 `(νx)P` | 作用域 + `move` 闭包（Closures） | 中 | Rust 用**词法作用域与所有权（Ownership）**近似 π 演算的名字限制；但 `Sender` 可克隆逃逸 |
 | 前缀 `a -> P` | 顺序语句 | 高 | — |
 | 递归 `μX.F(X)` / `!P` | `loop` / 循环 spawn | 中 | Rust 无进程常量，递归体现为循环与闭包 |
 | 互模拟 `~` | 无 | 无 | Rust 没有程序行为等价的形式定义（见 §6） |

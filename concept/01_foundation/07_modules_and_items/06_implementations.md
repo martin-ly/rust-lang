@@ -109,7 +109,7 @@ mindmap
 
 > **命题 1**: `impl` 块将**函数（方法）**绑定到类型，分为固有实现和 Trait 实现。
 >
-> **命题 2**: 方法第一个参数为 `self`、`&self` 或 `&mut self`，决定调用时所有权的转移/借用方式。
+> **命题 2**: 方法第一个参数为 `self`、`&self` 或 `&mut self`，决定调用时所有权的转移/借用（Borrowing）方式。
 >
 > **命题 3**: 关联函数没有 `self` 参数，通常用作构造函数，通过 `Type::function()` 调用。
 >
@@ -231,7 +231,7 @@ fn main() {
 
 本节的反例覆盖 `impl` 块的四个高频问题：
 
-- **`&self` 方法中修改字段**：`&self` 承诺不可变借用——直接赋值触发 E0594/E0596；需要「逻辑可变」时用内部可变性（`Cell`/`RefCell`）或改 `&mut self`；
+- **`&self` 方法中修改字段**：`&self` 承诺不可变借用（Mutable Borrow）——直接赋值触发 E0594/E0596；需要「逻辑可变」时用内部可变性（`Cell`/`RefCell`）或改 `&mut self`；
 - **消耗性方法后继续使用**：`fn consume(self)` 取所有权，调用后原变量失效（E0382）——builder 模式的 `self -> Self` 链式调用即利用此语义保证「每个中间态只使用一次」；
 - **Orphan Rule 违规**：`impl ForeignTrait for ForeignType` 触发 E0117——修复模式是 newtype 包装（`struct Wrapper(ForeignType)` 获得本地类型身份）或 trait 改由本地定义；
 - **测验衔接**：receiver 形式（`self`/`&self`/`&mut self`/`Box<Self>`/`Rc<Self>`）的选择是 impl 设计的第一决策。
@@ -304,7 +304,7 @@ impl std::fmt::Display for Vec<u8> {
 
 `impl String` 中 `fn into_bytes(self)` 的 receiver 是 `self`，其调用语义是？
 
-- A. 不可变借用，调用后原值仍可用
+- A. 不可变借用（Immutable Borrow），调用后原值仍可用
 - B. 可变借用，调用后原值仍可用
 - C. 获取所有权，调用后原值被移动、不可再使用
 - D. 复制原值，`self` 要求 `Copy`
@@ -365,7 +365,7 @@ impl MyTrait for String {}
 | 方法 receiver | `self` / `&self` / `&mut self` 三种接收形式 | 方法文法 |
 | 关联函数 | 无 receiver 的命名空间函数（如 `new`） | API 惯例 |
 | 多块 | 同一类型可拆分多个 impl 块 | 文法 |
-| 孤儿规则 | trait impl 要求 trait 或类型至少一方在本地定义 | 一致性规则 |
+| 孤儿规则（Orphan Rule） | trait impl 要求 trait 或类型至少一方在本地定义 | 一致性（Coherence）规则 |
 
 ## 🔗 概念关系
 

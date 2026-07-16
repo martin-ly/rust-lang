@@ -139,7 +139,7 @@ QPACK 解决:
 
 ## 三、eBPF：内核可编程与 Rust
 
-eBPF 的本质是在内核事件点（系统调用、网络包、tracepoint）挂载经 verifier 验证的沙箱字节码，实现无内核模块的可观测与可编程网络。aya-rs 让 Rust 覆盖 eBPF 全栈：内核侧用 `aya-ebpf`（no_std + 受限 Rust 子集编译为 BPF 目标），用户侧用 `aya` 加载与管理程序、共享 map。Rust 的独特优势在于类型安全直接映射 BPF 约束（map 类型在编译期检查）、以及相对 libbpf 更少的 unsafe 接缝。
+eBPF 的本质是在内核事件点（系统调用、网络包、tracepoint）挂载经 verifier 验证的沙箱字节码，实现无内核模块（Module）的可观测与可编程网络。aya-rs 让 Rust 覆盖 eBPF 全栈：内核侧用 `aya-ebpf`（no_std + 受限 Rust 子集编译为 BPF 目标），用户侧用 `aya` 加载与管理程序、共享 map。Rust 的独特优势在于类型安全直接映射 BPF 约束（map 类型在编译期检查）、以及相对 libbpf 更少的 unsafe 接缝。
 
 ### 3.1 eBPF 的本质
 
@@ -480,7 +480,7 @@ Rust 生态：纯 Rust QUIC 实现 `quinn`、HTTP/3 实现 `h3`、AWS `s2n-quic`
 
 | 概念 | 说明 |
 | :--- | :--- |
-| **TCP/UDP** | `TcpListener`/`TcpStream`；`UdpSocket`；同步与异步 |
+| **TCP/UDP** | `TcpListener`/`TcpStream`；`UdpSocket`；同步与异步（Async） |
 | **HTTP** | `reqwest`、`hyper`、`axum`；客户端与服务端 |
 | **WebSocket** | `tungstenite`；双向实时通信 |
 | **异步网络** | Tokio 运行时（Runtime）；`tokio::net`；与 C06 结合 |
@@ -520,11 +520,11 @@ Rust 生态：纯 Rust QUIC 实现 `quinn`、HTTP/3 实现 `h3`、AWS `s2n-quic`
 
 ## 相关概念
 
-- [对应测验](../13_quizzes/01_quiz_networking_async_ecosystem.md) — 网络与异步生态（Web 框架、Tokio/Glommio 运行时、QUIC/HTTP-3、eBPF）
+- [对应测验](../13_quizzes/01_quiz_networking_async_ecosystem.md) — 网络与异步生态（Web 框架、Tokio/Glommio 运行时（Runtime）、QUIC/HTTP-3、eBPF）
 
 ## ⚠️ 反例与陷阱
 
-本节以 listener 被 move 进两个闭包为反例，展示所有权规则对多任务分发的约束与 `try_clone` 修正。
+本节以 listener 被 move 进两个闭包（Closures）为反例，展示所有权规则对多任务分发的约束与 `try_clone` 修正。
 
 ### 反例：把 listener move 进两个闭包（rustc 1.97.0 实测）
 

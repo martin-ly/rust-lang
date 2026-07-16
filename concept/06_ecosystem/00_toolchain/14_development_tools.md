@@ -244,7 +244,7 @@ mindmap
 
 ## ⚠️ 反例与陷阱
 
-借用检查是开发工具链（clippy/rust-analyzer）每天提示最多的诊断之一。
+借用（Borrowing）检查是开发工具链（clippy/rust-analyzer）每天提示最多的诊断之一。
 
 ### 反例：引用比被引用者活得更久（rustc 1.97.0，--edition 2024 实测）
 

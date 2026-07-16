@@ -84,7 +84,7 @@
 
 **答案：C**
 
-**解析**：对应关系为 2015 → 1.0（初始版本）、2018 → 1.31（模块系统简化、`dyn Trait` 显式化）、2021 → 1.56（prelude 新增 `TryFrom`/`TryInto`、数组 `IntoIterator`）、**2024 → 1.85**（`if let` 临时作用域收窄、`gen` 关键字保留、异步闭包、never type fallback）。
+**解析**：对应关系为 2015 → 1.0（初始版本）、2018 → 1.31（模块（Module）系统简化、`dyn Trait` 显式化）、2021 → 1.56（prelude 新增 `TryFrom`/`TryInto`、数组 `IntoIterator`）、**2024 → 1.85**（`if let` 临时作用域收窄、`gen` 关键字保留、异步（Async）闭包（Closures）、never type fallback）。
 
 </details>
 
@@ -124,7 +124,7 @@ rust-version = "1.94"
 
 ### Q5. 🟡【多选】下列哪些特性是在 Rust 1.95–1.96 中稳定的？（选出所有正确项）
 
-- A. `cfg_select!` 宏（1.95，编译期 cfg 条件选择）
+- A. `cfg_select!` 宏（Macro）（1.95，编译期 cfg 条件选择）
 - B. `assert_matches!` / `debug_assert_matches!`（1.96）
 - C. `core::range` 的 `Copy` 范围类型（1.96，RFC 3550）
 - D. `async fn` in trait（RPITIT）
@@ -134,7 +134,7 @@ rust-version = "1.94"
 
 **答案：A、B、C**
 
-**解析**：1.95 稳定了 `cfg_select!` 宏、`if let` guards on match arms、路径段关键字重命名导入与 PowerPC 内联汇编；1.96 稳定了 `assert_matches!`/`debug_assert_matches!`（未进 prelude，需显式导入）、`expr` 元变量用于 `cfg`、以及 `core::range::Range<T>` 等实现 `Copy` + `IntoIterator` 的新范围类型（RFC 3550）。D 错：RPITIT（`impl Trait` in trait return position）稳定于 **1.75.0**（2023-12-28），远早于 1.95——[rust_1_90_stabilized](../00_version_tracking/rust_1_90_stabilized.md) 的版本勘误表专门澄清了这一点。
+**解析**：1.95 稳定了 `cfg_select!` 宏、`if let` guards on match arms、路径段关键字重命名导入与 PowerPC 内联汇编（Inline Assembly）；1.96 稳定了 `assert_matches!`/`debug_assert_matches!`（未进 prelude，需显式导入）、`expr` 元变量用于 `cfg`、以及 `core::range::Range<T>` 等实现 `Copy` + `IntoIterator` 的新范围类型（RFC 3550）。D 错：RPITIT（`impl Trait` in trait return position）稳定于 **1.75.0**（2023-12-28），远早于 1.95——[rust_1_90_stabilized](../00_version_tracking/rust_1_90_stabilized.md) 的版本勘误表专门澄清了这一点。
 
 </details>
 
@@ -147,7 +147,7 @@ rust-version = "1.94"
 
 **答案：对**
 
-**解析**：1.93 的「`String` / `Vec` 原始部分拆分」：`let (ptr, len, cap) = v.into_raw_parts();` 便于与外部运行时交互。同版本还稳定了 `MaybeUninit` 增强 API（`assume_init_ref`、`write_copy_of_slice` 等）与 `VecDeque::pop_front_if` / `pop_back_if` 条件弹出。(Source: [Rust 1.93 稳定特性](../00_version_tracking/rust_1_93_stabilized.md))
+**解析**：1.93 的「`String` / `Vec` 原始部分拆分」：`let (ptr, len, cap) = v.into_raw_parts();` 便于与外部运行时（Runtime）交互。同版本还稳定了 `MaybeUninit` 增强 API（`assume_init_ref`、`write_copy_of_slice` 等）与 `VecDeque::pop_front_if` / `pop_back_if` 条件弹出。(Source: [Rust 1.93 稳定特性](../00_version_tracking/rust_1_93_stabilized.md))
 
 </details>
 
@@ -184,7 +184,7 @@ fn double_size<const N: usize>() -> [u8; N * 2] {
 | A | 语法错误，`N * 2` 应写为 `N.mul(2)` |
 | B | const 参数参与运算属于 `generic_const_exprs`，stable 仅支持 min_const_generics 的独立参数形态 |
 | C | `u8` 不允许作为数组元素类型 |
-| D | 应改用 `Vec<u8>`，数组不支持 const 泛型 |
+| D | 应改用 `Vec<u8>`，数组不支持 const 泛型（Generics） |
 
 <details>
 <summary>💡 点击展开答案与解析</summary>
@@ -269,17 +269,17 @@ fn double_size<const N: usize>() -> [u8; N * 2] {
 
 ### Q13. 🟡【多选】下列哪些变更属于 Rust 1.91–1.92 版本线？（选出所有正确项）
 
-- A. 借用检查器优化：改进算法与缓存机制，编译时间减少 10–20%（1.91）
+- A. 借用（Borrowing）检查器优化：改进算法与缓存机制，编译时间减少 10–20%（1.91）
 - B. `MaybeUninit` 内部内存布局与有效性约束文档化（1.92）
 - C. `generic_const_exprs` 完整稳定（1.92）
-- D. 增强的 const 上下文及其对生命周期的影响（1.91）
+- D. 增强的 const 上下文及其对生命周期（Lifetimes）的影响（1.91）
 
 <details>
 <summary>✅ 答案与解析</summary>
 
 **答案：A、B、D**
 
-**解析**：[Rust 1.91 稳定特性](../00_version_tracking/rust_1_91_stabilized.md) 记录借用检查器优化（编译时间 -10–20%、借用冲突检测加速）与增强的 const 上下文；[Rust 1.92 稳定特性](../00_version_tracking/rust_1_92_stabilized.md) 记录 `MaybeUninit` 布局/有效性约束文档化与联合体原始引用。C 错：`generic_const_exprs` 截至 1.97 仍为 nightly 特性（参见 Q7）。
+**解析**：[Rust 1.91 稳定特性](../00_version_tracking/rust_1_91_stabilized.md) 记录借用检查器优化（编译时间 -10–20%、借用冲突检测加速）与增强的 const 上下文；[Rust 1.92 稳定特性](../00_version_tracking/rust_1_92_stabilized.md) 记录 `MaybeUninit` 布局/有效性约束文档化与联合体原始引用（Reference）。C 错：`generic_const_exprs` 截至 1.97 仍为 nightly 特性（参见 Q7）。
 
 </details>
 

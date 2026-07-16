@@ -30,13 +30,13 @@
 
 ## 反命题决策树
 
-> **反命题 2**: "忽略条目参考的细节也能写出正确代码" ⟹ 不成立。item 可见性、泛型参数和 trait 实现规则错误会直接导致编译失败。
+> **反命题 2**: "忽略条目参考的细节也能写出正确代码" ⟹ 不成立。item 可见性、泛型（Generics）参数和 trait 实现规则错误会直接导致编译失败。
 
 > **反命题 3**: "其他语言对条目参考的处理方式可以直接迁移到 Rust" ⟹ 不成立。Rust 的 trait、impl、泛型参数和生命周期（Lifetimes）参数构成独特的 item 体系。
 
 ## 一、Item 概述
 
-**Item（条目）** 是 Rust 模块中的声明单元，构成 crate 的静态结构。每个 item 都有名称、可见性和作用域。
+**Item（条目）** 是 Rust 模块（Module）中的声明单元，构成 crate 的静态结构。每个 item 都有名称、可见性和作用域。
 
 主要 item 类别：
 
@@ -55,7 +55,7 @@
 | Trait | `trait` | 抽象接口 |
 | 实现 | `impl` | trait 实现或固有实现 |
 | 外部块 | `extern` | FFI 声明块 |
-| 泛型参数 | `<T>` | 类型/生命周期/const 参数 |
+| 泛型参数 | `<T>` | 类型/生命周期（Lifetimes）/const 参数 |
 | 关联项 | `type` / `const` / `fn` | trait/impl 内部的从属 item |
 
 ### 语法概要
@@ -99,10 +99,10 @@ static COUNTER: std::sync::Mutex<u32> = std::sync::Mutex::new(0);
 
 | Item | 示例 | 说明 |
 |:---|:---|:---|
-| 结构体 | `struct Point { x: i32, y: i32 }` | 命名字段类型 |
+| 结构体（Struct） | `struct Point { x: i32, y: i32 }` | 命名字段类型 |
 | 元组结构体 | `struct Meters(u32);` | 单字段 newtype |
 | 单元结构体 | `struct Flag;` | 无字段 |
-| 枚举 | `enum Option<T> { Some(T), None }` | 带变体 |
+| 枚举（Enum） | `enum Option<T> { Some(T), None }` | 带变体 |
 | 联合体 | `union Value { i: i32, f: f32 }` | 内存共享，unsafe 访问 |
 | 类型别名 | `type MyResult<T> = Result<T, Error>;` | 同义名 |
 
@@ -275,7 +275,7 @@ mindmap
 
 ## ⚠️ 反例与陷阱
 
-> 陷阱：模块内的 item 默认私有，跨模块引用会失败。
+> 陷阱：模块内的 item 默认私有，跨模块引用（Reference）会失败。
 > 下面代码在 rustc 1.97 --edition 2024 下触发 `E0603`。
 
 ```rust,compile_fail,E0603

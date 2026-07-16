@@ -185,7 +185,7 @@ graph LR
 
 - **`use` 声明与路径解析**：`use` 在当前模块的命名空间中创建绑定，解析顺序为「`use` 导入 → 当前模块定义 → 外层模块（2018 edition 起不再隐式向外回溯，裸路径首段必须是 crate 名/`crate`/`self`/`super`/`use` 引入的名字）」。`use a::b as c` 重命名、`use a::{b, c}` 分组、`use a::*` glob（仅导入 `pub` 项，且显式绑定优先于 glob 冲突项）。
 - **Edition 2018 路径规则变更**：2015 中 `use foo::bar` 的 `foo` 默认从 crate 根解析，2018 起从「当前作用域」解析，外部 crate 名经 extern prelude 可用，`crate::foo` 显式表示根锚定。迁移工具 `cargo fix --edition` 自动改写；混用 edition 的 workspace 中，同一路径文本在两个 edition 语义可能不同——排查「路径在旧代码能编译、新模块报错」时先查两边 edition。
-- **Workspace 组织**：workspace 根 `Cargo.toml` 的 `[workspace] members` 声明成员 crate，共享 `Cargo.lock` 与 `target/`；`workspace.dependencies`/`workspace.package` 让成员继承依赖版本与元数据（`xxx.workspace = true`）。成员间引用用路径依赖（`path = "../foo"`），发布时需补 `version`。
+- **Workspace 组织**：workspace 根 `Cargo.toml` 的 `[workspace] members` 声明成员 crate，共享 `Cargo.lock` 与 `target/`；`workspace.dependencies`/`workspace.package` 让成员继承依赖版本与元数据（`xxx.workspace = true`）。成员间引用（Reference）用路径依赖（`path = "../foo"`），发布时需补 `version`。
 
 判定一个路径问题归属：单个 crate 内查 use/edition 规则；跨 crate 查 workspace 依赖声明与版本解析。
 

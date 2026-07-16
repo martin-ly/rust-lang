@@ -104,7 +104,7 @@ write!  (destination, "format_string", args...)
 |:---|:---|:---|:---|
 | 用户输出 | `Display` trait | `impl Display for T` | std::fmt |
 | 调试输出 | `Debug` trait | `#[derive(Debug)]` | std::fmt |
-| 格式化宏 | 编译期检查 | `format!("{}", x)` | std::fmt |
+| 格式化宏（Macro） | 编译期检查 | `format!("{}", x)` | std::fmt |
 | 格式说明符 | 控制宽度、精度、进制等 | `{:08.2}` | std::fmt |
 | 可扩展性 | 自定义 trait 如 `Binary`、`LowerHex` | `impl Binary for T` | std::fmt |
 | 零开销 | 格式化参数在编译期校验 | N/A | std::fmt |
@@ -211,7 +211,7 @@ fn main() {
 
 ## 四、示例与反例
 
-本节用三组对照说明「格式化与显示（Display and Debug Formatting）」：正确示例：错误类型实现 Display、反例：格式化参数数量不匹配与反例：为未实现 Display 的类型使用 `{}`。每组先给正确示例并标注其成立的类型系统依据，再给反例并标注编译器诊断（E0xxx）或运行时后果，最后给出修正方案。判读标准：正确示例应能通过 rustc 1.97 编译且无 clippy 警告，反例的失败点必须可定位到具体规则。
+本节用三组对照说明「格式化与显示（Display and Debug Formatting）」：正确示例：错误类型实现 Display、反例：格式化参数数量不匹配与反例：为未实现 Display 的类型使用 `{}`。每组先给正确示例并标注其成立的类型系统（Type System）依据，再给反例并标注编译器诊断（E0xxx）或运行时（Runtime）后果，最后给出修正方案。判读标准：正确示例应能通过 rustc 1.97 编译且无 clippy 警告，反例的失败点必须可定位到具体规则。
 
 ### 4.1 正确示例：错误类型实现 Display
 
@@ -458,7 +458,7 @@ D. `{:<8}`
 
 ---
 
-> **Rust 1.93 起**：`std::fmt::from_fn` 与 `std::fmt::FromFn` 稳定，可用闭包直接构造实现 `Display` 等格式化 trait 的值，无需定义新类型。详见 [版本页](../../07_future/00_version_tracking/rust_1_93_stabilized.md)（特性矩阵节）。
+> **Rust 1.93 起**：`std::fmt::from_fn` 与 `std::fmt::FromFn` 稳定，可用闭包（Closures）直接构造实现 `Display` 等格式化 trait 的值，无需定义新类型。详见 [版本页](../../07_future/00_version_tracking/rust_1_93_stabilized.md)（特性矩阵节）。
 
 ## 🧭 思维导图（Mindmap）
 

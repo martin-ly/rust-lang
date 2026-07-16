@@ -196,9 +196,9 @@ Rust for Linux 项目结构:
 
 技术细节的三条主线：
 
-1. **C 互操作与绑定生成**：内核 C API 经 `bindgen` 生成 Rust FFI 声明，再由 `kernel` crate 手工包为 safe 抽象；关键约束是**内核头文件的特殊性**（内联汇编、`__always_inline`、volatile 语义），bindgen 输出需人工裁剪白名单。
-2. **内核抽象层**：设计模式是「所有权包装内核资源」——`ARef<T>`（`get/put` 引用计数）、`Mutex<T, I>`（绑定 spinlock/mutex 原语，守卫 `Guard` 持锁且 `!Send` 表达「不可跨上下文持锁」）、`IO` 内存映射的 `Io<M>` 类型编码访问宽度（8/16/32/64 位寄存器在类型层区分）。每个抽象把一条内核惯例（「spinlock 不可睡眠」）变为编译期约束。
-3. **驱动开发模型**：`module!` 宏声明元数据，`impl kernel::Module` 的 `init` 返回 `Result`（错误即模块卸载）；异步支持（workqueue 上的 async）在实验阶段。
+1. **C 互操作与绑定生成**：内核 C API 经 `bindgen` 生成 Rust FFI 声明，再由 `kernel` crate 手工包为 safe 抽象；关键约束是**内核头文件的特殊性**（内联汇编（Inline Assembly）、`__always_inline`、volatile 语义），bindgen 输出需人工裁剪白名单。
+2. **内核抽象层**：设计模式是「所有权（Ownership）包装内核资源」——`ARef<T>`（`get/put` 引用（Reference）计数）、`Mutex<T, I>`（绑定 spinlock/mutex 原语，守卫 `Guard` 持锁且 `!Send` 表达「不可跨上下文持锁」）、`IO` 内存映射的 `Io<M>` 类型编码访问宽度（8/16/32/64 位寄存器在类型层区分）。每个抽象把一条内核惯例（「spinlock 不可睡眠」）变为编译期约束。
+3. **驱动开发模型**：`module!` 宏（Macro）声明元数据，`impl kernel::Module` 的 `init` 返回 `Result`（错误即模块（Module）卸载）；异步支持（workqueue 上的 async）在实验阶段。
 
 判定依据：写内核模块先通读 `kernel` crate 的抽象清单——重复造 safe 封装是内核 Rust 化最被诟病的反模式。
 
@@ -485,7 +485,7 @@ Rust for Linux 采用状态 (2024+):
 | 案例 | 领域 | 验证的 Rust 能力 |
 |:---|:---|:---|
 | Android Binder IPC | 进程间通信核心路径 | 内核抽象层对密集 unsafe C API 的安全封装 |
-| Apple GPU (Asahi) | 图形驱动 | 无文档硬件的逆向驱动中，所有权模型对寄存器/缓冲区生命周期的管理收益 |
+| Apple GPU (Asahi) | 图形驱动 | 无文档硬件的逆向驱动中，所有权模型对寄存器/缓冲区生命周期（Lifetimes）的管理收益 |
 | NVMe 基础设施 | 块设备 | 与既有 C 驱动共存的 FFI 边界工程 |
 
 阅读顺序建议：每个案例先定位"unsafe 封装层在哪"，再看 safe API 如何恢复内核子系统要求的不变式——这是评估任何 Rust 内核代码的统一审计路径。具体合并进主线的版本与状态以 kernel.org 提交记录为准。
@@ -724,7 +724,7 @@ graph TD
 | `no_std` 缺失 | 引用 std 类型/宏 | 编译错误（找不到 crate） |
 | 锁的原子顺序 | 内存序与 `unsafe` 封装 | 编译错误 / 审计 |
 | `alloc` 谨慎使用 | 分配失败必须可处理 | `try_*` API 约束 |
-| spinlock 与睡眠 | 持锁睡眠即死锁 | 运行时死锁 / lockdep 报告 |
+| spinlock 与睡眠 | 持锁睡眠即死锁 | 运行时（Runtime）死锁 / lockdep 报告 |
 
 判定原则：内核 Rust 用例若只在用户态复现，结论要降级——内核的分配失败路径与上下文约束（原子上下文不可睡眠）在用户态不可复现。
 
@@ -954,7 +954,7 @@ fn main() {}
 | 定理 | 前提 | 结论 | 置信度 |
 |:---|:---|:---|:---|
 | Rust for Linux ：操作系统内核中的内存安全（Memory Safety） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |
-| Rust for Linux ：操作系统内核中的内存安全 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
+| Rust for Linux ：操作系统内核中的内存安全（Memory Safety） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |
 | Rust for Linux ：操作系统内核中的内存安全 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |
 
 ## 自 docs/06_toolchain/06_rust_for_linux_tooling_guide.md 合并的补充内容

@@ -59,7 +59,7 @@ cargo +nightly build -Zbuild-std=core,alloc --target x86_64-unknown-none
 | `-Z binary-dep-depinfo` | nightly（rustc + cargo 同名） | dep-info 文件跟踪二进制依赖（sysroot、crate 依赖产物），使构建系统能感知二进制输入变化 | `rustc -Z help` 实测；[Cargo Unstable](https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#binary-dep-depinfo) |
 | `-Z codegen-backend=<path>` | nightly | 指定 codegen 后端动态库（如 Cranelift `rustc_codegen_cranelift`），是替换 LLVM 后端的入口 | `rustc -Z help` 实测；见 [LLVM 后端与代码生成](09_llvm_backend_and_codegen.md) |
 | `-Z dylib-lto` | nightly | 对 dylib crate 类型启用 LTO | `rustc -Z help` 实测 |
-| `-Z share-generics` | nightly | 当前 crate 共享泛型实例化（单态化去重），减小二进制体积、代价是链接时耦合 | [Unstable Book — share-generics](https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/share-generics.html) |
+| `-Z share-generics` | nightly | 当前 crate 共享泛型实例化（单态化（Monomorphization）去重），减小二进制体积、代价是链接时耦合 | [Unstable Book — share-generics](https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/share-generics.html) |
 | `-Z threads=N` | nightly（内部） | rustc 前端并行线程池大小；并行 rustc 的官方入口 | [Unstable Book — threads](https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/threads.html)（无 tracking issue，标注 internal） |
 | `-Z no-parallel-backend` | nightly | 保留 codegen-units 与 ThinLTO 但令 LLVM 串行执行，用于隔离并行后端 bug | [Unstable Book — no-parallel-backend](https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/no-parallel-backend.html) |
 | `-Z embed-metadata=no` | nightly | 不在 rlib/dylib 中嵌入 crate 元数据（减小产物；下游将无法链接） | `rustc -Z help` 实测 |
@@ -73,7 +73,7 @@ cargo +nightly build -Zbuild-std=core,alloc --target x86_64-unknown-none
 | `-Z time-passes` | nightly | 打印每个编译 pass 的耗时；`-Z time-passes-format=json` 输出机器可读格式 | [Unstable Book — time-passes](https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/time-passes.html) |
 | `-Z self-profile` | nightly | rustc 内部 profiler，产出 `.events/.string_data/.string_index` 三件套，用 [measureme](https://github.com/rust-lang/measureme) 的 `summarize`/`crox`/`inferno` 分析；`-Z self-profile-events` 控制事件集 | [Unstable Book — self-profile](https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/self-profile.html) |
 | `-Z print-type-sizes` | nightly | 打印每个类型的布局（size/align/字段偏移），排查内存膨胀的第一工具 | [Unstable Book — print-type-sizes](https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/print-type-sizes.html) |
-| `-Z print-mono-items` | nightly | 打印单态化收集结果（哪些泛型实例被 codegen） | `rustc -Z help` 实测 |
+| `-Z print-mono-items` | nightly | 打印单态化收集结果（哪些泛型（Generics）实例被 codegen） | `rustc -Z help` 实测 |
 | `-Z dump-mir=<filter>` | nightly | 把 MIR 按 pass 转储到 `mir_dump/`；`-Z dump-mir-graphviz` 另出 `.dot` | `rustc -Z help` 实测；见 [编译器测试体系](13_compiler_testing.md) |
 | `-Z llvm-time-trace` | nightly | 从 LLVM 侧产出 JSON 时间轨迹（Chrome trace 格式） | `rustc -Z help` 实测 |
 | `-Z treat-err-as-bug[=N]` | nightly | 把第 N 个错误当作 ICE 处理（带内部栈回溯），用于诊断编译器自身 | `rustc -Z help` 实测 |
@@ -121,9 +121,9 @@ cargo +nightly build -Zbuild-std=core,alloc --target x86_64-unknown-none
 | 选项 | 状态 | 用途 | 出处 |
 |:---|:---:|:---|:---|
 | `-Z next-solver[=coherence]` | nightly | 启用下一代 trait solver（`-Z next-solver=coherence` 仅在 coherence 检查中启用） | [Unstable Book — next-solver](https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/next-solver.html) |
-| `-Z polonius[=legacy]` | nightly | 启用基于 Polonius 的借用检查器（NLL 之后的位置敏感借用分析） | [Unstable Book — polonius](https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/polonius.html) |
+| `-Z polonius[=legacy]` | nightly | 启用基于 Polonius 的借用（Borrowing）检查器（NLL 之后的位置敏感借用分析） | [Unstable Book — polonius](https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/polonius.html) |
 | `-Z autodiff=Enable,...` | nightly | Enzyme 自动微分（`std::autodiff` 的编译器侧开关；`PrintTA/PrintAA/NoPostopt` 等子选项调试 AD 过程） | `rustc -Z help` 实测 |
-| `-Z contract-checks` | nightly | 为契约（contract）前/后置条件发射运行时检查 | `rustc -Z help` 实测 |
+| `-Z contract-checks` | nightly | 为契约（contract）前/后置条件发射运行时（Runtime）检查 | `rustc -Z help` 实测 |
 | `-Z allow-features=<list>` | nightly | 白名单：只允许列出的 language feature 被启用（限制依赖中 `#![feature]` 的 blast radius） | [Unstable Book — allow-features](https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/allow-features.html) |
 | `-Z assume-incomplete-release` | nightly | 令 `cfg(version)` 把当前版本视为未完成发布（版本门槛逻辑的测试工具） | `rustc -Z help` 实测 |
 

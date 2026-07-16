@@ -71,7 +71,7 @@
 
 ## 一、核心架构
 
-Rust 游戏架构的主流是 ECS（Entity-Component-System）：实体是 ID、组件是纯数据、系统是纯函数——这种分解与所有权模型高度契合（组件借用规则天然防止数据竞争）。Bevy 是生态代表：编译期查询类型检查、自动系统并行调度（按组件访问冲突分析）、插件式模块组织。对比传统 OOP 游戏对象树，ECS 用缓存友好的连续内存换掉了虚函数分发，用组合换掉了继承层次——这也是它成为 Rust 游戏引擎主流架构的原因。
+Rust 游戏架构的主流是 ECS（Entity-Component-System）：实体是 ID、组件是纯数据、系统是纯函数——这种分解与所有权模型高度契合（组件借用（Borrowing）规则天然防止数据竞争）。Bevy 是生态代表：编译期查询类型检查、自动系统并行调度（按组件访问冲突分析）、插件式模块（Module）组织。对比传统 OOP 游戏对象树，ECS 用缓存友好的连续内存换掉了虚函数分发，用组合换掉了继承层次——这也是它成为 Rust 游戏引擎主流架构的原因。
 
 ### 1.1 ECS 设计模式
 
@@ -167,7 +167,7 @@ Bevy 引擎架构:
 
 ## 二、图形渲染
 
-wgpu 是 Rust 图形的事实标准抽象层：基于 WebGPU 标准 API，后端覆盖 Vulkan/Metal/DX12/WebGL2，一份代码跨桌面与浏览器（WASM）。其设计体现 Rust 安全理念：资源生命周期由 RAII 管理、命令缓冲区编码保证 GPU 命令合法性、大部分状态错误在提交前捕获。渲染管线的经典阶段（顶点→光栅化→片段）在 wgpu 中映射为 `RenderPipeline` 对象 + WGSL 着色器；理解管线状态对象不可变（切换即新对象）是性能优化的起点。
+wgpu 是 Rust 图形的事实标准抽象层：基于 WebGPU 标准 API，后端覆盖 Vulkan/Metal/DX12/WebGL2，一份代码跨桌面与浏览器（WASM）。其设计体现 Rust 安全理念：资源生命周期（Lifetimes）由 RAII 管理、命令缓冲区编码保证 GPU 命令合法性、大部分状态错误在提交前捕获。渲染管线的经典阶段（顶点→光栅化→片段）在 wgpu 中映射为 `RenderPipeline` 对象 + WGSL 着色器；理解管线状态对象不可变（切换即新对象）是性能优化的起点。
 
 ### 2.1 WGPU — 跨平台图形
 >
@@ -433,8 +433,8 @@ graph TD
 
 > **补充生态工具（2026-07-12 自 `06_game_development.md` 合并）**：窗口与输入层 [winit](https://github.com/rust-windowing/winit)；
 > 资产管道的 [gltf](https://docs.rs/gltf/) crate；轻量 ECS 实现 [hecs](https://docs.rs/hecs/)（与 `bevy_ecs` 的 archetype-based 存储设计形成对照）；
-> 热重载（Hot Reloading）在 Rust 中受编译期单态化与类型布局稳定性约束，工程上通常以动态库重载（如 `hot-lib-reloader`）或脚本层（Lua/Rhai）折衷实现。
-> 进阶边界场景（archetype 变更与迭代器失效、游戏状态序列化的循环引用、ECS system 参数顺序冲突）见 [ECS 架构](02_game_ecs.md) 与 [游戏引擎内部机制](15_game_engine_internals.md)。
+> 热重载（Hot Reloading）在 Rust 中受编译期单态化（Monomorphization）与类型布局稳定性约束，工程上通常以动态库重载（如 `hot-lib-reloader`）或脚本层（Lua/Rhai）折衷实现。
+> 进阶边界场景（archetype 变更与迭代器（Iterator）失效、游戏状态序列化的循环引用（Reference）、ECS system 参数顺序冲突）见 [ECS 架构](02_game_ecs.md) 与 [游戏引擎内部机制](15_game_engine_internals.md)。
 
 ---
 
@@ -523,7 +523,7 @@ fn main() {
 
 ## 十、边界测试：游戏开发的编译错误
 
-游戏开发边界测试覆盖引擎接缝处的三类编译期拦截：Bevy 系统参数引用未插入的 `Resource`（运行时才 panic，应改用 `Option<Res<T>>` 或启动检查）；游戏循环中把 `!Send` 的渲染句柄移入并行系统（`Send` bound 编译期拒绝）；组件类型未实现 `Component` trait 导致查询失败。这些用例说明 Rust 游戏引擎把大量 C++ 的运行时崩溃与未定义行为前移为编译错误，代价是更陡峭的类型系统学习曲线。d` 约束（编译错误）、边界测试：游戏循环中的固定时间步长与渲染解耦（运行时卡顿）、边界测试：WGPU 的着色器编译与平台支持差异（运行时 panic）等5个方面。
+游戏开发边界测试覆盖引擎接缝处的三类编译期拦截：Bevy 系统参数引用未插入的 `Resource`（运行时才 panic，应改用 `Option<Res<T>>` 或启动检查）；游戏循环中把 `!Send` 的渲染句柄移入并行系统（`Send` bound 编译期拒绝）；组件类型未实现 `Component` trait 导致查询失败。这些用例说明 Rust 游戏引擎把大量 C++ 的运行时崩溃与未定义行为前移为编译错误，代价是更陡峭的类型系统（Type System）学习曲线。d` 约束（编译错误）、边界测试：游戏循环中的固定时间步长与渲染解耦（运行时卡顿）、边界测试：WGPU 的着色器编译与平台支持差异（运行时 panic）等5个方面。
 
 ### 10.1 边界测试：Bevy 的 Resource 与 System 参数（编译错误）
 

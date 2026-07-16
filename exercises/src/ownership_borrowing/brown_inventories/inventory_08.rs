@@ -1,5 +1,15 @@
 //! # Brown University CRP Ownership Inventory — Program 08
 //!
+//! **EN**: Ownership in Loops
+//! **Summary**: Master ownership transfer during iteration, iterating by reference, and when
+//! cloning is needed.
+//! **Key Terms**: 迭代 (iteration), 所有权转移 (ownership transfer), 引用迭代 (iterate by reference),
+//! 消费迭代 (consuming iteration), 克隆 (clone), 借用 (borrowing).
+//! **Related Concepts**:
+//! [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md),
+//! [`concept/02_intermediate/07_iterators_and_closures/01_iterator_patterns.md`](../../../../../concept/02_intermediate/07_iterators_and_closures/01_iterator_patterns.md),
+//! [`concept/01_foundation/01_ownership_borrow_lifetime/06_ownership_inventories_brown_book.md`](../../../../../concept/01_foundation/01_ownership_borrow_lifetime/06_ownership_inventories_brown_book.md).
+//!
 //! **来源 / Source**: Brown University CRP Ownership Inventory 样题
 //! **主题 / Topic**: 循环中的所有权 / Ownership in Loops
 //!
@@ -9,18 +19,23 @@
 //! Master ownership transfer during iteration, iterating by reference,
 //! and when `.clone()` is needed.
 //!
-//! ## TODO
+//! ## TODO / Tasks
 //!
 //! 1. 实现 `take_ownership_loop`，通过 for 循环消费 Vec 并拼接所有字符串。
+//!    Implement `take_ownership_loop` to consume a Vec and concatenate all strings in a `for` loop.
 //! 2. 实现 `borrow_loop`，不消费输入 Vec，只借用拼接。
+//!    Implement `borrow_loop` to concatenate without consuming the input Vec.
 //! 3. 比较两种写法在所有权和性能上的差异。
+//!    Compare the two approaches in terms of ownership and performance.
 
 /// 消费（move）Vec 中的所有 String，拼接成一个长字符串。
 /// Consumes (moves) all Strings in a Vec and concatenates them into one long String.
 pub fn take_ownership_loop(words: Vec<String>) -> String {
     let mut result = String::new();
     // TODO: 使用 for 循环获取每个 String 的所有权并拼接到 result。
+    // TODO: Use a `for` loop to take ownership of each `String` and append it to `result`.
     // 注意：这里 words 被消费后不能再使用。
+    // Note: `words` is consumed and cannot be used after this loop.
     for word in words {
         result.push_str(&word);
     }
@@ -32,6 +47,7 @@ pub fn take_ownership_loop(words: Vec<String>) -> String {
 pub fn borrow_loop(words: &[String]) -> String {
     let mut result = String::new();
     // TODO: 使用引用迭代，使 words 在函数返回后仍然可用。
+    // TODO: Iterate by reference so `words` remains usable after the function returns.
     for word in words {
         result.push_str(word);
     }

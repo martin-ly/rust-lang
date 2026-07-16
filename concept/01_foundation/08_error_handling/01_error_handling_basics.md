@@ -15,7 +15,7 @@
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页（L1 基础层）。
 > **层级定位**:
-> 本页为错误处理的 **L1 基础权威页**，覆盖 `Result`/`Option`/`?` 的入门语义；
+> 本页为错误处理（Error Handling）的 **L1 基础权威页**，覆盖 `Result`/`Option`/`?` 的入门语义；
 > 进阶传播模式见 L2 主权威页 [`04_error_handling.md`](../../02_intermediate/03_error_handling/01_error_handling.md)，组合子/错误转换/框架生态深入见 [`16_error_handling_deep_dive.md`](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md)。
 > 三页为合法进阶关系（basics → 主页 → deep dive），非重复权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
@@ -116,7 +116,7 @@ mindmap
 
 ## 一、核心概念
 
-Rust 错误处理的三个核心概念构成「可恢复错误进类型系统、不可恢复错误走 panic」的二分设计：
+Rust 错误处理的三个核心概念构成「可恢复错误进类型系统（Type System）、不可恢复错误走 panic」的二分设计：
 
 1. **`Result<T, E>`**：可恢复错误的类型化表示。`Ok(T)` 与 `Err(E)` 两个变体迫使调用方用 `match`/`?`/组合子显式处理失败路径——「忘记处理错误」在 Rust 中是编译期 `#[must_use]` 警告而非运行时事故。
 2. **`Option<T>`**：「值可能不存在」的类型化表示，消除 null。`Some(T)`/`None` 与 `Result` 同构（`Option<T> ≈ Result<T, ()>`），二者经 `ok_or`/`ok` 互转。用 `Option` 还是 `Result`，判定标准是：「缺失」是否需要携带原因——需要原因用 `Result`，纯有无用 `Option`。
@@ -308,11 +308,11 @@ fn main() {
 
 错误在跨层传播时需要「转换」与「组合」，本节给出三个机制的判定规则：
 
-- **`From` trait**：`?` 隐式调用的转换入口。`impl From<E1> for E2` 声明「`E1` 可以无损升格为 `E2`」，通常用于把底层错误（`io::Error`、`ParseIntError`）包装进应用错误枚举。手写 `From` impl 或用 `thiserror` 的 `#[from]` 派生，是库错误设计的标准做法。
-- **`map` 与 `and_then`**：`map` 变换成功值（`T → U`），`and_then` 串联可能失败的操作（`T → Result<U, E>`，flatMap）。判定用哪个：闭包返回普通值用 `map`，返回 `Result`/`Option` 用 `and_then`——用错会得到 `Result<Result<...>>` 的嵌套类型（编译器以类型不匹配提示）。
-- **组合模式**：`map_err` 转换错误侧、`or`/`or_else` 提供回退、`transpose` 交换 `Result<Option<T>>` 与 `Option<Result<T>>`。这组组合子使错误处理保持表达式风格，与迭代器链无缝衔接。
+- **`From` trait**：`?` 隐式调用的转换入口。`impl From<E1> for E2` 声明「`E1` 可以无损升格为 `E2`」，通常用于把底层错误（`io::Error`、`ParseIntError`）包装进应用错误枚举（Enum）。手写 `From` impl 或用 `thiserror` 的 `#[from]` 派生，是库错误设计的标准做法。
+- **`map` 与 `and_then`**：`map` 变换成功值（`T → U`），`and_then` 串联可能失败的操作（`T → Result<U, E>`，flatMap）。判定用哪个：闭包（Closures）返回普通值用 `map`，返回 `Result`/`Option` 用 `and_then`——用错会得到 `Result<Result<...>>` 的嵌套类型（编译器以类型不匹配提示）。
+- **组合模式**：`map_err` 转换错误侧、`or`/`or_else` 提供回退、`transpose` 交换 `Result<Option<T>>` 与 `Option<Result<T>>`。这组组合子使错误处理保持表达式风格，与迭代器（Iterator）链无缝衔接。
 
-类型层面的一致性约束：同一条 `?` 链上所有错误必须能 `From` 到函数的返回错误类型——这条约束是设计错误枚举层级（`thiserror`）或动态错误对象（`anyhow::Error`）的分水岭。
+类型层面的一致性（Coherence）约束：同一条 `?` 链上所有错误必须能 `From` 到函数的返回错误类型——这条约束是设计错误枚举层级（`thiserror`）或动态错误对象（`anyhow::Error`）的分水岭。
 
 ### 2.1 From trait
 >
@@ -453,7 +453,7 @@ Result/Option 组合:
 
 panic 是 Rust 的「不可恢复错误」通道，与 `Result` 形成明确的职责分工：
 
-- **`panic!` 宏**：触发线程级展开（unwinding，默认 `panic = "unwind"`），逐层执行栈上值的 `Drop` 后终止当前线程；配置 `panic = "abort"` 则直接终止进程（嵌入式/FFI 边界常用）。panic 的语义承诺是「进程内其他线程的内存安全不受影响」——毒化（poisoning）的 `Mutex` 会拒绝后续加锁，防止观察到半成品状态。
+- **`panic!` 宏（Macro）**：触发线程级展开（unwinding，默认 `panic = "unwind"`），逐层执行栈上值的 `Drop` 后终止当前线程；配置 `panic = "abort"` 则直接终止进程（嵌入式/FFI 边界常用）。panic 的语义承诺是「进程内其他线程的内存安全（Memory Safety）不受影响」——毒化（poisoning）的 `Mutex` 会拒绝后续加锁，防止观察到半成品状态。
 - **`unwrap` 与 `expect`**：`Result`/`Option` 的「我断言这里不会失败」出口，失败即 panic。`expect("理由")` 强制留下断言依据，是工程规范对 `unwrap` 的改进。二者的合法使用场景只有三种：不变量明显成立的局部推理（如「刚插入的键必存在」）、原型/测试代码、以及「失败即程序 bug」的契约违反。
 
 判定「用 `Result` 还是 panic」的标准：错误是否属于调用方应当处理的正常业务情况（如文件不存在、解析失败）——是则 `Result`；是否表示程序员错误/不变量破坏（如索引越界、空堆弹出后的 unwrap）——是则 panic 合理。`catch_unwind` 只应用于 FFI 边界与任务隔离层（如线程池、测试框架），不作常规控制流。
@@ -900,7 +900,7 @@ fn main() {}
 
 ## 嵌入式测验（Embedded Quiz）
 
-本组测验围绕测验 1：Result 与 ? 运算符（理解层）、测验 2：Option 与 Result 的转换（应用层）、测验 3：unwrap vs expect（分析层）、测验 4：错误传播链（应用层）等方面设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用检查」或「运行时行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
+本组测验围绕测验 1：Result 与 ? 运算符（理解层）、测验 2：Option 与 Result 的转换（应用层）、测验 3：unwrap vs expect（分析层）、测验 4：错误传播链（应用层）等方面设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用（Borrowing）检查」或「运行时行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
 
 ### 测验 1：Result 与 ? 运算符（理解层）
 

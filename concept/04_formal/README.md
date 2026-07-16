@@ -198,7 +198,7 @@ graph TB
 | [21_type_semantics.md](00_type_theory/06_type_semantics.md) | 类型语义 [教学类比] | 进步/保持定理、Rust 特有类型语义、子类型与变型 | ✅ v1.0 | L2 Type System, L4 形式化理论 | Pierce TAPL, RustBelt |
 | [18_evaluation_strategies.md](03_operational_semantics/04_evaluation_strategies.md) | 求值策略 [教学类比] | CBV/CBN/CBR、归约策略、Rust 的 CBV+Move 定位 | ✅ v1.0 | L1 Type System, L2 Generics | Lambda Calculus |
 | [01_process_calculi_for_rust.md](07_concurrency_semantics/01_process_calculi_for_rust.md) | 进程代数与 Rust | CSP/CCS/π 演算骨架、会合/外部选择/移动性、四条不同构边界 | ✅ v1.0 | L3 Concurrency, L4 Linear Logic | L5 Isomorphism Matrix |
-| [02_linearizability_and_consistency.md](07_concurrency_semantics/02_linearizability_and_consistency.md) | 线性化与一致性谱系 | Herlihy-Wing 历史/线性化点、一致性谱系、CAP、Treiber 栈实例 | ✅ v1.0 | L3 Atomics, L4 Hoare Logic | L6 CRDT, L6 Consensus |
+| [02_linearizability_and_consistency.md](07_concurrency_semantics/02_linearizability_and_consistency.md) | 线性化与一致性（Coherence）谱系 | Herlihy-Wing 历史/线性化点、一致性谱系、CAP、Treiber 栈实例 | ✅ v1.0 | L3 Atomics, L4 Hoare Logic | L6 CRDT, L6 Consensus |
 | [03_actor_semantics.md](07_concurrency_semantics/03_actor_semantics.md) | Actor 模型形式语义 | Hewitt 三公理、Agha 配置语义、OTP 监督树、actix/ractor/kameo | ✅ v1.0 | L3 Concurrency, L4 Process Calculi | L6 Consensus, L5 Isomorphism Matrix |
 
 ---
@@ -268,12 +268,12 @@ L4 → L1 映射中的信息损失:
 
 | 类型 | 文件 | 定位 |
 |:---|:---|:---|
-| ① 编译器原理 / 形式化基础设施 | [19_rustc_query_system.md](05_rustc_internals/01_rustc_query_system.md)、[20_mir_codegen_llvm_primer.md](05_rustc_internals/02_mir_codegen_llvm_primer.md)、[26_trait_solver_in_rustc.md](05_rustc_internals/03_trait_solver_in_rustc.md)、[35_name_resolution_and_hir.md](05_rustc_internals/04_name_resolution_and_hir.md)、[53_generics_compiler_behavior.md](05_rustc_internals/15_generics_compiler_behavior.md) | 类型检查/推断、HIR/MIR、查询系统、单态化等**原理性**内容，保留 L4 |
+| ① 编译器原理 / 形式化基础设施 | [19_rustc_query_system.md](05_rustc_internals/01_rustc_query_system.md)、[20_mir_codegen_llvm_primer.md](05_rustc_internals/02_mir_codegen_llvm_primer.md)、[26_trait_solver_in_rustc.md](05_rustc_internals/03_trait_solver_in_rustc.md)、[35_name_resolution_and_hir.md](05_rustc_internals/04_name_resolution_and_hir.md)、[53_generics_compiler_behavior.md](05_rustc_internals/15_generics_compiler_behavior.md) | 类型检查/推断、HIR/MIR、查询系统、单态化（Monomorphization）等**原理性**内容，保留 L4 |
 | ② Rust Reference 规范摘译与注解 | 38、40、41、42、43、45、46、47、48、49、51、52（共 12 页） | 规范条文摘译 + 示例 + 交叉引用，**非形式化推导**；各页头部均有「定位声明」标明摘译身份并指向同层形式化内容 |
 
 ② 类页面保留于 L4 而非迁移至 `01_foundation/` 的裁定理由：
 
-1. **引用成本**:12 页被 `concept/`、`knowledge/`、`docs/` 外部引用 3–13 处/页，且同目录互引密集（前置/后置概念链），迁移需改动数十处链接,风险高于收益;
+1. **引用（Reference）成本**:12 页被 `concept/`、`knowledge/`、`docs/` 外部引用 3–13 处/页，且同目录互引密集（前置/后置概念链），迁移需改动数十处链接,风险高于收益;
 2. **规范依据**:依据 [A/S/P 标记规范](../00_meta/03_audit/02_asp_marking_guide.md) §3.4,L4 层以 S/P 标记为主,S(Specification)规范分析类内容属于 L4 合法组成;
 3. **D1 规则**:`scripts/check_metadata_consistency.py` 的 D1 仅约束**文件内** Bloom 与「层次定位/层级」一致,不要求 Bloom 与目录层级一致,故②类页面维持 L2-L4 的内容相符标注不违规。
 

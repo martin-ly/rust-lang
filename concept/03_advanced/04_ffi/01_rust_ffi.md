@@ -176,7 +176,7 @@ Rust 支持的 ABI:
 FFI（外部函数接口）的技术细节集中在「声明、类型、回调」三条链路的安全性：
 
 - **`extern` 块的完整语法**：`extern "C" { fn c_fn(x: c_int) -> c_int; }` 声明外部符号，ABI 字符串（`"C"`、`"system"`、`"stdcall"`、`"C-unwind"`）决定调用约定（参数压栈顺序、寄存器分配、栈清理责任）。2024 edition 起 `extern` 块必须标注 `unsafe extern`——「声明即承诺签名正确」是 unsafe 契约，签名写错（如 C 侧 `long` 映射成 `i32` 而非 `c_long`）是静默 ABI 灾难而非编译错误。链接属性 `#[link(name = "foo")]` 指定库，`#[link_name = "..."]` 处理符号重命名。
-- **不透明类型与封装**：C 的不透明指针（`typedef struct Foo Foo;` 只暴露指针）在 Rust 侧建模为「私有零大小类型 + `*mut Foo`」的句柄模式——`struct Foo { _private: [u8; 0] }` 或 `enum Foo {}`（不可构造），安全封装层提供 `Foo::new()/method()/Drop` 把「创建-使用-销毁」生命周期纳入 RAII。封装的核心规则：裸指针不出模块边界，`Drop` 调用 C 侧 destroy 函数。
+- **不透明类型与封装**：C 的不透明指针（`typedef struct Foo Foo;` 只暴露指针）在 Rust 侧建模为「私有零大小类型 + `*mut Foo`」的句柄模式——`struct Foo { _private: [u8; 0] }` 或 `enum Foo {}`（不可构造），安全封装层提供 `Foo::new()/method()/Drop` 把「创建-使用-销毁」生命周期纳入 RAII。封装的核心规则：裸指针不出模块（Module）边界，`Drop` 调用 C 侧 destroy 函数。
 - **回调与闭包传递**：C 接受函数指针（`extern "C" fn`）——能传「无捕获闭包」（可强制转为 `fn` 指针）或显式 `extern "C" fn`；带状态的回调走「`void* user_data` + 还原 `Box`」模式（C 侧回传时 `Box::from_raw` 取回，注意配对 `into_raw`/`from_raw` 恰好一次）。`extern "C" fn` 中 panic 越过 FFI 边界是 UB——回调体必须用 `catch_unwind` 兜底（或 `"C-unwind"` ABI 显式声明可展开）。
 
 判定 FFI 边界的正确性，逐条核对：签名 ABI 与类型宽度（`c_long` vs `i64`）、所有权方向（谁分配谁释放）、展开边界（panic 不出 Rust）。
@@ -344,7 +344,7 @@ FFI 的反命题树破除四个高频误解，每条给出判定与边界：
 
 - **反命题 1：「`extern "C"` 保证 ABI 兼容」**。判定：`extern "C"` 只规定调用约定，不规定类型布局——`#[repr(Rust)]` 的结构体传给 C 函数是布局未定义（字段顺序、填充由编译器决定）。边界：跨边界的每个复合类型必须 `#[repr(C)]`，或只传不透明指针；`enum` 默认布局对 C 不可见，需 `#[repr(C)]` 或降级为整数 + 手动映射。
 - **反命题 2：「C 的 `int` 就是 Rust 的 `i32`」**。判定：多数平台成立但 LP64/LLP64 差异在 `long`（Linux 64 位 `long` = 8 字节，Windows = 4 字节）——用 `std::os::raw::c_long` 而非猜宽度。边界：`char` 的有符号性、`size_t`、`enum` 的底层类型（C 编译器可选）都是平台变量，`libc` crate 的类型别名是唯一可移植写法。
-- **反命题 3：「`unsafe` 只在 Rust 侧需要」**。判定：FFI 的安全性是双向契约——C 侧对 Rust 传入的指针做缓存/异步使用，Rust 的借用规则无从知晓。边界：传给 C 的指针若被「保留到调用返回之后」，必须用 `Box::into_raw`/`Arc::into_raw` 把所有权移交并配套释放回调，文档注明 C 侧的生命周期假设。
+- **反命题 3：「`unsafe` 只在 Rust 侧需要」**。判定：FFI 的安全性是双向契约——C 侧对 Rust 传入的指针做缓存/异步（Async）使用，Rust 的借用（Borrowing）规则无从知晓。边界：传给 C 的指针若被「保留到调用返回之后」，必须用 `Box::into_raw`/`Arc::into_raw` 把所有权移交并配套释放回调，文档注明 C 侧的生命周期假设。
 - **反命题 4：「panic 穿过 FFI 只是崩溃」**。判定：unwind 跨越 `extern "C"` 边界是 UB（不是「优雅崩溃」）——C 栈帧无展开信息，资源（malloc 的内存、文件锁）泄漏路径不可分析。边界：FFI 出口一律 `catch_unwind` + 错误码返回，或全栈用 `"C-unwind"` ABI（要求 C 侧支持展开，多数 C 库不支持）。
 
 每条反命题的验证：构造最小 FFI 对（几行 C + 几行 Rust），用 Miri/valgrind 在两种平台（Linux + Windows）各跑一遍——布局类误解在单平台上可能「碰巧正确」。
@@ -564,7 +564,7 @@ fn demo(e: Option<FromBytesUntilNulError>) {
 }
 ```
 
-（rustc 1.97.0 `--edition 2024` 实测编译通过。）工程影响面小但消除了一个不一致：`from_bytes_until_nul` 是解析 C 字符串的推荐入口（比 `from_bytes_with_nul` 容忍缺失的 NUL 结尾），其错误类型现在可无损进入要求 `Copy` 的泛型错误累加器。
+（rustc 1.97.0 `--edition 2024` 实测编译通过。）工程影响面小但消除了一个不一致：`from_bytes_until_nul` 是解析 C 字符串的推荐入口（比 `from_bytes_with_nul` 容忍缺失的 NUL 结尾），其错误类型现在可无损进入要求 `Copy` 的泛型（Generics）错误累加器。
 
 ## 六、来源与延伸阅读
 

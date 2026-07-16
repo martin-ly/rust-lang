@@ -96,11 +96,11 @@
 
 ## 一、核心概念
 
-过程宏（procedural macro）是「编译期执行的 Rust 函数，输入输出都是 `TokenStream`」，与声明宏构成能力互补：
+过程宏（procedural macro）是「编译期执行的 Rust 函数，输入输出都是 `TokenStream`」，与声明宏（Declarative Macro）构成能力互补：
 
-1. **过程宏 vs macro_rules**：`macro_rules!` 是「模式驱动的声明式变换」——写规则不写算法，能力上限是「语法结构的同构变换」（无法做字符串处理、无法分析字段类型语义）；过程宏是「命令式的 token 程序」——可任意检查、变换、生成，配合 `syn` 能解析完整 Rust AST。判定选型：变换逻辑能写成 3–5 条模式规则 → 声明宏（零依赖、编译快）；需要「读结构体字段生成对应代码」类逻辑 → 过程宏。
+1. **过程宏 vs macro_rules**：`macro_rules!` 是「模式驱动的声明式变换」——写规则不写算法，能力上限是「语法结构的同构变换」（无法做字符串处理、无法分析字段类型语义）；过程宏是「命令式的 token 程序」——可任意检查、变换、生成，配合 `syn` 能解析完整 Rust AST。判定选型：变换逻辑能写成 3–5 条模式规则 → 声明宏（零依赖、编译快）；需要「读结构体（Struct）字段生成对应代码」类逻辑 → 过程宏。
 2. **三种过程宏类型**：**derive 宏**（`#[proc_macro_derive]`——附加 impl，不修改原项，最受限最常用）；**属性宏**（`#[proc_macro_attribute]`——接收「属性参数 + 被标注项」两个 TokenStream，可整体重写该项，`#[tokio::main]`、`#[instrument]` 是代表）；**函数式宏**（`#[proc_macro]`——`my_macro!(...)` 形式，可出现在表达式/项/模式位置，`sqlx::query!` 是代表）。三者的 crate 声明同为 `proc-macro = true`，且过程宏 crate 只能导出宏（不能导出普通 API——生态惯例是 `xxx`（API）+ `xxx-macros`（宏）双 crate 结构）。
-3. **编译期执行模型**：过程宏被编译为「编译器的动态库插件」，在展开阶段被 rustc 加载执行——输入 token 来自调用点源码，输出 token 替换/附加到 AST。推论：过程宏的依赖（syn/quote）增加的是「编译时编译时间」；宏 panic 表现为编译错误；宏不能访问调用 crate 的运行时值（纯编译期视角）。
+3. **编译期执行模型**：过程宏被编译为「编译器的动态库插件」，在展开阶段被 rustc 加载执行——输入 token 来自调用点源码，输出 token 替换/附加到 AST。推论：过程宏的依赖（syn/quote）增加的是「编译时编译时间」；宏 panic 表现为编译错误；宏不能访问调用 crate 的运行时（Runtime）值（纯编译期视角）。
 
 三概念合起来回答「过程宏是什么、何时用、代价是什么」：它是编译器的插件机制，用于声明宏表达不了的代码生成，代价是编译时间与独立 crate 的工程复杂度。
 
@@ -234,7 +234,7 @@ graph TD
 
 - **TokenStream 操作**：`proc_macro::TokenStream` 是 token（标识符/字面量/标点/组）的序列——可直接 `to_string().parse()` 做字符串级变换（脆弱，不推荐），或经 `proc_macro2::TokenStream` 获得「可在宏外构造/测试」的等价类型（`proc_macro2` 是生态事实标准：它让生成代码的逻辑可在普通单元测试中运行）。
 - **syn + quote 工作流**：事实标准三件套——`syn` 把 `TokenStream` 解析为类型化 AST（`DeriveInput`、`ItemFn` 等，`parse_macro_input!` 是入口宏）；变换阶段操作 AST 节点（改字段、加约束）；`quote!` 把 AST/片段插值回 `TokenStream`（`#var` 插值、`#(...)*` 重复）。错误处理用 `syn::Error::new_spanned(node, msg).to_compile_error()`——把错误定位到用户代码的精确 span，这是「宏报错可读性」的关键技术。
-- **卫生性与 Span**：每个 token 携带 `Span`（来源位置 + hygiene 上下文）：`Span::call_site()`（标识符按调用点解析——生成代码引用用户类型的默认选择）、`Span::def_site()`（定义点，需 nightly `proc_macro_def_site`）、`Span::mixed_site()`（宏规则变量与背景的混合）。生成代码中引用宏 crate 内部项必须用 `quote!(::my_crate::...)` 全路径 + re-export 约定，否则调用方未导入即解析失败——这是过程宏最高频的正确性 bug。
+- **卫生性与 Span**：每个 token 携带 `Span`（来源位置 + hygiene 上下文）：`Span::call_site()`（标识符按调用点解析——生成代码引用（Reference）用户类型的默认选择）、`Span::def_site()`（定义点，需 nightly `proc_macro_def_site`）、`Span::mixed_site()`（宏规则变量与背景的混合）。生成代码中引用宏 crate 内部项必须用 `quote!(::my_crate::...)` 全路径 + re-export 约定，否则调用方未导入即解析失败——这是过程宏最高频的正确性 bug。
 
 判定一个宏 bug 的归属层：生成代码内容错 → quote 插值层；解析失败/字段读不到 → syn AST 层；「cannot find」类解析错误 → span/路径层。
 

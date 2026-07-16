@@ -232,7 +232,7 @@ mindmap
 Rust 类型系统（Type System）的三个权威定义视角，分别对应「分类」「工程目标」「数学基础」三个层次：
 
 - **Wikipedia 视角**：类型系统是给程序中的值与表达式分类的规则集合，分类的目的在于让「无意义操作」（如对字符串做算术）在运行前就被拒绝。Rust 属于静态、强类型、名义类型（nominal typing）为主、局部结构类型（structural，仅用于 trait object 与泛型约束）为辅的系统。
-- **TRPL 视角**：Rust 的类型系统是「零成本安全」的载体——所有权、借用、泛型、trait 全部在编译期完成检查与单态化（monomorphization），不引入运行时类型信息（RTTI）或装箱开销。
+- **TRPL 视角**：Rust 的类型系统是「零成本安全」的载体——所有权（Ownership）、借用（Borrowing）、泛型、trait 全部在编译期完成检查与单态化（monomorphization），不引入运行时类型信息（RTTI）或装箱开销。
 - **形式化视角**：Rust 类型系统可视为 Hindley-Milner 推断体系的工程化扩展：加入仿射类型（所有权）、区域类型（生命周期）、trait 约束（有界量化，bounded quantification）与泛型常量（const generics），推断从全局让位于局部签名标注。
 
 判定一个语言特性是否属于「类型系统层面」，标准是：它是否影响编译期的可接受性（acceptability）与单态化结果，而不产生任何运行时代码。按此标准，泛型、生命周期、trait bound 属于类型系统；`dyn Trait` 的虚表调用则跨在类型系统与运行时的边界上。
@@ -2241,7 +2241,7 @@ Rust 名义类型的刚性:
 - **命题 2「结构类型系统可以解决孤儿规则的问题」** —— 不成立。孤儿规则（Orphan Rule）的根源是**一致性（coherence）**而非类型等价判定方式：结构类型同样面临「两个 crate 为同一对 (trait, type) 提供重叠 impl」的菱形依赖问题。
 - **命题 3「Newtype 具有零运行时成本」** —— 成立但有边界。单字段 newtype 与被包装类型 ABI 相同（`#[repr(transparent)]` 保证），但跨 crate 的泛型单态化仍会产生独立代码，且 `Debug`/`Clone` 等派生实现是有成本的（编译期）。
 
-判定依据参考 [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html) 与 [RFC 3416 — impl Trait 语义](https://rust-lang.github.io/rfcs/3416-async-fn-in-traits.html) 的一致性讨论。
+判定依据参考 [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html) 与 [RFC 3185 — static async fn in trait](https://rust-lang.github.io/rfcs/3185-static-async-fn-in-trait.html) 的一致性讨论。
 
 ##### 命题 1: "名义类型阻止了所有非预期的类型等价"
 
@@ -2946,7 +2946,7 @@ fn main() {
 Rust 的运算符重载与 C++ 的关键差异在于「运算符即 trait」：每个可重载运算符都对应 `std::ops` 中的一个 trait（`Add`、`Sub`、`Mul`、`Deref`、`Index` 等），重载 = 为类型实现该 trait。核心命题有三条：
 
 1. **无自由重载**：不能为任意函数签名定义运算符行为，签名由 trait 固定（如 `Add::add(self, rhs: Rhs) -> Output`），结合性与优先级由语法固定不可改。这消除了 C++ 中重载 `operator,` 或改变求值顺序的隐患。
-2. **孤儿规则约束**：`impl Add for T` 要求 trait 或类型至少一方在当前 crate 定义，防止第三方 crate 之间 impl 冲突。
+2. **孤儿规则（Orphan Rule）约束**：`impl Add for T` 要求 trait 或类型至少一方在当前 crate 定义，防止第三方 crate 之间 impl 冲突。
 3. **关联类型输出**：`Output` 是关联类型而非固定为 `Self`，使 `&T + &T -> T`、`Duration + Duration -> Duration` 这类异型运算可表达。
 
 判定某个运算符能否对类型 `T` 使用，只需检查 `T` 是否实现了对应的 `std::ops` trait——方法解析失败（E0369）即表明未实现。
@@ -3078,7 +3078,7 @@ error[E0369]: cannot add `Foo` to `Foo`
 
 ## 从 `crates\c02_type_system\docs\tier_02_guides\02_compound_types_guide.md` 迁移的补充视角
 
-> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
+> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏（Macro）观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
 
 # 2.2 Rust 类型系统 - 复合类型指南
 
@@ -3238,7 +3238,7 @@ error[E0369]: cannot add `Foo` to `Foo`
 
 - **内存布局**: 结构体和枚举的内存表示
 - **零成本抽象**: 复合类型零开销
-- **适用场景**: 数据结构设计、状态机、错误处理
+- **适用场景**: 数据结构设计、状态机、错误处理（Error Handling）
 
 ### 关系连接
 

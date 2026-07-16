@@ -331,7 +331,7 @@ unsafe_code = "deny"
 workspace = true
 ```
 
-**陷阱要点**：profile/lints 的「根唯一」规则是 workspace 一致性的保证；排查优化或 lint 未生效时，第一嫌疑永远是配置写错了文件。
+**陷阱要点**：profile/lints 的「根唯一」规则是 workspace 一致性（Coherence）的保证；排查优化或 lint 未生效时，第一嫌疑永远是配置写错了文件。
 
 ---
 

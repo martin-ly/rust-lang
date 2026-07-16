@@ -194,7 +194,7 @@ let b = SecondsNewtype(10.0);
 
 ## 二、技术细节
 
-本节展开「Newtype 与包装器模式：类型安全的零成本抽象」的技术细节：Deref 与自动解引用、孤儿规则与 Newtype与包装器类型谱系。重点是类型签名、所有权语义与编译期约束如何相互作用，而不是 API 罗列；每个小节给出可编译的最小示例，并标注对应反例的失败规则。读完后应能解释：为什么这种写法能通过编译，而那种写法会被借用检查器或类型系统拒绝。
+本节展开「Newtype 与包装器模式：类型安全的零成本抽象」的技术细节：Deref 与自动解引用、孤儿规则与 Newtype与包装器类型谱系。重点是类型签名、所有权（Ownership）语义与编译期约束如何相互作用，而不是 API 罗列；每个小节给出可编译的最小示例，并标注对应反例的失败规则。读完后应能解释：为什么这种写法能通过编译，而那种写法会被借用（Borrowing）检查器或类型系统（Type System）拒绝。
 
 ### 2.1 Deref 与自动解引用
 >
@@ -349,9 +349,9 @@ Rust 中的包装器类型:
 本节检验 newtype 模式的两条常见误判：
 
 - **反命题 1：「newtype 自动继承被包装类型的所有能力」** —— 错误。`struct Meters(f64)` 不自动获得 `Add`/`Display`/`Debug`——trait 必须逐一派生或手写（`derive_more` crate 可批量转发）。这正是 newtype 的价值所在：**能力白名单制**——只暴露你想暴露的操作。
-- **反命题 2：「`Deref` 到内部类型是好设计」** —— 多数情况是反模式。`impl Deref for Meters { type Target = f64; }` 让 newtype 退化为「偶尔隐式转换的别名」——类型边界在方法调用处无声穿透，`meters * 2.0` 悄悄回到裸 `f64`。`Deref` 的正确用途是**智能指针**（`Box`/`Rc`/`String` 这类「指向他物」的类型），不是「获得内部类型的全部方法」。
+- **反命题 2：「`Deref` 到内部类型是好设计」** —— 多数情况是反模式。`impl Deref for Meters { type Target = f64; }` 让 newtype 退化为「偶尔隐式转换的别名」——类型边界在方法调用处无声穿透，`meters * 2.0` 悄悄回到裸 `f64`。`Deref` 的正确用途是**智能指针（Smart Pointer）**（`Box`/`Rc`/`String` 这类「指向他物」的类型），不是「获得内部类型的全部方法」。
 
-边界极限小节量化：`#[repr(transparent)]` 的 ABI 承诺、`PhantomData` 的型变标记、以及派生宏的过度约束陷阱。
+边界极限小节量化：`#[repr(transparent)]` 的 ABI 承诺、`PhantomData` 的型变标记、以及派生宏（Macro）的过度约束陷阱。
 
 ### 4.1 反命题树
 >
@@ -529,10 +529,10 @@ graph TD
 本节的边界用例覆盖 newtype 的五个典型失败点：
 
 - **trait 不继承**：`#[derive(Debug)]` 漏写导致打印失败——newtype 的能力清单是显式的，每个需要的 trait 都要声明；
-- **`PhantomData` 型变误用**：`PhantomData<T>` 使容器对 `T` 协变且「表现得像拥有 T」（影响 `Send`/`Sync` 自动实现与 drop check）——标记所有权用 `PhantomData<T>`，只标记生命周期用 `PhantomData<&'a ()>`，选错导致约束过严或 dropck UB；
+- **`PhantomData` 型变误用**：`PhantomData<T>` 使容器对 `T` 协变且「表现得像拥有 T」（影响 `Send`/`Sync` 自动实现与 drop check）——标记所有权用 `PhantomData<T>`，只标记生命周期（Lifetimes）用 `PhantomData<&'a ()>`，选错导致约束过严或 dropck UB；
 - **derive 限制**：含 `PhantomData<T>` 的类型派生 `Clone` 会过度约束 `T: Clone`——手写 impl 解除；
 - **`Deref` 方法名冲突**：内部类型与 newtype 同名方法的解析优先级（固有方法 > Deref 目标方法）——静默调用到错误版本是 `Deref` 滥用的经典后果；
-- **隐式转换陷阱**：`Deref` 链过深时类型推断失败（E0282）——显式标注或 `as_ref` 调用点修复。
+- **隐式转换陷阱**：`Deref` 链过深时类型推断（Type Inference）失败（E0282）——显式标注或 `as_ref` 调用点修复。
 
 每组用例给出判定准则：newtype 的每一处「便利」都对应一处「边界穿透」，审查时成对评估。
 
@@ -816,7 +816,7 @@ fn main() {
 }
 ```
 
-`pub struct Meters(f64)` 中字段默认私有，模块外无法调用构造器——这正是 newtype 模式隐藏内部表示的机制，误以为是「pub 即可构造」是常见陷阱。
+`pub struct Meters(f64)` 中字段默认私有，模块（Module）外无法调用构造器——这正是 newtype 模式隐藏内部表示的机制，误以为是「pub 即可构造」是常见陷阱。
 
 **修正**：
 

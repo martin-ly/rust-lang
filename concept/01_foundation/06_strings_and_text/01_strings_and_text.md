@@ -232,8 +232,8 @@ println!("{}", p);  // 输出: (1, 2)
 
 字符串的三个技术细节，全部源于「Rust 字符串是 UTF-8 字节序列」这一事实：
 
-- **字符串切片与索引**：`&str` 是 UTF-8 字节串的借用视图，索引按字节而非字符。`s[i]` 直接索引被语言禁止（编译错误：the type `str` cannot be indexed by integer），因为「第 i 个字节」可能落在多字节字符中间；合法做法是 `s[i..j]` 字节范围切片（边界必须落在字符边界，否则运行时 panic）或 `s.chars().nth(i)`（O(n)）。
-- **OS 字符串与路径**：`OsString`/`OsStr` 与 `PathBuf`/`Path` 封装平台原生字符串（Windows 为 WTF-8/UTF-16 近似，Unix 为任意字节）。它们不保证 UTF-8，与 `String` 的转换是「可能失败」操作（`to_str() -> Option<&str>`），类型系统据此强制处理非 UTF-8 文件名。
+- **字符串切片与索引**：`&str` 是 UTF-8 字节串的借用（Borrowing）视图，索引按字节而非字符。`s[i]` 直接索引被语言禁止（编译错误：the type `str` cannot be indexed by integer），因为「第 i 个字节」可能落在多字节字符中间；合法做法是 `s[i..j]` 字节范围切片（边界必须落在字符边界，否则运行时 panic）或 `s.chars().nth(i)`（O(n)）。
+- **OS 字符串与路径**：`OsString`/`OsStr` 与 `PathBuf`/`Path` 封装平台原生字符串（Windows 为 WTF-8/UTF-16 近似，Unix 为任意字节）。它们不保证 UTF-8，与 `String` 的转换是「可能失败」操作（`to_str() -> Option<&str>`），类型系统（Type System）据此强制处理非 UTF-8 文件名。
 - **与 C 字符串的互操作**：`CString`/`CStr` 要求内无 NUL 且末尾隐含 NUL（构造时校验，`CString::new` 返回 `Result`）；`&CStr → &str` 需 `to_str()`（UTF-8 校验），`&str → CString` 需分配拷贝。三层字符串类型（`String`/`OsString`/`CString`）各自对应一种不变量：UTF-8 / 平台编码 / NUL 结尾。
 
 ### 2.1 字符串切片与索引
@@ -574,7 +574,7 @@ graph TD
 
 - **生命周期不匹配**：`String` 拥有数据、`&str` 借用数据，把局部 `String` 的 `&str` 返出函数即 E0106/E0515。修复方向是返回 `String`（转移所有权）或让调用方提供缓冲区。
 - **字符串索引操作**：`s[0]` 编译错误——语言刻意不提供，迫使在「字节切片 `s[0..1]`」「字符迭代 `s.chars().next()`」之间显式选择，选择即声明你对编码边界的假设。
-- **模式类型不匹配**：`str::split` 的模式参数实现 `Pattern` trait（char、&str、闭包、数组均可），传入错误类型触发 E0277。
+- **模式类型不匹配**：`str::split` 的模式参数实现 `Pattern` trait（char、&str、闭包（Closures）、数组均可），传入错误类型触发 E0277。
 - **`+` 运算符消耗左操作数**：`a + &b` 中 `a` 被 move（`Add<&str> for String` 取 `self` by value），链式拼接后继续用 `a` 触发 E0382；需要保留时用 `format!` 或 `push_str`。
 
 判定字符串代码的正确性，先标注每个值的类型层级（`String`/`&str`/`&[u8]`/`char`），再检查每次转换经过的校验点——校验点之外无隐式转换。
@@ -924,7 +924,7 @@ thread 'main' panicked at 'byte index 10 is out of bounds of `hello`'
 | 二分模型 | `String` 拥有缓冲 / `&str` 借用视图 | 所有权模型 |
 | 索引语义 | 仅字节索引；无 O(1) 字符随机访问（UTF-8 变长编码） | API 设计 |
 | 长度定义 | `.len()` 返回字节数而非字符数 | 文档约定 |
-| 转换路径 | `String::from_utf8` 可失败（`FromUtf8Error`） | 错误处理契约 |
+| 转换路径 | `String::from_utf8` 可失败（`FromUtf8Error`） | 错误处理（Error Handling）契约 |
 
 ## 🔗 概念关系
 

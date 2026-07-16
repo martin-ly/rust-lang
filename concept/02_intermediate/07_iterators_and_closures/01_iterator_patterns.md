@@ -97,7 +97,7 @@
 迭代器模式的四个核心概念构成「惰性流处理」的完整模型：
 
 1. **Iterator trait**：核心是 `fn next(&mut self) -> Option<Self::Item>`——「拉取式」协议，每次调用产出一个元素或 `None`（终止）。`Item` 关联类型决定流的内容；`next` 取 `&mut self` 意味着迭代器自身是被消耗的状态机（`for` 循环消耗它，迭代两次需重新获取）。
-2. **适配器链（adapters）**：`map`/`filter`/`take`/`zip` 等消费迭代器、返回新迭代器——每个适配器是「包一层的状态机」，`next` 调用沿链向内传导，元素向外流回时逐层变换。链的类型是嵌套结构体（`Map<Filter<vec::IntoIter<T>, F>, G>`），单态化后整条链内联为一个循环体。
+2. **适配器链（adapters）**：`map`/`filter`/`take`/`zip` 等消费迭代器、返回新迭代器——每个适配器是「包一层的状态机」，`next` 调用沿链向内传导，元素向外流回时逐层变换。链的类型是嵌套结构体（Struct）（`Map<Filter<vec::IntoIter<T>, F>, G>`），单态化（Monomorphization）后整条链内联为一个循环体。
 3. **惰性求值（laziness）**：适配器不做任何工作——`v.iter().map(f)` 只构造状态机，元素变换发生在 `next` 被调用时。推论：无消费者的链是空操作（`iter.map(f)` 不调 `collect` 则 `f` 一次都不执行，编译器对此发 `unused_must_use` 风格警告）。
 4. **消费者与适配器的分界**：消费者（`collect`/`fold`/`for_each`/`find`）取 `self` by value、驱动 `next` 循环、产出非迭代器值——一条链必须恰好以一个消费者结尾才产生效果。判定一个方法是适配器还是消费者：返回 `impl Iterator` 的是适配器，返回其他的是消费者。
 
@@ -328,9 +328,9 @@ let result: Vec<i32> = vec![1, 2, 3, 4, 5]
 - **map-filter-collect**：变换-筛选-物化的主干模式。`collect` 的目标类型由 `FromIterator` 决定——`Vec`、`HashSet`、`String`、`Result<Vec<_>, E>`（遇到 `Err` 短路）皆可，类型标注或 `turbofish`（`collect::<Vec<_>>()`）消歧。
 - **fold 与归约**：`fold(init, |acc, x| ...)` 是最一般的消费者——`sum`/`product`/`max`/`count` 都是其特例；`reduce`（无初值，返回 `Option`）与 `try_fold`（可短路，`Result`/`Option` 控制流）覆盖变体。判定用哪个：有单位元用 `fold`，空流需区分用 `reduce`，中间可失败用 `try_fold`。
 - **zip 与并行迭代**：`zip` 把两流配对（短者耗尽即止——长度不一致静默截断，是逻辑错误来源）；`enumerate` 附加序号；rayon 的 `par_iter()` 把同一条适配器链变为数据并行（`ParallelIterator` trait），代码改动常只有一行。
-- **`IntoIterator` 与 `for` 循环**：`for x in e` 糖化为 `IntoIterator::into_iter(e)` + `next` 循环——`Vec` 的 `into_iter` 按值消耗（`T`）、`&Vec` 按引用（`&T`）、`&mut Vec` 按可变引用（`&mut T`），`for` 循环的「捕获方式」由被迭代表达式的引用层级决定。
+- **`IntoIterator` 与 `for` 循环**：`for x in e` 糖化为 `IntoIterator::into_iter(e)` + `next` 循环——`Vec` 的 `into_iter` 按值消耗（`T`）、`&Vec` 按引用（`&T`）、`&mut Vec` 按可变引用（Mutable Reference）（`&mut T`），`for` 循环的「捕获方式」由被迭代表达式的引用层级决定。
 
-模式选择判定：产出集合 → collect 系；产出单值 → fold 系；需要索引/配对 → zip/enumerate；需要并行 → rayon；读 `for` 循环先确认元素的引用层级。
+模式选择判定：产出集合 → collect 系；产出单值 → fold 系；需要索引/配对 → zip/enumerate；需要并行 → rayon；读 `for` 循环先确认元素的引用（Reference）层级。
 
 ### 2.1 map-filter-collect
 >
@@ -533,7 +533,7 @@ let r: RepeatN<u8> = RepeatN::default();
 assert_eq!(r.count(), 0); // 默认即空迭代器
 ```
 
-这使 `RepeatN` 可放进要求 `Default` 的泛型上下文（如 `#[derive(Default)]` 的结构体字段、`std::mem::take`），与 `std::iter::Empty`、`Repeat` 等已有 `Default` 的迭代器类型行为对齐。
+这使 `RepeatN` 可放进要求 `Default` 的泛型（Generics）上下文（如 `#[derive(Default)]` 的结构体字段、`std::mem::take`），与 `std::iter::Empty`、`Repeat` 等已有 `Default` 的迭代器类型行为对齐。
 
 ---
 
@@ -907,7 +907,7 @@ fn main() {
 
 ## 相关概念
 
-- [对应测验](../../01_foundation/11_quizzes/04_quiz_closures_iterators.md) — 闭包与迭代器（捕获、Fn traits、惰性求值、适配器）
+- [对应测验](../../01_foundation/11_quizzes/04_quiz_closures_iterators.md) — 闭包（Closures）与迭代器（捕获、Fn traits、惰性求值、适配器）
 - **上层概念**: [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Generics](../01_generics/01_generics.md) · [Closures](../../01_foundation/00_start/03_closure_basics.md)
 - **下层概念**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Performance](../../06_ecosystem/10_performance/01_performance_optimization.md)
 
@@ -954,8 +954,8 @@ fn main() {
 本节的边界用例围绕「迭代器是消耗性值 + 闭包捕获所有权」两条规则设计：
 
 - **迭代器消耗后复用**：`Iterator` 按值传递给适配器方法，`map`/`filter` 返回新迭代器而消耗旧的——链式调用自然正确，但把中间迭代器存变量后二次使用触发 E0382；
-- **闭包捕获的三种模式**：`Fn`（不可变借用捕获）/`FnMut`（可变借用）/`FnOnce`（按值 move）由闭包体对捕获变量的**使用方式**自动推断，`move` 闭包强制按值——把 `FnOnce` 闭包传给要求 `Fn` 的 API 触发 E0525；
-- **借用迭代器与 `collect` 的类型推断**：`collect()` 的目标类型必须可推断（E0282），惯用写法是 `let v: Vec<_> = ...collect()` 或 `collect::<Vec<_>>()`；
+- **闭包捕获的三种模式**：`Fn`（不可变借用（Immutable Borrow）捕获）/`FnMut`（可变借用（Mutable Borrow））/`FnOnce`（按值 move）由闭包体对捕获变量的**使用方式**自动推断，`move` 闭包强制按值——把 `FnOnce` 闭包传给要求 `Fn` 的 API 触发 E0525；
+- **借用（Borrowing）迭代器与 `collect` 的类型推断（Type Inference）**：`collect()` 的目标类型必须可推断（E0282），惯用写法是 `let v: Vec<_> = ...collect()` 或 `collect::<Vec<_>>()`；
 - **`iter`/`iter_mut`/`into_iter` 的选择**：对集合分别产生 `&T`/`&mut T`/`T`——选错导致后续操作类型不匹配（E0308）或无意借用延长。
 
 每组用例给出「恰好失败版 + 最小修复版」，覆盖迭代器代码中最常见的编译错误。
@@ -1100,7 +1100,7 @@ fn main() {
 
 - **手写 `Iterator` 的 `size_hint` 契约**：返回值 `(lower, upper)` 必须满足 lower ≤ 实际剩余 ≤ upper（upper 为 `None` 表示未知）；违反契约是**逻辑错误而非 UB**，但 `collect` 的预分配与 `zip` 的截断行为依赖它；
 - **`fused` 与耗尽后行为**：迭代器耗尽（返回 `None`）后再次 `next` 的行为未定义语义（可 panic、可继续返回 `None`）——`FusedIterator` 标记承诺「耗尽后永远 `None`」，`fuse()` 适配器可为任意迭代器补上该承诺；
-- **无限迭代器的边界**：`repeat`/`from_fn` 构造的无限序列必须配 `take`/`take_while` 截断，否则 `collect` 直接 OOM——类型系统不阻止无限性，判定责任在程序员；
+- **无限迭代器的边界**：`repeat`/`from_fn` 构造的无限序列必须配 `take`/`take_while` 截断，否则 `collect` 直接 OOM——类型系统（Type System）不阻止无限性，判定责任在程序员；
 - **`lending iterator` 的不可表达**：每次产出借用自身内部缓冲区的迭代器（如「按行迭代自有缓冲区」）无法用 `Iterator` 表达（关联类型 `Item` 不能借用 `self`），需 GAT 或流式回调——这是 1.65 GAT 稳定后才部分解锁的模式。
 
 本续篇的用例难度高于第十节，建议先完成第十节再进入。
@@ -1437,7 +1437,7 @@ impl Iterator for Counter {
 ## 🔗 概念关系
 
 - **上位（is-a）**：[Collections](../../01_foundation/05_collections/01_collections.md) 数据访问的统一抽象。
-- **下位（实例）**：异步流对应物见 [Stream Algebra](../../03_advanced/01_async/09_stream_algebra_and_backpressure.md)。
+- **下位（实例）**：异步（Async）流对应物见 [Stream Algebra](../../03_advanced/01_async/09_stream_algebra_and_backpressure.md)。
 - **对偶**：与 C++ 外部迭代器相对（内部 vs 外部迭代），见 [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)。
 - **组合**：与 [Closure Types](../04_types_and_conversions/02_closure_types.md) 组合传递适配逻辑。
 - **依赖**：适配器契约依赖 [Traits](../00_traits/01_traits.md)。

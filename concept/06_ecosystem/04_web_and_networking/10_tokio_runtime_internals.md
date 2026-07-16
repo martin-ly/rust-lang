@@ -8,9 +8,9 @@
 > **受众**: [进阶-专家]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页（Tokio 机制深度视角）。
-> **分工声明**: Future/poll/waker 的协议层在 [Future 与 Executor 机制](../../03_advanced/01_async/04_future_and_executor_mechanisms.md)；调度公平性（LIFO 槽、coop 预算、饥饿分析）在 [Executor 公平性与调度](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md)；thread-per-core 替代模型在 [Glommio 与 Thread-per-Core](05_glommio_and_thread_per_core.md)；crate 选型矩阵在 [Core Crates](../02_core_crates/01_core_crates.md)。本页统一 Tokio **内部机制**（驱动/池/任务句柄/宏语义/可观测性），不重复上述页面的推导（AGENTS.md §2 Canonical 规则）。
+> **分工声明**: Future/poll/waker 的协议层在 [Future 与 Executor 机制](../../03_advanced/01_async/04_future_and_executor_mechanisms.md)；调度公平性（LIFO 槽、coop 预算、饥饿分析）在 [Executor 公平性与调度](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md)；thread-per-core 替代模型在 [Glommio 与 Thread-per-Core](05_glommio_and_thread_per_core.md)；crate 选型矩阵在 [Core Crates](../02_core_crates/01_core_crates.md)。本页统一 Tokio **内部机制**（驱动/池/任务句柄/宏（Macro）语义/可观测性），不重复上述页面的推导（AGENTS.md §2 Canonical 规则）。
 > **A/S/P 标记**: **S** — Structure
-> **双维定位**: C×Ana — 分析「单 Reactor + 多 Driver + 分层队列」的运行时结构及其任务生命周期语义
+> **双维定位**: C×Ana — 分析「单 Reactor + 多 Driver + 分层队列」的运行时（Runtime）结构及其任务生命周期（Lifetimes）语义
 > **定位**: Tokio 是 Rust async 生态的事实标准运行时。本页把分散在 tutorial、blog 与 API docs 中的机制细节归一为单一权威页：每个机制给出「结构 → 语义 → 反例/边界 → 观测手段」。
 > **前置概念**: [Future 与 Executor 机制](../../03_advanced/01_async/04_future_and_executor_mechanisms.md) · [Async/Await](../../03_advanced/01_async/01_async.md) · [Waker 契约深度解析](../../03_advanced/01_async/12_waker_contract_deep_dive.md)
 > **后置概念**: [Executor 公平性与调度](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md) · [高性能网络服务架构](08_high_performance_network_service_architecture.md) · [Glommio 与 Thread-per-Core](05_glommio_and_thread_per_core.md)
@@ -117,7 +117,7 @@ epoll_wait 返回 fd 就绪
 
 **time driver**：`tokio::time::{sleep, timeout, interval}` 全部基于同一个分层时间轮（hierarchical timing wheel），挂起的定时器按到期时间分层入轮；driver 维护「最近到期时间」，Reactor 的 `epoll_wait` 超时就取它——定时器到期即 `wake()` 对应任务，与 I/O 就绪共享同一条唤醒路径。
 
-**blocking 线程池**：`spawn_blocking` 把闭包放到**独立**的阻塞线程池（与 worker 线程池分离），语义实测要点：
+**blocking 线程池**：`spawn_blocking` 把闭包（Closures）放到**独立**的阻塞线程池（与 worker 线程池分离），语义实测要点：
 
 - **上限 512**：`Builder::max_blocking_threads` 默认值即 512（tokio docs 原文 "The default value is 512."，2026-07-12 实测）。达到上限后新任务**排队**而非失败。
 - **用途边界**：tokio docs 明确 `spawn_blocking` 面向「有界、终会结束」的阻塞工作（同步文件 I/O、CPU 密集小段）；常驻型阻塞任务（持久进程、死循环监听）会**挤占池容量**，应改用 `std::thread::spawn` 自建线程。
@@ -294,7 +294,7 @@ fn main() {
 - [Glommio 与 Thread-per-Core](05_glommio_and_thread_per_core.md) — work-stealing 之外的运行时模型对比
 - [Core Crates](../02_core_crates/01_core_crates.md) — tokio/async-std/smol 选型矩阵
 - [高性能网络服务架构](08_high_performance_network_service_architecture.md) — 运行时机制之上的架构模式
-- [安全边界全景](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md) — 运行时契约在全局安全边界谱系中的位置（L5 向下引用）
+- [安全边界全景](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md) — 运行时契约在全局安全边界谱系中的位置（L5 向下引用（Reference））
 
 ## 十一、来源
 
@@ -319,7 +319,7 @@ fn main() {
 
 ### 反例：在 runtime 内再启动 runtime（rustc 1.97.0 实测）
 
-tokio 的经典运行时陷阱——在异步任务里调用 `Runtime::new().block_on(...)`：
+tokio 的经典运行时陷阱——在异步（Async）任务里调用 `Runtime::new().block_on(...)`：
 
 ```rust,no_run
 // 概念复现（std-only 等价演示，与 tokio 报错文本一致）：

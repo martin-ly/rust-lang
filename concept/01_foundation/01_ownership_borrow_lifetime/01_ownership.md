@@ -22,7 +22,7 @@
 > **跨层映射**: L1→L4 形式化嵌入 | L1→L3 工程扩展
 > **定理链编号**: T-001 所有权（Ownership）唯一性 → T-002 移动语义完备性 → T-003 Drop 安全性
 > **层级**: L1 基础概念
-> **相关概念**: [Type System](../02_type_system/01_type_system.md)（所有权规则由类型系统静态强制执行，但本文无前置依赖，见上「前置依赖: 无」）
+> **相关概念**: [Type System](../02_type_system/01_type_system.md)（所有权（Ownership）规则由类型系统静态强制执行，但本文无前置依赖，见上「前置依赖: 无」）
 > **后置概念**: [Borrowing](02_borrowing.md) · [Lifetimes](03_lifetimes.md) · [Smart Pointers](../../02_intermediate/02_memory_management/01_memory_management.md)
 > **主要来源**: · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
@@ -166,9 +166,9 @@ mindmap
 
 所有权（Ownership）在 Rust 中有三个互补的权威定义视角，分别回答「它是什么类型的机制」「它解决什么工程问题」「它为什么可被证明安全」三个层次的问题：
 
-- **类型系统视角（Wikipedia）**：所有权类型是一类控制别名（aliasing）与可变状态访问的类型系统。它把「谁能修改这块内存」编码进类型，使非法访问在类型检查阶段即被拒绝。
+- **类型系统（Type System）视角（Wikipedia）**：所有权类型是一类控制别名（aliasing）与可变状态访问的类型系统。它把「谁能修改这块内存」编码进类型，使非法访问在类型检查阶段即被拒绝。
 - **语言设计视角（TRPL）**：所有权是 Rust 管理内存的一套规则，编译器在编译期检查这些规则，不引入垃圾回收（GC）也不引入运行时（Runtime）引用计数，因此无任何运行时开销。
-- **形式化视角（RustBelt / COR）**：所有权可被建模为仿射类型系统（Affine Type System）中的独占资源，其内存安全性可在分离逻辑（Separation Logic）框架内机器证明。
+- **形式化视角（RustBelt / COR）**：所有权可被建模为仿射类型系统（Affine Type System）中的独占资源，其内存安全（Memory Safety）性可在分离逻辑（Separation Logic）框架内机器证明。
 
 三个视角的关系：TRPL 定义给出工程承诺（零成本 + 编译期保证），Wikipedia 定义给出类型论定位（它是已研究数十年的 ownership types 家族成员），RustBelt/COR 则把前两者收紧为可检验的数学命题。判定一段代码是否「违反所有权」，最终依据的是编译器对这三条核心规则的静态检查：唯一所有者、作用域即生命周期、move 后原绑定失效。
 
@@ -407,7 +407,7 @@ graph TD
 | 场景/条件 | 判定结论 | 依据（定理/规则） | 反例或失效条件 |
 |:---|:---|:---|:---|
 | 非 `Copy` 类型赋值、传参或返回 | move：所有权转移，原变量编译期失效 | 所有权规则：同一时刻值只有唯一所有者（§2.1 核心规则矩阵） | 类型实现 `Copy` ⟹ 按位复制，原变量仍可用（§7.2） |
-| 只需读取、无需取得所有权 | 不可变借用 `&T`，可多个共存 | 借用规则（详见 [02_borrowing.md](02_borrowing.md)） | 借用存活期间 move 所有者 ⟹ 编译错误（§5.2 B1） |
+| 只需读取、无需取得所有权 | 不可变借用（Mutable Borrow） `&T`，可多个共存 | 借用规则（详见 [02_borrowing.md](02_borrowing.md)） | 借用存活期间 move 所有者 ⟹ 编译错误（§5.2 B1） |
 | 需要修改但不转移所有权 | 可变借用 `&mut T`，独占访问 | 别名-可变分离（Aliasing XOR Mutation） | 与任何其他引用共存 ⟹ E0499/E0502（§5.2） |
 | 值需要堆分配或构成递归类型 | `Box<T>` 持有唯一所有权 | RAII：所有者离开作用域自动 drop（§6.1） | 需要多所有者共享 ⟹ `Box` 不适用，见 [12_smart_pointers.md](../../02_intermediate/02_memory_management/04_smart_pointers.md) |
 | 需要多所有者共享数据 | `Rc<T>`（单线程）/ `Arc<T>`（多线程） | 引用计数共享所有权（§6.1「模循环引用」） | 循环引用 ⟹ 内存泄漏，需 `Weak` 打破 |
@@ -1321,7 +1321,7 @@ pub unsafe extern "C" fn borrow_to_c(s: *const u8, len: usize) {
 | 返回指向局部变量的引用 | 引用存活 ⊆ 值存活 | E0106 / E0515 |
 | 同时持有 `&mut` 与 `&` | 独占可变 XOR 共享只读 | E0502 |
 | 循环内 move 非 `Copy` 值 | 每轮迭代都消费同一值 ⟹ 第二轮起源已失效 | E0382 |
-| 部分 move 后使用整体 | 结构体字段级所有权跟踪 | E0382 |
+| 部分 move 后使用整体 | 结构体（Struct）字段级所有权跟踪 | E0382 |
 
 学习方法：对每条用例先写出「编译器应报什么错」，再实际编译比对；全部预测正确即表明已掌握借用检查器的判定逻辑而非死记规则。
 

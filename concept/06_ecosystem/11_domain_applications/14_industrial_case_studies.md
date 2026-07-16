@@ -33,7 +33,7 @@
 Rust for Linux 的架构模式与挑战要点：
 
 - **项目背景**：Linux 6.1（2022）起 Rust 作为第二内核语言进入主线，定位是**新驱动与子系统的可选实现语言**，不重写既有 C 代码；2024 年部分维护者分歧后项目重组，核心抽象继续推进。
-- **架构模式**：`kernel` crate 提供 safe 封装层——C API 被包进带所有权的 Rust 类型（如 `ARef<T>` 引用计数包装、`Mutex` 绑定内核锁原语），unsafe 仅存在于封装内部；驱动作者写的代码原则上是 100% safe Rust。
+- **架构模式**：`kernel` crate 提供 safe 封装层——C API 被包进带所有权（Ownership）的 Rust 类型（如 `ARef<T>` 引用（Reference）计数包装、`Mutex` 绑定内核锁原语），unsafe 仅存在于封装内部；驱动作者写的代码原则上是 100% safe Rust。
 - **关键技术挑战**：fallible allocation（内核内存分配可失败，与 std 的 panic-on-OOM 模型冲突，催生了 `kernel::alloc` 的 `try_*` API）、panic 策略（`panic=abort` 与 oops 语义的折中）、以及构建系统与 kbuild 的集成。
 
 判定依据：评估内核 Rust 化进度看两点——`kernel` crate safe 抽象覆盖率，与首个主要驱动（如 GPU/NVMe 类）的主线合入状态。
@@ -177,7 +177,7 @@ Rust 工具链认证挑战:
 
 Android 是 Rust 在消费级操作系统中规模最大、证据最充分的落地案例。理解它需把握三个层面：
 
-- **战略决策**：Google 的公开数据显示内存安全漏洞长期占 Android CVE 的 70%+；自 Android 12 起执行“新代码优先 Rust”策略后，内存安全漏洞占比持续下降（2024 年已降至约 24%）——这是“内存安全语言消除漏洞类别”论点最硬的工业证据。
+- **战略决策**：Google 的公开数据显示内存安全（Memory Safety）漏洞长期占 Android CVE 的 70%+；自 Android 12 起执行“新代码优先 Rust”策略后，内存安全漏洞占比持续下降（2024 年已降至约 24%）——这是“内存安全语言消除漏洞类别”论点最硬的工业证据。
 - **覆盖范围**：从硬件抽象层（HAL）、关键系统服务（DNS 解析、蓝牙栈）到内核驱动（配合 Rust for Linux），呈“自底向上”渗透路径，应用层仍由 Java/Kotlin 主导。
 - **与 Java 互操作**：通过 AIDL/Binder 定义跨语言接口，Rust 实现服务端、Java 客户端调用；互操作层的序列化与线程模型（Binder 线程池）是集成的主要复杂度来源。
 
@@ -259,11 +259,11 @@ Firecracker 是 AWS 开发的**微虚拟机监视器 (MicroVMM)**，用于 AWS L
 
 三个工业案例虽然领域不同（内核、虚拟化、分布式存储），但提炼出的 Rust 模式高度可复用：
 
-- **示例 1（Rust for Linux 内核模块骨架）**：`module!` 宏 + `Module` trait 的生命周期模式——`init` 返回 `Self` 由内核持有，`Drop` 对应模块卸载；展示了 Rust 所有权如何映射内核对象生命周期。
-- **示例 2（Firecracker 式类型安全缓冲区）**：用新类型 + 长度校验封装客户机内存访问，把“越界访问 guest memory”从运行时检查提升为类型约束。
+- **示例 1（Rust for Linux 内核模块（Module）骨架）**：`module!` 宏（Macro） + `Module` trait 的生命周期（Lifetimes）模式——`init` 返回 `Self` 由内核持有，`Drop` 对应模块卸载；展示了 Rust 所有权如何映射内核对象生命周期。
+- **示例 2（Firecracker 式类型安全缓冲区）**：用新类型 + 长度校验封装客户机内存访问，把“越界访问 guest memory”从运行时（Runtime）检查提升为类型约束。
 - **示例 3（TiKV 式 fearless 并发计数器）**：`Arc<AtomicU64>` 与无锁读路径的组合，展示高并发网络服务中避免锁竞争的标准手法。
 
-共同主题：所有权与类型系统把各领域的“行业惯例检查”变成编译期强制。
+共同主题：所有权与类型系统（Type System）把各领域的“行业惯例检查”变成编译期强制。
 
 ### 示例 1：Linux 内核模块骨架（Rust for Linux）
 

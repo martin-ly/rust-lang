@@ -173,7 +173,7 @@ Unpin trait 的语义:
 
 - **Pin API 的契约（2.1）**：`Pin<P>` 包装指针类型 `P`（`&mut T`/`Box<T>`/`Arc<T>`），承诺「`P` 指向的值不再被 move」——`Pin::get_mut` 只对 `T: Unpin` 开放（Unpin 类型不在乎移动），`Pin::get_unchecked_mut` 是 `unsafe` 逃生口（承诺由程序员承担）；
 - **自引用结构体的安全构建（2.2）**：「先构造、后 pin、最后初始化引用」三阶段——`MaybeUninit` + `Pin<Box<T>>` + 手动设置自引用字段是底层模式，`pin-project`/`ouroboros`/`self_cell` crate 是安全封装；
-- **与 async/await 的关系（2.3）**：`Future::poll` 取 `Pin<&mut Self>` 因为状态机可能自引用（跨 await 的局部变量互相引用）——`Box::pin(fut)` 是手动 poll/存储 Future 的标准姿势，`pin!` 宏处理栈上 pin。
+- **与 async/await 的关系（2.3）**：`Future::poll` 取 `Pin<&mut Self>` 因为状态机可能自引用（跨 await 的局部变量互相引用）——`Box::pin(fut)` 是手动 poll/存储 Future 的标准姿势，`pin!` 宏（Macro）处理栈上 pin。
 
 判定准则：应用代码只接触 `Box::pin`/`pin!`/`.await` 三件套；手写 `Pin` 投影一律用 `pin-project`，不手写 `unsafe`。
 
@@ -571,7 +571,7 @@ fn main() {
 | 类型实现 `Unpin` | Pin 无实际约束，可自由移动 | `Unpin` auto trait | 手写 `!Unpin`（`PhantomPinned`）才真正固定 |
 | 实现自定义 Future/Generator | `pin-project` 或手写 unsafe Pin 代码 | 最佳实践（模式 4/5） | 字段投影误用 ⟹ UB |
 | `async fn` 生成的 future | 默认 `!Unpin`，poll 前需固定 | RFC 2394 | 移动已 poll 的 future ⟹ UB |
-| 堆上固定 | `Box::pin`（safe） | 模式 4 | 栈上 `pin_mut!` 生命周期受限（模式 5） |
+| 堆上固定 | `Box::pin`（safe） | 模式 4 | 栈上 `pin_mut!` 生命周期（Lifetimes）受限（模式 5） |
 
 ## 相关概念
 
@@ -721,7 +721,7 @@ fn main() {
 
 ## 嵌入式测验
 
-本组测验围绕测验 1：Pin 的设计动机（记忆层）、测验 2：Unpin 自动实现（理解层）、测验 3：Pin::new 的使用限制（应用层）与测验 4：async/await 与 Pin（分析层）设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用检查」或「运行时行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
+本组测验围绕测验 1：Pin 的设计动机（记忆层）、测验 2：Unpin 自动实现（理解层）、测验 3：Pin::new 的使用限制（应用层）与测验 4：async/await 与 Pin（分析层）设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用（Borrowing）检查」或「运行时（Runtime）行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
 
 ### 测验 1：Pin 的设计动机（记忆层）
 
@@ -956,7 +956,7 @@ let r: &mut &mut String = Pin::into_inner(p);
 let _ = r;
 ```
 
-> **旧 coercion 为何不健全（类型层解释）**：把 `Pin<&mut &mut T>` 隐式 coerce 成 `Pin<&mut T>`，会让类型系统“看起来”像是 `T` 被固定了，但底层实际被固定的只是引用 `&mut T`；一旦借此 `Pin<&mut T>` 对 `T` 做需要地址稳定的操作（如自引用投影、`get_unchecked_mut` 后移动），就可能违反 Pin 的“不移动”契约。release notes 以“to prevent unsoundness”定性该风险。⚠ **需专家复核**：具体可利用的 UB 触发链（含 `get_unchecked_mut` 后的精确步骤）release notes 未展开；上述为基于本页 §1.2 Pin 契约的类型层推导，完整不安全证明以 Rustonomicon — Pin 与相关 issue 为准。
+> **旧 coercion 为何不健全（类型层解释）**：把 `Pin<&mut &mut T>` 隐式 coerce 成 `Pin<&mut T>`，会让类型系统（Type System）“看起来”像是 `T` 被固定了，但底层实际被固定的只是引用 `&mut T`；一旦借此 `Pin<&mut T>` 对 `T` 做需要地址稳定的操作（如自引用投影、`get_unchecked_mut` 后移动），就可能违反 Pin 的“不移动”契约。release notes 以“to prevent unsoundness”定性该风险。⚠ **需专家复核**：具体可利用的 UB 触发链（含 `get_unchecked_mut` 后的精确步骤）release notes 未展开；上述为基于本页 §1.2 Pin 契约的类型层推导，完整不安全证明以 Rustonomicon — Pin 与相关 issue 为准。
 
 ### 3. 与 async 状态机 / 自引用的交互
 

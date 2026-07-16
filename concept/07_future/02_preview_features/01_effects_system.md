@@ -686,7 +686,7 @@ where
 
 > **关键洞察**:
 > `AsyncFn` 没有引入完整的 effect 变量语法，而是通过 trait 系统模拟了效果多态。
-> 这是 Rust "用类型系统解决问题"设计哲学的延续——不添加新语法，而是用已有机制（trait、关联类型、HRTB）表达新概念。
+> 这是 Rust "用类型系统（Type System）解决问题"设计哲学的延续——不添加新语法，而是用已有机制（trait、关联类型、HRTB）表达新概念。
 
 ### 2.4 With-Clauses：统一效果语法的设计提案
 
@@ -953,7 +953,7 @@ Rust 正在两条线并行推进 effect system：
 
 ### 4.2 Effect Generics：消除 API 重复的关键机制
 
-**[RustConf 2023 — Extending Rust's Effect System (Yoshua Wuyts)](https://www.youtube.com/@rustlang)**
+**[RustConf 2023 — Extending Rust's Effect System (Yoshua Wuyts)](https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA)**
 
 Rust 中 effects 的最大工程挑战不是单个效果的实现，而是**效果不匹配（effect mismatch）导致的 API 重复爆炸**——即业界熟知的"函数着色问题"（Function Coloring Problem）。
 
@@ -1074,7 +1074,7 @@ sequenceDiagram
 > 此序列图将"效果污染"和"效果消除"的动态过程可视化。
 > **步骤 1-2** 展示效果产生（被调用者返回携带效果的值），
 > **步骤 3-4** 展示效果传播（效果系统强制调用者承担相同效果），
-> **步骤 5-9** 展示效果处理（运行时通过 poll/await 消除效果）。
+> **步骤 5-9** 展示效果处理（运行时（Runtime）通过 poll/await 消除效果）。
 > 关键洞察：**效果多态（AsyncFn）允许调用者在不知道被调用者具体效果的情况下编写泛型（Generics）代码——效果变量 `e` 在调用点被实例化**。
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
 
@@ -1433,7 +1433,7 @@ Rust 生命周期:  fn foo<'a>(x: &'a T)       // 编译期生命周期
 | 形式化定义 | 效果签名 + handler 的代数 | `async`/`await` 可视为单效果（调度）的特化 |
 | 与 Monad 的关系 | 自由 monad 是效果的初始模型 | `Iterator`/组合子 ≈ 纯变换，无效果分层 |
 | 未来演进 | 效果多态、行类型 | 对应 keyword generics、泛化 `const`/`async` 上下文提案 |
-| Effect × Pin | 效果穿越自引用类型 | 生成器/`gen` 块的状态机固定问题 |
+| Effect × Pin | 效果穿越自引用（Reference）类型 | 生成器/`gen` 块的状态机固定问题 |
 
 判定原则：凡声称"Rust 将引入效果系统"的说法，必须指明对应哪个具体提案（keyword generics、gen blocks 或完整 effect handlers），三者数学强度依次递增。
 
@@ -1690,7 +1690,7 @@ trait Generator<R> {
 
 ## 嵌入式测验（Embedded Quiz）
 
-「嵌入式测验（Embedded Quiz）」涉及测验 1：什么是"效果系统"（Effect System）？它与类型系…、测验 2：Rust 目前如何通过类型系统处理效果（如异步、不安全）？（…、测验 3：其他语言（如 Koka、Eff）的效果系统与 Rust 的方…、测验 4：如果 Rust 引入泛型效果系统，可能对现有代码产生什么影响…等5个方面，本节逐一说明其要点。
+「嵌入式测验（Embedded Quiz）」涉及测验 1：什么是"效果系统"（Effect System）？它与类型系…、测验 2：Rust 目前如何通过类型系统处理效果（如异步（Async）、不安全）？（…、测验 3：其他语言（如 Koka、Eff）的效果系统与 Rust 的方…、测验 4：如果 Rust 引入泛型（Generics）效果系统，可能对现有代码产生什么影响…等5个方面，本节逐一说明其要点。
 
 ### 测验 1：什么是"效果系统"（Effect System）？它与类型系统有什么关系？（理解层）
 

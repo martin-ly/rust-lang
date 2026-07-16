@@ -144,7 +144,7 @@ Panic 可以是可恢复的，也可以是不可恢复的，具体取决于 pani
 
 > **权威来源**: [Rust Reference — Panic](https://doc.rust-lang.org/reference/panic.html), [TRPL Ch9 — Unrecoverable Errors](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html), [Rustonomicon — Panics](https://doc.rust-lang.org/nomicon/unwinding.html)
 >
-> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch 10](../../00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用（Reference） [Authority Source Sprint Batch 10](../../00_meta/02_sources/05_international_authority_index.md)
 
 ---
 
@@ -179,7 +179,7 @@ Panic 可以是可恢复的，也可以是不可恢复的，具体取决于 pani
 <details>
 <summary>✅ 答案</summary>
 
-**B 正确**。按本页「一、什么是 Panic」(Source: Rust Reference — Panic)：Panic 用于阻止函数正常返回，响应通常不可恢复的错误条件；某些语言结构（如数组越界索引）会自动 panic，`panic!` 宏提供显式能力，行为由 **panic handler** 控制。
+**B 正确**。按本页「一、什么是 Panic」(Source: Rust Reference — Panic)：Panic 用于阻止函数正常返回，响应通常不可恢复的错误条件；某些语言结构（如数组越界索引）会自动 panic，`panic!` 宏（Macro）提供显式能力，行为由 **panic handler** 控制。
 
 </details>
 
@@ -207,7 +207,7 @@ Panic 可以是可恢复的，也可以是不可恢复的，具体取决于 pani
 
 下列哪种跨 FFI 的 unwind 构成未定义行为（UB）？
 
-- A. 在 Rust 内部用 `catch_unwind` 捕获同运行时的 panic
+- A. 在 Rust 内部用 `catch_unwind` 捕获同运行时（Runtime）的 panic
 - B. 从通过非 unwinding ABI（如 `"C"`、`"system"`）声明的外国函数引发 unwind 进入 Rust 代码
 - C. 子线程 panic 后被 `JoinHandle::join` 捕获
 - D. 使用 `extern "C-unwind"` 声明的函数在支持 unwind 的两侧之间传播
@@ -233,7 +233,7 @@ fn main() {
 }
 ```
 
-捕获 `&mut` 的闭包不是 `UnwindSafe`：panic 可能留下被观察到的不一致中间状态，编译器默认拒绝跨 unwind 边界共享可变引用。
+捕获 `&mut` 的闭包（Closures）不是 `UnwindSafe`：panic 可能留下被观察到的不一致中间状态，编译器默认拒绝跨 unwind 边界共享可变引用（Mutable Reference）。
 
 **修正**：
 

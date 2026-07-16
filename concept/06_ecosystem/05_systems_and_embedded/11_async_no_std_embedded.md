@@ -88,7 +88,7 @@ mindmap
 | 堆分配 | `Box::pin` 可用 | 优先静态/栈分配 | Future 必须静态固定 |
 | 标准 I/O | `tokio::net` 等 | 外设 HAL + 自定义 driver | 需自己封装 Future |
 | 时间/定时器 | `tokio::time` | 硬件定时器 + executor 集成 | 精度与功耗直接相关 |
-| 错误处理 | `std::io::Error` | 自定义 error 类型 | 需显式设计错误枚举 |
+| 错误处理（Error Handling） | `std::io::Error` | 自定义 error 类型 | 需显式设计错误枚举（Enum） |
 | 调试 | `println!` / `tracing` | `defmt` / `rtt` | 日志格式与带宽受限 |
 
 ---
@@ -157,7 +157,7 @@ fn USART1() {
 }
 ```
 
-**修正**：ISR 只做最小化状态更新并调用 waker；异步逻辑在 task 中执行。
+**修正**：ISR 只做最小化状态更新并调用 waker；异步（Async）逻辑在 task 中执行。
 
 ---
 
@@ -180,7 +180,7 @@ async fn main(spawner: Spawner) {
 
 ### 5.2 无堆 Pin
 
-- 使用 `pin!` 宏在栈上固定（Rust 1.68+，`core::pin::pin!`）；
+- 使用 `pin!` 宏（Macro）在栈上固定（Rust 1.68+，`core::pin::pin!`）；
 - 使用 `StaticCell` 等 crate 在静态内存中固定；
 - 禁止在 no_std 中手动 `Box::pin` 除非启用了自定义分配器。
 
@@ -207,7 +207,7 @@ flowchart TD
 |---|---|---|
 | 中断中直接 await | ISR 不是 task 上下文 | ISR 只做 wake |
 | 堆分配导致 OOM | no_std 无默认分配器 | 使用静态 Future |
-| Future 被移动后自引用失效 | 未正确 Pin | 使用 StaticCell / pin! |
+| Future 被移动后自引用（Reference）失效 | 未正确 Pin | 使用 StaticCell / pin! |
 | 中断未禁用导致唤醒已释放任务 | Drop 中未清理中断 | 在 Drop 中禁用中断并注销 waker |
 | `std` 类型意外引入 | 依赖未标记 no_std | 使用 `cargo nono` 等工具检查 |
 

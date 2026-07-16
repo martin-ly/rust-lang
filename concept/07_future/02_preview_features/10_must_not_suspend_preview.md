@@ -40,9 +40,9 @@
 
 1. **启用 lint**：nightly 下 `#![feature(must_not_suspend)]`，编译器对已知危险类型与显式标注类型发出 `must_not_suspend` 警告；
 2. **自定义类型标记**：`#[must_not_suspend = "reason"]` 标注自有类型，任何持有它跨越 `.await` 的 future 触发 lint；
-3. **解决方式**：把临界区收缩到 `.await` 之前（缩小 `{ let g = m.lock(); ... }` 作用域）、改用异步互斥（其 guard 语义为跨 await 公平锁）、或将状态移入消息通道。
+3. **解决方式**：把临界区收缩到 `.await` 之前（缩小 `{ let g = m.lock(); ... }` 作用域）、改用异步（Async）互斥（其 guard 语义为跨 await 公平锁）、或将状态移入消息通道。
 
-判定原则：出现该 lint 时优先**缩短 guard 生命周期**；只有确实需要跨 await 持锁时才换异步互斥。
+判定原则：出现该 lint 时优先**缩短 guard 生命周期（Lifetimes）**；只有确实需要跨 await 持锁时才换异步互斥。
 
 ### 2.1 启用 lint
 
@@ -106,7 +106,7 @@ fn main() {
 1. **在 `.await` 前 drop guard**：使用嵌套作用域或显式 `drop(guard)`；
 2. **使用异步锁**：在 async 上下文中优先使用 `tokio::sync::Mutex` / `async-lock`；
 3. **避免在 async 函数中使用 `std::sync::Mutex`**：除非能证明锁持有时间极短且不跨越 await；
-4. **代码审查**：对跨越 await 的借用保持警觉，尤其是 `RefCell`、`RwLock`、`parking_lot` 等类型。
+4. **代码审查**：对跨越 await 的借用（Borrowing）保持警觉，尤其是 `RefCell`、`RwLock`、`parking_lot` 等类型。
 
 ### 3.2 迁移建议
 

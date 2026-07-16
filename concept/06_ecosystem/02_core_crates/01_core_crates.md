@@ -40,7 +40,7 @@
 
 - **crate（Wikipedia/官方 Book）**：Rust 的最小编译单元——库（`--crate-type lib`）或二进制；每个 crate 有独立的命名空间、隐私边界与编译产物。与「package」的区别：package 是 Cargo 概念（一个 Cargo.toml，可含 1 库 + 多二进制 crate），crate 是编译器概念。
 - **crates.io**：官方包注册中心，语义化版本 + 不可变发布（已发布版本不可覆盖，只能 yank）；与 Cargo 的分工：crates.io 管「发现与分发」，Cargo 管「解析与构建」。
-- **「核心 crate」的界定**：本页指生态中**事实标准的基础设施层**——serde（序列化）、tokio（异步运行时）、thiserror/anyhow（错误）、bytes（缓冲）、log/tracing（观测），特征是跨领域被传递依赖，选型错误影响全栈。
+- **「核心 crate」的界定**：本页指生态中**事实标准的基础设施层**——serde（序列化）、tokio（异步（Async）运行时（Runtime））、thiserror/anyhow（错误）、bytes（缓冲）、log/tracing（观测），特征是跨领域被传递依赖，选型错误影响全栈。
 
 判定依据：评估「核心」与否看反向依赖数（crates.io 的 dependents 列表），而非下载量绝对值。
 
@@ -454,11 +454,11 @@ graph TD
 | crate | 解决的问题 | 与 std 的关系 |
 |---|---|---|
 | `crossbeam` | 无锁并发原语（epoch 内存回收、MPMC 通道、scoped threads） | std 通道为 MPSC 且有锁；`crossbeam::scope` 是 `std::thread::scope` 的前身 |
-| `rayon` | 数据并行：`par_iter()` 工作窃取线程池 | 迭代器 API 的并行镜像，无 async |
+| `rayon` | 数据并行：`par_iter()` 工作窃取线程池 | 迭代器（Iterator） API 的并行镜像，无 async |
 | `parking_lot` | 更小更快的 `Mutex`/`RwLock`（无中毒、1 字锁） | std 同步原语带中毒（poisoning）语义，需 `unwrap` |
 | `dashmap` | 分片并发 HashMap | `HashMap` + `RwLock` 的高并发替代 |
 
-选型要点：CPU 密集批处理 → rayon；自研并发结构 → crossbeam；锁竞争热点 → parking_lot（注意其 `MutexGuard` 无中毒错误处理，逻辑不同）；高并发读多写少字典 → dashmap。
+选型要点：CPU 密集批处理 → rayon；自研并发结构 → crossbeam；锁竞争热点 → parking_lot（注意其 `MutexGuard` 无中毒错误处理（Error Handling），逻辑不同）；高并发读多写少字典 → dashmap。
 
 判定依据：先用 std 实现并 profile，确认同步原语为瓶颈后再引入——parking_lot/dashmap 的收益在高竞争下才显著。
 
@@ -696,7 +696,7 @@ crate 选型的可量化方法论：
 | *Security Analysis of Rust Cryptography* | 2023-2025 工业审计 | Rust 密码学库安全评估 | ring/rustls 审计基础 |
 | *Tokio: An Asynchronous Rust Runtime* | tokio.rs Team | 协作式调度 + work-stealing | tokio 的调度理论 |
 | *Rustls: Modern TLS in Rust* | rustls 团队 | 内存安全（Memory Safety） TLS | 替代 OpenSSL 的工程实践 |
-| *Rayon: Data Parallelism in Rust* | Josh Stone / Niko Matsakis | 无数据竞争的数据并行 | Send/Sync + 所有权 ⇒ 安全并行 |
+| *Rayon: Data Parallelism in Rust* | Josh Stone / Niko Matsakis | 无数据竞争的数据并行 | Send/Sync + 所有权（Ownership） ⇒ 安全并行 |
 | *Security Analysis of Rust Cryptography* | 2023-2025 工业审计 | Rust 密码学库安全评估 | ring/rustls 审计基础 |
 
 ---
@@ -730,10 +730,10 @@ crate 选型的可量化方法论：
 |:---|:---|:---|
 | 所有权 / Drop | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | RAII 资源管理根基 |
 | Trait 系统 | [`../02_intermediate/00_traits/01_traits.md`](../../02_intermediate/00_traits/01_traits.md) | derive 宏（Macro） + 接口抽象 |
-| 泛型 | [`../02_intermediate/01_generics/02_generics.md`](../../02_intermediate/01_generics/01_generics.md) | 零成本抽象（Zero-Cost Abstraction） |
+| 泛型（Generics） | [`../02_intermediate/01_generics/02_generics.md`](../../02_intermediate/01_generics/01_generics.md) | 零成本抽象（Zero-Cost Abstraction） |
 | 异步（Async）编程 | [`../03_advanced/01_async/02_async.md`](../../03_advanced/01_async/01_async.md) | tokio/axum 根基 |
 | Unsafe | [`../03_advanced/02_unsafe/03_unsafe.md`](../../03_advanced/02_unsafe/01_unsafe.md) | FFI/密码学边界 |
-| 宏系统 | [`../03_advanced/03_proc_macros/04_macros.md`](../../03_advanced/03_proc_macros/01_macros.md) | serde/clap derive |
+| 宏（Macro）系统 | [`../03_advanced/03_proc_macros/04_macros.md`](../../03_advanced/03_proc_macros/01_macros.md) | serde/clap derive |
 | 工具链 | [`./01_toolchain.md`](../00_toolchain/01_toolchain.md) | Cargo/crates.io 支撑 |
 | 设计模式 | [`./02_patterns.md`](../03_design_patterns/01_patterns.md) | Builder/Typestate 模式 |
 | 应用领域 | [`./04_application_domains.md`](../06_data_and_distributed/01_application_domains.md) | crate 的工程落地 |

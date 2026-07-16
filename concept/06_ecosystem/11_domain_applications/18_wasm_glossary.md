@@ -72,8 +72,8 @@
 WASM 基础术语构成理解整个生态的最小词汇表，可按“静态产物 → 运行实例 → 内存模型”三层归组：
 
 - **静态层**: 模块（Module）是编译后的 `.wasm` 二进制，包含函数、表、内存与全局变量的声明；它是无状态的，可被多次实例化。
-- **运行层**: 实例（Instance）是模块 + 导入绑定后的活对象，拥有自己的状态；宿主（Host）通过导入/导出函数与实例交互。
-- **内存层**: 线性内存（Linear Memory）是一块可增长的连续字节数组（按 64KiB 页计），是 WASM 与外部交换复杂数据的唯一通道——所有字符串、结构体最终都编码在这块内存里。
+- **运行层**: 实例（Instance）是模块（Module） + 导入绑定后的活对象，拥有自己的状态；宿主（Host）通过导入/导出函数与实例交互。
+- **内存层**: 线性内存（Linear Memory）是一块可增长的连续字节数组（按 64KiB 页计），是 WASM 与外部交换复杂数据的唯一通道——所有字符串、结构体（Struct）最终都编码在这块内存里。
 
 其余术语（表 Table、全局 Global、起动函数 Start）均可挂接到这三层上理解。
 
@@ -159,7 +159,7 @@ WASM 基础术语构成理解整个生态的最小词汇表，可按“静态产
 Rust 相关术语围绕“目标 → 胶水 → 打包”的工具链与类型边界组织：
 
 - **`wasm32-unknown-unknown`**: 最基础的编译目标，不预设任何宿主系统接口（无 WASI），产出需宿主提供导入才能做 I/O。
-- **wasm-bindgen**: 生成 Rust↔JS 胶水层的工具与宏（`#[wasm_bindgen]`），定义了**类型映射（Type Mapping）**——`String` ↔ JS string（经编码拷贝）、`&[u8]` ↔ `Uint8Array` 视图、结构体 ↔ JS class 包装。
+- **wasm-bindgen**: 生成 Rust↔JS 胶水层的工具与宏（Macro）（`#[wasm_bindgen]`），定义了**类型映射（Type Mapping）**——`String` ↔ JS string（经编码拷贝）、`&[u8]` ↔ `Uint8Array` 视图、结构体 ↔ JS class 包装。
 - **wasm-pack**: 面向 npm 生态的打包发布工具，串联 bindgen、优化与包元数据。
 
 术语间的关键联系：类型映射的成本（拷贝次数）是互操作性能的决定因素，选工具链前先确认目标宿主是否支持组件模型——支持则 WIT 取代手写类型映射。
@@ -320,7 +320,7 @@ WASM 性能优化术语围绕“二进制大小”与“运行时速度”两个
 
 WASM 工作流的工具链术语按编译—运行—封装三层组织：
 
-- **编译层**：`cargo` 与 `rustc` 负责将 Rust 编译到 `wasm32-unknown-unknown`（浏览器）或 `wasm32-wasip1/p2`（WASI 服务端）目标，链接对应的标准库切片。
+- **编译层**：`cargo` 与 `rustc` 负责将 Rust 编译到 `wasm32-unknown-unknown`（浏览器）或 `wasm32-wasip1/p2`（WASI 服务端）目标，链接对应的标准库切片（Slice）。
 - **运行层**：`wasmtime`（Bytecode Alliance 的独立运行时，服务端/CLI/边缘计算标准选择）与 `wasmer`（支持多后端编译器与嵌入式场景）让 WASM 脱离浏览器运行；WASI 定义了它们共同的系统接口（文件、时钟、随机数）。
 - **封装层**：`wasm-bindgen`/`wasm-pack` 处理 JS 胶水与 npm 发布（浏览器侧），`wizer` 做快照预初始化加速冷启动。
 

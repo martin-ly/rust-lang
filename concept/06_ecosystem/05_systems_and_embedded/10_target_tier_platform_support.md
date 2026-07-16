@@ -11,7 +11,7 @@
 > **后置概念**: [`-Z` 选项参考清单](../00_toolchain/15_z_flags_reference.md)（`build-std` 与 Tier 2/3 目标的关系）· [WASI](01_wasi.md) · [Rust vs Go（交叉编译与平台支持广度对比）](../../05_comparative/01_systems_languages/03_rust_vs_go.md)
 
 > **来源**: [The rustc book — Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html)（curl 200 实测 2026-07-12）· [Target Tier Policy](https://doc.rust-lang.org/nightly/rustc/target-tier-policy.html) · [releases.rs 1.90–1.97](https://releases.rs/)（各版 Platform Support 节，curl 200 实测）· [rustc book — nvptx64-nvidia-cuda](https://doc.rust-lang.org/nightly/rustc/platform-support/nvptx64-nvidia-cuda.html)（curl 200 实测）
-> **国际权威来源（2026-07-13 补录）**: **P1** [Herlihy & Shavit — The Art of Multiprocessor Programming（Morgan Kaufmann）](https://dl.acm.org/doi/book/10.5555/2385452)（各目标架构原子操作/内存模型的理论参照） · **P2** [Rust Blog — Raising the baseline for the nvptx64-nvidia-cuda target](https://blog.rust-lang.org/2026/05/01/nvptx-baseline-update/)（nvptx baseline 调整的官方公告；curl 200 实测 2026-07-13）
+> **国际权威来源（2026-07-13 补录）**: **P1** [Herlihy & Shavit — The Art of Multiprocessor Programming（Morgan Kaufmann）](https://dl.acm.org/doi/book/10.5555/2385452)（各目标架构原子操作（Atomic Operations）/内存模型的理论参照） · **P2** [Rust Blog — Raising the baseline for the nvptx64-nvidia-cuda target](https://blog.rust-lang.org/2026/05/01/nvptx-baseline-update/)（nvptx baseline 调整的官方公告；curl 200 实测 2026-07-13）
 
 ---
 

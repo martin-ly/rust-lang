@@ -363,7 +363,7 @@ queue.submit(std::iter::once(encoder.finish()));
 | `Device` | `Arc`-like 内部引用（Reference） | GPU 上下文生命周期（Lifetimes） |
 | `Buffer` | *owned* by `BindGroup` or `Queue` | 内存绑定合法性 |
 | `CommandEncoder` | 线性使用（`&mut` + consume） | 命令顺序 + 无重复提交 |
-| `TextureView` | 借用自 `Texture` | 视图生命周期（Lifetimes）不超过纹理 |
+| `TextureView` | 借用（Borrowing）自 `Texture` | 视图生命周期（Lifetimes）不超过纹理 |
 
 > **来源**: [wgpu Documentation] · [WebGPU Spec]
 
@@ -502,7 +502,7 @@ impl FixedArchetype {
 | **Tilemap + Sprite** | GBA、Analogue Pocket | ECS 管理动态 Sprite；背景层由独立系统处理 | `Position`（像素坐标）、`Tile`（瓦片索引） |
 | **Pico8 风格** | fantasy console 仿真 | 固定调色板、128×128 分辨率；ECS 实体对应"画图命令" | `DrawCmd { color: u4, shape: Shape }` |
 
-> **渲染系统的所有权模式**: 帧缓冲作为唯一的全局可变资源，在 ECS 中通常以 `&mut [u8]` 或自定义的 `FrameBuffer` 资源传入 Render System。这与 [L1 所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 中的"单一可变引用（Mutable Reference）"原则完全一致——在任何一帧中，只有一个 Render System 能持有帧缓冲的 `&mut`。
+> **渲染系统的所有权（Ownership）模式**: 帧缓冲作为唯一的全局可变资源，在 ECS 中通常以 `&mut [u8]` 或自定义的 `FrameBuffer` 资源传入 Render System。这与 [L1 所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 中的"单一可变引用（Mutable Reference）"原则完全一致——在任何一帧中，只有一个 Render System 能持有帧缓冲的 `&mut`。
 
 ```rust,ignore
 // ✅ Playdate 风格 1-bit 渲染系统（no_std + alloc）
@@ -681,7 +681,7 @@ fn spawn_enemy(
 
 ## 四、数据导向设计 (DOD) 与 Rust 零成本抽象的协同
 
-DOD 的核心主张——按访问模式组织内存（连续数组、SoA 布局）而非按对象组织——与 Rust 零成本抽象天然协同：泛型单态化让抽象组件访问编译为直接数组索引，迭代器融合让系统遍历无中间分配。验证方式是基准对比：同逻辑 AoS（`Vec<Entity>`）与 SoA（分量数组）在大规模实体下可差 3-10 倍。SIMD 优化需要 `unsafe`（如 `std::arch` intrinsics 或指针运算）时应封装为 safe API，unsafe 边界限定在单个热循环内，这是 DOD 在 Rust 中的标准工程形态。
+DOD 的核心主张——按访问模式组织内存（连续数组、SoA 布局）而非按对象组织——与 Rust 零成本抽象（Zero-Cost Abstraction）天然协同：泛型（Generics）单态化（Monomorphization）让抽象组件访问编译为直接数组索引，迭代器（Iterator）融合让系统遍历无中间分配。验证方式是基准对比：同逻辑 AoS（`Vec<Entity>`）与 SoA（分量数组）在大规模实体下可差 3-10 倍。SIMD 优化需要 `unsafe`（如 `std::arch` intrinsics 或指针运算）时应封装为 safe API，unsafe 边界限定在单个热循环内，这是 DOD 在 Rust 中的标准工程形态。
 
 ### 4.1 零成本抽象的 DOD 验证
 
@@ -716,7 +716,7 @@ pub fn update_positions_simd(
 
 ## 五、并发渲染：Send/Sync 在多线程游戏循环中的保证
 
-游戏引擎的多线程渲染受图形 API 线程亲和性约束：GPU 资源句柄（wgpu 的 `RenderPass`、OpenGL context）往往 `!Send`/`!Sync`，只能在创建线程使用。Rust 把这一约束编码进类型系统——跨线程移动这些资源直接编译失败，而 C++ 引擎靠文档与 code review 防守。标准解法是命令队列模式：游戏逻辑线程生成渲染命令（`Send` 的普通数据），渲染线程独占 GPU 资源消费命令。`Send`/`Sync` 边界由此成为架构分界线而非运行时约定。
+游戏引擎的多线程渲染受图形 API 线程亲和性约束：GPU 资源句柄（wgpu 的 `RenderPass`、OpenGL context）往往 `!Send`/`!Sync`，只能在创建线程使用。Rust 把这一约束编码进类型系统（Type System）——跨线程移动这些资源直接编译失败，而 C++ 引擎靠文档与 code review 防守。标准解法是命令队列模式：游戏逻辑线程生成渲染命令（`Send` 的普通数据），渲染线程独占 GPU 资源消费命令。`Send`/`Sync` 边界由此成为架构分界线而非运行时（Runtime）约定。
 
 ### 5.1 多线程渲染管线
 
@@ -1154,7 +1154,7 @@ struct ChildOf {
 |:---|:---|:---|
 | 所有权 | [`../01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | Component 生命周期（Lifetimes）与资源管理 |
 | 借用检查 | [`../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | System 调度冲突检测同构 |
-| 生命周期 | [`../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md`](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | Entity 引用（Reference）跨 System 有效性 |
+| 生命周期（Lifetimes） | [`../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md`](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | Entity 引用（Reference）跨 System 有效性 |
 | Trait 系统 | [`../02_intermediate/00_traits/01_traits.md`](../../02_intermediate/00_traits/01_traits.md) | `Component` / `SystemParam` derive |
 | 泛型（Generics） | `../02_intermediate/01_generics/02_generics.md` | `Query<Q>` 的零成本抽象（Zero-Cost Abstraction） |
 | 并发 | [`../03_advanced/00_concurrency/01_concurrency.md`](../../03_advanced/00_concurrency/01_concurrency.md) | `Send`/`Sync` 在多线程循环中的保证 |
@@ -1189,7 +1189,7 @@ struct ChildOf {
 
 ## 十、边界测试：游戏 ECS 的编译错误
 
-ECS 边界测试验证 Bevy 调度器的三类编译期约束：Query 参数引用未注册组件（`Query<&Missing>` 在系统注册时暴露类型错误）；同一系统内两个 Query 对同一组件产生可变冲突（Bevy 的运行时 panic 在静态检查可得时应改为编译期拆分）；跨线程系统访问 `!Send` 资源被 `Send` bound 拒绝。这些用例展示 ECS 框架如何把 C++ 引擎的运行时崩溃前移到编译期，是 Rust 游戏引擎的核心卖点之一。界测试：ECS 的 archetype 变更与引用失效（运行时 pa…、边界测试：多线程 ECS 与 `Send`/`Sync` 的组件约束（…等6个方面，本节依次展开。
+ECS 边界测试验证 Bevy 调度器的三类编译期约束：Query 参数引用（Reference）未注册组件（`Query<&Missing>` 在系统注册时暴露类型错误）；同一系统内两个 Query 对同一组件产生可变冲突（Bevy 的运行时 panic 在静态检查可得时应改为编译期拆分）；跨线程系统访问 `!Send` 资源被 `Send` bound 拒绝。这些用例展示 ECS 框架如何把 C++ 引擎的运行时崩溃前移到编译期，是 Rust 游戏引擎的核心卖点之一。界测试：ECS 的 archetype 变更与引用失效（运行时 pa…、边界测试：多线程 ECS 与 `Send`/`Sync` 的组件约束（…等6个方面，本节依次展开。
 
 ### 10.1 边界测试：Bevy 的 Query 与组件缺失（编译错误）
 

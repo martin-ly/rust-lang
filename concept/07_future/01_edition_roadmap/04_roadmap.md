@@ -478,7 +478,7 @@ let vec: Vec<u8, &bumpalo::Bump> = Vec::new_in(&arena);
 
 语言级语法的三个演进方向都服务于同一目标：**消除“效应维度”导致的 API 重复**：
 
-- **gen/kw：生成器关键字扩展**: `gen fn` 产生产生式迭代器（`Iterator` 的零样板实现），是 `async` 之外的第二个“栈式协程”入口；关键字在 Edition 2024 已预留（`gen` 成为保留字），为后续稳定铺路。
+- **gen/kw：生成器关键字扩展**: `gen fn` 产生产生式迭代器（Iterator）（`Iterator` 的零样板实现），是 `async` 之外的第二个“栈式协程”入口；关键字在 Edition 2024 已预留（`gen` 成为保留字），为后续稳定铺路。
 - **Open Enums 与可扩展枚举**: 库作者需要“可添加变体而不破坏下游 `match`”的枚举——`#[non_exhaustive]` 是部分答案，open enums 提案试图给出更系统的语义（含穷尽性检查的版本化规则）。
 - **Effects System 与关键字泛型**: `maybe async`、`maybe const` 式的效应泛型，让一个函数体服务多个效应维度（`read`/`read_async`/`read_const` 三合一）；是最具野心也最远期的方向，当前以实验性设计文档形态存在。
 
@@ -581,7 +581,7 @@ Effects System（效果系统）是 Rust 远期最具雄心的类型系统（Typ
 
 工具链与生态基础设施的三条主线：
 
-- **BorrowSanitizer**：类比 AddressSanitizer 的借用违规动态检测，目标是给 `unsafe` 代码提供 Miri 级检查但接近原生速度——Miri 的 50–100 倍减速使其无法跑全量测试，BSan 旨在弥合这一鸿沟。
+- **BorrowSanitizer**：类比 AddressSanitizer 的借用（Borrowing）违规动态检测，目标是给 `unsafe` 代码提供 Miri 级检查但接近原生速度——Miri 的 50–100 倍减速使其无法跑全量测试，BSan 旨在弥合这一鸿沟。
 - **Cranelift 后端**：`rustc_codegen_cranelift` 以编译速度换优化质量，debug 构建可提速 30–50%；`rustup component add rustc-codegen-cranelift-preview` 已可试用，缺 SIMD 内联等特性使其仅限开发期。
 - **Rust 规范文档化**：Ferrocene 团队推动的 FLS（Ferrocene Language Specification）与官方 Reference 的融合，是 Rust 进入安全关键认证（ISO 26262）的文档前提。
 

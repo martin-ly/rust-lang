@@ -152,7 +152,7 @@ let v = vec![ZeroSized; 1000]; // 无内存开销
 
 > **权威来源**: [Rust Reference — Memory Allocation and Lifetime](https://doc.rust-lang.org/reference/memory-allocation-and-lifetime.html), [TRPL Ch4 — Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html), [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html)
 >
-> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch 10](../../00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用（Reference） [Authority Source Sprint Batch 10](../../00_meta/02_sources/05_international_authority_index.md)
 
 ---
 
@@ -177,7 +177,7 @@ fn main() {
 }
 ```
 
-`push` 可能重新分配堆内存使旧指针失效；借用检查器用 E0502 在编译期挡住这类「迭代器失效」式内存错误，无需运行期代价。
+`push` 可能重新分配堆内存使旧指针失效；借用（Borrowing）检查器用 E0502 在编译期挡住这类「迭代器（Iterator）失效」式内存错误，无需运行期代价。
 
 **修正**：
 

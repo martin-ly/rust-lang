@@ -133,7 +133,7 @@ Cargo 的解析器本质上是一个 SAT-like 约束求解器：
 
 ## 四、特性合并（Feature Unification）
 
-特性合并是 Cargo 解析器的核心规则：依赖图中同一 crate 的同一版本只构建一次，所有路径请求的 feature 取并集启用。这保证了类型一致性（同一类型全图唯一）但有副作用：某分支为测试启用的 feature 可能意外激活另一分支的代码路径（如 `std` feature 泄漏进 no_std 构建）。resolver v2/v3 按构建种类（正常/dev/build）隔离 feature，缓解但未消除该问题——设计 feature 时应遵循“纯加法、无互斥”原则。
+特性合并是 Cargo 解析器的核心规则：依赖图中同一 crate 的同一版本只构建一次，所有路径请求的 feature 取并集启用。这保证了类型一致性（Coherence）（同一类型全图唯一）但有副作用：某分支为测试启用的 feature 可能意外激活另一分支的代码路径（如 `std` feature 泄漏进 no_std 构建）。resolver v2/v3 按构建种类（正常/dev/build）隔离 feature，缓解但未消除该问题——设计 feature 时应遵循“纯加法、无互斥”原则。
 
 ### 4.1 同一个 crate 在一个主版本内只编译一次
 

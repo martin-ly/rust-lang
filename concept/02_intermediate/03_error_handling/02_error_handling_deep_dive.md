@@ -10,7 +10,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页（L2 深入专题）。
-> **层级定位**: 本页为错误处理的 **L2 深入专题页**（deep dive），聚焦 `Result`/`Option` 组合子代数、`From` 错误转换、错误链（`Error::source()`）与 thiserror/anyhow/eyre 框架生态；入门基础见 L1 [`32_error_handling_basics.md`](../../01_foundation/08_error_handling/01_error_handling_basics.md)，L2 主权威页（传播模式与工程实践总览）见 [`01_error_handling.md`](01_error_handling.md)。三页为合法进阶关系（basics → 主页 → deep dive），非重复权威页。
+> **层级定位**: 本页为错误处理（Error Handling）的 **L2 深入专题页**（deep dive），聚焦 `Result`/`Option` 组合子代数、`From` 错误转换、错误链（`Error::source()`）与 thiserror/anyhow/eyre 框架生态；入门基础见 L1 [`32_error_handling_basics.md`](../../01_foundation/08_error_handling/01_error_handling_basics.md)，L2 主权威页（传播模式与工程实践总览）见 [`01_error_handling.md`](01_error_handling.md)。三页为合法进阶关系（basics → 主页 → deep dive），非重复权威页。
 > **定位**: 深入分析 Rust **错误处理（Error Handling）机制**——从 `Result`/`Option` 的组合子到 `?` 运算符、错误转换、自定义错误类型和错误处理框架，揭示 Rust 如何将错误处理融入类型系统（Type System）实现编译期安全。
 > **前置概念**: [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Traits](../00_traits/01_traits.md) · [Generics](../01_generics/01_generics.md)
 > **后置概念**: [Async](../../03_advanced/01_async/01_async.md) · [Logging](../../06_ecosystem/00_toolchain/02_logging_observability.md)
@@ -191,7 +191,7 @@ pub trait Error: Debug + Display {
 
 错误处理深入层的三个技术细节，覆盖「跨类型转换」「领域错误建模」「框架选型」的完整链路：
 
-- **错误转换与 `From` trait**：`?` 的隐式转换要求 `E2: From<E1>`。手写模式是「应用错误枚举 + 每个底层错误一个 `#[from]` 变体」；`From` 的语义承诺是「无损升格」（信息不丢失），有损转换应显式 `map_err`。
+- **错误转换与 `From` trait**：`?` 的隐式转换要求 `E2: From<E1>`。手写模式是「应用错误枚举（Enum） + 每个底层错误一个 `#[from]` 变体」；`From` 的语义承诺是「无损升格」（信息不丢失），有损转换应显式 `map_err`。
 - **自定义错误类型**：库错误的最佳实践是「一个公开错误枚举 + `thiserror` 派生 `Error`/`Display`」——变体表达领域失败模式（`NotFound`、`InvalidInput`），`#[error("...")]` 给出消息，`#[source]`/`#[from]` 维护因果链。错误枚举是库的 API 契约一部分：增删变体是 semver 相关变更（非穷尽 `#[non_exhaustive]` 可缓解）。
 - **错误处理框架选型**：`thiserror`（库场景，编译期生成 impl，零运行时成本，保留类型化匹配）vs `anyhow`（应用场景，动态错误对象 + 上下文链 `.context()`，牺牲可匹配性换 ergonomics）vs `eyre`/`miette`（anyhow 的增强：报告渲染、诊断码、源码片段标注）。判定标准：错误是否会被调用方 `match`——会则 thiserror，不会（一路 `?` 到 main 打印）则 anyhow 系。
 
@@ -387,7 +387,7 @@ impl std::error::Error for ManualError {
 
 本节反命题树针对错误处理的五个高频误解，边界极限给出每条误解的失效临界：
 
-- **反命题 1：「`unwrap` 在测试中之外永远不该用」**。判定依据：不变量由局部推理保证时（如「刚 `push` 后 `last()` 必为 `Some`」），`unwrap` 是把「编译器无法知道的不变量」标注为可审计的断言点，优于绕弯的防御代码。边界：不变量依赖跨模块/跨线程状态时，`unwrap` 退化为定时炸弹。
+- **反命题 1：「`unwrap` 在测试中之外永远不该用」**。判定依据：不变量由局部推理保证时（如「刚 `push` 后 `last()` 必为 `Some`」），`unwrap` 是把「编译器无法知道的不变量」标注为可审计的断言点，优于绕弯的防御代码。边界：不变量依赖跨模块（Module）/跨线程状态时，`unwrap` 退化为定时炸弹。
 - **反命题 2：「错误类型越细越好」**。判定依据：错误枚举的粒度应匹配「调用方的恢复策略种类」——所有变体走同一恢复路径的细分是噪声。边界：公开 API 的粗粒度错误会迫使调用方解析字符串消息，劣化为 C 风格。
 - **反命题 3：「panic 等于进程崩溃」**。判定依据：panic 默认 unwind 仅终止当前线程，`catch_unwind` 可在边界恢复；`panic = "abort"` 才是进程级。边界：FFI 边界未设 `catch_unwind`（unwind 跨越 extern 边界是 UB）与毒化锁的级联失败。
 
@@ -815,7 +815,7 @@ fn main() {
 - **上位（is-a）**：[错误处理基础](01_error_handling.md) 的深化与生态层。
 - **下位（实例）**：自定义错误枚举、thiserror 派生模式、anyhow 上下文模式（本文 §三 模式矩阵）。
 - **组合**：与 [副作用与纯度](../../01_foundation/00_start/04_effects_and_purity.md)（`Result` 作为异常效果）、[异常安全](04_exception_safety_rust_cpp.md) 组合。
-- **依赖**：依赖 [泛型](../01_generics/01_generics.md) 与 [Traits](../00_traits/01_traits.md)。
+- **依赖**：依赖 [泛型（Generics）](../01_generics/01_generics.md) 与 [Traits](../00_traits/01_traits.md)。
 
 ---
 

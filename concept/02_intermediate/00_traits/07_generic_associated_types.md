@@ -1,5 +1,5 @@
 > **内容分级**: [综述级]
-> **本节关键术语**: 泛型关联类型 (Generic Associated Types, GATs) · 出借迭代器 (Lending Iterator) · 高阶 Trait 约束 (Higher-Ranked Trait Bound, HRTB) · 类型族 (Type Family) · 隐含约束 (Implied Bounds) — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
+> **本节关键术语**: 泛型（Generics）关联类型 (Generic Associated Types, GATs) · 出借迭代器 (Lending Iterator) · 高阶 Trait 约束 (Higher-Ranked Trait Bound, HRTB) · 类型族 (Type Family) · 隐含约束 (Implied Bounds) — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 
 # 泛型关联类型（Generic Associated Types, GATs）
 
@@ -10,7 +10,7 @@
 > **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。`01_traits.md` §5.6、`04_advanced_traits.md` §1.2 与 `02_generics.md` §9.5/§11.5 中的 GAT 讨论均为摘要，以本页为准。
 > **A/S/P 标记**: **S** — Structure
-> **双维定位**: C×Ana — 分析类型参数 × Trait 解析 × 生命周期三维交叉的约束系统
+> **双维定位**: C×Ana — 分析类型参数 × Trait 解析 × 生命周期（Lifetimes）三维交叉的约束系统
 > **定位**: 深入分析 Rust 1.65 稳定化的 **泛型关联类型（GATs）**——从 `LendingIterator` 动机、语法规则、与 HRTB 的表达力边界，到稳定化历程与 1.97 的已知限制，给出可操作的选型判定表。
 > **前置概念**: [Traits](01_traits.md) · [Generics](../01_generics/01_generics.md) · [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md)
 > **后置概念**: [Async Cancellation Safety](../../03_advanced/01_async/05_async_cancellation_safety.md) · [Type Inference](../../04_formal/00_type_theory/03_type_inference.md)
@@ -95,7 +95,7 @@ pub trait Iterator {
 
 这隐含一条铁律：`next` 返回的值**不能借用自 `self`**。因为 `fn next(&mut self)` 中 `self` 的借用生命周期只存在于方法体内，而返回类型 `Self::Item` 在签名层面没有位置去"提及"这个生命周期。
 
-于是下面的"滑动窗口迭代器"无法用普通 `Iterator` 表达：
+于是下面的"滑动窗口迭代器（Iterator）"无法用普通 `Iterator` 表达：
 
 ```rust
 // ❌ 无法编译：Item 需要借用 self，但 type Item 无法携带生命周期
@@ -113,8 +113,8 @@ struct WindowsMut<'t, T> {
 
 | 方案 | 做法 | 代价 |
 |---|---|---|
-| **所有权化** | `next` 返回 `Vec<T>` / `String` 等拥有所有权的值 | 每次迭代一次堆分配，零成本抽象（Zero-cost Abstraction）破灭 |
-| **裸指针 + `unsafe`** | 返回 `'static` 化的引用或裸指针，人工保证不重叠 | 内存安全依赖人工审查，违背 Rust 核心承诺 |
+| **所有权（Ownership）化** | `next` 返回 `Vec<T>` / `String` 等拥有所有权的值 | 每次迭代一次堆分配，零成本抽象（Zero-cost Abstraction）破灭 |
+| **裸指针 + `unsafe`** | 返回 `'static` 化的引用或裸指针，人工保证不重叠 | 内存安全（Memory Safety）依赖人工审查，违背 Rust 核心承诺 |
 | **回调倒置（`for_each` 风格）** | 用 `fn with_item<R>(&mut self, f: impl FnMut(&mut T) -> R)` | 控制流反转，无法使用 `for` 循环、`zip`、提前 `break` |
 
 GATs 给出的答案是让关联类型自己携带生命周期参数：
@@ -214,7 +214,7 @@ impl<'t> LendingIterator for ByteWindows<'t> {
 }
 ```
 
-注意实现中 `self.buf = tail` 的重赋值是合法的：`tail` 借用自 `'t`（原始切片），而非 `'a`，因此它的存活期不阻塞下一次 `next` 调用。这正是借用检查器对 GAT 迭代器"每次借用独立"的精确表达。
+注意实现中 `self.buf = tail` 的重赋值是合法的：`tail` 借用自 `'t`（原始切片（Slice）），而非 `'a`，因此它的存活期不阻塞下一次 `next` 调用。这正是借用检查器对 GAT 迭代器"每次借用独立"的精确表达。
 
 ---
 
@@ -227,7 +227,7 @@ GATs 与 HRTB 都涉及"对所有生命周期量化"，但量化的**位置**不
 | 量化对象 | **Trait 约束**：`for<'a> F: Fn(&'a T) -> R` | **类型构造器**：`Self::Item<'a>` |
 | 出现位置 | `where` 子句、函数签名 | Trait 定义体内 |
 | 返回值能否依赖 `'a` | ❌ 不能（`R` 中无法提及 `'a`） | ✅ 可以（`Item<'a> = &'a T`） |
-| 典型用途 | 回调、泛型函数参数 | 出借迭代器、流式 API、异步 trait |
+| 典型用途 | 回调、泛型函数参数 | 出借迭代器、流式 API、异步（Async） trait |
 
 ### 3.1 GAT 替代 HRTB 的判定场景
 
@@ -252,7 +252,7 @@ trait RefMap {
 fn for_each_line<F>(f: F) where F: for<'a> FnMut(&'a str) { /* ... */ }
 ```
 
-**场景 C：闭包（Closures） + HRTB 的推断死角** —— `for<'a> Fn(&'a T) -> &'a U` 这类签名中，闭包体推断经常失败（late-bound vs early-bound 生命周期问题）；若该 trait 是你自己定义的，改用 GAT 可绕开闭包推断问题，代价是失去自动的闭包实现，需要写具名结构体。
+**场景 C：闭包（Closures） + HRTB 的推断死角** —— `for<'a> Fn(&'a T) -> &'a U` 这类签名中，闭包体推断经常失败（late-bound vs early-bound 生命周期问题）；若该 trait 是你自己定义的，改用 GAT 可绕开闭包推断问题，代价是失去自动的闭包实现，需要写具名结构体（Struct）。
 
 > **经验法则**：**"借用出不去"用 HRTB，"借用要回家"用 GAT**。即：借用只在调用内部存在 → HRTB；借用要作为返回值交还给调用者 → GAT。
 
@@ -273,7 +273,7 @@ trait Service {
 }
 ```
 
-理解 GAT 就理解了 async trait 为什么不能直接做 trait object（`dyn Service`），以及为什么生态里 `async_trait` 宏要改返回 `Pin<Box<dyn Future>>`——boxed future 擦掉了 `Item<'a>` 中的生命周期参数，把 GAT 退化回普通关联类型。
+理解 GAT 就理解了 async trait 为什么不能直接做 trait object（`dyn Service`），以及为什么生态里 `async_trait` 宏（Macro）要改返回 `Pin<Box<dyn Future>>`——boxed future 擦掉了 `Item<'a>` 中的生命周期参数，把 GAT 退化回普通关联类型。
 
 ---
 
@@ -328,7 +328,7 @@ RFC 1598 明确排除了：高阶 trait（`trait Foo<F<_>>`）、类型算子作
 
 - 每个类型构造器有唯一解析点（配合 coherence 规则可判定）；
 - 归一化（normalization）不会引入无界递归之外的歧义；
-- 单态化（monomorphization）成本可控，保持零成本抽象。
+- 单态化（monomorphization）成本可控，保持零成本抽象（Zero-Cost Abstraction）。
 
 ```mermaid
 graph LR
@@ -350,7 +350,7 @@ graph LR
 |---|---|---|
 | 每个实现一个固定类型，不借用 self | 普通关联类型 `type Item;` | 最简单，`Iterator` 模式 |
 | 返回 `impl Trait` 且类型与生命周期无关 | `-> impl Iterator<...>` | 隐藏实现，零成本 |
-| 回调消费借用、返回值与借用无关 | HRTB `for<'a> Fn(&'a T)` | 闭包自动实现，推断最顺 |
+| 回调消费借用、返回值与借用无关 | HRTB `for<'a> Fn(&'a T)` | 闭包（Closures）自动实现，推断最顺 |
 | **返回值借用 self / 输入** | **GAT** | 唯一在 stable 上类型安全的表达 |
 | 流式/分块访问内部缓冲 | GAT（`type Chunk<'a> where Self: 'a`） | 零拷贝 |
 | 需要 trait object 动态分发 | 放弃 GAT：box 返回值或所有权化 | GAT 非对象安全 |
@@ -465,7 +465,7 @@ fn demo_streaming() {
 }
 ```
 
-**GAT 在此的价值**：`Token<'a> = &'a str` 明确表达"token 是缓冲区的视图"。若用普通关联类型，只能返回 `String`（每次拷贝一行）或退化为 `unsafe`。注意 `cursor` 的更新发生在借用 `line` 构造**之前**的顺序安排上：更新通过 `self.cursor`（`usize`，Copy）完成，不与 `&self.buf` 的不可变借用冲突——因为借用的是 `buf` 字段而修改的是 `cursor` 字段，字段级借用分离（disjoint field borrow）使这段代码通过检查。
+**GAT 在此的价值**：`Token<'a> = &'a str` 明确表达"token 是缓冲区的视图"。若用普通关联类型，只能返回 `String`（每次拷贝一行）或退化为 `unsafe`。注意 `cursor` 的更新发生在借用 `line` 构造**之前**的顺序安排上：更新通过 `self.cursor`（`usize`，Copy）完成，不与 `&self.buf` 的不可变借用（Mutable Borrow）冲突——因为借用的是 `buf` 字段而修改的是 `cursor` 字段，字段级借用分离（disjoint field borrow）使这段代码通过检查。
 
 ### 7.3 示例三：自引用借用 —— 数据库游标式访问
 
@@ -511,7 +511,7 @@ fn demo_cursor() {
 }
 ```
 
-**设计要点**：`decode_buf` 复用意味着上一行的 `Row<'a>` 与下一次 `fetch_next` 的 `&mut self` 借用冲突——编译器强制调用者先放下旧行再取新行，这正是"自引用借用"模式想要的语义：缓冲复用由类型系统保证无悬垂引用，无需运行时代价。
+**设计要点**：`decode_buf` 复用意味着上一行的 `Row<'a>` 与下一次 `fetch_next` 的 `&mut self` 借用冲突——编译器强制调用者先放下旧行再取新行，这正是"自引用借用"模式想要的语义：缓冲复用由类型系统（Type System）保证无悬垂引用，无需运行时（Runtime）代价。
 
 ---
 
@@ -534,7 +534,7 @@ GAT 的当前局限（1.97 仍在）与高频错误模式：
 | E0107 | `struct takes 0 generic arguments but 1 was supplied` | 把 GAT 当泛型类型用：`Item<'a>` 写在非投影位置 | 用全投影形式 `<T as Tr>::Item<'a>` |
 | E0309 / E0477 | `the parameter type ... may not live long enough` | 使用点未证明 `Self: 'a` | 在签名加 `T: 'a` 约束 |
 | 闭包推断失败 | `implementation of FnOnce is not general enough` | 用闭包实现 GAT-like 签名时 late-bound 推断死角 | 写具名 struct + 显式 impl |
-| 对象安全 | `the trait ... cannot be made into an object` | GAT 带泛型参数，`dyn` 无法实例化 | box 返回值 / 枚举分发 / 所有权化 |
+| 对象安全 | `the trait ... cannot be made into an object` | GAT 带泛型参数，`dyn` 无法实例化 | box 返回值 / 枚举（Enum）分发 / 所有权化 |
 
 ### 8.2 implied bounds 限制（1.97 仍在）
 

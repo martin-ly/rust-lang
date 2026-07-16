@@ -29,7 +29,7 @@
 
 | # | 特性 | 当前状态 | 稳定后归属节 | 跟踪链接 |
 |:---:|:---|:---|:---|:---|
-| 1 | `Panic[Hook]Info` 中 `Location<'_>` 生命周期改为 `'static` | stabilized in 1.98 beta | §1.1 | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
+| 1 | `Panic[Hook]Info` 中 `Location<'_>` 生命周期（Lifetimes）改为 `'static` | stabilized in 1.98 beta | §1.1 | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
 | 2 | mingw-w64 C 工具链更新 | stabilized in 1.98 beta | §1.2 | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
 | 3 | 移除 Solaris 上 `File::lock` 实现（语义错误） | stabilized in 1.98 beta | §1.3 | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
 | 4 | 移除 `-Zemscripten-wasm-eh` | stabilized in 1.98 beta | §1.4 | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |

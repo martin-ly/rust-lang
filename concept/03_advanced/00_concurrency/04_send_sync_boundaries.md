@@ -7,7 +7,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L3-L4
 > **受众**: [专家]
-> **权威来源**: 本文件为 `concept/` 权威页。Send/Sync 的**核心契约、auto trait 推导与手动 impl**统一收敛于 [Send 与 Sync：Auto Trait 的并发安全契约](02_send_sync_auto_traits.md)；本文聚焦**边界形态**（trait objects、闭包、async 状态机、`impl Trait`）的判定方法、反例与工程决策。
+> **权威来源**: 本文件为 `concept/` 权威页。Send/Sync 的**核心契约、auto trait 推导与手动 impl**统一收敛于 [Send 与 Sync：Auto Trait 的并发安全（Concurrency Safety）契约](02_send_sync_auto_traits.md)；本文聚焦**边界形态**（trait objects、闭包（Closures）、async 状态机、`impl Trait`）的判定方法、反例与工程决策。
 >
 > **层次定位**: L3 高级概念 / 并发子域 — 类型系统（Type System）与并发（Concurrency）的交叉点
 > **A/S/P 标记**: **S+P** — Structure + Procedure
@@ -15,7 +15,7 @@
 > **前置概念**: [Send 与 Sync：Auto Trait 的并发安全契约](02_send_sync_auto_traits.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Trait Objects / 分发机制](../../02_intermediate/00_traits/02_dispatch_mechanisms.md) · [Async/Await](../01_async/01_async.md)
 > **后置概念**: [并发模式](03_concurrency_patterns.md) · [跨平台并发](05_cross_platform_concurrency.md) · [Unsafe Rust](../02_unsafe/01_unsafe.md)
 > **前置依赖**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Smart Pointers](../../02_intermediate/02_memory_management/01_memory_management.md) · [内部可变性](../../02_intermediate/02_memory_management/02_interior_mutability.md)
-> **后置延伸**: [原子操作与内存序](06_atomics_and_memory_ordering.md) · [无锁编程](07_lock_free.md) · [RustBelt](../../04_formal/02_separation_logic/01_rustbelt.md)
+> **后置延伸**: [原子操作（Atomic Operations）与内存序](06_atomics_and_memory_ordering.md) · [无锁编程](07_lock_free.md) · [RustBelt](../../04_formal/02_separation_logic/01_rustbelt.md)
 > **跨层映射**: L3→L4 Send/Sync ↔ 分离逻辑资源分片 | L3→L6 Tokio `spawn` 与跨线程 executor
 > **定理链编号**: T-043 Send/Sync 边界判定完备性
 > **unsafe 语义对齐**: 提及 `unsafe impl Send/Sync` 时遵循核心语义：`unsafe` 不是关闭检查器，而是将"该类型跨线程真的安全"这一全局假设的证明责任转移给程序员。
@@ -69,7 +69,7 @@
 要判断一个复合类型是否能跨线程，可按以下四步递归展开：
 
 1. **先问基础形态**：它是普通复合类型、`dyn Trait`、闭包，还是 `async` 生成的 Future？
-2. **再问所有权/共享**：它涉及所有权的转移（`Send`），还是共享引用 `&T` 的并发访问（`Sync`）？
+2. **再问所有权（Ownership）/共享**：它涉及所有权的转移（`Send`），还是共享引用 `&T` 的并发访问（`Sync`）？
 3. **分解内部状态**：对闭包看捕获变量；对 async 状态机看跨 `await` 保有的变量；对 `dyn Trait` 看 vtable 上附加的 auto trait bound。
 4. **验证边界**：用 `thread::spawn`、`tokio::spawn` 或 `assert_send::<T>()` 做编译期边界测试；若失败，按决策矩阵改造类型或显式添加 `+ Send` bound。
 
@@ -165,7 +165,7 @@ fn main() {}
 
 ### 3.1 捕获变量决定闭包的 Send/Sync
 
-闭包（closure）在 Rust 中是一个**匿名结构体**，其字段就是捕获的环境变量。闭包是否 `Send`/`Sync`，完全由捕获变量决定：
+闭包（closure）在 Rust 中是一个**匿名结构体（Struct）**，其字段就是捕获的环境变量。闭包是否 `Send`/`Sync`，完全由捕获变量决定：
 
 ```text
 closure: Send  ⟺  所有按值/按引用捕获的变量都是 Send
@@ -245,7 +245,7 @@ fn demo(m: Mutex<i32>) {
 fn main() {}
 ```
 
-**修复策略**：在 await 之前 drop guard，或改用 `tokio::sync::Mutex`（其 `MutexGuard` 是 `Send`，但会引入异步 lock 开销）。
+**修复策略**：在 await 之前 drop guard，或改用 `tokio::sync::Mutex`（其 `MutexGuard` 是 `Send`，但会引入异步（Async） lock 开销）。
 
 ---
 
@@ -273,7 +273,7 @@ fn rc_stream() -> impl Iterator<Item = i32> + Send {
 fn main() {}
 ```
 
-错误根源：`from_fn` 闭包捕获了 `Rc<i32>`，导致生成的迭代器类型 `!Send`，无法兑现 `+ Send` 承诺。
+错误根源：`from_fn` 闭包捕获了 `Rc<i32>`，导致生成的迭代器（Iterator）类型 `!Send`，无法兑现 `+ Send` 承诺。
 
 ### 5.2 RPITIT 与 async fn in trait
 
@@ -340,7 +340,7 @@ fn main() {
 }
 ```
 
-**错误本质**：闭包匿名结构体中包含 `Rc<i32>` 字段，因此闭包整体 `!Send`。即使函数从未真正 spawn 线程，类型系统也会拒绝。
+**错误本质**：闭包匿名结构体中包含 `Rc<i32>` 字段，因此闭包整体 `!Send`。即使函数从未真正 spawn 线程，类型系统（Type System）也会拒绝。
 
 ### 反例 3：async fn 返回的 Future 不是 Send（`MutexGuard` 跨 await）
 
@@ -361,7 +361,7 @@ fn main() {
 }
 ```
 
-**错误本质**：Future 状态机在挂起点保存了 `MutexGuard<i32>`，而该类型 `!Send`。修复：缩小 guard 生命周期，使其在 await 前 drop。
+**错误本质**：Future 状态机在挂起点保存了 `MutexGuard<i32>`，而该类型 `!Send`。修复：缩小 guard 生命周期（Lifetimes），使其在 await 前 drop。
 
 ### 反例 4：`dyn Trait` 缺少 `+ Send` 导致的线程边界错误
 

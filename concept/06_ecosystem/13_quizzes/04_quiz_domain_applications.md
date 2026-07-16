@@ -36,7 +36,7 @@
 
 ### Q1. 🟢【单选】按 [区块链](../11_domain_applications/01_blockchain.md) §1.1，Rust 智能合约相对 Solidity/EVM 的本质安全增益是？
 
-- A. 运行时插入更多安全检查（类似 Solidity 0.8 checked math）
+- A. 运行时（Runtime）插入更多安全检查（类似 Solidity 0.8 checked math）
 - B. 让整类漏洞（重入、溢出、未初始化存储）在编译期成为不可类型化的程序——从"防御性编程"到"构造性安全"
 - C. 提供 gas 自动优化
 - D. 用 GC 统一管理合约内存
@@ -46,7 +46,7 @@
 
 **答案：B**
 
-**解析**：权威页的漏洞对照表：所有权 + `&mut` 独占访问 ⟹ 重入攻击在编译期不可表达；`u64`/`u128` 默认 overflow panic + `checked_add` 显式处理 ⟹ 整数溢出显式化；`Option<T>` + 编译期初始化检查 ⟹ 不存在未初始化存储指针。核心洞察是"让整类漏洞在编译期成为不可类型化的程序"。A 是 Solidity 的运行时路线；D 与区块链确定性执行要求矛盾（无 GC 才保证确定性）。
+**解析**：权威页的漏洞对照表：所有权（Ownership） + `&mut` 独占访问 ⟹ 重入攻击在编译期不可表达；`u64`/`u128` 默认 overflow panic + `checked_add` 显式处理 ⟹ 整数溢出显式化；`Option<T>` + 编译期初始化检查 ⟹ 不存在未初始化存储指针。核心洞察是"让整类漏洞在编译期成为不可类型化的程序"。A 是 Solidity 的运行时路线；D 与区块链确定性执行要求矛盾（无 GC 才保证确定性）。
 
 </details>
 
@@ -84,7 +84,7 @@ wasm32-wasip1 / wasip2  —— sys: wasi（WebAssembly System Interface）
 
 **答案：对**
 
-**解析**：按 [WebAssembly](../11_domain_applications/03_webassembly.md) §2.2，`#[wasm_bindgen]` 宏生成 JS 胶水层，自动处理三类互操作负担：字符串编码转换、对象引用（JS 对象句柄表）管理、Rust panic 到 JS Error 的异常转换。开发者只需在 Rust 函数/结构体/impl 上标注即可暴露给 JS。
+**解析**：按 [WebAssembly](../11_domain_applications/03_webassembly.md) §2.2，`#[wasm_bindgen]` 宏（Macro）生成 JS 胶水层，自动处理三类互操作负担：字符串编码转换、对象引用（JS 对象句柄表）管理、Rust panic 到 JS Error 的异常转换。开发者只需在 Rust 函数/结构体（Struct）/impl 上标注即可暴露给 JS。
 
 </details>
 
@@ -92,10 +92,10 @@ wasm32-wasip1 / wasip2  —— sys: wasi（WebAssembly System Interface）
 
 ### Q4. 🟡【多选】关于 Rust 区块链架构谱系，下列说法与权威页一致的有？（选出所有正确项）
 
-- A. Solana 的 Sealevel 引擎支持并行合约执行，运行时对账户状态做与 Rust 编译期借用检查同构的运行时借用检查
+- A. Solana 的 Sealevel 引擎支持并行合约执行，运行时对账户状态做与 Rust 编译期借用（Borrowing）检查同构的运行时借用检查
 - B. Polkadot 基于 Substrate 框架与异构分片（平行链）模型
 - C. Rust 合约的执行确定性来自无 GC 的内存管理——消除 GC 暂停与内存布局非确定性
-- D. 类型系统可以阻止 `block.timestamp` 被矿工/验证者操纵
+- D. 类型系统（Type System）可以阻止 `block.timestamp` 被矿工/验证者操纵
 
 <details>
 <summary>✅ 答案与解析</summary>
@@ -114,9 +114,9 @@ wasm32-wasip1 / wasip2  —— sys: wasi（WebAssembly System Interface）
 
 ### Q5. 🟢【单选】按 [游戏 ECS](../11_domain_applications/02_game_ecs.md) §1.1 的形式化对应，ECS 三要素的 Rust 表达是？
 
-- A. Entity=trait 对象、Component=枚举、System=宏
+- A. Entity=trait 对象、Component=枚举（Enum）、System=宏
 - B. Entity=`u64` 包装标识符、Component=`#[derive(Component)]` 的 POD struct、System=带 `Query` 参数的普通函数
-- C. Entity=全局变量、Component=闭包、System=线程
+- C. Entity=全局变量、Component=闭包（Closures）、System=线程
 - D. 三者都必须用 unsafe 实现
 
 <details>
@@ -162,7 +162,7 @@ fn render_system(q: Query<&Transform>) { /* ... */ }
 
 **答案：对**
 
-**解析**：[游戏 ECS](../11_domain_applications/02_game_ecs.md) §1.1 的 ER 图认知说明明确：System 经 World 间接查询 Component——World 作为中心枢纽组织 Entity/Component/Archetype 的关联。正因为组件访问必须经过 `Query` 声明，调度器才能静态分析访问冲突并安全并行化；若 System 直接持有组件引用，所有权与别名关系将无法在系统边界上静态判定。这也是 SoA/Archetype 存储缓存友好性的架构前提。
+**解析**：[游戏 ECS](../11_domain_applications/02_game_ecs.md) §1.1 的 ER 图认知说明明确：System 经 World 间接查询 Component——World 作为中心枢纽组织 Entity/Component/Archetype 的关联。正因为组件访问必须经过 `Query` 声明，调度器才能静态分析访问冲突并安全并行化；若 System 直接持有组件引用（Reference），所有权与别名关系将无法在系统边界上静态判定。这也是 SoA/Archetype 存储缓存友好性的架构前提。
 
 </details>
 
@@ -213,7 +213,7 @@ fn render_system(q: Query<&Transform>) { /* ... */ }
 | 选项 | 论据 |
 |:---|:---|
 | A | Rust 生态的模型与算子覆盖已全面超越 PyTorch/TensorFlow |
-| B | 零成本抽象 + 内存安全 + 无 GIL 限制，适合高并发低延迟推理与边缘部署；但生态（尤其训练侧）仍在追赶 Python |
+| B | 零成本抽象（Zero-Cost Abstraction） + 内存安全（Memory Safety） + 无 GIL 限制，适合高并发低延迟推理与边缘部署；但生态（尤其训练侧）仍在追赶 Python |
 | C | Rust 没有 GC，因此任何 ML 代码都自动更快 |
 | D | 选择 Rust 的主要原因是其动态类型更灵活 |
 
@@ -267,7 +267,7 @@ fn render_system(q: Query<&Transform>) { /* ... */ }
 
 - A. 编译器保证的内存安全（soundness）消除 C/C++ 中 UB 类缺陷的论证负担（访谈数据：约 90% 传统静态分析检查被编译器覆盖）
 - B. `Send`/`Sync` 并发约束在编译期排除数据竞争，支撑 freedom from interference 论证
-- C. 显式生命周期把 C++ 中"文档约定"的生命周期变为可机器检查
+- C. 显式生命周期（Lifetimes）把 C++ 中"文档约定"的生命周期变为可机器检查
 - D. Rust 的 async 模型在 AUTOSAR 中无任何工程权衡，可直接全面替代 C++20 `co_await`
 
 <details>

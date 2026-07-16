@@ -61,10 +61,10 @@
 
 本节用属性矩阵刻画线性逻辑的核心概念及其 Rust 对应：
 
-- **资源（resource）**：线性假设 = 恰用一次的资源 ⟷ Rust 的所有权值；经典逻辑假设可任意复制/丢弃 ⟷ `Copy` 类型是「放松的线性资源」；
-- **乘法合取 `⊗`（tensor）**：「同时拥有 A 和 B」——分离的合取 ⟷ 结构体的字段（各自独立所有权）；
+- **资源（resource）**：线性假设 = 恰用一次的资源 ⟷ Rust 的所有权（Ownership）值；经典逻辑假设可任意复制/丢弃 ⟷ `Copy` 类型是「放松的线性资源」；
+- **乘法合取 `⊗`（tensor）**：「同时拥有 A 和 B」——分离的合取 ⟷ 结构体（Struct）的字段（各自独立所有权）；
 - **线性蕴含 `⊸`（lollipop）**：「消费 A 产出 B」 ⟷ `fn(A) -> B` 中 A 被 move 的函数；
-- **指数 `!A`（of course）**：「A 可任意复制使用」 ⟷ `&T`（共享引用可复制）或 `T: Copy`——指数模态是线性逻辑与直觉逻辑的接口，正如 `Copy`/借用是所有权世界与「自由使用」世界的接口。
+- **指数 `!A`（of course）**：「A 可任意复制使用」 ⟷ `&T`（共享引用（Reference）可复制）或 `T: Copy`——指数模态是线性逻辑与直觉逻辑的接口，正如 `Copy`/借用（Borrowing）是所有权世界与「自由使用」世界的接口。
 
 矩阵的读法：左列逻辑概念、右列 Rust 机制、中间列「保持/断裂」标注——断裂处（如线性逻辑的 `?A` 在 Rust 无直接对应）即理论边界。
 
@@ -463,7 +463,7 @@ Rust 编译期的相位模型:
 - **正例 2（tensor 分解）**：`let (a, b) = pair;` ⟷ `A ⊗ B` 的消除规则——解构即资源分离；
 - **反例 1（复制禁令）**：`let y = x; let z = x;`（String）⟷ 线性逻辑中 contraction 规则的缺失——E0382 即「逻辑上假设重复使用」的编译诊断；
 - **反例 2（丢弃禁令）**：`let x = String::new();`（未使用警告）⟷ weakening 规则缺失——线性资源必须被消费（`drop` 是显式消费）；
-- **边界例**：`Rc`/`Arc` 恢复「可共享」 ⟷ 指数 `!` 的运行期实现——共享的代价从「逻辑规则」变为「引用计数 + 运行时检查」。
+- **边界例**：`Rc`/`Arc` 恢复「可共享」 ⟷ 指数 `!` 的运行期实现——共享的代价从「逻辑规则」变为「引用计数 + 运行时（Runtime）检查」。
 
 每组例子给出线性逻辑推导树与对应 Rust 代码的双栏对照。
 
@@ -804,7 +804,7 @@ h x = ...  -- m 是重数变量
 | **unsafe 支持** | 原生支持，可封装安全抽象 | 无 direct 对应（FFI 通过 C 调用） | 原生 `unsafe` 区域广泛存在 | 有限（`unsafe` 包） |
 | **生态状态** | 工业级，稳定 | 实验性，GHC 9.x+ 可用 | 工业级，标准化 | 工业级，稳定 |
 
-> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** Rust 的所有权系统可理解为嵌入在更大语言中的**仿射类型系统**，核心资源纪律在编译期强制执行。 ✅
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** Rust 的所有权系统可理解为嵌入在更大语言中的**仿射类型系统（Type System）**，核心资源纪律在编译期强制执行。 ✅
 > **[Bernardy et al. 2017, *Linear Haskell*](https://doi.org/10.1145/3158124)** Linear Haskell 通过重数（multiplicity）在现有类型系统中嵌入线性约束，是严格线性类型系统的工业级实验。 ✅
 > **[C++ Reference: Smart pointers](https://en.cppreference.com/w/cpp/memory)** C++ 无内置线性/仿射类型系统；`unique_ptr` 提供运行时（Runtime）所有权管理，但编译器不检查 use-after-move。 ✅
 > **来源: Go Spec: Memory Model** Go 无线性/仿射类型概念，内存安全（Memory Safety）完全依赖 GC，引用（Reference）有效性无编译期检查。 ✅

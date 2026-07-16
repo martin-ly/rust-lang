@@ -8,7 +8,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L3-L4
 > **受众**: [专家]
-> **权威来源**: 本文件为 `concept/` 权威页。Send/Sync 的**核心定义、判定规则与 auto trait 机制**统一收敛于本页；[并发模型](01_concurrency.md)、[原子操作与内存序](06_atomics_and_memory_ordering.md)、[无锁编程](07_lock_free.md) 保留各自的应用场景章节，通过链接指向本页，不重复契约推导。
+> **权威来源**: 本文件为 `concept/` 权威页。Send/Sync 的**核心定义、判定规则与 auto trait 机制**统一收敛于本页；[并发模型](01_concurrency.md)、[原子操作（Atomic Operations）与内存序](06_atomics_and_memory_ordering.md)、[无锁编程](07_lock_free.md) 保留各自的应用场景章节，通过链接指向本页，不重复契约推导。
 >
 > **层次定位**: L3 高级概念 / 并发子域 — 类型系统（Type System）与并发（Concurrency）的交叉点
 > **A/S/P 标记**: **S** — Structure（结构性契约）
@@ -82,9 +82,9 @@ pub unsafe auto trait Sync { /* 无方法，纯标记 */ }
 
 `Send` 与 `Sync` 的形式化契约是 Rust 并发安全的公理化表述：
 
-- **Send 契约**：`T: Send` ⟺ 「`T` 类型的值的所有权可以安全地转移到另一个线程」。「安全」的精确含义：转移后，原线程不再持有任何对该值的访问路径（move 语义保证），且值的析构发生在新线程不会违反任何线程亲和性约束（如 `Rc` 的计数增减非原子——跨线程析构会与原线程的计数操作竞争）。
+- **Send 契约**：`T: Send` ⟺ 「`T` 类型的值的所有权（Ownership）可以安全地转移到另一个线程」。「安全」的精确含义：转移后，原线程不再持有任何对该值的访问路径（move 语义保证），且值的析构发生在新线程不会违反任何线程亲和性约束（如 `Rc` 的计数增减非原子——跨线程析构会与原线程的计数操作竞争）。
 - **Sync 契约 ⟺ `&T: Send`**：`T: Sync` ⟺ 「`&T` 可以安全地跨线程共享」，即多个线程同时持有 `&T` 不会引入数据竞争。由于 `&T` 只提供只读访问，契约实质是「`T` 的所有经 `&T` 可达的修改路径都有同步保护」——`Cell`/`RefCell` 的修改路径无同步（`!Sync`），`Mutex`/`Atomic` 的有（`Sync`）。
-- **契约与线程 API 的连接点**：`thread::spawn<F: FnOnce() -> R + Send + 'static, R: Send + 'static>`——签名把契约写进了 API：闭包（含其捕获环境）与返回值都必须 `Send + 'static`。`'static` 约束排除「借用栈上数据的闭包」（除非用 `thread::scope` 的作用域线程，它把借用安全性编码为作用域 join 保证）。
+- **契约与线程 API 的连接点**：`thread::spawn<F: FnOnce() -> R + Send + 'static, R: Send + 'static>`——签名把契约写进了 API：闭包（Closures）（含其捕获环境）与返回值都必须 `Send + 'static`。`'static` 约束排除「借用（Borrowing）栈上数据的闭包」（除非用 `thread::scope` 的作用域线程，它把借用安全性编码为作用域 join 保证）。
 
 契约的使用方式：任何「这个类型能跨线程吗」的问题，先分解为 `Send`（移动）与 `Sync`（共享）两问，再按结构化规则（复合类型 ⟺ 全字段满足）递归判定——编译器执行的就是同一算法。
 
@@ -101,7 +101,7 @@ T: Send ∧ t₁ owns v  ⟹  t₂ 独占 v 后不产生数据竞争 ∧ drop(v)
 注意契约的三个隐含分量：
 
 - **转移后原线程失去访问权**——这由所有权（move 语义）保证，Send 只管"转移这一动作"的安全性；
-- **析构位置可迁移**：`Drop::drop` 可能在新线程执行，因此 `T: Send` 也要求 `drop` 不依赖线程局部状态（thread-local state）。这正是 `Rc<T>` 为 `!Send` 的深层原因之一：`Rc` 的 `drop` 要减非原子引用计数，换线程执行会破坏计数完整性；
+- **析构位置可迁移**：`Drop::drop` 可能在新线程执行，因此 `T: Send` 也要求 `drop` 不依赖线程局部状态（thread-local state）。这正是 `Rc<T>` 为 `!Send` 的深层原因之一：`Rc` 的 `drop` 要减非原子引用（Reference）计数，换线程执行会破坏计数完整性；
 - **不蕴含 Sync**：`T: Send` 只说"独占转移安全"，**不**说"共享引用安全"。反例：`Cell<u32>: Send`（转移独占没问题）但 `Cell<u32>: !Sync`（共享引用会数据竞争）。
 
 ### 2.2 Sync 契约 ⟺ &T: Send
@@ -125,7 +125,7 @@ T: Sync  ⟺  &T: Send
 
 直接推论：
 
-- `T: Sync` 不要求 `T` 自身可变——`&T` 只允许读，**除非** `T` 有内部可变性（Interior Mutability）。因此 `Sync` 的实质是"**内部可变性的线程安全性审查**"：`Mutex<T>` 用互斥锁使内部可变安全 ⟹ `Sync`；`RefCell<T>` 的运行时借用检查不是线程安全的 ⟹ `!Sync`。
+- `T: Sync` 不要求 `T` 自身可变——`&T` 只允许读，**除非** `T` 有内部可变性（Interior Mutability）。因此 `Sync` 的实质是"**内部可变性的线程安全性审查**"：`Mutex<T>` 用互斥锁使内部可变安全 ⟹ `Sync`；`RefCell<T>` 的运行时（Runtime）借用检查不是线程安全的 ⟹ `!Sync`。
 - `&mut T: Send` 当且仅当 `T: Send`（独占引用转移等价于值转移）；`&mut T: Sync` 当且仅当 `T: Sync`（透过 `&mut T` 再借用出 `&T`）。
 
 ### 2.3 契约与线程 API 的连接点
@@ -163,7 +163,7 @@ fn sync_contract_in_action() {
 
 - **结构化推导规则**：编译器对每个具体类型递归判定——`struct S { a: A, b: B }` 自动 `Send` ⟺ `A: Send` 且 `B: Send`（`Sync` 同理）。推导是「语法驱动」的：不需要任何标注，新类型定义完成即获得（或失去）两个标记。泛型类型 `Vec<T>: Send ⟺ T: Send`——推导沿类型参数传播。
 - **负实现（Negative Impl）**：`impl !Send for Rc<T> {}` 形式显式声明「永不实现」——标准库用它标记 `Rc`、裸指针等。负 impl 在 stable 不可写（`negative_impls` feature），它是编译器与标准库的保留机制。
-- **stable 上的 opt-out 惯用法**：用户类型需 `!Send` 时，嵌入 `PhantomData<Rc<()>>` 或 `PhantomData<*mut ()>`（裸指针 `!Send + !Sync`）使自动推导失败；反之，`unsafe impl Send for T {}` 是人工签署「我保证该类型满足契约」——孤儿规则允许此 impl 当且仅当类型在本地定义。
+- **stable 上的 opt-out 惯用法**：用户类型需 `!Send` 时，嵌入 `PhantomData<Rc<()>>` 或 `PhantomData<*mut ()>`（裸指针 `!Send + !Sync`）使自动推导失败；反之，`unsafe impl Send for T {}` 是人工签署「我保证该类型满足契约」——孤儿规则（Orphan Rule）允许此 impl 当且仅当类型在本地定义。
 
 判定一个类型的 `Send`/`Sync` 状态，按顺序查：有无显式（`unsafe`）impl → 有无负 impl（标准库类型）→ 结构化推导（字段递归）→ `PhantomData` 标记。四级机制覆盖了从「全自动」到「全人工」的完整干预谱。
 
@@ -277,7 +277,7 @@ unsafe impl Send for MyHandle {}
 
 边界总结：
 
-1. auto trait 的手动 `unsafe impl` 只能加在**本 crate 定义**的类型上（orphan 规则）；显式 impl **覆盖**自动推导结果（auto trait 的特性，不产生 E0119 冲突）——典型场景：含原始指针字段的类型（规则 3 使其默认 `!Send`/`!Sync`）需要手动翻案；
+1. auto trait 的手动 `unsafe impl` 只能加在**本 crate 定义**的类型上（orphan 规则）；显式 impl **覆盖**自动推导结果（auto trait 的特性，不产生 E0119 冲突）——典型场景：含原始指针（Raw Pointer）字段的类型（规则 3 使其默认 `!Send`/`!Sync`）需要手动翻案；
 2. 不能给外部 crate 的类型“补”Send/Sync——那等于单方面宣布别人的类型线程安全，破坏一致性（Coherence），编译器报 E0117；
 3. stable 上不能给用户类型加 negative impl——只能重构类型（加毒化字段，§3.3），或使用每日构建版的 `negative_impls`。
 
@@ -335,7 +335,7 @@ fn assert_send_dyn() {
 | `Mutex<T>` | `T: Send` 时 ✅ | `T: Send` 时 ✅ | 互斥锁为内部可变性建立 happens-before（`unsafe impl` 翻案） |
 | `RwLock<T>` | `T: Send+Sync` 时 ✅ | `T: Send+Sync` 时 ✅ | 读锁共享 ⟹ 并发 `&T` ⟹ 需 `T: Sync`；写锁独占 ⟹ 需 `T: Send` |
 | `AtomicU32` 等原子类型 | ✅ | ✅ | 硬件级原子定序，内部可变性天然线程安全 |
-| `*const T` / `*mut T` | ❌ | ❌ | 规则 3：编译器不知指向数据的所有权与生命周期，保守拒绝 |
+| `*const T` / `*mut T` | ❌ | ❌ | 规则 3：编译器不知指向数据的所有权与生命周期（Lifetimes），保守拒绝 |
 | `UnsafeCell<T>` | `T: Send` 时 ✅ | ❌ | 内部可变性的地基否定（§4） |
 | `mpsc::Sender<T>` | `T: Send` 时 ✅ | ❌ | 发送端可克隆转移；共享 `&Sender` 内部用 `Rc` 风格状态（standard 实现） |
 | `mpsc::Receiver<T>` | `T: Send` 时 ✅ | ❌ | 单消费者语义 |
@@ -558,7 +558,7 @@ flowchart TD
 
 - A. `Rc` 没有实现 `Debug`
 - B. `Rc` 是 `!Send`：其引用计数非原子，转移所有权到另一线程（含在新线程执行 `drop` 减计数）会破坏计数完整性
-- C. `thread::spawn` 禁止捕获任何智能指针
+- C. `thread::spawn` 禁止捕获任何智能指针（Smart Pointer）
 - D. `Rc` 只能用于 `async` 上下文
 
 <details>

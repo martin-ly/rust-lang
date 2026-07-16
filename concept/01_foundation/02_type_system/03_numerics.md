@@ -107,10 +107,10 @@ mindmap
 Rust 数值类型的设计核心是**显式性**：所有溢出、截断、精度损失都必须显式选择语义，没有 C 式的隐式转换。三个层次：
 
 - **整数**：`i8`–`i128`/`u8`–`u128`/`isize`/`usize`——`usize` 是指针宽度的寻址类型（索引、长度专用），溢出语义四选一：debug 下 panic、release 下回绕（wrapping）、或显式 `wrapping_/checked_/saturating_/overflowing_` 方法族；
-- **浮点**：`f32`/`f64` 实现 IEEE 754——`NaN != NaN` 导致 `f64` 只实现 `PartialEq` 不实现 `Eq`（`total_cmp` 提供全序），这是「类型系统编码数学事实」的典型案例；
+- **浮点**：`f32`/`f64` 实现 IEEE 754——`NaN != NaN` 导致 `f64` 只实现 `PartialEq` 不实现 `Eq`（`total_cmp` 提供全序），这是「类型系统（Type System）编码数学事实」的典型案例；
 - **字面量与推断**：`42` 默认推断为 `i32`，后缀标注（`42u8`）或上下文驱动推断；无后缀且无法推断时编译报错而非随意默认。
 
-判定准则：金额用定点整数（分）或 `rust_decimal`，索引用 `usize`，协议字段用定宽类型——`i32` 默认只适合无约束计数。
+判定准则：金额用定点整数（分）或 `rust_decimal`，索引用（Reference） `usize`，协议字段用定宽类型——`i32` 默认只适合无约束计数。
 
 ### 1.1 整数类型全景
 
@@ -244,7 +244,7 @@ a.overflowing_add(b);  // (44, true)
 
 ## 二、技术细节
 
-本节展开「数值类型与运算：从整数到浮点的完整图景」的技术细节：类型转换与 as、Wrapping、Saturating、Checked、Overflo…、NonZero 类型与优化与SIMD 与向量化。重点是类型签名、所有权语义与编译期约束如何相互作用，而不是 API 罗列；每个小节给出可编译的最小示例，并标注对应反例的失败规则。读完后应能解释：为什么这种写法能通过编译，而那种写法会被借用检查器或类型系统拒绝。
+本节展开「数值类型与运算：从整数到浮点的完整图景」的技术细节：类型转换与 as、Wrapping、Saturating、Checked、Overflo…、NonZero 类型与优化与SIMD 与向量化。重点是类型签名、所有权（Ownership）语义与编译期约束如何相互作用，而不是 API 罗列；每个小节给出可编译的最小示例，并标注对应反例的失败规则。读完后应能解释：为什么这种写法能通过编译，而那种写法会被借用（Borrowing）检查器或类型系统拒绝。
 
 ### 2.1 类型转换与 as
 >
@@ -1130,13 +1130,13 @@ fn main() {
 | 类型谱系 | `i8`–`i128` / `u8`–`u128` / `isize` / `usize` / `f32` / `f64` | 固定宽度 + 指针宽度整数 |
 | 溢出语义 | debug 构建 panic，release 默认环绕（two's complement） | Reference 算术溢出规则 |
 | 显式控制 | `checked_` / `saturating_` / `wrapping_` / `overflowing_` 四族方法 | 标准库 API |
-| 字面量推断 | 无后缀整数字面量默认 `i32`，浮点默认 `f64` | 类型推断回退规则 |
+| 字面量推断 | 无后缀整数字面量默认 `i32`，浮点默认 `f64` | 类型推断（Type Inference）回退规则 |
 | 浮点模型 | IEEE 754-2008；`NaN` 破坏全序，仅实现 `PartialOrd` | `f32`/`f64` 文档 |
 
 ## 🔗 概念关系
 
 - **上位（is-a）**：[Type System](01_type_system.md) 的标量类型子族。
-- **下位（实例）**：`u32`、`i64`、`f64` 等具体宽度类型及 const 泛型 `[T; N]` 实例见本页「数值类型矩阵」。
+- **下位（实例）**：`u32`、`i64`、`f64` 等具体宽度类型及 const 泛型（Generics） `[T; N]` 实例见本页「数值类型矩阵」。
 - **对偶**：与变长堆数据相对（定长栈值 vs 堆缓冲），见 [Collections](../05_collections/01_collections.md)。
 - **组合**：溢出检查与 [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) 组合（`checked_add` 返回 `Option`）。
 - **依赖**：无开销数值抽象依赖 [Zero Cost Abstractions](../00_start/02_zero_cost_abstractions.md)。

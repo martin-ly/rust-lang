@@ -241,7 +241,7 @@ Cargo 内部的 `crates-io` crate 在 1.97 不再依赖 `curl`，网络请求统
 
 > **关联阅读**: [Cargo 1.96 新特性](04_cargo_196_features.md) · [Cargo Configuration](18_cargo_configuration.md) · [Rust 1.97 稳定特性](../../07_future/00_version_tracking/rust_1_97_stabilized.md)
 >
-> **向下对比（L5）**: [Rust vs Go — 工具链与模块代理的工程哲学对比](../../05_comparative/01_systems_languages/03_rust_vs_go.md)（Cargo vs Go Modules 在依赖解析与供应链治理上的设计取舍）
+> **向下对比（L5）**: [Rust vs Go — 工具链与模块（Module）代理的工程哲学对比](../../05_comparative/01_systems_languages/03_rust_vs_go.md)（Cargo vs Go Modules 在依赖解析与供应链治理上的设计取舍）
 
 ---
 

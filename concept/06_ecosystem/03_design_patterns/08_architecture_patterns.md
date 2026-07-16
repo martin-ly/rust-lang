@@ -369,7 +369,7 @@ Rust 的映射极为直接：
 | 驱动端口（Driving Port） | 应用层的 `trait UseCase` 或入口函数 |
 | 从动端口（Driven Port） | 核心定义的 `trait Repository` / `trait EventBus` |
 | 适配器 | `PgRepository`（sqlx 实现）、`KafkaEventBus` 等具体类型 |
-| 依赖注入 | 构造函数注入泛型参数 `fn new<R: Repository>(repo: R)` |
+| 依赖注入 | 构造函数注入泛型（Generics）参数 `fn new<R: Repository>(repo: R)` |
 
 关键判定：端口 trait 必须定义在领域 crate 内，适配器实现放在 infra crate——方向反了（领域 import infra 的 trait）是 Rust 新手最常见的六边形架构违规。
 
@@ -536,7 +536,7 @@ async fn main() {
 
 - **层次职责**: 领域模型放纯函数式业务规则（无 I/O）；领域服务放跨实体逻辑；应用层编排用例；基础设施实现仓储、消息等接口。
 - **依赖倒置落点**: 内层定义接口（port），外层实现（adapter）——Rust 中用 trait 表达 port，用泛型或 `Arc<dyn Trait>` 注入 adapter。
-- **判定依据**: 领域代码中出现 `tokio`/`sqlx` 等具体依赖即为违规；Rust 的模块系统 + crate 边界可把这条规则变成编译期强制（领域 crate 不依赖基础设施 crate）。
+- **判定依据**: 领域代码中出现 `tokio`/`sqlx` 等具体依赖即为违规；Rust 的模块（Module）系统 + crate 边界可把这条规则变成编译期强制（领域 crate 不依赖基础设施 crate）。
 
 ### 5.1 层次结构
 >
@@ -1046,7 +1046,7 @@ async fn optimized_handler(event: LambdaEvent<OrderRequest>) -> Result<Value, Er
 
 ## 十、边界测试
 
-边界测试把架构约束转化为可验证的失败用例：前两类利用 Rust 的类型系统与模块可见性在编译期拦截依赖方向违规（适配器绕过端口、跨层循环依赖），第三类则必须在运行时用超时与状态机验证一致性。三类测试对应架构治理的三道防线——编译期靠 `compile_fail` 用例固化规则，运行期靠故障注入暴露假设缺口。
+边界测试把架构约束转化为可验证的失败用例：前两类利用 Rust 的类型系统与模块可见性在编译期拦截依赖方向违规（适配器绕过端口、跨层循环依赖），第三类则必须在运行时用超时与状态机验证一致性（Coherence）。三类测试对应架构治理的三道防线——编译期靠 `compile_fail` 用例固化规则，运行期靠故障注入暴露假设缺口。
 
 ### 10.1 边界测试：适配器绕过端口直接依赖核心（编译错误）
 

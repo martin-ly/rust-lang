@@ -10,7 +10,7 @@
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。const generics 的**语法、stable 边界与判定规则**统一收敛于本页；[泛型系统总览](01_generics.md) 保留泛型参数空间的整体介绍，[类型级编程](03_type_level_programming.md) 保留 Peano/typenum 等编码技术，均通过链接指向本页。
 >
-> **层次定位**: L2 进阶概念 / 泛型子域 — 类型参数（type parameter）与值参数（value parameter）的交叉
+> **层次定位**: L2 进阶概念 / 泛型（Generics）子域 — 类型参数（type parameter）与值参数（value parameter）的交叉
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×App — 应用常量参数消除数组大小的抽象泄漏
 > **前置概念**: [Generics](01_generics.md) · [Traits](../00_traits/01_traits.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md)
@@ -116,7 +116,7 @@ fn motivation_demo() {
 核心收益：
 
 1. **数组抽象**：`[T; N]` 泛型化，告别宏批量生成 impl（std 自身曾用宏为 0..=32 长度实现 `Debug`/`PartialEq` 等 trait）；
-2. **维度即类型**：矩阵、SIMD 通道数、页大小等"值级不变量"进入类型系统，编译期拒绝维度不匹配；
+2. **维度即类型**：矩阵、SIMD 通道数、页大小等"值级不变量"进入类型系统（Type System），编译期拒绝维度不匹配；
 3. **零成本**：const 参数在单态化（Monomorphization）时被替换为字面常量，生成代码与手写定长版本逐指令相同。
 
 ## 二、语法与允许的标量类型边界
@@ -155,7 +155,7 @@ fn bool_and_char<const FLAG: bool, const CH: char>() {}
 
 允许：`u8 u16 u32 u64 u128 usize` / `i8 i16 i32 i64 i128 isize` / `bool` / `char`，共 14 种整数 + `bool` + `char`。
 
-禁止（stable）：浮点（无结构相等性（structural equality），`0.0 == -0.0` 等问题）、`&str`、引用、以及任何 ADT（struct/enum）。ADT 作为 const 参数由 `adt_const_params`（特性门，截至 1.97.0 仍未稳定）解锁，要求类型派生 `PartialEq + Eq + StructuralPartialEq + StructuralEq`。
+禁止（stable）：浮点（无结构相等性（structural equality），`0.0 == -0.0` 等问题）、`&str`、引用（Reference）、以及任何 ADT（struct/enum）。ADT 作为 const 参数由 `adt_const_params`（特性门，截至 1.97.0 仍未稳定）解锁，要求类型派生 `PartialEq + Eq + StructuralPartialEq + StructuralEq`。
 
 **排序规则**：const 参数可以在类型参数之后声明；调用时按位置或推断提供：
 
@@ -508,7 +508,7 @@ fn scaled_demo() {
 
 | 文件 | 保留内容 | 与本页关系 |
 |:---|:---|:---|
-| [01_generics.md](01_generics.md) | 泛型参数空间总览（类型/生命周期/const/关联类型）、单态化全景 | 引用本页作为 const 参数的深度权威页 |
+| [01_generics.md](01_generics.md) | 泛型参数空间总览（类型/生命周期（Lifetimes）/const/关联类型）、单态化全景 | 引用本页作为 const 参数的深度权威页 |
 | [03_type_level_programming.md](03_type_level_programming.md) | Peano 数、typenum、HList、类型级计算编码 | const generics 表达力不足时的替代方案，边界对照指向本页 §8 |
 | [11_const_trait_impl_preview.md](../../07_future/02_preview_features/06_const_trait_impl_preview.md) | `const trait`/`const fn` 在 trait 上下文的效果（const 计算的另一轴） | 互补：const generics 是"值级参数"，const trait 是"效果级参数" |
 

@@ -430,7 +430,7 @@ wasm-pack test --headless --firefox
 3. **利用新特性**
    - 使用 MaybeUninit 优化内存管理
    - 使用 NonZero::div_ceil 优化计算
-   - 使用迭代器特化优化性能
+   - 使用迭代器（Iterator）特化优化性能
    - 使用 rotate_right 优化数据操作
 
 **详细指南**: [Rust 1.92.0 WASM 迁移指南](/crates/c12_wasm/docs/11_rust_192_migration_guide.md)

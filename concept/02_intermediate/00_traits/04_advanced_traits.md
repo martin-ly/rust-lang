@@ -269,7 +269,7 @@ impl<'a, T> LendingIterator for MutWindows<'a, T> {
 - **默认类型参数**：`trait Add<Rhs = Self>`——减少常见情况的标注噪音，同时保留扩展点（`impl Add<u64> for u32`）；运算符 trait 大量使用此模式；
 - **完全限定语法**：`<T as Trait>::method()` 在多个 trait 提供同名方法时消歧——`Type::method` 的解析顺序是「固有方法 > trait 方法（按导入可见性）」，歧义时必须完全限定；这也是调用「未导入 trait 的方法」失败（E0599）时的诊断方向。
 
-进阶补充：GAT（`type Item<'a> where Self: 'a;`）使关联类型可带生命周期——lending iterator 等模式由此解锁，是 1.65 后 trait 设计的新自由度。
+进阶补充：GAT（`type Item<'a> where Self: 'a;`）使关联类型可带生命周期（Lifetimes）——lending iterator 等模式由此解锁，是 1.65 后 trait 设计的新自由度。
 
 ### 2.1 关联类型 vs 泛型参数
 >
@@ -423,7 +423,7 @@ pub trait Service = Fn(Request) -> Response + Send + Sync + 'static;
 - **反命题 1：「关联类型总是优于泛型参数」** —— 过度。关联类型强制「每类型唯一实现」，这在需要多实现时成为枷锁——`From<T>` 若用关联类型就不可能（`String` 需要 `From<&str>`、`From<char>` 等多实现）。判定准则：实现唯一性是否是**语义要求**（Iterator 的 Item 是）——是则关联类型，否则泛型参数。
 - **反命题 2：「`dyn Trait` 与泛型可以混用无代价」** —— 不准确。trait 对象要求对象安全（无泛型方法、无 `Self` 返回、无关联常量之外的常量），带 GAT 或泛型方法的 trait 无法 `dyn` 化——设计 trait 时要提前决定「静态分发专用」还是「需要 trait 对象」，后者牺牲表达能力。
 
-边界极限小节量化：trait 向上转型（`dyn SubTrait` → `dyn SuperTrait`，1.86 起稳定）、特化（specialization，nightly 的健全性争议）、以及 trait 一致性检查在复杂约束下的拒绝案例。
+边界极限小节量化：trait 向上转型（`dyn SubTrait` → `dyn SuperTrait`，1.86 起稳定）、特化（specialization，nightly 的健全性争议）、以及 trait 一致性（Coherence）检查在复杂约束下的拒绝案例。
 
 ### 4.1 反命题树
 >
@@ -551,7 +551,7 @@ graph TD
 - [Generics](../01_generics/01_generics.md) — 泛型系统
 - [Type System](../../01_foundation/02_type_system/01_type_system.md) — 类型系统（Type System）
 - [Type Inference](../../04_formal/00_type_theory/03_type_inference.md) — 类型推断（Type Inference）
-- [Send 与 Sync：Auto Trait 的并发安全契约](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md) — marker/auto trait 与负实现的权威页
+- [Send 与 Sync：Auto Trait 的并发安全（Concurrency Safety）契约](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md) — marker/auto trait 与负实现的权威页
 
 ---
 
@@ -581,7 +581,7 @@ graph TD
 
 ## 十、边界测试：高级 Trait 的编译错误
 
-本节把「高级 Trait 主题：从关联类型到特化」的规则推到编译器与运行时的边界上逐一实测：边界测试：关联类型与泛型参数冲突（编译错误）、边界测试：特殊化（Specialization）的不稳定性（编译错误）、边界测试：关联常量与泛型参数的交互（编译错误）、边界测试：trait alias 与 bound 的冗余（编译错误）等方面。每个用例标注预期结果（编译错误 / 运行时 panic / 逻辑错误），并用 rustc 1.97 验证：能复现的给出诊断信息与触发条件，不能复现的说明原因。这些用例共同回答一个问题——规则在极限处是否仍然成立，以及违反时编译器能否兜底。
+本节把「高级 Trait 主题：从关联类型到特化」的规则推到编译器与运行时（Runtime）的边界上逐一实测：边界测试：关联类型与泛型参数冲突（编译错误）、边界测试：特殊化（Specialization）的不稳定性（编译错误）、边界测试：关联常量与泛型参数的交互（编译错误）、边界测试：trait alias 与 bound 的冗余（编译错误）等方面。每个用例标注预期结果（编译错误 / 运行时 panic / 逻辑错误），并用 rustc 1.97 验证：能复现的给出诊断信息与触发条件，不能复现的说明原因。这些用例共同回答一个问题——规则在极限处是否仍然成立，以及违反时编译器能否兜底。
 
 ### 10.1 边界测试：关联类型与泛型参数冲突（编译错误）
 
@@ -1026,7 +1026,7 @@ trait Foo {
 | 属性 | 取值 / 判定 | 依据 |
 |---|---|---|
 | 关联类型 | 每个 impl 唯一绑定，避免泛型参数爆炸 | trait 文法 |
-| GAT | 泛型关联类型允许借用返回（Rust 1.65 稳定） | RFC 1598 |
+| GAT | 泛型关联类型允许借用（Borrowing）返回（Rust 1.65 稳定） | RFC 1598 |
 | 特化 | specialization 仍为 nightly 特性 | 跟踪特性 |
 | 对象安全 | `dyn Trait` 要求方法无泛型参数、无 `Self` 返回等约束 | 对象安全规则 |
 | 超 trait | `trait A: B` 声明隐含约束 | 继承规则 |
@@ -1035,6 +1035,6 @@ trait Foo {
 
 - **上位（is-a）**：[Traits](01_traits.md) trait 系统的进阶层。
 - **下位（实例）**：对象擦除实例见 [Type Erasure](../../03_advanced/06_low_level_patterns/03_type_erasure.md)。
-- **对偶**：与 [Generics](../01_generics/01_generics.md) 单态化静态分派相对（`dyn` 动态分派）。
+- **对偶**：与 [Generics](../01_generics/01_generics.md) 单态化（Monomorphization）静态分派相对（`dyn` 动态分派）。
 - **组合**：与 [Derive Traits](06_derive_traits.md) 组合自动生成基础 impl。
 - **依赖**：关联类型求值依赖 [Type-Level Programming](../01_generics/03_type_level_programming.md)。

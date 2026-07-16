@@ -230,7 +230,7 @@ async fn datafusion_query() -> Result<(), DataFusionError> {
 
 ## 四、统计分析与数值计算
 
-Rust 的数值计算生态呈“基础扎实、高层薄弱”格局：线性代数有 `nalgebra`（泛型矩阵，几何/图形见长）与 `ndarray`（N 维数组，NumPy 风格）；统计生态分散在 `statrs`（分布函数与统计检验）、`polars`（DataFrame，Lazy API + 表达式优化是核心竞争力）等 crate。与 Python 的差距在统计建模高层（无 statsmodels 等价物），因此现实路径是 Rust 做数据管道与性能热路径，建模仍借 PyO3 回调 Python。
+Rust 的数值计算生态呈“基础扎实、高层薄弱”格局：线性代数有 `nalgebra`（泛型（Generics）矩阵，几何/图形见长）与 `ndarray`（N 维数组，NumPy 风格）；统计生态分散在 `statrs`（分布函数与统计检验）、`polars`（DataFrame，Lazy API + 表达式优化是核心竞争力）等 crate。与 Python 的差距在统计建模高层（无 statsmodels 等价物），因此现实路径是 Rust 做数据管道与性能热路径，建模仍借 PyO3 回调 Python。
 
 ### 4.1 统计生态
 
@@ -284,7 +284,7 @@ fn linear_regression(x: &DMatrix<f64>, y: &DVector<f64>) -> Result<DVector<f64>,
 可视化与交互生态的现实状态（2026）：
 
 - **绘图**：`plotters`（纯 Rust 位图/SVG 后端，静态图）、`egui_plot`（交互式实时图）、`charming`（ECharts 绑定，Web 仪表板）；成熟度远低于 matplotlib，复杂出版级图表仍建议 Python 出图。
-- **Jupyter 内核**：`evcxr_jupyter` 提供 Rust REPL 内核，支持 `:dep` 声明依赖与变量持久化——可用于教学与 API 探索，但编译延迟（每次执行重编译依赖闭包）使其不适合快速迭代探索。
+- **Jupyter 内核**：`evcxr_jupyter` 提供 Rust REPL 内核，支持 `:dep` 声明依赖与变量持久化——可用于教学与 API 探索，但编译延迟（每次执行重编译依赖闭包（Closures））使其不适合快速迭代探索。
 
 务实策略：Rust 做数据处理产出 Parquet/Arrow，Python（marimo/Jupyter）消费做可视化——Arrow IPC 零拷贝跨语言传递使该组合几乎无序列化成本。
 
@@ -408,7 +408,7 @@ fn my_data science_lib(_py: Python, m: &PyModule) -> PyResult<()> {
 
 ## 七、反命题与边界
 
-“Rust 将取代 Python 做数据科学”是典型过度推断。反命题树给出反驳：数据科学的价值在探索速度而非运行速度，Jupyter + pandas 的交互反馈循环 Rust 短期无法复制；GPU 生态（CUDA/cuDNN 绑定）与模型生态（PyTorch）的锁定效应远大于语言优势。边界极限诚实标注 Rust 的甜区：ETL 管道（polars 已超越 pandas 性能）、特征工程服务化、Python 扩展模块加速——即“Python 旁边”而非“Python 替代”。
+“Rust 将取代 Python 做数据科学”是典型过度推断。反命题树给出反驳：数据科学的价值在探索速度而非运行速度，Jupyter + pandas 的交互反馈循环 Rust 短期无法复制；GPU 生态（CUDA/cuDNN 绑定）与模型生态（PyTorch）的锁定效应远大于语言优势。边界极限诚实标注 Rust 的甜区：ETL 管道（polars 已超越 pandas 性能）、特征工程服务化、Python 扩展模块（Module）加速——即“Python 旁边”而非“Python 替代”。
 
 ### 7.1 反命题树
 

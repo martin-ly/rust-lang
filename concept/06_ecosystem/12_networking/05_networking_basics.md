@@ -510,7 +510,7 @@ fn main() -> std::io::Result<()> {
 
 DNS 解析是几乎所有网络客户端的隐藏依赖，标准库与专用库的能力差距决定了选型：
 
-- **标准库 `ToSocketAddrs`**: 接口极简（`"example.com:80".to_socket_addrs()`），但底层是阻塞的 `getaddrinfo` 系统调用，无超时控制、无缓存、无 SRV/TXT 记录支持——在异步运行时中会阻塞整个 worker 线程。
+- **标准库 `ToSocketAddrs`**: 接口极简（`"example.com:80".to_socket_addrs()`），但底层是阻塞的 `getaddrinfo` 系统调用，无超时控制、无缓存、无 SRV/TXT 记录支持——在异步运行时（Runtime）中会阻塞整个 worker 线程。
 - **hickory-dns（原 trust-dns）**: 纯 Rust 异步解析器，支持 DoH/DoT、SRV 记录、自定义缓存与超时，是生产服务的标准选择。
 
 判定依据：原型/同步小程序用标准库即可；异步服务、需要 DNS 观测性或加密 DNS 的场景必须用 hickory-dns，并通过 `tokio` 的 `Hyper`/`reqwest` 连接器接入。
@@ -785,7 +785,7 @@ fn main() {
 
 ## 7. 实战案例
 
-两个实战案例分别代表服务端与客户端两类基本功：简单 HTTP 服务器（解析请求行与头、构造响应、处理 keep-alive）覆盖协议解析与连接生命周期；端口扫描器（并发 connect 探测、超时控制、结果聚合）覆盖并发模式与错误分类。两个案例都只用 std + tokio 不依赖框架，目的是建立对框架之下机制的理解——能手写这两个案例，使用 axum/reqwest 时才知道框架替你做了什么。
+两个实战案例分别代表服务端与客户端两类基本功：简单 HTTP 服务器（解析请求行与头、构造响应、处理 keep-alive）覆盖协议解析与连接生命周期（Lifetimes）；端口扫描器（并发 connect 探测、超时控制、结果聚合）覆盖并发模式与错误分类。两个案例都只用 std + tokio 不依赖框架，目的是建立对框架之下机制的理解——能手写这两个案例，使用 axum/reqwest 时才知道框架替你做了什么。
 
 ### 7.1 简单 HTTP 服务器
 
@@ -979,7 +979,7 @@ fn main() {
 
 ## ⚠️ 反例与陷阱
 
-本节以 `Arc<TcpStream>` 直接写入为反例，展示共享所有权下的可变性约束与 `try_clone` 修正。
+本节以 `Arc<TcpStream>` 直接写入为反例，展示共享所有权（Ownership）下的可变性约束与 `try_clone` 修正。
 
 ### 反例：经 `Arc` 共享后直接写 `TcpStream`（rustc 1.97.0 实测）
 

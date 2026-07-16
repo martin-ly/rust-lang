@@ -125,7 +125,7 @@ graph LR
 - core 子集**新增 ISO 26262 ASIL B 认证**（此前仅 IEC 61508）；
 - core 认证文档体系扩充（Safety Plan、Safety Report、Norm Mapping 全套）。
 
-认证子集以符号级清单公开：开发分支文档列出 core 1.98.0 下 **8,866 个认证符号**（2026-07-12 对 `safety-report/subset.html` 实测计数；该清单随版本增长）。未列入清单的 core API 即未认证——编译可用，但安全案例中不能引用其认证证据。
+认证子集以符号级清单公开：开发分支文档列出 core 1.98.0 下 **8,866 个认证符号**（2026-07-12 对 `safety-report/subset.html` 实测计数；该清单随版本增长）。未列入清单的 core API 即未认证——编译可用，但安全案例中不能引用（Reference）其认证证据。
 
 ### 3.2 新增认证目标与 `*-ferrocene-*` target
 
@@ -148,7 +148,7 @@ graph LR
 | `core` 认证子集（符号级清单，ASIL B / SIL 2） | `core` 清单外 API、`alloc` |
 | 合格目标矩阵内的代码生成 | 矩阵外 target（Tier 差异由上游定义，Ferrocene 不继承） |
 | `*-ferrocene-*` target 的认证 panic 实现 | 第三方 crate（crates.io 生态无认证包，见 [认证包清单页](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md)） |
-| Qualification Report 证据链（需求追溯、测试、已知问题） | 异步运行时、proc-macro 生态 |
+| Qualification Report 证据链（需求追溯、测试、已知问题） | 异步（Async）运行时（Runtime）、proc-macro 生态 |
 
 > **边界要点**：Ferrocene 解决「编译器可信 + core 可信」；应用层 crate、FFI 边界、async 运行时的安全论证仍由项目自行承担——这正是 SCRC（§5.2）存在的理由。
 

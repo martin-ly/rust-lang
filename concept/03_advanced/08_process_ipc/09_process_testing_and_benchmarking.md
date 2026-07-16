@@ -201,7 +201,7 @@ flowchart LR
 
 - [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
 - [高级进程管理](02_advanced_process_management.md)
-- [异步进程管理](03_async_process_management.md)
+- [异步（Async）进程管理](03_async_process_management.md)
 - [进程性能工程](08_process_performance_engineering.md)
 - [Rust 测试策略](../../06_ecosystem/09_testing_and_quality/01_testing_strategies.md)
 - [基准测试](../../06_ecosystem/09_testing_and_quality/04_benchmarking.md)
@@ -262,7 +262,7 @@ flowchart LR
 
 ## ⚠️ 反例与陷阱：浮点精确相等断言（运行时陷阱）
 
-**反例**（运行时陷阱，代码可通过编译）：
+**反例**（运行时（Runtime）陷阱，代码可通过编译）：
 
 ```rust
 #[test]

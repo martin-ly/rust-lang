@@ -263,11 +263,11 @@ Rust 的类型推断机制:
 
 类型系统进阶的三个技术细节，分别扩展「抽象表达力」的不同轴向：
 
-- **`impl Trait` 在参数位置**：参数位的 `impl Trait` 是匿名泛型参数的语法糖——`fn f(x: impl Display)` 等价于 `fn f<T: Display>(x: T)`。调用方选类型、每次调用可不同类型、单态化。与返回位 `impl Trait`（存在类型，实现方选类型、全函数唯一类型）构成对偶；判定用哪个位置，问「类型由谁决定」——调用方决定用参数位，实现细节需隐藏用返回位。
+- **`impl Trait` 在参数位置**：参数位的 `impl Trait` 是匿名泛型参数的语法糖——`fn f(x: impl Display)` 等价于 `fn f<T: Display>(x: T)`。调用方选类型、每次调用可不同类型、单态化（Monomorphization）。与返回位 `impl Trait`（存在类型，实现方选类型、全函数唯一类型）构成对偶；判定用哪个位置，问「类型由谁决定」——调用方决定用参数位，实现细节需隐藏用返回位。
 - **Const Generics 实战**：`struct Matrix<T, const R: usize, const C: usize>` 把维度编码进类型——`Matrix<f32, 3, 3> + Matrix<f32, 3, 4>` 是编译错误（维度不匹配在类型层拒绝）。stable 支持「具体常量 + 单参数算术」的受限子集（`min_const_generics`），`[T; N]` 的 `N` 参与泛型是最成熟用法；涉及 `N + 1` 这类表达式需 `generic_const_exprs`（仍 nightly）。
 - **类型别名与类型族**：`type Result<T> = std::result::Result<T, MyError>` 是「部分应用的别名」（无新类型，完全等价替换）；关联类型族（`trait Trait { type Assoc; }`）是「impl 处确定一次的类型函数」。别名为零成本纯语法，类型族携带「每 impl 唯一」的承诺——`type Assoc = i32` 在 impl 外不可被假设为其他。
 
-三者共用同一判定原则：信息放在类型层（编译期可检）还是值层（运行时可变）——进阶类型系统的全部技术都是把更多程序性质推进类型层的不同路径。
+三者共用同一判定原则：信息放在类型层（编译期可检）还是值层（运行时（Runtime）可变）——进阶类型系统的全部技术都是把更多程序性质推进类型层的不同路径。
 
 ### 2.1 impl Trait 在参数位置
 >
@@ -606,8 +606,8 @@ graph TD
 
 C++ 与 Rust 在「运算符与转换」上的关键差异，根源是重载决议（overload resolution）与 trait 解析（trait resolution）两套机制：
 
-- **C++ 的 `operator*` 歧义**：自由函数 + 成员函数 + 隐式转换序列共同参与重载决议，`a * b` 可能在「内置指针解引用、成员 operator*、自由 operator*、经用户定义转换后的内置乘法」之间歧义（编译错误 overload is ambiguous）或静默选中非预期候选（更糟）。决议规则数十页，结果依赖参数的全部隐式转换路径。
-- **C++ 隐式转换 vs Rust 显式 trait**：C++ 单参数构造函数与 `operator T()` 默认参与隐式转换（需 `explicit` 抑制），「类型悄悄变化」是整类 bug 的根源；Rust 无隐式用户定义转换——`From`/`Into` 必须显式调用（`.into()`），`as` 转换有固定白名单且信息损失可见。运算符同理：Rust `a * b` 只查 `b` 的类型上 `Mul` 的单一 impl（孤儿规则保证唯一），无候选集、无歧义。
+- **C++ 的 `operator*` 歧义**：自由函数 + 成员函数 + 隐式转换序列共同参与重载决议，`a * b` 可能在「内置指针解引用（Reference）、成员 operator*、自由 operator*、经用户定义转换后的内置乘法」之间歧义（编译错误 overload is ambiguous）或静默选中非预期候选（更糟）。决议规则数十页，结果依赖参数的全部隐式转换路径。
+- **C++ 隐式转换 vs Rust 显式 trait**：C++ 单参数构造函数与 `operator T()` 默认参与隐式转换（需 `explicit` 抑制），「类型悄悄变化」是整类 bug 的根源；Rust 无隐式用户定义转换——`From`/`Into` 必须显式调用（`.into()`），`as` 转换有固定白名单且信息损失可见。运算符同理：Rust `a * b` 只查 `b` 的类型上 `Mul` 的单一 impl（孤儿规则（Orphan Rule）保证唯一），无候选集、无歧义。
 
 判定一个「运算符行为不符预期」问题：C++ 中需展开重载决议 + 转换序列（调试器看实际调用的函数）；Rust 中只需查「左操作数类型对 `Mul<Rhs>` 的唯一 impl」——单 impl 假设使排查路径从指数级降为线性。
 
@@ -936,7 +936,7 @@ fn main() {}
 
 ## 嵌入式测验（Embedded Quiz）
 
-本组测验围绕测验 1：关联类型（Associated Type）与泛型参数的区别是…、测验 2：`type Output = i32;` 这种语法出现在哪里…、测验 3：Higher-Ranked Trait Bounds（HRT…、测验 4：类型级编程（Type-Level Programming）在…等方面设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用检查」或「运行时行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
+本组测验围绕测验 1：关联类型（Associated Type）与泛型参数的区别是…、测验 2：`type Output = i32;` 这种语法出现在哪里…、测验 3：Higher-Ranked Trait Bounds（HRT…、测验 4：类型级编程（Type-Level Programming）在…等方面设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用（Borrowing）检查」或「运行时行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
 
 ### 测验 1：关联类型（Associated Type）与泛型参数的区别是什么？什么时候更适合用关联类型？（理解层）
 
@@ -1025,7 +1025,7 @@ fn main() {}
 
 ## 从 `crates\c04_generic\docs\tier_04_advanced\01_advanced_type_techniques.md` 迁移的补充视角
 
-> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
+> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏（Macro）观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
 
 ﻿# 01 高级类型技巧
 
@@ -1266,7 +1266,7 @@ impl<'a, T> Slice<'a, T> {
 
 **为什么需要 PhantomData？**
 
-1. **生命周期标记**: 告诉编译器该类型与某个生命周期相关
+1. **生命周期（Lifetimes）标记**: 告诉编译器该类型与某个生命周期相关
 2. **Drop Check**: 影响 Drop 检查的行为
 3. **型变控制**: 控制类型参数的型变性 (variance)
 

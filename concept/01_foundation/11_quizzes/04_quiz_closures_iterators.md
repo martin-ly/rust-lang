@@ -33,7 +33,7 @@
 
 ## 一、闭包基础
 
-理解「闭包基础」需要把握 Q1. 以下代码能否编译？解释闭包的类型推断、Q2. 以下代码的输出是什么？解释闭包捕获环境的方式与Q3. 以下代码能否编译？`move` 闭包的作用是什么？，本节依次展开。
+理解「闭包（Closures）基础」需要把握 Q1. 以下代码能否编译？解释闭包的类型推断（Type Inference）、Q2. 以下代码的输出是什么？解释闭包捕获环境的方式与Q3. 以下代码能否编译？`move` 闭包的作用是什么？，本节依次展开。
 
 ### Q1. 🟡 以下代码能否编译？解释闭包的类型推断
 
@@ -197,7 +197,7 @@ move |y| x + y
 
 ## 二、迭代器基础
 
-本节围绕「迭代器基础」展开，覆盖 Q4. 以下代码的输出是什么？解释迭代器的惰性求值 与  Q5. 以下代码能否编译？`Iterator` trait 的核心方法… 两个方面。
+本节围绕「迭代器（Iterator）基础」展开，覆盖 Q4. 以下代码的输出是什么？解释迭代器的惰性求值 与  Q5. 以下代码能否编译？`Iterator` trait 的核心方法… 两个方面。
 
 ### Q4. 🟢 以下代码的输出是什么？解释迭代器的惰性求值
 
@@ -648,7 +648,7 @@ fn make_filter(min: i32) -> impl Fn(&i32) -> bool {
 ### Q11. 🟡【单选】闭包以哪种方式捕获环境变量，是由什么决定的？
 
 - A. 一律按移动（move）捕获
-- B. 闭包体内**如何使用**被捕获的值：只读则不可变借用，修改则可变借用，消耗则获取所有权
+- B. 闭包体内**如何使用**被捕获的值：只读则不可变借用（Mutable Borrow），修改则可变借用，消耗则获取所有权
 - C. 程序员必须在闭包签名中显式标注捕获方式
 - D. 编译器随机选择，无法预测
 
@@ -657,7 +657,7 @@ fn make_filter(min: i32) -> impl Fn(&i32) -> bool {
 
 **答案：B**
 
-**解析**：闭包自动推断**最宽松可用**的捕获方式（不可变借用 → 可变借用 → 所有权），依据是闭包体对变量的实际用法。`move` 关键字（A）是强制所有权捕获的**覆盖手段**，而非默认；Rust 闭包没有显式捕获列表语法（C 是 C++ lambda 的机制，典型迁移误解）。
+**解析**：闭包自动推断**最宽松可用**的捕获方式（不可变借用（Immutable Borrow） → 可变借用 → 所有权），依据是闭包体对变量的实际用法。`move` 关键字（A）是强制所有权捕获的**覆盖手段**，而非默认；Rust 闭包没有显式捕获列表语法（C 是 C++ lambda 的机制，典型迁移误解）。
 
 </details>
 
@@ -675,7 +675,7 @@ fn make_filter(min: i32) -> impl Fn(&i32) -> bool {
 
 **答案：B**
 
-**解析**：适配器返回新的迭代器而不做任何工作，这是零成本抽象的关键——链式组合在消费时融合为单次遍历，无中间集合分配（C 错）。这也是经典陷阱的来源：`iter.map(|x| println!("{x}"));` 单独一行什么也不打印，编译器会警告 "unused `Map` that must be used"。
+**解析**：适配器返回新的迭代器而不做任何工作，这是零成本抽象（Zero-Cost Abstraction）的关键——链式组合在消费时融合为单次遍历，无中间集合分配（C 错）。这也是经典陷阱的来源：`iter.map(|x| println!("{x}"));` 单独一行什么也不打印，编译器会警告 "unused `Map` that must be used"。
 
 </details>
 
@@ -693,7 +693,7 @@ fn make_filter(min: i32) -> impl Fn(&i32) -> bool {
 
 **答案：A、B、C**
 
-**解析**：三者按"调用权限"递减形成层次：`Fn`（共享调用）⊂ `FnMut`（可变调用）⊂ `FnOnce`（消耗调用），实现前者自动实现后者（C）。D 错误：`move` 只改变**捕获方式**（所有权而非借用），不改变 trait——`move || x + 1` 若只读使用 `x`，依然实现 `Fn`，可多次调用。
+**解析**：三者按"调用权限"递减形成层次：`Fn`（共享调用）⊂ `FnMut`（可变调用）⊂ `FnOnce`（消耗调用），实现前者自动实现后者（C）。D 错误：`move` 只改变**捕获方式**（所有权而非借用（Borrowing）），不改变 trait——`move || x + 1` 若只读使用 `x`，依然实现 `Fn`，可多次调用。
 
 </details>
 
@@ -706,7 +706,7 @@ fn make_filter(min: i32) -> impl Fn(&i32) -> bool {
 
 **答案：对**
 
-**解析**：迭代器链经单态化与内联后融合为紧凑循环，无中间分配、无虚调用。权威依据见 [Iterator Patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)：抽象"你不为此付出运行时代价"。这也是鼓励用迭代器替代手写 C 风格循环的工程理由（还能消除越界索引整类错误）。
+**解析**：迭代器链经单态化（Monomorphization）与内联后融合为紧凑循环，无中间分配、无虚调用。权威依据见 [Iterator Patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)：抽象"你不为此付出运行时（Runtime）代价"。这也是鼓励用迭代器替代手写 C 风格循环的工程理由（还能消除越界索引整类错误）。
 
 </details>
 
@@ -719,7 +719,7 @@ fn make_filter(min: i32) -> impl Fn(&i32) -> bool {
 
 **答案：错**
 
-**解析**：`collect` 是泛型方法，可构建任何实现了 `FromIterator` 的类型：`Vec`、`HashMap`、`HashSet`、`BTreeMap`、`String`（从 `char` 或 `&str` 迭代器）、甚至 `Result<Vec<T>, E>`（利用 `FromIterator for Result` 实现"首个错误即短路"）。只需通过 `let m: HashMap<_, _> = iter.collect();` 给出目标类型。
+**解析**：`collect` 是泛型（Generics）方法，可构建任何实现了 `FromIterator` 的类型：`Vec`、`HashMap`、`HashSet`、`BTreeMap`、`String`（从 `char` 或 `&str` 迭代器）、甚至 `Result<Vec<T>, E>`（利用 `FromIterator for Result` 实现"首个错误即短路"）。只需通过 `let m: HashMap<_, _> = iter.collect();` 给出目标类型。
 
 </details>
 

@@ -707,7 +707,7 @@ Rust 编译器（`rustc --error-format=json`）输出的 JSON 结构化诊断，
 | **样本效率** | 高：利用编译器反馈自举数据 | 低：依赖数十亿 token 预训练 |
 | **泛化能力** | 有限：局限于训练时的错误类型分布 | 强：跨语言、跨错误类型泛化 |
 | **修复可解释性** | 高：策略网络可分析，动作空间显式定义 | 低：黑盒生成，难以解释为何选择某修复 |
-| **Rust 适用性** | **极高**：编译器提供结构化诊断和精确 span | **中**：生命周期错误（E0716）等仍高达 40%+ 失败率 |
+| **Rust 适用性** | **极高**：编译器提供结构化诊断和精确 span | **中**：生命周期（Lifetimes）错误（E0716）等仍高达 40%+ 失败率 |
 | **多轮修复** | 天然支持：episode 内迭代优化 | 需显式 prompt engineering（"请修复编译错误"） |
 | **语义保证** | 可通过测试/Miri 验证 | 需人工审查，易生成"表面正确"的补丁 |
 
@@ -1033,7 +1033,7 @@ fn main() {
 
 | **Rust 是 AI 基础设施语言** | 性能+安全+并发 ⟹ | 推理引擎/向量数据库 | ML研究生态弱于Python | 生产级AI系统 |
 
-| **LLM 生成 Rust 有挑战** | 所有权推理 ⟹ | 编译器作为过滤器 | 迭代成本高 | 辅助而非替代 |
+| **LLM 生成 Rust 有挑战** | 所有权（Ownership）推理 ⟹ | 编译器作为过滤器 | 迭代成本高 | 辅助而非替代 |
 
 | **类型系统（Type System）辅助 AI 验证** | 编译器捕获生成错误 ⟹ | 减少运行时bug | 类型推断（Type Inference）复杂性 | 人机协作 |
 
@@ -1167,7 +1167,7 @@ graph TD
 >
 > AI 辅助编程的核心挑战不是"生成代码"，而是"生成正确的代码"。Rust 的类型系统（Type System）为 AI 提供了额外的验证层：即使 LLM 生成了有 bug 的代码，编译器也会拒绝它。这种"类型系统作为安全网"的特性，使 Rust 成为 AI 辅助编程的理想语言。
 >
-> 类型系统见 [`../02_intermediate/00_traits/01_traits.md`](../../02_intermediate/00_traits/01_traits.md) 与 [`../02_intermediate/01_generics/02_generics.md`](../../02_intermediate/01_generics/02_generics.md)。
+> 类型系统（Type System）见 [`../02_intermediate/00_traits/01_traits.md`](../../02_intermediate/00_traits/01_traits.md) 与 [`../02_intermediate/01_generics/02_generics.md`](../../02_intermediate/01_generics/02_generics.md)。
 
 > **过渡: L7 → L5**
 >
@@ -1184,7 +1184,7 @@ graph TD
 
 | 编号 | 保证 / 风险 | 前提 | 结论 | 失效条件 | 后果 |
 |:---|:---|:---|:---|:---|:---|
-| **A1** | 类型系统拦截错误 | LLM 生成代码通过 `rustc` | 类型错误、所有权错误被编译期捕获 | LLM 生成 `unsafe` 绕过；逻辑错误类型正确 | 运行时 bug |
+| **A1** | 类型系统拦截错误 | LLM 生成代码通过 `rustc` | 类型错误、所有权错误被编译期捕获 | LLM 生成 `unsafe` 绕过；逻辑错误类型正确 | 运行时（Runtime） bug |
 | **A2** | AI 生成 `unsafe` 风险 | LLM 不理解 Safety Contract | `unsafe` 块可能包含 UB | 未人工审计 AI 生成的 unsafe | 安全漏洞 |
 | **A3** | 确定性容器 | `Deterministic<T>` 类型 | AI 推理结果可复现 | 底层库非确定性；硬件差异 | 不可复现的 AI 输出 |
 | **A4** | 生成-验证闭环 | `cargo test` + `cargo miri` | AI 生成代码通过回归测试 | 测试覆盖不足；规格不完整 | 漏报错误 |

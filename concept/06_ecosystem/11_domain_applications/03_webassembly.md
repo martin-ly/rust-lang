@@ -170,7 +170,7 @@ graph LR
 技术细节的四条主线：
 
 1. **wasm32 目标三元组**：`wasm32-unknown-unknown`（无系统接口，纯计算+JS glue）、`wasm32-wasip1`（WASI Preview 1，POSIX 风格 fd）、`wasm32-wasip2`（组件模型，推荐新项目）——`wasm32-wasi` 旧名已弃用。
-2. **wasm-bindgen 与 JS 互操作**：`#[wasm_bindgen]` 生成 JS 胶水，处理字符串（UTF-8↔UTF-16 编解码）、结构体（线性内存序列化）、闭包（`Closure::wrap` 生命周期需手动管理，常见泄漏点）。
+2. **wasm-bindgen 与 JS 互操作**：`#[wasm_bindgen]` 生成 JS 胶水，处理字符串（UTF-8↔UTF-16 编解码）、结构体（Struct）（线性内存序列化）、闭包（Closures）（`Closure::wrap` 生命周期（Lifetimes）需手动管理，常见泄漏点）。
 3. **Wasm 组件模型**：WIT 描述接口，组件间通过句柄/资源传递复杂类型——`cargo component` + `wasm32-wasip2` 是 Rust 侧原生路径。
 4. **Rust 1.96 链接器行为变更**：`--allow-undefined` 类链接选项默认收紧，未声明的 import 在链接期报错而非运行期——旧项目升级需审计 `#[link(wasm_import_module)]` 声明完整性。
 
@@ -349,7 +349,7 @@ RUSTFLAGS="-Clink-arg=--allow-undefined" cargo build --target wasm32-unknown-unk
 反命题：「WASM 将取代容器/JS」——边界分析：
 
 1. **冷启动优势真实但场景有限**：毫秒级冷启动（对比容器百毫秒）只在边缘计算/FaaS 高密度调度中构成决策因素；长驻服务中该优势摊薄为零。
-2. **生态鸿沟**：WASI 系统接口覆盖仍不完整（socket 支持各运行时不一、无 fork、信号缺失），系统级程序移植常需重写 I/O 层——「编译过去就能跑」只适用于纯计算模块。
+2. **生态鸿沟**：WASI 系统接口覆盖仍不完整（socket 支持各运行时不一、无 fork、信号缺失），系统级程序移植常需重写 I/O 层——「编译过去就能跑」只适用于纯计算模块（Module）。
 3. **性能边界**：WASM 无多线程（threads 提案支持参差）、SIMD 覆盖窄于原生、GC 语言（经 WASM GC 提案）生态未熟——计算密集场景较原生慢 10–30% 是常态。
 4. **与 JS 的关系**：WASM 是 JS 的**协处理器**不是替代者——DOM/Web API 仍需 JS 胶水，纯 WASM 前端（Leptos/Dioxus）也经 wasm-bindgen 调 DOM。
 
@@ -502,10 +502,10 @@ Rust Wasm 工具链:
 
 ## 十、边界测试：WebAssembly 的编译错误
 
-WASM 目标把大量桌面环境理所当然的 API 变成编译期不可用，这是 Rust “目标平台能力编码进类型系统”的极端体现。本章覆盖五个代表性边界：
+WASM 目标把大量桌面环境理所当然的 API 变成编译期不可用，这是 Rust “目标平台能力编码进类型系统（Type System）”的极端体现。本章覆盖五个代表性边界：
 
 - **`wasm32-unknown-unknown` 的 std 限制**：无 OS 意味着 `std::thread`/`std::fs`/`std::net` 整体不可用；并发只能走 `wasm-bindgen-futures` + JS 事件循环或 Web Workers。
-- **`wasm-bindgen` 类型映射**：`String`/`Vec<u8>` 跨边界需要拷贝与内存管理，`#[wasm_bindgen]` 签名中使用不支持的类型（如泛型、trait 对象）直接编译失败。
+- **`wasm-bindgen` 类型映射**：`String`/`Vec<u8>` 跨边界需要拷贝与内存管理，`#[wasm_bindgen]` 签名中使用不支持的类型（如泛型（Generics）、trait 对象）直接编译失败。
 - **线性内存与 Rust 引用**：WASM 单块线性内存中，Rust 指针即内存偏移；把指针暴露给 JS 后 Rust 侧 realloc 会导致 JS 持有的视图悬垂——经典 use-after-free 的跨语言变体。
 - **panic 行为**：`wasm32-unknown-unknown` 默认 `panic=abort`，`catch_unwind` 不可用，错误必须走 `Result`。
 - 第五项覆盖 SIMD 特性检测与 `target_feature` 约束。

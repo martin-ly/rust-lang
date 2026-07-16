@@ -50,7 +50,7 @@
 > [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/index.html) ·
 > [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html) · [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)
 > **Rust 1.97.0 变更提示**：
-> Rust 1.97.0 起 `pin!` 宏会阻止隐式 deref coercion，相关细节与迁移建议见 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)。
+> Rust 1.97.0 起 `pin!` 宏（Macro）会阻止隐式 deref coercion，相关细节与迁移建议见 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)。
 
 ---
 
@@ -193,6 +193,7 @@
     - [Q1.2: 什么时候不应该使用 `async/await`？](#q12-什么时候不应该使用-asyncawait)
     - [Q1.3: `Future` 什么时候开始执行？](#q13-future-什么时候开始执行)
     - [Q1.4: `.await` 和 `poll()` 有什么区别？](#q14-await-和-poll-有什么区别)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ## 〇、认知路径（Cognitive Path）
 
@@ -2787,9 +2788,9 @@ differential-dataflow (增量计算)
 - **非 Send 类型跨 await 点**（编译错误）：`Rc`/`RefCell` 守卫等 `!Send` 值在 `.await` 前后都被使用 → 它成为状态机的一个字段 → 整个 future `!Send` → `tokio::spawn`（要求 `Send`）拒绝。修复三选一：`.await` 前结束该值的借用（缩小作用域）、换 `Send` 等价物（`Arc<Mutex>`）、或留在 `LocalSet`/单线程运行时。错误信息会指出「哪个值被持有跨越了哪个 await」——这是排查的起点。
 - **在 async 块中调用阻塞函数**（逻辑错误）：`std::thread::sleep`、`reqwest::blocking` 在 async 任务中阻塞的是「整个 worker 线程」而非当前任务——不报错但吞吐坍塌（N 个阻塞任务占满 N 个 worker 后全线饿死）。修复：`tokio::time::sleep`、`spawn_blocking` 包裹、或换异步库。clippy 与 tokio 的 `#[tokio::main]` 文档均将此列为反模式。
 - **递归 async fn**（编译错误 E0733）：`async fn f() { f().await }` 的状态机类型自引用，大小无限——必须用 `Box::pin` 间接（`fn f() -> Pin<Box<dyn Future<...>>>` 或 `async_recursion` 宏）。这是「状态机即类型」的直接推论。
-- **借用局部变量生命周期不足**：`async` 块捕获的引用必须活到 future 结束——`tokio::spawn(async { &x })` 报「borrowed value does not live long enough」，因为 spawn 要求 `'static`。修复：`move` 转移所有权、或 `tokio::scope`/`join!` 等有界并发原语。
+- **借用局部变量生命周期不足**：`async` 块捕获的引用必须活到 future 结束——`tokio::spawn(async { &x })` 报「borrowed value does not live long enough」，因为 spawn 要求 `'static`。修复：`move` 转移所有权（Ownership）、或 `tokio::scope`/`join!` 等有界并发原语。
 
-统一判定法：把 `async fn` 想象成「状态机结构体」——编译错误都对应「某个字段不合法」（`!Send`、自引用、借用短命），逻辑错误都对应「挂起/阻塞语义误解」。
+统一判定法：把 `async fn` 想象成「状态机结构体（Struct）」——编译错误都对应「某个字段不合法」（`!Send`、自引用、借用短命），逻辑错误都对应「挂起/阻塞语义误解」。
 
 ### 16.1 边界测试：非 Send 类型跨 await 点（编译错误）
 

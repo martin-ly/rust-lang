@@ -550,7 +550,7 @@ async fn create_test_file(path: &str, size: usize) -> io::Result<()> {
 
 关键架构权衡：
 
-1. **缓冲注册（registered buffers）**：`IORING_REGISTER_BUFFERS` 预注册内存，内核直接 DMA，省掉每次调用的 `copy_to_user` 页表查找——这是 Rust `tokio-uring` 要求 `buf` 参数为 `'static` 所有权的根本原因：缓冲区在内核持有期间不能被 Rust 释放，`tokio-uring` 用「把缓冲区所有权交给 future」的 API 把这一硬件约束编码进类型系统。
+1. **缓冲注册（registered buffers）**：`IORING_REGISTER_BUFFERS` 预注册内存，内核直接 DMA，省掉每次调用的 `copy_to_user` 页表查找——这是 Rust `tokio-uring` 要求 `buf` 参数为 `'static` 所有权（Ownership）的根本原因：缓冲区在内核持有期间不能被 Rust 释放，`tokio-uring` 用「把缓冲区所有权交给 future」的 API 把这一硬件约束编码进类型系统（Type System）。
 2. **与 epoll 的边界**：io_uring 在 NVMe 等高速设备上碾压 epoll；对千兆以下网络，epoll+非阻塞 I/O 的复杂度收益比仍占优。
 3. **内核版本陷阱**：部分 io_uring 特性（如 `IORING_OP_READ_MULTISHOT`）需要 6.x 内核，生产部署必须做特性探测。
 
@@ -2057,7 +2057,7 @@ echo "✅ 系统调优完成！"
 
 ## ⚠️ 反例与陷阱
 
-**陷阱：零拷贝缓冲区复用时旧视图未释放**。高性能网络服务复用 read buffer 是常态，但只要还持有指向 buffer 的切片，就不能清空/重填它——借用检查器把「悬垂视图」问题从运行时崩溃前移到编译期：
+**陷阱：零拷贝缓冲区复用时旧视图未释放**。高性能网络服务复用 read buffer 是常态，但只要还持有指向 buffer 的切片（Slice），就不能清空/重填它——借用（Borrowing）检查器把「悬垂视图」问题从运行时（Runtime）崩溃前移到编译期：
 
 ```rust,compile_fail
 fn process(buf: &mut Vec<u8>) -> usize {
@@ -2133,7 +2133,7 @@ fn process(buf: &mut Vec<u8>) -> usize {
 
 ## 过渡段
 
-> **过渡**: 从零拷贝技术过渡到 io_uring，可以理解内核旁路与异步 I/O 如何降低延迟。
+> **过渡**: 从零拷贝技术过渡到 io_uring，可以理解内核旁路与异步（Async） I/O 如何降低延迟。
 >
 > **过渡**: 从无锁数据结构过渡到 NUMA 感知，可以建立多核扩展与缓存局部性的优化视角。
 >

@@ -17,7 +17,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析字段默认值语义
-> **定位**: 跟踪 [RFC 3681](https://rust-lang.github.io/rfcs/3681-default-field-values.html) 引入的结构体字段默认值语法，说明其与函数式记录更新（Functional Record Update, FRU）、`Default` trait 及私有字段的交互。
+> **定位**: 跟踪 [RFC 3681](https://rust-lang.github.io/rfcs/3681-default-field-values.html) 引入的结构体（Struct）字段默认值语法，说明其与函数式记录更新（Functional Record Update, FRU）、`Default` trait 及私有字段的交互。
 > **前置概念**: [Structs](../../01_foundation/07_modules_and_items/04_structs.md) · [构造与初始化](../../02_intermediate/00_traits/05_construction_and_initialization.md) · [Derive Traits](../../02_intermediate/00_traits/06_derive_traits.md)
 > **后置概念**: [Version Tracking](../00_version_tracking/01_rust_version_tracking.md) · [Type System Basics](../../01_foundation/02_type_system/01_type_system.md)
 > **定理链**: N/A — 描述性/跟踪性文档，不涉及形式化定理链
@@ -65,7 +65,7 @@ RFC 3681 的核心规则（§Reference-level explanation）：
 1. **默认值表达式位置**：出现在字段类型之后，经 `=` 引入；须为 const 可求值上下文受限的普通表达式（每次构造时求值，非 `const` 单例）。
 2. **`..` 基数省略**：`Struct { .. }`（无基数表达式）仅在**所有省略字段都有默认值**时合法；有默认值的字段可被省略，无默认值的字段必须显式给出。
 3. **与 `..base` 的交互**：`..base` 形式中，已声明默认值的字段优先取 `base` 的对应字段值（FRU 语义不变）；`..`（无 base）形式则取声明的默认值。
-4. **私有性**：默认值声明不改变字段可见性规则；含私有必填字段的结构体仍不能在模块外构造（参见 [Visibility and Privacy](../../03_advanced/06_low_level_patterns/10_visibility_and_privacy.md)）。
+4. **私有性**：默认值声明不改变字段可见性规则；含私有必填字段的结构体仍不能在模块（Module）外构造（参见 [Visibility and Privacy](../../03_advanced/06_low_level_patterns/10_visibility_and_privacy.md)）。
 5. **`#[derive(Default)]` 演进**：RFC 预留了让 derive 生成的 `Default::default()` 复用字段默认值的路径，减少"默认值写两遍"。
 
 ## 三、实测示例（nightly 1.99.0）
@@ -98,12 +98,12 @@ fn main() {
 | `Default` trait | 字段默认值 ≠ `Default::default()`；前者是构造语法糖，后者是 trait 方法。两者共存时以显式构造表达式为准 |
 | Builder 模式 | 字段默认值覆盖 builder 的 80% 简单场景；类型状态 builder（Typestate）仍不可替代（编译期必填校验） |
 | FRU（`..base`） | 语义不变；`..`（无 base）是新形式，要求省略字段全有默认值 |
-| 模式匹配 | 默认值只作用于构造，不影响解构；`let Config { retries, .. } = c;` 照旧 |
+| 模式匹配（Pattern Matching） | 默认值只作用于构造，不影响解构；`let Config { retries, .. } = c;` 照旧 |
 | const 上下文 | 带默认值的结构体字面量可用于 `const`，前提是默认值表达式本身 const 兼容 |
 
 ## 五、反命题与边界分析
 
-- **反命题 1：「字段默认值让 Default trait 过时」**——错误。`Default` 是**类型级**协议（泛型边界 `T: Default` 可用），字段默认值是**构造点**语法；泛型代码仍依赖 trait。
+- **反命题 1：「字段默认值让 Default trait 过时」**——错误。`Default` 是**类型级**协议（泛型（Generics）边界 `T: Default` 可用），字段默认值是**构造点**语法；泛型代码仍依赖 trait。
 - **反命题 2：「默认值在编译期求值一次」**——错误。默认值表达式在**每次构造时**求值（否则 `String::new()` 之类将无法共享）。这一点与 Python 的默认参数陷阱形成对比。
 - **边界**：默认值声明是 API 契约的一部分——变更默认值是 semver 兼容性行为变更，与变更 `Default` 实现同等敏感（参见 [Cargo Registries 与发布](../../06_ecosystem/01_cargo/08_cargo_registries_and_publishing.md) 的 SemVer 讨论）。
 

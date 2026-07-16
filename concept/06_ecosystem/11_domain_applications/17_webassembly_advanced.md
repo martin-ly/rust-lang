@@ -106,7 +106,7 @@
 
 WebAssembly（WASM）的三层权威定义锚点：
 
-- **W3C 规范层面**：WASM 是一种为栈式虚拟机设计的可移植二进制指令格式（W3C Recommendation），具有线性内存模型、显式类型系统与可验证的模块结构；Rust 自 1.30 起将 `wasm32-unknown-unknown` 纳入 tier 2 支持。
+- **W3C 规范层面**：WASM 是一种为栈式虚拟机设计的可移植二进制指令格式（W3C Recommendation），具有线性内存模型、显式类型系统（Type System）与可验证的模块结构；Rust 自 1.30 起将 `wasm32-unknown-unknown` 纳入 tier 2 支持。
 - **组件模型（Component Model）**：W3C WebAssembly CG 的提案，定义跨语言可组合的模块链接层——核心 WASM 模块只暴露 `memory`/`func`，组件模型通过 WIT（WASM Interface Types）描述字符串、记录、变体等高层类型的 ABI。
 - **WASI（WebAssembly System Interface）**：标准组织 bytecodealliance 维护的能力安全系统接口；Preview 1 为 POSIX 风格 fd 模型，Preview 2 转向基于组件模型的句柄/资源（handle/resource）模型。
 
@@ -436,7 +436,7 @@ Rust 侧的关键对接点：
 
 - `cargo build --target wasm32-wasip2`（Rust 1.82+ tier 2 目标）直接产出组件；旧目标 `wasm32-wasi` 已更名为 `wasm32-wasip1`。
 - `wasi` crate（0.14+）提供 Preview 2 API 的原始绑定；高层代码应优先使用 `std`，让标准库映射到 WASI。
-- wasmtime 嵌入时通过 `wasmtime::component::bindgen!` 宏从 WIT 生成类型安全的 host 绑定，与 `wasm_bindgen` 的 JS 绑定形成对称设计。
+- wasmtime 嵌入时通过 `wasmtime::component::bindgen!` 宏（Macro）从 WIT 生成类型安全的 host 绑定，与 `wasm_bindgen` 的 JS 绑定形成对称设计。
 
 判定依据：新项目应选择 `wasm32-wasip2`；仅当宿主（如部分边缘平台）尚未支持组件模型时退回 wasip1。
 

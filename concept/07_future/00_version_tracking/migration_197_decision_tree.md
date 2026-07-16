@@ -16,7 +16,7 @@
 > **最后更新**: 2026-07-11
 > **状态**: ✅ 已对齐 Rust 1.97.0 stable
 
-> **主要来源（事实出处，判定树不引用外部页作为叶子）**:
+> **主要来源（事实出处，判定树不引用（Reference）外部页作为叶子）**:
 > · 版本页兼容性表与 §2.6/§2.7/§2.8：[`rust_1_97_stabilized.md`](rust_1_97_stabilized.md)
 > · 31 项特性清单（Compatibility 类）：[`reports/RUST_197_CONTENT_GAP_ANALYSIS_2026_07_11.md`](../../../reports/RUST_197_CONTENT_GAP_ANALYSIS_2026_07_11.md)
 > · 审计缺口（§2.4、§4 P2-5）：[`reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md`](../../../reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md)
@@ -48,11 +48,11 @@
 | 变化 | 受影响代码特征（命中即需评估） | 严重度 | 是否需迁移 | 小节 |
 |:---|:---|:---:|:---:|:---|
 | 空 `#[export_name]` 被拒绝 | 存在 `#[export_name = ""]` 或 Edition 2024 的 `#[unsafe(export_name = "")]` | 高（硬错误，无法编译） | 必须 | §3 |
-| `f32: From<{float}>` future-compat | 浮点字面量经 `From`/`Into`/泛型约束推断，依赖旧 `{float}`→`f64` 行为 | 中（future-compat 警告，未来变硬错误） | 建议 | §4 |
+| `f32: From<{float}>` future-compat | 浮点字面量经 `From`/`Into`/泛型（Generics）约束推断，依赖旧 `{float}`→`f64` 行为 | 中（future-compat 警告，未来变硬错误） | 建议 | §4 |
 | `pin!` 不再 deref coerce（类型签名） | `pin!(&mut x)` 后当作 `Pin<&mut T>` 使用 | 高（类型不匹配，无法编译） | 必须 | §5 |
 | `pin!` 对 async/自引用代码的影响 | 自引用 Future、手写 `poll`、`Pin<&mut &mut T>` 投影 | 高（编译失败或潜在 UB） | 必须 | §6 |
 | Windows `WSAESHUTDOWN→BrokenPipe` | 在 Windows 上按 `io::ErrorKind` 细分匹配 socket 关闭错误，未覆盖 `BrokenPipe` | 中（行为变化，运行期分支错位） | 建议 | §7 |
-| 模块路径段泛型参数被拒绝 | 在模块路径段上写 turbofish/泛型参数（非法语法） | 高（硬错误，无法编译） | 必须 | §8 |
+| 模块（Module）路径段泛型参数被拒绝 | 在模块路径段上写 turbofish/泛型参数（非法语法） | 高（硬错误，无法编译） | 必须 | §8 |
 
 **严重度判据**：高 = 升级后直接编译失败；中 = 升级后仍能编译但出现 future-compat 警告或运行期行为差异。
 
@@ -78,9 +78,9 @@ flowchart TD
 
 ## 3. 变化一：空 `#[export_name]` 被拒绝
 
-1.97 起 `#[export_name = ""]` 的空符号名从“静默接受”变为**编译错误**——空名称在链接产物中没有意义，此前接受它是实现疏漏。该变化影响的代码通常来自宏生成：拼接符号名时边界情况产出了空串。
+1.97 起 `#[export_name = ""]` 的空符号名从“静默接受”变为**编译错误**——空名称在链接产物中没有意义，此前接受它是实现疏漏。该变化影响的代码通常来自宏（Macro）生成：拼接符号名时边界情况产出了空串。
 
-判定树逻辑：报错指向 `export_name` 属性 → 检查名称是否由宏拼接产生 → 若是，在宏中对空结果显式报错或提供默认名；若是手写空串，直接删除该属性或填入真实符号名。验证方法：迁移后 `cargo build` 通过且 `nm`/`objdump` 输出中符号名与预期一致。此变化无运行时行为差异，属纯编译期收紧。
+判定树逻辑：报错指向 `export_name` 属性 → 检查名称是否由宏拼接产生 → 若是，在宏中对空结果显式报错或提供默认名；若是手写空串，直接删除该属性或填入真实符号名。验证方法：迁移后 `cargo build` 通过且 `nm`/`objdump` 输出中符号名与预期一致。此变化无运行时（Runtime）行为差异，属纯编译期收紧。
 
 ### 3.1 症状与报错信息
 
@@ -163,7 +163,7 @@ RUSTFLAGS="-D warnings" cargo check
 
 ### 4.1 症状与报错信息
 
-- **现象**：升级后 `cargo build`/`cargo check` 出现 **future-compatibility warning**（信息含「this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release」类标准措辞），与浮点字面量经 `From`/`Into`/泛型约束的**类型推断路径变化**相关。
+- **现象**：升级后 `cargo build`/`cargo check` 出现 **future-compatibility warning**（信息含「this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release」类标准措辞），与浮点字面量经 `From`/`Into`/泛型约束的**类型推断（Type Inference）路径变化**相关。
 - **根因（事实）**：Rust 1.97 调整 `{float}`（未约束浮点字面量）的回退行为——在需要具体类型且未被其它约束确定为 `f64` 时更可能回退到 `f32`；`f32: From<{float}>` 相关约束因此触发未来兼容性警告（来源：版本页 §2.6、§7「`f32: From<{float}>` 约束 `{float}` 将触发未来兼容性警告」、31 项清单 #23/#25）。
 - **风险等级**：当前为警告，但属于「未来会变成硬错误」的兼容性 lint 组，应在升级窗口内显式修复。
 
@@ -316,7 +316,7 @@ cargo clippy --all-targets -- -D warnings
 
 ## 6. 变化四：`pin!` 阻止 deref coercion 对 async / 自引用代码的影响
 
-> 本节与 §5 同源（都是「`pin!` 阻止 deref coercion」），但聚焦**async 状态机、手写 `Future::poll`、自引用结构体**这类会把 `Pin<&mut &mut Self>` 误传进 `Pin<&mut Self>` 边界的场景。判定路径与 §5 不同：这里关心「投影/边界是否仍成立」，而非单纯类型标注。
+> 本节与 §5 同源（都是「`pin!` 阻止 deref coercion」），但聚焦**async 状态机、手写 `Future::poll`、自引用结构体（Struct）**这类会把 `Pin<&mut &mut Self>` 误传进 `Pin<&mut Self>` 边界的场景。判定路径与 §5 不同：这里关心「投影/边界是否仍成立」，而非单纯类型标注。
 
 ### 6.1 症状与报错信息
 
@@ -401,7 +401,7 @@ fn drive(f: impl Future<Output = ()>) {
 }
 ```
 
-> 选择判据：实现自引用类型/手写 `poll` → 方案 A（`pin-project` 结构投影，避免手写 `unsafe` 投影）；仅驱动异步任务 → 方案 B（`Box::pin`/`pin_mut!`）。**不要**通过 `unsafe { Pin::new_unchecked(&mut x) }` 绕过类型变化来恢复旧行为——这会重新引入地址不稳定的 UB 风险。
+> 选择判据：实现自引用类型/手写 `poll` → 方案 A（`pin-project` 结构投影，避免手写 `unsafe` 投影）；仅驱动异步（Async）任务 → 方案 B（`Box::pin`/`pin_mut!`）。**不要**通过 `unsafe { Pin::new_unchecked(&mut x) }` 绕过类型变化来恢复旧行为——这会重新引入地址不稳定的 UB 风险。
 
 ### 6.4 验证方法
 
@@ -425,7 +425,7 @@ cargo +nightly miri test --all-targets
 
 判定是否受影响，按以下顺序排查：
 
-1. **症状与报错信息**：升级后原有错误处理分支不再命中，日志中出现此前未见的 `BrokenPipe`；
+1. **症状与报错信息**：升级后原有错误处理（Error Handling）分支不再命中，日志中出现此前未见的 `BrokenPipe`；
 2. **判定树**：代码中是否存在对 `ErrorKind::ConnectionReset` 的精确匹配且依赖它识别“对端关闭”？若是，即受影响；
 3. **迁移前后对比**：7.3 给出 `match` 分支的最小修改 diff——通常是把 `BrokenPipe` 并入既有分支；
 4. **验证方法**：7.4 提供跨平台的集成测试脚本，模拟对端 FIN 关闭并断言错误种类。
@@ -768,7 +768,7 @@ flowchart TD
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
-- **P1 学术/形式化**: [Jung, Dang, Kang & Dreyer: Stacked Borrows — An Aliasing Model for Rust（POPL 2020, arXiv:1909.03995；借用语义演进的形式化基线）](https://arxiv.org/abs/1909.03995)（2026-07-12 验证 HTTP 200）
+- **P1 学术/形式化**: [Jung, Dang, Kang & Dreyer: Stacked Borrows — An Aliasing Model for Rust（POPL 2020, arXiv:1909.03995；借用（Borrowing）语义演进的形式化基线）](https://arxiv.org/abs/1909.03995)（2026-07-12 验证 HTTP 200）
 - **P2 生态/社区**: [docs.rs/tokio — 生态权威 API 文档](https://docs.rs/tokio) · [docs.rs/futures — 生态权威 API 文档](https://docs.rs/futures)
 
 ---

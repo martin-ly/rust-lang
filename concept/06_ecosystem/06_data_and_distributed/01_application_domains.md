@@ -37,7 +37,7 @@
 
 ## 一、权威定义
 
-应用领域（Application Domain）指软件系统所服务的业务或技术范畴，如 Web 服务、嵌入式、数据科学等。领域决定技术栈的约束集合：嵌入式受资源与实时性约束，Web 受并发与延迟约束，数据科学受生态与互操作约束。Rust 的跨领域渗透路径值得注意——它先在系统编程（无 GC、内存安全）站稳，再借 WASM 与异步生态向 Web、借 no_std 向嵌入式、借 PyO3 向数据科学扩展，每个领域的成熟度与采纳动机各不相同。
+应用领域（Application Domain）指软件系统所服务的业务或技术范畴，如 Web 服务、嵌入式、数据科学等。领域决定技术栈的约束集合：嵌入式受资源与实时性约束，Web 受并发与延迟约束，数据科学受生态与互操作约束。Rust 的跨领域渗透路径值得注意——它先在系统编程（无 GC、内存安全（Memory Safety））站稳，再借 WASM 与异步（Async）生态向 Web、借 no_std 向嵌入式、借 PyO3 向数据科学扩展，每个领域的成熟度与采纳动机各不相同。
 
 ### 1.1 Wikipedia 权威定义
 
@@ -871,7 +871,7 @@ fn main() {
 
 ### 9.1 领域间迁移指南
 
-领域迁移的难点不在语法而在思维模型。Python→Rust 的关键跨越：动态类型到静态推断（类型即文档）、引用语义到所有权（数据流必须显式）、GIL 伪并行到真并行（`Send`/`Sync` 约束）、解释执行到编译期优化（错误前移到编译期）。Go→Rust 的跨越更小但更微妙：GC 到所有权（告别“随处共享指针”）、interface 隐式实现到 trait 显式实现、goroutine 自由创建到 async runtime 选型。两条路径都应从 CLI 小工具起步而非直接迁移核心系统。
+领域迁移的难点不在语法而在思维模型。Python→Rust 的关键跨越：动态类型到静态推断（类型即文档）、引用（Reference）语义到所有权（Ownership）（数据流必须显式）、GIL 伪并行到真并行（`Send`/`Sync` 约束）、解释执行到编译期优化（错误前移到编译期）。Go→Rust 的跨越更小但更微妙：GC 到所有权（告别“随处共享指针”）、interface 隐式实现到 trait 显式实现、goroutine 自由创建到 async runtime 选型。两条路径都应从 CLI 小工具起步而非直接迁移核心系统。
 
 #### 从 Python 迁移到 Rust
 
@@ -1255,7 +1255,7 @@ graph TD
 - **L3 Async**: `tokio-uring` 将 io_uring 的 completion 事件映射为 `Future`。与传统 epoll 不同，io_uring 的**无系统调用批量提交**（batch submission）改变了异步运行时的事件循环模型——从"poll → 等待 → 回调"变为"提交 → 内核执行 → 完成事件"。
 - **L4 形式化**: io_uring 的 ring buffer 是**线性资源**的经典案例——submission entry 一旦被提交，其内存区域在操作完成前不可修改或释放。这与 Rust 的 `Pin` 语义同构：提交的 `Op` 被 `Pin` 在 ring buffer 中，直到 completion 解固定。
 
-**安全边界**: `tokio-uring` 的 `Buffer` trait 要求提交的缓冲区在操作完成前保持有效。`unsafe` 边界在于：如果用户在 `Op` 完成前 `drop` 缓冲区，会导致内核写入已释放内存。封装层通过**生命周期（Lifetimes）标注**（`&'a [u8]`）将这一约束编码到类型系统。
+**安全边界**: `tokio-uring` 的 `Buffer` trait 要求提交的缓冲区在操作完成前保持有效。`unsafe` 边界在于：如果用户在 `Op` 完成前 `drop` 缓冲区，会导致内核写入已释放内存。封装层通过**生命周期（Lifetimes）标注**（`&'a [u8]`）将这一约束编码到类型系统（Type System）。
 
 > **[tokio-rs/io-uring](https://github.com/tokio-rs/io-uring)** io_uring 的共享环形缓冲区是 Rust 所有权模型的压力测试。
 
@@ -1312,7 +1312,7 @@ graph TD
 
 ### 11.8 Cargo Script：单文件 Rust 的模块系统压缩
 
-**形式化定位**: Cargo Script（Frontmatter）是单文件 Rust 脚本的**模块系统压缩**。其核心洞察：将 `Cargo.toml` 的依赖声明压缩为文件头部的注释/frontmatter，使单文件脚本成为**自包含的形式化单元**。
+**形式化定位**: Cargo Script（Frontmatter）是单文件 Rust 脚本的**模块（Module）系统压缩**。其核心洞察：将 `Cargo.toml` 的依赖声明压缩为文件头部的注释/frontmatter，使单文件脚本成为**自包含的形式化单元**。
 
 **与 L1-L4 的映射**:
 
@@ -1383,7 +1383,7 @@ graph TD
 
 ## 十、边界测试：应用领域的编译错误
 
-跨领域边界测试展示同一语言机制在不同领域的不同失效形态：Web 框架中 handler 间共享状态缺少 `Send + Sync`（axum/actix 在编译期拒绝非线程安全状态）；游戏引擎中 ECS 查询同时借用同一组件的可变与不可变引用（World 借用规则冲突）；数据管道中 `collect` 时机错误导致类型不匹配。三类用例说明所有权规则是跨领域一致的，但触发它的典型场景各有领域特色。测试：嵌入式中的 `std` 依赖误用（编译错误）与边界测试：Web 服务中的阻塞操作与 async runtime 的冲…。
+跨领域边界测试展示同一语言机制在不同领域的不同失效形态：Web 框架中 handler 间共享状态缺少 `Send + Sync`（axum/actix 在编译期拒绝非线程安全状态）；游戏引擎中 ECS 查询同时借用（Borrowing）同一组件的可变与不可变引用（World 借用规则冲突）；数据管道中 `collect` 时机错误导致类型不匹配。三类用例说明所有权规则是跨领域一致的，但触发它的典型场景各有领域特色。测试：嵌入式中的 `std` 依赖误用（编译错误）与边界测试：Web 服务中的阻塞操作与 async runtime 的冲…。
 
 ### 10.1 边界测试：Web 框架中的状态共享（编译错误）
 

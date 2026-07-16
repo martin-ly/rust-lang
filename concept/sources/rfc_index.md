@@ -121,7 +121,7 @@
 | [RFC 3668](https://rust-lang.github.io/rfcs/3668-async-closures.html) | Async closures | ✅ | 1.85 | `07_async_closures.md` |
 | [RFC 3681](https://rust-lang.github.io/rfcs/3681-default-field-values.html) | Default field values | 🚧 | nightly | `37_default_field_values_preview.md` |
 | [RFC 3695](https://rust-lang.github.io/rfcs/3695-cfg-boolean-literals.html) | `cfg(true)` / `cfg(false)` 布尔字面量 | ✅ | 1.88 | `11_conditional_compilation.md` §布尔字面量谓词 |
-| [RFC 3697](https://rust-lang.github.io/rfcs/3697-declarative-attribute-macros.html) / [3698](https://rust-lang.github.io/rfcs/3698-declarative-derive-macros.html) | 声明式属性/derive 宏 | 🚧 | — | `01_macros.md` §6 |
+| [RFC 3697](https://rust-lang.github.io/rfcs/3697-declarative-attribute-macros.html) / [3698](https://rust-lang.github.io/rfcs/3698-declarative-derive-macros.html) | 声明式属性/derive 宏（Macro） | 🚧 | — | `01_macros.md` §6 |
 | [RFC 3722](https://rust-lang.github.io/rfcs/3722-explicit-extern-abis.html) | Explicit extern ABIs | 🚧 | — | `03_linkage.md` §显式 extern ABI |
 | [RFC 3892](https://rust-lang.github.io/rfcs/3892-complex-numbers.html) | Complex numbers | 🚧 | — | `38_complex_numbers_preview.md` |
 | [RFC 3923](https://rust-lang.github.io/rfcs/3923-cargo-min-publish-age.html) | Cargo minimum publish age | 🚧 | — | `08_cargo_registries_and_publishing.md` §八 |

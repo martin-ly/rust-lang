@@ -100,9 +100,9 @@ mindmap
 
 属性（attribute）与声明宏（declarative macro）是 Rust 元编程的两个入口层，核心概念有三：
 
-1. **属性系统全景**：`#[...]`（应用于紧随的项）与 `#![...]`（应用于当前作用域整体）是编译器指令的统一语法。按处理者分三类：内建属性（`derive`、`cfg`、`inline`、`test`，由 rustc 直接解释）、工具属性（`rustfmt::skip`、`clippy::allow`）、以及过程宏属性（`#[tokio::main]` 等，由外部 crate 在编译期展开）。
-2. **声明宏基础**：`macro_rules!` 定义「模式 → 转录」的变换规则，在语法层面操作 token 树（token tree）。它是卫生（hygienic）的、模式驱动的、编译期执行的代码生成器——比 C 预处理器强在「按语法结构匹配」而非纯文本替换。
-3. **宏的卫生性（hygiene）**：宏内部引入的标识符与调用点的标识符默认隔离——宏里定义的 `let x` 不会意外捕获调用者的 `x`。卫生性是 `macro_rules!` 相对文本宏的核心优势，也是理解「为什么宏参数必须显式传入」的钥匙。
+1. **属性系统全景**：`#[...]`（应用于紧随的项）与 `#![...]`（应用于当前作用域整体）是编译器指令的统一语法。按处理者分三类：内建属性（`derive`、`cfg`、`inline`、`test`，由 rustc 直接解释）、工具属性（`rustfmt::skip`、`clippy::allow`）、以及过程宏（Procedural Macro）属性（`#[tokio::main]` 等，由外部 crate 在编译期展开）。
+2. **声明宏（Declarative Macro）基础**：`macro_rules!` 定义「模式 → 转录」的变换规则，在语法层面操作 token 树（token tree）。它是卫生（hygienic）的、模式驱动的、编译期执行的代码生成器——比 C 预处理器强在「按语法结构匹配」而非纯文本替换。
+3. **宏（Macro）的卫生性（hygiene）**：宏内部引入的标识符与调用点的标识符默认隔离——宏里定义的 `let x` 不会意外捕获调用者的 `x`。卫生性是 `macro_rules!` 相对文本宏的核心优势，也是理解「为什么宏参数必须显式传入」的钥匙。
 
 判定一个元编程需求该用属性还是宏：改变「项的语义/编译方式」用属性（它是给编译器的注解）；「生成新代码」用宏。
 
@@ -467,7 +467,7 @@ macro_rules! build_vec {
 - **反命题 1：「`#[derive]` 是编译器内建魔法」** —— 不准确。内建 derive（`Clone`/`Debug` 等）确实是编译器特判，但 derive 机制本身是**过程宏**：第三方 crate（serde、thiserror）的 derive 与内建 derive 走同一条编译管线，只是内建的不需要外部 crate。判定方法：`cargo expand` 可查看任何 derive 的展开结果。
 - **反命题 2：「属性可以任意添加而无副作用」** —— 错误。`#[inline]` 影响代码布局与跨 crate 优化、`#[repr]` 改变内存布局（ABI 承诺）、`#[must_use]` 改变调用方诊断——属性是**编译器指令**，不是注释。
 
-边界极限小节量化：属性作用目标（crate/模块/项/表达式/语句）的合法性、cfg 属性的求值时机（早于名称解析）、以及宏调用位置（项位置/表达式位置/语句位置/模式位置）的差异。
+边界极限小节量化：属性作用目标（crate/模块（Module）/项/表达式/语句）的合法性、cfg 属性的求值时机（早于名称解析）、以及宏调用位置（项位置/表达式位置/语句位置/模式位置）的差异。
 
 ### 4.1 反命题树
 >
@@ -639,12 +639,12 @@ graph TD
 
 属性与宏的编译错误按「展开期失败」与「展开后失败」两个阶段分类：
 
-- **`derive` 宏的 trait 冲突**：手写 `impl` 与 `#[derive]` 生成同一 trait 的 impl 报 E0119（conflicting implementations）；字段类型不满足 derive 的约束要求（如对含 `f64` 的结构体 derive `Eq`）在展开后报 E0277。
+- **`derive` 宏的 trait 冲突**：手写 `impl` 与 `#[derive]` 生成同一 trait 的 impl 报 E0119（conflicting implementations）；字段类型不满足 derive 的约束要求（如对含 `f64` 的结构体（Struct） derive `Eq`）在展开后报 E0277。
 - **宏递归展开溢出**：递归宏超过 `#![recursion_limit]`（默认 128）报「recursion limit reached」，修复是调大上限或重写为迭代式重复。
-- **hygiene 与标识符捕获**：宏展开后引用了调用点不存在的标识符（如宏内写 `println!` 但调用 crate 未导入 std prelude 之外的路径——2018 edition 后 `std` 路径在宏中需写全 `::std::`）报「cannot find macro/type in this scope」。这是过程宏与声明宏共有的跨 crate 陷阱。
+- **hygiene 与标识符捕获**：宏展开后引用（Reference）了调用点不存在的标识符（如宏内写 `println!` 但调用 crate 未导入 std prelude 之外的路径——2018 edition 后 `std` 路径在宏中需写全 `::std::`）报「cannot find macro/type in this scope」。这是过程宏与声明宏共有的跨 crate 陷阱。
 - **`cfg` 条件编译的互斥性**：`#[cfg(feature = "a")]` 与 `#[cfg(feature = "b")]` 两个 impl 在 features 同时开启时冲突（E0119）——cfg 的求值发生在宏展开之后、类型检查之前，互斥逻辑必须由 crate 作者用 compile_error! 或 feature 设计保证。
 
-判定宏错误属于哪个阶段：错误信息指向「宏展开点」是展开后失败（类型/借用检查），指向「宏定义/展开过程」是展开期失败。
+判定宏错误属于哪个阶段：错误信息指向「宏展开点」是展开后失败（类型/借用（Borrowing）检查），指向「宏定义/展开过程」是展开期失败。
 
 ### 12.1 边界测试：`derive` 宏的 trait 冲突（编译错误）
 

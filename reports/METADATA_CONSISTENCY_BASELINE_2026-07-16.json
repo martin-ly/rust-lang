@@ -1,0 +1,62 @@
+{
+  "summary": {
+    "date": "2026-07-16",
+    "scanned": 521,
+    "counts": {
+      "D1": 0,
+      "D2": 0,
+      "D3": 0,
+      "D4": 0,
+      "D5": 0,
+      "D6": 3
+    },
+    "pct": {
+      "D1": 0.0,
+      "D2": 0.0,
+      "D3": 0.0,
+      "D4": 0.0,
+      "D5": 0.0,
+      "D6": 0.6
+    },
+    "D2_base_files_with_asp_and_bloom": 324,
+    "flagged_files": 3
+  },
+  "examples": {
+    "D1": [],
+    "D2": [],
+    "D3": [],
+    "D4": [],
+    "D5": [],
+    "D6": [
+      [
+        "concept/00_meta/02_sources/01_authority_source_map.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/00_meta/03_audit/01_concept_audit_guide.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/07_future/02_preview_features/19_const_trait_preview.md",
+        "Summary 为空"
+      ]
+    ]
+  },
+  "per_file": {
+    "concept/00_meta/02_sources/01_authority_source_map.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/00_meta/03_audit/01_concept_audit_guide.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/07_future/02_preview_features/19_const_trait_preview.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    }
+  }
+}

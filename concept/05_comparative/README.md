@@ -226,7 +226,7 @@ L1-L4 知识                L5 综合                L6-L7 决策
 
 L5 的综合分析输出到：
 
-- **L4 形式化**: 对比结论依赖的理论基础 → [类型论](../04_formal/00_type_theory/01_type_theory.md) · [所有权形式化](../04_formal/01_ownership_logic/02_ownership_formal.md)
+- **L4 形式化**: 对比结论依赖的理论基础 → [类型论](../04_formal/00_type_theory/01_type_theory.md) · [所有权（Ownership）形式化](../04_formal/01_ownership_logic/02_ownership_formal.md)
 - **L6 生态**: 工程模式选择（Typestate vs OOP）、工具链决策
 - **L7 前沿**: 语言演进方向（Rust 是否需要 GC？async 模型优化？）
 - **实践**: 技术栈选型、团队培训路径设计、迁移策略
@@ -241,9 +241,9 @@ L5 的综合分析输出到：
 |---|---|---|
 | [RTTI 与动态类型识别](../02_intermediate/04_types_and_conversions/05_rtti_and_dynamic_typing.md) | C++ `typeid`/`dynamic_cast` vs Rust `Any`/`TypeId` | [Rust vs C++](01_systems_languages/01_rust_vs_cpp.md) |
 | [C 预处理器 vs Rust 宏](../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md) | 文本替换宏 vs 卫生宏/过程宏（Procedural Macro） | [Rust vs C++](01_systems_languages/01_rust_vs_cpp.md) |
-| [异常安全：C++ 与 Rust 的错误处理哲学](../02_intermediate/03_error_handling/04_exception_safety_rust_cpp.md) | 异常安全保证 vs `Result`/panic 边界 | [Safety Boundaries](03_domain_comparisons/01_safety_boundaries.md) |
-| [构造与初始化：C++ 构造函数 vs Rust 结构体字面量](../02_intermediate/00_traits/05_construction_and_initialization.md) | 构造函数/RAII vs 字面量/Builder | [Rust vs C++](01_systems_languages/01_rust_vs_cpp.md) |
-| [友元 vs 模块可见性](../02_intermediate/05_modules_and_visibility/02_friend_vs_module_privacy.md) | C++ `friend` vs Rust `pub(crate)` 隐私边界 | [Safety Boundaries](03_domain_comparisons/01_safety_boundaries.md) |
+| [异常安全：C++ 与 Rust 的错误处理（Error Handling）哲学](../02_intermediate/03_error_handling/04_exception_safety_rust_cpp.md) | 异常安全保证 vs `Result`/panic 边界 | [Safety Boundaries](03_domain_comparisons/01_safety_boundaries.md) |
+| [构造与初始化：C++ 构造函数 vs Rust 结构体（Struct）字面量](../02_intermediate/00_traits/05_construction_and_initialization.md) | 构造函数/RAII vs 字面量/Builder | [Rust vs C++](01_systems_languages/01_rust_vs_cpp.md) |
+| [友元 vs 模块（Module）可见性](../02_intermediate/05_modules_and_visibility/02_friend_vs_module_privacy.md) | C++ `friend` vs Rust `pub(crate)` 隐私边界 | [Safety Boundaries](03_domain_comparisons/01_safety_boundaries.md) |
 
 ---
 

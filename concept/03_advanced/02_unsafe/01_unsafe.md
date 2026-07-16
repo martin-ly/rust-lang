@@ -167,6 +167,7 @@
       - [9.6.3 为什么需要 unsafe 包装？](#963-为什么需要-unsafe-包装)
       - [9.6.4 迁移与 lint](#964-迁移与-lint)
   - [判定表：unsafe 使用与 UB 边界判定](#判定表unsafe-使用与-ub-边界判定)
+  - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
   - [相关概念链接](#相关概念链接)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
   - [权威来源索引](#权威来源索引)
@@ -211,6 +212,7 @@
   - [自 docs/05\_guides/05\_unsafe\_rust\_guide.md 合并的补充内容](#自-docs05_guides05_unsafe_rust_guidemd-合并的补充内容)
     - [🔗 推荐学习路径](#-推荐学习路径)
     - [📖 Rustonomicon 逐章对标表](#-rustonomicon-逐章对标表)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 <!-- L3::权威定义 -->
 
@@ -1268,7 +1270,7 @@ fn safe_raw_pointer() {
 
 1. **别名校验模型**：Stacked Borrows → Tree Borrows（2023 起成为 Miri 可选模型，`cargo miri test -- -Zmiri-tree-borrows`），对「重借后原引用复用」等模式更宽容；Rust 官方尚未承诺最终模型，但 Tree Borrows 是当前事实候选；
 2. **2024 Edition 的 unsafe 显式化**：`unsafe extern` 块、`#[unsafe(no_mangle)]` 属性语法、以及 `unsafe fn` 体内操作需内层 `unsafe` 块的 lint（`unsafe_op_in_unsafe_fn` 在 2024 edition 默认 deny）；
-3. **Miri 能力扩展**：从别名/UB 检测扩展到并发（data-race 检测）、弱内存序（`-Zmiri-many-seeds`）、以及 SIMD/内联汇编部分指令的解释执行；
+3. **Miri 能力扩展**：从别名/UB 检测扩展到并发（data-race 检测）、弱内存序（`-Zmiri-many-seeds`）、以及 SIMD/内联汇编（Inline Assembly）部分指令的解释执行；
 4. **指针来源（provenance）**：Strict Provenance API（`ptr::with_addr`/`map_addr`，1.84 稳定大部分）把「地址 vs 来源」分离，逐步替代 `as usize` 往返转换的未定义行为灰色地带。
 
 跟踪入口：[Rustonomicon](https://doc.rust-lang.org/nomicon/)、[Miri README](https://github.com/rust-lang/miri) 与 [UCG (Unsafe Code Guidelines)](https://github.com/rust-lang/unsafe-code-guidelines) 仓库。
@@ -1553,7 +1555,7 @@ Miri 不是唯一的动态检测工具。根据错误类型和检测阶段，Val
 
 #### 语义精确定义
 
-`std::ptr::read` / `write` 与裸指针解引用是 unsafe 内存操作的三个精度不同的工具，语义差异在「所有权的移动轨迹」：
+`std::ptr::read` / `write` 与裸指针解引用是 unsafe 内存操作的三个精度不同的工具，语义差异在「所有权（Ownership）的移动轨迹」：
 
 - **`std::ptr::read<T>(src: *const T) -> T`**：从 `src` **按位复制**出 `T` 并返回——源内存不变，但语义上「值的所有权被移出」（编译器视为 move）。双重所有权的责任转移给调用者：源位置必须被视为已消耗（否则 double-drop）。它是 `mem::replace`/`Option::take` 的 unsafe 原型。
 - **`std::ptr::write<T>(dst: *mut T, src: T)`**：把 `src` 按位写入 `dst`，**不读取也不 drop `dst` 原有内容**——这是它与 `*dst = src` 的唯一差别，也是对未初始化内存唯一合法的写入方式（`*dst = src` 会先 drop 旧值，对未初始化内存即 UB）。
@@ -1746,7 +1748,7 @@ unsafe fn construct_in_place<T>(ptr: *mut T, f: impl FnOnce() -> T) {
 
 - **危险模式 1：`ptr::read` 后原位置未失效导致 double-free**：`let v = ptr::read(p);` 后原 `*p` 仍会在作用域末正常 drop——同一分配被 drop 两次。正确姿势：`read` 后立即 `mem::forget` 原持有者，或改用 `ManuallyDrop<T>` 包装使 drop 不再自动发生（`Vec::pop` 内部即「`read` 末尾元素 + `set_len(len-1)` 使该区域脱离 Vec 的 drop 范围」）。
 - **危险模式 2：`ptr::write` 覆盖已初始化值导致内存泄漏**：`ptr::write(p, new)` 不 drop `*p` 的旧值——旧值持有的堆资源（`String` 缓冲区、`Box`）永久泄漏。正确姿势：覆盖已初始化内存用 `ptr::replace`（返回旧值由调用方处理）或 `*p = new`（自动 drop 旧值）；`ptr::write` 只用于「确认未初始化」的槽位。
-- **危险模式 3：对未初始化内存使用 `*ptr = val`**：赋值语义先 drop 后写——对未初始化内存执行 drop 是「对垃圾字节调用析构函数」，UB 中最难调试的一类（可能「碰巧工作」直到分配器状态改变）。正确姿势：`MaybeUninit<T>` 生命周期管理（`uninit()` → `write()` → `assume_init()`），或 `ptr::write` 直写裸指针。
+- **危险模式 3：对未初始化内存使用 `*ptr = val`**：赋值语义先 drop 后写——对未初始化内存执行 drop 是「对垃圾字节调用析构函数」，UB 中最难调试的一类（可能「碰巧工作」直到分配器状态改变）。正确姿势：`MaybeUninit<T>` 生命周期（Lifetimes）管理（`uninit()` → `write()` → `assume_init()`），或 `ptr::write` 直写裸指针。
 
 三模式的统一识别信号：代码中「`read`/`write`/解引用」与「初始化状态」的配对——每次操作前自问「这块内存此刻是否已初始化、之后谁负责 drop」，两问都有明确答案才合法。Miri 能动态捕获全部三类错误。
 
@@ -2643,7 +2645,7 @@ fn main() {
   - `MaybeUninit` 表示与有效性正式文档化
   - 安全代码允许对联合体字段取 `&raw const/mut`
 - **[Rust 1.93](../../07_future/00_version_tracking/rust_1_93_stabilized.md)**
-  - `MaybeUninit` 切片 API（`assume_init_ref/mut`、`write_copy/clone_of_slice`、`assume_init_drop`）
+  - `MaybeUninit` 切片（Slice） API（`assume_init_ref/mut`、`write_copy/clone_of_slice`、`assume_init_drop`）
 
 ## 相关概念链接
 
@@ -2813,7 +2815,7 @@ Tree Borrows（TB）修复了 SB 的多个问题：
 | SB 问题 | TB 修复 |
 |:---|:---|
 | `&T` 和 `*mut T` 的良性混用被禁止 | 引入 `Foreign` 读权限，允许外部读取 |
-| 循环引用结构中的借用失效 | 树形结构追踪，局部失效而非全局失效 |
+| 循环引用结构中的借用（Borrowing）失效 | 树形结构追踪，局部失效而非全局失效 |
 | 某些合法 unsafe 代码被误判 | 更精确的权限传播 |
 
 ```text

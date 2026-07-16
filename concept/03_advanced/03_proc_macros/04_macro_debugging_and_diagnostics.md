@@ -339,7 +339,7 @@ impl rustc_driver::Callbacks for MyCallbacks {
 
 ## 反命题
 
-> **反命题 1**: "可以用常规 debugger 调试过程宏（Procedural Macro）" ⟹ 不成立。宏在编译期执行，运行时调试器无法介入。
+> **反命题 1**: "可以用常规 debugger 调试过程宏（Procedural Macro）" ⟹ 不成立。宏在编译期执行，运行时（Runtime）调试器无法介入。
 >
 > **反命题 2**: "宏错误信息必然模糊" ⟹ 不成立。通过 `proc_macro::Diagnostic` 与 span 可以输出精确错误。
 >
@@ -366,7 +366,7 @@ impl rustc_driver::Callbacks for MyCallbacks {
 
 | 属性 | 取值 / 判定 | 依据 |
 |---|---|---|
-| 展开查看 | `cargo expand` 查看宏展开结果，支持模块/测试/feature 维度过滤 | 本文 §二 |
+| 展开查看 | `cargo expand` 查看宏展开结果，支持模块（Module）/测试/feature 维度过滤 | 本文 §二 |
 | 诊断输出 | 过程宏可向 stderr 输出诊断；`syn::Error` 提供精确定位 | 本文 §三–§四 |
 | 错误聚合 | `syn::Error::combine` 一次报告多个错误 | 本文 §4.2 |
 | 性能分析 | `cargo build --timings` / `RUSTC_LOG` / 宏展开耗时测量 | 本文 §五 |
@@ -410,7 +410,7 @@ mindmap
 
 ## ⚠️ 反例与陷阱
 
-> 陷阱：声明宏内部直接引用调用点变量，会因卫生性导致“找不到变量”的错误。
+> 陷阱：声明宏内部直接引用（Reference）调用点变量，会因卫生性导致“找不到变量”的错误。
 > 下面代码在 rustc 1.97 --edition 2024 下触发 `E0425`。
 
 ```rust,compile_fail,E0425

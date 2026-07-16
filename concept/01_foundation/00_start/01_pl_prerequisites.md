@@ -524,7 +524,7 @@ unsafe {
 - **上位（is-a）**：编程语言理论（PLT）核心概念集在 Rust 中的落点。
 - **下位（实例）**：求值策略、副作用模型、变量模型、Continuation/CPS、结构化程序定理五个子课题（本文 §一–§五）。
 - **组合**：与 [副作用与纯度](04_effects_and_purity.md)、[变量模型](../03_values_and_references/03_variable_model.md) 共同构成 Rust 语义的推理底座。
-- **依赖**：是理解 [所有权](../01_ownership_borrow_lifetime/01_ownership.md) 与 [Async](../../03_advanced/01_async/01_async.md) 的前置知识。
+- **依赖**：是理解 [所有权（Ownership）](../01_ownership_borrow_lifetime/01_ownership.md) 与 [Async](../../03_advanced/01_async/01_async.md) 的前置知识。
 
 ---
 
@@ -574,7 +574,7 @@ fn main() {
 }
 ```
 
-**修正对照**（串行化可变借用，编译通过）：
+**修正对照**（串行化可变借用（Mutable Borrow），编译通过）：
 
 ```rust
 fn main() {

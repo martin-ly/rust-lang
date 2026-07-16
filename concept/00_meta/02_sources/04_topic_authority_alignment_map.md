@@ -2,7 +2,10 @@
 
 > **EN**: Topic-Authority Alignment Map
 > **Summary**: 维护 Rust 知识库中各概念主题与其权威来源（官方文档、学术论文、工业生态、路线图）之间的对齐关系，确保每个概念有单一可信解释来源。
-> **权威来源**: [05_international_authority_index.md](05_international_authority_index.md) · [Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**:
+> [05_international_authority_index.md](05_international_authority_index.md) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > 生成时间：2026-07-05 05:12
 > 工具：`scripts/topic_authority_aligner.py` | 数据来源：Rust 官方文档、形式化/验证生态、工业生态、项目路线图
@@ -34,7 +37,9 @@
 
 ## 1. 当前项目概念层级（L0-L7）
 
-本节聚焦「当前项目概念层级（L0-L7）」，覆盖L00（62 篇）、L01（53 篇）、L02（36 篇）、L03（37 篇）等方面。论述顺序由定义到边界：先明确「当前项目概念层级（L0-L7）」在「主题-权威来源对齐图谱 (Topic-Authority Alignment Map)」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「当前项目概念层级（L0-L7）」的判定标准，并指出它在全页论证链中的位置。
+本节聚焦「当前项目概念层级（L0-L7）」，覆盖L00（62 篇）、L01（53 篇）、L02（36 篇）、L03（37 篇）等方面。
+论述顺序由定义到边界：先明确「当前项目概念层级（L0-L7）」在「主题-权威来源对齐图谱 (Topic-Authority Alignment Map)」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。
+读完后应能用一句话复述「当前项目概念层级（L0-L7）」的判定标准，并指出它在全页论证链中的位置。
 
 ### L00（62 篇）
 

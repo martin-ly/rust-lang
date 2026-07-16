@@ -196,11 +196,11 @@ flowchart TD
 
 完成安装后，进入 Rust 最核心的概念：
 
-1. [所有权与移动语义](../01_ownership_borrow_lifetime/01_ownership.md)
+1. [所有权（Ownership）与移动语义](../01_ownership_borrow_lifetime/01_ownership.md)
 2. [借用（Borrowing）与引用（Reference）](../01_ownership_borrow_lifetime/02_borrowing.md)
-3. [类型系统](../02_type_system/01_type_system.md)
+3. [类型系统（Type System）](../02_type_system/01_type_system.md)
 
-随后再学习 [模块系统](../07_modules_and_items/01_modules_and_paths.md)、[错误处理](../08_error_handling/01_error_handling_basics.md) 与 [测试](../10_testing_basics/01_testing_basics.md)。
+随后再学习 [模块（Module）系统](../07_modules_and_items/01_modules_and_paths.md)、[错误处理（Error Handling）](../08_error_handling/01_error_handling_basics.md) 与 [测试](../10_testing_basics/01_testing_basics.md)。
 
 ---
 > **权威来源**: [TRPL — Getting Started](https://doc.rust-lang.org/book/ch01-00-getting-started.html) · [Rust Installation](https://www.rust-lang.org/tools/install) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [rustup.rs](https://rustup.rs/)
@@ -255,7 +255,7 @@ flowchart TD
 <details>
 <summary>✅ 答案与解析</summary>
 
-`cargo check` 只进行类型检查与借用检查，不生成机器码，因此比 `cargo build` 快得多，适合快速发现编译错误。`cargo build` 会生成可执行文件或库，用于运行与发布。
+`cargo check` 只进行类型检查与借用（Borrowing）检查，不生成机器码，因此比 `cargo build` 快得多，适合快速发现编译错误。`cargo build` 会生成可执行文件或库，用于运行与发布。
 </details>
 
 ## 过渡段

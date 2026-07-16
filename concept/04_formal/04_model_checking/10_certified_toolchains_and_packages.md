@@ -41,6 +41,7 @@
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
     - [反例：forbid 策略下的 `unsafe` 块（rustc 1.97.0 实测）](#反例forbid-策略下的-unsafe-块rustc-1970-实测)
     - [✅ 修正：安全 API 或显式缩小策略范围](#-修正安全-api-或显式缩小策略范围)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -52,7 +53,7 @@
 |:---|:---|:---|:---|
 | **Qualification（工具鉴定）** | 开发工具（编译器等） | 证明工具引入缺陷的风险已受控；按 ISO 26262-8-11 的 TCL/TD 分级 | Ferrocene / HighTec 对 rustc 的 TÜV 鉴定 |
 | **Certification（产品认证）** | 交付软件（库、组件） | 软件本身按安全标准开发并通过评估 | Ferrocene certified core 子集 |
-| **SEooC（Safety Element out of Context）** | 脱离具体系统上下文开发的软件元素 | 假设一组安全需求，供系统集成者裁剪引用 | certified core 正是 SEooC |
+| **SEooC（Safety Element out of Context）** | 脱离具体系统上下文开发的软件元素 | 假设一组安全需求，供系统集成者裁剪引用（Reference） | certified core 正是 SEooC |
 
 > **关键洞察**：编译器鉴定不等于库认证，库认证不等于应用认证。三层证据各自独立，项目安全案例必须逐层引用。
 
@@ -99,8 +100,8 @@ Ferrocene 是当前唯一公开**符号级认证清单**的 Rust 库认证案例
 ### 3.2 HighTec Rust Development Platform（AURIX）
 
 - **定位**：面向 Infineon AURIX TC3x/TC4x 微控制器的 Rust 开发平台；HighTec 是**首个为 AURIX 提供 ISO 26262 认证 Rust 编译器**的厂商（2024-05 随英飞凌 AURIX Rust 生态发布）。
-- **认证**：Rust 编译器 ISO 26262 ASIL D 认证；其 TriCore C/C++ 编译器 9.1.2 于 2025-07-10 获 **TÜV NORD** ASIL D 认证——C/C++ 与 Rust 共用 LLVM 后端、链接器与构建基础设施，支持混合语言（hybrid）开发：把网络安全关键模块用 Rust 重写、其余保留 C/C++，无需拆分工具链或重复鉴定。
-- **配套**：预配置 `cargo build` 系统、AURIX I/O 库与驱动、Rust 运行时、C/C++ 混合集成示例；与安全认证 RTOS **PXROS-HR**（ISO 26262 ASIL D / IEC 61508 SIL 3 认证）集成；英飞凌 TC37x PAC、Bluewind 驱动、Lauterbach/PLS 调试工具链。
+- **认证**：Rust 编译器 ISO 26262 ASIL D 认证；其 TriCore C/C++ 编译器 9.1.2 于 2025-07-10 获 **TÜV NORD** ASIL D 认证——C/C++ 与 Rust 共用 LLVM 后端、链接器与构建基础设施，支持混合语言（hybrid）开发：把网络安全关键模块（Module）用 Rust 重写、其余保留 C/C++，无需拆分工具链或重复鉴定。
+- **配套**：预配置 `cargo build` 系统、AURIX I/O 库与驱动、Rust 运行时（Runtime）、C/C++ 混合集成示例；与安全认证 RTOS **PXROS-HR**（ISO 26262 ASIL D / IEC 61508 SIL 3 认证）集成；英飞凌 TC37x PAC、Bluewind 驱动、Lauterbach/PLS 调试工具链。
 - **来源**：HighTec 新闻稿 2025-07-10（TÜV NORD 认证）、英飞凌新闻稿 2024-05-08（AURIX Rust 生态），均 2026-07-12 检索核实。
 
 ### 3.3 AdaCore GNAT Pro for Rust

@@ -109,7 +109,7 @@ Rust 在特定位置自动执行类型强制（coercion）：
 
 ## 从 `crates\c02_type_system\docs\tier_04_advanced\03_formalizing_type_systems.md` 迁移的补充视角
 
-> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
+> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏（Macro）观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
 
 # 4.3 Rust 类型系统 - 类型系统形式化
 
@@ -152,11 +152,11 @@ Rust 在特定位置自动执行类型强制（coercion）：
     - 4.3 Drop 语义
   - 1. 借用（Borrowing）检查
     - 5.1 借用（Borrowing）规则形式化
-    - 5.2 Polonius 借用检查器
+    - 5.2 Polonius 借用（Borrowing）检查器
     - 5.3 NLL (Non-Lexical Lifetimes)
-  - [6. 生命周期推断](#七生命周期省略)
+  - [6. 生命周期（Lifetimes）推断](#七生命周期省略)
     - 6.1 生命周期约束系统
-    - 6.2 区域类型系统
+    - 6.2 区域类型系统（Type System）
     - 6.3 生命周期省略（Lifetime Elision）规则
   - 1. 类型健全性
     - 7.1 类型保全性证明
@@ -200,7 +200,7 @@ Rust 在特定位置自动执行类型强制（coercion）：
 
 **类型系统形式化 (Type System Formalization)**:
 
-- **定义**: Rust 1.92.0 类型系统的形式化描述，包括语法定义、类型规则、操作语义、所有权规则、借用检查、生命周期推断、类型健全性、分离逻辑与 RustBelt、Oxide 演算等
+- **定义**: Rust 1.92.0 类型系统的形式化描述，包括语法定义、类型规则、操作语义、所有权（Ownership）规则、借用检查、生命周期推断、类型健全性、分离逻辑与 RustBelt、Oxide 演算等
 - **类型**: 高级层文档
 - **范畴**: 类型系统、形式化方法
 - **版本**: Rust 1.97.0+ (Edition 2024)
@@ -266,7 +266,7 @@ Rust 在特定位置自动执行类型强制（coercion）：
 | :--- | :--- | :--- | :--- | :--- |
 | **λ-演算**       | Lambda 演算    | 函数式编程 | 函数正确性   | ✅          |
 | **线性类型系统** | 线性逻辑       | 所有权系统 | 资源安全     | ✅          |
-| **区域类型系统** | 区域逻辑       | 生命周期   | 引用安全     | ✅          |
+| **区域类型系统** | 区域逻辑       | 生命周期   | 引用（Reference）安全     | ✅          |
 | **HM 类型推断（Type Inference）**  | Hindley-Milner | 类型推断   | 类型正确性   | ✅          |
 | **RustBelt**     | 分离逻辑       | 内存安全（Memory Safety）   | 内存安全证明 | ✅          |
 | **Oxide**        | 核心演算       | Rust 核心  | 语言正确性   | ✅          |
@@ -309,7 +309,7 @@ Rust 类型系统的形式化基于：
 - λ-演算
 - 线性/仿射类型系统
 - 区域类型系统
-- Hindley-Milner 类型推断
+- Hindley-Milner 类型推断（Type Inference）
 
 ---
 (Source: [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html))
@@ -397,7 +397,7 @@ Rust 类型系统的形式化基于：
 >
 > **过渡**: 从子类型变型与生命周期省略（Lifetime Elision）过渡到 trait bound 与强制转换，可以建立“类型即约束、约束即能力”的规范视角。
 >
-> **过渡**: 从类型规范过渡到 ABI 与未定义行为，可以理解类型系统不仅是语法规则，也是内存安全与跨语言互操作的边界。
+> **过渡**: 从类型规范过渡到 ABI 与未定义行为，可以理解类型系统不仅是语法规则，也是内存安全（Memory Safety）与跨语言互操作的边界。
 >
 ---
 

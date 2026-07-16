@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×Ana — 分析命名进程 + 邮箱模型的形式根基与工程投影
 > **前置概念**: [L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · [L4 进程代数与 Rust](01_process_calculi_for_rust.md) · [L3 谱系页 §4.1](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md)
-> **后置概念**: [线性化与一致性谱系](02_linearizability_and_consistency.md) · [L6 分布式共识](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) · [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md)
+> **后置概念**: [线性化与一致性（Coherence）谱系](02_linearizability_and_consistency.md) · [L6 分布式共识](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) · [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md)
 
 ---
 
@@ -120,7 +120,7 @@ Hewitt 模型中 actor 失败没有特殊地位；**监督**是 Erlang（Armstro
   simple_one_for_one : 同构子进程池，崩溃即补
 ```
 
-**任其崩溃（let it crash）**哲学：不防御式地处理所有错误路径，而是让错误使 actor 崩溃、由监督者把状态重置到已知良好初值 ⟹ 错误处理代码从指数级的防御分支收敛为一条重启边。
+**任其崩溃（let it crash）**哲学：不防御式地处理所有错误路径，而是让错误使 actor 崩溃、由监督者把状态重置到已知良好初值 ⟹ 错误处理（Error Handling）代码从指数级的防御分支收敛为一条重启边。
 
 ### 3.2 位置透明性（Location Transparency）
 
@@ -175,13 +175,13 @@ graph TD
 
 ## 五、Rust 映射：actix / ractor / kameo
 
-Rust 没有语言级 actor；三个主流 crate 在类型系统内重建了 Actor 语义：
+Rust 没有语言级 actor；三个主流 crate 在类型系统（Type System）内重建了 Actor 语义：
 
 | 维度 | actix | ractor | kameo |
 |:---|:---|:---|:---|
 | 定位 | 成熟、生态最大（actix-web 基础） | Erlang 语义忠实移植 | 轻量、async 原生 |
 | 地址 | `Addr<A>` / `Recipient<M>` | `ActorRef<M>` | `ActorRef<A>` |
-| 消息 | `Message` trait + `Handler<M>` | 单消息枚举 + `Actor::handle` | `Message<M>` trait |
+| 消息 | `Message` trait + `Handler<M>` | 单消息枚举（Enum） + `Actor::handle` | `Message<M>` trait |
 | 邮箱 | 有界/无界可选 | 有界（背压） | 有界 |
 | 监督 | `Supervisor`（one_for_one 风格） | 监督树 + 重启策略（最接近 OTP） | 内建监督 + 链接（linking） |
 | 远程 | 无内建 | `ractor_cluster`（分布式） | `kameo_remote` |
@@ -234,7 +234,7 @@ impl Actor for Counter {
 }
 ```
 
-三个公理在 Rust 类型中的落点：`pre_start` 对应 `init`（create 由 `Actor::spawn` 完成）、`handle` 对应行为函数 `b`、`send_message` 对应 send 公理——监督则由 `Actor::spawn_linked` 与运行时重启策略提供。
+三个公理在 Rust 类型中的落点：`pre_start` 对应 `init`（create 由 `Actor::spawn` 完成）、`handle` 对应行为函数 `b`、`send_message` 对应 send 公理——监督则由 `Actor::spawn_linked` 与运行时（Runtime）重启策略提供。
 
 ---
 

@@ -10,7 +10,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页（Stream 代数与背压视角）。
 > **分工声明**: Stream 的基础概念（`Stream = 异步 Iterator`、dataflow 映射）留在 [Async/Await §15](01_async.md)；Stream/Sink trait 的 API 面分析留在 `01_async.md` §8.10；[Async 边界全景](06_async_boundary_panorama.md) 只做边界汇总。本页专攻三件事：① Stream 与 Iterator 的**代数对偶**；② `StreamExt` 组合子的**代数定律与失效点**；③ 背压的**形式模型**（窗口/信用制、队列论）。三者互不重复（AGENTS.md §2 Canonical 规则）。
 > **A/S/P 标记**: **S** — Structure
-> **双维定位**: C×Ana — 分析拉取式异步序列的组合结构与速率约束的传播方向
+> **双维定位**: C×Ana — 分析拉取式异步（Async）序列的组合结构与速率约束的传播方向
 > **定位**: 把 `Stream` 从「异步版的 Iterator」这一直觉，上升为可推理的代数对象：对偶签名、组合子定律、以及背压作为「速率约束的反向传播」的形式模型，全部落到可编译验证的示例-反例对上。
 > **前置概念**: [Async/Await](01_async.md) · [Pin 与 Unpin](08_pin_unpin.md) · [Future 与 Executor 机制](04_future_and_executor_mechanisms.md)
 > **后置概念**: [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) · [Async 取消安全](05_async_cancellation_safety.md) · [Iterator 模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)
@@ -85,7 +85,7 @@ flowchart TD
 | | Iterator（同步拉取） | Stream（异步拉取） |
 |---|---|---|
 | 方法 | `fn next(&mut self) -> Option<T>` | `fn poll_next(Pin<&mut Self>, &mut Context) -> Poll<Option<T>>` |
-| 接收者 | `&mut self` | `Pin<&mut Self>`（允许自引用状态机） |
+| 接收者 | `&mut self` | `Pin<&mut Self>`（允许自引用（Reference）状态机） |
 | 驱动者 | 调用者（for 循环） | 执行器（executor 的 poll 循环） |
 | 「现在没有」的表达 | 不存在（阻塞即等待） | `Poll::Pending` + waker 注册 |
 | 惰性 | 不调用 `next` 就不生产 | 不调用 `poll_next` 就不推进 |
@@ -469,7 +469,7 @@ flowchart TD
 - [futures-rs docs — `Stream` trait](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)（`poll_next` 签名与协议约定，2026-07-12 实测 200）
 - [futures-rs docs — `StreamExt`](https://docs.rs/futures/latest/futures/stream/trait.StreamExt.html)（`next` 的 Unpin 约束、`buffer_unordered`/`filter_map` 语义，2026-07-12 实测 200）
 - [tokio-stream docs](https://docs.rs/tokio-stream/latest/tokio_stream/)（`StreamExt::merge` 与 tokio 侧流适配，2026-07-12 实测 200）
-- [withoutboats — *poll_next*](https://without.boats/blog/poll-next/)（Stream/AsyncIterator 设计、pinning 与长生命周期状态机，2026-07-12 实测 200）
+- [withoutboats — *poll_next*](https://without.boats/blog/poll-next/)（Stream/AsyncIterator 设计、pinning 与长生命周期（Lifetimes）状态机，2026-07-12 实测 200）
 - [withoutboats — *poll_progress*](https://without.boats/blog/poll-progress/)（`Buffered`/`BufferUnordered` 与 for-await 循环体的并发边界，2026-07-12 实测 200）
 - [withoutboats — *Iterators and traversables*](https://without.boats/blog/iterators-and-traversables/)（iterator 的定义性讨论，2026-07-12 实测 200）
 - [Tokio docs — `tokio::sync::mpsc`](https://docs.rs/tokio/latest/tokio/sync/mpsc/)（bounded/unbounded channel 语义与 `send` 的背压行为）

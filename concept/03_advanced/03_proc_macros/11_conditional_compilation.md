@@ -48,7 +48,7 @@
 
 ## 二、配置谓词
 
-`#[cfg(predicate)]` 的谓词语言是「键值对 + 布尔组合」的受限逻辑，本节系统枚举：
+`#[cfg(predicate)]` 的谓词语言是「键值对 + 布尔组合」的受限逻辑，本节系统枚举（Enum）：
 
 - **基本形式**：`#[cfg(feature = "x")]`、`#[cfg(unix)]`、`#[cfg(target_arch = "x86_64")]`——单谓词直接判定；组合用 `all()`/`any()`/`not()`（无裸 `&&`，嵌套是递归的）；
 - **布尔字面量谓词**（RFC 3695，1.88 稳定）：`#[cfg(true)]`/`#[cfg(false)]`——看似无用，实为「程序化生成 cfg」与「临时禁用代码」的规范形式（替代 `#[cfg(any())]` 等 hack）；
@@ -99,7 +99,7 @@ fn main() {
 }
 ```
 
-适用范围：`#[cfg]`、`#[cfg_attr]`、内置 `cfg!` 宏，以及 Cargo 清单与配置中的 `[target.'cfg(...)']` 表。注意 `cfg(r#true)` / `cfg(r#false)` 保留旧行为（作为自定义 cfg 选项名，由 `--cfg true` 控制），与布尔字面量区分。
+适用范围：`#[cfg]`、`#[cfg_attr]`、内置 `cfg!` 宏（Macro），以及 Cargo 清单与配置中的 `[target.'cfg(...)']` 表。注意 `cfg(r#true)` / `cfg(r#false)` 保留旧行为（作为自定义 cfg 选项名，由 `--cfg true` 控制），与布尔字面量区分。
 
 ---
 
@@ -111,7 +111,7 @@ fn main() {
 - **`test`**：`cargo test` 构建测试 harness 时设置——`#[cfg(test)] mod tests` 的底层机制，也可用于「测试专用的 mock 实现」；
 - **`doc`**：rustdoc 构建时设置——文档测试中注入辅助代码（`#[cfg(doc)]` 块只在文档构建存在）；
 - **`doctest`**（1.40+）：文档测试编译时设置——区分「rustdoc 渲染」与「doctest 运行」；
-- **`miri`**：Miri 解释执行时设置——`#[cfg(miri)]` 跳过 Miri 不支持的操作（内联汇编、部分 SIMD）或减慢的测试（迭代次数降级）；
+- **`miri`**：Miri 解释执行时设置——`#[cfg(miri)]` 跳过 Miri 不支持的操作（内联汇编（Inline Assembly）、部分 SIMD）或减慢的测试（迭代次数降级）；
 - **`target_has_atomic`** 系列：按宽度声明原子支持——`no_std`/嵌入式目标的可移植性门控依据。
 
 完整权威列表见 [Rust Reference — Conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)。
@@ -287,7 +287,7 @@ Cargo 中通过 `RUSTFLAGS` 或在 `.cargo/config.toml` 中设置。
 
 > **权威来源**: [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html), [TRPL](https://doc.rust-lang.org/book/title-page.html), [Cargo Reference — Features](https://doc.rust-lang.org/cargo/reference/features.html)
 >
-> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch 10](../../00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用（Reference） [Authority Source Sprint Batch 10](../../00_meta/02_sources/05_international_authority_index.md)
 
 ---
 

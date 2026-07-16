@@ -537,7 +537,7 @@ fn derive_keys(master_key: &[u8], salt: &[u8]) -> ([u8; 32], [u8; 32]) {
 Rust 密码学生态按“原语 → 协议 → 前沿”三层组织，三个代表 crate 各占一层：
 
 - **ring（安全原语聚合）**: 精选的密码学原语集合（AEAD、ECDSA/EdDSA、HKDF），设计哲学是“无选择即无错误”——每种用途只提供一个现代算法（如对称加密只有 AES-GCM 与 ChaCha20-Poly1305），消除“选错参数”这一最大的人为漏洞来源；底层是 BoringSSL 的恒定时间汇编 + Rust 安全包装。
-- **rustls（纯 Rust TLS）**: 完整 TLS 1.2/1.3 实现，内存安全（无 unsafe 解析路径）、默认仅支持安全密码套件；经独立审计，是替代 OpenSSL 绑定的生产选项——AWS 等厂商资助其持续审计。
+- **rustls（纯 Rust TLS）**: 完整 TLS 1.2/1.3 实现，内存安全（Memory Safety）（无 unsafe 解析路径）、默认仅支持安全密码套件；经独立审计，是替代 OpenSSL 绑定的生产选项——AWS 等厂商资助其持续审计。
 - **dalek-cryptography（零知识友好）**: 高性能椭圆曲线（Curve25519/Ristretto）实现，恒定时间、形式化验证友好，是 ZK 证明系统（bulletproofs 等）与隐私协议的代数底座。
 
 判定依据：TLS 用 rustls，原语用 ring（够用即停），曲线/ZK 用 dalek——自造密码学轮子不在选项内。

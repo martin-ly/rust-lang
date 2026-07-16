@@ -153,7 +153,7 @@ fn handle_signals() -> Result<(), Box<dyn std::error::Error>> {
 - 本地无亲缘进程：命名管道或 Unix 域套接字。
 - 高性能大数据：共享内存 + 同步原语。
 - 跨网络通信：TCP/UDP 套接字。
-- 异步事件通知：信号。
+- 异步（Async）事件通知：信号。
 - 同一主机进程/线程间消息传递：`crossbeam-channel`。
 
 > **L2 向下引用（Reference）**: IPC 安全抽象建立在 [Trait 系统](../../02_intermediate/00_traits/01_traits.md) 与 [错误处理（Error Handling）](../../02_intermediate/03_error_handling/01_error_handling.md) 之上。
@@ -285,7 +285,7 @@ fn main() -> std::io::Result<()> {
 
 ## ⚠️ 反例与陷阱：发送端 drop 后 recv().unwrap() panic（运行时陷阱）
 
-**反例**（运行时陷阱，代码可通过编译）：
+**反例**（运行时（Runtime）陷阱，代码可通过编译）：
 
 ```rust
 use std::sync::mpsc;

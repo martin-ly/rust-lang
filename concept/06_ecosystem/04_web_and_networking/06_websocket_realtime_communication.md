@@ -149,7 +149,7 @@ WebSocket 实时通信
 
 ## 1. WebSocket 基础
 
-WebSocket（RFC 6455）与 HTTP 的本质差异是**连接生命周期与消息方向**：
+WebSocket（RFC 6455）与 HTTP 的本质差异是**连接生命周期（Lifetimes）与消息方向**：
 
 | 维度 | HTTP/1.1 | WebSocket |
 |---|---|---|
@@ -728,7 +728,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## ⚠️ 反例与陷阱
 
-**陷阱：广播遍历中修改客户端表**。WebSocket 服务常见的「遍历连接表发消息、顺手剔除失效连接」写法，在 Rust 中是不可变借用与可变借用冲突：
+**陷阱：广播遍历中修改客户端表**。WebSocket 服务常见的「遍历连接表发消息、顺手剔除失效连接」写法，在 Rust 中是不可变借用（Mutable Borrow）与可变借用冲突：
 
 ```rust,compile_fail
 use std::collections::HashMap;

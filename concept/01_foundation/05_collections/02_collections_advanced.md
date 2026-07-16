@@ -726,8 +726,8 @@ fn main() {
 本节的边界用例覆盖高级集合的五个典型失败点：
 
 - **`BTreeMap` 键未实现 `Ord`**：编译错误（E0277）——自定义键类型必须派生或实现全序；
-- **`VecDeque` 环绕索引**：逻辑错误——`make_contiguous` 与切片视图的交互需注意环绕状态下的不连续性；
-- **`HashMap` 的 `Entry` 与借用冲突**：`entry(key).or_insert_with(|| compute(&map))` 中闭包借用 `map` 与 `entry` 的可变借用冲突（E0502）——预计算值再传入是标准修复；
+- **`VecDeque` 环绕索引**：逻辑错误——`make_contiguous` 与切片（Slice）视图的交互需注意环绕状态下的不连续性；
+- **`HashMap` 的 `Entry` 与借用冲突**：`entry(key).or_insert_with(|| compute(&map))` 中闭包（Closures）借用 `map` 与 `entry` 的可变借用（Mutable Borrow）冲突（E0502）——预计算值再传入是标准修复；
 - **范围查询中的可变遍历**：`range_mut` 与修改键值会破坏 B 树有序性（`BTreeMap` 只暴露 `range_mut` 给值不给键）；
 - **自定义哈希与 `Eq` 不一致**：运行期逻辑错误——相等键哈希不同导致「键存在却查不到」，编译器无法检测，是自定义 `Hash` 实现的第一审查点。
 
@@ -1034,7 +1034,7 @@ fn main() {
 | `BTreeMap` | 有序键值，O(log n)，缓存友好的 B 树 | std |
 | `VecDeque` | 双端队列，环形缓冲，两端 O(1) | std |
 | `BinaryHeap` | 最大堆，push/pop O(log n) | std |
-| 自定义 Hasher | `BuildHasher` 可替换哈希算法 | 泛型参数 |
+| 自定义 Hasher | `BuildHasher` 可替换哈希算法 | 泛型（Generics）参数 |
 | 内存布局 | 各结构布局与缓存行为差异显著 | 本页「内存布局与性能特征」 |
 
 ## 🔗 概念关系

@@ -178,7 +178,7 @@ Phase 6 — 代码生成
 Rust 编译器前端流水线：`Token 流 → AST → 宏展开 → AST（稳定后）`。
 
 - **词法与语法分析**：`rustc_lexer` 产出 token 流，`rustc_parse` 用递归下降 + Pratt 解析器构造 AST；错误恢复采用「同步点跳过」策略，保证单次编译报出尽量多错误。
-- **宏展开**：`rustc_expand` 在 AST 层面工作——声明宏（`macro_rules!`）按模式匹配做 token 替换并做卫生性（hygiene）处理，过程宏在独立 crate 中编译为 dylib 后加载执行（`proc_macro` 桥）。展开是**惰性**的：仅在名称解析需要时触发，这解释了为何宏内引用后定义项有时失败。
+- **宏展开**：`rustc_expand` 在 AST 层面工作——声明宏（Declarative Macro）（`macro_rules!`）按模式匹配（Pattern Matching）做 token 替换并做卫生性（hygiene）处理，过程宏（Procedural Macro）在独立 crate 中编译为 dylib 后加载执行（`proc_macro` 桥）。展开是**惰性**的：仅在名称解析需要时触发，这解释了为何宏内引用（Reference）后定义项有时失败。
 
 判定依据：调试展开问题用 `cargo expand`（或 `-Zunpretty=expanded` on nightly）；语法错误定位不准时先检查最近编辑的宏调用。
 
@@ -238,7 +238,7 @@ pub enum ExprKind {
 HIR（High-level IR）是宏展开与名称解析之后的第一个完整语义表示，设计目标与类型检查功能构成其存在的两大理由：
 
 - **设计目标**: 把表面语法（surface syntax）“脱糖”为规范化形式——`for` 循环变为 `loop + match`、`?` 变为 `try` 块、`if let` 链展开为嵌套 `match`；所有后续分析只需处理这个小得多的语言内核，这是 rustc 可维护性的关键决策。
-- **类型检查**: HIR 是类型检查的输入——每个节点标注表达式类型，方法解析、自动引用/解引用（auto-ref/deref）、闭包捕获分析都在此层完成；错误信息中的 span 仍映射回原始源码，脱糖不丢失诊断精度。
+- **类型检查**: HIR 是类型检查的输入——每个节点标注表达式类型，方法解析、自动引用/解引用（auto-ref/deref）、闭包（Closures）捕获分析都在此层完成；错误信息中的 span 仍映射回原始源码，脱糖不丢失诊断精度。
 
 判定依据：读 rustc 源码时，涉及“某语法如何被检查”的问题从 HIR 层入手；涉及“某语法如何展开”的问题看 AST→HIR 的 lowering 过程。
 
@@ -364,7 +364,7 @@ Rust 类型推断的特点:
 
 MIR（Mid-level IR）是借用检查与多数 Rust 特有优化的舞台，其设计取舍：
 
-- **结构**：控制流图 + 基本块，语句为简单的赋值/调用/跳转——与 HIR 的表达式嵌套相反，MIR 是**扁平化**的，每个临时值有显式 `Place`（含类型与生命周期信息）。
+- **结构**：控制流图 + 基本块，语句为简单的赋值/调用/跳转——与 HIR 的表达式嵌套相反，MIR 是**扁平化**的，每个临时值有显式 `Place`（含类型与生命周期（Lifetimes）信息）。
 - **优化**：内联（`MirPass`）、常量传播、死代码消除、协程/生成器布局（async 状态机转换也发生在 MIR 层）。
 - **常量求值**：`const fn`/静态初始化由 Miri 解释器（CTFE 引擎）执行，可捕获常量上下文中的 UB（如越界、未初始化读取）。
 

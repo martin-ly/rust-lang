@@ -120,8 +120,8 @@ Trait 转换:
 
 - **`From`/`Into`**：无损转换，实现 `From` 自动获得 `Into`（blanket impl）——`String::from(&str)`、`u32::from(u8)`。`From` 实现即「类型间存在典范映射」的声明；
 - **`TryFrom`/`TryInto`**：有损但可校验的转换，返回 `Result`——`u8::try_from(i32)`、`usize::try_from(u64)`。1.34 起 std 为所有「可能失败」的整数转换提供实现；
-- **`AsRef`/`AsMut`**：廉价引用转换（`String: AsRef<str>`），用于泛型 API 接受「任何可视为 str 的类型」；
-- **`Deref`/`DerefMut`**：智能指针的解引用协议，支撑 deref coercion——只应为「指针-like」类型实现，滥用作继承模拟是反模式。
+- **`AsRef`/`AsMut`**：廉价引用（Reference）转换（`String: AsRef<str>`），用于泛型（Generics） API 接受「任何可视为 str 的类型」；
+- **`Deref`/`DerefMut`**：智能指针（Smart Pointer）的解引用协议，支撑 deref coercion——只应为「指针-like」类型实现，滥用作继承模拟是反模式。
 
 判定准则：转换方向无损 → `From`；可能失败 → `TryFrom`；只是「可视为」→ `AsRef`；`as` 仅用于数值与指针的底层转换。
 
@@ -221,7 +221,7 @@ fn main() {}
 
 ## 四、示例与反例
 
-本节用三组对照说明「类型转换（Type Conversions）」：正确示例：自定义错误类型、反例：滥用 `as` 导致截断与反例：违反孤儿规则。每组先给正确示例并标注其成立的类型系统依据，再给反例并标注编译器诊断（E0xxx）或运行时后果，最后给出修正方案。判读标准：正确示例应能通过 rustc 1.97 编译且无 clippy 警告，反例的失败点必须可定位到具体规则。
+本节用三组对照说明「类型转换（Type Conversions）」：正确示例：自定义错误类型、反例：滥用 `as` 导致截断与反例：违反孤儿规则。每组先给正确示例并标注其成立的类型系统（Type System）依据，再给反例并标注编译器诊断（E0xxx）或运行时（Runtime）后果，最后给出修正方案。判读标准：正确示例应能通过 rustc 1.97 编译且无 clippy 警告，反例的失败点必须可定位到具体规则。
 
 ### 4.1 正确示例：自定义错误类型
 
@@ -416,7 +416,7 @@ graph TD
 本节测验覆盖类型转换的三个核心判别点：
 
 - **理解层**：`From`/`Into`/`TryFrom`/`AsRef` 的分工——给定转换需求选择正确的 trait；
-- **应用层**：`impl Into<T>` 参数的 API 设计——为什么 `fn new(name: impl Into<String>)` 比 `fn new(name: String)` 更符合人体工学，以及它对单态化的影响；
+- **应用层**：`impl Into<T>` 参数的 API 设计——为什么 `fn new(name: impl Into<String>)` 比 `fn new(name: String)` 更符合人体工学，以及它对单态化（Monomorphization）的影响；
 - **分析层**：`as` 转换的语义表——整数截断、浮点饱和、指针 provenance 三类 `as` 行为的准确记忆。
 
 作答建议：测验 3 的每个 `as` 行为先用小程序实测（如 `(-1i8) as u8`、`1e300 as u8`），实测结果往往与直觉相悖——这正是本测验的价值。

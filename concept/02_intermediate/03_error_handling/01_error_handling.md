@@ -11,7 +11,7 @@
 > 本主题在 knowledge 中有系统化的知识索引：[错误处理（Error Handling）](../../01_foundation/08_error_handling/01_error_handling_basics.md)
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页（L2 主层）。
-> **层级定位**: 本页为错误处理的 **L2 主权威页**，覆盖 `Result`/`Option`/`?` 传播模式、自定义错误与 thiserror/anyhow 工程实践；入门基础见 L1 [`32_error_handling_basics.md`](../../01_foundation/08_error_handling/01_error_handling_basics.md)，组合子代数/错误链/框架生态深入见 [`02_error_handling_deep_dive.md`](02_error_handling_deep_dive.md)。三页为合法进阶关系（basics → 主页 → deep dive），非重复权威页。
+> **层级定位**: 本页为错误处理（Error Handling）的 **L2 主权威页**，覆盖 `Result`/`Option`/`?` 传播模式、自定义错误与 thiserror/anyhow 工程实践；入门基础见 L1 [`32_error_handling_basics.md`](../../01_foundation/08_error_handling/01_error_handling_basics.md)，组合子代数/错误链/框架生态深入见 [`02_error_handling_deep_dive.md`](02_error_handling_deep_dive.md)。三页为合法进阶关系（basics → 主页 → deep dive），非重复权威页。
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 实施 Result/Option 传播模式
@@ -167,7 +167,7 @@
 
 - **Wikipedia 对齐视角**：错误处理是「对异常/失败情况的检测、传播与恢复」机制，语言设计谱系为：返回码（C）→ 异常（C++/Java/Python）→ 类型化结果（Rust/Haskell/Swift）。谱系的演进方向是「把失败从隐式控制流变为显式数据流」。
 - **TRPL 官方视角**：Rust 把错误分为两类——可恢复错误用 `Result<T, E>` 返回（调用方必须处理），不可恢复错误用 `panic!` 终止当前线程（程序 bug 或不变量破坏）。二分由「调用方是否能合理恢复」判定。
-- **形式化视角**：`Result<T, E>` 是类型论中的和类型（sum type / 余积），`?` 运算符对应 Either monad 的绑定（bind）——错误传播是「monadic bind 短路语义」的语法糖。这使「错误处理的正确性」可被类型系统完整检查：不存在未声明的失败通道。
+- **形式化视角**：`Result<T, E>` 是类型论中的和类型（sum type / 余积），`?` 运算符对应 Either monad 的绑定（bind）——错误传播是「monadic bind 短路语义」的语法糖。这使「错误处理的正确性」可被类型系统（Type System）完整检查：不存在未声明的失败通道。
 
 判定一个失败应该用哪种机制表示：可预期且可恢复 → `Result`；程序 bug/不变量违反 → panic；进程级灾难 → `std::process::abort`。三者的边界即本页的主线。
 
@@ -213,7 +213,7 @@ Result<T, E> ≅ T + E       （余和类型: Ok(T) + Err(E)）
 
 1. **错误处理机制矩阵**：`Result`（类型化失败，可恢复）、`Option`（无原因的缺失）、`panic`（不可恢复，线程级）、`catch_unwind`（panic 的边界捕获，FFI/隔离层专用）。四者按「失败的可恢复性 × 传播的显式性」定位：`Result` 高可恢复高显式，panic 低可恢复但线程内自动传播。
 2. **Rust vs 其他语言对比**：C 返回码（易忽略，无编译器强制）；C++ 异常（零成功路径成本但控制流隐式、ABI 复杂、析构中抛出致命）；Java checked exception（显式但声明膨胀、lambda 不友好）；Go 多返回值（显式但无类型强制，`if err != nil` 靠纪律）；Rust `Result` + `?`（显式 + 类型强制 + 单字符传播）。Rust 方案的本质是把「Go 的显式」与「monad 的组合性」结合。
-3. **`Result` 组合子矩阵**：`map`/`map_err`（变换两侧）、`and_then`/`or_else`（链式）、`unwrap_or*`（默认值回退）、`transpose`（与 `Option` 交换层）、`collect`（迭代器聚合失败短路）。组合子使错误处理保持表达式链风格，替代命令式的逐层 `match`。
+3. **`Result` 组合子矩阵**：`map`/`map_err`（变换两侧）、`and_then`/`or_else`（链式）、`unwrap_or*`（默认值回退）、`transpose`（与 `Option` 交换层）、`collect`（迭代器（Iterator）聚合失败短路）。组合子使错误处理保持表达式链风格，替代命令式的逐层 `match`。
 
 判定一个错误处理重构方向：若代码出现深层 `match` 嵌套，向组合子矩阵查等价链式写法；若出现跨错误类型传播，向 `From` 转换链查缺失的 impl。
 
@@ -299,7 +299,7 @@ graph TD
 1. **可恢复错误用 `Result<T, E>` 表示** ⟹ 错误是类型而非控制流，编译器可静态检查；
 2. **`#[must_use]` 标注 `Result`** ⟹ 忽略错误会触发 `unused_must_use` 警告，静默吞错成为显式选择；
 3. **`?` 运算符仅传播不隐式转换** ⟹ 错误沿调用栈流动路径可在源码中逐跳追踪，无隐藏的控制流；
-4. **`From`/`Into` 转换在 `?` 处显式发生** ⟹ 错误类型收敛点（通常是 crate 根的错误枚举或 `Box<dyn Error>`）由程序员显式设计；
+4. **`From`/`Into` 转换在 `?` 处显式发生** ⟹ 错误类型收敛点（通常是 crate 根的错误枚举（Enum）或 `Box<dyn Error>`）由程序员显式设计；
 5. **不可恢复错误用 `panic!` 且默认 unwind 可捕获** ⟹ 故障隔离边界（线程、`catch_unwind`、FFI `extern "C"`）可被显式推理。
 
 反方向阅读（⟸）即为调试指南：线上 panic ⟸ 检查 panic hook 与 unwind 策略 ⟸ 定位违反前置条件的点。
@@ -402,7 +402,7 @@ graph TD
 
 ## 五、示例与反例（Examples & Counter-examples）
 
-本节的示例按「正确模式 → 反例 → 判定准则」三元组组织：每个正例展示一种惯用错误处理模式（`?` 传播、`map_err` 添加上下文、`unwrap_or_else` 惰性兜底、`match` 分变体恢复），紧随的反例展示同一意图的错误写法及编译器/运行时给出的信号。
+本节的示例按「正确模式 → 反例 → 判定准则」三元组组织：每个正例展示一种惯用错误处理模式（`?` 传播、`map_err` 添加上下文、`unwrap_or_else` 惰性兜底、`match` 分变体恢复），紧随的反例展示同一意图的错误写法及编译器/运行时（Runtime）给出的信号。
 
 重点区分三组易混淆概念：
 
@@ -2107,7 +2107,7 @@ fn compute() -> Maybe<i32> {
 
 ## 十一、演进方向
 
-本节梳理「Error Handling（错误处理）」在 Rust 1.97 之后的演进方向：`std::backtrace::Backtrace` 与错误追踪、`Termination` trait 与 main 返回 Result、`eyre` / `color-eyre` / `miette` /…、`#[track_caller]` 与错误定位优化等方面。判断依据是已合并的 RFC、nightly 特性状态与 Edition 节奏——能落地的给出迁移路径，仍属设想的明确标注不确定性。演进方向不是承诺，而是当前设计张力最可能释放的位置；引用时请核对该特性在最新 stable 中的实际状态。
+本节梳理「Error Handling（错误处理）」在 Rust 1.97 之后的演进方向：`std::backtrace::Backtrace` 与错误追踪、`Termination` trait 与 main 返回 Result、`eyre` / `color-eyre` / `miette` /…、`#[track_caller]` 与错误定位优化等方面。判断依据是已合并的 RFC、nightly 特性状态与 Edition 节奏——能落地的给出迁移路径，仍属设想的明确标注不确定性。演进方向不是承诺，而是当前设计张力最可能释放的位置；引用（Reference）时请核对该特性在最新 stable 中的实际状态。
 
 ### 11.1 `std::backtrace::Backtrace` 与错误追踪
 
@@ -2615,7 +2615,7 @@ fn main() {
 >
 ## 嵌入式测验（Embedded Quiz）
 
-本组测验围绕测验 1：`?` 运算符的转换（理解层）、测验 2：自定义错误类型（应用层）、测验 3：忽略 `Result` 的危险（分析层）、测验 4：`Option` 与 `Result` 转换（应用层）等方面设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用检查」或「运行时行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
+本组测验围绕测验 1：`?` 运算符的转换（理解层）、测验 2：自定义错误类型（应用层）、测验 3：忽略 `Result` 的危险（分析层）、测验 4：`Option` 与 `Result` 转换（应用层）等方面设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用（Borrowing）检查」或「运行时行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
 
 ### 测验 1：`?` 运算符的转换（理解层）
 

@@ -270,7 +270,7 @@ unsafe 代码必须遵守 Rust 内存模型：(Source: [Rust Reference — Memor
 | 属性 | 取值 / 判定 | 依据 |
 |---|---|---|
 | 四种语法 | `unsafe fn` / `unsafe {}` 块 / `unsafe trait` / `unsafe impl`（及 `extern`） | 本文 §一 |
-| 五种能力 | 解引用裸指针、调用 unsafe 函数、访问 `static mut`、实现 unsafe trait、访问 union 字段 | 本文 §二 |
+| 五种能力 | 解引用（Reference）裸指针、调用 unsafe 函数、访问 `static mut`、实现 unsafe trait、访问 union 字段 | 本文 §二 |
 | 非 unsafe 行为 | 整数溢出、内存泄漏、多数逻辑错误不属于 unsafe 范畴 | 本文 §四 |
 | 安全抽象 | 将 unsafe 封装在安全 API 之后是核心工程模式 | 本文 §五 |
 | UB 边界 | 仅当 unsafe 内违反有效性不变量时才构成 UB | 本文 §五–§六 |
@@ -280,7 +280,7 @@ unsafe 代码必须遵守 Rust 内存模型：(Source: [Rust Reference — Memor
 - **上位（is-a）**：[Unsafe](01_unsafe.md) 的参考手册式速查页。
 - **下位（实例）**：四种 unsafe 语法形态、五种超能力、安全抽象模式。
 - **组合**：与 [Unsafe 边界全景](02_unsafe_boundary_panorama.md)、[内存模型](06_memory_model.md) 组合。
-- **依赖**：依赖 [所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 的安全保证基线。
+- **依赖**：依赖 [所有权（Ownership）](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 的安全保证基线。
 
 ---
 

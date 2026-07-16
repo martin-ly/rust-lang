@@ -60,7 +60,7 @@ RPITIT（Return Position Impl Trait In Traits）自 1.75 稳定后已成为 trai
 
 1. **基础 RPITIT**：trait 方法返回 `impl Trait`，每个实现者可以返回不同的具体类型——与关联类型的区别在于调用方无需命名该类型，代价是无法在类型层面约束它（除非用 RTN）；
 2. **`async fn` in trait**：`async fn` 在 trait 中 desugar 为返回 `impl Future` 的方法，是 RPITIT 的特例——这解释了为什么它继承 RPITIT 的全部限制（如 dyn 兼容性缺失）；
-3. **精确捕获扩展（1.82+）**：`use<'a, T>` 语法控制返回的 opaque 类型捕获哪些泛型参数，解决了 2024 edition 默认捕获全部参数导致的过度约束问题。
+3. **精确捕获扩展（1.82+）**：`use<'a, T>` 语法控制返回的 opaque 类型捕获哪些泛型（Generics）参数，解决了 2024 edition 默认捕获全部参数导致的过度约束问题。
 
 阅读建议：已熟悉 1.75 语法的读者可直接跳到 2.3，捕获规则是 1.9x 时代 RPITIT 实践中最常踩的坑。
 
@@ -230,7 +230,7 @@ trait Items {
 作答指引：
 
 - 测验 1 要求给出 RPITIT 与关联类型的双向转换示例——能在两种写法间互译才算理解二者的表达力差异；
-- 测验 2 的关键是“命名能力”：关联类型可被其他类型参数引用，RPITIT 的返回类型匿名；
+- 测验 2 的关键是“命名能力”：关联类型可被其他类型参数引用（Reference），RPITIT 的返回类型匿名；
 - 测验 3 需解释 desugaring 链条：`async fn` → `impl Future` → RPITIT 限制继承；
 - 测验 4 聚焦 1.9x 的后续改进（精确捕获、RTN 提案），回答需区分已稳定与预览状态；
 - 测验 5 要求从 API 演进角度论证：公开 trait 中使用 RPITIT 后，返回类型的变更是否构成 breaking change。

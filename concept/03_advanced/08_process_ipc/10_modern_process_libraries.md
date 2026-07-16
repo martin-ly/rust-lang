@@ -154,7 +154,7 @@ flowchart TD
 ## 9. 集成模式
 
 - **Tokio + nix**：在异步（Async）框架中执行精细的 Unix 控制（信号、namespace）。
-- **sysinfo + tokio**：异步轮询系统与进程指标。
+- **sysinfo + tokio**：异步（Async）轮询系统与进程指标。
 - **duct + 流式处理**：利用 duct 简洁语法构建复杂管道，再用 `BufReader` 流式消费输出。
 - **daemonize + caps**：以最小权限启动并守护进程化。
 
@@ -202,7 +202,7 @@ flowchart TD
 | 定理 | 前提 | 结论 |
 |:---|:---|:---|
 | 需求匹配 ⟹ 降低复杂度 | 选择抽象级别与场景相符的库 | 代码更简洁、可维护性更高 |
-| tokio::process ⟹ 异步生态集成 | 与 Tokio 运行时无缝协作 | 高并发异步服务中减少阻塞 |
+| tokio::process ⟹ 异步生态集成 | 与 Tokio 运行时（Runtime）无缝协作 | 高并发异步服务中减少阻塞 |
 | nix/procfs ⟹ 底层可控性 | 直接操作系统接口与 /proc | 需要精细控制的系统工具首选 |
 
 ## 反命题

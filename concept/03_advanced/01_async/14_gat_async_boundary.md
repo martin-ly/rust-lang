@@ -1,6 +1,6 @@
 > **内容分级**: [专家级]
 >
-> **本节关键术语**: Generic Associated Types (GATs) · async fn in trait (AFIT) · Return Position Impl Trait In Trait (RPITIT) · Type Alias Impl Trait (TAIT) · Future 关联类型 · `where Self: 'a` · 自引用状态机 (self-referential state machine) · `Send` 传播 — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
+> **本节关键术语**: Generic Associated Types (GATs) · async fn in trait (AFIT) · Return Position Impl Trait In Trait (RPITIT) · Type Alias Impl Trait (TAIT) · Future 关联类型 · `where Self: 'a` · 自引用（Reference）状态机 (self-referential state machine) · `Send` 传播 — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 
 # GAT 与 Async 交叉边界语义
 
@@ -11,7 +11,7 @@
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页（GAT × Async 交叉语义视角）。GAT 的通用理论见 [`concept/02_intermediate/00_traits/07_generic_associated_types.md`](../../02_intermediate/00_traits/07_generic_associated_types.md)；async trait 的 dyn 兼容解决方案谱系见 [Async Trait 对象安全](13_async_trait_object_safety.md)。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
-> **双维定位**: C×Ana — 分析 GAT 的类型族结构与 async 状态机生命周期约束之间的交互边界
+> **双维定位**: C×Ana — 分析 GAT 的类型族结构与 async 状态机生命周期（Lifetimes）约束之间的交互边界
 > **定位**: 分析 Rust 1.75+ `async fn in trait` 背后的 GAT/RPITIT 机制，以及 `Send`、`Pin` 在 GAT Future 上的传播规则。
 > **前置概念**: [Generic Associated Types](../../02_intermediate/00_traits/07_generic_associated_types.md) · [Async/Await](01_async.md) · [Pin 与 Unpin](08_pin_unpin.md) · [Async Trait 对象安全](13_async_trait_object_safety.md)
 > **后置概念**: [Stream 代数与背压](09_stream_algebra_and_backpressure.md) · [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) · [Async FFI 边界](../04_ffi/04_async_ffi_boundary.md)
@@ -60,13 +60,28 @@ mindmap
 
 - [GAT 与 Async 交叉边界语义](#gat-与-async-交叉边界语义)
   - [🧠 知识结构图](#-知识结构图)
+  - [📑 目录](#-目录)
   - [一、认知路径](#一认知路径)
   - [二、核心概念](#二核心概念)
+    - [2.1 GAT 回顾：`trait Foo { type Bar<'a>; }`](#21-gat-回顾trait-foo--type-bara-)
+    - [2.2 为什么 async trait 需要 GAT：返回借用绑定的 Future](#22-为什么-async-trait-需要-gat返回借用绑定的-future)
+    - [2.3 `async fn in trait`（Rust 1.75+）与 RPITIT](#23-async-fn-in-traitrust-175与-rpitit)
+    - [2.4 GAT 生命周期约束如何影响 async 状态机](#24-gat-生命周期约束如何影响-async-状态机)
   - [三、判定规则](#三判定规则)
+    - [3.1 何时需要显式 GAT Future 类型](#31-何时需要显式-gat-future-类型)
+    - [3.2 `Send` bound 如何传播到 GAT Future](#32-send-bound-如何传播到-gat-future)
+    - [3.3 `Pin` 与 GAT 自引用类型的交互](#33-pin-与-gat-自引用类型的交互)
   - [四、边界测试 / 反例](#四边界测试--反例)
+    - [4.1 边界测试：GAT Future 不是 `Send` 导致的 `tokio::spawn` 失败](#41-边界测试gat-future-不是-send-导致的-tokiospawn-失败)
+    - [4.2 边界测试：生命周期不满足的 GAT async](#42-边界测试生命周期不满足的-gat-async)
+    - [4.3 边界测试：错误地假设 GAT 具体类型](#43-边界测试错误地假设-gat-具体类型)
   - [五、设计模式](#五设计模式)
+    - [5.1 用 GAT 实现自定义 async trait](#51-用-gat-实现自定义-async-trait)
+    - [5.2 与 `pin-project` 结合](#52-与-pin-project-结合)
   - [六、相关概念](#六相关概念)
   - [七、来源](#七来源)
+  - [📋 关键属性](#-关键属性)
+  - [🔗 概念关系](#-概念关系)
 
 ---
 
@@ -93,7 +108,7 @@ flowchart TD
 
 ### 2.1 GAT 回顾：`trait Foo { type Bar<'a>; }`
 
-GAT 让关联类型携带泛型参数（通常是生命周期），形成「类型构造器（type constructor）」：
+GAT 让关联类型携带泛型（Generics）参数（通常是生命周期），形成「类型构造器（type constructor）」：
 
 ```rust
 trait LendingIterator {
@@ -113,7 +128,7 @@ trait Bad {
 fn main() {}
 ```
 
-> **关键直觉**：GAT 把「类型」升级为「类型层面的函数」，使 async trait 能表达「Future 依赖本次调用的借用生命周期」。
+> **关键直觉**：GAT 把「类型」升级为「类型层面的函数」，使 async trait 能表达「Future 依赖本次调用的借用（Borrowing）生命周期」。
 
 ### 2.2 为什么 async trait 需要 GAT：返回借用绑定的 Future
 
@@ -228,7 +243,7 @@ impl Reader for FileReader<'_> {
 | 仅需要 `async fn` 语义，不 care Future 类型名 | `async fn in trait` (AFIT) | 最简洁，编译器处理 GAT/RPITIT |
 | 需要给 Future 加额外约束（`Send`、`Sync`、具体 trait bound） | 显式 `type Future<'a>: ...` | AFIT 的返回类型不可直接加 bound（需 RTN 或 trait_variant） |
 | 需要命名 Future 类型 | 显式 GAT | RPITIT 返回类型不可命名 |
-| 需要 `dyn Trait` 兼容 | `Pin<Box<dyn Future<...>>>` 或 `async_trait` 宏 | AFIT/RPITIT dyn 不兼容 |
+| 需要 `dyn Trait` 兼容 | `Pin<Box<dyn Future<...>>>` 或 `async_trait` 宏（Macro） | AFIT/RPITIT dyn 不兼容 |
 | 需要与 `pin-project` 组合 | 显式 GAT + 自定义 Future 类型 | 需要可命名类型才能派生 projection |
 
 > **决策要点**：能 AFIT 就不手写 GAT；一旦需要控制 Future 的 bound 或形状，立刻切换到显式 GAT。
@@ -414,6 +429,7 @@ async fn use_repo<R: AsyncRepo>(repo: &R) -> String {
 ```
 
 > **模式要点**：
+>
 > - `type Fetch<'a>: Future<Output = String> + Send + 'a` 在定义处一次性声明所有 bound；
 > - 实现侧只需给出具体类型，bound 由编译器检查；
 > - 调用侧可通过 `R::Fetch<'_>` 命名类型，便于存储在 struct 字段中。

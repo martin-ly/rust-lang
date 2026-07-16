@@ -49,9 +49,9 @@
 类型论（Type Theory）是研究「程序中值如何分类、分类如何保证行为良构」的数学分支，本页以两个权威定义锚定：
 
 - **Wikipedia 定义**：类型论是「把项（term）分类为类型（type）的形式系统」，起源于 Russell 为解决集合论悖论（1908）的分层思想，现代形态以 Martin-Löf 直觉类型论（ITT）与 λ 立方（Barendregt）为代表。它与集合论的根本差异：集合是「先有元素后谈归属」，类型是「项生来带类型，类型是构造的语法类别」。
-- **Pierce *TAPL* 与 Cardelli 定义**：Pierce 在 *Types and Programming Languages* 中给出的操作性定义——「类型系统是一种可处理的语法方法，通过程序短语分类来证明某类行为不会发生」（a tractable syntactic method for proving the absence of certain program behaviors）。Cardelli 进一步区分「类型论作为语言设计的基础」与「类型论作为逻辑（Curry-Howard 同构：类型 = 命题，程序 = 证明）」。
+- **Pierce *TAPL* 与 Cardelli 定义**：Pierce 在 *Types and Programming Languages* 中给出的操作性定义——「类型系统（Type System）是一种可处理的语法方法，通过程序短语分类来证明某类行为不会发生」（a tractable syntactic method for proving the absence of certain program behaviors）。Cardelli 进一步区分「类型论作为语言设计的基础」与「类型论作为逻辑（Curry-Howard 同构：类型 = 命题，程序 = 证明）」。
 
-两个定义在 Rust 语境的落点：Rust 类型系统是 Pierce 定义的工业实例（编译期证明「无数据竞争、无内存错误」两类行为不发生），而 GAT/生命周期等机制可从 Curry-Howard 视角读作「受限的依赖类型与区域逻辑」。
+两个定义在 Rust 语境的落点：Rust 类型系统是 Pierce 定义的工业实例（编译期证明「无数据竞争、无内存错误」两类行为不发生），而 GAT/生命周期（Lifetimes）等机制可从 Curry-Howard 视角读作「受限的依赖类型与区域逻辑」。
 
 ### 1.1 Wikipedia 定义
 
@@ -83,7 +83,7 @@ Rust 扩展:
 
 1. **类型论层次矩阵**（λ 立方维度）：简单类型 λ 演算（`λ→`，无多态）→ System F（`λ2`，类型抽象 `Λα`——Rust 泛型的祖先）→ System Fω（类型构造子，`λω`——GAT/HKT 的位置）→ 依赖类型（`λΠ`，值出现在类型中——const generics 是其受限片段）。Rust 整体位于 Fω 的子集 + 仿射扩展：比 HM（ML 系）强在显式有界量化，弱在「无全 HKT、无完整依赖类型」。
 2. **Variance 矩阵**：类型构造子 `F` 对子类型的保持方向——协变（`A ≤ B ⟹ F<A> ≤ F<B>`，如 `&'a T` 对 `'a`）、逆变（方向翻转，如 `fn(T)` 对参数 `T`）、不变（两边都不成立，如 `&mut T` 对 `T`、`Cell<T>`）。不变性是「可变 + 共享」的类型论代价：`&mut T` 对 `T` 不变保证了「写入 shorter-lived 值」的漏洞被类型拒绝。
-3. **Rust 类型的 Variance 实例**：编译器对每个泛型类型自动推导 variance（结构体字段的合成规则：不可变字段协变、`UnsafeCell` 字段逆变/不变、函数参数逆变返回值协变）。推导错误的手动修正工具是 `PhantomData<fn(T) -> T>`（协变声明）或 `PhantomData<Cell<T>>`（不变声明）。
+3. **Rust 类型的 Variance 实例**：编译器对每个泛型（Generics）类型自动推导 variance（结构体（Struct）字段的合成规则：不可变字段协变、`UnsafeCell` 字段逆变/不变、函数参数逆变返回值协变）。推导错误的手动修正工具是 `PhantomData<fn(T) -> T>`（协变声明）或 `PhantomData<Cell<T>>`（不变声明）。
 
 矩阵用法：遇到「生命周期看似满足却不编译」的问题，先查涉及类型的 variance——90% 的此类困惑是「把 `&mut T` 当协变用」或「`Cell` 使容器不变」导致。
 
@@ -483,7 +483,7 @@ Rust 类型系统 = λ→ + System F + HM + λ<: + 线性类型 + 约束类型
 
 ## 七、层次一致性标注（Layer Consistency Annotations）
 
-本节建立类型论概念与 Rust 工程概念之间的层次一致性标注体系，回答「形式化概念在工程层的投影是什么」：
+本节建立类型论概念与 Rust 工程概念之间的层次一致性（Coherence）标注体系，回答「形式化概念在工程层的投影是什么」：
 
 - **标注格式**：每个形式化概念附 `[L1 投影]`/`[L2 投影]` 标签——如「System F 的全称量化 `[L2 投影]` = 泛型函数 `<T> fn f(x: T)`」「存在类型 `[L2 投影]` = `impl Trait` 返回类型」；
 - **一致性判据**：投影必须保持「推理有效性」——形式化层可推导的性质，工程投影后仍应成立（类型安全的证明 ⟹ 工程代码无类型错误）；
@@ -568,9 +568,9 @@ graph TD
 
 本节给出四个"概念 → 反例"对，展示类型论抽象在 Rust 中的精确映射点与失配点：
 
-- **Variance 示例**：`&'static str` 是 `&'a str` 的子类型（协变），可用于任何期望短生命周期引用的位置；反例——`&mut T` 对 `T` 不变，把 `&mut &'static str` 当 `&mut &'a str` 用会被编译器拒绝（这恰是 soundness 所要求的）。
+- **Variance 示例**：`&'static str` 是 `&'a str` 的子类型（协变），可用于任何期望短生命周期引用（Reference）的位置；反例——`&mut T` 对 `T` 不变，把 `&mut &'static str` 当 `&mut &'a str` 用会被编译器拒绝（这恰是 soundness 所要求的）。
 - **递归类型边界**：`struct List { next: Option<Box<List>> }` 合法（`Box` 提供间接层打破无限大小）；反例——`struct Bad { next: Option<Bad> }` 触发 E0072（递归类型无间接层，大小不可判定）。
-- **映射精度评估**：Rust 类型系统 ≈ System F（参数多态）+ 子结构扩展（所有权）− 高阶类型（无 HKT）。"≈"的含义：泛型单态化在语义上等价于 System F 的实例化，但编译模型不同。
+- **映射精度评估**：Rust 类型系统 ≈ System F（参数多态）+ 子结构扩展（所有权）− 高阶类型（无 HKT）。"≈"的含义：泛型单态化（Monomorphization）在语义上等价于 System F 的实例化，但编译模型不同。
 - **HRTB 与全称量词**：`for<'a> Fn(&'a T)` 直接对应 ∀a.(Ptr a → R)，是全称量词在 Rust 中仅有的几处显式露面之一；反例——试图用具体生命周期替代 `for<'a>` 会触发 "not general enough" 错误。
 
 ### 9.1 Variance 示例
@@ -890,8 +890,8 @@ Curry-Howard 在 Rust 中的具体实例:
 TAPL 第 15 章的子类型核心规则是"子类型关系在函数类型上逆变于参数、协变于返回值"（S-Arrow）。Rust 生命周期恰好是这一规则的实例：
 
 - **子类型核心规则**：`'long <: 'short`（长生命周期是短生命周期的子类型）——对应 TAPL 中"记录宽度子类型"的直觉：能提供更多的资源是子类型。S-Arrow 规则在 Rust 的体现：`fn(&'a T)` 对 `'a` 逆变，`fn() -> &'a T` 对 `'a` 协变。
-- **Rust 生命周期作为子类型关系**：`&'a mut T` 对 `'a` 协变但对 `T` 不变——这是对 S-Arrow 的**修正**，因为可变引用既读（逆变位置）又写（协变位置），唯一安全的方差是不变。 Pierce 书中没有直接讨论这一点（TAPL 聚焦纯函数式核心），Rust 的可变性把方差问题从"协变/逆变"二选一扩展为三选一。
-- **映射边界**：TAPL 的子类型是声明式关系，Rust 的子类型仅存在于生命周期维度且由借用检查器算法化判定——声明式理论与算法化实现之间的 gap 正是 NLL/Polonius 的研究主题。系 两个方面。
+- **Rust 生命周期作为子类型关系**：`&'a mut T` 对 `'a` 协变但对 `T` 不变——这是对 S-Arrow 的**修正**，因为可变引用（Mutable Reference）既读（逆变位置）又写（协变位置），唯一安全的方差是不变。 Pierce 书中没有直接讨论这一点（TAPL 聚焦纯函数式核心），Rust 的可变性把方差问题从"协变/逆变"二选一扩展为三选一。
+- **映射边界**：TAPL 的子类型是声明式关系，Rust 的子类型仅存在于生命周期维度且由借用（Borrowing）检查器算法化判定——声明式理论与算法化实现之间的 gap 正是 NLL/Polonius 的研究主题。系 两个方面。
 
 #### 子类型的核心规则（TAPL Ch.15）
 
@@ -1024,8 +1024,8 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 类型论边界的编译错误对应「类型系统拒绝面的四个代表点」：
 
 - **单位类型与空类型的混淆**：`()`（unit，恰有一个值——「无信息」）vs `!`（never/empty，无值——「不可能」）vs `enum Void {}`（稳定的空类型模拟）。混淆表现：把「返回 `()` 的发散函数」与「返回 `!`」等价化（`if c { return } else { panic!() }` 的类型是 `()` 而非 `!`——`return` 的表达式类型是 `!` 但函数签名说了算）。判定：问「该类型的 inhabitant 数量」——1 是 unit，0 是 never。
-- **代数数据类型的穷尽匹配**（E0004）：ADT 的「和」性质使编译器能枚举全部变体——`match` 漏变体即拒绝。这是「类型即值集合」观点的直接计算化；`#[non_exhaustive]` 是「保留演进空间」的显式弃权（外部 crate 必须写 `_` 臂）。
-- **GAT 与高阶类型**：`trait StreamingIterator { type Item<'a>; fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>; }`——关联类型带生命周期参数使「借用自身产出的迭代器」可表达；错误形态：试图在 stable 模拟 HKT（`type Item<T>` 不受支持——GAT 只允许生命周期/类型参数按 trait 声明的形态出现）。
+- **代数数据类型的穷尽匹配**（E0004）：ADT 的「和」性质使编译器能枚举（Enum）全部变体——`match` 漏变体即拒绝。这是「类型即值集合」观点的直接计算化；`#[non_exhaustive]` 是「保留演进空间」的显式弃权（外部 crate 必须写 `_` 臂）。
+- **GAT 与高阶类型**：`trait StreamingIterator { type Item<'a>; fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>; }`——关联类型带生命周期参数使「借用自身产出的迭代器（Iterator）」可表达；错误形态：试图在 stable 模拟 HKT（`type Item<T>` 不受支持——GAT 只允许生命周期/类型参数按 trait 声明的形态出现）。
 - **依赖类型与数组长度**：`[T; N]` 的 `N` 是「类型位置的值」——依赖类型的入门实例；边界错误：`fn f<const N: usize>(a: [i32; N + 1])` 在 stable 被拒（`generic_const_exprs` 未稳定），`N` 只能以「裸参数」形态出现在类型中。
 
 统一视角：四个边界分别对应「值集合基数」「和类型完备性」「类型构造子参数化」「值-类型依赖」——即 λ 立方 + 仿射扩展在 Rust 中的四个前沿。
@@ -1466,7 +1466,7 @@ v = 42 : v  -- 无限列表
 
 **正确答案是 C**。
 
-**Hindley-Milner (HM) vs Rust 类型推断**：
+**Hindley-Milner (HM) vs Rust 类型推断（Type Inference）**：
 
 | 特性 | Haskell (HM) | Rust |
 |:---|:---|:---|
@@ -1544,7 +1544,7 @@ process(Vec::new());  // ✅ 从参数类型推断 T = i32
 
 ## 从 `crates\c02_type_system\docs\tier_04_advanced\01_type_theory_in_depth.md` 迁移的补充视角
 
-> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
+> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏（Macro）观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
 
 # 4.1 Rust 类型系统 - 类型理论深度
 
@@ -1654,7 +1654,7 @@ process(Vec::new());  // ✅ 从参数类型推断 T = i32
 
 **性能特征**:
 
-- **零成本抽象（Zero-Cost Abstraction）**: 类型系统零运行时开销
+- **零成本抽象（Zero-Cost Abstraction）**: 类型系统零运行时（Runtime）开销
 - **编译时保证**: 编译期类型安全保证
 - **适用场景**: 类型安全、形式化验证、高级类型系统
 

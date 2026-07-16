@@ -36,7 +36,7 @@
 自动微分（Automatic Differentiation, AD）是机器学习的计算基石：给定计算图，自动产出任一输出对任一输入的精确导数（非数值近似），是反向传播的形式化基础。两个层面回答 Rust 的语言级诉求：
 
 - **AD 是什么**: 两类模式——前向模式（forward mode）沿计算方向传播导数，适合输入少输出多；反向模式（reverse mode）先记录计算图再反向累积梯度，适合输出少输入多（神经网络的典型形态）。与数值微分（差分）相比无截断误差，与符号微分相比无表达式膨胀。
-- **Rust 为什么需要语言级 AD**: 库级 AD（`dfdx`、`burn` 的 autodiff）受限于无法对任意 Rust 控制流（循环、条件、闭包）自动求导——只有编译器级的源代码变换（source-to-source transformation）才能覆盖完整语言；Enzyme（LLVM 级 AD）的成功证明 IR 层微分可行，Rust 需要等价能力才能进入科学计算主流。
+- **Rust 为什么需要语言级 AD**: 库级 AD（`dfdx`、`burn` 的 autodiff）受限于无法对任意 Rust 控制流（循环、条件、闭包（Closures））自动求导——只有编译器级的源代码变换（source-to-source transformation）才能覆盖完整语言；Enzyme（LLVM 级 AD）的成功证明 IR 层微分可行，Rust 需要等价能力才能进入科学计算主流。
 
 判定依据：当前生产应使用库级方案并接受其表达限制；语言级 AD 属跟踪性投入。
 
@@ -82,9 +82,9 @@ tch-rs: 绑定 PyTorch Autograd（C++ 运行时）
 
 `std::autodiff` 的设计预览基于 Project Goals 的公开讨论，三个维度勾勒其可能形态：
 
-- **语法构想**: 倾向以过程宏/内建属性标注可微分函数（类似 `#[autodiff]` 修饰 `fn`），编译器在 MIR 层生成对偶函数；与 Enzyme 的 LLVM 集成方案（`std::autodiff` 的实验分支即基于 Enzyme）并行探索。
+- **语法构想**: 倾向以过程宏（Procedural Macro）/内建属性标注可微分函数（类似 `#[autodiff]` 修饰 `fn`），编译器在 MIR 层生成对偶函数；与 Enzyme 的 LLVM 集成方案（`std::autodiff` 的实验分支即基于 Enzyme）并行探索。
 - **前向 vs 反向模式**: 前向模式实现简单、内存开销低，适合作为第一里程碑；反向模式需要“tape”（计算记录）或源码逆转，是深度学习所需但复杂度高一个量级的目标。
-- **与现有生态对比**: `dfdx` 用类型系统编码张量形状（编译期维度检查）+ 库级 tape；`burn` 提供后端可切换的 autodiff；语言级方案的优势是任意控制流可微 + 零运行时抽象差距，劣势是仅支持编译器已变换的代码。
+- **与现有生态对比**: `dfdx` 用类型系统（Type System）编码张量形状（编译期维度检查）+ 库级 tape；`burn` 提供后端可切换的 autodiff；语言级方案的优势是任意控制流可微 + 零运行时（Runtime）抽象差距，劣势是仅支持编译器已变换的代码。
 
 判定依据：关注 Project Goals 的季度更新即可，设计细节仍在变动，不宜写入架构依赖。
 
@@ -161,7 +161,7 @@ fn main() {
 自动微分落地 Rust 的阻碍按性质分为工程与理论两类：
 
 - **当前状态（2026-06）**: 上游实验以 Enzyme 集成为主线——`std::autodiff` 在 nightly 有实验性支持（需自编译带 Enzyme 的 LLVM），可对简单 `fn` 生成前向模式导数；距离默认工具链可用仍有多个里程碑。
-- **核心挑战**: ① **LLVM 升级耦合**: Enzyme 版本与 rustc 的 LLVM 版本必须锁步，构建复杂度显著上升；② **unsafe 与内联汇编**: AD 变换需要理解内存效应，unsafe 代码的求导语义无法自动推导；③ **高阶导数与性能**: 反向模式的 tape 分配与 Rust 所有权模型的交互（tape 条目生命周期）尚无成熟设计。
+- **核心挑战**: ① **LLVM 升级耦合**: Enzyme 版本与 rustc 的 LLVM 版本必须锁步，构建复杂度显著上升；② **unsafe 与内联汇编（Inline Assembly）**: AD 变换需要理解内存效应，unsafe 代码的求导语义无法自动推导；③ **高阶导数与性能**: 反向模式的 tape 分配与 Rust 所有权（Ownership）模型的交互（tape 条目生命周期（Lifetimes））尚无成熟设计。
 
 判定依据：该特性按“跟踪研究”定位；科学计算项目的近期路径是 `dfdx`/`burn` + 手写关键梯度，或经 PyO3 调用 JAX/PyTorch 的 AD。
 

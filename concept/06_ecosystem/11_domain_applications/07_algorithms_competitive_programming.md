@@ -437,7 +437,7 @@ pub fn coordinate_compress(coords: &[i64]) -> Vec<usize> {
 
 1. **Fast I/O**：`io::stdin().lock()` + `read_line` 逐行解析慢（每行一次 UTF-8 校验与分配）；竞赛标配是**一次性读入全部输入**（`read_to_string` 或 `read_to_end`）+ 自写字节级扫描器（`split_ascii_whitespace` + `parse`，或直接字节解析整数），I/O 提速 5–10 倍。
 2. **零分配算法**：预分配 `Vec::with_capacity` 复用缓冲，`String::with_capacity` 输出缓冲一次 flush；热循环内任何 `String`/`Vec` 分配都是 TLE 嫌疑。
-3. **位运算**：状态压缩 DP（`1 << n` 子集枚举）、`u64::count_ones`/`leading_zeros`（编译为 `popcnt`/`lzcnt` 单指令）。
+3. **位运算**：状态压缩 DP（`1 << n` 子集枚举（Enum））、`u64::count_ones`/`leading_zeros`（编译为 `popcnt`/`lzcnt` 单指令）。
 4. **模运算安全**：`(a + b) % MOD` 在 `u64` 下溢出需 `(a + b) % MOD` 前确保 `a, b < MOD`；乘法用 `u128` 中间值或蒙哥马利约减。
 
 判定依据：提交前本地用最大规模随机数据测耗时，时限 50% 以内才稳。
@@ -566,11 +566,11 @@ pub fn pow_mod(mut base: u64, mut exp: u64) -> u64 {
 
 ## 四、复杂度在类型系统中的编码
 
-复杂度在类型系统中的编码是 Rust 竞赛/算法代码的独特探索方向：
+复杂度在类型系统（Type System）中的编码是 Rust 竞赛/算法代码的独特探索方向：
 
-1. **Const Generics 编码数组边界**：`struct Matrix<T, const R: usize, const C: usize>`——矩阵乘法维度不匹配（`R×C` 乘 `C'×K` 当 `C≠C'`）成为编译错误而非运行期 panic；代价是每个维度组合单态化一份代码。
+1. **Const Generics 编码数组边界**：`struct Matrix<T, const R: usize, const C: usize>`——矩阵乘法维度不匹配（`R×C` 乘 `C'×K` 当 `C≠C'`）成为编译错误而非运行期 panic；代价是每个维度组合单态化（Monomorphization）一份代码。
 2. **Type-Level 自然数（概念性）**：`typenum` crate 的 `U3`/`Sum<A, B>` 在类型层做自然数算术，可表达「栈深度 ≤ N」类资源约束——竞赛中过度设计，但在库设计（如 SIMD 宽度、密码学参数）中有真实价值。
-3. **`size_hint` 作为复杂度提示**：自定义迭代器正确实现 `size_hint` 使 `collect::<Vec<_>>()` 一次分配到位，`ExactSizeIterator` 是「长度 O(1) 可知」的类型级承诺。
+3. **`size_hint` 作为复杂度提示**：自定义迭代器（Iterator）正确实现 `size_hint` 使 `collect::<Vec<_>>()` 一次分配到位，`ExactSizeIterator` 是「长度 O(1) 可知」的类型级承诺。
 
 判定依据：竞赛代码只推荐第 1 项的轻量用法（固定维度数组）；typel-level 算术是库级技术。
 
@@ -735,7 +735,7 @@ mod verification {
 1. **递归深度限制**：默认主线程栈 8MB，DFS 深度 >10⁵（链式树退化）即栈溢出——改显式栈（`Vec` 模拟）或 `std::thread::Builder::stack_size(256MB)` 起大栈线程。
 2. **`usize`/`isize` 平台依赖**：64 位平台 `usize` 是 u64，但下标运算溢出（`0usize - 1`）debug 模式 panic、release 回绕——竞赛输入规模不确定时优先 `i64` 做算术，下标前转 `usize`。
 3. **浮点精度**：比较用 `eps = 1e-9` 相对误差，排序避免依赖浮点等值（`f64` 无 `Ord`，用 `total_cmp`）；几何题优先整数化（坐标 ×10⁶）。
-4. **过度 `clone()` 导致 TLE**：`Vec` 深拷贝 O(n)，藏在循环里即 O(n²)——借用检查允许的 `&[T]` 切片传递永远优于 clone；确实需要副本时用 `Rc<[T]>`（不可变共享，O(1) 克隆）。
+4. **过度 `clone()` 导致 TLE**：`Vec` 深拷贝 O(n)，藏在循环里即 O(n²)——借用（Borrowing）检查允许的 `&[T]` 切片（Slice）传递永远优于 clone；确实需要副本时用 `Rc<[T]>`（不可变共享，O(1) 克隆）。
 
 判定依据：WA/TLE 排查顺序——先溢出（usize 算术）、再栈深度、再 clone 热点（`perf` 或手插计数）。
 
@@ -812,7 +812,7 @@ temp.extend_from_slice(&nums[..]);
 
 竞赛编程的总结围绕两个视角：Rust 相对 C++ 的竞争力从何而来，以及这些优势如何落地为可复用的代码资产：
 
-- **核心要点回顾**：零成本抽象 + 编译期内存安全使 Rust 在复杂数据结构（链表、区间树）中比 C++ 更少出错且性能同级；Fast I/O（`BufRead` + 自定义 scanner）是避免 TLE 的入场券；所有权约束（`split_at_mut`、`Option<T>`）本身就是算法正确性的部分证明。
+- **核心要点回顾**：零成本抽象（Zero-Cost Abstraction） + 编译期内存安全（Memory Safety）使 Rust 在复杂数据结构（链表、区间树）中比 C++ 更少出错且性能同级；Fast I/O（`BufRead` + 自定义 scanner）是避免 TLE 的入场券；所有权（Ownership）约束（`split_at_mut`、`Option<T>`）本身就是算法正确性的部分证明。
 - **相关概念文件**：从可编译题解仓库（c08_algorithms）到形式验证工具链（Kani/Verus）、const generics 与零成本抽象的理论根基，构成从“刷题”到“验证”的完整学习路径。
 
 建议用法：要点回顾用于赛后复盘，概念文件表用于按弱项定向回读。

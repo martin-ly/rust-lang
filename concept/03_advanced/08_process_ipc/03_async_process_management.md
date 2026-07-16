@@ -20,7 +20,7 @@
 
 ## 1. 为什么需要异步进程管理
 
-在异步运行时（Runtime）中管理子进程时，同步 `std::process` 会阻塞当前线程，导致整个运行时线程池被占满。`tokio::process` 将 `std::process` 的 I/O 与等待操作转移到异步任务中，从而：
+在异步（Async）运行时（Runtime）中管理子进程时，同步 `std::process` 会阻塞当前线程，导致整个运行时线程池被占满。`tokio::process` 将 `std::process` 的 I/O 与等待操作转移到异步任务中，从而：
 
 - 不阻塞工作线程
 - 支持并发管理大量子进程
@@ -53,7 +53,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ## 3. 异步生命周期管理
 
-异步进程生命周期管理的核心是「等待与超时的组合」，两个支柱：
+异步进程生命周期（Lifetimes）管理的核心是「等待与超时的组合」，两个支柱：
 
 - **超时控制（3.1）**：`tokio::time::timeout(dur, child.wait())`——超时的语义是 **wait future 被取消，子进程仍在运行**！这是最常见的理解错误：timeout 不杀进程，必须显式 `child.kill().await` + `wait().await`（回收防僵尸）。优雅退出协议：先发 SIGTERM/关闭 stdin → 宽限期 → SIGKILL；
 - **异步通信（3.2）**：`tokio::process` 的 stdio 是 `AsyncRead`/`AsyncWrite`——stdout/stderr 必须**并发**消费（`tokio::join!` 或 spawn 独立任务），单向等待会管道写满死锁；大输出用 `BufReader` + `lines()` 流式处理。
@@ -315,7 +315,7 @@ flowchart TD
 
 > 来源：`crates/c07_process/docs/13_async_stdio_guide.md`
 
-在异步运行时中管理子进程时，标准输入/输出/错误也需要异步化。核心要点：
+在异步运行时（Runtime）中管理子进程时，标准输入/输出/错误也需要异步化。核心要点：
 
 - 使用 `tokio::process::Command` 的 `.stdin(Stdio::piped())` / `.stdout(Stdio::piped())` 创建管道。
 - 通过 `tokio::io::AsyncWriteExt` 异步写入 stdin，`AsyncBufReadExt` 异步读取 stdout/stderr。

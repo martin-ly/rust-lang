@@ -200,8 +200,8 @@ impl RequestBuilder<Ready> {
 DSL 嵌入（embedded DSL）的三个技术层级，按「验证发生的时机」递进：
 
 - **Parser Combinators**：用函数组合子把「语法规则」写为可组合的解析器值（`nom` 的 `tuple`/`alt`/`many0`、`winnow`、`chumsky`）。DSL 的语法即 Rust 表达式，解析器即一等值——优势是复用 Rust 的类型检查与 IDE 支持写「解析逻辑」，代价是语法错误以类型错误呈现（诊断可读性依赖库的 error 类型设计）。
-- **类型安全的 DSL**：把 DSL 的良构性（well-formedness）编码进类型——HTML 模板中「未闭合标签」、SQL 构建器中「未选定列就 execute」经泛型状态参数成为编译错误（typestate）。diesel 的查询构建器、`maud`/`leptos` 的模板宏是代表：DSL 用户写的是 Rust 语法，非法 DSL 程序 = 非法 Rust 程序。
-- **编译期验证的 DSL**：用过程宏在编译期解析 DSL 语法并生成代码——`sqlx::query!` 连接数据库校验 SQL 与 schema 的一致性，`format!` 宏在编译期解析格式串并检查参数个数。这一层级把「DSL 错误」前移到编译期诊断（带 span 的精确报错），代价是编译时间增加与「宏内 DSL 的错误信息质量完全取决于宏作者」。
+- **类型安全的 DSL**：把 DSL 的良构性（well-formedness）编码进类型——HTML 模板中「未闭合标签」、SQL 构建器中「未选定列就 execute」经泛型（Generics）状态参数成为编译错误（typestate）。diesel 的查询构建器、`maud`/`leptos` 的模板宏是代表：DSL 用户写的是 Rust 语法，非法 DSL 程序 = 非法 Rust 程序。
+- **编译期验证的 DSL**：用过程宏（Procedural Macro）在编译期解析 DSL 语法并生成代码——`sqlx::query!` 连接数据库校验 SQL 与 schema 的一致性（Coherence），`format!` 宏在编译期解析格式串并检查参数个数。这一层级把「DSL 错误」前移到编译期诊断（带 span 的精确报错），代价是编译时间增加与「宏内 DSL 的错误信息质量完全取决于宏作者」。
 
 三层的选择判定：解析任务 → parser combinator；构建任务（输出结构化值）→ 类型安全 DSL；语法与宿主差异大且需编译期校验 → 过程宏 DSL。
 
@@ -565,7 +565,7 @@ graph TD
 
 DSL 的边界测试按「DSL 规则在哪一层被执行」分类，每层有不同的失效形态：
 
-- **构建器模式的链式调用与所有权**（编译错误）：构建器方法取 `self` by value 时链式消耗所有权（`b.a().b()` 合法，`let b2 = b.a(); b.b()` 中 `b` 已 move 报 E0382）；取 `&mut self` 时链末端需 `.build()` 收尾且借用冲突受借用检查约束。两种风格的选择即「线性类型 vs 可变借用」的权衡，错误形态直接暴露所选风格。
+- **构建器模式的链式调用与所有权**（编译错误）：构建器方法取 `self` by value 时链式消耗所有权（`b.a().b()` 合法，`let b2 = b.a(); b.b()` 中 `b` 已 move 报 E0382）；取 `&mut self` 时链末端需 `.build()` 收尾且借用冲突受借用检查约束。两种风格的选择即「线性类型 vs 可变借用（Mutable Borrow）」的权衡，错误形态直接暴露所选风格。
 - **状态机 DSL 的非法状态转换**（编译错误）：typestate DSL 中调用「当前状态未定义的方法」报 E0599（no method named ... found）——DSL 语义错误以方法解析失败呈现，错误信息的质量取决于状态类型命名（`Query<Users, Selected>` 比 `S3` 可读）。
 - **宏递归深度限制**（编译错误）：`macro_rules!` 实现的 DSL（如 `html!` 类宏）嵌套过深触发 recursion limit（默认 128），修复是 `#![recursion_limit = "N"]` 或宏改迭代式。
 - **DSL 的类型安全与运行时错误**（运行时 panic）：无法静态表达的不变量（如「百分比字段 ≤ 100」依赖运行时值）退化为构建时校验——`build()` 返回 `Result` 或 panic，这是类型安全 DSL 的诚实边界：能进类型的规则零成本，不能进类型的规则显式失败。

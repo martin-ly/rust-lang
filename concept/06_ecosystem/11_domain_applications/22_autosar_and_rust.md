@@ -13,7 +13,7 @@
 > **后置概念**: [Industrial Case Studies](14_industrial_case_studies.md) · [cargo vet 与供应链审计](../07_security_and_cryptography/03_cargo_vet_supply_chain.md)
 >
 > **来源**: [AUTOSAR Adaptive Platform](https://www.autosar.org/standards/adaptive-platform)（2026-07-12 curl 实测） · [AUTOSAR R23-11 — AUTOSAR_AP_EXP_ARARustApplications.pdf](https://www.autosar.org/fileadmin/standards/R23-11/AP/AUTOSAR_AP_EXP_ARARustApplications.pdf)（实测 200） · [AUTOSAR R24-11 同文档更新版](https://www.autosar.org/fileadmin/standards/R24-11/AP/AUTOSAR_AP_EXP_ARARustApplications.pdf)（实测 200） · [SemiEngineering — Rust and virtual ECUs transforming AUTOSAR Classic（2025-07-08）](https://semiengineering.com/driving-the-future-how-rust-and-virtual-ecus-are-transforming-autosar-classic-automotive-software/) · [Synopsys — Validation of AUTOSAR Classic ECUs Running Rust SWCs（2025-01-27）](https://www.synopsys.com/blogs/chip-design/validation-of-autosar-classic-ecus-running-rust-swcs-a-safer-path-to-automotive-software.html)（实测 200）
-> **国际权威来源（2026-07-13 补录）**: **P0** [Ferrocene Language Specification](https://spec.ferrocene.dev/)（ISO 26262 认证 Rust 工具链的语言规范，curl 200 实测 2026-07-13） · **P1** [Jung et al. — RustBelt（POPL 2018）](https://plv.mpi-sws.org/rustbelt/popl18/)（汽车软件所依赖的内存安全形式化基础） · **P2** [Rust Blog — Announcing Rust 1.97.0](https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/)（curl 200 实测）
+> **国际权威来源（2026-07-13 补录）**: **P0** [Ferrocene Language Specification](https://spec.ferrocene.dev/)（ISO 26262 认证 Rust 工具链的语言规范，curl 200 实测 2026-07-13） · **P1** [Jung et al. — RustBelt（POPL 2018）](https://plv.mpi-sws.org/rustbelt/popl18/)（汽车软件所依赖的内存安全（Memory Safety）形式化基础） · **P2** [Rust Blog — Announcing Rust 1.97.0](https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/)（curl 200 实测）
 
 ---
 
@@ -63,7 +63,7 @@ Rust 进入 AUTOSAR 的两条路线因此不同：AP 是 POSIX + 现代语言生
 1. 在 AUTOSAR Adaptive Platform 项目中使用 Rust 的指导；
 2. Rust 编码指南（对齐 AUTOSAR 已有的 C++14 编码指南传统）。
 
-同年 ELISA Summit 上，WG-SAF 成员（Aptiv/Alten）发表 *AUTOSAR Adaptive Applications in Rust*，明确了技术路线：ara API 的 Rust 绑定需要把 C++ 的"文档约定的生命周期"变成编译器强制的生命周期、把自由函数（隐藏状态）变成方法、用 `Send`/`Sync` 替代共享可变状态的惯例。（该演讲原始 PDF 托管于 sched.com，2026-07-12 实测对爬虫返回 403；内容经检索结果与 R23-11 EXP 文档交叉核实。）
+同年 ELISA Summit 上，WG-SAF 成员（Aptiv/Alten）发表 *AUTOSAR Adaptive Applications in Rust*，明确了技术路线：ara API 的 Rust 绑定需要把 C++ 的"文档约定的生命周期（Lifetimes）"变成编译器强制的生命周期、把自由函数（隐藏状态）变成方法、用 `Send`/`Sync` 替代共享可变状态的惯例。（该演讲原始 PDF 托管于 sched.com，2026-07-12 实测对爬虫返回 403；内容经检索结果与 R23-11 EXP 文档交叉核实。）
 
 ### 2.2 R23-11：ARA Applications in Rust 解释性文档
 
@@ -74,7 +74,7 @@ Rust 进入 AUTOSAR 的两条路线因此不同：AP 是 POSIX + 现代语言生
 CP 侧没有等效的标准文档，但产业侧已出现可行路径：
 
 - **vECU 工具链**：Synopsys Silver 等虚拟 ECU 平台支持在 AUTOSAR Classic 项目中集成并验证 Rust 编写的 SWC（Software Component），与既有 C 代码共存（[Synopsys 2025-01-27](https://www.synopsys.com/blogs/chip-design/validation-of-autosar-classic-ecus-running-rust-swcs-a-safer-path-to-automotive-software.html)、[SemiEngineering 2025-07-08](https://semiengineering.com/driving-the-future-how-rust-and-virtual-ecus-are-transforming-autosar-classic-automotive-software/)）；
-- **混合开发**：把网络安全/内存安全敏感的模块用 Rust 实现，经 RTE 接口接入，其余保留 C——这与 HighTec AURIX Rust 平台（ISO 26262 ASIL D 认证）的 hybrid 模式一致（见 [认证工具链清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) §3.2）。
+- **混合开发**：把网络安全/内存安全敏感的模块（Module）用 Rust 实现，经 RTE 接口接入，其余保留 C——这与 HighTec AURIX Rust 平台（ISO 26262 ASIL D 认证）的 hybrid 模式一致（见 [认证工具链清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) §3.2）。
 
 ---
 
@@ -87,7 +87,7 @@ WG-SAF 的公开材料给出的核心理由：
 | 编译器保证的内存安全（soundness） | 消除 C/C++ 中 UB 类缺陷的论证负担；访谈数据显示约 90% 传统静态分析检查被编译器覆盖 |
 | `Send`/`Sync` 并发约束 | AP 多线程应用中数据竞争在编译期排除，支撑 freedom from interference 论证 |
 | 显式生命周期 | C++ 中"文档约定"的生命周期变为可机器检查 |
-| 显式 `pub`/`mut`/`clone`/`Result` 传播 | 与控制流可追溯性、错误处理完整性直接对应 |
+| 显式 `pub`/`mut`/`clone`/`Result` 传播 | 与控制流可追溯性、错误处理（Error Handling）完整性直接对应 |
 | async（协程状态机） | 对应 C++20 `co_await`，在 POSIX 侧高效多任务；但"染色"效应（阻塞/异步混用成本）仍需工程权衡 |
 | 验证工具生态 | miri、kani、prusti、loom、creusot 等可纳入 V&V 证据链 |
 

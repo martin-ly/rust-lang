@@ -15,7 +15,7 @@
 > [Web 框架](../04_web_and_networking/03_web_frameworks.md) ·
 > [网络协议](../04_web_and_networking/07_network_protocols.md) ·
 > [Glommio 与 Thread-per-Core](../04_web_and_networking/05_glommio_and_thread_per_core.md) ·
-> [并发与异步](../../03_advanced/00_concurrency/01_concurrency.md) ·
+> [并发与异步（Async）](../../03_advanced/00_concurrency/01_concurrency.md) ·
 > [Rust vs Go（并发模型对比）](../../05_comparative/01_systems_languages/03_rust_vs_go.md)
 
 ---
@@ -23,21 +23,21 @@
 > **Bloom 层级**: L2-L4
 > **难度图例**: 🟢 基础（概念直接考察）｜ 🟡 进阶（需理解深层原理）｜ 🔴 专家（多概念综合 / 边界情况）
 > **题型构成**: 代码阅读题 + 规范题型【单选】【多选】【判断】（按 mdbook-quiz 指南四级题型规范（`docs/02_learning/07_mdbook_quiz_guide.md`）的 .md 落地形态组织，不引入 TOML 插件）
-> **定位**: 验证学习者对 L6 网络与异步子领域生态格局（框架、运行时、协议）的掌握。
+> **定位**: 验证学习者对 L6 网络与异步子领域生态格局（框架、运行时（Runtime）、协议）的掌握。
 > **使用方式**: 先独立思考答案，再点击展开核对解析。
 
 ---
 
 ## 一、Web 框架格局
 
-本节考查 Web 框架格局：Q1 定位 Axum 的生态位，Q2 检验运行时绑定策略与权威页兼容性分析的一致性。
+本节考查 Web 框架格局：Q1 定位 Axum 的生态位，Q2 检验运行时绑定策略与权威页兼容性分析的一致性（Coherence）。
 
 ### Q1. 🟢【单选】Axum 在 Rust Web 框架生态中的定位是？
 
 - A. 基于 Actor 模型的工业级框架
 - B. Tokio 生态的原生扩展，构建于 Tokio、Tower 与 Hyper 之上
 - C. 声明式编程与类型安全优先的框架
-- D. 模块化与 OpenAPI 优先的框架
+- D. 模块（Module）化与 OpenAPI 优先的框架
 
 <details>
 <summary>✅ 答案与解析</summary>
@@ -158,7 +158,7 @@ enum RuntimeBinding {
 ### Q7. 🔴【单选】关于 Rust + eBPF（aya-rs）的独特优势，下列哪项最准确？
 
 - A. eBPF 程序只能用 C 编写，Rust 仅能做用户态加载器
-- B. Rust 的所有权/借用模型把内核验证器关注的内存安全问题前移到编译期，aya-rs 提供 Rust 编写 eBPF 程序与用户态加载的完整链路
+- B. Rust 的所有权（Ownership）/借用（Borrowing）模型把内核验证器关注的内存安全（Memory Safety）问题前移到编译期，aya-rs 提供 Rust 编写 eBPF 程序与用户态加载的完整链路
 - C. eBPF 允许任意无限循环，Rust 只是语法更现代
 - D. aya-rs 绕过内核验证器直接执行字节码
 
@@ -183,7 +183,7 @@ enum RuntimeBinding {
 | 选项 | 评审意见 |
 |:---|:---|
 | A | memcpy 开销不可避免，接受现状 |
-| B | 应引入零拷贝技术（如 `bytes::Bytes` 切片共享、`sendfile`/`splice` 语义或 Tokio 的零拷贝发送），消除用户态冗余拷贝 |
+| B | 应引入零拷贝技术（如 `bytes::Bytes` 切片（Slice）共享、`sendfile`/`splice` 语义或 Tokio 的零拷贝发送），消除用户态冗余拷贝 |
 | C | 改用同步阻塞 I/O 即可消除拷贝 |
 | D | 只需加大缓冲区，拷贝次数自然归零 |
 
@@ -235,7 +235,7 @@ enum RuntimeBinding {
 
 ### Q11. 🟢【单选】在 Rust 异步服务中配置 TLS，按 [网络安全](../12_networking/02_network_security.md) 的实践，推荐的组件组合是？
 
-- A. `openssl` 直接 FFI 调用，自行管理证书生命周期
+- A. `openssl` 直接 FFI 调用，自行管理证书生命周期（Lifetimes）
 - B. `rustls` + `tokio-rustls`（纯 Rust TLS 实现，装配 `TlsAcceptor`）
 - C. 关闭 TLS 改用应用层自研加密
 - D. `native-tls` 是唯一可用于生产的选择

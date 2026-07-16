@@ -87,7 +87,7 @@ Rust 在云原生栈的四项结构性优势：
 
 1. **资源效率**：无 GC + 零运行时 → 容器镜像小（静态二进制 + `FROM scratch`/distroless，常 <20MB）、内存基线低，直接降低 Pod 的 request/limit 与云账单；
 2. **冷启动**：无运行时初始化，毫秒级启动——Serverless/Knative 弹性伸缩的理想负载；
-3. **安全边界**：内存安全消除整类 RCE 漏洞，多租户基础设施（参考 Firecracker 案例）的首选语言；
+3. **安全边界**：内存安全（Memory Safety）消除整类 RCE 漏洞，多租户基础设施（参考 Firecracker 案例）的首选语言；
 4. **运维可观测**：`tokio` 的 task 模型 + `tracing` 的结构化 span 与 OpenTelemetry 原生对接。
 
 判定依据：横向扩容成本高（内存密集型服务）或冷启动敏感的场景，Rust 化 ROI 最高。
@@ -176,7 +176,7 @@ Axum 与 Actix-web 的选择矩阵（2026 现状）：
 |---|---|---|
 | 运行时 | Tokio 原生（tower 生态） | 自有 actor 衍生，已迁 Tokio 兼容 |
 | 抽象层 | `tower::Service` 中间件复用 | 自有 middleware 体系 |
-| 类型驱动 | 提取器（extractor）编译期校验 handler 签名 | 类似但宏魔法更多 |
+| 类型驱动 | 提取器（extractor）编译期校验 handler 签名 | 类似但宏（Macro）魔法更多 |
 | 生态协同 | tower-http（CORS/限流/压缩）、axum-extra | actix-* 自成体系 |
 | 学习曲线 | 「类型即文档」陡峭但可推理 | 上手快，深入需懂 actor 遗产 |
 
@@ -283,7 +283,7 @@ Actix-web:
 
 1. **服务网格**：数据面代理（Envoy 的替代者 Linkerd2-proxy 即 Rust 实现——选型理由正是内存安全 + 低延迟，边车代理每秒处理全量流量，GC 停顿不可接受）；控制面多为 Go，Rust 渗透缓慢。
 2. **容器运行时**：`youki`（Rust 实现的 OCI runtime）与 `containerd` 的 Rust shim；K8s 节点的安全敏感组件 Rust 化是明确趋势。
-3. **可观测性**：`tracing`（结构化日志/span，`#[instrument]` 过程宏零样板）→ `tracing-opentelemetry` → OTLP 导出；指标用 `metrics` crate（facade 模式，后端可换 Prometheus/StatsD）。
+3. **可观测性**：`tracing`（结构化日志/span，`#[instrument]` 过程宏（Procedural Macro）零样板）→ `tracing-opentelemetry` → OTLP 导出；指标用 `metrics` crate（facade 模式，后端可换 Prometheus/StatsD）。
 
 判定依据：服务网格选型不必因语言偏好——Linkerd（Rust 数据面）vs Istio（Envoy）按功能与运维复杂度选；应用侧可观测性标配 `tracing` + OTLP，与语言无关的后端栈。
 
@@ -400,7 +400,7 @@ Actix-web:
 “Rust 适合所有云原生场景”是一个需要拆分的全称命题。本节用两棵反命题树将其分解为可判定的子问题（生态成熟度、团队经验、性能敏感度），再给出 Rust 在云原生中的三条硬边界：
 
 - **生态成熟度边界**：service mesh、Serverless 框架等领域的 Rust 方案成熟度仍低于 Go/Java，选型时需评估具体子领域而非整体判断。
-- **开发速度边界**：编译时间与借用检查的认知成本使 Rust 在快速原型阶段劣势明显，增量编译与 sccache 只能部分缓解。
+- **开发速度边界**：编译时间与借用（Borrowing）检查的认知成本使 Rust 在快速原型阶段劣势明显，增量编译与 sccache 只能部分缓解。
 - **团队边界**： Tower/`Service` 抽象与 async 生命周期的学习曲线，决定团队前 2–3 个月的生产力折损。
 
 结论先行：Rust 适合追求极致性能与内存安全的云原生组件（数据面、代理、存储），控制面与快速迭代业务 Go 仍占优。

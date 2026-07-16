@@ -64,7 +64,7 @@
 
 ## 一、取消的语义：drop future 意味着什么
 
-Rust 异步的取消没有专门的机制——**取消就是 drop Future**。理解这一等式的全部推论是本节目标：
+Rust 异步（Async）的取消没有专门的机制——**取消就是 drop Future**。理解这一等式的全部推论是本节目标：
 
 1. **取消不是「停止执行」，而是「不再 poll」**（1.1）：Future 是惰性状态机，drop 后不再被轮询，正在 `await` 的子操作随之 drop（递归）——没有「信号打断执行中代码」的机制，`async` 代码本身永远运行在 poll 内；
 2. **取消的三个触发源**（1.2）：`select!` 分支落选、`JoinHandle::abort()`（tokio 中是「下次 poll 时不再调度」）、以及调用方直接 drop 持有 Future 的容器（如 `FuturesUnordered` 移除）；
@@ -134,7 +134,7 @@ enum FetchFut {
 
 `tokio::select!` 文档的约定（2.2）精确化了「cancel safe」标注的含义：被标注的方法（如 `mpsc::Receiver::recv`）承诺「若返回 `Pending` 后被取消，不丢失任何数据」；未标注的（如 `BufReader::read_line`）则可能在 await 时已部分消费缓冲区——取消即丢数据。
 
-证明义务分层（2.4）：① Future 自身状态（drop 即消失，自动安全）；② 通过 `&mut` 借用影响的外部状态（缓冲区、计数器——审计重点）；③ 跨 await 的副作用序列（锁、事务、消息发送——需要补偿逻辑或重构为「先选择后执行」）。本节的反例（第三章）全部对应第②③层的违反。
+证明义务分层（2.4）：① Future 自身状态（drop 即消失，自动安全）；② 通过 `&mut` 借用（Borrowing）影响的外部状态（缓冲区、计数器——审计重点）；③ 跨 await 的副作用序列（锁、事务、消息发送——需要补偿逻辑或重构为「先选择后执行」）。本节的反例（第三章）全部对应第②③层的违反。
 
 ### 2.1 操作级定义
 
@@ -174,7 +174,7 @@ tokio::select! {
 实操中“证明”一个操作取消安全，按由易到难有三层：
 
 1. **查文档**：Tokio/库文档已标注的方法级 cancel safe，直接采信（文档承诺即契约，违背是库的 bug）；
-2. **数据归属分析**：追踪“已读取/已接收但尚未交付”的数据在取消瞬间位于何处——Future 局部态（不安全）还是长生命周期对象（安全）。§五的判定口诀即此层的操作化；
+2. **数据归属分析**：追踪“已读取/已接收但尚未交付”的数据在取消瞬间位于何处——Future 局部态（不安全）还是长生命周期（Lifetimes）对象（安全）。§五的判定口诀即此层的操作化；
 3. **不变量枚举**：对业务级操作，按 §1.4 枚举全部挂起状态，逐个验证业务不变量（如“余额守恒”“消息恰好一次”）。只有这层能覆盖跨多个 await 的组合操作。
 
 ---
@@ -483,7 +483,7 @@ Future 被 drop 时，其状态机内活跃局部变量按**声明逆序**析构
 - [withoutboats — Asynchronous Clean-up](https://without.boats/blog/asynchronous-clean-up/) 及其异步系列博文（取消、清理与 async drop 的设计动机）
 - [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)（Future 惰性状态机与 drop 语义基础）
 - [Lagaillardie, Neykova & Yoshida: Stay Safe Under Panic — Affine Rust Programming with Multiparty Session Types（ECOOP 2022 全文, arXiv:2204.13464）](https://arxiv.org/abs/2204.13464)（P1 学术：Rust 取消/恐慌安全的会话类型形式化，2026-07-12 验证 HTTP 200）
-- 站内交叉引用：[Async/Await §8.7](01_async.md) · [Async 高级主题](02_async_advanced.md) · [Async 模式 §2.2/§10.2](03_async_patterns.md) · [Async Drop（预览）](../../07_future/02_preview_features/22_async_drop_preview.md) · [Pin 与 Unpin](08_pin_unpin.md)
+- 站内交叉引用（Reference）：[Async/Await §8.7](01_async.md) · [Async 高级主题](02_async_advanced.md) · [Async 模式 §2.2/§10.2](03_async_patterns.md) · [Async Drop（预览）](../../07_future/02_preview_features/22_async_drop_preview.md) · [Pin 与 Unpin](08_pin_unpin.md)
 
 ---
 

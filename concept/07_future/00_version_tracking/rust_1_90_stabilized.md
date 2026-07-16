@@ -85,10 +85,10 @@
 1.90 周期的异步特性主线是「让 trait 中的 async 真正可用」：
 
 1. **RPITIT（返回位置 impl Trait in Trait）**：trait 方法可声明 `fn get(&self) -> impl Future<Output = T>`，`async fn in trait` 正是其语法糖；静态分派场景不再需要 `async-trait` crate 的 `#[async_trait]`（它会把每个调用装箱为 `Pin<Box<dyn Future>>`，热路径有真实成本）。
-2. **异步闭包（RFC 3668）**：`async || ...` 产生实现 `AsyncFn` trait 的闭包——与普通闭包对齐的三种形态（`AsyncFn`/`AsyncFnMut`/`AsyncFnOnce`），解决了「闭包内 await 只能套 `async move` 块且借用语义错误」的长期痛点。
-3. **生命周期推断**：async fn in trait 的返回 Future 默认捕获 `&self` 生命周期，`+ use<'lt>` 精确捕获语法处理「不借用 self」的优化场景。
+2. **异步闭包（RFC 3668）**：`async || ...` 产生实现 `AsyncFn` trait 的闭包——与普通闭包对齐的三种形态（`AsyncFn`/`AsyncFnMut`/`AsyncFnOnce`），解决了「闭包内 await 只能套 `async move` 块且借用（Borrowing）语义错误」的长期痛点。
+3. **生命周期（Lifetimes）推断**：async fn in trait 的返回 Future 默认捕获 `&self` 生命周期，`+ use<'lt>` 精确捕获语法处理「不借用 self」的优化场景。
 
-判定依据：库作者定义异步 trait 时优先 RPITIT + `Send` bound 注解；仅当需要 trait object（`dyn`）时退回 `async-trait` 宏。
+判定依据：库作者定义异步 trait 时优先 RPITIT + `Send` bound 注解；仅当需要 trait object（`dyn`）时退回 `async-trait` 宏（Macro）。
 
 ### 1.1 异步Trait稳定化（RPITIT）
 
@@ -225,7 +225,7 @@ impl StreamProcessor for NetworkProcessor {
 
 GAT（泛型关联类型，1.65 稳定）在网络编程中的杀手场景是**零拷贝流式解析**：
 
-- **借用返回类型**：`trait Parser { type Output<'a> where Self: 'a; fn parse<'a>(&'a self, buf: &'a [u8]) -> Self::Output<'a>; }`——关联类型带生命周期参数，解析结果可直接引用输入缓冲（如 `&'a str` 切片），无需 `String` 拷贝；无 GAT 时代只能返回拥有类型或用 `unsafe` 绕。
+- **借用返回类型**：`trait Parser { type Output<'a> where Self: 'a; fn parse<'a>(&'a self, buf: &'a [u8]) -> Self::Output<'a>; }`——关联类型带生命周期参数，解析结果可直接引用（Reference）输入缓冲（如 `&'a str` 切片（Slice）），无需 `String` 拷贝；无 GAT 时代只能返回拥有类型或用 `unsafe` 绕。
 - **LendingIterator 模式**：`type Item<'a>` 让迭代器产出借用自身的元素（如按行解析的流），标准 `Iterator` 无法表达——这是 GAT 设计的原始动机（RFC 1598）。
 - **网络协议栈**：帧解析、HTTP 头部视图（`Header<'a>`）等场景的分配次数可降一个量级。
 
@@ -285,7 +285,7 @@ pub trait Connection {
 
 ## 3. let-else模式匹配
 
-`let ... else` 语法在模式匹配失败时执行发散（diverging）分支，适合网络错误处理中的“早退”（early return）路径。其编译期约束是：`else` 块必须以 `return`/`break`/`continue`/`panic!` 发散，编译器据此保证绑定变量在后续作用域中必然有效。
+`let ... else` 语法在模式匹配（Pattern Matching）失败时执行发散（diverging）分支，适合网络错误处理中的“早退”（early return）路径。其编译期约束是：`else` 块必须以 `return`/`break`/`continue`/`panic!` 发散，编译器据此保证绑定变量在后续作用域中必然有效。
 
 - **适用判定**: 失败分支只需早退、不依赖错误值细节时，优先 `let-else`；需要按错误种类分支时仍使用 `match`。
 - **对比 `if let`**: `let-else` 将成功路径保持在主缩进层级，降低深层嵌套（deep nesting）的认知负担。
@@ -353,8 +353,8 @@ pub fn load_config() -> Result<ServerConfig, String> {
 `impl Trait` 返回类型让函数隐藏具体类型、只暴露 trait 接口。1.90 时代配合 trait 中的 `impl Trait`（RPITIT，稳定于 1.75）与 `use<..>` 精确捕获语法（1.82），返回类型优化的重点是**捕获集（capture set）的最小化**。
 
 - **编译期收益**: `impl Iterator<Item = u8> + use<'a, T>` 形式避免无意捕获过多生命周期，使调用方获得更宽松的借用约束。
-- **运行时收益**: 返回具体闭包/迭代器类型（而非 `Box<dyn ...>`）保留单态化（monomorphization）与内联机会，是零成本抽象的落点。
-- **判定依据**: 公共 API 返回类型泄漏内部实现（如 `Map<Filter<...>>`）时应改为 `impl Trait`；调用方需要命名类型存入结构体字段时，仍需具名类型或 nightly 的 `type_alias_impl_trait`。
+- **运行时（Runtime）收益**: 返回具体闭包/迭代器类型（而非 `Box<dyn ...>`）保留单态化（monomorphization）与内联机会，是零成本抽象的落点。
+- **判定依据**: 公共 API 返回类型泄漏内部实现（如 `Map<Filter<...>>`）时应改为 `impl Trait`；调用方需要命名类型存入结构体（Struct）字段时，仍需具名类型或 nightly 的 `type_alias_impl_trait`。
 
 下面的返回类型优化小节给出改造前后的对比。
 
@@ -557,7 +557,7 @@ pub struct Packet {
 
 1.90 周期的错误处理改进围绕**结构化错误与传播便捷性**：
 
-1. **网络错误类型设计惯例**：`thiserror` 枚举按「错误来源层」组织变体（Io/Dns/Tls/Http/Timeout），`#[from]` 自动转换 + `#[error(transparent)]` 保持错误链——`std::error::Error::source` 链是生产可观测性的基础（`anyhow` 的 `chain()` 打印）。
+1. **网络错误类型设计惯例**：`thiserror` 枚举（Enum）按「错误来源层」组织变体（Io/Dns/Tls/Http/Timeout），`#[from]` 自动转换 + `#[error(transparent)]` 保持错误链——`std::error::Error::source` 链是生产可观测性的基础（`anyhow` 的 `chain()` 打印）。
 2. **`let-else` 与早退**：网络代码大量「取不到就返回」模式（连接拒绝、解析失败），`let-else` 把卫语句压到一行，主路径保持左对齐。
 3. **错误上下文化**：`anyhow::Context`（应用层）vs `thiserror`（库层）的分工不变——1.90 周期的改进主要在诊断侧（错误链打印格式、`Termination` trait 的退出码传播）。
 
@@ -676,7 +676,7 @@ Rust 的性能叙事常被简化为“零成本抽象”，但 1.90 时代的准
 
 1. **反汇编检查**：`cargo asm` 或 Compiler Explorer 查看抽象层是否完全内联消失；
 2. **分配检查**：抽象是否引入堆分配（如 `Box<dyn Trait>` 的动态分发就有明确成本）；
-3. **缓存行为**：单态化导致的代码膨胀是否引发指令缓存压力——这是“零成本”表述中常被忽略的负效应。
+3. **缓存行为**：单态化（Monomorphization）导致的代码膨胀是否引发指令缓存压力——这是“零成本”表述中常被忽略的负效应。
 
 本节各小节按上述框架给出实测方法与判断标准，避免把营销话术当作工程依据。
 

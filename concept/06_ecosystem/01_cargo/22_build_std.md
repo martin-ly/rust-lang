@@ -191,10 +191,10 @@ fn panic(_info: &PanicInfo) -> ! { loop {} }
 
 ## HAL 设计模式深化
 
-HAL 设计的两个深化模式把硬件约束编码进类型系统，是嵌入式 Rust“编译期正确性”的集中体现：
+HAL 设计的两个深化模式把硬件约束编码进类型系统（Type System），是嵌入式 Rust“编译期正确性”的集中体现：
 
-- **类型状态模式（Type State）**: 外设配置状态（未配置/已配置/运行中）编码为泛型参数——`Uart<Unconfigured>` 只有 `configure()`，`Uart<Configured>` 只有 `write()`；误用（未配置就发送）是编译错误而非运行时的不可预测寄存器写。代价是每个状态生成独立类型（单态化），文档与错误信息复杂度上升。
-- **寄存器访问模式**: `svd2rust` 生成的 PAC 用 `read/modify/write` 三件套 + 闭包（`reg.modify(|r, w| w.field().bit(true))`）保证读-改-写的完整性；字段级 API（`w.baud().variant(...)`）消除位运算错误； volatile 语义由库内部封装，用户代码不含 unsafe。
+- **类型状态模式（Type State）**: 外设配置状态（未配置/已配置/运行中）编码为泛型（Generics）参数——`Uart<Unconfigured>` 只有 `configure()`，`Uart<Configured>` 只有 `write()`；误用（未配置就发送）是编译错误而非运行时（Runtime）的不可预测寄存器写。代价是每个状态生成独立类型（单态化（Monomorphization）），文档与错误信息复杂度上升。
+- **寄存器访问模式**: `svd2rust` 生成的 PAC 用 `read/modify/write` 三件套 + 闭包（Closures）（`reg.modify(|r, w| w.field().bit(true))`）保证读-改-写的完整性；字段级 API（`w.baud().variant(...)`）消除位运算错误； volatile 语义由库内部封装，用户代码不含 unsafe。
 
 判定依据：新 HAL 设计默认采用类型状态（配置序列长的外设收益最大）；直接使用 PAC 时坚持三件套模式，绝不手写 `ptr::write_volatile` 组装寄存器值。
 

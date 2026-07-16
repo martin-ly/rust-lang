@@ -42,7 +42,7 @@
 
 协议形式化的基本框架是**协议三元组**：`〈消息语法, 状态机, 时序约束〉`。
 
-- **消息语法**：帧格式与字段编码——Rust 中用 `#[repr(C)]` 结构体或 `bitflags` 精确建模，类型大小由编译期 `const _: () = assert!(size_of::<Hdr>() == 20)` 钉死。
+- **消息语法**：帧格式与字段编码——Rust 中用 `#[repr(C)]` 结构体（Struct）或 `bitflags` 精确建模，类型大小由编译期 `const _: () = assert!(size_of::<Hdr>() == 20)` 钉死。
 - **状态机**：如 TCP 的 11 状态（CLOSED→SYN_SENT→ESTABLISHED→…），Rust 直接映射为 `enum TcpState` + `fn step(self, event) -> (Self, Action)`——非法转换是无对应 `match` 臂的编译错误。
 - **协议不变式**：如「ESTABLISHED 状态必有有效序列号窗口」，用类型编码（状态变体携带窗口字段）或 Kani 断言验证。
 
@@ -326,7 +326,7 @@ impl PiProcess {
 
 把 TCP/IP 的片段形式化为可执行 Rust 模型，既能精确刻画协议行为，又能用测试/验证工具直接检验。本节选取两个最具教学价值的片段：
 
-- **TCP Reno 拥塞控制**：用 `CongestionState` 枚举（慢启动/拥塞避免/快速恢复）+ `cwnd`/`ssthresh` 状态机完整编码 Reno 算法——AIMD（加性增、乘性减）的每个分支都对应可测试的状态转移，重复 ACK 计数达到 3 触发快速重传的逻辑一目了然。
+- **TCP Reno 拥塞控制**：用 `CongestionState` 枚举（Enum）（慢启动/拥塞避免/快速恢复）+ `cwnd`/`ssthresh` 状态机完整编码 Reno 算法——AIMD（加性增、乘性减）的每个分支都对应可测试的状态转移，重复 ACK 计数达到 3 触发快速重传的逻辑一目了然。
 - **IP 分片与重组**：MTU 超过时的分片（标志位 + 片偏移）与接收端按偏移重组、超时丢弃不完整报文的过程，是自然适合用 `BTreeMap<offset, bytes>` 建模的协议片段。
 
 这些模型可作为协议实现的“可执行规约”：真实实现与模型跑同一组输入，比对状态转移序列。
@@ -427,12 +427,12 @@ impl IpFragmentation {
 
 ## 六、协议组合与 Rust 类型系统验证
 
-协议栈组合与类型系统验证是 Rust 网络编程的独特优势：
+协议栈组合与类型系统（Type System）验证是 Rust 网络编程的独特优势：
 
-- **协议栈组合**：各层（Eth/IP/TCP/TLS/App）建模为 `trait Layer { type Upper; type Lower; }` 的关联类型链，层间帧的解封装用零拷贝切片（`&[u8]` 逐层剥离头部）——类型参数保证「TLS 记录只能出现在 TCP 流之上」这类栈结构约束。
+- **协议栈组合**：各层（Eth/IP/TCP/TLS/App）建模为 `trait Layer { type Upper; type Lower; }` 的关联类型链，层间帧的解封装用零拷贝切片（Slice）（`&[u8]` 逐层剥离头部）——类型参数保证「TLS 记录只能出现在 TCP 流之上」这类栈结构约束。
 - **幽灵类型强制协议状态**：`struct Connection<S: ProtoState>` + `PhantomData<S>`，握手各阶段消费旧类型返回新类型（`Connection<SynSent> → Connection<Established>`）；「在未握手连接上发送数据」因无对应方法而编译失败——这是会话类型在 Rust 中的工程化落地。
 
-判定依据：协议 bug 若源于「状态不符的操作」（如重复握手、提前发送），幽灵类型重构可将其整类消灭；运行时 `assert_eq!(self.state, ...)` 检查是应被类型化替代的信号。
+判定依据：协议 bug 若源于「状态不符的操作」（如重复握手、提前发送），幽灵类型重构可将其整类消灭；运行时（Runtime） `assert_eq!(self.state, ...)` 检查是应被类型化替代的信号。
 
 ### 6.1 协议栈组合
 

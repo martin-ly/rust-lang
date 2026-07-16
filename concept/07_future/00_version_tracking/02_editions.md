@@ -54,7 +54,7 @@
 | Edition | 稳定版本 | 主要变化 |
 |:---|:---:|:---|
 | 2015 | 1.0 | 初始版本；模块（Module）路径需要 `extern crate`；trait 对象可省略 `dyn` |
-| 2018 | 1.31 | 模块系统简化（`mod` 自动解析）、路径统一为 `crate::`、NLL、`async`/await 语法准备、`dyn Trait` 必须显式 |
+| 2018 | 1.31 | 模块（Module）系统简化（`mod` 自动解析）、路径统一为 `crate::`、NLL、`async`/await 语法准备、`dyn Trait` 必须显式 |
 | 2021 | 1.56 | prelude 新增 `TryFrom`/`TryInto`/`FromIterator`、数组实现 `IntoIterator`、panic 宏（Macro）一致性（Coherence）、保留语法 |
 | 2024 | 1.85+ | `if let` 临时作用域收窄、`gen` 关键字保留、异步（Async）闭包（Closures）、`match` 人体工学改进、never type fallback |
 
@@ -252,7 +252,7 @@ linker_messages = "allow"         # 1.97，默认 warn；特殊 lint，只能单
 | 默认类型（前 → 后） | `()` → **`!`**（edition 2024；计划未来推广到所有 edition） | 历史上多落到 `f64` → 受影响情形更可能落到 **`f32`** |
 | 破坏性 | edition 2024 内可能**编译失败或行为变化**；前置 edition 以 future-incompatible 警告检测（`dependency_on_unit_never_type_fallback`，warn-by-default） | 1.97 起 **future-compatibility warning**（"未来会变硬错误"），当前仍可编译 |
 | 关联 lint | `never_type_fallback_flowing_into_unsafe` 在 2024 由 warn 升至 **deny**；检测 lint `dependency_on_unit_never_type_fallback` | future-incompatible 组（围绕 `f32: From<{float}>` 的兼容性警告；不另列虚构 lint 名） |
-| 迁移动作 | 显式标注类型绕过 fallback：`f::<()>()?;`、`() = f()?;`、闭包 `|| -> () { panic!() }`、`<() as Default>::default()` | 显式后缀或标注：`1.0_f32`/`1.0_f64`、`let x: f64 = …`、`f64::from(x)` / turbofish |
+| 迁移动作 | 显式标注类型绕过 fallback：`f::<()>()?;`、`() = f()?;`、闭包（Closures） `|| -> () { panic!() }`、`<() as Default>::default()` | 显式后缀或标注：`1.0_f32`/`1.0_f64`、`let x: f64 = …`、`f64::from(x)` / turbofish |
 | 承载页 | [`31_never_type.md`](../../01_foundation/02_type_system/02_never_type.md) | [`27_type_checking_and_inference.md`](../../04_formal/00_type_theory/07_type_checking_and_inference.md)（fallback 边界小节） |
 
 **never type fallback（Edition 2024）最小对照**：

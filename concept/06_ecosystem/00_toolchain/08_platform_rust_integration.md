@@ -83,7 +83,7 @@
 
 ## 二、Android AOSP
 
-Android 是 Rust 进入超大型 C++ 代码库的标杆案例：Google 公开数据显示新代码转向 Rust 后，AOSP 内存安全漏洞占比随 Rust 代码量上升而显著下降。集成路径分三层——Android.bp 构建规则（rust_binary/rust_library 模块类型）解决编译接入，AIDL/Binder 的 Rust 后端解决系统 IPC，CXX/bindgen 解决与存量 C/C++/Java 的互操作。策略上坚持“新组件用 Rust，存量不重写”。
+Android 是 Rust 进入超大型 C++ 代码库的标杆案例：Google 公开数据显示新代码转向 Rust 后，AOSP 内存安全（Memory Safety）漏洞占比随 Rust 代码量上升而显著下降。集成路径分三层——Android.bp 构建规则（rust_binary/rust_library 模块（Module）类型）解决编译接入，AIDL/Binder 的 Rust 后端解决系统 IPC，CXX/bindgen 解决与存量 C/C++/Java 的互操作。策略上坚持“新组件用 Rust，存量不重写”。
 
 ### 2.1 AOSP 为什么选择 Rust
 

@@ -75,7 +75,7 @@
 - **Waker 契约**：`poll` 返回 `Poll::Pending` ⟹ Waker 已注册到 Reactor；资源就绪时 Reactor 必须调用 `wake()`。
 - **活性（Liveness）三反例**：遗忘 wake → 永久 Pending（活锁）；虚假 wake → 无害空转；Waker 过早释放 → 永久 Pending。
 - **活性调试路径**：Future 陷入永久 Pending 时，按「Waker 注册 → Reactor 唤醒 → poll 返回值合法性」三层决策树定位根因（完整 Mermaid 决策树见权威节）。
-- Waker 与具体执行器解耦：任何实现 `Wake` trait 的类型均可作为 Waker，同一 Future 可跨运行时复用。
+- Waker 与具体执行器解耦：任何实现 `Wake` trait 的类型均可作为 Waker，同一 Future 可跨运行时（Runtime）复用。
 
 > **实现纵深**: RawWakerVTable 手工实现的正确模式全集与契约违反反例集（丢失 wake 死锁 / 记账错误 double-free）见 [Waker 契约深度解析](12_waker_contract_deep_dive.md)。
 
@@ -87,13 +87,13 @@
 **要点摘要**：
 
 - `Waker` 是不透明句柄，由执行器经 `RawWaker` + `RawWakerVTable` 类型擦除实现；VTable 含 `clone` / `wake` / `wake_by_ref` / `drop` 四个函数指针。
-- `wake` 获取所有权（减少 Arc 引用计数），`wake_by_ref` 借用；性能敏感场景优选 `wake_by_ref`。
+- `wake` 获取所有权（减少 Arc 引用（Reference）计数），`wake_by_ref` 借用（Borrowing）；性能敏感场景优选 `wake_by_ref`。
 - `std::task::Wake` trait 提供比手写 `RawWakerVTable` 更安全的自定义路径：`Waker::from(Arc<T>)`。
 - Waker 的最终消费者是 OS 异步 I/O 机制（epoll / kqueue / IOCP），Reactor 将 I/O 就绪事件映射为 `wake()` 调用。
 
 ### 8.10 `Stream` / `Sink` trait 完整分析
 
-> **权威来源**：本节完整论述（`Stream` 状态机推导、`Sink` 四阶段生命周期、futures vs tokio-stream 对比）统一维护于
+> **权威来源**：本节完整论述（`Stream` 状态机推导、`Sink` 四阶段生命周期（Lifetimes）、futures vs tokio-stream 对比）统一维护于
 > [01_async.md §8.10](01_async.md#810-stream--sink-trait-完整分析)。本页保留高级摘要。
 
 **要点摘要**：
@@ -113,7 +113,7 @@
 - `Pin<Box<dyn Future>>`：运行时类型擦除 + 一次堆分配与间接调用——用于 trait 对象、递归 async fn、运行时类型选择。
 - 执行器统一存储不同任务的 Future 时需 `Pin<Box<dyn Future + Send>>`；其余场景避免无谓装箱。
 
-> **交叉链接（向下引用 L2）**：单态化机制见 [L2 泛型（Generics）](../../02_intermediate/01_generics/01_generics.md)（单态化与代码膨胀）；
+> **交叉链接（向下引用 L2）**：单态化（Monomorphization）机制见 [L2 泛型（Generics）](../../02_intermediate/01_generics/01_generics.md)（单态化与代码膨胀）；
 > trait 对象的内存布局（vtable）见 [L2 Trait](../../02_intermediate/00_traits/01_traits.md)。
 
 ### 8.12 `loom` 并发模型检测工具
@@ -352,7 +352,7 @@ fn main() {
 本节 4 道测验覆盖高级异步的核心判别点：
 
 - 测验 1（记忆层）：async fn in trait（1.75 稳定）的语义——脱糖为返回 `impl Future` 的方法，`dyn` 不兼容的原因；
-- 测验 2（理解层）：`Stream` trait 与 `Future` 的关系——「异步迭代器」模型，`poll_next` 的 `Option` 语义（`None` = 流结束）；
+- 测验 2（理解层）：`Stream` trait 与 `Future` 的关系——「异步迭代器（Iterator）」模型，`poll_next` 的 `Option` 语义（`None` = 流结束）；
 - 测验 3（应用层）：`spawn_blocking` 的适用场景——阻塞 IO/CPU 密集工作移出执行器线程，防止饿死其他任务；
 - 测验 4（分析层）：async 递归的 `Box::pin` 必要性——递归 async fn 生成无限尺寸的状态机，`Box::pin` 提供间接层切断。
 

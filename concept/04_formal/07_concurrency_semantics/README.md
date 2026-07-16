@@ -16,7 +16,7 @@ Rust 的并发原语（`mpsc`、`select!`、`Atomic*`、actor 框架）在工程
 | 问题 | 权威页 | 形式工具 |
 |:---|:---|:---|
 | 通道与通信的结构从哪来？Rust channel 与 CSP 到底「像」到什么程度？ | [01 进程代数与 Rust](01_process_calculi_for_rust.md) | CSP / CCS / π 演算、互模拟、移动性 |
-| 并发对象「正确」的精确定义是什么？怎么证明？ | [02 线性化与一致性谱系](02_linearizability_and_consistency.md) | Herlihy-Wing 历史/线性化点、一致性谱系、CAP |
+| 并发对象「正确」的精确定义是什么？怎么证明？ | [02 线性化与一致性（Coherence）谱系](02_linearizability_and_consistency.md) | Herlihy-Wing 历史/线性化点、一致性谱系、CAP |
 | 命名进程 + 邮箱模型的语义是什么？监督树如何形式化？ | [03 Actor 形式语义](03_actor_semantics.md) | Hewitt 三公理、Agha 配置语义、OTP 监督树 |
 
 ## 二、学习路径

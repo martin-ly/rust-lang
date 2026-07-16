@@ -13,7 +13,7 @@
 > **双维定位**: P×Eva — 评估宏（Macro）库工程实践
 > **前置概念**:
 > [过程宏（Procedural Macro）](02_proc_macro.md) ·
-> [宏调试与诊断](04_macro_debugging_and_diagnostics.md) ·
+> [宏（Macro）调试与诊断](04_macro_debugging_and_diagnostics.md) ·
 > [元编程](../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md) ·
 > [Cargo 注册表与包发布](../../06_ecosystem/01_cargo/08_cargo_registries_and_publishing.md)
 > **后置概念**:
@@ -50,7 +50,7 @@
 
 ## 二、版本兼容性
 
-过程宏 crate 的版本兼容有三条独立轴，生产级开发必须分别管理：
+过程宏（Procedural Macro） crate 的版本兼容有三条独立轴，生产级开发必须分别管理：
 
 1. **syn 主版本轴**：syn 1.x 与 2.x API 不兼容（`Meta` 匹配 → `parse_nested_meta` 回调）——宏生态的依赖树中 syn 版本分裂会导致编译时间倍增（两份 syn 编译），升级策略是跟随生态主流窗口批量升级；
 2. **rustc 最低版本（MSRV）轴**：过程宏在**编译期运行**，其 MSRV 受 `proc_macro` API 演进约束（如 `Span::source_text` 需要特定版本）——`Cargo.toml` 声明 `rust-version` 并在 CI 测试 MSRV 工具链；
@@ -433,7 +433,7 @@ mindmap
 
 ## ⚠️ 反例与陷阱
 
-> 陷阱：未加 `#[macro_export]` 的 `macro_rules!` 无法按路径引用，发布后被下游 crate 找不到。
+> 陷阱：未加 `#[macro_export]` 的 `macro_rules!` 无法按路径引用（Reference），发布后被下游 crate 找不到。
 > 下面代码在 rustc 1.97 --edition 2024 下触发 `E0433`。
 
 ```rust,compile_fail,E0433

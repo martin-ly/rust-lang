@@ -378,7 +378,7 @@ Rust 访问数据库有三种查询模式，抽象层级与类型安全程度递
 连接管理的两个工程要点：
 
 1. **连接池**：`Pool` 大小经验公式 = `((核心数 × 2) + 有效磁盘数)`（PG 经典公式），异步场景还要叠加「每连接一个并发查询」约束——池耗尽时 `acquire().await` 挂起，若无超时即死等（边界测试中的超时场景）。`sqlx::Pool` 默认带 `acquire_timeout`，**务必显式设置**而非依赖默认。
-2. **事务**：`pool.begin().await` 得到 `Transaction`，Rust 的所有权模型提供独特保证——`Transaction` 未 `commit` 而 drop 即自动回滚（RAII），「忘记提交/回滚」类 bug 在编译期被类型设计消灭大半。嵌套事务用 savepoint 模拟（SQLx `begin` on transaction）。
+2. **事务**：`pool.begin().await` 得到 `Transaction`，Rust 的所有权（Ownership）模型提供独特保证——`Transaction` 未 `commit` 而 drop 即自动回滚（RAII），「忘记提交/回滚」类 bug 在编译期被类型设计消灭大半。嵌套事务用 savepoint 模拟（SQLx `begin` on transaction）。
 
 反例：在 HTTP handler 中跨 `.await` 持有事务连接超过单查询需要——把连接占用时间从毫秒拉到秒，池耗尽雪崩的经典路径。
 
@@ -664,7 +664,7 @@ fn main() {
 数据库访问层的错误面集中在编译期类型契约与运行时资源管理两端。本章覆盖六个代表性边界：
 
 - **SQLx 编译期查询验证**：`query_as!` 宏在编译期比对 SQL 结果列与 Rust 类型，`TEXT → i32` 这类映射错误直接编译失败——代价是开发时需要可访问的数据库（或离线模式）。
-- **连接池生命周期**：池句柄必须 `'static`（通常 `Arc` 或 `OnceLock`），借用临时池会被借用检查器拒绝。
+- **连接池生命周期**：池句柄必须 `'static`（通常 `Arc` 或 `OnceLock`），借用（Borrowing）临时池会被借用检查器拒绝。
 - **连接池死锁**：在持有连接的事务中再向池请求第二个连接，池耗尽时永久等待——异步代码中尤其隐蔽。
 - **池耗尽与超时**：`acquire_timeout` 与 `max_connections` 的配置不当会把数据库慢查询放大为全服务不可用。
 - 另两项覆盖事务未提交/回滚的连接泄漏与预处理语句缓存膨胀。

@@ -31,7 +31,7 @@
 > [RFC 3518 — Sealed Traits](https://github.com/rust-lang/rfcs/pull/3518) ·
 > [GitHub #156628 — Open Enums Tracking](https://github.com/rust-lang/rust/issues/156628) ·
 > [Scala Sealed Traits](https://docs.scala-lang.org/tour/pattern-matching.html) ·
-> [Haskell Open Data Types](https://wiki.haskell.org/Extensible_datatypes) ·
+> [Haskell Open Data Types](https://wiki.haskell.org/Extensible_datatypes) *(known-broken: Haskell Wiki 间歇性 502)* ·
 > [OCaml Polymorphic Variants](https://ocaml.org/manual/polyvariant.html)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **前置依赖**: [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)
@@ -293,7 +293,7 @@ fn process_external(r: Response) -> String {
 | OCaml | Polymorphic Variants | 隐式行多态 | 编译期推断，精度高 |
 | Rust | `#[non_exhaustive]` | 仅库作者增变体 | 下游强制 `_` 臂 |
 
-Rust 方案的独特性：扩展权**只给定义方**，消费方永远安全（不会因新增变体出编译错误）——这是「语义化版本 + 类型检查」的组合设计；OCaml 多态变体最灵活但类型推断复杂度代价大。
+Rust 方案的独特性：扩展权**只给定义方**，消费方永远安全（不会因新增变体出编译错误）——这是「语义化版本 + 类型检查」的组合设计；OCaml 多态变体最灵活但类型推断（Type Inference）复杂度代价大。
 
 判定依据：需要消费方也能扩展的场景在 Rust 中应改用 trait object（`Box<dyn Event>`）而非枚举。
 
@@ -334,7 +334,7 @@ data AnyEvent = forall e. EventClass e => AnyEvent e
 ```
 
 > **对比**: Haskell 通过**类型类（Type Class）** 和**存在类型（Existential Types）** 模拟开放枚举，运行时通过虚表（vtable）分派。Rust 的 `enum` + `match` 是编译期静态分派，零运行时开销。
-> [来源: [Haskell Wiki — Open data type](https://wiki.haskell.org/Extensible_datatypes)]
+> [来源: [Haskell Wiki — Open data type](https://wiki.haskell.org/Extensible_datatypes) *(known-broken: Haskell Wiki 间歇性 502)*]
 
 ---
 

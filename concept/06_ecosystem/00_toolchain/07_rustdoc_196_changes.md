@@ -128,7 +128,7 @@ pub mod unix_only_api {
 
 - **变更内容**: `#[deprecated]` 项在 rustdoc 输出中获得更显著的视觉处理——侧边栏与列表页标注弃用状态，详情页把 `since` 版本与 `note` 迁移提示渲染为醒目的提示块，而非此前容易忽略的小字。
 - **示例效果**: 浏览依赖文档时，弃用 API 在索引页即可识别，不必点进详情才发现；配合编辑器内联提示，形成“列表可见 → 详情说明 → 编译警告”的三级提示链。
-- **建议**: crate 作者应补全 `#[deprecated(since = "x.y", note = "use foo instead")]` 的两个字段——`note` 是迁移路径的唯一权威说明，渲染改进使其价值放大；库升级指南文档（CHANGELOG）引用弃用项时应链接到对应文档页。
+- **建议**: crate 作者应补全 `#[deprecated(since = "x.y", note = "use foo instead")]` 的两个字段——`note` 是迁移路径的唯一权威说明，渲染改进使其价值放大；库升级指南文档（CHANGELOG）引用（Reference）弃用项时应链接到对应文档页。
 
 判定依据：弃用纪律的检查项是“每个 `#[deprecated]` 都有 since + note”，缺字段的标注在新渲染下同样醒目地暴露。
 
@@ -169,7 +169,7 @@ pub fn load_from_toml(path: &str) -> Result<Config, ConfigError> {
 
 ## 四、侧边栏导航增强
 
-Rust 1.96 的 rustdoc 侧边栏导航增强包含两项变更：条目分组更细（trait 实现按来源 crate 折叠，长 impl 列表不再淹没页面）、当前位置高亮与滚动同步（大文档定位成本显著降低）。对 crate 作者的影响主要是文档结构审查：侧边栏直接暴露模块组织质量，嵌套过深或命名含糊的模块在新导航下更显突兀——升级后应过一遍 docs.rs 渲染效果，把导航可读性纳入文档评审。
+Rust 1.96 的 rustdoc 侧边栏导航增强包含两项变更：条目分组更细（trait 实现按来源 crate 折叠，长 impl 列表不再淹没页面）、当前位置高亮与滚动同步（大文档定位成本显著降低）。对 crate 作者的影响主要是文档结构审查：侧边栏直接暴露模块（Module）组织质量，嵌套过深或命名含糊的模块在新导航下更显突兀——升级后应过一遍 docs.rs 渲染效果，把导航可读性纳入文档评审。
 
 ### 4.1 变更内容
 
@@ -191,7 +191,7 @@ Rust 1.96 对 Rustdoc 生成的 HTML 侧边栏进行了多项可用性改进：
 
 `missing_doc_code_examples` lint 针对的是“文档完整性的最后一环”——公共 API 有文字说明但无可执行示例：
 
-- **背景**: rustdoc 已有 `missing_docs`（缺文档）lint，但“有文档无示例”的 API 对使用者的帮助显著更低——示例是类型签名无法表达的使用上下文（初始化顺序、所有权转移、错误处理路径）。
+- **背景**: rustdoc 已有 `missing_docs`（缺文档）lint，但“有文档无示例”的 API 对使用者的帮助显著更低——示例是类型签名无法表达的使用上下文（初始化顺序、所有权（Ownership）转移、错误处理（Error Handling）路径）。
 - **1.96 改进**: lint 覆盖度与诊断信息改进，按项类型（fn/struct/trait）分别报告，配合 `#![warn(missing_doc_code_examples)]` 可在 crate 级启用渐进治理。
 - **启用方式**: 建议 `#![warn(...)]` 起步（不阻断构建），存量 crate 按模块渐进补齐；新 crate 可直接 `#![deny(...)]` 纳入门禁。
 - **与 `cargo test --doc` 的关系**: 该 lint 保证“有示例”，doctest 保证“示例正确”——两者组合构成文档示例的完整质量门；只有 lint 而无 doctest 执行，示例仍可能腐烂。

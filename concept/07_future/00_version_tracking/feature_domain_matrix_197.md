@@ -7,7 +7,7 @@
 > **内容分级**: [参考级]
 > **权威来源**: 本文件为 `concept/` 权威页（P2-1 交付物）。
 > **Rust 版本**: **1.97.0+**（Edition 2024）
-> **Bloom 层级**: L4（分析）/ L5（评价：跨领域一致性判定）/ L7（版本治理）
+> **Bloom 层级**: L4（分析）/ L5（评价：跨领域一致性（Coherence）判定）/ L7（版本治理）
 > **层次定位**: L7 未来/版本治理（横向反查层，依附于各核心领域权威页）
 > **最后更新**: 2026-07-11
 > **状态**: ✅ 已对齐 Rust 1.97.0 stable；缺口标注对齐 `reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md` §2.4 / §4 P2
@@ -70,14 +70,14 @@
 | 18 | `cargo -m` 简写 | ✗ | ✗ | ✗ | ✗ | ✗ | ✓ [84_commands](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md) | ✗ | ✗ | ✗ |
 | 19 | `crates-io` 移除 `curl` 依赖 | ✗ | ✗ | ✗ | ✗ | ✗ | ✓ [86_registry](../../06_ecosystem/01_cargo/21_cargo_registry_internals.md) | ✗ | ○ 减少平台差异 | ✗ |
 | 20 | Rustdoc `--emit` / `--remap-path-prefix` | ✗ | ✗ | ✗ | ✗ | ✗ | ○ 文档构建工具链（Rustdoc 不在 9 域内，归入 Cargo 间接） | ✗ | ✗ | ✗ |
-| 21 | `pin!` 阻止 deref coercions | ○ 宏展开语义 | ⚠缺口→应补于 01_foundation/02_type_system/04_coercion_and_casting.md | ○ pinning 内存不变性 | ✗ | ⚠缺口→应补于 03_advanced/01_async/08_pin_unpin.md | ✗ | ✗ | ✗ | ✓ `pin!(&mut x)` 必得 `Pin<&mut &mut T>` |
+| 21 | `pin!` 阻止 deref coercions | ○ 宏（Macro）展开语义 | ⚠缺口→应补于 01_foundation/02_type_system/04_coercion_and_casting.md | ○ pinning 内存不变性 | ✗ | ⚠缺口→应补于 03_advanced/01_async/08_pin_unpin.md | ✗ | ✗ | ✗ | ✓ `pin!(&mut x)` 必得 `Pin<&mut &mut T>` |
 | 22 | 空 `#[export_name]` 被拒绝 | ○ 属性校验 | ✗ | ✗ | ⚠缺口→应补于 03_advanced/04_ffi/03_linkage.md | ✗ | ✗ | ✗ | ✗ | ✓ 空导出名报错 |
 | 23 | `f32: From<{float}>` future compat warning | ✓ 推断路径变化 | ⚠缺口→应补于 04_formal/00_type_theory/07_type_checking_and_inference.md | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✓ future-compat warning |
 | 24 | `WSAESHUTDOWN` → `BrokenPipe`（Windows） | ✗ | ✗ | ✗ | ✗ | ○ 套接字错误对 async I/O 可见 | ✗ | ○ `io::ErrorKind` 表面 | ✓ Windows 套接字行为统一 | ⚠缺口→应补于 02_intermediate/03_error_handling/01_error_handling.md（Windows/Unix `ErrorKind` 迁移） |
 | 25 | Fallback `{float}` 到 `f32`（部分情形） | ✓ 浮点字面量推断 | ⚠缺口→应补于 04_formal/00_type_theory/07_type_checking_and_inference.md（与 edition 2024 never type fallback 统一） | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✓ 依赖旧推断的代码触发警告 |
 | 26 | `std::char` 常量/函数弃用 | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✓ `char::` 直接调用替代 | ✗ | ✓ deprecation 警告 |
 | 27 | `varargs_without_pattern` lint 在依赖中报告 | ○ 变参 FFI 模式 | ✗ | ✗ | ○ 变参函数 FFI 边界 | ✗ | ✗ | ✗ | ✗ | ✓ 依赖代码亦暴露 ⚠缺口→应补于 07_future/00_version_tracking/02_editions.md（lint-level 矩阵） |
-| 28 | 拒绝向模块路径段传泛型参数 | ✓ 路径语法校验 | ○ 泛型参数位置 | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✓ 非法泛型路径报错 |
+| 28 | 拒绝向模块（Module）路径段传泛型（Generics）参数 | ✓ 路径语法校验 | ○ 泛型参数位置 | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✓ 非法泛型路径报错 |
 | 29 | 无效 macho `link_section` 报错 | ○ 属性校验 | ✗ | ○ 段/节布局 | ⚠缺口→应补于 03_advanced/04_ffi/03_linkage.md | ✗ | ✗ | ✗ | ✓ mach-O（macOS）目标 | ✓ 非法段/节名报错 |
 | 30 | 某些 `enum` 编码改变 | ✗ | ✓ [42_type_layout](../../04_formal/05_rustc_internals/08_type_layout.md)（无布局保证） | ○ 判别式/字段布局 | ✗ | ✗ | ✗ | ✗ | ✗ | ✓ 不得依赖具体二进制布局 |
 | 31 | 校验 `#[link_name]` / `#[link(name)]` | ○ 属性校验 | ✗ | ✗ | ⚠缺口→应补于 03_advanced/04_ffi/03_linkage.md | ✗ | ✗ | ✗ | ✗ | ✓ 非法链接名报错 |
@@ -226,7 +226,7 @@ flowchart LR
 
 - **交互语义**：1.97 的 `{float}` 在未约束时回退到 `f32`（#25），与 `f32: From<{float}>` future-compat warning（#23）共享同一推断路径变化；而 trait solver 在默认值/default type fallback 上的取舍决定了"`{float}` 何时被约束为 `f64`、何时落到 `f32`"。审计指出 `26_trait_solver_in_rustc.md` 只更新到 solver flag，未把 default fallback 与 1.97 浮点 fallback 串起来。
 - **叠加 never type**：edition 2024 的 `never type (!) fallback` 与 1.97 浮点 fallback 是**两套并存的 fallback 机制**，目前割裂（见 §5.4）。
-- **应落地位置**：[`27_type_checking_and_inference.md`](../../04_formal/00_type_theory/07_type_checking_and_inference.md) 新增"`{float}`→f32 fallback 边界"小节，并与 [`26_trait_solver_in_rustc.md`](../../04_formal/05_rustc_internals/03_trait_solver_in_rustc.md) 的 default-type fallback 交叉引用；统一小节放在 `27_type_checking_and_inference.md`（承载），solver 页给回链。
+- **应落地位置**：[`27_type_checking_and_inference.md`](../../04_formal/00_type_theory/07_type_checking_and_inference.md) 新增"`{float}`→f32 fallback 边界"小节，并与 [`26_trait_solver_in_rustc.md`](../../04_formal/05_rustc_internals/03_trait_solver_in_rustc.md) 的 default-type fallback 交叉引用（Reference）；统一小节放在 `27_type_checking_and_inference.md`（承载），solver 页给回链。
 
 ### 5.2 `pin!` 不再 deref coerce × `Pin`/`Unpin` × async（#21）
 
@@ -273,7 +273,7 @@ flowchart LR
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P0 官方**: [Rust RFCs 索引（官方特性提案库）](https://rust-lang.github.io/rfcs/)
-- **P1 学术/形式化**: [Jung, Jourdan, Krebbers & Dreyer: RustBelt — Securing the Foundations of the Rust Programming Language（POPL 2018，类型系统形式化基线）](https://plv.mpi-sws.org/rustbelt/)（2026-07-12 验证 HTTP 200）
+- **P1 学术/形式化**: [Jung, Jourdan, Krebbers & Dreyer: RustBelt — Securing the Foundations of the Rust Programming Language（POPL 2018，类型系统（Type System）形式化基线）](https://plv.mpi-sws.org/rustbelt/)（2026-07-12 验证 HTTP 200）
 
 ## 🧭 思维导图（Mindmap）
 

@@ -12,8 +12,8 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析 const generic 与 trait object 的结构性冲突
-> **定位**: 解释 Rust 中 `const N: usize` 等编译期常量参数与 `dyn Trait` 动态分发之间的限制、 workaround 与设计模式。const generic 要求编译期已知，而 trait object 要求运行时抹除类型信息，两者在 vtable 层面存在根本张力。
-> **前置概念**: [Generics](01_generics.md) · [Const Generics](02_const_generics.md) · [Traits](../00_traits/01_traits.md) · [Dispatch Mechanisms](../00_traits/02_dispatch_mechanisms.md) · [类型系统基础](../../01_foundation/02_type_system/01_type_system.md)
+> **定位**: 解释 Rust 中 `const N: usize` 等编译期常量参数与 `dyn Trait` 动态分发之间的限制、 workaround 与设计模式。const generic 要求编译期已知，而 trait object 要求运行时（Runtime）抹除类型信息，两者在 vtable 层面存在根本张力。
+> **前置概念**: [Generics](01_generics.md) · [Const Generics](02_const_generics.md) · [Traits](../00_traits/01_traits.md) · [Dispatch Mechanisms](../00_traits/02_dispatch_mechanisms.md) · [类型系统（Type System）基础](../../01_foundation/02_type_system/01_type_system.md)
 > **后置概念**: [Generic Associated Types](../00_traits/07_generic_associated_types.md) · [Type-Level Programming](03_type_level_programming.md)
 
 ---
@@ -215,7 +215,7 @@ flowchart TD
 |---|---|---|
 | `dyn Trait<{N}>` 编译错误 | const generic 使 trait 非 object-safe | 用关联常量或泛型枚举 |
 | trait object 上访问关联常量混淆 | `<dyn Trait as Trait>::CONST` 无具体类型 | 通过 downcast 或枚举分发 |
-| 为每个 N 单态化导致代码膨胀 | 过度使用 const generic + 动态集合 | 改用枚举或 Box<dyn Trait> |
+| 为每个 N 单态化（Monomorphization）导致代码膨胀 | 过度使用 const generic + 动态集合 | 改用枚举或 Box<dyn Trait> |
 | vtable 方法签名含 `&[u8; N]` | N 进入方法签名，无法擦除 | 改为 `&[u8]` 并在运行期校验长度 |
 
 ---

@@ -64,7 +64,7 @@ Rust Stream Processing Ecosystem
 timely-dataflow 是 Rust 原生流处理的理论旗舰，核心设计与代码形态都围绕**时间戳驱动的进度追踪**：
 
 - **核心设计**: 计算被建模为数据流图（dataflow graph），每个元素携带逻辑时间戳；前沿（frontier）机制让算子知道“某时间戳之前的数据已全部到达”，从而精确触发窗口/聚合的输出——这是低延迟与正确性兼得的关键，区别于 micro-batch 的固定间隔触发。
-- **代码示例形态**: `worker.dataflow::<u64, _, _>(|scope| { source.map(...).filter(...).inspect(...) })`——数据流图以闭包内链式算子声明，`timely::execute` 驱动多 worker 并行；所有权模型使数据在 worker 间的传递零拷贝且线程安全由类型保证。
+- **代码示例形态**: `worker.dataflow::<u64, _, _>(|scope| { source.map(...).filter(...).inspect(...) })`——数据流图以闭包（Closures）内链式算子声明，`timely::execute` 驱动多 worker 并行；所有权（Ownership）模型使数据在 worker 间的传递零拷贝且线程安全由类型保证。
 
 判定依据：timely 是“引擎的引擎”——直接使用适合研究/定制系统，应用层通常经由 differential-dataflow 或 Materialize 间接使用。
 
@@ -213,7 +213,7 @@ Fluvio 是一个用 Rust 从头构建的分布式流处理平台，定位为 Kaf
 Materialize 把 differential-dataflow 产品化为流式 SQL 数据库，是 Rust 流处理生态最成熟的商业形态：
 
 - **架构三层**: ① SQL 层——标准 PostgreSQL 协议，用户写 `CREATE MATERIALIZED VIEW` 声明持续查询；② 数据流层——SQL 编译为 DD 数据流图，增量维护视图结果；③ 存储/接入层——从 Kafka/Postgres CDC 消费变更流，结果写入自身存储或直接对外推送（SUBSCRIBE）。核心价值主张：视图查询是 O(1) 读取（结果已物化），延迟在数据到达时而非查询时支付。
-- **与 Flink 的对比**: Flink 是通用流处理引擎（任意算子、事件时间、精确一次状态），Materialize 是“增量物化视图数据库”——前者灵活但需 Java/运维集群，后者以 SQL 表达力换取零运维的流式一致性。判定依据：用 SQL 能表达的持续查询选 Materialize；需要自定义算子/复杂事件处理选 Flink（或 timely 自研）。
+- **与 Flink 的对比**: Flink 是通用流处理引擎（任意算子、事件时间、精确一次状态），Materialize 是“增量物化视图数据库”——前者灵活但需 Java/运维集群，后者以 SQL 表达力换取零运维的流式一致性（Coherence）。判定依据：用 SQL 能表达的持续查询选 Materialize；需要自定义算子/复杂事件处理选 Flink（或 timely 自研）。
 
 ### 6.1 架构三层
 

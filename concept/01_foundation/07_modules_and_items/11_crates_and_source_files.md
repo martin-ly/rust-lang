@@ -31,7 +31,7 @@
 
 > **反命题 1**: "一个 Cargo package 就是一个 crate" ⟹ 不成立。一个 package 可以包含多个 crate（一个库 + 多个二进制）。
 > **反命题 2**: "crate 名称可以随意命名" ⟹ 不成立。`crate_name` 只能包含 Unicode 字母数字或下划线，且不能为空。
-> **反命题 3**: "源文件越多，编译后的 crate 越多" ⟹ 不成立。一个 crate 由单个 crate root 与若干模块源文件组成，最终输出仍是一个编译单元。
+> **反命题 3**: "源文件越多，编译后的 crate 越多" ⟹ 不成立。一个 crate 由单个 crate root 与若干模块（Module）源文件组成，最终输出仍是一个编译单元。
 
 ---
 
@@ -311,7 +311,7 @@ fn main() { let _ = Thing; }
 
 ### 9.1 边界陈述
 
-在 Rust 1.97.0 之前，**二进制 crate**（`crate-type = "bin"`）中的 `pub` 项会被 `dead_code` lint 隐式豁免——即使这些 `pub` 项从未被使用，编译器也不会发出 `dead_code` 警告。这是因为早期实现假设：二进制 crate 的 `pub` 项可能作为外部符号被链接器/调试器引用。
+在 Rust 1.97.0 之前，**二进制 crate**（`crate-type = "bin"`）中的 `pub` 项会被 `dead_code` lint 隐式豁免——即使这些 `pub` 项从未被使用，编译器也不会发出 `dead_code` 警告。这是因为早期实现假设：二进制 crate 的 `pub` 项可能作为外部符号被链接器/调试器引用（Reference）。
 
 Rust 1.97.0 起新增 **`dead_code_pub_in_binary`** lint（默认 allow），用于标记二进制 crate 中未被使用的 `pub` 项。该 lint 的语义收紧意味着：**`pub` 不再是二进制 crate 中压警告的逃生舱**。
 
@@ -320,7 +320,7 @@ Rust 1.97.0 起新增 **`dead_code_pub_in_binary`** lint（默认 allow），用
 以下条件**同时满足**时，1.97+ 会触发该 lint（若显式启用）：
 
 1. 当前 crate 类型为 **binary**（`main.rs` / `crate-type = "bin"`）。
-2. 存在 `pub` 修饰的 item（函数、静态变量、结构体等）。
+2. 存在 `pub` 修饰的 item（函数、静态变量、结构体（Struct）等）。
 3. 该 item 在当前 crate 内**未被任何代码路径使用**。
 4. 未对该 item 标注 `#[allow(dead_code)]` 或 `#[used]`。
 

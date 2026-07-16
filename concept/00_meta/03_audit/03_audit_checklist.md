@@ -11,10 +11,15 @@
 > **使用方法**: 每轮内容更新后，逐条检查并标记状态。
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
+> **来源**:
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 ---
 
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rust Internals Forum](https://internals.rust-lang.org/) · [concept/知识体系规范](../02_sources/01_authority_source_map.md)
+> **来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rust Internals Forum](https://internals.rust-lang.org/) ·
+> [concept/知识体系规范](../02_sources/01_authority_source_map.md)
 
 ## 📑 目录
 
@@ -60,7 +65,10 @@
   - [五、权威来源](#五权威来源)
   - [六、常见反例](#六常见反例)
 
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rust Internals Forum](https://internals.rust-lang.org/) · [concept/知识体系规范](../02_sources/01_authority_source_map.md)
+> **来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rust Internals Forum](https://internals.rust-lang.org/) ·
+> [concept/知识体系规范](../02_sources/01_authority_source_map.md)
 >
 ### 〇、质量门禁流程
 

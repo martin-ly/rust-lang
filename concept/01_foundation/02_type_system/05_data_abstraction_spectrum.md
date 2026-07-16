@@ -122,10 +122,10 @@ mindmap
 本节把 Rust 的数据抽象能力组织为从具体到抽象的六层谱系，每层回答「在哪一层建模最恰当」：
 
 1. **原始类型层**：`u32`/`bool` 直接建模——快但无语义约束（`age: u32` 可以是任何非负整数）；
-2. **元组/结构体层**：聚合命名字段——数据结构但无不变量保护；
+2. **元组/结构体（Struct）层**：聚合命名字段——数据结构但无不变量保护；
 3. **Newtype 层**：`struct UserId(u64)`——零成本包装获得类型区分（`UserId` 与 `OrderId` 不可混用）；
 4. **枚举层（ADT）**：`enum` 建模「若干互斥形态之一」——`Option`/`Result` 是典范，`match` 穷尽性把状态处理变为编译期义务；
-5. **trait 抽象层**：行为契约与数据分离——泛型约束或 `dyn` 对象；
+5. **trait 抽象层**：行为契约与数据分离——泛型（Generics）约束或 `dyn` 对象；
 6. **类型级编程层**：const generics、marker 类型（`PhantomData`）、状态机类型（typestate）——把不变量编码进类型让编译器执行。
 
 谱系使用方法：建模时从最低层开始，当「非法状态可表示」成为 bug 来源时向上一层——过度抽象（直接到第 6 层）与抽象不足同样有害。
@@ -578,7 +578,7 @@ impl std::fmt::Display for MyVec {
 
 - **递归类型无间接层**：`struct Node { next: Node }` 触发 E0072（无限尺寸）——`Box`/`Vec`/`Option` 提供间接；
 - **`#[non_exhaustive]` 枚举的穷尽匹配**：外部 crate 匹配此类枚举必须含 `_` 臂，否则 E0004——这是库作者的 semver 保护机制；
-- **newtype 的透明性假设**：`#[repr(transparent)]` 保证 ABI 相同，但字段私有性不变——跨模块直接构造失败（E0451）；
+- **newtype 的透明性假设**：`#[repr(transparent)]` 保证 ABI 相同，但字段私有性不变——跨模块（Module）直接构造失败（E0451）；
 - **typestate 的状态误用**：消耗性方法（`fn connect(self) -> Connected`）后使用旧状态触发 E0382——类型状态机把运行期状态错误前移为所有权错误。
 
 每组用例给出「恰好失败版 + 修复版」，覆盖数据建模中最常见的四类编译器对话。
@@ -858,7 +858,7 @@ ZST 不占用内存，可用于类型级标记（phantom types）、空迭代器
 
 - **上位（is-a）**：数据抽象（data abstraction）这一 PL 总概念的谱系化展开。
 - **下位（实例）**：C struct、C++ class、Java interface、Haskell/ML ADT、Rust enum+trait 六层代表。
-- **组合**：[类型系统基础](01_type_system.md) × [Traits](../../02_intermediate/00_traits/01_traits.md) 的交叉应用。
+- **组合**：[类型系统（Type System）基础](01_type_system.md) × [Traits](../../02_intermediate/00_traits/01_traits.md) 的交叉应用。
 - **依赖**：第六层依赖 [所有权](../01_ownership_borrow_lifetime/01_ownership.md)。
 
 ---

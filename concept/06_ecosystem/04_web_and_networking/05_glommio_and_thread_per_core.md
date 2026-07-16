@@ -24,7 +24,7 @@
 | 特性 | 说明 |
 |:---|:---|
 | Thread-per-core | 每个 CPU 核心绑定一个执行器，任务不跨核迁移 |
-| io_uring | Linux 5.1+ 提供的高性能异步 I/O 接口 |
+| io_uring | Linux 5.1+ 提供的高性能异步（Async） I/O 接口 |
 | NUMA 感知 | 针对多 socket 系统优化内存与任务放置 |
 | 零拷贝 I/O | 最小化数据复制 |
 
@@ -32,7 +32,7 @@
 
 ## 二、Thread-per-Core vs Work-Stealing
 
-> **深度链接**: Tokio work-stealing 运行时的内部机制（驱动层/blocking 池/任务句柄/select! 语义）权威页见 [Tokio 运行时内部机制](10_tokio_runtime_internals.md)；调度公平性定量分析见 [Executor 公平性与调度](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md)。
+> **深度链接**: Tokio work-stealing 运行时（Runtime）的内部机制（驱动层/blocking 池/任务句柄/select! 语义）权威页见 [Tokio 运行时内部机制](10_tokio_runtime_internals.md)；调度公平性定量分析见 [Executor 公平性与调度](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md)。
 
 | 特性 | Thread-per-core (Glommio) | Work-stealing (Tokio) |
 |:---|:---|:---|
@@ -205,7 +205,7 @@ fn main() {
 
 ## ⚠️ 反例与陷阱
 
-**陷阱：thread-per-core 模型中跨线程共享 `Rc<RefCell<_>>`**。Glommio 的核心约束是「状态不离开所属线程」；一旦把非 `Send` 类型 move 进 `thread::spawn`，借用检查器直接拒绝——这正是该架构用编译期约束替代运行时数据竞争的体现。
+**陷阱：thread-per-core 模型中跨线程共享 `Rc<RefCell<_>>`**。Glommio 的核心约束是「状态不离开所属线程」；一旦把非 `Send` 类型 move 进 `thread::spawn`，借用（Borrowing）检查器直接拒绝——这正是该架构用编译期约束替代运行时数据竞争的体现。
 
 ```rust,compile_fail
 use std::rc::Rc;

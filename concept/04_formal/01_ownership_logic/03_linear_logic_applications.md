@@ -190,7 +190,7 @@ Session Types: 将通信协议编码为类型
 2. **会话类型（session types）**：线性逻辑命题编码通信协议——`A ⊸ B` 编码「发送 A 后转为 B 状态」；Rust 的 typestate 模式（`Connection<Closed>` → `Connection<Open>`）是会话类型的工程近似；
 3. **能力（capability）与效果追踪**：线性资源建模「能力 token」——文件句柄、锁守卫（`MutexGuard`）都是线性能力：不可复制、必须归还；`MutexGuard` 的 `Drop` 实现即「消费的自动化」。
 
-每个方向附「线性逻辑推导 ⟷ Rust 代码」的对照，以及「放松线性约束的代价」（Rc 引用计数、运行时检查）分析。
+每个方向附「线性逻辑推导 ⟷ Rust 代码」的对照，以及「放松线性约束的代价」（Rc 引用（Reference）计数、运行时检查）分析。
 
 ### 2.1 所有权即线性类型
 >

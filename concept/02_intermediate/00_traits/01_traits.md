@@ -237,7 +237,7 @@ mindmap
 Trait 是 Rust 的「类型类」（type class）机制，三个权威定义视角分别定位其角色：
 
 - **Wikipedia 对齐视角**：trait 是「一组方法签名的集合，类型通过实现它声明自己具备某种能力」——与 Haskell type class、Scala trait 同属「约束多态（bounded polymorphism）」家族，区别于面向对象的接口继承（无数据继承、无实现继承的层级）。
-- **TRPL 与 RFC 官方视角**：trait 定义「共享行为」；编译器以 trait bound 为约束检查泛型，以 trait object（`dyn Trait`）提供运行时多态。孤儿规则（Orphan Rule）与一致性（coherence）检查保证 impl 全局唯一可判定。
+- **TRPL 与 RFC 官方视角**：trait 定义「共享行为」；编译器以 trait bound 为约束检查泛型，以 trait object（`dyn Trait`）提供运行时（Runtime）多态。孤儿规则（Orphan Rule）与一致性（coherence）检查保证 impl 全局唯一可判定。
 - **形式化视角**：trait 对应有界量化（bounded quantification, `∀T:Bound. τ`）的类型规则；关联类型是类型族（type family）的受限形式， blanket impl 是条件量化（`∀T:Bound. T: Trait`）。
 
 判定一个语言特性是否应建模为 trait，标准是：它描述的是「类型具备的能力」而非「类型的结构」——能力用 trait，结构用 struct/enum，混合需求用「struct + trait impl」组合。
@@ -1740,7 +1740,7 @@ fn notify<T: Summary>(item: &T) { ... }
 
 ## 十、相关概念链接
 
-- [对应测验](../01_generics/04_quiz_traits_and_generics.md) — Trait 与泛型（bound、关联类型、trait 对象、单态化）
+- [对应测验](../01_generics/04_quiz_traits_and_generics.md) — Trait 与泛型（bound、关联类型、trait 对象、单态化（Monomorphization））
 - **上层概念**: [Type System Basics](../../01_foundation/02_type_system/01_type_system.md)
 - **下层概念**: [L3 并发](../../03_advanced/00_concurrency/01_concurrency.md) · [Generics](../01_generics/01_generics.md)
 
@@ -2401,7 +2401,7 @@ RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
 
 trait 系统是 Rust 演进最活跃的子系统，本节按「已稳定 → 即将稳定 → 探索中」三档梳理：
 
-- **已稳定（1.65–1.97）**：GAT（泛型关联类型，1.65）使 `Iterator` 风格的 lending trait 可表达；RPITIT 与 `async fn in trait`（1.75）消除 `async_trait` 宏需求；精确捕获 `use<>`（1.82）控制 `impl Trait` 捕获的泛型参数；
+- **已稳定（1.65–1.97）**：GAT（泛型关联类型，1.65）使 `Iterator` 风格的 lending trait 可表达；RPITIT 与 `async fn in trait`（1.75）消除 `async_trait` 宏（Macro）需求；精确捕获 `use<>`（1.82）控制 `impl Trait` 捕获的泛型参数；
 - **即将稳定/部分可用**：trait 求解器重写（`-Znext-solver`，nightly 默认化推进中）修复旧求解器的缓存与合取 bug；`impl Trait` in let 绑定位置；
 - **探索中**：`trait alias`（nightly）减少重复约束书写；`dyn*` 更轻量的 trait 对象；specialization 的健全化路径（min_specialization 之外的全功能版本仍无稳定时间表）。
 
@@ -2628,7 +2628,7 @@ fn main() {}
 
 ## 嵌入式测验（Embedded Quiz）
 
-本组测验围绕测验 1：Trait 定义与实现（理解层）、测验 2：Trait Bound（应用层）、测验 3：默认实现（应用层）、测验 4：Orphan Rule（分析层）等方面设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用检查」或「运行时行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
+本组测验围绕测验 1：Trait 定义与实现（理解层）、测验 2：Trait Bound（应用层）、测验 3：默认实现（应用层）、测验 4：Orphan Rule（分析层）等方面设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用（Borrowing）检查」或「运行时行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
 
 ### 测验 1：Trait 定义与实现（理解层）
 

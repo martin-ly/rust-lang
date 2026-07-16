@@ -1,12 +1,16 @@
 # Rust 知识索引
 
 > **EN**: Knowledge Index
-> **Summary**: Rust 知识索引 Knowledge Index. (stub/archive redirect)
+> **Summary**: Navigational index for the `knowledge/` layer; for full conceptual explanations
+> see the linked `concept/` authority pages.
 > **Bloom 层级**: L2
-> 按主题快速查找所有知识文档
+> 按主题快速查找所有知识文档；通用 Rust 概念解释统一维护在 `concept/` 权威页。
 >
 > **受众**: [初学者] / [进阶]
 > **内容分级**: [综述级]
+>
+> **权威来源**: `knowledge/` 仅保留学习入口、速查与链接；完整概念推导请见
+> [`concept/`](../concept/) 权威页。
 
 ---
 
@@ -36,16 +40,16 @@
 
 | 特性 | 文档 | 状态 |
 |------|------|------|
-| `cfg_select!` | [02_intermediate/macros/cfg_select.md](02_intermediate/macros/01_cfg_select.md) | ✅ |
-| `if let guards` | [02_intermediate/control_flow/if_let_guards.md](02_intermediate/control_flow/01_if_let_guards.md) | ✅ |
+| `cfg_select!` | [concept/07_future/00_version_tracking/rust_1_95_stabilized.md](../concept/07_future/00_version_tracking/rust_1_95_stabilized.md) | ✅ |
+| `if let guards` | [concept/07_future/00_version_tracking/rust_1_95_stabilized.md](../concept/07_future/00_version_tracking/rust_1_95_stabilized.md) | ✅ |
 | `Atomic*::update` / `try_update` | [03_advanced/concurrency/atomics.md](03_advanced/concurrency/01_atomics.md) | ✅ |
-| `Vec::push_mut` / `insert_mut` | [02_intermediate/collections.md](02_intermediate/01_collections.md) | ✅ |
-| `VecDeque` / `LinkedList` `push_*_mut` | [02_intermediate/collections.md](02_intermediate/01_collections.md) | ✅ |
-| `core::range` | [02_intermediate/type_system/core_range.md](02_intermediate/type_system/01_core_range.md) | ✅ |
+| `Vec::push_mut` / `insert_mut` | [concept/01_foundation/05_collections/01_collections.md](../concept/01_foundation/05_collections/01_collections.md) | ✅ |
+| `VecDeque` / `LinkedList` `push_*_mut` | [concept/01_foundation/05_collections/01_collections.md](../concept/01_foundation/05_collections/01_collections.md) | ✅ |
+| `core::range` | [concept/07_future/00_version_tracking/rust_1_96_stabilized.md](../concept/07_future/00_version_tracking/rust_1_96_stabilized.md) | ✅ |
 | `*const/mut T::as_ref_unchecked` | [04_expert/unsafe_audit.md](04_expert/02_unsafe_audit.md) | ✅ |
 | `Layout::dangling_ptr` / `repeat` / `extend_packed` | [04_expert/unsafe_audit.md](04_expert/02_unsafe_audit.md) | ✅ |
 | `core::hint::cold_path` | [03_advanced/performance_optimization.md](03_advanced/05_performance_optimization.md) | ✅ |
-| `bool::TryFrom<{integer}>` | [02_intermediate/type_conversions.md](02_intermediate/07_type_conversions.md) | ✅ |
+| `bool::TryFrom<{integer}>` | [concept/01_foundation/02_type_system/04_coercion_and_casting.md](../concept/01_foundation/02_type_system/04_coercion_and_casting.md) | ✅ |
 | `MaybeUninit` / `Cell` 数组转换 | [03_advanced/unsafe/maybe_uninit.md](03_advanced/unsafe/02_maybe_uninit.md) | ✅ |
 | PowerPC/PowerPC64 内联汇编 | [concept/03_advanced/05_inline_assembly/01_inline_assembly.md](../concept/03_advanced/05_inline_assembly/01_inline_assembly.md) | ✅ |
 | `fmt::from_fn` / `ControlFlow` (const) | [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/03_rust_1_95.md) | ✅ |
@@ -98,26 +102,26 @@
 >
 > **[Rust Official Docs](https://doc.rust-lang.org/)**
 
-- **array_windows** - [01_fundamentals/iterators.md](01_fundamentals/04_iterators.md) - Rust 1.94 引入，1.96+ 可用
+- **array_windows** - [concept/02_intermediate/07_iterators_and_closures/01_iterator_patterns.md](../concept/02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) - Rust 1.94 引入，1.96+ 可用
 - **async/await** - [03_advanced/async/async_await.md](03_advanced/async/01_async_await.md)
 - **async closure** - [03_advanced/async/async_closures_2024.md](03_advanced/async/02_async_closures_2024.md) - Rust 1.85+
 - **atomics** - [03_advanced/concurrency/atomics.md](03_advanced/concurrency/01_atomics.md)
 
 ### B
 
-- **borrowing** - [01_fundamentals/borrowing.md](01_fundamentals/02_borrowing.md)
-- **Box** - [02_intermediate/smart_pointers.md](02_intermediate/04_smart_pointers.md)
+- **borrowing** - [concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md](../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
+- **Box** - [concept/02_intermediate/02_memory_management/04_smart_pointers.md](../concept/02_intermediate/02_memory_management/04_smart_pointers.md)
 
 ### C
 
 - **Cargo** - [06_ecosystem/cargo_basics.md](06_ecosystem/01_cargo_basics.md)
 - **case studies** - [99_archive/case_studies.md](99_archive/03_case_studies.md)
-- **char → usize** - [02_intermediate/type_conversions.md](02_intermediate/07_type_conversions.md) - Rust 基础转换 (非特定版本)
-- **collections** - [02_intermediate/collections.md](02_intermediate/01_collections.md)
+- **char → usize** - [concept/01_foundation/02_type_system/04_coercion_and_casting.md](../concept/01_foundation/02_type_system/04_coercion_and_casting.md) - Rust 基础转换 (非特定版本)
+- **collections** - [concept/01_foundation/05_collections/01_collections.md](../concept/01_foundation/05_collections/01_collections.md)
 - **compiler internals** - [04_expert/compiler_internals.md](04_expert/01_compiler_internals.md)
 - **concurrency** - [03_advanced/concurrency/](03_advanced/concurrency)
 - **ControlFlow** - (整合到控制流相关文档)
-- **CString/CStr** - [02_intermediate/strings.md](02_intermediate/05_strings.md)
+- **CString/CStr** - [concept/01_foundation/06_strings_and_text/01_strings_and_text.md](../concept/01_foundation/06_strings_and_text/01_strings_and_text.md)
 
 ### D
 
@@ -126,32 +130,32 @@
 ### E
 
 - **Edition 2024** - [06_ecosystem/edition_2024.md](06_ecosystem/02_edition_2024.md)
-- **error handling** - [02_intermediate/error_handling.md](02_intermediate/02_error_handling.md)
+- **error handling** - [concept/02_intermediate/03_error_handling/01_error_handling.md](../concept/02_intermediate/03_error_handling/01_error_handling.md)
 - **Euler's number** - [05_reference/math_constants.md](05_reference/02_math_constants.md)
 - **exercises** - [99_archive/exercises.md](99_archive/04_exercises.md)
 
 ### F
 
 - **FFI** - [03_advanced/unsafe/ffi.md](03_advanced/unsafe/01_ffi.md)
-- **From/Into** - [02_intermediate/type_conversions.md](02_intermediate/07_type_conversions.md)
+- **From/Into** - [concept/01_foundation/02_type_system/04_coercion_and_casting.md](../concept/01_foundation/02_type_system/04_coercion_and_casting.md)
 
 ### G
 
 - **generators** - [concept/07_future/02_preview_features/25_gen_blocks_preview.md](../concept/07_future/02_preview_features/25_gen_blocks_preview.md) - 🧪 Nightly 实验性（稳定时间待定）
-- **generics** - [02_intermediate/generics.md](02_intermediate/03_generics.md)
+- **generics** - [concept/02_intermediate/01_generics/01_generics.md](../concept/02_intermediate/01_generics/01_generics.md)
 - **Golden Ratio** - [05_reference/math_constants.md](05_reference/02_math_constants.md)
 
 ### H
 
-- **HashMap** - [02_intermediate/collections.md](02_intermediate/01_collections.md)
+- **HashMap** - [concept/01_foundation/05_collections/01_collections.md](../concept/01_foundation/05_collections/01_collections.md)
 - **hello world** - [00_start/01_hello_world.md](00_start/01_hello_world.md)
 
 ### I
 
-- **if let guards** - [02_intermediate/control_flow/if_let_guards.md](02_intermediate/control_flow/01_if_let_guards.md) - Rust 1.95.0
+- **if let guards** - [concept/07_future/00_version_tracking/rust_1_95_stabilized.md](../concept/07_future/00_version_tracking/rust_1_95_stabilized.md) - Rust 1.95.0
 - **inline assembly** - [concept/03_advanced/05_inline_assembly/01_inline_assembly.md](../concept/03_advanced/05_inline_assembly/01_inline_assembly.md)
 - **installation** - [00_start/02_installation.md](00_start/02_installation.md)
-- **iterators** - [01_fundamentals/iterators.md](01_fundamentals/04_iterators.md)
+- **iterators** - [concept/02_intermediate/07_iterators_and_closures/01_iterator_patterns.md](../concept/02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)
 
 ### K
 
@@ -162,7 +166,7 @@
 - **LazyCell** - [03_advanced/lazy_initialization.md](03_advanced/04_lazy_initialization.md) - Rust 1.96 (`get`, `get_mut`, `force_mut` accessors)
 - **LazyLock** - [03_advanced/lazy_initialization.md](03_advanced/04_lazy_initialization.md) - Rust 1.96 (`get`, `get_mut`, `force_mut` accessors)
 - **learning roadmap** - [00_start/03_learning_roadmap.md](00_start/03_learning_roadmap.md)
-- **lifetimes** - [01_fundamentals/lifetimes.md](../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
+- **lifetimes** - [concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md](../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
 - **LRU Cache** - [99_archive/case_studies.md](99_archive/03_case_studies.md)
 
 ### M
@@ -175,18 +179,18 @@
 
 ### O
 
-- **ownership** - [01_fundamentals/ownership.md](01_fundamentals/01_ownership.md)
+- **ownership** - [concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md](../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 
 ### P
 
-- **Peekable::next_if** - [01_fundamentals/iterators.md](01_fundamentals/04_iterators.md) - Rust 1.80.0
+- **Peekable::next_if** - [concept/02_intermediate/07_iterators_and_closures/01_iterator_patterns.md](../concept/02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) - Rust 1.80.0
 - **performance optimization** - [03_advanced/performance_optimization.md](03_advanced/05_performance_optimization.md)
 - **procedural macros** - [03_advanced/macros/procedural.md](03_advanced/macros/02_procedural.md)
 
 ### R
 
-- **Rc/Arc** - [02_intermediate/smart_pointers.md](02_intermediate/04_smart_pointers.md)
-- **Result/Option** - [02_intermediate/error_handling.md](02_intermediate/02_error_handling.md)
+- **Rc/Arc** - [concept/02_intermediate/02_memory_management/04_smart_pointers.md](../concept/02_intermediate/02_memory_management/04_smart_pointers.md)
+- **Result/Option** - [concept/02_intermediate/03_error_handling/01_error_handling.md](../concept/02_intermediate/03_error_handling/01_error_handling.md)
 - **Rust 1.95** - [06_ecosystem/emerging/rust_1_95.md](06_ecosystem/emerging/03_rust_1_95.md)
 - **Rust 1.96** - [06_ecosystem/emerging/rust_1_96.md](06_ecosystem/emerging/05_rust_1_96.md)
 - **Rust philosophy** - [00_start/04_rust_philosophy.md](00_start/04_rust_philosophy.md)
@@ -196,18 +200,18 @@
 
 - **semaphore** - [03_advanced/concurrency/synchronization.md](03_advanced/concurrency/02_synchronization.md)
 - **Send/Sync** - [03_advanced/concurrency/threads.md](03_advanced/concurrency/03_threads.md)
-- **smart pointers** - [02_intermediate/smart_pointers.md](02_intermediate/04_smart_pointers.md)
+- **smart pointers** - [concept/02_intermediate/02_memory_management/04_smart_pointers.md](../concept/02_intermediate/02_memory_management/04_smart_pointers.md)
 - **standard library** - [05_reference/std_library_cheatsheet.md](05_reference/03_std_library_cheatsheet.md)
-- **strings** - [02_intermediate/strings.md](02_intermediate/05_strings.md)
+- **strings** - [concept/01_foundation/06_strings_and_text/01_strings_and_text.md](../concept/01_foundation/06_strings_and_text/01_strings_and_text.md)
 - **synchronization** - [03_advanced/concurrency/synchronization.md](03_advanced/concurrency/02_synchronization.md)
 
 ### T
 
 - **threads** - [03_advanced/concurrency/threads.md](03_advanced/concurrency/03_threads.md)
 - **Tokio** - [03_advanced/async/async_await.md](03_advanced/async/01_async_await.md)
-- **traits** - [02_intermediate/traits.md](02_intermediate/06_traits.md)
+- **traits** - [concept/02_intermediate/00_traits/01_traits.md](../concept/02_intermediate/00_traits/01_traits.md)
 - **Tree Borrows** - [04_expert/miri/tree_borrows.md](04_expert/miri/01_tree_borrows.md)
-- **type conversions** - [02_intermediate/type_conversions.md](02_intermediate/07_type_conversions.md)
+- **type conversions** - [concept/01_foundation/02_type_system/04_coercion_and_casting.md](../concept/01_foundation/02_type_system/04_coercion_and_casting.md)
 
 ### U
 
@@ -216,7 +220,7 @@
 
 ### V
 
-- **Vec** - [02_intermediate/collections.md](02_intermediate/01_collections.md)
+- **Vec** - [concept/01_foundation/05_collections/01_collections.md](../concept/01_foundation/05_collections/01_collections.md)
 - **VERSION_TRACKING** - [99_archive/VERSION_TRACKING.md](99_archive/02_version_tracking.md)
 
 ---
@@ -228,17 +232,22 @@
 ```text
 00_start/02_installation.md → 00_start/01_hello_world.md →
 00_start/04_rust_philosophy.md → 00_start/03_learning_roadmap.md →
-01_fundamentals/01_ownership.md → 01_fundamentals/02_borrowing.md →
-01_fundamentals/03_lifetimes.md → 01_fundamentals/04_iterators.md
+../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md →
+../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md →
+../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md →
+../concept/02_intermediate/07_iterators_and_closures/01_iterator_patterns.md
 ```
 
 ### 进阶路径 ⭐⭐
 
 ```text
-02_intermediate/03_generics.md → 02_intermediate/06_traits.md →
-02_intermediate/02_error_handling.md → 02_intermediate/01_collections.md →
-02_intermediate/04_smart_pointers.md → 02_intermediate/07_type_conversions.md →
-02_intermediate/05_strings.md
+../concept/02_intermediate/01_generics/01_generics.md →
+../concept/02_intermediate/00_traits/01_traits.md →
+../concept/02_intermediate/03_error_handling/01_error_handling.md →
+../concept/01_foundation/05_collections/01_collections.md →
+../concept/02_intermediate/02_memory_management/04_smart_pointers.md →
+../concept/01_foundation/02_type_system/04_coercion_and_casting.md →
+../concept/01_foundation/06_strings_and_text/01_strings_and_text.md
 ```
 
 ### 高级路径 ⭐⭐⭐
@@ -262,12 +271,12 @@
 ### Rust 1.95–1.97 特性追踪
 
 ```text
-01_fundamentals/04_iterators.md (array_windows, next_if) →
-02_intermediate/07_type_conversions.md (bool::TryFrom, char→usize) →
-02_intermediate/control_flow/02_let_chains.md →
-02_intermediate/control_flow/01_if_let_guards.md →
-02_intermediate/macros/01_cfg_select.md →
-02_intermediate/type_system/01_core_range.md →
+../concept/02_intermediate/07_iterators_and_closures/01_iterator_patterns.md (array_windows, next_if) →
+../concept/01_foundation/02_type_system/04_coercion_and_casting.md (bool::TryFrom, char→usize) →
+../concept/07_future/01_edition_roadmap/02_edition_guide.md →
+../concept/07_future/00_version_tracking/rust_1_95_stabilized.md →
+../concept/07_future/00_version_tracking/rust_1_95_stabilized.md →
+../concept/07_future/00_version_tracking/rust_1_96_stabilized.md →
 03_advanced/04_lazy_initialization.md (LazyCell/LazyLock) →
 03_advanced/concurrency/01_atomics.md (Atomic*::update) →
 03_advanced/05_performance_optimization.md (cold_path) →

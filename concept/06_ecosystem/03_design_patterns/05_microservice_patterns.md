@@ -110,7 +110,7 @@ graph TD
 
 服务发现解决“目标服务的当前地址集”这一动态问题，Rust 生态的两条主线分别对应**控制面集成**与**消费侧抽象**：
 
-- **Consul / etcd 客户端集成**: 服务启动时注册自身（地址 + 健康检查端点）， Consul 以 DNS/HTTP 暴露查询接口、etcd 以 watch 机制推送变更；`consul-rs`/`etcd-client` 提供原生异步客户端——生产实践是用 sidecar（agent）注册、应用只查询本地 agent，降低耦合。
+- **Consul / etcd 客户端集成**: 服务启动时注册自身（地址 + 健康检查端点）， Consul 以 DNS/HTTP 暴露查询接口、etcd 以 watch 机制推送变更；`consul-rs`/`etcd-client` 提供原生异步（Async）客户端——生产实践是用 sidecar（agent）注册、应用只查询本地 agent，降低耦合。
 - **Tower::discover 动态服务列表**: `tower::discover::Change` 流把“地址集变更”抽象为 `Discover` trait，配合 `tower::balance::p2c`（power of two choices）组成客户端负载均衡——服务发现事件源可以是 DNS、Consul 轮询或 etcd watch，消费侧代码完全统一。
 
 判定依据：已有 Consul/etcd 基础设施直接集成；需要统一多种发现源（含静态配置）时以 Tower 抽象为边界，发现源实现 `Discover` 即可插拔。
@@ -834,7 +834,7 @@ Rust 微服务并非银弹:
 
 ## 十、边界测试：微服务模式的编译错误
 
-微服务边界测试覆盖服务化改造的三类典型失效：配置注入生命周期（`&Config` 借用到 `'static` 的 tokio task 中编译失败，需 `Arc<Config>` 共享）；gRPC 的 tonic 生成的 trait 与自定义序列化层的类型不匹配（prost 类型边界约束）；断路器半开状态的并发探测请求竞态（无原子状态机时多个探测同时放行，半开保护失效导致雪崩）。前两类编译期拦截，第三类必须用并发测试暴露。
+微服务边界测试覆盖服务化改造的三类典型失效：配置注入生命周期（`&Config` 借用（Borrowing）到 `'static` 的 tokio task 中编译失败，需 `Arc<Config>` 共享）；gRPC 的 tonic 生成的 trait 与自定义序列化层的类型不匹配（prost 类型边界约束）；断路器半开状态的并发探测请求竞态（无原子状态机时多个探测同时放行，半开保护失效导致雪崩）。前两类编译期拦截，第三类必须用并发测试暴露。
 
 ### 10.1 边界测试：配置注入的生命周期（编译错误）
 

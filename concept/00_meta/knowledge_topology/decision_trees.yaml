@@ -39,12 +39,12 @@ trees:
       file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
       anchor: "#31-借用冲突判定树"
     covered_concepts: [ex:Borrowing, ex:InteriorMutability, ex:SmartPointers]
-    rustc_error_codes: [E0499, E0501, E0502, E0503, E0505]
+    rustc_error_codes: [E0499, E0501, E0502, E0503, E0505, E0301]
     nodes:
       - id: B
         type: condition
         label: "症状：借用冲突（cannot borrow as mutable/immutable）"
-        rustc_error_codes: [E0499, E0501, E0502, E0503, E0505]
+        rustc_error_codes: [E0499, E0501, E0502, E0503, E0505, E0301]
       - id: Q1
         type: decision
         condition: "活跃别名数是否 ≥2（&T 与 &mut T 在重叠区域同时活跃）？"
@@ -158,12 +158,12 @@ trees:
       file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
       anchor: "#33-类型不匹配判定树"
     covered_concepts: [ex:Traits, ex:Generics, ex:ErrorHandling, ex:AsyncAdvanced]
-    rustc_error_codes: [E0277, E0283, E0308]
+    rustc_error_codes: [E0277, E0283, E0308, E0282, E0061]
     nodes:
       - id: T
         type: condition
         label: "症状：类型不匹配（expected ... found ... / trait bound unsatisfied）"
-        rustc_error_codes: [E0277, E0308]
+        rustc_error_codes: [E0277, E0308, E0282, E0061]
       - id: Q1
         type: decision
         condition: "'trait bound is not satisfied' 报错数是否 ≥1 条？"
@@ -563,12 +563,12 @@ trees:
       file: concept/00_meta/00_framework/concept_definition_decision_forest.md
       anchor: "#五trait-判定树"
     covered_concepts: [ex:Traits, ex:Generics]
-    rustc_error_codes: [E0119, E0277]
+    rustc_error_codes: [E0119, E0277, E0220, E0117]
     nodes:
       - id: D
         type: condition
         label: "概念定义：Trait 是定义共享行为的接口，可被类型实现，可被泛型约束"
-        rustc_error_codes: [E0119]
+        rustc_error_codes: [E0119, E0220, E0117]
       - {id: P1, type: condition, label: "前提 P1：Trait 可被外部类型实现"}
       - {id: P2, type: condition, label: "前提 P2：Orphan Rule 限制 impl 位置，防止一致性破坏"}
       - {id: P3, type: condition, label: "前提 P3：Trait 对象安全要求方法有确定性"}
@@ -930,12 +930,12 @@ trees:
       file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
       anchor: "#71-名称解析判定树"
     covered_concepts: [ex:Modules, ex:NamesScopesAndResolution]
-    rustc_error_codes: [E0433]
+    rustc_error_codes: [E0433, E0425, E0412]
     nodes:
       - id: D
         type: condition
         label: "症状：名称解析失败（failed to resolve use of undeclared crate/module）"
-        rustc_error_codes: [E0433]
+        rustc_error_codes: [E0433, E0425, E0412]
       - id: Q1
         type: decision
         condition: "缺失项是否为外部 crate（路径以非 crate/self/super 名开头）？"
@@ -984,12 +984,12 @@ trees:
       file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
       anchor: "#72-字段访问判定树"
     covered_concepts: [ex:Structs, ex:TypeSystem]
-    rustc_error_codes: [E0609]
+    rustc_error_codes: [E0609, E0023, E0026, E0027, E0063, E0531]
     nodes:
       - id: D
         type: condition
         label: "症状：字段访问失败（no field on type）"
-        rustc_error_codes: [E0609]
+        rustc_error_codes: [E0609, E0023, E0026, E0027, E0063, E0531]
       - id: Q1
         type: decision
         condition: "字段名与目标类型字段名差异数是否 ≥1（拼写错误）？"

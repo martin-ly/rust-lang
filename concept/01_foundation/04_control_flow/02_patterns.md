@@ -120,15 +120,15 @@ if let (a, 3) = (1, 2) { }     // 可反驳
 
 ## 四、模式形式
 
-本节系统枚举 Rust 模式（pattern）的全部形式。模式是「值的形状描述 + 可选的变量绑定」，出现在 `match`/`if let`/`let`/`for`/函数参数五个位置。核心形式：
+本节系统枚举（Enum） Rust 模式（pattern）的全部形式。模式是「值的形状描述 + 可选的变量绑定」，出现在 `match`/`if let`/`let`/`for`/函数参数五个位置。核心形式：
 
 - **字面量模式**：`42`、`"hello"`、`true`——按值相等匹配；
 - **标识符模式**：`x` 绑定（默认 move/copy，`ref`/`ref mut` 改绑定方式）、`CONST` 路径常量（按值匹配，与绑定的区分靠命名解析）；
 - **通配与剩余**：`_` 匹配不绑定、`..` 省略剩余字段/元素（每模式最多一次，元组中位置可推断）；
 - **范围模式**：`1..=5`、`'a'..='z'`——仅整数/字符/浮点（浮点范围匹配已废弃，1.42+ 警告）；
-- **绑定模式（binding modes）**：`match` 引用时自动进入 `ref` 模式（default binding mode 切换）——`match &opt { Some(x) => ... }` 中 `x: &T` 无需手写 `ref`。
+- **绑定模式（binding modes）**：`match` 引用（Reference）时自动进入 `ref` 模式（default binding mode 切换）——`match &opt { Some(x) => ... }` 中 `x: &T` 无需手写 `ref`。
 
-组合规则：模式可嵌套（结构体/元组/枚举解构）、可加守卫（`if` 条件，不参与穷尽性分析）、可用 `|` 或模式与 `@` 绑定（`x @ Some(_)`）。
+组合规则：模式可嵌套（结构体（Struct）/元组/枚举解构）、可加守卫（`if` 条件，不参与穷尽性分析）、可用 `|` 或模式与 `@` 绑定（`x @ Some(_)`）。
 
 ### Literal patterns
 
@@ -292,7 +292,7 @@ Rust 编译器检查 `match` 表达式是否穷尽所有可能的值。不可穷
 
 关于 `_` 与 `..`，下列说法正确的是？
 
-- A. `_` 匹配任意单个值，不绑定、不 move、不借用，总是不可反驳
+- A. `_` 匹配任意单个值，不绑定、不 move、不借用（Borrowing），总是不可反驳
 - B. `_` 会把匹配到的值绑定到名为 `_` 的变量
 - C. `..` 只能匹配恰好一个剩余元素
 - D. `_` 是可反驳模式
@@ -300,7 +300,7 @@ Rust 编译器检查 `match` 表达式是否穷尽所有可能的值。不可穷
 <details>
 <summary>✅ 答案</summary>
 
-**A 正确**。按本页「模式形式」：Wildcard pattern（`_`）匹配任意单个值，不绑定、不 move、不借用（Borrowing），**总是不可反驳**；Rest pattern（`..`）匹配**零个或多个**剩余元素，用于元组、元组结构体、切片模式，不可反驳。B/C/D 均与正文定义矛盾。
+**A 正确**。按本页「模式形式」：Wildcard pattern（`_`）匹配任意单个值，不绑定、不 move、不借用（Borrowing），**总是不可反驳**；Rest pattern（`..`）匹配**零个或多个**剩余元素，用于元组、元组结构体、切片（Slice）模式，不可反驳。B/C/D 均与正文定义矛盾。
 
 </details>
 
@@ -316,7 +316,7 @@ let Some(x) = Some(3);
 
 - A. 能编译，`x` 绑定为 `3`
 - B. 不能编译：`let` 绑定要求不可反驳模式，而 `Some(x)` 是可反驳模式
-- C. 能编译，但运行时可能 panic
+- C. 能编译，但运行时（Runtime）可能 panic
 - D. 不能编译：`Some(3)` 类型未知
 
 <details>
@@ -347,7 +347,7 @@ if let Some(y) = x {
 <details>
 <summary>✅ 答案</summary>
 
-**B 正确，`y: &i32`**。按本页「绑定模式（Binding modes）」：当引用值被非引用模式匹配时，编译器会**自动按 `ref` 绑定**，避免手动写 `&`——`Some(y)` 匹配 `&Option<i32>` 时，`y` 自动转为 `ref y`，类型为 `&i32`。这是默认绑定模式（default binding modes）机制，而非隐式解引用复制。
+**B 正确，`y: &i32`**。按本页「绑定模式（Binding modes）」：当引用值被非引用模式匹配（Pattern Matching）时，编译器会**自动按 `ref` 绑定**，避免手动写 `&`——`Some(y)` 匹配 `&Option<i32>` 时，`y` 自动转为 `ref y`，类型为 `&i32`。这是默认绑定模式（default binding modes）机制，而非隐式解引用复制。
 
 </details>
 

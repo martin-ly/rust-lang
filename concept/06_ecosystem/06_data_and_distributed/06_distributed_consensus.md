@@ -88,7 +88,7 @@
 
 ## 一、权威定义（Definition）
 
-共识问题的形式化：在异步网络中，一组进程各自持有初始值，要求所有非故障进程最终**决定（decide）**同一个值，且满足一致性（agreement）、有效性（validity）、终止性（termination）。
+共识问题的形式化：在异步（Async）网络中，一组进程各自持有初始值，要求所有非故障进程最终**决定（decide）**同一个值，且满足一致性（agreement）、有效性（validity）、终止性（termination）。
 
 **FLP 不可能结果**（Fischer–Lynch–Paterson, 1985）：在**纯异步**系统中，即使只有一个进程可能崩溃（crash failure），也不存在确定性的共识算法保证终止。工程上的出路是放宽「纯异步」假设：
 
@@ -802,7 +802,7 @@ async fn query_tendermint_consensus() -> anyhow::Result<()> {
 
 ## ⚠️ 反例与陷阱
 
-**陷阱：Raft 状态跨线程裸引用共享**。共识节点的 `term`/`voted_for` 更新必须串行化；试图让两个线程同时持 `&mut` 修改同一字段，编译期即被拒绝：
+**陷阱：Raft 状态跨线程裸引用（Reference）共享**。共识节点的 `term`/`voted_for` 更新必须串行化；试图让两个线程同时持 `&mut` 修改同一字段，编译期即被拒绝：
 
 ```rust,compile_fail
 struct NodeState { term: u64, voted_for: Option<u64> }
@@ -817,7 +817,7 @@ fn elect(state: &mut NodeState) {
 
 rustc 1.97.0 实测：`error[E0499]: cannot borrow *state.term as mutable more than once at a time`。
 
-**修正**：`Arc<Mutex<NodeState>>` 共享所有权 + 互斥；注意持有锁期间不得做网络 I/O，否则选举超时会被锁竞争放大：
+**修正**：`Arc<Mutex<NodeState>>` 共享所有权（Ownership） + 互斥；注意持有锁期间不得做网络 I/O，否则选举超时会被锁竞争放大：
 
 ```rust,ignore
 use std::sync::{Arc, Mutex};

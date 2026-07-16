@@ -77,7 +77,7 @@ fn demo() {
 | `#[optimize]` | PFCP | 函数级优化属性 |
 | `size_of_val_raw` / `align_of_val_raw` | 等待评审 | 裸值尺寸/对齐计算 |
 | C-variadic 函数定义 | PFCP | 安全 Rust 中定义 C 可变参数函数 |
-| `derive(CoercePointee)` | FCP finished | 智能指针自动类型强制 |
+| `derive(CoercePointee)` | FCP finished | 智能指针（Smart Pointer）自动类型强制 |
 | `never_type` (`!`) | FCP finished / blocked | 底类型最终稳定化 |
 
 ---
@@ -87,7 +87,7 @@ fn demo() {
 与 1.97 周期相关的长期项目仍在继续：
 
 - **Pin Ergonomics / Reborrow Traits**: Project Goals 2026 旗舰目标 "Beyond the &"，预计 1.99+。
-- **Field Projections**: `field_of!` 宏与 FRTs 已合并，逐步推进。
+- **Field Projections**: `field_of!` 宏（Macro）与 FRTs 已合并，逐步推进。
 - **BorrowSanitizer**: 运行时（Runtime） Tree Borrows 违规检测，LLVM RFC 已发布。
 - **Safety Tags**: unsafe 契约的机器可读标注，RFC 讨论中。
 

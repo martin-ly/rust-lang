@@ -34,7 +34,7 @@
 `crate-type` 决定编译产物的链接形态，六种类型按用途分三组：
 
 - **纯 Rust 消费**：`lib`（编译器按上下文选择的最优 Rust 库形态，下游 `use` 的默认）、`rlib`（Rust 静态库，含元数据——Rust 工具链间的标准交换格式）；
-- **系统级静态产物**：`bin`（可执行文件，隐式默认）、`staticlib`（C 静态库 `.a`/`.lib`——嵌入 C/C++ 项目，**包含全部 Rust 依赖与运行时**，体积大但自包含）；
+- **系统级静态产物**：`bin`（可执行文件，隐式默认）、`staticlib`（C 静态库 `.a`/`.lib`——嵌入 C/C++ 项目，**包含全部 Rust 依赖与运行时（Runtime）**，体积大但自包含）；
 - **系统级动态产物**：`dylib`（Rust 动态库——Rust 版本/编译器必须严格匹配，几乎只用于 Rust 插件系统）、`cdylib`（C 动态库 `.so`/`.dll`/`.dylib`——FFI 导出标准形态，只暴露 `extern` 符号，Rust 运行时可被裁剪）。
 
 选型判定：Rust 用 Rust ⟹ `lib`；C/C++ 项目静态嵌入 ⟹ `staticlib`；动态加载/多语言共享 ⟹ `cdylib`；`dylib` 仅在「全 Rust 动态插件」场景考虑（且优先评估 `abi_stable` crate 的稳定 ABI 方案）。
@@ -259,7 +259,7 @@ RFC 3722 要求 `extern` 块与 `extern fn` 的 ABI 字符串**显式化**：裸
 
 > **权威来源**: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html), [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html), [TRPL](https://doc.rust-lang.org/book/title-page.html)
 >
-> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch 10](../../00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用（Reference） [Authority Source Sprint Batch 10](../../00_meta/02_sources/05_international_authority_index.md)
 
 ---
 
@@ -274,7 +274,7 @@ Rust 1.97.0 将若干链接/ABI 相关行为从「单点变更」变成了跨领
 
 Rust 1.97.0 将 **v0 symbol mangling** 设为默认方案（自 1.59 起可经 `-C symbol-mangling-version=v0` 选择，现进入 stable 默认）。其跨领域影响落在**链接器输入符号的形态**上：
 
-- **链接器输入**：Rust→Rust 的混淆符号名格式变化（泛型实例保留具体值而非仅靠 hash），链接器看到的仍是合法符号，但任何按**旧混淆名文本**匹配的工具都会失配。
+- **链接器输入**：Rust→Rust 的混淆符号名格式变化（泛型（Generics）实例保留具体值而非仅靠 hash），链接器看到的仍是合法符号，但任何按**旧混淆名文本**匹配的工具都会失配。
 - **demangler / debugger / profiler**：旧版本工具可能**无法 demangle v0 符号**，导致调试器、profiler、backtrace 显示原始混淆名；主流工具（GDB 15+、LLDB、`rustfilt`）已支持 v0。
 - **backtrace**：发布说明明确指出 v0 可能改变 backtrace 文本的**格式**（symbol 呈现）。
 

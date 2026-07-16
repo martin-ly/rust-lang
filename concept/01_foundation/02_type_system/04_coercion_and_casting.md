@@ -228,7 +228,7 @@ takes_mut(&mut string);  // &mut String → &mut str
 
 ## 二、技术细节
 
-本节展开「类型强制与转换：显式与隐式的边界」的技术细节：as 转换的完整矩阵、From/Into 与 TryFrom/TryInto与指针转换。重点是类型签名、所有权语义与编译期约束如何相互作用，而不是 API 罗列；每个小节给出可编译的最小示例，并标注对应反例的失败规则。读完后应能解释：为什么这种写法能通过编译，而那种写法会被借用检查器或类型系统拒绝。
+本节展开「类型强制与转换：显式与隐式的边界」的技术细节：as 转换的完整矩阵、From/Into 与 TryFrom/TryInto与指针转换。重点是类型签名、所有权（Ownership）语义与编译期约束如何相互作用，而不是 API 罗列；每个小节给出可编译的最小示例，并标注对应反例的失败规则。读完后应能解释：为什么这种写法能通过编译，而那种写法会被借用（Borrowing）检查器或类型系统（Type System）拒绝。
 
 ### 2.1 as 转换的完整矩阵
 
@@ -417,7 +417,7 @@ let ptr = &aligned as *const Aligned as *const u8;
 - **反命题 1：「Rust 没有隐式转换」** —— 不准确：Rust 没有**数值**隐式转换（`i32` 不会自动变 `i64`），但有 **deref coercion**（`&String` → `&str`、`&Vec<T>` → `&[T]`）与 unsized coercion——它们是方法调用 ergonomics 的基石，却也是「为什么 `String` 参数传 `&str` 不行但反过来可以」这类困惑的根源。
 - **反命题 2：「`as` 在指针与整数间转换是安全的」** —— 语义上不安全：指针→整数丢失 provenance（来源），整数→指针是未定义来源的构造，后续解引用即 UB 风险。Strict Provenance API（`with_addr`/`map_addr`/`expose_provenance`）是 1.84+ 的正确替代。
 
-边界极限小节量化：coercion 站点（coercion sites）的完整列表、`as` 转换表（数值/指针/枚举/布尔）、以及 `transmute` 与 `as` 的能力边界。
+边界极限小节量化：coercion 站点（coercion sites）的完整列表、`as` 转换表（数值/指针/枚举（Enum）/布尔）、以及 `transmute` 与 `as` 的能力边界。
 
 ### 4.1 反命题树
 >
@@ -963,7 +963,7 @@ Deref 强制转换是 Rust 的隐式转换机制之一：
 
 ### 1. 这是一处“收窄”，不是 coercion 规则的普遍改动
 
-本页 §1.2 列出 Deref 强制的触发位置（函数/方法参数、`let` 右侧、结构体字段初始化、匹配臂、`if` 条件等）。Rust 1.97.0 **没有**改动这些通用规则；它只在**`std::pin::pin!` 宏的返回值上**移除了一处此前被错误允许的 deref coercion。release notes 原文要点（*Compatibility Notes*）：
+本页 §1.2 列出 Deref 强制的触发位置（函数/方法参数、`let` 右侧、结构体（Struct）字段初始化、匹配臂、`if` 条件等）。Rust 1.97.0 **没有**改动这些通用规则；它只在**`std::pin::pin!` 宏（Macro）的返回值上**移除了一处此前被错误允许的 deref coercion。release notes 原文要点（*Compatibility Notes*）：
 
 - “Prevent deref coercions in `pin!`, in order to prevent unsoundness.”
 - `pin!(x)` 且 `x: &mut T` → 现在总是 `Pin<&mut &mut T>`，此前有时会 coerce 为 `Pin<&mut T>`。

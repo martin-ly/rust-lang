@@ -233,9 +233,9 @@ Happens-Before 关系:
 | 内存序 | 保证 | 典型用途 |
 |:---|:---|:---|
 | `Relaxed` | 仅原子性，无顺序保证 | 计数器、统计量（无数据依赖） |
-| `Acquire`（读）/`Release`（写） | 成对构成 happens-before：Release 前的写对 Acquire 后可见 | 锁、引用计数、发布-订阅一个数据项 |
+| `Acquire`（读）/`Release`（写） | 成对构成 happens-before：Release 前的写对 Acquire 后可见 | 锁、引用（Reference）计数、发布-订阅一个数据项 |
 | `AcqRel` | Acquire + Release | CAS 循环中同时读写的操作 |
-| `SeqCst` | 全序：所有 SeqCst 操作存在全局一致顺序 | 多变量一致性、拿不准时的默认选择 |
+| `SeqCst` | 全序：所有 SeqCst 操作存在全局一致顺序 | 多变量一致性（Coherence）、拿不准时的默认选择 |
 
 关键模型：**内存序不修饰数据，修饰的是「哪些先前的写对本线程可见」**。`compare_exchange` 的成功/失败可分别指定内存序——失败分支只需读取语义（通常 `Relaxed` 或 `Acquire`）。判定准则：先 `SeqCst` 保证正确，profile 证明是热点再逐操作降级并给出论证。
 
@@ -951,7 +951,7 @@ fn main() {
 
 ## 嵌入式测验
 
-本组测验围绕测验 1：原子操作基础（记忆层）、测验 2：内存序（理解层）、测验 3：自旋锁实现（应用层）与测验 4：SeqCst 的必要性（分析层）设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用检查」或「运行时行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
+本组测验围绕测验 1：原子操作基础（记忆层）、测验 2：内存序（理解层）、测验 3：自旋锁实现（应用层）与测验 4：SeqCst 的必要性（分析层）设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用（Borrowing）检查」或「运行时行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
 
 ### 测验 1：原子操作基础（记忆层）
 
@@ -1331,7 +1331,7 @@ now_serving  = 当前叫到的号码
 
 - **基础构件**：`AtomicPtr`/`AtomicUsize` 的 `compare_exchange` 构成 Treiber 栈、Michael-Scott 队列的核心循环；
 - **内存回收是无锁的真正难点**：节点被摘出后何时可安全 free？其他线程可能仍持有引用——方案是 epoch-based reclamation（`crossbeam-epoch`，延迟回收）或 hazard pointer（记录在用指针）；
-- **`Arc` + CAS 的替代模式**：`arc-swap` 用原子指针换整个结构体，读多写极少场景（配置热更新）比无锁链表简单两个数量级。
+- **`Arc` + CAS 的替代模式**：`arc-swap` 用原子指针换整个结构体（Struct），读多写极少场景（配置热更新）比无锁链表简单两个数量级。
 
 判定准则：无锁的正确性论证需要形式化级别的心智成本——能用 `Mutex`（parking_lot）解决就不要无锁；确需无锁优先用 `crossbeam` 现成结构而非手写。
 
@@ -1422,7 +1422,7 @@ Rust 的生态系统鼓励开发者在尽可能高的抽象层次上解决问题
 本分册从创建第一个线程开始，学习了如何通过消息传递和共享状态这两种模式进行线程间通信与同步，并进一步将视野扩展到数据并行和整个并发库生态。
 
 Rust 的并发模型是其语言设计的皇冠明珠。
-它通过将所有权和类型系统（Type System）这两个核心支柱与并发原语深度融合，成功地在编译时解决了困扰系统编程领域数十年的内存安全问题，真正实现了高性能与高安全的统一。
+它通过将所有权和类型系统（Type System）这两个核心支柱与并发原语深度融合，成功地在编译时解决了困扰系统编程领域数十年的内存安全（Memory Safety）问题，真正实现了高性能与高安全的统一。
 
 ---
 
@@ -1489,7 +1489,7 @@ fn release_store(a: &AtomicU64) {
 ### 4. 跨平台边界与旧名废弃说明
 
 - **跨平台边界（原则）**：64 位主流目标上，原子对齐多与原始整数一致且可由原生指令完成；部分 32 位或特殊目标上，某宽度原子的**要求对齐**可能高于同宽度整数的惯用对齐或高于指针宽度，需保守路径。
-- ⚠ **需专家复核**：具体“哪些目标上 primitive 对齐 ≠ 指针宽度对齐”的目标清单，release notes 与版本页**未给出**；本小节不枚举目标名。
+- ⚠ **需专家复核**：具体“哪些目标上 primitive 对齐 ≠ 指针宽度对齐”的目标清单，release notes 与版本页**未给出**；本小节不枚举（Enum）目标名。
 - **旧名 `target_has_atomic_equal_alignment` 的废弃**：审计背景（§2.4/P2-2）指出该 cfg 曾用名 `target_has_atomic_equal_alignment`，1.97 起稳定为现名，旧名废弃。⚠ **需专家复核**：release notes 与版本页**未提及**旧名及废弃时间表；旧名/废弃说法当前仅来自审计背景，使用前请核对 Rust Reference 与稳定化 PR。
 
 ### 5. Rust 1.97.0 新增 LoongArch 原子 target features（`scq` / `lamcas` / `lam-bh` / `ld-seq-sa` / `div32`）
@@ -1533,7 +1533,7 @@ fn main() {
 
 ---
 
-> **Rust 1.91 起**：`AtomicPtr::fetch_ptr_add` / `fetch_ptr_sub` 与各原子类型的 `fetch_or` / `fetch_and` / `fetch_xor` 稳定，支持无锁指针算术与位掩码操作；**1.95 起** `update` / `try_update` 稳定，将 CAS 循环闭包化。详见 [1.91 版本页](../../07_future/00_version_tracking/rust_1_91_stabilized.md) 与 [1.95 版本页](../../07_future/00_version_tracking/rust_1_95_stabilized.md)（特性矩阵节）。
+> **Rust 1.91 起**：`AtomicPtr::fetch_ptr_add` / `fetch_ptr_sub` 与各原子类型的 `fetch_or` / `fetch_and` / `fetch_xor` 稳定，支持无锁指针算术与位掩码操作；**1.95 起** `update` / `try_update` 稳定，将 CAS 循环闭包（Closures）化。详见 [1.91 版本页](../../07_future/00_version_tracking/rust_1_91_stabilized.md) 与 [1.95 版本页](../../07_future/00_version_tracking/rust_1_95_stabilized.md)（特性矩阵节）。
 
 ## 🧭 思维导图（Mindmap）
 

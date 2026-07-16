@@ -218,8 +218,8 @@ let maybe_dangling = addr as *const u64;
 
 本节盘点内存模型层面的三个经典反模式，每个都是 Miri 可检测的 UB：
 
-- **读取未初始化 padding（9.1）**：结构体填充字节无定义值——`transmute` 整个结构体到字节数组读取 padding 是 UB（即使「只是想看看」）；正确做法是逐字段读取或 `#[repr(C, packed)]`（后者引入未对齐字段的新问题）；
-- **通过整数重建指针（9.2）**：`ptr as usize` 再 `usize as *const T`——丢失 provenance（来源），strict provenance 模型下重建的指针解引用是 UB；正确做法是 `with_addr`/`map_addr`（1.84+）或 `expose_provenance`（声明「我接受地址猜测」）；
+- **读取未初始化 padding（9.1）**：结构体（Struct）填充字节无定义值——`transmute` 整个结构体到字节数组读取 padding 是 UB（即使「只是想看看」）；正确做法是逐字段读取或 `#[repr(C, packed)]`（后者引入未对齐字段的新问题）；
+- **通过整数重建指针（9.2）**：`ptr as usize` 再 `usize as *const T`——丢失 provenance（来源），strict provenance 模型下重建的指针解引用（Reference）是 UB；正确做法是 `with_addr`/`map_addr`（1.84+）或 `expose_provenance`（声明「我接受地址猜测」）；
 - **别名违规（9.3）**：`&mut` 存在期间通过裸指针副本写入同一内存——Stacked/Tree Borrows 模型直接判定 UB；「先转裸指针再安全使用」的直觉是错的：从 `&mut` 派生的裸指针继承其独占义务。
 
 检测纪律：含 `unsafe` 的代码至少跑一次 `cargo miri test`——这三类反模式 Miri 全部可检测，无 Miri 的 unsafe 审查是不完整的。
@@ -368,7 +368,7 @@ fn align_check() {
 }
 ```
 
-> **边界**：`#[repr(align(N))]` 可以把对齐**抬高**到超过原子自然对齐，这总是安全的（更强对齐 ⟹ 仍满足较弱要求）；危险的是反过来——当一个值的**实际对齐低于**原子操作所需对齐时对其执行原子操作，是 UB（本文 §八）。`cfg(...)` 的用途正是让代码在“目标不保证自然对齐”时**拒绝或改走保守路径**，而非“修复”对齐。
+> **边界**：`#[repr(align(N))]` 可以把对齐**抬高**到超过原子自然对齐，这总是安全的（更强对齐 ⟹ 仍满足较弱要求）；危险的是反过来——当一个值的**实际对齐低于**原子操作（Atomic Operations）所需对齐时对其执行原子操作，是 UB（本文 §八）。`cfg(...)` 的用途正是让代码在“目标不保证自然对齐”时**拒绝或改走保守路径**，而非“修复”对齐。
 
 ### 3. 与原子指令生成的关系（查询 → codegen 分支）
 
@@ -379,7 +379,7 @@ fn align_check() {
 ### 4. 跨平台边界与旧名废弃说明
 
 - **跨平台边界（原则）**：在多数 64 位主流目标上，原子类型对齐与对应原始整数对齐一致；但在部分 32 位或特殊目标上，某宽度原子的**要求对齐**可能高于同宽度原始整数的“惯用”对齐，或高于指针宽度——这正是该 cfg 存在的理由。
-- ⚠ **需专家复核**：具体“哪些目标上 primitive 对齐 ≠ 指针宽度对齐”的目标清单，release notes 与版本页**未给出**；本小节不枚举目标名，避免臆测。需要精确清单时请查阅 Rust Reference — Conditional compilation 与各 target 的 `target_has_atomic_*` 定义。
+- ⚠ **需专家复核**：具体“哪些目标上 primitive 对齐 ≠ 指针宽度对齐”的目标清单，release notes 与版本页**未给出**；本小节不枚举（Enum）目标名，避免臆测。需要精确清单时请查阅 Rust Reference — Conditional compilation 与各 target 的 `target_has_atomic_*` 定义。
 - **旧名 `target_has_atomic_equal_alignment` 的废弃**：任务背景（审计 §2.4/P2-2）指出该 cfg 曾用名 `target_has_atomic_equal_alignment`，1.97 起稳定为 `target_has_atomic_primitive_alignment`，旧名废弃。⚠ **需专家复核**：release notes 与版本页**未提及**该旧名及其废弃时间表；旧名/废弃说法当前仅来自审计背景，未在两类权威来源中核对到，使用前请以 Rust Reference 与对应稳定化 PR 为准。
 
 > **来源**: [Rust 1.97.0 Release Notes — Language](https://releases.rs/docs/1.97.0/) · [Rust Reference — Conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [Rustonomicon — Atomics](https://doc.rust-lang.org/nomicon/atomics.html) · 版本页 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（§2.4）
@@ -466,7 +466,7 @@ Rust 内存模型中的"抽象字节"可以区分哪些状态？
 <details>
 <summary>✅ 答案</summary>
 
-**B 正确**。按本页「三、Provenance」：provenance 说明指针指向哪个分配，将带 provenance 的指针转译为整数再转回**可能丢失** provenance（A 错）。「六、别名模型」：Rust 正从 Stacked Borrows（基于栈的借用权限追踪，严格但限制较多）向 Tree Borrows（基于树的权限模型，对更多合法 unsafe 模式更宽容）演进。C 错：本页明确警告"Rust 的内存模型目前尚不完整，部分细节尚未最终确定"。
+**B 正确**。按本页「三、Provenance」：provenance 说明指针指向哪个分配，将带 provenance 的指针转译为整数再转回**可能丢失** provenance（A 错）。「六、别名模型」：Rust 正从 Stacked Borrows（基于栈的借用（Borrowing）权限追踪，严格但限制较多）向 Tree Borrows（基于树的权限模型，对更多合法 unsafe 模式更宽容）演进。C 错：本页明确警告"Rust 的内存模型目前尚不完整，部分细节尚未最终确定"。
 
 </details>
 

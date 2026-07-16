@@ -94,7 +94,7 @@
 
 - **基础概念**：设计模式的适用边界——什么算“重复出现的设计问题”，何时引入模式反而增加复杂度（over-engineering 的识别信号）。
 - **模式选择**：在创建型/结构型/行为型三大类之间做选择的决策标准，以及同一问题多种模式并存时的取舍（如 Builder vs 类型状态）。
-- **Rust 特性**：所有权、借用检查、`Send`/`Sync` 对经典 GoF 模式的改造——例如 Java 的 Observer 在 Rust 中必须处理回调生命周期，Singleton 被 `OnceLock`/`LazyLock` 取代。
+- **Rust 特性**：所有权（Ownership）、借用检查、`Send`/`Sync` 对经典 GoF 模式的改造——例如 Java 的 Observer 在 Rust 中必须处理回调生命周期（Lifetimes），Singleton 被 `OnceLock`/`LazyLock` 取代。
 - **实践问题**：测试、性能与团队约定层面的落地经验。
 
 阅读建议：先用「基础概念」校准“是否需要模式”，再按问题域跳查。
@@ -165,7 +165,7 @@
 | :--- | :--- | :--- || 内存安全（Memory Safety） | 手动管理   | 编译时保证 ✅         |
 | 并发安全（Concurrency Safety） | 需要锁     | Send/Sync 自动推导 ✅ |
 | 性能开销 | 虚函数表   | 零成本抽象（Zero-Cost Abstraction） ✅         |
-| 状态保证 | 运行时检查 | 编译时检查 ✅         |
+| 状态保证 | 运行时（Runtime）检查 | 编译时检查 ✅         |
 
 **相关**: [](tier_01_foundations/04_faq.md完整FAQ) | [术语表](/crates/c09_design_pattern/docs/tier_01_foundations/03_glossary.md)
 
@@ -448,7 +448,7 @@ trait Observer {
 
 以下资源按学习深度分层组织，与本 FAQ 互补而非重复：
 
-- **Tier 1 基础**：适合首次接触 c09 设计模式 crate 的读者，先建立模块地图与术语表，再回来查阅本 FAQ 的具体问题。
+- **Tier 1 基础**：适合首次接触 c09 设计模式 crate 的读者，先建立模块（Module）地图与术语表，再回来查阅本 FAQ 的具体问题。
 - **核心资源**：800+ 行可编译示例集与综合指南，提供本 FAQ 各答案的完整代码上下文。
 - **深度理论**：并发模式（Actor/Reactor、CSP vs Async）与形式化验证章节，回答本 FAQ 中“为什么 Rust 需要不同的并发模式”这类问题的理论根基。
 
@@ -540,7 +540,7 @@ mindmap
 
 ## ⚠️ 反例与陷阱
 
-**陷阱（`Rc<RefCell<T>>` 引用环泄漏）**：用 `Rc` 实现双向链表/图时，双向强引用形成环，引用计数永远到不了 0，内存永不释放——这是运行期陷阱，编译器不会报错：
+**陷阱（`Rc<RefCell<T>>` 引用（Reference）环泄漏）**：用 `Rc` 实现双向链表/图时，双向强引用形成环，引用计数永远到不了 0，内存永不释放——这是运行期陷阱，编译器不会报错：
 
 ```rust
 use std::cell::RefCell;

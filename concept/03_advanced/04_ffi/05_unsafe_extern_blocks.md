@@ -74,17 +74,25 @@ mindmap
     - [1.1 旧式 `extern {}` 的语义漏洞](#11-旧式-extern--的语义漏洞)
     - [1.2 Edition 2024：`unsafe extern {}`](#12-edition-2024unsafe-extern-)
     - [1.3 `safe` FFI：显式声明已审计边界](#13-safe-ffi显式声明已审计边界)
+      - [位置 A：`unsafe extern` 块内的 `safe fn` 声明](#位置-aunsafe-extern-块内的-safe-fn-声明)
+      - [位置 B：函数定义的语义对称](#位置-b函数定义的语义对称)
     - [1.4 迁移路径：`rust_2024_compatibility` lint](#14-迁移路径rust_2024_compatibility-lint)
   - [二、判定规则](#二判定规则)
     - [2.1 何时使用 `unsafe extern {}`](#21-何时使用-unsafe-extern-)
     - [2.2 何时使用 `safe fn`](#22-何时使用-safe-fn)
+      - [块内 `safe fn` 声明](#块内-safe-fn-声明)
+      - [函数定义：`extern "C" fn` 与 `unsafe extern "C" fn`](#函数定义extern-c-fn-与-unsafe-extern-c-fn)
     - [2.3 2021 Edition 与 2024 Edition 的行为差异](#23-2021-edition-与-2024-edition-的行为差异)
   - [三、边界测试 / 反例](#三边界测试--反例)
     - [3.1 反例：2024 Edition 下忘记 `unsafe` 调用 extern 函数](#31-反例2024-edition-下忘记-unsafe-调用-extern-函数)
     - [3.2 反例：错误声明 `safe` 但实际会触发 UB 的外部函数](#32-反例错误声明-safe-但实际会触发-ub-的外部函数)
     - [3.3 反例：跨 Edition 混用导致的兼容性错误](#33-反例跨-edition-混用导致的兼容性错误)
   - [四、与 `unsafe_op_in_unsafe_fn` 及 unsafe 契约的关系](#四与-unsafe_op_in_unsafe_fn-及-unsafe-契约的关系)
+    - [`unsafe_op_in_unsafe_fn` 的协同作用](#unsafe_op_in_unsafe_fn-的协同作用)
+    - [unsafe 契约的三层结构](#unsafe-契约的三层结构)
   - [五、最佳实践与检查清单](#五最佳实践与检查清单)
+    - [编写 Edition 2024 FFI 绑定的检查清单](#编写-edition-2024-ffi-绑定的检查清单)
+    - [常见误区](#常见误区)
   - [六、相关概念](#六相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
@@ -94,7 +102,7 @@ mindmap
 
 ### 1.1 旧式 `extern {}` 的语义漏洞
 
-在 Rust Edition 2021 及之前，`extern "ABI" { ... }` 块本身是一个**safe item**：声明它不需要 `unsafe` 上下文，可以出现在模块级别。然而，块内声明的函数**默认仍是 `unsafe fn`**，调用者仍需在调用点写 `unsafe` 块：
+在 Rust Edition 2021 及之前，`extern "ABI" { ... }` 块本身是一个**safe item**：声明它不需要 `unsafe` 上下文，可以出现在模块（Module）级别。然而，块内声明的函数**默认仍是 `unsafe fn`**，调用者仍需在调用点写 `unsafe` 块：
 
 ```rust,edition2021
 // Edition 2021：块本身是 safe item，但调用仍需 unsafe
@@ -110,9 +118,9 @@ fn main() {
 }
 ```
 
-> **问题本质**：`extern` 块声明的是**编译器无法验证的外部符号**。外部函数的签名是否正确、是否遵守 Rust 的内存安全与别名规则，完全依赖 `extern` 块作者的人工审计。但旧式语法把这份「对外部代码的信任断言」隐藏在一个 safe item 中——块本身不要求 `unsafe`，读者难以直观判断谁应为签名错误导致的 UB 负责。
+> **问题本质**：`extern` 块声明的是**编译器无法验证的外部符号**。外部函数的签名是否正确、是否遵守 Rust 的内存安全（Memory Safety）与别名规则，完全依赖 `extern` 块作者的人工审计。但旧式语法把这份「对外部代码的信任断言」隐藏在一个 safe item 中——块本身不要求 `unsafe`，读者难以直观判断谁应为签名错误导致的 UB 负责。
 >
-> 这造成责任边界模糊：如果 `extern` 块中的签名写错，运行时 UB 应归咎于**写块的人**还是**调用者**？Rust 2024 的答案是前者，因此要求 `extern` 块本身显式标注 `unsafe`。
+> 这造成责任边界模糊：如果 `extern` 块中的签名写错，运行时（Runtime） UB 应归咎于**写块的人**还是**调用者**？Rust 2024 的答案是前者，因此要求 `extern` 块本身显式标注 `unsafe`。
 
 ---
 
@@ -159,7 +167,7 @@ fn main() {
 }
 ```
 
-> **契约**：写 `safe fn` 等于承诺「该外部函数的行为满足 Rust 安全契约」——不会破坏内存安全、不会引入数据竞争、不会违反其签名对应的生命周期与别名规则。这个承诺是**人工审计结论**，编译器不验证。
+> **契约**：写 `safe fn` 等于承诺「该外部函数的行为满足 Rust 安全契约」——不会破坏内存安全、不会引入数据竞争、不会违反其签名对应的生命周期（Lifetimes）与别名规则。这个承诺是**人工审计结论**，编译器不验证。
 
 #### 位置 B：函数定义的语义对称
 
@@ -199,6 +207,7 @@ rust_2024_compatibility = "warn"
 运行 `cargo fix --edition` 可以自动将大多数旧式 `extern` 块改写为 `unsafe extern` 块，并保留原有语义（块内函数默认 unsafe）。随后人工审计哪些函数可以加上 `safe`。
 
 > **迁移原则**：
+>
 > 1. 先机械迁移：`extern "C" { ... }` → `unsafe extern "C" { ... }`；
 > 2. 再人工审计：对确认安全的外部函数加上 `safe fn`；
 > 3. 不要批量加 `safe`——每个 `safe` 都是一份不可由编译器验证的契约。
@@ -236,7 +245,7 @@ unsafe extern "C" {
 
 1. **签名正确**：参数类型、返回类型、ABI 字符串与外部实现完全一致；
 2. **行为可验证**：外部函数不会触发未定义行为（UB），只要传入合法参数；
-3. **不破坏 Rust 不变量**：不会绕过借用检查、不会制造数据竞争、不会返回悬垂指针；
+3. **不破坏 Rust 不变量**：不会绕过借用（Borrowing）检查、不会制造数据竞争、不会返回悬垂指针；
 4. **文档化**：在代码注释或安全封装层中说明审计依据。
 
 典型例子是 C 标准库中已知纯函数：
@@ -248,7 +257,7 @@ unsafe extern "C" {
 }
 ```
 
-> **注意**：即使 `strlen` 是 C 标准库函数，标注 `safe` 仍然要求调用者保证指针有效。`safe` 不消除前置条件，只是把「调用处写 `unsafe` 块」的要求移除。前置条件必须在类型系统或文档中表达。
+> **注意**：即使 `strlen` 是 C 标准库函数，标注 `safe` 仍然要求调用者保证指针有效。`safe` 不消除前置条件，只是把「调用处写 `unsafe` 块」的要求移除。前置条件必须在类型系统（Type System）或文档中表达。
 
 #### 函数定义：`extern "C" fn` 与 `unsafe extern "C" fn`
 
@@ -388,7 +397,7 @@ fn main() {
 }
 ```
 
-如果上述代码通过 `include!`、宏展开或复制粘贴进入 Edition 2024 crate，会产生：
+如果上述代码通过 `include!`、宏（Macro）展开或复制粘贴进入 Edition 2024 crate，会产生：
 
 ```text
 error: extern blocks must be unsafe

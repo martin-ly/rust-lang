@@ -38,7 +38,7 @@
 
 ## 一、什么是 Prelude
 
-**Prelude** 是一组在每个 crate 的每个模块中**自动进入作用域**的名字。它们不是当前模块的成员，因此在名称解析时被隐式查询，但不能通过 `self::Box` 这类路径引用（Reference）。
+**Prelude** 是一组在每个 crate 的每个模块（Module）中**自动进入作用域**的名字。它们不是当前模块的成员，因此在名称解析时被隐式查询，但不能通过 `self::Box` 这类路径引用（Reference）。
 
 > **关键性质**
 >
@@ -207,7 +207,7 @@ mod example {
 > 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
 
 - **[Rust 1.94](../../07_future/00_version_tracking/rust_1_94_stabilized.md)**
-  - std 宏改为经 prelude 导入（兼容性变更）
+  - std 宏（Macro）改为经 prelude 导入（兼容性变更）
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 

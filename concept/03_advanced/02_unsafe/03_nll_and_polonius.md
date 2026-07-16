@@ -8,7 +8,7 @@
 > **受众**: [专家]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **目录归属说明**: NLL/Polonius 属借用检查器演进主题，但其数据流分析精度直接决定 unsafe 代码中别名与生命周期推断的可靠性边界（RustBelt 形式化链条的一环），与 `02_unsafe/` 的 unsafe 语义强相关，故保留在本目录；基础借用概念见 [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)。
+> **目录归属说明**: NLL/Polonius 属借用检查器演进主题，但其数据流分析精度直接决定 unsafe 代码中别名与生命周期（Lifetimes）推断的可靠性边界（RustBelt 形式化链条的一环），与 `02_unsafe/` 的 unsafe 语义强相关，故保留在本目录；基础借用概念见 [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析借用（Borrowing）检查算法的精度演进
 > **定位**: 深入分析 Rust **借用（Borrowing）检查器**的两个里程碑——Non-Lexical Lifetimes (NLL) 如何放宽词法作用域限制，以及 Polonius 如何通过数据流分析实现更精确的借用检查，揭示 Rust 类型系统（Type System）的持续演进。
@@ -194,7 +194,7 @@ Polonius: 下一代借用检查器
 借用检查器三代演进的技术对比：
 
 - **词法借用检查（Rust ≤ 1.0 时代）**：借用存活到词法作用域结束——`{ let r = &x; use(r); } use(x)` 必须靠大括号人工缩短，简单但拒绝大量正确代码；
-- **NLL（Non-Lexical Lifetimes，1.31/2018 edition 起）**：借用存活到「最后一次使用」——基于 MIR 控制流图的活跃性分析（liveness），`let r = &x; use(r); use(x);` 无需大括号即通过；局限是**跨分支的路径不敏感**：「条件性返回引用」（经典的 get-or-insert 模式）仍被保守拒绝；
+- **NLL（Non-Lexical Lifetimes，1.31/2018 edition 起）**：借用存活到「最后一次使用」——基于 MIR 控制流图的活跃性分析（liveness），`let r = &x; use(r); use(x);` 无需大括号即通过；局限是**跨分支的路径不敏感**：「条件性返回引用（Reference）」（经典的 get-or-insert 模式）仍被保守拒绝；
 - **Polonius（开发中）**：把借用检查重写为 Datalog 约束求解（「loan 在程序点 p 活跃」的事实推导）——流敏感分析可接受 NLL 拒绝的正确代码，`-Zpolonius` 在 nightly 可试用。
 
 实践意义：理解 NLL 的「最后使用」规则即可预测 99% 的借用错误；剩余 1% 的「应该合法却被拒」多半落在 Polonius 的改进域——此时重构（`entry` API、拆分函数）比等待编译器更实际。
@@ -663,7 +663,7 @@ fn main() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-本组测验围绕测验 1：词法生命周期的问题（理解层）、测验 2：NLL 的改进范围（应用层）、测验 3：Polonius 与 NLL 的关系（理解层）、测验 4：NLL 与性能（分析层）等方面设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用检查」或「运行时行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
+本组测验围绕测验 1：词法生命周期的问题（理解层）、测验 2：NLL 的改进范围（应用层）、测验 3：Polonius 与 NLL 的关系（理解层）、测验 4：NLL 与性能（分析层）等方面设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用检查」或「运行时（Runtime）行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
 
 ### 测验 1：词法生命周期的问题（理解层）
 
@@ -886,7 +886,7 @@ fn f(v: &mut Vec<i32>, b: bool) -> &i32 {
 - **上位（is-a）**：[借用](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) 检查算法的实现演进。
 - **下位（实例）**：NLL 与 Polonius 两代借用检查器。
 - **组合**：与 [生命周期进阶](../../01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md) 的 Polonius 专题（其 §十二）呼应。
-- **依赖**：依赖 [所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 规则。
+- **依赖**：依赖 [所有权（Ownership）](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 规则。
 
 ---
 

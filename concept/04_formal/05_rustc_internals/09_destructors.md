@@ -153,7 +153,7 @@ println!("{}", x);
 
 > **来源**: [The Rustonomicon — Drop Flags](https://doc.rust-lang.org/nomicon/drop-flags.html)
 
-当值被**条件移动**（如 `if` 分支中可能 move 走局部变量）时，编译器需要运行时信息判断析构时该值是否仍有效。历史上 Rust 曾使用**动态 drop flag**（每个变量一个隐藏布尔位，归零后析构跳过）；现代 Rust 经 drop elaboration 在 MIR 层以最小化的 drop flag（仅条件移动处引入）实现同一语义：
+当值被**条件移动**（如 `if` 分支中可能 move 走局部变量）时，编译器需要运行时（Runtime）信息判断析构时该值是否仍有效。历史上 Rust 曾使用**动态 drop flag**（每个变量一个隐藏布尔位，归零后析构跳过）；现代 Rust 经 drop elaboration 在 MIR 层以最小化的 drop flag（仅条件移动处引入）实现同一语义：
 
 - **零成本原则**：无条件移动不引入任何 flag 或运行时检查；
 - **空间优化**：flag 尽量复用变量自身的 niche/状态字，而非独立存储；
@@ -197,7 +197,7 @@ fn main() {
 }
 ```
 
-**修正对照**：按引用访问，或用 `ManuallyDrop`/去掉 `Drop` 实现后解构。
+**修正对照**：按引用（Reference）访问，或用 `ManuallyDrop`/去掉 `Drop` 实现后解构。
 
 ```rust
 struct Guard { inner: Vec<u8> }

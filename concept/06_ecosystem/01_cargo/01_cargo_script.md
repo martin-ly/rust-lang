@@ -148,7 +148,7 @@ fn main() {
     - [10.2 边界测试：单文件脚本的模块（Module）限制（编译错误）](#102-边界测试单文件脚本的模块限制编译错误)
     - [10.5 边界测试：`cargo script` 的缓存与依赖版本漂移（运行时（Runtime）行为变化）](#105-边界测试cargo-script-的缓存与依赖版本漂移运行时行为变化)
     - [10.7 边界测试：cargo script 的依赖解析与版本冲突（运行时（Runtime）/编译错误）](#107-边界测试cargo-script-的依赖解析与版本冲突运行时编译错误)
-    - [10.3 边界测试：cargo script 的 shebang 与 Windows 兼容性（运行时错误）](#103-边界测试cargo-script-的-shebang-与-windows-兼容性运行时错误)
+    - [10.3 边界测试：cargo script 的 shebang 与 Windows 兼容性（运行时（Runtime）错误）](#103-边界测试cargo-script-的-shebang-与-windows-兼容性运行时错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Cargo Script（单文件 Rust 程序）相比传统 `cargo new` 项目有什么优势？（理解层）](#测验-1cargo-script单文件-rust-程序相比传统-cargo-new-项目有什么优势理解层)
     - [测验 2：在 Cargo Script 文件中，如何声明外部依赖？（理解层）](#测验-2在-cargo-script-文件中如何声明外部依赖理解层)
@@ -438,7 +438,7 @@ fn main() {
 cargo-script 的形式化定位回答“单文件如何嵌入 Cargo 的 crate 模型”，两条主线分别解释语义与边界：
 
 - **匿名 Crate 语义**: 每个 `.rs` 脚本被 cargo 提升为一个匿名 binary crate——frontmatter 是 manifest，文件本体是 `main.rs`，缓存目录充当 `target/`；这一提升是纯粹的“包装变换”，不引入任何新的语言语义——脚本内代码与普通 crate 代码行为完全一致（edition 按 frontmatter 声明，缺省为最新稳定 edition）。
-- **与模块系统的关系**: 单文件脚本不能有相邻的模块文件（没有 crate 根目录），多模块需求必须用内联 `mod foo { ... }`；`use` 外部 crate 经 frontmatter 依赖解析后与普通 crate 无异。
+- **与模块（Module）系统的关系**: 单文件脚本不能有相邻的模块文件（没有 crate 根目录），多模块需求必须用内联 `mod foo { ... }`；`use` 外部 crate 经 frontmatter 依赖解析后与普通 crate 无异。
 
 判定依据：匿名 crate 语义意味着所有适用于普通 crate 的工具（clippy、rustfmt、test）同样适用于脚本——`cargo script --test` 可运行脚本内的 `#[test]`。
 

@@ -175,7 +175,7 @@ fn main() {
 
 Rust CLI 开发的三大关键 crate 家族：
 
-1. **clap**：参数解析事实标准。两种 API 风格——derive（`#[derive(Parser)]`，类型即 CLI 契约，推荐）与 builder（运行期构造，适合动态命令）。设计要点：子命令映射为 `enum`，每个变体即一个命令，类型系统保证「未实现的子命令」不存在。
+1. **clap**：参数解析事实标准。两种 API 风格——derive（`#[derive(Parser)]`，类型即 CLI 契约，推荐）与 builder（运行期构造，适合动态命令）。设计要点：子命令映射为 `enum`，每个变体即一个命令，类型系统（Type System）保证「未实现的子命令」不存在。
 2. **交互与输出**：`indicatif`（进度条/多任务并发进度）、`console`（终端能力探测、颜色、样式）、`dialoguer`（交互式提示）。颜色输出须遵守 `NO_COLOR` 环境变量约定（`console`/`anstream` 已内建），非 TTY（管道/CI）自动降级无色。
 3. **配置管理**：`figment`/`config-rs` 分层叠加（文件 ← 环境变量 ← 命令行），`serde` 反序列化到强类型结构——配置错误在启动期 fail-fast，而非运行到一半才 panic。
 
@@ -623,7 +623,7 @@ fn main() {
 
 ## 十、边界测试：CLI 开发的编译错误
 
-CLI 工具的错误处理哲学与库不同：用户输入不可信、运行环境不可控（管道、信号、终端能力）。本章覆盖六个 CLI 特有的边界：
+CLI 工具的错误处理（Error Handling）哲学与库不同：用户输入不可信、运行环境不可控（管道、信号、终端能力）。本章覆盖六个 CLI 特有的边界：
 
 - **clap 派生宏的字段类型约束**：字段类型必须可解析（`FromStr`/`ValueEnum`），`Vec<T>` 等元素类型不满足约束时编译期拒绝——这是 Rust 把参数校验提前到编译期的体现，对照 Python argparse 的运行时异常。
 - **信号处理与异步代码**：信号处理器中只能做 async-signal-safe 操作（设置 `AtomicBool`），在 tokio 中应改用 `tokio::signal` 将信号转为 future。

@@ -9,7 +9,7 @@
 > **状态**: 🧪 Nightly 实验性（library feature `unsafe_pinned`；tracking issue rust-lang/rust#125735）
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **跟踪版本**: stable 1.97.0 报 E0658；nightly 1.99.0 可用
-> **预计稳定**: 待定（阻塞于 opsem 决议：issue #137750 — `UnsafePinned` 是否同时承担 `UnsafeCell` 式共享引用别名豁免）
+> **预计稳定**: 待定（阻塞于 opsem 决议：issue #137750 — `UnsafePinned` 是否同时承担 `UnsafeCell` 式共享引用（Reference）别名豁免）
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]
@@ -46,7 +46,7 @@
 
 ## 一、动机：Unpin 不能承担别名豁免
 
-背景问题（RFC 3467 §Motivation）：Rust 的 `&mut T` 向 LLVM 发出 `noalias` 属性，承诺该引用独占所指向内存。但**自引用生成器/异步 Future** 内部持有指向自身字段的指针——字段被 `Pin<&mut Self>` 钉住后，内部指针与 `&mut` 共存，`noalias` 承诺即被违反。
+背景问题（RFC 3467 §Motivation）：Rust 的 `&mut T` 向 LLVM 发出 `noalias` 属性，承诺该引用独占所指向内存。但**自引用生成器/异步（Async） Future** 内部持有指向自身字段的指针——字段被 `Pin<&mut Self>` 钉住后，内部指针与 `&mut` 共存，`noalias` 承诺即被违反。
 
 历史上编译器用一个**未文档化的 hack**：对含 `impl !Unpin` 的类型不发射 `noalias`。这把"钉住语义"（`Unpin` 是移动语义标记）与"别名语义"（noalias 是内存模型属性）错误耦合，且对用户代码不可见、不可审计。
 

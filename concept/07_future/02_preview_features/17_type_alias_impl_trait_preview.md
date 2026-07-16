@@ -43,11 +43,11 @@ type MyIter = impl Iterator<Item = i32>;
 
 TAIT（`type Alias = impl Trait;`）为不透明的 `impl Trait` 提供**可命名**入口，三条核心规则：
 
-1. **模块级 TAIT**：`type Iter = impl Iterator<Item = u32>;` 在模块内定义，模块外只能看到约束（`Iterator`），看不到具体类型；
+1. **模块（Module）级 TAIT**：`type Iter = impl Iterator<Item = u32>;` 在模块内定义，模块外只能看到约束（`Iterator`），看不到具体类型；
 2. **关联类型 TAIT**：trait 内 `type Assoc = impl Trait;`（RPITIT 的关联版本），让实现者为关联类型提供不透明值；
-3. **核心限制**：定义点必须有唯一具体类型可供编译器推断（hidden type 唯一性）；TAIT 不能递归引用自身；跨 crate 使用时 hidden type 的可见性仅限于定义模块。
+3. **核心限制**：定义点必须有唯一具体类型可供编译器推断（hidden type 唯一性）；TAIT 不能递归引用（Reference）自身；跨 crate 使用时 hidden type 的可见性仅限于定义模块。
 
-判定原则：当函数签名反复书写冗长的 `impl Trait + A + B`，或需要在结构体字段中存放不透明类型时引入 TAIT；若只是单次返回，直接用 RPIT 即可。nightly 需 `#![feature(type_alias_impl_trait)]`。
+判定原则：当函数签名反复书写冗长的 `impl Trait + A + B`，或需要在结构体（Struct）字段中存放不透明类型时引入 TAIT；若只是单次返回，直接用 RPIT 即可。nightly 需 `#![feature(type_alias_impl_trait)]`。
 
 ### 2.1 模块级 TAIT
 

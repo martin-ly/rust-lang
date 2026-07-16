@@ -193,7 +193,7 @@ fn parse_frame_good(frame: &[u8]) -> Result<u32, &'static str> {
 }
 ```
 
-rustc 1.97.0 实测（`catch_unwind` 复现）：`parse_frame_bad(&[0x01, 0x02])` panic；`parse_frame_good` 返回 `Err("truncated frame")`。生产协议栈应将长度校验、最大帧长上限（防内存放大攻击）放在状态机入口，与「6. 错误处理与重试」节配合。
+rustc 1.97.0 实测（`catch_unwind` 复现）：`parse_frame_bad(&[0x01, 0x02])` panic；`parse_frame_good` 返回 `Err("truncated frame")`。生产协议栈应将长度校验、最大帧长上限（防内存放大攻击）放在状态机入口，与「6. 错误处理（Error Handling）与重试」节配合。
 
 ## 相关概念
 
@@ -212,7 +212,7 @@ rustc 1.97.0 实测（`catch_unwind` 复现）：`parse_frame_bad(&[0x01, 0x02])
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
-- **P0 官方**: [std::net — Rust 标准库网络模块（官方 API 文档）](https://doc.rust-lang.org/std/net/index.html)
+- **P0 官方**: [std::net — Rust 标准库网络模块（Module）（官方 API 文档）](https://doc.rust-lang.org/std/net/index.html)
 
 ## 🧭 思维导图（Mindmap）
 

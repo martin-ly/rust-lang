@@ -31,12 +31,12 @@
 | 特性 | 影响面 | 受益场景 | 权威源 |
 |:---|:---|:---|:---|
 | 29 个 RISC-V target feature 稳定（含 RVA22U64 / RVA23U64 profile 大部） | 平台 / 编译器 | RISC-V 向量与扩展指令的可移植调用 | [Release Blog](https://blog.rust-lang.org/2026/03/05/Rust-1.94.0/) · [10 target tier platform support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) · [10 target tier platform support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) |
-| `<[T]>::array_windows` | 标准库 / 迭代器 | 定长滑动窗口（信号处理、协议解析） | [releases.rs](https://releases.rs/docs/1.94.0/) · [迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) |
+| `<[T]>::array_windows` | 标准库 / 迭代器（Iterator） | 定长滑动窗口（信号处理、协议解析） | [releases.rs](https://releases.rs/docs/1.94.0/) · [迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) |
 | `LazyCell` / `LazyLock::get` / `get_mut` / `force_mut` | 标准库 | 懒初始化值的可控读写与强制求值 | [releases.rs](https://releases.rs/docs/1.94.0/) · [02 interior mutability](../../02_intermediate/02_memory_management/02_interior_mutability.md) · [02 interior mutability](../../02_intermediate/02_memory_management/02_interior_mutability.md) |
 | `f32` / `f64::mul_add` | 标准库 / 数值 | 融合乘加（FMA），数值精度与性能 | [releases.rs](https://releases.rs/docs/1.94.0/) · [03 numerics](../../01_foundation/02_type_system/03_numerics.md) · [03 numerics](../../01_foundation/02_type_system/03_numerics.md) |
 | `EULER_GAMMA` / `GOLDEN_RATIO` 浮点常量 | 标准库 / 数值 | 数学常量免外部 crate | [releases.rs](https://releases.rs/docs/1.94.0/) · [03 numerics](../../01_foundation/02_type_system/03_numerics.md) · [03 numerics](../../01_foundation/02_type_system/03_numerics.md) |
 | Cargo `include` 配置键稳定 + TOML v1.1 解析 | Cargo | 配置文件拆分复用；清单语法升级 | [releases.rs](https://releases.rs/docs/1.94.0/) · [Cargo 配置](../../06_ecosystem/01_cargo/18_cargo_configuration.md) · [18 cargo configuration](../../06_ecosystem/01_cargo/18_cargo_configuration.md) |
-| std 宏改为经 prelude 导入（兼容性变更） | 兼容 / 宏 | 宏解析路径统一；glob 导入同名宏需调整 | [releases.rs](https://releases.rs/docs/1.94.0/) · [10 preludes](../../01_foundation/07_modules_and_items/10_preludes.md) · [01 attributes and macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) · [10 preludes](../../01_foundation/07_modules_and_items/10_preludes.md) · [01 attributes and macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) |
+| std 宏（Macro）改为经 prelude 导入（兼容性变更） | 兼容 / 宏 | 宏解析路径统一；glob 导入同名宏需调整 | [releases.rs](https://releases.rs/docs/1.94.0/) · [10 preludes](../../01_foundation/07_modules_and_items/10_preludes.md) · [01 attributes and macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) · [10 preludes](../../01_foundation/07_modules_and_items/10_preludes.md) · [01 attributes and macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) |
 
 ---
 
@@ -84,7 +84,7 @@ rust-version = "1.94"
 代码示例按“能跑通的最小用法”与“组合进真实代码的形态”两层给出：
 
 - **基础用法**: 每个新稳定 API 的最小调用片段——重点是展示签名与基本约束（如新 const fn 可在常量上下文中调用：`const X: usize = new_api(3);`），目标是让读者 30 秒内验证特性可用。
-- **高级模式**: 新特性与既有设施的叠加——const 化 API 进泛型约束、新 trait 方法与迭代器链组合、诊断改进对应的代码改写前后对比；这一层回答“值不值得为此升级 MSRV”。
+- **高级模式**: 新特性与既有设施的叠加——const 化 API 进泛型（Generics）约束、新 trait 方法与迭代器链组合、诊断改进对应的代码改写前后对比；这一层回答“值不值得为此升级 MSRV”。
 
 判定依据：示例中的每段代码都应能在 1.94 稳定工具链上直接编译运行；依赖 nightly 的组合会在示例旁显式标注。
 
@@ -180,9 +180,9 @@ pub fn advanced_example<T>(value: T) -> T {
 
 ## 版本事实对齐与权威来源（2026-07-12 回填）
 
-> **背景**：本页迁移自 crate 文档，上文“新增特性”表为占位级描述（“异步网络/生成器/性能优化”并非可核实的 1.94 特性条目）。版本特性的单一事实源是官方发布说明；本页作为跟踪页，应引用而非复述。Edition 2024（1.85.0 稳定）语义是 `rust-version = "1.94"` 项目的真实基线，以下给出可核实的 Edition 2024 语义示例。
+> **背景**：本页迁移自 crate 文档，上文“新增特性”表为占位级描述（“异步（Async）网络/生成器/性能优化”并非可核实的 1.94 特性条目）。版本特性的单一事实源是官方发布说明；本页作为跟踪页，应引用（Reference）而非复述。Edition 2024（1.85.0 稳定）语义是 `rust-version = "1.94"` 项目的真实基线，以下给出可核实的 Edition 2024 语义示例。
 
-**实测示例（`use<>` 精确生命周期捕获，1.82 稳定 / Edition 2024 默认规则；rustc 1.97.0 `--edition 2024` 编译运行通过）**：
+**实测示例（`use<>` 精确生命周期（Lifetimes）捕获，1.82 稳定 / Edition 2024 默认规则；rustc 1.97.0 `--edition 2024` 编译运行通过）**：
 
 ```rust
 // Edition 2024 基线语义：impl Trait 返回类型的精确捕获

@@ -75,12 +75,12 @@ Rust 内存安全验证工具谱系:
 
 BorrowSanitizer 的技术机制建立在两个 LLVM 基础设施之上：
 
-1. **Retag Intrinsics**：rustc 在借用创建/传递点插入 `llvm.ptr.retag` 类标记（Tree Borrows 别名模型的指令化），BSan 据此在影子内存中维护「哪个指针对哪些内存有访问权」的标签树——每次内存访问校验标签链，违反即报告。这与 ASan 的「红区检测越界」正交：BSan 检测的是**别名规则违反**（如 `&mut` 存续期间经其他指针写入），即使内存本身有效。
-2. **Shadow Stack**：追踪栈帧内引用的活跃区间，弥补纯影子内存对栈对象生命周期判定的盲区。
+1. **Retag Intrinsics**：rustc 在借用（Borrowing）创建/传递点插入 `llvm.ptr.retag` 类标记（Tree Borrows 别名模型的指令化），BSan 据此在影子内存中维护「哪个指针对哪些内存有访问权」的标签树——每次内存访问校验标签链，违反即报告。这与 ASan 的「红区检测越界」正交：BSan 检测的是**别名规则违反**（如 `&mut` 存续期间经其他指针写入），即使内存本身有效。
+2. **Shadow Stack**：追踪栈帧内引用（Reference）的活跃区间，弥补纯影子内存对栈对象生命周期（Lifetimes）判定的盲区。
 
 与 Miri 的互补：Miri 是**解释器**（完整 UB 检测，50–100× 减速，无法跑真实依赖如 FFI）；BSan 是**编译插桩**（预计 2–5× 减速，可跑原生代码与部分 FFI）。覆盖关系：BSan ⊂ Miri，但 BSan 能进的场景（大型测试套件、FFI 边界）Miri 进不去。
 
-判定依据：安全审计流水线应是 Miri（小模块全量）+ BSan（全仓冒烟）双层，而非二选一。
+判定依据：安全审计流水线应是 Miri（小模块（Module）全量）+ BSan（全仓冒烟）双层，而非二选一。
 
 ### 2.1 核心设计哲学
 
@@ -136,7 +136,7 @@ BorrowSanitizer 处于**早期实验**阶段，使用前需确认三点环境事
 
 1. **工具链**：仅 nightly 支持，且依赖 LLVM 的 BorrowSanitizer 插桩；具体编译标志随 LLVM/rustc 版本演进，以本机 `rustc -Z help` 与 rustc-dev-guide 为准；
 2. **启用方式**：通过 `RUSTFLAGS` 注入实验性 sanitizer 标志重新编译全部依赖，运行期由插桩代码报告借用栈违规（retag 失效、非法的别名读写）；
-3. **产物定位**：目标是含 `unsafe` 代码 crate 的 CI 增强层，而非发布产物——插桩带来显著运行时开销。
+3. **产物定位**：目标是含 `unsafe` 代码 crate 的 CI 增强层，而非发布产物——插桩带来显著运行时（Runtime）开销。
 
 与 Miri 的分工：Miri 是**解释器**，覆盖全量内存模型但慢；BorrowSanitizer 是**原生插桩**，快但只覆盖实际执行路径，两者互补。若本机 `-Z help` 未列出对应选项，说明该 nightly 尚未包含支持，应回退 Miri 验证。
 
@@ -415,6 +415,6 @@ fn main() {
 
 实测（rustc 1.97.0, edition 2024）：`error[E0499]: cannot borrow`x`as mutable more than once at a time`。
 
-**陷阱本质**：BSan 面向 `unsafe` + 原始指针场景——那里编译器无法静态证明别名唯一性。若误以为「安全代码也需要 BSan 兜底」，说明误解了分工：安全 Rust 的别名规则由借用检查器静态强制，BSan/Miri 只补 `unsafe` 盲区。
+**陷阱本质**：BSan 面向 `unsafe` + 原始指针（Raw Pointer）场景——那里编译器无法静态证明别名唯一性。若误以为「安全代码也需要 BSan 兜底」，说明误解了分工：安全 Rust 的别名规则由借用检查器静态强制，BSan/Miri 只补 `unsafe` 盲区。
 
 **修正**：安全代码遵守借用规则即可；`unsafe` 块中的原始指针别名交给 Miri（开发期）与 BSan（生产期）动态验证。

@@ -78,7 +78,7 @@ Prelude 是自动导入的名字集合：
 - `std::prelude::rust_2024`
 - 包含 `Option`, `Result`, `Vec`, `String`, `Drop`, `Copy` 等核心 trait 和类型。
 
-| Edition | Prelude 模块 |
+| Edition | Prelude 模块（Module） |
 |:---|:---|
 | 2015 | `std::prelude::v1` |
 | 2018 | `std::prelude::v1` |
@@ -171,7 +171,7 @@ fn dup() {}
 fn main() { dup(); }
 ```
 
-**修正对照**：重命名，或改用泛型/trait 分发表达「同名多态」。
+**修正对照**：重命名，或改用泛型（Generics）/trait 分发表达「同名多态」。
 
 ```rust
 fn dup() {}
@@ -179,7 +179,7 @@ fn dup2() {}
 fn main() { dup(); dup2(); }
 ```
 
-**陷阱要点**：值命名空间内函数不可重载——Rust 没有 C++ 式 overload；「同名不同签名」必须用 trait 方法、泛型或不同名表达。宏展开产生的重复定义同样触发 `E0428`。
+**陷阱要点**：值命名空间内函数不可重载——Rust 没有 C++ 式 overload；「同名不同签名」必须用 trait 方法、泛型或不同名表达。宏（Macro）展开产生的重复定义同样触发 `E0428`。
 
 ---
 

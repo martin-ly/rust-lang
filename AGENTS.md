@@ -284,6 +284,11 @@ bash scripts/git_hooks/install.sh
 4. **不要** 在 `crates/*/docs/` 中复制通用概念解释；应链接到 `concept/`。
 5. **新增重复内容必须被 CI 或人工 review 拦截**。
 6. **禁止未经验证的“完成”声明**：任何“已完成/全部通过/100%”类结论必须引用可机器复核的证据（质量门报告、脚本输出、CI 记录），且必须覆盖全部 23 个阻断质量门与 5 个语义观察门（若观察门状态变化，亦须一并核对）；仅部分门通过不得宣称“质量门全部通过”。报告与观察门状态矛盾时，以观察门最新报告为准并勘误原报告。
+7. **Stub/redirect 文件必须保持纯净**：`knowledge/` / `docs/` / `content/` / `crates/*/docs/` 中声明为 stub/redirect 的文件正文不得超过 25 行且不超过 2000 字节；超出部分必须迁移到 `concept/` 权威页。违者由 `scripts/check_stub_purity.py` 捕获。
+8. **KG 关系必须使用语义谓词**：核心实体周边禁止使用通用 `ex:RelationAnnotation`；应使用 `dependsOn` / `entails` / `mutexWith` / `refines` / `equivalentTo` / `counterExample` 等具体谓词。违者由 `scripts/check_kg_relation_precision.py` 捕获。
+9. **交叉/边界语义域必须有 `concept/` 权威页**：关键交叉语义域（let chains、unsafe extern、async+unsafe、FFI+async、Send/Sync boundaries、Pin + lifetimes 等）必须在 `concept/` 中存在非 stub 权威页。缺口由 `scripts/check_cross_domain_coverage.py` 捕获。
+10. **版本特性必须映射回 `concept/` 权威页**：Rust 1.90–1.97 稳定特性在版本跟踪页与 `concept/` 权威页之间必须存在双向链接；孤立发布说明不被接受。违者由 `scripts/check_version_semantic_injection.py` 捕获。
+11. **决策树必须保持 rustc error code 映射覆盖**：决策树 YAML 中 rustc 错误码映射必须格式正确、节点无歧义，且 Top 30 常见错误码覆盖率 ≥80%。未达标由 `scripts/check_decision_trees.py` 捕获。
 
 ---
 
@@ -297,10 +302,14 @@ bash scripts/git_hooks/install.sh
 | 版本页中心化管理 | Rust 新版本发布时 | `concept/07_future/rust_1_XX_*.md` |
 | 版本新鲜度巡检 | 每周（手动，不挂 CI 门：网络依赖检查不适合阻断） | `scripts/check_authority_freshness.py` |
 | 夜间质量报告 | 每天 | `.github/workflows/nightly_quality_report.yml` |
+| Stub 纯净度审计 | 每月 | `python scripts/check_stub_purity.py --strict` |
+| 交叉/边界语义覆盖审计 | 每月 | `python scripts/check_cross_domain_coverage.py --strict` |
+| 版本语义注入双向链接审计 | Rust 新版本发布时 / 每月 | `python scripts/check_version_semantic_injection.py --strict` |
 | KG 谓词实例化 | 每次 `apply_renumber.py` 重新生成 KG 后 | `python scripts/apply_kg_semantic_predicates.py --apply` |
-| 决策树 rustc error code 映射维护 | 新增/调整决策树或 rustc 错误码变更时 | `python scripts/check_decision_trees.py --strict` / `python scripts/rustc_error_to_decision_tree.py E0502` |
+| 决策树 rustc error code 映射维护 | 新增/调整决策树或 rustc 错误码变更时 / 每月 | `python scripts/check_decision_trees.py --strict` / `python scripts/rustc_error_to_decision_tree.py E0502` |
+| 月度语义深度评审 | 每月 | `.kimi/templates/monthly_semantic_review.md` |
 | pre-commit 检查 | 每次本地提交 | `scripts/git_hooks/pre-commit` |
 
 ---
 
-**最后更新**：2026-07-15（已对齐 Rust 1.97.0 stable；23 门全阻断 + 5 个语义观察门；决策树 rustc error code 映射已接入 `check_decision_trees.py` 与 `rustc_error_to_decision_tree.py`；Rust 1.90–1.97 版本语义注入双向链接覆盖率 100%）
+**最后更新**：2026-07-15（已对齐 Rust 1.97.0 stable；23 门全阻断 + 5 个语义观察门；语义密度红线已写入 §6；新增 PR 模板 `.github/PULL_REQUEST_TEMPLATE.md` 与月度语义评审模板 `.kimi/templates/monthly_semantic_review.md`）

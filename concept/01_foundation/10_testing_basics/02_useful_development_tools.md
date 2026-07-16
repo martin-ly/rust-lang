@@ -284,7 +284,7 @@ flowchart TD
 
 - **上位（is-a）**：Rust 开发者工具生态的总览页。
 - **下位（实例）**：rustfmt、clippy、rust-analyzer、rustdoc、cargo 子命令与社区工具。
-- **组合**：与 [Crates 与源文件](../07_modules_and_items/11_crates_and_source_files.md)（cargo 工作区）、[`assert_matches!`](../../02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md)（测试断言宏）组合。
+- **组合**：与 [Crates 与源文件](../07_modules_and_items/11_crates_and_source_files.md)（cargo 工作区）、[`assert_matches!`](../../02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md)（测试断言宏（Macro））组合。
 - **依赖**：依赖 cargo 的构建与包管理能力。
 
 ---

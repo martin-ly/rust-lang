@@ -230,7 +230,7 @@ flowchart TD
 | 微服务 RPC | gRPC | 高性能、类型安全、双向流 |
 | IoT 设备通信 | MQTT | 轻量级、QoS 支持、低带宽 |
 | 实时游戏 | QUIC | 低延迟、多路复用、0-RTT |
-| 异步任务队列 | AMQP | 可靠消息传递、工作队列 |
+| 异步（Async）任务队列 | AMQP | 可靠消息传递、工作队列 |
 | API 查询 | GraphQL | 灵活查询、减少过度获取 |
 | 实时推送 | SSE / WebSocket | 服务器推送、实时更新 |
 
@@ -255,7 +255,7 @@ flowchart TD
 
 ## ⚠️ 反例与陷阱
 
-**陷阱：帧解析时把切片直接传给 `from_be_bytes`**。gRPC/QUIC/AMQP 等二进制协议都要从字节流解码定宽整数，但 `u32::from_be_bytes` 要求 `[u8; 4]` 数组，切片类型不匹配：
+**陷阱：帧解析时把切片（Slice）直接传给 `from_be_bytes`**。gRPC/QUIC/AMQP 等二进制协议都要从字节流解码定宽整数，但 `u32::from_be_bytes` 要求 `[u8; 4]` 数组，切片类型不匹配：
 
 ```rust,compile_fail
 fn parse_len(frame: &[u8]) -> u32 {

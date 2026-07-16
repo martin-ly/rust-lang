@@ -472,7 +472,7 @@ graph TD
 
 ## 八、相关概念链接（L0-L7 映射）
 
-系统设计原则在 L0-L7 各层有不同投影：Capability 安全在 L1 体现为所有权/借用，L3 体现为 Pin/Unsafe 边界，L4 形式化为分离逻辑，L6 落地为 scopeguard 等生态模式；Session Types 在 L2 是 trait 与生命周期组合，L4 是线性逻辑，L6 是 crossbeam 的 channel 协议。纵向映射帮助读者从任一熟悉层级切入，沿列向上形式化或向下找生态实现。
+系统设计原则在 L0-L7 各层有不同投影：Capability 安全在 L1 体现为所有权/借用，L3 体现为 Pin/Unsafe 边界，L4 形式化为分离逻辑，L6 落地为 scopeguard 等生态模式；Session Types 在 L2 是 trait 与生命周期（Lifetimes）组合，L4 是线性逻辑，L6 是 crossbeam 的 channel 协议。纵向映射帮助读者从任一熟悉层级切入，沿列向上形式化或向下找生态实现。
 
 ### L0-L7 纵向映射
 >

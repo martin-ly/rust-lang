@@ -151,9 +151,9 @@ stateDiagram-v2
 
 所有权的形式化（formal ownership）把 Rust 的直觉规则转为可推理的逻辑系统，本节锚定三个权威形式化：
 
-1. **λRust 核心演算（RustBelt, Jung et al. POPL 2018）**：所有权作为「线程独占的资源」建模——`own(τ)` 谓词表达「拥有类型 τ 的值」，move = 资源转移，drop = 资源消费；
+1. **λRust 核心演算（RustBelt, Jung et al. POPL 2018）**：所有权（Ownership）作为「线程独占的资源」建模——`own(τ)` 谓词表达「拥有类型 τ 的值」，move = 资源转移，drop = 资源消费；
 2. **线性逻辑对应（Girard 1987 → Wadler 1990）**：所有权 ≈ 线性假设（每假设恰用一次）——「不能复制」（无 contraction 规则）对应 move 语义，「必须消费」对应 drop 义务；
-3. **Oxide/Aeneas 的现代形式化**：把借用检查建模为「区域（region）上的权限推导」——可变借用 = 唯一写权限，共享借用 = 只读权限的分发。
+3. **Oxide/Aeneas 的现代形式化**：把借用检查建模为「区域（region）上的权限推导」——可变借用（Mutable Borrow） = 唯一写权限，共享借用 = 只读权限的分发。
 
 三个形式化的分工：RustBelt 证健全性、线性逻辑给直觉、Oxide/Aeneas 支撑机械验证——本节给出三者的概念映射表。
 
@@ -226,7 +226,7 @@ COR 的核心类型判断：
 
 ## 三、形式化理论根基
 >
-> **来源: Felleisen & Hieb 1992, *The Revised Report on the Syntactic Theories of Sequential Control and State*; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/), [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** 操作语义规则描述状态转换，λRust 在此基础上扩展了所有权与借用。
+> **来源: Felleisen & Hieb 1992, *The Revised Report on the Syntactic Theories of Sequential Control and State*; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/), [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** 操作语义规则描述状态转换，λRust 在此基础上扩展了所有权与借用（Borrowing）。
 
 ```text
 赋值（Move）/ 传参:
@@ -344,7 +344,7 @@ graph TD
 | **C1**: 仿射弱化 | weakening ⟹ move 后原变量失效 | 仿射类型允许丢弃（weakening） | `move` 后原变量从 `Γ` 中移除或标记为 `⊥` | T1（所有权转移）、T2（线性类型） | 在 `Copy` 类型上误用 move 语义（实际为复制） | [ownership] `move` 与 `Copy` 的区别 |
 | **C2**: 内部可变性 | 运行时（Runtime）权限检查 | `UnsafeCell` 打破静态 `&T` 只读承诺 | 通过运行时借用计数（`RefCell`）或原子操作（Atomic Operations）（`AtomicT`）确保安全 | T5（别名模型）、T6（内存模型） | 运行时权限检查失败：`borrow_mut` 时已有活跃借用，触发 `panic` | [borrowing + unsafe] `RefCell<T>`、`Mutex<T>` |
 | **T4**: 分离逻辑断言 | 堆内存不相交 | `own(x, T) * own(y, U)` | `x` 与 `y` 的堆区域不相交，支持局部推理 | T2（线性类型）、T1（所有权转移） | `unsafe` 代码制造别名导致断言重叠，破坏 `*` 的分离性 | [ownership] 两个 `Box<T>` 永不相交 |
-| **T5**: 别名模型安全 | Stacked/Tree Borrows ⟹ 引用使用合法 | 别名模型公理（SB/TB） | 引用解引用行为符合内存模型假设 | T3（区域约束）、C2（内部可变性） | 模型假设被突破（如 `unsafe` 构造非法别名），Miri 报错 | [unsafe / raw pointer] `miri` 检测 |
+| **T5**: 别名模型安全 | Stacked/Tree Borrows ⟹ 引用（Reference）使用合法 | 别名模型公理（SB/TB） | 引用解引用行为符合内存模型假设 | T3（区域约束）、C2（内部可变性） | 模型假设被突破（如 `unsafe` 构造非法别名），Miri 报错 | [unsafe / raw pointer] `miri` 检测 |
 | **T6**: 内存模型一致性（Coherence） | TSO/Release-Acquire ⟹ 并发访问有序 | C11 内存模型 + Atomic 操作正确标记 | 并发读写无数据竞争，满足 `Send`/`Sync` trait 语义 | C2（内部可变性）、T4（分离逻辑） | 错误使用 `Ordering::Relaxed` 或绕过 `UnsafeCell` 的原子保证 | [concurrency] `Arc<T>`、`Mutex<T>` |
 
 > **一致性（Coherence）检查**: **L1（权限分离） ⟹ L2（分数权限） ⟹ T1（100% 移交） ⟹ C1（弱化失效）** 构成"从权限定义到转移再到失效"的静态链；**T3（区域） ⟹ T5（别名模型） ⟹ T6（内存模型）** 构成"从时间约束到空间约束到并发有序"的动态链。两条链在 **C2（内部可变性）** 处交汇，体现静态规则与运行时（Runtime）检查的互补。
@@ -354,7 +354,7 @@ graph TD
 
 反命题决策树把对所有权形式化的三个常见过度声明逐一证伪：
 
-- **决策树 1："形式化所有权证明所有程序安全"**——证伪：所有权证明的是内存安全与数据竞争自由，不覆盖死锁、内存泄漏（`Rc` 循环引用）、逻辑正确性。判定问题"该性质是否归约为别名控制"，否则超出所有权形式化的范围。
+- **决策树 1："形式化所有权证明所有程序安全"**——证伪：所有权证明的是内存安全（Memory Safety）与数据竞争自由，不覆盖死锁、内存泄漏（`Rc` 循环引用）、逻辑正确性。判定问题"该性质是否归约为别名控制"，否则超出所有权形式化的范围。
 - **决策树 2："线性类型和 Rust 所有权完全等价"**——证伪：Rust 是**仿射**（可用至多一次）而非线性（必须恰好一次）——`drop` 允许不使用；且 Rust 有 `Copy` 类型豁免与 `&T` 共享引用，这两点超出纯线性类型。等价只在"非 Copy 类型的移动语义"这一子系统上成立。
 - **决策树 3："权限系统可自动化验证所有 unsafe 代码"**——证伪：权限系统（如 RustBelt 的 lifetime logic）的验证需要人工提供不变式；全自动验证受 Rice 定理限制只能处理有界实例（Kani 的 bounded model checking）。判定依据：unsafe 代码的验证成本与其中不变式的复杂度成正比，不存在零成本自动方案。证所有属性"的顺序逐层展开。
 
@@ -550,7 +550,7 @@ Oxide 视角:
 
 Polonius 是借用检查的下一代形式化，本节给出其核心思想与现状：
 
-- **动机**：NLL 的「生命周期即代码区间」模型拒绝了一些安全程序（条件分支中借用已死但区间重叠的经典反例）；Polonius 改用「loan（贷款）」模型——借用是值的**使用点**的集合而非连续区间；
+- **动机**：NLL 的「生命周期（Lifetimes）即代码区间」模型拒绝了一些安全程序（条件分支中借用已死但区间重叠的经典反例）；Polonius 改用「loan（贷款）」模型——借用是值的**使用点**的集合而非连续区间；
 - **形式化**：Datalog 规则系统——`borrow_live_at(L, P)`（贷款 L 在程序点 P 存活）由数据流规则推导，`var_live_at`/`access_at` 等谓词组合出冲突判定；Datalog 的有限模型性质保证可判定性；
 - **现状**：rustc nightly 的 `-Zpolonius` 实验实现，完整稳定化受性能与错误信息质量制约——NLL 的错误信息（指出具体冲突借用）在 loan 模型下需重新设计；
 - **实践意义**：理解 Polonius 有助于预判「哪些当前被拒代码未来可能通过」——但代码应按当前规则书写，不依赖未来放宽。
@@ -779,7 +779,7 @@ async 状态机安全定理:
 
 ### 9.5b Kani 验证：Pin 地址恒定规格
 
-> **[Kani Documentation: Proof harnesses](https://model-checking.github.io/kani/proof-harnesses.html); [RefinedRust PLDI 2024](https://arxiv.org/abs/2404.03613)** 以下代码展示如何用 Kani 将 §9.5 的 LTL 公理转化为**可机械验证的规格**。虽然 Pin 的不动性主要由类型系统保证（编译期），Kani 可用于验证 unsafe 代码中对 Pin 合约的遵守。
+> **[Kani Documentation](https://model-checking.github.io/kani/); [RefinedRust PLDI 2024](https://arxiv.org/abs/2404.03613)** 以下代码展示如何用 Kani 将 §9.5 的 LTL 公理转化为**可机械验证的规格**。虽然 Pin 的不动性主要由类型系统（Type System）保证（编译期），Kani 可用于验证 unsafe 代码中对 Pin 合约的遵守。
 
 ```rust
 // Kani 验证规格: Pin 地址恒定定理
@@ -1234,7 +1234,7 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 
 - **线性类型与 `Drop` 的冲突（编译错误）**：若 Rust 真是线性类型，实现 `Drop` 的类型不能被遗忘——但 `mem::forget` 合法存在，证明 Rust 选择了仿射。测试：对 `Drop` 类型调用 `mem::forget` 可编译，其析构函数不运行，这恰是 `ManuallyDrop` 与 `MaybeUninit` 存在的理由。
 - **分离逻辑与共享可变状态的不可兼得（编译错误）**：分离逻辑的 frame rule 要求资源分离；`&mut T` 的独占性即分离断言的 Rust 化身——测试：试图从同一 `&mut` 派生两个并发活跃的 `&mut`（通过重借用）在活跃区间重叠时被 NLL 拒绝。
-- **`Cell` 的内部可变性边界**：`Cell<T>` 通过运行时不可变性（不可取引用）换取共享可变——测试：`Cell::get` 要求 `T: Copy`，对非 Copy 类型必须用 `replace`/`take`，编译器强制了"无共享引用指向可变内部"的不变式。试：子类型化与生命周期协变（编译错误）、边界测试：悬垂指针的形式化禁止（编译错误）等7个方面的顺序逐层展开。
+- **`Cell` 的内部可变性边界**：`Cell<T>` 通过运行时（Runtime）不可变性（不可取引用）换取共享可变——测试：`Cell::get` 要求 `T: Copy`，对非 Copy 类型必须用 `replace`/`take`，编译器强制了"无共享引用指向可变内部"的不变式。试：子类型化与生命周期协变（编译错误）、边界测试：悬垂指针的形式化禁止（编译错误）等7个方面的顺序逐层展开。
 
 ### 10.1 边界测试：线性类型与 `Drop` 的冲突（编译错误）
 

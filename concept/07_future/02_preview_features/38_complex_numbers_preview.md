@@ -72,7 +72,7 @@ impl<T> Complex<T> {
 
 设计约束：
 
-- **泛型标量**：`Complex<T>` 对标量类型泛型，算术 impl 约束在 `T: Float` 能力集上（具体 trait 边界依赖 [RFC 3514 浮点语义](../../01_foundation/02_type_system/03_numerics.md) 的既有 trait）。
+- **泛型（Generics）标量**：`Complex<T>` 对标量类型泛型，算术 impl 约束在 `T: Float` 能力集上（具体 trait 边界依赖 [RFC 3514 浮点语义](../../01_foundation/02_type_system/03_numerics.md) 的既有 trait）。
 - **`const fn` 优先**：构造与访问器均为 `const fn`，服务编译期常量表（如 FFT 旋转因子表）。
 - **布局透明**：`#[repr(C)]` 等价的双字段布局，与 C99 `double _Complex`、C++ `std::complex<double>` 的数组式 ABI 兼容（FFI 友好）。
 

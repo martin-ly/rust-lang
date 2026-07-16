@@ -138,7 +138,7 @@ Created → Running → Waiting → Terminated
 - **进程级资源限制（4.1）**：`setrlimit` 体系（`RLIMIT_AS` 地址空间、`RLIMIT_CPU` CPU 秒、`RLIMIT_NOFILE` 文件描述符、`RLIMIT_NPROC` 进程数）——软限制触发信号/错误（可调整），硬限制是天花板（仅 root 可提升）；Rust 经 `libc::setrlimit` 或 `rlimit` crate 设置，典型位置是 `Command::pre_exec`（子进程继承限制）；
 - **配额管理系统（4.2）**：cgroups（Linux）提供进程**组**级配额——cpu 份额/上限、memory.max（超限 OOM-kill 而非报错）、io 权重、pids.max（防 fork 炸弹）；v2 统一层级是当前标准，`dbus` 或直接写 cgroupfs 均可管理。
 
-工程要点：rlimit 是「防失控」的最后防线（超出即失败），cgroups 是「可观测的治理」（超出前可监控预警）；容器环境优先用容器运行时的资源声明（K8s limits/requests 底层即 cgroups），进程内设置应只作为补充。
+工程要点：rlimit 是「防失控」的最后防线（超出即失败），cgroups 是「可观测的治理」（超出前可监控预警）；容器环境优先用容器运行时（Runtime）的资源声明（K8s limits/requests 底层即 cgroups），进程内设置应只作为补充。
 
 ### 4.1 进程级资源限制
 
@@ -169,7 +169,7 @@ Windows 平台需使用对应的 Windows API 进行资源限制配置。
 ## 相关概念
 
 - [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
-- [异步进程管理](03_async_process_management.md)
+- [异步（Async）进程管理](03_async_process_management.md)
 - [跨平台进程管理](04_cross_platform_process_management.md)
 - [IPC 机制](05_ipc_mechanisms.md)
 

@@ -36,9 +36,9 @@
 
 - **形式化验证（Formal Verification）**：总称——用数学方法证明系统满足规格。与测试的本质区别：测试采样输入空间，验证穷举（通过抽象或演绎）输入空间；Dijkstra 名言「测试只能证明有 bug，不能证明无 bug」即此分野。
 - **模型检测（Model Checking）**：**自动化**穷举有限状态空间（或抽象后的状态空间），验证时序性质（如「不会死锁」）；瓶颈是状态爆炸，Rust 侧代表是 Kani（CBMC 路径，位级精确但限界）。
-- **定理证明（Theorem Proving）**：**人机交互**构造数学证明，可处理无限状态与复杂数学性质；成本最高，Rust 侧代表是 Verus（SMT 辅助的验证感知编程）与 RustBelt（Coq/Iris，证明 Rust 类型系统本身的可靠性）。
+- **定理证明（Theorem Proving）**：**人机交互**构造数学证明，可处理无限状态与复杂数学性质；成本最高，Rust 侧代表是 Verus（SMT 辅助的验证感知编程）与 RustBelt（Coq/Iris，证明 Rust 类型系统（Type System）本身的可靠性）。
 
-判定依据：协议级正确性 → 模型检测（TLA+）；实现级内存安全性质 → Kani；全新算法/并发原语 → Verus/Coq。
+判定依据：协议级正确性 → 模型检测（TLA+）；实现级内存安全（Memory Safety）性质 → Kani；全新算法/并发原语 → Verus/Coq。
 
 ### 1.1 形式化验证（Formal Verification）
 
@@ -77,7 +77,7 @@
 | 题号 | 层级 | 考察能力 | 通过标准 |
 |---|---|---|---|
 | 1 | 理解 | 区分验证与测试的保证范围 | 能说明“测试采样、验证穷尽”的准确含义及各自盲区 |
-| 2 | 应用 | 为给定项目选择工具层（Kani/Prusti/Verus/Miri） | 选择理由引用项目的 unsafe 占比与认证要求 |
+| 2 | 应用 | 为给定项目选择工具层（Kani/Prusti/Verus/Miri） | 选择理由引用（Reference）项目的 unsafe 占比与认证要求 |
 | 3 | 应用 | 判断 RustBelt 证明覆盖哪些语义 | 能指出 λRust 未建模的部分（如 async、FFI） |
 | 4 | 分析 | 计算形式化投入的 ROI | 给出“缺陷成本 × 验证成本”的具体估算框架 |
 | 5 | 分析 | 评估认证场景的工具链要求 | 区分 Ferrocene 认证与开源工具链的合规差异 |
@@ -505,7 +505,7 @@ flowchart TD
 - 基于 Stacked Borrows / Tree Borrows 模型解释执行 Rust MIR
 - 检测未定义行为（UB）：悬垂指针、数据竞争、类型混淆、未初始化内存读取
 - `cargo miri test` 已成为 Rust unsafe 代码开发的标准实践
-- **定位**: 光谱最左端的「日常工具」，零额外代码，高运行时成本
+- **定位**: 光谱最左端的「日常工具」，零额外代码，高运行时（Runtime）成本
 
 **Kani**：
 
@@ -579,7 +579,7 @@ fn swap<T>(x: &mut T, y: &mut T) {
 形式化验证进入 CI/CD 的关键是**分层**：把验证成本摊到与变更频率匹配的阶段。
 
 1. **Pre-commit（秒级）**：`cargo check` + clippy；Kani 的最小冒烟套件（每个 harness 限界 unwind ≤3）。
-2. **PR 级 CI（分钟级）**：Kani 全量 harness（unwind 界按循环深度标定）+ Miri 跑 `unsafe` 密集模块的单测；两者必须 pin 工具链版本（Kani/Miri 与 rustc nightly 日期强绑定，版本漂移是 CI 随机失败的头号原因）。
+2. **PR 级 CI（分钟级）**：Kani 全量 harness（unwind 界按循环深度标定）+ Miri 跑 `unsafe` 密集模块（Module）的单测；两者必须 pin 工具链版本（Kani/Miri 与 rustc nightly 日期强绑定，版本漂移是 CI 随机失败的头号原因）。
 3. **Nightly/周级（小时级）**：Verus/Prusti 的完整规格验证、模糊测试（`cargo-fuzz`）长跑。
 
 AWS 的 Kani 流水线实践（s2n-quic 等项目）证明：harness 与代码同仓、`#[kani::proof]` 标注 + 增量缓存可使 PR 级验证维持在 10 分钟内。
@@ -1449,7 +1449,7 @@ fn main() {
 | **类型系统即轻量形式化** | 编译期证明 ⟹ | 零成本 | 表达能力限制 | 日常编程 |
 | **形式化规格是瓶颈** | 需人工编写 ⟹ | 规格错误=证明无效 | 领域知识要求 | 研究重点 |
 | **轻量到重量光谱** | 类型→契约→模型检查→定理证明 ⟹ | 各层互补 | 非替代关系 | 实践策略 |
-| **所有权对应分离合取** | 编译器类型检查 ⟹ | `P * Q` 自动证明 | 功能正确性除外 | §4 核心论断 |
+| **所有权（Ownership）对应分离合取** | 编译器类型检查 ⟹ | `P * Q` 自动证明 | 功能正确性除外 | §4 核心论断 |
 
 ## 反命题分析（Anti-Propositions）
 

@@ -24,7 +24,7 @@
 
 - **`Vec<T>`（动态数组）**：连续内存，索引 O(1)、尾插摊销 O(1)、缓存友好；中间插入/删除 O(n) 需搬移元素。是 Rust 的默认选择——“先用 Vec，有证据再换”。
 - **`VecDeque<T>`（双端队列）**：环形缓冲区，两端插入/删除均 O(1)，是队列/滑动窗口的正确工具；代价是索引略慢于 Vec（取模寻址）。
-- **`LinkedList<T>`（双向链表）**：节点分散堆分配，缓存不友好，绝大多数场景慢于 Vec；仅当需要 O(1) 的任意位置 splice（不使迭代器失效）时才有优势。
+- **`LinkedList<T>`（双向链表）**：节点分散堆分配，缓存不友好，绝大多数场景慢于 Vec；仅当需要 O(1) 的任意位置 splice（不使迭代器（Iterator）失效）时才有优势。
 
 判定依据：先按访问模式（随机/两端/中间 splice）选结构，再用基准验证。
 
@@ -255,7 +255,7 @@ Rust 的所有权（Ownership）模型直接影响数据结构实现：
 - 默认使用 `Vec` 和 `HashMap`，它们经过高度优化。
 - 需要有序遍历时选择 `BTreeMap`/`BTreeSet`。
 - 避免在性能关键路径上使用 `LinkedList`。
-- 利用 Rust 的所有权模型在编译期保证数据结构不变量。
+- 利用 Rust 的所有权（Ownership）模型在编译期保证数据结构不变量。
 - 对图、链表等自引用（Reference）结构，优先用 index/Arena 替代 `Rc<RefCell<T>>` 以提升性能与可维护性。
 
 > **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md)
@@ -285,7 +285,7 @@ Rust 的所有权（Ownership）模型直接影响数据结构实现：
 
 ## ⚠️ 反例与陷阱
 
-**反例：自引用结构体** —— 同一值内字段互相借用，move 语义下无法成立。
+**反例：自引用（Reference）结构体（Struct）** —— 同一值内字段互相借用（Borrowing），move 语义下无法成立。
 
 ```rust,compile_fail
 // rustc 1.97.0 实测：error[E0505]: cannot move out of `s.data`

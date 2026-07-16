@@ -33,8 +33,8 @@
 
 ### Q1. 🟢【单选】SQLx 区别于传统 ORM 的核心特性是？
 
-- A. 类似 ActiveRecord 的运行时对象映射
-- B. 编译期 SQL 验证（`query!` 宏）、零运行时开销、异步原生
+- A. 类似 ActiveRecord 的运行时（Runtime）对象映射
+- B. 编译期 SQL 验证（`query!` 宏（Macro））、零运行时开销、异步（Async）原生
 - C. 由 derive 宏生成 schema 的同步查询构建器
 - D. 仅支持 SQLite 的嵌入式驱动
 
@@ -109,7 +109,7 @@
 
 ## 二、Rust 原生数据库系统
 
-本节覆盖 Rust 原生数据库：Q5 考 TiKV 事务层，Q6 辨析 Materialize 的一致性级别，Q7 对比 Meilisearch 与 Elasticsearch 的架构。
+本节覆盖 Rust 原生数据库：Q5 考 TiKV 事务层，Q6 辨析 Materialize 的一致性（Coherence）级别，Q7 对比 Meilisearch 与 Elasticsearch 的架构。
 
 ### Q5. 🟡【多选】关于 TiKV 的事务层，下列说法正确的有？（选出所有正确项）
 

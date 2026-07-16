@@ -1,5 +1,16 @@
 # Brown University CRP Ownership Inventory 练习
 
+**EN**: Brown University CRP Ownership Inventory Exercises
+**Summary**: Eight focused mini-exercises that build intuition for Rust ownership, borrowing,
+lifetimes, and RAII through the Brown University CRP Ownership Inventory pattern.
+**Key Terms**: 所有权 (ownership), 借用 (borrowing), 生命周期 (lifetime), RAII, Drop,
+移动语义 (move semantics), Copy 语义 (copy semantics), 可变借用 (mutable borrow).
+**Related Concepts**:
+[`concept/01_foundation/01_ownership_borrow_lifetime/06_ownership_inventories_brown_book.md`](../../../../../concept/01_foundation/01_ownership_borrow_lifetime/06_ownership_inventories_brown_book.md),
+[`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../../../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md),
+[`concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`](../../../../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md),
+[`concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md`](../../../../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md).
+
 > **Source**: Inspired by the Brown University CRP Ownership Inventory.
 > **目标**: 通过 8 个聚焦所有权子主题的小练习，帮助学习者建立对 Rust 所有权、借用和生命周期的直觉。
 >
@@ -35,6 +46,7 @@
 ```bash
 cargo test -p exercises --lib ownership_borrowing::brown_inventories
 ```
+
 ---
 
 ## 国际学习者入口

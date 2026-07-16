@@ -208,7 +208,7 @@ fn config_path() -> PathBuf {
 
 - **跨平台 Shell 抽象**：`Command` 本身已是跨平台抽象，但「shell 语法」（管道、重定向、变量展开）不是——`cmd /c` vs `sh -c` 的参数转义规则不同，建议用库（如 `duct`、`run_script`）或干脆避免 shell 直接传参数数组（`Command::arg` 不经过 shell，天然免疫注入）；
 - **通用命令映射**：常用命令的平台对应表（`ls`→`dir`、`grep`→`findstr`、信号 `SIGTERM`→`taskkill`）与「优先用 Rust 实现替代外部命令」的判定准则（`fs`/`walkdir` 替代 `ls -R`，消除外部依赖即消除平台差异）；
-- **跨平台测试策略**：`#[cfg(unix)]`/`#[cfg(windows)]` 门控的测试模块 + CI 双平台矩阵——文末反例演示「Windows 上引用 unix 扩展 trait」的编译错误与 `cfg` 门控导入的修正模式。
+- **跨平台测试策略**：`#[cfg(unix)]`/`#[cfg(windows)]` 门控的测试模块（Module） + CI 双平台矩阵——文末反例演示「Windows 上引用（Reference） unix 扩展 trait」的编译错误与 `cfg` 门控导入的修正模式。
 
 核心原则：平台差异应收敛到「抽象层之下」——上层代码只见统一接口，差异通过 `cfg` 与 trait 封装。
 

@@ -275,7 +275,7 @@ Y 组合子:
 本节检验 λ 演算学习中的三条常见误判：
 
 1. **「Y 组合子在 Rust 中可直接写」**：简单类型系统下 Y 不可类型化（自应用 `x x` 要求无限类型）；Rust 中需 `Box<dyn Fn>` + 显式不动点构造——「理论可表达」与「类型化可表达」的边界实例；
-2. **「闭包就是 λ 项」**：λ 演算的变量捕获是无限制的，Rust 闭包的捕获受所有权约束（move 闭包/借用闭包）——`FnOnce` 消费捕获环境在 λ 演算中无对应（线性 λ 演算才有）；
+2. **「闭包就是 λ 项」**：λ 演算的变量捕获是无限制的，Rust 闭包的捕获受所有权（Ownership）约束（move 闭包/借用（Borrowing）闭包）——`FnOnce` 消费捕获环境在 λ 演算中无对应（线性 λ 演算才有）；
 3. **「Church 编码有实践价值」**：编码演示的是表达力下限，不是编程范式——Rust 的 `enum` 是 Church 编码「序对/和类型」的一等化，工程上绝不用编码替代原生类型。
 
 每条误判附 λ 项与 Rust 代码的对照反例。
@@ -458,7 +458,7 @@ fn main() {
 - [Category Theory](04_category_theory.md) — 范畴论
 - [Denotational Semantics](../03_operational_semantics/01_denotational_semantics.md) — 指称语义
 - [Async Closures](../../03_advanced/01_async/07_async_closures.md) — 闭包即 λ 项在 Rust 中的工程表达
-- [Type Erasure](../../03_advanced/06_low_level_patterns/03_type_erasure.md) — 多态类型在运行时的擦除实现
+- [Type Erasure](../../03_advanced/06_low_level_patterns/03_type_erasure.md) — 多态类型在运行时（Runtime）的擦除实现
 
 ---
 

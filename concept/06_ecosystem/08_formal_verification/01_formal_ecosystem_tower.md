@@ -35,7 +35,7 @@
 
 ## 权威定义
 
-形式化验证（Formal Verification）指用数学方法证明或证伪系统相对于形式规约的正确性，与测试“抽样检查”相对，它提供“穷举保证”。谱系从轻到重：类型系统（编译期证明简单性质）→ 模型检查（Kani 的 CBMC 有界展开）→ 契约验证（Prusti 的前后置条件）→ 交互式定理证明（Coq/Lean 全功能但人力成本高）。Rust 生态的独特之处是验证对象本身已有强类型保证，形式化工具只需补足 unsafe 与并发语义，起点比其他语言高。
+形式化验证（Formal Verification）指用数学方法证明或证伪系统相对于形式规约的正确性，与测试“抽样检查”相对，它提供“穷举保证”。谱系从轻到重：类型系统（Type System）（编译期证明简单性质）→ 模型检查（Kani 的 CBMC 有界展开）→ 契约验证（Prusti 的前后置条件）→ 交互式定理证明（Coq/Lean 全功能但人力成本高）。Rust 生态的独特之处是验证对象本身已有强类型保证，形式化工具只需补足 unsafe 与并发语义，起点比其他语言高。
 
 ### Wikipedia 权威定义
 
@@ -263,7 +263,7 @@ quadrantChart
 
 ## 演进方向
 
-形式化生态的演进沿两条线展开：工具兼容性（核心 crate 的 MSRV/Edition 支持矩阵决定验证链能否跟随 stable Rust 演进——Prusti/Kani 都绑定特定 nightly 或 rustc 版本，升级滞后是常态）；工程集成（Kani + GitHub Actions 把证明 harness 变成 CI 检查项，配合 proof cache 控制时长）。趋势判断：验证正在从“研究项目”走向“安全关键模块的 CI 标配”，但全代码库验证仍不经济，按风险选模块是现实策略。
+形式化生态的演进沿两条线展开：工具兼容性（核心 crate 的 MSRV/Edition 支持矩阵决定验证链能否跟随 stable Rust 演进——Prusti/Kani 都绑定特定 nightly 或 rustc 版本，升级滞后是常态）；工程集成（Kani + GitHub Actions 把证明 harness 变成 CI 检查项，配合 proof cache 控制时长）。趋势判断：验证正在从“研究项目”走向“安全关键模块（Module）的 CI 标配”，但全代码库验证仍不经济，按风险选模块是现实策略。
 
 ### 8.1 核心 Crate MSRV 与 Edition 兼容性矩阵
 

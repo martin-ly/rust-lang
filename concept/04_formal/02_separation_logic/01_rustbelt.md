@@ -108,9 +108,9 @@
 
 RustBelt（Jung, Jourdan, Krebbers, Dreyer, POPL 2018）是 Rust 安全性的首个机械验证证明，本节给出其定义的四个组件：
 
-1. **λRust**：Rust 的核心演算——保留所有权、借用、生命周期、内部可变性的最小语言，在 Coq/Iris 中形式化；
+1. **λRust**：Rust 的核心演算——保留所有权、借用、生命周期（Lifetimes）、内部可变性的最小语言，在 Coq/Iris 中形式化；
 2. **Iris 框架**：高阶并发分离逻辑——RustBelt 的推理在 Iris 中进行，借用谓词 `&frac{α}{β}`（生命周期分数权限）是核心发明；
-3. **类型系统的逻辑关系**：`⊨ e : τ` 定义为「e 的所有归约保持 τ 的不变量」——类型判断被**翻译为逻辑命题**，类型安全 = 逻辑定理；
+3. **类型系统（Type System）的逻辑关系**：`⊨ e : τ` 定义为「e 的所有归约保持 τ 的不变量」——类型判断被**翻译为逻辑命题**，类型安全 = 逻辑定理；
 4. **健全性定理**：「良类型 λRust 程序（含满足库规约的 `unsafe` 库）无未定义行为」——关键创新：`unsafe` 库（`Cell`/`Mutex`/`Rc`）逐一给出**语义模型**并验证，证明「内部可变性在借用规则下安全」。
 
 本节给出 λRust 语法、核心规则与健全性定理的精确陈述。
@@ -524,7 +524,7 @@ graph TD
 
 1. **概念档**：`own(τ)`/`shr(κ, ℓ)` 谓词各对应什么 Rust 机制？生命周期分数令牌如何解释「`&mut` 可重借为 `&`」？——检验谓词映射表的掌握；
 2. **推理档**：给出 λRust 小例子（如 `Cell::get` 的规约），判定其在 Iris 中需要哪些不变式（NA-box/不变式命名空间）——检验「内部可变性为何安全」的证明思路；
-3. **边界档**：RustBelt 未覆盖什么？（答案方向：完整 trait 系统/泛型的单态化细节、弱内存序、真实 ABI——λRust 是核心演算不是完整 Rust）——检验对「形式化范围」的清醒认识。
+3. **边界档**：RustBelt 未覆盖什么？（答案方向：完整 trait 系统/泛型（Generics）的单态化（Monomorphization）细节、弱内存序、真实 ABI——λRust 是核心演算不是完整 Rust）——检验对「形式化范围」的清醒认识。
 
 每题附答案与论文对应章节（POPL 2018 §3-§5）的锚点。
 
@@ -592,7 +592,7 @@ CSL = 分离逻辑 + 资源不变量：
 
 - 线程在获取锁时获得资源的所有权，释放锁时归还
 - `Mutex<T>` 的资源不变量：`mutex_inv(ℓ, P) ≜ ∃v. ℓ ↦ v * P(v)`
-- `Arc<T>` 使用引用计数 + 分离逻辑的共享权限拆分
+- `Arc<T>` 使用引用（Reference）计数 + 分离逻辑的共享权限拆分
 
 这使得并发程序验证可以在局部推理的基础上进行，无需考虑全局状态。
 </details>
@@ -1092,7 +1092,7 @@ graph TD
 | Verus 由 Microsoft Research 开发 | [Verus GitHub] · Lorch et al. 2024 SOSP | ✅ |
 | Creusot 支持 unsafe 代码验证 | [Creusot Documentation] · Denis et al. 2022 FM | ✅ |
 | Prusti 基于 Viper 分离逻辑 | [Prusti GitHub] · Astrauskas et al. 2019 VSTTE | ✅ |
-| RustBelt 安全定理: Safe Rust ⇒ 内存安全 + 数据竞争自由 | Jung et al. 2017 POPL | ✅ |
+| RustBelt 安全定理: Safe Rust ⇒ 内存安全（Memory Safety） + 数据竞争自由 | Jung et al. 2017 POPL | ✅ |
 | Send/Sync 充分性基于并发分离逻辑 | Jung et al. 2017 POPL §5 | ✅ |
 | Iris 高阶分离逻辑支撑 RustBelt | Jung et al. 2018 POPL | ✅ |
 | Separation logic 是 Hoare 逻辑的内存扩展 | [Wikipedia: Separation logic](https://en.wikipedia.org/wiki/Separation_logic) | ✅ |

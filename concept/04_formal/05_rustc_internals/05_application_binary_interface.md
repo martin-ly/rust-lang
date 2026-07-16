@@ -171,7 +171,7 @@ pub fn name_in_rust() {}
 | 行 ＼ 列 | v0 mangling | debuginfo demangle | linker_messages | backtrace |
 |:---|:---|:---|:---|:---|
 | **v0 mangling** | 默认混淆方案（Rust→Rust 符号）— 主效应 | v0 符号需新版 demangler（`rustfilt`/GDB 15+/LLDB）方可还原 | 链接「未解析符号」时，v0 混淆名会出现在 linker 输出，需 demangle 才可读 | 旧栈帧打印可能显示混淆名；backtrace 文本**格式可能变化**（发布说明） |
-| **debuginfo demangle** | demangle 失败时调试器/profiler 显示原始 v0 名 | debuginfo 携带类型/泛型实例信息，依赖 demangler 还原 — 主效应 | linker 输出的 v0 名可经 `rustfilt` 等 demangle 后处理还原 | panic backtrace 的符号可读性取决于运行期 demangle |
+| **debuginfo demangle** | demangle 失败时调试器/profiler 显示原始 v0 名 | debuginfo 携带类型/泛型（Generics）实例信息，依赖 demangler 还原 — 主效应 | linker 输出的 v0 名可经 `rustfilt` 等 demangle 后处理还原 | panic backtrace 的符号可读性取决于运行期 demangle |
 | **linker_messages** | 链接错误中的 v0 名以 warning 形式透传到 rustc 诊断 | 默认未 demangle，原始符号直接显示 | 默认 warn 的特殊 lint（不在 `warnings` group）— 主效应 | 链接阶段告警先于运行期 backtrace，阶段不同但符号同源 |
 | **backtrace** | 栈帧符号来自 v0 混淆，文本格式可能变化 | 可读性依赖 demangle；发布说明指「格式可能变化」 | 运行期（backtrace）vs 链接期（linker_messages），共享同一符号名 | 运行期栈回溯 — 主效应 |
 

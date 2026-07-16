@@ -111,9 +111,9 @@ Mutex<T>: inner: sys::Mutex, poison: Cell<bool>, data: UnsafeCell<T>
 
 标准库容器的内部实现是「安全抽象包裹 unsafe 内核」的范本，三个核心结构：
 
-- **`Vec` 的核心结构**：`RawVec<T>`（`NonNull<T>` 指针 + `usize` cap + 分配器）+ `len`——`NonNull` 向编译器声明「指针永不为空」（启用空指针优化，`Option<Vec<T>>` 与 `Vec<T>` 同大小）。`push` 的 unsafe 内核：容量检查 → `ptr::write` 写入「len 之后的未初始化槽位」（写未初始化内存的唯一合法方式）→ `len += 1`。`Drop` 的实现：先按 `len` 逐个 drop 已初始化元素（`ptr::drop_in_place` 切片），再 `dealloc` 缓冲区——「先内容后容器」的顺序不可颠倒。
+- **`Vec` 的核心结构**：`RawVec<T>`（`NonNull<T>` 指针 + `usize` cap + 分配器）+ `len`——`NonNull` 向编译器声明「指针永不为空」（启用空指针优化，`Option<Vec<T>>` 与 `Vec<T>` 同大小）。`push` 的 unsafe 内核：容量检查 → `ptr::write` 写入「len 之后的未初始化槽位」（写未初始化内存的唯一合法方式）→ `len += 1`。`Drop` 的实现：先按 `len` 逐个 drop 已初始化元素（`ptr::drop_in_place` 切片（Slice）），再 `dealloc` 缓冲区——「先内容后容器」的顺序不可颠倒。
 - **`Arc` 的核心结构**：堆上「强计数 + 弱计数 + 数据」的单次分配（`ArcInner<T>` 布局：两个 `AtomicUsize` 紧邻 `T`——缓存行共享是性能关键）。`clone` = 强计数 `fetch_add(1, Relaxed)`（克隆无同步需求，计数自身原子即可）；`drop` = `fetch_sub(1, Release)` + 归零时 `Acquire` fence 后析构——Release/Acquire 配对保证「最后持有者看到所有先前持有者对数据的写」。
-- **`Mutex` 的核心结构**：`Mutex<T>` = 平台锁（Linux futex/`pthread_mutex`，无竞争路径是一个原子 CAS）+ `UnsafeCell<T>`。`UnsafeCell` 是全部内部可变性的编译器原语——它告诉优化器「此内存可经共享引用改变」（禁用基于 `noalias` 的优化）；`Mutex` 的 `Sync` 由「守卫的生命周期 = 锁的持有期」这一 RAII 结构保证。
+- **`Mutex` 的核心结构**：`Mutex<T>` = 平台锁（Linux futex/`pthread_mutex`，无竞争路径是一个原子 CAS）+ `UnsafeCell<T>`。`UnsafeCell` 是全部内部可变性的编译器原语——它告诉优化器「此内存可经共享引用改变」（禁用基于 `noalias` 的优化）；`Mutex` 的 `Sync` 由「守卫的生命周期（Lifetimes） = 锁的持有期」这一 RAII 结构保证。
 
 三结构的共同课程：unsafe 内核都很小（几十行），安全性来自「不变量的精确陈述 + RAII 边界的强制执行」——阅读顺序建议 Vec → Arc → Mutex，unsafe 复杂度递增。
 
@@ -248,7 +248,7 @@ impl<T> MyMutex<T> {
 
 本节示例按「正例学手法、反例学边界」组织，全部可用 Miri 验证：
 
-- **正确示例：手动实现 `Vec::pop`**：`if len == 0 { None } else { len -= 1; Some(unsafe { ptr::read(ptr.add(len)) }) }`——三行展示两个关键技术：`ptr::read`（移出元素而不 drop 原槽位——槽位由「len 减一」逻辑地失效）与「先改 len 再读」（panic 安全：若 `read` 后任何操作 panic，len 已更新，不会重复 drop）。这是「所有权经 `read` 转移 + 逻辑失效经 len 管理」的标准模式。
+- **正确示例：手动实现 `Vec::pop`**：`if len == 0 { None } else { len -= 1; Some(unsafe { ptr::read(ptr.add(len)) }) }`——三行展示两个关键技术：`ptr::read`（移出元素而不 drop 原槽位——槽位由「len 减一」逻辑地失效）与「先改 len 再读」（panic 安全：若 `read` 后任何操作 panic，len 已更新，不会重复 drop）。这是「所有权（Ownership）经 `read` 转移 + 逻辑失效经 len 管理」的标准模式。
 - **反例：读取未初始化内存**：`let v: Vec<i32> = Vec::with_capacity(10); unsafe { *v.as_ptr().add(5) }`——`with_capacity` 只分配不初始化，读未初始化是 UB（Miri 必报「using uninitialized data」）。即使「物理上」该内存可读写，编译器可假设未初始化读取任意传播 poison 值。
 - **反例：`Arc` 引用计数管理错误**：手写类 `Arc` 结构时 `fetch_sub` 用 `Relaxed` 收尾——归零线程可能看不到其他线程对数据的最后写（无 happens-before），析构读到过期状态；或 `clone` 用 `AcqRel`（无谓成本）。正确记忆：「克隆 Relaxed，销毁 Release + Acquire fence」——Release 发布「我不再用了」，Acquire 确认「我看到了所有人的不再用」。
 
@@ -340,7 +340,7 @@ impl<T> Clone for BadArc<T> {
 |:---|:---|:---|:---|
 | 未初始化内存 | 手动管理 | 完全安全抽象 | Vec 提供安全接口 |
 | 原子引用计数 | `AtomicUsize` | 无锁/分布式回收 | Arc 适合共享只读/少写数据 |
-| 运行时互斥 | OS mutex | 无锁算法 | Mutex 有上下文切换开销 |
+| 运行时（Runtime）互斥 | OS mutex | 无锁算法 | Mutex 有上下文切换开销 |
 | Drop 顺序 | 精确控制 | 编译器自动 | unsafe 代码需手动 drop |
 
 ---
@@ -473,7 +473,7 @@ graph TD
 
 A. `ptr::write` 更快
 B. `*ptr = value` 会先 drop 旧值，但内存未初始化
-C. `ptr::write` 可以绕过借用检查
+C. `ptr::write` 可以绕过借用（Borrowing）检查
 D. 没有区别
 
 <details>

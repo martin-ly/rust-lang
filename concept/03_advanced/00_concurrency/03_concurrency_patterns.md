@@ -252,7 +252,7 @@ fn spawn_thread<T: Send + 'static>(data: T) {
 并发模式的三个技术细节，分别对应「共享状态的三种替代方案」：
 
 - **通道模式**：消息传递把「共享可变状态」转化为「所有权经消息流动」——`mpsc` 的 `send` 移动值的所有权，接收方成为新所有者。变体按拓扑分：SPSC（`mpsc` 退化情形）、MPMC（`crossbeam-channel`）、广播（`tokio::broadcast`，每个订阅者收全量）、oneshot（`tokio::sync::oneshot`，一次性应答）。通道把同步点从「锁」换成「消息边界」，死锁风险转化为「通道两端都阻塞」的活锁风险（同样需协议设计）。
-- **无锁数据结构**：基于原子操作与 CAS 循环（compare-exchange loop）实现并发容器——`Arc` 的计数、`crossbeam::epoch` 的内存回收、`dashmap` 的分片哈希。无锁 ≠ 无同步：内存序（memory ordering）是隐藏的契约，`Acquire`/`Release` 配对建立 happens-before，写错内存序的无锁代码是「编译通过的数据竞争」。
+- **无锁数据结构**：基于原子操作（Atomic Operations）与 CAS 循环（compare-exchange loop）实现并发容器——`Arc` 的计数、`crossbeam::epoch` 的内存回收、`dashmap` 的分片哈希。无锁 ≠ 无同步：内存序（memory ordering）是隐藏的契约，`Acquire`/`Release` 配对建立 happens-before，写错内存序的无锁代码是「编译通过的数据竞争」。
 - **内存顺序**：`Ordering` 五级谱系——`Relaxed`（仅原子性，无顺序保证，计数器可用）、`Acquire`/`Release`（成对建立同步，锁的语义基础）、`AcqRel`（RMW 双向）、`SeqCst`（全序，最保守最易推理）。选型判定：只计数 → Relaxed；保护数据发布 → Acquire/Release 配对；不确定 → SeqCst（正确优先，x86 上成本几乎相同）。
 
 三者的统一视角：并发正确性 = 对所有共享访问建立 happens-before 关系——通道经消息边界的同步建立，无锁经 Acquire/Release 建立，锁经 unlock-lock 建立。内存序是三者共同的底层语言。
@@ -440,7 +440,7 @@ x.store(1, Ordering::SeqCst);
 - **反命题 3：「消息传递没有死锁」**。判定：双向同步通道两端互等（A 发等 B 收、B 发等 A 收）是活锁/死锁的同构现象。边界：消息协议需「方向分层」（请求/应答严格配对）或有界缓冲 + 超时。
 - **反命题 4：「`Relaxed` 够用」**。判定：`Relaxed` 只保证单变量操作原子，不建立跨变量顺序——「数据 + 就绪标志」模式用 Relaxed 可能读到新标志配旧数据。边界：涉及「一个原子发布、其他数据跟随」必须用 Acquire/Release 配对。
 
-每条反命题的验证方法：构造「两线程 × 特定交错」的最小反例，用 `loom` 工具穷举交错验证（loom 能系统枚举弱内存序下的全部可见结果）。
+每条反命题的验证方法：构造「两线程 × 特定交错」的最小反例，用 `loom` 工具穷举交错验证（loom 能系统枚举（Enum）弱内存序下的全部可见结果）。
 
 ### 4.1 反命题树
 >
@@ -1290,7 +1290,7 @@ fn transfer(from: &Account, to: &Account, amount: i32) {
 
 本节把消息传递并发（CSP 模型在 Rust 的落地）组织为一张可检索的知识图谱，回答四个导航问题：
 
-- **概念关系**：通道（channel）如何实现「通过通信共享内存，而非通过共享内存通信」——`Sender`/`Receiver` 的所有权分离是类型系统对 CSP 的编码；
+- **概念关系**：通道（channel）如何实现「通过通信共享内存，而非通过共享内存通信」——`Sender`/`Receiver` 的所有权分离是类型系统（Type System）对 CSP 的编码；
 - **数据流**：消息按值移动（move）穿过通道，发送方失去所有权——这与共享内存并发形成对偶：数据竞争在通道模型中不可表达；
 - **选型坐标**：标准库 `mpsc`（多生产者单消费者、无界）、`crossbeam`（MPMC + 有界 + select）、`tokio::mpsc`（异步感知背压）三方对比；
 - **性能特征**：无界通道的内存风险、有界通道的背压语义、`sync_channel(0)` 的会合（rendezvous）语义。
@@ -1380,7 +1380,7 @@ sequenceDiagram
 |:---|:---|:---|:---|
 | 生产者/消费者 | MPSC | MPMC | MPSC |
 | 有界/无界 | 均无界 | 均支持 | 有界（背压）/无界 |
-| `select` 多路复用 | ❌ | ✅ | ✅（`select!` 宏） |
+| `select` 多路复用 | ❌ | ✅ | ✅（`select!` 宏（Macro）） |
 | 异步感知 | ❌（阻塞） | ❌（阻塞） | ✅（`.await` 挂起） |
 | 关闭检测 | `RecvError` | 显式 `is_closed` | `None`/错误变体 |
 | 性能（同线程乒乓） | 基线 | 通常更快 | 有执行器开销 |
@@ -1462,7 +1462,7 @@ mindmap
 
 ## 📋 快速参考
 
-本节是通道 API 的速查页，按「常用操作 → 错误处理 → 进阶模式」三层组织：
+本节是通道 API 的速查页，按「常用操作 → 错误处理（Error Handling） → 进阶模式」三层组织：
 
 - **常用通道 API**：`channel()`/`sync_channel(n)` 构造、`send`/`try_send`/`send_timeout` 三档发送语义、`recv`/`try_recv`/`recv_timeout`/`iter` 四档接收语义——记忆锚点是「try_ 前缀 = 非阻塞返回 `Result`」；
 - **错误类型速查**：`SendError<T>`（接收端已关闭，**消息退回**）、`RecvError`（所有发送端已 drop，通道排空后触发）、`TrySendError::{Full, Disconnected}`——正确处理 `Disconnected` 是优雅关闭的关键；
@@ -1506,8 +1506,8 @@ mindmap
 
 Actor 模型把「并发单元 + 私有状态 + 邮箱」打包为进程内隔离的实体，Rust 实现的两个层级：
 
-- **基础 Actor 框架**：一个 actor = 「状态结构体 + 消息枚举 + 处理循环」的固定三件套：`tokio::spawn` 一个任务，内部 `while let Some(msg) = rx.recv().await { state.handle(msg) }`——状态字段无需 `Mutex`（只有循环任务访问），`Send` 约束只作用于消息类型。这是「用所有权替代锁」的范式实例：actor 状态的可变性由「单一任务独占」保证，类型系统经 `Send` 校验消息可跨任务移动。
-- **高级 Actor 特性**：监督策略（supervision：子 actor panic 后重启/升级，借鉴 Erlang——Rust 中用「spawn + JoinHandle 监控 + 重启循环」实现，注意状态重建策略需显式设计）；路由 actor（按消息键分发到 worker actor 池，一致性哈希或轮询）；背压邮箱（有界 `mpsc` 使快生产者在 actor 入口被自然限速）。
+- **基础 Actor 框架**：一个 actor = 「状态结构体（Struct） + 消息枚举 + 处理循环」的固定三件套：`tokio::spawn` 一个任务，内部 `while let Some(msg) = rx.recv().await { state.handle(msg) }`——状态字段无需 `Mutex`（只有循环任务访问），`Send` 约束只作用于消息类型。这是「用所有权替代锁」的范式实例：actor 状态的可变性由「单一任务独占」保证，类型系统经 `Send` 校验消息可跨任务移动。
+- **高级 Actor 特性**：监督策略（supervision：子 actor panic 后重启/升级，借鉴 Erlang——Rust 中用「spawn + JoinHandle 监控 + 重启循环」实现，注意状态重建策略需显式设计）；路由 actor（按消息键分发到 worker actor 池，一致性（Coherence）哈希或轮询）；背压邮箱（有界 `mpsc` 使快生产者在 actor 入口被自然限速）。
 
 判定「是否用 Actor 模式」：状态有明确归属且交互为异步消息 → actor 合适（actix、kameo 是成熟框架）；状态需多读写者并发细粒度访问 → 共享状态 + 锁/无锁更合适。actor 的成本是「每次交互一次堆分配 + 调度」，不适合纳秒级热路径。
 
@@ -1978,7 +1978,7 @@ impl<T: Send + 'static> BackpressureChannel<T> {
 
 - **`tokio::sync::broadcast`**：多接收者各持独立读指针，慢消费者收到 `Lagged(n)` 错误（丢弃旧消息保最新）——适合「最新值优先」场景（行情、传感器）；
 - **类型安全事件总线**：用 `TypeId` 索引的 `HashMap<TypeId, Box<dyn Any>>` 订阅表，订阅者按事件类型注册——类型擦除换来编译期事件类型检查，是游戏/GUI 框架的常见模式；
-- **异步事件流**：`Stream` trait + `StreamExt::filter/map` 把事件流当作异步迭代器处理，背压由 `Stream` 的轮询语义自然提供。
+- **异步事件流**：`Stream` trait + `StreamExt::filter/map` 把事件流当作异步迭代器（Iterator）处理，背压由 `Stream` 的轮询语义自然提供。
 
 判定准则：需要「不丢消息」时 broadcast 不合适（用 MPMC 队列或持久化日志）；需要「类型级事件契约」时用事件总线；已在 `Stream` 生态内时保持流式。
 

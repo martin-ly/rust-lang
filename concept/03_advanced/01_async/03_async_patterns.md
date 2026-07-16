@@ -220,7 +220,7 @@ Waker: 异步通知机制
 
 ## 二、技术细节
 
-本节展开「异步模式：从 Future 到生产级并发」的技术细节：并发执行模式 与 取消与超时。重点是类型签名、所有权语义与编译期约束如何相互作用，而不是 API 罗列；每个小节给出可编译的最小示例，并标注对应反例的失败规则。读完后应能解释：为什么这种写法能通过编译，而那种写法会被借用检查器或类型系统拒绝。
+本节展开「异步（Async）模式：从 Future 到生产级并发」的技术细节：并发执行模式 与 取消与超时。重点是类型签名、所有权（Ownership）语义与编译期约束如何相互作用，而不是 API 罗列；每个小节给出可编译的最小示例，并标注对应反例的失败规则。读完后应能解释：为什么这种写法能通过编译，而那种写法会被借用（Borrowing）检查器或类型系统（Type System）拒绝。
 
 ### 2.1 并发执行模式
 >
@@ -301,7 +301,7 @@ async fn process_stream() {
 
 ## 十、边界测试：异步模式的编译错误
 
-本节把「异步模式：从 Future 到生产级并发」的规则推到编译器与运行时的边界上逐一实测：边界测试：`Stream` 与 `Future` 的所有权混淆（编译错…、边界测试：取消安全（Cancellation Safety）违反（逻辑…与背压与流控制。每个用例标注预期结果（编译错误 / 运行时 panic / 逻辑错误），并用 rustc 1.97 验证：能复现的给出诊断信息与触发条件，不能复现的说明原因。这些用例共同回答一个问题——规则在极限处是否仍然成立，以及违反时编译器能否兜底。
+本节把「异步模式：从 Future 到生产级并发」的规则推到编译器与运行时（Runtime）的边界上逐一实测：边界测试：`Stream` 与 `Future` 的所有权混淆（编译错…、边界测试：取消安全（Cancellation Safety）违反（逻辑…与背压与流控制。每个用例标注预期结果（编译错误 / 运行时 panic / 逻辑错误），并用 rustc 1.97 验证：能复现的给出诊断信息与触发条件，不能复现的说明原因。这些用例共同回答一个问题——规则在极限处是否仍然成立，以及违反时编译器能否兜底。
 
 ### 10.1 边界测试：`Stream` 与 `Future` 的所有权混淆（编译错误）
 
@@ -712,7 +712,7 @@ graph TD
 - [Async](01_async.md) — 异步基础
 - [Pin](08_pin_unpin.md) — Pin 与 Unpin
 - [Concurrency](../00_concurrency/01_concurrency.md) — 并发基础
-- [Closure Types](../../02_intermediate/04_types_and_conversions/02_closure_types.md) — async 模式的状态捕获建立在闭包类型之上
+- [Closure Types](../../02_intermediate/04_types_and_conversions/02_closure_types.md) — async 模式的状态捕获建立在闭包（Closures）类型之上
 - [Iterator Patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) — 迭代器组合子与 Stream 模式的对应关系
 - [Distributed Systems](../../06_ecosystem/04_web_and_networking/01_distributed_systems.md) — 分布式系统
 - [Stream 代数与背压](09_stream_algebra_and_backpressure.md) — 背压（§2.3）的形式化纵深
@@ -804,7 +804,7 @@ async fn work() {
 > `Rc<T>` 不是 `Send`（引用（Reference）计数非原子），因此不能出现在 spawn 的闭包（Closures）中。
 > 解决方案：
 >
-> 1) 使用 `Arc<T>`（原子引用计数，`Send + Sync`）；
+> 1) 使用 `Arc<T>`（原子引用（Reference）计数，`Send + Sync`）；
 > 2) 在单线程执行器（`tokio::runtime::Builder::new_current_thread()`）中使用 `task::spawn_local`（不要求 `Send`）；
 > 3) 使用 `tokio::sync::Mutex` 而非 `std::sync::Mutex`（异步友好的锁）。
 >

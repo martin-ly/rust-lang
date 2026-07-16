@@ -132,7 +132,7 @@ use std::io::{self, Write};
 >
 > **相关概念**: [03 numerics](../../01_foundation/02_type_system/03_numerics.md)
 > **相关概念**: [03 numerics](../../01_foundation/02_type_system/03_numerics.md)
-Rust 1.97.0 调整了浮点字面量类型推断：当 `{float}`（未约束的浮点字面量）出现在需要具体类型的上下文中且未通过其他约束确定为 `f64` 时，更可能回退到 `f32`。这一变更主要影响依赖旧推断行为的代码，并会触发未来兼容性警告。
+Rust 1.97.0 调整了浮点字面量类型推断（Type Inference）：当 `{float}`（未约束的浮点字面量）出现在需要具体类型的上下文中且未通过其他约束确定为 `f64` 时，更可能回退到 `f32`。这一变更主要影响依赖旧推断行为的代码，并会触发未来兼容性警告。
 
 ```rust,ignore
 fn takes_f32(_: f32) {}
@@ -152,7 +152,7 @@ Rust 1.97.0 将 v0 symbol mangling 方案设为默认。该方案自 1.59 起可
 
 **与旧方案（Itanium ABI）相比的优势**：
 
-- 泛型参数实例保留具体值，而非仅通过 hash 追踪
+- 泛型（Generics）参数实例保留具体值，而非仅通过 hash 追踪
 - 消除旧方案中部分条目未使用 Itanium ABI 导致的不一致
 
 **影响与迁移**：
@@ -196,7 +196,7 @@ linker_messages = "allow"
 
 - **意义**：PTX 是 NVIDIA GPU 的虚拟 ISA，`nvptx64` 后端使 `rustc` 直接产出 PTX，无需经 C++/NVCC——`rust-gpu`（SpiritV 路线）之外的第二条 GPU 路径。
 - **基线提升内容**：目标从 tier 3 提升维护等级，CUDA 版本基线对齐现代驱动栈，`no_std`（GPU 无操作系统）作为唯一模式。
-- **现实边界**：生态仍极早期——无运行时 crate 生态、无 cuBLAS/cuDNN 类库绑定；适合研究型 kernel 开发，生产 GPU 计算仍需 `cudarc`（CUDA 驱动绑定，CPU 侧）或 wgpu/Vulkan 计算路线。
+- **现实边界**：生态仍极早期——无运行时（Runtime） crate 生态、无 cuBLAS/cuDNN 类库绑定；适合研究型 kernel 开发，生产 GPU 计算仍需 `cudarc`（CUDA 驱动绑定，CPU 侧）或 wgpu/Vulkan 计算路线。
 
 判定依据：需要 Rust 写 GPU kernel 的团队当前首选 wgpu 计算（跨厂商）；nvptx 目标适合追踪，不适合押注。
 
@@ -225,8 +225,8 @@ Rust 1.97.0 提升了 NVIDIA PTX 目标的硬件与 ISA 基线：
 | API | 解决的问题 | 典型场景 |
 |---|---|---|
 | `Default for RepeatN` | `repeat_n` 结果无法默认构造 | 泛型容器初始化 |
-| `Copy for ffi::FromBytesUntilNulError` | 该错误类型不能复制，错误处理受限 | C 字符串解析的 `?` 传播 |
-| `Send for std::fs::File` on UEFI | UEFI target 上 File 不可跨线程 | 固件/引导程序的异步 IO |
+| `Copy for ffi::FromBytesUntilNulError` | 该错误类型不能复制，错误处理（Error Handling）受限 | C 字符串解析的 `?` 传播 |
+| `Send for std::fs::File` on UEFI | UEFI target 上 File 不可跨线程 | 固件/引导程序的异步（Async） IO |
 | 整数位查询方法 | 手写位运算易错 | 位图、协议解析 |
 | `NonZero` 位查询 | NonZero 包装下位操作需先解包 | 无零值域的位图 |
 | `char::is_control` const 稳定 | const 上下文中无法判别控制字符 | 编译期文本处理 |
@@ -237,7 +237,7 @@ Rust 1.97.0 提升了 NVIDIA PTX 目标的硬件与 ISA 基线：
 >
 > **相关概念**: [01 iterator patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)
 > **相关概念**: [01 iterator patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)
-`std::iter::RepeatN`（`std::iter::repeat_n` 的返回类型）现在实现 `Default`，可构造空迭代器。
+`std::iter::RepeatN`（`std::iter::repeat_n` 的返回类型）现在实现 `Default`，可构造空迭代器（Iterator）。
 
 ```rust,ignore
 use std::iter::RepeatN;
@@ -250,7 +250,7 @@ assert_eq!(empty.count(), 0);
 >
 > **相关概念**: [01 rust ffi](../../03_advanced/04_ffi/01_rust_ffi.md)
 > **相关概念**: [01 rust ffi](../../03_advanced/04_ffi/01_rust_ffi.md)
-`std::ffi::FromBytesUntilNulError` 现在实现 `Copy`，可在不移动所有权的情况下复制错误值。
+`std::ffi::FromBytesUntilNulError` 现在实现 `Copy`，可在不移动所有权（Ownership）的情况下复制错误值。
 
 ```rust,ignore
 use std::ffi::CStr;
@@ -440,7 +440,7 @@ rustdoc --remap-path-prefix=/home/user=/src src/lib.rs
 | 链接器输出默认警告 | 可能出现新 warning | 使用 `-A linker-messages` 静默 |
 | 移除隐藏的已弃用 `f64` 方法 | 使用这些隐藏 API 的代码会失败 | 迁移到公开 API |
 | `varargs_without_pattern` lint 在依赖中也被报告 | 依赖代码中的变参模式问题会暴露 | 升级依赖或临时允许 |
-| 禁止向模块路径段传递泛型参数 | 某些不合法的泛型路径现在报错 | 修正路径语法 |
+| 禁止向模块（Module）路径段传递泛型参数 | 某些不合法的泛型路径现在报错 | 修正路径语法 |
 | 无效的 macho `link_section` 说明符报错 | 段/节名称非法时报错 | 修正 `#[link_section]` |
 | 某些 `enum` 编码改变 | 无布局保证的 `enum` 二进制布局可能不同 | 不要依赖具体布局 |
 | 空 `#[export_name = ""]` 报错 | 空导出名称被拒绝 | 提供非空名称或移除属性 |

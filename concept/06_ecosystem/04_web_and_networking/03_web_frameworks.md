@@ -564,7 +564,7 @@ fn main() {
 - **TechEmpower 基准解读**: 多场景分别测量——plaintext/JSON 序列化测框架开销，single-query/multiple-queries/fortunes 测数据库交互路径；Rust 框架（axum/actix）在 plaintext 场景接近极限（瓶颈在 HTTP 解析与内核），JSON 与 DB 场景的差距才是真实业务参考。注意“框架开销”在高 RPS 下占比会被 DB 延迟稀释——业务越重，框架差异越不重要。
 - **资源占用对比**: Rust 框架的稳态内存通常在 10–50MB（JVM 系 200MB+），p99 延迟在低负载下与 Go 相当、高负载下尾延迟更稳定（无 GC 停顿）；连接数 10 万级时内存优势成为部署密度的决定因素。
 
-判定依据：选型引用基准时只对比与自己业务形态相近的场景行，plaintext 排名对实际选型几乎无信息量。
+判定依据：选型引用（Reference）基准时只对比与自己业务形态相近的场景行，plaintext 排名对实际选型几乎无信息量。
 
 ### 5.1 TechEmpower 基准解读
 
@@ -624,7 +624,7 @@ TechEmpower Round 22+ 解读（JSON 序列化 / 单次查询 / 多次查询）:
 
 1. **运行时约束**: 已深度使用 tokio → axum；需要 actor 模型与独立运行时生态 → actix-web；团队偏好 batteries-included 与编译期路由校验 → rocket。
 2. **生态互操作**: 需要 gRPC + REST 共栈 → axum（与 tonic 共享 Tower 层）；需要嵌入式 HTTP（嵌入式/边缘） → 轻量选项（如 axum 裁剪或专用微型框架）。
-3. **团队因素**: axum 学习曲线在“extractor 类型签名”，actix 在“actor 心智模型”，rocket 在“宏魔法调试”——用同一 CRUD 原型让团队实际写一天再决定。
+3. **团队因素**: axum 学习曲线在“extractor 类型签名”，actix 在“actor 心智模型”，rocket 在“宏（Macro）魔法调试”——用同一 CRUD 原型让团队实际写一天再决定。
 
 场景化推荐矩阵（摘要）：BFF/API 网关 → axum；高并发长连接 → actix-web；快速原型/内部工具 → rocket。判定依据：框架间迁移成本中等（handler 逻辑可移植，中间件与状态管理不可），但远未到“选错毁项目”的程度——决策树走完仍平局时选 axum（生态默认项）。
 

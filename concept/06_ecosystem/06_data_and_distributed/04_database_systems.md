@@ -67,7 +67,7 @@ Rust 数据库生态谱系:
 TiKV 是 Rust 在分布式存储领域的标志性项目：一个提供分布式事务的 Key-Value 数据库，兼容 etcd 的 MVCC 语义且作为 TiDB 的存储层。理解它需把握三个层次：
 
 - **Percolator 事务模型**：基于 Google Percolator 论文，采用乐观并发控制（OCC）+ 两阶段提交（2PC），靠全局 TSO（Timestamp Oracle）分配单调时间戳实现快照隔离；prewrite/commit 两阶段中锁与多版本数据的写入顺序是正确性的关键。
-- **Rust 实现的优势**：无 GC 带来的确定性亚毫秒 P99 延迟（分布式事务对 GC 暂停极敏感）、`Send`/`Sync` 编译期并发安全、以及所有权模型对锁/内存资源的 RAII 管理。
+- **Rust 实现的优势**：无 GC 带来的确定性亚毫秒 P99 延迟（分布式事务对 GC 暂停极敏感）、`Send`/`Sync` 编译期并发安全（Concurrency Safety）、以及所有权（Ownership）模型对锁/内存资源的 RAII 管理。
 - **所有权模式在代码中的体现**：RocksDB 句柄、Region 元数据与 Raft 状态机如何用所有权划分线程边界。
 
 以下各节给出协议流程、对比表与代码结构分析。
@@ -465,7 +465,7 @@ fn main() {}
 
 以下测验检验本章五个 Rust 数据库生态判断点：
 
-- 测验 1：**为什么少用传统 ORM 隐式查询**——延迟加载与所有权/借用模型冲突，diesel/SeaORM 选择显式查询换编译期 N+1 检查与类型安全。
+- 测验 1：**为什么少用传统 ORM 隐式查询**——延迟加载与所有权/借用（Borrowing）模型冲突，diesel/SeaORM 选择显式查询换编译期 N+1 检查与类型安全。
 - 测验 2：**sled vs rocksdb**——纯 Rust Bw-Tree（API 简洁、无 C++ 构建链）vs LSM-Tree FFI 绑定（功能全、吞吐高）；选型取决于写入放大与运维复杂度。
 - 测验 3：**连接池为何用 deadpool/bb8**——正确实现池的难点在并发安全、健康检查与公平等待队列，自实现容易踩死锁。
 - 测验 4–5：**迁移工具与嵌入式 DB 选型**——sqlx-cli/refinery 的适用场景与版本化策略。

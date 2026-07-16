@@ -1,7 +1,7 @@
 > **内容分级**: [专家级]
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **本节关键术语**: async · unsafe · Pin · Waker · 自引用 · 契约 — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
+> **本节关键术语**: async · unsafe · Pin · Waker · 自引用（Reference） · 契约 — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 
 # Async 中的 Unsafe：异步上下文的安全契约
 
@@ -23,7 +23,7 @@
 > [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-keyword.html) ·
 > [RFC 2349 — Pin](https://rust-lang.github.io/rfcs/2349-pin.html) ·
 > [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html) ·
-> [Rustonomicon — Executing Manual Future](https://doc.rust-lang.org/nomicon/executor.html)
+> [Rust Async Book — Executing Futures](https://rust-lang.github.io/async-book/02_execution/02_future.html)
 
 ---
 
@@ -95,7 +95,7 @@ mindmap
 | async 机制 | unsafe 关切 | 安全责任归属 |
 |---|---|---|
 | `async fn` 状态机 | 状态机字段可能自引用 | 编译器生成安全代码；手写 poll 时由程序员保证 |
-| `.await` 挂起点 | 挂起时栈帧变为状态机堆内存 | 运行时/executor 保证状态机不被移动（Pin） |
+| `.await` 挂起点 | 挂起时栈帧变为状态机堆内存 | 运行时（Runtime）/executor 保证状态机不被移动（Pin） |
 | `Pin<&mut Self>` in `poll` | 自引用字段地址稳定性 | 调用 poll 的代码保证；投影时由实现者保证 |
 | `Waker` | 可能跨线程、跨 FFI 传递 | 使用方保证 wake 只发生一次且目标仍存活 |
 | `unsafe` 块内部 `.await` | 块内建立的临时不变量跨 await 可能失效 | 程序员保证每次恢复后不变量仍成立 |
@@ -122,7 +122,7 @@ async fn unsound_across_await() {
 
 **判定条件**：
 
-1. 如果 `raw` 指向的数据在 `await` 期间由 Rust 的所有权/借用系统保护（如 `&u8`），则安全；
+1. 如果 `raw` 指向的数据在 `await` 期间由 Rust 的所有权（Ownership）/借用（Borrowing）系统保护（如 `&u8`），则安全；
 2. 如果 `raw` 指向的数据可能在 `await` 期间被释放、移动或重新分配，则解引用 `raw` 是 UB。
 
 ### 3.2 反例：跨 await 悬垂裸指针
@@ -250,7 +250,7 @@ flowchart TD
 |---|---|---|---|
 | 跨 await 悬垂裸指针 | await 期间局部变量被释放 | Miri / 代码审查 | 使用 Pin 或堆分配 |
 | 手写 poll 移动自引用状态机 | `Pin<&mut Self>` 使用错误 | 编译错误 E0277 / Miri | 使用 pin-project |
-| FFI 回调 use-after-wake | Waker 生命周期管理错误 | 运行时崩溃 / Miri | 克隆 Waker，建立注册/注销契约 |
+| FFI 回调 use-after-wake | Waker 生命周期（Lifetimes）管理错误 | 运行时崩溃 / Miri | 克隆 Waker，建立注册/注销契约 |
 | `Pin::new_unchecked` 后值被移动 | 违反 Pin 契约 | UB（可能无立即症状） | 保证目标内存固定 |
 
 ---
@@ -270,4 +270,4 @@ flowchart TD
 > [Rust Reference — Async Blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks) ·
 > [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-keyword.html) ·
 > [RFC 2349 — Pin](https://rust-lang.github.io/rfcs/2349-pin.html) ·
-> [Rustonomicon — Executing Manual Future](https://doc.rust-lang.org/nomicon/executor.html)
+> [Rust Async Book — Executing Futures](https://rust-lang.github.io/async-book/02_execution/02_future.html)

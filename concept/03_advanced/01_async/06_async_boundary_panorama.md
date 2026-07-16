@@ -10,7 +10,7 @@
 > **受众**: [进阶-专家]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页（async 边界全景视角）。
-> **定位**: 汇总 Rust 异步编程全部**语义边界**——await 点两侧什么成立/什么不成立、取消何时安全、自引用何时合法、Future 何时可跨线程、运行时契约何时被打破、async trait 何时可对象化。每一节给出**边界陈述 → 反例 → 判定条件**三段式。
+> **定位**: 汇总 Rust 异步编程全部**语义边界**——await 点两侧什么成立/什么不成立、取消何时安全、自引用（Reference）何时合法、Future 何时可跨线程、运行时（Runtime）契约何时被打破、async trait 何时可对象化。每一节给出**边界陈述 → 反例 → 判定条件**三段式。
 > **分工声明**: async 概念推导（状态机变换、Future trait、语法糖展开）留在 [Async/Await](01_async.md)；取消安全的系统化形式化留在 [Async 取消安全](05_async_cancellation_safety.md)；Pin 机制推导留在 [Pin 与 Unpin](08_pin_unpin.md)。本页只做**边界视角的全景汇总**，不重复概念推导（AGENTS.md §2 Canonical 规则）。
 > **方法论对齐**: 反事实推理 · 边界测试 (Torchiano et al. 2018) · 判定树机器可读化（见 [decision_trees.yaml](../../00_meta/knowledge_topology/decision_trees.yaml) `DF-ASYNC-07`）
 > **全局对应**: 本页是 [安全边界全景](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md) 在 async 域的纵深展开；unsafe 域的对应页为 [Unsafe 边界全景](../02_unsafe/02_unsafe_boundary_panorama.md)。
@@ -152,7 +152,7 @@ graph TD
 
 ## 四、边界一：await 点语义边界
 
-`.await` 不是普通运算符，它定义了任务的**让出点（yield point）**——理解其语义边界是预测异步行为的前提：
+`.await` 不是普通运算符，它定义了任务的**让出点（yield point）**——理解其语义边界是预测异步（Async）行为的前提：
 
 - **让出 ≠ 切换线程**：`.await` 把控制交还执行器，任务可能立即在同一线程被重新 poll（如果 Future 已 Ready）——「await 一定会挂起」是错误直觉；
 - **await 点是取消点**：Future 只可能在 await 处被安全 drop——两个 await 之间的代码是不可分割的（对取消而言）；
@@ -165,7 +165,7 @@ graph TD
 
 `.await` 是 async 代码中**唯一**可能让出执行权的点。边界两侧的不对称性：
 
-- **边界前（同步段）**: 局部变量以栈帧形式存在，借用规则与普通函数完全相同。
+- **边界前（同步段）**: 局部变量以栈帧形式存在，借用（Borrowing）规则与普通函数完全相同。
 - **边界后（挂起后恢复）**: 只有"跨 await 活跃"的变量被保存进状态机字段；其余变量**已经不存在**。
 - **推论 1**: 跨 await 持有引用 ⟹ 状态机字段含引用 ⟹ 该引用指向的数据必须比 Future 活得久。
 - **推论 2**: 跨 await 持有 `&mut`、锁 guard、`RefCell` borrow guard ⟹ 它们成为状态机字段，参与 Send 判定与取消判定。
@@ -194,7 +194,7 @@ async fn also_bad(map: &HashMap<i32, i32>) {
 
 | # | 判定问题 | 定量阈值 | 判定结果 |
 |:---:|:---|:---|:---|
-| Q-A1 | 跨 await 点保持活跃的引用数是否 ≥1 个？ | ≥1 ⟹ 进入生命周期子判定 | 编译期阻止悬垂 |
+| Q-A1 | 跨 await 点保持活跃的引用数是否 ≥1 个？ | ≥1 ⟹ 进入生命周期（Lifetimes）子判定 | 编译期阻止悬垂 |
 | Q-A2 | 被引用数据的生存期结束行是否 < 引用最后使用行？ | < ⟹ `does not live long enough` | 编译期阻止 |
 | Q-A3 | 跨 await 持有的 guard 类型数（MutexGuard/Ref/RefMut）是否 ≥1 个？ | ≥1 ⟹ 叠加 Send 与取消安全判定 | 见 §七/§五 |
 
@@ -288,7 +288,7 @@ async fn self_referential() {
 | Q-P2 | 对同一值的 `get_unchecked_mut` 调用次数是否 ≥1 次且无对应不变量论证？ | ≥1 ⟹ Pin 契约疑似违反 | 🔴 潜在 UB |
 | Q-P3 | `Box::pin`/`pin!` 之后的移动次数是否 = 0？ | =0 ⟹ 内存稳定成立 | ✅ 合法 |
 
-> **修复策略**: 首选 `pin!` 宏或 `Box::pin`；手写自引用结构用 `pin-project`/`pin-project-lite`；详见 [Pin 与 Unpin](08_pin_unpin.md) 与 [39](04_future_and_executor_mechanisms.md)。
+> **修复策略**: 首选 `pin!` 宏（Macro）或 `Box::pin`；手写自引用结构用 `pin-project`/`pin-project-lite`；详见 [Pin 与 Unpin](08_pin_unpin.md) 与 [39](04_future_and_executor_mechanisms.md)。
 
 ---
 
@@ -395,7 +395,7 @@ fn outside_runtime() {
 
 trait 中的 async 方法长期是 Rust 异步的最大缺口，现状分三层：
 
-- **静态分发已稳定（1.75）**：`trait T { async fn f(&self); }` 脱糖为「返回 `impl Future` 的关联方法」——泛型/静态分发场景直接用，无运行时开销；
+- **静态分发已稳定（1.75）**：`trait T { async fn f(&self); }` 脱糖为「返回 `impl Future` 的关联方法」——泛型（Generics）/静态分发场景直接用，无运行时开销；
 - **`dyn` 不兼容**：脱糖产物返回「关联的匿名 Future 类型」，不同 impl 返回不同类型 ⟹ trait 对象不安全。当前方案三选一：① `#[async_trait]` 宏（`Box<dyn Future>` 包装，一次分配/调用）；② nightly `dyn*`/`async Fn` 实验；③ 手动返回 `Pin<Box<dyn Future<Output = T> + Send + '_>>`；
 - **`async_trait` 的成本与陷阱**：每次调用堆分配 + 默认加 `Send` 约束（`?Send` 可关闭）——热路径 trait 方法应考虑静态分发重构。
 
@@ -499,7 +499,7 @@ flowchart TD
 | [Waker 契约深度解析](12_waker_contract_deep_dive.md) | RawWakerVTable 实现与契约违反目录 | 本页 §八 executor 边界的实现层纵深 |
 | [Async Trait 对象安全](13_async_trait_object_safety.md) | dyn 兼容方案谱系与选型矩阵 | 本页 §九 的解决方案谱系权威页（v1.1 升格） |
 | [04_future_and_executor_mechanisms.md](04_future_and_executor_mechanisms.md) | executor/waker 机制 | §八 的机制细节指向该页 |
-| [02_closure_types.md](../../02_intermediate/04_types_and_conversions/02_closure_types.md) | 闭包类型与捕获规则 | async 闭包边界的类型基础 |
+| [02_closure_types.md](../../02_intermediate/04_types_and_conversions/02_closure_types.md) | 闭包（Closures）类型与捕获规则 | async 闭包边界的类型基础 |
 | [01_traits.md](../../02_intermediate/00_traits/01_traits.md) | trait 与对象安全 | dyn 兼容边界（§九）的 trait 基础 |
 | [02_async_advanced.md](02_async_advanced.md) / [03_async_patterns.md](03_async_patterns.md) | 高级主题与模式 | 修复策略的模式目录 |
 | [04_safety_boundaries.md](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md) | 全局安全边界全景 | 本页是其在 async 域的纵深 |

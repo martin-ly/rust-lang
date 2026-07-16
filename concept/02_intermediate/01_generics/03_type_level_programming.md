@@ -113,7 +113,7 @@ mindmap
 
 ## 🎯 什么是类型级编程？
 
-类型级编程是在类型系统层面进行计算和推理，所有计算在编译时完成，运行时（Runtime）零开销。
+类型级编程是在类型系统（Type System）层面进行计算和推理，所有计算在编译时完成，运行时（Runtime）零开销。
 (Source: [Rust Reference: Traits](https://doc.rust-lang.org/reference/items/traits.html))
 
 **核心概念**:
@@ -129,11 +129,11 @@ mindmap
 
 类型级编程（type-level programming）是利用「类型作为编译期值」的计算范式。Peano 自然数是其入门构造：用零类型 `Z` 与后继类型 `S<N>` 把自然数编码进类型层级——`S<S<Z>>` 即类型层面的 2。
 
-- **基础定义**：`struct Z; struct S<N>(PhantomData<N>);`——类型本身不存储数据（`PhantomData` 零大小），数值信息完全由类型的嵌套深度携带。这依赖 Rust 的类型递归与泛型实例化在编译期完成。
+- **基础定义**：`struct Z; struct S<N>(PhantomData<N>);`——类型本身不存储数据（`PhantomData` 零大小），数值信息完全由类型的嵌套深度携带。这依赖 Rust 的类型递归与泛型（Generics）实例化在编译期完成。
 - **类型级加法**：以 trait 实现加法函数——`trait Add<Rhs> { type Output; }`，基例 `impl<R> Add<R> for Z { type Output = R; }`，递归例 `impl<N, R> Add<R> for S<N> where N: Add<R> { type Output = S<N::Output>; }`。类型检查器在解析 `N::Output` 时执行「编译期递归求值」，这正是类型级计算的引擎。
 - **类型级乘法**：在加法之上递归定义（`mul(m, S<n>) = add(m, mul(m, n))`），展示「类型级函数可组合」。
 
-判定一段代码是否在做类型级计算，标准是：计算的输入输出是否都是类型（`type Output`、trait bound），运行时是否零数据流动。Peano 构造的价值不在实用（const generics 已覆盖数值需求），而在演示「trait 系统即编译期函数式语言」这一事实的最小模型。
+判定一段代码是否在做类型级计算，标准是：计算的输入输出是否都是类型（`type Output`、trait bound），运行时（Runtime）是否零数据流动。Peano 构造的价值不在实用（const generics 已覆盖数值需求），而在演示「trait 系统即编译期函数式语言」这一事实的最小模型。
 
 ### 基础定义
 
@@ -494,7 +494,7 @@ impl Connection<Authenticated> {
 }
 ```
 
-**编译时验证的协议**：`send` 只定义在 `Connection<Authenticated>` 上——「未认证就发送」在方法解析阶段即失败（E0599），无需任何运行时状态检查。状态迁移函数按值取 `self`（消耗旧状态）并返回新状态类型，旧状态值随之失效，「迁移后仍用旧句柄」也被所有权系统拒绝（E0382）。
+**编译时验证的协议**：`send` 只定义在 `Connection<Authenticated>` 上——「未认证就发送」在方法解析阶段即失败（E0599），无需任何运行时状态检查。状态迁移函数按值取 `self`（消耗旧状态）并返回新状态类型，旧状态值随之失效，「迁移后仍用旧句柄」也被所有权（Ownership）系统拒绝（E0382）。
 
 **适用判定**：协议状态数有限、迁移规则静态可知、违规代价高（网络协议握手、文件打开模式、构建器分步校验）。代价是每个状态 × 方法组合都要写 impl 块，状态爆炸时需权衡；运行时才知的动态状态不适用（应退化为 enum + 运行时检查）。
 
@@ -819,7 +819,7 @@ impl Not for False { type Output = True; }
 <details>
 <summary>✅ 答案</summary>
 
-**A 正确**。按本页 §2：布尔值编码为单元结构体 `True`/`False`，逻辑运算编码为带关联类型的 trait，每个输入类型的 `impl` 给出唯一 `Output`——编译器在单态化时完成"真值表查表"，结果是一个**类型**而非值。B/C/D 均把编译期类型级计算误置为运行时机制。
+**A 正确**。按本页 §2：布尔值编码为单元结构体（Struct） `True`/`False`，逻辑运算编码为带关联类型的 trait，每个输入类型的 `impl` 给出唯一 `Output`——编译器在单态化（Monomorphization）时完成"真值表查表"，结果是一个**类型**而非值。B/C/D 均把编译期类型级计算误置为运行时机制。
 
 </details>
 
@@ -847,7 +847,7 @@ impl Not for False { type Output = True; }
 |---|---|---|
 | 求值时机 | 全部计算在编译期完成 | 单态化 |
 | 编码手段 | Peano 数、trait 递归、关联类型输出 | 类型论编码 |
-| 运行时成本 | 零（类型在编译后完全擦除） | 零成本抽象 |
+| 运行时成本 | 零（类型在编译后完全擦除） | 零成本抽象（Zero-Cost Abstraction） |
 | 与 const 泛型 | const generics 承接数值型类型级计算 | const generics |
 | 复杂度代价 | 编译时间随递归深度增长 | 工程权衡 |
 

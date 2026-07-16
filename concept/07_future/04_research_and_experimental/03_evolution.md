@@ -348,7 +348,7 @@ cargo check -W rust-2024-compatibility
 **关键洞察**：
 Rust 2024 的核心主题是**显式化 Unsafe 边界**与**生命周期（Lifetimes）精确控制**。
 `unsafe extern` 块、`unsafe` 属性、`unsafe_op_in_unsafe_fn` 三重变化共同强化了 Rust 的安全契约——"unsafe 的边界必须肉眼可见"。
-而 RPIT `use<>` 则填补了 `impl Trait` 在生命周期表达上的长期模糊地带，与 `../02_intermediate/01_generics/02_generics.md` 中的泛型（Generics）约束理论直接相关。
+而 RPIT `use<>` 则填补了 `impl Trait` 在生命周期（Lifetimes）表达上的长期模糊地带，与 `../02_intermediate/01_generics/02_generics.md` 中的泛型（Generics）约束理论直接相关。
 
 ---
 
@@ -592,7 +592,7 @@ struct Array<T, const N: usize> {
 **演进中**：
 
 - **Const 泛型（Generics）表达式**：允许 `Array<T, {N * 2}>` 这样的复杂表达式
-- **Const 泛型 where 约束**：`where N > 0` 这样的常量约束
+- **Const 泛型（Generics） where 约束**：`where N > 0` 这样的常量约束
 - **泛型 const 项**：`const fn foo<const N: usize>() -> [u8; N]`
 
 **影响**：使 `typenum` 等编译期数值库成为历史，数组操作更加自然。
@@ -660,7 +660,7 @@ Rust 进入 Linux 内核是语言演进史上最重大的外部验证事件：
 
 - **Effects System（效应系统）**: 把 `const`/`async`/fallible 等“函数效应”抽象为可泛型的维度，目标是消除“每个效应维度 × 每个 API”的组合爆炸（如 `try_` 前缀家族）；处于早期研究阶段，关键字泛型（keyword generics）是其主要提案形态，距离稳定化最远但潜在收益最大。
 - **Generic Const Items（泛型 const 项）**: 允许 `impl` 块中定义依赖泛型参数的 `const` 项（如 `const SIZE: usize = N * 2`），是 const generics 拼图的自然延伸；2025 起进入 Project Goals，nightly 已有可用实现。
-- **TAIT（Type Alias Impl Trait）**: `type Foo = impl Trait;` 让不透明类型可命名，解决 `impl Trait` 无法存入结构体字段的长期痛点；长期卡在“定义用途（defining uses）”语义上，是三者中最接近稳定的。
+- **TAIT（Type Alias Impl Trait）**: `type Foo = impl Trait;` 让不透明类型可命名，解决 `impl Trait` 无法存入结构体（Struct）字段的长期痛点；长期卡在“定义用途（defining uses）”语义上，是三者中最接近稳定的。
 
 判定依据：项目规划可预期 TAIT 先行落地；effects system 应按“多年期”跟踪，不宜写入近期技术选型假设。
 
@@ -777,7 +777,7 @@ timeline
 - **RFC 追踪（rust-lang/rfcs）**: 特性从动机到设计细节的完整记录，FCP（Final Comment Period）阶段是社区影响决策的最后窗口；重大特性必读其 RFC 原文而非二手解读。
 - **其他渠道**: Zulip（t-lang 流）看设计讨论过程，This Week in Rust 做周报级聚合，各 Project Goal 的 tracking issue 看执行进度。
 
-判定依据：技术选型引用演进信息时，区分“已合并 RFC”（方向确定，时间不定）与“team 提议”（方向都可能变）——只有前者可纳入路线图的低置信度规划。
+判定依据：技术选型引用（Reference）演进信息时，区分“已合并 RFC”（方向确定，时间不定）与“team 提议”（方向都可能变）——只有前者可纳入路线图的低置信度规划。
 
 ### 5.1 Rust Lang Team Blog
 >
@@ -1189,8 +1189,8 @@ fn fixed() {
 
 | 用例 | 历史拦截点 | 稳定化解除的条件 |
 |:---|:---|:---|
-| GAT 不稳定历史 | 早期约束求解 panic / 拒绝 | where 子句完备性 + 类型推断收敛 |
-| `let-else` 与模式匹配 | 早期语法与 `else` 块发散性要求 | `!` 类型检查与 refutability 规则定稿 |
+| GAT 不稳定历史 | 早期约束求解 panic / 拒绝 | where 子句完备性 + 类型推断（Type Inference）收敛 |
+| `let-else` 与模式匹配（Pattern Matching） | 早期语法与 `else` 块发散性要求 | `!` 类型检查与 refutability 规则定稿 |
 
 判定原则：阅读历史用例时区分"实现未完成"（ICE、临时拒绝）与"设计否决"（规则性报错）；前者随版本消失，后者是稳定的语义边界。
 
@@ -1271,7 +1271,7 @@ fn fixed() {
 
 > **[来源: [Rust Blog — Project Goals Update: April 2026](https://blog.rust-lang.org/)]**
 > 2025H2 是 Rust Project Goals 机制的第一个完整半年周期。
-> 41 个目标中，旗舰目标集中在借用（Borrowing）系统改进、编译速度、高阶抽象和类型系统解放四个方向。
+> 41 个目标中，旗舰目标集中在借用（Borrowing）系统改进、编译速度、高阶抽象和类型系统（Type System）解放四个方向。
 > Cranelift backend 的未完成凸显了大型基础设施项目对持续资金支持的依赖——Trifecta Tech Foundation 的资金不足直接影响了生产就绪目标的达成。
 > [来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]
 
@@ -1329,7 +1329,7 @@ fn fixed() {
 | 子目标 | 状态 | 形式模型意义 |
 | :--- | :--- | :--- |
 | **Next-gen Trait Solver** | 逐步替换旧 solver | 新 solver（基于 chalk/SLG）支持更复杂的关联类型推理；对形式化可判定性边界有影响 |
-| **Stabilizable Polonius** | nightly 评估 | 基于数据流分析的借用检查，替代当前的基于区域的算法；解决 NLL 无法处理的复杂借用模式 |
+| **Stabilizable Polonius** | nightly 评估 | 基于数据流分析的借用（Borrowing）检查，替代当前的基于区域的算法；解决 NLL 无法处理的复杂借用模式 |
 | **In-place Initialization** | 设计中 | 允许未初始化内存的安全使用（如 `Box::new_uninit` 的泛化）；扩展 Rust 的**初始化语义** |
 | **Evolving Trait Hierarchies** | 长期研究 | 允许 trait 添加默认方法而不破坏下游实现；涉及**行为子类型的向后兼容理论** |
 
@@ -1767,7 +1767,7 @@ Tiffany 在访谈中强调：维护者资助的方向可能与社区利益不完
 
 - 2015 年 Android **Stagefright** 漏洞让 WhatsApp 意识到：操作系统级媒体库漏洞无法由应用单独修补，必须在应用层增加防护
 - WhatsApp 早期用 C++ 开发了跨平台媒体一致性（Coherence）库 **wamedia**，用于检测不符合 MP4 标准的文件，防止触发 OS 库漏洞
-- 由于媒体检查自动运行且处理不可信输入，wamedia 成为迁移到内存安全语言的理想目标
+- 由于媒体检查自动运行且处理不可信输入，wamedia 成为迁移到内存安全（Memory Safety）语言的理想目标
 
 **Rust 迁移成果**：
 

@@ -38,7 +38,7 @@
 
 > **定理 1** [Tier 2]: MIR 显式表达控制流图与所有权（Ownership）转移 ⟹ 借用（Borrowing）检查、drop 展开与常量求值可以在统一的图上进行。
 >
-> **定理 2** [Tier 2]: MIR 经过借用检查与优化后再 lower 到 codegen ⟹ 后端无需重新理解 Rust 的高层语法与所有权（Ownership）规则。
+> **定理 2** [Tier 2]: MIR 经过借用（Borrowing）检查与优化后再 lower 到 codegen ⟹ 后端无需重新理解 Rust 的高层语法与所有权（Ownership）规则。
 >
 > **定理 3** [Tier 2]: `rustc --emit=mir` 与 `rustc --emit=llvm-ir` 输出的是同一编译过程的不同切片（Slice） ⟹ 开发者可以通过对比二者定位优化与代码生成问题。
 >
@@ -90,7 +90,7 @@
 
 1. **显式控制流**：每个函数体被表示为一个有向图，节点是基本块（Basic Block），边是 terminator（跳转、返回、unwind 等）。
 2. **显式数据流**：每个基本块内部是一系列赋值语句，左值称为 **Place**，右值称为 **Rvalue**。
-3. **显式所有权**：`move`、`copy`、`&mut`、`Drop` 等语义在 MIR 中都有明确标记，便于借用检查器与 drop 展开器操作。
+3. **显式所有权（Ownership）**：`move`、`copy`、`&mut`、`Drop` 等语义在 MIR 中都有明确标记，便于借用检查器与 drop 展开器操作。
 
 ```text
 函数体（Function Body）
@@ -292,7 +292,7 @@ start:
 >
 > **逆向 2**: 如果 `--emit=mir` 输出的函数体没有预期的优化（如常量折叠、内联） ⟸ 应检查是否使用了 `-O` / `-C opt-level=3` 以及 `-Zmir-opt-level`，因为默认 `--emit=mir` 输出的是较早阶段的 MIR。
 >
-> **逆向 3**: 如果 LLVM IR 中某个泛型函数出现多次实例 ⟸ 这是单态化的正常结果；若要减少代码体积，应考虑使用 `dyn Trait`、枚举（Enum）或 `#[inline(never)]` 策略，而不是试图阻止单态化发生。
+> **逆向 3**: 如果 LLVM IR 中某个泛型（Generics）函数出现多次实例 ⟸ 这是单态化的正常结果；若要减少代码体积，应考虑使用 `dyn Trait`、枚举（Enum）或 `#[inline(never)]` 策略，而不是试图阻止单态化发生。
 
 ---
 

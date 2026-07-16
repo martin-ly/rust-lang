@@ -60,7 +60,7 @@ mindmap
 
 > **变量赋值时，传递的到底是"值的副本"还是"引用（Reference）的副本"？
 > 这个问题的答案把编程语言分成两大阵营：
-> C++ 和 Rust 倾向于值语义；Java 和 Python 倾向于引用语义。
+> C++ 和 Rust 倾向于值语义；Java 和 Python 倾向于引用（Reference）语义。
 > Rust 的所有权（Ownership）系统把值语义推向了极致：默认转移所有权，显式借用（Borrowing），编译期防止别名冲突。**
 
 ---
@@ -105,7 +105,7 @@ println!("{}", a); // 42
 
 1. **定义**：引用语义下，赋值复制的是引用（别名），修改通过任何别名可见——Java/Python/C# 的对象默认语义；其代价是别名带来的可推理性下降（`f(a); g(a);` 后 `a` 的状态需全局分析）；
 2. **引用语义的语言谱系**：Java（对象引用 + 原始值类型双轨）、Python（一切皆引用）、C#（`class` 引用 vs `struct` 值）——共同特征是 GC 承担引用目标的释放；
-3. **Rust 的位置**：Rust **显式区分**——默认 move/值语义，引用语义通过 `&T`/`&mut T`（借用，编译期检查）或 `Rc`/`Arc`（共享所有权，运行期计数）显式引入。引用在 Rust 是**带规则的工具**而非默认模型：借用规则把「别名 + 可变」的危险组合静态排除。
+3. **Rust 的位置**：Rust **显式区分**——默认 move/值语义，引用语义通过 `&T`/`&mut T`（借用（Borrowing），编译期检查）或 `Rc`/`Arc`（共享所有权（Ownership），运行期计数）显式引入。引用在 Rust 是**带规则的工具**而非默认模型：借用规则把「别名 + 可变」的危险组合静态排除。
 
 判定准则：需要共享时先问「谁拥有」——单所有者借用用 `&`，多所有者用 `Rc`/`Arc`，跨线程必须 `Arc`。
 
@@ -230,7 +230,7 @@ Java/Python object ..... 引用语义
 | 默认语义 | 复合类型默认按值 move / copy | 所有权模型 |
 | 引用方式 | 借用 `&T`/`&mut T` 或共享指针 `Rc`/`Arc`，需显式标注 | 区别于 Java/Python 默认引用语义 |
 | 别名规则 | `&mut` 独占、任意多 `&` 共享，编译期强制 | 借用检查器 |
-| 内存位置 | 值语义对象可完整驻留栈帧，无强制堆分配 | 零成本抽象 |
+| 内存位置 | 值语义对象可完整驻留栈帧，无强制堆分配 | 零成本抽象（Zero-Cost Abstraction） |
 | 拷贝语义 | 无隐式拷贝构造；复制需 `Copy` / `Clone` | trait 契约 |
 
 ## 🔗 概念关系
@@ -238,7 +238,7 @@ Java/Python object ..... 引用语义
 - **上位（is-a）**：[Variable Model](03_variable_model.md) 变量绑定模型的语义谱系。
 - **下位（实例）**：Rust move 作为值语义极值的实例分析见 [Move Semantics](../01_ownership_borrow_lifetime/05_move_semantics.md)。
 - **对偶**：与引用语义语言（Java/Python）的对象模型相对，见 [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)。
-- **组合**：与 [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) 共同定义对象生命周期边界。
+- **组合**：与 [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) 共同定义对象生命周期（Lifetimes）边界。
 - **依赖**：跨线程值共享合法性依赖 [Send/Sync](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md) auto trait。
 
 ---
@@ -257,7 +257,7 @@ fn main() {
 }
 ```
 
-同一时刻最多一个 `&mut`；第二个可变借用被借用检查器拒绝，这是引用语义与 C++ 引用别名的根本差异。
+同一时刻最多一个 `&mut`；第二个可变借用（Mutable Borrow）被借用检查器拒绝，这是引用语义与 C++ 引用别名的根本差异。
 
 **修正**：
 

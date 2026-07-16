@@ -80,7 +80,7 @@ mindmap
 
 **Async FFI 边界定义**：连接 Rust async/await 执行模型与外部（通常是 C）函数/库的接口层。该边界必须同时满足：
 
-- FFI 安全规则（ABI、类型布局、生命周期）；
+- FFI 安全规则（ABI、类型布局、生命周期（Lifetimes））；
 - async 运行时契约（`Future::poll` 非阻塞、`Waker` 正确唤醒、`Send`/`Sync` 边界）；
 - Pin 契约（若外部回调可能触及 Rust 自引用 Future）。
 
@@ -94,7 +94,7 @@ mindmap
 | 基于 fd 的事件驱动 | `epoll`, `kqueue`, `io_uring` | 自定义 Reactor + `Waker` | 高 |
 | C 回调注册 | libcurl multi, OpenSSL async | 将 `Waker` 作为回调 user_data | 中 |
 | 线程 + 队列 | 外部库自带后台线程 | `mpsc` / `oneshot` 桥接 | 中 |
-| 完全异步外部运行时 | io_uring, Windows overlapped | 封装为 Rust Future | 高 |
+| 完全异步（Async）外部运行时 | io_uring, Windows overlapped | 封装为 Rust Future | 高 |
 
 ---
 
@@ -121,7 +121,7 @@ async fn call_blocking_ffi() -> std::io::Result<()> {
 
 - FFI 调用是否阻塞超过 ~10μs？→ 使用 `spawn_blocking`
 - 调用是否频繁且短？→ 考虑 io_uring / 自定义 Reactor
-- 调用是否需要在 async 上下文中保持借用？→ 确保借用的数据在 await 期间存活
+- 调用是否需要在 async 上下文中保持借用（Borrowing）？→ 确保借用的数据在 await 期间存活
 
 ---
 
@@ -140,7 +140,7 @@ async fn call_blocking_ffi() -> std::io::Result<()> {
 
 | 契约 | 说明 | 违反后果 |
 |---|---|---|
-| Waker 克隆 | 每次传递给 C 前 `clone()`，确保独立所有权 | use-after-free |
+| Waker 克隆 | 每次传递给 C 前 `clone()`，确保独立所有权（Ownership） | use-after-free |
 | 回调线程安全 | 若 C 回调可能从任意线程触发，Waker 必须 `Send` | 数据竞争 |
 | 注销机制 | Future drop 时必须从 C 库注销回调 | 回调指向已释放内存 |
 | 单次唤醒 | 某些 reactor 要求 wake 后重新注册 | 丢失事件或重复唤醒 |

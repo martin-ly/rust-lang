@@ -84,6 +84,7 @@
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
     - [反例：同步函数中 `.await`（rustc 1.97.0 实测）](#反例同步函数中-awaitrustc-1970-实测)
     - [✅ 修正：在 async 上下文中求值](#-修正在-async-上下文中求值)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 
@@ -91,9 +92,9 @@
 
 本节给出 Future 与执行器机制的全局导航图：
 
-- **概念定义**：`Future` = 可轮询的计算状态机（`poll() -> Poll<T>`），执行器（executor）= 驱动状态机至完成的调度器，Waker = 状态机向执行器报告「可以再 poll 我」的回调句柄——三者构成 Rust 异步的运行时三角；
+- **概念定义**：`Future` = 可轮询的计算状态机（`poll() -> Poll<T>`），执行器（executor）= 驱动状态机至完成的调度器，Waker = 状态机向执行器报告「可以再 poll 我」的回调句柄——三者构成 Rust 异步（Async）的运行时（Runtime）三角；
 - **属性特征**：按「惰性（不 poll 不执行）× 协作式（await 点让出）× 零成本（状态机编译期生成）」三属性刻画，区别于抢占式线程与回调地狱；
-- **关系连接**：向上支撑 `async fn`/`.await` 语法糖，向下依赖 `Pin`（自引用状态机的内存不动承诺）与 `Waker` 的引用计数协议；
+- **关系连接**：向上支撑 `async fn`/`.await` 语法糖，向下依赖 `Pin`（自引用（Reference）状态机的内存不动承诺）与 `Waker` 的引用计数协议；
 - **学习路径**：概念定义 → Poll/Waker 机制（第 2 节）→ 手动实现 Future（第 4 节）→ 实战案例（第 6 节）。
 
 使用建议：手动实现一节是理解枢纽——亲手写过一次 `poll`，所有 async 行为的「魔法」都会消失。
@@ -182,8 +183,8 @@ Future 与 Executor 机制
 
 `Future` trait 是 Rust 异步的全部基石，其设计只有三个要素：
 
-- **Future 的定义**：`trait Future { type Output; fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>; }`——一个 future 是「可被反复查询状态的惰性计算」。`poll` 的语义契约：返回 `Ready(v)` 则计算完成（此后不得再 poll）；返回 `Pending` 则「尚未就绪，但已注册唤醒」——执行器可以稍后重试。`Pin<&mut Self>` 保证自引用状态机不会移动（`.await` 产生的跨挂起点借用依赖此保证）。
-- **Poll 枚举**：`Poll<T>` 只有两个变体（`Ready(T)`/`Pending`），是「就绪与否」的最小类型化表达——它把「异步等待」从回调/阻塞改写为「状态查询」，这是 Rust 异步「无运行时默认成本」的根源：没有事件循环的强制介入，poll 就是普通函数调用。
+- **Future 的定义**：`trait Future { type Output; fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>; }`——一个 future 是「可被反复查询状态的惰性计算」。`poll` 的语义契约：返回 `Ready(v)` 则计算完成（此后不得再 poll）；返回 `Pending` 则「尚未就绪，但已注册唤醒」——执行器可以稍后重试。`Pin<&mut Self>` 保证自引用状态机不会移动（`.await` 产生的跨挂起点借用（Borrowing）依赖此保证）。
+- **Poll 枚举（Enum）**：`Poll<T>` 只有两个变体（`Ready(T)`/`Pending`），是「就绪与否」的最小类型化表达——它把「异步等待」从回调/阻塞改写为「状态查询」，这是 Rust 异步「无运行时默认成本」的根源：没有事件循环的强制介入，poll 就是普通函数调用。
 - **Context 和 Waker**：`Context` 当前只承载 `Waker`——「任务就绪后如何通知执行器」的句柄。`Pending` 的契约要求 future 在返回前确保「进度发生时调用 `waker.wake()`」（通常由底层 IO 资源如 reactor 注册）。Waker 是 `RawWaker` 类型擦除后的安全句柄，`clone`/`wake`/`wake_by_ref` 三操作，内部是引用计数的 vtable 结构。
 
 三要素合起来回答了「Rust 异步为什么能零成本」：future 是状态机（无堆分配除非 Box），poll 是直接调用（无调度器固定开销），waker 是按需唤醒（无轮询）。判定一个异步抽象的层级：涉及 `poll` 的是核心层，涉及 `await` 的是语法糖层，涉及 `spawn` 的是运行时层。
@@ -682,9 +683,9 @@ where
 
 `async`/`await` 的本质是编译器把函数体重写为状态机，本节从转换、可视化与成本验证三角度展开：
 
-- **从 async 到状态机**：`async fn f()` 被编译为一个实现 `Future` 的匿名枚举/结构体——每个 `.await` 点是一个状态，状态字段 = 跨该 await 存活的局部变量（含借用的再引用——这是 `Pin` 要求的来源）。`poll` 的实现是 `match self.state { S0 => { 初始代码; 若 pending 则 state=S1, 返回 Pending } S1 => { 恢复点 1 的代码; ... } }`。理解这一点即理解全部 async 编译错误：「非 Send 跨 await」= 状态字段含 `!Send` 类型；「递归 async」= 状态机类型自引用。
+- **从 async 到状态机**：`async fn f()` 被编译为一个实现 `Future` 的匿名枚举/结构体（Struct）——每个 `.await` 点是一个状态，状态字段 = 跨该 await 存活的局部变量（含借用的再引用——这是 `Pin` 要求的来源）。`poll` 的实现是 `match self.state { S0 => { 初始代码; 若 pending 则 state=S1, 返回 Pending } S1 => { 恢复点 1 的代码; ... } }`。理解这一点即理解全部 async 编译错误：「非 Send 跨 await」= 状态字段含 `!Send` 类型；「递归 async」= 状态机类型自引用。
 - **状态机可视化**：以「读一行 → 解析 → 写回」为例，状态图为 `[Start] --poll--> [AwaitRead] --Ready(line)--> [AwaitWrite] --Ready--> [Done]`，每条边标注「waker 注册来源」（IO reactor）。调试异步卡住问题时，还原此图即可定位「停在哪个状态、等哪个 waker」。
-- **零成本抽象验证**：状态机转换无堆分配（`async fn` 本身不 `Box`，`spawn` 时才分配）、无动态分派（`poll` 经单态化内联）、无额外线程（单线程 executor 可运行任意多任务）。实证方法：`cargo expand` 查看展开后的状态机代码，或对「async 版 vs 手写回调状态机版」做汇编对比——二者应同构。
+- **零成本抽象验证**：状态机转换无堆分配（`async fn` 本身不 `Box`，`spawn` 时才分配）、无动态分派（`poll` 经单态化（Monomorphization）内联）、无额外线程（单线程 executor 可运行任意多任务）。实证方法：`cargo expand` 查看展开后的状态机代码，或对「async 版 vs 手写回调状态机版」做汇编对比——二者应同构。
 
 判定一个 async 性能问题的归因顺序：先查「是否不必要地 `Box`/分配」（打破零成本），再查「状态机是否因跨 await 持有大对象而膨胀」（复制成本），最后查 executor 调度层（公平性/ steal 开销）。
 

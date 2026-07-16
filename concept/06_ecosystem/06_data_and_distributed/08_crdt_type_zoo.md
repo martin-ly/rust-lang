@@ -11,7 +11,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页：CRDT 谱系与合并格形式化的唯一深度解释；[L3 谱系页](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) §5.3 保留导航式概览并链接回本页。
 > **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: C×Ana — 分析无协调复制数据类型的收敛证明与工程实现
-> **前置概念**: [L4 线性化与一致性谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) · [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md) · [L3 谱系页 §5.3](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md)
+> **前置概念**: [L4 线性化与一致性（Coherence）谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) · [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md) · [L3 谱系页 §5.3](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md)
 > **后置概念**: [L6 因果序与向量时钟](09_causal_ordering_vector_clocks.md) · [L6 分布式共识](06_distributed_consensus.md) · [L6 数据工程](05_data_engineering.md)
 
 ---
@@ -292,7 +292,7 @@ RGA/OR-Set 的「删除」不是移除状态，而是**追加墓碑**（tombston
 
 学习顺序建议：先在 [L4 一致性谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) 中定位 CRDT 的强度等级（最终一致但可证收敛），再读本页 §2 的合并格定理——全页只有这一个定理是真正需要吃透的；§3 动物园按 G-Counter → OR-Set → MV-Register 的顺序读（单调性技巧递进）；最后对照 [L6 向量时钟](09_causal_ordering_vector_clocks.md) 理解版本向量如何充当「偏序的压缩表示」。
 
-**核心推理链**: 交换/结合/幂等 ⟹ 唯一 join ⟹ 无需协调的收敛 ⟹ AP 可用性——CRDT 用代数性质把「冲突解决」从运行时协议问题变成了编译期（类型层）的设计问题。
+**核心推理链**: 交换/结合/幂等 ⟹ 唯一 join ⟹ 无需协调的收敛 ⟹ AP 可用性——CRDT 用代数性质把「冲突解决」从运行时（Runtime）协议问题变成了编译期（类型层）的设计问题。
 
 ---
 
