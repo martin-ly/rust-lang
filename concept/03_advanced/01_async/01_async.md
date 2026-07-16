@@ -956,7 +956,11 @@ graph TD
     A4[纯 CPU 密集型<br/>如: 数据分析]
 ```
 
-> **认知功能**: 技术选型向导——从任务特征（IO/CPU 密集度、并发规模、状态共享需求）出发的决策树。读者在新项目架构设计时，可从根节点出发回答两个关键问题，得到推荐的并发模型。关键洞察：选择 async 还是 thread 的本质是回答"任务是否以挂起等待为主"。[💡 原创分析](../../00_meta/00_framework/methodology.md)
+> **认知功能**:
+> 技术选型向导——从任务特征（IO/CPU 密集度、并发规模、状态共享需求）出发的决策树。
+> 读者在新项目架构设计时，可从根节点出发回答两个关键问题，得到推荐的并发模型。
+> 关键洞察：选择 async 还是 thread 的本质是回答"任务是否以挂起等待为主"。
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 > [来源: [Rust Async Book: Execution](https://rust-lang.github.io/async-book//02_execution/01_chapter.html)]
 
 ### 7.2 Pin 使用边界
@@ -972,7 +976,11 @@ graph TD
     A2[&mut T<br/>可 move / 可替换]
 ```
 
-> **认知功能**: 类型安全判定器——为手写 Future 或设计自引用结构提供 Pin 使用的判定流程。读者只需回答"是否包含自引用"和"是否需要地址稳定"两个问题，即可确定是否需要 Pin。关键洞察：自引用是 Pin 的充分条件而非必要条件，某些非自引用场景（如与硬件 DMA 交互）同样需要地址稳定。[💡 原创分析](../../00_meta/00_framework/methodology.md)
+> **认知功能**:
+> 类型安全判定器——为手写 Future 或设计自引用结构提供 Pin 使用的判定流程。
+> 读者只需回答"是否包含自引用"和"是否需要地址稳定"两个问题，即可确定是否需要 Pin。
+> 关键洞察：自引用是 Pin 的充分条件而非必要条件，某些非自引用场景（如与硬件 DMA 交互）同样需要地址稳定。
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 > [来源: [Tokio Docs: Runtime](https://tokio.rs/tokio/tutorial)]
 
 ---

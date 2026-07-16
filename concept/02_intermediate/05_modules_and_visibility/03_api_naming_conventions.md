@@ -15,7 +15,16 @@
 > **定位**: 系统整理 Rust 标准库与生态中反复出现的命名模式，帮助学习者写出“看起来就像 Rust”的 API。
 > **前置概念**: [Traits](../00_traits/01_traits.md) · [Generics](../01_generics/01_generics.md) · [Common Traits](../00_traits/01_traits.md)
 > **后置概念**: [Design Patterns](../../06_ecosystem/03_design_patterns/01_patterns.md) · [Type System Patterns](../04_types_and_conversions/04_type_system_advanced.md)
-> **来源**: [Google Comprehensive Rust — Predictable API](https://google.github.io/comprehensive-rust/idiomatic/foundations-api-design/predictable-api.html) · [Unicode UAX #31 — Identifier and Pattern Syntax](https://www.unicode.org/reports/tr31/) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **来源**:
+> [Google Comprehensive Rust — Predictable API](https://google.github.io/comprehensive-rust/idiomatic/foundations-api-design/predictable-api.html) ·
+> [Unicode UAX #31 — Identifier and Pattern Syntax](https://www.unicode.org/reports/tr31/) ·
+> [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [System F](https://en.wikipedia.org/wiki/System_F) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [Rust API Guidelines — Naming](https://rust-lang.github.io/api-guidelines//naming.html) ·
 > [RFC 430 / rust-lang/api-guidelines](https://rust-lang.github.io/api-guidelines/)
 > **定理链**: N/A — 描述性/约定性文档，不涉及形式化定理链
@@ -255,7 +264,10 @@ impl Task {
 | `into_` | `self` | 拥有值 | 通常免费（移动） | `String::into_bytes`、`Error::into_inner` |
 | `from` | 关联函数 | `Self` | 不失败；失败版用 `try_from` | `String::from`、`u32::from_be_bytes` |
 
-三条配套规则：① 类型间通用转换优先实现 `From`/`Into`/`TryFrom`/`TryInto` trait 而非造新名（`from`/`into` 无后缀版），方法版 `from_xxx` 保留给「源类型不止一个」的歧义场合；② `as_` 的输出类型名应与后缀一致（`as_mut`/`as_ref` 是特例）；③ 消耗 self 的转换必须 `into_` 开头——命名为 `to_` 却取 `self` by value 是违反 C-CONV 的 API 缺陷（clippy `wrong_self_convention` 捕获）。
+三条配套规则：
+① 类型间通用转换优先实现 `From`/`Into`/`TryFrom`/`TryInto` trait 而非造新名（`from`/`into` 无后缀版），方法版 `from_xxx` 保留给「源类型不止一个」的歧义场合；
+② `as_` 的输出类型名应与后缀一致（`as_mut`/`as_ref` 是特例）；
+③ 消耗 self 的转换必须 `into_` 开头——命名为 `to_` 却取 `self` by value 是违反 C-CONV 的 API 缺陷（clippy `wrong_self_convention` 捕获）。
 
 判定一次转换设计的命名：先定所有权流向（借/克隆/移动），再按上表取前缀；失败可能性叠加 `try_`。
 
@@ -463,7 +475,11 @@ impl From<(&str, u16)> for Config {
 
 ---
 
-> **权威来源**: [Rust API Guidelines — Naming](https://rust-lang.github.io/api-guidelines/naming.html), [TRPL](https://doc.rust-lang.org/book/title-page.html), [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html), [Unicode UAX #31](https://www.unicode.org/reports/tr31/)
+> **权威来源**:
+> [Rust API Guidelines — Naming](https://rust-lang.github.io/api-guidelines/naming.html),
+> [TRPL](https://doc.rust-lang.org/book/title-page.html),
+> [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html),
+> [Unicode UAX #31](https://www.unicode.org/reports/tr31/)
 > **权威来源对齐变更日志**: 2026-07-10 对齐权威来源
 > **状态**: ✅ 权威来源对齐完成
 

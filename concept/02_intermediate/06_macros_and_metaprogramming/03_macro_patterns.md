@@ -20,7 +20,13 @@
 
 ---
 
-> **来源**: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) · · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) · [Unicode UAX #31 — Identifier and Pattern Syntax](https://www.unicode.org/reports/tr31/)
+> **来源**:
+> [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) ·
+> · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) ·
+> [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) ·
+> [Unicode UAX #31 — Identifier and Pattern Syntax](https://www.unicode.org/reports/tr31/)
 > [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html) ·
 > [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines//macros.html) ·
 > [serde_derive](https://docs.rs/serde_derive/latest/serde_derive/) ·

@@ -19,13 +19,18 @@
 
 ---
 
-> **来源**: · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
+> **来源**:
+> · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
 > [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/index.html) ·
 > [Rust Atomics and Locks](https://marabos.nl/atomics/) ·
 > [C++ Memory Model](https://en.cppreference.com/w/cpp/atomic/memory_order) ·
 > [LLVM Atomic Instructions](https://llvm.org/docs/Atomics.html) ·
 > [Wikipedia — Memory Ordering](https://en.wikipedia.org/wiki/Memory_ordering)
-> **前置依赖**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
+> **前置依赖**:
+> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
 > **前置依赖**: [Traits](../../02_intermediate/00_traits/01_traits.md)
 > **对应 Crate**: [`c05_threads`](../../crates/c05_threads)
 > **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency)

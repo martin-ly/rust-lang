@@ -14,7 +14,12 @@
 > **双维定位**: C×Ana
 > **前置概念**: [Module System](01_module_system.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../00_traits/01_traits.md)
 > **后置概念**: [C++ Surface Features](../../05_comparative/00_paradigms/03_cpp_rust_surface_features.md) · [API Design Patterns](../../06_ecosystem/03_design_patterns/18_api_design_patterns.md)
-> **主要来源**: · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**:
+> · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > [TRPL Ch 7 — Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) ·
 > [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html) ·
@@ -230,7 +235,11 @@ access(item, module) = visible  iff  item 在 module 的可见范围内
 
 ---
 
-> **权威来源**: [TRPL — Packages, Crates, and Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html), [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html), [Rust by Example — Visibility](https://doc.rust-lang.org/rust-by-example/mod/visibility.html), [cppreference — Friend](https://en.cppreference.com/w/cpp/language/friend)
+> **权威来源**:
+> [TRPL — Packages, Crates, and Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html),
+> [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html),
+> [Rust by Example — Visibility](https://doc.rust-lang.org/rust-by-example/mod/visibility.html),
+> [cppreference — Friend](https://en.cppreference.com/w/cpp/language/friend)
 > **权威来源对齐变更日志**: 2026-07-04 创建，对齐 Rust 1.97.0 (Edition 2024)
 > **状态**: ✅ 权威来源对齐完成
 

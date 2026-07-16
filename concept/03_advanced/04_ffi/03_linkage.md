@@ -11,19 +11,37 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: P×Sys — 编译器输出与平台链接行为
-> **前置依赖**: [FFI Advanced](02_ffi_advanced.md) · [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) · [Smart Pointers](../../02_intermediate/02_memory_management/04_smart_pointers.md) · [Terminology Glossary](../../00_meta/01_terminology/01_terminology_glossary.md)
-> **后置概念**: [Unsafe Rust](../02_unsafe/01_unsafe.md) · [Preludes](../../01_foundation/07_modules_and_items/10_preludes.md) · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
+> **前置依赖**:
+> [FFI Advanced](02_ffi_advanced.md) ·
+> [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) ·
+> [Smart Pointers](../../02_intermediate/02_memory_management/04_smart_pointers.md) ·
+> [Terminology Glossary](../../00_meta/01_terminology/01_terminology_glossary.md)
+> **后置概念**:
+> [Unsafe Rust](../02_unsafe/01_unsafe.md) ·
+> [Preludes](../../01_foundation/07_modules_and_items/10_preludes.md) ·
+> [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **定理链**: N/A — 编译器行为/平台相关文档
-> **主要来源**: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html) · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)
-
+> **主要来源**:
+> [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html) ·
+> [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) ·
+> [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) ·
+> [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) ·
+> [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)
 >
-> **来源**: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html) · [Rust Reference — crate_type](https://doc.rust-lang.org/reference/linkage.html)
+> **来源**:
+> [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html) ·
+> [Rust Reference — crate_type](https://doc.rust-lang.org/reference/linkage.html)
 
 ---
 
 ## 一、概述
 
-本节主要从**编译器**而非语言语义的角度，介绍 Rust 支持的 crate 链接方式。Rust 编译器可以通过命令行标志或 `#![crate_type = "..."]` 属性生成多种输出产物。(Source: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html))
+本节主要从**编译器**而非语言语义的角度，介绍 Rust 支持的 crate 链接方式。
+Rust 编译器可以通过命令行标志或 `#![crate_type = "..."]` 属性生成多种输出产物。
+(Source: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html))
 
 > **核心原则**：编译器会尽量避免同一个库在最终产物中出现多次。
 
@@ -220,11 +238,15 @@ unsafe extern "C" {}
 
 > **来源**: [RFC 3722 — Explicit extern ABIs](https://rust-lang.github.io/rfcs/3722-explicit-extern-abis.html)
 
-RFC 3722 要求 `extern` 块与 `extern fn` 的 ABI 字符串**显式化**：裸 `extern {}` / `extern fn`（隐含 `"C"`）将逐步淘汰，统一书写为 `extern "C" {}` / `extern "C" fn`。该变化与 2024 Edition 的 `unsafe extern` 块要求（见 [Edition 2024 完全指南](../../07_future/01_edition_roadmap/02_edition_guide.md)）同属“FFI 边界显式化”治理线：ABI 字符串是链接语义的单一事实源，隐式默认在跨版本演进中是隐患。当前（1.97）裸写法仍可用但已有迁移 lint 路径；新代码应一律显式标注 ABI。
+RFC 3722 要求 `extern` 块与 `extern fn` 的 ABI 字符串**显式化**：裸 `extern {}` / `extern fn`（隐含 `"C"`）将逐步淘汰，统一书写为 `extern "C" {}` / `extern "C" fn`。
+该变化与 2024 Edition 的 `unsafe extern` 块要求（见 [Edition 2024 完全指南](../../07_future/01_edition_roadmap/02_edition_guide.md)）同属“FFI 边界显式化”治理线：
+ABI 字符串是链接语义的单一事实源，隐式默认在跨版本演进中是隐患。
+当前（1.97）裸写法仍可用但已有迁移 lint 路径；新代码应一律显式标注 ABI。
 
 ## 七、Panic 展开与链接一致性
 
-如果 Rust 产物是 **potentially unwinding** 的，则所有 crate 必须使用 `unwind` panic 策略，否则可能导致未定义行为。(Source: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html#linking-and-unwinding))
+如果 Rust 产物是 **potentially unwinding** 的，则所有 crate 必须使用 `unwind` panic 策略，否则可能导致未定义行为。
+(Source: [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html#linking-and-unwinding))
 
 潜在展开的条件：
 
@@ -311,7 +333,9 @@ pub fn rust_add(a: i32, b: i32) -> i32 { a + b }
 - `build.warnings = "deny"` 与 `RUSTFLAGS="-D warnings"` 作用于常规 lint/warnings 体系，**不一定**能压制 `linker_messages`。
 - 因此「CI 强制零警告」策略对 `linker_messages` 可能失效，需显式处理。
 
-⚠ **需专家复核**：上述「`-D warnings` / `build.warnings=deny` 无法压制 `linker_messages`」是由版本页 §2.8「特殊 lint、不受 warnings group 控制」与 §5.1「`build.warnings` 控制本地包常规 lint 警告」两条事实**推导**的 CI 行为结论；具体到各 toolchain 与 linker 的组合表现，建议以 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md) §2.8/§5.1 与实际编译输出复核。
+⚠ **需专家复核**：
+上述「`-D warnings` / `build.warnings=deny` 无法压制 `linker_messages`」是由版本页 §2.8「特殊 lint、不受 warnings group 控制」与 §5.1「`build.warnings` 控制本地包常规 lint 警告」两条事实**推导**的 CI 行为结论；
+具体到各 toolchain 与 linker 的组合表现，建议以 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md) §2.8/§5.1 与实际编译输出复核。
 
 **CI 处理建议**：先以 `warn` 运行收集真实链接器告警并针对性修复；仅在确认为已知误报时临时 `allow`。
 

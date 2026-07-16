@@ -13,8 +13,17 @@
 > **层次定位**: L3 高级概念 / 并发子域 — 类型系统（Type System）与并发（Concurrency）的交叉点
 > **A/S/P 标记**: **S** — Structure（结构性契约）
 > **双维定位**: C×Ana — 分析类型跨线程使用的安全性边界
-> **前置概念**: [Traits](../../02_intermediate/00_traits/01_traits.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [内部可变性（Interior Mutability）](../../02_intermediate/02_memory_management/02_interior_mutability.md)
-> **后置概念**: [Concurrency](01_concurrency.md) · [Atomics & Memory Ordering](06_atomics_and_memory_ordering.md) · [Lock-Free](07_lock_free.md) · [Unsafe Rust](../02_unsafe/01_unsafe.md) · [RustBelt](../../04_formal/02_separation_logic/01_rustbelt.md)
+> **前置概念**:
+> [Traits](../../02_intermediate/00_traits/01_traits.md) ·
+> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) ·
+> [内部可变性（Interior Mutability）](../../02_intermediate/02_memory_management/02_interior_mutability.md)
+> **后置概念**:
+> [Concurrency](01_concurrency.md) ·
+> [Atomics & Memory Ordering](06_atomics_and_memory_ordering.md) ·
+> [Lock-Free](07_lock_free.md) ·
+> [Unsafe Rust](../02_unsafe/01_unsafe.md) ·
+> [RustBelt](../../04_formal/02_separation_logic/01_rustbelt.md)
 
 ---
 
@@ -299,7 +308,12 @@ fn generic_inherits() {
 
 **组合类型的"意外传导"**：规则 2 是**全字段合取**，一个 `!Send` 字段即可否定整个类型——包括你没想到的字段（如嵌入的 `Rc` 回调、`*mut` 句柄）。排查 `E0277` 时应沿报错中的 "within `Outer`, the trait `Send` is not implemented for `Inner`" 链逐层定位毒化字段。
 
-**UnsafeCell 是 Sync 的"地基否定"**：`UnsafeCell<T>: !Sync` 是 std 中所有内部可变性抽象的基例。`Cell`、`RefCell`、`Mutex`、`AtomicU32` 内部都含 `UnsafeCell`；前三者保持 `!Sync`（或仅 `Send`），而 `Mutex`/`Atomic*` 通过 `unsafe impl Sync` 翻案——它们的 `unsafe impl` 之所以**正确**，是因为其 API 保证每次对 `UnsafeCell` 的访问都被互斥锁/原子操作的 happens-before 序保护。这揭示了 Sync 的本质判据：
+**UnsafeCell 是 Sync 的"地基否定"**：
+`UnsafeCell<T>: !Sync` 是 std 中所有内部可变性抽象的基例。
+`Cell`、`RefCell`、`Mutex`、`AtomicU32` 内部都含 `UnsafeCell`；
+前三者保持 `!Sync`（或仅 `Send`），而 `Mutex`/`Atomic*` 通过 `unsafe impl Sync` 翻案
+——它们的 `unsafe impl` 之所以**正确**，是因为其 API 保证每次对 `UnsafeCell` 的访问都被互斥锁/原子操作的 happens-before 序保护。
+这揭示了 Sync 的本质判据：
 
 ```text
 T 含 UnsafeCell ⟹ T 默认 !Sync
@@ -355,7 +369,10 @@ fn assert_send_dyn() {
 
 - **反例 1：`Rc` 跨线程（E0277）**：`thread::spawn(move || drop(rc))` 报 `Rc<i32> cannot be sent between threads safely`。拒绝依据：`Rc` 的引用计数增减是非原子的读-改-写，两线程并发操作同一计数即数据竞争。修复：`Arc`（原子计数，成本是每次克隆一次原子 RMW）。
 - **反例 2：`Arc<Cell<T>>` 共享可变（E0277）**：`Cell<T>: !Sync` 使 `Arc<Cell<T>>: !Sync`——`Arc` 只解决「跨线程移动」（`Send`），不解决「共享后的同步访问」（`Sync`）。这是 `Send`/`Sync` 正交性的典型考题：两层约束分别由两层类型回答，修复是 `Arc<Mutex<T>>` 或 `Arc<AtomicT>`。
-- **反例 3：`unsafe` 手动 impl 的正误对照**：正确情形——类型用 `AtomicUsize` 实现计数但字段组合使自动推导保守失败，人工 `unsafe impl Sync` 并在注释中给出「所有共享访问经原子操作」的论证；错误情形——为消编译错误给含 `Cell` 字段的类型 impl `Sync`，把数据竞争从编译期推迟到生产环境。判定人工 impl 是否合法的标准：能否写出「任意线程交错下，所有经 `&T` 的修改都经同步原语」的完整论证——写不出即非法。
+- **反例 3：
+- `unsafe` 手动 impl 的正误对照**：正确情形——类型用 `AtomicUsize` 实现计数但字段组合使自动推导保守失败，人工 `unsafe impl Sync` 并在注释中给出「所有共享访问经原子操作」的论证；
+- 错误情形——为消编译错误给含 `Cell` 字段的类型 impl `Sync`，把数据竞争从编译期推迟到生产环境。
+- 判定人工 impl 是否合法的标准：能否写出「任意线程交错下，所有经 `&T` 的修改都经同步原语」的完整论证——写不出即非法。
 
 ### 反例 1：`Rc` 跨线程（编译期拒绝 E0277）
 

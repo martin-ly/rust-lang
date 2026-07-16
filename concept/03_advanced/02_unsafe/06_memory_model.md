@@ -382,8 +382,16 @@ fn align_check() {
 - ⚠ **需专家复核**：具体“哪些目标上 primitive 对齐 ≠ 指针宽度对齐”的目标清单，release notes 与版本页**未给出**；本小节不枚举（Enum）目标名，避免臆测。需要精确清单时请查阅 Rust Reference — Conditional compilation 与各 target 的 `target_has_atomic_*` 定义。
 - **旧名 `target_has_atomic_equal_alignment` 的废弃**：任务背景（审计 §2.4/P2-2）指出该 cfg 曾用名 `target_has_atomic_equal_alignment`，1.97 起稳定为 `target_has_atomic_primitive_alignment`，旧名废弃。⚠ **需专家复核**：release notes 与版本页**未提及**该旧名及其废弃时间表；旧名/废弃说法当前仅来自审计背景，未在两类权威来源中核对到，使用前请以 Rust Reference 与对应稳定化 PR 为准。
 
-> **来源**: [Rust 1.97.0 Release Notes — Language](https://releases.rs/docs/1.97.0/) · [Rust Reference — Conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [Rustonomicon — Atomics](https://doc.rust-lang.org/nomicon/atomics.html) · 版本页 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（§2.4）
-> **交叉反链**: [`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md) · [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) · [`42_type_layout.md`](../../04_formal/05_rustc_internals/08_type_layout.md) · [`11_atomics_and_memory_ordering.md`](../00_concurrency/06_atomics_and_memory_ordering.md)
+> **来源**:
+> [Rust 1.97.0 Release Notes — Language](https://releases.rs/docs/1.97.0/) ·
+> [Rust Reference — Conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) ·
+> [Rustonomicon — Atomics](https://doc.rust-lang.org/nomicon/atomics.html) ·
+> 版本页 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（§2.4）
+> **交叉反链**:
+> [`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md) ·
+> [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) ·
+> [`42_type_layout.md`](../../04_formal/05_rustc_internals/08_type_layout.md) ·
+> [`11_atomics_and_memory_ordering.md`](../00_concurrency/06_atomics_and_memory_ordering.md)
 
 ---
 
@@ -472,7 +480,10 @@ Rust 内存模型中的"抽象字节"可以区分哪些状态？
 
 ---
 
-> **Rust 1.91 起**：`ptr::with_exposed_provenance(_mut)` 稳定，为整数↔指针往返提供显式 provenance 暴露路径；**1.96 起**「valid for read/write」定义重构（排除 null，由各方法单独声明例外），统一指针有效性契约。详见 [1.91 版本页](../../07_future/00_version_tracking/rust_1_91_stabilized.md) 与 [1.96 版本页](../../07_future/00_version_tracking/rust_1_96_stabilized.md)（特性矩阵节）。
+> **Rust 1.91 起**：
+> `ptr::with_exposed_provenance(_mut)` 稳定，为整数↔指针往返提供显式 provenance 暴露路径；
+> **1.96 起**「valid for read/write」定义重构（排除 null，由各方法单独声明例外），统一指针有效性契约。
+> 详见 [1.91 版本页](../../07_future/00_version_tracking/rust_1_91_stabilized.md) 与 [1.96 版本页](../../07_future/00_version_tracking/rust_1_96_stabilized.md)（特性矩阵节）。
 
 ## 🧭 思维导图（Mindmap）
 

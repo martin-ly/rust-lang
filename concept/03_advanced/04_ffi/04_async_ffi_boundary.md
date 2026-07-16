@@ -25,7 +25,11 @@
 
 ---
 
-> **来源**: [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) · [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/) · [Tokio docs — Async in Depth](https://docs.rs/tokio/latest/tokio/) · [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)
+> **来源**:
+> [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) ·
+> [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/) ·
+> [Tokio docs — Async in Depth](https://docs.rs/tokio/latest/tokio/) ·
+> [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)
 
 ---
 

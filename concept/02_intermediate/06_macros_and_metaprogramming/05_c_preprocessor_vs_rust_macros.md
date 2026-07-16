@@ -14,7 +14,13 @@
 > **双维定位**: C×Ana
 > **前置概念**: [Macros](../../03_advanced/03_proc_macros/01_macros.md) · [Generics](../01_generics/01_generics.md) · [Traits](../00_traits/01_traits.md)
 > **后置概念**: [Proc Macro](../../03_advanced/03_proc_macros/02_proc_macro.md) · [DSL and Embedding](02_dsl_and_embedding.md)
-> **主要来源**: · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **主要来源**:
+> · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [System F](https://en.wikipedia.org/wiki/System_F) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 >
 > [TRPL Ch 19.5 — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) ·
 > [Rust Reference — macro_rules!](https://doc.rust-lang.org/reference/macros-by-example.html) ·
@@ -241,7 +247,12 @@ M!(t)  ⟶  E[x := α(t)]
 
 ---
 
-> **权威来源**: [Rust Reference — Macros by Example](https://doc.rust-lang.org/reference/macros-by-example.html), [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html), [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html), [The Little Book of Rust Macros](https://veykril.github.io/tlborm/), [cppreference — C preprocessor](https://en.cppreference.com/w/c/preprocessor)
+> **权威来源**:
+> [Rust Reference — Macros by Example](https://doc.rust-lang.org/reference/macros-by-example.html),
+> [Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html),
+> [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html),
+> [The Little Book of Rust Macros](https://veykril.github.io/tlborm/),
+> [cppreference — C preprocessor](https://en.cppreference.com/w/c/preprocessor)
 >
 > **权威来源对齐变更日志**: 2026-07-10 添加权威来源对齐
 

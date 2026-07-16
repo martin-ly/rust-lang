@@ -17,7 +17,13 @@
 
 ---
 
-> **来源**: [The Rust Programming Language — Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [rayon](https://docs.rs/rayon/latest/rayon/) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [The Rust Programming Language — Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) ·
+> [rayon](https://docs.rs/rayon/latest/rayon/) ·
+> [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Atomics and Locks](https://marabos.nl/atomics/) ·
 > [crossbeam crate](https://docs.rs/crossbeam/latest/crossbeam/epoch/index.html) ·
 > [rayon crate](https://docs.rs/rayon/latest/rayon/) ·

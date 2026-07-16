@@ -3,23 +3,42 @@
 # Send/Sync 边界判定
 
 > **EN**: Send/Sync Boundary Judgment — Trait Objects, Closures, and Async State Machines
-> **Summary**: How to decide whether a Rust type is Send or Sync when it appears as a trait object, a closure capture environment, an async future, or an opaque `impl Trait` return type, with practical counterexamples and a decision matrix.
+> **Summary**:
+> How to decide whether a Rust type is Send or Sync when it appears as a trait object, a closure capture environment, an async future, or an opaque `impl Trait` return type, with practical counterexamples and a decision matrix.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L3-L4
 > **受众**: [专家]
-> **权威来源**: 本文件为 `concept/` 权威页。Send/Sync 的**核心契约、auto trait 推导与手动 impl**统一收敛于 [Send 与 Sync：Auto Trait 的并发安全（Concurrency Safety）契约](02_send_sync_auto_traits.md)；本文聚焦**边界形态**（trait objects、闭包（Closures）、async 状态机、`impl Trait`）的判定方法、反例与工程决策。
+> **权威来源**:
+> 本文件为 `concept/` 权威页。Send/Sync 的**核心契约、auto trait 推导与手动 impl**统一收敛于 [Send 与 Sync：Auto Trait 的并发安全（Concurrency Safety）契约](02_send_sync_auto_traits.md)；
+> 本文聚焦**边界形态**（trait objects、闭包（Closures）、async 状态机、`impl Trait`）的判定方法、反例与工程决策。
 >
 > **层次定位**: L3 高级概念 / 并发子域 — 类型系统（Type System）与并发（Concurrency）的交叉点
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析跨线程类型形态的安全性边界
-> **前置概念**: [Send 与 Sync：Auto Trait 的并发安全契约](02_send_sync_auto_traits.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Trait Objects / 分发机制](../../02_intermediate/00_traits/02_dispatch_mechanisms.md) · [Async/Await](../01_async/01_async.md)
+> **前置概念**:
+> [Send 与 Sync：Auto Trait 的并发安全契约](02_send_sync_auto_traits.md) ·
+> [Traits](../../02_intermediate/00_traits/01_traits.md) ·
+> [Trait Objects / 分发机制](../../02_intermediate/00_traits/02_dispatch_mechanisms.md) ·
+> [Async/Await](../01_async/01_async.md)
 > **后置概念**: [并发模式](03_concurrency_patterns.md) · [跨平台并发](05_cross_platform_concurrency.md) · [Unsafe Rust](../02_unsafe/01_unsafe.md)
-> **前置依赖**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Smart Pointers](../../02_intermediate/02_memory_management/01_memory_management.md) · [内部可变性](../../02_intermediate/02_memory_management/02_interior_mutability.md)
-> **后置延伸**: [原子操作（Atomic Operations）与内存序](06_atomics_and_memory_ordering.md) · [无锁编程](07_lock_free.md) · [RustBelt](../../04_formal/02_separation_logic/01_rustbelt.md)
+> **前置依赖**:
+> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) ·
+> [Smart Pointers](../../02_intermediate/02_memory_management/01_memory_management.md) ·
+> [内部可变性](../../02_intermediate/02_memory_management/02_interior_mutability.md)
+> **后置延伸**:
+> [原子操作（Atomic Operations）与内存序](06_atomics_and_memory_ordering.md) ·
+> [无锁编程](07_lock_free.md) ·
+> [RustBelt](../../04_formal/02_separation_logic/01_rustbelt.md)
 > **跨层映射**: L3→L4 Send/Sync ↔ 分离逻辑资源分片 | L3→L6 Tokio `spawn` 与跨线程 executor
 > **定理链编号**: T-043 Send/Sync 边界判定完备性
 > **unsafe 语义对齐**: 提及 `unsafe impl Send/Sync` 时遵循核心语义：`unsafe` 不是关闭检查器，而是将"该类型跨线程真的安全"这一全局假设的证明责任转移给程序员。
-> **主要来源**: [Rust Reference — Send and Sync](https://doc.rust-lang.org/reference/special-types-and-traits.html) · [Rustonomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) · [std::marker::Send](https://doc.rust-lang.org/std/marker/trait.Send.html) · [std::marker::Sync](https://doc.rust-lang.org/std/marker/trait.Sync.html) · [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
+> **主要来源**:
+> [Rust Reference — Send and Sync](https://doc.rust-lang.org/reference/special-types-and-traits.html) ·
+> [Rustonomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) ·
+> [std::marker::Send](https://doc.rust-lang.org/std/marker/trait.Send.html) ·
+> [std::marker::Sync](https://doc.rust-lang.org/std/marker/trait.Sync.html) ·
+> [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
 
 ---
 

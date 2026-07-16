@@ -19,12 +19,19 @@
 
 ---
 
-> **来源**: [Rustonomicon — Atomics](https://doc.rust-lang.org/nomicon/atomics.html) · [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/index.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Rustonomicon — Atomics](https://doc.rust-lang.org/nomicon/atomics.html) ·
+> [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/index.html) ·
+> [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
 > [C++ Memory Model](https://en.cppreference.com/w/cpp/atomic/memory_order) ·
 > [Wikipedia — Lock-free](https://en.wikipedia.org/wiki/Non-blocking_algorithm) ·
 > [Herlihy & Shavit — The Art of Multiprocessor Programming](https://www.amazon.com/Art-Multiprocessor-Programming-Revised-Reprint/dp/0123973376)
-> **前置依赖**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
+> **前置依赖**:
+> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
 > **前置依赖**: [Traits](../../02_intermediate/00_traits/01_traits.md)
 > **对应 Crate**: [`c05_threads`](../../crates/c05_threads)
 > **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency)

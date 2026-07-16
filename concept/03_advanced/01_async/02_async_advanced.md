@@ -249,7 +249,14 @@ fn main() {
 }
 ```
 
-> **修正**: `Pin<P<T>>` 只在 `T: !Unpin` 时保证 `T` 不被移动。`SelfRef` 未包含 `std::marker::PhantomPinned`，因此自动实现 `Unpin`——`Pin<&mut SelfRef>` 允许 `get_mut()` 获取 `&mut SelfRef`，进而允许移动。正确做法：`struct SelfRef { data: String, ptr: *const String, _pin: std::marker::PhantomPinned }`，显式标记 `!Unpin`。这与 C++ 的 `std::pin`（C++20，类似概念）或 Swift 的 `inout`（无 Pin 概念）不同——Rust 的 `Unpin` 是自动 trait，`PhantomPinned` 是显式禁用自动实现的方法。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html)] · [来源: [The Rustonomicon](https://doc.rust-lang.org/std/pin/index.html)]
+> **修正**:
+> `Pin<P<T>>` 只在 `T: !Unpin` 时保证 `T` 不被移动。
+> `SelfRef` 未包含 `std::marker::PhantomPinned`，因此自动实现 `Unpin`——`Pin<&mut SelfRef>` 允许 `get_mut()` 获取 `&mut SelfRef`，进而允许移动。
+> 正确做法：
+> `struct SelfRef { data: String, ptr: *const String, _pin: std::marker::PhantomPinned }`，
+> 显式标记 `!Unpin`。这与 C++ 的 `std::pin`（C++20，类似概念）或 Swift 的 `inout`（无 Pin 概念）不同——Rust 的 `Unpin` 是自动 trait，`PhantomPinned` 是显式禁用自动实现的方法。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html)] ·
+> [来源: [The Rustonomicon](https://doc.rust-lang.org/std/pin/index.html)]
 
 ### 10.3 边界测试：类型不匹配的基础错误
 
@@ -260,7 +267,12 @@ fn main() {
 }
 ```
 
-> **修正**: **类型不匹配**是 Rust 最常见的编译错误：1) `let x: i32 = "hello"` — `&str` 不能隐式转为 `i32`；2) Rust 无隐式类型转换（C/Java 的自动转换）；3) 需显式转换：`"42".parse::<i32>().unwrap()` 或 `42i32.to_string()`。
+> **修正**:
+> **类型不匹配**是 Rust 最常见的编译错误：
+>
+> 1) `let x: i32 = "hello"` — `&str` 不能隐式转为 `i32`；
+> 2) Rust 无隐式类型转换（C/Java 的自动转换）；
+> 3) 需显式转换：`"42".parse::<i32>().unwrap()` 或 `42i32.to_string()`。
 
 ## 逆向推理链（Backward Reasoning）
 

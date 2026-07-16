@@ -17,7 +17,13 @@
 
 ---
 
-> **来源**: · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) · [Unicode UAX #31 — Identifier and Pattern Syntax](https://www.unicode.org/reports/tr31/)
+> **来源**:
+> · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [System F](https://en.wikipedia.org/wiki/System_F) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) ·
+> [Unicode UAX #31 — Identifier and Pattern Syntax](https://www.unicode.org/reports/tr31/)
 > [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) ·
 > Rust 1.96 Release Notes ·
 > [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/) ·
@@ -198,8 +204,13 @@ debug_assert_matches!(config, Some(true));
 
 `assert_matches!` 的形式语义可以经与既有断言宏（Macro）的对比精确刻画：
 
-- **与 `assert!` / `assert_eq!` 的对比**：`assert!(matches!(x, pat))` 与 `assert_matches!(x, pat)` 语义等价，但失败信息不同——`assert_matches!` 在失败时打印「实际值 : 模式」的对照（经 `Debug`），而 `assert!(matches!(...))` 只报 `matches! 返回 false`。与 `assert_eq!` 的区别更深：`assert_eq!` 要求 `PartialEq + Debug` 且比较整个值；`assert_matches!` 用模式匹配，可断言「结构性形状」而忽略字段细节（`Some(_)`, `Err(Error::Io(_))`），也不要求 `PartialEq`——这使它能断言不可比较类型（如含闭包（Closures）的枚举）。
-- **绑定捕获与作用域**：`assert_matches!(x, Some(v) if v > 0)` 中的绑定 `v` 只在断言内部（宏展开生成的 `match` 臂）有效，不泄漏到外围作用域；守卫表达式 `if ...` 与 `match` 守卫语义完全一致。带守卫的版本语义为「`match x { pat if guard => (), _ => panic!() }`」的宏封装。
+- **与 `assert!` / `assert_eq!` 的对比**：
+- `assert!(matches!(x, pat))` 与 `assert_matches!(x, pat)` 语义等价，但失败信息不同——`assert_matches!` 在失败时打印「实际值 : 模式」的对照（经 `Debug`），而 `assert!(matches!(...))` 只报 `matches! 返回 false`。
+- 与 `assert_eq!` 的区别更深：`assert_eq!` 要求 `PartialEq + Debug` 且比较整个值；
+- `assert_matches!` 用模式匹配，可断言「结构性形状」而忽略字段细节（`Some(_)`, `Err(Error::Io(_))`），也不要求 `PartialEq`——这使它能断言不可比较类型（如含闭包（Closures）的枚举）。
+- **绑定捕获与作用域**：
+- `assert_matches!(x, Some(v) if v > 0)` 中的绑定 `v` 只在断言内部（宏展开生成的 `match` 臂）有效，不泄漏到外围作用域；
+- 守卫表达式 `if ...` 与 `match` 守卫语义完全一致。带守卫的版本语义为「`match x { pat if guard => (), _ => panic!() }`」的宏封装。
 
 形式化：`assert_matches!(e, p)` ⟺ `match e { p => {}, _ => panic!("assertion failed: {:?} does not match {}", e, stringify!(p)) }`——它是「单臂 match + 调试输出」的命名化，价值在诊断质量而非新语义。
 

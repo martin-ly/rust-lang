@@ -18,13 +18,20 @@
 > **后置概念**:
 > [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) ·
 > [System Design Principles](../../06_ecosystem/03_design_patterns/03_system_design_principles.md)
-> **主要来源**: · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**:
+> · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) ·
+> [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) ·
+> [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Herlihy & Shavit — The Art of Multiprocessor Programming] ·
 > [Lynch — Distributed Algorithms] · [Tanenbaum — Distributed Systems] ·
 > [Amazon Science — Must Framework] ·
 > [Rust Atomics and Locks](https://marabos.nl/atomics/)
 >
-> **来源**: [std::thread](https://doc.rust-lang.org/std/thread/) · [Rayon Docs](https://docs.rs/rayon/) · [TRPL — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
+> **来源**:
+> [std::thread](https://doc.rust-lang.org/std/thread/) ·
+> [Rayon Docs](https://docs.rs/rayon/) ·
+> [TRPL — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 ---
 
 > **Bloom 层级**: L3-L6

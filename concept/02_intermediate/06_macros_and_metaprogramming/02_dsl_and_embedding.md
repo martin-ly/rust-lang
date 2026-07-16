@@ -15,7 +15,12 @@
 
 ---
 
-> **来源**: · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) ·
+> [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) ·
 > [nom Parser Combinators](https://docs.rs/nom/latest/nom/) ·
