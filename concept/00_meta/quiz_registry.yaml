@@ -193,6 +193,30 @@ standalone_quizzes:
   - concept/03_advanced/00_concurrency/01_concurrency.md
   - concept/03_advanced/01_async/01_async.md
   concept_to_quiz_backlink: true
+- path: concept/03_advanced/00_concurrency/10_quiz_semantic_models.md
+  layer: L3
+  topic: 语义模型与跨语言对比（代数效应、依赖/细化类型、STM、分布式共识、GPU/HPC、语言语义模型矩阵）
+  questions: 15
+  meta_questions: 3
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 3
+    intermediate: 10
+    expert: 2
+  quiz_to_concept: true
+  concept_pages:
+  - concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md
+  - concept/04_formal/00_type_theory/10_dependent_refinement_types.md
+  - concept/04_formal/07_concurrency_semantics/05_stm_semantics.md
+  - concept/04_formal/07_concurrency_semantics/06_distributed_consensus_theory.md
+  - concept/05_comparative/02_managed_languages/09_rust_vs_haskell.md
+  - concept/05_comparative/00_paradigms/05_language_semantic_model_matrix.md
+  - concept/06_ecosystem/06_data_and_distributed/06_distributed_consensus.md
+  concept_to_quiz_backlink: true
 - path: concept/03_advanced/02_unsafe/05_quiz_unsafe.md
   layer: L3
   topic: Unsafe Rust（裸指针、unsafe 块/函数/trait、FFI、Miri）

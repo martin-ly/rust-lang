@@ -19,3 +19,4 @@ pub mod ex05_trait_object;
 pub mod ex06_if_let_guards;
 pub mod ex07_builder_pattern;
 pub mod ex08_luhn_algorithm;
+pub mod ex09_const_generics_semantics;

@@ -30,6 +30,8 @@
 > **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/04_roadmap.md)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/01_type_theory.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
+>
+> **形式理论分工（Canonical）**: 共识的**形式理论**——FLP 不可能性证明骨架、部分同步与故障检测器、CAP/PACELC 形式化、Paxos/Raft/PBFT 不变量与安全性论证、所有权类型系统 ⟹ 共识实现安全的机制分析——以 [L4 分布式共识与不可能性理论](../../04_formal/07_concurrency_semantics/06_distributed_consensus_theory.md) 为权威页；本页保留**算法机制教程、Rust 生态对比、选型决策树与边界测试**视角，理论推导不再展开。
 
 ## 📑 目录
 
@@ -266,7 +268,12 @@ Rust 实现 `raft-rs`（TiKV 抽出的核心库）只提供状态机式的 `RawN
 
 ### 4.1 Raft 核心机制
 
-> **[Raft — Ongaro & Ousterhout, ATC 2014](https://raft.github.io/raft.pdf)** Raft 是为**可理解性**设计的共识算法。与 Paxos 相比，Raft 将问题分解为三个独立子问题：**领导者选举**（Leader Election）、**日志复制**（Log Replication）、**安全性**（Safety）。通过**强领导者**（Strong Leader）简化设计：所有日志条目只从 Leader 流向 Follower。[来源: [Raft Paper](https://raft.github.io/raft.pdf)]
+> **[Raft — Ongaro & Ousterhout, ATC 2014](https://raft.github.io/raft.pdf)**
+> Raft 是为**可理解性**设计的共识算法。
+> 与 Paxos 相比，Raft 将问题分解为三个独立子问题：
+> **领导者选举**（Leader Election）、**日志复制**（Log Replication）、**安全性**（Safety）。
+> 通过**强领导者**（Strong Leader）简化设计：所有日志条目只从 Leader 流向 Follower。
+> [来源: [Raft Paper](https://raft.github.io/raft.pdf)]
 
 ```text
 Raft 状态机:
@@ -843,6 +850,7 @@ fn elect(state: Arc<Mutex<NodeState>>) {
 - [因果序与向量时钟](09_causal_ordering_vector_clocks.md) — Lamport 偏序、向量时钟：共识「全序广播」抹平的正是这个偏序
 - [CRDT 谱系](08_crdt_type_zoo.md) — 无共识路线：用合并格代数替代全序达成收敛
 - [L4 线性化与一致性谱系](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) — 线性化的形式定义：Raft 在多机实现的对象级语义
+- [L4 分布式共识与不可能性理论](../../04_formal/07_concurrency_semantics/06_distributed_consensus_theory.md) — FLP/CAP/PACELC 与 Paxos/Raft/PBFT 的形式理论权威页（证明骨架、不变量、仲裁算术）
 - [性能优化](../10_performance/01_performance_optimization.md) — 批处理、流水线、零拷贝
 - [安全与密码学](../07_security_and_cryptography/02_security_cryptography.md) — 数字签名、阈值密码学
 

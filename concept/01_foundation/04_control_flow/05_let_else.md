@@ -10,7 +10,7 @@
 > **Rust 版本**: 1.65.0+ stable
 > **最后更新**: 2026-07-16
 >
-> **前置概念**: [Control Flow](01_control_flow.md) · [Patterns](02_patterns.md) · [Let Chains](03_let_chains.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md)
+> **前置概念**: [Control Flow](01_control_flow.md) · [Patterns](02_patterns.md) · [Let Chains](03_let_chains.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) · [术语表](../../00_meta/01_terminology/01_terminology_glossary.md)
 > **后置概念**: [Statements and Expressions](04_statements_and_expressions.md) · [Option/Result Idioms](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md)
 >
 > **权威来源**:
@@ -218,21 +218,17 @@ fn main() {
 
 `let-else` 要求模式是可反驳的。使用不可反驳模式会报错：
 
-```rust,compile_fail
-fn main() {
-    let x = Some(5);
-    let Some(y) | None = x else { return; }; // 错误：let-else 不支持 |
-}
-```
+实际上，更常见的“错误”是写了一个永远匹配的模式——此时编译器只会警告 `irrefutable_let_patterns`，而不会报错：
 
-实际上，更常见的错误是写了一个永远匹配的模式：
-
-```rust,compile_fail
+```rust
 fn main() {
     let x = 5;
-    let n = x else { return; }; // 错误：n 是不可反驳模式
+    let n = x else { return; }; // ⚠️ warning: unreachable `else` clause
+    println!("{}", n);
 }
 ```
+
+> 这说明 `let-else` 的语法上**允许**不可反驳模式，但失去了提前退出的意义；lint 会提示你改用普通 `let`。
 
 ### 2.4 与 let chains 的关系
 

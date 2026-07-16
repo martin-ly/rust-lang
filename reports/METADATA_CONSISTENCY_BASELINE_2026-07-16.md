@@ -1,17 +1,17 @@
 # 元数据一致性基线（语义质量门 P0-1）
 
-**日期**: 2026-07-16  **扫描**: 521 concept 活跃文件（排除 archive）  **模式**: strict
+**日期**: 2026-07-16  **扫描**: 540 concept 活跃文件（排除 archive）  **模式**: strict
 
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
 | D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥 | 0 | 0.0% | >0 | pass |
-| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 0 (基=324) | 0.0% | >=5% | pass |
+| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 0 (基=328) | 0.0% | >=5% | pass |
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
 | D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
-| D6 Summary 低信息量模板套话 | 6 | 1.2% | >=3% | pass |
+| D6 Summary 低信息量模板套话 | 6 | 1.1% | >=3% | pass |
 
-**受影响文件总数**: 6 / 521
+**受影响文件总数**: 6 / 540
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -49,6 +49,7 @@
 - `concept/06_ecosystem/00_toolchain/07_rustdoc_196_changes.md` — 页面主题即 Rust 1.97 稳定化两个原 nightly rustdoc 标志，nightly 为历史状态陈述
 - `concept/06_ecosystem/00_toolchain/15_z_flags_reference.md` — 页面主题即 nightly-only `-Z` 选项系统化清单（与既有 -Z 类白名单页同质）
 - `concept/06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md` — Tier 2/3 no_std 目标须 nightly + -Z build-std 为工具链事实；rustc book 仅 nightly 路径托管（URL 规则已排除）
+- `concept/06_ecosystem/05_systems_and_embedded/12_gpu_programming_and_hpc.md` — rust-gpu 绑定固定编译器版本、std::simd portable SIMD 未稳定、nvptx64 目标须 nightly -Z build-std 均为截至 1.97 的工具链事实陈述（与既有 10_target_tier_platform_support.md 同质）
 - `concept/06_ecosystem/13_quizzes/03_quiz_security_testing.md` — quiz 题目/解析以 cargo vet 工具链可用性与 #[bench] nightly 状态为考点，nightly 为考点内容本身
 - `concept/sources/rfc_index.md` — RFC 索引：状态列记录各 RFC nightly/每日构建版状态，即索引内容本身（同 sources/INDEX.md 既有登记）
 - `concept/00_meta/00_framework/semantic_space.md` — 元框架页：nightly/preview 作为版本演进维度概念名引用（语义空间坐标轴描述）
@@ -86,6 +87,12 @@
 - `concept/06_ecosystem/01_cargo/04_cargo_196_features.md` — 迁移建议节：迁移窗口留 nightly CI 观察为工程实践陈述，非稳定层依赖
 - `concept/06_ecosystem/05_systems_and_embedded/02_cross_compilation.md` — 反命题树节：自定义 target 无 std 预编译须 nightly build-std 为工具链事实
 - `concept/06_ecosystem/08_formal_verification/01_formal_ecosystem_tower.md` — 演进方向节：Prusti/Kani 绑定特定 nightly/rustc 版本为生态事实陈述
+- `concept/02_intermediate/00_traits/08_negative_impls.md` — negative_impls 特性截至 1.97.0 仍为 nightly-only，页面主题即该特性
+- `concept/02_intermediate/00_traits/09_associated_type_defaults.md` — associated_type_defaults 特性截至 1.97.0 仍为 nightly-only，页面主题即该特性
+- `concept/04_formal/00_type_theory/10_dependent_refinement_types.md` — 页面讨论 Rust const generics 的 stable/nightly 边界；nightly 为 generic_const_exprs/adt_const_params 边界标注
+- `concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md` — 页面讨论 Rust 关键字效应与 effect handlers 设计空间；nightly 为预览特性边界标注
+- `concept/05_comparative/01_systems_languages/08_rust_vs_d.md` — 跨语言对比页客观陈述 D `-preview=dip1000` 标志名与 Rust 尚未稳定特性；nightly/preview 为对比事实本身
+- `concept/05_comparative/02_managed_languages/11_rust_vs_fsharp.md` — 跨语言对比页客观陈述 Rust 实验性特性边界；nightly/preview 为对比事实本身
 
 另有两类规则级排除：WASI Preview 1/2/3（WASM 规范版本专名）与 URL 路径中的 nightly（官方文档固定托管路径）。
 

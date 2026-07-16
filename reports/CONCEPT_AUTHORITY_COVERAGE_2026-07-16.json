@@ -1,59 +1,75 @@
 {
   "date": "2026-07-16",
-  "scanned": 500,
+  "scanned": 518,
   "coverage": {
     "P0": [
-      495,
+      513,
       99.0
     ],
     "P1": [
-      458,
-      91.6
+      465,
+      89.8
     ],
     "P2": [
-      424,
-      84.8
+      434,
+      83.8
     ],
     "any": [
-      500,
+      518,
       100.0
     ],
     "none": 0
   },
   "content_scope": {
-    "scanned": 414,
+    "scanned": 430,
     "P0": [
-      414,
+      430,
       100.0
     ],
     "P1": [
-      405,
-      97.8
+      411,
+      95.6
     ],
     "P2": [
-      407,
-      98.3
+      417,
+      97.0
     ],
     "any": [
-      414,
+      430,
       100.0
     ],
     "gaps_p1": [
       "concept/01_foundation/04_control_flow/03_let_chains.md",
+      "concept/01_foundation/04_control_flow/05_let_else.md",
+      "concept/02_intermediate/00_traits/08_negative_impls.md",
+      "concept/02_intermediate/00_traits/09_associated_type_defaults.md",
       "concept/02_intermediate/01_generics/05_const_generics_and_trait_objects.md",
       "concept/03_advanced/00_concurrency/04_send_sync_boundaries.md",
       "concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md",
       "concept/03_advanced/04_ffi/04_async_ffi_boundary.md",
       "concept/03_advanced/04_ffi/05_unsafe_extern_blocks.md",
+      "concept/04_formal/00_type_theory/10_dependent_refinement_types.md",
+      "concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md",
+      "concept/04_formal/07_concurrency_semantics/05_stm_semantics.md",
+      "concept/05_comparative/01_systems_languages/07_rust_vs_ada_spark.md",
+      "concept/05_comparative/01_systems_languages/08_rust_vs_d.md",
+      "concept/05_comparative/01_systems_languages/09_rust_vs_nim.md",
       "concept/06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md",
       "concept/07_future/00_version_tracking/rust_1_98_stabilized.md",
+      "concept/07_future/00_version_tracking/rust_1_99_preview.md",
       "concept/07_future/02_preview_features/19_const_trait_preview.md"
     ],
     "gaps_p2": [
+      "concept/02_intermediate/00_traits/08_negative_impls.md",
+      "concept/02_intermediate/00_traits/09_associated_type_defaults.md",
       "concept/02_intermediate/01_generics/05_const_generics_and_trait_objects.md",
       "concept/03_advanced/00_concurrency/04_send_sync_boundaries.md",
       "concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md",
       "concept/03_advanced/04_ffi/05_unsafe_extern_blocks.md",
+      "concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md",
+      "concept/05_comparative/00_paradigms/05_language_semantic_model_matrix.md",
+      "concept/05_comparative/02_managed_languages/09_rust_vs_haskell.md",
+      "concept/05_comparative/02_managed_languages/11_rust_vs_fsharp.md",
       "concept/06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md",
       "concept/07_future/00_version_tracking/rust_1_98_stabilized.md",
       "concept/07_future/02_preview_features/19_const_trait_preview.md"
@@ -61,44 +77,44 @@
   },
   "by_layer": {
     "L0": {
-      "n": 63,
-      "P0": 63,
-      "any": 63
+      "n": 64,
+      "P0": 64,
+      "any": 64
     },
     "L1": {
-      "n": 56,
-      "P0": 56,
-      "any": 56
+      "n": 57,
+      "P0": 57,
+      "any": 57
     },
     "L2": {
-      "n": 39,
-      "P0": 39,
-      "any": 39
+      "n": 41,
+      "P0": 41,
+      "any": 41
     },
     "L3": {
-      "n": 70,
-      "P0": 70,
-      "any": 70
+      "n": 71,
+      "P0": 71,
+      "any": 71
     },
     "L4": {
-      "n": 55,
-      "P0": 55,
-      "any": 55
+      "n": 59,
+      "P0": 59,
+      "any": 59
     },
     "L5": {
-      "n": 20,
-      "P0": 20,
-      "any": 20
+      "n": 27,
+      "P0": 27,
+      "any": 27
     },
     "L6": {
-      "n": 128,
-      "P0": 124,
-      "any": 128
+      "n": 129,
+      "P0": 125,
+      "any": 129
     },
     "L7": {
-      "n": 66,
-      "P0": 65,
-      "any": 66
+      "n": 67,
+      "P0": 66,
+      "any": 67
     },
     "L?": {
       "n": 3,

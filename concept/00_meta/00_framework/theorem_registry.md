@@ -25,6 +25,7 @@
     - [3.7 Trait 工程扩展域（T-200 – T-229）](#37-trait-工程扩展域t-200--t-229)
     - [3.8 泛型工程扩展域（T-230 – T-259）](#38-泛型工程扩展域t-230--t-259)
     - [3.9 形式化域（T-100 – T-159）](#39-形式化域t-100--t-159)
+    - [3.10 语义模型域（T-160 – T-199）](#310-语义模型域t-160--t-199)
   - [4. 冲突解决记录](#4-冲突解决记录)
   - [5. 使用规范](#5-使用规范)
   - [6. 维护责任](#6-维护责任)
@@ -149,6 +150,15 @@
 | T-110 – T-112 | 操作语义相关命题 | `concept/04_formal/03_operational_semantics/05_axiomatic_semantics.md` | ✅ 已注册 |
 | T-120 – T-129 | 公理语义相关命题 | `concept/04_formal/03_operational_semantics/05_axiomatic_semantics.md` | ✅ 已注册 |
 | T-130 – T-132 | 形式化扩展命题 | `concept/04_formal/00_type_theory/06_type_semantics.md` | ✅ 已注册 |
+
+### 3.10 语义模型域（T-160 – T-199）
+
+| 编号 | 命题 | 所在文件 | 状态 |
+|---|---|---|---|
+| T-160 | Rust 内存安全定理 | `concept/04_formal/00_type_theory/10_dependent_refinement_types.md` | ✅ 已注册 |
+| T-161 | Rust 并发安全定理 | `concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md` | ✅ 已注册 |
+| T-162 | Rust 效应系统不完备性权衡定理 | `concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md` | ✅ 已注册 |
+| T-163 | Rust 依赖类型片段定理 | `concept/04_formal/00_type_theory/10_dependent_refinement_types.md` | ✅ 已注册 |
 
 ---
 

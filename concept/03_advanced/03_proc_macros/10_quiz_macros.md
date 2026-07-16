@@ -360,7 +360,7 @@ fn main() {
 
 **答案**：✅ 能编译，输出：
 
-```
+```text
 Expression: 1 + 2
 Value: 3
 Expression: { let x = 5 ; x * 2 }

@@ -287,17 +287,26 @@
 4. **跨语言对比**覆盖了 13 个主流语言，但缺少 **Haskell、OCaml、F#、Ada/SPARK、D、Nim** 等高相关语言。
 5. 缺少一张统一的 **Rust 特性 ↔ 语义模型 ↔ 主流语言** 三维映射。
 
-### 9.2 Phase 0 剩余任务
+### 9.2 Phase 0 完成情况 ✅
 
-- [ ] 等待 `scripts/run_quality_gates.sh` 完成，记录各门通过/失败状态
-- [ ] 根据质量门输出，更新本报告 §7
-- [ ] 完成 `tmp/semantic_model_3d_mapping.json` 填充
+- [x] `scripts/run_quality_gates.sh` 完成，23 阻断门 + 5 观察门全部通过
+- [x] 更新本报告 §7 质量门基线
+- [x] 完成 `tmp/semantic_model_3d_mapping.json` 初始填充
 
-### 9.3 Phase 1 就绪任务
+### 9.3 Phase 1 完成情况 ✅
 
-- [ ] 基于 1.98 beta 信息，预填充 `rust_1_98_stabilized.md` 骨架中的实测内容（在稳定前用 beta 验证）
-- [ ] 建立 `rust_1_99_preview.md`
-- [ ] 创建缺失的 1.97 深度页：negative impls、associated type defaults、let else
+- [x] 基于 1.98 beta 信息，预填充 `rust_1_98_stabilized.md` 骨架中的实测内容
+- [x] 建立 `rust_1_99_preview.md`
+- [x] 创建缺失的 1.97 深度页：negative impls、associated type defaults、let else
+
+> 进度详情见 [`reports/SEMANTIC_MODEL_ALIGNMENT_PROGRESS_2026_07_16.md`](SEMANTIC_MODEL_ALIGNMENT_PROGRESS_2026_07_16.md)
+
+### 9.4 Phase 2 就绪任务
+
+- [ ] workflow / BPMN / Petri nets 语义模型权威页
+- [ ] statecharts / 状态机语义权威页
+- [ ] algebraic effects 与 OCaml 5 / Koka / Eff 对比
+- [ ] dependent / refinement types 与 Idris / Agda / F* / Liquid Haskell 对比
 
 ---
 

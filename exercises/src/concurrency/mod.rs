@@ -15,3 +15,4 @@ pub mod ex03_channel_mpsc;
 pub mod ex04_rwlock_shared;
 pub mod ex05_arc_atomic;
 pub mod ex06_link_checker;
+pub mod ex07_stm_style_transactions;

@@ -11,8 +11,8 @@
 > **最后更新**: 2026-07-16
 > **状态**: 不稳定；RFC 2532 已接受，实现与语义收敛中
 >
-> **前置概念**: [Traits](01_traits.md) · [Advanced Traits](04_advanced_traits.md) · [Generics](../01_generics/01_generics.md)
-> **后置概念**: [Specialization](../07_future/02_preview_features/31_specialization_preview.md) · [GATs](07_generic_associated_types.md)
+> **前置概念**: [Traits](01_traits.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Advanced Traits](04_advanced_traits.md) · [Generics](../01_generics/01_generics.md)
+> **后置概念**: [Specialization](../../07_future/02_preview_features/31_specialization_preview.md) · [GATs](07_generic_associated_types.md)
 >
 > **权威来源**:
 > · [RFC 2532 — Associated type defaults](https://rust-lang.github.io/rfcs/2532-associated-type-defaults.html) ·
@@ -383,4 +383,4 @@ fn main() {}
 - [Tracking Issue #29661](https://github.com/rust-lang/rust/issues/29661)
 - [Rust Reference — Associated Types](https://doc.rust-lang.org/reference/items/traits.html#associated-types)
 - [Advanced Traits 权威页](04_advanced_traits.md)
-- [Specialization 预览页](../07_future/02_preview_features/31_specialization_preview.md)
+- [Specialization 预览页](../../07_future/02_preview_features/31_specialization_preview.md)

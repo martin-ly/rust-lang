@@ -1,7 +1,7 @@
 {
   "summary": {
     "date": "2026-07-16",
-    "files": 13,
+    "files": 14,
     "flagged": 0,
     "T1_def_low_rate": 0.0,
     "T1_def_low": [
@@ -111,6 +111,11 @@
     {
       "rel": "concept/00_meta/knowledge_topology/10_gap_and_action_plan.md",
       "lines": 78,
+      "issues": {}
+    },
+    {
+      "rel": "concept/00_meta/knowledge_topology/11_semantic_model_atlas.md",
+      "lines": 521,
       "issues": {}
     },
     {

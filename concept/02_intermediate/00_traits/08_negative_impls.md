@@ -11,7 +11,7 @@
 > **最后更新**: 2026-07-16
 > **状态**: 用户代码 nightly only；标准库内部已使用
 >
-> **前置概念**: [Traits](01_traits.md) · [Send 与 Sync](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md) · [Auto Traits](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md)
+> **前置概念**: [Traits](01_traits.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Send 与 Sync](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md)
 > **后置概念**: [Pin 与 Unpin](../../03_advanced/01_async/08_pin_unpin.md) · [Rust 1.98+ 前沿特性预览](../../07_future/00_version_tracking/rust_1_98_preview.md)
 >
 > **权威来源**:

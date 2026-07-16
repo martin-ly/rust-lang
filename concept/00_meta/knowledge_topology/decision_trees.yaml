@@ -21,7 +21,7 @@
 # 校验: python scripts/check_decision_trees.py [--strict]
 
 version: "1.1"
-date: "2026-07-15"
+date: "2026-07-16"
 maintainer: "concept/00_meta/knowledge_topology"
 validator: "scripts/check_decision_trees.py"
 kg: "concept/00_meta/kg_data_v3.json"
@@ -1030,3 +1030,412 @@ trees:
       - {from: F2, to: V7, label: "验证"}
       - {from: F3, to: V7, label: "验证"}
       - {from: F4, to: V7, label: "验证"}
+
+  # ==========================================================================
+  # 来源三: 10_semantic_model_atlas.md（语言 / 并发分布式 模型选择）
+  # ==========================================================================
+
+  - id: DF-LANG-01
+    title_zh: 编程语言选择决策树
+    title_en: Programming Language Selection Decision Tree
+    source:
+      file: concept/00_meta/knowledge_topology/11_semantic_model_atlas.md
+      anchor: "#语言选择决策树"
+    covered_concepts: [ex:ProgrammingLanguageFoundations, ex:ComprehensiveRustMapping, ex:TypeSystem, ex:MemoryManagement, ex:EffectsAndPurity, ex:FormalMethods]
+    nodes:
+      - id: DF-LANG-01-ENTRY
+        type: condition
+        label: "入口：根据项目约束选择编程语言"
+      - id: DF-LANG-01-Q1
+        type: decision
+        condition: "是否需要最大内存安全且不接受垃圾回收（GC）？"
+        quantitative: false
+      - id: DF-LANG-01-Q2
+        type: decision
+        condition: "是否需要 GC 与快速生产力？"
+        quantitative: false
+      - id: DF-LANG-01-Q3
+        type: decision
+        condition: "是否需要纯函数式抽象 / 高阶类型（HKT）？"
+        quantitative: false
+      - id: DF-LANG-01-Q4
+        type: decision
+        condition: "是否需要系统级零成本抽象 + 手动内存管理？"
+        quantitative: false
+      - id: DF-LANG-01-Q5
+        type: decision
+        condition: "是否需要安全关键认证？"
+        quantitative: false
+      - id: DF-LANG-01-Q6
+        type: decision
+        condition: "是否需要跨平台 UI / 移动开发？"
+        quantitative: false
+      - id: DF-LANG-01-Q7
+        type: decision
+        condition: "是否需要编译期元编程？"
+        quantitative: false
+      - id: DF-LANG-01-Q8
+        type: decision
+        condition: "是否需要 effect handlers / 高级类型系统？"
+        quantitative: false
+      - id: DF-LANG-01-Q9
+        type: decision
+        condition: "是否需要依赖类型 / 形式化证明？"
+        quantitative: false
+      - {id: DF-LANG-01-C1, type: conclusion, label: "结论：Rust / Ada-SPARK / Zig（需手动纪律）"}
+      - {id: DF-LANG-01-C2, type: conclusion, label: "结论：Go / Java / C# / F# / Kotlin"}
+      - {id: DF-LANG-01-C3, type: conclusion, label: "结论：Haskell / OCaml / F# / Scala"}
+      - {id: DF-LANG-01-C4, type: conclusion, label: "结论：C / C++ / Rust / Zig / D"}
+      - {id: DF-LANG-01-C5, type: conclusion, label: "结论：Ada/SPARK / Rust（Ferrocene 路径）"}
+      - {id: DF-LANG-01-C6, type: conclusion, label: "结论：Swift / Kotlin / C# / Rust"}
+      - {id: DF-LANG-01-C7, type: conclusion, label: "结论：Rust / Nim / D / C++ 模板 / Zig"}
+      - {id: DF-LANG-01-C8, type: conclusion, label: "结论：OCaml 5 / Koka / Haskell"}
+      - {id: DF-LANG-01-C9, type: conclusion, label: "结论：Idris / Agda / F* / Lean / Liquid Haskell"}
+      - {id: DF-LANG-01-C10, type: conclusion, label: "结论：建议重新评估需求；通用脚本/全栈可选 Python / JavaScript / TypeScript"}
+      - {id: DF-LANG-01-V1, type: conclusion, label: "验证回边：构建原型、评估生态、跑 benchmark 与安全审查"}
+    edges:
+      - {from: DF-LANG-01-ENTRY, to: DF-LANG-01-Q1, label: "入口"}
+      - {from: DF-LANG-01-Q1, to: DF-LANG-01-C1, label: "是"}
+      - {from: DF-LANG-01-Q1, to: DF-LANG-01-Q2, label: "否"}
+      - {from: DF-LANG-01-Q2, to: DF-LANG-01-C2, label: "是"}
+      - {from: DF-LANG-01-Q2, to: DF-LANG-01-Q3, label: "否"}
+      - {from: DF-LANG-01-Q3, to: DF-LANG-01-C3, label: "是"}
+      - {from: DF-LANG-01-Q3, to: DF-LANG-01-Q4, label: "否"}
+      - {from: DF-LANG-01-Q4, to: DF-LANG-01-C4, label: "是"}
+      - {from: DF-LANG-01-Q4, to: DF-LANG-01-Q5, label: "否"}
+      - {from: DF-LANG-01-Q5, to: DF-LANG-01-C5, label: "是"}
+      - {from: DF-LANG-01-Q5, to: DF-LANG-01-Q6, label: "否"}
+      - {from: DF-LANG-01-Q6, to: DF-LANG-01-C6, label: "是"}
+      - {from: DF-LANG-01-Q6, to: DF-LANG-01-Q7, label: "否"}
+      - {from: DF-LANG-01-Q7, to: DF-LANG-01-C7, label: "是"}
+      - {from: DF-LANG-01-Q7, to: DF-LANG-01-Q8, label: "否"}
+      - {from: DF-LANG-01-Q8, to: DF-LANG-01-C8, label: "是"}
+      - {from: DF-LANG-01-Q8, to: DF-LANG-01-Q9, label: "否"}
+      - {from: DF-LANG-01-Q9, to: DF-LANG-01-C9, label: "是"}
+      - {from: DF-LANG-01-Q9, to: DF-LANG-01-C10, label: "否"}
+      - {from: DF-LANG-01-C1, to: DF-LANG-01-V1, label: "验证"}
+      - {from: DF-LANG-01-C2, to: DF-LANG-01-V1, label: "验证"}
+      - {from: DF-LANG-01-C3, to: DF-LANG-01-V1, label: "验证"}
+      - {from: DF-LANG-01-C4, to: DF-LANG-01-V1, label: "验证"}
+      - {from: DF-LANG-01-C5, to: DF-LANG-01-V1, label: "验证"}
+      - {from: DF-LANG-01-C6, to: DF-LANG-01-V1, label: "验证"}
+      - {from: DF-LANG-01-C7, to: DF-LANG-01-V1, label: "验证"}
+      - {from: DF-LANG-01-C8, to: DF-LANG-01-V1, label: "验证"}
+      - {from: DF-LANG-01-C9, to: DF-LANG-01-V1, label: "验证"}
+      - {from: DF-LANG-01-C10, to: DF-LANG-01-V1, label: "验证"}
+
+  - id: DF-CONC-DIST-01
+    title_zh: 并发与分布式模型选择决策树
+    title_en: Concurrency and Distributed Model Selection Decision Tree
+    source:
+      file: concept/00_meta/knowledge_topology/11_semantic_model_atlas.md
+      anchor: "#并发分布式模型选择决策树"
+    covered_concepts: [ex:Concurrency, ex:AsyncProgramming, ex:ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, ex:ConcurrencySemanticsFormalModelsOfConcurrentComputation, ex:ParallelDistributedPatternSpectrum, ex:UnsafeRust]
+    nodes:
+      - id: DF-CONC-DIST-01-ENTRY
+        type: condition
+        label: "入口：选择并发/并行/分布式模型"
+      - id: DF-CONC-DIST-01-Q1
+        type: decision
+        condition: "单进程内是否存在共享可变状态？"
+        quantitative: false
+      - id: DF-CONC-DIST-01-Q2
+        type: decision
+        condition: "任务间是否需要消息传递？"
+        quantitative: false
+      - id: DF-CONC-DIST-01-Q3
+        type: decision
+        condition: "是否 CPU 密集型并行数据？"
+        quantitative: false
+      - id: DF-CONC-DIST-01-Q4
+        type: decision
+        condition: "是否 I/O 密集型大量连接？"
+        quantitative: false
+      - id: DF-CONC-DIST-01-Q5
+        type: decision
+        condition: "是否需要 Actor 隔离？"
+        quantitative: false
+      - id: DF-CONC-DIST-01-Q6
+        type: decision
+        condition: "跨网络是否需要强一致性？"
+        quantitative: false
+      - id: DF-CONC-DIST-01-Q7
+        type: decision
+        condition: "跨网络是否需要分区容错？"
+        quantitative: false
+      - id: DF-CONC-DIST-01-Q8
+        type: decision
+        condition: "是否安全关键硬实时？"
+        quantitative: false
+      - id: DF-CONC-DIST-01-Q9
+        type: decision
+        condition: "是否 GPU / 数据并行？"
+        quantitative: false
+      - {id: DF-CONC-DIST-01-C1, type: conclusion, label: "结论：Mutex / RwLock + Arc"}
+      - {id: DF-CONC-DIST-01-C2, type: conclusion, label: "结论：channels（mpsc / mpmc）"}
+      - {id: DF-CONC-DIST-01-C3, type: conclusion, label: "结论：Rayon / scoped threads"}
+      - {id: DF-CONC-DIST-01-C4, type: conclusion, label: "结论：async/await + Tokio"}
+      - {id: DF-CONC-DIST-01-C5, type: conclusion, label: "结论：Actix / Actix-web 或 Erlang/Elixir / Scala Akka"}
+      - {id: DF-CONC-DIST-01-C6, type: conclusion, label: "结论：distributed consensus / Raft"}
+      - {id: DF-CONC-DIST-01-C7, type: conclusion, label: "结论：CRDTs / event sourcing / gRPC with retries"}
+      - {id: DF-CONC-DIST-01-C8, type: conclusion, label: "结论：Ravenscar / RTIC"}
+      - {id: DF-CONC-DIST-01-C9, type: conclusion, label: "结论：wgpu / rust-gpu / ndarray"}
+      - {id: DF-CONC-DIST-01-C10, type: conclusion, label: "结论：建议重新评估并发模型；单线程顺序模型可能足够"}
+      - {id: DF-CONC-DIST-01-V1, type: conclusion, label: "验证回边：原型验证 + benchmark + 死锁/竞争检测 + 安全审查"}
+    edges:
+      - {from: DF-CONC-DIST-01-ENTRY, to: DF-CONC-DIST-01-Q1, label: "入口"}
+      - {from: DF-CONC-DIST-01-Q1, to: DF-CONC-DIST-01-C1, label: "是"}
+      - {from: DF-CONC-DIST-01-Q1, to: DF-CONC-DIST-01-Q2, label: "否"}
+      - {from: DF-CONC-DIST-01-Q2, to: DF-CONC-DIST-01-C2, label: "是"}
+      - {from: DF-CONC-DIST-01-Q2, to: DF-CONC-DIST-01-Q3, label: "否"}
+      - {from: DF-CONC-DIST-01-Q3, to: DF-CONC-DIST-01-C3, label: "是"}
+      - {from: DF-CONC-DIST-01-Q3, to: DF-CONC-DIST-01-Q4, label: "否"}
+      - {from: DF-CONC-DIST-01-Q4, to: DF-CONC-DIST-01-C4, label: "是"}
+      - {from: DF-CONC-DIST-01-Q4, to: DF-CONC-DIST-01-Q5, label: "否"}
+      - {from: DF-CONC-DIST-01-Q5, to: DF-CONC-DIST-01-C5, label: "是"}
+      - {from: DF-CONC-DIST-01-Q5, to: DF-CONC-DIST-01-Q6, label: "否"}
+      - {from: DF-CONC-DIST-01-Q6, to: DF-CONC-DIST-01-C6, label: "是"}
+      - {from: DF-CONC-DIST-01-Q6, to: DF-CONC-DIST-01-Q7, label: "否"}
+      - {from: DF-CONC-DIST-01-Q7, to: DF-CONC-DIST-01-C7, label: "是"}
+      - {from: DF-CONC-DIST-01-Q7, to: DF-CONC-DIST-01-Q8, label: "否"}
+      - {from: DF-CONC-DIST-01-Q8, to: DF-CONC-DIST-01-C8, label: "是"}
+      - {from: DF-CONC-DIST-01-Q8, to: DF-CONC-DIST-01-Q9, label: "否"}
+      - {from: DF-CONC-DIST-01-Q9, to: DF-CONC-DIST-01-C9, label: "是"}
+      - {from: DF-CONC-DIST-01-Q9, to: DF-CONC-DIST-01-C10, label: "否"}
+      - {from: DF-CONC-DIST-01-C1, to: DF-CONC-DIST-01-V1, label: "验证"}
+      - {from: DF-CONC-DIST-01-C2, to: DF-CONC-DIST-01-V1, label: "验证"}
+      - {from: DF-CONC-DIST-01-C3, to: DF-CONC-DIST-01-V1, label: "验证"}
+      - {from: DF-CONC-DIST-01-C4, to: DF-CONC-DIST-01-V1, label: "验证"}
+      - {from: DF-CONC-DIST-01-C5, to: DF-CONC-DIST-01-V1, label: "验证"}
+      - {from: DF-CONC-DIST-01-C6, to: DF-CONC-DIST-01-V1, label: "验证"}
+      - {from: DF-CONC-DIST-01-C7, to: DF-CONC-DIST-01-V1, label: "验证"}
+      - {from: DF-CONC-DIST-01-C8, to: DF-CONC-DIST-01-V1, label: "验证"}
+      - {from: DF-CONC-DIST-01-C9, to: DF-CONC-DIST-01-V1, label: "验证"}
+      - {from: DF-CONC-DIST-01-C10, to: DF-CONC-DIST-01-V1, label: "验证"}
+
+  # ==========================================================================
+  # 新增：J-LANG-01 / J-CONC-01 语义模型选择决策树
+  # 来源: 10_semantic_model_atlas.md
+  # ==========================================================================
+
+  - id: J-LANG-01
+    title_zh: 编程语言选择判定树
+    title_en: Programming Language Selection Judgment Tree
+    source:
+      file: concept/00_meta/knowledge_topology/11_semantic_model_atlas.md
+      anchor: "#语言选择决策树-j-lang-01"
+    covered_concepts:
+      [
+        ex:ProgrammingLanguageFoundations,
+        ex:RustVsC,
+        ex:RustVsGo,
+        ex:RustVsZig,
+        ex:RustVsJava,
+        ex:RustVsPython,
+        ex:RustVsJavaScript,
+        ex:RustVsTypeScript,
+        ex:RustVsKotlin,
+        ex:RustVsSwift,
+        ex:RustVsScala,
+        ex:RustVsRuby,
+        ex:FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems,
+        ex:ZeroCostAbstractions,
+        ex:MemoryManagement,
+        ex:UnsafeRust,
+      ]
+    nodes:
+      - id: LANG-B
+        type: condition
+        label: "入口：根据项目约束选择编程语言"
+      - id: LANG-Q1
+        type: decision
+        condition: "硬实时延迟要求：p99 延迟是否 ≤ 100 μs 且抖动容差 ≤ 5%？"
+        quantitative: true
+        threshold: "p99 延迟 ≤ 100 μs 且抖动 ≤ 5%"
+      - id: LANG-Q2
+        type: decision
+        condition: "安全关键认证等级是否 ≥ ASIL-D / DAL-A？"
+        quantitative: true
+        threshold: "认证等级 ≥ ASIL-D / DAL-A"
+      - id: LANG-Q3
+        type: decision
+        condition: "可接受的最大 GC 暂停是否 ≤ 1 ms（即零容忍垃圾回收）？"
+        quantitative: true
+        threshold: "GC 暂停 ≤ 1 ms"
+      - id: LANG-Q4
+        type: decision
+        condition: "是否需要依赖类型 / 高阶类型（HKT）/ 线性类型等高级类型特性（需求项数 ≥ 1）？"
+        quantitative: true
+        threshold: "高级类型特性需求项数 ≥ 1"
+      - id: LANG-Q5
+        type: decision
+        condition: "目标领域现成库数量是否 ≥ 1000（强成熟生态依赖）？"
+        quantitative: true
+        threshold: "目标领域库数 ≥ 1000"
+      - id: LANG-Q6
+        type: decision
+        condition: "团队熟练目标语言的工程师比例是否 ≥ 50%？"
+        quantitative: true
+        threshold: "团队熟练度 ≥ 50%"
+      - {id: LANG-R1, type: conclusion, label: "根因：硬实时 / 超低延迟约束占主导"}
+      - {id: LANG-R2, type: conclusion, label: "根因：安全关键认证约束占主导"}
+      - {id: LANG-R3, type: conclusion, label: "根因：GC 零容忍约束占主导"}
+      - {id: LANG-R4, type: conclusion, label: "根因：类型系统表达力约束占主导"}
+      - {id: LANG-R5, type: conclusion, label: "根因：成熟生态约束占主导"}
+      - {id: LANG-R6, type: conclusion, label: "根因：团队 expertise 约束占主导"}
+      - {id: LANG-R7, type: conclusion, label: "根因：无极端约束，选择通用均衡方案"}
+      - {id: LANG-F1, type: conclusion, label: "结论：C / Ada-SPARK / Rust + RTIC（硬实时）"}
+      - {id: LANG-F2, type: conclusion, label: "结论：Ada/SPARK / Rust（Ferrocene 路径）（安全关键）"}
+      - {id: LANG-F3, type: conclusion, label: "结论：Rust / C / C++ / Zig / D / Nim（无 GC）"}
+      - {id: LANG-F4, type: conclusion, label: "结论：Haskell / OCaml / F# / Idris / Agda（高级类型）"}
+      - {id: LANG-F5, type: conclusion, label: "结论：Go / Java / C# / Python / JavaScript / TypeScript（成熟生态）"}
+      - {id: LANG-F6, type: conclusion, label: "结论：团队熟悉的主流语言 / Rust（团队 expertise）"}
+      - {id: LANG-F7, type: conclusion, label: "结论：Rust 作为默认均衡选择（无极端约束）"}
+      - {id: LANG-V1, type: conclusion, label: "验证回边：构建原型、跑 benchmark、评估生态与团队学习成本"}
+    edges:
+      - {from: LANG-B, to: LANG-Q1, label: "入口"}
+      - {from: LANG-Q1, to: LANG-R1, label: "是"}
+      - {from: LANG-Q1, to: LANG-Q2, label: "否"}
+      - {from: LANG-Q2, to: LANG-R2, label: "是"}
+      - {from: LANG-Q2, to: LANG-Q3, label: "否"}
+      - {from: LANG-Q3, to: LANG-R3, label: "是"}
+      - {from: LANG-Q3, to: LANG-Q4, label: "否"}
+      - {from: LANG-Q4, to: LANG-R4, label: "是"}
+      - {from: LANG-Q4, to: LANG-Q5, label: "否"}
+      - {from: LANG-Q5, to: LANG-R5, label: "是"}
+      - {from: LANG-Q5, to: LANG-Q6, label: "否"}
+      - {from: LANG-Q6, to: LANG-R6, label: "是"}
+      - {from: LANG-Q6, to: LANG-R7, label: "否"}
+      - {from: LANG-R1, to: LANG-F1, label: "修复"}
+      - {from: LANG-R2, to: LANG-F2, label: "修复"}
+      - {from: LANG-R3, to: LANG-F3, label: "修复"}
+      - {from: LANG-R4, to: LANG-F4, label: "修复"}
+      - {from: LANG-R5, to: LANG-F5, label: "修复"}
+      - {from: LANG-R6, to: LANG-F6, label: "修复"}
+      - {from: LANG-R7, to: LANG-F7, label: "修复"}
+      - {from: LANG-F1, to: LANG-V1, label: "验证"}
+      - {from: LANG-F2, to: LANG-V1, label: "验证"}
+      - {from: LANG-F3, to: LANG-V1, label: "验证"}
+      - {from: LANG-F4, to: LANG-V1, label: "验证"}
+      - {from: LANG-F5, to: LANG-V1, label: "验证"}
+      - {from: LANG-F6, to: LANG-V1, label: "验证"}
+      - {from: LANG-F7, to: LANG-V1, label: "验证"}
+
+  - id: J-CONC-01
+    title_zh: 并发与分布式模型选择判定树
+    title_en: Concurrency and Distributed Model Selection Judgment Tree
+    source:
+      file: concept/00_meta/knowledge_topology/11_semantic_model_atlas.md
+      anchor: "#并发分布式模型选择决策树-j-conc-01"
+    covered_concepts:
+      [
+        ex:Concurrency,
+        ex:AsyncProgramming,
+        ex:DistributedSystems,
+        ex:DistributedConsensus,
+        ex:CRDTTypeZooStateBasedOpBasedAndTheMergeLattice,
+        ex:EmbeddedSystems,
+        ex:SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts,
+        ex:ParallelDistributedPatternSpectrum,
+        ex:ProcessCalculiForRustCSPCCSAndThePiCalculus,
+        ex:UnsafeRust,
+      ]
+    nodes:
+      - id: CONC-B
+        type: condition
+        label: "入口：选择并发 / 并行 / 分布式模型"
+      - id: CONC-Q1
+        type: decision
+        condition: "单进程内共享可变状态访问点是否 ≥ 1？"
+        quantitative: true
+        threshold: "共享可变状态访问点 ≥ 1"
+      - id: CONC-Q2
+        type: decision
+        condition: "任务间消息传递通道数是否 ≥ 1？"
+        quantitative: true
+        threshold: "消息通道数 ≥ 1"
+      - id: CONC-Q3
+        type: decision
+        condition: "消息传递是否跨节点或需要 Actor 容错隔离（节点数 ≥ 2）？"
+        quantitative: true
+        threshold: "节点数 ≥ 2"
+      - id: CONC-Q4
+        type: decision
+        condition: "CPU 密集型计算任务占比是否 ≥ 60%？"
+        quantitative: true
+        threshold: "CPU 任务占比 ≥ 60%"
+      - id: CONC-Q5
+        type: decision
+        condition: "I/O 等待时间占比是否 ≥ 60% 或并发连接数 ≥ 1000？"
+        quantitative: true
+        threshold: "I/O 等待 ≥ 60% 或连接数 ≥ 1000"
+      - id: CONC-Q6
+        type: decision
+        condition: "是否存在跨节点 / 地理分布或容错要求（节点数 ≥ 2）？"
+        quantitative: true
+        threshold: "分布式节点数 ≥ 2"
+      - id: CONC-Q7
+        type: decision
+        condition: "跨网络强一致性写入比例是否 ≥ 80%？"
+        quantitative: true
+        threshold: "强一致性写入 ≥ 80%"
+      - id: CONC-Q8
+        type: decision
+        condition: "是否需要 no_std / 嵌入式实时约束？"
+        quantitative: true
+        threshold: "实时约束 = 是"
+      - {id: CONC-R1, type: conclusion, label: "根因：共享可变状态占主导"}
+      - {id: CONC-R2, type: conclusion, label: "根因：进程内消息传递占主导"}
+      - {id: CONC-R3, type: conclusion, label: "根因：Actor / 分布式容错占主导"}
+      - {id: CONC-R4, type: conclusion, label: "根因：CPU 密集型并行占主导"}
+      - {id: CONC-R5, type: conclusion, label: "根因：I/O 密集型高并发占主导"}
+      - {id: CONC-R6, type: conclusion, label: "根因：强一致性分布式占主导"}
+      - {id: CONC-R7, type: conclusion, label: "根因：弱一致性 / 分区容错占主导"}
+      - {id: CONC-R8, type: conclusion, label: "根因：嵌入式实时约束占主导"}
+      - {id: CONC-R9, type: conclusion, label: "根因：单线程顺序模型足够"}
+      - {id: CONC-F1, type: conclusion, label: "结论：Mutex / RwLock + Arc（共享内存同步）"}
+      - {id: CONC-F2, type: conclusion, label: "结论：channels（mpsc / mpmc / crossbeam）"}
+      - {id: CONC-F3, type: conclusion, label: "结论：Actors（Actix / Akka / Erlang/Elixir）"}
+      - {id: CONC-F4, type: conclusion, label: "结论：Rayon / scoped threads / MPI（CPU 并行）"}
+      - {id: CONC-F5, type: conclusion, label: "结论：async/await + Tokio（I/O 高并发）"}
+      - {id: CONC-F6, type: conclusion, label: "结论：Raft / Paxos / distributed consensus（强一致性）"}
+      - {id: CONC-F7, type: conclusion, label: "结论：CRDTs / event sourcing / gRPC with retries（弱一致性 / 分区容错）"}
+      - {id: CONC-F8, type: conclusion, label: "结论：RTIC / bare-metal interrupts（嵌入式实时）"}
+      - {id: CONC-F9, type: conclusion, label: "结论：单线程顺序模型足够"}
+      - {id: CONC-V1, type: conclusion, label: "验证回边：原型验证 + benchmark + 死锁/竞争检测 + 安全审查"}
+    edges:
+      - {from: CONC-B, to: CONC-Q1, label: "入口"}
+      - {from: CONC-Q1, to: CONC-R1, label: "是"}
+      - {from: CONC-Q1, to: CONC-Q2, label: "否"}
+      - {from: CONC-Q2, to: CONC-Q3, label: "是"}
+      - {from: CONC-Q2, to: CONC-Q4, label: "否"}
+      - {from: CONC-Q3, to: CONC-R3, label: "是"}
+      - {from: CONC-Q3, to: CONC-R2, label: "否"}
+      - {from: CONC-Q4, to: CONC-R4, label: "是"}
+      - {from: CONC-Q4, to: CONC-Q5, label: "否"}
+      - {from: CONC-Q5, to: CONC-R5, label: "是"}
+      - {from: CONC-Q5, to: CONC-Q6, label: "否"}
+      - {from: CONC-Q6, to: CONC-Q7, label: "是"}
+      - {from: CONC-Q6, to: CONC-Q8, label: "否"}
+      - {from: CONC-Q7, to: CONC-R6, label: "是"}
+      - {from: CONC-Q7, to: CONC-R7, label: "否"}
+      - {from: CONC-Q8, to: CONC-R8, label: "是"}
+      - {from: CONC-Q8, to: CONC-R9, label: "否"}
+      - {from: CONC-R1, to: CONC-F1, label: "修复"}
+      - {from: CONC-R2, to: CONC-F2, label: "修复"}
+      - {from: CONC-R3, to: CONC-F3, label: "修复"}
+      - {from: CONC-R4, to: CONC-F4, label: "修复"}
+      - {from: CONC-R5, to: CONC-F5, label: "修复"}
+      - {from: CONC-R6, to: CONC-F6, label: "修复"}
+      - {from: CONC-R7, to: CONC-F7, label: "修复"}
+      - {from: CONC-R8, to: CONC-F8, label: "修复"}
+      - {from: CONC-R9, to: CONC-F9, label: "修复"}
+      - {from: CONC-F1, to: CONC-V1, label: "验证"}
+      - {from: CONC-F2, to: CONC-V1, label: "验证"}
+      - {from: CONC-F3, to: CONC-V1, label: "验证"}
+      - {from: CONC-F4, to: CONC-V1, label: "验证"}
+      - {from: CONC-F5, to: CONC-V1, label: "验证"}
+      - {from: CONC-F6, to: CONC-V1, label: "验证"}
+      - {from: CONC-F7, to: CONC-V1, label: "验证"}
+      - {from: CONC-F8, to: CONC-V1, label: "验证"}
+      - {from: CONC-F9, to: CONC-V1, label: "验证"}

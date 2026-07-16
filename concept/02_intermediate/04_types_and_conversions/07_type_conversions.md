@@ -21,7 +21,6 @@
 > [The Rust Programming Language — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
 >
 > **权威来源**: 本文件为 `concept/` 权威页。
-
 > **Rust 1.97.0 变更提示**：
 > Rust 1.97.0 起，未约束浮点字面量（`{float}`）的默认回退行为发生变化，详见 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)。
 

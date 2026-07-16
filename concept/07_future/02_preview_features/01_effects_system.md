@@ -30,7 +30,7 @@
 > **A/S/P 标记**: **S** — Structure（心智模型）
 > **双维定位**: C×Ana — 分析 Effects 系统对 Rust 的潜力
 > **定位**: 本文件是 Rust 效果系统（Effect System）的**概念预研**，跟踪类型系统（Type System）向显式效果追踪演进的理论动向与工程实践。内容具有推测性，随语言团队决策动态更新。
-> **前置概念**: [Async](../../03_advanced/01_async/01_async.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Type Theory](../../04_formal/00_type_theory/01_type_theory.md)
+> **前置概念**: [Async](../../03_advanced/01_async/01_async.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Type Theory](../../04_formal/00_type_theory/01_type_theory.md) · [Algebraic Effects](../../04_formal/07_concurrency_semantics/04_algebraic_effects.md)
 > **主要来源**:
 > [Plotkin & Pretnar 2009 — Algebraic Effects] ·
 > [Lucassen & Gifford 1988 — Polymorphic Effect Systems] ·
@@ -305,6 +305,8 @@ N 种效果 → 2^N 种组合          N 种效果 → 1 种泛型机制
 | **状态** | 修改堆/全局状态 | `&mut T` | `fn foo() -> i32 effect State` |
 
 ### 1.2 代数效应（Algebraic Effects）vs 类型效应（Type Effects）
+>
+> **权威深入页**: 代数效应的形式定义、自由单子解释、操作语义与跨语言对比见 [L4 代数效应与效应处理器](../../04_formal/07_concurrency_semantics/04_algebraic_effects.md)。本页只保留高层对比与工程方向。
 >
 
 ```text

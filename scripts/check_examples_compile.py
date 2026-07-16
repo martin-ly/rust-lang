@@ -42,6 +42,8 @@ STDLIB_EXAMPLES = [
     "rust_194_control_flow_demo.rs",
     "rust_194_lazy_lock_demo.rs",
     "rust_194_lazylock_patterns.rs",
+    "semantic_model_const_generics_patterns.rs",
+    "semantic_model_keyword_effects.rs",
 ]
 
 # 需要外部依赖：由 examples/examples_check/ crate 的 [[bin]] 目标编译

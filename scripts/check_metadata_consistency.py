@@ -137,6 +137,8 @@ D5_WHITELIST_FILES = {
         "页面主题即 nightly-only `-Z` 选项系统化清单（与既有 -Z 类白名单页同质）",
     "concept/06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md":
         "Tier 2/3 no_std 目标须 nightly + -Z build-std 为工具链事实；rustc book 仅 nightly 路径托管（URL 规则已排除）",
+    "concept/06_ecosystem/05_systems_and_embedded/12_gpu_programming_and_hpc.md":
+        "rust-gpu 绑定固定编译器版本、std::simd portable SIMD 未稳定、nvptx64 目标须 nightly -Z build-std 均为截至 1.97 的工具链事实陈述（与既有 10_target_tier_platform_support.md 同质）",
     "concept/06_ecosystem/13_quizzes/03_quiz_security_testing.md":
         "quiz 题目/解析以 cargo vet 工具链可用性与 #[bench] nightly 状态为考点，nightly 为考点内容本身",
     "concept/sources/rfc_index.md":
@@ -217,6 +219,22 @@ D5_WHITELIST_FILES = {
         "反命题树节：自定义 target 无 std 预编译须 nightly build-std 为工具链事实",
     "concept/06_ecosystem/08_formal_verification/01_formal_ecosystem_tower.md":
         "演进方向节：Prusti/Kani 绑定特定 nightly/rustc 版本为生态事实陈述",
+    # ---- 2026-07-16 语义模型对齐 sprint 新建页：页面主题即 nightly-only 特性本身，
+    # 文首已显式声明不稳定特性警告；nightly/preview 提及为特性状态客观陈述。
+    "concept/02_intermediate/00_traits/08_negative_impls.md":
+        "negative_impls 特性截至 1.97.0 仍为 nightly-only，页面主题即该特性",
+    "concept/02_intermediate/00_traits/09_associated_type_defaults.md":
+        "associated_type_defaults 特性截至 1.97.0 仍为 nightly-only，页面主题即该特性",
+    # ---- 2026-07-16 Phase 2 语义模型权威页：stable 层页面内客观描述 nightly 边界
+    "concept/04_formal/00_type_theory/10_dependent_refinement_types.md":
+        "页面讨论 Rust const generics 的 stable/nightly 边界；nightly 为 generic_const_exprs/adt_const_params 边界标注",
+    "concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md":
+        "页面讨论 Rust 关键字效应与 effect handlers 设计空间；nightly 为预览特性边界标注",
+    # ---- 2026-07-16 Phase 3 跨语言对比：页面客观陈述对比语言的 preview/unstable/nightly 边界
+    "concept/05_comparative/01_systems_languages/08_rust_vs_d.md":
+        "跨语言对比页客观陈述 D `-preview=dip1000` 标志名与 Rust 尚未稳定特性；nightly/preview 为对比事实本身",
+    "concept/05_comparative/02_managed_languages/11_rust_vs_fsharp.md":
+        "跨语言对比页客观陈述 Rust 实验性特性边界；nightly/preview 为对比事实本身",
 }
 
 
