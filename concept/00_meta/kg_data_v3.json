@@ -17,7 +17,7 @@
     "previous_version": "3.0",
     "alignment": "RDF 1.2 / RDF-star / SKOS / JSON-LD 1.1 / SHACL",
     "entity_count": 539,
-    "relation_count": 8396
+    "relation_count": 8425
   },
   "classes": [
     {
@@ -35673,15 +35673,17 @@
     },
     {
       "@id": "_:rel1781",
-      "@type": "ex:relatedTo",
+      "@type": "ex:equivalentTo",
       "ex:subject": "ex:RustBelt",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:equivalentTo",
       "ex:object": "ex:RustBelt_02separation",
       "ex:source": "body-link:../../04_formal/02_separation_logic/01_rustbelt.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "两实体 prefLabel 均为 RustBelt；00_meta/02_sources/02_rustbelt_predicate_map.md 定位“将 RustBelt（Jung et al., POPL 2018）的核心形式化谓词映射到 L1-L3 工程概念”，04_formal/02_separation_logic/01_rustbelt.md Summary“RustBelt: a formal model of Rust's ownership and borrowing in Iris separation logic”",
+      "ex:rule": "E3-same-concept-xlayer"
     },
     {
       "@id": "_:rel1782",
@@ -69789,15 +69791,17 @@
     },
     {
       "@id": "_:rel4624",
-      "@type": "ex:relatedTo",
+      "@type": "ex:entails",
       "ex:subject": "ex:Ownership",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:entails",
       "ex:object": "ex:Generics",
       "ex:source": "body-link:../../02_intermediate/01_generics/01_generics.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页后置元数据：01_foundation/01_ownership_borrow_lifetime/01_ownership.md 的 后置概念/后置延伸 含 [01_generics]",
+      "ex:rule": "R5-postreq-metadata"
     },
     {
       "@id": "_:rel4625",
@@ -69981,27 +69985,31 @@
     },
     {
       "@id": "_:rel4640",
-      "@type": "ex:relatedTo",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:Borrowing",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:Ownership",
       "ex:source": "body-link:01_ownership.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页前置元数据：01_foundation/01_ownership_borrow_lifetime/02_borrowing.md 的 前置概念/前置依赖 含 [01_ownership]",
+      "ex:rule": "R4-prereq-metadata"
     },
     {
       "@id": "_:rel4641",
-      "@type": "ex:relatedTo",
+      "@type": "ex:entails",
       "ex:subject": "ex:Borrowing",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:entails",
       "ex:object": "ex:Traits",
       "ex:source": "body-link:../../02_intermediate/00_traits/01_traits.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页后置元数据：01_foundation/01_ownership_borrow_lifetime/02_borrowing.md 的 后置概念/后置延伸 含 [01_traits]",
+      "ex:rule": "R5-postreq-metadata"
     },
     {
       "@id": "_:rel4642",
@@ -70017,15 +70025,17 @@
     },
     {
       "@id": "_:rel4643",
-      "@type": "ex:relatedTo",
+      "@type": "ex:entails",
       "ex:subject": "ex:Borrowing",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:entails",
       "ex:object": "ex:Concurrency",
       "ex:source": "body-link:../../03_advanced/00_concurrency/01_concurrency.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页后置元数据：01_foundation/01_ownership_borrow_lifetime/02_borrowing.md 的 后置概念/后置延伸 含 [01_concurrency]",
+      "ex:rule": "R5-postreq-metadata"
     },
     {
       "@id": "_:rel4644",
@@ -70245,15 +70255,17 @@
     },
     {
       "@id": "_:rel4662",
-      "@type": "ex:relatedTo",
+      "@type": "ex:refines",
       "ex:subject": "ex:LifetimesAdvanced",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:refines",
       "ex:object": "ex:Lifetimes",
       "ex:source": "body-link:03_lifetimes.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md 为 03_lifetimes.md 的进阶展开（标题“生命周期进阶”）",
+      "ex:rule": "R3-curated-refines"
     },
     {
       "@id": "_:rel4663",
@@ -70449,15 +70461,17 @@
     },
     {
       "@id": "_:rel4679",
-      "@type": "ex:relatedTo",
+      "@type": "ex:mutexWith",
       "ex:subject": "ex:MoveSemantics",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:mutexWith",
       "ex:object": "ex:Borrowing",
       "ex:source": "body-link:02_borrowing.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md:942 “Rust 的所有权（Ownership）转移（move）与借用是互斥的。若变量已被借用…在借用释放前不能转移其所有权。”",
+      "ex:rule": "R1-curated-mutex"
     },
     {
       "@id": "_:rel4680",
@@ -73593,15 +73607,17 @@
     },
     {
       "@id": "_:rel4941",
-      "@type": "ex:relatedTo",
+      "@type": "ex:mutexWith",
       "ex:subject": "ex:PanicAndAbort",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:mutexWith",
       "ex:object": "ex:ErrorHandling",
       "ex:source": "body-link:01_error_handling_basics.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "01_foundation/08_error_handling/03_panic_and_abort.md:5 “不可恢复错误的处理机制”；:91 “异常: 可恢复的错误条件”——同一错误现场不可恢复(panic/abort)与可恢复(Result 传播)策略二选一",
+      "ex:rule": "R1-curated-mutex"
     },
     {
       "@id": "_:rel4942",
@@ -74721,27 +74737,31 @@
     },
     {
       "@id": "_:rel5035",
-      "@type": "ex:relatedTo",
+      "@type": "ex:entails",
       "ex:subject": "ex:Traits",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:entails",
       "ex:object": "ex:Concurrency",
       "ex:source": "body-link:../../03_advanced/00_concurrency/01_concurrency.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页后置元数据：02_intermediate/00_traits/01_traits.md 的 后置概念/后置延伸 含 [01_concurrency]",
+      "ex:rule": "R5-postreq-metadata"
     },
     {
       "@id": "_:rel5036",
-      "@type": "ex:relatedTo",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:Traits",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:Ownership",
       "ex:source": "body-link:../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页前置元数据：02_intermediate/00_traits/01_traits.md 的 前置概念/前置依赖 含 [01_ownership]",
+      "ex:rule": "R4-prereq-metadata"
     },
     {
       "@id": "_:rel5037",
@@ -74781,15 +74801,17 @@
     },
     {
       "@id": "_:rel5040",
-      "@type": "ex:relatedTo",
+      "@type": "ex:appliesTo",
       "ex:subject": "ex:DispatchMechanisms",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:appliesTo",
       "ex:object": "ex:Traits",
       "ex:source": "body-link:01_traits.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "02_intermediate/00_traits/02_dispatch_mechanisms.md:8 Summary“Static and dynamic dispatch in Rust: monomorphization, trait objects, vtables, object safety”（位于 00_traits 章节）——分发机制应用于 trait 使用",
+      "ex:rule": "A1-page-application"
     },
     {
       "@id": "_:rel5041",
@@ -74805,15 +74827,17 @@
     },
     {
       "@id": "_:rel5042",
-      "@type": "ex:relatedTo",
+      "@type": "ex:refines",
       "ex:subject": "ex:SerdePatterns",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:refines",
       "ex:object": "ex:Traits",
       "ex:source": "body-link:01_traits.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "02_intermediate/00_traits/03_serde_patterns.md 将 trait 精化为 serde 序列化模式应用",
+      "ex:rule": "R3-curated-refines"
     },
     {
       "@id": "_:rel5043",
@@ -74925,15 +74949,17 @@
     },
     {
       "@id": "_:rel5052",
-      "@type": "ex:relatedTo",
+      "@type": "ex:refines",
       "ex:subject": "ex:Traits_00traits",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:refines",
       "ex:object": "ex:Traits",
       "ex:source": "body-link:01_traits.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "02_intermediate/00_traits/04_advanced_traits.md 为 01_traits.md 的高级主题精化（标题“高级 Trait 主题”）",
+      "ex:rule": "R3-curated-refines"
     },
     {
       "@id": "_:rel5053",
@@ -75093,15 +75119,17 @@
     },
     {
       "@id": "_:rel5066",
-      "@type": "ex:relatedTo",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:ConstructionAndInitialization",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:Ownership",
       "ex:source": "body-link:../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页前置元数据：02_intermediate/00_traits/05_construction_and_initialization.md 的 前置概念/前置依赖 含 [01_ownership]",
+      "ex:rule": "R4-prereq-metadata"
     },
     {
       "@id": "_:rel5067",
@@ -75141,15 +75169,17 @@
     },
     {
       "@id": "_:rel5070",
-      "@type": "ex:relatedTo",
+      "@type": "ex:instanceOf",
       "ex:subject": "ex:DerivableTraits",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:instanceOf",
       "ex:object": "ex:Traits",
       "ex:source": "body-link:01_traits.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "02_intermediate/00_traits/06_derive_traits.md:7 Summary“标准库中可通过 #[derive(...)] 自动实现的 trait 参考”——可派生 trait 是 trait 的一个子范畴",
+      "ex:rule": "I3-self-evident-kind"
     },
     {
       "@id": "_:rel5071",
@@ -75657,15 +75687,17 @@
     },
     {
       "@id": "_:rel5113",
-      "@type": "ex:relatedTo",
+      "@type": "ex:mutexWith",
       "ex:subject": "ex:TypeLevelProgramming",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:mutexWith",
       "ex:object": "ex:RTTIAndDynamicTypeIdentification",
       "ex:source": "body-link:../04_types_and_conversions/05_rtti_and_dynamic_typing.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "02_intermediate/04_types_and_conversions/05_rtti_and_dynamic_typing.md:203 “RTTI 是静态类型系统（Type System）向运行时的有限‘泄漏’”——编译期类型计算与运行期类型识别在同一类型问题上互斥",
+      "ex:rule": "R1-curated-mutex"
     },
     {
       "@id": "_:rel5114",
@@ -75897,15 +75929,17 @@
     },
     {
       "@id": "_:rel5133",
-      "@type": "ex:relatedTo",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:MemoryManagement",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:Borrowing",
       "ex:source": "body-link:../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页前置元数据：02_intermediate/02_memory_management/01_memory_management.md 的 前置概念/前置依赖 含 [02_borrowing]",
+      "ex:rule": "R4-prereq-metadata"
     },
     {
       "@id": "_:rel5134",
@@ -75933,27 +75967,31 @@
     },
     {
       "@id": "_:rel5136",
-      "@type": "ex:relatedTo",
+      "@type": "ex:entails",
       "ex:subject": "ex:MemoryManagement",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:entails",
       "ex:object": "ex:Concurrency",
       "ex:source": "body-link:../../03_advanced/00_concurrency/01_concurrency.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页后置元数据：02_intermediate/02_memory_management/01_memory_management.md 的 后置概念/后置延伸 含 [01_concurrency]",
+      "ex:rule": "R5-postreq-metadata"
     },
     {
       "@id": "_:rel5137",
-      "@type": "ex:relatedTo",
+      "@type": "ex:entails",
       "ex:subject": "ex:MemoryManagement",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:entails",
       "ex:object": "ex:AsyncProgramming",
       "ex:source": "body-link:../../03_advanced/01_async/01_async.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页后置元数据：02_intermediate/02_memory_management/01_memory_management.md 的 后置概念/后置延伸 含 [01_async]",
+      "ex:rule": "R5-postreq-metadata"
     },
     {
       "@id": "_:rel5138",
@@ -76053,15 +76091,17 @@
     },
     {
       "@id": "_:rel5146",
-      "@type": "ex:relatedTo",
+      "@type": "ex:counterExample",
       "ex:subject": "ex:InteriorMutability",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:counterExample",
       "ex:object": "ex:Borrowing",
       "ex:source": "body-link:../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "01_foundation/01_ownership_borrow_lifetime/02_borrowing.md:781 “&mut vs &: 为什么不能同时有？… AXM: 读写互斥 … UnsafeCell 突破”；:461 “别名与可变互斥公理”——内部可变性（Cell/RefCell/UnsafeCell）是借用规则的受控反例",
+      "ex:rule": "R2-curated-counterexample"
     },
     {
       "@id": "_:rel5147",
@@ -76077,15 +76117,17 @@
     },
     {
       "@id": "_:rel5148",
-      "@type": "ex:relatedTo",
+      "@type": "ex:entails",
       "ex:subject": "ex:InteriorMutability",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:entails",
       "ex:object": "ex:AsyncProgramming",
       "ex:source": "body-link:../../03_advanced/01_async/01_async.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页后置元数据：02_intermediate/02_memory_management/02_interior_mutability.md 的 后置概念/后置延伸 含 [01_async]",
+      "ex:rule": "R5-postreq-metadata"
     },
     {
       "@id": "_:rel5149",
@@ -76149,15 +76191,17 @@
     },
     {
       "@id": "_:rel5154",
-      "@type": "ex:relatedTo",
+      "@type": "ex:refines",
       "ex:subject": "ex:CowAndBorrowed",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:refines",
       "ex:object": "ex:Borrowing",
       "ex:source": "body-link:../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "02_intermediate/02_memory_management/03_cow_and_borrowed.md: Cow 将借用语义精化为写时克隆（Clone-on-Write）",
+      "ex:rule": "R3-curated-refines"
     },
     {
       "@id": "_:rel5155",
@@ -76245,27 +76289,31 @@
     },
     {
       "@id": "_:rel5162",
-      "@type": "ex:relatedTo",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:SmartPointers",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:Borrowing",
       "ex:source": "body-link:../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页前置元数据：02_intermediate/02_memory_management/04_smart_pointers.md 的 前置概念/前置依赖 含 [02_borrowing]",
+      "ex:rule": "R4-prereq-metadata"
     },
     {
       "@id": "_:rel5163",
-      "@type": "ex:relatedTo",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:SmartPointers",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:MemoryManagement",
       "ex:source": "body-link:01_memory_management.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页前置元数据：02_intermediate/02_memory_management/04_smart_pointers.md 的 前置概念/前置依赖 含 [01_memory_management]",
+      "ex:rule": "R4-prereq-metadata"
     },
     {
       "@id": "_:rel5164",
@@ -76449,15 +76497,17 @@
     },
     {
       "@id": "_:rel5179",
-      "@type": "ex:relatedTo",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:ErrorHandling_03errorhandl",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:Traits",
       "ex:source": "body-link:../00_traits/01_traits.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页前置元数据：02_intermediate/03_error_handling/01_error_handling.md 的 前置概念/前置依赖 含 [01_traits]",
+      "ex:rule": "R4-prereq-metadata"
     },
     {
       "@id": "_:rel5180",
@@ -76473,15 +76523,17 @@
     },
     {
       "@id": "_:rel5181",
-      "@type": "ex:relatedTo",
+      "@type": "ex:entails",
       "ex:subject": "ex:ErrorHandling_03errorhandl",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:entails",
       "ex:object": "ex:AsyncProgramming",
       "ex:source": "body-link:../../03_advanced/01_async/01_async.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页后置元数据：02_intermediate/03_error_handling/01_error_handling.md 的 后置概念/后置延伸 含 [01_async]",
+      "ex:rule": "R5-postreq-metadata"
     },
     {
       "@id": "_:rel5182",
@@ -76617,15 +76669,17 @@
     },
     {
       "@id": "_:rel5193",
-      "@type": "ex:relatedTo",
+      "@type": "ex:refines",
       "ex:subject": "ex:ErrorHandling_03errorhandl_1",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:refines",
       "ex:object": "ex:ErrorHandling_03errorhandl",
       "ex:source": "body-link:01_error_handling.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "02_intermediate/03_error_handling/02_error_handling_deep_dive.md 为 04_error_handling.md 的深入精化（标题“错误处理深入”）",
+      "ex:rule": "R3-curated-refines"
     },
     {
       "@id": "_:rel5194",
@@ -76653,15 +76707,17 @@
     },
     {
       "@id": "_:rel5196",
-      "@type": "ex:relatedTo",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:Panic",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:PanicAndAbort",
       "ex:source": "body-link:../../01_foundation/08_error_handling/03_panic_and_abort.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页前置元数据：02_intermediate/03_error_handling/03_panic.md 的 前置概念/前置依赖 含 [03_panic_and_abort]",
+      "ex:rule": "R4-prereq-metadata"
     },
     {
       "@id": "_:rel5197",
@@ -76917,27 +76973,31 @@
     },
     {
       "@id": "_:rel5218",
-      "@type": "ex:relatedTo",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:ClosureTypes",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:Ownership",
       "ex:source": "body-link:../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页前置元数据：02_intermediate/04_types_and_conversions/02_closure_types.md 的 前置概念/前置依赖 含 [01_ownership]",
+      "ex:rule": "R4-prereq-metadata"
     },
     {
       "@id": "_:rel5219",
-      "@type": "ex:relatedTo",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:ClosureTypes",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:Borrowing",
       "ex:source": "body-link:../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页前置元数据：02_intermediate/04_types_and_conversions/02_closure_types.md 的 前置概念/前置依赖 含 [02_borrowing]",
+      "ex:rule": "R4-prereq-metadata"
     },
     {
       "@id": "_:rel5220",
@@ -76953,15 +77013,17 @@
     },
     {
       "@id": "_:rel5221",
-      "@type": "ex:relatedTo",
+      "@type": "ex:entails",
       "ex:subject": "ex:ClosureTypes",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:entails",
       "ex:object": "ex:Generics",
       "ex:source": "body-link:../01_generics/01_generics.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页后置元数据：02_intermediate/04_types_and_conversions/02_closure_types.md 的 后置概念/后置延伸 含 [01_generics]",
+      "ex:rule": "R5-postreq-metadata"
     },
     {
       "@id": "_:rel5222",
@@ -77049,15 +77111,17 @@
     },
     {
       "@id": "_:rel5229",
-      "@type": "ex:relatedTo",
+      "@type": "ex:instanceOf",
       "ex:subject": "ex:NewtypeAndWrapperTypes",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:instanceOf",
       "ex:object": "ex:DesignPatterns",
       "ex:source": "body-link:../../06_ecosystem/03_design_patterns/01_patterns.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "06_ecosystem/03_design_patterns/01_patterns.md:66“| Newtype | 结构型 | 类型区分 + 约束 | struct Wrapper(T) |”——Newtype 被设计模式权威页列为结构型模式",
+      "ex:rule": "I1-category-listed"
     },
     {
       "@id": "_:rel5230",
@@ -78681,27 +78745,31 @@
     },
     {
       "@id": "_:rel5365",
-      "@type": "ex:relatedTo",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:Concurrency",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:Borrowing",
       "ex:source": "body-link:../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页前置元数据：03_advanced/00_concurrency/01_concurrency.md 的 前置概念/前置依赖 含 [02_borrowing]",
+      "ex:rule": "R4-prereq-metadata"
     },
     {
       "@id": "_:rel5366",
-      "@type": "ex:relatedTo",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:Concurrency",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:Traits",
       "ex:source": "body-link:../../02_intermediate/00_traits/01_traits.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页前置元数据：03_advanced/00_concurrency/01_concurrency.md 的 前置概念/前置依赖 含 [01_traits]",
+      "ex:rule": "R4-prereq-metadata"
     },
     {
       "@id": "_:rel5367",
@@ -78813,27 +78881,31 @@
     },
     {
       "@id": "_:rel5376",
-      "@type": "ex:relatedTo",
+      "@type": "ex:entails",
       "ex:subject": "ex:SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:entails",
       "ex:object": "ex:Concurrency_00concurrenc_1",
       "ex:source": "body-link:06_atomics_and_memory_ordering.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页后置元数据：03_advanced/00_concurrency/02_send_sync_auto_traits.md 的 后置概念/后置延伸 含 [06_atomics_and_memory_ordering]",
+      "ex:rule": "R5-postreq-metadata"
     },
     {
       "@id": "_:rel5377",
-      "@type": "ex:relatedTo",
+      "@type": "ex:entails",
       "ex:subject": "ex:SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:entails",
       "ex:object": "ex:LockingPrimitives",
       "ex:source": "body-link:07_lock_free.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页后置元数据：03_advanced/00_concurrency/02_send_sync_auto_traits.md 的 后置概念/后置延伸 含 [07_lock_free]",
+      "ex:rule": "R5-postreq-metadata"
     },
     {
       "@id": "_:rel5378",
@@ -78861,39 +78933,45 @@
     },
     {
       "@id": "_:rel5380",
-      "@type": "ex:relatedTo",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:InteriorMutability",
       "ex:source": "body-link:../../02_intermediate/02_memory_management/02_interior_mutability.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页前置元数据：03_advanced/00_concurrency/02_send_sync_auto_traits.md 的 前置概念/前置依赖 含 [02_interior_mutability]",
+      "ex:rule": "R4-prereq-metadata"
     },
     {
       "@id": "_:rel5381",
-      "@type": "ex:relatedTo",
+      "@type": "ex:entails",
       "ex:subject": "ex:SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:entails",
       "ex:object": "ex:SafeAndEffectiveUnsafeRust",
       "ex:source": "body-link:../02_unsafe/01_unsafe.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页后置元数据：03_advanced/00_concurrency/02_send_sync_auto_traits.md 的 后置概念/后置延伸 含 [01_unsafe]",
+      "ex:rule": "R5-postreq-metadata"
     },
     {
       "@id": "_:rel5382",
-      "@type": "ex:relatedTo",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:Ownership",
       "ex:source": "body-link:../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页前置元数据：03_advanced/00_concurrency/02_send_sync_auto_traits.md 的 前置概念/前置依赖 含 [01_ownership]",
+      "ex:rule": "R4-prereq-metadata"
     },
     {
       "@id": "_:rel5383",
@@ -78909,15 +78987,17 @@
     },
     {
       "@id": "_:rel5384",
-      "@type": "ex:relatedTo",
+      "@type": "ex:refines",
       "ex:subject": "ex:Concurrency_00concurrenc",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:refines",
       "ex:object": "ex:Concurrency",
       "ex:source": "body-link:01_concurrency.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "03_advanced/00_concurrency/03_concurrency_patterns.md 将 01_concurrency.md 精化为并发模式谱系",
+      "ex:rule": "R3-curated-refines"
     },
     {
       "@id": "_:rel5385",
@@ -79041,15 +79121,17 @@
     },
     {
       "@id": "_:rel5395",
-      "@type": "ex:relatedTo",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:SendSyncBoundaryJudgmentTraitObjectsClosuresAndAsyncStateMachines",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:AsyncProgramming",
       "ex:source": "body-link:../01_async/01_async.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页前置元数据：03_advanced/00_concurrency/04_send_sync_boundaries.md 的 前置概念/前置依赖 含 [01_async]",
+      "ex:rule": "R4-prereq-metadata"
     },
     {
       "@id": "_:rel5396",
@@ -79065,15 +79147,17 @@
     },
     {
       "@id": "_:rel5397",
-      "@type": "ex:relatedTo",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:SendSyncBoundaryJudgmentTraitObjectsClosuresAndAsyncStateMachines",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:DispatchMechanisms",
       "ex:source": "body-link:../../02_intermediate/00_traits/02_dispatch_mechanisms.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页前置元数据：03_advanced/00_concurrency/04_send_sync_boundaries.md 的 前置概念/前置依赖 含 [02_dispatch_mechanisms]",
+      "ex:rule": "R4-prereq-metadata"
     },
     {
       "@id": "_:rel5398",
@@ -79101,15 +79185,17 @@
     },
     {
       "@id": "_:rel5400",
-      "@type": "ex:relatedTo",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:CrossPlatformConcurrency",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:Concurrency",
       "ex:source": "body-link:01_concurrency.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页前置元数据：03_advanced/00_concurrency/05_cross_platform_concurrency.md 的 前置概念/前置依赖 含 [01_concurrency]",
+      "ex:rule": "R4-prereq-metadata"
     },
     {
       "@id": "_:rel5401",
@@ -79401,39 +79487,45 @@
     },
     {
       "@id": "_:rel5425",
-      "@type": "ex:relatedTo",
+      "@type": "ex:counterExample",
       "ex:subject": "ex:LockingPrimitives",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:counterExample",
       "ex:object": "ex:Concurrency",
       "ex:source": "body-link:01_concurrency.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "03_advanced/00_concurrency/07_lock_free.md:409 “命题: 无锁总是优于锁” → :422 “无锁只在高竞争场景显著优于锁”——对朴素并发性能信念的反例",
+      "ex:rule": "R2-curated-counterexample"
     },
     {
       "@id": "_:rel5426",
-      "@type": "ex:relatedTo",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:LockingPrimitives",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:Concurrency_00concurrenc_1",
       "ex:source": "body-link:06_atomics_and_memory_ordering.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页前置元数据：03_advanced/00_concurrency/07_lock_free.md 的 前置概念/前置依赖 含 [06_atomics_and_memory_ordering]",
+      "ex:rule": "R4-prereq-metadata"
     },
     {
       "@id": "_:rel5427",
-      "@type": "ex:relatedTo",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:LockingPrimitives",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:SafeAndEffectiveUnsafeRust",
       "ex:source": "body-link:../02_unsafe/01_unsafe.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页前置元数据：03_advanced/00_concurrency/07_lock_free.md 的 前置概念/前置依赖 含 [01_unsafe]",
+      "ex:rule": "R4-prereq-metadata"
     },
     {
       "@id": "_:rel5428",
@@ -80205,15 +80297,17 @@
     },
     {
       "@id": "_:rel5492",
-      "@type": "ex:relatedTo",
+      "@type": "ex:refines",
       "ex:subject": "ex:AsyncAdvanced",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:refines",
       "ex:object": "ex:AsyncProgramming",
       "ex:source": "body-link:01_async.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "03_advanced/01_async/02_async_advanced.md 为 02_async.md 的进阶展开（标题“Async 进阶”）",
+      "ex:rule": "R3-curated-refines"
     },
     {
       "@id": "_:rel5493",
@@ -80889,15 +80983,17 @@
     },
     {
       "@id": "_:rel5549",
-      "@type": "ex:relatedTo",
+      "@type": "ex:refines",
       "ex:subject": "ex:AsyncClosures",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:refines",
       "ex:object": "ex:AsyncProgramming",
       "ex:source": "body-link:01_async.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "03_advanced/01_async/07_async_closures.md 将 async 精化到闭包捕获场景",
+      "ex:rule": "R3-curated-refines"
     },
     {
       "@id": "_:rel5550",
@@ -80985,15 +81081,17 @@
     },
     {
       "@id": "_:rel5557",
-      "@type": "ex:relatedTo",
+      "@type": "ex:appliesTo",
       "ex:subject": "ex:PinAndUnpin",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:appliesTo",
       "ex:object": "ex:AsyncProgramming",
       "ex:source": "body-link:01_async.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "03_advanced/01_async/08_pin_unpin.md:6 Summary“their interaction with futures and generators”；:16“探讨 Pin 与 Future、Generator 的交互，以及 async/await 的状态机实现”——Pin 应用于 async 状态机",
+      "ex:rule": "A1-page-application"
     },
     {
       "@id": "_:rel5558",
@@ -81909,15 +82007,17 @@
     },
     {
       "@id": "_:rel5634",
-      "@type": "ex:relatedTo",
+      "@type": "ex:counterExample",
       "ex:subject": "ex:SafeAndEffectiveUnsafeRust",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:counterExample",
       "ex:object": "ex:MemoryManagement",
       "ex:source": "body-link:../../02_intermediate/02_memory_management/01_memory_management.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "03_advanced/02_unsafe/01_unsafe.md:1422 “❌ 反例: Use-after-free（Miri 会报错）”——UAF 是对自动内存管理保证的反例",
+      "ex:rule": "R2-curated-counterexample"
     },
     {
       "@id": "_:rel5635",
@@ -82281,15 +82381,17 @@
     },
     {
       "@id": "_:rel5665",
-      "@type": "ex:relatedTo",
+      "@type": "ex:refines",
       "ex:subject": "ex:Borrowing_02unsafe",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:refines",
       "ex:object": "ex:Borrowing",
       "ex:source": "body-link:../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "03_advanced/02_unsafe/03_nll_and_polonius.md: NLL/Polonius 将借用检查从词法作用域精化到使用点/流敏感",
+      "ex:rule": "R3-curated-refines"
     },
     {
       "@id": "_:rel5666",
@@ -82533,15 +82635,17 @@
     },
     {
       "@id": "_:rel5686",
-      "@type": "ex:relatedTo",
+      "@type": "ex:refines",
       "ex:subject": "ex:MemoryModel",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:refines",
       "ex:object": "ex:SafeAndEffectiveUnsafeRust",
       "ex:source": "body-link:01_unsafe.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "03_advanced/02_unsafe/06_memory_model.md 精化 unsafe 语义的内存模型基础",
+      "ex:rule": "R3-curated-refines"
     },
     {
       "@id": "_:rel5687",
@@ -82701,15 +82805,17 @@
     },
     {
       "@id": "_:rel5700",
-      "@type": "ex:relatedTo",
+      "@type": "ex:dependsOn",
       "ex:subject": "ex:UnsafeReference",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:dependsOn",
       "ex:object": "ex:SafeAndEffectiveUnsafeRust",
       "ex:source": "body-link:01_unsafe.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "权威页前置元数据：03_advanced/02_unsafe/07_unsafe_reference.md 的 前置概念/前置依赖 含 [01_unsafe]",
+      "ex:rule": "R4-prereq-metadata"
     },
     {
       "@id": "_:rel5701",
@@ -83061,15 +83167,17 @@
     },
     {
       "@id": "_:rel5730",
-      "@type": "ex:relatedTo",
+      "@type": "ex:instanceOf",
       "ex:subject": "ex:ProceduralMacros",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:instanceOf",
       "ex:object": "ex:Macros",
       "ex:source": "body-link:../../01_foundation/09_macros_basics/01_attributes_and_macros.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "01_foundation/09_macros_basics/01_attributes_and_macros.md:4 关键术语“宏 (Macro) · 声明宏 (Declarative Macro) · 过程宏 (Procedural Macro)”；03_advanced/03_proc_macros/02_proc_macro.md:170“三种宏（Macro）的编译期执行模型相同”——过程宏是宏的一种",
+      "ex:rule": "I3-self-evident-kind"
     },
     {
       "@id": "_:rel5731",
@@ -84045,15 +84153,17 @@
     },
     {
       "@id": "_:rel5812",
-      "@type": "ex:relatedTo",
+      "@type": "ex:instanceOf",
       "ex:subject": "ex:CustomAllocators",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:instanceOf",
       "ex:object": "ex:MemoryManagement",
       "ex:source": "body-link:../../02_intermediate/02_memory_management/01_memory_management.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "02_intermediate/02_memory_management/01_memory_management.md:101 设 §5.7“自定义 Allocator（#[global_allocator]）”章节——自定义分配器是内存管理机制的实例",
+      "ex:rule": "I2-category-section"
     },
     {
       "@id": "_:rel5813",
@@ -87225,15 +87335,17 @@
     },
     {
       "@id": "_:rel6077",
-      "@type": "ex:relatedTo",
+      "@type": "ex:appliesTo",
       "ex:subject": "ex:TreeBorrowsDeepDive",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:appliesTo",
       "ex:object": "ex:SafeAndEffectiveUnsafeRust",
       "ex:source": "body-link:../../03_advanced/02_unsafe/01_unsafe.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md:10 受众“Unsafe Rust、形式化方法…开发者”；:15 前置依赖 Unsafe Rust——Tree Borrows 别名模型应用于 unsafe 代码合法性判定",
+      "ex:rule": "A2-prereq-domain"
     },
     {
       "@id": "_:rel6078",
@@ -87285,15 +87397,17 @@
     },
     {
       "@id": "_:rel6082",
-      "@type": "ex:relatedTo",
+      "@type": "ex:appliesTo",
       "ex:subject": "ex:BehaviorConsideredUndefined",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:appliesTo",
       "ex:object": "ex:SafeAndEffectiveUnsafeRust",
       "ex:source": "body-link:../../03_advanced/02_unsafe/01_unsafe.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "04_formal/01_ownership_logic/06_behavior_considered_undefined.md:14 前置依赖 Unsafe Rust；Summary“Rust Reference 明确列出的未定义行为（UB）清单…核心安全契约边界”——UB 清单应用于 unsafe 契约边界",
+      "ex:rule": "A2-prereq-domain"
     },
     {
       "@id": "_:rel6083",
@@ -87357,15 +87471,17 @@
     },
     {
       "@id": "_:rel6088",
-      "@type": "ex:relatedTo",
+      "@type": "ex:appliesTo",
       "ex:subject": "ex:RustBelt_02separation",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:appliesTo",
       "ex:object": "ex:SafeAndEffectiveUnsafeRust",
       "ex:source": "body-link:../../03_advanced/02_unsafe/01_unsafe.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "04_formal/02_separation_logic/01_rustbelt.md:23 后置/相关链接 Unsafe Rust；:35“扩展层次一致性标注至 L3 Unsafe”；来源标题“RustBelt: Securing the Foundations of the Rust Programming Language”——RustBelt 应用于 unsafe 抽象可靠性",
+      "ex:rule": "A1-page-application"
     },
     {
       "@id": "_:rel6089",
@@ -87621,15 +87737,17 @@
     },
     {
       "@id": "_:rel6110",
-      "@type": "ex:relatedTo",
+      "@type": "ex:appliesTo",
       "ex:subject": "ex:BorrowSanitizerRuntimeTreeBorrowsViolationDetection",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:appliesTo",
       "ex:object": "ex:SafeAndEffectiveUnsafeRust",
       "ex:source": "body-link:../../03_advanced/02_unsafe/01_unsafe.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md 前置依赖 Unsafe Rust · Miri；Summary“基于 LLVM 插桩的动态分析工具，用于检测 Rust 别名模型…违规”——应用于 unsafe 别名违规检测",
+      "ex:rule": "A2-prereq-domain"
     },
     {
       "@id": "_:rel6111",
@@ -88677,15 +88795,17 @@
     },
     {
       "@id": "_:rel6198",
-      "@type": "ex:relatedTo",
+      "@type": "ex:instanceOf",
       "ex:subject": "ex:AutoVerusAndVerusAutomatedVerificationEcosystem",
-      "ex:predicate": "ex:relatedTo",
+      "ex:predicate": "ex:instanceOf",
       "ex:object": "ex:VerificationToolchain",
       "ex:source": "body-link:01_verification_toolchain.md",
       "ex:confidence": 1.0,
       "ex:version": "1.97.0",
       "ex:reviewed": true,
-      "dcterms:created": "2026-07-11"
+      "dcterms:created": "2026-07-11",
+      "ex:evidence": "01_verification_toolchain.md:6 Summary 将 Verus 列为验证工具链成员",
+      "ex:rule": "I1-category-listed"
     },
     {
       "@id": "_:rel6199",
@@ -115062,6 +115182,412 @@
       "ex:version": "1.97.0",
       "ex:reviewed": true,
       "dcterms:created": "2026-07-11"
+    },
+    {
+      "@id": "_:rel8397",
+      "@type": "ex:mutexWith",
+      "ex:subject": "ex:PinAndUnpin",
+      "ex:predicate": "ex:mutexWith",
+      "ex:object": "ex:MoveSemantics",
+      "ex:source": "curated:03_advanced/01_async/08_pin_unpin.md:735",
+      "ex:evidence": "03_advanced/01_async/08_pin_unpin.md:735 “Pin 通过禁止移动（对 !Unpin 类型）来解决这个问题”；:648 “T: !Unpin — Pin 禁止 get_mut()（数据不可移动）”",
+      "ex:rule": "R1-curated-mutex",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8398",
+      "@type": "ex:mutexWith",
+      "ex:subject": "ex:Unions",
+      "ex:predicate": "ex:mutexWith",
+      "ex:object": "ex:MemoryManagement",
+      "ex:source": "curated:02_intermediate/04_types_and_conversions/06_unions.md:105",
+      "ex:evidence": "02_intermediate/04_types_and_conversions/06_unions.md:105 “Drop: 默认不 drop 字段”；:250 “联合体默认不会自动 drop 字段”——与 RAII 自动析构纪律互斥",
+      "ex:rule": "R1-curated-mutex",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8399",
+      "@type": "ex:counterExample",
+      "ex:subject": "ex:SafeAndEffectiveUnsafeRust",
+      "ex:predicate": "ex:counterExample",
+      "ex:object": "ex:Lifetimes",
+      "ex:source": "curated:03_advanced/02_unsafe/01_unsafe.md:1125",
+      "ex:evidence": "03_advanced/02_unsafe/01_unsafe.md:1125 “8.3 反例：悬垂裸指针（UB）”——裸指针悬垂是对“引用有效性总由生命周期保证”的反例",
+      "ex:rule": "R2-curated-counterexample",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8400",
+      "@type": "ex:counterExample",
+      "ex:subject": "ex:SafeAndEffectiveUnsafeRust",
+      "ex:predicate": "ex:counterExample",
+      "ex:object": "ex:TypeConversions",
+      "ex:source": "curated:03_advanced/02_unsafe/01_unsafe.md:1140",
+      "ex:evidence": "03_advanced/02_unsafe/01_unsafe.md:1140 “8.4 反例：transmute 滥用（UB）”——transmute 滥用是对安全类型转换纪律的反例",
+      "ex:rule": "R2-curated-counterexample",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8401",
+      "@type": "ex:refines",
+      "ex:subject": "ex:UnsafeRust",
+      "ex:predicate": "ex:refines",
+      "ex:object": "ex:SafeAndEffectiveUnsafeRust",
+      "ex:source": "curated:03_advanced/02_unsafe/04_unsafe_rust_patterns.md",
+      "ex:evidence": "03_advanced/02_unsafe/04_unsafe_rust_patterns.md 将 03_unsafe.md 精化为可复用 unsafe 模式",
+      "ex:rule": "R3-curated-refines",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8402",
+      "@type": "ex:refines",
+      "ex:subject": "ex:FutureAndExecutorMechanisms",
+      "ex:predicate": "ex:refines",
+      "ex:object": "ex:AsyncProgramming",
+      "ex:source": "curated:03_advanced/01_async/04_future_and_executor_mechanisms.md",
+      "ex:evidence": "03_advanced/01_async/04_future_and_executor_mechanisms.md 精化 async 的 Future/执行器机制",
+      "ex:rule": "R3-curated-refines",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8403",
+      "@type": "ex:equivalentTo",
+      "ex:subject": "ex:PanicAndAbort",
+      "ex:predicate": "ex:equivalentTo",
+      "ex:object": "ex:Panic",
+      "ex:source": "curated:E3-same-concept-xlayer",
+      "ex:evidence": "02_intermediate/03_error_handling/03_panic.md:9 Summary“Rust panic 的规范语义”，前置依赖指向 03_panic_and_abort.md；后者定位“系统讲解 Rust panic 机制”——同一 panic 概念的 L1/L2 两页",
+      "ex:rule": "E3-same-concept-xlayer",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8404",
+      "@type": "ex:equivalentTo",
+      "ex:subject": "ex:BorrowSanitizerRuntimeTreeBorrowsViolationDetection",
+      "ex:predicate": "ex:equivalentTo",
+      "ex:object": "ex:BorrowSanitizerBSanDynamicAliasingRuleVerificationForRust",
+      "ex:source": "curated:E3-same-concept-xlayer",
+      "ex:evidence": "04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md 与 07_future/02_preview_features/24_borrow_sanitizer.md 均为 BorrowSanitizer/BSan 权威页（MCP 958；LLVM 插桩动态别名检测），跨 L4/L7 双页",
+      "ex:rule": "E3-same-concept-xlayer",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8405",
+      "@type": "ex:instanceOf",
+      "ex:subject": "ex:MiriRustUndefinedBehaviorDetector",
+      "ex:predicate": "ex:instanceOf",
+      "ex:object": "ex:VerificationToolchain",
+      "ex:source": "curated:I1-category-listed",
+      "ex:evidence": "04_formal/04_model_checking/01_verification_toolchain.md:6 Summary“The Rust formal verification toolchain: Miri, Kani, Creusot, Verus, Prusti, and RustBelt.”",
+      "ex:rule": "I1-category-listed",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8406",
+      "@type": "ex:instanceOf",
+      "ex:subject": "ex:KaniRustBoundedModelChecker",
+      "ex:predicate": "ex:instanceOf",
+      "ex:object": "ex:VerificationToolchain",
+      "ex:source": "curated:I1-category-listed",
+      "ex:evidence": "01_verification_toolchain.md:6 Summary 将 Kani 列为验证工具链成员",
+      "ex:rule": "I1-category-listed",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8407",
+      "@type": "ex:instanceOf",
+      "ex:subject": "ex:RustBelt_02separation",
+      "ex:predicate": "ex:instanceOf",
+      "ex:object": "ex:VerificationToolchain",
+      "ex:source": "curated:I1-category-listed",
+      "ex:evidence": "01_verification_toolchain.md:6 Summary 将 RustBelt 列为验证工具链成员",
+      "ex:rule": "I1-category-listed",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8408",
+      "@type": "ex:instanceOf",
+      "ex:subject": "ex:PanicAndAbort",
+      "ex:predicate": "ex:instanceOf",
+      "ex:object": "ex:ErrorHandling",
+      "ex:source": "curated:I3-self-evident-kind",
+      "ex:evidence": "01_foundation/08_error_handling/03_panic_and_abort.md 标题“Panic 与 Abort：不可恢复错误的处理机制”——panic/abort 是错误处理机制的一种（不可恢复分支）",
+      "ex:rule": "I3-self-evident-kind",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8409",
+      "@type": "ex:instanceOf",
+      "ex:subject": "ex:Panic",
+      "ex:predicate": "ex:instanceOf",
+      "ex:object": "ex:ErrorHandling",
+      "ex:source": "curated:I3-self-evident-kind",
+      "ex:evidence": "02_intermediate/03_error_handling/03_panic.md:30“Panic 是 Rust 提供的机制，用于阻止函数正常返回，以响应通常不可恢复的错误条件”",
+      "ex:rule": "I3-self-evident-kind",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8410",
+      "@type": "ex:instanceOf",
+      "ex:subject": "ex:CowAndBorrowed",
+      "ex:predicate": "ex:instanceOf",
+      "ex:object": "ex:SmartPointers",
+      "ex:source": "curated:I2-category-section",
+      "ex:evidence": "02_intermediate/02_memory_management/04_smart_pointers.md:620“下层概念: Pin · Cow”——Cow 被智能指针权威页收录为下层概念（写时克隆智能指针）",
+      "ex:rule": "I2-category-section",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8411",
+      "@type": "ex:instanceOf",
+      "ex:subject": "ex:PinAndUnpin",
+      "ex:predicate": "ex:instanceOf",
+      "ex:object": "ex:SmartPointers",
+      "ex:source": "curated:I2-category-section",
+      "ex:evidence": "04_smart_pointers.md:620“下层概念: Pin · Cow”；:19 后置概念含 Pin——Pin 被智能指针权威页收录为下层概念",
+      "ex:rule": "I2-category-section",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8412",
+      "@type": "ex:instanceOf",
+      "ex:subject": "ex:LockingPrimitives",
+      "ex:predicate": "ex:instanceOf",
+      "ex:object": "ex:Concurrency",
+      "ex:source": "curated:I3-self-evident-kind",
+      "ex:evidence": "03_advanced/00_concurrency/07_lock_free.md:11“深入探讨 Rust 中的无锁编程”（位于 00_concurrency 章节）；01_concurrency.md:181-182 将锁/原子操作列为并发同步手段——无锁原语是并发技术的一种",
+      "ex:rule": "I3-self-evident-kind",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8413",
+      "@type": "ex:instanceOf",
+      "ex:subject": "ex:EventDrivenArchitecture",
+      "ex:predicate": "ex:instanceOf",
+      "ex:object": "ex:DesignPatterns",
+      "ex:source": "curated:I3-self-evident-kind",
+      "ex:evidence": "06_ecosystem/03_design_patterns/06_event_driven_architecture.md:16“Rust 实现事件驱动架构的核心模式”（位于 03_design_patterns 章节）",
+      "ex:rule": "I3-self-evident-kind",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8414",
+      "@type": "ex:instanceOf",
+      "ex:subject": "ex:CqrsEventSourcing",
+      "ex:predicate": "ex:instanceOf",
+      "ex:object": "ex:DesignPatterns",
+      "ex:source": "curated:I3-self-evident-kind",
+      "ex:evidence": "06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md:15“设计高可靠分布式系统的数据持久化模式”（位于 03_design_patterns 章节）",
+      "ex:rule": "I3-self-evident-kind",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8415",
+      "@type": "ex:instanceOf",
+      "ex:subject": "ex:ClosureTypes",
+      "ex:predicate": "ex:instanceOf",
+      "ex:object": "ex:Closures",
+      "ex:source": "curated:I2-category-section",
+      "ex:evidence": "01_foundation/00_start/03_closure_basics.md:2 关键术语“闭包 (Closure) · Fn · FnMut · FnOnce”；:7 Summary 将 Fn/FnMut/FnOnce（闭包类型）作为闭包概念的组成",
+      "ex:rule": "I2-category-section",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8416",
+      "@type": "ex:instanceOf",
+      "ex:subject": "ex:ConstantEvaluation",
+      "ex:predicate": "ex:instanceOf",
+      "ex:object": "ex:CompileTimeExecution",
+      "ex:source": "curated:I3-self-evident-kind",
+      "ex:evidence": "07_future/02_preview_features/32_compile_time_execution.md:1 标题“编译期执行与常量求值”——常量求值（const eval）是编译期执行的实例",
+      "ex:rule": "I3-self-evident-kind",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8417",
+      "@type": "ex:instanceOf",
+      "ex:subject": "ex:TypeErasure",
+      "ex:predicate": "ex:instanceOf",
+      "ex:object": "ex:DispatchMechanisms",
+      "ex:source": "curated:I2-category-section",
+      "ex:evidence": "02_intermediate/00_traits/02_dispatch_mechanisms.md:8 Summary 覆盖“动态分发、trait objects、vtables”；04_formal/05_rustc_internals/15_generics_compiler_behavior.md:4 将“静态分发与动态分发、类型擦除”并列为泛型编译行为——类型擦除是动态分发机制的实现",
+      "ex:rule": "I2-category-section",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8418",
+      "@type": "ex:appliesTo",
+      "ex:subject": "ex:MiriRustUndefinedBehaviorDetector",
+      "ex:predicate": "ex:appliesTo",
+      "ex:object": "ex:SafeAndEffectiveUnsafeRust",
+      "ex:source": "curated:A1-page-application",
+      "ex:evidence": "04_formal/04_model_checking/08_miri.md:9 Summary“Miri is Rust's official MIR interpreter for detecting undefined behavior in unsafe and safe Rust code”",
+      "ex:rule": "A1-page-application",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8419",
+      "@type": "ex:appliesTo",
+      "ex:subject": "ex:KaniRustBoundedModelChecker",
+      "ex:predicate": "ex:appliesTo",
+      "ex:object": "ex:FormalMethods_04modelcheck",
+      "ex:source": "curated:A1-page-application",
+      "ex:evidence": "04_formal/04_model_checking/09_kani.md:9 Summary“Kani is an AWS-developed bounded model checker for Rust. It verifies properties over all possible inputs and execution paths within bounds”——应用于模型检查领域",
+      "ex:rule": "A1-page-application",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8420",
+      "@type": "ex:appliesTo",
+      "ex:subject": "ex:SerdePatterns",
+      "ex:predicate": "ex:appliesTo",
+      "ex:object": "ex:Traits",
+      "ex:source": "curated:A1-page-application",
+      "ex:evidence": "02_intermediate/00_traits/03_serde_patterns.md:4“Serde 序列化模式：Rust 的类型驱动数据转换”（位于 00_traits 章节；关键术语 Serialize/Deserialize trait）——serde 是 trait 机制的应用",
+      "ex:rule": "A1-page-application",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8421",
+      "@type": "ex:appliesTo",
+      "ex:subject": "ex:ApplicationBinaryInterface",
+      "ex:predicate": "ex:appliesTo",
+      "ex:object": "ex:ForeignFunctionInterfaceFFI",
+      "ex:source": "curated:A2-prereq-domain",
+      "ex:evidence": "04_formal/05_rustc_internals/05_application_binary_interface.md:15 前置依赖 Linkage · FFI Advanced；来源 Rust Reference extern functions/external blocks——ABI 规则应用于 FFI 边界",
+      "ex:rule": "A2-prereq-domain",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8422",
+      "@type": "ex:appliesTo",
+      "ex:subject": "ex:MemoryModel",
+      "ex:predicate": "ex:appliesTo",
+      "ex:object": "ex:Concurrency",
+      "ex:source": "curated:A1-page-application",
+      "ex:evidence": "03_advanced/02_unsafe/06_memory_model.md:11“其并发内存序维度见 Atomics and Memory Ordering”；:33“将 Rust 内存模型与原子操作…链接”——内存模型应用于并发语义",
+      "ex:rule": "A1-page-application",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8423",
+      "@type": "ex:appliesTo",
+      "ex:subject": "ex:GenericsCompilerBehavior",
+      "ex:predicate": "ex:appliesTo",
+      "ex:object": "ex:Generics",
+      "ex:source": "curated:A1-page-application",
+      "ex:evidence": "04_formal/05_rustc_internals/15_generics_compiler_behavior.md:4 Summary“Rust 泛型（Generics）代码的编译行为：单态化、静态分发与动态分发、类型擦除…”——应用于泛型编译",
+      "ex:rule": "A1-page-application",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8424",
+      "@type": "ex:appliesTo",
+      "ex:subject": "ex:TypeInference",
+      "ex:predicate": "ex:appliesTo",
+      "ex:object": "ex:TypeSystem",
+      "ex:source": "curated:A1-page-application",
+      "ex:evidence": "04_formal/00_type_theory/03_type_inference.md:15“Rust 对 HM 的扩展（trait 约束、泛型（Generics）、生命周期（Lifetimes））”——类型推断算法应用于 Rust 类型系统",
+      "ex:rule": "A1-page-application",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
+    },
+    {
+      "@id": "_:rel8425",
+      "@type": "ex:appliesTo",
+      "ex:subject": "ex:TheTraitSolverInRustc",
+      "ex:predicate": "ex:appliesTo",
+      "ex:object": "ex:Traits",
+      "ex:source": "curated:A1-page-application",
+      "ex:evidence": "04_formal/05_rustc_internals/03_trait_solver_in_rustc.md:2 关键术语“Trait Solver · Selection · Fulfillment · Evaluation · Obligation”——trait 求解器应用于 trait 约束求解",
+      "ex:rule": "A1-page-application",
+      "ex:confidence": 1.0,
+      "ex:version": "1.97.0",
+      "ex:reviewed": true,
+      "dcterms:created": "2026-07-16"
     }
   ],
   "decision_trees": [

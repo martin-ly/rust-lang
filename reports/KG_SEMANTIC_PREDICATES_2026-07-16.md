@@ -3,25 +3,25 @@
 **日期**: 2026-07-16  
 **模式**: 已写回 kg_data_v3.json  
 **置信度阈值**: 0.75  
-**处理实体数**: 487  **处理关系数**: 17165
+**处理实体数**: 487  **处理关系数**: 17216
 
 ## 1. 各批次通用谓词残留
 
 | 批次 | 实体数 | 关系数 | 通用谓词残留 | 占比 |
 |:---|---:|---:|---:|---:|
-| `l1` | 51 | 1452 | 67 | 4.61% |
-| `l2` | 40 | 1142 | 44 | 3.85% |
-| `async` | 14 | 494 | 17 | 3.44% |
-| `unsafe` | 9 | 355 | 11 | 3.10% |
-| `formal` | 61 | 1265 | 44 | 3.48% |
+| `l1` | 51 | 1459 | 67 | 4.59% |
+| `l2` | 40 | 1153 | 44 | 3.82% |
+| `async` | 14 | 497 | 17 | 3.42% |
+| `unsafe` | 9 | 360 | 11 | 3.06% |
+| `formal` | 61 | 1276 | 44 | 3.45% |
 | `l5` | 27 | 668 | 21 | 3.14% |
-| `l6_concept` | 103 | 1950 | 124 | 6.36% |
-| `l7` | 66 | 1271 | 57 | 4.48% |
-| `l3_rem` | 43 | 899 | 47 | 5.23% |
+| `l6_concept` | 103 | 1952 | 124 | 6.35% |
+| `l7` | 66 | 1273 | 57 | 4.48% |
+| `l3_rem` | 43 | 902 | 47 | 5.21% |
 | `meta_navigation` | 29 | 3372 | 55 | 1.63% |
-| `ecosystem` | 126 | 2263 | 126 | 5.57% |
-| `future` | 66 | 1271 | 57 | 4.48% |
-| `rustc_internals` | 17 | 288 | 5 | 1.74% |
+| `ecosystem` | 126 | 2265 | 126 | 5.56% |
+| `future` | 66 | 1273 | 57 | 4.48% |
+| `rustc_internals` | 17 | 291 | 5 | 1.72% |
 | `framework` | 21 | 475 | 11 | 2.32% |
 
 - 处理批次内通用谓词总计残留: **686**
@@ -29,71 +29,77 @@
 
 ## 2. 改动统计
 
-- 修改的关系数: 6034
+- 修改的关系数: 89
 
 ## 3. 全局 @type 分布前后对比
 
 | 谓词 | 修改前 | 修改后 | Δ |
 |:---|---:|---:|---:|
-| `ex:relatedTo` | 1113 | 6263 | +5150 |
-| `ex:dependsOn` | 498 | 818 | +320 |
-| `ex:entails` | 188 | 752 | +564 |
-| `ex:RelationAnnotation` | 6597 | 563 | -6034 |
+| `ex:relatedTo` | 6263 | 6203 | -60 |
+| `ex:dependsOn` | 818 | 838 | +20 |
+| `ex:entails` | 752 | 764 | +12 |
+| `ex:RelationAnnotation` | 592 | 563 | -29 |
+| `ex:instanceOf` | 0 | 18 | +18 |
+| `ex:appliesTo` | 0 | 14 | +14 |
+| `ex:refines` | 0 | 12 | +12 |
+| `ex:counterExample` | 0 | 5 | +5 |
+| `ex:mutexWith` | 0 | 5 | +5 |
+| `ex:equivalentTo` | 0 | 3 | +3 |
 
 ## 4. 改动样例（前 50 条）
 
 | @id | 主语路径 | 宾语路径 | 旧谓词 | 新谓词 | 规则 | 置信度 |
 |:---|:---|:---|:---|:---|:---|---:|
-| `_:rel1` | `00_meta/00_framework/comprehensive_rust_mapping.md` | `00_meta/04_navigation/07_learning_guide.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel2` | `00_meta/00_framework/comprehensive_rust_mapping.md` | `00_meta/00_framework/bloom_taxonomy.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel3` | `00_meta/00_framework/comprehensive_rust_mapping.md` | `06_ecosystem/06_data_and_distributed/01_application_domains.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel4` | `00_meta/00_framework/cpp_rust_engineering_roadmap.md` | `05_comparative/01_systems_languages/01_rust_vs_cpp.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel5` | `00_meta/00_framework/cpp_rust_engineering_roadmap.md` | `01_foundation/03_values_and_references/03_variable_model.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel6` | `00_meta/00_framework/cpp_rust_engineering_roadmap.md` | `00_meta/00_framework/pattern_semantic_space_index.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel7` | `00_meta/00_framework/cpp_rust_engineering_roadmap.md` | `05_comparative/01_systems_languages/02_cpp_abi_object_model.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel8` | `00_meta/00_framework/pattern_semantic_space_index.md` | `06_ecosystem/03_design_patterns/01_patterns.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel9` | `00_meta/00_framework/pattern_semantic_space_index.md` | `01_foundation/02_type_system/01_type_system.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel10` | `00_meta/00_framework/pattern_semantic_space_index.md` | `06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel11` | `00_meta/00_framework/pattern_semantic_space_index.md` | `00_meta/00_framework/semantic_bridge_algorithms_patterns.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel12` | `00_meta/00_framework/pl_foundations_roadmap.md` | `01_foundation/02_type_system/01_type_system.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel13` | `00_meta/00_framework/pl_foundations_roadmap.md` | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel14` | `00_meta/00_framework/pl_foundations_roadmap.md` | `00_meta/00_framework/cpp_rust_engineering_roadmap.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel15` | `00_meta/00_framework/pl_foundations_roadmap.md` | `00_meta/00_framework/pattern_semantic_space_index.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel16` | `00_meta/00_framework/semantic_bridge_algorithms_patterns.md` | `06_ecosystem/11_domain_applications/07_algorithms_competitive_programming.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel17` | `00_meta/00_framework/semantic_bridge_algorithms_patterns.md` | `06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel21` | `00_meta/02_sources/05_international_authority_index.md` | `00_meta/04_navigation/03_concept_index.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel22` | `00_meta/02_sources/05_international_authority_index.md` | `00_meta/00_framework/knowledge_mindmap.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel26` | `00_meta/04_navigation/02_career_landscape.md` | `00_meta/00_framework/bloom_taxonomy.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel27` | `00_meta/04_navigation/02_career_landscape.md` | `06_ecosystem/06_data_and_distributed/01_application_domains.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel28` | `00_meta/04_navigation/13_foundations_gap_closure_index.md` | `00_meta/00_framework/pl_foundations_roadmap.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel29` | `00_meta/04_navigation/13_foundations_gap_closure_index.md` | `00_meta/00_framework/cpp_rust_engineering_roadmap.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel30` | `00_meta/04_navigation/13_foundations_gap_closure_index.md` | `00_meta/00_framework/pattern_semantic_space_index.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel31` | `00_meta/04_navigation/13_foundations_gap_closure_index.md` | `00_meta/03_audit/01_concept_audit_guide.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel33` | `00_meta/knowledge_topology/11_semantic_model_atlas.md` | `00_meta/knowledge_topology/01_concept_definition_atlas.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel34` | `00_meta/knowledge_topology/11_semantic_model_atlas.md` | `00_meta/knowledge_topology/06_inter_layer_mapping_atlas.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel35` | `00_meta/knowledge_topology/11_semantic_model_atlas.md` | `04_formal/07_concurrency_semantics/04_algebraic_effects.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel36` | `00_meta/knowledge_topology/11_semantic_model_atlas.md` | `04_formal/00_type_theory/10_dependent_refinement_types.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel37` | `00_meta/knowledge_topology/11_semantic_model_atlas.md` | `04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel38` | `00_meta/knowledge_topology/11_semantic_model_atlas.md` | `05_comparative/00_paradigms/05_language_semantic_model_matrix.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel44` | `01_foundation/00_start/02_zero_cost_abstractions.md` | `05_comparative/01_systems_languages/01_rust_vs_cpp.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel45` | `01_foundation/00_start/02_zero_cost_abstractions.md` | `06_ecosystem/00_toolchain/01_toolchain.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel49` | `01_foundation/00_start/03_closure_basics.md` | `02_intermediate/07_iterators_and_closures/01_iterator_patterns.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel51` | `01_foundation/00_start/03_closure_basics.md` | `02_intermediate/04_types_and_conversions/02_closure_types.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel53` | `01_foundation/00_start/04_effects_and_purity.md` | `04_formal/03_operational_semantics/04_evaluation_strategies.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel56` | `01_foundation/00_start/04_effects_and_purity.md` | `07_future/02_preview_features/01_effects_system.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel58` | `01_foundation/00_start/05_std_io_and_process.md` | `01_foundation/08_error_handling/01_error_handling_basics.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel60` | `01_foundation/00_start/05_std_io_and_process.md` | `01_foundation/06_strings_and_text/01_strings_and_text.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel62` | `01_foundation/00_start/05_std_io_and_process.md` | `06_ecosystem/06_data_and_distributed/01_application_domains.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel63` | `01_foundation/00_start/05_std_io_and_process.md` | `01_foundation/10_testing_basics/01_testing_basics.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel64` | `01_foundation/00_start/06_keywords.md` | `01_foundation/09_macros_basics/01_attributes_and_macros.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel65` | `01_foundation/00_start/06_keywords.md` | `01_foundation/07_modules_and_items/01_modules_and_paths.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel68` | `01_foundation/00_start/07_operators_and_symbols.md` | `03_advanced/03_proc_macros/01_macros.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel82` | `01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md` | `00_meta/04_navigation/07_learning_guide.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel89` | `01_foundation/02_type_system/02_never_type.md` | `01_foundation/08_error_handling/01_error_handling_basics.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel94` | `01_foundation/02_type_system/03_numerics.md` | `01_foundation/00_start/02_zero_cost_abstractions.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel95` | `01_foundation/02_type_system/03_numerics.md` | `01_foundation/05_collections/01_collections.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel106` | `01_foundation/02_type_system/05_data_abstraction_spectrum.md` | `03_advanced/06_low_level_patterns/03_type_erasure.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel114` | `01_foundation/03_values_and_references/02_value_vs_reference_semantics.md` | `00_meta/04_navigation/07_learning_guide.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel1781` | `00_meta/02_sources/02_rustbelt_predicate_map.md` | `04_formal/02_separation_logic/01_rustbelt.md` | `ex:equivalentTo` | `ex:equivalentTo` | existing-semantic | 1.00 |
+| `_:rel4624` | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | `02_intermediate/01_generics/01_generics.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
+| `_:rel4640` | `01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel4641` | `01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | `02_intermediate/00_traits/01_traits.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
+| `_:rel4643` | `01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | `03_advanced/00_concurrency/01_concurrency.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
+| `_:rel4662` | `01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md` | `01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md` | `ex:refines` | `ex:refines` | existing-semantic | 1.00 |
+| `_:rel4679` | `01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md` | `01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | `ex:mutexWith` | `ex:mutexWith` | existing-semantic | 1.00 |
+| `_:rel4941` | `01_foundation/08_error_handling/03_panic_and_abort.md` | `01_foundation/08_error_handling/01_error_handling_basics.md` | `ex:mutexWith` | `ex:mutexWith` | existing-semantic | 1.00 |
+| `_:rel5035` | `02_intermediate/00_traits/01_traits.md` | `03_advanced/00_concurrency/01_concurrency.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
+| `_:rel5036` | `02_intermediate/00_traits/01_traits.md` | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel5040` | `02_intermediate/00_traits/02_dispatch_mechanisms.md` | `02_intermediate/00_traits/01_traits.md` | `ex:appliesTo` | `ex:appliesTo` | existing-semantic | 1.00 |
+| `_:rel5042` | `02_intermediate/00_traits/03_serde_patterns.md` | `02_intermediate/00_traits/01_traits.md` | `ex:refines` | `ex:refines` | existing-semantic | 1.00 |
+| `_:rel5052` | `02_intermediate/00_traits/04_advanced_traits.md` | `02_intermediate/00_traits/01_traits.md` | `ex:refines` | `ex:refines` | existing-semantic | 1.00 |
+| `_:rel5066` | `02_intermediate/00_traits/05_construction_and_initialization.md` | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel5070` | `02_intermediate/00_traits/06_derive_traits.md` | `02_intermediate/00_traits/01_traits.md` | `ex:instanceOf` | `ex:instanceOf` | existing-semantic | 1.00 |
+| `_:rel5113` | `02_intermediate/01_generics/03_type_level_programming.md` | `02_intermediate/04_types_and_conversions/05_rtti_and_dynamic_typing.md` | `ex:mutexWith` | `ex:mutexWith` | existing-semantic | 1.00 |
+| `_:rel5133` | `02_intermediate/02_memory_management/01_memory_management.md` | `01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel5136` | `02_intermediate/02_memory_management/01_memory_management.md` | `03_advanced/00_concurrency/01_concurrency.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
+| `_:rel5137` | `02_intermediate/02_memory_management/01_memory_management.md` | `03_advanced/01_async/01_async.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
+| `_:rel5146` | `02_intermediate/02_memory_management/02_interior_mutability.md` | `01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | `ex:counterExample` | `ex:counterExample` | existing-semantic | 1.00 |
+| `_:rel5148` | `02_intermediate/02_memory_management/02_interior_mutability.md` | `03_advanced/01_async/01_async.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
+| `_:rel5154` | `02_intermediate/02_memory_management/03_cow_and_borrowed.md` | `01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | `ex:refines` | `ex:refines` | existing-semantic | 1.00 |
+| `_:rel5162` | `02_intermediate/02_memory_management/04_smart_pointers.md` | `01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel5163` | `02_intermediate/02_memory_management/04_smart_pointers.md` | `02_intermediate/02_memory_management/01_memory_management.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel5179` | `02_intermediate/03_error_handling/01_error_handling.md` | `02_intermediate/00_traits/01_traits.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel5181` | `02_intermediate/03_error_handling/01_error_handling.md` | `03_advanced/01_async/01_async.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
+| `_:rel5193` | `02_intermediate/03_error_handling/02_error_handling_deep_dive.md` | `02_intermediate/03_error_handling/01_error_handling.md` | `ex:refines` | `ex:refines` | existing-semantic | 1.00 |
+| `_:rel5196` | `02_intermediate/03_error_handling/03_panic.md` | `01_foundation/08_error_handling/03_panic_and_abort.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel5218` | `02_intermediate/04_types_and_conversions/02_closure_types.md` | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel5219` | `02_intermediate/04_types_and_conversions/02_closure_types.md` | `01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel5221` | `02_intermediate/04_types_and_conversions/02_closure_types.md` | `02_intermediate/01_generics/01_generics.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
+| `_:rel5229` | `02_intermediate/04_types_and_conversions/03_newtype_and_wrapper.md` | `06_ecosystem/03_design_patterns/01_patterns.md` | `ex:instanceOf` | `ex:instanceOf` | existing-semantic | 1.00 |
+| `_:rel5365` | `03_advanced/00_concurrency/01_concurrency.md` | `01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel5366` | `03_advanced/00_concurrency/01_concurrency.md` | `02_intermediate/00_traits/01_traits.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel5376` | `03_advanced/00_concurrency/02_send_sync_auto_traits.md` | `03_advanced/00_concurrency/06_atomics_and_memory_ordering.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
+| `_:rel5377` | `03_advanced/00_concurrency/02_send_sync_auto_traits.md` | `03_advanced/00_concurrency/07_lock_free.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
+| `_:rel5380` | `03_advanced/00_concurrency/02_send_sync_auto_traits.md` | `02_intermediate/02_memory_management/02_interior_mutability.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel5381` | `03_advanced/00_concurrency/02_send_sync_auto_traits.md` | `03_advanced/02_unsafe/01_unsafe.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
+| `_:rel5382` | `03_advanced/00_concurrency/02_send_sync_auto_traits.md` | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel5384` | `03_advanced/00_concurrency/03_concurrency_patterns.md` | `03_advanced/00_concurrency/01_concurrency.md` | `ex:refines` | `ex:refines` | existing-semantic | 1.00 |
+| `_:rel5395` | `03_advanced/00_concurrency/04_send_sync_boundaries.md` | `03_advanced/01_async/01_async.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel5397` | `03_advanced/00_concurrency/04_send_sync_boundaries.md` | `02_intermediate/00_traits/02_dispatch_mechanisms.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel5400` | `03_advanced/00_concurrency/05_cross_platform_concurrency.md` | `03_advanced/00_concurrency/01_concurrency.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel5425` | `03_advanced/00_concurrency/07_lock_free.md` | `03_advanced/00_concurrency/01_concurrency.md` | `ex:counterExample` | `ex:counterExample` | existing-semantic | 1.00 |
+| `_:rel5426` | `03_advanced/00_concurrency/07_lock_free.md` | `03_advanced/00_concurrency/06_atomics_and_memory_ordering.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel5427` | `03_advanced/00_concurrency/07_lock_free.md` | `03_advanced/02_unsafe/01_unsafe.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel5492` | `03_advanced/01_async/02_async_advanced.md` | `03_advanced/01_async/01_async.md` | `ex:refines` | `ex:refines` | existing-semantic | 1.00 |
+| `_:rel5549` | `03_advanced/01_async/07_async_closures.md` | `03_advanced/01_async/01_async.md` | `ex:refines` | `ex:refines` | existing-semantic | 1.00 |
+| `_:rel5557` | `03_advanced/01_async/08_pin_unpin.md` | `03_advanced/01_async/01_async.md` | `ex:appliesTo` | `ex:appliesTo` | existing-semantic | 1.00 |
+| `_:rel5634` | `03_advanced/02_unsafe/01_unsafe.md` | `02_intermediate/02_memory_management/01_memory_management.md` | `ex:counterExample` | `ex:counterExample` | existing-semantic | 1.00 |
 
 ## 5. 结论
 

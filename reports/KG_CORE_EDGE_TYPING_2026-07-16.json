@@ -1,6 +1,6 @@
 {
   "date": "2026-07-16",
-  "dry_run": true,
+  "dry_run": false,
   "core_entities": 68,
   "changes": 54,
   "before_core": {

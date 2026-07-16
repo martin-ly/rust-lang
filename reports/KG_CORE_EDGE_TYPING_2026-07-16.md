@@ -1,7 +1,7 @@
 # KG 核心边语义类型化（relatedTo 反塌缩）
 
 **日期**: 2026-07-16  **核心实体**: 68  **核心子集边**: 523 → 529  **改动**: 54  
-**模式**: dry-run（未写回）
+**模式**: 已写回 kg_data_v3.json
 
 ## 规则
 
@@ -21,8 +21,8 @@
 | ex:dependsOn | 114 | 134 | +20 |
 | ex:entails | 63 | 75 | +12 |
 | ex:refines | 0 | 12 | +12 |
-| ex:counterExample | 0 | 5 | +5 |
 | ex:mutexWith | 0 | 5 | +5 |
+| ex:counterExample | 0 | 5 | +5 |
 
 ### 全局 KG
 
@@ -32,8 +32,8 @@
 | ex:dependsOn | 834 | 854 | +20 |
 | ex:entails | 756 | 768 | +12 |
 | ex:refines | 0 | 12 | +12 |
-| ex:counterExample | 0 | 5 | +5 |
 | ex:mutexWith | 0 | 5 | +5 |
+| ex:counterExample | 0 | 5 | +5 |
 
 ## 逐边改动与依据
 
