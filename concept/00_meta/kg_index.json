@@ -4,7 +4,7 @@
     "generated": "2026-07-11",
     "rust_version": "1.97.0+",
     "source": "concept/",
-    "entity_count": 534,
+    "entity_count": 539,
     "schema": "simple KG index"
   },
   "entities": [
@@ -891,6 +891,19 @@
       "en": "Rust Minimum Viable Learning Path",
       "summary": "A 3-week beginner path to independently write a multi-threaded CLI in Rust, with runnable code and exercises for each stage.",
       "bloom": "Meta",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [],
+      "postrequisites": [],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:00_meta/04_navigation/15_quiz_registry.md",
+      "path": "00_meta/04_navigation/15_quiz_registry.md",
+      "title": "测验体系注册表（Quiz Registry）",
+      "en": "Quiz Registry — Human-readable index of all assessment assets in the knowledge base.",
+      "summary": "Unified index of the 22 standalone quizzes, per-page embedded quizzes, exercises test suites, Brown inventories, and the rustlings mapping, with question counts, type composition, difficulty distribution, and backlink status.",
+      "bloom": "L0（元信息 / 导航）",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [],
       "postrequisites": [],
@@ -9365,6 +9378,45 @@
       "related_crates": []
     },
     {
+      "id": "concept:06_ecosystem/00_toolchain/15_z_flags_reference.md",
+      "path": "06_ecosystem/00_toolchain/15_z_flags_reference.md",
+      "title": "rustc / Cargo `-Z` 不稳定选项参考清单",
+      "en": "rustc and Cargo `-Z` Unstable Flags Reference",
+      "summary": "A categorized, source-verified reference of the most-used unstable `-Z` flags for rustc and Cargo: build, diagnostics/profiling, sanitizers/hardening, dependency visibility, and type-system frontiers, each with status, purpose, and authoritative source.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "rustc Driver 与 Stable MIR",
+          "path": "10_rustc_driver_and_stable_mir.md"
+        },
+        {
+          "title": "LLVM 后端与代码生成",
+          "path": "09_llvm_backend_and_codegen.md"
+        },
+        {
+          "title": "编译器测试体系",
+          "path": "13_compiler_testing.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "交叉编译与 target 平台支持",
+          "path": "../05_systems_and_embedded/02_cross_compilation.md"
+        },
+        {
+          "title": "Target Tier 平台支持全景",
+          "path": "../05_systems_and_embedded/10_target_tier_platform_support.md"
+        },
+        {
+          "title": "Rust vs C++（工具链标志哲学对比：`-Z` 夜间选项 vs `-fsanitize`/`-march`）",
+          "path": "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:06_ecosystem/01_cargo/01_cargo_script.md",
       "path": "06_ecosystem/01_cargo/01_cargo_script.md",
       "title": "Cargo Script 脚本化 Rust",
@@ -11113,6 +11165,41 @@
       "related_crates": []
     },
     {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md",
+      "path": "06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md",
+      "title": "Target Tier 平台支持全景：分层保证与 1.90–1.97 变迁",
+      "en": "Target Tier Platform Support: Guarantees and Changes in Rust 1.90–1.97",
+      "summary": "Consolidated reference for Rust's tiered platform support — what Tier 1/2/3 guarantee, the current target counts, and every tier change from Rust 1.90 through 1.97, including the nvptx64-nvidia-cuda minimum SM/PTX ISA raise in 1.97.",
+      "bloom": "L3-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "交叉编译与 target 三元组",
+          "path": "02_cross_compilation.md"
+        },
+        {
+          "title": "将 Rust 集成到现有平台",
+          "path": "../00_toolchain/08_platform_rust_integration.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "`-Z` 选项参考清单",
+          "path": "../00_toolchain/15_z_flags_reference.md"
+        },
+        {
+          "title": "WASI",
+          "path": "01_wasi.md"
+        },
+        {
+          "title": "Rust vs Go（交叉编译与平台支持广度对比）",
+          "path": "../../05_comparative/01_systems_languages/03_rust_vs_go.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md",
       "path": "06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md",
       "title": "",
@@ -11150,6 +11237,41 @@
         {
           "title": "Async 中的 Unsafe",
           "path": "../../03_advanced/02_unsafe/08_async_in_unsafe_contexts.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/12_gpu_programming_and_hpc.md",
+      "path": "06_ecosystem/05_systems_and_embedded/12_gpu_programming_and_hpc.md",
+      "title": "Rust GPU 与高性能计算（GPU Programming & HPC）",
+      "en": "GPU Programming and High-Performance Computing with Rust",
+      "summary": "GPU execution models (SIMT, warps, blocks, memory hierarchy), the Rust GPU crate ecosystem (wgpu, rust-gpu, cust/accel, hip-sys, ash), HPC patterns (data parallelism, SIMD, NUMA, MPI), cross-language comparison with CUDA C++/SYCL/OpenCL/Kokkos/Julia, and the safety and performance boundaries of device-side Rust.",
+      "bloom": "L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Systems and Embedded（嵌入式系统）",
+          "path": "../05_systems_and_embedded/03_embedded_systems.md"
+        },
+        {
+          "title": "Unsafe Rust",
+          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
+        },
+        {
+          "title": "FFI",
+          "path": "../../03_advanced/04_ffi/01_rust_ffi.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Domain Applications（机器学习生态）",
+          "path": "../11_domain_applications/13_machine_learning_ecosystem.md"
+        },
+        {
+          "title": "Cross Compilation（交叉编译）",
+          "path": "../05_systems_and_embedded/02_cross_compilation.md"
         }
       ],
       "theorems": [],
@@ -12241,6 +12363,19 @@
           "path": "../04_web_and_networking/03_web_frameworks.md"
         }
       ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md",
+      "path": "06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md",
+      "title": "安全关键 Rust 专题索引",
+      "en": "Safety-Critical Rust Topic Index",
+      "summary": "Navigation index linking the `content/safety_critical/` in-depth suite (ISO 26262 / IEC 61508 / DO-178C / MISRA guides, case studies, checklists) with the related `concept/` canonical pages (formal methods, Ferrocene toolchain).",
+      "bloom": "L4-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [],
+      "postrequisites": [],
       "theorems": [],
       "related_crates": []
     },

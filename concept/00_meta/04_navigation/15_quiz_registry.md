@@ -1,6 +1,6 @@
 # 测验体系注册表（Quiz Registry）
 
-**EN**: Quiz Registry — Human-readable index of all assessment assets in the knowledge base.
+> **EN**: Quiz Registry — Human-readable index of all assessment assets in the knowledge base.
 
 > **Summary**: Unified index of the 22 standalone quizzes, per-page embedded quizzes, exercises test suites, Brown inventories, and the rustlings mapping, with question counts, type composition, difficulty distribution, and backlink status.
 > **Rust 版本**: 1.97.0+ (Edition 2024)

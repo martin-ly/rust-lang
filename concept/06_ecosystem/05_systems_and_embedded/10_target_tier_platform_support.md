@@ -1,6 +1,6 @@
 # Target Tier 平台支持全景：分层保证与 1.90–1.97 变迁
 
-**EN**: Target Tier Platform Support: Guarantees and Changes in Rust 1.90–1.97
+> **EN**: Target Tier Platform Support: Guarantees and Changes in Rust 1.90–1.97
 
 > **Summary**: Consolidated reference for Rust's tiered platform support — what Tier 1/2/3 guarantee, the current target counts, and every tier change from Rust 1.90 through 1.97, including the nvptx64-nvidia-cuda minimum SM/PTX ISA raise in 1.97.
 

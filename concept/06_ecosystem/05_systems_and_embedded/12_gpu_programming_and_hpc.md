@@ -1,6 +1,6 @@
 # Rust GPU 与高性能计算（GPU Programming & HPC）
 
-**EN**: GPU Programming and High-Performance Computing with Rust
+> **EN**: GPU Programming and High-Performance Computing with Rust
 > **Summary**: GPU execution models (SIMT, warps, blocks, memory hierarchy), the Rust GPU crate ecosystem (wgpu, rust-gpu, cust/accel, hip-sys, ash), HPC patterns (data parallelism, SIMD, NUMA, MPI), cross-language comparison with CUDA C++/SYCL/OpenCL/Kokkos/Julia, and the safety and performance boundaries of device-side Rust.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
