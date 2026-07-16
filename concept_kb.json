@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 523,
-    "generated_at": "2026-07-16T10:52:52.931658+00:00"
+    "generated_at": "2026-07-16T11:48:01.156440+00:00"
   },
   "files": [
     {
@@ -44376,7 +44376,7 @@
       "layer": "L4",
       "title": "代数效应与效应处理器：从自由单子到 Rust 的关键字效果",
       "positioning": "",
-      "line_count": 798,
+      "line_count": 799,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -44454,7 +44454,7 @@
       "layer": "L4",
       "title": "软件事务内存（STM）形式语义：从 Herlihy-Moss 到 Rust 的「无 STM」设计",
       "positioning": "`stm` crate 适合原型验证与教学演示（本页 §2.3 的组合子语义可以原样跑通），但在生产系统中，它把 Haskell 由类型系统承担的成本转嫁给了程序员自律——这正是 §3.1 第 3 条理由的微观实证。",
-      "line_count": 826,
+      "line_count": 827,
       "theorem_chains": [
         {
           "text": "3. 无冲突 ⟹ **提交**（commit），写入一次性生效；有冲突 ⟹ **中止**（abort），丢弃全部暂存写入并**重跑**（retry 重执行整个块）。",
@@ -44551,7 +44551,7 @@
       "layer": "L4",
       "title": "分布式共识与不可能性理论：FLP · CAP · Paxos · Raft · BFT",
       "positioning": "",
-      "line_count": 857,
+      "line_count": 858,
       "theorem_chains": [
         {
           "text": "直觉陈述：**终止性要求系统最终表态；异步性允许对抗者永远保持「再等等也许另一个决定也合法」的暧昧；一个潜在故障使系统无法对缺席者强制推进。** 三者合流 ⟹ 存在永远暧昧的执行。",
@@ -47217,7 +47217,7 @@
       "layer": "L5",
       "title": "Rust vs Haskell：所有权/RAII 与惰性纯函数式语言的系统对比",
       "positioning": "从**内存模型**、**类型系统**、**效应系统**、**并发模型**、**形式化验证**与**适用场景**六个维度，系统对比 Rust 与 Haskell 的设计哲学与工程权衡。本文是对 [Paradigm Matrix](../00_paradigms/01_paradigm_matrix.md) 中「函数式编程 vs 系统编程」交叉视角的 pairwise 深化，不重复该矩阵的通用范式定义。",
-      "line_count": 798,
+      "line_count": 799,
       "theorem_chains": [],
       "anti_propositions": [
         {

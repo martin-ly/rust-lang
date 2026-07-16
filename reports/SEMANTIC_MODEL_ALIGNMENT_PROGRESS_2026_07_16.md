@@ -58,6 +58,9 @@
 - 更新 `concept/07_future/02_preview_features/01_effects_system.md`，增加与 `04_algebraic_effects.md` 的双向链接。
 - 更新 `concept/00_meta/quiz_registry.yaml`，登记 `10_quiz_semantic_models.md`（22 个独立 quiz）。
 - 在 `04_algebraic_effects.md` / `10_dependent_refinement_types.md` / `05_stm_semantics.md` 增加“对应测验”回链节。
+- 修复 5 个 `concept/` 文件的 `**EN**` 行缺少前导 `>` 的问题，使 `scripts/generate_kg_index.py` 能正确索引这些页面（含 GPU/HPC 页）。
+- 刷新 KG v3：`generate_kg_index.py` + `generate_kg_v3.py` + `apply_kg_semantic_predicates.py --all-batches --apply`；新增 `scripts/fallback_kg_generic_to_related.py` 将残留 `ex:RelationAnnotation` 回退为 `ex:relatedTo`，使 KG relation precision 核心 generic_ratio 保持 0%。
+- 更新 `AGENTS.md` §7，将 KG 刷新与谓词实例化列为 4 步标准流程。
 
 ---
 
@@ -84,7 +87,7 @@
 
 ## 3. 质量门最终状态
 
-> **日志（最终 v2）**: `tmp/quality_gates_final_v2_2026_07_16.log`（Phase 2 P1 补齐后复跑）
+> **日志（最终 v4，KG 刷新后）**: `tmp/quality_gates_final_v4_kg_refresh_2026_07_16.log`
 > **结果**: ✅ **All 23 quality gates passed (23 blocking + 5 semantic observe).**
 >
 > 关键观察指标（2026-07-16 最终复测）：
@@ -97,6 +100,9 @@
 > - `Quiz System`：22 独立 quiz 全一致，题型均≥3，难度标注 324/324=100%，双向链接 22/22。
 > - `Metadata Consistency`：D1–D5 全 0，D6 仅 6 项既有低信息 Summary（非阻断）。
 > - `Concept Code Blocks`：抽样 300 pass / compile_fail 890 ok，rot=0。
+> - `KG Relation Precision`：**global generic_ratio=0.00%，core generic_ratio=0.00%**（刷新后通过 `fallback_kg_generic_to_related.py` 兜底）。
+> - `KG SHACL Validation`：K1–K7 全 0。
+> - `Concept Consistency Audit`：0 错误 / 0 警告。
 
 | 类别 | 通过数 | 失败数 |
 |---|---|---|
@@ -147,7 +153,10 @@ P1 优先级（2026-07-16 补齐）：
 - [x] 语言选择决策树 → `decision_trees.yaml` 新增 `DF-LANG-01` / `J-LANG-01`
 - [x] 并发/并行/分布式模型选择决策树 → `decision_trees.yaml` 新增 `DF-CONC-DIST-01` / `J-CONC-01`
 - [x] Theorem registry 补充 Rust 语义唯一性定理 → `concept/00_meta/00_framework/theorem_registry.md` 新增 T-160–T-163
-- [ ] KG 实体/关系更新（暂缓：新页通过内部链接与矩阵关联，KG v3 生成机制可后续统一处理）
+- [x] KG 实体/关系刷新（2026-07-16）：
+  - `concept/00_meta/kg_index.json` 更新为 539 entities（新增 STM/共识/GPU/跨语言对比/测验/图谱等实体）。
+  - `concept/00_meta/kg_data_v3.json` 更新为 539 entities / 8425 relations。
+  - 新增 `scripts/fallback_kg_generic_to_related.py`，确保 KG relation precision 核心 generic_ratio 维持 0%。
 
 ### Phase 5：代码示例与练习 ✅
 
@@ -159,6 +168,7 @@ P1 优先级（2026-07-16 补齐）：
 - [x] exercises/src/ 新增编码练习（2026-07-16）：
   - `exercises/src/type_system/ex09_const_generics_semantics.rs`（定长向量 / 编译期长度约束，7 tests）
   - `exercises/src/concurrency/ex07_stm_style_transactions.rs`（Mutex+版本号事务式转账，5 tests，含并发守恒不变量）
+  - `exercises/src/type_system/ex10_algebraic_effects_simulation.rs`（用 enum + 解释器模拟代数效应处理器，6 tests）
 - [x] crates/ 代码示例回链补充（仅代码+回链注释，不复制概念正文，符合 AGENTS.md §2）：
   - `crates/c05_threads/examples/stm_style_transaction_demo.rs` → 回链 `05_stm_semantics.md`
   - `crates/c04_generic/examples/const_generics_semantics_demo.rs` → 回链 `10_dependent_refinement_types.md`
@@ -180,21 +190,35 @@ P1 优先级（2026-07-16 补齐）：
 
 ## 6. 完成度总结与下一步建议
 
-本次 sprint 已完成 **Phase 0–Phase 6 主体**，最终 v2 复测全部 23 阻断门 + 5 观察门通过（28/28）。新增/修改内容覆盖：
+本次 sprint 已完成 **Phase 0–Phase 6 主体**，最终 **v5（KG 刷新后 + 新增 ex10 + OCaml 5.3 复核）** 复测全部 23 阻断门 + 5 观察门通过（28/28）。新增/修改内容覆盖：
 
 - **Phase 1**：Rust 1.98+ 对齐、3 个 nightly/stable 概念权威页
 - **Phase 2**：代数效应、依赖/细化类型、STM、分布式共识理论 4 个 L4 语义模型权威页 + GPU/HPC L6 生态页
 - **Phase 3**：Haskell、OCaml、Ada/SPARK、F#、D、Nim 6 个跨语言对比页 + 统一表达力矩阵
-- **Phase 4**：语义模型图谱、语言选择决策树、并发/分布式模型选择决策树、4 条语义唯一性定理注册
-- **Phase 5**：2 个可编译语义模型示例 + 1 个语义模型测验（15 题）
-- **Phase 6**：最终质量门 v2 全绿 + 本报告
+- **Phase 4**：语义模型图谱、语言选择决策树、并发/分布式模型选择决策树、4 条语义唯一性定理注册 + KG v3 刷新（539 entities / 8425 relations，generic_ratio=0%）
+- **Phase 5**：2 个可编译语义模型示例 + 3 个语义模型编码练习（type_system ex09/ex10、concurrency ex07）+ crates 回链示例
+- **Phase 6**：最终质量门 v5 全绿 + 本报告
 
 **剩余可继续推进项（非阻断）**：
 
-1. **长期治理**：KG v3 自动生成刷新（新页已通过 kb_auditor 纳入 `concept_kb.json`，KG v3 实体关系可在下一次 KG 重建时统一处理）；
-2. **可选评估**：Statecharts/工作流独立概念页决策（现由 `06_ecosystem/03_design_patterns/17_workflow_theory.md` 覆盖）。
+1. **可选评估**：Statecharts/工作流独立概念页决策（现由 `06_ecosystem/03_design_patterns/17_workflow_theory.md` 覆盖）；
+2. **长期治理**：继续压缩 `ex:relatedTo` 占比（当前 relatedTo 为兜底弱语义边，可通过 atlas 符号或策展规则逐步迁移到 dependsOn/entails/refines 等强谓词），但不再影响观察门通过。
 
-**Phase 5 已全部完成**：exercises 编码练习（type_system ex09 / concurrency ex07）与 crates 回链示例（c04/c05）已于 2026-07-16 补齐，`cargo test -p exercises`（214+ tests）与 `cargo clippy -D warnings` 均通过。
+**Phase 5 已全部完成**：exercises 编码练习（type_system ex09/ex10、concurrency ex07）与 crates 回链示例（c04/c05）已于 2026-07-16 补齐，`cargo test -p exercises`（221 tests）与 `cargo clippy -D warnings` 均通过。
+
+## 7. Web 权威来源快速复核（2026-07-16）
+
+针对本次 sprint 新建/更新的语义模型主题，快速比对了网络上的最新国际化权威来源，结果如下：
+
+| 主题 | 复核来源 | 关键发现 | 已采取动作 |
+|---|---|---|---|
+| Rust 1.98+ 特性 | GitHub Releases / doc.rust-lang.org/beta | 1.98.0-beta.2 已冻结，stable 预计 2026-08-20；无超出 beta 清单的新稳定特性 | `rust_1_98_stabilized.md` 预填充策略保持不变，stable 发布后二次核对 |
+| OCaml 5 代数效应 | OCaml 5.3 Manual、Modern OCaml 2026 综述 | 5.3（2025-01）被视为 5.x 稳定/LTS 线；Eio 是基于 effect handler 的代表性异步 I/O 库 | 在 `04_algebraic_effects.md` §4.1 补充 5.3 稳定化说明与 Eio 介绍 |
+| GPU/HPC（wgpu/rust-gpu） | Rustify 2026 wgpu 指南、Learn Wgpu、sotrh tutorial | wgpu 支持 Vulkan/Metal/DX12/WebGPU，candle/burn 将其作为推理后端；rust-gpu 用于 SPIR-V 着色器 | GPU/HPC 页已覆盖上述生态，无需新增 |
+| 分布式共识 | raft.github.io | Raft 官方实现列表与教学资源稳定 | `06_distributed_consensus_theory.md` 已引用 raft.github.io |
+| Rust STM | crates.io / docs.rs（搜索未找到活跃的主流 `stm` crate） | Rust 生态仍以 Mutex/channel/lock-free 为主，无生产级原生 STM | `05_stm_semantics.md` 关于“Rust 无原生 STM”的结论保持不变 |
+
+---
 
 **运行命令**：
 

@@ -1,9 +1,9 @@
 # 概念一致性审计报告 (Concept Consistency Audit)
 
-> 生成时间: 2026-07-16T19:37:17.072243
+> 生成时间: 2026-07-16T19:49:06.561879
 > 生成脚本: `scripts/concept_consistency_auditor.py`(扩展后监控 22 个核心概念)
 > 扫描文件数: 524
-> 提取概念定义数: 4627
+> 提取概念定义数: 4628
 > 跨文件引用数: 292
 
 ## 目录
@@ -75,8 +75,8 @@
 | 所有权-Move语义 | 259 | 94 |
 | Pin-自引用 | 235 | 68 |
 | const-trait-impl-定义 | 177 | 33 |
+| effects-system-现有 | 167 | 22 |
 | allocator-api-GlobalAlloc | 166 | 38 |
-| effects-system-现有 | 166 | 22 |
 | Pin-投影-结构 | 163 | 33 |
 | Send+Sync | 133 | 66 |
 | 所有权-作用域绑定 | 105 | 61 |

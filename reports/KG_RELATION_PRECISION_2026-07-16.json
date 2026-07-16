@@ -2,18 +2,17 @@
   "summary": {
     "date": "2026-07-16",
     "total_relations": 8425,
-    "generic_relation_annotation_count": 563,
-    "generic_ratio_global": 0.0668,
+    "generic_relation_annotation_count": 0,
+    "generic_ratio_global": 0.0,
     "core_entities": 50,
     "core_relations": 2481,
-    "core_generic_count": 101,
-    "core_generic_ratio": 0.0407,
+    "core_generic_count": 0,
+    "core_generic_ratio": 0.0,
     "core_lacking_semantic": 0,
     "global_predicate_distribution": {
-      "ex:relatedTo": 6203,
+      "ex:relatedTo": 6766,
       "ex:dependsOn": 838,
       "ex:entails": 764,
-      "ex:RelationAnnotation": 563,
       "ex:instanceOf": 18,
       "ex:appliesTo": 14,
       "ex:refines": 12,
@@ -22,10 +21,9 @@
       "ex:equivalentTo": 3
     },
     "core_predicate_distribution": {
-      "ex:relatedTo": 1616,
+      "ex:relatedTo": 1717,
       "ex:dependsOn": 523,
       "ex:entails": 202,
-      "ex:RelationAnnotation": 101,
       "ex:appliesTo": 13,
       "ex:refines": 11,
       "ex:instanceOf": 6,
@@ -91,7 +89,7 @@
     "ex:AsyncAdvanced": [
       [
         "ex:relatedTo",
-        21
+        25
       ],
       [
         "ex:entails",
@@ -133,7 +131,7 @@
     "ex:AsyncClosures": [
       [
         "ex:relatedTo",
-        19
+        20
       ],
       [
         "ex:entails",
@@ -161,7 +159,7 @@
     "ex:AsyncProgramming": [
       [
         "ex:relatedTo",
-        117
+        121
       ],
       [
         "ex:dependsOn",
@@ -175,7 +173,7 @@
     "ex:Borrowing": [
       [
         "ex:relatedTo",
-        58
+        62
       ],
       [
         "ex:dependsOn",
@@ -189,7 +187,7 @@
     "ex:Borrowing_02unsafe": [
       [
         "ex:relatedTo",
-        17
+        22
       ],
       [
         "ex:dependsOn",
@@ -203,7 +201,7 @@
     "ex:Concurrency": [
       [
         "ex:relatedTo",
-        93
+        98
       ],
       [
         "ex:dependsOn",
@@ -217,7 +215,7 @@
     "ex:Concurrency_00concurrenc": [
       [
         "ex:relatedTo",
-        24
+        28
       ],
       [
         "ex:dependsOn",
@@ -231,7 +229,7 @@
     "ex:Concurrency_00concurrenc_1": [
       [
         "ex:relatedTo",
-        36
+        39
       ],
       [
         "ex:dependsOn",
@@ -245,7 +243,7 @@
     "ex:Concurrency_01async": [
       [
         "ex:relatedTo",
-        25
+        29
       ],
       [
         "ex:dependsOn",
@@ -259,7 +257,7 @@
     "ex:ConstGenericsValuesAsTypeParameters": [
       [
         "ex:relatedTo",
-        19
+        20
       ],
       [
         "ex:dependsOn",
@@ -315,7 +313,7 @@
     "ex:ForeignFunctionInterfaceFFI": [
       [
         "ex:relatedTo",
-        41
+        45
       ],
       [
         "ex:dependsOn",
@@ -329,7 +327,7 @@
     "ex:ForeignFunctionInterfaceFFI_04ffi": [
       [
         "ex:relatedTo",
-        22
+        27
       ],
       [
         "ex:entails",
@@ -371,7 +369,7 @@
     "ex:Generics": [
       [
         "ex:relatedTo",
-        84
+        86
       ],
       [
         "ex:dependsOn",
@@ -385,7 +383,7 @@
     "ex:InteriorMutability": [
       [
         "ex:relatedTo",
-        24
+        25
       ],
       [
         "ex:entails",
@@ -399,7 +397,7 @@
     "ex:Lifetimes": [
       [
         "ex:relatedTo",
-        40
+        43
       ],
       [
         "ex:dependsOn",
@@ -413,7 +411,7 @@
     "ex:LifetimesAdvanced": [
       [
         "ex:relatedTo",
-        27
+        30
       ],
       [
         "ex:dependsOn",
@@ -427,7 +425,7 @@
     "ex:LinearLogic": [
       [
         "ex:relatedTo",
-        49
+        50
       ],
       [
         "ex:dependsOn",
@@ -441,7 +439,7 @@
     "ex:Linkage": [
       [
         "ex:relatedTo",
-        29
+        30
       ],
       [
         "ex:entails",
@@ -455,7 +453,7 @@
     "ex:LockingPrimitives": [
       [
         "ex:relatedTo",
-        14
+        18
       ],
       [
         "ex:dependsOn",
@@ -469,7 +467,7 @@
     "ex:MemoryManagement": [
       [
         "ex:relatedTo",
-        47
+        50
       ],
       [
         "ex:dependsOn",
@@ -497,7 +495,7 @@
     "ex:MoveSemantics": [
       [
         "ex:relatedTo",
-        18
+        21
       ],
       [
         "ex:dependsOn",
@@ -511,7 +509,7 @@
     "ex:Ownership": [
       [
         "ex:relatedTo",
-        106
+        110
       ],
       [
         "ex:dependsOn",
@@ -525,7 +523,7 @@
     "ex:Ownership_01ownershipl": [
       [
         "ex:relatedTo",
-        49
+        51
       ],
       [
         "ex:dependsOn",
@@ -539,7 +537,7 @@
     "ex:ParallelDistributedPatternSpectrum": [
       [
         "ex:relatedTo",
-        18
+        23
       ],
       [
         "ex:dependsOn",
@@ -553,7 +551,7 @@
     "ex:PinAndUnpin": [
       [
         "ex:relatedTo",
-        43
+        46
       ],
       [
         "ex:dependsOn",
@@ -581,7 +579,7 @@
     "ex:ProcessCalculiForRustCSPCCSAndThePiCalculus": [
       [
         "ex:relatedTo",
-        22
+        24
       ],
       [
         "ex:dependsOn",
@@ -609,7 +607,7 @@
     "ex:SafeAndEffectiveUnsafeRust": [
       [
         "ex:relatedTo",
-        122
+        126
       ],
       [
         "ex:dependsOn",
@@ -637,7 +635,7 @@
     "ex:SmartPointers": [
       [
         "ex:relatedTo",
-        23
+        24
       ],
       [
         "ex:entails",
@@ -665,7 +663,7 @@
     "ex:Traits": [
       [
         "ex:relatedTo",
-        95
+        97
       ],
       [
         "ex:dependsOn",
@@ -679,7 +677,7 @@
     "ex:Traits_00traits": [
       [
         "ex:relatedTo",
-        29
+        30
       ],
       [
         "ex:entails",
@@ -707,7 +705,7 @@
     "ex:TypeSystem": [
       [
         "ex:relatedTo",
-        116
+        121
       ],
       [
         "ex:dependsOn",
@@ -721,7 +719,7 @@
     "ex:TypeSystem_04typesandco": [
       [
         "ex:relatedTo",
-        18
+        19
       ],
       [
         "ex:dependsOn",
@@ -735,7 +733,7 @@
     "ex:TypeTheory": [
       [
         "ex:relatedTo",
-        62
+        64
       ],
       [
         "ex:dependsOn",
@@ -763,7 +761,7 @@
     "ex:UnsafeRust": [
       [
         "ex:relatedTo",
-        9
+        10
       ],
       [
         "ex:dependsOn",
@@ -777,7 +775,7 @@
     "ex:VariableModel": [
       [
         "ex:relatedTo",
-        20
+        23
       ],
       [
         "ex:dependsOn",

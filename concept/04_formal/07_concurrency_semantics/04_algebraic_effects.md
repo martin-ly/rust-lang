@@ -501,7 +501,7 @@ Rust 不引入通用 effect handler 的原因不是技术无知，而是**有意
 
 ### 4.1 OCaml 5：运行时处理器
 
-OCaml 5 通过 `Effect` 模块把 effect handler 引入生产级语言。与 Koka 不同，OCaml 5 **没有静态 effect 类型系统**（截至 5.3），效果安全性由程序员保证；它的主要目标是支持用户级并发调度与生成器。
+OCaml 5（5.0 GA 于 2022-12，5.3 于 2025-01 发布并被视为 5.x 线的稳定/LTS 级版本）通过 `Effect` 模块把 effect handler 引入生产级语言。与 Koka 不同，OCaml 5 **没有静态 effect 类型系统**（截至 5.3），效果安全性由程序员保证；它的主要目标是支持用户级并发调度与生成器。效果最显性的收益体现在 **Eio**：一个基于 effect handler 实现的跨平台异步 I/O 库，可在不引入 `async/await` 关键字的情况下提供结构化并发与高吞吐量 I/O。
 
 **声明效果**：
 

@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-16T10:52:52.930628+00:00
+> 生成时间: 2026-07-16T11:48:01.155069+00:00
 > 扫描文件数: 523
 
 ## 全局指标
@@ -693,9 +693,9 @@
 | E:\_src\rust-lang\concept\04_formal\07_concurrency_semantics\01_process_calculi_for_rust.md | L4 | 366 | 6 | 0 | 0 | 4 | 2 | 6 | 8 | ✅ | ✅ | ✅ | 进阶 / 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\07_concurrency_semantics\02_linearizability_and_consistency.md | L4 | 369 | 10 | 0 | 0 | 3 | 2 | 2 | 6 | ✅ | ✅ | ✅ | 进阶 / 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\07_concurrency_semantics\03_actor_semantics.md | L4 | 348 | 18 | 0 | 0 | 3 | 2 | 4 | 6 | ✅ | ✅ | ✅ | 进阶 / 研究者 | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\07_concurrency_semantics\04_algebraic_effects.md | L4 | 798 | 0 | 0 | 0 | 4 | 1 | 4 | 0 | ❌ | ✅ | ✅ | 专家 | 参考级 |
-| E:\_src\rust-lang\concept\04_formal\07_concurrency_semantics\05_stm_semantics.md | L4 | 826 | 1 | 0 | 0 | 5 | 1 | 5 | 2 | ❌ | ✅ | ✅ | 专家 | 参考级 |
-| E:\_src\rust-lang\concept\04_formal\07_concurrency_semantics\06_distributed_consensus_theory.md | L4 | 857 | 23 | 0 | 0 | 7 | 1 | 3 | 0 | ❌ | ✅ | ✅ | 专家 | 参考级 |
+| E:\_src\rust-lang\concept\04_formal\07_concurrency_semantics\04_algebraic_effects.md | L4 | 799 | 0 | 0 | 0 | 4 | 1 | 4 | 0 | ❌ | ✅ | ✅ | 专家 | 参考级 |
+| E:\_src\rust-lang\concept\04_formal\07_concurrency_semantics\05_stm_semantics.md | L4 | 827 | 1 | 0 | 0 | 5 | 1 | 5 | 2 | ❌ | ✅ | ✅ | 专家 | 参考级 |
+| E:\_src\rust-lang\concept\04_formal\07_concurrency_semantics\06_distributed_consensus_theory.md | L4 | 858 | 23 | 0 | 0 | 7 | 1 | 3 | 0 | ❌ | ✅ | ✅ | 专家 | 参考级 |
 | E:\_src\rust-lang\concept\05_comparative\00_paradigms\01_paradigm_matrix.md | L5 | 1300 | 8 | 0 | 0 | 5 | 9 | 12 | 16 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\05_comparative\00_paradigms\02_execution_model_isomorphism.md | L5 | 1049 | 3 | 0 | 0 | 1 | 6 | 13 | 0 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | E:\_src\rust-lang\concept\05_comparative\00_paradigms\03_cpp_rust_surface_features.md | L5 | 296 | 0 | 0 | 0 | 0 | 1 | 4 | 0 | ❌ | ✅ | ✅ | 进阶 | 研究级 |
@@ -718,7 +718,7 @@
 | E:\_src\rust-lang\concept\05_comparative\02_managed_languages\06_rust_vs_csharp.md | L5 | 895 | 4 | 0 | 0 | 2 | 2 | 6 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\05_comparative\02_managed_languages\07_rust_vs_elixir.md | L5 | 943 | 3 | 0 | 0 | 3 | 2 | 8 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\05_comparative\02_managed_languages\08_rust_vs_typescript.md | L5 | 974 | 3 | 0 | 0 | 2 | 3 | 6 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
-| E:\_src\rust-lang\concept\05_comparative\02_managed_languages\09_rust_vs_haskell.md | L5 | 798 | 0 | 0 | 0 | 1 | 1 | 8 | 0 | ❌ | ✅ | ✅ | 进阶 | 对比级 |
+| E:\_src\rust-lang\concept\05_comparative\02_managed_languages\09_rust_vs_haskell.md | L5 | 799 | 0 | 0 | 0 | 1 | 1 | 8 | 0 | ❌ | ✅ | ✅ | 进阶 | 对比级 |
 | E:\_src\rust-lang\concept\05_comparative\02_managed_languages\10_rust_vs_ocaml.md | L5 | 821 | 0 | 0 | 0 | 2 | 2 | 10 | 0 | ❌ | ✅ | ✅ | 进阶 | 对比级 |
 | E:\_src\rust-lang\concept\05_comparative\02_managed_languages\11_rust_vs_fsharp.md | L5 | 800 | 0 | 0 | 0 | 2 | 2 | 7 | 0 | ❌ | ✅ | ✅ | 进阶 | 对比级 |
 | E:\_src\rust-lang\concept\05_comparative\03_domain_comparisons\01_safety_boundaries.md | L5 | 1074 | 8 | 0 | 0 | 1 | 8 | 9 | 9 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
