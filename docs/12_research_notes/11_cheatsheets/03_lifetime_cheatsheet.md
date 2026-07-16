@@ -8,7 +8,7 @@
 >
 > **分级**: [B]
 > **Bloom 层级**: L5-L6
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [NLL RFC](https://rust-lang.github.io/rfcs/2094-nll.html)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | [NLL RFC](https://rust-lang.github.io/rfcs/2094-nll.html) | [`concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md`](../../../../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
 > **创建日期**: 2026-02-10
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.97.0+ (Edition 2024)

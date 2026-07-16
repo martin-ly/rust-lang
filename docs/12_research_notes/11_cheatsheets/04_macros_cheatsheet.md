@@ -12,7 +12,7 @@
 > **最后更新**: 2026-06-29
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) | [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/) | [The Rust Programming Language](https://doc.rust-lang.org/book/) | [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | [`concept/03_advanced/03_proc_macros/01_macros.md`](../../../../../concept/03_advanced/03_proc_macros/01_macros.md)
 
 ---
 
@@ -27,7 +27,7 @@
     - [参数模式 {#参数模式}](#参数模式-参数模式)
     - [重复模式 {#重复模式}](#重复模式-重复模式)
     - [常见片段类型 {#常见片段类型}](#常见片段类型-常见片段类型)
-  - [过程宏（Procedural Macro） {#过程宏}](#过程宏-过程宏)
+  - [过程宏 {#过程宏}](#过程宏-过程宏)
     - [派生宏 {#派生宏-1}](#派生宏-派生宏-1)
     - [属性宏 {#属性宏-1}](#属性宏-属性宏-1)
     - [函数式宏 {#函数式宏}](#函数式宏-函数式宏)
@@ -50,7 +50,7 @@
   - [🌍 权威国际化资源链接 {#权威国际化资源链接}](#-权威国际化资源链接-权威国际化资源链接)
     - [Rust Reference 核心章节 {#rust-reference-核心章节}](#rust-reference-核心章节-rust-reference-核心章节)
     - [The Rust Programming Language 核心章节 {#the-rust-programming-language-核心章节}](#the-rust-programming-language-核心章节-the-rust-programming-language-核心章节)
-    - [Rust Standard Library 核心 API / 模块（Module） {#rust-standard-library-核心-api-模块}](#rust-standard-library-核心-api--模块-rust-standard-library-核心-api-模块)
+    - [Rust Standard Library 核心 API / 模块 {#rust-standard-library-核心-api-模块}](#rust-standard-library-核心-api--模块-rust-standard-library-核心-api-模块)
     - [Rust By Example / Rust Cookbook / cheats.rs {#rust-by-example-rust-cookbook-cheatsrs}](#rust-by-example--rust-cookbook--cheatsrs-rust-by-example-rust-cookbook-cheatsrs)
     - [宏系统专属权威链接 {#宏系统专属权威链接}](#宏系统专属权威链接-宏系统专属权威链接)
       - [Reference Macros {#reference-macros}](#reference-macros-reference-macros)

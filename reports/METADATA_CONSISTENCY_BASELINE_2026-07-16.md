@@ -93,19 +93,14 @@
 
 ### D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥（0）
 
-### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（0）
-
 ### D3 关键字段同文件重声明（0）
 
 ### D4 文首块 Rust 版本号自矛盾（0）
-
-### D5 稳定层正文残留 nightly/preview/unstable（0）
 
 ### D6 Summary 低信息量模板套话（3）
 
 - `concept/00_meta/02_sources/01_authority_source_map.md` — Summary 为空
 - `concept/00_meta/03_audit/01_concept_audit_guide.md` — Summary 为空
-- `concept/07_future/02_preview_features/19_const_trait_preview.md` — Summary 为空
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 

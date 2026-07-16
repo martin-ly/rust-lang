@@ -13,7 +13,8 @@
 > [Rust Reference](https://doc.rust-lang.org/reference/) |
 > [The Rust Programming Language](https://doc.rust-lang.org/book/) |
 > [Rust Standard Library](https://doc.rust-lang.org/std/) |
-> [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/) |
+> [`concept/03_advanced/00_concurrency/01_concurrency.md`](../../../../../concept/03_advanced/00_concurrency/01_concurrency.md)
 >
 > **创建日期**: 2026-02-10
 > **最后更新**: 2026-06-29

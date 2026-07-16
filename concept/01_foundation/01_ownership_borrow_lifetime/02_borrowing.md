@@ -1107,7 +1107,11 @@ Cow<'a, T> 的约束:
 
 ### 11.2 补充：`Deref` / `DerefMut` 与自动借用的交互
 
-> **[Rust Reference: Deref](https://doc.rust-lang.org/reference/items/traits.html)** · **[Rust Reference: DerefMut](https://doc.rust-lang.org/reference/items/traits.html)** · **[TRPL Ch15.2](https://doc.rust-lang.org/book/ch15-02-deref.html)** `Deref` 和 `DerefMut` 是 Rust 的**强制解引用（deref coercion）**机制的核心。它们允许智能指针（Smart Pointer）和包装类型**自动转换为内部类型的引用**，从而无缝使用内部类型的方法。✅
+>
+> **[Rust Reference: Deref](https://doc.rust-lang.org/reference/items/traits.html)** ·
+> **[Rust Reference: DerefMut](https://doc.rust-lang.org/reference/items/traits.html)** ·
+> **[TRPL Ch15.2](https://doc.rust-lang.org/book/ch15-02-deref.html)** `Deref` 和 `DerefMut` 是 Rust 的**强制解引用（deref coercion）**机制的核心。
+> 它们允许智能指针（Smart Pointer）和包装类型**自动转换为内部类型的引用**，从而无缝使用内部类型的方法。✅
 
 #### 强制解引用的规则
 
@@ -1189,15 +1193,21 @@ fn_starts_with(p.as_ref() as &OsStr); // 作为 OS 字符串
 
 ## 十二、演进方向
 
-本节梳理「Borrowing（借用）」在 Rust 1.97 之后的演进方向：`&str` 作为 `&[u8]` 的字符串特化、`Deref` / `DerefMut` 与自动借用、`AsRef` / `AsMut` 的借用语义差异、`Cow<T>`：借用-所有权混合模式等方面。判断依据是已合并的 RFC、nightly 特性状态与 Edition 节奏——能落地的给出迁移路径，仍属设想的明确标注不确定性。演进方向不是承诺，而是当前设计张力最可能释放的位置；引用时请核对该特性在最新 stable 中的实际状态。
+本节梳理「Borrowing（借用）」在 Rust 1.97 之后的演进方向：
+`&str` 作为 `&[u8]` 的字符串特化、`Deref` / `DerefMut` 与自动借用、`AsRef` / `AsMut` 的借用语义差异、`Cow<T>`：借用-所有权混合模式等方面。
+判断依据是已合并的 RFC、nightly 特性状态与 Edition 节奏——能落地的给出迁移路径，仍属设想的明确标注不确定性。
+演进方向不是承诺，而是当前设计张力最可能释放的位置；引用时请核对该特性在最新 stable 中的实际状态。
 
 ### 12.1 `&str` 作为 `&[u8]` 的字符串特化
 
 - **演进方向**: 补充 `&str` 作为 `&[u8]` 的字符串特化形式的借用分析 —— 优先级: 中 —— 已完成 §8.4
 
-> **定义**：`&str` 是 UTF-8 字节切片（Slice）的借用形式，它在底层与 `&[u8]` 共享连续内存布局，但附加了“有效 UTF-8”的不变式。借用语义上，`&str` 是不可变借用，其生命周期受原始字符串所有者的约束。
-
-> **原理与合理性**：将字符串建模为字节的特化切片（Slice），使 Rust 能在零拷贝的情况下同时提供文本语义（`&str`）和原始字节访问（`as_bytes()`）。类型系统（Type System）通过 `str: !Sized` 禁止直接拥有 `str`，只能通过 `&str` 或 `String` 等 owned 容器访问。
+> **定义**：
+> `&str` 是 UTF-8 字节切片（Slice）的借用形式，它在底层与 `&[u8]` 共享连续内存布局，但附加了“有效 UTF-8”的不变式。
+> 借用语义上，`&str` 是不可变借用，其生命周期受原始字符串所有者的约束。
+> **原理与合理性**：
+> 将字符串建模为字节的特化切片（Slice），使 Rust 能在零拷贝的情况下同时提供文本语义（`&str`）和原始字节访问（`as_bytes()`）。
+> 类型系统（Type System）通过 `str: !Sized` 禁止直接拥有 `str`，只能通过 `&str` 或 `String` 等 owned 容器访问。
 
 ```rust
 let s = String::from("hello");
@@ -1215,7 +1225,6 @@ let b: &[u8] = text.as_bytes();
 - **演进方向**: 补充 `Deref` / `DerefMut` 与自动借用的交互 —— 优先级: 中 —— 已完成 §8.2
 
 > **定义**：`Deref` trait 定义智能指针（Smart Pointer）如何被解引用为其目标类型 `Target`；`DerefMut` 是可变版本。编译器在需要时自动进行**强制解引用（deref coercion）**，把 `&Wrapper` 转为 `&Target`。
-
 > **原理与合理性**：`Deref` 让自定义类型继承目标类型的接口而不引入运行时开销。自动借用规则保证：只要实现 `Deref`，`&Wrapper<T>` 在需要 `&T` 的上下文自动转换。这构成了 `String → &str`、`Box<T> → &T`、`Rc<T> → &T` 等智能指针（Smart Pointer）行为的基础。
 
 ```rust

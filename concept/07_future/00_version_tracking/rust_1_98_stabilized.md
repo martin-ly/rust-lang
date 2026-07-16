@@ -8,8 +8,8 @@
 > **内容分级**: [参考级]
 > **权威来源**: 本文件为 `concept/` 权威页（Rust 1.98 稳定特性的 canonical 汇总；稳定生效日为 2026-08-20，此前以 [`rust_1_98_preview.md`](rust_1_98_preview.md) 为周期跟踪入口）。
 > **Rust 版本**: 1.98.0+ (Edition 2024) —— **预计 2026-08-20 进入 stable 通道，当前为跟踪骨架**
-> **最后更新**: 2026-07-14
-> **状态**: ⏳ 骨架（1.98.0 已于 2026-07-03 分支进入 beta；正文待稳定后实测填充）
+> **最后更新**: 2026-07-16
+> **状态**: ⏳ 骨架已就绪（1.98.0 已于 2026-07-03 分支进入 beta；`check_version_semantic_injection.py` 未映射特性=0；正文待 2026-08-20 稳定后实测填充）
 >
 > **权威来源**: · [Rust 1.98.0 Release Notes (beta)](https://releases.rs/docs/1.98.0/) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [RFC Book](https://rust-lang.github.io/rfcs/)
 >

@@ -11,7 +11,7 @@
 > **内容分级**: [实验级]
 > **权威来源**: 本文件为 `concept/` 权威页（1.98+ **周期跟踪** canonical）。
 > **Canonical 分工**: 本页 = 周期跟踪（nightly 特性 / RFC 进展 / API 探测，随两周巡检滚动）；1.98.0 **稳定特性权威汇总** = [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md)（2026-08-20 稳定后生效，当前为跟踪骨架）。
-> **跟踪版本**: nightly 1.99.0 (2026-06-22)；**1.98.0 已于 2026-07-03 分支进入 beta**（[releases.rs 1.98.0 beta](https://releases.rs/docs/1.98.0/)，2026-07-14 curl 实测 200）
+> **跟踪版本**: nightly 1.99.0 (2026-06-22)；**1.98.0 已于 2026-07-03 分支进入 beta**（[releases.rs 1.98.0 beta](https://releases.rs/docs/1.98.0/)，2026-07-16 curl 实测 200）
 > **预计稳定时间**: **1.98.0 = 2026-08-20**（releases.rs 实测）；1.99+ 及以后
 > **当前阶段**: 🧪 Nightly 实验性 / 设计或 MCP 阶段
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
@@ -37,10 +37,10 @@
 > **前置概念**: N/A
 ---
 
-## 零、1.98 周期跟踪清单（2026-07-14 更新）
+## 零、1.98 周期跟踪清单（2026-07-16 更新）
 
 > **状态取值**：`stabilized in 1.98 beta`（已随 1.98.0 beta 分支合入，2026-08-20 转正）/ `RFC merged`（RFC 已合并，实现跟踪中）/ `FCP`（最终评论期）/ `nightly only`（nightly 可用，未排期）。
-> **实测来源**：[releases.rs 1.98.0 beta](https://releases.rs/docs/1.98.0/)（curl 200，2026-07-14）· §1.7 RFC 表（2026-07-12 实测）
+> **实测来源**：[releases.rs 1.98.0 beta](https://releases.rs/docs/1.98.0/)（curl 200，2026-07-16）· §1.7 RFC 表（2026-07-12 实测）
 
 | 特性 | 状态 | 跟踪链接 |
 |:---|:---|:---|

@@ -18,7 +18,14 @@
 
 ---
 
-> **来源**: [Rust Reference — Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html) · · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Rust Reference — Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html) ·
+> · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [System F](https://en.wikipedia.org/wiki/System_F) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Reference — Cast Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html#cast-expressions) ·
 > [TRPL — Data Types](https://doc.rust-lang.org/book/ch03-02-data-types.html) ·
 > [RFC 0401 — Coercions](https://rust-lang.github.io/rfcs//0401-coercions.html) ·

@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 505,
-    "generated_at": "2026-07-16T02:31:17.411642+00:00"
+    "generated_at": "2026-07-16T03:49:40.640840+00:00"
   },
   "files": [
     {
@@ -9647,7 +9647,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.1 引理：引用（Reference）不能比数据活得更久 ⟹ 悬垂指针在编译期被消除](#41-引理引用不能比数据活得更久--悬垂指针在编译期被消除)",
+          "text": "- [4.1 引理：引用不能比数据活得更久 ⟹ 悬垂指针在编译期被消除](#41-引理引用不能比数据活得更久--悬垂指针在编译期被消除)",
           "type": "paragraph"
         },
         {
@@ -10640,7 +10640,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.1 引理：ADT（枚举（Enum） + 结构体（Struct））⟹ 代数数据类型完备性](#41-引理adt枚举--结构体-代数数据类型完备性)",
+          "text": "- [4.1 引理：ADT（枚举 + 结构体）⟹ 代数数据类型完备性](#41-引理adt枚举--结构体-代数数据类型完备性)",
           "type": "paragraph"
         },
         {
@@ -10652,11 +10652,11 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.4 定理：类型推断（Type Inference）完备性 ⟹ Principal type property](#44-定理类型推断完备性--principal-type-property)",
+          "text": "- [4.4 定理：类型推断完备性 ⟹ Principal type property](#44-定理类型推断完备性--principal-type-property)",
           "type": "paragraph"
         },
         {
-          "text": "- [4.5 定理：类型一致性（Progress + Preservation）⟹ 运行时（Runtime）无类型错误](#45-定理类型一致性progress--preservation-运行时无类型错误)",
+          "text": "- [4.5 定理：类型一致性（Progress + Preservation）⟹ 运行时无类型错误](#45-定理类型一致性progress--preservation-运行时无类型错误)",
           "type": "paragraph"
         },
         {
@@ -17225,7 +17225,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.4 Trait + 泛型（Generics） ⟹ 零成本抽象（Zero-Cost Abstraction）](#44-trait--泛型--零成本抽象)",
+          "text": "- [4.4 Trait + 泛型 ⟹ 零成本抽象](#44-trait--泛型--零成本抽象)",
           "type": "paragraph"
         },
         {
@@ -18904,7 +18904,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.2 定理：单态化（Monomorphization） ⟹ 零成本抽象（Zero-Cost Abstraction） ⟹ 语义保持](#42-定理单态化--零成本抽象--语义保持)",
+          "text": "- [4.2 定理：单态化 ⟹ 零成本抽象 ⟹ 语义保持](#42-定理单态化--零成本抽象--语义保持)",
           "type": "paragraph"
         },
         {
@@ -20146,15 +20146,15 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.1 引理：Box ⟹ 堆分配 + 唯一所有权（Ownership）](#41-引理box--堆分配--唯一所有权)",
+          "text": "- [4.1 引理：Box ⟹ 堆分配 + 唯一所有权](#41-引理box--堆分配--唯一所有权)",
           "type": "paragraph"
         },
         {
-          "text": "- [4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用（Reference）计数）](#42-定理rcarc--共享所有权安全引用计数)",
+          "text": "- [4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用计数）](#42-定理rcarc--共享所有权安全引用计数)",
           "type": "paragraph"
         },
         {
-          "text": "- [4.3 推论：RefCell ⟹ 内部可变性运行时（Runtime）检查](#43-推论refcell--内部可变性运行时检查)",
+          "text": "- [4.3 推论：RefCell ⟹ 内部可变性运行时检查](#43-推论refcell--内部可变性运行时检查)",
           "type": "paragraph"
         },
         {
@@ -26693,7 +26693,7 @@
       "layer": "L3",
       "title": "Async/Await（异步编程）",
       "positioning": "",
-      "line_count": 3513,
+      "line_count": 3514,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 定理一致性（Coherence）矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注",
@@ -27717,7 +27717,7 @@
       "layer": "L3",
       "title": "Future 与 Executor 机制 (Future and Executor Mechanisms)",
       "positioning": "",
-      "line_count": 1255,
+      "line_count": 1256,
       "theorem_chains": [
         {
           "text": "- **与事件循环的衔接**：IO 型执行器（tokio）把 Waker 注册到 epoll/io_uring 的就绪回调——IO 就绪 ⟹ wake ⟹ 任务入队 ⟹ 下一次 poll。",
@@ -29340,7 +29340,7 @@
       "layer": "L3",
       "title": "GAT 与 Async 交叉边界语义",
       "positioning": "分析 Rust 1.75+ `async fn in trait` 背后的 GAT/RPITIT 机制，以及 `Send`、`Pin` 在 GAT Future 上的传播规则。",
-      "line_count": 503,
+      "line_count": 519,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -29491,14 +29491,14 @@
       "layer": "L3",
       "title": "Unsafe Rust 安全编程",
       "positioning": "",
-      "line_count": 3542,
+      "line_count": 3544,
       "theorem_chains": [
         {
           "text": "- v1.1 (2026-05-13): 重构增强——定理一致性（Coherence）矩阵扩展至10行（⟹推理链）、反命题决策树×4、认知路径六步递进、章节过渡段落、层次一致性标注",
           "type": "paragraph"
         },
         {
-          "text": "- [7.3 定理一致性（Coherence）矩阵（⟹ 推理链）](#73-定理一致性矩阵-推理链)",
+          "text": "- [7.3 定理一致性矩阵（⟹ 推理链）](#73-定理一致性矩阵-推理链)",
           "type": "paragraph"
         },
         {
@@ -30088,7 +30088,7 @@
       "layer": "L3",
       "title": "Unsafe 边界全景（Unsafe Boundary Panorama）",
       "positioning": "从 [Unsafe Rust](01_unsafe.md) 中抽离**边界视角**：不做 unsafe 概念推导，只回答五类边界问题——什么算 UB、别名模型管到哪、Miri 能查到什么、安全抽象的契约划在哪、FFI 布局契约何时成立。每一节给出**边界陈述 → 反例 → 判定条件**三段式。",
-      "line_count": 505,
+      "line_count": 506,
       "theorem_chains": [
         {
           "text": "| Q-U1 | 构造无效值（bool>1/枚举越界/! 实例）的位置数是否 ≥1 个？ | ≥1 ⟹ UB（无需使用即成立） | 🔴 UB |",
@@ -32765,7 +32765,7 @@
       "layer": "L3",
       "title": "syn & quote 完整参考",
       "positioning": "",
-      "line_count": 1262,
+      "line_count": 1263,
       "theorem_chains": [
         {
           "text": "> **定理链**: Parse Input ⟹ Transform AST ⟹ Emit Tokens",
@@ -33874,7 +33874,7 @@
       "layer": "L3",
       "title": "FFI 高级主题：跨语言边界的安全与性能",
       "positioning": "深入分析 Rust **FFI（外部函数接口）**的高级主题——从复杂类型映射、回调函数、到线程安全和内存布局控制，揭示如何在不安全边界上维持 Rust 的安全保证。",
-      "line_count": 973,
+      "line_count": 974,
       "theorem_chains": [
         {
           "text": "| FFI 高级主题：跨语言边界的安全与性能 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -34251,7 +34251,7 @@
       "layer": "L3",
       "title": "`unsafe extern blocks`：Edition 2024 的 FFI 安全边界",
       "positioning": "系统分析 Rust Edition 2024 对 `extern` 块的安全语义调整：从旧式块本身为 safe item 的隐患，到 `unsafe extern {}` 的显式 unsafe 契约，再到块内 `safe fn` 的审计机制，以及 `rust_2024_compatibility` lint 的迁移路径。",
-      "line_count": 545,
+      "line_count": 554,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -40273,7 +40273,7 @@
       "layer": "L4",
       "title": "求值策略：Call-by-Value, Call-by-Name, Call-by-Need",
       "positioning": "",
-      "line_count": 720,
+      "line_count": 721,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -40423,7 +40423,7 @@
       "layer": "L4",
       "title": "Axiomatic Semantics（公理语义）",
       "positioning": "",
-      "line_count": 1062,
+      "line_count": 1063,
       "theorem_chains": [
         {
           "text": "1. **赋值公理链**：`{P[x:=E]} x := E {P}` ⟹ 「前置条件向后替换」 ⟹ Rust 中 move 赋值需额外考虑「源变量失效」——公理扩展为「消耗性赋值公理」；",
@@ -40604,7 +40604,7 @@
       "layer": "L4",
       "title": "Aeneas Symbolic Semantics（Aeneas 符号化语义）",
       "positioning": "",
-      "line_count": 490,
+      "line_count": 491,
       "theorem_chains": [
         {
           "text": "- **验证接口**：LLBC 程序可继续翻译到 F*/Lean/HOL4 等证明助手的函数式模型——「命令式 Rust ⟹ 纯函数模型」的翻译是 Aeneas 的核心贡献。",
@@ -40751,7 +40751,7 @@
       "layer": "L4",
       "title": "Verification Toolchain Selection Guide（验证工具链选择指南）",
       "positioning": "",
-      "line_count": 1585,
+      "line_count": 1586,
       "theorem_chains": [
         {
           "text": "| Verification Toolchain Selection Guide（验证工具链选择指南） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -40948,7 +40948,7 @@
       "layer": "L4",
       "title": "航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)",
       "positioning": "系统讲解 **DO-178C 航空软件标准** 与 **DO-333 形式化方法补充** 的 Rust 映射——从软件等级 A~E 到定理证明、模型检查、抽象解释三类形式化方法在 Rust 生态中的工具链映射，分析 Rust 所有权（Ownership）系统在航空航天安全关键软件中的独特形式化优势。",
-      "line_count": 1147,
+      "line_count": 1148,
       "theorem_chains": [
         {
           "text": "| 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods) 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -41054,7 +41054,7 @@
       "layer": "L4",
       "title": "现代 Rust 验证工具生态（2025-2026）",
       "positioning": "利用大语言模型（LLM）自动生成 Verus 证明注解，降低形式化验证的门槛。",
-      "line_count": 580,
+      "line_count": 581,
       "theorem_chains": [
         {
           "text": "| 现代 Rust 验证工具生态（2025-2026） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -41192,7 +41192,7 @@
       "layer": "L4",
       "title": "通用程序语言理论基础：Rust 的 PL 基座",
       "positioning": "从通用程序语言（PL）理论视角审视 Rust 的设计根基，建立从 λ 演算到 Rust 类型系统（Type System）的概念桥梁。",
-      "line_count": 509,
+      "line_count": 510,
       "theorem_chains": [
         {
           "text": "| 通用程序语言理论基础：Rust 的 PL 基座 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -41695,7 +41695,7 @@
       "layer": "L4",
       "title": "认证工具链与认证包清单",
       "positioning": "",
-      "line_count": 266,
+      "line_count": 267,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -41748,7 +41748,7 @@
       "layer": "L4",
       "title": "Rustc 查询系统与增量编译",
       "positioning": "将 `rustc` 从“顺序 pass 流水线”还原为“按需查询 + 缓存”的真实架构，理解增量编译的底层机制。",
-      "line_count": 639,
+      "line_count": 640,
       "theorem_chains": [
         {
           "text": "- **失败模式**：指纹碰撞（理论上）与「粗粒度依赖」（一个查询依赖过多 ⟹ 级联标红）——查询粒度设计是增量性能的关键。",
@@ -42058,7 +42058,7 @@
       "layer": "L4",
       "title": "Rustc 名称解析与 HIR",
       "positioning": "把“名字怎么找到定义”和“源码如何变成编译器友好的 HIR”这两个前端核心步骤讲清楚，为理解类型检查、借用（Borrowing）检查打下基础。",
-      "line_count": 374,
+      "line_count": 375,
       "theorem_chains": [],
       "anti_propositions": [
         {

@@ -1,12 +1,12 @@
 # 非 GitHub 外部链接健康检查报告
 
-> 生成时间: 2026-07-16 10:18:56
+> 生成时间: 2026-07-16 11:39:11
 > 扫描范围: `concept/` 下所有非 `github.com` 的 Markdown 外部链接
-> 去重链接数: 3272
-> HTTP 200: 2479
-> 已白名单（脚本/SSL/403 误报）: 578
-> 受保护/重定向/SSL 警告（需人工复核）: 205
-> 疑似失效（404/超时/5xx）: 10
+> 去重链接数: 3269
+> HTTP 200: 2481
+> 已白名单（脚本/SSL/403 误报）: 584
+> 受保护/重定向/SSL 警告（需人工复核）: 204
+> 疑似失效（404/超时/5xx）: 0
 
 ## 受保护/重定向/SSL 警告链接清单
 
@@ -29,6 +29,7 @@
 | `https://bevyengine.org/learn/book/introduction/` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 06_ecosystem/11_domain_applications/15_game_engine_internals.md |
 | `https://blog.scottlogic.com/2023/10/18/the-state-of-webassembly-2023.html` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 07_future/04_research_and_experimental/06_rust_for_webassembly.md |
 | `https://cacm.acm.org/` | 403 | 05_comparative/00_paradigms/01_paradigm_matrix.md |
+| `https://cadenceworkflow.io/` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 06_ecosystem/03_design_patterns/17_workflow_theory.md |
 | `https://cel.cs.brown.edu/crp/` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 00_meta/00_framework/cpp_rust_engineering_roadmap.md, 01_foundation/00_start/00_start.md, 01_foundation/00_start/01_pl_prerequisites.md, 01_foundation/00_start/02_zero_cost_abstractions.md, 01_foundation/00_start/03_closure_basics.md |
 | `https://cel.cs.brown.edu/crp/idioms/constructors/copy_and_move_constructors.html` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md, 02_intermediate/00_traits/05_construction_and_initialization.md |
 | `https://cel.cs.brown.edu/crp/idioms/exceptions.html` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 02_intermediate/03_error_handling/04_exception_safety_rust_cpp.md |
@@ -70,6 +71,7 @@
 | `https://gitlab.mpi-sws.org/lgaeher/refinedrust` | <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)> | 06_ecosystem/08_formal_verification/02_formal_verification_tools.md |
 | `https://graydon2.dreamwidth.org/307291.html` | 403 | 07_future/04_research_and_experimental/03_evolution.md |
 | `https://grobotronics.com/images/datasheets/xpt2046-datasheet.pdf` | 403 | 06_ecosystem/05_systems_and_embedded/07_embedded_graphics.md |
+| `https://hackernoon.com/chained-hotstuff-a-enhanced-hotstuff-protocol-for-improved-performance` | 307 | 06_ecosystem/06_data_and_distributed/06_distributed_consensus.md |
 | `https://hexdocs.pm/elixir/GenServer.html` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 05_comparative/02_managed_languages/07_rust_vs_elixir.md |
 | `https://hexdocs.pm/elixir/typespecs.html` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 05_comparative/02_managed_languages/07_rust_vs_elixir.md |
 | `https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 04_formal/03_operational_semantics/03_operational_semantics.md, 04_formal/03_operational_semantics/05_axiomatic_semantics.md, 06_ecosystem/03_design_patterns/17_workflow_theory.md |
@@ -181,7 +183,7 @@
 | `https://tc39.es/ecma262/` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 05_comparative/02_managed_languages/03_rust_vs_javascript.md, 05_comparative/02_managed_languages/08_rust_vs_typescript.md |
 | `https://tenderlovemaking.com/2009/12/18/writing-ruby-c-extensions-part-1/` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 05_comparative/01_systems_languages/04_rust_vs_ruby.md |
 | `https://trust-in-soft.com/` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 04_formal/04_model_checking/04_modern_verification_tools.md |
-| `https://valgrind.org/docs/` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 03_advanced/02_unsafe/01_unsafe.md |
+| `https://valgrind.org/docs/` | <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)> | 03_advanced/02_unsafe/01_unsafe.md |
 | `https://wasi.dev` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 06_ecosystem/05_systems_and_embedded/01_wasi.md, 06_ecosystem/11_domain_applications/17_webassembly_advanced.md |
 | `https://wasi.dev/` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 00_meta/00_framework/boundary_extension_tree.md, 06_ecosystem/03_design_patterns/03_system_design_principles.md, 06_ecosystem/05_systems_and_embedded/01_wasi.md, 06_ecosystem/11_domain_applications/03_webassembly.md, 07_future/02_preview_features/28_wasm_target_evolution.md |
 | `https://wgpu.rs/` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 06_ecosystem/11_domain_applications/02_game_ecs.md, 06_ecosystem/11_domain_applications/05_game_development.md, 06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md, 06_ecosystem/11_domain_applications/15_game_engine_internals.md |
@@ -194,7 +196,6 @@
 | `https://without.boats/blog/pin/` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 07_future/02_preview_features/14_pin_ergonomics_preview.md |
 | `https://without.boats/blog/poll-next/` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 03_advanced/01_async/01_async.md, 03_advanced/01_async/09_stream_algebra_and_backpressure.md |
 | `https://without.boats/blog/poll-progress/` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 03_advanced/01_async/09_stream_algebra_and_backpressure.md |
-| `https://www.amazon.science/publications/how-amazon-web-services-uses-formal-methods` | 202 | 07_future/04_research_and_experimental/02_formal_methods.md |
 | `https://www.cl.cam.ac.uk/research/security/ctsrd/` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 06_ecosystem/05_systems_and_embedded/01_wasi.md |
 | `https://www.cl.cam.ac.uk/teaching/2021/Semantics/` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 04_formal/03_operational_semantics/01_denotational_semantics.md |
 | `https://www.cl.cam.ac.uk/~gw104/dens.pdf` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 04_formal/03_operational_semantics/01_denotational_semantics.md |
@@ -214,24 +215,7 @@
 | `https://www.stroustrup.com/abstraction-and-machine.pdf` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 00_meta/01_terminology/01_terminology_glossary.md |
 | `https://www.stroustrup.com/dne.html` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 06_ecosystem/03_design_patterns/03_system_design_principles.md |
 | `https://www.stroustrup.com/terminology.pdf` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 01_foundation/03_values_and_references/02_value_vs_reference_semantics.md |
-| `https://www.vldb.org/pvldb/vol13/p3411-armbrust.pdf` | <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)> | 06_ecosystem/06_data_and_distributed/05_data_engineering.md |
-| `https://www.vldb.org/pvldb/vol8/p1792-Akidau.pdf` | <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1016)> | 03_advanced/06_low_level_patterns/05_stream_processing_semantics.md |
 | `https://www.vs.inf.ethz.ch/publ/papers/VirtTimeGlobStates.pdf` | <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get issuer certificate (_ssl.c:1016)> | 06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md |
-
-## 疑似失效链接清单
-
-| URL | 状态 | 涉及文件 |
-|:---|:---|:---|
-| `https://doc.rust-lang.org/nomicon/executor.html` | 404 | 03_advanced/02_unsafe/08_async_in_unsafe_contexts.md |
-| `https://model-checking.github.io/kani/proof-harnesses.html` | 404 | 04_formal/01_ownership_logic/02_ownership_formal.md |
-| `https://rust-lang.github.io/rfcs/2294-if-let-chains.html` | 404 | 01_foundation/04_control_flow/03_let_chains.md |
-| `https://rust-lang.github.io/rfcs/2497-if-let-guard.html` | 404 | 01_foundation/04_control_flow/03_let_chains.md |
-| `https://rust-lang.github.io/rfcs/3416-async-fn-in-traits.html` | 404 | 01_foundation/02_type_system/01_type_system.md |
-| `https://rustwasm.github.io/wasm-bindgen/web-sys/index.html` | 404 | 06_ecosystem/11_domain_applications/20_wasm_javascript_interop.md |
-| `https://wiki.haskell.org/Extensible_datatypes` | 502 | 07_future/02_preview_features/34_open_enums_preview.md |
-| `https://wiki.haskell.org/Referential_transparency` | 502 | 01_foundation/00_start/04_effects_and_purity.md |
-| `https://www.cs.cmu.edu/~crary/812f19/lectures/15.pdf` | 404 | 00_meta/00_framework/expressiveness_multiview.md |
-| `https://www.youtube.com/@rustlang` | 404 | 07_future/02_preview_features/01_effects_system.md |
 
 ## 已白名单链接清单
 
@@ -645,6 +629,7 @@
 | `https://en.wikipedia.org/wiki/Reentrancy_(computing)` | 03_advanced/01_async/06_async_boundary_panorama.md |
 | `https://en.wikipedia.org/wiki/Reference_(computer_science)` | 01_foundation/01_ownership_borrow_lifetime/02_borrowing.md |
 | `https://en.wikipedia.org/wiki/Reference_counting` | 02_intermediate/02_memory_management/01_memory_management.md |
+| `https://en.wikipedia.org/wiki/Referential_transparency` | 01_foundation/00_start/04_effects_and_purity.md |
 | `https://en.wikipedia.org/wiki/Refinement_type` | 04_formal/04_model_checking/01_verification_toolchain.md, 07_future/02_preview_features/01_effects_system.md |
 | `https://en.wikipedia.org/wiki/Refresh_rate` | 06_ecosystem/05_systems_and_embedded/07_embedded_graphics.md |
 | `https://en.wikipedia.org/wiki/Region-based_memory_management` | 01_foundation/01_ownership_borrow_lifetime/01_ownership.md, 01_foundation/01_ownership_borrow_lifetime/02_borrowing.md, 01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md, 01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md, 04_formal/01_ownership_logic/01_linear_logic.md |
@@ -781,10 +766,14 @@
 | `https://trunkrs.dev/` | 06_ecosystem/11_domain_applications/17_webassembly_advanced.md |
 | `https://why3.lri.fr/` | 04_formal/03_operational_semantics/05_axiomatic_semantics.md |
 | `https://why3.lri.fr/stdlib/` | 04_formal/03_operational_semantics/05_axiomatic_semantics.md |
+| `https://wiki.haskell.org/Extensible_datatypes` | 07_future/02_preview_features/34_open_enums_preview.md |
+| `https://wiki.haskell.org/Functional_Reactive_Programming` | 06_ecosystem/04_web_and_networking/09_reactive_programming.md |
+| `https://wiki.haskell.org/Typeclassopedia` | 04_formal/00_type_theory/04_category_theory.md |
 | `https://wiki.linuxfoundation.org/realtime/start` | 06_ecosystem/05_systems_and_embedded/06_robotics.md |
 | `https://wiki.osdev.org/Rust` | 06_ecosystem/05_systems_and_embedded/05_os_kernel.md |
 | `https://www.1024cores.net/` | 03_advanced/00_concurrency/07_lock_free.md |
 | `https://www.cl.cam.ac.uk/~na482/pdfs/` | 04_formal/03_operational_semantics/04_evaluation_strategies.md |
+| `https://www.cs.cmu.edu/~crary/812f19/lectures/15.pdf` | 00_meta/00_framework/expressiveness_multiview.md |
 | `https://www.cs.ucl.ac.uk/staff/p.ohearn/papers/localreasoning.pdf` | 04_formal/02_separation_logic/02_separation_logic.md |
 | `https://www.darpa.mil/research/programs/translating-all-c-to-rust` | 06_ecosystem/05_systems_and_embedded/08_c_to_rust_translation.md |
 | `https://www.displayfuture.com/Display/datasheet/controller/ST7789.pdf` | 06_ecosystem/05_systems_and_embedded/07_embedded_graphics.md |
@@ -814,4 +803,5 @@
 | `https://www.w3.org/TR/webgpu/` | 06_ecosystem/11_domain_applications/05_game_development.md, 06_ecosystem/11_domain_applications/15_game_engine_internals.md |
 | `https://www.w3.org/wasm/` | 06_ecosystem/11_domain_applications/03_webassembly.md, 06_ecosystem/11_domain_applications/17_webassembly_advanced.md, 07_future/04_research_and_experimental/06_rust_for_webassembly.md |
 | `https://www.workflowpatterns.com/` | 00_meta/00_framework/semantic_bridge_algorithms_patterns.md |
+| `https://www.youtube.com/channel/UCaYhcUwRBNscFNUKTjgPFiA` | 07_future/02_preview_features/01_effects_system.md |
 | `https://zenodo.org/records/19622061` | 04_formal/01_ownership_logic/01_linear_logic.md |

@@ -35,7 +35,13 @@
 
 ---
 
-> **来源**: [std::string::String](https://doc.rust-lang.org/std/string/struct.String.html) · · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Unicode Standard](https://www.unicode.org/versions/latest/)
+> **来源**:
+> [std::string::String](https://doc.rust-lang.org/std/string/struct.String.html) ·
+> · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Unicode Standard](https://www.unicode.org/versions/latest/)
 > [std::str](https://doc.rust-lang.org/std/str/index.html) ·
 > [TRPL Ch8 — Strings](https://doc.rust-lang.org/book/ch08-02-strings.html) ·
 > [Unicode Standard](https://www.unicode.org/standard/standard.html) ·
@@ -629,7 +635,10 @@ fn fixed() {
 }
 ```
 
-> **修正**: Rust 禁止 `String`/`str` 的整数索引，因为 UTF-8 是多字节编码，第 N 个"字符"不一定是第 N 个字节。`"你好"[0]` 可能返回 UTF-8 首字节而非完整字符。这与 Python/Java 的透明 Unicode 处理不同——Rust 强制开发者显式选择字节级或字符级访问，避免隐式截断多字节字符。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
+> **修正**: Rust 禁止 `String`/`str` 的整数索引，因为 UTF-8 是多字节编码，第 N 个"字符"不一定是第 N 个字节。
+> `"你好"[0]` 可能返回 UTF-8 首字节而非完整字符。
+> 这与 Python/Java 的透明 Unicode 处理不同——Rust 强制开发者显式选择字节级或字符级访问，避免隐式截断多字节字符。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.3 边界测试：`str::split` 与模式类型的不匹配（编译错误）
 
@@ -648,9 +657,11 @@ fn main() {
 ```
 
 > **修正**:
-> `str::split` 接受实现 `Pattern` trait 的参数：`char`、`&str`、`&[char]`、`FnMut(char) -> bool`。`Vec<char>` 未实现 `Pattern`，因此不能作为 `split` 参数。
+> `str::split` 接受实现 `Pattern` trait 的参数：`char`、`&str`、`&[char]`、`FnMut(char) -> bool`。
+> `Vec<char>` 未实现 `Pattern`，因此不能作为 `split` 参数。
 > Rust 的 `Pattern` trait 是稳定的内部 trait（`std::str::pattern::Pattern`），不对外公开实现，因此不能为自定义类型实现 `Pattern`。
 > 这是标准库的封闭 trait 设计：防止外部类型破坏 `split` 的内部优化。
+>
 > 替代方案：
 >
 > 1) 将 `Vec<char>` 转为 `&[char]`（`vec.as_slice()`）；

@@ -15,12 +15,21 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价不同智能指针（Smart Pointer）的适用场景
 > **定位**: 系统分析 Rust **智能指针（Smart Pointer）**的设计——Box（独占堆分配）、Rc/Arc（引用（Reference）计数共享）、RefCell/Cell（内部可变性）、以及它们的组合使用模式，揭示每种指针类型的所有权（Ownership）语义和适用场景。
-> **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Memory Management](01_memory_management.md)
-> **后置概念**: [Pin](../../03_advanced/01_async/08_pin_unpin.md) · [Cow](03_cow_and_borrowed.md)
+> **前置概念**:
+> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) ·
+> [Memory Management](01_memory_management.md)
+> **后置概念**:
+> [Pin](../../03_advanced/01_async/08_pin_unpin.md) · [Cow](03_cow_and_borrowed.md)
 
 ---
 
-> **来源**: · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [std::boxed::Box](https://doc.rust-lang.org/std/boxed/struct.Box.html) ·
 > [std::rc::Rc](https://doc.rust-lang.org/std/rc/struct.Rc.html) ·
 > [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html) ·

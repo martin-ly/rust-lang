@@ -8,7 +8,7 @@
 |---|:---:|:---:|:---|
 | 元数据一致性 | 30% | 99.4 | flagged 3/521（D1互斥/D2脱节/D3重声明/D4版本/D5 nightly/D6套话） |
 | 拓扑实质度 | 25% | 98.6 | 定义套话率 0.0 / 关系塌缩 0.749 / 跳出 0.028 / 死端 0 / 判定定量 0.98 |
-| 去重健康 | 20% | 100.0 | 重叠命中 584，可处理（MERGE+DOCS_INTERNAL） 0 |
+| 去重健康 | 20% | 100.0 | 重叠命中 549，可处理（MERGE+DOCS_INTERNAL） 0 |
 | KG 完整性 | 25% | 100.0 | K1-K6={'K1_missing_required': 0, 'K1b_missing_bloomLevel': 0, 'K2_bad_path': 0, 'K3_not_bilingual': 0, 'K4_duplicate_id': 0, 'K5_dangling_relations': 0, 'K6_bad_tree_nodes': 0} |
 
 **总分**: 99.5 = 0.30×99.4 + 0.25×98.6 + 0.20×100.0 + 0.25×100.0

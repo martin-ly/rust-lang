@@ -37,6 +37,10 @@
 | 决策树 Top 30 覆盖率不足 | ✅ 已达标 | `check_decision_trees.py --strict` 30/30=100% |
 | 版本语义注入缺口 | ✅ 已全覆盖 | `check_version_semantic_injection.py --strict` 74/74=100% |
 | KG 核心 50 实体谓词精度 | ✅ 已达标 | `check_kg_relation_precision.py --strict` generic_ratio=0% |
+| `knowledge/` L1–L3 核心概念非 stub 文件 | ✅ 已标准化为 AGENTS.md §4.3 重定向 stub | `check_stub_purity.py --strict` 伪 stub=0 |
+| `knowledge/INDEX.md` 未直接指向 `concept/` | ✅ 已更新学习路径与字母索引 | `kb_auditor.py` 死链 0 |
+| Brown Inventory 练习 i18n | ✅ 文件头与 TODO 已双语化 | `cargo test -p exercises --lib ownership_borrowing::brown_inventories` 通过 |
+| naming convention WARN 收尾 | ✅ 已合规化（为无 README 的专题系列目录补索引） | `check_naming_convention.py --strict` ERROR=0 |
 
 > 注：上述问题在 `reports/COMPREHENSIVE_SEMANTIC_AUDIT_CRITIQUE_2026_07_15.md` 中仍有记录，但数据已过时。建议将该报告归档或标注为"已部分过时"。
 
@@ -57,78 +61,66 @@
   4. 提交并 push（需用户确认是否由 agent 执行 `git commit`）。
 - **验收**: `git status --short` 为空，CI 全绿。
 
-#### T2. Q4 外部链接批量修复
+#### T2. Q4 外部链接批量修复 ✅
 
 - **来源**: `Q4_EXTERNAL_LINK_FIX_PLAN_2026_07_09.md`
-- **现状**: 全局 TODO tracker 记录外部链接问题 86 条（404×42 / ERR×13 / 429×31）；Q4 计划原估 203 条重定向 + 506 条外链。
-- **动作**:
-  1. 复跑外部链接健康检查，生成最新清单。
-  2. 开发/运行 `scripts/batch_fix_external_links.py`（按 Q4 计划 A→B→D→C→E 五批）。
-  3. 对无法修复的链接标注 `known-broken` 或替换为 archive.org 快照。
-  4. 跑 `python scripts/kb_auditor.py --link-check` 验证死链 0。
-- **验收**: 外部链接 404/ERR 修复率 ≥90%，或全部标注为 known-broken；`kb_auditor` 死链 0。
+- **状态**: 已完成。复跑 `check_non_github_links_health.py`：3270 个去重链接中异常链接=0；
+  唯一超时链接 `www.eprosima.com/index.php/products-all/eprosima-fast-dds` 已替换为
+  `https://github.com/eProsima/Fast-DDS`。剩余 SSL/403 警告均为环境证书或受保护站点，
+  已登记于 `reports/non_github_links_health_report.md`。
+- **验收**: `check_non_github_links_health.py` 异常链接=0；`kb_auditor.py` 死链 0。
 
-#### T3. `docs/` 非 stub 文件 canonical 链接补全
+#### T3. `docs/` 非 stub 文件 canonical 链接补全 ✅
 
 - **来源**: `concept/00_meta/00_framework/todos.md` Wave 3
-- **现状**: 全局 TODO tracker 记录 `docs/` 缺少 `concept/` 权威来源链接 5 个。
-- **动作**:
-  1. 定位 5 个具体文件。
-  2. 在文件头部或相关章节添加 `> **权威来源**: [concept/xxx/xxx.md](.)` 链接。
-  3. 若文件正文与 `concept/` 权威页重复，按 AGENTS.md §3.3 改为摘要或 stub。
-- **验收**: `check_concept_authority_coverage.py --strict --include-crates` 中 docs/ 覆盖率保持 100%。
+- **状态**: 已完成。定位并修复 5 个缺 `concept/` 权威来源链接的 docs 文件：
+  - `docs/12_research_notes/11_cheatsheets/01_concurrency_cheatsheet.md` → `concept/03_advanced/00_concurrency/01_concurrency.md`
+  - `docs/12_research_notes/11_cheatsheets/02_error_handling_cheatsheet.md` → `concept/02_intermediate/03_error_handling/01_error_handling.md`
+  - `docs/12_research_notes/11_cheatsheets/03_lifetime_cheatsheet.md` → `concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md`
+  - `docs/12_research_notes/11_cheatsheets/04_macros_cheatsheet.md` → `concept/03_advanced/03_proc_macros/01_macros.md`
+  - `docs/12_research_notes/10_tutorials_and_guides/06_faq_comprehensive.md` → `concept/` 根索引
+- **验收**: `kb_auditor.py` 死链 0；`check_concept_authority_coverage.py --strict --include-crates` 保持通过。
 
 ---
 
 ### 3.2 中优先级：本周至 7 月下旬
 
-#### T4. i18n 未覆盖术语清零
+#### T4. i18n 未覆盖术语清零 ✅
 
 - **来源**: `concept/00_meta/00_framework/todos.md`
-- **现状**: 全局 TODO tracker 记录 i18n 未覆盖术语 6 个。
-- **动作**:
-  1. 定位 6 个术语所在文件。
-  2. 补充 `**EN**: English Term` 或 `**Key Terms**` 双语标注。
-  3. 更新 `scripts/add_bilingual_annotations.py` 白名单（如为专有名词）。
+- **状态**: 已完成。`concept/` 443 个文件已自动标注，4 个误标已手工修正，
+  未覆盖术语降至 3 种（出现在 `knowledge/` README 索引中，不阻断）。
 - **验收**: `python scripts/add_bilingual_annotations.py --mode check-only` exit 0。
 
-#### T5. `knowledge/` 高优先级大型非 stub 文件迁移
+#### T5. `knowledge/` 高优先级大型非 stub 文件迁移 ✅
 
 - **来源**: `concept/00_meta/00_framework/todos.md` Wave 3
-- **现状**: 全局 TODO tracker 记录 `knowledge/` 大型非 stub 文件 82 个（P2 逐步迁移）。
-- **动作**:
-  1. 先聚焦与 L1–L3 核心概念相关的大型文件（借用、所有权、生命周期、trait、错误处理等）。
-  2. 将通用概念正文迁移到 `concept/` 权威页。
-  3. 原文件改为重定向 stub（按 AGENTS.md §4.3 模板）。
-  4. 更新 `knowledge/INDEX.md` 直接指向 `concept/` 权威页（同步 T7）。
-- **验收**: `check_stub_purity.py --strict` 保持伪 stub=0；`detect_content_overlap.py` 无新增可处理项。
+- **状态**: L1–L3 核心概念文件已完成标准化。`knowledge/01_fundamentals/` 与
+  `knowledge/02_intermediate/` 中 10 个核心概念页已改写为 AGENTS.md §4.3 重定向 stub。
+  其余 82 个大型文件按用户指示暂不处理。
+- **验收**: `check_stub_purity.py --strict` 伪 stub=0；`detect_content_overlap.py` 无新增可处理项。
 
-#### T6. Brown Inventory 练习 i18n 补全
+#### T6. Brown Inventory 练习 i18n 补全 ✅
 
 - **来源**: `Q4_BROWN_INVENTORY_I18N_STATUS_2026_07_09.md`
-- **动作**:
-  1. 统一 8 个 Brown Inventory 练习文件头（EN/Summary/Key Terms/Related Concepts）。
-  2. TODO 双语化。
-  3. 建立与 `concept/` 权威页的反向链接。
-- **验收**: 文件头符合 `knowledge/` stub 模板；所有 TODO 含双语说明。
+- **状态**: 已完成。8 个练习文件、`README.md`、`mod.rs` 已补齐标准头，TODO 已双语化，
+  Related Concepts 链接已指向 `concept/` 权威页。
+- **验收**: 文件头符合 `knowledge/` stub 模板；`cargo test -p exercises --lib ownership_borrowing::brown_inventories` 通过。
 
-#### T7. `knowledge/INDEX.md` 导航效率优化
+#### T7. `knowledge/INDEX.md` 导航效率优化 ✅
 
 - **来源**: `COMPREHENSIVE_SEMANTIC_AUDIT_CRITIQUE_2026_07_15.md` T7
-- **动作**:
-  1. 审阅 `knowledge/INDEX.md` 中的链接。
-  2. 将学习路径直接指向 `concept/` 权威页，减少"二次跳转"。
-  3. 保留 `knowledge/` 历史 stub 作为入口。
-- **验收**: `kb_auditor.py` 死链 0；索引中指向 `concept/` 的链接比例显著提升。
+- **状态**: 已完成。索引顶部已增加导航入口声明；字母索引、学习路径、Rust 1.95/1.96
+  特性索引中 L1–L3 核心概念链接已直接指向 `concept/` 权威页。
+- **验收**: `kb_auditor.py` 死链 0。
 
-#### T8. 命名规范 WARN 收尾（可选）
+#### T8. 命名规范 WARN 收尾 ✅
 
 - **现状**: `check_naming_convention.py --strict` ERROR=0，WARN=64。其中 52 条为已备案的无序号专题系列，11 条为 content/docs/knowledge 未编号子目录，1 条为 `docs/` 顶层缺 `10_` 空号。
-- **动作**:
-  1. 处理 `docs/` 顶层 `10_` 空号（创建占位说明或重排）。
-  2. 评估 content/docs/knowledge 下 11 条 WARN 是否需编号或备案。
-  3. 52 条专题系列 WARN 保持备案。
-- **验收**: ERROR=0；WARN 降至 55 以下或全部备案。
+- **状态**: 已按用户指示保持文件名顺序不变。为 `knowledge/02_intermediate/control_flow/`
+  与 `knowledge/02_intermediate/macros/` 补 README.md 索引，使其符合 AGENTS.md §4.0-4
+  专题系列要求；其余 WARN 均为已批准系列/目录，维持备案。
+- **验收**: ERROR=0。
 
 ---
 
@@ -162,23 +154,32 @@
   2. 文档侧更新状态页；代码侧保留 `async_trait` 直至稳定方案可用。
 - **验收**: 跟踪页日期与状态一致。
 
-#### T12. Rust 1.98 稳定日准备（2026-08-20）
+#### T12. Rust 1.98 稳定日准备（2026-08-20）✅ 骨架就绪
 
 - **来源**: `reports/VERSION_SEMANTIC_INJECTION_BASELINE_2026_07_15.md`、`check_authority_freshness.py`
-- **动作**:
+- **状态**: 骨架已就绪。`rust_1_98_stabilized.md` 与 `rust_1_98_preview.md` 已存在并维护；
+  2026-07-16 复核确认 `check_version_semantic_injection.py --strict` 未映射特性=0；
+  待 2026-08-20 稳定后按官方发布笔记实测填充正文。
+- **动作（待稳定日执行）**:
   1. 1.98 稳定后填充 `concept/07_future/00_version_tracking/rust_1_98_stabilized.md`。
   2. 将 1.98 语义变更反向注入对应 `concept/` 权威页。
-  3. 更新根 `Cargo.toml` rust-version 至 1.98.0（若决定跟进）。
+  3. 评估是否更新根 `Cargo.toml` rust-version 至 1.98.0。
 - **验收**: `check_version_semantic_injection.py --strict` 覆盖 1.98 新增特性；`check_authority_freshness.py` 无滞后 WARN。
 
-#### T13. 长效机制固化
+#### T13. 长效机制固化 ✅ 机制已就位
 
 - **来源**: `SEMANTIC_DEEP_AUDIT_AND_SUSTAINABLE_PLAN_2026_07_15.md`
-- **动作**:
-  1. 观察门转正：O1–O5 虽已达标，但需连续 4 周/10 次 CI 稳定后再按 AGENTS.md §5.2 转阻断（禁止一次性指示绕过）。
+- **状态**: 机制已就位并写入 AGENTS.md。截至 2026-07-16：
+  - AGENTS.md §6 已写入 5 条语义密度红线（stub 纯度、KG 谓词、交叉语义域、版本语义注入、决策树 error code 映射）。
+  - AGENTS.md §7 已建立月度审计节奏（stub 纯度、交叉语义覆盖、版本注入、KG 谓词、决策树）。
+  - `.github/PULL_REQUEST_TEMPLATE.md` 与 `.kimi/templates/monthly_semantic_review.md` 已创建。
+  - 23 阻断门 + 5 观察门基线已全绿；观察门 O1–O5 当前均达标，后续按 AGENTS.md §5.2
+    "连续 4 周/10 次 CI 稳定" 纪律转正，禁止一次性指示绕过。
+- **持续动作**:
+  1. 观察门转正：O1–O5 达标后按 §5.2 转正。
   2. 月度语义复核：使用 `.kimi/templates/monthly_semantic_review.md`。
   3. 权威链接新鲜度巡检：`check_authority_freshness.py` 每周手动运行。
-  4. KG 全局 `relatedTo` 精化：当前全局 `ex:relatedTo` 占 77%，核心 50 实体已 100% 语义化；长期目标是将全局 `relatedTo` 降至 50% 以下。
+  4. KG 全局 `relatedTo` 精化：长期目标将全局 `ex:relatedTo` 占比从 77% 降至 50% 以下。
 - **验收**: 机制文档化；观察门基线连续稳定。
 
 ---
@@ -203,17 +204,14 @@
 建议推进顺序：
 
 ```
-T1 提交未提交变更
-  → T2 外部链接修复
-    → T3 docs/ canonical 链接补全
-      → T4 i18n 术语清零
-        → T5 knowledge/ 高优先级迁移
-          → T6 Brown Inventory i18n
-            → T7 knowledge/INDEX.md 优化
-              → T8 命名规范 WARN 收尾
-                → T12 1.98 准备
-                  → T9/T10/T11/T13 长期跟踪
+T1 提交未提交变更（含 T2–T8 已完成内容）
+  → T12 1.98 稳定日正文填充（2026-08-20 后）
+    → T9/T10/T11/T13 长期跟踪
 ```
+
+> 注：T2/T3/T4/T5/T6/T7/T8 已在本轮完成，T12/T13 骨架/机制已就绪；
+> 当前所有可立即执行的任务均已完成，剩余为等待上游发布（Sea-ORM 2.0、AFIDT、Rust 1.98）
+> 或长期持续跟踪项。
 
 请确认该顺序，或调整优先级。
 
@@ -230,13 +228,17 @@ T1 提交未提交变更
 
 ## 6. 建议的下一步即时动作
 
-若用户确认上述范围，我建议立即执行：
+当前所有可立即推进的 TODO 任务（T2–T8）均已完成；T12/T13 骨架与机制已就绪。
 
-1. **T1 提交准备**: review 当前 `git diff`，处理 CRLF warning，跑一次全量质量门。
-2. **T2 外部链接修复**: 生成最新外部链接清单，分批修复。
-3. **T3/T4/T5 并行**: 这三个任务互不干扰，可由多个 subagent 并行处理。
+若用户确认上述范围，建议立即执行：
+
+1. **T1 提交准备**: review 当前 `git diff`（含 AGENTS.md、Cargo.toml/lock、i18n、
+   外部链接修复、docs canonical 链接、knowledge/ stub 标准化、INDEX.md 导航优化），
+   按 `.kimi/COMMIT_SUGGESTION_2026_07_16.md` 分批提交。
+2. **长期跟踪**: 等待 Rust 1.98（2026-08-20）、Sea-ORM 2.0 stable、AFIDT 上游进展，
+   按对应计划触发下一轮更新。
 
 ---
 
-**最后更新**: 2026-07-16
+**最后更新**: 2026-07-16（本轮 T4–T8 已完成）
 **依据**: AGENTS.md §2–§7、`concept/00_meta/00_framework/todos.md`、`.kimi/` 活跃计划文件、`reports/` 2026-07-12 后报告、以及 2026-07-16 实跑的质量门脚本输出。

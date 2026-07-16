@@ -11,16 +11,29 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: F×Und — 理解函数作为 Rust 行为单元的基础结构
 > **定位**: 系统讲解 Rust 函数声明、参数传递、返回值、发散函数与所有权（Ownership）的交互，为后续 Trait、闭包（Closures）、Async 打下语法基础。
-> **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/01_type_system.md) · [Statements and Expressions](../04_control_flow/04_statements_and_expressions.md) · [Terminology Glossary](../../00_meta/01_terminology/01_terminology_glossary.md)
-> **后置概念**: [Traits](../../02_intermediate/00_traits/01_traits.md) · [Closures](../00_start/03_closure_basics.md) · [Modules and Paths](01_modules_and_paths.md)
+> **前置概念**:
+> [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Type System](../02_type_system/01_type_system.md) ·
+> [Statements and Expressions](../04_control_flow/04_statements_and_expressions.md) ·
+> [Terminology Glossary](../../00_meta/01_terminology/01_terminology_glossary.md)
+> **后置概念**:
+> [Traits](../../02_intermediate/00_traits/01_traits.md) ·
+> [Closures](../00_start/03_closure_basics.md) ·
+> [Modules and Paths](01_modules_and_paths.md)
 >
-> **来源**: [The Rust Programming Language — Functions](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html) · [Rust Reference — Functions](https://doc.rust-lang.org/reference/items/functions.html) · [Rust By Example — Functions](https://doc.rust-lang.org/rust-by-example/fn.html)
+> **来源**:
+> [The Rust Programming Language — Functions](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html) ·
+> [Rust Reference — Functions](https://doc.rust-lang.org/reference/items/functions.html) ·
+> [Rust By Example — Functions](https://doc.rust-lang.org/rust-by-example/fn.html)
 
 ---
 
 > **对应 Crate**: [`c03_control_fn`](../../crates/c03_control_fn)
 > **对应练习**: [`exercises/src/control_flow/`](../../exercises/src/control_flow)
-> **权威来源**: [Rust Reference — Functions](https://doc.rust-lang.org/reference/items/functions.html) · [TRPL — Functions](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html) · [Rust By Example — Functions](https://doc.rust-lang.org/rust-by-example/fn.html)
+> **权威来源**:
+> [Rust Reference — Functions](https://doc.rust-lang.org/reference/items/functions.html) ·
+> [TRPL — Functions](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html) ·
+> [Rust By Example — Functions](https://doc.rust-lang.org/rust-by-example/fn.html)
 >
 > **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL、Rust By Example）
 
