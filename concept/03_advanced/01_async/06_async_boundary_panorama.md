@@ -2,20 +2,25 @@
 
 > **内容分级**: [专家级]
 > **定理链**: N/A — 边界全景/导航性文档，形式化推导见各权威页
-
 > **EN**: Async Boundary Panorama
 > **Summary**: A panorama of the semantic boundaries of Rust async programming: await-point state boundaries, cancellation safety, Pin/self-reference, Send-across-await, executor/runtime contracts, and async trait object-safety — each with boundary statements, counterexamples, and quantitative decision conditions.
-
 > **Rust 版本**: 1.97.0+ (Edition 2024) · Tokio 1.x
 > **受众**: [进阶-专家]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页（async 边界全景视角）。
 > **定位**: 汇总 Rust 异步编程全部**语义边界**——await 点两侧什么成立/什么不成立、取消何时安全、自引用（Reference）何时合法、Future 何时可跨线程、运行时（Runtime）契约何时被打破、async trait 何时可对象化。每一节给出**边界陈述 → 反例 → 判定条件**三段式。
-> **分工声明**: async 概念推导（状态机变换、Future trait、语法糖展开）留在 [Async/Await](01_async.md)；取消安全的系统化形式化留在 [Async 取消安全](05_async_cancellation_safety.md)；Pin 机制推导留在 [Pin 与 Unpin](08_pin_unpin.md)。本页只做**边界视角的全景汇总**，不重复概念推导（AGENTS.md §2 Canonical 规则）。
+> **分工声明**:
+> async 概念推导（状态机变换、Future trait、语法糖展开）留在 [Async/Await](01_async.md)；
+> 取消安全的系统化形式化留在 [Async 取消安全](05_async_cancellation_safety.md)；
+> Pin 机制推导留在 [Pin 与 Unpin](08_pin_unpin.md)。本页只做**边界视角的全景汇总**，不重复概念推导（AGENTS.md §2 Canonical 规则）。
 > **方法论对齐**: 反事实推理 · 边界测试 (Torchiano et al. 2018) · 判定树机器可读化（见 [decision_trees.yaml](../../00_meta/knowledge_topology/decision_trees.yaml) `DF-ASYNC-07`）
 > **全局对应**: 本页是 [安全边界全景](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md) 在 async 域的纵深展开；unsafe 域的对应页为 [Unsafe 边界全景](../02_unsafe/02_unsafe_boundary_panorama.md)。
 >
-> **来源**: [Rust Async Book](https://rust-lang.github.io/async-book/) · [Tokio docs](https://docs.rs/tokio/latest/tokio/) · [Rust Reference — Async blocks](https://doc.rust-lang.org/reference/introduction.html) · [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)
+> **来源**:
+> [Rust Async Book](https://rust-lang.github.io/async-book/) ·
+> [Tokio docs](https://docs.rs/tokio/latest/tokio/) ·
+> [Rust Reference — Async blocks](https://doc.rust-lang.org/reference/introduction.html) ·
+> [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)
 
 **变更日志**:
 
@@ -71,16 +76,12 @@
 
 > **[Rust Async Book — async/await](https://rust-lang.github.io/async-book/)**: `async` transforms a block of code into a state machine that implements the `Future` trait; each `.await` is a point where control may be yielded back to the executor.
 > **来源**: <https://rust-lang.github.io/async-book/>
-
 > **[Tokio docs — Cancellation safety](https://docs.rs/tokio/latest/tokio/macro.select.html#cancellation-safety)**: To determine whether your own methods are cancellation safe, look for `.await` and consider what state is lost if the future is dropped at that point.
 > **来源**: <https://docs.rs/tokio/latest/tokio/macro.select.html#cancellation-safety>
-
 > **[Wikipedia: Coroutine](https://en.wikipedia.org/wiki/Coroutine)**: Coroutines are computer program components that allow execution to be suspended and resumed, generalizing subroutines for cooperative multitasking.
 > **来源**: <https://en.wikipedia.org/wiki/Coroutine>
-
 > **[Wikipedia: Reentrancy (computing)](https://en.wikipedia.org/wiki/Reentrancy_(computing))**: A routine is reentrant if it can be interrupted in the middle of its execution and then safely be called again before its previous invocations complete.
 > **来源**: <https://en.wikipedia.org/wiki/Reentrancy_(computing)>
-
 > **边界全景的定义**: 一条**语义边界**是这样一个程序点集合：点的一侧某不变式由编译器保证，另一侧该不变式的责任转移到程序员（或运行时）。async 的复杂性几乎全部来自这些边界两侧责任的交接。
 
 ---

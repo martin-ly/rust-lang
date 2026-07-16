@@ -29,7 +29,11 @@
 > **后置概念**: [Generics](../01_generics/01_generics.md) ·
 > [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) ·
 > [Async](../../03_advanced/01_async/01_async.md)
-> **主要来源**: [TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**:
+> [TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Reference: Traits](https://doc.rust-lang.org/reference/items/traits.html) ·
 > [Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class) ·
 > [RFC 255](https://rust-lang.github.io/rfcs//0255-object-safety.html)

@@ -20,12 +20,15 @@
 > [Traits](../00_traits/01_traits.md)
 > **后置概念**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) ·
 > [Async](../../03_advanced/01_async/01_async.md)
-> **主要来源**: [TRPL: Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**:
+> [TRPL: Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Reference: Errors](https://doc.rust-lang.org/reference/introduction.html) ·
 > [Wikipedia: Exception handling](https://en.wikipedia.org/wiki/Exception_handling) ·
 > [RFC 243](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html)
 > (Source: [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html))
-
 > **Rust 1.97.0 变更提示**：
 > Rust 1.97.0 将 `must_use` lint 扩展到 `Result<T, !>` 与 `ControlFlow<!, T>`，详见 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)。
 

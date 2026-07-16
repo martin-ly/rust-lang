@@ -11,7 +11,11 @@
 > **后置概念**: N/A
 ---
 
-> **来源**: · [自测题库](../../00_meta/04_navigation/12_self_assessment.md) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **来源**:
+> · [自测题库](../../00_meta/04_navigation/12_self_assessment.md) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [The Rust Programming Language — Ch13 Closures](https://doc.rust-lang.org/book/ch13-01-closures.html) ·
 > [The Rust Programming Language — Ch13 Iterators](https://doc.rust-lang.org/book/ch13-01-closures.html) ·
 > [Rust Reference — Closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html)
@@ -33,7 +37,9 @@
 
 ## 一、闭包基础
 
-理解「闭包（Closures）基础」需要把握 Q1. 以下代码能否编译？解释闭包的类型推断（Type Inference）、Q2. 以下代码的输出是什么？解释闭包捕获环境的方式与Q3. 以下代码能否编译？`move` 闭包的作用是什么？，本节依次展开。
+理解「闭包（Closures）基础」需要把握
+Q1. 以下代码能否编译？解释闭包的类型推断（Type Inference）、
+Q2. 以下代码的输出是什么？解释闭包捕获环境的方式与Q3. 以下代码能否编译？`move` 闭包的作用是什么？，本节依次展开。
 
 ### Q1. 🟡 以下代码能否编译？解释闭包的类型推断
 

@@ -340,8 +340,12 @@ graph TD
 
 ### 4.3 推论：RefCell ⟹ 内部可变性运行时检查
 
-> **[TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [std docs: RefCell]** RefCell 在单线程运行时检查借用规则，提供与编译期检查等价的安全性。 ✅ 已验证
-> **[Rust Reference: Interior mutability](https://doc.rust-lang.org/reference/interior-mutability.html)** `RefCell<T>` implements the interior mutability pattern by deferring borrow checking to runtime, allowing mutation through shared references in single-threaded contexts. ✅ 已验证
+>
+> **[TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) ·
+> [std docs: RefCell]** RefCell 在单线程运行时检查借用规则，提供与编译期检查等价的安全性。 ✅ 已验证
+> **[Rust Reference: Interior mutability](https://doc.rust-lang.org/reference/interior-mutability.html)**
+> `RefCell<T>` implements the interior mutability pattern by deferring borrow checking to runtime,
+> allowing mutation through shared references in single-threaded contexts. ✅ 已验证
 
 ```text
 前提 1: RefCell<T> 在运行时维护 borrow/borrow_mut 状态机
@@ -359,7 +363,10 @@ graph TD
 
 ### 4.4 RAII + 所有权 ⟹ 确定性释放
 
-> **[TRPL Ch4.1](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · [TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Reference: Drop](https://doc.rust-lang.org/reference/special-types-and-traits.html#drop)** RAII 确定性释放由所有权规则和 Drop trait 自动调用保证。 ✅ 已验证
+> **[TRPL Ch4.1](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) ·
+> [TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) ·
+> [Rust Reference: Drop](https://doc.rust-lang.org/reference/special-types-and-traits.html#drop)**
+> RAII 确定性释放由所有权规则和 Drop trait 自动调用保证。 ✅ 已验证
 
 ```text
 前提 1: 每个堆分配值由唯一所有者管理（Box）或引用计数管理（Rc/Arc）

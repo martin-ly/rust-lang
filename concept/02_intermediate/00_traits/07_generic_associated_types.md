@@ -18,7 +18,13 @@
 ---
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **来源**: [RFC 1598 — Generic Associated Types](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) · [Rust Reference — Associated Items](https://doc.rust-lang.org/reference/items/associated-items.html#associated-types) · [Rust 1.65 Release Notes](https://blog.rust-lang.org/2022/11/03/Rust-1.65.0.html) · [Niko Matsakis — GATs stabilization push](https://smallcultfollowing.com/babysteps/blog/2022/06/27/many-modes-a-gats-pattern/) · [RFC 2289 — Associated Type Bounds](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)
+> **来源**:
+>
+> [RFC 1598 — Generic Associated Types](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) ·
+> [Rust Reference — Associated Items](https://doc.rust-lang.org/reference/items/associated-items.html#associated-types) ·
+> [Rust 1.65 Release Notes](https://blog.rust-lang.org/2022/11/03/Rust-1.65.0.html) ·
+> [Niko Matsakis — GATs stabilization push](https://smallcultfollowing.com/babysteps/blog/2022/06/27/many-modes-a-gats-pattern/) ·
+> [RFC 2289 — Associated Type Bounds](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)
 > **对应 Crate**: [`c04_generic`](../../crates/c04_generic)
 > **对应练习**: [`exercises/src/generics/`](../../exercises/src/generics)
 
@@ -302,13 +308,15 @@ trait Service {
 
 ## 五、形式化：类型 × Trait × 生命周期三维交叉
 
-本节聚焦「形式化：类型 × Trait × 生命周期三维交叉」，覆盖类型族视角、良构性（Well-formedness）规则与为什么不是完整 HKT。论述顺序由定义到边界：先明确「形式化：类型 × Trait × 生命周期三维交叉」在「泛型关联类型（Generic Associated Types, GATs）」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「形式化：类型 × Trait × 生命周期三维交叉」的判定标准，并指出它在全页论证链中的位置。
+本节聚焦「形式化：类型 × Trait × 生命周期三维交叉」，覆盖类型族视角、良构性（Well-formedness）规则与为什么不是完整 HKT。
+论述顺序由定义到边界：先明确「形式化：类型 × Trait × 生命周期三维交叉」在「泛型关联类型（Generic Associated Types, GATs）」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。
+读完后应能用一句话复述「形式化：类型 × Trait × 生命周期三维交叉」的判定标准，并指出它在全页论证链中的位置。
 
 ### 5.1 类型族视角
 
 在 System Fω 的片段中，普通关联类型 `<T as Trait>::Item` 是类型层面的函数应用：给定具体实现者 `T`，投影出唯一类型。GAT 把这个投影提升为**类型族（type family）**：
 
-```
+```text
 Item : impl → lifetime → type       -- 语法种类：* → * （以生命周期为索引）
 Item(T, 'a) = <T as Trait>::Item<'a>
 ```
@@ -324,7 +332,8 @@ Item(T, 'a) = <T as Trait>::Item<'a>
 
 ### 5.3 为什么不是完整 HKT
 
-RFC 1598 明确排除了：高阶 trait（`trait Foo<F<_>>`）、类型算子作为一等公民、`impl Trait for SomeConstructor` 形式的实现。GAT 的类型构造器永远绑定在某个具名 trait 的具名关联类型上——这是**去函数化（defunctionalization）**：类型层面的"函数"没有独立的语法实体，只能作为 trait 成员存在，从而保证：
+RFC 1598 明确排除了：高阶 trait（`trait Foo<F<_>>`）、类型算子作为一等公民、`impl Trait for SomeConstructor` 形式的实现。
+GAT 的类型构造器永远绑定在某个具名 trait 的具名关联类型上——这是**去函数化（defunctionalization）**：类型层面的"函数"没有独立的语法实体，只能作为 trait 成员存在，从而保证：
 
 - 每个类型构造器有唯一解析点（配合 coherence 规则可判定）；
 - 归一化（normalization）不会引入无界递归之外的歧义；

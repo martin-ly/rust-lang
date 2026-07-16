@@ -18,8 +18,15 @@
 ---
 
 > **Rust 版本**: 1.97.0+ (Edition 2024) · futures 0.3 · tokio-stream 0.1
-> **来源**: [futures-rs — `Stream`](https://docs.rs/futures/latest/futures/stream/trait.Stream.html) · [futures-rs — `StreamExt`](https://docs.rs/futures/latest/futures/stream/trait.StreamExt.html) · [tokio-stream docs](https://docs.rs/tokio-stream/latest/tokio_stream/) · [withoutboats — poll_next](https://without.boats/blog/poll-next/) · [withoutboats — poll_progress](https://without.boats/blog/poll-progress/)（以上 2026-07-12 curl 实测 HTTP 200）
-> **国际权威来源（2026-07-13 补录）**: **P0** [Async Book — Streams 章](https://rust-lang.github.io/async-book/05_streams/01_chapter.html) · **P1** [Hoare — Communicating Sequential Processes（CACM 1978）](https://dl.acm.org/doi/10.1145/359576.359585)（背压/有界通道通信模型的理论源头；curl 实测 2026-07-13，ACM 对非浏览器 UA 返回 403 属反爬，DOI 页面浏览器可访问）
+> **来源**:
+> [futures-rs — `Stream`](https://docs.rs/futures/latest/futures/stream/trait.Stream.html) ·
+> [futures-rs — `StreamExt`](https://docs.rs/futures/latest/futures/stream/trait.StreamExt.html) ·
+> [tokio-stream docs](https://docs.rs/tokio-stream/latest/tokio_stream/) ·
+> [withoutboats — poll_next](https://without.boats/blog/poll-next/) ·
+> [withoutboats — poll_progress](https://without.boats/blog/poll-progress/)（以上 2026-07-12 curl 实测 HTTP 200）
+> **国际权威来源（2026-07-13 补录）**:
+> **P0** [Async Book — Streams 章](https://rust-lang.github.io/async-book/05_streams/01_chapter.html) ·
+> **P1** [Hoare — Communicating Sequential Processes（CACM 1978）](https://dl.acm.org/doi/10.1145/359576.359585)（背压/有界通道通信模型的理论源头；curl 实测 2026-07-13，ACM 对非浏览器 UA 返回 403 属反爬，DOI 页面浏览器可访问）
 > **对应 Crate**: [`c06_async`](../../../crates/c06_async)
 > **对应练习**: [`exercises/src/async_programming/`](../../../exercises/src/async_programming)
 

@@ -1,5 +1,7 @@
 > **内容分级**: [专家级]
-> **本节关键术语**: 取消安全 (Cancellation Safety) · 挂起点 (Suspension Point) · 选择宏 (select!) · 结构化并发 (Structured Concurrency) · 异步析构 (Async Drop) — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
+> **本节关键术语**:
+> 取消安全 (Cancellation Safety) · 挂起点 (Suspension Point) · 选择宏 (select!) · 结构化并发 (Structured Concurrency) · 异步析构 (Async Drop) —
+> [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 
 # Async 取消安全（Cancellation Safety）
 
@@ -18,7 +20,11 @@
 ---
 
 > **Rust 版本**: 1.97.0+ (Edition 2024) · Tokio 1.x
-> **来源**: [Tokio docs — `select!` Cancellation safety](https://docs.rs/tokio/latest/tokio/macro.select.html#cancellation-safety) · [Rust Async Book — Cancellation](https://rust-lang.github.io/async-book/) · [withoutboats — Asynchronous Clean-up](https://without.boats/blog/asynchronous-clean-up/) · [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)
+> **来源**:
+> [Tokio docs — `select!` Cancellation safety](https://docs.rs/tokio/latest/tokio/macro.select.html#cancellation-safety) ·
+> [Rust Async Book — Cancellation](https://rust-lang.github.io/async-book/) ·
+> [withoutboats — Asynchronous Clean-up](https://without.boats/blog/asynchronous-clean-up/) ·
+> [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)
 > **对应 Crate**: [`c06_async`](../../crates/c06_async)
 > **对应练习**: [`exercises/src/async_programming/`](../../exercises/src/async_programming)
 

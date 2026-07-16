@@ -17,7 +17,11 @@
 
 ---
 
-> **来源**: · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html) ·
 > [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines//flexibility.html) ·
 > [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) ·

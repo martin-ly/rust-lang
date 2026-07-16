@@ -17,7 +17,12 @@
 
 ---
 
-> **来源**: [Serde Documentation](https://serde.rs/) · [IETF RFC 8259 — JSON](https://tools.ietf.org/html/rfc8259) · [Peyton Jones — The Implementation of Functional Programming Languages](https://www.microsoft.com/en-us/research/publication/the-implementation-of-functional-programming-languages/) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)
+> **来源**:
+> [Serde Documentation](https://serde.rs/) ·
+> [IETF RFC 8259 — JSON](https://tools.ietf.org/html/rfc8259) ·
+> [Peyton Jones — The Implementation of Functional Programming Languages](https://www.microsoft.com/en-us/research/publication/the-implementation-of-functional-programming-languages/) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)
 > [Serde Book](https://serde.rs/impl-serialize.html) ·
 > [Rust Reference — Derive](https://doc.rust-lang.org/reference/procedural-macros.html#derive-macros) ·
 > [RFC 1681 — Macros 1.1](https://github.com/rust-lang/rfcs/pull/1681)

@@ -11,7 +11,13 @@
 > **后置概念**: [Ownership](06_quiz_ownership_borrowing.md)
 ---
 
-> **来源**: · [自测题库](../../00_meta/04_navigation/12_self_assessment.md) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> · [自测题库](../../00_meta/04_navigation/12_self_assessment.md) ·
+> [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [The Rust Programming Language — Ch3 Common Programming Concepts](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html) ·
 > [The Rust Programming Language — Ch6 Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) ·
 > [The Rust Programming Language — Ch18 Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html)

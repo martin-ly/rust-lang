@@ -11,11 +11,21 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification / Language semantics
 > **双维定位**: S×Lang — 语言标准库约定
-> **前置依赖**: [Traits](../../01_foundation/02_type_system/01_type_system.md) · [Structs and Enums](../../01_foundation/03_values_and_references/01_reference_semantics.md) · [Terminology Glossary](../../00_meta/01_terminology/01_terminology_glossary.md)
+> **前置依赖**:
+> [Traits](../../01_foundation/02_type_system/01_type_system.md) ·
+> [Structs and Enums](../../01_foundation/03_values_and_references/01_reference_semantics.md) ·
+> [Terminology Glossary](../../00_meta/01_terminology/01_terminology_glossary.md)
 > **后置概念**: [Advanced Traits](04_advanced_traits.md) · [Proc Macros](../../03_advanced/03_proc_macros/02_proc_macro.md)
 > **定理链**: N/A — 参考级文档
-> **主要来源**: [Rust Reference — Derive](https://doc.rust-lang.org/reference/attributes/derive.html) · [TRPL — Appendix C](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
-
+> **主要来源**:
+> [Rust Reference — Derive](https://doc.rust-lang.org/reference/attributes/derive.html) ·
+> [TRPL — Appendix C](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html) ·
+> [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [System F](https://en.wikipedia.org/wiki/System_F) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > **来源**: [TRPL — Appendix C: Derivable Traits](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html)
 
@@ -47,7 +57,8 @@ mindmap
 
 ## 一、`#[derive]` 的作用
 
-`#[derive(TraitName)]` 可以自动为 struct 或 enum 生成 trait 实现。编译器使用默认实现，其行为通常基于字段的逐字段/逐变体推导。(Source: [Rust Reference — Derive](https://doc.rust-lang.org/reference/attributes/derive.html))
+`#[derive(TraitName)]` 可以自动为 struct 或 enum 生成 trait 实现。编译器使用默认实现，其行为通常基于字段的逐字段/逐变体推导。
+(Source: [Rust Reference — Derive](https://doc.rust-lang.org/reference/attributes/derive.html))
 
 ```rust
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]

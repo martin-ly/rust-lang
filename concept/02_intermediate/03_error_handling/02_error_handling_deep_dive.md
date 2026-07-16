@@ -10,14 +10,26 @@
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页（L2 深入专题）。
-> **层级定位**: 本页为错误处理（Error Handling）的 **L2 深入专题页**（deep dive），聚焦 `Result`/`Option` 组合子代数、`From` 错误转换、错误链（`Error::source()`）与 thiserror/anyhow/eyre 框架生态；入门基础见 L1 [`32_error_handling_basics.md`](../../01_foundation/08_error_handling/01_error_handling_basics.md)，L2 主权威页（传播模式与工程实践总览）见 [`01_error_handling.md`](01_error_handling.md)。三页为合法进阶关系（basics → 主页 → deep dive），非重复权威页。
+> **层级定位**:
+> 本页为错误处理（Error Handling）的 **L2 深入专题页**（deep dive），聚焦 `Result`/`Option` 组合子代数、`From` 错误转换、错误链（`Error::source()`）与 thiserror/anyhow/eyre 框架生态；
+> 入门基础见 L1 [`32_error_handling_basics.md`](../../01_foundation/08_error_handling/01_error_handling_basics.md)，L2 主权威页（传播模式与工程实践总览）见 [`01_error_handling.md`](01_error_handling.md)。
+> 三页为合法进阶关系（basics → 主页 → deep dive），非重复权威页。
 > **定位**: 深入分析 Rust **错误处理（Error Handling）机制**——从 `Result`/`Option` 的组合子到 `?` 运算符、错误转换、自定义错误类型和错误处理框架，揭示 Rust 如何将错误处理融入类型系统（Type System）实现编译期安全。
-> **前置概念**: [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Traits](../00_traits/01_traits.md) · [Generics](../01_generics/01_generics.md)
-> **后置概念**: [Async](../../03_advanced/01_async/01_async.md) · [Logging](../../06_ecosystem/00_toolchain/02_logging_observability.md)
+> **前置概念**:
+> [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Traits](../00_traits/01_traits.md) · [Generics](../01_generics/01_generics.md)
+> **后置概念**:
+> [Async](../../03_advanced/01_async/01_async.md) · [Logging](../../06_ecosystem/00_toolchain/02_logging_observability.md)
 
 ---
 
-> **来源**: [Rust Reference — Errors](https://doc.rust-lang.org/std/result/enum.Result.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [System F](https://en.wikipedia.org/wiki/System_F) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **来源**:
+> [Rust Reference — Errors](https://doc.rust-lang.org/std/result/enum.Result.html) ·
+> [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [System F](https://en.wikipedia.org/wiki/System_F) ·
+> [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
+> [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 > [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
 > [thiserror crate](https://docs.rs/thiserror/latest/thiserror/) ·
 > [anyhow crate](https://docs.rs/anyhow/latest/anyhow/) ·
@@ -711,7 +723,16 @@ fn main() {
 }
 ```
 
-> **修正**: `Error::source()` 返回错误链的**下一个错误**。标准库的 `Error::chain()` 遍历 source 链。循环引用（Reference）（`A.source = B, B.source = A`）导致无限循环。虽然 Rust 的类型系统（Type System）（`&dyn Error` 是引用，不能拥有循环所有权（Ownership））使直接循环困难，但 `Arc` 或自定义实现可能创建逻辑循环。安全模式：1) 错误链应为**线性**（无分支、无循环）；2) `source` 指向**原始错误**（底层原因），非同一级别的包装；3) 使用 `anyhow`/`eyre` 自动管理错误链。这与 Java 的 `Throwable.getCause()`（同样可能循环，但 JVM 不检测）或 Go 的 `errors.Unwrap`（Go 1.13+ 的链式错误，手动管理）不同——Rust 的 `Error` trait 提供标准化错误链接口。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/error/trait.Error.html)] · [来源: [anyhow](https://docs.rs/anyhow/)]
+> **修正**:
+> `Error::source()` 返回错误链的**下一个错误**。标准库的 `Error::chain()` 遍历 source 链。
+> 循环引用（Reference）（`A.source = B, B.source = A`）导致无限循环。虽然 Rust 的类型系统（Type System）（`&dyn Error` 是引用，不能拥有循环所有权（Ownership））使直接循环困难，但 `Arc` 或自定义实现可能创建逻辑循环。
+> 安全模式：
+>
+> 1) 错误链应为**线性**（无分支、无循环）；
+> 2) `source` 指向**原始错误**（底层原因），非同一级别的包装；
+> 3) 使用 `anyhow`/`eyre` 自动管理错误链。
+> 这与 Java 的 `Throwable.getCause()`（同样可能循环，但 JVM 不检测）或 Go 的 `errors.Unwrap`（Go 1.13+ 的链式错误，手动管理）不同——Rust 的 `Error` trait 提供标准化错误链接口。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/error/trait.Error.html)] · [来源: [anyhow](https://docs.rs/anyhow/)]
 
 ## 嵌入式测验（Embedded Quiz）
 
