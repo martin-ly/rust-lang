@@ -13,7 +13,13 @@
 > **前置依赖**: [Panic and Abort](../../01_foundation/08_error_handling/03_panic_and_abort.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [The Rust Runtime](../../03_advanced/06_low_level_patterns/07_rust_runtime.md)
 > **后置概念**: [Error Handling](01_error_handling.md) · [FFI Advanced](../../03_advanced/04_ffi/02_ffi_advanced.md) · [Behavior Considered Undefined](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md)
 > **定理链**: Panic → Handler → Strategy → Unwind → UB Boundary
-> **主要来源**: [Rust Reference — Panic](https://doc.rust-lang.org/reference/panic.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Panic](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**:
+> [Rust Reference — Panic](https://doc.rust-lang.org/reference/panic.html) ·
+> [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [TRPL — Panic](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 >
 > **来源**: [Rust Reference — Panic](https://doc.rust-lang.org/reference/panic.html)
@@ -142,7 +148,10 @@ Panic 可以是可恢复的，也可以是不可恢复的，具体取决于 pani
 | [Behavior Considered Undefined](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md) | 错误的 FFI unwind 是 UB |
 | [The Rust Runtime](../../03_advanced/06_low_level_patterns/07_rust_runtime.md) | panic handler 是运行时的一部分 |
 
-> **权威来源**: [Rust Reference — Panic](https://doc.rust-lang.org/reference/panic.html), [TRPL Ch9 — Unrecoverable Errors](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html), [Rustonomicon — Panics](https://doc.rust-lang.org/nomicon/unwinding.html)
+> **权威来源**:
+> [Rust Reference — Panic](https://doc.rust-lang.org/reference/panic.html),
+> [TRPL Ch9 — Unrecoverable Errors](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html),
+> [Rustonomicon — Panics](https://doc.rust-lang.org/nomicon/unwinding.html)
 >
 > **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用（Reference） [Authority Source Sprint Batch 10](../../00_meta/02_sources/05_international_authority_index.md)
 

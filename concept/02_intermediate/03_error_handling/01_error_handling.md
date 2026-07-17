@@ -11,7 +11,11 @@
 > 本主题在 knowledge 中有系统化的知识索引：[错误处理（Error Handling）](../../01_foundation/08_error_handling/01_error_handling_basics.md)
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页（L2 主层）。
-> **层级定位**: 本页为错误处理（Error Handling）的 **L2 主权威页**，覆盖 `Result`/`Option`/`?` 传播模式、自定义错误与 thiserror/anyhow 工程实践；入门基础见 L1 [`32_error_handling_basics.md`](../../01_foundation/08_error_handling/01_error_handling_basics.md)，组合子代数/错误链/框架生态深入见 [`02_error_handling_deep_dive.md`](02_error_handling_deep_dive.md)。三页为合法进阶关系（basics → 主页 → deep dive），非重复权威页。
+> **层级定位**:
+> 本页为错误处理（Error Handling）的 **L2 主权威页**，覆盖 `Result`/`Option`/`?` 传播模式、自定义错误与 thiserror/anyhow 工程实践；
+> 入门基础见 L1 [`32_error_handling_basics.md`](../../01_foundation/08_error_handling/01_error_handling_basics.md)，
+> 组合子代数/错误链/框架生态深入见 [`02_error_handling_deep_dive.md`](02_error_handling_deep_dive.md)。
+> 三页为合法进阶关系（basics → 主页 → deep dive），非重复权威页。
 > **层级**: L2 进阶概念
 > **A/S/P 标记**: **A+S** — Application + Structure
 > **双维定位**: C×App — 实施 Result/Option 传播模式
@@ -328,7 +332,8 @@ graph TD
 >
 > **[TRPL Ch9.2](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html) ·
 > [Rust Reference: The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator)** ? 运算符通过隐式调用 From::from 实现错误的自动转换与传播。 ✅ 已验证
-> **[RFC 243: The ? Operator](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html)** The `?` operator was introduced in RFC 243 to provide ergonomic error propagation, later extended by [RFC 3058](https://rust-lang.github.io/rfcs//3058-try-trait-v2.html) for the general `Try` trait. ✅ 已验证
+> **[RFC 243: The ? Operator](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html)**
+> The `?` operator was introduced in RFC 243 to provide ergonomic error propagation, later extended by [RFC 3058](https://rust-lang.github.io/rfcs//3058-try-trait-v2.html) for the general `Try` trait. ✅ 已验证
 > (Source: [Rust Reference — The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator))
 
 ```text
@@ -349,7 +354,8 @@ graph TD
 
 > **[TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
 > [Rust Reference: panic](https://doc.rust-lang.org/reference/introduction.html)** panic 是 Safe Rust 中显式标记"程序进入不可能状态"的机制。 ✅ 已验证
-> **[Wikipedia: Exception handling](https://en.wikipedia.org/wiki/Exception_handling)** Unlike Java/C++ exceptions, Rust's `panic!` is not a general recovery mechanism but an explicit boundary for unrecoverable bugs; recoverable errors use `Result<T, E>`. ✅ 已验证
+> **[Wikipedia: Exception handling](https://en.wikipedia.org/wiki/Exception_handling)**
+> Unlike Java/C++ exceptions, Rust's `panic!` is not a general recovery mechanism but an explicit boundary for unrecoverable bugs; recoverable errors use `Result<T, E>`. ✅ 已验证
 
 ```text
 前提 1: panic 立即终止当前线程的执行（默认展开栈）
