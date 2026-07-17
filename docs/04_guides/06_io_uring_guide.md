@@ -1,7 +1,7 @@
 # io_uring 高性能 I/O 指南 {#io_uring-高性能-io-指南}
 
 > **EN**: Io Uring Guide
-> **Summary**: io_uring 高性能 I/O 指南 Io Uring Guide. 
+> **Summary**: io_uring 高性能 I/O 指南 Io Uring Guide.
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >

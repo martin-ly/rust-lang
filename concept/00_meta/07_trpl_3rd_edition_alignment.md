@@ -1,9 +1,12 @@
 # TRPL 第 3 版对照审计（TRPL 3rd Edition Alignment Audit）
 
+> **EN**: TRPL 3rd Edition Alignment Audit
+> **Summary**: Systematically compares The Rust Programming Language 3rd Edition with the `concept/` L1–L3 pages to identify gaps and plan updates.
 > **内容分级**: [综述级]
 > **受众**: [专家]
 > **定位**: 系统对比 The Rust Programming Language 第 3 版（2025-10 出版）与 `concept/` L1-L3 核心内容，识别差距并规划更新。
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **权威来源**: 本文件为 `concept/` 元层审计页；官方对照来源见 [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 
 ---
 

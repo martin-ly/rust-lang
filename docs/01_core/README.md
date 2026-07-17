@@ -2,6 +2,7 @@
 > 根据 AGENTS.md §3.4，`docs/` 仅保留学习路径、导航与速查，不重复概念定义。
 >
 > **核心权威页**:
+>
 > - [所有权](../../concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 > - [借用](../../concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
 > - [生命周期](../../concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)

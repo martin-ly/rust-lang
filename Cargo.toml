@@ -361,7 +361,7 @@ serde_yaml = "0.9.34"
 
 # 2025-12-11: 异步运行时最新稳定版本
 # tokio: 事件驱动的非阻塞I/O平台，用于编写异步I/O应用程序
-tokio = { version = "1.52.3", features = ["full"] }
+tokio = { version = "1.52.4", features = ["full"] }
 # tokio-util: tokio的实用工具库
 tokio-util = "0.7.18"
 # tokio-stream: tokio的流处理支持

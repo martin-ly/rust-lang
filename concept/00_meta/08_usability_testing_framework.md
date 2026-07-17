@@ -1,9 +1,12 @@
 # Rust 知识体系可用性测试框架（Usability Testing Framework）
 
+> **EN**: Rust Knowledge Base Usability Testing Framework
+> **Summary**: Defines a continuous learner-feedback loop for the knowledge base, moving from content output to validated learning outcomes.
 > **内容分级**: [综述级]
 > **受众**: [专家]
 > **定位**: 为项目建立持续的学习者反馈闭环，从"输出内容"转向"验证学习效果"。
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **权威来源**: 本文件为 `concept/` 元层方法页；学习路径对照 [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/)
 
 ---
 

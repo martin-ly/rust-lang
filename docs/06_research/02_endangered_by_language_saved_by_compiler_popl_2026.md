@@ -1,7 +1,7 @@
 # Endangered by Language, Saved by Compiler (POPL 2026) 研究笔记 {#endangered-by-language-saved-by-compiler-popl-2026-研究笔记}
 
 > **EN**: Endangered by Language, Saved by Compiler POPL 2026
-> **Summary**: 研究笔记 Endangered by Language, Saved by Compiler POPL 2026. 
+> **Summary**: 研究笔记 Endangered by Language, Saved by Compiler POPL 2026.
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [B]

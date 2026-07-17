@@ -5,7 +5,10 @@
 # Type System Basics（类型系统基础）
 >
 > **EN**: Type System
-> **Summary**: Rust's static type system combines scalar and compound types with algebraic data types, pattern matching, generics, and trait bounds. This chapter covers structs, enums, the match expression, type inference, and the path from everyday types toward formal type theory, giving learners the vocabulary needed for generic and trait-based design.
+> **Summary**:
+> Rust's static type system combines scalar and compound types with algebraic data types, pattern matching, generics, and trait bounds.
+> This chapter covers structs, enums, the match expression, type inference, and the path from everyday types toward formal type theory,
+> giving learners the vocabulary needed for generic and trait-based design.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **📎 交叉引用（Reference）**
@@ -2451,7 +2454,6 @@ fn g(items: &mut [Box<dyn Iterator<Item = i32>>]) {
 ### 补充：`!` (Never type) 的形式化分析与控制流图
 
 > **定义**：`!` 是**底类型（bottom type）**，表示永远不会返回的表达式。它是所有类型的子类型，因此可以出现在任何期望具体类型的位置。
-
 > **原理与合理性**：`!` 与空类型不同——空类型没有值，`!` 表示“无返回”。在控制流图中，`panic!()`、`loop {}`、`return` 等发散表达式产生 `!`，并可通过子类型关系自然融入后续类型检查（如 `let x: i32 = return;`）。它与 `Result<T, !>`、`Option<!>` 等组合，精确刻画“不可能失败/不可能有值”的语义。
 
 ```rust,ignore
@@ -2468,7 +2470,6 @@ fn maybe_ok() -> Result<i32, !> {
 ### 补充：Const Generics 的类型系统扩展
 
 > **定义**：Const Generics 允许泛型参数不仅是类型或生命周期，还可以是编译期已知的常量值（目前支持整数、`char`、`bool`、`usize` 等），从而把数值参数化引入类型系统。
-
 > **原理与合理性**：它让类型可以编码大小、维度、长度等编译期常量，例如 `[T; N]` 中的 `N` 现在可以参与泛型约束。类型系统必须保证 const 参数在实例化时可求值、无副作用，并且不参与运行时状态。`where` 子句中的 const 约束进一步支持依赖类型的轻量形式。
 
 ```rust,ignore
@@ -2486,7 +2487,6 @@ impl<T: Copy + Default, const N: usize> Matrix<T, N> {
 ### 补充：Type Inference 的 HM 算法与 Rust 扩展
 
 > **定义**：类型推断是编译器根据表达式上下文自动推导出类型的过程。Rust 基于 Hindley–Milner（HM）算法的核心思想，并扩展以支持重载、trait bound、方法调用和生命周期。
-
 > **原理与合理性**：HM 通过统一（unification）算法求解类型变量；Rust 在此基础上引入**约束生成 + 约束求解**两阶段模型，处理 `+` 等重载运算符、`.method()` 方法解析以及 `impl Trait` 的匿名泛型。如果约束无解，则产生 E0282/E0283 等错误。
 
 ```rust,compile_fail
@@ -2501,7 +2501,6 @@ v.push(42i32); // 推断 v: Vec<i32>
 ### 补充：ZST 与 `PhantomData` 的类型论意义
 
 > **定义**：Zero-sized type（ZST）是不占用运行内存的类型（如 `()`、`PhantomData<T>`、空 enum）。`PhantomData<T>` 是零大小标记类型，用于向类型系统声明“本类型逻辑上拥有/依赖 `T`”，但不存储 `T` 的值。
-
 > **原理与合理性**：ZST 在类型论中对应单元类型/空积；它们不影响运行时布局，但能参与类型检查。`PhantomData<T>` 对 unsafe 代码至关重要：它让编译器正确推导 variance、Drop check 和 auto-trait（`Send`/`Sync`）推导，而不引入实际存储。
 
 ```rust,ignore

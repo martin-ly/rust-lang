@@ -8,8 +8,6 @@
 > **Bloom 层级**: L3
 > **报告日期**: 2025-10-25
 
-
-
 ## 📑 目录 {#目录}
 
 - [跨模块实战项目指南 {#跨模块实战项目指南}](#跨模块实战项目指南-跨模块实战项目指南)
@@ -18,7 +16,6 @@
     - [入门级 {#入门级}](#入门级-入门级)
     - [进阶级 {#进阶级}](#进阶级-进阶级)
     - [专家级 {#专家级}](#专家级-专家级)
-  - [**状态**: ✅ 可用](#状态--可用)
   - [相关概念 {#相关概念}](#相关概念-相关概念)
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
@@ -45,10 +42,7 @@
 1. **Web 服务器** (C06-C10)
 2. **WASM 应用** (C11-C12)
 
-
-
 **状态**: ✅ 可用
-
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
@@ -59,18 +53,12 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
-
 - [README](README.md)
-
-
 
 ## 相关概念 {#相关概念}
 
 - [03_practice 目录](README.md)
 - [docs 索引](../README.md)
-
-
 
 ## 权威来源索引 {#权威来源索引}
 
@@ -82,4 +70,3 @@
 > **来源: [IEEE](https://standards.ieee.org/)**
 > **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
-

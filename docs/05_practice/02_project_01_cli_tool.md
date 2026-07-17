@@ -125,7 +125,7 @@ fn save_todos(todos: &[String]) -> std::io::Result<()> {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```
+```text
 todo-cli/
 ├── Cargo.toml
 └── src/

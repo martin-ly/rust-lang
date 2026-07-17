@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 524,
-    "generated_at": "2026-07-16T14:07:02.428878+00:00"
+    "total_files": 526,
+    "generated_at": "2026-07-17T04:51:53.307592+00:00"
   },
   "files": [
     {
@@ -274,7 +274,7 @@
       "layer": "L0",
       "title": "C/C++ → Rust 工程层对比路线图",
       "positioning": "",
-      "line_count": 258,
+      "line_count": 259,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -661,7 +661,7 @@
       "layer": "L0",
       "title": "模式语义空间索引：设计模式在概念体系中的坐标",
       "positioning": "",
-      "line_count": 197,
+      "line_count": 198,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -703,7 +703,7 @@
       "layer": "L0",
       "title": "通用 PL 基座路线图：Rust 在编程语言坐标系中的位置",
       "positioning": "",
-      "line_count": 178,
+      "line_count": 179,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -1126,7 +1126,7 @@
       "layer": "L0",
       "title": "定理链全局注册表（Theorem Registry）",
       "positioning": "",
-      "line_count": 217,
+      "line_count": 219,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -1217,7 +1217,7 @@
       "layer": "L0",
       "title": "Concept 文件双语模板 v2（Bilingual Template v2）",
       "positioning": "",
-      "line_count": 326,
+      "line_count": 327,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -1296,7 +1296,7 @@
       "layer": "L0",
       "title": "Concept 文件双语模板（Bilingual Template）",
       "positioning": "",
-      "line_count": 165,
+      "line_count": 166,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -1658,7 +1658,7 @@
       "layer": "L0",
       "title": "概念一致性（Coherence）检查清单",
       "positioning": "",
-      "line_count": 14,
+      "line_count": 15,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -1682,7 +1682,7 @@
       "layer": "L0",
       "title": "模板去同质化指南",
       "positioning": "",
-      "line_count": 94,
+      "line_count": 95,
       "theorem_chains": [
         {
           "text": "| `scripts/kb_auditor.py` | 检查模板化 ⟹ 标记、元数据完整性 |",
@@ -1778,7 +1778,7 @@
       "layer": "L0",
       "title": "Rust 语言特性盘点方法论",
       "positioning": "",
-      "line_count": 48,
+      "line_count": 50,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -1804,7 +1804,7 @@
       "layer": "L0",
       "title": "Cross Reference Matrix（交叉引用矩阵）",
       "positioning": "",
-      "line_count": 15,
+      "line_count": 17,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -2056,7 +2056,7 @@
       "layer": "L0",
       "title": "Rust 知识体系跨层依赖与蕴含拓扑图",
       "positioning": "",
-      "line_count": 16,
+      "line_count": 17,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -3064,7 +3064,7 @@
       "layer": "L0",
       "title": "基础知识缺口补全总索引",
       "positioning": "",
-      "line_count": 146,
+      "line_count": 147,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -3115,7 +3115,7 @@
       "layer": "L0",
       "title": "Rust Minimum Viable Learning Path (MVP Path)",
       "positioning": "",
-      "line_count": 290,
+      "line_count": 292,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -3155,7 +3155,7 @@
       "layer": "L0",
       "title": "测验体系注册表（Quiz Registry）",
       "positioning": "",
-      "line_count": 148,
+      "line_count": 150,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -3201,7 +3201,7 @@
       "layer": "L0",
       "title": "测验：元层框架与知识体系架构（L0）",
       "positioning": "验证学习者对知识体系自身架构（L0 元层）的掌握：分层职责、Bloom 映射、A/S/P 标记与 canonical 单一权威来源规则。",
-      "line_count": 372,
+      "line_count": 373,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -3248,7 +3248,7 @@
       "layer": "L0",
       "title": "TRPL 3rd Ed 章节映射",
       "positioning": "",
-      "line_count": 11,
+      "line_count": 13,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -3272,7 +3272,7 @@
       "layer": "L0",
       "title": "占位符页面",
       "positioning": "",
-      "line_count": 23,
+      "line_count": 25,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -7632,7 +7632,7 @@
       "layer": "L0",
       "title": "Rust 知识体系知识图谱本体规范 v2.0（RDF 1.2 / RDF-star / SKOS 对齐版）",
       "positioning": "本文件是 `kg_ontology.md`（v1 已不再维护）的 v2 升级版，在保留原有教学关系本体的基础上，显式对齐 W3C RDF 1.2、RDF-star、SKOS、JSON-LD 1.1 与 SHACL 数据形状标准，使项目知识图谱从\"规范文档\"进化为\"可验证、可查询、可多语言消费\"的 Linked Data。",
-      "line_count": 330,
+      "line_count": 331,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -7654,7 +7654,7 @@
       "layer": "L0",
       "title": "Rust 知识体系顶层本体（TLO）对齐",
       "positioning": "",
-      "line_count": 263,
+      "line_count": 264,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -7664,6 +7664,50 @@
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
       "matrix_rows": 67,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\trpl_3rd_edition_alignment.md",
+      "layer": "L0",
+      "title": "TRPL 第 3 版对照审计（TRPL 3rd Edition Alignment Audit）",
+      "positioning": "系统对比 The Rust Programming Language 第 3 版（2025-10 出版）与 `concept/` L1-L3 核心内容，识别差距并规划更新。",
+      "line_count": 79,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 27,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\usability_testing_framework.md",
+      "layer": "L0",
+      "title": "Rust 知识体系可用性测试框架（Usability Testing Framework）",
+      "positioning": "为项目建立持续的学习者反馈闭环，从\"输出内容\"转向\"验证学习效果\"。",
+      "line_count": 126,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 27,
       "pre_post": {
         "pre": [],
         "post": []
@@ -25189,7 +25233,7 @@
       "layer": "L3",
       "title": "Concurrency（并发模型）",
       "positioning": "",
-      "line_count": 2185,
+      "line_count": 2194,
       "theorem_chains": [
         {
           "text": "- v1.1 (2026-05-13): 增强定理一致性（Coherence）矩阵（11行 ⟹ 推理链）、反命题决策树、6步认知路径、章节过渡、层次一致性标注",
@@ -25508,7 +25552,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 13,
-      "matrix_rows": 111,
+      "matrix_rows": 113,
       "pre_post": {
         "pre": [
           "[L1 所有权（Ownership）](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [L1 借用（Borrowing）](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [L2 Trait](../../02_intermediate/00_traits/01_traits.md)",
@@ -29824,7 +29868,7 @@
       "layer": "L3",
       "title": "GAT 与 Async 交叉边界语义",
       "positioning": "分析 Rust 1.75+ `async fn in trait` 背后的 GAT/RPITIT 机制，以及 `Send`、`Pin` 在 GAT Future 上的传播规则。",
-      "line_count": 519,
+      "line_count": 524,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -30054,7 +30098,7 @@
       "layer": "L3",
       "title": "Unsafe Rust 安全编程",
       "positioning": "",
-      "line_count": 3544,
+      "line_count": 3555,
       "theorem_chains": [
         {
           "text": "- v1.1 (2026-05-13): 重构增强——定理一致性（Coherence）矩阵扩展至10行（⟹推理链）、反命题决策树×4、认知路径六步递进、章节过渡段落、层次一致性标注",
@@ -30637,7 +30681,7 @@
       "matrix_rows": 321,
       "pre_post": {
         "pre": [
-          "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md) · [Concurrency](../00_concurrency/01_concurrency.md)"
+          "> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·"
         ],
         "post": [
           "[FFI] · [Embedded] · [Custom Allocators]"
@@ -34239,7 +34283,7 @@
       "layer": "L3",
       "title": "Rust FFI：与外部代码的安全边界",
       "positioning": "系统分析 Rust 与 C/C++ 等外部代码交互的**Foreign Function Interface (FFI)** 机制，探讨 `extern` 块、ABI 兼容、`unsafe` 边界管理以及 `bindgen`/`cbindgen` 工具链。",
-      "line_count": 1024,
+      "line_count": 1045,
       "theorem_chains": [
         {
           "text": "| Rust FFI：与外部代码的安全边界 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -34437,7 +34481,7 @@
       "layer": "L3",
       "title": "FFI 高级主题：跨语言边界的安全与性能",
       "positioning": "深入分析 Rust **FFI（外部函数接口）**的高级主题——从复杂类型映射、回调函数、到线程安全和内存布局控制，揭示如何在不安全边界上维持 Rust 的安全保证。",
-      "line_count": 974,
+      "line_count": 983,
       "theorem_chains": [
         {
           "text": "| FFI 高级主题：跨语言边界的安全与性能 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -40513,7 +40557,7 @@
       "layer": "L4",
       "title": "Safety Tags（安全标签）",
       "positioning": "",
-      "line_count": 14,
+      "line_count": 16,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -41625,7 +41669,7 @@
       "layer": "L4",
       "title": "形式化方法在 Rust 中的应用（已合并）",
       "positioning": "",
-      "line_count": 22,
+      "line_count": 24,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -42195,7 +42239,7 @@
       "layer": "L4",
       "title": "Miri：Rust 未定义行为动态检测器",
       "positioning": "将 Miri 从“nightly 玩具”还原为日常 unsafe 代码审查与教学的标准工具。",
-      "line_count": 366,
+      "line_count": 367,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -42271,7 +42315,7 @@
       "layer": "L4",
       "title": "Kani：Rust 有界模型检查器",
       "positioning": "将 Kani 从\"AWS 内部工具\"还原为日常安全关键代码审查与教学的标准模型检查器。",
-      "line_count": 426,
+      "line_count": 427,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -49086,7 +49130,7 @@
       "layer": "L6",
       "title": "rustc / Cargo `-Z` 不稳定选项参考清单",
       "positioning": "",
-      "line_count": 196,
+      "line_count": 198,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -50325,7 +50369,7 @@
       "layer": "L6",
       "title": "Cargo Manifest 目标与元数据（Cargo Manifest Targets）",
       "positioning": "补充 `10_cargo_manifest_reference.md` 未涉及的 target、rust-version、pkgid 等子主题。",
-      "line_count": 217,
+      "line_count": 221,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -50431,7 +50475,7 @@
       "layer": "L6",
       "title": "Cargo build-std",
       "positioning": "",
-      "line_count": 379,
+      "line_count": 380,
       "theorem_chains": [
         {
           "text": "| 源码构建 std ⟹ 自定义目标支持 | 编译目标平台未预编译的标准库 | 支持新硬件与操作系统 |",
@@ -51549,7 +51593,7 @@
       "layer": "L6",
       "title": "Rust 系统设计原则与国际权威对齐",
       "positioning": "本文件从**系统架构设计**视角梳理 Rust 的核心设计原则，并与国际权威内容（形式化方法、分布式系统理论、安全工程、容错计算）建立对齐关系。",
-      "line_count": 828,
+      "line_count": 833,
       "theorem_chains": [
         {
           "text": "| Rust 系统设计原则与国际权威对齐 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -56563,7 +56607,7 @@
       "layer": "L6",
       "title": "Embedded-HAL 1.0 迁移与 Embassy 生产状态",
       "positioning": "",
-      "line_count": 329,
+      "line_count": 330,
       "theorem_chains": [
         {
           "text": "| 稳定 HAL API ⟹ 生态可移植性 | 统一硬件抽象接口 | 驱动与板级支持代码复用性提升 |",
@@ -56649,7 +56693,7 @@
       "layer": "L6",
       "title": "Target Tier 平台支持全景：分层保证与 1.90–1.97 变迁",
       "positioning": "",
-      "line_count": 143,
+      "line_count": 145,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60205,7 +60249,7 @@
       "layer": "L6",
       "title": "Rust 游戏开发（已合并）",
       "positioning": "",
-      "line_count": 17,
+      "line_count": 19,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -62085,7 +62129,7 @@
       "layer": "L6",
       "title": "安全关键 Rust 专题索引",
       "positioning": "本文件为 `concept/` 侧的**摘要+链接型导航页**（AGENTS.md §2.1 第 3 条：content/ 专题权威页需在 concept/ 建索引入口）。专题深度内容以 [`content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md`](../../../content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md) 为权威入口；通用概念解释以 `concept/` 相关权威页为准。本页不复制任何正文。",
-      "line_count": 43,
+      "line_count": 45,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -62843,7 +62887,7 @@
       "layer": "L6",
       "title": "测验：网络与异步生态（L6）",
       "positioning": "验证学习者对 L6 网络与异步子领域生态格局（框架、运行时（Runtime）、协议）的掌握。",
-      "line_count": 334,
+      "line_count": 335,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -62895,7 +62939,7 @@
       "layer": "L6",
       "title": "测验：数据库与存储生态（L6）",
       "positioning": "验证学习者对 L6 数据与分布式子领域（访问层选型 + Rust 原生数据库系统）的掌握。",
-      "line_count": 316,
+      "line_count": 317,
       "theorem_chains": [
         {
           "text": "**解析**：按 [因果序与向量时钟](../06_data_and_distributed/09_causal_ordering_vector_clocks.md)：向量时钟每进程维护 N 维向量、本地事件自增、消息携带并逐分量取 max（A）；两时钟逐分量比较互有大小即判定并发（B）；D 正确——向量时钟精确刻画 Lamport 1978 定义的 happens-before 偏序，标量时钟只能保持\"因果 ⟹ 序号小\"的单向蕴含。C 错：标量时钟无法区分并发与因果，表达能力严格弱于向量时钟。",
@@ -62956,7 +63000,7 @@
       "layer": "L6",
       "title": "测验：安全与测试生态（L6）",
       "positioning": "验证学习者对 L6 安全/密码学与测试质量子领域的掌握（密码学原则、供应链审计、分层测试）。",
-      "line_count": 325,
+      "line_count": 326,
       "theorem_chains": [
         {
           "text": "| B | 复现用例 ⟹ 修复 ⟹ 回归测试固化；再用 cargo-fuzz 对解析面做持续模糊测试，并把解析器纳入 proptest 性质测试（如深度限制/往返序列化） |",
@@ -63002,7 +63046,7 @@
       "layer": "L6",
       "title": "测验：领域应用生态（L6）",
       "positioning": "验证学习者对 L6 领域应用子领域（区块链、Wasm、游戏、ML、安全关键、量子、算法竞赛）生态格局与选型的掌握。",
-      "line_count": 335,
+      "line_count": 336,
       "theorem_chains": [
         {
           "text": "**解析**：权威页的漏洞对照表：所有权（Ownership） + `&mut` 独占访问 ⟹ 重入攻击在编译期不可表达；`u64`/`u128` 默认 overflow panic + `checked_add` 显式处理 ⟹ 整数溢出显式化；`Option<T>` + 编译期初始化检查 ⟹ 不存在未初始化存储指针。核心洞察是\"让整类漏洞在编译期成为不可类型化的程序\"。A 是 Solidity 的运行时路线；D 与区块链确定性执行要求矛盾（无 GC 才保证确定性）。",
@@ -68423,7 +68467,7 @@
       "layer": "L7",
       "title": "Const Trait 实现预览",
       "positioning": "",
-      "line_count": 13,
+      "line_count": 15,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -71128,7 +71172,7 @@
       "layer": "L7",
       "title": "测验：版本演进、Edition 机制与前沿特性（L7）",
       "positioning": "验证学习者对 Rust 版本治理机制（发布火车、Edition）、1.90–1.97 稳定特性谱系与前沿特性状态语义的掌握。",
-      "line_count": 354,
+      "line_count": 355,
       "theorem_chains": [],
       "anti_propositions": [
         {

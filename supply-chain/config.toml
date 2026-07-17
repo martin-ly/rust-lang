@@ -726,6 +726,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.cfg_aliases]]
+version = "0.2.2"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-17 cargo update 补丁升级（borsh 1.8.0 新增传递依赖）；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.cgl]]
 version = "0.3.2"
 criteria = "safe-to-run"
@@ -4051,10 +4057,10 @@ suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.tokio]]
-version = "1.52.3"
+version = "1.52.4"
 criteria = "safe-to-run"
 suggest = false
-notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+notes = "2026-07-17 cargo update 补丁升级 (1.52.3 -> 1.52.4)；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.tokio-macros]]
 version = "2.7.0"

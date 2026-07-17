@@ -51,6 +51,8 @@ graph TD
 
 - `00_`–`05_` 为常规编号子目录。
 - `06_trpl_3rd_ed_mapping.md` 原与 `01_terminology/` 同号，已迁移到空号 `06_`，避免重复。
+- `07_trpl_3rd_edition_alignment.md` 为 TRPL 第 3 版对照审计页，使用 `07_` 前缀。
+- `08_usability_testing_framework.md` 为知识库可用性测试框架页，使用 `08_` 前缀。
 - `07_placeholders/` 由未编号目录重命名而来，保持目录内连续序号。
 - `knowledge_topology/` 是**大型无序号专题系列目录**，内部已按 `01_`–`10_` 编号，并附 [README 索引](knowledge_topology/README.md)；按 AGENTS.md §4.0-4 保留为无序号系列目录，不再额外赋予顶层序号。
 - `00_framework/` 同样为注册的无序号专题系列目录，其文件保持无序号以兼容系列约定。

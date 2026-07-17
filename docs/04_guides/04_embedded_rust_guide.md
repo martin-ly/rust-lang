@@ -1,7 +1,7 @@
 # 嵌入式 Rust 指南：Embassy vs RTIC (Embassy vs RTIC) {#嵌入式-rust-指南embassy-vs-rtic}
 
 > **EN**: Embassy vs RTIC
-> **Summary**: 嵌入式 Rust 指南 Embassy vs RTIC. 
+> **Summary**: 嵌入式 Rust 指南 Embassy vs RTIC.
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **分级**: [A]
