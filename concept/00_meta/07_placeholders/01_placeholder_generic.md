@@ -20,3 +20,5 @@
 > - [模式语义空间索引](../00_framework/pattern_semantic_space_index.md)
 >
 > 欢迎参考 [Concept Audit Guide](../03_audit/01_concept_audit_guide.md) 创建本主题。
+> **受众**: [初学者]
+> **内容分级**: [综述级]

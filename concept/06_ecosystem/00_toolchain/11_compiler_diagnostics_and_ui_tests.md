@@ -6,7 +6,7 @@
 > **EN**: Compiler Diagnostics and UI Tests
 > **Summary**: Explains the structure of rustc diagnostics, how lints are defined and emitted, and how UI tests in compiletest verify compiler output.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **受众**: [专家 / 研究者]
+> **受众**: [专家]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **F** — Formal

@@ -8,7 +8,7 @@
 > **EN**: Async Cancellation Safety
 > **Summary**: Dropping a Rust future cancels it at its current await point; an operation is cancellation safe iff aborting at any suspension point never loses data or leaves inconsistent state—this page formalizes that property and maps it onto Tokio's API surface.
 >
-> **受众**: [进阶-专家]
+> **受众**: [进阶]
 > **Bloom 层级**: L3
 > **权威来源**: 本文件为 `concept/` 权威页。`01_async.md` §8.7、`02_async_advanced.md` 与 `03_async_patterns.md` §2.2/§10.2 中的取消安全讨论均为摘要，以本页为准。
 > **A/S/P 标记**: **S** — Structure

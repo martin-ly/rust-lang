@@ -7,7 +7,7 @@
 > **Summary**: A panorama of the semantic boundaries of unsafe Rust: the UB taxonomy boundary, the Stacked/Tree Borrows aliasing-model boundary, the Miri detectable-vs-undetectable boundary, the safety-vs-validity invariant contract boundary, and the FFI layout contract boundary — each with boundary statements, counterexamples, and quantitative decision conditions.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **受众**: [进阶-专家]
+> **受众**: [进阶]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页（unsafe 边界全景视角）。
 > **定位**: 从 [Unsafe Rust](01_unsafe.md) 中抽离**边界视角**：不做 unsafe 概念推导，只回答五类边界问题——什么算 UB、别名模型管到哪、Miri 能查到什么、安全抽象的契约划在哪、FFI 布局契约何时成立。每一节给出**边界陈述 → 反例 → 判定条件**三段式。

@@ -6,7 +6,7 @@
 > **Summary**: A formal deep-dive into algebraic effects (operations, handlers, continuations, delimited control), comparing Rust's keyword-based effect system with full handlers in OCaml 5, Koka, and Eff, and explaining why Rust stops short of general effect handlers.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家]
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 > **Bloom 层级**: L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+A** — Structure + Application

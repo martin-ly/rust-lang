@@ -50,6 +50,7 @@ python scripts/check_stub_purity.py --strict
 ```
 
 结果：
+
 - 伪 stub：0
 - 空壳页：0
 - 高重复正文：0
@@ -66,20 +67,21 @@ python scripts/check_kg_relation_precision.py --strict
 ```
 
 结果：
+
 - `kg_data_v3.json`：**540 entities / 8410 relations**
 - `KG SHACL`: K1–K7 全 0
 - `KG Relation Precision`: global **0.00%**, core **0.00%**
-- `ex:relatedTo` 剩余 **854** 条（约 10.2%），主要为同层跨目录弱语义关联
+- `ex:relatedTo` 剩余 **834** 条（约 9.9%），主要为同层跨目录弱语义关联
 - 关系表示一致性：`@type` 与 `ex:predicate` 完全同步，mismatch=0
 
 当前谓词分布：
 
 | 谓词 | 数量 |
 |---|---:|
-| `ex:hasPart` | 3663 |
-| `ex:dependsOn` | 1687 |
-| `ex:entails` | 1226 |
-| `ex:relatedTo` | 854 |
+| `ex:hasPart` | 3696 |
+| `ex:dependsOn` | 1677 |
+| `ex:entails` | 1223 |
+| `ex:relatedTo` | 834 |
 | `ex:partOf` | 430 |
 | `ex:refines` | 429 |
 | `ex:appliesTo` | 121 |
@@ -114,7 +116,7 @@ python scripts/check_version_semantic_injection.py --strict
 bash scripts/run_quality_gates.sh
 ```
 
-**日志**: `tmp/quality_gates_final_v11_web_updates_2026_07_16.log`  
+**日志**: `tmp/quality_gates_final_v11_web_updates_2026_07_16.log`
 **结果**: ✅ **All 23 blocking + 5 semantic observe gates passed**
 
 | 门 | 状态 | 关键指标 |
@@ -142,10 +144,10 @@ bash scripts/run_quality_gates.sh
 
 1. **KG 关系表示一致性 bug 已修复**：`compress_kg_relatedto.py` 与 `fallback_kg_generic_to_related.py` 此前只更新 `@type` 而未同步 `ex:predicate`，导致 5838 条关系二者不一致；已修复并重新跑通 KG 流水线，`@type` 与 `ex:predicate` 现在完全一致。
 2. **新增 meta 组织者启发式（H14/H15）**：`00_meta/00_framework` 与 `00_meta/knowledge_topology` 页面与其余 00_meta 子系统页面之间的关系按 `hasPart` / `partOf` 压缩，使 `ex:relatedTo` 从 1003 条降至 916 条。
-3. **新增根导航启发式（H0）**：`SUMMARY.md` / `README.md` 作为全书根导航，其所有出边统一压缩为 `ex:hasPart`，使 `ex:relatedTo` 从 916 条进一步降至 **854 条**。
-4. **剩余 854 条 `ex:relatedTo`**：主要为同层跨目录概念页之间的弱语义关联（`06_ecosystem`、`01_foundation`、`03_advanced` 等同层跨子域），已无法通过安全启发式自动压缩，需未来通过 atlas 符号或人工策展继续迁移到更强谓词。
-4. **生态跟踪**：wgpu 25.x、openraft 0.10 alpha 线已在对应 concept/ 页更新；后续需在新版本发布时回查。
-5. **workflow/statecharts**：`15_state_machine_semantics.md`（L3-L4）与 `17_workflow_theory.md`（L6）职责划分已建立，无需额外拆分。
+3. **新增根导航启发式（H0）**：`SUMMARY.md` / `README.md` 作为全书根导航，其所有出边统一压缩为 `ex:hasPart`；进一步扩展 H0 到所有子目录的 `README.md`，使 `ex:relatedTo` 从 916 条降至 **834 条**。
+4. **剩余 834 条 `ex:relatedTo`**：主要为同层跨目录概念页之间的弱语义关联（`06_ecosystem`、`01_foundation`、`03_advanced` 等同层跨子域），已无法通过安全启发式自动压缩，需未来通过 atlas 符号或人工策展继续迁移到更强谓词。
+5. **生态跟踪**：wgpu 25.x、openraft 0.10 alpha 线已在对应 concept/ 页更新；后续需在新版本发布时回查。
+6. **workflow/statecharts**：`15_state_machine_semantics.md`（L3-L4）与 `17_workflow_theory.md`（L6）职责划分已建立，无需额外拆分。
 
 ## 9. 结论
 
@@ -153,5 +155,5 @@ bash scripts/run_quality_gates.sh
 
 ---
 
-*报告生成: 2026-07-16*  
+*报告生成: 2026-07-16*
 *对应 sprint 报告: `reports/SEMANTIC_MODEL_ALIGNMENT_PROGRESS_2026_07_16.md`*

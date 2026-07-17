@@ -5,7 +5,7 @@
 > **EN**: Async Trait Object Safety
 > **Summary**: The complete solution spectrum for dyn-compatible async traits: the `async_trait` macro (Box allocation per call, single-thread variant), return type notation (RTN, nightly-only), RPITIT (stable since 1.75 but dyn-incompatible), hand-written boxed futures, and the future of native `async fn` in `dyn Trait` — with a scenario × solution × overhead × MSRV selection matrix.
 >
-> **受众**: [进阶-专家]
+> **受众**: [进阶]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页（async trait 对象安全**解决方案谱系**视角，自 [Async 边界全景 §9](06_async_boundary_panorama.md#九边界六async-trait-与-dyn-兼容边界) 升格）。
 > **分工声明**: 「RPITIT 使 trait 非 dyn 兼容」的**边界陈述与反例**（三段式）保留在 [Async 边界全景 §9](06_async_boundary_panorama.md)（该节已摘要化并回链本页）；trait 对象安全的一般理论（vtable、auto trait、关联类型规则）属于 [Traits](../../02_intermediate/00_traits/01_traits.md)。本页只做**解决方案谱系 + 选型矩阵 + 演进跟踪**，不重复边界推导与一般对象安全理论（AGENTS.md §2 Canonical 规则）。

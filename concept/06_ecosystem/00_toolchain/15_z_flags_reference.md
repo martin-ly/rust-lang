@@ -161,6 +161,8 @@ no_std / 自定义 target 构建 std    → cargo -Z build-std
 > | [Cargo — Unstable Features](https://doc.rust-lang.org/nightly/cargo/reference/unstable.html) | ✅ 一级 | Cargo 侧 `-Z`（build-std/build-analysis/public-dependency 等） |
 > | [rustc-dev-guide — How to build and run](https://rustc-dev-guide.rust-lang.org/building/how-to-build-and-run.html) | ✅ 一级 | 编译器开发场景下 `-Z` 的使用上下文 |
 > | [measureme](https://github.com/rust-lang/measureme) | ✅ 二级 | self-profile 数据分析工具链 |
+> **受众**: [进阶]
+> **内容分级**: [综述级]
 
 ## ⚠️ 反例与陷阱
 

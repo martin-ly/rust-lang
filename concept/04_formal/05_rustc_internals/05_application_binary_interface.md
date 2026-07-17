@@ -1,4 +1,4 @@
-> **内容分级**: [研究级]
+> **内容分级**: [研究者级]
 >
 # Application Binary Interface（ABI）
 

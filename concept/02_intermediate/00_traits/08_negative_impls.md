@@ -3,9 +3,9 @@
 > **EN**: Negative Impls
 > **Summary**: Negative impls (`impl !Trait for Type`) explicitly declare that a type will never implement a trait, used primarily for auto traits like `Send`, `Sync`, and `Unpin`; as of Rust 1.97.0, user-written negative impls remain unstable behind the `negative_impls` feature gate.
 >
-> **受众**: [进阶] / [专家]
+> **受众**: [专家]
 > **Bloom 层级**: L3-L4
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-07-16

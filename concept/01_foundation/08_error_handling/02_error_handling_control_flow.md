@@ -1,11 +1,11 @@
-> **内容分级**: [入门实践级]
+> **内容分级**: [综述级]
 
 # 错误处理控制流（Error Handling Control Flow）
 >
 > **EN**: Error Handling Control Flow
 > **Summary**: Error-handling patterns in Rust control flow: the `?` operator, `Try`/`FromResidual`, `try` blocks, custom error types with `thiserror`, and decision guidance for choosing between `?`, `match`, `unwrap`, `expect`, and `panic`.
 >
-> **受众**: [初学者] / [进阶]
+> **受众**: [初学者]
 > **层级**: L1 基础概念
 > **Bloom 层级**: L1-L3
 > **Rust 版本**: 1.97.0+ (Edition 2024)

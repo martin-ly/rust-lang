@@ -4,7 +4,7 @@
 > **Summary**: Guidelines for reducing boilerplate repetition across `concept/` files while preserving the bilingual header and core pedagogical structure.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
-> **受众**: [贡献者]
+> **受众**: [初学者]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L0 元信息
 > **A/S/P 标记**: M — Meta
@@ -12,6 +12,7 @@
 > **前置概念**: [Bilingual Template](../01_terminology/03_bilingual_template.md) · [Concept Consistency Audit Checklist](04_concept_consistency_audit_checklist.md)
 > **后置概念**: [Quality Dashboard](07_quality_dashboard_v2.md)
 > **主要来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RFCs](https://github.com/rust-lang/rfcs)
+> **内容分级**: [综述级]
 ---
 
 ## 一、目标

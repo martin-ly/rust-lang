@@ -6,7 +6,7 @@
 > **Summary**: Rust 语法中运算符与各类符号的速查参考，包括可重载运算符对应的 trait、路径/泛型/trait bound/宏（Macro）/注释/括号等上下文中的符号含义。 Quick reference of Rust operators and symbols, including overloadable traits and meanings in paths, generics, trait bounds, macros, comments, and brackets.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
-> **受众**: [初学者] / [中级]
+> **受众**: [初学者]
 > **Bloom 层级**: L1-L2
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification / Language syntax

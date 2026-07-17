@@ -8,7 +8,7 @@
 > **Bloom 层级**: L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **受众**: [专家]
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 > **前置概念**: [Linearizability](./02_linearizability_and_consistency.md) · [Process Calculi](./01_process_calculi_for_rust.md) · [Actor Semantics](./03_actor_semantics.md)
 > **后置概念**: [Distributed Consensus Ecosystem](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) · [CRDTs](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md) · [Causal Ordering](../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md)
 

@@ -6,7 +6,7 @@
 > **Summary**: Frontier topics in Rust design patterns: effect systems, algebraic effects, advanced session types, linear types, capability-based security, dependent types, quantum computing patterns, and future directions.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
-> **内容分级**: [研究级]
+> **内容分级**: [研究者级]
 > **Bloom 层级**: L4-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+A** — Structure + Application

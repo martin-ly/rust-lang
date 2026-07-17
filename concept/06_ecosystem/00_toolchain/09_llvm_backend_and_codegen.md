@@ -6,7 +6,7 @@
 > **EN**: LLVM Backend and Code Generation in rustc
 > **Summary**: Explains how rustc lowers MIR to LLVM IR, forms codegen units, uses target specifications, and performs LTO; also covers alternative backends like Cranelift and GCC.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **受众**: [专家 / 研究者]
+> **受众**: [专家]
 > **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **F** — Formal

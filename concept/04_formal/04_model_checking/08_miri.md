@@ -5,7 +5,7 @@
 > **EN**: Miri: Rust Undefined Behavior Detector
 > **Summary**: Miri is Rust's official MIR interpreter for detecting undefined behavior in unsafe and safe Rust code. Covers installation, common UB classes, Stacked Borrows vs Tree Borrows, and integration with existing crate tests.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **受众**: [进阶 / 工程 / 形式化]
+> **受众**: [研究者]
 > **内容分级**: [综述级]
 > **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -52,6 +52,7 @@
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
     - [反例：不同尺寸类型间 `transmute`（rustc 1.97.0 实测）](#反例不同尺寸类型间-transmuterustc-1970-实测)
     - [✅ 修正：`to_ne_bytes` 显式字节化](#-修正to_ne_bytes-显式字节化)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
 

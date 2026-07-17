@@ -8,3 +8,5 @@
 > **权威来源**: [docs/02_learning/09_learning_mvp_path.md](../../docs/02_learning/09_learning_mvp_path.md)
 >
 > 本文件为占位重定向页。TRPL 3rd Ed 逐章到 `concept/` 权威页的完整映射表内容已迁移至 `docs/02_learning/09_learning_mvp_path.md`，请前往该文件查看。
+> **受众**: [初学者]
+> **内容分级**: [综述级]

@@ -6,7 +6,7 @@
 > **Summary**: The formal semantics of Software Transactional Memory — the lineage from Herlihy-Moss 1993 hardware TM and Shavit-Touitou 1995 to Harris et al.'s composable transactions; the correctness spectrum from serializability through opacity to TMS2; retry/orElse composability; lock-based vs obstruction-free implementations — and a principled analysis of why Rust has no native STM, with its ownership-based alternatives and the limits of the `stm` crate.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家]
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 > **Bloom 层级**: L4
 > **权威来源**: 本文件为 `concept/` 权威页：STM 形式语义与 Rust「无 STM」设计分析的唯一深度解释。
 > **A/S/P 标记**: **S+A** — Structure + Application

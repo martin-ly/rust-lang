@@ -5,8 +5,8 @@
 > **EN**: Five Execution Models Definition Matrix
 > **Summary**: A one-page definition matrix of the five execution models (synchronous, concurrent, parallel, asynchronous, distributed) cross-referenced by definition, formal root, Rust vehicle, canonical primitives, failure modes, and links to their authoritative pages — plus a selection decision tree.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **受众**: [初学者 / 进阶]
-> **内容分级**: [导航级]
+> **受众**: [进阶]
+> **内容分级**: [综述级]
 > **Bloom 层级**: L2-L5
 > **权威来源**: 本文件为 `concept/` 权威页（导航型）：五模型定义矩阵的唯一一页式入口；**各模型的概念正文以各自权威页为准，本页不复制正文**（AGENTS.md §2 Canonical 规则）。
 > **A/S/P 标记**: **S** — Structure

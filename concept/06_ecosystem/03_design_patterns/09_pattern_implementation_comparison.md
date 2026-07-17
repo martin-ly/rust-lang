@@ -6,7 +6,7 @@
 > **Summary**: Compares different implementation strategies for design patterns in Rust: trait objects vs generics, sync vs async, static vs dynamic dispatch, single vs multi-threaded, zero-cost vs runtime abstraction, and ownership models.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 > **Bloom 层级**: L4-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+A** — Structure + Application

@@ -230,9 +230,12 @@ impl Drop for CallbackHandle {
 
 高级 FFI 的三个技术细节，处理「复杂类型、线程、错误」的跨边界契约：
 
-- **复杂类型映射**：字符串（`CString`/`CStr`——Rust 拥有缓冲区，C 侧只借 `as_ptr`，注意 NUL 结尾与内 NUL 校验）、数组与切片（Slice）（传「指针 + 长度」对，Rust 侧 `[T]` 的胖指针不能直接传 C）、回调表/虚表（C 的 `struct` 函数字段 ↔ Rust `#[repr(C)] struct { f: Option<extern "C" fn(...)> }`，函数字段用 `Option` 表达可空）、位域（`#[repr(C)]` 不直接支持——用整数字段 + 位运算封装，或 `bindgen` 生成访问器）。通则：FFI 边界只过「布局平凡」（plain old data）类型，语义丰富的 Rust 类型（`String`、`Vec`、`Result`）一律在边界拆成「指针 + 长度 + 错误码」三件套。
+- **复杂类型映射**：
+- 字符串（`CString`/`CStr`——Rust 拥有缓冲区，C 侧只借 `as_ptr`，注意 NUL 结尾与内 NUL 校验）、数组与切片（Slice）（传「指针 + 长度」对，Rust 侧 `[T]` 的胖指针不能直接传 C）、回调表/虚表（C 的 `struct` 函数字段 ↔ Rust `#[repr(C)] struct { f: Option<extern "C" fn(...)> }`，函数字段用 `Option` 表达可空）、位域（`#[repr(C)]` 不直接支持——用整数字段 + 位运算封装，或 `bindgen` 生成访问器）。
+- 通则：FFI 边界只过「布局平凡」（plain old data）类型，语义丰富的 Rust 类型（`String`、`Vec`、`Result`）一律在边界拆成「指针 + 长度 + 错误码」三件套。
 - **线程安全边界**：C 库的线程模型声明（thread-safe / 需外部同步 / 单线程）必须映射为 Rust 侧类型的 `Send`/`Sync`——线程安全的 C 句柄类型可 `unsafe impl Send + Sync`（附文档论证）；非线程安全的用 `PhantomData<*mut ()>` 显式 `!Sync`，把同步责任留在类型层。混线的典型事故：把单线程 C 库的句柄 `unsafe impl Sync` 塞进 `Arc` 全局共享。
-- **错误处理与 Panic 安全**：C 的错误约定（返回值、errno、错误回调）在 Rust 侧统一映射为 `Result`——封装层每次 FFI 调用后立即 `if ret != 0 { return Err(...) }`，`errno` 用 `std::io::Error::last_os_error()` 捕获（注意「先检查再调用其他可能改 errno 的函数」）。Rust 回调进 C 的路径必须 `catch_unwind` 并转换为 C 可理解的错误码——「panic 不出 Rust 边界」是高级 FFI 的硬性验收项。
+- **错误处理与 Panic 安全**：C 的错误约定（返回值、errno、错误回调）在 Rust 侧统一映射为 `Result`——封装层每次 FFI 调用后立即 `if ret != 0 { return Err(...) }`，`errno` 用 `std::io::Error::last_os_error()` 捕获（注意「先检查再调用其他可能改 errno 的函数」）。
+- Rust 回调进 C 的路径必须 `catch_unwind` 并转换为 C 可理解的错误码——「panic 不出 Rust 边界」是高级 FFI 的硬性验收项。
 
 判定一个高级 FFI 封装的完备性：复杂类型全走 POD 三件套、`Send`/`Sync` 标注与 C 线程文档一一对应、每个 FFI 调用点有错误映射、每个回调有 `catch_unwind`——四项清单即本节后续示例的评审基线。
 
@@ -435,7 +438,10 @@ Opaque 指针:
 
 本节检验高级 FFI 的两条致命误判：
 
-- **反命题 1：「`Box::into_raw` 的指针可以传给任何 C free」** —— 致命错误。Rust 分配器的内存必须由 **Rust 分配器**释放（`Box::from_raw` 后 drop）——混用 C 的 `free()` 与 Rust 全局分配器是堆损坏（Windows 上不同 CRT 堆、jemalloc/mimalloc 替换分配器时尤其确定崩溃）。跨边界的内存释放规则：**谁分配谁释放**，要么提供 `rust_free` 导出函数让 C 回调，要么用 `libc::malloc` 统一分配方；
+- **反命题 1：
+- 「`Box::into_raw` 的指针可以传给任何 C free」** —— 致命错误。
+- Rust 分配器的内存必须由 **Rust 分配器**释放（`Box::from_raw` 后 drop）——混用 C 的 `free()` 与 Rust 全局分配器是堆损坏（Windows 上不同 CRT 堆、jemalloc/mimalloc 替换分配器时尤其确定崩溃）。
+- 跨边界的内存释放规则：**谁分配谁释放**，要么提供 `rust_free` 导出函数让 C 回调，要么用 `libc::malloc` 统一分配方；
 - **反命题 2：「可变 static 在 FFI 中方便且可用」** —— 危险。`static mut` 的每次访问都是 `unsafe`，FFI 回调与 Rust 线程并发访问即数据竞争 UB——正确替代是 `AtomicXxx`（标志/计数）、`OnceLock`/`LazyLock`（一次性初始化）、或 `Mutex`（复合状态）。
 
 边界极限小节量化：C 变长参数（`...`）的类型提升规则、回调函数的生命周期管理（注册/注销配对）、以及 unwind 跨 FFI 边界的 `extern "C-unwind"` 语义。
@@ -764,7 +770,10 @@ fn main() {
 }
 ```
 
-> **修正**: C 的 `long double` 是平台相关的浮点类型：x86 上 80 位扩展精度（16 字节对齐），ARM 上 128 位四精度，某些平台上与 `double` 相同。Rust 标准库**无 `c_longdouble` 类型**，`libc` crate 提供平台特定的定义。FFI 中使用 `long double` 需：1) 查询目标平台的 `sizeof(long double)`；2) 使用 `libc::c_longdouble`（若可用）；3) 或避免在 FFI 边界使用 `long double`（改为 `double` 或自定义结构）。这与 C++ 的 `long double`（原生支持）或 Go 的 `C.longdouble`（通过 cgo 支持）不同——Rust 的 FFI 设计优先覆盖常见场景，`long double` 的边缘情况需额外处理。[来源: [libc Crate](https://docs.rs/libc/)] · [来源: [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/)]
+> **修正**: C 的 `long double` 是平台相关的浮点类型：x86 上 80 位扩展精度（16 字节对齐），ARM 上 128 位四精度，某些平台上与 `double` 相同。
+> Rust 标准库**无 `c_longdouble` 类型**，`libc` crate 提供平台特定的定义。FFI 中使用 `long double` 需：1) 查询目标平台的 `sizeof(long double)`；2) 使用 `libc::c_longdouble`（若可用）；3) 或避免在 FFI 边界使用 `long double`（改为 `double` 或自定义结构）。
+> 这与 C++ 的 `long double`（原生支持）或 Go 的 `C.longdouble`（通过 cgo 支持）不同——Rust 的 FFI 设计优先覆盖常见场景，`long double` 的边缘情况需额外处理。
+> [来源: [libc Crate](https://docs.rs/libc/)] · [来源: [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/)]
 
 ### 10.3 边界测试：C 可变参数函数的不安全绑定（运行时 UB）
 

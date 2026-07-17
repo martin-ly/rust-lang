@@ -8,8 +8,8 @@
 > the prohibition on mixing `&&` and `||`, and equivalence to nested `if let` / `match`.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
-> **受众**: [进阶初学者]
-> **内容分级**: [核心概念]
+> **受众**: [初学者]
+> **内容分级**: [综述级]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification

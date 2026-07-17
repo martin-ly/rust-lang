@@ -5,7 +5,7 @@
 > **EN**: CRDT Type Zoo: State-based, Op-based, and the Merge Lattice
 > **Summary**: The CRDT spectrum — state-based CvRDTs with semilattice merges (G-Counter, PN-Counter, OR-Set, LWW-Register, MV-Register, RGA), op-based CmRDTs with commutative operations, the merge-lattice formalization, Rust implementations (rust-crdt, yrs, automerge-rs), and divergence counterexamples from non-commutative merges.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **受众**: [进阶 / 工程 / 研究者]
+> **受众**: [进阶]
 > **内容分级**: [专家级]
 > **Bloom 层级**: L4-L6
 > **权威来源**: 本文件为 `concept/` 权威页：CRDT 谱系与合并格形式化的唯一深度解释；[L3 谱系页](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) §5.3 保留导航式概览并链接回本页。

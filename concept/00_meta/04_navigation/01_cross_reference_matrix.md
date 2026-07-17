@@ -12,3 +12,5 @@
 ---
 
 > **相关文件**: [概念索引](03_concept_index.md) · [Bloom 分类法](../00_framework/bloom_taxonomy.md) · [学习指南](07_learning_guide.md) · [概念审计指南](../03_audit/01_concept_audit_guide.md) · [语义空间坐标系](../00_framework/semantic_space.md)
+> **受众**: [初学者]
+> **内容分级**: [综述级]

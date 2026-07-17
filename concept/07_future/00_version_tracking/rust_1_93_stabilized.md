@@ -2,9 +2,9 @@
 >
 > **EN**: Rust 1.93 Stabilized Features
 > **Summary**: Rust 1.93 stabilized features across MaybeUninit APIs, String/Vec raw parts, VecDeque conditional pop, slice array conversion, Duration nanoseconds, and formatting helpers.
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 >
-> **受众**: [进阶] / [专家]
+> **受众**: [专家]
 > **层级**: L2-L3 版本追踪（稳定化特性记录）
 > **Bloom 层级**: L2-L3
 > **Rust 版本**: 1.93.0+ (历史版本)

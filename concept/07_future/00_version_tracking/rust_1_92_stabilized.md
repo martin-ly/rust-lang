@@ -2,9 +2,9 @@
 >
 > **EN**: Rust 1.92 Stabilized Features
 > **Summary**: Rust 1.92 stabilized features across ownership/lifetimes, type system, and control flow, migrated from crate docs to the canonical version-tracking page.
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 >
-> **受众**: [进阶] / [专家]
+> **受众**: [专家]
 > **层级**: L2-L3 版本追踪（稳定化特性记录）
 > **Bloom 层级**: L2-L3
 > **Rust 版本**: 1.92.0+ (历史版本)

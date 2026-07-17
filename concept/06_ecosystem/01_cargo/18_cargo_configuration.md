@@ -1,6 +1,6 @@
 # Cargo 配置与环境变量（Cargo Configuration）
 
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 > **本节关键术语**: Configuration · Environment Variables · `.cargo/config.toml` · Credential Provider · `CARGO_*` — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 >
 > **EN**: Cargo Configuration

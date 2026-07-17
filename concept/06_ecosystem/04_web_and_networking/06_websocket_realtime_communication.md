@@ -1,7 +1,7 @@
 > **EN**: WebSocket Real-Time Communication
 > **Summary**: Authoritative concept page for `03 Websocket Realtime Communication`. Content migrated from `crates/c10_networks/docs/tier_02_guides/03_websocket_realtime_communication.md`.
 > **受众**: [进阶]
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 > **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure

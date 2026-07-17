@@ -3,7 +3,7 @@
 > **EN**: cargo vet and Supply-Chain Auditing
 > **Summary**: How cargo-vet (Mozilla) turns third-party dependency review into a shared, incremental audit workflow — audits.toml / config.toml / imports.lock mechanics, built-in criteria, importing public audit sets — plus cargo-audit for vulnerability tracking, demonstrated with this repository's own supply-chain/ directory and CI quality gate (`cargo vet --locked`).
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **受众**: [进阶 / 工程]
+> **受众**: [进阶]
 > **内容分级**: [专家级]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 中 **cargo vet / 供应链依赖审计机制**的权威页；通用供应链安全实践与 CVE 跟踪见 [Security Practices](01_security_practices.md)。

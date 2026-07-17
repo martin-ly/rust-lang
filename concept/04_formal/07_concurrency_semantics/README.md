@@ -58,3 +58,5 @@ L3 并发编程（mpsc/Atomic 工程用法）
 | [06_distributed_consensus_theory.md](06_distributed_consensus_theory.md) | FLP/CAP/PACELC 不可能性理论、Paxos/Raft/PBFT 不变量、所有权 ⟹ 共识实现安全 | FLP 1985 · Brewer 2000/2012 · Gilbert & Lynch 2002 · Lamport 1998/2001 · Ongaro & Ousterhout 2014 · Castro & Liskov 1999 |
 
 > **文档版本**: 1.2 ｜ **最后更新**: 2026-07-16 ｜ **状态**: ✅ 新增 05 STM 语义页、06 分布式共识理论页（Rust 1.97 对齐）
+> **受众**: [研究者]
+> **内容分级**: [研究者级]

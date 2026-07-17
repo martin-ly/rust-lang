@@ -5,7 +5,7 @@
 > **EN**: Linearizability and the Consistency Spectrum
 > **Summary**: Herlihy-Wing's formal definition of linearizability (histories, legal sequential reorderings, real-time order preservation), proof techniques (linearization points, invariants), the spectrum from sequential to eventual consistency with its CAP relation, and a linearization-point analysis of a Treiber stack in Rust.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **受众**: [进阶 / 研究者]
+> **受众**: [研究者]
 > **内容分级**: [专家级]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页：线性化形式定义与一致性（Coherence）谱系的唯一深度解释；[L3 谱系页](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) §6.2 仅保留导航式概览并链接回本页。

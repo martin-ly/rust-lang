@@ -3,9 +3,9 @@
 > **EN**: Let-Else: Early Return on Pattern Mismatch
 > **Summary**: `let-else` is a stable Rust construct that refutes an irrefutable `let` binding: it binds variables on match and diverges into an `else` block when the pattern does not match, enabling ergonomic early-return/error-exit code.
 >
-> **受众**: [进阶初学者] / [进阶]
+> **受众**: [进阶]
 > **Bloom 层级**: L2
-> **内容分级**: [核心概念]
+> **内容分级**: [综述级]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **Rust 版本**: 1.65.0+ stable
 > **最后更新**: 2026-07-16

@@ -5,7 +5,7 @@
 > **EN**: Causal Ordering and Vector Clocks
 > **Summary**: Lamport's 1978 partial order and logical clocks, the Fidge/Mattern vector clock algorithm, concurrency detection and its counterexamples, causal ordering in Rust distributed libraries (tracing, version vectors), and the contrast with shared-memory happens-before.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **受众**: [进阶 / 工程 / 研究者]
+> **受众**: [进阶]
 > **内容分级**: [专家级]
 > **Bloom 层级**: L4-L6
 > **权威来源**: 本文件为 `concept/` 权威页：分布式因果序、逻辑时钟与向量时钟的唯一深度解释。

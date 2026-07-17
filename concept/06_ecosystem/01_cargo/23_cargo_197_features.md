@@ -3,7 +3,7 @@
 > **EN**: Cargo 1.97 Feature Highlights
 > **Summary**: Systematic coverage of Cargo changes stabilized in Rust 1.97: `build.warnings` configuration, `resolver.lockfile-path`, the `-m` short flag for `--manifest-path`, `cargo clean` target-directory validation, and removal of the `curl` dependency from `crates-io`. All examples verified against local Cargo 1.97.0.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **受众**: [进阶 / 工程]
+> **受众**: [进阶]
 > **内容分级**: [专家级]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。

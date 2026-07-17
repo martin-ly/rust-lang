@@ -1,6 +1,6 @@
 # Cargo Manifest 目标与元数据（Cargo Manifest Targets）
 
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 > **本节关键术语**: Cargo Target · Lib Target · Bin Target · Test Target · Example Target · Bench Target · Rust Version · Package ID Specification — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 >
 > **EN**: Cargo Manifest Targets
@@ -17,7 +17,11 @@
 
 ---
 
-> **来源**: [Cargo Book — The Manifest Format](https://doc.rust-lang.org/cargo/reference/manifest.html) · [Cargo Book — Cargo Targets](https://doc.rust-lang.org/cargo/reference/cargo-targets.html) · [Cargo Book — Rust Version](https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field) · [Cargo Book — Package ID Specifications](https://doc.rust-lang.org/cargo/reference/pkgid-spec.html)
+> **来源**:
+> [Cargo Book — The Manifest Format](https://doc.rust-lang.org/cargo/reference/manifest.html) ·
+> [Cargo Book — Cargo Targets](https://doc.rust-lang.org/cargo/reference/cargo-targets.html) ·
+> [Cargo Book — Rust Version](https://doc.rust-lang.org/cargo/reference/manifest.html#the-rust-version-field) ·
+> [Cargo Book — Package ID Specifications](https://doc.rust-lang.org/cargo/reference/pkgid-spec.html)
 
 ---
 

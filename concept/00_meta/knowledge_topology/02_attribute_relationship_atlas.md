@@ -4,7 +4,7 @@
 > **Summary**: 概念属性矩阵：每个核心概念的必备/可选属性、内容分级、A/S/P、Bloom 层级、定理链。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
-> **内容分级**: [元层]
+> **内容分级**: [综述级]
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 
 ---

@@ -14,9 +14,15 @@
 > **层级**: L3 高级概念
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: P×Eva — 评判 unsafe 契约的充分性
-> **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md) · [Concurrency](../00_concurrency/01_concurrency.md)
+> **前置概念**:
+> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) ·
+> [Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md) ·
+> [Concurrency](../00_concurrency/01_concurrency.md)
 > **后置概念**: [FFI] · [Embedded] · [Custom Allocators]
-> **主要来源**: · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**:
+> · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [TRPL: Ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) ·
 > [Rust Reference: Unsafe Rust](https://doc.rust-lang.org/reference/introduction.html) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
@@ -27,7 +33,10 @@
 > [Rust Edition Guide 2024 — unsafe extern blocks](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-extern.html) ·
 > [Rust Edition Guide 2024 — unsafe attributes](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-attributes.html)
 >
-> **内容去重提示**: 本文是 Unsafe Rust 的 `concept/` 权威来源。[`knowledge/03_advanced/unsafe/03_unsafe_rust.md`](../../../knowledge/03_advanced/unsafe/03_unsafe_rust.md) 与 [`concept/03_advanced/02_unsafe/04_unsafe_rust_patterns.md`](04_unsafe_rust_patterns.md) 已重定向至本文件，相关内容已在本文件中统一维护。
+> **内容去重提示**:
+> 本文是 Unsafe Rust 的 `concept/` 权威来源。
+> [`knowledge/03_advanced/unsafe/03_unsafe_rust.md`](../../../knowledge/03_advanced/unsafe/03_unsafe_rust.md) 与
+> [`concept/03_advanced/02_unsafe/04_unsafe_rust_patterns.md`](04_unsafe_rust_patterns.md) 已重定向至本文件，相关内容已在本文件中统一维护。
 
 ---
 
@@ -287,7 +296,9 @@ Unsafe Rust = Safe Rust ∪ { 操作 O | O 需要人工证明安全性 }
 
 ### 2.2b Unsafe Code Guidelines 完整 UB 分类
 
-> **来源: [Rust Reference: Behavior considered undefined; The Rust Unsafe Code Guidelines (UCG) Book; Ralf Jung Blog](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)** Rust 的 UB 清单不是封闭的——随着编译器优化假设的演进，新的 UB 类别可能被加入。以下分类基于 Rust Reference 和 UCG 的最权威定义。
+> **来源: [Rust Reference: Behavior considered undefined;
+> The Rust Unsafe Code Guidelines (UCG) Book; Ralf Jung Blog](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)** Rust 的 UB 清单不是封闭的——随着编译器优化假设的演进，新的 UB 类别可能被加入。
+> 以下分类基于 Rust Reference 和 UCG 的最权威定义。
 > **来源: [Rust Reference: Behavior considered undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)** 内存访问类 UB 是最常见的未定义行为，Miri 检测覆盖率高。
 
 #### 内存访问类 UB

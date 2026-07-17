@@ -2,9 +2,9 @@
 
 > **EN**: Semantic Models and Cross-Language Comparisons Quiz
 > **Summary**: L3 standalone quiz on algebraic effects, dependent and refinement types, STM, distributed consensus, GPU/HPC compilation targets, and the unified language semantic model matrix spanning Rust vs Haskell/OCaml/Ada/SPARK/F#/D/Nim.
-> **受众**: [进阶/专家]
+> **受众**: [进阶]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **内容分级**: [测验]
+> **内容分级**: [专家级]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链

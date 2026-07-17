@@ -2,7 +2,7 @@
 > **Summary**: Authoritative concept page for `C12 WASM - 常见问题`. Content migrated from `crates/c12_wasm/docs/tier_01_foundations/04_faq.md`.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — Application + Procedure

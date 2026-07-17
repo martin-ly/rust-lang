@@ -6,8 +6,8 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L6
 > **权威来源**: 本文件为 `concept/` 权威页（Rust GPU 编程与 HPC 生态的唯一 consolidated 解释）。
-> **受众**: [进阶/专家]
-> **内容分级**: [参考级]
+> **受众**: [进阶]
+> **内容分级**: [综述级]
 > **A/S/P 标记**: **P** — Procedure（生态工程操作知识）
 > **本节关键术语**: SIMT · warp · workgroup · occupancy · divergence · device memory · WGSL · SPIR-V · PTX — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 > **前置概念**: [Systems and Embedded（嵌入式系统）](../05_systems_and_embedded/03_embedded_systems.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md)

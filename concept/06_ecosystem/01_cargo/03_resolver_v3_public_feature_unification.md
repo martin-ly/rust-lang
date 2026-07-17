@@ -1,4 +1,4 @@
-> **内容分级**: [实践级]
+> **内容分级**: [综述级]
 
 # Resolver v3 与 `public = true` 的 feature unification 演示
 

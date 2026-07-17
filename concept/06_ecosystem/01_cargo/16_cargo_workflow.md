@@ -1,6 +1,6 @@
 # Cargo 工作流（Cargo Workflow）
 
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 > **本节关键术语**: Package Layout · `Cargo.toml` · `Cargo.lock` · Workspace · Target Directory — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 >
 > **EN**: Cargo Workflow

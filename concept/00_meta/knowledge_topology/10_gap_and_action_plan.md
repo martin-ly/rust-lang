@@ -4,7 +4,7 @@
 > **Summary**: 基于拓扑抽取结果识别的当前缺口：来源覆盖、表征完整性、层间/层内映射、定义一致性。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
-> **内容分级**: [元层]
+> **内容分级**: [综述级]
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 
 ---

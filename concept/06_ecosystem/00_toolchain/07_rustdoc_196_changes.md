@@ -3,7 +3,7 @@
 > **EN**: Rustdoc 1.96–1.97 Changes
 > **Summary**: Rustdoc changes stabilized in Rust 1.96 (`target.'cfg(..)'.rustdocflags`, deprecation rendering, sidebar navigation, `missing_doc_code_examples` lint) and Rust 1.97 (`--emit` output control, `--remap-path-prefix` / `--remap-path-scope` path remapping). 1.97 items verified against local rustdoc 1.97.0.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-> **受众**: [进阶 / 工程]
+> **受众**: [进阶]
 > **内容分级**: [专家级]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。

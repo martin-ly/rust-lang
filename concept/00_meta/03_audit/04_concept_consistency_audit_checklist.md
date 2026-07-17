@@ -1,4 +1,4 @@
-> **内容分级**:
+> **内容分级**: [综述级]
 >
 > [专家级]
 
@@ -11,3 +11,4 @@
 > **来源**: [03_audit_checklist.md](03_audit_checklist.md)
 > **前往权威文件**: [概念一致性检查清单 — 03_audit_checklist.md](03_audit_checklist.md)
 > **权威来源**: 本文件为 `concept/` 权威页。
+> **受众**: [初学者]

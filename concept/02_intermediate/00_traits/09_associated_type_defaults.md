@@ -3,9 +3,9 @@
 > **EN**: Associated Type Defaults
 > **Summary**: Associated type defaults allow a trait definition to specify a default type for an associated type, which implementors can override; as of Rust 1.97.0, this feature remains unstable behind the `associated_type_defaults` feature gate.
 >
-> **受众**: [进阶] / [专家]
+> **受众**: [专家]
 > **Bloom 层级**: L3-L4
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **Rust 版本**: nightly only（1.97.0 stable 不支持）
 > **最后更新**: 2026-07-16

@@ -13,7 +13,12 @@
 > **基准版本**: Rust 1.97.0 stable (Edition 2024)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) ·
+> [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
+> [Cargo Book](https://doc.rust-lang.org/cargo/index.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **Bloom 层级**: L5-L6

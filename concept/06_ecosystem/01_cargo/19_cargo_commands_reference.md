@@ -1,6 +1,6 @@
 # Cargo 命令参考（Cargo Commands Reference）
 
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 > **本节关键术语**: cargo build · cargo test · cargo check · cargo run · cargo add · cargo publish — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 >
 > **EN**: Cargo Commands Reference

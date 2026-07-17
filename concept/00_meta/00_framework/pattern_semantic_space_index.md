@@ -191,6 +191,7 @@ flowchart TD
 ## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+> **内容分级**: [综述级]
 
 - **P0 官方**: [Rust Reference — Patterns（官方语言规范）](https://doc.rust-lang.org/reference/patterns.html)
 - **P1 学术/形式化**: [Hogan et al.: Knowledge Graphs (ACM Comput. Surv. 2021)](https://dl.acm.org/doi/10.1145/3447772)

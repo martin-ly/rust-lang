@@ -6,7 +6,7 @@
 > **EN**: Cargo Authentication and Build Cache
 > **Summary**: Explains Cargo's credential provider system, token storage options, registry authentication, and the layout of `CARGO_HOME`, target/build directories, dep-info files, and shared caches like sccache.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **受众**: [中级 → 高级]
+> **受众**: [进阶]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application

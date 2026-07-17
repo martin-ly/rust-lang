@@ -1,4 +1,4 @@
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 > **本节关键术语**: Manifest · `Cargo.toml` · `[package]` · `[dependencies]` · `[features]` · `[profile]` · `[workspace]` · `[lints]` · `[patch]` — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 >
 # Cargo Manifest 参考速查
@@ -6,7 +6,7 @@
 > **EN**: Cargo Manifest Reference
 > **Summary**: A comprehensive but concise reference of `Cargo.toml` sections and fields, aligned with the Cargo Book Manifest Format.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **受众**: [中级 → 高级]
+> **受众**: [进阶]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application

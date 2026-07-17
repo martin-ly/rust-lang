@@ -5,7 +5,7 @@
 > **EN**: Executor Fairness and Scheduling
 > **Summary**: Inside Tokio's work-stealing scheduler: local queues, the LIFO slot and its fairness trade-offs, starvation scenarios and their detection, the coop poll budget, a thread-per-core comparison with glommio, and practical methods for measuring scheduling latency.
 >
-> **受众**: [进阶-专家]
+> **受众**: [进阶]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页（executor 公平性与调度视角）。
 > **分工声明**: Future/poll/waker 协议与 executor 的**职责模型**留在 [Future 与 Executor 机制](04_future_and_executor_mechanisms.md)；[Async 边界全景](06_async_boundary_panorama.md) §7 只做 executor 契约的边界汇总。本页专攻**调度器内部**：work-stealing 队列结构、LIFO 槽的公平性权衡、饥饿的构造/检测/修复、coop 预算、与 glommio thread-per-core 的对比、调度延迟测量。互不重复（AGENTS.md §2 Canonical 规则）。

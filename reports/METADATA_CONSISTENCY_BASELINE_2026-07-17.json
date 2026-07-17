@@ -1,0 +1,89 @@
+{
+  "summary": {
+    "date": "2026-07-17",
+    "scanned": 541,
+    "counts": {
+      "D1": 0,
+      "D2": 0,
+      "D3": 0,
+      "D4": 0,
+      "D5": 0,
+      "D6": 6
+    },
+    "pct": {
+      "D1": 0.0,
+      "D2": 0.0,
+      "D3": 0.0,
+      "D4": 0.0,
+      "D5": 0.0,
+      "D6": 1.1
+    },
+    "D2_base_files_with_asp_and_bloom": 329,
+    "flagged_files": 6
+  },
+  "examples": {
+    "D1": [],
+    "D2": [],
+    "D3": [],
+    "D4": [],
+    "D5": [],
+    "D6": [
+      [
+        "concept/00_meta/02_sources/01_authority_source_map.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/00_meta/03_audit/01_concept_audit_guide.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/01_foundation/04_control_flow/03_let_chains.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/03_advanced/00_concurrency/04_send_sync_boundaries.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/07_future/00_version_tracking/rust_1_95_stabilized.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/07_future/02_preview_features/19_const_trait_preview.md",
+        "Summary 为空"
+      ]
+    ]
+  },
+  "per_file": {
+    "concept/00_meta/02_sources/01_authority_source_map.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/00_meta/03_audit/01_concept_audit_guide.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/01_foundation/04_control_flow/03_let_chains.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/03_advanced/00_concurrency/04_send_sync_boundaries.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/07_future/00_version_tracking/rust_1_95_stabilized.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/07_future/02_preview_features/19_const_trait_preview.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    }
+  }
+}

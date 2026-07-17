@@ -5,7 +5,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: [embedded-hal 1.0.0](https://github.com/rust-embedded/embedded-hal/releases/tag/embedded-hal-v1.0.0) · [Embassy 文档](https://embassy.dev/) · [Rust Embedded Working Group](https://github.com/rust-embedded/wg)
 >
-> **受众**: [进阶 / 工程]
+> **受众**: [进阶]
 > **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+S** — Application + Structure
@@ -326,3 +326,4 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「Embedded-HAL 1 0 迁移与」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+> **内容分级**: [综述级]

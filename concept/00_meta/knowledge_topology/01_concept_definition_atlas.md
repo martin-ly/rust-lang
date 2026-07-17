@@ -4,7 +4,7 @@
 > **Summary**: 全部核心概念的中英名称、层级、一句话定义、权威来源、同义/近义/反义关系。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
-> **内容分级**: [元层]
+> **内容分级**: [综述级]
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 
 ---

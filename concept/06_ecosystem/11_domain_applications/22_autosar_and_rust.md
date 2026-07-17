@@ -3,7 +3,7 @@
 > **EN**: AUTOSAR and Rust
 > **Summary**: AUTOSAR (Classic/Adaptive Platform) and its relationship with Rust: the WG-SAF Rust initiative (2022), the R23-11 "Explanation of ARA Applications in Rust" document, Rust ecosystem crates for AUTOSAR data formats and protocols, and the certified-toolchain path for AUTOSAR projects.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **受众**: [进阶 / 专家]
+> **受众**: [专家]
 > **内容分级**: [专家级]
 > **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 中 **AUTOSAR×Rust 概念**的权威页；汽车 ECU 工程案例见 [`content/safety_critical/`](../../../content/safety_critical/) 专题套件（canonical 分工：概念在本页，案例在 content）。

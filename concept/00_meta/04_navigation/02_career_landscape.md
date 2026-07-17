@@ -1,11 +1,11 @@
-> **内容分级**: [元层]
+> **内容分级**: [综述级]
 >
 # Rust 职业市场全景：2026 年数据与分析
 >
 > **EN**: Career Landscape
 > **Summary**: Career Landscape — A quantitative 2026 Rust job-market analysis: salary ranges, role distribution, skills, and regional differences.
 > **Rust 版本**: N/A（市场数据）
-> **受众**: [入门 → 进阶]
+> **受众**: [初学者]
 > **Bloom 层级**: L1-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application

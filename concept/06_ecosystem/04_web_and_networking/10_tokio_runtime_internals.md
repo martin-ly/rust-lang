@@ -5,7 +5,7 @@
 > **EN**: Tokio Runtime Internals
 > **Summary**: The authoritative deep-dive page for Tokio's runtime architecture: multi_thread vs current_thread flavors, the mio-backed I/O driver and time driver, the blocking thread pool (`spawn_blocking` semantics and the 512-thread default cap), JoinSet/JoinHandle/AbortHandle lifecycle semantics, LocalSet and `!Send` tasks, `tokio::select!` semantics (biased mode, drop of cancelled branches), and observability via RuntimeMetrics and tokio-console.
 >
-> **受众**: [进阶-专家]
+> **受众**: [进阶]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页（Tokio 机制深度视角）。
 > **分工声明**: Future/poll/waker 的协议层在 [Future 与 Executor 机制](../../03_advanced/01_async/04_future_and_executor_mechanisms.md)；调度公平性（LIFO 槽、coop 预算、饥饿分析）在 [Executor 公平性与调度](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md)；thread-per-core 替代模型在 [Glommio 与 Thread-per-Core](05_glommio_and_thread_per_core.md)；crate 选型矩阵在 [Core Crates](../02_core_crates/01_core_crates.md)。本页统一 Tokio **内部机制**（驱动/池/任务句柄/宏（Macro）语义/可观测性），不重复上述页面的推导（AGENTS.md §2 Canonical 规则）。

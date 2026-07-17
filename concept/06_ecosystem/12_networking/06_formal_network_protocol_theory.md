@@ -6,7 +6,7 @@
 > **EN**: Formal Network Protocol Theory
 > **Summary**: Modeling and verifying network protocols in Rust using finite state machines, invariants, model checking, process calculus, Petri nets, and phantom types to enforce protocol states at compile time.
 >
-> **受众**: [研究者 / 专家]
+> **受众**: [研究者]
 > **层级**: L6 生态工程
 > **Bloom 层级**: L4-L6
 > **A/S/P 标记**: **S+P** — Structure + Procedure

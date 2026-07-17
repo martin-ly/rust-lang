@@ -4,8 +4,8 @@
 > **Summary**: Rust 官方/社区推荐的开发工具：rustfmt、rustfix/cargo fix、Clippy、rust-analyzer，以及它们在日常开发中的典型用法。 Official and community recommended Rust development tools: rustfmt, rustfix/cargo fix, Clippy, rust-analyzer, and typical daily workflows.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
-> **受众**: [初学者] / [中级]
-> **内容分级**: [研究级]
+> **受众**: [初学者]
+> **内容分级**: [研究者级]
 > **Bloom 层级**: L1-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application

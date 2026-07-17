@@ -10,10 +10,10 @@
     "core_generic_ratio": 0.0,
     "core_lacking_semantic": 0,
     "global_predicate_distribution": {
-      "ex:hasPart": 3663,
-      "ex:dependsOn": 1687,
-      "ex:entails": 1226,
-      "ex:relatedTo": 854,
+      "ex:hasPart": 3696,
+      "ex:dependsOn": 1717,
+      "ex:entails": 1223,
+      "ex:relatedTo": 794,
       "ex:partOf": 430,
       "ex:refines": 429,
       "ex:appliesTo": 121

@@ -5,7 +5,7 @@
 > **EN**: Cargo 1.96 Feature Highlights
 > **Summary**: Systematic coverage of Cargo and toolchain changes stabilized in Rust 1.96: `pubtime` registry field, runtime `CARGO_BIN_EXE_<crate>`, TOML v1.1 support, nested subcommand manpages, and related security fixes.
 > **Rust 版本**: 1.96.0+ (Edition 2024)
-> **受众**: [进阶 / 工程]
+> **受众**: [进阶]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application

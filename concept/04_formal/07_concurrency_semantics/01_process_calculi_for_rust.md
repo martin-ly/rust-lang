@@ -5,7 +5,7 @@
 > **EN**: Process Calculi for Rust: CSP, CCS, and the Pi-Calculus
 > **Summary**: Formal skeletons of Hoare's CSP, Milner's CCS and the pi-calculus, and a precise correspondence map to Rust's mpsc channels, select! and thread::spawn — with explicit boundaries on where the correspondence stops short of isomorphism.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **受众**: [进阶 / 研究者]
+> **受众**: [研究者]
 > **内容分级**: [专家级]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页：进程代数形式骨架及其与 Rust 原语对应的唯一深度解释。

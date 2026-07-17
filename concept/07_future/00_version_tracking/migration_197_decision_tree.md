@@ -3,8 +3,8 @@
 > **EN**: Rust 1.97 Compatibility Migration Decision Trees
 > **Summary**: Executable decision trees that turn Rust 1.97.0's compatibility changes into "am I affected → root cause → concrete migration step" flows, covering five scenarios: empty `export_name`, the `f32: From<{float}>` future-compat lint, `pin!` blocking deref coercion (incl. async/self-referential impact), Windows `WSAESHUTDOWN`→`BrokenPipe`, and rejected generic arguments in module path segments — every leaf is an actionable fix rather than a jump link.
 
-> **受众**: [进阶] / [专家]
-> **内容分级**: [参考级] / [操作级]
+> **受众**: [专家]
+> **内容分级**: [综述级]
 > **权威来源**: 本文件为 `concept/` 权威页（Rust 1.97 兼容性**迁移判定**的唯一权威来源）。
 > **Rust 版本**: **1.97.0+ (Edition 2024)**
 > **Bloom 层级**: L3-L4（应用/分析：将版本变更映射到具体代码修复）

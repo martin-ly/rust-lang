@@ -248,6 +248,30 @@ def main() -> int:
                 rule = "H15-meta-subsystem-partOf-framework"
                 evidence = f"{subj_path} is a subsystem that is part of meta-framework/atlas {obj_path}"
 
+        # H17: 00_meta cross-subsystem references are dependency relations
+        # higher-level meta consumers (audit/navigation/mapping/placeholders/atlas)
+        # depend on lower-level meta infrastructure (framework/terminology/sources/quizzes)
+        META_INFRA_DIRS = {
+            "00_meta/00_framework",
+            "00_meta/01_terminology",
+            "00_meta/02_sources",
+            "00_meta/05_quizzes",
+        }
+        META_CONSUMER_DIRS = {
+            "00_meta/03_audit",
+            "00_meta/04_navigation",
+            "00_meta/06_trpl_3rd_ed_mapping",
+            "00_meta/07_placeholders",
+            "00_meta/knowledge_topology",
+        }
+        if new_type is None and subj_path and obj_path:
+            sd = "/".join(subj_path.split("/")[:2])
+            od = "/".join(obj_path.split("/")[:2])
+            if sd in META_CONSUMER_DIRS and od in META_INFRA_DIRS and sd != od:
+                new_type = "ex:dependsOn"
+                rule = "H17-meta-consumer-dependsOn-infra"
+                evidence = f"{subj_path} is a higher-level meta page that depends on meta infrastructure {obj_path}"
+
         if new_type:
             r["@type"] = new_type
             r["ex:predicate"] = new_type

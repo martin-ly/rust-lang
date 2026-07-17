@@ -1,4 +1,4 @@
-> **内容分级**: [基础级]
+> **内容分级**: [综述级]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **本节关键术语**: 静态项（Static Item） · 可变静态（Mutable Static） · 内部可变性（Interior Mutability） · 生命周期（Lifetime） · 延迟初始化（Lazy Initialization）
 

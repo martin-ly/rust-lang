@@ -19,7 +19,12 @@
 ---
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **来源**: [RFC 1598](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) · [Rust 1.75 AFIT](https://blog.rust-lang.org/2023/12/21/async-fn-rpit-in-traits.html) · [Rust Reference](https://doc.rust-lang.org/reference/items/associated-items.html) · [RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html) · [pin-project](https://docs.rs/pin-project/latest/pin_project/)
+> **来源**:
+> [RFC 1598](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) ·
+> [Rust 1.75 AFIT](https://blog.rust-lang.org/2023/12/21/async-fn-rpit-in-traits.html) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/items/associated-items.html) ·
+> [RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html) ·
+> [pin-project](https://docs.rs/pin-project/latest/pin_project/)
 > **国际权威来源**: **P1** [Jung et al. — RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 > **对应 Crate**: [`c06_async`](../../../crates/c06_async)
 > **对应练习**: [`exercises/src/async_programming/`](../../../exercises/src/async_programming)

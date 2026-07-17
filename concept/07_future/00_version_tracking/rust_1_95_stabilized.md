@@ -7,9 +7,9 @@
 > 集合可变引用（Mutable Reference）插入、`as_ref_unchecked` / `as_mut_unchecked`、`Layout` 新 API、
 > `cold_path` 提示、布尔 `TryFrom<{integer}>`、`MaybeUninit` 与 `Cell` 数组互转，以及 PowerPC/PowerPC64 内联汇编（Inline Assembly）稳定化。
 >
-> **受众**: [进阶] / [专家]
+> **受众**: [专家]
 > **Bloom 层级**: L2-L3
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **Rust 版本**: **1.95.0 stable**
 > **最后更新**: 2026-07-01

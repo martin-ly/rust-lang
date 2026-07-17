@@ -5,8 +5,8 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L0-L1 (meta-navigation / atlas)
 > **权威来源**: 本文件为 `concept/` 元层导航图谱。
-> **受众**: [入门/进阶]
-> **内容分级**: [导航级]
+> **受众**: [初学者]
+> **内容分级**: [综述级]
 > **前置概念**: [Concept Definition Atlas](01_concept_definition_atlas.md) · [Inter-Layer Mapping](06_inter_layer_mapping_atlas.md)
 > **后置概念**: [Algebraic Effects](../../04_formal/07_concurrency_semantics/04_algebraic_effects.md) · [Dependent Types](../../04_formal/00_type_theory/10_dependent_refinement_types.md) · [Process Calculi](../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md) · [Language Semantic Model Matrix](../../05_comparative/00_paradigms/05_language_semantic_model_matrix.md)
 

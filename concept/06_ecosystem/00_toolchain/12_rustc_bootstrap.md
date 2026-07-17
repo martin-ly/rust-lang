@@ -6,7 +6,7 @@
 > **EN**: Bootstrapping the Rust Compiler
 > **Summary**: Explains how rustc builds itself in stages using `x.py`/`x`, the role of stage0/stage1/stage2, `cfg(bootstrap)`, and the bootstrap tool modes.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **受众**: [专家 / 研究者]
+> **受众**: [专家]
 > **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **F** — Formal

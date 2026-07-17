@@ -1,4 +1,4 @@
-> **内容分级**: [进阶]
+> **内容分级**: [专家级]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **本节关键术语**: 类型转换（Type Conversion） · 类型强制（Type Coercion） · 类型转换 trait（Conversion Trait） · 孤儿规则（Orphan Rule） · 盲眼实现（Blanket Impl）
 

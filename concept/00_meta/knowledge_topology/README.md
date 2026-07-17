@@ -5,7 +5,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [研究者]
-> **内容分级**: [元层]
+> **内容分级**: [综述级]
 > **定位**: 本目录是 `concept/` 的元层索引，帮助学习者从多个维度（定义、属性、场景、推理、来源）快速定位和理解 Rust 概念。
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/)

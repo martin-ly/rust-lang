@@ -6,7 +6,7 @@
 > **Bloom 层级**: L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **受众**: [专家]
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 > **前置概念**: [Type Theory](01_type_theory.md) · [Const Generics](../../02_intermediate/01_generics/02_const_generics.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)
 > **后置概念**: [Formal Ecosystem Tower](../../06_ecosystem/08_formal_verification/01_formal_ecosystem_tower.md)
 > **主要来源**: [Rust Reference — Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html) · [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) · [Idris 2 Language Reference](https://idris2.readthedocs.io/en/latest/) · [Agda Language Reference](https://agda.readthedocs.io/en/latest/) · [Liquid Haskell Blog](https://ucsd-progsys.github.io/liquidhaskell-blog/) · [Vazou et al. 2014 — Refinement Types for Haskell](https://ucsd-progsys.github.io/liquidhaskell/) · [F* Tutorial](https://www.fstar-lang.org/tutorial/) · [Dafny Docs](https://dafny.org/) · [Pierce 2002, *Types and Programming Languages*](https://www.cis.upenn.edu/~bcpierce/tapl/)

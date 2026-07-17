@@ -5,7 +5,7 @@
 > **EN**: Stream Algebra and Backpressure
 > **Summary**: Streams as pull-based asynchronous sequences: the exact duality with Iterator (`poll_next` vs `next`), the algebra of StreamExt combinators (fusion, associativity, and where it breaks), and a formal model of backpressure (windows, credits, bounded channels as queueing systems) with paired examples/counterexamples.
 >
-> **受众**: [进阶-专家]
+> **受众**: [进阶]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页（Stream 代数与背压视角）。
 > **分工声明**: Stream 的基础概念（`Stream = 异步 Iterator`、dataflow 映射）留在 [Async/Await §15](01_async.md)；Stream/Sink trait 的 API 面分析留在 `01_async.md` §8.10；[Async 边界全景](06_async_boundary_panorama.md) 只做边界汇总。本页专攻三件事：① Stream 与 Iterator 的**代数对偶**；② `StreamExt` 组合子的**代数定律与失效点**；③ 背压的**形式模型**（窗口/信用制、队列论）。三者互不重复（AGENTS.md §2 Canonical 规则）。

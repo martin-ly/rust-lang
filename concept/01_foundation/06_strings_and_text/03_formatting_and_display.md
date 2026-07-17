@@ -1,4 +1,4 @@
-> **内容分级**: [基础级]
+> **内容分级**: [综述级]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **本节关键术语**: 格式化（Formatting） · `Display` trait · `Debug` trait · `format!` 宏（Macro） · 格式化字符串（Format String） · 占位符（Placeholder）
 

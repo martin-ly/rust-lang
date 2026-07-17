@@ -2,7 +2,7 @@
 
 > **EN**: Database and Storage Ecosystem Quiz
 > **Summary**: L6 standalone quiz on the Rust database ecosystem: access libraries (SQLx/Diesel/SeaORM/Toasty), connection pooling, and Rust-built database systems (TiKV/Materialize/Meilisearch/SurrealDB).
-> **受众**: [进阶] / [专家]
+> **受众**: [专家]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` L6 生态层独立测验。
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
@@ -313,3 +313,4 @@ trait CvRdt {
 ---
 
 > **变更记录**: 2026-07-12 新建（W3-b：L6 数据库/存储 quiz，10 题：单选 3 / 代码阅读 3 / 多选 2 / 判断 2；难度 🟢2 / 🟡5 / 🔴3）；2026-07-13 扩展至 15 题（+5 题「分布式共识与 CRDT」：Raft 设计目标、CvRDT 半格、向量时钟、CmRDT 协作编辑、共识选型；难度 🟢3 / 🟡7 / 🔴5）。
+> **内容分级**: [综述级]

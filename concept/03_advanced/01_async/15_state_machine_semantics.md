@@ -7,7 +7,7 @@
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页（状态机语义与 Rust async 状态机实现的 L3-L4 入口）。
 > **受众**: [进阶]
-> **内容分级**: [概念级 + 工程对照]
+> **内容分级**: [专家级]
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **前置概念**: [Async/Await](01_async.md) · [Control Flow](../../01_foundation/04_control_flow/01_control_flow.md) · [Enums and Pattern Matching](../../01_foundation/04_control_flow/02_patterns.md)
 > **后置概念**: [Workflow Theory & Formalization](../../06_ecosystem/03_design_patterns/17_workflow_theory.md) · [Concurrency Patterns](../00_concurrency/03_concurrency_patterns.md)

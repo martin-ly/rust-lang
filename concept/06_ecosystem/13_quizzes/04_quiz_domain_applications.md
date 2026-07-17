@@ -2,7 +2,7 @@
 
 > **EN**: Domain Applications Ecosystem Quiz
 > **Summary**: L6 standalone quiz on Rust's domain application ecosystems: blockchain contracts and deterministic execution, WebAssembly targets and JS interop, game ECS architecture, the ML/data-science stack, safety-critical AUTOSAR alignment, quantum computing toolkits, and competitive programming with formal verification.
-> **受众**: [进阶] / [专家]
+> **受众**: [专家]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` L6 生态层独立测验。
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
@@ -332,3 +332,4 @@ circuit += MeasureQubit::new(0, "ro".to_string(), 0);
 ---
 
 > **变更记录**: 2026-07-13 新建（W3-b：L6 领域应用 quiz 补缺，15 题：单选 4 / 代码阅读 4 / 多选 4 / 判断 3；难度 🟢3 / 🟡7 / 🔴5；覆盖区块链/Wasm/游戏 ECS/ML/安全关键 AUTOSAR/量子/算法竞赛）。
+> **内容分级**: [综述级]

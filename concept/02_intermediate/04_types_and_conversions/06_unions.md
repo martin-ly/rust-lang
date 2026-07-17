@@ -1,4 +1,4 @@
-> **内容分级**: [进阶]
+> **内容分级**: [专家级]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **本节关键术语**: 联合体（Union） · 字段（Field） · 布局（Layout） · Drop 语义 · 内联汇编（Inline Assembly） · C 互操作（FFI） · 未初始化内存（Uninitialized Memory）
 

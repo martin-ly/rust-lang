@@ -4,7 +4,7 @@
 > **Summary**: 每层内部核心模型/概念间的等价、蕴含、依赖、互斥关系，基于同层前置/后置引用与策展语义标注。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
-> **内容分级**: [元层]
+> **内容分级**: [综述级]
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 
 ---

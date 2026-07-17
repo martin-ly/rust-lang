@@ -3,7 +3,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) · [Tokio 文档](https://tokio.rs/)
 > **受众**: [进阶]
-> **内容分级**: [指南级]
+> **内容分级**: [综述级]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — ApplicationProcedure

@@ -1,12 +1,12 @@
 # 可派生 Trait（Derive Traits）
 
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 > **本节关键术语**: Derive · `Debug` · `PartialEq` · `Eq` · `PartialOrd` · `Ord` · `Clone` · `Copy` · `Hash` · `Default` — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 >
 > **EN**: Derivable Traits
 > **Summary**: 标准库中可通过 `#[derive(...)]` 自动实现的 trait 参考：行为、默认实现语义、对字段类型的要求及典型使用场景。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **受众**: [初学者] / [中级]
+> **受众**: [初学者]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification / Language semantics

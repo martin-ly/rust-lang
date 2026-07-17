@@ -5,7 +5,7 @@
 > **EN**: Async Boundary Panorama
 > **Summary**: A panorama of the semantic boundaries of Rust async programming: await-point state boundaries, cancellation safety, Pin/self-reference, Send-across-await, executor/runtime contracts, and async trait object-safety — each with boundary statements, counterexamples, and quantitative decision conditions.
 > **Rust 版本**: 1.97.0+ (Edition 2024) · Tokio 1.x
-> **受众**: [进阶-专家]
+> **受众**: [进阶]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页（async 边界全景视角）。
 > **定位**: 汇总 Rust 异步编程全部**语义边界**——await 点两侧什么成立/什么不成立、取消何时安全、自引用（Reference）何时合法、Future 何时可跨线程、运行时（Runtime）契约何时被打破、async trait 何时可对象化。每一节给出**边界陈述 → 反例 → 判定条件**三段式。

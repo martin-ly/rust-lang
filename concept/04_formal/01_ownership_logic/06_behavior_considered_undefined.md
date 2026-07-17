@@ -1,4 +1,4 @@
-> **内容分级**: [研究级]
+> **内容分级**: [研究者级]
 >
 # 未定义行为清单（Behavior Considered Undefined）
 

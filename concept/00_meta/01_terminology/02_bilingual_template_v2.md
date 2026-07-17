@@ -21,7 +21,7 @@
 > **EN**: {English Title}
 > **Summary**: {50-100 words English summary}
 >
-> **受众**: [初学者 | 进阶 | 研究者]
+> **受众**: [初学者]
 > **层级（模板占位）**: {L0-L7} {基础/进阶/高级/形式化/对比/生态/未来}概念
 > **Bloom 层级**: L1-L6
 > **A/S/P 标记**: {A | S | P | A+S | S+P | ...}
@@ -279,6 +279,7 @@ graph TD
 
 ```markdown
 > [💡 原创分析](../00_framework/methodology.md)
+> **内容分级**: [综述级]
 ```
 
 ---

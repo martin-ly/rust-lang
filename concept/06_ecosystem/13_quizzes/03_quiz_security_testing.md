@@ -2,7 +2,7 @@
 
 > **EN**: Security and Testing Ecosystem Quiz
 > **Summary**: L6 standalone quiz on the Rust security and testing ecosystem: Kerckhoffs's principle and crypto primitives, cargo vet supply-chain auditing, and the testing pyramid with property testing, fuzzing, and Miri.
-> **受众**: [进阶] / [专家]
+> **受众**: [专家]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` L6 生态层独立测验。
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
@@ -322,3 +322,4 @@ proptest! {
 ---
 
 > **变更记录**: 2026-07-12 新建（W3-b：L6 安全/测试 quiz，10 题：单选 3 / 代码阅读 3 / 多选 2 / 判断 2；难度 🟢2 / 🟡5 / 🔴3）；2026-07-13 扩展至 15 题（+5 题「属性测试、模糊测试与基准」：proptest 性质与收缩、Criterion 统计基准、fuzz/loom/miri 定位、安全 issue 收敛；难度 🟢3 / 🟡7 / 🔴5）。
+> **内容分级**: [综述级]

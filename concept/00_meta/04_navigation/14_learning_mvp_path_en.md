@@ -287,3 +287,5 @@ After completing this path, you should be able to:
 > **Version**: Rust 1.97.0+ (Edition 2024)
 > **Last Updated**: 2026-06-09
 > **Maintainer**: Rust Learning Community
+> **受众**: [初学者]
+> **内容分级**: [综述级]

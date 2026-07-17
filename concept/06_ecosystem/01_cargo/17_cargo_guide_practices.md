@@ -1,6 +1,6 @@
 # Cargo 指南实践（Cargo Guide Practices）
 
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 > **本节关键术语**: Dependencies · Features · CI · Build Performance · Cache · `CARGO_TARGET_DIR` — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 >
 > **EN**: Cargo Guide Practices

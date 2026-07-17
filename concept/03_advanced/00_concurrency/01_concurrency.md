@@ -556,7 +556,11 @@ SeqCst 的额外保证:
     - "SeqCst 总是安全的，所以默认用它" → 性能损失 + 序保证仍不足
 ```
 
-> **来源**: [Rust Reference: Memory model — Sequential consistency](https://doc.rust-lang.org/reference/introduction.html) · [LLVM LangRef: Atomic memory ordering constraints] · [cppreference: std::memory_order] · [Herlihy & Shavit 2011 — The Art of Multiprocessor Programming Ch.7]
+> **来源**:
+> [Rust Reference: Memory model — Sequential consistency](https://doc.rust-lang.org/reference/introduction.html) ·
+> [LLVM LangRef: Atomic memory ordering constraints] ·
+> [cppreference: std::memory_order] ·
+> [Herlihy & Shavit 2011 — The Art of Multiprocessor Programming Ch.7]
 
 #### `fence` 操作与内存屏障
 
@@ -1703,7 +1707,10 @@ fn main() {
 
 ## 🎯 同步原语核心知识图谱
 
-同步原语可以按两个维度组织成知识图谱：按**阻塞方式**分为阻塞型（`Mutex`、`RwLock`、`Condvar`、信号量）与非阻塞型（原子类型、无锁结构）；按**通信语义**分为共享内存型（通过保护共同数据通信）与消息传递型（`mpsc`、`oneshot`、`broadcast` 通道）。关系图给出原语之间的组合与替代关系（如 `Condvar` 总是与 `Mutex` 配对使用），决策树则回答「给定共享模式，选哪个原语」——默认 `Mutex`，读远多于写时换 `RwLock`，只需单字状态时下沉到原子类型，需要跨线程转移所有权时改用通道。
+同步原语可以按两个维度组织成知识图谱：按**阻塞方式**分为阻塞型（`Mutex`、`RwLock`、`Condvar`、信号量）与非阻塞型（原子类型、无锁结构）；
+按**通信语义**分为共享内存型（通过保护共同数据通信）与消息传递型（`mpsc`、`oneshot`、`broadcast` 通道）。
+关系图给出原语之间的组合与替代关系（如 `Condvar` 总是与 `Mutex` 配对使用），决策树则回答「给定共享模式，选哪个原语」
+——默认 `Mutex`，读远多于写时换 `RwLock`，只需单字状态时下沉到原子类型，需要跨线程转移所有权时改用通道。
 
 ### 同步原语关系图
 
@@ -2166,8 +2173,9 @@ mindmap
 
 ### Send/Sync 速查表
 
-| 类型         | Send                 | Sync                 | 说明         |
-| :--- | :--- | :--- | :--- || `Mutex<T>`   | ✅ (if T: Send)      | ✅ (if T: Send)      | 线程安全     |
+| 类型 | Send | Sync | 说明 |
+| :--- | :--- | :--- | :--- |
+| `Mutex<T>`   | ✅ (if T: Send)      | ✅ (if T: Send)      | 线程安全     |
 | `RwLock<T>`  | ✅ (if T: Send)      | ✅ (if T: Send+Sync) | 线程安全     |
 | `Rc<T>`      | ❌                   | ❌                   | 仅单线程     |
 | `Arc<T>`     | ✅ (if T: Send+Sync) | ✅ (if T: Send+Sync) | 线程安全     |
@@ -2178,7 +2186,8 @@ mindmap
 ### Rust 1.92.0 关键改进（自 Rust 1.90 引入）
 
 | 改进项           | 提升幅度 | 影响范围     |
-| :--- | :--- | :--- || Mutex 性能优化   | +10%     | 所有互斥场景 |
+| :--- | :--- | :--- |
+| Mutex 性能优化   | +10%     | 所有互斥场景 |
 | RwLock 读性能    | +15%     | 读密集场景   |
 | Atomic 操作优化  | +5%      | 无锁编程     |
 | Condvar 唤醒优化 | 更快响应 | 条件等待     |

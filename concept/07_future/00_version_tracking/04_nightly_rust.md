@@ -1,4 +1,4 @@
-> **内容分级**: [研究级]
+> **内容分级**: [研究者级]
 >
 # Rust 的发布流程与 Nightly Rust
 
@@ -6,7 +6,7 @@
 > **Summary**: Rust 的火车发布模型、Stability without Stagnation 原则、Nightly/Beta/Stable 三个发布通道、feature flags、rustup 通道切换以及 RFC 流程。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
-> **受众**: [初学者] / [中级]
+> **受众**: [初学者]
 > **Bloom 层级**: L2
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure

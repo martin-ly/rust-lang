@@ -1,4 +1,4 @@
-> **内容分级**: [基础级]
+> **内容分级**: [综述级]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **本节关键术语**: 类型别名（Type Alias） · 泛型（Generics）类型别名（Generic Type Alias） · 关联类型（Associated Type） · 新类型模式（Newtype Pattern）
 

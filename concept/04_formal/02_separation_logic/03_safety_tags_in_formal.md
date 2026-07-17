@@ -11,3 +11,5 @@
 > - [AutoVerus/Verus](../04_model_checking/07_autoverus.md) — `requires`/`ensures` 契约验证
 > - [Miri](../04_model_checking/08_miri.md) · [形式化验证工具生态](../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md)
 > - [BorrowSanitizer 深度](04_borrow_sanitizer_in_formal.md)
+> **受众**: [研究者]
+> **内容分级**: [研究者级]

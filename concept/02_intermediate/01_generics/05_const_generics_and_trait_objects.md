@@ -7,7 +7,7 @@
 
 > **EN**: Const Generics and Trait Objects
 > **Summary**: The interaction between const generics and `dyn Trait`: where the compiler can and cannot erase type parameters, and how to design APIs that combine compile-time constants with runtime polymorphism.
-> **受众**: [进阶-专家]
+> **受众**: [进阶]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure

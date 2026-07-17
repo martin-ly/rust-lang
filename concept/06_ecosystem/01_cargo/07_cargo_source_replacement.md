@@ -6,7 +6,7 @@
 > **EN**: Cargo Source Replacement
 > **Summary**: Explains how to redirect Cargo's dependency sources to mirrors, local registries, or vendored directories; covers `[source]` configuration, `cargo vendor`, and offline mode.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **受众**: [中级 → 高级]
+> **受众**: [进阶]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application

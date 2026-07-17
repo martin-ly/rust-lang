@@ -5,7 +5,7 @@
 > **EN**: Rust Edition Mechanism and Migration Guide
 > **受众**: [研究者]
 > **Bloom 层级**: L2-L3
-> **内容分级**: [研究级]
+> **内容分级**: [研究者级]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **前置概念**: [Rust Edition Guide](02_edition_guide.md)
 > **后置概念**: [Rust Edition Guide](02_edition_guide.md)

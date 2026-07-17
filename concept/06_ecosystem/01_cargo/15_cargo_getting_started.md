@@ -1,6 +1,6 @@
 # Cargo 入门（Cargo Getting Started）
 
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 > **本节关键术语**: Cargo · Crate · Package · Manifest · `Cargo.toml` — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 >
 > **EN**: Cargo Getting Started

@@ -5,7 +5,7 @@
 > **EN**: Actor Semantics: From Hewitt's Axioms to the Rust Ecosystem
 > **Summary**: The formal semantics of the Actor model (Hewitt 1973, Agha 1986): actors as address + mailbox + behavior, the three axioms (send/create/become), supervision and location transparency, Erlang OTP supervision-tree semantics, the mapping to Rust's actix/ractor/kameo, and the boundary against channel models.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **受众**: [进阶 / 研究者]
+> **受众**: [研究者]
 > **内容分级**: [专家级]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页：Actor 模型形式语义及其 Rust 映射的唯一深度解释。

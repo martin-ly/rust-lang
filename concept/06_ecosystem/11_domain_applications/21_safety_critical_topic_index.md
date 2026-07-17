@@ -8,6 +8,8 @@
 > **Bloom 层级**: L4-L6
 > **定位**: 本文件为 `concept/` 侧的**摘要+链接型导航页**（AGENTS.md §2.1 第 3 条：content/ 专题权威页需在 concept/ 建索引入口）。专题深度内容以 [`content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md`](../../../content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md) 为权威入口；通用概念解释以 `concept/` 相关权威页为准。本页不复制任何正文。
 > **国际权威来源（2026-07-13 补录）**: **P0** [Ferrocene Language Specification](https://spec.ferrocene.dev/)（curl 200 实测 2026-07-13） · **P1** [Rockwell Collins — Field Guidance System 形式化方法案例（DO-333 实践, arXiv:1409.7643）](https://arxiv.org/abs/1409.7643)（curl 200 实测） · **P2** [Rust Blog — Announcing Rust 1.97.0](https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/)（生态官方发布信息，curl 200 实测）
+> **受众**: [进阶]
+> **内容分级**: [综述级]
 
 ---
 

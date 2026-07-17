@@ -1,6 +1,6 @@
 # Cargo Registry 内部机制（Cargo Registry Internals）
 
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 > **本节关键术语**: Registry Index · Registry Web API · Credential Provider · crates.io · Sparse Index — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 >
 > **EN**: Cargo Registry Internals

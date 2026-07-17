@@ -7,7 +7,7 @@
 > **EN**: Cargo Dependency Resolution
 > **Summary**: Explains how Cargo resolves crate dependency versions, selects compatible SemVer ranges, unifies features, handles lockfiles, resolver versions, and `rust-version` requirements.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
-> **受众**: [中级 → 高级]
+> **受众**: [进阶]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure

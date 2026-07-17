@@ -8,6 +8,8 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Procedure
 > **来源**: [releases.rs](https://releases.rs/) · [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/) · [RFC Book](https://rust-lang.github.io/rfcs/)
+> **受众**: [初学者]
+> **内容分级**: [综述级]
 
 ---
 

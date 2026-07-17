@@ -2,7 +2,7 @@
 > **Summary**: Authoritative concept page for `C12 WASM - 术语表`. Content migrated from `crates/c12_wasm/docs/tier_01_foundations/03_glossary.md`.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
-> **内容分级**: [参考级]
+> **内容分级**: [综述级]
 > **Bloom 层级**: L1-L2
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
