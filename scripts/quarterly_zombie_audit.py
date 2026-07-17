@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-季度僵尸内容清理机制：
+季度僵尸内容清理机制（优化版）
 90 天无内部链接指向、无 git 提交的文件自动标记为"僵尸内容"。
 """
 
 import os
 import subprocess
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime
 
 ROOT = Path.cwd()
 REPORTS_DIR = Path("reports")
@@ -25,25 +25,32 @@ def get_git_last_commit(path: Path) -> datetime:
         return datetime.now()
 
 
-def count_internal_links(md_path: Path) -> int:
-    target = str(md_path.resolve().relative_to(ROOT.resolve())).replace("\\", "/")
-    count = 0
+def build_link_index() -> dict:
+    """一次性构建所有 Markdown 内容索引"""
+    index = {}
     for root, _, files in os.walk(ROOT):
         for f in files:
             if f.endswith(".md"):
                 fpath = Path(root) / f
                 try:
-                    content = fpath.read_text(encoding="utf-8", errors="ignore")
-                    if target in content:
-                        count += 1
+                    index[str(fpath)] = fpath.read_text(encoding="utf-8", errors="ignore")
                 except Exception:
                     pass
+    return index
+
+
+def count_internal_links(md_path: Path, index: dict) -> int:
+    target = str(md_path.resolve().relative_to(ROOT.resolve())).replace("\\", "/")
+    count = 0
+    for content in index.values():
+        if target in content:
+            count += 1
     return count
 
 
 def main():
-    # 扫描 concept/、knowledge/、docs/ 中的 Markdown 文件
     scan_dirs = ["concept", "knowledge", "docs"]
+    index = build_link_index()
     zombies = []
     
     for dir_name in scan_dirs:
@@ -56,13 +63,12 @@ def main():
             
             last_commit = get_git_last_commit(md_path)
             days_since = (datetime.now() - last_commit).days
-            links = count_internal_links(md_path)
+            links = count_internal_links(md_path, index)
             
             if days_since > ZOMBIE_DAYS and links == 0:
                 rel = str(md_path.relative_to(ROOT)).replace("\\", "/")
                 zombies.append((rel, days_since))
     
-    # 输出报告
     report_path = REPORTS_DIR / "ZOMBIE_CONTENT_AUDIT_2026_06_03.md"
     with open(report_path, "w", encoding="utf-8") as f:
         f.write("# 季度僵尸内容审计报告\n\n")

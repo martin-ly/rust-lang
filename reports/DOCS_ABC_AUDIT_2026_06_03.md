@@ -1,0 +1,550 @@
+# docs/ A/B/C 价值审计报告
+
+> **生成时间**: 2026-07-17T09:24:53.713663
+> **MSRV 基准**: 1.96.0
+> **总文件数**: 530
+
+## A 类文件 (410 个)
+
+核心参考 — 必须保留
+
+- `00_meta/00_master_index.md` — 核心参考（22 个内部链接）
+- `00_meta/01_annual_review_template.md` — 核心参考（1 个内部链接）
+- `00_meta/03_docs_reorganization_complete.md` — 近期维护文件
+- `00_meta/04_documentation_division_of_labor.md` — 核心参考（1 个内部链接）
+- `00_meta/06_formal_content_master_index.md` — 近期维护文件
+- `00_meta/08_pdca_template.md` — 核心参考（1 个内部链接）
+- `00_meta/09_project_health_dashboard.md` — 近期维护文件
+- `00_meta/14_template_concept_doc.md` — 近期维护文件
+- `00_meta/15_template_decision_tree.md` — 核心参考（1 个内部链接）
+- `00_meta/16_authoritative_sources_and_citations.md` — 核心参考（3 个内部链接）
+- `00_meta/analysis/00_rust_2026_project_goals_monthly_tracking.md` — 核心参考（2 个内部链接）
+- `01_core/README.md` — 核心参考（4 个内部链接）
+- `02_learning/01_cross_module_learning_roadmap_2025_10_25.md` — 近期维护文件
+- `02_learning/02_cross_module_navigation.md` — 近期维护文件
+- `02_learning/04_learning_path_guide_2025_10_24.md` — 近期维护文件
+- `02_learning/08_official_resources_mapping.md` — 核心参考（3 个内部链接）
+- `02_learning/09_learning_mvp_path.md` — 核心参考（4 个内部链接）
+- `02_learning/quizzes/README.md` — 核心参考（6 个内部链接）
+- `02_learning/README.md` — 核心参考（3 个内部链接）
+- `03_reference/01_cross_language_comparison.md` — 近期维护文件
+- `03_reference/02_edge_cases_and_special_cases.md` — 核心参考（3 个内部链接）
+- `03_reference/03_error_code_mapping.md` — 核心参考（4 个内部链接）
+- `03_reference/05_standard_library_comprehensive_analysis_2025_12_25.md` — 近期维护文件
+- `03_reference/06_alignment_guide.md` — 核心参考（1 个内部链接）
+- `03_reference/07_trpl_3rd_ed_diff.md` — 核心参考（5 个内部链接）
+- `03_reference/quick_reference/01_ai_ml_cheatsheet.md` — 近期维护文件
+- `03_reference/quick_reference/02_algorithm_decision_cheatsheet.md` — 近期维护文件
+- `03_reference/quick_reference/03_algorithms_cheatsheet.md` — 核心参考（1 个内部链接）
+- `03_reference/quick_reference/04_assert_matches_guide.md` — 近期维护文件
+- `03_reference/quick_reference/07_closures_cheatsheet.md` — 核心参考（1 个内部链接）
+- `03_reference/quick_reference/08_collections_iterators_cheatsheet.md` — 核心参考（6 个内部链接）
+- `03_reference/quick_reference/09_control_flow_functions_cheatsheet.md` — 核心参考（2 个内部链接）
+- `03_reference/quick_reference/10_error_handling_cheatsheet.md` — 核心参考（2 个内部链接）
+- `03_reference/quick_reference/11_generics_cheatsheet.md` — 核心参考（1 个内部链接）
+- `03_reference/quick_reference/13_network_programming_cheatsheet.md` — 核心参考（1 个内部链接）
+- `03_reference/quick_reference/14_ownership_cheatsheet.md` — 核心参考（4 个内部链接）
+- `03_reference/quick_reference/16_process_management_cheatsheet.md` — 核心参考（1 个内部链接）
+- `03_reference/quick_reference/17_rust_190_to_193_features_cheatsheet.md` — 近期维护文件
+- `03_reference/quick_reference/18_rust_194_features_cheatsheet.md` — 近期维护文件
+- `03_reference/quick_reference/20_rust_196_features_cheatsheet.md` — 近期维护文件
+- `03_reference/quick_reference/21_rust_197_features_cheatsheet.md` — 核心参考（5 个内部链接）
+- `03_reference/quick_reference/22_rust_198_nightly_preview_cheatsheet.md` — 近期维护文件
+- `03_reference/quick_reference/23_smart_pointers_cheatsheet.md` — 核心参考（2 个内部链接）
+- `03_reference/quick_reference/24_strings_formatting_cheatsheet.md` — 核心参考（1 个内部链接）
+- `03_reference/quick_reference/27_type_system.md` — 核心参考（4 个内部链接）
+- `03_reference/quick_reference/28_wasm_cheatsheet.md` — 近期维护文件
+- `03_reference/quick_reference/README.md` — 核心参考（1 个内部链接）
+- `03_reference/README.md` — 近期维护文件
+- `04_guides/02_cxx_interop_guide.md` — 核心参考（1 个内部链接）
+- `04_guides/03_embassy_deep_dive.md` — 近期维护文件
+- `04_guides/04_embedded_rust_guide.md` — 近期维护文件
+- `04_guides/05_fuzzing_guide.md` — 核心参考（1 个内部链接）
+- `04_guides/07_let_chains_guide.md` — 核心参考（1 个内部链接）
+- `04_guides/08_libp2p_guide.md` — 近期维护文件
+- `04_guides/09_miri_guide.md` — 核心参考（2 个内部链接）
+- `04_guides/10_quic_http3_guide.md` — 近期维护文件
+- `04_guides/11_rust_2024_edition_future_in_prelude.md` — 核心参考（1 个内部链接）
+- `04_guides/12_rust_2024_edition_rpit_migration.md` — 近期维护文件
+- `04_guides/13_semver_checks.md` — 近期维护文件
+- `04_guides/14_test_coverage.md` — 核心参考（3 个内部链接）
+- `04_guides/15_api_guide.md` — 近期维护文件
+- `04_guides/16_migration_guide_2026.md` — 核心参考（2 个内部链接）
+- `04_guides/README.md` — 核心参考（1 个内部链接）
+- `05_practice/01_cross_module_practical_projects_2025_10_25.md` — 近期维护文件
+- `05_practice/03_project_02_file_processor.md` — 近期维护文件
+- `05_practice/04_project_03_calculator.md` — 核心参考（6 个内部链接）
+- `05_practice/05_project_04_password_generator.md` — 近期维护文件
+- `05_practice/06_project_05_text_statistics.md` — 核心参考（11 个内部链接）
+- `05_practice/07_project_06_concurrent_downloader.md` — 近期维护文件
+- `05_practice/08_project_07_chat_server.md` — 核心参考（9 个内部链接）
+- `05_practice/09_project_08_cache_system.md` — 核心参考（6 个内部链接）
+- `05_practice/10_project_09_log_parser.md` — 核心参考（7 个内部链接）
+- `05_practice/11_project_10_data_pipeline.md` — 核心参考（5 个内部链接）
+- `05_practice/12_project_11_web_server.md` — 核心参考（10 个内部链接）
+- `05_practice/13_project_12_wasm_app.md` — 核心参考（9 个内部链接）
+- `05_practice/14_project_13_database_engine.md` — 核心参考（10 个内部链接）
+- `05_practice/15_project_14_async_runtime.md` — 近期维护文件
+- `05_practice/16_project_15_distributed_system.md` — 近期维护文件
+- `06_research/01_cranelift_backend.md` — 近期维护文件
+- `06_research/02_endangered_by_language_saved_by_compiler_popl_2026.md` — 近期维护文件
+- `06_research/03_llm_c_to_rust_migration.md` — 近期维护文件
+- `06_research/06_polonius_next_gen_borrow_checker.md` — 核心参考（2 个内部链接）
+- `06_research/08_rust_for_linux.md` — 核心参考（3 个内部链接）
+- `06_research/09_rust_for_linux_2026.md` — 核心参考（1 个内部链接）
+- `06_research/10_rust_formal_verification.md` — 近期维护文件
+- `06_research/12_verusbelt_pldi_2026.md` — 核心参考（1 个内部链接）
+- `06_research/13_rust_language_feature_comprehensive_inventory_2026.md` — 核心参考（2 个内部链接）
+- `06_research/14_rust_ecosystem_comprehensive_review_2026.md` — 核心参考（3 个内部链接）
+- `07_thinking/02_decision_graph_network.md` — 核心参考（1 个内部链接）
+- `07_thinking/03_mind_map_collection.md` — 核心参考（1 个内部链接）
+- `07_thinking/04_multi_dimensional_concept_matrix.md` — 核心参考（2 个内部链接）
+- `07_thinking/05_proof_graph_network.md` — 近期维护文件
+- `07_thinking/06_thinking_representation_methods.md` — 近期维护文件
+- `07_thinking/README.md` — 核心参考（1 个内部链接）
+- `08_usage_guides/01_advanced_topics_deep_dive.md` — 近期维护文件
+- `08_usage_guides/02_ai_rust_ecosystem_guide.md` — 近期维护文件
+- `08_usage_guides/03_algorithms_usage_guide.md` — 近期维护文件
+- `08_usage_guides/04_async_programming_usage_guide.md` — 核心参考（4 个内部链接）
+- `08_usage_guides/05_cfg_select_macro_guide.md` — 近期维护文件
+- `08_usage_guides/06_cli_applications_guide.md` — 近期维护文件
+- `08_usage_guides/07_control_flow_functions_usage_guide.md` — 核心参考（1 个内部链接）
+- `08_usage_guides/08_cross_module_integration_examples.md` — 近期维护文件
+- `08_usage_guides/09_cxx_rust_interop_evaluation.md` — 近期维护文件
+- `08_usage_guides/10_design_patterns_usage_guide.md` — 核心参考（2 个内部链接）
+- `08_usage_guides/11_embedded_rust_guide.md` — 近期维护文件
+- `08_usage_guides/12_formal_verification_integration_guide.md` — 近期维护文件
+- `08_usage_guides/13_inline_assembly_guide.md` — 近期维护文件
+- `08_usage_guides/14_kani_practical_guide.md` — 核心参考（1 个内部链接）
+- `08_usage_guides/15_macro_system_usage_guide.md` — 核心参考（1 个内部链接）
+- `08_usage_guides/16_miri_practical_guide.md` — 核心参考（1 个内部链接）
+- `08_usage_guides/17_performance_testing_report.md` — 近期维护文件
+- `08_usage_guides/18_performance_tuning_guide.md` — 近期维护文件
+- `08_usage_guides/21_testing_coverage_guide.md` — 核心参考（1 个内部链接）
+- `08_usage_guides/22_threads_concurrency_usage_guide.md` — 核心参考（2 个内部链接）
+- `08_usage_guides/23_troubleshooting_guide.md` — 近期维护文件
+- `08_usage_guides/24_type_system_usage_guide.md` — 核心参考（1 个内部链接）
+- `08_usage_guides/26_verus_practical_guide.md` — 近期维护文件
+- `08_usage_guides/27_wasm_usage_guide.md` — 近期维护文件
+- `08_usage_guides/28_best_practices.md` — 核心参考（3 个内部链接）
+- `08_usage_guides/29_docker_guide.md` — 近期维护文件
+- `08_usage_guides/30_deployment.md` — 近期维护文件
+- `08_usage_guides/README.md` — 核心参考（1 个内部链接）
+- `08_usage_guides/workflow/01_workflow_theory.md` — 核心参考（1 个内部链接）
+- `08_usage_guides/workflow/README.md` — 近期维护文件
+- `09_toolchain/01_compiler_features.md` — 核心参考（1 个内部链接）
+- `09_toolchain/07_rust_1_95_nightly_preview.md` — 核心参考（2 个内部链接）
+- `09_toolchain/09_rustdoc_196_improvements.md` — 核心参考（3 个内部链接）
+- `09_toolchain/10_rust_1_97_features.md` — 核心参考（4 个内部链接）
+- `09_toolchain/12_cargo_script_guide.md` — 核心参考（1 个内部链接）
+- `09_toolchain/15_parallel_frontend.md` — 核心参考（1 个内部链接）
+- `09_toolchain/16_toml_v11_cargo_guide.md` — 核心参考（2 个内部链接）
+- `09_toolchain/18_cargo_build_optimization.md` — 核心参考（1 个内部链接）
+- `09_toolchain/19_nix_setup.md` — 近期维护文件
+- `09_toolchain/20_miri_integration_summary.md` — 核心参考（1 个内部链接）
+- `09_toolchain/21_miri_guide.md` — 近期维护文件
+- `09_toolchain/22_sccache_setup.md` — 近期维护文件
+- `11_project/01_completion_status.md` — 近期维护文件
+- `11_project/05_knowledge_structure_framework.md` — 近期维护文件
+- `11_project/06_module_knowledge_structure_guide.md` — 近期维护文件
+- `11_project/08_architecture.md` — 近期维护文件
+- `11_project/09_dependency_graph.md` — 近期维护文件
+- `11_project/README.md` — 核心参考（1 个内部链接）
+- `12_research_notes/01_alignment_matrices/02_async_book_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/03_async_ecosystem_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/04_authoritative_alignment_gap_analysis.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/07_authoritative_alignment_status.md` — 核心参考（1 个内部链接）
+- `12_research_notes/01_alignment_matrices/08_authoritative_content_alignment_report.md` — 核心参考（1 个内部链接）
+- `12_research_notes/01_alignment_matrices/09_authoritative_source_100_percent_roadmap.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/11_authoritative_source_completion_plan.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/12_authoritative_source_gap_and_backref_index.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/14_authoritative_source_version_tracking.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/17_community_best_practices_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/19_database_storage_cloud_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/20_design_patterns_authoritative_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/21_edition_guide_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/22_error_handling_network_web_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/23_ferrocene_fls_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/24_i18n_source_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/25_learning_and_interview_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/26_macros_ffi_embedded_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/27_performance_and_testing_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/28_rfc_alignment_index.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/29_rfc_argumentation_chain.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/30_rfc_to_counterexample_mapping.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/33_rust_by_example_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/34_rust_reference_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/35_rust_reference_chapters_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/37_rustc_dev_guide_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/38_rustc_errors_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/39_rustonomicon_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/40_safety_and_unsafe_authoritative_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/41_std_library_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/42_toolchain_ecosystem_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/43_unsafe_code_guidelines_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/44_verification_tools_practical_alignment.md` — 近期维护文件
+- `12_research_notes/01_alignment_matrices/45_version_evolution_alignment.md` — 近期维护文件
+- `12_research_notes/02_formal_methods/00_completeness_gaps.md` — 近期维护文件
+- `12_research_notes/02_formal_methods/04_error_handling_decision_tree.md` — 近期维护文件
+- `12_research_notes/02_formal_methods/05_formal_methods_completeness_checklist.md` — 近期维护文件
+- `12_research_notes/02_formal_methods/06_lifetime_formalization.md` — 核心参考（1 个内部链接）
+- `12_research_notes/02_formal_methods/07_macro_system.md` — 近期维护文件
+- `12_research_notes/02_formal_methods/08_macro_system_mindmap.md` — 核心参考（2 个内部链接）
+- `12_research_notes/02_formal_methods/11_safe_decidable_mechanisms_and_formal_methods_plan.md` — 近期维护文件
+- `12_research_notes/02_formal_methods/12_send_sync_formalization.md` — 近期维护文件
+- `12_research_notes/02_formal_methods/14_variance_concept_mindmap.md` — 核心参考（2 个内部链接）
+- `12_research_notes/02_formal_methods/15_workflow_engines_matrix.md` — 核心参考（1 个内部链接）
+- `12_research_notes/02_formal_methods/16_concurrency_async_counterexamples.md` — 近期维护文件
+- `12_research_notes/02_formal_methods/17_ownership_counterexamples.md` — 近期维护文件
+- `12_research_notes/02_formal_methods/18_unsafe_counterexamples.md` — 近期维护文件
+- `12_research_notes/02_formal_methods/README.md` — 近期维护文件
+- `12_research_notes/03_formal_proofs/02_concept_axiom_theorem_matrix.md` — 核心参考（1 个内部链接）
+- `12_research_notes/03_formal_proofs/03_const_eval_formalization.md` — 核心参考（1 个内部链接）
+- `12_research_notes/03_formal_proofs/05_core_features_full_chain.md` — 核心参考（1 个内部链接）
+- `12_research_notes/03_formal_proofs/06_core_theorems_en_summary.md` — 核心参考（1 个内部链接）
+- `12_research_notes/03_formal_proofs/07_core_theorems_full_proofs.md` — 核心参考（1 个内部链接）
+- `12_research_notes/03_formal_proofs/08_counter_examples_compendium.md` — 核心参考（1 个内部链接）
+- `12_research_notes/03_formal_proofs/09_executable_semantics_roadmap.md` — 核心参考（1 个内部链接）
+- `12_research_notes/03_formal_proofs/10_formal_concepts_encyclopedia.md` — 核心参考（1 个内部链接）
+- `12_research_notes/03_formal_proofs/11_formal_full_model_en_summary.md` — 核心参考（1 个内部链接）
+- `12_research_notes/03_formal_proofs/12_formal_full_model_overview.md` — 核心参考（1 个内部链接）
+- `12_research_notes/03_formal_proofs/16_formal_proof_system_guide.md` — 核心参考（1 个内部链接）
+- `12_research_notes/03_formal_proofs/20_language_semantics_expressiveness.md` — 核心参考（1 个内部链接）
+- `12_research_notes/03_formal_proofs/22_proof_techniques_mindmap.md` — 核心参考（1 个内部链接）
+- `12_research_notes/03_formal_proofs/23_proof_tree_borrow.md` — 核心参考（1 个内部链接）
+- `12_research_notes/03_formal_proofs/24_proof_tree_ownership.md` — 核心参考（1 个内部链接）
+- `12_research_notes/03_formal_proofs/25_proof_tree_type_safety.md` — 核心参考（1 个内部链接）
+- `12_research_notes/03_formal_proofs/26_rustsem_semantics.md` — 核心参考（2 个内部链接）
+- `12_research_notes/03_formal_proofs/27_safe_decidable_mechanisms_overview.md` — 核心参考（1 个内部链接）
+- `12_research_notes/03_formal_proofs/28_safe_unsafe_comprehensive_analysis.md` — 核心参考（1 个内部链接）
+- `12_research_notes/03_formal_proofs/29_theorem_rust_example_mapping.md` — 近期维护文件
+- `12_research_notes/03_formal_proofs/30_theorems_and_proof_strategies.md` — 核心参考（1 个内部链接）
+- `12_research_notes/03_formal_proofs/31_verification_tools_decision_tree.md` — 核心参考（1 个内部链接）
+- `12_research_notes/03_formal_proofs/32_verification_tools_matrix.md` — 核心参考（2 个内部链接）
+- `12_research_notes/04_formal_module_system/01_formalization_ecology_mindmap.md` — 核心参考（2 个内部链接）
+- `12_research_notes/04_formal_module_system/02_module_system_specification.md` — 核心参考（3 个内部链接）
+- `12_research_notes/04_formal_module_system/03_linkage_and_symbols.md` — 核心参考（1 个内部链接）
+- `12_research_notes/04_formal_module_system/04_module_hir_mir_mapping.md` — 核心参考（1 个内部链接）
+- `12_research_notes/04_formal_module_system/05_module_safety_abstraction.md` — 核心参考（1 个内部链接）
+- `12_research_notes/04_formal_module_system/06_formal_tools_module_mapping.md` — 近期维护文件
+- `12_research_notes/04_formal_module_system/07_module_counterexamples.md` — 近期维护文件
+- `12_research_notes/04_formal_module_system/README.md` — 核心参考（1 个内部链接）
+- `12_research_notes/05_type_theory/01_advanced_types.md` — 近期维护文件
+- `12_research_notes/05_type_theory/02_construction_capability.md` — 近期维护文件
+- `12_research_notes/05_type_theory/03_lifetime_formalization.md` — 核心参考（1 个内部链接）
+- `12_research_notes/05_type_theory/04_trait_system_formalization.md` — 近期维护文件
+- `12_research_notes/05_type_theory/06_variance_theory.md` — 核心参考（1 个内部链接）
+- `12_research_notes/05_type_theory/07_type_system_counterexamples.md` — 近期维护文件
+- `12_research_notes/06_concept_models/02_argumentation_chain_and_flow.md` — 核心参考（1 个内部链接）
+- `12_research_notes/06_concept_models/04_code_doc_formal_mapping.md` — 核心参考（1 个内部链接）
+- `12_research_notes/06_concept_models/05_cognitive_argumentation_framework.md` — 核心参考（1 个内部链接）
+- `12_research_notes/06_concept_models/06_concept_comparison_tables.md` — 核心参考（1 个内部链接）
+- `12_research_notes/06_concept_models/07_concept_hierarchy_framework.md` — 核心参考（1 个内部链接）
+- `12_research_notes/06_concept_models/08_concept_relationship_network.md` — 核心参考（1 个内部链接）
+- `12_research_notes/06_concept_models/09_cross_reference_index.md` — 近期维护文件
+- `12_research_notes/06_concept_models/10_design_mechanism_rationale.md` — 核心参考（1 个内部链接）
+- `12_research_notes/06_concept_models/11_domain_analysis_framework.md` — 核心参考（1 个内部链接）
+- `12_research_notes/06_concept_models/12_hierarchical_mapping_and_summary.md` — 核心参考（1 个内部链接）
+- `12_research_notes/06_concept_models/13_knowledge_graph_index.md` — 核心参考（1 个内部链接）
+- `12_research_notes/06_concept_models/14_ownership_concept_mindmap.md` — 核心参考（1 个内部链接）
+- `12_research_notes/06_concept_models/15_system_integration.md` — 核心参考（1 个内部链接）
+- `12_research_notes/06_concept_models/16_theoretical_and_argumentation_system_architecture.md` — 近期维护文件
+- `12_research_notes/06_concept_models/17_unified_systematic_framework.md` — 核心参考（1 个内部链接）
+- `12_research_notes/07_distributed_and_workflow/01_distributed_architecture_decision_tree.md` — 核心参考（1 个内部链接）
+- `12_research_notes/07_distributed_and_workflow/03_distributed_pattern_matrix.md` — 核心参考（1 个内部链接）
+- `12_research_notes/07_distributed_and_workflow/04_distributed_patterns_matrix.md` — 核心参考（3 个内部链接）
+- `12_research_notes/07_distributed_and_workflow/05_workflow_concept_mindmap.md` — 核心参考（1 个内部链接）
+- `12_research_notes/07_distributed_and_workflow/06_workflow_engine_matrix.md` — 核心参考（2 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/01_boundary_matrix.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/01_creational/01_abstract_factory.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/01_creational/02_builder.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/01_creational/03_factory_method.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/01_creational/04_prototype.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/01_creational/README.md` — 核心参考（7 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/02_design_patterns_counterexamples.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/02_structural/01_adapter.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/02_structural/02_bridge.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/02_structural/03_composite.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/02_structural/04_decorator.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/02_structural/05_facade.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/02_structural/06_flyweight.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/02_structural/07_proxy.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/02_structural/README.md` — 核心参考（7 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/01_chain_of_responsibility.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/02_command.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/03_interpreter.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/04_iterator.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/05_mediator.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/06_memento.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/07_observer.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/09_strategy.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/10_template_method.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/11_visitor.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/README.md` — 核心参考（7 个内部链接）
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/README.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/01_rust_idioms.md` — 核心参考（2 个内部链接）
+- `12_research_notes/08_software_design_theory/02_anti_patterns.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/02_workflow/01_workflow_state_machine.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/02_workflow/02_compensation_chain.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/02_workflow/03_long_running_transaction.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/02_workflow/README.md` — 核心参考（10 个内部链接）
+- `12_research_notes/08_software_design_theory/03_master_index.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/03_workflow_safe_complete_models/02_expressiveness_boundary.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/03_workflow_safe_complete_models/README.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/04_comprehensive_argumentation_gap_analysis_and_plan.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/04_execution_models/01_synchronous.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/04_execution_models/02_async.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/04_execution_models/03_concurrent.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/04_execution_models/04_parallel.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/04_execution_models/05_distributed.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/04_execution_models/06_boundary_analysis.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/04_execution_models/README.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/05_compositional_engineering/01_formal_composition.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/05_compositional_engineering/02_effectiveness_proofs.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/05_compositional_engineering/03_configuration_management_pattern.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/05_compositional_engineering/04_integration_theory.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/05_compositional_engineering/05_plugin_architecture_pattern.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/05_workflow_compositional_distributed_counterexamples.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/06_boundary_system/01_expressive_inexpressive_matrix.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/06_boundary_system/02_safe_unsafe_matrix.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/06_boundary_system/03_supported_unsupported_matrix.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/06_boundary_system/README.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/07_distributed/01_saga_pattern.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/07_distributed/02_cqrs_pattern.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/07_distributed/03_circuit_breaker.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/07_distributed/04_event_sourcing.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/07_distributed/05_outbox_pattern.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/07_distributed/06_timeout_pattern.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/07_distributed/07_retry_pattern.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/07_distributed/08_fallback_pattern.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/07_distributed/09_rate_limiting_idempotency_pattern.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/07_distributed/README.md` — 核心参考（9 个内部链接）
+- `12_research_notes/08_software_design_theory/08_crate_architectures/01_serde_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/02_tower_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/03_diesel_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/04_clap_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/06_tokio_architecture.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/08_crate_architectures/07_axum_architecture.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/08_crate_architectures/08_hyper_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/09_sqlx_architecture.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/08_crate_architectures/12_wasm_bindgen_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/13_wgpu_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/14_actix_web_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/16_rayon_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/18_sqlx_advanced_architecture.md` — 核心参考（1 个内部链接）
+- `12_research_notes/08_software_design_theory/08_crate_architectures/19_tracing_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/20_crossbeam_architecture.md` — 核心参考（2 个内部链接）
+- `12_research_notes/08_software_design_theory/08_crate_architectures/21_ratatui_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/24_mongodb_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/25_regex_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/26_chrono_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/27_kafka_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/28_kube_rs_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/29_lapin_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/30_gui_cross_platform_ui_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/31_meilisearch_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/32_surrealdb_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/33_vector_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/34_sentry_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/35_metrics_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/36_ort_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/37_tract_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/38_aws_sdk_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/39_azure_sdk_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/40_salvo_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/41_ntex_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/42_askama_architecture.md` — 近期维护文件
+- `12_research_notes/08_software_design_theory/08_crate_architectures/43_maud_architecture.md` — 近期维护文件
+- `12_research_notes/09_experiments/01_compiler_optimizations.md` — 核心参考（2 个内部链接）
+- `12_research_notes/09_experiments/03_macro_expansion_performance.md` — 核心参考（2 个内部链接）
+- `12_research_notes/09_experiments/04_memory_analysis.md` — 核心参考（2 个内部链接）
+- `12_research_notes/09_experiments/06_experiments_counterexamples.md` — 近期维护文件
+- `12_research_notes/09_experiments/README.md` — 核心参考（1 个内部链接）
+- `12_research_notes/10_tutorials_and_guides/01_advanced_data_structures_guide.md` — 近期维护文件
+- `12_research_notes/10_tutorials_and_guides/02_algorithm_exercises_guide.md` — 近期维护文件
+- `12_research_notes/10_tutorials_and_guides/04_cache_eviction_policies_guide.md` — 近期维护文件
+- `12_research_notes/10_tutorials_and_guides/05_faq.md` — 核心参考（2 个内部链接）
+- `12_research_notes/10_tutorials_and_guides/07_glossary.md` — 核心参考（4 个内部链接）
+- `12_research_notes/10_tutorials_and_guides/09_learning_path_comprehensive.md` — 核心参考（1 个内部链接）
+- `12_research_notes/10_tutorials_and_guides/10_lock_free_data_structures_guide.md` — 近期维护文件
+- `12_research_notes/10_tutorials_and_guides/11_practical_applications.md` — 核心参考（2 个内部链接）
+- `12_research_notes/10_tutorials_and_guides/14_research_methodology.md` — 核心参考（1 个内部链接）
+- `12_research_notes/10_tutorials_and_guides/17_tutorial_borrow_checker.md` — 核心参考（2 个内部链接）
+- `12_research_notes/10_tutorials_and_guides/18_tutorial_concurrency_models.md` — 核心参考（5 个内部链接）
+- `12_research_notes/10_tutorials_and_guides/19_tutorial_lifetimes.md` — 核心参考（1 个内部链接）
+- `12_research_notes/10_tutorials_and_guides/20_tutorial_ownership_safety.md` — 核心参考（3 个内部链接）
+- `12_research_notes/10_tutorials_and_guides/21_tutorial_type_system.md` — 核心参考（3 个内部链接）
+- `12_research_notes/10_tutorials_and_guides/22_user_guide.md` — 核心参考（1 个内部链接）
+- `12_research_notes/11_cheatsheets/01_concurrency_cheatsheet.md` — 核心参考（4 个内部链接）
+- `12_research_notes/11_cheatsheets/02_error_handling_cheatsheet.md` — 核心参考（4 个内部链接）
+- `12_research_notes/11_cheatsheets/05_rust_formal_methods_cheatsheet.md` — 核心参考（1 个内部链接）
+- `12_research_notes/13_meta_reports/01_archive_link_audit_report.md` — 近期维护文件
+- `12_research_notes/13_meta_reports/03_classification.md` — 核心参考（1 个内部链接）
+- `12_research_notes/13_meta_reports/04_comprehensive_project_report.md` — 核心参考（1 个内部链接）
+- `12_research_notes/13_meta_reports/06_comprehensive_systematic_overview.md` — 核心参考（1 个内部链接）
+- `12_research_notes/13_meta_reports/07_comprehensive_systematic_review_and_100_percent_plan.md` — 核心参考（1 个内部链接）
+- `12_research_notes/13_meta_reports/08_content_enhancement.md` — 核心参考（1 个内部链接）
+- `12_research_notes/13_meta_reports/09_i18n_translation_gap_analysis.md` — 近期维护文件
+- `12_research_notes/13_meta_reports/10_incremental_update_flow.md` — 核心参考（1 个内部链接）
+- `12_research_notes/13_meta_reports/11_quality_checklist.md` — 核心参考（2 个内部链接）
+- `12_research_notes/13_meta_reports/12_readme_100_percent_completion.md` — 核心参考（1 个内部链接）
+- `12_research_notes/13_meta_reports/14_research_notes_systematization_completion_report.md` — 近期维护文件
+- `14_content/README.md` — 核心参考（1 个内部链接）
+- `15_rust_formal_engineering_system/01_theoretical_foundations/01_type_system/README.md` — 核心参考（4 个内部链接）
+- `15_rust_formal_engineering_system/01_theoretical_foundations/02_ownership_system/README.md` — 核心参考（1 个内部链接）
+- `15_rust_formal_engineering_system/01_theoretical_foundations/03_ownership_borrowing/README.md` — 核心参考（1 个内部链接）
+- `15_rust_formal_engineering_system/01_theoretical_foundations/04_memory_safety/README.md` — 核心参考（1 个内部链接）
+- `15_rust_formal_engineering_system/01_theoretical_foundations/05_trait_system/README.md` — 近期维护文件
+- `15_rust_formal_engineering_system/01_theoretical_foundations/06_lifetime_management/README.md` — 近期维护文件
+- `15_rust_formal_engineering_system/01_theoretical_foundations/README.md` — 近期维护文件
+- `15_rust_formal_engineering_system/02_programming_paradigms/01_benchmark_minimal_guide.md` — 近期维护文件
+- `15_rust_formal_engineering_system/02_programming_paradigms/01_synchronous/README.md` — 核心参考（1 个内部链接）
+- `15_rust_formal_engineering_system/02_programming_paradigms/02_async/README.md` — 核心参考（2 个内部链接）
+- `15_rust_formal_engineering_system/02_programming_paradigms/09_actor_model/README.md` — 核心参考（1 个内部链接）
+- `15_rust_formal_engineering_system/02_programming_paradigms/README.md` — 近期维护文件
+- `15_rust_formal_engineering_system/03_practical_applications/memory/README.md` — 近期维护文件
+- `15_rust_formal_engineering_system/03_practical_applications/performance/README.md` — 近期维护文件
+- `15_rust_formal_engineering_system/03_practical_applications/README.md` — 近期维护文件
+- `15_rust_formal_engineering_system/04_compiler_theory/README.md` — 近期维护文件
+- `15_rust_formal_engineering_system/05_design_patterns/04_concurrent/README.md` — 核心参考（4 个内部链接）
+- `15_rust_formal_engineering_system/05_design_patterns/README.md` — 核心参考（1 个内部链接）
+- `15_rust_formal_engineering_system/06_software_engineering/07_testing/README.md` — 近期维护文件
+- `15_rust_formal_engineering_system/06_software_engineering/README.md` — 近期维护文件
+- `15_rust_formal_engineering_system/07_toolchain_ecosystem/01_compiler/README.md` — 近期维护文件
+- `15_rust_formal_engineering_system/07_toolchain_ecosystem/02_package_manager/README.md` — 近期维护文件
+- `15_rust_formal_engineering_system/07_toolchain_ecosystem/03_build_tools/README.md` — 近期维护文件
+- `15_rust_formal_engineering_system/07_toolchain_ecosystem/README.md` — 近期维护文件
+- `15_rust_formal_engineering_system/08_research_agenda/04_research_methods/README.md` — 近期维护文件
+- `15_rust_formal_engineering_system/09_quality_assurance/README.md` — 近期维护文件
+- `15_rust_formal_engineering_system/README.md` — 核心参考（1 个内部链接）
+- `README.md` — 核心参考（144 个内部链接）
+
+## B 类文件 (34 个)
+
+需更新 — 建议修复
+
+- `00_meta/12_rust_feature_tracking_template.md` — 包含 TODO/FIXME/待补充等标记
+- `02_learning/06_lfrs_certification_mapping.md` — 包含旧版本引用（最高 1.75）
+- `03_reference/04_rustnomicon_alignment.md` — 包含 TODO/FIXME/待补充等标记
+- `03_reference/quick_reference/15_pin_cheatsheet.md` — 包含旧版本引用（最高 1.68）
+- `03_reference/quick_reference/26_threads_concurrency_cheatsheet.md` — 包含 TODO/FIXME/待补充等标记
+- `04_guides/06_io_uring_guide.md` — 包含 TODO/FIXME/待补充等标记
+- `05_practice/02_project_01_cli_tool.md` — 包含 TODO/FIXME/待补充等标记
+- `05_practice/README.md` — 包含 TODO/FIXME/待补充等标记
+- `06_research/11_safety_critical_alignment_2026.md` — 包含 TODO/FIXME/待补充等标记
+- `08_usage_guides/19_pragmatic_guidelines_checklist.md` — 包含 TODO/FIXME/待补充等标记
+- `09_toolchain/13_cranelift_backend_guide.md` — 包含旧版本引用（最高 1.78）
+- `09_toolchain/14_jump_tables_guide.md` — 包含旧版本引用（最高 1.93）
+- `11_project/03_extension_deepening_plan_2026.md` — 包含 TODO/FIXME/待补充等标记
+- `11_project/04_hierarchy_mapping_master.md` — 包含 TODO/FIXME/待补充等标记
+- `12_research_notes/01_alignment_matrices/01_academic_papers_alignment.md` — 包含 TODO/FIXME/待补充等标记
+- `12_research_notes/01_alignment_matrices/05_authoritative_alignment_gap_matrix.md` — 包含 TODO/FIXME/待补充等标记
+- `12_research_notes/01_alignment_matrices/13_authoritative_source_line_anchors.md` — 包含 TODO/FIXME/待补充等标记
+- `12_research_notes/01_alignment_matrices/15_cargo_book_alignment.md` — 包含 TODO/FIXME/待补充等标记
+- `12_research_notes/01_alignment_matrices/16_cicd_supply_chain_alignment.md` — 包含 TODO/FIXME/待补充等标记
+- `12_research_notes/01_alignment_matrices/18_crate_architecture_authoritative_alignment.md` — 包含 TODO/FIXME/待补充等标记
+- `12_research_notes/01_alignment_matrices/32_rust_book_alignment.md` — 包含 TODO/FIXME/待补充等标记
+- `12_research_notes/02_formal_methods/03_borrow_checker_proof.md` — 包含 TODO/FIXME/待补充等标记
+- `12_research_notes/02_formal_methods/09_ownership_model.md` — 包含 TODO/FIXME/待补充等标记
+- `12_research_notes/05_type_theory/05_type_system_foundations.md` — 包含 TODO/FIXME/待补充等标记
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/08_state.md` — 包含 TODO/FIXME/待补充等标记
+- `12_research_notes/08_software_design_theory/03_workflow_safe_complete_models/01_complete_43_catalog.md` — 包含 TODO/FIXME/待补充等标记
+- `12_research_notes/08_software_design_theory/08_crate_architectures/15_wasm_architecture.md` — 包含 TODO/FIXME/待补充等标记
+- `12_research_notes/08_software_design_theory/08_crate_architectures/17_nalgebra_architecture.md` — 包含旧版本引用（最高 1.51）
+- `12_research_notes/10_tutorials_and_guides/06_faq_comprehensive.md` — 包含 TODO/FIXME/待补充等标记
+- `12_research_notes/10_tutorials_and_guides/08_interview_questions_collection.md` — 包含 TODO/FIXME/待补充等标记
+- `12_research_notes/11_cheatsheets/03_lifetime_cheatsheet.md` — 包含 TODO/FIXME/待补充等标记
+- `12_research_notes/11_cheatsheets/04_macros_cheatsheet.md` — 包含 TODO/FIXME/待补充等标记
+- `12_research_notes/13_meta_reports/02_changelog.md` — 包含 TODO/FIXME/待补充等标记
+- `12_research_notes/13_meta_reports/15_research_roadmap.md` — 包含 TODO/FIXME/待补充等标记
+
+## C 类文件 (86 个)
+
+低价值 — 建议归档/删除
+
+- `00_meta/02_content_reconstruction_plan_2026.md` — 包含 deprecated/已归档/过时标记
+- `00_meta/05_documentation_lifecycle.md` — 包含 deprecated/已归档/过时标记
+- `00_meta/07_improvement_plan_execution_complete.md` — 包含 deprecated/已归档/过时标记
+- `00_meta/10_quarterly_sync_checklist.md` — 包含 deprecated/已归档/过时标记
+- `00_meta/11_reorganization_complete.md` — 包含 deprecated/已归档/过时标记
+- `00_meta/13_rust_version_alignment_checklist.md` — 包含 deprecated/已归档/过时标记
+- `00_meta/17_terminology_standard.md` — 包含 deprecated/已归档/过时标记
+- `00_meta/history/00_reorganization.md` — 包含 deprecated/已归档/过时标记
+- `01_core/01_ownership_borrowing_lifetimes.md` — 包含 deprecated/已归档/过时标记
+- `02_learning/03_google_rust_mapping.md` — 包含 deprecated/已归档/过时标记
+- `02_learning/05_learning_path_planning.md` — 包含 deprecated/已归档/过时标记
+- `02_learning/07_mdbook_quiz_guide.md` — 包含 deprecated/已归档/过时标记
+- `03_reference/quick_reference/05_async_patterns.md` — 包含 deprecated/已归档/过时标记
+- `03_reference/quick_reference/06_cargo_cheatsheet.md` — 包含 deprecated/已归档/过时标记
+- `03_reference/quick_reference/12_modules_cheatsheet.md` — 包含 deprecated/已归档/过时标记
+- `03_reference/quick_reference/19_rust_195_features_cheatsheet.md` — 包含 deprecated/已归档/过时标记
+- `03_reference/quick_reference/25_testing_cheatsheet.md` — 包含 deprecated/已归档/过时标记
+- `04_guides/01_async_closures_deep_dive.md` — 包含 deprecated/已归档/过时标记
+- `06_research/04_next_generation_trait_solver.md` — 包含 deprecated/已归档/过时标记
+- `06_research/05_ng_trait_solver.md` — 包含 deprecated/已归档/过时标记
+- `06_research/07_polonius_tracking.md` — 包含 deprecated/已归档/过时标记
+- `06_research/README.md` — 包含 deprecated/已归档/过时标记
+- `07_thinking/01_applications_analysis_view.md` — 包含 deprecated/已归档/过时标记
+- `08_usage_guides/20_safety_tags_guide.md` — 包含 deprecated/已归档/过时标记
+- `08_usage_guides/25_unsafe_fields_preview.md` — 包含 deprecated/已归档/过时标记
+- `09_toolchain/02_rustdoc_advanced.md` — 包含 deprecated/已归档/过时标记
+- `09_toolchain/03_rust_1_93_vs_1_92_comparison.md` — 包含 deprecated/已归档/过时标记
+- `09_toolchain/04_rust_1_93_full_changelog.md` — 包含 deprecated/已归档/过时标记
+- `09_toolchain/05_rust_1_93_compatibility_deep_dive.md` — 包含 deprecated/已归档/过时标记
+- `09_toolchain/06_rust_1_93_cargo_rustdoc_changes.md` — 包含 deprecated/已归档/过时标记
+- `09_toolchain/08_rust_1_96_features.md` — 包含 deprecated/已归档/过时标记
+- `09_toolchain/11_rust_1_96_features.md` — 包含 deprecated/已归档/过时标记
+- `09_toolchain/17_rustdoc_196_improvements.md` — 包含 deprecated/已归档/过时标记
+- `09_toolchain/README.md` — 包含 deprecated/已归档/过时标记
+- `11_project/02_documentation_cross_reference_guide.md` — 包含 deprecated/已归档/过时标记
+- `11_project/07_project_architecture_guide.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/00_organization_and_navigation.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/01_alignment_matrices/06_authoritative_alignment_guide.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/01_alignment_matrices/10_authoritative_source_alignment_network.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/01_alignment_matrices/31_rfc_tracking_status.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/01_alignment_matrices/36_rustbelt_alignment.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/02_formal_methods/01_async_runtime_decision_tree.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/02_formal_methods/02_async_state_machine.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/02_formal_methods/10_pin_self_referential.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/02_formal_methods/13_testing_strategy_decision_tree.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/03_formal_proofs/01_aeneas_integration_plan.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/03_formal_proofs/04_coq_of_rust_integration_plan.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/03_formal_proofs/13_formal_language_and_proofs.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/03_formal_proofs/14_formal_methods_master_index.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/03_formal_proofs/15_formal_proof_critical_analysis_and_plan_2026_02.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/03_formal_proofs/17_formal_verification_guide.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/03_formal_proofs/18_international_formal_verification_index.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/03_formal_proofs/19_l3_machine_proof_guide.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/03_formal_proofs/21_proof_index.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/03_formal_proofs/33_version_evolution_counterexamples.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/04_formal_module_system/08_module_patterns_and_refactoring.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/05_type_theory/README.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/06_concept_models/01_application_trees.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/06_concept_models/03_argumentation_gap_index.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/06_concept_models/18_visualization_index.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/07_distributed_and_workflow/02_distributed_concept_mindmap.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/08_software_design_theory/01_design_patterns_formal/01_creational/05_singleton.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/08_software_design_theory/05_compositional_engineering/README.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/08_software_design_theory/08_crate_architectures/00_crate_architecture_master_index.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/08_software_design_theory/08_crate_architectures/05_bevy_architecture.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/08_software_design_theory/08_crate_architectures/10_tonic_architecture.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/08_software_design_theory/08_crate_architectures/11_reqwest_architecture.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/08_software_design_theory/08_crate_architectures/22_mio_architecture.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/08_software_design_theory/08_crate_architectures/23_redis_architecture.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/08_software_design_theory/08_crate_architectures/44_crate_architecture_counterexamples.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/08_software_design_theory/README.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/09_experiments/02_concurrency_performance.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/09_experiments/05_performance_benchmarks.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/10_tutorials_and_guides/03_best_practices.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/10_tutorials_and_guides/12_quick_find.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/10_tutorials_and_guides/13_quick_reference.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/10_tutorials_and_guides/15_resources.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/10_tutorials_and_guides/16_tools_guide.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/12_version_research/01_rust_193_language_features_comprehensive_analysis.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/12_version_research/02_rust_194_research_update.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/13_meta_reports/05_comprehensive_summary.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/13_meta_reports/13_research_notes_organization.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/13_meta_reports/16_system_summary.md` — 包含 deprecated/已归档/过时标记
+- `12_research_notes/README.md` — 包含 deprecated/已归档/过时标记
+- `13_templates/01_versioned_doc_template.md` — 包含 deprecated/已归档/过时标记
+- `15_rust_formal_engineering_system/00_master_index.md` — 包含 deprecated/已归档/过时标记
