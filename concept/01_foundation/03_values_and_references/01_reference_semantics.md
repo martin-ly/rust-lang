@@ -492,8 +492,16 @@ graph TD
 
 ## 相关概念
 
-- **上层概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) · [Type System](../02_type_system/01_type_system.md) · [Lifetime](../01_ownership_borrow_lifetime/03_lifetimes.md)
-- **下层概念**: [Smart Pointers](../../02_intermediate/02_memory_management/01_memory_management.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Formal Methods](../../04_formal/01_ownership_logic/01_linear_logic.md)
+- **上层概念**:
+- [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) ·
+- [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) ·
+- [Type System](../02_type_system/01_type_system.md) ·
+- [Lifetime](../01_ownership_borrow_lifetime/03_lifetimes.md)
+- **下层概念**:
+- [Smart Pointers](../../02_intermediate/02_memory_management/01_memory_management.md) ·
+- [Generics](../../02_intermediate/01_generics/01_generics.md) ·
+- [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) ·
+- [Formal Methods](../../04_formal/01_ownership_logic/01_linear_logic.md)
 
 - [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) — 所有权模型
 - [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) — 借用与生命周期（Lifetimes）
@@ -503,7 +511,10 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html),
+> [The Rust Programming Language](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html),
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
 
 **文档版本**: 1.1

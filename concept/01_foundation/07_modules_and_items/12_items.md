@@ -11,9 +11,17 @@
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×App — 规范应用
 > **前置依赖**: [Modules and Paths](01_modules_and_paths.md) · [Crates and Source Files](11_crates_and_source_files.md) · [Functions](02_functions.md)
-> **后置概念**: [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) · [Linkage](../../03_advanced/04_ffi/03_linkage.md)
+> **后置概念**:
+> [Traits](../../02_intermediate/00_traits/01_traits.md) ·
+> [Generics](../../02_intermediate/01_generics/01_generics.md) ·
+> [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) ·
+> [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) ·
+> [Linkage](../../03_advanced/04_ffi/03_linkage.md)
 > **定理链**: Crate → Module → Item → Scope → Visibility
-> **主要来源**: [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html) · [TRPL — Packages and Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html) · [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html)
+> **主要来源**:
+> [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html) ·
+> [TRPL — Packages and Crates](https://doc.rust-lang.org/book/ch07-01-packages-and-crates.html) ·
+> [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html)
 
 ---
 

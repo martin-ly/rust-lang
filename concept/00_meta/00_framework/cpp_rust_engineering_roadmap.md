@@ -11,7 +11,11 @@
 > **双维定位**: C×Ana / C×Eva
 > **前置概念**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [Variable Model](../../01_foundation/03_values_and_references/03_variable_model.md)
 > **后置概念**: [Pattern Semantic Space Index](pattern_semantic_space_index.md) · [C++ ABI Object Model](../../05_comparative/01_systems_languages/02_cpp_abi_object_model.md)
-> **主要来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University CRP Phrasebook](https://cel.cs.brown.edu/crp/) · [Rust Foundation Interop Initiative](https://github.com/rustfoundation/interop-initiative)
+> **主要来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Brown University CRP Phrasebook](https://cel.cs.brown.edu/crp/) ·
+> [Rust Foundation Interop Initiative](https://github.com/rustfoundation/interop-initiative)
 ---
 
 > **Bloom 层级**: L2-L5
