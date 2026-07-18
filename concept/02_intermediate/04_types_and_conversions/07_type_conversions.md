@@ -120,7 +120,7 @@ Trait 转换:
 - **`From`/`Into`**：无损转换，实现 `From` 自动获得 `Into`（blanket impl）——`String::from(&str)`、`u32::from(u8)`。`From` 实现即「类型间存在典范映射」的声明；
 - **`TryFrom`/`TryInto`**：有损但可校验的转换，返回 `Result`——`u8::try_from(i32)`、`usize::try_from(u64)`。1.34 起 std 为所有「可能失败」的整数转换提供实现；
 - **`AsRef`/`AsMut`**：廉价引用（Reference）转换（`String: AsRef<str>`），用于泛型（Generics） API 接受「任何可视为 str 的类型」；
-- **`Deref`/`DerefMut`**：智能指针（Smart Pointer）的解引用协议，支撑 deref coercion——只应为「指针-like」类型实现，滥用作继承模拟是反模式。
+- **`Deref`/`DerefMut`**：智能指针（Smart Pointer）的解引用（Reference）协议，支撑 deref coercion——只应为「指针-like」类型实现，滥用作继承模拟是反模式。
 
 判定准则：转换方向无损 → `From`；可能失败 → `TryFrom`；只是「可视为」→ `AsRef`；`as` 仅用于数值与指针的底层转换。
 
@@ -295,9 +295,9 @@ fn main() {}
 本节检验类型转换的两条常见误判：
 
 - **反命题 1：「实现了 `From` 就该实现 `Into`」** —— 错误且冗余：`Into` 有 blanket impl 自动派生自 `From`，手写 `Into` 会与 blanket impl 冲突（E0119）。正确做法永远只实现 `From`/`TryFrom`。
-- **反命题 2：「`as` 与 `From` 等价只是更简洁」** —— 危险。`as` 可静默截断（`256u16 as u8 == 0`）、可饱和浮点（`f64::MAX as u64`）、可重解释位模式——而 `From` 被类型系统限制为只存在于**无损**方向。代码审查中每个 `as` 都应能回答「为什么这里截断/饱和是可接受的」。
+- **反命题 2：「`as` 与 `From` 等价只是更简洁」** —— 危险。`as` 可静默截断（`256u16 as u8 == 0`）、可饱和浮点（`f64::MAX as u64`）、可重解释位模式——而 `From` 被类型系统（Type System）限制为只存在于**无损**方向。代码审查中每个 `as` 都应能回答「为什么这里截断/饱和是可接受的」。
 
-边界极限小节量化：反射式转换的不存在（Rust 无运行时类型查询，`Any` 只支持相等判定）、`Into` 在泛型约束中的 ergonomics（`impl Into<String>` 接受 `&str` 与 `String`）、以及孤儿规则对跨 crate 转换实现的限制。
+边界极限小节量化：反射式转换的不存在（Rust 无运行时（Runtime）类型查询，`Any` 只支持相等判定）、`Into` 在泛型（Generics）约束中的 ergonomics（`impl Into<String>` 接受 `&str` 与 `String`）、以及孤儿规则对跨 crate 转换实现的限制。
 
 ### 5.1 反命题树
 

@@ -16,7 +16,7 @@
 >
 > **状态**: ✅ 已完成
 >
-> - `async-std` 已进入维护模式，新项目建议优先考虑 Tokio / smol。
+> - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 >
 > **概念族**: Crate 架构 / redis
 >

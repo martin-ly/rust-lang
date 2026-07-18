@@ -224,7 +224,7 @@ Panic 可以是可恢复的，也可以是不可恢复的，具体取决于 pani
 <details>
 <summary>✅ 答案</summary>
 
-**B 正确**。按本页「六、跨 FFI Boundary 的 Unwinding」UB 清单：①从非 unwinding ABI（`"C"`、`"system"`）声明的外国函数引发 unwind 进入 Rust 代码；②从不支持 unwind 的代码调用 `extern "C-unwind"` 等允许 unwind 的 ABI 声明的 Rust 函数。A/C 是合法的同运行时恢复机制（§五）；D 是 `C-unwind` ABI 的设计用途。
+**B 正确**。按本页「六、跨 FFI Boundary 的 Unwinding」UB 清单：①从非 unwinding ABI（`"C"`、`"system"`）声明的外国函数引发 unwind 进入 Rust 代码；②从不支持 unwind 的代码调用 `extern "C-unwind"` 等允许 unwind 的 ABI 声明的 Rust 函数。A/C 是合法的同运行时（Runtime）恢复机制（§五）；D 是 `C-unwind` ABI 的设计用途。
 
 </details>
 

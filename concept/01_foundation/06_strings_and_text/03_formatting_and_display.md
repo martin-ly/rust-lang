@@ -117,7 +117,7 @@ write!  (destination, "format_string", args...)
 
 - **格式化 trait 的分工**：`Display`（面向用户的输出）、`Debug`（面向开发者，`{:?}`）、`LowerHex`/`Octal`/`Binary`/`Pointer` 等数值格式——`Display` 需手写或借助 `thiserror` 等，不可派生；
 - **格式参数的完整语法**：`{val:>width$.precision$}`——对齐（`<`/`^`/`>`）、填充、宽度、精度、符号（`+`）、进制（`x`/`o`/`b`/`e`）与命名参数（`{name}`，1.58+ 支持 `{var}` 内联捕获）；
-- **`format!` 家族的成本模型**：`format!` 分配 `String`、`write!` 写入 `io::Write` 或 `fmt::Write` 不分配（可复用缓冲）、`format_args!` 构造惰性 `Arguments`——日志宏等高频路径应传 `format_args!` 避免无条件分配。
+- **`format!` 家族的成本模型**：`format!` 分配 `String`、`write!` 写入 `io::Write` 或 `fmt::Write` 不分配（可复用缓冲）、`format_args!` 构造惰性 `Arguments`——日志宏（Macro）等高频路径应传 `format_args!` 避免无条件分配。
 
 每个要点附最小示例与输出对照，可直接运行验证。
 
@@ -297,7 +297,7 @@ fn main() {
 
 ## 六、边界测试
 
-本节把「格式化与显示（Display and Debug Formatting）」的规则推到编译器与运行时的边界上逐一实测：边界测试：命名参数 与 边界测试：动态宽度与精度。每个用例标注预期结果（编译错误 / 运行时 panic / 逻辑错误），并用 rustc 1.97 验证：能复现的给出诊断信息与触发条件，不能复现的说明原因。这些用例共同回答一个问题——规则在极限处是否仍然成立，以及违反时编译器能否兜底。
+本节把「格式化与显示（Display and Debug Formatting）」的规则推到编译器与运行时（Runtime）的边界上逐一实测：边界测试：命名参数 与 边界测试：动态宽度与精度。每个用例标注预期结果（编译错误 / 运行时 panic / 逻辑错误），并用 rustc 1.97 验证：能复现的给出诊断信息与触发条件，不能复现的说明原因。这些用例共同回答一个问题——规则在极限处是否仍然成立，以及违反时编译器能否兜底。
 
 ### 6.1 边界测试：命名参数
 

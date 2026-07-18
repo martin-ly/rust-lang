@@ -243,7 +243,7 @@ a.overflowing_add(b);  // (44, true)
 
 ## 二、技术细节
 
-本节展开「数值类型与运算：从整数到浮点的完整图景」的技术细节：类型转换与 as、Wrapping、Saturating、Checked、Overflo…、NonZero 类型与优化与SIMD 与向量化。重点是类型签名、所有权（Ownership）语义与编译期约束如何相互作用，而不是 API 罗列；每个小节给出可编译的最小示例，并标注对应反例的失败规则。读完后应能解释：为什么这种写法能通过编译，而那种写法会被借用（Borrowing）检查器或类型系统拒绝。
+本节展开「数值类型与运算：从整数到浮点的完整图景」的技术细节：类型转换与 as、Wrapping、Saturating、Checked、Overflo…、NonZero 类型与优化与SIMD 与向量化。重点是类型签名、所有权（Ownership）语义与编译期约束如何相互作用，而不是 API 罗列；每个小节给出可编译的最小示例，并标注对应反例的失败规则。读完后应能解释：为什么这种写法能通过编译，而那种写法会被借用（Borrowing）检查器或类型系统（Type System）拒绝。
 
 ### 2.1 类型转换与 as
 >

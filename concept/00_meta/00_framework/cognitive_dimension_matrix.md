@@ -3,7 +3,7 @@
 > 本文档提及 `async-std` 与/或 `wasm32-wasi`。
 > 请注意：
 >
-> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
@@ -167,7 +167,7 @@ mindmap
 | 概念文件 | 事实性 (F) | 概念性 (C) | 程序性 (P) | 元认知 (M) |
 |:---|:---|:---|:---|:---|
 | **01_concurrency** | F×Mem: `Send` / `Sync` auto trait 定义 F×App: `Mutex::lock` / `thread::spawn` 用法 | C×Und: fearless concurrency = 类型系统保证 C×Ana: 分析 `Atomic` memory ordering 的影响 | P×App: 实现无锁数据结构 P×Eva: 评估 crossbeam vs std::sync 选型 | M×Cre: 设计并发安全的学习验证实验 |
-| **02_async** | F×Mem: `Future` / `Poll` / `Waker` API F×App: `async fn` / `.await` 语法 | C×Und: async = CPS 变换 + 状态机 C×Ana: 分析 `Pin` 在自引用中的必要性 | P×App: 实现自定义 Future P×Eva: 评估 tokio vs async-std [已归档] 生态 | M×Ana: 诊断自身对 async 执行模型的误解 |
+| **02_async** | F×Mem: `Future` / `Poll` / `Waker` API F×App: `async fn` / `.await` 语法 | C×Und: async = CPS 变换 + 状态机 C×Ana: 分析 `Pin` 在自引用中的必要性 | P×App: 实现自定义 Future P×Eva: 评估 tokio vs async-std [已停止维护] 生态 | M×Ana: 诊断自身对 async 执行模型的误解 |
 | **03_unsafe** | F×Mem: `unsafe` 块 / `unsafe fn` / `unsafe impl` 语法 F×App: `*const T` / `*mut T` 裸指针操作 | C×Und: unsafe = 安全边界逃逸舱口 C×Ana: 分析 Miri 检测不到的 UB 类别 | P×App: 编写 SAFETY 注释 P×Eva: 评估 `unsafe` 抽象的 soundness | M×Eva: 评估自身 unsafe 使用的风险偏好 |
 | **04_macros** | F×Mem: `macro_rules!` / `proc_macro` API F×App: 声明宏匹配规则编写 | C×Und: 卫生宏 = gensym 的 Rust 实现 C×Ana: 分析宏展开与类型检查的顺序 | P×App: 实现自定义 derive 宏 P×Eva: 评估宏 vs 泛型的可维护性 | M×Cre: 设计 DSL 嵌入策略 |
 

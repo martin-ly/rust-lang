@@ -229,11 +229,11 @@ flowchart TD
 
 | 概念 | 关系 |
 |:---|:---|
-| [所有权](../01_ownership_borrow_lifetime/01_ownership.md) | Rust 最核心的内存管理规则 |
-| [类型系统](../02_type_system/01_type_system.md) | 编译期保证程序行为的基础 |
+| [所有权（Ownership）](../01_ownership_borrow_lifetime/01_ownership.md) | Rust 最核心的内存管理规则 |
+| [类型系统（Type System）](../02_type_system/01_type_system.md) | 编译期保证程序行为的基础 |
 | [Cargo 入门](../../06_ecosystem/01_cargo/15_cargo_getting_started.md) | 更完整的包管理与发布指南 |
-| [模块与路径](../07_modules_and_items/01_modules_and_paths.md) | 组织 crate 内部代码的方式 |
-| [错误处理基础](../08_error_handling/01_error_handling_basics.md) | 学习 `Result` 与 `?` 的起点 |
+| [模块（Module）与路径](../07_modules_and_items/01_modules_and_paths.md) | 组织 crate 内部代码的方式 |
+| [错误处理（Error Handling）基础](../08_error_handling/01_error_handling_basics.md) | 学习 `Result` 与 `?` 的起点 |
 | [测试基础](../10_testing_basics/01_testing_basics.md) | `cargo test` 的详细用法 |
 
 ---
@@ -327,7 +327,7 @@ fn main() {
 }
 ```
 
-**修正对照**（借用或显式克隆，编译通过）：
+**修正对照**（借用（Borrowing）或显式克隆，编译通过）：
 
 ```rust
 fn main() {

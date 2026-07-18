@@ -184,7 +184,7 @@ fn main() {
 - **上位（is-a）**：Rust 词法与语法表层（lexical layer）的保留词集合。
 - **下位（实例）**：`fn` / `let` / `match` / `async` / `unsafe` 等现行关键字，`gen` 等保留关键字。
 - **组合**：与 [运算符与符号](07_operators_and_symbols.md) 共同构成 Rust 词法表层全貌。
-- **依赖**：宏展开需区分关键字与标识符，见 [宏卫生](../../03_advanced/03_proc_macros/09_macro_hygiene.md)。
+- **依赖**：宏（Macro）展开需区分关键字与标识符，见 [宏卫生](../../03_advanced/03_proc_macros/09_macro_hygiene.md)。
 
 ---
 
@@ -253,7 +253,7 @@ let ok = r#try(input);
 <details>
 <summary>✅ 答案</summary>
 
-**B 正确**。按本页「实践建议」三条：①**避免**用关键字作标识符（即使 raw identifier 允许）——A 正是要规避的反例；②跨 edition 依赖时留意保留关键字变化（2015→2018 的 `try`/`async`/`await`）——D 错；③宏生成代码中可能需要 raw identifier（用户输入生成关键字命名字段/变量）。C 错：`r#` 是词法前缀，不是运行时机制。
+**B 正确**。按本页「实践建议」三条：①**避免**用关键字作标识符（即使 raw identifier 允许）——A 正是要规避的反例；②跨 edition 依赖时留意保留关键字变化（2015→2018 的 `try`/`async`/`await`）——D 错；③宏生成代码中可能需要 raw identifier（用户输入生成关键字命名字段/变量）。C 错：`r#` 是词法前缀，不是运行时（Runtime）机制。
 
 </details>
 

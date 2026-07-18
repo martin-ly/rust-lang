@@ -1512,7 +1512,7 @@ mindmap
 
 Actor 模型把「并发单元 + 私有状态 + 邮箱」打包为进程内隔离的实体，Rust 实现的两个层级：
 
-- **基础 Actor 框架**：一个 actor = 「状态结构体（Struct） + 消息枚举 + 处理循环」的固定三件套：`tokio::spawn` 一个任务，内部 `while let Some(msg) = rx.recv().await { state.handle(msg) }`——状态字段无需 `Mutex`（只有循环任务访问），`Send` 约束只作用于消息类型。这是「用所有权替代锁」的范式实例：actor 状态的可变性由「单一任务独占」保证，类型系统经 `Send` 校验消息可跨任务移动。
+- **基础 Actor 框架**：一个 actor = 「状态结构体（Struct） + 消息枚举（Enum） + 处理循环」的固定三件套：`tokio::spawn` 一个任务，内部 `while let Some(msg) = rx.recv().await { state.handle(msg) }`——状态字段无需 `Mutex`（只有循环任务访问），`Send` 约束只作用于消息类型。这是「用所有权替代锁」的范式实例：actor 状态的可变性由「单一任务独占」保证，类型系统（Type System）经 `Send` 校验消息可跨任务移动。
 - **高级 Actor 特性**：监督策略（supervision：子 actor panic 后重启/升级，借鉴 Erlang——Rust 中用「spawn + JoinHandle 监控 + 重启循环」实现，注意状态重建策略需显式设计）；路由 actor（按消息键分发到 worker actor 池，一致性（Coherence）哈希或轮询）；背压邮箱（有界 `mpsc` 使快生产者在 actor 入口被自然限速）。
 
 判定「是否用 Actor 模式」：状态有明确归属且交互为异步消息 → actor 合适（actix、kameo 是成熟框架）；状态需多读写者并发细粒度访问 → 共享状态 + 锁/无锁更合适。actor 的成本是「每次交互一次堆分配 + 调度」，不适合纳秒级热路径。
@@ -1663,7 +1663,7 @@ impl Actor for EchoActor {
 基础 Actor（每个 actor 一个邮箱 + 处理循环）之上，生产系统需要两个高级特性：
 
 - **监督策略（2.1）**：子 actor 崩溃时的恢复策略——one-for-one（只重启崩溃者）、one-for-all（重启整组）、rest-for-one（重启崩溃者及其后启动者）。Rust 无 Erlang 式内建监督树，需用 `JoinHandle` 结果 + 重启循环手动实现，或采用 `actix`/`riker` 框架；判定准则是「状态能否从持久层重建」——能则重启，不能则升级为 panic 传播；
-- **路由 Actor（2.2）**：把消息按 key 分发到 worker 池的路由模式——round-robin、一致性哈希（会话亲和）、最小邮箱优先（负载均衡）。实现要点是路由器本身不能成为瓶颈：无状态路由用原子计数器，有状态路由用 `DashMap`。
+- **路由 Actor（2.2）**：把消息按 key 分发到 worker 池的路由模式——round-robin、一致性（Coherence）哈希（会话亲和）、最小邮箱优先（负载均衡）。实现要点是路由器本身不能成为瓶颈：无状态路由用原子计数器，有状态路由用 `DashMap`。
 
 两特性的共同教训：Actor 模型简化的是**数据竞争**，不简化**故障语义**——监督与背压仍需显式设计。
 

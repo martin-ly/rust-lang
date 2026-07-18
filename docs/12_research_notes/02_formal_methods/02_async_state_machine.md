@@ -4,7 +4,7 @@
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
 >
-> - `async-std` 已进入维护模式，新项目建议优先考虑 Tokio / smol。
+> - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 已重命名为 `wasm32-wasip1`；WASI Preview 2 目标为 `wasm32-wasip2`。
 > **概念族**: 异步 / Future / async/await
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/12_research_notes/ 概念链关键节点持续推进。
@@ -31,7 +31,7 @@
 
 ## 📑 目录 {#目录}
 
-- [异步（Async）状态机形式化 {#异步状态机形式化}](#异步状态机形式化-异步状态机形式化)
+- [异步状态机形式化 {#异步状态机形式化}](#异步状态机形式化-异步状态机形式化)
   - [📑 目录 {#目录}](#-目录-目录)
   - [🎯 研究目标 {#研究目标}](#-研究目标-研究目标)
     - [核心问题 {#核心问题}](#核心问题-核心问题)
@@ -41,7 +41,7 @@
     - [理论背景 {#理论背景}](#理论背景-理论背景)
     - [状态机的理论基础 {#状态机的理论基础}](#状态机的理论基础-状态机的理论基础)
     - [Future/Poll 的理论基础 {#futurepoll-的理论基础}](#futurepoll-的理论基础-futurepoll-的理论基础)
-    - [并发安全（Concurrency Safety）的理论基础 {#并发安全的理论基础}](#并发安全的理论基础-并发安全的理论基础)
+    - [并发安全的理论基础 {#并发安全的理论基础}](#并发安全的理论基础-并发安全的理论基础)
     - [相关学术论文的详细分析 {#相关学术论文的详细分析}](#相关学术论文的详细分析-相关学术论文的详细分析)
       - [1. Async/await for Rust: A Language Perspective {#1-asyncawait-for-rust-a-language-perspective}](#1-asyncawait-for-rust-a-language-perspective-1-asyncawait-for-rust-a-language-perspective)
       - [2. Formal Verification of Async Rust Programs {#2-formal-verification-of-async-rust-programs}](#2-formal-verification-of-async-rust-programs-2-formal-verification-of-async-rust-programs)
@@ -69,12 +69,12 @@
     - [待证明的性质 {#待证明的性质}](#待证明的性质-待证明的性质)
     - [证明方法 {#证明方法}](#证明方法-证明方法)
     - [证明工作 {#证明工作}](#证明工作-证明工作)
-      - [定理 6.1 (状态一致性（Coherence）) {#定理-61-状态一致性}](#定理-61-状态一致性-定理-61-状态一致性)
+      - [定理 6.1 (状态一致性) {#定理-61-状态一致性}](#定理-61-状态一致性-定理-61-状态一致性)
       - [定理 6.2 (并发安全) {#定理-62-并发安全}](#定理-62-并发安全-定理-62-并发安全)
       - [定理 6.3 (进度保证) {#定理-63-进度保证}](#定理-63-进度保证-定理-63-进度保证)
   - [🔗 系统集成与实际应用 {#系统集成与实际应用}](#-系统集成与实际应用-系统集成与实际应用)
-    - [与类型系统（Type System）的集成 {#与类型系统的集成}](#与类型系统的集成-与类型系统的集成)
-    - [与生命周期（Lifetimes）的集成 {#与生命周期的集成}](#与生命周期的集成-与生命周期的集成)
+    - [与类型系统的集成 {#与类型系统的集成}](#与类型系统的集成-与类型系统的集成)
+    - [与生命周期的集成 {#与生命周期的集成}](#与生命周期的集成-与生命周期的集成)
     - [实际应用案例 {#实际应用案例}](#实际应用案例-实际应用案例)
     - [Rust 对应 {#rust-对应}](#rust-对应-rust-对应)
   - [⚠️ 反例：违反异步安全规则 {#反例违反异步安全规则}](#️-反例违反异步安全规则-反例违反异步安全规则)
@@ -1469,7 +1469,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 
 > **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
-1. **异步 I/O 与运行时**：Tokio/async-std [已归档] 中的 `AsyncRead`/`AsyncWrite`、`TcpStream` 等；每个 `poll_*` 对应状态机的一次 Poll 与状态转换，满足定理 6.1–6.3。
+1. **异步 I/O 与运行时**：Tokio/async-std [已停止维护] 中的 `AsyncRead`/`AsyncWrite`、`TcpStream` 等；每个 `poll_*` 对应状态机的一次 Poll 与状态转换，满足定理 6.1–6.3。
 2. **并发与 Select**：`tokio::select!`、`FuturesUnordered` 等多路复用；多个 `Future` 并发 Poll，由 Send/Sync 与定理 6.2 保证数据竞争自由。
 3. **结构化并发与取消**：`tokio_util::CancellationToken`、`JoinSet`；取消即状态机提前到终止状态，不违反进度性的有限性假设（“有限计算”排除显式取消前的无限等待）。
 
@@ -1583,7 +1583,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 > **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
 
 - [Tokio 实现](https://github.com/tokio-rs/tokio)
-- [async-std [已归档] 实现](<https://github.com/async-rs/async-std> [已归档])
+- [async-std [已停止维护] 实现](<https://github.com/async-rs/async-std> [已归档])
 - [Futures crate](https://github.com/rust-lang/futures-rs)
 - [标准库 Future 实现](https://doc.rust-lang.org/std/future/trait.Future.html)
 

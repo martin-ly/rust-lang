@@ -308,7 +308,7 @@ fn main() {
 | 类型 | 定义方式 | 用途 | 示例 |
 |:---|:---|:---|:---|
 | 派生宏（Macro） | `#[proc_macro_derive(Name)]` | 为类型自动实现 trait | `#[derive(Debug)]` |
-| 属性宏 | `#[proc_macro_attribute]` | 修改/包装函数/结构体（Struct） | `#[trace]`、`#[test]` |
+| 属性宏（Macro） | `#[proc_macro_attribute]` | 修改/包装函数/结构体（Struct） | `#[trace]`、`#[test]` |
 | 函数式宏 | `#[proc_macro]` | 像函数一样调用，操作 token | `sql!(SELECT * FROM users)` |
 
 **`#[trace]` 可能的展开**：
@@ -663,7 +663,7 @@ macro_rules! make_vec {
 
 **答案：B**
 
-**解析**：卫生性 = 展开时的**标识符隔离**：`macro_rules! m { () => { let x = 1; } }` 中的 `x` 与调用点的 `x` 是两个不同的绑定，互不遮蔽。这避免了 C 预处理器式的"名字污染"整类 bug。C 错：宏**可以**引用调用点作用域中可见的项（这正是 `$crate` 之外的正常路径解析）；卫生性隔离的是宏**内部新引入**的绑定。
+**解析**：卫生性 = 展开时的**标识符隔离**：`macro_rules! m { () => { let x = 1; } }` 中的 `x` 与调用点的 `x` 是两个不同的绑定，互不遮蔽。这避免了 C 预处理器式的"名字污染"整类 bug。C 错：宏**可以**引用（Reference）调用点作用域中可见的项（这正是 `$crate` 之外的正常路径解析）；卫生性隔离的是宏**内部新引入**的绑定。
 
 </details>
 
@@ -673,8 +673,8 @@ macro_rules! make_vec {
 
 - A. derive 宏为类型自动生成 trait 实现
 - B. 属性宏（attribute macro）可作用于函数、结构体（Struct）等项，读取并改写它们
-- C. 函数式过程宏（function-like）调用形式类似声明宏，但操作的是 `TokenStream`
-- D. 过程宏在程序运行期展开
+- C. 函数式过程宏（function-like）调用形式类似声明宏（Declarative Macro），但操作的是 `TokenStream`
+- D. 过程宏（Procedural Macro）在程序运行期展开
 
 <details>
 <summary>✅ 答案与解析</summary>
@@ -707,7 +707,7 @@ macro_rules! make_vec {
 
 **答案：错**
 
-**解析**：`macro_rules!` 是纯**模式匹配 + 模板替换**：不能检查类型信息、不能执行任意 Rust 代码、不能生成标识符拼接（无 `concat_idents!` 稳定支持）。需要"读入代码、计算、生成代码"的能力（如 derive、路由注册）必须用过程宏。实践中二者互补：简单重复/DSL 用声明宏，复杂生成用过程宏（常由 `macro_rules!` 做前端、过程宏做后端）。
+**解析**：`macro_rules!` 是纯**模式匹配（Pattern Matching） + 模板替换**：不能检查类型信息、不能执行任意 Rust 代码、不能生成标识符拼接（无 `concat_idents!` 稳定支持）。需要"读入代码、计算、生成代码"的能力（如 derive、路由注册）必须用过程宏。实践中二者互补：简单重复/DSL 用声明宏，复杂生成用过程宏（常由 `macro_rules!` 做前端、过程宏做后端）。
 
 </details>
 

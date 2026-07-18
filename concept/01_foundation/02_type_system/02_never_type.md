@@ -345,7 +345,7 @@ fn new_style() -> Result<i32, !> {
 
 Never type 的稳定化是一个跨越多年的渐进过程，本节按时间线梳理其状态（截至 Rust 1.97）：
 
-- **未完整稳定的部分**：`!` 作为一等类型在任意位置书写（如 `fn f() -> !` 已稳定，但泛型参数 `Result<T, !>` 中的显式 `!` 标注、trait 中关联类型为 `!` 等）仍受 `never_type` feature gate 约束，跟踪 issue 为 rust-lang/rust#35121。稳定化的主要障碍是「`!` 与 `()` 的历史兼容」：早期代码中发散函数的实际类型被推为 `()`，全量切换会破坏部分 trait impl 的匹配。
+- **未完整稳定的部分**：`!` 作为一等类型在任意位置书写（如 `fn f() -> !` 已稳定，但泛型（Generics）参数 `Result<T, !>` 中的显式 `!` 标注、trait 中关联类型为 `!` 等）仍受 `never_type` feature gate 约束，跟踪 issue 为 rust-lang/rust#35121。稳定化的主要障碍是「`!` 与 `()` 的历史兼容」：早期代码中发散函数的实际类型被推为 `()`，全量切换会破坏部分 trait impl 的匹配。
 - **Rust 1.92 的进展**：与 never type 相关的 future-incompat lint 转为 deny-by-default，推动生态代码为最终稳定化提前修复。
 - **Rust 1.96 的进展**：元组强制（tuple coercion）相关的 `!` 边角案例修复，使 `(T, !)` 这类复合位置的行为与理论一致。
 

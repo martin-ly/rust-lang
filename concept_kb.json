@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 526,
-    "generated_at": "2026-07-17T13:19:50.118479+00:00"
+    "total_files": 527,
+    "generated_at": "2026-07-18T10:30:29.263315+00:00"
   },
   "files": [
     {
@@ -274,7 +274,7 @@
       "layer": "L0",
       "title": "C/C++ → Rust 工程层对比路线图",
       "positioning": "",
-      "line_count": 259,
+      "line_count": 263,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -10737,7 +10737,7 @@
       "layer": "L1",
       "title": "Type System Basics（类型系统基础）",
       "positioning": "",
-      "line_count": 3374,
+      "line_count": 3376,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡、相关概念链接",
@@ -12039,7 +12039,7 @@
       "layer": "L1",
       "title": "引用语义：自动解引用、Deref 强制与类型转换",
       "positioning": "深入分析 Rust 的**引用语义机制**——自动解引用（Auto-deref）、Deref 强制（Deref Coercion）、类型强制（Type Coercion）以及它们与借用（Borrowing）检查器的交互，澄清开发者常见的隐式转换困惑。",
-      "line_count": 1511,
+      "line_count": 1522,
       "theorem_chains": [
         {
           "text": "2. **可变引用的弱化方向不可逆**：`&mut T` 可重借为 `&T`（可变 ⟹ 共享），但 `&&mut T` 永远无法变成 `&mut &mut T`——共享引用的不可变性是类型级承诺，穿透它即 UB 领域。",
@@ -12351,7 +12351,7 @@
       "layer": "L1",
       "title": "值语义 vs 引用语义：从 C++、Java、Python 到 Rust",
       "positioning": "",
-      "line_count": 275,
+      "line_count": 281,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -12550,7 +12550,7 @@
       "layer": "L1",
       "title": "控制流：表达式导向的流程控制",
       "positioning": "分析 Rust **控制流结构**的设计哲学——从表达式导向（expression-oriented）的 `if`/`match`/`loop`，到 `if let`/`while let` 的模式匹配（Pattern Matching）集成，揭示 Rust 如何将控制流转化为**值生成**而非**副作用执行**。",
-      "line_count": 1747,
+      "line_count": 1749,
       "theorem_chains": [
         {
           "text": "| 控制流：表达式导向的流程控制 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -14103,7 +14103,7 @@
       "layer": "L1",
       "title": "模块系统与路径：Rust 的代码组织哲学",
       "positioning": "系统讲解 Rust **模块（Module）系统**——从 `mod`、`use`、`pub` 的语法到文件系统映射、工作空间组织，揭示 Rust 如何通过模块系统实现代码封装、可见性控制和大型项目组织。",
-      "line_count": 989,
+      "line_count": 993,
       "theorem_chains": [
         {
           "text": "| 项仅在当前模块内使用 | 默认私有 | 可见性系统（§1.2） | 跨模块访问 ⟹ 编译错误（§10.1） |",
@@ -15481,7 +15481,7 @@
       "layer": "L1",
       "title": "项（Items）",
       "positioning": "",
-      "line_count": 426,
+      "line_count": 434,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 crate、模块（Module）、item、名称解析与可见性串联起来。",
@@ -15625,7 +15625,7 @@
           "[Modules and Paths](01_modules_and_paths.md) · [Crates and Source Files](11_crates_and_source_files.md) · [Functions](02_functions.md)"
         ],
         "post": [
-          "[Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) · [Linkage](../../03_advanced/04_ffi/03_linkage.md)"
+          "> [Traits](../../02_intermediate/00_traits/01_traits.md) ·"
         ]
       },
       "backward_chains": 2,
@@ -27146,7 +27146,7 @@
       "layer": "L3",
       "title": "测验：语义模型与跨语言对比（L3）",
       "positioning": "L3 独立测验——验证语义模型（代数效应、依赖/细化类型、STM、分布式共识）与跨语言语义模型矩阵（Rust vs Haskell/OCaml/Ada/SPARK/F#/D/Nim）的掌握程度。",
-      "line_count": 436,
+      "line_count": 437,
       "theorem_chains": [
         {
           "text": "**解析**：Fischer、Lynch、Paterson（JACM 1985）证明：纯异步 + 单崩溃故障 ⟹ 无确定性算法同时保证安全性与终止性。工程上绕过 FLP 的经典策略：**故障检测器**（Failure Detectors）、**随机化**（Ben-Or / Rabin）、**部分同步**（Partial Synchrony，PBFT / Tendermint）、**领导者选举超时**（Raft 用随机超时打破对称性）。FLP 否定的不是「共识不可行」，而是「纯异步 + 确定性 + 必终止」三者不可兼得。[→ 分布式共识理论 §2.1 / §2.3](../../04_formal/07_concurrency_semantics/06_distributed_consensus_theory.md) · [→ 分布式共识生态 §1.2](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md)",
@@ -27201,7 +27201,8 @@
         "../../05_comparative/02_managed_languages/10_rust_vs_ocaml.md",
         "../../05_comparative/02_managed_languages/11_rust_vs_fsharp.md",
         "../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md",
-        "01_concurrency.md"
+        "01_concurrency.md",
+        "04_send_sync_boundaries.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -27209,9 +27210,11 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "> [代数效应与效应处理器](../../04_formal/07_concurrency_semantics/04_algebraic_effects.md) ·"
+          "> **后置概念**: [并发（Concurrency）语义模型](01_concurrency.md) · [Send/Sync 边界](04_send_sync_boundaries.md)"
         ],
-        "post": []
+        "post": [
+          "[并发（Concurrency）语义模型](01_concurrency.md) · [Send/Sync 边界](04_send_sync_boundaries.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -40557,16 +40560,19 @@
       "layer": "L4",
       "title": "Safety Tags（安全标签）",
       "positioning": "",
-      "line_count": 16,
+      "line_count": 20,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md",
         "../../07_future/02_preview_features/03_safety_tags_preview.md",
+        "../04_model_checking/01_verification_toolchain.md",
         "../04_model_checking/07_autoverus.md",
         "../04_model_checking/08_miri.md",
+        "01_rustbelt.md",
         "04_borrow_sanitizer_in_formal.md"
       ],
       "transitions": 0,
@@ -40574,8 +40580,12 @@
       "mermaid_blocks": 0,
       "matrix_rows": 0,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [Separation Logic](01_rustbelt.md)"
+        ],
+        "post": [
+          "[Safety Tags Preview](../../07_future/02_preview_features/03_safety_tags_preview.md) · [Verification Tools](../04_model_checking/01_verification_toolchain.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -41669,7 +41679,7 @@
       "layer": "L4",
       "title": "形式化方法在 Rust 中的应用（已合并）",
       "positioning": "",
-      "line_count": 24,
+      "line_count": 28,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -41686,8 +41696,12 @@
       "mermaid_blocks": 0,
       "matrix_rows": 0,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Verification Toolchain](01_verification_toolchain.md) · [RustBelt](../02_separation_logic/01_rustbelt.md)"
+        ],
+        "post": [
+          "[Modern Verification Tools](04_modern_verification_tools.md) · [Aerospace Certification](03_aerospace_certification_formal_methods.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -50569,6 +50583,7 @@
       "cross_references": [
         "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
         "../../07_future/00_version_tracking/01_rust_version_tracking.md",
+        "../../07_future/00_version_tracking/rust_1_97_1.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../00_toolchain/01_toolchain.md",
         "04_cargo_196_features.md",
@@ -60249,7 +60264,7 @@
       "layer": "L6",
       "title": "Rust 游戏开发（已合并）",
       "positioning": "",
-      "line_count": 19,
+      "line_count": 23,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -60264,8 +60279,12 @@
       "mermaid_blocks": 0,
       "matrix_rows": 0,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Game ECS](02_game_ecs.md)"
+        ],
+        "post": [
+          "[Game Engine Internals](15_game_engine_internals.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -62129,7 +62148,7 @@
       "layer": "L6",
       "title": "安全关键 Rust 专题索引",
       "positioning": "本文件为 `concept/` 侧的**摘要+链接型导航页**（AGENTS.md §2.1 第 3 条：content/ 专题权威页需在 concept/ 建索引入口）。专题深度内容以 [`content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md`](../../../content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md) 为权威入口；通用概念解释以 `concept/` 相关权威页为准。本页不复制任何正文。",
-      "line_count": 45,
+      "line_count": 49,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -62155,8 +62174,12 @@
       "mermaid_blocks": 0,
       "matrix_rows": 16,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Formal Verification Tools](../../04_formal/04_model_checking/01_verification_toolchain.md) · [Ferrocene Preview](../../07_future/02_preview_features/12_ferrocene_preview.md)"
+        ],
+        "post": [
+          "[AUTOSAR and Rust](22_autosar_and_rust.md) · [Safety-Critical Ecosystem Master Index](../../../content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -62887,7 +62910,7 @@
       "layer": "L6",
       "title": "测验：网络与异步生态（L6）",
       "positioning": "验证学习者对 L6 网络与异步子领域生态格局（框架、运行时（Runtime）、协议）的掌握。",
-      "line_count": 335,
+      "line_count": 337,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -62912,11 +62935,13 @@
       "cross_references": [
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
+        "../04_web_and_networking/01_distributed_systems.md",
         "../04_web_and_networking/03_web_frameworks.md",
         "../04_web_and_networking/05_glommio_and_thread_per_core.md",
         "../04_web_and_networking/06_websocket_realtime_communication.md",
         "../04_web_and_networking/07_network_protocols.md",
         "../04_web_and_networking/08_high_performance_network_service_architecture.md",
+        "../06_data_and_distributed/01_application_domains.md",
         "../12_networking/02_network_security.md",
         "../12_networking/03_custom_protocol_implementation.md",
         "../12_networking/05_networking_basics.md"
@@ -62929,7 +62954,9 @@
         "pre": [
           "> [Web 框架](../04_web_and_networking/03_web_frameworks.md) ·"
         ],
-        "post": []
+        "post": [
+          "[Application Domains](../06_data_and_distributed/01_application_domains.md) · [Distributed Systems](../04_web_and_networking/01_distributed_systems.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -62939,7 +62966,7 @@
       "layer": "L6",
       "title": "测验：数据库与存储生态（L6）",
       "positioning": "验证学习者对 L6 数据与分布式子领域（访问层选型 + Rust 原生数据库系统）的掌握。",
-      "line_count": 317,
+      "line_count": 318,
       "theorem_chains": [
         {
           "text": "**解析**：按 [因果序与向量时钟](../06_data_and_distributed/09_causal_ordering_vector_clocks.md)：向量时钟每进程维护 N 维向量、本地事件自增、消息携带并逐分量取 max（A）；两时钟逐分量比较互有大小即判定并发（B）；D 正确——向量时钟精确刻画 Lamport 1978 定义的 happens-before 偏序，标量时钟只能保持\"因果 ⟹ 序号小\"的单向蕴含。C 错：标量时钟无法区分并发与因果，表达能力严格弱于向量时钟。",
@@ -62978,6 +63005,7 @@
         "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
         "../06_data_and_distributed/02_database_access.md",
         "../06_data_and_distributed/04_database_systems.md",
+        "../06_data_and_distributed/05_data_engineering.md",
         "../06_data_and_distributed/06_distributed_consensus.md",
         "../06_data_and_distributed/08_crdt_type_zoo.md",
         "../06_data_and_distributed/09_causal_ordering_vector_clocks.md"
@@ -62988,9 +63016,11 @@
       "matrix_rows": 25,
       "pre_post": {
         "pre": [
-          "> [数据库访问](../06_data_and_distributed/02_database_access.md) ·"
+          "> **后置概念**: [Database Access](../06_data_and_distributed/02_database_access.md) · [Data Engineering](../06_data_and_distributed/05_data_engineering.md)"
         ],
-        "post": []
+        "post": [
+          "[Database Access](../06_data_and_distributed/02_database_access.md) · [Data Engineering](../06_data_and_distributed/05_data_engineering.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -63000,7 +63030,7 @@
       "layer": "L6",
       "title": "测验：安全与测试生态（L6）",
       "positioning": "验证学习者对 L6 安全/密码学与测试质量子领域的掌握（密码学原则、供应链审计、分层测试）。",
-      "line_count": 326,
+      "line_count": 327,
       "theorem_chains": [
         {
           "text": "| B | 复现用例 ⟹ 修复 ⟹ 回归测试固化；再用 cargo-fuzz 对解析面做持续模糊测试，并把解析器纳入 proptest 性质测试（如深度限制/往返序列化） |",
@@ -63034,9 +63064,11 @@
       "matrix_rows": 25,
       "pre_post": {
         "pre": [
-          "> [安全实践](../07_security_and_cryptography/01_security_practices.md) ·"
+          "> **后置概念**: [Security Practices](../07_security_and_cryptography/01_security_practices.md) · [Testing Strategies](../09_testing_and_quality/01_testing_strategies.md)"
         ],
-        "post": []
+        "post": [
+          "[Security Practices](../07_security_and_cryptography/01_security_practices.md) · [Testing Strategies](../09_testing_and_quality/01_testing_strategies.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -63046,7 +63078,7 @@
       "layer": "L6",
       "title": "测验：领域应用生态（L6）",
       "positioning": "验证学习者对 L6 领域应用子领域（区块链、Wasm、游戏、ML、安全关键、量子、算法竞赛）生态格局与选型的掌握。",
-      "line_count": 336,
+      "line_count": 337,
       "theorem_chains": [
         {
           "text": "**解析**：权威页的漏洞对照表：所有权（Ownership） + `&mut` 独占访问 ⟹ 重入攻击在编译期不可表达；`u64`/`u128` 默认 overflow panic + `checked_add` 显式处理 ⟹ 整数溢出显式化；`Option<T>` + 编译期初始化检查 ⟹ 不存在未初始化存储指针。核心洞察是\"让整类漏洞在编译期成为不可类型化的程序\"。A 是 Solidity 的运行时路线；D 与区块链确定性执行要求矛盾（无 GC 才保证确定性）。",
@@ -63075,11 +63107,13 @@
       "sources": [],
       "cross_references": [
         "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
+        "../06_data_and_distributed/01_application_domains.md",
         "../11_domain_applications/01_blockchain.md",
         "../11_domain_applications/02_game_ecs.md",
         "../11_domain_applications/03_webassembly.md",
         "../11_domain_applications/07_algorithms_competitive_programming.md",
         "../11_domain_applications/13_machine_learning_ecosystem.md",
+        "../11_domain_applications/14_industrial_case_studies.md",
         "../11_domain_applications/16_quantum_computing_rust.md",
         "../11_domain_applications/21_safety_critical_topic_index.md",
         "../11_domain_applications/22_autosar_and_rust.md"
@@ -63090,9 +63124,11 @@
       "matrix_rows": 20,
       "pre_post": {
         "pre": [
-          "> [区块链](../11_domain_applications/01_blockchain.md) ·"
+          "> **后置概念**: [Application Domains](../06_data_and_distributed/01_application_domains.md) · [Industrial Case Studies](../11_domain_applications/14_industrial_case_studies.md)"
         ],
-        "post": []
+        "post": [
+          "[Application Domains](../06_data_and_distributed/01_application_domains.md) · [Industrial Case Studies](../11_domain_applications/14_industrial_case_studies.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -65550,6 +65586,48 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\00_version_tracking\\rust_1_97_1.md",
+      "layer": "L7",
+      "title": "Rust 1.97.1 稳定补丁",
+      "positioning": "",
+      "line_count": 193,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 5. 反命题"
+        },
+        {
+          "title": "### 5.1 反命题"
+        },
+        {
+          "title": "### 5.2 反命题"
+        }
+      ],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../06_ecosystem/00_toolchain/01_toolchain.md",
+        "../../06_ecosystem/01_cargo/13_cargo_security_cves.md",
+        "01_rust_version_tracking.md",
+        "rust_1_97_stabilized.md",
+        "rust_1_98_preview.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 11,
+      "pre_post": {
+        "pre": [
+          "[Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.97.0 稳定特性](rust_1_97_stabilized.md)"
+        ],
+        "post": [
+          "[Rust 1.98+ 前沿特性预览](rust_1_98_preview.md) · [Rust 工具链](../../06_ecosystem/00_toolchain/01_toolchain.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\07_future\\00_version_tracking\\rust_1_97_preview.md",
       "layer": "L7",
       "title": "Rust 1.97.0 前沿特性预览（已归档）",
@@ -65609,7 +65687,7 @@
       "layer": "L7",
       "title": "Rust 1.97.0 稳定特性",
       "positioning": "",
-      "line_count": 565,
+      "line_count": 570,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -65753,6 +65831,7 @@
         "../05_quizzes/01_quiz_version_and_preview.md",
         "01_rust_version_tracking.md",
         "rust_1_96_stabilized.md",
+        "rust_1_97_1.md",
         "rust_1_97_preview.md",
         "rust_1_98_preview.md"
       ],
@@ -65765,7 +65844,7 @@
           "[Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.96 稳定特性](rust_1_96_stabilized.md)"
         ],
         "post": [
-          "[Rust 1.97.0 前沿特性预览](rust_1_97_preview.md) · [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md)"
+          "[Rust 1.97.1 稳定补丁](rust_1_97_1.md) · [Rust 1.97.0 前沿特性预览](rust_1_97_preview.md) · [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md)"
         ]
       },
       "backward_chains": 0,
@@ -68467,12 +68546,14 @@
       "layer": "L7",
       "title": "Const Trait 实现预览",
       "positioning": "",
-      "line_count": 15,
+      "line_count": 19,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../../01_foundation/07_modules_and_items/09_const_items_and_const_fn.md",
+        "../../02_intermediate/01_generics/02_const_generics.md",
         "06_const_trait_impl_preview.md"
       ],
       "transitions": 0,
@@ -68480,8 +68561,12 @@
       "mermaid_blocks": 0,
       "matrix_rows": 0,
       "pre_post": {
-        "pre": [],
-        "post": []
+        "pre": [
+          "[Const Generics](../../02_intermediate/01_generics/02_const_generics.md)"
+        ],
+        "post": [
+          "[Const Trait Impl Preview](06_const_trait_impl_preview.md) · [Const Items and Const Fn](../../01_foundation/07_modules_and_items/09_const_items_and_const_fn.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -71172,7 +71257,7 @@
       "layer": "L7",
       "title": "测验：版本演进、Edition 机制与前沿特性（L7）",
       "positioning": "验证学习者对 Rust 版本治理机制（发布火车、Edition）、1.90–1.97 稳定特性谱系与前沿特性状态语义的掌握。",
-      "line_count": 355,
+      "line_count": 356,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -71220,6 +71305,7 @@
         "../00_version_tracking/rust_1_96_stabilized.md",
         "../00_version_tracking/rust_1_97_stabilized.md",
         "../00_version_tracking/rust_1_98_preview.md",
+        "../01_edition_roadmap/02_edition_guide.md",
         "../02_preview_features/12_ferrocene_preview.md"
       ],
       "transitions": 0,
@@ -71228,9 +71314,11 @@
       "matrix_rows": 20,
       "pre_post": {
         "pre": [
-          "> [Rust 版本跟踪](../00_version_tracking/01_rust_version_tracking.md) ·"
+          "> **后置概念**: [Rust Version Tracking](../00_version_tracking/01_rust_version_tracking.md) · [Edition Roadmap](../01_edition_roadmap/02_edition_guide.md)"
         ],
-        "post": []
+        "post": [
+          "[Rust Version Tracking](../00_version_tracking/01_rust_version_tracking.md) · [Edition Roadmap](../01_edition_roadmap/02_edition_guide.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0

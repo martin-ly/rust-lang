@@ -111,7 +111,7 @@ T: Send ∧ t₁ owns v  ⟹  t₂ 独占 v 后不产生数据竞争 ∧ drop(v)
 
 - **转移后原线程失去访问权**——这由所有权（move 语义）保证，Send 只管"转移这一动作"的安全性；
 - **析构位置可迁移**：`Drop::drop` 可能在新线程执行，因此 `T: Send` 也要求 `drop` 不依赖线程局部状态（thread-local state）。这正是 `Rc<T>` 为 `!Send` 的深层原因之一：`Rc` 的 `drop` 要减非原子引用（Reference）计数，换线程执行会破坏计数完整性；
-- **不蕴含 Sync**：`T: Send` 只说"独占转移安全"，**不**说"共享引用安全"。反例：`Cell<u32>: Send`（转移独占没问题）但 `Cell<u32>: !Sync`（共享引用会数据竞争）。
+- **不蕴含 Sync**：`T: Send` 只说"独占转移安全"，**不**说"共享引用（Reference）安全"。反例：`Cell<u32>: Send`（转移独占没问题）但 `Cell<u32>: !Sync`（共享引用会数据竞争）。
 
 ### 2.2 Sync 契约 ⟺ &T: Send
 
@@ -134,7 +134,7 @@ T: Sync  ⟺  &T: Send
 
 直接推论：
 
-- `T: Sync` 不要求 `T` 自身可变——`&T` 只允许读，**除非** `T` 有内部可变性（Interior Mutability）。因此 `Sync` 的实质是"**内部可变性的线程安全性审查**"：`Mutex<T>` 用互斥锁使内部可变安全 ⟹ `Sync`；`RefCell<T>` 的运行时（Runtime）借用检查不是线程安全的 ⟹ `!Sync`。
+- `T: Sync` 不要求 `T` 自身可变——`&T` 只允许读，**除非** `T` 有内部可变性（Interior Mutability）。因此 `Sync` 的实质是"**内部可变性的线程安全性审查**"：`Mutex<T>` 用互斥锁使内部可变安全 ⟹ `Sync`；`RefCell<T>` 的运行时（Runtime）借用（Borrowing）检查不是线程安全的 ⟹ `!Sync`。
 - `&mut T: Send` 当且仅当 `T: Send`（独占引用转移等价于值转移）；`&mut T: Sync` 当且仅当 `T: Sync`（透过 `&mut T` 再借用出 `&T`）。
 
 ### 2.3 契约与线程 API 的连接点
@@ -164,7 +164,7 @@ fn sync_contract_in_action() {
 }
 ```
 
-`'static` 约束与 Send/Sync 正交：它排除"捕获了栈引用的闭包逃到可能活得更久的线程"（scoped threads 用 `scope` 的生命周期（Lifetimes）担保放宽此约束）。
+`'static` 约束与 Send/Sync 正交：它排除"捕获了栈引用的闭包（Closures）逃到可能活得更久的线程"（scoped threads 用 `scope` 的生命周期（Lifetimes）担保放宽此约束）。
 
 ## 三、Auto Trait 机制：自动推导与负实现
 
@@ -312,7 +312,7 @@ fn generic_inherits() {
 `UnsafeCell<T>: !Sync` 是 std 中所有内部可变性抽象的基例。
 `Cell`、`RefCell`、`Mutex`、`AtomicU32` 内部都含 `UnsafeCell`；
 前三者保持 `!Sync`（或仅 `Send`），而 `Mutex`/`Atomic*` 通过 `unsafe impl Sync` 翻案
-——它们的 `unsafe impl` 之所以**正确**，是因为其 API 保证每次对 `UnsafeCell` 的访问都被互斥锁/原子操作的 happens-before 序保护。
+——它们的 `unsafe impl` 之所以**正确**，是因为其 API 保证每次对 `UnsafeCell` 的访问都被互斥锁/原子操作（Atomic Operations）的 happens-before 序保护。
 这揭示了 Sync 的本质判据：
 
 ```text
@@ -349,7 +349,7 @@ fn assert_send_dyn() {
 | `Mutex<T>` | `T: Send` 时 ✅ | `T: Send` 时 ✅ | 互斥锁为内部可变性建立 happens-before（`unsafe impl` 翻案） |
 | `RwLock<T>` | `T: Send+Sync` 时 ✅ | `T: Send+Sync` 时 ✅ | 读锁共享 ⟹ 并发 `&T` ⟹ 需 `T: Sync`；写锁独占 ⟹ 需 `T: Send` |
 | `AtomicU32` 等原子类型 | ✅ | ✅ | 硬件级原子定序，内部可变性天然线程安全 |
-| `*const T` / `*mut T` | ❌ | ❌ | 规则 3：编译器不知指向数据的所有权与生命周期（Lifetimes），保守拒绝 |
+| `*const T` / `*mut T` | ❌ | ❌ | 规则 3：编译器不知指向数据的所有权（Ownership）与生命周期（Lifetimes），保守拒绝 |
 | `UnsafeCell<T>` | `T: Send` 时 ✅ | ❌ | 内部可变性的地基否定（§4） |
 | `mpsc::Sender<T>` | `T: Send` 时 ✅ | ❌ | 发送端可克隆转移；共享 `&Sender` 内部用 `Rc` 风格状态（standard 实现） |
 | `mpsc::Receiver<T>` | `T: Send` 时 ✅ | ❌ | 单消费者语义 |
@@ -438,7 +438,7 @@ impl MmapHandle {
 }
 ```
 
-**错误**——对含 `Cell` 的类型盲目 `unsafe impl Sync`，编译通过但运行时数据竞争（UB）：
+**错误**——对含 `Cell` 的类型盲目 `unsafe impl Sync`，编译通过但运行时（Runtime）数据竞争（UB）：
 
 ```rust
 use std::cell::Cell;

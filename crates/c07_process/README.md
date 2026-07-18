@@ -1,6 +1,6 @@
 > **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
 >
-> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 
 ---
@@ -8,10 +8,10 @@
 # 🦀 C07 Process Management Library
 
 > **模块类型**: 进程管理学习模块 | ⭐ 质量评分: **95/100**
-> **Rust版本**: 1.97.0+ | 📊 完成度: **100% 完成** ✅
+> **Rust版本**: 1.97.1+ | 📊 完成度: **100% 完成** ✅
 > **学习重点**: 进程管理、IPC通信、信号处理、进程同步
 > **适用对象**: Rust中级到高级开发者、系统程序员
-> **最后更新**: 2025-12-25 | 🔄 维护模式: Rust 1.97.0+ MSRV 对齐，文档标准化完成
+> **最后更新**: 2025-12-25 | 🔄 维护模式: Rust 1.97.1+ MSRV 对齐，文档标准化完成
 
 ## 🎯 最新更新 (2025-12-25) ✨
 
@@ -19,13 +19,13 @@
 > **框架结构**: ✅ **4-Tier 架构**
 > **文档总数**: **29+ 篇**
 > **质量评分**: **95/100**
-> **Rust版本**: 1.97.0+ (Edition 2024)
+> **Rust版本**: 1.97.1+ (Edition 2024)
 
 ### 📖 文档标准化完成 🎉
 
 - ✅ **核心系列文档（01-10）** - 已添加标准头部格式
 - ✅ **实践系列文档（12-14）** - 已添加标准头部格式
-- ✅ **FAQ 和 Glossary** - 版本信息已更新到 Rust 1.97.0+
+- ✅ **FAQ 和 Glossary** - 版本信息已更新到 Rust 1.97.1+
 - ✅ **主索引和概览** - 维护状态已更新
 - ✅ **版本信息验证** - 所有文档版本信息准确
 
@@ -35,7 +35,7 @@
 > **框架结构**: ✅ **4-Tier 架构**
 > **文档总数**: **20+ 篇**
 > **质量评分**: **95/100**
-> **Rust版本**: 1.97.0+ (Edition 2024)
+> **Rust版本**: 1.97.1+ (Edition 2024)
 
 ## 🌟 2025-10-20 核心增强更新
 
@@ -121,6 +121,7 @@
 [dependencies]
 c07_process = { path = "crates/c07_process" }
 ```
+
 ## 🔧 使用方法
 
 ### 进程管理
@@ -161,6 +162,7 @@ if let Ok(output) = pm.get_output(pid) {
     println!("进程输出: {:?}", output);
 }
 ```
+
 ### IPC 通信
 
 ```rust
@@ -187,6 +189,7 @@ if let Ok(received) = ipc.receive_message("demo_pipe") {
 // 清理资源
 ipc.cleanup()?;
 ```
+
 ### 同步原语
 
 ```rust
@@ -229,6 +232,7 @@ if let Some(permit) = semaphore.try_acquire() {
     drop(permit); // 自动释放许可
 }
 ```
+
 ## 🏗️ 项目结构
 
 ```text
@@ -270,6 +274,7 @@ src/
     ├── ipc_demo.rs        # IPC通信演示
     └── sync_demo.rs       # 同步原语演示
 ```
+
 ## 🧪 运行测试
 
 ```bash
@@ -302,6 +307,7 @@ cargo run --bin group_demo
 cargo run --features async --bin async_stdio_demo
 cargo run --bin group_control_demo
 ```
+
 ## 📚 文档结构
 
 ### 核心文档
@@ -328,6 +334,7 @@ cargo run --bin group_control_demo
 ```bash
 cargo doc --open
 ```
+
 ## 🔍 错误处理
 
 库使用 `thiserror` 提供结构化的错误类型：
@@ -344,6 +351,7 @@ match result {
     Err(e) => println!("其他错误: {}", e),
 }
 ```
+
 ## 🌟 示例程序
 
 ### 进程管理演示
@@ -351,6 +359,7 @@ match result {
 ```bash
 cargo run --bin process_demo
 ```
+
 演示进程创建、监控、IPC通信和同步原语的使用。
 
 跨平台注意事项：
@@ -363,6 +372,7 @@ cargo run --bin process_demo
 ```bash
 cargo run --bin ipc_demo
 ```
+
 演示各种IPC机制的使用，包括管道、套接字、共享内存等。
 
 提示：在 Windows 平台上，"Unix 套接字" 将使用兼容实现（可能退化为 TCP 套接字）。
@@ -372,6 +382,7 @@ cargo run --bin ipc_demo
 ```bash
 cargo run --bin sync_demo
 ```
+
 演示互斥锁、读写锁、条件变量、信号量和屏障的使用。
 
 ### 超时与取消演示
@@ -379,6 +390,7 @@ cargo run --bin sync_demo
 ```bash
 cargo run --bin timeout_demo
 ```
+
 演示如何在超时时间内轮询等待子进程退出，并在超时后进行终止。
 支持通过环境变量配置：
 
@@ -386,22 +398,26 @@ cargo run --bin timeout_demo
 # 以 1500ms 超时运行
 TIMEOUT_MS=1500 cargo run --bin timeout_demo
 ```
+
 ### 监控与重启演示
 
 ```bash
 cargo run --bin supervisor_demo
 ```
+
 演示监控与指数退避重启。可配置环境变量：
 
 ```bash
 # 设置最大重启次数为 3，起始退避100ms，上限1500ms
 MAX_RESTARTS=3 BACKOFF_START_MS=100 BACKOFF_MAX_MS=1500 cargo run --bin supervisor_demo
 ```
+
 ### 进程组演示
 
 ```bash
 cargo run --bin group_demo
 ```
+
 演示 `ProcessGroupManager` 的创建、加入成员与查询。
 
 ### 进程组控制演示（按组终止）
@@ -409,6 +425,7 @@ cargo run --bin group_demo
 ```bash
 cargo run --bin group_control_demo
 ```
+
 演示如何通过组信息遍历成员并逐个终止，实现“按组终止”的控制逻辑。
 
 ### 标准 IO 管道演示
@@ -416,6 +433,7 @@ cargo run --bin group_control_demo
 ```bash
 cargo run --bin stdio_demo
 ```
+
 演示如何与子进程进行标准输入/输出交互：示例向子进程写入一行文本并读取回显，使用 `ProcessManager::write_stdin/close_stdin/read_stdout/read_stderr` 完成交互。
 
 ### 异步标准 IO 演示
@@ -423,6 +441,7 @@ cargo run --bin stdio_demo
 ```bash
 cargo run --features async --bin async_stdio_demo
 ```
+
 **说明**: 演示异步标准 IO 接口的使用，包括写入标准输入、读取标准输出和标准错误、带超时的等待等。
 
 **详细指南**: 查看 [异步标准 IO 使用指南](docs/13_async_stdio_guide.md) 获取完整的 API 文档和使用示例。
@@ -434,6 +453,7 @@ cargo run --features async --bin async_stdio_demo
 ```bash
 cargo run --features async --bin rust_190_features_demo
 ```
+
 演示 Rust 1.93.0 Edition 2024 的最新语言特性，包括：
 
 - 异步闭包 (Async Closures)
@@ -450,6 +470,7 @@ cargo run --features async --bin rust_190_features_demo
 ```bash
 cargo run --bin rust_192_features_demo
 ```
+
 演示 Rust 1.93.0 的最新特性在进程管理中的应用，包括：
 
 - `rotate_right`: 在进程队列管理中实现高效的轮转调度
@@ -465,6 +486,7 @@ cargo run --bin rust_192_features_demo
 ```bash
 cargo run --features async --bin enhanced_async_demo
 ```
+
 演示增强的异步进程管理功能，包括：
 
 - 完整的异步进程管理
@@ -478,6 +500,7 @@ cargo run --features async --bin enhanced_async_demo
 ```bash
 cargo run --features async --bin enhanced_ipc_demo
 ```
+
 演示增强的IPC通信功能，包括：
 
 - 零拷贝数据传输
@@ -491,6 +514,7 @@ cargo run --features async --bin enhanced_ipc_demo
 ```bash
 cargo run --features async --bin enhanced_sync_demo
 ```
+
 演示增强的同步原语功能，包括：
 
 - 死锁检测和预防
@@ -504,6 +528,7 @@ cargo run --features async --bin enhanced_sync_demo
 ```bash
 cargo run --features async --bin enhanced_error_demo
 ```
+
 演示增强的错误处理功能，包括：
 
 - 智能错误恢复机制
@@ -517,6 +542,7 @@ cargo run --features async --bin enhanced_error_demo
 ```bash
 cargo run --features async --example performance_optimization_demo
 ```
+
 **说明**: 演示性能优化功能的使用，包括内存优化、CPU优化、I/O优化和性能监控。
 
 **功能包括**:
@@ -564,6 +590,6 @@ cargo run --features async --example performance_optimization_demo
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.97.0+ (Edition 2024)
+**对应 Rust 版本**: 1.97.1+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

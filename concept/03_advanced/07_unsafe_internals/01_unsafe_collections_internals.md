@@ -430,7 +430,7 @@ graph TD
 
 ## 八、逆向推理链（Backward Reasoning）
 
-> **从编译错误/运行时症状反推定理链**:
+> **从编译错误/运行时（Runtime）症状反推定理链**:
 >
 > ```text
 > Miri 报告 UB ⟸ 未初始化内存被读取/double drop/使用已释放内存 ⟸ 检查 ptr::write/read/drop_in_place 使用
@@ -459,7 +459,7 @@ graph TD
 
 ## 嵌入式测验（Embedded Quiz）
 
-本节测验检验「能否把所有权规则应用到 `unsafe` 实现内部」，按层级排列：
+本节测验检验「能否把所有权（Ownership）规则应用到 `unsafe` 实现内部」，按层级排列：
 
 - **理解层**：`Vec` 的 `Unique<T>` 为什么是协变的——答不出「`&'a Vec<T>` 应能协变到 `&'a Vec<T'>`（当 `T: T'`）」即需复习型变；
 - **应用层**：手写 `Vec::drain` 风格 API 时未初始化区间的处理——`MaybeUninit` 与 `assume_init` 的正确配对；

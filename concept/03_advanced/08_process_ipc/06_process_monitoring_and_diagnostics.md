@@ -34,7 +34,7 @@
 - **存活检查（2.1）**：`Child::try_wait()` 返回 `Ok(None)` 表示存活——零成本轮询，适合低频健康检查；
 - **非阻塞轮询（2.2）**：轮询循环 + sleep 退避——简单但有延迟与 CPU 开销的权衡；异步（Async）环境应改用 `tokio::process::Child::wait().await`（事件驱动无轮询）；
 - **状态机（2.3）**：`Starting → Running → Exited(code) | Killed(signal) | Zombie` 的显式状态机——`ExitStatus` 的 `code()`/`signal()`（Unix 扩展）区分正常退出与信号终止，监控逻辑的健壮性取决于状态机的完备性（别忘「启动失败」态）；
-- **批量监控（2.4）**：多子进程的等待集合——同步用「每进程一线程 + 通道汇总」，异步用 `FuturesUnordered` 收集 `wait()` future。
+- **批量监控（2.4）**：多子进程的等待集合——同步用「每进程一线程 + 通道汇总」，异步（Async）用 `FuturesUnordered` 收集 `wait()` future。
 
 跨平台注意：Windows 无信号概念，`ExitStatus` 只有退出码——监控抽象层应把「被终止」统一为枚举（Enum）而非暴露平台细节。
 

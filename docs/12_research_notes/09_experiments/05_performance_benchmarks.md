@@ -4,7 +4,7 @@
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
 >
-> - `async-std` 已进入维护模式，新项目建议优先考虑 Tokio / smol。
+> - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 已重命名为 `wasm32-wasip1`；WASI Preview 2 目标为 `wasm32-wasip2`。
 > **概念族**: 实验研究
 
@@ -385,7 +385,7 @@ Criterion.rs 通过以下统计手段保证基准测试结果可靠：
 - **`Arc` vs `Rc` 性能比较**：单线程和多线程场景下的引用计数性能
 - **`Mutex` vs `RwLock` 性能比较**：不同读写比例下的锁性能
 - **通道（Channel）性能测试**：无界通道、有界通道、MPSC、SPSC 等
-- **异步运行时（Runtime）性能测试**：Tokio（推荐）、smol 等运行时的性能对比；async-std 已进入维护模式，新项目不再推荐
+- **异步运行时（Runtime）性能测试**：Tokio（推荐）、smol 等运行时的性能对比；`async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 - **原子操作（Atomic Operations）性能**：原子类型 vs 锁的性能对比
 
 **测试指标**：

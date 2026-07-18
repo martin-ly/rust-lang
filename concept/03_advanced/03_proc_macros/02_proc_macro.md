@@ -98,7 +98,7 @@
 
 过程宏（procedural macro）是「编译期执行的 Rust 函数，输入输出都是 `TokenStream`」，与声明宏（Declarative Macro）构成能力互补：
 
-1. **过程宏 vs macro_rules**：`macro_rules!` 是「模式驱动的声明式变换」——写规则不写算法，能力上限是「语法结构的同构变换」（无法做字符串处理、无法分析字段类型语义）；过程宏是「命令式的 token 程序」——可任意检查、变换、生成，配合 `syn` 能解析完整 Rust AST。判定选型：变换逻辑能写成 3–5 条模式规则 → 声明宏（零依赖、编译快）；需要「读结构体（Struct）字段生成对应代码」类逻辑 → 过程宏。
+1. **过程宏 vs macro_rules**：`macro_rules!` 是「模式驱动的声明式变换」——写规则不写算法，能力上限是「语法结构的同构变换」（无法做字符串处理、无法分析字段类型语义）；过程宏是「命令式的 token 程序」——可任意检查、变换、生成，配合 `syn` 能解析完整 Rust AST。判定选型：变换逻辑能写成 3–5 条模式规则 → 声明宏（Declarative Macro）（零依赖、编译快）；需要「读结构体（Struct）字段生成对应代码」类逻辑 → 过程宏。
 2. **三种过程宏类型**：**derive 宏**（`#[proc_macro_derive]`——附加 impl，不修改原项，最受限最常用）；**属性宏**（`#[proc_macro_attribute]`——接收「属性参数 + 被标注项」两个 TokenStream，可整体重写该项，`#[tokio::main]`、`#[instrument]` 是代表）；**函数式宏**（`#[proc_macro]`——`my_macro!(...)` 形式，可出现在表达式/项/模式位置，`sqlx::query!` 是代表）。三者的 crate 声明同为 `proc-macro = true`，且过程宏 crate 只能导出宏（不能导出普通 API——生态惯例是 `xxx`（API）+ `xxx-macros`（宏）双 crate 结构）。
 3. **编译期执行模型**：过程宏被编译为「编译器的动态库插件」，在展开阶段被 rustc 加载执行——输入 token 来自调用点源码，输出 token 替换/附加到 AST。推论：过程宏的依赖（syn/quote）增加的是「编译时编译时间」；宏 panic 表现为编译错误；宏不能访问调用 crate 的运行时（Runtime）值（纯编译期视角）。
 
@@ -778,7 +778,7 @@ fn main() {
 本节 5 道测验覆盖过程宏的核心判别点：
 
 - 测验 1（理解层）：三种过程宏类型（derive/attribute/function-like）的输入输出形态差异；
-- 测验 2（应用层）：执行时机——编译期独立 crate 编译执行，解释了「宏依赖不进运行时」「宏不能 `use` 自己」两个推论；
+- 测验 2（应用层）：执行时机——编译期独立 crate 编译执行，解释了「宏依赖不进运行时（Runtime）」「宏不能 `use` 自己」两个推论；
 - 测验 3（应用层）：syn + quote 工作流——parse（TokenStream→AST）→ transform（分析/改写）→ generate（AST→TokenStream）三段式；
 - 测验 4（分析层）：卫生性——`Ident::new` 的 span 选择（call_site/mixed_site）决定生成标识符的解析位置；
 - 测验 5（分析层）：derive 宏的限制——只能追加 impl 不能修改原类型、`attributes(...)` 声明辅助属性的必要性。

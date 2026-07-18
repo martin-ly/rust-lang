@@ -573,7 +573,7 @@ struct BadNode {
 }
 ```
 
-形成 `parent <-> child` 的循环强引用，引用计数永远不会降为 0，内存泄漏。
+形成 `parent <-> child` 的循环强引用（Reference），引用计数永远不会降为 0，内存泄漏。
 
 **`Weak` 解决循环引用**：
 
@@ -675,7 +675,7 @@ hello(&(*m)[..]);
 ### Q11. 🟢【单选】`Box<T>` 表达的所有权语义是？
 
 - A. 引用计数的共享所有权（Ownership）
-- B. 独占所有权的堆分配：同一时刻只有一个所有者，离开作用域时释放堆内存
+- B. 独占所有权（Ownership）的堆分配：同一时刻只有一个所有者，离开作用域时释放堆内存
 - C. 按位复制的栈值
 - D. 线程安全的共享引用
 
@@ -713,14 +713,14 @@ hello(&(*m)[..]);
 - A. `RefCell<T>` 把借用（Borrowing）规则的检查从编译期推迟到运行时（Runtime）
 - B. `Cell<T>` 适合实现 `Copy` 的小类型，通过整体替换实现修改
 - C. `Mutex<T>` 提供跨线程的内部可变性
-- D. `RefCell` 违反借用规则时编译器报错拒绝编译
+- D. `RefCell` 违反借用（Borrowing）规则时编译器报错拒绝编译
 
 <details>
 <summary>✅ 答案与解析</summary>
 
 **答案：A、B、C**
 
-**解析**：`RefCell` 运行时维护借用计数，同一时刻多个 `borrow()` 或一个 `borrow_mut()`；违规时 **panic** 而非编译错误（D 错，这正是"检查推迟"的含义）。`Cell` 无引用、按值 get/set，无运行时开销但要求 `Copy`（或用 `take`/`replace`）（B）。`Mutex` 用锁把借用冲突转化为互斥等待，是 `RefCell` 的线程安全对应物（C）。
+**解析**：`RefCell` 运行时（Runtime）维护借用计数，同一时刻多个 `borrow()` 或一个 `borrow_mut()`；违规时 **panic** 而非编译错误（D 错，这正是"检查推迟"的含义）。`Cell` 无引用、按值 get/set，无运行时开销但要求 `Copy`（或用 `take`/`replace`）（B）。`Mutex` 用锁把借用冲突转化为互斥等待，是 `RefCell` 的线程安全对应物（C）。
 
 </details>
 

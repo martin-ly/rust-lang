@@ -58,7 +58,7 @@
 | `name` | ✅ | 包名（crate 名），crates.io 限制 ASCII、64 字符 |
 | `version` | 发布时 | SemVer，如 `1.2.3`；无则默认 `0.0.0` |
 | `edition` | ❌ | Rust Edition，`2015`/`2018`/`2021`/`2024`；默认 `2015` |
-| `rust-version` | ❌ | MSRV，如 `"1.97.0"` |
+| `rust-version` | ❌ | MSRV，如 `"1.97.1"` |
 | `authors` | ❌ | 已废弃，但兼容 |
 | `description` | 发布 crates.io | 纯文本简介 |
 | `documentation` | ❌ | 文档 URL；未设置则自动指向 docs.rs |
@@ -165,7 +165,7 @@ edition = "2024"
 version = "0.1.0"
 
 [workspace.dependencies]
-serde = "1.0.217"
+serde = "1.0.228"
 ```
 
 成员包继承：

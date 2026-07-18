@@ -74,7 +74,7 @@ mindmap
 
 ### 1.1 什么是 let-else
 
-`let-else` 是 Rust 1.65 稳定的控制流构造，它把**模式匹配绑定**与**失败分支发散**合并到一条语句中：
+`let-else` 是 Rust 1.65 稳定的控制流构造，它把**模式匹配（Pattern Matching）绑定**与**失败分支发散**合并到一条语句中：
 
 ```rust
 fn main() {

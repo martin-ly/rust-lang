@@ -14,5 +14,9 @@
 > 形式迁入权威页的「六、来源与延伸阅读」一节；进阶边界场景指向
 > [ECS 架构](02_game_ecs.md) 与 [游戏引擎内部机制](15_game_engine_internals.md)。
 > 本文件保留路径作为重定向 stub，不再维护重复正文。
+> **前置概念**: [Game ECS](02_game_ecs.md)
+> **后置概念**: [Game Engine Internals](15_game_engine_internals.md)
+>
+>
 > **受众**: [进阶]
 > **内容分级**: [综述级]

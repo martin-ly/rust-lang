@@ -897,7 +897,7 @@ fn main() {
 
 - **上位（is-a）**：编译期计算在概念层的另一分支对应 [Type-Level Programming](../01_generics/03_type_level_programming.md)。
 - **下位（实例）**：过程宏工程实例见 [Production Grade Macro Development](../../03_advanced/03_proc_macros/05_production_grade_macro_development.md)。
-- **对偶**：与运行时反射（Java/Python 式）相对，见 [RTTI and Dynamic Typing](../04_types_and_conversions/05_rtti_and_dynamic_typing.md)。
+- **对偶**：与运行时（Runtime）反射（Java/Python 式）相对，见 [RTTI and Dynamic Typing](../04_types_and_conversions/05_rtti_and_dynamic_typing.md)。
 - **组合**：与 [Macro Patterns](03_macro_patterns.md) 组合落地。
 - **依赖**：基础见 [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md)。
 

@@ -54,10 +54,10 @@ Rust 采用 1:1 进程模型映射到操作系统进程，核心类型包括：
 
 ## 2. 生命周期管理
 
-进程生命周期的三个管理维度，覆盖「状态、异步（Async）、资源」：
+进程生命周期（Lifetimes）的三个管理维度，覆盖「状态、异步（Async）、资源」：
 
 - **进程状态机**：`创建(fork/spawn) → 运行 → [僵尸(已退出未收尸)] → 回收(wait)`——僵尸状态是 Unix 特有：子进程退出后内核保留其退出码直到父进程 `wait`，期间占 PID 表项。「孤儿进程」（父先死）被 init/PID1 收养并回收；「僵尸进程」的唯一解药是父进程 `wait`——Rust 中 `Child::wait`/`wait_with_output`，或对「刻意不管」的子进程用双 fork（daemon 化）或 SIGCHLD 处理。
-- **异步生命周期管理**：`tokio::process::Command` 把 `wait` 变为 `.await` 点（`child.wait().await`），内部经 SIGCHLD 信号驱动（全局信号处理器——与「多运行时（Runtime）实例」「其他 SIGCHLD 用户」的共存是部署注意点）。异步模式的核心收益：等待子进程不占线程（万级并发子进程场景，如 CI runner）；`Child::kill().await` 与「kill-on-drop」（tokio 的 `kill_on_drop(true)` 选项）把「任务取消 → 子进程清理」自动化。
+- **异步（Async）生命周期管理**：`tokio::process::Command` 把 `wait` 变为 `.await` 点（`child.wait().await`），内部经 SIGCHLD 信号驱动（全局信号处理器——与「多运行时（Runtime）实例」「其他 SIGCHLD 用户」的共存是部署注意点）。异步模式的核心收益：等待子进程不占线程（万级并发子进程场景，如 CI runner）；`Child::kill().await` 与「kill-on-drop」（tokio 的 `kill_on_drop(true)` 选项）把「任务取消 → 子进程清理」自动化。
 - **资源自动释放**：RAII 覆盖的范围与边界——管道/文件句柄自动（`ChildStdout`/`ChildStdin` 的 Drop），进程实体不自动（设计决策：drop 时杀进程可能误杀「已 detach 的长期服务」）。正确模式：`scopeguard`/自定义 guard 封装「确保 wait/kill」的清理逻辑，或 tokio `kill_on_drop`。泄漏审计：`ps` 查僵尸（`Z` 状态）与孤儿，归因到「缺 wait」或「缺 kill-on-drop」。
 
 判定生命周期管理的完备性：状态机的每个迁移都有代码路径（特别是错误分支的 wait）、异步取消有 kill 传播、句柄 drop 顺序文档化（先关 stdin 通知退出 → 超时 → kill → wait）。
@@ -96,7 +96,7 @@ Created → Running → (Waiting →)* → Terminated
 
 1. **基础属性**（3.1）：工作目录（`current_dir`）、环境变量（`env`/`envs`/`env_remove`/`env_clear`）、标准流重定向（`stdin`/`stdout`/`stderr` 的 `Stdio::piped/null/inherit` 三态）。关键陷阱：`env_clear` 后子进程可能因缺 `PATH`/`SystemRoot`（Windows）无法启动；
 2. **高级资源限制**（3.2）：Unix 上 `CommandExt::pre_exec`（`unsafe`——fork 后 exec 前只能调 async-signal-safe 函数）、uid/gid 切换、`setpgid`；Windows 上 `CommandExt::creation_flags`（如 `CREATE_NO_WINDOW`）；
-3. **跨平台资源管理**（3.3）：`ulimit` 类限制（内存/CPU/文件数）无跨平台抽象——Unix 用 `pre_exec` + `setrlimit`，Windows 需 Job Object（`windows` crate），容器环境应优先交给 cgroup/容器运行时而非进程内设置。
+3. **跨平台资源管理**（3.3）：`ulimit` 类限制（内存/CPU/文件数）无跨平台抽象——Unix 用 `pre_exec` + `setrlimit`，Windows 需 Job Object（`windows` crate），容器环境应优先交给 cgroup/容器运行时（Runtime）而非进程内设置。
 
 判定准则：属性只影响**子进程**，父进程状态不变；任何在 `pre_exec` 中的分配或锁操作都是 UB 风险。
 
@@ -205,9 +205,9 @@ Windows 平台需使用对应的 Windows API 进行资源限制配置。
 
 ## 7. 关键特性总结
 
-1. **内存安全**：所有权模型确保进程间内存隔离。
+1. **内存安全（Memory Safety）**：所有权（Ownership）模型确保进程间内存隔离。
 2. **资源管理**：自动资源释放，防止泄漏。
-3. **错误处理**：强制错误处理，提高健壮性。
+3. **错误处理（Error Handling）**：强制错误处理，提高健壮性。
 4. **跨平台兼容**：统一的 API 接口。
 5. **异步支持**：与 Tokio 等现代运行时集成。
 

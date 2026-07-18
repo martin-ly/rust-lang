@@ -1024,7 +1024,7 @@ let _ = (p_a, p_b);
 
 ### 3. 为什么“收窄”而不是“换种写法”：健全性
 
-`Pin<&mut T>` 的类型承诺是“`T` 在 drop 前不会被移动”（[`06_pin_unpin.md`](../../03_advanced/01_async/08_pin_unpin.md) §1.2）。而 `pin!(&mut x)` 实际固定的是引用 `&mut x`（引用本身 `Unpin`），**并未固定 `x`**。允许 `Pin<&mut &mut T>` coerce 到 `Pin<&mut T>` 会让类型系统对一个**未被真正固定**的值给出 `Pin<&mut T>` 的承诺——这正是 release notes 所说的 “to prevent unsoundness”。
+`Pin<&mut T>` 的类型承诺是“`T` 在 drop 前不会被移动”（[`06_pin_unpin.md`](../../03_advanced/01_async/08_pin_unpin.md) §1.2）。而 `pin!(&mut x)` 实际固定的是引用 `&mut x`（引用本身 `Unpin`），**并未固定 `x`**。允许 `Pin<&mut &mut T>` coerce 到 `Pin<&mut T>` 会让类型系统（Type System）对一个**未被真正固定**的值给出 `Pin<&mut T>` 的承诺——这正是 release notes 所说的 “to prevent unsoundness”。
 
 ```rust,ignore
 // edition = "2024", rust = "1.97" —— 语义对照：固定引用 ≠ 固定 pointee

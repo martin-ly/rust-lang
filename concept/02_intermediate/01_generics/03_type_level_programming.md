@@ -244,7 +244,7 @@ type Product = <Two as Mul<Three>>::Output;  // Six = Two * Three
 - **条件选择**：`trait If<B> { type Then; type Else; }` 或更惯用的「分派 trait」模式——`impl Select<True> for X { type Out = A; } impl Select<False> for X { type Out = B; }` 由 trait 求解完成分支；
 - **断言工具**：`trait Assert: IsTrue {}` + `fn assert<T: Assert>()`——编译期断言的骨架，`static_assertions` crate 是其工程化形态。
 
-实用价值评估：类型级布尔在现代 Rust 中大多被 const 泛型 + `const fn` 取代（`where [(); N > 0]:` 类约束更直接）——本节的价值是理解类型系统作为计算模型的原理，而非推荐日常使用。
+实用价值评估：类型级布尔在现代 Rust 中大多被 const 泛型（Generics） + `const fn` 取代（`where [(); N > 0]:` 类约束更直接）——本节的价值是理解类型系统（Type System）作为计算模型的原理，而非推荐日常使用。
 
 ### 布尔类型
 
@@ -494,7 +494,7 @@ impl Connection<Authenticated> {
 }
 ```
 
-**编译时验证的协议**：`send` 只定义在 `Connection<Authenticated>` 上——「未认证就发送」在方法解析阶段即失败（E0599），无需任何运行时状态检查。状态迁移函数按值取 `self`（消耗旧状态）并返回新状态类型，旧状态值随之失效，「迁移后仍用旧句柄」也被所有权（Ownership）系统拒绝（E0382）。
+**编译时验证的协议**：`send` 只定义在 `Connection<Authenticated>` 上——「未认证就发送」在方法解析阶段即失败（E0599），无需任何运行时（Runtime）状态检查。状态迁移函数按值取 `self`（消耗旧状态）并返回新状态类型，旧状态值随之失效，「迁移后仍用旧句柄」也被所有权（Ownership）系统拒绝（E0382）。
 
 **适用判定**：协议状态数有限、迁移规则静态可知、违规代价高（网络协议握手、文件打开模式、构建器分步校验）。代价是每个状态 × 方法组合都要写 impl 块，状态爆炸时需权衡；运行时才知的动态状态不适用（应退化为 enum + 运行时检查）。
 
@@ -845,7 +845,7 @@ impl Not for False { type Output = True; }
 
 | 属性 | 取值 / 判定 | 依据 |
 |---|---|---|
-| 求值时机 | 全部计算在编译期完成 | 单态化 |
+| 求值时机 | 全部计算在编译期完成 | 单态化（Monomorphization） |
 | 编码手段 | Peano 数、trait 递归、关联类型输出 | 类型论编码 |
 | 运行时成本 | 零（类型在编译后完全擦除） | 零成本抽象（Zero-Cost Abstraction） |
 | 与 const 泛型 | const generics 承接数值型类型级计算 | const generics |

@@ -176,7 +176,7 @@ struct Version { major: u32, minor: u32, patch: u32 }
 
 - **`Clone`**：显式深复制——`x.clone()` 是程序员可见的操作，可能昂贵（堆分配、递归克隆）；`Clone` 的存在不改变 move 语义（默认仍 move）；
 - **`Copy`**：隐式位复制——`Copy` 类型的「move」退化为按位拷贝且源保持有效（`let y = x;` 后 `x` 仍可用）。约束：所有字段 `Copy` + 类型不实现 `Drop`（E0184——位复制 + 析构 = double-free 风险，编译器强制排除）；
-- **派生过度约束陷阱**：`#[derive(Clone)] struct S<T>(PhantomData<T>)` 生成的 `impl<T: Clone>` 要求 `T: Clone`，但 `PhantomData<T>` 总是 `Copy`——泛型参数被不必要地约束，容器库常因此手写 impl；
+- **派生过度约束陷阱**：`#[derive(Clone)] struct S<T>(PhantomData<T>)` 生成的 `impl<T: Clone>` 要求 `T: Clone`，但 `PhantomData<T>` 总是 `Copy`——泛型（Generics）参数被不必要地约束，容器库常因此手写 impl；
 - **设计准则**：小型纯数据类型（`Point`、`IpAddr` 风格）派生 `Copy`；含堆资源的类型只 `Clone`；`Copy` 是承诺「复制即全部语义」——加字段时若新字段不可 `Copy`，原有代码的隐式复制点全部变为 move，是 API 破坏性变更。
 
 #### `Clone`
@@ -320,7 +320,7 @@ struct User {
 - A. 调用运行时（Runtime）反射生成
 - B. 使用默认实现，行为基于字段的逐字段/逐变体推导
 - C. 复制标准库中同名类型的实现
-- D. 生成空实现，待运行时填充
+- D. 生成空实现，待运行时（Runtime）填充
 
 <details>
 <summary>✅ 答案</summary>
@@ -372,7 +372,7 @@ struct User {
 | 机制 | `#[derive]` 在编译期按字段递归生成 impl | 内置宏（Macro） |
 | 覆盖范围 | `Debug`/`Clone`/`Copy`/`PartialEq`/`Eq`/`PartialOrd`/`Ord`/`Hash`/`Default` 等 | std |
 | 条件 | 所有字段均实现目标 trait 才可派生 | 生成规则 |
-| 不可派生 | `Display` 等需手写或第三方宏 crate | 生态惯例 |
+| 不可派生 | `Display` 等需手写或第三方宏（Macro） crate | 生态惯例 |
 | 组合 | 多个 derive 可叠加于同一类型 | 文法 |
 
 ## 🔗 概念关系

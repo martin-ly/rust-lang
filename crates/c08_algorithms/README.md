@@ -1,14 +1,14 @@
-# 🦀 Rust 算法与数据结构 - Rust 1.97.0+ 学习模块
+# 🦀 Rust 算法与数据结构 - Rust 1.97.1+ 学习模块
 
 > **模块类型**: 算法与数据结构学习模块 | ⭐ 质量评分: **95/100**
-> **Rust版本**: 1.97.0+ | 📊 完成度: **100% 完成** ✅
+> **Rust版本**: 1.97.1+ | 📊 完成度: **100% 完成** ✅
 > **学习重点**: 基础数据结构、高级数据结构、核心算法、并行与异步算法
 > **适用对象**: Rust中级到高级开发者、算法工程师
-> **最后更新**: 2025-12-11 | 🔄 维护模式: Rust 1.97.0+ MSRV 对齐
+> **最后更新**: 2025-12-11 | 🔄 维护模式: Rust 1.97.1+ MSRV 对齐
 
 ## 目录
 
-- [🦀 Rust 算法与数据结构 - Rust 1.97.0+ 学习模块](#-rust-算法与数据结构---rust-1960-学习模块)
+- [🦀 Rust 算法与数据结构 - Rust 1.97.1+ 学习模块](#-rust-算法与数据结构---rust-1971-学习模块)
   - [目录](#目录)
   - [🎯 最新更新 (2025-11-15) ✨](#-最新更新-2025-11-15-)
     - [📖 新版文档导航](#-新版文档导航)
@@ -228,6 +228,7 @@
 ```bash
 cargo add c08_algorithms
 ```
+
 ### 基础用法（对齐新接口）
 
 ```rust
@@ -283,6 +284,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
 ### 可选特性与成熟库对照
 
 - 启用 `with-petgraph`：使用 `petgraph` 进行图算法对照（例如 Dijkstra）。
@@ -292,6 +294,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 # 启用 petgraph 与 aho-corasick 特性
 cargo test -p c08_algorithms --features "with-petgraph with-aho" -- --nocapture
 ```
+
 ```rust
 // 图：与 petgraph 对照（需开启 with-petgraph）
 #[cfg(feature = "with-petgraph")]
@@ -319,6 +322,7 @@ cargo test -p c08_algorithms --features "with-petgraph with-aho" -- --nocapture
     assert!(!matches_fast.is_empty() && !matches_teach.is_empty());
 }
 ```
+
 ---
 
 ## 🔬 性能基准
@@ -342,6 +346,7 @@ cargo run -p c08_algorithms --bin doc_link_scan
 cargo run -p c08_algorithms --bin bench_report > report.csv
 # 用任意表格工具打开 report.csv 进行对比分析
 ```
+
 ---
 
 ## 📖 文档体系
@@ -451,6 +456,7 @@ cargo install cargo-llvm-cov
 cargo llvm-cov clean --workspace
 cargo llvm-cov test --workspace --html
 ```
+
 ---
 
 ## 🚀 贡献指南

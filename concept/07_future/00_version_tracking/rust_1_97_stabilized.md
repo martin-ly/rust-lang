@@ -7,19 +7,22 @@
 > **Bloom 层级**: L2-L3
 > **内容分级**: [综述级]
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **Rust 版本**: **1.97.0 stable**（项目 `rust-toolchain.toml` 保持 `stable` 通道，由 rustup 自动解析为当前 latest stable 1.97.0）
-> **最后更新**: 2026-07-10
-> **状态**: ✅ 已对齐 Rust 1.97.0 stable
+> **Rust 版本**: **1.97.1 stable**（项目 `rust-toolchain.toml` 保持 `stable` 通道，由 rustup 自动解析为当前 latest stable 1.97.1）
+> **最后更新**: 2026-07-18
+> **状态**: ✅ 已对齐 Rust 1.97.0 stable；**1.97.1 补丁已发布（LLVM 误编译修复），详见 [`rust_1_97_1.md`](rust_1_97_1.md)**
 >
 > **权威来源**:
 >
 > · [Rust 1.97.0 Release Notes](https://releases.rs/docs/1.97.0/) ·
+> [Rust 1.97.1 Release Notes](https://releases.rs/docs/1.97.1/) ·
 > [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
 > [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
 >
+> **补丁跟踪**: [Rust 1.97.1 稳定补丁](rust_1_97_1.md)（LLVM 优化误编译修复）
+>
 > **前置概念**: [Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.96 稳定特性](rust_1_96_stabilized.md)
-> **后置概念**: [Rust 1.97.0 前沿特性预览](rust_1_97_preview.md) · [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md)
+> **后置概念**: [Rust 1.97.1 稳定补丁](rust_1_97_1.md) · [Rust 1.97.0 前沿特性预览](rust_1_97_preview.md) · [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md)
 
 ---
 
@@ -470,13 +473,15 @@ pub fn foo() {}
 
 ## 8. 迁移指南
 
-升级到 Rust 1.97.0：
+升级到 Rust 1.97.1：
 
 ```bash
 rustup update stable
-cargo update
-cargo build
+rustc --version  # >= 1.97.1
+cargo --version  # >= 1.97.1
 ```
+
+> **注意**：Rust 1.97.1（2026-07-16）修复了一个 LLVM 优化导致的误编译，该问题自 1.87 起存在。即使不使用 1.97.0 的新特性，也建议所有使用 1.87+ 的项目升级到 1.97.1。详见 [Rust 1.97.1 稳定补丁](rust_1_97_1.md)。
 
 工具链与组件管理详见 [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md)；`cargo update` 的工作流与锁文件策略见 [Cargo Getting Started](../../06_ecosystem/01_cargo/15_cargo_getting_started.md)。
 
@@ -505,7 +510,7 @@ cargo build
 
 ## 10. 项目构建说明
 
-本项目 `rust-toolchain.toml` 保持 `channel = "stable"`，由 rustup 自动解析当前 latest stable。Rust 1.97.0 已发布，`stable` 通道当前解析到 1.97.0；`Cargo.toml` 中的 `rust-version = "1.97.0"` 为项目 MSRV。
+本项目 `rust-toolchain.toml` 保持 `channel = "stable"`，由 rustup 自动解析当前 latest stable。Rust 1.97.1 已发布，`stable` 通道当前解析到 1.97.1；`Cargo.toml` 中的 `rust-version = "1.97.1"` 为项目 MSRV。
 
 `#[cfg(nightly)]` 分支仅在 nightly 工具链下启用，文档中标记为 `rust,ignore` 的 nightly 专属示例不会参与默认 stable 构建。
 

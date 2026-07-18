@@ -42,7 +42,7 @@
 生产级宏（Macro）开发不仅是“让宏能工作”，还需要考虑：
 
 - **版本兼容性**: MSRV、Edition、依赖版本策略。
-- **错误诊断**: 用户遇到宏错误时能否快速修复。
+- **错误诊断**: 用户遇到宏（Macro）错误时能否快速修复。
 - **文档与示例**: 生成的 API 是否易于理解和使用。
 - **发布与维护**: 语义化版本、Changelog、CI/CD、安全审计。
 
@@ -53,7 +53,7 @@
 过程宏（Procedural Macro） crate 的版本兼容有三条独立轴，生产级开发必须分别管理：
 
 1. **syn 主版本轴**：syn 1.x 与 2.x API 不兼容（`Meta` 匹配 → `parse_nested_meta` 回调）——宏生态的依赖树中 syn 版本分裂会导致编译时间倍增（两份 syn 编译），升级策略是跟随生态主流窗口批量升级；
-2. **rustc 最低版本（MSRV）轴**：过程宏在**编译期运行**，其 MSRV 受 `proc_macro` API 演进约束（如 `Span::source_text` 需要特定版本）——`Cargo.toml` 声明 `rust-version` 并在 CI 测试 MSRV 工具链；
+2. **rustc 最低版本（MSRV）轴**：过程宏（Procedural Macro）在**编译期运行**，其 MSRV 受 `proc_macro` API 演进约束（如 `Span::source_text` 需要特定版本）——`Cargo.toml` 声明 `rust-version` 并在 CI 测试 MSRV 工具链；
 3. **生成代码的兼容性轴**：宏展开结果在用户 crate 中编译——生成代码用到的语法/feature 不能超过用户 MSRV（如生成 `let else` 要求用户 1.65+），文档必须声明「生成代码 MSRV」。
 
 判定准则：三条轴在 README 与 CHANGELOG 中分别记录——宏 crate 的破坏性变更 = 任一轴的不兼容变更。

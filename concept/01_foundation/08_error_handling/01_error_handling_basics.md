@@ -120,7 +120,7 @@ Rust 错误处理的三个核心概念构成「可恢复错误进类型系统（
 
 1. **`Result<T, E>`**：可恢复错误的类型化表示。`Ok(T)` 与 `Err(E)` 两个变体迫使调用方用 `match`/`?`/组合子显式处理失败路径——「忘记处理错误」在 Rust 中是编译期 `#[must_use]` 警告而非运行时事故。
 2. **`Option<T>`**：「值可能不存在」的类型化表示，消除 null。`Some(T)`/`None` 与 `Result` 同构（`Option<T> ≈ Result<T, ()>`），二者经 `ok_or`/`ok` 互转。用 `Option` 还是 `Result`，判定标准是：「缺失」是否需要携带原因——需要原因用 `Result`，纯有无用 `Option`。
-3. **`?` 运算符**：错误传播的语法糖。`expr?` 在 `Err(e)` 时等价于 `return Err(From::from(e))`——隐式执行 `From` 转换并提前返回；在 `Ok(v)`/`Some(v)` 时解包出 `v`。它把「逐层 `match` 传播错误」压缩为单个字符，同时保持类型系统对转换路径的完整检查。
+3. **`?` 运算符**：错误传播的语法糖。`expr?` 在 `Err(e)` 时等价于 `return Err(From::from(e))`——隐式执行 `From` 转换并提前返回；在 `Ok(v)`/`Some(v)` 时解包出 `v`。它把「逐层 `match` 传播错误」压缩为单个字符，同时保持类型系统（Type System）对转换路径的完整检查。
 
 三者的组合规则：`Result`/`Option` 负责「表示」，`?` 负责「传播」，`From`/`Into` 负责「跨错误类型转换」——错误处理代码的全部结构都可分解到这三个角色上。
 
@@ -312,7 +312,7 @@ fn main() {
 - **`map` 与 `and_then`**：`map` 变换成功值（`T → U`），`and_then` 串联可能失败的操作（`T → Result<U, E>`，flatMap）。判定用哪个：闭包（Closures）返回普通值用 `map`，返回 `Result`/`Option` 用 `and_then`——用错会得到 `Result<Result<...>>` 的嵌套类型（编译器以类型不匹配提示）。
 - **组合模式**：`map_err` 转换错误侧、`or`/`or_else` 提供回退、`transpose` 交换 `Result<Option<T>>` 与 `Option<Result<T>>`。这组组合子使错误处理保持表达式风格，与迭代器（Iterator）链无缝衔接。
 
-类型层面的一致性（Coherence）约束：同一条 `?` 链上所有错误必须能 `From` 到函数的返回错误类型——这条约束是设计错误枚举层级（`thiserror`）或动态错误对象（`anyhow::Error`）的分水岭。
+类型层面的一致性（Coherence）约束：同一条 `?` 链上所有错误必须能 `From` 到函数的返回错误类型——这条约束是设计错误枚举（Enum）层级（`thiserror`）或动态错误对象（`anyhow::Error`）的分水岭。
 
 ### 2.1 From trait
 >
@@ -713,7 +713,7 @@ graph TD
 | `unwrap()` 于 `Err` | panic 是运行期行为，编译器不检查 `Result` 内容 | 运行期 panic |
 | `?` 在返回 `()` 的函数中 | `?` 要求返回类型实现 `Try`（通常是 `Result`/`Option`） | 编译错误（E0277） |
 | `Result`/`Option` 混用 | 二者无隐式转换，需 `ok_or`/`ok_or_else` 显式桥接 | 编译错误（E0308） |
-| `catch_unwind` 捕获非 `UnwindSafe` 闭包 | 跨 unwind 边界共享可变状态可能观察到不一致 | 编译错误（E0277） |
+| `catch_unwind` 捕获非 `UnwindSafe` 闭包（Closures） | 跨 unwind 边界共享可变状态可能观察到不一致 | 编译错误（E0277） |
 | `unwrap_unchecked` | 程序员承诺值存在，违约即 UB（release 下无检查） | 运行期 UB |
 
 学习建议：运行期类用例用 `#[should_panic]` 或 Miri 复现；编译期类用例先预测错误码再编译比对。

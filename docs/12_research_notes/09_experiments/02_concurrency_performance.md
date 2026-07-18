@@ -4,7 +4,7 @@
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
 >
-> - `async-std` 已进入维护模式，本实验笔记已将其示例替换为 Tokio；新项目建议优先考虑 Tokio / smol。
+> - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 已重命名为 `wasm32-wasip1`；WASI Preview 2 目标为 `wasm32-wasip2`。
 > **概念族**: 实验研究
 
@@ -54,7 +54,7 @@
   - [🔬 实验设计 {#实验设计}](#-实验设计-实验设计)
     - [1. 同步原语性能测试 {#1-同步原语性能测试}](#1-同步原语性能测试-1-同步原语性能测试)
     - [2. 通道性能测试 {#2-通道性能测试}](#2-通道性能测试-2-通道性能测试)
-    - [3. 异步（Async）运行时（Runtime）性能测试 {#3-异步运行时性能测试}](#3-异步运行时性能测试-3-异步运行时性能测试)
+    - [3. 异步运行时性能测试 {#3-异步运行时性能测试}](#3-异步运行时性能测试-3-异步运行时性能测试)
     - [4. 并发模式性能测试 {#4-并发模式性能测试}](#4-并发模式性能测试-4-并发模式性能测试)
     - [Rust 1.96+ / Edition 2024 工具链 {#rust-196-edition-2024-工具链}](#rust-196--edition-2024-工具链-rust-196-edition-2024-工具链)
   - [💻 代码示例 {#代码示例}](#-代码示例-代码示例)
@@ -664,7 +664,7 @@ async fn async_task_benchmark() {
 
 1. **同步原语**：运行 `mutex_benchmark`、`rwlock_benchmark`，以及 Atomic、Condvar 的 bench；记录 ITERATIONS/THREADS 与耗时。
 2. **通道**：运行 `channel_benchmark`（std mpsc）、`tokio_unbounded_channel_benchmark`（Tokio async），若有 crossbeam 则一并对比；记录 MESSAGES 与延迟/吞吐。
-3. **异步**：`#[tokio::main]` 下跑 `async_task_benchmark`，变化 TASKS 与 `sleep` 时长；不推荐与 async-std 对比（已进入维护模式）。
+3. **异步**：`#[tokio::main]` 下跑 `async_task_benchmark`，变化 TASKS 与 `sleep` 时长；不推荐与 async-std 对比（已停止维护）。
 4. **留存**：将 `target/criterion/` 的 `estimates.json` 或主要指标录入「结果分析模板」。
 
 ---

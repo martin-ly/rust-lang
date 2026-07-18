@@ -896,7 +896,7 @@ fn main() {
 
 - **上位（is-a）**：[Traits](../../02_intermediate/00_traits/01_traits.md) 的动态分发机制。
 - **下位（实例）**：`Box<dyn Trait>`、vtable、自定义类型擦除模式。
-- **对偶**：静态分发（泛型单态化）⇄ 动态分发（类型擦除）。
+- **对偶**：静态分发（泛型单态化（Monomorphization））⇄ 动态分发（类型擦除）。
 - **组合**：与 [RTTI 与动态类型识别](../../02_intermediate/04_types_and_conversions/05_rtti_and_dynamic_typing.md)、[Async Trait 对象安全](../01_async/13_async_trait_object_safety.md) 组合。
 - **依赖**：依赖 [类型系统（Type System）基础](../../01_foundation/02_type_system/01_type_system.md)。
 

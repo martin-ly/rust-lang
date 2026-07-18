@@ -301,6 +301,7 @@ bash scripts/git_hooks/install.sh
 | 归档审计 | 每季度 | 人工 + 脚本 |
 | 版本页中心化管理 | Rust 新版本发布时 | `concept/07_future/rust_1_XX_*.md` |
 | 版本新鲜度巡检 | 每周（手动，不挂 CI 门：网络依赖检查不适合阻断） | `scripts/check_authority_freshness.py` |
+| Patch Release 响应 | Rust 补丁版本发布 / 关键安全公告（RUSTSEC/CVE）触发 | 1. 确认官方 Release Notes / RUSTSEC 影响范围；<br>2. 更新根 `Cargo.toml`/`rust-toolchain.toml`/`.clippy.toml` 的 `rust-version`；<br>3. 新建/更新 `concept/07_future/00_version_tracking/rust_1_XX_Y.md` 补丁权威页；<br>4. 同步 `rust_1_XX_stabilized.md`、`01_rust_version_tracking.md`、相关 Cargo 特性页、`concept/SUMMARY.md`；<br>5. 扫描修复 concept/content/docs/crates 中 MSRV 声明不一致（`check_msrv_consistency.py --strict`）；<br>6. 运行全部 23 阻断质量门，确认通过 |
 | 夜间质量报告 | 每天 | `.github/workflows/nightly_quality_report.yml` |
 | Stub 纯净度审计 | 每月 | `python scripts/check_stub_purity.py --strict` |
 | 交叉/边界语义覆盖审计 | 每月 | `python scripts/check_cross_domain_coverage.py --strict` |

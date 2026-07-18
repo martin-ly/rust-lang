@@ -3,7 +3,7 @@
 > 本文档提及 `async-std` 与/或 `wasm32-wasi`。
 > 请注意：
 >
-> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
@@ -275,7 +275,7 @@ graph TD
     Q3[概念: 优雅取消]
     Q4[概念: 避免阻塞]
 
-    M1[方法: Tokio / async-std [已归档]<br/>单线程 vs 多线程运行时]
+    M1[方法: Tokio / async-std [已停止维护]<br/>单线程 vs 多线程运行时]
     M2[方法: Arc + clone<br/>避免跨 await 借用]
     M3["方法: select / drop Future<br/>CancellationToken"]
     M4[方法: spawn_blocking<br/>rayon 数据并行]
@@ -465,7 +465,7 @@ graph TD
 |:---|:---|:---|
 | 内存安全设计 | `01_ownership`, `02_borrowing`, `03_lifetimes`, `03_memory_management` | `Box`, `Rc`, `Arc`, `Pin`, Miri |
 | 并发系统设计 | `01_concurrency`, `02_borrowing`, `01_traits` | `std::sync`, `crossbeam`, `rayon`, `parking_lot` |
-| 异步系统设计 | `02_async`, `06_pin_unpin`, `02_generics` | `tokio`, `async-std [已归档]`, `futures` |
+| 异步系统设计 | `02_async`, `06_pin_unpin`, `02_generics` | `tokio`, `async-std [已停止维护]`, `futures` |
 | FFI 互操作 | `03_unsafe`, `05_rust_ffi`, `09_ffi_advanced` | `bindgen`, `cbindgen`, `libc` |
 | 性能优化 | `06_zero_cost_abstractions`, `03_unsafe`, `15_zero_copy_parsing` | `criterion`, `perf`, `cachegrind` |
 | 错误处理 | `04_error_handling`, `15_error_handling_deep_dive` | `thiserror`, `anyhow`, `tracing` |

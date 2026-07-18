@@ -8,7 +8,7 @@
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
-> - `async-std` 已进入维护模式，新项目建议优先考虑 Tokio / smol。
+> - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 已重命名为 `wasm32-wasip1`；WASI Preview 2 目标为 `wasm32-wasip2`。
 > **概念族**: 软件设计 / Crate 架构
 
@@ -73,7 +73,7 @@
 **排除标准**：
 
 - 实验性/个人项目（GitHub stars < 1000 且无稳定 release）
-- 已被官方弃用的 crate（如 `async-std [已归档]`）
+- 已被官方弃用的 crate（如 `async-std [已停止维护]`）
 - 纯 FFI 封装层（无 Rust  idiomatic 设计创新）
 
 ---

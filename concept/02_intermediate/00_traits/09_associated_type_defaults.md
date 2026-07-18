@@ -373,7 +373,7 @@ impl Compute for FloatCompute {
 fn main() {}
 ```
 
-> 注意：trait 泛型默认值与关联类型默认值在表达力上不等价。泛型参数会影响 trait 的对象安全、一致性和使用方式。
+> 注意：trait 泛型默认值与关联类型默认值在表达力上不等价。泛型参数会影响 trait 的对象安全、一致性（Coherence）和使用方式。
 
 ---
 

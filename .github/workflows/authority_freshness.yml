@@ -1,0 +1,75 @@
+name: Authority Freshness Check
+
+on:
+  schedule:
+    # 每周一 UTC 03:00 / 北京时间 11:00
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+    inputs:
+      offline:
+        description: '离线模式（跳过网络检查）'
+        required: false
+        default: 'false'
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  authority-freshness:
+    name: Check upstream authority freshness
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run authority freshness check
+        id: freshness
+        continue-on-error: true
+        run: |
+          ARGS=""
+          if [ "${{ github.event.inputs.offline }}" = "true" ]; then
+            ARGS="--offline"
+          fi
+          python scripts/check_authority_freshness.py $ARGS > reports/AUTHORITY_FRESHNESS_GITHUB_$(date -u +%Y-%m-%d-%H%M%S).md 2>&1
+          echo "report=$(ls -t reports/AUTHORITY_FRESHNESS_GITHUB_*.md | head -1)" >> $GITHUB_OUTPUT
+
+      - name: Upload freshness report
+        uses: actions/upload-artifact@v4
+        with:
+          name: authority-freshness-report
+          path: reports/AUTHORITY_FRESHNESS_GITHUB_*.md
+          retention-days: 90
+
+      - name: Check for warnings
+        id: check-warn
+        run: |
+          REPORT="${{ steps.freshness.outputs.report }}"
+          if grep -q "WARN" "$REPORT"; then
+            echo "has_warn=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_warn=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create issue for upstream changes
+        if: steps.check-warn.outputs.has_warn == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('${{ steps.freshness.outputs.report }}', 'utf8');
+            const title = `[authority-freshness] 上游权威源变化提醒 — ${new Date().toISOString().split('T')[0]}`;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: `上游权威源新鲜度检查触发警告，请人工复核并按 [AGENTS.md Patch Release SOP](../blob/main/AGENTS.md) 处置。\n\n\`\`\`\n${report.slice(0, 6000)}\n\`\`\``,
+              labels: ['authority-freshness', 'upstream-alignment', 'automated']
+            });

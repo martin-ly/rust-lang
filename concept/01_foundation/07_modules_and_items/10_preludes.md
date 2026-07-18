@@ -42,7 +42,7 @@
 
 > **关键性质**
 >
-> - Prelude 名字在模块作用域中可见。
+> - Prelude 名字在模块（Module）作用域中可见。
 > - Prelude 名字**不是**模块成员，因此不能通过 `self::` 引用（Reference）。
 > - 存在多种 prelude，分别由语言、标准库、外部 crate、宏（Macro）和工具提供。
 

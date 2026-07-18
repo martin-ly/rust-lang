@@ -16,7 +16,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析跨线程类型形态的安全性边界
 > **前置概念**:
-> [Send 与 Sync：Auto Trait 的并发安全契约](02_send_sync_auto_traits.md) ·
+> [Send 与 Sync：Auto Trait 的并发安全（Concurrency Safety）契约](02_send_sync_auto_traits.md) ·
 > [Traits](../../02_intermediate/00_traits/01_traits.md) ·
 > [Trait Objects / 分发机制](../../02_intermediate/00_traits/02_dispatch_mechanisms.md) ·
 > [Async/Await](../01_async/01_async.md)
@@ -44,7 +44,7 @@
 
 **变更日志**:
 
-- v1.0 (2026-07-15): 初始版本，覆盖 trait objects、闭包、async 状态机、`impl Trait` / RPITIT 的 Send/Sync 边界判定、反例与决策矩阵。
+- v1.0 (2026-07-15): 初始版本，覆盖 trait objects、闭包（Closures）、async 状态机、`impl Trait` / RPITIT 的 Send/Sync 边界判定、反例与决策矩阵。
 
 > **对应 Crate**: [`c05_threads`](../../crates/c05_threads) · [`c06_async`](../../crates/c06_async)
 > **对应练习**: [`exercises/src/concurrency/`](../../exercises/src/concurrency) · [`exercises/src/async_programming/`](../../exercises/src/async_programming)
@@ -127,7 +127,7 @@ S<T>: Sync  ⟺  A: Sync ∧ B<T>: Sync
 
 当编译器无法从字段结构推导出 `Send`/`Sync` 时（例如包含 `UnsafeCell`、裸指针、FFI 句柄），可以手动实现，但前提是程序员能证明：
 
-1. **Send 契约**：所有权转移后，原线程不再通过任何路径访问该值；且 `drop` 在新线程执行不会破坏线程安全不变量。
+1. **Send 契约**：所有权（Ownership）转移后，原线程不再通过任何路径访问该值；且 `drop` 在新线程执行不会破坏线程安全不变量。
 2. **Sync 契约**：所有通过 `&T` 触发的修改都经过同步原语（如 `Mutex`、`Atomic`）或满足 happens-before 序。
 3. **与 Drop 的协同**：如果 `T: Send + Sync` 但 `T` 内部有线程亲和性资源，手动 impl 必须保证 `drop` 在正确线程执行（通常需要额外同步或 `SendWrapper`）。
 
@@ -359,7 +359,7 @@ fn main() {
 }
 ```
 
-**错误本质**：闭包匿名结构体中包含 `Rc<i32>` 字段，因此闭包整体 `!Send`。即使函数从未真正 spawn 线程，类型系统（Type System）也会拒绝。
+**错误本质**：闭包匿名结构体（Struct）中包含 `Rc<i32>` 字段，因此闭包整体 `!Send`。即使函数从未真正 spawn 线程，类型系统（Type System）也会拒绝。
 
 ### 反例 3：async fn 返回的 Future 不是 Send（`MutexGuard` 跨 await）
 

@@ -236,7 +236,7 @@ fn main() {
 - **Orphan Rule 违规**：`impl ForeignTrait for ForeignType` 触发 E0117——修复模式是 newtype 包装（`struct Wrapper(ForeignType)` 获得本地类型身份）或 trait 改由本地定义；
 - **测验衔接**：receiver 形式（`self`/`&self`/`&mut self`/`Box<Self>`/`Rc<Self>`）的选择是 impl 设计的第一决策。
 
-判定准则：方法 receiver 决定调用后变量的可用性——`self` 消耗、`&mut self` 独占借用、`&self` 共享只读，选错 receiver 是 API 易用性事故的高发源。
+判定准则：方法 receiver 决定调用后变量的可用性——`self` 消耗、`&mut self` 独占借用（Borrowing）、`&self` 共享只读，选错 receiver 是 API 易用性事故的高发源。
 
 ### 6.1 在 `&self` 方法中修改字段
 
@@ -305,14 +305,14 @@ impl std::fmt::Display for Vec<u8> {
 `impl String` 中 `fn into_bytes(self)` 的 receiver 是 `self`，其调用语义是？
 
 - A. 不可变借用（Immutable Borrow），调用后原值仍可用
-- B. 可变借用，调用后原值仍可用
+- B. 可变借用（Mutable Borrow），调用后原值仍可用
 - C. 获取所有权，调用后原值被移动、不可再使用
 - D. 复制原值，`self` 要求 `Copy`
 
 <details>
 <summary>✅ 答案</summary>
 
-**C 正确**。按本页「三、方法 Receiver」表格：`self` ⟹ 获取所有权；`&self` ⟹ 不可变借用；`&mut self` ⟹ 可变借用。§6.2 反例正是 `s.into_bytes()` 后再用 `s` 报 "borrow of moved value"。
+**C 正确**。按本页「三、方法 Receiver」表格：`self` ⟹ 获取所有权；`&self` ⟹ 不可变借用（Immutable Borrow）；`&mut self` ⟹ 可变借用。§6.2 反例正是 `s.into_bytes()` 后再用 `s` 报 "borrow of moved value"。
 
 </details>
 

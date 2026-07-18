@@ -673,7 +673,7 @@ println!("Result: {}", *counter.lock().unwrap());
 
 **答案：B**
 
-**解析**：`Send` = 可跨线程**转移所有权**（如 move 进 `thread::spawn`）。A 描述的是 `Sync`（`&T` 可跨线程共享）——`T: Sync ⟺ &T: Send`，两者混淆是最常见错误。C、D 与线程安全无关：是否可复制、是否含非静态引用是另外两个独立维度（`'static` 只是 `thread::spawn` 的常见约束，非 `Send` 的定义）。
+**解析**：`Send` = 可跨线程**转移所有权（Ownership）**（如 move 进 `thread::spawn`）。A 描述的是 `Sync`（`&T` 可跨线程共享）——`T: Sync ⟺ &T: Send`，两者混淆是最常见错误。C、D 与线程安全无关：是否可复制、是否含非静态引用（Reference）是另外两个独立维度（`'static` 只是 `thread::spawn` 的常见约束，非 `Send` 的定义）。
 
 </details>
 
@@ -735,7 +735,7 @@ println!("Result: {}", *counter.lock().unwrap());
 
 **答案：对**
 
-**解析**：`async` 状态机可能包含指向自身的引用（跨 `.await` 的借用），一旦移动，这些内部指针就悬空——`Pin<Ptr>` 通过"不提供 `&mut T` 安全访问路径"把值钉在内存位置。关键区分：`Pin` 约束的是**位置稳定性**而非**可变性**——被 pin 的数据照样可以被修改（甚至在 `Unpin` 类型上 pin 完全没有效果）。这也是 `Pin` 与 `&mut`（独占但允许移动/替换）语义错位的根源。
+**解析**：`async` 状态机可能包含指向自身的引用（跨 `.await` 的借用（Borrowing）），一旦移动，这些内部指针就悬空——`Pin<Ptr>` 通过"不提供 `&mut T` 安全访问路径"把值钉在内存位置。关键区分：`Pin` 约束的是**位置稳定性**而非**可变性**——被 pin 的数据照样可以被修改（甚至在 `Unpin` 类型上 pin 完全没有效果）。这也是 `Pin` 与 `&mut`（独占但允许移动/替换）语义错位的根源。
 
 </details>
 

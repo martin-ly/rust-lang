@@ -20,7 +20,7 @@
   - Glommio: Thread-per-core
   - Tokio: Work-stealing
   - Smol: 轻量级多模式
-  - async-std（已归档）
+  - async-std [已停止维护]
 - 性能基准测试
   - 延迟、吞吐量、内存、CPU 效率
 - I/O 性能对比

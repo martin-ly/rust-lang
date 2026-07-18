@@ -1,6 +1,6 @@
 > **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
 >
-> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 
 ---
@@ -186,7 +186,7 @@
 | 上下文 | Context | 传递给 `poll` 方法的异步执行上下文，包含 waker | Reference Ch 37.1 |
 | Waker | Waker | 通知执行器 Future 可以再次轮询的机制 | Reference Ch 37.1 |
 | 执行器 | Executor | 管理和调度 Future 执行运行时的组件 | The Book Ch 17.3 |
-| 运行时 | Runtime | 提供异步执行环境的库（如 Tokio、async-std [已归档]） | The Book Ch 17.3 |
+| 运行时 | Runtime | 提供异步执行环境的库（如 Tokio、async-std [已停止维护]） | The Book Ch 17.3 |
 | 反应器 | Reactor | 监听 I/O 事件并唤醒对应 waker 的运行时组件 | Reference Ch 37.1 |
 | 任务 | Task | 异步运行时调度的执行单元，通常是顶层的 Future | The Book Ch 17.3 |
 | 阻塞操作 | Blocking Operation | 会阻塞当前线程直到完成的操作，不应在异步上下文中执行 | The Book Ch 17.3 |

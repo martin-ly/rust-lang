@@ -30,7 +30,7 @@
 
 | 类型 | 作用 |
 | :--- | :--- |
-| `tokio::process::Command` | 异步进程构建器 |
+| `tokio::process::Command` | 异步（Async）进程构建器 |
 | `tokio::process::Child` | 子进程句柄 |
 | `tokio::process::ChildStdin` | 异步标准输入 |
 | `tokio::process::ChildStdout` | 异步标准输出 |
@@ -58,7 +58,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 - **超时控制（3.1）**：`tokio::time::timeout(dur, child.wait())`——超时的语义是 **wait future 被取消，子进程仍在运行**！这是最常见的理解错误：timeout 不杀进程，必须显式 `child.kill().await` + `wait().await`（回收防僵尸）。优雅退出协议：先发 SIGTERM/关闭 stdin → 宽限期 → SIGKILL；
 - **异步通信（3.2）**：`tokio::process` 的 stdio 是 `AsyncRead`/`AsyncWrite`——stdout/stderr 必须**并发**消费（`tokio::join!` 或 spawn 独立任务），单向等待会管道写满死锁；大输出用 `BufReader` + `lines()` 流式处理。
 
-生命周期完整检查表：spawn（`kill_on_drop` 是否设置？）→ 通信（双向并发消费？）→ 等待（超时 + kill 回收？）→ 清理（僵尸回收验证？）——四步缺一步都是生产事故候选项。
+生命周期（Lifetimes）完整检查表：spawn（`kill_on_drop` 是否设置？）→ 通信（双向并发消费？）→ 等待（超时 + kill 回收？）→ 清理（僵尸回收验证？）——四步缺一步都是生产事故候选项。
 
 ### 3.1 超时控制
 
@@ -349,7 +349,7 @@ async fn run_with_cancellation() -> std::io::Result<()> {
 
 ## 认知路径
 
-1. **问题识别**: 识别在异步运行时中调用同步 `std::process` 会阻塞工作线程的问题。
+1. **问题识别**: 识别在异步运行时（Runtime）中调用同步 `std::process` 会阻塞工作线程的问题。
 2. **概念建立**: 掌握 `tokio::process::Command`、`Child`、`ChildStdout` 等异步 API。
 3. **机制推理**: 通过异步运行时 ⟹ 非阻塞 I/O ⟹ 取消安全的定理链分析设计约束。
 4. **边界辨析**: 辨析“异步一定更快”等反命题，理解运行时调度和缓冲策略的影响。

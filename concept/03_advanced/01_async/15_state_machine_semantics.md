@@ -11,7 +11,7 @@
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **前置概念**: [Async/Await](01_async.md) · [Control Flow](../../01_foundation/04_control_flow/01_control_flow.md) · [Enums and Pattern Matching](../../01_foundation/04_control_flow/02_patterns.md)
 > **后置概念**: [Workflow Theory & Formalization](../../06_ecosystem/03_design_patterns/17_workflow_theory.md) · [Concurrency Patterns](../00_concurrency/03_concurrency_patterns.md)
-> **向下引用**: [Enums and Pattern Matching](../../01_foundation/04_control_flow/02_patterns.md) · [Control Flow](../../01_foundation/04_control_flow/01_control_flow.md)
+> **向下引用（Reference）**: [Enums and Pattern Matching](../../01_foundation/04_control_flow/02_patterns.md) · [Control Flow](../../01_foundation/04_control_flow/01_control_flow.md)
 
 ---
 
@@ -63,7 +63,7 @@ async fn example(x: i32) -> i32 {
 - **状态 2**：`step2(y)` 已提交，等待 `Poll::Ready(result)`。
 - **状态 3**：返回结果。
 
-每个 `.await` 边界都是一个**潜在挂起状态**。这正是 Rust 的 `Future` 状态机没有运行时栈切换、只靠生成结构体保存局部变量的原因。
+每个 `.await` 边界都是一个**潜在挂起状态**。这正是 Rust 的 `Future` 状态机没有运行时（Runtime）栈切换、只靠生成结构体（Struct）保存局部变量的原因。
 
 ```rust,edition2024
 use std::future::Future;
@@ -199,7 +199,7 @@ mindmap
 - [`04_future_and_executor_mechanisms.md`](04_future_and_executor_mechanisms.md) — Future 与执行器机制
 - [`../00_concurrency/03_concurrency_patterns.md`](../00_concurrency/03_concurrency_patterns.md) — 并发模式
 - [`../../06_ecosystem/03_design_patterns/17_workflow_theory.md`](../../06_ecosystem/03_design_patterns/17_workflow_theory.md) — 工作流理论与形式化（L6 权威页）
-- [`../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md`](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) — 迭代器是状态机的 L2 实例
+- [`../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md`](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) — 迭代器（Iterator）是状态机的 L2 实例
 - [`../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md`](../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md) — 进程演算
 
 ---

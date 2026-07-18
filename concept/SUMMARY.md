@@ -529,6 +529,7 @@
   - [Rust 1.96 稳定特性](07_future/00_version_tracking/rust_1_96_stabilized.md)
   - [Rust 1.97 前沿特性预览（Beta）](07_future/00_version_tracking/rust_1_97_preview.md)
   - [Rust 1.97 稳定特性](07_future/00_version_tracking/rust_1_97_stabilized.md)
+  - [Rust 1.97.1 稳定补丁](07_future/00_version_tracking/rust_1_97_1.md)
   - [Rust 1.97 特性×领域交叉矩阵](07_future/00_version_tracking/feature_domain_matrix_197.md)
   - [Rust 1.97 兼容性迁移判定树](07_future/00_version_tracking/migration_197_decision_tree.md)
   - [Rust 1.98+ 前沿特性预览](07_future/00_version_tracking/rust_1_98_preview.md)

@@ -252,7 +252,7 @@ fn main() {
 | 边界 | 现状 | 理论极限 | 工程意义 |
 |:---|:---|:---|:---|
 | 可变性 | `static mut` 需 unsafe | 安全可变全局状态 | 使用 `Mutex`/`RwLock`/`LazyLock` |
-| 初始化时机 | 编译期或首次访问 | 任意运行时 | `LazyLock` 支持延迟初始化 |
+| 初始化时机 | 编译期或首次访问 | 任意运行时（Runtime） | `LazyLock` 支持延迟初始化 |
 | 线程共享 | 不可变 static 是 `Sync` | `static mut` 非 `Sync` | 共享只读数据用 `static`，共享可变数据用同步原语 |
 | Drop 语义 | static 不会被 drop | 程序退出时泄漏 | 避免在 static 中持有需要显式释放的资源 |
 
@@ -363,7 +363,7 @@ graph TD
 - **应用层**：`LazyLock`/`OnceLock` 的选择——一次性惰性初始化（如正则、全局配置）的正确实现模式；
 - **分析层**：`Sync` 约束的推导——为什么 `static X: Mutex<T>` 合法而 `static X: RefCell<T>` 编译失败（`RefCell: !Sync`），把「跨线程共享可变状态」的类型检查链补全。
 
-作答建议：测验 3 先写出 `Sync` 的完整推理链（`&T: Send ⟺ T: Sync`），再对照答案——这是理解 Rust 并发类型系统的枢纽题目。
+作答建议：测验 3 先写出 `Sync` 的完整推理链（`&T: Send ⟺ T: Sync`），再对照答案——这是理解 Rust 并发类型系统（Type System）的枢纽题目。
 
 ### 测验 1：`static` vs `const`
 

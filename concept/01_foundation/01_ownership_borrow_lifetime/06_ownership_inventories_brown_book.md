@@ -188,7 +188,7 @@ fn main() {
 ## 四、与本地练习的衔接
 
 - 完成本样题后，可继续：
-  - `23_quiz_ownership_borrowing.md` — 更多所有权/借用（Borrowing）选择题
+  - `23_quiz_ownership_borrowing.md` — 更多所有权（Ownership）/借用（Borrowing）选择题
   - [`exercises/src/ownership_borrowing/`](../../exercises/src/ownership_borrowing) — 可编译的修复练习
     - [`ex06_string_replace_chain.rs`](../../exercises/src/ownership_borrowing/ex06_string_replace_chain.rs) — 字符串替换链（对应 Inventory #1）
     - [`ex07_vec_slice_borrow.rs`](../../exercises/src/ownership_borrowing/ex07_vec_slice_borrow.rs) — Vec 与切片（Slice）借用（Borrowing）冲突（对应 Inventory #2）

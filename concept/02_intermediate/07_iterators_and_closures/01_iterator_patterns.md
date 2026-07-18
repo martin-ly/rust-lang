@@ -101,7 +101,7 @@
 3. **惰性求值（laziness）**：适配器不做任何工作——`v.iter().map(f)` 只构造状态机，元素变换发生在 `next` 被调用时。推论：无消费者的链是空操作（`iter.map(f)` 不调 `collect` 则 `f` 一次都不执行，编译器对此发 `unused_must_use` 风格警告）。
 4. **消费者与适配器的分界**：消费者（`collect`/`fold`/`for_each`/`find`）取 `self` by value、驱动 `next` 循环、产出非迭代器值——一条链必须恰好以一个消费者结尾才产生效果。判定一个方法是适配器还是消费者：返回 `impl Iterator` 的是适配器，返回其他的是消费者。
 
-四个概念合起来回答「为什么迭代器链零成本」：惰性 + 单态化使抽象在编译期消解为等效手写循环。
+四个概念合起来回答「为什么迭代器链零成本」：惰性 + 单态化（Monomorphization）使抽象在编译期消解为等效手写循环。
 
 ### 1.1 Iterator Trait
 >
@@ -533,7 +533,7 @@ let r: RepeatN<u8> = RepeatN::default();
 assert_eq!(r.count(), 0); // 默认即空迭代器
 ```
 
-这使 `RepeatN` 可放进要求 `Default` 的泛型（Generics）上下文（如 `#[derive(Default)]` 的结构体字段、`std::mem::take`），与 `std::iter::Empty`、`Repeat` 等已有 `Default` 的迭代器类型行为对齐。
+这使 `RepeatN` 可放进要求 `Default` 的泛型（Generics）上下文（如 `#[derive(Default)]` 的结构体（Struct）字段、`std::mem::take`），与 `std::iter::Empty`、`Repeat` 等已有 `Default` 的迭代器类型行为对齐。
 
 ---
 
@@ -951,12 +951,12 @@ fn main() {
 
 ## 十、边界测试：迭代器模式的编译错误
 
-本节的边界用例围绕「迭代器是消耗性值 + 闭包捕获所有权」两条规则设计：
+本节的边界用例围绕「迭代器是消耗性值 + 闭包（Closures）捕获所有权」两条规则设计：
 
 - **迭代器消耗后复用**：`Iterator` 按值传递给适配器方法，`map`/`filter` 返回新迭代器而消耗旧的——链式调用自然正确，但把中间迭代器存变量后二次使用触发 E0382；
 - **闭包捕获的三种模式**：`Fn`（不可变借用（Immutable Borrow）捕获）/`FnMut`（可变借用（Mutable Borrow））/`FnOnce`（按值 move）由闭包体对捕获变量的**使用方式**自动推断，`move` 闭包强制按值——把 `FnOnce` 闭包传给要求 `Fn` 的 API 触发 E0525；
 - **借用（Borrowing）迭代器与 `collect` 的类型推断（Type Inference）**：`collect()` 的目标类型必须可推断（E0282），惯用写法是 `let v: Vec<_> = ...collect()` 或 `collect::<Vec<_>>()`；
-- **`iter`/`iter_mut`/`into_iter` 的选择**：对集合分别产生 `&T`/`&mut T`/`T`——选错导致后续操作类型不匹配（E0308）或无意借用延长。
+- **`iter`/`iter_mut`/`into_iter` 的选择**：对集合分别产生 `&T`/`&mut T`/`T`——选错导致后续操作类型不匹配（E0308）或无意借用（Borrowing）延长。
 
 每组用例给出「恰好失败版 + 最小修复版」，覆盖迭代器代码中最常见的编译错误。
 

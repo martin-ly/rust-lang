@@ -922,7 +922,7 @@ Rust 1.97.0 release notes 的 *Compatibility Notes* 原文要点：
 - 写 `pin!(x)` 且 `x: &mut T` 时，**现在总是**得到 `Pin<&mut &mut T>`；而此前**有时**会经 deref coercion 得到 `Pin<&mut T>`。
 - 该 coercion 自 **Rust 1.88.0** 起被“错误地允许”。
 
-即 1.97 的改动是**收窄** `std::pin::pin!` 宏返回值上原本隐式发生的 deref coercion，使“固定引用”与“固定值”在类型层严格区分：
+即 1.97 的改动是**收窄** `std::pin::pin!` 宏（Macro）返回值上原本隐式发生的 deref coercion，使“固定引用”与“固定值”在类型层严格区分：
 
 ```rust,ignore
 // edition = "2024", rust = "1.97" —— pin! 返回类型在 1.97 起严格化

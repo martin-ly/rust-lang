@@ -2,7 +2,7 @@
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
 >
-> - `async-std` 已进入维护模式，新项目建议优先考虑 Tokio / smol。
+> - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 已重命名为 `wasm32-wasip1`；WASI Preview 2 目标为 `wasm32-wasip2`。
 > **概念族**: 异步（Async） / Pin / 自引用
 > **迁回说明**: 本文档于 2026-06-29 从 archive/research_notes_2026_06_25/ 迁回，作为当前 docs/12_research_notes/ 概念链关键节点持续推进。
@@ -931,7 +931,7 @@ async fn use_future() {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-1. **async/await**：编译器生成的自引用 Future、`PhantomPinned`、`Unpin` 与 `!Unpin` 的区分；Tokio/async-std [已归档] 的 `Pin<Box<dyn Future>>`。
+1. **async/await**：编译器生成的自引用 Future、`PhantomPinned`、`Unpin` 与 `!Unpin` 的区分；Tokio/async-std [已停止维护] 的 `Pin<Box<dyn Future>>`。
 2. **迭代器（Iterator）与 stream**：`Stream`、自引用迭代器的 `next` 返回 `Option<&'a T>` 与 Pin 的配合。
 3. **与其他语言**：C++ `std::optional`、Swift 的 inout 与 Rust Pin/Unpin 的对比；Rust 通过类型与 Pin 在库层面保证，无需 GC。
 

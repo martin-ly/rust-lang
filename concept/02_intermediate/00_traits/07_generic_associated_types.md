@@ -11,7 +11,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。`01_traits.md` §5.6、`04_advanced_traits.md` §1.2 与 `02_generics.md` §9.5/§11.5 中的 GAT 讨论均为摘要，以本页为准。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析类型参数 × Trait 解析 × 生命周期（Lifetimes）三维交叉的约束系统
-> **定位**: 深入分析 Rust 1.65 稳定化的 **泛型关联类型（GATs）**——从 `LendingIterator` 动机、语法规则、与 HRTB 的表达力边界，到稳定化历程与 1.97 的已知限制，给出可操作的选型判定表。
+> **定位**: 深入分析 Rust 1.65 稳定化的 **泛型（Generics）关联类型（GATs）**——从 `LendingIterator` 动机、语法规则、与 HRTB 的表达力边界，到稳定化历程与 1.97 的已知限制，给出可操作的选型判定表。
 > **前置概念**: [Traits](01_traits.md) · [Generics](../01_generics/01_generics.md) · [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md)
 > **后置概念**: [Async Cancellation Safety](../../03_advanced/01_async/05_async_cancellation_safety.md) · [Type Inference](../../04_formal/00_type_theory/03_type_inference.md)
 
@@ -220,7 +220,7 @@ impl<'t> LendingIterator for ByteWindows<'t> {
 }
 ```
 
-注意实现中 `self.buf = tail` 的重赋值是合法的：`tail` 借用自 `'t`（原始切片（Slice）），而非 `'a`，因此它的存活期不阻塞下一次 `next` 调用。这正是借用检查器对 GAT 迭代器"每次借用独立"的精确表达。
+注意实现中 `self.buf = tail` 的重赋值是合法的：`tail` 借用自 `'t`（原始切片（Slice）），而非 `'a`，因此它的存活期不阻塞下一次 `next` 调用。这正是借用检查器对 GAT 迭代器（Iterator）"每次借用独立"的精确表达。
 
 ---
 
@@ -362,7 +362,7 @@ graph LR
 | 回调消费借用、返回值与借用无关 | HRTB `for<'a> Fn(&'a T)` | 闭包（Closures）自动实现，推断最顺 |
 | **返回值借用 self / 输入** | **GAT** | 唯一在 stable 上类型安全的表达 |
 | 流式/分块访问内部缓冲 | GAT（`type Chunk<'a> where Self: 'a`） | 零拷贝 |
-| 需要 trait object 动态分发 | 放弃 GAT：box 返回值或所有权化 | GAT 非对象安全 |
+| 需要 trait object 动态分发 | 放弃 GAT：box 返回值或所有权（Ownership）化 | GAT 非对象安全 |
 | async trait 方法 | 原生 `async fn`（1.75+，底层即 GAT） | 无需手写 GAT |
 
 ```mermaid
@@ -424,7 +424,7 @@ fn demo_windows_mut() {
 }
 ```
 
-**为什么安全**：每个 `window: &'a mut [T]` 的生命周期绑定到本次 `it.next()` 的借用；`window` 存活期间 `it` 被独占借用，循环下一次迭代前 `window` 必然已释放，因此不存在两个重叠的可变窗口。`std::mem::take` 把 `self.slice` 临时换成空切片，使 `split_at_mut` 产出的 `'a` 借用与原 `'t` 解耦。
+**为什么安全**：每个 `window: &'a mut [T]` 的生命周期绑定到本次 `it.next()` 的借用；`window` 存活期间 `it` 被独占借用，循环下一次迭代前 `window` 必然已释放，因此不存在两个重叠的可变窗口。`std::mem::take` 把 `self.slice` 临时换成空切片（Slice），使 `split_at_mut` 产出的 `'a` 借用与原 `'t` 解耦。
 
 ### 7.2 示例二：流式解析器 —— 零拷贝 token 流
 
@@ -542,7 +542,7 @@ GAT 的当前局限（1.97 仍在）与高频错误模式：
 | 缺 required bound | `missing required bound on`Item`` | GAT 生命周期参数未声明良构条件 | 补 `where Self: 'a` |
 | E0107 | `struct takes 0 generic arguments but 1 was supplied` | 把 GAT 当泛型类型用：`Item<'a>` 写在非投影位置 | 用全投影形式 `<T as Tr>::Item<'a>` |
 | E0309 / E0477 | `the parameter type ... may not live long enough` | 使用点未证明 `Self: 'a` | 在签名加 `T: 'a` 约束 |
-| 闭包推断失败 | `implementation of FnOnce is not general enough` | 用闭包实现 GAT-like 签名时 late-bound 推断死角 | 写具名 struct + 显式 impl |
+| 闭包（Closures）推断失败 | `implementation of FnOnce is not general enough` | 用闭包实现 GAT-like 签名时 late-bound 推断死角 | 写具名 struct + 显式 impl |
 | 对象安全 | `the trait ... cannot be made into an object` | GAT 带泛型参数，`dyn` 无法实例化 | box 返回值 / 枚举（Enum）分发 / 所有权化 |
 
 ### 8.2 implied bounds 限制（1.97 仍在）
@@ -613,7 +613,7 @@ trait Stream {
 - [Niko Matsakis — "Many modes: a GATs report"](https://smallcultfollowing.com/babysteps/blog/2022/06/27/many-modes-a-gats-pattern/) 与 [GATs 系列博文](https://smallcultfollowing.com/babysteps/)（required where clause 与 implied bounds 的设计权衡）
 - [RFC 2289 — Associated Type Bounds](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)（`Trait<Assoc: Bound>` 语法，1.79 稳定；可与 GAT 组合）
 - [rust-lang/rust #87479 — GAT implied bounds 跟踪](https://github.com/rust-lang/rust/issues/87479)
-- [Weiss, Patterson, Matsakis & Ahmed: Oxide — The Essence of Rust（arXiv:1903.00982）](https://arxiv.org/abs/1903.00982)（P1 学术：Rust trait/类型系统的学术形式化基线，2026-07-12 验证 HTTP 200）
+- [Weiss, Patterson, Matsakis & Ahmed: Oxide — The Essence of Rust（arXiv:1903.00982）](https://arxiv.org/abs/1903.00982)（P1 学术：Rust trait/类型系统（Type System）的学术形式化基线，2026-07-12 验证 HTTP 200）
 - 站内交叉引用：[高级 Trait 主题 §1.2](04_advanced_traits.md) · [Traits §5.6](01_traits.md) · [Generics §9.5](../01_generics/01_generics.md) · [Lifetimes 进阶](../../01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md)
 
 ---
@@ -670,6 +670,6 @@ GAT 声明 `type Item<'a> where Self: 'a;` 中的 where 子句是？
 <details>
 <summary>✅ 答案</summary>
 
-**B 正确**。按本页 §一：标准库 `Iterator` 的关联类型 `Item` 是不带参数的类型，隐含铁律——`next` 返回的值**不能借用自 `self`**。若返回原始切片生命周期 `'t` 的 `&'t mut [T]`，两次调用会同时存活两个重叠的可变借用，违反别名规则。GAT 的答案是让返回值生命周期与**本次调用**的借用 `'a` 绑定，由借用检查自动强制"下一次 `next` 前上一个 `Item<'a>` 必须已丢弃"。
+**B 正确**。按本页 §一：标准库 `Iterator` 的关联类型 `Item` 是不带参数的类型，隐含铁律——`next` 返回的值**不能借用自 `self`**。若返回原始切片生命周期 `'t` 的 `&'t mut [T]`，两次调用会同时存活两个重叠的可变借用（Mutable Borrow），违反别名规则。GAT 的答案是让返回值生命周期与**本次调用**的借用 `'a` 绑定，由借用检查自动强制"下一次 `next` 前上一个 `Item<'a>` 必须已丢弃"。
 
 </details>

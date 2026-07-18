@@ -339,7 +339,7 @@ mindmap
 
 ## ⚠️ 反例与陷阱
 
-> 陷阱：在异步代码中把 `std::process::Command` 生成的 `Child` 当成 Future 来 `.await`。
+> 陷阱：在异步（Async）代码中把 `std::process::Command` 生成的 `Child` 当成 Future 来 `.await`。
 > 标准库进程 API 是同步阻塞的，进程池/异步场景应使用 `tokio::process` 或阻塞任务。
 > 下面代码在 rustc 1.97 --edition 2024 下触发 `E0277`。
 

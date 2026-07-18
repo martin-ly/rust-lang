@@ -1,6 +1,6 @@
 [toolchain]
-# MSRV: stable 1.97.0（上游 latest stable 已发布 1.97.0，本地 rustup 镜像同步解析）
-# 使用 "stable" 通道而非精确版本号，rustup 会自动解析当前 latest stable（当前为 1.97.0）。
+# MSRV: stable 1.97.1（上游 latest stable 已发布 1.97.1，本地 rustup 镜像同步解析）
+# 使用 "stable" 通道而非精确版本号，rustup 会自动解析当前 latest stable（当前为 1.97.1）。
 # nightly-only 预览模块仍通过各 crate 的 build.rs 自动检测 nightly 并设置
 # `--cfg nightly` 来启用；stable 默认构建不会解析这些模块。
 channel = "stable"

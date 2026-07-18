@@ -2,7 +2,7 @@
 >
 > 本文档已按 Rust 1.97.0+ / Edition 2024 推荐实践更新生态引用（Reference）：
 >
-> - 异步（Async）运行时（Runtime）：`async-std` 已归档，新项目优先使用 **Tokio** 或 **smol**。
+> - 异步（Async）运行时（Runtime）：`async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - WASI 目标：`wasm32-wasi` 已重命名为 **`wasm32-wasip1`**；WASI Preview 2 目标为 **`wasm32-wasip2`**。
 > - 学习时请以 [The Rust Programming Language](https://doc.rust-lang.org/book/)、[Rust Reference](https://doc.rust-lang.org/reference/)、[Cargo Book](https://doc.rust-lang.org/cargo/)、[Rust Edition Guide - Rust 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) 为准。
 > **概念族**: 实际应用

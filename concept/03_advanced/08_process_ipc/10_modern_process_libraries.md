@@ -180,7 +180,7 @@ flowchart TD
 ## 12. 相关概念
 
 - [进程模型与生命周期（Lifetimes）](01_process_model_and_lifecycle.md)
-- [异步进程管理](03_async_process_management.md)
+- [异步（Async）进程管理](03_async_process_management.md)
 - [跨平台进程管理](04_cross_platform_process_management.md)
 - [进程安全与沙箱](07_process_security_and_sandboxing.md)
 - [核心开源库谱系](../../06_ecosystem/02_core_crates/01_core_crates.md)

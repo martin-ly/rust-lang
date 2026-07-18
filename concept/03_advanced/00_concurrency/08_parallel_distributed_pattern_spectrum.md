@@ -98,7 +98,7 @@
     - [2.3. 工作窃取 (Work-Stealing) 调度](#23-工作窃取-work-stealing-调度)
   - [3. 其他关键并发/并行库](#3-其他关键并发并行库)
     - [3.1. `crossbeam`: 更强大的通道与工具](#31-crossbeam-更强大的通道与工具)
-    - [3.2. `tokio` 和 `async-std [已归档]`: 异步运行时](#32-tokio-和-async-std-已归档-异步运行时)
+    - [3.2. `tokio` 和 `async-std [已停止维护]`: 异步运行时](#32-tokio-和-async-std-已停止维护-异步运行时)
   - [4. 哲学批判性分析](#4-哲学批判性分析)
     - [4.1. 抽象层次的提升](#41-抽象层次的提升)
     - [4.2. "无畏"的边界](#42-无畏的边界)
@@ -686,7 +686,7 @@ fn crdt_commutativity() {
 
 - **`Rc`/`RefCell` 跨线程**：`thread::spawn` 要求闭包 `Send + 'static`，捕获 `Rc` 直接触发 E0277——编译器代替你执行了「无数据竞争」检查；
 - **`&mut` 跨 `join`**：`rayon::join` 的两个闭包同时可变借用（Mutable Borrow）同一变量被拒绝（E0524）—— disjoint 字段借用或 `split_at_mut` 是标准修复；
-- **非 `'static` 引用逃逸**：scoped threads（1.63+）之前，`thread::spawn` 捕获局部引用是编译错误——`thread::scope` 用生命周期编码「join 先于作用域结束」；
+- **非 `'static` 引用（Reference）逃逸**：scoped threads（1.63+）之前，`thread::spawn` 捕获局部引用是编译错误——`thread::scope` 用生命周期编码「join 先于作用域结束」；
 - **`MutexGuard` 跨 `.await`**：异步上下文中持锁挂起使 `Future` 非 `Send`（`std::MutexGuard: !Send`）——需 `tokio::sync::Mutex` 或缩短临界区。
 
 每条用例的价值：编译错误信息本身就是并发规则的教科书，读懂错误比记住规则更可靠。
@@ -1078,9 +1078,9 @@ Rayon 的高性能得益于其底层的**工作窃取调度器**。
 - **原子操作（Atomic Operations）工具**: 提供了如 `AtomicCell` 等方便的原子类型。
 - **内存管理**: 提供了线程安全的内存回收机制，如 `epoch`。
 
-### 3.2. `tokio` 和 `async-std [已归档]`: 异步运行时
+### 3.2. `tokio` 和 `async-std [已停止维护]`: 异步运行时
 
-虽然我们将在后续章节深入探讨异步编程，但在这里有必要提及 `tokio` 和 `async-std [已归档]`。
+虽然我们将在后续章节深入探讨异步编程，但在这里有必要提及 `tokio` 和 `async-std [已停止维护]`。
 它们是完整的异步运行时，提供了事件循环、异步 I/O、定时器和任务调度器。
 
 它们解决的是**I/O 密集型**并发问题，而不是 **CPU 密集型**并行问题。

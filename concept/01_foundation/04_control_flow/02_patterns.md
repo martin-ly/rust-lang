@@ -128,7 +128,7 @@ if let (a, 3) = (1, 2) { }     // 可反驳
 - **范围模式**：`1..=5`、`'a'..='z'`——仅整数/字符/浮点（浮点范围匹配已废弃，1.42+ 警告）；
 - **绑定模式（binding modes）**：`match` 引用（Reference）时自动进入 `ref` 模式（default binding mode 切换）——`match &opt { Some(x) => ... }` 中 `x: &T` 无需手写 `ref`。
 
-组合规则：模式可嵌套（结构体（Struct）/元组/枚举解构）、可加守卫（`if` 条件，不参与穷尽性分析）、可用 `|` 或模式与 `@` 绑定（`x @ Some(_)`）。
+组合规则：模式可嵌套（结构体（Struct）/元组/枚举（Enum）解构）、可加守卫（`if` 条件，不参与穷尽性分析）、可用 `|` 或模式与 `@` 绑定（`x @ Some(_)`）。
 
 ### Literal patterns
 
@@ -300,7 +300,7 @@ Rust 编译器检查 `match` 表达式是否穷尽所有可能的值。不可穷
 <details>
 <summary>✅ 答案</summary>
 
-**A 正确**。按本页「模式形式」：Wildcard pattern（`_`）匹配任意单个值，不绑定、不 move、不借用（Borrowing），**总是不可反驳**；Rest pattern（`..`）匹配**零个或多个**剩余元素，用于元组、元组结构体、切片（Slice）模式，不可反驳。B/C/D 均与正文定义矛盾。
+**A 正确**。按本页「模式形式」：Wildcard pattern（`_`）匹配任意单个值，不绑定、不 move、不借用（Borrowing），**总是不可反驳**；Rest pattern（`..`）匹配**零个或多个**剩余元素，用于元组、元组结构体（Struct）、切片（Slice）模式，不可反驳。B/C/D 均与正文定义矛盾。
 
 </details>
 
@@ -342,7 +342,7 @@ if let Some(y) = x {
 - A. `i32`
 - B. `&i32`
 - C. `Option<i32>`
-- D. 编译错误：模式与引用类型不匹配
+- D. 编译错误：模式与引用（Reference）类型不匹配
 
 <details>
 <summary>✅ 答案</summary>
@@ -357,7 +357,7 @@ if let Some(y) = x {
 |---|---|---|
 | 可反驳性 | 模式分可反驳（refutable）与不可反驳（irrefutable）；`let` 要求不可反驳 | Reference 模式分类 |
 | 穷尽性 | `match` 必须覆盖所有可能值（编译期检查） | 穷尽性检查 |
-| 解构能力 | 结构体、元组、枚举、引用、切片、嵌套均可解构 | 模式文法 |
+| 解构能力 | 结构体、元组、枚举、引用、切片（Slice）、嵌套均可解构 | 模式文法 |
 | 绑定模式 | 默认按值绑定；`ref`/`ref mut` 或 match ergonomics 按引用 | Rust 2018 match ergonomics |
 | 组合扩展 | `\|` 或模式、`@` 子模式绑定、`if` 守卫 | 模式扩展语法 |
 
@@ -384,7 +384,7 @@ fn main() {
 }
 ```
 
-`match` 必须穷尽所有可能；漏掉 `None` 分支即编译错误，这是模式匹配相对 if/else 的核心保证。
+`match` 必须穷尽所有可能；漏掉 `None` 分支即编译错误，这是模式匹配（Pattern Matching）相对 if/else 的核心保证。
 
 **修正**：
 

@@ -818,7 +818,7 @@ unsafe {
 
 > **权威来源**: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html), [RFC 2873 — Inline Assembly](https://rust-lang.github.io/rfcs/2873-inline-asm.html), [Rust By Example — Inline Assembly](https://doc.rust-lang.org/rust-by-example/unsafe/asm.html)
 >
-> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用 [Authority Source Sprint Batch 10](../../00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 补全权威来源块与关键引用（Reference） [Authority Source Sprint Batch 10](../../00_meta/02_sources/05_international_authority_index.md)
 
 ---
 

@@ -87,7 +87,7 @@ mindmap
 impl !Trait for Type {}
 ```
 
-与普通（正）实现 `impl Trait for Type` 相反，负实现**不引入任何方法或关联项**，它只向类型系统添加一条**否定性事实**：该类型不满足该 trait 的约束。
+与普通（正）实现 `impl Trait for Type` 相反，负实现**不引入任何方法或关联项**，它只向类型系统（Type System）添加一条**否定性事实**：该类型不满足该 trait 的约束。
 
 在 Rust 1.97.0 中，负实现主要用于 **auto trait**（如 `Send`、`Sync`、`Unpin`）。标准库内部用它精确标记 `Rc<T>`、裸指针、OS 句柄等类型的线程安全边界：
 
@@ -97,7 +97,7 @@ impl<T: ?Sized> !Send for Rc<T> {}
 impl<T: ?Sized> !Sync for Rc<T> {}
 ```
 
-这些负实现让编译器在类型检查阶段就能拒绝 `Rc` 跨线程传递的代码，而不是等到运行时出错。
+这些负实现让编译器在类型检查阶段就能拒绝 `Rc` 跨线程传递的代码，而不是等到运行时（Runtime）出错。
 
 ### 1.2 语法与限制
 
@@ -119,7 +119,7 @@ fn main() {}
 |---|---|
 | **仅 auto trait** | 普通 trait 不能写负实现；`impl !Display for Foo` 会报错 |
 | **nightly only** | 用户代码需要 `#![feature(negative_impls)]` |
-| **孤儿规则** | 只能给本 crate 定义的类型写负实现（与正实现一致） |
+| **孤儿规则（Orphan Rule）** | 只能给本 crate 定义的类型写负实现（与正实现一致） |
 | **互斥性** | 同一类型不能同时存在 `impl Trait for T` 和 `impl !Trait for T` |
 | **无方法体** | 花括号内为空，不允许写方法或关联项 |
 
@@ -190,7 +190,7 @@ impl Marker for Foo {}
 impl !Marker for Foo {} // 错误：与正实现冲突
 ```
 
-编译器会报错（类似 `E0751 found both positive and negative implementation`），因为这违反了逻辑一致性。
+编译器会报错（类似 `E0751 found both positive and negative implementation`），因为这违反了逻辑一致性（Coherence）。
 
 ### 2.3 与泛型的交互
 
@@ -242,7 +242,7 @@ fn main() {}
 
 ### 3.2 标记 !Unpin
 
-自引用类型（self-referential structs）通常需要 `!Unpin` 来防止被移动：
+自引用（Reference）类型（self-referential structs）通常需要 `!Unpin` 来防止被移动：
 
 ```rust
 #![feature(negative_impls)]

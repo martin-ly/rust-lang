@@ -27,6 +27,7 @@
 > [Fischer, Lynch, Paterson 1985 — FLP](https://groups.csail.mit.edu/tds/papers/Lynch/jacm85.pdf)
 >
 > **前置概念**:
+> **后置概念**: [并发（Concurrency）语义模型](01_concurrency.md) · [Send/Sync 边界](04_send_sync_boundaries.md)
 > [代数效应与效应处理器](../../04_formal/07_concurrency_semantics/04_algebraic_effects.md) ·
 > [依赖类型与细化类型](../../04_formal/00_type_theory/10_dependent_refinement_types.md) ·
 > [STM 形式语义](../../04_formal/07_concurrency_semantics/05_stm_semantics.md) ·
@@ -59,7 +60,7 @@
 ### Q1. 🟢【单选】统一语言 × 语义模型表达力矩阵从哪六个维度刻画语言的语义模型？
 
 - A. 语法糖、包管理、构建速度、IDE 支持、社区规模、学习曲线
-- B. 内存安全模型、类型系统表达力、效应系统、并发模型、验证生态系统、编译目标灵活性
+- B. 内存安全（Memory Safety）模型、类型系统（Type System）表达力、效应系统、并发模型、验证生态系统、编译目标灵活性
 - C. 范式数量、标准库大小、第三方库数量、性能基准、公司背书、发布年份
 - D. 变量模型、控制流、数据结构、算法、网络协议、数据库
 
@@ -121,7 +122,7 @@
 
 **答案：错**
 
-**解析**：Rust 是**封闭效应系统**（closed effect system）：`async` / `const` / `unsafe` / `try` 等效应由语言预定义，用户不能声明新 effect，语言也不提供通用 `handle` 表达式。Rust 的探索方向是**关键字泛型**（Keyword Generics Initiative）——让既有效应可被统一抽象（如 `with async + throw`），而非引入 Koka 式的开放效应处理器。原因是有意识的设计权衡：零成本抽象、类型系统复杂度、向后兼容、所有权与续延的交互。[→ 代数效应 §3.1 / §3.4](../../04_formal/07_concurrency_semantics/04_algebraic_effects.md)
+**解析**：Rust 是**封闭效应系统**（closed effect system）：`async` / `const` / `unsafe` / `try` 等效应由语言预定义，用户不能声明新 effect，语言也不提供通用 `handle` 表达式。Rust 的探索方向是**关键字泛型**（Keyword Generics Initiative）——让既有效应可被统一抽象（如 `with async + throw`），而非引入 Koka 式的开放效应处理器。原因是有意识的设计权衡：零成本抽象（Zero-Cost Abstraction）、类型系统复杂度、向后兼容、所有权（Ownership）与续延的交互。[→ 代数效应 §3.1 / §3.4](../../04_formal/07_concurrency_semantics/04_algebraic_effects.md)
 
 </details>
 
@@ -139,7 +140,7 @@
 
 **答案：B**
 
-**解析**：`perform op` 暂停当前计算并把「操作之后的整个剩余计算」捕获为续延 `k`，handler 分支决定立即 resume、延迟 resume、丢弃续延（异常式）还是多次调用（非确定性）。异常 handler 没有续延，只能终止或向上传播。续延分**一次性**（one-shot：Koka、Rust async、OCaml 5 默认，可零成本实现）与**多次**（multi-shot：Eff，支持回溯但带运行时成本）。[→ 代数效应 §1.3 / §1.4](../../04_formal/07_concurrency_semantics/04_algebraic_effects.md)
+**解析**：`perform op` 暂停当前计算并把「操作之后的整个剩余计算」捕获为续延 `k`，handler 分支决定立即 resume、延迟 resume、丢弃续延（异常式）还是多次调用（非确定性）。异常 handler 没有续延，只能终止或向上传播。续延分**一次性**（one-shot：Koka、Rust async、OCaml 5 默认，可零成本实现）与**多次**（multi-shot：Eff，支持回溯但带运行时（Runtime）成本）。[→ 代数效应 §1.3 / §1.4](../../04_formal/07_concurrency_semantics/04_algebraic_effects.md)
 
 </details>
 
@@ -191,7 +192,7 @@ fn main() {
 
 **答案：错**
 
-**解析**：数组长度位置要求**编译期常量**，而 `n` 是运行时参数——编译器报 `E0435: attempt to use a non-constant value in a constant`。在 trait 签名或泛型返回类型中使用关联常量投影（如 `[u8; Self::SIZE]`）同样需要尚未稳定的 `generic_const_exprs`。这正是 Rust 依赖类型片段的核心边界：**运行时值不能构造类型**；完整依赖类型语言（Idris/Agda）中值可以自由进入类型。[→ 依赖类型 §3.2 / §5.1](../../04_formal/00_type_theory/10_dependent_refinement_types.md)
+**解析**：数组长度位置要求**编译期常量**，而 `n` 是运行时参数——编译器报 `E0435: attempt to use a non-constant value in a constant`。在 trait 签名或泛型（Generics）返回类型中使用关联常量投影（如 `[u8; Self::SIZE]`）同样需要尚未稳定的 `generic_const_exprs`。这正是 Rust 依赖类型片段的核心边界：**运行时值不能构造类型**；完整依赖类型语言（Idris/Agda）中值可以自由进入类型。[→ 依赖类型 §3.2 / §5.1](../../04_formal/00_type_theory/10_dependent_refinement_types.md)
 
 </details>
 
@@ -240,7 +241,7 @@ fn main() {
 
 **答案：A、B、C**
 
-**解析**：A 正确——完整依赖类型中类型可以依赖于值（如长度索引向量 `Vect n a`）。B 正确——Liquid Haskell 的 `{v : Int | v >= 0}` 由 SMT 自动验证，属「轻量」细化路线。C 正确——Rust 片段限于编译期常量；Rust 生态的细化类型由外部工具（如 Flux、Prusti、Creusot）承担。D 错——rustc 不做任意谓词验证，借用检查只覆盖所有权/生命周期不变式。[→ 依赖类型 §四](../../04_formal/00_type_theory/10_dependent_refinement_types.md)
+**解析**：A 正确——完整依赖类型中类型可以依赖于值（如长度索引向量 `Vect n a`）。B 正确——Liquid Haskell 的 `{v : Int | v >= 0}` 由 SMT 自动验证，属「轻量」细化路线。C 正确——Rust 片段限于编译期常量；Rust 生态的细化类型由外部工具（如 Flux、Prusti、Creusot）承担。D 错——rustc 不做任意谓词验证，借用（Borrowing）检查只覆盖所有权/生命周期（Lifetimes）不变式。[→ 依赖类型 §四](../../04_formal/00_type_theory/10_dependent_refinement_types.md)
 
 </details>
 
@@ -275,7 +276,7 @@ fn main() {
 
 **答案：对**
 
-**解析**：Fischer、Lynch、Paterson（JACM 1985）证明：纯异步 + 单崩溃故障 ⟹ 无确定性算法同时保证安全性与终止性。工程上绕过 FLP 的经典策略：**故障检测器**（Failure Detectors）、**随机化**（Ben-Or / Rabin）、**部分同步**（Partial Synchrony，PBFT / Tendermint）、**领导者选举超时**（Raft 用随机超时打破对称性）。FLP 否定的不是「共识不可行」，而是「纯异步 + 确定性 + 必终止」三者不可兼得。[→ 分布式共识理论 §2.1 / §2.3](../../04_formal/07_concurrency_semantics/06_distributed_consensus_theory.md) · [→ 分布式共识生态 §1.2](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md)
+**解析**：Fischer、Lynch、Paterson（JACM 1985）证明：纯异步（Async） + 单崩溃故障 ⟹ 无确定性算法同时保证安全性与终止性。工程上绕过 FLP 的经典策略：**故障检测器**（Failure Detectors）、**随机化**（Ben-Or / Rabin）、**部分同步**（Partial Synchrony，PBFT / Tendermint）、**领导者选举超时**（Raft 用随机超时打破对称性）。FLP 否定的不是「共识不可行」，而是「纯异步 + 确定性 + 必终止」三者不可兼得。[→ 分布式共识理论 §2.1 / §2.3](../../04_formal/07_concurrency_semantics/06_distributed_consensus_theory.md) · [→ 分布式共识生态 §1.2](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md)
 
 </details>
 
@@ -333,7 +334,7 @@ fn main() {
 
 **答案：A、B、C**
 
-**解析**：A 正确——OCaml 5 默认一次性续延（Dolan et al. 2017），多次恢复与可变状态交互复杂。B 正确——SPARK 是 Ada 的可验证子集，契约由 GNATprove 自动证明，矩阵中验证生态评级 **A**。C 正确——D 的默认 GC + 三级属性对应矩阵中「GC 可选 / 手动」定位。D 错——Nim 提供**可切换**内存策略：默认 ORC（延期引用计数 + 循环回收）、ARC（确定性引用计数）、`owned` 唯一引用与 `--mm:none` 全手动。F# 则以**计算表达式**（computation expressions：`async`/`task`/`seq`/`maybe`）统一效应抽象，与 Rust 的关键字效应形成对照。[→ Rust vs OCaml](../../05_comparative/02_managed_languages/10_rust_vs_ocaml.md) · [→ Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md) · [→ Rust vs D](../../05_comparative/01_systems_languages/08_rust_vs_d.md) · [→ Rust vs Nim](../../05_comparative/01_systems_languages/09_rust_vs_nim.md) · [→ Rust vs F#](../../05_comparative/02_managed_languages/11_rust_vs_fsharp.md)
+**解析**：A 正确——OCaml 5 默认一次性续延（Dolan et al. 2017），多次恢复与可变状态交互复杂。B 正确——SPARK 是 Ada 的可验证子集，契约由 GNATprove 自动证明，矩阵中验证生态评级 **A**。C 正确——D 的默认 GC + 三级属性对应矩阵中「GC 可选 / 手动」定位。D 错——Nim 提供**可切换**内存策略：默认 ORC（延期引用（Reference）计数 + 循环回收）、ARC（确定性引用计数）、`owned` 唯一引用与 `--mm:none` 全手动。F# 则以**计算表达式**（computation expressions：`async`/`task`/`seq`/`maybe`）统一效应抽象，与 Rust 的关键字效应形成对照。[→ Rust vs OCaml](../../05_comparative/02_managed_languages/10_rust_vs_ocaml.md) · [→ Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md) · [→ Rust vs D](../../05_comparative/01_systems_languages/08_rust_vs_d.md) · [→ Rust vs Nim](../../05_comparative/01_systems_languages/09_rust_vs_nim.md) · [→ Rust vs F#](../../05_comparative/02_managed_languages/11_rust_vs_fsharp.md)
 
 </details>
 
@@ -385,7 +386,7 @@ fn main() {
 
 | 得分 | 评价 | 建议 |
 |:---:|:---|:---|
-| 13–15/15 | 🏆 语义模型与跨语言对比已内化 | 进阶至 [进程代数](../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md) 或 [线性化与一致性](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) |
+| 13–15/15 | 🏆 语义模型与跨语言对比已内化 | 进阶至 [进程代数](../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md) 或 [线性化与一致性（Coherence）](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) |
 | 10–12/15 | ✅ 核心概念掌握 | 重读答错题对应的权威页小节，强化决策树应用 |
 | 6–9/15 | 🔄 需巩固基础 | 重读 [代数效应](../../04_formal/07_concurrency_semantics/04_algebraic_effects.md) 与 [语言语义模型矩阵](../../05_comparative/00_paradigms/05_language_semantic_model_matrix.md) |
 | 0–5/15 | 📚 建议重新开始 | 从 [语义模型图谱](../../00_meta/knowledge_topology/11_semantic_model_atlas.md) 建立全局认知，再逐页深入 |

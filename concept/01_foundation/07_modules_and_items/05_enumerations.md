@@ -29,7 +29,7 @@
 > **认知路径**: 本节从“如何表达一组互斥的状态”出发，依次建立枚举（Enum）变体、`Option<T>`、`Result<T, E>` 与模式匹配（Pattern Matching）穷尽性的完整图景。
 
 1. **问题识别**: 当变量只能处于若干互斥状态之一时，如何用类型安全地表达？
-2. **概念建立**: 掌握枚举定义、变体负载、`Option`、`Result`、穷尽性检查。
+2. **概念建立**: 掌握枚举（Enum）定义、变体负载、`Option`、`Result`、穷尽性检查。
 3. **机制推理**: 通过 ⟹ 定理链将枚举、模式匹配（Pattern Matching）与错误处理（Error Handling）规则串联起来。
 4. **边界辨析**: 借助反命题/反例理解未处理 `None`、`if let` 误用、变体所有权（Ownership）移动等问题。
 5. **迁移应用**: 将枚举与错误处理（Error Handling）、代数数据类型、形式化语义等后置概念链接。
@@ -46,7 +46,7 @@
 >
 > **定理 2** [Tier 1]: `Option<T>` 显式区分“有值”与“无值” ⟹ 替代空指针，消除解引用（Reference）空指针的运行时（Runtime）错误。
 >
-> **定理 3** [Tier 1]: `Result<T, E>` 显式区分“成功”与“失败” ⟹ 错误处理成为类型系统（Type System）的一部分，不可静默忽略。
+> **定理 3** [Tier 1]: `Result<T, E>` 显式区分“成功”与“失败” ⟹ 错误处理（Error Handling）成为类型系统（Type System）的一部分，不可静默忽略。
 
 ---
 
@@ -322,7 +322,7 @@ fn main() {
 <details>
 <summary>✅ 答案</summary>
 
-**B 正确**。枚举是**带标签的联合类型**（定理 1：其值恰好属于一个变体，编译器可在 `match` 中强制穷尽所有可能）。A 是结构体的本质（命名乘积类型）；C 是 C 语言 enum 的模型，不是 Rust 的。
+**B 正确**。枚举是**带标签的联合类型**（定理 1：其值恰好属于一个变体，编译器可在 `match` 中强制穷尽所有可能）。A 是结构体（Struct）的本质（命名乘积类型）；C 是 C 语言 enum 的模型，不是 Rust 的。
 
 </details>
 
@@ -350,7 +350,7 @@ fn handle(msg: Message) {
 <details>
 <summary>✅ 答案</summary>
 
-**B 正确**。按本页「四、模式匹配与穷尽性」与命题 4：编译器对 `match` 执行**穷尽性检查**，要求覆盖所有变体，否则编译错误（`non-exhaustive patterns`）。这是 Rust "无遗漏"安全保证的一部分。A/C 描述的"静默忽略/运行时 panic"正是 Rust 刻意排除的行为。
+**B 正确**。按本页「四、模式匹配与穷尽性」与命题 4：编译器对 `match` 执行**穷尽性检查**，要求覆盖所有变体，否则编译错误（`non-exhaustive patterns`）。这是 Rust "无遗漏"安全保证的一部分。A/C 描述的"静默忽略/运行时（Runtime） panic"正是 Rust 刻意排除的行为。
 
 </details>
 

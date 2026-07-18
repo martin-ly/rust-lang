@@ -50,21 +50,21 @@
     - [1.3 形式化定义](#13-形式化定义)
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
     - [2.1 Stack vs Heap 对比矩阵](#21-stack-vs-heap-对比矩阵)
-    - [2.2 智能指针对比矩阵](#22-智能指针对比矩阵)
+    - [2.2 智能指针（Smart Pointer）对比矩阵](#22-智能指针对比矩阵)
     - [2.3 内部可变性模式矩阵](#23-内部可变性模式矩阵)
   - [三、思维导图（Mind Map）](#三思维导图mind-map)
   - [四、定理推理链（Theorem Chain）](#四定理推理链theorem-chain)
-    - [4.1 引理：Box ⟹ 堆分配 + 唯一所有权](#41-引理box--堆分配--唯一所有权)
-    - [4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用计数）](#42-定理rcarc--共享所有权安全引用计数)
-    - [4.3 推论：RefCell ⟹ 内部可变性运行时检查](#43-推论refcell--内部可变性运行时检查)
+    - [4.1 引理：Box ⟹ 堆分配 + 唯一所有权（Ownership）](#41-引理box--堆分配--唯一所有权)
+    - [4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用（Reference）计数）](#42-定理rcarc--共享所有权安全引用计数)
+    - [4.3 推论：RefCell ⟹ 内部可变性运行时（Runtime）检查](#43-推论refcell--内部可变性运行时检查)
     - [4.4 RAII + 所有权 ⟹ 确定性释放](#44-raii--所有权--确定性释放)
-    - [4.5 定理一致性矩阵](#45-定理一致性矩阵)
+    - [4.5 定理一致性（Coherence）矩阵](#45-定理一致性矩阵)
   - [五、示例与反例（Examples \& Counter-examples）](#五示例与反例examples--counter-examples)
     - [5.1 正确示例：Box 堆分配](#51-正确示例box-堆分配)
     - [5.2 正确示例：Rc 共享所有权](#52-正确示例rc-共享所有权)
     - [5.3 正确示例：用 Weak 打破循环引用](#53-正确示例用-weak-打破循环引用)
     - [5.4 反例：Rc 循环引用导致泄漏](#54-反例rc-循环引用导致泄漏)
-    - [5.5 反例：RefCell 运行时借用冲突（panic）](#55-反例refcell-运行时借用冲突panic)
+    - [5.5 反例：RefCell 运行时借用（Borrowing）冲突（panic）](#55-反例refcell-运行时借用冲突panic)
     - [5.5 补充：`Pin<&mut T>` 的堆内存语义与自引用安全](#55-补充pinmut-t-的堆内存语义与自引用安全)
       - [栈 Pin vs 堆 Pin](#栈-pin-vs-堆-pin)
       - [自引用结构的形式化保证](#自引用结构的形式化保证)
@@ -93,7 +93,7 @@
   - [九、知识来源关系（Provenance）](#九知识来源关系provenance)
   - [判定表：内存管理策略判定](#判定表内存管理策略判定)
   - [十、相关概念链接](#十相关概念链接)
-    - [补充章节：`MaybeUninit<T>` 的内存安全边界](#补充章节maybeuninitt-的内存安全边界)
+    - [补充章节：`MaybeUninit<T>` 的内存安全（Memory Safety）边界](#补充章节maybeuninitt-的内存安全边界)
       - [用途：未初始化内存的安全抽象](#用途未初始化内存的安全抽象)
       - [与 `mem::uninitialized` 的区别](#与-memuninitialized-的区别)
       - [`assume_init` 的安全契约](#assume_init-的安全契约)
@@ -136,7 +136,7 @@
     - [10.3 边界测试：`Box::leak` 的永久泄漏（逻辑错误）](#103-边界测试boxleak-的永久泄漏逻辑错误)
     - [10.4 边界测试：`Rc<RefCell<T>>` 的循环引用（运行时 panic/内存泄漏）](#104-边界测试rcrefcellt-的循环引用运行时-panic内存泄漏)
     - [10.3 边界测试：`Box::into_raw` 后双重释放（运行时 UB）](#103-边界测试boxinto_raw-后双重释放运行时-ub)
-    - [10.4 边界测试：Box::leak 后的可变借用与原始 Box 的关系（编译错误）](#104-边界测试boxleak-后的可变借用与原始-box-的关系编译错误)
+    - [10.4 边界测试：Box::leak 后的可变借用（Mutable Borrow）与原始 Box 的关系（编译错误）](#104-边界测试boxleak-后的可变借用与原始-box-的关系编译错误)
     - [10.3 边界测试：返回局部变量的悬垂引用](#103-边界测试返回局部变量的悬垂引用)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Stack vs Heap（理解层）](#测验-1stack-vs-heap理解层)
@@ -408,7 +408,7 @@ graph TD
 - **栈分配优先**：小尺寸、短生命周期（Lifetimes）数据默认在栈上——反例是把大数组直接声明为局部变量导致栈溢出（应改用 `Vec` 或 `Box<[T]>`）；
 - **堆分配显式化**：`Box`/`Vec`/`Rc`/`Arc` 的分配点都在源码可见——反例是热路径上无意间的 `clone`/`to_string` 触发分配，用 `cargo flamegraph` 或 `dhat` 可定位；
 - **引用计数环泄漏**：`Rc` + `RefCell` 互指造成永不释放——判定准则是「只要所有权图有环就必须有一处 `Weak`」；
-- **arena/pool 分配**：批量同生命周期对象用 arena（如 `bumpalo`）把 N 次分配降为 1 次——反例是把 arena 引用逃逸到 arena 生命周期之外（借用检查会拒绝，正是类型系统（Type System）在兜底）。
+- **arena/pool 分配**：批量同生命周期（Lifetimes）对象用 arena（如 `bumpalo`）把 N 次分配降为 1 次——反例是把 arena 引用逃逸到 arena 生命周期之外（借用检查会拒绝，正是类型系统（Type System）在兜底）。
 
 每个反例附可复现代码与修复 diff，建议按「预测 → 运行 → 对照」顺序练习。
 
@@ -1873,7 +1873,7 @@ let mut pinned: Pin<Box<SelfRef>> = SelfRef::new(String::from("x"));
 
 - **运行时 UB（`unsafe` 责任区）**：`Box::into_raw` 后双重 `from_raw`（双重释放）、`ManuallyDrop` 后重复访问（use-after-drop）、`Vec::set_len` 超过已初始化区间。这类错误编译器无条件检查——进入 `unsafe` 即签署「人工维护不变量」契约，检测手段是 Miri/ASAN 等动态工具。
 - **运行时 panic（安全检查保留区）**：`Vec` 索引越界（`Index` 的 bounds check）、`RefCell` 双重可变借用、整数溢出（debug 模式）。这类错误无法用类型静态排除但运行时必被捕获——Rust 的底线是「错误可 panic，不可静默腐化内存」。
-- **编译错误（类型系统区）**：`Pin` 误用（对 `Pin<&mut T>` 要求 `T: Unpin` 才能取出 `&mut T`，E0277）、move 出 `Box` 后的使用（E0382）、`Rc` 跨线程传递（`Rc: !Send`，E0277）。这类错误在编译期零成本拦截。
+- **编译错误（类型系统（Type System）区）**：`Pin` 误用（对 `Pin<&mut T>` 要求 `T: Unpin` 才能取出 `&mut T`，E0277）、move 出 `Box` 后的使用（E0382）、`Rc` 跨线程传递（`Rc: !Send`，E0277）。这类错误在编译期零成本拦截。
 
 判定一个内存错误落在哪档，看发现时机：编译期 = 类型系统已编码该不变量；运行 panic = 动态检查保留；Miri 才报 = `unsafe` 契约被违反。十项边界测试是三档机制在不同 API 上的投影。
 

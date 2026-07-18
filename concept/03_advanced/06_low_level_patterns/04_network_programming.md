@@ -1,6 +1,6 @@
 > **生态状态提示**：本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
 >
-> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 >
 > **来源**: [std::net](https://doc.rust-lang.org/std/net/) · [Tokio Docs](https://docs.rs/tokio/) · [Async Book](https://rust-lang.github.io/async-book/index.html) · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Batty et al. — The Semantics of Multicore C](https://doi.org/10.1145/2049706.2049711) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)
@@ -245,7 +245,7 @@ TCP vs UDP 语义矩阵:
 
 ## 十、边界测试：网络编程的编译错误
 
-本节把「Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象」的规则推到编译器与运行时（Runtime）的边界上逐一实测：边界测试：`TcpStream` 的 `move` 与分裂（编译错误） 与 边界测试：套接字地址类型不匹配（编译错误）。每个用例标注预期结果（编译错误 / 运行时 panic / 逻辑错误），并用 rustc 1.97 验证：能复现的给出诊断信息与触发条件，不能复现的说明原因。这些用例共同回答一个问题——规则在极限处是否仍然成立，以及违反时编译器能否兜底。
+本节把「Rust 网络编程：Tokio TCP/UDP、异步（Async） IO 与 Tower 服务抽象」的规则推到编译器与运行时（Runtime）的边界上逐一实测：边界测试：`TcpStream` 的 `move` 与分裂（编译错误） 与 边界测试：套接字地址类型不匹配（编译错误）。每个用例标注预期结果（编译错误 / 运行时 panic / 逻辑错误），并用 rustc 1.97 验证：能复现的给出诊断信息与触发条件，不能复现的说明原因。这些用例共同回答一个问题——规则在极限处是否仍然成立，以及违反时编译器能否兜底。
 
 ### 10.1 边界测试：`TcpStream` 的 `move` 与分裂（编译错误）
 
@@ -847,13 +847,13 @@ use std::net::TcpStream;
 
 fn main() {
     let stream = TcpStream::connect("127.0.0.1:8080").unwrap();
-    // ❌ 运行时错误: 在 tokio 中将 std::net::TcpStream 设为非阻塞 [历史: async-std [已归档]]
+    // ❌ 运行时错误: 在 tokio 中将 std::net::TcpStream 设为非阻塞 [历史: async-std [已停止维护]]
     // 并与 async runtime 混用，导致不可预测的 polling 行为
     stream.set_nonblocking(true).unwrap();
 }
 ```
 
-> **修正**: `std::net::TcpStream` 是**同步** API，与 async runtime（tokio）**不兼容** [历史: async-std [已归档]]。异步网络编程应使用：`tokio::net::TcpStream` — tokio 的原生异步 TCP；3) `futures::io` 的抽象。混用同步和异步代码：1) `tokio::task::spawn_blocking` — 在独立线程池中运行同步阻塞代码；2) `async_compat` crate — 包装同步 `std::net` 为 async 兼容。`std::net` 的 `set_nonblocking(true)` 只是将阻塞调用改为返回 `WouldBlock` 错误，不解决与 async runtime 的事件循环集成问题。这与 Go 的 `net` 包（自动在 goroutine 中调度，无 sync/async 区分）或 Python 的 `asyncio`（需显式使用 `asyncio.open_connection`，不能用同步 `socket`）不同——Rust 严格区分同步和异步 API。[来源: [Tokio Network](https://docs.rs/tokio/)] · [来源: [async-std Archive [已归档]](https://github.com/async-rs/async-std)]
+> **修正**: `std::net::TcpStream` 是**同步** API，与 async runtime（tokio）**不兼容** [历史: async-std [已停止维护]]。异步网络编程应使用：`tokio::net::TcpStream` — tokio 的原生异步 TCP；3) `futures::io` 的抽象。混用同步和异步代码：1) `tokio::task::spawn_blocking` — 在独立线程池中运行同步阻塞代码；2) `async_compat` crate — 包装同步 `std::net` 为 async 兼容。`std::net` 的 `set_nonblocking(true)` 只是将阻塞调用改为返回 `WouldBlock` 错误，不解决与 async runtime 的事件循环集成问题。这与 Go 的 `net` 包（自动在 goroutine 中调度，无 sync/async 区分）或 Python 的 `asyncio`（需显式使用 `asyncio.open_connection`，不能用同步 `socket`）不同——Rust 严格区分同步和异步 API。[来源: [Tokio Network](https://docs.rs/tokio/)] · [来源: [async-std Archive [已归档]](https://github.com/async-rs/async-std)]
 
 ### 10.4 边界测试：TcpStream 的同步读写与 async 混用（编译错误/运行时死锁）
 

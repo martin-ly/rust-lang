@@ -11,7 +11,7 @@
 >
 > 本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
 >
-> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 
 ---
@@ -33,7 +33,7 @@
     - [3. impl Trait in associated types](#3-impl-trait-in-associated-types)
   - [异步运行时实战](#异步运行时实战)
     - [1. Tokio 高性能服务器](#1-tokio-高性能服务器)
-    - [2. async-std \[已归档\] 文件处理](#2-async-std-已归档-文件处理)
+    - [2. async-std \[已停止维护\] 文件处理](#2-async-std-已停止维护-文件处理)
     - [3. Smol 轻量级任务调度](#3-smol-轻量级任务调度)
   - [异步并发模式](#异步并发模式)
     - [1. 结构化并发 (JoinSet)](#1-结构化并发-joinset)
@@ -438,10 +438,10 @@ pub async fn demo_tokio_server() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-### 2. async-std [已归档] 文件处理
+### 2. async-std [已停止维护] 文件处理
 
 ```rust
-//! async-std [已归档] 文件异步处理
+//! async-std [已停止维护] 文件异步处理
 //! 特性: 并发读取、批处理、进度报告
 
 use async_std::fs::{File, read_dir};
@@ -514,7 +514,7 @@ impl AsyncFileProcessor {
 
 /// 示例：文件处理
 pub async fn demo_async_std_files() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-    println!("\n=== async-std [已归档] 文件处理示例 ===\n");
+    println!("\n=== async-std [已停止维护] 文件处理示例 ===\n");
 
     let processor = AsyncFileProcessor::new();
 

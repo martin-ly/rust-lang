@@ -2,7 +2,7 @@
 >
 > 本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
 >
-> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 
@@ -518,7 +518,7 @@ graph TD
 
 边界 2: 异步测试
 ├── 异步测试需要特殊运行时
-├── tokio::test, async-std [已归档]::test
+├── tokio::test, async-std [已停止维护]::test
 ├── 阻塞 vs 非阻塞断言
 └── 缓解: 使用 async 测试宏
 
@@ -808,7 +808,7 @@ fn main() {}
 ## 🔗 概念关系
 
 - **上位（is-a）**：失败信号模型对应 [Error Handling Basics](../08_error_handling/01_error_handling_basics.md) 的不可恢复分支。
-- **下位（实例）**：断言宏与 `should_panic` 实例见本页正文。
+- **下位（实例）**：断言宏（Macro）与 `should_panic` 实例见本页正文。
 - **对偶**：与编译期保障相对（运行时验证 vs 静态证明），对照 [Type System](../02_type_system/01_type_system.md)。
 - **组合**：断言 panic 机制见 [Panic and Abort](../08_error_handling/03_panic_and_abort.md)。
 - **依赖**：`#[test]` 属性依赖 [Attributes and Macros](../09_macros_basics/01_attributes_and_macros.md)。

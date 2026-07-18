@@ -2,7 +2,7 @@
 > 其中技术观点反映了对应时间点的社区状态，可能与当前（Rust 1.96+）推荐实践不一致。
 > 学习时请以 `concept/`、`knowledge/` 及官方文档为准。
 >
-> - `async-std` 已进入维护模式，新项目建议优先考虑 Tokio / smol。
+> - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 已重命名为 `wasm32-wasip1`；WASI Preview 2 目标为 `wasm32-wasip2`。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **概念族**: 异步（Async） / 运行时（Runtime）决策
@@ -95,7 +95,7 @@
 
 │   │       ├── 与同步代码混合 → spawn_blocking
 
-│   │       └── 与C集成 → async-std [已归档]或自定义
+│   │       └── 与C集成 → async-std [已停止维护]或自定义
 
 │   └── 否 → 使用同步
 
@@ -132,7 +132,7 @@
 | 运行时（Runtime） | 适用场景 | 特点 | 生态 |
 | :--- | :--- | :--- | :--- |
 | **Tokio** | 通用服务端 | 成熟、功能全、生态好 | ⭐⭐⭐⭐⭐ |
-| **async-std [已归档]** | 标准库兼容 | 类似std API | ⭐⭐⭐ |
+| **async-std [已停止维护]** | 标准库兼容 | 类似std API | ⭐⭐⭐ |
 | **smol** | 轻量级 | 简单、可组合 | ⭐⭐ |
 | **embassy** | 嵌入式 | no_std、实时 | ⭐⭐ |
 | **glommio** | 线程-per-core | io_uring、DPDK | ⭐ |

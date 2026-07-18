@@ -372,7 +372,7 @@ fn align_check() {
 
 ### 3. 与原子指令生成的关系（查询 → codegen 分支）
 
-原子指令通常要求操作数**自然对齐**：例如多字节原子的 load/store/CAS 需要地址按操作数宽度对齐；16 字节原子（如 `AtomicU128` 在支持的目标上）可能要求 16 字节对齐；32 位目标上的 64 位原子是否可由单条指令完成，取决于该目标的对齐与指令集。当对齐**不被保证**时，后端要么插入对齐检查/屏障，要么退回到 `compiler_rt` 的 `__atomic_*` libcall，要么在编译期拒绝。`cfg(target_has_atomic_primitive_alignment)` 让可移植代码**在编译期**区分这些情形（原理见 [`11_atomics_and_memory_ordering.md`](../00_concurrency/06_atomics_and_memory_ordering.md) 已引用的 LLVM Atomic Instructions；该页 §Rust 1.97.0 交叉语义 给出 codegen 侧的对称说明）。
+原子指令通常要求操作数**自然对齐**：例如多字节原子的 load/store/CAS 需要地址按操作数宽度对齐；16 字节原子（如 `AtomicU128` 在支持的目标上）可能要求 16 字节对齐；32 位目标上的 64 位原子是否可由单条指令完成，取决于该目标的对齐与指令集。当对齐**不被保证**时，后端要么插入对齐检查/屏障，要么退回到 `compiler_rt` 的 `__atomic_*` libcall，要么在编译期拒绝。`cfg(target_has_atomic_primitive_alignment)` 让可移植代码**在编译期**区分这些情形（原理见 [`11_atomics_and_memory_ordering.md`](../00_concurrency/06_atomics_and_memory_ordering.md) 已引用（Reference）的 LLVM Atomic Instructions；该页 §Rust 1.97.0 交叉语义 给出 codegen 侧的对称说明）。
 
 > ⚠ **需专家复核**：本 cfg 的**取值域**（除版本页示例 `"64"` 外还可取哪些值，如按位宽 `"8"/"16"/"32"/"128"` 或 `"ptr"` 形式）在 release notes 与版本页中**未完整列出**；上例沿用版本页 §2.4 的 `"64"` 写法，具体可取值以 Rust Reference — Conditional compilation / 该 cfg 的稳定化文档为准。
 
@@ -409,7 +409,7 @@ fn align_check() {
 
 - **上位（is-a）**：[Unsafe](01_unsafe.md) 的语义基础层。
 - **下位（实例）**：抽象字节、provenance、`MaybeUninit`、别名模型、对齐与 layout。
-- **组合**：与 [原子操作与内存序](../00_concurrency/06_atomics_and_memory_ordering.md)、[Unsafe 边界全景](02_unsafe_boundary_panorama.md) 组合。
+- **组合**：与 [原子操作（Atomic Operations）与内存序](../00_concurrency/06_atomics_and_memory_ordering.md)、[Unsafe 边界全景](02_unsafe_boundary_panorama.md) 组合。
 - **依赖**：依赖 [值与引用语义](../../01_foundation/03_values_and_references/02_value_vs_reference_semantics.md)。
 
 ---
@@ -449,7 +449,7 @@ Rust 内存模型中的"抽象字节"可以区分哪些状态？
 关于未初始化内存，下列说法正确的是？
 
 - A. 读取未初始化内存总是安全的
-- B. 读取未初始化内存是 UB（除 `union` 字段和结构体 padding 外）；`MaybeUninit<T>` 是处理未初始化内存的核心类型
+- B. 读取未初始化内存是 UB（除 `union` 字段和结构体（Struct） padding 外）；`MaybeUninit<T>` 是处理未初始化内存的核心类型
 - C. `MaybeUninit::assume_init()` 是安全函数
 - D. 未初始化字节的值固定为 0
 

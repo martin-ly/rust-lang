@@ -2,7 +2,7 @@
 >
 > 本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
 >
-> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [crates.io](https://crates.io/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
@@ -880,7 +880,7 @@ fn main() {
 | 动态类型 `x = 5` | 显式类型 `let x: i32 = 5;` | 类型推断（Type Inference）依赖使用场景 |
 | GC 内存管理 | 所有权 + 借用（Borrowing） | `Rc<RefCell<T>>` 不是银弹 |
 | `try/except` | `Result<T, E>` + `?` | 忘记处理 `Err` 分支 |
-| `async/await` | `async/await` + `Future` | Tokio（推荐），async-std [已归档] |
+| `async/await` | `async/await` + `Future` | Tokio（推荐），async-std [已停止维护] |
 | 鸭子类型 | Trait bound | Orphan Rule 限制 |
 | `list` / `dict` | `Vec<T>` / `HashMap<K, V>` | 需要预先考虑所有权 |
 
@@ -1464,7 +1464,7 @@ async fn handler() -> String {
 }
 ```
 
-> **修正**: Async runtime（tokio）基于**协作式多任务** [历史: async-std [已归档]]：任务在 `.await` 点 yield 控制权，让 runtime 调度其他任务。
+> **修正**: Async runtime（tokio）基于**协作式多任务** [历史: async-std [已停止维护]]：任务在 `.await` 点 yield 控制权，让 runtime 调度其他任务。
 > 若在 async 函数中执行**阻塞操作**（`std::thread::sleep`、`std::fs::read`、CPU 密集型计算、数据库同步查询），当前线程被阻塞，该线程上的所有任务都无法执行。
 > 在多线程 runtime 中，一个线程阻塞降低整体吞吐；在单线程 runtime 中，整个应用死锁。
 > 解决方案：1) 使用异步（Async）版本的 API（`tokio::fs`、`tokio::time`）；2) 将阻塞操作放到 `spawn_blocking` 线程池；3) 使用 `tokio::task::yield_now().await` 手动 yield。

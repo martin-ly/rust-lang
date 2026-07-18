@@ -401,7 +401,7 @@ fn assume_ready<T: AsyncTask>(t: &T) -> Ready<i32> {
 fn main() {}
 ```
 
-> **修正**：使用泛型约束而非具体类型。应写成 `fn use_task<T: AsyncTask>(t: &T) -> T::Future<'_>` 或进一步用 `Future` trait bound 处理返回值。
+> **修正**：使用泛型（Generics）约束而非具体类型。应写成 `fn use_task<T: AsyncTask>(t: &T) -> T::Future<'_>` 或进一步用 `Future` trait bound 处理返回值。
 
 ---
 

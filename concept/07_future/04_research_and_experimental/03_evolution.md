@@ -242,7 +242,7 @@ rustc 1.85.0 ──┬── 支持 edition = "2015"
 name = "my-crate"
 version = "0.1.0"
 edition = "2024"      # 语法解析规则版本
-rust-version = "1.97.0" # MSRV：最低编译器版本
+rust-version = "1.97.1" # MSRV：最低编译器版本
 ```
 
 这种解耦是 Rust 稳定承诺的基石：**升级编译器不会破坏现有代码**（只要不更改 edition），而**升级 edition 是 crate 作者的主动选择**。

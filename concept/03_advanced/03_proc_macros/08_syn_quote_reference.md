@@ -346,7 +346,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 
 核心类型分三层：
 
-1. **顶层项**：`Item`（枚举：`ItemFn`/`ItemStruct`/`ItemImpl`/…）是过程宏输入的主要形态，`File` 表示整个源文件；
+1. **顶层项**：`Item`（枚举（Enum）：`ItemFn`/`ItemStruct`/`ItemImpl`/…）是过程宏输入的主要形态，`File` 表示整个源文件；
 2. **表达式与类型**：`Expr`（60+ 变体覆盖全部表达式语法）、`Type`、`Pat`（模式）、`Stmt`；
 3. **辅助结构**：`Generics`/`WhereClause`/`Attribute`/`Visibility`——`Attribute` 的解析是 derive 宏配置参数的主要入口。
 
@@ -461,7 +461,7 @@ assert_eq!(last_segment.ident, "Vec");
 属性（`#[...]`）解析是 derive/attribute 宏的核心工作，本节按「读取 → 解析 → 移除」三步展开：
 
 - **读取**：`attrs: Vec<Attribute>` 挂在大多数 AST 节点上；`attr.path().is_ident("serde")` 做名字过滤，注意区分外层属性（`#[...]`）与内层属性（`#![...]`，`style` 字段）；
-- **解析**：syn 2.x 用 `attr.parse_nested_meta(|meta| { ... })` 回调式解析（替代 1.x 的 `Meta` 匹配），支持 `#[attr(key = "val", flag, list(a, b))]` 三类成分的统一处理；复杂配置用 `darling` crate 直接反序列化到结构体；
+- **解析**：syn 2.x 用 `attr.parse_nested_meta(|meta| { ... })` 回调式解析（替代 1.x 的 `Meta` 匹配），支持 `#[attr(key = "val", flag, list(a, b))]` 三类成分的统一处理；复杂配置用 `darling` crate 直接反序列化到结构体（Struct）；
 - **移除**：derive 宏通常要**剥离**自定义辅助属性（如 `#[my_derive(skip)]`）再输出，否则 rustc 报「未注册属性」——`attrs.retain(...)` 是惯用做法。
 
 判定准则：属性解析错误应用 `meta.error("...")` 返回带 span 的诊断，而非 panic——过程宏的 panic 只显示「proc macro panicked」。
@@ -566,7 +566,7 @@ pub fn my_attr(attr: TokenStream, item: TokenStream) -> TokenStream {
 
 `quote!` 是代码生成的标准工具，把「准引用（Reference）语法」转换为 `TokenStream` 构造代码。核心机制三条：
 
-1. **准引用**：`quote! { fn #name() { #body } }`——`#var` 插值任何实现了 `ToTokens` 的值（syn AST 节点、`Ident`、`Literal`、原始 token 流），其余部分按字面 token 输出；
+1. **准引用（Reference）**：`quote! { fn #name() { #body } }`——`#var` 插值任何实现了 `ToTokens` 的值（syn AST 节点、`Ident`、`Literal`、原始 token 流），其余部分按字面 token 输出；
 2. **重复**：`#(#items),*` 语法处理列表——`#(...)*` 内可含多个变量（要求同长度迭代），分隔符紧跟 `*` 前（`,`/`;` 或无）；
 3. **卫生控制**：`quote!` 生成的标识符默认用 `Span::call_site()`——需要隔离时用 `quote_spanned!` 或 `Ident::new(name, Span::mixed_site())` 预构造再插值。
 
@@ -835,7 +835,7 @@ impl ToTokens for Config {
 本节归纳 syn + quote 实战中的高频配方，每个模式解决一个具体问题：
 
 1. **生成唯一标识符**：`format_ident!("_{}_{}", name, index)` 避免生成代码的命名冲突；
-2. **泛型参数转发**：`let (impl_g, ty_g, where_c) = generics.split_for_impl();` 生成 `impl #impl_g Trait for #name #ty_g #where_c`——手写泛型拼接几乎必错；
+2. **泛型（Generics）参数转发**：`let (impl_g, ty_g, where_c) = generics.split_for_impl();` 生成 `impl #impl_g Trait for #name #ty_g #where_c`——手写泛型拼接几乎必错；
 3. **添加 where 约束**：`generics.make_where_clause().predicates.push(parse_quote!(#ty: Trait));`——为每个字段类型追加约束的标准做法；
 4. **条件生成**：`if let Some(attr) = find_attr(...) { quote!{...} } else { quote!{} }`——`quote!{}` 空流是合法的「不生成」；
 5. **错误累积**：遍历字段时收集 `Vec<syn::Error>`，最后 `combine` 一次性报告——比遇到第一个错误就返回的用户体验好得多。
@@ -936,7 +936,7 @@ pub fn create_struct(input: TokenStream) -> TokenStream {
 
 - **错误处理（Error Handling）**：宏内一切可失败操作返回 `syn::Result`，用 `?` 传播；错误构造用 `syn::Error::new_spanned(node, "消息")`——`node` 的 span 决定 rustc 报错的红线画在用户代码哪个 token 下（指向 `DeriveInput.ident` 即指向类型名，指向某字段即指向该字段）。多个错误用 `Error::combine` 聚合一次报出。反模式：`.unwrap()`（宏 panic = 无定位的「proc macro panicked」）、`Span::call_site()` 笼统定位（用户不知道错在哪个字段）。
 - **性能优化**：syn 按需开 feature（见 §1）；生成逻辑避免「`quote!` 结果 `to_string()` 再 `parse`」的往返（每次往返是一次完整解析，应直接构造 `TokenStream`）；大宏（如 serde）采用「预分配 + `extend` 追加」而非反复 `quote!` 嵌套。宏的编译成本 = 「宏 crate 自身编译」+「每次调用的解析/生成」，前者由 feature 裁剪控制，后者由避免重解析控制。
-- **可测试性**：生成逻辑写成「`proc_macro2::TokenStream → TokenStream`」的纯函数，单元测试直接断言输出（`prettyplease` 格式化后快照对比）；集成测试用 `trybuild` 锁定「应通过/应失败 + stderr」；复杂宏用「测试 crate」模拟真实调用（含泛型、where 子句、生命周期等边界输入）。三层测试使「宏升级 syn 版本」从盲改变为可验证重构。
+- **可测试性**：生成逻辑写成「`proc_macro2::TokenStream → TokenStream`」的纯函数，单元测试直接断言输出（`prettyplease` 格式化后快照对比）；集成测试用 `trybuild` 锁定「应通过/应失败 + stderr」；复杂宏用「测试 crate」模拟真实调用（含泛型、where 子句、生命周期（Lifetimes）等边界输入）。三层测试使「宏升级 syn 版本」从盲改变为可验证重构。
 
 ### 10.1 错误处理 (Error Handling)
 

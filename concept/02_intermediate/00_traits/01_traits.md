@@ -1395,7 +1395,7 @@ graph TD
 | **层面** | **分析** | **结果** |
 |:---|:---|:---|
 | 编译期 | `impl Trait` 单态化（Monomorphization）；`dyn Trait` vtable | ✅ 机制不同 |
-| 运行时 | `impl Trait` 零开销；`dyn Trait` 指针间接 | ✅ 性能差异 |
+| 运行时（Runtime） | `impl Trait` 零开销；`dyn Trait` 指针间接 | ✅ 性能差异 |
 | 语义 | `impl Trait` = ∃T.Trait(T) + 编译期已知；`dyn Trait` = 存在类型 + 运行时已知 | ⚠️ 不等价 |
 | 工程 | 返回类型用 `impl Trait`，异构集合用 `dyn Trait` | ✅ 互补 |
 
@@ -2047,7 +2047,7 @@ let v = runtime_zero::<Vec<u8>>();        // ✅ 运行时允许非 const impl
 
 在 `const_trait_impl` 稳定之前，社区发展了多种替代模式来实现"const 中的泛型 trait 行为"：
 
-**方案 1：`macro_rules!` 手动单态化**
+**方案 1：`macro_rules!` 手动单态化（Monomorphization）**
 
 ```rust,ignore
 // 稳定 Rust：为每个需要支持的类型写宏展开
@@ -2801,7 +2801,7 @@ trait Drawable {
 
 ## 从 `crates\c02_type_system\docs\tier_02_guides\04_trait_system_guide.md` 迁移的补充视角
 
-> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
+> **来源**: 本小节内容从 `crates/` 下的学习指南迁移而来，用于在单一权威页中保留该学习材料的宏（Macro）观视角与知识组织方式。完整代码示例与练习仍可在原 crates 文档的替代页面中查看。
 
 # 2.4 Rust 类型系统 - Trait 系统指南
 

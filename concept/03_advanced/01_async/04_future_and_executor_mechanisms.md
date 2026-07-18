@@ -119,7 +119,7 @@
 - **定义**: 负责调度和执行 Future 的运行时（Runtime）组件
 - **类型**: 运行时（Runtime）组件
 - **属性**: 任务调度、事件循环、Waker 管理
-- **关系**: 与 Future、异步运行时相关
+- **关系**: 与 Future、异步（Async）运行时（Runtime）相关
 
 **Poll 机制**:
 
@@ -192,7 +192,7 @@ Future 与 Executor 机制
 - `trait Future { type Output; fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>; }`——一个 future 是「可被反复查询状态的惰性计算」。
 - `poll` 的语义契约：返回 `Ready(v)` 则计算完成（此后不得再 poll）；
 - 返回 `Pending` 则「尚未就绪，但已注册唤醒」——执行器可以稍后重试。
-- `Pin<&mut Self>` 保证自引用状态机不会移动（`.await` 产生的跨挂起点借用（Borrowing）依赖此保证）。
+- `Pin<&mut Self>` 保证自引用（Reference）状态机不会移动（`.await` 产生的跨挂起点借用（Borrowing）依赖此保证）。
 - **Poll 枚举（Enum）**：
 - `Poll<T>` 只有两个变体（`Ready(T)`/`Pending`），是「就绪与否」的最小类型化表达——它把「异步等待」从回调/阻塞改写为「状态查询」，这是 Rust 异步「无运行时默认成本」的根源：没有事件循环的强制介入，poll 就是普通函数调用。
 - **Context 和 Waker**：`Context` 当前只承载 `Waker`——「任务就绪后如何通知执行器」的句柄。
@@ -705,7 +705,7 @@ where
 `async`/`await` 的本质是编译器把函数体重写为状态机，本节从转换、可视化与成本验证三角度展开：
 
 - **从 async 到状态机**：
-- `async fn f()` 被编译为一个实现 `Future` 的匿名枚举/结构体（Struct）——每个 `.await` 点是一个状态，状态字段 = 跨该 await 存活的局部变量（含借用的再引用——这是 `Pin` 要求的来源）。
+- `async fn f()` 被编译为一个实现 `Future` 的匿名枚举（Enum）/结构体（Struct）——每个 `.await` 点是一个状态，状态字段 = 跨该 await 存活的局部变量（含借用（Borrowing）的再引用——这是 `Pin` 要求的来源）。
 - `poll` 的实现是 `match self.state { S0 => { 初始代码; 若 pending 则 state=S1, 返回 Pending } S1 => { 恢复点 1 的代码; ... } }`。
 - 理解这一点即理解全部 async 编译错误：「非 Send 跨 await」= 状态字段含 `!Send` 类型；「递归 async」= 状态机类型自引用。
 - **状态机可视化**：

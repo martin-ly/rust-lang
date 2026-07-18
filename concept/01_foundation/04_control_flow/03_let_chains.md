@@ -76,7 +76,7 @@ fn main() {
 }
 ```
 
-**let 守卫（`if-let guards`）** 允许在 `match` 臂的 `if` 守卫中写 `let` 模式匹配，用来在已匹配绑定上再做一层可选解构。
+**let 守卫（`if-let guards`）** 允许在 `match` 臂的 `if` 守卫中写 `let` 模式匹配（Pattern Matching），用来在已匹配绑定上再做一层可选解构。
 
 ```rust
 fn parse(v: Option<&str>) -> Option<i32> {

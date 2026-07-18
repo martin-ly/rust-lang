@@ -12,7 +12,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评判 async 与 unsafe 交叉处的契约充分性
-> **定位**: 系统分析 async/await 状态机与 unsafe 操作的交叉语义：await 点两侧什么保持有效、Pin 如何约束自引用状态机、Waker 如何跨越 safe/unsafe 边界、手写 poll 时哪些不变量必须由程序员保证。
+> **定位**: 系统分析 async/await 状态机与 unsafe 操作的交叉语义：await 点两侧什么保持有效、Pin 如何约束自引用（Reference）状态机、Waker 如何跨越 safe/unsafe 边界、手写 poll 时哪些不变量必须由程序员保证。
 > **前置概念**: [Async/Await](../01_async/01_async.md) · [Pin 与 Unpin](../01_async/08_pin_unpin.md) · [Unsafe Rust](01_unsafe.md) · [Waker 契约](../01_async/12_waker_contract_deep_dive.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
 > **后置概念**: [Async FFI Boundary](../04_ffi/04_async_ffi_boundary.md) · [Async Boundary Panorama](../01_async/06_async_boundary_panorama.md)
 
@@ -199,7 +199,7 @@ fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
 
 ### 5.1 边界陈述
 
-`Waker` 是 async 运行时的核心回调机制。当 unsafe/FFI 代码持有 `Waker` 时，必须保证：
+`Waker` 是 async 运行时（Runtime）的核心回调机制。当 unsafe/FFI 代码持有 `Waker` 时，必须保证：
 
 1. **`Waker::wake` 只调用一次**（或按 `Clone` 计数调用）；
 2. **`Waker` 指向的任务在 wake 发生时仍存活**；
@@ -222,7 +222,7 @@ extern "C" fn c_callback(waker: *const Waker) {
 - 可能并发调用导致 use-after-free；
 - 未克隆的 Waker 被 wake_by_ref 后再次使用。
 
-**修正**：使用 `Waker::clone` 创建独立所有权，或使用 Arc<Waker> 等线程安全包装。
+**修正**：使用 `Waker::clone` 创建独立所有权（Ownership），或使用 Arc<Waker> 等线程安全包装。
 
 ---
 

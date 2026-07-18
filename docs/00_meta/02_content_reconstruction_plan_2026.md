@@ -2,7 +2,7 @@
 >
 > 本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
 >
-> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 
 ---
@@ -326,7 +326,7 @@ graph TD
 - 仅 42 行，3 个代码片段
 - 缺少 Future 状态机解释（这是 async Rust 的核心机制）
 - 缺少 Pin/Unpin（自引用类型的关键支撑）
-- 缺少运行时对比（Tokio vs async-std [已归档] vs smol vs embassy）
+- 缺少运行时对比（Tokio vs async-std [已停止维护] vs smol vs embassy）
 - 缺少取消语义与 Task 生命周期
 
 **目标结构**（650+ 行，10 模块（Module））：

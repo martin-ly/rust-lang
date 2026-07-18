@@ -95,7 +95,7 @@ let handle = LocalExecutorBuilder::default()
 
 ### 6.1 运行时特性概览
 
-| 特性 | Glommio | Tokio | Smol | async-std（已归档） |
+| 特性 | Glommio | Tokio | Smol | async-std [已停止维护] |
 |:---|:---|:---|:---|:---|
 | 架构模型 | Thread-per-core | Work-stealing | 单线程/多线程池 | Work-stealing |
 | 平台支持 | Linux 5.1+ | 跨平台 | 跨平台 | 跨平台 |

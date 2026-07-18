@@ -1011,7 +1011,7 @@ fn main() {
 |:---|:---|:---|
 | 借用规则：1个 &mut 或 N个 & | [TRPL Ch4.2](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) | ✅ |
 | 引用必须始终有效 | [TRPL Ch4.2](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) | ✅ |
-| `RefCell<T>` 运行时借用检查 | [TRPL Ch15.5](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html) | ✅ |
+| `RefCell<T>` 运行时（Runtime）借用检查 | [TRPL Ch15.5](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html) | ✅ |
 | `UnsafeCell<T>` 与内部可变性 | [TRPL Ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) · [Rust Reference: Interior Mutability](https://doc.rust-lang.org/reference/interior-mutability.html) | ✅ |
 | `Pin<&mut T>` 与自引用结构 | [TRPL Ch17 (Asynchronous Programming)](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [TRPL Ch20 (Advanced Types)](https://doc.rust-lang.org/book/ch20-04-advanced-types.html) · [Rust Reference: Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html) | ✅ |
 | NLL (Non-Lexical Lifetimes) | [Rust Reference: NLL](https://doc.rust-lang.org/reference/lifetime-elision.html) · [RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html) | ✅ |

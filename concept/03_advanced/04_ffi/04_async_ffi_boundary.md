@@ -203,7 +203,7 @@ flowchart TD
 | 失效模式 | 根因 | 修复方向 |
 |---|---|---|
 | 在 poll 中调用阻塞 FFI | 违反 Future 非阻塞契约 | 改为 spawn_blocking 或 Reactor |
-| C 回调唤醒已释放 Waker | Waker 生命周期管理错误 | 使用 Box/Arc + 注销机制 |
+| C 回调唤醒已释放 Waker | Waker 生命周期（Lifetimes）管理错误 | 使用 Box/Arc + 注销机制 |
 | 回调线程非 Send 却跨线程 wake | Waker 线程安全假设错误 | 约束 Waker: Send 或单线程 Reactor |
 | FFI 错误码未映射到 Rust 错误 | errno 被后续调用覆盖 | 在 unsafe 块内立即读取并转换 |
 | 外部句柄在 Future drop 后泄漏 | 缺少 Drop 中关闭/注销 | 在 Future Drop 中调用 FFI 清理 |

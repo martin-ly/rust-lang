@@ -105,9 +105,9 @@ fn make_callback() -> impl AsyncFnOnce() -> i32 {
 
 async 闭包（Closures）（`async || { ... }`，1.85 稳定）把「闭包捕获」与「Future 惰性」两套语义叠加，理解其交互是正确使用的前提：
 
-- **捕获与惰性的叠加**：`async move || { ... }` 在**调用时** move 环境进入 Future——闭包本身捕获的是调用现场的环境，返回的 Future 持有捕获值直到完成；这与 `|| async move { ... }`（闭包捕获、内部 async 块再 move）有微妙但关键的区别；
+- **捕获与惰性的叠加**：`async move || { ... }` 在**调用时** move 环境进入 Future——闭包（Closures）本身捕获的是调用现场的环境，返回的 Future 持有捕获值直到完成；这与 `|| async move { ... }`（闭包捕获、内部 async 块再 move）有微妙但关键的区别；
 - **`AsyncFn` trait 族**：`AsyncFn`/`AsyncFnMut`/`AsyncFnOnce` 对应 `Fn` 三族——每次调用返回一个新 Future，其生命周期可借用（Borrowing）闭包环境（这是旧 workaround `Fn() -> impl Future` 做不到的「lending」能力）；
-- **生命周期边界**：返回的 Future 借用 `&self` 时，Future 不能比闭包活得更久——跨 spawn 使用时需要 `move` + 拥有所有权（Ownership）。
+- **生命周期边界**：返回的 Future 借用（Borrowing） `&self` 时，Future 不能比闭包活得更久——跨 spawn 使用时需要 `move` + 拥有所有权（Ownership）。
 
 判定准则：需要「异步回调」签名（如 `where F: AsyncFn(&Req) -> Resp`）时用 async 闭包；仅需一次性异步逻辑时用 `async { ... }` 块更简单。
 
@@ -414,7 +414,7 @@ async fn main() {
 async 闭包的当前边界（1.85–1.97）：
 
 - **`dyn` 不可用**：`AsyncFn` 返回的 Future 是关联类型，`Box<dyn AsyncFn()>` 不是合法类型——动态分发需手写 `Box<dyn Fn() -> Pin<Box<dyn Future>>>` 双层包装，与 `async_trait` 的处境相同；
-- **生命周期推断更复杂**：返回 Future 的借用关系使「闭包比 Future 活得短」类错误（E0597 变体）成为新高频错误——`move` 闭包 + 所有权转移是标准修复；
+- **生命周期推断更复杂**：返回 Future 的借用关系使「闭包比 Future 活得短」类错误（E0597 变体）成为新高频错误——`move` 闭包 + 所有权（Ownership）转移是标准修复；
 - **trait 求解边界**：`AsyncFn` 的精确签名（含生命周期）在复杂泛型（Generics）约束中可能触发「higher-ranked 生命周期」限制，需要 `for<'a>` 显式标注；
 - **与 `Send` 的组合**：`AsyncFn + Send` 约束同时约束闭包与返回的 Future——`spawn` 场景需双重验证。
 

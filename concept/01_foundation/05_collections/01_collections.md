@@ -932,6 +932,6 @@ fn main() {
 
 - **上位（is-a）**：[Type System](../02_type_system/01_type_system.md) 上的泛型（Generics）容器族。
 - **下位（实例）**：`BTreeMap`、`VecDeque`、`BinaryHeap` 等进阶成员见 [高级集合](02_collections_advanced.md)。
-- **对偶**：与定长数组 `[T; N]` 相对（动态容量 vs 编译期定长），见 [Numerics](../02_type_system/03_numerics.md) 的 const 泛型讨论。
+- **对偶**：与定长数组 `[T; N]` 相对（动态容量 vs 编译期定长），见 [Numerics](../02_type_system/03_numerics.md) 的 const 泛型（Generics）讨论。
 - **组合**：与 [Iterators](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) 组合成数据处理管线。
 - **依赖**：元素生命周期（Lifetimes）管理依赖 [Ownership](../01_ownership_borrow_lifetime/01_ownership.md)。

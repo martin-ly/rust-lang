@@ -88,9 +88,9 @@
 
 ```text
 my-app 0.1.0
-├── serde 1.0.217
-│   └── serde_derive 1.0.217 (proc-macro)
-├── tokio 1.42.0
+├── serde 1.0.228
+│   └── serde_derive 1.0.228 (proc-macro)
+├── tokio 1.53.0
 │   └── ...
 └── local-crate (path dependency)
 ```

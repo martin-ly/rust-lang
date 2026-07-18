@@ -301,7 +301,7 @@ async fn process_stream() {
 
 ## 十、边界测试：异步模式的编译错误
 
-本节把「异步模式：从 Future 到生产级并发」的规则推到编译器与运行时（Runtime）的边界上逐一实测：边界测试：`Stream` 与 `Future` 的所有权混淆（编译错…、边界测试：取消安全（Cancellation Safety）违反（逻辑…与背压与流控制。每个用例标注预期结果（编译错误 / 运行时 panic / 逻辑错误），并用 rustc 1.97 验证：能复现的给出诊断信息与触发条件，不能复现的说明原因。这些用例共同回答一个问题——规则在极限处是否仍然成立，以及违反时编译器能否兜底。
+本节把「异步（Async）模式：从 Future 到生产级并发」的规则推到编译器与运行时（Runtime）的边界上逐一实测：边界测试：`Stream` 与 `Future` 的所有权（Ownership）混淆（编译错…、边界测试：取消安全（Cancellation Safety）违反（逻辑…与背压与流控制。每个用例标注预期结果（编译错误 / 运行时 panic / 逻辑错误），并用 rustc 1.97 验证：能复现的给出诊断信息与触发条件，不能复现的说明原因。这些用例共同回答一个问题——规则在极限处是否仍然成立，以及违反时编译器能否兜底。
 
 ### 10.1 边界测试：`Stream` 与 `Future` 的所有权混淆（编译错误）
 
@@ -574,7 +574,7 @@ async fn process_image(data: Vec<u8>) -> Result<Vec<u8>, task::JoinError> {
 本节检验异步模式的两条常见误判：
 
 - **反命题 1：「`select!` 分支取消总是安全的」** —— 错误。`select!` 中落选分支的 Future 被 drop——如果该 Future 在 `.await` 点之间已改变外部状态（如发送了一半的消息、扣除了配额），取消会留下不一致。判定准则：放进 `select!` 的每个分支都要审「drop 在任意 await 点是否安全」——不安全时改为先 `select` 出结果再执行副作用。
-- **反命题 2：「`join!` 是并行的」** —— 不准确。`join!` 在同一任务内**轮询驱动**多个 Future：它们是并发（concurrent）而非并行（parallel）——CPU 密集工作放 `join!` 里只会串行化。真并行需 `spawn` 到多线程运行时或 `spawn_blocking`。
+- **反命题 2：「`join!` 是并行的」** —— 不准确。`join!` 在同一任务内**轮询驱动**多个 Future：它们是并发（concurrent）而非并行（parallel）——CPU 密集工作放 `join!` 里只会串行化。真并行需 `spawn` 到多线程运行时（Runtime）或 `spawn_blocking`。
 
 边界极限小节量化：`FuturesUnordered` 的内存语义、`select!` 的 `biased` 模式（公平性 vs 优先级）、以及取消安全审计的检查清单。
 

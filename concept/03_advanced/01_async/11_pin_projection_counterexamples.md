@@ -196,9 +196,9 @@ fn main() {
 }
 ```
 
-**违反**：T1-③（pin 字段的析构未发生在原处/正确时机）。自引用结构的第一规则：**引用者先析构，所有者后析构**；任何 `take`/`ManuallyDrop`/`mem::replace` 介入字段生命周期都要重新论证顺序。pin-project 的 `#[pinned_drop]` 把这条规则结构化：pinned drop 体里只能拿到 `Pin<&mut Self>` 的投射，无法 `take` 走 pin 字段。
+**违反**：T1-③（pin 字段的析构未发生在原处/正确时机）。自引用（Reference）结构的第一规则：**引用者先析构，所有者后析构**；任何 `take`/`ManuallyDrop`/`mem::replace` 介入字段生命周期（Lifetimes）都要重新论证顺序。pin-project 的 `#[pinned_drop]` 把这条规则结构化：pinned drop 体里只能拿到 `Pin<&mut Self>` 的投射，无法 `take` 走 pin 字段。
 
-> **过渡**：三个 UB 反例的共同形态是「`get_unchecked_mut` 之后一切靠自觉」。编译器并非全然袖手旁观——不写 unsafe 的越界会被类型系统直接拦下，这就是 §4 的两条编译期防线。
+> **过渡**：三个 UB 反例的共同形态是「`get_unchecked_mut` 之后一切靠自觉」。编译器并非全然袖手旁观——不写 unsafe 的越界会被类型系统（Type System）直接拦下，这就是 §4 的两条编译期防线。
 
 ## 四、编译期防线：两个 compile_fail 反例
 
@@ -328,7 +328,7 @@ async fn main() {
 
 ### 6.1 pin-project-lite：声明式宏等价物
 
-不需要枚举变体投射、`#[pinned_drop]`、`project_replace` 时，pin-project-lite 以声明宏（Declarative Macro）提供同一安全保证，编译成本显著低于过程宏：
+不需要枚举（Enum）变体投射、`#[pinned_drop]`、`project_replace` 时，pin-project-lite 以声明宏（Declarative Macro）提供同一安全保证，编译成本显著低于过程宏（Procedural Macro）：
 
 ```rust
 use pin_project_lite::pin_project;

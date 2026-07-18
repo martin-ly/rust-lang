@@ -152,7 +152,7 @@ GlobalAlloc:
 - **arena 分配器（typed-arena / generational-arena）**：`typed-arena` 存同类型对象并借出 `&'arena T`——「arena 活着则引用（Reference）有效」由借用（Borrowing）检查保证，适合自引用/图结构（AST、DOM）的安全替代（绕开 `Rc<RefCell>` 的运行时检查）；`generational-arena` 返回「索引 + 代」句柄，删除后句柄失效（防 ABA），适合 ECS/句柄表。
 - **自研 `GlobalAlloc`**：实现 `GlobalAlloc`（`alloc`/`dealloc` + `Layout` 契约）注册全局分配器——安全边界：`alloc` 返回的指针必须满足 `Layout` 的对齐与大小承诺（违反即后续一切 UB 的源头），`dealloc` 收到的 `Layout` 必须与 `alloc` 时一致（调用方契约）。
 
-选型判定：阶段批量 → bumpalo；全局吞吐 → jemalloc/mimalloc；图/AST 自引用 → typed-arena；句柄表 → generational-arena；嵌入/计数/统计 → 自研 `GlobalAlloc`。
+选型判定：阶段批量 → bumpalo；全局吞吐 → jemalloc/mimalloc；图/AST 自引用（Reference） → typed-arena；句柄表 → generational-arena；嵌入/计数/统计 → 自研 `GlobalAlloc`。
 
 ### 2.1 bumpalo — Bump 分配器
 >

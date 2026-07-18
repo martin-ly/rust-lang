@@ -118,7 +118,7 @@ resolver = "3"
 members = ["crates/*"]
 ```
 
-- 当 workspace 成员声明 `rust-version = "1.97.0"` 时，Cargo 会优先选择满足该 MSRV 的依赖版本。
+- 当 workspace 成员声明 `rust-version = "1.97.1"` 时，Cargo 会优先选择满足该 MSRV 的依赖版本。
 - 如需验证最新依赖，使用 `cargo update --ignore-rust-version`。
 
 ## 七、公共/私有依赖与 Feature Unification

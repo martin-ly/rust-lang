@@ -2,7 +2,7 @@
 >
 > 本文档提及 `async-std` 与/或 `wasm32-wasi`。请注意：
 >
-> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI 第 2 版（wasip2）对应目标为 **`wasm32-wasip2`**。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 
@@ -2795,7 +2795,7 @@ differential-dataflow (增量计算)
 
 - **非 Send 类型跨 await 点**（编译错误）：`Rc`/`RefCell` 守卫等 `!Send` 值在 `.await` 前后都被使用 → 它成为状态机的一个字段 → 整个 future `!Send` → `tokio::spawn`（要求 `Send`）拒绝。修复三选一：`.await` 前结束该值的借用（缩小作用域）、换 `Send` 等价物（`Arc<Mutex>`）、或留在 `LocalSet`/单线程运行时。错误信息会指出「哪个值被持有跨越了哪个 await」——这是排查的起点。
 - **在 async 块中调用阻塞函数**（逻辑错误）：`std::thread::sleep`、`reqwest::blocking` 在 async 任务中阻塞的是「整个 worker 线程」而非当前任务——不报错但吞吐坍塌（N 个阻塞任务占满 N 个 worker 后全线饿死）。修复：`tokio::time::sleep`、`spawn_blocking` 包裹、或换异步库。clippy 与 tokio 的 `#[tokio::main]` 文档均将此列为反模式。
-- **递归 async fn**（编译错误 E0733）：`async fn f() { f().await }` 的状态机类型自引用，大小无限——必须用 `Box::pin` 间接（`fn f() -> Pin<Box<dyn Future<...>>>` 或 `async_recursion` 宏）。这是「状态机即类型」的直接推论。
+- **递归 async fn**（编译错误 E0733）：`async fn f() { f().await }` 的状态机类型自引用，大小无限——必须用 `Box::pin` 间接（`fn f() -> Pin<Box<dyn Future<...>>>` 或 `async_recursion` 宏（Macro））。这是「状态机即类型」的直接推论。
 - **借用局部变量生命周期不足**：`async` 块捕获的引用必须活到 future 结束——`tokio::spawn(async { &x })` 报「borrowed value does not live long enough」，因为 spawn 要求 `'static`。修复：`move` 转移所有权（Ownership）、或 `tokio::scope`/`join!` 等有界并发原语。
 
 统一判定法：把 `async fn` 想象成「状态机结构体（Struct）」——编译错误都对应「某个字段不合法」（`!Send`、自引用、借用短命），逻辑错误都对应「挂起/阻塞语义误解」。
@@ -3224,7 +3224,7 @@ async fn safe_operation() -> std::io::Result<()> {
 > 本文档提及 `async-std` 与/或 `wasm32-wasi`。
 > 请注意：
 >
-> - `async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。
+> - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI 第 2 版（wasip2）对应目标为 **`wasm32-wasip2`**。
 
 ---

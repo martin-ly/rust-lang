@@ -14,7 +14,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **状态**: ✅ 已完成权威国际化来源对齐升级
 >
-> - `async-std` 已进入维护模式，新项目建议优先考虑 Tokio / smol。
+> - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 已重命名为 `wasm32-wasip1`；WASI Preview 2 目标为 `wasm32-wasip2`。
 > **概念族**: 软件设计 / Crate 架构
 
@@ -369,7 +369,7 @@ graph TD
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-Reqwest 的异步 API 构建于 `hyper` + `tokio`（默认）或 `async-std [已归档]`（可选特性）之上：
+Reqwest 的异步 API 构建于 `hyper` + `tokio`（默认）或 `async-std [已停止维护]`（可选特性）之上：
 
 ```rust,ignore
 #[tokio::main]

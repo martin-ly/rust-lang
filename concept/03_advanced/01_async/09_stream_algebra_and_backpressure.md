@@ -11,7 +11,7 @@
 > **分工声明**: Stream 的基础概念（`Stream = 异步 Iterator`、dataflow 映射）留在 [Async/Await §15](01_async.md)；Stream/Sink trait 的 API 面分析留在 `01_async.md` §8.10；[Async 边界全景](06_async_boundary_panorama.md) 只做边界汇总。本页专攻三件事：① Stream 与 Iterator 的**代数对偶**；② `StreamExt` 组合子的**代数定律与失效点**；③ 背压的**形式模型**（窗口/信用制、队列论）。三者互不重复（AGENTS.md §2 Canonical 规则）。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析拉取式异步（Async）序列的组合结构与速率约束的传播方向
-> **定位**: 把 `Stream` 从「异步版的 Iterator」这一直觉，上升为可推理的代数对象：对偶签名、组合子定律、以及背压作为「速率约束的反向传播」的形式模型，全部落到可编译验证的示例-反例对上。
+> **定位**: 把 `Stream` 从「异步（Async）版的 Iterator」这一直觉，上升为可推理的代数对象：对偶签名、组合子定律、以及背压作为「速率约束的反向传播」的形式模型，全部落到可编译验证的示例-反例对上。
 > **前置概念**: [Async/Await](01_async.md) · [Pin 与 Unpin](08_pin_unpin.md) · [Future 与 Executor 机制](04_future_and_executor_mechanisms.md)
 > **后置概念**: [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) · [Async 取消安全](05_async_cancellation_safety.md) · [Iterator 模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)
 
@@ -448,7 +448,7 @@ flowchart TD
 - [Pin 与 Unpin](08_pin_unpin.md) — `poll_next` 的 `Pin<&mut Self>` 接收者与 §3.4 的 Unpin 约束
 - [Async 取消安全](05_async_cancellation_safety.md) — 背压挂起点同时是取消点，窗口内元素的取消语义
 - [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) — 被背压挂起的任务如何被公平唤醒
-- [Iterator 模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) — 同步侧组合子代数的权威页（L2 向下引用）
+- [Iterator 模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) — 同步侧组合子代数的权威页（L2 向下引用（Reference））
 - [Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md) — 队列驻留内存的分配语义基础
 
 ## 📋 关键属性

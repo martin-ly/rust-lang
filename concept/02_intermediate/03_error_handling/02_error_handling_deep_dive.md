@@ -204,7 +204,7 @@ pub trait Error: Debug + Display {
 错误处理深入层的三个技术细节，覆盖「跨类型转换」「领域错误建模」「框架选型」的完整链路：
 
 - **错误转换与 `From` trait**：`?` 的隐式转换要求 `E2: From<E1>`。手写模式是「应用错误枚举（Enum） + 每个底层错误一个 `#[from]` 变体」；`From` 的语义承诺是「无损升格」（信息不丢失），有损转换应显式 `map_err`。
-- **自定义错误类型**：库错误的最佳实践是「一个公开错误枚举 + `thiserror` 派生 `Error`/`Display`」——变体表达领域失败模式（`NotFound`、`InvalidInput`），`#[error("...")]` 给出消息，`#[source]`/`#[from]` 维护因果链。错误枚举是库的 API 契约一部分：增删变体是 semver 相关变更（非穷尽 `#[non_exhaustive]` 可缓解）。
+- **自定义错误类型**：库错误的最佳实践是「一个公开错误枚举（Enum） + `thiserror` 派生 `Error`/`Display`」——变体表达领域失败模式（`NotFound`、`InvalidInput`），`#[error("...")]` 给出消息，`#[source]`/`#[from]` 维护因果链。错误枚举是库的 API 契约一部分：增删变体是 semver 相关变更（非穷尽 `#[non_exhaustive]` 可缓解）。
 - **错误处理框架选型**：`thiserror`（库场景，编译期生成 impl，零运行时成本，保留类型化匹配）vs `anyhow`（应用场景，动态错误对象 + 上下文链 `.context()`，牺牲可匹配性换 ergonomics）vs `eyre`/`miette`（anyhow 的增强：报告渲染、诊断码、源码片段标注）。判定标准：错误是否会被调用方 `match`——会则 thiserror，不会（一路 `?` 到 main 打印）则 anyhow 系。
 
 三者协作的典型分层：库层 thiserror 定义类型化错误 → 应用层 `From` 汇聚 → 顶层 anyhow 附加上下文并渲染报告。

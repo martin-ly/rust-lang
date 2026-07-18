@@ -562,7 +562,7 @@ mindmap
 
 ## ⚠️ 反例与陷阱
 
-**陷阱（可变别名，E0499）**：从 PL 理论看，Rust 的所有权模型是对「别名控制（aliasing control）」的静态化——同一时刻只允许一个 `&mut` 路径写入同一存储位置：
+**陷阱（可变别名，E0499）**：从 PL 理论看，Rust 的所有权（Ownership）模型是对「别名控制（aliasing control）」的静态化——同一时刻只允许一个 `&mut` 路径写入同一存储位置：
 
 ```rust,compile_fail
 fn main() {

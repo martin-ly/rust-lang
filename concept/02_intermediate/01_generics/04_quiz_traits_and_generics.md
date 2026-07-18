@@ -421,7 +421,7 @@ fn print_it<T: Sized>(t: T) {
 }
 ```
 
-所有泛型参数默认有 `T: Sized` 约束。要接受 trait 对象或切片（Slice），需使用 `?Sized`：
+所有泛型（Generics）参数默认有 `T: Sized` 约束。要接受 trait 对象或切片（Slice），需使用 `?Sized`：
 
 ```rust
 fn print_it<T: ?Sized>(t: &T) {
@@ -636,7 +636,7 @@ fn main() {
 
 **答案：B**
 
-**解析**：`Vec<i32>` 与 `Vec<String>` 在编译后是两份独立的专用代码，无运行时类型信息，也无分发开销。A 是 Java 泛型的机制（类型擦除 + 一份字节码），是最常见的跨语言误解；C 描述的是 `dyn Trait` trait 对象，与泛型恰为两种互补的多态策略。
+**解析**：`Vec<i32>` 与 `Vec<String>` 在编译后是两份独立的专用代码，无运行时（Runtime）类型信息，也无分发开销。A 是 Java 泛型的机制（类型擦除 + 一份字节码），是最常见的跨语言误解；C 描述的是 `dyn Trait` trait 对象，与泛型恰为两种互补的多态策略。
 
 </details>
 

@@ -12,6 +12,7 @@
 > **来源**: [区块链](../11_domain_applications/01_blockchain.md) · [WebAssembly](../11_domain_applications/03_webassembly.md) · [游戏 ECS](../11_domain_applications/02_game_ecs.md) · [机器学习生态](../11_domain_applications/13_machine_learning_ecosystem.md) · [AUTOSAR 与 Rust](../11_domain_applications/22_autosar_and_rust.md) · [量子计算](../11_domain_applications/16_quantum_computing_rust.md) · [算法竞赛](../11_domain_applications/07_algorithms_competitive_programming.md) · [docs.rs — Rust crate 生态权威文档](https://docs.rs)（curl 200 实测 2026-07-13）
 >
 > **前置概念**:
+> **后置概念**: [Application Domains](../06_data_and_distributed/01_application_domains.md) · [Industrial Case Studies](../11_domain_applications/14_industrial_case_studies.md)
 > [区块链](../11_domain_applications/01_blockchain.md) ·
 > [WebAssembly](../11_domain_applications/03_webassembly.md) ·
 > [游戏 ECS](../11_domain_applications/02_game_ecs.md) ·

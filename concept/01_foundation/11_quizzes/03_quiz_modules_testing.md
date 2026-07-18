@@ -251,7 +251,7 @@ test tests::test_overflow ... ok
 | `#[cfg(test)]` | 条件编译——只在测试模式下编译此模块（Module） |
 | `#[test]` | 标记函数为测试函数 |
 | `#[should_panic]` | 预期测试会 panic；若未 panic 则测试失败 |
-| `use super::*;` | 导入父模块的所有公共项，使被测函数可用 |
+| `use super::*;` | 导入父模块（Module）的所有公共项，使被测函数可用 |
 
 **测试类型对比**：
 

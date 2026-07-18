@@ -1,10 +1,10 @@
 # 🦀 Rust设计模式综合学习模块
 
 > **模块类型**: 设计模式学习模块 | ⭐ 质量评分: **95/100**
-> **Rust版本**: 1.97.0+ | 📊 完成度: **100% 完成** ✅
+> **Rust版本**: 1.97.1+ | 📊 完成度: **100% 完成** ✅
 > **学习重点**: GoF设计模式、并发模式、Rust特有模式、形式化验证
 > **适用对象**: Rust中级到高级开发者、架构师
-> **最后更新**: 2025-12-25 | 🔄 维护模式: Rust 1.97.0+ MSRV 对齐，Tier 1 文档完善完成
+> **最后更新**: 2025-12-25 | 🔄 维护模式: Rust 1.97.1+ MSRV 对齐，Tier 1 文档完善完成
 
 ## 目录
 
@@ -353,6 +353,7 @@ cargo test --all-features
 # 5. 运行性能基准测试
 cargo bench
 ```
+
 ### 阅读建议路径
 
 ```text
@@ -379,6 +380,7 @@ cargo bench
 ├─ 贡献新的模式实现
 └─ 撰写技术博客分享经验
 ```
+
 ---
 
 ## 🛠️ 实践练习
@@ -609,6 +611,7 @@ cargo run -p c09_design_pattern --example pipeline_iter_demo
 # 启用 Tokio 门控并运行测试
 cargo test -p c09_design_pattern --features tokio-bench
 ```
+
 ### Benchmark（Criterion）
 
 ```bash
@@ -625,6 +628,7 @@ cargo bench -p c09_design_pattern -- --save-baseline main
 # 与已保存的基线对比
 cargo bench -p c09_design_pattern -- --baseline main
 ```
+
 ### 新增示例与基准索引
 
 - 示例：
@@ -650,6 +654,7 @@ block_on(bus.run_with_strategy(&events, BackpressureStrategy::DropOldest));
 block_on(bus.run_with_strategy(&events, BackpressureStrategy::Batch(2)));
 block_on(bus.run_with_timeout_like(&events, 3));
 ```
+
 - 基准：
   - `benches/async_gats_benches.rs`: 异步事件总线与 GATs 观察者基准
 

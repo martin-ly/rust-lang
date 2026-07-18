@@ -200,7 +200,7 @@ fn ok_literal() -> [u8; 2 + 3] { [0; 5] } // 2+3 不含泛型参数，普通 con
 //   同上
 ```
 
-边界规则一句话：**只要常量表达式中出现了 const 泛型参数的运算（而非原样引用），就需要每日构建版的 `generic_const_exprs`**。原因是 `[T; N + 1]` 这类类型在求值前无法判定相等性（`N + 1 == M + 1 ⟺ N == M`？对抽象 N、M 不可判定），会冲击类型检查的可判定性（Decidability）——这正是 RFC 2000 把 MVP 限制为"独立参数"的理论动机。
+边界规则一句话：**只要常量表达式中出现了 const 泛型参数的运算（而非原样引用（Reference）），就需要每日构建版的 `generic_const_exprs`**。原因是 `[T; N + 1]` 这类类型在求值前无法判定相等性（`N + 1 == M + 1 ⟺ N == M`？对抽象 N、M 不可判定），会冲击类型检查的可判定性（Decidability）——这正是 RFC 2000 把 MVP 限制为"独立参数"的理论动机。
 
 每日构建版上的对应形态（仅供认知，1.97.0 stable 不可用）：
 
@@ -292,7 +292,7 @@ const 参数不是"类型"，是"**编译期已知的值**"，其语义由三条
 本节给出 const 泛型的两个生产级应用示例，展示「值参数化类型」的实际价值：
 
 - **固定大小环形缓冲区**：`struct RingBuf<T, const N: usize>`——容量编码进类型，缓冲区在栈上内联（无堆分配），`N` 在编译期已知使边界检查可被优化；这是嵌入式场景替代 `Vec` 的标准模式；
-- **维度泛型矩阵**：`struct Matrix<T, const R: usize, const C: usize>`——`Matrix<f64, 3, 4> * Matrix<f64, 4, 2>` 的维度兼容性由类型系统检查（乘法实现为 `impl Mul<Matrix<T, C, K>> for Matrix<T, R, C>`），维度不匹配是编译错误而非运行期断言。
+- **维度泛型矩阵**：`struct Matrix<T, const R: usize, const C: usize>`——`Matrix<f64, 3, 4> * Matrix<f64, 4, 2>` 的维度兼容性由类型系统（Type System）检查（乘法实现为 `impl Mul<Matrix<T, C, K>> for Matrix<T, R, C>`），维度不匹配是编译错误而非运行期断言。
 
 两个示例的共同模式：**把「运行期不变量」提升为「类型级事实」**——代价是每组合成新类型（单态化），收益是检查前移与优化信息。
 
@@ -568,7 +568,7 @@ fn scaled_demo() {
 <details>
 <summary>✅ 答案</summary>
 
-**A 正确**。按本页 §二：const 参数以 `const NAME: TYPE` 形式出现在泛型参数列表中，与类型参数、生命周期参数并列——`const` 关键字与参数类型都不可省略（B/D 错）。C 错：`f64` 不在允许的标量类型边界内。
+**A 正确**。按本页 §二：const 参数以 `const NAME: TYPE` 形式出现在泛型参数列表中，与类型参数、生命周期（Lifetimes）参数并列——`const` 关键字与参数类型都不可省略（B/D 错）。C 错：`f64` 不在允许的标量类型边界内。
 
 </details>
 

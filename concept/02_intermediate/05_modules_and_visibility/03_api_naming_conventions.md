@@ -184,7 +184,7 @@ impl Task {
 - **`is_` / `has_` / `can_`**：返回 `bool` 的谓词，不失败、不消耗（`str::is_empty`、`Path::is_file`）。约定谓词方法取 `&self`、O(1) 或文档注明复杂度；`is_` 后接属性（`is_empty`），`has_` 后接持有物（`has_key` 风格），否定谓词优先用「`!x.is_empty()`」而非造 `is_not_empty`（`!is_empty` vs `len() > 0` 的 lint：clippy `len_zero` 要求容器提供 `is_empty`）。
 - **`as_` / `to_` / `into_` 三件套**（C-CONV 约定）：按「借用（Borrowing）-借用 / 借用-拥有 / 拥有-拥有」区分——`as_` 廉价借用视图（`str::as_bytes`，零拷贝，返回引用（Reference））；`to_` 昂贵的克隆式转换（`str::to_string`，分配）；`into_` 消耗 self 的转换（`String::into_bytes`，零拷贝转移缓冲区所有权（Ownership））。三者的后缀类型名一致时，前缀即成本声明。
 
-判定一个查询方法命名：返回引用且零成本 → `as_`；返回新拥有值且保留 self → `to_`；消耗 self → `into_`；返回 `bool` → `is_/has_`。违反约定的典型信号：名为 `as_` 却分配内存（成本名实不符），或名为 `to_` 却消耗 self（所有权名实不符）。
+判定一个查询方法命名：返回引用（Reference）且零成本 → `as_`；返回新拥有值且保留 self → `to_`；消耗 self → `into_`；返回 `bool` → `is_/has_`。违反约定的典型信号：名为 `as_` 却分配内存（成本名实不符），或名为 `to_` 却消耗 self（所有权（Ownership）名实不符）。
 
 ### 3.1 `is_`
 
@@ -499,7 +499,7 @@ impl From<(&str, u16)> for Config {
 | 谓词 | `is_` / `has_` 前缀返回 `bool` | 命名惯例 |
 | 可变访问 | getter 无后缀，setter 用 `set_` 或 `mut_` | 命名惯例 |
 | 转换语义 | `as_`（借用）/ `to_`（克隆）/ `into_`（消耗）成本递增 | 命名语义 |
-| 一致性 | 遵循 std 先例降低认知负荷 | 设计哲学 |
+| 一致性（Coherence） | 遵循 std 先例降低认知负荷 | 设计哲学 |
 
 ## 🔗 概念关系
 

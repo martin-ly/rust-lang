@@ -19,5 +19,9 @@
 > [Modern Verification Tools](04_modern_verification_tools.md) ·
 > [Aerospace Certification Formal Methods](03_aerospace_certification_formal_methods.md) ·
 > [RustBelt](../02_separation_logic/01_rustbelt.md)
+> **前置概念**: [Verification Toolchain](01_verification_toolchain.md) · [RustBelt](../02_separation_logic/01_rustbelt.md)
+> **后置概念**: [Modern Verification Tools](04_modern_verification_tools.md) · [Aerospace Certification](03_aerospace_certification_formal_methods.md)
+>
+>
 > **受众**: [研究者]
 > **内容分级**: [研究者级]

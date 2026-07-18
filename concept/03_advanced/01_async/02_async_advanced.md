@@ -99,8 +99,8 @@
 **要点摘要**：
 
 - `Stream` 是异步版 `Iterator`：核心方法 `poll_next(self: Pin<&mut Self>, cx) -> Poll<Option<Self::Item>>`，与 Future 的惰性语义一致。
-- `Sink` 表示可异步发送值的消费者（TCP 连接、消息通道），生命周期四阶段：`poll_ready` → `start_send` → `poll_flush` → `poll_close`。
-- `futures::Stream` 面向通用异步管道与跨运行时兼容；`tokio_stream` 面向 Tokio 生态（axum、tonic 流处理）。
+- `Sink` 表示可异步发送值的消费者（TCP 连接、消息通道），生命周期（Lifetimes）四阶段：`poll_ready` → `start_send` → `poll_flush` → `poll_close`。
+- `futures::Stream` 面向通用异步管道与跨运行时（Runtime）兼容；`tokio_stream` 面向 Tokio 生态（axum、tonic 流处理）。
 
 ### 8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异
 
@@ -113,7 +113,7 @@
 - `Pin<Box<dyn Future>>`：运行时类型擦除 + 一次堆分配与间接调用——用于 trait 对象、递归 async fn、运行时类型选择。
 - 执行器统一存储不同任务的 Future 时需 `Pin<Box<dyn Future + Send>>`；其余场景避免无谓装箱。
 
-> **交叉链接（向下引用 L2）**：单态化（Monomorphization）机制见 [L2 泛型（Generics）](../../02_intermediate/01_generics/01_generics.md)（单态化与代码膨胀）；
+> **交叉链接（向下引用（Reference） L2）**：单态化（Monomorphization）机制见 [L2 泛型（Generics）](../../02_intermediate/01_generics/01_generics.md)（单态化与代码膨胀）；
 > trait 对象的内存布局（vtable）见 [L2 Trait](../../02_intermediate/00_traits/01_traits.md)。
 
 ### 8.12 `loom` 并发模型检测工具
@@ -149,7 +149,7 @@
 本节的边界用例覆盖高级异步模式的四类编译错误：
 
 - **`select!` 分支完成后的变量使用**：分支 Future 完成后其局部状态不可再用——`select!` 每轮重新求值分支表达式，跨轮状态必须提升到循环外（`pin!` 或普通变量）；
-- **`Stream::next()` 与所有权冲突**：`stream.next().await` 需要 `&mut stream`——与同时持有的借用冲突（E0502），`while let Some(x) = stream.next().await` 是正确模式（借用在每轮结束）；
+- **`Stream::next()` 与所有权冲突**：`stream.next().await` 需要 `&mut stream`——与同时持有的借用（Borrowing）冲突（E0502），`while let Some(x) = stream.next().await` 是正确模式（借用在每轮结束）；
 - **`Pin`/`Unpin` 自动实现冲突**：含 `PhantomPinned` 或自引用的类型 `!Unpin`——`Box::pin` 前试图 move 触发 E0277；
 - **类型不匹配的基础错误**：`async` 块捕获与 `Send` 要求的组合——`spawn` 边界处的完整约束检查链。
 

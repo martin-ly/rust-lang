@@ -222,7 +222,7 @@ RTN 是 dyn 兼容的**前置积木**：RFC 3654 原文明确「We expect to mak
 
 ### 3.5 方案 E：`trait_variant`（Send 变体生成，RTN 的 stable 替代）
 
-RTN 的痛点是 nightly-only；`trait-variant` crate 用过程宏在 **stable** 上达到等效效果：从基础 trait 生成一个「返回的 Future 满足额外 bound」的变体 trait——**解决 spawn/Send 约束，不解决 dyn 兼容**：
+RTN 的痛点是 nightly-only；`trait-variant` crate 用过程宏（Procedural Macro）在 **stable** 上达到等效效果：从基础 trait 生成一个「返回的 Future 满足额外 bound」的变体 trait——**解决 spawn/Send 约束，不解决 dyn 兼容**：
 
 ```rust,ignore
 //! trait-variant 0.1.2 + tokio 1.52.3：rustc 1.97.0 实测运行通过（输出 ok）
@@ -301,7 +301,7 @@ flowchart TD
 ## 七、相关概念
 
 - [Async 边界全景 §9](06_async_boundary_panorama.md#九边界六async-trait-与-dyn-兼容边界) — 对象安全边界的陈述/反例/判定三段式（本页的上游摘要）
-- [Traits](../../02_intermediate/00_traits/01_traits.md) — 对象安全一般规则（vtable、auto trait、关联类型）（L2 向下引用）
+- [Traits](../../02_intermediate/00_traits/01_traits.md) — 对象安全一般规则（vtable、auto trait、关联类型）（L2 向下引用（Reference））
 - [Async/Await](01_async.md) — async fn 脱糖与 `impl Future` 不透明类型
 - [Async Closures](07_async_closures.md) — 返回 `impl Future` 的闭包形态，同样的不可命名性问题
 - [Future 与 Executor 机制](04_future_and_executor_mechanisms.md) — `Pin<Box<dyn Future>>` 的擦除形态与 poll 分发
@@ -323,7 +323,7 @@ flowchart TD
 |---|---|---|
 | 问题根源 | RPITIT 返回匿名 future 类型，vtable 无法承载 ⟹ 天生 dyn-incompatible | 本文 §二 |
 | 方案谱系 | async_trait 宏 / 手写 boxed / enum 分派 / RTN / trait_variant / erased 六方案 | 本文 §三 |
-| 运行时开销 | enum 分派零成本；boxed 方案每次调用一次堆分配 | 本文 §四 |
+| 运行时（Runtime）开销 | enum 分派零成本；boxed 方案每次调用一次堆分配 | 本文 §四 |
 | MSRV 跨度 | async_trait 低 MSRV；原生 RPITIT 需 1.75+ | 本文 §四 选型矩阵 |
 | 演进状态 | 原生 `dyn` async trait 仍处 nightly 跟踪 | 本文 §六 |
 

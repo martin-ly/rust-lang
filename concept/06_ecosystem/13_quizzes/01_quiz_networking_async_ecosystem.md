@@ -17,6 +17,8 @@
 > [Glommio 与 Thread-per-Core](../04_web_and_networking/05_glommio_and_thread_per_core.md) ·
 > [并发与异步（Async）](../../03_advanced/00_concurrency/01_concurrency.md) ·
 > [Rust vs Go（并发模型对比）](../../05_comparative/01_systems_languages/03_rust_vs_go.md)
+>
+> **后置概念**: [Application Domains](../06_data_and_distributed/01_application_domains.md) · [Distributed Systems](../04_web_and_networking/01_distributed_systems.md)
 
 ---
 
@@ -223,7 +225,7 @@ enum RuntimeBinding {
 
 **答案：错**
 
-**解析**：知识库统一加注的生态状态提示明确指出：`async-std` 项目已进入维护模式，2024 年后不再活跃开发；新项目建议优先评估 **Tokio** 或 **smol**。这与 [Glommio 与 Thread-per-Core](../04_web_and_networking/05_glommio_and_thread_per_core.md) §五「生态状态」的口径一致。
+**解析**：知识库统一加注的生态状态提示明确指出：`async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。这与 [Glommio 与 Thread-per-Core](../04_web_and_networking/05_glommio_and_thread_per_core.md) §五「生态状态」的口径一致。
 
 </details>
 

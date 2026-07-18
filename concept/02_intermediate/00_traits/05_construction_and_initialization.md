@@ -264,7 +264,7 @@ Point::new(x, y) = Point { x, y }
 
 ## 七、总结
 
-- **L1**：Rust 没有 C++ 的构造函数，用结构体字面量和关联函数（如 `new`）创建对象。
+- **L1**：Rust 没有 C++ 的构造函数，用结构体（Struct）字面量和关联函数（如 `new`）创建对象。
 - **L2**：Rust 的 `Default`、`Clone`、`Copy`、`Drop` trait 替代了 C++ 的默认/拷贝/移动构造函数和析构函数；不需要 Rule of Three/Five。
 - **L3**：Rust 去语法化的构造模型让所有对象创建行为都受类型系统（Type System）和所有权（Ownership）规则约束，消除了 C++ 中因构造函数特权语法导致的隐式转换、未初始化、异常安全等复杂问题。
 

@@ -68,7 +68,7 @@ mindmap
 
 > **Rust Reference**: A trait object is an opaque value of another type that implements a given set of traits. The set of traits is made up of an object safe base trait plus any number of auto traits.
 
-**Const Generic × Trait Object 交叉定义**：在需要同时满足“编译期常量参数”（const generic）与“运行时类型擦除/动态分发”（trait object）的场景中，Rust 类型系统表现出的限制与可用模式。核心矛盾在于：vtable 无法携带 const generic 参数的具体值。
+**Const Generic × Trait Object 交叉定义**：在需要同时满足“编译期常量参数”（const generic）与“运行时（Runtime）类型擦除/动态分发”（trait object）的场景中，Rust 类型系统（Type System）表现出的限制与可用模式。核心矛盾在于：vtable 无法携带 const generic 参数的具体值。
 
 ---
 

@@ -12,6 +12,7 @@
 > **来源**: [Rust Editions](../00_version_tracking/02_editions.md) · [Rust 发布流程](../00_version_tracking/03_rust_release_process.md) · [Rust 1.96 稳定特性](../00_version_tracking/rust_1_96_stabilized.md) · [Rust 1.97.0 稳定特性](../00_version_tracking/rust_1_97_stabilized.md) · [Rust 1.98+ 前沿特性预览](../00_version_tracking/rust_1_98_preview.md) · [Rust Blog — Announcing Rust 1.97.0](https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/)（P2 生态官方发布信息，curl 200 实测 2026-07-13）
 >
 > **前置概念**:
+> **后置概念**: [Rust Version Tracking](../00_version_tracking/01_rust_version_tracking.md) · [Edition Roadmap](../01_edition_roadmap/02_edition_guide.md)
 > [Rust 版本跟踪](../00_version_tracking/01_rust_version_tracking.md) ·
 > [Rust Editions](../00_version_tracking/02_editions.md) ·
 > [Rust 发布流程](../00_version_tracking/03_rust_release_process.md) ·
@@ -116,7 +117,7 @@ rust-version = "1.94"
 
 **答案**：B。
 
-**解析**：`rust-version = "1.94"` 声明该 crate 要求的**最低 rustc 版本**（MSRV），工具链低于此版本时 Cargo 拒绝构建；`edition = "2024"` 选择**语法/语义版本**，决定 `gen` 关键字保留、`if let` 作用域等语言行为。两者是不同维度的约束，混用是常见配置错误。(Source: [Rust Editions](../00_version_tracking/02_editions.md) 反命题 3)
+**解析**：`rust-version = "1.97.1"` 声明该 crate 要求的**最低 rustc 版本**（MSRV），工具链低于此版本时 Cargo 拒绝构建；`edition = "2024"` 选择**语法/语义版本**，决定 `gen` 关键字保留、`if let` 作用域等语言行为。两者是不同维度的约束，混用是常见配置错误。(Source: [Rust Editions](../00_version_tracking/02_editions.md) 反命题 3)
 
 </details>
 

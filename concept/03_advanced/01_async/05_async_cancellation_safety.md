@@ -144,7 +144,7 @@ enum FetchFut {
 
 ### 2.1 操作级定义
 
-设异步操作 `op` 的状态机为 `(S, →, s₀)`，其中 `P ⊆ S` 为挂起状态集。定义：
+设异步（Async）操作 `op` 的状态机为 `(S, →, s₀)`，其中 `P ⊆ S` 为挂起状态集。定义：
 
 > **取消安全（cancellation safe）**：对任意挂起状态 `p ∈ P`，在 `p` 处析构 Future 后，(a) 操作外部的可观察状态与"操作从未开始"或"操作已完整提交"之一一致（无半截状态）；(b) 已消费/已产出的数据不会丢失或重复交付；(c) 再次发起同一操作是良定义的。
 
@@ -241,7 +241,7 @@ async fn ok_lines(stream: tokio::net::TcpStream, mut shutdown: tokio::sync::watc
 //    StreamExt::next() 是 cancel safe 的（缓冲属于 Framed 而非 Future）
 ```
 
-修正二的关键：`Framed` 把缓冲从"Future 的局部状态"提升为"长生命周期对象的字段"。取消 drop 掉的只是一次 `next()` 调用，缓冲存活——这是把取消不安全操作改造为安全的通用手法：**状态外移**。
+修正二的关键：`Framed` 把缓冲从"Future 的局部状态"提升为"长生命周期（Lifetimes）对象的字段"。取消 drop 掉的只是一次 `next()` 调用，缓冲存活——这是把取消不安全操作改造为安全的通用手法：**状态外移**。
 
 ### 3.2 反例二：持锁跨 await 被取消，临界区半截
 

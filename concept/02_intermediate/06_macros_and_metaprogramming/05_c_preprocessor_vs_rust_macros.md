@@ -38,7 +38,7 @@
 
 > **C 预处理器和 Rust 宏（Macro）都叫"宏"，但本质上是两个时代的产物。
 > C 预处理器在文本层面做替换，不感知语法、类型和作用域；
-> Rust 宏在 token 流 / AST 层面操作，受卫生性（hygiene）约束，展开后仍受类型系统（Type System）检查。**
+> Rust 宏（Macro）在 token 流 / AST 层面操作，受卫生性（hygiene）约束，展开后仍受类型系统（Type System）检查。**
 > (Source: [Rust Reference — Macros by Example](https://doc.rust-lang.org/reference/macros-by-example.html))
 
 ---
@@ -172,7 +172,7 @@ impl Serialize for MyType {}
 - **什么时候不需要宏**（5.2）：CPP 中 `#define` 的多数用途在 Rust 中有更好的非宏替代——常量用 `const`（有类型、有作用域）、条件编译用 `#[cfg]`（语法级而非文本级）、内联函数用 `#[inline]` 泛型（Generics）（类型检查保留）；
 - **什么时候用过程宏（Procedural Macro）**（5.3）：需要解析语法结构（derive）、需要生成基于输入分析的大量代码、需要外部数据（读文件/环境）参与生成——这些超出 `macro_rules!` 的模式匹配（Pattern Matching）能力。
 
-迁移判定顺序：能 `const`/`fn`/`generics` 不宏，能 `macro_rules!` 不过程宏——每升一级，可调试性与可维护性降一档。
+迁移判定顺序：能 `const`/`fn`/`generics` 不宏，能 `macro_rules!` 不过程宏（Procedural Macro）——每升一级，可调试性与可维护性降一档。
 
 ### 5.1 什么时候用 `macro_rules!` 替代 `#define`
 

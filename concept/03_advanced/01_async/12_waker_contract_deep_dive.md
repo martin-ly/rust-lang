@@ -69,7 +69,7 @@ flowchart TD
 
 ## 二、Waker 的类型擦除结构
 
-`Waker` 是一个两指针宽的句柄：`{ data: *const (), vtable: &'static RawWakerVTable }`。执行器把所有任务类型擦除成同一形状，调度队列因此可以同质存放。VTable 的四个函数指针构成一套**引用计数记账协议**：
+`Waker` 是一个两指针宽的句柄：`{ data: *const (), vtable: &'static RawWakerVTable }`。执行器把所有任务类型擦除成同一形状，调度队列因此可以同质存放。VTable 的四个函数指针构成一套**引用（Reference）计数记账协议**：
 
 | VTable 函数 | 语义（std 文档原文要点） | 对 data 持有权的影响 |
 |---|---|---|
@@ -225,7 +225,7 @@ fn demo(tx: SyncSender<i32>) {
 |:---:|---|---|
 | R1 | **wake ⟹ 必须重新 poll** | 执行器收到 wake 后唯一合法的响应是把对应任务重新入队并最终 `poll`。`wake` 不是「数据就绪」的承诺，只是「值得再 poll 一次」的提示。§3.1 的 `block_on` 即最小演示。 |
 | R2 | **spurious wake 合法** | 任何时候、任何次数、对任何状态的 waker 调用 wake 都是合法的；最坏代价是一次空转 poll。Future 的 `poll` 因此必须是幂等可重入的：被「无理由」地 poll 不得出错。 |
-| R3 | **wake 消耗 / wake_by_ref 借用** | `Waker::wake(self)` 转移所有权（Ownership）（等价于先 wake_by_ref 再 drop）；vtable 层面对应 §2 的 -1 / 0 记账。用错的后果不是活性问题而是内存问题（§5-C2）。 |
+| R3 | **wake 消耗 / wake_by_ref 借用（Borrowing）** | `Waker::wake(self)` 转移所有权（Ownership）（等价于先 wake_by_ref 再 drop）；vtable 层面对应 §2 的 -1 / 0 记账。用错的后果不是活性问题而是内存问题（§5-C2）。 |
 | R4 | **Pending 之前的最后一次 waker 才有效** | 每次 poll 都传入新的 `Context`；资源方必须保存**最近一次** poll 收到的 waker 克隆，旧的可以被丢弃。executor 允许每次 poll 更换 waker（例如任务迁移到别的 worker）。 |
 
 > **R2 的工程推论**：测试唤醒逻辑时，「多 wake 几次」永远不能作为 bug 依据；「少 wake 一次」才是。这也解释了为什么 tokio 的 `Notify` 采用「许可（permit）合并」语义——多次 wake 合并为一次通知是合法的。
@@ -348,7 +348,7 @@ flowchart TD
 - [Async 高级主题](02_async_advanced.md) — Waker 契约的高级摘要页
 - [Future 与 Executor 机制](04_future_and_executor_mechanisms.md) — poll/waker 协议与 executor 职责模型
 - [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) — wake 入队之后的队列纪律与饥饿分析
-- [Tokio 运行时内部机制](../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md) — 工业级执行器中 wake 路径（task 句柄 ⟹ 调度队列）的完整实现
+- [Tokio 运行时（Runtime）内部机制](../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md) — 工业级执行器中 wake 路径（task 句柄 ⟹ 调度队列）的完整实现
 - [Pin 投射反例集](11_pin_projection_counterexamples.md) — 同为 unsafe 反例目录的姊妹页（Pin 域）
 - [Async 边界全景](06_async_boundary_panorama.md) — executor 契约的边界汇总视角
 - [Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md) — RawWaker data 指针背后的堆分配与引用计数基础（L2 向下引用）
@@ -358,7 +358,7 @@ flowchart TD
 - [std::task::Wake — std docs](https://doc.rust-lang.org/std/task/trait.Wake.html)（Wake trait 与 `Waker::from(Arc<T>)` 契约，2026-07-12 实测 200）
 - [std::task::RawWakerVTable — std docs](https://doc.rust-lang.org/std/task/struct.RawWakerVTable.html)（四函数记账契约与 `Waker::from_raw` 安全条件，2026-07-12 实测 200）
 - [The Rust Async Book — ch2 §Wakers（*Waking up*）](https://rust-lang.github.io/async-book/02_execution/03_wakeups.html)（Arc 计数 RawWaker 的权威教学实现；本书整体处于 rewrite WIP，ch2 机制描述与 std 文档交叉核对一致，2026-07-12 实测 200）
-- [futures-rs — `task` 模块（`AtomicWaker`/`waker` 适配器）](https://docs.rs/futures/latest/futures/task/)（R4「最新 waker」原语与 waker 组合子的生态权威实现，2026-07-12 实测 200）
+- [futures-rs — `task` 模块（Module）（`AtomicWaker`/`waker` 适配器）](https://docs.rs/futures/latest/futures/task/)（R4「最新 waker」原语与 waker 组合子的生态权威实现，2026-07-12 实测 200）
 - [RFC 2592 — `futures_api`（RawWaker/Waker 设计原文）](https://rust-lang.github.io/rfcs/2592-futures.html)（VTable 类型擦除的设计动机）
 - 站内交叉引用：[Async/Await](01_async.md) · [Future 与 Executor 机制](04_future_and_executor_mechanisms.md) · [Executor 公平性与调度](10_executor_fairness_and_scheduling.md) · [Tokio 运行时内部机制](../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md)
 
