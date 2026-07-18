@@ -251,7 +251,7 @@ Rust 语义族谱（顶层归纳）
 | 概念 | 语义归纳（一句话） | 证明文档 |
 | :--- | :--- | :--- |
 | 所有权 | 每个值恰有一个所有者，移动后原变量无效 | ownership_model |
-| 借用 | 不可变借用（Mutable Borrow）可多个，可变借用独占；互斥保证 | borrow_checker_proof |
+| 借用 | 不可变借用（Immutable Borrow）可多个，可变借用独占；互斥保证 | borrow_checker_proof |
 | 生命周期 | 引用生命周期必须 outlive 被引用对象 | lifetime_formalization |
 | 类型安全 | 良型程序不会出现类型错误（进展+保持） | type_system_foundations |
 | 型变 | 协变同向、逆变反向、不变无子类型；违反则悬垂 | variance_theory |

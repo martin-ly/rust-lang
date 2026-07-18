@@ -364,7 +364,7 @@ AST 节点通过 `Box` 拥有子节点，递归表达式树的所有权清晰；
 
 ### 借用与生命周期约束 {#借用与生命周期约束}
 
-`eval(&self, &HashMap)` 使用不可变借用（Mutable Borrow）遍历树；不修改 AST 与上下文，支持并发只读求值。
+`eval(&self, &HashMap)` 使用不可变借用（Immutable Borrow）遍历树；不修改 AST 与上下文，支持并发只读求值。
 
 ### trait 系统约束 {#trait-系统约束}
 

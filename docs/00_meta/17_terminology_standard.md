@@ -74,7 +74,7 @@
 | 中文术语 | 英文术语 | 定义 | 官方来源 |
 |---------|---------|------|---------|
 | 所有权 | Ownership | 每个值在任一时刻有且只有一个所有者，所有者离开作用域时值被释放 | The Book Ch 4.1 |
-| 借用 | Borrowing | 通过引用临时访问值而不获取所有权，分为不可变借用（Mutable Borrow）和可变借用 | The Book Ch 4.2 |
+| 借用 | Borrowing | 通过引用临时访问值而不获取所有权，分为不可变借用（Immutable Borrow）和可变借用 | The Book Ch 4.2 |
 | 不可变借用（Borrowing） | Immutable Borrow / Shared Reference | 允许只读访问的引用类型 `&T`，可同时存在多个 | The Book Ch 4.2 |
 | 可变借用 | Mutable Borrow / Exclusive Reference | 允许读写访问的引用类型 `&mut T`，同一作用域内只能存在一个 | The Book Ch 4.2 |
 | 移动 | Move | 将值的所有权从一个变量转移到另一个变量，原变量失效 | The Book Ch 4.1 |

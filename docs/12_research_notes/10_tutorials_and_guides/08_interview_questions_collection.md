@@ -240,7 +240,7 @@ println!("{}", r1);
 
 <summary>答案</summary>
 
-**错误**: 不能同时存在不可变借用（Mutable Borrow）和可变借用。
+**错误**: 不能同时存在不可变借用（Immutable Borrow）和可变借用。
 
 `r1`仍然存在（被println使用），所以不能创建`r2`。
 

@@ -154,14 +154,22 @@ def annotate_line(line: str, seen_terms: set[str]) -> tuple[str, bool]:
     masked, links, codes = mask_links_and_code(line)
     original_masked = masked
 
-    for cn, en in TERMS:
+    # 保护已有的中文（English）双语标注，防止短术语在长术语已标注范围内重复匹配。
+    protected: list[str] = []
+
+    def protect_repl(m: re.Match) -> str:
+        protected.append(m.group(0))
+        return "\x00PROT\x00"
+
+    masked = re.sub(r"[\u4e00-\u9fff]+[（(][A-Za-z][^）)]*[）)]", protect_repl, masked)
+
+    # 按中文长度降序处理，避免短术语错误匹配长术语的子串（如"可变借用"匹配"不可变借用"的后缀）。
+    for cn, en in sorted(TERMS, key=lambda t: len(t[0]), reverse=True):
         if cn in seen_terms:
             continue
         if masked.lstrip().startswith("#"):
             continue
         if re.search(rf"\b{re.escape(en)}\b", masked, re.IGNORECASE):
-            continue
-        if re.search(rf"{re.escape(cn)}\s*[\(（][A-Za-z]", masked):
             continue
 
         pattern = re.compile(
@@ -172,16 +180,16 @@ def annotate_line(line: str, seen_terms: set[str]) -> tuple[str, bool]:
             tail = masked[m.end() : m.end() + 30]
             if re.match(r"[\(（][A-Za-z]", tail):
                 return m.group(1)
-            before = masked[m.start() - 1] if m.start() > 0 else ""
-            after = masked[m.end()] if m.end() < len(masked) else ""
-            if before in "（(" and after in "）)":
-                return m.group(1)
             return f"{m.group(1)}（{en}）"
 
         new_masked, count = pattern.subn(repl, masked, count=1)
         if count > 0:
             masked = new_masked
             seen_terms.add(cn)
+
+    # 恢复被保护的已有标注
+    for prot in protected:
+        masked = masked.replace("\x00PROT\x00", prot, 1)
 
     if masked == original_masked:
         return line, False

@@ -474,7 +474,7 @@ fn demo_streaming() {
 }
 ```
 
-**GAT 在此的价值**：`Token<'a> = &'a str` 明确表达"token 是缓冲区的视图"。若用普通关联类型，只能返回 `String`（每次拷贝一行）或退化为 `unsafe`。注意 `cursor` 的更新发生在借用 `line` 构造**之前**的顺序安排上：更新通过 `self.cursor`（`usize`，Copy）完成，不与 `&self.buf` 的不可变借用（Mutable Borrow）冲突——因为借用的是 `buf` 字段而修改的是 `cursor` 字段，字段级借用分离（disjoint field borrow）使这段代码通过检查。
+**GAT 在此的价值**：`Token<'a> = &'a str` 明确表达"token 是缓冲区的视图"。若用普通关联类型，只能返回 `String`（每次拷贝一行）或退化为 `unsafe`。注意 `cursor` 的更新发生在借用 `line` 构造**之前**的顺序安排上：更新通过 `self.cursor`（`usize`，Copy）完成，不与 `&self.buf` 的不可变借用（Immutable Borrow）冲突——因为借用的是 `buf` 字段而修改的是 `cursor` 字段，字段级借用分离（disjoint field borrow）使这段代码通过检查。
 
 ### 7.3 示例三：自引用借用 —— 数据库游标式访问
 

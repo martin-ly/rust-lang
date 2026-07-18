@@ -5470,7 +5470,7 @@
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | Rust 对应 {#rust-对应} | `#rust-对应-rust-对应` | 同文件锚点不存在: #rust-对应-rust-对应 |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | ⚠️ 反例：违反借用规则导致数据竞争 {#反例违反借用规则导致数据竞争} | `#️-反例违反借用规则导致数据竞争-反例违反借用规则导致数据竞争` | 同文件锚点不存在: #️-反例违反借用规则导致数据竞争-反例违反借用规则导致数据竞争 |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | 💻 代码示例与实践 {#代码示例与实践} | `#-代码示例与实践-代码示例与实践` | 同文件锚点不存在: #-代码示例与实践-代码示例与实践 |
-| docs\research_notes\formal_methods\10_borrow_checker_proof.md | 示例 1：不可变借用（Mutable Borrow） {#示例-1不可变借用} | `#示例-1不可变借用-示例-1不可变借用` | 同文件锚点不存在: #示例-1不可变借用-示例-1不可变借用 |
+| docs\research_notes\formal_methods\10_borrow_checker_proof.md | 示例 1：不可变借用（Immutable Borrow） {#示例-1不可变借用} | `#示例-1不可变借用-示例-1不可变借用` | 同文件锚点不存在: #示例-1不可变借用-示例-1不可变借用 |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | 示例 2：可变借用 {#示例-2可变借用} | `#示例-2可变借用-示例-2可变借用` | 同文件锚点不存在: #示例-2可变借用-示例-2可变借用 |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | 示例 3：借用检查器拒绝数据竞争 {#示例-3借用检查器拒绝数据竞争} | `#示例-3借用检查器拒绝数据竞争-示例-3借用检查器拒绝数据竞争` | 同文件锚点不存在: #示例-3借用检查器拒绝数据竞争-示例-3借用检查器拒绝数据竞争 |
 | docs\research_notes\formal_methods\10_borrow_checker_proof.md | 示例 4：借用作用域与生命周期（Lifetimes） {#示例-4借用作用域与生命周期} | `#示例-4借用作用域与生命周期-示例-4借用作用域与生命周期` | 同文件锚点不存在: #示例-4借用作用域与生命周期-示例-4借用作用域与生命周期 |

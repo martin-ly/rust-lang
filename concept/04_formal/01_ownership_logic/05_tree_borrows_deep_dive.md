@@ -178,7 +178,7 @@ fn main() {
 }
 ```
 
-**修正对照**：收缩不可变借用（Mutable Borrow）的存活区间（NLL 下借用随最后使用结束）。
+**修正对照**：收缩不可变借用（Immutable Borrow）的存活区间（NLL 下借用随最后使用结束）。
 
 ```rust
 fn main() {

@@ -123,7 +123,7 @@ $$\text{Send}(\tau) \leftrightarrow \forall v:\tau,\, t_1,\, t_2.\ \text{SafeTra
 
 其中 $\text{SafeTransfer}(v, t_1, t_2)$ 表示：$v$ 在 $t_1$ 上创建或持有，转移至 $t_2$ 后，$t_1$ 不再访问 $v$，且 $t_2$ 上对 $v$ 的访问满足内存安全与借用规则。
 
-**Def SYNC1（Sync）**：类型 $\tau$ 满足 **Sync** 当且仅当：多线程共享不可变引用（Mutable Reference） $\& \tau$ 时，无数据竞争。形式化谓词：
+**Def SYNC1（Sync）**：类型 $\tau$ 满足 **Sync** 当且仅当：多线程共享不可变引用（Immutable Reference） $\& \tau$ 时，无数据竞争。形式化谓词：
 
 $$\text{Sync}(\tau) \leftrightarrow \forall t.\ \text{SafeShare}(\& \tau, t)$$
 

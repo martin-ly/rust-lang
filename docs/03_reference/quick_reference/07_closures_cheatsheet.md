@@ -99,7 +99,7 @@ let closure = move || println!("{}", s);
 
 | Trait | 描述 | 使用场景 |
 |-------|------|----------|
-| `Fn` | 不可变借用（Mutable Borrow）捕获 | 可多次调用 |
+| `Fn` | 不可变借用（Immutable Borrow）捕获 | 可多次调用 |
 | `FnMut` | 可变借用（Borrowing）捕获 | 可多次调用，需要可变引用（Mutable Reference） |
 | `FnOnce` | 移动捕获 | 只能调用一次 |
 

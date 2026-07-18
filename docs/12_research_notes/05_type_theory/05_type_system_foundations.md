@@ -3351,7 +3351,7 @@ fn main() {
 
 **新增 API**:
 
-- `assume_init_ref()`: 获取不可变引用（Mutable Reference）
+- `assume_init_ref()`: 获取不可变引用（Immutable Reference）
 - `assume_init_mut()`: 获取可变引用
 - `assume_init_drop()`: 安全地调用 drop
 - `write_copy_of_slice()`: 从切片写入

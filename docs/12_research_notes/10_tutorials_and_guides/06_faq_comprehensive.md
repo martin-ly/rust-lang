@@ -322,7 +322,7 @@ let mutex = Mutex::new(5);
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**A**: 允许在不可变引用（Mutable Reference）下修改数据，通过运行时检查保证安全。
+**A**: 允许在不可变引用（Immutable Reference）下修改数据，通过运行时检查保证安全。
 
 常见类型：
 
@@ -422,7 +422,7 @@ let v2 = v.clone();  // Vec<i32>
 
 > **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
 
-**A**: 缩小不可变借用（Mutable Borrow）的作用域：
+**A**: 缩小不可变借用（Immutable Borrow）的作用域：
 
 ```rust,ignore
 // ❌ 错误

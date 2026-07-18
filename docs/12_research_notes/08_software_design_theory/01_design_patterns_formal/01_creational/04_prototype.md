@@ -173,7 +173,7 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 
 **证明**：
 
-1. **借用规则**：`clone(&self)` 获取不可变借用（Mutable Borrow）
+1. **借用规则**：`clone(&self)` 获取不可变借用（Immutable Borrow）
    - 借用期间：`self` 不可被修改
    - 借用后：`self` 仍然有效
 2. **所有权转移**：返回值为新拥有值
