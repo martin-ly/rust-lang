@@ -9,9 +9,9 @@
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
 | D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
-| D6 Summary 低信息量模板套话 | 8 | 1.5% | >=3% | pass |
+| D6 Summary 低信息量模板套话 | 7 | 1.3% | >=3% | pass |
 
-**受影响文件总数**: 8 / 543
+**受影响文件总数**: 7 / 543
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -108,12 +108,11 @@
 
 ### D5 稳定层正文残留 nightly/preview/unstable（0）
 
-### D6 Summary 低信息量模板套话（8）
+### D6 Summary 低信息量模板套话（7）
 
-- `concept/00_meta/trpl_3rd_edition_alignment.md` — Summary 为空
-- `concept/00_meta/usability_testing_framework.md` — Summary 为空
 - `concept/00_meta/02_sources/01_authority_source_map.md` — Summary 为空
 - `concept/00_meta/03_audit/01_concept_audit_guide.md` — Summary 为空
+- `concept/01_foundation/02_type_system/01_type_system.md` — Summary 为空
 - `concept/01_foundation/04_control_flow/03_let_chains.md` — Summary 为空
 - `concept/03_advanced/00_concurrency/04_send_sync_boundaries.md` — Summary 为空
 - `concept/07_future/00_version_tracking/rust_1_95_stabilized.md` — Summary 为空

@@ -20,7 +20,7 @@ cortex-m-rt = "0.7.5"
 panic-halt = "0.2"
 
 # 可移植原子操作
-portable-atomic = { version = "1.13.1", features = ["critical-section"] }
+portable-atomic = { version = "1.14.0", features = ["critical-section"] }
 
 [profile.release]
 debug = 2

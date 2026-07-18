@@ -135,6 +135,21 @@ REVIEWED_PAIRS = {
         "docs/15_rust_formal_engineering_system/01_theoretical_foundations/01_type_system/README.md",
         "docs/15_rust_formal_engineering_system/01_theoretical_foundations/03_ownership_borrowing/README.md",
     }),
+    # 复核 2026-07-17（族 H）：content/safety_critical 套件目录索引与 README（sim 0.500）。
+    # 02_rust_safety_critical_ecosystem_master_index.md（目录内文件清单索引）vs README.md（套件使用指南与角色路径）：
+    # 共享为目录结构列表；正文独特 80%+（master_index 为文件清单，README 为使用指南/统计/标准覆盖）。
+    # 两者功能不同，属同一专题套件的导航骨架共现，非重复。
+    frozenset({
+        "content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md",
+        "content/safety_critical/README.md",
+    }),
+    # 复核 2026-07-17（族 I）：concept/SUMMARY.md 与属性关系图谱（sim 0.500）。
+    # SUMMARY.md 为 mdBook 目录导航清单；02_attribute_relationship_atlas.md 为概念属性矩阵。
+    # 共享为概念文件列表与元数据头模板；正文独特 90%+（目录 vs 属性矩阵）。非重复。
+    frozenset({
+        "concept/SUMMARY.md",
+        "concept/00_meta/knowledge_topology/02_attribute_relationship_atlas.md",
+    }),
 }
 
 

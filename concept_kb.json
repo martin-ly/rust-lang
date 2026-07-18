@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 526,
-    "generated_at": "2026-07-17T04:51:53.307592+00:00"
+    "generated_at": "2026-07-17T13:19:50.118479+00:00"
   },
   "files": [
     {
@@ -3289,6 +3289,50 @@
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
       "matrix_rows": 0,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\07_trpl_3rd_edition_alignment.md",
+      "layer": "L0",
+      "title": "TRPL 第 3 版对照审计（TRPL 3rd Edition Alignment Audit）",
+      "positioning": "系统对比 The Rust Programming Language 第 3 版（2025-10 出版）与 `concept/` L1-L3 核心内容，识别差距并规划更新。",
+      "line_count": 82,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 27,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\08_usability_testing_framework.md",
+      "layer": "L0",
+      "title": "Rust 知识体系可用性测试框架（Usability Testing Framework）",
+      "positioning": "为项目建立持续的学习者反馈闭环，从\"输出内容\"转向\"验证学习效果\"。",
+      "line_count": 129,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 27,
       "pre_post": {
         "pre": [],
         "post": []
@@ -7672,50 +7716,6 @@
       "templated_chains": 0
     },
     {
-      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\trpl_3rd_edition_alignment.md",
-      "layer": "L0",
-      "title": "TRPL 第 3 版对照审计（TRPL 3rd Edition Alignment Audit）",
-      "positioning": "系统对比 The Rust Programming Language 第 3 版（2025-10 出版）与 `concept/` L1-L3 核心内容，识别差距并规划更新。",
-      "line_count": 79,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 27,
-      "pre_post": {
-        "pre": [],
-        "post": []
-      },
-      "backward_chains": 0,
-      "templated_chains": 0
-    },
-    {
-      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\usability_testing_framework.md",
-      "layer": "L0",
-      "title": "Rust 知识体系可用性测试框架（Usability Testing Framework）",
-      "positioning": "为项目建立持续的学习者反馈闭环，从\"输出内容\"转向\"验证学习效果\"。",
-      "line_count": 126,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 1,
-      "matrix_rows": 27,
-      "pre_post": {
-        "pre": [],
-        "post": []
-      },
-      "backward_chains": 0,
-      "templated_chains": 0
-    },
-    {
       "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\00_start\\00_start.md",
       "layer": "L1",
       "title": "Rust 起步指南",
@@ -10737,7 +10737,7 @@
       "layer": "L1",
       "title": "Type System Basics（类型系统基础）",
       "positioning": "",
-      "line_count": 3375,
+      "line_count": 3374,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡、相关概念链接",
@@ -21820,7 +21820,7 @@
       "layer": "L2",
       "title": "Error Handling（错误处理）",
       "positioning": "补齐审计 §2.4 / §4 P2-2 缺口#7。本页此前仅有 1.97 横幅回链，无 Windows/Unix `ErrorKind` 映射差异。本节只补**映射差异与迁移判定**，不重复 `Result`/`?` 概念推导。完整判定树见 [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) §7。",
-      "line_count": 2926,
+      "line_count": 2932,
       "theorem_chains": [
         {
           "text": "- [4.1 引理：Result\\<T,E\\> ⟹ 和类型强制错误处理](#41-引理resultte--和类型强制错误处理)",
@@ -22570,7 +22570,7 @@
       "layer": "L2",
       "title": "Panic 机制",
       "positioning": "",
-      "line_count": 263,
+      "line_count": 272,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -22634,7 +22634,7 @@
       "layer": "L2",
       "title": "异常安全：C++ 与 Rust 的错误处理哲学",
       "positioning": "",
-      "line_count": 365,
+      "line_count": 371,
       "theorem_chains": [
         {
           "text": "- **Strong**: `exec(f, s) = ⊥ ⟹ state = s`",
@@ -22705,7 +22705,7 @@
           "[Error Handling](01_error_handling.md) · [Error Handling Basics](../../01_foundation/08_error_handling/01_error_handling_basics.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)"
         ],
         "post": [
-          "[Error Handling Deep Dive](02_error_handling_deep_dive.md) · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
+          "> [Error Handling Deep Dive](02_error_handling_deep_dive.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -31434,7 +31434,7 @@
       "layer": "L3",
       "title": "Unsafe 参考（Unsafe Reference）",
       "positioning": "",
-      "line_count": 332,
+      "line_count": 331,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 `unsafe` 关键字、块、操作和 UB 契约串联起来。",

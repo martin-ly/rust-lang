@@ -43,6 +43,12 @@ impl Machine<Idle> {
     }
 }
 
+impl Default for Machine<Idle> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Machine<Running> {
     /// Running -> Running（递增计数）/ Stay in Running and increment
     pub fn tick(mut self) -> Self {

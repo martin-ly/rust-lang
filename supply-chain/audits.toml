@@ -46,25 +46,50 @@ criteria = "safe-to-run"
 version = "0.94.0"
 notes = "2026-07-11: salvo 0.94.0 (salvo-rs 官方维护) 仅作为 c06_async 的 dev-dependency 用于 Web 框架示例，不参与默认构建产物。"
 
+[[audits.salvo]]
+criteria = "safe-to-run"
+version = "0.95.0"
+notes = "2026-07-18: salvo 0.95.0 (salvo-rs 官方维护) 仅作为 c06_async 的 dev-dependency 用于 Web 框架示例，不参与默认构建产物。"
+
 [[audits.salvo-proxy]]
 criteria = "safe-to-run"
 version = "0.94.0"
 notes = "2026-07-11: salvo-proxy 0.94.0 (salvo-rs 官方维护) 为 salvo 0.94 传递依赖，dev 示例用途。"
+
+[[audits.salvo-proxy]]
+criteria = "safe-to-run"
+version = "0.95.0"
+notes = "2026-07-18: salvo-proxy 0.95.0 (salvo-rs 官方维护) 为 salvo 0.95 传递依赖，dev 示例用途。"
 
 [[audits.salvo-serde-util]]
 criteria = "safe-to-run"
 version = "0.94.0"
 notes = "2026-07-11: salvo-serde-util 0.94.0 (salvo-rs 官方维护) 为 salvo 0.94 传递依赖，dev 示例用途。"
 
+[[audits.salvo-serde-util]]
+criteria = "safe-to-run"
+version = "0.95.0"
+notes = "2026-07-18: salvo-serde-util 0.95.0 (salvo-rs 官方维护) 为 salvo 0.95 传递依赖，dev 示例用途。"
+
 [[audits.salvo_core]]
 criteria = "safe-to-run"
 version = "0.94.0"
 notes = "2026-07-11: salvo_core 0.94.0 (salvo-rs 官方维护) 为 salvo 0.94 核心传递依赖，dev 示例用途。"
 
+[[audits.salvo_core]]
+criteria = "safe-to-run"
+version = "0.95.0"
+notes = "2026-07-18: salvo_core 0.95.0 (salvo-rs 官方维护) 为 salvo 0.95 核心传递依赖，dev 示例用途。"
+
 [[audits.salvo_macros]]
 criteria = "safe-to-run"
 version = "0.94.0"
 notes = "2026-07-11: salvo_macros 0.94.0 (salvo-rs 官方维护) 为 salvo 0.94 过程宏传递依赖，编译期执行。"
+
+[[audits.salvo_macros]]
+criteria = "safe-to-run"
+version = "0.95.0"
+notes = "2026-07-18: salvo_macros 0.95.0 (salvo-rs 官方维护) 为 salvo 0.95 过程宏传递依赖，编译期执行。"
 
 [[audits.zerocopy]]
 criteria = "safe-to-run"

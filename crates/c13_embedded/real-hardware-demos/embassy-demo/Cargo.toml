@@ -26,7 +26,7 @@ cortex-m-rt = "0.7.5"
 critical-section = "1.2.0"
 
 # 可移植原子操作（RP2040 是单核，但某些库依赖）
-portable-atomic = { version = "1.13.1", features = ["critical-section"] }
+portable-atomic = { version = "1.14.0", features = ["critical-section"] }
 
 [profile.release]
 debug = 2

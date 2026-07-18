@@ -4,7 +4,7 @@
   "indexed": 1454,
   "threshold": 0.5,
   "min_shared": 5,
-  "candidates": 566900,
+  "candidates": 566904,
   "hits": 651,
   "overlaps": [
     {
@@ -58,19 +58,6 @@
       "t2": "实践项目 13: 简易数据库引擎 {#实践项目-13-简易数据库引擎}",
       "lines1": 108,
       "lines2": 108
-    },
-    {
-      "sim": 0.818,
-      "kw_sim": 0.818,
-      "title_sim": 0.5,
-      "shared": 6,
-      "same_dir": true,
-      "f1": "crates/c05_threads/docs/tier_01_foundations/02_navigation.md",
-      "f2": "crates/c05_threads/docs/tier_01_foundations/03_glossary.md",
-      "t1": "C05 Threads 主索引导航",
-      "t2": "C05 Threads 术语表",
-      "lines1": 22,
-      "lines2": 22
     },
     {
       "sim": 0.818,
@@ -199,6 +186,19 @@
       "f2": "crates/c04_generic/docs/tier_01_foundations/04_faq.md",
       "t1": "C04 泛型编程 - 术语表",
       "t2": "C04 泛型编程 - 常见问题",
+      "lines1": 22,
+      "lines2": 22
+    },
+    {
+      "sim": 0.818,
+      "kw_sim": 0.818,
+      "title_sim": 0.5,
+      "shared": 6,
+      "same_dir": true,
+      "f1": "crates/c05_threads/docs/tier_01_foundations/02_navigation.md",
+      "f2": "crates/c05_threads/docs/tier_01_foundations/03_glossary.md",
+      "t1": "C05 Threads 主索引导航",
+      "t2": "C05 Threads 术语表",
       "lines1": 22,
       "lines2": 22
     },
@@ -6289,19 +6289,6 @@
     {
       "sim": 0.545,
       "kw_sim": 0.545,
-      "title_sim": 0.25,
-      "shared": 78,
-      "same_dir": true,
-      "f1": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/01_creational/01_abstract_factory.md",
-      "f2": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/05_mediator.md",
-      "t1": "Abstract Factory 形式化分析 {#abstract-factor",
-      "t2": "Mediator 形式化分析 {#mediator-形式化分析}",
-      "lines1": 853,
-      "lines2": 812
-    },
-    {
-      "sim": 0.545,
-      "kw_sim": 0.545,
       "title_sim": 0.333,
       "shared": 78,
       "same_dir": true,
@@ -6310,6 +6297,19 @@
       "t1": "Facade 形式化分析 {#facade-形式化分析}",
       "t2": "Mediator 形式化分析 {#mediator-形式化分析}",
       "lines1": 901,
+      "lines2": 812
+    },
+    {
+      "sim": 0.545,
+      "kw_sim": 0.545,
+      "title_sim": 0.25,
+      "shared": 78,
+      "same_dir": true,
+      "f1": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/01_creational/01_abstract_factory.md",
+      "f2": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/05_mediator.md",
+      "t1": "Abstract Factory 形式化分析 {#abstract-factor",
+      "t2": "Mediator 形式化分析 {#mediator-形式化分析}",
+      "lines1": 853,
       "lines2": 812
     },
     {

@@ -13,7 +13,10 @@
 > **双维定位**: C×Ana
 > **前置概念**: [Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Variable Model](03_variable_model.md) · [学习指南](../../00_meta/04_navigation/07_learning_guide.md)
 > **后置概念**: [Move Semantics](../01_ownership_borrow_lifetime/05_move_semantics.md) · [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md)
-> **主要来源**: · [Rust Reference — Pointer Types](https://doc.rust-lang.org/reference/types/pointer.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **主要来源**:
+> · [Rust Reference — Pointer Types](https://doc.rust-lang.org/reference/types/pointer.html) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 >
 > [Pierce — TAPL, §13](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
 > [Cardelli & Wegner 1985 — On Understanding Types, Data Abstraction, and Polymorphism](https://doi.org/10.1145/6041.6042) ·
@@ -27,7 +30,10 @@
 > **Bloom 层级**: L1-L4
 
 ---
-> **权威来源**: [Rust Reference — Place Expressions and Value Expressions](https://doc.rust-lang.org/reference/expressions.html#place-expressions-and-value-expressions) · [TRPL — What is Ownership?](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · [TRPL — References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
+> **权威来源**:
+> [Rust Reference — Place Expressions and Value Expressions](https://doc.rust-lang.org/reference/expressions.html#place-expressions-and-value-expressions) ·
+> [TRPL — What is Ownership?](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) ·
+> [TRPL — References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
 >
 > **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL）
 

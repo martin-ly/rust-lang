@@ -511,16 +511,16 @@ suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.aws-lc-rs]]
-version = "1.17.1"
+version = "1.17.3"
 criteria = "safe-to-run"
 suggest = false
-notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+notes = "2026-07-18 cargo update 补丁升级 (1.17.1 -> 1.17.3)；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.aws-lc-sys]]
-version = "0.42.0"
+version = "0.43.0"
 criteria = "safe-to-run"
 suggest = false
-notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+notes = "2026-07-18 cargo update 补丁升级 (0.42.0 -> 0.43.0)；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.axum]]
 version = "0.8.9"
@@ -2394,6 +2394,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-15 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
 
+[[exemptions.ntex-bytes]]
+version = "1.9.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-17 cargo update 补丁升级 (1.8.0 -> 1.9.0)；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.ntex-codec]]
 version = "1.2.1"
 criteria = "safe-to-run"
@@ -2454,6 +2460,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.ntex-net]]
+version = "3.13.1"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-17 cargo update 补丁升级 (3.13.0 -> 3.13.1)；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.ntex-polling]]
 version = "3.10.0"
 criteria = "safe-to-run"
@@ -2495,6 +2507,12 @@ version = "3.7.0"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.ntex-tls]]
+version = "3.8.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-17 cargo update 补丁升级 (3.7.0 -> 3.8.0)；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.ntex-util]]
 version = "3.6.1"
@@ -3051,6 +3069,12 @@ version = "1.13.1"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.portable-atomic]]
+version = "1.14.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-17 cargo update 补丁升级 (1.13.1 -> 1.14.0)；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.portable-atomic-util]]
 version = "0.2.7"
@@ -4062,11 +4086,23 @@ criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-17 cargo update 补丁升级 (1.52.3 -> 1.52.4)；本 crate 尚未经过正式代码审计。"
 
+[[exemptions.tokio]]
+version = "1.53.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-17 cargo update 补丁升级 (1.52.4 -> 1.53.0)；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.tokio-macros]]
 version = "2.7.0"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.tokio-macros]]
+version = "2.7.1"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-17 cargo update 补丁升级 (2.7.0 -> 2.7.1)；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.tokio-native-tls]]
 version = "0.3.1"
@@ -4997,10 +5033,10 @@ suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.zbus]]
-version = "5.17.0"
+version = "5.18.0"
 criteria = "safe-to-run"
 suggest = false
-notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+notes = "2026-07-18 cargo update 补丁升级 (5.17.0 -> 5.18.0)；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.zbus-lockstep]]
 version = "0.5.2"
@@ -5015,22 +5051,22 @@ suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.zbus_macros]]
-version = "5.17.0"
+version = "5.18.0"
 criteria = "safe-to-run"
 suggest = false
-notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+notes = "2026-07-18 cargo update 补丁升级 (5.17.0 -> 5.18.0)；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.zbus_names]]
-version = "4.3.3"
+version = "4.3.4"
 criteria = "safe-to-run"
 suggest = false
-notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+notes = "2026-07-18 cargo update 补丁升级 (4.3.3 -> 4.3.4)；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.zbus_xml]]
-version = "5.2.0"
+version = "5.2.1"
 criteria = "safe-to-run"
 suggest = false
-notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+notes = "2026-07-18 cargo update 补丁升级 (5.2.0 -> 5.2.1)；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.zerofrom]]
 version = "0.1.8"
@@ -5117,16 +5153,16 @@ suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.zvariant]]
-version = "5.13.0"
+version = "5.13.1"
 criteria = "safe-to-run"
 suggest = false
-notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+notes = "2026-07-18 cargo update 补丁升级 (5.13.0 -> 5.13.1)；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.zvariant_derive]]
-version = "5.13.0"
+version = "5.13.1"
 criteria = "safe-to-run"
 suggest = false
-notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+notes = "2026-07-18 cargo update 补丁升级 (5.13.0 -> 5.13.1)；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
 [[exemptions.zvariant_utils]]
 version = "3.5.0"
