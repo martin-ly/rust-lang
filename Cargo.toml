@@ -391,7 +391,9 @@ tracing-subscriber = { version = "0.3.23", features = ["env-filter", "json"] }
 # 2026-06-22: 0.4.32 -> 0.4.33 (cargo update)
 log = "0.4.33"
 # env_logger: log 的简单初始化封装（仅 c06_async 示例使用）
-# 注意: 禁用 default-features 中的 humantime，避免引入 jiff -> defmt 传递依赖
+# 注意: env_logger 0.11.x 默认特性包含 humantime -> jiff -> defmt；
+#       禁用 default-features 可阻止 env_logger 引入该路径。
+#       jiff 当前仍由 kube / k8s-openapi 传递依赖引入，与 env_logger 无关。
 env_logger = { version = "0.11.11", default-features = false, features = ["auto-color", "regex"] }
 # prometheus: Prometheus指标收集库
 prometheus = "0.14.0"
