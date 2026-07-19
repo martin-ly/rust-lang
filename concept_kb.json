@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 527,
-    "generated_at": "2026-07-18T10:30:29.263315+00:00"
+    "generated_at": "2026-07-19T01:14:12.213116+00:00"
   },
   "files": [
     {
@@ -8707,7 +8707,7 @@
       "line_count": 447,
       "theorem_chains": [
         {
-          "text": "图谱读法：所有权 ⟹ 借用规则 ⟹ 生命周期检查构成一条「机制 ⟹ 规则 ⟹ 验证」链；任何借用错误都可沿链定位到具体环节。",
+          "text": "图谱读法：所有权 ⟹ 借用规则 ⟹ 生命周期（Lifetimes）检查构成一条「机制 ⟹ 规则 ⟹ 验证」链；任何借用错误都可沿链定位到具体环节。",
           "type": "inline"
         },
         {
@@ -8776,11 +8776,11 @@
           "type": "table_row"
         },
         {
-          "text": "| 只需读取、无需取得所有权 | 不可变借用（Mutable Borrow） `&T`，可多个共存 | 借用规则（详见 [02_borrowing.md](02_borrowing.md)） | 借用存活期间 move 所有者 ⟹ 编译错误（§5.2 B1） |",
+          "text": "| 只需读取、无需取得所有权 | 不可变借用（Immutable Borrow） `&T`，可多个共存 | 借用规则（详见 [02_borrowing.md](02_borrowing.md)） | 借用存活期间 move 所有者 ⟹ 编译错误（§5.2 B1） |",
           "type": "table_row"
         },
         {
-          "text": "| 需要修改但不转移所有权 | 可变借用 `&mut T`，独占访问 | 别名-可变分离（Aliasing XOR Mutation） | 与任何其他引用共存 ⟹ E0499/E0502（§5.2） |",
+          "text": "| 需要修改但不转移所有权 | 可变借用（Mutable Borrow） `&mut T`，独占访问 | 别名-可变分离（Aliasing XOR Mutation） | 与任何其他引用共存 ⟹ E0499/E0502（§5.2） |",
           "type": "table_row"
         },
         {
@@ -14292,7 +14292,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **定理 2** [Tier 1]: 函数参数默认按值传递 ⟹ 调用者需显式使用 `&T` / `&mut T` 表达借用（Borrowing），否则发生所有权移动。",
+          "text": "> **定理 2** [Tier 1]: 函数参数默认按值传递 ⟹ 调用者需显式使用 `&T` / `&mut T` 表达借用（Borrowing），否则发生所有权（Ownership）移动。",
           "type": "paragraph"
         },
         {
@@ -14421,7 +14421,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **定理 2** [Tier 1]: `pub use path::Item;` 重导出内部路径 ⟹ 外部用户可通过当前模块访问该路径，构成 API 表面。",
+          "text": "> **定理 2** [Tier 1]: `pub use path::Item;` 重导出内部路径 ⟹ 外部用户可通过当前模块（Module）访问该路径，构成 API 表面。",
           "type": "paragraph"
         },
         {
@@ -14683,7 +14683,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> **定理 3** [Tier 1]: `Result<T, E>` 显式区分“成功”与“失败” ⟹ 错误处理成为类型系统（Type System）的一部分，不可静默忽略。",
+          "text": "> **定理 3** [Tier 1]: `Result<T, E>` 显式区分“成功”与“失败” ⟹ 错误处理（Error Handling）成为类型系统（Type System）的一部分，不可静默忽略。",
           "type": "paragraph"
         },
         {
@@ -14832,7 +14832,7 @@
           "type": "paragraph"
         },
         {
-          "text": "**C 正确**。按本页「三、方法 Receiver」表格：`self` ⟹ 获取所有权；`&self` ⟹ 不可变借用；`&mut self` ⟹ 可变借用。§6.2 反例正是 `s.into_bytes()` 后再用 `s` 报 \"borrow of moved value\"。",
+          "text": "**C 正确**。按本页「三、方法 Receiver」表格：`self` ⟹ 获取所有权；`&self` ⟹ 不可变借用（Immutable Borrow）；`&mut self` ⟹ 可变借用。§6.2 反例正是 `s.into_bytes()` 后再用 `s` 报 \"borrow of moved value\"。",
           "type": "paragraph"
         }
       ],
@@ -18981,7 +18981,7 @@
       "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\00_traits\\07_generic_associated_types.md",
       "layer": "L2",
       "title": "泛型关联类型（Generic Associated Types, GATs）",
-      "positioning": "深入分析 Rust 1.65 稳定化的 **泛型关联类型（GATs）**——从 `LendingIterator` 动机、语法规则、与 HRTB 的表达力边界，到稳定化历程与 1.97 的已知限制，给出可操作的选型判定表。",
+      "positioning": "深入分析 Rust 1.65 稳定化的 **泛型（Generics）关联类型（GATs）**——从 `LendingIterator` 动机、语法规则、与 HRTB 的表达力边界，到稳定化历程与 1.97 的已知限制，给出可操作的选型判定表。",
       "line_count": 676,
       "theorem_chains": [],
       "anti_propositions": [],
@@ -19357,7 +19357,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.2 定理：单态化 ⟹ 零成本抽象 ⟹ 语义保持](#42-定理单态化--零成本抽象--语义保持)",
+          "text": "- [4.2 定理：单态化（Monomorphization） ⟹ 零成本抽象（Zero-Cost Abstraction） ⟹ 语义保持](#42-定理单态化--零成本抽象--语义保持)",
           "type": "paragraph"
         },
         {
@@ -20599,15 +20599,15 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.1 引理：Box ⟹ 堆分配 + 唯一所有权](#41-引理box--堆分配--唯一所有权)",
+          "text": "- [4.1 引理：Box ⟹ 堆分配 + 唯一所有权（Ownership）](#41-引理box--堆分配--唯一所有权)",
           "type": "paragraph"
         },
         {
-          "text": "- [4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用计数）](#42-定理rcarc--共享所有权安全引用计数)",
+          "text": "- [4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用（Reference）计数）](#42-定理rcarc--共享所有权安全引用计数)",
           "type": "paragraph"
         },
         {
-          "text": "- [4.3 推论：RefCell ⟹ 内部可变性运行时检查](#43-推论refcell--内部可变性运行时检查)",
+          "text": "- [4.3 推论：RefCell ⟹ 内部可变性运行时（Runtime）检查](#43-推论refcell--内部可变性运行时检查)",
           "type": "paragraph"
         },
         {
@@ -24333,7 +24333,7 @@
       "line_count": 893,
       "theorem_chains": [
         {
-          "text": "- **反命题 1：「类型状态机（typestate）DSL 总是值得」** —— 有边界。typestate 把非法状态转为编译错误的代价是类型数量爆炸与错误信息晦涩——状态数 × 转换数超过 ~20 时，泛型签名的可读性崩溃。判定准则：状态机是 API 的核心契约（如协议握手、构建器必填字段）⟹ typestate 值得；内部实现细节 ⟹ 运行期 `enum` + 断言更简单。",
+          "text": "- **反命题 1：「类型状态机（typestate）DSL 总是值得」** —— 有边界。typestate 把非法状态转为编译错误的代价是类型数量爆炸与错误信息晦涩——状态数 × 转换数超过 ~20 时，泛型（Generics）签名的可读性崩溃。判定准则：状态机是 API 的核心契约（如协议握手、构建器必填字段）⟹ typestate 值得；内部实现细节 ⟹ 运行期 `enum` + 断言更简单。",
           "type": "paragraph"
         },
         {
@@ -25581,7 +25581,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- `T: Sync` 不要求 `T` 自身可变——`&T` 只允许读，**除非** `T` 有内部可变性（Interior Mutability）。因此 `Sync` 的实质是\"**内部可变性的线程安全性审查**\"：`Mutex<T>` 用互斥锁使内部可变安全 ⟹ `Sync`；`RefCell<T>` 的运行时（Runtime）借用检查不是线程安全的 ⟹ `!Sync`。",
+          "text": "- `T: Sync` 不要求 `T` 自身可变——`&T` 只允许读，**除非** `T` 有内部可变性（Interior Mutability）。因此 `Sync` 的实质是\"**内部可变性的线程安全性审查**\"：`Mutex<T>` 用互斥锁使内部可变安全 ⟹ `Sync`；`RefCell<T>` 的运行时（Runtime）借用（Borrowing）检查不是线程安全的 ⟹ `!Sync`。",
           "type": "paragraph"
         },
         {
@@ -26197,7 +26197,7 @@
       "matrix_rows": 9,
       "pre_post": {
         "pre": [
-          "> [Send 与 Sync：Auto Trait 的并发安全契约](02_send_sync_auto_traits.md) ·",
+          "> [Send 与 Sync：Auto Trait 的并发安全（Concurrency Safety）契约](02_send_sync_auto_traits.md) ·",
           "> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·"
         ],
         "post": [
@@ -27149,7 +27149,7 @@
       "line_count": 437,
       "theorem_chains": [
         {
-          "text": "**解析**：Fischer、Lynch、Paterson（JACM 1985）证明：纯异步 + 单崩溃故障 ⟹ 无确定性算法同时保证安全性与终止性。工程上绕过 FLP 的经典策略：**故障检测器**（Failure Detectors）、**随机化**（Ben-Or / Rabin）、**部分同步**（Partial Synchrony，PBFT / Tendermint）、**领导者选举超时**（Raft 用随机超时打破对称性）。FLP 否定的不是「共识不可行」，而是「纯异步 + 确定性 + 必终止」三者不可兼得。[→ 分布式共识理论 §2.1 / §2.3](../../04_formal/07_concurrency_semantics/06_distributed_consensus_theory.md) · [→ 分布式共识生态 §1.2](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md)",
+          "text": "**解析**：Fischer、Lynch、Paterson（JACM 1985）证明：纯异步（Async） + 单崩溃故障 ⟹ 无确定性算法同时保证安全性与终止性。工程上绕过 FLP 的经典策略：**故障检测器**（Failure Detectors）、**随机化**（Ben-Or / Rabin）、**部分同步**（Partial Synchrony，PBFT / Tendermint）、**领导者选举超时**（Raft 用随机超时打破对称性）。FLP 否定的不是「共识不可行」，而是「纯异步 + 确定性 + 必终止」三者不可兼得。[→ 分布式共识理论 §2.1 / §2.3](../../04_formal/07_concurrency_semantics/06_distributed_consensus_theory.md) · [→ 分布式共识生态 §1.2](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md)",
           "type": "paragraph"
         }
       ],
@@ -28690,11 +28690,11 @@
           "type": "table_row"
         },
         {
-          "text": "- **`dyn` 不兼容**：脱糖产物返回「关联的匿名 Future 类型」，不同 impl 返回不同类型 ⟹ trait 对象不安全。当前方案三选一：① `#[async_trait]` 宏（`Box<dyn Future>` 包装，一次分配/调用）；② nightly `dyn*`/`async Fn` 实验；③ 手动返回 `Pin<Box<dyn Future<Output = T> + Send + '_>>`；",
+          "text": "- **`dyn` 不兼容**：脱糖产物返回「关联的匿名 Future 类型」，不同 impl 返回不同类型 ⟹ trait 对象不安全。当前方案三选一：① `#[async_trait]` 宏（Macro）（`Box<dyn Future>` 包装，一次分配/调用）；② nightly `dyn*`/`async Fn` 实验；③ 手动返回 `Pin<Box<dyn Future<Output = T> + Send + '_>>`；",
           "type": "paragraph"
         },
         {
-          "text": "- **边界一侧（静态分发）**: `T: Trait` 泛型调用 ⟹ 每个 impl 有独立 Future 类型，单态化（Monomorphization），零成本。",
+          "text": "- **边界一侧（静态分发）**: `T: Trait` 泛型（Generics）调用 ⟹ 每个 impl 有独立 Future 类型，单态化（Monomorphization），零成本。",
           "type": "paragraph"
         },
         {
@@ -29297,7 +29297,7 @@
       "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\01_async\\09_stream_algebra_and_backpressure.md",
       "layer": "L3",
       "title": "Stream 代数与背压：拉取式序列的形式刻画",
-      "positioning": "把 `Stream` 从「异步版的 Iterator」这一直觉，上升为可推理的代数对象：对偶签名、组合子定律、以及背压作为「速率约束的反向传播」的形式模型，全部落到可编译验证的示例-反例对上。",
+      "positioning": "把 `Stream` 从「异步（Async）版的 Iterator」这一直觉，上升为可推理的代数对象：对偶签名、组合子定律、以及背压作为「速率约束的反向传播」的形式模型，全部落到可编译验证的示例-反例对上。",
       "line_count": 504,
       "theorem_chains": [
         {
@@ -29696,7 +29696,7 @@
           "type": "inline"
         },
         {
-          "text": "- [Tokio 运行时内部机制](../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md) — 工业级执行器中 wake 路径（task 句柄 ⟹ 调度队列）的完整实现",
+          "text": "- [Tokio 运行时（Runtime）内部机制](../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md) — 工业级执行器中 wake 路径（task 句柄 ⟹ 调度队列）的完整实现",
           "type": "paragraph"
         }
       ],
@@ -29837,7 +29837,7 @@
           ],
           "lines": 17,
           "should_fail": false,
-          "code_preview": "//! trait-variant 0.1.2 + tokio 1.52.3：rustc 1.97.0 实测运行通过（输出 ok） #[trait_varian..."
+          "code_preview": "//! trait-variant 0.1.2 + tokio 1.53.0：rustc 1.97.0 实测运行通过（输出 ok） #[trait_varian..."
         }
       ],
       "sources": [],
@@ -31532,7 +31532,7 @@
       "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\02_unsafe\\08_async_in_unsafe_contexts.md",
       "layer": "L3",
       "title": "Async 中的 Unsafe：异步上下文的安全契约",
-      "positioning": "系统分析 async/await 状态机与 unsafe 操作的交叉语义：await 点两侧什么保持有效、Pin 如何约束自引用状态机、Waker 如何跨越 safe/unsafe 边界、手写 poll 时哪些不变量必须由程序员保证。",
+      "positioning": "系统分析 async/await 状态机与 unsafe 操作的交叉语义：await 点两侧什么保持有效、Pin 如何约束自引用（Reference）状态机、Waker 如何跨越 safe/unsafe 边界、手写 poll 时哪些不变量必须由程序员保证。",
       "line_count": 274,
       "theorem_chains": [],
       "anti_propositions": [
@@ -32396,7 +32396,7 @@
           "type": "table_row"
         },
         {
-          "text": "| 编译期常量折叠 ⟹ 减少运行时开销 | 在宏展开阶段完成可静态求值的计算 | 生成的运行时代码更高效 |",
+          "text": "| 编译期常量折叠 ⟹ 减少运行时（Runtime）开销 | 在宏展开阶段完成可静态求值的计算 | 生成的运行时代码更高效 |",
           "type": "table_row"
         },
         {
@@ -36109,7 +36109,7 @@
       "line_count": 315,
       "theorem_chains": [
         {
-          "text": "3. **机制推理**: 通过 ⟹ 定理链将运行时属性、分配行为和二进制输出串联起来。",
+          "text": "3. **机制推理**: 通过 ⟹ 定理链将运行时（Runtime）属性、分配行为和二进制输出串联起来。",
           "type": "paragraph"
         },
         {
@@ -36971,7 +36971,7 @@
           "type": "paragraph"
         },
         {
-          "text": "| 条件编译隔离 ⟹ 可移植性 | 平台代码限制在最小模块 | 上层 API 保持统一 |",
+          "text": "| 条件编译隔离 ⟹ 可移植性 | 平台代码限制在最小模块（Module） | 上层 API 保持统一 |",
           "type": "table_row"
         },
         {
@@ -50697,7 +50697,7 @@
           ],
           "lines": 50,
           "should_fail": false,
-          "code_preview": "/ ✅ Cargo.toml // [dependencies] // axum = \"0.7\" // sqlx = { version = \"0.8\", fe..."
+          "code_preview": "/ ✅ Cargo.toml // [dependencies] // axum = \"0.8\" // sqlx = { version = \"0.8\", fe..."
         },
         {
           "flags": [
@@ -55500,7 +55500,7 @@
           "flags": [],
           "lines": 16,
           "should_fail": false,
-          "code_preview": "//! rustc 1.97.0 实测（经 workspace tokio 1.52.3 rmeta typecheck） use tokio::runtime..."
+          "code_preview": "//! rustc 1.97.0 实测（经 workspace tokio 1.53.0 rmeta typecheck） use tokio::runtime..."
         },
         {
           "flags": [],
@@ -55532,7 +55532,7 @@
           ],
           "lines": 24,
           "should_fail": false,
-          "code_preview": "//! rustc 1.97.0 + tokio 1.52.3（features = [\"full\", \"test-util\"]）实测运行通过 use std:..."
+          "code_preview": "//! rustc 1.97.0 + tokio 1.53.0（features = [\"full\", \"test-util\"]）实测运行通过 use std:..."
         },
         {
           "flags": [

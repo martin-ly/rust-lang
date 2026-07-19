@@ -12,7 +12,7 @@
 # {{标题}} {#标题}
 
 > **EN**: Versioned Doc Template
-> **Summary**: {{标题}} Versioned Doc Template. 
+> **Summary**: {{标题}} Versioned Doc Template.
 > **Rust 版本**: {{ rust_version }}+ ({{ stability }})
 > **Edition**: {{ edition }}
 > **最后验证**: {{ validation_date }}

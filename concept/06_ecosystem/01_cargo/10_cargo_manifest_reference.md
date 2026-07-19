@@ -165,7 +165,7 @@ edition = "2024"
 version = "0.1.0"
 
 [workspace.dependencies]
-serde = "1.0.228"
+serde = "1.0.229"
 ```
 
 成员包继承：

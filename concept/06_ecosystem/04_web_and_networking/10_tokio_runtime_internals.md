@@ -69,7 +69,7 @@ flowchart TD
 ## 二、Runtime 架构：两种 flavor
 
 ```rust
-//! rustc 1.97.0 实测（经 workspace tokio 1.52.3 rmeta typecheck）
+//! rustc 1.97.0 实测（经 workspace tokio 1.53.0 rmeta typecheck）
 use tokio::runtime::Builder;
 
 fn build_both() {
@@ -250,7 +250,7 @@ async fn main() {
 **确定性测试的时间控制**（`test-util` feature，注意：**不在 `full` 中**，需显式启用——实测勘误：`full` 下 `tokio::time::advance` 不可见，报 "configured out / gated behind the `test-util` feature"）：
 
 ```rust,ignore
-//! rustc 1.97.0 + tokio 1.52.3（features = ["full", "test-util"]）实测运行通过
+//! rustc 1.97.0 + tokio 1.53.0（features = ["full", "test-util"]）实测运行通过
 use std::time::Duration;
 use tokio::runtime::Builder;
 

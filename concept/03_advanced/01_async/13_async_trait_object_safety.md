@@ -21,7 +21,7 @@
 > **生态版本**: async-trait 0.1.89（workspace 锁定）· RTN 需 nightly（`#![feature(return_type_notation)]`）
 > **来源**: [RFC 3654 — Return Type Notation](https://rust-lang.github.io/rfcs/3654-return-type-notation.html) · [RFC 3185 — static async fn in trait](https://rust-lang.github.io/rfcs/3185-static-async-fn-in-trait.html) · [Niko Matsakis — Dyn async traits 系列](https://smallcultfollowing.com/babysteps/blog/2021/09/30/dyn-async-traits-part-1/) · [async-trait crate docs](https://docs.rs/async-trait/latest/async_trait/) · [Rust Blog — Async fn & RPITIT in traits（1.75）](https://blog.rust-lang.org/2023/12/21/async-fn-rpit-in-traits.html)（以上 2026-07-12 curl 实测 HTTP 200）
 > **国际权威来源（2026-07-13 补录）**: **P1** [Jung et al. — RustBelt（POPL 2018）](https://plv.mpi-sws.org/rustbelt/popl18/)（trait 对象/vtable 动态分发与对象安全规则的语义基础；curl 200 实测 2026-07-13）
-> **对应 Crate**: [`c06_async`](../../../crates/c06_async)（workspace `async-trait = "0.1.89"`）
+> **对应 Crate**: [`c06_async`](../../../crates/c06_async)（workspace `async-trait = "0.1.91"`）
 > **对应练习**: [`exercises/src/async_programming/`](../../../exercises/src/async_programming)
 
 **变更日志**:
@@ -225,7 +225,7 @@ RTN 是 dyn 兼容的**前置积木**：RFC 3654 原文明确「We expect to mak
 RTN 的痛点是 nightly-only；`trait-variant` crate 用过程宏（Procedural Macro）在 **stable** 上达到等效效果：从基础 trait 生成一个「返回的 Future 满足额外 bound」的变体 trait——**解决 spawn/Send 约束，不解决 dyn 兼容**：
 
 ```rust,ignore
-//! trait-variant 0.1.2 + tokio 1.52.3：rustc 1.97.0 实测运行通过（输出 ok）
+//! trait-variant 0.1.2 + tokio 1.53.0：rustc 1.97.0 实测运行通过（输出 ok）
 #[trait_variant::make(IntFactory: Send)]
 trait LocalIntFactory {
     async fn make(&self) -> i32;

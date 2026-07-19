@@ -318,6 +318,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.anyhow]]
+version = "1.0.104"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-19 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.arboard]]
 version = "3.6.1"
 criteria = "safe-to-run"
