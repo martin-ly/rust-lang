@@ -1,0 +1,495 @@
+# 过程宏理论
+
+> **创建日期**: 2025-11-11
+> **最后更新**: 2025-11-11
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📊 目录
+
+- [过程宏理论](#过程宏理论)
+  - [📊 目录](#-目录)
+  - [1. 形式化定义](#1-形式化定义)
+    - [1.1 过程宏的形式化定义](#11-过程宏的形式化定义)
+    - [1.2 TokenStream的形式化定义](#12-tokenstream的形式化定义)
+    - [1.3 过程宏的类型](#13-过程宏的类型)
+      - [类型1：函数式宏](#类型1函数式宏)
+      - [类型2：派生宏](#类型2派生宏)
+      - [类型3：属性宏](#类型3属性宏)
+  - [2. 核心定理与证明](#2-核心定理与证明)
+    - [2.1 定理1：TokenStream转换的正确性](#21-定理1tokenstream转换的正确性)
+      - [步骤1：正确实现的定义](#步骤1正确实现的定义)
+      - [步骤2：转换过程](#步骤2转换过程)
+      - [步骤3：正确性保证](#步骤3正确性保证)
+    - [2.2 定理2：类型安全保证](#22-定理2类型安全保证)
+      - [步骤1：类型检查的定义](#步骤1类型检查的定义)
+      - [步骤2：过程宏的类型处理](#步骤2过程宏的类型处理)
+      - [步骤3：类型安全保证](#步骤3类型安全保证)
+    - [2.3 定理3：展开终止性](#23-定理3展开终止性)
+      - [步骤1：展开过程的定义](#步骤1展开过程的定义)
+      - [步骤2：终止性保证](#步骤2终止性保证)
+  - [3. 过程宏类型](#3-过程宏类型)
+    - [3.1 函数式宏](#31-函数式宏)
+    - [3.2 派生宏](#32-派生宏)
+    - [3.3 属性宏](#33-属性宏)
+  - [4. TokenStream处理](#4-tokenstream处理)
+    - [4.1 TokenStream解析](#41-tokenstream解析)
+    - [4.2 AST操作](#42-ast操作)
+    - [4.3 代码生成](#43-代码生成)
+  - [5. 工程案例](#5-工程案例)
+    - [5.1 自定义派生宏](#51-自定义派生宏)
+    - [5.2 属性宏实现](#52-属性宏实现)
+    - [5.3 函数式宏](#53-函数式宏)
+  - [6. 批判性分析与未来展望](#6-批判性分析与未来展望)
+    - [6.1 优势](#61-优势)
+    - [6.2 挑战](#62-挑战)
+    - [6.3 未来展望](#63-未来展望)
+
+---
+
+## 1. 形式化定义
+
+### 1.1 过程宏的形式化定义
+
+**定义 1.1（过程宏）**：过程宏是基于TokenStream的程序化代码生成机制。
+
+形式化表示为：
+$$
+\text{ProceduralMacro} = (f: \text{TokenStream} \rightarrow \text{TokenStream}, \text{type}, \text{metadata})
+$$
+
+其中：
+
+- $f$ 是转换函数
+- $\text{type}$ 是宏类型（函数式、派生、属性）
+- $\text{metadata}$ 是元数据
+
+**定义 1.2（过程宏展开）**：过程宏展开是将输入TokenStream转换为输出TokenStream的过程。
+
+形式化表示为：
+$$
+\text{expand\_procedural}(m, \text{input}) = m(\text{input})
+$$
+
+### 1.2 TokenStream的形式化定义
+
+**定义 1.3（TokenStream）**：TokenStream是令牌序列，表示源代码的语法结构。
+
+形式化表示为：
+$$
+\text{TokenStream} = \text{Token}^*
+$$
+
+其中 $\text{Token}$ 是令牌类型。
+
+**令牌类型**：
+
+1. **标识符**：`ident`
+2. **字面量**：`literal`
+3. **关键字**：`keyword`
+4. **标点符号**：`punct`
+5. **分组**：`group`
+
+### 1.3 过程宏的类型
+
+#### 类型1：函数式宏
+
+形式化表示为：
+$$
+\text{FunctionMacro} = \lambda \text{input}: \text{TokenStream}. \text{process}(\text{input})
+$$
+
+#### 类型2：派生宏
+
+形式化表示为：
+$$
+\text{DeriveMacro} = \lambda \text{input}: \text{TokenStream}. \text{generate\_impl}(\text{parse}(\text{input}))
+$$
+
+#### 类型3：属性宏
+
+形式化表示为：
+$$
+\text{AttributeMacro} = \lambda (\text{attr}, \text{item}): (\text{TokenStream}, \text{TokenStream}). \text{modify}(\text{attr}, \text{item})
+$$
+
+---
+
+## 2. 核心定理与证明
+
+### 2.1 定理1：TokenStream转换的正确性
+
+**定理 2.1（TokenStream转换的正确性）**：如果过程宏实现正确，则TokenStream转换是正确的。
+
+形式化表示为：
+$$
+\text{correct\_impl}(m) \implies \text{correct}(\text{expand\_procedural}(m, \text{input}))
+$$
+
+**详细证明**：
+
+#### 步骤1：正确实现的定义
+
+正确实现要求：
+
+- 输入TokenStream被正确解析
+- 生成的代码语法正确
+- 生成的代码类型正确
+
+#### 步骤2：转换过程
+
+根据转换过程：
+
+- 输入TokenStream被解析为AST
+- AST被程序化处理
+- 处理后的AST被转换为TokenStream
+
+#### 步骤3：正确性保证
+
+由于正确实现：
+
+- 解析过程正确
+- 处理过程正确
+- 生成过程正确
+- 因此，转换是正确的
+
+**结论**：如果过程宏实现正确，则TokenStream转换是正确的。$\square$
+
+### 2.2 定理2：类型安全保证
+
+**定理 2.2（类型安全保证）**：过程宏生成的代码经过类型检查后保证类型安全。
+
+形式化表示为：
+$$
+\text{type\_check}(\text{expand\_procedural}(m, \text{input})) \implies \text{type\_safe}(\text{expand\_procedural}(m, \text{input}))
+$$
+
+**详细证明**：
+
+#### 步骤1：类型检查的定义
+
+类型检查要求：
+
+- 所有表达式有类型
+- 类型约束满足
+- 类型错误被检测
+
+#### 步骤2：过程宏的类型处理
+
+根据过程宏的机制：
+
+- 生成的代码需要类型检查
+- 类型检查确保类型正确
+- 类型错误会被编译器检测
+
+#### 步骤3：类型安全保证
+
+由于类型检查：
+
+- 生成的代码必须类型正确
+- 类型错误会被检测
+- 因此，类型安全得到保证
+
+**结论**：过程宏生成的代码经过类型检查后保证类型安全。$\square$
+
+### 2.3 定理3：展开终止性
+
+**定理 2.3（展开终止性）**：过程宏的展开过程必然终止。
+
+形式化表示为：
+$$
+\forall m, \text{input}: \exists n: \text{expand\_procedural}^n(m, \text{input}) = \text{expand\_procedural}^{n+1}(m, \text{input})
+$$
+
+**详细证明**：
+
+#### 步骤1：展开过程的定义
+
+展开过程要求：
+
+- 过程宏是函数，不是递归宏
+- 展开是一次性的
+- 展开结果不包含宏调用
+
+#### 步骤2：终止性保证
+
+根据过程宏的定义：
+
+- 过程宏是函数，不是递归的
+- 展开是一次性的转换
+- 因此，展开过程必然终止
+
+**结论**：过程宏的展开过程必然终止。$\square$
+
+---
+
+## 3. 过程宏类型
+
+### 3.1 函数式宏
+
+**定义 3.1（函数式宏）**：函数式宏是接受TokenStream并返回TokenStream的函数。
+
+形式化表示为：
+$$
+\text{FunctionMacro} = \text{TokenStream} \rightarrow \text{TokenStream}
+$$
+
+**示例**：
+
+```rust
+use proc_macro::TokenStream;
+
+#[proc_macro]
+pub fn my_macro(input: TokenStream) -> TokenStream {
+    // 处理input，生成代码
+    input
+}
+```
+
+### 3.2 派生宏
+
+**定义 3.2（派生宏）**：派生宏自动为类型生成特质实现。
+
+形式化表示为：
+$$
+\text{DeriveMacro}(T, \text{Trait}) = \text{generate}(\text{impl Trait for T})
+$$
+
+**示例**：
+
+```rust
+use proc_macro::TokenStream;
+use syn::{parse_macro_input, DeriveInput};
+use quote::quote;
+
+#[proc_macro_derive(MyDebug)]
+pub fn my_debug(input: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(input as DeriveInput);
+    let name = &input.ident;
+
+    let expanded = quote! {
+        impl std::fmt::Debug for #name {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(f, "{:?}", self)
+            }
+        }
+    };
+
+    expanded.into()
+}
+```
+
+### 3.3 属性宏
+
+**定义 3.3（属性宏）**：属性宏修改被标注的代码项。
+
+形式化表示为：
+$$
+\text{AttributeMacro}(\text{attr}, \text{item}) = \text{modify}(\text{item}, \text{attr})
+$$
+
+**示例**：
+
+```rust
+use proc_macro::TokenStream;
+
+#[proc_macro_attribute]
+pub fn my_attr(attr: TokenStream, item: TokenStream) -> TokenStream {
+    // 根据attr修改item
+    item
+}
+```
+
+---
+
+## 4. TokenStream处理
+
+### 4.1 TokenStream解析
+
+**解析步骤**：
+
+1. **词法分析**：将TokenStream转换为令牌序列
+2. **语法分析**：将令牌序列解析为AST
+3. **语义分析**：分析AST的语义
+
+**常用库**：
+
+- `syn`：解析TokenStream为AST
+- `quote`：从AST生成TokenStream
+
+### 4.2 AST操作
+
+**AST操作类型**：
+
+1. **遍历**：遍历AST节点
+2. **修改**：修改AST节点
+3. **生成**：生成新的AST节点
+
+**示例**：
+
+```rust
+use syn::{parse_macro_input, DeriveInput, Data, Fields};
+
+fn process_struct(input: DeriveInput) -> proc_macro2::TokenStream {
+    match input.data {
+        Data::Struct(data_struct) => {
+            match data_struct.fields {
+                Fields::Named(fields) => {
+                    // 处理命名字段
+                    quote! { /* 生成的代码 */ }
+                }
+                _ => quote! {}
+            }
+        }
+        _ => quote! {}
+    }
+}
+```
+
+### 4.3 代码生成
+
+**生成步骤**：
+
+1. **构建AST**：构建目标代码的AST
+2. **转换为TokenStream**：将AST转换为TokenStream
+3. **返回结果**：返回生成的TokenStream
+
+**示例**：
+
+```rust
+use quote::quote;
+
+let name = syn::Ident::new("MyStruct", proc_macro2::Span::call_site());
+let expanded = quote! {
+    struct #name {
+        field: i32,
+    }
+};
+```
+
+---
+
+## 5. 工程案例
+
+### 5.1 自定义派生宏
+
+```rust
+use proc_macro::TokenStream;
+use syn::{parse_macro_input, DeriveInput};
+use quote::quote;
+
+#[proc_macro_derive(MyDebug)]
+pub fn my_debug(input: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(input as DeriveInput);
+    let name = &input.ident;
+
+    let expanded = quote! {
+        impl std::fmt::Debug for #name {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(f, "{:?}", self)
+            }
+        }
+    };
+
+    expanded.into()
+}
+
+// 使用
+#[derive(MyDebug)]
+struct MyStruct {
+    field: i32,
+}
+```
+
+**形式化分析**：
+
+- 解析：将输入解析为DeriveInput
+- 生成：生成Debug特质实现
+- 类型安全：生成的代码类型正确
+
+### 5.2 属性宏实现
+
+```rust
+use proc_macro::TokenStream;
+use syn::{parse_macro_input, ItemFn};
+
+#[proc_macro_attribute]
+pub fn log(_attr: TokenStream, item: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(item as ItemFn);
+    let name = &input.sig.ident;
+
+    let expanded = quote! {
+        fn #name() {
+            println!("Calling {}", stringify!(#name));
+            // 原函数体
+        }
+    };
+
+    expanded.into()
+}
+
+// 使用
+#[log]
+fn my_function() {
+    println!("Hello");
+}
+```
+
+**形式化分析**：
+
+- 解析：将输入解析为ItemFn
+- 修改：添加日志代码
+- 生成：生成修改后的函数
+
+### 5.3 函数式宏
+
+```rust
+use proc_macro::TokenStream;
+
+#[proc_macro]
+pub fn my_macro(input: TokenStream) -> TokenStream {
+    // 处理input
+    input
+}
+
+// 使用
+my_macro!(some code here);
+```
+
+**形式化分析**：
+
+- 输入：接受任意TokenStream
+- 处理：程序化处理输入
+- 输出：生成新的TokenStream
+
+---
+
+## 6. 批判性分析与未来展望
+
+### 6.1 优势
+
+1. **灵活性**：过程宏提供强大的代码生成能力
+2. **类型安全**：生成的代码经过类型检查
+3. **可组合性**：过程宏可以组合使用
+
+### 6.2 挑战
+
+1. **调试困难**：过程宏的调试仍然困难
+2. **错误信息**：错误信息不够友好
+3. **性能开销**：复杂的过程宏可能影响编译时间
+
+### 6.3 未来展望
+
+1. **更好的工具**：开发更好的过程宏调试工具
+2. **改进的错误信息**：提供更友好的错误信息
+3. **性能优化**：优化过程宏的性能
+4. **IDE集成**：改进IDE对过程宏的支持
+
+---
+
+**创建日期**: 2025-11-11
+**最后更新**: 2025-11-11
+**维护者**: Rust语言形式化理论项目组
+**状态**: 已完善 ✅

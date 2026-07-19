@@ -1,0 +1,148 @@
+# 测试（Testing）索引
+
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📊 目录
+
+- [测试（Testing）索引](#测试testing索引)
+  - [📊 目录](#-目录)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 核心概念](#-核心概念)
+    - [1. 测试策略](#1-测试策略)
+    - [2. 测试工具](#2-测试工具)
+    - [3. 测试数据](#3-测试数据)
+    - [4. 测试环境](#4-测试环境)
+  - [💻 实践与样例](#-实践与样例)
+    - [代码示例位置](#代码示例位置)
+    - [快速开始示例](#快速开始示例)
+  - [🔗 相关索引](#-相关索引)
+  - [📚 内容文档](#-内容文档)
+  - [🧭 导航](#-导航)
+
+## 🎯 目的
+
+本模块介绍测试在 Rust 项目中的实现与应用，提供测试策略、测试工具、测试最佳实践。所有内容均基于 Rust 1.91.0 和当前最佳实践。
+
+### 核心价值
+
+- **测试**: 专注于 Rust 测试的实现与应用
+- **最佳实践**: 基于 Rust 社区最新测试实践
+- **完整覆盖**: 涵盖测试策略、测试工具、测试数据、测试环境等核心主题
+- **易于理解**: 提供详细的测试说明和代码示例
+
+## 📚 核心概念
+
+### 1. 测试策略
+
+**推荐库**: `cargo-test`, `mockall`, `proptest`, `quickcheck`
+
+- **单元测试**: 函数测试、模块测试、边界测试
+- **集成测试**: 组件测试、系统测试、端到端测试
+- **端到端测试**: 用户场景、业务流程、系统验证
+
+**相关资源**:
+
+- [Cargo Test 文档](https://doc.rust-lang.org/cargo/commands/cargo-test.html)
+- [Mockall 文档](https://docs.rs/mockall/)
+- [Proptest 文档](https://docs.rs/proptest/)
+- [QuickCheck 文档](https://docs.rs/quickcheck/)
+
+### 2. 测试工具
+
+**推荐库**: `cargo-test`, `cargo-tarpaulin`, `cargo-kcov`, `criterion`
+
+- **测试框架**: 内置测试框架、测试宏、测试属性
+- **测试运行器**: 测试执行、测试报告、测试统计
+- **测试报告**: 测试结果、测试覆盖率、测试分析
+
+**相关资源**:
+
+- [Cargo Test 文档](https://doc.rust-lang.org/cargo/commands/cargo-test.html)
+- [Tarpaulin 文档](https://docs.rs/cargo-tarpaulin/)
+- [Kcov 文档](https://github.com/SimonKagstrom/kcov)
+- [Criterion 文档](https://docs.rs/criterion/)
+
+### 3. 测试数据
+
+**推荐库**: `fake`, `rand`, `arbitrary`, `proptest`
+
+- **测试数据生成**: 随机数据、边界数据、异常数据
+- **测试数据管理**: 测试数据存储、测试数据清理、测试数据复用
+- **测试数据验证**: 数据验证、数据一致性、数据完整性
+
+**相关资源**:
+
+- [Fake 文档](https://docs.rs/fake/)
+- [Rand 文档](https://docs.rs/rand/)
+- [Arbitrary 文档](https://docs.rs/arbitrary/)
+- [Proptest 文档](https://docs.rs/proptest/)
+
+### 4. 测试环境
+
+**推荐库**: `tokio-test`, `mockito`, `wiremock`, `testcontainers`
+
+- **测试环境搭建**: 环境配置、环境初始化、环境清理
+- **测试环境隔离**: 环境隔离、数据隔离、资源隔离
+- **测试环境管理**: 环境复用、环境共享、环境监控
+
+**相关资源**:
+
+- [Tokio Test 文档](https://docs.rs/tokio-test/)
+- [Mockito 文档](https://docs.rs/mockito/)
+- [Wiremock 文档](https://docs.rs/wiremock/)
+- [Testcontainers 文档](https://docs.rs/testcontainers/)
+
+## 💻 实践与样例
+
+### 代码示例位置
+
+- **测试实现**: [crates/c54_testing](../../../crates/c54_testing/)
+- **质量保障**: [`../../10_quality_assurance/05_testing/00_index.md`](../../10_quality_assurance/05_testing/00_index.md)
+- **工具链生态**: [`../../06_toolchain_ecosystem/04_testing_frameworks/00_index.md`](../../06_toolchain_ecosystem/04_testing_frameworks/00_index.md)
+
+### 快速开始示例
+
+```rust
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_example() {
+        assert_eq!(2 + 2, 4);
+    }
+}
+```
+
+---
+
+## 🔗 相关索引
+
+- **理论基础（并发模型）**: [`../../01_theoretical_foundations/04_concurrency_models/00_index.md`](../../01_theoretical_foundations/04_concurrency_models/00_index.md)
+- **编程范式（异步）**: [`../../02_programming_paradigms/02_asynchronous/00_index.md`](../../02_programming_paradigms/02_asynchronous/00_index.md)
+- **质量保障**: [`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)
+
+---
+
+## 📚 内容文档
+
+- **[测试基础](./01_testing_fundamentals.md)** - 测试核心概念和实践 ✅
+
+## 🧭 导航
+
+- **返回软件工程**: [`../00_index.md`](../00_index.md)
+- **CI/CD**: [`../06_cicd/00_index.md`](../06_cicd/00_index.md)
+- **性能**: [`../08_performance/00_index.md`](../08_performance/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-15
+**维护者**: 项目维护者
+**状态**: 已完善 ✅

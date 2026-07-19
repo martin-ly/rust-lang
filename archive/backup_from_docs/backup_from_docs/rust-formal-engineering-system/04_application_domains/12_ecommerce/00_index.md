@@ -1,0 +1,144 @@
+# 电商（E-commerce）索引
+
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📊 目录
+
+- [电商（E-commerce）索引](#电商e-commerce索引)
+  - [📊 目录](#-目录)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 核心概念](#-核心概念)
+    - [1. 电商平台（E-commerce Platform）](#1-电商平台e-commerce-platform)
+    - [2. 支付系统（Payment System）](#2-支付系统payment-system)
+    - [3. 推荐系统（Recommendation System）](#3-推荐系统recommendation-system)
+    - [4. 搜索引擎（Search Engine）](#4-搜索引擎search-engine)
+  - [💻 实践与样例](#-实践与样例)
+    - [代码示例位置](#代码示例位置)
+    - [快速开始示例](#快速开始示例)
+  - [🔗 相关索引](#-相关索引)
+  - [🧭 导航](#-导航)
+
+## 🎯 目的
+
+本模块介绍 Rust 在电商领域的应用与实践，提供电商平台、支付系统、推荐系统的技术指导。所有内容均基于 Rust 1.91.0 和当前最佳实践。
+
+### 核心价值
+
+- **电商**: 专注于 Rust 在电商领域的应用
+- **最佳实践**: 基于 Rust 社区最新电商实践
+- **完整覆盖**: 涵盖电商平台、支付系统、推荐系统、搜索引擎等核心主题
+- **易于理解**: 提供详细的电商应用说明和代码示例
+
+## 📚 核心概念
+
+### 1. 电商平台（E-commerce Platform）
+
+**推荐库**: `actix-web`, `sqlx`, `diesel`, `serde`, `redis`
+
+- **商品管理**: 商品管理、商品分类、商品搜索
+- **订单处理**: 订单管理、订单状态、订单跟踪
+- **库存管理**: 库存管理、库存预警、库存同步
+- **用户管理**: 用户认证、用户画像、用户权限
+
+**相关资源**:
+
+- [Actix Web 文档](https://actix.rs/)
+- [SQLx 文档](https://docs.rs/sqlx/)
+- [Diesel 文档](https://diesel.rs/)
+- [Redis 文档](https://docs.rs/redis/)
+
+### 2. 支付系统（Payment System）
+
+**推荐库**: `tokio`, `actix-web`, `serde`, `ring`, `rustls`
+
+- **支付网关**: 支付网关、支付路由、支付处理
+- **支付安全**: 支付加密、支付验证、支付审计
+- **支付处理**: 支付处理、支付回调、支付对账
+- **支付方式**: 信用卡、支付宝、微信支付
+
+**相关资源**:
+
+- [Tokio 文档](https://tokio.rs/)
+- [Actix Web 文档](https://actix.rs/)
+- [ring 文档](https://docs.rs/ring/)
+- [rustls 文档](https://docs.rs/rustls/)
+
+### 3. 推荐系统（Recommendation System）
+
+**推荐库**: `candle`, `linfa`, `ndarray`, `redis`, `tokio`
+
+- **商品推荐**: 商品推荐、个性化推荐、协同过滤
+- **用户推荐**: 用户推荐、相似用户、用户画像
+- **内容推荐**: 内容推荐、热门推荐、实时推荐
+- **推荐算法**: 协同过滤、内容过滤、深度学习
+
+**相关资源**:
+
+- [Candle 文档](https://github.com/huggingface/candle)
+- [Linfa 文档](https://docs.rs/linfa/)
+- [ndarray 文档](https://docs.rs/ndarray/)
+- [Redis 文档](https://docs.rs/redis/)
+
+### 4. 搜索引擎（Search Engine）
+
+**推荐库**: `tantivy`, `meilisearch`, `elasticsearch`, `tokio`
+
+- **商品搜索**: 商品搜索、搜索优化、搜索排序
+- **全文搜索**: 全文搜索、模糊搜索、搜索建议
+- **搜索优化**: 搜索优化、搜索排名、搜索分析
+- **搜索性能**: 搜索性能、搜索缓存、搜索索引
+
+**相关资源**:
+
+- [Tantivy 文档](https://docs.rs/tantivy/)
+- [Meilisearch 文档](https://docs.rs/meilisearch/)
+- [Elasticsearch Rust](https://docs.rs/elasticsearch/)
+- [Tokio 文档](https://tokio.rs/)
+
+## 💻 实践与样例
+
+### 代码示例位置
+
+- **电商系统**: [crates/c38_ecommerce](../../../crates/c38_ecommerce/)
+- **支付系统**: [crates/c39_payment_system](../../../crates/c39_payment_system/)
+- **推荐系统**: [crates/c40_recommendation_system](../../../crates/c40_recommendation_system/)
+
+### 快速开始示例
+
+```rust
+// 使用 Actix Web 开发电商平台
+use actix_web::{web, App, HttpServer, Responder};
+
+async fn products() -> impl Responder {
+    "Product Management System"
+}
+```
+
+---
+
+## 🔗 相关索引
+
+- **理论基础（并发模型）**: [`../../01_theoretical_foundations/04_concurrency_models/00_index.md`](../../01_theoretical_foundations/04_concurrency_models/00_index.md)
+- **应用领域（AI/ML）**: [`../04_ai_ml/00_index.md`](../04_ai_ml/00_index.md)
+- **应用领域（金融科技）**: [`../01_fintech/00_index.md`](../01_fintech/00_index.md)
+
+---
+
+## 🧭 导航
+
+- **返回应用领域**: [`../00_index.md`](../00_index.md)
+- **汽车**: [`../11_automotive/00_index.md`](../11_automotive/00_index.md)
+- **社交媒体**: [`../13_social_media/00_index.md`](../13_social_media/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-10
+**维护者**: 项目维护者
+**状态**: 已完善 ✅

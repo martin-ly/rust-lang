@@ -1,0 +1,159 @@
+# 质量检查清单（Checklists）索引
+
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📊 目录
+
+- [质量检查清单（Checklists）索引](#质量检查清单checklists索引)
+  - [📊 目录](#-目录)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 检查清单](#-检查清单)
+    - [1. 代码提交检查清单](#1-代码提交检查清单)
+    - [2. 发布检查清单](#2-发布检查清单)
+    - [3. 性能检查清单](#3-性能检查清单)
+    - [4. 安全检查清单](#4-安全检查清单)
+  - [💻 实践与样例](#-实践与样例)
+    - [代码示例位置](#代码示例位置)
+    - [快速开始示例](#快速开始示例)
+  - [🔗 相关索引](#-相关索引)
+  - [🧭 导航](#-导航)
+
+## 🎯 目的
+
+本模块提供 Rust 项目开发过程中的质量检查清单，确保代码提交、发布、维护过程中的质量标准。
+所有内容均基于 Rust 1.91.0 和当前最佳实践。
+
+### 核心价值
+
+- **检查清单**: 提供全面的质量检查清单
+- **最佳实践**: 基于 Rust 社区最新质量实践
+- **完整覆盖**: 涵盖代码提交、发布、性能、安全等核心检查清单
+- **易于理解**: 提供详细的检查清单说明和实施指南
+
+## 📚 检查清单
+
+### 1. 代码提交检查清单
+
+**推荐工具**: `cargo-fmt`, `cargo-clippy`, `cargo-test`, `cargo-doc`
+
+- [ ] 代码通过 `cargo fmt` 格式化
+- [ ] 代码通过 `cargo clippy -- -D warnings` 检查
+- [ ] 所有测试通过 `cargo test`
+- [ ] 新增功能包含相应的测试
+- [ ] 公共 API 包含文档注释
+- [ ] 提交信息遵循 Conventional Commits 规范
+- [ ] CHANGELOG 更新（如适用）
+
+**相关资源**:
+
+- [Rustfmt 文档](https://github.com/rust-lang/rustfmt)
+- [Clippy 文档](https://github.com/rust-lang/rust-clippy)
+- [Conventional Commits](https://www.conventionalcommits.org/)
+
+### 2. 发布检查清单
+
+**推荐工具**: `cargo-version`, `cargo-audit`, `cargo-doc`, `cargo-test`
+
+- [ ] 版本号正确更新（遵循语义化版本）
+- [ ] CHANGELOG 更新
+- [ ] 所有测试通过
+- [ ] 基准测试通过
+- [ ] 文档更新（API 文档、README）
+- [ ] 依赖项检查（`cargo audit`）
+- [ ] 许可证检查
+- [ ] 发布说明准备
+
+**相关资源**:
+
+- [语义化版本](https://semver.org/)
+- [Cargo Audit 文档](https://docs.rs/cargo-audit/)
+- [Keep a Changelog](https://keepachangelog.com/)
+
+### 3. 性能检查清单
+
+**推荐工具**: `criterion`, `flamegraph`, `perf`, `cargo-bench`
+
+- [ ] 关键路径性能测试
+- [ ] 内存使用分析
+- [ ] 并发性能测试
+- [ ] 基准测试基线更新
+- [ ] 性能回归检查
+- [ ] 性能瓶颈分析
+- [ ] 资源使用监控
+
+**相关资源**:
+
+- [Criterion 文档](https://docs.rs/criterion/)
+- [Flamegraph 文档](https://github.com/flamegraph-rs/flamegraph)
+- [Perf 文档](https://perf.wiki.kernel.org/)
+
+### 4. 安全检查清单
+
+**推荐工具**: `cargo-audit`, `cargo-deny`, `cargo-geiger`, `miri`
+
+- [ ] 无 `unsafe` 代码（除非必要且已审查）
+- [ ] 输入验证完整
+- [ ] 错误处理完善
+- [ ] 依赖项安全扫描（`cargo audit`）
+- [ ] 敏感信息保护
+- [ ] 内存安全检查（`miri`）
+- [ ] 并发安全检查（`loom`）
+
+**相关资源**:
+
+- [Cargo Audit 文档](https://docs.rs/cargo-audit/)
+- [Cargo Deny 文档](https://docs.rs/cargo-deny/)
+- [Miri 文档](https://github.com/rust-lang/miri)
+- [Loom 文档](https://docs.rs/loom/)
+
+## 💻 实践与样例
+
+### 代码示例位置
+
+- **检查清单应用**: [crates/c03_control_fn](../../../crates/c03_control_fn/)
+- **性能检查**: [crates/c05_threads](../../../crates/c05_threads/)
+- **安全检查**: [crates/c10_networks](../../../crates/c10_networks/)
+
+### 快速开始示例
+
+```bash
+# 代码提交前检查
+cargo fmt
+cargo clippy -- -D warnings
+cargo test
+cargo doc --no-deps
+
+# 发布前检查
+cargo audit
+cargo test --workspace
+cargo bench --no-run
+```
+
+---
+
+## 🔗 相关索引
+
+- **质量标准**: [`../01_standards/00_index.md`](../01_standards/00_index.md)
+- **质量指南**: [`../02_guidelines/00_index.md`](../02_guidelines/00_index.md)
+- **自动化**: [`../08_automation/00_index.md`](../08_automation/00_index.md)
+
+---
+
+## 🧭 导航
+
+- **返回质量保障**: [`../00_index.md`](../00_index.md)
+- **质量标准**: [`../01_standards/00_index.md`](../01_standards/00_index.md)
+- **质量指南**: [`../02_guidelines/00_index.md`](../02_guidelines/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-10
+**维护者**: 项目维护者
+**状态**: 已完善 ✅

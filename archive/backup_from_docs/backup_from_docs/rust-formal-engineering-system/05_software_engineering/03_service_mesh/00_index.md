@@ -1,0 +1,141 @@
+# 服务网格（Service Mesh）索引
+
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📊 目录
+
+- [服务网格（Service Mesh）索引](#服务网格service-mesh索引)
+  - [📊 目录](#-目录)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 核心概念](#-核心概念)
+    - [1. 服务网格架构](#1-服务网格架构)
+    - [2. 流量管理](#2-流量管理)
+    - [3. 安全通信](#3-安全通信)
+    - [4. 可观测性](#4-可观测性)
+  - [💻 实践与样例](#-实践与样例)
+    - [代码示例位置](#代码示例位置)
+    - [快速开始示例](#快速开始示例)
+  - [🔗 相关索引](#-相关索引)
+  - [🧭 导航](#-导航)
+
+## 🎯 目的
+
+本模块介绍服务网格在 Rust 中的实现与应用，提供服务网格设计、部署、运维的最佳实践。所有内容均基于 Rust 1.91.0 和当前最佳实践。
+
+### 核心价值
+
+- **服务网格**: 专注于 Rust 服务网格的实现与应用
+- **最佳实践**: 基于 Rust 社区最新服务网格实践
+- **完整覆盖**: 涵盖服务网格架构、流量管理、安全通信、可观测性等核心主题
+- **易于理解**: 提供详细的服务网格说明和代码示例
+
+## 📚 核心概念
+
+### 1. 服务网格架构
+
+**推荐库**: `tokio`, `tonic`, `hyper`, `tower`, `linkerd2-proxy`
+
+- **数据平面**: 代理实现、流量转发、策略执行
+- **控制平面**: 配置管理、服务发现、策略分发
+- **Sidecar 模式**: Sidecar 代理、透明代理、服务注入
+
+**相关资源**:
+
+- [Tokio 文档](https://tokio.rs/)
+- [Tonic 文档](https://docs.rs/tonic/)
+- [Hyper 文档](https://docs.rs/hyper/)
+- [Linkerd 文档](https://linkerd.io/)
+
+### 2. 流量管理
+
+**推荐库**: `tower`, `tower-http`, `hyper`, `reqwest`
+
+- **路由**: 路由规则、路径匹配、权重路由
+- **负载均衡**: 负载均衡算法、健康检查、故障转移
+- **流量分割**: A/B 测试、金丝雀发布、流量镜像
+
+**相关资源**:
+
+- [Tower 文档](https://docs.rs/tower/)
+- [Tower HTTP 文档](https://docs.rs/tower-http/)
+- [Hyper 文档](https://docs.rs/hyper/)
+- [Istio 文档](https://istio.io/)
+
+### 3. 安全通信
+
+**推荐库**: `rustls`, `ring`, `tokio-rustls`, `quinn`
+
+- **mTLS**: 双向 TLS、证书管理、密钥轮换
+- **身份认证**: 服务身份、JWT 认证、OAuth 2.0
+- **授权**: 访问控制、策略执行、权限管理
+
+**相关资源**:
+
+- [rustls 文档](https://docs.rs/rustls/)
+- [ring 文档](https://docs.rs/ring/)
+- [Tokio Rustls 文档](https://docs.rs/tokio-rustls/)
+- [Quinn 文档](https://docs.rs/quinn/)
+
+### 4. 可观测性
+
+**推荐库**: `tracing`, `opentelemetry`, `prometheus`, `jaeger`
+
+- **指标**: 指标收集、指标导出、指标聚合
+- **日志**: 日志收集、日志聚合、日志分析
+- **追踪**: 分布式追踪、请求追踪、性能分析
+
+**相关资源**:
+
+- [Tracing 文档](https://docs.rs/tracing/)
+- [OpenTelemetry 文档](https://opentelemetry.io/)
+- [Prometheus 文档](https://prometheus.io/)
+- [Jaeger 文档](https://www.jaegertracing.io/)
+
+## 💻 实践与样例
+
+### 代码示例位置
+
+- **服务网格实现**: [crates/c50_service_mesh](../../../crates/c50_service_mesh/)
+- **微服务**: [crates/c13_microservice](../../../crates/c13_microservice/)
+- **网络编程**: [crates/c10_networks](../../../crates/c10_networks/)
+
+### 快速开始示例
+
+```rust
+// 使用 Tower 实现服务网格代理
+use tower::ServiceBuilder;
+use tower_http::trace::TraceLayer;
+
+let service = ServiceBuilder::new()
+    .layer(TraceLayer::new_for_http())
+    .service(handler);
+```
+
+---
+
+## 🔗 相关索引
+
+- **理论基础（并发模型）**: [`../../01_theoretical_foundations/04_concurrency_models/00_index.md`](../../01_theoretical_foundations/04_concurrency_models/00_index.md)
+- **编程范式（异步）**: [`../../02_programming_paradigms/02_asynchronous/00_index.md`](../../02_programming_paradigms/02_asynchronous/00_index.md)
+- **应用领域（云基础设施）**: [`../../04_application_domains/06_cloud_infrastructure/00_index.md`](../../04_application_domains/06_cloud_infrastructure/00_index.md)
+
+---
+
+## 🧭 导航
+
+- **返回软件工程**: [`../00_index.md`](../00_index.md)
+- **微服务**: [`../02_microservices/00_index.md`](../02_microservices/00_index.md)
+- **容器化**: [`../04_containerization/00_index.md`](../04_containerization/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-10
+**维护者**: 项目维护者
+**状态**: 已完善 ✅

@@ -1,0 +1,143 @@
+# 教育科技（Education Technology）索引
+
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📊 目录
+
+- [教育科技（Education Technology）索引](#教育科技education-technology索引)
+  - [📊 目录](#-目录)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 核心概念](#-核心概念)
+    - [1. 学习管理系统（Learning Management System）](#1-学习管理系统learning-management-system)
+    - [2. 在线教育平台（Online Education Platform）](#2-在线教育平台online-education-platform)
+    - [3. 自适应学习（Adaptive Learning）](#3-自适应学习adaptive-learning)
+    - [4. 教育数据分析（Educational Data Analytics）](#4-教育数据分析educational-data-analytics)
+  - [💻 实践与样例](#-实践与样例)
+    - [代码示例位置](#代码示例位置)
+    - [快速开始示例](#快速开始示例)
+  - [🔗 相关索引](#-相关索引)
+  - [🧭 导航](#-导航)
+
+## 🎯 目的
+
+本模块介绍 Rust 在教育科技领域的应用与实践，提供在线教育、学习管理、教育数据分析的技术指导。所有内容均基于 Rust 1.91.0 和当前最佳实践。
+
+### 核心价值
+
+- **教育科技**: 专注于 Rust 在教育科技领域的应用
+- **最佳实践**: 基于 Rust 社区最新教育科技实践
+- **完整覆盖**: 涵盖学习管理系统、在线教育平台、自适应学习、教育数据分析等核心主题
+- **易于理解**: 提供详细的教育科技应用说明和代码示例
+
+## 📚 核心概念
+
+### 1. 学习管理系统（Learning Management System）
+
+**推荐库**: `actix-web`, `sqlx`, `diesel`, `serde`, `chrono`
+
+- **课程管理**: 课程管理、课程内容、课程进度
+- **学生管理**: 学生管理、学生档案、学习记录
+- **教师管理**: 教师管理、教学资源、教学评估
+- **评估系统**: 自动评分、学习评估、成绩管理
+
+**相关资源**:
+
+- [Actix Web 文档](https://actix.rs/)
+- [SQLx 文档](https://docs.rs/sqlx/)
+- [Diesel 文档](https://diesel.rs/)
+- [Serde 文档](https://serde.rs/)
+
+### 2. 在线教育平台（Online Education Platform）
+
+**推荐库**: `tokio`, `actix-web`, `webrtc`, `websocket`
+
+- **视频教学**: 视频教学、直播教学、录播课程
+- **互动学习**: 互动学习、实时问答、在线讨论
+- **协作学习**: 在线讨论、团队项目、协作工具
+- **内容管理**: 内容管理、资源库、多媒体支持
+
+**相关资源**:
+
+- [Tokio 文档](https://tokio.rs/)
+- [Actix Web 文档](https://actix.rs/)
+- [WebRTC Rust](https://docs.rs/webrtc/)
+- [WebSocket Rust](https://docs.rs/websocket/)
+
+### 3. 自适应学习（Adaptive Learning）
+
+**推荐库**: `candle`, `linfa`, `ndarray`, `rayon`
+
+- **个性化学习路径**: 个性化学习路径、学习推荐、学习计划
+- **学习分析**: 学习行为分析、学习效果评估、学习优化
+- **智能推荐**: 内容推荐、资源推荐、学习建议
+- **学习预测**: 成绩预测、学习风险、学习干预
+
+**相关资源**:
+
+- [Candle 文档](https://github.com/huggingface/candle)
+- [Linfa 文档](https://docs.rs/linfa/)
+- [ndarray 文档](https://docs.rs/ndarray/)
+- [Rayon 文档](https://docs.rs/rayon/)
+
+### 4. 教育数据分析（Educational Data Analytics）
+
+**推荐库**: `polars`, `arrow`, `pandas`, `plotly`
+
+- **学习行为分析**: 学习行为分析、学习模式识别、学习趋势
+- **成绩预测**: 成绩预测、风险评估、干预建议
+- **教学效果评估**: 教学效果评估、课程质量分析、教学优化
+- **数据可视化**: 数据可视化、仪表板、报告生成
+
+**相关资源**:
+
+- [Polars 文档](https://pola-rs.github.io/polars/)
+- [Arrow Rust](https://arrow.apache.org/docs/rust/)
+- [Plotly Rust](https://docs.rs/plotly/)
+
+## 💻 实践与样例
+
+### 代码示例位置
+
+- **教育科技**: [crates/c32_education_tech](../../../crates/c32_education_tech/)
+- **学习管理**: [crates/c33_learning_management](../../../crates/c33_learning_management/)
+- **教育游戏**: [crates/c34_educational_games](../../../crates/c34_educational_games/)
+
+### 快速开始示例
+
+```rust
+// 使用 Actix Web 开发学习管理系统
+use actix_web::{web, App, HttpServer, Responder};
+
+async fn courses() -> impl Responder {
+    "Course Management System"
+}
+```
+
+---
+
+## 🔗 相关索引
+
+- **理论基础（并发模型）**: [`../../01_theoretical_foundations/04_concurrency_models/00_index.md`](../../01_theoretical_foundations/04_concurrency_models/00_index.md)
+- **应用领域（游戏开发）**: [`../02_game_development/00_index.md`](../02_game_development/00_index.md)
+- **应用领域（AI/ML）**: [`../04_ai_ml/00_index.md`](../04_ai_ml/00_index.md)
+
+---
+
+## 🧭 导航
+
+- **返回应用领域**: [`../00_index.md`](../00_index.md)
+- **医疗健康**: [`../09_healthcare/00_index.md`](../09_healthcare/00_index.md)
+- **汽车**: [`../11_automotive/00_index.md`](../11_automotive/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-10
+**维护者**: 项目维护者
+**状态**: 已完善 ✅

@@ -1,0 +1,141 @@
+# 安全（Security）索引
+
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📊 目录
+
+- [安全（Security）索引](#安全security索引)
+  - [📊 目录](#-目录)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 核心概念](#-核心概念)
+    - [1. 安全设计](#1-安全设计)
+    - [2. 安全开发](#2-安全开发)
+    - [3. 安全运维](#3-安全运维)
+    - [4. 身份认证](#4-身份认证)
+  - [💻 实践与样例](#-实践与样例)
+    - [代码示例位置](#代码示例位置)
+    - [快速开始示例](#快速开始示例)
+  - [🔗 相关索引](#-相关索引)
+  - [🧭 导航](#-导航)
+
+## 🎯 目的
+
+本模块介绍安全在 Rust 项目中的实现与应用，提供安全设计、安全开发、安全运维的最佳实践。所有内容均基于 Rust 1.91.0 和当前最佳实践。
+
+### 核心价值
+
+- **安全**: 专注于 Rust 安全的实现与应用
+- **最佳实践**: 基于 Rust 社区最新安全实践
+- **完整覆盖**: 涵盖安全设计、安全开发、安全运维、身份认证等核心主题
+- **易于理解**: 提供详细的安全说明和代码示例
+
+## 📚 核心概念
+
+### 1. 安全设计
+
+**推荐库**: `ring`, `rustls`, `openssl`, `bcrypt`
+
+- **威胁建模**: 威胁识别、威胁分析、威胁缓解
+- **安全架构**: 安全架构设计、安全边界、安全控制
+- **安全原则**: 最小权限、纵深防御、安全默认
+
+**相关资源**:
+
+- [Ring 文档](https://docs.rs/ring/)
+- [Rustls 文档](https://docs.rs/rustls/)
+- [OpenSSL 文档](https://docs.rs/openssl/)
+- [Bcrypt 文档](https://docs.rs/bcrypt/)
+
+### 2. 安全开发
+
+**推荐库**: `cargo-audit`, `cargo-deny`, `cargo-geiger`, `clippy`
+
+- **安全编码**: 安全编码规范、安全编码实践、安全编码审查
+- **安全测试**: 安全测试、漏洞测试、渗透测试
+- **安全审查**: 代码审查、安全审查、合规审查
+
+**相关资源**:
+
+- [Cargo Audit 文档](https://docs.rs/cargo-audit/)
+- [Cargo Deny 文档](https://docs.rs/cargo-deny/)
+- [Cargo Geiger 文档](https://docs.rs/cargo-geiger/)
+- [Clippy 文档](https://github.com/rust-lang/rust-clippy)
+
+### 3. 安全运维
+
+**推荐库**: `tracing`, `opentelemetry`, `prometheus`, `jaeger`
+
+- **安全监控**: 安全事件监控、异常检测、入侵检测
+- **安全响应**: 安全事件响应、应急处理、恢复措施
+- **安全更新**: 安全补丁、安全更新、漏洞修复
+
+**相关资源**:
+
+- [Tracing 文档](https://docs.rs/tracing/)
+- [OpenTelemetry 文档](https://opentelemetry.io/)
+- [Prometheus 文档](https://prometheus.io/docs/)
+- [Jaeger 文档](https://www.jaegertracing.io/)
+
+### 4. 身份认证
+
+**推荐库**: `jwt`, `oauth2`, `bcrypt`, `argon2`
+
+- **多因素认证**: 双因素认证、多因素认证、生物识别
+- **单点登录**: SSO、OAuth 2.0、SAML
+- **身份管理**: 身份管理、权限管理、角色管理
+
+**相关资源**:
+
+- [JWT 文档](https://docs.rs/jsonwebtoken/)
+- [OAuth2 文档](https://docs.rs/oauth2/)
+- [Bcrypt 文档](https://docs.rs/bcrypt/)
+- [Argon2 文档](https://docs.rs/argon2/)
+
+## 💻 实践与样例
+
+### 代码示例位置
+
+- **安全实现**: [crates/c56_security](../../../crates/c56_security/)
+- **网络安全**: [crates/c10_networks](../../../crates/c10_networks/)
+- **应用领域（网络安全）**: [`../../04_application_domains/08_cybersecurity/00_index.md`](../../04_application_domains/08_cybersecurity/00_index.md)
+
+### 快速开始示例
+
+```rust
+// 使用 JWT 进行身份认证
+use jsonwebtoken::{encode, decode, Header, Algorithm, Validation, EncodingKey, DecodingKey};
+
+fn create_token(user_id: &str) -> String {
+    let claims = Claims { sub: user_id.to_string() };
+    encode(&Header::new(Algorithm::HS256), &claims, &EncodingKey::from_secret("secret".as_ref())).unwrap()
+}
+```
+
+---
+
+## 🔗 相关索引
+
+- **理论基础（内存安全）**: [`../../01_theoretical_foundations/02_memory_safety/00_index.md`](../../01_theoretical_foundations/02_memory_safety/00_index.md)
+- **设计模式（安全模式）**: [`../../03_design_patterns/08_security/00_index.md`](../../03_design_patterns/08_security/00_index.md)
+- **质量保障**: [`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)
+
+---
+
+## 🧭 导航
+
+- **返回软件工程**: [`../00_index.md`](../00_index.md)
+- **性能**: [`../08_performance/00_index.md`](../08_performance/00_index.md)
+- **质量**: [`../10_quality/00_index.md`](../10_quality/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-10
+**维护者**: 项目维护者
+**状态**: 已完善 ✅

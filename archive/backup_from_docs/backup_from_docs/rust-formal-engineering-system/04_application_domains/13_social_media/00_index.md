@@ -1,0 +1,144 @@
+# 社交媒体（Social Media）索引
+
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📊 目录
+
+- [社交媒体（Social Media）索引](#社交媒体social-media索引)
+  - [📊 目录](#-目录)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 核心概念](#-核心概念)
+    - [1. 社交平台（Social Platform）](#1-社交平台social-platform)
+    - [2. 内容管理（Content Management）](#2-内容管理content-management)
+    - [3. 实时通信（Real-time Communication）](#3-实时通信real-time-communication)
+    - [4. 推荐系统（Recommendation System）](#4-推荐系统recommendation-system)
+  - [💻 实践与样例](#-实践与样例)
+    - [代码示例位置](#代码示例位置)
+    - [快速开始示例](#快速开始示例)
+  - [🔗 相关索引](#-相关索引)
+  - [🧭 导航](#-导航)
+
+## 🎯 目的
+
+本模块介绍 Rust 在社交媒体领域的应用与实践，提供社交平台、内容管理、用户交互的技术指导。所有内容均基于 Rust 1.91.0 和当前最佳实践。
+
+### 核心价值
+
+- **社交媒体**: 专注于 Rust 在社交媒体领域的应用
+- **最佳实践**: 基于 Rust 社区最新社交媒体实践
+- **完整覆盖**: 涵盖社交平台、内容管理、实时通信、推荐系统等核心主题
+- **易于理解**: 提供详细的社交媒体应用说明和代码示例
+
+## 📚 核心概念
+
+### 1. 社交平台（Social Platform）
+
+**推荐库**: `actix-web`, `tokio`, `sqlx`, `redis`, `serde`
+
+- **用户管理**: 用户注册、用户认证、用户画像
+- **内容发布**: 内容发布、内容编辑、内容删除
+- **社交网络**: 关注关系、好友关系、社交图谱
+- **用户交互**: 点赞、评论、分享、转发
+
+**相关资源**:
+
+- [Actix Web 文档](https://actix.rs/)
+- [Tokio 文档](https://tokio.rs/)
+- [SQLx 文档](https://docs.rs/sqlx/)
+- [Redis 文档](https://docs.rs/redis/)
+
+### 2. 内容管理（Content Management）
+
+**推荐库**: `tantivy`, `meilisearch`, `candle`, `tokio`
+
+- **内容审核**: 内容审核、敏感词过滤、违规检测
+- **内容推荐**: 内容推荐、个性化推荐、热门推荐
+- **内容分发**: 内容分发、内容缓存、内容同步
+- **内容安全**: 内容安全、反垃圾信息、内容保护
+
+**相关资源**:
+
+- [Tantivy 文档](https://docs.rs/tantivy/)
+- [Meilisearch 文档](https://docs.rs/meilisearch/)
+- [Candle 文档](https://github.com/huggingface/candle)
+- [Tokio 文档](https://tokio.rs/)
+
+### 3. 实时通信（Real-time Communication）
+
+**推荐库**: `tokio`, `actix-web`, `websocket`, `webrtc`, `quinn`
+
+- **即时消息**: 即时消息、消息推送、消息存储
+- **视频通话**: 视频通话、音频通话、屏幕共享
+- **直播**: 直播推流、直播拉流、直播互动
+- **实时同步**: 实时同步、状态同步、数据同步
+
+**相关资源**:
+
+- [Tokio 文档](https://tokio.rs/)
+- [Actix Web 文档](https://actix.rs/)
+- [WebSocket Rust](https://docs.rs/websocket/)
+- [WebRTC Rust](https://docs.rs/webrtc/)
+
+### 4. 推荐系统（Recommendation System）
+
+**推荐库**: `candle`, `linfa`, `ndarray`, `redis`, `tokio`
+
+- **内容推荐**: 内容推荐、个性化推荐、协同过滤
+- **用户推荐**: 用户推荐、相似用户、用户画像
+- **实时推荐**: 实时推荐、热门推荐、趋势推荐
+- **推荐算法**: 协同过滤、内容过滤、深度学习
+
+**相关资源**:
+
+- [Candle 文档](https://github.com/huggingface/candle)
+- [Linfa 文档](https://docs.rs/linfa/)
+- [ndarray 文档](https://docs.rs/ndarray/)
+- [Redis 文档](https://docs.rs/redis/)
+
+## 💻 实践与样例
+
+### 代码示例位置
+
+- **社交媒体**: [crates/c41_social_media](../../../crates/c41_social_media/)
+- **内容管理**: [crates/c42_content_management](../../../crates/c42_content_management/)
+- **实时通信**: [crates/c43_realtime_communication](../../../crates/c43_realtime_communication/)
+
+### 快速开始示例
+
+```rust
+// 使用 Actix Web 开发社交平台
+use actix_web::{web, App, HttpServer, Responder};
+
+async fn feed() -> impl Responder {
+    "Social Media Feed"
+}
+```
+
+---
+
+## 🔗 相关索引
+
+- **理论基础（并发模型）**: [`../../01_theoretical_foundations/04_concurrency_models/00_index.md`](../../01_theoretical_foundations/04_concurrency_models/00_index.md)
+- **应用领域（AI/ML）**: [`../04_ai_ml/00_index.md`](../04_ai_ml/00_index.md)
+- **应用领域（大数据分析）**: [`../07_big_data_analytics/00_index.md`](../07_big_data_analytics/00_index.md)
+
+---
+
+## 🧭 导航
+
+- **返回应用领域**: [`../00_index.md`](../00_index.md)
+- **电商**: [`../12_ecommerce/00_index.md`](../12_ecommerce/00_index.md)
+- **企业**: [`../14_enterprise/00_index.md`](../14_enterprise/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-10
+**维护者**: 项目维护者
+**状态**: 已完善 ✅

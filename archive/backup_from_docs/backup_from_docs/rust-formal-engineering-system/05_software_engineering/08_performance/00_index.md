@@ -1,0 +1,150 @@
+# 性能（Performance）索引
+
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📊 目录
+
+- [性能（Performance）索引](#性能performance索引)
+  - [📊 目录](#-目录)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 核心概念](#-核心概念)
+    - [1. 性能分析](#1-性能分析)
+    - [2. 性能调优](#2-性能调优)
+    - [3. 性能监控](#3-性能监控)
+    - [4. 缓存策略](#4-缓存策略)
+  - [💻 实践与样例](#-实践与样例)
+    - [代码示例位置](#代码示例位置)
+    - [快速开始示例](#快速开始示例)
+  - [🔗 相关索引](#-相关索引)
+  - [📚 内容文档](#-内容文档)
+  - [🧭 导航](#-导航)
+
+## 🎯 目的
+
+本模块介绍性能优化在 Rust 项目中的实现与应用，提供性能分析、性能调优、性能监控的最佳实践。所有内容均基于 Rust 1.91.0 和当前最佳实践。
+
+### 核心价值
+
+- **性能**: 专注于 Rust 性能优化的实现与应用
+- **最佳实践**: 基于 Rust 社区最新性能优化实践
+- **完整覆盖**: 涵盖性能分析、性能调优、性能监控、缓存策略等核心主题
+- **易于理解**: 提供详细的性能优化说明和代码示例
+
+## 📚 核心概念
+
+### 1. 性能分析
+
+**推荐库**: `criterion`, `iai`, `flamegraph`, `perf`
+
+- **性能剖析**: CPU 剖析、内存剖析、I/O 剖析
+- **性能基准**: 基准测试、性能对比、性能回归
+- **性能指标**: 响应时间、吞吐量、资源使用
+
+**相关资源**:
+
+- [Criterion 文档](https://docs.rs/criterion/)
+- [IAI 文档](https://docs.rs/iai/)
+- [Flamegraph 文档](https://github.com/flamegraph-rs/flamegraph)
+- [Perf 文档](https://perf.wiki.kernel.org/)
+
+### 2. 性能调优
+
+**推荐库**: `rayon`, `crossbeam`, `parking_lot`, `dashmap`
+
+- **算法优化**: 算法选择、算法改进、算法复杂度
+- **数据结构优化**: 数据结构选择、内存布局、缓存友好
+- **内存优化**: 内存分配、内存复用、内存池
+
+**相关资源**:
+
+- [Rayon 文档](https://docs.rs/rayon/)
+- [Crossbeam 文档](https://docs.rs/crossbeam/)
+- [Parking Lot 文档](https://docs.rs/parking_lot/)
+- [Dashmap 文档](https://docs.rs/dashmap/)
+
+### 3. 性能监控
+
+**推荐库**: `tracing`, `opentelemetry`, `prometheus`, `metrics`
+
+- **实时监控**: 实时指标、实时告警、实时分析
+- **性能告警**: 阈值告警、异常检测、性能预警
+- **性能报告**: 性能报告、性能分析、性能优化建议
+
+**相关资源**:
+
+- [Tracing 文档](https://docs.rs/tracing/)
+- [OpenTelemetry 文档](https://opentelemetry.io/)
+- [Prometheus 文档](https://prometheus.io/docs/)
+- [Metrics 文档](https://docs.rs/metrics/)
+
+### 4. 缓存策略
+
+**推荐库**: `redis`, `moka`, `cached`, `ttl_cache`
+
+- **内存缓存**: 本地缓存、进程缓存、线程缓存
+- **分布式缓存**: Redis、Memcached、分布式缓存
+- **缓存一致性**: 缓存更新、缓存失效、缓存同步
+
+**相关资源**:
+
+- [Redis 文档](https://docs.rs/redis/)
+- [Moka 文档](https://docs.rs/moka/)
+- [Cached 文档](https://docs.rs/cached/)
+- [TTL Cache 文档](https://docs.rs/ttl_cache/)
+
+## 💻 实践与样例
+
+### 代码示例位置
+
+- **性能优化**: [crates/c55_performance](../../../crates/c55_performance/)
+- **算法与数据结构**: [crates/c08_algorithms](../../../crates/c08_algorithms/)
+- **并发编程**: [crates/c05_threads](../../../crates/c05_threads/)
+
+### 快速开始示例
+
+```rust
+// 使用 Criterion 进行性能基准测试
+use criterion::{black_box, criterion_group, criterion_main, Criterion};
+
+fn benchmark_function(c: &mut Criterion) {
+    c.bench_function("my_function", |b| b.iter(|| {
+        // 性能测试代码
+    }));
+}
+
+criterion_group!(benches, benchmark_function);
+criterion_main!(benches);
+```
+
+---
+
+## 🔗 相关索引
+
+- **理论基础（并发模型）**: [`../../01_theoretical_foundations/04_concurrency_models/00_index.md`](../../01_theoretical_foundations/04_concurrency_models/00_index.md)
+- **编程范式（数据导向）**: [`../../02_programming_paradigms/10_data_oriented/00_index.md`](../../02_programming_paradigms/10_data_oriented/00_index.md)
+- **工具链生态（性能分析）**: [`../../06_toolchain_ecosystem/06_performance_analysis/00_index.md`](../../06_toolchain_ecosystem/06_performance_analysis/00_index.md)
+
+---
+
+## 📚 内容文档
+
+- **[性能优化](./01_performance_optimization.md)** - 性能优化技术和实践 ✅
+
+## 🧭 导航
+
+- **返回软件工程**: [`../00_index.md`](../00_index.md)
+- **测试**: [`../07_testing/00_index.md`](../07_testing/00_index.md)
+- **安全**: [`../09_security/00_index.md`](../09_security/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-15
+**维护者**: 项目维护者
+**状态**: 已完善 ✅

@@ -1,0 +1,16 @@
+[package]
+name = "c12_middlewares"
+version = "0.1.0"
+edition = "2024"
+resolver = "3"
+
+[dependencies]
+
+
+[lib]
+name = "c12_middlewares"
+path = "src/lib.rs"
+
+[[bin]]
+name = "c12_middlewares"
+path = "src/bin/main.rs"

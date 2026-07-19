@@ -1,0 +1,145 @@
+# 验证（Validation）索引
+
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📊 目录
+
+- [验证（Validation）索引](#验证validation索引)
+  - [📊 目录](#-目录)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 验证类型](#-验证类型)
+    - [1. 静态分析](#1-静态分析)
+    - [2. 动态分析](#2-动态分析)
+    - [3. 形式化验证](#3-形式化验证)
+    - [4. 属性测试](#4-属性测试)
+  - [💻 实践与样例](#-实践与样例)
+    - [代码示例位置](#代码示例位置)
+    - [快速开始示例](#快速开始示例)
+  - [🔗 相关索引](#-相关索引)
+  - [🧭 导航](#-导航)
+
+## 🎯 目的
+
+本模块介绍 Rust 项目中的各种验证技术与工具，提供静态分析、动态分析、形式化验证的实践指南。
+所有内容均基于 Rust 1.91.0 和当前最佳实践。
+
+### 核心价值
+
+- **验证技术**: 提供全面的验证技术和工具
+- **最佳实践**: 基于 Rust 社区最新验证实践
+- **完整覆盖**: 涵盖静态分析、动态分析、形式化验证、属性测试等核心验证类型
+- **易于理解**: 提供详细的验证说明和代码示例
+
+## 📚 验证类型
+
+### 1. 静态分析
+
+**推荐工具**: `clippy`, `rustc`, `cargo-udeps`, `cargo-deny`
+
+- **编译时分析**: 编译时程序分析，如 `clippy`、`rustc` 警告
+- **代码检查**: 代码风格、代码质量、潜在问题
+- **依赖分析**: 未使用的依赖、依赖冲突、依赖安全
+
+**相关资源**:
+
+- [Clippy 文档](https://github.com/rust-lang/rust-clippy)
+- [Rustc 文档](https://doc.rust-lang.org/rustc/)
+- [Cargo Udeps 文档](https://docs.rs/cargo-udeps/)
+- [Cargo Deny 文档](https://docs.rs/cargo-deny/)
+
+### 2. 动态分析
+
+**推荐工具**: `miri`, `asan`, `tsan`, `loom`, `valgrind`
+
+- **运行时分析**: 运行时程序分析，如 `miri`、ASAN、TSAN
+- **内存安全**: 检测内存泄漏、悬垂指针、缓冲区溢出
+- **并发安全**: 检测数据竞争、死锁、并发问题
+
+**相关资源**:
+
+- [Miri 文档](https://github.com/rust-lang/miri)
+- [Loom 文档](https://docs.rs/loom/)
+- [Sanitizers 文档](https://doc.rust-lang.org/beta/unstable-book/compiler-flags/sanitizer.html)
+- [Valgrind 文档](https://valgrind.org/)
+
+### 3. 形式化验证
+
+**推荐工具**: `kani`, `prusti`, `creusot`, `verus`
+
+- **数学证明**: 使用数学方法证明程序正确性
+- **属性验证**: 验证程序满足特定属性
+- **关键模块**: 对高风险模块进行形式化验证
+
+**相关资源**:
+
+- [Kani 文档](https://github.com/model-checking/kani)
+- [Prusti 文档](https://github.com/viperproject/prusti-dev)
+- [Creusot 文档](https://github.com/xldenis/creusot)
+- [Verus 文档](https://github.com/verus-lang/verus)
+
+### 4. 属性测试
+
+**推荐工具**: `proptest`, `quickcheck`, `arbitrary`
+
+- **随机测试**: 基于属性的随机测试
+- **输入生成**: 自动生成测试输入
+- **属性验证**: 验证程序满足特定属性
+
+**相关资源**:
+
+- [Proptest 文档](https://docs.rs/proptest/)
+- [QuickCheck 文档](https://docs.rs/quickcheck/)
+- [Arbitrary 文档](https://docs.rs/arbitrary/)
+
+## 💻 实践与样例
+
+### 代码示例位置
+
+- **静态分析**: [crates/c03_control_fn](../../../crates/c03_control_fn/)
+- **动态分析**: [crates/c05_threads](../../../crates/c05_threads/)
+- **形式化验证**: [crates/c04_generic](../../../crates/c04_generic/)
+
+### 快速开始示例
+
+```rust
+// 使用 Proptest 进行属性测试
+use proptest::prelude::*;
+
+proptest! {
+    #[test]
+    fn test_addition(a in 0..100i32, b in 0..100i32) {
+        let result = a + b;
+        assert!(result >= a);
+        assert!(result >= b);
+    }
+}
+```
+
+---
+
+## 🔗 相关索引
+
+- **测试**: [`../05_testing/00_index.md`](../05_testing/00_index.md)
+- **工具链生态**: [`../../06_toolchain_ecosystem/00_index.md`](../../06_toolchain_ecosystem/00_index.md)
+- **理论基础（形式化验证）**: [`../../01_theoretical_foundations/09_formal_verification/00_index.md`](../../01_theoretical_foundations/09_formal_verification/00_index.md)
+
+---
+
+## 🧭 导航
+
+- **返回质量保障**: [`../00_index.md`](../00_index.md)
+- **测试**: [`../05_testing/00_index.md`](../05_testing/00_index.md)
+- **验证工具**: [`../../06_toolchain_ecosystem/05_formal/00_index.md`](../../06_toolchain_ecosystem/05_formal/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-10
+**维护者**: 项目维护者
+**状态**: 已完善 ✅

@@ -1,0 +1,225 @@
+# 形式化工具（Formal Tools）索引
+
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📊 目录
+
+- [形式化工具（Formal Tools）索引](#形式化工具formal-tools索引)
+  - [📊 目录](#-目录)
+  - [🎯 目标](#-目标)
+    - [核心价值](#核心价值)
+  - [📚 核心工具](#-核心工具)
+    - [1. Kani（Model Checking）](#1-kanimodel-checking)
+    - [2. Prusti（Specification-based Verification）](#2-prustispecification-based-verification)
+    - [3. Creusot（Coq-based Proof）](#3-creusotcoq-based-proof)
+    - [4. 其他工具](#4-其他工具)
+  - [🚀 快速开始](#-快速开始)
+    - [Kani](#kani)
+    - [Prusti](#prusti)
+    - [Creusot](#creusot)
+  - [🔄 CI 集成建议](#-ci-集成建议)
+    - [GitHub Actions](#github-actions)
+    - [建议策略](#建议策略)
+  - [✨ 最佳实践](#-最佳实践)
+    - [开发流程](#开发流程)
+    - [配置策略](#配置策略)
+    - [建议流程](#建议流程)
+  - [🔗 相关索引](#-相关索引)
+  - [🧭 导航](#-导航)
+
+## 🎯 目标
+
+本模块在关键模块引入自动化/半自动化验证，提升正确性与可维护性，提供全面的形式化验证工具使用指南。所有内容均基于 Rust 1.91.0 和当前最佳实践。
+
+### 核心价值
+
+- **形式化验证**: 专注于 Rust 形式化验证最佳实践
+- **最佳实践**: 基于 Rust 社区最新形式化验证实践
+- **完整覆盖**: 涵盖 Kani、Prusti、Creusot 等核心工具
+- **易于理解**: 提供详细的形式化验证说明和代码示例
+
+## 📚 核心工具
+
+### 1. Kani（Model Checking）
+
+**推荐工具**: `kani-verifier`, `cargo kani`
+
+- **模型检查**: 模型检查、属性验证
+- **不变量验证**: 不变量验证、后置条件验证
+- **并发验证**: 并发模型验证、死锁检测
+- **内存安全**: 内存安全验证、指针安全验证
+
+**相关资源**:
+
+- [Kani 文档](https://github.com/model-checking/kani)
+- [Kani 用户指南](https://model-checking.github.io/kani/)
+- [Kani 教程](https://model-checking.github.io/kani/tutorial.html)
+
+### 2. Prusti（Specification-based Verification）
+
+**推荐工具**: `prusti-launch`, `cargo prusti`
+
+- **规范注解**: 规范注解、前置条件、后置条件
+- **函数验证**: 函数验证、循环验证
+- **内存安全**: 内存安全验证、借用检查
+- **类型安全**: 类型安全验证、类型约束
+
+**相关资源**:
+
+- [Prusti 文档](https://github.com/viperproject/prusti-dev)
+- [Prusti 用户指南](https://viperproject.github.io/prusti-dev/user-guide/)
+- [Prusti 教程](https://viperproject.github.io/prusti-dev/user-guide/getting-started.html)
+
+### 3. Creusot（Coq-based Proof）
+
+**推荐工具**: `creusot`, `cargo creusot`
+
+- **Coq 证明**: Coq 证明、形式化证明
+- **规范语言**: 规范语言、规范编写
+- **证明生成**: 证明生成、证明验证
+- **实验性**: 实验性工具、持续开发
+
+**相关资源**:
+
+- [Creusot 文档](https://github.com/xldenis/creusot)
+- [Creusot 用户指南](https://github.com/xldenis/creusot/blob/master/README.md)
+- [Coq 文档](https://coq.inria.fr/)
+
+### 4. 其他工具
+
+**推荐工具**: `miri`, `loom`, `proptest`
+
+- **Miri**: 未定义行为检测、运行时检查
+- **Loom**: 并发模型验证、状态空间探索
+- **Proptest**: 属性测试、随机测试生成
+
+**相关资源**:
+
+- [Miri 文档](https://github.com/rust-lang/miri)
+- [loom 文档](https://docs.rs/loom/)
+- [proptest 文档](https://docs.rs/proptest/)
+
+## 🚀 快速开始
+
+### Kani
+
+```bash
+# 安装 Kani
+cargo install kani-verifier
+
+# 运行 Kani 验证
+cargo kani --help
+
+# 验证特定函数
+cargo kani --function my_function
+```
+
+### Prusti
+
+```bash
+# 安装 Prusti
+cargo install prusti-launch
+
+# 运行 Prusti 验证
+cargo prusti --help
+
+# 验证特定文件
+cargo prusti --file src/lib.rs
+```
+
+### Creusot
+
+```bash
+# 安装 Creusot
+cargo install creusot
+
+# 运行 Creusot 验证
+cargo creusot --help
+```
+
+## 🔄 CI 集成建议
+
+### GitHub Actions
+
+```yaml
+name: Formal Verification
+on: [push, pull_request]
+jobs:
+  kani:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - name: Install Kani
+        run: cargo install kani-verifier
+      - name: Run Kani
+        run: cargo kani
+```
+
+### 建议策略
+
+- **关键模块**: 对关键并发结构和 unsafe 模块建立最小验证集的 CI job（按周跑）
+- **验证日志**: 将验证日志与证明工件归档，失败时阻断合并并回填工单
+- **核心性质**: 选择核心性质（如不死锁、队列有界、无越界访问）
+- **最小规格**: 编写最小规格与 harness，本地跑工具并修复问题后提交规格与结果
+
+## ✨ 最佳实践
+
+### 开发流程
+
+- **提交前检查**: 使用 pre-commit hook 自动运行形式化验证
+- **代码审查**: 将形式化验证结果纳入代码审查标准
+- **持续集成**: 在 CI 中运行形式化验证（按周跑，减少总体时长）
+- **渐进式采用**: 逐步为关键模块添加形式化验证
+
+### 配置策略
+
+- **项目初期**: 为基础模块添加形式化验证
+- **项目成熟**: 为关键模块添加形式化验证
+- **团队规范**: 统一形式化验证配置和策略
+- **定期更新**: 保持形式化验证工具版本更新
+
+### 建议流程
+
+1. **选择核心性质**: 选择核心性质（如不死锁、队列有界、无越界访问）
+2. **编写最小规格**: 编写最小规格与 harness
+3. **本地验证**: 本地跑工具并修复问题后提交规格与结果
+
+---
+
+## 🔗 相关索引
+
+- **代码分析**: [`../05_code_analysis/00_index.md`](../05_code_analysis/00_index.md) - 静态分析工具
+- **质量保障**: [`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md) - 质量保障标准
+- **理论基础**: [`../../01_theoretical_foundations/00_index.md`](../../01_theoretical_foundations/00_index.md) - 形式化理论
+
+---
+
+## 🧭 导航
+
+- **返回工具链生态**: [`../00_index.md`](../00_index.md)
+- **代码分析**: [`../05_code_analysis/00_index.md`](../05_code_analysis/00_index.md)
+- **质量保障**: [`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**别名与规范说明**:
+
+- 本页为形式化工具专题页，编号为 `05_formal`。与"05_code_analysis"编号冲突已通过规范入口化处理：
+  - 代码分析规范入口: [`../05_code_analysis/00_index.md`](../05_code_analysis/00_index.md)
+  - 形式化工具亦在质量保障综述中: [`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)
+
+---
+
+**最后更新**: 2025-11-10
+**维护者**: 项目维护者
+**状态**: 已完善 ✅

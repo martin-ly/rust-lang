@@ -1,0 +1,16 @@
+[package]
+name = "c07_process"
+version = "0.1.0"
+edition = "2024"
+resolver = "3"
+
+[dependencies]
+
+
+[lib]
+name = "c07_process"
+path = "src/lib.rs"
+
+[[bin]]
+name = "c07_process"
+path = "src/bin/main.rs"

@@ -1,0 +1,141 @@
+# 区块链与 Web3（Blockchain & Web3）索引
+
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📊 目录
+
+- [区块链与 Web3（Blockchain \& Web3）索引](#区块链与-web3blockchain--web3索引)
+  - [📊 目录](#-目录)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 核心概念](#-核心概念)
+    - [1. 区块链基础（Blockchain Basics）](#1-区块链基础blockchain-basics)
+    - [2. 智能合约（Smart Contracts）](#2-智能合约smart-contracts)
+    - [3. 去中心化应用（DApps）](#3-去中心化应用dapps)
+    - [4. 跨链技术（Cross-chain）](#4-跨链技术cross-chain)
+  - [💻 实践与样例](#-实践与样例)
+    - [代码示例位置](#代码示例位置)
+    - [快速开始示例](#快速开始示例)
+  - [🔗 相关索引](#-相关索引)
+  - [🧭 导航](#-导航)
+
+## 🎯 目的
+
+本模块介绍 Rust 在区块链和 Web3 领域的应用与实践，提供区块链开发、智能合约、去中心化应用的技术指导。所有内容均基于 Rust 1.91.0 和当前最佳实践。
+
+### 核心价值
+
+- **区块链/Web3**: 专注于 Rust 在区块链和 Web3 领域的应用
+- **最佳实践**: 基于 Rust 社区最新区块链/Web3 实践
+- **完整覆盖**: 涵盖区块链基础、智能合约、去中心化应用、跨链技术等核心主题
+- **易于理解**: 提供详细的区块链/Web3 应用说明和代码示例
+
+## 📚 核心概念
+
+### 1. 区块链基础（Blockchain Basics）
+
+**推荐库**: `substrate`, `parity-ethereum`, `solana`, `near`
+
+- **分布式账本**: 分布式账本、区块结构、链式存储
+- **共识机制**: PoW、PoS、DPoS、BFT 共识
+- **密码学**: 哈希函数、数字签名、加密算法
+- **节点开发**: 节点实现、网络协议、同步机制
+
+**相关资源**:
+
+- [Substrate 文档](https://substrate.io/)
+- [Parity Ethereum 文档](https://github.com/openethereum/openethereum)
+- [Solana 文档](https://docs.solana.com/)
+- [NEAR 文档](https://docs.near.org/)
+
+### 2. 智能合约（Smart Contracts）
+
+**推荐库**: `ink!`, `solana-program`, `near-sdk`, `foundry`
+
+- **智能合约开发**: 合约编写、合约编译、合约部署
+- **合约平台**: 以太坊、Solana、Polkadot、NEAR
+- **合约安全**: 安全审计、漏洞检测、最佳实践
+- **合约测试**: 单元测试、集成测试、模拟测试
+
+**相关资源**:
+
+- [ink! 文档](https://use.ink/)
+- [Solana Program 文档](https://docs.solana.com/developing/programs/overview)
+- [NEAR SDK 文档](https://docs.near.org/sdk/rust/introduction)
+- [Foundry 文档](https://book.getfoundry.sh/)
+
+### 3. 去中心化应用（DApps）
+
+**推荐库**: `ethers`, `web3`, `solana-web3`, `near-api`
+
+- **DApp 开发**: 前端开发、后端开发、智能合约集成
+- **Web3 集成**: Web3 库、钱包集成、交易处理
+- **用户界面**: React、Vue、Web3 组件
+- **状态管理**: 状态同步、事件监听、数据缓存
+
+**相关资源**:
+
+- [ethers-rs 文档](https://docs.rs/ethers/)
+- [web3-rs 文档](https://docs.rs/web3/)
+- [Solana Web3 文档](https://docs.rs/solana-web3/)
+- [NEAR API 文档](https://docs.rs/near-api/)
+
+### 4. 跨链技术（Cross-chain）
+
+**推荐库**: `polkadot`, `cosmos`, `ibc`, `bridge`
+
+- **跨链桥接**: 桥接协议、资产转移、状态同步
+- **互操作性**: 跨链通信、跨链调用、跨链数据
+- **中继链**: 中继链、平行链、跨链消息
+- **跨链标准**: 跨链标准、协议规范、实现方案
+
+**相关资源**:
+
+- [Polkadot 文档](https://polkadot.network/)
+- [Cosmos 文档](https://cosmos.network/)
+- [IBC 文档](https://ibc.cosmos.network/)
+- [Bridge 文档](https://docs.rs/bridge/)
+
+## 💻 实践与样例
+
+### 代码示例位置
+
+- **区块链开发**: [crates/c15_blockchain](../../../crates/c15_blockchain/)
+- **网络编程**: [crates/c10_networks](../../../crates/c10_networks/)
+- **分布式系统**: [crates/c20_distributed](../../../crates/c20_distributed/)
+
+### 快速开始示例
+
+```rust
+// 使用 Substrate 开发区块链
+use substrate_api_client::Api;
+
+let api = Api::new("http://localhost:9944").await?;
+```
+
+---
+
+## 🔗 相关索引
+
+- **理论基础（并发模型）**: [`../../01_theoretical_foundations/04_concurrency_models/00_index.md`](../../01_theoretical_foundations/04_concurrency_models/00_index.md)
+- **编程范式（并发）**: [`../../02_programming_paradigms/05_concurrent/00_index.md`](../../02_programming_paradigms/05_concurrent/00_index.md)
+- **质量保障（安全）**: [`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)
+
+---
+
+## 🧭 导航
+
+- **返回应用领域**: [`../00_index.md`](../00_index.md)
+- **理论基础**: [`../../01_theoretical_foundations/00_index.md`](../../01_theoretical_foundations/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-10
+**维护者**: 项目维护者
+**状态**: 已完善 ✅

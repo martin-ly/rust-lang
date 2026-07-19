@@ -1,0 +1,152 @@
+# 架构设计（Architecture Design）索引
+
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📊 目录
+
+- [架构设计（Architecture Design）索引](#架构设计architecture-design索引)
+  - [📊 目录](#-目录)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 核心概念](#-核心概念)
+    - [1. 分层与模块化](#1-分层与模块化)
+    - [2. DDD 关键点](#2-ddd-关键点)
+    - [3. 同步/异步边界](#3-同步异步边界)
+    - [4. 错误与可靠性](#4-错误与可靠性)
+  - [💻 实践与样例](#-实践与样例)
+    - [代码示例位置](#代码示例位置)
+    - [快速开始示例](#快速开始示例)
+  - [🔗 相关索引](#-相关索引)
+  - [🧭 导航](#-导航)
+
+## 🎯 目的
+
+本模块梳理 Rust 架构设计的设计原则与实现模式，建立系统架构的开发、部署与运维标准。所有内容均基于 Rust 1.91.0 和当前最佳实践。
+
+### 核心价值
+
+- **架构设计**: 专注于 Rust 系统架构设计的最佳实践
+- **最佳实践**: 基于 Rust 社区最新架构实践
+- **完整覆盖**: 涵盖分层架构、DDD、同步/异步边界、错误处理等核心主题
+- **易于理解**: 提供详细的架构设计说明和代码示例
+
+## 📚 核心概念
+
+### 1. 分层与模块化
+
+**推荐库**: `actix-web`, `axum`, `tokio`, `serde`, `thiserror`
+
+- **领域层**: 业务逻辑、领域模型、领域服务
+- **应用层**: 用例实现、应用服务、事务管理
+- **接口层**: API 接口、控制器、DTO 转换
+- **基础设施层**: 数据访问、外部服务、技术实现
+
+**相关资源**:
+
+- [Actix Web 文档](https://actix.rs/)
+- [Axum 文档](https://docs.rs/axum/)
+- [Tokio 文档](https://tokio.rs/)
+- [Serde 文档](https://serde.rs/)
+
+### 2. DDD 关键点
+
+**推荐库**: `serde`, `thiserror`, `anyhow`, `uuid`, `chrono`
+
+- **聚合根**: 聚合根设计、聚合边界、一致性保证
+- **仓储**: 仓储模式、数据访问抽象、查询优化
+- **领域服务**: 领域服务设计、无状态服务、业务规则
+- **限界上下文**: 上下文划分、上下文映射、集成模式
+
+**相关资源**:
+
+- [Serde 文档](https://serde.rs/)
+- [thiserror 文档](https://docs.rs/thiserror/)
+- [anyhow 文档](https://docs.rs/anyhow/)
+- [DDD 参考](https://martinfowler.com/bliki/DomainDrivenDesign.html)
+
+### 3. 同步/异步边界
+
+**推荐库**: `tokio`, `async-std`, `futures`, `actix-web`, `axum`
+
+- **I/O 接口**: 异步 I/O、非阻塞操作、事件驱动
+- **队列与事件总线**: 消息队列、事件总线、发布订阅
+- **跨进程通信**: gRPC、HTTP、WebSocket、消息传递
+
+**相关资源**:
+
+- [Tokio 文档](https://tokio.rs/)
+- [async-std 文档](https://docs.rs/async-std/)
+- [Futures 文档](https://docs.rs/futures/)
+- [Actix Web 文档](https://actix.rs/)
+
+### 4. 错误与可靠性
+
+**推荐库**: `thiserror`, `anyhow`, `tracing`, `opentelemetry`, `tower`
+
+- **重试/超时/熔断**: 重试策略、超时控制、熔断器模式
+- **补偿事务**: Saga 模式、补偿操作、最终一致性
+- **观察性**: 日志、指标、追踪、分布式追踪
+
+**相关资源**:
+
+- [thiserror 文档](https://docs.rs/thiserror/)
+- [anyhow 文档](https://docs.rs/anyhow/)
+- [tracing 文档](https://docs.rs/tracing/)
+- [OpenTelemetry 文档](https://opentelemetry.io/)
+
+## 💻 实践与样例
+
+### 代码示例位置
+
+- **微服务**: [crates/c13_microservice](../../../crates/c13_microservice/)
+- **网络**: [crates/c10_networks](../../../crates/c10_networks/)
+- **设计模式**: [`../../03_design_patterns/00_index.md`](../../03_design_patterns/00_index.md)
+
+### 快速开始示例
+
+```rust
+// 使用 Actix Web 实现分层架构
+use actix_web::{web, App, HttpServer, Responder};
+
+async fn handler() -> impl Responder {
+    "Hello, Architecture!"
+}
+
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    HttpServer::new(|| {
+        App::new().route("/", web::get().to(handler))
+    })
+    .bind("127.0.0.1:8080")?
+    .run()
+    .await
+}
+```
+
+---
+
+## 🔗 相关索引
+
+- **微服务**: [`../02_microservices/00_index.md`](../02_microservices/00_index.md)
+- **服务网格**: [`../03_service_mesh/00_index.md`](../03_service_mesh/00_index.md)
+- **设计模式**: [`../../03_design_patterns/00_index.md`](../../03_design_patterns/00_index.md)
+
+---
+
+## 🧭 导航
+
+- **返回软件工程**: [`../00_index.md`](../00_index.md)
+- **微服务**: [`../02_microservices/00_index.md`](../02_microservices/00_index.md)
+- **工具链生态**: [`../../06_toolchain_ecosystem/00_index.md`](../../06_toolchain_ecosystem/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-10
+**维护者**: 项目维护者
+**状态**: 已完善 ✅

@@ -1,0 +1,43 @@
+# 01. 所有权与借用系统 索引
+
+## 目录
+
+1. [哲学批判性分析](./05_variable_analysis.md#1-哲学批判性分析)
+2. [变量的本体论与类型系统](./05_variable_analysis.md#2-变量的本体论与类型系统)
+    1. [变量的定义与本体论](./05_variable_analysis.md#21-变量的定义与本体论)
+    2. [类型系统与变量的身份](./05_variable_analysis.md#22-类型系统与变量的身份)
+    3. [Copy语义与所有权](./05_variable_analysis.md#23-copy语义与所有权)
+3. [生命周期与作用域的多维分析](./03_lifetime_system.md)
+    1. [哲学批判性分析](./03_lifetime_system.md#1-哲学批判性分析)
+    2. [作用域的本体论与分类](./03_lifetime_system.md#2-作用域的本体论与分类)
+    3. [生命周期与作用域的关系](./03_lifetime_system.md#3-生命周期与作用域的关系)
+    4. [控制流、数据流与作用域](./03_lifetime_system.md#4-控制流数据流与作用域)
+    5. [可见性、遮蔽与命名空间](./03_lifetime_system.md#5-可见性遮蔽与命名空间)
+    6. [RAII、Drop与资源管理](./03_lifetime_system.md#6-raiidrop与资源管理)
+    7. [多表征与形式化证明](./03_lifetime_system.md#7-多表征与形式化证明)
+    8. [工程实践与最佳策略](./03_lifetime_system.md#8-工程实践与最佳策略)
+    9. [总结与未来展望](./03_lifetime_system.md#9-总结与未来展望)
+4. [可变性与内部可变性](./05_variable_analysis.md#4-可变性与内部可变性)
+    1. [不变性与可变性](./05_variable_analysis.md#41-不变性与可变性)
+    2. [内部可变性模式](./05_variable_analysis.md#42-内部可变性模式)
+    3. [可变性与并发安全](./05_variable_analysis.md#43-可变性与并发安全)
+5. [所有权与借用规则](./05_variable_analysis.md#5-所有权与借用规则)
+    1. [所有权原则](./05_variable_analysis.md#51-所有权原则)
+    2. [借用类型与排他性](./05_variable_analysis.md#52-借用类型与排他性)
+    3. [生命周期与借用检查](./05_variable_analysis.md#53-生命周期与借用检查)
+6. [数据流、执行流与变量状态](./05_variable_analysis.md#6-数据流执行流与变量状态)
+    1. [所有权转移的数据流图](./05_variable_analysis.md#61-所有权转移的数据流图)
+    2. [借用的数据通道](./05_variable_analysis.md#62-借用的数据通道)
+    3. [控制流与变量生命周期](./05_variable_analysis.md#63-控制流与变量生命周期)
+7. [多表征与形式化证明](./05_variable_analysis.md#7-多表征与形式化证明)
+    1. [变量生命周期流程图](./05_variable_analysis.md#71-变量生命周期流程图)
+    2. [所有权转移示意图](./05_variable_analysis.md#72-所有权转移示意图)
+    3. [变量系统的形式化符号](./05_variable_analysis.md#73-变量系统的形式化符号)
+8. [跨范式与工程实践](./05_variable_analysis.md#8-跨范式与工程实践)
+    1. [函数式、面向对象、系统编程视角](./05_variable_analysis.md#81-函数式面向对象系统编程视角)
+    2. [工程最佳实践与陷阱](./05_variable_analysis.md#82-工程最佳实践与陷阱)
+9. [总结与未来展望](./05_variable_analysis.md#9-总结与未来展望)
+
+---
+
+[返回上级目录](../00_index.md)

@@ -1,0 +1,144 @@
+# 企业（Enterprise）索引
+
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📊 目录
+
+- [企业（Enterprise）索引](#企业enterprise索引)
+  - [📊 目录](#-目录)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 核心概念](#-核心概念)
+    - [1. 企业系统（Enterprise Systems）](#1-企业系统enterprise-systems)
+    - [2. 业务流程（Business Processes）](#2-业务流程business-processes)
+    - [3. 企业集成（Enterprise Integration）](#3-企业集成enterprise-integration)
+    - [4. 企业安全（Enterprise Security）](#4-企业安全enterprise-security)
+  - [💻 实践与样例](#-实践与样例)
+    - [代码示例位置](#代码示例位置)
+    - [快速开始示例](#快速开始示例)
+  - [🔗 相关索引](#-相关索引)
+  - [🧭 导航](#-导航)
+
+## 🎯 目的
+
+本模块介绍 Rust 在企业级应用领域的应用与实践，提供企业系统、业务流程、企业集成的技术指导。所有内容均基于 Rust 1.91.0 和当前最佳实践。
+
+### 核心价值
+
+- **企业**: 专注于 Rust 在企业级应用领域的应用
+- **最佳实践**: 基于 Rust 社区最新企业级应用实践
+- **完整覆盖**: 涵盖企业系统、业务流程、企业集成、企业安全等核心主题
+- **易于理解**: 提供详细的企业级应用说明和代码示例
+
+## 📚 核心概念
+
+### 1. 企业系统（Enterprise Systems）
+
+**推荐库**: `actix-web`, `sqlx`, `diesel`, `serde`, `chrono`
+
+- **ERP 系统**: 企业资源规划、财务管理、供应链管理
+- **CRM 系统**: 客户关系管理、销售管理、客户服务
+- **SCM 系统**: 供应链管理、采购管理、库存管理
+- **HR 系统**: 人力资源管理、员工管理、薪酬管理
+
+**相关资源**:
+
+- [Actix Web 文档](https://actix.rs/)
+- [SQLx 文档](https://docs.rs/sqlx/)
+- [Diesel 文档](https://diesel.rs/)
+- [Serde 文档](https://serde.rs/)
+
+### 2. 业务流程（Business Processes）
+
+**推荐库**: `tokio`, `actix-web`, `serde`, `chrono`, `uuid`
+
+- **工作流**: 工作流引擎、流程定义、流程执行
+- **审批流程**: 审批流程、审批规则、审批记录
+- **业务流程自动化**: 业务流程自动化、任务调度、事件驱动
+- **流程监控**: 流程监控、流程分析、流程优化
+
+**相关资源**:
+
+- [Tokio 文档](https://tokio.rs/)
+- [Actix Web 文档](https://actix.rs/)
+- [Serde 文档](https://serde.rs/)
+- [Chrono 文档](https://docs.rs/chrono/)
+
+### 3. 企业集成（Enterprise Integration）
+
+**推荐库**: `tokio`, `actix-web`, `serde`, `kafka`, `rabbitmq`
+
+- **系统集成**: 系统集成、数据集成、服务集成
+- **API 集成**: API 网关、API 管理、API 安全
+- **消息队列**: 消息队列、消息路由、消息处理
+- **数据同步**: 数据同步、数据转换、数据验证
+
+**相关资源**:
+
+- [Tokio 文档](https://tokio.rs/)
+- [Actix Web 文档](https://actix.rs/)
+- [Kafka Rust](https://docs.rs/kafka/)
+- [RabbitMQ Rust](https://docs.rs/rabbitmq/)
+
+### 4. 企业安全（Enterprise Security）
+
+**推荐库**: `ring`, `rustls`, `jwt`, `oauth2`, `actix-web`
+
+- **身份管理**: 身份认证、单点登录、多因素认证
+- **访问控制**: 访问控制、权限管理、角色管理
+- **安全策略**: 安全策略、安全审计、安全监控
+- **数据加密**: 数据加密、数据脱敏、数据保护
+
+**相关资源**:
+
+- [ring 文档](https://docs.rs/ring/)
+- [rustls 文档](https://docs.rs/rustls/)
+- [JWT Rust](https://docs.rs/jsonwebtoken/)
+- [OAuth2 Rust](https://docs.rs/oauth2/)
+
+## 💻 实践与样例
+
+### 代码示例位置
+
+- **企业系统**: [crates/c44_enterprise](../../../crates/c44_enterprise/)
+- **业务流程**: [crates/c45_business_processes](../../../crates/c45_business_processes/)
+- **企业集成**: [crates/c46_enterprise_integration](../../../crates/c46_enterprise_integration/)
+
+### 快速开始示例
+
+```rust
+// 使用 Actix Web 开发企业系统
+use actix_web::{web, App, HttpServer, Responder};
+
+async fn dashboard() -> impl Responder {
+    "Enterprise Dashboard"
+}
+```
+
+---
+
+## 🔗 相关索引
+
+- **理论基础（并发模型）**: [`../../01_theoretical_foundations/04_concurrency_models/00_index.md`](../../01_theoretical_foundations/04_concurrency_models/00_index.md)
+- **应用领域（云基础设施）**: [`../06_cloud_infrastructure/00_index.md`](../06_cloud_infrastructure/00_index.md)
+- **软件工程（架构设计）**: [`../../05_software_engineering/01_architecture_design/00_index.md`](../../05_software_engineering/01_architecture_design/00_index.md)
+
+---
+
+## 🧭 导航
+
+- **返回应用领域**: [`../00_index.md`](../00_index.md)
+- **社交媒体**: [`../13_social_media/00_index.md`](../13_social_media/00_index.md)
+- **移动**: [`../15_mobile/00_index.md`](../15_mobile/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-10
+**维护者**: 项目维护者
+**状态**: 已完善 ✅

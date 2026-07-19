@@ -1,0 +1,143 @@
+# 人工智能与机器学习（AI/ML）索引
+
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📊 目录
+
+- [人工智能与机器学习（AI/ML）索引](#人工智能与机器学习aiml索引)
+  - [📊 目录](#-目录)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 核心概念](#-核心概念)
+    - [1. 深度学习（Deep Learning）](#1-深度学习deep-learning)
+    - [2. 机器学习（Machine Learning）](#2-机器学习machine-learning)
+    - [3. 数据处理（Data Processing）](#3-数据处理data-processing)
+    - [4. 模型推理（Model Inference）](#4-模型推理model-inference)
+  - [💻 实践与样例](#-实践与样例)
+    - [代码示例位置](#代码示例位置)
+    - [快速开始示例](#快速开始示例)
+  - [🔗 相关索引](#-相关索引)
+  - [🧭 导航](#-导航)
+
+## 🎯 目的
+
+本模块介绍 Rust 在人工智能与机器学习领域的应用与实践，提供深度学习、神经网络、数据处理的技术指导。所有内容均基于 Rust 1.91.0 和当前最佳实践。
+
+### 核心价值
+
+- **AI/ML**: 专注于 Rust 在人工智能与机器学习领域的应用
+- **最佳实践**: 基于 Rust 社区最新 AI/ML 实践
+- **完整覆盖**: 涵盖深度学习、机器学习、数据处理、模型推理等核心主题
+- **易于理解**: 提供详细的 AI/ML 应用说明和代码示例
+
+## 📚 核心概念
+
+### 1. 深度学习（Deep Learning）
+
+**推荐库**: `candle`, `tch`, `burn`, `ort`, `tract`
+
+- **神经网络**: 神经网络、反向传播、梯度下降
+- **模型训练**: 模型训练、优化算法、损失函数
+- **模型推理**: 预测、分类、回归、生成
+- **硬件加速**: GPU 加速、TPU 支持、量化推理
+
+**相关资源**:
+
+- [Candle 文档](https://github.com/huggingface/candle)
+- [tch 文档](https://docs.rs/tch/)
+- [Burn 文档](https://burn.dev/)
+- [ONNX Runtime Rust](https://docs.rs/ort/)
+
+### 2. 机器学习（Machine Learning）
+
+**推荐库**: `linfa`, `smartcore`, `candle`, `ndarray`
+
+- **监督学习**: 分类、回归、支持向量机
+- **无监督学习**: 聚类、降维、异常检测
+- **强化学习**: Q-learning、策略梯度、深度强化学习
+- **特征工程**: 特征提取、特征选择、特征变换
+
+**相关资源**:
+
+- [Linfa 文档](https://docs.rs/linfa/)
+- [SmartCore 文档](https://docs.rs/smartcore/)
+- [Candle 文档](https://github.com/huggingface/candle)
+- [ndarray 文档](https://docs.rs/ndarray/)
+
+### 3. 数据处理（Data Processing）
+
+**推荐库**: `polars`, `arrow`, `parquet`, `ndarray`, `rayon`
+
+- **特征工程**: 特征提取、特征选择、特征变换
+- **数据清洗**: 数据清洗、缺失值处理、异常值处理
+- **数据增强**: 数据增强、数据合成、数据平衡
+- **数据加载**: 数据加载、数据转换、数据缓存
+
+**相关资源**:
+
+- [Polars 文档](https://pola-rs.github.io/polars/)
+- [Arrow Rust](https://arrow.apache.org/docs/rust/)
+- [Parquet Rust](https://docs.rs/parquet/)
+- [ndarray 文档](https://docs.rs/ndarray/)
+
+### 4. 模型推理（Model Inference）
+
+**推荐库**: `candle`, `ort`, `tract`, `tch`, `burn`
+
+- **模型推理**: 预测、分类、回归、生成
+- **模型优化**: 模型量化、模型剪枝、模型压缩
+- **硬件加速**: GPU 加速、TPU 支持、边缘推理
+- **模型服务**: 模型部署、模型服务、模型监控
+
+**相关资源**:
+
+- [Candle 文档](https://github.com/huggingface/candle)
+- [ONNX Runtime Rust](https://docs.rs/ort/)
+- [Tract 文档](https://docs.rs/tract/)
+- [tch 文档](https://docs.rs/tch/)
+
+## 💻 实践与样例
+
+### 代码示例位置
+
+- **AI/ML 开发**: [crates/c21_ai_ml](../../../crates/c21_ai_ml/)
+- **数据处理**: [crates/c22_data_processing](../../../crates/c22_data_processing/)
+- **计算机视觉**: [crates/c23_computer_vision](../../../crates/c23_computer_vision/)
+
+### 快速开始示例
+
+```rust
+// 使用 Candle 进行深度学习
+use candle_core::{Device, Tensor};
+
+let device = Device::Cpu;
+let x = Tensor::randn(0f32, 1.0, (2, 3), &device)?;
+```
+
+---
+
+## 🔗 相关索引
+
+- **理论基础（数学基础）**: [`../../01_theoretical_foundations/10_mathematical_foundations/00_index.md`](../../01_theoretical_foundations/10_mathematical_foundations/00_index.md)
+- **编程范式（数据导向）**: [`../../02_programming_paradigms/10_data_oriented/00_index.md`](../../02_programming_paradigms/10_data_oriented/00_index.md)
+- **应用领域（大数据分析）**: [`../07_big_data_analytics/00_index.md`](../07_big_data_analytics/00_index.md)
+
+---
+
+## 🧭 导航
+
+- **返回应用领域**: [`../00_index.md`](../00_index.md)
+- **IoT**: [`../03_iot/00_index.md`](../03_iot/00_index.md)
+- **区块链与 Web3**: [`../05_blockchain_web3/00_index.md`](../05_blockchain_web3/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-10
+**维护者**: 项目维护者
+**状态**: 已完善 ✅

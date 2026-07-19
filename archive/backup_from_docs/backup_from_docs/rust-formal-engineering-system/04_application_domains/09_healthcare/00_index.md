@@ -1,0 +1,144 @@
+# 医疗健康（Healthcare）索引
+
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📊 目录
+
+- [医疗健康（Healthcare）索引](#医疗健康healthcare索引)
+  - [📊 目录](#-目录)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 核心概念](#-核心概念)
+    - [1. 医疗信息系统（Medical Information Systems）](#1-医疗信息系统medical-information-systems)
+    - [2. 健康监测（Health Monitoring）](#2-健康监测health-monitoring)
+    - [3. 医学影像（Medical Imaging）](#3-医学影像medical-imaging)
+    - [4. 数据分析（Data Analytics）](#4-数据分析data-analytics)
+  - [💻 实践与样例](#-实践与样例)
+    - [代码示例位置](#代码示例位置)
+    - [快速开始示例](#快速开始示例)
+  - [🔗 相关索引](#-相关索引)
+  - [🧭 导航](#-导航)
+
+## 🎯 目的
+
+本模块介绍 Rust 在医疗健康领域的应用与实践，提供医疗系统、健康监测、数据分析的技术指导。所有内容均基于 Rust 1.91.0 和当前最佳实践。
+
+### 核心价值
+
+- **医疗健康**: 专注于 Rust 在医疗健康领域的应用
+- **最佳实践**: 基于 Rust 社区最新医疗健康实践
+- **完整覆盖**: 涵盖医疗信息系统、健康监测、医学影像、数据分析等核心主题
+- **易于理解**: 提供详细的医疗健康应用说明和代码示例
+
+## 📚 核心概念
+
+### 1. 医疗信息系统（Medical Information Systems）
+
+**推荐库**: `actix-web`, `sqlx`, `diesel`, `serde`, `chrono`
+
+- **电子病历**: 电子病历、病历管理、病历查询
+- **医院管理**: 医院管理、科室管理、人员管理
+- **预约系统**: 预约管理、排班系统、资源调度
+- **数据交换**: HL7、FHIR、DICOM 标准
+
+**相关资源**:
+
+- [Actix Web 文档](https://actix.rs/)
+- [SQLx 文档](https://docs.rs/sqlx/)
+- [Diesel 文档](https://diesel.rs/)
+- [HL7 文档](https://www.hl7.org/)
+
+### 2. 健康监测（Health Monitoring）
+
+**推荐库**: `tokio`, `embedded-hal`, `bluetooth`, `mqtt`
+
+- **可穿戴设备**: 可穿戴设备、传感器数据、健康指标
+- **远程监测**: 远程监测、实时数据、告警系统
+- **健康指标**: 心率、血压、血糖、体温监测
+- **数据同步**: 数据同步、云端存储、数据分析
+
+**相关资源**:
+
+- [Tokio 文档](https://tokio.rs/)
+- [embedded-hal 文档](https://docs.rs/embedded-hal/)
+- [Bluetooth Rust](https://docs.rs/bluetooth/)
+- [MQTT Rust](https://docs.rs/mqtt/)
+
+### 3. 医学影像（Medical Imaging）
+
+**推荐库**: `image`, `opencv`, `dicom`, `ndarray`
+
+- **图像处理**: 图像处理、图像增强、图像分析
+- **诊断辅助**: 诊断辅助、AI 辅助诊断、图像识别
+- **DICOM**: DICOM 标准、医学影像格式、影像存储
+- **3D 重建**: 3D 重建、体积渲染、可视化
+
+**相关资源**:
+
+- [image 文档](https://docs.rs/image/)
+- [OpenCV Rust](https://docs.rs/opencv/)
+- [DICOM Rust](https://docs.rs/dicom/)
+- [ndarray 文档](https://docs.rs/ndarray/)
+
+### 4. 数据分析（Data Analytics）
+
+**推荐库**: `polars`, `arrow`, `pandas`, `candle`
+
+- **健康数据分析**: 趋势分析、预测模型、风险评估
+- **临床试验**: 数据收集、统计分析、结果分析
+- **药物管理**: 药物追踪、剂量计算、药物相互作用
+- **隐私保护**: HIPAA 合规、数据加密、访问控制
+
+**相关资源**:
+
+- [Polars 文档](https://pola-rs.github.io/polars/)
+- [Arrow Rust](https://arrow.apache.org/docs/rust/)
+- [Candle 文档](https://github.com/huggingface/candle)
+- [HIPAA 合规](https://www.hhs.gov/hipaa/)
+
+## 💻 实践与样例
+
+### 代码示例位置
+
+- **医疗健康**: [crates/c29_healthcare](../../../crates/c29_healthcare/)
+- **健康监测**: [crates/c30_health_monitoring](../../../crates/c30_health_monitoring/)
+- **医学影像**: [crates/c31_medical_imaging](../../../crates/c31_medical_imaging/)
+
+### 快速开始示例
+
+```rust
+// 使用 Actix Web 开发医疗系统
+use actix_web::{web, App, HttpServer, Responder};
+
+async fn health_check() -> impl Responder {
+    "Health System OK"
+}
+```
+
+---
+
+## 🔗 相关索引
+
+- **理论基础（内存安全）**: [`../../01_theoretical_foundations/02_memory_safety/00_index.md`](../../01_theoretical_foundations/02_memory_safety/00_index.md)
+- **应用领域（AI/ML）**: [`../04_ai_ml/00_index.md`](../04_ai_ml/00_index.md)
+- **应用领域（IoT）**: [`../03_iot/00_index.md`](../03_iot/00_index.md)
+
+---
+
+## 🧭 导航
+
+- **返回应用领域**: [`../00_index.md`](../00_index.md)
+- **网络安全**: [`../08_cybersecurity/00_index.md`](../08_cybersecurity/00_index.md)
+- **教育科技**: [`../10_education_tech/00_index.md`](../10_education_tech/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-10
+**维护者**: 项目维护者
+**状态**: 已完善 ✅

@@ -1,0 +1,143 @@
+# 汽车（Automotive）索引
+
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📊 目录
+
+- [汽车（Automotive）索引](#汽车automotive索引)
+  - [📊 目录](#-目录)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 核心概念](#-核心概念)
+    - [1. 自动驾驶（Autonomous Driving）](#1-自动驾驶autonomous-driving)
+    - [2. 车载系统（In-Vehicle Systems）](#2-车载系统in-vehicle-systems)
+    - [3. 汽车网络（Automotive Networks）](#3-汽车网络automotive-networks)
+    - [4. 功能安全（Functional Safety）](#4-功能安全functional-safety)
+  - [💻 实践与样例](#-实践与样例)
+    - [代码示例位置](#代码示例位置)
+    - [快速开始示例](#快速开始示例)
+  - [🔗 相关索引](#-相关索引)
+  - [🧭 导航](#-导航)
+
+## 🎯 目的
+
+本模块介绍 Rust 在汽车领域的应用与实践，提供自动驾驶、车载系统、汽车网络的技术指导。所有内容均基于 Rust 1.91.0 和当前最佳实践。
+
+### 核心价值
+
+- **汽车**: 专注于 Rust 在汽车领域的应用
+- **最佳实践**: 基于 Rust 社区最新汽车领域实践
+- **完整覆盖**: 涵盖自动驾驶、车载系统、汽车网络、功能安全等核心主题
+- **易于理解**: 提供详细的汽车应用说明和代码示例
+
+## 📚 核心概念
+
+### 1. 自动驾驶（Autonomous Driving）
+
+**推荐库**: `candle`, `opencv`, `ndarray`, `embedded-hal`, `rtic`
+
+- **感知系统**: 传感器融合、目标检测、环境感知
+- **决策系统**: 路径规划、行为决策、风险评估
+- **控制系统**: 车辆控制、执行器控制、反馈控制
+- **实时系统**: 硬实时、软实时、实时调度
+
+**相关资源**:
+
+- [Candle 文档](https://github.com/huggingface/candle)
+- [OpenCV Rust](https://docs.rs/opencv/)
+- [ndarray 文档](https://docs.rs/ndarray/)
+- [RTIC 文档](https://rtic.rs/)
+
+### 2. 车载系统（In-Vehicle Systems）
+
+**推荐库**: `tokio`, `actix-web`, `serde`, `embedded-hal`, `can`
+
+- **信息娱乐**: 信息娱乐系统、多媒体播放、用户界面
+- **导航系统**: GPS 导航、地图显示、路线规划
+- **车载通信**: 车载通信、远程控制、OTA 更新
+- **人机交互**: 语音识别、手势识别、触摸屏
+
+**相关资源**:
+
+- [Tokio 文档](https://tokio.rs/)
+- [Actix Web 文档](https://actix.rs/)
+- [embedded-hal 文档](https://docs.rs/embedded-hal/)
+- [CAN Rust](https://docs.rs/can/)
+
+### 3. 汽车网络（Automotive Networks）
+
+**推荐库**: `can`, `socketcan`, `someip`, `dds`
+
+- **CAN 总线**: CAN 协议、CAN 消息、CAN 网络
+- **LIN 总线**: LIN 协议、LIN 消息、LIN 网络
+- **以太网**: 车载以太网、TSN、AVB
+- **网络管理**: 网络诊断、网络配置、网络监控
+
+**相关资源**:
+
+- [CAN Rust](https://docs.rs/can/)
+- [socketcan 文档](https://docs.rs/socketcan/)
+- [SOME/IP Rust](https://docs.rs/someip/)
+- [DDS Rust](https://docs.rs/dds/)
+
+### 4. 功能安全（Functional Safety）
+
+**推荐库**: `kani`, `prusti`, `miri`, `loom`
+
+- **ISO 26262**: 功能安全标准、安全分析、安全验证
+- **安全机制**: 故障检测、故障处理、冗余设计
+- **安全验证**: 形式化验证、安全测试、安全审计
+- **网络安全**: 车载网络安全、安全通信、安全更新
+
+**相关资源**:
+
+- [Kani 文档](https://github.com/model-checking/kani)
+- [Prusti 文档](https://github.com/viperproject/prusti-dev)
+- [Miri 文档](https://github.com/rust-lang/miri)
+- [ISO 26262 标准](https://www.iso.org/standard/68383.html)
+
+## 💻 实践与样例
+
+### 代码示例位置
+
+- **汽车系统**: [crates/c35_automotive](../../../crates/c35_automotive/)
+- **自动驾驶**: [crates/c36_autonomous_driving](../../../crates/c36_autonomous_driving/)
+- **车载网络**: [crates/c37_vehicle_networks](../../../crates/c37_vehicle_networks/)
+
+### 快速开始示例
+
+```rust
+// 使用 CAN 总线进行车载通信
+use can::CanSocket;
+
+let socket = CanSocket::bind("can0")?;
+let frame = socket.read()?;
+```
+
+---
+
+## 🔗 相关索引
+
+- **理论基础（并发模型）**: [`../../01_theoretical_foundations/04_concurrency_models/00_index.md`](../../01_theoretical_foundations/04_concurrency_models/00_index.md)
+- **应用领域（IoT）**: [`../03_iot/00_index.md`](../03_iot/00_index.md)
+- **应用领域（AI/ML）**: [`../04_ai_ml/00_index.md`](../04_ai_ml/00_index.md)
+
+---
+
+## 🧭 导航
+
+- **返回应用领域**: [`../00_index.md`](../00_index.md)
+- **教育科技**: [`../10_education_tech/00_index.md`](../10_education_tech/00_index.md)
+- **电商**: [`../12_ecommerce/00_index.md`](../12_ecommerce/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-10
+**维护者**: 项目维护者
+**状态**: 已完善 ✅

@@ -1,0 +1,150 @@
+# 质量指南（Guidelines）索引
+
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📊 目录
+
+- [质量指南（Guidelines）索引](#质量指南guidelines索引)
+  - [📊 目录](#-目录)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 核心指南](#-核心指南)
+    - [1. 代码质量指南](#1-代码质量指南)
+    - [2. 测试质量指南](#2-测试质量指南)
+    - [3. 文档质量指南](#3-文档质量指南)
+    - [4. 性能质量指南](#4-性能质量指南)
+  - [💻 实践与样例](#-实践与样例)
+    - [代码示例位置](#代码示例位置)
+    - [快速开始示例](#快速开始示例)
+  - [🔗 相关索引](#-相关索引)
+  - [🧭 导航](#-导航)
+
+## 🎯 目的
+
+本模块提供 Rust 项目质量保障的实践指南与最佳实践，建立代码质量、测试质量、文档质量的统一标准。
+所有内容均基于 Rust 1.91.0 和当前最佳实践。
+
+### 核心价值
+
+- **质量指南**: 提供全面的质量保障实践指南
+- **最佳实践**: 基于 Rust 社区最新质量实践
+- **完整覆盖**: 涵盖代码质量、测试质量、文档质量、性能质量等核心指南
+- **易于理解**: 提供详细的质量指南说明和代码示例
+
+## 📚 核心指南
+
+### 1. 代码质量指南
+
+**推荐工具**: `rustfmt`, `clippy`, `cargo-fmt`, `cargo-clippy`
+
+- **代码风格**: 遵循 `rustfmt` 标准，使用 `clippy` 检查
+- **命名规范**: 使用有意义的变量名和函数名，遵循 Rust 命名约定
+- **注释规范**: 为公共 API 提供文档注释，使用 `///` 和 `//!`
+- **错误处理**: 使用 `Result` 和 `Option` 进行错误处理，避免 `panic!`
+- **性能考虑**: 避免不必要的分配和拷贝，使用引用和切片
+
+**相关资源**:
+
+- [Rustfmt 文档](https://github.com/rust-lang/rustfmt)
+- [Clippy 文档](https://github.com/rust-lang/rust-clippy)
+- [Rust API 指南](https://rust-lang.github.io/api-guidelines/)
+
+### 2. 测试质量指南
+
+**推荐工具**: `cargo-test`, `proptest`, `quickcheck`, `mockall`
+
+- **测试覆盖**: 核心功能必须有测试覆盖，目标覆盖率 ≥ 80%
+- **测试分类**: 单元测试、集成测试、端到端测试
+- **测试数据**: 使用工厂模式生成测试数据，使用 `proptest` 进行属性测试
+- **测试隔离**: 每个测试独立运行，不依赖外部状态
+- **属性测试**: 使用 `proptest` 进行基于属性的测试
+
+**相关资源**:
+
+- [Cargo Test 文档](https://doc.rust-lang.org/cargo/commands/cargo-test.html)
+- [Proptest 文档](https://docs.rs/proptest/)
+- [QuickCheck 文档](https://docs.rs/quickcheck/)
+- [Mockall 文档](https://docs.rs/mockall/)
+
+### 3. 文档质量指南
+
+**推荐工具**: `cargo-doc`, `mdbook`, `rustdoc`
+
+- **API 文档**: 为所有公共 API 提供文档注释，使用 `///` 和 `//!`
+- **示例代码**: 提供可运行的示例代码，使用 `# Examples` 部分
+- **变更日志**: 维护详细的 CHANGELOG，遵循 Keep a Changelog 格式
+- **贡献指南**: 提供清晰的贡献指南，包括代码规范和提交流程
+
+**相关资源**:
+
+- [Rustdoc 文档](https://doc.rust-lang.org/rustdoc/)
+- [MdBook 文档](https://rust-lang.github.io/mdBook/)
+- [Keep a Changelog](https://keepachangelog.com/)
+
+### 4. 性能质量指南
+
+**推荐工具**: `criterion`, `iai`, `flamegraph`, `perf`
+
+- **性能基准**: 关键接口提供性能基准测试，使用 `criterion`
+- **性能分析**: 使用 `flamegraph` 和 `perf` 进行性能分析
+- **性能优化**: 避免不必要的分配，使用零成本抽象
+- **性能监控**: 监控性能指标，防止性能回归
+
+**相关资源**:
+
+- [Criterion 文档](https://docs.rs/criterion/)
+- [IAI 文档](https://docs.rs/iai/)
+- [Flamegraph 文档](https://github.com/flamegraph-rs/flamegraph)
+
+## 💻 实践与样例
+
+### 代码示例位置
+
+- **代码质量**: [crates/c03_control_fn](../../../crates/c03_control_fn/)
+- **测试实践**: [crates/c05_threads](../../../crates/c05_threads/)
+- **文档实践**: [crates/c06_async](../../../crates/c06_async/)
+
+### 快速开始示例
+
+```rust
+/// 计算两个数的和
+///
+/// # Examples
+///
+/// ```
+/// use my_crate::add;
+/// assert_eq!(add(2, 3), 5);
+/// ```
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+```
+
+---
+
+## 🔗 相关索引
+
+- **质量标准**: [`../01_standards/00_index.md`](../01_standards/00_index.md)
+- **检查清单**: [`../03_checklists/00_index.md`](../03_checklists/00_index.md)
+- **测试**: [`../05_testing/00_index.md`](../05_testing/00_index.md)
+- **工具链生态**: [`../../06_toolchain_ecosystem/00_index.md`](../../06_toolchain_ecosystem/00_index.md)
+
+---
+
+## 🧭 导航
+
+- **返回质量保障**: [`../00_index.md`](../00_index.md)
+- **质量标准**: [`../01_standards/00_index.md`](../01_standards/00_index.md)
+- **检查清单**: [`../03_checklists/00_index.md`](../03_checklists/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-10
+**维护者**: 项目维护者
+**状态**: 已完善 ✅

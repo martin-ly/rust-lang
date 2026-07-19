@@ -1,0 +1,143 @@
+# 云基础设施（Cloud Infrastructure）索引
+
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📊 目录
+
+- [云基础设施（Cloud Infrastructure）索引](#云基础设施cloud-infrastructure索引)
+  - [📊 目录](#-目录)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 核心概念](#-核心概念)
+    - [1. 容器化（Containerization）](#1-容器化containerization)
+    - [2. 微服务（Microservices）](#2-微服务microservices)
+    - [3. 服务网格（Service Mesh）](#3-服务网格service-mesh)
+    - [4. 云原生（Cloud Native）](#4-云原生cloud-native)
+  - [💻 实践与样例](#-实践与样例)
+    - [代码示例位置](#代码示例位置)
+    - [快速开始示例](#快速开始示例)
+  - [🔗 相关索引](#-相关索引)
+  - [🧭 导航](#-导航)
+
+## 🎯 目的
+
+本模块介绍 Rust 在云基础设施领域的应用与实践，提供容器化、微服务、服务网格的技术指导。所有内容均基于 Rust 1.91.0 和当前最佳实践。
+
+### 核心价值
+
+- **云基础设施**: 专注于 Rust 在云基础设施领域的应用
+- **最佳实践**: 基于 Rust 社区最新云基础设施实践
+- **完整覆盖**: 涵盖容器化、微服务、服务网格、云原生等核心主题
+- **易于理解**: 提供详细的云基础设施应用说明和代码示例
+
+## 📚 核心概念
+
+### 1. 容器化（Containerization）
+
+**推荐库**: `docker`, `kube`, `oci`, `containerd`
+
+- **Docker**: Docker 镜像、容器管理、镜像构建
+- **Kubernetes**: 容器编排、Pod 管理、服务发现
+- **容器运行时**: containerd、CRI-O、容器生命周期
+- **镜像管理**: 镜像构建、镜像推送、镜像安全
+
+**相关资源**:
+
+- [Docker Rust](https://docs.rs/docker/)
+- [kube-rs 文档](https://kube.rs/)
+- [OCI 规范](https://opencontainers.org/)
+- [containerd 文档](https://containerd.io/)
+
+### 2. 微服务（Microservices）
+
+**推荐库**: `actix-web`, `axum`, `warp`, `tonic`, `tower`
+
+- **服务拆分**: 服务拆分、服务边界、服务职责
+- **API 网关**: API 网关、路由管理、负载均衡
+- **服务发现**: 服务注册、服务发现、健康检查
+- **服务通信**: gRPC、REST、消息队列、事件驱动
+
+**相关资源**:
+
+- [Actix Web 文档](https://actix.rs/)
+- [Axum 文档](https://docs.rs/axum/)
+- [Tonic 文档](https://docs.rs/tonic/)
+- [Tower 文档](https://docs.rs/tower/)
+
+### 3. 服务网格（Service Mesh）
+
+**推荐库**: `linkerd`, `istio`, `envoy`, `consul`
+
+- **流量管理**: 流量路由、负载均衡、熔断降级
+- **安全通信**: mTLS、身份认证、授权策略
+- **可观测性**: 指标收集、日志聚合、链路追踪
+- **策略管理**: 访问控制、速率限制、重试策略
+
+**相关资源**:
+
+- [Linkerd 文档](https://linkerd.io/)
+- [Istio 文档](https://istio.io/)
+- [Envoy 文档](https://www.envoyproxy.io/)
+- [Consul 文档](https://www.consul.io/)
+
+### 4. 云原生（Cloud Native）
+
+**推荐库**: `kubernetes`, `prometheus`, `grafana`, `opentelemetry`
+
+- **12-Factor App**: 配置管理、日志处理、进程管理
+- **云原生架构**: 微服务、容器化、DevOps、CI/CD
+- **可观测性**: 监控、日志、链路追踪、告警
+- **自动化**: 自动扩缩容、自动恢复、自动部署
+
+**相关资源**:
+
+- [Kubernetes 文档](https://kubernetes.io/)
+- [Prometheus 文档](https://prometheus.io/)
+- [Grafana 文档](https://grafana.com/)
+- [OpenTelemetry Rust](https://opentelemetry.io/docs/instrumentation/rust/)
+
+## 💻 实践与样例
+
+### 代码示例位置
+
+- **微服务开发**: [crates/c13_microservice](../../../crates/c13_microservice/)
+- **网络编程**: [crates/c10_networks](../../../crates/c10_networks/)
+- **异步编程**: [crates/c06_async](../../../crates/c06_async/)
+
+### 快速开始示例
+
+```rust
+// 使用 Actix Web 开发微服务
+use actix_web::{web, App, HttpServer, Responder};
+
+async fn index() -> impl Responder {
+    "Hello, Cloud Native!"
+}
+```
+
+---
+
+## 🔗 相关索引
+
+- **编程范式（异步）**: [`../../02_programming_paradigms/02_async/00_index.md`](../../02_programming_paradigms/02_async/00_index.md)
+- **软件工程（微服务）**: [`../../05_software_engineering/00_index.md`](../../05_software_engineering/00_index.md)
+- **质量保障（可观测性）**: [`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)
+
+---
+
+## 🧭 导航
+
+- **返回应用领域**: [`../00_index.md`](../00_index.md)
+- **软件工程**: [`../../05_software_engineering/00_index.md`](../../05_software_engineering/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-10
+**维护者**: 项目维护者
+**状态**: 已完善 ✅

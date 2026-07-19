@@ -1,0 +1,63 @@
+# 错误处理（Error Handling）索引
+
+> **创建日期**: 2025-11-11
+> **最后更新**: 2025-11-11
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📚 核心文档
+
+### 理论基础
+
+- **[01_formal_error_handling_theory.md](01_formal_error_handling_theory.md)** - 错误处理形式化理论 ✅ 已完善
+
+---
+
+## 📊 目录
+
+- [错误处理（Error Handling）索引](#错误处理error-handling索引)
+  - [📚 核心文档](#-核心文档)
+    - [理论基础](#理论基础)
+  - [📊 目录](#-目录)
+  - [模型](#模型)
+  - [策略与工具](#策略与工具)
+  - [实践与样例（Practice）](#实践与样例practice)
+  - [📚 内容文档](#-内容文档)
+  - [相关索引](#相关索引)
+  - [导航](#导航)
+
+## 模型
+
+- `Result<T, E>` 与 `Option<T>`：可恢复/不可恢复语义
+- Panic 与不可恢复错误：边界与约束
+- 错误分层：领域错误/技术错误/环境错误
+
+## 策略与工具
+
+- 错误类型设计：枚举化、细粒度 vs 聚合
+- 错误传播：`?`、`thiserror`、`anyhow`
+- 观测与SLO：错误率、重试、熔断
+
+## 实践与样例（Practice）
+
+- 错误处理基础：参见 [crates/c03_control_fn](../../../crates/c03_control_fn/)
+- 网络错误处理：[crates/c10_networks](../../../crates/c10_networks/)
+- 微服务错误处理：[crates/c13_microservice](../../../crates/c13_microservice/)
+
+## 📚 内容文档
+
+- **[错误处理基础](./01_error_handling_fundamentals.md)** - 错误处理核心概念和实践 ✅
+
+## 相关索引
+
+- 类型系统（Result/Option 类型）：[`../01_type_system/00_index.md`](../01_type_system/00_index.md)
+- 质量保障（错误测试）：[`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)
+- 软件工程（错误策略）：[`../../05_software_engineering/00_index.md`](../../05_software_engineering/00_index.md)
+
+## 导航
+
+- 返回理论基础：[`../00_index.md`](../00_index.md)
+- 质量保障：[`../../10_quality_assurance/00_index.md`](../../10_quality_assurance/00_index.md)
+- 返回项目根：[`../../README.md`](../../README.md)

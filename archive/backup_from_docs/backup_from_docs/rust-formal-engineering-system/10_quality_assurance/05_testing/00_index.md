@@ -1,0 +1,149 @@
+# 测试（Testing）索引
+
+> **创建日期**: 2025-10-31
+> **最后更新**: 2025-11-10
+> **Rust 版本**: 1.91.0 (Edition 2024) ✅
+> **状态**: 已完善 ✅
+
+---
+
+## 📊 目录
+
+- [测试（Testing）索引](#测试testing索引)
+  - [📊 目录](#-目录)
+  - [🎯 目的](#-目的)
+    - [核心价值](#核心价值)
+  - [📚 测试类型](#-测试类型)
+    - [1. 单元测试](#1-单元测试)
+    - [2. 集成测试](#2-集成测试)
+    - [3. 端到端测试](#3-端到端测试)
+    - [4. 属性测试](#4-属性测试)
+  - [💻 实践与示例](#-实践与示例)
+    - [代码示例位置](#代码示例位置)
+    - [快速开始示例](#快速开始示例)
+  - [🔗 相关索引](#-相关索引)
+  - [🧭 导航](#-导航)
+
+## 🎯 目的
+
+本模块建立完整的测试体系：单元测试、集成测试、端到端测试、属性测试，提供测试最佳实践与工具链集成方案。
+所有内容均基于 Rust 1.91.0 和当前最佳实践。
+
+### 核心价值
+
+- **测试体系**: 建立完整的测试体系和最佳实践
+- **最佳实践**: 基于 Rust 社区最新测试实践
+- **完整覆盖**: 涵盖单元测试、集成测试、端到端测试、属性测试等核心测试类型
+- **易于理解**: 提供详细的测试说明和代码示例
+
+## 📚 测试类型
+
+### 1. 单元测试
+
+**推荐工具**: `cargo-test`, `mockall`, `testcontainers`
+
+- **函数级测试**: 使用 `#[cfg(test)]` 模块进行函数级测试
+- **模块测试**: 测试模块内部功能和边界条件
+- **边界测试**: 测试边界条件和异常情况
+
+**相关资源**:
+
+- [Cargo Test 文档](https://doc.rust-lang.org/cargo/commands/cargo-test.html)
+- [Mockall 文档](https://docs.rs/mockall/)
+- [Testcontainers 文档](https://docs.rs/testcontainers/)
+
+### 2. 集成测试
+
+**推荐工具**: `cargo-test`, `tokio-test`, `wiremock`
+
+- **模块间接口**: 位于 `tests/` 目录，测试模块间接口
+- **组件测试**: 测试组件集成和交互
+- **系统测试**: 测试系统功能和业务流程
+
+**相关资源**:
+
+- [Cargo Test 文档](https://doc.rust-lang.org/cargo/commands/cargo-test.html)
+- [Tokio Test 文档](https://docs.rs/tokio-test/)
+- [Wiremock 文档](https://docs.rs/wiremock/)
+
+### 3. 端到端测试
+
+**推荐工具**: `cargo-test`, `reqwest`, `selenium`
+
+- **完整业务流程**: 测试完整业务流程和用户场景
+- **系统验证**: 验证系统功能和性能
+- **用户场景**: 测试真实用户场景和使用情况
+
+**相关资源**:
+
+- [Cargo Test 文档](https://doc.rust-lang.org/cargo/commands/cargo-test.html)
+- [Reqwest 文档](https://docs.rs/reqwest/)
+- [Selenium 文档](https://www.selenium.dev/)
+
+### 4. 属性测试
+
+**推荐工具**: `proptest`, `quickcheck`, `arbitrary`
+
+- **基于属性**: 基于属性的随机测试（proptest/quickcheck）
+- **输入生成**: 自动生成测试输入和边界条件
+- **属性验证**: 验证程序满足特定属性
+
+**相关资源**:
+
+- [Proptest 文档](https://docs.rs/proptest/)
+- [QuickCheck 文档](https://docs.rs/quickcheck/)
+- [Arbitrary 文档](https://docs.rs/arbitrary/)
+
+## 💻 实践与示例
+
+### 代码示例位置
+
+- **基础测试**: [crates/c03_control_fn](../../../crates/c03_control_fn/)
+- **并发测试**: [crates/c05_threads](../../../crates/c05_threads/)
+- **异步测试**: [crates/c06_async](../../../crates/c06_async/)
+- **网络测试**: [crates/c10_networks](../../../crates/c10_networks/)
+
+### 快速开始示例
+
+```rust
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_example() {
+        assert_eq!(2 + 2, 4);
+    }
+
+    #[tokio::test]
+    async fn test_async() {
+        let result = async_function().await;
+        assert!(result.is_ok());
+    }
+}
+```
+
+---
+
+## 🔗 相关索引
+
+- **质量保障总览**: [`../00_index.md`](../00_index.md)
+- **验证工具**: [`../04_validation/00_index.md`](../04_validation/00_index.md)
+- **自动化**: [`../08_automation/00_index.md`](../08_automation/00_index.md)
+- **工具链生态**: [`../../06_toolchain_ecosystem/04_testing_frameworks/00_index.md`](../../06_toolchain_ecosystem/04_testing_frameworks/00_index.md)
+
+---
+
+## 🧭 导航
+
+- **返回质量保障**: [`../00_index.md`](../00_index.md)
+- **验证工具**: [`../04_validation/00_index.md`](../04_validation/00_index.md)
+- **工具链生态**: [`../../06_toolchain_ecosystem/00_index.md`](../../06_toolchain_ecosystem/00_index.md)
+- **软件工程**: [`../../05_software_engineering/00_index.md`](../../05_software_engineering/00_index.md)
+- **返回项目根**: [`../../README.md`](../../README.md)
+
+---
+
+**最后更新**: 2025-11-10
+**维护者**: 项目维护者
+**状态**: 已完善 ✅
