@@ -88,6 +88,7 @@
 2. 校验所有 Cargo.toml：workspace 成员必须 `rust-version.workspace = true` 或与根一致；豁免 exclude 路径与自带 `[workspace]` 的独立工作区（含其子成员）；
 3. 校验活跃文档中的 MSRV **声明式**表述（`rust-version = "x"` 同行带 MSRV/最低注释、`MSRV x`、`x MSRV`、`最低 Rust 版本 x`、元数据式 `Rust 版本: x`；仅匹配 `1.x` 版本，跳过比较语义 `<`/`>=`、标题/TOC 行、假设性发布历史示例、第三方上下文行）；
 4. 校验 `.clippy.toml msrv`。
+
 - 默认 exit 0；`--strict` 存在 ERROR 时 exit 1。已登记 `scripts/README.md` 与 `AGENTS.md` §5。
 
 运行结果：`ERROR=0 WARN=0 INFO(豁免)=16`，`--strict` exit 0。

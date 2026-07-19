@@ -51,9 +51,9 @@
     - [最常用文档](#最常用文档)
     - [最热门代码](#最热门代码)
 
-**版本**: 1.0.0  
-**Rust版本**: 1.90+  
-**Edition**: 2024  
+**版本**: 1.0.0
+**Rust版本**: 1.90+
+**Edition**: 2024
 **最后更新**: 2025-10-02
 
 ---
@@ -339,7 +339,7 @@ graph TD
   - 同步异步等价性（归并排序对比）
   - 形式化验证（二分查找完整证明）
   - 性能基准测试
-  
+
 - `examples/comprehensive_algorithm_demo.rs` - 算法综合演示
 - `examples/rust_2024_features_demo.rs` - Rust 2024特性演示
 
@@ -439,6 +439,6 @@ graph TD
 
 ---
 
-**维护者**: Rust算法团队  
-**联系方式**: 见 [CONTRIBUTING.md](../CONTRIBUTING.md)  
+**维护者**: Rust算法团队
+**联系方式**: 见 [CONTRIBUTING.md](../CONTRIBUTING.md)
 **最后更新**: 2025-10-02
