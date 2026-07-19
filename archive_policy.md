@@ -76,6 +76,17 @@ archive/
 |------|------|------|
 | 2026-06-28 | `docs/archive/` → `archive/docs/`；`docs/rust-ownership-decidability/` → `archive/rust-ownership-decidability/`；合并了此前已存在的部分归档副本 | `9d65d11fc` |
 
+## 10. 主题索引与分类入口
+
+为提升 `archive/` 的可发现性，维护者应遵循以下分类入口：
+
+- 新增归档内容时，优先在 `archive/THEMATIC_INDEX.md` 中找到对应的主题/子主题，并补充文件路径。
+- 如某文件同时属于多个主题，可在主要主题下列出，并在其他主题中通过相对链接交叉引用。
+- 高相关度或高度重复的归档文件，应记录在 `archive/RELATIONSHIP_MAP.md` 中，并标注建议动作（保留/合并/标记为 stub）。
+- 每月运行一次 `python scripts/archive_index_sync.py --report tmp/archive_index_sync_report_YYYY_MM_DD.md`，检查未编入索引的新文件和重复堆积。
+
+索引文件属于归档说明，允许创建和更新，但不得用于向 `archive/` 添加新的活跃内容。
+
 ---
 
 *本政策随项目治理改进计划同步执行。*

@@ -10,8 +10,13 @@
 > **A/S/P 标记**: S+A — Structure + Application
 > **双维定位**: C×Ana / C×Eva
 > **前置概念**: [Patterns](../../06_ecosystem/03_design_patterns/01_patterns.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md)
-> **后置概念**: [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) · [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md)
-> **主要来源**: [GoF — Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) · [POSA](https://en.wikipedia.org/wiki/Pattern-Oriented_Software_Architecture) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))
+> **后置概念**:
+> [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) ·
+> [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md)
+> **主要来源**:
+> [GoF — Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) ·
+> [POSA](https://en.wikipedia.org/wiki/Pattern-Oriented_Software_Architecture) ·
+> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 ---
 
 > **Bloom 层级**: L2-L5
@@ -175,7 +180,7 @@ flowchart TD
 
 ## 九、延伸阅读
 
-- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))
+- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 - [GoF — Design Patterns: Elements of Reusable Object-Oriented Software]
 - [POSA — Pattern-Oriented Software Architecture]
 - [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md)
