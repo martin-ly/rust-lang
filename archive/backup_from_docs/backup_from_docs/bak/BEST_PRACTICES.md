@@ -1,10 +1,10 @@
 # 📖 Rust 最佳实践指南 (Best Practices)
 
-> **文档定位**: Rust 开发的最佳实践和编码规范  
-> **使用方式**: 作为日常开发参考，提升代码质量  
+> **文档定位**: Rust 开发的最佳实践和编码规范
+> **使用方式**: 作为日常开发参考，提升代码质量
 > **相关文档**: [贡献指南](./CONTRIBUTING.md) | [快速参考](./QUICK_REFERENCE.md) | [故障排查](./TROUBLESHOOTING.md)
 
-**最后更新**: 2025-10-19  
+**最后更新**: 2025-10-19
 **适用版本**: Rust 1.90+
 
 ---
@@ -109,13 +109,13 @@ mod auth {
 impl User {
     // 构造函数
     pub fn new(name: String) -> Self { }
-    
+
     // 访问器
     pub fn name(&self) -> &str { }
-    
+
     // 修改器
     pub fn set_name(&mut self, name: String) { }
-    
+
     // 其他方法
     pub fn is_valid(&self) -> bool { }
 }
@@ -351,10 +351,10 @@ use thiserror::Error;
 enum MyError {
     #[error("IO error: {0}")]
     Io(#[from] std::io::Error),
-    
+
     #[error("Parse error: {0}")]
     Parse(#[from] std::num::ParseIntError),
-    
+
     #[error("{0}")]
     Custom(String),
 }
@@ -650,22 +650,22 @@ impl ConfigBuilder {
             timeout: 30,
         }
     }
-    
+
     pub fn host(mut self, host: String) -> Self {
         self.host = host;
         self
     }
-    
+
     pub fn port(mut self, port: u16) -> Self {
         self.port = port;
         self
     }
-    
+
     pub fn timeout(mut self, timeout: u64) -> Self {
         self.timeout = timeout;
         self
     }
-    
+
     pub fn build(self) -> Config {
         Config {
             host: self.host,
@@ -703,14 +703,14 @@ impl MyString {
     pub fn from_str(s: &str) -> Self {
         MyString(s.to_string())
     }
-    
+
     // From trait
     impl From<String> for MyString {
         fn from(s: String) -> Self {
             MyString(s)
         }
     }
-    
+
     // FromStr trait
     impl FromStr for MyString {
         type Err = ParseError;
@@ -774,33 +774,33 @@ fn print_items(items: Vec<String>) {  // 太严格
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     // 测试正常情况
     #[test]
     fn test_add_positive_numbers() {
         assert_eq!(add(2, 3), 5);
     }
-    
+
     // 测试边界情况
     #[test]
     fn test_add_zero() {
         assert_eq!(add(0, 0), 0);
     }
-    
+
     // 测试错误情况
     #[test]
     fn test_divide_by_zero() {
         let result = divide(10.0, 0.0);
         assert!(result.is_err());
     }
-    
+
     // 测试 panic
     #[test]
     #[should_panic(expected = "divide by zero")]
     fn test_panic_on_zero() {
         divide_panicking(10, 0);
     }
-    
+
     // 使用 Result 测试
     #[test]
     fn test_with_result() -> Result<(), String> {
@@ -821,7 +821,7 @@ mod tests {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     // 测试辅助函数
     fn create_test_user() -> User {
         User {
@@ -830,13 +830,13 @@ mod tests {
             email: "test@example.com".to_string(),
         }
     }
-    
+
     #[test]
     fn test_user_validation() {
         let user = create_test_user();
         assert!(user.is_valid());
     }
-    
+
     #[test]
     fn test_user_serialization() {
         let user = create_test_user();
@@ -1020,6 +1020,6 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 最佳实践是经验的总结，但不是教条。根据实际情况灵活应用。
 
-**最后更新**: 2025-10-19  
-**维护团队**: Rust 学习社区  
+**最后更新**: 2025-10-19
+**维护团队**: Rust 学习社区
 **版本**: v1.0
