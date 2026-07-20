@@ -1,0 +1,17 @@
+01_governance/
+02_version_alignment/
+03_concept_history/
+04_crate_reports/
+05_formal_methods/
+06_ecosystem/
+07_research_notes/
+08_quality_audits/
+2026/
+backup_from_docs/
+cargo_package_management_from_c02/
+content/
+docs/
+reports/
+research_notes/
+research_notes_2026_06_25/
+rust-ownership-decidability/

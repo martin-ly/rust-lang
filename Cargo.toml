@@ -356,7 +356,8 @@ anyhow = "1.0.104"
 # serde: 通用序列化/反序列化框架，支持多种数据格式
 serde = { version = "1.0.229", features = ["derive"] }
 # serde_json: JSON序列化/反序列化支持
-serde_json = "1.0.150"
+# 2026-07-20: cargo update 1.0.150 -> 1.0.151
+serde_json = "1.0.151"
 # serde_yaml: YAML序列化/反序列化支持
 serde_yaml = "0.9.34"
 # 二进制序列化 benchmark 已移除（避免引入额外依赖）
@@ -427,8 +428,9 @@ metrics-exporter-prometheus = { version = "0.18.3", default-features = false }
 chrono = { version = "0.4.45", features = ["serde"] }
 # time: 现代时间处理库，提供高性能的时间操作
 # 2026-06-22: 0.3.49 -> 0.3.51 (cargo update)
-# 2026-07-08: cargo update 自动解析至 0.3.53
-time = { version = "0.3.53", features = ["serde", "macros"] }
+# 2026-07-08: 0.3.51 -> 0.3.53 (cargo update)
+# 2026-07-20: cargo update 0.3.53 -> 0.3.54
+time = { version = "0.3.54", features = ["serde", "macros"] }
 
 # 2025-12-11: 其他常用库最新稳定版本
 # uuid: UUID生成和解析库，支持多种UUID版本
@@ -738,12 +740,14 @@ const-hex = "=1.19.1"
 # - chrono: 0.4.44 -> 0.4.45
 # - time: 0.3.49 -> 0.3.51 (cargo update 2026-06-22)
 # - time: 0.3.51 -> 0.3.53 (cargo update 2026-07-08)
+# - time: 0.3.53 -> 0.3.54 (cargo update 2026-07-20)
 # - quote: 1.0.45 -> 1.0.46 (cargo update 2026-06-22)
 # - 传递依赖 (cargo update 自动升级):
 #     libp2p-quic 0.13.0 -> 0.13.1
 #     quinn 0.11.9 -> 0.11.11
 #     quinn-proto 0.11.14 -> 0.11.15
 #     time-macros 0.2.29 -> 0.2.30
+#     time-macros 0.2.31 -> 0.2.32 (cargo update 2026-07-20, time 0.3.54 传递依赖)
 # - bytes: 1.11.1 -> 1.12.0
 # - redis: 1.2.3 -> 1.2.4 (cargo update 2026-06-22)
 # - config: 0.15.23 -> 0.15.24
@@ -900,5 +904,5 @@ similar_names = "allow"
 # 上游（GnomedDev/proc-macro-error-2）自 2024-09 后无修复发布，
 # 因此 vendor 到本地并应用官方建议的一行修复（extern crate 改为 pub extern crate）。
 # 上游发布修复版后应移除此 patch。
-#[patch.crates-io]
-#proc-macro-error2 = { path = "vendor/proc-macro-error2" }
+[patch.crates-io]
+proc-macro-error2 = { path = "vendor/proc-macro-error2" }

@@ -9,11 +9,21 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 本文件从**纵向抽象层级**梳理 Rust 的惯用法（idioms）——从词法糖到架构模式的高效、等效、简洁表达方式，与 `01_patterns.md` 的设计模式形成互补：后者聚焦「设计模式」（面向问题），本文件聚焦「惯用法」（面向表达）。
 > **原则**: 每个惯用法必须展示「非惯用写法 → 惯用写法」的等价变换，并标注效率特征与认知负荷。
-> **对齐来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) · [Rust Style Guide] · [Clippy Lints] · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+> **对齐来源**:
+> [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) ·
+> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) ·
+> [Rust Style Guide] · [Clippy Lints] ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 > **基准版本**: Rust 1.97.0 stable (Edition 2024)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) ·
+> [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **Bloom 层级**: L3-L5
@@ -263,13 +273,20 @@ graph TD
     H --> H3[ECS Archetype]
 ```
 
-> **认知功能**: 此树状图将七层惯用法谱系转化为**可遍历的分类层级**，每层3个代表性节点构成最小完整集合。建议将其作为速查索引——当遇到具体代码场景时，可自上而下定位最匹配的惯用法层级。关键洞察是惯用法的「正交覆盖」：L0-L3 聚焦单线程正确性，L4-L6 聚焦性能与并发架构。[💡 原创分析](../../00_meta/00_framework/methodology.md)
+> **认知功能**:
+> 此树状图将七层惯用法谱系转化为**可遍历的分类层级**，每层3个代表性节点构成最小完整集合。
+> 建议将其作为速查索引——当遇到具体代码场景时，可自上而下定位最匹配的惯用法层级。
+> 关键洞察是惯用法的「正交覆盖」：L0-L3 聚焦单线程正确性，L4-L6 聚焦性能与并发架构。
+> [💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 ---
 
 ## 三、L0 词法级惯用法
 
-L0 是惯用法谱系的「零层」：单个表达式/语句层面的地道写法，不引入任何抽象，只关乎「同样的意思怎么写最 Rust」。四个代表项（`?` 传播、`if let` 单模式匹配（Pattern Matching）、复合赋值与范围循环、字面量与后缀约定）的共同判据：**用类型系统（Type System）已有的糖，而不是手工展开**——`?` 替代 `match` 传播、`if let` 替代单臂 `match`、`for x in 0..n` 替代索引循环。L0 惯用法的特点是「无争议」：它们不改变程序的抽象结构，只减少样板；clippy 的 `redundant_*`/`needless_*` lint 族大多作用于这一层。学习建议：L0 是「能编译」到「能读懂」的最短路径，任何新代码都应先过一遍 clippy 的 L0 级 lint。
+L0 是惯用法谱系的「零层」：单个表达式/语句层面的地道写法，不引入任何抽象，只关乎「同样的意思怎么写最 Rust」。
+四个代表项（`?` 传播、`if let` 单模式匹配（Pattern Matching）、复合赋值与范围循环、字面量与后缀约定）的共同判据：**用类型系统（Type System）已有的糖，而不是手工展开**——`?` 替代 `match` 传播、`if let` 替代单臂 `match`、`for x in 0..n` 替代索引循环。
+L0 惯用法的特点是「无争议」：它们不改变程序的抽象结构，只减少样板；clippy 的 `redundant_*`/`needless_*` lint 族大多作用于这一层。
+学习建议：L0 是「能编译」到「能读懂」的最短路径，任何新代码都应先过一遍 clippy 的 L0 级 lint。
 
 ### 3.1
 
@@ -1130,7 +1147,11 @@ quadrantChart
 
 ## 十三、定理推理链
 
-惯用法不是风格偏好，多数有可形式化的保证。一致性矩阵把每条惯用法拆为“前提 ⟹ 结论”：`?` 运算符在 well-typed 前提下展开为等效 `match`（零成本）；`#[repr(transparent)]` 的 newtype 与内层类型内存布局等价（零成本抽象）；typestate 模式借 PhantomData 使非法状态不可表示（编译期安全）。矩阵同时标注失效条件——这些惯用法在 `unsafe`/transmute 面前不再成立。
+惯用法不是风格偏好，多数有可形式化的保证。
+一致性矩阵把每条惯用法拆为“前提 ⟹ 结论”：`?` 运算符在 well-typed 前提下展开为等效 `match`（零成本）；
+`#[repr(transparent)]` 的 newtype 与内层类型内存布局等价（零成本抽象）；
+typestate 模式借 PhantomData 使非法状态不可表示（编译期安全）。
+矩阵同时标注失效条件——这些惯用法在 `unsafe`/transmute 面前不再成立。
 
 ### 定理一致性矩阵（惯用法谱系专集）
 
@@ -1199,11 +1220,19 @@ quadrantChart
     └─ 标志：能为团队制定惯用法规范，评审代码时识别反模式
 ```
 
-> **思维表征说明**: 此认知路径将「七层惯用法谱系」转化为**渐进式学习阶梯**——不是要求初学者一次性掌握全部，而是根据经验匹配适当的抽象层级。这与 `inter_layer_topology.md` 的跨层认知路径和 `intra_layer_model_map.md` 的层内决策树形成三维导航：纵向（层间）、横向（层内）、深度（经验递进）。 [Dreyfus 技能获取模型; Bloom 认知层级](https://en.wikipedia.org/wiki/Dreyfus_model_of_skill_acquisition)
+> **思维表征说明**:
+> 此认知路径将「七层惯用法谱系」转化为**渐进式学习阶梯**——不是要求初学者一次性掌握全部，而是根据经验匹配适当的抽象层级。
+> 这与 `inter_layer_topology.md` 的跨层认知路径和 `intra_layer_model_map.md` 的层内决策树形成三维导航：纵向（层间）、横向（层内）、深度（经验递进）。
+> [Dreyfus 技能获取模型; Bloom 认知层级](https://en.wikipedia.org/wiki/Dreyfus_model_of_skill_acquisition)
 
 ---
 
-> **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) · [Rust Style Guide](https://doc.rust-lang.org/style-guide/) · [Clippy Lints](https://rust-lang.github.io/rust-clippy//master/index.html) · [TRPL §13](https://doc.rust-lang.org/book/ch13-00-functional-features.html)
+> **权威来源**:
+> [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) ·
+> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) ·
+> [Rust Style Guide](https://doc.rust-lang.org/style-guide/) ·
+> [Clippy Lints](https://rust-lang.github.io/rust-clippy//master/index.html) ·
+> [TRPL §13](https://doc.rust-lang.org/book/ch13-00-functional-features.html)
 >
 > **Rust 版本**: 1.97.0 stable (Edition 2024)
 > **文档版本**: 1.1
@@ -1214,7 +1243,10 @@ quadrantChart
 
 ## 权威来源索引
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
+> **权威来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html),
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html),
+> [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../00_meta/02_sources/05_international_authority_index.md)
 > **相关文件**:
 >

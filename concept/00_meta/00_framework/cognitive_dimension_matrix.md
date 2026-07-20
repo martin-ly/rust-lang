@@ -165,7 +165,7 @@ mindmap
 ### 2.3 L3 高级概念层映射
 
 | 概念文件 | 事实性 (F) | 概念性 (C) | 程序性 (P) | 元认知 (M) |
-|:---|:---|:---|:---|:---|
+|:---|:---|:---|:---|:---|:---|
 | **01_concurrency** | F×Mem: `Send` / `Sync` auto trait 定义 F×App: `Mutex::lock` / `thread::spawn` 用法 | C×Und: fearless concurrency = 类型系统保证 C×Ana: 分析 `Atomic` memory ordering 的影响 | P×App: 实现无锁数据结构 P×Eva: 评估 crossbeam vs std::sync 选型 | M×Cre: 设计并发安全的学习验证实验 |
 | **02_async** | F×Mem: `Future` / `Poll` / `Waker` API F×App: `async fn` / `.await` 语法 | C×Und: async = CPS 变换 + 状态机 C×Ana: 分析 `Pin` 在自引用中的必要性 | P×App: 实现自定义 Future P×Eva: 评估 tokio vs async-std [已停止维护] 生态 | M×Ana: 诊断自身对 async 执行模型的误解 |
 | **03_unsafe** | F×Mem: `unsafe` 块 / `unsafe fn` / `unsafe impl` 语法 F×App: `*const T` / `*mut T` 裸指针操作 | C×Und: unsafe = 安全边界逃逸舱口 C×Ana: 分析 Miri 检测不到的 UB 类别 | P×App: 编写 SAFETY 注释 P×Eva: 评估 `unsafe` 抽象的 soundness | M×Eva: 评估自身 unsafe 使用的风险偏好 |
@@ -174,7 +174,7 @@ mindmap
 ### 2.4 L4 形式化层映射
 
 | 概念文件 | 事实性 (F) | 概念性 (C) | 程序性 (P) | 元认知 (M) |
-|:---|:---|:---|:---|:---| :--- | :--- |
+|:---|:---|:---|:---|:---| :--- | :--- | :--- |
 | **01_linear_logic** | F×Mem: `!A` / `⊗` / `⊸` 符号 F×App: 将线性逻辑规则映射到 Rust 代码 | C×Und: 线性逻辑 = 资源敏感推理 C×Ana: 分析 weakening/contraction 在 Rust 中的缺失 | P×App: 用类型编码线性协议 P×Eva: 评估会话类型的 Rust 编码完备性 | M×Und: 理解自身对"资源即命题"的直觉差距 |
 | **02_type_theory** | F×Mem: System F / HM / F_ω 的语法 F×App: 手写 λ 演算类型推导 | C×Und: Curry-Howard 对应在 Rust 中的实例 C×Ana: 分析 Rust 类型系统与 System F 的差距 | P×App: 利用参数性推导"免费定理" P×Eva: 评估 GATs 的类型论扩展 | M×Ana: 评估自身类型论基础对理解 Rust 的帮助 |
 | **03_ownership_formal** | F×Mem: COR / 区域类型 / 分离逻辑的符号 F×App: 将借用规则翻译为分离逻辑公式 | C×Und: 所有权 = 仿射逻辑 + 区域约束 C×Ana: 分析 Polonius 与 NLL 的精度差异 | P×App: 使用 Kani 验证 unsafe 代码 P×Eva: 评估形式化验证的 ROI | M×Eva: 评估形式化方法在项目中的适用边界 |
@@ -183,7 +183,7 @@ mindmap
 ### 2.5 L5-L7 层映射
 
 | 层级 | 事实性 (F) | 概念性 (C) | 程序性 (P) | 元认知 (M) |
-|:---|:---|:---|:---|:---| :--- | :--- |
+|:---|:---|:---|:---|:---| :--- | :--- | :--- |
 | **L5 对比层** | F×Mem: 各语言特性对照表 F×App: 编写跨语言等价代码 | C×Und: 范式差异的本体论根源 C×Ana: 分析 Rust vs C++ 内存模型同构性 | P×App: 执行 C++→Rust 范式转换 P×Eva: 评估技术选型的形式化论据 | M×Eva: 评估自身语言偏见的认知影响 |
 | **L6 生态层** | F×Mem: Crate 名称 / 版本 / API 签名 F×App: Cargo.toml 依赖配置 | C×Und: 设计模式 = 类型系统的工程投影 C×Ana: 分析生态系统中的安全性依赖链 | P×App: 设计可组合的系统架构 P×Eva: 评估 unsafe 依赖的可审计性 | M×Cre: 设计团队 Rust 能力建设计划 |
 | **L7 前沿层** | F×Mem: RFC 编号 / Edition 变更清单 F×App: 使用每日构建版实验特性 | C×Und: 语言演进的类型论约束 C×Ana: 分析 Effects 系统对 async 的统一潜力 | P×App: 参与 RFC 社区讨论 P×Eva: 评估新特性的生产就绪度 | M×Cre: 预测 Rust 5 年演进方向 |
@@ -214,7 +214,9 @@ mindmap
 | RustBelt (`04_formal/04_rustbelt`) | 概念性 | 评价 | C×Eva: 评价安全性定理的假设边界 | S |
 | 验证工具链 (`04_formal/05_verification_toolchain`) | 程序性 | 评价 | P×Eva: 评估验证工具的 ROI | P |
 
-> **关键发现**: L1-L3 的核心概念以**概念性知识 (C)** 为主（12/17 = 70.6%），这与 Rust 的"心智模型驱动"学习特征一致。仅有泛型、错误处理、Unsafe、宏、验证工具链以**程序性知识 (P)** 为主导，这些恰恰是"可自动化"与"不可自动化"的边界领域。[💡 原创分析](methodology.md)
+> **关键发现**: L1-L3 的核心概念以**概念性知识 (C)** 为主（12/17 = 70.6%），这与 Rust 的"心智模型驱动"学习特征一致。
+> 仅有泛型、错误处理、Unsafe、宏、验证工具链以**程序性知识 (P)** 为主导，这些恰恰是"可自动化"与"不可自动化"的边界领域。
+> [💡 原创分析](methodology.md)
 
 ---
 

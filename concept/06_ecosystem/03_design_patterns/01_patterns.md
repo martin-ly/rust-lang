@@ -11,11 +11,25 @@
 > **层级**: L6 生态工程
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×App — 应用设计模式解决类型安全问题
-> **前置概念**: [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
-> **主要来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **前置概念**:
+> [Traits](../../02_intermediate/00_traits/01_traits.md) ·
+> [Generics](../../02_intermediate/01_generics/01_generics.md) ·
+> [Type System](../../01_foundation/02_type_system/01_type_system.md)
+> [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
+> **主要来源**:
+> [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) ·
+> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [TRPL — Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))
+> **来源**:
+> [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) ·
+> [TRPL — Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html) ·
+> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+>
 >
 > **说明**: 本文档包含可直接编译的标准库示例（`rust`）、依赖外部 crate 或仅为示意的代码片段（`rust,ignore`），以及故意展示编译失败的边界测试（`rust,compile_fail`）。
 ---
@@ -32,7 +46,7 @@
 
 ## 一、权威定义
 
-> **[Rust Design Patterns](https://rust-unofficial.github.io/patterns/))** Rust design patterns are recurring solutions to common problems in software design using the Rust programming language. They leverage Rust's unique features such as ownership, traits, and the type system.
+> **[Rust Design Patterns](https://rust-unofficial.github.io/patterns/)** Rust design patterns are recurring solutions to common problems in software design using the Rust programming language. They leverage Rust's unique features such as ownership, traits, and the type system.
 > **[Wikipedia — Design pattern](https://en.wikipedia.org/wiki/Design_pattern)** A design pattern is the re-usable form of a solution to a design problem. The idea was introduced by the architect Christopher Alexander and has been adapted for various other disciplines, most notably computer science.
 > **来源**: <https://en.wikipedia.org/wiki/Design_pattern>
 > **[Wikipedia — Resource acquisition is initialization (RAII)](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization)** Resource acquisition is initialization (RAII) is a programming idiom used in several object-oriented, statically-typed programming languages to describe a particular language behavior. In RAII, holding a resource is a class invariant, and is tied to object lifetime: resource allocation (or acquisition) is done during object creation (specifically initialization), by the constructor, while resource deallocation (release) is done during object destruction (specifically finalization), by the destructor. In other words, resource acquisition must succeed for initialization to succeed.
@@ -2252,8 +2266,11 @@ fn global_config() -> &'static Config {
 责任链模式把「请求沿处理者链传递，直到被处理」解耦发送者与处理者，Rust 实现与使用场景：
 
 - **模式定义**：链上每个节点持有「后继」引用，处理逻辑为「能处理则处理，否则转发后继」。经典用途是中间件（middleware）、事件冒泡、审批流。GoF 实现靠继承共享 `successor` 字段——Rust 无继承，等价结构有两种。
-- **Rust 实现**：① **trait object 链**——`trait Handler { fn handle(&self, req: &Request) -> Result<(), Request>; fn set_next(&mut self, next: Box<dyn Handler>); }`，`Box<dyn Handler>` 持有后继，运行时组链（axum/tower 的中间件栈即此思想的成熟化）；② **闭包（Closures）/函数链**——`Vec<Box<dyn Fn(&Request) -> ControlFlow<()>>>`，处理者退化为函数，「转发」由 `ControlFlow::Continue` 表达，更轻但失去节点状态。tower 的 `Service` trait + `ServiceBuilder` 栈是生产级参考实现：每层是一个 `Service`，`layer` 组合把链压成单一类型（编译期可见的链结构）。
-- **使用场景**：HTTP 中间件（认证 → 限流 → 日志 → 业务）、GUI 事件冒泡（子组件不处理则父组件）、审批工作流。判定适用性：处理者集合是否「运行时异构且需动态组链」——是则 trait object 链；编译期固定的处理流水线用泛型栈（tower 风格），零成本且类型自文档。
+- **Rust 实现**：
+- ① **trait object 链**——`trait Handler { fn handle(&self, req: &Request) -> Result<(), Request>; fn set_next(&mut self, next: Box<dyn Handler>); }`，`Box<dyn Handler>` 持有后继，运行时组链（axum/tower 的中间件栈即此思想的成熟化）；
+- ② **闭包（Closures）/函数链**——`Vec<Box<dyn Fn(&Request) -> ControlFlow<()>>>`，处理者退化为函数，「转发」由 `ControlFlow::Continue` 表达，更轻但失去节点状态。tower 的 `Service` trait + `ServiceBuilder` 栈是生产级参考实现：每层是一个 `Service`，`layer` 组合把链压成单一类型（编译期可见的链结构）。
+- **使用场景**：HTTP 中间件（认证 → 限流 → 日志 → 业务）、GUI 事件冒泡（子组件不处理则父组件）、审批工作流。
+- 判定适用性：处理者集合是否「运行时异构且需动态组链」——是则 trait object 链；编译期固定的处理流水线用泛型栈（tower 风格），零成本且类型自文档。
 
 #### 模式定义
 
