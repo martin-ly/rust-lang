@@ -1,31 +1,26 @@
 # 归档目录
 
-> **🚧 重组中（2026-07-20）**：`archive/` 正在进行全面主题化重组。重组期间请暂停向本目录新增归档内容；如需引用，请继续通过现有索引或联系维护者。重组完成后，本提示将移除。
-
 本目录用于存放只读的历史参考内容。详细规则见项目根目录的 [`ARCHIVE_POLICY.md`](../archive_policy.md)。
 
 ## 主要子目录
 
-| 目录 | 说明 | 来源 |
+| 目录 | 说明 | 主题 |
 |------|------|------|
-| `archive/docs/` | 历史文档、审计、检查清单、重组记录 | `docs/archive/` |
-| `archive/rust-ownership-decidability/` | Rust 所有权可判定性研究历史资料 | `docs/rust-ownership-decidability/` |
-| `archive/08_quality_audits/deprecated/` | 已废弃或替代的旧方案 | 历史归档 |
-| `archive/research_notes_2026_06_25/` | 2026-06-25 研究笔记快照 | 历史归档 |
+| `archive/01_governance/` | 归档政策、项目计划、顶层审计、元数据 | 治理与元数据 |
+| `archive/02_version_alignment/` | Rust 版本跟踪、验证报告、对称差分析 | 版本与权威来源 |
+| `archive/03_concept_history/` | 旧版概念页、知识卡片、指南 | 概念页历史 |
+| `archive/04_crate_reports/` | Crate 完成/增强报告、Cargo 包管理旧版 | Crate 报告 |
+| `archive/05_formal_methods/` | 形式化方法、学术工具、中文所有权教程 | 形式化方法 |
+| `archive/06_ecosystem/` | 生态深度内容、场景、生产实践、前沿特性 | 生态深度 |
+| `archive/07_research_notes/` | 版本研究、研究笔记快照、设计/类型理论 | 研究笔记 |
+| `archive/08_quality_audits/` | 质量审计、链路检查、临时参考、C-class 审计 | 质量审计 |
+| `archive/09_special_collections/` | 超大独立集合：`rust_ownership_decidability`、`backup_from_docs` | 独立专题 |
 
 ## 主题索引与关联映射
 
-为提升历史资料的可发现性，本目录新增按内容主题的索引：
-
-- [`THEMATIC_INDEX.md`](THEMATIC_INDEX.md) — 8 大主题、24 子主题分类导航，标注活跃对应页。
+- [`THEMATIC_INDEX.md`](THEMATIC_INDEX.md) — 8 大主题、子主题分类导航，标注活跃对应页。
 - [`RELATIONSHIP_MAP.md`](RELATIONSHIP_MAP.md) — 高相关度文件组、重叠检测摘要与清理优先级。
-
-快速入口：
-
-- [Rust 版本与权威来源对齐](THEMATIC_INDEX.md#2-rust-版本与权威来源对齐)
-- [形式化方法与所有权可判定性](THEMATIC_INDEX.md#5-形式化方法与所有权可判定性)
-- [Crate 完成报告族](RELATIONSHIP_MAP.md#组-bcrate-完成报告族-极高)
-- [质量审计报告族](RELATIONSHIP_MAP.md#组-f审计报告族-高)
+- [`ARCHIVE_REORG_LOG_2026_07_20.md`](ARCHIVE_REORG_LOG_2026_07_20.md) — 本次重组迁移映射与操作记录。
 
 ## 使用说明
 

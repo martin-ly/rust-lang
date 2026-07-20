@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 527,
-    "generated_at": "2026-07-19T01:14:12.213116+00:00"
+    "generated_at": "2026-07-20T14:44:21.237882+00:00"
   },
   "files": [
     {
@@ -105,7 +105,7 @@
       "layer": "L0",
       "title": "Rust 知识体系双维认知矩阵（Krathwohl × Bloom）",
       "positioning": "本文件建立 **Krathwohl 知识维度**（事实性 / 概念性 / 程序性 / 元认知）与 **Bloom 认知过程维度**（记忆 → 理解 → 应用 → 分析 → 评价 → 创造）的双维交叉矩阵，为 `concept/` 下每个概念文件提供超越单一 Bloom 标签的多维认知定位。",
-      "line_count": 401,
+      "line_count": 403,
       "theorem_chains": [
         {
           "text": "| Cognitive Dimension Matrix 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
@@ -661,7 +661,7 @@
       "layer": "L0",
       "title": "模式语义空间索引：设计模式在概念体系中的坐标",
       "positioning": "",
-      "line_count": 198,
+      "line_count": 206,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -692,7 +692,7 @@
           "[Patterns](../../06_ecosystem/03_design_patterns/01_patterns.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md)"
         ],
         "post": [
-          "[Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) · [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md)"
+          "> [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -703,7 +703,7 @@
       "layer": "L0",
       "title": "通用 PL 基座路线图：Rust 在编程语言坐标系中的位置",
       "positioning": "",
-      "line_count": 179,
+      "line_count": 182,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -881,7 +881,7 @@
       "layer": "L0",
       "title": "Rust 表征空间（Semantic / Representational Space）",
       "positioning": "本文件是 `concept/` 知识体系的**元层总论**，从表征空间（Representational Space）与语义空间（Semantic Space）的视角，系统分析 Rust 语言\"能表达什么\"、\"不能表达什么\"、\"等价表达的组合关系\"，以及其内部机制的完备性与封闭性。",
-      "line_count": 1357,
+      "line_count": 1360,
       "theorem_chains": [
         {
           "text": "| 断言 | 前提条件 ⟹ 结论 | 反例/边界条件 | 典型场景 | 失效条件 |",
@@ -1718,7 +1718,7 @@
       "layer": "L0",
       "title": "内容分级与受众标签体系",
       "positioning": "",
-      "line_count": 162,
+      "line_count": 163,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -7797,7 +7797,7 @@
       "layer": "L1",
       "title": "编程语言理论基础（PL Prerequisites）",
       "positioning": "L1 基础层的**前置知识补充**。理解这些通用 PL 概念后，你将能更深刻地回答\"为什么 Rust 要这样设计\"，而非仅仅记忆规则。",
-      "line_count": 593,
+      "line_count": 598,
       "theorem_chains": [
         {
           "text": "| 编程语言理论基础（PL Prerequisites） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -7939,7 +7939,7 @@
       "layer": "L1",
       "title": "零成本抽象：Rust 的性能哲学",
       "positioning": "深入分析 Rust **零成本抽象（Zero-Cost Abstraction）**（Zero-Cost Abstractions）的设计哲学——探讨泛型（Generics）、迭代器（Iterator）、Trait 对象等高层抽象如何在编译期消除运行时（Runtime）开销，以及与 C++ \"零开销原则\" 的对比。",
-      "line_count": 915,
+      "line_count": 919,
       "theorem_chains": [
         {
           "text": "| 零成本抽象：Rust 的性能哲学 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -8765,7 +8765,7 @@
       "layer": "L1",
       "title": "Ownership（所有权）",
       "positioning": "",
-      "line_count": 2016,
+      "line_count": 2020,
       "theorem_chains": [
         {
           "text": "3. **分离逻辑（Separation Logic）视角**：`&mut T` 授予对 `T` 的**独占访问权**——形式上等价于分离逻辑中的 `points-to` 谓词 `x ↦ v`；`&T` 的共享性通过「不可变 ⟹ 并发可共享」约束保证无数据竞争。",
@@ -50827,7 +50827,7 @@
       "layer": "L6",
       "title": "Design Patterns（设计模式）",
       "positioning": "",
-      "line_count": 3200,
+      "line_count": 3217,
       "theorem_chains": [
         {
           "text": "| **RAII** | 资源泄漏 | 确定性资源管理 ⟹ `Drop`自动调用 | 所有权（Ownership）+作用域 | 边界：`mem::forget`、引用（Reference）循环泄漏 |",
@@ -51258,7 +51258,7 @@
       "matrix_rows": 171,
       "pre_post": {
         "pre": [
-          "[Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]"
+          "> [Traits](../../02_intermediate/00_traits/01_traits.md) ·"
         ],
         "post": [
           "[Future Roadmap](../../07_future/01_edition_roadmap/04_roadmap.md)"
@@ -51272,10 +51272,10 @@
       "layer": "L6",
       "title": "Rust 惯用法谱系全景（Idioms Spectrum）",
       "positioning": "本文件从**纵向抽象层级**梳理 Rust 的惯用法（idioms）——从词法糖到架构模式的高效、等效、简洁表达方式，与 `01_patterns.md` 的设计模式形成互补：后者聚焦「设计模式」（面向问题），本文件聚焦「惯用法」（面向表达）。",
-      "line_count": 1493,
+      "line_count": 1525,
       "theorem_chains": [
         {
-          "text": "惯用法不是风格偏好，多数有可形式化的保证。一致性矩阵把每条惯用法拆为“前提 ⟹ 结论”：`?` 运算符在 well-typed 前提下展开为等效 `match`（零成本）；`#[repr(transparent)]` 的 newtype 与内层类型内存布局等价（零成本抽象）；typestate 模式借 PhantomData 使非法状态不可表示（编译期安全）。矩阵同时标注失效条件——这些惯用法在 `unsafe`/transmute 面前不再成立。",
+          "text": "一致性矩阵把每条惯用法拆为“前提 ⟹ 结论”：`?` 运算符在 well-typed 前提下展开为等效 `match`（零成本）；",
           "type": "paragraph"
         },
         {
@@ -54516,7 +54516,7 @@
       "layer": "L6",
       "title": "Rust Web 框架对比与选型",
       "positioning": "对比分析 Rust 主流 Web 框架——Axum、Actix-web、Rocket、Poem——从架构设计、运行时（Runtime）集成、中间件机制到性能特征，建立系统化的选型决策框架。",
-      "line_count": 1098,
+      "line_count": 1107,
       "theorem_chains": [
         {
           "text": "| 新项目 + Tower 生态兼容（如 Tonic gRPC） | Axum | §6.1 决策树 Q1/Q2 | 团队不熟 Tower/`Service` ⟹ 学习曲线陡（§7.1 F1） |",

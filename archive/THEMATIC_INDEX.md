@@ -1,7 +1,7 @@
 # Archive 主题索引
 
-> 本文件按“内容主题”对 `archive/` 进行索引，弥补原有“来源/时间”目录组织的可发现性不足。
-> 生成时间：2026-07-19
+> 本文件按“内容主题”对 `archive/` 进行索引，按 8 大主题 + 1 独立专题集合组织。
+> 生成时间：2026-07-20（重组后）
 > 适用范围：`archive/` 全部只读历史内容。
 
 ---
@@ -17,16 +17,17 @@
 
 ## 主题总览
 
-| 主题 | 子主题数 | 核心目录/文件 | 说明 |
-|------|---------|--------------|------|
-| [1. 治理与元数据](#1-治理与元数据) | 3 | 根报告、README、root_meta | 归档政策、项目计划、顶层审计、元数据脚本 |
-| [2. Rust 版本与权威来源对齐](#2-rust-版本与权威来源对齐) | 3 | 顶层 `RUST_*` 报告、verification_reports | 版本跟踪、特性验证、权威来源对比 |
-| [3. 概念页历史与迁移](#3-概念页历史与迁移) | 3 | 2026/concept_archive、knowledge、guides | 旧版概念页、知识卡片、指南旧版 |
-| [4. Crate 完成与增强报告](#4-crate-完成与增强报告) | 3 | 2026/crates_reports、crates_c08_...、cargo_package_management_from_c02 | Crate 完成报告、旧版文档、Cargo 包管理 |
-| [5. 形式化方法与所有权可判定性](#5-形式化方法与所有权可判定性) | 5 | rust-ownership-decidability、content/academic | 形式化、可判定性、验证工具、案例研究 |
-| [6. 生态深度内容](#6-生态深度内容) | 7 | content/ecosystem、content/scenarios、content/production | 异步、数据库、场景、生产实践、前沿特性 |
-| [7. 研究笔记与实验](#7-研究笔记与实验) | 3 | research_notes、research_notes_2026_06_25 | 版本研究、形式化、设计理论 |
-| [8. 质量审计、链路检查与临时文件](#8-质量审计链路检查与临时文件) | 7 | reports、temp、backup_from_docs、deprecated | 审计报告、链路检查、备份、废弃方案 |
+| 主题 | 子主题数 | 核心目录 | 说明 |
+|------|---------|----------|------|
+| [1. 治理与元数据](#1-治理与元数据) | 4 | `01_governance/` | 归档政策、项目计划、顶层审计、元数据脚本 |
+| [2. Rust 版本与权威来源对齐](#2-rust-版本与权威来源对齐) | 4 | `02_version_alignment/` | 版本跟踪、验证报告、权威来源对比、检查清单 |
+| [3. 概念页历史与迁移](#3-概念页历史与迁移) | 4 | `03_concept_history/` | 旧版概念页、知识卡片、指南、AI 辅助编程 |
+| [4. Crate 完成与增强报告](#4-crate-完成与增强报告) | 11 | `04_crate_reports/` | 按 crate 组织的完成报告、Cargo 包管理旧版 |
+| [5. 形式化方法与所有权可判定性](#5-形式化方法与所有权可判定性) | 6 | `05_formal_methods/` | 形式化、学术工具、所有权可判定性、废弃方案 |
+| [6. 生态深度内容](#6-生态深度内容) | 10 | `06_ecosystem/` | 异步、数据库、序列化、场景、生产实践、前沿特性 |
+| [7. 研究笔记与实验](#7-研究笔记与实验) | 6 | `07_research_notes/` | 版本研究、研究快照、设计理论、类型理论、实验 |
+| [8. 质量审计、链路检查与临时文件](#8-质量审计链路检查与临时文件) | 8 | `08_quality_audits/` | 审计报告、链路检查、备份入口、临时参考 |
+| [9. 独立专题集合](#9-独立专题集合) | 2 | `09_special_collections/` | 超大独立集合：所有权可判定性、docs 大备份 |
 
 ---
 
@@ -35,22 +36,29 @@
 ### 1.1 归档政策与目录说明
 
 - [`README.md`](README.md) — `archive/` 目录说明与使用规则
+- [`ARCHIVE_REORG_LOG_2026_07_20.md`](ARCHIVE_REORG_LOG_2026_07_20.md) — 本次重组迁移记录
+- [`01_governance/01_archive_policy/ARCHIVE_INDEX.md`](01_governance/01_archive_policy/ARCHIVE_INDEX.md) — 历史归档索引
 - [`../archive_policy.md`](../archive_policy.md) — 归档政策全文
 - 活跃对应页：无（治理文件本身）
 
 ### 1.2 项目级计划与跟进报告
 
 - [`01_governance/CRITICAL_AUDIT_REPORT_2026.md`](01_governance/CRITICAL_AUDIT_REPORT_2026.md) — 2026 年批判性审计
-- [`02_version_alignment/RUST_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05_01.md`](02_version_alignment/RUST_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05_01.md) — 国际权威来源对称差分析
-- [`02_version_alignment/RUST_196_FEATURE_ALIGNMENT_AUDIT.md`](02_version_alignment/RUST_196_FEATURE_ALIGNMENT_AUDIT.md) — 1.96 特性对齐审计
-- [`02_version_alignment/RUST_REFERENCE_GAP_ANALYSIS_REPORT.md`](02_version_alignment/RUST_REFERENCE_GAP_ANALYSIS_REPORT.md) — Rust Reference 缺口分析
 - [`01_governance/PROJECT_FOLLOW_UP_PLAN.md`](01_governance/PROJECT_FOLLOW_UP_PLAN.md)、[`01_governance/PROJECT_NEXT_PHASE_PLAN.md`](01_governance/PROJECT_NEXT_PHASE_PLAN.md)、[`01_governance/PHASE1_COMPLETION_REPORT.md`](01_governance/PHASE1_COMPLETION_REPORT.md) 等
-- 活跃对应页：[`concept/07_future/00_version_tracking/`](../concept/07_future/00_version_tracking/)
+- [`01_governance/02_project_plans/`](01_governance/02_project_plans/) — 2026 年 3 月重组计划、语义空间 Wave 计划等
+- 活跃对应页：[`concept/07_future/`](../concept/07_future/)
 
-### 1.3 根级元数据与脚本
+### 1.3 项目报告
 
-- [`01_governance/root_meta/concept_kb.json`](01_governance/root_meta/concept_kb.json) — 元知识库索引（48k+ 行）
-- [`01_governance/root_meta/`](01_governance/root_meta/) 内缓存、Docker Compose、Python 脚本
+- [`01_governance/03_project_reports/`](01_governance/03_project_reports/) — Rust 1.94 特性清单、crates 更新报告
+- 活跃对应页：[`concept/`](../concept/)
+
+### 1.4 根级元数据与脚本
+
+- [`01_governance/04_root_meta/concept_kb.json`](01_governance/04_root_meta/concept_kb.json) — 元知识库索引
+- [`01_governance/04_root_meta/concept_index_retired_2026-05-21.json`](01_governance/04_root_meta/concept_index_retired_2026-05-21.json) — 已退役 concept 索引
+- [`01_governance/04_root_meta/kg_data_v1_retired_2026-05-23.json`](01_governance/04_root_meta/kg_data_v1_retired_2026-05-23.json) — 知识图谱 v1 退役数据
+- [`01_governance/04_root_meta/kg_data_v2_retired_2026-07-12.json`](01_governance/04_root_meta/kg_data_v2_retired_2026-07-12.json) — 知识图谱 v2 退役数据
 - 活跃对应页：[`concept/`](../concept/)、[`tools/`](../tools/)
 
 ---
@@ -59,19 +67,26 @@
 
 ### 2.1 版本跟踪与特性对齐
 
-- 顶层 `RUST_189_*` 至 `RUST_197_*` 系列报告
-- [`2026/concept_archive/`](2026/concept_archive/) — 旧版概念页按版本归档
+- [`02_version_alignment/RUST_196_FEATURE_ALIGNMENT_AUDIT.md`](02_version_alignment/RUST_196_FEATURE_ALIGNMENT_AUDIT.md) — 1.96 特性对齐审计
+- [`02_version_alignment/RUST_1.96_MIGRATION_PLAN.md`](02_version_alignment/RUST_1.96_MIGRATION_PLAN.md)、[`02_version_alignment/RUST_1.96_MIGRATION_COMPLETE.md`](02_version_alignment/RUST_1.96_MIGRATION_COMPLETE.md)
+- [`02_version_alignment/01_rust_version_tracking/`](02_version_alignment/01_rust_version_tracking/) — 工具链、历史版本文档、版本报告
 - 活跃对应页：[`concept/07_future/00_version_tracking/`](../concept/07_future/00_version_tracking/)
 
 ### 2.2 验证报告
 
-- [`02_version_alignment/verification_reports/`](02_version_alignment/verification_reports/) — Rust 1.94 等版本验证报告
+- [`02_version_alignment/02_verification_reports/`](02_version_alignment/02_verification_reports/) — Rust 1.94 验证报告族
 - 活跃对应页：[`concept/07_future/00_version_tracking/`](../concept/07_future/00_version_tracking/)
 
 ### 2.3 对称差分析与国际权威对比
 
-- [`02_version_alignment/RUST_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05_01.md`](02_version_alignment/RUST_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05_01.md)
+- [`02_version_alignment/RUST_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05_01.md`](02_version_alignment/RUST_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05_01.md) — 国际权威来源对称差分析
+- [`02_version_alignment/RUST_REFERENCE_GAP_ANALYSIS_REPORT.md`](02_version_alignment/RUST_REFERENCE_GAP_ANALYSIS_REPORT.md) — Rust Reference 缺口分析
 - 活跃对应页：[`concept/07_future/`](../concept/07_future/)
+
+### 2.4 2026 检查清单
+
+- [`02_version_alignment/04_2026_checklists/`](02_version_alignment/04_2026_checklists/) — 2026 H1 版本对齐检查清单、2026 Q2 季度同步检查清单
+- 活跃对应页：无（审计产物）
 
 ---
 
@@ -79,124 +94,142 @@
 
 ### 3.1 旧版概念页
 
-- [`2026/concept_archive/`](2026/concept_archive/) — 35+ 份旧版概念页（所有权、生命周期、异步、泛型等）
+- [`03_concept_history/01_legacy_concept_pages/`](03_concept_history/01_legacy_concept_pages/) — 从 `concept/` 各层级迁移出来的旧版概念页（35+ 份）
 - 活跃对应页：[`concept/`](../concept/) 各层级权威页
 
 ### 3.2 知识卡片旧版
 
-- [`03_concept_history/knowledge/01_fundamentals/01_borrowing.md`](03_concept_history/knowledge/01_fundamentals/01_borrowing.md)
-- [`03_concept_history/knowledge/01_fundamentals/03_lifetimes.md`](03_concept_history/knowledge/01_fundamentals/03_lifetimes.md)
-- [`03_concept_history/knowledge/01_fundamentals/04_ownership.md`](03_concept_history/knowledge/01_fundamentals/04_ownership.md)
-- [`03_concept_history/knowledge/02_intermediate/`](03_concept_history/knowledge/02_intermediate/)、[`03_concept_history/knowledge/03_advanced/`](03_concept_history/knowledge/03_advanced/)
+- [`03_concept_history/02_knowledge_cards/`](03_concept_history/02_knowledge_cards/) — 旧版知识卡片（基础、中级、高级、专家）
 - 活跃对应页：[`concept/`](../concept/)
 
 ### 3.3 指南旧版
 
-- [`03_concept_history/guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md`](03_concept_history/guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md)
-- [`03_concept_history/guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md`](03_concept_history/guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md)
+- [`03_concept_history/03_guides/`](03_concept_history/03_guides/) — 旧版指南
+- 活跃对应页：[`docs/04_guides/`](../docs/04_guides/)
+
+### 3.4 AI 辅助编程
+
+- [`03_concept_history/03_guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md`](03_concept_history/03_guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md)
+- [`03_concept_history/03_guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md`](03_concept_history/03_guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md)
 - 活跃对应页：[`docs/04_guides/`](../docs/04_guides/)
 
 ---
 
 ## 4. Crate 完成与增强报告
 
-### 4.1 按 Crate 组织的完成报告
+### 4.1–4.10 按 Crate 组织
 
-- [`2026/crates_reports/c01_ownership_borrow_scope/`](2026/crates_reports/c01_ownership_borrow_scope/)
-- [`2026/crates_reports/c02_type_system/`](2026/crates_reports/c02_type_system/)
-- [`2026/crates_reports/c04_generic/`](2026/crates_reports/c04_generic/)
-- [`2026/crates_reports/c06_async/`](2026/crates_reports/c06_async/)
-- [`2026/crates_reports/c07_process/`](2026/crates_reports/c07_process/)
-- [`2026/crates_reports/c08_algorithms/`](2026/crates_reports/c08_algorithms/)
-- [`2026/crates_reports/c09_design_pattern/`](2026/crates_reports/c09_design_pattern/)
-- [`2026/crates_reports/c10_networks/`](2026/crates_reports/c10_networks/)
-- 注：各目录内含大量 FINAL/COMPLETION/ENHANCEMENT/UPGRADE 报告，存在主题重叠。
+- [`04_crate_reports/01_c01_ownership_borrow_scope/`](04_crate_reports/01_c01_ownership_borrow_scope/) — 所有权/借用/作用域；Rust 1.89/1.90 特性分析
+- [`04_crate_reports/02_c02_type_system/`](04_crate_reports/02_c02_type_system/) — 类型系统、Cargo 文档、dispatch 机制
+- [`04_crate_reports/03_c03_control_fn/`](04_crate_reports/03_c03_control_fn/) — 控制流与函数
+- [`04_crate_reports/04_c04_generic/`](04_crate_reports/04_c04_generic/) — 泛型
+- [`04_crate_reports/05_c05_threads/`](04_crate_reports/05_c05_threads/) — 线程
+- [`04_crate_reports/06_c06_async/`](04_crate_reports/06_c06_async/) — 异步生态（最大报告族）
+- [`04_crate_reports/07_c07_process/`](04_crate_reports/07_c07_process/) — 进程/错误处理/同步原语
+- [`04_crate_reports/08_c08_algorithms/`](04_crate_reports/08_c08_algorithms/) — 算法 crate
+- [`04_crate_reports/09_c09_design_pattern/`](04_crate_reports/09_c09_design_pattern/) — 设计模式
+- [`04_crate_reports/10_c10_networks/`](04_crate_reports/10_c10_networks/) — 网络 crate
 - 活跃对应页：[`crates/`](../crates/)
 
-### 4.2 Crate 文档旧版
+### 4.11 Cargo 包管理旧版
 
-- [`2026/crates_c08_algorithms_docs_archive_2025/`](2026/crates_c08_algorithms_docs_archive_2025/)
-- 活跃对应页：[`crates/c08_algorithms/`](../crates/c08_algorithms/)
-
-### 4.3 Cargo 包管理体系旧版
-
-- [`cargo_package_management_from_c02/`](cargo_package_management_from_c02/) — 17 份文档 + `diagrams/` + `examples/`
+- [`04_crate_reports/11_cargo_package_management/`](04_crate_reports/11_cargo_package_management/) — 17 份文档 + diagrams + examples
 - 活跃对应页：[`concept/06_ecosystem/cargo/`](../concept/06_ecosystem/)、[`crates/c02_type_system/`](../crates/c02_type_system/)
+
+### 4.12 C08 算法 Crate 旧版文档
+
+- [`04_crate_reports/08_c08_algorithms_docs_archive_2025/`](04_crate_reports/08_c08_algorithms_docs_archive_2025/) — 旧版算法 crate 文档归档
+- 活跃对应页：[`crates/c08_algorithms/`](../crates/c08_algorithms/)
 
 ---
 
 ## 5. 形式化方法与所有权可判定性
 
-### 5.1 核心教程与可判定性分析
+### 5.1 所有权可判定性专题入口
 
-- [`rust-ownership-decidability/00-foundations/`](rust-ownership-decidability/00-foundations/)
-- [`rust-ownership-decidability/01-core-concepts/`](rust-ownership-decidability/01-core-concepts/)
-- [`rust-ownership-decidability/04-decidability-analysis/`](rust-ownership-decidability/04-decidability-analysis/)
-- [`docs/rust-ownership-chinese/`](docs/rust-ownership-chinese/) — 中文所有权与可判定性教程旧版
+- [`05_formal_methods/01_ownership_decidability_collection/README.md`](05_formal_methods/01_ownership_decidability_collection/README.md) — 专题入口
+- 完整集合：[`09_special_collections/rust_ownership_decidability/`](09_special_collections/rust_ownership_decidability/)
 - 活跃对应页：[`concept/04_formal/`](../concept/04_formal/)
 
-### 5.2 验证工具
+### 5.2 学术工具
 
-- [`rust-ownership-decidability/03-verification-tools/`](rust-ownership-decidability/03-verification-tools/)
-- [`content/academic/`](content/academic/) — RustBelt、Tree Borrows、Polonius、Kani、Prusti、Creusot、Aeneas、Coq
+- [`05_formal_methods/02_academic_tools/`](05_formal_methods/02_academic_tools/) — RustBelt、Tree Borrows、Polonius、Kani、Prusti、Creusot、Aeneas
 - 活跃对应页：[`concept/04_formal/02_separation_logic/`](../concept/04_formal/02_separation_logic/)
 
-### 5.3 案例研究
+### 5.3 形式化工程系统
 
-- [`rust-ownership-decidability/case-studies/`](rust-ownership-decidability/case-studies/) — 按领域组织（wasm, security, ml-ai, media, gamedev, embedded, database, cloud, cli, blockchain）
-- 活跃对应页：[`concept/06_ecosystem/`](../concept/06_ecosystem/)、[`content/`](../content/)
+- [`05_formal_methods/03_formal_engineering_system/`](05_formal_methods/03_formal_engineering_system/) — 形式化工程系统资料
+- 活跃对应页：[`concept/04_formal/`](../concept/04_formal/)
 
-### 5.4 并发/异步/分布式专题
+### 5.4 废弃方案
 
-- [`rust-ownership-decidability/12-concurrency-patterns/`](rust-ownership-decidability/12-concurrency-patterns/)
-- [`rust-ownership-decidability/async-specialty/`](rust-ownership-decidability/async-specialty/)
-- [`rust-ownership-decidability/16-program-semantics/distributed-patterns/`](rust-ownership-decidability/16-program-semantics/distributed-patterns/)
-- 活跃对应页：[`concept/03_advanced/01_async/`](../concept/03_advanced/01_async/)、[`concept/05_comparative/`](../concept/05_comparative/)
+- [`05_formal_methods/04_coq_aeneas_deprecated/`](05_formal_methods/04_coq_aeneas_deprecated/) — Aeneas、Coq/Isabelle 证明脚手架、Coq-of-Rust 计划
+- 活跃对应页：[`content/safety_critical/`](../content/safety_critical/)
 
-### 5.5 形式化工程系统旧版
+### 5.5 研究笔记-形式化
 
-- [`docs/c_class_audit_2026_06_08/rust-formal-engineering-system/`](docs/c_class_audit_2026_06_08/rust-formal-engineering-system/)
+- [`05_formal_methods/05_research_notes_formal/`](05_formal_methods/05_research_notes_formal/) — 形式化方法研究笔记
+- 活跃对应页：[`concept/04_formal/`](../concept/04_formal/)
+
+### 5.6 中文所有权教程
+
+- [`05_formal_methods/06_chinese_ownership_tutorial/`](05_formal_methods/06_chinese_ownership_tutorial/) — 中文所有权与可判定性教程旧版
 - 活跃对应页：[`concept/04_formal/`](../concept/04_formal/)
 
 ---
 
 ## 6. 生态深度内容
 
-### 6.1 异步运行时与网络
+### 6.1 异步运行时
 
-- [`content/ecosystem/async_runtimes/`](content/ecosystem/async_runtimes/)
-- [`content/ecosystem/error_handling/`](content/ecosystem/error_handling/)
-- 活跃对应页：[`concept/03_advanced/01_async/`](../concept/03_advanced/01_async/)、[`concept/06_ecosystem/networks/`](../concept/06_ecosystem/)
+- [`06_ecosystem/01_async_runtimes/`](06_ecosystem/01_async_runtimes/) — Tokio 等异步运行时
+- 活跃对应页：[`concept/03_advanced/01_async/`](../concept/03_advanced/01_async/)
 
 ### 6.2 数据库与 ORM
 
-- [`content/ecosystem/`](content/ecosystem/) 中 SQLx、SeaORM 相关材料
+- [`06_ecosystem/02_databases_orm/`](06_ecosystem/02_databases_orm/) — SQLx、Sea-ORM
 - 活跃对应页：[`concept/06_ecosystem/databases/`](../concept/06_ecosystem/)
 
 ### 6.3 序列化与数据格式
 
-- [`content/ecosystem/serialization/`](content/ecosystem/serialization/)
+- [`06_ecosystem/03_serialization/`](06_ecosystem/03_serialization/) — Serde 最佳实践
 - 活跃对应页：[`concept/06_ecosystem/`](../concept/06_ecosystem/)
 
 ### 6.4 场景化应用
 
-- [`content/scenarios/`](content/scenarios/) — CLI、Web、嵌入式、游戏、数据工程、系统基础设施
-- 活跃对应页：[`content/ecosystem/`](../content/ecosystem/)（若已迁移）、[`docs/05_practice/`](../docs/05_practice/)
+- [`06_ecosystem/04_scenarios/`](06_ecosystem/04_scenarios/) — CLI、Web、数据工程/ML、嵌入式、游戏
+- 活跃对应页：[`content/ecosystem/`](../content/ecosystem/)、[`docs/05_practice/`](../docs/05_practice/)
 
 ### 6.5 生产实践
 
-- [`content/production/`](content/production/) — K8s、serverless、CI/CD、可观测性、性能调优
+- [`06_ecosystem/05_production_practices/`](06_ecosystem/05_production_practices/) — K8s、serverless、CI/CD、可观测性、性能调优
 - 活跃对应页：[`content/safety_critical/`](../content/safety_critical/)、[`docs/05_practice/`](../docs/05_practice/)
 
 ### 6.6 前沿特性跟踪
 
-- [`content/emerging/`](content/emerging/) — async closures、TAIT、generic const exprs、WASM、gen blocks
+- [`06_ecosystem/06_emerging_features/`](06_ecosystem/06_emerging_features/) — async closures、TAIT、generic const exprs、WASM、gen blocks
 - 活跃对应页：[`concept/07_future/`](../concept/07_future/)
 
 ### 6.7 知识表征矩阵
 
-- [`content/representations/`](content/representations/)
+- [`06_ecosystem/07_representations/`](06_ecosystem/07_representations/) — Bloom × Krathwohl 矩阵、知识表征映射
 - 活跃对应页：[`concept/00_meta/`](../concept/00_meta/)
+
+### 6.8 Crate 案例研究入口
+
+- [`06_ecosystem/08_crate_case_studies/README.md`](06_ecosystem/08_crate_case_studies/README.md) — 专题入口
+- 完整集合：[`09_special_collections/rust_ownership_decidability/case-studies/`](09_special_collections/rust_ownership_decidability/case-studies/)
+- 活跃对应页：[`crates/`](../crates/)、[`concept/06_ecosystem/`](../concept/06_ecosystem/)
+
+### 6.9 错误处理
+
+- [`06_ecosystem/09_error_handling/`](06_ecosystem/09_error_handling/) — 错误处理生态深度
+- 活跃对应页：[`concept/06_ecosystem/`](../concept/06_ecosystem/)
+
+### 6.10 Web 框架
+
+- [`06_ecosystem/10_web_frameworks/`](06_ecosystem/10_web_frameworks/) — Axum、Actix-web、Rocket 等
+- 活跃对应页：[`concept/06_ecosystem/networks/`](../concept/06_ecosystem/)
 
 ---
 
@@ -204,19 +237,33 @@
 
 ### 7.1 版本特性研究笔记
 
-- [`research_notes/`](research_notes/) — Rust 1.91–1.94 特性、语义框架、工具矩阵
+- [`07_research_notes/01_version_research/`](07_research_notes/01_version_research/) — Rust 1.91–1.94 特性研究笔记
 - 活跃对应页：[`concept/07_future/00_version_tracking/`](../concept/07_future/00_version_tracking/)
 
 ### 7.2 研究笔记快照（2026-06-25）
 
-- [`research_notes_2026_06_25/`](research_notes_2026_06_25/)
-- 子目录：`experiments/`、`formal_methods/`、`formal_modules/`、`software_design_theory/`、`type_theory/`
-- 活跃对应页：[`concept/04_formal/`](../concept/04_formal/)
+- [`07_research_notes/02_snapshot_2026_06_25/`](07_research_notes/02_snapshot_2026_06_25/) — 根文件快照（项目报告、索引、教程、cheatsheet 等）
+- 活跃对应页：[`concept/`](../concept/)
 
 ### 7.3 设计理论
 
-- [`research_notes_2026_06_25/software_design_theory/`](research_notes_2026_06_25/software_design_theory/)
+- [`07_research_notes/03_software_design_theory/`](07_research_notes/03_software_design_theory/) — 设计模式、工作流、执行模型、分布式模式
 - 活跃对应页：[`concept/06_ecosystem/03_design_patterns/`](../concept/06_ecosystem/03_design_patterns/)
+
+### 7.4 类型理论
+
+- [`07_research_notes/04_type_theory/`](07_research_notes/04_type_theory/) — 类型系统基础、trait 形式化、const 求值
+- 活跃对应页：[`concept/04_formal/`](../concept/04_formal/)
+
+### 7.5 实验
+
+- [`07_research_notes/05_experiments/`](07_research_notes/05_experiments/) — 性能/编译器实验笔记
+- 活跃对应页：[`examples/`](../examples/)
+
+### 7.6 形式化统一模型
+
+- [`07_research_notes/06_formal_unified_models/`](07_research_notes/06_formal_unified_models/) — LSIP、PostgreSQL 形式化、Rust 核心 crate 形式化塔
+- 活跃对应页：[`concept/04_formal/`](../concept/04_formal/)
 
 ---
 
@@ -224,63 +271,84 @@
 
 ### 8.1 链路健康与死链报告
 
-- [`08_quality_audits/LINK_CHECK_REPORT_FULL.md`](08_quality_audits/LINK_CHECK_REPORT_FULL.md)
-- [`reports/2026_07/`](reports/2026_07/) 中 `LINK_CHECK_*.md` 系列
+- [`08_quality_audits/LINK_CHECK_REPORT_FULL.md`](08_quality_audits/LINK_CHECK_REPORT_FULL.md) — 全库链路健康报告
 - 活跃对应页：无（审计产物）
 
 ### 8.2 内容重叠与去重报告
 
-- [`reports/2026_07/CONTENT_OVERLAP_DETECTION_*.md`](reports/2026_07/)
+- [`08_quality_audits/02_content_overlap/`](08_quality_audits/02_content_overlap/) — 内容重叠检测报告、重复内容审计
 - 活跃对应页：无（审计产物）
 
 ### 8.3 内容完整性与 i18n 审计
 
-- [`reports/2026_07/CONTENT_COMPLETENESS_*.md`](reports/2026_07/)
-- [`reports/2026_07/I18N_*.md`](reports/2026_07/)
+- [`08_quality_audits/CONTENT_COMPLETENESS_UNIFICATION_SUMMARY.md`](08_quality_audits/CONTENT_COMPLETENESS_UNIFICATION_SUMMARY.md)
 - 活跃对应页：无（审计产物）
 
 ### 8.4 安全/供应链审计
 
-- [`reports/2026_07/`](reports/2026_07/) 中安全相关报告
+- [`08_quality_audits/MIRI_TESTS_FIX_REPORT.md`](08_quality_audits/MIRI_TESTS_FIX_REPORT.md)
 - 活跃对应页：[`supply-chain/`](../supply-chain/)
 
 ### 8.5 临时文件与快速参考
 
-- [`08_quality_audits/temp/`](08_quality_audits/temp/)
-- [`docs/temp/`](docs/temp/)
-- [`docs/version_reports/`](docs/version_reports/)
+- [`08_quality_audits/05_temp_quick_reference/`](08_quality_audits/05_temp_quick_reference/) — 历史临时文件、快速参考
 - 活跃对应页：[`docs/03_reference/quick_reference/`](../docs/03_reference/quick_reference/)
 
-### 8.6 备份与重组历史
+### 8.6 已废弃方案
 
-- [`backup_from_docs/`](backup_from_docs/) — 2025 年 `docs/` 大重组备份
-- [`docs/2026_03_reorganization/`](docs/2026_03_reorganization/) — 2026 年 3 月重组记录
+- [`05_formal_methods/04_coq_aeneas_deprecated/`](05_formal_methods/04_coq_aeneas_deprecated/) — 已废弃方案（迁移后位置）
+- 活跃对应页：[`content/safety_critical/`](../content/safety_critical/)
+
+### 8.7 docs 大备份入口
+
+- [`08_quality_audits/07_backup_from_docs_entry/README.md`](08_quality_audits/07_backup_from_docs_entry/README.md) — 专题入口
+- 完整集合：[`09_special_collections/backup_from_docs/`](09_special_collections/backup_from_docs/)
 - 活跃对应页：[`docs/`](../docs/)
 
-### 8.7 已废弃方案
+### 8.8 按时间归档报告
 
-- [`08_quality_audits/deprecated/RUST_SAFETY_CRITICAL_ECOSYSTEM/`](08_quality_audits/deprecated/RUST_SAFETY_CRITICAL_ECOSYSTEM/)
-- [`08_quality_audits/deprecated/coq_skeleton/`](08_quality_audits/deprecated/coq_skeleton/)
-- 活跃对应页：[`content/safety_critical/`](../content/safety_critical/)
+- [`08_quality_audits/08_reports_by_time/`](08_quality_audits/08_reports_by_time/) — 2025-12、2026 Q1、2026_07 等历史报告
+- 活跃对应页：无（审计产物）
+
+### 8.9 C-class 审计包
+
+- [`08_quality_audits/09_c_class_audit_2026_06_08/`](08_quality_audits/09_c_class_audit_2026_06_08/) — 2026-06-08 C-class 审计完整包
+- 活跃对应页：无（审计产物）
 
 ---
 
-## 附录 A：关键统计数据
+## 9. 独立专题集合
+
+### 9.1 所有权可判定性
+
+- [`09_special_collections/rust_ownership_decidability/`](09_special_collections/rust_ownership_decidability/) — 450+ 文件，核心教学资料
+- 专题入口：[`05_formal_methods/01_ownership_decidability_collection/README.md`](05_formal_methods/01_ownership_decidability_collection/README.md)
+- 活跃对应页：[`concept/04_formal/`](../concept/04_formal/)
+
+### 9.2 docs 大备份
+
+- [`09_special_collections/backup_from_docs/`](09_special_collections/backup_from_docs/) — 2025 年 `docs/` 大重组完整备份（~11,755 文件）
+- 专题入口：[`08_quality_audits/07_backup_from_docs_entry/README.md`](08_quality_audits/07_backup_from_docs_entry/README.md)
+- 活跃对应页：[`docs/`](../docs/)、[`concept/`](../concept/)
+
+---
+
+## 附录 A：关键统计数据（重组后）
 
 | 指标 | 数值 |
 |------|------|
-| Markdown 文件总数 | 12,361 |
-| 重复标题组 | 1,354 组 |
-| MD5 完全相同文件组 | 1,211 组 |
-| 顶层全局报告 | 21 份 |
-| 空标题文件（未匹配到 `#` 一级标题） | 4,467 份 |
+| 8 大主题目录下文件总数 | 约 1,108 |
+| 独立专题集合文件总数 | 约 12,320 |
+| 合计 | 约 13,428 |
+| 历史未主题化目录 | 0 |
 
-> 注：空标题文件多集中在 `backup_from_docs/backup_from_docs/`、旧版报告和 README 中，标题提取规则仅匹配 `# 标题`，部分文件使用 `#标题` 或 front matter 形式导致未命中。建议后续完善标题元数据。
+> 注：独立专题集合 `rust_ownership_decidability/` 与 `backup_from_docs/` 内部结构保留，不拆散。
 
 ---
 
 ## 附录 B：相关文件
 
 - [`RELATIONSHIP_MAP.md`](RELATIONSHIP_MAP.md) — 文件关联组与相关度分析
-- [`tmp/archive_overlap_scan_2026_07_19.md`](../tmp/archive_overlap_scan_2026_07_19.md) — 完整重叠检测报告
-- [`tmp/archive_inventory_before_2026_07_19.txt`](../tmp/archive_inventory_before_2026_07_19.txt) — 目录结构备份清单
+- [`ARCHIVE_REORG_LOG_2026_07_20.md`](ARCHIVE_REORG_LOG_2026_07_20.md) — 重组迁移记录
+- [`tmp/archive_overlap_scan_before_reorg_2026_07_20.md`](../tmp/archive_overlap_scan_before_reorg_2026_07_20.md) — 重组前重叠检测报告
+- [`../archive_policy.md`](../archive_policy.md) — 归档政策

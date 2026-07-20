@@ -44,49 +44,46 @@ def md5_hash(filepath):
         return ""
 
 
-# 主题分类规则：关键词 -> (主题, 子主题)
+# 主题分类规则：路径前缀 -> (主题, 子主题)
 CLASSIFICATION_RULES = [
     # 治理与元数据
-    (("archive_policy", "README.md", "PROJECT_", "PHASE", "CRITICAL_AUDIT",
-      "SYMMETRIC_DIFFERENCE", "root_meta", "concept_kb.json"),
-     "1. 治理与元数据", "1.2 项目级计划与跟进报告"),
+    (("01_governance/",),
+     "1. 治理与元数据", "按子目录细分"),
     # 版本与权威来源
-    (("RUST_19", "verification_reports", "version_reports", "FEATURE_ALIGNMENT",
-      "REFERENCE_GAP"),
-     "2. Rust 版本与权威来源对齐", "2.1 版本跟踪与特性对齐"),
+    (("02_version_alignment/",),
+     "2. Rust 版本与权威来源对齐", "按子目录细分"),
     # 概念页历史
-    (("concept_archive", "/knowledge/", "/guides/", "AI_ASSISTED"),
-     "3. 概念页历史与迁移", "3.1 旧版概念页"),
+    (("03_concept_history/",),
+     "3. 概念页历史与迁移", "按子目录细分"),
     # Crate 完成报告
-    (("crates_reports", "crates_c08", "cargo_package_management"),
-     "4. Crate 完成与增强报告", "4.1 按 Crate 组织的完成报告"),
+    (("04_crate_reports/",),
+     "4. Crate 完成与增强报告", "按子目录细分"),
     # 形式化/所有权
-    (("rust-ownership-decidability", "formal-engineering-system",
-      "rust-ownership-chinese", "formal_methods", "formal_modules", "type_theory"),
-     "5. 形式化方法与所有权可判定性", "5.1 核心教程与可判定性分析"),
+    (("05_formal_methods/",),
+     "5. 形式化方法与所有权可判定性", "按子目录细分"),
     # 生态深度
-    (("content/ecosystem", "content/scenarios", "content/production",
-      "content/emerging", "content/representations"),
-     "6. 生态深度内容", "6.1 异步运行时与网络"),
+    (("06_ecosystem/",),
+     "6. 生态深度内容", "按子目录细分"),
     # 研究笔记
-    (("research_notes", "software_design_theory"),
-     "7. 研究笔记与实验", "7.1 版本特性研究笔记"),
+    (("07_research_notes/",),
+     "7. 研究笔记与实验", "按子目录细分"),
     # 质量审计/临时文件
-    (("LINK_CHECK", "CONTENT_OVERLAP", "CONTENT_COMPLETENESS", "I18N",
-      "/reports/", "backup_from_docs", "/temp/", "deprecated"),
-     "8. 质量审计、链路检查与临时文件", "8.1 链路健康与死链报告"),
+    (("08_quality_audits/",),
+     "8. 质量审计、链路检查与临时文件", "按子目录细分"),
+    # 独立专题集合
+    (("09_special_collections/",),
+     "9. 独立专题集合", "按子目录细分"),
 ]
 
 
 def classify_file(path: Path) -> tuple:
-    """根据路径和标题关键词返回建议的主题分类。"""
+    """根据路径前缀返回建议的主题分类。"""
     rel = str(path.relative_to(ARCHIVE)).lower()
-    title = extract_title(path).lower()
-    for keywords, theme, subtheme in CLASSIFICATION_RULES:
-        for kw in keywords:
-            if kw.lower() in rel or kw.lower() in title:
+    for prefixes, theme, subtheme in CLASSIFICATION_RULES:
+        for prefix in prefixes:
+            if rel.startswith(prefix.lower()):
                 return theme, subtheme
-    return "8. 质量审计、链路检查与临时文件", "8.6 备份与重组历史"
+    return "8. 质量审计、链路检查与临时文件", "其他"
 
 
 def load_indexed_paths():
