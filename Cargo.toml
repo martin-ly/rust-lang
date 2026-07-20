@@ -900,5 +900,5 @@ similar_names = "allow"
 # 上游（GnomedDev/proc-macro-error-2）自 2024-09 后无修复发布，
 # 因此 vendor 到本地并应用官方建议的一行修复（extern crate 改为 pub extern crate）。
 # 上游发布修复版后应移除此 patch。
-[patch.crates-io]
-proc-macro-error2 = { path = "vendor/proc-macro-error2" }
+#[patch.crates-io]
+#proc-macro-error2 = { path = "vendor/proc-macro-error2" }
