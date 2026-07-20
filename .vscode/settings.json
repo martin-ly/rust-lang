@@ -60,5 +60,6 @@
     "*.md": "default",
     "*.copilotmd": "vscode.markdown.preview.editor",
     "*.svg": "imagePreview.previewEditor"
-  }
+  },
+  "git.ignoreLimitWarning": true
 }

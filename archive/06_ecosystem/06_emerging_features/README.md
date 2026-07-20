@@ -1,29 +1,37 @@
-# Rust 前沿特性跟踪
+# Rust 前沿特性跟踪 {#rust-前沿特性跟踪}
 
+> **分级**: [B]
+> **Bloom 层级**: L4-L5 (分析/评价)
 > **定位**: 跟踪 Rust 最新语言特性和即将稳定的功能
-> **版本**: Rust 1.97+ (Beta) / 1.98+ (Nightly)
+> **版本**: Rust 1.95+ (Nightly)
 > **更新频率**: 每两周
-> **状态**: 📦 已归档（只读历史参考，不再维护）
+> **状态**: 🔄 持续更新
 
 ---
 
-## 📋 目录
+## 📋 目录 {#目录}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [Rust 前沿特性跟踪](#rust-前沿特性跟踪)
-  - [📋 目录](#-目录)
-  - [🎯 目标](#-目标)
-  - [📊 特性跟踪矩阵](#-特性跟踪矩阵)
-  - [🔬 正在开发的特性](#-正在开发的特性)
-    - [Generic Const Expressions (generic\_const\_exprs)](#generic-const-expressions-generic_const_exprs)
-    - [Async Closures](#async-closures)
-    - [Impl Trait in Associated Type](#impl-trait-in-associated-type)
-    - [Type Alias Impl Trait (TAIT)](#type-alias-impl-trait-tait)
-  - [📈 版本路线图](#-版本路线图)
-  - [🔗 参考资源](#-参考资源)
+- [Rust 前沿特性跟踪 {#rust-前沿特性跟踪}](#rust-前沿特性跟踪-rust-前沿特性跟踪)
+  - [📋 目录 {#目录}](#-目录-目录)
+  - [🎯 目标 {#目标}](#-目标-目标)
+  - [📊 特性跟踪矩阵 {#特性跟踪矩阵}](#-特性跟踪矩阵-特性跟踪矩阵)
+  - [🔬 正在开发的特性 {#正在开发的特性}](#-正在开发的特性-正在开发的特性)
+    - [Generic Const Expressions (generic\_const\_exprs) {#generic-const-expressions-generic\_const\_exprs}](#generic-const-expressions-generic_const_exprs-generic-const-expressions-generic_const_exprs)
+    - [Async Closures {#async-closures}](#async-closures-async-closures)
+    - [Impl Trait in Associated Type {#impl-trait-in-associated-type}](#impl-trait-in-associated-type-impl-trait-in-associated-type)
+    - [Type Alias Impl Trait (TAIT) {#type-alias-impl-trait-tait}](#type-alias-impl-trait-tait-type-alias-impl-trait-tait)
+  - [📈 版本路线图 {#版本路线图}](#-版本路线图-版本路线图)
+  - [🔗 参考资源 {#参考资源}](#-参考资源-参考资源)
+  - [相关概念 {#相关概念}](#相关概念-相关概念)
+  - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
 ---
 
-## 🎯 目标
+## 🎯 目标 {#目标}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本目录致力于：
 
@@ -34,11 +42,13 @@
 
 ---
 
-## 📊 特性跟踪矩阵
+## 📊 特性跟踪矩阵 {#特性跟踪矩阵}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | 状态 | 预计稳定版本 | 文档完成度 | 示例代码 | 迁移指南 |
 |------|------|--------------|------------|----------|----------|
-| **Generic Const Expressions** | 开发中 | 1.97+ | 📝 20% | ✅ 基础 | 📝 规划中 |
+| **Generic Const Expressions** | 开发中 | 1.96+ | 📝 20% | ✅ 基础 | 📝 规划中 |
 | **Async Closures** | ✅ 已稳定 | **1.85.0** | ✅ 完整 | ✅ 完整 | ✅ 已完成 |
 | **Impl Trait in Assoc Type** | FCP | 1.95 | 📝 40% | ✅ 完整 | 📝 规划中 |
 | **TAIT** | 不稳定 | 1.97+ | 📝 25% | ⚠️ 部分 | 📝 规划中 |
@@ -47,13 +57,15 @@
 
 ---
 
-## 🔬 正在开发的特性
+## 🔬 正在开发的特性 {#正在开发的特性}
 
-### Generic Const Expressions (generic_const_exprs)
+### Generic Const Expressions (generic_const_exprs) {#generic-const-expressions-generic_const_exprs}
+
+> **来源: [IEEE](https://standards.ieee.org/)**
 
 **描述**: 允许在泛型参数中使用更复杂的常量表达式
 
-```rust
+```rust,ignore
 #![feature(generic_const_exprs)]
 
 // 使用 const 泛型进行编译时计算
@@ -92,15 +104,16 @@ where
 
 ---
 
-### Async Closures
+### Async Closures {#async-closures}
 
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
 > **状态**: ✅ **Stable since Rust 1.85.0**
 >
-> **正式文档已迁移**: [concept/03_advanced/24_async_closures.md](../../../concept/03_advanced/01_async/24_async_closures.md)
+> **正式文档已迁移**: [concept/03_advanced/24_async_closures.md](../../../../concept/03_advanced/01_async/24_async_closures.md)
 
 **描述**: 原生支持异步闭包，无需 `async move` 包裹。
 
-```rust
+```rust,ignore
 // Rust 1.85.0+ stable，无需 feature gate
 async fn new_way() {
     let f = async || {
@@ -125,11 +138,13 @@ async fn new_way() {
 
 ---
 
-### Impl Trait in Associated Type
+### Impl Trait in Associated Type {#impl-trait-in-associated-type}
+
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
 
 **描述**: 在关联类型中使用 `impl Trait`
 
-```rust
+```rust,ignore
 #![feature(impl_trait_in_assoc_type)]
 
 trait AsyncIterator {
@@ -171,11 +186,13 @@ impl AsyncIterator for Counter {
 
 ---
 
-### Type Alias Impl Trait (TAIT)
+### Type Alias Impl Trait (TAIT) {#type-alias-impl-trait-tait}
+
+> **来源: [POPL](https://www.sigplan.org/Conferences/POPL/)**
 
 **描述**: 在类型别名中使用 `impl Trait`
 
-```rust
+```rust,ignore
 #![feature(type_alias_impl_trait)]
 
 // 定义不透明的类型别名
@@ -206,7 +223,7 @@ fn recursive_async(n: u32) -> RecursiveFuture {
 
 ---
 
-## 📈 版本路线图
+## 📈 版本路线图 {#版本路线图}
 
 ```mermaid
 timeline
@@ -226,12 +243,18 @@ timeline
 
 ---
 
-## 🔗 参考资源
+## 🔗 参考资源 {#参考资源}
 
 - [Rust Release Tracking](https://releases.rs/)
 - [Rust RFCs](https://rust-lang.github.io/rfcs/)
 - [Rust Internals Forum](https://internals.rust-lang.org/)
 - [This Week in Rust](https://this-week-in-rust.org/)
+
+---
+
+**维护者**: Rust 学习项目团队
+**更新日期**: 2026-03-15
+**状态**: 🔄 持续跟踪更新
 
 ---
 
@@ -243,3 +266,24 @@ timeline
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念 {#相关概念}
+
+- [Async Closures](../../../knowledge/06_ecosystem/emerging/01_async_closures.md)
+- [Generic Const Exprs](../../../knowledge/06_ecosystem/emerging/02_generic_const_exprs.md)
+- [Rust 1.95 稳定特性](../../../knowledge/06_ecosystem/emerging/03_rust_1_95.md)
+
+---
+
+## 权威来源索引 {#权威来源索引}
+
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**

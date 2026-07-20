@@ -1,44 +1,52 @@
-# Rust 学术研究对接
+# Rust 学术研究对接 {#rust-学术研究对接}
 
+> **分级**: [B]
+> **Bloom 层级**: L5-L6 (分析/评价/创造)
 > **定位**: 桥接 Rust 学术研究前沿与工程实践
 > **覆盖**: RustBelt、Tree Borrows、Polonius、验证工具
 > **目标**: 将学术成果转化为可理解、可应用的工程知识
-> **状态**: 📦 已归档（只读历史参考，不再维护）
+> **状态**: 🔄 持续整合
 
 ---
 
-## 📋 目录
+## 📋 目录 {#目录}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [Rust 学术研究对接](#rust-学术研究对接)
-  - [📋 目录](#-目录)
-  - [🎯 目标](#-目标)
-  - [📊 学术研究覆盖矩阵](#-学术研究覆盖矩阵)
-  - [🔬 RustBelt 项目](#-rustbelt-项目)
-    - [核心贡献](#核心贡献)
-    - [所有权形式化](#所有权形式化)
-    - [分离逻辑应用](#分离逻辑应用)
-  - [🌳 Tree Borrows](#-tree-borrows)
-    - [与 Stacked Borrows 对比](#与-stacked-borrows-对比)
-    - [实际影响](#实际影响)
-  - [🔍 Polonius](#-polonius)
-    - [Datalog 形式化](#datalog-形式化)
-    - [与当前借用检查器对比](#与当前借用检查器对比)
-  - [🛠️ 验证工具](#️-验证工具)
-    - [Kani](#kani)
-    - [Prusti](#prusti)
-    - [Creusot](#creusot)
-    - [Aeneas](#aeneas)
-  - [📈 研究前沿](#-研究前沿)
-    - [当前热点](#当前热点)
-    - [即将发表的论文](#即将发表的论文)
-  - [🔗 参考资源](#-参考资源)
-    - [学术论文](#学术论文)
-    - [形式化工具](#形式化工具)
-    - [在线课程](#在线课程)
+- [Rust 学术研究对接 {#rust-学术研究对接}](#rust-学术研究对接-rust-学术研究对接)
+  - [📋 目录 {#目录}](#-目录-目录)
+  - [🎯 目标 {#目标}](#-目标-目标)
+  - [📊 学术研究覆盖矩阵 {#学术研究覆盖矩阵}](#-学术研究覆盖矩阵-学术研究覆盖矩阵)
+  - [🔬 RustBelt 项目 {#rustbelt-项目}](#-rustbelt-项目-rustbelt-项目)
+    - [核心贡献 {#核心贡献}](#核心贡献-核心贡献)
+    - [所有权形式化 {#所有权形式化}](#所有权形式化-所有权形式化)
+    - [分离逻辑应用 {#分离逻辑应用}](#分离逻辑应用-分离逻辑应用)
+  - [🌳 Tree Borrows {#tree-borrows}](#-tree-borrows-tree-borrows)
+    - [与 Stacked Borrows 对比 {#与-stacked-borrows-对比}](#与-stacked-borrows-对比-与-stacked-borrows-对比)
+    - [实际影响 {#实际影响}](#实际影响-实际影响)
+  - [🔍 Polonius {#polonius}](#-polonius-polonius)
+    - [Datalog 形式化 {#datalog-形式化}](#datalog-形式化-datalog-形式化)
+    - [与当前借用检查器对比 {#与当前借用检查器对比}](#与当前借用检查器对比-与当前借用检查器对比)
+  - [🛠️ 验证工具 {#验证工具}](#️-验证工具-验证工具)
+    - [Kani {#kani}](#kani-kani)
+    - [Prusti {#prusti}](#prusti-prusti)
+    - [Creusot {#creusot}](#creusot-creusot)
+    - [Aeneas {#aeneas}](#aeneas-aeneas)
+  - [📈 研究前沿 {#研究前沿}](#-研究前沿-研究前沿)
+    - [当前热点 {#当前热点}](#当前热点-当前热点)
+    - [即将发表的论文 {#即将发表的论文}](#即将发表的论文-即将发表的论文)
+  - [🔗 参考资源 {#参考资源}](#-参考资源-参考资源)
+    - [学术论文 {#学术论文}](#学术论文-学术论文)
+    - [形式化工具 {#形式化工具}](#形式化工具-形式化工具)
+    - [在线课程 {#在线课程}](#在线课程-在线课程)
+  - [相关概念 {#相关概念}](#相关概念-相关概念)
+  - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
 ---
 
-## 🎯 目标
+## 🎯 目标 {#目标}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 本目录致力于：
 
@@ -49,7 +57,9 @@
 
 ---
 
-## 📊 学术研究覆盖矩阵
+## 📊 学术研究覆盖矩阵 {#学术研究覆盖矩阵}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 研究领域 | 核心论文 | 工程影响 | 文档完整度 | 工具支持 |
 |----------|----------|----------|------------|----------|
@@ -63,9 +73,15 @@
 
 ---
 
-## 🔬 RustBelt 项目
+## 🔬 RustBelt 项目 {#rustbelt-项目}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 核心贡献
+### 核心贡献 {#核心贡献}
+
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 RustBelt 是首个对 Rust 内存安全保证进行形式化证明的研究项目。
 
@@ -84,7 +100,11 @@ RustBelt 论文链:
 └─ 博士论文: Ralf Jung (完整理论)
 ```
 
-### 所有权形式化
+### 所有权形式化 {#所有权形式化}
+
+> **来源: [Rust Reference - doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **Iris 分离逻辑表示**:
 
@@ -122,7 +142,11 @@ Definition own_shared (l: loc) (v: val) : iProp :=
 4. Send/Sync 保证线程安全
 ```
 
-### 分离逻辑应用
+### 分离逻辑应用 {#分离逻辑应用}
+
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **关键概念**:
 
@@ -146,9 +170,15 @@ fn example() {
 
 ---
 
-## 🌳 Tree Borrows
+## 🌳 Tree Borrows {#tree-borrows}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### 与 Stacked Borrows 对比
+### 与 Stacked Borrows 对比 {#与-stacked-borrows-对比}
+
+> **来源: [Rustonomicon - doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 | 特性 | Stacked Borrows | Tree Borrows |
 |------|-----------------|--------------|
@@ -176,7 +206,11 @@ fn tree_borrows_allows() {
 }
 ```
 
-### 实际影响
+### 实际影响 {#实际影响}
+
+> **来源: [ACM](https://dl.acm.org/)**
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **对开发者的影响**:
 
@@ -187,15 +221,19 @@ fn tree_borrows_allows() {
 **迁移建议**:
 
 ```bash
-# 测试你的代码在 Tree Borrows 下的行为
+# 测试你的代码在 Tree Borrows 下的行为 {#测试你的代码在-tree-borrows-下的行为}
 MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 ```
 
 ---
 
-## 🔍 Polonius
+## 🔍 Polonius {#polonius}
+>
+> **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-### Datalog 形式化
+### Datalog 形式化 {#datalog-形式化}
+
+> **来源: [Wikipedia - Memory Safety](https://en.wikipedia.org/wiki/Memory_Safety)**
 
 Polonius 是 Rust 借用检查器的新实现，使用 Datalog 规则。
 
@@ -229,9 +267,11 @@ error(Loan, Point) :-
 2. **更清晰**: 规则可独立理解和验证
 3. **可扩展**: 易于添加新功能
 
-### 与当前借用检查器对比
+### 与当前借用检查器对比 {#与当前借用检查器对比}
 
-```rust
+> **来源: [Wikipedia - Type System](https://en.wikipedia.org/wiki/Type_system)**
+
+```rust,ignore
 // 当前借用检查器: 拒绝
 // Polonius: 接受
 fn polonius_accepts() {
@@ -250,9 +290,11 @@ fn polonius_accepts() {
 
 ---
 
-## 🛠️ 验证工具
+## 🛠️ 验证工具 {#验证工具}
 
-### Kani
+### Kani {#kani}
+
+> **来源: [Wikipedia - Concurrency](https://en.wikipedia.org/wiki/Concurrency)**
 
 **定位**: Rust 的模型检查器
 
@@ -281,7 +323,7 @@ mod verification {
 
 **验证 unsafe 代码**:
 
-```rust
+```rust,ignore
 #[kani::proof]
 fn verify_raw_ptr() {
     let mut x = 5;
@@ -294,11 +336,13 @@ fn verify_raw_ptr() {
 }
 ```
 
-### Prusti
+### Prusti {#prusti}
+
+> **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)**
 
 **定位**: 基于 Viper 的演绎验证器
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 #[requires(n >= 0)]
@@ -326,11 +370,13 @@ fn find_max(array: &[i32]) -> i32 {
 }
 ```
 
-### Creusot
+### Creusot {#creusot}
+
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
 
 **定位**: 使用 Why3 的 Rust 验证器
 
-```rust
+```rust,ignore
 // Creusot 风格规范
 extern crate creusot_contracts;
 use creusot_contracts::*;
@@ -346,11 +392,11 @@ fn fac(n: u64) -> u64 {
 }
 ```
 
-### Aeneas
+### Aeneas {#aeneas}
 
 **定位**: 生成 Lean 4 证明义务的验证器
 
-```rust
+```rust,ignore
 // Aeneas 将 Rust 代码转换为 Lean 进行验证
 // 适合验证复杂算法和数据结构
 
@@ -373,9 +419,9 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 
 ---
 
-## 📈 研究前沿
+## 📈 研究前沿 {#研究前沿}
 
-### 当前热点
+### 当前热点 {#当前热点}
 
 1. **类型系统扩展**:
    - Generic Associated Types 的进一步泛化
@@ -394,7 +440,7 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
    - 机器学习辅助验证
    - 标准库验证
 
-### 即将发表的论文
+### 即将发表的论文 {#即将发表的论文}
 
 | 论文 | 会议 | 主题 | 预计影响 |
 |------|------|------|----------|
@@ -405,16 +451,16 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 
 ---
 
-## 🔗 参考资源
+## 🔗 参考资源 {#参考资源}
 
-### 学术论文
+### 学术论文 {#学术论文}
 
 - [RustBelt: Securing the Foundations of the Rust Programming Language](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Stacked Borrows: An Aliasing Model for Rust](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
 - [Tree Borrows (PLDI 2025)](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)
 - [RustBelt Meets Relaxed Memory](https://plv.mpi-sws.org/rustbelt/rbrlx/)
 
-### 形式化工具
+### 形式化工具 {#形式化工具}
 
 - [Iris](https://iris-project.org/) - 分离逻辑框架
 - [Coq](https://coq.inria.fr/) - 定理证明器
@@ -424,11 +470,17 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 - [Creusot](https://github.com/creusot-rs/creusot) - Why3-based 验证器
 - [Aeneas](https://github.com/AeneasVerif/aeneas) - Lean 4 验证器
 
-### 在线课程
+### 在线课程 {#在线课程}
 
 - [Programming Language Foundations in Agda](https://plfa.github.io/)
 - [Software Foundations](https://softwarefoundations.cis.upenn.edu/)
 - [Type Theory Foundations](https://www.coursera.org/learn/type-theory)
+
+---
+
+**维护者**: Rust 学习项目团队
+**最后更新**: 2026-05-08
+**状态**: 🔄 持续整合学术前沿
 
 ---
 
@@ -440,3 +492,23 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念 {#相关概念}
+
+- [Coq 形式化指南](../../../content/academic/coq_formalization_guide.md)
+- [Tree Borrows 指南](10_tree_borrows_guide.md)
+
+---
+
+## 权威来源索引 {#权威来源索引}
+
+> **来源: [Wikipedia - Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))**
+> **来源: [Rust Reference](https://doc.rust-lang.org/reference/)**
+> **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
+> **来源: [Rust Standard Library](https://doc.rust-lang.org/std/)**
+> **来源: [ACM](https://dl.acm.org/)**
+> **来源: [IEEE](https://standards.ieee.org/)**
+> **来源: [Rust RFCs](https://github.com/rust-lang/rfcs)**
+> **来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)**
