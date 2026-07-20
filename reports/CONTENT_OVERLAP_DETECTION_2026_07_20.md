@@ -1,11 +1,15 @@
 # 四轨内容相似度检测报告
 
-- **扫描文件数**: 1011
+- **扫描文件数**: 1022
 - **相似度阈值**: 0.6
-- **潜在重复对**: 1
+- **潜在重复对**: 5
 
 | 相似度 | 文件1 | 文件2 | 标题1 | 标题2 |
 |:---|:---|:---|:---|:---|
+| 0.75 | `concept\03_advanced\02_unsafe\01_unsafe.md` | `knowledge\03_advanced\unsafe\03_unsafe_rust.md` | Unsafe Rust 安全编程 | 03 Unsafe Rust |
+| 0.75 | `concept\03_advanced\02_unsafe\04_unsafe_rust_patterns.md` | `knowledge\03_advanced\unsafe\03_unsafe_rust.md` | Unsafe Rust 模式：安全抽象的核心技术 | 03 Unsafe Rust |
+| 0.75 | `concept\04_formal\01_ownership_logic\05_tree_borrows_deep_dive.md` | `knowledge\04_expert\miri\01_tree_borrows.md` | Tree Borrows 深度解析 | 01 Tree Borrows |
+| 0.75 | `concept\07_future\01_edition_roadmap\02_edition_guide.md` | `knowledge\06_ecosystem\02_edition_2024.md` | Edition 2024 完全指南：新特性与迁移策略 | 02 Edition 2024 |
 | 0.60 | `concept\07_future\00_version_tracking\migration_197_decision_tree.md` | `docs\03_reference\quick_reference\21_rust_197_features_cheatsheet.md` | Rust 1.97 兼容性迁移判定树 | Rust 1.97 特性速查表 {#rust-197-特性速 |
 
 ## 建议

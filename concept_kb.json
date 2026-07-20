@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 527,
-    "generated_at": "2026-07-20T14:44:21.237882+00:00"
+    "generated_at": "2026-07-20T15:20:21.150285+00:00"
   },
   "files": [
     {
@@ -295,7 +295,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../archive/reports/2026_07/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md",
+        "../../../archive/08_quality_audits/08_reports_by_time/2026_07/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
@@ -508,7 +508,7 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../../../archive/reports/2026_07/MIRI_VALIDATION_2026_05_27.md",
+        "../../../archive/08_quality_audits/08_reports_by_time/2026_07/MIRI_VALIDATION_2026_05_27.md",
         "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
         "boundary_extension_tree.md",
         "concept_definition_decision_forest.md",
@@ -713,7 +713,7 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../../../archive/reports/2026_07/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md",
+        "../../../archive/08_quality_audits/08_reports_by_time/2026_07/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md",
         "../../01_foundation/00_start/04_effects_and_purity.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
@@ -1755,7 +1755,7 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../../../archive/reports/2026_07/QUALITY_BASELINE_v2_0.md",
+        "../../../archive/08_quality_audits/08_reports_by_time/2026_07/QUALITY_BASELINE_v2_0.md",
         "../00_framework/methodology.md",
         "../02_sources/05_international_authority_index.md",
         "../04_navigation/03_concept_index.md",
@@ -2222,7 +2222,7 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../../../archive/reports/2026_07/GOOGLE_COMPREHENSIVE_RUST_MAPPING_2026_06_19.md",
+        "../../../archive/08_quality_audits/08_reports_by_time/2026_07/GOOGLE_COMPREHENSIVE_RUST_MAPPING_2026_06_19.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../01_foundation/01_ownership_borrow_lifetime/06_ownership_inventories_brown_book.md",
@@ -2276,10 +2276,10 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../../../archive/reports/2026_07/QUALITY_BASELINE_v1_9.md",
-        "../../../archive/reports/2026_07/code_block_compile_report.md",
-        "../../../archive/reports/2026_07/concept_audit_report.md",
-        "../../../archive/reports/2026_07/concept_consistency_report.md",
+        "../../../archive/08_quality_audits/08_reports_by_time/2026_07/QUALITY_BASELINE_v1_9.md",
+        "../../../archive/08_quality_audits/08_reports_by_time/2026_07/code_block_compile_report.md",
+        "../../../archive/08_quality_audits/08_reports_by_time/2026_07/concept_audit_report.md",
+        "../../../archive/08_quality_audits/08_reports_by_time/2026_07/concept_consistency_report.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
@@ -3070,7 +3070,7 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../../../archive/reports/2026_07/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md",
+        "../../../archive/08_quality_audits/08_reports_by_time/2026_07/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md",
         "../../01_foundation/00_start/04_effects_and_purity.md",
         "../../01_foundation/02_type_system/05_data_abstraction_spectrum.md",
         "../../01_foundation/03_values_and_references/03_variable_model.md",
@@ -40156,7 +40156,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../archive/docs/content/academic/10_tree_borrows_guide.md",
+        "../../../archive/05_formal_methods/02_academic_tools/10_tree_borrows_guide.md",
         "../../../knowledge/04_expert/miri/01_tree_borrows.md",
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
@@ -65924,7 +65924,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../archive/reports/2026_07/RUST_198_NIGHTLY_PROBE_2026_06_28.md",
+        "../../../archive/08_quality_audits/08_reports_by_time/2026_07/RUST_198_NIGHTLY_PROBE_2026_06_28.md",
         "../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md",
         "../../04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md",
         "../../04_formal/04_model_checking/07_autoverus.md",

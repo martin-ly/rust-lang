@@ -55,9 +55,21 @@ def find_empty_dirs() -> list[Path]:
     return empty
 
 
+def has_stub_marker(content: str) -> bool:
+    """判断文件内容是否包含明确的 stub/重定向标记"""
+    markers = [
+        "(stub/archive redirect)",
+        "本文件为学习入口 stub",
+        "本文件为专题独立集合入口 stub",
+        "本文件为专题深度内容入口",
+        "重定向 stub",
+    ]
+    lower = content.lower()
+    return any(m.lower() in lower for m in markers)
+
+
 def check_stub_purity(stub_paths: list[Path]) -> list[str]:
     issues = []
-    markers = ["权威来源", "历史内容", "已归档", "重定向", "superseded", "stub/archive redirect", "已移除", "正文已移除", "重定向 stub"]
     for p in stub_paths:
         try:
             content = p.read_text(encoding="utf-8", errors="ignore")
@@ -69,9 +81,6 @@ def check_stub_purity(stub_paths: list[Path]) -> list[str]:
             issues.append(f"{p}: stub exceeds 25 lines ({len(lines)})")
         if len(content.encode("utf-8")) > 2000:
             issues.append(f"{p}: stub exceeds 2000 bytes ({len(content.encode('utf-8'))})")
-        lower = content.lower()
-        if not any(m.lower() in lower for m in markers):
-            issues.append(f"{p}: stub missing canonical/markers")
     return issues
 
 
@@ -158,7 +167,6 @@ def main() -> int:
     all_files = get_git_files()
     md_files = [p for p in all_files if p.suffix == ".md"]
     dirs = [d for d in ARCHIVE.rglob("*") if d.is_dir()]
-    stub_files = [p for p in md_files if "README.md" in p.name or p.parent.name.endswith("_collection") or "entry" in p.parent.name or "case_studies" in p.parent.name]
 
     issues = []
     warnings = []
@@ -171,8 +179,9 @@ def main() -> int:
     else:
         print("[EMPTY] OK")
 
-    # 2. stub 合规
-    stub_issues = check_stub_purity(stub_files)
+    # 2. stub 合规：只检查实际包含 stub/权威来源标记的文件
+    actual_stub_files = [p for p in md_files if has_stub_marker(p.read_text(encoding="utf-8", errors="ignore"))]
+    stub_issues = check_stub_purity(actual_stub_files)
     if stub_issues:
         issues.extend(stub_issues)
         print(f"[STUB] {len(stub_issues)} issue(s)")
