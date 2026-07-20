@@ -13,7 +13,11 @@
 >
 > **⏱️ 预计学习时间**: 75-100 分钟
 > **📚 难度级别**: ⭐⭐⭐⭐⭐ 专家级
-> **权威来源**: [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html), [syn crate](https://docs.rs/syn/), [quote crate](https://docs.rs/quote/), [proc-macro2 crate](https://docs.rs/proc-macro2/), [RFC 1566: Procedural Macros](https://rust-lang.github.io/rfcs/1566-proc-macros.html)
+> **权威来源**:
+> [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html),
+> [syn crate](https://docs.rs/syn/), [quote crate](https://docs.rs/quote/),
+> [proc-macro2 crate](https://docs.rs/proc-macro2/),
+> [RFC 1566: Procedural Macros](https://rust-lang.github.io/rfcs/1566-proc-macros.html)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增过程宏三种类型（Derive/Attribute/Function-like）形式化语义来源标注、syn/quote/proc-macro2 生态工具链来源、跨语言编译期元编程对比（C++ Templates / Template Haskell） [来源: Authority Source Sprint Batch 8]
 >
