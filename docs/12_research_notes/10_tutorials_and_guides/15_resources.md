@@ -357,7 +357,7 @@
 
 | 资源类型 | 形式化文档 | 可验证/支撑的定理 |
 | :--- | :--- | :--- |
-| RustBelt、Stacked Borrows | [ownership_model](../02_formal_methods/09_ownership_model.md)、[borrow_checker_proof](../02_formal_methods/03_borrow_checker_proof.md)、[coq_skeleton](../../../archive/deprecated/coq_skeleton/README.md)（归档只读）、[RUSTBELT_ALIGNMENT](../01_alignment_matrices/36_rustbelt_alignment.md) | OW1、T2/T3、CHAN-T1、MUTEX-T1；Coq T-OW2 骨架 |
+| RustBelt、Stacked Borrows | [ownership_model](../02_formal_methods/09_ownership_model.md)、[borrow_checker_proof](../02_formal_methods/03_borrow_checker_proof.md)、[coq_skeleton](../../../archive/05_formal_methods/04_coq_aeneas_deprecated/coq_skeleton/README.md)（归档只读）、[RUSTBELT_ALIGNMENT](../01_alignment_matrices/36_rustbelt_alignment.md) | OW1、T2/T3、CHAN-T1、MUTEX-T1；Coq T-OW2 骨架 |
 | Rust 类型系统研究 | [type_system_foundations](../05_type_theory/05_type_system_foundations.md)、[trait_system_formalization](../05_type_theory/04_trait_system_formalization.md) | 类型保持、coherence、RPITIT |
 | Prusti、Kani | [formal_methods](../02_formal_methods/README.md) | 所有权（Ownership）、借用（Borrowing）、unsafe 契约 |
 | Criterion、Miri | [experiments/README](../09_experiments/README.md) | EX-T1、EX-T2；内存安全（Memory Safety）验证 |
@@ -403,7 +403,7 @@
 - [国际对标索引](../03_formal_proofs/18_international_formal_verification_index.md) - RustBelt、Aeneas、RustSEM 等
 - [形式化全模型入口](../03_formal_proofs/12_formal_full_model_overview.md) - 统一形式系统
 - [核心定理完整证明](../03_formal_proofs/07_core_theorems_full_proofs.md) - L2 级 ownership T2、borrow T1、type T3
-- [Coq 证明骨架](../../../archive/deprecated/coq_skeleton/README.md)（归档只读） - T-OW2 所有权（Ownership）唯一性
+- [Coq 证明骨架](../../../archive/05_formal_methods/04_coq_aeneas_deprecated/coq_skeleton/README.md)（归档只读） - T-OW2 所有权（Ownership）唯一性
 - L3 实施指南 - Coq/Isabelle 补全路线（已归档）
 
 ---

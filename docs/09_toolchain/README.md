@@ -503,9 +503,9 @@ pub fn function(a: i32, b: i32) -> i32 {
 - [Rust 1.93 vs 1.92 对比分析](03_rust_1_93_vs_1_92_comparison.md) 🆕
 - Rust 1.93 兼容性注意事项 🆕
 - [Rust 1.93 完整变更清单](04_rust_1_93_full_changelog.md) 🆕
-- [Rust 版本演进链 1.89–1.93](../../archive/docs/2026_05_historical_docs/08_rust_version_evolution_1.89_to_1.93.md)（已归档）
+- [Rust 版本演进链 1.89–1.93](../../archive/02_version_alignment/01_rust_version_tracking/2026_05_historical_docs/08_rust_version_evolution_1.89_to_1.93.md)（已归档）
 - [Rust 1.93 兼容性深度解析](05_rust_1_93_compatibility_deep_dive.md) 🆕
-- [Rust 1.89→1.93 累积特性总览](../../archive/docs/2026_05_historical_docs/10_rust_1.89_to_1.93_cumulative_features_overview.md)（已归档）
+- [Rust 1.89→1.93 累积特性总览](../../archive/02_version_alignment/01_rust_version_tracking/2026_05_historical_docs/10_rust_1.89_to_1.93_cumulative_features_overview.md)（已归档）
 - [Rust 1.93 Cargo 与 Rustdoc 变更详解](06_rust_1_93_cargo_rustdoc_changes.md) 🆕
 - [Rust 1.93 语言特性全面分析（92 项设计论证）](../12_research_notes/12_version_research/01_rust_193_language_features_comprehensive_analysis.md) 🆕
 - [Rust 1.94 研究笔记](../12_research_notes/12_version_research/02_rust_194_research_update.md) 🆕

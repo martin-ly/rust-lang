@@ -406,7 +406,7 @@ $$
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [CORE_THEOREMS_FULL_PROOFS](07_core_theorems_full_proofs.md) — 完整证明（L2）
-- [coq_skeleton](../../../archive/deprecated/coq_skeleton/README.md)（归档只读） — Coq 骨架（L3）
+- [coq_skeleton](../../../archive/05_formal_methods/04_coq_aeneas_deprecated/coq_skeleton/README.md)（归档只读） — Coq 骨架（L3）
 - [ownership_model](../02_formal_methods/09_ownership_model.md)、[borrow_checker_proof](../02_formal_methods/03_borrow_checker_proof.md)、[type_system_foundations](../05_type_theory/05_type_system_foundations.md)
 
 ---

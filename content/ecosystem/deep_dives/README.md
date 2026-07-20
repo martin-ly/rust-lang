@@ -21,7 +21,7 @@
 >
 > **[Rust Official Docs](https://doc.rust-lang.org/)**
 
-1. 先掌握 [03_advanced/async/](../../../knowledge/03_advanced/async) 的异步基础
+1. 先掌握 [03_advanced/async/](../../../concept/03_advanced/01_async/01_async.md) 的异步基础
 2. 再深入 Tokio 运行时机制
 3. 最后学习 Axum 的 Web 开发模式
 
@@ -29,8 +29,8 @@
 
 > **[Rust Official Docs](https://doc.rust-lang.org/)**
 
-- [03_advanced/concurrency/](../../../knowledge/03_advanced/concurrency) - 线程与并发
-- [06_ecosystem/databases/](../../../knowledge/06_ecosystem/databases) - 数据库集成
+- [03_advanced/concurrency/](../../../concept/03_advanced/00_concurrency/01_concurrency.md) - 线程与并发
+- [06_ecosystem/databases/](../../../concept/06_ecosystem/06_data_and_distributed/02_database_access.md) - 数据库集成
 
 ---
 

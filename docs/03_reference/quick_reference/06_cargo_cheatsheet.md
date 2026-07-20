@@ -881,7 +881,7 @@ tempfile = "3.0"  # 若仅测试用，不应放这里
 
 - [工具链文档索引](../../09_toolchain/README.md)
 - Cargo 工作空间指南
-- [Cargo 包管理与工作空间索引（已归档）](../../../archive/cargo_package_management_from_c02/00_INDEX.md)
+- [Cargo 包管理与工作空间索引（已归档）](../../../archive/04_crate_reports/11_cargo_package_management/00_INDEX.md)
 
 ## 🧩 相关示例代码 {#相关示例代码}
 >
@@ -890,9 +890,9 @@ tempfile = "3.0"  # 若仅测试用，不应放这里
 这些示例可帮助你把 Cargo 的核心命令串成完整工作流：
 
 - **Cargo 项目模板（文档示例，已归档）**：`archive/cargo_package_management_from_c02/examples/`
-  - [简单 CLI 项目](../../../archive/cargo_package_management_from_c02/examples/01_simple_cli.md)（归档只读）
-  - [带 features 的库](../../../archive/cargo_package_management_from_c02/examples/02_library_with_features.md)（归档只读）
-  - [Workspace 项目](../../../archive/cargo_package_management_from_c02/examples/03_workspace_project.md)（归档只读）
+  - [简单 CLI 项目](../../../archive/04_crate_reports/11_cargo_package_management/examples/01_simple_cli.md)（归档只读）
+  - [带 features 的库](../../../archive/04_crate_reports/11_cargo_package_management/examples/02_library_with_features.md)（归档只读）
+  - [Workspace 项目](../../../archive/04_crate_reports/11_cargo_package_management/examples/03_workspace_project.md)（归档只读）
 - **运行 examples（真实 workspace 例子）**：
   - `cargo run -p c03_control_fn --example control_flow_example`
   - `cargo run -p c05_threads --example message_passing_demo`
@@ -916,7 +916,7 @@ tempfile = "3.0"  # 若仅测试用，不应放这里
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-- [Cargo 包管理完整文档（已归档）](../../../archive/cargo_package_management_from_c02/README.md)
+- [Cargo 包管理完整文档（已归档）](../../../archive/04_crate_reports/11_cargo_package_management/README.md)
 - [工具链文档](../../09_toolchain/README.md)
 - Cargo 工作空间指南
 

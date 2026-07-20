@@ -159,13 +159,13 @@
 | T04 | cargo-script (`cargo +nightly script`) | ✅ | [`crates/c03_control_fn/examples/cargo_script_demo.rs`](../../../crates/c03_control_fn/examples/cargo_script_demo.rs) — 可直接运行的 shebang 脚本示例 |
 | T05 | cargo-semver-checks 集成 | ✅ | [`crates/c10_networks/src/cargo_semver_checks_guide.rs`](../../../crates/c10_networks/src/cargo_semver_checks_guide.rs) — API 兼容性检查指南，覆盖 major/minor/patch 判定规则 |
 | T06 | rust-analyzer 性能与功能完善 | 🟡 | IDE 配置有提及，缺少性能调优指南、Chalk 求解器原理和宏扩展诊断 |
-| T07 | 编译时间持续优化 (parallel frontend) | 🟡 | [`reports/COMPILATION_OPTIMIZATION_REPORT.md`](../../../archive/reports/2026_07/COMPILATION_OPTIMIZATION_REPORT.md) 有数据，但缺少并行前端实际操作指南 |
+| T07 | 编译时间持续优化 (parallel frontend) | 🟡 | [`reports/COMPILATION_OPTIMIZATION_REPORT.md`](../../../archive/08_quality_audits/08_reports_by_time/2026_07/COMPILATION_OPTIMIZATION_REPORT.md) 有数据，但缺少并行前端实际操作指南 |
 | T08 | `rustc_codegen_gcc` 后端进展 | 🔴 | 无覆盖 — GCC 后端对特定架构（如 RISC-V）有独特价值 |
 | T09 | LLVM 版本升级与维护 | 🔴 | 无覆盖 — 属于编译器内部基础设施 |
 | T10 | 错误信息改进 (diagnostics) | 🟡 | 有错误处理专题文档，但缺少 diagnostics 结构解析和多语言错误信息 |
 | T11 | 增量编译健壮性提升 | 🔴 | 无覆盖 — 涉及 `rustc` 查询系统的重构 |
 | T12 | `cargo-fuzz` / 模糊测试集成 | 🟡 | 测试 crate 有提及，缺少从 `arbitrary` trait 到 CI 集成的端到端教程 |
-| T13 | sccache / 分布式构建 | 🟡 | [`reports/sccache-benchmark.md`](../../../archive/reports/2026_07/sccache-benchmark.md) 有基准数据，但缺少多平台部署指南 |
+| T13 | sccache / 分布式构建 | 🟡 | [`reports/sccache-benchmark.md`](../../../archive/08_quality_audits/08_reports_by_time/2026_07/sccache-benchmark.md) 有基准数据，但缺少多平台部署指南 |
 | T14 | 交叉编译体验改善 | 🟡 | 嵌入式目录有部分交叉编译内容，但缺少系统性的目标三元组配置指南 |
 | T15 | 调试信息 (debuginfo) 质量提升 | 🔴 | 无覆盖 — 涉及 split debuginfo、`.dwp` 文件和 GDB/LLDB 集成 |
 | T16 | Profile-Guided Optimization (PGO) 普及 | 🔴 | 无覆盖 — `cargo-pgo` 或 `llvm-profdata` 使用指南待创建 |
@@ -389,10 +389,10 @@
 
 ### 7.2 本项目相关报告 {#72-本项目相关报告}
 
-- [2026-05 对称差分析报告](../../../archive/docs/c_class_audit_2026_06_08/00_meta/analysis/00_rust_global_alignment_symmetric_difference_analysis_2026_05.md)（归档只读）
-- [2026-04 对称差分析报告](../../../archive/docs/c_class_audit_2026_06_08/00_meta/analysis/00_rust_global_alignment_symmetric_difference_analysis_2026.md)（归档只读）
-- [编译优化报告](../../../archive/reports/2026_07/COMPILATION_OPTIMIZATION_REPORT.md)
-- [sccache 基准测试](../../../archive/reports/2026_07/sccache-benchmark.md)
+- [2026-05 对称差分析报告](../../../archive/08_quality_audits/09_c_class_audit_2026_06_08/00_meta/analysis/00_rust_global_alignment_symmetric_difference_analysis_2026_05.md)（归档只读）
+- [2026-04 对称差分析报告](../../../archive/08_quality_audits/09_c_class_audit_2026_06_08/00_meta/analysis/00_rust_global_alignment_symmetric_difference_analysis_2026.md)（归档只读）
+- [编译优化报告](../../../archive/08_quality_audits/08_reports_by_time/2026_07/COMPILATION_OPTIMIZATION_REPORT.md)
+- [sccache 基准测试](../../../archive/08_quality_audits/08_reports_by_time/2026_07/sccache-benchmark.md)
 
 ### 7.3 已覆盖目标的文档索引 {#73-已覆盖目标的文档索引}
 

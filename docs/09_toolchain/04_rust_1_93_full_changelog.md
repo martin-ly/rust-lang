@@ -7,7 +7,7 @@
 > **状态**: 历史内容已迁移，仅作路径保留
 > **归档说明**: 本文档为 Rust 1.93 历史版本材料，已迁移到 `archive/docs/06_toolchain/06_07_rust_1_93_full_changelog.md`。
 > 最新 Rust 版本特性请参阅 [concept/07_future/rust_1_96_stabilized.md](../../concept/07_future/00_version_tracking/rust_1_96_stabilized.md)。
-> 历史版本存档：[archive/docs/06_toolchain/06_07_rust_1_93_full_changelog.md](../../archive/docs/06_toolchain/06_07_rust_1_93_full_changelog.md)
+> 历史版本存档：[archive/docs/06_toolchain/06_07_rust_1_93_full_changelog.md](../../archive/02_version_alignment/01_rust_version_tracking/06_toolchain/06_07_rust_1_93_full_changelog.md)
 
 ---
 

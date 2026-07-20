@@ -408,7 +408,7 @@
 | refines | core::range | 范围/迭代器（Iterator） | `core::range` 模块精化了 Rust 的范围与迭代器抽象 | [../12_version_research/02_rust_194_research_update.md](../12_version_research/02_rust_194_research_update.md) / P0: [Rust 1.96 Release Notes – core::range](https://github.com/rust-lang/rust/releases/tag/1.96.0) |
 | version_introduces | Edition 2024 | tail-expr drop order | 2024 Edition 改变尾部表达式临时值作用域/drop 顺序 | [../12_version_research/02_rust_194_research_update.md](../12_version_research/02_rust_194_research_update.md) / P0: [Edition Guide – Tail expression temporary scope](https://doc.rust-lang.org/edition-guide/rust-2024/temporary-tail-expr-scope.html) |
 | version_introduces | 1.95 | if-let guards | Rust 1.95 稳定化 `if let` guards | [../12_version_research/02_rust_194_research_update.md](../12_version_research/02_rust_194_research_update.md) / P0: [Rust 1.95 Release Notes](https://github.com/rust-lang/rust/releases/tag/1.85.0) |
-| version_introduces | 1.96 | core::range / assert_matches! | Rust 1.96 引入 `core::range` 模块并稳定化 `assert_matches!` | [10_rust_194_195_feature_matrix.md](../../../archive/research_notes_2026_06_25/10_rust_194_195_feature_matrix.md) / P0: [Rust 1.96 Release Notes](https://github.com/rust-lang/rust/releases/tag/1.96.0) |
+| version_introduces | 1.96 | core::range / assert_matches! | Rust 1.96 引入 `core::range` 模块并稳定化 `assert_matches!` | [10_rust_194_195_feature_matrix.md](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_rust_194_195_feature_matrix.md) / P0: [Rust 1.96 Release Notes](https://github.com/rust-lang/rust/releases/tag/1.96.0) |
 | refines | 缓存淘汰策略 | 算法 / 缓存策略 | 缓存淘汰是算法在容量受限场景下的精化模型 | [../10_tutorials_and_guides/04_cache_eviction_policies_guide.md](../10_tutorials_and_guides/04_cache_eviction_policies_guide.md) |
 | implements | CLOCK | 近似 LRU | CLOCK 用引用位近似 LRU 的最近使用顺序 | [../10_tutorials_and_guides/04_cache_eviction_policies_guide.md](../10_tutorials_and_guides/04_cache_eviction_policies_guide.md) |
 | refines | ARC | LRU/LFU | ARC 通过 T1/T2/B1/B2 自平衡适应最近/频繁访问 | [../10_tutorials_and_guides/04_cache_eviction_policies_guide.md](../10_tutorials_and_guides/04_cache_eviction_policies_guide.md) |
@@ -512,7 +512,7 @@
 | 设计模式 | [../08_software_design_theory/01_design_patterns_formal/README.md](../08_software_design_theory/01_design_patterns_formal/README.md) | [../08_software_design_theory/03_master_index.md](../08_software_design_theory/03_master_index.md) | 各模式文件 §反例 |
 | 模块系统 | [../04_formal_module_system/02_module_system_specification.md](../04_formal_module_system/02_module_system_specification.md) | [../04_formal_module_system/README.md](../04_formal_module_system/README.md) | [../04_formal_module_system/07_module_counterexamples.md](../04_formal_module_system/07_module_counterexamples.md) |
 | 实验研究 | [../09_experiments/README.md](../09_experiments/README.md) | [../09_experiments/README.md](../09_experiments/README.md) | [../09_experiments/06_experiments_counterexamples.md](../09_experiments/06_experiments_counterexamples.md) |
-| 版本特性 | [../12_version_research/02_rust_194_research_update.md](../12_version_research/02_rust_194_research_update.md) | [10_rust_194_195_feature_matrix.md](../../../archive/research_notes_2026_06_25/10_rust_194_195_feature_matrix.md) | 待补 |
+| 版本特性 | [../12_version_research/02_rust_194_research_update.md](../12_version_research/02_rust_194_research_update.md) | [10_rust_194_195_feature_matrix.md](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_rust_194_195_feature_matrix.md) | 待补 |
 
 ---
 

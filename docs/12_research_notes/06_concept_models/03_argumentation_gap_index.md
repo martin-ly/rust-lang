@@ -149,7 +149,7 @@
 
 [CORE_THEOREMS_FULL_PROOFS](../03_formal_proofs/07_core_theorems_full_proofs.md) L2 完整证明；
 
-[coq_skeleton](../../../archive/deprecated/coq_skeleton/README.md)（归档只读） T-OW2 Coq 骨架；
+[coq_skeleton](../../../archive/05_formal_methods/04_coq_aeneas_deprecated/coq_skeleton/README.md)（归档只读） T-OW2 Coq 骨架；
 
 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../03_formal_proofs/18_international_formal_verification_index.md) 国际对标；
 
@@ -220,7 +220,7 @@
 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](../03_formal_proofs/28_safe_unsafe_comprehensive_analysis.md) | **安全与非安全全面论证**：边界、契约、UB、安全抽象 |
 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../12_version_research/01_rust_193_language_features_comprehensive_analysis.md) | **Rust 1.93 语言特性全面分析**：92 项特性全覆盖 |
 | [CORE_FEATURES_FULL_CHAIN](../03_formal_proofs/05_core_features_full_chain.md) | **核心特性完整链**：13 项 Def→示例→论证→证明 |
-| [FEATURE_TEMPLATE](../../../archive/research_notes_2026_06_25/10_feature_template.md) | **特性精简模板**：79 项非核心特性 |
+| [FEATURE_TEMPLATE](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_feature_template.md) | **特性精简模板**：79 项非核心特性 |
 | [INCREMENTAL_UPDATE_FLOW](../13_meta_reports/10_incremental_update_flow.md) | **版本增量更新流程**：1.94+ 发布后更新步骤 |
 | [construction_capability](../05_type_theory/02_construction_capability.md) | **类型构造能力**：Def TCON1、矩阵、决策树 |
 | [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../03_formal_proofs/15_formal_proof_critical_analysis_and_plan_2026_02.md) | **批判性分析与推进计划**：国际对标、证明深度、全模型入口、Coq 骨架 |

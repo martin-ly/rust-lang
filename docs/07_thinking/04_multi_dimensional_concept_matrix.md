@@ -13,7 +13,7 @@
 
 | 维度 | 说明 | 对应文档 |
 | :--- | :--- | :--- |
-| **抽象层** | L1 基础 → L7 前沿 | [concept/](../..) · [knowledge/](../../knowledge) |
+| **抽象层** | L1 基础 → L7 前沿 | [concept/](../..) · [knowledge/](../../concept/README.md) |
 | **知识类型** | 定义 / 定理 / 反模式 / 工程实践 | 各概念文件头部标记 |
 | **Bloom 层级** | L1-L6 | 各概念文件头部标记 |
 | **A/S/P 标记** | A (Application) / S (Structure) / P (Procedure) | 各概念文件头部标记 |

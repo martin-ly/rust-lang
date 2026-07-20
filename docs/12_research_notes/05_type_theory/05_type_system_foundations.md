@@ -17,7 +17,7 @@
 >
 > **层次定位**: L4 形式化 / 类型论基础研究
 > **前置依赖**: [concept L4 类型论](../../../concept/04_formal/00_type_theory/01_type_theory.md) · [concept L2 泛型（Generics）](../../../concept/02_intermediate/01_generics/01_generics.md)
-> **后置延伸**: [ROD 形式语义](../../../archive/rust-ownership-decidability/formal-foundations/README.md)（归档只读） · [concept L7 效果系统](../../../concept/07_future/02_preview_features/01_effects_system.md)
+> **后置延伸**: [ROD 形式语义](../../../archive/09_special_collections/rust_ownership_decidability/formal-foundations/README.md)（归档只读） · [concept L7 效果系统](../../../concept/07_future/02_preview_features/01_effects_system.md)
 > **跨层映射**: L4 System F ↔ Rust 泛型（Generics） | 研究笔记扩展
 > **定理链编号**: T-130 类型一致性（Coherence） → T-131 子类型 soundness
 > **创建日期**: 2025-01-27

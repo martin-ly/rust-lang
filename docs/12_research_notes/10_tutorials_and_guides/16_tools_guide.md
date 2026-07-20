@@ -76,7 +76,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**主推路径**：Prusti、Kani（Rust 原生验证，无需学习专业形式化语言）。Coq/Lean 为可选进阶研究，见 [archive/deprecated/](../../../archive/deprecated/README.md)（归档只读）。
+**主推路径**：Prusti、Kani（Rust 原生验证，无需学习专业形式化语言）。Coq/Lean 为可选进阶研究，见 [archive/deprecated/](../../../archive/05_formal_methods/04_coq_aeneas_deprecated/README.md)（归档只读）。
 
 ### Prusti {#prusti}
 
@@ -305,7 +305,7 @@ verus! {
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
 **说明**：Coq、Lean 为专业形式化证明语言，需额外学习成本。
-本项目已归档 Coq 骨架与 Aeneas 对接计划至 [archive/deprecated/](../../../archive/deprecated/README.md)。
+本项目已归档 Coq 骨架与 Aeneas 对接计划至 [archive/deprecated/](../../../archive/05_formal_methods/04_coq_aeneas_deprecated/README.md)。
 主路径聚焦 **数学风格形式化论证 + Rust 示例**（见 [CORE_THEOREMS_FULL_PROOFS](../03_formal_proofs/07_core_theorems_full_proofs.md)）。
 若需机器可检查证明，可参考 Prusti/Kani 或国际对标 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../03_formal_proofs/18_international_formal_verification_index.md)。
 

@@ -47,7 +47,7 @@
 
 本指南对应 `crates/c08_algorithms`，提供 Rust 中各类算法的完整实现，包括排序、搜索、图算法、动态规划、数据结构、机器学习算法以及 LeetCode 分类题解。所有实现支持同步、并行和异步三种执行模式。
 
-**前置知识**: [knowledge/02_intermediate/](../../knowledge/02_intermediate) 集合与迭代器（Iterator）
+**前置知识**: [knowledge/02_intermediate/](../../concept/02_intermediate/README.md) 集合与迭代器（Iterator）
 **速查卡**: [02_algorithms_cheatsheet.md](../03_reference/quick_reference/03_algorithms_cheatsheet.md)
 
 ---

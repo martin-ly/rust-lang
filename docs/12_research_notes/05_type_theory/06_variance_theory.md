@@ -765,7 +765,7 @@ RustBelt 的证明表明：若 `&mut T` 对 `T` 允许协变，则可通过 ghos
 
 - [型变实现](../../../crates/c02_type_system/src/README.md)
 - [型变示例](../../../crates/c02_type_system/examples/README.md)
-- [形式化工程系统 - 型变](../../../archive/docs/c_class_audit_2026_06_08/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/06_variance.md)（归档只读）
+- [形式化工程系统 - 型变](../../../archive/08_quality_audits/09_c_class_audit_2026_06_08/rust-formal-engineering-system/01_theoretical_foundations/01_type_system/06_variance.md)（归档只读）
 
 ### 工具资源 {#工具资源}
 

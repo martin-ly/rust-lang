@@ -129,7 +129,7 @@
 
 - **FORMAT_AND_CONTENT_ALIGNMENT_PLAN**：F1–F4 全部交付；计划状态更新为 ✅ 100% 完成
 - **F1 格式统一**：QUALITY_CHECKLIST 增加 research_notes 元信息统一模板；全库补全「Rust 版本」行（含 23 模式、执行模型、根目录与子目录）；MAINTENANCE_GUIDE 增加格式统一检查清单与季度复核项
-- **F2.4 / F3**：新建 [RUST_193_COUNTEREXAMPLES_INDEX](../../../archive/research_notes/10_rust_193_counterexamples_index.md)（1.93 相关反例集中索引）；RUST_193 § 特性→映射表 明确为 92 项→推荐落点文档；00_ORGANIZATION 新增 § 六 权威来源与版本约定
+- **F2.4 / F3**：新建 [RUST_193_COUNTEREXAMPLES_INDEX](../../../archive/07_research_notes/01_version_research/10_rust_193_counterexamples_index.md)（1.93 相关反例集中索引）；RUST_193 § 特性→映射表 明确为 92 项→推荐落点文档；00_ORGANIZATION 新增 § 六 权威来源与版本约定
 - **F4 持续机制**：CONTRIBUTING 增加格式门禁与元信息检查项；MAINTENANCE_GUIDE 季度维护增加「格式+内容+1.93 对齐」复核
 
 ### 充分完整 完备 100% 收尾（2026-02-14）🆕 {#充分完整-完备-100-收尾2026-02-14}
@@ -216,7 +216,7 @@
 - **Phase 4 组件成熟度**：扩展 [04_compositional_engineering](../08_software_design_theory/05_compositional_engineering/README.md)；Def CE-MAT1（L1–L4 成熟度）、 theorem CE-MAT-T1、构建能力确定性判定树；与 02_workflow、05_boundary_system 衔接
 - **Phase 5 核心特性完整链**：新建 [CORE_FEATURES_FULL_CHAIN](../03_formal_proofs/05_core_features_full_chain.md)；13 项核心特性（所有权（Ownership）、借用（Borrowing）、生命周期（Lifetimes）、Pin、Send/Sync、Future、Trait、泛型（Generics）、match、for、Option/Result、闭包（Closures）、?）统一 Def→示例→论证→证明链
 - **Phase 6 全局索引增强**：UNIFIED_SYSTEMATIC_FRAMEWORK 新增「按特性族/类型族/执行模型子索引」；设计模式表征与组件构建索引
-- **Phase 7 92 特性精简模板**：新建 [FEATURE_TEMPLATE](../../../archive/research_notes_2026_06_25/10_feature_template.md)；概念→形式化引用→反例模板；与 RUST_193 对应
+- **Phase 7 92 特性精简模板**：新建 [FEATURE_TEMPLATE](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_feature_template.md)；概念→形式化引用→反例模板；与 RUST_193 对应
 - **Phase 8 增量流程**：新建 [INCREMENTAL_UPDATE_FLOW](10_incremental_update_flow.md)；1.94+ 发布后更新步骤与检查清单；MAINTENANCE_GUIDE 新增版本增量更新节
 - **INDEX**：新增 CORE_FEATURES_FULL_CHAIN、FEATURE_TEMPLATE、INCREMENTAL_UPDATE_FLOW 条目
 

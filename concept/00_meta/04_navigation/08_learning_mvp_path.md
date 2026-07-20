@@ -300,7 +300,7 @@ cargo test --test l3_ecosystem_alignment
 | [Rust by Example](https://doc.rust-lang.org/rust-by-example/index.html) | 主题式学习 | Day 1-6 阅读材料 | 可作为概念文件的代码示例补充 |
 | [TRPL 3rd Ed](https://doc.rust-lang.org/book/title-page.html) | 官方教程 | 全路径 | Rust 1.97.0+ / Edition 2024 基准；Ch 17 为完整异步编程入门 |
 | [Brown University Interactive Book](https://rust-book.cs.brown.edu/) | 交互式教程 | Day 3-4 / Day 10-11 | Aquascope 所有权可视化 + 嵌入式测验；OOPSLA 2023/2024 研究支撑；本地映射见 [`28_ownership_inventories_brown_book.md`](../../01_foundation/01_ownership_borrow_lifetime/06_ownership_inventories_brown_book.md) |
-| [Google Comprehensive Rust](https://google.github.io/comprehensive-rust/) | 工业级课程 | Week 1 Day 1-6 + 扩展专题 | Google Android 团队维护；4 天基础 + Android/Chromium/Bare Metal/Concurrency/Idiomatic/Unsafe 专题；本地映射见 [`GOOGLE_COMPREHENSIVE_RUST_MAPPING_2026_06_19.md`](../../../archive/reports/2026_07/GOOGLE_COMPREHENSIVE_RUST_MAPPING_2026_06_19.md)（归档只读） |
+| [Google Comprehensive Rust](https://google.github.io/comprehensive-rust/) | 工业级课程 | Week 1 Day 1-6 + 扩展专题 | Google Android 团队维护；4 天基础 + Android/Chromium/Bare Metal/Concurrency/Idiomatic/Unsafe 专题；本地映射见 [`GOOGLE_COMPREHENSIVE_RUST_MAPPING_2026_06_19.md`](../../../archive/08_quality_audits/08_reports_by_time/2026_07/GOOGLE_COMPREHENSIVE_RUST_MAPPING_2026_06_19.md)（归档只读） |
 
 > **差异说明**:
 > Rustify.rs 的三阶段路径（基础→应用→精通）将并发和异步放在"精通"阶段，而本 MVP 路径将其提前到 Week 2，以便在 40 小时内完成一个具备生产价值的 CLI 工具。

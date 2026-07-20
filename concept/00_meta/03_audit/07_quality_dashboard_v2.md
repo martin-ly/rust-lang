@@ -269,7 +269,7 @@ graph LR
 
 ---
 
-> **相关文件**: [导航中心](../04_navigation/09_navigation.md) · [审计清单](03_audit_checklist.md) · [概念索引](../04_navigation/03_concept_index.md) · [质量基线](../../../archive/reports/2026_07/QUALITY_BASELINE_v2_0.md)（归档只读）
+> **相关文件**: [导航中心](../04_navigation/09_navigation.md) · [审计清单](03_audit_checklist.md) · [概念索引](../04_navigation/03_concept_index.md) · [质量基线](../../../archive/08_quality_audits/08_reports_by_time/2026_07/QUALITY_BASELINE_v2_0.md)（归档只读）
 
 ## 认知路径
 

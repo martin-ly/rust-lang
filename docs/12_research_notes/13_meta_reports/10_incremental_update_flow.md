@@ -283,9 +283,9 @@ fn api_stabilization_example() {
 
 | 文档 | 用途 | 链接 |
 | :--- | :--- | :--- |
-| MAINTENANCE_GUIDE | 维护计划、质量检查 | [10_maintenance_guide.md](../../../archive/research_notes_2026_06_25/10_maintenance_guide.md) |
+| MAINTENANCE_GUIDE | 维护计划、质量检查 | [10_maintenance_guide.md](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_maintenance_guide.md) |
 | RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS | 特性分析主文档 | [../12_version_research/01_rust_193_language_features_comprehensive_analysis.md](../12_version_research/01_rust_193_language_features_comprehensive_analysis.md) |
-| FEATURE_TEMPLATE | 新特性精简模板 | [10_feature_template.md](../../../archive/research_notes_2026_06_25/10_feature_template.md) |
+| FEATURE_TEMPLATE | 新特性精简模板 | [10_feature_template.md](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_feature_template.md) |
 
 ### 形式化方法文档 {#形式化方法文档}
 
@@ -304,8 +304,8 @@ fn api_stabilization_example() {
 
 | 文档 | 用途 | 链接 |
 | :--- | :--- | :--- |
-| RUST_191_RESEARCH_UPDATE | 1.91.1 更新记录 | [10_rust_191_research_update_2025_11_15.md](../../../archive/research_notes/10_rust_191_research_update_2025_11_15.md) |
-| RUST_192_RESEARCH_UPDATE | 1.92.0 更新记录 | [10_rust_192_research_update_2025_12_11.md](../../../archive/research_notes/10_rust_192_research_update_2025_12_11.md) |
+| RUST_191_RESEARCH_UPDATE | 1.91.1 更新记录 | [10_rust_191_research_update_2025_11_15.md](../../../archive/07_research_notes/01_version_research/10_rust_191_research_update_2025_11_15.md) |
+| RUST_192_RESEARCH_UPDATE | 1.92.0 更新记录 | [10_rust_192_research_update_2025_12_11.md](../../../archive/07_research_notes/01_version_research/10_rust_192_research_update_2025_12_11.md) |
 | CHANGELOG | 更新日志 | [02_changelog.md](02_changelog.md) |
 
 ### 形式化证明文档 {#形式化证明文档}
@@ -316,7 +316,7 @@ fn api_stabilization_example() {
 | 文档 | 用途 | 链接 |
 | :--- | :--- | :--- |
 | CORE_THEOREMS_FULL_PROOFS | 核心定理完整证明 | [../03_formal_proofs/07_core_theorems_full_proofs.md](../03_formal_proofs/07_core_theorems_full_proofs.md) |
-| COQ_ISABELLE_PROOF_SCAFFOLDING | Coq 证明骨架 | [10_coq_isabelle_proof_scaffolding.md](../../../archive/research_notes_2026_06_25/10_coq_isabelle_proof_scaffolding.md) |
+| COQ_ISABELLE_PROOF_SCAFFOLDING | Coq 证明骨架 | [10_coq_isabelle_proof_scaffolding.md](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_coq_isabelle_proof_scaffolding.md) |
 | PROOF_INDEX | 证明索引 | [../03_formal_proofs/21_proof_index.md](../03_formal_proofs/21_proof_index.md) |
 | SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS | 安全分析 | [../03_formal_proofs/28_safe_unsafe_comprehensive_analysis.md](../03_formal_proofs/28_safe_unsafe_comprehensive_analysis.md) |
 

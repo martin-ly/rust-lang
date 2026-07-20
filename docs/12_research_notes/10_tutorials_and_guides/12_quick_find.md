@@ -313,7 +313,7 @@
 
 - **批判性分析与推进计划** → [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../03_formal_proofs/15_formal_proof_critical_analysis_and_plan_2026_02.md)
 - **核心定理完整证明** → [CORE_THEOREMS_FULL_PROOFS](../03_formal_proofs/07_core_theorems_full_proofs.md)（L2 级 ownership T2、borrow T1、type T3）
-- **Coq 证明骨架** → [archive/deprecated/coq_skeleton](../../../archive/deprecated/coq_skeleton/README.md)（T-OW2）、[COQ_ISABELLE_PROOF_SCAFFOLDING](../../../archive/deprecated/README.md)（已归档）
+- **Coq 证明骨架** → [archive/deprecated/coq_skeleton](../../../archive/05_formal_methods/04_coq_aeneas_deprecated/coq_skeleton/README.md)（T-OW2）、[COQ_ISABELLE_PROOF_SCAFFOLDING](../../../archive/05_formal_methods/04_coq_aeneas_deprecated/README.md)（已归档）
 - **国际对标** → [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../03_formal_proofs/18_international_formal_verification_index.md)、[RUSTBELT_ALIGNMENT](../01_alignment_matrices/36_rustbelt_alignment.md)
 - **权威对齐指南** → [AUTHORITATIVE_ALIGNMENT_GUIDE](../01_alignment_matrices/06_authoritative_alignment_guide.md)（原三大支柱文档已归档至 `../archive/process_reports/2026_02/`）
 - **工具对接** → Aeneas 集成计划、coq-of-rust 集成计划（已归档）
@@ -374,7 +374,7 @@
 - **研究方法** → [研究方法论](14_research_methodology.md)
 - **实际应用** → [实际应用案例研究](11_practical_applications.md)
 - **工具使用** → [研究工具使用指南](16_tools_guide.md)
-- **写作指导** → [研究笔记写作指南](../../../archive/research_notes_2026_06_25/10_writing_guide.md)
+- **写作指导** → [研究笔记写作指南](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_writing_guide.md)
 
 ---
 
@@ -446,9 +446,9 @@
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [研究进展跟踪](../../../archive/research_notes_2026_06_25/10_progress_tracking.md)
-- [研究任务清单](../../../archive/research_notes_2026_06_25/10_task_checklist.md)
-- [系统统计报告](../../../archive/research_notes_2026_06_25/10_statistics.md)
+- [研究进展跟踪](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_progress_tracking.md)
+- [研究任务清单](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_task_checklist.md)
+- [系统统计报告](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_statistics.md)
 
 ### 工具和指南 {#工具和指南}
 
@@ -456,7 +456,7 @@
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [研究工具使用指南](16_tools_guide.md)
-- [研究笔记写作指南](../../../archive/research_notes_2026_06_25/10_writing_guide.md)
+- [研究笔记写作指南](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_writing_guide.md)
 - [研究方法论](14_research_methodology.md)
 
 ---

@@ -11,14 +11,14 @@
 > **双维定位**: C×Eva
 > **前置概念**: [PL Foundations Roadmap](../00_framework/pl_foundations_roadmap.md) · [C/C++ Engineering Roadmap](../00_framework/cpp_rust_engineering_roadmap.md) · [Pattern Semantic Space Index](../00_framework/pattern_semantic_space_index.md)
 > **后置概念**: [Concept Audit Guide](../03_audit/01_concept_audit_guide.md)
-> **主要来源**: [SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md](../../../archive/reports/2026_07/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md)（归档只读） · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RFCs](https://github.com/rust-lang/rfcs)
+> **主要来源**: [SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md](../../../archive/08_quality_audits/08_reports_by_time/2026_07/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md)（归档只读） · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RFCs](https://github.com/rust-lang/rfcs)
 ---
 
 > **Bloom 层级**: L0（导航索引）
 
 ## 一、核心命题
 
-> **审计报告 [SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md](../../../archive/reports/2026_07/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md)（归档只读） 指出项目存在"两头强、中间弱、底层散"的结构性失衡。
+> **审计报告 [SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md](../../../archive/08_quality_audits/08_reports_by_time/2026_07/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md)（归档只读） 指出项目存在"两头强、中间弱、底层散"的结构性失衡。
 > 本索引追踪 Phase A（通用 PL 基座）、Phase B（C/C++ 工程层对比）、Phase C（表征空间坐标系）的补全状态，
 > 列出已完成的文件、仍存在的已知问题，以及下一步建议。**
 

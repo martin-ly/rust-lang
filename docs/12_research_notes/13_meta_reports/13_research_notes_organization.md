@@ -117,8 +117,8 @@ research_notes/                         # 当前活跃目录（2026-06-29 更新
 | :--- | :--- | :--- |
 | ../03_formal_proofs/01_aeneas_integration_plan.md | archive/deprecated/10_aeneas_integration_plan.md | Aeneas 对接计划 |
 | ../03_formal_proofs/04_coq_of_rust_integration_plan.md | archive/deprecated/10_coq_of_rust_integration_plan.md | coq-of-rust 对接计划 |
-| 10_coq_isabelle_proof_scaffolding.md | [archive/deprecated/](../../../archive/docs/deprecated/README.md)（归档只读） | Coq/Isabelle 骨架说明 |
-| coq_skeleton/（.v 等） | [archive/deprecated/coq_skeleton/](../../../archive/docs/deprecated/coq_skeleton/README.md)（归档只读） | Coq 证明骨架；本目录仅保留 [coq_skeleton/README.md](../../../archive/deprecated/coq_skeleton/README.md)（归档只读） 重定向 |
+| 10_coq_isabelle_proof_scaffolding.md | [archive/deprecated/](../../../archive/05_formal_methods/04_coq_aeneas_deprecated/README.md)（归档只读） | Coq/Isabelle 骨架说明 |
+| coq_skeleton/（.v 等） | [archive/deprecated/coq_skeleton/](../../../archive/05_formal_methods/04_coq_aeneas_deprecated/coq_skeleton/README.md)（归档只读） | Coq 证明骨架；本目录仅保留 [coq_skeleton/README.md](../../../archive/05_formal_methods/04_coq_aeneas_deprecated/coq_skeleton/README.md)（归档只读） 重定向 |
 
 **引用（Reference）建议**：新文档中提及 Aeneas、coq-of-rust、Coq 骨架时，链接至上述 `archive/deprecated/` 路径；INDEX/README 中已统一标注「已归档」。
 

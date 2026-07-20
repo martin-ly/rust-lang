@@ -261,8 +261,8 @@
 > **来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)**
 
 - 任务编排与执行计划 - 包含所有可视化内容
-- [任务清单](../../../archive/research_notes_2026_06_25/10_task_checklist.md) - 详细任务列表
-- [进度跟踪](../../../archive/research_notes_2026_06_25/10_progress_tracking.md) - 详细进度跟踪
+- [任务清单](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_task_checklist.md) - 详细任务列表
+- [进度跟踪](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_progress_tracking.md) - 详细进度跟踪
 
 ### 工具资源 {#工具资源}
 
@@ -471,9 +471,9 @@ fn main() {
 
 | 定理 | 可视化表示 | 代码示例位置 |
 | :--- | :--- | :--- |
-| T-OW2 | 所有权状态转换图 | [10_coq_isabelle_proof_scaffolding.md](../../../archive/research_notes_2026_06_25/10_coq_isabelle_proof_scaffolding.md) |
-| T-BR1 | 借用（Borrowing）生命周期（Lifetimes）图 | [10_coq_isabelle_proof_scaffolding.md](../../../archive/research_notes_2026_06_25/10_coq_isabelle_proof_scaffolding.md) |
-| T-TY3 | 类型推导树 | [10_coq_isabelle_proof_scaffolding.md](../../../archive/research_notes_2026_06_25/10_coq_isabelle_proof_scaffolding.md) |
+| T-OW2 | 所有权状态转换图 | [10_coq_isabelle_proof_scaffolding.md](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_coq_isabelle_proof_scaffolding.md) |
+| T-BR1 | 借用（Borrowing）生命周期（Lifetimes）图 | [10_coq_isabelle_proof_scaffolding.md](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_coq_isabelle_proof_scaffolding.md) |
+| T-TY3 | 类型推导树 | [10_coq_isabelle_proof_scaffolding.md](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_coq_isabelle_proof_scaffolding.md) |
 
 ---
 

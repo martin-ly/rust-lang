@@ -299,14 +299,14 @@ A: 建议路径：
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-A: 是的，项目维护团队会跟踪Rust版本更新，确保内容时效性。详见 [10_project_maintenance_guide.md](../../../archive/research_notes_2026_06_25/10_project_maintenance_guide.md)。
+A: 是的，项目维护团队会跟踪Rust版本更新，确保内容时效性。详见 [10_project_maintenance_guide.md](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_project_maintenance_guide.md)。
 
 ### Q: 如何贡献内容？ {#q-如何贡献内容}
 
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-A: 请参考 [10_project_maintenance_guide.md](../../../archive/research_notes_2026_06_25/10_project_maintenance_guide.md) 中的贡献流程。
+A: 请参考 [10_project_maintenance_guide.md](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_project_maintenance_guide.md) 中的贡献流程。
 
 ---
 

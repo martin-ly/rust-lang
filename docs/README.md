@@ -25,7 +25,7 @@
 ## 推荐路径 {#推荐路径}
 
 1. **初学者**: [01_learning/学习路径指南](02_learning/04_learning_path_guide_2025_10_24.md) → [MVP 学习路径](../concept/00_meta/04_navigation/08_learning_mvp_path.md)
-2. **查阅 API**: [02_reference/quick_reference/](../archive/docs/c_class_audit_2026_06_08/02_reference/quick_reference)
+2. **查阅 API**: [02_reference/quick_reference/](../archive/08_quality_audits/09_c_class_audit_2026_06_08/02_reference/quick_reference)
 3. **实践项目**: [03_practice/](05_practice)
 4. **进阶专题**: [03_guides/](04_guides) / [05_guides/](08_usage_guides)
 

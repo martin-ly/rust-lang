@@ -98,7 +98,7 @@
 >
 > **来源: [Rust Official Docs](https://doc.rust-lang.org/)**
 
-**简短回答**: 从 [快速入门指南](../../../archive/research_notes_2026_06_25/10_getting_started.md) 开始。
+**简短回答**: 从 [快速入门指南](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_getting_started.md) 开始。
 
 **详细说明**:
 
@@ -108,7 +108,7 @@
 
 **相关资源**:
 
-- [快速入门指南](../../../archive/research_notes_2026_06_25/10_getting_started.md)
+- [快速入门指南](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_getting_started.md)
 - [主索引](../README.md)
 - [系统总结](../13_meta_reports/16_system_summary.md)
 
@@ -219,7 +219,7 @@
 
 - [工具使用指南](16_tools_guide.md)
 - [形式化方法索引](../02_formal_methods/README.md)
-- [研究笔记模板](../../../archive/research_notes_2026_06_25/10_template.md)
+- [研究笔记模板](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_template.md)
 
 ---
 
@@ -264,8 +264,8 @@
 
 **相关资源**:
 
-- [贡献指南](../../../archive/research_notes_2026_06_25/10_contributing.md)
-- [研究笔记模板](../../../archive/research_notes_2026_06_25/10_template.md)
+- [贡献指南](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_contributing.md)
+- [研究笔记模板](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_template.md)
 
 ---
 
@@ -277,7 +277,7 @@
 
 **详细说明**:
 
-1. 使用 [研究笔记模板](../../../archive/research_notes_2026_06_25/10_template.md) 创建文件
+1. 使用 [研究笔记模板](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_template.md) 创建文件
 2. 遵循 [研究笔记规范](../README.md#研究笔记规范)
 3. 使用 [质量检查清单](../13_meta_reports/11_quality_checklist.md) 检查质量
 4. 请他人审查
@@ -285,7 +285,7 @@
 **相关资源**:
 
 - [质量检查清单](../13_meta_reports/11_quality_checklist.md)
-- [贡献指南](../../../archive/research_notes_2026_06_25/10_contributing.md)
+- [贡献指南](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_contributing.md)
 
 ---
 
@@ -304,7 +304,7 @@
 
 **相关资源**:
 
-- [贡献指南](../../../archive/research_notes_2026_06_25/10_contributing.md)
+- [贡献指南](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_contributing.md)
 - [主索引](../README.md)
 
 ---
@@ -399,7 +399,7 @@
 **相关资源**:
 
 - [研究笔记规范](../README.md#研究笔记规范)
-- [研究笔记模板](../../../archive/research_notes_2026_06_25/10_template.md)
+- [研究笔记模板](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_template.md)
 
 ---
 
@@ -438,7 +438,7 @@
 **相关资源**:
 
 - [质量检查清单](../13_meta_reports/11_quality_checklist.md)
-- [贡献指南](../../../archive/research_notes_2026_06_25/10_contributing.md)
+- [贡献指南](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_contributing.md)
 
 ---
 
@@ -451,10 +451,10 @@
 
 > **来源: [IEEE](https://standards.ieee.org/)**
 
-- [快速入门指南](../../../archive/research_notes_2026_06_25/10_getting_started.md) - 新用户入门指南
+- [快速入门指南](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_getting_started.md) - 新用户入门指南
 - [主索引](../README.md) - 完整的研究笔记索引
 - [快速参考](13_quick_reference.md) - 快速查找指南
-- [贡献指南](../../../archive/research_notes_2026_06_25/10_contributing.md) - 贡献流程和规范
+- [贡献指南](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_contributing.md) - 贡献流程和规范
 
 ### 获取帮助 {#获取帮助}
 

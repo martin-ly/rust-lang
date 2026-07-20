@@ -313,7 +313,7 @@ research_notes/
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-1. 使用 [研究笔记模板](../../../archive/research_notes_2026_06_25/10_template.md) 创建新笔记
+1. 使用 [研究笔记模板](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_template.md) 创建新笔记
 2. 遵循 [研究笔记规范](../README.md#研究笔记规范)
 3. 使用 [质量检查清单](11_quality_checklist.md) 确保质量
 
@@ -321,7 +321,7 @@ research_notes/
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-1. 阅读 [贡献指南](../../../archive/research_notes_2026_06_25/10_contributing.md) 了解贡献流程
+1. 阅读 [贡献指南](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_contributing.md) 了解贡献流程
 2. 选择合适的贡献类型
 3. 遵循质量标准和检查清单
 
@@ -378,7 +378,7 @@ research_notes/
 | 研究路线图 | [15_research_roadmap.md](15_research_roadmap.md) | 研究计划 |
 | 工具使用指南 | [../10_tutorials_and_guides/16_tools_guide.md](../10_tutorials_and_guides/16_tools_guide.md) | 工具指南 |
 | 更新日志 | [02_changelog.md](02_changelog.md) | 版本历史 |
-| 快速入门指南 | [10_getting_started.md](../../../archive/research_notes_2026_06_25/10_getting_started.md) | 入门指南 |
+| 快速入门指南 | [10_getting_started.md](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_getting_started.md) | 入门指南 |
 | 常见问题解答 | [../10_tutorials_and_guides/05_faq.md](../10_tutorials_and_guides/05_faq.md) | FAQ |
 
 ### 贡献和质量 {#贡献和质量}
@@ -387,9 +387,9 @@ research_notes/
 
 | 文档 | 链接 | 用途 |
 | :--- | :--- | :--- |
-| 贡献指南 | [10_contributing.md](../../../archive/research_notes_2026_06_25/10_contributing.md) | 贡献流程 |
+| 贡献指南 | [10_contributing.md](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_contributing.md) | 贡献流程 |
 | 质量检查清单 | [11_quality_checklist.md](11_quality_checklist.md) | 质量标准 |
-| 研究笔记模板 | [10_template.md](../../../archive/research_notes_2026_06_25/10_template.md) | 创建模板 |
+| 研究笔记模板 | [10_template.md](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_template.md) | 创建模板 |
 
 ### 外部资源 {#外部资源}
 >
@@ -535,9 +535,9 @@ fn main() {
 
 | 定理 | Coq 文件 | 状态 |
 | :--- | :--- | :--- |
-| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../../../archive/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v)（归档只读） | 骨架已创建 |
-| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../../../archive/deprecated/coq_skeleton/BORROW_DATARACE_FREE.v)（归档只读） | 骨架已创建 |
-| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../../../archive/deprecated/coq_skeleton/TYPE_SAFETY.v)（归档只读） | 骨架已创建 |
+| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../../../archive/05_formal_methods/04_coq_aeneas_deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v)（归档只读） | 骨架已创建 |
+| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../../../archive/05_formal_methods/04_coq_aeneas_deprecated/coq_skeleton/BORROW_DATARACE_FREE.v)（归档只读） | 骨架已创建 |
+| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../../../archive/05_formal_methods/04_coq_aeneas_deprecated/coq_skeleton/TYPE_SAFETY.v)（归档只读） | 骨架已创建 |
 
 ### 系统集成文档 {#系统集成文档}
 >

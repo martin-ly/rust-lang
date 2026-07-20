@@ -14,7 +14,7 @@
 |:---|:---|:---|
 | **初学者起步** | [LEARNING_MVP_PATH.md](../../concept/00_meta/04_navigation/08_learning_mvp_path.md) | 35-45 小时最小可行学习路径 |
 | **概念文件** | [concept/](..) | L1-L7 分层概念文档 |
-| **知识索引** | [knowledge/](../../knowledge) | 系统化知识卡片 |
+| **知识索引** | [knowledge/](../../concept/README.md) | 系统化知识卡片 |
 | **速查表** | [docs/02_reference/quick_reference/](../03_reference/quick_reference/README.md) | API 速查与参考 |
 | **练习** | [exercises/](../../exercises) | 编程练习与测试 |
 | **Crate 示例** | [crates/](../../crates) | 可编译代码示例 |

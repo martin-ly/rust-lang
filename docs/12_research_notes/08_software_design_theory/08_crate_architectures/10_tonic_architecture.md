@@ -2,7 +2,7 @@
 >
 > 若只需要使用指南与生态定位，请优先参考：
 >
-> - [gRPC 微服务指南](../../../../archive/content/ecosystem/web_frameworks/grpc_microservices_guide.md)
+> - [gRPC 微服务指南](../../../../archive/06_ecosystem/10_web_frameworks/grpc_microservices_guide.md)
 > - [网络编程](../../../../concept/03_advanced/06_low_level_patterns/04_network_programming.md)
 > - [网络协议](../../../../concept/06_ecosystem/04_web_and_networking/07_network_protocols.md)
 >

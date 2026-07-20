@@ -584,7 +584,7 @@ struct EditorState { text: String } // 缺少 cursor
 | 1.93 特性 | 与本模式 | 说明 |
 | :--- | :--- | :--- |
 | 无新增影响 | — | 1.93 无影响 Memento 语义的变更 |
-| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../../../archive/research_notes/10_rust_193_counterexamples_index.md) 特定项 |
+| 92 项落点 | 无 | 本模式未涉及 [RUST_193_COUNTEREXAMPLES_INDEX](../../../../../archive/07_research_notes/01_version_research/10_rust_193_counterexamples_index.md) 特定项 |
 
 ---
 

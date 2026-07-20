@@ -54,7 +54,7 @@
 |------|----------|----------|------|
 | Cargo.toml 配置 | [Cargo Book](https://doc.rust-lang.org/cargo/reference/manifest.html) | [15_cargo_book_alignment.md](15_cargo_book_alignment.md) | package、dependencies、profile |
 | Workspace | [Cargo Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) | [crates/common/README.md](../../../crates/common/README.md) | 多 crate 管理 |
-| Features | [Cargo Features](https://doc.rust-lang.org/cargo/reference/features.html) | [10_cargo_194_features.md](../../../archive/research_notes/10_cargo_194_features.md) | 条件编译、依赖组合 |
+| Features | [Cargo Features](https://doc.rust-lang.org/cargo/reference/features.html) | [10_cargo_194_features.md](../../../archive/07_research_notes/01_version_research/10_cargo_194_features.md) | 条件编译、依赖组合 |
 | Resolver v3 | [Resolver](https://doc.rust-lang.org/cargo/reference/resolver.html) | [examples/resolver_v3_practice/](../../../examples/resolver_v3_practice/README.md) | 依赖解析 |
 | Cargo script | [Cargo Scripts](https://doc.rust-lang.org/cargo/reference/unstable.html#script) | [examples/cargo_script_demo.rs](../../../examples/cargo_script_demo.rs) | 单文件脚本 |
 

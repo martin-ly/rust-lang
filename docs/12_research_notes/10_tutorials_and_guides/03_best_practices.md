@@ -109,7 +109,7 @@
 - ✅ 边界条件：重要断言补充反例
 - ✅ 交叉引用：与 [PROOF_INDEX](../03_formal_proofs/21_proof_index.md)、[FORMAL_PROOF_SYSTEM_GUIDE](../03_formal_proofs/16_formal_proof_system_guide.md) 衔接
 
-**证明深度**：L1 证明思路 / L2 完整证明 / L3 机器可检查；见 [PROOF_INDEX](../03_formal_proofs/21_proof_index.md) § 证明深度层次、[CORE_THEOREMS_FULL_PROOFS](../03_formal_proofs/07_core_theorems_full_proofs.md) L2 示例、[coq_skeleton](../../../archive/deprecated/coq_skeleton/README.md)（归档只读） L3 骨架。
+**证明深度**：L1 证明思路 / L2 完整证明 / L3 机器可检查；见 [PROOF_INDEX](../03_formal_proofs/21_proof_index.md) § 证明深度层次、[CORE_THEOREMS_FULL_PROOFS](../03_formal_proofs/07_core_theorems_full_proofs.md) L2 示例、[coq_skeleton](../../../archive/05_formal_methods/04_coq_aeneas_deprecated/coq_skeleton/README.md)（归档只读） L3 骨架。
 
 **引用**：[FORMAL_PROOF_SYSTEM_GUIDE](../03_formal_proofs/16_formal_proof_system_guide.md) 论证要素规范、
 [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../06_concept_models/16_theoretical_and_argumentation_system_architecture.md) 论证体系五层、
@@ -259,7 +259,7 @@ fn example_anti_pattern() {
 
 **最佳实践**:
 
-- ✅ 遵循 [研究笔记模板](../../../archive/research_notes_2026_06_25/10_template.md)
+- ✅ 遵循 [研究笔记模板](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_template.md)
 - ✅ 使用清晰的标题层次
 - ✅ 保持逻辑流程连贯
 
@@ -677,7 +677,7 @@ fn main() {
 
 **最佳实践**:
 
-- ✅ 阅读 [贡献指南](../../../archive/research_notes_2026_06_25/10_contributing.md)
+- ✅ 阅读 [贡献指南](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_contributing.md)
 - ✅ 遵循贡献流程
 - ✅ 使用质量检查清单
 
@@ -816,10 +816,10 @@ git commit -m "添加所有权模型形式化研究笔记
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-- [研究笔记模板](../../../archive/research_notes_2026_06_25/10_template.md) - 研究笔记模板
-- [贡献指南](../../../archive/research_notes_2026_06_25/10_contributing.md) - 贡献流程和规范
+- [研究笔记模板](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_template.md) - 研究笔记模板
+- [贡献指南](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_contributing.md) - 贡献流程和规范
 - [质量检查清单](../13_meta_reports/11_quality_checklist.md) - 质量检查标准
-- [维护指南](../../../archive/research_notes_2026_06_25/10_maintenance_guide.md) - 系统维护指南
+- [维护指南](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_maintenance_guide.md) - 系统维护指南
 
 ### 工具和资源 {#工具和资源}
 >

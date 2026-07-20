@@ -472,7 +472,7 @@
 
 - [VERIFICATION_TOOLS_MATRIX](32_verification_tools_matrix.md) — 工具详细对比
 - [AENEAS_INTEGRATION_PLAN](01_aeneas_integration_plan.md) — Aeneas集成指南
-- [COQ_ISABELLE_PROOF_SCAFFOLDING](../../../archive/research_notes_2026_06_25/10_coq_isabelle_proof_scaffolding.md) — 证明脚手架
+- [COQ_ISABELLE_PROOF_SCAFFOLDING](../../../archive/07_research_notes/02_snapshot_2026_06_25/10_coq_isabelle_proof_scaffolding.md) — 证明脚手架
 
 ### 6.2 快速参考卡 {#62-快速参考卡}
 

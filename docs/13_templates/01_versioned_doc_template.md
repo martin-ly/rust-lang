@@ -17,7 +17,7 @@
 > **Edition**: {{ edition }}
 > **最后验证**: {{ validation_date }}
 > **状态**: {{ status }}
-> **历史版本**: [归档列表](../../archive/docs/2026_03_reorganization/VERSION_INDEX.md)
+> **历史版本**: [归档列表](../../archive/01_governance/02_project_plans/2026_03_reorganization/VERSION_INDEX.md)
 
 ---
 
@@ -217,7 +217,7 @@ default = []
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-- [版本化索引](../../archive/docs/2026_03_reorganization/VERSION_INDEX.md)（归档只读）
+- [版本化索引](../../archive/01_governance/02_project_plans/2026_03_reorganization/VERSION_INDEX.md)（归档只读）
 - 历史版本归档: `../../crates/{{ crate }}/src/archive/`
 - 相关 crate: `crates/{{ related_crate }}/`
 
@@ -323,7 +323,7 @@ mod tests {
 
 ---
 
-*本文档遵循 [Rust 学习项目版本化规范](../../archive/docs/2026_03_reorganization/VERSION_INDEX.md)（归档只读）*
+*本文档遵循 [Rust 学习项目版本化规范](../../archive/01_governance/02_project_plans/2026_03_reorganization/VERSION_INDEX.md)（归档只读）*
 
 ---
 
