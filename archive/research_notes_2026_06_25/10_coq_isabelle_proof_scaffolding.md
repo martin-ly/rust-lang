@@ -189,7 +189,7 @@ Ltac check_borrow :=
 
 - [形式化方法概述](formal_methods/README.md)
 - [证明索引](10_proof_index.md)
-- [Coq 骨架](../deprecated/coq_skeleton/README.md)
+- [Coq 骨架](../08_quality_audits/deprecated/coq_skeleton/README.md)
 
 ---
 

@@ -696,7 +696,7 @@ mod tests {
 
 - [高级实践工作坊](exercises/ADVANCED_OWNERSHIP_WORKSHOP.md) - 深入复杂场景
 - [案例分析](case-studies/README.md) - 学习生产代码
-- [Coq形式化](../deprecated/coq_skeleton/README.md) - 理解严格证明
+- [Coq形式化](../08_quality_audits/deprecated/coq_skeleton/README.md) - 理解严格证明
 
 ---
 

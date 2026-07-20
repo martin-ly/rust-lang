@@ -69,7 +69,7 @@
 
 **文档状态**：本指南结构与全部六类验证的 Coq/Isabelle 框架、任务清单已完整；验证任务清单中的方框供实施时勾选。
 
-**Coq 证明骨架**：所有权唯一性（T-OW2）的 Coq 定理骨架已创建，见 [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v)、[COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md)。
+**Coq 证明骨架**：所有权唯一性（T-OW2）的 Coq 定理骨架已创建，见 [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../08_quality_audits/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v)、[COQ_ISABELLE_PROOF_SCAFFOLDING](10_coq_isabelle_proof_scaffolding.md)。
 
 ### 验证目标 {#验证目标}
 

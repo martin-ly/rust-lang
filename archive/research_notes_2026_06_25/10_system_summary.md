@@ -531,9 +531,9 @@ fn main() {
 
 | 定理 | Coq 文件 | 状态 |
 | :--- | :--- | :--- |
-| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
-| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
-| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../deprecated/coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
+| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../08_quality_audits/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
+| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../08_quality_audits/deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
+| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../08_quality_audits/deprecated/coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
 
 ### 系统集成文档
 >

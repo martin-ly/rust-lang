@@ -23,10 +23,10 @@
 
 | 文件 | 说明 |
 |------|------|
-| `RUST_196_FEATURE_ALIGNMENT_AUDIT.md` | 1.96 特性对齐审计 |
-| `RUST_REFERENCE_GAP_ANALYSIS_REPORT.md` | Rust Reference 缺口分析 |
-| `RUST_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05_01.md` | 国际权威来源对称差分析 |
-| `verification_reports/RUST_194_VERIFICATION_REPORT.md` | 1.94 编译器验证报告 |
+| `02_version_alignment/RUST_196_FEATURE_ALIGNMENT_AUDIT.md` | 1.96 特性对齐审计 |
+| `02_version_alignment/RUST_REFERENCE_GAP_ANALYSIS_REPORT.md` | Rust Reference 缺口分析 |
+| `02_version_alignment/RUST_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05_01.md` | 国际权威来源对称差分析 |
+| `02_version_alignment/verification_reports/RUST_194_VERIFICATION_REPORT.md` | 1.94 编译器验证报告 |
 | `research_notes/10_rust_194_core_notes_index.md` | 1.94 研究笔记索引 |
 | `2026/concept_archive/` 中各版本对应旧版概念页 | 旧版概念页按版本归档 |
 
@@ -127,12 +127,12 @@
 
 | 文件/目录 | 说明 |
 |-----------|------|
-| `LINK_CHECK_REPORT_FULL.md` | 全库链路健康报告（906 KB） |
+| `08_quality_audits/LINK_CHECK_REPORT_FULL.md` | 全库链路健康报告（906 KB） |
 | `reports/2026_07/CONTENT_OVERLAP_DETECTION_*.md` | 逐日重叠检测报告 |
 | `reports/2026_07/LINK_CHECK_*.md` | 逐日链路检测报告 |
 | `reports/2026_07/CONTENT_COMPLETENESS_*.md` | 内容完整性审计 |
 | `reports/2026_07/I18N_*.md` | 国际化审计 |
-| `CRITICAL_AUDIT_REPORT_2026.md` | 批判性审计 |
+| `01_governance/CRITICAL_AUDIT_REPORT_2026.md` | 批判性审计 |
 
 **相关度**: 高（同一主题：质量门历史报告）
 **建议动作**: 按时间序列保留；在 `THEMATIC_INDEX.md` 中提供快速入口。如空间有限，可仅保留最新版本与关键版本，其余压缩或 stub 化。
@@ -148,13 +148,13 @@
 | `backup_from_docs/` | 2025 年 `docs/` 大重组完整备份 |
 | `docs/2026_03_reorganization/` | 2026 年 3 月重组记录 |
 | `docs/rust-ownership-chinese/` | 中文所有权教程旧版（含 Rust 项目） |
-| `temp/` | 历史临时文件 |
+| `08_quality_audits/temp/` | 历史临时文件 |
 
 **相关度**: 中（均为迁移/备份历史，但来源不同）
 **建议动作**:
 
 1. `backup_from_docs/` 作为整体历史备份，建议保留，不单独处理。
-2. 对 `temp/` 中明显无价值的临时文件（如空文件、缓存）可清理，需用户确认。
+2. 对 `08_quality_audits/temp/` 中明显无价值的临时文件（如空文件、缓存）可清理，需用户确认。
 3. 在 `THEMATIC_INDEX.md` 中标注“备份来源”与“活跃对应页”。
 
 ---
@@ -165,14 +165,14 @@
 
 | 文件 | 说明 |
 |------|------|
-| `PHASE1_COMPLETION_REPORT.md` | 阶段 1 完成报告 |
-| `PROJECT_FOLLOW_UP_PLAN.md` | 项目后续计划 |
-| `PROJECT_NEXT_PHASE_PLAN.md` | 下阶段计划 |
-| `CRITICAL_AUDIT_REPORT_2026.md` | 批判性审计 |
-| `RUST_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05_01.md` | 对称差分析 |
-| `RUST_196_FEATURE_ALIGNMENT_AUDIT.md` | 1.96 对齐审计 |
-| `RUST_REFERENCE_GAP_ANALYSIS_REPORT.md` | Reference 缺口 |
-| `LINK_CHECK_REPORT_FULL.md` | 全库链路报告 |
+| `01_governance/PHASE1_COMPLETION_REPORT.md` | 阶段 1 完成报告 |
+| `01_governance/PROJECT_FOLLOW_UP_PLAN.md` | 项目后续计划 |
+| `01_governance/PROJECT_NEXT_PHASE_PLAN.md` | 下阶段计划 |
+| `01_governance/CRITICAL_AUDIT_REPORT_2026.md` | 批判性审计 |
+| `02_version_alignment/RUST_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05_01.md` | 对称差分析 |
+| `02_version_alignment/RUST_196_FEATURE_ALIGNMENT_AUDIT.md` | 1.96 对齐审计 |
+| `02_version_alignment/RUST_REFERENCE_GAP_ANALYSIS_REPORT.md` | Reference 缺口 |
+| `08_quality_audits/LINK_CHECK_REPORT_FULL.md` | 全库链路报告 |
 
 **相关度**: 中（均为项目级文件，但主题不同）
 **建议动作**: 保留在根目录；在 `THEMATIC_INDEX.md` 中按主题分类引用即可。
@@ -187,7 +187,7 @@
 | P1 | 组 D | 建立形式化/所有权资料版本映射 | 理清 450+ 文件关系 |
 | P2 | 组 A | 统一版本对齐报告引用 | 避免权威来源引用混乱 |
 | P3 | 组 F | 按时间序列归档审计报告 | 减少重复审计报告堆积 |
-| P4 | 组 G | 清理 `temp/` 与 `backup_from_docs/` 中无效文件 | 释放空间 |
+| P4 | 组 G | 清理 `08_quality_audits/temp/` 与 `backup_from_docs/` 中无效文件 | 释放空间 |
 | P5 | 组 E、H | 保持索引化，按需处理 | 维持现状 |
 
 ---

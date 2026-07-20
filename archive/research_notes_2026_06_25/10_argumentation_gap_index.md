@@ -141,7 +141,7 @@
 - **CONTENT_ENHANCEMENT**：✅ Def CE1、Axiom CE1、定理 CE-T1
 - **形式化证明批判性分析与推进计划（2026-02-14）**：✅ [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](10_formal_proof_critical_analysis_and_plan_2026_02.md) 阶段 1–3 100%；
 [CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) L2 完整证明；
-[coq_skeleton](../deprecated/coq_skeleton/README.md) T-OW2 Coq 骨架；
+[coq_skeleton](../08_quality_audits/deprecated/coq_skeleton/README.md) T-OW2 Coq 骨架；
 [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](10_international_formal_verification_index.md) 国际对标；
 证明深度 L1/L2/L3 标注
 

@@ -8,7 +8,7 @@
 |------|------|------|
 | `archive/docs/` | 历史文档、审计、检查清单、重组记录 | `docs/archive/` |
 | `archive/rust-ownership-decidability/` | Rust 所有权可判定性研究历史资料 | `docs/rust-ownership-decidability/` |
-| `archive/deprecated/` | 已废弃或替代的旧方案 | 历史归档 |
+| `archive/08_quality_audits/deprecated/` | 已废弃或替代的旧方案 | 历史归档 |
 | `archive/research_notes_2026_06_25/` | 2026-06-25 研究笔记快照 | 历史归档 |
 
 ## 主题索引与关联映射

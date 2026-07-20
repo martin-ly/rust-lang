@@ -601,11 +601,11 @@ fn api_stabilization_examples() {
 
 | :--- | :--- | :--- |
 
-| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
+| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../08_quality_audits/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 骨架已创建 |
 
-| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
+| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../08_quality_audits/deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 骨架已创建 |
 
-| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../deprecated/coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
+| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../08_quality_audits/deprecated/coq_skeleton/TYPE_SAFETY.v) | 骨架已创建 |
 
 ### 相关研究笔记 {#相关研究笔记}
 

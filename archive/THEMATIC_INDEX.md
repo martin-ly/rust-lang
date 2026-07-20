@@ -40,17 +40,17 @@
 
 ### 1.2 项目级计划与跟进报告
 
-- [`CRITICAL_AUDIT_REPORT_2026.md`](CRITICAL_AUDIT_REPORT_2026.md) — 2026 年批判性审计
-- [`RUST_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05_01.md`](RUST_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05_01.md) — 国际权威来源对称差分析
-- [`RUST_196_FEATURE_ALIGNMENT_AUDIT.md`](RUST_196_FEATURE_ALIGNMENT_AUDIT.md) — 1.96 特性对齐审计
-- [`RUST_REFERENCE_GAP_ANALYSIS_REPORT.md`](RUST_REFERENCE_GAP_ANALYSIS_REPORT.md) — Rust Reference 缺口分析
-- [`PROJECT_FOLLOW_UP_PLAN.md`](PROJECT_FOLLOW_UP_PLAN.md)、[`PROJECT_NEXT_PHASE_PLAN.md`](PROJECT_NEXT_PHASE_PLAN.md)、[`PHASE1_COMPLETION_REPORT.md`](PHASE1_COMPLETION_REPORT.md) 等
+- [`01_governance/CRITICAL_AUDIT_REPORT_2026.md`](01_governance/CRITICAL_AUDIT_REPORT_2026.md) — 2026 年批判性审计
+- [`02_version_alignment/RUST_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05_01.md`](02_version_alignment/RUST_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05_01.md) — 国际权威来源对称差分析
+- [`02_version_alignment/RUST_196_FEATURE_ALIGNMENT_AUDIT.md`](02_version_alignment/RUST_196_FEATURE_ALIGNMENT_AUDIT.md) — 1.96 特性对齐审计
+- [`02_version_alignment/RUST_REFERENCE_GAP_ANALYSIS_REPORT.md`](02_version_alignment/RUST_REFERENCE_GAP_ANALYSIS_REPORT.md) — Rust Reference 缺口分析
+- [`01_governance/PROJECT_FOLLOW_UP_PLAN.md`](01_governance/PROJECT_FOLLOW_UP_PLAN.md)、[`01_governance/PROJECT_NEXT_PHASE_PLAN.md`](01_governance/PROJECT_NEXT_PHASE_PLAN.md)、[`01_governance/PHASE1_COMPLETION_REPORT.md`](01_governance/PHASE1_COMPLETION_REPORT.md) 等
 - 活跃对应页：[`concept/07_future/00_version_tracking/`](../concept/07_future/00_version_tracking/)
 
 ### 1.3 根级元数据与脚本
 
-- [`root_meta/concept_kb.json`](root_meta/concept_kb.json) — 元知识库索引（48k+ 行）
-- [`root_meta/`](root_meta/) 内缓存、Docker Compose、Python 脚本
+- [`01_governance/root_meta/concept_kb.json`](01_governance/root_meta/concept_kb.json) — 元知识库索引（48k+ 行）
+- [`01_governance/root_meta/`](01_governance/root_meta/) 内缓存、Docker Compose、Python 脚本
 - 活跃对应页：[`concept/`](../concept/)、[`tools/`](../tools/)
 
 ---
@@ -65,12 +65,12 @@
 
 ### 2.2 验证报告
 
-- [`verification_reports/`](verification_reports/) — Rust 1.94 等版本验证报告
+- [`02_version_alignment/verification_reports/`](02_version_alignment/verification_reports/) — Rust 1.94 等版本验证报告
 - 活跃对应页：[`concept/07_future/00_version_tracking/`](../concept/07_future/00_version_tracking/)
 
 ### 2.3 对称差分析与国际权威对比
 
-- [`RUST_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05_01.md`](RUST_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05_01.md)
+- [`02_version_alignment/RUST_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05_01.md`](02_version_alignment/RUST_SYMMETRIC_DIFFERENCE_ANALYSIS_2026_05_01.md)
 - 活跃对应页：[`concept/07_future/`](../concept/07_future/)
 
 ---
@@ -84,16 +84,16 @@
 
 ### 3.2 知识卡片旧版
 
-- [`knowledge/01_fundamentals/01_borrowing.md`](knowledge/01_fundamentals/01_borrowing.md)
-- [`knowledge/01_fundamentals/03_lifetimes.md`](knowledge/01_fundamentals/03_lifetimes.md)
-- [`knowledge/01_fundamentals/04_ownership.md`](knowledge/01_fundamentals/04_ownership.md)
-- [`knowledge/02_intermediate/`](knowledge/02_intermediate/)、[`knowledge/03_advanced/`](knowledge/03_advanced/)
+- [`03_concept_history/knowledge/01_fundamentals/01_borrowing.md`](03_concept_history/knowledge/01_fundamentals/01_borrowing.md)
+- [`03_concept_history/knowledge/01_fundamentals/03_lifetimes.md`](03_concept_history/knowledge/01_fundamentals/03_lifetimes.md)
+- [`03_concept_history/knowledge/01_fundamentals/04_ownership.md`](03_concept_history/knowledge/01_fundamentals/04_ownership.md)
+- [`03_concept_history/knowledge/02_intermediate/`](03_concept_history/knowledge/02_intermediate/)、[`03_concept_history/knowledge/03_advanced/`](03_concept_history/knowledge/03_advanced/)
 - 活跃对应页：[`concept/`](../concept/)
 
 ### 3.3 指南旧版
 
-- [`guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md`](guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md)
-- [`guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md`](guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md)
+- [`03_concept_history/guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md`](03_concept_history/guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2026.md)
+- [`03_concept_history/guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md`](03_concept_history/guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md)
 - 活跃对应页：[`docs/04_guides/`](../docs/04_guides/)
 
 ---
@@ -224,7 +224,7 @@
 
 ### 8.1 链路健康与死链报告
 
-- [`LINK_CHECK_REPORT_FULL.md`](LINK_CHECK_REPORT_FULL.md)
+- [`08_quality_audits/LINK_CHECK_REPORT_FULL.md`](08_quality_audits/LINK_CHECK_REPORT_FULL.md)
 - [`reports/2026_07/`](reports/2026_07/) 中 `LINK_CHECK_*.md` 系列
 - 活跃对应页：无（审计产物）
 
@@ -246,7 +246,7 @@
 
 ### 8.5 临时文件与快速参考
 
-- [`temp/`](temp/)
+- [`08_quality_audits/temp/`](08_quality_audits/temp/)
 - [`docs/temp/`](docs/temp/)
 - [`docs/version_reports/`](docs/version_reports/)
 - 活跃对应页：[`docs/03_reference/quick_reference/`](../docs/03_reference/quick_reference/)
@@ -259,8 +259,8 @@
 
 ### 8.7 已废弃方案
 
-- [`deprecated/RUST_SAFETY_CRITICAL_ECOSYSTEM/`](deprecated/RUST_SAFETY_CRITICAL_ECOSYSTEM/)
-- [`deprecated/coq_skeleton/`](deprecated/coq_skeleton/)
+- [`08_quality_audits/deprecated/RUST_SAFETY_CRITICAL_ECOSYSTEM/`](08_quality_audits/deprecated/RUST_SAFETY_CRITICAL_ECOSYSTEM/)
+- [`08_quality_audits/deprecated/coq_skeleton/`](08_quality_audits/deprecated/coq_skeleton/)
 - 活跃对应页：[`content/safety_critical/`](../content/safety_critical/)
 
 ---

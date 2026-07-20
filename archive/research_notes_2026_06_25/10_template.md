@@ -423,9 +423,9 @@ Qed.
 
 | 定理 | Coq 文件 | 说明 |
 | :--- | :--- | :--- |
-| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 所有权唯一性 |
-| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 数据竞争自由 |
-| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../deprecated/coq_skeleton/TYPE_SAFETY.v) | 类型安全 |
+| T-OW2 | [coq_skeleton/OWNERSHIP_UNIQUENESS.v](../08_quality_audits/deprecated/coq_skeleton/OWNERSHIP_UNIQUENESS.v) | 所有权唯一性 |
+| T-BR1 | [coq_skeleton/BORROW_DATARACE_FREE.v](../08_quality_audits/deprecated/coq_skeleton/BORROW_DATARACE_FREE.v) | 数据竞争自由 |
+| T-TY3 | [coq_skeleton/TYPE_SAFETY.v](../08_quality_audits/deprecated/coq_skeleton/TYPE_SAFETY.v) | 类型安全 |
 
 ---
 

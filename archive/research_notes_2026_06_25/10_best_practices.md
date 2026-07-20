@@ -105,7 +105,7 @@
 - ✅ 边界条件：重要断言补充反例
 - ✅ 交叉引用：与 [PROOF_INDEX](10_proof_index.md)、[FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md) 衔接
 
-**证明深度**：L1 证明思路 / L2 完整证明 / L3 机器可检查；见 [PROOF_INDEX](10_proof_index.md) § 证明深度层次、[CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) L2 示例、[coq_skeleton](../deprecated/coq_skeleton/README.md) L3 骨架。
+**证明深度**：L1 证明思路 / L2 完整证明 / L3 机器可检查；见 [PROOF_INDEX](10_proof_index.md) § 证明深度层次、[CORE_THEOREMS_FULL_PROOFS](10_core_theorems_full_proofs.md) L2 示例、[coq_skeleton](../08_quality_audits/deprecated/coq_skeleton/README.md) L3 骨架。
 
 **引用**：[FORMAL_PROOF_SYSTEM_GUIDE](10_formal_proof_system_guide.md) 论证要素规范、
 [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](10_theoretical_and_argumentation_system_architecture.md) 论证体系五层、

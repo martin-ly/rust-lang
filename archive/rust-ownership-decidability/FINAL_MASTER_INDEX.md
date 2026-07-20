@@ -46,7 +46,6 @@
     - [对于进阶学习者](#对于进阶学习者)
     - [对于研究者](#对于研究者)
   - [🎉 项目完成](#-项目完成)
-  - [**🎉 知识库完整，欢迎使用！🎉**](#-知识库完整欢迎使用)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
   - [权威来源索引](#权威来源索引-1)
@@ -97,7 +96,7 @@
 |------|------|
 | [RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md](RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md) | 研究计划 |
 | [theorems/decidability_theorems.md](theorems/decidability_theorems.md) | 核心定理 |
-| [coq-formalization/README.md](../deprecated/coq_skeleton/README.md) | Coq 代码入口 |
+| [coq-formalization/README.md](../08_quality_audits/deprecated/coq_skeleton/README.md) | Coq 代码入口 |
 | [FINAL_DOCUMENTATION.md](FINAL_DOCUMENTATION.md) | 完整技术文档 |
 
 ### 🗂️ 元模型
@@ -344,7 +343,7 @@ Rust 示例:      ~2,000 行
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. 阅读 [MASTER_COMPREHENSIVE_ANALYSIS.md](MASTER_COMPREHENSIVE_ANALYSIS.md) 建立系统框架
-2. 研究 [coq-formalization/README.md](../deprecated/coq_skeleton/README.md) 理解严格证明
+2. 研究 [coq-formalization/README.md](../08_quality_audits/deprecated/coq_skeleton/README.md) 理解严格证明
 3. 分析边界案例和反例
 
 ### 对于研究者
@@ -377,6 +376,7 @@ Rust 示例:      ~2,000 行
 *"系统化知识 + 严格证明 + 丰富示例 = 深入理解"*:
 
 **🎉 知识库完整，欢迎使用！🎉**
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -375,7 +375,7 @@
 
 | 资源类型 | 形式化文档 | 可验证/支撑的定理 |
 | :--- | :--- | :--- |
-| RustBelt、Stacked Borrows | [ownership_model](formal_methods/10_ownership_model.md)、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)、[coq_skeleton](../deprecated/coq_skeleton/README.md)、[RUSTBELT_ALIGNMENT](10_rustbelt_alignment.md) | OW1、T2/T3、CHAN-T1、MUTEX-T1；Coq T-OW2 骨架 |
+| RustBelt、Stacked Borrows | [ownership_model](formal_methods/10_ownership_model.md)、[borrow_checker_proof](formal_methods/10_borrow_checker_proof.md)、[coq_skeleton](../08_quality_audits/deprecated/coq_skeleton/README.md)、[RUSTBELT_ALIGNMENT](10_rustbelt_alignment.md) | OW1、T2/T3、CHAN-T1、MUTEX-T1；Coq T-OW2 骨架 |
 | Rust 类型系统研究 | [type_system_foundations](type_theory/10_type_system_foundations.md)、[trait_system_formalization](type_theory/10_trait_system_formalization.md) | 类型保持、coherence、RPITIT |
 | Prusti、Kani | [formal_methods](formal_methods/README.md) | 所有权、借用、unsafe 契约 |
 | Criterion、Miri | [experiments/README](experiments/README.md) | EX-T1、EX-T2；内存安全验证 |
@@ -415,7 +415,7 @@
 - [国际对标索引](10_international_formal_verification_index.md) - RustBelt、Aeneas、RustSEM 等
 - [形式化全模型入口](10_formal_full_model_overview.md) - 统一形式系统
 - [核心定理完整证明](10_core_theorems_full_proofs.md) - L2 级 ownership T2、borrow T1、type T3
-- [Coq 证明骨架](../deprecated/coq_skeleton/README.md) - T-OW2 所有权唯一性
+- [Coq 证明骨架](../08_quality_audits/deprecated/coq_skeleton/README.md) - T-OW2 所有权唯一性
 - L3 实施指南 - Coq/Isabelle 补全路线（已归档）
 
 ---
