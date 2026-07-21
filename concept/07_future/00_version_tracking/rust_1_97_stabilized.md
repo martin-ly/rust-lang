@@ -179,9 +179,8 @@ rustc -C symbol-mangling-version=v0 --print cfg
 
 **关键语义**：
 
-- `linker_messages` 是**特殊 lint**，**不受 `warnings` lint group 控制**。
-- 已知误报或预期行为已被 rustc 过滤。
-- 若需临时静默，显式设置为 `allow`：
+- `linker_messages` 默认级别为 `warn`，且属于 `warnings` lint group。因此 `RUSTFLAGS="-D warnings"` 与 `Cargo.toml` 中的 `build.warnings = "deny"` 会将其提升为 `deny`（链接器产生的 warning 将导致编译失败）。
+- 已知误报或预期行为已被 rustc 过滤；若需临时静默，显式设置为 `allow`：
 
 ```toml
 [lints.rust]
@@ -192,6 +191,8 @@ linker_messages = "allow"
 // 或在 crate 根显式允许
 #![allow(linker_messages)]
 ```
+
+> 来源：`rustc 1.97.1 -W help` 显示 `linker-messages` 默认 `warn`；`warnings` group 描述为 "mass-change the level for lints which produce warnings"，因此 `linker_messages` 受 `warnings` group 控制。
 
 ---
 

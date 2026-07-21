@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 527,
-    "generated_at": "2026-07-21T12:59:31.084319+00:00"
+    "generated_at": "2026-07-21T13:42:50.427820+00:00"
   },
   "files": [
     {
@@ -34643,7 +34643,7 @@
       "layer": "L3",
       "title": "Linkage（链接）",
       "positioning": "本小节为 Rust 1.97.0 在「编译器符号发射 ⟷ 链接器输入 ⟷ ABI 契约」边界的**交叉语义**补全，对应审计缺口（[`GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md`](../../../reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md) §2.4、§4 P2-2 缺口#1）。原 `mangling / linker / export_name / v0` 在本页 0 命中，现补齐。",
-      "line_count": 488,
+      "line_count": 487,
       "theorem_chains": [
         {
           "text": "选型判定：Rust 用 Rust ⟹ `lib`；C/C++ 项目静态嵌入 ⟹ `staticlib`；动态加载/多语言共享 ⟹ `cdylib`；`dylib` 仅在「全 Rust 动态插件」场景考虑（且优先评估 `abi_stable` crate 的稳定 ABI 方案）。",
@@ -38991,7 +38991,7 @@
       "layer": "L4",
       "title": "rustc 类型检查与类型推断",
       "positioning": "把“编译器如何知道 `Vec<&str>` 并对未标注类型做推断”还原为约束生成、统一与区域求解的完整算法。",
-      "line_count": 476,
+      "line_count": 484,
       "theorem_chains": [
         {
           "text": "- **回退作为 tie-breaker**：当多个候选在语法上都可匹配、`{float}` 未被其它等值约束固定时，回退默认值决定 solver 把 `{float}` 实例化为 `f32` 还是 `f64`，从而决定**哪一个 `From` 候选被选中**。默认值变化 ⟹ 候选选择可能变化 ⟹ future-compat 警告。",
@@ -63140,7 +63140,7 @@
       "layer": "L7",
       "title": "Rust 形式模型演进跟踪（1.79–1.97+）",
       "positioning": "本文件从**形式模型维度**跟踪 Rust 语言特性的演进，而非版本特性清单。仅收录对 Rust 的**所有权（Ownership）模型、类型系统（Type System）、异步（Async）语义、Unsafe 边界**有结构性影响的特性。",
-      "line_count": 2657,
+      "line_count": 2699,
       "theorem_chains": [
         {
           "text": "| Rust 形式模型演进跟踪（1.79–1.97+） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -63232,6 +63232,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../../AGENTS.md",
         "../../../docs/09_toolchain/08_rust_1_96_features.md",
         "../../../docs/09_toolchain/10_rust_1_97_features.md",
         "../../00_meta/00_framework/methodology.md",
@@ -63268,7 +63269,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 3,
-      "matrix_rows": 479,
+      "matrix_rows": 484,
       "pre_post": {
         "pre": [
           ">"
@@ -65690,7 +65691,7 @@
       "layer": "L7",
       "title": "Rust 1.97.0 稳定特性",
       "positioning": "",
-      "line_count": 572,
+      "line_count": 573,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [

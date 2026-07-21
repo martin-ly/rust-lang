@@ -52,7 +52,7 @@
 |---|---|---|---|---|---|---|---|---|---|---|
 | 1 | Symbol mangling v0 enabled by default | ○ 符号命名 | ✗ | ✗ | ✓ [27_linkage](../../03_advanced/04_ffi/03_linkage.md) / [38_ABI](../../04_formal/05_rustc_internals/05_application_binary_interface.md)（v0 / demangle / backtrace） | ✗ | ✗ | ✗ | ○ 调试器/Profiler 因平台而异 | ✓ 旧工具 demangle 失效 |
 | 2 | Cargo `build.warnings` config | ✗ | ✗ | ✗ | ✗ | ✗ | ✓ [83_config](../../06_ecosystem/01_cargo/18_cargo_configuration.md) · [65_lints](../../06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md) | ✗ | ✗ | ○ 仅控 local packages，控的是 lint 级别 |
-| 3 | Linker output 默认显示（`linker_messages` lint） | ✗ | ✗ | ✗ | ✓ [27_linkage](../../03_advanced/04_ffi/03_linkage.md) §B | ✗ | ○ 与 `build.warnings` 组合（#2）但 `linker_messages` 不受 `warnings` group 控制 | ✗ | ✗ | ✓ 特殊 lint（不在 `warnings` group） ✓ [02_editions](02_editions.md) §8.1 |
+| 3 | Linker output 默认显示（`linker_messages` lint） | ✗ | ✗ | ✗ | ✓ [27_linkage](../../03_advanced/04_ffi/03_linkage.md) §B | ✗ | ✓ 与 `build.warnings` 组合（#2）：`linker_messages` 默认 warn 且属于 `warnings` group | ✗ | ✗ | ✓ 默认 warn，受 `warnings` group 控制 ✓ [02_editions](02_editions.md) §8.1 |
 | 4 | `Default for RepeatN` | ✗ | ○ `Default` trait | ✗ | ✗ | ✗ | ✗ | ✓ std 表面 API（无专属概念页） | ✗ | ✗ |
 | 5 | `Copy for ffi::FromBytesUntilNulError` | ✗ | ○ `Copy` trait 语义 | ✗ | ○ FFI 边界类型 | ✗ | ✗ | ✓ std 表面 API | ✗ | ✗ |
 | 6 | `Send for std::fs::File` on UEFI | ✗ | ○ `Send` auto trait | ✗ | ✗ | ○ `Send` 约束影响跨 await 移动 | ✗ | ✓ std 表面 API | ✓ UEFI 目标（`x86_64-unknown-uefi`） | ✗ |
@@ -196,7 +196,7 @@ flowchart LR
 
 - **涉及特性**：#2 #16 #17 #18 #19（直接）；#3 #11 #20（○ 间接）
 - **应反向嵌入核心页**：[`83_cargo_configuration.md`](../../06_ecosystem/01_cargo/18_cargo_configuration.md)、[`65_cargo_profiles_and_lints.md`](../../06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md)、[`60_cargo_dependency_resolution.md`](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md)、[`84_cargo_commands_reference.md`](../../06_ecosystem/01_cargo/19_cargo_commands_reference.md)、[`86_cargo_registry_internals.md`](../../06_ecosystem/01_cargo/21_cargo_registry_internals.md)
-- **覆盖状态**：**已交叉**——Cargo 各页齐备；版本页 §5.1 已补 `CARGO_BUILD_WARNINGS`、local-only、`--keep-going` 模板。注意交叉边界：`linker_messages`（#3）**不受** `build.warnings`/`warnings` group 控制（见 §2.8 / §5.1 注）。
+- **覆盖状态**：**已交叉**——Cargo 各页齐备；版本页 §5.1 已补 `CARGO_BUILD_WARNINGS`、local-only、`--keep-going` 模板。注意交叉边界：`linker_messages`（#3）默认 warn 且属于 `warnings` group，因此 `build.warnings = "deny"` 会将其提升为 deny（详见 `27_linkage.md` §B）。
 
 ### 4.7 Std（标准库）
 

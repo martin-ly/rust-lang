@@ -324,23 +324,22 @@ pub fn rust_add(a: i32, b: i32) -> i32 { a + b }
 // export_name 显式固定字面符号，同样绕过 v0 混淆。
 ```
 
-### B. `linker_messages` lint：链接器输出默认显示，且不在 `warnings` group
+### B. `linker_messages` lint：链接器输出默认显示，且属于 `warnings` group
 
 历史上 rustc 在链接成功时**隐藏** linker 的 stderr；Rust 1.97.0 改为**默认显示**链接器输出，并通过 `linker_messages` lint 以 warning 形式报告（发布说明："Warn on linker output by default"）。
 
-**关键边界（交叉点）**：`linker_messages` 是**特殊 lint**，**不受 `warnings` lint group 控制**。由此推出 CI 上的非显然结论：
+**关键边界（交叉点）**：`linker_messages` 默认级别为 `warn`，且属于 `warnings` lint group。由此推出的 CI 结论为：
 
-- `build.warnings = "deny"` 与 `RUSTFLAGS="-D warnings"` 作用于常规 lint/warnings 体系，**不一定**能压制 `linker_messages`。
-- 因此「CI 强制零警告」策略对 `linker_messages` 可能失效，需显式处理。
+- `build.warnings = "deny"` 与 `RUSTFLAGS="-D warnings"` 会把 `linker_messages` 提升为 `deny`，即链接器产生的任何 warning 都会导致编译失败。
+- 如果项目希望 CI 对链接器告警保持“零警告”策略，可直接使用 `build.warnings = "deny"` 或 `RUSTFLAGS="-D warnings"`，无需额外针对 `linker_messages` 单独配置。
+- 如果项目需要临时压制某些已知误报的链接器 warning，再显式使用 `linker_messages = "allow"`。
 
-⚠ **需专家复核**：
-上述「`-D warnings` / `build.warnings=deny` 无法压制 `linker_messages`」是由版本页 §2.8「特殊 lint、不受 warnings group 控制」与 §5.1「`build.warnings` 控制本地包常规 lint 警告」两条事实**推导**的 CI 行为结论；
-具体到各 toolchain 与 linker 的组合表现，建议以 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md) §2.8/§5.1 与实际编译输出复核。
+> **已核对**：`rustc 1.97.1 -W help` 显示 `linker-messages` 默认 `warn`；`warnings` group 描述为 "mass-change the level for lints which produce warnings"，因此 `linker_messages` 受 `warnings` group 控制。前述结论与该输出一致。具体到各 toolchain 与 linker 的组合表现，建议以实际编译输出复核。
 
 **CI 处理建议**：先以 `warn` 运行收集真实链接器告警并针对性修复；仅在确认为已知误报时临时 `allow`。
 
 ```toml
-# Cargo.toml — 显式允许（静默）linker_messages；注意它不在 warnings group 内
+# Cargo.toml — 仅在确认误报时显式允许 linker_messages
 [lints.rust]
 linker_messages = "allow"
 ```
