@@ -18,7 +18,12 @@
 > **前置概念**: [Toolchain](../00_toolchain/01_toolchain.md) · [Cargo](../00_toolchain/01_toolchain.md) · [Security Practices](../07_security_and_cryptography/01_security_practices.md)
 > **后置概念**: [Cross Compilation](../05_systems_and_embedded/02_cross_compilation.md) · [Distributed Systems](../04_web_and_networking/01_distributed_systems.md)
 >
-> **来源**: [Cargo — Manifest: license](https://doc.rust-lang.org/cargo/reference/manifest.html#the-license-and-license-file-fields) · [Choose a License](https://choosealicense.com/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Cargo — Manifest: license](https://doc.rust-lang.org/cargo/reference/manifest.html#the-license-and-license-file-fields) ·
+> [Choose a License](https://choosealicense.com/) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**: [Rust FAQ — Why MIT/Apache-2.0](https://www.rust-lang.org/policies/licenses) ·
@@ -117,7 +122,7 @@ Rust 生态的许可证现状:
 
   宽松许可证（Permissive）:
   ┌─────────────────┬─────────────────┬─────────────────┐
-  │ 许可证          │ 专利授权        │ 必须开源衍生作品│
+  │ 许可证           │ 专利授权        │ 必须开源衍生作品  │
   ├─────────────────┼─────────────────┼─────────────────┤
   │ MIT             │ 无              │ 否              │
   │ Apache-2.0      │ 有              │ 否              │
@@ -129,12 +134,12 @@ Rust 生态的许可证现状:
 
   Copyleft 许可证:
   ┌─────────────────┬─────────────────┬─────────────────┐
-  │ 许可证          │ 专利授权        │ 必须开源衍生作品│
+  │ 许可证           │ 专利授权        │ 必须开源衍生作品  │
   ├─────────────────┼─────────────────┼─────────────────┤
-  │ GPL-2.0/3.0     │ 有              │ 是（同等许可证）│
-  │ LGPL            │ 有              │ 修改库时必须    │
-  │ AGPL            │ 有              │ 网络服务也必须  │
-  │ MPL-2.0         │ 有              │ 修改文件时必须  │
+  │ GPL-2.0/3.0     │ 有              │ 是（同等许可证）  │
+  │ LGPL            │ 有              │ 修改库时必须     │
+  │ AGPL            │ 有              │ 网络服务也必须   │
+  │ MPL-2.0         │ 有              │ 修改文件时必须   │
   └─────────────────┴─────────────────┴─────────────────┘
 
   关键差异:

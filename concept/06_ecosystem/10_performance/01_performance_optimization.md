@@ -26,7 +26,10 @@
 
 ---
 
-> **来源**: · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Criterion.rs Book](https://bheisler.github.io/criterion.rs/book/) ·
 > [Rust Performance Book](https://nnethercote.github.io/perf-book/) ·
 > [cargo-flamegraph](https://github.com/flamegraph-rs/flamegraph) ·
@@ -72,7 +75,6 @@
     - [核心推理链](#核心推理链)
   - [从 `crates\c07_process\docs\13_performance_optimization_guide.md` 迁移的补充视角](#从-cratesc07_processdocs13_performance_optimization_guidemd-迁移的补充视角)
 - [C07-13. 性能优化与调优指南](#c07-13-性能优化与调优指南)
-  - [📋 目录](#-目录-1)
   - [1. 性能分析基础](#1-性能分析基础)
     - [1.1 性能指标](#11-性能指标)
     - [1.2 基准测试](#12-基准测试)
@@ -586,7 +588,13 @@ fn fixed() {
 }
 ```
 
-> **修正**: 性能优化常涉及 `unsafe` 代码（裸指针、未初始化内存、`mem::transmute`）。这些优化的前提是遵守 Rust 的内存模型——`Vec` 的 `as_mut_ptr()` 返回的指针只在 `Vec` 不重新分配时有效。任何 `push`、`reserve`、`shrink` 都可能导致重新分配，使旧指针悬垂。Miri 可检测此类违规，但无法在编译期完全阻止——这是 unsafe 代码审查的重点。与 C++ 的 `vector::data()` 相同，但 Rust 要求显式 `unsafe` 块，增加审查可见性。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
+> **修正**:
+> 性能优化常涉及 `unsafe` 代码（裸指针、未初始化内存、`mem::transmute`）。
+> 这些优化的前提是遵守 Rust 的内存模型——`Vec` 的 `as_mut_ptr()` 返回的指针只在 `Vec` 不重新分配时有效。
+> 任何 `push`、`reserve`、`shrink` 都可能导致重新分配，使旧指针悬垂。
+> Miri 可检测此类违规，但无法在编译期完全阻止——这是 unsafe 代码审查的重点。
+> 与 C++ 的 `vector::data()` 相同，但 Rust 要求显式 `unsafe` 块，增加审查可见性。
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
 ### 10.2 边界测试：`MaybeUninit` 的未初始化内存（运行时 UB）
 
@@ -605,7 +613,16 @@ fn main() {
 }
 ```
 
-> **修正**: `MaybeUninit<T>` 是 Rust 中处理未初始化内存的安全抽象。`assume_init()` 告诉编译器"此值已初始化"，但实际上若未写入就读取，是未定义行为。编译器可能将未初始化值视为 `undef`（LLVM），导致任意行为。正确使用模式：1) `MaybeUninit::uninit()` 分配空间；2) `ptr.write(val)` 初始化；3) `assume_init()` 读取。这与 C 的 `malloc` + 使用未初始化内存相同，但 Rust 的类型系统（Type System）追踪初始化状态，Miri 在运行时（Runtime）验证。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
+> **修正**:
+> `MaybeUninit<T>` 是 Rust 中处理未初始化内存的安全抽象。
+> `assume_init()` 告诉编译器"此值已初始化"，但实际上若未写入就读取，是未定义行为。
+> 编译器可能将未初始化值视为 `undef`（LLVM），导致任意行为。
+> 正确使用模式：
+>
+> 1) `MaybeUninit::uninit()` 分配空间；
+> 2) `ptr.write(val)` 初始化；
+> 3) `assume_init()` 读取。这与 C 的 `malloc` + 使用未初始化内存相同，但 Rust 的类型系统（Type System）追踪初始化状态，Miri 在运行时（Runtime）验证。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.3 边界测试：`mem::transmute` 的大小不匹配（编译错误）
 
@@ -618,7 +635,15 @@ fn main() {
 }
 ```
 
-> **修正**: `mem::transmute` 是 Rust 中最危险的 unsafe 操作之一，要求源类型和目标类型大小完全相同（`size_of::<Src>() == size_of::<Dst>()`）。编译器在编译期检查大小相等，不等则报错。`u32`（4字节）→ `u64`（8字节）的转换必须通过显式扩展（`x as u64`）而非 `transmute`。更隐蔽的错误是 `Vec<T>` → `Vec<U>` 的转换：即使 `size_of::<T>() == size_of::<U>()`，内存布局可能不同（如对齐、drop 逻辑），导致 UB。安全替代：`u32::from_le_bytes`、`bytemuck` crate 的 `Pod` trait（要求无填充、对齐兼容）。这与 C 的 `(type)val` 强制转换（无大小检查）形成对比——Rust 将大小不匹配从运行时崩溃转化为编译错误。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/fn.transmute.html)] · [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/transmutes.html)]
+> **修正**:
+> `mem::transmute` 是 Rust 中最危险的 unsafe 操作之一，要求源类型和目标类型大小完全相同（`size_of::<Src>() == size_of::<Dst>()`）。
+> 编译器在编译期检查大小相等，不等则报错。
+> `u32`（4字节）→ `u64`（8字节）的转换必须通过显式扩展（`x as u64`）而非 `transmute`。
+> 更隐蔽的错误是 `Vec<T>` → `Vec<U>` 的转换：即使 `size_of::<T>() == size_of::<U>()`，内存布局可能不同（如对齐、drop 逻辑），导致 UB。
+> 安全替代：`u32::from_le_bytes`、`bytemuck` crate 的 `Pod` trait（要求无填充、对齐兼容）。
+> 这与 C 的 `(type)val` 强制转换（无大小检查）形成对比——Rust 将大小不匹配从运行时崩溃转化为编译错误。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/mem/fn.transmute.html)] ·
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/transmutes.html)]
 
 ### 10.4 边界测试：内联汇编的操作数类型约束（编译错误）
 
@@ -639,7 +664,14 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的内联汇编（Inline Assembly）（`asm!` macro，stable since 1.59）在编译期验证操作数类型与约束（constraint）的兼容性。`mov` 指令在 x86-64 上操作 64 位寄存器，但 `x` 是 `u32`（32位），类型不匹配导致编译错误。正确写法：统一为 `u64`，或使用 `in("eax") x` 显式指定 32 位寄存器。Rust 的内联汇编比 C 的 `asm` 关键字类型安全：操作数与 Rust 变量绑定，编译器检查类型和生命周期（Lifetimes），自动处理寄存器分配和 clobber 列表。这是 Rust "zero-cost abstraction with safety" 的延伸：直接控制硬件，同时保持类型系统（Type System）的保护。来源: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) · 来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **修正**:
+> Rust 的内联汇编（Inline Assembly）（`asm!` macro，stable since 1.59）在编译期验证操作数类型与约束（constraint）的兼容性。
+> `mov` 指令在 x86-64 上操作 64 位寄存器，但 `x` 是 `u32`（32位），类型不匹配导致编译错误。
+> 正确写法：统一为 `u64`，或使用 `in("eax") x` 显式指定 32 位寄存器。
+> Rust 的内联汇编比 C 的 `asm` 关键字类型安全：操作数与 Rust 变量绑定，编译器检查类型和生命周期（Lifetimes），自动处理寄存器分配和 clobber 列表。
+> 这是 Rust "zero-cost abstraction with safety" 的延伸：直接控制硬件，同时保持类型系统（Type System）的保护。
+> 来源: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) ·
+> 来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 
 ### 10.6 边界测试：`#[inline(always)]` 与代码膨胀（编译错误/链接错误）
 
@@ -656,7 +688,16 @@ fn main() {
 }
 ```
 
-> **修正**: `#[inline(always)]` 强制编译器在每个调用点内联函数，无论大小。对小函数（getter、setter、简单算术），内联消除函数调用开销。但对大函数，内联导致**代码膨胀**（code bloat）：相同代码复制多次，指令缓存（icache）效率下降，二进制体积激增。极端情况下，链接器可能失败（文件过大）或二进制加载失败。Rust 的 `#[inline]`（无参数）是建议性内联，编译器根据启发式决定；`#[inline(always)]` 应仅用于极小的热点函数。`#[inline(never)]` 强制不内联，用于调试或防止代码膨胀。这与 C 的 `inline`（建议性，`__attribute__((always_inline))` 强制）或 C++ 的 `inline`（链接器合并，非内联指令）类似——Rust 的内联属性直接控制 LLVM 的 inlining 决策。[来源: [Rust Reference — Inline Attribute](https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
+> **修正**:
+> `#[inline(always)]` 强制编译器在每个调用点内联函数，无论大小。
+> 对小函数（getter、setter、简单算术），内联消除函数调用开销。
+> 但对大函数，内联导致**代码膨胀**（code bloat）：相同代码复制多次，指令缓存（icache）效率下降，二进制体积激增。
+> 极端情况下，链接器可能失败（文件过大）或二进制加载失败。
+> Rust 的 `#[inline]`（无参数）是建议性内联，编译器根据启发式决定；`#[inline(always)]` 应仅用于极小的热点函数。
+> `#[inline(never)]` 强制不内联，用于调试或防止代码膨胀。
+> 这与 C 的 `inline`（建议性，`__attribute__((always_inline))` 强制）或 C++ 的 `inline`（链接器合并，非内联指令）类似——Rust 的内联属性直接控制 LLVM 的 inlining 决策。
+> [来源: [Rust Reference — Inline Attribute](https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute)] ·
+> [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
 
 ### 10.7 边界测试：`inline(always)` 的代码膨胀（编译后性能下降）
 
@@ -670,7 +711,19 @@ fn tiny_helper(x: i32) -> i32 {
 // 若 tiny_helper 在 100 处调用，inline(always) 生成 100 份代码
 ```
 
-> **修正**: `#[inline]` 提示编译器内联函数，`#[inline(always)]` 强制内联（忽略启发式）。内联的收益：消除函数调用开销、允许跨函数优化（常量传播、死代码消除）。内联的成本：代码膨胀（instruction cache pressure）、编译时间增加。`always` 的危险：1) 大函数在多处调用 → 二进制膨胀；2) 递归函数 → 编译错误（无法内联无限递归）；3) 跨 crate 边界 → 链接器可能忽略（需 LTO）。内联决策应交由编译器（`#[inline]` 为提示，`always` 仅在微基准验证后使用）。这与 C++ 的 `inline` 关键字（弱提示，链接器决定）或 Go 的编译器自动内联（无注解控制）不同——Rust 的内联注解是强提示，但 `always` 需极度谨慎。[来源: [Rust Reference — Inline](https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/inlining.html)]
+> **修正**:
+> `#[inline]` 提示编译器内联函数，`#[inline(always)]` 强制内联（忽略启发式）。
+> 内联的收益：消除函数调用开销、允许跨函数优化（常量传播、死代码消除）。
+> 内联的成本：代码膨胀（instruction cache pressure）、编译时间增加。
+> `always` 的危险：
+>
+> 1) 大函数在多处调用 → 二进制膨胀；
+> 2) 递归函数 → 编译错误（无法内联无限递归）；
+> 3) 跨 crate 边界 → 链接器可能忽略（需 LTO）。
+> 内联决策应交由编译器（`#[inline]` 为提示，`always` 仅在微基准验证后使用）。
+> 这与 C++ 的 `inline` 关键字（弱提示，链接器决定）或 Go 的编译器自动内联（无注解控制）不同——Rust 的内联注解是强提示，但 `always` 需极度谨慎。
+> [来源: [Rust Reference — Inline](https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute)] ·
+> [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/inlining.html)]
 
 ### 10.3 边界测试：SIMD 类型的内存对齐要求（运行时 UB）
 
@@ -686,7 +739,25 @@ fn main() {
 }
 ```
 
-> **修正**: SIMD（AVX/AVX2/SSE）指令对**内存对齐**有严格要求：1) `__m128`（SSE）需 16 字节对齐；2) `__m256`（AVX）需 32 字节对齐；3) `__m512`（AVX-512）需 64 字节对齐。未对齐加载（`_mm256_loadu_si256`，`u` = unaligned）性能稍低但安全。Rust 的 `std::arch` 模块（Module）提供平台特定的 SIMD 内联函数，是 `unsafe` 的。安全 SIMD 抽象：`packed_simd`（已废弃）、`std::simd`（每日构建版，portable SIMD）、`auto_vectorization`（编译器自动向量化）。最佳实践：1) 使用 `#[repr(align(32))]` 保证对齐；2) 优先用 `loadu` 除非在极致性能路径；3) 用 `std::simd`（稳定后）替代裸内联函数。这与 C 的 `__m256`（同样对齐要求）或编译器自动向量化（无对齐控制）不同——Rust 的 SIMD 显式暴露硬件约束。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/arch/index.html)] · [来源: [Portable SIMD](https://doc.rust-lang.org/std/simd/index.html)]
+> **修正**:
+> SIMD（AVX/AVX2/SSE）指令对**内存对齐**有严格要求：
+>
+> 1) `__m128`（SSE）需 16 字节对齐；
+> 2) `__m256`（AVX）需 32 字节对齐；
+> 3) `__m512`（AVX-512）需 64 字节对齐。
+>
+> 未对齐加载（`_mm256_loadu_si256`，`u` = unaligned）性能稍低但安全。
+> Rust 的 `std::arch` 模块（Module）提供平台特定的 SIMD 内联函数，是 `unsafe` 的。
+> 安全 SIMD 抽象：`packed_simd`（已废弃）、`std::simd`（每日构建版，portable SIMD）、`auto_vectorization`（编译器自动向量化）。
+> 最佳实践：
+>
+> 1) 使用 `#[repr(align(32))]` 保证对齐；
+> 2) 优先用 `loadu` 除非在极致性能路径；
+> 3) 用 `std::simd`（稳定后）替代裸内联函数。
+>
+> 这与 C 的 `__m256`（同样对齐要求）或编译器自动向量化（无对齐控制）不同——Rust 的 SIMD 显式暴露硬件约束。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/arch/index.html)] ·
+> [来源: [Portable SIMD](https://doc.rust-lang.org/std/simd/index.html)]
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -773,52 +844,6 @@ Release 开启优化：内联、循环展开、LTO、向量化等。Debug 关闭
 > **文档定位**: Tier 2 实践指南
 > **最后更新**: 2025-12-25
 > **相关文档**: 主索引 | FAQ | Glossary
-
-## 📋 目录
-
-- [C07-13. 性能优化与调优指南](#c07-13-性能优化与调优指南)
-  - [📋 目录](#-目录)
-  - [1. 性能分析基础](#1-性能分析基础)
-    - [1.1 性能指标](#11-性能指标)
-    - [1.2 基准测试](#12-基准测试)
-    - [1.3 性能分析工具](#13-性能分析工具)
-  - 1. 进程创建优化
-    - 2.1 进程池技术
-    - 2.2 预启动进程
-    - 2.3 进程复用
-  - 1. 内存优化
-    - 3.1 零拷贝技术
-    - 3.2 内存池管理
-    - 3.3 内存映射
-  - [4. I/O 优化](#cpu-与-io-优化)
-    - 4.1 异步（Async） I/O
-    - 4.2 缓冲策略
-    - 4.3 管道优化
-  - 1. 并发优化
-    - 5.1 工作窃取
-    - 5.2 无锁数据结构
-    - 5.3 CPU 亲和性
-  - 1. 网络优化
-    - 6.1 连接池
-    - 6.2 批量处理
-    - 6.3 压缩传输
-  - 1. 缓存策略
-    - 7.1 结果缓存
-    - 7.2 进程缓存
-    - 7.3 智能缓存
-  - 1. 监控与调优
-    - 8.1 实时监控
-    - 8.2 性能调优
-    - 8.3 自动化优化
-  - 1. 实战案例
-    - 9.1 高性能服务器
-    - 9.2 批处理系统
-    - 9.3 实时处理系统
-  - 1. 总结
-    - 核心优化技术
-    - 监控与调优
-    - 实战应用
-    - 最佳实践
 
 本章深入探讨 Rust 进程管理的性能优化技术，提供全面的调优指南和实战案例。
 

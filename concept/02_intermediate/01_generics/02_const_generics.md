@@ -3,12 +3,16 @@
 # Const Generics（常量泛型）：值作为类型参数
 
 > **EN**: Const Generics — Values as Type Parameters
-> **Summary**: Const generics allow types, functions, and impls to be parameterized by compile-time constant values (e.g. `<const N: usize>`), making fixed-size arrays `[T; N]` and similar value-indexed abstractions expressible without macros or type-level encodings. This page is the canonical reference for their motivation, syntax, the stable boundary of `min_const_generics` versus the nightly `generic_const_exprs`/`adt_const_params` in Rust 1.97.0, monomorphization semantics, and the decision boundary against macros and type-level naturals.
+> **Summary**:
+> Const generics allow types, functions, and impls to be parameterized by compile-time constant values (e.g. `<const N: usize>`), making fixed-size arrays `[T; N]` and similar value-indexed abstractions expressible without macros or type-level encodings.
+> This page is the canonical reference for their motivation, syntax, the stable boundary of `min_const_generics` versus the nightly `generic_const_exprs`/`adt_const_params` in Rust 1.97.0, monomorphization semantics, and the decision boundary against macros and type-level naturals.
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L2-L3
 > **受众**: [进阶]
-> **权威来源**: 本文件为 `concept/` 权威页。const generics 的**语法、stable 边界与判定规则**统一收敛于本页；[泛型系统总览](01_generics.md) 保留泛型参数空间的整体介绍，[类型级编程](03_type_level_programming.md) 保留 Peano/typenum 等编码技术，均通过链接指向本页。
+> **权威来源**:
+> 本文件为 `concept/` 权威页。const generics 的**语法、stable 边界与判定规则**统一收敛于本页；
+> [泛型系统总览](01_generics.md) 保留泛型参数空间的整体介绍，[类型级编程](03_type_level_programming.md) 保留 Peano/typenum 等编码技术，均通过链接指向本页。
 >
 > **层次定位**: L2 进阶概念 / 泛型（Generics）子域 — 类型参数（type parameter）与值参数（value parameter）的交叉
 > **A/S/P 标记**: **S** — Structure
