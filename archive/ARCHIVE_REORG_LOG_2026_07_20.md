@@ -47,9 +47,36 @@
 
 - `scripts/apply_archive_reorg.py` — 读取 CSV 映射执行 `git mv` 迁移
 - `scripts/verify_archive_reorg.py` — 验证迁移后目录结构、死链、stub 合规、文件数量守恒
+- `scripts/check_archive_integrity.py` — 修正 stub 检测逻辑，避免把普通 README 误判为 stub
+- `tmp/fix_archive_dead_links.py` — 修复重组后活跃目录到 archive 的旧路径死链
+- `tmp/fix_knowledge_stub_links.py` — 修复 knowledge/ 重定向 stub 的相对链接
+- `tmp/fix_archive_internal_links.py` — 修复 archive/ 内部 Markdown 文件之间的断裂相对链接
+
+## 阶段 6：清理、验证与收尾
+
+### 死链修复
+
+- 修复 `concept/` 中指向旧 archive 路径的 23 个死链（reports/2026_07、docs/content/academic 等）。
+- 修复 `docs/` 和 `content/` 中指向旧 archive 路径的 201 个死链（docs/06_toolchain、docs/2026_03_reorganization、docs/2026_05_historical_docs、content/ecosystem/... 等）。
+- 将 `docs/` / `content/` 中指向 `knowledge/` 目录的 9 个死链直接重定向到 `concept/` 权威页。
+- 为 `concept/` 中指向缺失 `knowledge/` 文件目标的 13 个死链创建重定向 stub（12 个新文件），使 `knowledge/` 恢复导航入口。
+- 修正上述 12 个 `knowledge/` stub 的相对链接，确保 stub 指向正确的权威页。
+
+### 质量门验证（阶段 6 复测）
+
+| 检查 | 结果 |
+|------|------|
+| `python scripts/kb_auditor.py --link-check` | ✅ 死链 0 / docs\|content\|knowledge 死链 0 |
+| `python scripts/detect_content_overlap.py` | ✅ 通过（5 对 stub↔canonical 警告，exit 0） |
+| `python scripts/check_naming_convention.py --strict` | ✅ ERROR=0 / WARN=54 |
+| `python scripts/check_archive_integrity.py --strict` | ⚠️ 仍有 archive 内部历史链接断裂，详见备注 |
+
+### 备注
+
+- `check_archive_integrity.py` 的 stub 误报已修正：由 3038 条降至 14 条（均为历史文件中声明为 stub/archive redirect 但正文超长的真实条目）。
+- archive 内部历史文件之间的交叉链接（~17K 条）断裂主要因目录主题化重组后相对路径变化；已通过 `tmp/fix_archive_internal_links.py` 尝试自动修复，剩余未解决项需人工复核。
 
 ## 附录：Git 重命名/移动清单（前 200 条）
 
 ```text
 ```
-
