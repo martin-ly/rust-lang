@@ -24,7 +24,15 @@
 > [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md)
 > (Source: [Wikipedia — Simply Typed Lambda Calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus))
 > **后置概念**: [Formal Methods](../../07_future/04_research_and_experimental/02_formal_methods.md)
-> **主要来源**: [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) · [Iris Project](https://iris-project.org/) · [Creusot](https://creusot.rs/) · [Verus](https://verus-lang.github.io/verus/guide/) · [Kani: AWS] · [Aeneas](https://github.com/AeneasVerif/aeneas) · [RefinedRust] · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**:
+> [RustBelt: POPL 2018](https://doi.org/10.1145/3158154) ·
+> [Iris Project](https://iris-project.org/) ·
+> [Creusot](https://creusot.rs/) ·
+> [Verus](https://verus-lang.github.io/verus/guide/) ·
+> [Kani: AWS] · [Aeneas](https://github.com/AeneasVerif/aeneas) ·
+> [RefinedRust] ·
+> [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---

@@ -8938,9 +8938,9 @@ dependencies = [
 
 [[package]]
 name = "libc"
-version = "0.2.187"
+version = "0.2.188"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a7743783ea728ef5c31194c6590797eed286449b4a4e87d626d8a51f0a94e732"
+checksum = "22053b6a34f84abc97f9129e61334f40174659a1b9bd18c970b83db6a9a6348b"
 
 [[package]]
 name = "libdbus-sys"
@@ -10926,9 +10926,9 @@ dependencies = [
 
 [[package]]
 name = "ntex-rt"
-version = "3.15.5"
+version = "3.15.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "60e50cc6b9bb79222e3b7c619b667ca39a1130530e0ef970e418d9810c037267"
+checksum = "8e2c9052fceff41aa4aed2bbb2f4bead39dd9bbf917c5b4e90f71e6ddbb0ccc8"
 dependencies = [
  "async-channel",
  "async-task",
@@ -17393,15 +17393,16 @@ dependencies = [
 
 [[package]]
 name = "tokio-util"
-version = "0.7.18"
+version = "0.7.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9ae9cec805b01e8fc3fd2fe289f89149a9b66dd16786abd8b19cfa7b48cb0098"
+checksum = "494815d09bf52b5548659851081238f0ca39ff638363907596da739561c62c52"
 dependencies = [
  "bytes",
  "futures-core",
  "futures-io",
  "futures-sink",
  "futures-util",
+ "libc",
  "pin-project-lite",
  "slab",
  "tokio",
@@ -20522,9 +20523,9 @@ dependencies = [
 
 [[package]]
 name = "xxhash-rust"
-version = "0.8.17"
+version = "0.8.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "985eec839aaf2a1270af8f4ebcf63cf9401cfd90f0902f97c28d9f104ffbde72"
+checksum = "aee1b19627c7c60102ab80d3a9cbe18de90bfe03bfa6c3715447681f0e8c8af6"
 
 [[package]]
 name = "yaml-rust2"
