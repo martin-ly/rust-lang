@@ -1,0 +1,37 @@
+{
+  "summary": {
+    "date": "2026-07-21",
+    "entities": 540,
+    "relations": 8410,
+    "decision_trees": 3,
+    "fault_trees": 2,
+    "K1_missing_required": 0,
+    "K1b_missing_bloomLevel": 0,
+    "K2_bad_path": 0,
+    "K3_not_bilingual": 0,
+    "K4_duplicate_id": 0,
+    "K5_dangling_relations": 0,
+    "K6_bad_tree_nodes": 0,
+    "K7_missing_layer_domain": 0
+  },
+  "relation_sample": {
+    "@id": "_:rel1",
+    "@type": "ex:dependsOn",
+    "ex:subject": "ex:ComprehensiveRustMapping",
+    "ex:predicate": "ex:dependsOn",
+    "ex:object": "ex:LearningGuide",
+    "ex:source": "prerequisite:../04_navigation/07_learning_guide.md",
+    "ex:confidence": 1.0,
+    "ex:version": "1.97.0",
+    "ex:reviewed": true,
+    "dcterms:created": "2026-07-11"
+  },
+  "K1_missing": [],
+  "K1b_bloom_missing_sample": [],
+  "K2_bad_path": [],
+  "K3_not_bilingual": [],
+  "K4_dup": [],
+  "K5_dangling": [],
+  "K6_bad": [],
+  "K7_missing_layer_domain": []
+}

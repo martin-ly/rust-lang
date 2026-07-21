@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 527,
-    "generated_at": "2026-07-20T15:20:21.150285+00:00"
+    "generated_at": "2026-07-21T12:59:31.084319+00:00"
   },
   "files": [
     {
@@ -8765,7 +8765,7 @@
       "layer": "L1",
       "title": "Ownership（所有权）",
       "positioning": "",
-      "line_count": 2020,
+      "line_count": 2024,
       "theorem_chains": [
         {
           "text": "3. **分离逻辑（Separation Logic）视角**：`&mut T` 授予对 `T` 的**独占访问权**——形式上等价于分离逻辑中的 `points-to` 谓词 `x ↦ v`；`&T` 的共享性通过「不可变 ⟹ 并发可共享」约束保证无数据竞争。",
@@ -20041,7 +20041,7 @@
       "layer": "L2",
       "title": "Const Generics（常量泛型）：值作为类型参数",
       "positioning": "",
-      "line_count": 616,
+      "line_count": 620,
       "theorem_chains": [
         {
           "text": "维度进入类型 ⟹ 形状错误在编译期暴露，乘法只写一次覆盖所有形状：",
@@ -47634,7 +47634,7 @@
       "layer": "L5",
       "title": "Rust 安全保证的边界条件全景（Safety Boundary Panorama）",
       "positioning": "本文件汇总 Rust 所有**编译期安全保证**的边界条件、失效场景和反例，形成完整的\"安全 ⇄ 不安全\"边界地图。",
-      "line_count": 1074,
+      "line_count": 1182,
       "theorem_chains": [
         {
           "text": "> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。",
@@ -47915,7 +47915,7 @@
       "layer": "L6",
       "title": "Toolchain（工具链与 Cargo）",
       "positioning": "",
-      "line_count": 1973,
+      "line_count": 2065,
       "theorem_chains": [
         {
           "text": "| **断言** | **前提** | **结论（⟹ 推理链）** | **工具链组件** | **失效条件** |",
@@ -48105,6 +48105,7 @@
         "../../04_formal/02_separation_logic/01_rustbelt.md",
         "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
         "../../07_future/00_version_tracking/01_rust_version_tracking.md",
+        "../../07_future/00_version_tracking/rust_1_97_1.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../../07_future/04_research_and_experimental/01_ai_integration.md",
         "../../07_future/04_research_and_experimental/02_formal_methods.md",
@@ -48795,7 +48796,7 @@
       "layer": "L6",
       "title": "Rust 编译器的 LLVM 后端与代码生成",
       "positioning": "把“MIR 之后发生了什么”讲清楚：从 LLVM IR 生成、代码优化到目标文件与链接，覆盖 rustc 代码生成层的核心机制。",
-      "line_count": 338,
+      "line_count": 340,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -48813,6 +48814,7 @@
         "../../00_meta/01_terminology/01_terminology_glossary.md",
         "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
         "../../07_future/00_version_tracking/rust_1_91_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_97_1.md",
         "05_compiler_infrastructure.md",
         "10_rustc_driver_and_stable_mir.md"
       ],
@@ -59340,7 +59342,7 @@
       "layer": "L6",
       "title": "性能优化：Rust 代码的测量与调优",
       "positioning": "> 覆盖 Rust **性能优化**的核心方法论——从基准测试（criterion）、",
-      "line_count": 1186,
+      "line_count": 1211,
       "theorem_chains": [
         {
           "text": "| 性能优化：Rust 代码的测量与调优 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -59490,7 +59492,7 @@
       "layer": "L6",
       "title": "Blockchain & Smart Contract Security（区块链与智能合约安全）",
       "positioning": "",
-      "line_count": 972,
+      "line_count": 978,
       "theorem_chains": [
         {
           "text": "- **内存安全（Memory Safety） ⟹ 合约漏洞类别消除**: 重入攻击之外的溢出、越界、use-after-free 是 EVM/Solidity 合约的经典损失来源（整数溢出曾导致多起代币事件）；Rust 的借用（Borrowing）检查 + 默认溢出检查（debug panic / release 可配置）把这些类别在编译期或运行早期暴露，而非审计期事后发现。",
@@ -59924,7 +59926,7 @@
       "layer": "L6",
       "title": "WebAssembly 生态：Rust 的浏览器外运行时",
       "positioning": "> 系统分析 Rust 在 **WebAssembly (Wasm)** 生态中的核心地位，",
-      "line_count": 712,
+      "line_count": 716,
       "theorem_chains": [
         {
           "text": "| WebAssembly 生态：Rust 的浏览器外运行时 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -60044,7 +60046,7 @@
       "layer": "L6",
       "title": "许可证与合规：Rust 项目的法律工程",
       "positioning": "系统讲解 Rust **开源许可证选择**、**依赖合规**和**版权管理**",
-      "line_count": 701,
+      "line_count": 706,
       "theorem_chains": [
         {
           "text": "| 许可证与合规：Rust 项目的法律工程 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -63138,7 +63140,7 @@
       "layer": "L7",
       "title": "Rust 形式模型演进跟踪（1.79–1.97+）",
       "positioning": "本文件从**形式模型维度**跟踪 Rust 语言特性的演进，而非版本特性清单。仅收录对 Rust 的**所有权（Ownership）模型、类型系统（Type System）、异步（Async）语义、Unsafe 边界**有结构性影响的特性。",
-      "line_count": 2630,
+      "line_count": 2657,
       "theorem_chains": [
         {
           "text": "| Rust 形式模型演进跟踪（1.79–1.97+） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -63283,7 +63285,7 @@
       "layer": "L7",
       "title": "Rust Editions（语言版本）",
       "positioning": "补齐审计 §2.4 / §4 P2-2 缺口#6 指出的\"edition 2024 × 1.97 割裂\"。本节只做**交叉定位**，不重复版本页逐项解释；fallback 的推断推导落在承载页 [`27_type_checking_and_inference.md`](../../04_formal/00_type_theory/07_type_checking_and_inference.md) 与 [`31_never_type.md`](../../01_foundation/02_type_system/02_never_type.md)。",
-      "line_count": 361,
+      "line_count": 373,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将编译器版本、Edition、语法行为、迁移路径串联起来。",
@@ -63392,10 +63394,10 @@
       "matrix_rows": 35,
       "pre_post": {
         "pre": [
-          "[Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) · [Cargo Getting Started](../../06_ecosystem/01_cargo/15_cargo_getting_started.md) · [Module System](../../02_intermediate/05_modules_and_visibility/01_module_system.md)"
+          "> [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) ·"
         ],
         "post": [
-          "[Async Advanced](../../03_advanced/01_async/02_async_advanced.md) · [Cargo 1.96 Features](../../06_ecosystem/01_cargo/04_cargo_196_features.md) · [Rust Release Process](03_rust_release_process.md) · [Edition Guide](../01_edition_roadmap/02_edition_guide.md)"
+          "[Async Advanced](../../03_advanced/01_async/02_async_advanced.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -63460,7 +63462,7 @@
       "layer": "L7",
       "title": "Rust 的发布流程与 Nightly Rust",
       "positioning": "",
-      "line_count": 276,
+      "line_count": 283,
       "theorem_chains": [
         {
           "text": "| Nightly 通道 ⟹ 实验空间 | 每日构建包含最新特性 | 支持早期验证 |",
@@ -63546,6 +63548,7 @@
         "../01_edition_roadmap/02_edition_guide.md",
         "01_rust_version_tracking.md",
         "02_editions.md",
+        "migration_197_decision_tree.md",
         "rust_1_97_preview.md",
         "rust_1_97_stabilized.md",
         "rust_1_98_preview.md"
@@ -63559,7 +63562,7 @@
           "[Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.97.0 稳定特性](rust_1_97_stabilized.md)"
         ],
         "post": [
-          "[Rust 1.97.0 前沿预览](rust_1_97_preview.md) · [Rust 1.98+ 前沿预览](rust_1_98_preview.md) · 迁移判定树（P2-5，待落地）"
+          "[Rust 1.97.0 前沿预览](rust_1_97_preview.md) · [Rust 1.98+ 前沿预览](rust_1_98_preview.md) · [迁移判定树](migration_197_decision_tree.md)（P2-5，已落地）"
         ]
       },
       "backward_chains": 0,
@@ -63570,7 +63573,7 @@
       "layer": "L7",
       "title": "Rust 1.97 兼容性迁移判定树",
       "positioning": "",
-      "line_count": 798,
+      "line_count": 808,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -63726,10 +63729,10 @@
       "matrix_rows": 26,
       "pre_post": {
         "pre": [
-          "[Rust 1.97 稳定特性](rust_1_97_stabilized.md) · [Rust 版本跟踪](01_rust_version_tracking.md) · [Pin 与 Unpin](../../03_advanced/01_async/08_pin_unpin.md) · [类型强制与转换](../../01_foundation/02_type_system/04_coercion_and_casting.md) · [ABI](../../04_formal/05_rustc_internals/05_application_binary_interface.md) · [Linkage](../../03_advanced/04_ffi/03_linkage.md)"
+          "> [Rust 1.97 稳定特性](rust_1_97_stabilized.md) ·"
         ],
         "post": [
-          "[Rust 1.97 前沿预览](rust_1_97_preview.md) · [Rust 1.98+ 前沿预览](rust_1_98_preview.md)"
+          "> [Rust 1.97 前沿预览](rust_1_97_preview.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -65687,7 +65690,7 @@
       "layer": "L7",
       "title": "Rust 1.97.0 稳定特性",
       "positioning": "",
-      "line_count": 570,
+      "line_count": 572,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [

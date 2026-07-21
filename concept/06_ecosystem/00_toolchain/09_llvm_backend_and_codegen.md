@@ -315,6 +315,8 @@ Cranelift 编译速度快但优化较弱，适合 debug 构建或需要快速反
 
 > 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
 
+- **[Rust 1.97.1](../../07_future/00_version_tracking/rust_1_97_1.md)**
+  - 修复 LLVM 优化导致的误编译；回退 1.97.0 中提高触发概率的 IR 变更
 - **[Rust 1.91](../../07_future/00_version_tracking/rust_1_91_stabilized.md)**
   - 内部升级 LLVM 21
 

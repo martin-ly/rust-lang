@@ -10,12 +10,24 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×App — 规范应用
-> **前置依赖**: [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) · [Cargo Getting Started](../../06_ecosystem/01_cargo/15_cargo_getting_started.md) · [Module System](../../02_intermediate/05_modules_and_visibility/01_module_system.md)
-> **后置概念**: [Async Advanced](../../03_advanced/01_async/02_async_advanced.md) · [Cargo 1.96 Features](../../06_ecosystem/01_cargo/04_cargo_196_features.md) · [Rust Release Process](03_rust_release_process.md) · [Edition Guide](../01_edition_roadmap/02_edition_guide.md)
-> **L1 基础依赖**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Module System](../../02_intermediate/05_modules_and_visibility/01_module_system.md)
+> **前置依赖**:
+> [Toolchain](../../06_ecosystem/00_toolchain/01_toolchain.md) ·
+> [Cargo Getting Started](../../06_ecosystem/01_cargo/15_cargo_getting_started.md) ·
+> [Module System](../../02_intermediate/05_modules_and_visibility/01_module_system.md)
+> **后置概念**: [Async Advanced](../../03_advanced/01_async/02_async_advanced.md) ·
+> [Cargo 1.96 Features](../../06_ecosystem/01_cargo/04_cargo_196_features.md) ·
+> [Rust Release Process](03_rust_release_process.md) ·
+> [Edition Guide](../01_edition_roadmap/02_edition_guide.md)
+> **L1 基础依赖**:
+> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) ·
+> [Module System](../../02_intermediate/05_modules_and_visibility/01_module_system.md)
 > **定理链**: Compiler Version → Edition → Syntax/Behavior → Migration
 >
-> **来源**: [The Rust Programming Language — Appendix E: Editions](https://doc.rust-lang.org/book/appendix-05-editions.html) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html) · [Rust Reference — Editions](https://doc.rust-lang.org/reference/items.html?search=edition)
+> **来源**:
+> [The Rust Programming Language — Appendix E: Editions](https://doc.rust-lang.org/book/appendix-05-editions.html) ·
+> [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/index.html) ·
+> [Rust Reference — Editions](https://doc.rust-lang.org/reference/items.html?search=edition)
 
 ---
 
@@ -214,9 +226,9 @@ flowchart TD
 | `unsafe_op_in_unsafe_fn` | Edition 2024（1.85.0 起随 edition） | edition 2024：**warn**；edition ≤2021：**allow** | 否（属 `rust_2024_compatibility` group） | `cargo fix --edition`（自动迁移）；或 crate 根 `#![warn(unsafe_op_in_unsafe_fn)]` 手动定位 / `#![allow(...)]` 静默 | [Edition Guide — unsafe_op_in_unsafe_fn](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html) |
 | `dead_code_pub_in_binary` | Rust **1.97.0**（工具链，全 edition） | **allow**（allow-by-default） | 否（allow-by-default 不随 `-D warnings` 自动启用） | `#![warn(dead_code_pub_in_binary)]` 或 `[lints.rust] dead_code_pub_in_binary = "warn"` 显式启用（常用于 CI） | [`rust_1_97_stabilized.md`](rust_1_97_stabilized.md) §2.2；[releases.rs 1.97.0](https://releases.rs/docs/1.97.0/) |
 | `linker_messages` | Rust **1.97.0**（工具链，全 edition） | **warn**（默认显示链接器输出） | **否（特殊 lint，不受 `warnings` group / `build.warnings` 控制）** | `#![allow(linker_messages)]` 或 `[lints.rust] linker_messages = "allow"` 静默；**不能**靠 `-D warnings` 升级也不能靠 `build.warnings` 关闭 | [`rust_1_97_stabilized.md`](rust_1_97_stabilized.md) §2.8；[releases.rs 1.97.0](https://releases.rs/docs/1.97.0/) |
-| `varargs_without_pattern` | Rust **1.97.0** 起**在依赖中也报告**（lint 本身更早存在） | **warn**（默认级别 **⚠需专家复核**；版本页与 releases.rs 仅确认"在依赖中报告"这一变更，未列默认级别） | 是（按常规 warn-by-default lint 处理；**⚠需专家复核**其 group 归属） | `#![allow(varargs_without_pattern)]` 临时静默，或升级依赖修复变参 FFI 模式 | [releases.rs 1.97.0](https://releases.rs/docs/1.97.0/)（"report the `varargs_without_pattern` lint in deps"）；[`feature_domain_matrix_197.md`](feature_domain_matrix_197.md) #27 |
+| `varargs_without_pattern` | Rust **1.97.0** 起**在依赖中也报告**（lint 本身更早存在） | **warn**（rustc stable `warn-by-default` 列表收录；来源：[Warn-by-default Lints](https://doc.rust-lang.org/stable/rustc/lints/listing/warn-by-default.html)） | **是**（`warnings` lint group 会改变其级别；`-D warnings` / `build.warnings` 可将其提升为错误） | `#![allow(varargs_without_pattern)]` 临时静默，或升级依赖修复变参 FFI 模式 | [releases.rs 1.97.0](https://releases.rs/docs/1.97.0/)（"report the `varargs_without_pattern` lint in deps"）；[rustc stable — Warn-by-default Lints](https://doc.rust-lang.org/stable/rustc/lints/listing/warn-by-default.html) |
 
-> ⚠**复核标记（2 处，同属 `varargs_without_pattern` 一行：默认级别 + `warnings` group 归属）**：
+> 上表 `varargs_without_pattern` 的默认级别与 `warnings` group 归属已由 rustc stable `warn-by-default` 列表确认（来源：[Warn-by-default Lints](https://doc.rust-lang.org/stable/rustc/lints/listing/warn-by-default.html)），不再保留复核标记。
 
 **迁移开关代码示例（Edition 2024 / Rust 1.97.0+）**：
 

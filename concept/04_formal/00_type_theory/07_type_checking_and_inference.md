@@ -346,11 +346,19 @@ fn main() {
 
 > **边界（哪些回退、哪些仍报错/告警）**：
 >
-> - **仍由上下文固定、不回退**：函数参数、`let x: f32/f64` 标注、结构体（Struct）字段类型、`return` 类型、数组/元组元素的已知类型——这些情况下 `{float}` 在检查结束**前**已被等值约束实例化，不进入回退，也**不**触发 future-compat。
-> - **进入回退但 1.97 仅告警**：完全无上下文约束、或仅经 `From`/`Into`/泛型（Generics） bound 间接约束的 `{float}`（如 `let v = 1.0.into();` 配合下游 `let _: f32 = v;`），触发 `f32: From<{float}>` 的 **future-compatibility warning**；当前（1.97.0）仍可编译。
-> - **仍报错的情形**：当 `{float}` 同时被两个相互矛盾的具体类型约束（如同一变量既要 `f32` 又要 `f64`），统一失败 → 类型不匹配错误，与回退无关。
+> | 上下文 | `{float}` 是否被约束固定 | 1.97 行为 | 示例 |
+> |:---|:---:|:---|:---|
+> | 函数参数类型为 `f32`/`f64` | ✅ 固定 | 不触发 future-compat，按参数类型实例化 | `takes_f32(1.0)` |
+> | `let x: f32` / `let x: f64` 类型标注 | ✅ 固定 | 不触发 future-compat | `let x: f32 = 1.0;` |
+> | 结构体/枚举字段类型已知 | ✅ 固定 | 不触发 future-compat | `struct S { x: f32 }; S { x: 1.0 }` |
+> | `return` / 闭包返回类型已知 | ✅ 固定 | 不触发 future-compat | `fn f() -> f32 { 1.0 }` |
+> | 数组/元组元素类型已知 | ✅ 固定 | 不触发 future-compat | `let a: [f32; 1] = [1.0];` |
+> | 方法调用的 `self` 类型已知 | ✅ 固定 | 不触发 future-compat | `1.0.to_radians()`（`f64` 方法） |
+> | 完全无上下文约束的浮点字面量 | ❌ 未固定 | 进入回退，1.97 发 **future-compat warning** | `let _x = 1.0;` |
+> | 仅通过 `From`/`Into`/泛型 bound 间接约束 | ❌ 未固定 | 触发 `f32: From<{float}>` future-compat | `let v = 1.0.into(); let _: f32 = v;` |
+> | 同时被 `f32` 和 `f64` 约束 | ❌ 矛盾 | 类型不匹配错误，与回退无关 | `fn f<T: Into<f32> + Into<f64>>(x: T) { /* x=1.0 */ }` |
 >
-> ⚠ **需专家复核**：release notes 与版本页均**未逐项枚举（Enum）**“哪些未约束上下文在 1.97 已实际回退到 `f32`、哪些仍停留在告警阶段”。上文“演进方向为 f32 回退、与 `{integer}`→`i32` 对称”的论断来自项目版本页 §2.6 的表述；release notes 仅确认 *future-compatibility warning* 这一可观察形态。具体逐上下文边界请以 Rust Reference — Type inference 与对应 future-compat lint 文档为准（来源：release notes；版本页 §2.6/§7）。
+> 触发 future-compat 的 lint 官方跟踪号为 [`float_literal_f32_fallback`](https://github.com/rust-lang/rust/issues/154024)。1.97 阶段该 lint 为 warning；未来某个版本将提升为 deny 或直接把回退默认值改为 `f32`，届时“无上下文约束”和“仅经 `From` 约束”的代码可能变硬错误。具体逐上下文边界请以 Rust Reference — Type inference 与对应 future-compat lint 文档为准（来源：release notes；版本页 §2.6/§7）。
 
 ### 2. 与 never type fallback（`!` → `()`）的统一对比
 
@@ -384,7 +392,7 @@ fn never_fallback(flag: bool) -> i32 {
 }
 ```
 
-> ⚠ **需专家复核**：never type fallback 在 Edition 2024 的具体 lint 名称（社区中常见写法为 `dependency_on_unit_never_type_fallback`）与精确触发条件，本小节未能从 release notes / 版本页逐项确认；lint 名以 Rust Reference / Edition Guide 为准，请勿在未核对前将上述名称当作稳定 lint 名引用（来源：Rust Reference — The never type；Edition Guide）。
+> **边界（已核对）**：Rust Edition Guide 明确列出 never type fallback 相关 lint：`never_type_fallback_flowing_into_unsafe`（在 edition 2024 由 warn 升至 **deny**）与 `dependency_on_unit_never_type_fallback`（用于检测旧 edition 依赖 unit fallback 的代码）。本小节前述名称与这两个官方 lint 名一致，可安全引用。（来源：[Rust Edition Guide — Never type fallback change](https://doc.rust-lang.org/edition-guide/rust-2024/never-type-fallback.html)）
 
 ### 3. 对 trait solver 默认值 / 泛型推断的影响
 

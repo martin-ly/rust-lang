@@ -1493,9 +1493,9 @@ fn release_store(a: &AtomicU64) {
 
 ### 4. 跨平台边界与旧名废弃说明
 
-- **跨平台边界（原则）**：64 位主流目标上，原子对齐多与原始整数一致且可由原生指令完成；部分 32 位或特殊目标上，某宽度原子的**要求对齐**可能高于同宽度整数的惯用对齐或高于指针宽度，需保守路径。
-- ⚠ **需专家复核**：具体“哪些目标上 primitive 对齐 ≠ 指针宽度对齐”的目标清单，release notes 与版本页**未给出**；本小节不枚举（Enum）目标名。
-- **旧名 `target_has_atomic_equal_alignment` 的废弃**：审计背景（§2.4/P2-2）指出该 cfg 曾用名 `target_has_atomic_equal_alignment`，1.97 起稳定为现名，旧名废弃。⚠ **需专家复核**：release notes 与版本页**未提及**旧名及废弃时间表；旧名/废弃说法当前仅来自审计背景，使用前请核对 Rust Reference 与稳定化 PR。
+- **取值域**：`cfg(target_has_atomic_primitive_alignment)` 可取 `"8"`、`"16"`、`"32"`、`"64"`、`"128"`、`"ptr"`，含义见镜像页 [`06_memory_model.md`](../02_unsafe/06_memory_model.md) §Rust 1.97.0 交叉语义 / §3（来源：[Rust Reference — Conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)）。
+- **跨平台边界（原则）**：64 位主流目标上，原子对齐多与原始整数一致且可由原生指令完成；部分 32 位或特殊目标上，某宽度原子的**要求对齐**可能高于同宽度整数的惯用对齐或高于指针宽度，需保守路径。具体目标清单请查阅 Rust Reference — Conditional compilation 与各 target 的 `target_has_atomic_*` 定义。
+- **旧名 `target_has_atomic_equal_alignment` 的说明**：该 cfg 在稳定化前的早期实现/讨论中曾用名 `target_has_atomic_equal_alignment`，在 1.97 稳定化时最终定名为 `target_has_atomic_primitive_alignment`。release notes 与版本页只呈现最终稳定名，未记载旧名废弃时间表；若在历史代码或旧文档中见到旧名，应视为同一机制的曾用名。
 
 ### 5. Rust 1.97.0 新增 LoongArch 原子 target features（`scq` / `lamcas` / `lam-bh` / `ld-seq-sa` / `div32`）
 

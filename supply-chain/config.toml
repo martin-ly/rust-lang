@@ -486,6 +486,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.async-trait]]
+version = "0.1.91"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.atomic-waker]]
 version = "1.1.2"
 criteria = "safe-to-run"
@@ -672,6 +678,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "cargo-vet 豁免更新：延续 1.25.0 豁免策略，尚未正式代码审计。"
 
+[[exemptions.bytemuck]]
+version = "1.25.2"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.bytemuck_derive]]
 version = "1.11.0"
 criteria = "safe-to-run"
@@ -726,6 +738,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.cc]]
+version = "1.3.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.cfg-if]]
 version = "1.0.4"
 criteria = "safe-to-run"
@@ -779,6 +797,12 @@ version = "4.6.2"
 criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-16 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
+[[exemptions.clap]]
+version = "4.6.3"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.clap_builder]]
 version = "4.6.0"
@@ -1411,6 +1435,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.fastrand]]
+version = "2.5.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.fax]]
 version = "0.2.7"
 criteria = "safe-to-run"
@@ -1506,11 +1536,29 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.futures-channel]]
+version = "0.3.33"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
+[[exemptions.futures-core]]
+version = "0.3.33"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.futures-io]]
 version = "0.3.32"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.futures-io]]
+version = "0.3.33"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.futures-lite]]
 version = "1.13.0"
@@ -1524,11 +1572,35 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.futures-macro]]
+version = "0.3.33"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
+[[exemptions.futures-sink]]
+version = "0.3.33"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
+[[exemptions.futures-task]]
+version = "0.3.33"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.futures-timer]]
 version = "3.0.4"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.futures-util]]
+version = "0.3.33"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.gemm]]
 version = "0.19.0"
@@ -1846,6 +1918,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.hyper]]
+version = "1.11.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.hyper-rustls]]
 version = "0.27.9"
 criteria = "safe-to-run"
@@ -2061,6 +2139,12 @@ version = "0.2.186"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.libc]]
+version = "0.2.187"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.libloading]]
 version = "0.8.9"
@@ -3124,6 +3208,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.proc-macro2]]
+version = "1.0.107"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.proc-macro2-diagnostics]]
 version = "0.10.1"
 criteria = "safe-to-run"
@@ -3195,6 +3285,12 @@ version = "1.0.46"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.quote]]
+version = "1.0.47"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.r-efi]]
 version = "5.3.0"
@@ -3363,11 +3459,23 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.ref-cast]]
+version = "1.0.26"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.ref-cast-impl]]
 version = "1.0.25"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.ref-cast-impl]]
+version = "1.0.26"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.regex]]
 version = "1.13.0"
@@ -3651,6 +3759,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.serde]]
+version = "1.0.229"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.serde-xml-rs]]
 version = "0.8.2"
 criteria = "safe-to-run"
@@ -3669,11 +3783,23 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.serde_core]]
+version = "1.0.229"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.serde_derive]]
 version = "1.0.228"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.serde_derive]]
+version = "1.0.229"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.serde_derive_internals]]
 version = "0.29.1"
@@ -3698,6 +3824,12 @@ version = "0.1.20"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.serde_repr]]
+version = "0.1.21"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.serde_with]]
 version = "3.21.0"
@@ -4008,6 +4140,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.thiserror]]
+version = "2.0.19"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.thiserror-impl]]
 version = "1.0.69"
 criteria = "safe-to-run"
@@ -4019,6 +4157,12 @@ version = "2.0.18"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.thiserror-impl]]
+version = "2.0.19"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.thread_local]]
 version = "1.1.10"
@@ -4103,6 +4247,12 @@ version = "1.53.0"
 criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-17 cargo update 补丁升级 (1.52.4 -> 1.53.0)；本 crate 尚未经过正式代码审计。"
+
+[[exemptions.tokio]]
+version = "1.53.1"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.tokio-macros]]
 version = "2.7.0"
@@ -4582,11 +4732,23 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.webpki-root-certs]]
+version = "1.0.9"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.webpki-roots]]
 version = "1.0.8"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.webpki-roots]]
+version = "1.0.9"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.weezl]]
 version = "0.1.12"
@@ -5079,6 +5241,18 @@ version = "5.2.1"
 criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-18 cargo update 补丁升级 (5.2.0 -> 5.2.1)；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.zerocopy]]
+version = "0.8.55"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
+[[exemptions.zerocopy-derive]]
+version = "0.8.55"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.zerofrom]]
 version = "0.1.8"

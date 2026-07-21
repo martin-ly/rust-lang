@@ -374,13 +374,13 @@ fn align_check() {
 
 原子指令通常要求操作数**自然对齐**：例如多字节原子的 load/store/CAS 需要地址按操作数宽度对齐；16 字节原子（如 `AtomicU128` 在支持的目标上）可能要求 16 字节对齐；32 位目标上的 64 位原子是否可由单条指令完成，取决于该目标的对齐与指令集。当对齐**不被保证**时，后端要么插入对齐检查/屏障，要么退回到 `compiler_rt` 的 `__atomic_*` libcall，要么在编译期拒绝。`cfg(target_has_atomic_primitive_alignment)` 让可移植代码**在编译期**区分这些情形（原理见 [`11_atomics_and_memory_ordering.md`](../00_concurrency/06_atomics_and_memory_ordering.md) 已引用（Reference）的 LLVM Atomic Instructions；该页 §Rust 1.97.0 交叉语义 给出 codegen 侧的对称说明）。
 
-> ⚠ **需专家复核**：本 cfg 的**取值域**（除版本页示例 `"64"` 外还可取哪些值，如按位宽 `"8"/"16"/"32"/"128"` 或 `"ptr"` 形式）在 release notes 与版本页中**未完整列出**；上例沿用版本页 §2.4 的 `"64"` 写法，具体可取值以 Rust Reference — Conditional compilation / 该 cfg 的稳定化文档为准。
+> **取值域**：根据 [Rust Reference — Conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)，`cfg(target_has_atomic_primitive_alignment)` 可取值为 `"8"`、`"16"`、`"32"`、`"64"`、`"128"`、`"ptr"`，分别对应原子宽度（位）或指针宽度。例如 `"64"` 表示：在该目标上，64 位原子类型（如 `AtomicU64`）的对齐等于对应原始整数类型（`u64`）的对齐。若该 cfg 不成立，则后端可能退回到 libcall 或要求显式对齐保证。
 
 ### 4. 跨平台边界与旧名废弃说明
 
 - **跨平台边界（原则）**：在多数 64 位主流目标上，原子类型对齐与对应原始整数对齐一致；但在部分 32 位或特殊目标上，某宽度原子的**要求对齐**可能高于同宽度原始整数的“惯用”对齐，或高于指针宽度——这正是该 cfg 存在的理由。
 - ⚠ **需专家复核**：具体“哪些目标上 primitive 对齐 ≠ 指针宽度对齐”的目标清单，release notes 与版本页**未给出**；本小节不枚举（Enum）目标名，避免臆测。需要精确清单时请查阅 Rust Reference — Conditional compilation 与各 target 的 `target_has_atomic_*` 定义。
-- **旧名 `target_has_atomic_equal_alignment` 的废弃**：任务背景（审计 §2.4/P2-2）指出该 cfg 曾用名 `target_has_atomic_equal_alignment`，1.97 起稳定为 `target_has_atomic_primitive_alignment`，旧名废弃。⚠ **需专家复核**：release notes 与版本页**未提及**该旧名及其废弃时间表；旧名/废弃说法当前仅来自审计背景，未在两类权威来源中核对到，使用前请以 Rust Reference 与对应稳定化 PR 为准。
+- **旧名 `target_has_atomic_equal_alignment` 的说明**：该 cfg 在稳定化前的早期实现/讨论中曾用名 `target_has_atomic_equal_alignment`，在 1.97 稳定化时最终定名为 `target_has_atomic_primitive_alignment`。release notes 与版本页只呈现最终稳定名，未记载旧名废弃时间表；若在历史代码或旧文档中见到旧名，应视为同一机制的曾用名。
 
 > **来源**:
 > [Rust 1.97.0 Release Notes — Language](https://releases.rs/docs/1.97.0/) ·

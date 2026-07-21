@@ -893,9 +893,9 @@ fn demo_fixed() { takes_f32(1.0_f32); let _: f64 = f64::from(2.0_f64); }
 | `never_type_fallback_flowing_into_unsafe` | **edition 2024** | 2024：**deny**（由 warn 升） | — | 见 §7.2 显式类型标注 |
 | `dead_code_pub_in_binary` | **工具链 1.97** | allow | 否（allow-by-default） | `#![warn(dead_code_pub_in_binary)]` 或 `[lints.rust] = "warn"` 启用 |
 | `linker_messages` | **工具链 1.97** | warn | **否（特殊 lint）** | 仅 `#![allow(linker_messages)]` / `[lints.rust] linker_messages = "allow"` 静默 |
-| `varargs_without_pattern` | **工具链 1.97**（在依赖中报告） | warn（**⚠需专家复核**默认级别） | 是（**⚠需专家复核**） | 升级依赖或 `#![allow(varargs_without_pattern)]` 临时静默 |
+| `varargs_without_pattern` | **工具链 1.97**（在依赖中报告） | **warn**（rustc stable `warn-by-default` 列表收录；来源：[Warn-by-default Lints](https://doc.rust-lang.org/stable/rustc/lints/listing/warn-by-default.html)） | **是**（`warnings` lint group 覆盖；`-D warnings` / `build.warnings` 可将其提升为错误） | 升级依赖或 `#![allow(varargs_without_pattern)]` 临时静默 |
 
-> ⚠**复核标记（2 处，同属 `varargs_without_pattern` 一行：默认级别 + group 归属）**：`varargs_without_pattern` 的**默认级别与 `warnings` group 归属**标 ⚠。其 **lint 名**与 **1.97 起在依赖中报告**这一行为变更已由 releases.rs 确认（非编造）；仅默认级别/group 归属需进一步核对 rustc lint registry。
+> 上表 `varargs_without_pattern` 的默认级别与 `warnings` group 归属已由 rustc stable `warn-by-default` 列表确认（来源：[Warn-by-default Lints](https://doc.rust-lang.org/stable/rustc/lints/listing/warn-by-default.html)），不再保留复核标记。
 
 ### 7.5 来源与反链
 

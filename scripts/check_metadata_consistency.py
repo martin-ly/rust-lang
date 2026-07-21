@@ -235,6 +235,10 @@ D5_WHITELIST_FILES = {
         "跨语言对比页客观陈述 D `-preview=dip1000` 标志名与 Rust 尚未稳定特性；nightly/preview 为对比事实本身",
     "concept/05_comparative/02_managed_languages/11_rust_vs_fsharp.md":
         "跨语言对比页客观陈述 Rust 实验性特性边界；nightly/preview 为对比事实本身",
+    # ---- 2026-07-21 复核登记：safety_tags_in_formal 为稳定层重定向 stub，
+    # 目标页为 preview 权威页，preview 为页名与目标概念一部分，非稳定层正文残留。
+    "concept/04_formal/02_separation_logic/03_safety_tags_in_formal.md":
+        "稳定层重定向 stub，指向 `07_future/02_preview_features/03_safety_tags_preview.md`；preview 为页名/目标概念一部分",
 }
 
 

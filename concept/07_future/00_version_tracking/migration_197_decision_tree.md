@@ -6,16 +6,23 @@
 > **受众**: [专家]
 > **内容分级**: [综述级]
 > **权威来源**: 本文件为 `concept/` 权威页（Rust 1.97 兼容性**迁移判定**的唯一权威来源）。
-> **Rust 版本**: **1.97.0+ (Edition 2024)**
+> **Rust 版本**: **1.97.1+ (Edition 2024)**
 > **Bloom 层级**: L3-L4（应用/分析：将版本变更映射到具体代码修复）
 > **A/S/P 标记**: **P** — Process（迁移流程与判定）
 > **双维定位**: P×App — 把版本兼容性变更应用到存量代码
-> **前置概念**: [Rust 1.97 稳定特性](rust_1_97_stabilized.md) · [Rust 版本跟踪](01_rust_version_tracking.md) · [Pin 与 Unpin](../../03_advanced/01_async/08_pin_unpin.md) · [类型强制与转换](../../01_foundation/02_type_system/04_coercion_and_casting.md) · [ABI](../../04_formal/05_rustc_internals/05_application_binary_interface.md) · [Linkage](../../03_advanced/04_ffi/03_linkage.md)
-> **后置概念**: [Rust 1.97 前沿预览](rust_1_97_preview.md) · [Rust 1.98+ 前沿预览](rust_1_98_preview.md)
+> **前置概念**:
+> [Rust 1.97 稳定特性](rust_1_97_stabilized.md) ·
+> [Rust 版本跟踪](01_rust_version_tracking.md) ·
+> [Pin 与 Unpin](../../03_advanced/01_async/08_pin_unpin.md) ·
+> [类型强制与转换](../../01_foundation/02_type_system/04_coercion_and_casting.md) ·
+> [ABI](../../04_formal/05_rustc_internals/05_application_binary_interface.md) ·
+> [Linkage](../../03_advanced/04_ffi/03_linkage.md)
+> **后置概念**:
+> [Rust 1.97 前沿预览](rust_1_97_preview.md) ·
+> [Rust 1.98+ 前沿预览](rust_1_98_preview.md)
 > **companion reference**: 纯特性清单速查见 [`docs/03_reference/quick_reference/21_rust_197_features_cheatsheet.md`](../../../docs/03_reference/quick_reference/21_rust_197_features_cheatsheet.md)
-> **最后更新**: 2026-07-11
-> **状态**: ✅ 已对齐 Rust 1.97.0 stable
-
+> **最后更新**: 2026-07-21
+> **状态**: ✅ 已对齐 Rust 1.97.1 stable（1.97.0 特性 + 1.97.1 LLVM 补丁；1.97.1 无新增语言/库/Cargo 特性）
 > **主要来源（事实出处，判定树不引用（Reference）外部页作为叶子）**:
 > · 版本页兼容性表与 §2.6/§2.7/§2.8：[`rust_1_97_stabilized.md`](rust_1_97_stabilized.md)
 > · 31 项特性清单（Compatibility 类）：[`reports/RUST_197_CONTENT_GAP_ANALYSIS_2026_07_11.md`](../../../reports/RUST_197_CONTENT_GAP_ANALYSIS_2026_07_11.md)
@@ -62,7 +69,9 @@
 
 ```mermaid
 flowchart TD
-    START["升级到 Rust 1.97 后 cargo check 或 cargo build 出现异常"] --> Q1{"异常发生在哪个阶段"}
+    START["升级到 Rust 1.97.x 后 cargo check 或 cargo build 出现异常"] --> Q0{"当前 rustc 版本是否 >= 1.97.1"}
+    Q0 -->|否| UP["动作：先升级到 Rust 1.97.1（修复 LLVM 误编译；该问题自 1.87 起存在，建议所有 1.87+ 项目升级）"]
+    Q0 -->|是| Q1{"异常发生在哪个阶段"}
     Q1 -->|编译期硬错误, 信息含 export_name 或空字符串| R1["进入 §3 空 export_name 判定树"]
     Q1 -->|future-compat 警告, 信息含 float 推断或 From| R2["进入 §4 f32 From float 判定树"]
     Q1 -->|类型不匹配, 期望 Pin 引用了不同类型, 含 pin| R3["进入 §5 pin 类型签名判定树"]
@@ -70,6 +79,7 @@ flowchart TD
     Q1 -->|仅 Windows 目标 socket 关闭分支行为变化| R5["进入 §7 WSAESHUTDOWN 判定树"]
     Q1 -->|编译期硬错误, 信息含模块路径段不接受泛型参数| R6["进入 §8 模块路径泛型判定树"]
     Q1 -->|以上皆否| R7["对照 §1 表格逐行复核特征, 仍未命中则不属于本文五类变化"]
+    UP --> Q1
 ```
 
 > 说明：本节为路由而非迁移终点；真正的可执行叶子在 §3–§8。本节节点为导航动作，不替代各小节判定树。
