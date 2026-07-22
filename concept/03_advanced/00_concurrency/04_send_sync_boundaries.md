@@ -3,8 +3,7 @@
 # Send/Sync 边界判定
 
 > **EN**: Send/Sync Boundary Judgment — Trait Objects, Closures, and Async State Machines
-> **Summary**:
-> How to decide whether a Rust type is Send or Sync when it appears as a trait object, a closure capture environment, an async future, or an opaque `impl Trait` return type, with practical counterexamples and a decision matrix.
+> **Summary**: How to decide whether trait objects, closures, async futures, and `impl Trait` returns are Send or Sync, with counterexamples and a decision matrix.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L3-L4
 > **受众**: [专家]

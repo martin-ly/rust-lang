@@ -1,11 +1,7 @@
 # 链式 let 与 let 守卫（Let Chains & If-Let Guards）
 
 > **EN**: Let Chains and If-Let Guards
-> **Summary**:
-> Rust `let chains` 与 `if-let guards` 的权威语义说明：链式条件中的模式绑定可见性、可反驳性约束、`&&` 与 `||` 的不可混用规则，以及与嵌套 `if let` / `match` 的等价转换。
-> Authoritative semantics for Rust `let chains` and `if-let guards`:
-> pattern-binding visibility in chained conditions, refutability constraints,
-> the prohibition on mixing `&&` and `||`, and equivalence to nested `if let` / `match`.
+> **Summary**: Authoritative semantics for Rust `let chains` and `if-let guards` covering pattern-binding visibility, refutability constraints, `&&`-only connection, and nested equivalence.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [初学者]

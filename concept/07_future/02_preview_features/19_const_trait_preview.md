@@ -1,7 +1,7 @@
 # Const Trait 实现预览
 
-**EN**: Const Trait Implementation Preview
-**Summary**: Entry stub pointing to the canonical preview page for const trait implementations (`~const Trait`, `const impl`) in Rust; full semantics are maintained in `06_const_trait_impl_preview.md`.
+> **EN**: Const Trait Implementation Preview
+> **Summary**: Redirect stub for the const trait implementations preview (`~const Trait`, `const impl`), linking to the canonical page covering nightly syntax, semantics, and migration boundaries.
 
 > **权威来源**: 本文件为重定向 stub。Const Trait 预览的完整概念解释统一维护在：
 > [`06_const_trait_impl_preview.md`](06_const_trait_impl_preview.md)

@@ -1,8 +1,12 @@
-# Rust 1.97 特性速查表 {#rust-197-特性速查表}
+# Rust 1.97 特性速查表（Features Cheatsheet / Quick Reference）
 
 > **EN**: Rust 1.97 Features Cheatsheet
 > **Summary**: Rust 1.97.0（2026-07-09 stable）特性速查。完整说明与代码示例参见 `concept/07_future/00_version_tracking/rust_1_97_stabilized.md`。
-> **权威来源**: [`concept/07_future/00_version_tracking/rust_1_97_stabilized.md`](../../../concept/07_future/00_version_tracking/rust_1_97_stabilized.md)
+>
+> **权威来源**:
+>
+> - 完整特性说明请见 [`concept/07_future/00_version_tracking/rust_1_97_stabilized.md`](../../../concept/07_future/00_version_tracking/rust_1_97_stabilized.md)；
+> - 兼容性迁移判定与修复动作的**唯一权威来源**为 [`concept/07_future/00_version_tracking/migration_197_decision_tree.md`](../../../concept/07_future/00_version_tracking/migration_197_decision_tree.md)。
 >
 > **分级**: [A]
 > **Bloom 层级**: L2
@@ -59,9 +63,7 @@
 
 ## 兼容性注意
 
-> 完整迁移判定树与修复动作请见权威页 [`concept/07_future/00_version_tracking/migration_197_decision_tree.md`](../../../concept/07_future/00_version_tracking/migration_197_decision_tree.md)。本节仅列出关键词，不重复迁移动作。
-
-- v0 symbol mangling、空 `export_name`、`pin!` deref coercion、Windows `WSAESHUTDOWN→BrokenPipe` 等变化均已在迁移判定树中给出可执行修复步骤。
+> 完整迁移判定树与可执行修复动作请见权威页 [`concept/07_future/00_version_tracking/migration_197_decision_tree.md`](../../../concept/07_future/00_version_tracking/migration_197_decision_tree.md)。本节不再重复迁移动作，仅提示：涉及空 `export_name`、`pin!` deref coercion、Windows socket error mapping 等变化的代码，请按判定树逐步排查。
 
 > **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-07-10

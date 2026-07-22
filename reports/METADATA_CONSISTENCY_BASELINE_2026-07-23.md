@@ -9,9 +9,9 @@
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
 | D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
-| D6 Summary 低信息量模板套话 | 9 | 1.7% | >=3% | pass |
+| D6 Summary 低信息量模板套话 | 0 | 0.0% | >=3% | pass |
 
-**受影响文件总数**: 9 / 544
+**受影响文件总数**: 0 / 544
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -101,30 +101,15 @@
 
 ### D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥（0）
 
-
 ### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（0）
-
 
 ### D3 关键字段同文件重声明（0）
 
-
 ### D4 文首块 Rust 版本号自矛盾（0）
-
 
 ### D5 稳定层正文残留 nightly/preview/unstable（0）
 
-
-### D6 Summary 低信息量模板套话（9）
-
-- `concept/00_meta/02_sources/01_authority_source_map.md` — Summary 为空
-- `concept/00_meta/03_audit/01_concept_audit_guide.md` — Summary 为空
-- `concept/01_foundation/02_type_system/01_type_system.md` — Summary 为空
-- `concept/01_foundation/04_control_flow/03_let_chains.md` — Summary 为空
-- `concept/02_intermediate/01_generics/02_const_generics.md` — Summary 为空
-- `concept/03_advanced/00_concurrency/04_send_sync_boundaries.md` — Summary 为空
-- `concept/07_future/00_version_tracking/rust_1_95_stabilized.md` — Summary 为空
-- `concept/07_future/00_version_tracking/rust_1_97_1.md` — Summary 为空
-- `concept/07_future/02_preview_features/19_const_trait_preview.md` — Summary 为空
+### D6 Summary 低信息量模板套话（0）
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 

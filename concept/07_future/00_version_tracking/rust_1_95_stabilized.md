@@ -1,11 +1,7 @@
 # Rust 1.95.0 稳定特性
 
 > **EN**: Rust 1.95.0 Stabilized Features
-> **Summary**:
-> Rust 1.95.0（2026-04-16 stable）引入的关键语言与库特性：
-> `cfg_select!` 宏（Macro）、`if let` guards、路径段关键字重命名导入、`core::range` 模块（Module）、原子 `update` / `try_update`、
-> 集合可变引用（Mutable Reference）插入、`as_ref_unchecked` / `as_mut_unchecked`、`Layout` 新 API、
-> `cold_path` 提示、布尔 `TryFrom<{integer}>`、`MaybeUninit` 与 `Cell` 数组互转，以及 PowerPC/PowerPC64 内联汇编（Inline Assembly）稳定化。
+> **Summary**: A tour of Rust 1.95.0 stabilized language and library features including `cfg_select!`, `if let` guards, `core::range`, atomic updates, and layout APIs.
 >
 > **受众**: [专家]
 > **Bloom 层级**: L2-L3

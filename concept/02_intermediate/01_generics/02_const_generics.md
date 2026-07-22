@@ -3,9 +3,7 @@
 # Const Generics（常量泛型）：值作为类型参数
 
 > **EN**: Const Generics — Values as Type Parameters
-> **Summary**:
-> Const generics allow types, functions, and impls to be parameterized by compile-time constant values (e.g. `<const N: usize>`), making fixed-size arrays `[T; N]` and similar value-indexed abstractions expressible without macros or type-level encodings.
-> This page is the canonical reference for their motivation, syntax, the stable boundary of `min_const_generics` versus the nightly `generic_const_exprs`/`adt_const_params` in Rust 1.97.0, monomorphization semantics, and the decision boundary against macros and type-level naturals.
+> **Summary**: Const generics allow types, functions, and impls to be parameterized by compile-time constants, covering stable syntax, nightly extensions, monomorphization, and macro alternatives.
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L2-L3

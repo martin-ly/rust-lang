@@ -7,10 +7,7 @@
 # Type System Basics（类型系统基础）
 >
 > **EN**: Type System
-> **Summary**:
-> Rust's static type system combines scalar and compound types with algebraic data types, pattern matching, generics, and trait bounds.
-> This chapter covers structs, enums, the match expression, type inference, and the path from everyday types toward formal type theory,
-> giving learners the vocabulary needed for generic and trait-based design.
+> **Summary**: Rust's static type system combining scalar and compound types, algebraic data types, pattern matching, generics, and trait bounds from everyday use toward type theory.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **📎 交叉引用（Reference）**
