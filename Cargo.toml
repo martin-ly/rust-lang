@@ -183,8 +183,8 @@ codegen-units = 1024
 panic = "abort"
 
 # 工作区级别的依赖版本统一
-# 2026-07-10: Rust 1.97.0 stable / 1.98.0-nightly 同步更新
-# rust-version: 1.97.0
+# 2026-07-22: Rust 1.97.1 stable / 1.98.0-beta / 1.99.0-nightly 同步更新
+# rust-version: 1.97.1
 # 注意: 优先选择稳定成熟的版本，避免使用 alpha/RC 版本导致的破坏性变更
 [workspace.dependencies]
 # 本地 crate
