@@ -48,7 +48,7 @@ rustls = { workspace = true, optional = true }
 rdkafka = { version = "0.37", features = ["tokio"], optional = true }
 
 # Kubernetes ecosystem examples
-kube = { version = "4.0.0", features = ["client", "runtime", "derive"], optional = true }
+kube = { version = "4.2.0", features = ["client", "runtime", "derive"], optional = true }
 k8s-openapi = { version = "0.28.0", features = ["latest"], optional = true }
 
 
@@ -72,8 +72,8 @@ vector = { version = "0.4.1", optional = true }
 
 # Cloud vendor SDK examples
 # 禁用默认 features，避免 aws-sdk-s3 默认启用 legacy-rustls（rustls 0.21）引入 RUSTSEC-2026-0098/0099/0104
-aws-config = { version = "1.9.0", optional = true, default-features = false, features = ["default-https-client", "rt-tokio", "credentials-process", "sso"] }
-aws-sdk-s3 = { version = "1.138.1", optional = true, default-features = false, features = ["default-https-client", "rt-tokio"] }
+aws-config = { version = "1.10.0", optional = true, default-features = false, features = ["default-https-client", "rt-tokio", "credentials-process", "sso"] }
+aws-sdk-s3 = { version = "1.139.0", optional = true, default-features = false, features = ["default-https-client", "rt-tokio"] }
 azure_core = { version = "1.0.0", optional = true }
 azure_identity = { version = "1.0.0", optional = true }
 azure_storage_blob = { version = "1.0.0", optional = true }
@@ -130,6 +130,7 @@ mongodb = "3.7.0"
 #       作为 dev-dependency 仅用于示例，保守保持)
 lapin = "2.5.5"
 # 2026-07-08: kube 0.98 -> 4.0.0，k8s-openapi 0.24 -> 0.25，消除 backoff unmaintained 传递依赖
+# 2026-07-22: kube 4.0.0 -> 4.2.0（cargo update）
 
 # 2026-07-11: 锁定 0.10 (aes-gcm 0.11 已发布但切换至 aead 0.6 / hybrid-array 新栈；
 #       cookie/sqlx 生态仍在 aead 0.5 + digest 0.10，保守保持)

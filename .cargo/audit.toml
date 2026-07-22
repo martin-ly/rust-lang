@@ -143,9 +143,10 @@ ignore = [
     # RUSTSEC-2025-0134: rustls-pemfile 不再维护
     # 影响评估: LOW（PEM 解析工具，功能稳定）
     # - 攻击向量: 需要解析恶意 PEM 输入
-    # - 影响范围: rustls 0.21/0.22 的传递依赖；kube 4.0.0 等仍依赖旧 rustls
+    # - 影响范围: rustls 0.21/0.22 的传递依赖；kube 4.2.0 已升级到 rustls 0.23+，不再引入 rustls-pemfile。
+    #       当前 rustls-pemfile 2.2.0 仅由 lapin 2.5.5 (dev-dependency) -> amq-protocol-tcp -> tcp-stream -> rustls-native-certs 引入。
     # - 实际状态: rustls-pemfile 功能已被 rustls-pki-types 吸收，但旧 rustls 仍使用
-    # - 上游状态: 等待 kube、reqwest 等升级到 rustls 0.23+
+    # - 上游状态: 等待 lapin 等升级到 rustls 0.23+，或移除 lapin 示例依赖
     "RUSTSEC-2025-0134",
 
     # RUSTSEC-2026-0192: ttf-parser 不再维护

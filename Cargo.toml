@@ -372,7 +372,8 @@ tokio = { version = "1.53.1", features = ["full"] }
 # 2026-07-21: cargo update 0.7.18 -> 0.7.19
 tokio-util = "0.7.19"
 # tokio-stream: tokio的流处理支持
-tokio-stream = "0.1.18"
+# 2026-07-22: cargo update 0.1.18 -> 0.1.19
+tokio-stream = "0.1.19"
 # tokio-tungstenite: tokio与tungstenite的集成，提供WebSocket支持
 # 2026-03-28: 0.28.0 -> 0.29.0 (cargo update)
 # 2026-07-18: 0.29.0 -> 0.30.0 (cargo update)
@@ -453,7 +454,8 @@ num_cpus = "1.17.0"
 # 2026-04-24: 0.2.186 (Rust 1.96.0 compatible)
 # 2026-07-21: cargo update 0.2.186 -> 0.2.187
 # 2026-07-21: cargo update 0.2.187 -> 0.2.188
-libc = "0.2.188"
+# 2026-07-22: cargo update 0.2.188 -> 0.2.189
+libc = "0.2.189"
 # rand: 随机数生成库，提供高质量的随机数生成
 # 2026-03-28: 升级到 0.10.x (重大版本更新)
 # 2026-07-03: cargo update 0.10.1 -> 0.10.2
@@ -653,7 +655,9 @@ nix = "0.31.3"
 
 # clap 系列 - 命令行参数解析
 # 2026-07-16: cargo update 4.6.1 -> 4.6.2
-clap = { version = "4.6.3", default-features = false }
+# 2026-07-18: cargo update 4.6.2 -> 4.6.3
+# 2026-07-22: cargo update 4.6.3 -> 4.6.4
+clap = { version = "4.6.4", default-features = false }
 clap_builder = { version = "4.6.2", default-features = false }
 clap_complete = "4.6.5"
 clap_derive = "4.6.1"
@@ -787,6 +791,34 @@ const-hex = "=1.19.1"
 # - quote: 1.0.46 -> 1.0.47 (cargo update 2026-07-18)
 # - proc-macro2: 1.0.106 -> 1.0.107 (cargo update 2026-07-18)
 # - webpki-roots: 1.0.8 -> 1.0.9 (cargo update 2026-07-18)
+# - 传递依赖 (cargo update 2026-07-22):
+#     ammonia: 4.1.3 -> 4.1.4
+#     aws-config: 1.9.0 -> 1.10.0
+#     aws-runtime: 1.8.1 -> 1.9.0
+#     aws-sdk-s3: 1.138.1 -> 1.139.0
+#     aws-sdk-sso: 1.103.0 -> 1.104.0
+#     aws-sdk-ssooidc: 1.105.0 -> 1.106.0
+#     aws-sdk-sts: 1.108.0 -> 1.109.0
+#     aws-smithy-query: 0.61.1 -> 0.62.0
+#     aws-smithy-xml: 0.61.1 -> 0.62.0
+#     aws-types: 1.4.0 -> 1.5.0
+#     glob: 0.3.3 -> 0.3.4
+#     leptos_router: 0.8.14 -> 0.8.15
+#     libp2p-gossipsub: 0.49.4 -> 0.49.5
+#     surrealdb 系列: 3.2.1 -> 3.2.3 (surrealdb, surrealdb-collections, surrealdb-core,
+#       surrealdb-strand, surrealdb-types, surrealdb-types-derive)
+#     syn 3.x: 3.0.2 -> 3.0.3 (cxx 等传递依赖)
+# - workspace 依赖同步 (cargo update 2026-07-22):
+#     clap: 4.6.3 -> 4.6.4
+#     libc: 0.2.188 -> 0.2.189
+#     tokio-stream: 0.1.18 -> 0.1.19
+# - c10_networks 直接依赖同步 (cargo update 2026-07-22):
+#     aws-config: 1.9.0 -> 1.10.0 (Cargo.toml 声明同步)
+#     aws-sdk-s3: 1.138.1 -> 1.139.0 (Cargo.toml 声明同步)
+#     kube 系列: 4.0.0 -> 4.2.0 (kube, kube-client, kube-core, kube-derive, kube-runtime)
+# - 传递依赖 (cargo update 2026-07-22):
+#     granit-parser: 0.0.3 -> 0.0.7
+#     serde-saphyr: 0.0.27 -> 0.0.29
 # - toml: 移除 workspace 中错误的 1.1.2+spec-1.1.0 声明
 #       (无子 crate 通过 workspace 引用 toml；Cargo.lock 中 toml 0.8.2 为 system-deps 传递依赖，不受 workspace 声明影响)
 # - bincode 2.0.1 -> 3.0.0: 3.0.0 为 crates.io 占位符版本（compile_error!），无法使用

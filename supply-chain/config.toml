@@ -804,6 +804,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
 
+[[exemptions.clap]]
+version = "4.6.4"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-22 cargo update 补丁升级 (4.6.3 -> 4.6.4)；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.clap_builder]]
 version = "4.6.0"
 criteria = "safe-to-run"
@@ -1704,6 +1710,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.glob]]
+version = "0.3.4"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-22 cargo update 补丁升级 (0.3.3 -> 0.3.4)；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.glow]]
 version = "0.17.0"
 criteria = "safe-to-run"
@@ -2146,6 +2158,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
 
+[[exemptions.libc]]
+version = "0.2.189"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-22 cargo update 补丁升级 (0.2.188 -> 0.2.189)；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.libloading]]
 version = "0.8.9"
 criteria = "safe-to-run"
@@ -2579,6 +2597,12 @@ version = "3.15.5"
 criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-15 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
+[[exemptions.ntex-rt]]
+version = "3.15.7"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-22 cargo update 补丁升级 (3.15.5 -> 3.15.7)；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.ntex-server]]
 version = "3.10.4"
@@ -4074,6 +4098,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-20 cargo update 补丁升级（cxx 等传递依赖）；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.syn]]
+version = "3.0.3"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-22 cargo update 补丁升级 (3.0.2 -> 3.0.3)；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.sync_wrapper]]
 version = "1.0.2"
 criteria = "safe-to-run"
@@ -4289,6 +4319,12 @@ version = "0.7.18"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.tokio-util]]
+version = "0.7.19"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-22 cargo update 补丁升级 (0.7.18 -> 0.7.19)；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.toml_datetime]]
 version = "1.1.1+spec-1.1.0"
