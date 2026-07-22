@@ -7,8 +7,8 @@
 | MERGE | 0 | 应合并近克隆（留一删余或 stub 化） |
 | DOCS_INTERNAL | 0 | docs/ 内同主题互抄（合并或互链） |
 | SERIES | 129 | 保留但标注为版本系列/分章（白名单） |
-| REVIEWED | 385 | 已批量复核确认非重复（stub/模板系列/同领域术语共现，白名单） |
-| REVIEW | 1 | 人工复核 |
+| REVIEWED | 386 | 已批量复核确认非重复（stub/模板系列/同领域术语共现，白名单） |
+| REVIEW | 0 | 人工复核 |
 
 ## MERGE（0）Top 25
 
@@ -50,7 +50,7 @@
 | 0.818 | `crates/c10_networks/docs/tier_04_rust_194_updates/README.md` | `crates/c12_wasm/docs/tier_04_rust_194_updates/README.md` |
 | 0.806 | `docs/05_practice/08_project_07_chat_server.md` | `docs/05_practice/12_project_11_web_server.md` |
 
-## REVIEWED（385）Top 25
+## REVIEWED（386）Top 25
 
 | sim | 文件1 | 文件2 |
 |:---:|:---|:---|
@@ -80,11 +80,10 @@
 | 0.778 | `crates/c11_macro_system_proc/c11_macro_system_proc_macros/docs/one_page_summary.md` | `crates/c11_macro_system_proc/c11_macro_system_proc_macros/docs/README.md` |
 | 0.75 | `crates/c01_ownership_borrow_scope/docs/00_master_index.md` | `crates/c01_ownership_borrow_scope/docs/tier_01_foundations/03_glossary.md` |
 
-## REVIEW（1）Top 25
+## REVIEW（0）Top 25
 
 | sim | 文件1 | 文件2 |
 |:---:|:---|:---|
-| 0.526 | `crates/c02_type_system/best_practices_guide.md` | `crates/c02_type_system/tutorial_guide.md` |
 
 ## 机器可读
 

@@ -43,6 +43,6 @@
 > 仅追加来源链接以闭合权威覆盖，不改本文正文；通用概念请以 `concept/` 权威页为准（AGENTS.md §2）。
 
 - **P0 官方 — TRPL Ch4 Understanding Ownership**: <https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html>
-- **P0 官方 — TRPL Ch10 Generic Types, Traits, and Lifetimes**: <https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html>
+- **P0 官方 — TRPL Ch10 Generic Types, Traits, and Lifetimes**: <https://doc.rust-lang.org/book/ch10-00-generics.html>
 - **P0 Reference — Types**: <https://doc.rust-lang.org/reference/types.html>
 - **P0 RFCs**: <https://rust-lang.github.io/rfcs/>

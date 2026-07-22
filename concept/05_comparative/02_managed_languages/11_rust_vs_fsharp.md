@@ -305,7 +305,7 @@ fn main() {
 
 Rust trait 通过**单态化（monomorphization）**实现零成本抽象，但无法直接表达高阶类型（higher-kinded types，HKT）。生命周期标注在跨函数边界时必须显式声明，这是 Rust 学习曲线的主要来源。
 
-> **来源**: [Rust Reference — Traits](https://doc.rust-lang.org/reference/traits.html) · [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-migration.html)
+> **来源**: [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html) · [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)
 
 ### 4.2 F#：Discriminated Unions、Records、Units of Measure 与 Type Providers
 

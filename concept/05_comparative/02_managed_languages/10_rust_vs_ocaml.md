@@ -246,7 +246,7 @@ where
 }
 ```
 
-> **来源**: [OCaml Type Inference](https://ocaml.org/docs/type-inference) · [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/type-inference.html)
+> **来源**: [OCaml Type Inference](https://ocaml.org/docs/type-inference) · [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/types/inferred.html)
 
 ---
 

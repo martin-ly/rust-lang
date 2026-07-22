@@ -3,8 +3,8 @@
     "SERIES": 129,
     "MERGE": 0,
     "DOCS_INTERNAL": 0,
-    "REVIEWED": 385,
-    "REVIEW": 1,
+    "REVIEWED": 386,
+    "REVIEW": 0,
     "total": 515,
     "source": "reports/CONTENT_OVERLAP_V2_2026-07-23.json"
   },
@@ -5815,6 +5815,19 @@
       {
         "sim": 0.526,
         "kw_sim": 0.526,
+        "title_sim": 0.0,
+        "shared": 5,
+        "same_dir": true,
+        "f1": "crates/c02_type_system/best_practices_guide.md",
+        "f2": "crates/c02_type_system/tutorial_guide.md",
+        "t1": "Rust 1.90 最佳实践指南",
+        "t2": "Rust 1.90 高级特性教程指南",
+        "lines1": 29,
+        "lines2": 39
+      },
+      {
+        "sim": 0.526,
+        "kw_sim": 0.526,
         "title_sim": 0.333,
         "shared": 5,
         "same_dir": true,
@@ -6697,20 +6710,6 @@
         "lines2": 15
       }
     ],
-    "REVIEW": [
-      {
-        "sim": 0.526,
-        "kw_sim": 0.526,
-        "title_sim": 0.0,
-        "shared": 5,
-        "same_dir": true,
-        "f1": "crates/c02_type_system/best_practices_guide.md",
-        "f2": "crates/c02_type_system/tutorial_guide.md",
-        "t1": "Rust 1.90 最佳实践指南",
-        "t2": "Rust 1.90 高级特性教程指南",
-        "lines1": 29,
-        "lines2": 39
-      }
-    ]
+    "REVIEW": []
   }
 }

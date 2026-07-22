@@ -156,7 +156,7 @@ Rust 将内存安全编码进类型系统：
 - **生命周期**：编译器验证引用不会比被引用数据活得更长。
 - **`Option<T>` 替代空指针**，切片越界在 safe Rust 中触发 panic 而非未定义行为。
 
-> **来源**: [TRPL — What is Ownership?](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · [Rust Reference — References and Borrowing](https://doc.rust-lang.org/reference/types/reference.html)
+> **来源**: [TRPL — What is Ownership?](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · [Rust Reference — References and Borrowing](https://doc.rust-lang.org/reference/types/pointer.html)
 
 ```rust
 fn main() {

@@ -113,6 +113,15 @@ REVIEWED_PATH_RE = [
 ]
 
 REVIEWED_PAIRS = {
+    # 复核 2026-07-23（族 J）：crates/c02_type_system 两个 stub 入口页（sim 0.526）。
+    # best_practices_guide.md（28 行）与 tutorial_guide.md（38 行）均为 AGENTS.md §2/§6.4 规范的
+    # crate 学习/最佳实践入口 stub，正文仅含「权威来源」重定向块 + 主题导航表 + 实践入口说明。
+    # 共享内容为 stub 模板骨架；独特内容为各自主题导航目标（基础/泛型/trait/错误处理 vs
+    # 高级类型/GAT/TAIT/生命周期/模式匹配/异步）。非概念正文互抄，登记 REVIEWED。
+    frozenset({
+        "crates/c02_type_system/best_practices_guide.md",
+        "crates/c02_type_system/tutorial_guide.md",
+    }),
     # 复核 2026-07-12（族 E）：concept 网络域同领域术语共现（sim 0.500）。逐文件比对（747 vs 886 行）：
     # 06_websocket 主题为 WebSocket 应用协议（握手/tokio-tungstenite/聊天室实战），
     # 05_networking_basics 主题为 TCP/IP 网络基础；正文独特内容 64%/67%，
