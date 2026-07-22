@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 527,
-    "generated_at": "2026-07-21T13:42:50.427820+00:00"
+    "generated_at": "2026-07-22T17:39:09.214711+00:00"
   },
   "files": [
     {
@@ -40241,7 +40241,7 @@
       "layer": "L4",
       "title": "RustBelt & Verification Toolchain（RustBelt 与验证工具链）",
       "positioning": "",
-      "line_count": 1471,
+      "line_count": 1479,
       "theorem_chains": [
         {
           "text": "- [2.2 ⟹ 推理链](#22--推理链)",
