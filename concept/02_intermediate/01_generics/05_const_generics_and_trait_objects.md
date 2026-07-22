@@ -74,6 +74,8 @@ mindmap
 
 ## 二、冲突根源
 
+本节从 const generic 与 trait object 的设计目标出发，对比编译期已知常量与运行时类型擦除之间的根本张力，为后续 object-safe 判定与 workaround 提供理论背景。
+
 | 机制 | 关键特性 | 与另一机制的冲突 |
 |---|---|---|
 | **Const Generic** | 参数值在编译期已知，参与类型身份 | `dyn Trait<N>` 要求在运行时确定 `N`，但 vtable 没有位置存 `N` |
@@ -84,6 +86,8 @@ mindmap
 ---
 
 ## 三、为什么 `dyn Trait<{N}>` 不工作
+
+本节通过具体编译错误和 object-safe 判定条件，解释 vtable 无法携带 const generic 参数值、当前 Rust 为何不支持 `dyn Trait<{N}>`。
 
 ### 3.1 尝试与编译错误
 
@@ -116,6 +120,8 @@ trait 要成为 object-safe 并支持 const generic，必须满足：
 ---
 
 ## 四、Workaround 与设计模式
+
+本节给出三种在保持动态分发的同时绕过 const generic 限制的工程化方案，并比较它们的适用场景与权衡。
 
 ### 4.1 用关联类型/方法替代 const generic
 
@@ -210,6 +216,8 @@ flowchart TD
 ---
 
 ## 六、反例与失效模式
+
+本节汇总 const generic 与 trait object 混用时最常见的失效模式，从根因出发给出对应的修复方向。
 
 | 失效模式 | 根因 | 修复方向 |
 |---|---|---|

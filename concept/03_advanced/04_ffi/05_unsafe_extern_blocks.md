@@ -100,6 +100,8 @@ mindmap
 
 ## 一、核心概念
 
+本节建立 Edition 2024 对 `extern` 块安全语义的调整框架。1.1 揭示旧式 `extern {}` 隐藏信任断言的问题，1.2 说明 `unsafe extern {}` 的语法与语义变化，1.3 引入 `safe fn` 显式审计机制，1.4 给出迁移 lint 与 `cargo fix` 的使用路径。
+
 ### 1.1 旧式 `extern {}` 的语义漏洞
 
 在 Rust Edition 2021 及之前，`extern "ABI" { ... }` 块本身是一个**safe item**：声明它不需要 `unsafe` 上下文，可以出现在模块（Module）级别。然而，块内声明的函数**默认仍是 `unsafe fn`**，调用者仍需在调用点写 `unsafe` 块：
@@ -216,6 +218,8 @@ rust_2024_compatibility = "warn"
 
 ## 二、判定规则
 
+本节给出 `unsafe extern {}` 与 `safe fn` 的使用规则。2.1 说明默认应使用 `unsafe extern {}`，2.2 细化 `safe fn` 的适用条件与函数定义语义，2.3 对比 2021 与 2024 Edition 的行为差异。
+
 ### 2.1 何时使用 `unsafe extern {}`
 
 默认情况下，所有 Edition 2024 的 extern 块都应使用 `unsafe extern {}`：
@@ -238,6 +242,8 @@ unsafe extern "C" {
 ---
 
 ### 2.2 何时使用 `safe fn`
+
+本节在判定规则下进一步聚焦 `safe fn` 的审计条件与函数定义对称性。块内声明小节给出在外部符号上标注 `safe` 的前提，函数定义小节区分 `extern "C" fn` 与 `unsafe extern "C" fn` 对外暴露 Rust 函数时的语义。
 
 #### 块内 `safe fn` 声明
 
@@ -300,6 +306,8 @@ pub unsafe extern "C" fn compute_with_ptr(ptr: *const i32) -> i32 {
 ---
 
 ## 三、边界测试 / 反例
+
+本节通过编译错误与 UB 场景验证本节规则的边界。3.1 展示忘记 `unsafe` 调用 extern 函数的编译错误，3.2 展示错误标注 `safe` 导致看似 safe 实则 UB 的问题，3.3 说明跨 Edition 混用带来的兼容性错误。
 
 ### 3.1 反例：2024 Edition 下忘记 `unsafe` 调用 extern 函数
 
@@ -421,6 +429,8 @@ error: extern blocks must be unsafe
 
 ## 四、与 `unsafe_op_in_unsafe_fn` 及 unsafe 契约的关系
 
+本节将 `unsafe extern` 块放在更广阔的 unsafe 契约体系中理解。`unsafe_op_in_unsafe_fn` 小节说明其与 extern 块的协同作用，unsafe 契约三层结构小节把声明层、审计层与操作层的责任可视化。
+
 ### `unsafe_op_in_unsafe_fn` 的协同作用
 
 `unsafe_op_in_unsafe_fn` 是一个 lint（已在 Edition 2024 默认 `deny`），它要求**在 `unsafe fn` 内部，每一次 unsafe 操作仍需显式使用 `unsafe` 块**。这与 `unsafe extern` 块形成互补：
@@ -468,6 +478,8 @@ pub fn safe_api() {              // 公开层：对外暴露 safe 接口
 ---
 
 ## 五、最佳实践与检查清单
+
+本节把前述规则沉淀为可执行的工程清单。检查清单小节给出编写 Edition 2024 FFI 绑定的逐项步骤，常见误区小节纠正常见的理解与使用错误。
 
 ### 编写 Edition 2024 FFI 绑定的检查清单
 

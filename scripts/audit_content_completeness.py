@@ -31,8 +31,32 @@ CONCEPT = ROOT / "concept"
 
 EXCLUDE_PARTS = {"archive", "sources", "placeholders", "deprecated"}
 
+# 额外：以文件为单位的 marker 豁免。这些文件本身就是 TODO/占位符/审计方法论页，
+# 正文中必然反复出现 TODO/TBD/FIXME/placeholder 等词，但都是术语引用或方法论定义，
+# 不代表内容缺口。豁免后仍会计入活跃文件数，但不统计 marker。
+SKIP_MARKER_FILES: set[str] = {
+    "concept/00_meta/00_framework/todos.md",
+    "concept/00_meta/00_framework/methodology.md",
+    "concept/00_meta/03_audit/03_audit_checklist.md",
+    "concept/00_meta/04_navigation/13_foundations_gap_closure_index.md",
+    "concept/00_meta/07_placeholders/01_placeholder_generic.md",
+}
+
 MARKER_RE = re.compile(
-    r"TODO|TBD|FIXME|待补充|待完善|占位符|placeholder", re.IGNORECASE
+    r"TODO|TBD|FIXME|待补充|待完善|placeholder", re.IGNORECASE
+)
+# 已知不是内容缺口的合法命中（大小写不敏感）
+FALSE_POSITIVE_RE = re.compile(
+    r"todo!\(\)|unimplemented!\(\)|LINK_PLACEHOLDER|"
+    r"todos\.md|Global TODO Tracker|全局待办清单|"
+    r"`[^`]*(?:TODO|TBD|FIXME|待补充|待完善|placeholder)[^`]*`|"
+    r"跟踪级\s*[—\-]\s*待补充|"  # 代码状态标签，不是缺口
+    r"todo-overreach|"  # RFC 文件名
+    r"占位符（Placeholder）|"  # 中文技术术语：format/type placeholder
+    r"Placeholder Generic|"  # 占位符模板页名
+    r"todo\s+vs\s+unreachable|"  # 比较 panic 系列宏
+    r"placeholder\s+view\s+of\s+a\s+variable",  # future/promise 技术术语
+    re.IGNORECASE,
 )
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*\S)\s*$")
 FENCE_RE = re.compile(r"^\s*```")
@@ -80,16 +104,18 @@ def classify_line(line: str) -> str:
 
 
 def audit_file(path: Path) -> dict:
+    rel_path = str(path.relative_to(ROOT)).replace("\\", "/")
     lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
     result = {
-        "path": str(path.relative_to(ROOT)).replace("\\", "/"),
+        "path": rel_path,
         "redirect_stub": is_redirect_stub(lines),
         "markers": [],          # (lineno, kind, text)
         "empty_leaf": [],       # (lineno, heading)
         "empty_parent": [],     # (lineno, heading)
         "placeholder_sections": [],  # (lineno, heading, guide_text)
     }
-    # --- markers (skip code fences) ---
+    # --- markers (skip code fences and known false positives) ---
+    skip_markers = rel_path in SKIP_MARKER_FILES
     in_code = False
     for i, line in enumerate(lines, start=1):
         if FENCE_RE.match(line):
@@ -97,7 +123,9 @@ def audit_file(path: Path) -> dict:
             continue
         if in_code:
             continue
-        if MARKER_RE.search(line):
+        if skip_markers:
+            continue
+        if MARKER_RE.search(line) and not FALSE_POSITIVE_RE.search(line):
             result["markers"].append((i, classify_line(line), line.strip()[:120]))
     if result["redirect_stub"]:
         return result

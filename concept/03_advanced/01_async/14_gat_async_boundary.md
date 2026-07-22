@@ -111,6 +111,8 @@ flowchart TD
 
 ## 二、核心概念
 
+本节回顾 GAT 基础并建立 async trait 所需的类型族视角。2.1 重温 GAT 语法，2.2 解释普通关联类型无法表达借用绑定 Future 的问题，2.3 介绍 AFIT/RPITIT 语法糖，2.4 说明生命周期约束如何影响 async 状态机字段。
+
 ### 2.1 GAT 回顾：`trait Foo { type Bar<'a>; }`
 
 GAT 让关联类型携带泛型（Generics）参数（通常是生命周期），形成「类型构造器（type constructor）」：
@@ -241,6 +243,8 @@ impl Reader for FileReader<'_> {
 
 ## 三、判定规则
 
+本节给出在 async trait 中选择显式 GAT 还是 AFIT/RPITIT 的决策依据。3.1 列出何时需要显式 `type Future<'a>`，3.2 分析 Send bound 的传播路径，3.3 讨论自定义自引用 Future 与 Pin 的交互。
+
 ### 3.1 何时需要显式 GAT Future 类型
 
 | 场景 | 推荐写法 | 原因 |
@@ -283,6 +287,8 @@ trait AsyncTaskSend: Send {
 ---
 
 ## 四、边界测试 / 反例
+
+本节通过编译失败示例展示 GAT × async 的边界失效模式。4.1 演示非 Send Future 导致无法 `tokio::spawn`，4.2 展示生命周期越界借用，4.3 说明调用方不能假设 GAT 的具体实现类型。
 
 ### 4.1 边界测试：GAT Future 不是 `Send` 导致的 `tokio::spawn` 失败
 
@@ -406,6 +412,8 @@ fn main() {}
 ---
 
 ## 五、设计模式
+
+本节给出可落地的 GAT async trait 实现模式。5.1 展示显式 GAT Future 的标准写法，5.2 说明如何结合 `pin-project` 安全处理自定义自引用类型。
 
 ### 5.1 用 GAT 实现自定义 async trait
 

@@ -104,6 +104,8 @@ mindmap
 
 ## 三、Await 点作为安全边界
 
+本节把 `await` 视为 safe/unsafe 代码之间的隐性边界，分析挂起与恢复对临时不变量的影响。3.1 给出判定跨 `await` 持有裸指针是否安全的条件，3.2 用悬垂裸指针示例展示违反该条件的 UB 风险。
+
 ### 3.1 边界陈述
 
 `unsafe` 块在同步代码中是一个**词法作用域**：块结束时，块内建立的临时不变量可以丢弃。但在 async 块中，`unsafe` 块可能跨越 `.await`：
@@ -148,6 +150,8 @@ async fn dangling_across_await() {
 ---
 
 ## 四、Pin 与自引用状态机
+
+本节聚焦手写 Future 时 Pin 契约的维护责任。4.1 阐明 `Pin<&mut Self>` 与自引用字段的稳定性要求，4.2 通过错误 `poll` 实现演示破坏 Pin 不变量的典型写法及修正。
 
 ### 4.1 边界陈述
 
@@ -196,6 +200,8 @@ fn poll(self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
 ---
 
 ## 五、Waker 的跨边界契约
+
+本节讨论 Waker 从 Rust async 运行时传递到 unsafe/FFI 回调时的安全责任。5.1 列出单次唤醒、生命周期与线程安全等契约，5.2 用 FFI 回调示例说明错误持有 Waker 引用导致的 use-after-free 风险。
 
 ### 5.1 边界陈述
 

@@ -136,6 +136,8 @@ S<T>: Sync  ⟺  A: Sync ∧ B<T>: Sync
 
 ## 二、Trait Objects 中的边界
 
+本节聚焦 `dyn Trait` 这一动态分发形态下的 Send/Sync 判定。2.1 解释默认 `dyn Trait` 不实现 Send/Sync 的根本原因，2.2 给出 `+ Send + Sync` bound 的充分必要条件与常见错误。
+
 ### 2.1 `dyn Trait` 为什么默认不是 Send/Sync
 
 `dyn Trait` 是一种**擦除具体类型**的动态分发类型。编译器只知道它实现了 `Trait`，不知道它底层封装的是 `Rc<T>`、`Cell<T>` 还是 `Mutex<T>`。因此：
@@ -181,6 +183,8 @@ fn main() {}
 
 ## 三、闭包中的边界
 
+本节分析闭包作为匿名结构体时，其捕获变量如何决定 Send/Sync 实现。3.1 给出判定规则，3.2 对比 `move` 闭包与借用闭包在捕获语义上的差异。
+
 ### 3.1 捕获变量决定闭包的 Send/Sync
 
 闭包（closure）在 Rust 中是一个**匿名结构体（Struct）**，其字段就是捕获的环境变量。闭包是否 `Send`/`Sync`，完全由捕获变量决定：
@@ -217,6 +221,8 @@ fn main() {
 ---
 
 ## 四、Async 状态机中的边界
+
+本节说明 `async fn`/`async {}` 编译生成的状态机如何继承 Send/Sync 约束。4.1 描述状态机字段与跨 `await` 持有变量的关系，4.2 列举自引用、`MutexGuard` 等导致 Future 失去 Send 的典型场景。
 
 ### 4.1 状态机的生成与跨 await 持有
 
@@ -268,6 +274,8 @@ fn main() {}
 ---
 
 ## 五、`impl Trait` / RPITIT 中的 Send bound 泄漏
+
+本节讨论 `impl Trait` 与 RPITIT 返回类型中 bound 向隐藏类型的反向传播。5.1 说明 `+ Send` 如何约束函数体实现，5.2 扩展到 trait 中 RPITIT 与 `async fn in trait` 的 Send 保证问题。
 
 ### 5.1 `impl Trait + Send` 对隐藏类型的约束
 

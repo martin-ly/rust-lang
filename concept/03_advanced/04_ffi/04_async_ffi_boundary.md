@@ -104,6 +104,8 @@ mindmap
 
 ## 三、阻塞 FFI：线程池桥接
 
+本节处理最常见也最简单的 async-FFI 形态：同步阻塞式外部调用。3.1 阐明 `Future::poll` 的非阻塞契约，3.2 给出是否使用线程池桥接的判定条件。
+
 ### 3.1 边界陈述
 
 `Future::poll` 必须尽快返回，不能阻塞 executor 线程。阻塞 FFI 调用应放在独立线程上执行。
@@ -130,6 +132,8 @@ async fn call_blocking_ffi() -> std::io::Result<()> {
 ---
 
 ## 四、回调 FFI：Waker 与外部回调
+
+本节处理 C 风格回调库与 Rust async 运行时的集成模式。4.1 描述将 `Waker` 作为 `user_data` 的标准流程，4.2 总结克隆、注销、线程安全等关键契约，4.3 演示直接传递 Waker 引用给 C 的危险。
 
 ### 4.1 边界陈述
 
@@ -164,6 +168,8 @@ extern "C" fn callback(waker: *const Waker) {
 ---
 
 ## 五、自定义 Reactor 模式
+
+本节面向基于 fd 或 io_uring 的事件驱动型外部接口。5.1 概述 Reactor 的基本结构与线程模型，5.2 说明独立 Reactor 与 Tokio 等运行时集成的几种方式。
 
 ### 5.1 模式概述
 
