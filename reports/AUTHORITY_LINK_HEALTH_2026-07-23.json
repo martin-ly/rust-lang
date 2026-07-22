@@ -1,0 +1,94 @@
+{
+  "date": "2026-07-23",
+  "scanned": 2115,
+  "bad": 5,
+  "anti_bot_403": 2,
+  "anti_bot_404_cratesio": 1,
+  "by_tier": {
+    "P0": 5
+  },
+  "anti_bot_by_tier": {
+    "P1": 2
+  },
+  "anti_bot_404_by_tier": {
+    "P0": 1
+  },
+  "bad_list": [
+    {
+      "url": "https://doc.rust-lang.org/book/ch10-00-generic-types-traits-and-lifetimes.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "docs/08_usage_guides/24_type_system_usage_guide.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/reference/lifetime-migration.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/05_comparative/02_managed_languages/11_rust_vs_fsharp.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/reference/traits.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/05_comparative/02_managed_languages/11_rust_vs_fsharp.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/reference/type-inference.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/05_comparative/02_managed_languages/10_rust_vs_ocaml.md"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/reference/types/reference.html",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/05_comparative/01_systems_languages/09_rust_vs_nim.md"
+      ]
+    }
+  ],
+  "anti_bot_list": [
+    {
+      "url": "https://cacm.acm.org/",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "concept/05_comparative/00_paradigms/01_paradigm_matrix.md"
+      ]
+    },
+    {
+      "url": "https://queue.acm.org/detail.cfm?id=2898444",
+      "tier": "P1",
+      "status": 403,
+      "err": "HTTPError",
+      "files": [
+        "docs/12_research_notes/08_software_design_theory/08_crate_architectures/28_kube_rs_architecture.md"
+      ]
+    }
+  ],
+  "anti_bot_404_list": [
+    {
+      "url": "https://github.com/rust-lang/cargo/blob/master/src/cargo/util/toml/embedded.rs",
+      "tier": "P0",
+      "status": 404,
+      "err": "HTTPError",
+      "files": [
+        "concept/06_ecosystem/01_cargo/01_cargo_script.md"
+      ]
+    }
+  ]
+}
