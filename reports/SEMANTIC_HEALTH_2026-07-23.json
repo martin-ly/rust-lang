@@ -1,13 +1,13 @@
 {
   "date": "2026-07-23",
-  "total_score": 99.2,
+  "total_score": 99.7,
   "grade": "OK",
-  "metadata_score": 98.3,
+  "metadata_score": 100.0,
   "topology_score": 98.6,
   "dedup_score": 100.0,
   "kg_score": 100.0,
   "inputs": {
-    "metadata_flagged": "9/544",
+    "metadata_flagged": "0/544",
     "topology_T1_def_low_rate": 0.0,
     "topology_T2_top_rate": 0.749,
     "overlap_hits": 509,

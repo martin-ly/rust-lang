@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 527,
-    "generated_at": "2026-07-22T17:39:09.214711+00:00"
+    "generated_at": "2026-07-22T18:16:12.946523+00:00"
   },
   "files": [
     {
@@ -1333,7 +1333,7 @@
       "layer": "L0",
       "title": "权威来源映射表（Authority Source Map）",
       "positioning": "",
-      "line_count": 217,
+      "line_count": 216,
       "theorem_chains": [
         {
           "text": "| Authority Source Map 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
@@ -1534,7 +1534,7 @@
       "layer": "L0",
       "title": "Concept Audit Guide（概念审计指南）",
       "positioning": "",
-      "line_count": 109,
+      "line_count": 107,
       "theorem_chains": [
         {
           "text": "| 08 Concept Audit Guide 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
@@ -3323,7 +3323,7 @@
       "layer": "L0",
       "title": "Rust 知识体系可用性测试框架（Usability Testing Framework）",
       "positioning": "为项目建立持续的学习者反馈闭环，从\"输出内容\"转向\"验证学习效果\"。",
-      "line_count": 129,
+      "line_count": 131,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -7617,7 +7617,7 @@
       "layer": "L0",
       "title": "语义模型图谱（Semantic Model Atlas）",
       "positioning": "",
-      "line_count": 521,
+      "line_count": 541,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -10737,7 +10737,7 @@
       "layer": "L1",
       "title": "Type System Basics（类型系统基础）",
       "positioning": "",
-      "line_count": 3376,
+      "line_count": 3373,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡、相关概念链接",
@@ -12924,7 +12924,7 @@
       "layer": "L1",
       "title": "链式 let 与 let 守卫（Let Chains & If-Let Guards）",
       "positioning": "",
-      "line_count": 495,
+      "line_count": 505,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -13220,7 +13220,7 @@
       "layer": "L1",
       "title": "let-else：失败分支提前返回",
       "positioning": "",
-      "line_count": 362,
+      "line_count": 370,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -19107,7 +19107,7 @@
       "layer": "L2",
       "title": "负实现（Negative Impls）",
       "positioning": "",
-      "line_count": 358,
+      "line_count": 366,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -19233,7 +19233,7 @@
       "layer": "L2",
       "title": "关联类型默认值（Associated Type Defaults）",
       "positioning": "",
-      "line_count": 387,
+      "line_count": 395,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -20041,7 +20041,7 @@
       "layer": "L2",
       "title": "Const Generics（常量泛型）：值作为类型参数",
       "positioning": "",
-      "line_count": 620,
+      "line_count": 618,
       "theorem_chains": [
         {
           "text": "维度进入类型 ⟹ 形状错误在编译期暴露，乘法只写一次覆盖所有形状：",
@@ -20528,7 +20528,7 @@
       "layer": "L2",
       "title": "常量泛型与 Trait 对象：静态分发与动态分发的交叉边界",
       "positioning": "解释 Rust 中 `const N: usize` 等编译期常量参数与 `dyn Trait` 动态分发之间的限制、 workaround 与设计模式。const generic 要求编译期已知，而 trait object 要求运行时（Runtime）抹除类型信息，两者在 vtable 层面存在根本张力。",
-      "line_count": 235,
+      "line_count": 243,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -26072,7 +26072,7 @@
       "layer": "L3",
       "title": "Send/Sync 边界判定",
       "positioning": "",
-      "line_count": 484,
+      "line_count": 491,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -29871,7 +29871,7 @@
       "layer": "L3",
       "title": "GAT 与 Async 交叉边界语义",
       "positioning": "分析 Rust 1.75+ `async fn in trait` 背后的 GAT/RPITIT 机制，以及 `Send`、`Pin` 在 GAT Future 上的传播规则。",
-      "line_count": 524,
+      "line_count": 532,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -29993,7 +29993,7 @@
       "layer": "L3",
       "title": "状态机语义与工作流模型",
       "positioning": "",
-      "line_count": 210,
+      "line_count": 212,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -31533,7 +31533,7 @@
       "layer": "L3",
       "title": "Async 中的 Unsafe：异步上下文的安全契约",
       "positioning": "系统分析 async/await 状态机与 unsafe 操作的交叉语义：await 点两侧什么保持有效、Pin 如何约束自引用（Reference）状态机、Waker 如何跨越 safe/unsafe 边界、手写 poll 时哪些不变量必须由程序员保证。",
-      "line_count": 274,
+      "line_count": 280,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -34802,7 +34802,7 @@
       "layer": "L3",
       "title": "Async FFI 边界：在异步运行时中调用外部代码",
       "positioning": "阐述如何将 C/外部库的阻塞或回调式接口接入 Rust async/await 生态：从线程池桥接到自定义 Reactor，再到把 Rust `Waker` 安全地传递给 C 回调。",
-      "line_count": 225,
+      "line_count": 231,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -34861,7 +34861,7 @@
       "layer": "L3",
       "title": "`unsafe extern blocks`：Edition 2024 的 FFI 安全边界",
       "positioning": "系统分析 Rust Edition 2024 对 `extern` 块的安全语义调整：从旧式块本身为 safe item 的隐患，到 `unsafe extern {}` 的显式 unsafe 契约，再到块内 `safe fn` 的审计机制，以及 `rust_2024_compatibility` lint 的迁移路径。",
-      "line_count": 554,
+      "line_count": 566,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -39303,7 +39303,7 @@
       "layer": "L4",
       "title": "依赖类型与细化类型（Dependent Types and Refinement Types）",
       "positioning": "",
-      "line_count": 929,
+      "line_count": 941,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -44513,7 +44513,7 @@
       "layer": "L4",
       "title": "代数效应与效应处理器：从自由单子到 Rust 的关键字效果",
       "positioning": "",
-      "line_count": 799,
+      "line_count": 809,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -44591,7 +44591,7 @@
       "layer": "L4",
       "title": "软件事务内存（STM）形式语义：从 Herlihy-Moss 到 Rust 的「无 STM」设计",
       "positioning": "`stm` crate 适合原型验证与教学演示（本页 §2.3 的组合子语义可以原样跑通），但在生产系统中，它把 Haskell 由类型系统承担的成本转嫁给了程序员自律——这正是 §3.1 第 3 条理由的微观实证。",
-      "line_count": 827,
+      "line_count": 837,
       "theorem_chains": [
         {
           "text": "3. 无冲突 ⟹ **提交**（commit），写入一次性生效；有冲突 ⟹ **中止**（abort），丢弃全部暂存写入并**重跑**（retry 重执行整个块）。",
@@ -44688,7 +44688,7 @@
       "layer": "L4",
       "title": "分布式共识与不可能性理论：FLP · CAP · Paxos · Raft · BFT",
       "positioning": "",
-      "line_count": 858,
+      "line_count": 870,
       "theorem_chains": [
         {
           "text": "直觉陈述：**终止性要求系统最终表态；异步性允许对抗者永远保持「再等等也许另一个决定也合法」的暧昧；一个潜在故障使系统无法对缺席者强制推进。** 三者合流 ⟹ 存在永远暧昧的执行。",
@@ -45337,7 +45337,7 @@
       "layer": "L5",
       "title": "统一语言 × 语义模型表达力矩阵",
       "positioning": "",
-      "line_count": 560,
+      "line_count": 564,
       "theorem_chains": [
         {
           "text": "**定理链 1: 所有权 ⟹ 仿射类型 ⟹ 编译期内存安全**",
@@ -46289,7 +46289,7 @@
       "layer": "L5",
       "title": "Rust vs Ada/SPARK：现代所有权类型系统与安全关键形式化子集的工程对比",
       "positioning": "对比分析 **Rust** 与 **Ada/SPARK** 在系统编程、安全关键、形式化验证与认证工业中的设计本体论、实现机制与适用边界；通用安全关键工程实践与标准映射详见 [`content/safety_critical/`](../../../content/safety_critical/README.md)。",
-      "line_count": 569,
+      "line_count": 587,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -46358,7 +46358,7 @@
       "layer": "L5",
       "title": "Rust vs D：所有权类型系统与可选 GC 系统语言的工程对比",
       "positioning": "对比分析 **Rust** 与 **D** 在系统编程、应用编程与元编程中的设计哲学、实现机制与适用边界；通用编程范式对比详见 [Paradigm Matrix](../00_paradigms/01_paradigm_matrix.md)。",
-      "line_count": 702,
+      "line_count": 722,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -46440,7 +46440,7 @@
       "layer": "L5",
       "title": "Rust vs Nim：所有权类型系统与 Python 式系统语言的工程对比",
       "positioning": "对比分析 **Rust** 与 **Nim** 在系统编程与脚本式系统语言之间的设计取舍；通用多语言范式坐标详见 [`Paradigm Matrix`](../00_paradigms/01_paradigm_matrix.md)。",
-      "line_count": 656,
+      "line_count": 674,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47354,7 +47354,7 @@
       "layer": "L5",
       "title": "Rust vs Haskell：所有权/RAII 与惰性纯函数式语言的系统对比",
       "positioning": "从**内存模型**、**类型系统**、**效应系统**、**并发模型**、**形式化验证**与**适用场景**六个维度，系统对比 Rust 与 Haskell 的设计哲学与工程权衡。本文是对 [Paradigm Matrix](../00_paradigms/01_paradigm_matrix.md) 中「函数式编程 vs 系统编程」交叉视角的 pairwise 深化，不重复该矩阵的通用范式定义。",
-      "line_count": 799,
+      "line_count": 817,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47441,7 +47441,7 @@
       "layer": "L5",
       "title": "Rust vs OCaml：系统安全与函数式表达力的对比",
       "positioning": "从**内存模型**、**类型系统（Type System）**、**效应系统（Effect System）**、**并发模型**和**模块系统**五个维度，系统对比 Rust 与 OCaml 的设计哲学差异，揭示 Rust 的编译期资源控制与 OCaml 的代数效应/垃圾回收在系统编程、编译器构造和形式化方法中的适用边界。",
-      "line_count": 821,
+      "line_count": 837,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47548,7 +47548,7 @@
       "layer": "L5",
       "title": "Rust vs F#：系统所有权与函数式数据生态的对比",
       "positioning": "从**内存模型**、**类型系统**、**异步与并发**、**函数式特性**、**工具链**与**适用场景**六个维度，系统对比 Rust 与 F# 的设计哲学与工程权衡。本文是对 [Paradigm Matrix](../00_paradigms/01_paradigm_matrix.md) 中「系统编程 vs 托管函数式编程」交叉视角的 pairwise 深化，不重复该矩阵的通用范式定义。",
-      "line_count": 800,
+      "line_count": 814,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -56765,7 +56765,7 @@
       "layer": "L6",
       "title": "裸机与嵌入式中的 Async：no_std 异步运行时",
       "positioning": "系统讲解在 `no_std`/嵌入式环境中使用 async Rust 的特殊约束：无堆分配、中断安全、自定义 executor、embassy 与 rtic 的架构差异，以及如何避免在裸机中触发 UB。",
-      "line_count": 228,
+      "line_count": 232,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -56832,7 +56832,7 @@
       "layer": "L6",
       "title": "Rust GPU 与高性能计算（GPU Programming & HPC）",
       "positioning": "",
-      "line_count": 852,
+      "line_count": 862,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -65370,7 +65370,7 @@
       "layer": "L7",
       "title": "Rust 1.95.0 稳定特性",
       "positioning": "",
-      "line_count": 426,
+      "line_count": 422,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -65594,7 +65594,7 @@
       "layer": "L7",
       "title": "Rust 1.97.1 稳定补丁",
       "positioning": "",
-      "line_count": 193,
+      "line_count": 199,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -65962,7 +65962,7 @@
       "layer": "L7",
       "title": "Rust 1.98.0 稳定特性",
       "positioning": "",
-      "line_count": 249,
+      "line_count": 251,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -66035,7 +66035,7 @@
       "layer": "L7",
       "title": "Rust 1.99+ 前沿特性预览",
       "positioning": "",
-      "line_count": 143,
+      "line_count": 149,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
