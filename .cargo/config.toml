@@ -49,10 +49,19 @@ linker = "clang"
 protocol = "sparse"
 
 [net]
-# 网络重试配置
-retry = 3
-# 使用Git CLI fetch (对于大型仓库更快)
+# 网络重试配置：适当增加重试次数，应对 crates.io 稀疏索引的偶发网络抖动
+retry = 5
+# 使用 Git CLI fetch（对于大型仓库更快，且 curl 后端对 HTTP/2 兼容更稳定）
 git-fetch-with-cli = true
+
+[http]
+# 禁用 HTTP/2 多路复用，避免部分网络环境/代理下出现
+# "Error in the HTTP2 framing layer" 等偶发错误，回退到更稳定的 HTTP/1.1
+multiplexing = false
+# 请求超时（单位：秒），为慢网络和大索引下载保留足够余量
+timeout = 120
+# 如需调试网络请求，可取消下方注释
+# debug = true
 
 # 启用流水线编译 - 在稳定版1.70+可用
 [pipeline]
