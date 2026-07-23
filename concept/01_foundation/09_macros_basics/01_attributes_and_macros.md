@@ -990,3 +990,7 @@ struct Point {
 ---
 
 > **Rust 1.95 起**：`cfg_select!` 宏稳定，以多分支选择替代嵌套 `#[cfg]` 属性，简化互斥条件编译。详见 [版本页](../../07_future/00_version_tracking/rust_1_95_stabilized.md)（特性矩阵节）。
+
+> **过渡**: 掌握属性宏与声明宏后，可进一步学习宏的卫生性（hygiene）、token 树与过程宏的编译期代码生成。
+> **过渡**: 将属性与生命周期/类型系统结合，可理解 `#[derive]` 如何自动实现 trait，以及自定义 derive 宏的边界。
+> **过渡**: 从宏基础出发，可进入 `proc_macro` crate、syn/quote 生态与条件编译 `#[cfg]` 的高级用法。
