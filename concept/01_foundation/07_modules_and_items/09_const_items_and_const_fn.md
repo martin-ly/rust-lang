@@ -470,3 +470,7 @@ D. 返回基本类型如 `i32`
 
 - **P1 学术/形式化**: [Cardelli & Wegner: On Understanding Types, Data Abstraction, and Polymorphism (ACM Comput. Surv. 1985)](https://dl.acm.org/doi/10.1145/6041.6042)
 - **P2 生态/社区**: [docs.rs/cargo_metadata — 生态权威 API 文档](https://docs.rs/cargo_metadata) · [docs.rs/semver — 生态权威 API 文档](https://docs.rs/semver)
+
+> **过渡**: 掌握 `const` 与 `const fn` 的编译期求值规则后，可进一步学习常量泛型与常量传播优化。
+> **过渡**: 将 `const` 与 `static` 对比，可理解内存位置、内联与 `&'static` 引用的差异。
+> **过渡**: 从 `const fn` 出发，可进入安全关键代码中的编译期验证、数组长度与类型状态设计。

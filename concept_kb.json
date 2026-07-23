@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 528,
-    "generated_at": "2026-07-23T22:23:01.702523+00:00"
+    "generated_at": "2026-07-23T22:30:27.643575+00:00"
   },
   "files": [
     {
@@ -11597,7 +11597,7 @@
       "layer": "L1",
       "title": "数值类型与运算：从整数到浮点的完整图景",
       "positioning": "系统讲解 Rust **数值类型**——从整数、浮点、饱和运算到类型转换和溢出行为，揭示 Rust 如何在安全性与性能之间做出精确的设计选择。",
-      "line_count": 1146,
+      "line_count": 1150,
       "theorem_chains": [
         {
           "text": "| 数值类型与运算：从整数到浮点的完整图景 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -11773,7 +11773,7 @@
         "01_type_system.md",
         "https://github.com/rust-lang/rfcs/blob/master/text/0560-integer-overflow.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
       "matrix_rows": 17,
@@ -11793,7 +11793,7 @@
       "layer": "L1",
       "title": "类型强制与转换：显式与隐式的边界",
       "positioning": "系统讲解 Rust **类型强制（coercion）**和**类型转换（casting）**——从 deref 强制、子类型强制到显式 `as` 转换，揭示 Rust 如何在安全与灵活性之间精确控制类型变换。",
-      "line_count": 1072,
+      "line_count": 1076,
       "theorem_chains": [
         {
           "text": "| 类型强制与转换：显式与隐式的边界 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -11969,7 +11969,7 @@
         "../03_values_and_references/01_reference_semantics.md",
         "01_type_system.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
       "matrix_rows": 16,
@@ -12550,14 +12550,30 @@
       "layer": "L1",
       "title": "变量模型：从通用 PL 视角看 Rust 的所有权",
       "positioning": "",
-      "line_count": 757,
-      "theorem_chains": [],
+      "line_count": 785,
+      "theorem_chains": [
+        {
+          "text": "| 绑定引入所有权 ⟹ 资源生命周期显式化 | 理解 `let` 创建所有者 | 预测 drop 时机与 move 行为 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 可变性默认不可变 ⟹ 别名控制简化 | 需要 `mut` 显式声明 | 减少共享可变状态导致的数据竞争 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 遮蔽 (shadowing) 与重新绑定 ⟹ 名称复用安全 | 区分遮蔽与修改 | 在同一作用域内安全转换类型/值 | 高 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [
         {
           "title": "## 七、反例"
         },
         {
           "title": "### 7.1 反例"
+        },
+        {
+          "title": "## 反命题"
         }
       ],
       "code_blocks": [
@@ -12662,10 +12678,10 @@
         "../02_type_system/01_type_system.md",
         "../11_quizzes/05_quiz_pl_foundations.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 62,
+      "matrix_rows": 66,
       "pre_post": {
         "pre": [
           "[Ownership](../01_ownership_borrow_lifetime/01_ownership.md) · [Type System](../02_type_system/01_type_system.md)"
@@ -12674,7 +12690,7 @@
           "[Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) · [Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md) · [Evaluation Strategies](../../04_formal/03_operational_semantics/04_evaluation_strategies.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -13403,14 +13419,30 @@
       "layer": "L1",
       "title": "let-else：失败分支提前返回",
       "positioning": "",
-      "line_count": 370,
-      "theorem_chains": [],
+      "line_count": 401,
+      "theorem_chains": [
+        {
+          "text": "| 模式匹配成功 ⟹ 绑定在后续作用域可用 | `let-else` 左侧匹配 | 成功路径扁平表达 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 模式匹配失败 ⟹ 必须进入 else 发散 | else 分支返回 `!` 或 `()` | 失败路径不泄漏未绑定变量 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| let-else 替代 if-let 嵌套 ⟹ 早退逻辑清晰 | 单一模式需要早退 | 代码层级减少，可读性提升 | 高 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [
         {
           "title": "## 四、反命题"
         },
         {
           "title": "### 4.1 反命题"
+        },
+        {
+          "title": "## 反命题"
         }
       ],
       "code_blocks": [
@@ -13493,10 +13525,10 @@
         "03_let_chains.md",
         "04_statements_and_expressions.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 15,
+      "matrix_rows": 19,
       "pre_post": {
         "pre": [
           "[Control Flow](01_control_flow.md) · [Patterns](02_patterns.md) · [Let Chains](03_let_chains.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) · [术语表](../../00_meta/01_terminology/01_terminology_glossary.md)"
@@ -13505,7 +13537,7 @@
           "[Statements and Expressions](04_statements_and_expressions.md) · [Option/Result Idioms](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -13513,7 +13545,7 @@
       "layer": "L1",
       "title": "集合类型：Rust 标准库的数据结构谱系",
       "positioning": "系统分析 Rust **标准库集合类型**的设计——从 Vec/VecDeque 的顺序容器，到 HashMap/BTreeMap 的关联容器，再到 HashSet/BTreeSet 的集合类型，揭示每种数据结构的所有权（Ownership）语义、性能特征和选型策略。",
-      "line_count": 938,
+      "line_count": 942,
       "theorem_chains": [
         {
           "text": "| 集合类型：Rust 标准库的数据结构谱系 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -13676,7 +13708,7 @@
         "../02_type_system/03_numerics.md",
         "02_collections_advanced.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 3,
       "matrix_rows": 21,
@@ -13696,7 +13728,7 @@
       "layer": "L1",
       "title": "高级集合类型：BTreeMap、VecDeque、BinaryHeap 与自定义 Hasher 深度分析",
       "positioning": "深入分析 Rust **标准库高级集合类型**的设计权衡——从 BTreeMap/BTreeSet 的有序关联容器，到 HashMap 自定义 hasher，再到 VecDeque 的双端队列与 BinaryHeap 的优先队列，揭示每种数据结构的所有权（Ownership）语义、性能特征、内存布局与选型策略。",
-      "line_count": 1067,
+      "line_count": 1071,
       "theorem_chains": [
         {
           "text": "- **反命题 1：「`HashMap` 总是比 `BTreeMap` 快」** —— 有边界。小键集（<50 项）时 B 树的缓存友好性常反超哈希计算成本；有序遍历、范围查询、前缀扫描场景 B 树是唯一选择；哈希的另一隐性成本是 DoS 抗性（`HashMap` 默认 SipHash 有防护，换 `FxHash` 提速即放弃防护）。判定准则：需要顺序 ⟹ B 树；纯点查且规模大 ⟹ 哈希。",
@@ -13826,7 +13858,7 @@
         "../02_type_system/01_type_system.md",
         "01_collections.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 3,
       "matrix_rows": 26,
@@ -13846,7 +13878,7 @@
       "layer": "L1",
       "title": "字符串与文本：Rust 的 Unicode 处理与格式化系统",
       "positioning": "> 系统分析 Rust **字符串类型**的设计——String [来源: [Rust String](https://doc.rust-lang.org/std/string/struct.String.html)] 与",
-      "line_count": 947,
+      "line_count": 951,
       "theorem_chains": [
         {
           "text": "| 字符串与文本：Rust 的 Unicode 处理与格式化系统 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -14018,7 +14050,7 @@
         "../08_error_handling/01_error_handling_basics.md",
         "02_strings_and_encoding.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
       "matrix_rows": 17,
@@ -14038,7 +14070,7 @@
       "layer": "L1",
       "title": "字符串与编码：Rust 的文本处理类型系统",
       "positioning": "系统分析 Rust **字符串类型体系**的设计——String 与 str 的所有权（Ownership）语义、UTF-8 编码约束、OsString/OsStr 的平台抽象、CString/CStr 的 FFI 互操作，以及 grapheme clusters、unicode normalization 等高级文本处理概念。",
-      "line_count": 908,
+      "line_count": 912,
       "theorem_chains": [
         {
           "text": "- **反命题 2：「`from_utf8_lossy` 是安全的默认选择」** —— 有代价：损失转换静默替换无效字节，数据完整性场景（哈希、加密、协议解析）中静默损坏比报错更糟。判定准则：数据必须完整 ⟹ `from_utf8` 返回 `Result`；仅展示用途 ⟹ lossy 可接受。",
@@ -14143,7 +14175,7 @@
         "../08_error_handling/01_error_handling_basics.md",
         "01_strings_and_text.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 3,
       "matrix_rows": 45,
@@ -14163,7 +14195,7 @@
       "layer": "L1",
       "title": "格式化与显示（Display and Debug Formatting）",
       "positioning": "",
-      "line_count": 481,
+      "line_count": 485,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`{}` 和 `{:?}` 相同\" ⟹ 不成立。`{}` 调用 `Display`，`{:?}` 调用 `Debug`。",
@@ -14266,7 +14298,7 @@
         "../../07_future/00_version_tracking/rust_1_93_stabilized.md",
         "01_strings_and_text.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
       "matrix_rows": 17,
@@ -14286,7 +14318,7 @@
       "layer": "L1",
       "title": "模块系统与路径：Rust 的代码组织哲学",
       "positioning": "系统讲解 Rust **模块（Module）系统**——从 `mod`、`use`、`pub` 的语法到文件系统映射、工作空间组织，揭示 Rust 如何通过模块系统实现代码封装、可见性控制和大型项目组织。",
-      "line_count": 993,
+      "line_count": 997,
       "theorem_chains": [
         {
           "text": "| 项仅在当前模块内使用 | 默认私有 | 可见性系统（§1.2） | 跨模块访问 ⟹ 编译错误（§10.1） |",
@@ -14444,7 +14476,7 @@
         "05_enumerations.md",
         "12_items.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
       "matrix_rows": 30,
