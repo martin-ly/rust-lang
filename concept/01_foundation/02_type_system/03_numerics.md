@@ -1143,3 +1143,7 @@ fn main() {
 ---
 
 > **Rust 1.90 起**：`u{N}::{checked,overflowing,saturating,wrapping}_sub_signed` 稳定，无符号-有符号混合减法获得溢出可控语义；同时 `f32`/`f64` 的 `floor`/`ceil`/`trunc`/`fract`/`round`/`round_ties_even` 进入 const 上下文。详见 [版本页](../../07_future/00_version_tracking/rust_1_90_stabilized.md)（特性矩阵节）。
+
+> **过渡**: 掌握定宽整数与浮点规则后，可进一步学习 `as` 转换、类型推断与字面量后缀如何共同决定数值表达式类型。
+> **过渡**: 理解溢出/饱和/包装语义后，可进入 `checked_*` 与 `wrapping_*` 的选择策略，以及安全关键代码中的数值约束。
+> **过渡**: 将数值类型与 const 泛型结合，可理解数组长度、`[T; N]` 与编译期计算之间的关联。
