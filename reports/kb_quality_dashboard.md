@@ -1,25 +1,25 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-22T18:36:38.900336+00:00
-> 扫描文件数: 527
+> 生成时间: 2026-07-23T19:53:29.982416+00:00
+> 扫描文件数: 528
 
 ## 全局指标
 
 | 指标 | 数值 | 目标 | 状态 |
 |:---|:---|:---|:---|
-| 总文件数 | 527 | 27 | ✅ |
+| 总文件数 | 528 | 27 | ✅ |
 | 总定理链 (⟹) | 2120 | ≥270 | ✅ |
 | 总反命题 | 732 | ≥40 | ✅ |
 | 总 Mermaid 图 | 1077 | ≥50 | ✅ |
 | 编译验证代码块 | 5293 | ≥150 | ✅ |
-| 定理矩阵总行 | 24680 | — | — |
+| 定理矩阵总行 | 24700 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
 | docs/content/knowledge 死链数量 | 0 | 0 | ✅ |
 | 反向推理 (⟸) | 317 | ≥50 | ✅ |
 | 模板化 ⟹ | 0 | 0 | ✅ |
-| 前置概念覆盖率 | 457/457 | 100% | ✅ |
-| 后置概念覆盖率 | 457/457 | 100% | ✅ |
-| 双标签覆盖率 | 457/457 | >=95% | ✅ |
+| 前置概念覆盖率 | 458/458 | 100% | ✅ |
+| 后置概念覆盖率 | 458/458 | 100% | ✅ |
+| 双标签覆盖率 | 458/458 | >=95% | ✅ |
 | 非法标签组合 | 0 | 0 | ✅ |
 
 ## 按层级分布
@@ -33,7 +33,7 @@
 | L4 | 61 | 3.5 | 1.1 | 35/61 (57%) | 0.1 | 0 | 61/61 | 61/61 | 61/61 |
 | L5 | 27 | 3.1 | 1.4 | 19/27 (70%) | 0.0 | 0 | 27/27 | 27/27 | 27/27 |
 | L6 | 130 | 2.6 | 1.4 | 61/130 (46%) | 0.0 | 0 | 130/130 | 130/130 | 130/130 |
-| L7 | 69 | 2.0 | 0.6 | 38/69 (55%) | 0.0 | 0 | 69/69 | 69/69 | 69/69 |
+| L7 | 70 | 2.0 | 0.6 | 38/70 (54%) | 0.0 | 0 | 70/70 | 70/70 | 70/70 |
 
 ## 风险文件
 
@@ -335,6 +335,7 @@
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\02_editions.md | L7 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\feature_domain_matrix_197.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\migration_197_decision_tree.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
+| E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_100_preview.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_95_stabilized.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_96_stabilized.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_97_stabilized.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
@@ -856,6 +857,7 @@
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\04_nightly_rust.md | L7 | 283 | 3 | 0 | 0 | 0 | 1 | 2 | 6 | ❌ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\feature_domain_matrix_197.md | L7 | 292 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | ❌ | ✅ | ✅ | 专家 | 综述级 |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\migration_197_decision_tree.md | L7 | 808 | 0 | 0 | 0 | 0 | 9 | 17 | 0 | ❌ | ✅ | ✅ | 专家 | 综述级 |
+| E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_100_preview.md | L7 | 216 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 专家 | 实验级 |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_90_stabilized.md | L7 | 972 | 4 | 0 | 0 | 1 | 1 | 17 | 6 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_91_stabilized.md | L7 | 2792 | 3 | 0 | 0 | 0 | 1 | 83 | 6 | ❌ | ✅ | ✅ | 专家 | 综述级 |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_92_stabilized.md | L7 | 2778 | 3 | 0 | 0 | 0 | 1 | 74 | 6 | ❌ | ✅ | ✅ | 专家 | 综述级 |

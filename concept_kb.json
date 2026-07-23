@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 527,
-    "generated_at": "2026-07-22T18:36:38.901336+00:00"
+    "total_files": 528,
+    "generated_at": "2026-07-23T19:53:29.983416+00:00"
   },
   "files": [
     {
@@ -63734,6 +63734,53 @@
         ],
         "post": [
           "> [Rust 1.97 前沿预览](rust_1_97_preview.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\00_version_tracking\\rust_1_100_preview.md",
+      "layer": "L7",
+      "title": "Rust 1.100+ 前沿特性预览",
+      "positioning": "",
+      "line_count": 216,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../06_ecosystem/01_cargo/01_cargo_script.md",
+        "../../06_ecosystem/01_cargo/15_cargo_getting_started.md",
+        "../02_preview_features/01_effects_system.md",
+        "../02_preview_features/03_safety_tags_preview.md",
+        "../02_preview_features/05_derive_coerce_pointee_preview.md",
+        "../02_preview_features/06_const_trait_impl_preview.md",
+        "../02_preview_features/09_return_type_notation_preview.md",
+        "../02_preview_features/16_cranelift_backend_preview.md",
+        "../02_preview_features/17_type_alias_impl_trait_preview.md",
+        "../02_preview_features/18_arbitrary_self_types_preview.md",
+        "../02_preview_features/22_async_drop_preview.md",
+        "../02_preview_features/23_field_projections_preview.md",
+        "../02_preview_features/24_borrow_sanitizer.md",
+        "../02_preview_features/25_gen_blocks_preview.md",
+        "../02_preview_features/27_cargo_semver_checks_preview.md",
+        "../02_preview_features/29_aarch64_sve_sme_preview.md",
+        "../02_preview_features/31_specialization_preview.md",
+        "../02_preview_features/35_f16_f128_preview.md",
+        "01_rust_version_tracking.md",
+        "rust_1_99_preview.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 20,
+      "pre_post": {
+        "pre": [
+          "[Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.99+ 前沿特性预览](rust_1_99_preview.md) · [Cargo 入门](../../06_ecosystem/01_cargo/15_cargo_getting_started.md)"
+        ],
+        "post": [
+          "Rust 1.101+ 前沿特性预览（待 1.100.0 进入 beta 后建立）"
         ]
       },
       "backward_chains": 0,
