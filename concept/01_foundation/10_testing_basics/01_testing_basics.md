@@ -812,3 +812,7 @@ fn main() {}
 - **对偶**：与编译期保障相对（运行时验证 vs 静态证明），对照 [Type System](../02_type_system/01_type_system.md)。
 - **组合**：断言 panic 机制见 [Panic and Abort](../08_error_handling/03_panic_and_abort.md)。
 - **依赖**：`#[test]` 属性依赖 [Attributes and Macros](../09_macros_basics/01_attributes_and_macros.md)。
+
+> **过渡**: 掌握单元测试与集成测试结构后，可进一步学习测试夹具、参数化测试与 mock 设计。
+> **过渡**: 将测试与 panic/错误处理结合，可理解 `#[should_panic]` 与 `Result` 测试的适用场景。
+> **过渡**: 从测试基础出发，可进入 `cargo test` 并发模型、文档测试与 CI 质量门集成。
