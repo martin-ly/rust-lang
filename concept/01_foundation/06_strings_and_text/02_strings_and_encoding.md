@@ -905,3 +905,7 @@ fn main() {
 - **对偶**：合法 UTF-8 不变量与平台字节串宽松性相对。
 - **组合**：与 [Rust FFI](../../03_advanced/04_ffi/01_rust_ffi.md) 组合完成 C 字符串互操作。
 - **依赖**：转换错误处理依赖 [Error Handling Basics](../08_error_handling/01_error_handling_basics.md)。
+
+> **过渡**: 掌握 UTF-8 与平台编码转换后，可进一步学习 FFI 中 `CString`/`CStr` 与 Rust 字符串的安全互操作。
+> **过渡**: 将编码不变量与错误处理结合，可理解为什么 `from_utf8` 返回 `Result` 而 `lossy` 变体提供兜底策略。
+> **过渡**: 从字符串编码出发，可进入国际化（i18n）、正则表达式、serde 与终端/文件路径编码处理。

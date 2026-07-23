@@ -944,3 +944,7 @@ thread 'main' panicked at 'byte index 10 is out of bounds of `hello`'
 - **对偶**：与 `Vec<u8>`/`&[u8]` 字节缓冲相对（文本不变量 vs 原始字节），见 [Collections](../05_collections/01_collections.md)。
 - **组合**：与 [Error Handling](../08_error_handling/01_error_handling_basics.md) 组合处理非法 UTF-8。
 - **依赖**：`String`/`&str` 二分依赖 [Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md)。
+
+> **过渡**: 掌握 `String`/`&str` 的不变量后，可进一步学习索引、切片与 UTF-8 边界安全规则。
+> **过渡**: 将字符串所有权模型与集合结合，可理解 `String` 作为拥有缓冲、`&str` 作为借用的视图关系。
+> **过渡**: 从字符串基础出发，可进入 `OsStr`/`CString`、正则、序列化与 FFI 字符串互操作的学习。

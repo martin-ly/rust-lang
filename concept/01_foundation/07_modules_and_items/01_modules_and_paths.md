@@ -990,3 +990,7 @@ mod external_user {
 - **对偶**：与 C++ 文本包含 `#include` 相对，见 [Friend vs Module Privacy](../../02_intermediate/05_modules_and_visibility/02_friend_vs_module_privacy.md)。
 - **组合**：与 [Structs](04_structs.md) / [Enumerations](05_enumerations.md) 组合形成 crate 的公共 API 面。
 - **依赖**：进阶可见性控制见 [Module System](../../02_intermediate/05_modules_and_visibility/01_module_system.md)。
+
+> **过渡**: 掌握 crate/模块/文件映射后，可进一步学习 `pub(restricted)`、`use` 别名与 `mod` 文件布局约定。
+> **过渡**: 将模块路径与可见性结合，可理解为什么 `pub` 只是授权公开，真正可达还受父模块可见性约束。
+> **过渡**: 从模块系统出发，可进入 workspace、crate 间依赖、re-export 与 API 稳定性设计。

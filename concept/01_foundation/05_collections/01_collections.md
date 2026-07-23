@@ -935,3 +935,7 @@ fn main() {
 - **对偶**：与定长数组 `[T; N]` 相对（动态容量 vs 编译期定长），见 [Numerics](../02_type_system/03_numerics.md) 的 const 泛型（Generics）讨论。
 - **组合**：与 [Iterators](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) 组合成数据处理管线。
 - **依赖**：元素生命周期（Lifetimes）管理依赖 [Ownership](../01_ownership_borrow_lifetime/01_ownership.md)。
+
+> **过渡**: 掌握 Vec/String/HashMap 核心 API 后，可进一步学习容量管理、 amortized 增长与迭代器消耗规则。
+> **过渡**: 将集合与所有权/借用规则结合，可理解为什么 `iter()`/`iter_mut()`/`into_iter()` 三种迭代器对应不同的所有权转移。
+> **过渡**: 从标准集合出发，可进入泛型约束、自定义集合与 unsafe 内部实现的学习。
