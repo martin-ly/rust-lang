@@ -264,3 +264,31 @@ mindmap
       宏命名空间
     五、macro_use Prelude
 ```
+
+---
+
+## 认知路径
+
+> **认知路径**: 从「为什么无需 `use std::vec::Vec`」这一日常观察出发，理解 prelude 如何分层注入标准/外部/语言命名空间，再学习如何控制或自定义这些默认导入。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---|
+| 标准库 prelude 自动注入 ⟹ 常用类型零样板使用 | `std` 可用 | `Vec`、`String`、`Option` 等无需显式 use | 高 |
+| `#![no_std]` 关闭标准库 prelude ⟹ 显式控制依赖 | 需要嵌入式或最小依赖 | 必须手动引入 `core`/`alloc` 项 | 高 |
+| 外部 crate prelude 依赖 `extern crate`/`use` ⟹ API 面可控 | 包作者显式导出 | 用户获得一致的导入体验 | 高 |
+
+> **过渡**: 掌握标准库 prelude 后，可进一步学习 `#![no_std]`、`#[prelude_import]` 与自定义 crate prelude 的写法。
+> **过渡**: 将 prelude 与模块路径结合，可理解为什么同名类型在不同作用域可能冲突或遮蔽。
+> **过渡**: 从 prelude 出发，可进入宏的 `macro_use` prelude、`global_allocator` 与嵌入式启动代码的学习。
+
+> 样板代码减少 ⟸ 常用类型自动注入 ⟸ 标准库 prelude
+> 依赖可控 ⟸ `#![no_std]` 关闭隐式导入 ⟸ 显式引入 core/alloc
+
+---
+
+## 反命题与边界
+
+> **反命题**: "Prelude 中的名字在所有作用域都可见，无法遮蔽或覆盖。" —— 错误。Prelude 名字作用域最低，用户显式 `use` 或局部定义可遮蔽它；例如本地定义 `enum Option` 会遮蔽标准库 `Option`（虽然不建议）。
+> **边界**: `#[no_std]` 会移除 `std` prelude，但 `core` prelude 仍然存在；语言级 prelude（如 `Copy`、`Send` 等 trait）无法关闭。
