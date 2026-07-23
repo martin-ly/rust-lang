@@ -1746,3 +1746,9 @@ goto 的错误清理模式
 ---
 
 > **Rust 1.95 起**：match 守卫支持 `if let`（if-let guards），可在 `match` 分支守卫中做条件绑定；同时路径段关键字重命名导入（如 `use foo::r#async as f;`）稳定。详见 [版本页](../../07_future/00_version_tracking/rust_1_95_stabilized.md)（特性矩阵节）。
+
+---
+
+> **过渡**: 理解 Control Flow（控制流）后，下一步应学习 [Generics（泛型）](../../02_intermediate/01_generics/01_generics.md) 与 [Traits（特征）](../../02_intermediate/00_traits/01_traits.md)，并注意 `match` 穷尽性与表达式类型的边界。
+> **过渡**: 在 [Ownership（所有权）](../01_ownership_borrow_lifetime/01_ownership.md) 与 [Type System（类型系统）](../02_type_system/01_type_system.md) 的基础上，本节将 `if`/`match`/`loop` 扩展为值生成规则。
+> **过渡**: 从本节规则到 [Async/Await（异步编程）](../../03_advanced/01_async/01_async.md)，核心变化是控制流挂起点与状态机变换。

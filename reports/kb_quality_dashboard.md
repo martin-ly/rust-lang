@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-23T21:40:30.533292+00:00
+> 生成时间: 2026-07-23T22:14:38.658370+00:00
 > 扫描文件数: 528
 
 ## 全局指标
@@ -8,14 +8,14 @@
 | 指标 | 数值 | 目标 | 状态 |
 |:---|:---|:---|:---|
 | 总文件数 | 528 | 27 | ✅ |
-| 总定理链 (⟹) | 2120 | ≥270 | ✅ |
-| 总反命题 | 732 | ≥40 | ✅ |
+| 总定理链 (⟹) | 2126 | ≥270 | ✅ |
+| 总反命题 | 738 | ≥40 | ✅ |
 | 总 Mermaid 图 | 1077 | ≥50 | ✅ |
 | 编译验证代码块 | 5293 | ≥150 | ✅ |
-| 定理矩阵总行 | 24700 | — | — |
+| 定理矩阵总行 | 24708 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
 | docs/content/knowledge 死链数量 | 0 | 0 | ✅ |
-| 反向推理 (⟸) | 317 | ≥50 | ✅ |
+| 反向推理 (⟸) | 331 | ≥50 | ✅ |
 | 模板化 ⟹ | 0 | 0 | ✅ |
 | 前置概念覆盖率 | 458/458 | 100% | ✅ |
 | 后置概念覆盖率 | 458/458 | 100% | ✅ |
@@ -27,7 +27,7 @@
 | 层级 | 文件数 | 平均 ⟹/文件 | 平均过渡段/文件 | 认知路径 | ⟸/文件 | 模板化 | 前置覆盖 | 后置覆盖 | 双标签 |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
 | L0 | 70 | 7.0 | 2.8 | 35/70 (50%) | 0.6 | 0 | 16/70 | 14/70 | 69/70 |
-| L1 | 57 | 4.2 | 2.3 | 40/57 (70%) | 1.5 | 0 | 57/57 | 57/57 | 57/57 |
+| L1 | 57 | 4.3 | 3.2 | 42/57 (73%) | 1.7 | 0 | 57/57 | 57/57 | 57/57 |
 | L2 | 41 | 5.1 | 1.2 | 25/41 (60%) | 1.8 | 0 | 41/41 | 41/41 | 41/41 |
 | L3 | 72 | 5.7 | 2.2 | 55/72 (76%) | 1.6 | 0 | 72/72 | 72/72 | 72/72 |
 | L4 | 61 | 3.5 | 1.1 | 35/61 (57%) | 0.1 | 0 | 61/61 | 61/61 | 61/61 |
@@ -39,14 +39,8 @@
 
 | 文件 | 层级 | 未通过项 |
 |:---|:---|:---|
-| E:\_src\rust-lang\concept\01_foundation\00_start\01_pl_prerequisites.md | L1 | 过渡段落不足 (0 < 3); 缺失反命题 |
-| E:\_src\rust-lang\concept\01_foundation\00_start\02_zero_cost_abstractions.md | L1 | 过渡段落不足 (2 < 3) |
-| E:\_src\rust-lang\concept\01_foundation\00_start\03_closure_basics.md | L1 | 过渡段落不足 (0 < 3) |
-| E:\_src\rust-lang\concept\01_foundation\00_start\04_effects_and_purity.md | L1 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 反向推理不足 (⟸ 0 < 2) |
-| E:\_src\rust-lang\concept\01_foundation\00_start\05_std_io_and_process.md | L1 | 过渡段落不足 (0 < 3) |
-| E:\_src\rust-lang\concept\01_foundation\00_start\06_keywords.md | L1 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失反命题; 反向推理不足 (⟸ 0 < 2) |
+| E:\_src\rust-lang\concept\01_foundation\00_start\04_effects_and_purity.md | L1 | 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\01_foundation\00_start\07_operators_and_symbols.md | L1 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失反命题; 反向推理不足 (⟸ 0 < 2) |
-| E:\_src\rust-lang\concept\01_foundation\01_ownership_borrow_lifetime\05_move_semantics.md | L1 | 缺失认知路径; 过渡段落不足 (0 < 3); 缺失反命题; 反向推理不足 (⟸ 0 < 2) |
 | E:\_src\rust-lang\concept\01_foundation\01_ownership_borrow_lifetime\06_ownership_inventories_brown_book.md | L1 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失反命题; 反向推理不足 (⟸ 0 < 2) |
 | E:\_src\rust-lang\concept\01_foundation\02_type_system\02_never_type.md | L1 | 过渡段落不足 (0 < 3); 缺失反命题 |
 | E:\_src\rust-lang\concept\01_foundation\02_type_system\03_numerics.md | L1 | 过渡段落不足 (0 < 3) |
@@ -55,7 +49,6 @@
 | E:\_src\rust-lang\concept\01_foundation\03_values_and_references\01_reference_semantics.md | L1 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\01_foundation\03_values_and_references\02_value_vs_reference_semantics.md | L1 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失反命题; 反向推理不足 (⟸ 0 < 2) |
 | E:\_src\rust-lang\concept\01_foundation\03_values_and_references\03_variable_model.md | L1 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 反向推理不足 (⟸ 0 < 2) |
-| E:\_src\rust-lang\concept\01_foundation\04_control_flow\01_control_flow.md | L1 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\01_foundation\04_control_flow\02_patterns.md | L1 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失反命题; 反向推理不足 (⟸ 0 < 2) |
 | E:\_src\rust-lang\concept\01_foundation\04_control_flow\03_let_chains.md | L1 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 反向推理不足 (⟸ 0 < 2) |
 | E:\_src\rust-lang\concept\01_foundation\04_control_flow\04_statements_and_expressions.md | L1 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失反命题; 反向推理不足 (⟸ 0 < 2) |
@@ -464,19 +457,19 @@
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\kg_ontology_v2.md | L0 | 331 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 研究者 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\knowledge_topology\kg_tlo_alignment.md | L0 | 264 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\00_start\00_start.md | L1 | 343 | 4 | 2 | 0 | 1 | 2 | 3 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| E:\_src\rust-lang\concept\01_foundation\00_start\01_pl_prerequisites.md | L1 | 598 | 3 | 2 | 0 | 0 | 1 | 14 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| E:\_src\rust-lang\concept\01_foundation\00_start\02_zero_cost_abstractions.md | L1 | 919 | 3 | 2 | 0 | 2 | 3 | 14 | 2 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| E:\_src\rust-lang\concept\01_foundation\00_start\03_closure_basics.md | L1 | 951 | 4 | 2 | 0 | 2 | 2 | 18 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| E:\_src\rust-lang\concept\01_foundation\00_start\04_effects_and_purity.md | L1 | 849 | 0 | 0 | 0 | 2 | 1 | 17 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| E:\_src\rust-lang\concept\01_foundation\00_start\05_std_io_and_process.md | L1 | 503 | 4 | 4 | 0 | 4 | 2 | 10 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| E:\_src\rust-lang\concept\01_foundation\00_start\06_keywords.md | L1 | 292 | 0 | 0 | 0 | 0 | 1 | 4 | 0 | ❌ | ✅ | ✅ | 初学者 | 综述级 |
+| E:\_src\rust-lang\concept\01_foundation\00_start\01_pl_prerequisites.md | L1 | 612 | 3 | 4 | 0 | 1 | 1 | 14 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| E:\_src\rust-lang\concept\01_foundation\00_start\02_zero_cost_abstractions.md | L1 | 921 | 3 | 2 | 0 | 2 | 3 | 14 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| E:\_src\rust-lang\concept\01_foundation\00_start\03_closure_basics.md | L1 | 965 | 4 | 4 | 0 | 3 | 2 | 18 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| E:\_src\rust-lang\concept\01_foundation\00_start\04_effects_and_purity.md | L1 | 863 | 0 | 2 | 0 | 3 | 1 | 17 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| E:\_src\rust-lang\concept\01_foundation\00_start\05_std_io_and_process.md | L1 | 517 | 4 | 6 | 0 | 5 | 2 | 10 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| E:\_src\rust-lang\concept\01_foundation\00_start\06_keywords.md | L1 | 320 | 3 | 2 | 0 | 1 | 1 | 4 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\00_start\07_operators_and_symbols.md | L1 | 279 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | ❌ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\01_ownership_borrow_lifetime\00_ownership_borrow_lifetime_knowledge_map.md | L1 | 447 | 5 | 2 | 0 | 1 | 6 | 0 | 5 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| E:\_src\rust-lang\concept\01_foundation\01_ownership_borrow_lifetime\01_ownership.md | L1 | 2024 | 27 | 2 | 0 | 3 | 8 | 46 | 16 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| E:\_src\rust-lang\concept\01_foundation\01_ownership_borrow_lifetime\01_ownership.md | L1 | 2031 | 27 | 4 | 0 | 3 | 8 | 46 | 22 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\01_ownership_borrow_lifetime\02_borrowing.md | L1 | 2159 | 13 | 3 | 0 | 3 | 7 | 53 | 20 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\01_ownership_borrow_lifetime\03_lifetimes.md | L1 | 1557 | 23 | 2 | 0 | 3 | 6 | 40 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\01_ownership_borrow_lifetime\04_lifetimes_advanced.md | L1 | 1894 | 3 | 2 | 0 | 1 | 1 | 49 | 10 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| E:\_src\rust-lang\concept\01_foundation\01_ownership_borrow_lifetime\05_move_semantics.md | L1 | 363 | 3 | 0 | 0 | 0 | 1 | 6 | 0 | ❌ | ✅ | ✅ | 初学者 | 综述级 |
+| E:\_src\rust-lang\concept\01_foundation\01_ownership_borrow_lifetime\05_move_semantics.md | L1 | 389 | 6 | 2 | 0 | 1 | 1 | 6 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\01_ownership_borrow_lifetime\06_ownership_inventories_brown_book.md | L1 | 226 | 0 | 0 | 0 | 0 | 1 | 3 | 0 | ❌ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\02_type_system\01_type_system.md | L1 | 3373 | 23 | 2 | 0 | 3 | 13 | 63 | 16 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\02_type_system\02_never_type.md | L1 | 678 | 3 | 2 | 0 | 0 | 1 | 16 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
@@ -486,7 +479,7 @@
 | E:\_src\rust-lang\concept\01_foundation\03_values_and_references\01_reference_semantics.md | L1 | 1522 | 4 | 2 | 0 | 3 | 8 | 35 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\03_values_and_references\02_value_vs_reference_semantics.md | L1 | 281 | 0 | 0 | 0 | 0 | 1 | 5 | 0 | ❌ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\03_values_and_references\03_variable_model.md | L1 | 757 | 0 | 0 | 0 | 2 | 1 | 12 | 0 | ❌ | ✅ | ✅ | 初学者 | 综述级 |
-| E:\_src\rust-lang\concept\01_foundation\04_control_flow\01_control_flow.md | L1 | 1749 | 3 | 2 | 0 | 2 | 6 | 25 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| E:\_src\rust-lang\concept\01_foundation\04_control_flow\01_control_flow.md | L1 | 1755 | 3 | 2 | 0 | 2 | 6 | 25 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\04_control_flow\02_patterns.md | L1 | 400 | 0 | 0 | 0 | 0 | 1 | 14 | 0 | ❌ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\04_control_flow\03_let_chains.md | L1 | 505 | 0 | 0 | 0 | 4 | 1 | 24 | 0 | ❌ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\01_foundation\04_control_flow\04_statements_and_expressions.md | L1 | 306 | 0 | 0 | 0 | 0 | 1 | 7 | 0 | ❌ | ✅ | ✅ | 初学者 | 综述级 |

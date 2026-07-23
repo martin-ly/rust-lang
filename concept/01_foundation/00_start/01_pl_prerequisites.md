@@ -595,3 +595,17 @@ fn main() {
 ```
 
 > 理论对照：这正是「副作用模型」一节中写效果（write effect）排他性的编译期体现。
+
+> **过渡**: 从 PL 理论基础到 Rust 的所有权（Ownership）系统，核心变化是把「别名控制」从动态运行时检查转化为编译期静态规则。
+> **过渡**: 理解求值策略、副作用模型与变量模型后，下一步应学习 Rust 的所有权（Ownership）、借用（Borrowing）与生命周期（Lifetimes），并注意它们如何用类型系统（Type System）显式化效果。
+> **过渡**: 本节中的 Continuation 与 CPS 视角是理解 `async/await` 状态机编译模型的前置 lens；忽略它会导致把 `await` 误读为线程阻塞。
+
+> 内存安全 ⟸ 别名控制 ⟸ 借用检查器
+> fearless concurrency ⟸ 写效果排他性 ⟸ `&mut T` 独占语义
+
+---
+
+## 反命题与边界
+
+> **反命题**: "PL 理论只是学术概念，写 Rust 代码不需要理解。" —— 错误。Rust 的所有权（Ownership）规则直接对应线性/仿射逻辑中的资源唯一性，不理解它就无法解释为什么 `move` 后原变量失效、为什么 `&mut` 不能别名。
+> **边界**: 当代码涉及 `unsafe`、内部可变性（Interior Mutability）或 FFI 时，PL 理论的静态保证会被部分放宽，需要程序员手动承担验证责任（参见 [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)）。

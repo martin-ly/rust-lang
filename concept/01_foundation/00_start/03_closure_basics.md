@@ -948,3 +948,17 @@ fn make_closure() -> impl Fn() -> i32 {
 - **对偶**：与普通函数（无环境捕获）相对，见 [Functions](../07_modules_and_items/02_functions.md)。
 - **组合**：与 [Iterator Patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) 组合使用。
 - **依赖**：捕获的所有权规则依赖 [Ownership](../01_ownership_borrow_lifetime/01_ownership.md)。
+
+> **过渡**: 从普通函数到闭包（Closures），核心变化是函数拥有了「环境捕获」能力；这要求把所有权（Ownership）/借用（Borrowing）规则扩展到匿名类型上。
+> **过渡**: 理解 `Fn`/`FnMut`/`FnOnce` 的 trait 分派后，下一步应学习迭代器适配器与异步（Async）闭包，并注意捕获方式对生命周期（Lifetimes）的影响。
+> **过渡**: 闭包是 Rust 函数式接口与所有权系统交叉点；忽略捕获语义会导致返回闭包时出现悬垂引用（Dangling Reference）错误。
+
+> 迭代器链零成本 ⟸ 闭包内联 ⟸ 单态化与静态分派
+> 回调安全 ⟸ 捕获方式显式化 ⟸ `move` 关键字与 `Fn`/`FnMut`/`FnOnce` trait
+
+---
+
+## 反命题与边界
+
+> **反命题**: "闭包捕获总是按引用（Reference），用 `move` 没有意义。" —— 错误。Rust 闭包默认按借用捕获，但返回闭包或跨作用域传递时必须用 `move` 按值转移所有权，否则会出现悬垂引用。
+> **边界**: 当闭包捕获 `&mut` 环境并返回 `FnMut` 时，调用者必须保证闭包生命周期（Lifetimes）不超出被捕获变量的作用域；在 async 闭包中还需考虑 `Pin` 与 `Send` 约束。

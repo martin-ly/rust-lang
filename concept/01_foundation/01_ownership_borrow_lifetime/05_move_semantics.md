@@ -360,3 +360,29 @@ fn main() {
     println!("{s} {t}");
 }
 ```
+
+---
+
+## 认知路径（Cognitive Path）
+
+> **认知路径**: 从 [Ownership（所有权）](01_ownership.md) 与 [Variable Model（变量模型）](../03_values_and_references/03_variable_model.md) 出发，经由本节的核心判定规则，到达 [Borrowing（借用）](02_borrowing.md)、[Lifetimes（生命周期）](03_lifetimes.md)、[Rust vs C++（跨语言对比）](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) 与工程实践。
+
+### 核心推理链
+
+| 定理 | 前提 | 结论 | 置信度 |
+|:---|:---|:---|:---:|
+| Move 规则 ⟹ 可编译 | 掌握 Copy/Clone 区别 | 能写出符合借用检查器的资源转移代码 | 高 |
+| 忽略 Copy 边界 ⟹ 编译错误 | 非 Copy 类型赋值后继续使用 | 出现 E0382 错误 | 高 |
+| 显式 Clone 最佳实践 ⟹ 安全抽象 | 需要共享时选择 clone 或 Rc | 减少意外移动与数据竞争 | 中 |
+
+### 反命题与边界
+
+> **反命题**: "Move 语义会复制数据（Copy）" —— 错误。正确判定是 Move 是 bitwise 转移 + 原绑定失效；只有实现 `Copy` 的类型才按位复制。
+> **边界**: 当类型实现 `Drop` 或需 `ManuallyDrop` 时，移动语义受析构顺序约束；跨 FFI 边界需显式管理（参见 [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)）。
+
+> **过渡**: 理解 Move 语义（Move Semantics）后，下一步应学习 [Borrowing（借用）](02_borrowing.md) 与 [Lifetimes（生命周期）](03_lifetimes.md)，并注意 `Copy` 与 `Clone` 的边界。
+> **过渡**: 在 [Ownership（所有权）](01_ownership.md) 与 [Variable Model（变量模型）](../03_values_and_references/03_variable_model.md) 的基础上，本节将资源转移扩展为可判定规则。
+> **过渡**: 从本节规则到 [Rust vs C++（跨语言对比）](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)，核心变化是理解 Rust moved-from 状态与 C++ 有效但未指定状态的本质差异。
+
+> 资源确定性释放 ⟸ RAII + 所有权唯一性
+> 无 moved-from 漏洞 ⟸ 编译期标记原绑定失效

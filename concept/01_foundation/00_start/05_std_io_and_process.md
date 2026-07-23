@@ -500,3 +500,17 @@ D. `let _ = file.read_to_string(&mut s);`
 
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
 - **P2 生态/社区**: [docs.rs/num_cpus — 生态权威 API 文档](https://docs.rs/num_cpus) · [docs.rs/interprocess — 生态权威 API 文档](https://docs.rs/interprocess)
+
+> **过渡**: 从标准 I/O API 到错误处理与进程控制，核心变化是把「程序如何与外界交互」从隐式副作用提升为显式 `Result` 与跨平台路径抽象。
+> **过渡**: 掌握 `std::io`/`std::fs`/`std::process` 后，下一步应学习 `?` 错误传播、自定义错误类型与异步（Async） I/O，并注意同步阻塞与并发性能的区别。
+> **过渡**: 标准库 I/O 是 Rust 与操作系统交互的安全边界；忽略 `Result` 或路径编码会导致跨平台 bug 与安全漏洞。
+
+> 健壮 CLI ⟸ 错误显式传播 ⟸ `Result` 与 `?` 运算符
+> 跨平台路径安全 ⟸ `PathBuf` 抽象 ⟸ 操作系统编码隔离
+
+---
+
+## 反命题与边界
+
+> **反命题**: "Rust 的 I/O 函数失败时 panic，不需要处理 `Result`。" —— 错误。Rust 标准库 I/O 几乎全返回 `Result`，忽略错误会导致数据丢失、权限绕过或未定义行为。
+> **边界**: 当处理外部命令、环境变量或文件系统时，输入可能包含恶意构造的路径或命令注入；需要显式验证并避免把用户输入直接传给 `std::process::Command`。

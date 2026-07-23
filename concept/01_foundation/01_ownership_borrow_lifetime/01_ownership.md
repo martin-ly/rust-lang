@@ -2020,4 +2020,11 @@ let word = get_first_word(s.clone()); // s 仍有效
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
+> **过渡**: 从所有权（Ownership）的三条规则到借用（Borrowing）与生命周期（Lifetimes），核心变化是从「唯一绑定」过渡到「临时访问 + 时效约束」。
+> **过渡**: 理解 move 语义后，下一步应学习 `Copy`/`Clone` 的边界与 `Drop` 的确定性释放，并注意循环引用导致的泄漏。
+> **过渡**: 所有权（Ownership）规则是借用检查器（Borrow Checker）的根基；离开所有权而直接讨论借用会丢失内存安全的形式化来源。
+
+> 类型安全 ⟸ 所有权唯一性 ⟸ 借用检查器
+> 无数据竞争 ⟸ 可变借用（Mutable Borrow）独占性 ⟸ Send/Sync 自动推导
+
 - **P2 生态/社区**: [Learn Rust With Entirely Too Many Linked Lists](https://rust-unofficial.github.io/too-many-lists/)

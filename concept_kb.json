@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 528,
-    "generated_at": "2026-07-23T21:40:30.534291+00:00"
+    "generated_at": "2026-07-23T22:14:38.659370+00:00"
   },
   "files": [
     {
@@ -7797,7 +7797,7 @@
       "layer": "L1",
       "title": "编程语言理论基础（PL Prerequisites）",
       "positioning": "L1 基础层的**前置知识补充**。理解这些通用 PL 概念后，你将能更深刻地回答\"为什么 Rust 要这样设计\"，而非仅仅记忆规则。",
-      "line_count": 598,
+      "line_count": 612,
       "theorem_chains": [
         {
           "text": "| 编程语言理论基础（PL Prerequisites） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -7812,7 +7812,11 @@
           "type": "table_row"
         }
       ],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -7913,12 +7917,13 @@
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/01_generics.md",
         "../../03_advanced/01_async/01_async.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
         "../01_ownership_borrow_lifetime/01_ownership.md",
         "../02_type_system/01_type_system.md",
         "../03_values_and_references/03_variable_model.md",
         "04_effects_and_purity.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
       "matrix_rows": 36,
@@ -7931,7 +7936,7 @@
           "[Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)"
         ]
       },
-      "backward_chains": 2,
+      "backward_chains": 4,
       "templated_chains": 0
     },
     {
@@ -7939,7 +7944,7 @@
       "layer": "L1",
       "title": "零成本抽象：Rust 的性能哲学",
       "positioning": "深入分析 Rust **零成本抽象（Zero-Cost Abstraction）**（Zero-Cost Abstractions）的设计哲学——探讨泛型（Generics）、迭代器（Iterator）、Trait 对象等高层抽象如何在编译期消除运行时（Runtime）开销，以及与 C++ \"零开销原则\" 的对比。",
-      "line_count": 919,
+      "line_count": 921,
       "theorem_chains": [
         {
           "text": "| 零成本抽象：Rust 的性能哲学 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -8078,7 +8083,7 @@
         "../01_ownership_borrow_lifetime/05_move_semantics.md",
         "../02_type_system/01_type_system.md"
       ],
-      "transitions": 2,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 3,
       "matrix_rows": 29,
@@ -8098,7 +8103,7 @@
       "layer": "L1",
       "title": "闭包基础：捕获环境与匿名函数",
       "positioning": "系统讲解 Rust **闭包（Closure）**——从环境捕获、Fn/FnMut/FnOnce trait 到闭包作为参数和返回值，揭示 Rust 如何将函数式编程的灵活性与所有权（Ownership）系统的安全性结合。",
-      "line_count": 951,
+      "line_count": 965,
       "theorem_chains": [
         {
           "text": "| 闭包基础：捕获环境与匿名函数 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -8123,6 +8128,9 @@
         },
         {
           "title": "### 4.1 反命题"
+        },
+        {
+          "title": "## 反命题"
         }
       ],
       "code_blocks": [
@@ -8271,7 +8279,7 @@
         "../07_modules_and_items/02_functions.md",
         "../11_quizzes/04_quiz_closures_iterators.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
       "matrix_rows": 22,
@@ -8283,7 +8291,7 @@
           "[Iterator](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) · [Async](../../03_advanced/01_async/01_async.md) · [Functional Patterns](../../02_intermediate/04_types_and_conversions/02_closure_types.md)"
         ]
       },
-      "backward_chains": 2,
+      "backward_chains": 4,
       "templated_chains": 0
     },
     {
@@ -8291,7 +8299,7 @@
       "layer": "L1",
       "title": "副作用与纯度：从引用透明到 Rust 的所有权效果",
       "positioning": "",
-      "line_count": 849,
+      "line_count": 863,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -8299,6 +8307,9 @@
         },
         {
           "title": "### 7.1 反例"
+        },
+        {
+          "title": "## 反命题"
         }
       ],
       "code_blocks": [
@@ -8446,7 +8457,7 @@
         "../11_quizzes/05_quiz_pl_foundations.md",
         "https://github.com/rust-lang/keyword-generics-initiative/blob/master/updates/2024-02-09-extending-rusts-effect-system.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
       "matrix_rows": 69,
@@ -8458,7 +8469,7 @@
           "[Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md) · [Effects System](../../07_future/02_preview_features/01_effects_system.md) · [Async](../../03_advanced/01_async/01_async.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -8466,7 +8477,7 @@
       "layer": "L1",
       "title": "标准 I/O 与进程（std I/O and Process）",
       "positioning": "",
-      "line_count": 503,
+      "line_count": 517,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`std::io` 是异步（Async）的\" ⟹ 不成立。`std::io` 是同步阻塞 I/O；异步 I/O 使用 `tokio::io` 等。",
@@ -8497,6 +8508,9 @@
         },
         {
           "title": "### 5.1 反命题"
+        },
+        {
+          "title": "## 反命题"
         }
       ],
       "code_blocks": [
@@ -8574,7 +8588,7 @@
         "../08_error_handling/01_error_handling_basics.md",
         "../10_testing_basics/01_testing_basics.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
       "matrix_rows": 17,
@@ -8586,7 +8600,7 @@
           "[Async I/O](../../03_advanced/01_async/01_async.md) · [Command Line Apps](../../06_ecosystem/06_data_and_distributed/01_application_domains.md) · [Testing Basics](../10_testing_basics/01_testing_basics.md)"
         ]
       },
-      "backward_chains": 4,
+      "backward_chains": 6,
       "templated_chains": 0
     },
     {
@@ -8594,9 +8608,26 @@
       "layer": "L1",
       "title": "Rust 关键字（Keywords）",
       "positioning": "",
-      "line_count": 292,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 320,
+      "theorem_chains": [
+        {
+          "text": "| 关键字保留 ⟹ 解析无歧义 | 理解关键字表 | 能正确识别语句结构 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| `r#` 转义 ⟹ 兼容旧接口 | 需要与保留关键字同名的标识符 | 可调用 `r#match` 等名称 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 保留关键字 ⟹ 版本演进 | 关注未来保留字 | 避免在 API 命名中使用潜在关键字 | 中 |",
+          "type": "table_row"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -8637,10 +8668,10 @@
         "../09_macros_basics/01_attributes_and_macros.md",
         "07_operators_and_symbols.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 64,
+      "matrix_rows": 68,
       "pre_post": {
         "pre": [
           "[Identifiers and Names](../03_values_and_references/03_variable_model.md) · [Terminology Glossary](../../00_meta/01_terminology/01_terminology_glossary.md)"
@@ -8649,7 +8680,7 @@
           "[Attributes and Macros](../09_macros_basics/01_attributes_and_macros.md) · [Modules and Paths](../07_modules_and_items/01_modules_and_paths.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -8765,7 +8796,7 @@
       "layer": "L1",
       "title": "Ownership（所有权）",
       "positioning": "",
-      "line_count": 2024,
+      "line_count": 2031,
       "theorem_chains": [
         {
           "text": "3. **分离逻辑（Separation Logic）视角**：`&mut T` 授予对 `T` 的**独占访问权**——形式上等价于分离逻辑中的 `points-to` 谓词 `x ↦ v`；`&T` 的共享性通过「不可变 ⟹ 并发可共享」约束保证无数据竞争。",
@@ -9234,7 +9265,7 @@
         "04_lifetimes_advanced.md",
         "06_ownership_inventories_brown_book.md"
       ],
-      "transitions": 16,
+      "transitions": 22,
       "has_cognitive_path": true,
       "mermaid_blocks": 8,
       "matrix_rows": 111,
@@ -9246,7 +9277,7 @@
           "[Borrowing](02_borrowing.md) · [Lifetimes](03_lifetimes.md) · [Smart Pointers](../../02_intermediate/02_memory_management/01_memory_management.md)"
         ]
       },
-      "backward_chains": 2,
+      "backward_chains": 4,
       "templated_chains": 0
     },
     {
@@ -10595,7 +10626,7 @@
       "layer": "L1",
       "title": "Move 语义：C++ 与 Rust 的资源转移模型",
       "positioning": "",
-      "line_count": 363,
+      "line_count": 389,
       "theorem_chains": [
         {
           "text": "| 非 `Copy` 类型赋值、传参、返回 | move：bitwise copy + 源变量编译期标记无效 | §3.1 Rust move 语义 | `Copy` 类型 ⟹ 源变量仍可用（§3.2） |",
@@ -10608,9 +10639,25 @@
         {
           "text": "| 自定义资源管理（三/五法则场景） | 实现 `Drop`；通常无需手写移动构造 | §6 三/五/零法则 vs Copy/Clone/Drop | 同时实现 `Copy` 与 `Drop` ⟹ 编译禁止 |",
           "type": "table_row"
+        },
+        {
+          "text": "| Move 规则 ⟹ 可编译 | 掌握 Copy/Clone 区别 | 能写出符合借用检查器的资源转移代码 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 忽略 Copy 边界 ⟹ 编译错误 | 非 Copy 类型赋值后继续使用 | 出现 E0382 错误 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 显式 Clone 最佳实践 ⟹ 安全抽象 | 需要共享时选择 clone 或 Rc | 减少意外移动与数据竞争 | 中 |",
+          "type": "table_row"
         }
       ],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -10656,16 +10703,17 @@
         "../../00_meta/04_navigation/07_learning_guide.md",
         "../../02_intermediate/00_traits/05_construction_and_initialization.md",
         "../../02_intermediate/08_quizzes/30_quiz_cpp_rust_foundations.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../03_values_and_references/03_variable_model.md",
         "01_ownership.md",
         "02_borrowing.md",
         "03_lifetimes.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 29,
+      "matrix_rows": 33,
       "pre_post": {
         "pre": [
           "[Ownership](01_ownership.md) · [Variable Model](../03_values_and_references/03_variable_model.md) · [Borrowing](02_borrowing.md) · [学习指南](../../00_meta/04_navigation/07_learning_guide.md)"
@@ -10674,7 +10722,7 @@
           "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [Construction](../../02_intermediate/00_traits/05_construction_and_initialization.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -12550,7 +12598,7 @@
       "layer": "L1",
       "title": "控制流：表达式导向的流程控制",
       "positioning": "分析 Rust **控制流结构**的设计哲学——从表达式导向（expression-oriented）的 `if`/`match`/`loop`，到 `if let`/`while let` 的模式匹配（Pattern Matching）集成，揭示 Rust 如何将控制流转化为**值生成**而非**副作用执行**。",
-      "line_count": 1749,
+      "line_count": 1755,
       "theorem_chains": [
         {
           "text": "| 控制流：表达式导向的流程控制 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -12762,6 +12810,7 @@
         "../../00_meta/01_terminology/01_terminology_glossary.md",
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../00_meta/04_navigation/08_learning_mvp_path.md",
+        "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/01_generics.md",
         "../../02_intermediate/04_types_and_conversions/01_range_types.md",
         "../../02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md",
@@ -12780,7 +12829,7 @@
         "02_patterns.md",
         "04_statements_and_expressions.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 6,
       "matrix_rows": 47,
