@@ -5391,3 +5391,39 @@ version = "3.5.0"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.foreign-types-macros]]
+version = "0.2.4"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-24 cargo update 新增传递依赖；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.quick-xml]]
+version = "0.41.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-24 cargo update 新增传递依赖；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.rustls-pki-types]]
+version = "1.15.1"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-24 cargo update 新增传递依赖；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.wayland-backend]]
+version = "0.3.16"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-24 cargo update 新增传递依赖；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.wayland-client]]
+version = "0.31.15"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-24 cargo update 新增传递依赖；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.wayland-scanner]]
+version = "0.31.11"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-07-24 cargo update 新增传递依赖；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"

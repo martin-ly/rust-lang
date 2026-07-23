@@ -24,12 +24,18 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SERIES_RE = re.compile(
-    r"rust_1\d\d|rust_19\d|readme_rust_|_part\d|_v\d+|_19\d\d|20\d\d_\d\d_\d\d|"
+    r"rust_1\d{2,3}|rust_19\d|readme_rust_|_part\d|_v\d+|_19\d\d|20\d\d_\d\d_\d\d|"
     r"comprehensive_enhancement_report|examples_collection|snapshot", re.IGNORECASE)
 
 # 显式 SERIES 白名单（人工复核登记的误报对；路径为仓库相对路径，正斜杠）。
 # 登记格式：frozenset({file1, file2})，匹配时同时按完整路径与 basename 对判定（容忍 NN_ 重编号）。
 SERIES_PAIRS = {
+    # 复核 2026-07-24：1.99+ 与 1.100+ 版本跟踪页为同系列周期跟踪模板，内容差异化（版本号、
+    # 日期、预计稳定时间、周期清单来源日期）随 nightly 滚动更新，非重复。
+    frozenset({
+        "concept/07_future/00_version_tracking/rust_1_99_preview.md",
+        "concept/07_future/00_version_tracking/rust_1_100_preview.md",
+    }),
     # 复核 2026-07-12：rust 1.90 网络示例分章文件（Part1/Part2），实测正文相似度 12.7%，
     # 内容为不同章节（基础示例 vs 进阶协议），非重复，保留分章结构。
     frozenset({

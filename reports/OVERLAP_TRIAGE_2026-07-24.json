@@ -1,7 +1,7 @@
 {
   "summary": {
-    "SERIES": 129,
-    "MERGE": 2,
+    "SERIES": 131,
+    "MERGE": 0,
     "DOCS_INTERNAL": 0,
     "REVIEWED": 392,
     "REVIEW": 0,
@@ -10,6 +10,32 @@
   },
   "buckets": {
     "SERIES": [
+      {
+        "sim": 1.0,
+        "kw_sim": 0.738,
+        "title_sim": 1.0,
+        "shared": 34,
+        "same_dir": true,
+        "f1": "concept/07_future/00_version_tracking/rust_1_99_preview.md",
+        "f2": "concept/07_future/00_version_tracking/rust_1_100_preview.md",
+        "t1": "Rust 1.99+ 前沿特性预览",
+        "t2": "Rust 1.100+ 前沿特性预览",
+        "lines1": 149,
+        "lines2": 216
+      },
+      {
+        "sim": 1.0,
+        "kw_sim": 0.738,
+        "title_sim": 1.0,
+        "shared": 25,
+        "same_dir": true,
+        "f1": "concept/07_future/00_version_tracking/rust_1_100_preview.md",
+        "f2": "concept/07_future/00_version_tracking/rust_1_99_preview.md",
+        "t1": "Rust 1.100+ 前沿特性预览",
+        "t2": "Rust 1.99+ 前沿特性预览",
+        "lines1": 216,
+        "lines2": 149
+      },
       {
         "sim": 1.0,
         "kw_sim": 0.357,
@@ -1688,34 +1714,7 @@
         "lines2": 120
       }
     ],
-    "MERGE": [
-      {
-        "sim": 1.0,
-        "kw_sim": 0.738,
-        "title_sim": 1.0,
-        "shared": 34,
-        "same_dir": true,
-        "f1": "concept/07_future/00_version_tracking/rust_1_99_preview.md",
-        "f2": "concept/07_future/00_version_tracking/rust_1_100_preview.md",
-        "t1": "Rust 1.99+ 前沿特性预览",
-        "t2": "Rust 1.100+ 前沿特性预览",
-        "lines1": 149,
-        "lines2": 216
-      },
-      {
-        "sim": 1.0,
-        "kw_sim": 0.738,
-        "title_sim": 1.0,
-        "shared": 25,
-        "same_dir": true,
-        "f1": "concept/07_future/00_version_tracking/rust_1_100_preview.md",
-        "f2": "concept/07_future/00_version_tracking/rust_1_99_preview.md",
-        "t1": "Rust 1.100+ 前沿特性预览",
-        "t2": "Rust 1.99+ 前沿特性预览",
-        "lines1": 216,
-        "lines2": 149
-      }
-    ],
+    "MERGE": [],
     "DOCS_INTERNAL": [],
     "REVIEWED": [
       {
