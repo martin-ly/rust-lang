@@ -1075,3 +1075,7 @@ fn may_fail() -> Result<i32, anyhow::Error> {
 - **对偶**：与 C++ 异常相对，见 [Exception Safety](../../02_intermediate/03_error_handling/04_exception_safety_rust_cpp.md)。
 - **组合**：与 [Enumerations](../07_modules_and_items/05_enumerations.md) 的 `Result`/`Option` 组合。
 - **依赖**：错误转换依赖 [Traits](../../02_intermediate/00_traits/01_traits.md)（`From`/`Into`）。
+
+> **过渡**: 掌握 `Result`/`Option` 后，可进一步学习 `?` 操作符、`map`/`and_then` 组合子与自定义错误类型。
+> **过渡**: 将错误处理与所有权结合，可理解 `Result` 如何在不抛异常的情况下传播所有权与错误信息。
+> **过渡**: 从可恢复错误出发，可进入 panic、异常安全与 FFI 边界错误处理的对比学习。

@@ -1017,3 +1017,7 @@ catch_unwind(AssertUnwindSafe(|| {
 - **对偶**：与 `Result` 可恢复路径相对，见 [Error Handling Basics](01_error_handling_basics.md)。
 - **组合**：FFI 边界的 panic 防护见 [Rust FFI](../../03_advanced/04_ffi/01_rust_ffi.md)。
 - **依赖**：`panic!` 的发散类型依赖 [Never Type](../02_type_system/02_never_type.md)。
+
+> **过渡**: 理解 panic 作为不可恢复错误信号后，可进一步学习 panic hook、abort 模式与 unwinding 的成本。
+> **过渡**: 将 panic 与 `Result` 对比，可建立「可恢复 vs 不可恢复」的决策框架，避免用 panic 做正常控制流。
+> **过渡**: 从 panic 出发，可进入 FFI 边界的 panic 跨语言处理、no_std 下的 panic handler 与嵌入式错误终止。
