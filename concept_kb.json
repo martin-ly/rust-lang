@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 528,
-    "generated_at": "2026-07-23T22:30:27.643575+00:00"
+    "generated_at": "2026-07-23T22:40:22.471911+00:00"
   },
   "files": [
     {
@@ -7797,7 +7797,7 @@
       "layer": "L1",
       "title": "编程语言理论基础（PL Prerequisites）",
       "positioning": "L1 基础层的**前置知识补充**。理解这些通用 PL 概念后，你将能更深刻地回答\"为什么 Rust 要这样设计\"，而非仅仅记忆规则。",
-      "line_count": 612,
+      "line_count": 613,
       "theorem_chains": [
         {
           "text": "| 编程语言理论基础（PL Prerequisites） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -8103,7 +8103,7 @@
       "layer": "L1",
       "title": "闭包基础：捕获环境与匿名函数",
       "positioning": "系统讲解 Rust **闭包（Closure）**——从环境捕获、Fn/FnMut/FnOnce trait 到闭包作为参数和返回值，揭示 Rust 如何将函数式编程的灵活性与所有权（Ownership）系统的安全性结合。",
-      "line_count": 965,
+      "line_count": 966,
       "theorem_chains": [
         {
           "text": "| 闭包基础：捕获环境与匿名函数 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -8490,7 +8490,7 @@
       "layer": "L1",
       "title": "标准 I/O 与进程（std I/O and Process）",
       "positioning": "",
-      "line_count": 517,
+      "line_count": 518,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`std::io` 是异步（Async）的\" ⟹ 不成立。`std::io` 是同步阻塞 I/O；异步 I/O 使用 `tokio::io` 等。",
@@ -8621,7 +8621,7 @@
       "layer": "L1",
       "title": "Rust 关键字（Keywords）",
       "positioning": "",
-      "line_count": 320,
+      "line_count": 323,
       "theorem_chains": [
         {
           "text": "| 关键字保留 ⟹ 解析无歧义 | 理解关键字表 | 能正确识别语句结构 | 高 |",
@@ -14625,7 +14625,7 @@
       "layer": "L1",
       "title": "Use Declarations（使用声明）",
       "positioning": "系统讲解 `use` 声明的语法、作用域规则、重导出与 glob 导入，帮助学习者建立清晰的模块（Module）命名空间心智模型。",
-      "line_count": 318,
+      "line_count": 322,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 `use` 声明、作用域与可见性规则串联起来。",
@@ -14728,7 +14728,7 @@
         "10_preludes.md",
         "12_items.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
       "matrix_rows": 19,
@@ -15149,7 +15149,7 @@
       "layer": "L1",
       "title": "类型别名（Type Alias）",
       "positioning": "",
-      "line_count": 460,
+      "line_count": 464,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"类型别名会创建新类型\" ⟹ 不成立。别名与原类型完全等价，编译器不会区分。",
@@ -15257,7 +15257,7 @@
         "../../02_intermediate/04_types_and_conversions/03_newtype_and_wrapper.md",
         "../02_type_system/01_type_system.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
       "matrix_rows": 16,
@@ -15277,7 +15277,7 @@
       "layer": "L1",
       "title": "静态项（Static Items）",
       "positioning": "",
-      "line_count": 449,
+      "line_count": 453,
       "theorem_chains": [
         {
           "text": "> **反命题 1**: \"`static` 和 `const` 完全相同\" ⟹ 不成立。`static` 有固定地址且可运行期存在；`const` 是编译期内联值。",
@@ -15373,7 +15373,7 @@
         "../01_ownership_borrow_lifetime/02_borrowing.md",
         "../01_ownership_borrow_lifetime/03_lifetimes.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
       "matrix_rows": 23,
@@ -15393,7 +15393,7 @@
       "layer": "L1",
       "title": "常量项与常量函数（Const Items and Const Functions）",
       "positioning": "",
-      "line_count": 473,
+      "line_count": 477,
       "theorem_chains": [
         {
           "text": "判定准则：计算结果依赖运行期输入 ⟹ 普通 `fn`；需要在数组长度或泛型参数中使用 ⟹ 必须 `const fn`；`const fn` 签名变更（加非 const 操作）是 semver 破坏性变更。",
@@ -15494,7 +15494,7 @@
         "../02_type_system/01_type_system.md",
         "../04_control_flow/01_control_flow.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
       "matrix_rows": 17,
@@ -15514,9 +15514,26 @@
       "layer": "L1",
       "title": "Preludes（预导入模块）",
       "positioning": "",
-      "line_count": 267,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 295,
+      "theorem_chains": [
+        {
+          "text": "| 标准库 prelude 自动注入 ⟹ 常用类型零样板使用 | `std` 可用 | `Vec`、`String`、`Option` 等无需显式 use | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| `#![no_std]` 关闭标准库 prelude ⟹ 显式控制依赖 | 需要嵌入式或最小依赖 | 必须手动引入 `core`/`alloc` 项 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 外部 crate prelude 依赖 `extern crate`/`use` ⟹ API 面可控 | 包作者显式导出 | 用户获得一致的导入体验 | 高 |",
+          "type": "table_row"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -15566,10 +15583,10 @@
         "../09_macros_basics/01_attributes_and_macros.md",
         "01_modules_and_paths.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 8,
+      "matrix_rows": 12,
       "pre_post": {
         "pre": [
           "[Modules and Paths](01_modules_and_paths.md) · [Attributes and Macros](../09_macros_basics/01_attributes_and_macros.md) · [Terminology Glossary](../../00_meta/01_terminology/01_terminology_glossary.md)"
@@ -15578,7 +15595,7 @@
           "[Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Linkage](../../03_advanced/04_ffi/03_linkage.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -15851,7 +15868,7 @@
       "layer": "L1",
       "title": "Rust 错误处理基础",
       "positioning": "系统讲解 Rust 的错误处理（Error Handling）机制——从 `Result` 和 `Option` 到 `?` 运算符，分析 Rust 如何将错误处理融入类型系统（Type System），实现编译期安全。",
-      "line_count": 1078,
+      "line_count": 1082,
       "theorem_chains": [
         {
           "text": "| Rust 错误处理基础 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -16001,7 +16018,7 @@
         "02_error_handling_control_flow.md",
         "03_panic_and_abort.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
       "matrix_rows": 28,
@@ -16152,7 +16169,7 @@
       "layer": "L1",
       "title": "Panic 与 Abort：不可恢复错误的处理机制",
       "positioning": "系统讲解 Rust **panic** 机制——从 panic 与 Result 的哲学分野、panic 传播、到自定义 panic 处理和 abort 模式，揭示 Rust 如何在\"优雅失败\"与\"快速崩溃\"之间做出设计选择。",
-      "line_count": 1020,
+      "line_count": 1024,
       "theorem_chains": [
         {
           "text": "| 错误由调用者引起且调用者可修复 | `Result` | §1.2 决策树 | 库中 panic ⟹ 剥夺调用方处理策略选择权 |",
@@ -16296,7 +16313,7 @@
         "../10_testing_basics/01_testing_basics.md",
         "01_error_handling_basics.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
       "matrix_rows": 25,
@@ -16316,7 +16333,7 @@
       "layer": "L1",
       "title": "属性与声明宏：编译期元编程基础",
       "positioning": "系统讲解 Rust **属性（attributes）**和**声明宏（macro_rules!）**——从编译期元编程的基础语法到模式匹配（Pattern Matching）、递归宏和卫生性，揭示 Rust 如何在编译期生成代码同时保持类型安全。",
-      "line_count": 993,
+      "line_count": 997,
       "theorem_chains": [
         {
           "text": "| 属性与声明宏（Declarative Macro）：编译期元编程基础 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -16454,7 +16471,7 @@
         "../07_modules_and_items/01_modules_and_paths.md",
         "01_attributes_and_macros.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
       "matrix_rows": 10,
@@ -16474,7 +16491,7 @@
       "layer": "L1",
       "title": "测试基础：从单元测试到集成测试",
       "positioning": "系统讲解 Rust **测试机制**——从单元测试、集成测试到文档测试和基准测试，揭示 Rust 如何内置测试文化并支持多种测试层级。",
-      "line_count": 815,
+      "line_count": 819,
       "theorem_chains": [
         {
           "text": "| 测试基础：从单元测试到集成测试 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -16579,7 +16596,7 @@
         "../09_macros_basics/01_attributes_and_macros.md",
         "../11_quizzes/03_quiz_modules_testing.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
       "matrix_rows": 16,
@@ -16671,9 +16688,26 @@
       "layer": "L1",
       "title": "测验：类型系统（试点扩展）",
       "positioning": "嵌入式互动测验扩展——验证 L1 类型系统（Type System）核心概念（标量/复合类型、enum、模式匹配（Pattern Matching）、类型转换）的掌握程度。",
-      "line_count": 610,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 638,
+      "theorem_chains": [
+        {
+          "text": "| 类型推断正确 ⟹ 减少显式标注 | 理解 Hindley-Milner 风格约束 | 代码简洁且编译通过 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| trait 约束清晰 ⟹ 泛型 API 可预测 | 明确 `T: Trait` bound | 调用者错误在编译期暴露 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 类型别名与 newtype 区分 ⟹ 抽象安全 | 选择 `type` vs `struct` | 避免意外类型兼容 | 高 |",
+          "type": "table_row"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -16782,10 +16816,10 @@
         "../09_macros_basics/01_attributes_and_macros.md",
         "06_quiz_ownership_borrowing.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 35,
+      "matrix_rows": 39,
       "pre_post": {
         "pre": [
           "> [Type System](../02_type_system/01_type_system.md) ·"
@@ -16794,7 +16828,7 @@
           "[Ownership](06_quiz_ownership_borrowing.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -16802,11 +16836,27 @@
       "layer": "L1",
       "title": "测验：错误处理（试点扩展）",
       "positioning": "嵌入式互动测验扩展——验证 L1 错误处理（Error Handling）核心概念（Result/Option、`?` 运算符、panic、自定义错误）的掌握程度。",
-      "line_count": 744,
-      "theorem_chains": [],
+      "line_count": 772,
+      "theorem_chains": [
+        {
+          "text": "| `Result` 显式传播 ⟹ 调用点知晓错误 | 使用 `?` / `match` / `if let` | 不遗漏错误分支 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| `Option` 与 `Result` 转换 ⟹ 错误语义清晰 | 明确「无值」与「失败」 | 避免把缺失当错误 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| panic 仅用于不可恢复 ⟹ 控制流不滥用 | 区分 bug 与预期错误 | 代码可维护性提升 | 高 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [
         {
           "title": "### 反例"
+        },
+        {
+          "title": "## 反命题"
         }
       ],
       "code_blocks": [
@@ -16959,12 +17009,13 @@
         "../04_control_flow/01_control_flow.md",
         "../05_collections/01_collections.md",
         "../08_error_handling/01_error_handling_basics.md",
-        "../08_error_handling/03_panic_and_abort.md"
+        "../08_error_handling/03_panic_and_abort.md",
+        "03_panic_and_abort.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 39,
+      "matrix_rows": 43,
       "pre_post": {
         "pre": [
           "> [Error Handling Basics](../08_error_handling/01_error_handling_basics.md) ·"
@@ -16973,7 +17024,7 @@
           "N/A"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -16981,9 +17032,26 @@
       "layer": "L1",
       "title": "测验：模块系统与测试（L1 试点扩展）",
       "positioning": "L1 嵌入式互动测验——验证模块系统（package/crate/module、可见性、路径）与测试（单元测试、集成测试、文档测试）核心概念的掌握程度。",
-      "line_count": 800,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 828,
+      "theorem_chains": [
+        {
+          "text": "| 模块树与文件树一致 ⟹ 路径可预测 | 理解 `mod`/`mod.rs` 布局 | 正确组织 crate 结构 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 可见性显式化 ⟹ API 面可控 | 使用 `pub`/`pub(crate)` | 封装与封装测试平衡 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 测试与产品代码同 crate ⟹ 可测内部 | `#[cfg(test)] mod tests` | 无需暴露私有 API | 高 |",
+          "type": "table_row"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -17144,10 +17212,10 @@
         "../07_modules_and_items/01_modules_and_paths.md",
         "../10_testing_basics/01_testing_basics.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 48,
+      "matrix_rows": 52,
       "pre_post": {
         "pre": [
           "> [Modules and Paths](../07_modules_and_items/01_modules_and_paths.md) ·"
@@ -17156,7 +17224,7 @@
           "N/A"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -17164,9 +17232,26 @@
       "layer": "L1",
       "title": "测验：闭包与迭代器（L1 试点扩展）",
       "positioning": "L1 嵌入式互动测验——验证闭包（捕获环境、Fn/FnMut/FnOnce、move 闭包（Closures））与迭代器（Iterator trait、适配器、消费者、惰性求值）核心概念的掌握程度。",
-      "line_count": 788,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 816,
+      "theorem_chains": [
+        {
+          "text": "| 闭包捕获环境 ⟹ 回调与延迟计算自然 | 理解 `Fn`/`FnMut`/`FnOnce` | 选择正确闭包 trait | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 迭代器适配器链式 ⟹ 声明式数据流 | 组合 `map`/`filter`/`fold` | 避免手动索引循环 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 所有权消耗适配器区分 ⟹ 资源安全 | 区分 `iter`/`iter_mut`/`into_iter` | 不越界借用或重复消耗 | 高 |",
+          "type": "table_row"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [
@@ -17417,10 +17502,10 @@
         "../01_ownership_borrow_lifetime/01_ownership.md",
         "../05_collections/01_collections.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 37,
+      "matrix_rows": 41,
       "pre_post": {
         "pre": [
           "> [Closure Basics](../00_start/03_closure_basics.md) ·"
@@ -17429,7 +17514,7 @@
           "N/A"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -17437,9 +17522,26 @@
       "layer": "L1",
       "title": "测验：通用 PL 基座",
       "positioning": "",
-      "line_count": 269,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 297,
+      "theorem_chains": [
+        {
+          "text": "| 变量模型扎实 ⟹ 所有权/借用推理有根 | 理解绑定、作用域、可变性 | 预测 move/borrow 行为 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 求值策略区分 ⟹ 性能与语义可控 | 理解 eager/lazy、call-by-value | 选择迭代器与闭包策略 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 控制流与数据抽象联动 ⟹ 类型安全设计 | 掌握 match/enum/trait | 写出穷尽且可维护的代码 | 高 |",
+          "type": "table_row"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
@@ -17450,10 +17552,10 @@
         "../03_values_and_references/03_variable_model.md",
         "../04_control_flow/01_control_flow.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 0,
+      "matrix_rows": 4,
       "pre_post": {
         "pre": [
           "· [自测题库](../../00_meta/04_navigation/12_self_assessment.md)"
@@ -17462,7 +17564,7 @@
           "N/A"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
@@ -17470,9 +17572,26 @@
       "layer": "L1",
       "title": "测验：所有权、借用与生命周期（试点）",
       "positioning": "> 本文件为**嵌入式互动测验试点**，采用 `<details>` 交互标签实现\"自测-展开-核对\"的轻量级学习闭环。",
-      "line_count": 597,
-      "theorem_chains": [],
-      "anti_propositions": [],
+      "line_count": 625,
+      "theorem_chains": [
+        {
+          "text": "| 所有权单一 ⟹ 资源释放可预测 | 理解 `let` 创建所有者 | 无悬挂引用与重复释放 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 借用规则严格 ⟹ 数据竞争避免 | 区分 `&` 与 `&mut` | 编译期捕获别名冲突 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 生命周期推断正确 ⟹ 引用有效 | 理解 NLL 与作用域 | 引用不越界使用 | 高 |",
+          "type": "table_row"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [
@@ -17615,10 +17734,10 @@
         "../01_ownership_borrow_lifetime/03_lifetimes.md",
         "../05_collections/01_collections.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 6,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 8,
+      "matrix_rows": 12,
       "pre_post": {
         "pre": [
           ">"
@@ -17627,7 +17746,7 @@
           "[Borrowing](../01_ownership_borrow_lifetime/02_borrowing.md)"
         ]
       },
-      "backward_chains": 0,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
