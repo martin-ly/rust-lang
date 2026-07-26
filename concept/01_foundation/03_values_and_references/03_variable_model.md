@@ -85,6 +85,9 @@
   - [🔗 概念关系](#-概念关系)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [相关概念](#相关概念)
+  - [认知路径](#认知路径)
+    - [核心推理链](#核心推理链)
+  - [反命题与边界](#反命题与边界)
 
 ---
 

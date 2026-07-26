@@ -11,7 +11,12 @@
 > **后置概念**: N/A
 ---
 
-> **来源**: · [Rust vs C++](../01_systems_languages/01_rust_vs_cpp.md) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> · [Rust vs C++](../01_systems_languages/01_rust_vs_cpp.md) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust vs C++ — Rust Book](https://doc.rust-lang.org/nomicon/index.html) ·
 > [Rust vs Go — Official Comparisons](https://go.dev/doc/) ·
 > [The C Programming Language — K&R]

@@ -16,7 +16,13 @@
 > **后置概念**: [WebAssembly](../11_domain_applications/03_webassembly.md) · [Rust Version Tracking](../../07_future/00_version_tracking/01_rust_version_tracking.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **来源**: [log crate](https://docs.rs/log/) · [tracing](https://docs.rs/tracing/) · [std::fmt](https://doc.rust-lang.org/std/fmt/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [log crate](https://docs.rs/log/) ·
+> [tracing](https://docs.rs/tracing/) ·
+> [std::fmt](https://doc.rust-lang.org/std/fmt/) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**: [tracing Documentation](https://docs.rs/tracing/latest/tracing/trait.Instrument.html) ·
@@ -192,7 +198,8 @@ async fn handle_request(req: Request) {
 
 ## 二、技术细节
 
-可观测性三支柱在 Rust 生态有明确分工：日志（`tracing` 的级别过滤与结构化字段）回答“发生了什么”，Metrics（计数器/仪表盘/直方图分别对应累计量、瞬时值、分布）回答“系统状态如何”，分布式追踪（OpenTelemetry 的 span/trace 传播）回答“请求经过了哪里”。三者的技术细节分别对应采集、聚合、关联三个环节，落地时通常 tracing 统一打点，再分别导出到日志后端、Prometheus 与 OTLP。
+可观测性三支柱在 Rust 生态有明确分工：日志（`tracing` 的级别过滤与结构化字段）回答“发生了什么”，Metrics（计数器/仪表盘/直方图分别对应累计量、瞬时值、分布）回答“系统状态如何”，分布式追踪（OpenTelemetry 的 span/trace 传播）回答“请求经过了哪里”。
+三者的技术细节分别对应采集、聚合、关联三个环节，落地时通常 tracing 统一打点，再分别导出到日志后端、Prometheus 与 OTLP。
 
 ### 2.1 日志级别与过滤
 >
@@ -315,7 +322,9 @@ WebAssembly:
 
 ## 四、反命题与边界分析
 
-可观测性最常见的过度工程是“一切服务都上全量 tracing”。反命题树给出反驳路径：同步小型工具用 `log` + `env_logger` 足够，`tracing` 的 span 模型在异步并发场景才真正发挥价值；全量 DEBUG 级别上生产则会被存储成本与噪声反噬。边界极限标注量化约束：高 QPS 服务的事件采样率、span 属性基数对存储的影响、以及日志刷盘对尾延迟的可见影响。
+可观测性最常见的过度工程是“一切服务都上全量 tracing”。
+反命题树给出反驳路径：同步小型工具用 `log` + `env_logger` 足够，`tracing` 的 span 模型在异步并发场景才真正发挥价值；
+全量 DEBUG 级别上生产则会被存储成本与噪声反噬。边界极限标注量化约束：高 QPS 服务的事件采样率、span 属性基数对存储的影响、以及日志刷盘对尾延迟的可见影响。
 
 ### 4.1 反命题树
 >
@@ -469,7 +478,8 @@ graph TD
 
 ## 十、边界测试：日志与可观测性的编译错误
 
-可观测性边界测试聚焦三类接缝错误：`tracing` span 跨 `.await` 持有时违反 `Send`（异步场景的编译期拦截）、OpenTelemetry 全局 provider 重复设置导致运行时 panic（单例资源约束）、结构化日志字段类型不实现 `Value` 的编译错误。三类分别对应生命周期、全局状态、类型约束，是接入 tracing 时最先会遇到的三道坎。匹配（运行时错误）、边界测试：span 的生命周期与异步代码（编译错误/运行时丢失）等7个方面，本节依次展开。
+可观测性边界测试聚焦三类接缝错误：`tracing` span 跨 `.await` 持有时违反 `Send`（异步场景的编译期拦截）、OpenTelemetry 全局 provider 重复设置导致运行时 panic（单例资源约束）、结构化日志字段类型不实现 `Value` 的编译错误。
+三类分别对应生命周期、全局状态、类型约束，是接入 tracing 时最先会遇到的三道坎。匹配（运行时错误）、边界测试：span 的生命周期与异步代码（编译错误/运行时丢失）等7个方面，本节依次展开。
 
 ### 10.1 边界测试：`tracing` span 的生命周期（编译错误）
 
@@ -491,7 +501,11 @@ fn fixed() {
 }
 ```
 
-> **修正**: `tracing` crate 的结构化日志使用 **span** 表示操作上下文。创建 span（`info_span!`）不自动进入——必须调用 `.enter()` 将当前线程的上下文关联到 span。`_guard` 在 drop 时自动退出 span，确保即使 panic 也能正确关闭。这与 OpenTelemetry 的 span 或 Go 的 context 类似，但 Rust 的所有权（Ownership）系统保证 span 生命周期的正确性——不能忘记退出 span（资源泄漏），不能访问已退出的 span。[来源: [tracing Documentation](https://docs.rs/tracing/)]
+> **修正**:
+> `tracing` crate 的结构化日志使用 **span** 表示操作上下文。
+> 创建 span（`info_span!`）不自动进入——必须调用 `.enter()` 将当前线程的上下文关联到 span。
+> `_guard` 在 drop 时自动退出 span，确保即使 panic 也能正确关闭。
+> 这与 OpenTelemetry 的 span 或 Go 的 context 类似，但 Rust 的所有权（Ownership）系统保证 span 生命周期的正确性——不能忘记退出 span（资源泄漏），不能访问已退出的 span。[来源: [tracing Documentation](https://docs.rs/tracing/)]
 
 ### 10.2 边界测试：OpenTelemetry 的全局提供者设置（运行时 panic）
 
@@ -514,7 +528,10 @@ fn fixed() {
 }
 ```
 
-> **修正**: OpenTelemetry 的全局 API 要求在首次使用前先设置 provider。这与 Go 的 `init()` 或 Java 的静态初始化不同——Rust 没有运行时（Runtime）自动初始化，必须显式调用 `set_tracer_provider`。忘记初始化会导致 panic 或静默丢弃 span。在大型应用中，初始化顺序管理（init order）是常见问题——使用 `once_cell::Lazy` 或 `std::sync::OnceLock` 可确保延迟初始化且线程安全。[来源: [OpenTelemetry Rust](https://docs.rs/opentelemetry/)]
+> **修正**:
+> OpenTelemetry 的全局 API 要求在首次使用前先设置 provider。
+> 这与 Go 的 `init()` 或 Java 的静态初始化不同——Rust 没有运行时（Runtime）自动初始化，必须显式调用 `set_tracer_provider`。
+> 忘记初始化会导致 panic 或静默丢弃 span。在大型应用中，初始化顺序管理（init order）是常见问题——使用 `once_cell::Lazy` 或 `std::sync::OnceLock` 可确保延迟初始化且线程安全。[来源: [OpenTelemetry Rust](https://docs.rs/opentelemetry/)]
 
 ### 10.3 边界测试：结构化日志的字段类型不匹配（运行时错误）
 
@@ -531,7 +548,16 @@ fn main() {
 }
 ```
 
-> **修正**: `tracing` crate 支持结构化日志（key-value 对），但字段的格式化方式（`%` Display、`?` Debug、无修饰符的 `Value` trait）影响输出格式。在日志聚合系统中，同一字段的不一致格式导致解析失败或类型冲突。最佳实践：1) 定义统一的字段类型（`user_id` 总是 `u64`，用无修饰符形式）；2) 使用 `tracing` 的 `valuable` 集成（类型化结构化数据）；3) 在日志 schema 中显式声明字段类型。这与 OpenTelemetry 的 attribute 类型系统（Type System）（`string`、`int`、`bool`、`double`）或 JSON 日志（无类型，解析器推断）相关——结构化日志的价值在于机器可解析，类型一致性（Coherence）是前提。[来源: [tracing Documentation](https://docs.rs/tracing/)] · [来源: [OpenTelemetry Specification](https://opentelemetry.io/docs/specs/otel/logs/)]
+> **修正**:
+> `tracing` crate 支持结构化日志（key-value 对），但字段的格式化方式（`%` Display、`?` Debug、无修饰符的 `Value` trait）影响输出格式。
+> 在日志聚合系统中，同一字段的不一致格式导致解析失败或类型冲突。
+> 最佳实践：
+>
+> 1) 定义统一的字段类型（`user_id` 总是 `u64`，用无修饰符形式）；
+> 2) 使用 `tracing` 的 `valuable` 集成（类型化结构化数据）；
+> 3) 在日志 schema 中显式声明字段类型。这与 OpenTelemetry 的 attribute 类型系统（Type System）（`string`、`int`、`bool`、`double`）或 JSON 日志（无类型，解析器推断）相关——结构化日志的价值在于机器可解析，类型一致性（Coherence）是前提。
+> [来源: [tracing Documentation](https://docs.rs/tracing/)] ·
+> [来源: [OpenTelemetry Specification](https://opentelemetry.io/docs/specs/otel/logs/)]
 
 ### 10.4 边界测试：span 的生命周期与异步代码（编译错误/运行时丢失）
 
