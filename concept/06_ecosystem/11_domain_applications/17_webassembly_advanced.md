@@ -11,7 +11,13 @@
 > **代码状态**: ✅ 含可编译示例
 >
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
-> **来源**: [Rust and WebAssembly Book](https://rustwasm.github.io/docs/book/index.html) · [wasm-bindgen](https://docs.rs/wasm-bindgen/) · [Wasmtime Rust API](https://docs.wasmtime.dev/lang-rust.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Rust and WebAssembly Book](https://rustwasm.github.io/docs/book/index.html) ·
+> [wasm-bindgen](https://docs.rs/wasm-bindgen/) ·
+> [Wasmtime Rust API](https://docs.wasmtime.dev/lang-rust.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ## 📑 目录
 

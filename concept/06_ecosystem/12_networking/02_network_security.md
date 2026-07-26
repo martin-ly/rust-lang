@@ -11,10 +11,18 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 应用主题
 > **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
-> **前置概念**: [Async/Await](../../03_advanced/01_async/01_async.md) · [Rust 网络编程](../../03_advanced/06_low_level_patterns/04_network_programming.md) · [Security & Cryptography](../07_security_and_cryptography/02_security_cryptography.md)
-> **后置概念**: [高级网络协议](01_advanced_network_protocols.md) · [分布式系统](../04_web_and_networking/01_distributed_systems.md)
+> **前置概念**:
+> [Async/Await](../../03_advanced/01_async/01_async.md) ·
+> [Rust 网络编程](../../03_advanced/06_low_level_patterns/04_network_programming.md) ·
+> [Security & Cryptography](../07_security_and_cryptography/02_security_cryptography.md)
+> **后置概念**:
+> [高级网络协议](01_advanced_network_protocols.md) ·
+> [分布式系统](../04_web_and_networking/01_distributed_systems.md)
 >
-> **来源**: [rustls](https://docs.rs/rustls/) · [tokio-rustls](https://docs.rs/tokio-rustls/) · [RFC 8446 — TLS 1.3](https://tools.ietf.org/html/rfc8446)
+> **来源**:
+> [rustls](https://docs.rs/rustls/) ·
+> [tokio-rustls](https://docs.rs/tokio-rustls/) ·
+> [RFC 8446 — TLS 1.3](https://tools.ietf.org/html/rfc8446)
 
 ---
 

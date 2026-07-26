@@ -9,7 +9,11 @@
 > **代码状态**: [示例级 — 已补充代码]
 > **后置概念**: [Future Roadmap](../../07_future/01_edition_roadmap/04_roadmap.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
-> **来源**: [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [Rustdoc Book](https://doc.rust-lang.org/rustdoc/) · [std API Docs](https://doc.rust-lang.org/std/index.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
+> **来源**:
+> [Cargo Book](https://doc.rust-lang.org/cargo/index.html) ·
+> [Rustdoc Book](https://doc.rust-lang.org/rustdoc/) ·
+> [std API Docs](https://doc.rust-lang.org/std/index.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/)
 
 ## 📑 目录
 
@@ -110,7 +114,10 @@
 
 ### 1.2 量子叠加与测量
 
-> **[Qiskit Textbook](https://qiskit.org/textbook/)** 量子叠加（superposition）允许量子系统同时处于多个基态的线性组合中。当对量子态进行**测量**时，叠加态会**坍缩**（collapse）到某个基态，概率由对应概率幅的模平方决定。测量是量子计算与经典世界交互的唯一方式，也是量子算法设计中的核心约束。[来源: [Qiskit Textbook — Measurement](https://qiskit.org/textbook/ch-states/single-qubit-gates.html)]
+> **[Qiskit Textbook](https://qiskit.org/textbook/)** 量子叠加（superposition）允许量子系统同时处于多个基态的线性组合中。
+> 当对量子态进行**测量**时，叠加态会**坍缩**（collapse）到某个基态，概率由对应概率幅的模平方决定。
+> 测量是量子计算与经典世界交互的唯一方式，也是量子算法设计中的核心约束。
+> [来源: [Qiskit Textbook — Measurement](https://qiskit.org/textbook/ch-states/single-qubit-gates.html)]
 
 ```text
 测量公设 (Measurement Postulate):

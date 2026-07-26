@@ -13,11 +13,28 @@
 > **层级**: L6 应用主题
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×App — 应用算法和竞赛编程模式
-> **前置概念**: · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md)
-> **后置概念**: [Formal Ecosystem Tower](../08_formal_verification/01_formal_ecosystem_tower.md) · [Performance Optimization](../10_performance/01_performance_optimization.md)
-> **主要来源**: [CLRS — Introduction to Algorithms] · [LeetCode] · [Codeforces] · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [VeriContest arXiv 2026-05-08] · [Kani Docs] · [CSES Problem Set] · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **前置概念**:
+> · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) ·
+> [Generics](../../02_intermediate/01_generics/01_generics.md) ·
+> [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) ·
+> [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md)
+> **后置概念**:
+> [Formal Ecosystem Tower](../08_formal_verification/01_formal_ecosystem_tower.md) ·
+> [Performance Optimization](../10_performance/01_performance_optimization.md)
+> **主要来源**:
+> [CLRS — Introduction to Algorithms] · [LeetCode] · [Codeforces] ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [VeriContest arXiv 2026-05-08] · [Kani Docs] · [CSES Problem Set] ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
-> **来源**: [std::collections](https://doc.rust-lang.org/std/collections/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) · [The Algorithms — Rust](https://github.com/TheAlgorithms/Rust)
+> **来源**:
+> [std::collections](https://doc.rust-lang.org/std/collections/) ·
+> [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html) ·
+> [The Algorithms — Rust](https://github.com/TheAlgorithms/Rust)
 ---
 
 > **Bloom 层级**: L3-L6

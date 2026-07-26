@@ -17,10 +17,22 @@
 > **前置概念**: [Async](../../03_advanced/01_async/01_async.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md)
 > **后置概念**: [Performance](../10_performance/01_performance_optimization.md) · [Web Development](01_application_domains.md)
 >
-> **来源**: [Diesel](https://docs.rs/diesel/) · [SQLx](https://docs.rs/sqlx/) · [tokio-postgres](https://docs.rs/tokio-postgres/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Diesel](https://docs.rs/diesel/) ·
+> [SQLx](https://docs.rs/sqlx/) ·
+> [tokio-postgres](https://docs.rs/tokio-postgres/) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
-> **来源**: [SQLx](https://github.com/launchbadge/sqlx) · [Diesel](https://diesel.rs/) · [SeaORM](https://www.sea-ql.org/SeaORM/) · [Rust Database Guide](https://rust-lang-nursery.github.io/rust-cookbook/database.html) · [Wikipedia — ORM](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping)
+> **来源**:
+> [SQLx](https://github.com/launchbadge/sqlx) ·
+> [Diesel](https://diesel.rs/) ·
+> [SeaORM](https://www.sea-ql.org/SeaORM/) ·
+> [Rust Database Guide](https://rust-lang-nursery.github.io/rust-cookbook/database.html) ·
+> [Wikipedia — ORM](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/01_type_theory.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
