@@ -14,7 +14,12 @@
 > **前置概念**: [网络协议](../04_web_and_networking/07_network_protocols.md) · [类型级编程](../../02_intermediate/01_generics/03_type_level_programming.md) · [Kani](../../04_formal/04_model_checking/09_kani.md)
 > **后置概念**: [自定义协议实现](03_custom_protocol_implementation.md) · [网络安全](02_network_security.md)
 >
-> **主要来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Kani 文档](https://model-checking.github.io/kani/) · [TCP RFC 793](https://tools.ietf.org/html/rfc793) · [RFC 8446 — TLS 1.3](https://tools.ietf.org/html/rfc8446)
+> **主要来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
+> [Kani 文档](https://model-checking.github.io/kani/) ·
+> [TCP RFC 793](https://tools.ietf.org/html/rfc793) ·
+> [RFC 8446 — TLS 1.3](https://tools.ietf.org/html/rfc8446)
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -28,7 +33,8 @@
 
 ## 一、核心定位
 
-网络协议的正确性不仅依赖测试，还可以通过**形式化方法**在设计和实现阶段给出更强保证。Rust 的类型系统（Type System）与模型检查工具（如 Kani）为协议形式化提供了独特的工程路径：
+网络协议的正确性不仅依赖测试，还可以通过**形式化方法**在设计和实现阶段给出更强保证。
+Rust 的类型系统（Type System）与模型检查工具（如 Kani）为协议形式化提供了独特的工程路径：
 
 - 用**有限状态机**精确描述协议生命周期（Lifetimes）。
 - 用**不变式**约束合法状态集合。

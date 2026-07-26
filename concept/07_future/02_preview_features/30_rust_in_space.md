@@ -55,7 +55,8 @@ Rust 提供了：
 
 ### 2.1 卫星星载软件
 
-卫星计算机资源受限：CPU 慢、内存小、无操作系统或 RTOS。Rust 的 `no_std` 模式允许在裸机或 RTOS 上运行：
+卫星计算机资源受限：CPU 慢、内存小、无操作系统或 RTOS。
+Rust 的 `no_std` 模式允许在裸机或 RTOS 上运行：
 
 ```rust,editable
 #![no_std]

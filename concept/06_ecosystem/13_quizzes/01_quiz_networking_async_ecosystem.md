@@ -51,7 +51,10 @@
 
 **答案：B**
 
-**解析**：按 [Web 框架](../04_web_and_networking/03_web_frameworks.md)：Axum 是 Tokio 生态原生扩展，运行时绑定 Tokio 独占，路由模型为组合式（`Router::merge`/`nest`/`route`），中间件走 Tower Service 生态（`Layer` trait）。A 是 Actix-web（Actor 模型），C 是 Rocket（声明式），D 是 Poem（OpenAPI 优先）。
+**解析**：
+按 [Web 框架](../04_web_and_networking/03_web_frameworks.md)：
+Axum 是 Tokio 生态原生扩展，运行时绑定 Tokio 独占，路由模型为组合式（`Router::merge`/`nest`/`route`），中间件走 Tower Service 生态（`Layer` trait）。
+A 是 Actix-web（Actor 模型），C 是 Rocket（声明式），D 是 Poem（OpenAPI 优先）。
 
 </details>
 
@@ -79,7 +82,12 @@ enum RuntimeBinding {
 
 **答案**：B。
 
-**解析**：Axum 的架构特征明确标注"运行时绑定：Tokio 独占"（构建于 Tokio/Tower/Hyper）；Actix-web 是 Actor 模型的工业级实现，有自身运行时体系。框架选型时需同时确认运行时绑定策略——这是 [Web 框架](../04_web_and_networking/03_web_frameworks.md) §三「异步运行时集成对比」的核心维度。A/C/D 均与兼容性矩阵矛盾。
+**解析**：
+Axum 的架构特征明确标注"运行时绑定：
+Tokio 独占"（构建于 Tokio/Tower/Hyper）；
+Actix-web 是 Actor 模型的工业级实现，有自身运行时体系。
+框架选型时需同时确认运行时绑定策略——这是 [Web 框架](../04_web_and_networking/03_web_frameworks.md) §三「异步运行时集成对比」的核心维度。
+A/C/D 均与兼容性矩阵矛盾。
 
 </details>
 
@@ -101,7 +109,11 @@ enum RuntimeBinding {
 
 **答案：B**
 
-**解析**：按 [Glommio 与 Thread-per-Core](../04_web_and_networking/05_glommio_and_thread_per_core.md) 对比表：thread-per-core（Glommio）无线程切换、缓存友好度最高、负载均衡需手动处理、编程复杂度较高，适用高频交易、数据库引擎、高吞吐网络服务；work-stealing（Tokio）自动负载均衡、编程复杂度较低，适用通用 Web / 微服务。Glommio 还提供 `LocalExecutorBuilder::pin_to_cpu` 做 CPU 绑定与 NUMA 优化。
+**解析**：
+按 [Glommio 与 Thread-per-Core](../04_web_and_networking/05_glommio_and_thread_per_core.md) 对比表：
+thread-per-core（Glommio）无线程切换、缓存友好度最高、负载均衡需手动处理、编程复杂度较高，适用高频交易、数据库引擎、高吞吐网络服务；
+work-stealing（Tokio）自动负载均衡、编程复杂度较低，适用通用 Web / 微服务。
+Glommio 还提供 `LocalExecutorBuilder::pin_to_cpu` 做 CPU 绑定与 NUMA 优化。
 
 </details>
 

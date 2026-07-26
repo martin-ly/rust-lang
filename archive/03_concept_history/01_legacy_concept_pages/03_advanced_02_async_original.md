@@ -25,9 +25,16 @@
 > **层级**: L3 高级概念
 > **层级一致性（Coherence）**: 本文件所有定理与定义均锚定于 L3 抽象层；涉及 L4 形式化公理处已显式标注。前置概念（L1-L2）为推理前提，后置概念（Pin/Streams）为自然延伸。
 > **前置概念**:
-> [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Lifetimes](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [Traits](../02_intermediate/00_traits/01_traits.md) · [Generics](../02_intermediate/01_generics/02_generics.md) · [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md)
+> [Ownership](../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Lifetimes](../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) ·
+> [Traits](../02_intermediate/00_traits/01_traits.md) ·
+> [Generics](../02_intermediate/01_generics/02_generics.md) ·
+> [Error Handling](../02_intermediate/03_error_handling/04_error_handling.md)
 > **后置概念**: [Pin/Unpin] · [Streams]
-> **主要来源**: [TRPL: Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/index.html) · [RFC 2394] · [RFC 2349]
+> **主要来源**:
+> [TRPL: Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) ·
+> [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/index.html) ·
+> [RFC 2394] · [RFC 2349]
 
 ---
 
