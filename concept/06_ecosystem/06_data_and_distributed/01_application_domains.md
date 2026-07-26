@@ -5,7 +5,14 @@
 > - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html) · [crates.io](https://crates.io/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+>
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Cargo Book](https://doc.rust-lang.org/cargo/index.html) ·
+> [crates.io](https://crates.io/) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 ---
 
@@ -21,9 +28,20 @@
 > **层级**: L6 生态工程
 > **A/S/P 标记**: **S+A+P** — 全维度
 > **双维定位**: P×Eva — 评估 Rust 在特定领域的适用性
-> **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Async](../../03_advanced/01_async/01_async.md) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [Core Crates](../02_core_crates/01_core_crates.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
-> **后置概念**: [AI Integration](../../07_future/04_research_and_experimental/01_ai_integration.md) · [Formal Methods](../../07_future/04_research_and_experimental/02_formal_methods.md)
-> **主要来源**: [Rust in Production](https://www.rust-lang.org/) · [Rust Foundation] · [Ferrous Systems] · [RustConf] · [AWS/Google/Microsoft Rust 博客]
+> **前置概念**:
+>
+> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Traits](../../02_intermediate/00_traits/01_traits.md) ·
+> [Async](../../03_advanced/01_async/01_async.md) ·
+> [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) ·
+> [Core Crates](../02_core_crates/01_core_crates.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
+> **后置概念**:
+>
+> [AI Integration](../../07_future/04_research_and_experimental/01_ai_integration.md) ·
+> [Formal Methods](../../07_future/04_research_and_experimental/02_formal_methods.md)
+> **主要来源**:
+> [Rust in Production](https://www.rust-lang.org/) ·
+> [Rust Foundation] · [Ferrous Systems] · [RustConf] · [AWS/Google/Microsoft Rust 博客]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -214,11 +232,15 @@ graph TD
 | **reqwest** | **0.13.3** (2026-05) | TLS 后端迁移至 `aws-lc-rs`，为 FIPS 140-3 合规奠定基础 | [reqwest releases](https://github.com/seanmonstar/reqwest/releases) |
 | **arrow-rs** | **58.3.0 + 补丁** (2026-05-07) | 多处整数溢出修复（`BufferBuilder`、`ArrayData::slice`、`FixedSizeBinaryArray`） | [arrow-rs releases](https://github.com/apache/arrow-rs/releases) |
 
-> **关键洞察**: sqlx 0.9.0 的 MSRV 提升至 1.94.0 反映了 Rust 生态的**快速演进压力**——核心基础设施 crate 的 MSRV 提升会迫使下游项目跟进，否则被锁定在旧版本。这与 Go 的向后兼容性承诺（Go 1 兼容性保证）形成对比：Rust 的快速语言演进带来了表达力优势，但也增加了生态维护负担。tokio 的 LIFO slot stealing 回退则展示了**生产环境性能回归的敏感性**——即使在最流行的异步（Async）运行时（Runtime）中，看似微小的调度策略变更也可能引发大规模性能问题。[💡 原创分析](../../00_meta/00_framework/methodology.md)
+> **关键洞察**:
+> sqlx 0.9.0 的 MSRV 提升至 1.94.0 反映了 Rust 生态的**快速演进压力**——核心基础设施 crate 的 MSRV 提升会迫使下游项目跟进，否则被锁定在旧版本。
+> 这与 Go 的向后兼容性承诺（Go 1 兼容性保证）形成对比：Rust 的快速语言演进带来了表达力优势，但也增加了生态维护负担。
+> tokio 的 LIFO slot stealing 回退则展示了**生产环境性能回归的敏感性**——即使在最流行的异步（Async）运行时（Runtime）中，看似微小的调度策略变更也可能引发大规模性能问题。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **浏览器引擎里程碑 — Servo v0.1.0 on crates.io（2026-04-13）**:
 
-**[Servo Project]** Rust 编写的浏览器引擎 **Servo** 首次发布到 **crates.io**，并引入 **6 个月 LTS 发布策略**。这标志着 Servo 从 Mozilla 研究项目向独立可分发库的转型。
+**[Servo Project]** Rust 编写的浏览器引擎 **Servo** 首次发布到 **crates.io**，并引入 **6 个月 LTS 发布策略**。
+这标志着 Servo 从 Mozilla 研究项目向独立可分发库的转型。
 
 | **维度** | **详情** |
 |:---|:---|
@@ -402,7 +424,13 @@ Rust 在区块链领域占据**主导地位**的原因：
 | **移除未对齐字段初始化 escape hatch** | `#[disable_initialized_field_access]` 静默允许未对齐字段的就地初始化，产生运行时（Runtime） UB | 移除该 escape hatch，依赖它的代码现在编译失败而非静默产生 UB |
 | **`unused_features` lint 兼容** | Rust 1.96 重新启用 `unused_features` lint，内核全局启用的 feature 列表触发大量警告 | 内核构建系统全局允许该 lint，避免逐 crate 修改 |
 
-> **关键洞察**: Rust for Linux 正在从"社区实验"转变为"Rust Project 官方目标"。编译器团队（Wesley Wiser）、语言团队（Niko Matsakis）和内核团队（Miguel Ojeda）的协同，标志着 Rust 在系统编程最深层的渗透。核心 tension：**内核需要的新语言特性**（如 guaranteed destructors、arbitrary self types）与**语言团队的稳定化保守主义**之间的平衡。pin-init 的 soundness 修复尤其重要：它展示了 Rust 内核代码如何通过类型系统（Type System）级别的封闭（sealed token）来消除初始化顺序相关的漏洞类别——这是 C 语言无法实现的保证。来源: [Rust Project Goals — Rust for Linux](https://rust-lang.github.io/rust-project-goals/) · 来源: [Rust Blog](https://blog.rust-lang.org/) · 来源: [Linux Kernel v7.0-rc4](https://kernel.org/) · 可信度: ✅
+> **关键洞察**:
+> Rust for Linux 正在从"社区实验"转变为"Rust Project 官方目标"。
+> 编译器团队（Wesley Wiser）、语言团队（Niko Matsakis）和内核团队（Miguel Ojeda）的协同，标志着 Rust 在系统编程最深层的渗透。
+> 核心 tension：**内核需要的新语言特性**（如 guaranteed destructors、arbitrary self types）与**语言团队的稳定化保守主义**之间的平衡。
+> pin-init 的 soundness 修复尤其重要：它展示了 Rust 内核代码如何通过类型系统（Type System）级别的封闭（sealed token）来消除初始化顺序相关的漏洞类别——这是 C 语言无法实现的保证。
+> 来源: [Rust Project Goals — Rust for Linux](https://rust-lang.github.io/rust-project-goals/) ·
+> 来源: [Rust Blog](https://blog.rust-lang.org/) · 来源: [Linux Kernel v7.0-rc4](https://kernel.org/) · 可信度: ✅
 > **来源**: [Rust for Linux] · [LWN] · 可信度: ✅
 
 ### 4.7-B Android AOSP：Rust 集成的实证研究（FSE 2026）
@@ -449,7 +477,10 @@ Rust 在区块链领域占据**主导地位**的原因：
 | `hickory-proto` + 30+ 依赖 | 350 KB | 非为嵌入式优化，未来可精简 |
 | **总计** | **371 KB** | Pixel modem 内存不紧张，优先社区支持和代码质量 |
 
-> **关键洞察**: Google Pixel 基带 Rust 集成是 **"现有固件代码库中渐进式引入 Rust"** 的教科书级案例。它展示了在**没有操作系统**（bare-metal）、**没有标准库**（`no_std`）、**现有 C/C++ 构建系统**（Pigweed/GN）的极端约束下，如何将 Rust 组件嵌入现有固件。与 Rust for Linux（内核子系统）不同，基带场景更苛刻：无 `std`、无 `cargo`、30+ 第三方 crate 依赖、弱符号冲突等。这为嵌入式/IoT/汽车电子等领域提供了可复制的迁移 playbook。
+> **关键洞察**:
+> Google Pixel 基带 Rust 集成是 **"现有固件代码库中渐进式引入 Rust"** 的教科书级案例。
+> 它展示了在**没有操作系统**（bare-metal）、**没有标准库**（`no_std`）、**现有 C/C++ 构建系统**（Pigweed/GN）的极端约束下，如何将 Rust 组件嵌入现有固件。
+> 与 Rust for Linux（内核子系统）不同，基带场景更苛刻：无 `std`、无 `cargo`、30+ 第三方 crate 依赖、弱符号冲突等。这为嵌入式/IoT/汽车电子等领域提供了可复制的迁移 playbook。
 > **来源**: [Google Security Blog — Bringing Rust to the Pixel Baseband](https://blog.google/security/bringing-rust-to-the-pixel-baseband/) · [Help Net Security](https://www.helpnetsecurity.com/2026/04/13/google-pixel-rust-baseband-modem-security/) · 可信度: ✅
 
 ### 4.8 桌面 GUI 与跨平台应用
@@ -1408,7 +1439,14 @@ struct AppStateFixed {
 }
 ```
 
-> **修正**: Web 服务器通常使用线程池或异步（Async）运行时处理并发请求。应用状态必须在多个线程间共享。`Rc<T>` 使用非原子引用（Reference）计数，不能跨线程；`Arc<T>` 使用原子操作（Atomic Operations），是 `Send + Sync`。Rust 编译器在编译期验证这些约束——试图将 `Rc` 状态传递给多线程框架是编译错误。这与 Node.js 的全局状态（单线程事件循环）或 Python 的 GIL（全局解释器锁）不同——Rust 的并发安全（Concurrency Safety）通过类型系统静态保证，无运行时检查开销。[来源: [Actix Documentation](https://docs.rs/actix-web/)]
+> **修正**:
+>
+> Web 服务器通常使用线程池或异步（Async）运行时处理并发请求。
+> 应用状态必须在多个线程间共享。`Rc<T>` 使用非原子引用（Reference）计数，不能跨线程；
+> `Arc<T>` 使用原子操作（Atomic Operations），是 `Send + Sync`。
+> Rust 编译器在编译期验证这些约束——试图将 `Rc` 状态传递给多线程框架是编译错误。
+> 这与 Node.js 的全局状态（单线程事件循环）或 Python 的 GIL（全局解释器锁）不同——Rust 的并发安全（Concurrency Safety）通过类型系统静态保证，无运行时检查开销。
+> [来源: [Actix Documentation](https://docs.rs/actix-web/)]
 
 ### 10.2 边界测试：游戏引擎中的 ECS 组件查询（编译错误）
 
@@ -1428,7 +1466,11 @@ fn main() {
 }
 ```
 
-> **修正**: ECS（Entity-Component-System）是游戏开发的核心架构。Rust 的 ECS 框架（Bevy、hecs、legion）利用类型系统保证查询安全：系统函数签名定义所需的组件组合，编译器验证查询与组件存储的一致性（Coherence）。若系统要求 `Query<&mut Position, &Velocity>`，但某实体缺少 `Velocity`，该实体自动被过滤出查询结果。这与 Unity 的反射式组件访问或 C++ 的手动类型转换不同——Rust 的 ECS 在编译期保证组件类型安全，运行时无类型检查开销。来源: [Bevy Documentation]
+> **修正**:
+> ECS（Entity-Component-System）是游戏开发的核心架构。
+> Rust 的 ECS 框架（Bevy、hecs、legion）利用类型系统保证查询安全：系统函数签名定义所需的组件组合，编译器验证查询与组件存储的一致性（Coherence）。
+> 若系统要求 `Query<&mut Position, &Velocity>`，但某实体缺少 `Velocity`，该实体自动被过滤出查询结果。
+> 这与 Unity 的反射式组件访问或 C++ 的手动类型转换不同——Rust 的 ECS 在编译期保证组件类型安全，运行时无类型检查开销。来源: [Bevy Documentation]
 
 ### 10.3 边界测试：嵌入式中的 `std` 依赖误用（编译错误）
 
@@ -1445,7 +1487,18 @@ fn main() {
 }
 ```
 
-> **修正**: 嵌入式系统（ bare-metal、RTOS、WASM 微内核）通常使用 `#![no_std]`，禁用标准库 `std`（依赖操作系统：文件系统、网络、线程、堆分配）。`no_std`  crate 只能使用 `core`（基本类型、迭代器（Iterator）、选项/结果）和可选的 `alloc`（`Vec`、`String`、`Box`，需全局分配器）。常见错误：1) 依赖的 crate 使用了 `std`（即使是简单的 `println!`）；2) 使用了 `std::collections::HashMap`（需 `std` 的随机数生成器，嵌入式中改用 `heapless::LinearMap`）；3) 使用了 `std::time`（嵌入式中改用 `embassy_time` 或硬件定时器）。`cargo tree` 和 `cargo-nono` 工具帮助检查 `no_std` 兼容性。这与 C 的嵌入式开发（无标准库依赖，直接使用寄存器）或 Arduino 的 C++（简化标准库）类似——Rust 的 `no_std` 提供了现代类型系统在资源受限环境中的应用。[来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/index.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
+> **修正**:
+> 嵌入式系统（ bare-metal、RTOS、WASM 微内核）通常使用 `#![no_std]`，禁用标准库 `std`（依赖操作系统：文件系统、网络、线程、堆分配）。
+> `no_std`  crate 只能使用 `core`（基本类型、迭代器（Iterator）、选项/结果）和可选的 `alloc`（`Vec`、`String`、`Box`，需全局分配器）。
+> 常见错误：
+>
+> 1) 依赖的 crate 使用了 `std`（即使是简单的 `println!`）；
+> 2) 使用了 `std::collections::HashMap`（需 `std` 的随机数生成器，嵌入式中改用 `heapless::LinearMap`）；
+> 3) 使用了 `std::time`（嵌入式中改用 `embassy_time` 或硬件定时器）。
+>
+> `cargo tree` 和 `cargo-nono` 工具帮助检查 `no_std` 兼容性。
+> 这与 C 的嵌入式开发（无标准库依赖，直接使用寄存器）或 Arduino 的 C++（简化标准库）类似——Rust 的 `no_std` 提供了现代类型系统在资源受限环境中的应用。
+> [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/index.html)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.4 边界测试：Web 服务中的阻塞操作与 async runtime 的冲突（运行时性能崩溃）
 

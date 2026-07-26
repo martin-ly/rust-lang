@@ -8,7 +8,6 @@
 > [Cargo Book — Specifying Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) ·
 > [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516) ·
 > [rust-lang/cargo#6129](https://github.com/rust-lang/cargo/issues/6129)
-
 > > **权威来源**: 本文件为 `concept/` 权威页。
 > >
 ## 代码示例：声明公共与私有依赖
@@ -35,7 +34,7 @@ pub fn flags() -> MyFlags { /* ... */ }
 
 ---
 
-# Cargo `public = true` 与 Resolver v3：依赖可见性的工程化
+## Cargo `public = true` 与 Resolver v3：依赖可见性的工程化
 
 > **受众**: [进阶]
 > **内容分级**: [综述级]
@@ -49,7 +48,11 @@ pub fn flags() -> MyFlags { /* ... */ }
 
 ---
 
-> 来源: [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516) · [Cargo Book — Resolver](https://doc.rust-lang.org/cargo/reference/resolver.html) · [Cargo Book — SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html) · [rust-lang/cargo#6129](https://github.com/rust-lang/cargo/issues/6129)
+> 来源:
+> [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516) ·
+> [Cargo Book — Resolver](https://doc.rust-lang.org/cargo/reference/resolver.html) ·
+> [Cargo Book — SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html) ·
+> [rust-lang/cargo#6129](https://github.com/rust-lang/cargo/issues/6129)
 > **后置概念**: [Cargo Workspaces](14_cargo_workspaces.md)
 > **前置依赖**: [SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html)
 
@@ -57,7 +60,7 @@ pub fn flags() -> MyFlags { /* ... */ }
 
 - [Cargo `public = true` 与 Resolver v3](#cargo-public--true-与-resolver-v3)
   - [代码示例：声明公共与私有依赖](#代码示例声明公共与私有依赖)
-- [Cargo `public = true` 与 Resolver v3：依赖可见性的工程化](#cargo-public--true-与-resolver-v3依赖可见性的工程化)
+  - [Cargo `public = true` 与 Resolver v3：依赖可见性的工程化](#cargo-public--true-与-resolver-v3依赖可见性的工程化)
   - [📑 目录](#-目录)
   - [一、Resolver v3 与 v2 的差异](#一resolver-v3-与-v2-的差异)
     - [1.1 MSRV-aware 解析](#11-msrv-aware-解析)

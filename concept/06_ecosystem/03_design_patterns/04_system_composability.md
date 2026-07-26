@@ -6,16 +6,33 @@
 >
 > **EN**: System Composability
 > **Summary**: System Composability: Rust ecosystem tools, crates, and engineering practices.
-> **来源**: [tokio](https://docs.rs/tokio/) · [tower](https://docs.rs/tower/) · [rayon](https://docs.rs/rayon/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [tokio](https://docs.rs/tokio/) ·
+> [tower](https://docs.rs/tower/) ·
+> [rayon](https://docs.rs/rayon/) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 生态工程
 > **A/S/P 标记**: **P+S** — Procedure + Structure
 > **双维定位**: P×Eva — 评估系统可组合性
-> **前置概念**: · [Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md) [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Async](../../03_advanced/01_async/01_async.md) · [Iterator](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)
-> **后置概念**: [Tower 架构](../../04_formal/00_type_theory/04_category_theory.md) · [应用域](../06_data_and_distributed/01_application_domains.md)
-> **主要来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Tokio 文档](https://docs.rs/tokio/) · [Tower 文档](https://docs.rs/tower/) · [rayon 文档](https://docs.rs/rayon/)
+> **前置概念**:
+> · [Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md) [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
+> · [Traits](../../02_intermediate/00_traits/01_traits.md) ·
+> [Generics](../../02_intermediate/01_generics/01_generics.md) ·
+> [Async](../../03_advanced/01_async/01_async.md) ·
+> [Iterator](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)
+> **后置概念**:
+> [Tower 架构](../../04_formal/00_type_theory/04_category_theory.md) ·
+> [应用域](../06_data_and_distributed/01_application_domains.md)
+> **主要来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Tokio 文档](https://docs.rs/tokio/) ·
+> [Tower 文档](https://docs.rs/tower/) ·
+> [rayon 文档](https://docs.rs/rayon/)
 
 ---
 
@@ -73,11 +90,17 @@ Rust 的类型系统（Type System）通过**零成本抽象 (Zero-Cost Abstract
 
 ## 二、四大可组合模式
 
-系统可组合性的四种经典模式对应不同的数据流动假设：管道-过滤器（Unix 管道式，线性流、每级独立变换）、数据流管道（有向图拓扑，支持分叉合并，如 beam 式批处理）、事件驱动组合（发布订阅解耦生产者与消费者，时序不确定）、分层组合（每层只对下一层编程）。选择判据：数据流向是否线性、是否需要背压、组件是否需要独立演化。Rust 的类型系统（Type System）让管道模式受益最大——`Iterator` 适配器链就是零成本的管道-过滤器。ven Composition)与层组合 (Layer Composition)的顺序逐层展开。
+系统可组合性的四种经典模式对应不同的数据流动假设：
+管道-过滤器（Unix 管道式，线性流、每级独立变换）、数据流管道（有向图拓扑，支持分叉合并，如 beam 式批处理）、事件驱动组合（发布订阅解耦生产者与消费者，时序不确定）、分层组合（每层只对下一层编程）。
+选择判据：
+数据流向是否线性、是否需要背压、组件是否需要独立演化。
+Rust 的类型系统（Type System）让管道模式受益最大——`Iterator` 适配器链就是零成本的管道-过滤器。
+ven Composition与层组合 (Layer Composition)的顺序逐层展开。
 
 ### 2.1 管道-过滤器 (Pipe-and-Filter)
 
-管道-过滤器是最经典的可组合模式：数据流顺序通过一系列处理阶段（过滤器），每个阶段的输出作为下一阶段的输入。Rust 的 `Iterator` trait 是此模式的零成本实现。
+管道-过滤器是最经典的可组合模式：数据流顺序通过一系列处理阶段（过滤器），每个阶段的输出作为下一阶段的输入。
+Rust 的 `Iterator` trait 是此模式的零成本实现。
 
 ```mermaid
 graph LR

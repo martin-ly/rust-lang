@@ -16,7 +16,14 @@
 > **前置依赖**: [Async](../../03_advanced/01_async/01_async.md) · 事件驱动架构 · [泛型（Generics）](../../02_intermediate/01_generics/01_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md)
 > **后置延伸**: [分布式系统](../04_web_and_networking/01_distributed_systems.md) · [微服务架构模式](05_microservice_patterns.md) · [云原生](../04_web_and_networking/02_cloud_native.md)
 >
-> **来源**: [eventstore-rs](https://docs.rs/eventstore/) · [cqrs-es](https://docs.rs/cqrs-es/) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [eventstore-rs](https://docs.rs/eventstore/) ·
+> [cqrs-es](https://docs.rs/cqrs-es/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
 ---
 
@@ -1219,7 +1226,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-> **来源**: [Axon Framework — Architecture](https://docs.axoniq.io/axon-framework-reference/5.1/) · [EventStoreDB — Getting Started](https://developers.eventstore.com/server/v24.10/quick-start/) · [Rust Event Sourcing Example](https://github.com/rust-lang/async-book/)
+> **来源**:
+> [Axon Framework — Architecture](https://docs.axoniq.io/axon-framework-reference/5.1/) ·
+> [EventStoreDB — Getting Started](https://developers.eventstore.com/server/v24.10/quick-start/) ·
+> [Rust Event Sourcing Example](https://github.com/rust-lang/async-book/)
 
 ---
 
@@ -1284,7 +1294,10 @@ CQRS+ES 的两个高频误判是项目失败的主因：
 | **模式演化** | Upcasting / 版本化枚举（Enum） | 事件格式不可破坏式变更 | 需要严格的事件契约治理 |
 | **跨边界上下文** | 事件驱动的上下文映射 | 不存在全局一致的事件总线 | 需要显式的上下文契约（Anti-Corruption Layer）|
 
-> **来源**: [Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html) · [Microsoft — CQRS Journey](https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)) · [Vernon — Implementing DDD](https://www.amazon.com/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577)
+> **来源**:
+> [Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html) ·
+> [Microsoft — CQRS Journey](https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10)) ·
+> [Vernon — Implementing DDD](https://www.amazon.com/Implementing-Domain-Driven-Design-Vaughn-Vernon/dp/0321834577)
 
 ---
 
@@ -1315,7 +1328,11 @@ fn benchmark_rebuild_without_snapshot() {
 }
 ```
 
-> **修正**: 快照是生产环境的事件溯源必需品。推荐的快照策略是**计数触发 + 时间触发**的混合：每 1000 个事件或每 1 小时（以先到者为准）创建一次快照。快照存储应使用与事件存储不同的物理存储（如 S3/MinIO 对象存储），以降低成本。[来源: [EventStoreDB — Snapshots](https://docs.kurrent.io/server/v24.10/features/streams.html)] · [Microsoft — CQRS Journey](https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
+> **修正**:
+> 快照是生产环境的事件溯源必需品。推荐的快照策略是**计数触发 + 时间触发**的混合：每 1000 个事件或每 1 小时（以先到者为准）创建一次快照。
+> 快照存储应使用与事件存储不同的物理存储（如 S3/MinIO 对象存储），以降低成本。
+> [来源: [EventStoreDB — Snapshots](https://docs.kurrent.io/server/v24.10/features/streams.html)] ·
+> [Microsoft — CQRS Journey](https://learn.microsoft.com/en-us/previous-versions/msp-n-p/jj554200(v=pandp.10))
 
 ### 10.2 边界测试：双写不一致导致数据丢失（逻辑错误）
 

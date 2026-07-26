@@ -15,7 +15,12 @@
 > **前置依赖**: [泛型（Generics）](../../02_intermediate/01_generics/01_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md) · [生命周期（Lifetimes）](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · 设计模式
 > **后置延伸**: [CQRS & Event Sourcing](07_cqrs_event_sourcing.md) · [微服务架构模式](05_microservice_patterns.md) · [事件驱动架构](06_event_driven_architecture.md)
 >
-> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) ·
+> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
 ---
 
@@ -240,13 +245,18 @@
 | **Rust 适配性** | 良好 | 优秀（Trait 即端口）| 优秀 | 优秀 | 良好（cargo-lambda）|
 | **主要来源** | Fowler EAA | Cockburn | Palermo | Martin | AWS / Azure / GCP |
 
-> **来源**: [Cockburn — Hexagonal](https://alistair.cockburn.us/hexagonal-architecture/) · [Palermo — Onion](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/) · [Martin — Clean](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) · [AWS — Serverless](https://aws.amazon.com/serverless/)
+> **来源**:
+> [Cockburn — Hexagonal](https://alistair.cockburn.us/hexagonal-architecture/) ·
+> [Palermo — Onion](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/) ·
+> [Martin — Clean](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) ·
+> [AWS — Serverless](https://aws.amazon.com/serverless/)
 
 ---
 
 ## 三、分层架构
 
-分层架构（Layered Architecture）的依赖规则只有一条：**上层可依赖下层，下层不得知晓上层**。经典四层为表现层 → 应用层 → 领域层 → 基础设施层。
+分层架构（Layered Architecture）的依赖规则只有一条：**上层可依赖下层，下层不得知晓上层**。
+经典四层为表现层 → 应用层 → 领域层 → 基础设施层。
 
 Rust 实现该约束的独特手段是 **Cargo workspace 的 crate 边界**：编译器天然拒绝循环依赖，分层违规在 `cargo build` 阶段即失败，无需 ArchUnit 之类的外部架构测试工具。推荐布局：
 

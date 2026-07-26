@@ -15,8 +15,30 @@
 
 ---
 
-> **来源**: [wgpu 官方文档与源码](https://github.com/gfx-rs/wgpu) · [docs.rs/wgpu](https://docs.rs/wgpu) · [Rust-GPU 项目（rust-gpu Book）](https://rust-gpu.github.io/rust-gpu/book/) · [github.com/Rust-GPU/rust-gpu](https://github.com/Rust-GPU/rust-gpu) · [ash — Vulkan 绑定](https://github.com/ash-rs/ash) · [docs.rs/cust（CUDA Driver API）](https://docs.rs/cust) · [docs.rs/cudarc](https://docs.rs/cudarc) · [CUDA C++ Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/) · [CUDA C++ Best Practices Guide](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/) · [Vulkan Specification](https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html) · [SPIR-V Specification](https://registry.khronos.org/SPIR-V/specs/unified1/SPIRV.html) · [WebGPU Specification（W3C）](https://www.w3.org/TR/webgpu/) · [WGSL Specification（W3C）](https://www.w3.org/TR/WGSL/) · [SYCL 2020 Specification](https://registry.khronos.org/SYCL/specs/sycl_2020/html/sycl-2020.html) · [OpenCL 3.0 Specification](https://registry.khronos.org/OpenCL/specs/3.0-unified/html/OpenCL_API.html) · [NVIDIA HPC 开发者门户](https://developer.nvidia.com/hpc) · [rustc book — nvptx64-nvidia-cuda target](https://doc.rust-lang.org/nightly/rustc/platform-support/nvptx64-nvidia-cuda.html)
-> **国际权威来源**: **P0** [rustc book — Platform Support: nvptx64-nvidia-cuda](https://doc.rust-lang.org/nightly/rustc/platform-support/nvptx64-nvidia-cuda.html)（Rust 官方 CUDA 目标支持页；URL 含 doc.rust-lang.org 官方域） · **P1** [Lustig, Sahasrabuddhe & Giroux — A Formal Analysis of the NVIDIA PTX Memory Consistency Model（ASPLOS 2019）](https://dl.acm.org/doi/10.1145/3297858.3304043)（GPU 作用域内存模型的形式化基准文献） · [Herlihy & Shavit — The Art of Multiprocessor Programming（Morgan Kaufmann）](https://dl.acm.org/doi/book/10.5555/2385452)（内存一致性模型理论参照） · **P2** [Rust Blog — Raising the baseline for the nvptx64-nvidia-cuda target](https://blog.rust-lang.org/2026/05/01/nvptx-baseline-update/)（1.97 nvptx 基线调整官方公告；与本目录 [Target Tier 平台支持全景](10_target_tier_platform_support.md) 互链）
+> **来源**:
+>
+> [wgpu 官方文档与源码](https://github.com/gfx-rs/wgpu) ·
+> [docs.rs/wgpu](https://docs.rs/wgpu) ·
+> [Rust-GPU 项目（rust-gpu Book）](https://rust-gpu.github.io/rust-gpu/book/) ·
+> [github.com/Rust-GPU/rust-gpu](https://github.com/Rust-GPU/rust-gpu) ·
+> [ash — Vulkan 绑定](https://github.com/ash-rs/ash) ·
+> [docs.rs/cust（CUDA Driver API）](https://docs.rs/cust) ·
+> [docs.rs/cudarc](https://docs.rs/cudarc) ·
+> [CUDA C++ Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/) ·
+> [CUDA C++ Best Practices Guide](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/) ·
+> [Vulkan Specification](https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html) ·
+> [SPIR-V Specification](https://registry.khronos.org/SPIR-V/specs/unified1/SPIRV.html) ·
+> [WebGPU Specification（W3C）](https://www.w3.org/TR/webgpu/) ·
+> [WGSL Specification（W3C）](https://www.w3.org/TR/WGSL/) ·
+> [SYCL 2020 Specification](https://registry.khronos.org/SYCL/specs/sycl_2020/html/sycl-2020.html) ·
+> [OpenCL 3.0 Specification](https://registry.khronos.org/OpenCL/specs/3.0-unified/html/OpenCL_API.html) ·
+> [NVIDIA HPC 开发者门户](https://developer.nvidia.com/hpc) ·
+> [rustc book — nvptx64-nvidia-cuda target](https://doc.rust-lang.org/nightly/rustc/platform-support/nvptx64-nvidia-cuda.html)
+> **国际权威来源**:
+> **P0** [rustc book — Platform Support: nvptx64-nvidia-cuda](https://doc.rust-lang.org/nightly/rustc/platform-support/nvptx64-nvidia-cuda.html)（Rust 官方 CUDA 目标支持页；URL 含 doc.rust-lang.org 官方域） ·
+> **P1** [Lustig, Sahasrabuddhe & Giroux — A Formal Analysis of the NVIDIA PTX Memory Consistency Model（ASPLOS 2019）](https://dl.acm.org/doi/10.1145/3297858.3304043)（GPU 作用域内存模型的形式化基准文献） ·
+> [Herlihy & Shavit — The Art of Multiprocessor Programming（Morgan Kaufmann）](https://dl.acm.org/doi/book/10.5555/2385452)（内存一致性模型理论参照） ·
+> **P2** [Rust Blog — Raising the baseline for the nvptx64-nvidia-cuda target](https://blog.rust-lang.org/2026/05/01/nvptx-baseline-update/)（1.97 nvptx 基线调整官方公告；与本目录 [Target Tier 平台支持全景](10_target_tier_platform_support.md) 互链）
 
 ---
 
@@ -121,9 +143,13 @@ mindmap
 
 > **CUDA C++ Programming Guide**: The GPU is specialized for highly parallel computations and therefore designed such that more transistors are devoted to data processing rather than data caching and flow control.
 
-**GPGPU（通用图形处理器计算）定义**：将原本为图形渲染设计的 GPU 用作通用数据并行加速器——把同一 kernel（核函数）施加到大规模数据元素上，由数百到数万个轻量线程并发执行。**HPC（高性能计算）** 则是更大的伞概念：在单节点（多核 CPU + SIMD + GPU 加速器）与集群（MPI 互联的多节点）两个尺度上追求浮点吞吐与内存带宽的极限利用。
+**GPGPU（通用图形处理器计算）定义**：
+将原本为图形渲染设计的 GPU 用作通用数据并行加速器——把同一 kernel（核函数）施加到大规模数据元素上，由数百到数万个轻量线程并发执行。
+**HPC（高性能计算）** 则是更大的伞概念：在单节点（多核 CPU + SIMD + GPU 加速器）与集群（MPI 互联的多节点）两个尺度上追求浮点吞吐与内存带宽的极限利用。
 
-Rust 在该领域的角色可概括为一句话：**host 侧的安全编排者 + device 侧的新兴编译目标**。host 侧（CPU 代码）Rust 的所有权与类型系统可以直接生效；device 侧（kernel 代码）则取决于具体路径——wgpu/WGSL 提供 API 级验证，rust-gpu 把 Rust 类型检查延伸到 shader 内，而 cust/ash/hip-sys 等 FFI 路径则退化为 `unsafe` 薄封装（见 [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) 与 [FFI](../../03_advanced/04_ffi/01_rust_ffi.md)）。
+Rust 在该领域的角色可概括为一句话：**host 侧的安全编排者 + device 侧的新兴编译目标**。
+host 侧（CPU 代码）Rust 的所有权与类型系统可以直接生效；device 侧（kernel 代码）则取决于具体路径——wgpu/WGSL 提供 API 级验证，rust-gpu 把 Rust 类型检查延伸到 shader 内，而 cust/ash/hip-sys 等 FFI 路径则退化为 `unsafe` 薄封装
+（见 [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) 与 [FFI](../../03_advanced/04_ffi/01_rust_ffi.md)）。
 
 ### 1.2 GPU 与 CPU 的设计哲学差异
 
@@ -136,7 +162,8 @@ Rust 在该领域的角色可概括为一句话：**host 侧的安全编排者 +
 | 并行粒度 | 线程级 + 指令级 | 数据级（SIMT）为主 |
 | 典型并行规模 | 10¹–10² 线程 | 10⁴–10⁶ 线程 |
 
-工程推论：GPU 不是「更快的 CPU」，而是一台**带宽换延迟**的机器。只有「足够规则、足够大规模、计算密度（FLOP/Byte）足够高」的问题才值得 offload——这是 §7.5 反例 4 的正面陈述。
+工程推论：GPU 不是「更快的 CPU」，而是一台**带宽换延迟**的机器。
+只有「足够规则、足够大规模、计算密度（FLOP/Byte）足够高」的问题才值得 offload——这是 §7.5 反例 4 的正面陈述。
 
 ### 1.3 Rust 切入 GPU 的三条技术路径
 
@@ -239,7 +266,10 @@ if (tid % 2 == 0) { path_a(); } else { path_b(); }
 
 减轻分歧的惯用手法：按分支谓词对数据预排序/分区；把小分支改为无分支算术（`min`/`max`/select）；把分歧粒度提升到 warp 对齐的边界。
 
-**架构变迁警示**：自 Volta（SM 7.0，恰为 Rust 1.97 nvptx64 目标的最低 SM，见 [Target Tier 平台支持全景](10_target_tier_platform_support.md)）起，NVIDIA 引入**独立线程调度（Independent Thread Scheduling）**——每个线程有独立 PC 与栈。warp 内「天然 lockstep」不再是语言语义的一部分：依赖「同 warp 隐式同步」的老代码（如不加 `__syncwarp()` 的 warp 内数据交换）在 Volta+ 上是未定义行为（详见 §7.4 反例 3）。
+**架构变迁警示**：
+自 Volta（SM 7.0，恰为 Rust 1.97 nvptx64 目标的最低 SM，见 [Target Tier 平台支持全景](10_target_tier_platform_support.md)）起，
+NVIDIA 引入**独立线程调度（Independent Thread Scheduling）**
+——每个线程有独立 PC 与栈。warp 内「天然 lockstep」不再是语言语义的一部分：依赖「同 warp 隐式同步」的老代码（如不加 `__syncwarp()` 的 warp 内数据交换）在 Volta+ 上是未定义行为（详见 §7.4 反例 3）。
 
 ### 2.6 同步与作用域内存模型
 
@@ -400,7 +430,9 @@ pub fn shade(output: &mut Vec4) {
 }
 ```
 
-边界提示：rust-gpu 目标是 Vulkan 生态（SPIR-V）；它**不是** CUDA 编译路径。要 NVIDIA PTX 须走路径 A（cust/cudarc + nvcc/NVRTC）或官方的 `nvptx64-nvidia-cuda` target（见 §3.7 与 [Target Tier 平台支持全景](10_target_tier_platform_support.md)，该目标 1.97 起最低 SM 7.0 / PTX ISA 7.0，且需 nightly 工具链 `-Z build-std=core`——工具链事实，与 Tier 页同源）。
+边界提示：rust-gpu 目标是 Vulkan 生态（SPIR-V）；它**不是** CUDA 编译路径。
+要 NVIDIA PTX 须走路径 A（cust/cudarc + nvcc/NVRTC）或官方的 `nvptx64-nvidia-cuda` target（见 §3.7 与 [Target Tier 平台支持全景](10_target_tier_platform_support.md)，
+该目标 1.97 起最低 SM 7.0 / PTX ISA 7.0，且需 nightly 工具链 `-Z build-std=core`——工具链事实，与 Tier 页同源）。
 
 ### 3.4 cust / cudarc / accel：CUDA 谱系
 
@@ -504,14 +536,16 @@ fn make_pipeline(device: &Device, spv: &[u8]) -> vk::Pipeline {
 }
 ```
 
-与 wgpu 的对照恰是 Rust 安全分层的活教材：ash 把[Vulkan 规范](https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html)的每一条「valid usage」规则都留给调用者；wgpu 则把这些规则编码进类型与运行时验证。**两者共享同一个 SPIR-V 生态**——rust-gpu 产出的 shader 可以直接喂给 ash 管线。
+与 wgpu 的对照恰是 Rust 安全分层的活教材：ash 把[Vulkan 规范](https://registry.khronos.org/vulkan/specs/latest/html/vkspec.html)的每一条「valid usage」规则都留给调用者；wgpu 则把这些规则编码进类型与运行时验证。
+**两者共享同一个 SPIR-V 生态**——rust-gpu 产出的 shader 可以直接喂给 ash 管线。
 
 ### 3.7 周边生态：naga / metal / ocl / nvptx 目标
 
 - **naga**：gfx-rs 的 shader 翻译器（WGSL ↔ SPIR-V ↔ MSL ↔ HLSL ↔ GLSL），wgpu 内置；可作为库单独使用，做 shader 静态分析与跨 IR 迁移。
 - **metal crate**：Apple Metal 的 Objective-C 绑定（host 侧），compute 与图形皆可；shader 语言为 MSL（C++14 子集）。
 - **ocl / opencl3**：[OpenCL](https://registry.khronos.org/OpenCL/specs/3.0-unified/html/OpenCL_API.html) 绑定；OpenCL 3.0 把 2.x 特性降为可选，定位为「最终统一 API」，但工业重心已转向 CUDA/HIP/SYCL 与 WebGPU。
-- **官方 nvptx64-nvidia-cuda target**：rustc 内置 LLVM NVPTX 后端（Tier 2、no_std），1.97 起最低 SM 7.0 / PTX ISA 7.0（[Rust Blog 公告](https://blog.rust-lang.org/2026/05/01/nvptx-baseline-update/)）；当前主要用于嵌入式 PTX 场景与 accel 类研究项目，详细约束见本目录 [Target Tier 平台支持全景](10_target_tier_platform_support.md)。
+- **官方 nvptx64-nvidia-cuda target**：rustc 内置 LLVM NVPTX 后端（Tier 2、no_std），1.97 起最低 SM 7.0 / PTX ISA 7.0（[Rust Blog 公告](https://blog.rust-lang.org/2026/05/01/nvptx-baseline-update/)）；
+- 当前主要用于嵌入式 PTX 场景与 accel 类研究项目，详细约束见本目录 [Target Tier 平台支持全景](10_target_tier_platform_support.md)。
 
 ---
 
@@ -535,7 +569,8 @@ fn par_saxpy(a: f32, x: &[f32], y: &mut [f32]) {
 }
 ```
 
-同一种「按索引切分、无共享写」的思维在 GPU 上叫 **grid-stride loop**：kernel 内以 `for (i = global_id; i < n; i += grid_dim * block_dim)` 遍历，使固定规模的 grid 能处理任意 n。两者的共同本质是**把迭代空间剖分为互不重叠的分片**——Rust 的 `chunks_mut`/`par_chunks_mut` 与 CUDA 的 blockIdx 分区是同一模式在不同硬件上的投影。
+同一种「按索引切分、无共享写」的思维在 GPU 上叫 **grid-stride loop**：kernel 内以 `for (i = global_id; i < n; i += grid_dim * block_dim)` 遍历，使固定规模的 grid 能处理任意 n。
+两者的共同本质是**把迭代空间剖分为互不重叠的分片**——Rust 的 `chunks_mut`/`par_chunks_mut` 与 CUDA 的 blockIdx 分区是同一模式在不同硬件上的投影。
 
 ### 4.2 SIMD 与向量化
 
@@ -669,13 +704,24 @@ GPU 编程把 Rust 的安全边界从 host 代码延伸到设备内存、kernel 
 
 GPU 场景把 Rust 的安全边界推到了四个 rustc 够不着的位置：
 
-**S1. unsafe FFI 与签名漂移。** CUDA/HIP/OpenCL 的 launch 接口经 C ABI 传递裸指针与标量（§3.4），参数个数/类型错位不被任何编译器检查。缓解：把每个 kernel 的 launch 封进一个安全 Rust 函数，参数类型与 kernel 签名一一对应并集中维护；能走 NVRTC 时用断言在 JIT 后校验符号存在。
+**S1. unsafe FFI 与签名漂移。**
+CUDA/HIP/OpenCL 的 launch 接口经 C ABI 传递裸指针与标量（§3.4），参数个数/类型错位不被任何编译器检查。
+缓解：把每个 kernel 的 launch 封进一个安全 Rust 函数，参数类型与 kernel 签名一一对应并集中维护；能走 NVRTC 时用断言在 JIT 后校验符号存在。
 
-**S2. 设备内存生命周期与 stream 异步性。** `DeviceBuffer` 的 `Drop`（cust）只保证释放显存，**不保证在途 kernel 已读完它**——在非默认 stream 上 drop 后立即复用/读取 host 侧数据是经典 use-after-free 变体。正确的封装契约：拥有 buffer 的类型同时拥有它最后被提交的 stream，drop 前 `stream.synchronize()` 或记录 event 依赖（§7.3 反例 2 给出失效形态）。
+**S2. 设备内存生命周期与 stream 异步性。**
+`DeviceBuffer` 的 `Drop`（cust）只保证释放显存，**不保证在途 kernel 已读完它**——在非默认 stream 上 drop 后立即复用/读取 host 侧数据是经典 use-after-free 变体。
+正确的封装契约：拥有 buffer 的类型同时拥有它最后被提交的 stream，drop 前 `stream.synchronize()` 或记录 event 依赖（§7.3 反例 2 给出失效形态）。
 
-**S3. 同步与 barrier 纪律。** block 内共享内存的读写必须配 `workgroupBarrier()`/`__syncthreads()`；漏配在多数输入下「看起来对」，只在特定调度交错下出错——与 CPU 数据竞争同构但更难复现。WGSL 在语言层强制 barrier 的一致性规则（divergence 内 barrier 是编译错误），CUDA C++ 则全靠程序员。
+**S3. 同步与 barrier 纪律。**
+block 内共享内存的读写必须配 `workgroupBarrier()`/`__syncthreads()`；
+漏配在多数输入下「看起来对」，只在特定调度交错下出错——与 CPU 数据竞争同构但更难复现。
+WGSL 在语言层强制 barrier 的一致性规则（divergence 内 barrier 是编译错误），CUDA C++ 则全靠程序员。
 
-**S4. kernel 内数据竞争不在借用检查射程内。** Rust 的「无数据竞争」保证作用域是**单个 Rust 程序的线程语义**；kernel 提交给驱动后，数千线程在设备上并发读写同一块显存，借用检查不可见、不可执行。kernel 内竞态自由的证明责任落在：WGSL 类型规则（rust-gpu/wgpu 路径）、PTX/Vulkan 内存模型纪律（§2.6）、以及工程审查。[Lustig et al.（ASPLOS 2019）](https://dl.acm.org/doi/10.1145/3297858.3304043) 对 PTX 模型的形式化工作表明：即便厂商模型本身，也是在发布多年后才获得严格语义——应用层更没有侥幸空间。
+**S4. kernel 内数据竞争不在借用检查射程内。**
+Rust 的「无数据竞争」保证作用域是**单个 Rust 程序的线程语义**；
+kernel 提交给驱动后，数千线程在设备上并发读写同一块显存，借用检查不可见、不可执行。
+kernel 内竞态自由的证明责任落在：WGSL 类型规则（rust-gpu/wgpu 路径）、PTX/Vulkan 内存模型纪律（§2.6）、以及工程审查。
+[Lustig et al.（ASPLOS 2019）](https://dl.acm.org/doi/10.1145/3297858.3304043) 对 PTX 模型的形式化工作表明：即便厂商模型本身，也是在发布多年后才获得严格语义——应用层更没有侥幸空间。
 
 ### 5.2 Rust 的独特优势
 

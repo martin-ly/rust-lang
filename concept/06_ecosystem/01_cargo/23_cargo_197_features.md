@@ -9,15 +9,28 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: P×App — 将 Cargo 1.97 工具链变更应用于 CI 强化、锁文件治理与误删防护
-> **前置概念**: · [Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md) [Toolchain](../00_toolchain/01_toolchain.md) · [Cargo 1.96 新特性](04_cargo_196_features.md) · [Cargo Configuration](18_cargo_configuration.md) · [Cargo Commands Reference](19_cargo_commands_reference.md)
-> **后置概念**: [Rust Version Tracking](../../07_future/00_version_tracking/01_rust_version_tracking.md) · [Rust 1.97 Stabilized](../../07_future/00_version_tracking/rust_1_97_stabilized.md)
+> **前置概念**:
+> · [Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md) [Toolchain](../00_toolchain/01_toolchain.md) ·
+> [Cargo 1.96 新特性](04_cargo_196_features.md) ·
+> [Cargo Configuration](18_cargo_configuration.md) ·
+> [Cargo Commands Reference](19_cargo_commands_reference.md)
+> **后置概念**:
+> [Rust Version Tracking](../../07_future/00_version_tracking/01_rust_version_tracking.md) ·
+> [Rust 1.97 Stabilized](../../07_future/00_version_tracking/rust_1_97_stabilized.md)
 > **版本状态**: 当前稳定 patch 为 **1.97.1**；本页特性集即 Rust 1.97.0 的 Cargo 变更（1.97.1 为 LLVM 误编译修复补丁，不影响 Cargo 特性）。
 > **实测环境**: `cargo 1.97.1 (c980f4866 2026-06-30)`，Windows x86_64，2026-07-18 实测。
 
 ---
 
-> **来源**: [Rust 1.97.0/1.97.1 Release Notes](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（本库权威汇总；1.97.1 补丁见 [`rust_1_97_1.md`](../../07_future/00_version_tracking/rust_1_97_1.md)） · [Cargo CHANGELOG](https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md) · [Cargo Book — Configuration](https://doc.rust-lang.org/cargo/reference/config.html) · [Cargo Book — Environment Variables](https://doc.rust-lang.org/cargo/reference/environment-variables.html)
-> **国际权威来源（2026-07-18 更新）**: **P1** [Bae et al. — RUDRA（SOSP 2021）](https://dl.acm.org/doi/10.1145/3477132.3483570)（以 crates.io 全量包为对象的生态级分析） · **P2** [Rust Blog — Announcing Rust 1.97.0](https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/)（curl 200 实测 2026-07-13） · **P2** [Rust Blog — Announcing Rust 1.97.1](https://blog.rust-lang.org/2026/07/16/Rust-1.97.1/)（curl 200 实测 2026-07-18）
+> **来源**:
+> [Rust 1.97.0/1.97.1 Release Notes](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（本库权威汇总；1.97.1 补丁见 [`rust_1_97_1.md`](../../07_future/00_version_tracking/rust_1_97_1.md)） ·
+> [Cargo CHANGELOG](https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md) ·
+> [Cargo Book — Configuration](https://doc.rust-lang.org/cargo/reference/config.html) ·
+> [Cargo Book — Environment Variables](https://doc.rust-lang.org/cargo/reference/environment-variables.html)
+> **国际权威来源（2026-07-18 更新）**:
+> **P1** [Bae et al. — RUDRA（SOSP 2021）](https://dl.acm.org/doi/10.1145/3477132.3483570)（以 crates.io 全量包为对象的生态级分析） ·
+> **P2** [Rust Blog — Announcing Rust 1.97.0](https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/)（curl 200 实测 2026-07-13） ·
+> **P2** [Rust Blog — Announcing Rust 1.97.1](https://blog.rust-lang.org/2026/07/16/Rust-1.97.1/)（curl 200 实测 2026-07-18）
 
 ---
 

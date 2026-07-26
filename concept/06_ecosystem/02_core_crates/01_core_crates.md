@@ -21,9 +21,21 @@
 > **层级**: L6 生态工程
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: P×Eva — 评估生态 crate 的安全性和可维护性
-> **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Async](../../03_advanced/01_async/01_async.md) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)]
+> **前置概念**:
+> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Traits](../../02_intermediate/00_traits/01_traits.md) ·
+> [Generics](../../02_intermediate/01_generics/01_generics.md) ·
+> [Async](../../03_advanced/01_async/01_async.md) ·
+> [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)]
 > **后置概念**: [Application Domains](../06_data_and_distributed/01_application_domains.md)
-> **主要来源**: [crates.io](https://crates.io) · [lib.rs](https:/lib.rs) · [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**:
+> [crates.io](https://crates.io) ·
+> [lib.rs](https:/lib.rs) ·
+> [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) ·
+> [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 ---
 
@@ -66,7 +78,10 @@
 
 ## 嵌入式测验（Embedded Quiz）
 
-本组测验覆盖核心 crate 的四个选型考点：serde 的 derive 机制（编译期生成序列化代码 vs 运行时反射）；tokio 运行时 flavor 选择（`current_thread` vs `multi_thread` 的适用场景）；thiserror（库定义错误类型）与 anyhow（应用传播错误）的分工；以及各 crate 的 MSRV 与特性组合。每题标注认知层级，错题按标注回查本章对应 crate 小节。4：bytes crate 的设计目标（分析层）等5个方面。
+本组测验覆盖核心 crate 的四个选型考点：serde 的 derive 机制（编译期生成序列化代码 vs 运行时反射）；
+tokio 运行时 flavor 选择（`current_thread` vs `multi_thread` 的适用场景）；
+thiserror（库定义错误类型）与 anyhow（应用传播错误）的分工；
+以及各 crate 的 MSRV 与特性组合。每题标注认知层级，错题按标注回查本章对应 crate 小节。4：bytes crate 的设计目标（分析层）等5个方面。
 
 ### 测验 1：serde 的核心机制（理解层）
 
@@ -1228,7 +1243,11 @@ graph TD
 
 ## 十、边界测试：核心 crate 的编译错误
 
-核心 crate 边界测试固化三类入门期高频错误：serde 反序列化缺字段且无 `#[serde(default)]` 的运行时错误（与编译期 derive 错误相对照）；tokio 在 runtime 外调用 `tokio::spawn` 的 panic（“no reactor running”——必须处于 runtime 上下文）；thiserror 的 `#[from]` 与 anyhow 混用时的类型转换边界。三类用例分别对应序列化契约、运行时上下文与错误分层，是核心 crate 入门的第一批踩坑点。nyhow`的混用（编译错…、边界测试：`tokio` 与 `Tokio` 的 channel 不兼…等7个方面的顺序逐层展开。
+核心 crate 边界测试固化三类入门期高频错误：
+serde 反序列化缺字段且无 `#[serde(default)]` 的运行时错误（与编译期 derive 错误相对照）；
+tokio 在 runtime 外调用 `tokio::spawn` 的 panic（“no reactor running”——必须处于 runtime 上下文）；
+thiserror 的 `#[from]` 与 anyhow 混用时的类型转换边界。三类用例分别对应序列化契约、运行时上下文与错误分层，是核心 crate 入门的第一批踩坑点。
+nyhow`的混用（编译错…、边界测试：`tokio` 与 `Tokio` 的 channel 不兼…等7个方面的顺序逐层展开。
 
 ### 10.1 边界测试：`serde` 的派生宏与字段缺失（编译错误）
 
@@ -1248,7 +1267,12 @@ fn main() {
 }
 ```
 
-> **修正**: `serde` 的 `Deserialize` derive 宏在编译期生成反序列化逻辑，运行时检查字段存在性。缺失字段返回 `Err`，不是编译错误。这与 Protobuf 的 schema 演化不同——serde 默认严格，不自动填充默认值。使用 `#[serde(default)]` 可使字段可选，使用 `#[serde(default = "default_port")]` 指定默认值。Rust 生态的序列化是"显式契约"——数据结构定义即契约，运行时验证契约一致性（Coherence）。[来源: [Serde Documentation](https://serde.rs/)]
+> **修正**:
+> `serde` 的 `Deserialize` derive 宏在编译期生成反序列化逻辑，运行时检查字段存在性。
+> 缺失字段返回 `Err`，不是编译错误。这与 Protobuf 的 schema 演化不同——serde 默认严格，不自动填充默认值。
+> 使用 `#[serde(default)]` 可使字段可选，使用 `#[serde(default = "default_port")]` 指定默认值。
+> Rust 生态的序列化是"显式契约"——数据结构定义即契约，运行时验证契约一致性（Coherence）。
+> [来源: [Serde Documentation](https://serde.rs/)]
 
 ### 10.2 边界测试：`tokio` 运行时未启动时调用 `spawn`（运行时 panic）
 
@@ -1269,7 +1293,12 @@ async fn main_fixed() {
 }
 ```
 
-> **修正**: Tokio 的 `spawn` 需要在活跃的运行时上下文中执行。运行时通过线程局部存储维护当前上下文。在主线程直接调用 `spawn` 而不启动运行时会 panic。这与 Go 的 `go` 关键字（隐式全局调度器）不同——Rust 的运行时是显式的，允许一个程序中同时存在多个隔离的运行时实例。这种显式性增加了代码量，但提供了更精细的控制（如为不同工作负载配置不同线程池）。[来源: [Tokio Documentation](https://docs.rs/tokio/)]
+> **修正**:
+> Tokio 的 `spawn` 需要在活跃的运行时上下文中执行。运行时通过线程局部存储维护当前上下文。
+> 在主线程直接调用 `spawn` 而不启动运行时会 panic。
+> 这与 Go 的 `go` 关键字（隐式全局调度器）不同——Rust 的运行时是显式的，允许一个程序中同时存在多个隔离的运行时实例。
+> 这种显式性增加了代码量，但提供了更精细的控制（如为不同工作负载配置不同线程池）。
+> [来源: [Tokio Documentation](https://docs.rs/tokio/)]
 
 ### 10.3 边界测试：`thiserror` 与 `anyhow` 的混用（编译错误）
 
@@ -1293,7 +1322,17 @@ fn main() {
 }
 ```
 
-> **修正**: `thiserror` 用于库（定义结构化错误类型），`anyhow` 用于应用（快速错误处理（Error Handling））。`anyhow::Result<T>` 是 `Result<T, anyhow::Error>` 的别名，`anyhow::Error` 可自动包裹任何实现 `std::error::Error` 的类型。`may_fail` 中 `?` 从 `std::io::Error` 转换为 `anyhow::Error` 是自动的（通过 `From`），但若函数签名是 `Result<T, AppError>`，`anyhow::Error` 不能自动转换。解决方案：1) 库函数返回 `thiserror` 类型，应用层用 `anyhow` 包裹；2) 统一使用 `anyhow`（牺牲结构化错误）；3) 统一使用 `thiserror`（增加样板）。这与 Go 的 `error` 接口（统一，无结构化）或 Java 的异常层次（结构化，但繁琐）不同——Rust 的错误生态提供分层选择，而非一刀切。来源: [thiserror Documentation] · 来源: [anyhow Documentation]
+> **修正**:
+> `thiserror` 用于库（定义结构化错误类型），`anyhow` 用于应用（快速错误处理（Error Handling））。
+> `anyhow::Result<T>` 是 `Result<T, anyhow::Error>` 的别名，`anyhow::Error` 可自动包裹任何实现 `std::error::Error` 的类型。
+> `may_fail` 中 `?` 从 `std::io::Error` 转换为 `anyhow::Error` 是自动的（通过 `From`），但若函数签名是 `Result<T, AppError>`，`anyhow::Error` 不能自动转换。
+> 解决方案：
+>
+> 1) 库函数返回 `thiserror` 类型，应用层用 `anyhow` 包裹；
+> 2) 统一使用 `anyhow`（牺牲结构化错误）；
+> 3) 统一使用 `thiserror`（增加样板）。
+> 这与 Go 的 `error` 接口（统一，无结构化）或 Java 的异常层次（结构化，但繁琐）不同——Rust 的错误生态提供分层选择，而非一刀切。
+> 来源: [thiserror Documentation] · 来源: [anyhow Documentation]
 
 ### 10.4 边界测试：`tokio` 与 `Tokio` 的 channel 不兼容（编译错误）
 
@@ -1310,7 +1349,17 @@ async fn tokio_task() {
 }
 ```
 
-> **修正**: `tokio::sync::mpsc` 的 `send`/`recv` 是异步（Async）方法，底层依赖 tokio 的 reactor（epoll/kqueue/IOCP）进行任务唤醒。在 Tokio 或 smol 的 runtime 上调用 tokio channel，可能导致任务永不唤醒（deadlock）或 panic。跨 runtime 的互操作性是 Rust 异步生态的分裂点：1) 计算型 future（无 I/O）可跨 runtime 使用；2) I/O 和定时器必须匹配 runtime；3) `async-compat` crate 提供适配层，但有开销。这与 Go 的单一 runtime（所有 goroutine 由 Go scheduler 管理）或 JavaScript 的单一事件循环不同——Rust 的异步生态允许多个 runtime 竞争，但要求开发者明确选择和隔离。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Tokio Documentation](https://docs.rs/Tokio/)]
+> **修正**:
+>
+> `tokio::sync::mpsc` 的 `send`/`recv` 是异步（Async）方法，底层依赖 tokio 的 reactor（epoll/kqueue/IOCP）进行任务唤醒。
+> 在 Tokio 或 smol 的 runtime 上调用 tokio channel，可能导致任务永不唤醒（deadlock）或 panic。
+> 跨 runtime 的互操作性是 Rust 异步生态的分裂点：
+>
+> 1) 计算型 future（无 I/O）可跨 runtime 使用；
+> 2) I/O 和定时器必须匹配 runtime；
+> 3) `async-compat` crate 提供适配层，但有开销。
+> 这与 Go 的单一 runtime（所有 goroutine 由 Go scheduler 管理）或 JavaScript 的单一事件循环不同——Rust 的异步生态允许多个 runtime 竞争，但要求开发者明确选择和隔离。
+> [来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Tokio Documentation](https://docs.rs/Tokio/)]
 
 ### 10.5 边界测试：`rayon` 的线程池饥饿与任务粒度（运行时性能下降）
 
@@ -1330,7 +1379,20 @@ fn main() {
 }
 ```
 
-> **修正**: `rayon` 是 Rust 的数据并行库，基于 work-stealing 线程池自动并行化迭代器（Iterator）。但**任务粒度**是关键：1) 任务太小（如 `x * 2`）→ 线程调度开销 > 并行收益；2) 任务太大 → 负载不均衡，某些线程空闲。`rayon` 的启发式：通过 `join` 递归分割任务，但无法控制最小分割粒度。优化：1) 使用 `par_chunks` 增加每任务工作量；2) 使用 `with_min_len(n)` 设置最小长度；3) 只在计算密集型操作中使用 `par_iter`（I/O 密集型用 `tokio`）。这与 Java 的 `ForkJoinPool`（类似 work-stealing）或 C++ 的 `std::execution::par`（C++17，类似抽象）类似——数据并行的性能取决于任务粒度，无万能配置。[来源: [rayon Documentation](https://docs.rs/rayon/)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
+> **修正**:
+> `rayon` 是 Rust 的数据并行库，基于 work-stealing 线程池自动并行化迭代器（Iterator）。
+> 但**任务粒度**是关键：
+>
+> 1) 任务太小（如 `x * 2`）→ 线程调度开销 > 并行收益；
+> 2) 任务太大 → 负载不均衡，某些线程空闲。`rayon` 的启发式：通过 `join` 递归分割任务，但无法控制最小分割粒度。
+>
+> 优化：
+>
+> 1) 使用 `par_chunks` 增加每任务工作量；
+> 2) 使用 `with_min_len(n)` 设置最小长度；
+> 3) 只在计算密集型操作中使用 `par_iter`（I/O 密集型用 `tokio`）。
+> 这与 Java 的 `ForkJoinPool`（类似 work-stealing）或 C++ 的 `std::execution::par`（C++17，类似抽象）类似——数据并行的性能取决于任务粒度，无万能配置。
+> [来源: [rayon Documentation](https://docs.rs/rayon/)] · [来源: [Rust Performance Book](https://nnethercote.github.io/perf-book/)]
 
 ### 10.3 边界测试：`thiserror` 与 `anyhow` 的错误类型混用（编译错误）
 
@@ -1357,7 +1419,20 @@ fn main() {
 }
 ```
 
-> **修正**: `thiserror` 用于**库**的错误类型定义（派生 `std::error::Error`），`anyhow` 用于**应用**的错误处理（Error Handling）（动态类型擦除）。混用场景：1) 库返回 `thiserror` 定义的错误；2) 应用使用 `anyhow::Result` 聚合多个库的错误；3) `anyhow::Error::from(my_error)` 自动转换。`anyhow` 的 `Context` trait 添加错误上下文：`file.open("config.txt").context("failed to read config")?`。`thiserror` 的优势：结构化错误（可匹配具体变体）；`anyhow` 的优势：简洁、动态、自动回溯（backtrace）。这与 Go 的 `error` 接口（简单字符串，无链式上下文）或 Java 的异常链（`cause` 字段）类似——Rust 的错误生态分层明确：`thiserror` 用于类型化错误，`anyhow` 用于运行时错误处理。[来源: [thiserror](https://docs.rs/thiserror/)] · [来源: [anyhow](https://docs.rs/anyhow/)]
+> **修正**:
+>
+> `thiserror` 用于**库**的错误类型定义（派生 `std::error::Error`），`anyhow` 用于**应用**的错误处理（Error Handling）（动态类型擦除）。
+> 混用场景：
+>
+> 1) 库返回 `thiserror` 定义的错误；
+> 2) 应用使用 `anyhow::Result` 聚合多个库的错误；
+> 3) `anyhow::Error::from(my_error)` 自动转换。
+>
+> `anyhow` 的 `Context` trait 添加错误上下文：`file.open("config.txt").context("failed to read config")?`。
+> `thiserror` 的优势：结构化错误（可匹配具体变体）；
+> `anyhow` 的优势：简洁、动态、自动回溯（backtrace）。
+> 这与 Go 的 `error` 接口（简单字符串，无链式上下文）或 Java 的异常链（`cause` 字段）类似——Rust 的错误生态分层明确：`thiserror` 用于类型化错误，`anyhow` 用于运行时错误处理。
+> [来源: [thiserror](https://docs.rs/thiserror/)] · [来源: [anyhow](https://docs.rs/anyhow/)]
 
 ### 10.4 边界测试：`tokio` 的 runtime 与 `std::thread::spawn` 混用（运行时性能下降）
 
@@ -1380,7 +1455,22 @@ fn main() {
 }
 ```
 
-> **修正**: `tokio` 的**任务调度**：1) `tokio::spawn` — 创建异步任务，由 tokio 的线程池调度（非阻塞）；2) `std::thread::spawn` — 创建 OS 线程，阻塞操作占用线程。混用问题：1) 阻塞操作（sleep、文件 IO、CPU 密集）占用 tokio worker 线程 → 其他 async 任务饥饿；2) 应使用 `tokio::task::spawn_blocking` 运行阻塞代码；3) 或使用 `tokio::fs` 替代 `std::fs`（异步文件 IO）。`tokio` 的线程池：默认 worker 线程数 = CPU 核心数，阻塞任务应 offload 到 blocking pool。这与 Go 的 goroutine（调度器自动处理阻塞，无需区分 async/sync）或 Java 的 `CompletableFuture`（默认使用 `ForkJoinPool`，同样需避免阻塞）不同——Rust 的 async runtime 要求开发者显式管理阻塞操作。[来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Async Rust](https://rust-lang.github.io/async-book/index.html)]
+> **修正**:
+>
+> `tokio` 的**任务调度**：
+>
+> 1) `tokio::spawn` — 创建异步任务，由 tokio 的线程池调度（非阻塞）；
+> 2) `std::thread::spawn` — 创建 OS 线程，阻塞操作占用线程。
+>
+> 混用问题：
+>
+> 1) 阻塞操作（sleep、文件 IO、CPU 密集）占用 tokio worker 线程 → 其他 async 任务饥饿；
+> 2) 应使用 `tokio::task::spawn_blocking` 运行阻塞代码；
+> 3) 或使用 `tokio::fs` 替代 `std::fs`（异步文件 IO）。
+> `tokio` 的线程池：默认 worker 线程数 = CPU 核心数，阻塞任务应 offload 到 blocking pool。
+>
+> 这与 Go 的 goroutine（调度器自动处理阻塞，无需区分 async/sync）或 Java 的 `CompletableFuture`（默认使用 `ForkJoinPool`，同样需避免阻塞）不同——Rust 的 async runtime 要求开发者显式管理阻塞操作。
+> [来源: [Tokio Documentation](https://docs.rs/tokio/)] · [来源: [Async Rust](https://rust-lang.github.io/async-book/index.html)]
 
 ---
 

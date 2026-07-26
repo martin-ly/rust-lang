@@ -17,10 +17,21 @@
 > **前置概念**: [Async](../../03_advanced/01_async/01_async.md) · 分布式系统 · [错误处理（Error Handling）](../../01_foundation/08_error_handling/01_error_handling_basics.md)
 > **后置概念**: [事件驱动架构](06_event_driven_architecture.md) · [云原生](../04_web_and_networking/02_cloud_native.md)
 >
-> **来源**: [tower](https://docs.rs/tower/) · [tonic](https://docs.rs/tonic/) · [failsafe](https://docs.rs/failsafe/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [tower](https://docs.rs/tower/) ·
+> [tonic](https://docs.rs/tonic/) ·
+> [failsafe](https://docs.rs/failsafe/) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
-> **来源**: [Axum](https://docs.rs/axum/latest/axum/) · [Tower](https://docs.rs/axum/latest/axum/middleware/index.html) · [failsafe crate](https://docs.rs/failsafe/latest/failsafe/) · [Microservices Patterns (Chris Richardson)](https://microservices.io/book) · [Kafka Documentation](https://kafka.apache.org/documentation/)
+> **来源**:
+> [Axum](https://docs.rs/axum/latest/axum/) ·
+> [Tower](https://docs.rs/axum/latest/axum/middleware/index.html) ·
+> [failsafe crate](https://docs.rs/failsafe/latest/failsafe/) ·
+> [Microservices Patterns (Chris Richardson)](https://microservices.io/book) ·
+> [Kafka Documentation](https://kafka.apache.org/documentation/)
 
 ## 📑 目录
 

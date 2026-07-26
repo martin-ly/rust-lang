@@ -285,14 +285,19 @@ classDiagram
 
 > **认知功能**: 将Visitor模式的"双重分发"结构可视化，清晰呈现Expr（元素层次）与ExprVisitor（操作层次）的正交分离。建议在实现AST遍历或代码生成前对照此图验证接口设计。
 > **关键洞察**: enum变体替代继承层次，`accept`方法的泛型（Generics）参数将运行时（Runtime）双重分发压缩为编译期单分发，消除虚函数表膨胀。
-> **思维表征说明**: `classDiagram` 是设计模式的**标准 UML 表达**——`--|>` 表示继承/变体关系，`<|..` 表示 trait 实现，`..>` 表示依赖关系。Visitor 模式的核心结构在此图中一目了然：Expr 是被访问的元素层次（enum 变体），ExprVisitor 是操作接口，EvalVisitor / PrintVisitor 是具体操作实现。这与 `graph TD` 流程图（展示概念关系）形成互补——类图展示的是**代码结构中的类型关系**。 [GoF Design Patterns; UML 2.5 Class Diagram Standard](https://en.wikipedia.org/wiki/Design_Patterns)
+> **思维表征说明**:
+>
+> `classDiagram` 是设计模式的**标准 UML 表达**——`--|>` 表示继承/变体关系，`<|..` 表示 trait 实现，`..>` 表示依赖关系。
+> Visitor 模式的核心结构在此图中一目了然：Expr 是被访问的元素层次（enum 变体），ExprVisitor 是操作接口，EvalVisitor / PrintVisitor 是具体操作实现。
+> 这与 `graph TD` 流程图（展示概念关系）形成互补——类图展示的是**代码结构中的类型关系**。
+> [GoF Design Patterns; UML 2.5 Class Diagram Standard](https://en.wikipedia.org/wiki/Design_Patterns)
 
 **与其他语言对比**：
 
 - **Java/C++**: 经典双重分发（`accept` + `visit`）；Rust 通过 `match` 枚举实现单分发，避免虚函数膨胀，但无法直接扩展现有 enum 的变体（需用 enum/struct 模拟开放访问者）。
 - **Haskell**: 利用类型类（type class）和代数数据类型直接建模，Rust 的 enum + trait 在表达能力上非常接近。
 
-> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)) · 可信度: ✅
+> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)· 可信度: ✅
 
 ### 4.3 Strategy 模式
 
