@@ -578,7 +578,17 @@ fn main() {
 }
 ```
 
-> **修正**: `tracing` 的 span 代表一个上下文范围（如 HTTP 请求、数据库事务），需显式 `enter()` 或 `.instrument()` 附加到异步任务。未进入的 span 不记录任何事件，导致日志缺乏上下文（难以关联同一请求的事件）。异步代码中的 span 传播：1) `.instrument(span)` 将 span 绑定到 future；2) `#[instrument]` 属性宏（Macro）自动包装函数；3) `tracing-futures` 的 `WithSubscriber` 传播 subscriber。这与 OpenTelemetry 的 Context（需显式传播）或 Java 的 MDC（Mapped Diagnostic Context，ThreadLocal，不适用于异步）类似——异步代码打破了线程与请求的 1:1 映射，上下文传播需要显式机制。Rust 的 `tracing` 通过 `Instrument` trait 和 `#[instrument]` 宏简化了这一过程。[来源: [tracing Documentation](https://docs.rs/tracing/)] · [来源: [OpenTelemetry Rust](https://docs.rs/opentelemetry/)]
+> **修正**:
+> `tracing` 的 span 代表一个上下文范围（如 HTTP 请求、数据库事务），需显式 `enter()` 或 `.instrument()` 附加到异步任务。
+> 未进入的 span 不记录任何事件，导致日志缺乏上下文（难以关联同一请求的事件）。
+> 异步代码中的 span 传播：
+>
+> 1) `.instrument(span)` 将 span 绑定到 future；
+> 2) `#[instrument]` 属性宏（Macro）自动包装函数；
+> 3) `tracing-futures` 的 `WithSubscriber` 传播 subscriber。
+> 这与 OpenTelemetry 的 Context（需显式传播）或 Java 的 MDC（Mapped Diagnostic Context，ThreadLocal，不适用于异步）类似——异步代码打破了线程与请求的 1:1 映射，上下文传播需要显式机制。
+> Rust 的 `tracing` 通过 `Instrument` trait 和 `#[instrument]` 宏简化了这一过程。
+> [来源: [tracing Documentation](https://docs.rs/tracing/)] · [来源: [OpenTelemetry Rust](https://docs.rs/opentelemetry/)]
 
 ### 10.5 边界测试：`tracing` 的 span 泄漏与内存增长（运行时资源泄漏）
 
@@ -594,7 +604,18 @@ fn main() {
 }
 ```
 
-> **修正**: `tracing` crate 的 span 是**结构化日志**的核心：进入 span 时记录开始时间/上下文，退出时记录结束。`span.entered()` 返回 `Entered` guard，drop 时自动退出。若 guard 生命周期过长（如存储在 `static`、循环中创建不退出、跨 await 点持有），span 永不关闭，导致：1) 内存泄漏（span 数据结构累积）；2) 分布式追踪中 trace 不完整；3) 指标计算错误（span 时长无限）。async 场景特别注意：使用 `span.in_scope(|| ...)` 而非 `entered()`，或用 `tracing::Instrument` trait（`.instrument(span)`）。这与 OpenTelemetry 的 span 管理或 Go 的 `context.WithTimeout` 类似——结构化追踪需严格的生命周期管理，泄漏代价高。[来源: [tracing Documentation](https://docs.rs/tracing/)] · [来源: [OpenTelemetry Rust](https://github.com/open-telemetry/opentelemetry-rust)]
+> **修正**:
+> `tracing` crate 的 span 是**结构化日志**的核心：进入 span 时记录开始时间/上下文，退出时记录结束。
+> `span.entered()` 返回 `Entered` guard，drop 时自动退出。
+> 若 guard 生命周期过长（如存储在 `static`、循环中创建不退出、跨 await 点持有），span 永不关闭，导致：
+>
+> 1) 内存泄漏（span 数据结构累积）；
+> 2) 分布式追踪中 trace 不完整；
+> 3) 指标计算错误（span 时长无限）。
+>
+> async 场景特别注意：使用 `span.in_scope(|| ...)` 而非 `entered()`，或用 `tracing::Instrument` trait（`.instrument(span)`）。
+> 这与 OpenTelemetry 的 span 管理或 Go 的 `context.WithTimeout` 类似——结构化追踪需严格的生命周期管理，泄漏代价高。
+> [来源: [tracing Documentation](https://docs.rs/tracing/)] · [来源: [OpenTelemetry Rust](https://github.com/open-telemetry/opentelemetry-rust)]
 
 ### 10.3 边界测试：tracing 的 span 生命周期与异步代码跨越 await（运行时泄漏）
 
@@ -617,7 +638,20 @@ fn main() {
 }
 ```
 
-> **修正**: `tracing` 的 `Span::entered()` 返回 `Entered` guard，drop 时退出 span。在 async 代码中，guard 跨越 `await` 点：1) span 在任务挂起时不退出；2) 其他任务可能看到"活跃"的 span，但当前任务未执行；3) 分布式追踪中 trace 时长错误（包含挂起时间）。正确做法：1) `span.in_scope(|| { ... })` — 同步代码块；2) `.instrument(span)` — 异步 Future 的 span 绑定（进入 poll 时进入 span，poll 结束时退出）；3) `tracing::instrument` 宏（Macro） — 自动为 async fn 添加 instrument。这与 OpenTelemetry 的 span 管理或 Go 的 `context.WithTimeout` 类似——结构化追踪需严格的生命周期管理，异步代码尤其敏感。[来源: [tracing Documentation](https://docs.rs/tracing/)] · [来源: [OpenTelemetry Rust](https://github.com/open-telemetry/opentelemetry-rust)]
+> **修正**:
+> `tracing` 的 `Span::entered()` 返回 `Entered` guard，drop 时退出 span。
+> 在 async 代码中，guard 跨越 `await` 点：
+>
+> 1) span 在任务挂起时不退出；
+> 2) 其他任务可能看到"活跃"的 span，但当前任务未执行；
+> 3) 分布式追踪中 trace 时长错误（包含挂起时间）。
+>
+> 正确做法：
+>
+> 1) `span.in_scope(|| { ... })` — 同步代码块；
+> 2) `.instrument(span)` — 异步 Future 的 span 绑定（进入 poll 时进入 span，poll 结束时退出）；
+> 3) `tracing::instrument` 宏（Macro） — 自动为 async fn 添加 instrument。这与 OpenTelemetry 的 span 管理或 Go 的 `context.WithTimeout` 类似——结构化追踪需严格的生命周期管理，异步代码尤其敏感。
+> [来源: [tracing Documentation](https://docs.rs/tracing/)] · [来源: [OpenTelemetry Rust](https://github.com/open-telemetry/opentelemetry-rust)]
 
 ## 嵌入式测验（Embedded Quiz）
 

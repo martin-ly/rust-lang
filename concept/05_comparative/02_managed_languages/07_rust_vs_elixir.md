@@ -16,7 +16,15 @@
 
 ---
 
-> **来源**: [Elixir Official](https://elixir-lang.org/) · [Erlang/OTP](https://www.erlang.org/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Wikipedia — Erlang](https://en.wikipedia.org/wiki/Erlang_(programming_language)) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+>
+> [Elixir Official](https://elixir-lang.org/) ·
+> [Erlang/OTP](https://www.erlang.org/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
+> [Wikipedia — Erlang](https://en.wikipedia.org/wiki/Erlang_(programming_language)) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置依赖**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/01_type_theory.md)
 
@@ -739,7 +747,12 @@ fn fixed() {
 }
 ```
 
-> **Elixir 对比**: Elixir 是动态类型，变量可以重新绑定为任何类型。Rust 的变量类型在编译期固定，不能重新赋值为不同类型。Rust 的 `enum` 是表达"多种可能类型"的方式，调用者必须通过 `match` 处理每个变体。这与 Elixir 的 pattern matching 类似，但 Rust 在编译期验证穷尽性。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+> **Elixir 对比**:
+> Elixir 是动态类型，变量可以重新绑定为任何类型。
+> Rust 的变量类型在编译期固定，不能重新赋值为不同类型。
+> Rust 的 `enum` 是表达"多种可能类型"的方式，调用者必须通过 `match` 处理每个变体。
+> 这与 Elixir 的 pattern matching 类似，但 Rust 在编译期验证穷尽性。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
 
 ### 10.2 边界测试：Elixir 的进程邮箱与 Rust 的 channel（编译错误）
 
@@ -768,7 +781,13 @@ fn fixed() {
 }
 ```
 
-> **Elixir 对比**: Elixir 的进程（Actor 模型）通过邮箱（mailbox）接收消息，每个进程有独立邮箱，无共享状态。Rust 的 `mpsc::channel` 是多生产者单消费者——多个发送者，一个接收者。若需广播，使用 `tokio::sync::broadcast` 或 `crossbeam::channel`。Elixir 的进程隔离在虚拟机（BEAM）层面实现，Rust 的 channel 在类型系统（Type System）层面保证线程安全。两者都消除了数据竞争，但实现层级不同。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
+> **Elixir 对比**:
+> Elixir 的进程（Actor 模型）通过邮箱（mailbox）接收消息，每个进程有独立邮箱，无共享状态。
+> Rust 的 `mpsc::channel` 是多生产者单消费者——多个发送者，一个接收者。
+> 若需广播，使用 `tokio::sync::broadcast` 或 `crossbeam::channel`。
+> Elixir 的进程隔离在虚拟机（BEAM）层面实现，Rust 的 channel 在类型系统（Type System）层面保证线程安全。
+> 两者都消除了数据竞争，但实现层级不同。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
 
 ### 10.5 边界测试：Elixir 的进程隔离与 Rust 的共享内存并发（编译错误）
 
@@ -791,7 +810,30 @@ fn main() {
 }
 ```
 
-> **修正**: Elixir/Erlang 的 **Actor 模型** 中，进程完全隔离——不共享内存，所有通信通过异步（Async）消息传递。Rust 支持 Actor 模型（`actix`），但默认是**共享内存并发**：线程共享地址空间，通过锁/原子同步。Elixir 的优势：1) 无数据竞争（无共享内存）；2) 容错（进程崩溃不影响其他进程，supervisor 重启）；3) 热代码升级。Rust 的优势：1) 性能（无消息序列化开销）；2) 细粒度控制（可选择共享或无共享）；3) 类型安全（编译期防止数据竞争）。从 Elixir 迁移到 Rust 时，需注意：1) 不再有进程隔离的保护；2) 共享状态需 `Mutex`/`RwLock`；3) 错误处理（Error Handling）从"let it crash"变为显式 `Result` 传播。这与 Go 的 goroutine + channel（可选择共享或通信）类似——Rust 提供两种并发模型，但共享内存是默认和最高效的。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-01-threads.html)] · [来源: [Elixir Processes](https://elixir-lang.org/getting-started/processes.html)]
+> **修正**:
+> Elixir/Erlang 的 **Actor 模型** 中，进程完全隔离——不共享内存，所有通信通过异步（Async）消息传递。
+> Rust 支持 Actor 模型（`actix`），但默认是**共享内存并发**：线程共享地址空间，通过锁/原子同步。
+> Elixir 的优势：
+>
+> 1) 无数据竞争（无共享内存）；
+> 2) 容错（进程崩溃不影响其他进程，supervisor 重启）；
+> 3) 热代码升级。
+>
+> Rust 的优势：
+>
+> 1) 性能（无消息序列化开销）；
+> 2) 细粒度控制（可选择共享或无共享）；
+> 3) 类型安全（编译期防止数据竞争）。
+>
+> 从 Elixir 迁移到 Rust 时，需注意：
+>
+> 1) 不再有进程隔离的保护；
+> 2) 共享状态需 `Mutex`/`RwLock`；
+> 3) 错误处理（Error Handling）从"let it crash"变为显式 `Result` 传播。
+>
+> 这与 Go 的 goroutine + channel（可选择共享或通信）类似——Rust 提供两种并发模型，但共享内存是默认和最高效的。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-01-threads.html)] ·
+> [来源: [Elixir Processes](https://elixir-lang.org/getting-started/processes.html)]
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -807,7 +849,9 @@ fn main() {
 | 4 | `match` 穷尽性 vs 运行期模式匹配 | 静态/动态分派 |
 | 5 | 互补架构设计 | NIF、Ports、编排与计算分离 |
 
-通过标准：第 5 题能给出具体的系统划分方案（哪些职责归 Elixir、哪些归 Rust、边界用什么协议），而不只是复述“两者可以互补”。建议作答后对照第 10.5 节的边界测试案例验证。
+通过标准：
+第 5 题能给出具体的系统划分方案（哪些职责归 Elixir、哪些归 Rust、边界用什么协议），而不只是复述“两者可以互补”。
+建议作答后对照第 10.5 节的边界测试案例验证。
 
 ### 测验 1：Elixir 的 Actor 模型（进程隔离）与 Rust 的共享内存并发有什么根本区别？（理解层）
 

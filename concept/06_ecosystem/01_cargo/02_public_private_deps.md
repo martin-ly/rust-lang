@@ -3,7 +3,11 @@
 > **EN**: Cargo `public = true` Dependency Visibility and Resolver v3
 > **Summary**: Declaring dependency visibility with `public = true/false`, resolver v3's MSRV-aware fallback, and their impact on API stability and feature unification.
 > **Rust 版本**: 1.97.0 (stable) / nightly with `-Zpublic-dependency`
-> **来源**: [Cargo Book — Dependency Resolution](https://doc.rust-lang.org/cargo/reference/resolver.html) · [Cargo Book — Specifying Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) · [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516) · [rust-lang/cargo#6129](https://github.com/rust-lang/cargo/issues/6129)
+> **来源**:
+> [Cargo Book — Dependency Resolution](https://doc.rust-lang.org/cargo/reference/resolver.html) ·
+> [Cargo Book — Specifying Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html) ·
+> [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516) ·
+> [rust-lang/cargo#6129](https://github.com/rust-lang/cargo/issues/6129)
 
 > > **权威来源**: 本文件为 `concept/` 权威页。
 > >
@@ -140,7 +144,8 @@ indexmap = { version = "2", public = false }
 
 ## 三、传递依赖可见性与 feature 统一
 
-public/private 依赖标注（`public = true`，resolver v3 配套）解决库 API 的依赖泄漏问题：私有依赖的类型若出现在公开 API 签名中，下游会因无法命名该类型而编译失败——标注机制把这个错误从下游使用点前移到库的 lint 检查。feature 统一规则与之交互：同一依赖的不同 feature 在依赖图中合并启用，公开依赖的 feature 选择成为 API 契约的一部分，升级策略需按 SemVer 对待。
+public/private 依赖标注（`public = true`，resolver v3 配套）解决库 API 的依赖泄漏问题：私有依赖的类型若出现在公开 API 签名中，下游会因无法命名该类型而编译失败——标注机制把这个错误从下游使用点前移到库的 lint 检查。
+feature 统一规则与之交互：同一依赖的不同 feature 在依赖图中合并启用，公开依赖的 feature 选择成为 API 契约的一部分，升级策略需按 SemVer 对待。
 
 ### 3.1 传递可见性
 
@@ -210,7 +215,9 @@ flowchart TD
 
 ## 七、迁移与实践
 
-迁移到 public/private 标注的推荐路径：先全量扫描公开 API 中暴露的外部类型（`cargo public-api` 辅助），只为真正泄漏的依赖加 `public = true`，其余保持私有以收紧未来 API 面。与 `workspace.dependencies` 协同时，标注写在成员 crate 而非 workspace 根（版本集中管理、可见性按成员声明）。可运行示例演示了标注前后下游编译错误的差异——从“下游诡异的类型不可达”变成“库内明确的 lint 警告”。
+迁移到 public/private 标注的推荐路径：先全量扫描公开 API 中暴露的外部类型（`cargo public-api` 辅助），只为真正泄漏的依赖加 `public = true`，其余保持私有以收紧未来 API 面。
+与 `workspace.dependencies` 协同时，标注写在成员 crate 而非 workspace 根（版本集中管理、可见性按成员声明）。
+可运行示例演示了标注前后下游编译错误的差异——从“下游诡异的类型不可达”变成“库内明确的 lint 警告”。
 
 ### 7.1 在现有 workspace 中逐步标注
 

@@ -16,7 +16,11 @@
 
 ---
 
-> **来源**: [Cargo Book — Dependency Resolution](https://doc.rust-lang.org/cargo/reference/resolver.html) · [Cargo Book — Features](https://doc.rust-lang.org/cargo/reference/features.html) · [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516) · [Rust 1.84.0 Release Notes](https://releases.rs/docs/1.84.0/)
+> **来源**:
+> [Cargo Book — Dependency Resolution](https://doc.rust-lang.org/cargo/reference/resolver.html) ·
+> [Cargo Book — Features](https://doc.rust-lang.org/cargo/reference/features.html) ·
+> [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516) ·
+> [Rust 1.84.0 Release Notes](https://releases.rs/docs/1.84.0/)
 
 ---
 

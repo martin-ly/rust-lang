@@ -5,7 +5,8 @@
 # Cargo Build Scripts（`build.rs`）
 
 > **EN**: Cargo Build Scripts (`build.rs`)
-> **Summary**: `build.rs` is Cargo's pre-compilation build script: it runs before the main crate, prints `cargo:` directives to inject `cfg` flags and environment variables, links native libraries through `links`/`OUT_DIR`, and controls rebuild caching via `rerun-if-changed` — this page covers its execution model, output protocol, native-dependency linking, and common pitfalls.
+> **Summary**:
+> `build.rs` is Cargo's pre-compilation build script: it runs before the main crate, prints `cargo:` directives to inject `cfg` flags and environment variables, links native libraries through `links`/`OUT_DIR`, and controls rebuild caching via `rerun-if-changed` — this page covers its execution model, output protocol, native-dependency linking, and common pitfalls.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: L2-L3
@@ -171,7 +172,9 @@ fn main() {
 
 ## 四、链接原生库
 
-链接原生库是 build.rs 最常见的用途。`links` 字段声明“本 crate 链接哪个原生库”，Cargo 借此保证同一原生库在依赖图中只有一个 crate 声明链接（避免符号冲突），并允许下游通过 `DEP_XXX_*` 环境变量传递链接信息。典型流程：build.rs 用 `pkg-config` 或 `cc` crate 探测/编译 C 库，再通过 `cargo:rustc-link-lib` 与 `cargo:rustc-link-search` 指令告诉 rustc 链接参数。
+链接原生库是 build.rs 最常见的用途。
+`links` 字段声明“本 crate 链接哪个原生库”，Cargo 借此保证同一原生库在依赖图中只有一个 crate 声明链接（避免符号冲突），并允许下游通过 `DEP_XXX_*` 环境变量传递链接信息。
+典型流程：build.rs 用 `pkg-config` 或 `cc` crate 探测/编译 C 库，再通过 `cargo:rustc-link-lib` 与 `cargo:rustc-link-search` 指令告诉 rustc 链接参数。
 
 ### 4.1 使用 `links` 字段
 

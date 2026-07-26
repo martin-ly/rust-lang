@@ -10,13 +10,25 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: P×App — 将 Cargo 1.96 工具链变更应用于构建、发布与依赖治理
-> **前置概念**: · [Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md) [Toolchain](../00_toolchain/01_toolchain.md) · [Public/Private Dependencies](02_public_private_deps.md) · [Cargo Security](13_cargo_security_cves.md) · [Security Practices](../07_security_and_cryptography/01_security_practices.md)
-> **后置概念**: [Rust Version Tracking](../../07_future/00_version_tracking/01_rust_version_tracking.md) · [Rust 1.96 Stabilized](../../07_future/00_version_tracking/rust_1_96_stabilized.md)
+> **前置概念**:
+>
+> · [Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md) [Toolchain](../00_toolchain/01_toolchain.md) ·
+> [Public/Private Dependencies](02_public_private_deps.md) · [Cargo Security](13_cargo_security_cves.md) ·
+> [Security Practices](../07_security_and_cryptography/01_security_practices.md)
+> **后置概念**: [Rust Version Tracking](../../07_future/00_version_tracking/01_rust_version_tracking.md) ·
+> [Rust 1.96 Stabilized](../../07_future/00_version_tracking/rust_1_96_stabilized.md)
 > **版本状态**: 当前稳定 patch 为 **1.97.0**；特性集与 Rust 1.96.0 一致。
 
 ---
 
-> **来源**: [Cargo 1.96 CHANGELOG](https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md) · · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+>
+> [Cargo 1.96 CHANGELOG](https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md) ·
+> · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > Rust 1.96.0 Release Notes ·
 > [Cargo Book — Environment Variables](https://doc.rust-lang.org/cargo/reference/environment-variables.html) ·
 > [Cargo Book — Manifest Format](https://doc.rust-lang.org/cargo/reference/manifest.html) ·
@@ -215,7 +227,8 @@ extra = { name = "demo", flags = ["a", "b"] }
 
 ## 五、嵌套子命令 manpage
 
-Cargo 1.96 补齐了嵌套子命令的 manpage 生成：`cargo help <cmd> <subcmd>` 与 `man cargo-<cmd>-<subcmd>` 现在对 `cargo install`、`cargo publish` 等带嵌套结构的命令提供完整文档，不再只有顶层帮助。收益主要在离线环境与脚本化场景：CI 镜像中无需联网查文档，`--help` 输出与 manpage 内容对齐减少了文档版本漂移。这是工具链文档工程化的收尾性改进。
+Cargo 1.96 补齐了嵌套子命令的 manpage 生成：`cargo help <cmd> <subcmd>` 与 `man cargo-<cmd>-<subcmd>` 现在对 `cargo install`、`cargo publish` 等带嵌套结构的命令提供完整文档，不再只有顶层帮助。
+收益主要在离线环境与脚本化场景：CI 镜像中无需联网查文档，`--help` 输出与 manpage 内容对齐减少了文档版本漂移。这是工具链文档工程化的收尾性改进。
 
 ### 5.1 变更内容
 
@@ -251,7 +264,10 @@ Rust 1.96 修复了两个 Cargo CVE，这些修复与工具链行为直接相关
 
 ## 七、迁移建议与陷阱
 
-迁移到 Cargo 1.96 的推荐路径：先在 CI 固定新版本跑全量构建（lockfile 兼容性是第一验证点），再逐项启用新特性而非一次性切换。常见陷阱三个：lockfile 格式变更导致旧版 cargo 无法读取（团队需同步升级）；新默认行为（如解析器告警升级）使旧警告变错误；嵌套 manpage 等文档特性需要重新生成本地文档缓存。迁移窗口建议留一个迭代周期观察 nightly CI。
+迁移到 Cargo 1.96 的推荐路径：先在 CI 固定新版本跑全量构建（lockfile 兼容性是第一验证点），再逐项启用新特性而非一次性切换。
+常见陷阱三个：lockfile 格式变更导致旧版 cargo 无法读取（团队需同步升级）；
+新默认行为（如解析器告警升级）使旧警告变错误；嵌套 manpage 等文档特性需要重新生成本地文档缓存。
+迁移窗口建议留一个迭代周期观察 nightly CI。
 
 ### 7.1 推荐迁移路径
 
