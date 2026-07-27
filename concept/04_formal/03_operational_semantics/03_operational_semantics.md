@@ -2,7 +2,7 @@
 
 # 操作语义：程序行为的形式化定义
 >
-> **EN**: Formal Methods
+> **EN**: Operational Semantics
 > **Summary**: Formal Methods — Operational semantics: small-step versus big-step rules, and formal modeling of ownership, borrowing, and concurrency.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]

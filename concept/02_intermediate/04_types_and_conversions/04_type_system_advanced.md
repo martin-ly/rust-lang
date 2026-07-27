@@ -7,7 +7,7 @@
 >
 # 高级类型系统：从关联类型到类型级编程
 >
-> **EN**: Type System
+> **EN**: Type System Advanced
 > **Summary**: Type System — Advanced type system: GATs, impl Trait, type-level computation, and const generics under compile-time safety.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >

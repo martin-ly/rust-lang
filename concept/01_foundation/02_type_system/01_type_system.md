@@ -4,9 +4,9 @@
 > 类型系统 (Type System) · 结构体 (Struct) · 枚举 (Enum) · 模式匹配 (Pattern Matching) · 泛型 (Generic) · Trait
 > — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 
-# Type System Basics（类型系统基础）
+# 类型系统基础
 >
-> **EN**: Type System
+> **EN**: Type System Basics
 > **Summary**: Rust's static type system combining scalar and compound types, algebraic data types, pattern matching, generics, and trait bounds from everyday use toward type theory.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >

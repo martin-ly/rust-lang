@@ -7,7 +7,7 @@
 # 模块系统与路径：Rust 的代码组织哲学
 
 >
-> **EN**: Modules
+> **EN**: Modules and Paths
 > **Summary**: Modules — The module system: mod, use, pub, filesystem mapping, visibility, and workspace organization.
 > **📎 交叉引用（Reference）**
 >

@@ -1,9 +1,9 @@
 > **内容分级**: [综述级]
 > **本节关键术语**: 模块系统 (Module System) · 工作空间 (Workspace) · 包 (Package) · Crate · 可见性 (Visibility) — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 >
-# 模块系统：Rust 的代码组织与可见性规则
+# 模块系统高级主题：可见性规则与工程实践
 >
-> **EN**: Modules
+> **EN**: Module System Advanced
 > **Summary**: Modules — The module system in depth: filesystem mapping, visibility rules, crate boundaries, and contrasts with C++/Java/Python.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]

@@ -2,7 +2,7 @@
 >
 > **本节关键术语**: 借用 (Borrowing) · 引用 (Reference) · 可变引用（Mutable Reference） (&mut T) · 不可变引用（Immutable Reference） (&T) · 悬垂引用 (Dangling Reference) — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 
-# Borrowing（借用）
+# 借用
 >
 > **EN**: Borrowing
 > **Summary**: Borrowing lets code access data by reference without taking ownership. Rust enforces aliasing-XOR-mutability: any number of immutable borrows or exactly one mutable borrow may exist in a scope, and references must never dangle. This chapter covers shared and mutable references, reborrowing, splitting borrows, and patterns that keep the borrow checker happy.

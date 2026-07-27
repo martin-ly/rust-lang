@@ -1,7 +1,7 @@
 > **内容分级**: [综述级]
 > **本节关键术语**: 内存管理 (Memory Management) · 堆 (Heap) · 栈 (Stack) · Drop · RAII · 内存布局 (Memory Layout) — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 >
-# Memory Management（内存管理）
+# 内存管理
 >
 > **EN**: Memory Management
 > **Summary**: Memory Management. Rust's compile-time memory safety through ownership, borrowing, and lifetimes. Covers stack vs heap, RAII, smart pointers, and zero-cost abstractions.

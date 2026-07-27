@@ -2,10 +2,11 @@
 
 - **扫描文件数**: 1025
 - **相似度阈值**: 0.6
-- **潜在重复对**: 0
+- **潜在重复对**: 1
 
 | 相似度 | 文件1 | 文件2 | 标题1 | 标题2 |
 |:---|:---|:---|:---|:---|
+| 0.75 | `concept\01_foundation\02_type_system\01_type_system.md` | `docs\12_research_notes\05_type_theory\05_type_system_foundations.md` | 类型系统基础 | 类型系统基础 {#类型系统基础} |
 
 ## 建议
 

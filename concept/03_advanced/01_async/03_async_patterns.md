@@ -2,7 +2,7 @@
 
 # 异步模式：从 Future 到生产级并发
 >
-> **EN**: Concurrency
+> **EN**: Async Patterns
 > **Summary**: Concurrency — Advanced async patterns: Future state machines, Pin guarantees, concurrent execution, and cancellation propagation.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家]

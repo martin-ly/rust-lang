@@ -3,7 +3,7 @@
 
 # 测验：Rust 工具链（L6 试点扩展）
 >
-> **EN**: Toolchain
+> **EN**: Toolchain (Quiz)
 > **Summary**: Toolchain — An interactive quiz checking the Rust toolchain: Cargo dependencies, Clippy, Miri, rustfmt, and documentation.
 > **受众**: [进阶]
 > **Rust 版本**: 1.97.0+ (Edition 2024)

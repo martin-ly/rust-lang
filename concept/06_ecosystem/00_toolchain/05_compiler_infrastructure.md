@@ -5,7 +5,7 @@
 >
 # Rust 编译器基础设施深度解析
 >
-> **EN**: Compiler Internals
+> **EN**: Compiler Infrastructure
 > **Summary**: Compiler Internals: Rust ecosystem tools, crates, and engineering practices.
 > **Rust 版本**: 1.97.0+ (nightly for Cranelift/build-std/sanitizer)
 > **权威来源**: 本文件为 `concept/` 权威页。

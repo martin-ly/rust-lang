@@ -2,7 +2,7 @@
 
 # 测验：类型系统（试点扩展）
 >
-> **EN**: Type System
+> **EN**: Type System (Quiz)
 > **Summary**: Type System — An interactive quiz checking L1 type-system fundamentals: scalar and compound types, enums, and matching.
 > **受众**: [初学者]
 > **Rust 版本**: 1.97.0+ (Edition 2024)

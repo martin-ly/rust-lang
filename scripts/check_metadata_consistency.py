@@ -73,6 +73,9 @@ D2_WHITELIST_FILES = {
     # 的内容属性而非自身层级；跟踪页不按概念页分级。
     "concept/07_future/02_preview_features/33_autoverus_preview.md":
         "L7 预览跟踪页（非概念权威页），A/S/P 描述被跟踪对象属性",
+    # L0 模板/元文件：文件本身是 concept/ 文件模板，A/S/P 为示例占位而非内容分级。
+    "concept/00_meta/01_terminology/03_bilingual_template.md":
+        "L0 双语模板文件，A/S/P=A 为模板示例占位，不适用概念页分级规则",
 }
 
 # D5 显式登记白名单（2026-07-12 逐文件复核）：以下稳定层页面的 nightly/preview/unstable

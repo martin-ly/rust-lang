@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 533,
-    "generated_at": "2026-07-27T17:30:40.282979+00:00"
+    "total_files": 536,
+    "generated_at": "2026-07-27T18:25:13.138905+00:00"
   },
   "files": [
     {
@@ -10,7 +10,7 @@
       "layer": "L0",
       "title": "Bloom Taxonomy（Bloom 分类法）",
       "positioning": "",
-      "line_count": 201,
+      "line_count": 202,
       "theorem_chains": [
         {
           "text": "| 03 Bloom Taxonomy 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
@@ -671,13 +671,13 @@
         "../../03_advanced/00_concurrency/03_concurrency_patterns.md",
         "../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md",
         "../../03_advanced/06_low_level_patterns/03_type_erasure.md",
+        "../../04_formal/00_type_theory/12_pattern_composition_algebra.md",
         "../../06_ecosystem/03_design_patterns/01_patterns.md",
         "../../06_ecosystem/03_design_patterns/04_system_composability.md",
         "../../06_ecosystem/03_design_patterns/05_microservice_patterns.md",
         "../../06_ecosystem/03_design_patterns/06_event_driven_architecture.md",
         "../../06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md",
         "../../06_ecosystem/03_design_patterns/08_architecture_patterns.md",
-        "../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md",
         "../../06_ecosystem/03_design_patterns/17_workflow_theory.md",
         "../../06_ecosystem/03_design_patterns/18_api_design_patterns.md",
         "../../06_ecosystem/04_web_and_networking/09_reactive_programming.md",
@@ -692,7 +692,7 @@
           "[Patterns](../../06_ecosystem/03_design_patterns/01_patterns.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md)"
         ],
         "post": [
-          "> [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) ·"
+          "> [Pattern Composition Algebra](../../04_formal/00_type_theory/12_pattern_composition_algebra.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -812,8 +812,8 @@
         "../../01_foundation/04_control_flow/01_control_flow.md",
         "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
         "../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md",
+        "../../04_formal/00_type_theory/12_pattern_composition_algebra.md",
         "../../06_ecosystem/03_design_patterns/01_patterns.md",
-        "../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md",
         "../../06_ecosystem/11_domain_applications/07_algorithms_competitive_programming.md"
       ],
       "transitions": 6,
@@ -825,7 +825,7 @@
           "[Algorithms](../../06_ecosystem/11_domain_applications/07_algorithms_competitive_programming.md) ·"
         ],
         "post": [
-          "[Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) ·"
+          "[Pattern Composition Algebra](../../04_formal/00_type_theory/12_pattern_composition_algebra.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -1186,7 +1186,7 @@
       "layer": "L0",
       "title": "Rust 核心术语英中对照表",
       "positioning": "",
-      "line_count": 466,
+      "line_count": 467,
       "theorem_chains": [
         {
           "text": "| 术语标准化 ⟹ 跨文档理解一致性 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
@@ -1296,7 +1296,7 @@
       "layer": "L0",
       "title": "Concept 文件双语模板（Bilingual Template）",
       "positioning": "",
-      "line_count": 166,
+      "line_count": 167,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -1370,7 +1370,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\00_meta\\02_sources\\02_rustbelt_predicate_map.md",
       "layer": "L0",
-      "title": "RustBelt 谓词映射图（RustBelt Predicate Map）",
+      "title": "RustBelt 谓词映射图",
       "positioning": "本文件将 RustBelt（Jung et al., POPL 2018）中的核心形式化谓词——**所有权谓词 `own(τ)`** 和 **共享谓词 `shr(κ, ℓ)`**——可视化映射到 Rust 的 L1-L3 工程概念，建立\"数学符号 ↔ 代码直觉\"的双向桥梁。",
       "line_count": 435,
       "theorem_chains": [
@@ -1478,7 +1478,7 @@
       "layer": "L0",
       "title": "主题-权威来源对齐图谱 (Topic-Authority Alignment Map)",
       "positioning": "",
-      "line_count": 393,
+      "line_count": 394,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -1811,7 +1811,7 @@
       "layer": "L0",
       "title": "概念一致性（Coherence）检查清单",
       "positioning": "",
-      "line_count": 15,
+      "line_count": 16,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -1835,7 +1835,7 @@
       "layer": "L0",
       "title": "模板去同质化指南",
       "positioning": "",
-      "line_count": 95,
+      "line_count": 96,
       "theorem_chains": [
         {
           "text": "| `scripts/kb_auditor.py` | 检查模板化 ⟹ 标记、元数据完整性 |",
@@ -1957,7 +1957,7 @@
       "layer": "L0",
       "title": "Cross Reference Matrix（交叉引用矩阵）",
       "positioning": "",
-      "line_count": 17,
+      "line_count": 18,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -2209,7 +2209,7 @@
       "layer": "L0",
       "title": "Rust 知识体系跨层依赖与蕴含拓扑图",
       "positioning": "",
-      "line_count": 17,
+      "line_count": 18,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -3235,11 +3235,11 @@
         "../../02_intermediate/05_modules_and_visibility/02_friend_vs_module_privacy.md",
         "../../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md",
         "../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md",
+        "../../04_formal/00_type_theory/12_pattern_composition_algebra.md",
         "../../04_formal/03_operational_semantics/04_evaluation_strategies.md",
         "../../05_comparative/00_paradigms/03_cpp_rust_surface_features.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../05_comparative/01_systems_languages/02_cpp_abi_object_model.md",
-        "../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md",
         "../00_framework/cpp_rust_engineering_roadmap.md",
         "../00_framework/pattern_semantic_space_index.md",
         "../00_framework/pl_foundations_roadmap.md",
@@ -3268,7 +3268,7 @@
       "layer": "L0",
       "title": "Rust Minimum Viable Learning Path (MVP Path)",
       "positioning": "",
-      "line_count": 292,
+      "line_count": 293,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -3401,7 +3401,7 @@
       "layer": "L0",
       "title": "TRPL 3rd Ed 章节映射",
       "positioning": "",
-      "line_count": 13,
+      "line_count": 14,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -3425,7 +3425,7 @@
       "layer": "L0",
       "title": "占位符页面",
       "positioning": "",
-      "line_count": 25,
+      "line_count": 26,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -3454,7 +3454,7 @@
       "layer": "L0",
       "title": "TRPL 第 3 版对照审计（TRPL 3rd Edition Alignment Audit）",
       "positioning": "系统对比 The Rust Programming Language 第 3 版（2025-10 出版）与 `concept/` L1-L3 核心内容，识别差距并规划更新。",
-      "line_count": 82,
+      "line_count": 83,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -3476,7 +3476,7 @@
       "layer": "L0",
       "title": "Rust 知识体系可用性测试框架（Usability Testing Framework）",
       "positioning": "为项目建立持续的学习者反馈闭环，从\"输出内容\"转向\"验证学习效果\"。",
-      "line_count": 131,
+      "line_count": 132,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -3498,7 +3498,7 @@
       "layer": "L0",
       "title": "概念定义图谱（Concept Definition Atlas）",
       "positioning": "",
-      "line_count": 566,
+      "line_count": 567,
       "theorem_chains": [
         {
           "text": "| `05_logical_reasoning_atlas` | [逻辑推理图谱](../../00_meta/knowledge_topology/05_logical_reasoning_atlas.md) | Logical Reasoning Atlas | A navigational index of theorem chains, inference rules, proof/verification paths, and formal correspondences across the Rust concept hierarchy. 定理链（⟹/⟸）、推理规则、证明/验证路径、形式化对应。 | 2 |",
@@ -3726,6 +3726,9 @@
         "../../04_formal/00_type_theory/07_type_checking_and_inference.md",
         "../../04_formal/00_type_theory/08_type_inference_complexity.md",
         "../../04_formal/00_type_theory/09_type_system_reference.md",
+        "../../04_formal/00_type_theory/11_formal_design_pattern_theory.md",
+        "../../04_formal/00_type_theory/12_pattern_composition_algebra.md",
+        "../../04_formal/00_type_theory/13_formal_algorithm_theory.md",
         "../../04_formal/01_ownership_logic/01_linear_logic.md",
         "../../04_formal/01_ownership_logic/02_ownership_formal.md",
         "../../04_formal/01_ownership_logic/03_linear_logic_applications.md",
@@ -3840,12 +3843,10 @@
         "../../06_ecosystem/03_design_patterns/08_architecture_patterns.md",
         "../../06_ecosystem/03_design_patterns/09_pattern_implementation_comparison.md",
         "../../06_ecosystem/03_design_patterns/10_pattern_selection_best_practices.md",
-        "../../06_ecosystem/03_design_patterns/11_formal_design_pattern_theory.md",
         "../../06_ecosystem/03_design_patterns/12_frontier_research_and_innovative_patterns.md",
         "../../06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md",
         "../../06_ecosystem/03_design_patterns/14_design_patterns_glossary.md",
         "../../06_ecosystem/03_design_patterns/15_design_patterns_faq.md",
-        "../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md",
         "../../06_ecosystem/03_design_patterns/17_workflow_theory.md",
         "../../06_ecosystem/03_design_patterns/18_api_design_patterns.md",
         "../../06_ecosystem/04_web_and_networking/01_distributed_systems.md",
@@ -3897,7 +3898,6 @@
         "../../06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md",
         "../../06_ecosystem/11_domain_applications/10_algorithm_complexity_analysis.md",
         "../../06_ecosystem/11_domain_applications/11_cutting_edge_algorithms.md",
-        "../../06_ecosystem/11_domain_applications/12_formal_algorithm_theory.md",
         "../../06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md",
         "../../06_ecosystem/11_domain_applications/14_industrial_case_studies.md",
         "../../06_ecosystem/11_domain_applications/15_game_engine_internals.md",
@@ -3996,7 +3996,7 @@
       "layer": "L0",
       "title": "属性关系图谱（Attribute Relationship Atlas）",
       "positioning": "",
-      "line_count": 561,
+      "line_count": 562,
       "theorem_chains": [
         {
           "text": "| [术语表 - C11 Macro System](../../03_advanced/03_proc_macros/06_macro_glossary.md) | L3 高级概念层 | 研究者 | 参考级 | S | L4-L5 | Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency |",
@@ -4063,7 +4063,7 @@
           "type": "table_row"
         },
         {
-          "text": "| [形式化设计模式理论 (Formal Design Pattern Theory)](../../06_ecosystem/03_design_patterns/11_formal_design_pattern_theory.md) | L6 生态工程层 | 研究者 | 研究级 | S | L4-L6 | Abstract Pattern ⟹ Formal Model ⟹ Language Mapping |",
+          "text": "| [形式化设计模式理论 (Formal Design Pattern Theory)](../../04_formal/00_type_theory/11_formal_design_pattern_theory.md) | L6 生态工程层 | 研究者 | 研究级 | S | L4-L6 | Abstract Pattern ⟹ Formal Model ⟹ Language Mapping |",
           "type": "table_row"
         },
         {
@@ -4328,6 +4328,9 @@
         "../../04_formal/00_type_theory/07_type_checking_and_inference.md",
         "../../04_formal/00_type_theory/08_type_inference_complexity.md",
         "../../04_formal/00_type_theory/09_type_system_reference.md",
+        "../../04_formal/00_type_theory/11_formal_design_pattern_theory.md",
+        "../../04_formal/00_type_theory/12_pattern_composition_algebra.md",
+        "../../04_formal/00_type_theory/13_formal_algorithm_theory.md",
         "../../04_formal/01_ownership_logic/01_linear_logic.md",
         "../../04_formal/01_ownership_logic/02_ownership_formal.md",
         "../../04_formal/01_ownership_logic/03_linear_logic_applications.md",
@@ -4442,12 +4445,10 @@
         "../../06_ecosystem/03_design_patterns/08_architecture_patterns.md",
         "../../06_ecosystem/03_design_patterns/09_pattern_implementation_comparison.md",
         "../../06_ecosystem/03_design_patterns/10_pattern_selection_best_practices.md",
-        "../../06_ecosystem/03_design_patterns/11_formal_design_pattern_theory.md",
         "../../06_ecosystem/03_design_patterns/12_frontier_research_and_innovative_patterns.md",
         "../../06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md",
         "../../06_ecosystem/03_design_patterns/14_design_patterns_glossary.md",
         "../../06_ecosystem/03_design_patterns/15_design_patterns_faq.md",
-        "../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md",
         "../../06_ecosystem/03_design_patterns/17_workflow_theory.md",
         "../../06_ecosystem/03_design_patterns/18_api_design_patterns.md",
         "../../06_ecosystem/04_web_and_networking/01_distributed_systems.md",
@@ -4499,7 +4500,6 @@
         "../../06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md",
         "../../06_ecosystem/11_domain_applications/10_algorithm_complexity_analysis.md",
         "../../06_ecosystem/11_domain_applications/11_cutting_edge_algorithms.md",
-        "../../06_ecosystem/11_domain_applications/12_formal_algorithm_theory.md",
         "../../06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md",
         "../../06_ecosystem/11_domain_applications/14_industrial_case_studies.md",
         "../../06_ecosystem/11_domain_applications/15_game_engine_internals.md",
@@ -4598,7 +4598,7 @@
       "layer": "L0",
       "title": "场景决策树图谱（Scenario Decision Tree Atlas）",
       "positioning": "",
-      "line_count": 620,
+      "line_count": 621,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -4734,6 +4734,8 @@
         "../../04_formal/00_type_theory/07_type_checking_and_inference.md",
         "../../04_formal/00_type_theory/08_type_inference_complexity.md",
         "../../04_formal/00_type_theory/09_type_system_reference.md",
+        "../../04_formal/00_type_theory/12_pattern_composition_algebra.md",
+        "../../04_formal/00_type_theory/13_formal_algorithm_theory.md",
         "../../04_formal/01_ownership_logic/01_linear_logic.md",
         "../../04_formal/01_ownership_logic/02_ownership_formal.md",
         "../../04_formal/01_ownership_logic/03_linear_logic_applications.md",
@@ -4809,7 +4811,6 @@
         "../../06_ecosystem/03_design_patterns/10_pattern_selection_best_practices.md",
         "../../06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md",
         "../../06_ecosystem/03_design_patterns/14_design_patterns_glossary.md",
-        "../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md",
         "../../06_ecosystem/04_web_and_networking/01_distributed_systems.md",
         "../../06_ecosystem/04_web_and_networking/02_cloud_native.md",
         "../../06_ecosystem/04_web_and_networking/03_web_frameworks.md",
@@ -4843,7 +4844,6 @@
         "../../06_ecosystem/11_domain_applications/07_algorithms_competitive_programming.md",
         "../../06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md",
         "../../06_ecosystem/11_domain_applications/11_cutting_edge_algorithms.md",
-        "../../06_ecosystem/11_domain_applications/12_formal_algorithm_theory.md",
         "../../06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md",
         "../../06_ecosystem/11_domain_applications/14_industrial_case_studies.md",
         "../../06_ecosystem/11_domain_applications/17_webassembly_advanced.md",
@@ -4907,7 +4907,7 @@
       "layer": "L0",
       "title": "示例与反例图谱（Example and Counterexample Atlas）",
       "positioning": "",
-      "line_count": 541,
+      "line_count": 542,
       "theorem_chains": [
         {
           "text": "| [Waker 契约深度解析：RawWakerVTable 实现与契约违反反例集](../../03_advanced/01_async/12_waker_contract_deep_dive.md) | 示例/反例节 ×4 | 契约违反反例集 · 反例 C1：丢失 wake ⟹ 死锁（时序图） |",
@@ -5059,6 +5059,8 @@
         "../../04_formal/00_type_theory/07_type_checking_and_inference.md",
         "../../04_formal/00_type_theory/08_type_inference_complexity.md",
         "../../04_formal/00_type_theory/09_type_system_reference.md",
+        "../../04_formal/00_type_theory/11_formal_design_pattern_theory.md",
+        "../../04_formal/00_type_theory/12_pattern_composition_algebra.md",
         "../../04_formal/01_ownership_logic/01_linear_logic.md",
         "../../04_formal/01_ownership_logic/02_ownership_formal.md",
         "../../04_formal/01_ownership_logic/03_linear_logic_applications.md",
@@ -5157,10 +5159,8 @@
         "../../06_ecosystem/03_design_patterns/08_architecture_patterns.md",
         "../../06_ecosystem/03_design_patterns/09_pattern_implementation_comparison.md",
         "../../06_ecosystem/03_design_patterns/10_pattern_selection_best_practices.md",
-        "../../06_ecosystem/03_design_patterns/11_formal_design_pattern_theory.md",
         "../../06_ecosystem/03_design_patterns/12_frontier_research_and_innovative_patterns.md",
         "../../06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md",
-        "../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md",
         "../../06_ecosystem/03_design_patterns/17_workflow_theory.md",
         "../../06_ecosystem/03_design_patterns/18_api_design_patterns.md",
         "../../06_ecosystem/04_web_and_networking/01_distributed_systems.md",
@@ -5290,7 +5290,7 @@
       "layer": "L0",
       "title": "逻辑推理图谱（Logical Reasoning Atlas）",
       "positioning": "",
-      "line_count": 191,
+      "line_count": 192,
       "theorem_chains": [
         {
           "text": "> **Summary**: A navigational index of theorem chains, inference rules, proof/verification paths, and formal correspondences across the Rust concept hierarchy. 定理链（⟹/⟸）、推理规则、证明/验证路径、形式化对应。",
@@ -5410,7 +5410,7 @@
       "layer": "L0",
       "title": "层间映射图谱（Inter-Layer Mapping Atlas）",
       "positioning": "",
-      "line_count": 203,
+      "line_count": 204,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -5486,6 +5486,7 @@
         "../../03_advanced/04_ffi/01_rust_ffi.md",
         "../../03_advanced/06_low_level_patterns/03_type_erasure.md",
         "../../04_formal/00_type_theory/01_type_theory.md",
+        "../../04_formal/00_type_theory/12_pattern_composition_algebra.md",
         "../../04_formal/01_ownership_logic/01_linear_logic.md",
         "../../04_formal/01_ownership_logic/02_ownership_formal.md",
         "../../04_formal/02_separation_logic/01_rustbelt.md",
@@ -5499,7 +5500,6 @@
         "../../06_ecosystem/01_cargo/15_cargo_getting_started.md",
         "../../06_ecosystem/02_core_crates/01_core_crates.md",
         "../../06_ecosystem/03_design_patterns/01_patterns.md",
-        "../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md",
         "../../06_ecosystem/05_systems_and_embedded/01_wasi.md",
         "../../06_ecosystem/06_data_and_distributed/01_application_domains.md",
         "../../06_ecosystem/10_performance/01_performance_optimization.md",
@@ -5527,7 +5527,7 @@
       "layer": "L0",
       "title": "层内映射图谱（Intra-Layer Mapping Atlas）",
       "positioning": "",
-      "line_count": 594,
+      "line_count": 595,
       "theorem_chains": [
         {
           "text": "- `⟹` entails：源蕴含/导向目标（后置概念引用，默认）",
@@ -6522,7 +6522,7 @@
           "type": "table_row"
         },
         {
-          "text": "| [形式化算法理论](../../06_ecosystem/11_domain_applications/12_formal_algorithm_theory.md) | ⟹ | [算法工程实践 (Algorithm Engineering Practice)](../../06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [形式化算法理论](../../04_formal/00_type_theory/13_formal_algorithm_theory.md) | ⟹ | [算法工程实践 (Algorithm Engineering Practice)](../../06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -6594,7 +6594,7 @@
           "type": "table_row"
         },
         {
-          "text": "| [模式组合代数：设计模式的结构化关联与冲突分析](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/01_distributed_systems.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [模式组合代数：设计模式的结构化关联与冲突分析](../../04_formal/00_type_theory/12_pattern_composition_algebra.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/01_distributed_systems.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -7049,6 +7049,9 @@
         "../../04_formal/00_type_theory/07_type_checking_and_inference.md",
         "../../04_formal/00_type_theory/08_type_inference_complexity.md",
         "../../04_formal/00_type_theory/09_type_system_reference.md",
+        "../../04_formal/00_type_theory/11_formal_design_pattern_theory.md",
+        "../../04_formal/00_type_theory/12_pattern_composition_algebra.md",
+        "../../04_formal/00_type_theory/13_formal_algorithm_theory.md",
         "../../04_formal/01_ownership_logic/01_linear_logic.md",
         "../../04_formal/01_ownership_logic/02_ownership_formal.md",
         "../../04_formal/01_ownership_logic/03_linear_logic_applications.md",
@@ -7143,12 +7146,10 @@
         "../../06_ecosystem/03_design_patterns/08_architecture_patterns.md",
         "../../06_ecosystem/03_design_patterns/09_pattern_implementation_comparison.md",
         "../../06_ecosystem/03_design_patterns/10_pattern_selection_best_practices.md",
-        "../../06_ecosystem/03_design_patterns/11_formal_design_pattern_theory.md",
         "../../06_ecosystem/03_design_patterns/12_frontier_research_and_innovative_patterns.md",
         "../../06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md",
         "../../06_ecosystem/03_design_patterns/14_design_patterns_glossary.md",
         "../../06_ecosystem/03_design_patterns/15_design_patterns_faq.md",
-        "../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md",
         "../../06_ecosystem/03_design_patterns/17_workflow_theory.md",
         "../../06_ecosystem/03_design_patterns/18_api_design_patterns.md",
         "../../06_ecosystem/04_web_and_networking/01_distributed_systems.md",
@@ -7195,7 +7196,6 @@
         "../../06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md",
         "../../06_ecosystem/11_domain_applications/10_algorithm_complexity_analysis.md",
         "../../06_ecosystem/11_domain_applications/11_cutting_edge_algorithms.md",
-        "../../06_ecosystem/11_domain_applications/12_formal_algorithm_theory.md",
         "../../06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md",
         "../../06_ecosystem/11_domain_applications/14_industrial_case_studies.md",
         "../../06_ecosystem/11_domain_applications/15_game_engine_internals.md",
@@ -7287,7 +7287,7 @@
       "layer": "L0",
       "title": "概念-权威来源对齐图谱（Concept-Source Alignment Atlas）",
       "positioning": "",
-      "line_count": 52,
+      "line_count": 53,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -7311,7 +7311,7 @@
       "layer": "L0",
       "title": "推理判定树图谱（Reasoning Judgment Tree Atlas）",
       "positioning": "",
-      "line_count": 742,
+      "line_count": 743,
       "theorem_chains": [
         {
           "text": "| [Async/Await](../../03_advanced/01_async/01_async.md) | 推理/定理节 ×7 | 定理矩阵（10 行，含 ⟹ 推理链） · 推理链层级图 |",
@@ -7503,6 +7503,9 @@
         "../../04_formal/00_type_theory/07_type_checking_and_inference.md",
         "../../04_formal/00_type_theory/08_type_inference_complexity.md",
         "../../04_formal/00_type_theory/09_type_system_reference.md",
+        "../../04_formal/00_type_theory/11_formal_design_pattern_theory.md",
+        "../../04_formal/00_type_theory/12_pattern_composition_algebra.md",
+        "../../04_formal/00_type_theory/13_formal_algorithm_theory.md",
         "../../04_formal/01_ownership_logic/01_linear_logic.md",
         "../../04_formal/01_ownership_logic/02_ownership_formal.md",
         "../../04_formal/01_ownership_logic/03_linear_logic_applications.md",
@@ -7584,12 +7587,10 @@
         "../../06_ecosystem/03_design_patterns/08_architecture_patterns.md",
         "../../06_ecosystem/03_design_patterns/09_pattern_implementation_comparison.md",
         "../../06_ecosystem/03_design_patterns/10_pattern_selection_best_practices.md",
-        "../../06_ecosystem/03_design_patterns/11_formal_design_pattern_theory.md",
         "../../06_ecosystem/03_design_patterns/12_frontier_research_and_innovative_patterns.md",
         "../../06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md",
         "../../06_ecosystem/03_design_patterns/14_design_patterns_glossary.md",
         "../../06_ecosystem/03_design_patterns/15_design_patterns_faq.md",
-        "../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md",
         "../../06_ecosystem/03_design_patterns/17_workflow_theory.md",
         "../../06_ecosystem/03_design_patterns/18_api_design_patterns.md",
         "../../06_ecosystem/04_web_and_networking/01_distributed_systems.md",
@@ -7634,7 +7635,6 @@
         "../../06_ecosystem/11_domain_applications/07_algorithms_competitive_programming.md",
         "../../06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md",
         "../../06_ecosystem/11_domain_applications/11_cutting_edge_algorithms.md",
-        "../../06_ecosystem/11_domain_applications/12_formal_algorithm_theory.md",
         "../../06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md",
         "../../06_ecosystem/11_domain_applications/14_industrial_case_studies.md",
         "../../06_ecosystem/11_domain_applications/15_game_engine_internals.md",
@@ -7724,7 +7724,7 @@
       "layer": "L0",
       "title": "缺口与行动计划（Gap and Action Plan）",
       "positioning": "",
-      "line_count": 78,
+      "line_count": 79,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -7851,7 +7851,7 @@
       "layer": "L0",
       "title": "Rust 知识体系顶层本体（TLO）对齐",
       "positioning": "",
-      "line_count": 264,
+      "line_count": 265,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -8977,7 +8977,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\01_ownership_borrow_lifetime\\01_ownership.md",
       "layer": "L1",
-      "title": "Ownership（所有权）",
+      "title": "所有权",
       "positioning": "",
       "line_count": 2031,
       "theorem_chains": [
@@ -9466,7 +9466,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\01_ownership_borrow_lifetime\\02_borrowing.md",
       "layer": "L1",
-      "title": "Borrowing（借用）",
+      "title": "借用",
       "positioning": "",
       "line_count": 2159,
       "theorem_chains": [
@@ -10983,7 +10983,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\02_type_system\\01_type_system.md",
       "layer": "L1",
-      "title": "Type System Basics（类型系统基础）",
+      "title": "类型系统基础",
       "positioning": "",
       "line_count": 3373,
       "theorem_chains": [
@@ -16767,7 +16767,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\10_testing_basics\\02_useful_development_tools.md",
       "layer": "L1",
-      "title": "常用开发工具（Useful Development Tools）",
+      "title": "常用开发工具（基础）",
       "positioning": "",
       "line_count": 341,
       "theorem_chains": [
@@ -17904,7 +17904,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\00_traits\\01_traits.md",
       "layer": "L2",
-      "title": "Traits（Trait 系统）",
+      "title": "Trait 系统",
       "positioning": "",
       "line_count": 3202,
       "theorem_chains": [
@@ -19852,7 +19852,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\01_generics\\01_generics.md",
       "layer": "L2",
-      "title": "Generics（泛型系统）",
+      "title": "泛型系统",
       "positioning": "",
       "line_count": 3358,
       "theorem_chains": [
@@ -21098,7 +21098,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\02_memory_management\\01_memory_management.md",
       "layer": "L2",
-      "title": "Memory Management（内存管理）",
+      "title": "内存管理",
       "positioning": "",
       "line_count": 2279,
       "theorem_chains": [
@@ -22326,7 +22326,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\03_error_handling\\01_error_handling.md",
       "layer": "L2",
-      "title": "Error Handling（错误处理）",
+      "title": "错误处理进阶",
       "positioning": "补齐审计 §2.4 / §4 P2-2 缺口#7。本页此前仅有 1.97 横幅回链，无 Windows/Unix `ErrorKind` 映射差异。本节只补**映射差异与迁移判定**，不重复 `Result`/`?` 概念推导。完整判定树见 [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) §7。",
       "line_count": 2932,
       "theorem_chains": [
@@ -24233,7 +24233,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\05_modules_and_visibility\\01_module_system.md",
       "layer": "L2",
-      "title": "模块系统：Rust 的代码组织与可见性规则",
+      "title": "模块系统高级主题：可见性规则与工程实践",
       "positioning": "深入分析 Rust **模块系统**（module system）的设计——从文件系统映射、可见性规则（pub/use/super/self）、到 crate 边界与 workspace 组织，揭示 Rust 模块系统与 C++/Java/Python 的本质差异。",
       "line_count": 912,
       "theorem_chains": [
@@ -25739,7 +25739,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\00_concurrency\\01_concurrency.md",
       "layer": "L3",
-      "title": "Concurrency（并发模型）",
+      "title": "并发模型",
       "positioning": "",
       "line_count": 2194,
       "theorem_chains": [
@@ -26252,7 +26252,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\00_concurrency\\03_concurrency_patterns.md",
       "layer": "L3",
-      "title": "并发 模式：从消息 传递到锁自由的数据结构",
+      "title": "并发模式：从消息传递到锁自由的数据结构",
       "positioning": "深入分析 Rust **并发编程的高级模式**——从 Actor 模型、通道模式到无锁数据结构和内存序，揭示 Rust 所有权（Ownership）系统如何为并发安全（Concurrency Safety）提供编译期保证。",
       "line_count": 2376,
       "theorem_chains": [
@@ -27457,10 +27457,10 @@
         "../../00_meta/00_framework/semantic_bridge_algorithms_patterns.md",
         "../../00_meta/04_navigation/08_learning_mvp_path.md",
         "../../02_intermediate/00_traits/01_traits.md",
+        "../../04_formal/00_type_theory/12_pattern_composition_algebra.md",
         "../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md",
         "../../04_formal/README.md",
         "../../06_ecosystem/03_design_patterns/03_system_design_principles.md",
-        "../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md",
         "../../06_ecosystem/04_web_and_networking/01_distributed_systems.md",
         "../../06_ecosystem/README.md",
         "../01_async/01_async.md",
@@ -27477,7 +27477,7 @@
           "> [Concurrency](01_concurrency.md) ·"
         ],
         "post": [
-          "> [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) ·"
+          "> [Pattern Composition Algebra](../../04_formal/00_type_theory/12_pattern_composition_algebra.md) ·"
         ]
       },
       "backward_chains": 3,
@@ -28366,7 +28366,7 @@
       "layer": "L3",
       "title": "Async/Await 高级主题",
       "positioning": "",
-      "line_count": 703,
+      "line_count": 704,
       "theorem_chains": [
         {
           "text": "> **定理链编号**: T-053 Waker 活性 ⟹ T-054 Stream 安全性",
@@ -30634,7 +30634,7 @@
       "layer": "L3",
       "title": "是否需要进入 L4 形式化层？",
       "positioning": "L3（高级）与 L4（形式化）之间的**决策缓冲带**，帮助你判断是否需要阅读形式化内容。",
-      "line_count": 187,
+      "line_count": 188,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -31631,7 +31631,7 @@
       "layer": "L3",
       "title": "Unsafe Rust 模式：安全抽象的核心技术",
       "positioning": "",
-      "line_count": 86,
+      "line_count": 87,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过需求 ⟹ 安全抽象 ⟹ 安全 API 的定理链组织 unsafe 代码。",
@@ -32236,7 +32236,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\03_proc_macros\\01_macros.md",
       "layer": "L3",
-      "title": "Macros（宏系统）",
+      "title": "宏系统高级主题",
       "positioning": "",
       "line_count": 2573,
       "theorem_chains": [
@@ -39410,7 +39410,7 @@
       "layer": "L4",
       "title": "Type Semantics（类型语义）",
       "positioning": "",
-      "line_count": 978,
+      "line_count": 979,
       "theorem_chains": [
         {
           "text": "- **集合论语义**：`T <: U` ⟹ ⟦T⟧ ⊆ ⟦U⟧（类型解释的子集）——生命周期子类型 `'a: 'b` 读作「'a 的区间包含 'b 的区间」，方向与直觉相反（长命 ⊆ 短命的「可用位置集」）；",
@@ -40061,9 +40061,449 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\00_type_theory\\11_formal_design_pattern_theory.md",
+      "layer": "L4",
+      "title": "形式化设计模式理论 (Formal Design Pattern Theory)",
+      "positioning": "",
+      "line_count": 1142,
+      "theorem_chains": [
+        {
+          "text": "> **定理链**: Abstract Pattern ⟹ Formal Model ⟹ Language Mapping",
+          "type": "paragraph"
+        },
+        {
+          "text": "| 形式模型 ⟹ 精确推理 | 消除自然语言描述的歧义 | 支持严格验证模式适用性 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 范畴论 ⟹ 模式组合 | 对象、态射与函子 | 提供模式组合与变换的框架 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 语言映射 ⟹ 可应用边界 | Rust 所有权与生命周期（Lifetimes）约束 | 决定哪些形式模式可直接实现 |",
+          "type": "table_row"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 42,
+          "should_fail": false,
+          "code_preview": "/// Strategy 模式的类型论表示 /// /// 类型: Strategy<T> = T → Result<T, E> /// /// 形式化性质: ..."
+        },
+        {
+          "flags": [],
+          "lines": 69,
+          "should_fail": false,
+          "code_preview": "// Typestate Builder 的依赖类型表示 // // 形式化： // Builder(state: BuilderState) → Reques..."
+        },
+        {
+          "flags": [],
+          "lines": 76,
+          "should_fail": false,
+          "code_preview": "/// Decorator 模式是 Functor /// /// 范畴论解释: /// - 对象: 类型 A, B, C, ... /// - 态射: 函数 ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 85,
+          "should_fail": false,
+          "code_preview": "/// Result<T, E> 是 Monad /// /// 范畴论解释: /// - return : T → Result<T, E> /// - bi..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 32,
+          "should_fail": false,
+          "code_preview": "/// 命题: \"如果有 Builder(Complete)，则可以构造 Request\" /// 逻辑: Builder(Complete) ⇒ Reques..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "/// 命题: \"构建器必须设置URL才能构建\" /// 依赖类型: Π (b : Builder) . has_url(b) = true → build(b..."
+        },
+        {
+          "flags": [],
+          "lines": 50,
+          "should_fail": false,
+          "code_preview": "// RAII 模式是线性类型的应用 // // 形式化: // - 资源 R 的类型是线性的 // - 获取: acquire : () → R  (创建资源..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 33,
+          "should_fail": false,
+          "code_preview": "/// Builder 模式的仿射类型表示 /// /// 仿射性质: Builder 可以被使用 0 次或 1 次  pub struct AffineBui..."
+        },
+        {
+          "flags": [],
+          "lines": 94,
+          "should_fail": false,
+          "code_preview": "// 会话类型: 模拟 TCP 连接状态机 // // 形式化协议: // S = μX. { //   Connect: X, //   Send: Data..."
+        },
+        {
+          "flags": [],
+          "lines": 33,
+          "should_fail": false,
+          "code_preview": "/// State 模式的和类型表示 /// /// 形式化: State = Idle + Running + Stopped /// /// 性质: ///..."
+        },
+        {
+          "flags": [],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "/// Builder 模式的积类型表示 /// /// 形式化: Request = URL × Method × Headers /// /// 性质: /..."
+        },
+        {
+          "flags": [],
+          "lines": 36,
+          "should_fail": false,
+          "code_preview": "// Composite 模式的递归类型表示 // // 形式化: Tree = Leaf(Value) + Node(Tree, Tree) // // 性质..."
+        },
+        {
+          "flags": [],
+          "lines": 41,
+          "should_fail": false,
+          "code_preview": "/// Kani 验证 Singleton 的线程安全性 #[cfg(kani)] #[kani::proof] fn verify_singleton_thr..."
+        },
+        {
+          "flags": [],
+          "lines": 27,
+          "should_fail": false,
+          "code_preview": "/// 验证 Observer 模式的不变量 /// /// 不变量: 通知所有观察者后，所有观察者都收到了事件  pub struct Subject<O> ..."
+        },
+        {
+          "flags": [],
+          "lines": 45,
+          "should_fail": false,
+          "code_preview": "/// 性质: Factory 生产的产品符合类型约束 /// /// ∀p ∈ Product, ∃c ∈ Creator: c.create() = p /..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 33,
+          "should_fail": false,
+          "code_preview": "/// 定理: 设计模式满足代数结构 /// /// 设 P = {Strategy, Observer, Decorator, ...} 为模式集合 /// ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0382"
+          ],
+          "lines": 15,
+          "should_fail": true,
+          "code_preview": "struct Open; struct Closed;  struct Door<S> { state: S } impl Door<Closed> {    ..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "struct Open; struct Closed;  struct Door<S> { state: S } impl Door<Closed> {    ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../03_advanced/03_proc_macros/01_macros.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../06_ecosystem/03_design_patterns/01_patterns.md",
+        "../../06_ecosystem/03_design_patterns/09_pattern_implementation_comparison.md",
+        "../../06_ecosystem/03_design_patterns/12_frontier_research_and_innovative_patterns.md",
+        "12_pattern_composition_algebra.md"
+      ],
+      "transitions": 6,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 23,
+      "pre_post": {
+        "pre": [
+          "[Traits](../../02_intermediate/00_traits/01_traits.md) · [Macros Advanced](../../03_advanced/03_proc_macros/01_macros.md) · [Design Patterns](../../06_ecosystem/03_design_patterns/01_patterns.md) · [Pattern Implementation Comparison](../../06_ecosystem/03_design_patterns/09_pattern_implementation_comparison.md)"
+        ],
+        "post": [
+          "[Frontier Research and Innovative Patterns](../../06_ecosystem/03_design_patterns/12_frontier_research_and_innovative_patterns.md) · [Pattern Composition Algebra](12_pattern_composition_algebra.md)",
+          "[Rust vs C++：形式系统模型 vs 机制工程模型](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\00_type_theory\\12_pattern_composition_algebra.md",
+      "layer": "L4",
+      "title": "模式组合代数：设计模式的结构化关联与冲突分析",
+      "positioning": "",
+      "line_count": 792,
+      "theorem_chains": [
+        {
+          "text": "| 模式组合代数：设计模式的结构化关联与冲突分析 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 模式组合代数：设计模式的结构化关联与冲突分析 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 模式组合代数：设计模式的结构化关联与冲突分析 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |",
+          "type": "table_row"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 七、反例"
+        },
+        {
+          "title": "### 7.1 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "// Observer ⊗ Factory: 事件通知与对象创建独立运行 use std::sync::{Arc, Mutex, Weak};  struct ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// Validation ∘ Transformation ∘ Persistence // 输入 → [验证] → [转换] → [持久化] → 输出  f..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "// CircuitBreaker ⊕ Retry ⊕ Fallback // 根据失败率选择策略  enum ResilienceStrategy {    ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "// Strategy → Command: 策略的执行被封装为命令  trait Strategy {     fn execute(&self, data:..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 36,
+          "should_fail": false,
+          "code_preview": "// Typestate 模式: 编译期保证状态转换合法 struct Uninitialized; struct Initialized; struct Ru..."
+        },
+        {
+          "flags": [],
+          "lines": 30,
+          "should_fail": false,
+          "code_preview": "// 组合: RAII（资源获取即初始化）+ Scope Guard（作用域守卫） use std::fs::File; use std::io::{self,..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 32,
+          "should_fail": false,
+          "code_preview": "// 编译期多态（零成本）+ 运行期多态（动态分发）的组合  trait PaymentStrategy {     fn pay(&self, amount:..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// tower::Service 的组合中间件 use tower::{Service, ServiceBuilder, timeout::TimeoutLa..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 31,
+          "should_fail": false,
+          "code_preview": "// Saga = T1 ∘ T2 ∘ ... ∘ Tn ∘ (Compensation_n ∘ ... ∘ Compensation_1) // 每个事务 T..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "// 错误: Singleton 隐藏依赖，与 DI 哲学冲突 struct Logger;  impl Logger {     fn instance() ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 32,
+          "should_fail": false,
+          "code_preview": "use std::rc::Rc; use std::cell::RefCell;  struct Subject {     observers: Vec<Rc..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "// 边界测试: 当组合的模式数量增加时，状态空间呈指数增长  // 2 个模式: 4 种状态组合 // 3 个模式: 8 种状态组合 // 4 个模式: 16..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 28,
+          "should_fail": true,
+          "code_preview": "struct StateA; struct StateB;  impl StateA {     fn to_b(self) -> StateB { State..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "struct Wrapper<T>(T);  fn main() {     let w = Wrapper(String::from(\"hello\"));  ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 25,
+          "should_fail": false,
+          "code_preview": "fn main() {     // ❌ 编译问题: 过度嵌套的组合子导致类型签名指数增长     let result = option_a()       ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/02_type_system/01_type_system.md",
+        "../../03_advanced/00_concurrency/03_concurrency_patterns.md",
+        "../../03_advanced/01_async/03_async_patterns.md",
+        "../../05_comparative/00_paradigms/01_paradigm_matrix.md",
+        "../../06_ecosystem/03_design_patterns/01_patterns.md",
+        "../../06_ecosystem/03_design_patterns/03_system_design_principles.md",
+        "../../06_ecosystem/04_web_and_networking/01_distributed_systems.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": true,
+      "mermaid_blocks": 1,
+      "matrix_rows": 37,
+      "pre_post": {
+        "pre": [
+          "[Patterns](../../06_ecosystem/03_design_patterns/01_patterns.md) · [Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) · [Async Patterns](../../03_advanced/01_async/03_async_patterns.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md)"
+        ],
+        "post": [
+          "[Distributed Systems](../../06_ecosystem/04_web_and_networking/01_distributed_systems.md) · [System Design Principles](../../06_ecosystem/03_design_patterns/03_system_design_principles.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\00_type_theory\\13_formal_algorithm_theory.md",
+      "layer": "L4",
+      "title": "形式化算法理论",
+      "positioning": "",
+      "line_count": 338,
+      "theorem_chains": [
+        {
+          "text": "| 形式规约 ⟹ 无歧义需求 | 使用谓词与状态转换 | 精确定义期望行为 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 正确性证明 ⟹ 可靠性 | 循环不变量与终止性 | 保证算法输出符合规约 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 复杂度界 ⟹ 资源预测 | 最坏/平均/均摊分析 | 评估算法可行性 |",
+          "type": "table_row"
+        }
+      ],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 32,
+          "should_fail": false,
+          "code_preview": "/// 前置条件：arr 按升序排列 /// 后置条件：返回 target 的索引，若不存在则返回 Err(插入位置) /// 循环不变式：答案（若存在）始终位..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "use std::ptr::NonNull;  /// { arr 非空 } -> 返回首元素 { 返回值 == arr[0] } pub fn first_o..."
+        },
+        {
+          "flags": [],
+          "lines": 30,
+          "should_fail": false,
+          "code_preview": "#[cfg(kani)] mod verification {     use super::*;      #[kani::proof]     fn ver..."
+        },
+        {
+          "flags": [],
+          "lines": 38,
+          "should_fail": false,
+          "code_preview": "/// 不变量：每个入队元素最终按 FIFO 顺序出队 pub struct FifoQueue<T> {     inner: std::collection..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "fn mid(low: usize, high: usize) -> usize {     (low + high) / 2 } fn main() {   ..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "fn mid(low: usize, high: usize) -> usize {     low + (high - low) / 2 } fn main(..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/02_unsafe/04_unsafe_rust_patterns.md",
+        "../../04_formal/03_operational_semantics/02_hoare_logic.md",
+        "../../04_formal/04_model_checking/02_formal_methods.md",
+        "../../05_comparative/00_paradigms/01_paradigm_matrix.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
+        "../../06_ecosystem/11_domain_applications/07_algorithms_competitive_programming.md",
+        "../../06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md",
+        "../../06_ecosystem/11_domain_applications/09_data_structures_in_rust.md",
+        "../../06_ecosystem/11_domain_applications/10_algorithm_complexity_analysis.md",
+        "../../06_ecosystem/11_domain_applications/11_cutting_edge_algorithms.md",
+        "11_formal_design_pattern_theory.md"
+      ],
+      "transitions": 6,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 16,
+      "pre_post": {
+        "pre": [
+          "[Unsafe Rust Patterns](../../03_advanced/02_unsafe/04_unsafe_rust_patterns.md) · [算法复杂度分析](../../06_ecosystem/11_domain_applications/10_algorithm_complexity_analysis.md) · [形式化方法](../../04_formal/04_model_checking/02_formal_methods.md) · [Hoare 逻辑](../../04_formal/03_operational_semantics/02_hoare_logic.md)"
+        ],
+        "post": [
+          "[算法工程实践](../../06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\04_formal\\01_ownership_logic\\01_linear_logic.md",
       "layer": "L4",
-      "title": "Linear Logic & Affine Logic（线性逻辑与仿射逻辑）",
+      "title": "线性逻辑与仿射逻辑",
       "positioning": "",
       "line_count": 1291,
       "theorem_chains": [
@@ -40268,9 +40708,9 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\04_formal\\01_ownership_logic\\02_ownership_formal.md",
       "layer": "L4",
-      "title": "Ownership Formalization（所有权形式化）",
+      "title": "所有权形式化",
       "positioning": "",
-      "line_count": 1696,
+      "line_count": 1697,
       "theorem_chains": [
         {
           "text": "| 定理 | ⟹ 推理链 | 前提 | 结论 | 被哪些定理依赖 | 失效条件 | L1 概念映射 |",
@@ -40859,7 +41299,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\04_formal\\02_separation_logic\\01_rustbelt.md",
       "layer": "L4",
-      "title": "RustBelt & Verification Toolchain（RustBelt 与验证工具链）",
+      "title": "RustBelt 与验证工具链",
       "positioning": "",
       "line_count": 1479,
       "theorem_chains": [
@@ -41180,7 +41620,7 @@
       "layer": "L4",
       "title": "Safety Tags（安全标签）",
       "positioning": "",
-      "line_count": 20,
+      "line_count": 21,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -41802,7 +42242,7 @@
       "layer": "L4",
       "title": "Axiomatic Semantics（公理语义）",
       "positioning": "",
-      "line_count": 1063,
+      "line_count": 1064,
       "theorem_chains": [
         {
           "text": "1. **赋值公理链**：`{P[x:=E]} x := E {P}` ⟹ 「前置条件向后替换」 ⟹ Rust 中 move 赋值需额外考虑「源变量失效」——公理扩展为「消耗性赋值公理」；",
@@ -42299,7 +42739,7 @@
       "layer": "L4",
       "title": "形式化方法在 Rust 中的应用（已合并）",
       "positioning": "",
-      "line_count": 28,
+      "line_count": 29,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -42329,7 +42769,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\04_formal\\04_model_checking\\03_aerospace_certification_formal_methods.md",
       "layer": "L4",
-      "title": "航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)",
+      "title": "航空航天认证与形式化方法",
       "positioning": "系统讲解 **DO-178C 航空软件标准** 与 **DO-333 形式化方法补充** 的 Rust 映射——从软件等级 A~E 到定理证明、模型检查、抽象解释三类形式化方法在 Rust 生态中的工具链映射，分析 Rust 所有权（Ownership）系统在航空航天安全关键软件中的独特形式化优势。",
       "line_count": 1148,
       "theorem_chains": [
@@ -42437,7 +42877,7 @@
       "layer": "L4",
       "title": "现代 Rust 验证工具生态（2025-2026）",
       "positioning": "利用大语言模型（LLM）自动生成 Verus 证明注解，降低形式化验证的门槛。",
-      "line_count": 581,
+      "line_count": 582,
       "theorem_chains": [
         {
           "text": "| 现代 Rust 验证工具生态（2025-2026） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -48252,7 +48692,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\03_domain_comparisons\\01_safety_boundaries.md",
       "layer": "L5",
-      "title": "Rust 安全保证的边界条件全景（Safety Boundary Panorama）",
+      "title": "Rust 安全保证的边界条件全景",
       "positioning": "本文件汇总 Rust 所有**编译期安全保证**的边界条件、失效场景和反例，形成完整的\"安全 ⇄ 不安全\"边界地图。",
       "line_count": 1182,
       "theorem_chains": [
@@ -48533,7 +48973,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\00_toolchain\\01_toolchain.md",
       "layer": "L6",
-      "title": "Toolchain（工具链与 Cargo）",
+      "title": "工具链与 Cargo",
       "positioning": "",
       "line_count": 2065,
       "theorem_chains": [
@@ -50257,7 +50697,7 @@
       "layer": "L6",
       "title": "Cargo Build Scripts（`build.rs`）",
       "positioning": "把 `build.rs` 从“神秘的编译前脚本”还原为可预测、可调试、可重用的构建阶段工具。",
-      "line_count": 574,
+      "line_count": 573,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -51586,7 +52026,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\03_design_patterns\\01_patterns.md",
       "layer": "L6",
-      "title": "Design Patterns（设计模式）",
+      "title": "设计模式概览",
       "positioning": "",
       "line_count": 3222,
       "theorem_chains": [
@@ -53274,7 +53714,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\03_design_patterns\\08_architecture_patterns.md",
       "layer": "L6",
-      "title": "Architecture Patterns（架构设计模式）",
+      "title": "架构设计模式",
       "positioning": "",
       "line_count": 1374,
       "theorem_chains": [
@@ -53768,173 +54208,21 @@
       "layer": "L6",
       "title": "形式化设计模式理论 (Formal Design Pattern Theory)",
       "positioning": "",
-      "line_count": 1142,
-      "theorem_chains": [
-        {
-          "text": "> **定理链**: Abstract Pattern ⟹ Formal Model ⟹ Language Mapping",
-          "type": "paragraph"
-        },
-        {
-          "text": "| 形式模型 ⟹ 精确推理 | 消除自然语言描述的歧义 | 支持严格验证模式适用性 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 范畴论 ⟹ 模式组合 | 对象、态射与函子 | 提供模式组合与变换的框架 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 语言映射 ⟹ 可应用边界 | Rust 所有权与生命周期（Lifetimes）约束 | 决定哪些形式模式可直接实现 |",
-          "type": "table_row"
-        }
-      ],
-      "anti_propositions": [
-        {
-          "title": "### 反例"
-        }
-      ],
-      "code_blocks": [
-        {
-          "flags": [],
-          "lines": 42,
-          "should_fail": false,
-          "code_preview": "/// Strategy 模式的类型论表示 /// /// 类型: Strategy<T> = T → Result<T, E> /// /// 形式化性质: ..."
-        },
-        {
-          "flags": [],
-          "lines": 69,
-          "should_fail": false,
-          "code_preview": "// Typestate Builder 的依赖类型表示 // // 形式化： // Builder(state: BuilderState) → Reques..."
-        },
-        {
-          "flags": [],
-          "lines": 76,
-          "should_fail": false,
-          "code_preview": "/// Decorator 模式是 Functor /// /// 范畴论解释: /// - 对象: 类型 A, B, C, ... /// - 态射: 函数 ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 85,
-          "should_fail": false,
-          "code_preview": "/// Result<T, E> 是 Monad /// /// 范畴论解释: /// - return : T → Result<T, E> /// - bi..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 32,
-          "should_fail": false,
-          "code_preview": "/// 命题: \"如果有 Builder(Complete)，则可以构造 Request\" /// 逻辑: Builder(Complete) ⇒ Reques..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 24,
-          "should_fail": false,
-          "code_preview": "/// 命题: \"构建器必须设置URL才能构建\" /// 依赖类型: Π (b : Builder) . has_url(b) = true → build(b..."
-        },
-        {
-          "flags": [],
-          "lines": 50,
-          "should_fail": false,
-          "code_preview": "// RAII 模式是线性类型的应用 // // 形式化: // - 资源 R 的类型是线性的 // - 获取: acquire : () → R  (创建资源..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 33,
-          "should_fail": false,
-          "code_preview": "/// Builder 模式的仿射类型表示 /// /// 仿射性质: Builder 可以被使用 0 次或 1 次  pub struct AffineBui..."
-        },
-        {
-          "flags": [],
-          "lines": 94,
-          "should_fail": false,
-          "code_preview": "// 会话类型: 模拟 TCP 连接状态机 // // 形式化协议: // S = μX. { //   Connect: X, //   Send: Data..."
-        },
-        {
-          "flags": [],
-          "lines": 33,
-          "should_fail": false,
-          "code_preview": "/// State 模式的和类型表示 /// /// 形式化: State = Idle + Running + Stopped /// /// 性质: ///..."
-        },
-        {
-          "flags": [],
-          "lines": 21,
-          "should_fail": false,
-          "code_preview": "/// Builder 模式的积类型表示 /// /// 形式化: Request = URL × Method × Headers /// /// 性质: /..."
-        },
-        {
-          "flags": [],
-          "lines": 36,
-          "should_fail": false,
-          "code_preview": "// Composite 模式的递归类型表示 // // 形式化: Tree = Leaf(Value) + Node(Tree, Tree) // // 性质..."
-        },
-        {
-          "flags": [],
-          "lines": 41,
-          "should_fail": false,
-          "code_preview": "/// Kani 验证 Singleton 的线程安全性 #[cfg(kani)] #[kani::proof] fn verify_singleton_thr..."
-        },
-        {
-          "flags": [],
-          "lines": 27,
-          "should_fail": false,
-          "code_preview": "/// 验证 Observer 模式的不变量 /// /// 不变量: 通知所有观察者后，所有观察者都收到了事件  pub struct Subject<O> ..."
-        },
-        {
-          "flags": [],
-          "lines": 45,
-          "should_fail": false,
-          "code_preview": "/// 性质: Factory 生产的产品符合类型约束 /// /// ∀p ∈ Product, ∃c ∈ Creator: c.create() = p /..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 33,
-          "should_fail": false,
-          "code_preview": "/// 定理: 设计模式满足代数结构 /// /// 设 P = {Strategy, Observer, Decorator, ...} 为模式集合 /// ..."
-        },
-        {
-          "flags": [
-            "compile_fail",
-            "E0382"
-          ],
-          "lines": 15,
-          "should_fail": true,
-          "code_preview": "struct Open; struct Closed;  struct Door<S> { state: S } impl Door<Closed> {    ..."
-        },
-        {
-          "flags": [],
-          "lines": 14,
-          "should_fail": false,
-          "code_preview": "struct Open; struct Closed;  struct Door<S> { state: S } impl Door<Closed> {    ..."
-        }
-      ],
+      "line_count": 13,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
-        "01_patterns.md",
-        "09_pattern_implementation_comparison.md",
-        "12_frontier_research_and_innovative_patterns.md",
-        "16_pattern_composition_algebra.md"
+        "../../04_formal/00_type_theory/11_formal_design_pattern_theory.md"
       ],
-      "transitions": 6,
+      "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
-      "matrix_rows": 23,
+      "mermaid_blocks": 0,
+      "matrix_rows": 0,
       "pre_post": {
-        "pre": [
-          "[Design Patterns](01_patterns.md) · [Pattern Implementation Comparison](09_pattern_implementation_comparison.md)"
-        ],
-        "post": [
-          "[Frontier Research and Innovative Patterns](12_frontier_research_and_innovative_patterns.md) · [Pattern Composition Algebra](16_pattern_composition_algebra.md)",
-          "[Rust vs C++：形式系统模型 vs 机制工程模型](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
-        ]
+        "pre": [],
+        "post": []
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -54103,10 +54391,10 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../04_formal/00_type_theory/11_formal_design_pattern_theory.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../11_domain_applications/14_industrial_case_studies.md",
         "01_patterns.md",
-        "11_formal_design_pattern_theory.md",
         "13_engineering_and_production_patterns.md"
       ],
       "transitions": 6,
@@ -54115,7 +54403,7 @@
       "matrix_rows": 10,
       "pre_post": {
         "pre": [
-          "[Design Patterns](01_patterns.md) · [Formal Design Pattern Theory](11_formal_design_pattern_theory.md)"
+          "[Design Patterns](01_patterns.md) · [Formal Design Pattern Theory](../../04_formal/00_type_theory/11_formal_design_pattern_theory.md)"
         ],
         "post": [
           "[Engineering and Production Patterns](13_engineering_and_production_patterns.md) · [Industrial Case Studies](../11_domain_applications/14_industrial_case_studies.md)",
@@ -54130,7 +54418,7 @@
       "layer": "L6",
       "title": "工程实践与生产级模式",
       "positioning": "",
-      "line_count": 379,
+      "line_count": 380,
       "theorem_chains": [
         {
           "text": "| 熔断器 ⟹ 故障隔离 | 快速失败并限制级联影响 | 提升系统整体可用性 |",
@@ -54316,6 +54604,7 @@
       "sources": [],
       "cross_references": [
         "../../01_foundation/00_start/02_zero_cost_abstractions.md",
+        "../../04_formal/00_type_theory/11_formal_design_pattern_theory.md",
         "../../05_comparative/00_paradigms/01_paradigm_matrix.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../11_domain_applications/08_algorithm_engineering_practice.md",
@@ -54325,7 +54614,6 @@
         "08_architecture_patterns.md",
         "09_pattern_implementation_comparison.md",
         "10_pattern_selection_best_practices.md",
-        "11_formal_design_pattern_theory.md",
         "12_frontier_research_and_innovative_patterns.md",
         "13_engineering_and_production_patterns.md"
       ],
@@ -54338,7 +54626,7 @@
           "[Design Patterns](01_patterns.md) · [Pattern Implementation Comparison](09_pattern_implementation_comparison.md)"
         ],
         "post": [
-          "[Pattern Selection Best Practices](10_pattern_selection_best_practices.md) · [Formal Design Pattern Theory](11_formal_design_pattern_theory.md)"
+          "[Pattern Selection Best Practices](10_pattern_selection_best_practices.md) · [Formal Design Pattern Theory](../../04_formal/00_type_theory/11_formal_design_pattern_theory.md)"
         ]
       },
       "backward_chains": 0,
@@ -54442,170 +54730,21 @@
       "layer": "L6",
       "title": "模式组合代数：设计模式的结构化关联与冲突分析",
       "positioning": "",
-      "line_count": 792,
-      "theorem_chains": [
-        {
-          "text": "| 模式组合代数：设计模式的结构化关联与冲突分析 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 模式组合代数：设计模式的结构化关联与冲突分析 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 模式组合代数：设计模式的结构化关联与冲突分析 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |",
-          "type": "table_row"
-        }
-      ],
-      "anti_propositions": [
-        {
-          "title": "## 七、反例"
-        },
-        {
-          "title": "### 7.1 反例"
-        }
-      ],
-      "code_blocks": [
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 21,
-          "should_fail": false,
-          "code_preview": "// Observer ⊗ Factory: 事件通知与对象创建独立运行 use std::sync::{Arc, Mutex, Weak};  struct ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 10,
-          "should_fail": false,
-          "code_preview": "// Validation ∘ Transformation ∘ Persistence // 输入 → [验证] → [转换] → [持久化] → 输出  f..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 21,
-          "should_fail": false,
-          "code_preview": "// CircuitBreaker ⊕ Retry ⊕ Fallback // 根据失败率选择策略  enum ResilienceStrategy {    ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 26,
-          "should_fail": false,
-          "code_preview": "// Strategy → Command: 策略的执行被封装为命令  trait Strategy {     fn execute(&self, data:..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 36,
-          "should_fail": false,
-          "code_preview": "// Typestate 模式: 编译期保证状态转换合法 struct Uninitialized; struct Initialized; struct Ru..."
-        },
-        {
-          "flags": [],
-          "lines": 30,
-          "should_fail": false,
-          "code_preview": "// 组合: RAII（资源获取即初始化）+ Scope Guard（作用域守卫） use std::fs::File; use std::io::{self,..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 32,
-          "should_fail": false,
-          "code_preview": "// 编译期多态（零成本）+ 运行期多态（动态分发）的组合  trait PaymentStrategy {     fn pay(&self, amount:..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 13,
-          "should_fail": false,
-          "code_preview": "// tower::Service 的组合中间件 use tower::{Service, ServiceBuilder, timeout::TimeoutLa..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 31,
-          "should_fail": false,
-          "code_preview": "// Saga = T1 ∘ T2 ∘ ... ∘ Tn ∘ (Compensation_n ∘ ... ∘ Compensation_1) // 每个事务 T..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 24,
-          "should_fail": false,
-          "code_preview": "// 错误: Singleton 隐藏依赖，与 DI 哲学冲突 struct Logger;  impl Logger {     fn instance() ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 32,
-          "should_fail": false,
-          "code_preview": "use std::rc::Rc; use std::cell::RefCell;  struct Subject {     observers: Vec<Rc..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 26,
-          "should_fail": false,
-          "code_preview": "// 边界测试: 当组合的模式数量增加时，状态空间呈指数增长  // 2 个模式: 4 种状态组合 // 3 个模式: 8 种状态组合 // 4 个模式: 16..."
-        },
-        {
-          "flags": [
-            "compile_fail"
-          ],
-          "lines": 28,
-          "should_fail": true,
-          "code_preview": "struct StateA; struct StateB;  impl StateA {     fn to_b(self) -> StateB { State..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 17,
-          "should_fail": false,
-          "code_preview": "struct Wrapper<T>(T);  fn main() {     let w = Wrapper(String::from(\"hello\"));  ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 25,
-          "should_fail": false,
-          "code_preview": "fn main() {     // ❌ 编译问题: 过度嵌套的组合子导致类型签名指数增长     let result = option_a()       ..."
-        }
-      ],
+      "line_count": 13,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../../01_foundation/02_type_system/01_type_system.md",
-        "../../03_advanced/00_concurrency/03_concurrency_patterns.md",
-        "../../03_advanced/01_async/03_async_patterns.md",
-        "../../05_comparative/00_paradigms/01_paradigm_matrix.md",
-        "../04_web_and_networking/01_distributed_systems.md",
-        "01_patterns.md",
-        "03_system_design_principles.md"
+        "../../04_formal/00_type_theory/12_pattern_composition_algebra.md"
       ],
       "transitions": 0,
-      "has_cognitive_path": true,
-      "mermaid_blocks": 1,
-      "matrix_rows": 37,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 0,
       "pre_post": {
-        "pre": [
-          "[Patterns](01_patterns.md) · [Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) · [Async Patterns](../../03_advanced/01_async/03_async_patterns.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md)"
-        ],
-        "post": [
-          "[Distributed Systems](../04_web_and_networking/01_distributed_systems.md) · [System Design Principles](03_system_design_principles.md)"
-        ]
+        "pre": [],
+        "post": []
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -54613,7 +54752,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\03_design_patterns\\17_workflow_theory.md",
       "layer": "L6",
-      "title": "Workflow Theory & Formalization（工作流理论与形式化）",
+      "title": "工作流理论与形式化",
       "positioning": "",
       "line_count": 1481,
       "theorem_chains": [
@@ -54811,7 +54950,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\03_design_patterns\\18_api_design_patterns.md",
       "layer": "L6",
-      "title": "API Design Patterns（API 设计模式）",
+      "title": "API 设计模式",
       "positioning": "",
       "line_count": 1408,
       "theorem_chains": [
@@ -55429,7 +55568,7 @@
       "layer": "L6",
       "title": "HTTP 客户端开发",
       "positioning": "",
-      "line_count": 246,
+      "line_count": 247,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -56342,7 +56481,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\05_systems_and_embedded\\01_wasi.md",
       "layer": "L6",
-      "title": "WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型）",
+      "title": "WASI 与 WebAssembly 组件模型",
       "positioning": "",
       "line_count": 699,
       "theorem_chains": [
@@ -56853,7 +56992,7 @@
       "layer": "L6",
       "title": "Rust 操作系统内核开发",
       "positioning": "",
-      "line_count": 550,
+      "line_count": 551,
       "theorem_chains": [
         {
           "text": "| 操作系统与内核：Rust 的系统级编程 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -57179,7 +57318,7 @@
       "layer": "L6",
       "title": "Rust 嵌入式图形开发",
       "positioning": "",
-      "line_count": 1212,
+      "line_count": 1213,
       "theorem_chains": [
         {
           "text": "| Rust 嵌入式图形系统开发 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -59008,7 +59147,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\07_security_and_cryptography\\01_security_practices.md",
       "layer": "L6",
-      "title": "安全 实践：Rust 代码的防御性编程",
+      "title": "安全实践：Rust 代码的防御性编程",
       "positioning": "系统讲解 Rust **安全编程实践**——从输入验证、加密使用、到审计和供应链安全，揭示如何在 Rust 的内存安全（Memory Safety）基础上构建全面的安全防御体系。",
       "line_count": 1105,
       "theorem_chains": [
@@ -59129,7 +59268,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\07_security_and_cryptography\\02_security_cryptography.md",
       "layer": "L6",
-      "title": "Security & Cryptography（安全与密码学）",
+      "title": "安全与密码学",
       "positioning": "",
       "line_count": 1035,
       "theorem_chains": [
@@ -59364,7 +59503,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\08_formal_verification\\01_formal_ecosystem_tower.md",
       "layer": "L6",
-      "title": "Formal Ecosystem Tower（Rust 生态形式化分层塔）",
+      "title": "Rust 生态形式化分层塔",
       "positioning": "",
       "line_count": 639,
       "theorem_chains": [
@@ -59477,7 +59616,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\08_formal_verification\\02_formal_verification_tools.md",
       "layer": "L6",
-      "title": "Formal Verification Tools（形式化验证工具生态）",
+      "title": "形式化验证工具生态",
       "positioning": "",
       "line_count": 1054,
       "theorem_chains": [
@@ -60440,7 +60579,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\11_domain_applications\\02_game_ecs.md",
       "layer": "L6",
-      "title": "Game Development & ECS Architecture（游戏开发与 ECS 架构）",
+      "title": "游戏开发与 ECS 架构",
       "positioning": "",
       "line_count": 1415,
       "theorem_chains": [
@@ -61031,7 +61170,7 @@
       "layer": "L6",
       "title": "Rust 游戏开发（已合并）",
       "positioning": "",
-      "line_count": 23,
+      "line_count": 24,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -61526,7 +61665,7 @@
       "layer": "L6",
       "title": "Unknown",
       "positioning": "",
-      "line_count": 337,
+      "line_count": 338,
       "theorem_chains": [
         {
           "text": "| 合适结构 ⟹ 算法效率 | 根据访问模式选择 | 时间/空间复杂度最优 |",
@@ -61638,7 +61777,7 @@
       "layer": "L6",
       "title": "Rust 算法复杂度分析",
       "positioning": "",
-      "line_count": 243,
+      "line_count": 244,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -61710,7 +61849,7 @@
       "layer": "L6",
       "title": "前沿算法技术",
       "positioning": "",
-      "line_count": 290,
+      "line_count": 291,
       "theorem_chains": [
         {
           "text": "| Rust 内存安全（Memory Safety） ⟹ 更少并发 bug | 所有权（Ownership）与借用（Borrowing）检查 | 降低新算法实现风险 |",
@@ -61758,6 +61897,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../04_formal/00_type_theory/13_formal_algorithm_theory.md",
         "../../05_comparative/00_paradigms/01_paradigm_matrix.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
@@ -61767,7 +61907,6 @@
         "08_algorithm_engineering_practice.md",
         "09_data_structures_in_rust.md",
         "10_algorithm_complexity_analysis.md",
-        "12_formal_algorithm_theory.md",
         "13_machine_learning_ecosystem.md",
         "16_quantum_computing_rust.md"
       ],
@@ -61791,85 +61930,21 @@
       "layer": "L6",
       "title": "形式化算法理论",
       "positioning": "",
-      "line_count": 337,
-      "theorem_chains": [
-        {
-          "text": "| 形式规约 ⟹ 无歧义需求 | 使用谓词与状态转换 | 精确定义期望行为 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 正确性证明 ⟹ 可靠性 | 循环不变量与终止性 | 保证算法输出符合规约 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 复杂度界 ⟹ 资源预测 | 最坏/平均/均摊分析 | 评估算法可行性 |",
-          "type": "table_row"
-        }
-      ],
+      "line_count": 13,
+      "theorem_chains": [],
       "anti_propositions": [],
-      "code_blocks": [
-        {
-          "flags": [],
-          "lines": 32,
-          "should_fail": false,
-          "code_preview": "/// 前置条件：arr 按升序排列 /// 后置条件：返回 target 的索引，若不存在则返回 Err(插入位置) /// 循环不变式：答案（若存在）始终位..."
-        },
-        {
-          "flags": [],
-          "lines": 16,
-          "should_fail": false,
-          "code_preview": "use std::ptr::NonNull;  /// { arr 非空 } -> 返回首元素 { 返回值 == arr[0] } pub fn first_o..."
-        },
-        {
-          "flags": [],
-          "lines": 30,
-          "should_fail": false,
-          "code_preview": "#[cfg(kani)] mod verification {     use super::*;      #[kani::proof]     fn ver..."
-        },
-        {
-          "flags": [],
-          "lines": 38,
-          "should_fail": false,
-          "code_preview": "/// 不变量：每个入队元素最终按 FIFO 顺序出队 pub struct FifoQueue<T> {     inner: std::collection..."
-        },
-        {
-          "flags": [],
-          "lines": 7,
-          "should_fail": false,
-          "code_preview": "fn mid(low: usize, high: usize) -> usize {     (low + high) / 2 } fn main() {   ..."
-        },
-        {
-          "flags": [],
-          "lines": 7,
-          "should_fail": false,
-          "code_preview": "fn mid(low: usize, high: usize) -> usize {     low + (high - low) / 2 } fn main(..."
-        }
-      ],
+      "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../../04_formal/03_operational_semantics/02_hoare_logic.md",
-        "../../04_formal/04_model_checking/02_formal_methods.md",
-        "../../05_comparative/00_paradigms/01_paradigm_matrix.md",
-        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
-        "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
-        "../03_design_patterns/11_formal_design_pattern_theory.md",
-        "07_algorithms_competitive_programming.md",
-        "08_algorithm_engineering_practice.md",
-        "09_data_structures_in_rust.md",
-        "10_algorithm_complexity_analysis.md",
-        "11_cutting_edge_algorithms.md"
+        "../../04_formal/00_type_theory/13_formal_algorithm_theory.md"
       ],
-      "transitions": 6,
+      "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
-      "matrix_rows": 16,
+      "mermaid_blocks": 0,
+      "matrix_rows": 0,
       "pre_post": {
-        "pre": [
-          "[算法复杂度分析](10_algorithm_complexity_analysis.md) · [形式化方法](../../04_formal/04_model_checking/02_formal_methods.md) · [Hoare 逻辑](../../04_formal/03_operational_semantics/02_hoare_logic.md)"
-        ],
-        "post": [
-          "[算法工程实践](08_algorithm_engineering_practice.md)"
-        ]
+        "pre": [],
+        "post": []
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -62044,7 +62119,7 @@
       "layer": "L6",
       "title": "Rust 工业应用案例研究",
       "positioning": "",
-      "line_count": 541,
+      "line_count": 542,
       "theorem_chains": [
         {
           "text": "| Rust 工业级案例研究 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -63098,7 +63173,7 @@
       "layer": "L6",
       "title": "网络安全",
       "positioning": "",
-      "line_count": 415,
+      "line_count": 416,
       "theorem_chains": [
         {
           "text": "| 内存安全（Memory Safety） ⟹ 更少攻击面 | Rust 所有权（Ownership）与借用（Borrowing）检查 | 消除大量传统 C/C++ 漏洞类 |",
@@ -63194,7 +63269,7 @@
       "layer": "L6",
       "title": "自定义协议实现",
       "positioning": "",
-      "line_count": 228,
+      "line_count": 229,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -67820,7 +67895,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\07_future\\02_preview_features\\04_parallel_frontend_preview.md",
       "layer": "L7",
-      "title": "并行 前端编译预研：Rust 编译器 的多核扩展",
+      "title": "并行前端编译预研：Rust 编译器的多核扩展",
       "positioning": "探讨 Rust 编译器前端从**单线程串行**到**多核并行**的架构演进，分析其对编译时间、增量编译和 IDE 响应性的影响。",
       "line_count": 718,
       "theorem_chains": [
@@ -69368,7 +69443,7 @@
       "layer": "L7",
       "title": "Const Trait 实现预览",
       "positioning": "",
-      "line_count": 19,
+      "line_count": 20,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -71200,7 +71275,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\07_future\\04_research_and_experimental\\02_formal_methods.md",
       "layer": "L7",
-      "title": "Formal Methods Industrialization（形式化方法工业化）",
+      "title": "形式化方法工业化",
       "positioning": "",
       "line_count": 1754,
       "theorem_chains": [

@@ -1,9 +1,9 @@
 > **内容分级**: [专家级]
 > **Bloom 层级**: L4
 
-# Ownership Formalization（所有权形式化）
+# 所有权形式化
 >
-> **EN**: Ownership
+> **EN**: Ownership Formalization
 > **Summary**: Ownership. Guide to 03 Ownership Formal.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]

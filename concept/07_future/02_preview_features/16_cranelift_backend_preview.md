@@ -2,7 +2,7 @@
 
 > **代码状态**: ✅ 含可编译示例
 >
-> **EN**: Compiler Internals
+> **EN**: Cranelift Backend Preview
 > **Summary**: Compiler Internals — Cranelift as an alternative rustc backend: effects on compile time, debug experience, and iteration speed versus LLVM.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >

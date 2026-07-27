@@ -6,7 +6,7 @@
 >
 # Rust 错误处理基础
 >
-> **EN**: Error Handling
+> **EN**: Error Handling Basics
 > **Summary**: Error Handling — Error-handling basics: Result, Option, and the `?` operator, embedding errors into the type system.
 > **📎 交叉引用（Reference）**
 >

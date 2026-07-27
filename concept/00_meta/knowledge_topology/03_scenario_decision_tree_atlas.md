@@ -526,7 +526,7 @@ flowchart TD
 | [模式选择最佳实践 (Pattern Selection Best Practices)](../../06_ecosystem/03_design_patterns/10_pattern_selection_best_practices.md) | 决策/场景节 ×8 | 2. 模式选择决策树 · 创建型模式决策树 |
 | [工程实践与生产级模式](../../06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md) | 决策/场景节 ×1 | 模式选择决策树 |
 | [C09 设计模式 - 术语表](../../06_ecosystem/03_design_patterns/14_design_patterns_glossary.md) | 决策/场景节 ×1 | 模式选择决策树 |
-| [模式组合代数：设计模式的结构化关联与冲突分析](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) | 决策/场景节 ×2 | 模式选择的形式化决策树 · 并发场景的模式选择 |
+| [模式组合代数：设计模式的结构化关联与冲突分析](../../04_formal/00_type_theory/12_pattern_composition_algebra.md) | 决策/场景节 ×2 | 模式选择的形式化决策树 · 并发场景的模式选择 |
 | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/01_distributed_systems.md) | 决策/场景节 ×1 · mermaid 判定图 ×1 | 分布式网络系统技术选型 |
 | [Rust 云原生生态](../../06_ecosystem/04_web_and_networking/02_cloud_native.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
 | [Rust Web 框架对比与选型](../../06_ecosystem/04_web_and_networking/03_web_frameworks.md) | 决策/场景节 ×4 · mermaid 判定图 ×2 | 选型决策框架 · "选哪个框架？" 决策树 |
@@ -561,7 +561,7 @@ flowchart TD
 | [算法工程实践 (Algorithm Engineering Practice)](../../06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md) | 决策/场景节 ×1 | 决策树图 |
 | [](../../06_ecosystem/11_domain_applications/09_data_structures_in_rust.md) | 决策/场景节 ×1 · mermaid 判定图 ×1 | 7. 集合选择决策树 |
 | [前沿算法技术](../../06_ecosystem/11_domain_applications/11_cutting_edge_algorithms.md) | 决策/场景节 ×2 | 前沿算法决策树 · 选型矩阵 |
-| [形式化算法理论](../../06_ecosystem/11_domain_applications/12_formal_algorithm_theory.md) | 决策/场景节 ×1 | 验证工具选型决策树 |
+| [形式化算法理论](../../04_formal/00_type_theory/13_formal_algorithm_theory.md) | 决策/场景节 ×1 | 验证工具选型决策树 |
 | [Machine Learning Ecosystem](../../06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md) | 决策/场景节 ×1 | 边界测试：单线程 DataFrame 操作在并发场景下竞争（运行时错误） |
 | [Rust 工业应用案例研究](../../06_ecosystem/11_domain_applications/14_industrial_case_studies.md) | 决策/场景节 ×1 | 选型决策树 |
 | [Rust WebAssembly 高级开发](../../06_ecosystem/11_domain_applications/17_webassembly_advanced.md) | 决策/场景节 ×3 | 测验 5：Rust 编译为 WASM 时，`wasm-bindgen` 与 `… · 典型应用场景 |

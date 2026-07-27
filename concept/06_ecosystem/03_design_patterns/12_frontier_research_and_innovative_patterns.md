@@ -11,7 +11,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: A×Res — 前沿研究与创新模式
-> **前置依赖**: [Design Patterns](01_patterns.md) · [Formal Design Pattern Theory](11_formal_design_pattern_theory.md)
+> **前置依赖**: [Design Patterns](01_patterns.md) · [Formal Design Pattern Theory](../../04_formal/00_type_theory/11_formal_design_pattern_theory.md)
 > **后置概念**: [Engineering and Production Patterns](13_engineering_and_production_patterns.md) · [Industrial Case Studies](../11_domain_applications/14_industrial_case_studies.md)
 > **定理链**: Emerging Problem ⟹ Experimental Pattern ⟹ Production Hardening
 > **层级**: L6 生态工程

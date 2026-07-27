@@ -3,9 +3,9 @@
 > **代码状态**: ✅ 含可编译示例
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-# API Design Patterns（API 设计模式）
+# API 设计模式
 >
-> **EN**: Design Patterns
+> **EN**: API Design Patterns
 > **Summary**: Design Patterns. Guide to 42 Api Design Patterns.
 >
 > **受众**: [进阶]

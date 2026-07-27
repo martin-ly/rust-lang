@@ -3,7 +3,7 @@
 >
 # 闭包基础：捕获环境与匿名函数
 >
-> **EN**: Closures
+> **EN**: Closure Basics
 > **Summary**: Closures — Closures: environment capture, the Fn/FnMut/FnOnce traits, and using closures as parameters and return values.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **📎 交叉引用（Reference）**

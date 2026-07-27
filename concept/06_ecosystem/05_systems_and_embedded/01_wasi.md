@@ -15,11 +15,11 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 ---
 
-# WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型）
+# WASI 与 WebAssembly 组件模型
 
 > **代码状态**: ✅ 含可编译示例
 >
-> **EN**: WebAssembly
+> **EN**: WASI and WebAssembly Component Model
 > **Summary**: WebAssembly. Guide to 08 Wasi.
 > **受众**: [进阶]
 > **内容分级**: [综述级]

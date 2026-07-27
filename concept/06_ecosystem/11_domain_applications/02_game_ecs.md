@@ -1,8 +1,8 @@
 > **代码状态**: ✅ 含可编译示例
 
-# Game Development & ECS Architecture（游戏开发与 ECS 架构）
+# 游戏开发与 ECS 架构
 >
-> **EN**: Game Development
+> **EN**: Game ECS Architecture
 > **Summary**: Game Development: Rust ecosystem tools, crates, and engineering practices.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]

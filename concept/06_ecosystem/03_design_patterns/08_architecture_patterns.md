@@ -2,9 +2,9 @@
 > **代码状态**: ✅ 含可编译示例
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-# Architecture Patterns（架构设计模式）
+# 架构设计模式
 >
-> **EN**: Design Patterns
+> **EN**: Architecture Patterns
 > **Summary**: Design Patterns. Guide to 35 Architecture Patterns.
 >
 > **受众**: [进阶]

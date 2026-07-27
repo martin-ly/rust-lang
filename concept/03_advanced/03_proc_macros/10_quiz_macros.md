@@ -2,7 +2,7 @@
 
 # 测验：宏系统（L3 试点扩展）
 >
-> **EN**: Macros
+> **EN**: Macros (Quiz)
 > **Summary**: Macros — An interactive quiz checking the macro system: macro_rules!, repetition, hygiene, and procedural macros.
 > **答案**：
 >

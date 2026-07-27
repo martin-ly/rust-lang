@@ -4,9 +4,9 @@
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-# Security & Cryptography（安全与密码学）
+# 安全与密码学
 >
-> **EN**: Security Practices
+> **EN**: Security and Cryptography
 > **Summary**: Security Practices. Guide to 43 Security Cryptography.
 >
 > **受众**: [进阶]

@@ -1,8 +1,8 @@
 > **内容分级**: [专家级]
 
-# 并发 模式：从消息 传递到锁自由的数据结构
+# 并发模式：从消息传递到锁自由的数据结构
 >
-> **EN**: Concurrency
+> **EN**: Concurrency Patterns
 > **Summary**: Concurrency — Advanced concurrency: actors, channels, lock-free structures, and memory ordering under ownership-based safety.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家]

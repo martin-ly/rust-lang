@@ -3,9 +3,9 @@
 > **代码状态**: ✅ 含可编译示例
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-# Workflow Theory & Formalization（工作流理论与形式化）
+# 工作流理论与形式化
 >
-> **EN**: Formal Methods
+> **EN**: Workflow Theory & Formalization
 > **Summary**: Formal Methods. Guide to 41 Workflow Theory.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >

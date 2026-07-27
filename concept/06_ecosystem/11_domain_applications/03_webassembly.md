@@ -2,7 +2,7 @@
 
 # WebAssembly 生态：Rust 的浏览器外运行时
 >
-> **EN**: WebAssembly
+> **EN**: WebAssembly Ecosystem
 > **Summary**: WebAssembly — Rust's WebAssembly ecosystem: a portable, safe, efficient bytecode for running beyond the browser.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]

@@ -1,6 +1,6 @@
-# L4 形式化理论层（Formal Methods）
+# L4 形式化理论层
 >
-> **EN**: Formal Methods
+> **EN**: Formal Methods Layer Overview
 > **Summary**: Formal methods: type theory, ownership semantics, and verification tools.
 > **对应 Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]

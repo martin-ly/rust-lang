@@ -1,6 +1,6 @@
-# 常用开发工具（Useful Development Tools）
+# 常用开发工具（基础）
 
-> **EN**: Useful Development Tools
+> **EN**: Useful Development Tools (Foundation)
 > **Summary**: A tour of the Rust toolchain and ecosystem tooling: rustfmt, clippy, rustdoc, cargo, rust-analyzer, plus popular community plugins like cargo-watch, cargo-expand, cargo-audit, and cargo-deny, with configuration examples and CI workflow guidance.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >

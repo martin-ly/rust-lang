@@ -1,133 +1,33 @@
 {
   "summary": {
     "date": "2026-07-28",
-    "scanned": 550,
+    "scanned": 553,
     "counts": {
-      "D1": 1,
-      "D2": 10,
+      "D1": 0,
+      "D2": 0,
       "D3": 0,
       "D4": 0,
       "D5": 0,
       "D6": 0
     },
     "pct": {
-      "D1": 0.2,
-      "D2": 1.8,
+      "D1": 0.0,
+      "D2": 0.0,
       "D3": 0.0,
       "D4": 0.0,
       "D5": 0.0,
       "D6": 0.0
     },
     "D2_base_files_with_asp_and_bloom": 347,
-    "flagged_files": 10
+    "flagged_files": 0
   },
   "examples": {
-    "D1": [
-      [
-        "concept/06_ecosystem/11_domain_applications/12_formal_algorithm_theory.md",
-        "Bloom [5, 6] 与 层次定位/层级 [4] 无交集"
-      ]
-    ],
-    "D2": [
-      [
-        "concept/00_meta/01_terminology/03_bilingual_template.md",
-        "A/S/P=A 允许 [1, 2] 与 Bloom [0] 无交集"
-      ],
-      [
-        "concept/03_advanced/02_unsafe/09_sanitizers.md",
-        "A/S/P=A 允许 [1, 2] 与 Bloom [3, 4] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md",
-        "A/S/P=A 允许 [1, 2] 与 Bloom [5, 6] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/04_web_and_networking/04_http_client_development.md",
-        "A/S/P=A 允许 [1, 2] 与 Bloom [5, 6] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/11_domain_applications/09_data_structures_in_rust.md",
-        "A/S/P=A 允许 [1, 2] 与 Bloom [5, 6] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/11_domain_applications/10_algorithm_complexity_analysis.md",
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/11_domain_applications/11_cutting_edge_algorithms.md",
-        "A/S/P=A 允许 [1, 2] 与 Bloom [5, 6] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/11_domain_applications/12_formal_algorithm_theory.md",
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/12_networking/02_network_security.md",
-        "A/S/P=A 允许 [1, 2] 与 Bloom [5, 6] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/12_networking/03_custom_protocol_implementation.md",
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ]
-    ],
+    "D1": [],
+    "D2": [],
     "D3": [],
     "D4": [],
     "D5": [],
     "D6": []
   },
-  "per_file": {
-    "concept/00_meta/01_terminology/03_bilingual_template.md": {
-      "D2": [
-        "A/S/P=A 允许 [1, 2] 与 Bloom [0] 无交集"
-      ]
-    },
-    "concept/03_advanced/02_unsafe/09_sanitizers.md": {
-      "D2": [
-        "A/S/P=A 允许 [1, 2] 与 Bloom [3, 4] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md": {
-      "D2": [
-        "A/S/P=A 允许 [1, 2] 与 Bloom [5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/04_web_and_networking/04_http_client_development.md": {
-      "D2": [
-        "A/S/P=A 允许 [1, 2] 与 Bloom [5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/11_domain_applications/09_data_structures_in_rust.md": {
-      "D2": [
-        "A/S/P=A 允许 [1, 2] 与 Bloom [5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/11_domain_applications/10_algorithm_complexity_analysis.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/11_domain_applications/11_cutting_edge_algorithms.md": {
-      "D2": [
-        "A/S/P=A 允许 [1, 2] 与 Bloom [5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/11_domain_applications/12_formal_algorithm_theory.md": {
-      "D1": [
-        "Bloom [5, 6] 与 层次定位/层级 [4] 无交集"
-      ],
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/12_networking/02_network_security.md": {
-      "D2": [
-        "A/S/P=A 允许 [1, 2] 与 Bloom [5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/12_networking/03_custom_protocol_implementation.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ]
-    }
-  }
+  "per_file": {}
 }

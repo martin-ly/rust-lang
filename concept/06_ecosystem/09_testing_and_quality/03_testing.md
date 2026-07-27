@@ -5,7 +5,7 @@
 >
 # 测试生态：单元测试、集成测试与验证策略
 >
-> **EN**: Testing
+> **EN**: Testing Ecosystem
 > **Summary**: Testing — Rust's testing ecosystem: unit and integration tests plus verification strategies.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]

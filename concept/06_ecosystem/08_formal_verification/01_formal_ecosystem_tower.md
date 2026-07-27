@@ -1,8 +1,8 @@
-# Formal Ecosystem Tower（Rust 生态形式化分层塔）
+# Rust 生态形式化分层塔
 
 > **代码状态**: ✅ 含可编译示例
 >
-> **EN**: Formal Methods
+> **EN**: Formal Verification Ecosystem Tower
 > **Summary**: Formal Methods. Guide to 05 Formal Ecosystem Tower.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]

@@ -1,8 +1,8 @@
 > **内容分级**: [专家级]
 
-# RustBelt & Verification Toolchain（RustBelt 与验证工具链）
+# RustBelt 与验证工具链
 >
-> **EN**: RustBelt
+> **EN**: RustBelt and Verification Toolchain
 > **Summary**: RustBelt: a formal model of Rust's ownership and borrowing in Iris separation logic.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]

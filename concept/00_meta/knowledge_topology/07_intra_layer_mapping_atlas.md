@@ -435,11 +435,11 @@
 | [rustc 编译器诊断与 UI Tests](../../06_ecosystem/00_toolchain/11_compiler_diagnostics_and_ui_tests.md) | ⟹ | [Rust 编译器基础设施深度解析](../../06_ecosystem/00_toolchain/05_compiler_infrastructure.md) | 后置概念引用（蕴含/导向） |
 | [前沿算法技术](../../06_ecosystem/11_domain_applications/11_cutting_edge_algorithms.md) | ⟹ | [Rust 量子计算生态](../../06_ecosystem/11_domain_applications/16_quantum_computing_rust.md) | 后置概念引用（蕴含/导向） |
 | [前沿算法技术](../../06_ecosystem/11_domain_applications/11_cutting_edge_algorithms.md) | ⟹ | [Machine Learning Ecosystem](../../06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md) | 后置概念引用（蕴含/导向） |
-| [形式化设计模式理论 (Formal Design Pattern Theory)](../../06_ecosystem/03_design_patterns/11_formal_design_pattern_theory.md) | ⟸ | [前沿研究与创新模式 (Frontier Research and Innovative Patterns)](../../06_ecosystem/03_design_patterns/12_frontier_research_and_innovative_patterns.md) | 源在目标的前置元数据中（目标依赖源） |
-| [形式化设计模式理论 (Formal Design Pattern Theory)](../../06_ecosystem/03_design_patterns/11_formal_design_pattern_theory.md) | ⊑ | [模式组合代数：设计模式的结构化关联与冲突分析](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
+| [形式化设计模式理论 (Formal Design Pattern Theory)](../../04_formal/00_type_theory/11_formal_design_pattern_theory.md) | ⟸ | [前沿研究与创新模式 (Frontier Research and Innovative Patterns)](../../06_ecosystem/03_design_patterns/12_frontier_research_and_innovative_patterns.md) | 源在目标的前置元数据中（目标依赖源） |
+| [形式化设计模式理论 (Formal Design Pattern Theory)](../../04_formal/00_type_theory/11_formal_design_pattern_theory.md) | ⊑ | [模式组合代数：设计模式的结构化关联与冲突分析](../../04_formal/00_type_theory/12_pattern_composition_algebra.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [Cargo 子命令与插件生态](../../06_ecosystem/01_cargo/12_cargo_subcommands_and_plugins.md) | ⟹ | [Cargo 安全公告：CVE-2026-5222 与 CVE-2026-5223](../../06_ecosystem/01_cargo/13_cargo_security_cves.md) | 后置概念引用（蕴含/导向） |
 | [Cargo 子命令与插件生态](../../06_ecosystem/01_cargo/12_cargo_subcommands_and_plugins.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/03_devops_and_ci_cd.md) | 后置概念引用（蕴含/导向） |
-| [形式化算法理论](../../06_ecosystem/11_domain_applications/12_formal_algorithm_theory.md) | ⟹ | [算法工程实践 (Algorithm Engineering Practice)](../../06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md) | 后置概念引用（蕴含/导向） |
+| [形式化算法理论](../../04_formal/00_type_theory/13_formal_algorithm_theory.md) | ⟹ | [算法工程实践 (Algorithm Engineering Practice)](../../06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md) | 后置概念引用（蕴含/导向） |
 | [前沿研究与创新模式 (Frontier Research and Innovative Patterns)](../../06_ecosystem/03_design_patterns/12_frontier_research_and_innovative_patterns.md) | ⊑ | [工程实践与生产级模式](../../06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [前沿研究与创新模式 (Frontier Research and Innovative Patterns)](../../06_ecosystem/03_design_patterns/12_frontier_research_and_innovative_patterns.md) | ⟹ | [Rust 工业应用案例研究](../../06_ecosystem/11_domain_applications/14_industrial_case_studies.md) | 后置概念引用（蕴含/导向） |
 | [rustc 自举](../../06_ecosystem/00_toolchain/12_rustc_bootstrap.md) | ⟹ | [rustc 编译器测试体系](../../06_ecosystem/00_toolchain/13_compiler_testing.md) | 后置概念引用（蕴含/导向） |
@@ -453,7 +453,7 @@
 | [Cargo Workspaces](../../06_ecosystem/01_cargo/14_cargo_workspaces.md) | ⟹ | [Cargo Profiles 与 Lints](../../06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md) | 后置概念引用（蕴含/导向） |
 | [Cargo Workspaces](../../06_ecosystem/01_cargo/14_cargo_workspaces.md) | ⟹ | [Cargo Registry 与包发布](../../06_ecosystem/01_cargo/08_cargo_registries_and_publishing.md) | 后置概念引用（蕴含/导向） |
 | [C09 设计模式 - 术语表](../../06_ecosystem/03_design_patterns/14_design_patterns_glossary.md) | ⊑ | [模式选择最佳实践 (Pattern Selection Best Practices)](../../06_ecosystem/03_design_patterns/10_pattern_selection_best_practices.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
-| [C09 设计模式 - 术语表](../../06_ecosystem/03_design_patterns/14_design_patterns_glossary.md) | ⊑ | [形式化设计模式理论 (Formal Design Pattern Theory)](../../06_ecosystem/03_design_patterns/11_formal_design_pattern_theory.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
+| [C09 设计模式 - 术语表](../../06_ecosystem/03_design_patterns/14_design_patterns_glossary.md) | ⊑ | [形式化设计模式理论 (Formal Design Pattern Theory)](../../04_formal/00_type_theory/11_formal_design_pattern_theory.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [Rust 常用开发工具](../../06_ecosystem/00_toolchain/14_development_tools.md) | ⟹ | [Cargo Profiles 与 Lints](../../06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md) | 后置概念引用（蕴含/导向） |
 | [Cargo 入门](../../06_ecosystem/01_cargo/15_cargo_getting_started.md) | ⟸ | [Cargo 工作流](../../06_ecosystem/01_cargo/16_cargo_workflow.md) | 源在目标的前置元数据中（目标依赖源） |
 | [Cargo 入门](../../06_ecosystem/01_cargo/15_cargo_getting_started.md) | ⟹ | [Cargo 依赖解析](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md) | 后置概念引用（蕴含/导向） |
@@ -467,8 +467,8 @@
 | [Cargo 工作流](../../06_ecosystem/01_cargo/16_cargo_workflow.md) | ⟸ | [Cargo 指南实践](../../06_ecosystem/01_cargo/17_cargo_guide_practices.md) | 源在目标的前置元数据中（目标依赖源） |
 | [Cargo 工作流](../../06_ecosystem/01_cargo/16_cargo_workflow.md) | ⟹ | [Cargo Workspaces](../../06_ecosystem/01_cargo/14_cargo_workspaces.md) | 后置概念引用（蕴含/导向） |
 | [Cargo 工作流](../../06_ecosystem/01_cargo/16_cargo_workflow.md) | ⟹ | [Cargo 依赖解析](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md) | 后置概念引用（蕴含/导向） |
-| [模式组合代数：设计模式的结构化关联与冲突分析](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/01_distributed_systems.md) | 后置概念引用（蕴含/导向） |
-| [模式组合代数：设计模式的结构化关联与冲突分析](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) | ⊑ | [Rust 系统设计原则与国际权威对齐](../../06_ecosystem/03_design_patterns/03_system_design_principles.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
+| [模式组合代数：设计模式的结构化关联与冲突分析](../../04_formal/00_type_theory/12_pattern_composition_algebra.md) | ⟹ | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/01_distributed_systems.md) | 后置概念引用（蕴含/导向） |
+| [模式组合代数：设计模式的结构化关联与冲突分析](../../04_formal/00_type_theory/12_pattern_composition_algebra.md) | ⊑ | [Rust 系统设计原则与国际权威对齐](../../06_ecosystem/03_design_patterns/03_system_design_principles.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [Cargo 指南实践](../../06_ecosystem/01_cargo/17_cargo_guide_practices.md) | ⟹ | [Cargo 配置与环境变量](../../06_ecosystem/01_cargo/18_cargo_configuration.md) | 后置概念引用（蕴含/导向） |
 | [Cargo 指南实践](../../06_ecosystem/01_cargo/17_cargo_guide_practices.md) | ⟹ | [DevOps 与 CI/CD：Rust 的持续交付工程实践](../../06_ecosystem/00_toolchain/03_devops_and_ci_cd.md) | 后置概念引用（蕴含/导向） |
 | [Cargo 指南实践](../../06_ecosystem/01_cargo/17_cargo_guide_practices.md) | ⟹ | [性能优化：Rust 代码的测量与调优](../../06_ecosystem/10_performance/01_performance_optimization.md) | 后置概念引用（蕴含/导向） |

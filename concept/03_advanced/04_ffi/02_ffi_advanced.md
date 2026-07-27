@@ -2,7 +2,7 @@
 
 # FFI 高级主题：跨语言边界的安全与性能
 >
-> **EN**: Foreign Function Interface (FFI)
+> **EN**: FFI Advanced Topics
 > **Summary**: Foreign Function Interface (FFI) — Advanced FFI: complex type mapping, callbacks, thread safety, and memory-layout control across unsafe boundaries.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家]

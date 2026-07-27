@@ -3,7 +3,7 @@
 >
 # 错误处理深入：从 Result 到自定义错误生态
 >
-> **EN**: Error Handling
+> **EN**: Error Handling Deep Dive
 > **Summary**: Error Handling — A deep dive into error handling: combinators, the `?` operator, conversions, custom errors, and frameworks.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >

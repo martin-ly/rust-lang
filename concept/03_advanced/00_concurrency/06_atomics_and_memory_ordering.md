@@ -2,7 +2,7 @@
 
 # 原子操作与内存序：无锁并发的精确控制
 >
-> **EN**: Concurrency
+> **EN**: Atomics and Memory Ordering
 > **Summary**: Concurrency — Atomic types and memory ordering: load/store, compare-and-swap, and release-acquire for precise lock-free control.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **📎 交叉引用（Reference）**

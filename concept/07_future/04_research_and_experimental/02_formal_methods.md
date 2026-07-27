@@ -1,8 +1,8 @@
-# Formal Methods Industrialization（形式化方法工业化）
+# 形式化方法工业化
 
 > **代码状态**: ✅ 含可编译示例
 >
-> **EN**: Formal Methods
+> **EN**: Formal Methods Industrialization
 > **Summary**: Formal methods in Rust — from model checking (Kani) and deductive verification (Creusot/Verus/Prusti) to runtime UB detection (Miri) and protocol-level specification (TLA+/P): the five-layer verification model, the type-system-to-theorem-proving spectrum, CI/CD integration, and industrial case studies.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >

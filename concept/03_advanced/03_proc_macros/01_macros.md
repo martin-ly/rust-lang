@@ -1,8 +1,8 @@
 > **内容分级**: [专家级]
 
-# Macros（宏系统）
+# 宏系统高级主题
 >
-> **EN**: Macros
+> **EN**: Macros Advanced
 > **Summary**: Macros. Guide to 04 Macros.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **来源**:

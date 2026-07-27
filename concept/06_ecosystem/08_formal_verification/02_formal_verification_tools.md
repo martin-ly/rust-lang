@@ -2,9 +2,9 @@
 > **代码状态**: ✅ 含可编译示例
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-# Formal Verification Tools（形式化验证工具生态）
+# 形式化验证工具生态
 >
-> **EN**: Formal Methods
+> **EN**: Formal Verification Tools
 > **Summary**: Formal Methods. Guide to 47 Formal Verification Tools.
 > **受众**: [进阶]
 > **Bloom 层级**: L4-L5

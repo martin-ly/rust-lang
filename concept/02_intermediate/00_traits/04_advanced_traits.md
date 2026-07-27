@@ -3,7 +3,7 @@
 >
 # 高级 Trait 主题：从关联类型到特化
 >
-> **EN**: Traits
+> **EN**: Advanced Traits
 > **Summary**: Traits — Advanced traits: associated types, generic associated types, specialization, and negative impls.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >

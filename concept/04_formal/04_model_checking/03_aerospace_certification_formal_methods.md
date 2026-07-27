@@ -1,8 +1,8 @@
 > **内容分级**: [专家级]
 
-# 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)
+# 航空航天认证与形式化方法
 >
-> **EN**: Formal Methods
+> **EN**: Aerospace Certification & Formal Methods
 > **Summary**: Formal Methods — Mapping DO-178C and DO-333 to Rust: theorem proving, model checking, and abstract interpretation for airborne software.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]

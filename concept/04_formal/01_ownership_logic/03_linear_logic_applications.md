@@ -2,7 +2,7 @@
 
 # 线性逻辑在 Rust 中的工程应用
 >
-> **EN**: Linear Logic
+> **EN**: Linear Logic Applications
 > **Summary**: Linear Logic — Linear logic in practice: resource management, protocol state machines, and session types in Rust.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]

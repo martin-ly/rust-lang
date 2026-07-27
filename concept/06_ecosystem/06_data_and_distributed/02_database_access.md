@@ -4,7 +4,7 @@
 >
 # Rust 数据库访问生态
 >
-> **EN**: Database Access
+> **EN**: Database Access Ecosystem
 > **Summary**: Database Access — SQLx compile-time checking and the Diesel ORM, using type safety to eliminate runtime query errors.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >

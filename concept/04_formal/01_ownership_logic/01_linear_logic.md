@@ -1,8 +1,8 @@
 > **内容分级**: [专家级]
 
-# Linear Logic & Affine Logic（线性逻辑与仿射逻辑）
+# 线性逻辑与仿射逻辑
 >
-> **EN**: Linear Logic
+> **EN**: Linear and Affine Logic
 > **Summary**: Linear Logic: formal methods foundations, semantics, and verification techniques relevant to Rust.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]

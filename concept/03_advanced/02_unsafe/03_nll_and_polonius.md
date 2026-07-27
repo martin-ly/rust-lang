@@ -2,7 +2,7 @@
 
 # NLL 与 Polonius：借用检查器的演进
 >
-> **EN**: Borrowing
+> **EN**: NLL and Polonius
 > **Summary**: Borrowing — NLL and Polonius: how non-lexical lifetimes and data-flow analysis make borrow checking more precise.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家]

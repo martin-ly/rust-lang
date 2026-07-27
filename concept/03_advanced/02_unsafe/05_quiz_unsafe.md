@@ -2,7 +2,7 @@
 
 # 测验：Unsafe Rust（L3 试点扩展）
 >
-> **EN**: Unsafe Rust
+> **EN**: Unsafe Rust (Quiz)
 > **Summary**: Unsafe Rust — An interactive quiz checking Unsafe Rust: raw pointers, unsafe blocks/functions/traits, FFI, and Miri validation.
 > **受众**: [专家]
 > **Rust 版本**: 1.97.0+ (Edition 2024)

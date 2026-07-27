@@ -2,7 +2,7 @@
 > [综述级]
 > **本节关键术语**: 泛型 (Generics) · 类型参数 (Type Parameter) · 约束 (Bound) · where 子句 · 单态化 (Monomorphization) — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 >
-# Generics（泛型系统）
+# 泛型系统
 >
 > **EN**: Generics
 > **Summary**: Generics. Parametric polymorphism in Rust enabling type-safe, reusable code across types. Covers generic functions, structs, trait bounds, and monomorphization trade-offs.

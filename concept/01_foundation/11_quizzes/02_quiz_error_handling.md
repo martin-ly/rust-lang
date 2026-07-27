@@ -2,7 +2,7 @@
 
 # 测验：错误处理（试点扩展）
 >
-> **EN**: Error Handling
+> **EN**: Error Handling (Quiz)
 > **Summary**: Error Handling — An interactive quiz checking L1 error handling: Result, Option, the `?` operator, panic, and custom errors.
 > **受众**: [初学者]
 > **Rust 版本**: 1.97.0+ (Edition 2024)

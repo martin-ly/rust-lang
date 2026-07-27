@@ -3,7 +3,7 @@
 >
 # 宏模式：编译期代码生成的工程实践
 >
-> **EN**: Macros
+> **EN**: Macro Patterns
 > **Summary**: Macros — Macro engineering patterns: DRY code generation, API design, and compile-time computation without harming readability.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >

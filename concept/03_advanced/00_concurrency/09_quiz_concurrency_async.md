@@ -2,7 +2,7 @@
 
 # 测验：并发与异步（L3 试点扩展）
 >
-> **EN**: Concurrency
+> **EN**: Concurrency and Async (Quiz)
 > **Summary**: Concurrency — An interactive quiz checking L3 concurrency (Send/Sync, Mutex/Arc, channels) and async (Future, Pin, await).
 > **受众**: [专家]
 > **Rust 版本**: 1.97.0+ (Edition 2024)

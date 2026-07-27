@@ -1,8 +1,8 @@
 > **内容分级**: [专家级]
 
-# Concurrency（并发模型）
+# 并发模型
 >
-> **EN**: Concurrency
+> **EN**: Concurrency Models
 > **Summary**: Rust's concurrency model uses ownership and the Send and Sync traits to rule out data races at compile time. The chapter covers spawning threads, message passing with channels, shared mutable state via Mutex and Arc, and deadlock-free design patterns, showing how to write fearless concurrent programs.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **📎 交叉引用（Reference）**

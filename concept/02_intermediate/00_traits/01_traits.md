@@ -3,7 +3,7 @@
 > **本节关键术语**: 特征 (Trait) · 实现 (Implement) · 孤儿规则 (Orphan Rule) · 一致性 (Coherence) · 对象安全 (Object Safety) — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 >
 
-# Traits（Trait 系统）
+# Trait 系统
 >
 > **EN**: Traits
 > **Summary**: Traits define shared behavior in Rust: interfaces with methods, associated types, and default implementations that can be composed through trait bounds. The chapter explores implementing traits, trait objects, object safety, the orphan rule, coherence, and advanced patterns such as associated types and blanket impls.

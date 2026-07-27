@@ -12,7 +12,7 @@
 
 > **代码状态**: ✅ 含可编译示例
 >
-> **EN**: Testing
+> **EN**: Testing Strategies
 > **Summary**: Testing — Testing strategies: the built-in framework, proptest, cargo-fuzz, Miri, and Kani in a layered quality system.
 > **受众**: [进阶]
 > **内容分级**: [专家级]

@@ -2,7 +2,7 @@
 
 # 子类型与变型：Rust 类型系统中的协变、逆变与不变
 >
-> **EN**: Type System
+> **EN**: Subtype and Variance
 > **Summary**: Type System — Subtyping and variance: why `&'static str` coerces to `&'a str` but `&mut &'static str` does not to `&mut &'a str`.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]

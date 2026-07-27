@@ -4,7 +4,7 @@
 >
 # Rust 游戏开发生态
 >
-> **EN**: Game Development
+> **EN**: Game Development Ecosystem
 > **Summary**: Game Development — Rust in game development: Bevy ECS and WGPU rendering, where safety and performance reshape engine design.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >

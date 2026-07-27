@@ -11,7 +11,7 @@
 > **受众**: [专家]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 应用主题
-> **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
+> **A/S/P 标记**: **P+S** — Procedure + Structure
 > **前置概念**:
 > [Async/Await](../../03_advanced/01_async/01_async.md) ·
 > [Rust 网络编程](../../03_advanced/06_low_level_patterns/04_network_programming.md) ·

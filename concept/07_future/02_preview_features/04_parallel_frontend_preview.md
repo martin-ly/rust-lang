@@ -1,8 +1,8 @@
-# 并行 前端编译预研：Rust 编译器 的多核扩展
+# 并行前端编译预研：Rust 编译器的多核扩展
 
 > **代码状态**: ✅ 含可编译示例
 >
-> **EN**: Compiler Internals
+> **EN**: Parallel Frontend Preview
 > **Summary**: Compiler Internals — The compiler front end's shift from single-threaded to multi-core parallel, and its impact on build times and IDE responsiveness.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >

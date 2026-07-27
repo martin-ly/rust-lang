@@ -5,7 +5,7 @@
 >
 # 数据库系统：Rust 在存储引擎中的语义
 >
-> **EN**: Database Access
+> **EN**: Database Systems in Rust
 > **Summary**: Database Access: Rust ecosystem tools, crates, and engineering practices.
 >
 > **受众**: [进阶]

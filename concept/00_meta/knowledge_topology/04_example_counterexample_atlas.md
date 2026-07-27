@@ -411,10 +411,10 @@ flowchart TD
 | [Architecture Patterns](../../06_ecosystem/03_design_patterns/08_architecture_patterns.md) | 示例/反例节 ×4 · compile_fail ×2 | 边界测试 · 边界测试：适配器绕过端口直接依赖核心（编译错误） |
 | [模式实现对比 (Pattern Implementation Comparison)](../../06_ecosystem/03_design_patterns/09_pattern_implementation_comparison.md) | 示例/反例节 ×3 · compile_fail ×1 | 9. 实测示例：静态 vs 动态分派的语义等价与成本边界（2026-07-12… · ⚠️ 反例与陷阱 |
 | [模式选择最佳实践 (Pattern Selection Best Practices)](../../06_ecosystem/03_design_patterns/10_pattern_selection_best_practices.md) | 示例/反例节 ×4 · compile_fail ×1 | 4. 反模式与陷阱 · 组合示例：HTTP客户端 |
-| [形式化设计模式理论 (Formal Design Pattern Theory)](../../06_ecosystem/03_design_patterns/11_formal_design_pattern_theory.md) | 示例/反例节 ×2 · compile_fail ×1 | ⚠️ 反例与陷阱 · 反例：typestate 令牌被消费两次（rustc 1.97.0 实测） |
+| [形式化设计模式理论 (Formal Design Pattern Theory)](../../04_formal/00_type_theory/11_formal_design_pattern_theory.md) | 示例/反例节 ×2 · compile_fail ×1 | ⚠️ 反例与陷阱 · 反例：typestate 令牌被消费两次（rustc 1.97.0 实测） |
 | [前沿研究与创新模式 (Frontier Research and Innovative Patterns)](../../06_ecosystem/03_design_patterns/12_frontier_research_and_innovative_patterns.md) | 示例/反例节 ×2 · compile_fail ×1 | ⚠️ 反例与陷阱 · 反例：原生 `async fn` trait 不能做成 trait objec… |
 | [工程实践与生产级模式](../../06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md) | 示例/反例节 ×2 | ⚠️ 反例与陷阱 · 反例：`todo!()` 进入生产代码路径（rustc 1.97.0 实测） |
-| [模式组合代数：设计模式的结构化关联与冲突分析](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) | 示例/反例节 ×8 · compile_fail ×1 | 反例与边界测试 · 反例：Singleton + DI 的冲突 |
+| [模式组合代数：设计模式的结构化关联与冲突分析](../../04_formal/00_type_theory/12_pattern_composition_algebra.md) | 示例/反例节 ×8 · compile_fail ×1 | 反例与边界测试 · 反例：Singleton + DI 的冲突 |
 | [Workflow Theory & Formalization](../../06_ecosystem/03_design_patterns/17_workflow_theory.md) | 示例/反例节 ×4 · compile_fail ×1 | 边界测试 · 边界测试：状态机转换遗漏导致死代码（编译/逻辑错误） |
 | [API Design Patterns](../../06_ecosystem/03_design_patterns/18_api_design_patterns.md) | 示例/反例节 ×6 · compile_fail ×1 | 边界测试 · 边界测试：GraphQL N+1 查询导致数据库过载（运行时性能） |
 | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/01_distributed_systems.md) | 示例/反例节 ×8 · compile_fail ×3 | 常见陷阱 · 边界测试：分布式系统的编译错误 |

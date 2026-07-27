@@ -10499,8 +10499,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:06_ecosystem/03_design_patterns/11_formal_design_pattern_theory.md",
-      "path": "06_ecosystem/03_design_patterns/11_formal_design_pattern_theory.md",
+      "id": "concept:04_formal/00_type_theory/11_formal_design_pattern_theory.md",
+      "path": "04_formal/00_type_theory/11_formal_design_pattern_theory.md",
       "title": "形式化设计模式理论 (Formal Design Pattern Theory)",
       "en": "Formal Design Pattern Theory",
       "summary": "Formal foundations of design patterns: type theory, category theory, Curry-Howard correspondence, linear/affine types, session types, algebraic data types, and verification practice with Kani.",
@@ -10622,8 +10622,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md",
-      "path": "06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md",
+      "id": "concept:04_formal/00_type_theory/12_pattern_composition_algebra.md",
+      "path": "04_formal/00_type_theory/12_pattern_composition_algebra.md",
       "title": "",
       "en": "Design Patterns",
       "summary": "Design Patterns: Rust ecosystem tools, crates, and engineering practices.",
@@ -12227,8 +12227,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:06_ecosystem/11_domain_applications/12_formal_algorithm_theory.md",
-      "path": "06_ecosystem/11_domain_applications/12_formal_algorithm_theory.md",
+      "id": "concept:04_formal/00_type_theory/13_formal_algorithm_theory.md",
+      "path": "04_formal/00_type_theory/13_formal_algorithm_theory.md",
       "title": "",
       "en": "Formal Algorithm Theory",
       "summary": "Mathematical foundations of algorithms in Rust: computability, complexity, loop invariants, Hoare logic, and practical formal verification with Kani.",

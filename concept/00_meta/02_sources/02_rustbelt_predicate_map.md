@@ -1,6 +1,6 @@
-# RustBelt 谓词映射图（RustBelt Predicate Map）
+# RustBelt 谓词映射图
 >
-> **EN**: RustBelt
+> **EN**: RustBelt Predicate Map
 > **Summary**: RustBelt — A visual map from RustBelt's own and shr predicates to L1-L3 engineering concepts, bridging symbols and code intuition.
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)

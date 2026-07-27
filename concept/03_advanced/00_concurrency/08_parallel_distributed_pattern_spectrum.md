@@ -16,7 +16,7 @@
 > [Traits](../../02_intermediate/00_traits/01_traits.md) ·
 > [Distributed Systems](../../06_ecosystem/04_web_and_networking/01_distributed_systems.md)
 > **后置概念**:
-> [Pattern Composition Algebra](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) ·
+> [Pattern Composition Algebra](../../04_formal/00_type_theory/12_pattern_composition_algebra.md) ·
 > [System Design Principles](../../06_ecosystem/03_design_patterns/03_system_design_principles.md)
 > **主要来源**:
 > · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) ·

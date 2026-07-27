@@ -17,4 +17,4 @@
 | 设计模式总览 | [concept/06_ecosystem/03_design_patterns/01_patterns.md](../../../concept/06_ecosystem/03_design_patterns/01_patterns.md) |
 | 并发模式 | [concept/03_advanced/00_concurrency/03_concurrency_patterns.md](../../../concept/03_advanced/00_concurrency/03_concurrency_patterns.md) |
 | 异步模式 | [concept/03_advanced/01_async/03_async_patterns.md](../../../concept/03_advanced/01_async/03_async_patterns.md) |
-| 形式化设计模式理论 | [concept/06_ecosystem/03_design_patterns/11_formal_design_pattern_theory.md](../../../concept/06_ecosystem/03_design_patterns/11_formal_design_pattern_theory.md) |
+| 形式化设计模式理论 | [concept/04_formal/00_type_theory/11_formal_design_pattern_theory.md](../../../concept/04_formal/00_type_theory/11_formal_design_pattern_theory.md) |

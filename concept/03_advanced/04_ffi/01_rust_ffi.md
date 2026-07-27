@@ -2,7 +2,7 @@
 
 # Rust FFI：与外部代码的安全边界
 >
-> **EN**: Foreign Function Interface (FFI)
+> **EN**: Rust FFI
 > **Summary**: Foreign Function Interface (FFI) — Extern blocks, ABI compatibility, unsafe boundary management, and the bindgen/cbindgen tooling.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **📎 交叉引用（Reference）**

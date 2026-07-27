@@ -2,7 +2,7 @@
 
 # 测验：所有权、借用与生命周期（试点）
 >
-> **EN**: Ownership
+> **EN**: Ownership, Borrowing and Lifetimes (Quiz)
 > **Summary**: Ownership — An interactive quiz checking ownership, borrowing, and lifetime fundamentals.
 >
 > ```rust,compile_fail

@@ -1,17 +1,17 @@
 # 元数据一致性基线（语义质量门 P0-1）
 
-**日期**: 2026-07-28  **扫描**: 550 concept 活跃文件（排除 archive）  **模式**: strict
+**日期**: 2026-07-28  **扫描**: 553 concept 活跃文件（排除 archive）  **模式**: strict
 
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
-| D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥 | 1 | 0.2% | >0 | FAIL |
-| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 10 (基=347) | 1.8% | >=5% | pass |
+| D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥 | 0 | 0.0% | >0 | pass |
+| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 0 (基=347) | 0.0% | >=5% | pass |
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
 | D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
 | D6 Summary 低信息量模板套话 | 0 | 0.0% | >=3% | pass |
 
-**受影响文件总数**: 10 / 550
+**受影响文件总数**: 0 / 553
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -19,6 +19,7 @@
 
 - `concept/00_meta/04_navigation/13_foundations_gap_closure_index.md` — L0 导航索引页，无概念正文，A/S/P 内容分级不适用
 - `concept/07_future/02_preview_features/33_autoverus_preview.md` — L7 预览跟踪页（非概念权威页），A/S/P 描述被跟踪对象属性
+- `concept/00_meta/01_terminology/03_bilingual_template.md` — L0 双语模板文件，A/S/P=A 为模板示例占位，不适用概念页分级规则
 
 ### D5 稳定层 nightly/preview 豁免
 
@@ -102,22 +103,11 @@
 
 ## 各类 Top 样例
 
-### D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥（1）
+### D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥（0）
 
-- `concept/06_ecosystem/11_domain_applications/12_formal_algorithm_theory.md` — Bloom [5, 6] 与 层次定位/层级 [4] 无交集
 
-### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（10）
+### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（0）
 
-- `concept/00_meta/01_terminology/03_bilingual_template.md` — A/S/P=A 允许 [1, 2] 与 Bloom [0] 无交集
-- `concept/03_advanced/02_unsafe/09_sanitizers.md` — A/S/P=A 允许 [1, 2] 与 Bloom [3, 4] 无交集
-- `concept/06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md` — A/S/P=A 允许 [1, 2] 与 Bloom [5, 6] 无交集
-- `concept/06_ecosystem/04_web_and_networking/04_http_client_development.md` — A/S/P=A 允许 [1, 2] 与 Bloom [5, 6] 无交集
-- `concept/06_ecosystem/11_domain_applications/09_data_structures_in_rust.md` — A/S/P=A 允许 [1, 2] 与 Bloom [5, 6] 无交集
-- `concept/06_ecosystem/11_domain_applications/10_algorithm_complexity_analysis.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
-- `concept/06_ecosystem/11_domain_applications/11_cutting_edge_algorithms.md` — A/S/P=A 允许 [1, 2] 与 Bloom [5, 6] 无交集
-- `concept/06_ecosystem/11_domain_applications/12_formal_algorithm_theory.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
-- `concept/06_ecosystem/12_networking/02_network_security.md` — A/S/P=A 允许 [1, 2] 与 Bloom [5, 6] 无交集
-- `concept/06_ecosystem/12_networking/03_custom_protocol_implementation.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
 
 ### D3 关键字段同文件重声明（0）
 
@@ -133,7 +123,7 @@
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 
-- D1 Bloom互斥 1 (>0)
+- 无（全部通过）
 
 ## 机器可读
 

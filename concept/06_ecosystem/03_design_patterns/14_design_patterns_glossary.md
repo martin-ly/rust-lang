@@ -9,7 +9,7 @@
 > **双维定位**: S×Mem — 设计模式术语索引
 > **前置依赖**: [Design Patterns](01_patterns.md) · [Pattern Implementation Comparison](09_pattern_implementation_comparison.md)
 > **相关概念**: [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md) — GoF 术语的范式归属 · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) — 同一模式术语在 C++ 与 Rust 中的语义差异
-> **后置概念**: [Pattern Selection Best Practices](10_pattern_selection_best_practices.md) · [Formal Design Pattern Theory](11_formal_design_pattern_theory.md)
+> **后置概念**: [Pattern Selection Best Practices](10_pattern_selection_best_practices.md) · [Formal Design Pattern Theory](../../04_formal/00_type_theory/11_formal_design_pattern_theory.md)
 > **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency
 >
 > **权威来源**: 本页为 `Design Patterns Glossary` 的权威概念页；crate 文档仅保留导航 stub。
@@ -70,7 +70,7 @@
 | **结构型** | Adapter | `From` / `Deref` / wrapper | [Design Patterns](01_patterns.md) |
 | | Bridge | trait + 组合替代继承 | [Architecture Patterns](08_architecture_patterns.md) |
 | | Composite | enum + 递归结构 | [Design Patterns](01_patterns.md) |
-| | Decorator | 泛型（Generics）包装 / `Deref` | [Formal Design Pattern Theory](11_formal_design_pattern_theory.md) |
+| | Decorator | 泛型（Generics）包装 / `Deref` | [Formal Design Pattern Theory](../../04_formal/00_type_theory/11_formal_design_pattern_theory.md) |
 | | Facade | 模块（Module）级 API 封装 | [System Design Principles](03_system_design_principles.md) |
 | | Flyweight | `Arc` + 共享不可变数据 | [Pattern Implementation Comparison](09_pattern_implementation_comparison.md) |
 | | Proxy | trait object / 生命周期（Lifetimes）守卫 | [Design Patterns](01_patterns.md) |
@@ -79,7 +79,7 @@
 | | State | enum + `match` / Typestate | [Design Patterns](01_patterns.md) |
 | | Command | trait + `Vec<Box<dyn Command>>` | [Design Patterns](01_patterns.md) |
 | | Chain of Responsibility | `Iterator` + `and_then` | [Design Patterns](01_patterns.md) |
-| | Iterator | `Iterator` trait / GATs | [Formal Design Pattern Theory](11_formal_design_pattern_theory.md) |
+| | Iterator | `Iterator` trait / GATs | [Formal Design Pattern Theory](../../04_formal/00_type_theory/11_formal_design_pattern_theory.md) |
 | | Template Method | trait 默认实现 | [Design Patterns](01_patterns.md) |
 | | Visitor | trait + enum `accept` | [Design Patterns](01_patterns.md) |
 | | Mediator | 消息通道 / Actor | [Microservice Patterns](05_microservice_patterns.md) |

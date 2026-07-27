@@ -1,8 +1,8 @@
-# Design Patterns（设计模式）
+# 设计模式概览
 
 > **代码状态**: ✅ 含可编译示例
 >
-> **EN**: Design Patterns
+> **EN**: Design Patterns Overview
 > **Summary**: Design Patterns. Guide to 02 Patterns.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]

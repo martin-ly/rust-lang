@@ -1,9 +1,9 @@
 > **内容分级**: [专家级]
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 
-# Rust 安全保证的边界条件全景（Safety Boundary Panorama）
+# Rust 安全保证的边界条件全景
 >
-> **EN**: Security Practices
+> **EN**: Safety Boundaries
 > **Summary**: Security Practices — A panorama of the boundary conditions, failure cases, and counterexamples of Rust's compile-time safety guarantees.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]

@@ -2,7 +2,7 @@
 
 # Hoare 逻辑：程序验证的形式化基础与 Rust 契约
 >
-> **EN**: Formal Methods
+> **EN**: Hoare Logic
 > **Summary**: Formal Methods — Hoare logic: pre/postconditions, loop invariants, and weakest preconditions as a basis for Rust contracts and verification.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]

@@ -62,12 +62,12 @@
 | L0 元信息层 | [Rust 知识体系全局思维导图](../../00_meta/00_framework/knowledge_mindmap.md) | L3 高级概念层 | [Async/Await](../../03_advanced/01_async/01_async.md) | 相关概念节 |
 | L0 元信息层 | [模式语义空间索引：设计模式在概念体系中的坐标](../../00_meta/00_framework/pattern_semantic_space_index.md) | L1 基础概念层 | [Type System Basics](../../01_foundation/02_type_system/01_type_system.md) | 前置概念 |
 | L0 元信息层 | [模式语义空间索引：设计模式在概念体系中的坐标](../../00_meta/00_framework/pattern_semantic_space_index.md) | L6 生态工程层 | [Design Patterns](../../06_ecosystem/03_design_patterns/01_patterns.md) | 前置概念 |
-| L0 元信息层 | [模式语义空间索引：设计模式在概念体系中的坐标](../../00_meta/00_framework/pattern_semantic_space_index.md) | L6 生态工程层 | [模式组合代数：设计模式的结构化关联与冲突分析](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) | 后置概念 |
+| L0 元信息层 | [模式语义空间索引：设计模式在概念体系中的坐标](../../00_meta/00_framework/pattern_semantic_space_index.md) | L6 生态工程层 | [模式组合代数：设计模式的结构化关联与冲突分析](../../04_formal/00_type_theory/12_pattern_composition_algebra.md) | 后置概念 |
 | L0 元信息层 | [通用 PL 基座路线图：Rust 在编程语言坐标系中的位置](../../00_meta/00_framework/pl_foundations_roadmap.md) | L1 基础概念层 | [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 前置概念 |
 | L0 元信息层 | [通用 PL 基座路线图：Rust 在编程语言坐标系中的位置](../../00_meta/00_framework/pl_foundations_roadmap.md) | L1 基础概念层 | [Type System Basics](../../01_foundation/02_type_system/01_type_system.md) | 前置概念 |
 | L0 元信息层 | [语义桥：算法、设计模式与工作流模式的统一谱系](../../00_meta/00_framework/semantic_bridge_algorithms_patterns.md) | L3 高级概念层 | [并行与分布式模式谱系：从线程池到共识算法](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) | 后置概念 |
 | L0 元信息层 | [语义桥：算法、设计模式与工作流模式的统一谱系](../../00_meta/00_framework/semantic_bridge_algorithms_patterns.md) | L6 生态工程层 | [Design Patterns](../../06_ecosystem/03_design_patterns/01_patterns.md) | 前置概念 |
-| L0 元信息层 | [语义桥：算法、设计模式与工作流模式的统一谱系](../../00_meta/00_framework/semantic_bridge_algorithms_patterns.md) | L6 生态工程层 | [模式组合代数：设计模式的结构化关联与冲突分析](../../06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md) | 后置概念 |
+| L0 元信息层 | [语义桥：算法、设计模式与工作流模式的统一谱系](../../00_meta/00_framework/semantic_bridge_algorithms_patterns.md) | L6 生态工程层 | [模式组合代数：设计模式的结构化关联与冲突分析](../../04_formal/00_type_theory/12_pattern_composition_algebra.md) | 后置概念 |
 | L0 元信息层 | [语义桥：算法、设计模式与工作流模式的统一谱系](../../00_meta/00_framework/semantic_bridge_algorithms_patterns.md) | L6 生态工程层 | [算法与竞赛编程 (Algorithms & Competitive Programming)](../../06_ecosystem/11_domain_applications/07_algorithms_competitive_programming.md) | 前置概念 |
 | L0 元信息层 | [Rust Semantic Expressiveness: A Panoramic Survey](../../00_meta/00_framework/semantic_expressiveness.md) | L4 形式化理论层 | [RustBelt & Verification Toolchain](../../04_formal/02_separation_logic/01_rustbelt.md) | 相关概念节 |
 | L0 元信息层 | [Rust Semantic Expressiveness: A Panoramic Survey](../../00_meta/00_framework/semantic_expressiveness.md) | L5 对比分析层 | [Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证>](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) | 相关概念节 |

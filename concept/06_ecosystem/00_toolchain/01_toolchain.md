@@ -8,11 +8,11 @@
 
 ---
 
-# Toolchain（工具链与 Cargo）
+# 工具链与 Cargo
 
 > **代码状态**: ✅ 含可编译示例
 >
-> **EN**: Toolchain
+> **EN**: Toolchain and Cargo
 > **Summary**: Toolchain. Guide to 01 Toolchain.
 > **受众**: [进阶]
 > **内容分级**: [综述级]

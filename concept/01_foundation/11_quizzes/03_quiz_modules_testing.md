@@ -2,7 +2,7 @@
 
 # 测验：模块系统与测试（L1 试点扩展）
 >
-> **EN**: Modules
+> **EN**: Modules and Testing (Quiz)
 > **Summary**: Modules — An interactive quiz checking L1 modules (packages, crates, visibility, paths) and testing fundamentals.
 > **受众**: [初学者]
 > **Rust 版本**: 1.97.0+ (Edition 2024)

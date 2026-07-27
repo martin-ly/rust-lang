@@ -2,7 +2,7 @@
 
 # 测验：Trait 与泛型（试点扩展）
 >
-> **EN**: Generics
+> **EN**: Traits and Generics (Quiz)
 > **Summary**: Generics — An interactive quiz checking L2 traits and generics: definitions, bounds, associated types, and trait objects.
 >
 > ```rust,compile_fail

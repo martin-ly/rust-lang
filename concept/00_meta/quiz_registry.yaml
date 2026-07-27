@@ -862,7 +862,7 @@ embedded_quizzes:
     blocks: 5
   - path: concept/06_ecosystem/03_design_patterns/08_architecture_patterns.md
     blocks: 5
-  - path: concept/06_ecosystem/03_design_patterns/16_pattern_composition_algebra.md
+  - path: concept/04_formal/00_type_theory/12_pattern_composition_algebra.md
     blocks: 5
   - path: concept/06_ecosystem/03_design_patterns/17_workflow_theory.md
     blocks: 5

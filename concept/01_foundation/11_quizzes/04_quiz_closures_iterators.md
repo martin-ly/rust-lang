@@ -2,7 +2,7 @@
 
 # 测验：闭包与迭代器（L1 试点扩展）
 >
-> **EN**: Closures
+> **EN**: Closures and Iterators (Quiz)
 > **Summary**: Closures — An interactive quiz checking closures (capture, Fn traits, move) and iterators (adapters, consumers, laziness).
 > **受众**: [初学者]
 > **Rust 版本**: 1.97.0+ (Edition 2024)

@@ -13,7 +13,7 @@
 
 > **代码状态**: ✅ 含可编译示例
 >
-> **EN**: WebAssembly
+> **EN**: Rust for WebAssembly Research
 > **Summary**: WebAssembly — Rust for WebAssembly: wasm-bindgen/wasm-pack, Yew/Leptos, the compile model, JS interop, and performance trade-offs.
 >
 > **受众**: [专家]
