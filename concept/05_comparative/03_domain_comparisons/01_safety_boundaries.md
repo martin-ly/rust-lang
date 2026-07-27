@@ -724,7 +724,7 @@ Rust 的内存模型（基于 C++11）假设编译器和 CPU 遵循特定的排�
 
 > **定理**：Rust 的 `AtomicOrdering` 是**语言级抽象**，与硬件实际排序能力之间存在 gaps。正确使用 `Acquire`/`Release` 在 x86 和 ARM 上都安全，但在 ARM 上生成的代码会插入更多屏障（性能成本更高）。
 > **来源**:
-> [Rust Reference: Memory Model](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rust Reference: Memory Model](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) ·
 > [LLVM Memory Model] ·
 > [Herlihy & Shavit: The Art of Multiprocessor Programming] ·
 > [Wikipedia: Memory ordering](https://en.wikipedia.org/wiki/Memory_ordering)

@@ -17,9 +17,9 @@
 > **全局对应**: 本页是 [安全边界全景](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md) 在 async 域的纵深展开；unsafe 域的对应页为 [Unsafe 边界全景](../02_unsafe/02_unsafe_boundary_panorama.md)。
 >
 > **来源**:
-> [Rust Async Book](https://rust-lang.github.io/async-book/) ·
+> [Rust Async Book](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html) ·
 > [Tokio docs](https://docs.rs/tokio/latest/tokio/) ·
-> [Rust Reference — Async blocks](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rust Reference — Async blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks) ·
 > [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)
 
 **变更日志**:
@@ -74,7 +74,7 @@
 
 ## 一、权威定义
 
-> **[Rust Async Book — async/await](https://rust-lang.github.io/async-book/)**: `async` transforms a block of code into a state machine that implements the `Future` trait; each `.await` is a point where control may be yielded back to the executor.
+> **[Rust Async Book — async/await](https://rust-lang.github.io/async-book/01_getting_started/04_async_await_primer.html)**: `async` transforms a block of code into a state machine that implements the `Future` trait; each `.await` is a point where control may be yielded back to the executor.
 > **来源**: <https://rust-lang.github.io/async-book/>
 > **[Tokio docs — Cancellation safety](https://docs.rs/tokio/latest/tokio/macro.select.html#cancellation-safety)**: To determine whether your own methods are cancellation safe, look for `.await` and consider what state is lost if the future is dropped at that point.
 > **来源**: <https://docs.rs/tokio/latest/tokio/macro.select.html#cancellation-safety>
@@ -521,7 +521,7 @@ flowchart TD
 
 ## 权威来源索引
 
-- **P0 官方**: [Rust Async Book](https://rust-lang.github.io/async-book/) · [Tokio docs — select! Cancellation safety](https://docs.rs/tokio/latest/tokio/macro.select.html#cancellation-safety) · [std::pin](https://doc.rust-lang.org/std/pin/index.html) · [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html)
+- **P0 官方**: [Rust Async Book](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html) · [Tokio docs — select! Cancellation safety](https://docs.rs/tokio/latest/tokio/macro.select.html#cancellation-safety) · [std::pin](https://doc.rust-lang.org/std/pin/index.html) · [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html)
 - **P1 学术**: [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)（λ_Rust 对 Pin/UnsafeCell 的建模）
 - **P2 生态**: [withoutboats — Asynchronous Clean-up](https://without.boats/blog/asynchronous-clean-up/) · [async-trait crate](https://docs.rs/async-trait/latest/async_trait/)
 

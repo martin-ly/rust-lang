@@ -22,7 +22,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024) · Tokio 1.x
 > **来源**:
 > [Tokio docs — `select!` Cancellation safety](https://docs.rs/tokio/latest/tokio/macro.select.html#cancellation-safety) ·
-> [Rust Async Book — Cancellation](https://rust-lang.github.io/async-book/) ·
+> [Rust Async Book — Cancellation](https://rust-lang.github.io/async-book/06_multiple_futures/01_chapter.html) ·
 > [withoutboats — Asynchronous Clean-up](https://without.boats/blog/asynchronous-clean-up/) ·
 > [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)
 > **对应 Crate**: [`c06_async`](../../crates/c06_async)
@@ -485,7 +485,7 @@ Future 被 drop 时，其状态机内活跃局部变量按**声明逆序**析构
 ## 九、来源
 
 - [Tokio docs — `tokio::select!`：Cancellation safety 章节](https://docs.rs/tokio/latest/tokio/macro.select.html#cancellation-safety)（方法级 cancel safe 约定的权威表述，以及各 API 文档中的 cancel-safety 标注）
-- [Rust Async Book — Cancellation / `FuturesUnordered`](https://rust-lang.github.io/async-book/)（取消语义与组合子行为）
+- [Rust Async Book — Cancellation / `FuturesUnordered`](https://rust-lang.github.io/async-book/06_multiple_futures/01_chapter.html)（取消语义与组合子行为）
 - [withoutboats — Asynchronous Clean-up](https://without.boats/blog/asynchronous-clean-up/) 及其异步系列博文（取消、清理与 async drop 的设计动机）
 - [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)（Future 惰性状态机与 drop 语义基础）
 - [Lagaillardie, Neykova & Yoshida: Stay Safe Under Panic — Affine Rust Programming with Multiparty Session Types（ECOOP 2022 全文, arXiv:2204.13464）](https://arxiv.org/abs/2204.13464)（P1 学术：Rust 取消/恐慌安全的会话类型形式化，2026-07-12 验证 HTTP 200）

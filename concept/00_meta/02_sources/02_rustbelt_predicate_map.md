@@ -8,7 +8,7 @@
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 本文件将 RustBelt（Jung et al., POPL 2018）中的核心形式化谓词——**所有权谓词 `own(τ)`** 和 **共享谓词 `shr(κ, ℓ)`**——可视化映射到 Rust 的 L1-L3 工程概念，建立"数学符号 ↔ 代码直觉"的双向桥梁。
-> **对齐来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Iris 分离逻辑教程] · [O'Hearn — Separation Logic] · [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/introduction.html)
+> **对齐来源**: [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Iris 分离逻辑教程] · [O'Hearn — Separation Logic] · [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
@@ -17,11 +17,11 @@
 >
 > **来源**: [Iris 教程 — https://iris-project.org/]
 > **来源**: [O'Hearn, P.W. — *Separation Logic*. Communications of the ACM, 2019]
-> **来源**: [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/introduction.html)
+> **来源**: [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
 
 ## 📑 目录
 
-- [RustBelt 谓词映射图（RustBelt Predicate Map）](#rustbelt-谓词映射图rustbelt-predicate-map)
+- [RustBelt 谓词映射图](#rustbelt-谓词映射图)
   - [📑 目录](#-目录)
   - [〇、谓词映射认知全景](#〇谓词映射认知全景)
   - [一、RustBelt 核心谓词定义](#一rustbelt-核心谓词定义)

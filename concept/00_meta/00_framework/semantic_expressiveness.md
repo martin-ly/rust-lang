@@ -252,7 +252,7 @@ Rust 的常量求值器（const evaluator）是 MIR 解释器的一个子集，*
 | Trait 动态分发 (`dyn`) | ❌ | ✅ | vtable 是运行时构造 |
 | 递归类型构造 | ⚠️ 受限 | ✅ | 防止编译期无限展开 |
 
-> **来源**: [Rust Reference: Constant Evaluation](https://doc.rust-lang.org/reference/introduction.html) · [RFC 2344: const_loop](https://github.com/rust-lang/rfcs/pull/2344) · [Rust Internals: const eval limitations]
+> **来源**: [Rust Reference: Constant Evaluation](https://doc.rust-lang.org/reference/const_evaluation.html) · [RFC 2344: const_loop](https://github.com/rust-lang/rfcs/pull/2344) · [Rust Internals: const eval limitations]
 
 ### 3.4 与四语言对比
 
@@ -278,7 +278,7 @@ Rust 的常量求值器（const evaluator）是 MIR 解释器的一个子集，*
   超限 → 编译错误（非运行时错误）
 ```
 
-> **来源**: [Rust Reference: Constant Evaluation — Query cycles](https://doc.rust-lang.org/reference/introduction.html) · [Rust Internals: const eval step limit]
+> **来源**: [Rust Reference: Constant Evaluation — Query cycles](https://doc.rust-lang.org/reference/const_evaluation.html) · [Rust Internals: const eval step limit]
 
 ### 3.6 映射到 L0-L7
 
@@ -324,7 +324,7 @@ Rust 类型系统能编码什么不变式？它能表达哪些其他语言用不
 | **子类型** | `'a: 'b`（生命周期） | 结构子类型 | ✅ 无运行时 | 仅生命周期；无数据子类型 |
 | **递归类型** | `enum List { Cons(T, Box<List>) }` | μα.τ | ⚠️ 需 `Box` 解除 | 无无限大小类型 |
 
-> **来源**: [Rust Reference: Types](https://doc.rust-lang.org/reference/introduction.html) · [Pierce 2002 TAPL Ch.23-24] · [RFC 1210: impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html) · [RFC 1598: GATs](https://github.com/rust-lang/rfcs/pull/1598)
+> **来源**: [Rust Reference: Types](https://doc.rust-lang.org/reference/types.html) · [Pierce 2002 TAPL Ch.23-24] · [RFC 1210: impl Trait](https://doc.rust-lang.org/reference/types/impl-trait.html) · [RFC 1598: GATs](https://github.com/rust-lang/rfcs/pull/1598)
 
 ### 4.4 刻意缺失的类型特性
 
@@ -458,7 +458,7 @@ Rust 如何表达计算的控制结构？从结构化控制到异常处理到异
   无调度器开销（仅在 .await 点让出）
 ```
 
-> **来源**: [without.boats blog: Zero-cost async] · [Rust Reference: Async blocks](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [without.boats blog: Zero-cost async] · [Rust Reference: Async blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
 ### 5.7 映射到 L0-L7
 
@@ -505,7 +505,7 @@ Rust 如何表达内存布局、生命周期、所有权转移和内部可变性
 | **裸指针** | `*const T` | 无所有权 | 手动管理 | ✅ | 无形式化保证 |
 | **Pin（不动性）** | `Pin<P<T>>` | 地址不变 | 直到 drop | ✅ | LTL `□addr_stable` |
 
-> **来源**: [Rust Reference: Memory model](https://doc.rust-lang.org/reference/introduction.html) · [Rustonomicon: Ownership](https://doc.rust-lang.org/nomicon/index.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Rust Reference: Memory model](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [Rustonomicon: Ownership](https://doc.rust-lang.org/nomicon/ownership.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
 ### 6.4 内存模型的形式化分层
 
@@ -527,7 +527,7 @@ L3: 机器内存模型（LLVM）
 关键保证: L1 ⟹ L2 ⟹ L3，安全 Rust 代码在三层模型中行为一致
 ```
 
-> **来源**: [Rust Reference: Memory model](https://doc.rust-lang.org/reference/introduction.html) · [Jung et al. POPL 2019 — Stacked Borrows] · [Pichon-Pharabod & Dreyer — Tree Borrows]
+> **来源**: [Rust Reference: Memory model](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [Jung et al. POPL 2019 — Stacked Borrows] · [Pichon-Pharabod & Dreyer — Tree Borrows]
 
 ### 6.5 与四语言对比
 
@@ -607,7 +607,7 @@ Rust 如何表达并发和并行？从共享状态到消息传递到数据并行
 | **`tokio::spawn`** | 协作式多任务 | `Future: Send` | 状态机调度 | I/O 密集型并发 |
 | **`std::thread`** | OS 线程 | 闭包 `Send` | 1.7μs 上下文切换 | CPU 密集型并行 |
 
-> **来源**: [Rust Reference: Send and Sync](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Rayon Documentation] · [Tokio Documentation](https://tokio.rs/)
+> **来源**: [Rust Reference: Send and Sync](https://doc.rust-lang.org/reference/special-types-and-traits.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Rayon Documentation] · [Tokio Documentation](https://tokio.rs/)
 
 ### 7.4 Send/Sync：并发安全的类型系统编码
 
@@ -632,7 +632,7 @@ unsafe impl Sync for MyType {}   // MyType 可跨线程共享引用（&MyType: S
 | `Mutex<T>` | ✅（若 `T: Send`） | ✅（若 `T: Send`） | 锁保护内部可变性 |
 | `*const T` | ✅（若 `T: Sync`） | ✅（若 `T: Sync`） | 裸指针无自动实现 |
 
-> **来源**: [Rust Reference: Auto traits](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Rust Reference: Auto traits](https://doc.rust-lang.org/reference/special-types-and-traits.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
 ### 7.5 与四语言对比
 
@@ -709,7 +709,7 @@ Rust 如何组合代码、隐藏实现细节、创建可复用抽象？从函数
 | **Type Alias** | 语义等价 | 实现细节暴露 | ✅ | 无 |
 | **Newtype** | 包装 + Deref | 完全隐藏内部 | ✅ | 无 |
 
-> **来源**: [Rust Reference: Macros](https://doc.rust-lang.org/reference/introduction.html) · [Rust Reference: Items](https://doc.rust-lang.org/reference/introduction.html) · [RFC 1584: macros 2.0](https://rust-lang.github.io/rfcs/1584-macros.html)
+> **来源**: [Rust Reference: Macros](https://doc.rust-lang.org/reference/macros.html) · [Rust Reference: Items](https://doc.rust-lang.org/reference/introduction.html) · [RFC 1584: macros 2.0](https://rust-lang.github.io/rfcs/1584-macros.html)
 
 ### 8.4 元编程表达力：宏系统
 
@@ -803,7 +803,7 @@ safe Rust ──→ unsafe 块 ──→ FFI ──→ 外部世界
 | **终止性** | ❌ 不保证 | ❌ 不保证 | ❌ 不保证 | ❌ 不保证 |
 | **无副作用** | ❌ 不保证 | ❌ 不保证 | ❌ 不保证 | ❌ 不保证 |
 
-> **来源**: [Rust Reference: Unsafety](https://doc.rust-lang.org/reference/introduction.html) · [Rustonomicon: What Unsafe Can Do](https://doc.rust-lang.org/nomicon/index.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**: [Rust Reference: Unsafety](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Rustonomicon: What Unsafe Can Do](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
 ### 9.4 未定义行为（UB）分类
 

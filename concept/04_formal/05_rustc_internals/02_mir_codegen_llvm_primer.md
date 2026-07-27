@@ -63,6 +63,7 @@
   - [一、什么是 MIR](#一什么是-mir)
   - [二、MIR → Codegen → LLVM IR 流水线](#二mir--codegen--llvm-ir-流水线)
     - [2.1 关键查询节点](#21-关键查询节点)
+    - [2.2 常见 MIR 优化与 passes](#22-常见-mir-优化与-passes)
   - [三、如何查看 MIR：`rustc --emit=mir`](#三如何查看-mirrustc---emitmir)
   - [四、如何查看 LLVM IR：`rustc --emit=llvm-ir`](#四如何查看-llvm-irrustc---emitllvm-ir)
   - [五、最小 annotated 示例](#五最小-annotated-示例)
@@ -154,6 +155,22 @@ graph LR
 > **定理**: 每个泛型（Generics）函数在 `optimized_mir` 阶段仍是泛型的；真正的单态化发生在 codegen 阶段，由 `Instance::mono` 等机制驱动。
 >
 > [Rustc Dev Guide — Monomorphization](https://rustc-dev-guide.rust-lang.org/overview.html)
+
+### 2.2 常见 MIR 优化与 passes
+
+`optimized_mir` 阶段运行一组 MIR-level passes，主要包括：
+
+| Pass / 概念 | 作用 | 示例 |
+|:---|:---|:---|
+| `StorageLive` / `StorageDead` | 标记局部变量的活跃区间，辅助栈帧布局与 drop 展开 | `StorageLive(_1); ...; StorageDead(_1)` |
+| Drop elaboration | 将高层的 `drop` 语义展开为显式的 `Drop` trait 调用与条件判断 | `if needs_drop::<T> { core::ptr::drop_in_place(...) }` |
+| Const prop / SimplifyCFG | 常量传播、死分支消除、基本块合并 | 将 `if true { a } else { b }` 简化为 `a` |
+| Dataflow analyses | 到达定义、活跃变量、借用状态等数据流分析 | 为后续优化与 borrowck 提供事实 |
+| Inlining | 将小函数 MIR body 内联到调用点 | 减少函数调用开销 |
+
+> 提示：`-Zmir-opt-level=N`（nightly）可控制 MIR 优化等级；稳定工具链默认等级已足够日常检查。
+>
+> [Rustc Dev Guide — MIR Optimizations](https://rustc-dev-guide.rust-lang.org/mir/optimizations.html)
 
 ---
 

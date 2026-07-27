@@ -27,23 +27,22 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # 被认定为「首页」的 URL 模式，以及对应的权威来源名称
 HOMEPAGE_PATTERNS = [
     # (regex, authority_name, suggested_root_for_contextual_fixup)
-    (re.compile(r"https?://doc\.rust-lang\.org/reference/introduction\.html"), "Rust Reference", "https://doc.rust-lang.org/reference/"),
-    (re.compile(r"https?://doc\.rust-lang\.org/reference/index\.html"), "Rust Reference", "https://doc.rust-lang.org/reference/"),
+    (re.compile(r"https?://doc\.rust-lang\.org/reference/introduction\.html$"), "Rust Reference", "https://doc.rust-lang.org/reference/"),
+    (re.compile(r"https?://doc\.rust-lang\.org/reference/index\.html$"), "Rust Reference", "https://doc.rust-lang.org/reference/"),
     (re.compile(r"https?://doc\.rust-lang\.org/reference/?$"), "Rust Reference", "https://doc.rust-lang.org/reference/"),
-    (re.compile(r"https?://doc\.rust-lang\.org/nomicon/index\.html"), "Rustonomicon", "https://doc.rust-lang.org/nomicon/"),
+    (re.compile(r"https?://doc\.rust-lang\.org/nomicon/index\.html$"), "Rustonomicon", "https://doc.rust-lang.org/nomicon/"),
     (re.compile(r"https?://doc\.rust-lang\.org/nomicon/?$"), "Rustonomicon", "https://doc.rust-lang.org/nomicon/"),
-    (re.compile(r"https?://doc\.rust-lang\.org/nomicon/\)"), "Rustonomicon", "https://doc.rust-lang.org/nomicon/"),
-    (re.compile(r"https?://doc\.rust-lang\.org/book/title-page\.html"), "TRPL", "https://doc.rust-lang.org/book/"),
-    (re.compile(r"https?://doc\.rust-lang\.org/book/index\.html"), "TRPL", "https://doc.rust-lang.org/book/"),
-    (re.compile(r"https?://doc\.rust-lang\.org/edition-guide/index\.html"), "Rust Edition Guide", "https://doc.rust-lang.org/edition-guide/"),
+    (re.compile(r"https?://doc\.rust-lang\.org/book/title-page\.html$"), "TRPL", "https://doc.rust-lang.org/book/"),
+    (re.compile(r"https?://doc\.rust-lang\.org/book/index\.html$"), "TRPL", "https://doc.rust-lang.org/book/"),
+    (re.compile(r"https?://doc\.rust-lang\.org/edition-guide/index\.html$"), "Rust Edition Guide", "https://doc.rust-lang.org/edition-guide/"),
     (re.compile(r"https?://doc\.rust-lang\.org/edition-guide/?$"), "Rust Edition Guide", "https://doc.rust-lang.org/edition-guide/"),
-    (re.compile(r"https?://doc\.rust-lang\.org/async-book/index\.html"), "Async Book", "https://doc.rust-lang.org/async-book/"),
+    (re.compile(r"https?://doc\.rust-lang\.org/async-book/index\.html$"), "Async Book", "https://doc.rust-lang.org/async-book/"),
     (re.compile(r"https?://doc\.rust-lang\.org/async-book/?$"), "Async Book", "https://doc.rust-lang.org/async-book/"),
-    (re.compile(r"https?://rust-lang\.github\.io/async-book/?"), "Async Book", "https://rust-lang.github.io/async-book/"),
-    (re.compile(r"https?://doc\.rust-lang\.org/rustc-dev-guide/index\.html"), "rustc-dev-guide", "https://doc.rust-lang.org/rustc-dev-guide/"),
-    (re.compile(r"https?://doc\.rust-lang\.org/rustc-dev-guide/introduction\.html"), "rustc-dev-guide", "https://doc.rust-lang.org/rustc-dev-guide/"),
-    (re.compile(r"https?://rustc-dev-guide\.rust-lang\.org/?"), "rustc-dev-guide", "https://rustc-dev-guide.rust-lang.org/"),
-    (re.compile(r"https?://doc\.rust-lang\.org/std/index\.html"), "Rust Standard Library", "https://doc.rust-lang.org/std/"),
+    (re.compile(r"https?://rust-lang\.github\.io/async-book/?$"), "Async Book", "https://rust-lang.github.io/async-book/"),
+    (re.compile(r"https?://doc\.rust-lang\.org/rustc-dev-guide/index\.html$"), "rustc-dev-guide", "https://doc.rust-lang.org/rustc-dev-guide/"),
+    (re.compile(r"https?://doc\.rust-lang\.org/rustc-dev-guide/introduction\.html$"), "rustc-dev-guide", "https://doc.rust-lang.org/rustc-dev-guide/"),
+    (re.compile(r"https?://rustc-dev-guide\.rust-lang\.org/?$"), "rustc-dev-guide", "https://rustc-dev-guide.rust-lang.org/"),
+    (re.compile(r"https?://doc\.rust-lang\.org/std/index\.html$"), "Rust Standard Library", "https://doc.rust-lang.org/std/"),
 ]
 
 # markdown 内联链接 [text](url)

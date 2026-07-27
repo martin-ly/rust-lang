@@ -29,7 +29,7 @@
 > [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
 > [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
 > [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
-> [Rust Reference: Errors](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rust Reference: Errors](https://doc.rust-lang.org/reference/items/functions.html) ·
 > [Wikipedia: Exception handling](https://en.wikipedia.org/wiki/Exception_handling) ·
 > [RFC 243](https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html)
 > (Source: [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html))
@@ -49,7 +49,7 @@
 
 ## 📑 目录
 
-- [Error Handling（错误处理）](#error-handling错误处理)
+- [错误处理进阶](#错误处理进阶)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 Wikipedia 对齐定义](#11-wikipedia-对齐定义)
@@ -353,7 +353,7 @@ graph TD
 ### 4.3 推论：panic ⟹ 不可恢复错误的显式边界
 
 > **[TRPL Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
-> [Rust Reference: panic](https://doc.rust-lang.org/reference/introduction.html)** panic 是 Safe Rust 中显式标记"程序进入不可能状态"的机制。 ✅ 已验证
+> [Rust Reference: panic](https://doc.rust-lang.org/reference/macros.html#panic)** panic 是 Safe Rust 中显式标记"程序进入不可能状态"的机制。 ✅ 已验证
 > **[Wikipedia: Exception handling](https://en.wikipedia.org/wiki/Exception_handling)**
 > Unlike Java/C++ exceptions, Rust's `panic!` is not a general recovery mechanism but an explicit boundary for unrecoverable bugs; recoverable errors use `Result<T, E>`. ✅ 已验证
 

@@ -13,7 +13,7 @@
 > **前置依赖**: [Async/Await](../../03_advanced/01_async/01_async.md) · [Async Patterns](../../03_advanced/01_async/03_async_patterns.md) · [执行模型同构](../../05_comparative/00_paradigms/02_execution_model_isomorphism.md)
 > **后置概念**: [High-Performance Network Service Architecture](08_high_performance_network_service_architecture.md)
 >
-> **主要来源**: [Glommio Repository](https://github.com/DataDog/glommio) · [Linux io_uring](https://kernel.dk/io_uring.pdf) · [Async Rust Book](https://rust-lang.github.io/async-book/)
+> **主要来源**: [Glommio Repository](https://github.com/DataDog/glommio) · [Linux io_uring](https://kernel.dk/io_uring.pdf) · [Async Rust Book](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html)
 
 ---
 
@@ -234,7 +234,7 @@ fn spawn_worker(state: Arc<Mutex<u64>>) {
 
 - [Glommio GitHub](https://github.com/DataDog/glommio)
 - [Linux io_uring 论文](https://kernel.dk/io_uring.pdf)
-- [Async Rust Book](https://rust-lang.github.io/async-book/)
+- [Async Rust Book](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html)
 
 ## 过渡段
 

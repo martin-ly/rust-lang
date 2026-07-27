@@ -30,6 +30,7 @@
   - [5. 使用规范](#5-使用规范)
   - [6. 维护责任](#6-维护责任)
   - [7. 权威来源（References · 国际权威对齐）](#7-权威来源references--国际权威对齐)
+  - [8. 跨层定理编号映射（2026-07-28 新增）](#8-跨层定理编号映射2026-07-28-新增)
   - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
 
 ## 1. 注册表目的
@@ -206,6 +207,26 @@
 - **P0 官方**: [Rust Reference — Type System / Traits / Lifetimes](https://doc.rust-lang.org/reference/) · [The Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust RFCs](https://rust-lang.github.io/rfcs/)
 - **P1 学术/形式化**: Ralf Jung et al. _RustBelt: Securing the Foundations of the Rust Programming Language_ (POPL 2018) · _Stacked Borrows: An Aliasing Model for Rust_ (POPL 2019) · Villani / Hostert / Dreyer / Jung _Tree Borrows: A New Aliasing Model for Rust_ (PLDI 2025, Distinguished Paper)
 - **映射维护**: 见 [`concept/00_meta/02_sources/01_authority_source_map.md`](../02_sources/01_authority_source_map.md)
+
+---
+
+## 8. 跨层定理编号映射（2026-07-28 新增）
+
+本项目 `T-xxx` 编号用于全局定理链，但 L4 形式化页常使用本地记号（`L1 / L2 / T1 / C1 / C2` 等）。为避免跨层语义对称差，约定：
+
+| 本地记号 | 含义 | 与项目编号关系 |
+|:---|:---|:---|
+| `L1`, `L2`, ... | 形式化页本地引理（Lemma） | 首次出现时应标注对应 `T-xxx` |
+| `T1`, `T2`, ... | 形式化页本地定理（Theorem） | 若与项目 `T-xxx` 等价，应在页内显式说明 |
+| `C1`, `C2`, ... | 形式化页本地推论（Corollary） | 应注明由哪个 `T-xxx` 推导 |
+| `AXM` | Alias-XOR-Mutation（借用规则别名） | 等价于 **T-010 借用规则** |
+
+**示例映射**：
+
+- `Own(p) / Shr(p) / Mut(p) / Dealloc(p)`（L4 RustBelt）↔ `Own(T) / Borrow(&T) / Borrow(&mut T) / Dropped`（L1/L2 教学层）。详见 [`04_inter_layer_map.md`](../04_navigation/04_inter_layer_map.md) §5.3。
+- `L4` 线性逻辑公理 `L1` ↔ 项目 **T-100+ 形式化类型论** 范围。
+
+> **维护规则**：新增 L4 形式化页时，作者应在页首元数据或首次使用本地定理编号处，添加 `> **跨层映射**: 本地 T1 ↔ T-xxx` 说明块。
 
 ---
 

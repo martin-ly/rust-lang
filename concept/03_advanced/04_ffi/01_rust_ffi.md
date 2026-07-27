@@ -1000,7 +1000,7 @@ unsafe { process_string(ptr); }
 ### 暴露 Rust 函数给 C
 
 ```rust
-#[unsafe(no_mangle)] // Edition 2024：unsafe 属性需显式标注
+#[unsafe(no_mangle)] // Edition 2024：unsafe 属性需显式标注；旧版写作 #[no_mangle]
 pub extern "C" fn rust_add(a: i32, b: i32) -> i32 {
     a + b
 }

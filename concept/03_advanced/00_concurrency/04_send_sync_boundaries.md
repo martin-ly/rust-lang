@@ -37,7 +37,7 @@
 > [Rustonomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) ·
 > [std::marker::Send](https://doc.rust-lang.org/std/marker/trait.Send.html) ·
 > [std::marker::Sync](https://doc.rust-lang.org/std/marker/trait.Sync.html) ·
-> [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/)
+> [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html)
 
 ---
 

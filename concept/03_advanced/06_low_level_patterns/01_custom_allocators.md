@@ -391,7 +391,7 @@ graph TD
 ```
 
 > **边界要点**: 自定义分配器的边界与**unsafe 风险**、**生态兼容性**、**平台差异**和**调试复杂度**相关。
-> [来源: [Rustonomicon — Allocators](https://doc.rust-lang.org/nomicon/index.html)]
+> [来源: [Rustonomicon — Allocators](https://doc.rust-lang.org/nomicon/vec/vec-alloc.html)]
 
 ---
 

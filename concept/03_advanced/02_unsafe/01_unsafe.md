@@ -24,7 +24,7 @@
 > · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
 > [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [TRPL: Ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) ·
-> [Rust Reference: Unsafe Rust](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rust Reference: Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html) ·
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
 > [RFC 2585](https://rust-lang.github.io/rfcs/2585-unsafe-block-in-unsafe-fn.html) ·
 > [RFC 3325](https://rust-lang.github.io/rfcs/3325-unsafe-attributes.html) ·
@@ -267,7 +267,7 @@ Unsafe Rust = Safe Rust ∪ { 操作 O | O 需要人工证明安全性 }
 ## 二、概念属性矩阵（Attribute Matrix）
 
 > 在明确定义后，我们需要对 unsafe 提供的操作进行系统分类。以下三个矩阵分别覆盖：操作能力、未定义行为类型、以及各角色的安全责任。
-> **来源: [Rust Reference: Unsafe Rust; Rustonomicon](https://doc.rust-lang.org/reference/introduction.html)** Unsafe 操作分为 7 类，每类有明确的安全契约。
+> **来源: [Rust Reference: Unsafe Rust; Rustonomicon](https://doc.rust-lang.org/reference/unsafe-blocks.html)** Unsafe 操作分为 7 类，每类有明确的安全契约。
 
 ### 2.1 Unsafe 操作分类矩阵
 
@@ -381,8 +381,8 @@ Unsafe Rust = Safe Rust ∪ { 操作 O | O 需要人工证明安全性 }
 ## 三、形式化理论根基（Formal Foundation）
 
 > 概念分类之后，需要从类型系统（Type System）视角理解 unsafe 的本质。unsafe 不是"关闭编译器"，而是在封闭证明系统中引入新的公理，并由程序员人工保证其一致性（Coherence）。
-> **[Rustonomicon: The Safe/Unsafe Boundary](https://doc.rust-lang.org/nomicon/index.html)** Safe Rust 是封闭的证明系统；unsafe 是显式引入新公理并人工保证一致性（Coherence）的扩展。类比：Safe Rust = 欧氏几何，Unsafe = 非欧几何。💡 原创分析
-> **来源: [Rustonomicon: The Safe/Unsafe Boundary](https://doc.rust-lang.org/nomicon/index.html)** Unsafe 不是关闭检查器，而是引入人工验证的公理。
+> **[Rustonomicon: The Safe/Unsafe Boundary](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html)** Safe Rust 是封闭的证明系统；unsafe 是显式引入新公理并人工保证一致性（Coherence）的扩展。类比：Safe Rust = 欧氏几何，Unsafe = 非欧几何。💡 原创分析
+> **来源: [Rustonomicon: The Safe/Unsafe Boundary](https://doc.rust-lang.org/nomicon/safe-unsafe-meaning.html)** Unsafe 不是关闭检查器，而是引入人工验证的公理。
 
 ### 3.1 Unsafe 作为公理缺口
 >
@@ -1267,15 +1267,15 @@ fn safe_raw_pointer() {
 | 未定义行为（UB）定义 | [Wikipedia: Undefined behavior](https://en.wikipedia.org/wiki/Undefined_behavior) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) | ✅ |
 | 内存安全（Memory Safety） | [Wikipedia: Memory safety](https://en.wikipedia.org/wiki/Memory_safety) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) | ✅ |
 | Miri 形式化验证工具 | [Miri Documentation](https://github.com/rust-lang/miri) · [Stacked Borrows — POPL 2021](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) | ✅ |
-| unsafe 操作分类 | [Rust Reference: Unsafe Rust](https://doc.rust-lang.org/reference/introduction.html) · [TRPL Ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) | ✅ |
+| unsafe 操作分类 | [Rust Reference: Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [TRPL Ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) | ✅ |
 | Validity Invariant | [Rustonomicon: What is unsafe?](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) · [UCG Book] | ✅ |
-| 裸指针语义 | [Rust Reference: Pointer types](https://doc.rust-lang.org/reference/introduction.html) · [std::ptr docs] | ✅ |
-| FFI 边界安全 | [Rust Reference: External blocks](https://doc.rust-lang.org/reference/introduction.html) · [Rustonomicon: FFI](https://doc.rust-lang.org/nomicon/ffi.html) | ✅ |
+| 裸指针语义 | [Rust Reference: Pointer types](https://doc.rust-lang.org/reference/types/pointer.html) · [std::ptr docs] | ✅ |
+| FFI 边界安全 | [Rust Reference: External blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) · [Rustonomicon: FFI](https://doc.rust-lang.org/nomicon/ffi.html) | ✅ |
 | 内存布局控制 | [Rust Reference: Type Layout](https://doc.rust-lang.org/reference/type-layout.html) · [Rustonomicon: Data Layout](https://doc.rust-lang.org/nomicon/index.html) | ✅ |
 | Stacked/Tree Borrows | [POPL 2019 · Jung et al.] · [Miri Book](https://github.com/rust-lang/miri) | ✅ |
 | Miri 动态检测 | [Miri Book](https://github.com/rust-lang/miri) · [rustc-dev-guide: Miri] | ✅ |
 | unsafe_op_in_unsafe_fn | [Rust 2024 Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) · [RFC 2585](https://rust-lang.github.io/rfcs/2585-unsafe-block-in-unsafe-fn.html) | ✅ |
-| FFI 与外部函数接口 | [Wikipedia: Foreign function interface](https://en.wikipedia.org/wiki/Foreign_function_interface) · [Rust Reference: FFI](https://doc.rust-lang.org/reference/introduction.html) | ✅ |
+| FFI 与外部函数接口 | [Wikipedia: Foreign function interface](https://en.wikipedia.org/wiki/Foreign_function_interface) · [Rust Reference: FFI](https://doc.rust-lang.org/reference/items/external-blocks.html) | ✅ |
 | 类型双关（Type punning） | [Wikipedia: Type punning](https://en.wikipedia.org/wiki/Type_punning) · [Rust Reference: Unions](https://doc.rust-lang.org/reference/items/unions.html) | ✅ |
 
 ---
@@ -1561,7 +1561,7 @@ Miri 不是唯一的动态检测工具。根据错误类型和检测阶段，Val
 
 ### 补充章节：`std::ptr::read/write` vs `*ptr` 解引用的语义差异
 
-> **权威来源**: [Rust Reference: Pointer operators](https://doc.rust-lang.org/reference/introduction.html) · [Rust Reference: Behavior considered undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [The Rustonomicon: Ownership and Move Semantics](https://doc.rust-lang.org/nomicon/index.html) · [std::ptr API docs](https://doc.rust-lang.org/std/ptr/) · [Rustonomicon: Working With Memory](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源**: [Rust Reference: Pointer operators](https://doc.rust-lang.org/reference/introduction.html) · [Rust Reference: Behavior considered undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [The Rustonomicon: Ownership and Move Semantics](https://doc.rust-lang.org/nomicon/ownership.html) · [std::ptr API docs](https://doc.rust-lang.org/std/ptr/) · [Rustonomicon: Working With Memory](https://doc.rust-lang.org/nomicon/working-with-memory.html)
 > **层级标注**: `L3::裸指针语义` → `L1::所有权` 移动语义延伸 · `L2::内存管理` drop 触发控制 · `L4::形式化` Validity Invariant 边界
 
 **核心区别**：裸指针的 `*` 解引用操作与 `std::ptr::read`/`std::ptr::write` 在**所有权（Ownership）语义**、**drop 触发**和**借用（Borrowing）检查器介入程度**方面存在本质差异。`*ptr` 是**引用语义**的延伸——它假设目标位置已初始化、对齐且有效，并受 Rust 所有权规则约束；而 `ptr::read`/`ptr::write` 是**原始内存操作**，仅执行 bitwise copy 或按位覆盖，不调用 `Clone`，也不自动触发 `Drop`。
@@ -1591,7 +1591,7 @@ Miri 不是唯一的动态检测工具。根据错误类型和检测阶段，Val
 - **不安全契约**：`src` 必须对齐且指向已初始化的 `T`；读取后，调用者必须确保原位置和新位置的值**不会同时被 drop**。
 
 > **Rust 1.96 更新**: `"valid for read/write"` 定义重构——`ptr` 方法的文档现在明确排除 null 指针作为"有效"地址，将 null 例外作为单独说明添加到各方法上。这与 `NonNull<T>` 的语义一致：null 指针**不是**任何 Rust 引用的有效值，即使在 unsafe 代码中解引用 null 也是立即 UB。
-> **来源: [Rustonomicon: Ownership and Move Semantics](https://doc.rust-lang.org/nomicon/index.html)** Move 语义在底层就是 bitwise copy + 使原位置失效。`ptr::read` 只做前半部分，后半部分由程序员负责。✅ 已验证
+> **来源: [Rustonomicon: Ownership and Move Semantics](https://doc.rust-lang.org/nomicon/ownership.html)** Move 语义在底层就是 bitwise copy + 使原位置失效。`ptr::read` 只做前半部分，后半部分由程序员负责。✅ 已验证
 
 ###### Rust 1.96 `valid for read/write` 语义变更详解
 
@@ -1798,7 +1798,7 @@ fn safe_read_pattern<T>(ptr: *mut T) -> T {
 }
 ```
 
-> **来源: [Rustonomicon: Working With Memory](https://doc.rust-lang.org/nomicon/index.html)** Using `ptr::read` without ensuring the source is no longer considered initialized can lead to double-drops, which is undefined behavior. ✅ 已验证
+> **来源: [Rustonomicon: Working With Memory](https://doc.rust-lang.org/nomicon/working-with-memory.html)** Using `ptr::read` without ensuring the source is no longer considered initialized can lead to double-drops, which is undefined behavior. ✅ 已验证
 
 ##### 危险模式 2：`ptr::write` 覆盖已初始化值导致的内存泄漏
 
@@ -2138,11 +2138,11 @@ fn demo_invariance<'a>(ptr: *mut &'a str) -> *mut &'static str {
 }
 ```
 
-> **来源: [Rust Reference: Variance](https://doc.rust-lang.org/reference/introduction.html)**
+> **来源: [Rust Reference: Variance](https://doc.rust-lang.org/reference/subtyping.html)**
 > `*const T` 对 `T` 是协变的，`*mut T` 对 `T` 是不变的。
 > `NonNull<T>` 通过内部存储 `*const T` 来实现协变，同时通过 API 设计（`as_mut()` 需要 unsafe）保持写入的安全性。
 > ✅ 已验证
-> **来源: [Rustonomicon: Variance](https://doc.rust-lang.org/nomicon/index.html)**
+> **来源: [Rustonomicon: Variance](https://doc.rust-lang.org/nomicon/subtyping.html)**
 > 协变性对容器类型至关重要：`Vec<&'a str>` 可协变为 `Vec<&'static str>`，这使函数返回包含长生命周期（Lifetimes）引用的容器成为可能。
 > 若 `Vec` 内部使用 `*mut T` 而非 `NonNull<T>`，它将是不变的，极大限制其可用性。 ✅ 已验证
 > **定理**：`NonNull<T>` 的协变设计是**类型系统层面的精巧权衡**

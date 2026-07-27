@@ -16,7 +16,7 @@
 > **后置概念**: [Tokio Runtime Internals](../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md) · [Network Programming](../../03_advanced/06_low_level_patterns/04_network_programming.md)
 >
 > **来源**:
-> [Async Book (WIP)](https://rust-lang.github.io/async-book/) ·
+> [Async Book (WIP)](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html) ·
 > [Linux io_uring](https://kernel.org/doc/html/latest/block/io_uring.html) ·
 > [tokio-rs/tokio-uring](https://github.com/tokio-rs/tokio-uring) ·
 > [glommio](https://github.com/DataDog/glommio) ·

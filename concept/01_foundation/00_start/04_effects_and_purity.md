@@ -497,7 +497,7 @@ fn unsafe_effect_escape() {
 }
 ```
 
-> **边界洞察**: `unsafe` 块允许副作用"逃逸"类型系统（Type System）的约束。这是 Rust 设计中唯一的效果逃逸口——Safe Rust 保证无副作用逃逸，Unsafe Rust 将保证责任转移给程序员。[NOM — What is unsafe?](https://doc.rust-lang.org/nomicon/) ✅
+> **边界洞察**: `unsafe` 块允许副作用"逃逸"类型系统（Type System）的约束。这是 Rust 设计中唯一的效果逃逸口——Safe Rust 保证无副作用逃逸，Unsafe Rust 将保证责任转移给程序员。[NOM — What is unsafe?](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) ✅
 
 ### 7.3 边界测试：`const fn` 中的副作用逃逸（编译错误）
 
@@ -510,7 +510,7 @@ const fn impure_const() -> i32 {
 }
 ```
 
-> **边界洞察**: `const fn` 是 Rust 中纯度要求最严格的上下文——不允许可变变量、不允许堆分配、不允许非 `const` 操作。任何副作用尝试都会在编译期被拒绝。这构成了 Rust 效果系统的"核心纯净区"。来源: [Rust Reference — §6.10.1 const contexts](https://doc.rust-lang.org/reference/introduction.html) ✅
+> **边界洞察**: `const fn` 是 Rust 中纯度要求最严格的上下文——不允许可变变量、不允许堆分配、不允许非 `const` 操作。任何副作用尝试都会在编译期被拒绝。这构成了 Rust 效果系统的"核心纯净区"。来源: [Rust Reference — §6.10.1 const contexts](https://doc.rust-lang.org/reference/const_evaluation.html) ✅
 
 ### 7.4 边界测试：闭包捕获的副作用
 

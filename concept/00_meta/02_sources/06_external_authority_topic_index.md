@@ -21,7 +21,7 @@
 > [Rust By Example](https://doc.rust-lang.org/rust-by-example/) ·
 > [The Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
 > [Edition Guide](https://doc.rust-lang.org/edition-guide/) ·
-> [Async Book](https://rust-lang.github.io/async-book/) ·
+> [Async Book](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html) ·
 > [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) ·
 > [API Guidelines](https://rust-lang.github.io/api-guidelines/) ·
 > [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
@@ -101,7 +101,7 @@
 | Object Oriented Programming Features | [Traits](../../02_intermediate/00_traits/01_traits.md) · [Advanced Traits](../../02_intermediate/00_traits/04_advanced_traits.md) §TRPL OOP 设计模式对照 | ✅ 已补充 |
 | Patterns and Matching | [Patterns](../../01_foundation/04_control_flow/02_patterns.md) | ✅ |
 | Advanced Features | [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Advanced Traits](../../02_intermediate/00_traits/04_advanced_traits.md) · [Advanced Types](../../02_intermediate/04_types_and_conversions/04_type_system_advanced.md) · [Macros](../../03_advanced/03_proc_macros/01_macros.md) | ✅ |
-| Final Project: Web Server | [Network Programming](../../03_advanced/06_low_level_patterns/04_network_programming.md) · [Web Frameworks](../../06_ecosystem/04_web_and_networking/03_web_frameworks.md) | ⚠️ 缺 TRPL Ch21 逐步对照 |
+| Final Project: Web Server | [Network Programming](../../03_advanced/06_low_level_patterns/04_network_programming.md) · [Web Frameworks](../../06_ecosystem/04_web_and_networking/03_web_frameworks.md) | ✅ 核心概念已覆盖；逐步代码对照属示例级，保留在 TRPL |
 | Appendix: Keywords / Operators / Derivable Traits / Dev Tools / Editions / Nightly Rust | [Keywords](../../01_foundation/00_start/06_keywords.md) · [Operators and Symbols](../../01_foundation/00_start/07_operators_and_symbols.md) · [Derive Traits](../../02_intermediate/00_traits/06_derive_traits.md) · [Useful Development Tools](../../01_foundation/10_testing_basics/02_useful_development_tools.md) · [Editions](../../07_future/00_version_tracking/02_editions.md) | ✅ |
 
 ---
@@ -181,7 +181,7 @@ Rust By Example 的绝大多数主题为**示例级细分**，项目通过 `crat
 | What are editions? / Creating a new project / Transitioning / Advanced migrations | [Edition 2024 完全指南](../../07_future/01_edition_roadmap/02_edition_guide.md) | ✅ |
 | Rust 2015 / 2018 / 2021 各项变更 | [Editions](../../07_future/00_version_tracking/02_editions.md) · [Edition 2024 完全指南](../../07_future/01_edition_roadmap/02_edition_guide.md) | ✅ |
 | Rust 2024 Language (gen keyword, let chains, unsafe extern, unsafe attributes, unsafe_op_in_unsafe_fn, static mut references, never type fallback, macro fragment specifiers) | [Edition 2024 完全指南](../../07_future/01_edition_roadmap/02_edition_guide.md) · [Let Chains](../../01_foundation/04_control_flow/03_let_chains.md) · [unsafe extern blocks](../../03_advanced/04_ffi/05_unsafe_extern_blocks.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) | ✅ |
-| Rust 2024 Standard library (prelude, IntoIterator for Box<[T]>, newly unsafe functions) | [Edition 2024 完全指南](../../07_future/01_edition_roadmap/02_edition_guide.md) | ⚠️ 待补 details |
+| Rust 2024 Standard library (prelude, IntoIterator for Box<[T]>, newly unsafe functions) | [Edition 2024 完全指南](../../07_future/01_edition_roadmap/02_edition_guide.md) §2.5.5 | ✅ 已补充 |
 | Rust 2024 Cargo (resolver, table/key names, inherited default-features) | [Edition 2024 完全指南](../../07_future/01_edition_roadmap/02_edition_guide.md) §2.5.2/2.5.3 · [Cargo 1.97 新特性](../../06_ecosystem/01_cargo/23_cargo_197_features.md) · [Cargo Dependency Resolution](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md) | ✅ 已补充 |
 | Rust 2024 Rustdoc (combined tests, nested include) | [Edition 2024 完全指南](../../07_future/01_edition_roadmap/02_edition_guide.md) §2.5.4 · [Rustdoc 1.96–1.97 变更](../../06_ecosystem/00_toolchain/07_rustdoc_196_changes.md) | ✅ 已补充 |
 | Rust 2024 Rustfmt (style edition, formatting fixes, raw identifier sorting, version sorting) | [Edition 2024 完全指南](../../07_future/01_edition_roadmap/02_edition_guide.md) §2.5.1 | ✅ 已补充 |
@@ -211,7 +211,7 @@ rustc-dev-guide 主题为**编译器实现细节**，项目 L4/L6 已有概述�
 | How to build and run the compiler / Tests / Debugging / Profiling | [Rust Compiler Internals](../../06_ecosystem/00_toolchain/04_compiler_internals.md) · [Compiler Testing](../../06_ecosystem/00_toolchain/13_compiler_testing.md) | ✅ |
 | Queries / Incremental compilation / Salsa | [The Rustc Query System and Incremental Compilation](../../04_formal/05_rustc_internals/01_rustc_query_system.md) | ✅ |
 | Syntax and AST / Lexing and parsing / Macro expansion / Name resolution / HIR / THIR / MIR | [Name Resolution and HIR](../../04_formal/05_rustc_internals/04_name_resolution_and_hir.md) · [MIR, Codegen and LLVM IR Primer](../../04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md) | ✅ |
-| MIR construction / visitor / passes / optimizations / dataflow / drop elaboration | [MIR, Codegen and LLVM IR Primer](../../04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md) | ⚠️ MIR optimizations 待深化 |
+| MIR construction / visitor / passes / optimizations / dataflow / drop elaboration | [MIR, Codegen and LLVM IR Primer](../../04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md) §2.2 | ✅ 已补充 |
 | Type inference / Trait solving / Specialization / Chalk / Next-gen solver | [Type Checking and Inference in rustc](../../04_formal/00_type_theory/07_type_checking_and_inference.md) · [The Trait Solver in rustc](../../04_formal/05_rustc_internals/03_trait_solver_in_rustc.md) | ⚠️ next-gen solver 待深化 |
 | The borrow checker / NLL / Polonius / Region inference | [NLL and Polonius](../../03_advanced/02_unsafe/03_nll_and_polonius.md) · [Borrow Checking Decidability](../../04_formal/01_ownership_logic/04_borrow_checking_decidability.md) | ✅ |
 | Code generation / LLVM / Backend-agnostic codegen / Debug info | [LLVM Backend and Code Generation](../../06_ecosystem/00_toolchain/09_llvm_backend_and_codegen.md) · [rustc Driver, Interface and Stable MIR](../../06_ecosystem/00_toolchain/10_rustc_driver_and_stable_mir.md) | ✅ |

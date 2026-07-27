@@ -26,7 +26,7 @@
 > [Lamport, Shostak & Pease 1982 — The Byzantine Generals Problem](https://lamport.azurewebsites.net/pubs/byz.pdf) ·
 > [Dwork, Lynch & Stockmeyer 1988 — Consensus in the Presence of Partial Synchrony](https://groups.csail.mit.edu/tds/papers/Lynch/jacm88.pdf) ·
 > [Chandra & Toueg 1996 — Unreliable Failure Detectors for Reliable Distributed Systems](https://www.cs.cornell.edu/fbs/publications/DSbook.c.pdf) ·
-> [Rust Standard Library — std::sync](https://doc.rust-lang.org/std/sync/) · [Rust Async Book](https://rust-lang.github.io/async-book/) ·
+> [Rust Standard Library — std::sync](https://doc.rust-lang.org/std/sync/) · [Rust Async Book](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html) ·
 > [raft-rs 文档](https://docs.rs/raft) · [openraft 文档](https://docs.rs/openraft) · [hotstuff-rs 文档](https://docs.rs/hotstuff-rs/)
 >
 > ⚠️ **声明**: 本页呈现的是**形式理论骨架与证明直觉**，用于建立可推理的心智模型，而非机器验证的完整证明。涉及 Paxos/Raft 的不变量陈述以原始论文与 TLA+ 规范为准；Rust 代码为教学级骨架。算法生态对比、选型决策树与部署工程见 [L6 分布式共识生态页](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md)，本页与其有显式分工（见 §5.5）。

@@ -444,7 +444,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 Rust 通过 `Send`/`Sync` trait 在编译期保证跨线程/任务共享的安全：`Send` 表示可跨线程转移，`Sync` 表示可被多线程共享引用。
 
-> **来源**: [The Rust Async Book](https://rust-lang.github.io/async-book/) · [Rust Reference — async/await](https://doc.rust-lang.org/reference/expressions/await-expr.html)
+> **来源**: [The Rust Async Book](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html) · [Rust Reference — async/await](https://doc.rust-lang.org/reference/expressions/await-expr.html)
 
 ### 5.2 F#：Async 工作流与 task 计算表达式
 
@@ -765,7 +765,7 @@ graph TD
 
 - [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 - [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
-- [The Rust Async Book](https://rust-lang.github.io/async-book/)
+- [The Rust Async Book](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html)
 - [Rust Embedded Book](https://doc.rust-lang.org/stable/embedded-book/)
 - [RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [F# Documentation](https://learn.microsoft.com/en-us/dotnet/fsharp/)

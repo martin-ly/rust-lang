@@ -74,7 +74,7 @@ mindmap
 
 ## 📑 目录
 
-- [Borrowing（借用）](#borrowing借用)
+- [借用](#借用)
   - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
@@ -419,7 +419,7 @@ graph TD
 > **认知功能**: 此思维导图将借用系统组织为「两种引用类型 + 一条核心规则 + 一个检查器 + 三类高级模式」的四维结构。
 > 读者可通过此图快速回答「我现在学的是借用的哪个方面」——是基本的 &T/&mut T 权限差异（B/C），还是编译器如何工作（E），还是自引用/内部可变性等进阶话题（F）。
 > 图中 D 分支的「要么 1 个 &mut，要么 N 个 &」是 Rust 借用规则最精炼的口诀，应作为记忆锚点。 [💡 原创分析](../../00_meta/00_framework/methodology.md)
-> [来源: [TRPL — References](https://doc.rust-lang.org/book/title-page.html)]
+> [来源: [TRPL — References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]
 > **过渡**: 思维导图呈现了借用的静态知识结构，而决策树则将这种知识转化为动态的判断流程——面对具体问题时"该用 &T 还是 &mut T"。
 
 ---
@@ -1359,7 +1359,7 @@ impl SelfRef {
 
 - **演进方向**: 补充 `Cell<T>` / `RefCell<T>` 的内部可变性与借用规则的"绕过" —— 优先级: 高 —— 已完成 v1.1
 
-> **[Rust Reference: Interior Mutability](https://doc.rust-lang.org/reference/introduction.html)** `Cell<T>` / `RefCell<T>` 通过运行时检查替代编译期检查，是内部可变性的安全抽象。✅ 已验证
+> **[Rust Reference: Interior Mutability](https://doc.rust-lang.org/reference/interior-mutability.html)** `Cell<T>` / `RefCell<T>` 通过运行时检查替代编译期检查，是内部可变性的安全抽象。✅ 已验证
 
 #### 核心概念
 

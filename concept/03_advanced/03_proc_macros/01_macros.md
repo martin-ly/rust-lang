@@ -1285,7 +1285,7 @@ fn main() {
 
 ### 3. 编译期计算（`const fn` + `const generics`）替代宏的趋势
 
-> **[Rust Reference: const fn](https://doc.rust-lang.org/reference/introduction.html)** `const fn` 允许在编译期执行计算，生成编译期常量。许多过去必须用 `macro_rules!` 实现的场景（如数组长度计算、类型大小断言）现在可以用纯 Rust 函数完成。✅ 已验证
+> **[Rust Reference: const fn](https://doc.rust-lang.org/reference/items/functions.html#const-functions)** `const fn` 允许在编译期执行计算，生成编译期常量。许多过去必须用 `macro_rules!` 实现的场景（如数组长度计算、类型大小断言）现在可以用纯 Rust 函数完成。✅ 已验证
 > **[Rust [RFC 2000](https://rust-lang.github.io/rfcs//2000-const-generics.html): const generics]** const generics 允许泛型参数为编译期常量值（如 `Array<T, N>`），消除了对宏生成多态类型的需求。✅ 已验证
 
 **`const fn` 替代 `macro_rules!` 的场景**
@@ -1383,13 +1383,13 @@ fn main() {
 }
 ```
 
-> **[Rust Reference: const_eval](https://doc.rust-lang.org/reference/introduction.html)** `const fn` 的能力在持续扩展（如 const trait、const mut 引用（Reference）），但宏在语法级变换（DSL、可变参数）上的优势不可替代。✅ 已验证
+> **[Rust Reference: const_eval](https://doc.rust-lang.org/reference/const_evaluation.html)** `const fn` 的能力在持续扩展（如 const trait、const mut 引用（Reference）），但宏在语法级变换（DSL、可变参数）上的优势不可替代。✅ 已验证
 
 ---
 
 ### 4. `concat!` / `stringify!` / `include_str!` 等内置宏
 
-> **[Rust Reference: Built-in Macros](https://doc.rust-lang.org/reference/introduction.html)** Rust 标准库提供一组编译期内置宏，它们在展开阶段执行特定操作（字符串拼接、文件包含、环境变量读取等），是元编程的基础工具。✅ 已验证
+> **[Rust Reference: Built-in Macros](https://doc.rust-lang.org/reference/macros-by-example.html)** Rust 标准库提供一组编译期内置宏，它们在展开阶段执行特定操作（字符串拼接、文件包含、环境变量读取等），是元编程的基础工具。✅ 已验证
 
 **内置宏完整列表与使用场景**
 
@@ -1882,7 +1882,7 @@ pub fn with_cleanup(_args: TokenStream, input: TokenStream) -> TokenStream {
 }
 ```
 
-> **[Rust Reference: async fn](https://doc.rust-lang.org/reference/introduction.html)** 对于 `async fn`，闭包（Closures）包装需额外注意保留 `async` 语义。最安全的做法始终是通过 `#fn_sig` 整体引用原始签名（已含 `async` 关键字），仅在 block 层面做包裹。✅ 已验证
+> **[Rust Reference: async fn](https://doc.rust-lang.org/reference/items/functions.html#async-functions)** 对于 `async fn`，闭包（Closures）包装需额外注意保留 `async` 语义。最安全的做法始终是通过 `#fn_sig` 整体引用原始签名（已含 `async` 关键字），仅在 block 层面做包裹。✅ 已验证
 
 #### 5.5 错误处理：使用 `proc_macro_error2` 提供友好的编译错误
 
@@ -2123,8 +2123,8 @@ mod internal {
 | macro_rules! 语法 | [Rust Reference: Macros by Example](https://doc.rust-lang.org/reference/macros-by-example.html) · [TRPL Ch19.5](https://doc.rust-lang.org/book/ch19-05-advanced-functions-and-closures.html) | ✅ |
 | 过程宏设计 | [Rust Reference: Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html) · [RFC 1566](https://rust-lang.github.io/rfcs/1566-proc-macros.html) | ✅ |
 | 卫生宏机制 | [Rust Reference: Hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene) · [Kohlbecker et al. 1986] | ✅ |
-| 编译期内置宏 | [Rust Reference: Built-in Macros](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-05-macros.html) | ✅ |
-| const fn 替代趋势 | [Rust Reference: const_eval](https://doc.rust-lang.org/reference/introduction.html) · [RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html) | ✅ |
+| 编译期内置宏 | [Rust Reference: Built-in Macros](https://doc.rust-lang.org/reference/macros-by-example.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-05-macros.html) | ✅ |
+| const fn 替代趋势 | [Rust Reference: const_eval](https://doc.rust-lang.org/reference/const_evaluation.html) · [RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html) | ✅ |
 | syn/quote/proc_macro2 | [syn docs] · [quote docs] · [proc_macro2 docs] | ✅ |
 | 声明宏 2.0 演进 | [Rust Reference: macro keyword](https://doc.rust-lang.org/reference/introduction.html) · [RFC 1584](https://rust-lang.github.io/rfcs/1584-macros.html) | ✅ |
 | 属性宏修改函数体 | [Rust Reference: Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html) · [syn docs] | ✅ |

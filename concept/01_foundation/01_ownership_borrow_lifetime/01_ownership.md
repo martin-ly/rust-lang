@@ -69,7 +69,7 @@ mindmap
 
 ## 📑 目录
 
-- [Ownership（所有权）](#ownership所有权)
+- [所有权](#所有权)
   - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
@@ -243,7 +243,7 @@ COR (Calculus of Ownership and Reference, ETH Zurich) 将 Rust 核心语法归�
 | **形式化基础** | 仿射/线性类型论 | 无统一形式化 | 范畴论 (Category Theory) · HM 类型推断（Type Inference） | 无统一形式化 |
 | **对应机制** | `Own<T>` / `Drop` | `unique_ptr` / `shared_ptr` | `LinearTypes` extension · `ResourceT` | `defer` · 值拷贝 |
 
-> **[来源: [Rust Reference: Ownership](https://doc.rust-lang.org/reference/introduction.html)]** Rust 的所有权系统通过编译期检查实现零成本内存安全（Memory Safety）。 ✅
+> **[来源: [TRPL — What is Ownership?](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)]** Rust 的所有权系统通过编译期检查实现零成本内存安全（Memory Safety）。 ✅
 > **来源: [C++ Reference: std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr)** C++11 `unique_ptr` 提供运行时（Runtime）所有权管理，但编译器不检查 use-after-move。 ✅
 > **[Haskell GHC User Guide: LinearTypes](https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/linear_types.html)** GHC 9.0+ 引入 LinearTypes 扩展，允许显式线性类型约束，与 Rust 所有权在类型论上同源但实现阶段不同（Haskell 为可选扩展，Rust 为核心机制）。 ✅
 > **来源: [Go Spec: Memory Model](https://go.dev/ref/mem)** Go 依赖垃圾回收，无编译期所有权检查，`defer` 提供确定性清理但非所有权语义。 ✅
@@ -1236,7 +1236,7 @@ Send trait 的形式化语义:
 > - `T: !Send + Sync` — 不可转移但可共享引用（罕见，如某些同步原语）
 > - `T: !Send + !Sync` — 完全线程不安全（如 `Rc<T>`、裸指针）
 >
-> > **来源: [Rustonomicon: Send and Sync](https://doc.rust-lang.org/nomicon/index.html)** ✅
+> > **来源: [Rustonomicon: Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html)** ✅
 > **相关链接**：内部可变性对 `Send`/`Sync` 的影响见 [02_borrowing.md](02_borrowing.md) §补充章节：`Cell<T>` / `RefCell<T>` 的内部可变性；异步（Async）任务的所有权转移见 [c06_async README](../../../crates/c06_async/README.md)。
 
 ### 补充：所有权与 FFI / unsafe 边界的交互

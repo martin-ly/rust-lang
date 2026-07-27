@@ -28,7 +28,7 @@
 > **所有权（Ownership）语义对齐**: 并发编程中的所有权遵循 Rust 核心原则——每个值有**唯一所有者**（单一所有权，资源唯一性），
 > owner 离开**作用域**时自动**drop/释放**（RAII），
 > 值通过**move/转移**传递所有权（Ownership）（赋值、传参后原变量变为 uninitialized）
-> (Source: [Rust Reference — Ownership](https://doc.rust-lang.org/reference/introduction.html), [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/))
+> (Source: [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html), [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/))
 > **后置概念**: [Async/Await](../01_async/01_async.md) ·
 > [Unsafe Rust](../02_unsafe/01_unsafe.md)
 > **unsafe 语义对齐**: 当本文件提及 `unsafe impl Send/Sync` 时，遵循核心语义——`unsafe` 不是关闭检查器，而是将全局线程安全假设的证明责任转移给程序员。
@@ -56,7 +56,7 @@
 
 ## 📑 目录
 
-- [Concurrency（并发模型）](#concurrency并发模型)
+- [并发模型](#并发模型)
   - [📑 目录](#-目录)
   - [零、认知路径（Cognitive Path）](#零认知路径cognitive-path)
     - [第 1 步：为什么单线程没问题？](#第-1-步为什么单线程没问题)
@@ -373,7 +373,7 @@ Rust 并发的权威定义可归纳为一句话：**并发安全（Concurrency S
   - 因此数据竞争的四个必要条件无法同时满足
 ```
 
-> **[Rust Reference: Auto traits](https://doc.rust-lang.org/reference/introduction.html)** Send 和 Sync 是 auto trait，编译器自动为所有字段均满足该 trait 的类型实现。组合规则由编译器的结构推导保证。✅ 已验证
+> **[Rust Reference: Auto traits](https://doc.rust-lang.org/reference/special-types-and-traits.html)** Send 和 Sync 是 auto trait，编译器自动为所有字段均满足该 trait 的类型实现。组合规则由编译器的结构推导保证。✅ 已验证
 > **[Boyland 2003: Fractional Permissions]** Sync 的语义（共享读访问）与分数权限模型中的读取权限分裂（permission splitting）概念同源：多个只读引用（Reference）可安全共存。✅ 已验证
 
 ### 3.1b C11 Memory Model 在 Rust 中的精确映射
@@ -410,7 +410,7 @@ C11/C++11 内存模型基于三种基本序关系：
 | **`AcqRel`** | `memory_order_acq_rel` | 对 RMW（read-modify-write）操作同时提供 acquire + release | CAS、fetch_add 等 RMW | 用于普通 load/store |
 | **`SeqCst`** | `memory_order_seq_cst` | 全局一致的序：所有 seq_cst 操作形成单一全序 | 多线程协议初始化、标志位同步 | 滥用为"最安全默认" |
 
-> **来源**: [Rust Reference: Atomic types — Memory orderings](https://doc.rust-lang.org/reference/introduction.html) · [Rust std::sync::atomic::Ordering docs] · [C++ Standard §33.5 [atomics.fences]]
+> **来源**: [Rust Reference: Atomic types — Memory orderings](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [Rust std::sync::atomic::Ordering docs] · [C++ Standard §33.5 [atomics.fences]]
 
 #### 精确语义：Release-Acquire 配对
 
@@ -440,7 +440,7 @@ let data = shared_data.load(Ordering::Acquire); // Acquire: 看到 store 后，d
     - 不保证 StoreStore/LoadLoad 屏障（由编译器重排规则自然满足）
 ```
 
-> **来源**: [Rust Reference: Memory model — Release-acquire ordering](https://doc.rust-lang.org/reference/introduction.html) · [Batty et al. 2011 — The Semantics of Multicore C] · [LLVM LangRef: Atomic Instructions]
+> **来源**: [Rust Reference: Memory model — Release-acquire ordering](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [Batty et al. 2011 — The Semantics of Multicore C] · [LLVM LangRef: Atomic Instructions]
 
 **Release-Acquire 时序可视化（Mermaid sequenceDiagram）**:
 
@@ -557,7 +557,7 @@ SeqCst 的额外保证:
 ```
 
 > **来源**:
-> [Rust Reference: Memory model — Sequential consistency](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rust Reference: Memory model — Sequential consistency](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) ·
 > [LLVM LangRef: Atomic memory ordering constraints] ·
 > [cppreference: std::memory_order] ·
 > [Herlihy & Shavit 2011 — The Art of Multiprocessor Programming Ch.7]
@@ -671,7 +671,7 @@ Send 和 Sync 形成类型系统的"安全格":
   3. 线程创建隐含 Release-Acquire 语义：父线程在 spawn 之前的写对新线程可见
 ```
 
-> **来源**: [Rust Reference: Thread spawning and memory ordering](https://doc.rust-lang.org/reference/introduction.html) · [std::sync::mpsc docs — Channel synchronization] · [POSIX Threads: pthread_create memory visibility]
+> **来源**: [Rust Reference: Thread spawning and memory ordering](https://doc.rust-lang.org/reference/special-types-and-traits.html) · [std::sync::mpsc docs — Channel synchronization] · [POSIX Threads: pthread_create memory visibility]
 
 #### 从 CSL 到 C11 的精化关系
 
@@ -725,7 +725,7 @@ unsafe impl Sync for BadSync {}  // 谎言！
   - Miri 的 data-race detector 可在运行时捕获此类错误（-Zmiri-disable-isolation）
 ```
 
-> **来源**: [Rust Reference: Send and Sync — Unsafe impl guidelines](https://doc.rust-lang.org/reference/introduction.html) · [Miri Book](https://github.com/rust-lang/miri) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **来源**: [Rust Reference: Send and Sync — Unsafe impl guidelines](https://doc.rust-lang.org/reference/special-types-and-traits.html) · [Miri Book](https://github.com/rust-lang/miri) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ---
 
@@ -826,7 +826,7 @@ graph TD
 ```
 
 > **[TRPL Ch16.3](https://doc.rust-lang.org/book/ch16-00-concurrency.html)** `Mutex<T>`提供内部可变性并通过锁机制保证线程安全。Sync 的实现对 T 的约束为 T: Send，而非 T: Sync，因为获取锁后可将值 move 出临界区。✅ 已验证
-> **[Rust Reference: Sync](https://doc.rust-lang.org/reference/introduction.html)** Sync 的定义要求 &T 可安全跨线程共享；Mutex 的锁确保任意时刻仅一个线程访问数据，故满足该定义。✅ 已验证
+> **[Rust Reference: Sync](https://doc.rust-lang.org/reference/special-types-and-traits.html)** Sync 的定义要求 &T 可安全跨线程共享；Mutex 的锁确保任意时刻仅一个线程访问数据，故满足该定义。✅ 已验证
 
 ### 6.2 `Mutex<T>` 的内部可变性定理
 

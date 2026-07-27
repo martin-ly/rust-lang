@@ -211,7 +211,7 @@ fn main() {
 }
 ```
 
-**修正对照**：确定性初始化；若确需延迟初始化（unsafe 场景），用 `MaybeUninit`。
+**修正对照**：确定性初始化；若确需延迟初始化（unsafe 场景），用 `MaybeUninit`。Rust 1.96+ 还在裸指针 API 中引入 `valid-for-read` / `valid-for-write` 概念（如 `ptr::is_aligned_and_valid_for_read` 等实验 API），用于显式询问某段内存是否可安全读取/写入，进一步细化 UB 边界。
 
 ```rust
 fn main() {

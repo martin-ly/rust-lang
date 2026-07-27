@@ -130,7 +130,7 @@ graph TD
 
 > **扩展条件**: 使用 `unsafe` 关键字标记的块、函数或 trait impl。
 > **安全保证**: 编译器不再验证内存安全，程序员必须手动维护不变式。
-> **核心契约**: 来源: [The Rustonomicon, *What Unsafe Rust Can Do*](https://doc.rust-lang.org/nomicon/index.html)
+> **核心契约**: 来源: [The Rustonomicon, *What Unsafe Rust Can Do*](https://doc.rust-lang.org/nomicon/what-unsafe-does.html)
 
 | 操作 | 是否需要 unsafe | 风险等级 | 典型场景 | 来源: [Rustonomicon §1.3](https://doc.rust-lang.org/nomicon/index.html)
 |:---|:---:|:---:|:---|

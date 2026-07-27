@@ -20,7 +20,7 @@
 > [Rust vs Haskell](../../05_comparative/02_managed_languages/09_rust_vs_haskell.md) ·
 > [分布式共识](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) ·
 > [语义模型图谱](../../00_meta/knowledge_topology/11_semantic_model_atlas.md) ·
-> [Rust Standard Library — std::sync](https://doc.rust-lang.org/std/sync/) · [Rust Async Book](https://rust-lang.github.io/async-book/) ·
+> [Rust Standard Library — std::sync](https://doc.rust-lang.org/std/sync/) · [Rust Async Book](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html) ·
 > [Plotkin & Pretnar 2009 — Handlers of Algebraic Effects](https://doi.org/10.1007/978-3-642-00590-9_7) ·
 > [Harris et al. — Composable Memory Transactions](https://www.microsoft.com/en-us/research/publication/composable-memory-transactions/) ·
 > [Ongaro & Ousterhout 2014 — Raft](https://raft.github.io/raft.pdf) ·

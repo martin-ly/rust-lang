@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 536,
-    "generated_at": "2026-07-27T20:27:03.284767+00:00"
+    "total_files": 537,
+    "generated_at": "2026-07-27T20:49:47.393356+00:00"
   },
   "files": [
     {
@@ -1126,18 +1126,19 @@
       "layer": "L0",
       "title": "定理链全局注册表（Theorem Registry）",
       "positioning": "",
-      "line_count": 219,
+      "line_count": 240,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../02_sources/01_authority_source_map.md"
+        "../02_sources/01_authority_source_map.md",
+        "../04_navigation/04_inter_layer_map.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 70,
+      "matrix_rows": 75,
       "pre_post": {
         "pre": [],
         "post": []
@@ -1683,6 +1684,28 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\02_sources\\topic_authority_alignment_map.md",
+      "layer": "L0",
+      "title": "主题-权威来源对齐图谱 (Topic-Authority Alignment Map)",
+      "positioning": "",
+      "line_count": 364,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 4,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\00_meta\\03_audit\\01_concept_audit_guide.md",
       "layer": "L0",
       "title": "Concept Audit Guide（概念审计指南）",
@@ -2128,7 +2151,7 @@
       "layer": "L0",
       "title": "跨层知识图谱（Inter-Layer Dependency Map）",
       "positioning": "本文件是 `concept/` 知识体系的全局关系骨架，显式定义 L0-L7 各层之间的**逻辑蕴含关系**、**形式化映射**、**反事实依赖**和**反向反馈**。",
-      "line_count": 634,
+      "line_count": 680,
       "theorem_chains": [
         {
           "text": "| — | Send/Sync (Marker Trait) | 并发安全保证 | 并发分离逻辑 (CSL) | **同态** | Send/Sync ⟹ CSL 资源安全 |",
@@ -2190,13 +2213,14 @@
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../04_formal/01_ownership_logic/02_ownership_formal.md",
         "../00_framework/methodology.md",
+        "../00_framework/theorem_registry.md",
         "../02_sources/01_authority_source_map.md",
         "../02_sources/05_international_authority_index.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 73,
+      "matrix_rows": 92,
       "pre_post": {
         "pre": [],
         "post": []
@@ -10992,7 +11016,7 @@
       "layer": "L1",
       "title": "类型系统基础",
       "positioning": "",
-      "line_count": 3378,
+      "line_count": 3380,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡、相关概念链接",
@@ -11011,7 +11035,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.4 定理：类型推断完备性 ⟹ Principal type property](#44-定理类型推断完备性--principal-type-property)",
+          "text": "- [4.4 定理：类型推断完备性 ⟹ Principal type property（条件性）](#44-定理类型推断完备性--principal-type-property条件性)",
           "type": "paragraph"
         },
         {
@@ -21116,15 +21140,15 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.1 引理：Box ⟹ 堆分配 + 唯一所有权（Ownership）](#41-引理box--堆分配--唯一所有权)",
+          "text": "- [4.1 引理：Box ⟹ 堆分配 + 唯一所有权](#41-引理box--堆分配--唯一所有权)",
           "type": "paragraph"
         },
         {
-          "text": "- [4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用（Reference）计数）](#42-定理rcarc--共享所有权安全引用计数)",
+          "text": "- [4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用计数）](#42-定理rcarc--共享所有权安全引用计数)",
           "type": "paragraph"
         },
         {
-          "text": "- [4.3 推论：RefCell ⟹ 内部可变性运行时（Runtime）检查](#43-推论refcell--内部可变性运行时检查)",
+          "text": "- [4.3 推论：RefCell ⟹ 内部可变性运行时检查](#43-推论refcell--内部可变性运行时检查)",
           "type": "paragraph"
         },
         {
@@ -27741,7 +27765,7 @@
       "layer": "L3",
       "title": "Async/Await（异步编程）",
       "positioning": "",
-      "line_count": 3645,
+      "line_count": 3650,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 定理一致性（Coherence）矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注",
@@ -29604,7 +29628,7 @@
       "layer": "L3",
       "title": "Pin 与 Unpin：自引用类型的不动性保证",
       "positioning": "深入分析 Rust 中 **Pin<&mut T>** 和 **Unpin** 的设计动机——解决自引用（Reference）类型（self-referential structs）在内存移动时的安全问题，探讨 Pin 与 Future、Generator 的交互，以及 async/await 的状态机实现。",
-      "line_count": 1148,
+      "line_count": 1154,
       "theorem_chains": [
         {
           "text": "| 必须自引用且固定后不再移动 | `Pin<Box<T>>` 或 `pin_mut!` | §4.1 反命题树 TRUE | 之后仍需移动 ⟹ 违反 Pin 契约 |",
@@ -35145,7 +35169,7 @@
           "flags": [],
           "lines": 5,
           "should_fail": false,
-          "code_preview": "#[unsafe(no_mangle)] // Edition 2024：unsafe 属性需显式标注 pub extern \"C\" fn rust_add(a..."
+          "code_preview": "#[unsafe(no_mangle)] // Edition 2024：unsafe 属性需显式标注；旧版写作 #[no_mangle] pub extern..."
         }
       ],
       "sources": [],
@@ -38947,7 +38971,7 @@
       "layer": "L4",
       "title": "子类型与变型：Rust 类型系统中的协变、逆变与不变",
       "positioning": "深入分析 Rust 类型系统（Type System）中的**子类型关系**与**变型规则**（Variance），解释为什么 `&'static str` 可以赋给 `&'a str`，但 `&mut &'static str` 不能赋给 `&mut &'a str`。",
-      "line_count": 714,
+      "line_count": 715,
       "theorem_chains": [
         {
           "text": "2. **变型定义**：类型构造子 F 的变型 = 子类型关系经 F 后的方向——协变（`T<:U ⟹ F<T><:F<U>`）、逆变（方向反转）、不变（仅当 T=U）；判定口诀：「出现在输出位置 → 协变，输入位置 → 逆变」；",
@@ -48505,7 +48529,7 @@
       "layer": "L5",
       "title": "Rust vs Haskell：所有权/RAII 与惰性纯函数式语言的系统对比",
       "positioning": "从**内存模型**、**类型系统**、**效应系统**、**并发模型**、**形式化验证**与**适用场景**六个维度，系统对比 Rust 与 Haskell 的设计哲学与工程权衡。本文是对 [Paradigm Matrix](../00_paradigms/01_paradigm_matrix.md) 中「函数式编程 vs 系统编程」交叉视角的 pairwise 深化，不重复该矩阵的通用范式定义。",
-      "line_count": 860,
+      "line_count": 862,
       "theorem_chains": [],
       "anti_propositions": [
         {

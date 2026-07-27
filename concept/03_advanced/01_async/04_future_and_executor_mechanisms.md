@@ -1087,7 +1087,7 @@ impl Future for MyFuture {
 
 ### 外部资源
 
-- [Async Book - Pinning](https://rust-lang.github.io/async-book/)
+- [Async Book - Pinning](https://rust-lang.github.io/async-book/04_pinning/01_chapter.html)
 - [Tokio Internals](https://tokio.rs/blog/2019-10-scheduler)
 
 ---

@@ -22,7 +22,7 @@
 > **对应 L4 形式化**: 并发分离逻辑 · 线性时序逻辑 · 效果系统 · 元类型论
 > **来源:
 >
-> [Rust Reference - Concurrency](https://doc.rust-lang.org/reference/introduction.html)** ·
+> [Rust Reference - Concurrency](https://doc.rust-lang.org/reference/special-types-and-traits.html)** ·
 > **来源: [Rustonomicon - docs.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/index.html)** ·
 > **来源: [Wikipedia - Asynchronous I/O](https://en.wikipedia.org/wiki/Asynchronous_I/O)** ·
 > **来源: [Wikipedia - Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming)**

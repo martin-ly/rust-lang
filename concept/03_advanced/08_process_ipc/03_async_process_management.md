@@ -288,7 +288,7 @@ impl PartialOrd for Task {
 
 ---
 
-> **权威来源**: [Tokio Process](https://docs.rs/tokio/latest/tokio/) · [Rust Async Book](https://rust-lang.github.io/async-book/)
+> **权威来源**: [Tokio Process](https://docs.rs/tokio/latest/tokio/) · [Rust Async Book](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html)
 
 ---
 

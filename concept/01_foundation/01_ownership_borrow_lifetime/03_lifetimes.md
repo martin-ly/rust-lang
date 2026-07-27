@@ -154,7 +154,7 @@ mindmap
 
 ## 一、权威定义（Definition）
 
-> (Source: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/introduction.html))
+> (Source: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetimes.html))
 
 ### 1.1 TRPL 官方定义
 
@@ -252,7 +252,7 @@ NLL 的关键改进:
   求解器: 从基于"作用域嵌套树"变为基于"CFG 数据流分析"
 ```
 
-> **来源**: [rustc NLL [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html) — Non-Lexical Lifetimes] · [Rust Reference: Lifetime resolution](https://doc.rust-lang.org/reference/introduction.html) · [rustc borrow_check/src/region_inference/mod.rs]
+> **来源**: [rustc NLL [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html) — Non-Lexical Lifetimes] · [Rust Reference: Lifetime resolution](https://doc.rust-lang.org/reference/lifetime-elision.html) · [rustc borrow_check/src/region_inference/mod.rs]
 
 #### 与 Polonius 的演进关系
 
@@ -326,7 +326,7 @@ Polonius 的改进:
 |:---|:---|:---|:---|
 | **Trait object 生命周期** | 默认边界取决于上下文：`Box<dyn Trait>` → `dyn Trait + 'static`；`&'a dyn Trait` → `dyn Trait + 'a` | `dyn Trait + 'a` | 拥有型容器默认 `'static`，借用型容器继承引用生命周期；显式 `+ 'a` 可放宽 |
 | **`const`/`static` 引用** | `const X: &str = "..."` 隐式 `'static` | `const X: &'static str = "..."` | `const` 与 `static` 的初始化值被提升为 `'static`；显式标注可省略 |
-| **函数指针/闭包 trait** | `fn(&str) -> &str` 中引用生命周期按函数 elision 推断 | `for<'a> fn(&'a str) -> &'a str` | 高阶函数指针与 `Fn`、`FnMut`、`FnOnce` trait bound 同样适用 elision |
+| **函数指针 (function pointer) / 闭包 trait** | `fn(&str) -> &str` 中引用生命周期按函数 elision 推断 | `for<'a> fn(&'a str) -> &'a str` | 高阶函数指针与 `Fn`、`FnMut`、`FnOnce` trait bound 同样适用 elision |
 | **`'_` 占位符** | `&'_ str` 等价于 `&'a str`（由编译器分配新生命周期参数） | `&'a str` | 用于“需要标注但无需命名”的场景，如 `Box<dyn Trait + '_>` 中避免默认 `'static` |
 
 **关键边界示例**：
@@ -506,7 +506,7 @@ graph BT
   ⟹ 长生命周期引用可安全替代短生命周期引用，无悬垂风险
 ```
 
-> **来源: [Rust Reference: Variance](https://doc.rust-lang.org/reference/introduction.html)** 生命周期协变/逆变/不变的类型系统（Type System）规则基于子类型理论。✅
+> **来源: [Rust Reference: Variance](https://doc.rust-lang.org/reference/subtyping.html)** 生命周期协变/逆变/不变的类型系统（Type System）规则基于子类型理论。✅
 
 ### 4.6 推论：'static 生命周期 ⟹ 全局/泄漏数据的安全性
 

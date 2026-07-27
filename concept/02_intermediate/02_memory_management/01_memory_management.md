@@ -19,7 +19,7 @@
 > [Async](../../03_advanced/01_async/01_async.md)
 > **主要来源**: [TRPL: Ch4.1-4.3](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html) · [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) · [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [TRPL: Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) ·
-> [Rust Reference: Memory Model](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rust Reference: Memory Model](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) ·
 > [Wikipedia: Memory management](https://en.wikipedia.org/wiki/Memory_management)
 > (Source: [TRPL — What is Ownership?](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html))
 
@@ -42,7 +42,7 @@
 
 ## 📑 目录
 
-- [Memory Management（内存管理）](#memory-management内存管理)
+- [内存管理](#内存管理)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 Wikipedia 对齐定义](#11-wikipedia-对齐定义)
@@ -50,21 +50,21 @@
     - [1.3 形式化定义](#13-形式化定义)
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
     - [2.1 Stack vs Heap 对比矩阵](#21-stack-vs-heap-对比矩阵)
-    - [2.2 智能指针（Smart Pointer）对比矩阵](#22-智能指针对比矩阵)
+    - [2.2 智能指针对比矩阵](#22-智能指针对比矩阵)
     - [2.3 内部可变性模式矩阵](#23-内部可变性模式矩阵)
   - [三、思维导图（Mind Map）](#三思维导图mind-map)
   - [四、定理推理链（Theorem Chain）](#四定理推理链theorem-chain)
-    - [4.1 引理：Box ⟹ 堆分配 + 唯一所有权（Ownership）](#41-引理box--堆分配--唯一所有权)
-    - [4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用（Reference）计数）](#42-定理rcarc--共享所有权安全引用计数)
-    - [4.3 推论：RefCell ⟹ 内部可变性运行时（Runtime）检查](#43-推论refcell--内部可变性运行时检查)
+    - [4.1 引理：Box ⟹ 堆分配 + 唯一所有权](#41-引理box--堆分配--唯一所有权)
+    - [4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用计数）](#42-定理rcarc--共享所有权安全引用计数)
+    - [4.3 推论：RefCell ⟹ 内部可变性运行时检查](#43-推论refcell--内部可变性运行时检查)
     - [4.4 RAII + 所有权 ⟹ 确定性释放](#44-raii--所有权--确定性释放)
-    - [4.5 定理一致性（Coherence）矩阵](#45-定理一致性矩阵)
+    - [4.5 定理一致性矩阵](#45-定理一致性矩阵)
   - [五、示例与反例（Examples \& Counter-examples）](#五示例与反例examples--counter-examples)
     - [5.1 正确示例：Box 堆分配](#51-正确示例box-堆分配)
     - [5.2 正确示例：Rc 共享所有权](#52-正确示例rc-共享所有权)
     - [5.3 正确示例：用 Weak 打破循环引用](#53-正确示例用-weak-打破循环引用)
     - [5.4 反例：Rc 循环引用导致泄漏](#54-反例rc-循环引用导致泄漏)
-    - [5.5 反例：RefCell 运行时借用（Borrowing）冲突（panic）](#55-反例refcell-运行时借用冲突panic)
+    - [5.5 反例：RefCell 运行时借用冲突（panic）](#55-反例refcell-运行时借用冲突panic)
     - [5.5 补充：`Pin<&mut T>` 的堆内存语义与自引用安全](#55-补充pinmut-t-的堆内存语义与自引用安全)
       - [栈 Pin vs 堆 Pin](#栈-pin-vs-堆-pin)
       - [自引用结构的形式化保证](#自引用结构的形式化保证)
@@ -93,7 +93,7 @@
   - [九、知识来源关系（Provenance）](#九知识来源关系provenance)
   - [判定表：内存管理策略判定](#判定表内存管理策略判定)
   - [十、相关概念链接](#十相关概念链接)
-    - [补充章节：`MaybeUninit<T>` 的内存安全（Memory Safety）边界](#补充章节maybeuninitt-的内存安全边界)
+    - [补充章节：`MaybeUninit<T>` 的内存安全边界](#补充章节maybeuninitt-的内存安全边界)
       - [用途：未初始化内存的安全抽象](#用途未初始化内存的安全抽象)
       - [与 `mem::uninitialized` 的区别](#与-memuninitialized-的区别)
       - [`assume_init` 的安全契约](#assume_init-的安全契约)
@@ -136,7 +136,7 @@
     - [10.3 边界测试：`Box::leak` 的永久泄漏（逻辑错误）](#103-边界测试boxleak-的永久泄漏逻辑错误)
     - [10.4 边界测试：`Rc<RefCell<T>>` 的循环引用（运行时 panic/内存泄漏）](#104-边界测试rcrefcellt-的循环引用运行时-panic内存泄漏)
     - [10.3 边界测试：`Box::into_raw` 后双重释放（运行时 UB）](#103-边界测试boxinto_raw-后双重释放运行时-ub)
-    - [10.4 边界测试：Box::leak 后的可变借用（Mutable Borrow）与原始 Box 的关系（编译错误）](#104-边界测试boxleak-后的可变借用与原始-box-的关系编译错误)
+    - [10.4 边界测试：Box::leak 后的可变借用与原始 Box 的关系（编译错误）](#104-边界测试boxleak-后的可变借用与原始-box-的关系编译错误)
     - [10.3 边界测试：返回局部变量的悬垂引用](#103-边界测试返回局部变量的悬垂引用)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Stack vs Heap（理解层）](#测验-1stack-vs-heap理解层)
@@ -1048,7 +1048,7 @@ c.borrow_mut().push_str("hello");     // 运行时检查的可变借用
 
 ### Step 3: 规则困惑 — 借用检查与内部可变性
 
-> **[TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rustonomicon: Interior Mutability](https://doc.rust-lang.org/nomicon/index.html)** 编译期检查是静态证明（零开销但保守），RefCell 是动态监控（运行时开销但更灵活）。 ✅
+> **[TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rustonomicon: Interior Mutability](https://doc.rust-lang.org/nomicon/interior-mutability.html)** 编译期检查是静态证明（零开销但保守），RefCell 是动态监控（运行时开销但更灵活）。 ✅
 
 **核心问题**: "编译期不让我可变借用（Mutable Borrow），RefCell 为什么可以？"
 
@@ -1333,7 +1333,7 @@ pub unsafe extern "C" fn rust_string_to_c(s: String) -> *mut c_char {
 }
 ```
 
-> **来源**: [Rust Reference: ManuallyDrop](https://doc.rust-lang.org/std/mem/struct.ManuallyDrop.html) · [Rust Reference: std::mem::forget](https://doc.rust-lang.org/std/mem/fn.forget.html) · [Rustonomicon: Special memory](https://doc.rust-lang.org/nomicon/index.html) · [Wikipedia: Memory management](https://en.wikipedia.org/wiki/Memory_management)
+> **来源**: [Rust Reference: ManuallyDrop](https://doc.rust-lang.org/std/mem/struct.ManuallyDrop.html) · [Rust Reference: std::mem::forget](https://doc.rust-lang.org/std/mem/fn.forget.html) · [Rustonomicon: Special memory](https://doc.rust-lang.org/nomicon/exotic-sizes.html) · [Wikipedia: Memory management](https://en.wikipedia.org/wiki/Memory_management)
 
 ---
 

@@ -35,6 +35,11 @@
   - [五、层间一致性检查点](#五层间一致性检查点)
     - [5.1 定义一致性检查](#51-定义一致性检查)
     - [5.2 定理一致性检查](#52-定理一致性检查)
+    - [5.3 跨层术语与定理编号映射](#53-跨层术语与定理编号映射)
+      - [5.3.1 所有权/借用状态映射](#531-所有权借用状态映射)
+      - [5.3.2 定理编号约定映射](#532-定理编号约定映射)
+      - [5.3.3 异步操作语义映射](#533-异步操作语义映射)
+      - [5.3.4 UB 分类 L3 ↔ L4 对照](#534-ub-分类-l3--l4-对照)
   - [六、反事实与边界条件](#六反事实与边界条件)
     - [6.1 什么情况下形式化保证失效？](#61-什么情况下形式化保证失效)
     - [6.2 跨层断裂点](#62-跨层断裂点)
@@ -323,7 +328,7 @@ graph LR
     前提: T: Send（所有权可跨线程转移）∧ T: Sync（&T 可跨线程共享）
     推理: 线程间传递满足所有权唯一性或不可变共享
     反事实: Rc<T> 不是 Send（共享计数器非线程安全）
-    来源: ✅ [TRPL Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · ✅ [Rustonomicon: Send and Sync](https://doc.rust-lang.org/nomicon/index.html)
+    来源: ✅ [TRPL Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · ✅ [Rustonomicon: Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html)
 
 形式化完备 (L4): RustBelt ⟹ 上述所有定理可机械验证
     前提: Iris 分离逻辑 + λRust 操作语义
@@ -352,7 +357,7 @@ graph LR
     前提: 生命周期约束是偏序关系
     推理: 图可达性算法可在多项式时间求解
     反事实: HRTB (∀<'a>) 引入全称量词 ⟹ 更高复杂度但仍可判定
-    来源: ✅ [Rust Reference: Lifetime Elision](https://doc.rust-lang.org/reference/introduction.html) · 💡 [原创分析]
+    来源: ✅ [Rust Reference: Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · 💡 [原创分析]
 
 子定理 3 (L2-L3): 单态化 ⟹ 零成本抽象
     前提: 泛型函数在每个实例类型上独立编译
@@ -418,6 +423,47 @@ graph LR
 | 无内存泄漏 | L1 + L2 | 所有权 ⟹ Drop，但 Rc 循环例外 | ⚠️ 有条件成立 |
 | 零成本抽象 | L2 + L4 | 单态化 ⟹ 无运行时开销 | ✅ 一致（dyn 除外） |
 | async 安全 | L3 + L4 | Pin + Future ⟹ 自引用安全 | ⚠️ 部分形式化 |
+
+### 5.3 跨层术语与定理编号映射
+
+为消除 L1-L4 之间因教学表述与形式化记号不同而产生的语义对称差，本节建立显式映射表。
+
+#### 5.3.1 所有权/借用状态映射
+
+| 教学层 (L1/L2) | 形式化层 (L4) | 说明 |
+|:---|:---|:---|
+| `Own(T)` / 唯一 owner | `Own(p)` | 对位置 `p` 的独占资源权限 |
+| `Moved` | 权限转移（无剩余权限） | move 后原变量失去 `Own(p)` |
+| `Borrow(&T)` | `Shr(p)` | 对 `p` 的共享只读分数权限 |
+| `Borrow(&mut T)` | `Mut(p)` | 对 `p` 的独占可变分数权限 |
+| `Dropped` | `Dealloc(p)` | 资源释放，权限归还 |
+
+> 权威来源：RustBelt (Jung et al., POPL 2018) 使用 `Own / Shr / Mut / Dealloc` 作为 Iris 分离逻辑中的权限谓词；TRPL 与 Brown Book 使用 `所有权 / 借用 / 生命周期` 等教学术语。
+
+#### 5.3.2 定理编号约定映射
+
+| 编号体系 | 使用场景 | 示例 | 对应关系 |
+|:---|:---|:---|:---|
+| 项目 `T-xxx` | `concept/` 全局定理链 | T-001 所有权唯一性 | 统一注册于 [`theorem_registry.md`](../00_framework/theorem_registry.md) |
+| L4 内部 `L1 / L2 / T1 / C1 / C2` | 形式化页本地引理/定理/推论 | L1 线性逻辑公理、T1 Move 安全定理 | 应在各 L4 文件首次出现时标注对应项目编号 |
+| `AXM` | 借用规则别名 | Alias-XOR-Mutation | 等价于 T-010 借用规则 |
+
+#### 5.3.3 异步操作语义映射
+
+| L3 语法 | L4 语义对象 | 说明 |
+|:---|:---|:---|
+| `async fn` / `async {}` | `Future` 状态机 | 编译期去糖为 `poll` 方法 |
+| `.await` | `IntoFuture::into_future` + `Pin::new_unchecked` + `Future::poll` | 每次 `.await` 产生一次状态转移 |
+| `Pin<Box<T>>` | location stability 约束 | 保证自引用字段地址不变 |
+
+#### 5.3.4 UB 分类 L3 ↔ L4 对照
+
+| L3 工程分类 | L4 形式化分类 | 对应权威页 |
+|:---|:---|:---|
+| 越界访问 / 悬垂指针 | 越界 place projection / 无效引用 | `concept/04_formal/01_ownership_logic/06_behavior_considered_undefined.md` |
+| 无效枚举值 / ABI 不匹配 | 产生无效值 / 错误调用约定 | `concept/03_advanced/02_unsafe/01_unsafe.md` |
+| 数据竞争 | 非原子并发访问重叠内存 | `concept/03_advanced/00_concurrency/04_send_sync_boundaries.md` |
+| 未初始化内存读取 | 读取未初始化 place | `concept/04_formal/01_ownership_logic/06_behavior_considered_undefined.md` |
 
 ---
 

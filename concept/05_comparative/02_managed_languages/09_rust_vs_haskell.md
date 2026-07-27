@@ -512,7 +512,7 @@ const fn double(x: i32) -> i32 {
 
 > **关键洞察**：Rust 的效应系统是「可选且局部的」——普通函数默认可以执行任意副作用，只有需要特殊保证时才加上 `unsafe`、`async` 或 `const`。
 >
-> **来源**: [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Async Book](https://rust-lang.github.io/async-book/)
+> **来源**: [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Async Book](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html)
 
 ### 6.2 Haskell：单子与纯函数默认
 

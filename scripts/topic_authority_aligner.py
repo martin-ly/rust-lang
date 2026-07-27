@@ -344,6 +344,17 @@ AUTHORITY_TOPIC_ALIASES = {
     "ring / rustls": "concept/06_ecosystem/07_security_and_cryptography/02_security_cryptography.md",
 }
 
+# 人工声明：这些项目文件对应权威来源中的已知主题，但标题/章节名差异导致自动对齐未命中。
+# 格式：project_path -> 权威来源描述（用于报告）。命中时不计入 "项目独有"。
+MANUAL_AUTHORITY_COVERAGE = {
+    "concept/01_foundation/04_control_flow/03_let_chains.md": "RFC 2497 / Reference — If expressions",
+    "concept/01_foundation/02_type_system/02_never_type.md": "RFC 1216 / Reference — Never type",
+    "concept/02_intermediate/01_generics/02_const_generics.md": "RFC 2000 / Reference — Generic parameters",
+    "concept/02_intermediate/02_memory_management/03_cow_and_borrowed.md": "std::borrow::Cow / TRPL — Smart Pointers",
+    "concept/03_advanced/02_unsafe/09_sanitizers.md": "rustc-dev-guide / Unstable Book — Sanitizers",
+    "concept/03_advanced/02_unsafe/07_unsafe_reference.md": "Reference — Unsafety",
+}
+
 
 def phase1():
     print("=== Phase 1: 抽取当前项目主题 ===")
@@ -431,6 +442,24 @@ def phase3():
                 "authority": at,
                 "best_score": round(score, 3),
             })
+
+    # 应用人工覆盖声明：将已知对应权威来源的项目主题视为已对齐
+    manually_aligned = []
+    for pt in project_topics:
+        if pt["path"] in MANUAL_AUTHORITY_COVERAGE and pt["path"] not in project_matched:
+            project_matched.add(pt["path"])
+            manually_aligned.append({
+                "authority": {
+                    "title": MANUAL_AUTHORITY_COVERAGE[pt["path"]],
+                    "category": "manual_coverage",
+                    "book": MANUAL_AUTHORITY_COVERAGE[pt["path"]],
+                    "url": "",
+                },
+                "project_match": pt,
+                "score": 1.0,
+                "manual": True,
+            })
+    aligned.extend(manually_aligned)
 
     only_in_project = [pt for pt in project_topics if pt["path"] not in project_matched]
 

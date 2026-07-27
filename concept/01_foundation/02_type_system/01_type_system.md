@@ -310,6 +310,8 @@ Rust 扩展:
 | | Slice | `[T]` | 无法直接拥有 | N/A | 动态 |
 | | 字符串切片 | `str` | 无法直接拥有 | N/A | 动态（UTF-8 字节序列，DST） |
 
+> **Rust Reference: Types** 将 `str` 与 `i32`、`bool`、`char` 等一同列为 **built-in primitive type**（内建原始类型）。`str` 是 Rust 中唯一一个既非标量也非复合的原始类型，它是动态大小类型（DST），通常以 `&str` 形式出现。✅
+
 ### 2.2 Rust 类型系统特征矩阵
 >
 
@@ -386,7 +388,7 @@ classDiagram
 > 图中的 note 标注了典型实现者和例外，帮助读者快速判断「我的类型是否自动实现了某 trait」。
 > 建议将此图作为「trait 实现推断」的参考——看到 `T: Copy` 约束时，知道它也满足 `T: Clone + Sized`。
 > 来源: [Rust Reference §11; TRPL §10; UML Class Diagram Standard](https://doc.rust-lang.org/reference/introduction.html)
-> [来源: [TRPL — Types](https://doc.rust-lang.org/book/title-page.html)]
+> [来源: [TRPL — Data Types](https://doc.rust-lang.org/book/ch03-02-data-types.html)]
 > **类型分类层次（另一视角——数据导向）**:
 
 ```mermaid
@@ -1183,7 +1185,7 @@ let s = infallible_op()?;  // ? 不会返回，因为 Err(!) 无法构造
 
 ### 11.2 补充：Zero-Sized Types (ZST) 与 `PhantomData`
 
-> **[Rust Reference: Zero-sized types](https://doc.rust-lang.org/reference/introduction.html)** ·
+> **[Rust Reference: Zero-sized types](https://doc.rust-lang.org/reference/types.html)** ·
 > **[Rust Reference: PhantomData](https://doc.rust-lang.org/reference/special-types-and-traits.html)**
 > ZST 是**运行时大小为 0 字节**的类型，在类型论中是**单元类型（unit type）**的泛化。
 > `PhantomData<T>` 是 ZST 的代表，用于**在类型系统中携带编译期信息**，而不产生运行时开销。✅
@@ -1255,7 +1257,7 @@ struct Invariant<T>(PhantomData<*mut T>);    // T 不变
 > 这是"零成本抽象（Zero-Cost Abstraction）"的极致体现。
 >
 > **来源**: [Rust Reference: PhantomData](https://doc.rust-lang.org/reference/special-types-and-traits.html) ·
-> [Rust Reference: Variance](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rust Reference: Variance](https://doc.rust-lang.org/reference/subtyping.html) ·
 > [Rustonomicon: PhantomData](https://doc.rust-lang.org/nomicon/index.html) ·
 > [Wikipedia: Unit type](https://en.wikipedia.org/wiki/Unit_type)
 
@@ -1836,13 +1838,13 @@ fn main() {
 | `Option<&u32>::None` | 全 0 | 64 位 null 指针 |
 | `Option<Option<&u32>>::None` | `[00, ..., 00, 01, 00, ..., 00]` | 需显式 tag 区分 `None` 与 `Some(None)`，大小为 16 |
 
-> **来源: [The Rustonomicon: Transmute](https://doc.rust-lang.org/nomicon/index.html)** `std::mem::transmute` 和裸指针转换是观察内存布局的终极工具，但任何对布局的依赖都属于 `unsafe` 合约——编译器版本升级可能改变无 `#[repr]` 类型的布局。✅
+> **来源: [The Rustonomicon: Transmute](https://doc.rust-lang.org/nomicon/transmutes.html)** `std::mem::transmute` 和裸指针转换是观察内存布局的终极工具，但任何对布局的依赖都属于 `unsafe` 合约——编译器版本升级可能改变无 `#[repr]` 类型的布局。✅
 > **一致性检查**: §11.5.2 的形式化布局公式与 §11.5.7 的实验代码形成 "理论—实践" 闭环。`#[repr]` 的介入是两者之间的控制变量：无 repr 时理论仅能给出上界，有 repr 时布局精确可预测。
 > **来源汇总**:
 > [Rust Reference: Enums](https://doc.rust-lang.org/reference/items/enumerations.html) · [Rust Reference: Type Layout](https://doc.rust-lang.org/reference/type-layout.html) · [Rust Reference: repr Attribute](https://doc.rust-lang.org/reference/type-layout.html#representations) ·
 > [Rust Reference: std::mem::discriminant](https://doc.rust-lang.org/reference/introduction.html) · [Rust Reference: DiscriminantKind](https://doc.rust-lang.org/reference/introduction.html) ·
 > [Unsafe Code Guidelines: Enum Layout] · [Unsafe Code Guidelines: Values] ·
-> [The Rustonomicon: Exotic Sizes](https://doc.rust-lang.org/nomicon/index.html) · [The Rustonomicon: Transmute](https://doc.rust-lang.org/nomicon/index.html) · [Wikipedia: Tagged union](https://en.wikipedia.org/wiki/Tagged_union)
+> [The Rustonomicon: Exotic Sizes](https://doc.rust-lang.org/nomicon/index.html) · [The Rustonomicon: Transmute](https://doc.rust-lang.org/nomicon/transmutes.html) · [Wikipedia: Tagged union](https://en.wikipedia.org/wiki/Tagged_union)
 
 ### 11.6 `union` 的类型安全边界
 
@@ -2005,7 +2007,7 @@ Rust 的类型系统中最容易被忽视的二元性体现在**生命周期子�
 ```
 
 > **来源: [Rust Reference: Subtyping](https://doc.rust-lang.org/reference/subtyping.html)** "Lifetime parameters are covariant: `'long` is a subtype of `'short` if `'long` outlives `'short`." 生命周期参数具有协变性，子类型关系由区域的包含关系（结构特征）决定。✅
-> **来源: [The Rustonomicon: Variance](https://doc.rust-lang.org/nomicon/index.html)** Rust 的 variance 系统决定了泛型参数在何种方向上保持子类型关系。生命周期是唯一在 Rust 中显式展示结构子类型的机制。✅
+> **来源: [The Rustonomicon: Variance](https://doc.rust-lang.org/nomicon/subtyping.html)** Rust 的 variance 系统决定了泛型参数在何种方向上保持子类型关系。生命周期是唯一在 Rust 中显式展示结构子类型的机制。✅
 
 这种**内部二元性**意味着：
 
@@ -2362,7 +2364,7 @@ Rust 编程者需要建立**双模式认知框架**，在不同场景下切换�
 
 > **来源**:
 > [Rust Reference: Subtyping](https://doc.rust-lang.org/reference/subtyping.html) ·
-> [Rust Reference: Variance](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rust Reference: Variance](https://doc.rust-lang.org/reference/subtyping.html) ·
 > [Rust Reference: PhantomData](https://doc.rust-lang.org/reference/special-types-and-traits.html) ·
 > [Rustonomicon: PhantomData](https://doc.rust-lang.org/nomicon/index.html) ·
 > [RFC 2584: Structural Records](https://github.com/rust-lang/rfcs/pull/2584) ·
@@ -2423,7 +2425,7 @@ let p: &Point = &Point(1, 2);
 ```
 
 > **分析**: 这一交叉点揭示了 Rust 类型系统的**层次化设计**：外层构造（引用、生命周期、泛型参数）倾向于结构规则以提供灵活性；内层原子类型（struct、enum、trait）倾向于名义规则以提供安全性与一致性。
-> [来源: [Rust Reference: Types](https://doc.rust-lang.org/reference/types.html) · [Rust Reference: Subtyping](https://doc.rust-lang.org/reference/subtyping.html) · [Rust Reference: Type Coercions](https://doc.rust-lang.org/reference/introduction.html)]（一级来源）
+> [来源: [Rust Reference: Types](https://doc.rust-lang.org/reference/types.html) · [Rust Reference: Subtyping](https://doc.rust-lang.org/reference/subtyping.html) · [Rust Reference: Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html)]（一级来源）
 > **与多级引用语义的关联**: 详见 `05_reference_semantics.md` §七 对 `&mut &T`、`&&mut T` 及 partial reborrow 的深度分析——其中外层引用的可变性遵循结构规则，而内层引用的目标类型遵循名义或结构规则，两者的交互决定了复杂借用（Borrowing）场景的类型检查行为。
 
 ---

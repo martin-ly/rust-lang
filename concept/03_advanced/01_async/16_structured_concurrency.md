@@ -16,7 +16,7 @@
 > **后置概念**: [Async IOUring Preview](../../07_future/02_preview_features/39_async_ioring_preview.md) · [Tokio Runtime Internals](../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md)
 >
 > **来源**:
-> [Async Book (WIP)](https://rust-lang.github.io/async-book/) ·
+> [Async Book (WIP)](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html) ·
 > [Structured Concurrency by Martin Sustrik](https://www.250bpm.com/p/structured-concurrency) ·
 > [Project Loom](https://openjdk.org/projects/loom/) ·
 > [Kotlin Coroutines](https://kotlinlang.org/docs/coroutine-context-and-dispatchers.html) ·

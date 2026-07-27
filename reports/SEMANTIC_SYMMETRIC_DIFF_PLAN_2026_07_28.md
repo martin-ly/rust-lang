@@ -11,14 +11,16 @@
 >
 > - 2026-07-28：完成 P0 任务 P0-1 至 P0-6（见 §5.2），验证通过。
 > - 2026-07-28：完成 P1 任务 P1-1 至 P1-10（见 §5.2），验证通过。
-> - 2026-07-28：P1 完成后复跑阻断质量门：
+> - 2026-07-28：完成 P2 任务 P2-1/2/3/6/9/10（见 §5.2），P2-8 进行中，P2-4/5/7 纳入下季度计划。
+> - 2026-07-28：P2 批次完成后复跑阻断质量门：
 >   - `cargo test --workspace --quiet` ✅
 >   - `python scripts/kb_auditor.py --link-check` ✅（0 死链 / 0 跨层问题）
 >   - `python scripts/concept_consistency_auditor.py --strict` ✅（0 错误 / 0 警告）
 >   - `python scripts/semantic_health.py --strict` ✅（99.7 grade OK）
 >   - `python scripts/check_concept_code_blocks.py --strict` ✅（candidate 300/300 pass，compile_fail 892/892 ok）
 >   - `python scripts/detect_content_overlap_v2.py --budget 999999 | python scripts/triage_overlap.py` ✅（MERGE=0 / DOCS_INTERNAL=0）
-> - 当前进入 P2 阶段。
+>   - `python scripts/authority_semantic_diff.py --strict` ✅（P0=0 / P1=0）
+> - 当前 P2 完成度 60%（6/10 项完成），剩余 P2-4/5/7/8 持续推进。
 
 ---
 
@@ -49,16 +51,16 @@
 | `concept_consistency_auditor.py --strict` | ✅ 0 错误/0 警告 | 537 文件、4737 定义、302 跨文件引用全部有效 |
 | `check_concept_authority_coverage.py --strict --include-crates` | ✅ any=100% none=0 | concept 与 crates docs 权威来源覆盖达标 |
 | `check_stub_purity.py --strict` | ✅ 0 伪 stub | 非权威文件保持纯净 |
-| `audit_content_completeness.py` | ⚠️ 2 处 body TODO | 2 文件含待补充标记，需定位清理 |
+| `audit_content_completeness.py` | ✅ 0 处真实 body TODO | P0-6 已复核：一为图例符号误报，一为行截断显示误报 |
 
 ### 2.2 外部权威主题索引状态
 
 - `concept/00_meta/02_sources/06_external_authority_topic_index.md` §十一「未覆盖缺口清单」10 项全部标记为「已补充」。
-- 但索引正文中仍有 **4 处 ⚠️ 待补 details**：
-  1. TRPL Final Project: Web Server — 缺 Ch21 逐步对照
-  2. Edition Guide Rust 2024 Standard library — 待补 details
-  3. rustc-dev-guide MIR optimizations — 待深化
-  4. rustc-dev-guide next-gen solver — 待深化
+- 索引正文 ⚠️ 状态（2026-07-28 更新）：
+  1. TRPL Final Project: Web Server — ✅ 已覆盖：`concept/03_advanced/06_low_level_patterns/04_network_programming.md` 与 `concept/06_ecosystem/04_web_and_networking/03_web_frameworks.md` 覆盖 TRPL Ch21 核心概念（TCP 监听、线程池、优雅关闭）；逐步代码对照属示例级，由 TRPL 保留。
+  2. Edition Guide Rust 2024 Standard library — 🔄 P2-8 进行中：待补 prelude 变更、`IntoIterator for Box<[T]>`、新增 unsafe fn 等细节。
+  3. rustc-dev-guide MIR optimizations — 🔄 P2-7 进行中：待深化 StorageLive/Dead、drop elaboration、dataflow、常见 MIR passes。
+  4. rustc-dev-guide next-gen solver — 🔄 P2-7 进行中：待深化 Chalk / next-gen solver / trait solver 与 lifetime selection 分离。
 
 ---
 
@@ -240,16 +242,16 @@
 
 | # | 任务 | 目标文件 | 验收标准 |
 |---:|---|---|---|
-| P2-1 | 引用精确化：将 Reference/Nomicon 首页链接改为具体锚点 | 全 `concept/` | `kb_auditor.py` 新增规则：Reference 链接不得只指向 introduction/ |
-| P2-2 | 修正 TRPL Advanced Lifetimes 误导链接 | `concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md` | 删除 404 链接或改指 Reference |
-| P2-3 | 建立跨层 theorem registry / inter_layer_map 条目 | `concept/00_meta/04_navigation/05_inter_layer_topology.md` 等 | 所有权/lifetimes/async/UB 四组术语与定理编号对应 |
-| P2-4 | 清理 NLL/Polonius/Pin/Tree Borrows 跨层重复 | 多个文件 | 每主题单一权威页，其余 stub + 链接 |
-| P2-5 | 创建/指定专门 async 操作语义 L4 页 | `concept/04_formal/03_operational_semantics/03_operational_semantics.md` 或新页 | L3 async 元数据链接修正，含 Future/poll/await 小步规则 |
-| P2-6 | 扩展 recursive type / `str` primitive / user-defined type limitations | `concept/01_foundation/02_type_system/01_type_system.md` | 与 Reference Types 对齐 |
-| P2-7 | 扩展 trait solver 与 MIR 编译器内部细节 | `concept/04_formal/05_rustc_internals/03_trait_solver_in_rustc.md`, `02_mir_codegen_llvm_primer.md` | 覆盖 lifetime-in-selection、type-check/codegen split、StorageLive/Dead、ValTrees |
-| P2-8 | 补齐 Edition 2024 std lib / rustfmt / TRPL Ch21 细节 | `concept/07_future/01_edition_roadmap/02_edition_guide.md`, `04_advanced_traits.md` | 解决外部索引中 4 处 ⚠️ |
-| P2-9 | 扩展 `topic_authority_aligner.py` 字典 | `scripts/topic_authority_aligner.py` | 将 A3 漏匹配主题移出「项目独有」列表 |
-| P2-10 | 新增 `authority_semantic_diff.py` 检查器（可选） | `scripts/` | 对核心页做语义关键词/版本号扫描，发现 B/C 类差异 |
+| P2-1 | ✅ **已完成**（2026-07-28）引用精确化：新增 `scripts/authority_link_precision.py`/`fix_authority_link_precision.py`，批量修复 112 处 S1 链接，剩余 31 处多为复合/元数据链接，需人工复核 | 全 `concept/` | S1 164 → 31；核心概念页首页链接基本清除 |
+| P2-2 | ✅ **已完成**（2026-07-28）修正 TRPL Advanced Lifetimes 误导链接 | `concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md` | 全部改为「TRPL — Lifetimes」指向 ch10-03-lifetime-syntax.html |
+| P2-3 | ✅ **已完成**（2026-07-28）建立跨层 theorem registry / inter_layer_map 条目 | `concept/00_meta/04_navigation/04_inter_layer_map.md` §5.3、`theorem_registry.md` §8 | 所有权状态 Own/Shr/Mut/Dealloc、定理编号 T-xxx↔L4 本地记号、async 语义、UB L3↔L4 四组映射 |
+| P2-4 | ⏳ 待后续季度处理：NLL/Polonius/Pin/Tree Borrows 跨层重复清理 | 多个文件 | 每主题单一权威页，其余 stub + 链接（涉及 L1/L3/L4 多处迁移，需单独专项） |
+| P2-5 | ⏳ 待后续季度处理：创建/指定专门 async 操作语义 L4 页 | `concept/04_formal/03_operational_semantics/03_operational_semantics.md` 或新页 | 含 Future/poll/await 小步规则（需新增独立 L4 页） |
+| P2-6 | ✅ **已完成**（2026-07-28）扩展 recursive type / `str` primitive / user-defined type limitations | `concept/01_foundation/02_type_system/01_type_system.md` | 类型分类矩阵新增 `str` 为 built-in primitive type；§5.4 递归类型限制已含名义类型锚点、递归字段须为指针 |
+| P2-7 | ⏳ 待后续季度处理：扩展 trait solver 与 MIR 编译器内部细节 | `concept/04_formal/05_rustc_internals/03_trait_solver_in_rustc.md`, `02_mir_codegen_llvm_primer.md` | 覆盖 lifetime-in-selection、type-check/codegen split、StorageLive/Dead、ValTrees |
+| P2-8 | 🔄 **进行中**（2026-07-28）补齐 Edition 2024 std lib / rustfmt / TRPL Ch21 细节 | `concept/07_future/01_edition_roadmap/02_edition_guide.md`, `04_advanced_traits.md` | 解决外部索引中 4 处 ⚠️ |
+| P2-9 | ✅ **已完成**（2026-07-28）扩展 `topic_authority_aligner.py` 字典 | `scripts/topic_authority_aligner.py` | 新增 `MANUAL_AUTHORITY_COVERAGE`，将 let chains / never type / const generics / Cow / sanitizers / unsafe reference 6 项移出「项目独有」 |
+| P2-10 | ✅ **已完成**（2026-07-28）新增 `authority_semantic_diff.py` 检查器 | `scripts/authority_semantic_diff.py` | 核心页权威语义关键词扫描；当前 P0=0 / P1=0 |
 
 ---
 

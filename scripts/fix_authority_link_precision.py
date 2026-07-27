@@ -171,6 +171,32 @@ LINK_TEXT_TO_URL: Dict[str, str] = {
     "common async mistakes": "https://rust-lang.github.io/async-book/07_workarounds/03_common_mistakes.html",
     "rust async book — executing futures": "https://rust-lang.github.io/async-book/02_execution/02_future.html",
     "async book (wip)": "https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html",
+    "async book - pinning": "https://rust-lang.github.io/async-book/04_pinning/01_chapter.html",
+    "rust async book — cancellation / `futuresunordered`": "https://rust-lang.github.io/async-book/06_multiple_futures/01_chapter.html",
+
+    # rustc-dev-guide
+    "rust compiler development guide — proc macros": "https://rustc-dev-guide.rust-lang.org/proc-macros.html",
+    "rustc-dev-guide — track_caller in traits": "https://rustc-dev-guide.rust-lang.org/traits/track-caller.html",
+
+    # Additional precise mappings for remaining S1
+    "rust reference: atomic types — memory orderings": "https://doc.rust-lang.org/reference/behavior-considered-undefined.html",
+    "rust reference: memory model — release-acquire ordering": "https://doc.rust-lang.org/reference/behavior-considered-undefined.html",
+    "rust reference: memory model — sequential consistency": "https://doc.rust-lang.org/reference/behavior-considered-undefined.html",
+    "rust reference: thread spawning and memory ordering": "https://doc.rust-lang.org/reference/special-types-and-traits.html",
+    "rust reference: send and sync — unsafe impl guidelines": "https://doc.rust-lang.org/reference/special-types-and-traits.html",
+    "rust reference: async fn desugaring — 局部变量提升规则": "https://doc.rust-lang.org/reference/items/functions.html#async-functions",
+    "rust reference: async fn": "https://doc.rust-lang.org/reference/items/functions.html#async-functions",
+    "rust reference — §6.10.1 const contexts": "https://doc.rust-lang.org/reference/const_evaluation.html",
+    "nom — what is unsafe?": "https://doc.rust-lang.org/nomicon/what-unsafe-does.html",
+    "the rustonomicon: transmute": "https://doc.rust-lang.org/nomicon/transmutes.html",
+    "the rustonomicon: variance": "https://doc.rust-lang.org/nomicon/subtyping.html",
+    "rust reference — generic associated types": "https://doc.rust-lang.org/reference/items/associated-items.html",
+    "rust reference: generic associated types": "https://doc.rust-lang.org/reference/items/associated-items.html",
+    "rust reference — memory model": "https://doc.rust-lang.org/reference/behavior-considered-undefined.html",
+    "rust reference — memory model / 2025": "https://doc.rust-lang.org/reference/behavior-considered-undefined.html",
+    "rust reference — constant evaluation — query cycles": "https://doc.rust-lang.org/reference/const_evaluation.html",
+    "rust reference: constant evaluation — query cycles": "https://doc.rust-lang.org/reference/const_evaluation.html",
+    "the rustonomicon, *what unsafe rust can do*": "https://doc.rust-lang.org/nomicon/what-unsafe-does.html",
 }
 
 

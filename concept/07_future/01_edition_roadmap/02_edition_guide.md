@@ -49,6 +49,7 @@
       - [2.5.2 Cargo 表名/键名一致性](#252-cargo-表名键名一致性)
       - [2.5.3 Cargo：拒绝未使用的继承默认特性](#253-cargo拒绝未使用的继承默认特性)
       - [2.5.4 Rustdoc 合并测试与嵌套 `include!`](#254-rustdoc-合并测试与嵌套-include)
+      - [2.5.5 Standard library 变更](#255-standard-library-变更)
   - [三、新特性矩阵](#三新特性矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -466,6 +467,21 @@ let _= include_bytes!("examples/data.bin");  // 2024：相对于 README.md
 
 > **迁移提示**：该变更无自动迁移工具；迁移后首次 `cargo test --doc` 失败时，按错误提示将路径改为相对于 Markdown 文件即可。
 > [来源: [Rust Edition Guide — Rustdoc combined tests](https://doc.rust-lang.org/edition-guide/rust-2024/rustdoc-doctests.html) · [Rust Edition Guide — Rustdoc nested include! change](https://doc.rust-lang.org/edition-guide/rust-2024/rustdoc-nested-includes.html)]
+
+#### 2.5.5 Standard library 变更
+
+Edition 2024 还捆绑了几项标准库层面的可见变更（通过 `rust-version` / edition 联合生效）：
+
+- **Prelude 新增 `std::future::Future` 与 `std::pin::Pin`**：
+  在 Edition 2024 中，`Future` 和 `Pin` 被加入 prelude，因此 async 代码中可减少显式 `use std::future::Future` / `use std::pin::Pin`。
+
+- **`Box<[T]>` 实现 `IntoIterator`**：
+  Rust 1.85+ / Edition 2024 起 `Box<[T]>` 可直接 `for x in box_array { ... }`，无需先 `.into_vec()` 或 `&*` 解引用。
+
+- **新增 `unsafe` fn（`std::env::set_var` 等）**：
+  根据 Edition 2024 的「unsafe 语义范围」决议，`std::env::set_var` / `std::env::remove_var` 等函数在 Edition 2024 被标记为 `unsafe fn`，调用需 `unsafe { ... }` 块。
+
+> [来源: [Rust Edition Guide — Standard library changes](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) · [Rust Reference — Prelude](https://doc.rust-lang.org/reference/names/preludes.html)]
 
 ---
 

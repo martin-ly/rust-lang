@@ -325,7 +325,7 @@ Trait 的属性矩阵沿三个维度组织，每个维度都附带可机械判�
 | **动态分发** | ✅ `dyn Trait` | ❌（通常） | ✅ 虚函数 | ✅ 默认 | ✅ 接口值 |
 
 > **来源: [Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class)** Type class 支持 ad hoc 多态，Rust Trait 直接受 Haskell Type Class 启发。 ✅
-> **来源: [Rust Reference: Traits](https://doc.rust-lang.org/reference/introduction.html)** Rust Trait 通过显式 `impl` 实现，支持关联类型、默认实现和泛型（Generics）约束。 ✅
+> **来源: [Rust Reference: Traits](https://doc.rust-lang.org/reference/items/traits.html)** Rust Trait 通过显式 `impl` 实现，支持关联类型、默认实现和泛型（Generics）约束。 ✅
 > **[C++ Reference: Concepts](https://en.cppreference.com/w/cpp/language/constraints)** C++20 Concepts 是模板的约束机制，通过 duck typing 自动匹配，无孤儿规则（Orphan Rule）。 ✅
 > **[Go Spec: Interface types](https://go.dev/ref/spec#Interface_types)** Go 接口是结构类型（structural typing），隐式实现，无显式 `implements` 关键字。 ✅
 
@@ -517,7 +517,7 @@ pub unsafe auto trait Sync {}
 边界: 可通过 unsafe impl 手动覆盖；原始指针保守默认为 !Send/!Sync
 ```
 
-> **来源: [Rust Reference: Auto Traits](https://doc.rust-lang.org/reference/introduction.html)** 结构化归纳推导是编译器对复合类型自动实现 Auto Trait 的标准机制，原始指针（Raw Pointer）因保守策略默认排除。
+> **来源: [Rust Reference: Auto Traits](https://doc.rust-lang.org/reference/special-types-and-traits.html)** 结构化归纳推导是编译器对复合类型自动实现 Auto Trait 的标准机制，原始指针（Raw Pointer）因保守策略默认排除。
 
 具体规则如下：
 
