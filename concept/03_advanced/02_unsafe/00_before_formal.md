@@ -1,6 +1,7 @@
 # 是否需要进入 L4 形式化层？
 >
 > **EN**: Formal Methods
+> **Bloom 层级**: L3
 > **Summary**: Formal Methods: advanced Rust topics, performance/runtime considerations, and ecosystem patterns.
 > **内容分级**: [综述级]
 > **受众**: [进阶]

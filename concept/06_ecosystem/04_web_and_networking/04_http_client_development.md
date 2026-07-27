@@ -1,4 +1,5 @@
 > **内容分级**: [综述级]
+> **Bloom 层级**: L5-L6
 > **代码状态**: ✅ 含可编译示例
 >
 # HTTP 客户端开发
@@ -10,7 +11,7 @@
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 应用主题
-> **A/S/P 标记**: **A+P** — Application + Procedure
+> **A/S/P 标记**: **P+A** — Procedure + Application
 > **前置概念**: [Async/Await](../../03_advanced/01_async/01_async.md) · [Rust 网络编程](../../03_advanced/06_low_level_patterns/04_network_programming.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md)
 > **后置概念**: [Web Frameworks](03_web_frameworks.md) · [Distributed Systems](01_distributed_systems.md)
 >

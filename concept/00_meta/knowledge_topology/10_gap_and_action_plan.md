@@ -1,6 +1,7 @@
 # 缺口与行动计划（Gap and Action Plan）
 
 > **EN**: Gap and Action Plan
+> **Bloom 层级**: L0
 > **Summary**: 基于拓扑抽取结果识别的当前缺口：来源覆盖、表征完整性、层间/层内映射、定义一致性。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]

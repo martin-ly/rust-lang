@@ -1,6 +1,7 @@
 # 层间映射图谱（Inter-Layer Mapping Atlas）
 
 > **EN**: Inter-Layer Mapping Atlas
+> **Bloom 层级**: L0
 > **Summary**: L0–L7 各层之间的依赖、蕴含、反馈关系，基于前置/后置概念元数据与「相关概念」章节引用的全层统计。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]

@@ -1,4 +1,5 @@
 > **内容分级**: [综述级]
+> **Bloom 层级**: L5-L6
 > **代码状态**: ✅ 含可编译示例
 >
 # Rust 算法复杂度分析
@@ -10,7 +11,7 @@
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 应用主题
-> **A/S/P 标记**: **S** — Structure
+> **A/S/P 标记**: **P+S** — Procedure + Structure
 > **前置概念**: [Type System Basics](../../01_foundation/02_type_system/01_type_system.md) · [Functions](../../01_foundation/07_modules_and_items/02_functions.md) · [Collections](../../01_foundation/05_collections/01_collections.md)
 > **后置概念**: [算法与竞赛编程](07_algorithms_competitive_programming.md) · [算法工程实践](08_algorithm_engineering_practice.md)
 >

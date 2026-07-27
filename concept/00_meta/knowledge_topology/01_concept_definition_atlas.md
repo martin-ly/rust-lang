@@ -1,6 +1,7 @@
 # 概念定义图谱（Concept Definition Atlas）
 
 > **EN**: Concept Definition Atlas
+> **Bloom 层级**: L0
 > **Summary**: 全部核心概念的中英名称、层级、一句话定义、权威来源、同义/近义/反义关系。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]

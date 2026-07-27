@@ -1,6 +1,7 @@
 # Concept 元层
 >
 > **EN**: Concept Meta Layer
+> **Bloom 层级**: L0
 > **Summary**: Overview and entry point for the concept documentation structure: navigation, metadata, audit, and governance layers that connect L0-L7 canonical concept pages.
 > **受众**: [初学者]
 > **内容分级**: [综述级]

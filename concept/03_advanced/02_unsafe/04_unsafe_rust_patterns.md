@@ -1,4 +1,5 @@
 > **内容分级**: [专家级]
+> **Bloom 层级**: L3-L4
 > **受众**: [专家]
 > **前置概念**: [Unsafe Rust](01_unsafe.md)
 > **后置概念**: [Unsafe Rust 安全编程](01_unsafe.md)

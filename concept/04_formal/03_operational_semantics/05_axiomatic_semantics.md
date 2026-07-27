@@ -1,4 +1,5 @@
 > **内容分级**: [专家级]
+> **Bloom 层级**: L4
 
 # Axiomatic Semantics（公理语义）
 >

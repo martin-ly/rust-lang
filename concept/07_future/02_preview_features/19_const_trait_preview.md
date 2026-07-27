@@ -1,6 +1,7 @@
 # Const Trait 实现预览
 
 > **EN**: Const Trait Implementation Preview
+> **Bloom 层级**: L7
 > **Summary**: Redirect stub for the const trait implementations preview (`~const Trait`, `const impl`), linking to the canonical page covering nightly syntax, semantics, and migration boundaries.
 
 > **权威来源**: 本文件为重定向 stub。Const Trait 预览的完整概念解释统一维护在：

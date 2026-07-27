@@ -1,6 +1,7 @@
 # Rust 知识体系可用性测试框架（Usability Testing Framework）
 
 > **EN**: Rust Knowledge Base Usability Testing Framework
+> **Bloom 层级**: L0
 > **Summary**: Defines a continuous learner-feedback loop for the knowledge base, moving from content output to validated learning outcomes.
 > **内容分级**: [综述级]
 > **受众**: [专家]

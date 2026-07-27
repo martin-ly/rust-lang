@@ -1,6 +1,7 @@
 # Rust 知识体系顶层本体（TLO）对齐
 
 > **EN**: Top-level Ontology Alignment for Rust Knowledge Graph
+> **Bloom 层级**: L0
 > **Summary**: Maps project knowledge-graph entities to upper ontologies (BFO / DOLCE) for semantic-web interoperability and engineering reference.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >

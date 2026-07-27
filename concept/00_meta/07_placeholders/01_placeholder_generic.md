@@ -1,6 +1,7 @@
 # 占位符页面
 >
 > **EN**: Placeholder
+> **Bloom 层级**: L0
 > **Summary**: This page is a generic placeholder for links in concept files that point to content not yet created.
 >
 > **主要来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RFCs](https://github.com/rust-lang/rfcs)

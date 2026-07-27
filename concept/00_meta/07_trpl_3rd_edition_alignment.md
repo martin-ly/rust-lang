@@ -1,6 +1,7 @@
 # TRPL 第 3 版对照审计（TRPL 3rd Edition Alignment Audit）
 
 > **EN**: TRPL 3rd Edition Alignment Audit
+> **Bloom 层级**: L0
 > **Summary**: Systematically compares The Rust Programming Language 3rd Edition with the `concept/` L1–L3 pages to identify gaps and plan updates.
 > **内容分级**: [综述级]
 > **受众**: [专家]

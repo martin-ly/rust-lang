@@ -1,5 +1,6 @@
 > **内容分级**: [专家级]
 >
+> **Bloom 层级**: L4
 # Type Semantics（类型语义）
 >
 > **EN**: Type Semantics

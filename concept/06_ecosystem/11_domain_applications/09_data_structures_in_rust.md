@@ -1,4 +1,5 @@
 > **内容分级**: [综述级]
+> **Bloom 层级**: L5-L6
 > **代码状态**: ✅ 含可编译示例
 >
 > # Rust 数据结构实践
@@ -10,7 +11,7 @@
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 应用主题
-> **A/S/P 标记**: **A+S** — Application + Structure
+> **A/S/P 标记**: **P+S** — Procedure + Structure
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Collections](../../01_foundation/05_collections/01_collections.md)
 > **后置概念**: [算法工程实践](08_algorithm_engineering_practice.md) · [算法与竞赛编程](07_algorithms_competitive_programming.md)
 >

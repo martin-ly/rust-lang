@@ -1,6 +1,7 @@
 # 主题-权威来源对齐图谱 (Topic-Authority Alignment Map)
 
 > **EN**: Topic-Authority Alignment Map
+> **Bloom 层级**: L0
 > **Summary**: 维护 Rust 知识库中各概念主题与其权威来源（官方文档、学术论文、工业生态、路线图）之间的对齐关系，确保每个概念有单一可信解释来源。
 > **权威来源**:
 > [05_international_authority_index.md](05_international_authority_index.md) ·

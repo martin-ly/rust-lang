@@ -1,4 +1,5 @@
 > **EN**: TRPL 3rd Ed Chapter Mapping
+> **Bloom 层级**: L0
 > **Summary**: Redirect stub pointing to the full TRPL 3rd Ed chapter-to-concept mapping in docs/01_learning/learning_mvp_path.md.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。

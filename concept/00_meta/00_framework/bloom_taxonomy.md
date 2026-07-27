@@ -1,6 +1,7 @@
 # Bloom Taxonomy（Bloom 分类法）
 >
 > **EN**: Bloom Taxonomy
+> **Bloom 层级**: L0
 > **Summary**: Bloom's taxonomy adapted for Rust cognitive skill assessment, mapping remembering to creation across knowledge dimensions.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >

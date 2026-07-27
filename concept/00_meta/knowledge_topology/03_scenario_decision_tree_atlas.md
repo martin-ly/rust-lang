@@ -1,6 +1,7 @@
 # 场景决策树图谱（Scenario Decision Tree Atlas）
 
 > **EN**: Scenario Decision Tree Atlas
+> **Bloom 层级**: L0
 > **Summary**: A navigational index that maps typical Rust development scenarios to decision questions, candidate solutions, and authoritative concept pages across L1–L7. 典型开发场景 → 决策问题 → 候选方案 → Rust 概念/工具选择。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]

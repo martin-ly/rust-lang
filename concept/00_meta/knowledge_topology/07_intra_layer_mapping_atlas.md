@@ -1,6 +1,7 @@
 # 层内映射图谱（Intra-Layer Mapping Atlas）
 
 > **EN**: Intra-Layer Mapping Atlas
+> **Bloom 层级**: L0
 > **Summary**: 每层内部核心模型/概念间的等价、蕴含、依赖、互斥关系，基于同层前置/后置引用与策展语义标注。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]

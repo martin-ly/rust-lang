@@ -1,6 +1,7 @@
 # Safety Tags（安全标签）
 
 > **EN**: Safety Tags in Formal Verification — Redirect Stub
+> **Bloom 层级**: L4
 > **Summary**: Redirect stub: the RFC #3842 `safety` attributes proposal — structured, tool-checkable annotations of `unsafe` function safety contracts, plus their predicate-logic formalization and mapping to Kani/Prusti/Verus — is canonically covered in `concept/07_future/02_preview_features/03_safety_tags_preview.md`; this page keeps only the pointer.
 
 > **权威来源**: 本主题已合并至 [`../../07_future/02_preview_features/03_safety_tags_preview.md`](../../07_future/02_preview_features/03_safety_tags_preview.md)，本文件保留为重定向（Redirect stub）。

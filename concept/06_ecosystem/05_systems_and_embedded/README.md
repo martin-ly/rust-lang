@@ -1,6 +1,7 @@
 # 系统与嵌入式（Systems & Embedded）
 
 > **EN**: Systems and Embedded Topic Index
+> **Bloom 层级**: L0
 > **Summary**: Directory index for the `05_systems_and_embedded` topic cluster — WASI, cross-compilation, embedded systems, CLI development, OS kernels, robotics, embedded graphics, C-to-Rust translation, embedded-hal 1.0 migration, target tier platform support, no_std async, and GPU programming & HPC — the systems-facing layer of the L6 ecosystem tier.
 
 > **权威来源**: 本目录为 `concept/06_ecosystem/` 系统与嵌入式专题目录；各文件为所属主题的 `concept/` 权威页。

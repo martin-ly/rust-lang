@@ -1,4 +1,5 @@
 > **内容分级**: [专家级]
+> **Bloom 层级**: L5-L6
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 > **代码状态**: ✅ 含可编译示例
 >
@@ -11,7 +12,7 @@
 > **受众**: [专家]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 生态工程
-> **A/S/P 标记**: **A+S** — Application + Structure
+> **A/S/P 标记**: **P+S+A** — Procedure + Structure + Application
 > **前置概念**: [Architecture Patterns](08_architecture_patterns.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md)
 > **后置概念**: [Microservice Patterns](05_microservice_patterns.md) · [Event-Driven Architecture](06_event_driven_architecture.md)
 > **相关概念**: [Pattern Implementation Comparison](09_pattern_implementation_comparison.md) · [Pattern Selection Best Practices](10_pattern_selection_best_practices.md) · [System Design Principles](03_system_design_principles.md) · [Algorithm Engineering Practice](../11_domain_applications/08_algorithm_engineering_practice.md) · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) — 工程模式在两种系统语言中的表达对比 · [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md) — 生产模式的范式坐标

@@ -1,6 +1,7 @@
 # 模板去同质化指南
 >
 > **EN**: Template Deduplication Guide
+> **Bloom 层级**: L0
 > **Summary**: Guidelines for reducing boilerplate repetition across `concept/` files while preserving the bilingual header and core pedagogical structure.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >

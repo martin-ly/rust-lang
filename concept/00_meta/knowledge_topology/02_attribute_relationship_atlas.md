@@ -1,6 +1,7 @@
 # 属性关系图谱（Attribute Relationship Atlas）
 
 > **EN**: Attribute Relationship Atlas
+> **Bloom 层级**: L0
 > **Summary**: 概念属性矩阵：每个核心概念的必备/可选属性、内容分级、A/S/P、Bloom 层级、定理链。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]

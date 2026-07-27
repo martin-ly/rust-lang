@@ -1,4 +1,5 @@
 > **内容分级**: [综述级]
+> **Bloom 层级**: L5-L6
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 > **代码状态**: ✅ 含可编译示例
 >
@@ -11,7 +12,7 @@
 > **受众**: [专家]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 应用主题
-> **A/S/P 标记**: **A+S** — Application + Structure
+> **A/S/P 标记**: **P+S+A** — Procedure + Structure + Application
 > **前置概念**: [算法复杂度分析](10_algorithm_complexity_analysis.md) · [算法工程实践](08_algorithm_engineering_practice.md)
 > **后置概念**: [量子计算生态](16_quantum_computing_rust.md) · [机器学习生态](13_machine_learning_ecosystem.md)
 > **相关概念**: [数据结构与 Rust](09_data_structures_in_rust.md) · [算法与竞赛编程](07_algorithms_competitive_programming.md) · [形式化算法理论](12_formal_algorithm_theory.md) · [工程实践与生产级模式](../03_design_patterns/13_engineering_and_production_patterns.md) · [前沿研究与创新模式](../03_design_patterns/12_frontier_research_and_innovative_patterns.md)

@@ -1,6 +1,7 @@
 # 逻辑推理图谱（Logical Reasoning Atlas）
 
 > **EN**: Logical Reasoning Atlas
+> **Bloom 层级**: L0
 > **Summary**: A navigational index of theorem chains, inference rules, proof/verification paths, and formal correspondences across the Rust concept hierarchy. 定理链（⟹/⟸）、推理规则、证明/验证路径、形式化对应。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]

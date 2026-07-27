@@ -1,6 +1,7 @@
 # 知识体系拓扑图谱集（Knowledge Topology Atlas）
 
 > **EN**: Knowledge Topology Atlas
+> **Bloom 层级**: L0
 > **Summary**: Rust 知识体系的全局拓扑视图：概念定义、属性关系、场景决策树、示例反例、逻辑推理、层间/层内映射、权威来源对齐。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >

@@ -1,4 +1,5 @@
 > **内容分级**: [专家级]
+> **Bloom 层级**: L5-L6
 > **代码状态**: ✅ 含可编译示例
 >
 # 自定义协议实现
@@ -10,7 +11,7 @@
 > **受众**: [专家]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **层级**: L6 应用主题
-> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **A/S/P 标记**: **P+S** — Procedure + Structure
 > **前置概念**: [Rust 网络编程](../../03_advanced/06_low_level_patterns/04_network_programming.md) · [Async/Await](../../03_advanced/01_async/01_async.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md)
 > **后置概念**: [高级网络协议](01_advanced_network_protocols.md) · [分布式系统](../04_web_and_networking/01_distributed_systems.md)
 >

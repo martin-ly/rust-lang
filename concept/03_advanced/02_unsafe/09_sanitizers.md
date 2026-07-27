@@ -11,7 +11,7 @@
 > **受众**: [专家]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+P** — Application + Procedure
+> **A/S/P 标记**: **P+A** — Procedure + Application
 > **双维定位**: T×Eva — 工具链与运行时（Runtime）验证
 > **定位**: 将 Sanitizers 从“LLVM 黑盒”还原为 unsafe/底层代码审查与 CI 的可选动态检测层。
 > **前置概念**:

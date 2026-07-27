@@ -1,6 +1,7 @@
 # 网络编程（Networking）
 
 > **EN**: Networking Topic Index
+> **Bloom 层级**: L0
 > **Summary**: Directory index for the `12_networking` topic cluster — socket programming basics, protocol quick start, advanced protocols (gRPC/MQTT/QUIC/AMQP/GraphQL/SSE), network security, custom protocol implementation, and formal protocol theory — forming the protocol/mechanism layer that complements `04_web_and_networking`'s application-architecture layer.
 
 > **权威来源**: 本目录为 `concept/06_ecosystem/` 网络编程专题目录。

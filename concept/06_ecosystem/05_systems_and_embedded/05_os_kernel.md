@@ -1,6 +1,7 @@
 > **受众**: [进阶]
 > [研究者]
 >
+> **Bloom 层级**: L5-L6
 # Rust 操作系统内核开发
 
 > **EN**: Rust for Operating System Kernel Development

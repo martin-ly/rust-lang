@@ -1,6 +1,7 @@
 # Concept 文件双语模板（Bilingual Template）
 
 > **EN**: Bilingual Concept Template
+> **Bloom 层级**: L0
 > **Summary**: Standardized bilingual header template for all `concept/` files to support internationalization.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >

@@ -1,6 +1,7 @@
 # 推理判定树图谱（Reasoning Judgment Tree Atlas）
 
 > **EN**: Reasoning Judgment Tree Atlas
+> **Bloom 层级**: L0
 > **Summary**: Symptom → diagnostic question → root cause → fix strategy concept paths for compiler errors and runtime issues. 编译错误/运行时问题 → 判定问题 → 根因 → 修复策略的概念路径。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]

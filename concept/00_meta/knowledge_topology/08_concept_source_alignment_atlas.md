@@ -1,6 +1,7 @@
 # 概念-权威来源对齐图谱（Concept-Source Alignment Atlas）
 
 > **EN**: Concept-Source Alignment Atlas
+> **Bloom 层级**: L0
 > **Summary**: 每个核心概念与国际化权威来源的对齐：Rust Reference、TRPL、RFCs、学术、课程、工业、标准。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]

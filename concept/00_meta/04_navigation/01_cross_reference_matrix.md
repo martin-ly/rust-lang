@@ -1,6 +1,7 @@
 # Cross Reference Matrix（交叉引用矩阵）
 
 > **Summary**: Redirect stub for the cross-reference matrix; the authoritative index is concept_index.md.
+> **Bloom 层级**: L0
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **EN**: Cross Reference Matrix
 > **状态**: 已合并

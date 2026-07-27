@@ -1,6 +1,7 @@
 # 示例与反例图谱（Example and Counterexample Atlas）
 
 > **EN**: Example and Counterexample Atlas
+> **Bloom 层级**: L0
 > **Summary**: A navigational index of correct examples, common misuses, boundary cases, and counterexamples organized by concept layer. 按概念组织的正确示例、错误示例、边界示例与反例分析。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
