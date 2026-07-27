@@ -98,7 +98,7 @@
 | Smart Pointers | [Smart Pointers](../../02_intermediate/02_memory_management/04_smart_pointers.md) | ✅ |
 | Fearless Concurrency | [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) | ✅ |
 | Async, Await, Futures, and Streams | [Async Programming](../../03_advanced/01_async/01_async.md) | ✅ |
-| Object Oriented Programming Features | [Traits](../../02_intermediate/00_traits/01_traits.md) · [Advanced Traits](../../02_intermediate/00_traits/04_advanced_traits.md) | ⚠️ 缺 OOP design patterns 独立对照 |
+| Object Oriented Programming Features | [Traits](../../02_intermediate/00_traits/01_traits.md) · [Advanced Traits](../../02_intermediate/00_traits/04_advanced_traits.md) §TRPL OOP 设计模式对照 | ✅ 已补充 |
 | Patterns and Matching | [Patterns](../../01_foundation/04_control_flow/02_patterns.md) | ✅ |
 | Advanced Features | [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Advanced Traits](../../02_intermediate/00_traits/04_advanced_traits.md) · [Advanced Types](../../02_intermediate/04_types_and_conversions/04_type_system_advanced.md) · [Macros](../../03_advanced/03_proc_macros/01_macros.md) | ✅ |
 | Final Project: Web Server | [Network Programming](../../03_advanced/06_low_level_patterns/04_network_programming.md) · [Web Frameworks](../../06_ecosystem/04_web_and_networking/03_web_frameworks.md) | ⚠️ 缺 TRPL Ch21 逐步对照 |
@@ -215,8 +215,8 @@ rustc-dev-guide 主题为**编译器实现细节**，项目 L4/L6 已有概述�
 | Type inference / Trait solving / Specialization / Chalk / Next-gen solver | [Type Checking and Inference in rustc](../../04_formal/00_type_theory/07_type_checking_and_inference.md) · [The Trait Solver in rustc](../../04_formal/05_rustc_internals/03_trait_solver_in_rustc.md) | ⚠️ next-gen solver 待深化 |
 | The borrow checker / NLL / Polonius / Region inference | [NLL and Polonius](../../03_advanced/02_unsafe/03_nll_and_polonius.md) · [Borrow Checking Decidability](../../04_formal/01_ownership_logic/04_borrow_checking_decidability.md) | ✅ |
 | Code generation / LLVM / Backend-agnostic codegen / Debug info | [LLVM Backend and Code Generation](../../06_ecosystem/00_toolchain/09_llvm_backend_and_codegen.md) · [rustc Driver, Interface and Stable MIR](../../06_ecosystem/00_toolchain/10_rustc_driver_and_stable_mir.md) | ✅ |
-| Rustdoc internals / Search / GUI/JSON test suites | — | ❌ 缺口，待补充 |
-| Sanitizers support | — | ❌ 缺口，与 Miri/Kani/BSan 形成对照 |
+| Rustdoc internals / Search / GUI/JSON test suites | [Rustdoc Internals](../../06_ecosystem/00_toolchain/16_rustdoc_internals.md) | ✅ 已补充 |
+| Sanitizers support | [Sanitizers](../../03_advanced/02_unsafe/09_sanitizers.md) | ✅ 已补充 |
 | Notification groups / Compiler team / Walkthrough / Stability | 📎 流程/治理类，不属概念层 | 📎 |
 
 ---
@@ -237,7 +237,7 @@ rustc-dev-guide 主题为**编译器实现细节**，项目 L4/L6 已有概述�
 |:---|:---|:---:|
 | Data layout / Structs and tuples / Scalars / Enums / Unions / Pointers / Function pointers / Arrays and Slices / Packed SIMD vectors | [Type Layout](../../04_formal/05_rustc_internals/08_type_layout.md) · [Memory Model](../../03_advanced/02_unsafe/06_memory_model.md) | ✅ |
 | Validity / Unions / Function Pointers | [Behavior Considered Undefined](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md) · [Unions](../../02_intermediate/04_types_and_conversions/06_unions.md) | ✅ |
-| Optimizations / Return value optimization | [Performance Optimization](../../06_ecosystem/10_performance/01_performance_optimization.md) | ⚠️ 可补充 RVO 语义小节 |
+| Optimizations / Return value optimization | [Performance Optimization](../../06_ecosystem/10_performance/01_performance_optimization.md) §RVO/NRVO 与 Copy Elision | ✅ 已补充 |
 
 ---
 
@@ -252,11 +252,11 @@ rustc-dev-guide 主题为**编译器实现细节**，项目 L4/L6 已有概述�
 | 3 | Rust 2024 Rustdoc combined tests / nested include | Edition Guide | `concept/07_future/01_edition_roadmap/02_edition_guide.md` §2.5.4 | ✅ 已补充 |
 | 4 | Structured concurrency | Async Book | `concept/03_advanced/01_async/16_structured_concurrency.md`（本轮新增） | ✅ 已补充 |
 | 5 | Async IO: readiness vs completion, io_uring | Async Book | `concept/07_future/02_preview_features/39_async_ioring_preview.md`（本轮新增） | ✅ 已补充 |
-| 6 | Rustdoc internals | rustc-dev-guide | `concept/04_formal/05_rustc_internals/` 或 `concept/06_ecosystem/00_toolchain/` | P2 |
-| 7 | Sanitizers support | rustc-dev-guide | `concept/03_advanced/02_unsafe/01_unsafe.md` 或新增独立页 | P2 |
+| 6 | Rustdoc internals | rustc-dev-guide | [Rustdoc Internals](../../06_ecosystem/00_toolchain/16_rustdoc_internals.md) | ✅ 已补充 |
+| 7 | Sanitizers support | rustc-dev-guide | [Sanitizers](../../03_advanced/02_unsafe/09_sanitizers.md) | ✅ 已补充 |
 | 8 | API Guidelines 逐项映射 | API Guidelines | `concept/02_intermediate/05_modules_and_visibility/03_api_naming_conventions.md` §十 | ✅ 已补充 |
-| 9 | TRPL OOP design patterns 对照 | TRPL | `concept/02_intermediate/00_traits/04_advanced_traits.md` 新增子节 | P3 |
-| 10 | Return value optimization 语义 | UCG | `concept/06_ecosystem/10_performance/01_performance_optimization.md` 新增子节 | P3 |
+| 9 | TRPL OOP design patterns 对照 | TRPL | [Advanced Traits](../../02_intermediate/00_traits/04_advanced_traits.md) §TRPL OOP 设计模式对照 | ✅ 已补充 |
+| 10 | Return value optimization 语义 | UCG | [Performance Optimization](../../06_ecosystem/10_performance/01_performance_optimization.md) §RVO/NRVO 与 Copy Elision | ✅ 已补充 |
 
 ---
 

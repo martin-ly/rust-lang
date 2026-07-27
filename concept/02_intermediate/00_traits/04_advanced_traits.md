@@ -106,6 +106,11 @@ mindmap
     - [泛型关联类型 (GAT) 示例](#泛型关联类型-gat-示例)
     - [关联常量](#关联常量)
     - [RPITIT（Rust 1.75+）](#rpititrust-175)
+  - [补充：TRPL Ch18 OOP 设计模式对照](#补充trpl-ch18-oop-设计模式对照)
+    - [Trait Object：Rust 的“多态”](#trait-objectrust-的多态)
+    - [State Pattern：用 trait 与结构体替代继承](#state-pattern用-trait-与结构体替代继承)
+    - [Typestate 编码：把状态提升到类型](#typestate-编码把状态提升到类型)
+    - [与 TRPL 的对照要点](#与-trpl-的对照要点)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
@@ -1017,6 +1022,107 @@ trait Foo {
 ```
 
 > 完整语法、使用场景与边界测试参见本节正文。
+
+---
+
+## 补充：TRPL Ch18 OOP 设计模式对照
+
+> **权威来源**: [TRPL — Object Oriented Programming Features](https://doc.rust-lang.org/book/ch18-00-oop.html)
+
+TRPL 第 18 章用 Rust 重新诠释面向对象设计模式。其核心不是把 Rust 变成 OOP 语言，而是说明 trait 与 trait object 如何表达等价思想，并在类型系统（Type System）层面消除运行时的动态分派开销或状态不一致风险。
+
+### Trait Object：Rust 的“多态”
+
+Rust 通过 `dyn Trait` 提供**动态分发**：
+
+```rust
+pub trait Draw {
+    fn draw(&self);
+}
+
+pub struct Screen {
+    pub components: Vec<Box<dyn Draw>>,
+}
+
+impl Screen {
+    pub fn run(&self) {
+        for component in self.components.iter() {
+            component.draw();
+        }
+    }
+}
+```
+
+与泛型 `Vec<T: Draw>` 的**静态分发**不同，`Vec<Box<dyn Draw>>` 允许同一集合容纳不同具体类型，代价是 vtable 间接调用与对象安全约束（方法无泛型参数、无 `Self` 返回、`Self: Sized` 除外）。
+
+### State Pattern：用 trait 与结构体替代继承
+
+TRPL 的“博客发布状态机”示例展示如何用 Rust 类型系统（Type System）实现状态模式：
+
+```rust,ignore
+trait State {
+    fn request_review(self: Box<Self>) -> Box<dyn State>;
+    fn approve(self: Box<Self>) -> Box<dyn State>;
+    fn content<'a>(&self, post: &'a Post) -> &'a str { "" }
+}
+
+struct Draft;
+impl State for Draft {
+    fn request_review(self: Box<Self>) -> Box<dyn State> { Box::new(PendingReview) }
+    fn approve(self: Box<Self>) -> Box<dyn State> { self }
+}
+
+struct PendingReview;
+impl State for PendingReview { /* ... */ }
+```
+
+关键点：
+
+- 状态转移通过 `Box<dyn State>` 的所有权（Ownership）移动实现，旧状态在转移后不可访问；
+- 无需 `self.state = ...` 式的可变更新，从而避免非法状态组合；
+- 与经典 OOP 的继承相比，Rust 用**组合 + trait object** 表达多态。
+
+### Typestate 编码：把状态提升到类型
+
+更激进的 Rust 惯用法是把状态编码进类型参数，实现**编译期状态验证**：
+
+```rust,ignore
+struct Post<State> {
+    content: String,
+    _state: std::marker::PhantomData<State>,
+}
+
+struct Draft;
+struct PendingReview;
+struct Published;
+
+impl Post<Draft> {
+    fn new() -> Self { /* ... */ }
+    fn request_review(self) -> Post<PendingReview> { /* ... */ }
+}
+
+impl Post<PendingReview> {
+    fn approve(self) -> Post<Published> { /* ... */ }
+}
+
+impl Post<Published> {
+    fn content(&self) -> &str { &self.content }
+}
+```
+
+Typestate 保证 `content()` 只能在 `Published` 状态下调用，`request_review()` 只能在 `Draft` 状态下调用——非法状态转移在编译期被拒绝。这是 Rust 相对于动态 OOP 语言的独特优势：把不变量从运行时测试前移到类型检查。
+
+### 与 TRPL 的对照要点
+
+| TRPL 概念 | Rust 表达 | 与 OOP 的差异 |
+|---|---|---|
+| 对象 | struct + impl | 无隐式 `self`，无继承 |
+| 多态 | `dyn Trait` / 泛型 | 静态分发默认，动态分发显式 |
+| 封装 | 模块可见性（Privacy） | 无 `private`/`protected` 关键字 |
+| 继承 | trait 默认实现 + 组合 | 无类继承，禁止实现继承 |
+| 状态模式 | trait object / Typestate | 可用所有权移动消除非法状态 |
+
+> **权威来源**: [TRPL — Object Oriented Programming Features](https://doc.rust-lang.org/book/ch18-00-oop.html) · [Brown University — CRP: OOP in Rust](https://cel.cs.brown.edu/crp/)
 
 ---
 

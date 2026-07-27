@@ -49,6 +49,7 @@
     - [2.1 Criterion：统计性基准测试](#21-criterion统计性基准测试)
     - [2.2 Flamegraph：可视化性能分析](#22-flamegraph可视化性能分析)
     - [2.3 缓存友好性与内存布局](#23-缓存友好性与内存布局)
+    - [2.4 RVO/NRVO 与 Copy Elision](#24-rvonrvo-与-copy-elision)
   - [三、优化策略矩阵](#三优化策略矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -339,6 +340,65 @@ struct Compact {
 
 > **缓存洞察**: CPU 缓存是现代性能的关键——**数据局部性**（locality）往往比算法复杂度更重要。Rust 允许精确控制内存布局，这是性能优化的重要工具。
 > [来源: [Rust Performance Book — Memory Layout](https://nnethercote.github.io/perf-book/type-sizes.html)]
+
+---
+
+### 2.4 RVO/NRVO 与 Copy Elision
+
+> **权威来源**: [Brown University — CRP: Return Value Optimization](https://cel.cs.brown.edu/crp/) · [Rust Reference — Moved Values](https://doc.rust-lang.org/reference/variables.html?highlight=moved#moved-places)
+
+C++ 程序员常问：Rust 是否有 RVO/NRVO（返回值优化 / 命名返回值优化）？答案是：**Rust 不保证任何 RVO**，但从语义上 move 等价于按位拷贝（bitwise copy），而 LLVM 优化器通常能把冗余拷贝完全消除。
+
+#### 语义层面：move 就是按位拷贝
+
+```rust
+struct BigStruct {
+    data: [u8; 1024],
+}
+
+fn make_big() -> BigStruct {
+    BigStruct { data: [0; 1024] }
+}
+
+fn main() {
+    let x = make_big(); // 语义上：从 make_big 的栈帧 memcpy 到 x
+}
+```
+
+Rust 的 move 语义不区分“深拷贝”与“浅拷贝”——非 `Copy` 类型的 move 在语义上总是按位拷贝后使源失效。这意味着：
+
+- 不存在 C++ 中“拷贝构造函数副作用”的语义问题；
+- 编译器有权且经常把 `make_big` 的结果直接构造到调用者的目标地址，无需中间临时对象。
+
+#### 优化层面：LLVM 决定 eliminable copy
+
+Rust 后端基于 LLVM，`rustc` 会把高层次的 move lowered 为 `memcpy` 或 SSA 值，然后由 LLVM 的 MemCpyOpt / SROA / GVN 等 pass 消除：
+
+```text
+move 语义上：  源地址 → 目标地址 的 memcpy
+优化后：       若源地址在 move 后不再使用，直接在目标地址构造
+```
+
+因此实际代码中 `let x = make_big()` 往往生成与“在 x 的地址原地构造”相同的汇编。
+
+#### 何时无法消除
+
+- 源与目标生命周期（Lifetimes）重叠且后续仍读取源；
+- 返回值路径不唯一（多个返回点返回不同局部变量）；
+- 启用了 `panic=unwind` 且析构函数（Destructor）语义复杂，导致需要在异常路径上保留副本；
+- 跨 FFI 边界或 `#[repr(C)]` 布局限制优化器假设。
+
+#### 与 C++ 的对比
+
+| 维度 | C++ | Rust |
+|---|---|---|
+| 保证 | 自 C++17 起对 prvalue 有 mandatory copy elision | 无语言级 RVO 保证 |
+| 拷贝语义 | 拷贝/移动构造函数可带副作用 | move 是纯按位拷贝，无副作用 |
+| 优化决策 | 编译器 + 语言规则共同决定 | 几乎完全交给 LLVM |
+| 可观察性 | 拷贝构造函数调用次数可观测 | 无构造函数副作用，优化不可观测 |
+
+> **工程建议**：不要为了让“RVO 发生”而扭曲 Rust 代码。写清晰的 move 语义代码即可；若对热点路径有疑虑，用 `cargo asm` 查看生成的汇编，确认是否生成多余 `memcpy`。
+> [来源: [Rust Performance Book — Compile Times](https://nnethercote.github.io/perf-book/compile-times.html)]
 
 ---
 
