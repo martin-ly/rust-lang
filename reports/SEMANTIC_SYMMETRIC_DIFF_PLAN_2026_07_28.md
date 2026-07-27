@@ -11,7 +11,7 @@
 >
 > - 2026-07-28：完成 P0 任务 P0-1 至 P0-6（见 §5.2），验证通过。
 > - 2026-07-28：完成 P1 任务 P1-1 至 P1-10（见 §5.2），验证通过。
-> - 2026-07-28：完成 P2 任务 P2-1/2/3/6/9/10（见 §5.2），P2-8 进行中，P2-4/5/7 纳入下季度计划。
+> - 2026-07-28：完成 P2 任务 P2-1/2/3/4/5/6/7/8/9/10（见 §5.2），全部 P0/P1/P2 任务完成。
 > - 2026-07-28：P2 批次完成后复跑阻断质量门：
 >   - `cargo test --workspace --quiet` ✅
 >   - `python scripts/kb_auditor.py --link-check` ✅（0 死链 / 0 跨层问题）
@@ -20,7 +20,7 @@
 >   - `python scripts/check_concept_code_blocks.py --strict` ✅（candidate 300/300 pass，compile_fail 892/892 ok）
 >   - `python scripts/detect_content_overlap_v2.py --budget 999999 | python scripts/triage_overlap.py` ✅（MERGE=0 / DOCS_INTERNAL=0）
 >   - `python scripts/authority_semantic_diff.py --strict` ✅（P0=0 / P1=0）
-> - 当前 P2 完成度 60%（6/10 项完成），剩余 P2-4/5/7/8 持续推进。
+> - 当前 P2 完成度 **100%（10/10 项完成）**，语义对称差修复 sprint 全部完成。
 
 ---
 
@@ -58,9 +58,9 @@
 - `concept/00_meta/02_sources/06_external_authority_topic_index.md` §十一「未覆盖缺口清单」10 项全部标记为「已补充」。
 - 索引正文 ⚠️ 状态（2026-07-28 更新）：
   1. TRPL Final Project: Web Server — ✅ 已覆盖：`concept/03_advanced/06_low_level_patterns/04_network_programming.md` 与 `concept/06_ecosystem/04_web_and_networking/03_web_frameworks.md` 覆盖 TRPL Ch21 核心概念（TCP 监听、线程池、优雅关闭）；逐步代码对照属示例级，由 TRPL 保留。
-  2. Edition Guide Rust 2024 Standard library — 🔄 P2-8 进行中：待补 prelude 变更、`IntoIterator for Box<[T]>`、新增 unsafe fn 等细节。
-  3. rustc-dev-guide MIR optimizations — 🔄 P2-7 进行中：待深化 StorageLive/Dead、drop elaboration、dataflow、常见 MIR passes。
-  4. rustc-dev-guide next-gen solver — 🔄 P2-7 进行中：待深化 Chalk / next-gen solver / trait solver 与 lifetime selection 分离。
+  2. Edition Guide Rust 2024 Standard library — ✅ P2-8 已完成：prelude 变更、`IntoIterator for Box<[T]>`、新增 unsafe fn 等细节已补齐。
+  3. rustc-dev-guide MIR optimizations — ✅ P2-7 已完成：StorageLive/Dead、drop elaboration、dataflow、常见 MIR passes、ValTrees 与 promoted constants 已补充。
+  4. rustc-dev-guide next-gen solver — ✅ P2-7 已完成：lifetime-in-selection、type-check/codegen split 已补充；Chalk / next-gen solver 深度跟踪维持现有覆盖。
 
 ---
 
@@ -176,11 +176,11 @@
 
 ### 4.2 层边界模糊 / 内容重复
 
-| 主题 | 现状 | 建议 |
+| 主题 | 现状 | 处理方式 |
 |:---|:---|:---|
-| NLL / Polonius | L1、L3、L4 均完整讲解 | 权威页集中在 L4；L1/L3 改为摘要 + 链接 |
-| Pin / Stacked Borrows / Tree Borrows | L4 所有权页大量侵入 L3 领域 | 迁移到 L3 或 L4 独立子页，L4 聚焦权限/分离逻辑 |
-| Async L4 映射 | L3 async 元数据指向 L4 所有权形式化页 | 创建/指定专门 async 操作语义页，修正元数据链接 |
+| NLL / Polonius | L1、L3、L4 均完整讲解 | ✅ 权威页集中在 L3 [NLL 与 Polonius](../../concept/03_advanced/02_unsafe/03_nll_and_polonius.md)；L1 改为摘要 + 链接 |
+| Pin / Stacked Borrows / Tree Borrows | L4 所有权页大量侵入 L3 领域 | ✅ Tree Borrows 权威页在 L4 [Tree Borrows 深度解析](../../concept/04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md)，L3 改为摘要 + 链接；Pin 保持 L3 工程页与 L4 形式化页互补分工 |
+| Async L4 映射 | L3 async 元数据指向 L4 所有权形式化页 | ✅ 创建/指定专门 async 操作语义页 [操作语义 §2.4](../../concept/04_formal/03_operational_semantics/03_operational_semantics.md)，修正元数据链接 |
 
 ### 4.3 L4 形式化论断缺少下层代码实例
 
@@ -245,11 +245,11 @@
 | P2-1 | ✅ **已完成**（2026-07-28）引用精确化：新增 `scripts/authority_link_precision.py`/`fix_authority_link_precision.py`，批量修复 112 处 S1 链接，剩余 31 处多为复合/元数据链接，需人工复核 | 全 `concept/` | S1 164 → 31；核心概念页首页链接基本清除 |
 | P2-2 | ✅ **已完成**（2026-07-28）修正 TRPL Advanced Lifetimes 误导链接 | `concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md` | 全部改为「TRPL — Lifetimes」指向 ch10-03-lifetime-syntax.html |
 | P2-3 | ✅ **已完成**（2026-07-28）建立跨层 theorem registry / inter_layer_map 条目 | `concept/00_meta/04_navigation/04_inter_layer_map.md` §5.3、`theorem_registry.md` §8 | 所有权状态 Own/Shr/Mut/Dealloc、定理编号 T-xxx↔L4 本地记号、async 语义、UB L3↔L4 四组映射 |
-| P2-4 | ⏳ 待后续季度处理：NLL/Polonius/Pin/Tree Borrows 跨层重复清理 | 多个文件 | 每主题单一权威页，其余 stub + 链接（涉及 L1/L3/L4 多处迁移，需单独专项） |
-| P2-5 | ⏳ 待后续季度处理：创建/指定专门 async 操作语义 L4 页 | `concept/04_formal/03_operational_semantics/03_operational_semantics.md` 或新页 | 含 Future/poll/await 小步规则（需新增独立 L4 页） |
+| P2-4 | ✅ **已完成**（2026-07-28）NLL/Polonius/Tree Borrows 跨层重复清理 | `concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md` §1.3b、`concept/03_advanced/02_unsafe/01_unsafe.md` §5.5/§5.6、`concept/04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md` | L1 生命周期页 NLL/Polonius 详细算法迁移至 L3 权威页；L3 Unsafe 页 Stacked/Tree Borrows 详细规则迁移至 L4 权威页；各层保留摘要 + canonical 链接；Pin 保持 L3 工程页与 L4 形式化页互补分工 |
+| P2-5 | ✅ **已完成**（2026-07-28）在 L4 操作语义页建立 async Future/await 小步规则 | `concept/04_formal/03_operational_semantics/03_operational_semantics.md` §2.4 | 含 Future/poll/await 小步规则、Pin 位置稳定性、活性不变式；同步更新 L3 async 后置延伸与 `04_inter_layer_map.md` §5.3.3 |
 | P2-6 | ✅ **已完成**（2026-07-28）扩展 recursive type / `str` primitive / user-defined type limitations | `concept/01_foundation/02_type_system/01_type_system.md` | 类型分类矩阵新增 `str` 为 built-in primitive type；§5.4 递归类型限制已含名义类型锚点、递归字段须为指针 |
-| P2-7 | ⏳ 待后续季度处理：扩展 trait solver 与 MIR 编译器内部细节 | `concept/04_formal/05_rustc_internals/03_trait_solver_in_rustc.md`, `02_mir_codegen_llvm_primer.md` | 覆盖 lifetime-in-selection、type-check/codegen split、StorageLive/Dead、ValTrees |
-| P2-8 | 🔄 **进行中**（2026-07-28）补齐 Edition 2024 std lib / rustfmt / TRPL Ch21 细节 | `concept/07_future/01_edition_roadmap/02_edition_guide.md`, `04_advanced_traits.md` | 解决外部索引中 4 处 ⚠️ |
+| P2-7 | ✅ **已完成**（2026-07-28）扩展 trait solver 与 MIR 编译器内部细节 | `concept/04_formal/05_rustc_internals/03_trait_solver_in_rustc.md` §6.5、`02_mir_codegen_llvm_primer.md` §2.2/§2.3 | 已覆盖 lifetime-in-selection、type-check/codegen split、StorageLive/Dead、drop elaboration、常见 MIR passes、ValTrees 与 promoted constants |
+| P2-8 | ✅ **已完成**（2026-07-28）补齐 Edition 2024 std lib / rustfmt / TRPL Ch21 细节 | `concept/07_future/01_edition_roadmap/02_edition_guide.md` §2.5.5、`06_external_authority_topic_index.md` | 外部索引 4 处 ⚠️ 全部解决：Web Server ✅ / Std lib ✅ / MIR opts ✅ / next-gen solver ✅ |
 | P2-9 | ✅ **已完成**（2026-07-28）扩展 `topic_authority_aligner.py` 字典 | `scripts/topic_authority_aligner.py` | 新增 `MANUAL_AUTHORITY_COVERAGE`，将 let chains / never type / const generics / Cow / sanitizers / unsafe reference 6 项移出「项目独有」 |
 | P2-10 | ✅ **已完成**（2026-07-28）新增 `authority_semantic_diff.py` 检查器 | `scripts/authority_semantic_diff.py` | 核心页权威语义关键词扫描；当前 P0=0 / P1=0 |
 
@@ -275,13 +275,14 @@
 
 ## 七、验收标准
 
-- P0 任务全部完成并通过以下检查：
+- P0/P1/P2 任务全部完成（100%）并通过以下检查：
   - `cargo test --workspace --quiet`
-  - `python scripts/kb_auditor.py`
+  - `python scripts/kb_auditor.py --link-check`
+  - `python scripts/concept_consistency_auditor.py --strict`
   - `python scripts/check_concept_code_blocks.py --strict`
+  - `python scripts/detect_content_overlap_v2.py --budget 999999 | python scripts/triage_overlap.py`
+  - `python scripts/authority_semantic_diff.py --strict`
   - 重新运行 `check_version_semantic_injection.py` / `check_cross_domain_coverage.py` / `semantic_health.py` 仍通过
-- P1 任务完成 ≥80%。
-- P2 任务完成 ≥50% 或纳入下季度计划。
 - 新增/修改的 concept 页均符合 AGENTS.md §4.2 元数据模板（EN/Summary/Rust 版本/Bloom 层级/权威来源）。
 
 ---

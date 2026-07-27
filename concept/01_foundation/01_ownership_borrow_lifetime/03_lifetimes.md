@@ -41,6 +41,7 @@
 - v1.0 (2026-05-12): 初始版本，完成权威定义、生命周期（Lifetimes）规则矩阵、形式化视角、NLL 分析、示例反例
 - v2.2 (2026-05-14): 完成待办双项——§13 Lifetime Elision 完整形式化（三条规则 ∀/⇒ 形式化、正例+反例、Rust Reference 来源）；§14 `impl Trait` 与生命周期（Lifetimes）推断交互（RPIT 捕获、APIT 差异、`+'a` 显式约束、where 对比、来源标注）
 - v2.2 (2026-05-19): 补全权威来源标注——新增跨语言生命周期（Lifetimes）对比矩阵（C++ / Haskell / Go），补充 Polonius 与 Tree Borrows 来源，深化 NLL → Polonius 演进论证
+- v2.4 (2026-07-28): P2 跨层去重——§1.3b 中 NLL/Polonius 详细算法与演进链迁移至 L3/L4 权威页 [NLL 与 Polonius](../../03_advanced/02_unsafe/03_nll_and_polonius.md)，本页保留 L1 直觉与形式化演进链概要
 - v2.3 (2026-07-28): P1 语义补齐——扩展生命周期省略规则（trait object 默认边界、`const`/`static` 隐式 `'static`、函数指针/闭包 trait elision、`'_` placeholder），明确 `'static ⊑ 'a` 中 `⊑` 表示 outlives 且与 subtype 方向相反；Rust 版本更新至 1.97.1+
 - v2.1 (2026-05-13): Phase BC 形式化深化——新增§1.3b Tofte-Talpin 区域推断算法的 Rust 适配（原始 ML 算法概述、三项关键适配、Rust 约束生成与求解两阶段算法、与 Polonius 演进关系）
 - v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡
@@ -82,7 +83,7 @@ mindmap
     - [1.3b Tofte-Talpin 区域推断算法的 Rust 适配](#13b-tofte-talpin-区域推断算法的-rust-适配)
       - [原始算法（ML 语言）](#原始算法ml-语言)
       - [Rust 的三项关键适配](#rust-的三项关键适配)
-      - [Rust 中的区域约束生成与求解](#rust-中的区域约束生成与求解)
+      - [Rust 中的区域约束求解（L1 直觉）](#rust-中的区域约束求解l1-直觉)
       - [与 Polonius 的演进关系](#与-polonius-的演进关系)
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
     - [2.1 生命周期标注矩阵](#21-生命周期标注矩阵)
@@ -223,50 +224,35 @@ Tofte-Talpin 区域推断的核心思想:
 
 > **来源**: [Rust Reference: Non-Lexical Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) · [rustc NLL RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html) · [Rust Internals: NLL design notes](https://internals.rust-lang.org/)
 
-#### Rust 中的区域约束生成与求解
+> **跨层映射**: NLL 与 Polonius 的完整算法、演进链、边界示例与工程影响详见 `concept/` 权威页 [NLL 与 Polonius：借用检查器的演进](../../03_advanced/02_unsafe/03_nll_and_polonius.md)。本节只保留 L1 必要的直觉：NLL 让生命周期从"词法作用域"变为"实际使用范围"，从而接受更多合法程序。
+
+#### Rust 中的区域约束求解（L1 直觉）
 
 ```text
-编译器生命周期检查的两阶段算法:
+编译器生命周期检查的两阶段算法（直觉版）:
 
 阶段 1: 约束生成（Constraint Generation）
-  对函数体进行数据流分析，生成生命周期约束：
-
-    - 引用创建: let r = &x  →  生成约束: lifetime(r) ≤ lifetime(x)
-    - 函数调用: foo(&x, &y) → 根据签名生成 outlives 约束
-    - 赋值: r1 = r2       →  生成约束: lifetime(r1) = lifetime(r2)
-    - 返回: return &x      →  生成约束: lifetime(return) ≤ lifetime(x)
-
-  约束形式: 'a: 'b（'a outlives 'b）或 'a = 'b
+  对函数体扫描，生成生命周期约束：
+    - 引用创建: let r = &x  →  lifetime(r) ≤ lifetime(x)
+    - 函数调用: foo(&x)    →  根据签名生成 outlives 约束
+    - 返回: return &x      →  lifetime(return) ≤ lifetime(x)
 
 阶段 2: 约束求解（Constraint Solving）
-  将所有约束输入偏序约束求解器：
-
-    1. 构建约束图: 节点 = 生命周期变量，边 = outlives 关系
-    2. 检查图中是否存在矛盾环（如 'a: 'b 且 'b: 'a 且 'a ≠ 'b 的非法场景）
-    3. 为每个引用计算最小满足约束的生命周期范围
-    4. 若存在未满足的约束 → 编译错误（E0597、E0106 等）
+  1. 构建约束图: 节点 = 生命周期变量，边 = outlives 关系
+  2. 检查是否存在矛盾环
+  3. 若存在未满足约束 → 编译错误（E0597、E0106 等）
 
 NLL 的关键改进:
   传统（词法）: 生命周期 = 语法作用域范围
   NLL: 生命周期 = 控制流图（CFG）中从定义点到最后一次使用点的路径集合
-  求解器: 从基于"作用域嵌套树"变为基于"CFG 数据流分析"
 ```
 
-> **来源**: [rustc NLL [RFC 2094](https://rust-lang.github.io/rfcs//2094-nll.html) — Non-Lexical Lifetimes] · [Rust Reference: Lifetime resolution](https://doc.rust-lang.org/reference/lifetime-elision.html) · [rustc borrow_check/src/region_inference/mod.rs]
+> **来源**: [rustc NLL RFC 2094](https://rust-lang.github.io/rfcs/2094-nll.html) · [Rust Reference: Lifetime resolution](https://doc.rust-lang.org/reference/lifetime-elision.html)
 
 #### 与 Polonius 的演进关系
 
 ```text
-NLL 的局限性:
-  - 仍基于"基于点的分析"（point-based），某些合法模式被拒绝
-  - 例如: 两个分支分别借用不同字段，合并后无法使用整体
-
-Polonius 的改进:
-  - 基于"基于起源的分析"（origin-based）
-  - 将生命周期视为"值的来源集合"而非"时间范围"
-  - 更精确地追踪 "哪个值被哪个引用借用"
-
-形式化演进链:
+形式化演进链（概要）:
   Tofte-Talpin (1994) 词法区域
        ↓
   Rust 传统生命周期（词法作用域）
@@ -275,12 +261,10 @@ Polonius 的改进:
        ↓
   Polonius (未来) 基于 Datalog 的起源推理
 
-关键洞察:
-  每一代都在 "保持 soundness" 的前提下 "减少保守拒绝"
-  即: 接受集单调递增，拒绝集单调递减
+关键洞察: 每一代都在 "保持 soundness" 的前提下 "减少保守拒绝"。
 ```
 
-> **来源**: [Polonius GitHub: README and design docs] · [rustc Polonius tracking issue] · [Niko Matsakis blog: From NLL to Polonius]
+> **权威来源**: [NLL 与 Polonius：借用检查器的演进](../../03_advanced/02_unsafe/03_nll_and_polonius.md) · [Polonius GitHub](https://github.com/rust-lang/polonius)
 
 ---
 

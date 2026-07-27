@@ -40,6 +40,7 @@
     - [6.2 行为差异示例：关联类型与高阶生命周期](#62-行为差异示例关联类型与高阶生命周期)
     - [6.3 嵌套目标与 Fixpoint：推断变量的传播](#63-嵌套目标与-fixpoint推断变量的传播)
     - [6.4 可复现的对比实验：高阶生命周期与关联类型归一化](#64-可复现的对比实验高阶生命周期与关联类型归一化)
+    - [6.5 Selection 与生命周期、Type-Check/Codegen 分离](#65-selection-与生命周期type-checkcodegen-分离)
   - [七、Coinduction 与递归 Trait](#七coinduction-与递归-trait)
   - [八、逆向推理链（Backward Reasoning）](#八逆向推理链backward-reasoning)
   - [嵌入式测验](#嵌入式测验)
@@ -314,6 +315,13 @@ rustc +nightly --edition 2024 -Znext-solver=globally trait_solver_cmp.rs
 | 新 solver | 编译通过（仅可能有 unused variable 警告） |
 
 旧 solver 会过早尝试在 `for<'a>` binder 内部把 `<T as WithAssoc<'a>>::Output` 结构展开，无法识别它归一化为 `&'a ()`；新 solver 生成 `AliasRelate` 目标，将等价判断延迟到参数环境足以归一化关联类型时再求解。
+
+### 6.5 Selection 与生命周期、Type-Check/Codegen 分离
+
+- **Selection 不考虑 lifetime**：trait 求解只关心类型是否实现 trait，不验证具体生命周期约束。lifetime 检查由独立的 borrow checker（NLL/Polonius）在 MIR 阶段完成。因此同一类型可能同时通过 `T: 'a` 与 `T: 'b` 的 selection，但生命周期是否满足由后续阶段判定。
+- **Type-check 与 codegen 各做一次 selection**：rustc 在类型检查阶段做一次 trait selection 以推断类型并报告错误；在 codegen/monomorphization 阶段会再次执行 selection，确保单态化后的具体类型仍满足 trait bound。两次 selection 的输入不同（泛型 vs 单态化后类型），但逻辑共享同一 solver。
+
+> [Rustc Dev Guide — Trait solving overview](https://rustc-dev-guide.rust-lang.org/solve/trait-solving.html)
 
 ---
 

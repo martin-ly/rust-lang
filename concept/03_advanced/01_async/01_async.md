@@ -31,7 +31,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Ana — 分析 Pin 与状态机的交互
 > **前置依赖**: [L2 泛型（Generics）](../../02_intermediate/01_generics/01_generics.md) · [L2 Trait](../../02_intermediate/00_traits/01_traits.md) · L1 生命周期（Lifetimes）
-> **后置延伸**: [L4 异步（Async）语义形式化](../../04_formal/01_ownership_logic/02_ownership_formal.md) · [L6 Tokio](../../06_ecosystem/02_core_crates/01_core_crates.md) · [L7 效果系统](../../07_future/02_preview_features/01_effects_system.md)
+> **后置延伸**: [L4 异步（Async）操作语义](../../04_formal/03_operational_semantics/03_operational_semantics.md#24-异步-futureawait-的小步操作语义) · [L4 所有权形式化](../../04_formal/01_ownership_logic/02_ownership_formal.md) · [L6 Tokio](../../06_ecosystem/02_core_crates/01_core_crates.md) · [L7 效果系统](../../07_future/02_preview_features/01_effects_system.md)
 > **跨层映射**: L3→L4 Future [来源: [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)] ↔  continuation monad | L3→L7 async effects → algebraic effects
 > **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性（Coherence） → T-052 async/await 转换正确性
 > **层级**: L3 高级概念
@@ -57,6 +57,7 @@
 > **Bloom 层级**: L3-L5
 **变更日志**:
 
+- v4.4 (2026-07-28): P2 跨层映射——后置延伸指向 L4 异步操作语义页 [`03_operational_semantics.md` §2.4](../../04_formal/03_operational_semantics/03_operational_semantics.md#24-异步-futureawait-的小步操作语义)，与 `04_inter_layer_map.md` §5.3.3 同步
 - v4.3 (2026-07-28): P1 语义补齐——新增§3.1a `async fn` 参数捕获与 drop 顺序边界、`async unsafe fn` 边界示例，引用 Rust Reference — Async functions / Functions；Rust 版本更新至 1.97.1+
 - v4.2 (2026-05-13): Phase B 验证实践——新增§8.13 Miri 动态验证场景（悬垂指针检测、无效 bool 检测、async 状态机未初始化内存检测，含实际 Miri 输出截图）
 - v4.1 (2026-05-13): Phase B 形式化深化——新增§3.1b 状态机操作语义（小步语义、poll 状态转移函数、.await CPS 变换、Pin 约束在操作语义中的体现）；新增§3.2b Pin LTL 形式化（不动性公理 A1-A3、Unpin 豁免、poll 递归调用链验证、与§3.1b 操作语义衔接）
@@ -109,7 +110,7 @@
       - [poll 作为状态转移函数](#poll-作为状态转移函数)
       - [.await 的 CPS 变换规则](#await-的-cps-变换规则)
       - [Pin 约束在操作语义中的体现](#pin-约束在操作语义中的体现)
-      - [async fn 参数捕获与 drop 顺序边界](#async-fn-参数捕获与-drop-顺序边界)
+      - [async fn 参数捕获与 drop 顺序边界 (drop order)](#async-fn-参数捕获与-drop-顺序边界-drop-order)
       - [async unsafe fn 的边界](#async-unsafe-fn-的边界)
     - [3.2 Pin 的形式化语义](#32-pin-的形式化语义)
     - [3.2b Pin 的 LTL 形式化（异步状态机语境）](#32b-pin-的-ltl-形式化异步状态机语境)

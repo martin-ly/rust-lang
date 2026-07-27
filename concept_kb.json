@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 537,
-    "generated_at": "2026-07-27T20:49:47.393356+00:00"
+    "total_files": 536,
+    "generated_at": "2026-07-27T21:16:15.381692+00:00"
   },
   "files": [
     {
@@ -1684,28 +1684,6 @@
       "templated_chains": 0
     },
     {
-      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\02_sources\\topic_authority_alignment_map.md",
-      "layer": "L0",
-      "title": "主题-权威来源对齐图谱 (Topic-Authority Alignment Map)",
-      "positioning": "",
-      "line_count": 364,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 4,
-      "pre_post": {
-        "pre": [],
-        "post": []
-      },
-      "backward_chains": 0,
-      "templated_chains": 0
-    },
-    {
       "path": "E:\\_src\\rust-lang\\concept\\00_meta\\03_audit\\01_concept_audit_guide.md",
       "layer": "L0",
       "title": "Concept Audit Guide（概念审计指南）",
@@ -2211,6 +2189,7 @@
       "sources": [],
       "cross_references": [
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../03_advanced/01_async/08_pin_unpin.md",
         "../../04_formal/01_ownership_logic/02_ownership_formal.md",
         "../00_framework/methodology.md",
         "../00_framework/theorem_registry.md",
@@ -9983,7 +9962,7 @@
       "layer": "L1",
       "title": "Lifetimes（生命周期）",
       "positioning": "",
-      "line_count": 1604,
+      "line_count": 1588,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡",
@@ -10397,6 +10376,7 @@
         "../../00_meta/04_navigation/04_inter_layer_map.md",
         "../../02_intermediate/01_generics/01_generics.md",
         "../../03_advanced/01_async/01_async.md",
+        "../../03_advanced/02_unsafe/03_nll_and_polonius.md",
         "../11_quizzes/06_quiz_ownership_borrowing.md",
         "01_ownership.md",
         "02_borrowing.md",
@@ -27765,7 +27745,7 @@
       "layer": "L3",
       "title": "Async/Await（异步编程）",
       "positioning": "",
-      "line_count": 3650,
+      "line_count": 3651,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 定理一致性（Coherence）矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注",
@@ -30755,7 +30735,7 @@
       "layer": "L3",
       "title": "Unsafe Rust 安全编程",
       "positioning": "",
-      "line_count": 3562,
+      "line_count": 3457,
       "theorem_chains": [
         {
           "text": "- v1.1 (2026-05-13): 重构增强——定理一致性（Coherence）矩阵扩展至10行（⟹推理链）、反命题决策树×4、认知路径六步递进、章节过渡段落、层次一致性标注",
@@ -30845,18 +30825,6 @@
         }
       ],
       "code_blocks": [
-        {
-          "flags": [],
-          "lines": 10,
-          "should_fail": false,
-          "code_preview": "fn stacked_borrows_legal() {     let mut x = 0i32;     let r1 = &mut x;      // ..."
-        },
-        {
-          "flags": [],
-          "lines": 11,
-          "should_fail": false,
-          "code_preview": "fn stacked_borrows_ub() {     let mut x = 0i32;     let r1 = &mut x;          //..."
-        },
         {
           "flags": [
             "ignore"
@@ -31317,6 +31285,7 @@
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../02_intermediate/02_memory_management/01_memory_management.md",
         "../../04_formal/01_ownership_logic/02_ownership_formal.md",
+        "../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md",
         "../../04_formal/02_separation_logic/01_rustbelt.md",
         "../../04_formal/README.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
@@ -31330,12 +31299,13 @@
         "../README.md",
         "02_unsafe_boundary_panorama.md",
         "04_unsafe_rust_patterns.md",
-        "05_quiz_unsafe.md"
+        "05_quiz_unsafe.md",
+        "06_memory_model.md"
       ],
       "transitions": 3,
       "has_cognitive_path": true,
-      "mermaid_blocks": 11,
-      "matrix_rows": 323,
+      "mermaid_blocks": 10,
+      "matrix_rows": 299,
       "pre_post": {
         "pre": [
           "> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·"
@@ -31564,7 +31534,7 @@
       "layer": "L3",
       "title": "NLL 与 Polonius：借用检查器的演进",
       "positioning": "深入分析 Rust **借用（Borrowing）检查器**的两个里程碑——Non-Lexical Lifetimes (NLL) 如何放宽词法作用域限制，以及 Polonius 如何通过数据流分析实现更精确的借用检查，揭示 Rust 类型系统（Type System）的持续演进。",
-      "line_count": 911,
+      "line_count": 912,
       "theorem_chains": [
         {
           "text": "| NLL 与 Polonius：借用检查器的演进 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -41298,7 +41268,7 @@
       "layer": "L4",
       "title": "Tree Borrows 深度解析",
       "positioning": "",
-      "line_count": 228,
+      "line_count": 229,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -41335,6 +41305,7 @@
         "../../../knowledge/04_expert/miri/01_tree_borrows.md",
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../03_advanced/02_unsafe/06_memory_model.md",
         "../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md",
         "../../07_future/00_version_tracking/rust_1_98_preview.md",
         "../../07_future/02_preview_features/03_safety_tags_preview.md",
@@ -42062,7 +42033,7 @@
       "layer": "L4",
       "title": "操作语义：程序行为的形式化定义",
       "positioning": "介绍 **操作语义（Operational Semantics）**——通过形式化规则定义程序的执行步骤，分析小步语义（Small-Step）与大步语义（Big-Step）的对比，以及 Rust 的所有权（Ownership）、借用（Borrowing）和并发操作的形式化建模方法。",
-      "line_count": 1124,
+      "line_count": 1189,
       "theorem_chains": [
         {
           "text": "| 操作语义：程序行为的形式化定义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -42190,7 +42161,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 50,
+      "matrix_rows": 64,
       "pre_post": {
         "pre": [
           "[Type Theory](../00_type_theory/01_type_theory.md) · [Ownership Formal](../01_ownership_logic/02_ownership_formal.md) · [Linear Logic](../01_ownership_logic/01_linear_logic.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)"
@@ -43767,7 +43738,7 @@
       "layer": "L4",
       "title": "MIR、Codegen 与 LLVM IR 入门",
       "positioning": "把 rustc 后端入口讲清楚：MIR 是什么、它如何被逐步 lower 为 LLVM IR、以及开发者如何利用 `rustc` 命令直接观察这些中间产物。",
-      "line_count": 420,
+      "line_count": 483,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将 MIR 构建、借用（Borrowing）检查、优化、单态化（Monomorphization）与 LLVM IR 生成串联起来。",
@@ -43846,7 +43817,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 11,
+      "matrix_rows": 25,
       "pre_post": {
         "pre": [
           "[Rustc Query System](01_rustc_query_system.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)"
@@ -43863,7 +43834,7 @@
       "layer": "L4",
       "title": "rustc 中的 Trait Solver",
       "positioning": "把“这个类型是否实现了某 trait”这一核心问题，还原为候选装配、筛选、确认与约束求解的完整算法。",
-      "line_count": 476,
+      "line_count": 484,
       "theorem_chains": [
         {
           "text": "> **定理 4** [Tier 2]: 旧 solver 将 evaluation 与 fulfillment 分离 ⟹ 候选选择阶段无法直接缓存推断约束，导致同一份约束可能被重复求值。",
@@ -67175,7 +67146,7 @@
       "layer": "L7",
       "title": "Edition 2024 完全指南：新特性与迁移策略",
       "positioning": "全面讲解 Rust **Edition 2024** 的新特性——从 gen blocks、async closures 到 never type 和 lifetime captures，揭示 Edition 机制如何在不破坏兼容性的前提下推进语言演进。",
-      "line_count": 1046,
+      "line_count": 1062,
       "theorem_chains": [
         {
           "text": "| Edition 2024 完全指南：新特性与迁移策略 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",

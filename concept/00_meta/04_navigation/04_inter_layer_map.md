@@ -450,11 +450,11 @@ graph LR
 
 #### 5.3.3 异步操作语义映射
 
-| L3 语法 | L4 语义对象 | 说明 |
-|:---|:---|:---|
-| `async fn` / `async {}` | `Future` 状态机 | 编译期去糖为 `poll` 方法 |
-| `.await` | `IntoFuture::into_future` + `Pin::new_unchecked` + `Future::poll` | 每次 `.await` 产生一次状态转移 |
-| `Pin<Box<T>>` | location stability 约束 | 保证自引用字段地址不变 |
+| L3 语法 | L4 语义对象 | 说明 | L4 权威页 |
+|:---|:---|:---|:---|
+| `async fn` / `async {}` | `Future` 状态机 | 编译期去糖为 `poll` 方法 | [`03_operational_semantics.md` §2.4](../../04_formal/03_operational_semantics/03_operational_semantics.md#24-异步-futureawait-的小步操作语义) |
+| `.await` | `IntoFuture::into_future` + `Pin::new_unchecked` + `Future::poll` | 每次 `.await` 产生一次状态转移；L4 形式化为小步规则 `poll(Suspendᵢ(Γᵢ, w), cx) → ...` | [`03_operational_semantics.md` §2.4](../../04_formal/03_operational_semantics/03_operational_semantics.md#24-异步-futureawait-的小步操作语义) |
+| `Pin<Box<T>>` | location stability 约束 | 保证自引用字段地址不变 | [`08_pin_unpin.md`](../../03_advanced/01_async/08_pin_unpin.md) · [`02_ownership_formal.md`](../../04_formal/01_ownership_logic/02_ownership_formal.md) |
 
 #### 5.3.4 UB 分类 L3 ↔ L4 对照
 

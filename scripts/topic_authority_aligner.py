@@ -572,7 +572,7 @@ def phase4():
         aligned_by_layer.setdefault(layer, []).append(item)
 
     # Write index asset (canonical location under 00_meta/02_sources)
-    meta_file = META_DIR / "02_sources" / "topic_authority_alignment_map.md"
+    meta_file = META_DIR / "02_sources" / "04_topic_authority_alignment_map.md"
     lines = []
     lines.append("# 主题-权威来源对齐图谱 (Topic-Authority Alignment Map)\n")
     lines.append(f"> 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M')}\n")

@@ -12,6 +12,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析借用（Borrowing）检查算法的精度演进
 > **定位**: 深入分析 Rust **借用（Borrowing）检查器**的两个里程碑——Non-Lexical Lifetimes (NLL) 如何放宽词法作用域限制，以及 Polonius 如何通过数据流分析实现更精确的借用检查，揭示 Rust 类型系统（Type System）的持续演进。
+> **跨层映射**: 本页为 NLL/Polonius 的 `concept/` 权威页；L1 [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) §1.3b 保留 Tofte-Talpin 到 NLL 的 L1 直觉与演进链概要，详细算法、边界示例与 Miri/编译器影响见本页。
 > **前置概念**: [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md)
 > **后置概念**: [Unsafe](01_unsafe.md) · [Formal Methods](../../04_formal/02_separation_logic/01_rustbelt.md)
 >

@@ -38,6 +38,7 @@
     - [2.1 配置与转换规则](#21-配置与转换规则)
     - [2.2 环境与存储](#22-环境与存储)
     - [2.3 Rust 操作语义的特殊性](#23-rust-操作语义的特殊性)
+    - [2.4 异步 Future/await 的小步操作语义](#24-异步-futureawait-的小步操作语义)
   - [三、应用映射](#三应用映射)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -328,6 +329,66 @@ Rust 操作语义的独特挑战:
 
 > **Rust 特殊性**: Rust 的操作语义必须同时处理**值语义**（所有权（Ownership）转移）和**引用（Reference）语义**（借用（Borrowing）约束）——这比传统命令式语言复杂得多。
 > (Source: [Stacked Borrows Paper](https://doi.org/10.1145/3371106)) · (Source: [Tree Borrows](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html))
+
+---
+
+### 2.4 异步 Future/await 的小步操作语义
+>
+
+`async fn` / `async {}` 的去糖结果不是普通函数，而是一个实现 `std::future::Future` 的**状态机类型**。从操作语义角度看，该状态机的执行由 `poll` 方法驱动，`.await` 是挂起点（suspension point）的语法糖。下面给出 L4 层的小步规则，与 L3 工程视角的 §3.1b 形成纵向映射。
+
+```text
+Future 作为状态机对象:
+
+  F ::= Start(Γ₀)            -- 初始状态，持有参数与捕获环境
+      | Suspendᵢ(Γᵢ, w)      -- 第 i 个挂起点：保存局部变量 Γᵢ 与待轮询子 Future w
+      | Complete(v)          -- 完成状态，持有返回值 v
+      | Panicked             -- 异常终止状态
+
+  其中 Γᵢ 为跨第 i 个 .await 存活的局部变量集合；w 为当前挂起等待的子 Future。
+```
+
+**`poll` 的小步转换规则**（状态转移函数 `poll : Pin<&mut F> × &mut Context → Poll<T>`）：
+
+```text
+[初始推进]
+  poll(Start(Γ₀), cx)
+    → match eval_until_await(Γ₀) with
+        | return v            ⇒ (Ready(v), Complete(v))
+        | .await w in body'   ⇒ (Pending, Suspend₁(Γ₁, w), register_waker(cx, w))
+
+[挂起恢复]
+  poll(Suspendᵢ(Γᵢ, w), cx)
+    → match poll(Pin::new_unchecked(&mut w), cx) with
+        | Pending             ⇒ (Pending, Suspendᵢ(Γᵢ, w))
+        | Ready(v)            ⇒ match resume_body(Γᵢ, v) with
+                                  | return v'       ⇒ (Ready(v'), Complete(v'))
+                                  | .await w' in Γᵢ₊₁ ⇒ (Pending, Suspendᵢ₊₁(Γᵢ₊₁, w'),
+                                                         register_waker(cx, w'))
+
+[终止幂等]
+  poll(Complete(v), _) → (Ready(v), Complete(v))
+  poll(Panicked, _)    → panic!("polled after panic")
+```
+
+> **关键细节 1 — `IntoFuture` 与临时 pinning**：Rust 1.64 起 `.await` 先去糖为 `IntoFuture::into_future(expr)`，再对结果调用 `Future::poll`。由于 `poll` 要求 `Pin<&mut Self>`，编译器在生成的状态机内部使用 `Pin::new_unchecked` 临时固定子 Future（状态机自身已通过 `Pin<&mut Self>` 被外层固定）。
+>
+> **关键细节 2 — Pin 作为位置稳定性公理**：若状态机 `F` 包含自引用字段，则 `Pin<&mut F>` 在操作语义中引入一条**位置不变式** `addr(F) 恒定`，直到 `F` 被 drop 或完成。该不变式保证自引用字段的偏移量在跨 `await` 的多次 `poll` 之间有效。
+>
+> **关键细节 3 — 活性（liveness）**：每次进入 `Pending` 状态时，必须通过 `cx.waker()` 将当前任务 waker 注册到子 Future `w` 上；否则 `w` 就绪后无法唤醒执行器，导致任务永久挂起。
+
+> **来源**: [Rust Reference — Async functions](https://doc.rust-lang.org/reference/items/functions.html#async-functions) · [Rust Reference — Await expressions](https://doc.rust-lang.org/reference/expressions/await-expr.html) · [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html) · [RFC 2349 — Pin](https://rust-lang.github.io/rfcs/2349-pin.html)
+
+**与 L3 工程视角的对照**：
+
+| L3 工程表述 | L4 操作语义对象 | 规则/不变式 |
+|:---|:---|:---|
+| `async fn` 返回 `impl Future` | `Start(Γ₀)` 状态 | 调用 = 构造初始状态，不执行 body |
+| `.await` 挂起当前任务 | `Suspendᵢ(Γᵢ, w)` 转移 | 小步规则：poll 子 Future → Pending/Ready |
+| `Pin<&mut Self>` | 位置稳定性约束 `addr(F) 恒定` | 自引用安全的形式化前提 |
+| Waker/Context | `register_waker(cx, w)` 副作用 | 活性不变式 `I₂` |
+
+> **认知功能**: 将小步语义应用于 async，可以精确回答「`.await` 在语义上做了什么」：它不是函数调用，而是**状态机的一次显式上下文切换**——把当前状态机的局部环境存入 `Suspendᵢ`，并把 CPU 控制权交还给执行器，直到子 Future 通过 waker 回调再次触发 `poll`。
 
 ---
 
@@ -765,11 +826,14 @@ Trait 系统是 Rust 形式化验证中「最后的主要堡垒」。其难度�
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**:
+>
+> - 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/05_international_authority_index.md)
+> - 2026-07-28 补充 §2.4「异步 Future/await 的小步操作语义」，建立 L3 async/await 与 L4 小步规则的跨层映射
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/05_international_authority_index.md)
 
-**文档版本**: 1.0
-**最后更新**: 2026-05-22
+**文档版本**: 1.1
+**最后更新**: 2026-07-28
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 
 ---
@@ -1114,6 +1178,7 @@ mindmap
       配置与转换规则
       环境与存储
       Rust 操作语义的特殊性
+      异步 Future await 的小步操作语义
     Rust 语义项目比较矩阵
       引言 为什么没有单一形式化覆盖全部
       完整比较矩阵

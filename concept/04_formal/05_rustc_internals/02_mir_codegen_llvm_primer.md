@@ -64,6 +64,7 @@
   - [二、MIR → Codegen → LLVM IR 流水线](#二mir--codegen--llvm-ir-流水线)
     - [2.1 关键查询节点](#21-关键查询节点)
     - [2.2 常见 MIR 优化与 passes](#22-常见-mir-优化与-passes)
+    - [2.3 常量与 promoted：ValTrees 表示](#23-常量与-promotedvaltrees-表示)
   - [三、如何查看 MIR：`rustc --emit=mir`](#三如何查看-mirrustc---emitmir)
   - [四、如何查看 LLVM IR：`rustc --emit=llvm-ir`](#四如何查看-llvm-irrustc---emitllvm-ir)
   - [五、最小 annotated 示例](#五最小-annotated-示例)
@@ -171,6 +172,46 @@ graph LR
 > 提示：`-Zmir-opt-level=N`（nightly）可控制 MIR 优化等级；稳定工具链默认等级已足够日常检查。
 >
 > [Rustc Dev Guide — MIR Optimizations](https://rustc-dev-guide.rust-lang.org/mir/optimizations.html)
+
+---
+
+### 2.3 常量与 promoted：ValTrees 表示
+
+MIR 中的常量（`const` 求值结果、`static` 初始值、promoted 子表达式）不是直接以 LLVM IR 常量形态出现的，而是先被编译器表示为 **ValTree（Value Tree）**。ValTree 是 rustc 内部对「编译期已知值」的结构化抽象，位于 `rustc_middle::mir::ConstValue` / `rustc_middle::ty::Const` 层级。
+
+```text
+ValTree 的归纳结构（简化）:
+
+  ValTree ::= Leaf(Scalar)
+            | Branch([ValTree; N])          -- 定长数组、元组、结构体字段
+            | Variant(idx, [ValTree; N])    -- 枚举变体：变体索引 + 字段树
+
+  Scalar  ::= Int(_) | Float(_) | RawPtr(_) | FnPtr(_) | Char(_)
+```
+
+**与 MIR 的交互**:
+
+| MIR 构造 | 对应的 ValTree 形态 | 说明 |
+|:---|:---|:---|
+| `_1 = const 42_i32` | `Leaf(Int(42))` | 标量常量直接为叶节点 |
+| `_2 = const [1, 2, 3]` | `Branch([Leaf(1), Leaf(2), Leaf(3)])` | 数组为分支节点 |
+| `_3 = const Point { x: 1, y: 2 }` | `Branch([Leaf(1), Leaf(2)])` | 结构体字段按声明顺序成树 |
+| `_4 = const Some(5)` | `Variant(1, [Leaf(5)])` | 枚举变体索引 + 载荷 |
+| promoted 临时常量 | `ValTree` 缓存于 `promoted` 表 | 避免重复 CTFE 求值 |
+
+**关键机制**:
+
+1. **CTFE（Compile-Time Function Evaluation）**: `const fn` 的求值结果首先被编码为 ValTree；只有最终 lower 到 codegen 时才被翻译成 LLVM `Constant`。
+2. **Promoted constants**: 借用检查器与 MIR 构建阶段会把某些无副作用的子表达式（如 `&[1, 2, 3]` 或 `&std::sync::Once::new()`）提升为 `promoted` 常量，其值以 ValTree 形式缓存，生命周期视为 `'static`。
+3. **Const generics**: 泛型参数 `<const N: usize>` 的实例值也使用 ValTree 表示，从而可以在类型层面比较和单态化。
+
+**限制与边界**:
+
+- ValTree 只能表示**完全初始化的、不含非法值**的常量；对未初始化内存、`union` 活跃字段外的内容、或指向 `static` 的引用，编译器会回退到更通用的 `ConstValue` 表示。
+- 含有内部可变性（如 `Cell`）或 `UnsafeCell` 的值不能简单放入 `static` / `const`，因为 ValTree 假设值在编译期不可变。
+- 跨 crate 的常量序列化依赖 ValTree 的稳定编码；rustc 版本升级时需保持其兼容性。
+
+> **来源**: [Rustc Dev Guide — Constant Evaluation](https://rustc-dev-guide.rust-lang.org/const-eval/index.html) · [Rustc Dev Guide — Promoteds](https://rustc-dev-guide.rust-lang.org/mir/index.html) · [Rust Reference — Constant Evaluation](https://doc.rust-lang.org/reference/const_eval.html)
 
 ---
 
@@ -374,11 +415,14 @@ MIR 仍保留 Rust 高层语义（如 `move`、`Drop`、借用检查标记、基
 ---
 
 > **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [LLVM Documentation](https://llvm.org/docs/)
-> **权威来源对齐变更日志**: 2026-07-09 创建，对齐 Rust 1.97.0+ MIR/codegen 文档
+> **权威来源对齐变更日志**:
+>
+> - 2026-07-09 创建，对齐 Rust 1.97.0+ MIR/codegen 文档
+> - 2026-07-28 补充 §2.3「常量与 promoted：ValTrees 表示」，覆盖 CTFE、promoted constants、const generics 的编译期值表示
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/05_international_authority_index.md)
 
-**文档版本**: 1.0
-**最后更新**: 2026-07-09
+**文档版本**: 1.1
+**最后更新**: 2026-07-28
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 
 ---
@@ -430,6 +474,8 @@ mindmap
     什么是 MIR
     MIR → Codegen → LLVM IR 流水线
       1 关键查询节点
+      2 常见 MIR 优化与 passes
+      3 常量与 promoted ValTrees 表示
     如何查看 MIR rustc --emit=mir
 ```
 
