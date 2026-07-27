@@ -2,7 +2,6 @@
 
 > **EN**: Alignment Guide
 > **Summary**: Rust 对齐知识综合指南 Alignment Guide.
-
 > **权威来源**: 本文件为 docs/ 参考重定向 stub，完整概念解释请见：
 > [`concept/01_foundation/02_type_system/01_type_system.md`](../../concept/01_foundation/02_type_system/01_type_system.md)
 >

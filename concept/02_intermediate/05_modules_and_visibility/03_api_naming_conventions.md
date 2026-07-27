@@ -58,6 +58,7 @@
   - [八、快速对照表](#八快速对照表)
   - [九、练习题](#九练习题)
     - [练习 1：为 `Config` 设计 API](#练习-1为-config-设计-api)
+  - [十、API Guidelines 命名规则逐项映射表](#十api-guidelines-命名规则逐项映射表)
   - [相关概念](#相关概念)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [📋 关键属性](#-关键属性)
@@ -461,6 +462,27 @@ impl From<(&str, u16)> for Config {
 ```
 
 </details>
+
+---
+
+## 十、API Guidelines 命名规则逐项映射表
+
+下表将 [Rust API Guidelines — Naming](https://rust-lang.github.io/api-guidelines/naming.html) 的命名规则与本文各节逐一对齐，方便在 API 设计时按编号快速定位约定出处与反例。
+
+| 规则编号 | 规则英文名称 | 核心要求 | 本文对应章节 | 典型示例 | 常见反例 |
+|:---|:---|:---|:---:|:---|:---|
+| C-CASE | Casing conforms to RFC 430 | 类型/Trait `UpperCamelCase`；函数/方法/变量 `snake_case`；常量/静态 `SCREAMING_SNAKE_CASE`；缩写视为一个词（`Uuid` 而非 `UUID`） | 一、八 | `struct TaskConfig` / `fn with_capacity` / `const MAX_LEN: usize` | `struct Task_Config` / `fn getMaxLen` |
+| C-CTOR | Call constructors from functions | 主构造器用 `new`；带关键配置用 `with_`；从其他类型转换用 `from_`；可能失败用 `try_` | 二 | `Vec::new()` / `Vec::with_capacity(10)` / `Task::try_new(...)` | 多个 `new` 变体；`make_new()` 与 `new()` 并存 |
+| C-TRY | Use `try_` for fallible constructors | `try_` 前缀暗示返回 `Result`/`Option`；成对提供非失败版本 | 2.4 | `Task::try_new(name, priority)?` | `try_do()` 返回 `Option<T>`（前缀与类型错配） |
+| C-CONV | Ad-hoc conversions follow `as_`, `to_`, `into_` | `as_` 零成本借用；`to_` 昂贵克隆/转换；`into_` 消耗所有权 | 三、五 | `str::as_bytes()` / `str::to_string()` / `String::into_bytes()` | `as_xxx` 内部分配；`to_xxx` 却取 `self` by value |
+| C-GETTER | Getter names follow Rust convention | 避免 `get_` 前缀；`foo()` / `foo_mut()` / `set_foo(v)` 三件套 | 四 | `task.name()` / `task.name_mut()` | `task.get_name()` 与 `task.name()` 并存 |
+| C-ITER | Iterator methods follow `iter`, `iter_mut`, `into_iter` | 同质容器应提供 `iter`/`iter_mut`/`into_iter` | 四 | `vec.iter()` / `vec.iter_mut()` / `vec.into_iter()` | 自定义 `each()` 替代标准三连 |
+| C-ITER-TY | Iterator type names match methods | `into_iter()` 返回 `IntoIter`，`iter()` 返回 `Iter` | 四 | `vec::IntoIter` / `vec::Iter` | 方法名与返回类型名不一致 |
+| C-FEATURE | Feature names are free of placeholder words | Cargo feature 名直接叫 `std`/`serde`，不加 `use-`/`with-`；禁用否定式 feature | 八（ Cargo feature 设计） | `features = ["std", "serde"]` | `use-std` / `with-serde` / `no-std` |
+| C-WORD-ORDER | Names use a consistent word order | 错误类型等采用“动词-对象-错误”顺序，并保持 crate 内一致 | 八 | `ParseIntError` / `RecvTimeoutError` | 同一 crate 中混用 `AddrParseError` 与 `ParseAddrError` |
+
+> **使用方式**：设计 API 时先按 C-CASE 确定大小写；构造器查 C-CTOR/C-TRY；转换查 C-CONV；访问器查 C-GETTER；迭代器查 C-ITER/C-ITER-TY；Cargo feature 查 C-FEATURE；类型命名词序查 C-WORD-ORDER。
+> [来源: [Rust API Guidelines — Naming](https://rust-lang.github.io/api-guidelines/naming.html)]
 
 ---
 

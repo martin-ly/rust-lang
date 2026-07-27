@@ -2,7 +2,6 @@
 
 > **EN**: Cross Language Comparison
 > **Summary**: Rust 与 C++/Go/Python 跨语言对比 Cross Language Comparison.
-
 > **权威来源**: 本文件为 docs/ 参考重定向 stub，完整概念解释请见：
 > [`concept/05_comparative/README.md`](../../concept/05_comparative/README.md)
 >

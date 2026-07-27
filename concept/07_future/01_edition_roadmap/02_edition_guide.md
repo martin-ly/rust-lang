@@ -44,6 +44,11 @@
     - [2.2 Async Closures](#22-async-closures)
     - [2.3 Lifetime 捕获](#23-lifetime-捕获)
     - [2.4 `if let` 临时作用域收窄](#24-if-let-临时作用域收窄)
+    - [2.5 工具链与文档生态的边缘变更](#25-工具链与文档生态的边缘变更)
+      - [2.5.1 `rustfmt` Style Edition](#251-rustfmt-style-edition)
+      - [2.5.2 Cargo 表名/键名一致性](#252-cargo-表名键名一致性)
+      - [2.5.3 Cargo：拒绝未使用的继承默认特性](#253-cargo拒绝未使用的继承默认特性)
+      - [2.5.4 Rustdoc 合并测试与嵌套 `include!`](#254-rustdoc-合并测试与嵌套-include)
   - [三、新特性矩阵](#三新特性矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -353,6 +358,114 @@ fn get_string() -> String { String::from("hello") }
 >     println!("{}", x);
 > }
 > ```
+
+---
+
+### 2.5 工具链与文档生态的边缘变更
+
+Edition 2024 不仅影响 rustc 语言语义，还同步调整了 `rustfmt`、Cargo 与 `rustdoc` 的默认行为。这些变更通常不修改运行时语义，但会改变 CI 格式检查、依赖解析与文档测试的执行方式，迁移时容易被忽略。
+
+#### 2.5.1 `rustfmt` Style Edition
+
+Rust 2024 引入 **Style Edition** 机制，使格式风格可以像语言 Edition 一样演进，避免 rustfmt 为保持“格式化稳定性”而长期锁定旧风格。默认情况下，`rustfmt` 使用与 crate 相同的 Edition 作为 Style Edition，但可在 `rustfmt.toml` 中单独覆盖：
+
+```toml
+# rustfmt.toml 或 .rustfmt.toml
+style_edition = "2024"
+```
+
+命令行同样支持显式指定：
+
+```bash
+rustfmt lib.rs --edition 2024          # 解析与 Style Edition 均为 2024
+rustfmt lib.rs --style-edition 2024    # 仅覆盖 Style Edition
+```
+
+> **迁移提示**：若项目启用编辑器“保存时自动格式化”，应在仓库中提交 `rustfmt.toml` 并锁定 `style_edition`，否则编辑器直接调用 `rustfmt`（默认 2015 edition）与 `cargo fmt` 的输出可能不一致。
+> [来源: [Rust Edition Guide — Rustfmt: Style edition](https://doc.rust-lang.org/edition-guide/rust-2024/rustfmt-style-edition.html)]
+
+#### 2.5.2 Cargo 表名/键名一致性
+
+Edition 2024 禁止 Cargo.toml 中“同一含义两种写法”的历史别名，强制使用 kebab-case 形式：
+
+| 旧写法（2021 及以前允许） | 2024 强制写法 |
+|:---|:---|
+| `[project]` | `[package]` |
+| `default_features` | `default-features` |
+| `crate_type` | `crate-type` |
+| `proc_macro` | `proc-macro` |
+| `dev_dependencies` | `dev-dependencies` |
+| `build_dependencies` | `build-dependencies` |
+
+```toml
+# 2021 Edition 仍兼容的旧写法
+[dev_dependencies]
+rand = { version = "0.8.5", default_features = false }
+
+# 2024 Edition 强制写法
+[dev-dependencies]
+rand = { version = "0.8.5", default-features = false }
+```
+
+`cargo fix --edition` 会自动替换这些键名与表名；手动迁移时需全文检查 `Cargo.toml`。
+> [来源: [Rust Edition Guide — Cargo: Table and key name consistency](https://doc.rust-lang.org/edition-guide/rust-2024/cargo-table-key-names.html)]
+
+#### 2.5.3 Cargo：拒绝未使用的继承默认特性
+
+Workspace inheritance 允许在 `[workspace.dependencies]` 中统一声明依赖，各成员通过 `workspace = true` 继承。Edition 2024 修复了一个历史交互漏洞：
+
+- 若 workspace 依赖未显式设置 `default-features = false`，则成员中 `default-features = false` 实际无效（默认特性已被启用），现在会报**硬错误**。
+
+```toml
+# workspace Cargo.toml
+[workspace.dependencies]
+regex = "1.10.4"          # 未写 default-features = false，等价于 true
+
+# member Cargo.toml（2024 Edition）—— 错误
+[dependencies]
+regex = { workspace = true, default-features = false }  # ERROR
+```
+
+修复方式：在 workspace 定义中显式关闭默认特性，或移除成员中的无效覆盖。
+
+> **判定原则**：需要按成员灵活开关默认特性时，workspace 依赖必须写 `default-features = false`；但注意同一 workspace 内特性会统一合并，只要任一成员显式或默认开启默认特性，所有成员都会获得。
+> [来源: [Rust Edition Guide — Cargo: Reject unused inherited default-features](https://doc.rust-lang.org/edition-guide/rust-2024/cargo-inherited-default-features.html)]
+
+#### 2.5.4 Rustdoc 合并测试与嵌套 `include!`
+
+**合并 doctests（combined tests）**：
+
+2024 Edition 之前，每个文档代码块单独编译为一个可执行文件；doc test 数量多时开销显著。2024 Edition 起，`rustdoc --test` 会尝试把多个 doctests 合并到同一个二进制中，通过函数隔离保持独立性，可大幅提升文档测试速度。
+
+需要单独编译的情况由 rustdoc 自动检测，或手动加 `standalone_crate` 标签：
+
+```rust
+//! ```standalone_crate
+//! let location = std::panic::Location::caller();
+//! assert_eq!(location.line(), 5);
+//! ```
+```
+
+常见需要 `standalone_crate` 的场景：依赖行号/`type_name` 字符串、使用 `compile_fail`、`edition` 标签、全局属性、`global_allocator`、或使用 `$crate` 的宏。
+
+**嵌套 `include!` 路径解析**：
+
+当文档通过 `#![doc = include_str!("../README.md")]` 引入外部 Markdown，且该 Markdown 内的 doctest 又使用 `include!` / `include_str!` / `include_bytes!` 时，路径解析基准发生变化：
+
+- 2021 Edition 及以前：路径相对于**源文件**（如 `src/lib.rs`）。
+- 2024 Edition 起：路径相对于**包含 doctest 的 Markdown 文件**本身。
+
+```markdown
+<!-- README.md -->
+```
+
+let _= include_bytes!("examples/data.bin");  // 2024：相对于 README.md
+
+```
+```
+
+> **迁移提示**：该变更无自动迁移工具；迁移后首次 `cargo test --doc` 失败时，按错误提示将路径改为相对于 Markdown 文件即可。
+> [来源: [Rust Edition Guide — Rustdoc combined tests](https://doc.rust-lang.org/edition-guide/rust-2024/rustdoc-doctests.html) · [Rust Edition Guide — Rustdoc nested include! change](https://doc.rust-lang.org/edition-guide/rust-2024/rustdoc-nested-includes.html)]
 
 ---
 

@@ -46,7 +46,6 @@
     - [官方文档引用 {#官方文档引用}](#官方文档引用-官方文档引用)
     - [博客文章引用 {#博客文章引用}](#博客文章引用-博客文章引用)
   - [验证清单 {#验证清单}](#验证清单-验证清单)
-  - [**维护说明**: 本文档应随Rust生态更新而更新，确保所有引用来源保持最新和准确](#维护说明-本文档应随rust生态更新而更新确保所有引用来源保持最新和准确)
   - [相关概念 {#相关概念}](#相关概念-相关概念)
   - [权威来源索引 {#权威来源索引}](#权威来源索引-权威来源索引)
 
@@ -319,7 +318,7 @@ Cargo：
 
 使用ACM/IEEE格式：
 
-```
+```text
 [作者]. [标题]. In [会议] [年份]. DOI:[doi]
 ```
 
@@ -327,7 +326,7 @@ Cargo：
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```
+```text
 [文档名称]. [URL]. [访问日期]
 ```
 
@@ -335,7 +334,7 @@ Cargo：
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```
+```text
 [作者]. [标题]. [博客名称], [日期]. [URL]
 ```
 
@@ -355,6 +354,7 @@ Cargo：
 ---
 
 **维护说明**: 本文档应随Rust生态更新而更新，确保所有引用来源保持最新和准确
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

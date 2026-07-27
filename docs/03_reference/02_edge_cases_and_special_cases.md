@@ -2,7 +2,6 @@
 
 > **EN**: Edge Cases And Special Cases
 > **Summary**: Rust 边界条件与特例示例 Edge Cases And Special Cases.
-
 > **权威来源**: 本文件为 docs/ 参考重定向 stub，完整概念解释请见：
 > [`concept/01_foundation/README.md`](../../concept/01_foundation/README.md)
 >

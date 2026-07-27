@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 528,
-    "generated_at": "2026-07-23T22:40:22.471911+00:00"
+    "total_files": 533,
+    "generated_at": "2026-07-27T15:12:19.966393+00:00"
   },
   "files": [
     {
@@ -1524,6 +1524,157 @@
         ],
         "post": [
           "[Concept Index](../04_navigation/03_concept_index.md) · [Knowledge Mindmap](../00_framework/knowledge_mindmap.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\02_sources\\06_external_authority_topic_index.md",
+      "layer": "L0",
+      "title": "外部权威来源主题索引（External Authority Topic Index）",
+      "positioning": "将 TRPL、Reference、Rust By Example、Nomicon、Edition Guide、Async Book、rustc-dev-guide、API Guidelines、Unsafe Code Guidelines 的 SUMMARY 主题与项目 `concept/` 进行主题对齐，形成可持续的“权威来源 ↔ 项目概念”双向地图。",
+      "line_count": 273,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/00_start/00_start.md",
+        "../../01_foundation/00_start/01_pl_prerequisites.md",
+        "../../01_foundation/00_start/03_closure_basics.md",
+        "../../01_foundation/00_start/05_std_io_and_process.md",
+        "../../01_foundation/00_start/06_keywords.md",
+        "../../01_foundation/00_start/07_operators_and_symbols.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md",
+        "../../01_foundation/02_type_system/01_type_system.md",
+        "../../01_foundation/02_type_system/04_coercion_and_casting.md",
+        "../../01_foundation/03_values_and_references/01_reference_semantics.md",
+        "../../01_foundation/03_values_and_references/03_variable_model.md",
+        "../../01_foundation/04_control_flow/01_control_flow.md",
+        "../../01_foundation/04_control_flow/02_patterns.md",
+        "../../01_foundation/04_control_flow/03_let_chains.md",
+        "../../01_foundation/04_control_flow/04_statements_and_expressions.md",
+        "../../01_foundation/05_collections/01_collections.md",
+        "../../01_foundation/05_collections/02_collections_advanced.md",
+        "../../01_foundation/06_strings_and_text/01_strings_and_text.md",
+        "../../01_foundation/06_strings_and_text/03_formatting_and_display.md",
+        "../../01_foundation/07_modules_and_items/01_modules_and_paths.md",
+        "../../01_foundation/07_modules_and_items/02_functions.md",
+        "../../01_foundation/07_modules_and_items/04_structs.md",
+        "../../01_foundation/07_modules_and_items/05_enumerations.md",
+        "../../01_foundation/07_modules_and_items/10_preludes.md",
+        "../../01_foundation/07_modules_and_items/11_crates_and_source_files.md",
+        "../../01_foundation/07_modules_and_items/12_items.md",
+        "../../01_foundation/08_error_handling/01_error_handling_basics.md",
+        "../../01_foundation/08_error_handling/02_error_handling_control_flow.md",
+        "../../01_foundation/09_macros_basics/01_attributes_and_macros.md",
+        "../../01_foundation/10_testing_basics/01_testing_basics.md",
+        "../../01_foundation/10_testing_basics/02_useful_development_tools.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/00_traits/04_advanced_traits.md",
+        "../../02_intermediate/00_traits/06_derive_traits.md",
+        "../../02_intermediate/01_generics/01_generics.md",
+        "../../02_intermediate/02_memory_management/02_interior_mutability.md",
+        "../../02_intermediate/02_memory_management/04_smart_pointers.md",
+        "../../02_intermediate/03_error_handling/03_panic.md",
+        "../../02_intermediate/03_error_handling/04_exception_safety_rust_cpp.md",
+        "../../02_intermediate/04_types_and_conversions/02_closure_types.md",
+        "../../02_intermediate/04_types_and_conversions/04_type_system_advanced.md",
+        "../../02_intermediate/04_types_and_conversions/06_unions.md",
+        "../../02_intermediate/04_types_and_conversions/07_type_conversions.md",
+        "../../02_intermediate/05_modules_and_visibility/03_api_naming_conventions.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/06_attributes_by_category.md",
+        "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../03_advanced/00_concurrency/04_send_sync_boundaries.md",
+        "../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md",
+        "../../03_advanced/01_async/01_async.md",
+        "../../03_advanced/01_async/02_async_advanced.md",
+        "../../03_advanced/01_async/03_async_patterns.md",
+        "../../03_advanced/01_async/04_future_and_executor_mechanisms.md",
+        "../../03_advanced/01_async/05_async_cancellation_safety.md",
+        "../../03_advanced/01_async/08_pin_unpin.md",
+        "../../03_advanced/01_async/09_stream_algebra_and_backpressure.md",
+        "../../03_advanced/01_async/11_pin_projection_counterexamples.md",
+        "../../03_advanced/01_async/16_structured_concurrency.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../03_advanced/02_unsafe/02_unsafe_boundary_panorama.md",
+        "../../03_advanced/02_unsafe/03_nll_and_polonius.md",
+        "../../03_advanced/02_unsafe/06_memory_model.md",
+        "../../03_advanced/03_proc_macros/01_macros.md",
+        "../../03_advanced/03_proc_macros/02_proc_macro.md",
+        "../../03_advanced/03_proc_macros/11_conditional_compilation.md",
+        "../../03_advanced/04_ffi/01_rust_ffi.md",
+        "../../03_advanced/04_ffi/03_linkage.md",
+        "../../03_advanced/04_ffi/04_async_ffi_boundary.md",
+        "../../03_advanced/04_ffi/05_unsafe_extern_blocks.md",
+        "../../03_advanced/05_inline_assembly/01_inline_assembly.md",
+        "../../03_advanced/06_low_level_patterns/04_network_programming.md",
+        "../../03_advanced/06_low_level_patterns/07_rust_runtime.md",
+        "../../03_advanced/06_low_level_patterns/08_memory_allocation_and_lifetime.md",
+        "../../03_advanced/06_low_level_patterns/09_variables.md",
+        "../../03_advanced/06_low_level_patterns/10_visibility_and_privacy.md",
+        "../../03_advanced/07_unsafe_internals/01_unsafe_collections_internals.md",
+        "../../04_formal/00_type_theory/02_subtype_variance.md",
+        "../../04_formal/00_type_theory/07_type_checking_and_inference.md",
+        "../../04_formal/00_type_theory/09_type_system_reference.md",
+        "../../04_formal/01_ownership_logic/04_borrow_checking_decidability.md",
+        "../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md",
+        "../../04_formal/03_operational_semantics/07_constant_evaluation.md",
+        "../../04_formal/05_rustc_internals/01_rustc_query_system.md",
+        "../../04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md",
+        "../../04_formal/05_rustc_internals/03_trait_solver_in_rustc.md",
+        "../../04_formal/05_rustc_internals/04_name_resolution_and_hir.md",
+        "../../04_formal/05_rustc_internals/05_application_binary_interface.md",
+        "../../04_formal/05_rustc_internals/06_names_and_resolution.md",
+        "../../04_formal/05_rustc_internals/07_special_types_and_traits.md",
+        "../../04_formal/05_rustc_internals/08_type_layout.md",
+        "../../04_formal/05_rustc_internals/09_destructors.md",
+        "../../04_formal/05_rustc_internals/10_lexical_structure.md",
+        "../../04_formal/05_rustc_internals/11_items_reference.md",
+        "../../04_formal/05_rustc_internals/12_attributes.md",
+        "../../04_formal/05_rustc_internals/13_statements_and_expressions_reference.md",
+        "../../04_formal/05_rustc_internals/14_patterns_reference.md",
+        "../../04_formal/05_rustc_internals/16_names_reference.md",
+        "../../04_formal/05_rustc_internals/17_reference_appendices.md",
+        "../../04_formal/06_notation/01_notation.md",
+        "../../06_ecosystem/00_toolchain/04_compiler_internals.md",
+        "../../06_ecosystem/00_toolchain/07_rustdoc_196_changes.md",
+        "../../06_ecosystem/00_toolchain/09_llvm_backend_and_codegen.md",
+        "../../06_ecosystem/00_toolchain/10_rustc_driver_and_stable_mir.md",
+        "../../06_ecosystem/00_toolchain/13_compiler_testing.md",
+        "../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md",
+        "../../06_ecosystem/01_cargo/15_cargo_getting_started.md",
+        "../../06_ecosystem/01_cargo/23_cargo_197_features.md",
+        "../../06_ecosystem/03_design_patterns/01_patterns.md",
+        "../../06_ecosystem/03_design_patterns/03_system_design_principles.md",
+        "../../06_ecosystem/04_web_and_networking/03_web_frameworks.md",
+        "../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md",
+        "../../06_ecosystem/10_performance/01_performance_optimization.md",
+        "../../07_future/00_version_tracking/02_editions.md",
+        "../../07_future/01_edition_roadmap/02_edition_guide.md",
+        "../../07_future/02_preview_features/39_async_ioring_preview.md",
+        "../00_framework/todos.md",
+        "../04_navigation/03_concept_index.md",
+        "01_authority_source_map.md",
+        "04_topic_authority_alignment_map.md",
+        "05_international_authority_index.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 126,
+      "pre_post": {
+        "pre": [
+          "[Authority Source Map](01_authority_source_map.md) · [International Authority Index](05_international_authority_index.md) · [Topic-Authority Alignment Map](04_topic_authority_alignment_map.md)"
+        ],
+        "post": [
+          "[Concept Index](../04_navigation/03_concept_index.md) · [Global TODO Tracker](../00_framework/todos.md)"
         ]
       },
       "backward_chains": 0,
@@ -12550,7 +12701,7 @@
       "layer": "L1",
       "title": "变量模型：从通用 PL 视角看 Rust 的所有权",
       "positioning": "",
-      "line_count": 785,
+      "line_count": 788,
       "theorem_chains": [
         {
           "text": "| 绑定引入所有权 ⟹ 资源生命周期显式化 | 理解 `let` 创建所有者 | 预测 drop 时机与 move 行为 | 高 |",
@@ -17009,8 +17160,7 @@
         "../04_control_flow/01_control_flow.md",
         "../05_collections/01_collections.md",
         "../08_error_handling/01_error_handling_basics.md",
-        "../08_error_handling/03_panic_and_abort.md",
-        "03_panic_and_abort.md"
+        "../08_error_handling/03_panic_and_abort.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
@@ -19680,7 +19830,7 @@
       "layer": "L2",
       "title": "Generics（泛型系统）",
       "positioning": "",
-      "line_count": 3350,
+      "line_count": 3358,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -19691,7 +19841,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.2 定理：单态化（Monomorphization） ⟹ 零成本抽象（Zero-Cost Abstraction） ⟹ 语义保持](#42-定理单态化--零成本抽象--语义保持)",
+          "text": "- [4.2 定理：单态化 ⟹ 零成本抽象 ⟹ 语义保持](#42-定理单态化--零成本抽象--语义保持)",
           "type": "paragraph"
         },
         {
@@ -21760,7 +21910,7 @@
       "layer": "L2",
       "title": "智能指针：堆内存管理与共享语义",
       "positioning": "系统分析 Rust **智能指针（Smart Pointer）**的设计——Box（独占堆分配）、Rc/Arc（引用（Reference）计数共享）、RefCell/Cell（内部可变性）、以及它们的组合使用模式，揭示每种指针类型的所有权（Ownership）语义和适用场景。",
-      "line_count": 977,
+      "line_count": 993,
       "theorem_chains": [
         {
           "text": "| 独占堆分配 | `Box<T>` | §三 选型决策矩阵 | 需要共享 ⟹ `Box` 不适用 |",
@@ -24317,7 +24467,7 @@
       "layer": "L2",
       "title": "Rust API 命名约定",
       "positioning": "系统整理 Rust 标准库与生态中反复出现的命名模式，帮助学习者写出“看起来就像 Rust”的 API。",
-      "line_count": 570,
+      "line_count": 592,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -24461,7 +24611,7 @@
       "transitions": 2,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 28,
+      "matrix_rows": 38,
       "pre_post": {
         "pre": [
           "[Traits](../00_traits/01_traits.md) · [Generics](../01_generics/01_generics.md) · [Common Traits](../00_traits/01_traits.md)"
@@ -30402,6 +30552,60 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\01_async\\16_structured_concurrency.md",
+      "layer": "L3",
+      "title": "结构化并发（Structured Concurrency）",
+      "positioning": "响应 Async Book 新版对 \"Structured concurrency\" 的跟踪需求，为 Rust 异步生态中缺乏原生结构化并发支持的问题建立权威解释。",
+      "line_count": 170,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 七、反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// 理想 API（概念演示，非当前 Rust 稳定 API） async fn parent() -> Result<()> {     scope(|s| ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "// 概念 API（演示取消传播） async fn parent_with_timeout() -> Result<()> {     timeout(Dur..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../02_intermediate/03_error_handling/01_error_handling.md",
+        "../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md",
+        "../../07_future/02_preview_features/39_async_ioring_preview.md",
+        "01_async.md",
+        "04_future_and_executor_mechanisms.md",
+        "05_async_cancellation_safety.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 18,
+      "pre_post": {
+        "pre": [
+          "[Async/Await](01_async.md) · [Async Cancellation Safety](05_async_cancellation_safety.md) · [Future and Executor Mechanisms](04_future_and_executor_mechanisms.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md)"
+        ],
+        "post": [
+          "[Async IOUring Preview](../../07_future/02_preview_features/39_async_ioring_preview.md) · [Tokio Runtime Internals](../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\02_unsafe\\00_before_formal.md",
       "layer": "L3",
       "title": "是否需要进入 L4 形式化层？",
@@ -31942,6 +32146,64 @@
         ],
         "post": [
           "[Async FFI Boundary](../04_ffi/04_async_ffi_boundary.md) · [Async Boundary Panorama](../01_async/06_async_boundary_panorama.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\02_unsafe\\09_sanitizers.md",
+      "layer": "L3",
+      "title": "Sanitizers：运行时缺陷检测工具族",
+      "positioning": "将 Sanitizers 从“LLVM 黑盒”还原为 unsafe/底层代码审查与 CI 的可选动态检测层。",
+      "line_count": 388,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "### 反命题"
+        },
+        {
+          "title": "### 反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "#[sanitize(address = \"off\")] fn hot_path_that_cannot_be_instrumented() {     // ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "// needs-sanitizer-address ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../02_intermediate/02_memory_management/01_memory_management.md",
+        "../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md",
+        "../../04_formal/04_model_checking/08_miri.md",
+        "../../04_formal/04_model_checking/09_kani.md",
+        "01_unsafe.md",
+        "06_memory_model.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 38,
+      "pre_post": {
+        "pre": [
+          "> [Unsafe Rust](01_unsafe.md) ·"
+        ],
+        "post": [
+          "> [Miri](../../04_formal/04_model_checking/08_miri.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -47356,7 +47618,7 @@
       "layer": "L5",
       "title": "Rust vs C#：托管与原生之路",
       "positioning": "对比分析 **Rust** 与 **C#** 的设计哲学——从内存管理、泛型（Generics）系统到异步（Async）模型，揭示托管语言与原生语言在工程实践中的权衡。",
-      "line_count": 895,
+      "line_count": 904,
       "theorem_chains": [
         {
           "text": "1. **“语法相似 ⟹ 语义相同”**：C# 的 `Task` 是 hot（创建即调度），Rust 的 `Future` 是 cold（poll 才推进）；`await` 在两侧的意义因此被运行时模型重新定义；",
@@ -47464,7 +47726,7 @@
       "layer": "L5",
       "title": "Rust vs Elixir 对比分析",
       "positioning": "对比 Rust 和 Elixir（Erlang VM）在并发模型、错误处理（Error Handling）、类型系统（Type System）和运行时（Runtime）的异同。",
-      "line_count": 943,
+      "line_count": 987,
       "theorem_chains": [
         {
           "text": "| Rust vs Elixir 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -48118,7 +48380,7 @@
       "layer": "L5",
       "title": "测验：Rust vs 系统编程语言（L5 试点扩展）",
       "positioning": "L5 嵌入式互动测验——通过代码对比验证 Rust 与 C/C++/Go 在内存安全（Memory Safety）、并发模型、错误处理（Error Handling）等维度的核心差异。",
-      "line_count": 798,
+      "line_count": 803,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -48467,7 +48729,7 @@
       "layer": "L6",
       "title": "日志与可观测性：Rust 服务端监控生态",
       "positioning": "覆盖 Rust 生态中 **日志（log/tracing [来源: [tokio tracing](https://docs.rs/tracing/latest/tracing/trait.Instrument.html)]）**、**指标（metrics）**、**分布式追踪（distributed tracing）**三大可观测性支柱，分析各 crate 的设计哲学与选型策略。",
-      "line_count": 724,
+      "line_count": 784,
       "theorem_chains": [
         {
           "text": "| 日志与可观测性：Rust 服务端监控生态 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -48592,7 +48854,7 @@
       "layer": "L6",
       "title": "DevOps 与 CI/CD：Rust 的持续交付工程实践",
       "positioning": "系统分析 Rust **DevOps 工程实践**——从 GitHub Actions 工作流设计、cargo-release 发布自动化、交叉编译 CI 集成，到 Docker 镜像优化、构建缓存策略、CI 测试矩阵与安全审计（cargo-audit、cargo-deny），揭示 Rust 项目如何从代码提交到生产部署实现高可靠持续交付。",
-      "line_count": 905,
+      "line_count": 910,
       "theorem_chains": [
         {
           "text": "| DevOps 与 CI/CD：Rust 的持续交付工程实践 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -49513,11 +49775,150 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\00_toolchain\\16_rustdoc_internals.md",
+      "layer": "L6",
+      "title": "Rustdoc 内部实现",
+      "positioning": "揭示 `rustdoc` 作为 `rustc` 子系统的完整数据流，从源码经 `clean` AST、多轮 pass，到 HTML/JSON 渲染与 doctest 提取，服务于需要调试、扩展或贡献 rustdoc 的 toolchain 内部开发者。",
+      "line_count": 618,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "### 反命题"
+        },
+        {
+          "title": "### 反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// src/librustdoc/core.rs pub struct DocContext<'tcx> {     pub tcx: TyCtxt<'tcx..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "// 概念性入口伪代码（非真实源码） pub fn run_global_ctxt(     krate: rustc_hir::Crate,     rend..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// src/librustdoc/clean/mod.rs（概念片段） pub fn krate(cx: &mut DocContext<'_>, krate..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "// src/librustdoc/visit_ast.rs（概念片段） struct RustdocVisitor<'a, 'tcx> {     cx: &..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "// 默认行为：显示在 reexport 列表中 pub use inner::Foo;  // 内联：Foo 的完整文档页出现在 facade 模块下 #[d..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "/// 使用 [`Vec::push`] 添加元素。 /// 等价于 [`std::vec::Vec::push`]. pub fn demo(v: &mut ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "#[cfg(unix)] #[doc(cfg(unix))]  // 显式声明，rustdoc 会渲染平台标签 pub fn unix_only() {} ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// src/librustdoc/formats/renderer.rs（概念片段） pub fn run_format<'tcx, T: FormatRen..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "// src/librustdoc/html/render/context.rs（概念片段） pub struct Context<'a, 'tcx> {   ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 1,
+          "should_fail": false,
+          "code_preview": "/// ..."
+        },
+        {
+          "flags": [
+            "` 块包装成可编译的 crate，包括："
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "   - 注入 `#![allow(...)]` 与 `extern crate`。    - 把隐藏行（`# ...`）移到实际代码中但不在文档中显示。   ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 1,
+          "should_fail": false,
+          "code_preview": "/// ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../04_formal/05_rustc_internals/01_rustc_query_system.md",
+        "../../04_formal/05_rustc_internals/04_name_resolution_and_hir.md",
+        "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
+        "../09_testing_and_quality/02_documentation.md",
+        "../10_performance/01_performance_optimization.md",
+        "01_toolchain.md",
+        "04_compiler_internals.md",
+        "07_rustdoc_196_changes.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 26,
+      "pre_post": {
+        "pre": [
+          "[Toolchain](01_toolchain.md) · [Documentation](../09_testing_and_quality/02_documentation.md) · [rustc Query System](../../04_formal/05_rustc_internals/01_rustc_query_system.md) · [Name Resolution and HIR](../../04_formal/05_rustc_internals/04_name_resolution_and_hir.md)"
+        ],
+        "post": [
+          "[Rustdoc 1.96–1.97 变更](07_rustdoc_196_changes.md) · [Compiler Internals](04_compiler_internals.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\01_cargo\\01_cargo_script.md",
       "layer": "L6",
       "title": "Cargo Script 脚本化 Rust",
       "positioning": "将 Rust 从\"项目级语言\"扩展为\"脚本级语言\"的工程机制，使单文件可执行成为一等公民。",
-      "line_count": 776,
+      "line_count": 782,
       "theorem_chains": [
         {
           "text": "| Cargo Script：单文件 Rust 程序 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -49668,7 +50069,7 @@
       "layer": "L6",
       "title": "Cargo `public = true` 与 Resolver v3",
       "positioning": "解决 Rust crate 图中“依赖泄漏”问题的核心机制，使 API 稳定性与依赖演进解耦；同时说明 resolver v3 在版本选择上的 MSRV-aware 行为。",
-      "line_count": 307,
+      "line_count": 317,
       "theorem_chains": [
         {
           "text": "| Resolver v3 启用 `fallback` ⟹ MSRV 兼容版本优先 | workspace 存在 `rust-version` 约束 | 依赖解析不会选择超过成员 MSRV 的版本 | 高 |",
@@ -49738,7 +50139,7 @@
       "layer": "L6",
       "title": "Resolver v3 与 `public = true` 的 feature unification 演示",
       "positioning": "把“resolver v3 + public dependency”从概念落到可运行的 Cargo workspace，观察 `cargo tree -e features` 的实际输出。",
-      "line_count": 227,
+      "line_count": 231,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -49771,7 +50172,7 @@
       "layer": "L6",
       "title": "Cargo 1.96 新特性与工具链变更",
       "positioning": "",
-      "line_count": 339,
+      "line_count": 355,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -49818,10 +50219,10 @@
       "matrix_rows": 26,
       "pre_post": {
         "pre": [
-          "· [Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md) [Toolchain](../00_toolchain/01_toolchain.md) · [Public/Private Dependencies](02_public_private_deps.md) · [Cargo Security](13_cargo_security_cves.md) · [Security Practices](../07_security_and_cryptography/01_security_practices.md)"
+          ">"
         ],
         "post": [
-          "[Rust Version Tracking](../../07_future/00_version_tracking/01_rust_version_tracking.md) · [Rust 1.96 Stabilized](../../07_future/00_version_tracking/rust_1_96_stabilized.md)"
+          "[Rust Version Tracking](../../07_future/00_version_tracking/01_rust_version_tracking.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -49832,7 +50233,7 @@
       "layer": "L6",
       "title": "Cargo Build Scripts（`build.rs`）",
       "positioning": "把 `build.rs` 从“神秘的编译前脚本”还原为可预测、可调试、可重用的构建阶段工具。",
-      "line_count": 571,
+      "line_count": 574,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -50891,7 +51292,7 @@
       "layer": "L6",
       "title": "Cargo 1.97 新特性与工具链变更",
       "positioning": "",
-      "line_count": 291,
+      "line_count": 304,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -50933,10 +51334,10 @@
       "matrix_rows": 22,
       "pre_post": {
         "pre": [
-          "· [Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md) [Toolchain](../00_toolchain/01_toolchain.md) · [Cargo 1.96 新特性](04_cargo_196_features.md) · [Cargo Configuration](18_cargo_configuration.md) · [Cargo Commands Reference](19_cargo_commands_reference.md)"
+          "> · [Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md) [Toolchain](../00_toolchain/01_toolchain.md) ·"
         ],
         "post": [
-          "[Rust Version Tracking](../../07_future/00_version_tracking/01_rust_version_tracking.md) · [Rust 1.97 Stabilized](../../07_future/00_version_tracking/rust_1_97_stabilized.md)"
+          "> [Rust Version Tracking](../../07_future/00_version_tracking/01_rust_version_tracking.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -50947,7 +51348,7 @@
       "layer": "L6",
       "title": "Core Crates（核心开源库谱系）",
       "positioning": "",
-      "line_count": 1406,
+      "line_count": 1496,
       "theorem_chains": [
         {
           "text": "> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。",
@@ -51149,7 +51550,7 @@
       "matrix_rows": 258,
       "pre_post": {
         "pre": [
-          "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Async](../../03_advanced/01_async/01_async.md) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)]"
+          "> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·"
         ],
         "post": [
           "[Application Domains](../06_data_and_distributed/01_application_domains.md)"
@@ -51163,7 +51564,7 @@
       "layer": "L6",
       "title": "Design Patterns（设计模式）",
       "positioning": "",
-      "line_count": 3217,
+      "line_count": 3222,
       "theorem_chains": [
         {
           "text": "| **RAII** | 资源泄漏 | 确定性资源管理 ⟹ `Drop`自动调用 | 所有权（Ownership）+作用域 | 边界：`mem::forget`、引用（Reference）循环泄漏 |",
@@ -52079,7 +52480,7 @@
       "layer": "L6",
       "title": "系统可组合性 (System Composability)",
       "positioning": "",
-      "line_count": 823,
+      "line_count": 846,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -52269,10 +52670,10 @@
       "matrix_rows": 32,
       "pre_post": {
         "pre": [
-          "· [Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md) [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Async](../../03_advanced/01_async/01_async.md) · [Iterator](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)"
+          "> · [Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md) [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)"
         ],
         "post": [
-          "[Tower 架构](../../04_formal/00_type_theory/04_category_theory.md) · [应用域](../06_data_and_distributed/01_application_domains.md)"
+          "> [Tower 架构](../../04_formal/00_type_theory/04_category_theory.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -52283,7 +52684,7 @@
       "layer": "L6",
       "title": "微服务架构模式 (Microservice Architecture Patterns)",
       "positioning": "从系统架构视角梳理 Rust 在微服务场景中的核心模式——服务发现、熔断、Saga、CQRS、事件溯源——揭示 Rust 的类型安全与零成本抽象（Zero-Cost Abstraction）如何支撑高可靠分布式系统。",
-      "line_count": 1035,
+      "line_count": 1046,
       "theorem_chains": [
         {
           "text": "| 微服务架构模式 (Microservice Architecture Patterns) 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -52457,7 +52858,7 @@
       "layer": "L6",
       "title": "事件驱动架构 (Event-Driven Architecture)",
       "positioning": "从系统架构视角分析 Rust 实现事件驱动架构的核心模式——类型安全事件总线、消息队列集成、幂等处理、背压传播——揭示所有权（Ownership）系统与不可变事件流的深层契合。",
-      "line_count": 1054,
+      "line_count": 1061,
       "theorem_chains": [
         {
           "text": "| 事件驱动架构 (Event-Driven Architecture) 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -52630,7 +53031,7 @@
       "layer": "L6",
       "title": "CQRS & Event Sourcing（命令查询职责分离与事件溯源）",
       "positioning": "",
-      "line_count": 1563,
+      "line_count": 1580,
       "theorem_chains": [
         {
           "text": "| CQRS & Event Sourcing（命令查询职责分离与事件溯源） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -52851,7 +53252,7 @@
       "layer": "L6",
       "title": "Architecture Patterns（架构设计模式）",
       "positioning": "",
-      "line_count": 1364,
+      "line_count": 1374,
       "theorem_chains": [
         {
           "text": "| Architecture Patterns（架构设计模式） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -57166,7 +57567,7 @@
       "layer": "L6",
       "title": "Rust GPU 与高性能计算（GPU Programming & HPC）",
       "positioning": "",
-      "line_count": 862,
+      "line_count": 908,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -57308,7 +57709,7 @@
       "layer": "L6",
       "title": "Application Domains（软件工程应用主题）",
       "positioning": "本章节从**形式模型视角**梳理各生态前沿方向，不展开使用教程，聚焦\"该领域与 Rust 所有权/类型系统（Type System）的交互、安全边界、与 L1-L4 的映射\"。",
-      "line_count": 1564,
+      "line_count": 1617,
       "theorem_chains": [
         {
           "text": "> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/))]",
@@ -57470,10 +57871,10 @@
       "matrix_rows": 297,
       "pre_post": {
         "pre": [
-          "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Async](../../03_advanced/01_async/01_async.md) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [Core Crates](../02_core_crates/01_core_crates.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]"
+          ">"
         ],
         "post": [
-          "[AI Integration](../../07_future/04_research_and_experimental/01_ai_integration.md) · [Formal Methods](../../07_future/04_research_and_experimental/02_formal_methods.md)"
+          ">"
         ]
       },
       "backward_chains": 0,
@@ -57484,7 +57885,7 @@
       "layer": "L6",
       "title": "Rust 数据库访问生态",
       "positioning": "分析 Rust 的数据库访问生态——从 SQLx 的编译期检查到 Diesel 的 ORM [来源: [Wikipedia — ORM](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping)]，探讨类型安全如何消除运行时（Runtime）查询错误。",
-      "line_count": 871,
+      "line_count": 883,
       "theorem_chains": [
         {
           "text": "| Rust 数据库访问生态 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -60630,7 +61031,7 @@
       "layer": "L6",
       "title": "算法与竞赛编程 (Algorithms & Competitive Programming)",
       "positioning": "",
-      "line_count": 1349,
+      "line_count": 1366,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60864,10 +61265,10 @@
       "matrix_rows": 84,
       "pre_post": {
         "pre": [
-          "· [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md)"
+          "> · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·"
         ],
         "post": [
-          "[Formal Ecosystem Tower](../08_formal_verification/01_formal_ecosystem_tower.md) · [Performance Optimization](../10_performance/01_performance_optimization.md)"
+          "> [Formal Ecosystem Tower](../08_formal_verification/01_formal_ecosystem_tower.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -61714,7 +62115,7 @@
       "layer": "L6",
       "title": "Game Engine Internals（游戏引擎内部原理）",
       "positioning": "",
-      "line_count": 1200,
+      "line_count": 1205,
       "theorem_chains": [
         {
           "text": "| Game Engine Internals（游戏引擎内部原理） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -61876,7 +62277,7 @@
       "layer": "L6",
       "title": "Rust 量子计算生态",
       "positioning": "",
-      "line_count": 1075,
+      "line_count": 1082,
       "theorem_chains": [
         {
           "text": "| Quantum Computing in Rust（量子计算与 Rust） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -62030,7 +62431,7 @@
       "layer": "L6",
       "title": "Rust WebAssembly 高级开发",
       "positioning": "",
-      "line_count": 1251,
+      "line_count": 1257,
       "theorem_chains": [
         {
           "text": "| Advanced WebAssembly in Rust（高级 WebAssembly 与 Rust） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -62219,7 +62620,7 @@
       "layer": "L6",
       "title": "C12 WASM - 术语表",
       "positioning": "",
-      "line_count": 443,
+      "line_count": 445,
       "theorem_chains": [
         {
           "text": "> **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency",
@@ -62483,8 +62884,8 @@
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\11_domain_applications\\21_safety_critical_topic_index.md",
       "layer": "L6",
       "title": "安全关键 Rust 专题索引",
-      "positioning": "本文件为 `concept/` 侧的**摘要+链接型导航页**（AGENTS.md §2.1 第 3 条：content/ 专题权威页需在 concept/ 建索引入口）。专题深度内容以 [`content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md`](../../../content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md) 为权威入口；通用概念解释以 `concept/` 相关权威页为准。本页不复制任何正文。",
-      "line_count": 49,
+      "positioning": ">",
+      "line_count": 59,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -62511,10 +62912,10 @@
       "matrix_rows": 16,
       "pre_post": {
         "pre": [
-          "[Formal Verification Tools](../../04_formal/04_model_checking/01_verification_toolchain.md) · [Ferrocene Preview](../../07_future/02_preview_features/12_ferrocene_preview.md)"
+          ">"
         ],
         "post": [
-          "[AUTOSAR and Rust](22_autosar_and_rust.md) · [Safety-Critical Ecosystem Master Index](../../../content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md)"
+          "> [AUTOSAR and Rust](22_autosar_and_rust.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -62525,7 +62926,7 @@
       "layer": "L6",
       "title": "AUTOSAR 与 Rust",
       "positioning": "",
-      "line_count": 205,
+      "line_count": 215,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -62667,7 +63068,7 @@
       "layer": "L6",
       "title": "网络安全",
       "positioning": "",
-      "line_count": 407,
+      "line_count": 415,
       "theorem_chains": [
         {
           "text": "| 内存安全（Memory Safety） ⟹ 更少攻击面 | Rust 所有权（Ownership）与借用（Borrowing）检查 | 消除大量传统 C/C++ 漏洞类 |",
@@ -62749,10 +63150,10 @@
       "matrix_rows": 13,
       "pre_post": {
         "pre": [
-          "[Async/Await](../../03_advanced/01_async/01_async.md) · [Rust 网络编程](../../03_advanced/06_low_level_patterns/04_network_programming.md) · [Security & Cryptography](../07_security_and_cryptography/02_security_cryptography.md)"
+          "> [Async/Await](../../03_advanced/01_async/01_async.md) ·"
         ],
         "post": [
-          "[高级网络协议](01_advanced_network_protocols.md) · [分布式系统](../04_web_and_networking/01_distributed_systems.md)"
+          "> [高级网络协议](01_advanced_network_protocols.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -63086,7 +63487,7 @@
       "layer": "L6",
       "title": "形式化网络协议理论",
       "positioning": "",
-      "line_count": 671,
+      "line_count": 677,
       "theorem_chains": [
         {
           "text": "| 形式模型 ⟹ 无歧义规范 | 使用状态机或进程代数 | 精确描述协议行为 |",
@@ -63246,7 +63647,7 @@
       "layer": "L6",
       "title": "测验：网络与异步生态（L6）",
       "positioning": "验证学习者对 L6 网络与异步子领域生态格局（框架、运行时（Runtime）、协议）的掌握。",
-      "line_count": 337,
+      "line_count": 354,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -63302,7 +63703,7 @@
       "layer": "L6",
       "title": "测验：数据库与存储生态（L6）",
       "positioning": "验证学习者对 L6 数据与分布式子领域（访问层选型 + Rust 原生数据库系统）的掌握。",
-      "line_count": 318,
+      "line_count": 323,
       "theorem_chains": [
         {
           "text": "**解析**：按 [因果序与向量时钟](../06_data_and_distributed/09_causal_ordering_vector_clocks.md)：向量时钟每进程维护 N 维向量、本地事件自增、消息携带并逐分量取 max（A）；两时钟逐分量比较互有大小即判定并发（B）；D 正确——向量时钟精确刻画 Lamport 1978 定义的 happens-before 偏序，标量时钟只能保持\"因果 ⟹ 序号小\"的单向蕴含。C 错：标量时钟无法区分并发与因果，表达能力严格弱于向量时钟。",
@@ -63352,10 +63753,10 @@
       "matrix_rows": 25,
       "pre_post": {
         "pre": [
-          "> **后置概念**: [Database Access](../06_data_and_distributed/02_database_access.md) · [Data Engineering](../06_data_and_distributed/05_data_engineering.md)"
+          "> **后置概念**:"
         ],
         "post": [
-          "[Database Access](../06_data_and_distributed/02_database_access.md) · [Data Engineering](../06_data_and_distributed/05_data_engineering.md)"
+          "> [Database Access](../06_data_and_distributed/02_database_access.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -63366,7 +63767,7 @@
       "layer": "L6",
       "title": "测验：安全与测试生态（L6）",
       "positioning": "验证学习者对 L6 安全/密码学与测试质量子领域的掌握（密码学原则、供应链审计、分层测试）。",
-      "line_count": 327,
+      "line_count": 335,
       "theorem_chains": [
         {
           "text": "| B | 复现用例 ⟹ 修复 ⟹ 回归测试固化；再用 cargo-fuzz 对解析面做持续模糊测试，并把解析器纳入 proptest 性质测试（如深度限制/往返序列化） |",
@@ -63400,10 +63801,10 @@
       "matrix_rows": 25,
       "pre_post": {
         "pre": [
-          "> **后置概念**: [Security Practices](../07_security_and_cryptography/01_security_practices.md) · [Testing Strategies](../09_testing_and_quality/01_testing_strategies.md)"
+          "> **后置概念**:"
         ],
         "post": [
-          "[Security Practices](../07_security_and_cryptography/01_security_practices.md) · [Testing Strategies](../09_testing_and_quality/01_testing_strategies.md)"
+          "> [Security Practices](../07_security_and_cryptography/01_security_practices.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -66532,7 +66933,7 @@
       "layer": "L7",
       "title": "Edition 2024 完全指南：新特性与迁移策略",
       "positioning": "全面讲解 Rust **Edition 2024** 的新特性——从 gen blocks、async closures 到 never type 和 lifetime captures，揭示 Edition 机制如何在不破坏兼容性的前提下推进语言演进。",
-      "line_count": 933,
+      "line_count": 1046,
       "theorem_chains": [
         {
           "text": "| Edition 2024 完全指南：新特性与迁移策略 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -66595,6 +66996,12 @@
           "lines": 6,
           "should_fail": false,
           "code_preview": "> // 自动迁移后的代码: > let temp = get_string(); > if let Some(x) = temp.as_ref() { >  ..."
+        },
+        {
+          "flags": [],
+          "lines": 1,
+          "should_fail": false,
+          "code_preview": "//! ..."
         },
         {
           "flags": [
@@ -66682,7 +67089,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 29,
+      "matrix_rows": 36,
       "pre_post": {
         "pre": [
           "[Rust Version Tracking](../00_version_tracking/01_rust_version_tracking.md) · [Async](../../03_advanced/01_async/01_async.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)",
@@ -69851,7 +70258,7 @@
       "layer": "L7",
       "title": "Rust in Space Preview",
       "positioning": "",
-      "line_count": 283,
+      "line_count": 284,
       "theorem_chains": [
         {
           "text": "| Rust in Space Preview 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -70591,6 +70998,51 @@
         ],
         "post": [
           "[f16 / f128 预研](35_f16_f128_preview.md) · [Version Tracking](../00_version_tracking/01_rust_version_tracking.md) · [Machine Learning 生态](../../06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\02_preview_features\\39_async_ioring_preview.md",
+      "layer": "L7",
+      "title": "Async IO: io_uring 与 completion-based 异步 IO 预研",
+      "positioning": "响应 Async Book 新版对 \"Async IO: readiness vs completion, and io_uring\" 的跟踪需求，为 Rust 异步 IO 从 readiness 模型向 completion 模型演进建立概念锚点。",
+      "line_count": 202,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 七、反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "pub trait AsyncRead {     fn poll_read(         self: Pin<&mut Self>,         cx..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/01_async/01_async.md",
+        "../../03_advanced/01_async/04_future_and_executor_mechanisms.md",
+        "../../03_advanced/01_async/09_stream_algebra_and_backpressure.md",
+        "../../03_advanced/06_low_level_patterns/04_network_programming.md",
+        "../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 15,
+      "pre_post": {
+        "pre": [
+          "[Async/Await](../../03_advanced/01_async/01_async.md) · [Future and Executor Mechanisms](../../03_advanced/01_async/04_future_and_executor_mechanisms.md) · [Stream Algebra and Backpressure](../../03_advanced/01_async/09_stream_algebra_and_backpressure.md)"
+        ],
+        "post": [
+          "[Tokio Runtime Internals](../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md) · [Network Programming](../../03_advanced/06_low_level_patterns/04_network_programming.md)"
         ]
       },
       "backward_chains": 0,

@@ -701,7 +701,14 @@ fn main() {
 }
 ```
 
-> **修正**: 自引用结构（self-referential struct）是 Rust 的**硬问题**：`&mut self` 允许移动 `self`（若 `Self: !Unpin`），但 `self.ptr` 指向 `self.data` 的地址，移动后 `ptr` 成为悬垂指针。`Pin` 是解决自引用的关键：`Pin<&mut Self>` 保证 `self` 在内存中不可移动（`!Unpin`），允许安全创建自引用。但 `Pin` 的 API 严格：`Pin::new_unchecked` 要求调用者保证对象永不被移动；`Box::pin` 是安全创建 `Pin<Box<T>>` 的标准方式。自引用是 async/await、生成器、Futures 的核心机制。这与 C++ 的 `this` 指针（无 Pin 约束，移动后自引用 UB）或 Swift 的引用类型（堆分配不移动）不同——Rust 通过 `Pin` 类型系统（Type System）显式标记不可移动对象。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/pin/struct.Pin.html)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-04-rc.html)]
+> **修正**:
+> 自引用结构（self-referential struct）是 Rust 的**硬问题**：
+> `&mut self` 允许移动 `self`（若 `Self: !Unpin`），但 `self.ptr` 指向 `self.data` 的地址，移动后 `ptr` 成为悬垂指针。
+> `Pin` 是解决自引用的关键：`Pin<&mut Self>` 保证 `self` 在内存中不可移动（`!Unpin`），允许安全创建自引用。
+> 但 `Pin` 的 API 严格：`Pin::new_unchecked` 要求调用者保证对象永不被移动；`Box::pin` 是安全创建 `Pin<Box<T>>` 的标准方式。
+> 自引用是 async/await、生成器、Futures 的核心机制。这与 C++ 的 `this` 指针（无 Pin 约束，移动后自引用 UB）或 Swift 的引用类型（堆分配不移动）不同——Rust 通过 `Pin` 类型系统（Type System）显式标记不可移动对象。
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/pin/struct.Pin.html)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch15-04-rc.html)]
 
 ### 10.4 边界测试：`Arc<RefCell<T>>` 的线程安全幻觉（编译错误）
 
@@ -726,7 +733,16 @@ fn main() {
 }
 ```
 
-> **修正**: `Arc<T>` 实现 `Send` + `Sync` 当且仅当 `T: Send + Sync`。`RefCell<T>` 不实现 `Sync`（单线程运行时（Runtime）借用（Borrowing）检查），所以 `Arc<RefCell<T>>` 不能跨线程。线程安全的内部可变性：1) `Arc<Mutex<T>>` — 互斥锁；2) `Arc<RwLock<T>>` — 读写锁；3) `Arc<AtomicUsize>` — 无锁原子操作（Atomic Operations）。`RefCell` 的设计：单线程场景下零开销（无原子操作），但线程间共享导致编译错误。这与 C++ 的 `std::shared_ptr<std::mutex>`（可跨线程，但需手动锁管理）或 Java 的 `AtomicInteger`（线程安全，但无 RefCell 的借用语义）不同——Rust 的类型系统（Type System）通过 `Send`/`Sync` 在编译期排除不安全的线程共享。来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · 来源: [Rust Standard Library]
+> **修正**:
+> `Arc<T>` 实现 `Send` + `Sync` 当且仅当 `T: Send + Sync`。`RefCell<T>` 不实现 `Sync`（单线程运行时（Runtime）借用（Borrowing）检查），所以 `Arc<RefCell<T>>` 不能跨线程。
+> 线程安全的内部可变性：
+>
+> 1) `Arc<Mutex<T>>` — 互斥锁；
+> 2) `Arc<RwLock<T>>` — 读写锁；
+> 3) `Arc<AtomicUsize>` — 无锁原子操作（Atomic Operations）。
+> `RefCell` 的设计：单线程场景下零开销（无原子操作），但线程间共享导致编译错误。
+> 这与 C++ 的 `std::shared_ptr<std::mutex>`（可跨线程，但需手动锁管理）或 Java 的 `AtomicInteger`（线程安全，但无 RefCell 的借用语义）不同——Rust 的类型系统（Type System）通过 `Send`/`Sync` 在编译期排除不安全的线程共享。
+> 来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · 来源: [Rust Standard Library]
 
 ## 实践
 

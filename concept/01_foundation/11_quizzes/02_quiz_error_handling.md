@@ -746,7 +746,7 @@ fn main() -> Result<(), std::io::Error> {
 
 ## 认知路径
 
-> **认知路径**: 通过本测验回顾错误处理核心概念，将错题映射回 [Error Handling Basics 权威页](../08_error_handling/01_error_handling_basics.md) 与 [Panic and Abort](03_panic_and_abort.md) 进行针对性补强。
+> **认知路径**: 通过本测验回顾错误处理核心概念，将错题映射回 [Error Handling Basics 权威页](../08_error_handling/01_error_handling_basics.md) 与 [Panic and Abort](../08_error_handling/03_panic_and_abort.md) 进行针对性补强。
 
 ### 核心推理链
 

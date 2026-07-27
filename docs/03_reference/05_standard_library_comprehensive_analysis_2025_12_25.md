@@ -2,7 +2,6 @@
 
 > **EN**: Standard Library Comprehensive Analysis 2025 12 25
 > **Summary**: Rust 标准库全面分析与论证文档 Standard Library Comprehensive Analysis 2025 12 25.
-
 > **权威来源**: 本文件为 docs/ 参考重定向 stub，完整概念解释请见：
 > [`concept/06_ecosystem/02_core_crates/01_core_crates.md`](../../concept/06_ecosystem/02_core_crates/01_core_crates.md)
 >
