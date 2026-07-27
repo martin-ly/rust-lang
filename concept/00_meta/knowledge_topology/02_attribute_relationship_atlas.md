@@ -346,12 +346,12 @@
 | [Architecture Patterns](../../06_ecosystem/03_design_patterns/08_architecture_patterns.md) | L6 生态工程层 | 进阶 | 专家级 | — | L4-L6 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [模式实现对比 (Pattern Implementation Comparison)](../../06_ecosystem/03_design_patterns/09_pattern_implementation_comparison.md) | L6 生态工程层 | 进阶 | 参考级 | — | L4-L6 | Scenario ⟹ Implementation Strategy ⟹ Trade-off Evaluation |
 | [模式选择最佳实践 (Pattern Selection Best Practices)](../../06_ecosystem/03_design_patterns/10_pattern_selection_best_practices.md) | L6 生态工程层 | 进阶 | 参考级 | — | L4-L6 | Requirement ⟹ Pattern Selection ⟹ Validation |
-| [形式化设计模式理论 (Formal Design Pattern Theory)](../../04_formal/00_type_theory/11_formal_design_pattern_theory.md) | L6 生态工程层 | 研究者 | 研究级 | S | L4-L6 | Abstract Pattern ⟹ Formal Model ⟹ Language Mapping |
+| [形式化设计模式理论 (Formal Design Pattern Theory)](../../04_formal/00_type_theory/11_formal_design_pattern_theory.md) | L4-L6 形式化理论 | 研究者 | 研究级 | S | L4-L6 | Abstract Pattern ⟹ Formal Model ⟹ Language Mapping |
 | [前沿研究与创新模式 (Frontier Research and Innovative Patterns)](../../06_ecosystem/03_design_patterns/12_frontier_research_and_innovative_patterns.md) | L6 生态工程层 | 研究者 | 研究级 | — | L4-L6 | Emerging Problem ⟹ Experimental Pattern ⟹ Production Hardening |
 | [工程实践与生产级模式](../../06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md) | L6 生态工程层 | 专家 | 专家级 | — | — | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [C09 设计模式 - 术语表](../../06_ecosystem/03_design_patterns/14_design_patterns_glossary.md) | L6 生态工程层 | 进阶 | 参考级 | S | L1-L2 | Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency |
 | [C09 设计模式 - 常见问题](../../06_ecosystem/03_design_patterns/15_design_patterns_faq.md) | L6 生态工程层 | 进阶 | 参考级 | — | L2-L3 | Common Question ⟹ Pattern Mechanism ⟹ Best Practice |
-| [模式组合代数：设计模式的结构化关联与冲突分析](../../04_formal/00_type_theory/12_pattern_composition_algebra.md) | L6 生态工程层 | 进阶 | 专家级 | — | L4-L6 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
+| [模式组合代数：设计模式的结构化关联与冲突分析](../../04_formal/00_type_theory/12_pattern_composition_algebra.md) | L4-L6 形式化理论 | 进阶 | 专家级 | — | L4-L6 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Workflow Theory & Formalization](../../06_ecosystem/03_design_patterns/17_workflow_theory.md) | L6 生态工程层 | 进阶 | 综述级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [API Design Patterns](../../06_ecosystem/03_design_patterns/18_api_design_patterns.md) | L6 生态工程层 | 进阶 | 综述级 | — | L3-L6 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [分布式 系统：Rust 在微服务 与集群中的工程实践](../../06_ecosystem/04_web_and_networking/01_distributed_systems.md) | L6 生态工程层 | 进阶 | 专家级 | — | L3-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
@@ -404,7 +404,7 @@
 | [](../../06_ecosystem/11_domain_applications/09_data_structures_in_rust.md) | L6 生态工程层 | 进阶 | 进阶 | — | — | — |
 | [Rust 算法复杂度分析](../../06_ecosystem/11_domain_applications/10_algorithm_complexity_analysis.md) | L6 生态工程层 | 进阶 | 进阶 | S | — | — |
 | [前沿算法技术](../../06_ecosystem/11_domain_applications/11_cutting_edge_algorithms.md) | L6 生态工程层 | 专家 | 综述级 | — | — | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
-| [形式化算法理论](../../04_formal/00_type_theory/13_formal_algorithm_theory.md) | L6 生态工程层 | 专家 | 形式化级 | S | — | 形式化算法理论为程序正确性提供数学基础 |
+| [形式化算法理论](../../04_formal/00_type_theory/13_formal_algorithm_theory.md) | L4-L6 形式化理论 | 专家 | 形式化级 | S | L4-L6 | 形式化算法理论为程序正确性提供数学基础 |
 | [Machine Learning Ecosystem](../../06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md) | L6 生态工程层 | 进阶 | 综述级 | — | L3-L4 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |
 | [Rust 工业应用案例研究](../../06_ecosystem/11_domain_applications/14_industrial_case_studies.md) | L6 生态工程层 | 研究者 | 专家级 | — | — | — |
 | [Game Engine Internals](../../06_ecosystem/11_domain_applications/15_game_engine_internals.md) | L6 生态工程层 | 进阶 | 综述级 | — | L4-L5 | N/A — 描述性/综述性/导航性文档，不涉及形式化定理链 |

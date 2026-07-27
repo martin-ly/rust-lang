@@ -5,7 +5,7 @@
 > **Summary**: Redirect stub for the const trait implementations preview (`~const Trait`, `const impl`), linking to the canonical page covering nightly syntax, semantics, and migration boundaries.
 
 > **权威来源**: 本文件为重定向 stub。Const Trait 预览的完整概念解释统一维护在：
-> [`06_const_trait_impl_preview.md`](06_const_trait_impl_preview.md)
+> [`concept/07_future/02_preview_features/06_const_trait_impl_preview.md`](../../07_future/02_preview_features/06_const_trait_impl_preview.md)
 >
 > 根据 AGENTS.md §2 Canonical 规则，同一预览主题只保留一个 `concept/` 权威页；
 > 本文件仅保留入口链接，避免双权威页。

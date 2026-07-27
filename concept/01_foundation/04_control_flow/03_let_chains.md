@@ -171,6 +171,7 @@ fn main() {
 传统 `if` 守卫只能使用已绑定变量：
 
 ```rust
+let x = Some(1);
 match x {
     Some(v) if v > 0 => {}
     _ => {}

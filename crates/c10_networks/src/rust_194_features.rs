@@ -1,5 +1,5 @@
-//! Rust 1.94 引入的网络编程特性（1.97.0+ 稳定可用）
-//! Rust 1.94 network programming features (stable in 1.96+) module
+//! Rust 1.94.0 引入的网络编程特性（1.94.0 稳定）
+//! Rust 1.94 network programming features (stable in 1.94.0) module
 //! - array_windows - 切片数组窗口迭代器（用于协议解析）
 //! - array_windows - array （）
 //! - array_windows - （）
@@ -886,7 +886,7 @@ impl MacAddressParser {
 // ==================== 6. 综合应用示例 ====================
 
 /// 演示 Rust 1.94.0 网络编程特性
-/// demonstration Rust 1.94 network programming features (stable in 1.96+)
+/// demonstration Rust 1.94.0 network programming features (stable in 1.94.0)
 pub fn demonstrate_rust_194_network_features() {
     println!("\n=== Rust 1.94.0 网络编程特性演示 ===\n");
 
@@ -978,7 +978,7 @@ pub fn demonstrate_rust_194_network_features() {
 }
 
 /// 获取 Rust 1.94.0 网络编程特性信息
-/// Rust 1.94 network programming features (stable in 1.96+)
+/// Rust 1.94.0 network programming features (stable in 1.94.0)
 pub fn get_rust_194_network_info() -> String {
     "Rust 1.94.0 网络编程特性:\n- array_windows - 协议解析优化\n- LazyLock 新方法 - \
      网络配置管理\n- 数学常量 - 网络算法优化\n- Peekable 新方法 - 协议流解析\n- TryFrom<char> for \

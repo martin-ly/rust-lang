@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 536,
-    "generated_at": "2026-07-27T18:25:13.138905+00:00"
+    "generated_at": "2026-07-27T18:45:26.494024+00:00"
   },
   "files": [
     {
@@ -3896,6 +3896,7 @@
         "../../06_ecosystem/11_domain_applications/06_game_development.md",
         "../../06_ecosystem/11_domain_applications/07_algorithms_competitive_programming.md",
         "../../06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md",
+        "../../06_ecosystem/11_domain_applications/09_data_structures_in_rust.md",
         "../../06_ecosystem/11_domain_applications/10_algorithm_complexity_analysis.md",
         "../../06_ecosystem/11_domain_applications/11_cutting_edge_algorithms.md",
         "../../06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md",
@@ -4063,7 +4064,7 @@
           "type": "table_row"
         },
         {
-          "text": "| [形式化设计模式理论 (Formal Design Pattern Theory)](../../04_formal/00_type_theory/11_formal_design_pattern_theory.md) | L6 生态工程层 | 研究者 | 研究级 | S | L4-L6 | Abstract Pattern ⟹ Formal Model ⟹ Language Mapping |",
+          "text": "| [形式化设计模式理论 (Formal Design Pattern Theory)](../../04_formal/00_type_theory/11_formal_design_pattern_theory.md) | L4-L6 形式化理论 | 研究者 | 研究级 | S | L4-L6 | Abstract Pattern ⟹ Formal Model ⟹ Language Mapping |",
           "type": "table_row"
         },
         {
@@ -61663,7 +61664,7 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\11_domain_applications\\09_data_structures_in_rust.md",
       "layer": "L6",
-      "title": "Unknown",
+      "title": "Rust 数据结构实践",
       "positioning": "",
       "line_count": 338,
       "theorem_chains": [
@@ -69451,6 +69452,7 @@
       "cross_references": [
         "../../01_foundation/07_modules_and_items/09_const_items_and_const_fn.md",
         "../../02_intermediate/01_generics/02_const_generics.md",
+        "../../07_future/02_preview_features/06_const_trait_impl_preview.md",
         "06_const_trait_impl_preview.md"
       ],
       "transitions": 0,

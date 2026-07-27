@@ -110,9 +110,10 @@ mindmap
 
 `unsafe` 块在同步代码中是一个**词法作用域**：块结束时，块内建立的临时不变量可以丢弃。但在 async 块中，`unsafe` 块可能跨越 `.await`：
 
-```rust
+```rust,ignore
 async fn unsound_across_await() {
-    let raw: *const u8 = /* 某个有效指针 */;
+    let data: u8 = 42;
+    let raw: *const u8 = &data; // 仅在本作用域内有效
     unsafe {
         // 此时 raw 有效
         something().await;

@@ -49,7 +49,7 @@
 
 Rust 编译器把
 
-```rust
+```rust,ignore
 async fn example(x: i32) -> i32 {
     let y = step1(x).await;
     step2(y).await

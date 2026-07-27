@@ -32,6 +32,28 @@
 
 ---
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((Rust 1.100+ 预览))
+    延续跟踪
+      gen blocks
+      async_drop
+      Specialization
+    新语言构造
+      Safety tags
+      Field projections
+      BorrowSanitizer
+    类型系统演进
+      TAIT
+      RTN
+      Arbitrary self types
+    数值与平台
+      f16 / f128
+      Portable SIMD
+```
+
 ## 零、1.100 周期跟踪清单（2026-07-23 初始）
 
 > **状态取值**：`stabilized in 1.100 beta`（已随 1.100.0 beta 分支合入）/ `RFC merged`（RFC 已合并，实现跟踪中）/ `FCP`（最终评论期）/ `nightly only`（nightly 可用，未排期）/ `design`（设计/MCP 阶段）。
@@ -158,6 +180,8 @@ Cargo 将支持在依赖中标记 `public = true/false`，以区分「依赖类�
 ---
 
 ## 五、形式化与安全预览
+
+本节跟踪旨在提升 Rust unsafe 代码可验证性与安全表达力的前沿特性，包括机器可读的安全标注和动态/静态检查工具。
 
 ### 5.1 Safety Tags
 

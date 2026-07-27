@@ -27,9 +27,35 @@
 > **对应 Crate**: 见 [`c06_async`](../../crates/c06_async)
 > **对应练习**: 见 [`exercises/src/async_programming/`](../../exercises/src/async_programming)
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((结构化并发))
+    核心原则
+      父作用域嵌套
+      自动取消传播
+      错误向上聚合
+      确定性 join
+    Rust 现状
+      std 无原生 scope
+      Tokio JoinSet
+      async-scoped
+      embassy
+    常见反模式
+      孤儿任务泄漏
+      跨 await 裸指针
+      取消信号丢失
+    跨语言对比
+      Swift async let
+      Kotlin coroutineScope
+      Python Trio
+```
+
 ## 📑 目录
 
 - [结构化并发（Structured Concurrency）](#结构化并发structured-concurrency)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、权威定义](#一权威定义)
   - [二、核心原则](#二核心原则)
@@ -38,6 +64,7 @@
   - [五、取消传播与错误处理](#五取消传播与错误处理)
   - [六、跨语言对比](#六跨语言对比)
   - [七、反命题与边界](#七反命题与边界)
+    - [反例：孤儿任务泄漏](#反例孤儿任务泄漏)
   - [八、参考来源](#八参考来源)
 
 ---
@@ -157,6 +184,24 @@ async fn parent_with_timeout() -> Result<()> {
 - **“结构化并发会消除所有并发 bug”**：不成立。它主要解决**任务泄漏**和**取消传播**问题，不解决数据竞争、死锁、竞态条件。
 - **“Rust 没有结构化并发就不能写可靠异步代码”**：不成立。通过 `JoinSet`、显式 `AbortHandle`、超时组合可以实现类似效果，但 boilerplate 更多。
 - **边界**：结构化并发对**CPU-bound 任务**和**长时间运行后台任务**的语义需要特殊处理——并非所有任务都适合被强制绑定到父作用域。
+
+### 反例：孤儿任务泄漏
+
+以下代码在 `main` 返回后，`spawn` 出的后台任务可能成为**孤儿任务**：父作用域已结束，子任务仍在运行，导致程序无法正常退出或资源泄漏。
+
+```rust,ignore
+use tokio::task;
+
+async fn orphan_task() {
+    task::spawn(async {
+        // 若父任务取消/退出，此任务可能仍在后台运行
+        tokio::time::sleep(std::time::Duration::from_secs(10)).await;
+    });
+    // 父任务立即返回，未等待、未 abort 子任务
+}
+```
+
+结构化并发方案要求子任务句柄的生命周期绑定到父 `scope`，scope 退出前必须 join 或 cancel 所有子任务。
 
 ---
 

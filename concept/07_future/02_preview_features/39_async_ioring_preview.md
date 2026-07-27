@@ -27,9 +27,32 @@
 > **对应 Crate**: 见 [`c06_async`](../../crates/c06_async)
 > **对应练习**: 见 [`exercises/src/async_programming/`](../../exercises/src/async_programming)
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((Async IOUring))
+    两种模型
+      Readiness-Based
+      Completion-Based
+    io_uring 核心
+      SQ 提交队列
+      CQ 完成队列
+      buffer 生命周期
+    Rust 生态
+      tokio-uring
+      glommio
+      monoio
+    关键边界
+      buffer 必须在完成前有效
+      Linux 5.1+ 限制
+      trait 不兼容
+```
+
 ## 📑 目录
 
 - [Async IO: io\_uring 与 completion-based 异步 IO 预研](#async-io-io_uring-与-completion-based-异步-io-预研)
+  - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、背景与问题](#一背景与问题)
   - [二、Readiness-Based vs Completion-Based 模型对比](#二readiness-based-vs-completion-based-模型对比)
@@ -38,6 +61,7 @@
   - [五、与当前 Async Trait 的兼容性问题](#五与当前-async-trait-的兼容性问题)
   - [六、迁移与选型决策树](#六迁移与选型决策树)
   - [七、反命题与边界](#七反命题与边界)
+    - [反例：在 IO 完成前释放 buffer](#反例在-io-完成前释放-buffer)
   - [八、参考来源](#八参考来源)
 
 ---
@@ -189,6 +213,26 @@ pub trait AsyncRead {
 - **“io_uring 总是比 epoll 快”**：不成立。低并发、小消息场景下，io_uring 的 setup 和 buffer pinning  overhead 可能抵消收益；性能优势主要体现在高并发文件/网络 IO。
 - **“io_uring 可以替代所有 AsyncRead/AsyncWrite”**：不成立。readiness trait 生态庞大，completion-based API 与之不直接兼容，短期内将是并存局面。
 - **边界**：io_uring 的 buffer 安全模型要求调用者保证 buffer 在提交到完成期间有效，错误管理会导致内核级 UB 或数据损坏。
+
+### 反例：在 IO 完成前释放 buffer
+
+以下代码展示了一个典型的 completion-based IO 错误：buffer 在提交后被释放/重用，但内核仍在向其写入数据。
+
+```rust,ignore
+use tokio_uring::fs::File;
+
+async fn unsound_read() -> std::io::Result<()> {
+    let file = File::open("data.bin").await?;
+    let mut buf = vec![0u8; 4096];
+    // 错误：将指向栈/堆 buffer 的操作提交给内核后
+    let op = file.read_at(buf, 0);
+    drop(buf); // 在操作完成前释放/重用 buffer
+    let (res, _buf) = op.await; // 内核可能已写入被释放的内存
+    res
+}
+```
+
+正确做法：使用 `tokio-uring` 的 ownership 语义（操作拿走 buffer，完成后归还），或确保 buffer 在 `await` 期间保持固定有效。
 
 ---
 

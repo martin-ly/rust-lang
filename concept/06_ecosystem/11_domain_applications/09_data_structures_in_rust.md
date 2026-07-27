@@ -2,8 +2,8 @@
 > **Bloom 层级**: L5-L6
 > **代码状态**: ✅ 含可编译示例
 >
-> # Rust 数据结构实践
->
+# Rust 数据结构实践
+
 > **EN**: Data Structures in Rust
 > **Summary**: Core data structures in Rust's standard library and common custom implementations: vectors, queues, trees, hash tables, graphs, and advanced structures, with selection guidance and ownership-aware design patterns.
 > **Rust 版本**: 1.97.0+ (Edition 2024)

@@ -310,7 +310,7 @@ fn main() {}
 ```rust
 fn read_config(path: &str) -> Result<String, std::io::Error> {
     let contents = std::fs::read_to_string(path)?;
-    let first = contents.lines().next() else {
+    let Some(first) = contents.lines().next() else {
         return Err(std::io::Error::other("empty config"));
     };
     Ok(first.to_string())

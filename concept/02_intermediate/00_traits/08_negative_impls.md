@@ -338,7 +338,9 @@ fn main() {}
 
 示例：
 
-```rust
+```rust,nightly
+#![feature(negative_bounds)]
+
 use std::marker::PhantomData;
 
 struct NotSendNotSync {

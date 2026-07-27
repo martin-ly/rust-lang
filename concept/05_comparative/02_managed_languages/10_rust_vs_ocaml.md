@@ -383,7 +383,7 @@ let len = match s with Some v -> String.length v | None -> 0
 
 Rust 的模块系统以 **crate** 为编译/发布单元，内部通过 `mod` 和 `use` 组织命名空间：
 
-```rust
+```rust,ignore
 // Rust: crate 结构
 // src/lib.rs
 pub mod parser;

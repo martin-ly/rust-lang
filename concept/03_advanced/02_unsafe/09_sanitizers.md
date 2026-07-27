@@ -105,6 +105,8 @@
 
 ## 二、使用方法
 
+Sanitizers 目前仍是不稳定工具链特性，需要在 nightly rustc 下通过 `-Z sanitizer=...` 启用，并通常配合 `-Zbuild-std` 重新链接标准库。本节覆盖命令行标志、cargo 联用与函数级开关三种使用方式。
+
 ### 2.1 基本编译标志
 
 在 nightly 工具链下，通过 `-Z sanitizer=<name>` 启用：
@@ -161,6 +163,8 @@ fn hot_path_that_cannot_be_instrumented() {
 
 ## 三、rustc 中的实现机制
 
+rustc 本身并不重新实现 sanitizer 的检查逻辑，而是作为 LLVM instrumentation pass 与 compiler-rt 运行时之间的集成层。理解这一机制有助于在自定义目标、自定义 sysroot 或 CI 中调试链接与 codegen 问题。
+
 ### 3.1 LLVM 集成总览
 
 除 CFI 外，Rust 的 sanitizer 实现几乎完全依赖 LLVM：
@@ -215,6 +219,8 @@ LLVM IR 的 instrumentation pass 在**优化 pass 之后**被调用；每种 san
 ---
 
 ## 四、测试与 CI
+
+Sanitizer 相关测试分布在 rustc 的 codegen、UI 与 compiletest 框架中。为 rustc 贡献新 sanitizer 支持或启用 CI 时，需要熟悉这些测试目录与指令约定。
 
 ### 4.1 codegen 测试
 
@@ -273,6 +279,8 @@ tests/ui/sanitizer/
 
 ## 六、Sanitizers vs Miri vs Kani
 
+Sanitizers、Miri 与 Kani 分别对应运行时动态检测、MIR 级解释执行和有界模型检查三种验证范式。它们在检测时机、可检测缺陷类型、运行成本与平台支持上互补，而非互斥。
+
 ### 6.1 对比矩阵
 
 | 维度 | Sanitizers | Miri | Kani |
@@ -322,6 +330,8 @@ CFI/KCFI 则用于构建需要控制流完整性的生产二进制或内核组�
 
 ## ⚠️ 反命题与边界陷阱
 
+Sanitizers 是强大的动态检测工具，但存在明确的适用范围、平台限制与误报/漏报边界。本节澄清常见误解并给出具体陷阱示例。
+
 ### 反命题 1：“Sanitizers 能替代 safe Rust / 类型系统”
 
 ❌ **不成立**。Sanitizers 是**运行时动态检测**，只能在实际执行路径上发现问题；它们不能替代编译期的所有权、借用和生命周期检查。写出 `unsafe` 代码时，仍须人工维护 Safety Contract。
@@ -343,6 +353,23 @@ CFI/KCFI 则用于构建需要控制流完整性的生产二进制或内核组�
 | **必须重链 std** | 使用 `-Zbuild-std` 或自定义 sysroot，否则运行时库可能链接失败 |
 | **函数粒度决策需抑制内联** | `#[sanitize(...)]` 不同取值时，内联可能破坏 instrumentation 语义 |
 | **不能替代 Miri/Kani** | Sanitizers 检测运行时二进制；Miri 检测 MIR 语义；Kani 做有界证明；三者互补 |
+
+### 反例：未执行路径的 UB 漏报
+
+以下代码在 `unsafe` 块中仅在 `debug_mode` 为真时执行有缺陷的指针操作。若测试用例未覆盖 `debug_mode = true` 分支，ASan 不会报告任何错误，但 UB 仍然存在。
+
+```rust,ignore
+fn process(data: &[u8], debug_mode: bool) {
+    if debug_mode {
+        unsafe {
+            // 仅在 debug_mode 为 true 时越界读取
+            let _ = *data.as_ptr().add(data.len());
+        }
+    }
+}
+```
+
+**教训**：Sanitizers 只能证明“执行到的路径上未发现某类错误”，不能证明“代码不存在 UB”。
 
 ---
 

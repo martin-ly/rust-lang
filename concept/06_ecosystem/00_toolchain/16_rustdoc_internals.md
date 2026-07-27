@@ -73,6 +73,8 @@
 
 ## 一、核心概念与架构
 
+rustdoc 并非独立的 Markdown 处理器，而是 `rustc` 源码树中复用编译器前端的文档生成子系统。理解它的位置、数据流与核心数据结构，是调试、扩展或贡献 rustdoc 的基础。
+
 ### 1.1 rustdoc 在 rustc 中的位置
 
 `rustdoc` 不是独立工具，而是 `rustc` 源码树中 `src/librustdoc` 目录下的一个 crate。它复用编译器前端直到 **HIR（High-level Intermediate Representation）** 的解析与类型信息，然后跳过后端代码生成，直接生成文档产物。这意味着 rustdoc 必须理解 name resolution、macro expansion、`cfg` 条件编译和 trait resolution，但不会运行 borrow checker 或 LLVM 后端。
@@ -148,6 +150,8 @@ pub fn run_global_ctxt(
 ---
 
 ## 二、从 Crate 到 Clean AST
+
+rustdoc 首先调用 rustc 前端获得 HIR 与 `TyCtxt`，然后通过 `clean` 模块把 HIR 节点转换为更精简、更文档化的 `clean::Item` 树。本节解释 Clean AST 的设计动机、关键类型和跨 crate inlining 的语义影响。
 
 ### 2.1 `clean/mod.rs` 与 Clean 类型
 
@@ -319,6 +323,8 @@ Strip passes 根据可见性过滤 Clean AST 中的项：
 
 ## 四、从 Clean 到 HTML / JSON
 
+Clean AST 经过 passes 后被传递给渲染器。本节跟踪 HTML（默认）与 JSON（nightly/unstable）两种输出格式的生成路径，包括模板渲染、搜索索引和源码页。
+
 ### 4.1 `formats::renderer::run_format`
 
 `src/librustdoc/formats/renderer.rs` 中的 `run_format` 是渲染阶段的统一入口。它根据 `OutputFormat` 分发到 HTML 渲染器或 JSON 渲染器：
@@ -426,6 +432,8 @@ JSON 模式与 HTML 模式共享 Clean AST 和大部分 pass，但跳过 Askama 
 
 ## 五、Doctest 与独立 Markdown 模式
 
+`cargo test --doc` 的实际执行者是 rustdoc 而非 rustc。本节解释 doctest 如何从 doc 注释中提取、包装成独立 crate 并运行，以及独立 Markdown 文件的渲染路径。
+
 ### 5.1 Doctest 提取：`test.rs` / `make_test` / `find_testable_code`
 
 `cargo test --doc` 的实际执行者是 rustdoc 的 `test.rs` 模块。其流程为：
@@ -475,6 +483,8 @@ rustdoc README.md
 ---
 
 ## 六、本地测试与调试
+
+为 rustc/rustdoc 贡献代码时，需要掌握 rustc 源码树中的本地构建与调试命令。本节覆盖 `./x doc`、`rustdoc` 本地 HTTP 服务器等常用工作流。
 
 ### 6.1 用 `./x doc library` 构建
 
@@ -528,6 +538,8 @@ miniserve build/<host>/doc --index index.html
 
 ## ⚠️ 反命题 / 边界分析 / 常见陷阱
 
+rustdoc 的“部分编译”模型带来了许多与直觉不符的边界。本节澄清常见误解，并给出 intra-doc link、doc test error code 和缓存等具体陷阱。
+
 ### 反命题 1：“rustdoc 只是 Markdown 处理器”
 
 **错误**。rustdoc 深度依赖 `rustc` 的 name resolution 与类型信息。如果只在文本层处理 Markdown，就无法实现 intra-doc link、跨 crate inlining、`doc(cfg(...))` 平台标签等功能。
@@ -559,6 +571,22 @@ rustc 错误码可能随版本重编号或合并，导致原本标注 `E0308` �
 rustdoc 输出的 `static.files/` 包含哈希化文件名以便长期缓存，但 `index.html` 与模块页引用这些资源时使用相对路径。
 如果 CDN 或静态服务器配置错误，可能出现页面样式丢失。
 解决方式是确保 `static.files` 目录与 HTML 页面保持相对位置不变。
+
+### 反例：intra-doc link 在 reexport 后失效
+
+```rust,ignore
+// crate_a/src/lib.rs
+pub mod inner {
+    /// See [Foo]
+    pub struct Bar;
+    pub struct Foo;
+}
+
+// crate_b/src/lib.rs
+pub use crate_a::inner::*; // 扁平 reexport
+```
+
+在上例中，`crate_a::inner::Bar` 的 doc 注释使用相对路径 `[Foo]`。当 `crate_b` 通过 `pub use crate_a::inner::*` 扁平 reexport 后，`Bar` 在文档树中的逻辑父模块从 `crate_a::inner` 变为 `crate_b`。此时 `[Foo]` 在 `crate_b` 的文档中可能解析失败，因为 `crate_b` 下并不存在 `Foo`。这说明了 link resolution 必须在 inlining pass 之后、针对最终文档树进行的原因。
 
 ---
 

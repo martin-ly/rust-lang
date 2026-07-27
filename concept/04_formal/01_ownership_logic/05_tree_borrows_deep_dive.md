@@ -83,7 +83,7 @@ let r2 = &mut x; // 重新借用
 |:---|:---|:---|
 | 结构 | 栈 | 树 |
 | 严格程度 | 更严格 | 更灵活 |
-| Miri 默认 | 曾是默认 | 自某版本起成为默认 |
+| Miri 默认 | Rust 1.71 之前的默认 | 自 Rust 1.72 起成为 Miri 默认 |
 | 误报 | 较多 | 较少 |
 | 漏报 | 较少 | 理论上可能略多（但仍在安全边界内） |
 | 教学难度 | 较直观 | 需要理解树与权限状态 |
@@ -96,7 +96,7 @@ let r2 = &mut x; // 重新借用
 MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 ```
 
-自 Miri 某版本起，Tree Borrows 已成为默认模型。Stacked Borrows 仍可通过 `-Zmiri-stacked-borrows` 启用。 (Source: [Miri 文档 — Tree Borrows](https://github.com/rust-lang/miri/blob/master/src/borrow_tracker/mod.rs))
+自 Rust 1.72 起，Tree Borrows 已成为 Miri 默认模型。Stacked Borrows 仍可通过 `MIRIFLAGS="-Zmiri-stacked-borrows"` 启用。 (Source: [Miri 文档 — Tree Borrows](https://github.com/rust-lang/miri/blob/master/src/borrow_tracker/mod.rs))
 
 ---
 
@@ -110,7 +110,15 @@ BorrowSanitizer 的目标是运行时（Runtime）检测 Tree Borrows 违规。�
 
 ---
 
-## 七、反命题与边界
+## 七、Rust 1.97.1 语义定位
+
+截至 Rust 1.97.1：
+
+- **rustc 未将 Tree Borrows 作为正式 UB 规范**：Rust Reference 的 [Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) 章节仍在持续细化，Stacked Borrows 与 Tree Borrows 都是学术界/工业界提出的**操作语义候选模型**。
+- **Miri 默认使用 Tree Borrows**：自 Rust 1.72 起，Miri 默认启用 Tree Borrows（`-Zmiri-tree-borrows`），以接受更多在 Stacked Borrows 下被误报的合法 unsafe 模式。仍可通过 `MIRIFLAGS="-Zmiri-stacked-borrows"` 切回旧模型。
+- **生产代码建议**：编写 unsafe 代码时，应以 Rust Reference / UCG 的明文规则为首要依据；Tree Borrows 提供的是“代码在 Miri 下是否被接受”的额外信号，而非编写新 unsafe 模式的许可证。
+
+## 八、反命题与边界
 
 - **不是许可证**：Tree Borrows 是操作语义模型，用于检测 UB，不是编写 unsafe 代码的许可。
 - **仍在演进**：Rust 的正式别名模型尚未最终确定，Stacked/Tree Borrows 都是候选解释。

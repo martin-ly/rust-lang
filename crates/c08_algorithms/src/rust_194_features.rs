@@ -1,7 +1,7 @@
-//! # Rust 1.94 引入的算法特性（1.97.0+ 稳定可用）
-//! # Rust 1.94 algorithmfeatures (stable in 1.96+)simplementation module
+//! # Rust 1.94.0 引入的算法特性（1.94.0 稳定）
+//! # Rust 1.94 algorithmfeatures (stable in 1.94.0) implementation module
 //!
-//! 本模块展示了 Rust 1.94 引入、在 1.96+ 中稳定的 在算法实现场景中的增强，包括：
+//! 本模块展示了 Rust 1.94.0 引入并稳定的 在算法实现场景中的增强，包括：
 //! This module demonstrates Rust 1.94 algorithmimplementationstrongincluding
 //! - array_windows 在滑动窗口算法中的应用 / Array Windows in Sliding Window Algorithms
 //! - 数学常量在数值算法中的应用 / Math Constants in Numerical Algorithms
@@ -12,7 +12,7 @@
 //! - date : 2026-03-06
 //! - 版本: 1.0
 //! - Version: 1.0
-//! - 引入版本: 1.94.0 | 稳定版本: 1.97.0+
+//! - 引入版本: 1.94.0 | 稳定版本: 1.94.0
 //! - Rust Version: 1.94.0
 //! - Edition: 2024
 use std::collections::HashMap;
@@ -881,7 +881,7 @@ pub fn demonstrate_rust_194_algorithm_features() {
 }
 
 /// 获取 Rust 1.94.0 算法特性信息
-/// Get Rust 1.94 algorithmfeatures (stable in 1.96+)sinformation
+/// Get Rust 1.94.0 algorithm features (stable in 1.94.0)sinformation
 pub fn get_rust_194_algorithm_info() -> String {
     "Rust 1.94.0 算法特性:\n- array_windows 在滑动窗口算法中的应用\n- LazyCell 在算法缓存中的应用 \
      (get, get_mut, force_mut)\n- 数学常量在数值算法中的应用 (EULER_GAMMA, GOLDEN_RATIO)\n- \

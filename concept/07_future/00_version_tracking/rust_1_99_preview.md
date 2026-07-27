@@ -32,6 +32,28 @@
 
 ---
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((Rust 1.99+ 预览))
+    语言特性
+      gen blocks
+      async_drop
+      Specialization
+    类型系统
+      TAIT
+      RTN
+      Arbitrary self types
+    安全与形式化
+      Safety tags
+      BorrowSanitizer
+    平台与性能
+      f16 / f128
+      Portable SIMD
+      Field projections
+```
+
 ## 零、1.99 周期跟踪清单（2026-07-16 初始）
 
 > **状态取值**：`stabilized in 1.99 beta`（已随 1.99.0 beta 分支合入）/ `RFC merged`（RFC 已合并，实现跟踪中）/ `FCP`（最终评论期）/ `nightly only`（nightly 可用，未排期）/ `design`（设计/MCP 阶段）。
