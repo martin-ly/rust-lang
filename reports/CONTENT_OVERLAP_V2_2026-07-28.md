@@ -1,7 +1,7 @@
 # 内容重叠检测 v2（语义质量门 P0-3）
 
 **日期**: 2026-07-28  **扫描**: 1850 文件（concept/knowledge/docs/content/crates，排除 archive/book/target）
-**纳入索引**: 1435（已剔除真 stub/空关键词）  **候选对(共享>=5词)**: 567563
+**纳入索引**: 1435（已剔除真 stub/空关键词）  **候选对(共享>=5词)**: 568001
 **阈值**: 0.5  **命中对**: 502（同目录 502 / 跨目录 0）
 
 > 本版修正旧版『0 重复』假象：全文关键词（非前50）、纳入 crates、不豁免假 stub、同目录也检、去掉标题 x1.5 主导。
@@ -10,12 +10,13 @@
 
 | sim | kw | title | 共享词 | 同目录 | 文件1（行） | 文件2（行） |
 |:---:|:---:|:---:|:---:|:---:|:---|:---|
-| 1.0 | 0.738 | 1.0 | 34 | Y | `concept/07_future/00_version_tracking/rust_1_99_preview.md`(149) | `concept/07_future/00_version_tracking/rust_1_100_preview.md`(216) |
-| 1.0 | 0.738 | 1.0 | 25 | Y | `concept/07_future/00_version_tracking/rust_1_100_preview.md`(216) | `concept/07_future/00_version_tracking/rust_1_99_preview.md`(149) |
+| 1.0 | 0.74 | 1.0 | 34 | Y | `concept/07_future/00_version_tracking/rust_1_99_preview.md`(171) | `concept/07_future/00_version_tracking/rust_1_100_preview.md`(240) |
+| 1.0 | 0.74 | 1.0 | 26 | Y | `concept/07_future/00_version_tracking/rust_1_100_preview.md`(240) | `concept/07_future/00_version_tracking/rust_1_99_preview.md`(171) |
 | 1.0 | 0.357 | 1.0 | 7 | Y | `crates/c10_networks/docs/07_rust_190_examples_collection.md`(857) | `crates/c10_networks/docs/08_rust_190_examples_part2.md`(857) |
 | 0.846 | 0.846 | 0.5 | 7 | Y | `crates/c08_algorithms/docs/tier_01_foundations/01_project_overview.md`(22) | `crates/c08_algorithms/docs/tier_01_foundations/02_navigation.md`(22) |
 | 0.846 | 0.846 | 0.667 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/tier_03_references/03_lifetimes_reference.md`(24) | `crates/c01_ownership_borrow_scope/docs/tier_04_advanced/01_advanced_lifetime_patterns.md`(24) |
 | 0.821 | 0.821 | 0.333 | 8 | Y | `docs/05_practice/14_project_13_database_engine.md`(108) | `docs/05_practice/06_project_05_text_statistics.md`(108) |
+| 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c05_threads/docs/tier_01_foundations/02_navigation.md`(22) | `crates/c05_threads/docs/tier_01_foundations/03_glossary.md`(22) |
 | 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c04_generic/docs/00_master_index.md`(22) | `crates/c04_generic/docs/tier_01_foundations/01_project_overview.md`(22) |
 | 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c04_generic/docs/00_master_index.md`(22) | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md`(22) |
 | 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c04_generic/docs/00_master_index.md`(22) | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md`(22) |
@@ -26,7 +27,6 @@
 | 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md`(22) | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md`(22) |
 | 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md`(22) | `crates/c04_generic/docs/tier_01_foundations/04_faq.md`(22) |
 | 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md`(22) | `crates/c04_generic/docs/tier_01_foundations/04_faq.md`(22) |
-| 0.818 | 0.818 | 0.5 | 6 | Y | `crates/c05_threads/docs/tier_01_foundations/02_navigation.md`(22) | `crates/c05_threads/docs/tier_01_foundations/03_glossary.md`(22) |
 | 0.818 | 0.818 | 0.5 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/tier_04_rust_194_updates/README.md`(22) | `crates/c06_async/docs/tier_04_rust_194_updates/README.md`(22) |
 | 0.818 | 0.818 | 0.5 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/tier_04_rust_194_updates/README.md`(22) | `crates/c11_macro_system_proc/docs/tier_04_rust_194_updates/README.md`(21) |
 | 0.818 | 0.818 | 0.5 | 5 | Y | `crates/c01_ownership_borrow_scope/docs/tier_04_rust_194_updates/README.md`(22) | `crates/c12_wasm/docs/tier_04_rust_194_updates/README.md`(21) |

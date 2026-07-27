@@ -4,7 +4,7 @@
 >
 > **EN**: Rust FFI
 > **Summary**: Foreign Function Interface (FFI) — Extern blocks, ABI compatibility, unsafe boundary management, and the bindgen/cbindgen tooling.
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 > **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[FFI](../../../knowledge/03_advanced/02_ffi.md)
@@ -191,6 +191,16 @@ FFI（外部函数接口）的技术细节集中在「声明、类型、回调�
 >
 
 ```rust,ignore
+// 外部类型（不透明）：extern 块内只允许函数与静态变量声明。
+// `type FILE;` 属于不稳定的 extern types 特性；稳定 Rust 应使用私有零大小类型。
+#[repr(C)]
+pub struct FILE {
+    _private: [u8; 0],
+}
+
+// 函数指针类型：在 extern 块外定义，再作为参数/返回值类型使用
+pub type Callback = extern "C" fn(data: *mut c_void) -> c_int;
+
 // 声明外部函数
 #[link(name = "mylib")]  // 链接库名
 extern "C" {
@@ -202,12 +212,6 @@ extern "C" {
 
     // 外部全局变量
     static mut errno: c_int;
-
-    // 外部类型（不透明）
-    type FILE;  // C 的 FILE* 对应 *mut FILE
-
-    // 函数指针类型
-    type Callback = extern "C" fn(data: *mut c_void) -> c_int;
 }
 
 // 从 Rust 调用
@@ -222,6 +226,7 @@ unsafe {
 > 1. `extern "C"` 块内声明的函数默认是 `unsafe` 的——因为 Rust 无法验证外部代码的安全性
 > 2. `#[link(name = "...")]` 指定链接时搜索的库名
 > 3. `static mut` 外部变量访问需要 `unsafe`，因为存在数据竞争风险
+> 4. **稳定 Rust 的 extern 块仅允许函数与静态变量声明**；不透明类型应使用 `#[repr(C)] struct Foo { _private: [u8; 0] }` 或 `enum Foo {}` 在块外建模
 > [来源: [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html)]
 
 ---
@@ -233,9 +238,14 @@ unsafe {
 // 模式: 不透明指针（Opaque Pointer）
 // C 端: typedef struct Connection Connection;
 
-extern "C" {
-    type Connection;  // Rust 中不完整类型
+// 稳定 Rust 中，extern 块内不允许 `type Connection;`。
+// 使用私有零大小类型在块外建模不透明 C 结构体。
+#[repr(C)]
+pub struct Connection {
+    _private: [u8; 0],
+}
 
+extern "C" {
     fn connection_new(host: *const c_char) -> *mut Connection;
     fn connection_send(conn: *mut Connection, data: *const u8, len: usize) -> c_int;
     fn connection_close(conn: *mut Connection);
@@ -620,7 +630,7 @@ fn demo(e: Option<FromBytesUntilNulError>) {
 > [Rust Reference](https://doc.rust-lang.org/reference/introduction.html),
 > [The Rust Programming Language](https://doc.rust-lang.org/book/ch20-01-unsafe-rust.html),
 > [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
-> **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
+> **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)；2026-07-28 修正 extern 块内不允许 `type` 别名与函数指针类型别名的示例，改为稳定 Rust 的不透明类型建模方式。
 
 **文档版本**: 1.0
 **最后更新**: 2026-05-21

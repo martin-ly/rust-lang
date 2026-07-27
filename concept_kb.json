@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 536,
-    "generated_at": "2026-07-27T18:45:26.494024+00:00"
+    "generated_at": "2026-07-27T20:27:03.284767+00:00"
   },
   "files": [
     {
@@ -9959,7 +9959,7 @@
       "layer": "L1",
       "title": "Lifetimes（生命周期）",
       "positioning": "",
-      "line_count": 1557,
+      "line_count": 1604,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡",
@@ -10066,6 +10066,12 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "// Trait object 默认 'static：裸 dyn Trait 只能持有 'static 数据 fn static_trait_object() ..."
+        },
         {
           "flags": [],
           "lines": 12,
@@ -10376,7 +10382,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 6,
-      "matrix_rows": 46,
+      "matrix_rows": 51,
       "pre_post": {
         "pre": [
           "[Ownership](01_ownership.md) · [Borrowing](02_borrowing.md)"
@@ -10986,7 +10992,7 @@
       "layer": "L1",
       "title": "类型系统基础",
       "positioning": "",
-      "line_count": 3373,
+      "line_count": 3378,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡、相关概念链接",
@@ -11037,7 +11043,7 @@
           "type": "paragraph"
         },
         {
-          "text": "### 4.4 定理：类型推断完备性 ⟹ Principal type property",
+          "text": "### 4.4 定理：类型推断完备性 ⟹ Principal type property（条件性）",
           "type": "paragraph"
         },
         {
@@ -11557,7 +11563,7 @@
       "transitions": 16,
       "has_cognitive_path": true,
       "mermaid_blocks": 13,
-      "matrix_rows": 230,
+      "matrix_rows": 231,
       "pre_post": {
         "pre": [
           "[Ownership](../01_ownership_borrow_lifetime/01_ownership.md)"
@@ -13244,7 +13250,7 @@
       "layer": "L1",
       "title": "链式 let 与 let 守卫（Let Chains & If-Let Guards）",
       "positioning": "",
-      "line_count": 533,
+      "line_count": 537,
       "theorem_chains": [
         {
           "text": "| 链式 let 绑定 ⟹ 减少嵌套早退 | 多个相关 `Option`/`Result` 连续判断 | 代码扁平且作用域紧凑 | 高 |",
@@ -13323,9 +13329,9 @@
         },
         {
           "flags": [],
-          "lines": 5,
+          "lines": 6,
           "should_fail": false,
-          "code_preview": "match x {     Some(v) if v > 0 => {}     _ => {} } ..."
+          "code_preview": "let x = Some(1); match x {     Some(v) if v > 0 => {}     _ => {} } ..."
         },
         {
           "flags": [
@@ -19616,7 +19622,7 @@
       "layer": "L2",
       "title": "负实现（Negative Impls）",
       "positioning": "",
-      "line_count": 366,
+      "line_count": 368,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -19708,10 +19714,12 @@
           "code_preview": "#![feature(negative_impls)]  struct NotSend; impl !Send for NotSend {}  fn main(..."
         },
         {
-          "flags": [],
-          "lines": 12,
+          "flags": [
+            "nightly"
+          ],
+          "lines": 14,
           "should_fail": false,
-          "code_preview": "use std::marker::PhantomData;  struct NotSendNotSync {     _marker: PhantomData<..."
+          "code_preview": "#![feature(negative_bounds)]  use std::marker::PhantomData;  struct NotSendNotSy..."
         }
       ],
       "sources": [],
@@ -27733,7 +27741,7 @@
       "layer": "L3",
       "title": "Async/Await（异步编程）",
       "positioning": "",
-      "line_count": 3522,
+      "line_count": 3645,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 定理一致性（Coherence）矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注",
@@ -27856,6 +27864,36 @@
           "lines": 7,
           "should_fail": false,
           "code_preview": "async fn self_ref() {     let s = String::from(\"hello\");     let r = &s;  // r 是..."
+        },
+        {
+          "flags": [
+            "no_run"
+          ],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "struct LoudDrop(&'static str);  impl Drop for LoudDrop {     fn drop(&mut self) ..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "async unsafe fn read_kernel_buffer() -> i32 {     // 假设此处执行某种 unsafe 系统调用     42..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 23,
+          "should_fail": false,
+          "code_preview": "use std::sync::Arc; use std::sync::atomic::{AtomicUsize, Ordering};  struct Drop..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "async unsafe fn dangerous() -> i32 {     // 函数体内部可执行 unsafe 操作     42 }  async f..."
         },
         {
           "flags": [
@@ -29566,7 +29604,7 @@
       "layer": "L3",
       "title": "Pin 与 Unpin：自引用类型的不动性保证",
       "positioning": "深入分析 Rust 中 **Pin<&mut T>** 和 **Unpin** 的设计动机——解决自引用（Reference）类型（self-referential structs）在内存移动时的安全问题，探讨 Pin 与 Future、Generator 的交互，以及 async/await 的状态机实现。",
-      "line_count": 1037,
+      "line_count": 1148,
       "theorem_chains": [
         {
           "text": "| 必须自引用且固定后不再移动 | `Pin<Box<T>>` 或 `pin_mut!` | §4.1 反命题树 TRUE | 之后仍需移动 ⟹ 违反 Pin 契约 |",
@@ -29623,6 +29661,22 @@
           "lines": 31,
           "should_fail": false,
           "code_preview": "use std::pin::Pin; use std::marker::PhantomPinned;  struct SelfReferential {    ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "use std::pin::Pin; use std::marker::PhantomPinned;  struct Inner { _pin: Phantom..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use std::pin::Pin; use std::mem::ManuallyDrop; use std::marker::PhantomPinned;  ..."
         },
         {
           "flags": [
@@ -29789,8 +29843,8 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 3,
-      "matrix_rows": 31,
+      "mermaid_blocks": 4,
+      "matrix_rows": 37,
       "pre_post": {
         "pre": [
           "[Async](01_async.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)"
@@ -30511,7 +30565,9 @@
       ],
       "code_blocks": [
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 5,
           "should_fail": false,
           "code_preview": "async fn example(x: i32) -> i32 {     let y = step1(x).await;     step2(y).await..."
@@ -30581,11 +30637,14 @@
       "layer": "L3",
       "title": "结构化并发（Structured Concurrency）",
       "positioning": "响应 Async Book 新版对 \"Structured concurrency\" 的跟踪需求，为 Rust 异步生态中缺乏原生结构化并发支持的问题建立权威解释。",
-      "line_count": 170,
+      "line_count": 215,
       "theorem_chains": [],
       "anti_propositions": [
         {
           "title": "## 七、反命题"
+        },
+        {
+          "title": "### 反例"
         }
       ],
       "code_blocks": [
@@ -30604,6 +30663,14 @@
           "lines": 11,
           "should_fail": false,
           "code_preview": "// 概念 API（演示取消传播） async fn parent_with_timeout() -> Result<()> {     timeout(Dur..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use tokio::task;  async fn orphan_task() {     task::spawn(async {         // 若父..."
         }
       ],
       "sources": [],
@@ -30617,7 +30684,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 18,
       "pre_post": {
         "pre": [
@@ -30664,7 +30731,7 @@
       "layer": "L3",
       "title": "Unsafe Rust 安全编程",
       "positioning": "",
-      "line_count": 3555,
+      "line_count": 3562,
       "theorem_chains": [
         {
           "text": "- v1.1 (2026-05-13): 重构增强——定理一致性（Coherence）矩阵扩展至10行（⟹推理链）、反命题决策树×4、认知路径六步递进、章节过渡段落、层次一致性标注",
@@ -31244,7 +31311,7 @@
       "transitions": 3,
       "has_cognitive_path": true,
       "mermaid_blocks": 11,
-      "matrix_rows": 321,
+      "matrix_rows": 323,
       "pre_post": {
         "pre": [
           "> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·"
@@ -32096,7 +32163,7 @@
       "layer": "L3",
       "title": "Async 中的 Unsafe：异步上下文的安全契约",
       "positioning": "系统分析 async/await 状态机与 unsafe 操作的交叉语义：await 点两侧什么保持有效、Pin 如何约束自引用（Reference）状态机、Waker 如何跨越 safe/unsafe 边界、手写 poll 时哪些不变量必须由程序员保证。",
-      "line_count": 280,
+      "line_count": 281,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -32114,10 +32181,12 @@
       ],
       "code_blocks": [
         {
-          "flags": [],
-          "lines": 10,
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
           "should_fail": false,
-          "code_preview": "async fn unsound_across_await() {     let raw: *const u8 = /* 某个有效指针 */;     uns..."
+          "code_preview": "async fn unsound_across_await() {     let data: u8 = 42;     let raw: *const u8 ..."
         },
         {
           "flags": [
@@ -32181,7 +32250,7 @@
       "layer": "L3",
       "title": "Sanitizers：运行时缺陷检测工具族",
       "positioning": "将 Sanitizers 从“LLVM 黑盒”还原为 unsafe/底层代码审查与 CI 的可选动态检测层。",
-      "line_count": 388,
+      "line_count": 415,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -32189,6 +32258,9 @@
         },
         {
           "title": "### 反命题"
+        },
+        {
+          "title": "### 反例"
         }
       ],
       "code_blocks": [
@@ -32207,6 +32279,14 @@
           "lines": 2,
           "should_fail": false,
           "code_preview": "// needs-sanitizer-address ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "fn process(data: &[u8], debug_mode: bool) {     if debug_mode {         unsafe {..."
         }
       ],
       "sources": [],
@@ -34907,7 +34987,7 @@
       "layer": "L3",
       "title": "Rust FFI：与外部代码的安全边界",
       "positioning": "系统分析 Rust 与 C/C++ 等外部代码交互的**Foreign Function Interface (FFI)** 机制，探讨 `extern` 块、ABI 兼容、`unsafe` 边界管理以及 `bindgen`/`cbindgen` 工具链。",
-      "line_count": 1045,
+      "line_count": 1055,
       "theorem_chains": [
         {
           "text": "| Rust FFI：与外部代码的安全边界 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -34935,17 +35015,17 @@
           "flags": [
             "ignore"
           ],
-          "lines": 25,
+          "lines": 29,
           "should_fail": false,
-          "code_preview": "// 声明外部函数 #[link(name = \"mylib\")]  // 链接库名 extern \"C\" {     // 简单函数     fn abs(x..."
+          "code_preview": "// 外部类型（不透明）：extern 块内只允许函数与静态变量声明。 // `type FILE;` 属于不稳定的 extern types 特性；稳定 Ru..."
         },
         {
           "flags": [
             "ignore"
           ],
-          "lines": 35,
+          "lines": 40,
           "should_fail": false,
-          "code_preview": "// 模式: 不透明指针（Opaque Pointer） // C 端: typedef struct Connection Connection;  exte..."
+          "code_preview": "// 模式: 不透明指针（Opaque Pointer） // C 端: typedef struct Connection Connection;  // 稳..."
         },
         {
           "flags": [
@@ -35482,7 +35562,7 @@
       "layer": "L3",
       "title": "`unsafe extern blocks`：Edition 2024 的 FFI 安全边界",
       "positioning": "系统分析 Rust Edition 2024 对 `extern` 块的安全语义调整：从旧式块本身为 safe item 的隐患，到 `unsafe extern {}` 的显式 unsafe 契约，再到块内 `safe fn` 的审计机制，以及 `rust_2024_compatibility` lint 的迁移路径。",
-      "line_count": 566,
+      "line_count": 568,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -38867,7 +38947,7 @@
       "layer": "L4",
       "title": "子类型与变型：Rust 类型系统中的协变、逆变与不变",
       "positioning": "深入分析 Rust 类型系统（Type System）中的**子类型关系**与**变型规则**（Variance），解释为什么 `&'static str` 可以赋给 `&'a str`，但 `&mut &'static str` 不能赋给 `&mut &'a str`。",
-      "line_count": 669,
+      "line_count": 714,
       "theorem_chains": [
         {
           "text": "2. **变型定义**：类型构造子 F 的变型 = 子类型关系经 F 后的方向——协变（`T<:U ⟹ F<T><:F<U>`）、逆变（方向反转）、不变（仅当 T=U）；判定口诀：「出现在输出位置 → 协变，输入位置 → 逆变」；",
@@ -38876,6 +38956,10 @@
         {
           "text": "技术细节附「为什么 `&mut` 必须不变」的完整反例推导（可变引用（Mutable Reference）协变 ⟹ 类型混淆攻击）。",
           "type": "inline"
+        },
+        {
+          "text": "> **[Rust Reference — Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html#variance)** 类型参数的变型按**每个使用点独立计算**：同一生命周期或类型参数在不同字段中可以具有不同变型，最终整体变型是所有使用点的最小上界（任一不变 ⟹ 整体不变）。",
+          "type": "paragraph"
         },
         {
           "text": "| 子类型与变型：Rust 类型系统中的协变、逆变与不变 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -38912,6 +38996,12 @@
           "lines": 25,
           "should_fail": false,
           "code_preview": "// 结构体的变型由字段推导 struct Wrapper<'a, T> {     item: &'a T,  // &'a T: 协变 over 'a, 协..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "struct Variance<'a, T> {     // 'a 在此处为协变：共享引用 &T 对其生命周期参数协变     x: &'a i32,    ..."
         },
         {
           "flags": [
@@ -38991,7 +39081,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 3,
-      "matrix_rows": 10,
+      "matrix_rows": 23,
       "pre_post": {
         "pre": [
           "[Type System](../../01_foundation/02_type_system/01_type_system.md) · [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)",
@@ -39411,7 +39501,7 @@
       "layer": "L4",
       "title": "Type Semantics（类型语义）",
       "positioning": "",
-      "line_count": 979,
+      "line_count": 980,
       "theorem_chains": [
         {
           "text": "- **集合论语义**：`T <: U` ⟹ ⟦T⟧ ⊆ ⟦U⟧（类型解释的子集）——生命周期子类型 `'a: 'b` 读作「'a 的区间包含 'b 的区间」，方向与直觉相反（长命 ⊆ 短命的「可用位置集」）；",
@@ -41184,11 +41274,11 @@
       "layer": "L4",
       "title": "Tree Borrows 深度解析",
       "positioning": "",
-      "line_count": 220,
+      "line_count": 228,
       "theorem_chains": [],
       "anti_propositions": [
         {
-          "title": "## 七、反命题"
+          "title": "## 八、反命题"
         }
       ],
       "code_blocks": [
@@ -41252,7 +41342,7 @@
       "layer": "L4",
       "title": "未定义行为清单（Behavior Considered Undefined）",
       "positioning": "",
-      "line_count": 211,
+      "line_count": 251,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -46491,7 +46581,7 @@
       "layer": "L5",
       "title": "Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证>",
       "positioning": "",
-      "line_count": 2223,
+      "line_count": 2247,
       "theorem_chains": [
         {
           "text": "以下矩阵将文中的核心断言分解为**前提条件 → 结论 → 反例/边界**的推理链，用 `⟹` 标明逻辑推导关系：",
@@ -48415,11 +48505,14 @@
       "layer": "L5",
       "title": "Rust vs Haskell：所有权/RAII 与惰性纯函数式语言的系统对比",
       "positioning": "从**内存模型**、**类型系统**、**效应系统**、**并发模型**、**形式化验证**与**适用场景**六个维度，系统对比 Rust 与 Haskell 的设计哲学与工程权衡。本文是对 [Paradigm Matrix](../00_paradigms/01_paradigm_matrix.md) 中「函数式编程 vs 系统编程」交叉视角的 pairwise 深化，不重复该矩阵的通用范式定义。",
-      "line_count": 817,
+      "line_count": 860,
       "theorem_chains": [],
       "anti_propositions": [
         {
           "title": "## 反命题"
+        },
+        {
+          "title": "### 10.4 反例"
         }
       ],
       "code_blocks": [
@@ -48470,6 +48563,12 @@
           "lines": 11,
           "should_fail": false,
           "code_preview": "fn consume(v: Vec<i32>) -> Vec<i32> {     v }  fn affine_demo() {     let v = ve..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "fn sum_to_n(n: i64) -> i64 {     (1..=n).sum()   // 严格求值，无 thunk 累积 } ..."
         }
       ],
       "sources": [],
@@ -48554,7 +48653,9 @@
           "code_preview": "// Rust: 没有 null，Option 强制处理 fn main() {     let s: Option<String> = None;     /..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 16,
           "should_fail": false,
           "code_preview": "// Rust: crate 结构 // src/lib.rs pub mod parser; pub mod codegen;  // src/parser...."
@@ -50244,7 +50345,7 @@
       "layer": "L6",
       "title": "Rustdoc 内部实现",
       "positioning": "揭示 `rustdoc` 作为 `rustc` 子系统的完整数据流，从源码经 `clean` AST、多轮 pass，到 HTML/JSON 渲染与 doctest 提取，服务于需要调试、扩展或贡献 rustdoc 的 toolchain 内部开发者。",
-      "line_count": 618,
+      "line_count": 646,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -50252,6 +50353,9 @@
         },
         {
           "title": "### 反命题"
+        },
+        {
+          "title": "### 反例"
         }
       ],
       "code_blocks": [
@@ -50350,6 +50454,14 @@
           "lines": 1,
           "should_fail": false,
           "code_preview": "/// ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// crate_a/src/lib.rs pub mod inner {     /// See [Foo]     pub struct Bar;     ..."
         }
       ],
       "sources": [],
@@ -64585,7 +64697,7 @@
       "layer": "L7",
       "title": "Rust 1.100+ 前沿特性预览",
       "positioning": "",
-      "line_count": 216,
+      "line_count": 240,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -64614,7 +64726,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 20,
       "pre_post": {
         "pre": [
@@ -66923,7 +67035,7 @@
       "layer": "L7",
       "title": "Rust 1.99+ 前沿特性预览",
       "positioning": "",
-      "line_count": 149,
+      "line_count": 171,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -66950,7 +67062,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 15,
       "pre_post": {
         "pre": [
@@ -71115,11 +71227,14 @@
       "layer": "L7",
       "title": "Async IO: io_uring 与 completion-based 异步 IO 预研",
       "positioning": "响应 Async Book 新版对 \"Async IO: readiness vs completion, and io_uring\" 的跟踪需求，为 Rust 异步 IO 从 readiness 模型向 completion 模型演进建立概念锚点。",
-      "line_count": 202,
+      "line_count": 246,
       "theorem_chains": [],
       "anti_propositions": [
         {
           "title": "## 七、反命题"
+        },
+        {
+          "title": "### 反例"
         }
       ],
       "code_blocks": [
@@ -71130,6 +71245,14 @@
           "lines": 8,
           "should_fail": false,
           "code_preview": "pub trait AsyncRead {     fn poll_read(         self: Pin<&mut Self>,         cx..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use tokio_uring::fs::File;  async fn unsound_read() -> std::io::Result<()> {    ..."
         }
       ],
       "sources": [],
@@ -71142,7 +71265,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
+      "mermaid_blocks": 1,
       "matrix_rows": 15,
       "pre_post": {
         "pre": [

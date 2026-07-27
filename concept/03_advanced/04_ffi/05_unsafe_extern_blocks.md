@@ -1,6 +1,6 @@
 > **内容分级**: [专家级]
 >
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 > **本节关键术语**: unsafe extern blocks · safe extern · FFI · unsafe boundary · unsafe-op-in-unsafe-fn · edition migration — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 
 # `unsafe extern blocks`：Edition 2024 的 FFI 安全边界
@@ -292,16 +292,18 @@ pub unsafe extern "C" fn compute_with_ptr(ptr: *const i32) -> i32 {
 
 ### 2.3 2021 Edition 与 2024 Edition 的行为差异
 
-| 特性 | Edition 2021 | Edition 2024 |
-|:---|:---|:---|
-| `extern "C" { fn f(); }` | ✅ 合法，块本身是 safe item | ❌ 编译错误：`extern blocks must be unsafe` |
-| `unsafe extern "C" { fn f(); }` | ❌ 不支持该语法 | ✅ 合法，块内函数默认 unsafe fn |
-| 调用 extern 函数是否需要 `unsafe` | 需要（块内函数默认 unsafe fn） | 需要（除非声明为 `safe fn`） |
-| `safe fn` 声明 | 不支持 | ✅ 支持，调用处无需 `unsafe` |
-| `safe` 安全限定符 | 不支持 | ✅ 仅支持在 `unsafe extern {}` 块内使用 |
-| 迁移 lint | 无 | `rust_2024_compatibility` |
+> **版本前提**：Rust 1.82.0 起，`unsafe extern "ABI" { ... }` 已在**所有 Edition** 中可用（可选）；Rust 1.85.0 / Edition 2024 起，`extern "ABI" { ... }` 不再被隐式允许，必须写 `unsafe extern`。来源：[Rust Edition Guide — unsafe extern blocks](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-extern.html)、[Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html)。
 
-> **关键洞察**：Edition 2024 并没有改变 FFI 的**运行时（Runtime）语义**——外部代码仍然不可验证。它改变的是**语法层面如何表达信任**：把隐式的「extern 块本身是 safe item」改为显式的「extern 块必须标注 unsafe，块内 safe 符号需要单独标注」。
+| 特性 | Edition 2021（Rust ≥1.82） | Edition 2024 |
+|:---|:---|:---|
+| `extern "C" { fn f(); }` | ✅ 合法，但建议迁移 | ❌ 编译错误：`extern blocks must be unsafe` |
+| `unsafe extern "C" { fn f(); }` | ✅ 合法（自 1.82 起可选） | ✅ 合法，块内函数默认 unsafe fn |
+| 调用 extern 函数是否需要 `unsafe` | 需要（块内函数默认 unsafe fn） | 需要（除非声明为 `safe fn`） |
+| `safe fn` 声明 | ✅ 支持（仅在 `unsafe extern {}` 块内） | ✅ 支持，调用处无需 `unsafe` |
+| `safe` 安全限定符 | ✅ 支持（仅在 `unsafe extern {}` 块内） | ✅ 仅支持在 `unsafe extern {}` 块内使用 |
+| 迁移 lint | 无（1.82–1.84）；`missing_unsafe_on_extern` / `rust_2024_compatibility`（1.85+） | `missing_unsafe_on_extern`（属于 `rust_2024_compatibility` lint 组） |
+
+> **关键洞察**：Edition 2024 并没有改变 FFI 的**运行时（Runtime）语义**——外部代码仍然不可验证。它改变的是**语法层面如何表达信任**：把隐式的「extern 块本身是 safe item」改为显式的「extern 块必须标注 unsafe，块内 safe 符号需要单独标注」。`unsafe extern` 语法本身自 1.82 起就已可用，并非 2024 Edition 独占。
 
 ---
 
@@ -520,7 +522,7 @@ pub fn safe_api() {              // 公开层：对外暴露 safe 接口
 ---
 
 > **权威来源**: [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) · [Rust Edition Guide 2024 — unsafe extern blocks](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-extern.html) · [RFC 3484](https://rust-lang.github.io/rfcs/3484-unsafe-extern-blocks.html) · [The Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html)
-> **权威来源对齐变更日志**: 2026-07-15 创建，对齐 Rust 1.97.0+ (Edition 2024)
+> **权威来源对齐变更日志**: 2026-07-15 创建，对齐 Rust 1.97.0+ (Edition 2024)；2026-07-28 修正 `unsafe extern` 在 Edition 2021 自 1.82 起即可选，以及迁移 lint 名称。
 
 **文档版本**: 1.0
 **最后更新**: 2026-07-15

@@ -8,7 +8,7 @@
 >
 > **EN**: Type System Basics
 > **Summary**: Rust's static type system combining scalar and compound types, algebraic data types, pattern matching, generics, and trait bounds from everyday use toward type theory.
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 >
 > **📎 交叉引用（Reference）**
 >
@@ -56,6 +56,7 @@
 
 - v1.0 (2026-05-12): 初始版本，完成权威定义、类型分类矩阵、ADT 分析、形式化视角、思维导图、示例反例
 - v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡、相关概念链接
+- v2.1 (2026-07-28): P1 语义补齐——弱化“Principal Type / HM 完备性”表述为条件性/限定性 claim，补充递归类型限制（名义类型锚点、递归字段须为指针）与 `str` 原始类型分类，Rust 版本更新至 1.97.1+
 
 ---
 
@@ -87,7 +88,7 @@ mindmap
 
 ## 📑 目录
 
-- [Type System Basics（类型系统基础）](#type-system-basics类型系统基础)
+- [类型系统基础](#类型系统基础)
   - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
@@ -102,7 +103,7 @@ mindmap
     - [4.1 引理：ADT（枚举 + 结构体）⟹ 代数数据类型完备性](#41-引理adt枚举--结构体-代数数据类型完备性)
     - [4.2 引理：NPO 零成本空值优化 ⟹ Option\<\&T\> 的内存同构于 \&T](#42-引理npo-零成本空值优化--optiont-的内存同构于-t)
     - [4.3 定理：match 穷尽性检查 ⟹ 无未处理变体](#43-定理match-穷尽性检查--无未处理变体)
-    - [4.4 定理：类型推断完备性 ⟹ Principal type property](#44-定理类型推断完备性--principal-type-property)
+    - [4.4 定理：类型推断完备性 ⟹ Principal type property（条件性）](#44-定理类型推断完备性--principal-type-property条件性)
     - [4.5 定理：类型一致性（Progress + Preservation）⟹ 运行时无类型错误](#45-定理类型一致性progress--preservation-运行时无类型错误)
     - [4.6 推论：`Option<T>` ⟹ 空指针在类型层面消除](#46-推论optiont--空指针在类型层面消除)
     - [4.7 推论：Result\<T, E\> ⟹ 错误在类型层面强制处理](#47-推论resultt-e--错误在类型层面强制处理)
@@ -307,6 +308,7 @@ Rust 扩展:
 | | 闭包（Closures） | `impl Fn/FnMut/FnOnce` | 视捕获而定 | 通常 ❌ | 捕获变量和 |
 | **动态** | Trait Object | `dyn Trait` | 栈（胖指针） | ❌ | 2 × ptr |
 | | Slice | `[T]` | 无法直接拥有 | N/A | 动态 |
+| | 字符串切片 | `str` | 无法直接拥有 | N/A | 动态（UTF-8 字节序列，DST） |
 
 ### 2.2 Rust 类型系统特征矩阵
 >
@@ -520,18 +522,20 @@ Rust 类型系统的安全性保障同样由引理、定理与推论构成严密
 > **[来源: [Rust Reference: Patterns](https://doc.rust-lang.org/reference/patterns.html)]** match 穷尽性检查由编译器验证，确保 enum 的所有变体都被处理。✅
 > **来源: [TRPL Ch6.1](https://doc.rust-lang.org/book/title-page.html)** `Option<T>` 强制处理 None 情况，消除空指针错误。✅
 
-### 4.4 定理：类型推断完备性 ⟹ Principal type property
+### 4.4 定理：类型推断完备性 ⟹ Principal type property（条件性）
 
 ```text
-定理 T2: 类型推断完备性
+定理 T2: 类型推断完备性（条件性）
   前提: Rust 类型推断基于 Hindley-Milner 算法的扩展
-  前提: 无显式泛型约束的表达式
+  前提: 纯局部、无显式泛型约束且无歧义的表达式
     ↓
-  结论: 存在唯一的最一般类型（Principal Type）可被编译器推断
+  结论: 在 HM 核心片段中存在唯一的最一般类型（Principal Type）可被编译器推断
     ↓
   ⟹ 程序员在绝大多数局部场景无需显式标注类型，同时保持静态检查的严格性
 ```
 
+> **限定说明**: Rust **不是纯 HM 系统**——它没有跨函数的 let-polymorphism，公共 API、trait 方法签名以及 `collect()` 等多态目标场景必须显式标注。因此 T2 是“局部、无歧义片段”的 Principal Type 性质，而非对整个 Rust 类型推断的完备性断言。
+> [来源: [Rust Reference — Type inference](https://doc.rust-lang.org/reference/type-inference.html) · [Rust Reference — Generic parameters](https://doc.rust-lang.org/reference/items/generics.html)]
 > **[Pierce "Types and Programming Languages"](https://www.cis.upenn.edu/~bcpierce/tapl/)** Hindley-Milner 类型推断对无显式约束的表达式是完备的（Principal type property）。✅
 
 ### 4.5 定理：类型一致性（Progress + Preservation）⟹ 运行时无类型错误
@@ -597,7 +601,7 @@ Rust 类型系统的安全性保障同样由引理、定理与推论构成严密
 | L1: ADT 代数完备性 | struct = 积, enum = 余积 | 所有数据结构可组合表达 | 范畴论（积/余积） | T1, C2, C3 | 无法表达开放变体（需 dyn Trait） | — |
 | L2: NPO 零成本优化 | `&T` 永不为 null | Option<&T> ≅ &T 内存布局 | 内存安全（Memory Safety）公理 | C1 | 非引用（Reference）类型无 NPO | — |
 | T1: Match 穷尽性 | enum 封闭 + match 全覆盖 | 无遗漏 case | 代数类型论（和类型） | C1, C2 | `#[non_exhaustive]` 跨 crate | E0004 |
-| T2: 类型推断完备性 | 无显式泛型（Generics）约束 | 唯一最一般类型可推断 | HM 类型推断 | — | 多态场景需标注 | E0282 |
+| T2: 类型推断完备性（条件性） | 纯局部、无显式泛型（Generics）约束、无歧义 | 最一般类型可推断 | HM 类型推断 | — | 跨函数/公共 API/collect 等多态场景需标注 | E0282 |
 | T3: 类型安全定理 | 类型检查通过 + 无 unsafe | Progress + Preservation | 类型论元定理 | — | `std::mem::transmute` | — |
 | C1: 空指针消除 | T1 + L2 | null 在类型层面不可达 | 和类型 + NPO | — | `unsafe` 构造 null &T | — |
 | C2: 错误强制处理 | T1 + L1 | 错误路径不可遗漏 | 和类型穷尽性 | — | `unwrap()` 运行时（Runtime） panic | — |
@@ -718,6 +722,7 @@ enum List<T> {
 - `List<T>` 的大小 = `tag + max(size(T), size(List<T>))`
 - `size(List<T>)` 出现在等式右侧，导致无限递归
 - 这是 ADT 代数完备性在内存布局层面的边界：无限类型需要递归锚点
+- **Rust Reference 限制**：递归类型必须包含至少一个**名义类型（nominal type）**作为锚点，且直接自包含的递归字段必须是指针或间接层（`Box<T>`、`Rc<T>`、裸指针等），不能是裸值自包含
 
 **修正方案**：
 

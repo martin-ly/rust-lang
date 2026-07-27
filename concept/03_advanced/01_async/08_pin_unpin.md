@@ -4,7 +4,7 @@
 >
 > **EN**: Pin and Unpin
 > **Summary**: Pin and Unpin — Guaranteeing immovability for self-referential types, and their interaction with futures and generators.
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 > **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[Pin/Unpin](../../../knowledge/03_advanced/async)
@@ -32,6 +32,13 @@
 > **对应 Crate**: [`c06_async`](../../crates/c06_async)
 > **对应练习**: [`exercises/src/async_programming/`](../../exercises/src/async_programming)
 
+---
+
+> **变更日志**:
+>
+> - v1.0 (2026-05-12): 初始版本，覆盖 Pin/Unpin 核心概念、API 契约、自引用构建与常见陷阱
+> - v1.1 (2026-07-28): P1 语义补齐——新增 structural pinning、`Pin::set`、非结构 vs 结构字段投影、`Pin<&mut ManuallyDrop<T>>` 不可创建的原因；引用 std::pin 模块文档；Rust 版本更新至 1.97.1+
+
 ## 📑 目录
 >
 
@@ -45,6 +52,9 @@
     - [2.1 Pin API 的契约](#21-pin-api-的契约)
     - [2.2 自引用结构体的安全构建](#22-自引用结构体的安全构建)
     - [2.3 与 async/await 的关系](#23-与-asyncawait-的关系)
+    - [2.4 结构 pinning（Structural Pinning）](#24-结构-pinningstructural-pinning)
+      - [`Pin::set` 赋值](#pinset-赋值)
+      - [为什么 `Pin<&mut ManuallyDrop<T>>` 无法提供有效 Pin 保证](#为什么-pinmut-manuallydropt-无法提供有效-pin-保证)
   - [三、使用模式](#三使用模式)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
@@ -78,6 +88,9 @@
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [📋 关键属性](#-关键属性-1)
+  - [🔗 概念关系](#-概念关系-1)
+  - [🧭 思维导图（Mindmap）](#-思维导图mindmap-1)
 
 ---
 
@@ -287,6 +300,65 @@ async/await 与 Pin 的关系:
 
 > **async 洞察**: Pin 是 async/await 的**底层基石**——没有 Pin，异步状态机就无法安全地持有跨 await 点的引用。Pin 使 Rust 的 async 实现既安全又零成本。
 > [来源: [Async Working Group — Pin](https://rust-lang.github.io/async-fundamentals-initiative/)]
+
+### 2.4 结构 pinning（Structural Pinning）
+
+> **[std::pin module docs](https://doc.rust-lang.org/std/pin/index.html)** 当某个类型承诺“被 pin 后，其字段也保持 pin 状态”时，称该字段是**结构 pinned（structurally pinned）**。对结构 pinned 字段，可以从 `Pin<&mut Outer>` 安全投影出 `Pin<&mut Field>`；对非结构 pinned 字段，则只能得到普通的 `&mut Field`。
+
+```text
+结构 pinning vs 非结构 pinning:
+
+  结构 pinned 字段:
+    - 字段类型通常为 !Unpin（需要 Pin 保证）
+    - 类型契约保证：Outer 被 Pin ⟹ 该字段也被 Pin
+    - 投影结果: Pin<&mut Outer> → Pin<&mut Field>
+    - 示例场景: async 状态机中的自引用字段、自定义自引用结构体
+
+  非结构 pinned 字段:
+    - 字段类型通常为 Unpin（或不需要 Pin 保证）
+    - 投影结果: Pin<&mut Outer> → &mut Field
+    - 允许安全 move/replace 该字段，不受外层 Pin 约束
+    - 示例场景: Pin<&mut Wrapper<String>> 中的 String 字段
+```
+
+#### `Pin::set` 赋值
+
+`Pin::set` 通过 `DerefMut` 原地替换被 Pin 的值，**不触发 move**，因此适用于 `!Unpin` 类型：
+
+```rust,ignore
+use std::pin::Pin;
+use std::marker::PhantomPinned;
+
+struct Inner { _pin: PhantomPinned }
+
+let mut inner = Inner { _pin: PhantomPinned };
+let mut pinned = unsafe { Pin::new_unchecked(&mut inner) };
+
+// 原地替换 inner，旧值在原地 drop，不移动 pointee
+pinned.set(Inner { _pin: PhantomPinned });
+```
+
+> 关键点：`Pin::set` 要求 `T: ?Sized`，它调用 `Drop` 后写入新值，因此不会破坏“Pin 后不可 move”的契约。
+
+#### 为什么 `Pin<&mut ManuallyDrop<T>>` 无法提供有效 Pin 保证
+
+`ManuallyDrop<T>` 无条件实现 `Unpin`，即使 `T: !Unpin`。因此：
+
+```rust,ignore
+use std::pin::Pin;
+use std::mem::ManuallyDrop;
+use std::marker::PhantomPinned;
+
+struct Inner { _pin: PhantomPinned }
+
+let mut x: ManuallyDrop<Inner> = ManuallyDrop::new(Inner { _pin: PhantomPinned });
+// 编译通过：ManuallyDrop<Inner>: Unpin
+let pinned: Pin<&mut ManuallyDrop<Inner>> = Pin::new(&mut x);
+```
+
+但 `pinned` 并不能保证内部 `Inner` 不被移动：`ManuallyDrop` 的 `Unpin` 意味着可以通过 safe API（如 `ManuallyDrop::take` 或重新赋值）把 `Inner` 移出，从而违反 `!Unpin` 的 immobility 契约。因此，`Pin<&mut ManuallyDrop<T>>` **不等价于**对 `T` 的 Pin；在需要固定 `T` 的场景中不能使用 `ManuallyDrop<T>` 作为中间层。
+
+> 来源：[std::pin module docs](https://doc.rust-lang.org/std/pin/index.html) · [std::pin::Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)
 
 ---
 
@@ -590,10 +662,10 @@ fn main() {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch17-00-async-await.html)
 >
-> **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
+> **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)；2026-07-28 P1 语义补齐——新增结构 pinning（structural pinning）、`Pin::set`、非结构/结构字段投影、`Pin<&mut ManuallyDrop<T>>` 不可创建等边界说明，引用 std::pin 模块文档，Rust 版本更新至 1.97.1+
 
-**文档版本**: 1.0
-**最后更新**: 2026-05-21
+**文档版本**: 1.1
+**最后更新**: 2026-07-28
 **状态**: ✅ 概念文件创建完成
 
 ---
@@ -991,6 +1063,51 @@ impl SelfRef {
 > **边界**：不要试图用 `unsafe { Pin::new_unchecked(&mut x) }` 绕过类型变化以恢复旧行为——这会重新引入地址不稳定风险（本页 §4.5）。`pin!` 收窄是**健全性修复**，正确应对是改用 `pin!(x)` 固定值本身、或用 `pin-project` 做投影。
 
 > **来源**: [Rust 1.97.0 Release Notes — Compatibility Notes](https://releases.rs/docs/1.97.0/) · [Rust Reference — Pin](https://doc.rust-lang.org/std/pin/index.html) · [Rustonomicon — Pinning](https://doc.rust-lang.org/std/pin/index.html) · 版本页 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（§7、§7.1）
+> **交叉反链**: [`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md) · [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) · [`14_coercion_and_casting.md`](../../01_foundation/02_type_system/04_coercion_and_casting.md)
+
+## 📋 关键属性
+
+| 属性 | 取值 / 判定 | 依据 |
+|---|---|---|
+| 问题根源 | 自引用类型移动后内部指针悬垂 | 本文 §1.1 |
+| Pin 契约 | `Pin<P>` 承诺 pointee 不再被移动（除非 `T: Unpin`） | 本文 §1.2、§2.1 |
+| Unpin | auto trait，大多数类型默认实现，`!Unpin` 需 `PhantomPinned` | 本文 §1.3 |
+| 固定方式 | 栈上 `pin!` 宏固定 / 堆上 `Box::pin` 固定 | 本文 §三 使用模式 |
+| 与 async | `async fn` 状态机含自引用，故 `!Unpin`，poll 前必须 pin | 本文 §2.3 |
+
+## 🔗 概念关系
+
+- **上位（is-a）**：[内存管理](../../02_intermediate/02_memory_management/01_memory_management.md) 中的不动性（immovability）保证机制。
+- **下位（实例）**：`Pin<&mut T>`、`Pin<Box<T>>`、`pin!` 宏、`PhantomPinned`。
+- **对偶**：`Unpin`（可自由移动）⇄ `!Unpin`（固定后禁移）。
+- **组合**：与 [Async 基础](01_async.md)、[Pin 投影反例集](11_pin_projection_counterexamples.md) 组合。
+- **依赖**：依赖 [Unsafe](../02_unsafe/01_unsafe.md) 的契约推理（自引用结构的安全构建）。
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Pin 与 Unpin自引用类型的不动性保证))
+    一、核心概念
+      1.2 Pin 的设计承诺不再移动
+      1.3 Unpin大多数类型的默认
+    二、技术细节
+      2.1 Pin API 的契约
+      2.2 自引用结构体的安全构建
+      2.3 与 async/await 的关系
+    三、使用模式
+    四、反命题与边界分析
+      4.1 反命题树
+      4.2 边界极限
+    Rust 1.97.0 交叉语义
+      1. 变化事实来自 release
+      2. 与 Unpin auto trait
+      3. 与 async 状态机 / 自引用的交互
+```
+
+md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)（§7、§7.1）
 > **交叉反链**: [`feature_domain_matrix_197.md`](../../07_future/00_version_tracking/feature_domain_matrix_197.md) · [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) · [`14_coercion_and_casting.md`](../../01_foundation/02_type_system/04_coercion_and_casting.md)
 
 ## 📋 关键属性

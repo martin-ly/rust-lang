@@ -4,7 +4,7 @@
 >
 > **EN**: Safe and Effective Unsafe Rust
 > **Summary**: Unsafe Rust is a carefully scoped escape hatch for operations the compiler cannot verify, such as raw-pointer dereferencing, calling foreign functions, and implementing low-level data structures. This chapter explains the unsafe contract, the five unsafe superpowers, soundness invariants, and how to keep safe abstractions reliable.
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 > **📎 交叉引用（Reference）**
 >
 > 本主题在 knowledge 中有系统化的知识索引：[Unsafe Rust](../../../knowledge/03_advanced/unsafe)
@@ -48,6 +48,7 @@
 - v1.3 (2026-05-13): Phase BC 形式化深化——新增§2.2b Unsafe Code Guidelines 完整 UB 分类（内存访问/类型系统（Type System）/并发/其他四大类 15 子类 + UB 检测不可判定性定理）；新增§7.2b Miri 检测算法原理（核心解释循环、与 LLVM 优化假设关系、MIRIFLAGS 完整选项速查）
 - v1.2 (2026-05-13): 深度重构——新增 §5.5 Stacked Borrows 操作语义、§5.6 Tree Borrows 演进；增强 §7.2 Miri 检测边界（覆盖范围表格+MIRIFLAGS使用）；补充层次一致性（Coherence）标注（L1/L4映射）与章节过渡段落
 - v2.0 (2026-06-23): 全面对齐 Rust 2024 Edition Unsafe/FFI 变更——重写第九章，补充 `unsafe extern` blocks（RFC 3484）与 `#[unsafe(...)]` 属性（RFC 3325），更新稳定版本信息为 Rust 1.85.0
+- v2.1 (2026-07-28): P1 语义修正——明确 Miri 为单线程解释器、无法检测数据竞争，交叉引用 Loom/TSan；将递归 panic/栈溢出/整数除零从“canonical UB”重新归类为运行时故障/abort，并引用 Reference overflow-checks caveat；Rust 版本更新至 1.97.1+
 
 ---
 
@@ -292,7 +293,9 @@ Unsafe Rust = Safe Rust ∪ { 操作 O | O 需要人工证明安全性 }
 | **类型系统（Type System）** | 无效枚举（Enum）值、数据竞争、对齐违规 | 难 | `mem::transmute` 滥用 |
 | **并发** | 数据竞争、锁顺序错误（C++ style） | 难 | 非原子访问共享可变状态 |
 | **ABI** | 调用约定不匹配、布局假设错误 | 难 | FFI 类型宽度不匹配 |
-| **特殊** | 递归 panic、栈溢出、除以零 | 中等 | `panic!` in `Drop` |
+| **运行时 fault / abort** | 递归 panic、栈溢出、整数除以零 | 低–中等 | `panic!` in `Drop` |
+| **特殊说明** | 上述三项通常触发 panic 或 abort，而非 Rust Reference 枚举的 canonical UB。整数除零在 `overflow-checks` 开启时 panic；关闭时结果由具体后端决定（可能 abort 或 wrapping），Rust Reference 不将其列入 UB 清单。 | — | — |
+| | 来源: [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [Rust Reference — Integer operator overflow](https://doc.rust-lang.org/reference/expressions/operator-expr.html#overflow) | | |
 
 ### 2.2b Unsafe Code Guidelines 完整 UB 分类
 
@@ -338,7 +341,7 @@ Unsafe Rust = Safe Rust ∪ { 操作 O | O 需要人工证明安全性 }
 |:---|:---|:---:|:---|
 | **ABI 不匹配** | FFI 调用时参数类型/调用约定与声明不符 | ❌ | `extern "C"` 函数签名与 C 头不匹配 |
 | **内联汇编（Inline Assembly）违规** | 汇编约束与实际副作用不符 | ❌ | `asm!("..." : "=r"(x))` 但实际修改内存 |
-| **栈溢出** | 递归/大数组导致栈空间耗尽 | ⚠️（OS 信号） | 无限递归 |
+| **栈溢出 / 运行时 abort** | 递归/大数组导致栈空间耗尽；不属于 Rust Reference UB 清单，通常由 OS/运行时以 abort/信号终止 | ⚠️（OS 信号） | 无限递归 |
 
 > **来源**: [Rust Reference: Behavior considered undefined — 完整清单](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [UCG Book: What is undefined behavior?] · [Ralf Jung Blog: The scope of unsafe]
 
@@ -525,11 +528,15 @@ Miri (Rust 解释器) 可检测:
   ✅ 悬垂指针解引用
   ✅ 越界访问
   ✅ 未对齐访问
-  ✅ 数据竞争（部分）
+  ❌ 数据竞争（Miri 是单线程解释器，无法检测真实多线程数据竞争）
   ✅ 无效枚举值
   ❌ 所有可能的 UB（停机问题）
   ❌ 与硬件相关的行为（如内联汇编）
   ❌ FFI 边界错误（外部代码不透明）
+
+并发 UB 检测工具补充:
+  • [Loom](https://docs.rs/loom) — 模型检查 Rust 并发原语
+  • [ThreadSanitizer (TSan)](https://clang.llvm.org/docs/ThreadSanitizer.html) — 运行时动态数据竞争检测
 ```
 
 > 详见 §7.2 的完整覆盖范围表格与 `MIRIFLAGS` 使用方式。
@@ -928,7 +935,7 @@ graph TD
       例: Vec, String, HashMap, Rc, Arc, Box 都有 unsafe 内部实现
 ```
 
-> **[Miri Documentation](https://github.com/rust-lang/miri)** Miri 是 Rust 的解释型 MIR 执行器，可动态检测悬垂指针、越界访问、未对齐访问、数据竞争（部分）和无效枚举（Enum）值等 UB。✅ 已验证
+> **[Miri Documentation](https://github.com/rust-lang/miri)** Miri 是 Rust 的解释型 MIR 执行器，可动态检测悬垂指针、越界访问、未对齐访问、无效枚举（Enum）值等 UB。Miri 是单线程解释器，**不检测数据竞争**；并发 UB 需用 [Loom](https://docs.rs/loom) 或 [ThreadSanitizer](https://clang.llvm.org/docs/ThreadSanitizer.html) 等工具。✅ 已验证
 > **[Miri Documentation: Limitations]** Miri 无法检测所有 UB（停机问题不可解），且不支持与硬件相关的行为（如内联汇编（Inline Assembly））。✅ 已验证
 
 ### 7.2 Miri 的验证边界
@@ -1205,7 +1212,7 @@ graph TD
 |:---|:---|:---|
 | Stacked Borrows 模型 | ⚠️ 兼容模式 | 历史默认模型，部分合法模式被误判 |
 | Tree Borrows 模型 | ✅ 默认检测 | 2024 年末起为 Miri 默认，覆盖更多合法模式 |
-| 数据竞争 | ✅ 检测 | happens-before 分析 |
+| 数据竞争 | ❌ 不检测 | Miri 为单线程解释器，无法检测真实多线程数据竞争；需用 Loom / TSan |
 | 未初始化读取 | ✅ 检测 | `MaybeUninit` 追踪 |
 | 悬垂指针解引用 | ✅ 检测 | 内存分配追踪 |
 | 与外部代码交互 | ❌ 不检测 | FFI 调用不透明 |
@@ -1525,7 +1532,7 @@ Miri 不是唯一的动态检测工具。根据错误类型和检测阶段，Val
 |:---|:---|:---|:---|:---|
 | **检测时机** | MIR 解释执行（编译后） | 机器码动态插桩（运行时） | 编译期插桩 + 运行时库 | 编译期插桩 + 运行时库 |
 | **内存错误** | ✅ UAF、OOB、未对齐、未初始化 | ✅ UAF、未初始化、泄漏 | ✅ UAF、OOB、堆栈缓冲区溢出 | ❌ 不专门检测 |
-| **数据竞争** | ⚠️ 部分（单线程解释器模拟） | ❌ 不检测 | ❌ 不检测 | ✅ 核心功能 |
+| **数据竞争** | ❌ 不检测（Miri 为单线程解释器，无法模拟真实多线程竞争） | ❌ 不检测 | ❌ 不检测 | ✅ 核心功能 |
 | **别名违规** | ✅ Stacked/Tree Borrows | ❌ 不检测 | ❌ 不检测 | ❌ 不检测 |
 | **无效枚举值** | ✅ discriminant 检查 | ❌ 不检测 | ❌ 不检测 | ❌ 不检测 |
 | **FFI / 外部代码** | ❌ 不透明（stub 或 panic） | ✅ 可检测 C 代码 | ✅ 可检测 C/C++ 代码 | ✅ 可检测 C/C++ 代码 |
@@ -2873,7 +2880,7 @@ Unsafe 的边界测试按「编译期仍可拦截的错误」与「已进入 UB 
 - **运行时灾难（unsafe 豁免后的人工责任区）**：`str::from_utf8_unchecked` 传入无效 UTF-8——后续任何 `str` 方法可读到非法状态，UB 经安全代码放大（「安全代码的信任被 unsafe 破坏」是 UB 传播的标准路径）；通过裸指针制造「同一内存的 `&mut` 与 `&` 共存」（违反 Stacked Borrows，Miri 必报）；`transmute` 改变 `&'a T` 的生命周期（Lifetimes）为 `'static`——悬垂引用经安全接口流出。
 - **判定框架**：unsafe 代码审查按「五步清单」——① 指针有效性（分配内、对齐、非空）；② 初始化状态（读前已写）；③ 别名规则（`&mut` 独占性人工维持）；④ 生命周期（引用不超过数据存活期）；⑤ panic 安全（unsafe 块内 panic 不留下半更新状态）。七项边界测试分别命中清单的不同条目。
 
-Miri（`cargo miri test`）是「运行时灾难」档的动态裁判：Stacked Borrows 模型 + 未初始化内存追踪 + 数据竞争检测，能拦截本节全部 UB 形态——unsafe 代码的最低验收标准应是 Miri 全绿。
+Miri（`cargo miri test`）是「运行时灾难」档的动态裁判：Stacked Borrows 模型 + 未初始化内存追踪，能拦截本节大部分 UB 形态（不含真实多线程数据竞争）。真实并发数据竞争需用 Loom 或 TSan 检测——unsafe 代码的最低验收标准应是 Miri 全绿 + 并发场景经 Loom/TSan 覆盖。
 
 ### 16.1 边界测试：裸指针解引用前的空检查（编译错误）
 
@@ -3036,7 +3043,7 @@ fn main() {
 > **诊断方法**：
 >
 > - Miri: error: Undefined Behavior (dangling pointer) → 违反了 T2(引用有效性) → 检查裸指针生命周期
-> - Miri: error: Undefined Behavior (data race) → 违反了 T5(无数据竞争) → 检查 UnsafeCell 使用或原子序数
+> - TSan / Loom: 真实数据竞争 → 违反了 T5(无数据竞争) → 检查 UnsafeCell 使用或原子序数（Miri 为单线程解释器，不检测多线程数据竞争）
 > - Miri: error: invalid enum value → Validity Invariant 违反 → 检查 transmute 的目标类型
 
 ## 参考来源

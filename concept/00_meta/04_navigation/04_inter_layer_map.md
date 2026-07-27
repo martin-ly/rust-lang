@@ -317,7 +317,7 @@ graph LR
     前提: 所有引用 'a 必须 outlive 其指向数据
     推理: 若数据已释放，引用生命周期必已结束
     反事实: 'static 引用指向局部变量（编译错误 E0597）
-    来源: ✅ [TRPL Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · ✅ [Rust Reference: Lifetimes](https://doc.rust-lang.org/reference/introduction.html)
+    来源: ✅ [TRPL Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · ✅ [Rust Reference: Lifetimes](https://doc.rust-lang.org/reference/lifetimes.html)
 
 组合定理 (L2-L3): Send + Sync ⟹ 跨线程安全
     前提: T: Send（所有权可跨线程转移）∧ T: Sync（&T 可跨线程共享）

@@ -4,12 +4,19 @@
 >
 > **EN**: Subtype and Variance
 > **Summary**: Type System — Subtyping and variance: why `&'static str` coerces to `&'a str` but `&mut &'static str` does not to `&mut &'a str`.
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
+
+---
+
+> **变更日志**:
+>
+> - v1.0 (2026-05-12): 初始版本，覆盖协变/逆变/不变定义与核心类型构造子变型表
+> - v1.1 (2026-07-28): P1 语义修复——扩展变型表至 `[T]`/`[T; n]`、`fn() -> T`、`PhantomData<T>`、`dyn Trait<T> + 'a`；新增使用点独立计算规则与混合变型结构体示例；Rust 版本更新至 1.97.1
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Ana — 分析变型和子类型的传播规则
 > **定位**: 深入分析 Rust 类型系统（Type System）中的**子类型关系**与**变型规则**（Variance），解释为什么 `&'static str` 可以赋给 `&'a str`，但 `&mut &'static str` 不能赋给 `&mut &'a str`。
@@ -18,7 +25,7 @@
 
 ---
 
-> **来源**: [Rust Reference — Subtyping](https://doc.rust-lang.org/reference/subtyping.html) · · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Rust Reference — Subtyping](https://doc.rust-lang.org/reference/subtyping.html) · [Rust Reference — Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html#variance) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rustonomicon — Variance](https://doc.rust-lang.org/nomicon/subtyping.html) ·
 > [Wikipedia — Covariance and Contravariance](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)) ·
 > [TAPL — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
@@ -35,6 +42,7 @@
   - [二、技术细节](#二技术细节)
     - [2.1 生命周期位置的变型推导](#21-生命周期位置的变型推导)
     - [2.2 结构体与枚举的变型](#22-结构体与枚举的变型)
+    - [2.2b 按使用点独立计算变型](#22b-按使用点独立计算变型)
     - [2.3 函数指针的变型](#23-函数指针的变型)
   - [三、形式化分析](#三形式化分析)
   - [四、反命题与边界分析](#四反命题与边界分析)
@@ -131,27 +139,23 @@ graph LR
 ### 1.3 Rust 中的变型规则
 >
 
-```text
-Rust 类型的变型规则:
+| **类型构造器** | **对参数 X 的变型** | **说明** |
+|:---|:---|:---|
+| `&T` | 协变 over T | 只读共享引用 |
+| `&mut T` | 不变 over T | 可变引用允许原地写入，破坏协变安全 |
+| `*const T` | 协变 over T | 只读裸指针 |
+| `*mut T` | 不变 over T | 可变裸指针 |
+| `Box<T>` | 协变 over T | 独占所有权，无内部可变性 |
+| `Vec<T>` / `Option<T>` | 协变 over T | 元素/内容处于只读位置 |
+| `[T]` / `[T; N]` | 协变 over T | 切片与定长数组的元素位置只读 |
+| `fn(T) -> U` | 逆变 over T，协变 over U | 参数是输入位置，返回值是输出位置 |
+| `fn() -> T` | 协变 over T | 无参数函数指针，仅含返回位置 |
+| `Cell<T>` / `RefCell<T>` / `Mutex<T>` / `UnsafeCell<T>` | 不变 over T | 内部可变性破坏协变 |
+| `PhantomData<T>` | 协变 over T | 零大小标记类型，用于显式控制变型/dropck |
+| `dyn Trait<T> + 'a` | 对 `'a` 协变，对 `T` 不变 | trait object 的生命周期边界可放宽；类型参数位于不变位置 |
 
-  &T          → 协变 over T
-  &mut T      → 不变 over T
-  *const T    → 协变 over T
-  *mut T      → 不变 over T
-  Box<T>      → 协变 over T
-  Vec<T>      → 协变 over T
-  Cell<T>     → 不变 over T
-  RefCell<T>  → 不变 over T
-  Mutex<T>    → 不变 over T
-  fn(T) -> U  → 逆变 over T, 协变 over U
-  UnsafeCell<T> → 不变 over T
-
-  结构体/枚举: 根据字段位置推导
-  泛型参数: 默认协变，可通过 PhantomData 控制
-```
-
-> **规则洞察**: Rust 的变型规则遵循**安全原则**——任何允许修改内部值的类型（&mut, Cell, Mutex）都是不变的，因为协变/逆变可能导致类型安全的破坏。
-> [来源: [Rustonomicon — Variance](https://doc.rust-lang.org/nomicon/subtyping.html)]
+> **规则洞察**: Rust 的变型规则遵循**安全原则**——任何允许修改内部值的类型（`&mut`, `Cell`, `Mutex`）都是不变的，因为协变/逆变可能导致类型安全的破坏。数组 `[T; N]` 与切片 `[T]` 对 `T` 协变，因为元素只读；`fn() -> T` 与 `fn(T) -> U` 的返回位置协变，参数位置逆变；`dyn Trait<T> + 'a` 中生命周期 `'a` 可协变收窄，但 `T` 位于不变位置。
+> [来源: [Rust Reference — Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html#variance)] · [Rustonomicon — Variance](https://doc.rust-lang.org/nomicon/subtyping.html)]
 
 ---
 
@@ -228,6 +232,48 @@ enum Option<'a, T> {
 
 > **推导规则**: 结构体（Struct）/枚举（Enum）对类型参数 X 的变型是其所有字段对 X 变型的**最小上界**——如果任何字段是不变的，整体就是不变的。
 > [来源: [Rust Reference — Variance](https://doc.rust-lang.org/reference/subtyping.html#variance)]
+
+---
+
+### 2.2b 按使用点独立计算变型
+>
+
+> **[Rust Reference — Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html#variance)** 类型参数的变型按**每个使用点独立计算**：同一生命周期或类型参数在不同字段中可以具有不同变型，最终整体变型是所有使用点的最小上界（任一不变 ⟹ 整体不变）。
+
+```text
+按使用点计算变型的规则:
+
+  1. 对类型/生命周期参数 X 的每一次出现，确定其在该位置的变型
+  2. 位置变型由外层类型构造器决定：
+       - 输出位置（返回值、共享引用指向类型等）→ 协变
+       - 输入位置（函数参数、逆变位置）→ 逆变
+       - 可变引用/内部可变性位置 → 不变
+  3. 结构体/枚举对 X 的整体变型 = 所有出现位置变型的最小上界
+       - 任一位置为“不变” ⟹ 整体为“不变”
+       - 无不变但有逆变 ⟹ 整体为“逆变”
+       - 全为协变 ⟹ 整体为“协变”
+```
+
+**Reference 混合变型结构体示例**:
+
+```rust
+struct Variance<'a, T> {
+    // 'a 在此处为协变：共享引用 &T 对其生命周期参数协变
+    x: &'a i32,
+    // 'a 在此处为不变：可变引用 &mut T 对其生命周期参数不变
+    y: &'a mut i32,
+    // T 在此处为协变：T 出现在结构体字段的“拥有”输出位置
+    z: T,
+}
+```
+
+**结论**:
+
+- `Variance<'a, T>` 对 `'a` 是**不变**的（因为 `y: &'a mut i32` 字段使 `'a` 在该位置不变）
+- `Variance<'a, T>` 对 `T` 是**协变**的（唯一使用点 `z: T` 为协变）
+
+> **关键洞察**: 同一生命周期 `'a` 在不同字段中可以同时是协变和不变；结构体整体变型取最保守（最小上界）结果。这是 Rust Reference 中“per-location variance computation”的核心内容。
+> [来源: [Rust Reference — Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html#variance)]
 
 ---
 
@@ -418,13 +464,13 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference — Subtyping](https://doc.rust-lang.org/reference/subtyping.html) · [Rustonomicon — Variance](https://doc.rust-lang.org/nomicon/subtyping.html) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Wikipedia — Covariance and Contravariance](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science))
-> **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)
+> **权威来源**: [Rust Reference — Subtyping](https://doc.rust-lang.org/reference/subtyping.html) · [Rust Reference — Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html#variance) · [Rustonomicon — Variance](https://doc.rust-lang.org/nomicon/subtyping.html) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Wikipedia — Covariance and Contravariance](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science))
+> **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.97.0+ (Edition 2024)；2026-07-28 P1 语义补齐——扩展变型表（`[T]`/`[T; n]`、`fn() -> T`、`PhantomData<T>`、`dyn Trait<T> + 'a`）、新增按使用点独立计算变型的规则与 Reference 混合变型结构体示例，Rust 版本更新至 1.97.1+
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/05_international_authority_index.md)
 
-**文档版本**: 1.0
-**最后更新**: 2026-05-21
-**状态**: ✅ 权威来源对齐完成 (Batch L4)
+**文档版本**: 1.1
+**最后更新**: 2026-07-28
+**状态**: ✅ 权威来源对齐完成 (Batch L4) + P1 语义补齐
 
 ---
 

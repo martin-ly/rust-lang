@@ -1,6 +1,6 @@
 > **内容分级**: [综述级]
 >
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 >
 > **本节关键术语**: 生命周期 (Lifetime) · 生命周期注解 (Lifetime Annotation) · 静态生命周期 ('static) · 省略规则 (Elision) — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 
@@ -41,6 +41,7 @@
 - v1.0 (2026-05-12): 初始版本，完成权威定义、生命周期（Lifetimes）规则矩阵、形式化视角、NLL 分析、示例反例
 - v2.2 (2026-05-14): 完成待办双项——§13 Lifetime Elision 完整形式化（三条规则 ∀/⇒ 形式化、正例+反例、Rust Reference 来源）；§14 `impl Trait` 与生命周期（Lifetimes）推断交互（RPIT 捕获、APIT 差异、`+'a` 显式约束、where 对比、来源标注）
 - v2.2 (2026-05-19): 补全权威来源标注——新增跨语言生命周期（Lifetimes）对比矩阵（C++ / Haskell / Go），补充 Polonius 与 Tree Borrows 来源，深化 NLL → Polonius 演进论证
+- v2.3 (2026-07-28): P1 语义补齐——扩展生命周期省略规则（trait object 默认边界、`const`/`static` 隐式 `'static`、函数指针/闭包 trait elision、`'_` placeholder），明确 `'static ⊑ 'a` 中 `⊑` 表示 outlives 且与 subtype 方向相反；Rust 版本更新至 1.97.1+
 - v2.1 (2026-05-13): Phase BC 形式化深化——新增§1.3b Tofte-Talpin 区域推断算法的 Rust 适配（原始 ML 算法概述、三项关键适配、Rust 约束生成与求解两阶段算法、与 Polonius 演进关系）
 - v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡
 
@@ -87,6 +88,7 @@ mindmap
     - [2.1 生命周期标注矩阵](#21-生命周期标注矩阵)
     - [2.2 生命周期关系矩阵](#22-生命周期关系矩阵)
     - [2.3 生命周期省略规则（Elision Rules）](#23-生命周期省略规则elision-rules)
+      - [2.3.1 Elision 的其余权威场景](#231-elision-的其余权威场景)
   - [三、思维导图（Mind Map）](#三思维导图mind-map)
   - [四、定理推理链（Theorem Chain）](#四定理推理链theorem-chain)
     - [4.1 引理：引用不能比数据活得更久 ⟹ 悬垂指针在编译期被消除](#41-引理引用不能比数据活得更久--悬垂指针在编译期被消除)
@@ -316,6 +318,49 @@ Polonius 的改进:
 | **Rule 2** | 若只有一个输入生命周期，所有输出生命周期等于它 | `fn foo(x: &'a T) -> &'a U` | `fn first(s: &str) -> &str` |
 | **Rule 3** | 若有 `&self` 或 `&mut self`，输出生命周期等于 `self` | `fn foo(&self) -> &T` → `fn foo<'a>(&'a self) -> &'a T` | `impl MyStruct { fn get(&self) -> &T }` |
 
+#### 2.3.1 Elision 的其余权威场景
+
+> **[Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html)** 除函数签名的三条规则外，还在 trait object、`const`/`static`、函数指针/闭包 trait 与 `'_` 占位符中存在隐式 `'static` 或默认生命周期绑定。
+
+| **场景** | **默认/省略行为** | **显式写法** | **说明** |
+|:---|:---|:---|:---|
+| **Trait object 生命周期** | 默认边界取决于上下文：`Box<dyn Trait>` → `dyn Trait + 'static`；`&'a dyn Trait` → `dyn Trait + 'a` | `dyn Trait + 'a` | 拥有型容器默认 `'static`，借用型容器继承引用生命周期；显式 `+ 'a` 可放宽 |
+| **`const`/`static` 引用** | `const X: &str = "..."` 隐式 `'static` | `const X: &'static str = "..."` | `const` 与 `static` 的初始化值被提升为 `'static`；显式标注可省略 |
+| **函数指针/闭包 trait** | `fn(&str) -> &str` 中引用生命周期按函数 elision 推断 | `for<'a> fn(&'a str) -> &'a str` | 高阶函数指针与 `Fn`、`FnMut`、`FnOnce` trait bound 同样适用 elision |
+| **`'_` 占位符** | `&'_ str` 等价于 `&'a str`（由编译器分配新生命周期参数） | `&'a str` | 用于“需要标注但无需命名”的场景，如 `Box<dyn Trait + '_>` 中避免默认 `'static` |
+
+**关键边界示例**：
+
+```rust
+// Trait object 默认 'static：裸 dyn Trait 只能持有 'static 数据
+fn static_trait_object() -> Box<dyn std::fmt::Display> {
+    Box::new("hello")  // &'static str 满足默认 'static
+}
+
+// 若需要非 'static，必须显式写 + 'a
+fn borrowed_trait_object<'a>(s: &'a str) -> Box<dyn std::fmt::Display + 'a> {
+    Box::new(s)
+}
+
+// '_ 占位符：避免 dyn Trait 默认 'static，同时无需命名生命周期
+fn elided_trait_object(s: &str) -> Box<dyn std::fmt::Display + '_> {
+    Box::new(s)
+}
+
+// 函数指针类型支持 elision：等价于 type Callback = for<'a> fn(&'a str) -> &'a str;
+type Callback = fn(&str) -> &str;
+
+// 闭包 trait bound 同样适用：F 接受任意短生命周期引用并返回同生命周期引用
+fn with_closure<F>(f: F, s: &str) -> String
+where
+    F: Fn(&str) -> &str,
+{
+    f(s).to_string()
+}
+```
+
+> **来源**: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html)
+
 ---
 
 > **过渡**: 属性矩阵展示了生命周期规则的静态特征，接下来需要建立概念之间的关联网络——生命周期如何与借用（Borrowing）、泛型（Generics）、异步（Async）等机制交织，形成完整的引用安全体系。
@@ -393,6 +438,8 @@ graph TD
   ⟹ 编译器可通过约束求解判断任意生命周期组合的有效性
 ```
 
+> **符号说明**: 此处 `⊑` 读作 **outlives**（“至少活得和…一样长”），`'a ⊑ 'b` 等价于 `'a: 'b`。这与 Rust 子类型方向**相反**：`'static` 是最长生命周期，因此 `'static ⊑ 'a` 对任意 `'a` 成立；但在子类型记号中 `'static <: 'a`（`'static` 是 `'a` 的子类型），所以 `&'static str` 是 `&'a str` 的子类型。换言之，"活得长"在 outlives 序中是"大元"，在子类型序中是"子类型"；`⊑` 描述生命周期自身的偏序，`<:` 描述引用类型的子类型关系，两者方向相反但互不矛盾。
+>
 > **[来源: [Rust Reference: Subtyping](https://doc.rust-lang.org/reference/subtyping.html)]** Rust 中生命周期子类型关系 'static <: 'a 的形式化定义。✅
 
 **生命周期偏序集 Hasse 图（Mermaid）**:
@@ -1132,7 +1179,7 @@ fn print_it<T: Display + 'static>(t: T) { ... }
 
 **答案**：`T` 必须实现 `Display`，且 `T` 中**不包含任何非 `'static` 的引用**。注意：`T: 'static` 不表示 `T` 本身必须存活整个程序运行期，而是表示 `T` 内部没有引用局部数据（即 `T` 可以安全地在线程间传递或长期存储）。例如 `String: 'static`，`&'static str: 'static`，但 `&'a i32`（其中 `'a` 不是 `'static`）不满足 `T: 'static`。
 </details>
-> **权威来源**: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/introduction.html) · [TRPL — Validating References with Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · [Rustonomicon — Lifetimes](https://doc.rust-lang.org/nomicon/lifetimes.html)
+> **权威来源**: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetimes.html) · [TRPL — Validating References with Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · [Rustonomicon — Lifetimes](https://doc.rust-lang.org/nomicon/lifetimes.html)
 >
 > **权威来源对齐变更日志**: 2026-07-10 补充权威来源标注（Rust Reference、TRPL、Rustonomicon）
 

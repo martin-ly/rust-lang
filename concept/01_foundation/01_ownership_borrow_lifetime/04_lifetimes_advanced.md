@@ -14,7 +14,7 @@
 >
 > **来源**: · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 >
-> [TRPL — Advanced Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) ·
+> [TRPL — Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) ·
 > [Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) ·
 > [Reference — Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html) ·
 > [Brown University Interactive Book](https://rust-book.cs.brown.edu/ch10-03-lifetime-syntax.html)
@@ -860,7 +860,7 @@ impl<'s> Iterator for Words<'s> {
 Lending Iterator 通过 GATs 将 `Item` 参数化为 `Item<'a>`，并用 `where Self: 'a` 确保**迭代器本身至少存活到返回引用的生命周期**，从而安全地表达自引用迭代。这是 GATs 解决表达力鸿沟的经典案例。
 
 > **[来源: [RFC 1598](https://rust-lang.github.io/rfcs//1598-generic_associated_types.html) (GATs)]** `where Self: 'a` 约束确保关联类型不会引用比 `Self` 更短的生命周期，构成自引用集合的类型安全基础。✅
-> **来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html); [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
+> **来源: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html); [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html); [Rust RFCs](https://github.com/rust-lang/rfcs); Academic Papers** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 > **来源: [Wikipedia](https://en.wikipedia.org/wiki/Main_Page); POPL/PLDI/ECOOP Papers; [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)/Iris Project** 形式化概念参考了权威学术来源和类型论研究。✅
 
 ---
@@ -1259,7 +1259,7 @@ fn read_int(u: &Value) -> i32 {
 | **Variable shadowing** | [Variable shadowing](https://en.wikipedia.org/wiki/Variable_shadowing) | 变量遮蔽 |
 | **Non-lexical lifetimes** | [Non-lexical lifetimes](https://en.wikipedia.org/wiki/Rust_(programming_language)#Non-lexical_lifetimes) | 非词法生命周期 |
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源**: [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html), [Rustonomicon — Lifetimes](https://doc.rust-lang.org/nomicon/lifetimes.html)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../../00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.1
@@ -1497,7 +1497,7 @@ fn main() {
 ```
 
 > **变型洞察**: **变型**是 Rust 类型系统（Type System）的**隐藏齿轮**——它解释了为什么某些生命周期转换合法而另一些不合法。
-> [来源: [The Rustonomicon — Subtyping and Variance](https://doc.rust-lang.org/nomicon/subtyping.html)] · [TRPL — Advanced Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
+> [来源: [The Rustonomicon — Subtyping and Variance](https://doc.rust-lang.org/nomicon/subtyping.html)] · [TRPL — Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
 
 ### 18.2 生命周期与闭包：三种捕获模式
 

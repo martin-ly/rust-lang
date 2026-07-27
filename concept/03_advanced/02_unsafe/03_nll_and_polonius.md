@@ -575,7 +575,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
+> **权威来源**: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetimes.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/05_international_authority_index.md)
 

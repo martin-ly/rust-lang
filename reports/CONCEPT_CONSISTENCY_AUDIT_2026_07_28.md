@@ -1,9 +1,9 @@
 # 概念一致性审计报告 (Concept Consistency Audit)
 
-> 生成时间: 2026-07-28T03:02:01.686080
+> 生成时间: 2026-07-28T04:27:47.990660
 > 生成脚本: `scripts/concept_consistency_auditor.py`(扩展后监控 22 个核心概念)
 > 扫描文件数: 537
-> 提取概念定义数: 4732
+> 提取概念定义数: 4763
 > 跨文件引用数: 302
 
 ## 目录
@@ -72,42 +72,42 @@
 
 | 概念 | 提取次数 | 涉及文件数 |
 |:---|:---|:---|
-| RPITIT-RTN-TAIT-定义 | 472 | 49 |
-| unsafe-UB | 458 | 128 |
+| RPITIT-RTN-TAIT-定义 | 476 | 49 |
+| unsafe-UB | 460 | 128 |
 | effects-system-定义 | 360 | 39 |
 | 所有权-Move语义 | 269 | 95 |
-| Pin-自引用 | 240 | 69 |
+| Pin-自引用 | 242 | 69 |
 | const-trait-impl-定义 | 179 | 34 |
 | effects-system-现有 | 171 | 22 |
+| Pin-投影-结构 | 170 | 34 |
 | allocator-api-GlobalAlloc | 166 | 38 |
-| Pin-投影-结构 | 165 | 33 |
 | Send+Sync | 131 | 65 |
 | 所有权-作用域绑定 | 105 | 61 |
 | 借用-可变独占 | 104 | 40 |
 | 变型-定义 | 102 | 22 |
 | 内部可变性-运行时检查 | 101 | 32 |
-| let-chains-守卫 | 98 | 35 |
-| async-Future-状态机 | 97 | 39 |
-| 生命周期-子类型-outlives | 92 | 27 |
+| let-chains-守卫 | 100 | 35 |
+| async-Future-状态机 | 99 | 39 |
+| 生命周期-子类型-outlives | 94 | 27 |
 | const-trait-impl-效果 | 88 | 19 |
-| unsafe-extern-块 | 81 | 15 |
-| unsafe-extern-safe | 80 | 17 |
+| unsafe-extern-safe | 83 | 17 |
+| unsafe-extern-块 | 83 | 15 |
 | RPITIT-RTN-TAIT-捕获 | 80 | 24 |
+| let-chains-链式 | 80 | 9 |
 | GAT-async-生命周期 | 79 | 17 |
-| let-chains-链式 | 78 | 9 |
 | GAT-async-边界 | 74 | 20 |
 | 所有权-唯一所有权 | 72 | 37 |
-| 变型-规则 | 71 | 14 |
+| 变型-规则 | 70 | 14 |
 | unsafe-契约 | 62 | 33 |
-| match-ergonomics-默认绑定 | 54 | 31 |
+| match-ergonomics-默认绑定 | 55 | 32 |
 | unsafe-superpowers-unsafe_op | 53 | 13 |
 | 内部可变性-定义 | 49 | 24 |
 | Sync | 49 | 24 |
+| 生命周期-子类型-static | 39 | 14 |
 | async-Future-等价 | 38 | 22 |
-| 生命周期-子类型-static | 37 | 14 |
+| Unpin-定义 | 37 | 11 |
 | unsafe-不变式 | 37 | 6 |
 | 借用-引用有效 | 36 | 22 |
-| Unpin-定义 | 35 | 11 |
 | Send/Sync边界-trait对象 | 35 | 10 |
 | temporary-scope-临时作用域 | 31 | 11 |
 | unsafe-语义 | 24 | 16 |
@@ -120,8 +120,8 @@
 | 所有权-Copy例外 | 11 | 7 |
 | 生命周期-Rule2 | 11 | 4 |
 | allocator-api-Allocator | 11 | 5 |
+| Pin-投影-安全 | 10 | 7 |
 | 生命周期-Rule3 | 9 | 3 |
-| Pin-投影-安全 | 9 | 6 |
 | 生命周期-Rule1 | 7 | 2 |
 | unsafe-superpowers-五种能力 | 4 | 3 |
 | 内部可变性-UnsafeCell | 2 | 2 |

@@ -4,7 +4,7 @@
 >
 > - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI 第 2 版（wasip2）对应目标为 **`wasm32-wasip2`**。
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 
 ---
 
@@ -57,6 +57,7 @@
 > **Bloom 层级**: L3-L5
 **变更日志**:
 
+- v4.3 (2026-07-28): P1 语义补齐——新增§3.1a `async fn` 参数捕获与 drop 顺序边界、`async unsafe fn` 边界示例，引用 Rust Reference — Async functions / Functions；Rust 版本更新至 1.97.1+
 - v4.2 (2026-05-13): Phase B 验证实践——新增§8.13 Miri 动态验证场景（悬垂指针检测、无效 bool 检测、async 状态机未初始化内存检测，含实际 Miri 输出截图）
 - v4.1 (2026-05-13): Phase B 形式化深化——新增§3.1b 状态机操作语义（小步语义、poll 状态转移函数、.await CPS 变换、Pin 约束在操作语义中的体现）；新增§3.2b Pin LTL 形式化（不动性公理 A1-A3、Unpin 豁免、poll 递归调用链验证、与§3.1b 操作语义衔接）
 - v4.0 (2026-05-13): Phase 4 待办清理——新增§8.9 Waker/Context 底层机制（VTable、自定义 Reactor）、§8.10 Stream/Sink trait 完整分析（异步（Async）迭代器（Iterator）与生产者）、§8.11 `Pin<Box<dyn Future>>` vs impl Future 性能差异（动态/静态分发、栈 pinning）、§8.12 loom 并发模型检测工具
@@ -100,11 +101,16 @@
     - [2.3 运行时对比矩阵](#23-运行时对比矩阵)
   - [三、形式化理论根基（Formal Foundation）](#三形式化理论根基formal-foundation)
     - [3.1 async fn 作为状态机：精确推导](#31-async-fn-作为状态机精确推导)
+    - [3.1a async fn 参数捕获与 async unsafe fn 边界](#31a-async-fn-参数捕获与-async-unsafe-fn-边界)
+      - [边界 1：参数捕获与 drop 时机](#边界-1参数捕获与-drop-时机)
+      - [边界 2：async unsafe fn 的安全边界](#边界-2async-unsafe-fn-的安全边界)
     - [3.1b 状态机操作语义（Operational Semantics）](#31b-状态机操作语义operational-semantics)
       - [状态机类型归纳定义](#状态机类型归纳定义)
       - [poll 作为状态转移函数](#poll-作为状态转移函数)
       - [.await 的 CPS 变换规则](#await-的-cps-变换规则)
       - [Pin 约束在操作语义中的体现](#pin-约束在操作语义中的体现)
+      - [async fn 参数捕获与 drop 顺序边界](#async-fn-参数捕获与-drop-顺序边界)
+      - [async unsafe fn 的边界](#async-unsafe-fn-的边界)
     - [3.2 Pin 的形式化语义](#32-pin-的形式化语义)
     - [3.2b Pin 的 LTL 形式化（异步状态机语境）](#32b-pin-的-ltl-形式化异步状态机语境)
       - [不动性公理（Immobility Axiom）](#不动性公理immobility-axiom)
@@ -335,7 +341,7 @@ Poll 类型:
 | **运行时（Runtime）** | **调度策略** | **线程池** | **生态** | **适用场景** |
 |:---|:---|:---|:---|:---|
 | **Tokio** | 工作窃取 M:N | 多线程 | 最丰富（axum, tonic, hyper） | 生产级服务端 |
-| **Tokio** | 工作窃取 M:N | 多线程 | 中等 | 通用异步 |
+| **async-std** | 工作窃取 M:N | 多线程 | 中等 | 通用异步（⚠️ 2025-08 停止维护，建议迁移到 smol/Tokio） |
 | **smol** | 简单高效 | 可配置 | 轻量 | 嵌入式/低资源 |
 | **embassy** | 协程/中断驱动 | 单线程 | 嵌入式 | IoT/嵌入式 |
 | **glommio** | 线程 per core | 1 线程/核心 | 专用 | 存储/IO 密集型 |
@@ -412,6 +418,71 @@ Pin<&mut Self> 的内存布局约束:
 > **[TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html)** Pin 是 async/await 安全的关键——编译器生成的状态机可能包含自引用（Reference）（局部变量的引用），Pin 防止状态机被 move 后引用失效。✅ 已验证
 > **[Phil-opp OS blog]** 自引用结构在操作系统开发中常见（如页表自引用），Pin 提供了类型系统（Type System）级别的安全保证。✅ 已验证
 > **[RFC 2349: Pin](https://rust-lang.github.io/rfcs/2349-pin.html)** `Pin<P<T>>` was introduced to guarantee that `!Unpin` values cannot be moved, providing the formal foundation for safe self-referential async state machines. ✅ 已验证
+
+### 3.1a async fn 参数捕获与 async unsafe fn 边界
+
+> **[Rust Reference: Async functions](https://doc.rust-lang.org/reference/items/functions.html#async-functions)** `async fn` 的参数与局部变量一样，在函数体被求值前即被捕获进返回的 Future；因此参数的析构发生在 Future 被完全 `.await`（或整个 Future 被 drop）之后，而非调用 `async fn` 的当下。
+> **[Rust Reference: Functions — unsafe functions](https://doc.rust-lang.org/reference/items/functions.html#unsafe-functions)** `async unsafe fn` 的 `unsafe` 修饰的是**调用**该函数的动作；函数返回的 Future 本身可以交给 safe 代码 `.await`，因为 `.await` 不再触发 `unsafe` 块中的操作。
+
+#### 边界 1：参数捕获与 drop 时机
+
+与普通函数不同，`async fn` 在被调用时不会立即执行函数体，而是把所有参数打包进一个 Future。参数的生命周期因此与 Future 绑定，直到 Future 完成或被丢弃：
+
+```rust,no_run
+struct LoudDrop(&'static str);
+
+impl Drop for LoudDrop {
+    fn drop(&mut self) {
+        println!("dropping: {}", self.0);
+    }
+}
+
+async fn consume(_x: LoudDrop) {
+    println!("async body started");
+    std::future::ready(()).await;
+    println!("async body ended");
+}
+
+fn main() {
+    let fut = consume(LoudDrop("argument"));
+    println!("future created, not awaited yet");
+    // 此时 _x 仍被 Future 持有，尚未 drop
+    drop(fut); // 或 fut.await;
+    // 输出顺序：
+    // future created, not awaited yet
+    // dropping: argument
+}
+```
+
+> 若把 `consume` 写成普通 `fn consume(_x: LoudDrop)`，参数在函数返回时即被 drop；`async fn` 则把 drop 推迟到 Future 生命周期的末尾。这一差异对持有锁、文件描述符或内存池句柄的参数尤为重要：调用 `async fn` 不会立即释放资源。
+
+#### 边界 2：async unsafe fn 的安全边界
+
+`async unsafe fn` 的 `unsafe` 关键字只作用于**发起调用**的那一刻，生成 Future 之后的行为由 `.await` 驱动，而 `.await` 本身是 safe 操作：
+
+```rust
+async unsafe fn read_kernel_buffer() -> i32 {
+    // 假设此处执行某种 unsafe 系统调用
+    42
+}
+
+async fn caller() -> i32 {
+    // 调用 async unsafe fn 需要 unsafe 块
+    let fut = unsafe { read_kernel_buffer() };
+    // 但 .await 该 Future 不需要 unsafe
+    fut.await
+}
+
+fn main() {
+    let _ = caller();
+}
+```
+
+> 这一设计符合 Rust 的 `unsafe` 边界原则：`unsafe` 块应尽可能小，只覆盖真正调用 unsafe 操作的表达式。Future 被 `.await` 时只是轮询状态机，不再进入 `unsafe` 上下文，因此可以在 safe 代码中传播与组合。
+
+---
+
+> **来源**: [Rust Reference: Async functions](https://doc.rust-lang.org/reference/items/functions.html#async-functions) · [Rust Reference: Functions — unsafe functions](https://doc.rust-lang.org/reference/items/functions.html#unsafe-functions)
 
 ### 3.1b 状态机操作语义（Operational Semantics）
 
@@ -508,30 +579,36 @@ stateDiagram-v2
 
 #### .await 的 CPS 变换规则
 
+> **与 Reference 的精确对齐**：`.await` 操作数首先通过 [`IntoFuture::into_future`](https://doc.rust-lang.org/std/future/trait.IntoFuture.html) 转换为 `Future`，随后被临时固定（pin）到栈上，再进入 poll 循环。来源：[Rust Reference — Await expressions](https://doc.rust-lang.org/reference/expressions/await-expr.html)。
+
 ```text
 .await 不是语法糖，而是编译期的 CPS（Continuation-Passing Style）变换：
 
-  源程序:  let x = fut.await;
+  源程序:  let x = fut.await;   // fut 类型为 F，且 F: IntoFuture
            rest(x)
 
-  CPS 变换:
-    fut.poll(cx).then(|result| {
-        match result {
-            Ready(v) => rest(v),           -- 继续执行后续代码
+  编译器 desugaring（含 IntoFuture 与临时 Pin）：
+    let mut tmp = IntoFuture::into_future(fut);   // 先转换为 Future
+    let mut pinned = unsafe { Pin::new_unchecked(&mut tmp) }; // 栈上临时固定
+    loop {
+        match pinned.as_mut().poll(cx) {
+            Ready(v) => break rest(v),      -- 继续执行后续代码
             Pending  => {
                 save_continuation(|| rest); -- 保存续体到状态机
-                Pending                     -- 向父级返回 Pending
+                yield Pending;              -- 向父级返回 Pending，恢复后重新 poll
             }
         }
-    })
+    }
 
 形式化性质:
+  - .await 操作数需满足 `IntoFuture`，编译器自动调用 `into_future()`
+  - 临时 Future 在栈上通过 `Pin::new_unchecked` 固定，保证 poll 期间地址恒定
   - .await 点是**可重入的（reentrant）**: 同一个状态机可被多次 poll
   - .await 点是**可取消的（cancellable）**: 若 Future 被 drop，续体不会执行
   - .await 点是**无栈的（stackless）**: 续体保存在堆分配的状态机中，非调用栈
 ```
 
-> **来源**: [without.boats blog: Await is not syntactic sugar] · [RFC 2394 §4: await desugaring](https://rust-lang.github.io/rfcs/2394-async_await.html) · [Appel 1992 — Compiling with Continuations]
+> **来源**: [Rust Reference — Await expressions](https://doc.rust-lang.org/reference/expressions/await-expr.html) · [without.boats blog: Await is not syntactic sugar] · [RFC 2394 §4: await desugaring](https://rust-lang.github.io/rfcs/2394-async_await.html) · [Appel 1992 — Compiling with Continuations]
 
 #### Pin 约束在操作语义中的体现
 
@@ -554,6 +631,57 @@ stateDiagram-v2
 ```
 
 > **来源**: [Rust Reference: Pin methods](https://doc.rust-lang.org/reference/introduction.html) · [RFC 2349 §3: Pin invariants](https://rust-lang.github.io/rfcs/2349-pin.html) · [Rustonomicon: Pinning](https://doc.rust-lang.org/std/pin/struct.Pin.html)
+
+#### async fn 参数捕获与 drop 顺序边界
+
+> **[Rust Reference — Async functions](https://doc.rust-lang.org/reference/items/functions.html#async-functions)** 调用 `async fn` 时，所有参数会被捕获进返回的 Future 状态机；这些参数在 Future 被完整 `.await` 到 `Ready` 之前不会被 drop。
+
+```rust,ignore
+use std::sync::Arc;
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+struct DropCounter(Arc<AtomicUsize>);
+impl Drop for DropCounter {
+    fn drop(&mut self) { self.0.fetch_add(1, Ordering::SeqCst); }
+}
+
+async fn consume(x: DropCounter) -> usize {
+    // x 已被移动进 Future 状态机，但此时尚未 drop
+    async {}.await;
+    // 返回后，状态机字段 x 才会 drop
+    x.0.load(Ordering::SeqCst)
+}
+
+fn main() {
+    let c = Arc::new(AtomicUsize::new(0));
+    let fut = consume(DropCounter(c.clone())); // 参数移动进 fut，未 drop
+    assert_eq!(c.load(Ordering::SeqCst), 0);
+    let _ = tokio::runtime::Runtime::new().unwrap().block_on(fut);
+    assert_eq!(c.load(Ordering::SeqCst), 1); // Future 完成后 drop
+}
+```
+
+> **关键边界**：`async fn` 的调用点**不立即执行函数体**，也不立即 drop 参数；参数的生命周期被延长至 Future 完成。若 Future 被提前 drop（如 `select!` 落选），参数会在此时 drop。
+
+#### async unsafe fn 的边界
+
+> **[Rust Reference — Functions](https://doc.rust-lang.org/reference/items/functions.html)** `async unsafe fn` 的 `unsafe` 只作用于**调用**该函数的那一刻；返回的 Future 本身可以在 safe 代码中被 `.await`。
+
+```rust,ignore
+async unsafe fn dangerous() -> i32 {
+    // 函数体内部可执行 unsafe 操作
+    42
+}
+
+async fn caller() -> i32 {
+    // 只有初始调用需要 unsafe 块
+    let fut = unsafe { dangerous() };
+    // .await 本身不需要 unsafe
+    fut.await
+}
+```
+
+> **关键边界**：`async unsafe fn` 不等于 `unsafe { async fn }`。前者的 unsafe 契约在调用时履行，之后产生的 Future 是普通的 `impl Future<Output = i32>`，可以在 safe 上下文中 poll/await。
 
 ---
 
@@ -2705,7 +2833,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 | **Promise (programming)** | [Promise (programming)](https://en.wikipedia.org/wiki/Promise_(programming)) | Promise |
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch17-00-async-await.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html), [Async Book](https://rust-lang.github.io/async-book/index.html), [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html), [RFC 2349 — Pin](https://rust-lang.github.io/rfcs/2349-pin.html)
-> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 更新权威来源块 [Authority Source Sprint Batch 10](../../00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-07-10 Stage F L3 更新权威来源块 [Authority Source Sprint Batch 10](../../00_meta/02_sources/05_international_authority_index.md)；2026-07-28 修正运行时矩阵重复 Tokio 行，并在 `.await` CPS 变换中补充 `IntoFuture::into_future` 与临时 `Pin::new_unchecked`。
 
 **文档版本**: 1.1
 **最后更新**: 2026-05-19

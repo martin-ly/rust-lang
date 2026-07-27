@@ -2,7 +2,7 @@
 
 > **EN**: Let Chains and If-Let Guards
 > **Summary**: Authoritative semantics for Rust `let chains` and `if-let guards` covering pattern-binding visibility, refutability constraints, `&&`-only connection, and nested equivalence.
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 >
 > **受众**: [初学者]
 > **内容分级**: [综述级]
@@ -31,7 +31,7 @@
 ---
 > **权威来源**: [Rust Reference — If let expressions](https://doc.rust-lang.org/reference/expressions/if-expr.html#if-let-expressions) · [Rust Reference — Match expressions](https://doc.rust-lang.org/reference/expressions/match-expr.html)
 >
-> **权威来源对齐变更日志**: 2026-07-15 创建权威页（Rust 1.97.0 / Edition 2024）。
+> **权威来源对齐变更日志**: 2026-07-15 创建权威页（Rust 1.97.0 / Edition 2024）；2026-07-28 修正 `let chains` 与 `if-let guards` 稳定版本号。
 
 ---
 
@@ -334,14 +334,15 @@ fn main() {
 
 | 特性 | 稳定版本 | 当前项目版本 |
 |---|---|---|
-| `let chains` | Rust 1.64（2022-09） | ✅ 1.97.0+ 可用 |
-| `if-let guards` | Rust 1.83（2024-11） | ✅ 1.97.0+ 可用 |
+| `let chains` | Rust 1.88.0 / Edition 2024（2026-01） | ✅ 1.97.0+ 可用 |
+| `if-let guards` | Rust 1.95.0（2026-04） | ✅ 1.97.0+ 可用 |
 | Edition 2024 语法兼容 | — | ✅ 无额外 `feature` 开关 |
+
+> **版本说明**：Rust Reference 当前明确说明 `let chains` 仅在 Edition 2024 及以后受支持；`if-let guards` 在 Rust 1.95.0 稳定化。来源：[Rust Reference — If let expressions](https://doc.rust-lang.org/reference/expressions/if-expr.html#if-let-expressions)、[Rust 1.88.0 release notes](https://blog.rust-lang.org/2026/01/29/Rust-1.88.0.html)、[Rust 1.95.0 release notes](https://blog.rust-lang.org/2026/04/24/Rust-1.95.0.html)。
 
 在 Edition 2024 下：
 
-- `let chains` 自 Rust 1.64 起已稳定，无需特性门控；
-- `if-let guards` 同样已稳定；
+- `let chains` 与 `if-let guards` 均已稳定，无需特性门控；
 - 与 `match ergonomics`、默认绑定模式、`let-else` 等特性共同构成现代 Rust 的模式控制流体系。
 
 > `let-else` 与 `let chains` 互补：前者用于早退，后者用于连续过滤。
@@ -430,7 +431,7 @@ fn main() {
 | 绑定可见性 | 向右可见，true 分支内可见，不向外泄漏 | 临时作用域规则 |
 | 短路语义 | 左侧匹配失败则右侧不执行 | `&&` 短路 |
 | 与 `let-else` 关系 | `let-else` 用于早退；`let chains` 用于连续过滤 | 互补语法 |
-| 稳定版本 | `let chains` 1.64+；`if-let guards` 1.83+ | Rust 稳定化历史 |
+| 稳定版本 | `let chains` 1.88.0 / Edition 2024；`if-let guards` 1.95.0 | Rust 稳定化历史 |
 
 ## 十、概念关系
 
@@ -444,8 +445,10 @@ fn main() {
 
 ## 国际权威参考 / International Authority References（P2 生态）
 
-- [Rust 1.83.0 发布公告 — `if-let-guards` 稳定化](https://blog.rust-lang.org/2024/11/28/Rust-1.83.0.html)
-- [Rust 1.64.0 发布公告 — `let_chains` 稳定化](https://blog.rust-lang.org/2022/09/22/Rust-1.64.0.html)
+- [Rust 1.95.0 发布公告 — `if-let-guards` 稳定化](https://blog.rust-lang.org/2026/04/24/Rust-1.95.0.html)
+- [Rust 1.88.0 发布公告 — `let_chains` 在 Edition 2024 稳定化](https://blog.rust-lang.org/2026/01/29/Rust-1.88.0.html)
+- [RFC 2497 — if-let-chains](https://rust-lang.github.io/rfcs/2497-if-let-chains.html)
+- [RFC 2294 — if-let-guard](https://rust-lang.github.io/rfcs/2294-if-let-guard.html)
 
 ---
 
