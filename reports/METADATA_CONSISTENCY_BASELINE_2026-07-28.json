@@ -1,0 +1,54 @@
+{
+  "summary": {
+    "date": "2026-07-28",
+    "scanned": 550,
+    "counts": {
+      "D1": 0,
+      "D2": 1,
+      "D3": 0,
+      "D4": 0,
+      "D5": 0,
+      "D6": 1
+    },
+    "pct": {
+      "D1": 0.0,
+      "D2": 0.2,
+      "D3": 0.0,
+      "D4": 0.0,
+      "D5": 0.0,
+      "D6": 0.2
+    },
+    "D2_base_files_with_asp_and_bloom": 334,
+    "flagged_files": 2
+  },
+  "examples": {
+    "D1": [],
+    "D2": [
+      [
+        "concept/03_advanced/02_unsafe/09_sanitizers.md",
+        "A/S/P=A 允许 [1, 2] 与 Bloom [3, 4] 无交集"
+      ]
+    ],
+    "D3": [],
+    "D4": [],
+    "D5": [],
+    "D6": [
+      [
+        "concept/06_ecosystem/01_cargo/05_cargo_build_scripts.md",
+        "Summary 为空"
+      ]
+    ]
+  },
+  "per_file": {
+    "concept/03_advanced/02_unsafe/09_sanitizers.md": {
+      "D2": [
+        "A/S/P=A 允许 [1, 2] 与 Bloom [3, 4] 无交集"
+      ]
+    },
+    "concept/06_ecosystem/01_cargo/05_cargo_build_scripts.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    }
+  }
+}

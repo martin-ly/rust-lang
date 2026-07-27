@@ -43,8 +43,9 @@ url = { workspace = true }
 rustls = { workspace = true, optional = true }
 
 # Kafka support (optional, requires librdkafka build environment)
-# 2026-07-11: 锁定 0.37 (0.39 已发布但为 0.x 破坏性升级，且需 librdkafka/cmake 环境验证，
-#       Windows 主机无法编译验证，故保守保持；kafka 为可选 feature)
+# 2026-07-27: 0.39 已发布但 rdkafka-sys 4.10 在 Windows 上构建失败
+#       （执行 configure shell 脚本时报 "%1 不是有效的 Win32 应用程序"），
+#       当前 Windows 主机无法验证，故保守保持 0.37
 rdkafka = { version = "0.37", features = ["tokio"], optional = true }
 
 # Kubernetes ecosystem examples
@@ -126,15 +127,13 @@ axum = { workspace = true }
 ring = { workspace = true }
 # 2026-07-04: cargo update 后同步到当前解析版本
 mongodb = "3.7.0"
-# 2026-07-11: 锁定 2.5.5 (lapin 3.x/4.x 为大版本 API 重写，amq-protocol 生态尚未迁移；
-#       作为 dev-dependency 仅用于示例，保守保持)
-lapin = "2.5.5"
+# 2026-07-27: 升级至 lapin 4.x，示例代码已适配新 API
+lapin = "4.10.0"
 # 2026-07-08: kube 0.98 -> 4.0.0，k8s-openapi 0.24 -> 0.25，消除 backoff unmaintained 传递依赖
 # 2026-07-22: kube 4.0.0 -> 4.2.0（cargo update）
 
-# 2026-07-11: 锁定 0.10 (aes-gcm 0.11 已发布但切换至 aead 0.6 / hybrid-array 新栈；
-#       cookie/sqlx 生态仍在 aead 0.5 + digest 0.10，保守保持)
-aes-gcm = "0.10"
+# 2026-07-27: 升级至 0.11，基准代码使用新 API；aead 0.5/0.6 多版本共存由 Cargo 解析
+aes-gcm = "0.11"
 sha2 = { workspace = true }
 lru = { workspace = true }
 chrono = { workspace = true }

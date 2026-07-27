@@ -239,6 +239,14 @@ D5_WHITELIST_FILES = {
     # 目标页为 preview 权威页，preview 为页名与目标概念一部分，非稳定层正文残留。
     "concept/04_formal/02_separation_logic/03_safety_tags_in_formal.md":
         "稳定层重定向 stub，指向 `07_future/02_preview_features/03_safety_tags_preview.md`；preview 为页名/目标概念一部分",
+    # ---- 2026-07-28 依赖升级后复核登记：以下页面 nightly/preview/unstable 提及均为页面主题
+    # 或权威来源索引中的合法引用，非稳定层正文残留不稳定依赖。
+    "concept/00_meta/02_sources/06_external_authority_topic_index.md":
+        "外部权威来源主题索引：TRPL Appendix 'Nightly Rust' 为外部主题名引用；Async IOUring Preview 指向 07_future 预览权威页",
+    "concept/03_advanced/02_unsafe/09_sanitizers.md":
+        "Sanitizers 页面主题即 LLVM 运行时检测工具族；`-Z sanitizer=...` 与 The Unstable Book 引用为工具链事实陈述",
+    "concept/06_ecosystem/00_toolchain/16_rustdoc_internals.md":
+        "rustdoc 内部实现页；JSON 输出 unstable/nightly 用法与 docs.rs nightly 行为为工具链事实陈述",
 }
 
 

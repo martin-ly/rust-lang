@@ -1,6 +1,56 @@
 
 # cargo-vet audits file
 
+[[audits.aead]]
+criteria = "safe-to-run"
+version = "0.6.1"
+notes = "2026-07-27: aead 0.6.1 (RustCrypto 官方维护) 为 aes-gcm 0.11 升级后的传递依赖，仅用于 benchmark 中的本地 AEAD 加密示例。"
+
+[[audits.aes]]
+criteria = "safe-to-run"
+version = "0.9.2"
+notes = "2026-07-27: aes 0.9.2 (RustCrypto 官方维护) 为 aes-gcm 0.11 升级后的传递依赖，仅用于 benchmark 中的本地 AES 加密示例。"
+
+[[audits.aes-gcm]]
+criteria = "safe-to-run"
+version = "0.11.0"
+notes = "2026-07-27: aes-gcm 0.11.0 (RustCrypto 官方维护) 为 c10_networks 的 benchmark 依赖，仅用于本地加密示例，不处理网络输入。"
+
+[[audits.amq-protocol]]
+criteria = "safe-to-run"
+version = "10.6.2"
+notes = "2026-07-27: amq-protocol 10.6.2 (AMQP 官方协议实现) 为 lapin 4.10.0 升级后的传递依赖，仅用于 AMQP 示例/测试路径。"
+
+[[audits.amq-protocol-tcp]]
+criteria = "safe-to-run"
+version = "10.6.2"
+notes = "2026-07-27: amq-protocol-tcp 10.6.2 为 lapin 4.10.0 的 TCP 传输层传递依赖，仅用于 AMQP 示例/测试路径。"
+
+[[audits.amq-protocol-types]]
+criteria = "safe-to-run"
+version = "10.6.2"
+notes = "2026-07-27: amq-protocol-types 10.6.2 为 lapin 4.10.0 的 AMQP 类型系统传递依赖，仅用于 AMQP 示例/测试路径。"
+
+[[audits.amq-protocol-uri]]
+criteria = "safe-to-run"
+version = "10.6.2"
+notes = "2026-07-27: amq-protocol-uri 10.6.2 为 lapin 4.10.0 的 AMQP URI 解析传递依赖，仅用于 AMQP 示例/测试路径。"
+
+[[audits.async-compat]]
+criteria = "safe-to-run"
+version = "0.2.5"
+notes = "2026-07-27: async-compat 0.2.5 (async-rs 官方维护) 为 lapin 4.10.0 的异步运行时兼容层传递依赖，仅用于 AMQP 示例/测试路径。"
+
+[[audits.async-rs]]
+criteria = "safe-to-run"
+version = "0.8.11"
+notes = "2026-07-27: async-rs 0.8.11 (async-rs 官方维护) 为 lapin 4.10.0 的异步 IO 传递依赖，仅用于 AMQP 示例/测试路径。"
+
+[[audits.backon]]
+criteria = "safe-to-run"
+version = "1.6.0"
+notes = "2026-07-27: backon 1.6.0 (Xuanwo 官方维护) 为 lapin 4.10.0 的重试策略传递依赖，仅用于 AMQP 示例/测试路径。"
+
 [[audits.bare-metal]]
 criteria = "safe-to-deploy"
 version = "0.2.5"
@@ -21,20 +71,90 @@ criteria = "safe-to-run"
 version = "1.2.67"
 notes = "2026-07-11: cc 1.2.67 (rust-lang/cc-rs 官方维护) 为构建脚本通用 C 编译驱动，patch 升级 (1.2.66->1.2.67)，仅构建期执行。"
 
+[[audits.cipher]]
+criteria = "safe-to-run"
+version = "0.5.2"
+notes = "2026-07-27: cipher 0.5.2 (RustCrypto 官方维护) 为 aes-gcm 0.11 升级后的传递依赖，仅用于 benchmark 中的本地加密示例。"
+
+[[audits.cpubits]]
+criteria = "safe-to-run"
+version = "0.1.1"
+notes = "2026-07-27: cpubits 0.1.1 为 lapin 4.10.0 的 CPU 特性检测传递依赖，仅用于 AMQP 示例/测试路径。"
+
+[[audits.ctr]]
+criteria = "safe-to-run"
+version = "0.10.1"
+notes = "2026-07-27: ctr 0.10.1 (RustCrypto 官方维护) 为 aes-gcm 0.11 升级后的传递依赖，仅用于 benchmark 中的本地加密示例。"
+
+[[audits.event-listener]]
+criteria = "safe-to-run"
+version = "5.4.2"
+notes = "2026-07-27: event-listener 5.4.2 (async-rs 官方维护) 为 cargo update 后新增依赖；在项目中仅用于测试/示例路径的异步同步原语，无网络安全暴露面。"
+
+[[audits.flume]]
+criteria = "safe-to-run"
+version = "0.12.0"
+notes = "2026-07-27: flume 0.12.0 (zesterer 官方维护) 为 lapin 4.10.0 的 MPSC 通道传递依赖，仅用于 AMQP 示例/测试路径。"
+
+[[audits.futures-rustls]]
+criteria = "safe-to-run"
+version = "0.26.0"
+notes = "2026-07-27: futures-rustls 0.26.0 为 lapin 4.10.0 的 TLS 异步封装传递依赖，仅用于 AMQP 示例/测试路径。"
+
+[[audits.ghash]]
+criteria = "safe-to-run"
+version = "0.6.0"
+notes = "2026-07-27: ghash 0.6.0 (RustCrypto 官方维护) 为 aes-gcm 0.11 升级后的 GHASH 传递依赖，仅用于 benchmark 中的本地加密示例。"
+
+[[audits.gloo-timers]]
+criteria = "safe-to-run"
+version = "0.3.0"
+notes = "2026-07-27: gloo-timers 0.3.0 (RustWasm 官方维护) 为 lapin 4.10.0 的 WASM 定时器传递依赖，仅用于 AMQP 示例/测试路径。"
+
 [[audits.hickory-proto]]
 criteria = "safe-to-deploy"
 version = "0.25.2"
 notes = "Formal audit stub for RUSTSEC-2026-0118/0119. hickory-proto 0.25.2 is only a Cargo.lock residual and not part of the active compilation graph; the project does not enable mdns, so the DNS proof-validation issue is not exploitable here. Replace with a real audit or upgrade once libp2p >0.56.0 is available."
+
+[[audits.inout]]
+criteria = "safe-to-run"
+version = "0.2.2"
+notes = "2026-07-27: inout 0.2.2 (RustCrypto 官方维护) 为 aes-gcm 0.11 升级后的传递依赖，仅用于 benchmark 中的本地加密示例。"
 
 [[audits.instant]]
 criteria = "safe-to-deploy"
 version = "0.1.13"
 notes = "Formal audit stub for RUSTSEC-2024-0384. instant is a time-utility crate used only by the experimental glommio module in c06_async on Linux. It is not exposed to untrusted input and has no security-sensitive surface in this project."
 
+[[audits.lapin]]
+criteria = "safe-to-run"
+version = "4.10.0"
+notes = "2026-07-27: lapin 4.10.0 (AMQP 官方 Rust 客户端) 为 c10_networks 的 AMQP 示例依赖，仅用于本地 RabbitMQ 示例，不处理不可信网络输入。"
+
+[[audits.nom]]
+criteria = "safe-to-run"
+version = "8.0.0"
+notes = "2026-07-27: nom 8.0.0 (Geal 官方维护) 为 lapin 4.10.0 / x509-parser 的解析器传递依赖，仅用于 AMQP 示例/测试路径。"
+
+[[audits.p12-keystore]]
+criteria = "safe-to-run"
+version = "0.2.1"
+notes = "2026-07-27: p12-keystore 0.2.1 为 lapin 4.10.0 的 PKCS#12 密钥存储传递依赖，仅用于 AMQP 示例/测试路径。"
+
 [[audits.paste]]
 criteria = "safe-to-deploy"
 version = "1.0.15"
 notes = "Formal audit stub for RUSTSEC-2024-0436. paste is a compile-time proc-macro helper used transitively by dev/benchmark dependencies (candle-core, libp2p, tokenizers, etc.). It has no runtime attack surface in this project."
+
+[[audits.polyval]]
+criteria = "safe-to-run"
+version = "0.7.3"
+notes = "2026-07-27: polyval 0.7.3 (RustCrypto 官方维护) 为 aes-gcm 0.11 升级后的 POLYVAL 传递依赖，仅用于 benchmark 中的本地加密示例。"
+
+[[audits.rustls-connector]]
+criteria = "safe-to-run"
+version = "0.23.6"
+notes = "2026-07-27: rustls-connector 0.23.6 为 lapin 4.10.0 的 TLS 连接封装传递依赖，仅用于 AMQP 示例/测试路径。"
 
 [[audits.safetensors]]
 criteria = "safe-to-run"
@@ -90,6 +210,46 @@ notes = "2026-07-11: salvo_macros 0.94.0 (salvo-rs 官方维护) 为 salvo 0.94 
 criteria = "safe-to-run"
 version = "0.95.0"
 notes = "2026-07-18: salvo_macros 0.95.0 (salvo-rs 官方维护) 为 salvo 0.95 过程宏传递依赖，编译期执行。"
+
+[[audits.schemars]]
+criteria = "safe-to-run"
+version = "1.2.2"
+notes = "2026-07-27: schemars 1.2.2 (GREsau 官方维护) 为 cargo update 后 patch 升级，仅用于 JSON Schema 生成示例/测试，不处理不可信输入。"
+
+[[audits.schemars_derive]]
+criteria = "safe-to-run"
+version = "1.2.2"
+notes = "2026-07-27: schemars_derive 1.2.2 为 schemars 1.2.2 的过程宏派生伴侣，仅编译期执行。"
+
+[[audits.serde_derive_internals]]
+criteria = "safe-to-run"
+version = "0.30.0"
+notes = "2026-07-27: serde_derive_internals 0.30.0 (serde-rs 官方维护) 为 cargo update 后新增传递依赖，serde_derive 内部辅助库，仅编译期执行。"
+
+[[audits.tcp-stream]]
+criteria = "safe-to-run"
+version = "0.34.14"
+notes = "2026-07-27: tcp-stream 0.34.14 为 lapin 4.10.0 的 TCP 流抽象传递依赖，仅用于 AMQP 示例/测试路径。"
+
+[[audits.tokio-stream]]
+criteria = "safe-to-run"
+version = "0.1.19"
+notes = "2026-07-27: tokio-stream 0.1.19 (tokio-rs 官方维护) 为 lapin 4.10.0 的流适配传递依赖，仅用于 AMQP 示例/测试路径。"
+
+[[audits.toml_parser]]
+criteria = "safe-to-run"
+version = "1.1.3+spec-1.1.0"
+notes = "2026-07-27: toml_parser 1.1.3 (toml-rs 官方维护) 为 cargo update 后 patch 升级，TOML 解析辅助库，仅用于构建/测试路径。"
+
+[[audits.universal-hash]]
+criteria = "safe-to-run"
+version = "0.6.1"
+notes = "2026-07-27: universal-hash 0.6.1 (RustCrypto 官方维护) 为 aes-gcm 0.11 升级后的传递依赖，仅用于 benchmark 中的本地加密示例。"
+
+[[audits.x509-parser]]
+criteria = "safe-to-run"
+version = "0.18.1"
+notes = "2026-07-27: x509-parser 0.18.1 为 lapin 4.10.0 的 TLS/X.509 证书解析传递依赖，仅用于 AMQP 示例/测试路径。"
 
 [[audits.zerocopy]]
 criteria = "safe-to-run"

@@ -6,9 +6,8 @@
 //! 本示例仅做编译检查用，运行时若无服务将连接失败。
 
 use lapin::options::*;
-use lapin::publisher_confirm::Confirmation;
 use lapin::types::FieldTable;
-use lapin::{BasicProperties, Connection, ConnectionProperties};
+use lapin::{BasicProperties, Confirmation, Connection, ConnectionProperties};
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -20,7 +19,7 @@ async fn main() -> anyhow::Result<()> {
 
     channel
         .queue_declare(
-            &queue,
+            queue.as_str().into(),
             QueueDeclareOptions {
                 durable: true,
                 ..Default::default()
@@ -38,8 +37,8 @@ async fn main() -> anyhow::Result<()> {
         let payload = format!("hello lapin {i}");
         let confirm = channel
             .basic_publish(
-                "",
-                &queue,
+                "".into(),
+                queue.as_str().into(),
                 BasicPublishOptions::default(),
                 payload.as_bytes(),
                 BasicProperties::default(),

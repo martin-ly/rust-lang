@@ -19,7 +19,7 @@ async fn main() -> anyhow::Result<()> {
 
     channel
         .queue_declare(
-            &queue,
+            queue.as_str().into(),
             QueueDeclareOptions {
                 durable: true,
                 ..Default::default()
@@ -33,8 +33,8 @@ async fn main() -> anyhow::Result<()> {
 
     let mut consumer = channel
         .basic_consume(
-            &queue,
-            "rust-learning-consumer",
+            queue.as_str().into(),
+            "rust-learning-consumer".into(),
             BasicConsumeOptions {
                 no_ack: false,
                 ..Default::default()
