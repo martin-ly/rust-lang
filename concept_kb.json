@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 577,
-    "generated_at": "2026-07-28T23:35:41.202409+00:00"
+    "generated_at": "2026-07-28T23:38:58.316942+00:00"
   },
   "files": [
     {
@@ -40925,6 +40925,7 @@
       "cross_references": [
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/01_generics.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
         "../02_separation_logic/01_rustbelt.md",
         "01_type_theory.md",
         "02_subtype_variance.md",
@@ -40939,7 +40940,7 @@
           "[Type Theory](01_type_theory.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)"
         ],
         "post": [
-          "[Subtyping and Variance](02_subtype_variance.md) · [Category Theory](04_category_theory.md) · [RustBelt](../02_separation_logic/01_rustbelt.md)"
+          "[Subtyping and Variance](02_subtype_variance.md) · [Category Theory](04_category_theory.md) · [RustBelt](../02_separation_logic/01_rustbelt.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)"
         ]
       },
       "backward_chains": 0,

@@ -48,7 +48,7 @@
 
 ## 📑 目录
 
-- [RustBelt \& Verification Toolchain（RustBelt 与验证工具链）](#rustbelt--verification-toolchainrustbelt-与验证工具链)
+- [RustBelt 与验证工具链](#rustbelt-与验证工具链)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 Wikipedia 权威定义](#11-wikipedia-权威定义)
@@ -901,7 +901,7 @@ jobs:
 
 ## 📑 目录
 
-- [RustBelt \& Verification Toolchain（RustBelt 与验证工具链）](#rustbelt--verification-toolchainrustbelt-与验证工具链)
+- [RustBelt 与验证工具链](#rustbelt-与验证工具链)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 Wikipedia 权威定义](#11-wikipedia-权威定义)
