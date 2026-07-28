@@ -33,7 +33,7 @@
     - [安装](#安装)
     - [验证命令](#验证命令)
   - [三、核心概念](#三核心概念)
-    - [3.1 Pearlite：Rust 风格的契约语言](#31-pearlite-rust-风格的契约语言)
+    - [3.1 Pearlite：Rust 风格的契约语言](#31-pearliterust-风格的契约语言)
     - [3.2 视图运算符 `@`](#32-视图运算符-)
     - [3.3 预言变量：`*x` 当前值与 `^x` 最终值](#33-预言变量x-当前值与-x-最终值)
     - [3.4 函数契约：`#[requires]` / `#[ensures]`](#34-函数契约requires--ensures)
@@ -51,6 +51,9 @@
   - [八、权威来源索引](#八权威来源索引)
   - [相关工具交叉索引](#相关工具交叉索引)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
+    - [测验 1：Creusot 的核心验证范式是什么？（理解层）](#测验-1creusot-的核心验证范式是什么理解层)
+    - [测验 2：`^x` 在 Creusot 中表示什么？（理解层）](#测验-2x-在-creusot-中表示什么理解层)
+    - [测验 3：何时优先选择 Creusot 而非 Kani？（评价层）](#测验-3何时优先选择-creusot-而非-kani评价层)
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
     - [反例：未限制前置条件导致溢出验证失败](#反例未限制前置条件导致溢出验证失败)
     - [✅ 修正：显式 `requires` 边界](#-修正显式-requires-边界)
@@ -239,6 +242,7 @@ pub fn sum_up_to(n: u64) -> u64 {
 ```
 
 > **设计要点**: 循环不变量必须同时满足：
+>
 > 1. **初始化**：进入循环前成立；
 > 2. **保持**：每次迭代后仍成立；
 > 3. **充分**：与循环退出条件结合后能推出后置条件。
@@ -454,7 +458,6 @@ flowchart TD
 
 > **权威来源**: [Creusot 官方文档](https://creusot.rs/) · [Creusot User Guide](https://guide.creusot.rs/) · [Creusot GitHub](https://github.com/creusot-rs/creusot) · [Why3 Platform](http://why3.lri.fr/)
 > **文档版本**: 1.0
-> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-07-28
 > **权威来源对齐变更日志**: 2026-07-28 创建，对齐 Creusot 0.2+/Rust 1.97.0，整合 ICFEM 2022 / PLDI 2023 / RustHorn 理论与 Creusot 官方文档 [P1-1 新增概念页]
 

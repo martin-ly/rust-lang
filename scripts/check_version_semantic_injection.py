@@ -36,6 +36,17 @@ VERSION_FILES: list[tuple[str, str]] = [
     ("1.97", "rust_1_97_stabilized.md"),
 ]
 
+# Patch release pages that need bidirectional semantic links to concept/ authority pages.
+# Each entry maps patch version filename to the set of concept pages it should link to
+# (and which should link back).
+PATCH_FILES: dict[str, list[str]] = {
+    "rust_1_97_1.md": [
+        "04_formal/03_operational_semantics/08_llvm_ir_poison_ub.md",
+        "03_advanced/02_unsafe/06_memory_model.md",
+        "06_ecosystem/00_toolchain/09_llvm_backend_and_codegen.md",
+    ],
+}
+
 # Regex for markdown links
 MD_LINK_RE = re.compile(r"\[([^\]]*)\]\(([^\s)]+)\)")
 
@@ -223,11 +234,81 @@ def evaluate() -> dict:
     }
 
 
+def evaluate_patches() -> dict:
+    """Check bidirectional semantic links for patch release pages."""
+    all_patches: list[dict] = []
+
+    for patch_filename, expected_concept_pages in PATCH_FILES.items():
+        patch_path = VERSION_DIR / patch_filename
+        if not patch_path.exists():
+            continue
+        patch_text = patch_path.read_text(encoding="utf-8", errors="replace")
+
+        # Forward links from patch page to concept/ authority pages
+        forward_links: set[str] = set()
+        for m in MD_LINK_RE.finditer(patch_text):
+            target = m.group(2)
+            resolved = resolve_link(target, VERSION_DIR)
+            if resolved and is_concept_authority_path(resolved):
+                forward_links.add(resolved.relative_to(CONCEPT_DIR).as_posix())
+
+        # Backlinks from concept pages to patch page
+        version_link_pattern = re.compile(re.escape(patch_filename))
+        backlink_map: dict[str, str] = {}
+        for path in CONCEPT_DIR.rglob("*.md"):
+            if "00_version_tracking" in path.parts:
+                continue
+            rel = path.relative_to(CONCEPT_DIR).as_posix()
+            text = path.read_text(encoding="utf-8", errors="replace")
+            if version_link_pattern.search(text):
+                backlink_map[rel] = text
+
+        patch_result = {
+            "patch": patch_filename,
+            "expected": expected_concept_pages,
+            "forward_links": sorted(forward_links),
+            "backlinks": sorted(backlink_map),
+            "missing_forward": sorted(set(expected_concept_pages) - forward_links),
+            "missing_backlink": sorted(set(expected_concept_pages) - set(backlink_map)),
+        }
+        patch_result["ok"] = (
+            not patch_result["missing_forward"]
+            and not patch_result["missing_backlink"]
+        )
+        all_patches.append(patch_result)
+
+    return {
+        "patches": all_patches,
+        "patch_ok_count": sum(1 for p in all_patches if p["ok"]),
+        "patch_total": len(all_patches),
+    }
+
+
 def format_report(result: dict, date_str: str) -> str:
+    patch_result = result.get("patches", {})
+    patch_lines: list[str] = []
+    if patch_result.get("patch_total"):
+        patch_lines.extend([
+            "",
+            "### 补丁版本双向链接",
+            "",
+            f"- 补丁页数：{patch_result['patch_total']}",
+            f"- 双向链接完整：{patch_result['patch_ok_count']} / {patch_result['patch_total']}",
+            "",
+        ])
+        for p in patch_result["patches"]:
+            status = "✅" if p["ok"] else "❌"
+            patch_lines.append(f"- {status} `{p['patch']}`")
+            if p["missing_forward"]:
+                patch_lines.append(f"  - 缺少前向链接：`{', '.join(p['missing_forward'])}`")
+            if p["missing_backlink"]:
+                patch_lines.append(f"  - 缺少回链：`{', '.join(p['missing_backlink'])}`")
+        patch_lines.append("")
+
     lines = [
         f"# Version Semantic Injection Baseline Report ({date_str})",
         "",
-        "> 检查 Rust 1.90–1.97 稳定特性在版本跟踪页与 `concept/` 权威页之间的双向链接覆盖。",
+        "> 检查 Rust 1.90–1.97 稳定特性及补丁版本页在版本跟踪页与 `concept/` 权威页之间的双向链接覆盖。",
         "",
         "## 汇总",
         "",
@@ -235,10 +316,13 @@ def format_report(result: dict, date_str: str) -> str:
         f"- 提取特性数：{result['total']}",
         f"- 已映射：{result['mapped_count']} ({result['coverage_rate']}%)",
         f"- 未映射：{result['unmapped_count']}",
+    ]
+    lines.extend(patch_lines)
+    lines.extend([
         "",
         "## 未映射特性",
         "",
-    ]
+    ])
     if not result["unmapped"]:
         lines.append("无。所有提取特性均已建立 concept/ 前向链接或存在带特征提及的 concept/ 回链。")
     else:
@@ -275,14 +359,15 @@ def format_report(result: dict, date_str: str) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="检查 Rust 1.90–1.97 稳定特性的版本语义注入双向链接覆盖"
+        description="检查 Rust 1.90–1.97 稳定特性及补丁版本的版本语义注入双向链接覆盖"
     )
-    parser.add_argument("--strict", action="store_true", help="覆盖率 < 80%% 时 exit 1")
+    parser.add_argument("--strict", action="store_true", help="覆盖率 < 80%% 或补丁双向链接不完整时 exit 1")
     parser.add_argument("--json", action="store_true", help="仅输出 JSON 到 stdout")
     parser.add_argument("--report", action="store_true", help="写入 reports/ 基线报告")
     args = parser.parse_args()
 
     result = evaluate()
+    result["patches"] = evaluate_patches()
     date_str = _dt.datetime.now().strftime("%Y_%m_%d")
 
     if args.json:
@@ -301,9 +386,14 @@ def main() -> int:
         json_path.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
         print(f"\n报告已写入：\n  {md_path}\n  {json_path}", file=sys.stderr)
 
-    if args.strict and result["coverage_rate"] < 80.0:
-        print(f"\n❌ 覆盖率 {result['coverage_rate']}% < 80%，严格模式失败。", file=sys.stderr)
-        return 1
+    if args.strict:
+        if result["coverage_rate"] < 80.0:
+            print(f"\n❌ 稳定特性覆盖率 {result['coverage_rate']}% < 80%，严格模式失败。", file=sys.stderr)
+            return 1
+        patch_result = result.get("patches", {})
+        if patch_result.get("patch_total") and patch_result.get("patch_ok_count") != patch_result.get("patch_total"):
+            print("\n❌ 补丁版本页双向链接不完整，严格模式失败。", file=sys.stderr)
+            return 1
     return 0
 
 

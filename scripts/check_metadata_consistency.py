@@ -250,6 +250,16 @@ D5_WHITELIST_FILES = {
         "Sanitizers 页面主题即 LLVM 运行时检测工具族；`-Z sanitizer=...` 与 The Unstable Book 引用为工具链事实陈述",
     "concept/06_ecosystem/00_toolchain/16_rustdoc_internals.md":
         "rustdoc 内部实现页；JSON 输出 unstable/nightly 用法与 docs.rs nightly 行为为工具链事实陈述",
+    # ---- 2026-07-29 P1/P2 语义深化复核登记：以下新建/扩展页 nightly/preview 提及均为
+    # 页面主题本身或工具链事实陈述，非稳定层正文残留不稳定依赖。
+    "concept/00_meta/00_framework/methodology.md":
+        "方法论文首元数据表：版本跟踪与路线图行提及 preview 页作为合法导航分类，非正文依赖",
+    "concept/04_formal/00_type_theory/14_flux.md":
+        "Flux 页面主题即研究原型；nightly 为其 rust-toolchain 要求与限制说明，文首 Rust 版本字段已显式声明",
+    "concept/04_formal/04_model_checking/04_modern_verification_tools.md":
+        "验证工具矩阵客观陈述 Flux 需 nightly 及 BorrowSanitizer/Safety Tags 等 preview 特性链接，非稳定层依赖",
+    "concept/04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md":
+        "rustc 内部机制页：`-Zmir-opt-level` nightly 标志作为 MIR 优化调参事实陈述",
 }
 
 

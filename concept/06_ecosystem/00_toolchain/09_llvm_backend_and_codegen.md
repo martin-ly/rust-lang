@@ -46,6 +46,9 @@
   - [权威来源索引](#权威来源索引)
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
   - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
+  - [九、LLVM 优化正确性与 Rust 安全保证](#九llvm-优化正确性与-rust-安全保证)
+    - [9.1 Rust 1.97.1 案例：load-select 合并](#91-rust-1971-案例load-select-合并)
+    - [9.2 工程启示](#92-工程启示)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
@@ -316,9 +319,34 @@ Cranelift 编译速度快但优化较弱，适合 debug 构建或需要快速反
 > 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
 
 - **[Rust 1.97.1](../../07_future/00_version_tracking/rust_1_97_1.md)**
-  - 修复 LLVM 优化导致的误编译；回退 1.97.0 中提高触发概率的 IR 变更
+  - 修复 LLVM load-select 合并优化在 poison condition 下引入的 immediate UB；回退 1.97.0 中将 enum `None` 判别值改为 -1 的 IR 变更
+  - 该事件表明：即使 safe Rust 源代码合法，LLVM 层面的错误优化仍可能生成错误机器码
 - **[Rust 1.91](../../07_future/00_version_tracking/rust_1_91_stabilized.md)**
   - 内部升级 LLVM 21
+
+## 九、LLVM 优化正确性与 Rust 安全保证
+
+LLVM 后端负责将 LLVM IR 优化并 lowering 为机器码。绝大多数情况下，优化是透明的，但当优化 pass 错误地转换 IR 时，可能破坏 Rust 的 safe 语义保证。
+
+### 9.1 Rust 1.97.1 案例：load-select 合并
+
+一个具体的例子是 Rust 1.97.1 修复的 LLVM bug：
+
+```text
+select cond, (load ptr_1), (load ptr_2)
+    === 错误优化 ===>
+load (select cond, ptr_1, ptr_2)
+```
+
+当 `cond` 为 LLVM IR 的 **poison** 值时，变换后的形式会解引用 poison 指针，触发 immediate UB。Rust 1.97.0 将 `Option<T>` 的 `None` 判别值改为 `-1`，导致该 bug 从“潜伏十个版本的静默错误”变成“x86-64 release 构建下的必然 segfault”。
+
+### 9.2 工程启示
+
+- **不要假设编译器永远正确**：安全关键代码应关注 rustc / LLVM 的安全公告和 patch release。
+- **release 构建测试**：某些优化 bug 只在优化构建下暴露，关键路径应在 release 配置下跑集成测试。
+- **最小复现是定位后端 bug 的关键**：当崩溃无法从源代码解释时，尝试用 `-C opt-level=0` 和 `-C opt-level=3` 对比，缩小到优化器问题。
+
+> 完整技术细节见 [Rust 1.97.1 稳定补丁](../../07_future/00_version_tracking/rust_1_97_1.md) 与 [LLVM IR 中的 Poison、Undefined Behavior 与 Freeze](../../04_formal/03_operational_semantics/08_llvm_ir_poison_ub.md)。
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 

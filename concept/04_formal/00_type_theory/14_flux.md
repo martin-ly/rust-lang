@@ -9,7 +9,7 @@
 > **内容分级**: [综述级]
 > **前置概念**: [Dependent Types and Refinement Types](10_dependent_refinement_types.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)
 > **后置概念**: [Modern Verification Tools](../04_model_checking/04_modern_verification_tools.md) · [Formal Verification Tools](../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md)
-> **主要来源**: [Flux GitHub](https://github.com/flux-rs/flux) · [Flux Documentation](https://flux-rs.github.io/flux/) · [Lehmann et al., PLDI 2023 — Flux: Liquid Types for Rust](https://ranjitjhala.github.io/static/flux-pldi23.pdf) · [Lehmann et al., OOPSLA 2022 — Flux: Liquid Types for Rust](https://arxiv.org/pdf/2207.04034.pdf)
+> **主要来源**: [Flux GitHub](https://github.com/flux-rs/flux) · [Flux Documentation](https://flux-rs.github.io/flux/) · [Lehmann et al., PLDI 2023 — Flux: Liquid Types for Rust](https://ranjitjhala.github.io/static/flux-pldi23.pdf) · [Lehmann et al., OOPSLA 2022 — Flux: Liquid Types for Rust](https://arxiv.org/pdf/2207.04034.pdf) · [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html)
 
 ---
 
@@ -62,7 +62,7 @@ mindmap
     - [2.1 函数签名注解 `#[flux::sig(...)]`](#21-函数签名注解-fluxsig)
     - [2.2 `#[flux::spec(...)]` 与 `flux-rs` 宏](#22-fluxspec-与-flux-rs-宏)
     - [2.3 独占所有权与强更新](#23-独占所有权与强更新)
-    - [2.4 可变引用 `&mut T`：弱更新](#24-可变引用-mut-t-弱更新)
+    - [2.4 可变引用 `&mut T`：弱更新](#24-可变引用-mut-t弱更新)
     - [2.5 强引用 `&strg T` 与 `ensures`](#25-强引用-strg-t-与-ensures)
     - [2.6 自定义类型：`refined_by` 与 `variant`](#26-自定义类型refined_by-与-variant)
   - [三、可验证性质与典型示例](#三可验证性质与典型示例)
@@ -82,6 +82,9 @@ mindmap
     - [6.3 反例：细化谓词超出 SMT 片段会失败](#63-反例细化谓词超出-smt-片段会失败)
     - [6.4 反例：需要 nightly 工具链](#64-反例需要-nightly-工具链)
   - [七、来源与延伸阅读](#七来源与延伸阅读)
+    - [权威来源](#权威来源)
+    - [关键论文](#关键论文)
+    - [相关概念页](#相关概念页)
   - [对应测验](#对应测验)
 
 ---

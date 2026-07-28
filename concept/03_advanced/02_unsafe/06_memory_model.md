@@ -47,6 +47,7 @@
   - [三、Provenance](#三provenance)
   - [四、初始化与 MaybeUninit](#四初始化与-maybeuninit)
   - [五、与未定义行为的关系](#五与未定义行为的关系)
+    - [5.1 编译器后端优化也会引入 UB 吗？](#51-编译器后端优化也会引入-ub-吗)
   - [六、别名模型：Stacked Borrows / Tree Borrows](#六别名模型stacked-borrows--tree-borrows)
   - [七、内存对齐与 Layout](#七内存对齐与-layout)
   - [八、指针与整数转换规则](#八指针与整数转换规则)
@@ -157,6 +158,20 @@ let val = unsafe { x.assume_init() };
 - 破坏指针别名规则是 UB。
 
 参见 [Behavior Considered Undefined](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md) 获取完整 UB 清单。
+
+### 5.1 编译器后端优化也会引入 UB 吗？
+
+通常，Rust 的 UB 讨论集中在源代码和 MIR 层面：程序员写下的 `unsafe` 操作是否违反了内存模型。但 Rust 1.97.1 事件说明，**编译器后端优化器本身也可能引入 UB**。
+
+具体而言，LLVM 的一个 load-select 合并优化在 `cond` 为 poison 时，将原本安全的条件加载重写为对 poison 指针的解引用，从而在 LLVM IR 层面产生 immediate UB。由于该 IR 随后被翻译为机器码，safe Rust 代码在运行时也可能出现 segfault 或错误结果。
+
+这并不削弱 Rust 所有权模型对源代码层面的保证，但提醒安全关键系统：
+
+- 编译器正确性是安全链条的最后一环；
+- patch release 中的编译器 bug 修复应视为安全事件；
+- 当遇到无法从源代码解释的崩溃时，应考虑后端优化 bug 的可能性。
+
+> 案例详情见 [Rust 1.97.1 稳定补丁](../../07_future/00_version_tracking/rust_1_97_1.md)；LLVM IR 层面的 poison/UB/freeze 语义见 [LLVM IR 中的 Poison、Undefined Behavior 与 Freeze](../../04_formal/03_operational_semantics/08_llvm_ir_poison_ub.md)。
 
 ## 六、别名模型：Stacked Borrows / Tree Borrows
 

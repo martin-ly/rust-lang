@@ -6,7 +6,7 @@
 > **Rust 版本**: 1.97.1 (Edition 2024)
 > **生成时间**: 2026-07-28
 > **确认事项**: 用户同意由 AI 决策任务范围、写入报告、立即执行 P0、对齐 Comprehensive Rust / Creusot / Flux / hax 等国际来源；**不同意将观察门强制转正为阻断门**（避免阻碍扩展）。
-> **状态**: 已确认，进入执行阶段
+> **状态**: ✅ 已执行完成（2026-07-29）；23 阻断门 + 6 观察门全部通过；P2-6 阻塞待 Rust 1.98/1.99 发布；P3-4 用户跳过
 
 ---
 
@@ -15,7 +15,7 @@
 | 维度 | 当前基线 | 目标 |
 |---|---|---|
 | 23 阻断质量门 | 全部通过 | 保持全部通过 |
-| 5 语义观察门 | 全部通过 | 保持通过，不强制转正 |
+| 6 语义观察门 | 全部通过 | 保持通过，不强制转正 |
 | 国际权威来源索引 | 53 来源 100% 标题对齐 | 扩展至 60+ 来源 |
 | S1 精确链接残差 | 31 处 | ≤5 处 |
 | 验证工具生态 | 5 个深度覆盖 | ≥8 个深度覆盖 |
@@ -52,26 +52,26 @@
 
 ## 四、P2 — 中期深化（1-3 个月）
 
-| # | 任务 | 目标文件 | 验收标准 |
-|---:|---|---|---|
-| P2-1 | 扩展国际来源索引：Little Book of Rust Books、Rust for Linux Kernel、Zero To Production In Rust | `concept/00_meta/02_sources/05_international_authority_index.md` | 新增 4-6 个权威来源 |
-| P2-2 | 评估 L4 中通用 CS 理论内容的层归属 | `concept/04_formal/00_type_theory/` 等 | 过度泛化内容改为 stub 或迁移 |
-| P2-3 | 建立 `docs/` / `content/` 与 `concept/` 的 canonical 边界巡逻 | 新增/扩展脚本 | 每月输出重复风险报告 |
-| P2-4 | 深化 Pin / async 语义精度 | `03_advanced/01_async/08_pin_unpin.md`、`11_pin_projection_counterexamples.md` | 与 std::pin 文档逐 API 对照 |
-| P2-5 | 深化 UB 清单与 Reference BCU 的逐条映射 | `04_formal/01_ownership_logic/06_behavior_considered_undefined.md` | 每条 UB 项链接到 Reference 具体锚点 |
-| P2-6 | 补全 Rust 1.98/1.99 稳定特性权威页 | `concept/07_future/00_version_tracking/rust_1_98_stabilized.md`、`rust_1_99_preview.md` | 版本发布后 1 周内完成填充 |
+| # | 任务 | 目标文件 | 验收标准 | 状态 |
+|---:|---|---|---|:---:|
+| P2-1 | 扩展国际来源索引：Little Book of Rust Books、Rust for Linux Kernel、Zero To Production In Rust | `concept/00_meta/02_sources/05_international_authority_index.md` | 新增 4-6 个权威来源 | ✅ 2026-07-28 |
+| P2-2 | 评估 L4 中通用 CS 理论内容的层归属 | `concept/04_formal/00_type_theory/` 等 | 过度泛化内容改为 stub 或迁移 | ✅ 2026-07-28 |
+| P2-3 | 建立 `docs/` / `content/` 与 `concept/` 的 canonical 边界巡逻 | `scripts/check_canonical_boundary.py`；`reports/CANONICAL_BOUNDARY_PATROL_*.md` | 每月输出重复风险报告；默认 threshold=0.60、跳过短页 | ✅ 2026-07-28 |
+| P2-4 | 深化 Pin / async 语义精度 | `03_advanced/01_async/08_pin_unpin.md` | 与 std::pin 文档逐 API 对照；新增 §2.5 对照表 | ✅ 2026-07-28 |
+| P2-5 | 深化 UB 清单与 Reference BCU 的逐条映射 | `04_formal/01_ownership_logic/06_behavior_considered_undefined.md` | 11 条 UB 链接到 `r-undefined.*` 锚点；新增 §七 映射表 | ✅ 2026-07-28 |
+| P2-6 | 补全 Rust 1.98/1.99 稳定特性权威页 | `concept/07_future/00_version_tracking/rust_1_98_stabilized.md`、`rust_1_99_preview.md` | 版本发布后 1 周内完成填充 | ⏸️ 阻塞：等待 Rust 1.98/1.99 正式发布 |
 
 ---
 
 ## 五、P3 — 长期治理（3-12 个月）
 
-| # | 任务 | 目标文件/机制 | 验收标准 |
-|---:|---|---|---|
-| P3-1 | 将 `authority_semantic_diff.py` 作为**观察门**挂载到 CI（不转正为阻断门） | `run_quality_gates.sh`、`quality_gates.yml` | 每次 PR 扫描核心页权威关键词并输出 warning |
-| P3-2 | 建立季度“国际来源语义抽样审计”机制 | `.kimi/templates/monthly_semantic_review.md` | 每季度抽样 5-8 个核心页与 Reference/Nomicon 对比 |
-| P3-3 | 观察门状态监控 | `scripts/check_decision_trees.py` 等 | 记录基线，但不强制转正 |
-| P3-4 | 建立非英文社区来源索引（可选） | `concept/00_meta/02_sources/05_international_authority_index.md` | 收录中文/日文/俄文高质量 Rust 资源 |
-| P3-5 | 自动化 patch release 响应流程 | AGENTS.md §7 | Rust 补丁版本发布后 48 小时内更新并跑全部门 |
+| # | 任务 | 目标文件/机制 | 验收标准 | 状态 |
+|---:|---|---|---|:---:|
+| P3-1 | 将 `authority_semantic_diff.py` 作为**观察门**挂载到 CI（不转正为阻断门） | `run_quality_gates.sh`、`quality_gates.yml` | 每次 PR 扫描核心页权威关键词并输出 warning；observe gate 计数更新为 6 | ✅ 2026-07-28 |
+| P3-2 | 建立季度“国际来源语义抽样审计”机制 | `.kimi/templates/quarterly_international_source_audit.md` | 每季度抽样 5-8 个核心页与 Reference/Nomicon 对比 | ✅ 2026-07-29 |
+| P3-3 | 观察门状态监控 | `reports/OBSERVE_GATE_BASELINE_2026_07_28.md` | 记录 5 个语义观察门基线，不强制转正 | ✅ 2026-07-29 |
+| P3-4 | 建立非英文社区来源索引（可选） | `concept/00_meta/02_sources/05_international_authority_index.md` | 收录中文/日文/俄文高质量 Rust 资源 | ❌ 2026-07-28 用户确认跳过 |
+| P3-5 | 自动化 patch release 响应流程 | `scripts/patch_release_response.py`；`docs/04_guides/17_patch_release_response_workflow.md`；AGENTS.md §7 | Rust 补丁版本发布后 48 小时内更新并跑全部门 | ✅ 2026-07-29 |
 
 ---
 
@@ -79,8 +79,9 @@
 
 | 频率 | 动作 | 工具/负责人 |
 |---|---|---|
-| 每次 PR | 跑 23 阻断门 + authority_semantic_diff（观察） | CI |
+| 每次 PR | 跑 23 阻断门 + 6 观察门（含 authority_semantic_diff） | CI |
 | 每月 | 检查上游版本 freshness；修复 S1 增长 | `check_authority_freshness.py`、`authority_link_precision.py` |
+| 每月 | canonical 边界巡逻：输出重复风险报告 | `scripts/check_canonical_boundary.py` |
 | 每季度 | 国际来源语义抽样审计；刷新 topic-authority map | 维护者 + `topic_authority_aligner.py` |
 | 每次 Rust 新版本 | Patch release 响应；更新版本跟踪页 | 维护者 |
 
@@ -109,19 +110,59 @@ P0 与 P1 全部完成后实跑关键质量门：
 | KG 谓词精度 | `python scripts/check_kg_relation_precision.py --strict` | ✅ generic_ratio=0% |
 | S1 精确链接 | `python scripts/authority_link_precision.py` | ✅ S1=1（剩余 1 处历史模糊链接） |
 
+### P2/P3 本次推进验证（2026-07-28）
+
+| 检查项 | 命令 | 结果 |
+|---|---|:---|
+| 死链 / 跨层 | `python scripts/kb_auditor.py --link-check` | ✅ 死链 0 / 跨层 0（P2-4/P2-5 新增锚点全部有效） |
+| 权威语义差分 | `python scripts/authority_semantic_diff.py --strict` | ✅ P0=0 P1=0（P2-4/P2-5 关键词已覆盖） |
+| 代码块编译 | `python scripts/check_concept_code_blocks.py --strict` | ✅ candidate 300/300 pass, compile_fail 892/892 ok |
+| canonical 边界巡逻 | `python scripts/check_canonical_boundary.py --top 10` | ✅ 脚本可调；默认 threshold=0.60 输出 1190 对，多为 `docs/03_reference/quick_reference/` 与 `docs/12_research_notes/` 的合法摘要/研究笔记 |
+
+### 2026-07-29 最终验证（命名规范修复与全门复跑）
+
+修复 `docs/04_guides/patch_release_response_workflow.md` 命名违规 → `docs/04_guides/17_patch_release_response_workflow.md` 后复跑：
+
+| 检查项 | 命令 | 结果 |
+|---|---|---|
+| 命名规范 | `python scripts/check_naming_convention.py --strict` | ✅ ERROR=0（仅保留 55 个历史 WARN） |
+| 内容重叠 v2 | `detect_content_overlap_v2.py \| triage_overlap.py` | ✅ MERGE=0 DOCS_INTERNAL=0 |
+| 示例编译 | `python scripts/check_examples_compile.py --strict` | ✅ 11 stdlib + 3 deps 通过，0 失败 |
+| 工作区编译 | `cargo check --workspace` | ✅ 通过 |
+| 工作区测试 | `cargo test --workspace --quiet` | ✅ 全部 crate 通过（含 doctests，无失败） |
+| Clippy | `cargo clippy --workspace -- -D warnings` | ✅ 通过，无 warning |
+| 安全审计 | `cargo audit --no-fetch` | ✅ 无漏洞 |
+| 供应链审计 | `cargo vet --locked` | ✅ Vetting Succeeded（955 fully audited, 788 exempted） |
+| mdbook 构建 | `mdbook build` | ✅ 通过（仅 search index 过大警告） |
+| 死链 / 跨层 | `python scripts/kb_auditor.py --link-check` | ✅ 死链 0 / 跨层 0 |
+| 语义健康 | `python scripts/semantic_health.py --strict` | ✅ 99.6 grade OK |
+| 权威语义差分 | `python scripts/authority_semantic_diff.py --strict` | ✅ P0=0 P1=0 |
+| 交叉域覆盖 | `python scripts/check_cross_domain_coverage.py --strict` | ✅ 16/16 = 100% |
+| 拓扑质量 | `python scripts/check_topology_quality.py --strict` | ✅ T1–T6 全通过 |
+| KG 形态 | `python scripts/check_kg_shapes.py --strict` | ✅ K1–K7 全 0 |
+| 测验体系 | `python scripts/check_quiz_system.py --strict` | ✅ 0 失败，22/22 双向链接 |
+| 思维表征覆盖 | `python scripts/check_mindmap_coverage.py --strict` | ✅ 100% / 96.8% |
+| 版本语义注入 | `python scripts/check_version_semantic_injection.py --strict` | ✅ 74/74 = 100% |
+| Stub 纯净度 | `python scripts/check_stub_purity.py --strict` | ✅ 0 伪 stub |
+| KG 谓词精度 | `python scripts/check_kg_relation_precision.py --strict` | ✅ generic_ratio=0% |
+| 权威覆盖 | `python scripts/check_concept_authority_coverage.py --strict --include-crates` | ✅ any=100% none=0 core_gaps=0 |
+| 概念一致性 | `python scripts/concept_consistency_auditor.py --strict` | ✅ 0 错误 / 0 警告 |
+| 代码块编译 | `python scripts/check_concept_code_blocks.py --strict` | ✅ candidate 300/300 pass, compile_fail 892/892 ok |
+| 元数据一致性 | `python scripts/check_metadata_consistency.py --strict` | ✅ D1/D3/D4/D5/D6=0；D2=1（已白名单） |
+| 权威页唯一性 | `python scripts/check_canonical_uniqueness.py --strict` | ✅ 0 真实重复（278 WARN 为合法相似） |
+| 决策树 | `python scripts/check_decision_trees.py --strict` | ✅ PASS；Top30 覆盖率 100% |
+| 双语标注 | `python scripts/add_bilingual_annotations.py --mode check-only` | ✅ 缺少 EN/Summary=0 |
+
 ---
 
 ## 八、验收总标准
 
 - [x] P0 全部完成并通过 23 阻断质量门。
 - [x] P1 全部完成，S1 ≤ 5，验证工具矩阵 ≥8 工具。
-- [ ] P2/P3 按计划推进，观察门保持通过且不强制转正。
+- [x] P2-1 ~ P2-5 已完成；P2-6 因 Rust 1.98/1.99 未发布而阻塞。
+- [x] P3-1 已完成；P3-4 用户确认跳过；P3-2/P3-3/P3-5 已完成。
 - [x] 新增/修改文件符合 AGENTS.md §4.2 元数据模板。
-- [x] 所有代码块保持可编译（`check_concept_code_blocks.py --strict` pass）。
-- [ ] P1 全部完成，S1 ≤ 5，验证工具矩阵 ≥8 工具。
-- [ ] P2/P3 按计划推进，观察门保持通过且不强制转正。
-- [ ] 新增/修改文件符合 AGENTS.md §4.2 元数据模板。
-- [ ] 所有代码块保持可编译（`check_concept_code_blocks.py --strict` pass）。
+- [x] 所有代码块保持可编译（`check_concept_code_blocks.py --strict` pass：300/300 + 892/892 ok）。
 
 ---
 

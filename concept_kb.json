@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 538,
-    "generated_at": "2026-07-28T14:11:25.277464+00:00"
+    "total_files": 539,
+    "generated_at": "2026-07-28T20:05:27.291708+00:00"
   },
   "files": [
     {
@@ -1504,13 +1504,20 @@
       "layer": "L0",
       "title": "International Authority Index（国际化权威来源索引）",
       "positioning": "集中维护 Rust 知识体系所需的国际权威来源 URL，便于 concept/、knowledge/、docs/ 各层统一引用，避免重复搜索与链接失效。",
-      "line_count": 275,
+      "line_count": 285,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../../01_foundation/05_collections/01_collections.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/05_modules_and_visibility/03_api_naming_conventions.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../06_ecosystem/00_toolchain/03_devops_and_ci_cd.md",
         "../../06_ecosystem/03_design_patterns/01_patterns.md",
+        "../../06_ecosystem/04_web_and_networking/03_web_frameworks.md",
+        "../../06_ecosystem/05_systems_and_embedded/03_embedded_systems.md",
         "../../06_ecosystem/10_performance/01_performance_optimization.md",
         "../00_framework/comprehensive_rust_mapping.md",
         "../00_framework/knowledge_mindmap.md",
@@ -1522,7 +1529,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 99,
+      "matrix_rows": 105,
       "pre_post": {
         "pre": [
           "[Authority Source Map](01_authority_source_map.md) · [Sources](03_sources.md) · [Topic-Authority Alignment Map](04_topic_authority_alignment_map.md)"
@@ -2133,7 +2140,7 @@
       "layer": "L0",
       "title": "跨层知识图谱（Inter-Layer Dependency Map）",
       "positioning": "本文件是 `concept/` 知识体系的全局关系骨架，显式定义 L0-L7 各层之间的**逻辑蕴含关系**、**形式化映射**、**反事实依赖**和**反向反馈**。",
-      "line_count": 731,
+      "line_count": 736,
       "theorem_chains": [
         {
           "text": "| — | Send/Sync (Marker Trait) | 并发安全保证 | 并发分离逻辑 (CSL) | **同态** | Send/Sync ⟹ CSL 资源安全 |",
@@ -29627,7 +29634,7 @@
       "layer": "L3",
       "title": "Pin 与 Unpin：自引用类型的不动性保证",
       "positioning": "深入分析 Rust 中 **Pin<&mut T>** 和 **Unpin** 的设计动机——解决自引用（Reference）类型（self-referential structs）在内存移动时的安全问题，探讨 Pin 与 Future、Generator 的交互，以及 async/await 的状态机实现。",
-      "line_count": 1154,
+      "line_count": 1189,
       "theorem_chains": [
         {
           "text": "| 必须自引用且固定后不再移动 | `Pin<Box<T>>` 或 `pin_mut!` | §4.1 反命题树 TRUE | 之后仍需移动 ⟹ 违反 Pin 契约 |",
@@ -29700,6 +29707,14 @@
           "lines": 10,
           "should_fail": false,
           "code_preview": "use std::pin::Pin; use std::mem::ManuallyDrop; use std::marker::PhantomPinned;  ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "// 反模式：试图用 ManuallyDrop 绕过 !Unpin let mut x: ManuallyDrop<Inner> = ManuallyDrop:..."
         },
         {
           "flags": [
@@ -29867,7 +29882,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 4,
-      "matrix_rows": 37,
+      "matrix_rows": 46,
       "pre_post": {
         "pre": [
           "[Async](01_async.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)"
@@ -31945,7 +31960,7 @@
       "layer": "L3",
       "title": "Rust 内存模型（Memory Model）",
       "positioning": "",
-      "line_count": 500,
+      "line_count": 514,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将字节模型、provenance 和 UB 边界串联起来。",
@@ -32049,11 +32064,13 @@
         "../../02_intermediate/03_error_handling/03_panic.md",
         "../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md",
         "../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md",
+        "../../04_formal/03_operational_semantics/08_llvm_ir_poison_ub.md",
         "../../04_formal/05_rustc_internals/08_type_layout.md",
         "../../07_future/00_version_tracking/feature_domain_matrix_197.md",
         "../../07_future/00_version_tracking/migration_197_decision_tree.md",
         "../../07_future/00_version_tracking/rust_1_91_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_96_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_97_1.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../00_concurrency/06_atomics_and_memory_ordering.md",
         "../05_inline_assembly/01_inline_assembly.md",
@@ -39240,7 +39257,7 @@
       "layer": "L4",
       "title": "范畴论与 Rust：从函子到单子",
       "positioning": "从**范畴论**视角分析 Rust 的类型系统（Type System）——从函子（Functor）、应用函子（Applicative）到单子（Monad），揭示 Rust 的类型构造器如何隐式实现这些抽象代数结构。",
-      "line_count": 855,
+      "line_count": 856,
       "theorem_chains": [
         {
           "text": "| 范畴论与 Rust：从函子到单子 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -40521,7 +40538,7 @@
       "layer": "L4",
       "title": "形式化算法理论",
       "positioning": "",
-      "line_count": 338,
+      "line_count": 339,
       "theorem_chains": [
         {
           "text": "| 形式规约 ⟹ 无歧义需求 | 使用谓词与状态转换 | 精确定义期望行为 |",
@@ -40577,6 +40594,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/04_navigation/03_concept_index.md",
         "../../03_advanced/02_unsafe/04_unsafe_rust_patterns.md",
         "../../04_formal/03_operational_semantics/02_hoare_logic.md",
         "../../04_formal/04_model_checking/02_formal_methods.md",
@@ -40610,7 +40628,7 @@
       "layer": "L4",
       "title": "Flux：Rust 的 Liquid 细化类型",
       "positioning": "",
-      "line_count": 480,
+      "line_count": 483,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -41545,7 +41563,7 @@
       "layer": "L4",
       "title": "未定义行为清单（Behavior Considered Undefined）",
       "positioning": "",
-      "line_count": 251,
+      "line_count": 286,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -41578,7 +41596,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 19,
+      "matrix_rows": 37,
       "pre_post": {
         "pre": [
           "[Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Atomics and Memory Ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) · [Pointer Aliasing](02_ownership_formal.md)"
@@ -42860,6 +42878,39 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\03_operational_semantics\\08_llvm_ir_poison_ub.md",
+      "layer": "L4",
+      "title": "LLVM IR 中的 Poison、Undefined Behavior 与 Freeze",
+      "positioning": "",
+      "line_count": 264,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 6. 反例"
+        }
+      ],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/02_unsafe/06_memory_model.md",
+        "../../06_ecosystem/00_toolchain/09_llvm_backend_and_codegen.md",
+        "../../07_future/00_version_tracking/rust_1_97_1.md",
+        "02_hoare_logic.md",
+        "03_operational_semantics.md",
+        "05_axiomatic_semantics.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 5,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\04_formal\\04_model_checking\\01_verification_toolchain.md",
       "layer": "L4",
       "title": "Verification Toolchain Selection Guide（验证工具链选择指南）",
@@ -43311,7 +43362,7 @@
       "layer": "L4",
       "title": "通用程序语言理论基础：Rust 的 PL 基座",
       "positioning": "从通用程序语言（PL）理论视角审视 Rust 的设计根基，建立从 λ 演算到 Rust 类型系统（Type System）的概念桥梁。",
-      "line_count": 510,
+      "line_count": 511,
       "theorem_chains": [
         {
           "text": "| 通用程序语言理论基础：Rust 的 PL 基座 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -43415,6 +43466,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/02_sources/05_international_authority_index.md",
+        "../../01_foundation/02_type_system/01_type_system.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../07_future/02_preview_features/01_effects_system.md",
@@ -43867,7 +43919,7 @@
       "layer": "L4",
       "title": "Creusot：基于 Why3 的 Rust 演绎验证器",
       "positioning": "将 Creusot 从学术研究工具还原为算法与数据结构功能正确性验证的可选工具，理解其与 Kani/Verus/Prusti/Aeneas 的边界。学习本页前应先掌握 L3 [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) 与 L4 [Ownership Formalization](../01_ownership_logic/02_ownership_formal.md) 的基础。",
-      "line_count": 581,
+      "line_count": 584,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -50293,7 +50345,7 @@
       "layer": "L6",
       "title": "Rust 编译器的 LLVM 后端与代码生成",
       "positioning": "把“MIR 之后发生了什么”讲清楚：从 LLVM IR 生成、代码优化到目标文件与链接，覆盖 rustc 代码生成层的核心机制。",
-      "line_count": 340,
+      "line_count": 365,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -50309,6 +50361,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../04_formal/03_operational_semantics/08_llvm_ir_poison_ub.md",
         "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
         "../../07_future/00_version_tracking/rust_1_91_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_97_1.md",
@@ -60695,7 +60748,7 @@
       "layer": "L6",
       "title": "性能优化：Rust 代码的测量与调优",
       "positioning": "> 覆盖 Rust **性能优化**的核心方法论——从基准测试（criterion）、",
-      "line_count": 1401,
+      "line_count": 1406,
       "theorem_chains": [
         {
           "text": "| 性能优化：Rust 代码的测量与调优 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -66964,7 +67017,7 @@
       "layer": "L7",
       "title": "Rust 1.97.1 稳定补丁",
       "positioning": "",
-      "line_count": 199,
+      "line_count": 298,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -66977,10 +67030,22 @@
           "title": "### 5.2 反命题"
         }
       ],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [
+            "edition2024"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "enum Inner { A(u32), B(u32) } struct Big { _pad: u64, inner: Inner } struct Smal..."
+        }
+      ],
       "sources": [],
       "cross_references": [
+        "../../03_advanced/02_unsafe/06_memory_model.md",
+        "../../04_formal/03_operational_semantics/08_llvm_ir_poison_ub.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
+        "../../06_ecosystem/00_toolchain/09_llvm_backend_and_codegen.md",
         "../../06_ecosystem/01_cargo/13_cargo_security_cves.md",
         "01_rust_version_tracking.md",
         "rust_1_97_stabilized.md",
