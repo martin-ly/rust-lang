@@ -1135,6 +1135,11 @@ Java ⊂ Rust（系统编程能力）
 | **并发安全** | [`01_concurrency.md`](../../03_advanced/00_concurrency/01_concurrency.md) | §1-§7 | 元分析 → Send/Sync + happens-before |
 | **跨语言对比** | [`01_rust_vs_cpp.md`](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) | §1-§6 | 元分析 → 本体论差异 |
 | **依赖类型边界** | [`02_type_theory.md`](../../04_formal/00_type_theory/01_type_theory.md) | §1-§3 | 元分析 → HM 类型系统扩展 |
+| **企业架构算子** | [`14_enterprise_architecture/README.md`](../../06_ecosystem/14_enterprise_architecture/README.md) | §1-§3 | 元分析 → BDAT 四维 + ADR 治理 |
+| **系统工程语义** | [`06_systems_engineering_standards.md`](../../04_formal/09_system_semantics/06_systems_engineering_standards.md) | §1-§4 | 元分析 → ISO 15288 / SysML v2 |
+| **模型驱动工程** | [`19_model_driven_engineering.md`](../../06_ecosystem/03_design_patterns/19_model_driven_engineering.md) | §1-§5 | 元分析 → CIM/PIM/PSM + DSL |
+| **语义工程** | [`13_semantic_engineering/README.md`](../../04_formal/13_semantic_engineering/README.md) | §1-§4 | 元分析 → 本体 / DL / KG / 互操作 |
+| **AI 系统架构** | [`08_llm_system_architecture.md`](../../07_future/04_research_and_experimental/08_llm_system_architecture.md) | §1-§5 | 元分析 → RAG / Agent / LLMOps |
 
 ---
 
@@ -1252,6 +1257,7 @@ graph TD
 - [x] **中**: 补充 Miri / Kani 在验证等价表达语义保持中的应用 — v1.1 §4.6
 - [x] **低**: 建立表征空间的机器可解析模型（JSON/YAML 导出） —— 原 `concept_index.json` 已于 2026-07-12 退役（过期，101 文件 vs 实际 476 文件，移入 `archive/2026/`）；现以 `concept/00_meta/kg_data_v3.json` 为唯一机器可解析真相源
 - [x] **低**: 与 `concept_index.md` 和 `inter_layer_map.md` 同步更新 — v1.1 Phase 4
+- [x] **高**: 对齐企业架构 / 软件工程标准 / 系统工程 / 语义工程 / AI 系统架构的国际权威内容 — v1.2 全 Phase 推进
 
 ---
 

@@ -40,6 +40,7 @@ Rust 的并发与分布式表达能力是其核心卖点之一。`semantic_space
 | 03 | `03_component_based_semantics.md` | 组件化系统语义：BIP、接口、组合与涌现行为 | ⏳ 待创建 |
 | 04 | `04_distributed_systems_semantics.md` | 分布式系统语义：共识、一致性、容错的形式化 | ⏳ 待创建 |
 | 05 | `05_reactive_systems_semantics.md` | 反应式系统语义：Reactive streams、backpressure、时态逻辑 | ✅ 已创建 |
+| 06 | `06_systems_engineering_standards.md` | ISO/IEC/IEEE 15288 系统生命周期过程、V-model、SysML v2 语义与 Rust 映射 | ✅ 已创建 |
 
 ---
 
@@ -63,5 +64,6 @@ semantic_space.md §5 机制组合
             ├── π 演算：动态拓扑与 channel 移动
             ├── 组件组合：从局部组件到系统涌现行为
             ├── 分布式语义：共识与一致性
-            └── 反应式语义：流与背压
+            ├── 反应式语义：流与背压
+            └── 系统工程标准：ISO 15288 / V-model / SysML v2
 ```

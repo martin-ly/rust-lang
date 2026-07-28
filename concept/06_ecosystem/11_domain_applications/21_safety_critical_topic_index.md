@@ -50,6 +50,7 @@
 | [MC/DC 覆盖率预研](../../07_future/02_preview_features/02_mcdc_coverage_preview.md) | DO-178C A 级覆盖率准则 |
 | [Safety Tags 预研](../../07_future/02_preview_features/03_safety_tags_preview.md) | 安全标注机制 |
 | [形式化验证工具链](../../04_formal/04_model_checking/01_verification_toolchain.md) | 验证工具全景 |
+| [安全关键系统工程](23_safety_critical_systems_engineering.md) | 安全关键系统工程标准矩阵、Rust 资格鉴定与形式方法集成 |
 
 ## 3. 分工边界
 

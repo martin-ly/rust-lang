@@ -27,7 +27,13 @@
     - [1.2 架构描述语言 ADL](#12-架构描述语言-adl)
     - [1.3 架构风格](#13-架构风格)
     - [1.4 连接件语义](#14-连接件语义)
-    - [1.5 风格的语法与状态机形式化](#15-风格的语法与状态机形式化)
+    - [1.5 ISO/IEC/IEEE 42010 架构描述概念模型](#15-isoiecieee-42010-架构描述概念模型)
+      - [核心概念](#核心概念)
+      - [Rust 工程映射](#rust-工程映射)
+    - [1.6 质量属性与架构战术](#16-质量属性与架构战术)
+      - [架构战术分类](#架构战术分类)
+      - [ATAM 与 Rust 工程](#atam-与-rust-工程)
+    - [1.7 风格的语法与状态机形式化](#17-风格的语法与状态机形式化)
       - [语法视角](#语法视角)
       - [状态机视角](#状态机视角)
     - [1.6 到 Rust 的映射](#16-到-rust-的映射)
@@ -129,7 +135,94 @@ call(cᵢ, cⱼ, m) / return(cⱼ, cᵢ, v)
 
 ---
 
-### 1.5 风格的语法与状态机形式化
+### 1.5 ISO/IEC/IEEE 42010 架构描述概念模型
+
+ISO/IEC/IEEE 42010:2022 为软件与系统架构描述提供了国际通用的概念框架。它将架构描述（Architecture Description, AD）视为围绕利益相关方关注点组织的一组视图（view）与视角（viewpoint）。这些概念可与 Shaw & Garlan 的组件-连接件-配置三元组相互补充：42010 回答“如何规范化地描述和交流架构”，三元组回答“架构由哪些结构元素构成”。
+
+#### 核心概念
+
+| 概念 | 42010 定义 | 与三元组的对应 |
+|---|---|---|
+| **System** 系统 | 被描述的对象，由元素、关系和环境界定 | 架构的整体范围 |
+| **Architecture** 架构 | 系统的基本组织方式 | (C, K, Γ) 三元组 |
+| **Stakeholder** 利益相关方 | 对系统或架构有利益的个人、团队或组织 | 组件/连接件的使用者与决策者 |
+| **Concern** 关注点 | 利益相关方感兴趣的主题 | 性能、安全、可修改性等 |
+| **Viewpoint** 视角 | 创建视图的约定、规则与技术 | 视图模板，如“模块依赖视角” |
+| **View** 视图 | 从特定视角对架构的表达 | 具体架构图或描述制品 |
+| **Correspondence** 对应关系 | 视图或架构元素之间的映射 | 配置一致性、接口匹配 |
+| **Architecture Description (AD)** 架构描述 | 记录架构的工件集合 | 架构文档、ADR、代码结构 |
+
+概念关系可概括为：
+
+```text
+Stakeholder ──has──→ Concern
+Concern ──addressed by──→ Viewpoint
+Viewpoint ──defines──→ View
+View ──expresses──→ Architecture of System
+Correspondence ──relates──→ Views
+```
+
+#### Rust 工程映射
+
+在 Rust 工程中，42010 概念可直接落地：
+
+| 42010 概念 | Rust 工程对应 | 示例 |
+|---|---|---|
+| System | Cargo workspace | 整个应用系统 |
+| Architecture | crate 职责、模块边界、trait 契约 | workspace 成员与接口 |
+| Stakeholder | 产品经理、安全团队、运维、下游库用户 | 不同角色关注不同视图 |
+| Concern | 编译期安全、运行时性能、依赖可审计 | 质量属性场景 |
+| Viewpoint | “模块依赖视角”“API 契约视角”“依赖审计视角” | 视图规则约定 |
+| View | `cargo tree` 输出、crate 依赖图、API 文档 | 具体可视化制品 |
+| Correspondence | 代码结构与 ADR 的链接 | 追踪一致性 |
+| AD | README + ADR + 架构图 + CI 配置 | 架构描述集合 |
+
+> **来源**: [ISO/IEC/IEEE 42010:2022](https://www.iso.org/standard/74296.html) · [The Open Group — TOGAF Standard, 10th Edition](https://www.opengroup.org/togaf)
+
+---
+
+### 1.6 质量属性与架构战术
+
+架构决策的核心驱动力之一是**质量属性（quality attributes）**。SEI 的 ATAM（Architecture Tradeoff Analysis Method）将质量属性场景化为：
+
+```text
+质量属性场景 = 刺激（Stimulus）+ 环境（Environment）+ 制品（Artifact）+ 响应（Response）+ 响应度量（Response Measure）
+```
+
+例如：
+
+| 元素 | 示例 |
+|---|---|
+| 刺激 | 10 倍流量突增 |
+| 环境 | 正常运行时间 |
+| 制品 | 订单服务 |
+| 响应 | 自动水平扩展 |
+| 响应度量 | 99 分位延迟 < 200ms |
+
+#### 架构战术分类
+
+架构战术（architectural tactics）是为实现特定质量属性而采取的设计决策。常见分类：
+
+| 质量属性 | 战术 | Rust 生态实践 |
+|---|---|---|
+| **可用性（Availability）** | 冗余、故障检测、故障恢复 | `tokio` 任务重启、supervisor 模式、负载均衡 |
+| **性能（Performance）** | 资源调度、缓存、并发 | `rayon` 数据并行、`dashmap` 并发缓存、无锁结构 |
+| **安全性（Security）** | 抵御攻击、最小权限、审计 | `unsafe` 边界审计、`cargo audit`、WASI capability |
+| **可修改性（Modifiability）** | 封装、抽象、信息隐藏 | crate 边界、`trait` 端口、依赖倒置 |
+
+#### ATAM 与 Rust 工程
+
+ATAM 强调**权衡（tradeoff）**：提升某一质量属性往往会损害另一属性。Rust 的类型系统把这种权衡部分地提前到编译期：
+
+- 选择 `unsafe` 提升性能 → 牺牲安全性保证，需额外审计。
+- 选择 `dyn Trait` 提升可修改性 → 牺牲静态内联带来的性能。
+- 选择强类型状态机提升可修改性/安全性 → 牺牲编译复杂度和开发速度。
+
+> **来源**: [SEI — ATAM](https://www.sei.cmu.edu/research-capabilities/all-work/display.cfm?customel_datapageid_4050=21306) · [ISO/IEC 25010:2023](https://www.iso.org/standard/78175.html)
+
+---
+
+### 1.7 风格的语法与状态机形式化
 
 架构风格可形式化为**生成语法**或**状态机**：
 

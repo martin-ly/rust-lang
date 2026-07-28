@@ -56,6 +56,11 @@
   - [六、模型部署与推理优化](#六模型部署与推理优化)
     - [6.1 量化与压缩](#61-量化与压缩)
     - [6.2 边缘部署](#62-边缘部署)
+    - [6.3 MLOps 工具链与 Rust](#63-mlops-工具链与-rust)
+      - [模型服务（Model Serving）](#模型服务model-serving)
+      - [特征存储（Feature Store）](#特征存储feature-store)
+      - [实验跟踪（Experiment Tracking）](#实验跟踪experiment-tracking)
+      - [可观测性（Observability）](#可观测性observability)
   - [七、Rust ML 的技术优势与限制](#七rust-ml-的技术优势与限制)
     - [7.1 优势分析](#71-优势分析)
     - [7.2 限制分析](#72-限制分析)
@@ -688,6 +693,111 @@ Rust 优势:
 ```
 
 > **来源**: [Edge ML with Rust](https://www.arewelearningyet.com/) · [WASM ML](https://github.com/torch2424/wasm-by-example)
+
+---
+
+### 6.3 MLOps 工具链与 Rust
+
+MLOps 关注模型从训练到生产的全生命周期工程化，Rust 在其中主要承担**服务化、数据管道、可观测性与制品管理**等基础设施角色，而非替代 Python 训练生态。下文覆盖模型服务、特征存储、实验跟踪和可观测性四个环节。
+
+#### 模型服务（Model Serving）
+
+生产推理服务的核心诉求是低延迟、高吞吐和稳定运行。Rust 无 GC、内存安全的特性使其适合作为模型服务容器，典型组合是 `axum`/`actix-web` + `ort`/`candle`/`tract`。
+
+```rust,ignore
+// 概念性：axum 模型推理服务端点
+use axum::{extract::State, Json, Router};
+use std::sync::Arc;
+
+#[derive(serde::Deserialize)]
+struct PredictRequest {
+    features: Vec<f32>,
+}
+
+#[derive(serde::Serialize)]
+struct PredictResponse {
+    prediction: f32,
+    model_version: String,
+}
+
+async fn predict(
+    State((model, version)): State<(Arc<dyn Fn(&[f32]) -> f32 + Send + Sync>, String)>,
+    Json(req): Json<PredictRequest>,
+) -> Json<PredictResponse> {
+    Json(PredictResponse {
+        prediction: model(&req.features),
+        model_version: version,
+    })
+}
+```
+
+判定依据：推理服务的热路径应尽量减少分配和同步开销；Rust 的所有权与 async 运行时可以帮助在编译期排除大量性能与并发陷阱。
+
+#### 特征存储（Feature Store）
+
+Rust 生态目前缺少成熟的开源 Feature Store，但可以通过自建服务实现在线/离线特征一致性：
+
+```text
+在线特征: Redis / PostgreSQL（低延迟，点查）
+离线特征: Parquet / Delta Lake（批量，分析）
+特征服务: Rust API 统一封装，版本化 schema
+```
+
+关键模式：
+
+- **Schema 版本化**: 使用 serde + `schemars` 定义特征 schema，CI 阶段校验训练与服务代码使用同一版本。
+- **在线/离线一致性**: 同一特征转换逻辑用 Rust 共享库实现，避免 Python 训练代码与服务代码重复实现导致漂移。
+- **缓存与预聚合**: 对访问频繁的用户画像特征使用 TTL 缓存，减少数据库压力。
+
+#### 实验跟踪（Experiment Tracking）
+
+训练实验需要记录超参数、指标、模型 artifacts 和依赖版本。Rust 侧可以：
+
+- 用 `serde_json` + `semver` 序列化实验配置；
+- 用 `sha2` 计算数据集与模型权重的校验和；
+- 通过 REST/gRPC 客户端将元数据写入 MLflow、Weights & Biases 等跟踪平台。
+
+```rust
+// 概念性：实验配置与可复现 key
+#[derive(serde::Serialize)]
+struct ExperimentConfig {
+    seed: u64,
+    dataset_version: String,
+    cargo_lock_hash: String,
+    hyperparameters: serde_json::Value,
+}
+
+impl ExperimentConfig {
+    fn reproducibility_key(&self) -> String {
+        format!("{}-{}-{}", self.seed, self.dataset_version, self.cargo_lock_hash)
+    }
+}
+```
+
+#### 可观测性（Observability）
+
+生产 ML 系统需要同时监控系统级指标（延迟、错误率）和模型级指标（预测分布、漂移）。Rust 生态提供低开销的指标与链路追踪：
+
+| 能力 | Crate | 用途 |
+|:---|:---|:---|
+| 指标采集 | `metrics` + `metrics-exporter-prometheus` | 暴露 Prometheus 指标 |
+| 链路追踪 | `tracing` + `tracing-opentelemetry` | 请求级链路追踪 |
+| 日志 | `tracing-subscriber` | 结构化日志 |
+| 漂移检测 | 自建统计模块 | KS/PSI、均值漂移 |
+
+```rust,ignore
+// 概念性：推理请求指标埋点
+use metrics::{counter, histogram};
+
+async fn tracked_predict(handler: impl FnOnce()) {
+    let start = std::time::Instant::now();
+    handler();
+    histogram!("inference_latency_seconds", start.elapsed().as_secs_f64());
+    counter!("inference_requests_total", 1);
+}
+```
+
+> **来源**: [Huyen — Designing Machine Learning Systems](https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/) · [DeepLearning.AI — MLOps Specialization](https://www.deeplearning.ai/courses/machine-learning-engineering-for-production-mlops/) · [metrics.rs](https://metrics.rs/) · [tracing](https://docs.rs/tracing/)
 
 ---
 

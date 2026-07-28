@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 561,
-    "generated_at": "2026-07-28T22:13:11.298735+00:00"
+    "total_files": 574,
+    "generated_at": "2026-07-28T23:15:36.980568+00:00"
   },
   "files": [
     {
@@ -661,7 +661,7 @@
       "layer": "L0",
       "title": "模式语义空间索引：设计模式在概念体系中的坐标",
       "positioning": "",
-      "line_count": 211,
+      "line_count": 216,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -673,10 +673,12 @@
         "../../03_advanced/06_low_level_patterns/03_type_erasure.md",
         "../../04_formal/00_type_theory/12_pattern_composition_algebra.md",
         "../../04_formal/08_algorithm_semantics/README.md",
+        "../../04_formal/09_system_semantics/06_systems_engineering_standards.md",
         "../../04_formal/09_system_semantics/README.md",
         "../../04_formal/10_architecture_semantics/README.md",
         "../../04_formal/11_computational_models/README.md",
         "../../04_formal/12_concurrency_models/README.md",
+        "../../04_formal/13_semantic_engineering/README.md",
         "../../06_ecosystem/03_design_patterns/01_patterns.md",
         "../../06_ecosystem/03_design_patterns/04_system_composability.md",
         "../../06_ecosystem/03_design_patterns/05_microservice_patterns.md",
@@ -685,13 +687,16 @@
         "../../06_ecosystem/03_design_patterns/08_architecture_patterns.md",
         "../../06_ecosystem/03_design_patterns/17_workflow_theory.md",
         "../../06_ecosystem/03_design_patterns/18_api_design_patterns.md",
+        "../../06_ecosystem/03_design_patterns/19_model_driven_engineering.md",
         "../../06_ecosystem/04_web_and_networking/09_reactive_programming.md",
+        "../../06_ecosystem/14_enterprise_architecture/README.md",
+        "../../07_future/04_research_and_experimental/08_llm_system_architecture.md",
         "semantic_bridge_algorithms_patterns.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 2,
-      "matrix_rows": 45,
+      "matrix_rows": 50,
       "pre_post": {
         "pre": [
           "[Patterns](../../06_ecosystem/03_design_patterns/01_patterns.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md)"
@@ -886,7 +891,7 @@
       "layer": "L0",
       "title": "Rust 表征空间（Semantic / Representational Space）",
       "positioning": "本文件是 `concept/` 知识体系的**元层总论**，从表征空间（Representational Space）与语义空间（Semantic Space）的视角，系统分析 Rust 语言\"能表达什么\"、\"不能表达什么\"、\"等价表达的组合关系\"，以及其内部机制的完备性与封闭性。",
-      "line_count": 1366,
+      "line_count": 1372,
       "theorem_chains": [
         {
           "text": "| 断言 | 前提条件 ⟹ 结论 | 反例/边界条件 | 典型场景 | 失效条件 |",
@@ -1015,18 +1020,23 @@
         "../../04_formal/00_type_theory/01_type_theory.md",
         "../../04_formal/02_separation_logic/01_rustbelt.md",
         "../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md",
+        "../../04_formal/09_system_semantics/06_systems_engineering_standards.md",
         "../../04_formal/11_computational_models/01_computational_semantics_framework.md",
         "../../04_formal/11_computational_models/02_computability_theory.md",
         "../../04_formal/11_computational_models/05_equivalence_of_computational_models.md",
         "../../04_formal/12_concurrency_models/03_parallel_concurrent_async_distributed_semantics.md",
+        "../../04_formal/13_semantic_engineering/README.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../06_ecosystem/03_design_patterns/19_model_driven_engineering.md",
+        "../../06_ecosystem/14_enterprise_architecture/README.md",
+        "../../07_future/04_research_and_experimental/08_llm_system_architecture.md",
         "../02_sources/05_international_authority_index.md",
         "methodology.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 5,
-      "matrix_rows": 175,
+      "matrix_rows": 180,
       "pre_post": {
         "pre": [],
         "post": []
@@ -1514,7 +1524,7 @@
       "layer": "L0",
       "title": "International Authority Index（国际化权威来源索引）",
       "positioning": "集中维护 Rust 知识体系所需的国际权威来源 URL，便于 concept/、knowledge/、docs/ 各层统一引用，避免重复搜索与链接失效。",
-      "line_count": 285,
+      "line_count": 382,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -1524,11 +1534,23 @@
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/05_modules_and_visibility/03_api_naming_conventions.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../04_formal/09_system_semantics/06_systems_engineering_standards.md",
+        "../../04_formal/13_semantic_engineering/01_ontology_engineering.md",
+        "../../04_formal/13_semantic_engineering/02_description_logic_and_owl.md",
+        "../../04_formal/13_semantic_engineering/03_knowledge_graph_construction.md",
+        "../../04_formal/13_semantic_engineering/04_semantic_interoperability.md",
         "../../06_ecosystem/00_toolchain/03_devops_and_ci_cd.md",
         "../../06_ecosystem/03_design_patterns/01_patterns.md",
+        "../../06_ecosystem/03_design_patterns/19_model_driven_engineering.md",
         "../../06_ecosystem/04_web_and_networking/03_web_frameworks.md",
         "../../06_ecosystem/05_systems_and_embedded/03_embedded_systems.md",
         "../../06_ecosystem/10_performance/01_performance_optimization.md",
+        "../../06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md",
+        "../../06_ecosystem/14_enterprise_architecture/02_architecture_governance_and_adrs.md",
+        "../../06_ecosystem/14_enterprise_architecture/03_architecture_standards_alignment.md",
+        "../../07_future/04_research_and_experimental/08_llm_system_architecture.md",
+        "../../07_future/04_research_and_experimental/09_mlops_and_llmops.md",
+        "../../07_future/04_research_and_experimental/10_ai_safety_and_alignment.md",
         "../00_framework/comprehensive_rust_mapping.md",
         "../00_framework/knowledge_mindmap.md",
         "../04_navigation/03_concept_index.md",
@@ -1539,7 +1561,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 105,
+      "matrix_rows": 173,
       "pre_post": {
         "pre": [
           "[Authority Source Map](01_authority_source_map.md) · [Sources](03_sources.md) · [Topic-Authority Alignment Map](04_topic_authority_alignment_map.md)"
@@ -3347,7 +3369,7 @@
       "layer": "L0",
       "title": "测验体系注册表（Quiz Registry）",
       "positioning": "",
-      "line_count": 151,
+      "line_count": 152,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -7869,7 +7891,7 @@
       "layer": "L0",
       "title": "Rust 知识体系知识图谱本体规范 v2.0（RDF 1.2 / RDF-star / SKOS 对齐版）",
       "positioning": "本文件是 `kg_ontology.md`（v1 已不再维护）的 v2 升级版，在保留原有教学关系本体的基础上，显式对齐 W3C RDF 1.2、RDF-star、SKOS、JSON-LD 1.1 与 SHACL 数据形状标准，使项目知识图谱从\"规范文档\"进化为\"可验证、可查询、可多语言消费\"的 Linked Data。",
-      "line_count": 331,
+      "line_count": 335,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -9019,7 +9041,7 @@
       "layer": "L1",
       "title": "所有权",
       "positioning": "",
-      "line_count": 2031,
+      "line_count": 2032,
       "theorem_chains": [
         {
           "text": "3. **分离逻辑（Separation Logic）视角**：`&mut T` 授予对 `T` 的**独占访问权**——形式上等价于分离逻辑中的 `points-to` 谓词 `x ↦ v`；`&T` 的共享性通过「不可变 ⟹ 并发可共享」约束保证无数据竞争。",
@@ -9469,6 +9491,7 @@
       "cross_references": [
         "../../../crates/c06_async/README.md",
         "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/00_framework/semantic_space.md",
         "../../00_meta/01_terminology/01_terminology_glossary.md",
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../00_meta/04_navigation/04_inter_layer_map.md",
@@ -9508,7 +9531,7 @@
       "layer": "L1",
       "title": "借用",
       "positioning": "",
-      "line_count": 2159,
+      "line_count": 2160,
       "theorem_chains": [
         {
           "text": "| 函数只读取数据、调用方保留所有权 | 参数用 `&T` | §5.1 决策树 Q1/Q2 | 需要修改数据 ⟹ `&T` 不可写，编译错误 |",
@@ -9955,6 +9978,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/00_framework/semantic_space.md",
         "../../00_meta/01_terminology/01_terminology_glossary.md",
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../00_meta/04_navigation/04_inter_layer_map.md",
@@ -17953,7 +17977,7 @@
       "layer": "L2",
       "title": "Trait 系统",
       "positioning": "",
-      "line_count": 3202,
+      "line_count": 3203,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -18575,6 +18599,7 @@
         "../../../crates/c02_type_system/docs/tier_02_guides/03_compound_types_guide.md",
         "../../../crates/c02_type_system/docs/tier_02_guides/05_generics_programming_guide.md",
         "../../../knowledge/02_intermediate/06_traits.md",
+        "../../00_meta/00_framework/semantic_space.md",
         "../../00_meta/01_terminology/01_terminology_glossary.md",
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../00_meta/04_navigation/04_inter_layer_map.md",
@@ -30779,7 +30804,7 @@
       "layer": "L3",
       "title": "Unsafe Rust 安全编程",
       "positioning": "",
-      "line_count": 3457,
+      "line_count": 3458,
       "theorem_chains": [
         {
           "text": "- v1.1 (2026-05-13): 重构增强——定理一致性（Coherence）矩阵扩展至10行（⟹推理链）、反命题决策树×4、认知路径六步递进、章节过渡段落、层次一致性标注",
@@ -31322,6 +31347,7 @@
         "../../../docs/12_research_notes/02_formal_methods/14_variance_concept_mindmap.md",
         "../../../knowledge/03_advanced/unsafe/03_unsafe_rust.md",
         "../../00_meta/00_framework/methodology.md",
+        "../../00_meta/00_framework/semantic_space.md",
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../00_meta/04_navigation/08_learning_mvp_path.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
@@ -47162,11 +47188,77 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\09_system_semantics\\06_systems_engineering_standards.md",
+      "layer": "L4",
+      "title": "系统工程标准与 Rust 映射",
+      "positioning": "从系统生命周期、V&V 与模型语义三个维度，建立系统工程标准与 Rust 安全关键/嵌入式实现的映射框架。",
+      "line_count": 477,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 六、反命题"
+        },
+        {
+          "title": "### 反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "// 简化的 SysML 状态机行为投影 enum FlightMode {     Standby,     Armed,     Flying,     L..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "#![no_std] #![no_main]  use core::panic::PanicInfo;  #[panic_handler] fn panic(_..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// Kani 示例：验证有界计数器的安全属性 #[cfg(kani)] #[kani::proof] fn counter_never_overflows()..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../06_ecosystem/11_domain_applications/23_safety_critical_systems_engineering.md",
+        "01_actor_model_semantics.md",
+        "03_component_based_semantics.md",
+        "04_distributed_systems_semantics.md",
+        "05_reactive_systems_semantics.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 18,
+      "pre_post": {
+        "pre": [
+          "[并发模型](../../03_advanced/00_concurrency/01_concurrency.md) · [Actor 模型系统语义](01_actor_model_semantics.md) · [分布式系统语义](04_distributed_systems_semantics.md) · [反应式系统语义](05_reactive_systems_semantics.md)"
+        ],
+        "post": [
+          "[安全关键系统工程](../../06_ecosystem/11_domain_applications/23_safety_critical_systems_engineering.md) · [组件化系统语义](03_component_based_semantics.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\04_formal\\10_architecture_semantics\\01_software_architecture_formalization.md",
       "layer": "L4",
       "title": "软件架构形式化（Software Architecture Formalization）",
       "positioning": "从形式化视角建立软件架构的组件-连接件-配置三元模型，介绍架构描述语言（ADL）、架构风格与连接件语义，并映射到 Rust 的 crate/module/trait/workspace 机制。",
-      "line_count": 353,
+      "line_count": 446,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47198,7 +47290,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 23,
+      "matrix_rows": 52,
       "pre_post": {
         "pre": [
           "[Async/Await](../../03_advanced/01_async/01_async.md) · [Architecture Patterns](../../06_ecosystem/03_design_patterns/08_architecture_patterns.md) · [Pattern Composition Algebra](../00_type_theory/12_pattern_composition_algebra.md) · [System Composability](../../06_ecosystem/03_design_patterns/04_system_composability.md)"
@@ -47434,7 +47526,7 @@
       "layer": "L4",
       "title": "计算语义统一框架（A Unified Framework of Computational Semantics）",
       "positioning": "把操作、指称、公理、类型四种语义统一为观察同一程序行为的四种互补视角，为后续可计算性、形式语言与程序等价性讨论奠定共同语言。",
-      "line_count": 256,
+      "line_count": 259,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47488,7 +47580,7 @@
       "layer": "L4",
       "title": "可计算性理论（Computability Theory）",
       "positioning": "从图灵机、递归函数与 Church-Turing 论题出发，刻画「可计算」的形式边界，并通过 Rust 实例展示可判定性与不可判定性在语言实现中的投影。",
-      "line_count": 339,
+      "line_count": 345,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47547,7 +47639,7 @@
       "layer": "L4",
       "title": "形式语言与自动机（Formal Languages and Automata）",
       "positioning": "从 Chomsky 层级与自动机对应关系出发，定位 Rust 语法子集（正则表达式、上下文无关表达式、宏系统）在形式语言谱系中的位置，为理解解析、类型推断与宏扩展的计算边界提供理论基础。",
-      "line_count": 561,
+      "line_count": 566,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47636,7 +47728,7 @@
       "layer": "L4",
       "title": "计算的数学函数（Mathematical Functions of Computation）",
       "positioning": "把可计算函数视为数学对象，连接 λ 可定义性、μ-递归、部分递归函数与指称语义中的 Scott 域，并通过 Rust 函数/闭包/迭代器展示理论与实现的对应与张力。",
-      "line_count": 310,
+      "line_count": 316,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47698,7 +47790,7 @@
       "layer": "L4",
       "title": "计算模型等价性（Equivalence of Computational Models）",
       "positioning": "从图灵等价、模型间编码与 Felleisen 表达力三个角度，说明「所有图灵完备语言计算能力相同」与「工程语言表达能力不同」为何同时成立，并把这一理论映射到 Rust 的 `async/await` 与 `?` 等语法构造。",
-      "line_count": 370,
+      "line_count": 375,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47839,7 +47931,7 @@
       "layer": "L4",
       "title": "并发模型表达能力比较（Expressiveness of Concurrent Models）",
       "positioning": "从**编码、互模拟与 Felleisen 表达力框架**三个维度，比较共享内存、CSP、Actor、π 演算等并发模型的表达能力边界，并解释 Rust 的 `tokio::select!`、`async/await` 等原语在形式表达力坐标系中的位置。",
-      "line_count": 453,
+      "line_count": 458,
       "theorem_chains": [
         {
           "text": "| T-ECM-03 | 强互模拟 ⟹ 弱互模拟 | 弱互模拟定义更宽松 | 若两系统强互模拟，则必然弱互模拟；反之不成立 |",
@@ -47926,7 +48018,7 @@
       "layer": "L4",
       "title": "同步 · 并发 · 并行 · 异步 · 分布式的语义边界",
       "positioning": "在单一页中形式化区分「同步/并发/并行/异步/分布式」五种计算范式，标定它们的语义交集、包含关系与 Rust 原语的落点，避免把实现细节或性能目标当成范式定义。",
-      "line_count": 394,
+      "line_count": 404,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47999,11 +48091,237 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\13_semantic_engineering\\01_ontology_engineering.md",
+      "layer": "L4",
+      "title": "本体工程方法论（Ontology Engineering Methodologies）",
+      "positioning": "从**方法论**角度比较三种经典本体工程方法，并给出把它们应用到 Rust 知识体系的具体步骤；避免把「本体」简单等同于「分类树」。",
+      "line_count": 289,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 七、反命题"
+        },
+        {
+          "title": "### 反命题"
+        },
+        {
+          "title": "### 反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "// 类：Resource 对应 OWL 中的类 ex:Resource trait Resource {}  // 子类：OwnedResource ⊑ Re..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/02_type_system/01_type_system.md",
+        "../../03_advanced/06_low_level_patterns/03_type_erasure.md",
+        "../README.md",
+        "02_description_logic_and_owl.md",
+        "03_knowledge_graph_construction.md",
+        "04_semantic_interoperability.md",
+        "README.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 23,
+      "pre_post": {
+        "pre": [
+          "[语义工程目录 README](README.md) · [L4 形式化理论层](../README.md) · [类型系统](../../01_foundation/02_type_system/01_type_system.md) · [L3 类型擦除](../../03_advanced/06_low_level_patterns/03_type_erasure.md)"
+        ],
+        "post": [
+          "[描述逻辑与 OWL](02_description_logic_and_owl.md) · [知识图谱构建](03_knowledge_graph_construction.md) · [语义互操作](04_semantic_interoperability.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\13_semantic_engineering\\02_description_logic_and_owl.md",
+      "layer": "L4",
+      "title": "描述逻辑与 OWL（Description Logic and OWL）",
+      "positioning": "从**形式逻辑**角度介绍描述逻辑家族与 OWL 2 profiles，帮助读者理解知识图谱本体的可判定推理边界，并把 trait 一致性求解类比为约束满足问题。",
+      "line_count": 296,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 七、反命题"
+        },
+        {
+          "title": "### 反命题"
+        },
+        {
+          "title": "### 反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 25,
+          "should_fail": false,
+          "code_preview": "// 概念 C：Drawable trait Drawable {}  // 概念 D：Clickable trait Clickable {}  // 概念 ..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "trait IsSend<T> {} impl<T: Send> IsSend<T> for () {}  // 类型级断言：仅当 T: Send 时，Proo..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/02_type_system/01_type_system.md",
+        "../../03_advanced/02_unsafe/06_memory_model.md",
+        "01_ontology_engineering.md",
+        "03_knowledge_graph_construction.md",
+        "04_semantic_interoperability.md",
+        "README.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 26,
+      "pre_post": {
+        "pre": [
+          "[语义工程目录 README](README.md) · [本体工程](01_ontology_engineering.md) · [类型系统](../../01_foundation/02_type_system/01_type_system.md) · [L3 内存模型](../../03_advanced/02_unsafe/06_memory_model.md)"
+        ],
+        "post": [
+          "[知识图谱构建](03_knowledge_graph_construction.md) · [语义互操作](04_semantic_interoperability.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\13_semantic_engineering\\03_knowledge_graph_construction.md",
+      "layer": "L4",
+      "title": "知识图谱构建（Knowledge Graph Construction）",
+      "positioning": "从**工程实现**角度介绍如何把非结构化或多源数据转化为可查询、可验证的知识图谱，并把项目 KG v3 作为 Rust 知识体系持续演进的实例。",
+      "line_count": 357,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 八、反命题"
+        },
+        {
+          "title": "### 反命题"
+        },
+        {
+          "title": "### 反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "#[derive(Debug, Clone)] struct Iri(String);  #[derive(Debug, Clone)] enum Term {..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// 概念示意：使用 sophia 解析 Turtle use sophia::api::prelude::*; use sophia::turtle::par..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// 概念示意：使用 oxigraph 进行 SPARQL 查询 use oxigraph::store::Store;  let store = Store:..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/knowledge_topology/kg_ontology_v2.md",
+        "../../03_advanced/06_low_level_patterns/05_stream_processing_semantics.md",
+        "01_ontology_engineering.md",
+        "02_description_logic_and_owl.md",
+        "04_semantic_interoperability.md",
+        "README.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 9,
+      "pre_post": {
+        "pre": [
+          "[语义工程目录 README](README.md) · [本体工程](01_ontology_engineering.md) · [描述逻辑与 OWL](02_description_logic_and_owl.md) · [L3 流处理语义](../../03_advanced/06_low_level_patterns/05_stream_processing_semantics.md)"
+        ],
+        "post": [
+          "[语义互操作](04_semantic_interoperability.md) · [知识图谱本体 v2](../../00_meta/knowledge_topology/kg_ontology_v2.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\13_semantic_engineering\\04_semantic_interoperability.md",
+      "layer": "L4",
+      "title": "语义互操作（Semantic Interoperability）",
+      "positioning": "从**互操作**角度介绍如何让不同系统、不同词汇表的语义资产相互理解，并给出 Rust 服务端与客户端场景下的工程映射。",
+      "line_count": 303,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 七、反命题"
+        },
+        {
+          "title": "### 反命题"
+        },
+        {
+          "title": "### 反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// 概念示意：axum handler 根据 Accept 头返回 JSON-LD 或 Turtle use axum::{extract::Accept, ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/00_framework/semantic_space.md",
+        "../../00_meta/knowledge_topology/kg_ontology_v2.md",
+        "../../03_advanced/06_low_level_patterns/04_network_programming.md",
+        "01_ontology_engineering.md",
+        "02_description_logic_and_owl.md",
+        "03_knowledge_graph_construction.md",
+        "README.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 6,
+      "pre_post": {
+        "pre": [
+          "[语义工程目录 README](README.md) · [知识图谱构建](03_knowledge_graph_construction.md) · [描述逻辑与 OWL](02_description_logic_and_owl.md) · [L3 网络编程](../../03_advanced/06_low_level_patterns/04_network_programming.md)"
+        ],
+        "post": [
+          "[知识图谱本体 v2](../../00_meta/knowledge_topology/kg_ontology_v2.md) · [语义空间](../../00_meta/00_framework/semantic_space.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\00_paradigms\\01_paradigm_matrix.md",
       "layer": "L5",
       "title": "Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵）",
       "positioning": "",
-      "line_count": 1300,
+      "line_count": 1301,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 重构——添加认知路径、⟹推理链、反命题决策树、章节过渡、层次一致性（Coherence）标注",
@@ -48145,6 +48463,7 @@
       "cross_references": [
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/00_framework/paradigm_transition_matrix.md",
+        "../../00_meta/00_framework/semantic_space.md",
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../04_formal/00_type_theory/01_type_theory.md",
         "../../04_formal/01_ownership_logic/01_linear_logic.md",
@@ -54925,7 +55244,7 @@
       "layer": "L6",
       "title": "Rust 系统设计原则与国际权威对齐",
       "positioning": "本文件从**系统架构设计**视角梳理 Rust 的核心设计原则，并与国际权威内容（形式化方法、分布式系统理论、安全工程、容错计算）建立对齐关系。",
-      "line_count": 833,
+      "line_count": 860,
       "theorem_chains": [
         {
           "text": "| Rust 系统设计原则与国际权威对齐 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -55043,7 +55362,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 7,
-      "matrix_rows": 99,
+      "matrix_rows": 107,
       "pre_post": {
         "pre": [
           "[Architecture Patterns](08_architecture_patterns.md)"
@@ -57279,6 +57598,89 @@
         ],
         "post": [
           "[Future Roadmap](../../07_future/01_edition_roadmap/04_roadmap.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\03_design_patterns\\19_model_driven_engineering.md",
+      "layer": "L6",
+      "title": "模型驱动工程",
+      "positioning": "从 MDA 抽象层、DSL 工程与模型变换语义出发，将模型驱动思想映射到 Rust 的宏系统与类型驱动生成。",
+      "line_count": 492,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 八、反命题"
+        },
+        {
+          "title": "### 反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 22,
+          "should_fail": false,
+          "code_preview": "// PIM 在 Rust 中的初步投影 trait Account {     fn balance(&self) -> Money;     fn with..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "// 轻量级状态机 DSL macro_rules! state_machine {     (         $name:ident {          ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "// 过程宏示例：为结构体生成 builder（概念示意） use proc_macro::TokenStream;  #[proc_macro_derive(..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "#[derive(Builder)] struct Request {     url: String,     method: String, }  let ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "use serde::{Serialize, Deserialize};  #[derive(Serialize, Deserialize, Debug)] s..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md",
+        "../../05_comparative/00_paradigms/05_language_semantic_model_matrix.md",
+        "../05_systems_and_embedded/03_embedded_systems.md",
+        "11_formal_design_pattern_theory.md",
+        "16_pattern_composition_algebra.md",
+        "17_workflow_theory.md",
+        "18_api_design_patterns.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 6,
+      "pre_post": {
+        "pre": [
+          "[元编程与宏](../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md) · [形式化设计模式理论](11_formal_design_pattern_theory.md) · [模式组合代数](16_pattern_composition_algebra.md) · [工作流理论与形式化](17_workflow_theory.md)"
+        ],
+        "post": [
+          "[API 设计模式](18_api_design_patterns.md) · [Rust 嵌入式系统开发](../05_systems_and_embedded/03_embedded_systems.md) · [语言语义模型矩阵](../../05_comparative/00_paradigms/05_language_semantic_model_matrix.md)"
         ]
       },
       "backward_chains": 0,
@@ -64091,7 +64493,7 @@
       "layer": "L6",
       "title": "Machine Learning Ecosystem（机器学习生态）",
       "positioning": "",
-      "line_count": 1031,
+      "line_count": 1141,
       "theorem_chains": [
         {
           "text": "| Machine Learning Ecosystem（机器学习生态） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -64195,6 +64597,28 @@
           "flags": [
             "ignore"
           ],
+          "lines": 25,
+          "should_fail": false,
+          "code_preview": "// 概念性：axum 模型推理服务端点 use axum::{extract::State, Json, Router}; use std::sync::Ar..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// 概念性：实验配置与可复现 key #[derive(serde::Serialize)] struct ExperimentConfig {     se..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// 概念性：推理请求指标埋点 use metrics::{counter, histogram};  async fn tracked_predict(han..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
           "lines": 14,
           "should_fail": false,
           "code_preview": "// ❌ 错误：未初始化张量可能包含敏感数据 use candle_core::{Tensor, Device};  unsafe fn insecure_te..."
@@ -64236,7 +64660,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 71,
+      "matrix_rows": 76,
       "pre_post": {
         "pre": [
           "[类型系统（Type System）](../../01_foundation/02_type_system/01_type_system.md) · [泛型（Generics）](../../02_intermediate/01_generics/01_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)",
@@ -65127,7 +65551,7 @@
       "layer": "L6",
       "title": "安全关键 Rust 专题索引",
       "positioning": ">",
-      "line_count": 59,
+      "line_count": 60,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -65146,12 +65570,13 @@
         "../../07_future/02_preview_features/02_mcdc_coverage_preview.md",
         "../../07_future/02_preview_features/03_safety_tags_preview.md",
         "../../07_future/02_preview_features/12_ferrocene_preview.md",
-        "22_autosar_and_rust.md"
+        "22_autosar_and_rust.md",
+        "23_safety_critical_systems_engineering.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 16,
+      "matrix_rows": 17,
       "pre_post": {
         "pre": [
           ">"
@@ -65200,6 +65625,81 @@
         ],
         "post": [
           "[Industrial Case Studies](14_industrial_case_studies.md) · [cargo vet 与供应链审计](../07_security_and_cryptography/03_cargo_vet_supply_chain.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\11_domain_applications\\23_safety_critical_systems_engineering.md",
+      "layer": "L6",
+      "title": "安全关键系统工程",
+      "positioning": "从安全关键概念与标准矩阵出发，梳理 Rust 在航空、汽车、工业功能安全中的资格鉴定路径与形式方法集成。",
+      "line_count": 430,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 六、反命题"
+        },
+        {
+          "title": "### 反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "#![deny(unsafe_code)] // 安全关键 crate 入口：强制拒绝 unsafe， // 把 unsafe 边界集中到少数经评审、有形式化论..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "#[cfg(kani)] #[kani::proof] fn saturating_add_never_overflows() {     let a: u8 ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// Prusti 风格前置/后置条件（概念语法，以实际工具版本为准） #[requires(x >= 0)] #[ensures(ret >= x)] fn ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// Verus 风格不变量与证明（概念示意） verus! {     struct Counter { value: u64 }      impl Cou..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../04_formal/04_model_checking/01_verification_toolchain.md",
+        "../../04_formal/04_model_checking/03_aerospace_certification_formal_methods.md",
+        "../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md",
+        "../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md",
+        "../05_systems_and_embedded/03_embedded_systems.md",
+        "21_safety_critical_topic_index.md",
+        "22_autosar_and_rust.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 11,
+      "pre_post": {
+        "pre": [
+          "[形式化验证工具链](../../04_formal/04_model_checking/01_verification_toolchain.md) · [安全关键 Rust 专题索引](21_safety_critical_topic_index.md) · [AUTOSAR 与 Rust](22_autosar_and_rust.md) · [Rust 嵌入式系统开发](../05_systems_and_embedded/03_embedded_systems.md) · [Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)"
+        ],
+        "post": [
+          "[航空航天认证与形式化方法](../../04_formal/04_model_checking/03_aerospace_certification_formal_methods.md) · [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md)"
         ]
       },
       "backward_chains": 0,
@@ -66107,6 +66607,132 @@
         ],
         "post": [
           "[Application Domains](../06_data_and_distributed/01_application_domains.md) · [Industrial Case Studies](../11_domain_applications/14_industrial_case_studies.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\14_enterprise_architecture\\01_enterprise_architecture_frameworks.md",
+      "layer": "L6",
+      "title": "企业架构框架（Enterprise Architecture Frameworks）",
+      "positioning": "从企业级视角对齐 TOGAF 10、Zachman Framework、FEAF 与 BDAT 四维矩阵，建立业务、数据、应用、技术架构与 Rust 工程结构的映射。",
+      "line_count": 354,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 六、反命题"
+        },
+        {
+          "title": "### 反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "// 应用架构层定义的端口（服务契约） pub trait OrderRepository: Send + Sync {     async fn find_b..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md",
+        "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
+        "../03_design_patterns/03_system_design_principles.md",
+        "../03_design_patterns/08_architecture_patterns.md",
+        "02_architecture_governance_and_adrs.md",
+        "03_architecture_standards_alignment.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 43,
+      "pre_post": {
+        "pre": [
+          "[Software Architecture Formalization](../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md) · [Architecture Patterns](../03_design_patterns/08_architecture_patterns.md) · [System Design Principles](../03_design_patterns/03_system_design_principles.md)"
+        ],
+        "post": [
+          "[Architecture Governance and ADRs](02_architecture_governance_and_adrs.md) · [Architecture Standards Alignment](03_architecture_standards_alignment.md) · [Safety Boundaries](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\14_enterprise_architecture\\02_architecture_governance_and_adrs.md",
+      "layer": "L6",
+      "title": "架构治理与架构决策记录（Architecture Governance and ADRs）",
+      "positioning": "从架构治理视角建立 ADR、架构原则、技术雷达与企业级 Rust 工程实践（workspace、MSRV、RFC、质量门）的映射。",
+      "line_count": 371,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 六、反命题"
+        },
+        {
+          "title": "### 反命题"
+        }
+      ],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md",
+        "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
+        "../03_design_patterns/03_system_design_principles.md",
+        "01_enterprise_architecture_frameworks.md",
+        "03_architecture_standards_alignment.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 37,
+      "pre_post": {
+        "pre": [
+          "[Enterprise Architecture Frameworks](01_enterprise_architecture_frameworks.md) · [Software Architecture Formalization](../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md)"
+        ],
+        "post": [
+          "[Architecture Standards Alignment](03_architecture_standards_alignment.md) · [System Design Principles](../03_design_patterns/03_system_design_principles.md) · [Safety Boundaries](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\14_enterprise_architecture\\03_architecture_standards_alignment.md",
+      "layer": "L6",
+      "title": "架构标准对齐（Architecture Standards Alignment）",
+      "positioning": "将 ISO/IEC/IEEE 42010、12207、15288、25010 与 SWEBOK v4 等国际标准映射到 Rust 工程概念、工具和质量门。",
+      "line_count": 343,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 八、反命题"
+        },
+        {
+          "title": "### 反命题"
+        }
+      ],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../04_formal/09_system_semantics/06_systems_engineering_standards.md",
+        "../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md",
+        "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
+        "../03_design_patterns/03_system_design_principles.md",
+        "01_enterprise_architecture_frameworks.md",
+        "02_architecture_governance_and_adrs.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 78,
+      "pre_post": {
+        "pre": [
+          "[Enterprise Architecture Frameworks](01_enterprise_architecture_frameworks.md) · [Architecture Governance and ADRs](02_architecture_governance_and_adrs.md) · [Software Architecture Formalization](../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md)"
+        ],
+        "post": [
+          "[System Design Principles](../03_design_patterns/03_system_design_principles.md) · [Systems Engineering Standards](../../04_formal/09_system_semantics/06_systems_engineering_standards.md) · [Safety Boundaries](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md)"
         ]
       },
       "backward_chains": 0,
@@ -73319,7 +73945,7 @@
       "layer": "L7",
       "title": "AI × Rust：生成-验证闭环与确定性容器",
       "positioning": "Prophet 属于**监督学习**（学习历史补丁特征），而非 RL。但它是\"编译器/测试反馈驱动程序修复\"思想的早期工业级实践，为后续 RL 方法奠定了问题定义基础。[MIT News, 2016](https://news.mit.edu/)",
-      "line_count": 1035,
+      "line_count": 1040,
       "theorem_chains": [
         {
           "text": "> **论证**: RustBelt 证明 Safe Rust 的内存安全（无 UAF/DF），因此编译通过 ⟹ 内存安全（Memory Safety）。但编译通过 ⇏ 逻辑正确（功能 bug 仍可能存在）。",
@@ -73414,12 +74040,15 @@
         "../../02_intermediate/00_traits/01_traits.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
-        "02_formal_methods.md"
+        "02_formal_methods.md",
+        "08_llm_system_architecture.md",
+        "09_mlops_and_llmops.md",
+        "10_ai_safety_and_alignment.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 3,
-      "matrix_rows": 62,
+      "matrix_rows": 65,
       "pre_post": {
         "pre": [
           "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·",
@@ -74350,6 +74979,199 @@
         ],
         "post": [
           "[Rust Specification](https://www.rust-lang.org/) · [官方路线图](https://github.com/rust-lang/rust/labels/F-roadmap)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\04_research_and_experimental\\08_llm_system_architecture.md",
+      "layer": "L7",
+      "title": "LLM 系统架构：RAG、Agent 与向量数据库",
+      "positioning": "",
+      "line_count": 533,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 七、反命题"
+        },
+        {
+          "title": "### 7.1 反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "// 概念性接口：LLM 请求与响应契约 pub struct LlmRequest {     pub system_prompt: String,     ..."
+        },
+        {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "// 概念性工具调用 schema #[derive(serde::Deserialize, Debug)] #[serde(tag = \"tool\")] pu..."
+        },
+        {
+          "flags": [],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "// 概念性 Agent 消息协议 pub struct AgentMessage {     pub from: AgentId,     pub to: A..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "// 概念性 Qdrant 客户端用法（需依赖 qdrant-client） use qdrant_client::Qdrant; use qdrant_cli..."
+        },
+        {
+          "flags": [],
+          "lines": 30,
+          "should_fail": false,
+          "code_preview": "// 概念性 axum 推理服务端点 use axum::{extract::State, Json, Router}; use std::sync::Arc;..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/02_type_system/01_type_system.md",
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md",
+        "01_ai_integration.md",
+        "05_rust_in_ai.md",
+        "09_mlops_and_llmops.md",
+        "10_ai_safety_and_alignment.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": true,
+      "mermaid_blocks": 1,
+      "matrix_rows": 24,
+      "pre_post": {
+        "pre": [
+          "[Rust in AI](05_rust_in_ai.md) · [Machine Learning Ecosystem](../../06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md)"
+        ],
+        "post": [
+          "[MLOps and LLMOps](09_mlops_and_llmops.md) · [AI Safety and Alignment](10_ai_safety_and_alignment.md) · [AI Integration](01_ai_integration.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\04_research_and_experimental\\09_mlops_and_llmops.md",
+      "layer": "L7",
+      "title": "MLOps 与 LLMOps：模型生命周期工程化",
+      "positioning": "",
+      "line_count": 545,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 八、反命题"
+        },
+        {
+          "title": "### 8.1 反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "// 概念性流水线步骤抽象 pub struct PipelineStep<T> {     pub name: &'static str,     pub v..."
+        },
+        {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "// 概念性训练配置，强调版本锁定 #[derive(Clone, Debug)] pub struct TrainingConfig {     pub se..."
+        },
+        {
+          "flags": [],
+          "lines": 22,
+          "should_fail": false,
+          "code_preview": "// 概念性模型 artifact 元数据 pub struct ModelArtifact {     pub name: String,     pub v..."
+        },
+        {
+          "flags": [],
+          "lines": 34,
+          "should_fail": false,
+          "code_preview": "// 概念性漂移检测接口 pub trait DriftDetector {     fn fit_reference(&mut self, data: &[f..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "// 概念性 axum 模型服务（需 axum、serde、tokio） use axum::{extract::State, Json, Router}; u..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/02_type_system/01_type_system.md",
+        "../../03_advanced/01_async/01_async.md",
+        "../../06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md",
+        "08_llm_system_architecture.md",
+        "10_ai_safety_and_alignment.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": true,
+      "mermaid_blocks": 1,
+      "matrix_rows": 25,
+      "pre_post": {
+        "pre": [
+          "[Machine Learning Ecosystem](../../06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md) · [LLM System Architecture](08_llm_system_architecture.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Async/Await](../../03_advanced/01_async/01_async.md)"
+        ],
+        "post": [
+          "[AI Safety and Alignment](10_ai_safety_and_alignment.md) · [LLM System Architecture](08_llm_system_architecture.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\04_research_and_experimental\\10_ai_safety_and_alignment.md",
+      "layer": "L7",
+      "title": "AI 安全与对齐：RLHF、Constitutional AI 与形式化验证",
+      "positioning": "",
+      "line_count": 404,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 七、反命题"
+        },
+        {
+          "title": "### 7.1 反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "// 概念性：用类型系统标记\"已过滤输入\"与\"原始输入\" pub struct RawPrompt(String); pub struct SanitizedP..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md",
+        "01_ai_integration.md",
+        "02_formal_methods.md",
+        "08_llm_system_architecture.md",
+        "09_mlops_and_llmops.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": true,
+      "mermaid_blocks": 1,
+      "matrix_rows": 28,
+      "pre_post": {
+        "pre": [
+          "[LLM System Architecture](08_llm_system_architecture.md) · [MLOps and LLMOps](09_mlops_and_llmops.md) · [Formal Methods](02_formal_methods.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)"
+        ],
+        "post": [
+          "[AI Integration](01_ai_integration.md) · [Formal Methods](02_formal_methods.md)"
         ]
       },
       "backward_chains": 0,

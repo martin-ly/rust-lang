@@ -99,10 +99,10 @@ concept→quiz 回链 22/22 完成（`scripts/add_quiz_backlinks.py` 幂等批�
 | 03_advanced | 29 | 116 |
 | 04_formal | 43 | 195 |
 | 05_comparative | 18 | 88 |
-| 06_ecosystem | 71 | 340 |
-| 07_future | 43 | 211 |
+| 06_ecosystem | 74 | 355 |
+| 07_future | 46 | 226 |
 | README.md / sources | 4 | 12 |
-| **合计** | **316** | **1367** |
+| **合计** | **322** | **1397** |
 
 > W3-b（2026-07-12）新增 15 页嵌入式测验（L1×6：patterns/statements/functions/structs/enums/impls；
 > L2×5：dispatch/derive/GAT/const_generics/panic；L3×4：send_sync/future_executor/cancellation/memory_model），
@@ -110,6 +110,7 @@ concept→quiz 回链 22/22 完成（`scripts/add_quiz_backlinks.py` 幂等批�
 > 2026-07-13 再补 3 页（L1：06_keywords；L2：03_type_level_programming；L3：08_syn_quote_reference），共 +9 答题块；
 > TOP-20 清单中 04_unsafe_rust_patterns 为重定向 stub，按 canonical 规则不加测验，其权威页 01_unsafe.md 已有 4 块嵌入式测验。
 > 2026-07-28 对称差修复 sprint 新增 L4 权威页 `04_formal/04_model_checking/11_creusot.md`（含 3 块嵌入式测验），L4 +1 页 / +3 块。
+> 2026-07-28 企业架构 / 系统工程 / 语义工程 / AI 系统语义对齐 sprint 新增 6 个 concept/ 权威页（`06_ecosystem/14_enterprise_architecture/` 3 页、`04_formal/09_system_semantics/06_systems_engineering_standards.md`、`06_ecosystem/03_design_patterns/19_model_driven_engineering.md`、`04_formal/13_semantic_engineering/` 4 页、`07_future/04_research_and_experimental/08-10 AI 系统页`），共 +30 块嵌入式测验；生态层 +3 页 / +15 块，未来层 +3 页 / +15 块。
 
 ---
 
@@ -145,6 +146,6 @@ python scripts/check_quiz_system.py --strict  # 注册表一致性/题型多样�
 校验项：① yaml 注册表与实际文件一致性（题数/题型/难度分布/嵌入式统计）；② 独立 quiz 题型多样性 ≥3 种；
 ③ 难度标注率（目标 100%）；④ quiz→concept 与 concept→quiz 双向链接率（回链 22/22）。
 
-> 本页统计由 `scripts/check_quiz_system.py` 机器复核；最后核对：2026-07-16（`--strict` 0 失败；回链 22/22；324/324 题难度标注 100%）。
+> 本页统计由 `scripts/check_quiz_system.py` 机器复核；最后核对：2026-07-28（`--strict` 0 失败；回链 22/22；324/324 题难度标注 100%；嵌入式测验 322 页 / 1397 块）。
 > **受众**: [初学者]
 > **内容分级**: [综述级]

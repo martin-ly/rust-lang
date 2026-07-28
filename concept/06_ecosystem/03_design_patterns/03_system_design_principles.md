@@ -46,6 +46,7 @@
     - [2.5 分布式一致性：从所有权到共识的隐喻](#25-分布式一致性从所有权到共识的隐喻)
     - [2.6 安全边界：Zero Trust + WASI 能力安全](#26-安全边界zero-trust--wasi-能力安全)
     - [2.7 容错设计：Error Kernel + Let It Crash](#27-容错设计error-kernel--let-it-crash)
+  - [二（续）、七项设计原则与国际标准映射](#二续七项设计原则与国际标准映射)
   - [三、系统设计决策矩阵](#三系统设计决策矩阵)
     - [3.1 安全-性能-可维护性帕累托前沿](#31-安全-性能-可维护性帕累托前沿)
     - [3.2 场景驱动的设计选择](#32-场景驱动的设计选择)
@@ -282,6 +283,32 @@ impl Worker {
     }
 }
 ```
+
+---
+
+## 二（续）、七项设计原则与国际标准映射
+
+将 Rust 的七项核心设计原则映射到 SWEBOK v4 知识领域与 ISO/IEC 25010:2023 质量特性，可在国际标准坐标系中定位 Rust 工程的独特价值。
+
+| 设计原则 | 核心 Rust 机制 | SWEBOK v4 知识领域 | ISO/IEC 25010 质量特性 |
+|:---|:---|:---|:---|
+| **内存安全** | 所有权 + 借用 + 生命周期 | 软件构造、软件质量、软件安全 | 安全性（Security）、可靠性（Reliability） |
+| **并发安全** | `Send`/`Sync`、 fearless concurrency | 软件设计、软件质量、软件安全 | 可靠性（Reliability）、性能效率（Performance Efficiency） |
+| **零成本抽象** | 泛型单态化、内联优化 | 软件构造、计算基础 | 性能效率（Performance Efficiency）、可维护性（Maintainability） |
+| **组件组合** | `trait`、关联类型、Tower Service | 软件设计、软件构造 | 可维护性（Maintainability）、功能适合性（Functional Suitability） |
+| **分布式一致性** | 所有权转移隐喻、`Send`/`Sync` | 软件设计、软件工程模型与方法 | 可靠性（Reliability）、性能效率（Performance Efficiency） |
+| **安全边界** | `unsafe` 边界、`pub` 可见性、WASI capability | 软件安全、软件构造 | 安全性（Security）、可靠性（Reliability） |
+| **容错设计** | `Result<T, E>`、`panic` 边界、Error Kernel | 软件设计、软件质量、软件维护 | 可靠性（Reliability）、可维护性（Maintainability） |
+
+**映射说明**：
+
+- **SWEBOK 软件构造**：对应 Rust 的编译期保证（借用检查、单态化）。这些不是运行时机制，而是构造阶段由编译器强制实施的工程约束。
+- **SWEBOK 软件设计**：对应 trait、crate 边界、并发模型等架构级选择。设计决策直接决定质量属性的满足程度。
+- **SWEBOK 软件安全 / 软件质量**：对应内存安全、并发安全、安全边界。Rust 将这些安全属性从“测试发现”前移到“编译期拒绝”。
+- **ISO/IEC 25010 可靠性**：所有涉及错误处理、并发、容错的 Rust 机制都直接或间接提升可靠性。
+- **ISO/IEC 25010 可维护性**：trait 与 crate 边界提升模块化与可修改性；零成本抽象在不牺牲性能的前提下提升代码可读性。
+
+> **来源**: [SWEBOK v4](https://www.computer.org/education/bodies-of-knowledge/software-engineering) · [ISO/IEC 25010:2023](https://www.iso.org/standard/78175.html)
 
 ---
 

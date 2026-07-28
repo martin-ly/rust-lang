@@ -85,7 +85,12 @@ graph TD
 | **系统语义** | [System Semantics](../../04_formal/09_system_semantics/README.md) | Actor、π 演算、组件组合、分布式系统、反应式系统 |
 | **架构语义** | [Architecture Semantics](../../04_formal/10_architecture_semantics/README.md) | ADL、架构模式不变量、架构精化、Rust 架构约束 |
 | **计算模型与可计算性** | [Computational Models](../../04_formal/11_computational_models/README.md) | 语义统一框架、可计算性、形式语言、数学函数、模型等价 |
-| **并发模型比较** | [Concurrency Model Comparison](../../04_formal/12_concurrency_models/README.md) | 并发模型谱系、表达能力比较、五范式语义边界 |
+  | **并发模型比较** | [Concurrency Model Comparison](../../04_formal/12_concurrency_models/README.md) | 并发模型谱系、表达能力比较、五范式语义边界 |
+  | **系统工程标准** | [Systems Engineering Standards](../../04_formal/09_system_semantics/06_systems_engineering_standards.md) | ISO 15288、V 模型、SysML v2 与 Rust 映射 |
+  | **语义工程** | [Semantic Engineering](../../04_formal/13_semantic_engineering/README.md) | 本体工程、描述逻辑、知识图谱、语义互操作 |
+  | **企业架构** | [Enterprise Architecture](../../06_ecosystem/14_enterprise_architecture/README.md) | TOGAF、Zachman、FEAF、BDAT、ADR、架构治理 |
+  | **模型驱动工程** | [Model-Driven Engineering](../../06_ecosystem/03_design_patterns/19_model_driven_engineering.md) | MDA/MDE、DSL、语言工作台、模型转换 |
+  | **AI 系统架构** | [LLM System Architecture](../../07_future/04_research_and_experimental/08_llm_system_architecture.md) | RAG、Agent、Multi-Agent、Tool Use |
 
 ### 2.2 纵向：抽象层级维度
 

@@ -328,3 +328,7 @@ cargo run --bin kg-validate -- concept/00_meta/kg_data_v3.json concept/00_meta/k
 > **内容分级**: [综述级]
 
 - **P1 学术/形式化**: [Hogan et al.: Knowledge Graphs (ACM Comput. Surv. 2021)](https://dl.acm.org/doi/10.1145/3447772)
+- **P1 方法论**: Fernández-López, M.; Gómez-Pérez, A. & Juristo, N. *Methontology: From Ontological Art Towards Ontological Engineering*. Proc. AAAI 1997.
+- **P1 方法论**: Suárez-Figueroa, M. C. et al. (eds.) *NeOn Methodology for Building Ontology Networks*. Springer, 2012.
+- **P1 上层本体**: Arp, R.; Smith, B. & Spear, A. D. *Building Ontologies with Basic Formal Ontology (BFO 2020)*. MIT Press, 2015/2020.
+- **P1 形式化**: Baader, F.; Calvanese, D.; McGuinness, D.; Nardi, D. & Patel-Schneider, P. (eds.) *The Description Logic Handbook*. Cambridge University Press, 2nd ed., 2007.

@@ -148,6 +148,9 @@ graph TB
 | [01_ai_integration.md](04_research_and_experimental/01_ai_integration.md) | AI × Rust | 生成-验证闭环、AI 语义安全网、确定性容器 | ✅ v1.0 | L3 Unsafe, L4 RustBelt, L6 工具链 | L3 Unsafe 契约精确化 |
 | [02_formal_methods.md](04_research_and_experimental/02_formal_methods.md) | 形式化方法工业化 | Code-Level + System-Level 验证、PObserve、CI 集成 | ✅ v1.0 | L4 RustBelt, L6 工具链, L3 Unsafe | L4 验证范围扩展 |
 | [03_evolution.md](04_research_and_experimental/03_evolution.md) | 语言演进 | Edition、RFC、Const 泛型、GATs、Effects、特化 | ✅ v1.0 | L2 Trait/Generics, L5 范式定位 | L2 特性扩展 |
+| [08_llm_system_architecture.md](04_research_and_experimental/08_llm_system_architecture.md) | LLM 系统架构 | RAG、Agent、Multi-Agent、向量数据库、Rust 映射 | ✅ v1.0 | L3 Unsafe, L6 工具链, L4 Formal | L3 类型契约与 unsafe 边界 |
+| [09_mlops_and_llmops.md](04_research_and_experimental/09_mlops_and_llmops.md) | MLOps / LLMOps | 模型生命周期、CI/CD、监控、漂移检测 | ✅ v1.0 | L3 Unsafe, L6 工具链, L2 Trait | L6 可观测性工具链 |
+| [10_ai_safety_and_alignment.md](04_research_and_experimental/10_ai_safety_and_alignment.md) | AI 安全与对齐 | RLHF、Constitutional AI、形式化验证、Rust 可审计运行时 | ✅ v1.0 | L3 Unsafe, L4 RustBelt, L6 工具链 | L3/L4 安全边界 |
 | [05_rust_version_tracking.md](00_version_tracking/01_rust_version_tracking.md) | 版本特性演进 | 1.79–1.95+ 形式模型维度跟踪、五个趋势、前沿矩阵 | ✅ v1.0 | L1-L4 全部概念 | L1-L4 概念更新驱动 |
 | [25_open_enums_preview.md](02_preview_features/34_open_enums_preview.md) | 开放枚举（Enum）预研 | `#[non_exhaustive]` 形式化语义、跨语言对比、API 设计模式 | ✅ v1.0 | L1 Type System, L2 Traits | L1 穷尽性检查语义演进 |
 | [borrow_sanitizer.md](02_preview_features/24_borrow_sanitizer.md) | BorrowSanitizer：动态别名规则验证工具 | Shadow Stack、运行时（Runtime）借用（Borrowing）检查、与 Miri 对比 | ✅ v1.0 | L3 Unsafe, L1 Ownership | L3 Unsafe 检测工具化 |

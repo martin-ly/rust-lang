@@ -439,8 +439,8 @@ standalone_quizzes:
   concept_to_quiz_backlink: true
 embedded_quizzes:
   description: concept/ 页面内嵌入式测验（### 测验 N + <details> 答题块），按页聚合
-  pages: 316
-  total_blocks: 1367
+  pages: 322
+  total_blocks: 1397
   items:
   - path: concept/00_meta/00_framework/bloom_taxonomy.md
     blocks: 3
@@ -978,6 +978,12 @@ embedded_quizzes:
     blocks: 5
   - path: concept/06_ecosystem/11_domain_applications/17_webassembly_advanced.md
     blocks: 5
+  - path: concept/06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md
+    blocks: 5
+  - path: concept/06_ecosystem/14_enterprise_architecture/02_architecture_governance_and_adrs.md
+    blocks: 5
+  - path: concept/06_ecosystem/14_enterprise_architecture/03_architecture_standards_alignment.md
+    blocks: 5
   - path: concept/06_ecosystem/README.md
     blocks: 3
   - path: concept/07_future/00_version_tracking/01_rust_version_tracking.md
@@ -1061,6 +1067,12 @@ embedded_quizzes:
   - path: concept/07_future/04_research_and_experimental/06_rust_for_webassembly.md
     blocks: 5
   - path: concept/07_future/04_research_and_experimental/07_ebpf_rust.md
+    blocks: 5
+  - path: concept/07_future/04_research_and_experimental/08_llm_system_architecture.md
+    blocks: 5
+  - path: concept/07_future/04_research_and_experimental/09_mlops_and_llmops.md
+    blocks: 5
+  - path: concept/07_future/04_research_and_experimental/10_ai_safety_and_alignment.md
     blocks: 5
   - path: concept/07_future/archive/01_ai_integration_original.md
     blocks: 3

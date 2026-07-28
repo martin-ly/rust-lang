@@ -3,7 +3,7 @@
 # International Authority Index（国际化权威来源索引）
 >
 > **EN**: International Authority Index
-> **Summary**: A curated, categorized index of authoritative international sources for Rust: official docs, academic formalization, industrial ecosystems, standards bodies, and cross-language references.
+> **Summary**: A curated, categorized index of authoritative international sources for Rust: official docs, academic formalization, industrial ecosystems, standards bodies, enterprise/software/system architecture, semantic engineering, AI systems, and cross-language references.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者 / 进阶]
 > **Bloom 层级**: L2-L4
@@ -48,10 +48,14 @@
     - [学术通用](#学术通用)
   - [五、标准与行业规范](#五标准与行业规范)
   - [六、社区权威博客与演讲](#六社区权威博客与演讲)
-  - [八、国际课程与书籍](#八国际课程与书籍)
+  - [七、企业架构与软件工程标准](#七企业架构与软件工程标准)
+  - [八、系统工程与模型驱动工程](#八系统工程与模型驱动工程)
+  - [九、语义工程、本体论与知识图谱](#九语义工程本体论与知识图谱)
+  - [十、AI 系统架构、MLOps/LLMOps 与安全对齐](#十ai-系统架构mlopsllmops-与安全对齐)
+  - [十一、国际课程与书籍](#十一国际课程与书籍)
     - [国际课程](#国际课程)
     - [权威书籍](#权威书籍)
-  - [九、使用建议](#九使用建议)
+  - [十二、使用建议](#十二使用建议)
 
 ---
 
@@ -226,9 +230,14 @@
 |:---|:---|:---|
 | ISO/IEC 9899 (C Standard) | <https://www.iso.org/standard/74528.html> | C 语言标准 |
 | ISO/IEC 14882 (C++ Standard) | <https://www.iso.org/standard/83626.html> | C++ 语言标准 |
+| ISO/IEC/IEEE 42010:2022 | <https://www.iso.org/standard/74296.html> | 系统与软件工程——架构描述 |
 | MISRA C:2012 | <https://misra.org.uk/> | 嵌入式 C 安全规范 |
 | ISO 26262 | <https://www.iso.org/standard/68383.html> | 汽车功能安全 |
 | IEC 61508 | <https://webstore.iec.ch/publication/66912> | 工业功能安全 |
+| DO-178C / ED-12C | <https://www.rtca.org/product/do-178c/> | 航空机载软件审定 |
+| EN 50128 | <https://www.cenelec.eu/dyn/www/f?p=104:110:14827060398951::::FSP_ORG_ID:2128753> | 铁路控制与保护软件 |
+| ISO/SAE 21434 | <https://www.iso.org/standard/70918.html> | 道路车辆网络安全工程 |
+| IEC 62443 | <https://webstore.iec.ch/publication/66912> | 工业自动化控制系统网络安全 |
 | Linux Kernel BPF Docs | <https://docs.kernel.org/bpf/> | eBPF 文档 |
 
 ---
@@ -246,7 +255,94 @@
 
 ---
 
-## 八、国际课程与书籍
+## 七、企业架构与软件工程标准
+
+| 来源 | URL | 说明 | 项目映射 |
+|:---|:---|:---|:---|
+| TOGAF Standard, 10th Edition | <https://www.opengroup.org/togaf> | The Open Group 企业架构框架 | [`concept/06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md`](../../06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md) |
+| ISO/IEC/IEEE 42010:2022 | <https://www.iso.org/standard/74296.html> | 系统与软件工程——架构描述 | [`concept/06_ecosystem/14_enterprise_architecture/03_architecture_standards_alignment.md`](../../06_ecosystem/14_enterprise_architecture/03_architecture_standards_alignment.md) |
+| IEEE 1471-2000 | <https://standards.ieee.org/standard/1471-2000.html> | 软件密集型系统架构描述先驱标准 | [`concept/06_ecosystem/14_enterprise_architecture/03_architecture_standards_alignment.md`](../../06_ecosystem/14_enterprise_architecture/03_architecture_standards_alignment.md) |
+| SWEBOK v3/v4 | <https://www.computer.org/education/bodies-of-knowledge/software-engineering> | IEEE Computer Society 软件工程知识体系 | [`concept/06_ecosystem/14_enterprise_architecture/03_architecture_standards_alignment.md`](../../06_ecosystem/14_enterprise_architecture/03_architecture_standards_alignment.md) |
+| ISO/IEC/IEEE 12207:2017 | <https://www.iso.org/standard/63712.html> | 软件生命周期过程 | [`concept/06_ecosystem/14_enterprise_architecture/03_architecture_standards_alignment.md`](../../06_ecosystem/14_enterprise_architecture/03_architecture_standards_alignment.md) |
+| ISO/IEC 25010:2023 SQuaRE | <https://www.iso.org/standard/35733.html> | 系统与软件质量模型 | [`concept/06_ecosystem/14_enterprise_architecture/03_architecture_standards_alignment.md`](../../06_ecosystem/14_enterprise_architecture/03_architecture_standards_alignment.md) |
+| ISO/IEC/IEEE 5055 | <https://www.iso.org/standard/80623.html> | 自动化源代码质量度量 | [`concept/06_ecosystem/14_enterprise_architecture/03_architecture_standards_alignment.md`](../../06_ecosystem/14_enterprise_architecture/03_architecture_standards_alignment.md) |
+| OMG Essence / SEMAT | <https://www.omg.org/spec/Essence/> | 软件工程方法与过程内核 | [`concept/06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md`](../../06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md) |
+| CMMI v3.0 | <https://cmmiinstitute.com/cmmi> | 能力成熟度模型集成 | [`concept/06_ecosystem/14_enterprise_architecture/02_architecture_governance_and_adrs.md`](../../06_ecosystem/14_enterprise_architecture/02_architecture_governance_and_adrs.md) |
+| BAPO Model | <https://www.gartner.com/en/newsroom/press-releases> (工业实践概念) | Business-Architecture-Process-Organization 视图 | [`concept/06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md`](../../06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md) |
+| C4 Model | <https://c4model.com/> | 软件架构可视化模型 | [`concept/06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md`](../../06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md) |
+| arc42 | <https://arc42.org/> | 实用软件架构文档模板 | [`concept/06_ecosystem/14_enterprise_architecture/02_architecture_governance_and_adrs.md`](../../06_ecosystem/14_enterprise_architecture/02_architecture_governance_and_adrs.md) |
+| Kruchten 4+1 View Model | <https://www.cs.ubc.ca/~gregor/teaching/papers/4+1view-architecture.pdf> | 软件架构多视图模型 | [`concept/06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md`](../../06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md) |
+| Rozanski & Woods — Software Systems Architecture | <https://www.viewpoints-and-perspectives.info/> | 架构视点与视角方法 | [`concept/06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md`](../../06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md) |
+| Architecture Decision Records (ADR) | <https://adr.github.io/> | 架构决策记录社区实践 | [`concept/06_ecosystem/14_enterprise_architecture/02_architecture_governance_and_adrs.md`](../../06_ecosystem/14_enterprise_architecture/02_architecture_governance_and_adrs.md) |
+
+---
+
+## 八、系统工程与模型驱动工程
+
+| 来源 | URL | 说明 | 项目映射 |
+|:---|:---|:---|:---|
+| INCOSE Systems Engineering Handbook v5 | <https://www.incose.org/incose-member-resources/se-handbook> | 系统工程实践手册 | [`concept/04_formal/09_system_semantics/06_systems_engineering_standards.md`](../../04_formal/09_system_semantics/06_systems_engineering_standards.md) |
+| ISO/IEC/IEEE 15288:2023 | <https://www.iso.org/standard/81713.html> | 系统生命周期过程 | [`concept/04_formal/09_system_semantics/06_systems_engineering_standards.md`](../../04_formal/09_system_semantics/06_systems_engineering_standards.md) |
+| OMG SysML v2 | <https://www.omgsysml.org/SysML-2.htm> | 系统建模语言第 2 版 | [`concept/04_formal/09_system_semantics/06_systems_engineering_standards.md`](../../04_formal/09_system_semantics/06_systems_engineering_standards.md) |
+| OMG Model Driven Architecture (MDA) | <https://www.omg.org/mda/> | 模型驱动架构 | [`concept/06_ecosystem/03_design_patterns/19_model_driven_engineering.md`](../../06_ecosystem/03_design_patterns/19_model_driven_engineering.md) |
+| OMG UML 2.5.1/2.6 | <https://www.omg.org/spec/UML/> | 统一建模语言 | [`concept/06_ecosystem/03_design_patterns/19_model_driven_engineering.md`](../../06_ecosystem/03_design_patterns/19_model_driven_engineering.md) |
+| OMG MOF | <https://www.omg.org/spec/MOF/> | 元对象设施 | [`concept/06_ecosystem/03_design_patterns/19_model_driven_engineering.md`](../../06_ecosystem/03_design_patterns/19_model_driven_engineering.md) |
+| OMG XMI | <https://www.omg.org/spec/XMI/> | XML 元数据交换 | [`concept/06_ecosystem/03_design_patterns/19_model_driven_engineering.md`](../../06_ecosystem/03_design_patterns/19_model_driven_engineering.md) |
+| OMG QVT | <https://www.omg.org/spec/QVT/> | 模型转换语言 | [`concept/06_ecosystem/03_design_patterns/19_model_driven_engineering.md`](../../06_ecosystem/03_design_patterns/19_model_driven_engineering.md) |
+| Eclipse EMF | <https://www.eclipse.org/modeling/emf/> | Eclipse 建模框架 | [`concept/06_ecosystem/03_design_patterns/19_model_driven_engineering.md`](../../06_ecosystem/03_design_patterns/19_model_driven_engineering.md) |
+| Eclipse Epsilon | <https://www.eclipse.org/epsilon/> | 可扩展模型驱动开发平台 | [`concept/06_ecosystem/03_design_patterns/19_model_driven_engineering.md`](../../06_ecosystem/03_design_patterns/19_model_driven_engineering.md) |
+| PlantUML | <https://plantuml.com/> | 文本化 UML/SysML 绘图工具 | [`concept/06_ecosystem/03_design_patterns/19_model_driven_engineering.md`](../../06_ecosystem/03_design_patterns/19_model_driven_engineering.md) |
+| VIATRA / IncQuery | <https://www.eclipse.org/VIATRA/> | 基于模型的查询与转换 | [`concept/06_ecosystem/03_design_patterns/19_model_driven_engineering.md`](../../06_ecosystem/03_design_patterns/19_model_driven_engineering.md) |
+
+---
+
+## 九、语义工程、本体论与知识图谱
+
+| 来源 | URL | 说明 | 项目映射 |
+|:---|:---|:---|:---|
+| W3C OWL 2 | <https://www.w3.org/TR/owl2-overview/> | Web 本体语言 | [`concept/04_formal/13_semantic_engineering/02_description_logic_and_owl.md`](../../04_formal/13_semantic_engineering/02_description_logic_and_owl.md) |
+| W3C RDF 1.2 / RDF Schema | <https://www.w3.org/TR/rdf12-concepts/> | 资源描述框架 | [`concept/04_formal/13_semantic_engineering/03_knowledge_graph_construction.md`](../../04_formal/13_semantic_engineering/03_knowledge_graph_construction.md) |
+| W3C SPARQL 1.1 | <https://www.w3.org/TR/sparql11-overview/> | RDF 查询语言 | [`concept/04_formal/13_semantic_engineering/03_knowledge_graph_construction.md`](../../04_formal/13_semantic_engineering/03_knowledge_graph_construction.md) |
+| W3C SHACL | <https://www.w3.org/TR/shacl/> | 形状约束语言 | [`concept/04_formal/13_semantic_engineering/03_knowledge_graph_construction.md`](../../04_formal/13_semantic_engineering/03_knowledge_graph_construction.md) |
+| W3C SKOS | <https://www.w3.org/TR/skos-reference/> | 简单知识组织系统 | [`concept/04_formal/13_semantic_engineering/04_semantic_interoperability.md`](../../04_formal/13_semantic_engineering/04_semantic_interoperability.md) |
+| ISO/IEC 21838-1 Top-Level Ontologies | <https://www.iso.org/standard/71954.html> | 顶层本体顶层标准 | [`concept/04_formal/13_semantic_engineering/01_ontology_engineering.md`](../../04_formal/13_semantic_engineering/01_ontology_engineering.md) |
+| Basic Formal Ontology (BFO) | <https://basic-formal-ontology.org/> | 通用顶层本体 | [`concept/04_formal/13_semantic_engineering/01_ontology_engineering.md`](../../04_formal/13_semantic_engineering/01_ontology_engineering.md) |
+| OBO Foundry | <https://obofoundry.org/> | 生物医学本体协同库 | [`concept/04_formal/13_semantic_engineering/01_ontology_engineering.md`](../../04_formal/13_semantic_engineering/01_ontology_engineering.md) |
+| DOL / OntoIOp | <https://ontohub.org/dol/> | 分布式本体、建模与规范语言 | [`concept/04_formal/13_semantic_engineering/04_semantic_interoperability.md`](../../04_formal/13_semantic_engineering/04_semantic_interoperability.md) |
+| schema.org | <https://schema.org/> | 搜索引擎与 Web 通用词汇表 | [`concept/04_formal/13_semantic_engineering/04_semantic_interoperability.md`](../../04_formal/13_semantic_engineering/04_semantic_interoperability.md) |
+| DBpedia | <https://www.dbpedia.org/> | 从 Wikipedia 抽取的开放知识图谱 | [`concept/04_formal/13_semantic_engineering/03_knowledge_graph_construction.md`](../../04_formal/13_semantic_engineering/03_knowledge_graph_construction.md) |
+| Wikidata | <https://www.wikidata.org/> | 结构化知识库与 SPARQL 端点 | [`concept/04_formal/13_semantic_engineering/03_knowledge_graph_construction.md`](../../04_formal/13_semantic_engineering/03_knowledge_graph_construction.md) |
+| W3C Linked Data Platform | <https://www.w3.org/TR/ldp/> | 链接数据平台协议 | [`concept/04_formal/13_semantic_engineering/04_semantic_interoperability.md`](../../04_formal/13_semantic_engineering/04_semantic_interoperability.md) |
+| ISO/IEC 19763 (Metamodel framework) | <https://www.iso.org/standard/57373.html> | 互操作元模型框架 | [`concept/04_formal/13_semantic_engineering/04_semantic_interoperability.md`](../../04_formal/13_semantic_engineering/04_semantic_interoperability.md) |
+
+---
+
+## 十、AI 系统架构、MLOps/LLMOps 与安全对齐
+
+| 来源 | URL | 说明 | 项目映射 |
+|:---|:---|:---|:---|
+| NIST AI Risk Management Framework | <https://www.nist.gov/itl/ai-risk-management-framework> | AI 风险管理框架 | [`concept/07_future/04_research_and_experimental/10_ai_safety_and_alignment.md`](../../07_future/04_research_and_experimental/10_ai_safety_and_alignment.md) |
+| ISO/IEC 42001:2023 | <https://www.iso.org/standard/81230.html> | AI 管理体系 | [`concept/07_future/04_research_and_experimental/10_ai_safety_and_alignment.md`](../../07_future/04_research_and_experimental/10_ai_safety_and_alignment.md) |
+| ISO/IEC 23053:2022 | <https://www.iso.org/standard/74438.html> | 使用 ML 的 AI 系统框架 | [`concept/07_future/04_research_and_experimental/09_mlops_and_llmops.md`](../../07_future/04_research_and_experimental/09_mlops_and_llmops.md) |
+| MLCommons AI Safety | <https://mlcommons.org/ai-safety/> | AI 安全基准 | [`concept/07_future/04_research_and_experimental/10_ai_safety_and_alignment.md`](../../07_future/04_research_and_experimental/10_ai_safety_and_alignment.md) |
+| Google MLOps | <https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning> | MLOps 持续交付与自动化 | [`concept/07_future/04_research_and_experimental/09_mlops_and_llmops.md`](../../07_future/04_research_and_experimental/09_mlops_and_llmops.md) |
+| Microsoft Responsible AI | <https://www.microsoft.com/en-us/ai/responsible-ai> | 负责任 AI 原则与工具 | [`concept/07_future/04_research_and_experimental/10_ai_safety_and_alignment.md`](../../07_future/04_research_and_experimental/10_ai_safety_and_alignment.md) |
+| Anthropic Responsible Scaling Policy | <https://www.anthropic.com/news/announcing-our-responsible-scaling-policy> | 负责任扩展政策 | [`concept/07_future/04_research_and_experimental/10_ai_safety_and_alignment.md`](../../07_future/04_research_and_experimental/10_ai_safety_and_alignment.md) |
+| OpenAI Preparedness Framework | <https://openai.com/preparedness/> | 前沿模型准备度框架 | [`concept/07_future/04_research_and_experimental/10_ai_safety_and_alignment.md`](../../07_future/04_research_and_experimental/10_ai_safety_and_alignment.md) |
+| OWASP LLM Top 10 | <https://genai.owasp.org/llm-top-10/> | LLM 应用安全风险 | [`concept/07_future/04_research_and_experimental/10_ai_safety_and_alignment.md`](../../07_future/04_research_and_experimental/10_ai_safety_and_alignment.md) |
+| OWASP ML Top 10 | <https://mltop10.info/> | ML 系统安全风险 | [`concept/07_future/04_research_and_experimental/10_ai_safety_and_alignment.md`](../../07_future/04_research_and_experimental/10_ai_safety_and_alignment.md) |
+| MLSys Conference | <https://mlsys.org/> | ML 系统学术会议 | [`concept/07_future/04_research_and_experimental/08_llm_system_architecture.md`](../../07_future/04_research_and_experimental/08_llm_system_architecture.md) |
+| MLflow | <https://mlflow.org/> | 开源 ML 生命周期平台 | [`concept/07_future/04_research_and_experimental/09_mlops_and_llmops.md`](../../07_future/04_research_and_experimental/09_mlops_and_llmops.md) |
+| Kubeflow | <https://www.kubeflow.org/> | Kubernetes 上的 ML 工作流 | [`concept/07_future/04_research_and_experimental/09_mlops_and_llmops.md`](../../07_future/04_research_and_experimental/09_mlops_and_llmops.md) |
+| LangChain / LangGraph | <https://python.langchain.com/docs/introduction/> | LLM 应用编排框架 | [`concept/07_future/04_research_and_experimental/08_llm_system_architecture.md`](../../07_future/04_research_and_experimental/08_llm_system_architecture.md) |
+| Hugging Face | <https://huggingface.co/docs/transformers/> | Transformer 模型与推理生态 | [`concept/07_future/04_research_and_experimental/08_llm_system_architecture.md`](../../07_future/04_research_and_experimental/08_llm_system_architecture.md) |
+| Weights & Biases | <https://wandb.ai/site> | 实验跟踪与模型观测 | [`concept/07_future/04_research_and_experimental/09_mlops_and_llmops.md`](../../07_future/04_research_and_experimental/09_mlops_and_llmops.md) |
+| Ray / Anyscale | <https://docs.ray.io/> | 分布式 ML 与 LLM 服务 | [`concept/07_future/04_research_and_experimental/08_llm_system_architecture.md`](../../07_future/04_research_and_experimental/08_llm_system_architecture.md) |
+| vLLM | <https://docs.vllm.ai/> | 高吞吐 LLM 推理引擎 | [`concept/07_future/04_research_and_experimental/08_llm_system_architecture.md`](../../07_future/04_research_and_experimental/08_llm_system_architecture.md) |
+
+---
+
+## 十一、国际课程与书籍
 
 本节聚焦系统化的 Rust 学习课程与权威书籍，作为官方文档的补充。这些来源通常覆盖教学顺序、练习路径或领域实践，适合与 `concept/` 权威页形成“课程 → 深度”双向映射。
 
@@ -271,14 +367,15 @@
 | Effective Rust | <https://www.lurklurk.org/effective-rust/> | 基于条目的 Rust 工程实践建议 | [`concept/02_intermediate/05_modules_and_visibility/03_api_naming_conventions.md`](../../02_intermediate/05_modules_and_visibility/03_api_naming_conventions.md) |
 | The Little Book of Rust Books | <https://lborb.github.io/book/> | 官方与非官方 Rust 书籍索引 | 元索引（本文件） |
 
-> **P2-1 说明**：以上 4 个新增来源（Zero To Production / Rust for the Linux Kernel / Rust Cookbook / Rust for Rustaceans / Effective Rust）使本节来源数从 4 扩展到 9；连同官方文档、形式化生态、工业生态，项目国际权威来源索引总数从 53 扩展到 60+。
+> **P2-1 说明**：本节来源从 3 扩展到 8；连同官方文档、形式化生态、工业生态、企业架构、系统工程、语义工程、AI 系统，项目国际权威来源索引总数从 60+ 扩展到 95+。
 
 ---
 
-## 九、使用建议
+## 十二、使用建议
 
 1. **新增 concept/ 文件时**：优先从此索引选取 2–4 个相关权威来源写入 frontmatter 的 `> **来源**: ...`。
 2. **引用学术来源时**：给出论文标题、会议/期刊、DOI 或项目主页。
 3. **引用生态库时**：使用 docs.rs 或官方文档的 stable 链接；避免链接到特定版本号（除非讨论版本差异）。
-4. **定期校验**：运行 `scripts/audit_source_links.py` 与 `scripts/audit_remaining_source_placeholders.py`，修复失效或泛化链接。
-5. **发现新权威来源**：先更新本索引，再在概念页中引用，保持单一权威来源清单。
+4. **引用企业架构 / 系统工程 / 语义工程 / AI 标准时**：优先链接到官方标准机构或已验证的公开摘要页；完整标准文本通常需购买，可在 concept/ 权威页中注明获取方式。
+5. **定期校验**：运行 `scripts/audit_source_links.py` 与 `scripts/audit_remaining_source_placeholders.py`，修复失效或泛化链接。
+6. **发现新权威来源**：先更新本索引，再在概念页中引用，保持单一权威来源清单。

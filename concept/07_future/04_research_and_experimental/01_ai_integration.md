@@ -48,6 +48,8 @@
 4. **确定性容器**: AI 生成 + Rust 编译 + Nix 构建 = 可复现、可验证的软件供应链
 5. **未来方向**: 形式化规格生成、证明辅助编程、自动 unsafe 审计
 
+更系统地看，AI × Rust 的下一步不仅是"让 AI 生成能通过编译的代码"，而是把**安全、对齐与可审计性**内建于整个软件供应链：从 LLM 系统架构的 RAG 与 Agent 边界，到 MLOps/LLMOps 的模型版本与漂移监控，再到 RLHF、Constitutional AI 与形式化验证共同构成的 AI 安全防线。相关主题分别见 [LLM 系统架构](08_llm_system_architecture.md)、[MLOps 与 LLMOps](09_mlops_and_llmops.md) 与 [AI 安全与对齐](10_ai_safety_and_alignment.md)。
+
 ---
 
 ### 2.1 人工智能（Artificial Intelligence）
@@ -618,6 +620,9 @@ Rust 编译器 = 形式过滤器，将空间限制为语义一致的子集
 | Neuro-Symbolic Synthesis | 神经网络 + 符号推理（类型检查、SMT）结合 | [MIT CSAIL] |
 | Proof-Carrying Code from LLM | LLM 同时生成代码和形式化证明 | [INRIA/MSR] |
 | Rust-Specific Fine-Tuning | 在 Rust 代码库上继续预训练，强化所有权（Ownership）理解 | [HuggingFace StarCoder2] |
+| LLM 系统架构 | RAG、Agent、Multi-Agent 与向量数据库的 Rust 映射 | [LLM System Architecture](08_llm_system_architecture.md) |
+| MLOps / LLMOps | 模型生命周期、CI/CD、监控漂移与 Rust 服务化 | [MLOps and LLMOps](09_mlops_and_llmops.md) |
+| AI 安全与对齐 | RLHF、Constitutional AI、形式化验证与 Rust 可审计运行时 | [AI Safety and Alignment](10_ai_safety_and_alignment.md) |
 
 ---
 
