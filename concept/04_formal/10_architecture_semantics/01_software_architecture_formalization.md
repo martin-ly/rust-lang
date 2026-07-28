@@ -2,8 +2,8 @@
 >
 # 软件架构形式化（Software Architecture Formalization）
 
-**EN**: Software Architecture Formalization
-**Summary**: Formal models of software architecture — components, connectors, configurations, architectural styles, and ADLs — with a bridge to Rust's module and crate system.
+> **EN**: Software Architecture Formalization
+> **Summary**: Formal models of software architecture — components, connectors, configurations, architectural styles, and ADLs — with a bridge to Rust's module and crate system.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4-L5

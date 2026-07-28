@@ -22,6 +22,7 @@
 > [L4 类型论](../../04_formal/00_type_theory/01_type_theory.md) ·
 > [L6 设计模式](../../06_ecosystem/03_design_patterns/01_patterns.md)
 > **跨层映射**: L2→L4 Trait ↔ 类型类 (Type Class) | L2→L3 Send/Sync Trait
+> **表征空间映射**: [semantic_space.md §5 Trait 组合规则](../../00_meta/00_framework/semantic_space.md)
 > **定理链编号**: T-200 特质一致性（Coherence） → T-201 孤儿规则（Orphan Rule）完备性 → T-202 关联类型规范化
 > **层级**: L2 进阶概念
 > **前置概念**: [Type System Basics](../../01_foundation/02_type_system/01_type_system.md) ·
@@ -87,7 +88,7 @@ mindmap
 
 ## 📑 目录
 
-- [Traits（Trait 系统）](#traitstrait-系统)
+- [Trait 系统](#trait-系统)
   - [🧠 知识结构图](#-知识结构图)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)

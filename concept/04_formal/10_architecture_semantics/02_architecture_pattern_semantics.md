@@ -5,8 +5,8 @@
 
 # 架构模式语义（Architecture Pattern Semantics）
 
-**EN**: Architecture Pattern Semantics
-**Summary**: Formal semantics of common architecture patterns — Layered, Hexagonal, Onion, Clean, Microkernel, Event-Driven — as invariants on dependencies, control flow, and data flow.
+> **EN**: Architecture Pattern Semantics
+> **Summary**: Formal semantics of common architecture patterns — Layered, Hexagonal, Onion, Clean, Microkernel, Event-Driven — as invariants on dependencies, control flow, and data flow.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4-L5

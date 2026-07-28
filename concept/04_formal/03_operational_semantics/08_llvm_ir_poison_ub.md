@@ -1,7 +1,7 @@
 # LLVM IR 中的 Poison、Undefined Behavior 与 Freeze
 
-**EN**: Poison, Undefined Behavior, and Freeze in LLVM IR
-**Summary**: Explains LLVM IR's poison values, immediate vs. deferred undefined behavior, and the `freeze` instruction, using the Rust 1.97.1 miscompilation as a concrete case study.
+> **EN**: Poison, Undefined Behavior, and Freeze in LLVM IR
+> **Summary**: Explains LLVM IR's poison values, immediate vs. deferred undefined behavior, and the `freeze` instruction, using the Rust 1.97.1 miscompilation as a concrete case study.
 
 > **Rust 版本**: 1.97.1+
 > **Bloom 层级**: L4

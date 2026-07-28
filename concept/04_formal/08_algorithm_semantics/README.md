@@ -1,7 +1,7 @@
 # 算法语义（Algorithm Semantics）
 
-**EN**: Algorithm Semantics
-**Summary**: Formal semantics of algorithms in Rust — Hoare logic, refinement calculus, iterator correctness, unsafe algorithm invariants, and observational equivalence of algorithmic implementations.
+> **EN**: Algorithm Semantics
+> **Summary**: Formal semantics of algorithms in Rust — Hoare logic, refinement calculus, iterator correctness, unsafe algorithm invariants, and observational equivalence of algorithmic implementations.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4

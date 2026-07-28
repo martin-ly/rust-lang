@@ -1,25 +1,25 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-28T21:23:54.548993+00:00
-> 扫描文件数: 553
+> 生成时间: 2026-07-28T22:13:11.297500+00:00
+> 扫描文件数: 561
 
 ## 全局指标
 
 | 指标 | 数值 | 目标 | 状态 |
 |:---|:---|:---|:---|
-| 总文件数 | 553 | 27 | ✅ |
-| 总定理链 (⟹) | 2186 | ≥270 | ✅ |
-| 总反命题 | 796 | ≥40 | ✅ |
-| 总 Mermaid 图 | 1099 | ≥50 | ✅ |
-| 编译验证代码块 | 5419 | ≥150 | ✅ |
-| 定理矩阵总行 | 25486 | — | — |
+| 总文件数 | 561 | 27 | ✅ |
+| 总定理链 (⟹) | 2189 | ≥270 | ✅ |
+| 总反命题 | 812 | ≥40 | ✅ |
+| 总 Mermaid 图 | 1109 | ≥50 | ✅ |
+| 编译验证代码块 | 5451 | ≥150 | ✅ |
+| 定理矩阵总行 | 25583 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
 | docs/content/knowledge 死链数量 | 0 | 0 | ✅ |
 | 反向推理 (⟸) | 363 | ≥50 | ✅ |
 | 模板化 ⟹ | 0 | 0 | ✅ |
-| 前置概念覆盖率 | 478/482 | 100% | ⚠️ |
-| 后置概念覆盖率 | 478/482 | 100% | ⚠️ |
-| 双标签覆盖率 | 472/482 | >=95% | ✅ |
+| 前置概念覆盖率 | 486/490 | 100% | ⚠️ |
+| 后置概念覆盖率 | 486/490 | 100% | ⚠️ |
+| 双标签覆盖率 | 472/490 | >=95% | ✅ |
 | 非法标签组合 | 0 | 0 | ✅ |
 
 ## 按层级分布
@@ -30,7 +30,7 @@
 | L1 | 57 | 5.2 | 6.8 | 57/57 (100%) | 2.3 | 0 | 57/57 | 57/57 | 57/57 |
 | L2 | 41 | 5.1 | 1.2 | 25/41 (60%) | 1.8 | 0 | 41/41 | 41/41 | 41/41 |
 | L3 | 74 | 5.5 | 2.1 | 55/74 (74%) | 1.6 | 0 | 74/74 | 74/74 | 74/74 |
-| L4 | 81 | 2.9 | 1.1 | 38/81 (46%) | 0.1 | 0 | 80/81 | 80/81 | 74/81 |
+| L4 | 89 | 2.7 | 1.0 | 39/89 (43%) | 0.1 | 0 | 88/89 | 88/89 | 74/89 |
 | L5 | 27 | 3.1 | 1.4 | 19/27 (70%) | 0.0 | 0 | 27/27 | 27/27 | 27/27 |
 | L6 | 131 | 2.5 | 1.3 | 60/131 (45%) | 0.0 | 0 | 128/131 | 128/131 | 128/131 |
 | L7 | 71 | 2.0 | 0.6 | 38/71 (53%) | 0.0 | 0 | 71/71 | 71/71 | 71/71 |
@@ -192,6 +192,14 @@
 | E:\_src\rust-lang\concept\04_formal\10_architecture_semantics\02_architecture_pattern_semantics.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
 | E:\_src\rust-lang\concept\04_formal\10_architecture_semantics\03_architecture_refinement.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
 | E:\_src\rust-lang\concept\04_formal\10_architecture_semantics\04_rust_architecture_constraints.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
+| E:\_src\rust-lang\concept\04_formal\11_computational_models\01_computational_semantics_framework.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
+| E:\_src\rust-lang\concept\04_formal\11_computational_models\02_computability_theory.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
+| E:\_src\rust-lang\concept\04_formal\11_computational_models\03_formal_languages_and_automata.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
+| E:\_src\rust-lang\concept\04_formal\11_computational_models\04_mathematical_functions_of_computation.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
+| E:\_src\rust-lang\concept\04_formal\11_computational_models\05_equivalence_of_computational_models.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
+| E:\_src\rust-lang\concept\04_formal\12_concurrency_models\01_models_of_concurrency.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
+| E:\_src\rust-lang\concept\04_formal\12_concurrency_models\02_expressiveness_of_concurrent_models.md | L4 | 过渡段落不足 (0 < 3); 缺失受众标签 |
+| E:\_src\rust-lang\concept\04_formal\12_concurrency_models\03_parallel_concurrent_async_distributed_semantics.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
 | E:\_src\rust-lang\concept\05_comparative\00_paradigms\02_execution_model_isomorphism.md | L5 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\05_comparative\00_paradigms\03_cpp_rust_surface_features.md | L5 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\05_comparative\00_paradigms\05_language_semantic_model_matrix.md | L5 | 过渡段落不足 (2 < 3) |
@@ -390,11 +398,11 @@
 | E:\_src\rust-lang\concept\00_meta\00_framework\knowledge_mindmap.md | L0 | 308 | 1 | 0 | 0 | 1 | 2 | 0 | 6 | ✅ | ❌ | ❌ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\00_framework\methodology.md | L0 | 610 | 1 | 0 | 0 | 2 | 5 | 1 | 6 | ✅ | ✅ | ✅ | 研究者 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\00_framework\paradigm_transition_matrix.md | L0 | 330 | 1 | 0 | 0 | 1 | 3 | 0 | 6 | ✅ | ❌ | ❌ | 进阶 | 综述级 |
-| E:\_src\rust-lang\concept\00_meta\00_framework\pattern_semantic_space_index.md | L0 | 209 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
+| E:\_src\rust-lang\concept\00_meta\00_framework\pattern_semantic_space_index.md | L0 | 211 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\00_framework\pl_foundations_roadmap.md | L0 | 182 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\00_framework\semantic_bridge_algorithms_patterns.md | L0 | 735 | 1 | 0 | 0 | 1 | 0 | 7 | 6 | ✅ | ✅ | ✅ | 专家 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\00_framework\semantic_expressiveness.md | L0 | 1133 | 1 | 0 | 0 | 1 | 2 | 1 | 6 | ✅ | ❌ | ❌ | 研究者 | 综述级 |
-| E:\_src\rust-lang\concept\00_meta\00_framework\semantic_space.md | L0 | 1360 | 10 | 0 | 0 | 2 | 5 | 9 | 6 | ✅ | ❌ | ❌ | 研究者 | 综述级 |
+| E:\_src\rust-lang\concept\00_meta\00_framework\semantic_space.md | L0 | 1366 | 10 | 0 | 0 | 2 | 5 | 9 | 6 | ✅ | ❌ | ❌ | 研究者 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\00_framework\theorem_inference_forest.md | L0 | 557 | 15 | 0 | 0 | 1 | 3 | 0 | 6 | ✅ | ❌ | ❌ | 研究者 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\00_framework\theorem_registry.md | L0 | 240 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\00_framework\todos.md | L0 | 349 | 1 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ❌ | ❌ | 专家 | 综述级 |
@@ -697,10 +705,18 @@
 | E:\_src\rust-lang\concept\04_formal\09_system_semantics\03_component_based_semantics.md | L4 | 563 | 5 | 0 | 0 | 2 | 1 | 6 | 4 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\09_system_semantics\04_distributed_systems_semantics.md | L4 | 401 | 1 | 0 | 0 | 2 | 1 | 5 | 4 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\09_system_semantics\05_reactive_systems_semantics.md | L4 | 473 | 2 | 0 | 0 | 2 | 1 | 5 | 8 | ❌ | ✅ | ✅ | 研究者 | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\10_architecture_semantics\01_software_architecture_formalization.md | L4 | 341 | 0 | 0 | 0 | 2 | 1 | 1 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\10_architecture_semantics\02_architecture_pattern_semantics.md | L4 | 573 | 0 | 0 | 0 | 2 | 1 | 5 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\10_architecture_semantics\03_architecture_refinement.md | L4 | 431 | 0 | 0 | 0 | 2 | 1 | 3 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\10_architecture_semantics\01_software_architecture_formalization.md | L4 | 353 | 0 | 0 | 0 | 2 | 1 | 1 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\10_architecture_semantics\02_architecture_pattern_semantics.md | L4 | 595 | 0 | 0 | 0 | 2 | 1 | 5 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\10_architecture_semantics\03_architecture_refinement.md | L4 | 444 | 0 | 0 | 0 | 2 | 1 | 3 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\10_architecture_semantics\04_rust_architecture_constraints.md | L4 | 227 | 0 | 0 | 0 | 3 | 1 | 4 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\11_computational_models\01_computational_semantics_framework.md | L4 | 256 | 0 | 0 | 0 | 1 | 1 | 2 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\11_computational_models\02_computability_theory.md | L4 | 339 | 0 | 0 | 0 | 1 | 1 | 3 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\11_computational_models\03_formal_languages_and_automata.md | L4 | 561 | 0 | 0 | 0 | 2 | 2 | 7 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\11_computational_models\04_mathematical_functions_of_computation.md | L4 | 310 | 0 | 0 | 0 | 1 | 1 | 4 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\11_computational_models\05_equivalence_of_computational_models.md | L4 | 370 | 0 | 0 | 0 | 1 | 1 | 2 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\12_concurrency_models\01_models_of_concurrency.md | L4 | 357 | 0 | 0 | 0 | 4 | 1 | 6 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\12_concurrency_models\02_expressiveness_of_concurrent_models.md | L4 | 453 | 3 | 0 | 0 | 3 | 1 | 4 | 0 | ✅ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\12_concurrency_models\03_parallel_concurrent_async_distributed_semantics.md | L4 | 394 | 0 | 0 | 0 | 3 | 2 | 4 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
 | E:\_src\rust-lang\concept\05_comparative\00_paradigms\01_paradigm_matrix.md | L5 | 1300 | 8 | 0 | 0 | 5 | 9 | 12 | 16 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\05_comparative\00_paradigms\02_execution_model_isomorphism.md | L5 | 1049 | 3 | 0 | 0 | 1 | 6 | 13 | 0 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | E:\_src\rust-lang\concept\05_comparative\00_paradigms\03_cpp_rust_surface_features.md | L5 | 296 | 0 | 0 | 0 | 0 | 1 | 4 | 0 | ❌ | ✅ | ✅ | 进阶 | 研究者级 |

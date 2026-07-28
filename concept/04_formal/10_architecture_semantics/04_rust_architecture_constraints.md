@@ -4,8 +4,8 @@
 
 # Rust 架构语义约束（Rust Architecture Semantics Constraints）
 
-**EN**: Rust Architecture Semantics Constraints
-**Summary**: How Rust's module system, crate boundaries, visibility rules, ABI, and workspace mechanism constrain and shape software architecture semantics.
+> **EN**: Rust Architecture Semantics Constraints
+> **Summary**: How Rust's module system, crate boundaries, visibility rules, ABI, and workspace mechanism constrain and shape software architecture semantics.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4-L5

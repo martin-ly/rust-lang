@@ -20,6 +20,7 @@
 > [Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md) ·
 > [Concurrency](../00_concurrency/01_concurrency.md)
 > **后置概念**: [FFI] · [Embedded] · [Custom Allocators]
+> **表征空间映射**: [semantic_space.md §2 逃逸舱口](../../00_meta/00_framework/semantic_space.md)
 > **主要来源**:
 > · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
 > [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)

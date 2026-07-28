@@ -1,7 +1,7 @@
 # 架构语义（Architecture Semantics）
 
-**EN**: Architecture Semantics
-**Summary**: Formal semantics of software architecture — architectural description languages, architectural styles, connector semantics, architecture refinement, and Rust-specific constraints.
+> **EN**: Architecture Semantics
+> **Summary**: Formal semantics of software architecture — architectural description languages, architectural styles, connector semantics, architecture refinement, and Rust-specific constraints.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4-L5

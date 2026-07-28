@@ -1,41 +1,41 @@
 {
   "date": "2026-07-29",
-  "scanned": 544,
+  "scanned": 552,
   "coverage": {
     "P0": [
-      539,
+      547,
       99.1
     ],
     "P1": [
-      476,
-      87.5
+      478,
+      86.6
     ],
     "P2": [
-      444,
-      81.6
+      446,
+      80.8
     ],
     "any": [
-      544,
+      552,
       100.0
     ],
     "none": 0
   },
   "content_scope": {
-    "scanned": 453,
+    "scanned": 461,
     "P0": [
-      453,
+      461,
       100.0
     ],
     "P1": [
-      422,
-      93.2
+      424,
+      92.0
     ],
     "P2": [
-      427,
-      94.3
+      429,
+      93.1
     ],
     "any": [
-      453,
+      461,
       100.0
     ],
     "gaps_p1": [
@@ -60,6 +60,12 @@
       "concept/04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md",
       "concept/04_formal/10_architecture_semantics/03_architecture_refinement.md",
       "concept/04_formal/10_architecture_semantics/04_rust_architecture_constraints.md",
+      "concept/04_formal/11_computational_models/01_computational_semantics_framework.md",
+      "concept/04_formal/11_computational_models/02_computability_theory.md",
+      "concept/04_formal/11_computational_models/03_formal_languages_and_automata.md",
+      "concept/04_formal/11_computational_models/04_mathematical_functions_of_computation.md",
+      "concept/04_formal/11_computational_models/05_equivalence_of_computational_models.md",
+      "concept/04_formal/12_concurrency_models/03_parallel_concurrent_async_distributed_semantics.md",
       "concept/05_comparative/01_systems_languages/07_rust_vs_ada_spark.md",
       "concept/05_comparative/01_systems_languages/08_rust_vs_d.md",
       "concept/05_comparative/01_systems_languages/09_rust_vs_nim.md",
@@ -92,6 +98,12 @@
       "concept/04_formal/10_architecture_semantics/01_software_architecture_formalization.md",
       "concept/04_formal/10_architecture_semantics/03_architecture_refinement.md",
       "concept/04_formal/10_architecture_semantics/04_rust_architecture_constraints.md",
+      "concept/04_formal/11_computational_models/01_computational_semantics_framework.md",
+      "concept/04_formal/11_computational_models/02_computability_theory.md",
+      "concept/04_formal/11_computational_models/04_mathematical_functions_of_computation.md",
+      "concept/04_formal/11_computational_models/05_equivalence_of_computational_models.md",
+      "concept/04_formal/12_concurrency_models/01_models_of_concurrency.md",
+      "concept/04_formal/12_concurrency_models/02_expressiveness_of_concurrent_models.md",
       "concept/05_comparative/00_paradigms/05_language_semantic_model_matrix.md",
       "concept/05_comparative/02_managed_languages/09_rust_vs_haskell.md",
       "concept/05_comparative/02_managed_languages/11_rust_vs_fsharp.md",
@@ -122,9 +134,9 @@
       "any": 74
     },
     "L4": {
-      "n": 79,
-      "P0": 79,
-      "any": 79
+      "n": 87,
+      "P0": 87,
+      "any": 87
     },
     "L5": {
       "n": 27,

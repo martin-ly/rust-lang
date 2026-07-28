@@ -366,6 +366,8 @@ Unsafe Rust 不是"关闭所有检查"，而是**打开特定的逃逸门**：
 - 编译期计算主要通过 `const generics` 和 `const fn` 实现，而非类型级 hack
 - 图灵完备性是一个理论性质，不影响日常编程（递归限制保护）
 
+> **形式化深入**: 图灵完备性、可计算性与计算模型等价的系统讨论见 [`04_formal/11_computational_models/02_computability_theory.md`](../../04_formal/11_computational_models/02_computability_theory.md) 与 [`04_formal/11_computational_models/05_equivalence_of_computational_models.md`](../../04_formal/11_computational_models/05_equivalence_of_computational_models.md)。
+
 ### 2.4 不是 Total 的，但是定义时错误的
 
 > **[学术来源: Rust Forum — Is Rust total?]** Rust 不是 total 语言（不是所有函数都保证返回），因为它是图灵完备的（存在无限循环）。
@@ -600,6 +602,8 @@ Rust 目前用三种不兼容的语法表达三种效果：
 ## 四、等价表达的语义保持（Equivalent Expressions & Semantic Preservation）
 
 等价表达的语义保持研究"同一意图的多种写法是否语义相同"。谱系与四组判定：
+
+> **形式化深入**: 操作/指称/公理/类型四种语义如何共同刻画「等价」，见 [`04_formal/11_computational_models/01_computational_semantics_framework.md`](../../04_formal/11_computational_models/01_computational_semantics_framework.md)；Rust 算法实现的观察等价与精化，见 [`04_formal/08_algorithm_semantics/05_algorithm_equivalence.md`](../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md)。
 
 - **继承 → Trait + 组合**：`class Dog extends Animal` 与 `impl Animal for Dog` + 字段组合在意图上等价（"是一种" + 复用），但语义不同：继承隐式携带虚表与子类型协变，trait 组合是静态分派 + 无子类型。判定：需要运行时多态 → `dyn Trait`；只需代码复用 → 组合 + 泛型，零成本。
 - **异常 → Result**：`try/catch` 与 `?` 传播在控制流上等价（沿调用栈向上传递错误），语义差异在可见性——异常是隐式控制流（函数签名不声明），`Result` 把错误路径编码进类型。判定：可恢复错误必须 `Result`；只有不可恢复 bug 才 `panic!`。
@@ -922,6 +926,8 @@ Kani（基于 CBMC 的 Rust 模型检测器）通过符号执行验证程序是�
 ## 五、机制组合的语义空间（Combinatorial Semantic Space）
 
 机制组合的语义空间把 Rust 特性视为可组合的**基础算子**，分析组合的表达力与代价：
+
+> **形式化深入**: 同步/并发/并行/异步/分布式五种计算范式在形式语义上的精确边界与 Rust 映射，见 [`04_formal/12_concurrency_models/03_parallel_concurrent_async_distributed_semantics.md`](../../04_formal/12_concurrency_models/03_parallel_concurrent_async_distributed_semantics.md)。
 
 - **基础算子的代数表示**：所有权（O）、借用（B）、生命周期（L）、泛型（G）、trait（T）、unsafe（U）六个算子。每个语言构造是算子的组合：`Arc<Mutex<T>>` = O + G + T（共享所有权 + 参数化 + 内部可变性抽象）；`&'a mut [T]` = B + L + G。
 - **组合爆炸与约束**：6 算子理论组合 2⁶=64 种，但约束（如 `&mut` 的排他性禁止某些别名组合、coherence 限制 trait 组合）把合法组合压缩到可管理的子集——约束不是缺陷而是可判定性的来源。

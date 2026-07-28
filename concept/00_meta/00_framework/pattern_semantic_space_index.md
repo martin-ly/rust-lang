@@ -84,6 +84,8 @@ graph TD
 | **算法语义** | [Algorithm Semantics](../../04_formal/08_algorithm_semantics/README.md) | Hoare 逻辑、精化演算、迭代器正确性、unsafe 不变量、算法等价 |
 | **系统语义** | [System Semantics](../../04_formal/09_system_semantics/README.md) | Actor、π 演算、组件组合、分布式系统、反应式系统 |
 | **架构语义** | [Architecture Semantics](../../04_formal/10_architecture_semantics/README.md) | ADL、架构模式不变量、架构精化、Rust 架构约束 |
+| **计算模型与可计算性** | [Computational Models](../../04_formal/11_computational_models/README.md) | 语义统一框架、可计算性、形式语言、数学函数、模型等价 |
+| **并发模型比较** | [Concurrency Model Comparison](../../04_formal/12_concurrency_models/README.md) | 并发模型谱系、表达能力比较、五范式语义边界 |
 
 ### 2.2 纵向：抽象层级维度
 

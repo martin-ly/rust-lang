@@ -97,12 +97,12 @@ concept→quiz 回链 22/22 完成（`scripts/add_quiz_backlinks.py` 幂等批�
 | 01_foundation | 40 | 161 |
 | 02_intermediate | 30 | 132 |
 | 03_advanced | 29 | 116 |
-| 04_formal | 37 | 170 |
+| 04_formal | 43 | 195 |
 | 05_comparative | 18 | 88 |
 | 06_ecosystem | 71 | 340 |
 | 07_future | 43 | 211 |
 | README.md / sources | 4 | 12 |
-| **合计** | **310** | **1342** |
+| **合计** | **316** | **1367** |
 
 > W3-b（2026-07-12）新增 15 页嵌入式测验（L1×6：patterns/statements/functions/structs/enums/impls；
 > L2×5：dispatch/derive/GAT/const_generics/panic；L3×4：send_sync/future_executor/cancellation/memory_model），

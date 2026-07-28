@@ -20,6 +20,7 @@
 > **前置依赖**: 无（L1 入口概念）
 > **后置延伸**: [L2 泛型（Generics）](../../02_intermediate/01_generics/01_generics.md) · L4 所有权（Ownership）形式化 · L3 Unsafe
 > **跨层映射**: L1→L4 形式化嵌入 | L1→L3 工程扩展
+> **表征空间映射**: [semantic_space.md §2 所有权算子](../../00_meta/00_framework/semantic_space.md)
 > **定理链编号**: T-001 所有权（Ownership）唯一性 → T-002 移动语义完备性 → T-003 Drop 安全性
 > **层级**: L1 基础概念
 > **相关概念**: [Type System](../02_type_system/01_type_system.md)（所有权（Ownership）规则由类型系统静态强制执行，但本文无前置依赖，见上「前置依赖: 无」）

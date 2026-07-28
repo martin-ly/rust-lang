@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 553,
-    "generated_at": "2026-07-28T21:23:54.549992+00:00"
+    "total_files": 561,
+    "generated_at": "2026-07-28T22:13:11.298735+00:00"
   },
   "files": [
     {
@@ -661,7 +661,7 @@
       "layer": "L0",
       "title": "模式语义空间索引：设计模式在概念体系中的坐标",
       "positioning": "",
-      "line_count": 209,
+      "line_count": 211,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -675,6 +675,8 @@
         "../../04_formal/08_algorithm_semantics/README.md",
         "../../04_formal/09_system_semantics/README.md",
         "../../04_formal/10_architecture_semantics/README.md",
+        "../../04_formal/11_computational_models/README.md",
+        "../../04_formal/12_concurrency_models/README.md",
         "../../06_ecosystem/03_design_patterns/01_patterns.md",
         "../../06_ecosystem/03_design_patterns/04_system_composability.md",
         "../../06_ecosystem/03_design_patterns/05_microservice_patterns.md",
@@ -689,7 +691,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 2,
-      "matrix_rows": 43,
+      "matrix_rows": 45,
       "pre_post": {
         "pre": [
           "[Patterns](../../06_ecosystem/03_design_patterns/01_patterns.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md)"
@@ -884,7 +886,7 @@
       "layer": "L0",
       "title": "Rust 表征空间（Semantic / Representational Space）",
       "positioning": "本文件是 `concept/` 知识体系的**元层总论**，从表征空间（Representational Space）与语义空间（Semantic Space）的视角，系统分析 Rust 语言\"能表达什么\"、\"不能表达什么\"、\"等价表达的组合关系\"，以及其内部机制的完备性与封闭性。",
-      "line_count": 1360,
+      "line_count": 1366,
       "theorem_chains": [
         {
           "text": "| 断言 | 前提条件 ⟹ 结论 | 反例/边界条件 | 典型场景 | 失效条件 |",
@@ -1012,6 +1014,11 @@
         "../../03_advanced/03_proc_macros/01_macros.md",
         "../../04_formal/00_type_theory/01_type_theory.md",
         "../../04_formal/02_separation_logic/01_rustbelt.md",
+        "../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md",
+        "../../04_formal/11_computational_models/01_computational_semantics_framework.md",
+        "../../04_formal/11_computational_models/02_computability_theory.md",
+        "../../04_formal/11_computational_models/05_equivalence_of_computational_models.md",
+        "../../04_formal/12_concurrency_models/03_parallel_concurrent_async_distributed_semantics.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../02_sources/05_international_authority_index.md",
         "methodology.md"
@@ -47159,7 +47166,7 @@
       "layer": "L4",
       "title": "软件架构形式化（Software Architecture Formalization）",
       "positioning": "从形式化视角建立软件架构的组件-连接件-配置三元模型，介绍架构描述语言（ADL）、架构风格与连接件语义，并映射到 Rust 的 crate/module/trait/workspace 机制。",
-      "line_count": 341,
+      "line_count": 353,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47208,7 +47215,7 @@
       "layer": "L4",
       "title": "架构模式语义（Architecture Pattern Semantics）",
       "positioning": "从形式化视角定义常见架构模式的语义不变量，将其表述为依赖图、控制流与数据流的约束，并映射到 Rust 的模块、trait 与 workspace 机制。本文是 [Architecture Patterns](../../06_ecosystem/03_design_patterns/08_architecture_patterns.md) 的形式化深化，连接高层设计模式与实现级语义。",
-      "line_count": 573,
+      "line_count": 595,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47287,7 +47294,7 @@
       "layer": "L4",
       "title": "架构精化",
       "positioning": "从形式化视角定义软件架构精化关系，建立抽象架构元素到 Rust crate/module/trait 具体实现的逐步映射，给出不变量保持的证明义务，并用反例说明“拆分≠精化”。",
-      "line_count": 431,
+      "line_count": 444,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47417,6 +47424,575 @@
         ],
         "post": [
           "[Architecture Pattern Semantics](02_architecture_pattern_semantics.md) · [Architecture Refinement](03_architecture_refinement.md) · [Cargo Workspaces](../../06_ecosystem/01_cargo/14_cargo_workspaces.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\11_computational_models\\01_computational_semantics_framework.md",
+      "layer": "L4",
+      "title": "计算语义统一框架（A Unified Framework of Computational Semantics）",
+      "positioning": "把操作、指称、公理、类型四种语义统一为观察同一程序行为的四种互补视角，为后续可计算性、形式语言与程序等价性讨论奠定共同语言。",
+      "line_count": 256,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 二、反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "fn main() {     let x = 1 + 1;     assert_eq!(x, 2); } ..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "fn main() {     let mut x = 0;     let ptr = &mut x as *mut i32;     unsafe {   ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/01_async/01_async.md",
+        "../00_type_theory/01_type_theory.md",
+        "../00_type_theory/05_lambda_calculus.md",
+        "../00_type_theory/06_type_semantics.md",
+        "../03_operational_semantics/01_denotational_semantics.md",
+        "../03_operational_semantics/03_operational_semantics.md",
+        "../03_operational_semantics/05_axiomatic_semantics.md",
+        "02_computability_theory.md",
+        "04_mathematical_functions_of_computation.md",
+        "05_equivalence_of_computational_models.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 6,
+      "pre_post": {
+        "pre": [
+          "[Async/Await](../../03_advanced/01_async/01_async.md) · [Lambda Calculus](../00_type_theory/05_lambda_calculus.md) · [Type Theory](../00_type_theory/01_type_theory.md)"
+        ],
+        "post": [
+          "[Computability Theory](02_computability_theory.md) · [Mathematical Functions of Computation](04_mathematical_functions_of_computation.md) · [Equivalence of Computational Models](05_equivalence_of_computational_models.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\11_computational_models\\02_computability_theory.md",
+      "layer": "L4",
+      "title": "可计算性理论（Computability Theory）",
+      "positioning": "从图灵机、递归函数与 Church-Turing 论题出发，刻画「可计算」的形式边界，并通过 Rust 实例展示可判定性与不可判定性在语言实现中的投影。",
+      "line_count": 339,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 三、反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn factorial(n: u64) -> u64 {     if n == 0 { 1 } else { n * factorial(n - 1) } ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "fn main() {     // ❌ 编译错误：需要显式类型标注     let compose = |f, g| |x| f(g(x));     let..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "fn compose<A, B, C, F, G>(f: F, g: G) -> impl Fn(A) -> C where     F: Fn(B) -> C..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/00_framework/decidability_spectrum.md",
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../00_type_theory/01_type_theory.md",
+        "../00_type_theory/05_lambda_calculus.md",
+        "03_formal_languages_and_automata.md",
+        "04_mathematical_functions_of_computation.md",
+        "05_equivalence_of_computational_models.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 7,
+      "pre_post": {
+        "pre": [
+          "[Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Lambda Calculus](../00_type_theory/05_lambda_calculus.md) · [Type Theory](../00_type_theory/01_type_theory.md)"
+        ],
+        "post": [
+          "[Mathematical Functions of Computation](04_mathematical_functions_of_computation.md) · [Formal Languages and Automata](03_formal_languages_and_automata.md) · [Equivalence of Computational Models](05_equivalence_of_computational_models.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\11_computational_models\\03_formal_languages_and_automata.md",
+      "layer": "L4",
+      "title": "形式语言与自动机（Formal Languages and Automata）",
+      "positioning": "从 Chomsky 层级与自动机对应关系出发，定位 Rust 语法子集（正则表达式、上下文无关表达式、宏系统）在形式语言谱系中的位置，为理解解析、类型推断与宏扩展的计算边界提供理论基础。",
+      "line_count": 561,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 二、反命题"
+        },
+        {
+          "title": "### 2.1 反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 23,
+          "should_fail": false,
+          "code_preview": "#[derive(Clone, Copy, PartialEq, Eq)] enum Parity { Even, Odd }  fn dfa_even_zer..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "use regex::Regex;  fn main() {     let re = Regex::new(r\"^\\d{4}-\\d{2}-\\d{2}$\").u..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "fn main() {     // Rust 表达式：嵌套深度任意，需要栈来解析     let x = {         let y = {       ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// ❌ 编译错误：过程宏虽然强大，但不能生成任意非法语法 // 以下不是合法 Rust 代码，宏展开后会被语法检查拒绝 macro_rules! bad { ..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "// Rust 宏系统比 CFG 更强的简单示例： // macro_rules! 可以重复匹配嵌套模式并生成新代码 macro_rules! count_tt..."
+        },
+        {
+          "flags": [],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "fn main() { { { ... { } ... } } } ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "// ❌ 编译错误：不平衡的分隔符不是合法 Rust 语法 fn main() {     {         {  // 多一个开括号 } ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/00_framework/decidability_spectrum.md",
+        "../../03_advanced/03_proc_macros/01_macros.md",
+        "../00_type_theory/03_type_inference.md",
+        "../00_type_theory/05_lambda_calculus.md",
+        "02_computability_theory.md",
+        "05_equivalence_of_computational_models.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 19,
+      "pre_post": {
+        "pre": [
+          "[Lambda Calculus](../00_type_theory/05_lambda_calculus.md) · [Type Inference](../00_type_theory/03_type_inference.md)"
+        ],
+        "post": [
+          "[Computability Theory](02_computability_theory.md) · [Equivalence of Computational Models](05_equivalence_of_computational_models.md) · [Decidability Spectrum](../../00_meta/00_framework/decidability_spectrum.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\11_computational_models\\04_mathematical_functions_of_computation.md",
+      "layer": "L4",
+      "title": "计算的数学函数（Mathematical Functions of Computation）",
+      "positioning": "把可计算函数视为数学对象，连接 λ 可定义性、μ-递归、部分递归函数与指称语义中的 Scott 域，并通过 Rust 函数/闭包/迭代器展示理论与实现的对应与张力。",
+      "line_count": 310,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 三、反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "fn reciprocal(x: f64) -> f64 {     if x == 0.0 {         panic!(\"division by zer..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn diverges() -> ! {     loop {} }  fn main() {     // diverges() 永远不会返回，对应数学函数中..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "fn main() {     let naturals = std::iter::successors(Some(0), |n| Some(n + 1)); ..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "fn reciprocal(x: f64) -> f64 {     if x == 0.0 { panic!(\"zero\") } else { 1.0 / x..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../00_type_theory/05_lambda_calculus.md",
+        "../00_type_theory/06_type_semantics.md",
+        "../03_operational_semantics/01_denotational_semantics.md",
+        "02_computability_theory.md",
+        "05_equivalence_of_computational_models.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 7,
+      "pre_post": {
+        "pre": [
+          "[Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Lambda Calculus](../00_type_theory/05_lambda_calculus.md) · [Computability Theory](02_computability_theory.md)"
+        ],
+        "post": [
+          "[Denotational Semantics](../03_operational_semantics/01_denotational_semantics.md) · [Equivalence of Computational Models](05_equivalence_of_computational_models.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\11_computational_models\\05_equivalence_of_computational_models.md",
+      "layer": "L4",
+      "title": "计算模型等价性（Equivalence of Computational Models）",
+      "positioning": "从图灵等价、模型间编码与 Felleisen 表达力三个角度，说明「所有图灵完备语言计算能力相同」与「工程语言表达能力不同」为何同时成立，并把这一理论映射到 Rust 的 `async/await` 与 `?` 等语法构造。",
+      "line_count": 370,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 四、反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "async fn say_hello() -> String {     \"hello\".to_string() }  fn main() {     // 调..."
+        },
+        {
+          "flags": [],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "use std::num::ParseIntError;  fn with_question(s: &str) -> Result<i32, ParseIntE..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/00_framework/semantic_space.md",
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../00_type_theory/05_lambda_calculus.md",
+        "../03_operational_semantics/03_operational_semantics.md",
+        "../08_algorithm_semantics/05_algorithm_equivalence.md",
+        "../12_concurrency_models/README.md",
+        "01_computational_semantics_framework.md",
+        "02_computability_theory.md",
+        "04_mathematical_functions_of_computation.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 13,
+      "pre_post": {
+        "pre": [
+          "[Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Computational Semantics Framework](01_computational_semantics_framework.md) · [Computability Theory](02_computability_theory.md) · [Mathematical Functions of Computation](04_mathematical_functions_of_computation.md)"
+        ],
+        "post": [
+          "[Algorithm Equivalence](../08_algorithm_semantics/05_algorithm_equivalence.md) · [Concurrency Models](../12_concurrency_models/README.md) · [Semantic Space](../../00_meta/00_framework/semantic_space.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\12_concurrency_models\\01_models_of_concurrency.md",
+      "layer": "L4",
+      "title": "并发模型谱系（Models of Concurrency）",
+      "positioning": "从**模型谱系**角度给出并发计算的形式分类：共享内存、消息传递（CSP/Actor/π）、Petri 网，并把它们映射到 Rust 的 `std::sync`、`mpsc`、异步运行时与 Actor 框架，避免把工程原语误当成理论模型的同构实现。",
+      "line_count": 357,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 二、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "use std::sync::{Arc, Mutex}; use std::thread;  fn main() {     let counter = Arc..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use std::sync::mpsc; use std::thread;  fn main() {     // sync_channel(0) 强制会合：发..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// 概念示意：ractor 风格的 actor 三要素 // 地址   : ActorRef<CounterMsg> // 邮箱   : 运行时提供的消息队列..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "use std::sync::mpsc; use std::thread;  fn main() {     // 把新的工作通道发送给子线程：拓扑在运行时改变..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use std::sync::mpsc;  fn main() {     let (tx, _rx) = mpsc::channel::<i32>();   ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误假设：A、B 同时向 C 发送 Init 与 Use， // 认为 Init 一定先被处理。 actor_a.do_send(Init); act..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../05_comparative/00_paradigms/04_five_models_definition_matrix.md",
+        "../07_concurrency_semantics/01_process_calculi_for_rust.md",
+        "../07_concurrency_semantics/03_actor_semantics.md",
+        "../09_system_semantics/04_distributed_systems_semantics.md",
+        "02_expressiveness_of_concurrent_models.md",
+        "03_parallel_concurrent_async_distributed_semantics.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 9,
+      "pre_post": {
+        "pre": [
+          "[L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · [L4 进程代数与 Rust](../07_concurrency_semantics/01_process_calculi_for_rust.md) · [L4 Actor 形式语义](../07_concurrency_semantics/03_actor_semantics.md) · [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md)"
+        ],
+        "post": [
+          "[并发模型表达能力比较](02_expressiveness_of_concurrent_models.md) · [五范式语义边界](03_parallel_concurrent_async_distributed_semantics.md) · [分布式系统语义](../09_system_semantics/04_distributed_systems_semantics.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\12_concurrency_models\\02_expressiveness_of_concurrent_models.md",
+      "layer": "L4",
+      "title": "并发模型表达能力比较（Expressiveness of Concurrent Models）",
+      "positioning": "从**编码、互模拟与 Felleisen 表达力框架**三个维度，比较共享内存、CSP、Actor、π 演算等并发模型的表达能力边界，并解释 Rust 的 `tokio::select!`、`async/await` 等原语在形式表达力坐标系中的位置。",
+      "line_count": 453,
+      "theorem_chains": [
+        {
+          "text": "| T-ECM-03 | 强互模拟 ⟹ 弱互模拟 | 弱互模拟定义更宽松 | 若两系统强互模拟，则必然弱互模拟；反之不成立 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **认知路径**: 模型谱系 ⟹ 编码能力 ⟹ 互模拟等价 ⟹ 编码丢失的语义 ⟹ Felleisen 框架 ⟹ Rust `select!` 实例 ⟹ 反例边界。",
+          "type": "paragraph"
+        },
+        {
+          "text": "**核心推理链**: 编码存在 ⟹ 行为等价成立（在限定观察集下）⟹ 但公平性/故障/分布/顺序会丢失 ⟹ 工程选型时不能只看\"能不能模拟\"。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 三、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "use std::sync::{Arc, Mutex};  fn main() {     // 实现 A：显式锁     let data = Arc::ne..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// tokio::select! 的工程形态（需 tokio 依赖） use tokio::select;  async fn demo(rx: &mut t..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// 一个\"手写\"的近似 select! 会迅速陷入状态爆炸： enum Select2State<A, B> {     Start { a: A, b: B..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "use std::sync::{Arc, Mutex}; use std::thread;  fn main() {     // 用共享内存 + 锁模拟\"消息..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/01_async/01_async.md",
+        "../../05_comparative/00_paradigms/04_five_models_definition_matrix.md",
+        "../07_concurrency_semantics/01_process_calculi_for_rust.md",
+        "../07_concurrency_semantics/03_actor_semantics.md",
+        "../08_algorithm_semantics/05_algorithm_equivalence.md",
+        "../09_system_semantics/04_distributed_systems_semantics.md",
+        "../09_system_semantics/05_reactive_systems_semantics.md",
+        "01_models_of_concurrency.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": true,
+      "mermaid_blocks": 1,
+      "matrix_rows": 17,
+      "pre_post": {
+        "pre": [
+          "[Async/Await](../../03_advanced/01_async/01_async.md) · [Models of Concurrency](01_models_of_concurrency.md) · [Process Calculi for Rust](../07_concurrency_semantics/01_process_calculi_for_rust.md) · [Actor Semantics](../07_concurrency_semantics/03_actor_semantics.md) · [Algorithm Equivalence](../08_algorithm_semantics/05_algorithm_equivalence.md)"
+        ],
+        "post": [
+          "[Distributed Systems Semantics](../09_system_semantics/04_distributed_systems_semantics.md) · [Reactive Systems Semantics](../09_system_semantics/05_reactive_systems_semantics.md) · [Five Models Definition Matrix](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\12_concurrency_models\\03_parallel_concurrent_async_distributed_semantics.md",
+      "layer": "L4",
+      "title": "同步 · 并发 · 并行 · 异步 · 分布式的语义边界",
+      "positioning": "在单一页中形式化区分「同步/并发/并行/异步/分布式」五种计算范式，标定它们的语义交集、包含关系与 Rust 原语的落点，避免把实现细节或性能目标当成范式定义。",
+      "line_count": 394,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 五、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "use std::sync::mpsc; use std::thread;  fn main() {     let (tx, rx) = mpsc::chan..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "use rayon::prelude::*;  fn main() {     // 将迭代器自动拆分到多个 CPU 核心     let sum: u64 =..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "async fn fetch(id: u32) -> u32 {     // 在真实程序中，这里会执行非阻塞 I/O     id * 2 }  #[toki..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 22,
+          "should_fail": false,
+          "code_preview": "use tokio::time::Instant;  #[tokio::main] async fn main() {     let start = Inst..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../03_advanced/00_concurrency/04_send_sync_boundaries.md",
+        "../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md",
+        "../../03_advanced/01_async/01_async.md",
+        "../../05_comparative/00_paradigms/04_five_models_definition_matrix.md",
+        "../07_concurrency_semantics/01_process_calculi_for_rust.md",
+        "../07_concurrency_semantics/03_actor_semantics.md",
+        "../09_system_semantics/04_distributed_systems_semantics.md",
+        "01_models_of_concurrency.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 17,
+      "pre_post": {
+        "pre": [
+          "[并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · [Async/Await](../../03_advanced/01_async/01_async.md) · [并发模型谱系](01_models_of_concurrency.md) · [五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md)"
+        ],
+        "post": [
+          "[进程代数与 Rust](../07_concurrency_semantics/01_process_calculi_for_rust.md) · [Actor 形式语义](../07_concurrency_semantics/03_actor_semantics.md) · [分布式系统语义](../09_system_semantics/04_distributed_systems_semantics.md)"
         ]
       },
       "backward_chains": 0,

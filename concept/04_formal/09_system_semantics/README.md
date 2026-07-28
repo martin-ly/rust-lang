@@ -1,7 +1,7 @@
 # 系统语义（System Semantics）
 
-**EN**: System Semantics
-**Summary**: Formal semantics of concurrent, distributed, and reactive systems in Rust — Actor model, π-calculus, component-based semantics, distributed consensus, and reactive streams.
+> **EN**: System Semantics
+> **Summary**: Formal semantics of concurrent, distributed, and reactive systems in Rust — Actor model, π-calculus, component-based semantics, distributed consensus, and reactive streams.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4

@@ -2,8 +2,8 @@
 >
 # 不安全算法的语义不变量（Semantic Invariants of Unsafe Algorithms）
 
-**EN**: Semantic Invariants of Unsafe Algorithms
-**Summary**: Preconditions, postconditions, and aliasing invariants required to prove correctness of unsafe algorithms in Rust.
+> **EN**: Semantic Invariants of Unsafe Algorithms
+> **Summary**: Preconditions, postconditions, and aliasing invariants required to prove correctness of unsafe algorithms in Rust.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4

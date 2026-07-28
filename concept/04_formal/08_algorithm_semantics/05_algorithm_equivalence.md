@@ -2,8 +2,8 @@
 >
 # 算法实现的观察等价性（Observational Equivalence of Algorithm Implementations）
 
-**EN**: Observational Equivalence of Algorithm Implementations
-**Summary**: When two Rust implementations of the same algorithm are interchangeable based on observable behavior, and when complexity or non-determinism breaks equivalence.
+> **EN**: Observational Equivalence of Algorithm Implementations
+> **Summary**: When two Rust implementations of the same algorithm are interchangeable based on observable behavior, and when complexity or non-determinism breaks equivalence.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4

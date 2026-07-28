@@ -6,8 +6,8 @@
 
 # 架构精化
 
-**EN**: Architecture Refinement
-**Summary**: Stepwise refinement from abstract architecture to concrete Rust implementation while preserving architectural invariants.
+> **EN**: Architecture Refinement
+> **Summary**: Stepwise refinement from abstract architecture to concrete Rust implementation while preserving architectural invariants.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4-L5
