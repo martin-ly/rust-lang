@@ -638,7 +638,7 @@ safeDiv x y = x `div` y
 -- 调用 safeDiv x 0 会被 Liquid Haskell 拒绝
 ```
 
-Liquid Haskell 的工业价值在于：它可以在不修改 GHC 核心语义的前提下，为现有 Haskell 代码添加轻量验证。Rust 生态中的类似工具是 [Flux](https://flux-rs.github.io/)（Rust 的细化类型研究项目，目前仍是实验性质）。
+Liquid Haskell 的工业价值在于：它可以在不修改 GHC 核心语义的前提下，为现有 Haskell 代码添加轻量验证。Rust 生态中的类似工具是 [Flux](14_flux.md)（Rust 的 Liquid 细化类型研究项目，目前仍是实验性质；详见 `concept/` 权威页）。
 
 ### 4.3 F* 与 Dafny：验证感知类型
 
@@ -775,7 +775,7 @@ impl Expr<i32> {
 - 扩展 const generics 的表达式能力（`generic_const_exprs` 稳定化）；
 - 改进类型级编程的 ergonomics；
 - 通过外部验证工具（Verus、Kani、Creusot）满足安全关键需求；
-- 实验性细化类型项目（如 Flux）探索语法层面的支持。
+- 实验性细化类型项目（如 [Flux](14_flux.md)）探索语法层面的支持。
 
 ---
 
@@ -911,7 +911,7 @@ fn state_machine_demo() {
 - [Kani](https://model-checking.github.io/kani/)
 - [Creusot](https://creusot-rs.github.io/)
 - [Aeneas](https://github.com/AeneasVerif/aeneas)
-- [Flux](https://flux-rs.github.io/)（Rust 细化类型研究项目）
+- [Flux](14_flux.md)（Rust 的 Liquid 细化类型研究项目）
 
 ### 相关概念页
 

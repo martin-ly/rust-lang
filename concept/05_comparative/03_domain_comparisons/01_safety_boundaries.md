@@ -641,7 +641,7 @@ Rust 的安全边界在编译期和运行时（Runtime）有不同的表现形�
 
 > **来源**:
 > [Rust Error Index] ·
-> [Rust Reference: Error Codes](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rust Reference: Error Codes](https://doc.rust-lang.org/error_codes/error-index.html) ·
 > [Rust Standard Library: panic!]
 
 ### 11.2 "错误码 → 边界条件 → 概念"反向索引

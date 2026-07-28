@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 536,
-    "generated_at": "2026-07-27T21:16:15.381692+00:00"
+    "total_files": 538,
+    "generated_at": "2026-07-28T13:34:39.153344+00:00"
   },
   "files": [
     {
@@ -571,7 +571,7 @@
       "layer": "L0",
       "title": "方法论：思维表征与知识结构规范",
       "positioning": "本文件定义 `concept/` 下所有主题文件的内容结构、思维表征方式和知识组织规范，确保内容的**一致性、可比较性、可扩展性**。",
-      "line_count": 586,
+      "line_count": 610,
       "theorem_chains": [
         {
           "text": "| 方法论框架 ⟹ 知识组织一致性 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
@@ -606,7 +606,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 5,
-      "matrix_rows": 35,
+      "matrix_rows": 41,
       "pre_post": {
         "pre": [
           "[链接到前置概念]"
@@ -1350,6 +1350,7 @@
       "sources": [],
       "cross_references": [
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../04_formal/01_ownership_logic/01_linear_logic.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
@@ -1503,12 +1504,15 @@
       "layer": "L0",
       "title": "International Authority Index（国际化权威来源索引）",
       "positioning": "集中维护 Rust 知识体系所需的国际权威来源 URL，便于 concept/、knowledge/、docs/ 各层统一引用，避免重复搜索与链接失效。",
-      "line_count": 251,
+      "line_count": 275,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../../06_ecosystem/03_design_patterns/01_patterns.md",
+        "../../06_ecosystem/10_performance/01_performance_optimization.md",
+        "../00_framework/comprehensive_rust_mapping.md",
         "../00_framework/knowledge_mindmap.md",
         "../04_navigation/03_concept_index.md",
         "01_authority_source_map.md",
@@ -1518,7 +1522,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 90,
+      "matrix_rows": 99,
       "pre_post": {
         "pre": [
           "[Authority Source Map](01_authority_source_map.md) · [Sources](03_sources.md) · [Topic-Authority Alignment Map](04_topic_authority_alignment_map.md)"
@@ -40128,7 +40132,8 @@
         "../../03_advanced/00_concurrency/10_quiz_semantic_models.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../06_ecosystem/08_formal_verification/01_formal_ecosystem_tower.md",
-        "01_type_theory.md"
+        "01_type_theory.md",
+        "14_flux.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -40580,6 +40585,194 @@
         ],
         "post": [
           "[算法工程实践](../../06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\00_type_theory\\14_flux.md",
+      "layer": "L4",
+      "title": "Flux：Rust 的 Liquid 细化类型",
+      "positioning": "",
+      "line_count": 480,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 六、反例"
+        },
+        {
+          "title": "### 6.1 反例"
+        },
+        {
+          "title": "### 6.2 反例"
+        },
+        {
+          "title": "### 6.3 反例"
+        },
+        {
+          "title": "### 6.4 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "// Flux 可以验证 1 + 2 + 3 的类型为 i32[6] // 以及 1 + 2 + 3 <= 10 的类型为 bool[true] ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "#[flux::sig(fn(i32[@n]) -> bool[n > 0])] fn is_pos(n: i32) -> bool {     n > 0 }..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// 正整数 i32{v: v > 0}  // 非空向量 RVec<T>{v: v > 0}  // nat 是 i32{v: v >= 0} 的缩写 ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "#[flux::sig(fn(x: i32) -> i32{v: v >= 0 && v >= x})] fn abs(x: i32) -> i32 {    ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "#[flux::sig(fn(x: i32[@n]) -> bool[n > 0])] fn is_pos(n: i32) -> bool { ... } ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use flux_rs::attrs::*;  #[spec(fn(x: i32) -> i32{v: x < v})] fn inc(x: i32) -> i..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "#[flux::spec(fn(x: i32) -> i32{v: x < v})] pub fn inc(x: i32) -> i32 {     x + 1..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "fn strong_update_demo() {     let mut x = 0;        // x: i32[0]     x += 1;    ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "#[flux::sig(fn(x: &mut i32{v: v >= 0}))] fn decr(x: &mut i32) {     if *x > 0 { ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "#[flux::sig(fn(x: &strg i32[@n]) ensures *x: i32[n + 1])] fn incr(x: &mut i32) {..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "#[flux::refined_by(len: int)] enum List<T> {     #[flux::variant(List<T>[0])]   ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "#[flux::sig(fn(vec: &RVec<i32>[@n], idx: usize{idx < n}) -> &i32)] fn safe_get(v..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "#[flux::sig(fn(x: i32, y: i32{v: v != 0}) -> i32)] fn safe_div(x: i32, y: i32) -..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "// 所有元素都为正的整数向量 #[flux::sig(fn() -> RVec<i32{v: v > 0}>)] fn positives() -> RVec..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "#[flux::sig(fn(*const i32) -> i32)] unsafe fn deref_raw(ptr: *const i32) -> i32 ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// Flux 无法直接证明“列表已排序”这类需要任意归纳推理的性质 #[flux::sig(fn(&RVec<i32>) -> bool)] fn is_so..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// 涉及非线性算术、量词或复杂数据结构的谓词可能无法自动求解 #[flux::sig(fn(n: i32) -> i32{v: v * v == n})] f..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../02_intermediate/01_generics/01_generics.md",
+        "../../03_advanced/00_concurrency/10_quiz_semantic_models.md",
+        "../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md",
+        "../04_model_checking/04_modern_verification_tools.md",
+        "../04_model_checking/08_miri.md",
+        "../04_model_checking/09_kani.md",
+        "10_dependent_refinement_types.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 17,
+      "pre_post": {
+        "pre": [
+          "[Dependent Types and Refinement Types](10_dependent_refinement_types.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)"
+        ],
+        "post": [
+          "[Modern Verification Tools](../04_model_checking/04_modern_verification_tools.md) · [Formal Verification Tools](../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md)"
         ]
       },
       "backward_chains": 0,
@@ -42963,7 +43156,7 @@
       "layer": "L4",
       "title": "现代 Rust 验证工具生态（2025-2026）",
       "positioning": "利用大语言模型（LLM）自动生成 Verus 证明注解，降低形式化验证的门槛。",
-      "line_count": 582,
+      "line_count": 591,
       "theorem_chains": [
         {
           "text": "| 现代 Rust 验证工具生态（2025-2026） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -43070,6 +43263,7 @@
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../07_future/02_preview_features/03_safety_tags_preview.md",
         "../../07_future/02_preview_features/24_borrow_sanitizer.md",
+        "../00_type_theory/14_flux.md",
         "../01_ownership_logic/05_tree_borrows_deep_dive.md",
         "../02_separation_logic/01_rustbelt.md",
         "../02_separation_logic/04_borrow_sanitizer_in_formal.md",
@@ -43077,12 +43271,13 @@
         "01_verification_toolchain.md",
         "07_autoverus.md",
         "08_miri.md",
-        "09_kani.md"
+        "09_kani.md",
+        "11_creusot.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 40,
+      "matrix_rows": 44,
       "pre_post": {
         "pre": [
           "[Verification Toolchain](01_verification_toolchain.md) · [Hoare 逻辑](../03_operational_semantics/02_hoare_logic.md) · [RustBelt](../02_separation_logic/01_rustbelt.md)",
@@ -43647,6 +43842,136 @@
         ],
         "post": [
           "[安全关键 Rust 专题索引](../../06_ecosystem/11_domain_applications/21_safety_critical_topic_index.md) · [cargo vet 与供应链审计](../../06_ecosystem/07_security_and_cryptography/03_cargo_vet_supply_chain.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\04_model_checking\\11_creusot.md",
+      "layer": "L4",
+      "title": "Creusot：基于 Why3 的 Rust 演绎验证器",
+      "positioning": "将 Creusot 从学术研究工具还原为算法与数据结构功能正确性验证的可选工具，理解其与 Kani/Verus/Prusti/Aeneas 的边界。学习本页前应先掌握 L3 [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) 与 L4 [Ownership Formalization](../01_ownership_logic/02_ownership_formal.md) 的基础。",
+      "line_count": 581,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// 选择两个可变借用之一返回 // ^y == *y 表示：未被选中的借用最终值与其初始值相同 #[ensures(     if b { result ==..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "use creusot_contracts::*;  #[requires(vec@.len() < usize::MAX@)] #[ensures(resul..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "#[requires(n@ * (n@ + 1) / 2 <= u64::MAX@)] #[ensures(result@ == n@ * (n@ + 1) /..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "#[check(terminates)] #[requires(n@ * (n@ + 1) / 2 <= u32::MAX@)] #[ensures(resul..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "// 逻辑函数：在契约中可用，运行时被擦除 #[logic(open)] pub fn is_sorted(s: Seq<u64>) -> bool {    ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// 链表节点的 ghost 权限示例（简化） pub struct List<T> {     first: *const Link<T>,     last..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "use creusot_contracts::*;  #[requires(x@ < i64::MAX@)] #[ensures(result@ == x@ +..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use creusot_contracts::*;  // 将 x 增加 n，保持 y 不变 #[requires(n@ >= 0)] #[ensures(^x..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "use creusot_contracts::*;  #[check(terminates)] #[requires(n@ * (n@ + 1) / 2 <= ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "use creusot_contracts::*;  // ❌ 验证失败：未限制 x，x + 1 可能溢出 #[ensures(result@ == x@ + ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "use creusot_contracts::*;  #[requires(x@ < i64::MAX@)] #[ensures(result@ == x@ +..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../01_ownership_logic/02_ownership_formal.md",
+        "01_verification_toolchain.md",
+        "04_modern_verification_tools.md",
+        "07_autoverus.md",
+        "08_miri.md",
+        "09_kani.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 43,
+      "pre_post": {
+        "pre": [
+          "[Verification Toolchain](01_verification_toolchain.md) · [现代验证工具生态](04_modern_verification_tools.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)"
+        ],
+        "post": [
+          "[Kani](09_kani.md) · [Miri](08_miri.md) · [AutoVerus](07_autoverus.md)"
         ]
       },
       "backward_chains": 0,
@@ -59726,7 +60051,7 @@
       "layer": "L6",
       "title": "形式化验证工具生态",
       "positioning": "",
-      "line_count": 1054,
+      "line_count": 1023,
       "theorem_chains": [
         {
           "text": "| Formal Verification Tools（形式化验证工具生态） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -59801,14 +60126,6 @@
           "flags": [
             "ignore"
           ],
-          "lines": 23,
-          "should_fail": false,
-          "code_preview": "// Flux 精化类型示例 // 使用 #[flux::sig(...)] 注解类型约束  #[flux::sig(fn(x: i32{v: v >= 0})..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
           "lines": 16,
           "should_fail": false,
           "code_preview": "// ❌ 错误：Kani 只验证有 harness 的函数，未覆盖的函数仍有 bug  fn unchecked_access(arr: &[i32], idx..."
@@ -59860,6 +60177,7 @@
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../04_formal/00_type_theory/14_flux.md",
         "../../04_formal/04_model_checking/01_verification_toolchain.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../07_future/00_version_tracking/01_rust_version_tracking.md",
@@ -59872,7 +60190,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 66,
+      "matrix_rows": 72,
       "pre_post": {
         "pre": [
           "[类型系统（Type System）](../../01_foundation/02_type_system/01_type_system.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · 形式化验证 · [生命周期（Lifetimes）](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)",
@@ -66854,7 +67172,7 @@
       "layer": "L7",
       "title": "Rust 1.98+ 前沿特性预览",
       "positioning": "",
-      "line_count": 724,
+      "line_count": 742,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [

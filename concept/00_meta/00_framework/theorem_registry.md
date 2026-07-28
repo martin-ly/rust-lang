@@ -204,7 +204,7 @@
 
 > 本注册表规范的 `T-xxx` 定理编号，其命题出处对齐下列国际权威来源（仅作来源登记，不改正文事实）：
 
-- **P0 官方**: [Rust Reference — Type System / Traits / Lifetimes](https://doc.rust-lang.org/reference/) · [The Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust RFCs](https://rust-lang.github.io/rfcs/)
+- **P0 官方**: [Rust Reference — Type System / Traits / Lifetimes](https://doc.rust-lang.org/reference/types.html) · [The Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust RFCs](https://rust-lang.github.io/rfcs/)
 - **P1 学术/形式化**: Ralf Jung et al. _RustBelt: Securing the Foundations of the Rust Programming Language_ (POPL 2018) · _Stacked Borrows: An Aliasing Model for Rust_ (POPL 2019) · Villani / Hostert / Dreyer / Jung _Tree Borrows: A New Aliasing Model for Rust_ (PLDI 2025, Distinguished Paper)
 - **映射维护**: 见 [`concept/00_meta/02_sources/01_authority_source_map.md`](../02_sources/01_authority_source_map.md)
 

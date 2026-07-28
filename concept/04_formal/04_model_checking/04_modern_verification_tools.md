@@ -360,6 +360,8 @@ pub fn safe_wrapper(data: &[u8]) -> u32 {
 | 日常 unsafe 代码审查 | **Miri** | Kani (bounded) | Miri 不验证所有执行路径 |
 | 安全关键组件（crypto/网络） | **Kani 0.65+** | ESBMC | 循环需契约或展开 |
 | 操作系统/驱动/嵌入式 | **Verus** | Kani + 手引公理 | 学习曲线陡峭 |
+| 算法/数据结构功能正确性 | **Creusot** | Verus | 标注负担中高、Why3 求解器调参 |
+| 轻量数组边界 / 向量长度 / 元素不变量 | **Flux** | Verus / Kani | 仅 safe Rust，需 nightly |
 | LLM 辅助验证入门 | **AutoVerus** | 纯 Verus | 成功率随复杂度下降 |
 | C/Rust FFI 混合验证 | **ESBMC** | TrustInSoft | Rust 前端成熟度有限 |
 | 遗留 C 代码审计 | **TrustInSoft** | ESBMC | 商业工具，需许可证 |
@@ -463,9 +465,10 @@ cd verus/source && ./tools/get-z3.sh && cargo build --release
 > **最后更新**: 2026-07-09
 > **权威来源对齐变更日志**: 2026-07-09 新增 Safety Tags / BorrowSanitizer / AutoVerus / Tree Borrows 交叉引用（Reference） [P2-Q3 形式化工具交叉引用]; 2026-07-10 L4 形式化层权威来源对齐复审 [Authority Source Sprint Batch L4](../../00_meta/02_sources/05_international_authority_index.md)
 
-**文档版本**: 1.0
-**最后更新**: 2026-07-10
+**文档版本**: 1.1
+**最后更新**: 2026-07-28
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
+> **变更**: 2026-07-28 在选型速查表与相关工具交叉索引中新增 Creusot [P1-1]
 
 ## 相关工具交叉索引
 
@@ -477,7 +480,9 @@ cd verus/source && ./tools/get-z3.sh && cargo build --release
 | [Stacked Borrows](../01_ownership_logic/05_tree_borrows_deep_dive.md) | 早期 Rust 别名模型 | [Stacked Borrows 论文](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) |
 | [Safety Tags](../../07_future/02_preview_features/03_safety_tags_preview.md) | `unsafe` 安全契约机器可读标注（RFC #3842） | [RFC #3842](https://github.com/rust-lang/rfcs/pull/3842) |
 | [BorrowSanitizer](../02_separation_logic/04_borrow_sanitizer_in_formal.md) | 运行时别名模型检测 | [Rust Project Goal #624](https://github.com/rust-lang/rust-project-goals/issues/624) |
+| [Creusot](11_creusot.md) | 基于 Why3/Coma 的 Rust 演绎验证器，擅长可变借用与算法功能正确性 | [Creusot 官方文档](https://creusot.rs/) · [Creusot GitHub](https://github.com/creusot-rs/creusot) |
 | [AutoVerus / Verus](07_autoverus.md) | SMT 演绎验证与 LLM 辅助自动证明 | [Verus GitHub](https://github.com/verus-lang/verus) · [AutoVerus 论文](https://arxiv.org/abs/2409.13082) |
+| [Flux](../00_type_theory/14_flux.md) | Rust 的 Liquid 细化类型，轻量边界/长度/元素不变量验证 | [Flux GitHub](https://github.com/flux-rs/flux) · [Flux PLDI 2023 论文](https://ranjitjhala.github.io/static/flux-pldi23.pdf) |
 
 ## 认知路径
 
@@ -576,6 +581,10 @@ mindmap
       工具链集成愿景
     TrustInSoft C Rust
       抽象解释原理
+    Flux Liquid 细化类型
+      数组边界
+      向量长度
+      元素不变量
 ```
 
 > **认知功能**: 本 mindmap 从本页「现代 Rust 验证工具生态 2025-2026」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

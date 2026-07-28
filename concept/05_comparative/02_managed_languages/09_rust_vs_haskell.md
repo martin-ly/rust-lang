@@ -822,7 +822,7 @@ fn sum_to_n(n: i64) -> i64 {
 - [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 - [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 - [RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
-- [The Async Book](https://rust-lang.github.io/async-book/)
+- [The Async Book](https://rust-lang.github.io/async-book/01_getting_started/02_why_async.html)
 - [Rust Embedded Book](https://doc.rust-lang.org/stable/embedded-book/)
 - [Haskell.org](https://www.haskell.org/)
 - [Haskell 2010 Language Report](https://www.haskell.org/onlinereport/haskell2010/)

@@ -91,7 +91,7 @@
     - [Q54: Error Source Chain](#q54-error-source-chain)
     - [Q55: 泛型 vs Trait Object 错误处理](#q55-泛型-vs-trait-object-错误处理)
     - [Q56: Zero-Sized Types (ZST)](#q56-zero-sized-types-zst)
-  - [L3 扩展层：并发、异步、unsafe 与宏（8 题） \[来源: 题目基于 TRPL Ch16 (并发), Rust Async Book / 2025; Rust Reference — unsafe, Macros / 2025; RFC 2349 (Pin)\](https://rust-lang.github.io/async-book/)](#l3-扩展层并发异步unsafe-与宏8-题-来源-题目基于-trpl-ch16-并发-rust-async-book--2025-rust-reference--unsafe-macros--2025-rfc-2349-pinhttpsrust-langgithubioasync-book)
+  - [L3 扩展层：并发、异步、unsafe 与宏（8 题） \[来源: 题目基于 TRPL Ch16 (并发), Rust Async Book / 2025; Rust Reference — unsafe, Macros / 2025; RFC 2349 (Pin)\](https://rust-lang.github.io/async-book/01_getting_started/02_why_async.html)](#l3-扩展层并发异步unsafe-与宏8-题-来源-题目基于-trpl-ch16-并发-rust-async-book--2025-rust-reference--unsafe-macros--2025-rfc-2349-pinhttpsrust-langgithubioasync-book)
     - [Q57: Atomic Ordering](#q57-atomic-ordering)
     - [Q58: Stream vs Iterator](#q58-stream-vs-iterator)
     - [Q59: Cancel Safety](#q59-cancel-safety)
@@ -131,7 +131,7 @@
 
 > **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [concept/知识体系]
 >
-## L1 基础层：所有权与类型系统（8 题） 题目基于 TRPL Ch4 (所有权), Ch10 (生命周期), Ch6 (枚举) / 2024; [Rust Reference — Ownership, Lifetimes, Types / 2025](https://doc.rust-lang.org/reference/introduction.html); [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)
+## L1 基础层：所有权与类型系统（8 题） 题目基于 TRPL Ch4 (所有权), Ch10 (生命周期), Ch6 (枚举) / 2024; [Rust Reference — Ownership, Lifetimes, Types / 2025](https://doc.rust-lang.org/reference/types.html); [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)
 
 > **[Bloom Taxonomy 2001; 认知科学评估方法论](https://cft.vanderbilt.edu/guides-sub-pages/blooms-taxonomy/)** 自测题基于 Bloom 认知层级设计，覆盖记忆→理解→应用→分析。
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust RFCs](https://rust-lang.github.io/rfcs/index.html)
@@ -847,7 +847,7 @@ Oxide 的核心创新：用 **ownership typing** 形式化 Rust 的所有权规�
 > [Wikipedia — Programming Language Comparison](https://en.wikipedia.org/wiki/Comparison_of_programming_languages)
 >
 
-## L5 对比层：多语言范式（5 题） 题目基于 TRPL 跨章节对比 / 2024; [Rust Reference — Types, Traits / 2025](https://doc.rust-lang.org/reference/introduction.html); [Wikipedia — Object-oriented Programming](https://en.wikipedia.org/wiki/Object-oriented_Programming)(<https://en.wikipedia.org/wiki/Object-oriented_programming>)
+## L5 对比层：多语言范式（5 题） 题目基于 TRPL 跨章节对比 / 2024; [Rust Reference — Types, Traits / 2025](https://doc.rust-lang.org/reference/items/traits.html); [Wikipedia — Object-oriented Programming](https://en.wikipedia.org/wiki/Object-oriented_Programming)(<https://en.wikipedia.org/wiki/Object-oriented_programming>)
 
 本组测验检验「Rust 与主流语言的范式差异」理解，覆盖五个判别点：
 
@@ -947,7 +947,7 @@ Rust 是仿射的：`let x = ...;` 后不使用 `x` 是合法的（ weakening）
 > **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [concept/知识体系]
 > **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Cargo Book](https://doc.rust-lang.org/cargo/index.html)
 >
-## L6 生态层：工程实践（5 题） 题目基于 Cargo Book / 2025; [Rust Reference — Crates, unsafe / 2025](https://doc.rust-lang.org/reference/introduction.html); Rust Internals — Edition System(<https://internals.rust-lang.org/>)
+## L6 生态层：工程实践（5 题） 题目基于 Cargo Book / 2025; [Rust Reference — Crates, unsafe / 2025](https://doc.rust-lang.org/reference/crates-and-source-files.html); Rust Internals — Edition System(<https://internals.rust-lang.org/>)
 
 本组测验检验「Rust 工程生态」的实操理解，覆盖五个判别点：
 
@@ -1055,7 +1055,7 @@ Rust 如何保证向后兼容？
 > **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 >
 
-## L1 扩展层：所有权与类型系统（8 题） [来源: 题目基于 Rust Reference — Ownership, Lifetimes, Types / 2025; TRPL Ch4, Ch6, Ch10 / 2024; Rustonomicon — Life before Main](https://doc.rust-lang.org/nomicon/index.html)
+## L1 扩展层：所有权与类型系统（8 题） [来源: 题目基于 Rust Reference — Ownership, Lifetimes, Types / 2025; TRPL Ch4, Ch6, Ch10 / 2024; Rustonomicon — Life before Main](https://doc.rust-lang.org/nomicon/beneath-std.html)
 
 本组扩展测验深化 L1 层的所有权与类型系统理解，覆盖八个判别点：
 
@@ -1931,7 +1931,7 @@ proof fn maintain_invariant(x: u32, ghost prev: u32)
 > **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [concept/知识体系]
 > **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Wikipedia — Zero-cost Abstraction](https://en.wikipedia.org/wiki/Zero-overhead_principle)
 >
-## L5 扩展层：多语言范式对比（4 题） 题目基于 TRPL 跨语言对比 / 2024; [Rust Reference — unsafe, FFI / 2025](https://doc.rust-lang.org/reference/introduction.html); [Wikipedia — Capability-based Security](https://en.wikipedia.org/wiki/Capability-based_Security)(<https://en.wikipedia.org/wiki/Capability-based_security>)]
+## L5 扩展层：多语言范式对比（4 题） 题目基于 TRPL 跨语言对比 / 2024; [Rust Reference — unsafe, FFI / 2025](https://doc.rust-lang.org/reference/items/external-blocks.html); [Wikipedia — Capability-based Security](https://en.wikipedia.org/wiki/Capability-based_Security)(<https://en.wikipedia.org/wiki/Capability-based_security>)]
 
 本节聚焦「L5 扩展层：多语言范式对比（4 题）」，覆盖Q73: Rust vs Swift、Q74: Rust vs C# Span、Q75: 零成本抽象与Q76: 基于能力的安全。论述顺序由定义到边界：先明确「L5 扩展层：多语言范式对比（4 题）」在「Rust 知识体系自测题库（Self-Assessment）」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「L5 扩展层：多语言范式对比（4 题）」的判定标准，并指出它在全页论证链中的位置。
 
@@ -2031,7 +2031,7 @@ Rust 的所有权即一种**能力**：
 > **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [concept/知识体系]
 > **来源**: [Bloom's Taxonomy (2001 Revision)](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [SemVer Specification](https://semver.org/)
 >
-## L6 扩展层：工程实践与生态（4 题） 题目基于 Cargo Book / 2025; [Rust Reference — Macros, Documentation / 2025](https://doc.rust-lang.org/reference/introduction.html); SemVer 2.0.0(<https://semver.org/>)]
+## L6 扩展层：工程实践与生态（4 题） 题目基于 Cargo Book / 2025; [Rust Reference — Macros, Documentation / 2025](https://doc.rust-lang.org/reference/macros.html); SemVer 2.0.0(<https://semver.org/>)]
 
 本节聚焦「L6 扩展层：工程实践与生态（4 题）」，覆盖Q77: Cargo Features 解析、Q78: proc-macro2 与 syn、Q79: SemVer 与 API 演进与Q80: rustdoc Doctest。论述顺序由定义到边界：先明确「L6 扩展层：工程实践与生态（4 题）」在「Rust 知识体系自测题库（Self-Assessment）」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「L6 扩展层：工程实践与生态（4 题）」的判定标准，并指出它在全页论证链中的位置。
 

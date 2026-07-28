@@ -310,7 +310,7 @@ Trait 的属性矩阵沿三个维度组织，每个维度都附带可机械判�
 | **关联类型 Trait** | `trait Iterator { type Item; }` | `type Item = T;` | `dyn Iterator<Item=T>` | `Iterator`、`Future` |
 | **生命周期（Lifetimes） Trait** | `trait Borrow<'a>` | 含生命周期参数 | 受限 | `ToOwned`、`Borrow` |
 
-> **来源: [Rust Reference: Auto Traits; Rust Reference: Special Types and Traits](https://doc.rust-lang.org/reference/introduction.html)** Auto Trait 由编译器自动推导，不含关联项；`Sized` 等标记 Trait 具有类似的编译器特殊处理语义。
+> **来源: [Rust Reference: Auto Traits; Rust Reference: Special Types and Traits](https://doc.rust-lang.org/reference/special-types-and-traits.html#auto-traits)** Auto Trait 由编译器自动推导，不含关联项；`Sized` 等标记 Trait 具有类似的编译器特殊处理语义。
 
 ### 2.2 Trait vs 其他语言机制对比
 
@@ -443,7 +443,7 @@ graph TD
 
 impl<P₁...Pn> Trait<T₁...Tm> for Type
 
-> **来源**: [RFC 1023 §3 — Orphan rules formal definition](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html) · [Rust Reference: Orphan rules — Fundamental types](https://doc.rust-lang.org/reference/introduction.html) · [Dreyer 2017 §3.2.2]
+> **来源**: [RFC 1023 §3 — Orphan rules formal definition](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html) · [Rust Reference: Orphan rules — Fundamental types](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules) · [Dreyer 2017 §3.2.2]
 > **[Pierce 2002 TAPL Ch.23](https://www.cis.upenn.edu/~bcpierce/tapl/); [Wadler & Blott 1989](https://doi.org/10.1145/75277.75283)** Rust Trait 与 Haskell 类型类均可映射到 System F 的字典传递解释。
 
 #### 与 System F 子类型化的对接
@@ -453,7 +453,7 @@ impl<P₁...Pn> Trait<T₁...Tm> for Type
 
 #### Blanket impl 与 Horn 子句可满足性
 
-> **来源**: [Rust Reference: Impl overlapping](https://doc.rust-lang.org/reference/introduction.html) · [Rust Reference: min_specialization](https://doc.rust-lang.org/reference/introduction.html) · [Dowek & Jiang 2011 — Eigenvariables, bracketing and the decidability of positive minimal predicate logic] · [Rust Internals: Specialization soundness issues]
+> **来源**: [Rust Reference: Impl overlapping](https://doc.rust-lang.org/reference/items/implementations.html#trait-implementation-coherence) · [Rust Reference: min_specialization](https://doc.rust-lang.org/reference/items/implementations.html#trait-implementation-coherence) · [Dowek & Jiang 2011 — Eigenvariables, bracketing and the decidability of positive minimal predicate logic] · [Rust Internals: Specialization soundness issues]
 > **来源: [Rust Reference: Coherence — 完整规则集](https://doc.rust-lang.org/reference/introduction.html)** Coherence 系统是 Rust 类型检查器的核心，其实现分布在 rustc_trait_selection crate 的 coherence 模块（Module）中。
 
 ---
@@ -499,7 +499,7 @@ pub unsafe auto trait Sync {}
 
 > **Send 核心语义**:
 > `Send` 标记**可以安全跨线程转移所有权（Ownership）**的类型——即值的所有权从一个线程 move 到另一个线程不会导致数据竞争或内存不安全
-> 来源: [Rust Reference — Send and Sync / 2025; Rustonomicon — Send and Sync / 2025; RustBelt — 数据竞争自由定理 / POPL 2018](https://doc.rust-lang.org/reference/introduction.html)。
+> 来源: [Rust Reference — Send and Sync / 2025; Rustonomicon — Send and Sync / 2025; RustBelt — 数据竞争自由定理 / POPL 2018](https://doc.rust-lang.org/reference/special-types-and-traits.html#send-and-sync)。
 > `Sync` 标记**可以安全跨线程共享引用（Reference）**的类型——即 `&T` 可以安全地传递给多个线程同时读取。
 
 #### 自动推导规则
@@ -1929,7 +1929,7 @@ const fn double<T: Add<Output = T>>(x: T) -> T {
 }
 ```
 
-> **来源: [Rust Reference: const_eval; RFC 3762](https://doc.rust-lang.org/reference/introduction.html)** 稳定 Rust 的 const fn 限制源于编译器无法在编译期验证 trait 方法的 const 安全性，const trait impl 系统正是为解决此问题而设计。
+> **来源: [Rust Reference: const_eval; RFC 3762](https://doc.rust-lang.org/reference/const_eval.html)** 稳定 Rust 的 const fn 限制源于编译器无法在编译期验证 trait 方法的 const 安全性，const trait impl 系统正是为解决此问题而设计。
 
 #### `~const` 语法与 `#[const_trait]`
 
@@ -2138,7 +2138,7 @@ Orphan Rule 默认: ❌ 不允许（Box 来自 std，MyType 来自 A，MyTrait �
 | `Vec<T>` | ❌ | 非 fundamental |
 | `Option<T>` | ❌ | 非 fundamental |
 
-> **来源: [Rust Reference: Fundamental types; RFC 2451](https://doc.rust-lang.org/reference/introduction.html)** `#[fundamental]` 的完整列表和语义由 Rust Reference 和 [RFC 2451](https://rust-lang.github.io/rfcs//2451-re-rebalancing-coherence.html) 定义，用户代码不可自行添加此属性。
+> **来源: [Rust Reference: Fundamental types; RFC 2451](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)** `#[fundamental]` 的完整列表和语义由 Rust Reference 和 [RFC 2451](https://rust-lang.github.io/rfcs//2451-re-rebalancing-coherence.html) 定义，用户代码不可自行添加此属性。
 
 #### 为什么这些类型是 fundamental：对下游 crate 的"透明性"
 
@@ -2291,7 +2291,7 @@ impl !Sync for RawFd {}
 // RawFd 现在: !Send + !Sync（即使 i32 是 Send + Sync）
 ```
 
-> **来源: [Rust Reference: Auto Traits; RFC 683](https://doc.rust-lang.org/reference/introduction.html)** Negative impl 对 Auto Trait 的核心作用是阻止编译器的结构化归纳自动推导，提供明确的 !Send/!Sync 语义承诺。
+> **来源: [Rust Reference: Auto Traits; RFC 683](https://doc.rust-lang.org/reference/special-types-and-traits.html#auto-traits)** Negative impl 对 Auto Trait 的核心作用是阻止编译器的结构化归纳自动推导，提供明确的 !Send/!Sync 语义承诺。
 
 对比不声明 negative impl 的情况：
 

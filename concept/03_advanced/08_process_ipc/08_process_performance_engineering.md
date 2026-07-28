@@ -223,7 +223,7 @@ flowchart TD
 
 ## 权威来源（References · 国际权威对齐）
 
-- **P0 官方**: [Rust `std::process` / `std::thread`](https://doc.rust-lang.org/std/process/) · [The Rustonomicon — 并发与 FFI](https://doc.rust-lang.org/nomicon/)
+- **P0 官方**: [Rust `std::process` / `std::thread`](https://doc.rust-lang.org/std/process/) · [The Rustonomicon — 并发与 FFI](https://doc.rust-lang.org/nomicon/races.html)
 - **P2 生态**: [The Rust Performance Book (nnethercote)](https://nnethercote.github.io/perf-book/) · [docs.rs](https://docs.rs/) · [crates.io](https://crates.io/)
 - **映射维护**: [`concept/00_meta/02_sources/01_authority_source_map.md`](../../00_meta/02_sources/01_authority_source_map.md)
 

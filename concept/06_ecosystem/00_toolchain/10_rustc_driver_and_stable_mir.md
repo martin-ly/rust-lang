@@ -149,7 +149,7 @@ rustup component add rustc-dev llvm-tools
 
 > **常见错误**: 缺少 `llvm-tools` 时链接会报 `-lLLVM-{version}` 找不到。
 >
-> [Rustc Dev Guide — External rustc_drivers](https://rustc-dev-guide.rust-lang.org/)(<https://rustc-dev-guide.rust-lang.org/rustc-driver/external-rustc-drivers.html>)
+> [Rustc Dev Guide — External rustc_drivers](https://rustc-dev-guide.rust-lang.org/rustc-driver/external-rustc-drivers.html)(<https://rustc-dev-guide.rust-lang.org/rustc-driver/external-rustc-drivers.html>)
 
 ---
 

@@ -386,7 +386,7 @@ unsafe fn dereference_raw<T>(ptr: *const T) -> T {
 // 其中 unsafe_assumptions(ptr) 是程序员手动保证的前置条件
 ```
 
-> **关键洞察**: `unsafe` 块不是"无规则"的区域，而是**公理由程序员手动提供**的区域。Rust 的 `// SAFETY:` 注释文化正是公理语义在工程实践中的体现——程序员在 unsafe 块前显式声明所需的前置条件，这些条件构成了人工的霍尔三元组。然而，当前工具链（Prusti/Creusot/Kani）对 `unsafe` 的支持仍然有限，这是 Rust 形式化验证的最大缺口之一。(Source: [Rustonomicon — Unsafe Rust](https://doc.rust-lang.org/nomicon/index.html)) · (Source: [RustBelt — Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/))
+> **关键洞察**: `unsafe` 块不是"无规则"的区域，而是**公理由程序员手动提供**的区域。Rust 的 `// SAFETY:` 注释文化正是公理语义在工程实践中的体现——程序员在 unsafe 块前显式声明所需的前置条件，这些条件构成了人工的霍尔三元组。然而，当前工具链（Prusti/Creusot/Kani）对 `unsafe` 的支持仍然有限，这是 Rust 形式化验证的最大缺口之一。(Source: [Rustonomicon — Unsafe Rust](https://doc.rust-lang.org/nomicon/meet-safe-and-unsafe.html)) · (Source: [RustBelt — Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/))
 
 ---
 

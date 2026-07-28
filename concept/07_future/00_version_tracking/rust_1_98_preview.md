@@ -11,8 +11,8 @@
 > **内容分级**: [实验级]
 > **权威来源**: 本文件为 `concept/` 权威页（1.98+ **周期跟踪** canonical）。
 > **Canonical 分工**: 本页 = 周期跟踪（nightly 特性 / RFC 进展 / API 探测，随两周巡检滚动）；1.98.0 **稳定特性权威汇总** = [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md)（2026-08-20 稳定后生效，当前为跟踪骨架）。
-> **跟踪版本**: nightly 1.99.0 (2026-06-22)；**1.98.0 已于 2026-07-03 分支进入 beta**（[releases.rs 1.98.0 beta](https://releases.rs/docs/1.98.0/)，2026-07-16 curl 实测 200）
-> **预计稳定时间**: **1.98.0 = 2026-08-20**（releases.rs 实测）；1.99+ 及以后
+> **跟踪版本**: nightly 1.99.0+ (2026-07-28)；**1.98.0 已于 2026-07-03 分支进入 beta**（[releases.rs 1.98.0 beta](https://releases.rs/docs/1.98.0/)，2026-07-28 curl 实测 200）
+> **预计稳定时间**: **1.98.0 = 2026-08-20**（releases.rs 实测；截至 2026-07-28 约 3 周后发布）；1.99+ 及以后
 > **当前阶段**: 🧪 Nightly 实验性 / 设计或 MCP 阶段
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **状态**: 特性集高度不确定，稳定时间和具体内容以官方发布为准
@@ -37,10 +37,28 @@
 > **前置概念**: N/A
 ---
 
-## 零、1.98 周期跟踪清单（2026-07-16 更新）
+## 当前状态：1.98.0 beta 已冻结，stable 约 3 周后发布（2026-07-28）
+
+> **状态摘要**：1.98.0 已于 **2026-07-03** 从 master 切分进入 beta 通道，预计 **2026-08-20** 转正为 stable。截至 2026-07-28，特性集已在 beta 分支锁定；最终 release notes 通常会在 stable 发布前 1–2 周由 release team 定稿。本页继续跟踪 beta 已知项与 nightly 1.99+ 前瞻项，stable 发布后将把已稳定内容迁移至 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md)。
+
+### 官方跟踪来源
+
+- [Rust 1.98.0 Release Notes (beta)](https://releases.rs/docs/1.98.0/) — 当前最具体的 1.98.0 变更清单
+- [Rust Forge — Release Versions](https://forge.rust-lang.org/) — 发布日历与分支时间线
+- [The Rust Programming Language Blog](https://blog.rust-lang.org/) — stable 发布官方公告
+- [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) — 团队进展、pre-release testing、Project Goals 月度更新
+- [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) — 年度目标与路线图（Pin ergonomics、RTN、cargo-script、public/private dependencies 等）
+- [rust-lang/rust releases](https://github.com/rust-lang/rust/releases) — 标签级 release 与 nightly 构建
+- [Rust Internals Forum](https://internals.rust-lang.org/) — 设计讨论与 FCP 公告
+
+> **事实源优先级**：官方 release notes > rust-lang/rust PR 合并记录 > Project Goals 月度更新 > internals 讨论。未合并进对应分支的“计划中/讨论中”条目不进入特性表。
+
+---
+
+## 零、1.98 周期跟踪清单（2026-07-28 更新）
 
 > **状态取值**：`stabilized in 1.98 beta`（已随 1.98.0 beta 分支合入，2026-08-20 转正）/ `RFC merged`（RFC 已合并，实现跟踪中）/ `FCP`（最终评论期）/ `nightly only`（nightly 可用，未排期）。
-> **实测来源**：[releases.rs 1.98.0 beta](https://releases.rs/docs/1.98.0/)（curl 200，2026-07-16）· §1.7 RFC 表（2026-07-12 实测）
+> **实测来源**：[releases.rs 1.98.0 beta](https://releases.rs/docs/1.98.0/)（curl 200，2026-07-28）· §1.7 RFC 表（2026-07-28 实测）
 
 | 特性 | 状态 | 跟踪链接 |
 |:---|:---|:---|

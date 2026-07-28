@@ -40,7 +40,7 @@
 
 > **来源**: · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust RFC — Unsafe Fields](https://github.com/rust-lang/rfcs/pull/3458) ·
-> [Rustonomicon — Unsafe Rust](https://doc.rust-lang.org/nomicon/index.html) ·
+> [Rustonomicon — Unsafe Rust](https://doc.rust-lang.org/nomicon/meet-safe-and-unsafe.html) ·
 > [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) ·
 > [Rust Internals — Unsafe Field Discussion](https://internals.rust-lang.org/)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)

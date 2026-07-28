@@ -310,6 +310,7 @@
   - [模式参考（Patterns Reference）](04_formal/05_rustc_internals/14_patterns_reference.md)
   - [类型系统参考（Type System Reference）](04_formal/00_type_theory/09_type_system_reference.md)
   - [依赖类型与细化类型（Dependent Types and Refinement Types）](04_formal/00_type_theory/10_dependent_refinement_types.md)
+  - [Flux：Rust 的 Liquid 细化类型](04_formal/00_type_theory/14_flux.md)
   - [泛型（Generics）编译器行为：单态化（Monomorphization）、分发与类型擦除](04_formal/05_rustc_internals/15_generics_compiler_behavior.md)
   - [名字参考（Names Reference）](04_formal/05_rustc_internals/16_names_reference.md)
   - [Rust Reference 附录（Reference Appendices）](04_formal/05_rustc_internals/17_reference_appendices.md)

@@ -49,6 +49,7 @@
   - [五、标准与行业规范](#五标准与行业规范)
   - [六、社区权威博客与演讲](#六社区权威博客与演讲)
   - [七、使用建议](#七使用建议)
+  - [八、国际课程与书籍](#八国际课程与书籍)
 
 ---
 
@@ -238,6 +239,29 @@
 | Jon Gjengset | <https://thesquareplanet.com/blog/> · <https://www.youtube.com/@JonGjengset> |
 | Ralf Jung | <https://www.ralfj.de/blog/> |
 | dtolnay | <https://github.com/dtolnay> |
+
+---
+
+## 八、国际课程与书籍
+
+本节聚焦系统化的 Rust 学习课程与权威书籍，作为官方文档的补充。这些来源通常覆盖教学顺序、练习路径或领域实践，适合与 `concept/` 权威页形成“课程 → 深度”双向映射。
+
+### 国际课程
+
+| 来源 | URL | 说明 | 项目映射 |
+|:---|:---|:---|:---|
+| Comprehensive Rust (Google) | <https://google.github.io/comprehensive-rust/> | Google Android 团队维护的 4 天免费课程，覆盖基础到 Android/FFI 实践 | [`concept/00_meta/00_framework/comprehensive_rust_mapping.md`](../00_framework/comprehensive_rust_mapping.md) |
+| The Little Book of Rust Books | <https://lborb.github.io/book/> | 官方与非官方 Rust 书籍索引 | 待建立映射（P2-1） |
+| Rustlings | <https://github.com/rust-lang/rustlings> | 官方小练习集合 | [`exercises/`](../../../exercises/) |
+
+### 权威书籍
+
+| 来源 | URL | 说明 | 项目映射 |
+|:---|:---|:---|:---|
+| Rust Design Patterns | <https://rust-unofficial.github.io/patterns/> | 社区维护的设计模式书 | [`concept/06_ecosystem/03_design_patterns/01_patterns.md`](../../06_ecosystem/03_design_patterns/01_patterns.md)（P1-4 深化） |
+| Rust Performance Book | <https://nnethercote.github.io/perf-book/> | 性能优化权威指南 | [`concept/06_ecosystem/10_performance/01_performance_optimization.md`](../../06_ecosystem/10_performance/01_performance_optimization.md)（P1-5 深化） |
+| Zero To Production In Rust | <https://www.zero2prod.com/> | 生产级 Rust Web 应用实践 | 待建立映射（P2-1） |
+| Rust for the Linux Kernel | <https://docs.kernel.org/rust/> | Linux 内核 Rust 开发官方文档 | 待建立映射（P2-1） |
 
 ---
 

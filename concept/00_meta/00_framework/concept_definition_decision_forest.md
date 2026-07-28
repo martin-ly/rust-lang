@@ -370,7 +370,7 @@ graph TD
 ┌─────────────────────────────────────────────────────────────┐
 │ 概念定义                                                    │
 │ 「生命周期是引用有效的程序点集合，编译期构造，不进入机器码」   │
-│   来源: [Rust Reference §10.3; Tofte-Talpin 区域类型](https://doc.rust-lang.org/reference/introduction.html)       │
+│   来源: [Rust Reference §10.3; Tofte-Talpin 区域类型](https://doc.rust-lang.org/reference/lifetime-elision.html)       │
 └─────────────────────────────────────────────────────────────┘
                               │
         ┌─────────────────────┼─────────────────────┐

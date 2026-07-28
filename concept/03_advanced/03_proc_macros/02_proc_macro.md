@@ -771,7 +771,7 @@ fn main() {
 > [来源: [syn crate](https://docs.rs/syn/)]
 > [来源: [quote crate](https://docs.rs/quote/)]
 > [来源: [proc-macro2 crate](https://docs.rs/proc-macro2/)]
-> [来源: [Rust Compiler Development Guide — Proc Macros](https://rustc-dev-guide.rust-lang.org/)]
+> [来源: [Rust Compiler Development Guide — Proc Macros](https://rustc-dev-guide.rust-lang.org/macro-expansion.html#procedural-macros)]
 
 ## 嵌入式测验（Embedded Quiz）
 

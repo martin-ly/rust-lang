@@ -519,52 +519,21 @@ fn binary_search(v: &Vec<u64>, k: u64) -> (r: usize)
 
 ### 5.1 Flux：精化类型（Refinement Types）
 
-> **[Flux](https://github.com/liquid-rust/flux)** 是 UC San Diego 开发的 Rust 精化类型系统（Type System）扩展。精化类型将**逻辑谓词**附加到类型上，例如 `i32{v: 0 <= v && v < 100}` 表示范围在 [0, 100) 的整数。Flux 在编译期自动推断和检查这些谓词。[来源: [Flux Paper — PLDI 2023](https://ranjitjhala.github.io/static/flux-pldi23.pdf)]
+> **权威来源**: 通用 Rust 概念解释统一维护在 `concept/04_formal/00_type_theory/14_flux.md`；本节仅保留工具生态视角的摘要与选型要点。
 
-```rust,ignore
-// Flux 精化类型示例
-// 使用 #[flux::sig(...)] 注解类型约束
+[Flux](https://github.com/flux-rs/flux) 是 UC San Diego 开发的 Rust **Liquid 细化类型**研究原型。它在 Rust 类型上附加逻辑谓词（如 `i32{v: v > 0}`），并依赖 Rust 的所有权机制处理命令式更新与别名，从而用 SMT 自动验证数组边界、向量长度、元素级不变量等轻量属性。完整语法、所有权集成、反例与限制见 [`concept/04_formal/00_type_theory/14_flux.md`](../../04_formal/00_type_theory/14_flux.md)。
 
-#[flux::sig(fn(x: i32{v: v >= 0}) -> i32{v: v >= 0})]
-pub fn abs(x: i32) -> i32 {
-    if x < 0 { -x } else { x }
-}
+**选型摘要**:
 
-#[flux::sig(fn(arr: &[i32{v: v >= 0}]) -> i32{v: v >= 0})]
-pub fn sum_positive(arr: &[i32]) -> i32 {
-    let mut sum = 0;
-    for i in 0..arr.len() {
-        sum += arr[i];  // Flux 验证: arr[i] >= 0，sum 保持 >= 0
-    }
-    sum
-}
+| 场景 | Flux 是否合适 | 关键限制 |
+|:---|:---:|:---|
+| 数组/向量索引边界 | ✅ | 需用 `RVec<T>` 等 Flux 提供的类型或自定义 `refined_by` |
+| 整数非零/非负约束 | ✅ | 谓词需在 SMT 可判定片段内 |
+| 容器元素级不变量 | ✅ | 通过多态实例化自动推断 |
+| unsafe / FFI / 裸指针 | ❌ | 仅支持 safe Rust |
+| 复杂功能正确性（排序、协议状态机） | ⚠️ | 程序逻辑工具（Verus/Creusot）更合适 |
 
-// 向量索引安全
-#[flux::sig(fn(vec: &Vec<i32>, i: usize{0 <= i && i < vec.len()}) -> i32)]
-pub fn safe_get(vec: &Vec<i32>, i: usize) -> i32 {
-    vec[i]  // Flux 保证不会发生越界
-}
-```
-
-**Flux vs 标准 Rust 类型系统（Type System）**:
-
-```text
-标准 Rust:        Vec<i32>          →  编译期仅保证是 i32 向量
-Flux 精化类型:    Vec<i32{v: v>0}>  →  编译期还保证所有元素 > 0
-
-优势:
-  · 零运行时开销（谓词在编译期擦除）
-  · 自动推断（通常无需手动写谓词）
-  · 与 Rust 类型系统无缝集成
-
-局限:
-  · 不支持 unsafe 代码
-  · 复杂数据结构（如自定义树）的谓词可能难以表达
-  · 求解器可能超时
-```
-
-> **来源**: [Flux GitHub](https://github.com/liquid-rust/flux) · [Liquid Types — PLDI 2008](https://goto.ucsd.edu/~rjhala/liquid/liquid_types.pdf) · [Refinement Types Survey](https://arxiv.org/abs/2010.07763)
-> **2025 最新进展 — Generic Refinement Types (POPL 2025)**: Flux 团队将精化类型扩展到**泛型（Generics）上下文**，解决了原始 Flux 无法处理泛型函数（如 `fn max<T: Ord>(a: T, b: T) -> T`）的精化谓词问题。Generic Refinement Types 允许类型参数携带精化约束（如 `T{v: v >= 0}`），并通过**约束抽象**（Constraint Abstraction）在实例化时求解具体谓词。这是精化类型从"特定类型上的轻量验证"向"通用库级验证"的关键跃迁。[来源: [POPL 2025 — Lehmann et al., "Generic Refinement Types"](https://dl.acm.org/doi/10.1145/3704886)]
+**2025 最新进展 — Generic Refinement Types (POPL 2025)**: Flux 团队将细化类型扩展到**泛型（Generics）上下文**，允许类型参数携带细化约束（如 `T{v: v >= 0}`），并通过**约束抽象**（Constraint Abstraction）在实例化时求解具体谓词。这是细化类型从“特定类型上的轻量验证”向“通用库级验证”的关键跃迁。[来源: [POPL 2025 — Lehmann et al., "Generic Refinement Types"](https://dl.acm.org/doi/10.1145/3704886)]
 
 ### 5.2 Aeneas：向函数式语言的转换
 
