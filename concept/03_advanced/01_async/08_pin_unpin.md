@@ -38,6 +38,7 @@
 >
 > - v1.0 (2026-05-12): 初始版本，覆盖 Pin/Unpin 核心概念、API 契约、自引用构建与常见陷阱
 > - v1.1 (2026-07-28): P1 语义补齐——新增 structural pinning、`Pin::set`、非结构 vs 结构字段投影、`Pin<&mut ManuallyDrop<T>>` 不可创建的原因；引用 std::pin 模块文档；Rust 版本更新至 1.97.1+
+> - v1.2 (2026-07-28): P2-4 深化——新增 `std::pin::Pin` 逐 API 对照表（构造/访问/转换/投影），链接到官方方法锚点；补充 `Pin::map_unchecked_mut` 与 structural pinning 的关系及 `ManuallyDrop` 反模式
 
 ## 📑 目录
 >
@@ -359,6 +360,40 @@ let pinned: Pin<&mut ManuallyDrop<Inner>> = Pin::new(&mut x);
 但 `pinned` 并不能保证内部 `Inner` 不被移动：`ManuallyDrop` 的 `Unpin` 意味着可以通过 safe API（如 `ManuallyDrop::take` 或重新赋值）把 `Inner` 移出，从而违反 `!Unpin` 的 immobility 契约。因此，`Pin<&mut ManuallyDrop<T>>` **不等价于**对 `T` 的 Pin；在需要固定 `T` 的场景中不能使用 `ManuallyDrop<T>` 作为中间层。
 
 > 来源：[std::pin module docs](https://doc.rust-lang.org/std/pin/index.html) · [std::pin::Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)
+
+### 2.5 `std::pin::Pin` API 与 `std::pin` 模块逐条对照
+
+[std::pin 模块文档](https://doc.rust-lang.org/std/pin/index.html) 将 API 分为“构造”“访问”“转换”“投影”四类。下表把本页讲解的概念映射到官方 API，便于逐条核对。
+
+| API | 官方签名要点 | 安全级别 | 语义/使用场景 | 本文对应节 |
+|:---|:---|:---:|:---|:---|
+| [`Pin::new`](https://doc.rust-lang.org/std/pin/struct.Pin.html#method.new) | `impl<'a, T: Unpin> Pin<&'a mut T>` | safe | 为 `Unpin` 类型创建栈/临时 `Pin`；`!Unpin` 类型编译错误 | §2.1 |
+| [`Pin::new_unchecked`](https://doc.rust-lang.org/std/pin/struct.Pin.html#method.new_unchecked) | `unsafe fn new_unchecked(pointer: P) -> Pin<P>` | unsafe | 为 `!Unpin` 类型创建 `Pin`；**创建者承诺**在 drop 前不移动 pointee | §2.1、§2.2 |
+| [`Pin::as_mut`](https://doc.rust-lang.org/std/pin/struct.Pin.html#method.as_mut) | `fn as_mut(&mut self) -> Pin<&mut T>` | safe | 从 `Pin<&mut T>` 再借一个 `Pin<&mut T>`，不消费原 Pin；poll 实现中常用 | §三 模式 2 |
+| [`Pin::set`](https://doc.rust-lang.org/std/pin/struct.Pin.html#method.set) | `fn set(self, value: T) where T: ?Sized` | safe | 原地替换被 Pin 的值，旧值在原地 `drop`，**不触发 move** | §2.4 |
+| [`Pin::get_mut`](https://doc.rust-lang.org/std/pin/struct.Pin.html#method.get_mut) | `fn get_mut(self) -> &'a mut T where T: Unpin` | safe | `Unpin` 类型可安全解包为 `&mut T` | §2.1 |
+| [`Pin::get_unchecked_mut`](https://doc.rust-lang.org/std/pin/struct.Pin.html#method.get_unchecked_mut) | `unsafe fn get_unchecked_mut(self) -> &'a mut T` | unsafe | `!Unpin` 类型解包；之后一切 Pin 不变量由程序员手工维持 | §2.1、[§3 UB 反例](11_pin_projection_counterexamples.md) |
+| [`Pin::map_unchecked`](https://doc.rust-lang.org/std/pin/struct.Pin.html#method.map_unchecked) | `unsafe fn map_unchecked(...) -> Pin<&'a U>` | unsafe | 不改变 pointee 地址，整体重指向到另一个 `Pin<&U>`；需保持 pin 契约 | §2.4 |
+| [`Pin::map_unchecked_mut`](https://doc.rust-lang.org/std/pin/struct.Pin.html#method.map_unchecked_mut) | 可变版 | unsafe | 同上，用于 `Pin<&mut T>` | §2.4 |
+
+> **设计意图**：`Pin` 的 API 刻意把“安全操作”限制在 `Unpin` 类型上，所有可能破坏不动性保证的操作都标为 `unsafe` 并要求显式 SAFETY 注释。
+
+#### `Pin::map_unchecked_mut` 与 structural pinning 的关系
+
+`map_unchecked_mut` 是手写结构投射的底层 primitive：它允许从 `Pin<&mut Outer>` 产生一个新的 `Pin<&mut Field>`，**前提是你能证明该字段自 pointee 被 pin 以来地址未变**。这正是 `pin-project` 过程宏生成的代码所要保证的契约（见 [Pin 投射反例集](11_pin_projection_counterexamples.md) 定理 T1）。
+
+#### `ManuallyDrop<T>` 与 `Pin` 的再次强调
+
+`ManuallyDrop<T>` 无条件 `Unpin`，因此不能用它包装 `!Unpin` 类型后再施加 Pin 语义。反模式：
+
+```rust,ignore
+// 反模式：试图用 ManuallyDrop 绕过 !Unpin
+let mut x: ManuallyDrop<Inner> = ManuallyDrop::new(Inner { _pin: PhantomPinned });
+let pinned: Pin<&mut ManuallyDrop<Inner>> = Pin::new(&mut x); // 编译通过
+// 但 ManuallyDrop::take 可以安全地把 Inner 移出，破坏 Pin 契约
+```
+
+正确做法：直接固定 `Inner`（`Pin<Box<Inner>>` 或 `Pin<&mut Inner>` via `Pin::new_unchecked`），不通过 `ManuallyDrop` 中转。
 
 ---
 

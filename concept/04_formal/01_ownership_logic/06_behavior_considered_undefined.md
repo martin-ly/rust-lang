@@ -14,6 +14,7 @@
 >
 > - v1.0 (2026-07-10): 初始版本，覆盖 Rust Reference UB 清单核心条目
 > - v1.1 (2026-07-28): P1 语义补齐——扩展悬垂/未对齐指针细节（`isize::MAX` span 边界、`size_of_val`、引用/`Box` 显式存活期、misaligned place projection）、无效值边界（union/padding 读取例外）；更新 Rust 版本至 1.97.1+
+> - v1.2 (2026-07-28): P2-5 深化——将 §二 UB 清单 11 项及 §三 细节逐条链接到 Rust Reference `r-undefined.*` 规则锚点；新增 §七 BCU 规则锚点映射表
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
 > **前置依赖**: [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Atomics and Memory Ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) · [Pointer Aliasing](02_ownership_formal.md)
@@ -28,7 +29,7 @@
 
 ## 一、核心原则
 
-`unsafe` 关键字**不**改变“Rust 程序永远不得导致未定义行为”这一事实。它只是将避免 UB 的责任从编译器转移到了程序员。 (Source: [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html))
+`unsafe` 关键字**不**改变“Rust 程序永远不得导致未定义行为”这一事实。它只是将避免 UB 的责任从编译器转移到了程序员。 (Source: [Rust Reference — Behavior Considered Undefined § r-undefined.intro](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.intro))
 
 - **Sound（健全）**: 任何 safe 代码与某段 unsafe 代码交互时都不会触发 UB。
 - **Unsound（不健全）**: safe 代码可以错误使用该 unsafe 代码并触发 UB。
@@ -45,7 +46,7 @@
 
 ### 1. 数据竞争（Data races）
 
-多个线程同时访问同一内存位置，且至少一个是写操作，没有同步。 (Source: [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html))
+多个线程同时访问同一内存位置，且至少一个是写操作，没有同步。 (Source: [Rust Reference — r-undefined.race](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.race))
 
 ### 2. 访问悬垂或基于未对齐指针的 place
 
@@ -54,20 +55,22 @@
 - **指针 span 边界**: Rust 要求指针及其所访问类型的 `size_of_val` 不会使地址计算超出 `isize::MAX` 范围；超出该范围的 place 访问属于 UB。
 
 > 零大小类型（ZST）的指针永远不会悬垂，即使它是空指针。
-> **[Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)** 对“访问悬垂或基于未对齐指针的 place”给出了上述边界条件。
+> **[Rust Reference — r-undefined.pointer-access](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.pointer-access)** 对“访问悬垂或基于未对齐指针的 place”给出了上述边界条件。
 
 ### 3. 越界或 misaligned place projection
 
 - **越界 projection**: 字段访问、元组索引、数组/切片（Slice）索引运算导致指针算术越界。
 - **misaligned projection**: 通过 `*const T` / `*mut T` 构造的 place 若未满足目标类型对齐要求，在 load/store 时构成 UB。使用 `&raw const` / `&raw mut` 创建未对齐裸指针本身是允许的，但后续解引用需保证对齐。
 
-> **[Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)** 将越界与未对齐的 place projection 列为 UB。
+> **[Rust Reference — r-undefined.place-projection](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.place-projection)** 将越界与未对齐的 place projection 列为 UB。
 
 ### 4. 破坏指针别名规则
 
 - `&T` 指向的内存在其存活期间不可被修改（`UnsafeCell<U>` 内部除外）。
 - `&mut T` 指向的内存不可被任何非派生自该引用（Reference）的指针读写，且同一时间内不可存在其他引用。
 - `Box<T>` 在别名规则中等价于 `&'static mut T`。
+
+(Source: [Rust Reference — r-undefined.alias](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.alias))
 
 ### 5. 修改不可变字节
 
@@ -76,22 +79,26 @@
 - 不可变绑定或不可变 `static` 拥有的字节（`UnsafeCell<U>` 内部除外）。
 - 共享引用（Reference）（以及通过 `Box`、复合类型字段传递的引用）可达的字节。
 
+(Source: [Rust Reference — r-undefined.immutable](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.immutable))
+
 ### 6. 调用编译器内建产生 UB
 
-例如错误使用 `std::intrinsics` 中的某些内建函数。
+例如错误使用 `std::intrinsics` 中的某些内建函数。 (Source: [Rust Reference — r-undefined.intrinsic](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.intrinsic))
 
 ### 7. 在当前平台不支持的特性上执行代码
 
-使用 `target_feature` 启用当前 CPU 不支持的指令集，除非平台文档明确说明安全。
+使用 `target_feature` 启用当前 CPU 不支持的指令集，除非平台文档明确说明安全。 (Source: [Rust Reference — r-undefined.target-feature](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.target-feature))
 
 ### 8. 错误调用约定或错误展开
 
 - 调用函数的 ABI 不匹配。
 - 跨过一个不允许展开的栈帧进行 unwind（例如将 `"C-unwind"` 函数当作 `"C"` 调用或转换函数指针）。
 
+(Source: [Rust Reference — r-undefined.call](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.call))
+
 ### 9. 产生无效值（Invalid values）
 
-只要值被赋值、读取、传递、返回，即视为“产生”该值。以下值为无效：
+只要值被赋值、读取、传递、返回，即视为“产生”该值。以下值为无效： (Source: [Rust Reference — r-undefined.invalid](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.invalid)、[Rust Reference — invalid-values](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#invalid-values))
 
 | 类型 | 有效值要求 |
 |:---|:---|
@@ -108,7 +115,7 @@
 | 宽引用（Reference）/Box/裸指针 metadata | 必须与 unsized tail 类型匹配（vtable 或有效 slice 长度） |
 | 自定义有效范围类型 | 如 `NonNull<T>`、`NonZero<T>`，必须落在允许范围内 |
 
-> **Union / Padding 读取例外**（来源: [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)）：
+> **Union / Padding 读取例外**（来源: [Rust Reference — r-undefined.validity.union](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.validity.union)）：
 >
 > - 读取 `union` 的非活跃字段（inactive field）**本身**不自动构成 UB；但若读取出的值被当作某具体类型“产生”（赋值、传递、返回、用于运算），则该值必须对该类型有效。
 > - 读取结构体/元组/数组的 padding 字节**本身**不自动构成 UB；但将从 padding 中读取的字节解释为某个具体类型的值并“产生”该值时，则属于无效值 UB。
@@ -116,13 +123,15 @@
 
 ### 10. 错误使用内联汇编
 
-参见 [Inline Assembly](../../03_advanced/05_inline_assembly/01_inline_assembly.md) 的安全规则。
+参见 [Inline Assembly](../../03_advanced/05_inline_assembly/01_inline_assembly.md) 的安全规则。 (Source: [Rust Reference — r-undefined.asm](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.asm))
 
 ### 11. 违反 Rust 运行时假设
 
 - 当前大多数运行时（Runtime）假设未显式文档化。
 - unwind 相关假设参见 panic 文档。
 - 运行时（Runtime）期望 Rust 栈帧在局部变量析构完成前不会被释放；`longjmp` 等 C 函数可能违反该假设。
+
+(Source: [Rust Reference — r-undefined.runtime](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.runtime))
 
 ---
 
@@ -134,7 +143,7 @@
 
 引用（Reference）或指针若指向的字节不全部属于同一生存期内的分配，则为悬垂。ZST 指针例外。
 
-**Pointer span 与 `isize::MAX` 边界**（来源: [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)）:
+**Pointer span 与 `isize::MAX` 边界**（来源: [Rust Reference — r-undefined.pointed-to](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.pointed-to)）：
 
 - 通过指针算术产生的地址与原始指针之间的字节偏移不得超过 `isize::MAX`（正向或负向）。
 - 该限制适用于 `ptr::offset`、slice 索引、place projection 等所有基于指针的地址计算。
@@ -153,7 +162,7 @@
 
 ### 未对齐指针
 
-place 基于未对齐指针，当且仅当对该 place 进行 load/store 时构成 UB。使用 `&raw const` / `&raw mut` 创建裸指针是允许的，但 `&` / `&mut` 要求字段类型对齐。
+place 基于未对齐指针，当且仅当对该 place 进行 load/store 时构成 UB。使用 `&raw const` / `&raw mut` 创建裸指针是允许的，但 `&` / `&mut` 要求字段类型对齐。 (Source: [Rust Reference — r-undefined.misaligned](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.misaligned)、[Rust Reference — places-based-on-misaligned-pointers](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#places-based-on-misaligned-pointers))
 
 **Misaligned place projection 细节**:
 
@@ -168,7 +177,7 @@ place 基于未对齐指针，当且仅当对该 place 进行 load/store 时构�
 
 在 const 求值中，纯整数数据不能携带 provenance；持有指针数据的值必须要么无 provenance，要么所有字节是同一原始指针（Raw Pointer）的正确顺序片段。
 
-因此，在 const 上下文中将带 provenance 的指针转译为整数是 UB。
+因此，在 const 上下文中将带 provenance 的指针转译为整数是 UB。 (Source: [Rust Reference — r-undefined.validity.const-provenance](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.validity.const-provenance))
 
 ---
 
@@ -188,14 +197,40 @@ place 基于未对齐指针，当且仅当对该 place 进行 load/store 时构�
 | [Inline Assembly](../../03_advanced/05_inline_assembly/01_inline_assembly.md) | 内联汇编有独立的正确性规则 |
 | [Application Binary Interface](../05_rustc_internals/05_application_binary_interface.md) | ABI 错误调用可触发 UB |
 
+## 七、Rust Reference BCU 规则锚点映射表
+
+为便于逐条核验，下表将本页 UB 清单与 [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) 的精确规则锚点一一对应。所有锚点均经 2026-07-28 curl 实测存在。
+
+| 本节目录 | Rust Reference 规则锚点 | 说明 |
+|:---|:---|:---|
+| §一 核心原则（soundness/unsoundness） | [`#r-undefined.intro`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.intro)、[`#r-undefined.soundness`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.soundness) | UB 列表非穷尽、unsafe 责任转移 |
+| §2.1 数据竞争 | [`#r-undefined.race`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.race) | 多线程无同步写 |
+| §2.2 访问悬垂/未对齐 place | [`#r-undefined.pointer-access`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.pointer-access) | load/store 的 place 条件 |
+| §2.3 越界/misaligned place projection | [`#r-undefined.place-projection`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.place-projection) | 字段/索引投影越界 |
+| §2.4 破坏指针别名规则 | [`#r-undefined.alias`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.alias) | `&T`/`&mut T`/`Box<T>` 别名语义 |
+| §2.5 修改不可变字节 | [`#r-undefined.immutable`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.immutable) | `const`/`static`/共享引用可达字节 |
+| §2.6 调用编译器内建产生 UB | [`#r-undefined.intrinsic`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.intrinsic) | `std::intrinsics` 误用 |
+| §2.7 不支持的 target_feature | [`#r-undefined.target-feature`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.target-feature) | CPU 不支持指令集 |
+| §2.8 错误 ABI / 错误展开 | [`#r-undefined.call`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.call) | ABI 不匹配、非法 unwind |
+| §2.9 产生无效值 | [`#r-undefined.invalid`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.invalid)、[`#invalid-values`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#invalid-values) | 无效值清单 |
+| §2.10 错误使用内联汇编 | [`#r-undefined.asm`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.asm) | inline assembly 规则 |
+| §2.11 违反 Rust 运行时假设 | [`#r-undefined.runtime`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.runtime) | 栈帧析构、`longjmp` 等 |
+| §3.1 悬垂指针细节 | [`#r-undefined.dangling`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.dangling)、[`#dangling-pointers`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#dangling-pointers) | ZST 例外、`isize::MAX` 限制 |
+| §3.1 pointer span / `isize::MAX` | [`#r-undefined.pointed-to`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.pointed-to)、[`#pointed-to-bytes`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#pointed-to-bytes) | `size_of_val` 与字节跨度 |
+| §3.2 未对齐指针 | [`#r-undefined.misaligned`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.misaligned)、[`#places-based-on-misaligned-pointers`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#places-based-on-misaligned-pointers) | `&raw const` 允许、load/store 才 UB |
+| §3.2 misaligned projection / `repr(packed)` | [`#r-undefined.misaligned.ptr`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.misaligned.ptr)–[`r-undefined.misaligned.packed`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.misaligned.packed) | 多层 projection 对齐要求 |
+| §2.9/§四 union/padding / const provenance | [`#r-undefined.validity.union`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.validity.union)、[`#r-undefined.validity.const-provenance`](https://doc.rust-lang.org/reference/behavior-considered-undefined.html#r-undefined.validity.const-provenance) | 无效值细则 |
+
+> **维护提示**：Rust Reference 的规则锚点以 `r-undefined.<name>` 形式存在；本节标题锚点（如 `#invalid-values`）是 mdBook 自动生成的标题 ID。两者均可独立访问，但规则锚点更稳定（Reference 修订时通常保留规则 ID）。
+
 ---
 
 > **权威来源**: [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference — The unsafe keyword](https://doc.rust-lang.org/reference/unsafe-keyword.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文）；2026-07-28 P1 语义补齐——扩展指针 span/`isize::MAX`、liveness duration、misaligned projection、union/padding 例外等边界细节 [Authority Source Sprint Batch L4](../../00_meta/02_sources/05_international_authority_index.md)
 
-**文档版本**: 1.1
+**文档版本**: 1.2
 **最后更新**: 2026-07-28
-**状态**: ✅ 权威来源对齐完成 (Batch L4) + P1 语义补齐
+**状态**: ✅ 权威来源对齐完成 (Batch L4) + P1/P2 语义补齐
 
 ---
 
