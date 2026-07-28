@@ -81,6 +81,9 @@ graph TD
 | **工作流** | [Workflow Theory](../../06_ecosystem/03_design_patterns/17_workflow_theory.md) | State Machine、Saga、Activity、Compensation |
 | **API 设计** | [API Design Patterns](../../06_ecosystem/03_design_patterns/18_api_design_patterns.md) | Builder、Typestate、Extension Trait、Error API |
 | **系统可组合性** | [System Composability](../../06_ecosystem/03_design_patterns/04_system_composability.md) | Composability、Isolation、Monoid、Plugin |
+| **算法语义** | [Algorithm Semantics](../../04_formal/08_algorithm_semantics/README.md) | Hoare 逻辑、精化演算、迭代器正确性、unsafe 不变量、算法等价 |
+| **系统语义** | [System Semantics](../../04_formal/09_system_semantics/README.md) | Actor、π 演算、组件组合、分布式系统、反应式系统 |
+| **架构语义** | [Architecture Semantics](../../04_formal/10_architecture_semantics/README.md) | ADL、架构模式不变量、架构精化、Rust 架构约束 |
 
 ### 2.2 纵向：抽象层级维度
 

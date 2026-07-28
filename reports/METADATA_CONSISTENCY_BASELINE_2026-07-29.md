@@ -1,17 +1,17 @@
 # 元数据一致性基线（语义质量门 P0-1）
 
-**日期**: 2026-07-29  **扫描**: 556 concept 活跃文件（排除 archive）  **模式**: strict
+**日期**: 2026-07-29  **扫描**: 573 concept 活跃文件（排除 archive）  **模式**: strict
 
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
 | D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥 | 0 | 0.0% | >0 | pass |
-| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 1 (基=348) | 0.2% | >=5% | pass |
+| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 1 (基=351) | 0.2% | >=5% | pass |
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
 | D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
-| D6 Summary 低信息量模板套话 | 1 | 0.2% | >=3% | pass |
+| D6 Summary 低信息量模板套话 | 10 | 1.7% | >=3% | pass |
 
-**受影响文件总数**: 2 / 556
+**受影响文件总数**: 11 / 573
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -119,9 +119,18 @@
 
 ### D5 稳定层正文残留 nightly/preview/unstable（0）
 
-### D6 Summary 低信息量模板套话（1）
+### D6 Summary 低信息量模板套话（10）
 
 - `concept/04_formal/03_operational_semantics/08_llvm_ir_poison_ub.md` — Summary 为空
+- `concept/04_formal/08_algorithm_semantics/04_unsafe_algorithm_invariants.md` — Summary 为空
+- `concept/04_formal/08_algorithm_semantics/05_algorithm_equivalence.md` — Summary 为空
+- `concept/04_formal/08_algorithm_semantics/README.md` — Summary 为空
+- `concept/04_formal/09_system_semantics/README.md` — Summary 为空
+- `concept/04_formal/10_architecture_semantics/01_software_architecture_formalization.md` — Summary 为空
+- `concept/04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md` — Summary 为空
+- `concept/04_formal/10_architecture_semantics/03_architecture_refinement.md` — Summary 为空
+- `concept/04_formal/10_architecture_semantics/04_rust_architecture_constraints.md` — Summary 为空
+- `concept/04_formal/10_architecture_semantics/README.md` — Summary 为空
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 

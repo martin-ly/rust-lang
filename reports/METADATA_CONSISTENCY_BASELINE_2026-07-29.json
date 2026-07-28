@@ -1,14 +1,14 @@
 {
   "summary": {
     "date": "2026-07-29",
-    "scanned": 556,
+    "scanned": 573,
     "counts": {
       "D1": 0,
       "D2": 1,
       "D3": 0,
       "D4": 0,
       "D5": 0,
-      "D6": 1
+      "D6": 10
     },
     "pct": {
       "D1": 0.0,
@@ -16,10 +16,10 @@
       "D3": 0.0,
       "D4": 0.0,
       "D5": 0.0,
-      "D6": 0.2
+      "D6": 1.7
     },
-    "D2_base_files_with_asp_and_bloom": 348,
-    "flagged_files": 2
+    "D2_base_files_with_asp_and_bloom": 351,
+    "flagged_files": 11
   },
   "examples": {
     "D1": [],
@@ -36,6 +36,42 @@
       [
         "concept/04_formal/03_operational_semantics/08_llvm_ir_poison_ub.md",
         "Summary 为空"
+      ],
+      [
+        "concept/04_formal/08_algorithm_semantics/04_unsafe_algorithm_invariants.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/04_formal/08_algorithm_semantics/05_algorithm_equivalence.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/04_formal/08_algorithm_semantics/README.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/04_formal/09_system_semantics/README.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/04_formal/10_architecture_semantics/01_software_architecture_formalization.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/04_formal/10_architecture_semantics/03_architecture_refinement.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/04_formal/10_architecture_semantics/04_rust_architecture_constraints.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/04_formal/10_architecture_semantics/README.md",
+        "Summary 为空"
       ]
     ]
   },
@@ -48,6 +84,51 @@
     "concept/04_formal/04_model_checking/11_creusot.md": {
       "D2": [
         "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5] 无交集"
+      ]
+    },
+    "concept/04_formal/08_algorithm_semantics/04_unsafe_algorithm_invariants.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/04_formal/08_algorithm_semantics/05_algorithm_equivalence.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/04_formal/08_algorithm_semantics/README.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/04_formal/09_system_semantics/README.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/04_formal/10_architecture_semantics/01_software_architecture_formalization.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/04_formal/10_architecture_semantics/03_architecture_refinement.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/04_formal/10_architecture_semantics/04_rust_architecture_constraints.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/04_formal/10_architecture_semantics/README.md": {
+      "D6": [
+        "Summary 为空"
       ]
     }
   }

@@ -1,41 +1,41 @@
 {
   "date": "2026-07-29",
-  "scanned": 529,
+  "scanned": 544,
   "coverage": {
     "P0": [
-      524,
+      539,
       99.1
     ],
     "P1": [
-      468,
-      88.5
+      476,
+      87.5
     ],
     "P2": [
-      438,
-      82.8
+      444,
+      81.6
     ],
     "any": [
-      529,
+      544,
       100.0
     ],
     "none": 0
   },
   "content_scope": {
-    "scanned": 438,
+    "scanned": 453,
     "P0": [
-      438,
+      453,
       100.0
     ],
     "P1": [
-      414,
-      94.5
+      422,
+      93.2
     ],
     "P2": [
-      421,
-      96.1
+      427,
+      94.3
     ],
     "any": [
-      438,
+      453,
       100.0
     ],
     "gaps_p1": [
@@ -53,6 +53,13 @@
       "concept/04_formal/00_type_theory/10_dependent_refinement_types.md",
       "concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md",
       "concept/04_formal/07_concurrency_semantics/05_stm_semantics.md",
+      "concept/04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md",
+      "concept/04_formal/08_algorithm_semantics/03_iterator_correctness.md",
+      "concept/04_formal/09_system_semantics/02_pi_calculus_for_rust.md",
+      "concept/04_formal/09_system_semantics/03_component_based_semantics.md",
+      "concept/04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md",
+      "concept/04_formal/10_architecture_semantics/03_architecture_refinement.md",
+      "concept/04_formal/10_architecture_semantics/04_rust_architecture_constraints.md",
       "concept/05_comparative/01_systems_languages/07_rust_vs_ada_spark.md",
       "concept/05_comparative/01_systems_languages/08_rust_vs_d.md",
       "concept/05_comparative/01_systems_languages/09_rust_vs_nim.md",
@@ -76,6 +83,15 @@
       "concept/03_advanced/04_ffi/05_unsafe_extern_blocks.md",
       "concept/04_formal/00_type_theory/14_flux.md",
       "concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md",
+      "concept/04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md",
+      "concept/04_formal/08_algorithm_semantics/03_iterator_correctness.md",
+      "concept/04_formal/08_algorithm_semantics/04_unsafe_algorithm_invariants.md",
+      "concept/04_formal/08_algorithm_semantics/05_algorithm_equivalence.md",
+      "concept/04_formal/09_system_semantics/01_actor_model_semantics.md",
+      "concept/04_formal/09_system_semantics/02_pi_calculus_for_rust.md",
+      "concept/04_formal/10_architecture_semantics/01_software_architecture_formalization.md",
+      "concept/04_formal/10_architecture_semantics/03_architecture_refinement.md",
+      "concept/04_formal/10_architecture_semantics/04_rust_architecture_constraints.md",
       "concept/05_comparative/00_paradigms/05_language_semantic_model_matrix.md",
       "concept/05_comparative/02_managed_languages/09_rust_vs_haskell.md",
       "concept/05_comparative/02_managed_languages/11_rust_vs_fsharp.md",
@@ -106,9 +122,9 @@
       "any": 74
     },
     "L4": {
-      "n": 64,
-      "P0": 64,
-      "any": 64
+      "n": 79,
+      "P0": 79,
+      "any": 79
     },
     "L5": {
       "n": 27,

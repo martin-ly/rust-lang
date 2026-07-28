@@ -439,8 +439,8 @@ standalone_quizzes:
   concept_to_quiz_backlink: true
 embedded_quizzes:
   description: concept/ 页面内嵌入式测验（### 测验 N + <details> 答题块），按页聚合
-  pages: 302
-  total_blocks: 1302
+  pages: 310
+  total_blocks: 1342
   items:
   - path: concept/00_meta/00_framework/bloom_taxonomy.md
     blocks: 3
@@ -558,6 +558,8 @@ embedded_quizzes:
     blocks: 5
   - path: concept/01_foundation/04_control_flow/02_patterns.md
     blocks: 3
+  - path: concept/01_foundation/04_control_flow/03_let_chains.md
+    blocks: 2
   - path: concept/01_foundation/04_control_flow/04_statements_and_expressions.md
     blocks: 3
   - path: concept/01_foundation/05_collections/01_collections.md
@@ -730,6 +732,8 @@ embedded_quizzes:
     blocks: 4
   - path: concept/04_formal/00_type_theory/08_type_inference_complexity.md
     blocks: 3
+  - path: concept/04_formal/00_type_theory/12_pattern_composition_algebra.md
+    blocks: 5
   - path: concept/04_formal/01_ownership_logic/01_linear_logic.md
     blocks: 5
   - path: concept/04_formal/01_ownership_logic/02_ownership_formal.md
@@ -758,6 +762,8 @@ embedded_quizzes:
     blocks: 3
   - path: concept/04_formal/04_model_checking/05_programming_language_foundations.md
     blocks: 5
+  - path: concept/04_formal/04_model_checking/11_creusot.md
+    blocks: 3
   - path: concept/04_formal/05_rustc_internals/01_rustc_query_system.md
     blocks: 4
   - path: concept/04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md
@@ -766,6 +772,22 @@ embedded_quizzes:
     blocks: 4
   - path: concept/04_formal/05_rustc_internals/04_name_resolution_and_hir.md
     blocks: 4
+  - path: concept/04_formal/08_algorithm_semantics/02_refinement_calculus.md
+    blocks: 5
+  - path: concept/04_formal/08_algorithm_semantics/03_iterator_correctness.md
+    blocks: 5
+  - path: concept/04_formal/08_algorithm_semantics/04_unsafe_algorithm_invariants.md
+    blocks: 5
+  - path: concept/04_formal/08_algorithm_semantics/05_algorithm_equivalence.md
+    blocks: 5
+  - path: concept/04_formal/09_system_semantics/03_component_based_semantics.md
+    blocks: 5
+  - path: concept/04_formal/10_architecture_semantics/01_software_architecture_formalization.md
+    blocks: 5
+  - path: concept/04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md
+    blocks: 5
+  - path: concept/04_formal/10_architecture_semantics/03_architecture_refinement.md
+    blocks: 5
   - path: concept/04_formal/README.md
     blocks: 3
   - path: concept/05_comparative/00_paradigms/01_paradigm_matrix.md
@@ -861,8 +883,6 @@ embedded_quizzes:
   - path: concept/06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md
     blocks: 5
   - path: concept/06_ecosystem/03_design_patterns/08_architecture_patterns.md
-    blocks: 5
-  - path: concept/04_formal/00_type_theory/12_pattern_composition_algebra.md
     blocks: 5
   - path: concept/06_ecosystem/03_design_patterns/17_workflow_theory.md
     blocks: 5
@@ -987,8 +1007,6 @@ embedded_quizzes:
   - path: concept/07_future/02_preview_features/17_type_alias_impl_trait_preview.md
     blocks: 5
   - path: concept/07_future/02_preview_features/18_arbitrary_self_types_preview.md
-    blocks: 5
-  - path: concept/07_future/02_preview_features/19_const_trait_preview.md
     blocks: 5
   - path: concept/07_future/02_preview_features/20_ergonomic_ref_counting_preview.md
     blocks: 5
