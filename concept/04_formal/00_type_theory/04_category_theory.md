@@ -10,6 +10,7 @@
 >
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
+> **内容定位**: **project-specific** — 本节为范畴论在 Rust 知识体系中的教学类比与跨语言对比桥梁，非 Rust 官方规范。Rust 权威语义请参见 [`Trait 系统`](../../02_intermediate/00_traits/01_traits.md) 与 [`泛型系统`](../../02_intermediate/01_generics/01_generics.md)。
 > **定位**: 从**范畴论**视角分析 Rust 的类型系统（Type System）——从函子（Functor）、应用函子（Applicative）到单子（Monad），揭示 Rust 的类型构造器如何隐式实现这些抽象代数结构。
 > **前置概念**: [Type Theory](01_type_theory.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
 > **后置概念**: [Linear Logic](../01_ownership_logic/01_linear_logic.md) · [RustBelt](../02_separation_logic/01_rustbelt.md)

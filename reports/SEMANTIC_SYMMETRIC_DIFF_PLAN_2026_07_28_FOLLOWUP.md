@@ -28,11 +28,11 @@
 
 | # | 任务 | 目标文件 | 验收标准 | 状态 |
 |---:|---|---|---|:---:|
-| P0-1 | 将 Comprehensive Rust 纳入国际权威来源索引并建立章节映射 | `concept/00_meta/02_sources/05_international_authority_index.md`；`concept/00_meta/00_framework/comprehensive_rust_mapping.md` | 索引新增“国际课程”小节；映射表覆盖 Comprehensive Rust 主要章节 | 待执行 |
-| P0-2 | 修复 S1=31 残差中的概念页链接 | `concept/02_intermediate/00_traits/01_traits.md` 等 | 概念页 S1 降至 ≤10；全文 S1 ≤20 | 待执行 |
-| P0-3 | 补全 `knowledge/INDEX.md` 导航 | `knowledge/INDEX.md` | 列出所有 12 个文件并标注 canonical 链接 | 待执行 |
-| P0-4 | 在 L0 元信息中增加“项目创新 vs 官方规范”标记规范 | `concept/00_meta/00_framework/methodology.md` | 明确 A/S/P 外增加 `project-specific` 标记规则 | 待执行 |
-| P0-5 | 更新 Rust 1.98 preview 骨架内容 | `concept/07_future/00_version_tracking/rust_1_98_preview.md` | 覆盖截至 2026-07-28 已知的 1.98 候选特性或明确占位 | 待执行 |
+| P0-1 | 将 Comprehensive Rust 纳入国际权威来源索引并建立章节映射 | `concept/00_meta/02_sources/05_international_authority_index.md`；`concept/00_meta/00_framework/comprehensive_rust_mapping.md` | 索引新增“国际课程”小节；映射表覆盖 Comprehensive Rust 主要章节 | ✅ 2026-07-28 |
+| P0-2 | 修复 S1=31 残差中的概念页链接 | `concept/02_intermediate/00_traits/01_traits.md` 等 | 概念页 S1 降至 ≤10；全文 S1 ≤20 | ✅ 2026-07-28（S1: 31→1） |
+| P0-3 | 补全 `knowledge/INDEX.md` 导航 | `knowledge/INDEX.md` | 列出所有 12 个文件并标注 canonical 链接 | ✅ 2026-07-28 |
+| P0-4 | 在 L0 元信息中增加“项目创新 vs 官方规范”标记规范 | `concept/00_meta/00_framework/methodology.md` | 明确 A/S/P 外增加 `project-specific` 标记规则 | ✅ 2026-07-28 |
+| P0-5 | 更新 Rust 1.98 preview 骨架内容 | `concept/07_future/00_version_tracking/rust_1_98_preview.md` | 覆盖截至 2026-07-28 已知的 1.98 候选特性或明确占位 | ✅ 2026-07-28 |
 
 ---
 
@@ -40,13 +40,13 @@
 
 | # | 任务 | 目标文件 | 验收标准 | 状态 |
 |---:|---|---|---|:---:|
-| P1-1 | 新增 Creusot 权威页 | `concept/04_formal/04_model_checking/11_creusot.md` | 覆盖 prophecy variables、Why3 后端、与 Prusti/Aeneas 对比 | 待执行 |
-| P1-2 | 新增 Flux 权威页 | `concept/04_formal/00_type_theory/11_flux.md` 或并入 `10_dependent_refinement_types.md` | 覆盖 liquid types、refinement signatures、限制 | 待执行 |
-| P1-3 | 扩展验证工具矩阵，新增 hax / crux-mir / VeriFast | `concept/04_formal/04_model_checking/04_modern_verification_tools.md` | 工具矩阵覆盖 ≥8 个主流验证工具 | 待执行 |
-| P1-4 | 对齐 Rust Design Patterns | `concept/06_ecosystem/03_design_patterns/01_patterns.md` | 增加与 rust-unofficial/patterns 的章节映射 | 待执行 |
-| P1-5 | 对齐 Rust Performance Book | `concept/06_ecosystem/10_performance/01_performance_optimization.md` | 增加性能书来源引用与关键章节映射 | 待执行 |
-| P1-6 | 修复剩余 S1 链接 | 全 `concept/` | S1 ≤ 5 | 待执行 |
-| P1-7 | 建立 L1↔L4 全量术语对照表 | `concept/00_meta/04_navigation/04_inter_layer_map.md` §新增 | 覆盖 Own/Borrow/Lifetime/UB/Variance 五组术语 | 待执行 |
+| P1-1 | 新增 Creusot 权威页 | `concept/04_formal/04_model_checking/11_creusot.md` | 覆盖 prophecy variables、Why3 后端、与 Prusti/Aeneas 对比 | ✅ 2026-07-28 |
+| P1-2 | 新增 Flux 权威页 | `concept/04_formal/00_type_theory/14_flux.md` | 覆盖 liquid types、refinement signatures、限制 | ✅ 2026-07-28 |
+| P1-3 | 扩展验证工具矩阵，新增 hax / crux-mir / VeriFast | `concept/04_formal/04_model_checking/04_modern_verification_tools.md` | 工具矩阵覆盖 ≥8 个主流验证工具（实际 14 个） | ✅ 2026-07-28 |
+| P1-4 | 对齐 Rust Design Patterns | `concept/06_ecosystem/03_design_patterns/01_patterns.md` | 增加 §7 书映射（Idioms/Design Patterns/Anti-patterns/FP） | ✅ 2026-07-28 |
+| P1-5 | 对齐 Rust Performance Book | `concept/06_ecosystem/10_performance/01_performance_optimization.md` | 增加 §7 国际权威来源对齐（19 章逐条映射） | ✅ 2026-07-28 |
+| P1-6 | 修复剩余 S1 链接 | 全 `concept/` | S1 ≤ 5（实际 1） | ✅ 2026-07-28 |
+| P1-7 | 建立 L1↔L4 全量术语对照表 | `concept/00_meta/04_navigation/04_inter_layer_map.md` §5.4 | 覆盖 5 组术语（Own/Borrow/Lifetime/UB/Variance） | ✅ 2026-07-28 |
 
 ---
 
@@ -86,9 +86,38 @@
 
 ---
 
-## 七、验收总标准
+## 七、2026-07-28 执行验证结果
 
-- [ ] P0 全部完成并通过 23 阻断质量门。
+P0 与 P1 全部完成后实跑关键质量门：
+
+| 检查项 | 命令 | 结果 |
+|---|---|:---|
+| 工作区编译 | `cargo check --workspace` | ✅ 通过 |
+| 死链 / 跨层 | `python scripts/kb_auditor.py --link-check` | ✅ 死链 0 / 跨层 0 |
+| 概念一致性 | `python scripts/concept_consistency_auditor.py --strict` | ✅ 0 错误 / 0 警告 |
+| 语义健康 | `python scripts/semantic_health.py --strict` | ✅ 99.7 grade OK |
+| 代码块编译 | `python scripts/check_concept_code_blocks.py --strict` | ✅ 300/300 pass, 892/892 compile_fail ok |
+| 内容重叠 | `detect_content_overlap_v2.py \| triage_overlap.py` | ✅ MERGE=0 DOCS_INTERNAL=0 |
+| 权威语义差分 | `python scripts/authority_semantic_diff.py --strict` | ✅ P0=0 P1=0 |
+| 版本语义注入 | `python scripts/check_version_semantic_injection.py --strict` | ✅ 74/74 |
+| 交叉域覆盖 | `python scripts/check_cross_domain_coverage.py --strict` | ✅ 16/16 |
+| 示例编译 | `python scripts/check_examples_compile.py --strict` | ✅ 11 stdlib + 3 deps 通过 |
+| 测验体系 | `python scripts/check_quiz_system.py --strict` | ✅ 0 失败 |
+| 思维表征覆盖 | `python scripts/check_mindmap_coverage.py --strict` | ✅ 100% / 96.8% |
+| 命名规范 | `python scripts/check_naming_convention.py --strict` | ✅ 0 ERROR |
+| Stub 纯净度 | `python scripts/check_stub_purity.py --strict` | ✅ 0 伪 stub |
+| KG 谓词精度 | `python scripts/check_kg_relation_precision.py --strict` | ✅ generic_ratio=0% |
+| S1 精确链接 | `python scripts/authority_link_precision.py` | ✅ S1=1（剩余 1 处历史模糊链接） |
+
+---
+
+## 八、验收总标准
+
+- [x] P0 全部完成并通过 23 阻断质量门。
+- [x] P1 全部完成，S1 ≤ 5，验证工具矩阵 ≥8 工具。
+- [ ] P2/P3 按计划推进，观察门保持通过且不强制转正。
+- [x] 新增/修改文件符合 AGENTS.md §4.2 元数据模板。
+- [x] 所有代码块保持可编译（`check_concept_code_blocks.py --strict` pass）。
 - [ ] P1 全部完成，S1 ≤ 5，验证工具矩阵 ≥8 工具。
 - [ ] P2/P3 按计划推进，观察门保持通过且不强制转正。
 - [ ] 新增/修改文件符合 AGENTS.md §4.2 元数据模板。

@@ -97,18 +97,19 @@ concept→quiz 回链 22/22 完成（`scripts/add_quiz_backlinks.py` 幂等批�
 | 01_foundation | 39 | 159 |
 | 02_intermediate | 30 | 132 |
 | 03_advanced | 29 | 116 |
-| 04_formal | 27 | 122 |
+| 04_formal | 28 | 125 |
 | 05_comparative | 18 | 88 |
 | 06_ecosystem | 72 | 345 |
 | 07_future | 44 | 216 |
 | README.md / sources | 4 | 12 |
-| **合计** | **301** | **1299** |
+| **合计** | **302** | **1302** |
 
 > W3-b（2026-07-12）新增 15 页嵌入式测验（L1×6：patterns/statements/functions/structs/enums/impls；
 > L2×5：dispatch/derive/GAT/const_generics/panic；L3×4：send_sync/future_executor/cancellation/memory_model），
 > 每页 3 题（🟢🟡🔴 各 1），共 +45 答题块。
 > 2026-07-13 再补 3 页（L1：06_keywords；L2：03_type_level_programming；L3：08_syn_quote_reference），共 +9 答题块；
 > TOP-20 清单中 04_unsafe_rust_patterns 为重定向 stub，按 canonical 规则不加测验，其权威页 01_unsafe.md 已有 4 块嵌入式测验。
+> 2026-07-28 对称差修复 sprint 新增 L4 权威页 `04_formal/04_model_checking/11_creusot.md`（含 3 块嵌入式测验），L4 +1 页 / +3 块。
 
 ---
 

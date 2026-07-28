@@ -45,6 +45,24 @@
   - [TrustInSoft：C/Rust 混合代码的抽象解释](#trustinsoftcrust-混合代码的抽象解释)
     - [抽象解释原理](#抽象解释原理)
     - [Rust 支持状态](#rust-支持状态)
+  - [hax：Rust → F\*/Lean/Rocq 的高保证翻译](#haxrust--fleanrocq-的高保证翻译)
+    - [核心思想](#核心思想-1)
+    - [工作层级与后端](#工作层级与后端)
+    - [能发现的缺陷类型](#能发现的缺陷类型)
+    - [优势与局限](#优势与局限)
+    - [状态](#状态-1)
+  - [crux-mir：Galois 的 Rust 符号测试/验证器](#crux-mirgalois-的-rust-符号测试验证器)
+    - [核心思想](#核心思想-2)
+    - [工作层级](#工作层级)
+    - [能发现的缺陷类型](#能发现的缺陷类型-1)
+    - [优势与局限](#优势与局限-1)
+    - [状态](#状态-2)
+  - [VeriFast：基于分离逻辑的模块化验证器](#verifast基于分离逻辑的模块化验证器)
+    - [核心思想](#核心思想-3)
+    - [工作层级](#工作层级-1)
+    - [能发现的缺陷类型](#能发现的缺陷类型-2)
+    - [优势与局限](#优势与局限-2)
+    - [状态](#状态-3)
   - [选型速查表（2026）](#选型速查表2026)
   - [快速开始：工具安装与运行](#快速开始工具安装与运行)
     - [Miri（Rust 官方动态分析器）](#mirirust-官方动态分析器)
@@ -353,14 +371,178 @@ pub fn safe_wrapper(data: &[u8]) -> u32 {
 
 ---
 
+## hax：Rust → F*/Lean/Rocq 的高保证翻译
+
+> **定位**: Cryspen 维护的 Rust 验证工具，将 Rust 代码高保证地翻译到 F*、Lean（经 Aeneas）、Rocq（Coq）等定理证明器，使用户能在**实际实现代码**上构造机器可检查的 proof，而非在手写模型上验证。
+>
+> 📚 **相关概念页**: 与 [Creusot](11_creusot.md) 同属“Rust → 外部证明生态”路线，但 hax 更强调密码学与协议验证的多后端能力。
+
+### 核心思想
+
+hax 的 pipeline 可概括为：
+
+```text
+Rust 源代码
+    ↓
+rustc 前端提取 THIR（Typed HIR）为 JSON
+    ↓
+hax engine（OCaml）做简化与精化
+    ↓
+F* / Lean（Aeneas）/ Rocq / ProVerif / EasyCrypt / SSProve
+    ↓
+在目标证明器中编写并检查规范与证明
+```
+
+与 ProVerif 等“验证手写模型”的工具不同，hax 的目标是**直接验证 Rust 实现**，从而减少规范与代码之间的语义鸿沟。
+
+### 工作层级与后端
+
+| 后端 | 命令 | 状态 | 典型用途 |
+|:---|:---|:---:|:---|
+| **Lean（经 Aeneas/Charon）** | `cargo hax into lean` | 活跃开发 | 通用函数式证明、算法验证 |
+| **F*** | `cargo hax into fstar` | 稳定 | 密码学规范验证 |
+| **Rocq/Coq** | `cargo hax into coq` | 实验性 | 依赖类型与归纳证明 |
+| **ProVerif** | `cargo hax into pro-verif` | 实验性 | 协议安全分析 |
+| **EasyCrypt** | `cargo hax into easycrypt` | 实验性 | 密码学可证明安全 |
+
+> hax 的前端从 rustc 提取 **THIR**；Lean 后端实际走 `charon + aeneas` 路径将 MIR 进一步翻译为 Aeneas 的 IR。
+
+### 能发现的缺陷类型
+
+- 密码实现中的功能偏离规范
+- 协议消息处理逻辑错误
+- 数组/切片越界、整数溢出（由后端 SMT/证明器捕获）
+- `unsafe` 块与底层假设不一致（取决于后端建模深度）
+
+### 优势与局限
+
+| 优势 | 局限 |
+|:---|:---|
+| 直接翻译真实 Rust 代码，避免模型漂移 | v1 不支持返回值或别名场景下的 `&mut T` |
+| 多后端覆盖证明助手与密码学/协议专用工具 | 部分后端（Rocq/ProVerif/EasyCrypt）仍为实验性 |
+| 继承 hacspec 密码学规范传统 | 对泛型、trait 对象等复杂 Rust 特性支持仍在演进 |
+| `cargo hax` 子命令易于集成 | 证明编写仍需要形式化方法专家 |
+
+### 状态
+
+- **维护方**: Cryspen
+- **成熟度**: F* 后端较稳定；Lean 路径活跃开发；其余后端实验性
+- **典型应用**: 高保证密码库（如 ML-KEM、Signal 协议组件）的形式化验证
+
+**权威来源**: [hax GitHub](https://github.com/cryspen/hax) · [hax 官方文档](https://hax.cryspen.com/) · [Hax — Enabling High Assurance Cryptographic Software (RustVerify24)](https://hax.cryspen.com/blog/)
+
+---
+
+## crux-mir：Galois 的 Rust 符号测试/验证器
+
+> **定位**: Galois 开发的 Rust 符号执行验证工具，基于成熟 SAW-Cryptol 生态的 **Crucible** 符号模拟库，将证明表述为**符号单元测试**（symbolic unit tests），支持 safe 与 unsafe Rust 的位精确建模。
+
+### 核心思想
+
+crux-mir 的工作方式与 Kani 类似，但工程哲学更接近“符号测试”：
+
+```text
+#[crux::test]
+fn bound_check() {
+    let i = usize::symbolic("i");
+    let arr: Vec<u32> = vec![1; 10];
+    get_wrapped(i, &arr);  // crux-mir 穷举所有有效输入
+}
+```
+
+crux-mir 通过 `mir-json` 把 Rust 代码翻译为 MIR 的 JSON 表示，再用 Haskell 编写的 Crucible 引擎进行符号模拟，并把断言提交给 Yices/Z3 等 SMT 求解器。它支持**组合推理**（compositional reasoning），即调用方只使用被调函数的规约而非展开其体，从而扩展到中等复杂度证明。
+
+### 工作层级
+
+- **输入**: Rust 源代码
+- **中间表示**: MIR（通过 [`mir-json`](https://github.com/GaloisInc/mir-json) 提取）
+- **验证引擎**: Crucible 符号模拟 + SMT（Yices / Z3）
+
+### 能发现的缺陷类型
+
+- 整数溢出、数组/切片越界
+- 函数返回值与规范不一致
+- 与 Cryptol 或可执行规范的外延等价性失败
+- unsafe 块中的内存安全违规（在支持范围内）
+
+### 优势与局限
+
+| 优势 | 局限 |
+|:---|:---|
+| 位精确（bit-precise）建模 safe 与 unsafe Rust | 对大量 `core::intrinsics` 缺少覆盖，常报 `Don't know how to call ...` |
+| 组合推理可扩展到中等复杂代码 | 循环默认需展开，复杂循环需 `--path-sat` 且仍可能受限 |
+| 与 Crux-LLVM/Cryptol 共享跨语言验证生态 | 常量表达式/静态初始化中的引用与函数指针支持有限 |
+| 支持分支覆盖（branch coverage）与符号执行性能分析 | 符号数组大小需上界，真正无界大小不支持 |
+| 已有工业部署案例 | 工具链依赖 Haskell/GHC、cabal、mir-json，安装较重 |
+
+### 状态
+
+- **维护方**: Galois, Inc.
+- **成熟度**: 活跃开发，已有工业用例（如 curve25519-dalek 的 Scalar52 验证）
+- **许可**: 开源（BSD-3-Clause 等，见 Galois 仓库）
+
+**权威来源**: [crux-mir GitHub](https://github.com/GaloisInc/crucible/tree/master/crux-mir) · [Galois — Crux 介绍](https://www.galois.com/articles/crux-introducing-our-new-open-source-tool-for-software-verification) · [Crux, a Precise Verifier for Rust and Other Languages (arXiv 2410.18280)](https://arxiv.org/abs/2410.18280)
+
+---
+
+## VeriFast：基于分离逻辑的模块化验证器
+
+> **定位**: KU Leuven DistriNet 研究组开发的模块化形式化验证器，基于**分离逻辑**（Separation Logic）与**符号执行**，用于验证单线程/多线程 C、Java 以及 **unsafe Rust** 程序的未定义行为 absence 与功能正确性。
+
+### 核心思想
+
+VeriFast 对每个函数单独进行**前向符号执行**：
+
+```text
+函数 precondition（分离逻辑断言）
+        ↓
+符号执行函数体，用 SMT 检查数据断言
+        ↓
+所有返回点满足 postcondition
+```
+
+调用函数时使用其 pre/postcondition 而非展开体；循环需提供不变量。为表达丰富规约，用户可在注释中定义归纳数据类型、递归纯函数、抽象谓词、类型谓词以及**引理函数**（lemma functions，无副作用、可终止的证明函数）。
+
+### 工作层级
+
+- **输入**: Rust 源代码 + 写在特殊注释里的注解（annotations）
+- **前端**: rustc（因此受目标架构与编译配置影响）
+- **内存模型**: 分离逻辑表示，safe Rust 函数的 pre/post 可由 RustBelt 对类型的解释自动推导；`unsafe` 函数需用户显式提供
+
+### 能发现的缺陷类型
+
+- `unsafe` 块导致的未定义行为（越界、未对齐访问、use-after-free 等）
+- 多线程数据竞争（在支持范围内）
+- 函数实现违反其前置/后置条件
+- 循环不变量不保持
+
+### 优势与局限
+
+| 优势 | 局限 |
+|:---|:---|
+| 模块化、sound 的分离逻辑验证 | Rust 支持目前仍**非常不完整**，新用例往往需要扩展工具 |
+| 自动为 safe Rust 函数推导 pre/post | 需要大量人工注解：pre/post、循环不变量、ghost `open`/`close`、引理函数 |
+| 直接处理 unsafe Rust，补充借用检查器无法覆盖的角落 | VeriFast 自身未被形式化验证，存在未知 soundness bug 的可能 |
+| 支持 SMT 自动推理与人工引理函数结合 | 对未建模的 rustc 行为/目标特性可能给出条件性保证 |
+
+### 状态
+
+- **维护方**: imec-DistriNet, KU Leuven（核心开发者 Bart Jacobs）
+- **成熟度**: 研究原型；Rust 前端自 2022 年起开发，已验证标准库 `LinkedList` 等示例
+- **许可**: 开源（BSD-2-Clause 等，见仓库）
+
+**权威来源**: [VeriFast GitHub](https://github.com/verifast/verifast) · [VeriFast for Rust Reference](https://verifast.github.io/verifast/rust-reference/) · [VeriFast — Modular Program Verifier](https://alastairreid.github.io/RelatedWork/papers/jacobs:nfm:2011/)
+
+---
+
 ## 选型速查表（2026）
 
 | 场景 | 首选工具 | 备选 | 关键限制 |
 |:---|:---|:---|:---|
 | 日常 unsafe 代码审查 | **Miri** | Kani (bounded) | Miri 不验证所有执行路径 |
-| 安全关键组件（crypto/网络） | **Kani 0.65+** | ESBMC | 循环需契约或展开 |
+| 安全关键组件（crypto/网络） | **Kani 0.65+** | ESBMC / crux-mir | 循环需契约或展开 |
 | 操作系统/驱动/嵌入式 | **Verus** | Kani + 手引公理 | 学习曲线陡峭 |
-| 算法/数据结构功能正确性 | **Creusot** | Verus | 标注负担中高、Why3 求解器调参 |
+| 算法/数据结构功能正确性 | **Creusot** | Verus / hax (Lean/F*) | 标注负担中高、Why3/外部求解器调参 |
 | 轻量数组边界 / 向量长度 / 元素不变量 | **Flux** | Verus / Kani | 仅 safe Rust，需 nightly |
 | LLM 辅助验证入门 | **AutoVerus** | 纯 Verus | 成功率随复杂度下降 |
 | C/Rust FFI 混合验证 | **ESBMC** | TrustInSoft | Rust 前端成熟度有限 |
@@ -368,6 +550,9 @@ pub fn safe_wrapper(data: &[u8]) -> u32 {
 | unsafe API 标准化文档 | **Safety Tags** (未来) | rustdoc + 手写 | RFC 尚未批准 |
 | 生产环境借用（Borrowing）检查（运行时） | **BorrowSanitizer** (BSan) | Miri | 2-5x 性能开销，需每日构建版工具链 |
 | 编译器本身验证 | **a-mir-formality** | — | 研究工具，非程序验证 |
+| 密码学/协议实现高保证验证 | **hax** | Creusot | 部分后端实验性；`&mut T` 返回/别名受限 |
+| 符号单元测试与跨语言（Rust/C/Cryptol）验证 | **crux-mir** | Kani | 大量 `core::intrinsics` 未建模；安装较重 |
+| unsafe Rust 模块化分离逻辑验证 | **VeriFast** | Verus / Creusot | Rust 支持非常不完整；需大量分离逻辑注解 |
 
 ---
 
@@ -468,7 +653,7 @@ cd verus/source && ./tools/get-z3.sh && cargo build --release
 **文档版本**: 1.1
 **最后更新**: 2026-07-28
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
-> **变更**: 2026-07-28 在选型速查表与相关工具交叉索引中新增 Creusot [P1-1]
+> **变更**: 2026-07-28 在选型速查表与相关工具交叉索引中新增 Creusot [P1-1]; 2026-07-28 新增 hax / crux-mir / VeriFast 三节并扩展选型速查表与交叉索引 [P1-3]
 
 ## 相关工具交叉索引
 
@@ -483,6 +668,9 @@ cd verus/source && ./tools/get-z3.sh && cargo build --release
 | [Creusot](11_creusot.md) | 基于 Why3/Coma 的 Rust 演绎验证器，擅长可变借用与算法功能正确性 | [Creusot 官方文档](https://creusot.rs/) · [Creusot GitHub](https://github.com/creusot-rs/creusot) |
 | [AutoVerus / Verus](07_autoverus.md) | SMT 演绎验证与 LLM 辅助自动证明 | [Verus GitHub](https://github.com/verus-lang/verus) · [AutoVerus 论文](https://arxiv.org/abs/2409.13082) |
 | [Flux](../00_type_theory/14_flux.md) | Rust 的 Liquid 细化类型，轻量边界/长度/元素不变量验证 | [Flux GitHub](https://github.com/flux-rs/flux) · [Flux PLDI 2023 论文](https://ranjitjhala.github.io/static/flux-pldi23.pdf) |
+| **hax** | Rust → F*/Lean/Rocq 高保证翻译，聚焦密码学与协议实现 | [hax GitHub](https://github.com/cryspen/hax) · [hax 官方文档](https://hax.cryspen.com/) |
+| **crux-mir** | Galois 基于 Crucible 的 Rust 符号测试/验证器，位精确建模 safe/unsafe Rust | [crux-mir GitHub](https://github.com/GaloisInc/crucible/tree/master/crux-mir) · [Crux 论文 (arXiv 2410.18280)](https://arxiv.org/abs/2410.18280) |
+| **VeriFast** | 基于分离逻辑的模块化验证器，支持 unsafe Rust 的 UB absence 验证 | [VeriFast GitHub](https://github.com/verifast/verifast) · [VeriFast for Rust Reference](https://verifast.github.io/verifast/rust-reference/) |
 
 ## 认知路径
 
@@ -585,6 +773,18 @@ mindmap
       数组边界
       向量长度
       元素不变量
+    hax Rust to Provers
+      F Star
+      Lean Aeneas
+      Rocq Coq
+    crux mir 符号测试
+      MIR via mir json
+      Crucible SMT
+      分支覆盖
+    VeriFast 分离逻辑
+      符号执行
+      unsafe Rust
+      RustBelt 类型解释
 ```
 
 > **认知功能**: 本 mindmap 从本页「现代 Rust 验证工具生态 2025-2026」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

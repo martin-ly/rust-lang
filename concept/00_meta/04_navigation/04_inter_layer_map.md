@@ -40,6 +40,12 @@
       - [5.3.2 定理编号约定映射](#532-定理编号约定映射)
       - [5.3.3 异步操作语义映射](#533-异步操作语义映射)
       - [5.3.4 UB 分类 L3 ↔ L4 对照](#534-ub-分类-l3--l4-对照)
+    - [5.4 跨层术语对照表](#54-跨层术语对照表)
+      - [5.4.1 所有权 / Move 状态](#541-所有权--move-状态)
+      - [5.4.2 生命周期 / 区域](#542-生命周期--区域)
+      - [5.4.3 UB 分类](#543-ub-分类)
+      - [5.4.4 型变 / Variance](#544-型变--variance)
+      - [5.4.5 借用检查](#545-借用检查)
   - [六、反事实与边界条件](#六反事实与边界条件)
     - [6.1 什么情况下形式化保证失效？](#61-什么情况下形式化保证失效)
     - [6.2 跨层断裂点](#62-跨层断裂点)
@@ -464,6 +470,56 @@ graph LR
 | 无效枚举值 / ABI 不匹配 | 产生无效值 / 错误调用约定 | `concept/03_advanced/02_unsafe/01_unsafe.md` |
 | 数据竞争 | 非原子并发访问重叠内存 | `concept/03_advanced/00_concurrency/04_send_sync_boundaries.md` |
 | 未初始化内存读取 | 读取未初始化 place | `concept/04_formal/01_ownership_logic/06_behavior_considered_undefined.md` |
+
+---
+
+### 5.4 跨层术语对照表
+
+本节将 L1–L4 中描述同一语义对象的教学术语、工程术语与形式化术语显式对齐，减少跨层阅读时的“同义不同形”噪音。每个术语尽量链接到 `concept/` 中的权威页。
+
+#### 5.4.1 所有权 / Move 状态
+
+| L1 术语 | L2 术语 | L3 术语 | L4 术语 | 说明 / 映射 |
+|:---|:---|:---|:---|:---|
+| [Own(T) / 唯一 owner](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | [Drop trait](../../02_intermediate/02_memory_management/01_memory_management.md) | [unsafe 突破唯一性](../../03_advanced/02_unsafe/01_unsafe.md) | [Own(p)](../../04_formal/01_ownership_logic/02_ownership_formal.md) | 对位置 `p` 的独占资源权限；L4 用 `Own(p)` 精确表达“谁能访问哪段内存” |
+| [Moved](../../01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md) | [Move / Copy 标记](../../02_intermediate/02_memory_management/01_memory_management.md) | [ManuallyDrop / raw pointer](../../03_advanced/02_unsafe/01_unsafe.md) | 权限转移（无剩余权限） | move 后原变量失去 `Own(p)`，对应线性逻辑中的资源消耗 |
+| [Borrow(&T)](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | [Borrow / AsRef trait](../../02_intermediate/00_traits/01_traits.md) | [跨线程共享 / Sync](../../03_advanced/00_concurrency/04_send_sync_boundaries.md) | [Shr(p)](../../04_formal/01_ownership_logic/02_ownership_formal.md) | 对 `p` 的共享只读分数权限；多个 `Shr(p)` 可同时存在 |
+| [Borrow(&mut T)](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | [内部可变性](../../02_intermediate/02_memory_management/02_interior_mutability.md) | [Mutex / RwLock / UnsafeCell](../../03_advanced/02_unsafe/01_unsafe.md) | [Mut(p)](../../04_formal/01_ownership_logic/02_ownership_formal.md) | 对 `p` 的独占可变分数权限；与 `Own(p)` 及其他 `Mut(p)` 互斥 |
+| [Dropped](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | [Drop trait](../../02_intermediate/02_memory_management/01_memory_management.md) | [mem::forget / ManuallyDrop](../../03_advanced/02_unsafe/01_unsafe.md) | [Dealloc(p)](../../04_formal/01_ownership_logic/02_ownership_formal.md) | 资源释放，权限归还；unsafe 可显式阻止 Drop 执行 |
+
+#### 5.4.2 生命周期 / 区域
+
+| L1 术语 | L2 术语 | L3 术语 | L4 术语 | 说明 / 映射 |
+|:---|:---|:---|:---|:---|
+| ['a 生命周期标注](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | [泛型生命周期参数](../../02_intermediate/01_generics/01_generics.md) | [HRTB `for<'a>`](../../02_intermediate/01_generics/01_generics.md) | [区域变量 (region variable)](../../04_formal/01_ownership_logic/04_borrow_checking_decidability.md) | `'a` 是程序点集合的语法名字；L4 中对应一个待求解的区域变量 |
+| ['static](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | [全局 / 静态生命周期](../../01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md) | [leaking / static promotion](../../03_advanced/02_unsafe/01_unsafe.md) | [⊤ / 最大区域](../../04_formal/01_ownership_logic/04_borrow_checking_decidability.md) | 全程序存活区域，是所有其他区域的超集 |
+| [outlives 约束 `'a: 'b`](../../01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md) | [trait / where bound](../../02_intermediate/01_generics/01_generics.md) | [HRTB 高阶约束](../../02_intermediate/01_generics/01_generics.md) | [outlives constraint](../../04_formal/01_ownership_logic/04_borrow_checking_decidability.md) | 子集约束：region('a) ⊇ region('b)；L4 用图可达性求解 |
+
+#### 5.4.3 UB 分类
+
+| L1 术语 | L2 术语 | L3 术语 | L4 术语 | 说明 / 映射 |
+|:---|:---|:---|:---|:---|
+| — | — | [越界访问 / 悬垂指针](../../03_advanced/02_unsafe/01_unsafe.md) | [越界 place projection / 无效引用](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md) | 工程上称“越界/悬垂”，形式化上是对不存在或已释放 place 的投影 |
+| — | — | [无效枚举值 / ABI 不匹配](../../03_advanced/02_unsafe/01_unsafe.md) | [产生无效值 / 错误调用约定](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md) | 产生 `bool`/`enum`/`fn` 等不允许的位模式，或调用约定不一致 |
+| — | — | [数据竞争](../../03_advanced/00_concurrency/04_send_sync_boundaries.md) | [非原子并发访问重叠内存](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md) | 未同步的读写/写写重叠；L4 形式化为内存模型层面的冲突 |
+| — | — | [读取未初始化内存](../../03_advanced/02_unsafe/01_unsafe.md) | [读取未初始化 place](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md) | `MaybeUninit::assume_init` 过早使用或 `mem::uninitialized` 导致的 UB |
+
+#### 5.4.4 型变 / Variance
+
+| L1 术语 | L2 术语 | L3 术语 | L4 术语 | 说明 / 映射 |
+|:---|:---|:---|:---|:---|
+| — | [协变 (Covariant)](../../02_intermediate/04_types_and_conversions/04_type_system_advanced.md) | — | [协变规则](../../04_formal/00_type_theory/02_subtype_variance.md) | `T' <: T ⇒ F<T'> <: F<T>`；生命周期、不可变引用典型协变 |
+| — | [逆变 (Contravariant)](../../02_intermediate/04_types_and_conversions/04_type_system_advanced.md) | — | [逆变规则](../../04_formal/00_type_theory/02_subtype_variance.md) | `T' <: T ⇒ F<T> <: F<T'>`；函数参数位置典型逆变 |
+| — | [不变 (Invariant)](../../02_intermediate/04_types_and_conversions/04_type_system_advanced.md) | — | [不变规则](../../04_formal/00_type_theory/02_subtype_variance.md) | 无子类型关系；`&mut T`、`UnsafeCell<T>`、类型参数默认不变 |
+| ['static 是 'a 的子类型](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | [生命周期协变](../../02_intermediate/04_types_and_conversions/04_type_system_advanced.md) | — | [区域子类型 `<:`](../../04_formal/00_type_theory/02_subtype_variance.md) | `'static <: 'a` 是 Rust 子类型系统的核心实例 |
+
+#### 5.4.5 借用检查
+
+| L1 术语 | L2 术语 | L3 术语 | L4 术语 | 说明 / 映射 |
+|:---|:---|:---|:---|:---|
+| [借用检查器错误 (E05xx)](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | [trait / 生命周期约束](../../02_intermediate/01_generics/01_generics.md) | [NLL](../../03_advanced/02_unsafe/03_nll_and_polonius.md) | [NLL 数据流 + 区域约束](../../04_formal/01_ownership_logic/04_borrow_checking_decidability.md) | 从“词法作用域”扩展到“基于使用点”的数据流分析 |
+| [词法生命周期错误](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | — | [Polonius](../../03_advanced/02_unsafe/03_nll_and_polonius.md) | [Polonius Datalog 求解](../../04_formal/01_ownership_logic/04_borrow_checking_decidability.md) | 用约束传播替代固定作用域，进一步扩展可接受程序集合 |
+| [悬垂引用 / E0597](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | — | — | [region inference / outlives 求解](../../04_formal/01_ownership_logic/04_borrow_checking_decidability.md) | 引用使用点必须位于被引用值存活区域内，否则约束不可满足 |
 
 ---
 

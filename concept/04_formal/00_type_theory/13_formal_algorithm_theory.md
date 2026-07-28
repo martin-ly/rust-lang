@@ -11,6 +11,7 @@
 >
 > **受众**: [专家]
 > **权威来源**: 本文件为 `concept/` 权威页。
+> **内容定位**: **project-specific** — 本节为通用算法理论（图灵机、主定理、复杂度）在 Rust 知识体系中的教学桥梁，非 Rust 官方规范。Rust 权威语义请参见 [`概念索引`](../../00_meta/04_navigation/03_concept_index.md)。
 > **层级**: L4-L6 形式化理论
 > **A/S/P 标记**: **P+S** — Procedure + Structure
 > **前置概念**: [Unsafe Rust Patterns](../../03_advanced/02_unsafe/04_unsafe_rust_patterns.md) · [算法复杂度分析](../../06_ecosystem/11_domain_applications/10_algorithm_complexity_analysis.md) · [形式化方法](../../04_formal/04_model_checking/02_formal_methods.md) · [Hoare 逻辑](../../04_formal/03_operational_semantics/02_hoare_logic.md)

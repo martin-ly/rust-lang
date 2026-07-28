@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 538,
-    "generated_at": "2026-07-28T13:34:39.153344+00:00"
+    "generated_at": "2026-07-28T14:11:25.277464+00:00"
   },
   "files": [
     {
@@ -2133,7 +2133,7 @@
       "layer": "L0",
       "title": "跨层知识图谱（Inter-Layer Dependency Map）",
       "positioning": "本文件是 `concept/` 知识体系的全局关系骨架，显式定义 L0-L7 各层之间的**逻辑蕴含关系**、**形式化映射**、**反事实依赖**和**反向反馈**。",
-      "line_count": 680,
+      "line_count": 731,
       "theorem_chains": [
         {
           "text": "| — | Send/Sync (Marker Trait) | 并发安全保证 | 并发分离逻辑 (CSL) | **同态** | Send/Sync ⟹ CSL 资源安全 |",
@@ -2193,8 +2193,23 @@
       "sources": [],
       "cross_references": [
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/01_generics/01_generics.md",
+        "../../02_intermediate/02_memory_management/01_memory_management.md",
+        "../../02_intermediate/02_memory_management/02_interior_mutability.md",
+        "../../02_intermediate/04_types_and_conversions/04_type_system_advanced.md",
+        "../../03_advanced/00_concurrency/04_send_sync_boundaries.md",
         "../../03_advanced/01_async/08_pin_unpin.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../03_advanced/02_unsafe/03_nll_and_polonius.md",
+        "../../04_formal/00_type_theory/02_subtype_variance.md",
         "../../04_formal/01_ownership_logic/02_ownership_formal.md",
+        "../../04_formal/01_ownership_logic/04_borrow_checking_decidability.md",
+        "../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md",
         "../00_framework/methodology.md",
         "../00_framework/theorem_registry.md",
         "../02_sources/01_authority_source_map.md",
@@ -2203,7 +2218,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 92,
+      "matrix_rows": 116,
       "pre_post": {
         "pre": [],
         "post": []
@@ -3315,7 +3330,7 @@
       "layer": "L0",
       "title": "测验体系注册表（Quiz Registry）",
       "positioning": "",
-      "line_count": 150,
+      "line_count": 151,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -43156,7 +43171,7 @@
       "layer": "L4",
       "title": "现代 Rust 验证工具生态（2025-2026）",
       "positioning": "利用大语言模型（LLM）自动生成 Verus 证明注解，降低形式化验证的门槛。",
-      "line_count": 591,
+      "line_count": 791,
       "theorem_chains": [
         {
           "text": "| 现代 Rust 验证工具生态（2025-2026） 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -43277,7 +43292,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 44,
+      "matrix_rows": 72,
       "pre_post": {
         "pre": [
           "[Verification Toolchain](01_verification_toolchain.md) · [Hoare 逻辑](../03_operational_semantics/02_hoare_logic.md) · [RustBelt](../02_separation_logic/01_rustbelt.md)",
@@ -52461,7 +52476,7 @@
       "layer": "L6",
       "title": "设计模式概览",
       "positioning": "",
-      "line_count": 3222,
+      "line_count": 3279,
       "theorem_chains": [
         {
           "text": "| **RAII** | 资源泄漏 | 确定性资源管理 ⟹ `Drop`自动调用 | 所有权（Ownership）+作用域 | 边界：`mem::forget`、引用（Reference）循环泄漏 |",
@@ -52873,23 +52888,37 @@
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../00_meta/04_navigation/10_problem_graph.md",
+        "../../01_foundation/00_start/03_closure_basics.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/00_traits/02_dispatch_mechanisms.md",
+        "../../02_intermediate/00_traits/04_advanced_traits.md",
+        "../../02_intermediate/00_traits/05_construction_and_initialization.md",
+        "../../02_intermediate/00_traits/06_derive_traits.md",
         "../../02_intermediate/01_generics/01_generics.md",
         "../../02_intermediate/02_memory_management/01_memory_management.md",
+        "../../02_intermediate/02_memory_management/03_cow_and_borrowed.md",
+        "../../02_intermediate/02_memory_management/04_smart_pointers.md",
         "../../02_intermediate/03_error_handling/01_error_handling.md",
+        "../../02_intermediate/04_types_and_conversions/03_newtype_and_wrapper.md",
+        "../../02_intermediate/05_modules_and_visibility/01_module_system.md",
+        "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/01_async/01_async.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../03_advanced/04_ffi/01_rust_ffi.md",
+        "../../03_advanced/04_ffi/02_ffi_advanced.md",
         "../../05_comparative/00_paradigms/01_paradigm_matrix.md",
         "../../07_future/01_edition_roadmap/04_roadmap.md",
-        "../00_toolchain/01_toolchain.md"
+        "../00_toolchain/01_toolchain.md",
+        "01_patterns.md"
       ],
       "transitions": 8,
       "has_cognitive_path": true,
       "mermaid_blocks": 6,
-      "matrix_rows": 171,
+      "matrix_rows": 202,
       "pre_post": {
         "pre": [
           "> [Traits](../../02_intermediate/00_traits/01_traits.md) ·"
@@ -60666,7 +60695,7 @@
       "layer": "L6",
       "title": "性能优化：Rust 代码的测量与调优",
       "positioning": "> 覆盖 Rust **性能优化**的核心方法论——从基准测试（criterion）、",
-      "line_count": 1271,
+      "line_count": 1401,
       "theorem_chains": [
         {
           "text": "| 性能优化：Rust 代码的测量与调优 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -60717,6 +60746,34 @@
           "lines": 12,
           "should_fail": false,
           "code_preview": "struct BigStruct {     data: [u8; 1024], }  fn make_big() -> BigStruct {     Big..."
+        },
+        {
+          "flags": [],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "fn collect_even(n: usize) -> Vec<u32> {     // 若 n 已知，直接分配 n/2 个容量     let mut v..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn main() {     let mut v1: Vec<u32> = Vec::with_capacity(99);     let v2: Vec<u..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use smallvec::SmallVec;  fn collect_short() -> SmallVec<[u32; 4]> {     let mut ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use hashbrown::HashMap; use rustc_hash::FxHasher; use std::hash::BuildHasherDefa..."
         },
         {
           "flags": [],
@@ -60804,7 +60861,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 32,
+      "matrix_rows": 52,
       "pre_post": {
         "pre": [
           "[Zero Cost Abstractions](../../01_foundation/00_start/02_zero_cost_abstractions.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)",

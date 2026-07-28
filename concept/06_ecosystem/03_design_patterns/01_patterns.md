@@ -3155,7 +3155,7 @@ fn main() {
 **维护者**: Rust 学习项目团队
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 >
 
 ## ⚠️ 反例与陷阱
@@ -3190,6 +3190,63 @@ fn instance() -> &'static String {
     INSTANCE.get_or_init(|| "one".to_string())
 }
 ```
+
+---
+
+## 七、Rust Design Patterns 书映射
+
+> **权威来源**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) —— 本节的章节结构来自该书目录，下方链接指向本知识库 `concept/` 权威页或 `crates/` 可编译示例。完整概念推导请见对应 canonical 页面，此处不重复正文。
+
+[Rust Design Patterns](https://rust-unofficial.github.io/patterns/) 将内容分为 **Idioms（惯用法）**、**Design Patterns（设计模式）**、**Anti-patterns（反模式）** 与 **Functional Programming（函数式编程）** 四部分。下表将书中主要条目映射到本知识库的现有权威页与示例代码。
+
+### 7.1 Idioms 惯用法
+
+| 书中条目 | 本知识库对应位置 | 说明 |
+|:---|:---|:---|
+| Use borrowed types for arguments | [`所有权与借用`](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) | 优先使用 `&T` / `&str` 等借用类型减少克隆 |
+| Constructor / `Default` trait | [`构造与初始化`](../../02_intermediate/00_traits/05_construction_and_initialization.md) · [`派生 Trait`](../../02_intermediate/00_traits/06_derive_traits.md) | `new()` 关联函数与 `#[derive(Default)]` |
+| Collections are smart pointers | [`智能指针`](../../02_intermediate/02_memory_management/04_smart_pointers.md) | `Vec`/`Box` 等即所有权管理抽象 |
+| Finalisation in destructors | [`所有权`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | RAII / `Drop` 确定性资源释放 |
+| On-stack dynamic dispatch | [`分发机制`](../../02_intermediate/00_traits/02_dispatch_mechanisms.md) | `dyn Trait` 与静态分发选型 |
+| Iterating over an `Option` | [`迭代器模式`](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) | `Option`/`Result` 的迭代适配 |
+| Pass variables to closure | [`闭包基础`](../../01_foundation/00_start/03_closure_basics.md) | 闭包捕获与所有权转移 |
+| Privacy for extensibility | [`模块系统`](../../02_intermediate/05_modules_and_visibility/01_module_system.md) | `pub` / `pub(crate)` 的扩展性设计 |
+| FFI idioms | [`Rust FFI`](../../03_advanced/04_ffi/01_rust_ffi.md) | 字符串传递、错误处理等边界惯用法 |
+
+### 7.2 Design Patterns 设计模式
+
+| 书中条目 | 本知识库对应位置 | 说明 |
+|:---|:---|:---|
+| Builder | [本页创建型模式](01_patterns.md) | 消费型/类型状态 Builder |
+| Command | [本页 §4.1](01_patterns.md) · [`crates/c09_design_pattern/src/behavioral/command/mod.rs`](../../../crates/c09_design_pattern/src/behavioral/command/mod.rs) | 请求参数化与撤销 |
+| Interpreter | [本页解释器模式](01_patterns.md) | `enum` + `match` 小 DSL |
+| Newtype | [`Newtype 与包装器`](../../02_intermediate/04_types_and_conversions/03_newtype_and_wrapper.md) | 零成本类型安全 |
+| RAII Guards | [`所有权`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | `Drop` / 作用域守卫 |
+| Strategy | [本页 §4.3](01_patterns.md) · [`crates/c09_design_pattern/src/behavioral/strategy/mod.rs`](../../../crates/c09_design_pattern/src/behavioral/strategy/mod.rs) | 静态/动态算法替换 |
+| Visitor | [本页 §4.2](01_patterns.md) · [`crates/c09_design_pattern/src/behavioral/visitor/mod.rs`](../../../crates/c09_design_pattern/src/behavioral/visitor/mod.rs) | enum `accept` 扩展操作 |
+| State Machine | [本页 §4.4](01_patterns.md) · [`crates/c09_design_pattern/src/behavioral/state/mod.rs`](../../../crates/c09_design_pattern/src/behavioral/state/mod.rs) | 枚举状态机与 Typestate 编译期状态机 |
+| Object-based FFI APIs | [`Rust FFI`](../../03_advanced/04_ffi/01_rust_ffi.md) · [`FFI 高级主题`](../../03_advanced/04_ffi/02_ffi_advanced.md) | opaque pointer / wrapper |
+| Contain unsafety in small modules | [`unsafe Rust`](../../03_advanced/02_unsafe/01_unsafe.md) | 将 `unsafe` 限制在小模块 |
+| Prefer small crates | [本页结构型模式补充视角](01_patterns.md) | crate 拆分与组合设计 |
+
+### 7.3 Anti-patterns 反模式
+
+| 书中条目 | 本知识库对应位置 | 说明 |
+|:---|:---|:---|
+| Clone to satisfy the borrow checker | [`借用`](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [`Cow`](../../02_intermediate/02_memory_management/03_cow_and_borrowed.md) | 优先通过重新设计所有权或 `Cow` 避免盲目克隆 |
+| `#[deny(warnings)]` | [`错误处理`](../../02_intermediate/03_error_handling/01_error_handling.md) | 将 warnings 视为 CI 质量信号而非无条件 deny |
+| Deref polymorphism | [本页反模式](01_patterns.md) | 滥用 `Deref` 隐藏类型边界 |
+| `unwrap()` abuse | [`错误处理`](../../02_intermediate/03_error_handling/01_error_handling.md) | 生产代码优先 `?` / `expect` |
+| String interning pitfalls | [本页享元模式](01_patterns.md) | 字符串驻留的收益边界与过度抽象风险 |
+
+### 7.4 Functional Programming 函数式编程
+
+| 书中条目 | 本知识库对应位置 | 说明 |
+|:---|:---|:---|
+| Generics as type classes | [`泛型`](../../02_intermediate/01_generics/01_generics.md) · [`Trait`](../../02_intermediate/00_traits/01_traits.md) | Rust trait 与 Haskell type class 的对应 |
+| Functional optics | [`类型系统`](../../01_foundation/02_type_system/01_type_system.md) · [`高级 Trait`](../../02_intermediate/00_traits/04_advanced_traits.md) | Lens/Prism 等可通过泛型编码 |
+
+> **映射原则**：本表仅作导航；任何模式的具体推导、边界条件与代码示例，均以上述 canonical 页为准。
 
 ---
 

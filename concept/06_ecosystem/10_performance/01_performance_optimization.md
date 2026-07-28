@@ -50,12 +50,22 @@
     - [2.2 Flamegraph：可视化性能分析](#22-flamegraph可视化性能分析)
     - [2.3 缓存友好性与内存布局](#23-缓存友好性与内存布局)
     - [2.4 RVO/NRVO 与 Copy Elision](#24-rvonrvo-与-copy-elision)
+      - [语义层面：move 就是按位拷贝](#语义层面move-就是按位拷贝)
+      - [优化层面：LLVM 决定 eliminable copy](#优化层面llvm-决定-eliminable-copy)
+      - [何时无法消除](#何时无法消除)
+      - [与 C++ 的对比](#与-c-的对比)
+    - [2.5 Rust Performance Book 标准库优化模式](#25-rust-performance-book-标准库优化模式)
+      - [2.5.1 预分配容量：`with_capacity` / `reserve_exact`](#251-预分配容量with_capacity--reserve_exact)
+      - [2.5.2 复用分配：`clone_from`](#252-复用分配clone_from)
+      - [2.5.3 短向量优化：`SmallVec` / `ArrayVec`](#253-短向量优化smallvec--arrayvec)
+      - [2.5.4 更快的哈希表：`hashbrown` + 定制 hasher](#254-更快的哈希表hashbrown--定制-hasher)
   - [三、优化策略矩阵](#三优化策略矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
+  - [七、国际权威来源对齐](#七国际权威来源对齐)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：性能优化的编译错误](#十边界测试性能优化的编译错误)
@@ -402,6 +412,96 @@ move 语义上：  源地址 → 目标地址 的 memcpy
 
 ---
 
+### 2.5 Rust Performance Book 标准库优化模式
+
+> 本节对应 [Rust Performance Book — Heap Allocations](https://nnethercote.github.io/perf-book/heap-allocations.html) 与 [Standard Library Types](https://nnethercote.github.io/perf-book/standard-library-types.html)，将书中高频建议转化为可直接应用的标准库/生态代码模式。
+
+多数 Rust 性能问题最终落回“减少分配、复用内存、选择更合适的数据结构”。下面四个模式出现频率最高，且不需要 `unsafe`。
+
+#### 2.5.1 预分配容量：`with_capacity` / `reserve_exact`
+
+重复 `push` 会导致 `Vec` 按 0→4→8→16→… 的准倍增策略重新分配。如果已知元素数量，预先分配可消除多次分配与元素拷贝。
+
+```rust
+fn collect_even(n: usize) -> Vec<u32> {
+    // 若 n 已知，直接分配 n/2 个容量
+    let mut v = Vec::with_capacity(n / 2);
+    for i in 0..n {
+        if i % 2 == 0 {
+            v.push(i as u32);
+        }
+    }
+    v
+}
+
+fn main() {
+    let v = collect_even(100);
+    assert!(v.capacity() >= 50);
+    assert_eq!(v.len(), 50);
+}
+```
+
+`HashSet::with_capacity` / `HashMap::with_capacity` 同理：哈希表也是单一连续堆分配，预分配可避免 rehash。
+
+#### 2.5.2 复用分配：`clone_from`
+
+`a.clone_from(&b)` 语义上等价于 `a = b.clone()`，但会尽量复用 `a` 已有的堆分配，避免先释放再分配。
+
+```rust
+fn main() {
+    let mut v1: Vec<u32> = Vec::with_capacity(99);
+    let v2: Vec<u32> = vec![1, 2, 3];
+    v1.clone_from(&v2); // v1 的已有分配被复用
+    assert_eq!(v1, vec![1, 2, 3]);
+    assert_eq!(v1.capacity(), 99);
+}
+```
+
+适用场景：循环中反复把一个新状态克隆到已有缓冲区，例如每帧更新的渲染命令列表、批量解析结果。
+
+#### 2.5.3 短向量优化：`SmallVec` / `ArrayVec`
+
+当向量通常很短但偶尔变长时，`smallvec::SmallVec<[T; N]>` 在栈/结构体内保存前 `N` 个元素，超出后才堆分配，可显著降低分配率。`arrayvec::ArrayVec` 适用于“最大长度已知且绝不超出”的场景。
+
+```rust,ignore
+use smallvec::SmallVec;
+
+fn collect_short() -> SmallVec<[u32; 4]> {
+    let mut v = SmallVec::new();
+    for i in 0..3 {
+        v.push(i); // 完全在 SmallVec 内部，无堆分配
+    }
+    v
+}
+```
+
+注意：`SmallVec` 每次访问都要判断当前是内联还是堆分配，因此普通操作略慢于 `Vec`；且 `SmallVec<[T; N]>` 本身可能比 `Vec<T>` 大。只适合“大量短向量”场景，并需基准测试验证。
+
+#### 2.5.4 更快的哈希表：`hashbrown` + 定制 hasher
+
+Rust 标准库 `HashMap`/`HashSet` 自 1.36 起底层基于 [`hashbrown`](https://github.com/rust-lang/hashbrown)。若仍需独立使用 `hashbrown` 或选择更快（但抗 HashDoS 较弱）的 hasher，可组合 `rustc-hash` / `ahash`：
+
+```rust,ignore
+use hashbrown::HashMap;
+use rustc_hash::FxHasher;
+use std::hash::BuildHasherDefault;
+
+type FxHashMap<K, V> = HashMap<K, V, BuildHasherDefault<FxHasher>>;
+
+fn main() {
+    let mut map: FxHashMap<u32, u32> =
+        FxHashMap::with_capacity_and_hasher(100, Default::default());
+    map.insert(1, 10);
+}
+```
+
+工程建议：默认 `SipHash 1-3` 已经提供强抗 HashDoS 能力；切换到 `FxHasher`/`AHasher` 只在性能分析确认哈希是热点、且输入可信时使用。
+
+> **要点**: 标准库优化模式的核心是“在测量后，用最小侵入性改动减少分配”。这些改动不改变算法复杂度，但在真实工作负载中往往带来数倍收益。
+> [来源: [Rust Performance Book — Heap Allocations](https://nnethercote.github.io/perf-book/heap-allocations.html)] · [来源: [Rust Performance Book — Standard Library Types](https://nnethercote.github.io/perf-book/standard-library-types.html)]
+
+---
+
 ## 三、优化策略矩阵
 
 ```text
@@ -576,6 +676,41 @@ graph TD
 | [cargo-llvm-lines](https://github.com/dtolnay/cargo-llvm-lines) | ✅ 一级 | 泛型（Generics）膨胀分析 |
 | [std::simd](https://doc.rust-lang.org/std/simd/index.html) | ✅ 一级 | SIMD 支持 |
 | [Brendan Gregg — Flame Graphs](https://www.brendangregg.com/flamegraphs.html) | ✅ 二级 | 火焰图发明者 |
+
+---
+
+## 七、国际权威来源对齐
+
+为落实 AGENTS.md 的 canonical 与权威来源要求，本节将 [The Rust Performance Book](https://nnethercote.github.io/perf-book/) 的章节与本知识库现有内容逐一对齐，并标注剩余缺口。
+
+| Rust Performance Book 章节 | 本知识库对应内容 | 覆盖状态 |
+|---|---|---|
+| [1. Introduction](https://nnethercote.github.io/perf-book/introduction.html) | [一、核心概念](#一核心概念) | ✅ 已覆盖 |
+| [2. Benchmarking](https://nnethercote.github.io/perf-book/benchmarking.html) | [2.1 Criterion：统计性基准测试](#21-criterion统计性基准测试) | ✅ 已覆盖 |
+| [3. Build Configuration](https://nnethercote.github.io/perf-book/build-configuration.html) | [1.2 编译器优化层级](#12-编译器优化层级) | ✅ 已覆盖 |
+| [4. Linting](https://nnethercote.github.io/perf-book/linting.html) | Clippy 相关指引散见于各 concept 页 | ⚠️ 缺口：无专门“性能 lint”权威页 |
+| [5. Profiling](https://nnethercote.github.io/perf-book/profiling.html) | [2.2 Flamegraph：可视化性能分析](#22-flamegraph可视化性能分析) | ✅ 已覆盖 |
+| [6. Inlining](https://nnethercote.github.io/perf-book/inlining.html) | [10.6 / 10.7 边界测试](#十边界测试性能优化的编译错误) | ✅ 已覆盖 |
+| [7. Hashing](https://nnethercote.github.io/perf-book/hashing.html) | [2.5 Rust Performance Book 标准库优化模式](#25-rust-performance-book-标准库优化模式) | ✅ 新增覆盖 |
+| [8. Heap Allocations](https://nnethercote.github.io/perf-book/heap-allocations.html) | [2.5 Rust Performance Book 标准库优化模式](#25-rust-performance-book-标准库优化模式) | ✅ 新增覆盖 |
+| [9. Type Sizes](https://nnethercote.github.io/perf-book/type-sizes.html) | [2.3 缓存友好性与内存布局](#23-缓存友好性与内存布局) | ⚠️ 部分覆盖（可扩展 enum/option 布局） |
+| [10. Standard Library Types](https://nnethercote.github.io/perf-book/standard-library-types.html) | [2.5 Rust Performance Book 标准库优化模式](#25-rust-performance-book-标准库优化模式) | ✅ 新增覆盖 |
+| [11. Iterators](https://nnethercote.github.io/perf-book/iterators.html) | [1.3 零成本抽象的验证](#13-零成本抽象的验证) | ⚠️ 部分覆盖（可扩展 `collect`/`extend`/`size_hint`） |
+| [12. Bounds Checks](https://nnethercote.github.io/perf-book/bounds-checks.html) | 边界测试 / `unsafe` 优化 | ⚠️ 缺口：无专门边界检查消除权威页 |
+| [13. I/O](https://nnethercote.github.io/perf-book/io.html) | [补充视角：进程管理性能优化](#补充视角进程管理性能优化) | ✅ 部分覆盖 |
+| [14. Logging and Debugging](https://nnethercote.github.io/perf-book/logging-and-debugging.html) | — | ⚠️ 缺口 |
+| [15. Wrapper Types](https://nnethercote.github.io/perf-book/wrapper-types.html) | — | ⚠️ 缺口 |
+| [16. Machine Code](https://nnethercote.github.io/perf-book/machine-code.html) | [1.3 零成本抽象的验证](#13-零成本抽象的验证) | ✅ 已覆盖 |
+| [17. Parallelism](https://nnethercote.github.io/perf-book/parallelism.html) | [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md)、[Async](../../03_advanced/01_async/01_async.md) | ✅ 已覆盖 |
+| [18. General Tips](https://nnethercote.github.io/perf-book/general-tips.html) | [五、常见陷阱](#五常见陷阱) | ✅ 已覆盖 |
+| [19. Compile Times](https://nnethercote.github.io/perf-book/compile-times.html) | [1.2 编译器优化层级](#12-编译器优化层级)、[三、优化策略矩阵](#三优化策略矩阵) | ✅ 已覆盖 |
+
+**缺口处理计划**：
+
+- **Linting / Logging / Wrapper Types / Bounds Checks**：当前本页为性能优化总览；若后续测量证明这些主题是项目热点，应在 `concept/06_ecosystem/10_performance/` 下新增专门权威页，并通过链接回指本页。
+- **Type Sizes / Iterators**：可在本页扩展现有的小节，但优先保持“测量后补充”原则，避免过度增长总览页。
+
+> **权威来源**: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)
 
 ---
 

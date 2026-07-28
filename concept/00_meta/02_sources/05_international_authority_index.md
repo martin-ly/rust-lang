@@ -48,8 +48,10 @@
     - [学术通用](#学术通用)
   - [五、标准与行业规范](#五标准与行业规范)
   - [六、社区权威博客与演讲](#六社区权威博客与演讲)
-  - [七、使用建议](#七使用建议)
   - [八、国际课程与书籍](#八国际课程与书籍)
+    - [国际课程](#国际课程)
+    - [权威书籍](#权威书籍)
+  - [九、使用建议](#九使用建议)
 
 ---
 
@@ -71,6 +73,8 @@
 | Rust RFCs | <https://rust-lang.github.io/rfcs/> | 语言特性设计、Roadmap |
 | Rust Project Goals | <https://rust-lang.github.io/rust-project-goals/> | 项目目标与年度路线图 |
 | Rust Blog / Inside Rust | <https://blog.rust-lang.org/> · <https://blog.rust-lang.org/inside-rust/> | 发布说明、内部实现更新 |
+| Rust API Guidelines | <https://rust-lang.github.io/api-guidelines/> | API 设计、命名、互操作、可预测性 |
+| Rustfmt Style Guide | <https://rust-lang.github.io/style-guide/> | 代码格式与 style edition |
 
 ---
 
@@ -260,12 +264,18 @@
 |:---|:---|:---|:---|
 | Rust Design Patterns | <https://rust-unofficial.github.io/patterns/> | 社区维护的设计模式书 | [`concept/06_ecosystem/03_design_patterns/01_patterns.md`](../../06_ecosystem/03_design_patterns/01_patterns.md)（P1-4 深化） |
 | Rust Performance Book | <https://nnethercote.github.io/perf-book/> | 性能优化权威指南 | [`concept/06_ecosystem/10_performance/01_performance_optimization.md`](../../06_ecosystem/10_performance/01_performance_optimization.md)（P1-5 深化） |
-| Zero To Production In Rust | <https://www.zero2prod.com/> | 生产级 Rust Web 应用实践 | 待建立映射（P2-1） |
-| Rust for the Linux Kernel | <https://docs.kernel.org/rust/> | Linux 内核 Rust 开发官方文档 | 待建立映射（P2-1） |
+| Zero To Production In Rust | <https://www.zero2prod.com/> | 生产级 Rust Web 应用实践 | [`concept/06_ecosystem/04_web_and_networking/03_web_frameworks.md`](../../06_ecosystem/04_web_and_networking/03_web_frameworks.md) · [`concept/06_ecosystem/00_toolchain/03_devops_and_ci_cd.md`](../../06_ecosystem/00_toolchain/03_devops_and_ci_cd.md) |
+| Rust for the Linux Kernel | <https://docs.kernel.org/rust/> | Linux 内核 Rust 开发官方文档 | [`concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md`](../../06_ecosystem/05_systems_and_embedded/03_embedded_systems.md) |
+| Rust Cookbook | <https://rust-lang-nursery.github.io/rust-cookbook/> | 标准库与生态常用任务示例 | [`concept/01_foundation/05_collections/01_collections.md`](../../01_foundation/05_collections/01_collections.md) 等 L1-L2 权威页 |
+| Rust for Rustaceans | <https://rustforrustaceans.com/> | 中高级 Rust 开发者进阶书 | [`concept/02_intermediate/00_traits/01_traits.md`](../../02_intermediate/00_traits/01_traits.md) · [`concept/03_advanced/02_unsafe/01_unsafe.md`](../../03_advanced/02_unsafe/01_unsafe.md) |
+| Effective Rust | <https://www.lurklurk.org/effective-rust/> | 基于条目的 Rust 工程实践建议 | [`concept/02_intermediate/05_modules_and_visibility/03_api_naming_conventions.md`](../../02_intermediate/05_modules_and_visibility/03_api_naming_conventions.md) |
+| The Little Book of Rust Books | <https://lborb.github.io/book/> | 官方与非官方 Rust 书籍索引 | 元索引（本文件） |
+
+> **P2-1 说明**：以上 4 个新增来源（Zero To Production / Rust for the Linux Kernel / Rust Cookbook / Rust for Rustaceans / Effective Rust）使本节来源数从 4 扩展到 9；连同官方文档、形式化生态、工业生态，项目国际权威来源索引总数从 53 扩展到 60+。
 
 ---
 
-## 七、使用建议
+## 九、使用建议
 
 1. **新增 concept/ 文件时**：优先从此索引选取 2–4 个相关权威来源写入 frontmatter 的 `> **来源**: ...`。
 2. **引用学术来源时**：给出论文标题、会议/期刊、DOI 或项目主页。
