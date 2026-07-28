@@ -481,7 +481,7 @@ flowchart TD
 | [Hoare 逻辑：程序验证的形式化基础与 Rust 契约](../../04_formal/03_operational_semantics/02_hoare_logic.md) | 推理/定理节 ×3 | 反命题与边界分析 · 反命题树 |
 | [操作语义：程序行为的形式化定义](../../04_formal/03_operational_semantics/03_operational_semantics.md) | 推理/定理节 ×3 | 反命题与边界分析 · 反命题树 |
 | [Axiomatic Semantics](../../04_formal/03_operational_semantics/05_axiomatic_semantics.md) | 推理/定理节 ×4 | 反命题与边界分析 · 反命题树 |
-| [常量求值](../../04_formal/03_operational_semantics/07_constant_evaluation.md) | 定理链元数据 ✓ | 定理链元数据 |
+| [常量求值](../../04_formal/03_operational_semantics/08_constant_evaluation.md) | 定理链元数据 ✓ | 定理链元数据 |
 | [Verification Toolchain Selection Guide](../../04_formal/04_model_checking/01_verification_toolchain.md) | 推理/定理节 ×1 | 核心推理链 |
 | [航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)](../../04_formal/04_model_checking/03_aerospace_certification_formal_methods.md) | 推理/定理节 ×1 | 核心推理链 |
 | [现代 Rust 验证工具生态](../../04_formal/04_model_checking/04_modern_verification_tools.md) | 推理/定理节 ×1 | 核心推理链 |

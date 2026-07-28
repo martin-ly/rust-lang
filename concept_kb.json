@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 574,
-    "generated_at": "2026-07-28T23:15:36.980568+00:00"
+    "total_files": 577,
+    "generated_at": "2026-07-28T23:35:41.202409+00:00"
   },
   "files": [
     {
@@ -1670,7 +1670,7 @@
         "../../04_formal/00_type_theory/09_type_system_reference.md",
         "../../04_formal/01_ownership_logic/04_borrow_checking_decidability.md",
         "../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md",
-        "../../04_formal/03_operational_semantics/07_constant_evaluation.md",
+        "../../04_formal/03_operational_semantics/08_constant_evaluation.md",
         "../../04_formal/05_rustc_internals/01_rustc_query_system.md",
         "../../04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md",
         "../../04_formal/05_rustc_internals/03_trait_solver_in_rustc.md",
@@ -3369,7 +3369,7 @@
       "layer": "L0",
       "title": "测验体系注册表（Quiz Registry）",
       "positioning": "",
-      "line_count": 152,
+      "line_count": 153,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -3805,8 +3805,8 @@
         "../../04_formal/03_operational_semantics/03_operational_semantics.md",
         "../../04_formal/03_operational_semantics/04_evaluation_strategies.md",
         "../../04_formal/03_operational_semantics/05_axiomatic_semantics.md",
-        "../../04_formal/03_operational_semantics/06_aeneas_symbolic_semantics.md",
-        "../../04_formal/03_operational_semantics/07_constant_evaluation.md",
+        "../../04_formal/03_operational_semantics/07_aeneas_symbolic_semantics.md",
+        "../../04_formal/03_operational_semantics/08_constant_evaluation.md",
         "../../04_formal/04_model_checking/01_verification_toolchain.md",
         "../../04_formal/04_model_checking/02_formal_methods.md",
         "../../04_formal/04_model_checking/03_aerospace_certification_formal_methods.md",
@@ -4408,8 +4408,8 @@
         "../../04_formal/03_operational_semantics/03_operational_semantics.md",
         "../../04_formal/03_operational_semantics/04_evaluation_strategies.md",
         "../../04_formal/03_operational_semantics/05_axiomatic_semantics.md",
-        "../../04_formal/03_operational_semantics/06_aeneas_symbolic_semantics.md",
-        "../../04_formal/03_operational_semantics/07_constant_evaluation.md",
+        "../../04_formal/03_operational_semantics/07_aeneas_symbolic_semantics.md",
+        "../../04_formal/03_operational_semantics/08_constant_evaluation.md",
         "../../04_formal/04_model_checking/01_verification_toolchain.md",
         "../../04_formal/04_model_checking/02_formal_methods.md",
         "../../04_formal/04_model_checking/03_aerospace_certification_formal_methods.md",
@@ -5137,8 +5137,8 @@
         "../../04_formal/03_operational_semantics/03_operational_semantics.md",
         "../../04_formal/03_operational_semantics/04_evaluation_strategies.md",
         "../../04_formal/03_operational_semantics/05_axiomatic_semantics.md",
-        "../../04_formal/03_operational_semantics/06_aeneas_symbolic_semantics.md",
-        "../../04_formal/03_operational_semantics/07_constant_evaluation.md",
+        "../../04_formal/03_operational_semantics/07_aeneas_symbolic_semantics.md",
+        "../../04_formal/03_operational_semantics/08_constant_evaluation.md",
         "../../04_formal/04_model_checking/01_verification_toolchain.md",
         "../../04_formal/04_model_checking/03_aerospace_certification_formal_methods.md",
         "../../04_formal/04_model_checking/04_modern_verification_tools.md",
@@ -6108,7 +6108,7 @@
           "type": "table_row"
         },
         {
-          "text": "| [语句与表达式参考](../../04_formal/05_rustc_internals/13_statements_and_expressions_reference.md) | ⟹ | [常量求值](../../04_formal/03_operational_semantics/07_constant_evaluation.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [语句与表达式参考](../../04_formal/05_rustc_internals/13_statements_and_expressions_reference.md) | ⟹ | [常量求值](../../04_formal/03_operational_semantics/08_constant_evaluation.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -7128,7 +7128,7 @@
         "../../04_formal/03_operational_semantics/03_operational_semantics.md",
         "../../04_formal/03_operational_semantics/04_evaluation_strategies.md",
         "../../04_formal/03_operational_semantics/05_axiomatic_semantics.md",
-        "../../04_formal/03_operational_semantics/07_constant_evaluation.md",
+        "../../04_formal/03_operational_semantics/08_constant_evaluation.md",
         "../../04_formal/04_model_checking/01_verification_toolchain.md",
         "../../04_formal/04_model_checking/04_modern_verification_tools.md",
         "../../04_formal/04_model_checking/07_autoverus.md",
@@ -7580,7 +7580,7 @@
         "../../04_formal/03_operational_semantics/02_hoare_logic.md",
         "../../04_formal/03_operational_semantics/03_operational_semantics.md",
         "../../04_formal/03_operational_semantics/05_axiomatic_semantics.md",
-        "../../04_formal/03_operational_semantics/07_constant_evaluation.md",
+        "../../04_formal/03_operational_semantics/08_constant_evaluation.md",
         "../../04_formal/04_model_checking/01_verification_toolchain.md",
         "../../04_formal/04_model_checking/03_aerospace_certification_formal_methods.md",
         "../../04_formal/04_model_checking/04_modern_verification_tools.md",
@@ -15714,7 +15714,7 @@
         "../../00_meta/01_terminology/01_terminology_glossary.md",
         "../../02_intermediate/01_generics/01_generics.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
-        "../../04_formal/03_operational_semantics/07_constant_evaluation.md",
+        "../../04_formal/03_operational_semantics/08_constant_evaluation.md",
         "../02_type_system/01_type_system.md",
         "../04_control_flow/01_control_flow.md"
       ],
@@ -15727,7 +15727,7 @@
           "[Type System Basics](../02_type_system/01_type_system.md) · [Functions and Control Flow](../04_control_flow/01_control_flow.md)"
         ],
         "post": [
-          "[Generics](../../02_intermediate/01_generics/01_generics.md) · [Constant Evaluation](../../04_formal/03_operational_semantics/07_constant_evaluation.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)"
+          "[Generics](../../02_intermediate/01_generics/01_generics.md) · [Constant Evaluation](../../04_formal/03_operational_semantics/08_constant_evaluation.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)"
         ]
       },
       "backward_chains": 3,
@@ -32100,7 +32100,7 @@
         "../../02_intermediate/03_error_handling/03_panic.md",
         "../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md",
         "../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md",
-        "../../04_formal/03_operational_semantics/08_llvm_ir_poison_ub.md",
+        "../../04_formal/03_operational_semantics/09_llvm_ir_poison_ub.md",
         "../../04_formal/05_rustc_internals/08_type_layout.md",
         "../../07_future/00_version_tracking/feature_domain_matrix_197.md",
         "../../07_future/00_version_tracking/migration_197_decision_tree.md",
@@ -40848,6 +40848,206 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\00_type_theory\\15_parametricity_and_theorems_for_free.md",
+      "layer": "L4",
+      "title": "Parametricity 与免费定理（Parametricity and Theorems for Free）",
+      "positioning": "",
+      "line_count": 349,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 五、反命题"
+        },
+        {
+          "title": "### 5.1 反例"
+        },
+        {
+          "title": "### 5.2 反例"
+        },
+        {
+          "title": "### 5.3 反例"
+        },
+        {
+          "title": "### 5.4 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "fn id<T>(x: T) -> T {     x }  fn main() {     assert_eq!(id(42), 42);     asser..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "fn reverse<T>(mut v: Vec<T>) -> Vec<T> {     v.reverse();     v }  fn main() {  ..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "fn double(x: i32) -> i32 { x * 2 } fn add_one(x: i32) -> i32 { x + 1 }  fn main(..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "fn not_id<T>(x: T) -> T {     loop {} // 永不完结，类型仍是 T -> T，但语义不是 id } ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn default_or<T: Default>(x: T) -> T {     if std::mem::size_of::<T>() == 1 {   ..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "fn zero<T: Default + PartialOrd>(x: T) -> T {     let d = T::default();     if x..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use std::any::{Any, TypeId};  fn suspicious<T: 'static>(x: T) -> T {     if Type..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "struct Loud<T>(T); impl<T> Drop for Loud<T> {     fn drop(&mut self) { println!(..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/01_generics/01_generics.md",
+        "../02_separation_logic/01_rustbelt.md",
+        "01_type_theory.md",
+        "02_subtype_variance.md",
+        "04_category_theory.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 15,
+      "pre_post": {
+        "pre": [
+          "[Type Theory](01_type_theory.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)"
+        ],
+        "post": [
+          "[Subtyping and Variance](02_subtype_variance.md) · [Category Theory](04_category_theory.md) · [RustBelt](../02_separation_logic/01_rustbelt.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\00_type_theory\\16_expressive_power.md",
+      "layer": "L4",
+      "title": "Felleisen 表达力（Felleisen Expressive Power）",
+      "positioning": "",
+      "line_count": 362,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 五、反命题"
+        },
+        {
+          "title": "### 5.1 反例"
+        },
+        {
+          "title": "### 5.2 反例"
+        },
+        {
+          "title": "### 5.3 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "// `vec!` 是一个声明宏；它局部展开为 Vec 的构造代码。 let v = vec![1, 2, 3]; ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "let v = {     let mut __v = Vec::new();     __v.push(1);     __v.push(2);     __..."
+        },
+        {
+          "flags": [],
+          "lines": 23,
+          "should_fail": false,
+          "code_preview": "/// 所有权转移：返回值的所有权从函数内部转移到调用者。 pub fn make_string() -> String {     String::from(..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "/// 返回两个字符串切片中较长者的引用。 /// 生命周期标注 'a 说明：返回值的生命周期不超过 x 或 y 中较短者。 pub fn longest<'a..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "pub trait Area {     fn area(&self) -> f64; }  pub struct Circle { pub radius: f..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// 声明宏示例：简化重复的错误处理模式。 macro_rules! bail {     ($($arg:tt)*) => {         return ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "// 这段代码不能编译：Rust 不支持 `F<_>` 形式的类型构造器参数。 trait Mappable<F<_>, A, B> {     fn map(..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "// 非法：Rust 不能根据运行时值 n 构造类型 Vector<n>。 fn make_vector<const N: usize>(n: usize) -..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "// 过程宏不能根据 `x` 的类型生成不同代码；它只能看到 Token 树。 #[derive(Debug)] struct Point { x: i32, ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/03_proc_macros/01_macros.md",
+        "01_type_theory.md",
+        "05_lambda_calculus.md",
+        "06_type_semantics.md",
+        "10_dependent_refinement_types.md",
+        "13_formal_algorithm_theory.md",
+        "14_flux.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 6,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\04_formal\\01_ownership_logic\\01_linear_logic.md",
       "layer": "L4",
       "title": "线性逻辑与仿射逻辑",
@@ -41252,7 +41452,7 @@
         "../00_type_theory/01_type_theory.md",
         "../00_type_theory/02_subtype_variance.md",
         "../02_separation_logic/01_rustbelt.md",
-        "../03_operational_semantics/06_aeneas_symbolic_semantics.md",
+        "../03_operational_semantics/07_aeneas_symbolic_semantics.md",
         "01_linear_logic.md",
         "04_borrow_checking_decidability.md",
         "https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md"
@@ -42767,7 +42967,101 @@
       "templated_chains": 0
     },
     {
-      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\03_operational_semantics\\06_aeneas_symbolic_semantics.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\03_operational_semantics\\06_observational_equivalence.md",
+      "layer": "L4",
+      "title": "观察等价性：程序行为的外部不可区分性",
+      "positioning": "介绍**观察等价性（Observational Equivalence）**——从外部可观察行为的角度定义程序片段是否\"相同\"，并说明它与操作语义、上下文等价、双模拟以及 Rust 编译器优化、unsafe 边界之间的关系。",
+      "line_count": 307,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 三、反命题"
+        },
+        {
+          "title": "### 3.1 反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "let a = 2 + 3; let b = 1 + 4; ..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "fn double(x: i32) -> i32 { x * 2 } fn shift_left(x: i32) -> i32 { x << 1 } ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn consume(v: Vec<i32>) -> usize { v.len() }  let v1 = vec![1, 2, 3]; let n1 = c..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "let v = vec![1, 2, 3]; let r = &v;          // 借用 let n = v.len();     // 通过共享借用..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "fn optimized() -> i32 {     let x = 42;          // 死变量，可被消除     let y = 10;    ..."
+        },
+        {
+          "flags": [],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "fn optimized() -> i32 { 15 } ..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "unsafe fn raw_swap(a: *mut i32, b: *mut i32) {     let t = *a;     *a = *b;     ..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "fn f1(x: i32) -> i32 { x + x } fn f2(x: i32) -> i32 { x * 2 } ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../01_ownership_logic/02_ownership_formal.md",
+        "../01_ownership_logic/05_tree_borrows_deep_dive.md",
+        "../02_separation_logic/01_rustbelt.md",
+        "../02_separation_logic/02_separation_logic.md",
+        "01_denotational_semantics.md",
+        "03_operational_semantics.md",
+        "04_evaluation_strategies.md",
+        "05_axiomatic_semantics.md",
+        "07_aeneas_symbolic_semantics.md",
+        "09_llvm_ir_poison_ub.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 5,
+      "pre_post": {
+        "pre": [
+          "[操作语义](03_operational_semantics.md) · [指称语义](01_denotational_semantics.md) · [公理语义](05_axiomatic_semantics.md) · [求值策略](04_evaluation_strategies.md) · [所有权形式化](../01_ownership_logic/02_ownership_formal.md)"
+        ],
+        "post": [
+          "[RustBelt](../02_separation_logic/01_rustbelt.md) · [分离逻辑](../02_separation_logic/02_separation_logic.md) · [Tree Borrows](../01_ownership_logic/05_tree_borrows_deep_dive.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\03_operational_semantics\\07_aeneas_symbolic_semantics.md",
       "layer": "L4",
       "title": "Aeneas Symbolic Semantics（Aeneas 符号化语义）",
       "positioning": "",
@@ -42841,7 +43135,7 @@
       "templated_chains": 0
     },
     {
-      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\03_operational_semantics\\07_constant_evaluation.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\03_operational_semantics\\08_constant_evaluation.md",
       "layer": "L4",
       "title": "常量求值（Constant Evaluation）",
       "positioning": "",
@@ -42914,7 +43208,7 @@
       "templated_chains": 0
     },
     {
-      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\03_operational_semantics\\08_llvm_ir_poison_ub.md",
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\03_operational_semantics\\09_llvm_ir_poison_ub.md",
       "layer": "L4",
       "title": "LLVM IR 中的 Poison、Undefined Behavior 与 Freeze",
       "positioning": "",
@@ -45293,7 +45587,7 @@
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../03_advanced/06_low_level_patterns/09_variables.md",
         "../03_operational_semantics/03_operational_semantics.md",
-        "../03_operational_semantics/07_constant_evaluation.md",
+        "../03_operational_semantics/08_constant_evaluation.md",
         "09_destructors.md",
         "14_patterns_reference.md"
       ],
@@ -45306,7 +45600,7 @@
           "[Statements and Expressions](../../01_foundation/04_control_flow/04_statements_and_expressions.md) · [Variables](../../03_advanced/06_low_level_patterns/09_variables.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md)"
         ],
         "post": [
-          "[Patterns Reference](14_patterns_reference.md) · [Constant Evaluation](../03_operational_semantics/07_constant_evaluation.md) · [Destructors](09_destructors.md)"
+          "[Patterns Reference](14_patterns_reference.md) · [Constant Evaluation](../03_operational_semantics/08_constant_evaluation.md) · [Destructors](09_destructors.md)"
         ]
       },
       "backward_chains": 0,
@@ -52281,7 +52575,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/01_terminology_glossary.md",
-        "../../04_formal/03_operational_semantics/08_llvm_ir_poison_ub.md",
+        "../../04_formal/03_operational_semantics/09_llvm_ir_poison_ub.md",
         "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
         "../../07_future/00_version_tracking/rust_1_91_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_97_1.md",
@@ -69270,7 +69564,7 @@
       "sources": [],
       "cross_references": [
         "../../03_advanced/02_unsafe/06_memory_model.md",
-        "../../04_formal/03_operational_semantics/08_llvm_ir_poison_ub.md",
+        "../../04_formal/03_operational_semantics/09_llvm_ir_poison_ub.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/00_toolchain/09_llvm_backend_and_codegen.md",
         "../../06_ecosystem/01_cargo/13_cargo_security_cves.md",
@@ -73673,7 +73967,7 @@
       "cross_references": [
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../01_foundation/02_type_system/03_numerics.md",
-        "../../04_formal/03_operational_semantics/07_constant_evaluation.md",
+        "../../04_formal/03_operational_semantics/08_constant_evaluation.md",
         "../../04_formal/05_rustc_internals/05_application_binary_interface.md",
         "../../06_ecosystem/11_domain_applications/13_machine_learning_ecosystem.md",
         "../00_version_tracking/01_rust_version_tracking.md",

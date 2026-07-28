@@ -13,7 +13,7 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×App
 > **前置概念**: [Type System Basics](../02_type_system/01_type_system.md) · [Functions and Control Flow](../04_control_flow/01_control_flow.md)
-> **后置概念**: [Generics](../../02_intermediate/01_generics/01_generics.md) · [Constant Evaluation](../../04_formal/03_operational_semantics/07_constant_evaluation.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
+> **后置概念**: [Generics](../../02_intermediate/01_generics/01_generics.md) · [Constant Evaluation](../../04_formal/03_operational_semantics/08_constant_evaluation.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
 >
 > **主要来源**: [The Rust Reference — Constant Items](https://doc.rust-lang.org/reference/items/constant-items.html) ·
 > [The Rust Reference — Const Functions](https://doc.rust-lang.org/reference/const_eval.html#const-functions) ·

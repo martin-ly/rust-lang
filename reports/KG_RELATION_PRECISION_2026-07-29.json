@@ -1,29 +1,29 @@
 {
   "summary": {
     "date": "2026-07-29",
-    "total_relations": 9187,
+    "total_relations": 9226,
     "generic_relation_annotation_count": 0,
     "generic_ratio_global": 0.0,
     "core_entities": 50,
-    "core_relations": 2588,
+    "core_relations": 2597,
     "core_generic_count": 0,
     "core_generic_ratio": 0.0,
     "core_lacking_semantic": 0,
     "global_predicate_distribution": {
-      "ex:hasPart": 3992,
-      "ex:dependsOn": 1885,
-      "ex:entails": 1353,
-      "ex:relatedTo": 896,
-      "ex:refines": 484,
+      "ex:hasPart": 3999,
+      "ex:dependsOn": 1893,
+      "ex:entails": 1360,
+      "ex:relatedTo": 900,
+      "ex:refines": 497,
       "ex:partOf": 450,
       "ex:appliesTo": 127
     },
     "core_predicate_distribution": {
-      "ex:dependsOn": 1021,
-      "ex:hasPart": 619,
-      "ex:entails": 385,
+      "ex:dependsOn": 1025,
+      "ex:hasPart": 621,
+      "ex:entails": 386,
       "ex:relatedTo": 285,
-      "ex:refines": 138,
+      "ex:refines": 140,
       "ex:partOf": 109,
       "ex:appliesTo": 31
     }
@@ -352,7 +352,7 @@
     "ex:Generics": [
       [
         "ex:dependsOn",
-        61
+        62
       ],
       [
         "ex:entails",
@@ -520,7 +520,7 @@
     "ex:OwnershipFormalization": [
       [
         "ex:dependsOn",
-        20
+        21
       ],
       [
         "ex:entails",
@@ -618,7 +618,7 @@
       ],
       [
         "ex:entails",
-        41
+        42
       ],
       [
         "ex:relatedTo",
@@ -670,7 +670,7 @@
     "ex:Traits": [
       [
         "ex:dependsOn",
-        91
+        92
       ],
       [
         "ex:entails",
@@ -726,7 +726,7 @@
     "ex:TypeTheory": [
       [
         "ex:dependsOn",
-        26
+        27
       ],
       [
         "ex:entails",

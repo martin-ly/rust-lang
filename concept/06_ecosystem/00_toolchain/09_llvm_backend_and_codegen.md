@@ -346,7 +346,7 @@ load (select cond, ptr_1, ptr_2)
 - **release 构建测试**：某些优化 bug 只在优化构建下暴露，关键路径应在 release 配置下跑集成测试。
 - **最小复现是定位后端 bug 的关键**：当崩溃无法从源代码解释时，尝试用 `-C opt-level=0` 和 `-C opt-level=3` 对比，缩小到优化器问题。
 
-> 完整技术细节见 [Rust 1.97.1 稳定补丁](../../07_future/00_version_tracking/rust_1_97_1.md) 与 [LLVM IR 中的 Poison、Undefined Behavior 与 Freeze](../../04_formal/03_operational_semantics/08_llvm_ir_poison_ub.md)。
+> 完整技术细节见 [Rust 1.97.1 稳定补丁](../../07_future/00_version_tracking/rust_1_97_1.md) 与 [LLVM IR 中的 Poison、Undefined Behavior 与 Freeze](../../04_formal/03_operational_semantics/09_llvm_ir_poison_ub.md)。
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 

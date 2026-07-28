@@ -1,41 +1,41 @@
 {
   "date": "2026-07-29",
-  "scanned": 565,
+  "scanned": 568,
   "coverage": {
     "P0": [
-      559,
+      562,
       98.9
     ],
     "P1": [
-      484,
+      487,
       85.7
     ],
     "P2": [
-      448,
-      79.3
+      449,
+      79.0
     ],
     "any": [
-      565,
+      568,
       100.0
     ],
     "none": 0
   },
   "content_scope": {
-    "scanned": 474,
+    "scanned": 477,
     "P0": [
-      473,
+      476,
       99.8
     ],
     "P1": [
-      430,
-      90.7
+      433,
+      90.8
     ],
     "P2": [
-      431,
-      90.9
+      432,
+      90.6
     ],
     "any": [
-      474,
+      477,
       100.0
     ],
     "gaps_p1": [
@@ -95,6 +95,8 @@
       "concept/03_advanced/02_unsafe/09_sanitizers.md",
       "concept/03_advanced/04_ffi/05_unsafe_extern_blocks.md",
       "concept/04_formal/00_type_theory/14_flux.md",
+      "concept/04_formal/00_type_theory/15_parametricity_and_theorems_for_free.md",
+      "concept/04_formal/03_operational_semantics/06_observational_equivalence.md",
       "concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md",
       "concept/04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md",
       "concept/04_formal/08_algorithm_semantics/03_iterator_correctness.md",
@@ -152,9 +154,9 @@
       "any": 74
     },
     "L4": {
-      "n": 92,
-      "P0": 92,
-      "any": 92
+      "n": 95,
+      "P0": 95,
+      "any": 95
     },
     "L5": {
       "n": 27,

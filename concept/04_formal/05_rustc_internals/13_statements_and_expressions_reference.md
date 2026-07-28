@@ -12,7 +12,7 @@
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
 > **前置依赖**: [Statements and Expressions](../../01_foundation/04_control_flow/04_statements_and_expressions.md) · [Variables](../../03_advanced/06_low_level_patterns/09_variables.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md)
-> **后置概念**: [Patterns Reference](14_patterns_reference.md) · [Constant Evaluation](../03_operational_semantics/07_constant_evaluation.md) · [Destructors](09_destructors.md)
+> **后置概念**: [Patterns Reference](14_patterns_reference.md) · [Constant Evaluation](../03_operational_semantics/08_constant_evaluation.md) · [Destructors](09_destructors.md)
 > **定理链**: Statement → Expression → Value / Effect
 >
 > **来源**: [Rust Reference — Statements and Expressions](https://doc.rust-lang.org/reference/statements-and-expressions.html) · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
@@ -146,7 +146,7 @@ let x = unsafe { *raw_ptr };
 |:---|:---|
 | [Patterns Reference](14_patterns_reference.md) | 多种表达式上下文依赖模式 |
 | [Destructors](09_destructors.md) | 临时值作用域决定析构时机 |
-| [Constant Evaluation](../03_operational_semantics/07_constant_evaluation.md) | 常量上下文限制可用表达式 |
+| [Constant Evaluation](../03_operational_semantics/08_constant_evaluation.md) | 常量上下文限制可用表达式 |
 | [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) | `unsafe` 块是特殊表达式 |
 | [Async/Await](../../03_advanced/01_async/01_async.md) | `await` 表达式只能在 async 上下文中使用 |
 

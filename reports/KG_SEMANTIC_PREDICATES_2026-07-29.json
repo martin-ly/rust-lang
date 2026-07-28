@@ -18,10 +18,10 @@
     "framework"
   ],
   "min_confidence": 0.75,
-  "processed_entities": 536,
-  "processed_relations": 18368,
+  "processed_entities": 539,
+  "processed_relations": 18416,
   "processed_generic_remaining": 797,
-  "changed_relations": 8518,
+  "changed_relations": 8557,
   "below_threshold_skipped": 0,
   "batch_statistics": [
     {
@@ -34,9 +34,9 @@
     {
       "batch": "l2",
       "entities": 40,
-      "relations": 1175,
+      "relations": 1179,
       "generic_remaining": 44,
-      "generic_ratio": 0.0374
+      "generic_ratio": 0.0373
     },
     {
       "batch": "async",
@@ -48,16 +48,16 @@
     {
       "batch": "unsafe",
       "entities": 10,
-      "relations": 384,
+      "relations": 385,
       "generic_remaining": 11,
       "generic_ratio": 0.0286
     },
     {
       "batch": "formal",
-      "entities": 94,
-      "relations": 1781,
+      "entities": 97,
+      "relations": 1820,
       "generic_remaining": 80,
-      "generic_ratio": 0.0449
+      "generic_ratio": 0.044
     },
     {
       "batch": "l5",
@@ -83,14 +83,14 @@
     {
       "batch": "l3_rem",
       "entities": 43,
-      "relations": 934,
+      "relations": 935,
       "generic_remaining": 47,
       "generic_ratio": 0.0503
     },
     {
       "batch": "meta_navigation",
       "entities": 29,
-      "relations": 3447,
+      "relations": 3450,
       "generic_remaining": 63,
       "generic_ratio": 0.0183
     },
@@ -124,23 +124,23 @@
     }
   ],
   "before_type_distribution": {
-    "ex:RelationAnnotation": 9187
+    "ex:RelationAnnotation": 9226
   },
   "after_type_distribution": {
-    "ex:relatedTo": 6726,
-    "ex:dependsOn": 936,
-    "ex:entails": 856,
+    "ex:relatedTo": 6750,
+    "ex:dependsOn": 944,
+    "ex:entails": 863,
     "ex:RelationAnnotation": 669
   },
   "before_predicate_distribution": {
-    "ex:relatedTo": 7320,
-    "ex:dependsOn": 981,
-    "ex:entails": 886
+    "ex:relatedTo": 7344,
+    "ex:dependsOn": 989,
+    "ex:entails": 893
   },
   "after_predicate_distribution": {
-    "ex:relatedTo": 7320,
-    "ex:dependsOn": 981,
-    "ex:entails": 886
+    "ex:relatedTo": 7344,
+    "ex:dependsOn": 989,
+    "ex:entails": 893
   },
   "changes_sample": [
     {
@@ -2696,12 +2696,12 @@
       "subject": "ex:ConstItemsAndConstFunctions",
       "object": "ex:ConstantEvaluation",
       "subject_path": "01_foundation/07_modules_and_items/09_const_items_and_const_fn.md",
-      "object_path": "04_formal/03_operational_semantics/07_constant_evaluation.md",
+      "object_path": "04_formal/03_operational_semantics/08_constant_evaluation.md",
       "old_type": "ex:RelationAnnotation",
       "old_predicate": "ex:entails",
       "new_predicate": "ex:entails",
       "rule": "existing-semantic",
-      "source": "postrequisite:../../04_formal/03_operational_semantics/07_constant_evaluation.md",
+      "source": "postrequisite:../../04_formal/03_operational_semantics/08_constant_evaluation.md",
       "confidence": 1.0
     },
     {

@@ -7,7 +7,7 @@
   "dedup_score": 100.0,
   "kg_score": 100.0,
   "inputs": {
-    "metadata_flagged": "1/599",
+    "metadata_flagged": "1/602",
     "topology_T1_def_low_rate": 0.0,
     "topology_T2_top_rate": 0.749,
     "overlap_hits": 510,

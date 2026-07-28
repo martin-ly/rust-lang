@@ -171,7 +171,7 @@ let val = unsafe { x.assume_init() };
 - patch release 中的编译器 bug 修复应视为安全事件；
 - 当遇到无法从源代码解释的崩溃时，应考虑后端优化 bug 的可能性。
 
-> 案例详情见 [Rust 1.97.1 稳定补丁](../../07_future/00_version_tracking/rust_1_97_1.md)；LLVM IR 层面的 poison/UB/freeze 语义见 [LLVM IR 中的 Poison、Undefined Behavior 与 Freeze](../../04_formal/03_operational_semantics/08_llvm_ir_poison_ub.md)。
+> 案例详情见 [Rust 1.97.1 稳定补丁](../../07_future/00_version_tracking/rust_1_97_1.md)；LLVM IR 层面的 poison/UB/freeze 语义见 [LLVM IR 中的 Poison、Undefined Behavior 与 Freeze](../../04_formal/03_operational_semantics/09_llvm_ir_poison_ub.md)。
 
 ## 六、别名模型：Stacked Borrows / Tree Borrows
 

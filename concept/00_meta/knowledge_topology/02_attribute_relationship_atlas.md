@@ -247,8 +247,8 @@
 | [操作语义：程序行为的形式化定义](../../04_formal/03_operational_semantics/03_operational_semantics.md) | L4 形式化理论层 | 研究者 | 专家级 | — | L4-L5 | — |
 | [求值策略：Call-by-Value, Call-by-Name, Call-by-Need](../../04_formal/03_operational_semantics/04_evaluation_strategies.md) | L4 形式化理论层 | 研究者 | 专家级 | S | L4-L5 | — |
 | [Axiomatic Semantics](../../04_formal/03_operational_semantics/05_axiomatic_semantics.md) | L4 形式化理论层 | 研究者 | 专家级 | — | — | — |
-| [Aeneas Symbolic Semantics](../../04_formal/03_operational_semantics/06_aeneas_symbolic_semantics.md) | L4 形式化理论层 | 研究者 | 专家级 | — | L4-L5 | — |
-| [常量求值](../../04_formal/03_operational_semantics/07_constant_evaluation.md) | L4 形式化理论层 | 研究者 | 研究级 | S | L2-L3 | Const Context → Constant Expression → Compile-time Evaluation |
+| [Aeneas Symbolic Semantics](../../04_formal/03_operational_semantics/07_aeneas_symbolic_semantics.md) | L4 形式化理论层 | 研究者 | 专家级 | — | L4-L5 | — |
+| [常量求值](../../04_formal/03_operational_semantics/08_constant_evaluation.md) | L4 形式化理论层 | 研究者 | 研究级 | S | L2-L3 | Const Context → Constant Expression → Compile-time Evaluation |
 | [Verification Toolchain Selection Guide](../../04_formal/04_model_checking/01_verification_toolchain.md) | L4 形式化理论层 | 研究者 | 专家级 | P | L3-L5 | — |
 | [形式化方法在 Rust 中的应用](../../04_formal/04_model_checking/02_formal_methods.md) | L4 形式化理论层 | — | — | — | — | — |
 | [航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)](../../04_formal/04_model_checking/03_aerospace_certification_formal_methods.md) | L4 形式化理论层 | 研究者 | 专家级 | — | L4-L5 | — |

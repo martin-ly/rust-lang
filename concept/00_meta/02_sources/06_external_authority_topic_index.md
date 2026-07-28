@@ -127,7 +127,7 @@
 | Linkage | [Linkage](../../03_advanced/04_ffi/03_linkage.md) | ✅ |
 | Inline assembly | [Inline Assembly](../../03_advanced/05_inline_assembly/01_inline_assembly.md) | ✅ |
 | Unsafety / unsafe keyword / Behavior considered undefined / Behavior not considered unsafe | [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Behavior Considered Undefined](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md) | ✅ |
-| Constant evaluation | [Constant Evaluation](../../04_formal/03_operational_semantics/07_constant_evaluation.md) | ✅ |
+| Constant evaluation | [Constant Evaluation](../../04_formal/03_operational_semantics/08_constant_evaluation.md) | ✅ |
 | Application binary interface | [Application Binary Interface](../../04_formal/05_rustc_internals/05_application_binary_interface.md) | ✅ |
 | The Rust runtime | [The Rust Runtime](../../03_advanced/06_low_level_patterns/07_rust_runtime.md) | ✅ |
 | Appendices (Grammar, Syntax index, Macro ambiguity, Influences, Glossary) | [Reference Appendices](../../04_formal/05_rustc_internals/17_reference_appendices.md) | ✅ |

@@ -265,7 +265,7 @@
 | [词法结构](../../04_formal/05_rustc_internals/10_lexical_structure.md) | ⟹ | [条目参考](../../04_formal/05_rustc_internals/11_items_reference.md) | 后置概念引用（蕴含/导向） |
 | [条目参考](../../04_formal/05_rustc_internals/11_items_reference.md) | ⟸ | [属性](../../04_formal/05_rustc_internals/12_attributes.md) | 源在目标的前置元数据中（目标依赖源） |
 | [语句与表达式参考](../../04_formal/05_rustc_internals/13_statements_and_expressions_reference.md) | ↔ | [模式参考](../../04_formal/05_rustc_internals/14_patterns_reference.md) | 互为后置概念（互参） |
-| [语句与表达式参考](../../04_formal/05_rustc_internals/13_statements_and_expressions_reference.md) | ⟹ | [常量求值](../../04_formal/03_operational_semantics/07_constant_evaluation.md) | 后置概念引用（蕴含/导向） |
+| [语句与表达式参考](../../04_formal/05_rustc_internals/13_statements_and_expressions_reference.md) | ⟹ | [常量求值](../../04_formal/03_operational_semantics/08_constant_evaluation.md) | 后置概念引用（蕴含/导向） |
 | [语句与表达式参考](../../04_formal/05_rustc_internals/13_statements_and_expressions_reference.md) | ⟹ | [析构函数与 Drop Scope](../../04_formal/05_rustc_internals/09_destructors.md) | 后置概念引用（蕴含/导向） |
 | [模式参考](../../04_formal/05_rustc_internals/14_patterns_reference.md) | ⊑ | [析构函数与 Drop Scope](../../04_formal/05_rustc_internals/09_destructors.md) | 同主题目录，一端为进阶/机制/模式（精化关系） |
 | [模式参考](../../04_formal/05_rustc_internals/14_patterns_reference.md) | ↔ | [语句与表达式参考](../../04_formal/05_rustc_internals/13_statements_and_expressions_reference.md) | 互为后置概念（互参） |

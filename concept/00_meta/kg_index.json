@@ -4,7 +4,7 @@
     "generated": "2026-07-11",
     "rust_version": "1.97.0+",
     "source": "concept/",
-    "entity_count": 599,
+    "entity_count": 602,
     "schema": "simple KG index"
   },
   "entities": [
@@ -2548,7 +2548,7 @@
         },
         {
           "title": "Constant Evaluation",
-          "path": "../../04_formal/03_operational_semantics/07_constant_evaluation.md"
+          "path": "../../04_formal/03_operational_semantics/08_constant_evaluation.md"
         },
         {
           "title": "Unsafe Rust",
@@ -6851,6 +6851,58 @@
       "related_crates": []
     },
     {
+      "id": "concept:04_formal/00_type_theory/15_parametricity_and_theorems_for_free.md",
+      "path": "04_formal/00_type_theory/15_parametricity_and_theorems_for_free.md",
+      "title": "Parametricity 与免费定理（Parametricity and Theorems for Free）",
+      "en": "Parametricity and Theorems for Free",
+      "summary": "A self-contained treatment of Reynolds' abstraction theorem and Wadler's \"theorems for free\", showing how universal polymorphism constrains the behavior of Rust generic functions and where trait bounds, nontermination, unsafe code, and reflection break those guarantees.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Type Theory",
+          "path": "01_type_theory.md"
+        },
+        {
+          "title": "Generics",
+          "path": "../../02_intermediate/01_generics/01_generics.md"
+        },
+        {
+          "title": "Traits",
+          "path": "../../02_intermediate/00_traits/01_traits.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Subtyping and Variance",
+          "path": "02_subtype_variance.md"
+        },
+        {
+          "title": "Category Theory",
+          "path": "04_category_theory.md"
+        },
+        {
+          "title": "RustBelt",
+          "path": "../02_separation_logic/01_rustbelt.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:04_formal/00_type_theory/16_expressive_power.md",
+      "path": "04_formal/00_type_theory/16_expressive_power.md",
+      "title": "",
+      "en": "Felleisen Expressive Power",
+      "summary": "A treatment of Matthias Felleisen's notion of programming-language expressiveness—distinguishing it from raw computational power—and how Rust's ownership, lifetimes, traits, and macro systems exemplify the ability to encode programming concepts as local, observation-preserving abstractions rather than external transformations.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [],
+      "postrequisites": [],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:04_formal/01_ownership_logic/01_linear_logic.md",
       "path": "04_formal/01_ownership_logic/01_linear_logic.md",
       "title": "",
@@ -7261,8 +7313,59 @@
       "related_crates": []
     },
     {
-      "id": "concept:04_formal/03_operational_semantics/06_aeneas_symbolic_semantics.md",
-      "path": "04_formal/03_operational_semantics/06_aeneas_symbolic_semantics.md",
+      "id": "concept:04_formal/03_operational_semantics/06_observational_equivalence.md",
+      "path": "04_formal/03_operational_semantics/06_observational_equivalence.md",
+      "title": "",
+      "en": "Observational Equivalence",
+      "summary": "Operational semantics notion: two program fragments are observationally equivalent iff every well-typed surrounding context produces the same externally visible behavior, with Rust examples spanning pure functions, ownership moves, unsafe boundaries, and compiler optimizations.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "操作语义",
+          "path": "03_operational_semantics.md"
+        },
+        {
+          "title": "指称语义",
+          "path": "01_denotational_semantics.md"
+        },
+        {
+          "title": "公理语义",
+          "path": "05_axiomatic_semantics.md"
+        },
+        {
+          "title": "求值策略",
+          "path": "04_evaluation_strategies.md"
+        },
+        {
+          "title": "所有权形式化",
+          "path": "../01_ownership_logic/02_ownership_formal.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "RustBelt",
+          "path": "../02_separation_logic/01_rustbelt.md"
+        },
+        {
+          "title": "分离逻辑",
+          "path": "../02_separation_logic/02_separation_logic.md"
+        },
+        {
+          "title": "Tree Borrows",
+          "path": "../01_ownership_logic/05_tree_borrows_deep_dive.md"
+        },
+        {
+          "title": "Unsafe Rust",
+          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:04_formal/03_operational_semantics/07_aeneas_symbolic_semantics.md",
+      "path": "04_formal/03_operational_semantics/07_aeneas_symbolic_semantics.md",
       "title": "",
       "en": "Aeneas Symbolic Semantics",
       "summary": "POPL 2024 论文提出的符号化语义方法：通过 LLBC 显式建模借用（Borrowing）/贷款，用符号执行自动推理，再经 HLPL 桥接底层指针语义，最终在 Aeneas 工具中生成可证明的函数式规范。",
@@ -7274,8 +7377,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:04_formal/03_operational_semantics/07_constant_evaluation.md",
-      "path": "04_formal/03_operational_semantics/07_constant_evaluation.md",
+      "id": "concept:04_formal/03_operational_semantics/08_constant_evaluation.md",
+      "path": "04_formal/03_operational_semantics/08_constant_evaluation.md",
       "title": "常量求值（Constant Evaluation）",
       "en": "Constant Evaluation",
       "summary": "Rust 编译期常量求值机制：常量表达式、常量上下文（const context）与 `const fn` 的规则与限制。",
@@ -7300,8 +7403,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:04_formal/03_operational_semantics/08_llvm_ir_poison_ub.md",
-      "path": "04_formal/03_operational_semantics/08_llvm_ir_poison_ub.md",
+      "id": "concept:04_formal/03_operational_semantics/09_llvm_ir_poison_ub.md",
+      "path": "04_formal/03_operational_semantics/09_llvm_ir_poison_ub.md",
       "title": "LLVM IR 中的 Poison、Undefined Behavior 与 Freeze",
       "en": "Poison, Undefined Behavior, and Freeze in LLVM IR",
       "summary": "Explains LLVM IR's poison values, immediate vs. deferred undefined behavior, and the `freeze` instruction, using the Rust 1.97.1 miscompilation as a concrete case study.",
@@ -8051,7 +8154,7 @@
         },
         {
           "title": "Constant Evaluation",
-          "path": "../03_operational_semantics/07_constant_evaluation.md"
+          "path": "../03_operational_semantics/08_constant_evaluation.md"
         },
         {
           "title": "Destructors",

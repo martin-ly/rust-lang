@@ -41,7 +41,7 @@ VERSION_FILES: list[tuple[str, str]] = [
 # (and which should link back).
 PATCH_FILES: dict[str, list[str]] = {
     "rust_1_97_1.md": [
-        "04_formal/03_operational_semantics/08_llvm_ir_poison_ub.md",
+        "04_formal/03_operational_semantics/09_llvm_ir_poison_ub.md",
         "03_advanced/02_unsafe/06_memory_model.md",
         "06_ecosystem/00_toolchain/09_llvm_backend_and_codegen.md",
     ],

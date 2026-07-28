@@ -192,7 +192,7 @@ graph TB
 | [08_type_inference.md](00_type_theory/03_type_inference.md) | 类型推断（Type Inference） | HM 算法、统一、Rust 扩展、Trait 约束推断 | ✅ v1.0 | L2 Generics, L2 Trait | 编译器类型检查 |
 | [28_borrow_checking_decidability.md](01_ownership_logic/04_borrow_checking_decidability.md) | 借用检查可判定性 [ROD 迁移] | NLL/Polonius、区域约束、P-完全、与 rustc borrowck 映射 | ✅ 已迁移 | L1 Borrowing, L3 Unsafe | rustc_borrowck |
 | [29_type_inference_complexity.md](00_type_theory/08_type_inference_complexity.md) | 类型推断（Type Inference）复杂度 [ROD 迁移] | HM 扩展、约束生成、PSPACE-完全、与 rustc typeck 映射 | ✅ 已迁移 | L2 Trait, L2 Generics | rustc_typeck |
-| [30_aeneas_symbolic_semantics.md](03_operational_semantics/06_aeneas_symbolic_semantics.md) | Aeneas 符号化语义 [ROD 迁移] | LLBC、HLPL、符号执行、模拟关系、Aeneas 工具链 | ✅ 已迁移 | L3 Unsafe, L7 Formal Methods | Aeneas, Miri |
+| [30_aeneas_symbolic_semantics.md](03_operational_semantics/07_aeneas_symbolic_semantics.md) | Aeneas 符号化语义 [ROD 迁移] | LLBC、HLPL、符号执行、模拟关系、Aeneas 工具链 | ✅ 已迁移 | L3 Unsafe, L7 Formal Methods | Aeneas, Miri |
 | [17_operational_semantics.md](03_operational_semantics/03_operational_semantics.md) | 操作语义 [教学类比] | 小步/大步语义、求值上下文、Rust 形式化 | ✅ v1.0 | L1 Ownership, L3 Unsafe | RustBelt, Miri |
 | [20_axiomatic_semantics.md](03_operational_semantics/05_axiomatic_semantics.md) | 公理语义 [教学类比] | Hoare 逻辑、wp/sp 计算、Rust 所有权（Ownership）公理化 | ✅ v1.0 | L4 形式化理论, L3 Unsafe | Prusti, Creusot, Kani |
 | [21_type_semantics.md](00_type_theory/06_type_semantics.md) | 类型语义 [教学类比] | 进步/保持定理、Rust 特有类型语义、子类型与变型 | ✅ v1.0 | L2 Type System, L4 形式化理论 | Pierce TAPL, RustBelt |
@@ -214,7 +214,7 @@ graph TB
 - [现代 Rust 验证工具生态（2025-2026）](04_model_checking/04_modern_verification_tools.md)
 - [借用（Borrowing）检查可判定性](01_ownership_logic/04_borrow_checking_decidability.md)
 - 类型推断（Type Inference）复杂度
-- [Aeneas 符号化语义](03_operational_semantics/06_aeneas_symbolic_semantics.md)
+- [Aeneas 符号化语义](03_operational_semantics/07_aeneas_symbolic_semantics.md)
 - [通用程序语言理论基础：Rust 的 PL 基座](04_model_checking/05_programming_language_foundations.md)
 - [测验：形式化方法概念（嵌入式互动试点）](04_model_checking/06_quiz_formal_methods.md)
 

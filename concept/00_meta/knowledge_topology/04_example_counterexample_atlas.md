@@ -317,8 +317,8 @@ flowchart TD
 | [操作语义：程序行为的形式化定义](../../04_formal/03_operational_semantics/03_operational_semantics.md) | 示例/反例节 ×12 · compile_fail ×4 | 常见陷阱 · 编译验证示例 |
 | [求值策略：Call-by-Value, Call-by-Name, Call-by-Need](../../04_formal/03_operational_semantics/04_evaluation_strategies.md) | 示例/反例节 ×9 · compile_fail ×4 | 反例与边界测试 · 反例：严格求值的性能陷阱 |
 | [Axiomatic Semantics](../../04_formal/03_operational_semantics/05_axiomatic_semantics.md) | 示例/反例节 ×10 · compile_fail ×1 | 边界测试 · 边界测试：wp 计算的无限 descending chain（逻辑错误） |
-| [Aeneas Symbolic Semantics](../../04_formal/03_operational_semantics/06_aeneas_symbolic_semantics.md) | 示例/反例节 ×2 | Rust / Aeneas 风格示例 · ⚠️ 反例与陷阱 |
-| [常量求值](../../04_formal/03_operational_semantics/07_constant_evaluation.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
+| [Aeneas Symbolic Semantics](../../04_formal/03_operational_semantics/07_aeneas_symbolic_semantics.md) | 示例/反例节 ×2 | Rust / Aeneas 风格示例 · ⚠️ 反例与陷阱 |
+| [常量求值](../../04_formal/03_operational_semantics/08_constant_evaluation.md) | 示例/反例节 ×1 · compile_fail ×1 | ⚠️ 反例与陷阱 |
 | [Verification Toolchain Selection Guide](../../04_formal/04_model_checking/01_verification_toolchain.md) | 示例/反例节 ×3 · compile_fail ×6 | 验证边界：编译错误示例 · 边界测试：Kani 的循环展开限制与验证失败（验证失败/超时） |
 | [航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)](../../04_formal/04_model_checking/03_aerospace_certification_formal_methods.md) | 示例/反例节 ×8 · compile_fail ×4 | 边界测试：航空航天认证形式化方法的编译错误 · 边界测试：MISRA C 规则的 Rust 类比（编译错误） |
 | [现代 Rust 验证工具生态](../../04_formal/04_model_checking/04_modern_verification_tools.md) | 示例/反例节 ×5 · compile_fail ×1 | 概念示例（伪代码） · 验证示例：安全包装器 |

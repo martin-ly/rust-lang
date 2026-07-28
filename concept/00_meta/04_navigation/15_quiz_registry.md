@@ -97,12 +97,12 @@ concept→quiz 回链 22/22 完成（`scripts/add_quiz_backlinks.py` 幂等批�
 | 01_foundation | 40 | 161 |
 | 02_intermediate | 30 | 132 |
 | 03_advanced | 29 | 116 |
-| 04_formal | 43 | 195 |
+| 04_formal | 46 | 204 |
 | 05_comparative | 18 | 88 |
 | 06_ecosystem | 74 | 355 |
 | 07_future | 46 | 226 |
 | README.md / sources | 4 | 12 |
-| **合计** | **322** | **1397** |
+| **合计** | **325** | **1406** |
 
 > W3-b（2026-07-12）新增 15 页嵌入式测验（L1×6：patterns/statements/functions/structs/enums/impls；
 > L2×5：dispatch/derive/GAT/const_generics/panic；L3×4：send_sync/future_executor/cancellation/memory_model），
@@ -111,6 +111,7 @@ concept→quiz 回链 22/22 完成（`scripts/add_quiz_backlinks.py` 幂等批�
 > TOP-20 清单中 04_unsafe_rust_patterns 为重定向 stub，按 canonical 规则不加测验，其权威页 01_unsafe.md 已有 4 块嵌入式测验。
 > 2026-07-28 对称差修复 sprint 新增 L4 权威页 `04_formal/04_model_checking/11_creusot.md`（含 3 块嵌入式测验），L4 +1 页 / +3 块。
 > 2026-07-28 企业架构 / 系统工程 / 语义工程 / AI 系统语义对齐 sprint 新增 6 个 concept/ 权威页（`06_ecosystem/14_enterprise_architecture/` 3 页、`04_formal/09_system_semantics/06_systems_engineering_standards.md`、`06_ecosystem/03_design_patterns/19_model_driven_engineering.md`、`04_formal/13_semantic_engineering/` 4 页、`07_future/04_research_and_experimental/08-10 AI 系统页`），共 +30 块嵌入式测验；生态层 +3 页 / +15 块，未来层 +3 页 / +15 块。
+> 2026-07-29 PLAN_Semantic_Space_Wave 缺口补全 sprint 新增 3 个 L4 形式化权威页（`04_formal/00_type_theory/15_parametricity_and_theorems_for_free.md`、`04_formal/03_operational_semantics/06_observational_equivalence.md`、`04_formal/00_type_theory/16_expressive_power.md`），L4 +3 页 / +9 块。
 
 ---
 

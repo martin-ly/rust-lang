@@ -124,7 +124,7 @@ RFC 3453 明确以下未决项是稳定化的主要阻塞（§Unresolved questio
 1. **`f16` 的 C ABI 映射**：`__fp16`（ARM）vs `_Float16`（C23）vs 无对应类型（部分 x86 ABI 按 `uint16_t` 传递）。`extern "C" fn` 签名中 `f16` 的 ABI 在各目标平台尚未完全对齐。
 2. **`f128` 与 `long double`**：x86-64 SysV 的 `long double` 是 80 位扩展精度（x87），与 binary128 不同；`f128` 须映射到 `__float128`/`_Float128`，依赖平台 libquadmath 或 compiler-rt。
 3. **软件模拟路径的性能与正确性**：无硬件支持目标上的 round-to-nearest-even 与次正规数行为须与 IEEE 完全一致，测试矩阵庞大。
-4. **`const fn` 与编译期求值**： Miri/CTFE 对 binary128 的支持须先行落地（参见 [Constant Evaluation](../../04_formal/03_operational_semantics/07_constant_evaluation.md)）。
+4. **`const fn` 与编译期求值**： Miri/CTFE 对 binary128 的支持须先行落地（参见 [Constant Evaluation](../../04_formal/03_operational_semantics/08_constant_evaluation.md)）。
 
 ## 五、反命题与边界分析
 
@@ -138,7 +138,7 @@ RFC 3453 明确以下未决项是稳定化的主要阻塞（§Unresolved questio
 |:---|:---|
 | 上位概念 | [数值类型与运算](../../01_foundation/02_type_system/03_numerics.md)（浮点谱系扩展） |
 | 并列概念 | [Complex Numbers 预研](38_complex_numbers_preview.md)（数值生态扩展） |
-| 约束来源 | [Application Binary Interface](../../04_formal/05_rustc_internals/05_application_binary_interface.md) · [Constant Evaluation](../../04_formal/03_operational_semantics/07_constant_evaluation.md) |
+| 约束来源 | [Application Binary Interface](../../04_formal/05_rustc_internals/05_application_binary_interface.md) · [Constant Evaluation](../../04_formal/03_operational_semantics/08_constant_evaluation.md) |
 | 演进跟踪 | [Version Tracking](../00_version_tracking/01_rust_version_tracking.md) |
 
 ## ⚠️ 反例与陷阱

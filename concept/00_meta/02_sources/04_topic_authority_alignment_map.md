@@ -204,8 +204,8 @@
 - `concept/04_formal/03_operational_semantics/03_operational_semantics.md` — 操作语义：程序行为的形式化定义
 - `concept/04_formal/03_operational_semantics/04_evaluation_strategies.md` — 求值策略：Call-by-Value, Call-by-Name, Call-by-Need
 - `concept/04_formal/03_operational_semantics/05_axiomatic_semantics.md` — Axiomatic Semantics（公理语义）
-- `concept/04_formal/03_operational_semantics/06_aeneas_symbolic_semantics.md` — Aeneas Symbolic Semantics（Aeneas 符号化语义）
-- `concept/04_formal/03_operational_semantics/07_constant_evaluation.md` — 常量求值（Constant Evaluation）
+- `concept/04_formal/03_operational_semantics/07_aeneas_symbolic_semantics.md` — Aeneas Symbolic Semantics（Aeneas 符号化语义）
+- `concept/04_formal/03_operational_semantics/08_constant_evaluation.md` — 常量求值（Constant Evaluation）
 - `concept/04_formal/04_model_checking/01_verification_toolchain.md` — Verification Toolchain Selection Guide（验证工具链选择指南）
 - `concept/04_formal/04_model_checking/02_formal_methods.md` — 形式化方法在 Rust 中的应用（2026-07-12 起为重定向 stub，权威页为 `concept/07_future/04_research_and_experimental/02_formal_methods.md`）
 - `concept/04_formal/04_model_checking/03_aerospace_certification_formal_methods.md` — 航空航天认证与形式化方法 (Aerospace Certification & Formal Methods)
