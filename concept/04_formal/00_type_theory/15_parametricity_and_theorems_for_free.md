@@ -7,7 +7,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **来源**: [Rust Reference — Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html) · [Wadler 1989, *Theorems for Free!* (arXiv)](https://arxiv.org/abs/cs/9201102) · [Wadler 1989, *Theorems for Free!* (ACM DL)](https://dl.acm.org/doi/10.1145/99370.99404) · [Reynolds 1983, *Types, Abstraction and Parametric Polymorphism*](https://doi.org/10.1007/BFb0035118) · [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 > **前置概念**: [Type Theory](01_type_theory.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
-> **后置概念**: [Subtyping and Variance](02_subtype_variance.md) · [Category Theory](04_category_theory.md) · [RustBelt](../02_separation_logic/01_rustbelt.md)
+> **后置概念**: [Subtyping and Variance](02_subtype_variance.md) · [Category Theory](04_category_theory.md) · [RustBelt](../02_separation_logic/01_rustbelt.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
 
 ---
 
