@@ -21,7 +21,7 @@
 > **后置延伸**: [L2 Trait](../../02_intermediate/00_traits/01_traits.md) · [L4 分离逻辑](../../04_formal/01_ownership_logic/01_linear_logic.md) · [L3 并发](../../03_advanced/00_concurrency/01_concurrency.md)
 > **跨层映射**: L1→L4 借用规则 ↔ 线性逻辑 !A 规则 | L1→L3 借用（Borrowing） → Send/Sync
 > **表征空间映射**: [semantic_space.md §2 借用算子](../../00_meta/00_framework/semantic_space.md)
-> **定理链编号**: T-010 借用（Borrowing）唯一性 → T-011 生命周期（Lifetimes）包含 → T-012 悬垂引用 [来源: [Rust Reference — References](https://doc.rust-lang.org/reference/types/pointer.html)]不可达
+> **定理链编号**: T-010 借用（Borrowing）唯一性 → T-011 生命周期（Lifetimes）包含 → T-012 悬垂引用
 > **层级**: L1 基础概念
 > **前置概念**:
 >

@@ -190,6 +190,9 @@ Tool Use 让模型输出结构化工具调用请求，由系统解析并执行�
 
 ```rust
 // 概念性工具调用 schema
+#[derive(Debug)]
+pub struct ToolError;
+
 #[derive(serde::Deserialize, Debug)]
 #[serde(tag = "tool")]
 pub enum ToolCall {
@@ -249,6 +252,9 @@ Multi-Agent 系统的核心复杂度在于**Agent 间通信契约**：
 
 ```rust
 // 概念性 Agent 消息协议
+#[derive(Clone)]
+pub struct AgentId(String);
+
 pub struct AgentMessage {
     pub from: AgentId,
     pub to: AgentId,
@@ -362,6 +368,19 @@ struct InferenceResponse {
     text: String,
 }
 
+struct LlmError;
+struct LlmRequest {
+    system_prompt: String,
+    user_prompt: String,
+    temperature: f32,
+    max_tokens: usize,
+}
+
+trait LlmBackend {
+    type Output;
+    fn complete(&self, req: LlmRequest) -> Result<Self::Output, LlmError>;
+}
+
 async fn inference_handler(
     State(model): State<Arc<dyn LlmBackend<Output = InferenceResponse>>>,
     Json(req): Json<InferenceRequest>,
@@ -372,9 +391,7 @@ async fn inference_handler(
         temperature: 0.7,
         max_tokens: req.max_tokens,
     })?;
-    Ok(Json(resp.parsed.unwrap_or_else(|| InferenceResponse {
-        text: resp.raw_text,
-    })))
+    Ok(Json(resp))
 }
 ```
 

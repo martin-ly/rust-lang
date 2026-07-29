@@ -3,25 +3,25 @@
 **EN**: International Authoritative Sources Baseline for Semantic Space Alignment
 **Summary**: 整理 Rust 语义空间、形式化方法、系统/架构语义、AI 语义工程等领域必须对齐的英文权威来源，供 Wave 1–Wave 4 引用与增强使用。
 
-> **生成时间**: 2026-07-29  
+> **文件性质**: 本文件为 `docs/00_meta/analysis/` 分析基线文件，非 `concept/` 概念权威页。
+> 通用 Rust 概念解释统一维护在 `concept/` 中；本文仅保留来源索引、覆盖矩阵与对齐状态，不重复论证。
+> **生成时间**: 2026-07-29
 > **对齐版本**: Rust 1.97.1+ (Edition 2024)
 
 ---
 
 ## 使用说明
 
-- 本表是“来源 → 项目页”的覆盖矩阵，后续每增强一页，应在对应行的“对齐状态”标注 ✅。
-- 所有 URL 均为公开可访问的英文权威来源；若后续无法访问，使用 DOI/ISBN 作为备用引用。
-- 禁止在 `concept/` 之外重复这些来源的完整论证；`docs/` 分析文件只保留摘要与链接。
+本表是“来源 → 项目页”的覆盖矩阵，用于追踪语义空间国际对齐工作中各权威来源是否已被引用到对应 `concept/` 权威页。后续每增强一页，应在对应行的“对齐状态”标注 ✅。所有 URL 均为公开可访问的英文权威来源；若后续无法访问，使用 DOI/ISBN 作为备用引用。禁止在 `concept/` 之外重复这些来源的完整论证；`docs/` 分析文件只保留摘要、索引与链接，完整概念推导请跳转至 `concept/` 权威页。
 
 ## 一、表达力与语义等价
 
 | 来源 | URL | 关键论断 | 目标概念页 | 对齐状态 |
 |---|---|---|---|---|
-| Felleisen (1991) *On the Expressive Power of Programming Languages* | [PDF](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf) | 表达力差异 = 是否需要全局程序变换；局部变换（语法糖）不增加表达力 | `concept/00_meta/00_framework/semantic_space.md` §2/§3 | pending |
-| Wadler (1989) *Theorems for Free!* | [PDF](https://people.mpi-sws.org/~dreyer/tor/papers/wadler.pdf) | 参数多态性推出“免费定理”，构成观察等价的理论基础 | `concept/04_formal/00_type_theory/15_parametricity_and_theorems_for_free.md` | pending |
-| Leffler (2017) *Rust's Type System is Turing-Complete* | [Blog](https://sdleffler.github.io/RustTypeSystemTuringComplete/) | Rust 类型系统（Trait + 关联类型）可编码图灵机；受递归深度限制 | `concept/00_meta/00_framework/semantic_space.md` §2.3 | pending |
-| Pierce (2002) *Types and Programming Languages* | [MIT Press](https://www.cis.upenn.edu/~bcpierce/tapl/) | 类型系统、操作语义、语义保持的系统教材 | `concept/04_formal/00_type_theory/01_type_theory.md` | pending |
+| Felleisen (1991) *On the Expressive Power of Programming Languages* | [PDF](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf) | 表达力差异 = 是否需要全局程序变换；局部变换（语法糖）不增加表达力 | `concept/00_meta/00_framework/semantic_space.md` §1.1/§3.4/§7.3 | ✅ aligned |
+| Wadler (1989) *Theorems for Free!* | [PDF](https://people.mpi-sws.org/~dreyer/tor/papers/wadler.pdf) | 参数多态性推出“免费定理”，构成观察等价的理论基础 | `concept/04_formal/00_type_theory/15_parametricity_and_theorems_for_free.md` · `concept/00_meta/00_framework/semantic_space.md` §4/§7.3/§8 | ✅ aligned |
+| Leffler (2017) *Rust's Type System is Turing-Complete* | [Blog](https://sdleffler.github.io/RustTypeSystemTuringComplete/) | Rust 类型系统（Trait + 关联类型）可编码图灵机；受递归深度限制 | `concept/00_meta/00_framework/semantic_space.md` §2.3 | ✅ aligned |
+| Pierce (2002) *Types and Programming Languages* | [MIT Press](https://www.cis.upenn.edu/~bcpierce/tapl/) | 类型系统、操作语义、语义保持的系统教材 | `concept/04_formal/00_type_theory/01_type_theory.md` · `concept/00_meta/00_framework/semantic_space.md` §2.4/§6.3 | ✅ aligned |
 
 ## 二、所有权、内存模型与形式化
 

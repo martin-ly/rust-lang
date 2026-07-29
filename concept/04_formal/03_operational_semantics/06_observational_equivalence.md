@@ -3,18 +3,18 @@
 # 观察等价性：程序行为的外部不可区分性
 >
 > **EN**: Observational Equivalence
-> **Summary**: Operational semantics notion: two program fragments are observationally equivalent iff every well-typed surrounding context produces the same externally visible behavior, with Rust examples spanning pure functions, ownership moves, unsafe boundaries, and compiler optimizations.
+> **Summary**: Operational-semantics notion: two program fragments are observationally equivalent iff every well-typed surrounding context produces the same externally visible behavior, with Rust examples spanning pure functions, ownership moves, compiler optimizations, unsafe boundaries, and non-deterministic concurrency; aligned with Pierce TAPL, Plotkin SOS, Mason-Talcott CIU, Pitts/Ahmed logical relations, Sipser/HMU computability theory, Barendregt λ-calculus, Scott domains, and Felleisen expressiveness.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
 > ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [RustBelt](https://plv.mpi-sws.org/rustbelt/)、[Coq](https://coq.inria.fr/)、[Iris](https://iris-project.org/)。
 >
 > **Bloom 层级**: L4
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **定位**: 介绍**观察等价性（Observational Equivalence）**——从外部可观察行为的角度定义程序片段是否"相同"，并说明它与操作语义、上下文等价、双模拟以及 Rust 编译器优化、unsafe 边界之间的关系。
+> **定位**: 介绍**观察等价性（Observational Equivalence）**——从外部可观察行为的角度定义程序片段是否"相同"，并说明它与操作语义、上下文等价、双模拟、逻辑关系以及 Rust 编译器优化、unsafe 边界之间的关系。
 > **前置概念**: [操作语义](03_operational_semantics.md) · [指称语义](01_denotational_semantics.md) · [公理语义](05_axiomatic_semantics.md) · [求值策略](04_evaluation_strategies.md) · [所有权形式化](../01_ownership_logic/02_ownership_formal.md)
 > **后置概念**: [RustBelt](../02_separation_logic/01_rustbelt.md) · [分离逻辑](../02_separation_logic/02_separation_logic.md) · [Tree Borrows](../01_ownership_logic/05_tree_borrows_deep_dive.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Winskel — The Formal Semantics of Programming Languages](https://mitpress.mit.edu/9780262731034) · [arXiv: Contextual Equivalence and Operational Semantics](https://arxiv.org/abs/1808.09835)
+> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Plotkin — A Structural Approach to Operational Semantics (1981)](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf) · [Winskel — The Formal Semantics of Programming Languages](https://mitpress.mit.edu/9780262731034) · [Mason & Talcott (1991)](https://doi.org/10.1017/S0956796800000136) · [Pitts (1997)](https://www.cl.cam.ac.uk/~amp12/papers/index.html) · [Ahmed (2006)](https://doi.org/10.1007/11693024_6) · [Jung et al. — RustBelt (2018)](https://plv.mpi-sws.org/rustbelt/) · [Sipser — Introduction to the Theory of Computation (2012)](https://math.mit.edu/~sipser/book.html) · [Hopcroft, Motwani & Ullman — Introduction to Automata Theory, Languages, and Computation (2006)](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation) · [Barendregt — The Lambda Calculus: Its Syntax and Semantics (1984)](https://doi.org/10.1016/C2009-0-14341-3) · [Scott — Data Types as Lattices (1976)](https://doi.org/10.1137/0205037) · [Felleisen — On the Expressive Power of Programming Languages (1991)](https://doi.org/10.1007/BF00119888)
 
 ---
 
@@ -29,12 +29,18 @@
     - [1.4 CIU 定理：闭实例使用的同余性](#14-ciu-定理闭实例使用的同余性)
     - [1.5 逻辑关系（Logical Relations）与 Rust unsafe 抽象正确性](#15-逻辑关系logical-relations与-rust-unsafe-抽象正确性)
     - [1.6 在计算理论网络中的位置](#16-在计算理论网络中的位置)
+    - [1.7 图灵等价 vs 观察等价：能力相等不代表行为不可区分](#17-图灵等价-vs-观察等价能力相等不代表行为不可区分)
+    - [1.8 λ 演算、Church-Rosser 与确定性求值](#18-λ-演算church-rosser-与确定性求值)
+    - [1.9 指称语义与完全抽象：Scott 与 Plotkin](#19-指称语义与完全抽象scott-与-plotkin)
+    - [1.10 Felleisen 表达力框架中的观察等价](#110-felleisen-表达力框架中的观察等价)
   - [二、Rust 示例](#二rust-示例)
     - [2.1 纯函数表达式的观察等价](#21-纯函数表达式的观察等价)
     - [2.2 所有权移动与借用](#22-所有权移动与借用)
-    - [2.3 编译器优化视角：常量折叠、内联与 LTO](#23-编译器优化视角常量折叠内联与-lto)
+    - [2.3 编译器优化视角：常量折叠、内联、LTO 与 black\_box](#23-编译器优化视角常量折叠内联lto-与-black_box)
     - [2.4 unsafe 边界：外部不可观察的内部差异](#24-unsafe-边界外部不可观察的内部差异)
     - [2.5 unsafe 边界反例：违反观察等价的模式](#25-unsafe-边界反例违反观察等价的模式)
+    - [2.6 并发上下文：非确定性与观察等价](#26-并发上下文非确定性与观察等价)
+    - [2.7 `std::hint::black_box` 与"可观察"的边界](#27-stdhintblack_box-与可观察的边界)
   - [三、反命题与边界分析](#三反命题与边界分析)
     - [3.1 反命题树](#31-反命题树)
     - [3.2 边界极限](#32-边界极限)
@@ -42,15 +48,20 @@
     - [4.1 观察等价性与上下文等价](#41-观察等价性与上下文等价)
     - [4.2 逻辑关系与 Rust 抽象安全](#42-逻辑关系与-rust-抽象安全)
     - [4.3 计算理论、表达力与 Curry-Howard 背景](#43-计算理论表达力与-curry-howard-背景)
-    - [4.4 Rust 官方与工程参考](#44-rust-官方与工程参考)
+    - [4.4 指称语义与完全抽象](#44-指称语义与完全抽象)
+    - [4.5 Rust 官方与工程参考](#45-rust-官方与工程参考)
   - [五、嵌入式测验（Embedded Quiz）](#五嵌入式测验embedded-quiz)
     - [测验 1：观察等价性的核心判断标准是什么？（理解层）](#测验-1观察等价性的核心判断标准是什么理解层)
     - [测验 2：以下两个函数是否观察等价？为什么？（应用层）](#测验-2以下两个函数是否观察等价为什么应用层)
     - [测验 3：为什么 `unsafe` 抽象的安全性可以表述为观察等价问题？（分析层）](#测验-3为什么-unsafe-抽象的安全性可以表述为观察等价问题分析层)
     - [测验 4：CIU 定理与逻辑关系的作用（综合层）](#测验-4ciu-定理与逻辑关系的作用综合层)
     - [测验 5：编译器优化的观察等价基础（应用层）](#测验-5编译器优化的观察等价基础应用层)
+    - [测验 6：Rice 定理对观察等价的限制（分析层）](#测验-6rice-定理对观察等价的限制分析层)
+    - [测验 7：完全抽象把哪两种等价联系起来？（理解层）](#测验-7完全抽象把哪两种等价联系起来理解层)
+    - [测验 8：Felleisen 框架中 `?` 与 `async/await` 的地位（评价层）](#测验-8felleisen-框架中--与-asyncawait-的地位评价层)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
   - [相关概念](#相关概念)
+  - [相关概念](#相关概念-1)
 
 ---
 
@@ -64,7 +75,7 @@
 >
 > 对于两个 Rust 表达式 `e₁` 与 `e₂`，若对**任意**类型匹配的程序上下文 `C[-]`，填充后得到的完整程序 `C[e₁]` 与 `C[e₂]` 具有相同的外部可观察行为（终止/发散、返回值、I/O、panic 模式），则称：
 > $$
-e_1 \cong_{\text{obs}} e_2
+> e_1 \cong_{\text{obs}} e_2
 > $$
 
 "相同的外部可观察行为"通常包括：
@@ -91,14 +102,14 @@ e_1 \cong_{\text{obs}} e_2
 >
 > 设 `Γ ⊢ e₁ : τ` 且 `Γ ⊢ e₂ : τ` 为 Rust 类型系统中的两个良类型项。给定一个观察谓词 `Obs(·)`（通常取"是否停机/发散/panic 并返回特定值"），称 `e₁` 与 `e₂` 在上下文 `Γ` 下**上下文等价**，记作：
 > $$
-\Gamma \vdash e_1 \cong_{\text{ctx}} e_2 : \tau
-$$
+> \Gamma \vdash e_1 \cong_{\text{ctx}} e_2 : \tau
+> $$
 > 当且仅当对任意将类型 `τ` 的洞填充为可观察类型（如 `()`）的合法程序上下文 `C[-]`，都有：
 > $$
-\text{Obs}(C[e_1]) = \text{Obs}(C[e_2])
-$$
+> \text{Obs}(C[e_1]) = \text{Obs}(C[e_2])
+> $$
 >
-> 其中"合法"指 `C[e₁]` 与 `C[e₂]` 都通过类型检查与借用检查。该定义直接来自 Pierce 对类型化 λ 演算中上下文等价的陈述（Pierce, 2002, Ch. 8, §8.2）。
+> 其中"合法"指 `C[e₁]` 与 `C[e₂]` 都通过类型检查与借用检查。该定义直接来自 Pierce 对类型化 λ 演算中上下文等价的陈述（Pierce, 2002, Ch. 8, §8.2；Ch. 12 进一步讨论正规形与语义等价）。
 
 上下文等价具有三个关键性质，使其成为编译器优化和抽象屏障的合适基准：
 
@@ -125,8 +136,8 @@ $$
 >
 > 形式化地，`e₁ ≈_{ciu} e₂` 当且仅当对所有闭合替换 `γ` 和所有求值上下文 `R[-]`：
 > $$
-\text{Obs}(R[\gamma(e_1)]) = \text{Obs}(R[\gamma(e_2)])
-$$
+> \text{Obs}(R[\gamma(e_1)]) = \text{Obs}(R[\gamma(e_2)])
+> $$
 
 CIU 定理的核心结论是：在大多数基于操作语义的类型化语言中（包括带状态的函数式语言），**CIU 等价与上下文等价重合**。
 
@@ -134,8 +145,8 @@ CIU 定理的核心结论是：在大多数基于操作语义的类型化语言�
 >
 > 若语言的操作语义满足某些标准条件（确定性、类型保持、progress），则对任意良类型项 `e₁, e₂`：
 > $$
- e_1 \cong_{\text{ctx}} e_2 \quad\Longleftrightarrow\quad e_1 \approx_{\text{ciu}} e_2
-$$
+> e_1 \cong_{\text{ctx}} e_2 \quad\Longleftrightarrow\quad e_1 \approx_{\text{ciu}} e_2
+> $$
 
 对 Rust 的工程意义是：证明两个表达式观察等价时，只需检验它们在**所有闭合的、单步求值的上下文**中的行为，而不必真的枚举整个 crate 或所有可能的调用者。Pitts（1997）将 CIU 与 operationally-based logical relations 结合，给出了高阶状态化语言的系统证明方法。
 
@@ -157,11 +168,11 @@ Ahmed（2006）针对递归类型和量词类型提出的 **step-indexed logical
 在 Rust 中，**RustBelt**（Jung et al., 2018）使用 Iris 高阶分离逻辑与 step-indexed logical relations 来证明：safe API 与其内部 unsafe 实现在所有合法 safe 上下文下观察等价。换句话说，unsafe 抽象的正确性可以被精确表述为逻辑关系问题：内部实现必须落在 safe 接口所诱导的逻辑关系之内。
 
 ```rust
-/// 一个简化的 safe unsafe 抽象：内部使用裸指针，
+/// 一个简化的 safe/unsafe 抽象：内部使用裸指针，
 /// 但对外提供与“理想借用交换”不可区分的行为。
 pub fn safe_swap<T>(a: &mut T, b: &mut T) {
     // std::mem::swap 内部使用 unsafe，但其规约保证：
-    // 对任何满足借用检查 safe 上下文，效果等同于逻辑上的值交换。
+    // 对任何满足借用检查的 safe 上下文，效果等同于逻辑上的值交换。
     std::mem::swap(a, b);
 }
 ```
@@ -175,7 +186,70 @@ pub fn safe_swap<T>(a: &mut T, b: &mut T) {
 - **与 Rice 定理的联系**：Rice 定理指出，任何非平凡的程序语义性质都是不可判定的。由于"与某个给定程序观察等价"本身就是一种非平凡语义性质，因此**精确判定两个任意 Rust 程序是否观察等价是不可判定的**。编译器的优化策略因此只能是**安全近似**：保证生成的代码与原程序观察等价，而不是穷尽所有可能的等价变换。详见 [可计算性理论](../11_computational_models/02_computability_theory.md)。
 - **与 Curry-Howard 对应的联系**：在"命题即类型，证明即程序"的视角下，两个证明项（程序）若观察等价，则它们对应同一个命题的"相同证明行为"。Curry-Howard 为理解"同一类型的不同实现为何等价"提供了逻辑直觉。详见 [计算的数学函数](../11_computational_models/04_mathematical_functions_of_computation.md)。
 - **与形式语言自动机的联系**：程序的可观察行为可以视为一串"输出/状态转移"组成的字（word）。不同表达能力的形式语言层级（正则、上下文无关、图灵可识别）对应不同粒度的"可观察集"。在 Rust 中，解析器组合子（nom/pest/lalrpop/syn）的表达能力选择本质上是在 Chomsky 层级上定位可识别的观察集。详见 [形式语言与自动机](../11_computational_models/03_formal_languages_and_automata.md)。
-- **与 Felleisen 表达力的联系**：Felleisen（1991）区分了"计算能力"与"表达能力"。`async/await`、`?`、`try` 块、`for await` 等构造并不提升 Rust 的图灵完备性，但通过局部转换（local translation）与宏展开改变可表达模式；它们能否被其它构造表达，正是一个**表达力等价**问题。详见 [计算模型等价性](../11_computational_models/05_equivalence_of_computational_models.md)。
+- **与 Felleisen 表达力的联系**：Felleisen（1991）区分了"计算能力"与"表达能力"。`async/await`、`?`、`try` 块、`for await` 等构造并不提升 Rust 的图灵完备性，但通过局部转换（local translation）与宏展开改变可表达模式；它们能否被其它构造表达，正是一个**表达力等价**问题。详见 [Felleisen 表达力](../00_type_theory/16_expressive_power.md) 与 [计算模型等价性](../11_computational_models/05_equivalence_of_computational_models.md)。
+
+### 1.7 图灵等价 vs 观察等价：能力相等不代表行为不可区分
+
+Sipser（2012）在 *Introduction to the Theory of Computation* 第 4–5 章中证明：若两种计算模型都能计算相同的部分可计算函数集合，则它们**图灵等价**。然而，图灵等价只回答"能计算哪些函数"，并不保证"在任何上下文中的外部行为都相同"。Hopcroft、Motwani 与 Ullman（2006）在讨论 Church-Turing 论题与编码时也强调：模型之间的翻译通常只保持输入-输出关系，而**不保持**副作用、资源消耗、终止模式或运行时错误（HMU, 2006, Ch. 1, §1.2 与 Ch. 9）。
+
+因此，观察等价是比图灵等价**更细粒度**的关系：
+
+| 维度 | 图灵等价 | 观察等价 |
+|:---|:---|:---|
+| 核心问题 | 能计算哪些部分可计算函数 | 在所有合法上下文中是否不可区分 |
+| 可观察行为 | 通常只考虑输入-输出函数 | 包括终止、panic、副作用、资源、UB |
+| 判定性 | 模型能力比较本身可陈述 | 由 Rice 定理，任意语义等价性不可判定 |
+| Rust 实例 | Rust 与 Brainfuck 计算能力相同 | `panic!()` 与正常返回**不等价** |
+
+> **教学类比（Rice 定理推论）**
+>
+> 设 `P` 为"与某固定程序 `p` 观察等价"的性质。`P` 是非平凡语义性质（存在与 `p` 等价的程序，也存在不等价的程序）。由 Rice 定理（Sipser, 2012, Thm. 5.16；HMU, 2006, Thm. 9.11），不存在通用算法能判定任意 Rust 程序是否满足 `P`。
+
+对 Rust 工程的意义是：编译器**不能**在一般情况下判定两段代码是否观察等价，因此所有优化都必须是已被严格证明的、保持特定观察等价关系的变换（常量折叠、内联、LTO 等），而不是任意语义重写。关于图灵等价与模型间编码的更多细节，参见 [计算模型等价性](../11_computational_models/05_equivalence_of_computational_models.md)。
+
+### 1.8 λ 演算、Church-Rosser 与确定性求值
+
+Barendregt（1984）在 *The Lambda Calculus: Its Syntax and Semantics* 中系统证明了无类型 λ 演算的 **Church-Rosser 定理**（合流性，Church-Rosser property）：若项 `t` 可分别归约到 `u` 与 `v`，则存在 `w` 使得 `u` 与 `v` 都可归约到 `w`（Barendregt, 1984, Ch. 3, Thm. 3.2.8）。这意味着在纯 λ 演算中，β-归约**不依赖求值顺序**：不同的归约路径若都终止，则最终得到相同的正规形。因此，β-可转换的表达式在纯子语言中观察等价。
+
+Rust 的纯函数子语言（无副作用、无 `unsafe`、无 I/O 的闭包应用）同样满足一种受限的 β-等价：
+
+```rust
+fn main() {
+    // (λx. x + x) 2  →β  2 + 2
+    let a = (|x: i32| x + x)(2);
+    let b = 2 + 2;
+    assert_eq!(a, b); // 在纯上下文中二者观察等价
+}
+```
+
+但 Rust 采用**严格（eager / call-by-value）**求值策略（Pierce, 2002, Ch. 5），并且拥有副作用、可变状态与 `unsafe` 代码，因此 Church-Rosser 定理**不能直接**应用于完整 Rust 程序。β-归约只能在已知无副作用的子表达式中使用，例如编译器的常量传播与函数内联。关于求值策略的完整讨论，参见 [求值策略](04_evaluation_strategies.md)；关于 λ 演算与 Rust 闭包的对应，参见 [Lambda 演算](../00_type_theory/05_lambda_calculus.md)。
+
+### 1.9 指称语义与完全抽象：Scott 与 Plotkin
+
+Scott（1976）在 "Data types as lattices" 中建立了**Scott 域**（Scott domains）与指称语义：每个类型被解释为一个带有偏序 `⊑` 的完备偏序（CPO），程序被解释为域之间的连续函数，而非终止用 bottom 元素 `⊥` 表示。在指称语义中，若两个程序具有相同的指称（denotation），则它们在所有充分抽象的模型中应当观察等价。
+
+然而，Plotkin（1977）在 "LCF considered as a programming language" 中证明：简单的序列式语言 PCF **不是完全抽象**（not fully abstract）的——存在两个程序在指称语义中等价，但在操作语义中可被某个上下文区分（典型反例是 "parallel or"）。完全抽象（full abstraction）要求：
+
+> **完全抽象（教学类比）**
+>
+> 一个指称语义模型 `⟦·⟧` 对语言 `L` 是**完全抽象**的，当且仅当对任意两个良类型程序 `e₁, e₂`：
+> $$
+> ⟦e_1⟧ = ⟦e_2⟧ \quad\Longleftrightarrow\quad e_1 \cong_{\text{obs}} e_2
+> $$
+
+对 Rust 的启示：safe Rust 源程序的语义与 MIR/LLVM 层的语义之间，理想情况下应满足相对于**safe 上下文**的完全抽象。如果 LLVM 优化引入的 `poison`/`undef` 差异能在某个 safe 上下文中被观察到，那么该优化就不保持观察等价。关于 LLVM 层 poison/undef 的详细讨论，参见 [LLVM IR 中的 Poison、Undefined Behavior 与 Freeze](09_llvm_ir_poison_ub.md)；关于指称语义基础，参见 [指称语义](01_denotational_semantics.md)。
+
+### 1.10 Felleisen 表达力框架中的观察等价
+
+Felleisen（1991）将**表达力**（expressive power）与**计算能力**（computational power）区分开：计算能力由 Church-Turing 论题刻画，而表达力衡量"表达一个概念所需的语言扩展是否可局部、观察保持地消除"。Felleisen 与 Flatt（1998）进一步指出，判断新构造 `C` 是否提升表达力的关键是：是否存在一个**局部变换**（local transformation）——通常是宏或脱糖——能把使用 `C` 的程序片段翻译成基础语言的片段，并且翻译前后在任意不包含 `C` 的上下文中观察等价。
+
+Rust 中的多个语法构造正是这类观察保持的局部变换：
+
+- **`?` 运算符**：局部脱糖为 `match Try::branch(expr)`，不改变可观察行为（详见 [Felleisen 表达力](../00_type_theory/16_expressive_power.md) 与 [计算模型等价性](../11_computational_models/05_equivalence_of_computational_models.md)）。
+- **`async/await`**：`async fn` 与 `.await` 局部转换为 `Future` 状态机，不引入新的计算能力，但显著降低手写状态机的工程成本。
+- **`try` 块**：把 `?` 的错误传播范围局部化，同样不改变观察行为。
+
+这些构造说明：观察等价不仅是编译器优化的基础，也是语言设计者判断"语法糖"与"真正语义扩展"的分界线。
 
 ---
 
@@ -186,8 +260,11 @@ pub fn safe_swap<T>(a: &mut T, b: &mut T) {
 以下两个表达式在 `i32` 类型下观察等价：
 
 ```rust
-let a = 2 + 3;
-let b = 1 + 4;
+fn main() {
+    let a = 2 + 3;
+    let b = 1 + 4;
+    assert_eq!(a, b);
+}
 ```
 
 对任意合法上下文，只要读取 `a` 或 `b` 的最终值，都会得到 `5`。因此 `2 + 3 ≅ 1 + 4`。
@@ -197,9 +274,25 @@ let b = 1 + 4;
 ```rust
 fn double(x: i32) -> i32 { x * 2 }
 fn shift_left(x: i32) -> i32 { x << 1 }
+
+fn main() {
+    for x in 0..100 {
+        assert_eq!(double(x), shift_left(x));
+    }
+}
 ```
 
 对**所有** `i32` 输入，`double(x)` 与 `shift_left(x)` 返回值相同（忽略溢出语义细节时）。在有符号整数不触发 UB 的前提下，二者观察等价。但若上下文观察 CPU 周期或汇编指令，则它们可能不等价——这正是"观察等价性取决于观察能力"的体现。
+
+闭包层面的 β-归约也保持观察等价：
+
+```rust
+fn main() {
+    let a = (|x: i32| x + x)(2);
+    let b = 2 + 2;
+    assert_eq!(a, b); // β-归约在纯子语言中保持观察等价
+}
+```
 
 ### 2.2 所有权移动与借用
 
@@ -208,11 +301,15 @@ fn shift_left(x: i32) -> i32 { x << 1 }
 ```rust
 fn consume(v: Vec<i32>) -> usize { v.len() }
 
-let v1 = vec![1, 2, 3];
-let n1 = consume(v1);
+fn main() {
+    let v1 = vec![1, 2, 3];
+    let n1 = consume(v1);
 
-let v2 = vec![1, 2, 3];
-let n2 = consume(v2);
+    let v2 = vec![1, 2, 3];
+    let n2 = consume(v2);
+
+    assert_eq!(n1, n2);
+}
 ```
 
 只要 `v1` 与 `v2` 在调用点之前未被其他上下文观察过具体地址，两段代码观察等价：都返回 `3`，且之后都无法再使用 `v1`/`v2`。
@@ -220,15 +317,18 @@ let n2 = consume(v2);
 但以下情况**不等价**：
 
 ```rust
-let v = vec![1, 2, 3];
-let r = &v;          // 借用
-let n = v.len();     // 通过共享借用观察长度
-// r 仍可使用
+fn main() {
+    let v = vec![1, 2, 3];
+    let r = &v;          // 借用
+    let n = v.len();     // 通过共享借用观察长度
+    // r 仍可使用
+    assert_eq!(r.len(), n);
+}
 ```
 
 与直接移动不同，借用让上下文在函数调用后继续观察 `v`，因此不能简单替换为 `consume(v)`。
 
-### 2.3 编译器优化视角：常量折叠、内联与 LTO
+### 2.3 编译器优化视角：常量折叠、内联、LTO 与 black_box
 
 编译器优化合法性的本质，就是证明优化前后程序观察等价。合法的优化必须保证：对任何不依赖未定义行为或实现细节（如地址、执行时间）的上下文，优化后的程序与原程序产生相同的外部可观察结果。
 
@@ -240,15 +340,13 @@ fn folded() -> i32 {
     let y = 10;
     y + 5
 }
+
+fn main() {
+    assert_eq!(folded(), 15);
+}
 ```
 
-常量折叠与死代码消除后，等价于：
-
-```rust
-fn folded() -> i32 { 15 }
-```
-
-因为 `x` 从未被外部上下文观察，消除它不改变观察行为。但若 `x` 涉及 `unsafe` 或 `#[no_mangle]` 符号，则优化可能不再合法。
+常量折叠与死代码消除后，等价于返回 `15`。因为 `x` 从未被外部上下文观察，消除它不改变观察行为。但若 `x` 涉及 `unsafe` 或 `#[no_mangle]` 符号，则优化可能不再合法。
 
 **函数内联**改变的是调用开销，不改变可观察语义：
 
@@ -259,32 +357,44 @@ fn double(x: i32) -> i32 { x * 2 }
 pub fn caller(x: i32) -> i32 {
     double(x) + 1
 }
-```
 
-在语义层面，内联后的程序等价于：
-
-```rust
-pub fn caller_inlined(x: i32) -> i32 {
-    x * 2 + 1
+fn main() {
+    assert_eq!(caller(3), 7);
 }
 ```
 
-只要 `double` 没有副作用且不被通过函数指针外部观察，替换就是观察等价的。但若 `double` 被取地址（`let f: fn(i32) -> i32 = double;`）或被 `#[no_mangle]` 暴露给外部符号表，内联可能改变可观察行为（例如调试符号、地址唯一性）。
+在语义层面，内联后的程序等价于 `x * 2 + 1`。只要 `double` 没有副作用且不被通过函数指针外部观察，替换就是观察等价的。但若 `double` 被取地址（`let f: fn(i32) -> i32 = double;`）或被 `#[no_mangle]` 暴露给外部符号表，内联可能改变可观察行为（例如调试符号、地址唯一性）。
 
-**链接时优化（LTO）**进一步把跨 crate 边界也纳入等价变换。例如：
+**链接时优化（LTO）**进一步把跨 crate 边界也纳入等价变换：
 
 ```rust
 mod crate_a {
     pub fn helper(x: i32) -> i32 { x + 1 }
 }
 
-// 在 LTO 下，编译器可以把 `helper` 的体跨模块内联到 `caller` 中。
 pub fn caller(x: i32) -> i32 {
     crate_a::helper(x) * 2
+}
+
+fn main() {
+    assert_eq!(caller(2), 6);
 }
 ```
 
 在 `Cargo.toml` 中开启 `lto = true` 后，编译器可以把 `helper` 的体跨 crate 内联到 `caller` 中，生成等价于 `(x + 1) * 2` 的代码。这种跨模块变换的合法性同样由观察等价保证：任何只依赖 `caller` 返回值的 safe 上下文都无法区分是否发生了内联。
+
+**`std::hint::black_box`** 是观察边界的典型工具：它告诉编译器"把这个值当作外部可观察"，从而阻止基于内部等价假设的优化。
+
+```rust
+use std::hint::black_box;
+
+fn main() {
+    let x = 2 + 3;
+    // 没有 black_box 时，编译器可能把 x 折叠为 5；
+    // 加上 black_box 后，x 被视为可能被外部观察，优化受限。
+    assert_eq!(black_box(x), 5);
+}
+```
 
 ### 2.4 unsafe 边界：外部不可观察的内部差异
 
@@ -296,11 +406,31 @@ unsafe fn raw_swap(a: *mut i32, b: *mut i32) {
     *a = *b;
     *b = t;
 }
+
+fn main() {
+    let mut x = 1;
+    let mut y = 2;
+    unsafe { raw_swap(&mut x, &mut y); }
+    assert_eq!((x, y), (2, 1));
+}
 ```
 
 与使用 `std::mem::swap` 的 safe 版本相比，只要调用者满足别名契约（`a` 与 `b` 不重叠），二者观察等价；但若违反契约，`raw_swap` 可能产生 UB，而 `std::mem::swap` 通过借用检查直接阻止这种调用上下文。
 
 因此，**unsafe 抽象的正确性可以表述为**：safe API 与其内部 unsafe 实现在所有合法 safe 上下文下观察等价。
+
+下面的 `compile_fail` 示例说明：safe 编译器会拒绝能构造出非法别名的上下文，这些上下文本来就不在观察等价的比较范围内。
+
+```rust,compile_fail,E0499
+fn main() {
+    let mut v = vec![1, 2, 3];
+    let a = &mut v;
+    let b = &mut v; // 错误：不能同时存在两个可变借用
+    println!("{} {}", a[0], b[0]);
+}
+```
+
+错误 `E0499` 表明：safe 上下文无法构造对同一内存的两个同时可变引用。若用 `unsafe` 绕过此约束，则 unsafe 实现必须保证从 safe 上下文观察时仍与合法实现等价，否则就破坏了 safe API 的契约。
 
 ### 2.5 unsafe 边界反例：违反观察等价的模式
 
@@ -338,6 +468,67 @@ fn main() {
 
 在 unsafe 代码中，若实现者误以为"内部指针布局不可观察"而违反别名规则，则可能在某些 safe 上下文中引入 UB，从而破坏 safe API 与 unsafe 实现之间的观察等价。这正是 RustBelt 等验证项目要防止的情况。
 
+最后，观察等价只定义在**合法（well-typed）上下文**上。下面的例子说明：即便表达式"值相同"，若生命周期不合法，该上下文也不参与比较。
+
+```rust,compile_fail,E0716
+fn main() {
+    let r: &str = String::from("x").as_str(); // 临时值在语句结束时被释放
+    println!("{}", r);
+}
+```
+
+错误 `E0716` 表明：`String::from("x")` 产生的临时值在语句结束时被释放，而 `r` 仍指向它，导致悬垂引用。这个上下文因类型/生命周期检查失败而被排除在观察等价比较之外。
+
+### 2.6 并发上下文：非确定性与观察等价
+
+当程序存在非确定性（如线程调度、随机数）时，观察等价需要从"单一轨迹"推广到"可观察行为集合"。
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let counter = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+
+    for _ in 0..10 {
+        let c = Arc::clone(&counter);
+        handles.push(thread::spawn(move || {
+            let mut n = c.lock().unwrap();
+            *n += 1;
+        }));
+    }
+
+    for h in handles {
+        h.join().unwrap();
+    }
+
+    assert_eq!(*counter.lock().unwrap(), 10);
+}
+```
+
+在这个程序中，10 个线程的调度顺序是不确定的，但从最终 `counter` 的值来看，任何合法调度都产生相同观察结果 `10`。因此，就"最终计数器值"这一观察维度而言，不同调度轨迹是观察等价的；但若上下文能观察中间状态或执行时间，则它们不等价。
+
+### 2.7 `std::hint::black_box` 与"可观察"的边界
+
+编译器优化基于"某些值不会被外部观察"的假设。`std::hint::black_box` 显式打破这一假设，从而改变哪些优化是合法的。
+
+```rust
+use std::hint::black_box;
+
+fn sum_to(n: i32) -> i32 {
+    (1..=n).sum()
+}
+
+fn main() {
+    // 若不用 black_box，编译器可能在编译期计算出 sum_to(100) 并替换调用点。
+    // 使用 black_box 后，调用必须保留，因为结果被视为外部可观察。
+    assert_eq!(black_box(sum_to(black_box(100))), 5050);
+}
+```
+
+这个例子说明："可观察"不是一个绝对概念，而是由语言语义、编译器假设和显式提示共同决定的。在讨论观察等价时，必须首先明确观察能力集合。
+
 ---
 
 ## 三、反命题与边界分析
@@ -356,12 +547,21 @@ fn main() {
 │   └── 副作用可见差异（I/O、全局变量）
 │
 ├── 借用/生命周期导致上下文非法
-│   ├── 替换后借用检查失败
+│   ├── 替换后借用检查失败（E0382 / E0502 / E0499 / E0716）
 │   └── 产生悬垂引用或数据竞争
 │
-└── unsafe 边界破坏
-    ├── 合法 safe 上下文触发 UB
-    └── 内部指针布局假设被外部观察
+├── unsafe 边界破坏
+│   ├── 合法 safe 上下文触发 UB
+│   └── 内部指针布局假设被外部观察
+│
+├── 非确定性与并发
+│   ├── 不同调度产生不同可观察结果
+│   └── 上下文能观察中间状态或时间
+│
+└── 实现细节被当作可观察
+    ├── 依赖具体内存地址（如 `as *const _` 比较）
+    ├── 依赖执行时间或指令计数
+    └── 依赖 `#[no_mangle]` 符号存在性
 ```
 
 ### 3.2 边界极限
@@ -369,7 +569,9 @@ fn main() {
 1. **非确定性（Non-determinism）**：若程序本身非确定（如并发调度、随机数生成），观察等价需定义在"可能行为集合"上，而非单一轨迹。
 2. **资源消耗**：CPU 时间、内存占用通常不被视为"可观察行为"，但在实时系统或侧信道攻击模型中可能成为区分依据。
 3. **编译器内部表示**：LLVM IR 层面的 `poison`/`undef` 差异在源语言层面可能观察等价，但在特定架构下可能暴露为 UB。参见 [LLVM IR 中的 Poison、Undefined Behavior 与 Freeze](09_llvm_ir_poison_ub.md)。
-4. **FFI 与外部状态**：跨越 FFI 边界时，C 端可以任意读取内存，导致 Rust 端认为"不可观察"的内部布局被外部观察。
+4. **完全抽象的缺口**：简单指称模型可能无法捕捉所有操作语义可观察的差异（如 PCF 中的 parallel or）。Rust 的 safe/unsafe 边界也存在类似张力。
+5. **FFI 与外部状态**：跨越 FFI 边界时，C 端可以任意读取内存，导致 Rust 端认为"不可观察"的内部布局被外部观察。
+6. **Rice 定理的硬边界**：不存在通用算法能判定任意两个 Rust 程序是否观察等价；所有安全优化都只能是已被证明保持特定观察等价关系的变换。
 
 ---
 
@@ -377,7 +579,8 @@ fn main() {
 
 ### 4.1 观察等价性与上下文等价
 
-- **Pierce, B. C. (2002).** *Types and Programming Languages*. MIT Press. ISBN 978-0-262-16209-8. —— 第 8 章（Operational Semantics）与第 12 章（Normal Forms）系统介绍操作语义、求值上下文与上下文等价；第 1 部分奠定类型化 λ 演算基础。[官方页面](https://www.cis.upenn.edu/~bcpierce/tapl/)
+- **Pierce, B. C. (2002).** *Types and Programming Languages*. MIT Press. ISBN 978-0-262-16209-8. —— 第 5 章（Operational Semantics）、第 8 章（Operational Semantics & Contextual Equivalence）与第 12 章（Normal Forms）系统介绍操作语义、求值上下文与上下文等价；第 1 部分奠定类型化 λ 演算基础。[官方页面](https://www.cis.upenn.edu/~bcpierce/tapl/)
+- **Plotkin, G. D. (1981).** "A Structural Approach to Operational Semantics." Technical Report DAIMI FN-19, Aarhus University. —— 结构化操作语义（SOS）奠基论文，为现代操作语义与上下文等价证明提供规则框架。[PDF](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf)
 - **Winskel, G. (1993).** *The Formal Semantics of Programming Languages*. MIT Press. ISBN 978-0-262-73103-4. —— 形式化语义经典教材，涵盖操作语义、指称语义与等价关系。
 - **Pitts, A. M. (1997).** "Operationally-based theories of program equivalence." In *Semantics and Logics of Computation*, edited by A. M. Pitts and P. Dybjer, 241–298. Cambridge University Press. —— 系统阐述基于操作语义的程序等价理论，包括 CIU 定理与 operationally-based logical relations 的证明方法。[在线版本](https://www.cl.cam.ac.uk/~amp12/papers/index.html)
 - **Mason, I. A., & Talcott, C. L. (1991).** "Equivalence in functional languages with effects." *Journal of Functional Programming* 1 (3): 287–327. —— 提出并证明 CIU 等价与上下文等价的重合性。
@@ -393,18 +596,24 @@ fn main() {
 
 ### 4.3 计算理论、表达力与 Curry-Howard 背景
 
-- **Sipser, M. (2012).** *Introduction to the Theory of Computation*, 3rd ed. Cengage Learning. ISBN 978-1-133-18779-0. —— 第 4–5 章涵盖 Rice 定理、可判定性/可识别性、图灵机等价等可计算性核心内容。
+- **Sipser, M. (2012).** *Introduction to the Theory of Computation*, 3rd ed. Cengage Learning. ISBN 978-1-133-18779-0. —— 第 4–5 章涵盖 Church-Turing 论题、Rice 定理、可判定性/可识别性、图灵机等价等可计算性核心内容。
+- **Hopcroft, J. E., Motwani, R., & Ullman, J. D. (2006).** *Introduction to Automata Theory, Languages, and Computation*, 3rd ed. Pearson. ISBN 978-0-321-46225-1. —— 第 1 章（Church-Turing 论题与自动机导论）、第 9 章（可判定性）与第 7 章（上下文无关文法）为观察等价与形式语言层级提供背景。
 - **Felleisen, M. (1991).** "On the expressive power of programming languages." *Science of Computer Programming* 17 (1–3): 35–75. —— 提出通过"局部变换/宏表达"判定语言构造是否真正提升表达力的框架。[PDF](https://www.cs.tufts.edu/~nr/cs257/archive/matthias-felleisen/expressive-as-published.pdf)
 - **Felleisen, M., & Flatt, M. (1998).** "Units: Cool modules for HOT languages." In *Proceedings of the ACM SIGPLAN 1998 Conference on Programming Language Design and Implementation (PLDI 1998)*, 236–248. ACM. DOI: [10.1145/277650.277731](https://doi.org/10.1145/277650.277731) —— 以模块系统为例展示表达力分析在语言设计中的应用。
-- **Barendregt, H. P. (1984).** *The Lambda Calculus: Its Syntax and Semantics*, revised ed. Studies in Logic and the Foundations of Mathematics 103. North-Holland. ISBN 978-0-444-87508-2. DOI: [10.1016/B978-0-444-87508-2.50006-X](https://doi.org/10.1016/B978-0-444-87508-2.50006-X) —— λ 演算标准参考书，奠定可计算函数与 Curry-Howard 对应的数学基础。
+- **Barendregt, H. P. (1984).** *The Lambda Calculus: Its Syntax and Semantics*, revised ed. Studies in Logic and the Foundations of Mathematics 103. North-Holland. ISBN 978-0-444-87508-2. DOI: [10.1016/B978-0-444-87508-2.50006-X](https://doi.org/10.1016/B978-0-444-87508-2.50006-X) —— λ 演算标准参考书，Ch. 3 证明 Church-Rosser 定理，奠定可计算函数与 Curry-Howard 对应的数学基础。
 - **Girard, J.-Y., Taylor, P., & Lafont, Y. (1989).** *Proofs and Types*. Cambridge Tracts in Theoretical Computer Science 7. Cambridge University Press. ISBN 978-0-521-37181-0. —— 系统阐述 Curry-Howard 对应、命题即类型、证明即程序。[PDF](https://www.paultaylor.eu/stable/Proofs+Types.html)
-- **Scott, D. S. (1976).** "Data types as lattices." *SIAM Journal on Computing* 5 (3): 522–587. DOI: [10.1137/0205037](https://doi.org/10.1137/0205037) —— 建立 Scott 域与指称语义，为解释递归类型、非终止与不动点提供数学框架。
-- **Hopcroft, J. E., Motwani, R., & Ullman, J. D. (2006).** *Introduction to Automata Theory, Languages, and Computation*, 3rd ed. Pearson. ISBN 978-0-321-46225-1. —— 自动机与形式语言标准教材，涵盖泵引理、Myhill-Nerode 定理与 Chomsky 层级。
 
-### 4.4 Rust 官方与工程参考
+### 4.4 指称语义与完全抽象
+
+- **Scott, D. S. (1976).** "Data types as lattices." *SIAM Journal on Computing* 5 (3): 522–587. DOI: [10.1137/0205037](https://doi.org/10.1137/0205037) —— 建立 Scott 域与指称语义，为解释递归类型、非终止与不动点提供数学框架。
+- **Plotkin, G. D. (1977).** "LCF considered as a programming language." *Theoretical Computer Science* 5 (3): 223–255. DOI: [10.1016/0304-3975(77)90044-5](https://doi.org/10.1016/0304-3975(77)90044-5) —— 提出完全抽象概念，并证明 PCF 在标准 Scott 模型下不是完全抽象的（parallel or 反例）。
+- **Milner, R. (1977).** "Fully abstract models of typed lambda-calculi." *Theoretical Computer Science* 4 (1): 1–22. DOI: [10.1016/0304-3975(77)90053-6](https://doi.org/10.1016/0304-3975(77)90053-6) —— 从另一角度研究完全抽象与标准模型之间的关系。
+
+### 4.5 Rust 官方与工程参考
 
 - **Rust Reference.** [https://doc.rust-lang.org/reference/introduction.html](https://doc.rust-lang.org/reference/introduction.html) —— Rust 官方语义参考，是判断"合法上下文"的 P0 权威来源。
 - **The Rust Programming Language (TRPL).** [https://doc.rust-lang.org/book/](https://doc.rust-lang.org/book/) —— Rust 官方学习资料，对所有权、借用、unsafe 边界有权威描述。
+- **Rust Reference — `std::hint::black_box`.** [https://doc.rust-lang.org/std/hint/fn.black_box.html](https://doc.rust-lang.org/std/hint/fn.black_box.html) —— 说明编译器观察边界的显式控制。
 
 ---
 
@@ -483,6 +692,56 @@ safe API 向外部保证的行为应与其内部 unsafe 实现在所有合法 sa
 
 ---
 
+### 测验 6：Rice 定理对观察等价的限制（分析层）
+
+以下哪一项是 Rice 定理对观察等价的直接推论？
+
+- A. 任意两个 Rust 程序的观察等价性都不可判定
+- B. 编译器永远不能进行常量折叠
+- C. 所有图灵等价的程序都观察等价
+- D. Rust 类型系统能判定观察等价
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**A. 任意两个 Rust 程序的观察等价性都不可判定**。
+
+"与某固定程序观察等价"是一个非平凡语义性质：有些程序等价，有些不等价。由 Rice 定理（Sipser, 2012, Thm. 5.16），不存在通用算法判定任意输入程序是否具有该性质。因此编译器只能依赖已被证明保持特定观察等价的局部变换，而不能进行任意语义等价判定。
+</details>
+
+---
+
+### 测验 7：完全抽象把哪两种等价联系起来？（理解层）
+
+**题目**: 在指称语义中，"完全抽象"（full abstraction）指的是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+完全抽象要求**指称相等**与**观察等价/上下文等价**重合：两个程序在语义模型中具有相同的指称，当且仅当它们在所有合法上下文中不可区分。Plotkin（1977）证明 PCF 在标准 Scott 模型下不是完全抽象的，说明简单指称模型可能遗漏操作语义可观察的差异。
+</details>
+
+---
+
+### 测验 8：Felleisen 框架中 `?` 与 `async/await` 的地位（评价层）
+
+**题目**: 根据 Felleisen 的表达力框架，以下关于 Rust `?` 运算符与 `async/await` 的说法哪个最准确？
+
+- A. 它们提升了 Rust 的计算能力，使其超越图灵等价
+- B. 它们必须引发全局程序重写才能被消除
+- C. 它们是局部、观察保持的变换（语法糖/局部脱糖），不提升表达力
+- D. 它们改变了 Rust 可计算函数的集合
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+**C. 它们是局部、观察保持的变换（语法糖/局部脱糖），不提升表达力**。
+
+Felleisen（1991）区分计算能力与表达能力：`?` 可局部脱糖为 `match`，`async/await` 可局部脱糖为 `Future` 状态机，二者都保持观察等价，因此不提升计算能力，也不扩展可计算函数集合。它们改善的是工程 ergonomics，而非表达力。
+</details>
+
+---
+
 ## 🧭 思维导图（Mindmap）
 
 ```mermaid
@@ -504,23 +763,36 @@ mindmap
       死代码消除
       函数内联
       链接时优化 LTO
+      black_box 观察边界
       unsafe 抽象契约
+      并发行为集合
     边界
       非确定性
       FFI 外部状态
       资源消耗不可观察
       别名规则破坏
       移动后继续使用 E0382
+      双重可变借用 E0499
+      临时值悬垂 E0716
     计算理论网络
       Rice 定理与不可判定性
+      图灵等价 ≠ 观察等价
+      Church-Rosser / β-归约
+      完全抽象 Scott-Plotkin
       Felleisen 表达力
       Curry-Howard 对应
       形式语言层级
     权威来源
-      Pierce TAPL Ch.8/12
+      Pierce TAPL Ch.5/8/12
+      Plotkin SOS 1981
       Ahmed step-indexed LR
       Pitts operational reasoning
       Mason-Talcott CIU
+      Sipser / HMU 可计算性
+      Barendregt λ-calculus
+      Scott domains
+      Plotkin full abstraction
+      Felleisen expressiveness
       RustBelt
       Rust Reference
 ```
@@ -539,6 +811,79 @@ mindmap
 - [RustBelt](../02_separation_logic/01_rustbelt.md)
 - [Tree Borrows 深度解析](../01_ownership_logic/05_tree_borrows_deep_dive.md)
 - [LLVM IR 中的 Poison、Undefined Behavior 与 Freeze](09_llvm_ir_poison_ub.md)
+- [可计算性理论](../11_computational_models/02_computability_theory.md)
+- [形式语言与自动机](../11_computational_models/03_formal_languages_and_automata.md)
+- [计算的数学函数](../11_computational_models/04_mathematical_functions_of_computation.md)
+- [计算模型等价性](../11_computational_models/05_equivalence_of_computational_models.md)
+- [Lambda 演算](../00_type_theory/05_lambda_calculus.md)
+- [Felleisen 表达力](../00_type_theory/16_expressive_power.md)
+tional Equivalence 观察等价性))
+    定义
+      外部不可区分
+      任意合法上下文
+      相同可观察行为
+      观察谓词 Obs
+    等价形式
+      上下文等价 ≅ctx
+      双模拟
+      CIU 等价 ≈ciu
+      逻辑关系 Logical Relations
+    计算理论基础
+      Böhm 定理 Barendregt
+      Myhill-Nerode HMU
+      充分性 Scott-Plotkin
+      Rice 定理 Sipser
+      Felleisen 表达力
+    Rust 应用
+      编译器优化合法性
+      常量折叠
+      死代码消除
+      函数内联
+      链接时优化 LTO
+      unsafe 抽象契约
+      RustBelt
+    可观察维度扩展
+      函数指针身份
+      Drop 顺序
+      并发行为集合
+      const 上下文 vs 运行时
+    边界
+      非确定性
+      FFI 外部状态
+      资源消耗不可观察
+      别名规则破坏
+      移动后继续使用 E0382
+      借用冲突 E0502 E0499
+      unsafe 边界 E0133
+    权威来源
+      Pierce TAPL Ch.8/12
+      Ahmed step-indexed LR
+      Pitts operational reasoning
+      Mason-Talcott CIU
+      Barendregt Böhm
+      Scott-Plotkin adequacy
+      RustBelt
+      Rust Reference
+
+```
+
+> **认知功能**: 本 mindmap 从本页「观察等价性」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+
+---
+
+## 相关概念
+
+- [操作语义：程序行为的形式化定义](03_operational_semantics.md)
+- [指称语义](01_denotational_semantics.md)
+- [公理语义](05_axiomatic_semantics.md)
+- [求值策略](04_evaluation_strategies.md)
+- [常量求值](08_constant_evaluation.md)
+- [Aeneas Symbolic Semantics（Aeneas 符号化语义）](07_aeneas_symbolic_semantics.md)
+- [RustBelt](../02_separation_logic/01_rustbelt.md)
+- [Tree Borrows 深度解析](../01_ownership_logic/05_tree_borrows_deep_dive.md)
+- [LLVM IR 中的 Poison、Undefined Behavior 与 Freeze](09_llvm_ir_poison_ub.md)
+- [λ 演算与 Rust 计算模型](../00_type_theory/05_lambda_calculus.md)
+- [Felleisen 表达力](../00_type_theory/16_expressive_power.md)
 - [可计算性理论](../11_computational_models/02_computability_theory.md)
 - [形式语言与自动机](../11_computational_models/03_formal_languages_and_automata.md)
 - [计算的数学函数](../11_computational_models/04_mathematical_functions_of_computation.md)

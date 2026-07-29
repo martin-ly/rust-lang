@@ -1,28 +1,28 @@
 {
   "summary": {
     "date": "2026-07-29",
-    "total_relations": 9234,
+    "total_relations": 9256,
     "generic_relation_annotation_count": 0,
     "generic_ratio_global": 0.0,
     "core_entities": 50,
-    "core_relations": 2599,
+    "core_relations": 2602,
     "core_generic_count": 0,
     "core_generic_ratio": 0.0,
     "core_lacking_semantic": 0,
     "global_predicate_distribution": {
-      "ex:hasPart": 4001,
-      "ex:dependsOn": 1894,
-      "ex:entails": 1361,
-      "ex:relatedTo": 903,
+      "ex:hasPart": 4003,
+      "ex:dependsOn": 1896,
+      "ex:entails": 1364,
+      "ex:relatedTo": 918,
       "ex:refines": 498,
       "ex:partOf": 450,
       "ex:appliesTo": 127
     },
     "core_predicate_distribution": {
-      "ex:dependsOn": 1026,
+      "ex:dependsOn": 1027,
       "ex:hasPart": 621,
       "ex:entails": 387,
-      "ex:relatedTo": 285,
+      "ex:relatedTo": 287,
       "ex:refines": 140,
       "ex:partOf": 109,
       "ex:appliesTo": 31
@@ -726,7 +726,7 @@
     "ex:TypeTheory": [
       [
         "ex:dependsOn",
-        27
+        28
       ],
       [
         "ex:entails",
@@ -734,7 +734,7 @@
       ],
       [
         "ex:relatedTo",
-        9
+        11
       ]
     ],
     "ex:UnsafeBoundaryPanorama": [

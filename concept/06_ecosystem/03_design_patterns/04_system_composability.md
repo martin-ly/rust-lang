@@ -547,7 +547,8 @@ where
 // ❌ 反模式：同步发送在异步上下文中阻塞 executor
 #[tokio::main]
 async fn bad() {
-    let (tx, rx) = std::sync::mpsc::channel();
+    let (tx, _rx) = std::sync::mpsc::channel();
+    let big_data = vec![0u8; 1024];
     tokio::spawn(async move {
         // 同步 send 会阻塞当前 async 任务，但不 yield 控制权
         tx.send(big_data).unwrap(); // 若缓冲区满，永久阻塞！
@@ -557,7 +558,8 @@ async fn bad() {
 // ✅ 改进：使用异步通道或阻塞线程池
 #[tokio::main]
 async fn good() {
-    let (tx, mut rx) = tokio::sync::mpsc::channel(100);
+    let (tx, _rx) = tokio::sync::mpsc::channel(100);
+    let big_data = vec![0u8; 1024];
     tokio::spawn(async move {
         tx.send(big_data).await.unwrap(); // 正确 yield，executor 调度其他任务
     });

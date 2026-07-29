@@ -148,6 +148,8 @@
 | **Cell / RefCell** | [L2: 内存管理](../../02_intermediate/02_memory_management/01_memory_management.md) | L1 借用、L3 并发 | 分析 | ← 内部可变性 → 运行时借用检查 |
 | **Const Generics** | [L2: 泛型](../../02_intermediate/01_generics/01_generics.md) | L4 类型论、L7 演进 | 分析 | ← 泛型 → 类型级编程 |
 | **Copy Trait** | [L1: 所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | L2 Trait、L4 线性逻辑 | 理解 | ⊘ Move ≡ 线性逻辑 weakening |
+| **Computability Theory** | [L4: 可计算性理论](../../04_formal/11_computational_models/02_computability_theory.md) | L4 计算模型、L4 类型论 | 分析 | ← Church-Turing 论题 → Rust 类型系统边界 |
+| **Computational Models** | [L4: 计算语义框架](../../04_formal/11_computational_models/01_computational_semantics_framework.md) | L4 类型论、L4 并发语义 | 分析 | ← λ 演算 / 图灵机 / 递归函数 → 等价链 |
 | **Concurrency** | [L3: 并发](../../03_advanced/00_concurrency/01_concurrency.md) | L1 借用、L2 Send/Sync、L4 CSL | 分析 | ← 借用 + Send/Sync → 异步 |
 | **Complex Numbers (复数类型)** | [L7: Complex Numbers 预研](../../07_future/02_preview_features/38_complex_numbers_preview.md) | L1 数值类型、L7 f16/f128 | 分析 | ← RFC 3892 → 标准库词汇类型 |
 | **CSP (Communicating Sequential Processes)** | [L5: Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md) | L3 并发、L5 范式矩阵 | 评价 | ⊘ 所有权并发 |
@@ -173,6 +175,7 @@
 | **Edition Mechanism** | [L7: 语言演进](../../07_future/04_research_and_experimental/03_evolution.md) | 所有层 | 评价 | ← RFC 流程 → 向后兼容演进 |
 | **Effect System (效果系统)** | [L7: Effects System](../../07_future/02_preview_features/01_effects_system.md) | L2 泛型、L3 async/const/unsafe、L4 类型论 | 评价 | ← async/const/try → 统一效果语法；effects × substructural types × refinement types 三元愿景 |
 | **Elision Rules** | [L1: 生命周期](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) | L2 泛型、L4 区域类型 | 应用 | ← 生命周期标注 → 简化书写 |
+| **Equivalence of Computational Models** | [L4: 计算模型等价性](../../04_formal/11_computational_models/05_equivalence_of_computational_models.md) | L4 可计算性、L4 类型论 | 评价 | ← 编码 / Church-Turing → 编译器优化合法性边界 |
 | **enum (Sum Type)** | [L1: 类型系统](../../01_foundation/02_type_system/01_type_system.md) | L2 错误处理、L4 代数类型 | 理解 | ≡ 和类型 / 余积 (A + B) |
 | **Error Handling (Result/Option)** | [L2: 错误处理](../../02_intermediate/03_error_handling/01_error_handling.md) | L1 类型系统、L3 异步 | 应用 | ← Option/Result → ? 运算符 |
 | **Error Pedagogy** | [L0: 学习指南](07_learning_guide.md) | L0 Bloom、L1-L3 | 应用 | ← 编译错误 → 概念学习 |
@@ -191,6 +194,7 @@
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
 | **FFI (Foreign Function Interface)** | [L3: Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) | L1 所有权、L5 Rust vs C++ | 评价 | ← unsafe → 外部代码互操作 |
+| **Formal Languages and Automata** | [L4: 形式语言与自动机](../../04_formal/11_computational_models/03_formal_languages_and_automata.md) | L4 可计算性、L6 解析生态 | 分析 | ← 正则 / 上下文无关 → syn / peg / logos |
 | **Formal Methods (形式化方法)** | [L7: 形式化方法](../../07_future/04_research_and_experimental/02_formal_methods.md) | L4 RustBelt、L6 工具链 | 创造 | ← RustBelt → 工业验证 |
 | **Fractional Permissions** | [L4: RustBelt](../../04_formal/02_separation_logic/01_rustbelt.md) | L1 借用、L3 并发 | 评价 | ≡ 借用规则的形式化根基 |
 | **Future** | [L3: 异步](../../03_advanced/01_async/01_async.md) | L2 Trait、L3 Pin | 分析 | ← Trait + 状态机 → async/await |
@@ -242,6 +246,7 @@
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
 | **Macros** | [L3: 宏](../../03_advanced/03_proc_macros/01_macros.md) | L1 类型系统、L4 元编程 | 分析 | ← 语法扩展 → DSL |
+| **Mathematical Functions of Computation** | [L4: 计算的数学函数](../../04_formal/11_computational_models/04_mathematical_functions_of_computation.md) | L4 可计算性、L4 类型论 | 分析 | ← Y 组合子 / 不动点 → Scott 域语义 |
 | **MaybeUninit** | [L3: Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) | L1 所有权、L4 内存模型 | 评价 | ← unsafe → 延迟初始化 |
 | **Memory Model** | [L3: Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) | L4 RustBelt、L5 对比 | 分析 | → Stacked/Tree Borrows |
 | **Memory Safety** | [L1: 所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 所有层 | 理解 | ← 所有权 + 借用 + 生命周期 |
@@ -261,6 +266,7 @@
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
+| **Observational Equivalence** | [L4: 观察等价性](../../04_formal/03_operational_semantics/06_observational_equivalence.md) | L4 操作语义、L4 参数化 | 评价 | ← CIU / 逻辑关系 → 编译器优化合法性 |
 | **Option / Result** | [L2: 错误处理](../../02_intermediate/03_error_handling/01_error_handling.md) | L1 类型系统、L3 异步 | 应用 | ≡ Maybe Monad → ? 运算符 |
 | **Orphan Rule** | [L2: Trait](../../02_intermediate/00_traits/01_traits.md) | L4 类型论 | 分析 | ← Trait 一致性 → 封装 |
 | **Ownership** | [L1: 所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) | 所有层 | 理解 | ≡ 线性资源 ⊗ → 借用 |

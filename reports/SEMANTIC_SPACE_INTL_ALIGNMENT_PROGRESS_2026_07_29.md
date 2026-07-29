@@ -53,6 +53,22 @@
     - 新增 OWL 2 profiles（EL/QL/RL/DL）选型决策树。
     - 新增 RDF 1.1 / RDF*/ SPARQL* 与 SHACL 形状约束。
     - 补充 trait coherence 作为 CSP、TBox/ABox 对应关系及 `compile_fail,E0119` 反例。
+- **Wave 2 深化（用户选择继续后补充）**
+  - `concept/04_formal/11_computational_models/02_computability_theory.md`
+    - 新增 Rice 定理、Post 对应问题、算术层级、可计算性谱系与 Rust 类型系统（Type System）/borrow checker 的对应关系。
+    - 补充 Sipser 2012、Soare 2016、Cutland 1980 等权威来源。
+  - `concept/04_formal/11_computational_models/03_formal_languages_and_automata.md`
+    - 新增泵引理、Myhill-Nerode 定理、上下文无关语言与 Rust 解析生态映射（syn/peg/logos）。
+    - 补充 Hopcroft & Ullman、Kozen、Appel 等权威来源。
+  - `concept/04_formal/11_computational_models/04_mathematical_functions_of_computation.md`
+    - 新增 Y 组合子、不动点语义、Curry-Howard 对应、Scott 域与 partiality monad。
+    - 补充 Barendregt、Scott、Strachey、Wadler 等权威来源。
+  - `concept/04_formal/11_computational_models/05_equivalence_of_computational_models.md`
+    - 新增具体编码直觉、Church-Turing 论题的物理/超计算边界、Rice 定理对编译器优化的限制、Felleisen 表达能力幂集。
+    - 补充 Turing 1936、Church 1936、Felleisen 1991、Ord 2006 等权威来源。
+  - `concept/04_formal/03_operational_semantics/06_observational_equivalence.md`
+    - 新增 CIU 定理、逻辑关系、参数化与上下文引理、编译器优化合法性判据。
+    - 补充 Morris 1968、Plotkin 1977、Pitts 2012、Ahmed 2006 等权威来源。
 
 ### Wave 3：企业架构 / 软件工程模式深化
 
@@ -76,7 +92,7 @@
 
 - 已执行 KG 刷新流程：
   1. `python scripts/generate_kg_index.py` → 602 entities
-  2. `python scripts/generate_kg_v3.py` → 602 entities / 9229 relations
+  2. `python scripts/generate_kg_v3.py` → 602 entities / 9256 relations
   3. `python scripts/apply_kg_semantic_predicates.py --all-batches --apply`
   4. `python scripts/fallback_kg_generic_to_related.py --apply`
   5. `python scripts/compress_kg_relatedto.py --apply`
@@ -88,13 +104,13 @@
 
 ## 三、质量门回归状态
 
-最近一次全质量门回归 `bash scripts/run_quality_gates.sh`（任务 ID：`bash-3shorozq`）已完成，结果：
+最近一次全质量门回归 `bash scripts/run_quality_gates.sh`（任务 ID：`bash-ee36w9rt`）已完成，结果：
 
 ```text
 ✅ All 23 quality gates passed (23 blocking + 5 semantic observe).
 ```
 
-第一轮回归（任务 ID：`bash-yrtyeml2`）曾出现 2 处失败，已定位并修复：
+此前回归（任务 ID：`bash-yrtyeml2`）曾出现 2 处失败，已定位并修复：
 
 | 失败门 | 根因 | 修复 |
 |---|---|---|
@@ -137,11 +153,13 @@
 1. **Patch Release 响应机制**
    - 当 Rust 发布 1.97.2+ 或 1.98.0 时，按 AGENTS.md §7 流程更新 `rust_1_XX_Y.md`、MSRV 声明、相关概念页版本语义注入。
 
-2. **季度国际来源语义抽样审计**
-   - 按 `.kimi/templates/quarterly_international_source_audit.md` 抽样 5–8 个核心 `concept/` 页，与 Reference/Nomicon/TRPL 进行对比，修正语义漂移。
+2. **季度国际来源语义抽样审计** ✅
+   - 已按 `.kimi/templates/quarterly_international_source_audit.md` 抽样 8 个核心 `concept/` 页，与 Reference/Nomicon/TRPL 进行对比。
+   - 未发现漂移；所有样本的权威来源链接、版本声明、关键语义论断均与上游保持一致。
+   - 报告：`reports/QUARTERLY_INTL_SOURCE_AUDIT_2026_Q4_2026_07_29.md`。
 
 3. **观察门达标跟踪**
-   - O1 Stub Purity：当前伪 stub 0 / 空壳页 1（`01_formal_sources_baseline.md` 3 行正文），可评估是否改为 stub 模板或扩展。
+   - O1 Stub Purity：当前伪 stub 0 / 空壳页 0 / 高重复 0；`01_formal_sources_baseline.md` 已补充基线说明段落，不再判定为空壳页。
    - O4 Decision Tree：Top 30 覆盖率已 100%（30/30），继续保持。
 
 ### 长期
@@ -161,7 +179,7 @@
 |---|---|---|
 | 新增内容触发 overlap-v2 阻断 | 已控 | 所有新增正文均在 `concept/` 权威页；无跨目录重复；triage 可处理项保持 0。 |
 | 代码块标注腐烂 | 已修复 | 子任务中发现的 `CF_WRONG_CODE` 已通过重新验证；当前 `rot=0`。 |
-| 全门回归运行时过长 | 进行中 | 已在后台运行；单独验证关键门均已通过。 |
+| 全门回归运行时过长 | 已完成 | 全质量门 `bash-ee36w9rt` 已通过（23 阻断 + 5 观察）。 |
 | KG 刷新后 generic ratio 反弹 | 已控 | 刷新后核心 generic_ratio=0.00%，总 generic_ratio=0.00%。 |
 
 ---
@@ -177,3 +195,9 @@
 - `concept/04_formal/12_concurrency_models/03_parallel_concurrent_async_distributed_semantics.md`
 - `concept/06_ecosystem/14_enterprise_architecture/05_strategic_domain_driven_design_in_rust.md`
 - `concept/07_future/00_version_tracking/rust_1_97_1.md`
+- `reports/QUARTERLY_INTL_SOURCE_AUDIT_2026_Q3_2026_07_29.md`
+- `concept/04_formal/11_computational_models/02_computability_theory.md`
+- `concept/04_formal/11_computational_models/03_formal_languages_and_automata.md`
+- `concept/04_formal/11_computational_models/04_mathematical_functions_of_computation.md`
+- `concept/04_formal/11_computational_models/05_equivalence_of_computational_models.md`
+- `concept/04_formal/03_operational_semantics/06_observational_equivalence.md`

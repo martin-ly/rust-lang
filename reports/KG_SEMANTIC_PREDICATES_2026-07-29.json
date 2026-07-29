@@ -19,9 +19,9 @@
   ],
   "min_confidence": 0.75,
   "processed_entities": 539,
-  "processed_relations": 18431,
+  "processed_relations": 18453,
   "processed_generic_remaining": 797,
-  "changed_relations": 8565,
+  "changed_relations": 8587,
   "below_threshold_skipped": 0,
   "batch_statistics": [
     {
@@ -55,9 +55,9 @@
     {
       "batch": "formal",
       "entities": 97,
-      "relations": 1825,
+      "relations": 1847,
       "generic_remaining": 80,
-      "generic_ratio": 0.0438
+      "generic_ratio": 0.0433
     },
     {
       "batch": "l5",
@@ -124,23 +124,23 @@
     }
   ],
   "before_type_distribution": {
-    "ex:RelationAnnotation": 9234
+    "ex:RelationAnnotation": 9256
   },
   "after_type_distribution": {
-    "ex:relatedTo": 6756,
-    "ex:dependsOn": 945,
-    "ex:entails": 864,
+    "ex:relatedTo": 6773,
+    "ex:dependsOn": 947,
+    "ex:entails": 867,
     "ex:RelationAnnotation": 669
   },
   "before_predicate_distribution": {
-    "ex:relatedTo": 7350,
-    "ex:dependsOn": 990,
-    "ex:entails": 894
+    "ex:relatedTo": 7367,
+    "ex:dependsOn": 992,
+    "ex:entails": 897
   },
   "after_predicate_distribution": {
-    "ex:relatedTo": 7350,
-    "ex:dependsOn": 990,
-    "ex:entails": 894
+    "ex:relatedTo": 7367,
+    "ex:dependsOn": 992,
+    "ex:entails": 897
   },
   "changes_sample": [
     {

@@ -3,7 +3,7 @@
 # 内联汇编 (Inline Assembly)
 
 > **EN**: Inline Assembly
-> **Summary**: Low-level inline assembly in Rust using `asm!` and `global_asm!`, covering syntax, constraints, platform-specific features, and safety boundaries.
+> **Summary**: Low-level inline assembly in Rust using `asm!`, `global_asm!`, and `naked_asm!`, covering syntax, constraints, `clobber_abi`, platform-specific features, and safety boundaries.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [专家]
 > **Bloom 层级**: L4-L5
@@ -19,7 +19,7 @@
 > **来源**: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) · · [Kohlbecker et al. — Hygienic Macro Expansion](https://doi.org/10.1145/41625.41632) · [Flatt — Binding as Sets of Scopes](https://doi.org/10.1145/2814304.2814305) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) · [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [RFC 2873 — Inline Assembly](https://rust-lang.github.io/rfcs//2873-inline-asm.html) ·
 > [Rust By Example — Inline Assembly](https://doc.rust-lang.org/rust-by-example/unsafe/asm.html) ·
-> [s390x Vector Support PR](https://github.com/rust-lang/rust/pull/150551) ·
+> [s390x Vector Support PR](https://github.com/rust-lang/rust/pull/154184) ·
 > [LLVM SystemZ Backend](https://llvm.org/docs/CompilerWriterInfo.html) ·
 > [Intel 64 and IA-32 Architectures Software Developer Manuals](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html) ·
 > [ARM Architecture Reference Manual](https://developer.arm.com/documentation/ddi0487/latest/)
@@ -68,12 +68,13 @@
 
 ## 一、核心概念
 
-内联汇编（inline assembly）是「在 Rust 代码中嵌入目标架构机器指令」的机制，四个核心概念：
+内联汇编（inline assembly）是「在 Rust 代码中嵌入目标架构机器指令」的机制，五个核心概念：
 
 1. **为什么需要内联汇编**：正当场景只有四类——访问编译器不暴露的 CPU 特性（特殊控制寄存器、`cpuid`、`rdtsc` 精确计时）、实现硬件协议要求的精确指令序列（内存屏障 `mfence`、原子原语的底层实现）、手写超越编译器的极限优化（极罕见，需基准证明）、以及操作系统/嵌入式开发（系统调用入口、上下文切换）。反模式：用汇编「优化」普通算术——现代 LLVM 几乎总是做得更好。
-2. **`asm!` 宏基础语法**：`asm!("指令模板", 操作数列表)`——模板中 `{}`/`{name}` 引用（Reference）操作数；操作数按方向分 `in("reg") expr`（输入）、`out("reg") ret`（输出）、`inout("reg") expr => ret`、`lateout`、`sym`（符号地址）、`const`（立即数）。2020 起稳定（`std::arch::asm`，取代旧 `llvm_asm!`）。
-3. **约束系统（Constraints）**：`"reg"`（任意通用寄存器）、架构特定类（x86 的 `"rax"`/`"eax"` 显式寄存器、 `"m"` 内存操作数在部分架构可用）。编译器据约束分配寄存器并插入必要的 mov——约束是「Rust 世界与汇编世界的类型系统（Type System）」。
-4. **Clobber 与 Options**：`options(...)` 声明副作用——`nostack`（不碰栈）、`preserves_flags`（不改标志寄存器）、`readonly`/`pure`（内存访问语义，影响优化器重排）、`nomem`、`att_syntax`。未声明的副作用（如写了内存却加 `nomem`）使优化器基于错误假设重排代码——静默错误，比崩溃难查十倍。
+2. **`asm!` 宏基础语法**：`asm!("指令模板", 操作数列表)`——模板中 `{}`/`{name}` 引用（Reference）操作数；操作数按方向分 `in("reg") expr`（输入）、`out("reg") ret`（输出）、`inout("reg") expr => ret`、`lateout`、`sym`（符号地址）、`const`（立即数）、`clobber_abi("C")`（按调用约定声明被破坏的寄存器）。2020 起稳定（`std::arch::asm`，取代旧 `llvm_asm!`）。
+3. **三个稳定宏**：除 `asm!` 外，`global_asm!` 在模块级插入汇编，`naked_asm!` 用于 `#[unsafe(naked)]` 函数的完整函数体——两者都只能使用 `sym`/`const` 操作数。
+4. **约束系统（Constraints）**：`"reg"`（任意通用寄存器）、架构特定类（x86 的 `"rax"`/`"eax"` 显式寄存器、 `"m"` 内存操作数在部分架构可用）。编译器据约束分配寄存器并插入必要的 mov——约束是「Rust 世界与汇编世界的类型系统（Type System）」。
+5. **Clobber 与 Options**：`options(...)` 声明副作用——`nostack`（不碰栈）、`preserves_flags`（不改标志寄存器）、`readonly`/`pure`（内存访问语义，影响优化器重排）、`nomem`、`att_syntax`。未声明的副作用（如写了内存却加 `nomem`）使优化器基于错误假设重排代码——静默错误，比崩溃难查十倍。
 
 判定一段内联汇编的正确性：操作数方向全、约束精确、options 与指令真实副作用一致——三者任一缺失都是「编译器看不见的不变量」。
 

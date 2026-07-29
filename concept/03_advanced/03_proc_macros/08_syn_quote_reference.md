@@ -584,20 +584,23 @@ pub fn my_attr(attr: TokenStream, item: TokenStream) -> TokenStream {
 
 ### 5.2 基本语法
 
-```rust
+```rust,ignore
 use quote::quote;
 
-let name = syn::Ident::new("MyStruct", proc_macro2::Span::call_site());
+fn main() {
+    let name = syn::Ident::new("MyStruct", proc_macro2::Span::call_site());
 
-let expanded = quote! {
-    impl Debug for #name {
-        fn fmt(&self, f: &mut Formatter) -> Result {
-            write!(f, stringify!(#name))
+    let expanded = quote! {
+        impl std::fmt::Debug for #name {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(f, stringify!(#name))
+            }
         }
-    }
-};
+    };
 
-// expanded 是 proc_macro2::TokenStream
+    // expanded 是 proc_macro2::TokenStream
+    let _ = expanded;
+}
 ```
 
 ---

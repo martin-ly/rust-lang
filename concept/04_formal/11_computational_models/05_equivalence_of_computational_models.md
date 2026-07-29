@@ -38,7 +38,7 @@
       - [Curry-Howard 对应：命题即类型](#curry-howard-对应命题即类型)
       - [Rust 闭包 / 迭代器与数学函数的精确对应与张力](#rust-闭包--迭代器与数学函数的精确对应与张力)
   - [二、Felleisen 表达力框架](#二felleisen-表达力框架)
-      - [Rice 定理与编译器优化正确性](#rice-定理与编译器优化正确性)
+    - [Rice 定理与编译器优化正确性](#rice-定理与编译器优化正确性)
   - [三、Rust 中的局部变换与宏表达](#三rust-中的局部变换与宏表达)
     - [3.1 `async/await`：Future 状态机的局部去糖](#31-asyncawaitfuture-状态机的局部去糖)
     - [3.2 `?` 运算符：`Try` 分支的宏表达](#32--运算符try-分支的宏表达)
@@ -156,7 +156,11 @@ impl<T: Rec> Rec for T {
     type Out = <T as Rec>::Out;
 }
 
-fn main() {}
+fn check<T: Rec>() -> T::Out { loop {} }
+
+fn main() {
+    let _: i32 = check::<i32>();
+}
 ```
 
 > **来源**: [Sipser 1996/2012 — Introduction to the Theory of Computation, Ch4-5](https://math.mit.edu/~sipser/book.html) · [Soare 1987 — Recursively Enumerable Sets and Degrees](https://doi.org/10.1007/978-3-662-02460-7) · [Soare 2016 — Turing Computability: Theory and Applications](https://doi.org/10.1007/978-3-642-31933-4)

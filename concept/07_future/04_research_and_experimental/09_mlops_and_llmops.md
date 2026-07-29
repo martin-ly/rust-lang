@@ -214,9 +214,12 @@ impl TrainingConfig {
 
 ```rust
 // 概念性模型 artifact 元数据
+#[derive(Debug)]
+pub struct RegistryError;
+
 pub struct ModelArtifact {
     pub name: String,
-    pub version: semver::Version,
+    pub version: String, // 实际工程中使用 semver::Version
     pub checksum: String,
     pub metrics: serde_json::Value,
     pub stage: ModelStage,
@@ -231,7 +234,7 @@ pub enum ModelStage {
 
 pub trait ModelRegistry {
     fn register(&mut self, artifact: ModelArtifact) -> Result<(), RegistryError>;
-    fn promote(&mut self, name: &str, version: &semver::Version, stage: ModelStage) -> Result<(), RegistryError>;
+    fn promote(&mut self, name: &str, version: &str, stage: ModelStage) -> Result<(), RegistryError>;
     fn load(&self, name: &str, stage: ModelStage) -> Option<&ModelArtifact>;
 }
 ```

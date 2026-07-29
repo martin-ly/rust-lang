@@ -160,6 +160,10 @@
 | T-161 | Rust 并发安全定理 | `concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md` | ✅ 已注册 |
 | T-162 | Rust 效应系统不完备性权衡定理 | `concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md` | ✅ 已注册 |
 | T-163 | Rust 依赖类型片段定理 | `concept/04_formal/00_type_theory/10_dependent_refinement_types.md` | ✅ 已注册 |
+| T-164 | Rust 类型系统图灵完备性 | `concept/00_meta/00_framework/semantic_space.md` §2.3 | ✅ 已注册 |
+| T-165 | 观察等价作为等价表达判定基础 | `concept/00_meta/00_framework/semantic_space.md` §4 | ✅ 已注册 |
+| T-166 | Safe Rust 语义封闭性（无 UB） | `concept/00_meta/00_framework/semantic_space.md` §2.1 | ✅ 已注册 |
+| T-167 | 参数多态约束实现行为（免费定理） | `concept/00_meta/00_framework/semantic_space.md` §8 | ✅ 已注册 |
 
 ---
 

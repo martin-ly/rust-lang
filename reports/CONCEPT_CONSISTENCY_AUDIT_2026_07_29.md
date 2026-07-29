@@ -1,9 +1,9 @@
 # 概念一致性审计报告 (Concept Consistency Audit)
 
-> 生成时间: 2026-07-29T20:35:54.996407
+> 生成时间: 2026-07-29T23:28:20.146242
 > 生成脚本: `scripts/concept_consistency_auditor.py`(扩展后监控 22 个核心概念)
 > 扫描文件数: 584
-> 提取概念定义数: 4842
+> 提取概念定义数: 4860
 > 跨文件引用数: 321
 
 ## 目录
@@ -72,7 +72,7 @@
 
 | 概念 | 提取次数 | 涉及文件数 |
 |:---|:---|:---|
-| unsafe-UB | 500 | 137 |
+| unsafe-UB | 514 | 138 |
 | RPITIT-RTN-TAIT-定义 | 479 | 51 |
 | effects-system-定义 | 362 | 40 |
 | 所有权-Move语义 | 272 | 96 |
@@ -82,10 +82,10 @@
 | effects-system-现有 | 171 | 22 |
 | allocator-api-GlobalAlloc | 166 | 38 |
 | Send+Sync | 133 | 66 |
+| async-Future-状态机 | 108 | 45 |
 | 所有权-作用域绑定 | 107 | 61 |
 | 变型-定义 | 106 | 23 |
 | 借用-可变独占 | 106 | 41 |
-| async-Future-状态机 | 105 | 44 |
 | 内部可变性-运行时检查 | 101 | 32 |
 | let-chains-守卫 | 100 | 35 |
 | 生命周期-子类型-outlives | 94 | 27 |
@@ -103,8 +103,8 @@
 | unsafe-superpowers-unsafe_op | 53 | 13 |
 | 内部可变性-定义 | 49 | 24 |
 | Sync | 49 | 24 |
+| async-Future-等价 | 40 | 24 |
 | 生命周期-子类型-static | 40 | 15 |
-| async-Future-等价 | 39 | 23 |
 | 借用-引用有效 | 38 | 23 |
 | Unpin-定义 | 37 | 11 |
 | unsafe-不变式 | 37 | 6 |

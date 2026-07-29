@@ -16,7 +16,7 @@
 > **前置概念**: [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md)
 > **后置概念**: [Unsafe](01_unsafe.md) · [Formal Methods](../../04_formal/02_separation_logic/01_rustbelt.md)
 >
-> **来源**: [RFC 2094 — NLL](https://rust-lang.github.io/rfcs//2094-nll.html) · [Polonius](https://github.com/rust-lang/polonius) · [Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [RFC 2094 — NLL](https://rust-lang.github.io/rfcs//2094-nll.html) · [Polonius](https://github.com/rust-lang/polonius) · [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**: [NLL RFC](https://rust-lang.github.io/rfcs//2094-nll.html) ·
@@ -173,7 +173,7 @@ Polonius: 下一代借用检查器
   └── 在 CFG 的每个点上传播借用信息
 
   当前状态 (2026-06):
-  ├── ✅ #150551 已落地 — Polonius 核心实现完成
+  ├── ✅ [#134980](https://github.com/rust-lang/rust/pull/134980) 已合并 — Location-sensitive Polonius prototype
   ├── 🧪 `-Zpolonius` 标志在每日构建版可用
   ├── 📋 **感觉可稳定化（stabilizable）** — Project Goals 2026 最新评估
   ├── 📅 目标 **2026 年内稳定化 alpha 版本**（Rust Project Goals 2026 一级目标）
@@ -576,7 +576,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetimes.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
+> **权威来源**: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/05_international_authority_index.md)
 

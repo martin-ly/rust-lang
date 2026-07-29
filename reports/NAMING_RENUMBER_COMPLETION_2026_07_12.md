@@ -61,7 +61,7 @@ $ python scripts/kb_auditor.py        # 2026-07-12 实跑，exit 0
 
 | 规则 | 级别 | 首跑结果 |
 |---|---|---:|
-| N1 序号格式 NN_ + snake_case slug（无序号系列文件/目录按 WARN） | ERROR/WARN | ERROR 0 / WARN 81 |
+| N1 序号格式 NN_+ snake_case slug（无序号系列文件/目录按 WARN） | ERROR/WARN | ERROR 0 / WARN 81 |
 | N2 同目录同号冲突 | ERROR | 0（修复后；见下） |
 | N3 双前缀/异形前缀 | ERROR | 0 |
 | N4 变体后缀（stub 豁免降 WARN） | ERROR/WARN | WARN 3（均为已处置 stub，见 §3） |

@@ -7321,7 +7321,7 @@
       "path": "04_formal/03_operational_semantics/06_observational_equivalence.md",
       "title": "",
       "en": "Observational Equivalence",
-      "summary": "Operational semantics notion: two program fragments are observationally equivalent iff every well-typed surrounding context produces the same externally visible behavior, with Rust examples spanning pure functions, ownership moves, unsafe boundaries, and compiler optimizations.",
+      "summary": "Operational-semantics notion: two program fragments are observationally equivalent iff every well-typed surrounding context produces the same externally visible behavior, with Rust examples spanning pure functions, ownership moves, compiler optimizations, unsafe boundaries, and non-deterministic concurrency; aligned with Pierce TAPL, Plotkin SOS, Mason-Talcott CIU, Pitts/Ahmed logical relations, Sipser/HMU computability theory, Barendregt λ-calculus, Scott domains, and Felleisen expressiveness.",
       "bloom": "L4",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [
@@ -9259,7 +9259,7 @@
       "path": "04_formal/11_computational_models/02_computability_theory.md",
       "title": "",
       "en": "Computability Theory",
-      "summary": "Turing machines, recursive functions, the halting problem, decidability/recognizability, and the Church-Turing thesis — with Rust examples of computable and non-computable boundaries.",
+      "summary": "Turing machines, recursive functions, the halting problem, decidability/recognizability, Rice's theorem, Post's correspondence problem, reductions, arithmetical hierarchy, and the Church-Turing thesis — with Rust examples of computable and non-computable boundaries, explicit compile_fail,E0xxx counterexamples, and citations to Sipser, HMU, Barendregt, Scott, Pierce TAPL, Felleisen, Ahmed, and Pitts.",
       "bloom": "L4-L5",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [
@@ -9274,6 +9274,10 @@
         {
           "title": "Type Theory",
           "path": "../00_type_theory/01_type_theory.md"
+        },
+        {
+          "title": "Type Checking and Inference",
+          "path": "../00_type_theory/07_type_checking_and_inference.md"
         }
       ],
       "postrequisites": [
@@ -9288,6 +9292,10 @@
         {
           "title": "Equivalence of Computational Models",
           "path": "05_equivalence_of_computational_models.md"
+        },
+        {
+          "title": "Observational Equivalence",
+          "path": "../03_operational_semantics/06_observational_equivalence.md"
         }
       ],
       "theorems": [],
@@ -9298,13 +9306,17 @@
       "path": "04_formal/11_computational_models/03_formal_languages_and_automata.md",
       "title": "",
       "en": "Formal Languages and Automata",
-      "summary": "The Chomsky hierarchy — regular, context-free, context-sensitive, and recursively enumerable languages — and their automata counterparts.",
+      "summary": "The Chomsky hierarchy — regular, context-free, context-sensitive, and recursively enumerable languages — with pumping lemmas (regular and context-free), Myhill-Nerode theorem, closure properties, NFA/DFA power-set construction, Rust parser ecosystem mapping (regex/nom/pest/lalrpop/syn expressiveness and applicable levels), and typestate automata encoded via traits, aligned with Sipser, HMU, Barendregt, Scott, Pierce, Felleisen, Ahmed and Pitts.",
       "bloom": "L4-L5",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [
         {
           "title": "Lambda Calculus",
           "path": "../00_type_theory/05_lambda_calculus.md"
+        },
+        {
+          "title": "Type Theory",
+          "path": "../00_type_theory/01_type_theory.md"
         },
         {
           "title": "Type Inference",
@@ -9321,6 +9333,10 @@
           "path": "05_equivalence_of_computational_models.md"
         },
         {
+          "title": "Observational Equivalence",
+          "path": "../03_operational_semantics/06_observational_equivalence.md"
+        },
+        {
           "title": "Decidability Spectrum",
           "path": "../../00_meta/00_framework/decidability_spectrum.md"
         }
@@ -9333,7 +9349,7 @@
       "path": "04_formal/11_computational_models/04_mathematical_functions_of_computation.md",
       "title": "",
       "en": "Mathematical Functions of Computation",
-      "summary": "Computable functions as mathematical objects — λ-definability, μ-recursion, partial recursive functions, and their connection to denotational semantics via Scott domains.",
+      "summary": "Computable functions as mathematical objects — λ-definability, μ-recursion, fixed-point combinators, partiality, Curry-Howard correspondence, Scott domains, and their relationship to observational equivalence and expressive power, illustrated with Rust 1.97 Edition 2024.",
       "bloom": "L4-L5",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [
@@ -9358,6 +9374,10 @@
         {
           "title": "Equivalence of Computational Models",
           "path": "05_equivalence_of_computational_models.md"
+        },
+        {
+          "title": "Observational Equivalence",
+          "path": "../03_operational_semantics/06_observational_equivalence.md"
         }
       ],
       "theorems": [],

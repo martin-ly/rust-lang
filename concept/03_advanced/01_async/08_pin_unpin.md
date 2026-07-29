@@ -26,7 +26,7 @@
 > [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
 > [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [TRPL Ch17 — Pin](https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html) ·
-> [Rustonomicon — Pin](https://doc.rust-lang.org/std/pin/index.html) ·
+> [Rustonomicon — Pin](https://doc.rust-lang.org/nomicon/pin.html) ·
 > [RFC 2349 — Pin](https://github.com/rust-lang/rfcs/pull/2349) ·
 > [Tracking Issue #55766](https://github.com/rust-lang/rust/issues/55766)
 > **对应 Crate**: [`c06_async`](../../crates/c06_async)
@@ -56,6 +56,9 @@
     - [2.4 结构 pinning（Structural Pinning）](#24-结构-pinningstructural-pinning)
       - [`Pin::set` 赋值](#pinset-赋值)
       - [为什么 `Pin<&mut ManuallyDrop<T>>` 无法提供有效 Pin 保证](#为什么-pinmut-manuallydropt-无法提供有效-pin-保证)
+    - [2.5 `std::pin::Pin` API 与 `std::pin` 模块逐条对照](#25-stdpinpin-api-与-stdpin-模块逐条对照)
+      - [`Pin::map_unchecked_mut` 与 structural pinning 的关系](#pinmap_unchecked_mut-与-structural-pinning-的关系)
+      - [`ManuallyDrop<T>` 与 `Pin` 的再次强调](#manuallydropt-与-pin-的再次强调)
   - [三、使用模式](#三使用模式)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)

@@ -440,7 +440,7 @@ standalone_quizzes:
 embedded_quizzes:
   description: concept/ 页面内嵌入式测验（### 测验 N + <details> 答题块），按页聚合
   pages: 326
-  total_blocks: 1409
+  total_blocks: 1422
   items:
   - path: concept/00_meta/00_framework/bloom_taxonomy.md
     blocks: 3
@@ -759,7 +759,7 @@ embedded_quizzes:
   - path: concept/04_formal/03_operational_semantics/05_axiomatic_semantics.md
     blocks: 5
   - path: concept/04_formal/03_operational_semantics/06_observational_equivalence.md
-    blocks: 3
+    blocks: 8
   - path: concept/04_formal/04_model_checking/01_verification_toolchain.md
     blocks: 5
   - path: concept/04_formal/04_model_checking/03_aerospace_certification_formal_methods.md
@@ -797,11 +797,11 @@ embedded_quizzes:
   - path: concept/04_formal/11_computational_models/01_computational_semantics_framework.md
     blocks: 3
   - path: concept/04_formal/11_computational_models/02_computability_theory.md
-    blocks: 4
+    blocks: 6
   - path: concept/04_formal/11_computational_models/03_formal_languages_and_automata.md
     blocks: 5
   - path: concept/04_formal/11_computational_models/04_mathematical_functions_of_computation.md
-    blocks: 3
+    blocks: 7
   - path: concept/04_formal/11_computational_models/05_equivalence_of_computational_models.md
     blocks: 5
   - path: concept/04_formal/12_concurrency_models/02_expressiveness_of_concurrent_models.md
