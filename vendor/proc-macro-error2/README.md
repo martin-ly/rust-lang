@@ -162,10 +162,10 @@ pub fn make_answer(input: TokenStream) -> TokenStream {
 
 ## Limitations
 
-- Warnings are emitted only on nightly, they are ignored on stable.
-- "help" suggestions can't have their own span info on stable,
+* Warnings are emitted only on nightly, they are ignored on stable.
+* "help" suggestions can't have their own span info on stable,
   (essentially inheriting the parent span).
-- If your macro happens to trigger a panic, no errors will be displayed. This is not a
+* If your macro happens to trigger a panic, no errors will be displayed. This is not a
   technical limitation but rather intentional design. `panic` is not for error reporting.
 
 ## MSRV policy
@@ -180,7 +180,7 @@ Error handling in proc-macros sucks. There's not much of a choice today:
 you either "bubble up" the error up to the top-level of the macro and convert it to
 a [`compile_error!`][compl_err] invocation or just use a good old panic. Both these ways suck:
 
-- Former sucks because it's quite redundant to unroll a proper error handling
+* Former sucks because it's quite redundant to unroll a proper error handling
     just for critical errors that will crash the macro anyway; so people mostly
     choose not to bother with it at all and use panic. Simple `.expect` is too tempting.
 
@@ -188,7 +188,7 @@ a [`compile_error!`][compl_err] invocation or just use a good old panic. Both th
     you're going to have to rewrite it entirely once [`proc_macro::Diagnostic`][] is finally
     stable. Not cool.
 
-- Later sucks because there's no way to carry out the span info via `panic!`.
+* Later sucks because there's no way to carry out the span info via `panic!`.
     `rustc` will highlight the invocation itself but not some specific token inside it.
 
     Furthermore, panics aren't for error-reporting at all; panics are for bug-detecting
@@ -196,7 +196,7 @@ a [`compile_error!`][compl_err] invocation or just use a good old panic. Both th
     when you need a prototype ASAP so error handling can wait. Mixing these usages only
     messes things up.
 
-- There is [`proc_macro::Diagnostic`][] which is awesome but it has been experimental
+* There is [`proc_macro::Diagnostic`][] which is awesome but it has been experimental
     for more than a year and is unlikely to be stabilized any time soon.
 
     This crate's API is intentionally designed to be compatible with `proc_macro::Diagnostic`
@@ -205,18 +205,19 @@ a [`compile_error!`][compl_err] invocation or just use a good old panic. Both th
 
 That said, we need a solution, but this solution must meet these conditions:
 
-- It must be better than `panic!`. The main point: it must offer a way to carry the span information
+* It must be better than `panic!`. The main point: it must offer a way to carry the span information
     over to user.
-- It must take as little effort as possible to migrate from `panic!`. Ideally, a new
+* It must take as little effort as possible to migrate from `panic!`. Ideally, a new
     macro with similar semantics plus ability to carry out span info.
-- It must maintain compatibility with [`proc_macro::Diagnostic`][] .
-- **It must be usable on stable**.
+* It must maintain compatibility with [`proc_macro::Diagnostic`][] .
+* **It must be usable on stable**.
 
 This crate aims to provide such a mechanism. All you have to do is annotate your top-level
 `#[proc_macro]` function with `#[proc_macro_error]` attribute and change panics to
 [`abort!`]/[`abort_call_site!`] where appropriate, see [the Guide][guide].
 
 ## Disclaimer
+
 Please note that **this crate is not intended to be used in any way other
 than error reporting in procedural macros**, use `Result` and `?` (possibly along with one of the
 many helpers out there) for anything else.
@@ -238,12 +239,10 @@ for inclusion in this crate by you, as defined in the Apache-2.0 license, shall
 be dual licensed as above, without any additional terms or conditions.
 </sub>
 
-
 [compl_err]: https://doc.rust-lang.org/std/macro.compile_error.html
 [`proc_macro::Diagnostic`]: https://doc.rust-lang.org/proc_macro/struct.Diagnostic.html
 
 [crate::dummy]: https://docs.rs/proc-macro-error2/1/proc_macro_error/dummy/index.html
-[crate::multi]: https://docs.rs/proc-macro-error2/1/proc_macro_error/multi/index.html
 
 [`abort_call_site!`]: https://docs.rs/proc-macro-error2/1/proc_macro_error/macro.abort_call_site.html
 [`abort!`]: https://docs.rs/proc-macro-error2/1/proc_macro_error/macro.abort.html
