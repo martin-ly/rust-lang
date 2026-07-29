@@ -8561,6 +8561,10 @@
         {
           "title": "Ownership Formalization",
           "path": "../01_ownership_logic/02_ownership_formal.md"
+        },
+        {
+          "title": "Unsafe Rust",
+          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
         }
       ],
       "postrequisites": [
@@ -9669,7 +9673,7 @@
       "path": "04_formal/13_semantic_engineering/02_description_logic_and_owl.md",
       "title": "",
       "en": "Description Logic and OWL",
-      "summary": "A survey of description logics from ALC to SROIQ, OWL 2 profiles (EL/QL/RL), tableaux reasoning, satisfiability, and a lightweight mapping to Rust trait coherence and type-level predicates.",
+      "summary": "A survey of description logics from ALC to SROIQ, OWL 2 profiles (EL/QL/RL), tableaux reasoning, satisfiability, RDF 1.1 and RDF*/SPARQL* for property graphs, SHACL shape constraints, and a lightweight mapping to Rust trait coherence and type-level predicates.",
       "bloom": "L4-L5",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [

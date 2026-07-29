@@ -846,7 +846,7 @@ fn main() {
 | RFC #3808 — `#![register_{attribute,lint}_tool]` | [rust-lang.github.io/rfcs/3808-register-tool.html](https://rust-lang.github.io/rfcs/3808-register-tool.html) | 周期跟踪表 |
 | RFC #3928 — Avoid linting `unreachable_code` on `todo!()` | [rust-lang.github.io/rfcs/3928-todo-overreach.html](https://rust-lang.github.io/rfcs/3928-todo-overreach.html) | 周期跟踪表 |
 | releases.rs — Rust 1.98.0 beta | [releases.rs/docs/1.98.0/](https://releases.rs/docs/1.98.0/) | 全文状态跟踪 |
-| Rust 1.97.1 稳定补丁权威页 | [`rust_1_97_1.md`](rust_1_97_1.md) | §十连续性 |
+| Rust 1.97.1 稳定补丁权威页 | [`rust_1_97_1.md`](rust_1_97_1.md) | §5、§7 |
 | Rust 1.98.0 稳定特性（跟踪骨架） | [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md) | canonical 分工 |
 
 > **来源优先级**：官方 Rust Blog / releases.rs > RFC Book > GitHub PR/Issue > 社区技术分析。本页所有链接均经 2026-07-28 curl 实测可访问（200）。

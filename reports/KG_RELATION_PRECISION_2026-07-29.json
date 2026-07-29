@@ -1,25 +1,25 @@
 {
   "summary": {
     "date": "2026-07-29",
-    "total_relations": 9229,
+    "total_relations": 9234,
     "generic_relation_annotation_count": 0,
     "generic_ratio_global": 0.0,
     "core_entities": 50,
-    "core_relations": 2598,
+    "core_relations": 2599,
     "core_generic_count": 0,
     "core_generic_ratio": 0.0,
     "core_lacking_semantic": 0,
     "global_predicate_distribution": {
       "ex:hasPart": 4001,
-      "ex:dependsOn": 1893,
+      "ex:dependsOn": 1894,
       "ex:entails": 1361,
-      "ex:relatedTo": 900,
-      "ex:refines": 497,
+      "ex:relatedTo": 903,
+      "ex:refines": 498,
       "ex:partOf": 450,
       "ex:appliesTo": 127
     },
     "core_predicate_distribution": {
-      "ex:dependsOn": 1025,
+      "ex:dependsOn": 1026,
       "ex:hasPart": 621,
       "ex:entails": 387,
       "ex:relatedTo": 285,
@@ -614,7 +614,7 @@
     "ex:SafeAndEffectiveUnsafeRust": [
       [
         "ex:dependsOn",
-        119
+        120
       ],
       [
         "ex:entails",

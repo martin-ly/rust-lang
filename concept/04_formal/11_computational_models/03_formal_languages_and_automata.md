@@ -3,12 +3,12 @@
 # 形式语言与自动机（Formal Languages and Automata）
 
 > **EN**: Formal Languages and Automata
-> **Summary**: The Chomsky hierarchy — regular, context-free, context-sensitive, and recursively enumerable languages — and their automata counterparts.
+> **Summary**: The Chomsky hierarchy — regular, context-free, context-sensitive, and recursively enumerable languages — with pumping lemmas, Myhill-Nerode theorem, Rust parser ecosystem mapping, and typestate automata.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **定位**: 从 Chomsky 层级与自动机对应关系出发，定位 Rust 语法子集（正则表达式、上下文无关表达式、宏系统）在形式语言谱系中的位置，为理解解析、类型推断与宏扩展的计算边界提供理论基础。
+> **定位**: 从 Chomsky 层级、泵引理、Myhill-Nerode 定理与自动机对应关系出发，定位 Rust 语法子集、解析生态（nom/pest/lalrpop/syn）与 typestate 模式在形式语言谱系中的位置。
 > **前置概念**: [Lambda Calculus](../00_type_theory/05_lambda_calculus.md) · [Type Inference](../00_type_theory/03_type_inference.md)
 > **后置概念**: [Computability Theory](02_computability_theory.md) · [Equivalence of Computational Models](05_equivalence_of_computational_models.md) · [Decidability Spectrum](../../00_meta/00_framework/decidability_spectrum.md)
 
@@ -24,7 +24,13 @@
     - [1.3 正则语言：DFA、NFA 与正则表达式](#13-正则语言dfanfa-与正则表达式)
     - [1.4 上下文无关语言：CFG 与 PDA](#14-上下文无关语言cfg-与-pda)
     - [1.5 图灵可识别与可判定语言](#15-图灵可识别与可判定语言)
-    - [1.6 Rust 中的形式语言实例](#16-rust-中的形式语言实例)
+    - [1.6 泵引理（Pumping Lemma）](#16-泵引理pumping-lemma)
+      - [1.6.1 正则语言的泵引理](#161-正则语言的泵引理)
+      - [1.6.2 上下文无关语言的泵引理](#162-上下文无关语言的泵引理)
+    - [1.7 Myhill-Nerode 定理](#17-myhill-nerode-定理)
+    - [1.8 Rust 解析生态映射](#18-rust-解析生态映射)
+    - [1.9 自动机与 typestate / trait 的对应](#19-自动机与-typestate--trait-的对应)
+    - [1.10 Rust 中的形式语言实例](#110-rust-中的形式语言实例)
   - [二、反命题与边界分析](#二反命题与边界分析)
     - [2.1 反命题：Rust 语法是正则语言](#21-反命题rust-语法是正则语言)
     - [2.2 边界极限](#22-边界极限)
@@ -254,7 +260,180 @@ fn main() {
 
 ---
 
-### 1.6 Rust 中的形式语言实例
+### 1.6 泵引理（Pumping Lemma）
+
+泵引理是证明语言**不**属于某一层级的标准工具。它给出的是必要条件：若语言属于该层级，则任意足够长的字符串都能被「泵」长或泵短后仍在语言中。通过找到反例字符串，可以证明某个语言不在该层级。
+
+#### 1.6.1 正则语言的泵引理
+
+> **正则语言泵引理**
+>
+> 若 L 是正则语言，则存在泵长度 `p ≥ 1`，使得对任意 `s ∈ L` 且 `|s| ≥ p`，`s` 可分解为 `s = xyz`，满足：
+>
+> 1. `|xy| ≤ p`
+> 2. `|y| > 0`
+> 3. 对所有 `i ≥ 0`，`xyⁱz ∈ L`
+
+典型应用：证明 `L = {aⁿbⁿ | n ≥ 0}` 不是正则语言。取 `s = aᵖbᵖ`，则前缀 `xy` 全为 `a`；泵 `y` 会破坏 `a` 与 `b` 的数量平衡。
+
+```text
+泵引理不是充分条件：
+├── 满足泵引理 ⇒ 不一定正则
+├── 不满足泵引理 ⇒ 一定不正则
+└── 工程意义：任意深度计数/匹配都需要 CFG 或更强模型
+```
+
+> **来源**: [Sipser 2012 — §1.4, pp. 77–82](https://math.mit.edu/~sipser/book.html) · [Hopcroft, Motwani & Ullman 2006 — §4.1](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation)
+
+#### 1.6.2 上下文无关语言的泵引理
+
+> **上下文无关语言泵引理**
+>
+> 若 L 是 CFL，则存在泵长度 `p ≥ 1`，使得对任意 `s ∈ L` 且 `|s| ≥ p`，`s` 可分解为 `s = uvxyz`，满足：
+>
+> 1. `|vxy| ≤ p`
+> 2. `|vy| > 0`
+> 3. 对所有 `i ≥ 0`，`uvⁱxyⁱz ∈ L`
+
+典型应用：证明 `L = {aⁿbⁿcⁿ | n ≥ 0}` 不是 CFL。取 `s = aᵖbᵖcᵖ`，则 `vxy` 最多跨越两种字符；泵 `v` 和 `y` 会破坏三种字符数量相等。
+
+```text
+CFG 泵引理的工程含义：
+├── Rust 表达式语法可以处理任意嵌套的 {}、()、[]
+├── 但无法处理需要「三个并行计数」的语言结构
+└── 某些语义约束（如变量绑定唯一性）需要超出 CFG 的工具
+```
+
+> **来源**: [Sipser 2012 — §2.3, pp. 125–130](https://math.mit.edu/~sipser/book.html) · [Hopcroft, Motwani & Ullman 2006 — §7.2](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation)
+
+---
+
+### 1.7 Myhill-Nerode 定理
+
+**Myhill-Nerode 定理**给出了正则语言的另一种刻画：一个语言是正则的，当且仅当它的「不可区分关系」具有有限指数。这个定理比泵引理更强，因为它既是必要条件也是充分条件。
+
+> **定义（不可区分关系）**
+>
+> 对语言 `L ⊆ Σ*`，定义关系 `≡_L` 如下：`x ≡_L y` 当且仅当对所有 `z ∈ Σ*`，
+> $$
+> xz \in L \iff yz \in L
+> $$
+
+> **Myhill-Nerode 定理**
+>
+> 语言 L 是正则的，当且仅当 `≡_L` 的等价类个数（指数）是有限的。
+
+```text
+直观理解：
+├── 每个等价类对应 DFA 的一个状态
+├── 等价类有限 ⇔ 只需要有限状态即可识别该语言
+├── 这是构造最小 DFA 的理论基础
+└── 泵引理只能证非正则；Myhill-Nerode 还能用来构造最小自动机
+```
+
+示例：语言 `L = {aⁿbⁿ | n ≥ 0}` 不是正则的，因为字符串 `a⁰, a¹, a², ...` 两两不等价：对 `aⁱ` 和 `aʲ`（i ≠ j），取 `z = bⁱ`，则 `aⁱbⁱ ∈ L` 但 `aʲbⁱ ∉ L`。
+
+> **来源**: [Sipser 2012 — §1.4, Problem 1.52 及补充](https://math.mit.edu/~sipser/book.html) · [Hopcroft, Motwani & Ullman 2006 — §4.4](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation)
+
+---
+
+### 1.8 Rust 解析生态映射
+
+Rust 生态提供了从正则表达式到完整语法解析的多层工具，分别对应形式语言层级的不同位置：
+
+| 工具 / Crate | 形式能力 | 典型用途 | 与 Chomsky 层级关系 |
+|:---|:---|:---|:---|
+| `regex` | 正则语言 | 词法匹配、日志过滤、配置校验 | Type-3；编译为 DFA/NFA |
+| `nom` | 解析器组合子；覆盖 CFG 及轻量上下文有关模式 | 二进制/文本协议解析、配置文件 | Type-2 为主，可扩展 |
+| `pest` | PEG（解析表达式文法） | 领域特定语言（DSL）、配置文件 | 比 CFG 表达能力略有不同（无歧义，有序选择） |
+| `lalrpop` | LR(1) / LALR | 完整编程语言语法、表达式语法 | Type-2；确定性 CFG 子集 |
+| `syn` | 手写递归下降 | proc-macro 解析 Rust 语法树 | 实用 CFG + Rust 特定规则 |
+
+```text
+选择建议：
+├── 需要快速正则匹配 → regex
+├── 需要组合式、零拷贝解析 → nom
+├── 需要声明式 DSL 且要求无歧义 → pest
+├── 需要完整语言前端 → lalrpop / 手写递归下降（如 syn）
+└── 需要解析 Rust 自身语法 → syn
+```
+
+> **认知要点**：这些工具不是「越强越好」。`regex` 虽然能力有限，但性能极高且可判定；`nom`/`pest`/`lalrpop` 进入 CFG 领域后，表达能力增强但错误恢复、歧义处理变得更复杂；`syn` 则直接面向 Rust 语法这一特定 CFG 变体。
+>
+> **来源**: [regex crate documentation](https://docs.rs/regex) · [nom crate documentation](https://docs.rs/nom) · [pest crate documentation](https://docs.rs/pest) · [lalrpop documentation](https://lalrpop.github.io/lalrpop/) · [syn crate documentation](https://docs.rs/syn)
+
+---
+
+### 1.9 自动机与 typestate / trait 的对应
+
+**Typestate** 是一种将状态机编码进类型系统的设计模式：对象在不同状态下具有不同的类型，只有特定状态下才能调用特定方法。这与 DFA/PDA 的「状态 + 转移」思想直接对应。
+
+Rust 的所有权与 trait 系统特别适合实现 typestate。下面的例子用类型模拟一个具有 `Open` 和 `Closed` 两种状态的门：
+
+```rust
+struct Closed;
+struct Open;
+
+struct Door<State> {
+    state: State,
+}
+
+impl Door<Closed> {
+    fn new() -> Self { Door { state: Closed } }
+    fn open(self) -> Door<Open> { Door { state: Open } }
+}
+
+impl Door<Open> {
+    fn close(self) -> Door<Closed> { Door { state: Closed } }
+    fn walk_through(&self) -> &'static str { "walking through" }
+}
+
+fn main() {
+    let door = Door::new();
+    let door = door.open();
+    println!("{}", door.walk_through());
+    let _door = door.close();
+}
+```
+
+> 这个模式的关键在于：**编译器在类型层面强制执行状态转移规则**。`Door<Closed>` 不能调用 `walk_through`，`Door<Open>` 不能调用 `open`。这相当于把 DFA 的转移函数编码为类型系统的 method 签名。
+
+更复杂的例子可以用 trait 表达「在当前状态下允许的操作」：
+
+```rust
+trait State {}
+struct Locked;
+struct Unlocked;
+impl State for Locked {}
+impl State for Unlocked {}
+
+struct Safe<S: State> { _state: S }
+
+impl Safe<Locked> {
+    fn unlock(self, key: u32) -> Result<Safe<Unlocked>, Self> {
+        if key == 42 { Ok(Safe { _state: Unlocked }) } else { Err(self) }
+    }
+}
+
+impl Safe<Unlocked> {
+    fn retrieve(&self) -> &'static str { "secret" }
+    fn lock(self) -> Safe<Locked> { Safe { _state: Locked } }
+}
+
+fn main() {
+    let safe = Safe { _state: Locked };
+    match safe.unlock(42) {
+        Ok(open) => { println!("{}", open.retrieve()); let _ = open.lock(); }
+        Err(_) => {}
+    }
+}
+```
+
+> **来源**: [Rust Reference — Items](https://doc.rust-lang.org/reference/items.html) · [Rust By Example — Generics](https://doc.rust-lang.org/rust-by-example/generics.html)
+
+---
+
+### 1.10 Rust 中的形式语言实例
 
 Rust 程序在不同编译阶段对应形式语言层级的不同对象：
 
@@ -405,12 +584,16 @@ fn main() {
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Hopcroft, Motwani & Ullman — Introduction to Automata Theory, Languages, and Computation](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation) | ✅ 一级 | 自动机理论经典教材 |
-| [Sipser — Introduction to the Theory of Computation](https://en.wikipedia.org/wiki/Introduction_to_the_Theory_of_Computation) | ✅ 一级 | 可计算性与复杂度理论 |
+| [Hopcroft, Motwani & Ullman — Introduction to Automata Theory, Languages, and Computation, 3rd ed. (2006)](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation) | ✅ 一级 | 自动机理论经典教材；DFA/NFA §2，泵引理 §4.1/§7.2，Myhill-Nerode §4.4 |
+| [Sipser — Introduction to the Theory of Computation, 3rd ed. (2012)](https://en.wikipedia.org/wiki/Introduction_to_the_Theory_of_Computation) | ✅ 一级 | 可计算性与复杂度理论；正则泵引理 §1.4，CFG 泵引理 §2.3，Myhill-Nerode §1.4 |
 | [Rust Reference — Introduction](https://doc.rust-lang.org/reference/introduction.html) | ✅ P0 | Rust 官方参考手册 |
 | [Rust Reference — Macros By Example](https://doc.rust-lang.org/reference/macros-by-example.html) | ✅ P0 | 声明宏官方规格 |
 | [Rust Reference — Expressions](https://doc.rust-lang.org/reference/expressions.html) | ✅ P0 | Rust 表达式语法 |
 | [regex crate documentation](https://docs.rs/regex) | ✅ 二级 | Rust 正则表达式实现 |
+| [nom crate documentation](https://docs.rs/nom) | ✅ 二级 | 解析器组合子 |
+| [pest crate documentation](https://docs.rs/pest) | ✅ 二级 | PEG 解析器生成器 |
+| [lalrpop documentation](https://lalrpop.github.io/lalrpop/) | ✅ 二级 | LR(1)/LALR 解析器生成器 |
+| [syn crate documentation](https://docs.rs/syn) | ✅ 二级 | Rust 语法树解析 |
 
 ---
 
@@ -545,6 +728,21 @@ mindmap
         LBA
       Type-0 递归可枚举语言
         图灵机
+    泵引理
+      正则语言泵引理
+      上下文无关语言泵引理
+    Myhill-Nerode 定理
+      不可区分关系
+      有限指数 ⇔ 正则
+    Rust 解析生态
+      regex
+      nom
+      pest
+      lalrpop
+      syn
+    Typestate 与自动机
+      状态编码为类型
+      trait 表达转移
     Rust 实例
       词法：正则
       表达式语法：CFG
@@ -555,11 +753,6 @@ mindmap
       Rust 语法不是正则语言
       正则表达式无法匹配任意嵌套
       CFG 不能描述全部 Rust
-    相关概念
-      可计算性理论
-      计算模型等价性
-      类型推断
-      Rust 宏系统
 ```
 
-> **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+> **认知功能**: 本 mindmap 从本页「形式语言与自动机」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

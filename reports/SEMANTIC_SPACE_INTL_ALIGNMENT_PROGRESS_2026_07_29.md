@@ -5,7 +5,7 @@
 
 > **Rust 版本**: 1.97.1+ (Edition 2024)
 > **报告日期**: 2026-07-29
-> **状态**: Wave 0–4 已完成；Wave 5 KG/Quiz/全质量门回归进行中
+> **状态**: Wave 0–5 已完成；全 23 阻断门 + 5 语义观察门通过
 
 ---
 
@@ -37,6 +37,22 @@
   - 补充 CSP/CCS/π 演算、session types、algebraic effects 与 async/await 的表达能力对比。
   - 新增 channel 类型参数正例与 `compile_fail,E0308` 协议错配反例。
   - 权威来源索引新增 Hoare 1985、Milner 1989/1992、Honda 1993、Gay & Hole 2005、Wadler 2012、Plotkin & Pretnar 2009、Dolan et al. 2017。
+- **Wave 2 剩余子领域（用户选择 2 后补充）**
+  - `concept/04_formal/10_architecture_semantics/01_software_architecture_formalization.md`
+    - 补充 ISO/IEC/IEEE 42010:2022 视图-视点-利益相关者-关注四元关系。
+    - 新增 ADR（Michael Nygard 格式）模板与 Rust 工程实践。
+    - 新增 ATAM 四阶段及与 Rust 安全性/性能/可维护性的映射。
+  - `concept/04_formal/09_system_semantics/06_systems_engineering_standards.md`
+    - 新增 Reactive Manifesto 反应式系统语义四属性。
+    - 新增 CAP 定理、FLP 不可能结果、PACELC 模型及 Rust 工程映射。
+    - 补充 15288 生命周期过程与 Rust 嵌入式/no_std/Ferrocene 映射表。
+  - `concept/04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md`
+    - 从 41 行扩展为完整算法语义页，新增排序/搜索/迭代器/unsafe 算法的 Hoare 契约与终止性论证。
+    - 新增 Creusot/Prusti/Kani 工具链映射与嵌入式测验。
+  - `concept/04_formal/13_semantic_engineering/02_description_logic_and_owl.md`
+    - 新增 OWL 2 profiles（EL/QL/RL/DL）选型决策树。
+    - 新增 RDF 1.1 / RDF*/ SPARQL* 与 SHACL 形状约束。
+    - 补充 trait coherence 作为 CSP、TBox/ABox 对应关系及 `compile_fail,E0119` 反例。
 
 ### Wave 3：企业架构 / 软件工程模式深化
 
@@ -72,11 +88,18 @@
 
 ## 三、质量门回归状态
 
-最近一次全质量门回归 `bash scripts/run_quality_gates.sh`（任务 ID：`bash-u4pi6y25`）已完成，结果：
+最近一次全质量门回归 `bash scripts/run_quality_gates.sh`（任务 ID：`bash-3shorozq`）已完成，结果：
 
 ```text
 ✅ All 23 quality gates passed (23 blocking + 5 semantic observe).
 ```
+
+第一轮回归（任务 ID：`bash-yrtyeml2`）曾出现 2 处失败，已定位并修复：
+
+| 失败门 | 根因 | 修复 |
+|---|---|---|
+| Concept Consistency Audit (strict) | `rust_1_98_preview.md:849` 引用 `rust_1_97_1.md` 的 `§十连续性`，但目标文件无该段落 | 改为 `§5、§7`（目标文件存在的“迁移与验证”和“与 Rust 1.97.0 的关系”） |
+| Quiz System (strict) | `quiz_registry.yaml` 中 `embedded_quizzes` 统计为 325 页 / 1406 块，实际为 326 页 / 1409 块 | 更新为 `pages: 326`、`total_blocks: 1409` |
 
 覆盖的 23 个阻断门包括：Cargo Check/Test/Clippy/Audit/Vet、mdbook Build、KB Auditor Link Check、Content Overlap Detection、i18n Term Coverage、Mermaid Syntax、Topology Quality、KG SHACL、Canonical Uniqueness、Concept Consistency Audit、Concept Authority Coverage、Examples Compile、Naming Convention、Quiz System、Metadata Consistency、Concept Code Blocks、Mindmap Coverage、Semantic Health、Content Overlap v2。5 个语义观察门（Stub Purity、Cross-Domain Coverage、KG Relation Precision、Decision Tree rustc Error Code Coverage、Version Semantic Injection）均通过。
 
@@ -85,6 +108,8 @@
 | 门 | 命令 | 状态 |
 |---|---|---|
 | 知识体系审计 | `python scripts/kb_auditor.py --link-check` | ✅ 通过（死链 0，跨层问题 0） |
+| 概念一致性 | `python scripts/concept_consistency_auditor.py --strict` | ✅ 通过（无效引用 0） |
+| 测验体系 | `python scripts/check_quiz_system.py --strict` | ✅ 通过（22 quiz / 326 页 / 1409 块一致） |
 | 概念代码块 | `python scripts/check_concept_code_blocks.py --strict` | ✅ 通过（rot=0） |
 | 版本语义注入 | `python scripts/check_version_semantic_injection.py --strict` | ✅ 通过（74/74 映射） |
 | KG SHACL | `python scripts/check_kg_shapes.py --strict` | ✅ 通过 |
@@ -94,38 +119,38 @@
 
 ## 四、后续可持续改进计划
 
-### 短期（本轮或下一轮即可补齐）
+### 短期（本轮已完成）
 
-1. **Wave 2 剩余子领域对齐**
-   - `concept/04_formal/10_architecture_semantics/01_software_architecture_formalization.md`：补充 ISO/IEC/IEEE 42010:2022 视图与视点、ADR 模板、ATAM 评估方法的权威链接。
-   - `concept/04_formal/09_system_semantics/06_systems_engineering_standards.md`：补充 ISO/IEC/IEEE 15288 生命周期流程、Reactive Manifesto、CAP/FLP 分布式一致性模型的国际来源。
-   - `concept/04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md`：补充 Hoare 逻辑规则在 Rust unsafe 算法不变量验证中的可编译示例。
-   - `concept/04_formal/13_semantic_engineering/02_description_logic_and_owl.md`：补充 W3C OWL 2 Primer、SHACL、RDF* 的官方链接与 Rust 类型级谓词类比。
+1. **Wave 2 剩余子领域对齐** ✅
+   - `concept/04_formal/10_architecture_semantics/01_software_architecture_formalization.md`：已补充 ISO/IEC/IEEE 42010:2022 视图与视点、ADR 模板、ATAM 评估方法。
+   - `concept/04_formal/09_system_semantics/06_systems_engineering_standards.md`：已补充 ISO/IEC/IEEE 15288 生命周期流程、Reactive Manifesto、CAP/FLP/PACELC 分布式一致性模型。
+   - `concept/04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md`：已扩展为完整算法语义页，含排序/搜索/迭代器/unsafe 算法的 Hoare 契约与 Creusot/Prusti/Kani 工具链映射。
+   - `concept/04_formal/13_semantic_engineering/02_description_logic_and_owl.md`：已补充 OWL 2 profiles、SHACL、RDF*/SPARQL* 与 trait coherence 类比。
 
-2. **Wave 5 收尾**
-   - 为新增/修改页补充 `concept→quiz` 回链（若相关 quiz 已存在）。
-   - 检查 `concept/SUMMARY.md` 是否完整包含所有新增/修改页。
-   - 全质量门回归通过后，生成本报告的“完成版”。
+2. **Wave 5 收尾** ✅
+   - 为新增/修改页补充 `concept→quiz` 回链（quiz 系统双向链接 22/22）。
+   - 已检查 `concept/SUMMARY.md` 包含新增页（如 `05_strategic_domain_driven_design_in_rust.md`）。
+   - 全质量门回归已通过（任务 `bash-3shorozq`），本报告为完成版。
 
 ### 中期（持续维护）
 
-3. **Patch Release 响应机制**
+1. **Patch Release 响应机制**
    - 当 Rust 发布 1.97.2+ 或 1.98.0 时，按 AGENTS.md §7 流程更新 `rust_1_XX_Y.md`、MSRV 声明、相关概念页版本语义注入。
 
-4. **季度国际来源语义抽样审计**
+2. **季度国际来源语义抽样审计**
    - 按 `.kimi/templates/quarterly_international_source_audit.md` 抽样 5–8 个核心 `concept/` 页，与 Reference/Nomicon/TRPL 进行对比，修正语义漂移。
 
-5. **观察门达标跟踪**
+3. **观察门达标跟踪**
    - O1 Stub Purity：当前伪 stub 0 / 空壳页 1（`01_formal_sources_baseline.md` 3 行正文），可评估是否改为 stub 模板或扩展。
    - O4 Decision Tree：Top 30 覆盖率已 100%（30/30），继续保持。
 
 ### 长期
 
-6. **语义空间页的国际来源深度**
+1. **语义空间页的国际来源深度**
    - 将 `semantic_space.md` 中的每一条论断追溯到具体论文/标准/RFC 段落，减少“常识性”未引用陈述。
    - 引入 `theorem_chain` 或形式化引用来支持关键命题（如“Rust 类型系统是图灵完备的”）。
 
-7. **多语言社区跟踪（可选）**
+2. **多语言社区跟踪（可选）**
    - 当前决策：非英文社区暂不覆盖。若未来需要，可建立 `concept/00_meta/02_sources/` 下的非英文来源索引 stub，但不复制正文。
 
 ---

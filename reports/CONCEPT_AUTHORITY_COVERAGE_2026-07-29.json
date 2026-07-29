@@ -7,8 +7,8 @@
       98.8
     ],
     "P1": [
-      490,
-      85.4
+      493,
+      85.9
     ],
     "P2": [
       454,
@@ -27,8 +27,8 @@
       99.6
     ],
     "P1": [
-      436,
-      90.3
+      439,
+      90.9
     ],
     "P2": [
       436,
@@ -54,11 +54,9 @@
       "concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md",
       "concept/04_formal/07_concurrency_semantics/05_stm_semantics.md",
       "concept/04_formal/07_concurrency_semantics/07_session_types.md",
-      "concept/04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md",
       "concept/04_formal/08_algorithm_semantics/03_iterator_correctness.md",
       "concept/04_formal/09_system_semantics/02_pi_calculus_for_rust.md",
       "concept/04_formal/09_system_semantics/03_component_based_semantics.md",
-      "concept/04_formal/09_system_semantics/06_systems_engineering_standards.md",
       "concept/04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md",
       "concept/04_formal/10_architecture_semantics/03_architecture_refinement.md",
       "concept/04_formal/10_architecture_semantics/04_rust_architecture_constraints.md",
@@ -68,7 +66,6 @@
       "concept/04_formal/11_computational_models/05_equivalence_of_computational_models.md",
       "concept/04_formal/12_concurrency_models/03_parallel_concurrent_async_distributed_semantics.md",
       "concept/04_formal/13_semantic_engineering/01_ontology_engineering.md",
-      "concept/04_formal/13_semantic_engineering/02_description_logic_and_owl.md",
       "concept/04_formal/13_semantic_engineering/04_semantic_interoperability.md",
       "concept/04_formal/13_semantic_engineering/05_knowledge_graph_reasoning.md",
       "concept/05_comparative/01_systems_languages/07_rust_vs_ada_spark.md",

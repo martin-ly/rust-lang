@@ -19,9 +19,9 @@
   ],
   "min_confidence": 0.75,
   "processed_entities": 539,
-  "processed_relations": 18424,
+  "processed_relations": 18431,
   "processed_generic_remaining": 797,
-  "changed_relations": 8560,
+  "changed_relations": 8565,
   "below_threshold_skipped": 0,
   "batch_statistics": [
     {
@@ -48,16 +48,16 @@
     {
       "batch": "unsafe",
       "entities": 10,
-      "relations": 386,
+      "relations": 387,
       "generic_remaining": 11,
-      "generic_ratio": 0.0285
+      "generic_ratio": 0.0284
     },
     {
       "batch": "formal",
       "entities": 97,
-      "relations": 1821,
+      "relations": 1825,
       "generic_remaining": 80,
-      "generic_ratio": 0.0439
+      "generic_ratio": 0.0438
     },
     {
       "batch": "l5",
@@ -76,9 +76,9 @@
     {
       "batch": "l7",
       "entities": 73,
-      "relations": 1368,
+      "relations": 1369,
       "generic_remaining": 73,
-      "generic_ratio": 0.0534
+      "generic_ratio": 0.0533
     },
     {
       "batch": "l3_rem",
@@ -104,9 +104,9 @@
     {
       "batch": "future",
       "entities": 73,
-      "relations": 1368,
+      "relations": 1369,
       "generic_remaining": 73,
-      "generic_ratio": 0.0534
+      "generic_ratio": 0.0533
     },
     {
       "batch": "rustc_internals",
@@ -124,22 +124,22 @@
     }
   ],
   "before_type_distribution": {
-    "ex:RelationAnnotation": 9229
+    "ex:RelationAnnotation": 9234
   },
   "after_type_distribution": {
-    "ex:relatedTo": 6752,
-    "ex:dependsOn": 944,
+    "ex:relatedTo": 6756,
+    "ex:dependsOn": 945,
     "ex:entails": 864,
     "ex:RelationAnnotation": 669
   },
   "before_predicate_distribution": {
-    "ex:relatedTo": 7346,
-    "ex:dependsOn": 989,
+    "ex:relatedTo": 7350,
+    "ex:dependsOn": 990,
     "ex:entails": 894
   },
   "after_predicate_distribution": {
-    "ex:relatedTo": 7346,
-    "ex:dependsOn": 989,
+    "ex:relatedTo": 7350,
+    "ex:dependsOn": 990,
     "ex:entails": 894
   },
   "changes_sample": [
