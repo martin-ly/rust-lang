@@ -4,7 +4,7 @@
 # 所有权形式化
 >
 > **EN**: Ownership Formalization
-> **Summary**: Ownership. Guide to 03 Ownership Formal.
+> **Summary**: Formal models of Rust ownership: affine/linear types, fractional permissions, region-based lifetimes, and place-capability graphs.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -20,6 +20,31 @@
 > **定理链编号**: T-100 借用（Borrowing）检查可判定性 → T-101 所有权（Ownership）类型 soundness → T-102 内存安全（Memory Safety）完备性
 > **ROD 迁移备注**: 本文档是所有权（Ownership）形式化的主入口。关于借用（Borrowing）检查的**可判定性**与**复杂度**，详见 [Borrow Checking Decidability](04_borrow_checking_decidability.md)；关于 Aeneas 符号化语义对借用规则的自动化证明，详见 [Aeneas Symbolic Semantics](../03_operational_semantics/07_aeneas_symbolic_semantics.md)。
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+
+---
+
+## 权威来源 / Provenance
+
+本页关于所有权形式化模型（权限、区域、别名）的论述，直接引用以下权威来源：
+
+- **RustBelt** — Jung et al., *RustBelt: Securing the Foundations of the Rust Programming Language*, POPL 2018 · [项目主页](https://plv.mpi-sws.org/rustbelt/) · [DOI 10.1145/3158154](https://doi.org/10.1145/3158154)
+- **Place Capability Graphs** — Astrauskas et al., *Place Capability Graphs for Rust*, 2024 · [ETH PDF](https://pm.inf.ethz.ch/publications/Astrauskas2024.pdf)
+- **Rust Reference — Unsafe Rust** — [官方文档](https://doc.rust-lang.org/reference/unsafe.html)
+
+关键论断：Place Capability Graphs 将 Rust 借用信息编码为静态、模块化的图结构，在不需要完整定理证明的情况下，精确捕获 safe Rust 中“哪些 place 在何时可读/可写”的能力，从而连接了类型系统实现与形式化语义。
+
+```rust,compile_fail
+// 所有权形式化的核心推论：同一 place 不能同时持有两个可变能力
+fn main() {
+    let mut x = 0;
+    let r1 = &mut x;
+    let r2 = &mut x; // error[E0499]: cannot borrow `x` as mutable more than once
+    *r1 = 1;
+    *r2 = 2;
+}
+```
+
+---
 
 ## 零、认知路径（Cognitive Path）
 

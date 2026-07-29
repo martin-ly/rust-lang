@@ -26,6 +26,8 @@
 > [tokio::select! 教程](https://tokio.rs/tokio/tutorial/select)
 >
 > ⚠️ **声明**: 本页呈现的是**形式语义骨架与教学级对应**，非经机器验证的同构证明。Rust 标准库从未以任何进程代数为形式语义基础；「对应」一词在本页始终指**结构化类比**，而非双模拟等价。
+>
+> **权威来源 / Provenance**: Hoare, C. A. R. (1978). *Communicating Sequential Processes*. Communications of the ACM 21(8): 666–677. 该论文首次提出 CSP 进程代数，定义了基于命名通道的同步通信（rendezvous）与外部选择算子 `□`；1985 年书籍版系统化这些概念。[PDF](https://www.cs.cmu.edu/~crary/819-f09/Hoare78.pdf)
 
 ---
 
@@ -271,10 +273,23 @@ fn pipeline() {
     assert_eq!(rx_out.recv().unwrap(), 42);
 }
 
+// 外部选择 P [] Q 的 Rust 投影：recv 或超时二选一
+fn external_choice() {
+    let (tx, rx) = mpsc::channel::<i32>();
+    thread::spawn(move || {
+        tx.send(1).unwrap();
+    });
+    match rx.recv_timeout(std::time::Duration::from_millis(100)) {
+        Ok(v) => assert_eq!(v, 1),          // P 分支：通道就绪
+        Err(_) => panic!("Q 分支不应触发"), // Q 分支：超时
+    }
+}
+
 fn main() {
     parallel();
     handshake();
     pipeline();
+    external_choice();
 }
 ```
 

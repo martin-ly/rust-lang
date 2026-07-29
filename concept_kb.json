@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 583,
-    "generated_at": "2026-07-29T15:28:45.602063+00:00"
+    "generated_at": "2026-07-29T15:51:17.502888+00:00"
   },
   "files": [
     {
@@ -891,7 +891,7 @@
       "layer": "L0",
       "title": "Rust 表征空间（Semantic / Representational Space）",
       "positioning": "本文件是 `concept/` 知识体系的**元层总论**，从表征空间（Representational Space）与语义空间（Semantic Space）的视角，系统分析 Rust 语言\"能表达什么\"、\"不能表达什么\"、\"等价表达的组合关系\"，以及其内部机制的完备性与封闭性。",
-      "line_count": 1446,
+      "line_count": 1460,
       "theorem_chains": [
         {
           "text": "| 类型系统 | safe 代码无 UB | 类型正确 ⟹ 源码语义正确 |",
@@ -1038,17 +1038,23 @@
         "../../04_formal/00_type_theory/15_parametricity_and_theorems_for_free.md",
         "../../04_formal/02_separation_logic/01_rustbelt.md",
         "../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md",
+        "../../04_formal/08_algorithm_semantics/README.md",
         "../../04_formal/09_system_semantics/06_systems_engineering_standards.md",
+        "../../04_formal/09_system_semantics/README.md",
+        "../../04_formal/10_architecture_semantics/README.md",
         "../../04_formal/11_computational_models/01_computational_semantics_framework.md",
         "../../04_formal/11_computational_models/02_computability_theory.md",
         "../../04_formal/11_computational_models/05_equivalence_of_computational_models.md",
+        "../../04_formal/11_computational_models/README.md",
         "../../04_formal/12_concurrency_models/03_parallel_concurrent_async_distributed_semantics.md",
+        "../../04_formal/12_concurrency_models/README.md",
         "../../04_formal/13_semantic_engineering/05_knowledge_graph_reasoning.md",
         "../../04_formal/13_semantic_engineering/README.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/03_design_patterns/19_model_driven_engineering.md",
         "../../06_ecosystem/14_enterprise_architecture/04_domain_driven_design_in_rust.md",
+        "../../06_ecosystem/14_enterprise_architecture/05_strategic_domain_driven_design_in_rust.md",
         "../../06_ecosystem/14_enterprise_architecture/README.md",
         "../../07_future/00_version_tracking/rust_1_97_1.md",
         "../../07_future/04_research_and_experimental/08_llm_system_architecture.md",
@@ -29699,7 +29705,7 @@
       "layer": "L3",
       "title": "Pin 与 Unpin：自引用类型的不动性保证",
       "positioning": "深入分析 Rust 中 **Pin<&mut T>** 和 **Unpin** 的设计动机——解决自引用（Reference）类型（self-referential structs）在内存移动时的安全问题，探讨 Pin 与 Future、Generator 的交互，以及 async/await 的状态机实现。",
-      "line_count": 1189,
+      "line_count": 1192,
       "theorem_chains": [
         {
           "text": "| 必须自引用且固定后不再移动 | `Pin<Box<T>>` 或 `pin_mut!` | §4.1 反命题树 TRUE | 之后仍需移动 ⟹ 违反 Pin 契约 |",
@@ -41852,7 +41858,7 @@
       "layer": "L4",
       "title": "Tree Borrows 深度解析",
       "positioning": "",
-      "line_count": 229,
+      "line_count": 255,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -41860,6 +41866,14 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// Tree Borrows 允许、Stacked Borrows 拒绝的别名模式 // 验证：MIRIFLAGS=-Zmiri-tree-borrows c..."
+        },
         {
           "flags": [
             "ignore"
@@ -41971,7 +41985,7 @@
       "layer": "L4",
       "title": "RustBelt 与验证工具链",
       "positioning": "",
-      "line_count": 1479,
+      "line_count": 1500,
       "theorem_chains": [
         {
           "text": "- [2.2 ⟹ 推理链](#22--推理链)",
@@ -42000,6 +42014,12 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// RustBelt-style 所有权不变式：move 转移独占权限 own(τ)，原变量失效 fn main() {     let s = String..."
+        },
         {
           "flags": [],
           "lines": 52,
@@ -46217,7 +46237,7 @@
       "layer": "L4",
       "title": "进程代数与 Rust 并发原语：CSP · CCS · π 演算",
       "positioning": "",
-      "line_count": 366,
+      "line_count": 381,
       "theorem_chains": [
         {
           "text": "| T-PC-01 | `sync_channel(0)` 复现会合语义 | 发送与接收的 API 契约 | 发送完成 ⟹ 接收方已取走该值 |",
@@ -46289,7 +46309,7 @@
         },
         {
           "flags": [],
-          "lines": 40,
+          "lines": 53,
           "should_fail": false,
           "code_preview": "use std::sync::mpsc::{self, Sender, Receiver}; use std::thread;  // 并行组合 P ∥ Q：两..."
         },
@@ -46939,7 +46959,7 @@
       "layer": "L4",
       "title": "Session Types 与 Rust 通信协议",
       "positioning": "",
-      "line_count": 278,
+      "line_count": 311,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -46961,9 +46981,9 @@
         },
         {
           "flags": [],
-          "lines": 13,
+          "lines": 44,
           "should_fail": false,
-          "code_preview": "// 协议：Client !String. ?i32. end pub struct SendName(Sender<String>); pub struct ..."
+          "code_preview": "use std::sync::mpsc::{channel, Receiver, Sender};  // 协议：Client !String. ?i32. e..."
         },
         {
           "flags": [],
@@ -46973,11 +46993,12 @@
         },
         {
           "flags": [
-            "compile_fail"
+            "compile_fail",
+            "E0382"
           ],
           "lines": 10,
           "should_fail": true,
-          "code_preview": "// 非法：试图把已经 move 的 tx 再次使用。 use std::sync::mpsc::channel;  fn main() {     let (..."
+          "code_preview": "// 非法：把已经 move 的 tx 再次使用，违反线性规则（E0382）。 use std::sync::mpsc::channel;  fn main()..."
         }
       ],
       "sources": [],
@@ -47510,10 +47531,17 @@
       "layer": "L4",
       "title": "π 演算 for Rust 系统语义",
       "positioning": "从**系统语义**（动态拓扑、channel 移动性、名称传递作为结构演化机制）角度为 π 演算提供导航入口。完整形式化骨架、CSP/CCS/π 与 Rust 原语对应见 [`04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md`](../07_concurrency_semantics/01_process_calculi_for_rust.md)。",
-      "line_count": 37,
+      "line_count": 75,
       "theorem_chains": [],
       "anti_propositions": [],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "use std::sync::mpsc::{self, Receiver, Sender};  fn main() {     // 控制通道：用于交接新的工作..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../07_concurrency_semantics/01_process_calculi_for_rust.md",
@@ -47827,7 +47855,7 @@
       "layer": "L4",
       "title": "系统工程标准与 Rust 映射",
       "positioning": "从系统生命周期、V&V 与模型语义三个维度，建立系统工程标准与 Rust 安全关键/嵌入式实现的映射框架。",
-      "line_count": 658,
+      "line_count": 681,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47882,7 +47910,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 37,
+      "matrix_rows": 45,
       "pre_post": {
         "pre": [
           "[并发模型](../../03_advanced/00_concurrency/01_concurrency.md) · [Actor 模型系统语义](01_actor_model_semantics.md) · [分布式系统语义](04_distributed_systems_semantics.md) · [反应式系统语义](05_reactive_systems_semantics.md)"
@@ -47899,7 +47927,7 @@
       "layer": "L4",
       "title": "软件架构形式化（Software Architecture Formalization）",
       "positioning": "从形式化视角建立软件架构的组件-连接件-配置三元模型，介绍架构描述语言（ADL）、架构风格与连接件语义，并映射到 Rust 的 crate/module/trait/workspace 机制。",
-      "line_count": 542,
+      "line_count": 563,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47931,7 +47959,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 66,
+      "matrix_rows": 71,
       "pre_post": {
         "pre": [
           "[Async/Await](../../03_advanced/01_async/01_async.md) · [Architecture Patterns](../../06_ecosystem/03_design_patterns/08_architecture_patterns.md) · [Pattern Composition Algebra](../00_type_theory/12_pattern_composition_algebra.md) · [System Composability](../../06_ecosystem/03_design_patterns/04_system_composability.md)"
@@ -47948,7 +47976,7 @@
       "layer": "L4",
       "title": "架构模式语义（Architecture Pattern Semantics）",
       "positioning": "从形式化视角定义常见架构模式的语义不变量，将其表述为依赖图、控制流与数据流的约束，并映射到 Rust 的模块、trait 与 workspace 机制。本文是 [Architecture Patterns](../../06_ecosystem/03_design_patterns/08_architecture_patterns.md) 的形式化深化，连接高层设计模式与实现级语义。",
-      "line_count": 595,
+      "line_count": 615,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -48010,7 +48038,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 17,
+      "matrix_rows": 23,
       "pre_post": {
         "pre": [
           "[Async/Await](../../03_advanced/01_async/01_async.md) · [Architecture Patterns](../../06_ecosystem/03_design_patterns/08_architecture_patterns.md) · [Pattern Composition Algebra](../00_type_theory/12_pattern_composition_algebra.md) · [System Composability](../../06_ecosystem/03_design_patterns/04_system_composability.md) · [Semantic Space](../../00_meta/00_framework/semantic_space.md)"
@@ -48362,7 +48390,7 @@
       "layer": "L4",
       "title": "形式语言与自动机（Formal Languages and Automata）",
       "positioning": "从 Chomsky 层级、泵引理、Myhill-Nerode 定理、闭包性质、NFA/DFA 等价构造与自动机对应关系出发，定位 Rust 语法子集、解析生态（nom/pest/lalrpop/syn）与 typestate 模式在形式语言谱系中的位置，并桥接 λ 演算、类型理论与指称语义的国际权威视角。",
-      "line_count": 1154,
+      "line_count": 1150,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -67658,7 +67686,7 @@
       "layer": "L6",
       "title": "企业架构框架（Enterprise Architecture Frameworks）",
       "positioning": "从企业级视角对齐 TOGAF 10、Zachman Framework、FEAF 与 BDAT 四维矩阵，建立业务、数据、应用、技术架构与 Rust 工程结构的映射。",
-      "line_count": 354,
+      "line_count": 376,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -67688,7 +67716,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 43,
+      "matrix_rows": 51,
       "pre_post": {
         "pre": [
           "[Software Architecture Formalization](../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md) · [Architecture Patterns](../03_design_patterns/08_architecture_patterns.md) · [System Design Principles](../03_design_patterns/03_system_design_principles.md)"
@@ -67784,7 +67812,7 @@
       "layer": "L6",
       "title": "领域驱动设计（DDD）在 Rust 中的战术模式",
       "positioning": "将 Eric Evans 与 Vaughn Vernon 的 DDD 战术设计模式与 Rust 的类型系统、所有权和错误处理模型对齐，提供可在生产代码中落地的实现策略。",
-      "line_count": 328,
+      "line_count": 348,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -67876,7 +67904,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 0,
+      "matrix_rows": 6,
       "pre_post": {
         "pre": [
           "[Enterprise Architecture Frameworks](01_enterprise_architecture_frameworks.md) · [Architecture Governance and ADRs](02_architecture_governance_and_adrs.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Error Handling](../../01_foundation/08_error_handling/01_error_handling_basics.md) · [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md)"
@@ -70443,8 +70471,13 @@
       "layer": "L7",
       "title": "Rust 1.97.1 稳定补丁",
       "positioning": "",
-      "line_count": 449,
-      "theorem_chains": [],
+      "line_count": 505,
+      "theorem_chains": [
+        {
+          "text": "> 从元层看，1.97.1 事件是“形式化语义 ⟹ 工业编译器实现”信任链的鲜活案例：safe Rust 的封闭性定理保证源码级无 UB，但 LLVM 优化层的等价变换仍需工程验证。关于这一信任边界的系统讨论，见 [`concept/00_meta/00_framework/semantic_space.md`](../../00_meta/00_framework/semantic_space.md) §4.7 “Rust 1.97.1：补丁语义与编译器信任边界”。",
+          "type": "paragraph"
+        }
+      ],
       "anti_propositions": [
         {
           "title": "## 6. 反命题"
@@ -70459,11 +70492,21 @@
       "code_blocks": [
         {
           "flags": [
-            "compile_fail"
+            "compile_fail",
+            "E0512"
           ],
           "lines": 9,
           "should_fail": true,
           "code_preview": "> enum State { On, Off } > > fn main() { >     let s = State::On; >     // 试图通过 ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0605"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "> enum State { On(i32), Off } > > fn main() { >     let s = State::On(1); >     ..."
         },
         {
           "flags": [
@@ -70476,6 +70519,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/00_framework/semantic_space.md",
         "../../03_advanced/02_unsafe/06_memory_model.md",
         "../../04_formal/03_operational_semantics/09_llvm_ir_poison_ub.md",
         "../../06_ecosystem/00_toolchain/01_toolchain.md",
@@ -70488,7 +70532,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 24,
+      "matrix_rows": 35,
       "pre_post": {
         "pre": [
           "[Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.97.0 稳定特性](rust_1_97_stabilized.md)"

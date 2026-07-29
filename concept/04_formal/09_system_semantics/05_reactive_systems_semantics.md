@@ -29,6 +29,8 @@
 > [tokio::sync::mpsc docs](https://docs.rs/tokio/latest/tokio/sync/mpsc/)
 >
 > ⚠️ **声明**: 本页呈现的是反应式系统的**形式语义骨架与教学级对应**，非经机器验证的同构证明。Rust 标准库未以任何反应式形式模型为基础；「对应」指结构化类比，而非双模拟等价。
+>
+> **权威来源 / Provenance**: The Reactive Manifesto. *The Reactive Manifesto*. 2013/2014. 该宣言定义了反应式系统的四个核心特征：Responsive（响应性）、Resilient（弹性）、Elastic（弹性）与 Message-Driven（消息驱动）。[Official Site](https://www.reactivemanifesto.org/)
 
 ---
 

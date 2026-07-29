@@ -1150,6 +1150,16 @@ fn safe_raw_pointer() {
 
 ## 十、知识来源关系（Provenance）
 
+Rust 官方对 `unsafe` 的权威定义见 [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe.html)。该文档规定了 `unsafe` 块、`unsafe` 函数、`unsafe` trait、extern 块等构造的语法与语义边界，也是所有 unsafe 编程实践讨论的单一事实来源。
+
+```rust,compile_fail
+// Rust Reference 的形式化推论：裸指针解引用等 unsafe 操作必须出现在 unsafe 上下文中
+fn main() {
+    let ptr = &1 as *const i32;
+    let _ = *ptr; // error[E0133]: dereference of raw pointer requires unsafe function or block
+}
+```
+
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
 | unsafe 提供 5 种超能力 | [TRPL Ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) | ✅ |

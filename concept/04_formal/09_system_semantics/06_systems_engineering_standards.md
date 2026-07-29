@@ -25,6 +25,29 @@
 > [Ferrocene Language Specification](https://spec.ferrocene.dev/) ·
 > [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 
+> **权威来源 / Provenance**: 本节系统生命周期、V-model 与验证确认（V&V）语义直接对齐 ISO/IEC/IEEE 15288:2023 与 INCOSE Systems Engineering Handbook 第 5 版。
+>
+> - **ISO/IEC/IEEE 15288:2023** — *Systems and Software Engineering — System Life Cycle Processes*. ISO, 2023. [https://www.iso.org/standard/63711.html](https://www.iso.org/standard/63711.html)
+> - **INCOSE** — *Systems Engineering Handbook: A Guide for System Life Cycle Processes and Activities* (5th ed.). Wiley, 2023. [https://www.incose.org/incose-members/featured-content/incose-handbooks](https://www.incose.org/incose-members/featured-content/incose-handbooks)
+
+---
+
+ISO/IEC/IEEE 15288 技术过程到 Rust 制品决策表：
+
+```text
+| 15288 技术过程   | Rust 工程制品                  | 验证证据示例                       |
+|------------------|--------------------------------|------------------------------------|
+| 利益相关方需求   | requirements/ Markdown + ID    | 需求审查会议纪要                   |
+| 系统需求分析     | struct/enum 不变量、常量       | 类型检查、static_assertions        |
+| 架构设计         | crate 边界、模块图、trait 契约 | cargo check 通过、架构图           |
+| 实现             | src/、Cargo.toml               | CI build、clippy 零警告            |
+| 集成             | tests/integration、HIL         | 集成测试报告                       |
+| 验证             | 单元/属性测试、Kani 证明       | 覆盖率、证明日志                   |
+| 确认             | 用户场景测试、验收清单         | 验收签字、鉴定审查记录             |
+```
+
+> 说明：该决策表把 15288 技术过程链映射为 Rust 安全关键/嵌入式项目中的可审计制品，支持 V-model 左侧细化与右侧验证的追溯。
+
 ---
 
 ## 📑 目录

@@ -15,6 +15,8 @@
 >
 > ⚠️ **声明**: 本页呈现的是**形式语义骨架与教学级代码**，用于建立协议类型直觉。Rust 标准库没有原生 session-type 检查；文中涉及的“协议编码”依赖所有权和线性使用约定，而非编译器自动验证协议状态机。
 
+> **权威来源 / Provenance**: Honda, K. (1993). *Types for Dyadic Interaction*. CONCUR 1993 / LNCS 715, 509–523. 该论文首次提出 session type，用线性类型刻画双向通信协议的状态演化；其多党异步扩展见 Honda, Yoshida & Carbone (2008). *Multiparty Asynchronous Session Types*. POPL 2008. 完整 session types 文献索引见 [Session Types Bibliography](http://groups.inf.ed.ac.uk/abcd/session-types-bibliography.html).
+
 ---
 
 ## 🧠 知识结构图
@@ -127,21 +129,52 @@ fn main() {
 更忠实的编码是把协议的每一步表示为不同的 Rust 类型，从而把“协议错误”转化为**类型错误**或**所有权错误**：
 
 ```rust
+use std::sync::mpsc::{channel, Receiver, Sender};
+
 // 协议：Client !String. ?i32. end
-pub struct SendName(Sender<String>);
-pub struct RecvPrice(Receiver<i32>);
+// 用两个底层 channel 模拟一条双向会话通道；类型状态保证顺序
+pub struct Session<S, R> {
+    tx: Sender<S>,
+    rx: Receiver<R>,
+}
+
+pub struct SendName(Session<String, i32>);
+pub struct RecvPrice(Session<String, i32>);
 
 impl SendName {
+    // 消耗 SendName，返回 RecvPrice：协议状态从 !String 转移到 ?i32
     pub fn send_name(self, name: String) -> RecvPrice {
-        self.0.send(name).unwrap();
-        // 假设协议约定：发送方在发送名字后立即在同一个 channel 上接收价格
-        // 为教学清晰，这里把 rx 也带在类型里；真实实现通常成对构造。
-        todo!() // 实际需返回持有 rx 的 RecvPrice
+        self.0.tx.send(name).unwrap();
+        RecvPrice(self.0)
     }
+}
+
+impl RecvPrice {
+    // 消耗 RecvPrice，完成协议 end
+    pub fn recv_price(self) -> i32 {
+        self.0.rx.recv().unwrap()
+    }
+}
+
+fn main() {
+    let (tx1, rx1) = channel::<String>();
+    let (tx2, rx2) = channel::<i32>();
+
+    // 工作线程扮演 Server 的对偶端
+    std::thread::spawn(move || {
+        let name = rx1.recv().unwrap();
+        assert_eq!(name, "apple");
+        tx2.send(42).unwrap();
+    });
+
+    let client = SendName(Session { tx: tx1, rx: rx2 });
+    let client = client.send_name("apple".into());
+    let price = client.recv_price();
+    assert_eq!(price, 42);
 }
 ```
 
-> 注意：上面的骨架故意简化。完整实现需要把 `SendName` 与 `RecvPrice` 持有的 `Sender<T>` / `Receiver<T>` 分开或合并管理。
+> 关键点：通过 `self` 消费，`send_name` 之后无法再调用；协议错误变成编译期所有权错误（E0382）。
 
 ---
 
@@ -194,14 +227,14 @@ fn main() {
 
 ### 反例 2：错误地在选择前发送数据
 
-```rust,compile_fail
-// 非法：试图把已经 move 的 tx 再次使用。
+```rust,compile_fail,E0382
+// 非法：把已经 move 的 tx 再次使用，违反线性规则（E0382）。
 use std::sync::mpsc::channel;
 
 fn main() {
     let (tx, rx) = channel::<i32>();
-    let tx2 = tx; // tx 被 move
-    tx.send(1).unwrap(); // 错误：value borrowed here after move
+    let _tx2 = tx; // tx 被 move
+    tx.send(1).unwrap(); // 错误：use of moved value: `tx` [E0382]
     let _ = rx.recv();
 }
 ```

@@ -16,6 +16,28 @@
 
 > **来源**: [The Open Group — TOGAF Standard, 10th Edition](https://www.opengroup.org/togaf) · [Zachman Framework](https://www.zachman.com/) · [FEAF](https://www.whitehouse.gov/omb/management/egov/federal-enterprise-architecture/) · [ISO/IEC/IEEE 42010:2022](https://www.iso.org/standard/74296.html) · [IEEE 1471-2000](https://standards.ieee.org/standard/1471-2000.html)
 
+> **权威来源 / Provenance**: 本节企业架构框架（TOGAF ADM、BDAT 四维矩阵、Zachman/FEAF 参考模型）与 The Open Group 的 *TOGAF Standard, 10th Edition* 对齐。
+>
+> - **The Open Group** — *TOGAF Standard, 10th Edition*. [https://www.opengroup.org/togaf](https://www.opengroup.org/togaf)
+
+---
+
+TOGAF ADM 阶段到 Cargo workspace 决策表：
+
+```text
+| ADM 阶段 | 企业架构关注点       | Rust workspace 动作                  | 输出制品                     |
+|----------|----------------------|--------------------------------------|------------------------------|
+| A 愿景   | 边界与利益相关方     | 定义 workspace members 与 crate 职责 | Cargo.toml [workspace]       |
+| B 业务   | 能力、领域事件       | 识别 bounded context、领域事件类型   | crates/*/domain 事件枚举     |
+| C 信息   | 数据/应用拆分        | 设计 struct/enum 与 trait 契约       | 共享 kernel crate            |
+| D 技术   | 平台、部署、MSRV     | 配置 target、CI、容器镜像            | rust-toolchain.toml          |
+| E/F 迁移 | 债务、版本、路线图   | 制定 SemVer/MSRV 升级计划            | ROADMAP.md、ADR              |
+| G 治理   | 合规、质量门         | 配置 CI 阻断门、架构测试             | .github/workflows/*.yml      |
+| H 变更   | 补丁、依赖、安全响应 | 执行 cargo update、RUSTSEC 响应      | 变更记录、更新 Cargo.lock    |
+```
+
+> 说明：该表把 TOGAF ADM 的迭代周期映射到 Rust monorepo 的日常治理动作；ADM 的“裁剪”原则意味着小型项目可合并阶段，但需显式记录。
+
 ---
 
 ## 📑 目录

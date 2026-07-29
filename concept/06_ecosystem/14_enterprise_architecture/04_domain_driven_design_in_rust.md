@@ -16,6 +16,26 @@
 
 > **来源**: [Evans 2003 — *Domain-Driven Design*](https://www.oreilly.com/library/view/domain-driven-design-tackling/0321125215/) · [Vernon 2016 — *Implementing Domain-Driven Design*](https://www.oreilly.com/library/view/implementing-domain-driven-design/9780133039900/) · [Fowler 2005 — Anemic Domain Model](https://martinfowler.com/bliki/AnemicDomainModel.html) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 
+> **权威来源 / Provenance**: 本节领域驱动设计战术模式与 Eric Evans (2003) 的 *Domain-Driven Design* 对齐；核心概念（限界上下文、聚合、领域事件、仓储）的免费摘要参见 InfoQ minibook。
+>
+> - **Evans (2003)** — *Domain-Driven Design: Tackling Complexity in the Heart of Software*. Addison-Wesley. [O'Reilly](https://www.oreilly.com/library/view/domain-driven-design-tackling/0321125215/) · [InfoQ summary](https://www.infoq.com/minibooks/domain-driven-design-quickly/)
+
+---
+
+DDD bounded context → Cargo workspace 映射决策表：
+
+```text
+| DDD 概念         | 组织含义               | Rust workspace 映射                | 边界规则                              |
+|------------------|------------------------|------------------------------------|---------------------------------------|
+| Bounded Context  | 独立语义与发布边界     | 一个 workspace member crate        | 跨 context 仅通过共享事件/ID 通信     |
+| Aggregate        | 一致性边界             | crate 内的一个模块 + 聚合根 struct | 外部只持有根 ID，不引用内部实体       |
+| Domain Event     | 跨聚合/上下文通信      | enum OrderEvent + message bus      | 事件类型定义在共享契约 crate          |
+| Repository       | 持久化抽象             | trait OrderRepository              | 端口定义在领域 crate，适配器在外围 crate|
+| Shared Kernel    | 跨 context 共享子域    | 独立的 shared-kernel crate         | 变更需所有 context 维护者同意         |
+```
+
+> 说明：该表说明 Evans 提出的战略/战术模式可自然映射到 Rust workspace 的 crate 边界与 trait 端口；bounded context 对应独立编译与发布单元。
+
 ---
 
 ## 🧠 知识结构图

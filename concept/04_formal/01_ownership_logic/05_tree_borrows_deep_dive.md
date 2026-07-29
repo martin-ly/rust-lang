@@ -23,6 +23,32 @@
 > **后置概念**: N/A
 ---
 
+## 权威来源 / Provenance
+
+本页关于 Stacked Borrows / Tree Borrows 别名模型的事实与比较，直接引用以下权威来源：
+
+- **Stacked Borrows** — Jung et al., *Stacked Borrows: An Aliasing Model for Rust*, POPL 2019 (广泛称为 2020 年扩展版本) · [项目主页](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
+- **Tree Borrows** — Villani et al., *Tree Borrows*, PLDI 2025 · [预印本 PDF](https://perso.crans.org/vanille/treebor/aux/preprint.pdf) · [Ralf Jung 博客讲解](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html)
+
+关键论断：Tree Borrows 用树形权限状态机替代 Stacked Borrows 的线性栈，使“通过裸指针重新借用后复用原引用”等合法 unsafe 模式不再被误报为 UB，同时保持对真 UB 的检测能力。
+
+```rust,ignore
+// Tree Borrows 允许、Stacked Borrows 拒绝的别名模式
+// 验证：MIRIFLAGS=-Zmiri-tree-borrows cargo miri test 通过；
+//       MIRIFLAGS=-Zmiri-stacked-borrows cargo miri test 报 UB。
+fn main() {
+    let mut x = 0;
+    let r1 = &mut x;                  // 父可变引用
+    let raw = r1 as *mut i32;         // 派生裸指针
+    let r2 = unsafe { &mut *raw };    // 通过裸指针重新借用
+    unsafe { *r2 = 1; }               // 子引用写
+    drop(r2);                         // 子引用结束
+    assert_eq!(*r1, 1);               // Tree Borrows：父引用仍可读；Stacked Borrows 会判为 UB
+}
+```
+
+---
+
 ## 一、权威定义
 
 > Tree Borrows is a new aliasing model for Rust that generalizes Stacked Borrows to support more flexible borrowing patterns.

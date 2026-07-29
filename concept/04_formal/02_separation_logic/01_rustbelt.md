@@ -46,6 +46,27 @@
 
 ---
 
+## 权威来源 / Provenance
+
+本页关于 RustBelt 形式化模型与核心定理的事实，直接引用以下权威来源：
+
+- **RustBelt** — Jung et al., *RustBelt: Securing the Foundations of the Rust Programming Language*, POPL 2018 · [项目主页](https://plv.mpi-sws.org/rustbelt/) · [DOI 10.1145/3158154](https://doi.org/10.1145/3158154)
+- **Iris** — Jung et al., *Iris from the Ground Up*, JFP 2018 · [Iris Project](https://iris-project.org/)
+
+RustBelt 的核心形式化结论是：在 λRust 操作语义下，通过 Iris 分离逻辑机械验证的 safe Rust 子集满足内存安全且无数据竞争；unsafe 代码若满足其 Iris 协议契约，则不破坏 safe 抽象边界。
+
+```rust
+// RustBelt-style 所有权不变式：move 转移独占权限 own(τ)，原变量失效
+fn main() {
+    let s = String::from("RustBelt");
+    let t = s;              // own(String) 从 s 转移到 t
+    // println!("{}", s);   // 若取消注释：error[E0382] value used here after move
+    println!("{}", t);      // ✅ 独占所有权有效
+}
+```
+
+---
+
 ## 📑 目录
 
 - [RustBelt 与验证工具链](#rustbelt-与验证工具链)

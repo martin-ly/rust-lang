@@ -16,6 +16,27 @@
 
 > **来源**: [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html) · [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) · [Shaw & Garlan — Software Architecture (1996)](https://www.cs.cmu.edu/~search/articles/books/SA.book.pdf)
 
+> **权威来源 / Provenance**: 本节软件架构形式化模型与 ISO/IEC/IEEE 42010:2022 架构描述框架对齐；组件-连接件-配置三元组与架构描述语言（ADL）讨论参考 Shaw & Garlan (1996) 与 Medvidovic & Taylor (2000)。
+>
+> - **ISO/IEC/IEEE 42010:2022** — *Software and Systems Engineering — Architecture Description*. ISO, 2022. [https://www.iso.org/standard/74296.html](https://www.iso.org/standard/74296.html)
+> - **Shaw & Garlan (1996)** — *Software Architecture: Perspectives on an Emerging Discipline*. Prentice Hall. [PDF](https://www.cs.cmu.edu/~search/articles/books/SA.book.pdf)
+> - **Medvidovic & Taylor (2000)** — *A Classification and Comparison Framework for Software Architecture Description Languages*. IEEE Transactions on Software Engineering. [https://ieeexplore.ieee.org/document/845372](https://ieeexplore.ieee.org/document/845372)
+
+---
+
+ISO/IEC/IEEE 42010 视点与 Rust crate 结构映射：
+
+```text
+| 视点 (Viewpoint) | 关注点 (Concern)          | Rust 工程视图 / 制品                     |
+|------------------|---------------------------|------------------------------------------|
+| Module View      | 编译期耦合、信息隐藏      | cargo modules 模块依赖图                 |
+| API Contract     | 稳定性、版本化            | 核心 crate 中定义的 pub trait            |
+| Dependency Audit | 供应链风险、可审计性      | cargo tree 输出 + Cargo.lock             |
+| Runtime View     | 性能、弹性、资源使用      | tokio runtime 拓扑、CPU/内存指标         |
+```
+
+> 说明：上述映射说明 42010 的“视点-视图”概念可直接用于组织 Rust 项目的架构描述；不同利益相关方（安全、性能、运维）通过各自视点审查代码制品。
+
 ---
 
 ## 📑 目录

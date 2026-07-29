@@ -19,6 +19,26 @@
 
 > **来源**: [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 
+> **权威来源 / Provenance**: 本节架构模式作为不变量集合与质量属性语义，主要对齐 Bass, Clements & Kazman (2021) 的 *Software Architecture in Practice* 中关于架构模式、质量属性场景与架构战术的论述。
+>
+> - **Bass, Clements & Kazman (2021)** — *Software Architecture in Practice* (4th ed.). SEI. [https://www.sei.cmu.edu/research-capabilities/books/book.cfm?assetid=669293](https://www.sei.cmu.edu/research-capabilities/books/book.cfm?assetid=669293)
+
+---
+
+架构模式质量属性决策表：
+
+```text
+| 关注质量属性 | 推荐模式族        | Rust 战术示例                          | 代价                     |
+|--------------|-------------------|----------------------------------------|--------------------------|
+| 可修改性     | Layered / Clean   | 每层一个 workspace member crate        | 增加 crate 管理成本      |
+| 可测试性     | Hexagonal         | trait 端口 + 内存适配器                | 接口设计工作量           |
+| 性能/吞吐    | Event-Driven      | tokio::sync::mpsc / broadcast          | 延迟、序列化开销         |
+| 可扩展性     | Microkernel       | trait Plugin + 动态注册表              | 插件加载与隔离复杂度     |
+| 可用性       | Event-Driven + LB | tower 重试/熔断 + supervisor           | 运维与监控成本           |
+```
+
+> 说明：该表体现 Bass 等提出的“质量属性驱动架构战术选择”思想；具体选择需结合基准测试与 ATAM 式权衡。
+
 ---
 
 ## 📑 目录
