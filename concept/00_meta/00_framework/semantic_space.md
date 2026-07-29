@@ -1177,7 +1177,7 @@ Java ⊂ Rust（系统编程能力）
 | **领域驱动设计（Rust）** | [`04_domain_driven_design_in_rust.md`](../../06_ecosystem/14_enterprise_architecture/04_domain_driven_design_in_rust.md) | §1-§5 | 元分析 → 限界上下文 / 聚合 / 仓储 |
 | **知识图谱推理** | [`05_knowledge_graph_reasoning.md`](../../04_formal/13_semantic_engineering/05_knowledge_graph_reasoning.md) | §1-§4 | 元分析 → OWL / SHACL / 推理机 |
 | **AI 模型服务（Rust）** | [`11_rust_for_ai_model_serving.md`](../../07_future/04_research_and_experimental/11_rust_for_ai_model_serving.md) | §1-§4 | 元分析 → Triton / Seldon / SLO / 能效 |
-| **Rust 1.97.1 补丁语义** | [`rust_1_97_1.md`](../../07_future/00_version_tracking/rust_1_97_1.md) | §1-§2 | 元分析 → LLVM 优化边界 / 工具链信任 |
+| **Rust 1.97.1 补丁语义** | [`rust_1_97_1.md`](../../07_future/00_version_tracking/rust_1_97_1.md) | §2.1 | 元分析 → LLVM 优化边界 / 工具链信任 |
 
 ---
 
