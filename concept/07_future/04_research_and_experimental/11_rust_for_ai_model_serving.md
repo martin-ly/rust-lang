@@ -14,7 +14,7 @@
 
 ---
 
-> **来源**: [Huyen — *Designing Machine Learning Systems*](https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/) · [ONNX Runtime](https://onnxruntime.ai/) · [Hugging Face Candle](https://github.com/huggingface/candle) · [LLM Inference Survey (arXiv)](https://arxiv.org/abs/2401.00066) · [vLLM / PagedAttention](https://arxiv.org/abs/2309.06180) · [TensorRT-LLM](https://developer.nvidia.com/tensorrt-llm)
+> **来源**: [Huyen — *Designing Machine Learning Systems*](https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/) · [MLCommons Inference Rules](https://mlcommons.org/inference/) · [NVIDIA Triton Inference Server](https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/index.html) · [Hugging Face Inference API docs](https://huggingface.co/docs/api-inference/index) · [Seldon Core](https://docs.seldon.io/seldon-core-2/) · [ONNX Runtime docs](https://onnxruntime.ai/docs/) · [Hugging Face Candle](https://github.com/huggingface/candle) · [LLM Inference Survey (arXiv)](https://arxiv.org/abs/2401.00066) · [vLLM / PagedAttention](https://arxiv.org/abs/2309.06180) · [TensorRT-LLM](https://developer.nvidia.com/tensorrt-llm)
 
 ---
 
@@ -38,6 +38,10 @@ mindmap
       Batching scheduler
       Prefix caching
       Load balancing
+    语义边界
+      请求级语义
+      引擎抽象
+      观测语义
     Rust 优势
       零成本抽象
       内存安全
@@ -178,9 +182,111 @@ async fn generate(Json(req): Json<GenerateRequest>) -> impl IntoResponse {
 
 ---
 
-## 五、生产部署与治理
+## 五、模型服务语义与系统边界
 
-### 5.1 SLO / SLI 与可观测性
+模型服务系统不仅要“跑起来”，还必须精确定义请求在系统边界上的语义行为：请求如何被接收、编解码、调度、执行与观测。下面从请求级语义、推理引擎抽象和观测语义三个维度展开。
+
+### 5.1 请求级语义
+
+- **Batching（静态批处理）**：将形状兼容的请求拼成固定大小的张量一次性送入推理引擎，可提升吞吐，但同批次内较快的请求需等待最慢者完成，尾部延迟会恶化。适用于输入输出长度相对固定的 CV / Encoder 场景。
+- **Dynamic Batching（动态批处理 / in-flight batching）**：调度器在最大等待时间或最大 batch size 到达前聚合到达的请求，再统一 dispatch。它是在**吞吐**与**TTFT（首 token 时间）**之间的核心权衡；最大等待时间本身就是 SLO 旋钮。
+- **序列化 / 反序列化**：用户文本 → token IDs → 引擎张量 → 输出 logits → 文本/结构化输出。开销包括 tokenizer CPU 计算、张量布局转换、网络负载（gRPC/Protobuf 或 JSON）。使用 Safetensors、零拷贝张量缓冲、gRPC streaming 可降低这部分开销。
+- **Token 限制**：`max_input_tokens`、`max_total_tokens`、`max_new_tokens` 定义了请求在模型上下文窗口内的合法范围。超出限制时需截断或拒绝；更长的序列会占用更多 KV cache 与显存，且 prefill 阶段算力密集、decode 阶段显存带宽密集。
+
+### 5.2 推理引擎抽象
+
+不同推理引擎在模型格式、优化阶段、调度能力和 Rust 绑定成熟度上差异显著：
+
+| 引擎 | 定位 | 官方文档 | Rust 绑定/实现 | 核心语义差异 |
+|---|---|---|---|---|
+| **ONNX Runtime** | 跨平台 ONNX 模型推理引擎 | [ONNX Runtime docs](https://onnxruntime.ai/docs/) | `ort` crate | 图级优化 + Execution Provider 插件化；适合 CV、语音、传统小模型 |
+| **TensorRT / TensorRT-LLM** | NVIDIA 高性能推理 SDK | [TensorRT-LLM](https://developer.nvidia.com/tensorrt-llm) | 官方 Rust 绑定有限 | 将模型编译为优化 engine，支持 plugin/fusion；显存与 kernel 高度优化 |
+| **llama.cpp** | GGUF/GGML 量化 LLM 推理 | [llama.cpp GitHub](https://github.com/ggerganov/llama.cpp) | `llama-cpp-rs` 等 | 以 GGUF 文件格式和量化为核心，CPU/GPU 后端多样；边缘部署友好 |
+| **Candle** | Hugging Face 纯 Rust ML 框架 | [Candle docs](https://huggingface.co/docs/candle/index) | `candle-core` | Rust-first，无 Python 依赖；张量 API 接近 PyTorch，生态仍在快速演进 |
+
+**关键语义差异**：
+
+- **模型格式**：ONNX（通用计算图） vs TensorRT engine（NVIDIA 专用优化产物） vs GGUF（llama.cpp 量化容器） vs Safetensors（Candle 常用）。
+- **优化阶段**：ONNX Runtime 在加载时做图优化；TensorRT 通常离线/在线编译；llama.cpp 聚焦量化和 KV cache；Candle 强调 Rust 原生人体工学。
+- **调度能力**：Triton/TensorRT-LLM、vLLM 内置连续批处理 / PagedAttention；Candle 与 llama.cpp 通常暴露较低层 API，需要服务层自行实现 scheduler。
+
+### 5.3 观测语义
+
+可观测性不只是“打日志”，而是把延迟拆分到可干预的组件：
+
+- **SLI / SLO**：常见 SLI 包括 TTFT、TPOT（每个输出 token 的时间）、端到端延迟、吞吐（tokens/s、requests/s）、错误率、GPU 显存利用率；SLO 如 P99 TTFT < 200 ms、P95 TPOT < 50 ms、可用性 > 99.9%。
+- **Latency Histogram 与百分位**：将延迟按桶收集后计算 p50、p95、p99、p999。LLM 输出长度差异极大，均值延迟容易掩盖尾部延迟，百分位才是 SLO 的核心。
+- **吞吐与并发度关系**：并发度增加时吞吐先上升，直至 GPU 算力或显存带宽饱和；超过饱和点后排队延迟占主导，端到端延迟上升（Little's Law：`L = λW`）。Rust 的异步运行时能在无 GC 停顿的情况下维持高并发，但真正的瓶颈通常是底层 CUDA/ROCm 推理引擎。
+
+### 5.4 Rust 服务骨架：tokio + axum 端点
+
+```rust,ignore
+// 概念骨架：用 axum + tokio 暴露异步模型服务 HTTP 端点。
+// 真实运行需将 axum、tokio、serde 加入 Cargo.toml。
+use axum::{
+    extract::Json,
+    http::StatusCode,
+    response::{IntoResponse, Response},
+    routing::post,
+    Router,
+};
+use serde::{Deserialize, Serialize};
+use std::sync::Arc;
+use tokio::sync::{mpsc, oneshot};
+
+#[derive(Deserialize)]
+struct GenerateRequest {
+    prompt: String,
+    max_tokens: usize,
+}
+
+#[derive(Serialize)]
+struct GenerateResponse {
+    text: String,
+}
+
+// 异步提交到推理队列，解耦 HTTP worker 与模型执行线程/进程
+async fn generate(
+    Json(req): Json<GenerateRequest>,
+    tx: axum::extract::State<Arc<mpsc::UnboundedSender<InferenceJob>>>,
+) -> Response {
+    let (resp_tx, resp_rx) = oneshot::channel();
+    let job = InferenceJob {
+        prompt: req.prompt,
+        max_tokens: req.max_tokens,
+        respond_to: resp_tx,
+    };
+    if tx.send(job).is_err() {
+        return (StatusCode::SERVICE_UNAVAILABLE, "inference queue closed").into_response();
+    }
+    match resp_rx.await {
+        Ok(text) => (StatusCode::OK, Json(GenerateResponse { text })).into_response(),
+        Err(_) => (StatusCode::INTERNAL_SERVER_ERROR, "inference failed").into_response(),
+    }
+}
+
+struct InferenceJob {
+    prompt: String,
+    max_tokens: usize,
+    respond_to: oneshot::Sender<String>,
+}
+
+#[tokio::main]
+async fn main() {
+    let (tx, _rx) = mpsc::unbounded_channel::<InferenceJob>();
+    let app = Router::new()
+        .route("/generate", post(generate))
+        .with_state(Arc::new(tx));
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
+    axum::serve(listener, app).await.unwrap();
+}
+```
+
+> 使用 `ignore` 避免 CI 编译缺少 axum/tokio 依赖；真实部署应放在 workspace crate 或独立服务中管理依赖。
+
+## 六、生产部署与治理
+
+### 6.1 SLO / SLI 与可观测性
 
 生产模型服务需要明确的**服务水平目标（SLO）**和**服务水平指标（SLI）**：
 
@@ -194,7 +300,7 @@ async fn generate(Json(req): Json<GenerateRequest>) -> impl IntoResponse {
 
 > **关键洞察**: Rust 的无 GC 停顿和零成本抽象使其在**延迟敏感**和**高吞吐**场景下更容易达成严格的 SLO。
 
-### 5.2 模型版本管理与 A/B 测试
+### 6.2 模型版本管理与 A/B 测试
 
 ```text
 模型注册表（如 MLflow / Hugging Face Hub）
@@ -208,26 +314,27 @@ async fn generate(Json(req): Json<GenerateRequest>) -> impl IntoResponse {
 
 Rust 服务可通过 feature flag（如 `launchdarkly`、`unleash`）或配置文件实现模型版本路由。
 
-### 5.3 安全与隐私边界
+### 6.3 安全与隐私边界
 
 - **模型窃取**：限制 prompt 日志、限制输出 tokens 采样。
 - **数据泄露**：避免在日志中记录 PII；使用差分隐私或联邦学习时明确边界。
 - **提示注入**：对输入进行过滤、沙箱化工具调用。
 - **供应链**：使用 `cargo vet` / `cargo audit` 审查推理运行时依赖。
 
-### 5.4 国际权威来源对齐
+### 6.4 国际权威来源对齐
 
 | 来源 | URL | 对齐内容 |
 |---|---|---|
-| MLCommons Inference | https://mlcommons.org/benchmarks/inference/ | 推理性能与能效基准 |
-| NVIDIA Triton | https://docs.nvidia.com/deeplearning/triton-inference-server/ | 数据中心推理服务架构 |
-| Seldon Core | https://docs.seldon.io/seldon-core-2/ | Kubernetes 上 ML 部署与监控 |
-| Model Cards | https://arxiv.org/abs/1810.03993 | 模型透明度与限制报告 |
-| LLM System Survey | https://arxiv.org/abs/2303.18223 | LLM 训练与推理系统栈 |
+| MLCommons Inference | <https://mlcommons.org/inference/> | 推理性能、能效与公平性基准规则 |
+| Hugging Face Inference API | <https://huggingface.co/docs/api-inference/index> | 托管模型服务请求语义与限制 |
+| NVIDIA Triton | <https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/index.html> | 数据中心推理服务架构与调度 |
+| Seldon Core | <https://docs.seldon.io/seldon-core-2/> | Kubernetes 上 ML 部署、A/B 测试与监控 |
+| Model Cards | <https://arxiv.org/abs/1810.03993> | 模型透明度与限制报告 |
+| LLM System Survey | <https://arxiv.org/abs/2303.18223> | LLM 训练与推理系统栈 |
 
 ---
 
-## 六、反命题与边界
+## 七、反命题与边界
 
 ### 反例 1：用 Rust 重写所有训练代码
 
@@ -237,24 +344,39 @@ Rust 在**训练框架**生态（autograd、分布式训练、实验工具）仍
 
 INT4 量化可能显著降低模型能力；对于需要高精度推理的任务（如代码生成、数学推理），应保留 FP16 或采用 QLoRA 等精细量化。
 
+### 反例 3：认为“模型服务只是 HTTP 转发”
+
+这是一个常见的设计误解。模型服务远不止把请求路由到模型；它隐藏了大量系统复杂度：
+
+- **延迟层次**：网络 RTT、序列化/反序列化、tokenizer 预处理、队列等待、GPU 内核启动、KV cache 访问、解码步迭代、后处理均会贡献端到端延迟；忽略任何一层都难以达成 SLO。
+- **批处理权衡**：动态批处理需要在等待更多请求与最大等待时间之间做调度决策；batch size 过大导致 TTFT 恶化，过小则 GPU 利用率不足。
+- **缓存策略**：Prefix caching、KV cache 复用、embedding cache 能显著降低重复计算，但需要管理显存生命周期与一致性。
+- **GPU 内存管理**：模型权重、激活值、KV cache、连续批处理的中间状态共享有限显存；OOM 可能在长序列或高并发时突然出现。
+- **自动扩缩容**：GPU 节点冷启动慢、显存不可超分、请求长度变化大，导致 CPU/GPU 混部扩缩容远比无状态 HTTP 服务困难。
+
 ### 边界：Rust 不是 CUDA 内核开发首选
 
 虽然 Rust 有 `cust`/`cudarc` 等 CUDA 绑定，但高性能 kernel 开发仍以 CUDA C++/Triton 为主。Rust 更适合编排这些 kernel。
 
 ---
 
-## 七、国际权威参考
+## 八、国际权威参考
+
+- **P0 官方/生态**
+  - [MLCommons Inference Rules](https://mlcommons.org/inference/) — 推理性能、能效与公平性基准规则
+  - [NVIDIA Triton Inference Server Architecture](https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/index.html) — 数据中心推理服务架构与调度
+  - [Hugging Face Inference API docs](https://huggingface.co/docs/api-inference/index) — 托管模型服务 API 语义
+  - [Seldon Core docs](https://docs.seldon.io/seldon-core-2/) — Kubernetes 上 ML 部署、A/B 测试与可观测性
+  - [ONNX Runtime docs](https://onnxruntime.ai/docs/)
+  - [TensorRT / TensorRT-LLM](https://developer.nvidia.com/tensorrt-llm)
+  - [llama.cpp](https://github.com/ggerganov/llama.cpp)
+  - [Candle docs](https://huggingface.co/docs/candle/index)
 
 - **P1 学术/系统**
   - [Huyen — *Designing Machine Learning Systems*](https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/)
   - [vLLM / PagedAttention (SOSP 2023)](https://arxiv.org/abs/2309.06180)
   - [LLM Inference Survey](https://arxiv.org/abs/2401.00066)
   - [LLM Serving Survey](https://arxiv.org/abs/2312.15234)
-
-- **P0 官方/生态**
-  - [ONNX Runtime](https://onnxruntime.ai/)
-  - [Candle GitHub](https://github.com/huggingface/candle)
-  - [TensorRT-LLM](https://developer.nvidia.com/tensorrt-llm)
 
 - **P2 社区**
   - [Hugging Face Rust](https://huggingface.co/docs/candle/index)

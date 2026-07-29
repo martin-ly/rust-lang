@@ -60,22 +60,116 @@
 > **状态取值**：`stabilized in 1.98 beta`（已随 1.98.0 beta 分支合入，2026-08-20 转正）/ `RFC merged`（RFC 已合并，实现跟踪中）/ `FCP`（最终评论期）/ `nightly only`（nightly 可用，未排期）。
 > **实测来源**：[releases.rs 1.98.0 beta](https://releases.rs/docs/1.98.0/)（curl 200，2026-07-28）· §1.7 RFC 表（2026-07-28 实测）
 
-| 特性 | 状态 | 跟踪链接 |
-|:---|:---|:---|
-| `Panic[Hook]Info` 中 `Location<'_>` 生命周期（Lifetimes）改为 `'static` | stabilized in 1.98 beta | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
-| mingw-w64 C 工具链更新 | stabilized in 1.98 beta | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
-| 移除 Solaris 上 `File::lock` 实现（语义错误） | stabilized in 1.98 beta | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
-| 移除 `-Zemscripten-wasm-eh` | stabilized in 1.98 beta | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
-| Named `Fn` trait parameters（RFC #3955） | RFC merged（2026-07-08） | [RFC Book](https://rust-lang.github.io/rfcs/3955-named-fn-trait-parameters.html) |
-| `#![register_{attribute,lint}_tool]`（RFC #3808） | RFC merged（2026-06-10） | [RFC Book](https://rust-lang.github.io/rfcs/3808-register-tool.html) |
-| `todo!()` 不再触发 `unreachable_code`（RFC #3928） | RFC merged（2026-06-25） | [RFC Book](https://rust-lang.github.io/rfcs/3928-todo-overreach.html) |
-| Safety Tags（RFC #3842） | FCP / 讨论中 | [rfcs#3842](https://github.com/rust-lang/rfcs/pull/3842) |
-| Pin Ergonomics（`&pin mut` / `&pin const`） | nightly only（Project Goal 2026） | [预览页](../02_preview_features/14_pin_ergonomics_preview.md) |
-| Async Drop | nightly only | [预览页](../02_preview_features/22_async_drop_preview.md) |
-| Return Type Notation（RTN） | nightly only | [预览页](../02_preview_features/09_return_type_notation_preview.md) |
-| Public/Private Dependencies（RFC #3516） | RFC merged，Cargo 实现跟踪中 | [RFC Book](https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html) |
+| 特性 | 状态 | 语义影响 / 迁移注意 | 跟踪链接 |
+|:---|:---|:---|:---|
+| `Panic[Hook]Info` 中 `Location<'_>` 生命周期改为 `'static` | stabilized in 1.98 beta | **语义等价**：调用点行为不变；签名严格化可能破坏依赖旧生命周期的泛型/Trait 实现。迁移见 §0.1。 | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
+| mingw-w64 C 工具链更新 | stabilized in 1.98 beta | **构建行为变化**：Windows GNU target 的链接行为、运行时依赖与产物布局可能改变；需重新验证 FFI/静态链接产物。 | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
+| 移除 Solaris 上 `File::lock` 实现（语义错误） | stabilized in 1.98 beta | **观察行为变化**：原实现语义错误，现明确不可用。Solaris 用户需迁移至 `fcntl` 或平台特定文件锁。 | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
+| 移除 `-Zemscripten-wasm-eh` | stabilized in 1.98 beta | **命令行选项移除**：原使用该 flag 的构建脚本/CI 需改用新的异常处理配置或移除；否则 `rustc` 报错「未知 option」。 | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
+| Named `Fn` trait parameters（RFC #3955） | RFC merged（2026-07-08） | **语法糖，无语义/ABI 影响**：名称仅用于文档与 LSP 提示，不改变对象安全、调用语法或 ABI。详见 §0.2。 | [RFC Book](https://rust-lang.github.io/rfcs/3955-named-fn-trait-parameters.html) |
+| `#![register_{attribute,lint}_tool]`（RFC #3808） | RFC merged（2026-06-10） | **命名空间扩展**：新增 crate 级工具命名空间注册，允许外部工具使用 `tool::lint`/`#[tool::attr]` 语法而不报错；与同名 crate 可能产生歧义错误。 | [RFC Book](https://rust-lang.github.io/rfcs/3808-register-tool.html) |
+| `todo!()` 不再触发 `unreachable_code`（RFC #3928） | RFC merged（2026-06-25） | **观察行为变化**：`todo!()` 后代码不再产生 `unreachable_code` lint；新增 `todo_macro_calls` warn-by-default lint，可在开发期关闭、发布前启用。 | [RFC Book](https://rust-lang.github.io/rfcs/3928-todo-overreach.html) |
+| Safety Tags（RFC #3842） | FCP / 讨论中 | 如稳定，将把 unsafe 契约从自由文本提升为结构化属性，影响 clippy/审核工具对 unsafe 块的检查能力。 | [rfcs#3842](https://github.com/rust-lang/rfcs/pull/3842) |
+| Pin Ergonomics（`&pin mut` / `&pin const`） | nightly only（Project Goal 2026） | 引入原生固定借用类型，可能简化 futures/自引用结构体代码，但稳定前 API 仍可能变化。 | [预览页](../02_preview_features/14_pin_ergonomics_preview.md) |
+| Async Drop | nightly only | 使 `drop` 可 `await`，影响异步资源清理模式；距离稳定尚有设计工作。 | [预览页](../02_preview_features/22_async_drop_preview.md) |
+| Return Type Notation（RTN） | nightly only | 允许在 bound 中约束 `impl Trait` 返回类型的关联项，是 `async fn` in traits 替代 `#[async_trait]` 的关键拼图。 | [预览页](../02_preview_features/09_return_type_notation_preview.md) |
+| Public/Private Dependencies（RFC #3516） | RFC merged，Cargo 实现跟踪中 | 区分公共 API 依赖与实现细节依赖，使 cargo 能机器判定依赖变化是否构成 SemVer 破坏。 | [RFC Book](https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html) |
 
 > **维护约定**：每两周按 §7.1 频率核对本表；1.98.0 发布（2026-08-20）后将 beta 行迁移至 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md)（骨架已建，2026-07-14），本页滚动为 1.99+ 跟踪。
+
+---
+
+### §0.1 `Panic[Hook]Info` 中 `Location<'_>` 生命周期 `'static` 化的语义影响
+
+在 1.98 beta 中，`std::panic::PanicInfo::location()`（以及对应的 `PanicHookInfo::location()`）的返回类型从与 `&self` 绑定的 `Option<&Location<'_>>` 收紧为 `Option<&'static Location<'static>>`。这一变更的表面动机很简单：panic 发生位置是编译期静态数据（文件、行号、列号），其生命周期本就可以是 `'static`；对全局 panic hook 等需要把位置信息持久化或跨借用边界转发的场景，`'static` 生命周期消除了不必要的人为限制。
+
+#### 语义等价性
+
+对绝大多数仅在 hook 内部打印或格式化位置信息的代码，本变更**完全语义等价**，观察行为不变：
+
+```rust,ignore
+std::panic::set_hook(Box::new(|info| {
+    if let Some(loc) = info.location() {
+        eprintln!("panic at {}:{}", loc.file(), loc.line());
+    }
+}));
+```
+
+`'static` 引用可以协变为任何更短生命周期，因此上述代码在 1.98 前后都能编译，且运行时行为一致。
+
+#### 潜在破坏性：何时会编译失败？
+
+破坏只发生在**把 location 生命周期与 panic info 生命周期显式绑定**的泛型或 Trait 实现中：
+
+1. **返回类型显式标注旧生命周期**。若某函数旧签名返回 `&Location<'_>`（隐式取自 `&PanicInfo<'_>`），1.98 后实际返回 `&'static Location<'static>`。调用者若把该返回值存到与 `info` 同生命周期的变量，通常仍可编译；真正会报错的是把 `Location<'_>` 作为关联类型或泛型参数传递，并要求其生命周期严格等于某个局部生命周期的代码。
+
+2. **Trait 实现中的生命周期等式**。例如为 `PanicInfo<'a>` 实现某 trait，并把 `location()` 的结果类型写作 `&'a Location<'a>`：
+
+   ```rust,ignore
+   trait LocProvider<'a> {
+       fn location(&self) -> &'a Location<'a>;
+   }
+
+   impl<'a> LocProvider<'a> for PanicInfo<'a> {
+       fn location(&self) -> &'a Location<'a> {
+           self.location().unwrap() // 1.98 前：&'a Location<'a>；1.98 后：&'static Location<'static>
+       }
+   }
+   ```
+
+   在 1.98 中，`&'static Location<'static>` 无法强制转换为 `&'a Location<'a>` 当 trait 要求精确等式时，会产生生命周期不匹配错误。
+
+3. **高阶 trait bound（HRTB）**。若代码使用 `for<'a> Fn(&'a PanicInfo<'a>) -> &'a Location<'a>` 之类 bound，1.98 后由于返回值是 `'static`，该 bound 不再满足。
+
+#### 迁移指南
+
+- **简单调用者**：无需改动；`'static` 引用的协变规则保证旧代码继续工作。
+- **泛型/Trait 作者**：把 `Location` 的生命周期参数从局部生命周期改为 `'static`，或直接用 `&'static Location<'static>` 作为关联类型/返回类型。
+- **库作者**：如果你的 crate 公开了接收或返回 panic location 的 API，建议在 `Cargo.toml` 中把 `rust-version` 升到 `1.98.0`，并在变更日志中注明该签名变化。
+
+> **核心结论**：该变更对**使用** panic hook 的代码是向后兼容的；对**抽象/封装** panic location 生命周期的泛型代码是潜在破坏变更，迁移方式是把相关生命周期统一为 `'static`。
+
+---
+
+### §0.2 Named `Fn` trait parameters（RFC #3955）的语义影响
+
+[RFC #3955](https://rust-lang.github.io/rfcs/3955-named-fn-trait-parameters.html) 允许在 `Fn`/`FnMut`/`FnOnce` 及其 async 变体 `AsyncFn*` 的圆括号泛型参数列表中为参数命名，例如 `impl Fn(msg: String, priority: usize)`。该 RFC 已于 **2026-07-08** 合并，预计随 1.99+ 进入实现与稳定化通道。下面对其潜在语义影响作边界分析。
+
+#### 对 Trait 对象安全的影响：**无实质影响**
+
+参数名在类型系统中不参与等价判定。`dyn Fn(msg: String, priority: usize)` 与 `dyn Fn(String, usize)` 表示同一个 trait object 类型，vtable 布局、调用约定与对象安全规则均不变。名称仅作为**句法注释**存在，在 AST  lowered 到 MIR/LLVM IR 之前即被擦除。
+
+#### 对调用语法的影响：**无直接调用语法变化**
+
+命名参数仅出现在**类型签名侧**（bound、where 子句、type alias），不改变调用侧语法。调用闭包时仍需按位置传参：
+
+```rust,ignore
+fn parse(log: impl Fn(msg: String, priority: usize)) {
+    // 仍需按位置调用，不能写 log(msg: s, priority: 1)
+    log("error".to_string(), 1);
+}
+```
+
+这与未来可能的「命名参数（named arguments）」语言特性有本质区别：RFC #3955 只是让高阶函数签名的可读性与 `fn` 指针保持一致，不提供调用时的命名匹配、重排或省略。
+
+#### 对 ABI 的影响：**无 ABI 变化**
+
+参数名不会进入：
+
+- v0 symbol mangling；
+- vtable 条目；
+- calling convention 的寄存器/栈布局；
+- monomorphization 后的 LLVM IR。
+
+因此，`impl Fn(A, B)` 与 `impl Fn(a: A, b: B)` 单态化后的产物完全相同，对 FFI、动态链接、编译缓存（incr. comp）均无影响。
+
+#### 迁移与兼容性
+
+- **现有代码**：完全向后兼容；未命名的 `Fn` bound 继续有效。
+- **新增代码**：可逐步在 API 签名中添加参数名以改善文档与 IDE 提示，属于可选增强。
+- **工具链要求**：稳定化前需 nightly + `#![feature(named_fn_trait_parameters)]`（feature 名以最终实现为准）。
+
+> **核心结论**：RFC #3955 是**纯句法/文档增强**，不引入新的语义等价关系、不改变 trait 对象安全、不改变 ABI。教学与代码审查中应明确区分「`Fn` trait 命名参数」与「函数调用命名参数」两个独立特性。
 
 ---
 
@@ -739,3 +833,64 @@ fn main() {
 
 等待 1.98 稳定化（跟踪本页「零、1.98 周期跟踪清单」）；
 实验用 nightly + `#![feature(float_algebraic)]`，等效行为可先用 [`crates/c08_algorithms/src/rust_197_features.rs`](../../../crates/c08_algorithms/src/rust_197_features.rs) 中的演示实现过渡。
+
+---
+
+## 九、国际权威来源
+
+本节集中列出本页涉及的 1.98 周期国际权威来源，便于版本语义注入检查与季度国际来源抽样审计复核。
+
+| 来源 | 链接 | 作用域 |
+|:---|:---|:---|
+| RFC #3955 — Named `Fn` trait parameters | [rust-lang.github.io/rfcs/3955-named-fn-trait-parameters.html](https://rust-lang.github.io/rfcs/3955-named-fn-trait-parameters.html) | §0.2、周期跟踪表 |
+| RFC #3808 — `#![register_{attribute,lint}_tool]` | [rust-lang.github.io/rfcs/3808-register-tool.html](https://rust-lang.github.io/rfcs/3808-register-tool.html) | 周期跟踪表 |
+| RFC #3928 — Avoid linting `unreachable_code` on `todo!()` | [rust-lang.github.io/rfcs/3928-todo-overreach.html](https://rust-lang.github.io/rfcs/3928-todo-overreach.html) | 周期跟踪表 |
+| releases.rs — Rust 1.98.0 beta | [releases.rs/docs/1.98.0/](https://releases.rs/docs/1.98.0/) | 全文状态跟踪 |
+| Rust 1.97.1 稳定补丁权威页 | [`rust_1_97_1.md`](rust_1_97_1.md) | §十连续性 |
+| Rust 1.98.0 稳定特性（跟踪骨架） | [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md) | canonical 分工 |
+
+> **来源优先级**：官方 Rust Blog / releases.rs > RFC Book > GitHub PR/Issue > 社区技术分析。本页所有链接均经 2026-07-28 curl 实测可访问（200）。
+
+---
+
+## 十、与 Rust 1.97.1 补丁的连续性
+
+Rust 1.97.1（2026-07-16）修复了一个由 LLVM load-select 合并优化导致的误编译问题，并采取**双重修复**：backport LLVM 上游修复 + 回退 Rust 1.97.0 中提高触发概率的 enum 判别值 `-1` IR 变更。完整技术细节、最小复现与验证清单见 [`rust_1_97_1.md`](rust_1_97_1.md)（本库 1.97.1 补丁权威页）。本节说明该补丁对 1.98 beta 与 nightly 的向后影响。
+
+### 10.1 时间线带来的分支状态
+
+| 版本/通道 | 分支/发布日期 | 是否天然包含 1.97.1 修复 |
+|:---|:---|:---|
+| Rust 1.97.0 | 2026-07-09 | ❌ 是问题触发版本 |
+| Rust 1.97.1 | 2026-07-16 | ✅ 双重修复 |
+| Rust 1.98.0 beta | 2026-07-03 从 master 切分 | ⚠️ 初始 beta **不**包含 1.97.1 修复；需后续 backport |
+| Rust 1.98.0 stable | 预计 2026-08-20 | ✅ 发布前须完成 backport |
+| nightly 1.99.0+ | master 滚动 | ✅ 1.97.1 合并进 master 后已包含修复 |
+
+关键观察：**1.98.0 beta 分支点（2026-07-03）早于 1.97.1 发布（2026-07-16）**。因此，最早一批 1.98 beta 构建理论上仍携带与 1.97.0 相同的 LLVM 触发条件；只有经过 release team 的 backport 后，beta 才具备与 1.97.1 同等的正确性。
+
+### 10.2 对 1.98 beta 的向后影响
+
+1. **源码兼容性**：1.97.1 仅修复编译器后端 bug，不修改语言语义、标准库 API 或 Cargo 行为。因此，任何在 1.97.1 上编译通过的代码迁移到已修复的 1.98 beta 时，**不需要源代码改动**。
+
+2. **构建产物差异**：由于 1.97.1 回退了 enum 判别值的 `-1` IR 表示，1.98 beta 在接收该 backport 前后，release 构建的代码生成可能与 1.97.0 不同；这与 1.97.1 的行为一致，属于「正确性优先于字节级一致性」的修复。
+
+3. **验证建议**：若你在 2026-08-20 之前测试 1.98 beta，应：
+   - 查看 beta 构建的 commit 日期，确认其晚于 1.97.1 修复合入 beta 的时间；
+   - 使用 [`rust_1_97_1.md` §2.6](rust_1_97_1.md) 的最小复现（MRE）在 `rustc +beta -O` 下验证不再 segfault；
+   - 对 release 构建跑 `cargo test --release` 并与 1.97.1 结果对比。
+
+### 10.3 对 nightly 的向后影响
+
+nightly 通道直接跟踪 master。1.97.1 的修复在合并进 master 后，后续所有 nightly 构建（包括 1.99.0+）都已包含 LLVM backport 与 IR 回退。因此：
+
+- 在 nightly 上复现 1.97.0 的 segfault 已不可能（除非使用旧 nightly 工具链）；
+- 但 nightly 仍可能引入新的实验性 IR 生成或 LLVM 升级，产生新的优化问题；不能把「1.97.1 修复了 load-select bug」等同于「nightly 绝对安全」。
+
+### 10.4 连续性的工程含义
+
+- **从 1.97.1 升级到 1.98.0 stable**：用户应默认 LLVM 修复已被继承；若 stable 发布说明未明确提及，可视为 release team 的常规 backport 流程已完成。
+- **CI 矩阵建议**：在 1.98.0 stable 发布后，建议短期内在 CI 中同时保留 `1.97.1` 与 `1.98.0` 的 release 构建对比，以捕获由 enum 判别值表示回退带来的任何性能基线漂移。
+- **供应链声明**：若你的 crate 声明 `rust-version = "1.97.1"`，升级到 `1.98.0` 是自然的下一步；无需因为 1.97.1 是 patch release 而额外限制 1.98.0。
+
+> **总结**：1.97.1 的 LLVM 修复对 1.98 beta 是**向后必要的 backport**，对 nightly 是**已合并的前置正确性修复**。对终端用户而言，从 1.97.1 迁移到 1.98.0 stable 是平滑升级，只需关注 release 构建产物是否经过重新验证。

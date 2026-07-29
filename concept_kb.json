@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 583,
-    "generated_at": "2026-07-29T11:53:10.140906+00:00"
+    "generated_at": "2026-07-29T12:03:33.932574+00:00"
   },
   "files": [
     {
@@ -46914,24 +46914,87 @@
       "layer": "L4",
       "title": "Hoare 逻辑 for Rust 算法",
       "positioning": "将 Hoare 逻辑从通用程序验证工具聚焦到**算法语义**——排序、搜索、迭代、unsafe 算法库的不变量与终止性。完整 Hoare 逻辑理论及推理规则见 [`04_formal/03_operational_semantics/02_hoare_logic.md`](../03_operational_semantics/02_hoare_logic.md)。",
-      "line_count": 42,
+      "line_count": 400,
       "theorem_chains": [],
       "anti_propositions": [],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "/// 前置条件: x < i32::MAX（调用者负责） /// 后置条件: 返回值 == x + 1 且 > x fn increment_checked(..."
+        },
+        {
+          "flags": [],
+          "lines": 23,
+          "should_fail": false,
+          "code_preview": "fn sort_demo<T: Ord + Clone + std::fmt::Debug>(slice: &mut [T]) {     let origin..."
+        },
+        {
+          "flags": [],
+          "lines": 32,
+          "should_fail": false,
+          "code_preview": "fn binary_search<T: Ord>(slice: &[T], target: &T) -> Option<usize> {     let mut..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "fn first_even(numbers: &[i32]) -> Option<&i32> {     numbers.iter().find(|&&x| x..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn sum_via_fold(numbers: &[i32]) -> i32 {     numbers.iter().fold(0, |acc, &x| a..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "static DATA: [u8; 4] = [1, 2, 3, 4];  fn valid_static_slice() -> &'static [u8] {..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "fn main() {     let ptr = 0x1 as *const u8;      // 错误：在 unsafe 块外调用 unsafe 函数。 ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "> fn dangling_slice() -> &'static [u8] { >     let local = 42u8; >     let ptr =..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "while lo < hi {     let mid = lo + (hi - lo) / 2;     match slice[mid].cmp(targe..."
+        }
+      ],
       "sources": [],
       "cross_references": [
+        "../../03_advanced/02_unsafe/01_unsafe.md",
         "../01_ownership_logic/02_ownership_formal.md",
         "../03_operational_semantics/02_hoare_logic.md",
+        "../04_model_checking/01_verification_toolchain.md",
+        "../04_model_checking/09_kani.md",
+        "../04_model_checking/11_creusot.md",
         "02_refinement_calculus.md",
         "04_unsafe_algorithm_invariants.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 5,
+      "mermaid_blocks": 1,
+      "matrix_rows": 25,
       "pre_post": {
         "pre": [
-          "[Hoare Logic](../03_operational_semantics/02_hoare_logic.md) · [Ownership Formalization](../01_ownership_logic/02_ownership_formal.md)"
+          "[Hoare Logic](../03_operational_semantics/02_hoare_logic.md) · [Ownership Formalization](../01_ownership_logic/02_ownership_formal.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)"
         ],
         "post": [
           "[Refinement Calculus](02_refinement_calculus.md) · [Unsafe Algorithm Invariants](04_unsafe_algorithm_invariants.md)"
@@ -47668,11 +47731,11 @@
       "layer": "L4",
       "title": "系统工程标准与 Rust 映射",
       "positioning": "从系统生命周期、V&V 与模型语义三个维度，建立系统工程标准与 Rust 安全关键/嵌入式实现的映射框架。",
-      "line_count": 477,
+      "line_count": 658,
       "theorem_chains": [],
       "anti_propositions": [
         {
-          "title": "## 六、反命题"
+          "title": "## 八、反命题"
         },
         {
           "title": "### 反命题"
@@ -47686,6 +47749,12 @@
           "lines": 20,
           "should_fail": false,
           "code_preview": "// 简化的 SysML 状态机行为投影 enum FlightMode {     Standby,     Armed,     Flying,     L..."
+        },
+        {
+          "flags": [],
+          "lines": 56,
+          "should_fail": false,
+          "code_preview": "// 带错误处理的 SysML 状态机行为投影（可编译） // 状态集合 S、事件集合 Σ、转移函数 δ 均显式表达；非法转移返回错误而非静默跳过。  #[de..."
         },
         {
           "flags": [
@@ -47717,7 +47786,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 18,
+      "matrix_rows": 37,
       "pre_post": {
         "pre": [
           "[并发模型](../../03_advanced/00_concurrency/01_concurrency.md) · [Actor 模型系统语义](01_actor_model_semantics.md) · [分布式系统语义](04_distributed_systems_semantics.md) · [反应式系统语义](05_reactive_systems_semantics.md)"
@@ -47734,7 +47803,7 @@
       "layer": "L4",
       "title": "软件架构形式化（Software Architecture Formalization）",
       "positioning": "从形式化视角建立软件架构的组件-连接件-配置三元模型，介绍架构描述语言（ADL）、架构风格与连接件语义，并映射到 Rust 的 crate/module/trait/workspace 机制。",
-      "line_count": 446,
+      "line_count": 542,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47766,7 +47835,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 52,
+      "matrix_rows": 66,
       "pre_post": {
         "pre": [
           "[Async/Await](../../03_advanced/01_async/01_async.md) · [Architecture Patterns](../../06_ecosystem/03_design_patterns/08_architecture_patterns.md) · [Pattern Composition Algebra](../00_type_theory/12_pattern_composition_algebra.md) · [System Composability](../../06_ecosystem/03_design_patterns/04_system_composability.md)"
@@ -48646,11 +48715,14 @@
       "layer": "L4",
       "title": "描述逻辑与 OWL（Description Logic and OWL）",
       "positioning": "从**形式逻辑**角度介绍描述逻辑家族与 OWL 2 profiles，帮助读者理解知识图谱本体的可判定推理边界，并把 trait 一致性求解类比为约束满足问题。",
-      "line_count": 296,
+      "line_count": 443,
       "theorem_chains": [],
       "anti_propositions": [
         {
-          "title": "## 七、反命题"
+          "title": "## 九、反命题"
+        },
+        {
+          "title": "### 反命题"
         },
         {
           "title": "### 反命题"
@@ -48662,6 +48734,12 @@
       "code_blocks": [
         {
           "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "struct Person {     name: String,     // minCount=1, maxCount=1, datatype=string..."
+        },
+        {
+          "flags": [],
           "lines": 25,
           "should_fail": false,
           "code_preview": "// 概念 C：Drawable trait Drawable {}  // 概念 D：Clickable trait Clickable {}  // 概念 ..."
@@ -48671,6 +48749,14 @@
           "lines": 13,
           "should_fail": false,
           "code_preview": "trait IsSend<T> {} impl<T: Send> IsSend<T> for () {}  // 类型级断言：仅当 T: Send 时，Proo..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 10,
+          "should_fail": true,
+          "code_preview": "trait Drawable {}  // TBox：所有类型都满足 Drawable impl<T> Drawable for T {}  // ABox：试..."
         }
       ],
       "sources": [],
@@ -48684,8 +48770,8 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
-      "matrix_rows": 26,
+      "mermaid_blocks": 2,
+      "matrix_rows": 48,
       "pre_post": {
         "pre": [
           "[语义工程目录 README](README.md) · [本体工程](01_ontology_engineering.md) · [类型系统](../../01_foundation/02_type_system/01_type_system.md) · [L3 内存模型](../../03_advanced/02_unsafe/06_memory_model.md)"
@@ -70238,10 +70324,34 @@
       "layer": "L7",
       "title": "Rust 1.98+ 前沿特性预览",
       "positioning": "",
-      "line_count": 742,
+      "line_count": 897,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "std::panic::set_hook(Box::new(|info| {     if let Some(loc) = info.location() { ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "   trait LocProvider<'a> {        fn location(&self) -> &'a Location<'a>;    }  ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "fn parse(log: impl Fn(msg: String, priority: usize)) {     // 仍需按位置调用，不能写 log(ms..."
+        },
         {
           "flags": [
             "ignore"
@@ -70317,13 +70427,14 @@
         "../02_preview_features/09_return_type_notation_preview.md",
         "../02_preview_features/14_pin_ergonomics_preview.md",
         "../02_preview_features/22_async_drop_preview.md",
+        "rust_1_97_1.md",
         "rust_1_97_preview.md",
         "rust_1_98_stabilized.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 50,
+      "matrix_rows": 63,
       "pre_post": {
         "pre": [
           "N/A",
@@ -75899,11 +76010,14 @@
       "layer": "L7",
       "title": "Rust 在 AI 模型服务与推理系统中的应用",
       "positioning": "聚焦**模型服务层**（model serving / inference serving），把 LLM system architecture 中的推理部分下沉到工程实现，对齐国际 ML 系统工程实践与 Rust 生态。",
-      "line_count": 293,
+      "line_count": 415,
       "theorem_chains": [],
       "anti_propositions": [
         {
-          "title": "## 六、反命题"
+          "title": "## 七、反命题"
+        },
+        {
+          "title": "### 反例"
         },
         {
           "title": "### 反例"
@@ -75936,6 +76050,14 @@
           "lines": 17,
           "should_fail": false,
           "code_preview": "use axum::{extract::Json, response::IntoResponse, routing::post, Router}; use se..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 60,
+          "should_fail": false,
+          "code_preview": "// 概念骨架：用 axum + tokio 暴露异步模型服务 HTTP 端点。 // 真实运行需将 axum、tokio、serde 加入 Cargo.tom..."
         }
       ],
       "sources": [],
@@ -75952,7 +76074,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 24,
+      "matrix_rows": 30,
       "pre_post": {
         "pre": [
           "[LLM System Architecture](08_llm_system_architecture.md) · [MLOps and LLMOps](09_mlops_and_llmops.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Async/Await](../../03_advanced/01_async/01_async.md) · [Performance Optimization](../../06_ecosystem/10_performance/01_performance_optimization.md)"

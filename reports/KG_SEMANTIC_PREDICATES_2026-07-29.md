@@ -1,8 +1,8 @@
 # KG 语义谓词实例化报告（l1, l2, async, unsafe, formal, l5, l6_concept, l7, l3_rem, meta_navigation, ecosystem, future, rustc_internals, framework）
 
-**日期**: 2026-07-29  
-**模式**: 已写回 kg_data_v3.json  
-**置信度阈值**: 0.75  
+**日期**: 2026-07-29
+**模式**: 已写回 kg_data_v3.json
+**置信度阈值**: 0.75
 **处理实体数**: 539  **处理关系数**: 18424
 
 ## 1. 各批次通用谓词残留

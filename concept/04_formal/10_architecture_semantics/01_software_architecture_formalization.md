@@ -29,6 +29,9 @@
     - [1.4 连接件语义](#14-连接件语义)
     - [1.5 ISO/IEC/IEEE 42010 架构描述概念模型](#15-isoiecieee-42010-架构描述概念模型)
       - [核心概念](#核心概念)
+      - [1.5.1 视图-视点-利益相关者-关注四元关系](#151-视图-视点-利益相关者-关注四元关系)
+      - [1.5.2 架构决策记录（ADR）模板](#152-架构决策记录adr模板)
+      - [1.5.3 架构权衡分析方法（ATAM）四阶段](#153-架构权衡分析方法atam四阶段)
       - [Rust 工程映射](#rust-工程映射)
     - [1.6 质量属性与架构战术](#16-质量属性与架构战术)
       - [架构战术分类](#架构战术分类)
@@ -47,7 +50,8 @@
     - [测验 3：为什么说“相同组件在不同配置中具有相同语义”是错误的？（分析层）](#测验-3为什么说相同组件在不同配置中具有相同语义是错误的分析层)
     - [测验 4：Rust 的哪些机制对应架构形式化中的“连接件”？（应用层）](#测验-4rust-的哪些机制对应架构形式化中的连接件应用层)
     - [测验 5：架构风格为什么能导出可推断性质？（分析层）](#测验-5架构风格为什么能导出可推断性质分析层)
-  - [五、🧭 思维导图（Mindmap）](#五-思维导图mindmap)
+  - [五、权威来源索引](#五权威来源索引)
+  - [六、🧭 思维导图（Mindmap）](#六-思维导图mindmap)
 
 ---
 
@@ -137,7 +141,7 @@ call(cᵢ, cⱼ, m) / return(cⱼ, cᵢ, v)
 
 ### 1.5 ISO/IEC/IEEE 42010 架构描述概念模型
 
-ISO/IEC/IEEE 42010:2022 为软件与系统架构描述提供了国际通用的概念框架。它将架构描述（Architecture Description, AD）视为围绕利益相关方关注点组织的一组视图（view）与视角（viewpoint）。这些概念可与 Shaw & Garlan 的组件-连接件-配置三元组相互补充：42010 回答“如何规范化地描述和交流架构”，三元组回答“架构由哪些结构元素构成”。
+[ISO/IEC/IEEE 42010:2022](https://www.iso.org/standard/74296.html) 为软件与系统架构描述提供了国际通用的概念框架。它将架构描述（Architecture Description, AD）视为围绕利益相关方关注点组织的一组视图（view）与视角（viewpoint）。这些概念可与 Shaw & Garlan 的组件-连接件-配置三元组相互补充：42010 回答“如何规范化地描述和交流架构”，三元组回答“架构由哪些结构元素构成”。
 
 #### 核心概念
 
@@ -156,11 +160,85 @@ ISO/IEC/IEEE 42010:2022 为软件与系统架构描述提供了国际通用的�
 
 ```text
 Stakeholder ──has──→ Concern
-Concern ──addressed by──→ Viewpoint
+Concern ──framed by──→ Viewpoint
 Viewpoint ──defines──→ View
 View ──expresses──→ Architecture of System
 Correspondence ──relates──→ Views
 ```
+
+#### 1.5.1 视图-视点-利益相关者-关注四元关系
+
+ISO/IEC/IEEE 42010:2022 用以下四元组精确定义架构描述的社会-技术语境：
+
+| 概念 | 精确定义 | 形式化角色 |
+|---|---|---|
+| **Stakeholder（利益相关者）** | 对系统或其描述拥有利益的个人、团队或组织（§3.47） | 需求的来源与验收主体 |
+| **Concern（关注）** | 利益相关者感兴趣的主题（§3.4），通常表达为问题、目标或约束 | 待被视图回答的“问题” |
+| **Viewpoint（视点）** | 创建视图的约定、规则与技术的集合（§3.54），它**框定**一个或多个关注 | 视图模板与构造方法 |
+| **View（视图）** | 从特定视点出发对架构的表达（§3.53） | 满足关注点的具体制品 |
+
+四元关系可形式化为：
+
+```text
+has_concern(s, c)        -- 利益相关者 s 拥有关注 c
+frames(vp, c)            -- 视点 vp 框定关注 c
+conforms_to(v, vp)       -- 视图 v 符合视点 vp 的约定
+addresses(v, c)          -- 视图 v 回答关注 c
+expresses(v, a)          -- 视图 v 表达架构 a
+```
+
+**关键边界**：一个关注可以被多个视点框定，一个视点也可以产生多个视图；但**视图如果不声明其视点，则无法判断它回答了哪些关注**。在 Rust 工程中，`cargo tree` 的输出只有附带“依赖审计视点”说明时，才构成对“依赖可审计”关注的有效回答。
+
+#### 1.5.2 架构决策记录（ADR）模板
+
+架构决策记录（Architecture Decision Record, ADR）是 AD 的轻量级制品。Michael Nygard 提出的经典模板被 [ADR GitHub 组织](https://adr.github.io/) 维护，格式如下：
+
+```markdown
+# ADR-NNNN. 标题
+
+## 状态
+proposed | accepted | deprecated | superseded by ADR-NNNN
+
+## 背景（Context）
+描述决策时的技术、业务与约束环境。
+
+## 决策（Decision）
+以完整语句陈述“我们决定……”。
+
+## 后果（Consequences）
+- 正面：……
+- 负面：……
+- 中性：……
+```
+
+在 Rust 项目中的实践：
+
+- **存放位置**：`doc/adr/` 或 `architecture/adr/`，命名 `NNNN-short-title.md`。
+- **与代码链接**：在 `Cargo.toml` 的注释或 crate 级 doc comment 中引用 ADR 编号，例如 `// ADR-0007: 使用 workspace 拆分认证 crate`。
+- **状态维护**：当决策被新的 `rust-version` 提升或 crate 重构取代时，必须将旧 ADR 标记为 `superseded`，否则读者会依据过期决策行动。
+
+**反例**：某项目把 ADR 当作“会议纪要”而不写状态和后果，导致半年后新成员误以为 `unsafe` 代码块仍被“临时”允许，实际上该决策已被 `deprecated`。ADR 不是决策的替代品，而是**决策状态的持久化**；缺少状态字段即失去可审计性。
+
+#### 1.5.3 架构权衡分析方法（ATAM）四阶段
+
+ATAM 由 SEI 提出，用于在架构早期识别质量属性之间的冲突。其标准流程可归纳为四个阶段：
+
+| 阶段 | 目标 | 典型输出 |
+|---|---|---|
+| **阶段 0：准备与伙伴关系** | 确定评估范围、参与角色与业务驱动 | 评估计划、利益相关者清单 |
+| **阶段 1：初步评估** | 介绍业务驱动、架构方法，构建质量属性效用树 | 效用树（Utility Tree）、风险/非风险列表 |
+| **阶段 2：深度评估** | 头脑风暴场景并分析架构方法 | 场景优先级、权衡点、敏感度点 |
+| **阶段 3：结果报告与跟踪** | 汇总发现，形成可执行的改进建议 | ATAM 报告、风险缓解计划 |
+
+与 Rust 工程质量属性的映射：
+
+| 质量属性 | ATAM 关注点 | Rust 工程证据 |
+|---|---|---|
+| **安全性（Safety/Security）** | 识别会削弱类型安全或引入攻击面的架构决策 | `unsafe` 使用审计、`cargo audit` 报告、WASI capability 边界 |
+| **性能（Performance）** | 评估响应时间、吞吐、资源占用 | `criterion` 基准、`tokio` 延迟直方图、无锁数据结构选型 |
+| **可维护性（Maintainability）** | 评估模块耦合、依赖方向、可测试性 | `cargo-modules` 依赖图、API 文档覆盖率、`semver` 兼容性策略 |
+
+**边界说明**：ATAM 的“效用树”权重本质上是利益相关者的主观判断，不是可机器验证的指标。将 ATAM 结果直接等同于设计规范，可能掩盖未参与评估团队的关注点。此外，Rust 的借用检查器只能在编译期保证部分安全-性能权衡；涉及运行时调度或硬件缓存的权衡仍需基准测试。
 
 #### Rust 工程映射
 
@@ -406,7 +484,20 @@ Pipe-Filter 通过“数据单向流动、过滤器无共享状态”的约束�
 
 ---
 
-## 五、🧭 思维导图（Mindmap）
+## 五、权威来源索引
+
+- **Shaw & Garlan** — *Software Architecture: Perspectives on an Emerging Discipline* (1996). [PDF](https://www.cs.cmu.edu/~search/articles/books/SA.book.pdf)
+- **Garlan & Shaw** — *An Introduction to Software Architecture* (1993). [CMU ABLE](https://www.cs.cmu.edu/~able/introduction_to_software_architecture.htm)
+- **Medvidovic & Taylor** — *A Classification and Comparison Framework for Software Architecture Description Languages* (2000). [IEEE Xplore](https://ieeexplore.ieee.org/document/845372)
+- **ISO/IEC/IEEE 42010:2022** — *Software and Systems Engineering — Architecture Description*. ISO, 2022. [https://www.iso.org/standard/74296.html](https://www.iso.org/standard/74296.html)
+- **ADR GitHub Organization** — *Architecture Decision Records*. Michael Nygard 模板与 Rust 项目实践索引. [https://adr.github.io/](https://adr.github.io/)
+- **SEI — ATAM** — *Architecture Tradeoff Analysis Method*. Carnegie Mellon University. [https://www.sei.cmu.edu/research-capabilities/all-work/display.cfm?customel_datapageid_4050=21306](https://www.sei.cmu.edu/research-capabilities/all-work/display.cfm?customel_datapageid_4050=21306)
+- **ISO/IEC 25010:2023** — *Systems and Software Engineering — Quality Models*. ISO, 2023. [https://www.iso.org/standard/78175.html](https://www.iso.org/standard/78175.html)
+- **The Open Group** — *TOGAF Standard, 10th Edition*. [https://www.opengroup.org/togaf](https://www.opengroup.org/togaf)
+
+---
+
+## 六、🧭 思维导图（Mindmap）
 
 ```mermaid
 mindmap
@@ -438,6 +529,11 @@ mindmap
       module 可见性单元
       trait 接口契约
       workspace 产品线
+    ISO 42010 架构描述
+      Stakeholder Concern
+      Viewpoint View
+      ADR
+      ATAM 权衡
 ```
 
 ---

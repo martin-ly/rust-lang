@@ -32,30 +32,36 @@
 - [系统工程标准与 Rust 映射](#系统工程标准与-rust-映射)
   - [📑 目录](#-目录)
   - [一、权威定义](#一权威定义)
-  - [二、ISO/IEC/IEEE 15288 生命周期过程](#二isoiecieee-15288-生命周期过程)
+    - [二、ISO/IEC/IEEE 15288 生命周期过程](#二isoiecieee-15288-生命周期过程)
     - [2.1 技术过程（Technical Processes）](#21-技术过程technical-processes)
     - [2.2 管理过程（Management Processes）](#22-管理过程management-processes)
     - [2.3 协议过程（Agreement Processes）](#23-协议过程agreement-processes)
-  - [三、V-model 与验证确认](#三v-model-与验证确认)
-  - [四、SysML v2 形式语义](#四sysml-v2-形式语义)
-    - [4.1 需求语义](#41-需求语义)
-    - [4.2 结构语义](#42-结构语义)
-    - [4.3 行为语义](#43-行为语义)
-  - [五、Rust 映射](#五rust-映射)
-    - [5.1 嵌入式与 no\_std](#51-嵌入式与-no_std)
-    - [5.2 Ferrocene 资格鉴定](#52-ferrocene-资格鉴定)
-    - [5.3 验证与形式方法](#53-验证与形式方法)
-  - [六、反命题与边界](#六反命题与边界)
+    - [2.4 生命周期过程与 Rust 嵌入式/no_std/Ferrocene 的映射](#24-生命周期过程与-rust-嵌入式no_stdferrocene-的映射)
+  - [三、反应式系统语义](#三反应式系统语义)
+  - [四、分布式一致性模型](#四分布式一致性模型)
+    - [4.1 CAP 定理（Brewer 2000）](#41-cap-定理brewer-2000)
+    - [4.2 FLP 不可能结果（Fischer, Lynch, Paterson 1985）](#42-flp-不可能结果fischer-lynch-paterson-1985)
+    - [4.3 PACELC 模型](#43-pacelc-模型)
+  - [五、V-model 与验证确认](#五v-model-与验证确认)
+  - [六、SysML v2 形式语义](#六sysml-v2-形式语义)
+    - [6.1 需求语义](#61-需求语义)
+    - [6.2 结构语义](#62-结构语义)
+    - [6.3 行为语义](#63-行为语义)
+  - [七、Rust 映射](#七rust-映射)
+    - [7.1 嵌入式与 no\_std](#71-嵌入式与-no_std)
+    - [7.2 Ferrocene 资格鉴定](#72-ferrocene-资格鉴定)
+    - [7.3 验证与形式方法](#73-验证与形式方法)
+  - [八、反命题与边界](#八反命题与边界)
     - [反命题：Rust 的内存安全自动满足 DO-178C / ISO 26262](#反命题rust-的内存安全自动满足-do-178c--iso-26262)
     - [边界：SysML v2 模型不能直接编译为 Rust](#边界sysml-v2-模型不能直接编译为-rust)
     - [边界：V-model 不是线性瀑布](#边界v-model-不是线性瀑布)
-  - [七、嵌入式测验（Embedded Quiz）](#七嵌入式测验embedded-quiz)
+  - [九、嵌入式测验（Embedded Quiz）](#九嵌入式测验embedded-quiz)
     - [测验 1：ISO/IEC/IEEE 15288 中哪一类过程直接包含“验证”与“确认”活动？](#测验-1isoiecieee-15288-中哪一类过程直接包含验证与确认活动)
     - [测验 2：V-model 的核心语义是什么？](#测验-2v-model-的核心语义是什么)
     - [测验 3：SysML v2 中，需求 `r` 与实现证据 `e` 之间的关系用什么谓词表达？](#测验-3sysml-v2-中需求-r-与实现证据-e-之间的关系用什么谓词表达)
     - [测验 4：在安全关键 Rust 项目中，选择 Ferrocene 工具链的主要价值是什么？](#测验-4在安全关键-rust-项目中选择-ferrocene-工具链的主要价值是什么)
     - [测验 5：下面哪段代码最能体现 SysML v2 状态机行为语义在 Rust 中的投影？](#测验-5下面哪段代码最能体现-sysml-v2-状态机行为语义在-rust-中的投影)
-  - [八、权威来源索引](#八权威来源索引)
+  - [十、权威来源索引](#十权威来源索引)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -126,9 +132,112 @@ Rust 生态把这些管理过程编码为工具链：
 - 明确工具链资格范围：上游 stable rustc 还是 **Ferrocene** 认证工具链
 - 明确第三方 crate 的评审等级与使用限制
 
+### 2.4 生命周期过程与 Rust 嵌入式/no_std/Ferrocene 的映射
+
+将 15288 的生命周期过程映射到 Rust 嵌入式/安全关键工程，可得到如下对应关系：
+
+| 15288 过程 | Rust / no_std / Ferrocene 工程制品 | 关键决策点 |
+|:---|:---|:---|
+| 利益相关方需求定义 | `no_std` 约束清单、RAM/ROM 预算、安全目标（ASIL/SIL） | 是否允许 `alloc`，是否使用 `std` 主机模拟 |
+| 系统需求分析 | 用类型与不变量捕获实时/资源约束，例如 `const MAX_BUF: usize` | 静态分配 vs 动态分配的可认证性 |
+| 架构设计 | crate 拆分：`core`（无 `std`）、`hal`（硬件抽象）、`app`；`Cargo.toml` feature flags | 硬件抽象层（HAL）与 Ferrocene 子集的兼容性 |
+| 实现 | `#![no_std]`、`#[panic_handler]`、可选自定义 `global_allocator` | `unsafe` 驱动代码的封装与审计 |
+| 集成 | `cargo embed` / `probe-rs`、硬件在环（HIL）、链接启动文件 | 目标 triple 与链接脚本版本锁定 |
+| 验证 | 主机单元测试 + 交叉编译目标测试、Miri/`cargo kani` 验证 `no_std` 不变量 | 工具链是否经过 Ferrocene 资格鉴定 |
+| 确认 | 系统验收测试、TÜV SÜD 证书、工具鉴定报告 | Ferrocene 语言规范子集的合规声明 |
+| 协议/供应 | MSRV、Ferrocene 版本、`Cargo.lock`、第三方 crate 审计等级 | 合同中明确“上游 rustc 不在认证范围内” |
+
+**边界说明**：`no_std` 是架构决策，不是默认选项。选择 `no_std` 会禁用 `std` 的 panic 基础设施、文件与网络抽象，必须显式提供 `panic_handler` 与启动入口。Ferrocene 提供的是**工具链资格证据**，不替代需求追溯与测试。
+
 ---
 
-## 三、V-model 与验证确认
+## 三、反应式系统语义
+
+[Reactive Manifesto](https://www.reactivemanifesto.org/) 将反应式系统定义为“对事件作出响应、负载可伸缩、具备弹性、以消息驱动”的系统。其四个核心语义属性可形式化地映射到 Rust 并发与异步基础设施：
+
+| 属性 | 语义定义 | Rust 工程映射 |
+|---|---|---|
+| **Responsive（响应性）** | 系统在可预测时间内作出响应，关注尾延迟与用户体验 | `tokio` 任务调度、`tokio::time::timeout`、延迟直方图、`tracing` 指标 |
+| **Resilient（弹性/韧性）** | 面对故障仍保持响应，通过隔离、复制与监督限制故障扩散 | `tokio` 任务 abort / `JoinSet`、`tower` 重试与熔断、`supervisor` 模式 |
+| **Elastic（伸缩性）** | 随工作负载变化自动调整资源，保持响应 | `tokio` runtime 线程池、数据并行 `rayon`、连接池 / back-pressure |
+| **Message Driven（消息驱动）** | 组件通过异步消息传递交互，形成显式边界与背压 | `tokio::sync::mpsc` / `broadcast`、`futures::Stream`、actor 框架 |
+
+形式化关系可概括为：
+
+```text
+Message Driven → Elastic ∧ Resilient → Responsive
+```
+
+即消息驱动为弹性和伸缩提供基础，二者共同支撑响应性。
+
+**边界与反例**：Reactive Manifesto 不保证硬实时（hard real-time）截止时间；它关注的是“在失败和负载下保持响应”的统计行为。一个消息驱动的 Rust 服务如果未建模超时和断路器，仍会在级联故障中丧失响应性。此外，消息传递引入了序列化、队列延迟和反序列化失败，这些开销在延迟敏感路径上可能成为新的瓶颈。
+
+---
+
+## 四、分布式一致性模型
+
+分布式系统的一致性模型刻画了多节点在面对故障与网络分区时的行为边界。以下三个结果是该领域的国际权威结论：
+
+### 4.1 CAP 定理（Brewer 2000）
+
+Brewer 在 PODC 2000 提出、Gilbert & Lynch 2002 形式证明的 CAP 定理指出：
+
+> 在异步网络中，若发生网络分区（Partition），分布式系统无法同时保证一致性（Consistency，通常指线性一致性）与可用性（Availability，每个非故障节点必须对请求作出响应）。
+
+形式化表述：
+
+```text
+Partition ⇒ ¬(Consistency ∧ Availability)
+```
+
+Rust 工程映射：
+
+- **CP 系统**：强一致性优先，例如基于 Raft 的键值存储（`openraft`、`raft` crate）。
+- **AP 系统**：可用性优先，例如 gossip 协议、CRDT 数据类型。
+- **测试**：使用 `tokio` 的 deterministic runtime 或网络故障注入库模拟分区，验证系统选择。
+
+**边界**：CAP 的 C/A/P 只能在**分区发生时**构成三元权衡；正常网络下可以同时追求一致性与可用性。常见误读“三选二”忽略了分区的条件性。
+
+### 4.2 FLP 不可能结果（Fischer, Lynch, Paterson 1985）
+
+FLP 结果指出：
+
+> 在完全异步的分布式系统中，即使只有一个节点可能发生崩溃故障（crash-stop），也不存在确定性的共识协议能够在有限步内保证终止。
+
+形式化表述：
+
+```text
+Asynchronous messages ∧ f ≥ 1 crash-stop ⇒ No deterministic consensus algorithm always terminates
+```
+
+工程含义：Paxos、Raft 等实际算法通过引入**超时与部分同步假设**（partial synchrony）绕过 FLP 不可能性。Rust 实现中，`tokio::time::timeout` 与 leader election 的超时机制正是将异步模型弱化为部分同步的关键设计。
+
+**边界**：FLP 针对的是**消息传递异步模型**与**确定性算法**；使用随机化协议（如 Ben-Or）或共享内存模型会改变结论。
+
+### 4.3 PACELC 模型
+
+PACELC（Abadi 2010）将 CAP 扩展为更细粒度的权衡框架：
+
+> **If Partition, then choose Availability or Consistency; Else, choose Latency or Consistency.**
+
+| 分支 | 选择 | 典型系统语义 |
+|---|---|---|
+| **P + A** | 分区时选可用性 | 异步复制、最终一致性、CRDT |
+| **P + C** | 分区时选一致性 | 同步复制、暂停写入、Raft 多数派 |
+| **E + L** | 无分区时选延迟 | 本地缓存、读从副本、异步提交 |
+| **E + C** | 无分区时选一致性 | 同步读主节点、事务提交、强一致索引 |
+
+Rust 工程映射：
+
+- 同一进程内使用 `tokio::sync` channel 实现 `E + C`（强一致、低延迟）。
+- 跨服务使用消息代理实现 `E + L` 或 `P + A`。
+- 在 `no_std` 嵌入式集群中，分区 rare but catastrophic，因此往往倾向 `P + C`。
+
+**反例**：认为“CAP/PACELC 只适用于数据库”是狭隘的。任何具有网络边界的 Rust 微服务、嵌入式总线或 `tokio` 运行时节点集合都受这些模型约束。
+
+---
+
+## 五、V-model 与验证确认
 
 **V-model** 是系统工程的经典可视化框架，强调左侧“分解/细化”与右侧“集成/验证”的一一对应：
 
@@ -165,7 +274,7 @@ V-model 不是瀑布的同义词；它的核心语义是 **traceability（可追
 
 ---
 
-## 四、SysML v2 形式语义
+## 六、SysML v2 形式语义
 
 SysML v2 是 OMG 推出的下一代系统建模语言，从 v1 的图中心转向 **模型中心 + API 中心**。其形式语义可分解为三个核心域：
 
@@ -176,7 +285,7 @@ SysML v2 模型 M ::= ⟨Req, Struct, Behav⟩
   Behav  : 状态机、活动、交互
 ```
 
-### 4.1 需求语义
+### 6.1 需求语义
 
 需求被建模为可被引用、分解、满足和验证的实体：
 
@@ -193,7 +302,7 @@ Rust 映射：
 - 用 `#[cfg(test)]` 模块中的测试函数作为 `verified_by`
 - 用类型/不变量作为 `satisfied_by` 的编译期证据
 
-### 4.2 结构语义
+### 6.2 结构语义
 
 SysML v2 的结构语义基于 **部件（Part）**、**端口（Port）** 与 **连接（Connection）** 的层级组合：
 
@@ -210,7 +319,7 @@ SysML v2 的结构语义基于 **部件（Part）**、**端口（Port）** 与 *
 - **Port** → 公共 API（`pub fn`、`pub trait` 方法）的输入/输出参数
 - **Connection** → trait 实现、channel、消息传递
 
-### 4.3 行为语义
+### 6.3 行为语义
 
 SysML v2 的行为可由状态机、活动图和序列图表达。其操作语义可归结为：
 
@@ -224,7 +333,7 @@ SysML v2 的行为可由状态机、活动图和序列图表达。其操作语�
   λ   : S × Σ → Action -- 输出/动作
 ```
 
-Rust 中的直接映射是 `enum` + `match` + `async/await`：
+Rust 中的直接映射是 `enum` + `match` + `async/await`。以下是一个**可编译**的简化投影，使用 `Result` 显式处理非法转移，避免“静默忽略”造成的语义丢失：
 
 ```rust,ignore
 // 简化的 SysML 状态机行为投影
@@ -248,11 +357,69 @@ impl FlightMode {
 }
 ```
 
+```rust
+// 带错误处理的 SysML 状态机行为投影（可编译）
+// 状态集合 S、事件集合 Σ、转移函数 δ 均显式表达；非法转移返回错误而非静默跳过。
+
+#[derive(Debug, PartialEq, Clone)]
+enum PumpState {
+    Idle,
+    Running,
+    Fault,
+}
+
+#[derive(Debug, PartialEq, Clone)]
+enum PumpEvent {
+    Start,
+    Stop,
+    Overheat,
+    Reset,
+}
+
+#[derive(Debug, PartialEq)]
+enum PumpError {
+    InvalidTransition { from: PumpState, event: PumpEvent },
+    AlreadyFault,
+}
+
+impl PumpState {
+    fn on_event(self, event: PumpEvent) -> Result<Self, PumpError> {
+        match (self, event) {
+            (PumpState::Idle,    PumpEvent::Start)    => Ok(PumpState::Running),
+            (PumpState::Running, PumpEvent::Stop)     => Ok(PumpState::Idle),
+            (PumpState::Running, PumpEvent::Overheat) => Ok(PumpState::Fault),
+            (PumpState::Fault,   PumpEvent::Reset)    => Ok(PumpState::Idle),
+            (PumpState::Fault,   PumpEvent::Start)    => Err(PumpError::AlreadyFault),
+            (from, event) => Err(PumpError::InvalidTransition { from, event }),
+        }
+    }
+}
+
+fn main() {
+    let s = PumpState::Idle
+        .on_event(PumpEvent::Start).unwrap()
+        .on_event(PumpEvent::Overheat).unwrap();
+    assert_eq!(s, PumpState::Fault);
+
+    let err = PumpState::Idle.on_event(PumpEvent::Stop);
+    assert!(matches!(
+        err,
+        Err(PumpError::InvalidTransition {
+            from: PumpState::Idle,
+            event: PumpEvent::Stop,
+        })
+    ));
+
+    let recovered = s.on_event(PumpEvent::Reset).unwrap();
+    assert_eq!(recovered, PumpState::Idle);
+}
+```
+
 ---
 
-## 五、Rust 映射
+## 七、Rust 映射
 
-### 5.1 嵌入式与 no_std
+### 7.1 嵌入式与 no_std
 
 系统工程中的很多 Rust 目标运行在资源受限环境。`no_std` 是进入该域的门票：
 
@@ -279,7 +446,7 @@ pub extern "C" fn _start() -> ! {
 - 选择 `no_std` 是一项架构决策，需要记录于设计记录
 - 选择 `alloc` 还是完全静态分配影响 **RAM 预算** 与 **可认证性**
 
-### 5.2 Ferrocene 资格鉴定
+### 7.2 Ferrocene 资格鉴定
 
 Ferrocene 是 Rust 的首个通过 TÜV SÜD 认证的工具链，覆盖：
 
@@ -297,7 +464,7 @@ Ferrocene 是 Rust 的首个通过 TÜV SÜD 认证的工具链，覆盖：
   证据          : TÜV SÜD 证书 + 工具鉴定报告
 ```
 
-### 5.3 验证与形式方法
+### 7.3 验证与形式方法
 
 Rust 的验证工具链可映射到 SysML v2 的 `verified_by` 关系：
 
@@ -324,7 +491,7 @@ fn counter_never_overflows() {
 
 ---
 
-## 六、反命题与边界
+## 八、反命题与边界
 
 ### 反命题：Rust 的内存安全自动满足 DO-178C / ISO 26262
 
@@ -356,7 +523,7 @@ V-model 常被误用为“需求 → 设计 → 编码 → 测试”的单向瀑
 
 ---
 
-## 七、嵌入式测验（Embedded Quiz）
+## 九、嵌入式测验（Embedded Quiz）
 
 #### 测验 1：ISO/IEC/IEEE 15288 中哪一类过程直接包含“验证”与“确认”活动？
 
@@ -435,11 +602,15 @@ Ferrocene 提供的是**工具链资格鉴定证据**，它是安全案例的必
 
 ---
 
-## 八、权威来源索引
+## 十、权威来源索引
 
-- **ISO/IEC/IEEE 15288:2023** — *Systems and Software Engineering — System Life Cycle Processes*. ISO, 2023.
+- **ISO/IEC/IEEE 15288:2023** — *Systems and Software Engineering — System Life Cycle Processes*. ISO, 2023. [https://www.iso.org/standard/63711.html](https://www.iso.org/standard/63711.html)
 - **INCOSE** — *Systems Engineering Handbook: A Guide for System Life Cycle Processes and Activities* (5th ed.). Wiley, 2023.
-- **OMG** — *Systems Modeling Language (SysML v2) Specification*. Object Management Group, 2024.
+- **OMG** — *Systems Modeling Language (SysML v2) Specification*. Object Management Group, 2024. [https://www.omg.org/spec/SysML/](https://www.omg.org/spec/SysML/)
+- **Reactive Manifesto** — *The Reactive Manifesto*. [https://www.reactivemanifesto.org/](https://www.reactivemanifesto.org/)
+- **Brewer 2000 / Gilbert & Lynch 2002** — CAP Theorem: *Towards Robust Distributed Systems* (PODC 2000) and *Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services* (SIGACT 2002). [https://dl.acm.org/doi/10.1145/343477.343502](https://dl.acm.org/doi/10.1145/343477.343502) · [https://dl.acm.org/doi/10.1145/564585.564601](https://dl.acm.org/doi/10.1145/564585.564601)
+- **Fischer, Lynch & Paterson 1985** — *Impossibility of Distributed Consensus with One Faulty Process* (JACM 1985). [https://dl.acm.org/doi/10.1145/3149.214121](https://dl.acm.org/doi/10.1145/3149.214121)
+- **Abadi 2010** — PACELC model: *Consistency Tradeoffs in Modern Distributed Database System Design* (IEEE Computer 2012, first presented 2010). [https://cs-www.cs.yale.edu/homes/dna/papers/abadi-pacelc.pdf](https://cs-www.cs.yale.edu/homes/dna/papers/abadi-pacelc.pdf)
 - **Ferrocene** — [Ferrocene Language Specification](https://spec.ferrocene.dev/)
 - **Rust Project** — [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 
@@ -456,6 +627,16 @@ mindmap
       技术过程
       管理过程
       协议过程
+      嵌入式 no_std Ferrocene 映射
+    反应式系统语义
+      Responsive
+      Resilient
+      Elastic
+      Message Driven
+    分布式一致性模型
+      CAP 定理
+      FLP 不可能结果
+      PACELC 模型
     V-model
       左侧细化
       右侧验证
