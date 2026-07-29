@@ -1,41 +1,41 @@
 {
   "date": "2026-07-29",
-  "scanned": 573,
+  "scanned": 574,
   "coverage": {
     "P0": [
-      566,
+      567,
       98.8
     ],
     "P1": [
-      489,
-      85.3
+      490,
+      85.4
     ],
     "P2": [
       454,
-      79.2
+      79.1
     ],
     "any": [
-      573,
+      574,
       100.0
     ],
     "none": 0
   },
   "content_scope": {
-    "scanned": 482,
+    "scanned": 483,
     "P0": [
-      480,
+      481,
       99.6
     ],
     "P1": [
-      435,
-      90.2
+      436,
+      90.3
     ],
     "P2": [
       436,
-      90.5
+      90.3
     ],
     "any": [
-      482,
+      483,
       100.0
     ],
     "gaps_p1": [
@@ -62,7 +62,6 @@
       "concept/04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md",
       "concept/04_formal/10_architecture_semantics/03_architecture_refinement.md",
       "concept/04_formal/10_architecture_semantics/04_rust_architecture_constraints.md",
-      "concept/04_formal/11_computational_models/01_computational_semantics_framework.md",
       "concept/04_formal/11_computational_models/02_computability_theory.md",
       "concept/04_formal/11_computational_models/03_formal_languages_and_automata.md",
       "concept/04_formal/11_computational_models/04_mathematical_functions_of_computation.md",
@@ -80,6 +79,7 @@
       "concept/06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md",
       "concept/06_ecosystem/11_domain_applications/23_safety_critical_systems_engineering.md",
       "concept/06_ecosystem/14_enterprise_architecture/04_domain_driven_design_in_rust.md",
+      "concept/06_ecosystem/14_enterprise_architecture/05_strategic_domain_driven_design_in_rust.md",
       "concept/07_future/00_version_tracking/rust_1_100_preview.md",
       "concept/07_future/00_version_tracking/rust_1_97_1.md",
       "concept/07_future/00_version_tracking/rust_1_98_stabilized.md",
@@ -128,6 +128,7 @@
       "concept/06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md",
       "concept/06_ecosystem/14_enterprise_architecture/02_architecture_governance_and_adrs.md",
       "concept/06_ecosystem/14_enterprise_architecture/03_architecture_standards_alignment.md",
+      "concept/06_ecosystem/14_enterprise_architecture/05_strategic_domain_driven_design_in_rust.md",
       "concept/07_future/00_version_tracking/rust_1_98_stabilized.md",
       "concept/07_future/02_preview_features/39_async_ioring_preview.md",
       "concept/07_future/04_research_and_experimental/08_llm_system_architecture.md",
@@ -168,9 +169,9 @@
       "any": 27
     },
     "L6": {
-      "n": 133,
-      "P0": 128,
-      "any": 133
+      "n": 134,
+      "P0": 129,
+      "any": 134
     },
     "L7": {
       "n": 73,

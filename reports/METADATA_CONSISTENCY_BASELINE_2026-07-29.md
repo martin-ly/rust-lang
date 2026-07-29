@@ -1,6 +1,6 @@
 # 元数据一致性基线（语义质量门 P0-1）
 
-**日期**: 2026-07-29  **扫描**: 607 concept 活跃文件（排除 archive）  **模式**: strict
+**日期**: 2026-07-29  **扫描**: 608 concept 活跃文件（排除 archive）  **模式**: strict
 
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
@@ -9,9 +9,9 @@
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
 | D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
-| D6 Summary 低信息量模板套话 | 5 | 0.8% | >=3% | pass |
+| D6 Summary 低信息量模板套话 | 6 | 1.0% | >=3% | pass |
 
-**受影响文件总数**: 6 / 607
+**受影响文件总数**: 7 / 608
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -123,12 +123,13 @@
 ### D5 稳定层正文残留 nightly/preview/unstable（0）
 
 
-### D6 Summary 低信息量模板套话（5）
+### D6 Summary 低信息量模板套话（6）
 
 - `concept/04_formal/00_type_theory/17_system_f.md` — Summary 为空
 - `concept/04_formal/07_concurrency_semantics/07_session_types.md` — Summary 为空
 - `concept/04_formal/13_semantic_engineering/05_knowledge_graph_reasoning.md` — Summary 为空
 - `concept/06_ecosystem/14_enterprise_architecture/04_domain_driven_design_in_rust.md` — Summary 为空
+- `concept/06_ecosystem/14_enterprise_architecture/05_strategic_domain_driven_design_in_rust.md` — Summary 为空
 - `concept/07_future/04_research_and_experimental/11_rust_for_ai_model_serving.md` — Summary 为空
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）

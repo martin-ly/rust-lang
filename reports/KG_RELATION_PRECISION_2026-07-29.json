@@ -1,7 +1,7 @@
 {
   "summary": {
     "date": "2026-07-29",
-    "total_relations": 9227,
+    "total_relations": 9229,
     "generic_relation_annotation_count": 0,
     "generic_ratio_global": 0.0,
     "core_entities": 50,
@@ -10,7 +10,7 @@
     "core_generic_ratio": 0.0,
     "core_lacking_semantic": 0,
     "global_predicate_distribution": {
-      "ex:hasPart": 3999,
+      "ex:hasPart": 4001,
       "ex:dependsOn": 1893,
       "ex:entails": 1361,
       "ex:relatedTo": 900,

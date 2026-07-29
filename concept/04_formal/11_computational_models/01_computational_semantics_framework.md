@@ -23,6 +23,7 @@
     - [1.2 它们之间的关系](#12-它们之间的关系)
     - [1.3 Rust 示例：`let x = 1 + 1`](#13-rust-示例let-x--1--1)
     - [1.4 `unsafe` 作为公理契约](#14-unsafe-作为公理契约)
+    - [1.5 计算语义与 Church-Turing 论题](#15-计算语义与-church-turing-论题)
   - [二、反命题与边界分析](#二反命题与边界分析)
   - [三、相关概念](#三相关概念)
   - [四、嵌入式测验（Embedded Quiz）](#四嵌入式测验embedded-quiz)
@@ -141,6 +142,54 @@ fn main() {
 
 ---
 
+### 1.5 计算语义与 Church-Turing 论题
+
+**Church-Turing 论题**（Church 1936; Turing 1936）不是一条可在形式系统内证明的定理，而是关于「有效可计算」边界的经验性/哲学性论断：
+
+> 任何可被人类或机械「有效计算」的函数，都可以由图灵机计算，也可以由无类型 λ 演算表达，也可以由部分递归函数定义。
+
+这三种经典模型在表达力上是等价的：
+
+```text
+计算等价链：
+  图灵机  ≡  无类型 λ 演算  ≡  部分递归函数
+           ≡  通用寄存器机  ≡  所有图灵完备编程语言（无资源限制）
+```
+
+- **图灵机**从「状态-磁带」角度刻画计算：一条无限长磁带、一个读写头、有限状态控制器。
+- **λ 演算**从「函数与应用」角度刻画计算：通过 λ 抽象与 β 归约表达任意可计算函数。
+- **部分递归函数**从「函数构造」角度刻画计算：从零、后继、投影出发，经组合、原始递归与无界最小化得到所有可计算函数。
+
+它们之间的相互模拟（simulation）正是**计算语义**要回答的问题：给定一种语言的程序，如何把它映射到另一种语义模型，并证明映射保持可观察行为。
+
+#### Rust const 求值：受约束的可计算性
+
+Rust 的 **const 求值（const evaluation）** 是 Church-Turing 论题在工程语言中的一个**受约束实例**。`const fn` 与 `const` 上下文允许在编译期执行计算，但这些计算被严格限制，以保证编译期终止性、确定性与无堆分配：
+
+| 能力 | const 上下文 | 说明 |
+|:---|:---:|:---|
+| 算术与位运算 | ✅ | 基本整数、布尔、字符运算 |
+| 条件表达式 `if` / `match` | ✅ | 自 Rust 1.46 起允许 |
+| `loop` / `while` / `for` | ✅ | 允许，但受解释器迭代步数上限约束 |
+| 递归调用 | ✅ | 允许，但展开深度与步数受 const 求值限制器约束 |
+| 调用其他 `const fn` | ✅ | 只能调用已标记为 `const fn` 的函数 |
+| 堆分配（`Box`、`Vec` 等） | ❌ | 编译期无堆，会报 E0015 等错误 |
+| 调用非 `const` 标准库方法 | ❌ | 例如 `Vec::push` 未 const-stabilized |
+| 未定义行为 / 任意 I/O | ❌ | const 求值必须是纯函数式的 |
+
+```rust,compile_fail,E0015
+const fn heap_alloc_in_const() -> Vec<i32> {
+    vec![1, 2, 3] // ERROR: vec! 宏在 const fn 中会触发堆分配，
+                  // 其底层调用（如 Box::new_uninit）不是 const fn
+}
+```
+
+> **认知要点**：const 求值不是「可计算性更弱」——它在理论上仍是图灵完备的受限子集；其限制主要来自**编译期资源与确定性要求**，而非计算理论本身。循环、递归、条件都能写，但一旦超出内部解释器的步数/迭代上限，编译器会报告 `evaluation of constant value failed`。
+
+> **来源**: [Church 1936 / Church-Turing 论题综述](https://arxiv.org/abs/cs/0503082) · Turing 1936 — *On computable numbers, with an application to the Entscheidungsproblem* · [Winskel 1993 — The Formal Semantics of Programming Languages](https://www.cs.cmu.edu/~crary/819-f09/Winskel.pdf) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
+
+---
+
 ## 二、反命题与边界分析
 
 一个常见误判是：**「每种语言都有现成的指称语义」**。事实上，指称语义需要为语言构造找到合适的数学空间（domain）。对于无类型 λ 演算加无限制递归，直接构造集合论函数会导致悖论，必须引入**Scott 域（Scott domain）**和**连续函数（continuous functions）**才能给出一致的指称语义。
@@ -152,7 +201,7 @@ fn main() {
 └── 边界：某些语言构造（如反射、任意宏展开）至今仍无满意指称语义
 ```
 
-> **来源**: [Scott & Strachey — Toward a Mathematical Semantics for Computer Languages](https://www.cs.ox.ac.uk/files/3232/PRG06.pdf) · [Winskel 1993 — The Formal Semantics of Programming Languages](https://mitpress.mit.edu/9780262731034)
+> **来源**: [Scott & Strachey — Toward a Mathematical Semantics for Computer Languages](https://www.cs.ox.ac.uk/files/3232/PRG06.pdf) · [Winskel 1993 — The Formal Semantics of Programming Languages](https://www.cs.cmu.edu/~crary/819-f09/Winskel.pdf)
 
 ---
 
@@ -225,8 +274,9 @@ fn main() {
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [Plotkin 1981 — SOS](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf) | ✅ 一级 | 结构化操作语义奠基 |
-| [Winskel 1993 — Formal Semantics](https://mitpress.mit.edu/9780262731034) | ✅ 一级 | 形式语义教材 |
-| [Pierce 2002 — TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/) | ✅ 一级 | 类型与编程语言 |
+| [Winskel 1993 — The Formal Semantics of Programming Languages](https://www.cs.cmu.edu/~crary/819-f09/Winskel.pdf) | ✅ 一级 | 形式语义教材（CMU 课程 PDF） |
+| [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) | ✅ 一级 | 类型与编程语言（TAPL 主页） |
+| [Church 1936 / 论题综述](https://arxiv.org/abs/cs/0503082) | ✅ 一级 | Church-Turing 论题综述（arXiv cs/0503082） |
 | [Scott & Strachey — Denotational Semantics](https://www.cs.ox.ac.uk/files/3232/PRG06.pdf) | ✅ 一级 | 指称语义奠基 |
 | [Rust Reference — Unsafe blocks](https://doc.rust-lang.org/reference/unsafe-keyword.html#unsafe-blocks) | ✅ 一级 | Rust unsafe 块语义 |
 
@@ -255,4 +305,11 @@ mindmap
       充分性
       完全抽象
       声音性/完备性
+    Church-Turing 论题
+      图灵机
+      λ 演算
+      部分递归函数
+    Rust const 求值
+      受约束的可计算性
+      E0015 边界
 ```

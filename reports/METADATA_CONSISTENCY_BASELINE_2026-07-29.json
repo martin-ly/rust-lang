@@ -1,14 +1,14 @@
 {
   "summary": {
     "date": "2026-07-29",
-    "scanned": 607,
+    "scanned": 608,
     "counts": {
       "D1": 0,
       "D2": 1,
       "D3": 0,
       "D4": 0,
       "D5": 0,
-      "D6": 5
+      "D6": 6
     },
     "pct": {
       "D1": 0.0,
@@ -16,10 +16,10 @@
       "D3": 0.0,
       "D4": 0.0,
       "D5": 0.0,
-      "D6": 0.8
+      "D6": 1.0
     },
     "D2_base_files_with_asp_and_bloom": 357,
-    "flagged_files": 6
+    "flagged_files": 7
   },
   "examples": {
     "D1": [],
@@ -50,6 +50,10 @@
         "Summary 为空"
       ],
       [
+        "concept/06_ecosystem/14_enterprise_architecture/05_strategic_domain_driven_design_in_rust.md",
+        "Summary 为空"
+      ],
+      [
         "concept/07_future/04_research_and_experimental/11_rust_for_ai_model_serving.md",
         "Summary 为空"
       ]
@@ -77,6 +81,11 @@
       ]
     },
     "concept/06_ecosystem/14_enterprise_architecture/04_domain_driven_design_in_rust.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/06_ecosystem/14_enterprise_architecture/05_strategic_domain_driven_design_in_rust.md": {
       "D6": [
         "Summary 为空"
       ]

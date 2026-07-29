@@ -9,7 +9,7 @@
 > **Bloom 层级**: L5-L7
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 与 [`04_domain_driven_design_in_rust.md`](04_domain_driven_design_in_rust.md)（战术模式）互补，聚焦 DDD 战略设计在 Rust 工程结构中的落地。
-> **前置概念**: [Enterprise Architecture Frameworks](01_enterprise_architecture_frameworks.md) · [Architecture Governance and ADRs](02_architecture_governance_and_adrs.md) · [Domain-Driven Design Tactical Patterns](04_domain_driven_design_in_rust.md) · [Modules and Paths](../../01_foundation/07_modules_and_items/01_modules_and_paths.md)
+> **前置概念**: [Enterprise Architecture Frameworks](01_enterprise_architecture_frameworks.md) · [Architecture Governance and ADRs](02_architecture_governance_and_adrs.md) · [Software Architecture Formalization](../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md) · [Language Semantic Model Matrix](../../05_comparative/00_paradigms/05_language_semantic_model_matrix.md) · [Domain-Driven Design Tactical Patterns](04_domain_driven_design_in_rust.md) · [Modules and Paths](../../01_foundation/07_modules_and_items/01_modules_and_paths.md)
 > **后置概念**: [System Design Principles](../03_design_patterns/03_system_design_principles.md) · [CQRS and Event Sourcing](../03_design_patterns/07_cqrs_event_sourcing.md) · [Rust FFI](../../03_advanced/04_ffi/01_rust_ffi.md)
 
 ---
@@ -150,7 +150,7 @@ impl InventoryAcl {
 
 ---
 
-## 五、反命题与边界
+## 五、反例与边界
 
 - **反命题 1**：限界上下文应该尽可能小。事实：过小会导致集成成本爆炸；边界应由语义一致性和团队所有权决定。
 - **反命题 2**：所有 crate 都应该对应一个限界上下文。事实：crate 也可能按技术分层（如 `shared-kernel`），但应避免技术分层污染业务边界。

@@ -480,6 +480,7 @@
     - [架构治理与架构决策记录](06_ecosystem/14_enterprise_architecture/02_architecture_governance_and_adrs.md)
     - [软件工程标准与 Rust 映射](06_ecosystem/14_enterprise_architecture/03_architecture_standards_alignment.md)
     - [领域驱动设计（DDD）在 Rust 中的战术模式](06_ecosystem/14_enterprise_architecture/04_domain_driven_design_in_rust.md)
+    - [战略领域驱动设计（Strategic DDD）在 Rust 中的实践](06_ecosystem/14_enterprise_architecture/05_strategic_domain_driven_design_in_rust.md)
   - [Rust 数据科学与科学计算](06_ecosystem/06_data_and_distributed/07_rust_for_data_science.md)
   - [CRDT 谱系：状态基、操作基与合并格形式化](06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md)
   - [因果序与向量时钟：Lamport 偏序的算法化](06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md)

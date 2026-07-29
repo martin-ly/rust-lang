@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 582,
-    "generated_at": "2026-07-29T11:13:53.900605+00:00"
+    "total_files": 583,
+    "generated_at": "2026-07-29T11:53:10.140906+00:00"
   },
   "files": [
     {
@@ -48002,7 +48002,7 @@
       "layer": "L4",
       "title": "计算语义统一框架（A Unified Framework of Computational Semantics）",
       "positioning": "把操作、指称、公理、类型四种语义统一为观察同一程序行为的四种互补视角，为后续可计算性、形式语言与程序等价性讨论奠定共同语言。",
-      "line_count": 259,
+      "line_count": 316,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -48021,6 +48021,15 @@
           "lines": 9,
           "should_fail": false,
           "code_preview": "fn main() {     let mut x = 0;     let ptr = &mut x as *mut i32;     unsafe {   ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0015"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "const fn heap_alloc_in_const() -> Vec<i32> {     vec![1, 2, 3] // ERROR: vec! 宏在..."
         }
       ],
       "sources": [],
@@ -48039,7 +48048,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 6,
+      "matrix_rows": 16,
       "pre_post": {
         "pre": [
           "[Async/Await](../../03_advanced/01_async/01_async.md) · [Lambda Calculus](../00_type_theory/05_lambda_calculus.md) · [Type Theory](../00_type_theory/01_type_theory.md)"
@@ -48494,7 +48503,7 @@
       "layer": "L4",
       "title": "同步 · 并发 · 并行 · 异步 · 分布式的语义边界",
       "positioning": "在单一页中形式化区分「同步/并发/并行/异步/分布式」五种计算范式，标定它们的语义交集、包含关系与 Rust 原语的落点，避免把实现细节或性能目标当成范式定义。",
-      "line_count": 404,
+      "line_count": 481,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -48508,6 +48517,21 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use std::sync::mpsc;  fn main() {     let (tx, rx) = mpsc::channel::<i32>();    ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0308"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "use std::sync::mpsc;  fn main() {     let (tx, _rx) = mpsc::channel::<i32>();   ..."
+        },
         {
           "flags": [],
           "lines": 14,
@@ -48554,7 +48578,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 2,
-      "matrix_rows": 17,
+      "matrix_rows": 22,
       "pre_post": {
         "pre": [
           "[并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · [Async/Await](../../03_advanced/01_async/01_async.md) · [并发模型谱系](01_models_of_concurrency.md) · [五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md)"
@@ -67375,6 +67399,55 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\14_enterprise_architecture\\05_strategic_domain_driven_design_in_rust.md",
+      "layer": "L6",
+      "title": "战略领域驱动设计（Strategic DDD）在 Rust 中的实践",
+      "positioning": "与 [`04_domain_driven_design_in_rust.md`](04_domain_driven_design_in_rust.md)（战术模式）互补，聚焦 DDD 战略设计在 Rust 工程结构中的落地。",
+      "line_count": 199,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 五、反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// sales/src/inventory_acl.rs use inventory::StockLevel; // 上游类型只出现在 ACL 内部  pub..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/07_modules_and_items/01_modules_and_paths.md",
+        "../../03_advanced/04_ffi/01_rust_ffi.md",
+        "../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md",
+        "../../05_comparative/00_paradigms/05_language_semantic_model_matrix.md",
+        "../03_design_patterns/03_system_design_principles.md",
+        "../03_design_patterns/07_cqrs_event_sourcing.md",
+        "01_enterprise_architecture_frameworks.md",
+        "02_architecture_governance_and_adrs.md",
+        "04_domain_driven_design_in_rust.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 22,
+      "pre_post": {
+        "pre": [
+          "[Enterprise Architecture Frameworks](01_enterprise_architecture_frameworks.md) · [Architecture Governance and ADRs](02_architecture_governance_and_adrs.md) · [Software Architecture Formalization](../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md) · [Language Semantic Model Matrix](../../05_comparative/00_paradigms/05_language_semantic_model_matrix.md) · [Domain-Driven Design Tactical Patterns](04_domain_driven_design_in_rust.md) · [Modules and Paths](../../01_foundation/07_modules_and_items/01_modules_and_paths.md)"
+        ],
+        "post": [
+          "[System Design Principles](../03_design_patterns/03_system_design_principles.md) · [CQRS and Event Sourcing](../03_design_patterns/07_cqrs_event_sourcing.md) · [Rust FFI](../../03_advanced/04_ffi/01_rust_ffi.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\07_future\\00_version_tracking\\01_rust_version_tracking.md",
       "layer": "L7",
       "title": "Rust 形式模型演进跟踪（1.79–1.97+）",
@@ -69880,20 +69953,28 @@
       "layer": "L7",
       "title": "Rust 1.97.1 稳定补丁",
       "positioning": "",
-      "line_count": 298,
+      "line_count": 449,
       "theorem_chains": [],
       "anti_propositions": [
         {
-          "title": "## 5. 反命题"
+          "title": "## 6. 反命题"
         },
         {
-          "title": "### 5.1 反命题"
+          "title": "### 6.1 反命题"
         },
         {
-          "title": "### 5.2 反命题"
+          "title": "### 6.2 反命题"
         }
       ],
       "code_blocks": [
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "> enum State { On, Off } > > fn main() { >     let s = State::On; >     // 试图通过 ..."
+        },
         {
           "flags": [
             "edition2024"
@@ -69917,7 +69998,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 11,
+      "matrix_rows": 24,
       "pre_post": {
         "pre": [
           "[Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.97.0 稳定特性](rust_1_97_stabilized.md)"
@@ -75818,11 +75899,11 @@
       "layer": "L7",
       "title": "Rust 在 AI 模型服务与推理系统中的应用",
       "positioning": "聚焦**模型服务层**（model serving / inference serving），把 LLM system architecture 中的推理部分下沉到工程实现，对齐国际 ML 系统工程实践与 Rust 生态。",
-      "line_count": 244,
+      "line_count": 293,
       "theorem_chains": [],
       "anti_propositions": [
         {
-          "title": "## 五、反命题"
+          "title": "## 六、反命题"
         },
         {
           "title": "### 反例"
@@ -75871,7 +75952,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 12,
+      "matrix_rows": 24,
       "pre_post": {
         "pre": [
           "[LLM System Architecture](08_llm_system_architecture.md) · [MLOps and LLMOps](09_mlops_and_llmops.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Async/Await](../../03_advanced/01_async/01_async.md) · [Performance Optimization](../../06_ecosystem/10_performance/01_performance_optimization.md)"

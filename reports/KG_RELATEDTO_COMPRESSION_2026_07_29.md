@@ -5,7 +5,7 @@
 
 | 谓词 | 数量 |
 |---|---:|
-| hasPart | 3999 |
+| hasPart | 4001 |
 | partOf | 450 |
 | refines | 497 |
 | dependsOn | 949 |
@@ -14,7 +14,7 @@
 | appliesTo | 127 |
 | unchanged | 900 |
 
-- 修改总数: 6519
+- 修改总数: 6521
 - 未变更（仍 relatedTo）: 900
 
 规则说明：H1/H2 导航页 hasPart/partOf；H3 同目录进阶 refines；H4/H5 跨层 dependsOn/entails；H6 同路径 equivalentTo。

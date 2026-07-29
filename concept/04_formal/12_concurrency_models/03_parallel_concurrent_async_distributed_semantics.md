@@ -36,6 +36,7 @@
     - [2.3 并行：PRAM 与线性化](#23-并行pram-与线性化)
     - [2.4 异步：Future 与事件循环](#24-异步future-与事件循环)
     - [2.5 分布式：偏序与共识](#25-分布式偏序与共识)
+    - [2.6 进程代数与 session types 视角](#26-进程代数与-session-types-视角)
   - [三、语义交集与常见误解](#三语义交集与常见误解)
     - [3.1 包含关系](#31-包含关系)
     - [3.2 编程语言层面的常见误配](#32-编程语言层面的常见误配)
@@ -122,6 +123,75 @@ e₁ → e₂  当且仅当
 ```
 
 当事件不可比较时，称它们**并发**——这是分布式语境下「并发」一词的另一种精确含义。
+
+### 2.6 进程代数与 session types 视角
+
+上面的五种范式可以从**进程代数**与**类型化通信协议**两个角度重新组织，这为 Rust 的 `mpsc`、`async/await` 以及更高级的类型系统扩展提供了形式语义背景。
+
+#### 2.6.1 进程代数：CSP、CCS、π 演算
+
+- **CSP（Communicating Sequential Processes）** — [Hoare 1985](http://www.usingcsp.com/cspbook.pdf)：以**同步会合（rendezvous）**为核心，进程通过命名通道交换事件；并行组合 `P || Q` 要求共享事件同步发生；外部选择 `[]` 让环境决定进程走向。Rust 的 `mpsc::sync_channel(0)` 与 `select!` 是其工程投影，但 Rust 默认 channel 是有缓冲的，二者并非同构（详见 [同层：进程代数与 Rust](../07_concurrency_semantics/01_process_calculi_for_rust.md)）。
+- **CCS（Calculus of Communicating Systems）** — [Milner 1989](https://www.research.ed.ac.uk/en/publications/communication-and-concurrency/)：以极小语法（前缀、选择、并行、限制、重标记）定义带标签迁移系统，并给出**强/弱互模拟**作为行为等价标准。互模拟为比较并发实现是否可替换提供了方法论基准，但 Rust 程序本身没有标注迁移系统，因此不能直接套用等价证明。
+- **π 演算** — [Milner, Parrow & Walker 1992](https://doi.org/10.1016/0890-5401(92)90008-4)：在 CCS 基础上引入**通道名作为一等消息**，从而建模通信拓扑的动态变化（mobility）。Rust 中 `Sender<T>` 本身可作为值被移动或嵌入消息，正是这一思想的类型系统近似。
+
+> **小结**：三种演算共同把「并发」从实现细节提升为**交互模式**的研究对象；它们解释 Rust 通道与选择的血统，也标示出 Rust 所有权类型系统带来的额外静态约束。
+
+#### 2.6.2 Session types：把协议写进类型
+
+Session types 将双向通信协议编码为类型，使得**顺序、分支、递归**等协议结构在编译期即可检验。
+
+- [Honda 1993](https://doi.org/10.1007/3-540-57208-2_35) 提出二元会话类型（dyadic interaction types），用 `!T.S`（发送 `T` 后继续 `S`）、`?T.S`（接收 `T` 后继续 `S`）、`⊕{l:S, …}`（内部选择分支）、`&{l:S, …}`（外部选择分支）描述通信顺序。
+- [Gay & Hole 2005](https://doi.org/10.1007/s00236-005-0177-z) 为 π 演算上的 session types 建立子类型关系，允许发送端比接收端更「具体」，同时保持通信安全。
+- [Wadler 2012](https://doi.org/10.1145/2364527.2364568) 的 *Propositions as Sessions* 揭示 session types 与线性逻辑之间的 Curry-Howard 对应：通信的**对偶性**（duality）对应逻辑否定，**线性使用**对应资源不可复制。
+
+Session types 保证协议安全的核心机制有三点：
+
+1. **对偶性（Duality）**：通道两端的类型互为对偶，发送 `!T` 必须匹配接收 `?T`；若两端不一致，类型检查失败。
+2. **线性（Linearity）**：会话端点不能被随意复制或丢弃，防止在错误状态下继续使用已关闭或已转换的通道。
+3. **进展（Progress）**：良类型的进程网络不会出现死锁或协议状态错配（在理想演算中；工程实现还需额外条件）。
+
+Rust 标准库并没有原生 session types，但 `mpsc::channel::<T>()` 的类型参数已经体现了最朴素的「对偶」思想：发送端 `Sender<T>` 与接收端 `Receiver<T>` 通过同一类型 `T` 耦合，任何类型错配都会在编译期被拒绝。
+
+```rust
+use std::sync::mpsc;
+
+fn main() {
+    let (tx, rx) = mpsc::channel::<i32>();
+    // tx 与 rx 共享同一个类型参数 T = i32
+    tx.send(42).unwrap();
+    let v: i32 = rx.recv().unwrap();
+    assert_eq!(v, 42);
+}
+```
+
+下面的 `compile_fail` 反例说明：一旦把 `Sender<i32>` 与需要 `String` 的接收端混用，编译器立即拒绝。
+
+```rust,compile_fail,E0308
+use std::sync::mpsc;
+
+fn main() {
+    let (tx, _rx) = mpsc::channel::<i32>();
+    // 类型不匹配：Sender<i32> 不能接受 String
+    tx.send("hello".to_string()).unwrap();
+}
+```
+
+#### 2.6.3 Algebraic effects 与 async/await 的表达能力对比
+
+**Algebraic effects** — [Plotkin & Pretnar 2009](https://doi.org/10.1007/978-3-642-00590-9_7) 把「效应操作」的**签名**与**解释器（handler）**分离：程序调用如 `async` / `await` / `yield` / `fork` 等操作，但由外层 handler 决定这些操作的具体语义。这种分离使得同一套语法可以解释成协作式调度、异常、状态、非确定性等多种语义。
+
+[Dolan et al. 2017](https://doi.org/10.1007/978-3-319-89719-6_6) 在 Multicore OCaml 中展示了如何用 effect handlers 实现 **async/await 式并发**：`Async` 与 `Await` 作为两个 effect 操作，由单个 handler 维护就绪队列与阻塞映射。这说明 async/await 可以被视为 algebraic effects 的一个**特化实例**。
+
+与 Rust 的 `async/await` 相比：
+
+| 维度 | Rust `async/await` | Algebraic effects |
+|:---|:---|:---|
+| 控制抽象 | 编译为状态机，隐式 `poll`/`Waker` | 通过 resumable continuation 显式捕获与恢复 |
+| 可定制性 | 执行器可定制，但 `Future` 语义固定 | handler 可重新定义 `await`/`spawn` 的语义 |
+| 与类型系统关系 | `Future<Output = T>` 是 trait，Send/Sync 边界约束跨任务移动 | 效应操作作为类型效果（effect system）的一部分 |
+| 表达能力 | 足以为 I/O 密集型并发提供零成本抽象 | 更强，可统一表达异常、回溯、协程、并发等 |
+
+> **边界**：Rust 目前（1.97）没有 language-level algebraic effects；`async/await` 是**单一、固定的效应解释**。若未来引入 effect system，才可能把 `await`、`?`、`yield` 等统一为可组合的效应操作。
 
 ---
 
@@ -285,12 +355,19 @@ async fn main() {
 - [std::sync::mpsc — Rust 标准库文档](https://doc.rust-lang.org/std/sync/mpsc/)（P0 官方）
 - [rayon docs.rs](https://docs.rs/rayon/latest/rayon/) · [tokio docs.rs](https://docs.rs/tokio/latest/tokio/)
 - Lee, E. A. "The Problem with Threads." *IEEE Computer* 39(5), 2006, 33–42.
-- Hoare, C. A. R. *Communicating Sequential Processes*. Prentice Hall, 1985.
+- Hoare, C. A. R. *Communicating Sequential Processes*. Prentice Hall, 1985. [作者授权电子版](http://www.usingcsp.com/cspbook.pdf)（项目记录：2026-07-12 本网络 DNS 未解析，保留备查）
 - Lamport, L. "Time, Clocks, and the Ordering of Events in a Distributed System." *Communications of the ACM* 21(7), 1978, 558–565.
+- Milner, R. *Communication and Concurrency*. Prentice Hall, 1989. [Edinburgh Research Explorer](https://www.research.ed.ac.uk/en/publications/communication-and-concurrency/)
+- Milner, R., Parrow, J., Walker, D. "A Calculus of Mobile Processes." *Information and Computation* 100(1), 1992, 1–77. [DOI](https://doi.org/10.1016/0890-5401(92)90008-4)
+- Honda, K. "Types for Dyadic Interaction." *CONCUR 1993*, LNCS 715, 1993, 509–523. [DOI](https://doi.org/10.1007/3-540-57208-2_35)
+- Gay, S. J., Hole, M. "Subtyping for Session Types in the Pi Calculus." *Acta Informatica* 42(2–3), 2005, 191–225. [DOI](https://doi.org/10.1007/s00236-005-0177-z)
+- Wadler, P. "Propositions as Sessions." *ICFP 2012*, 2012, 273–286. [DOI](https://doi.org/10.1145/2364527.2364568)
+- Plotkin, G. D., Pretnar, M. "Handlers of Algebraic Effects." *ESOP 2009*, LNCS 5502, 2009, 80–94. [DOI](https://doi.org/10.1007/978-3-642-00590-9_7)
+- Dolan, S., Eliopoulos, S., Hillerström, D., Madhavapeddy, A., Sivaramakrishnan, K. C., White, L. "Concurrent System Programming with Effect Handlers." *TFP 2017*, LNCS 10788, 2017, 98–117. [DOI](https://doi.org/10.1007/978-3-319-89719-6_6)
 
 > **相关文件**: [同层：并发模型谱系](01_models_of_concurrency.md) · [同层：进程代数](../07_concurrency_semantics/01_process_calculi_for_rust.md) · [同层：Actor 语义](../07_concurrency_semantics/03_actor_semantics.md)
 >
-> **文档版本**: 1.0 ｜ **最后更新**: 2026-07-28 ｜ **状态**: ✅ 新建（Rust 1.97 对齐）
+> **文档版本**: 1.1 ｜ **最后更新**: 2026-07-29 ｜ **状态**: ✅ Wave 2 增强（Rust 1.97 对齐）
 
 ---
 

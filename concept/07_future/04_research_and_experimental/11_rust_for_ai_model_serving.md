@@ -178,7 +178,56 @@ async fn generate(Json(req): Json<GenerateRequest>) -> impl IntoResponse {
 
 ---
 
-## 五、反命题与边界
+## 五、生产部署与治理
+
+### 5.1 SLO / SLI 与可观测性
+
+生产模型服务需要明确的**服务水平目标（SLO）**和**服务水平指标（SLI）**：
+
+| SLI | 说明 | Rust 生态工具 |
+|---|---|---|
+| **延迟（Latency）** | TTFT / TPOT / P99 latency | `tokio::time`、`metrics`、OpenTelemetry |
+| **吞吐（Throughput）** | tokens/s、requests/s | `prometheus`、自定义 histogram |
+| **可用性（Availability）** | 成功请求比例 | `axum` health check、kube probes |
+| **成本（Cost）** | $ / 1M tokens、GPU 利用率 | DCGM、NVML 绑定 |
+| **能效（Energy）** | W / token、CO₂ / inference | MLCommons Power、NVIDIA Triton 能效指标 |
+
+> **关键洞察**: Rust 的无 GC 停顿和零成本抽象使其在**延迟敏感**和**高吞吐**场景下更容易达成严格的 SLO。
+
+### 5.2 模型版本管理与 A/B 测试
+
+```text
+模型注册表（如 MLflow / Hugging Face Hub）
+    ↓
+版本化模型工件（GGUF、ONNX、Safetensors）
+    ↓
+金丝雀部署 → A/B 测试 → 全量 rollout
+    ↓
+回滚策略（蓝绿 / 影子流量）
+```
+
+Rust 服务可通过 feature flag（如 `launchdarkly`、`unleash`）或配置文件实现模型版本路由。
+
+### 5.3 安全与隐私边界
+
+- **模型窃取**：限制 prompt 日志、限制输出 tokens 采样。
+- **数据泄露**：避免在日志中记录 PII；使用差分隐私或联邦学习时明确边界。
+- **提示注入**：对输入进行过滤、沙箱化工具调用。
+- **供应链**：使用 `cargo vet` / `cargo audit` 审查推理运行时依赖。
+
+### 5.4 国际权威来源对齐
+
+| 来源 | URL | 对齐内容 |
+|---|---|---|
+| MLCommons Inference | https://mlcommons.org/benchmarks/inference/ | 推理性能与能效基准 |
+| NVIDIA Triton | https://docs.nvidia.com/deeplearning/triton-inference-server/ | 数据中心推理服务架构 |
+| Seldon Core | https://docs.seldon.io/seldon-core-2/ | Kubernetes 上 ML 部署与监控 |
+| Model Cards | https://arxiv.org/abs/1810.03993 | 模型透明度与限制报告 |
+| LLM System Survey | https://arxiv.org/abs/2303.18223 | LLM 训练与推理系统栈 |
+
+---
+
+## 六、反命题与边界
 
 ### 反例 1：用 Rust 重写所有训练代码
 
@@ -194,7 +243,7 @@ INT4 量化可能显著降低模型能力；对于需要高精度推理的任务
 
 ---
 
-## 六、国际权威参考
+## 七、国际权威参考
 
 - **P1 学术/系统**
   - [Huyen — *Designing Machine Learning Systems*](https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/)
