@@ -6884,6 +6884,10 @@
         {
           "title": "RustBelt",
           "path": "../02_separation_logic/01_rustbelt.md"
+        },
+        {
+          "title": "Unsafe Rust",
+          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
         }
       ],
       "theorems": [],

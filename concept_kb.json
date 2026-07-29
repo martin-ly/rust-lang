@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 577,
-    "generated_at": "2026-07-28T23:38:58.316942+00:00"
+    "total_files": 582,
+    "generated_at": "2026-07-29T11:13:53.900605+00:00"
   },
   "files": [
     {
@@ -891,8 +891,16 @@
       "layer": "L0",
       "title": "Rust 表征空间（Semantic / Representational Space）",
       "positioning": "本文件是 `concept/` 知识体系的**元层总论**，从表征空间（Representational Space）与语义空间（Semantic Space）的视角，系统分析 Rust 语言\"能表达什么\"、\"不能表达什么\"、\"等价表达的组合关系\"，以及其内部机制的完备性与封闭性。",
-      "line_count": 1372,
+      "line_count": 1416,
       "theorem_chains": [
+        {
+          "text": "| 类型系统 | safe 代码无 UB | 类型正确 ⟹ 源码语义正确 |",
+          "type": "table_row"
+        },
+        {
+          "text": "> **关键洞察**: 补丁版本的语义价值在于暴露“形式化语义 ⟹ 工业编译器实现”之间的信任链。形式化证明保证类型系统无 UB，但 LLVM 层的等价变换仍需工程验证。Rust 1.97.1 是“安全抽象依赖于整个工具链”的鲜活案例。",
+          "type": "paragraph"
+        },
         {
           "text": "| 断言 | 前提条件 ⟹ 结论 | 反例/边界条件 | 典型场景 | 失效条件 |",
           "type": "table_row"
@@ -999,6 +1007,14 @@
           "flags": [
             "ignore"
           ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// 危险直觉：\"我检查了 unsafe 块，所以等价表达安全\" // 实际：LLVM 优化器可能基于对整个函数的别名/UB 假设进行变换， //       ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
           "lines": 23,
           "should_fail": false,
           "code_preview": "// ❌ 概念混淆: \"生命周期\"在不同上下文中的不同含义  // 上下文 1: 借用检查器中的生命周期（编译期引用 validity） fn borrow<'..."
@@ -1025,18 +1041,23 @@
         "../../04_formal/11_computational_models/02_computability_theory.md",
         "../../04_formal/11_computational_models/05_equivalence_of_computational_models.md",
         "../../04_formal/12_concurrency_models/03_parallel_concurrent_async_distributed_semantics.md",
+        "../../04_formal/13_semantic_engineering/05_knowledge_graph_reasoning.md",
         "../../04_formal/13_semantic_engineering/README.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../06_ecosystem/00_toolchain/01_toolchain.md",
         "../../06_ecosystem/03_design_patterns/19_model_driven_engineering.md",
+        "../../06_ecosystem/14_enterprise_architecture/04_domain_driven_design_in_rust.md",
         "../../06_ecosystem/14_enterprise_architecture/README.md",
+        "../../07_future/00_version_tracking/rust_1_97_1.md",
         "../../07_future/04_research_and_experimental/08_llm_system_architecture.md",
+        "../../07_future/04_research_and_experimental/11_rust_for_ai_model_serving.md",
         "../02_sources/05_international_authority_index.md",
         "methodology.md"
       ],
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 5,
-      "matrix_rows": 180,
+      "matrix_rows": 195,
       "pre_post": {
         "pre": [],
         "post": []
@@ -41049,6 +41070,95 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\00_type_theory\\17_system_f.md",
+      "layer": "L4",
+      "title": "System F 与 Rust 泛型多态",
+      "positioning": "",
+      "line_count": 274,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 五、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "fn id<T>(x: T) -> T {     x } ..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "fn main() {     let _a = id(42i32);   // 编译期生成 id::<i32>     let _b = id(\"hi\"); ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "// 非法：Rust 泛型不能根据运行时值选择返回类型。 fn bad<T, U>(flag: bool, x: T, y: U) -> if flag { T..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "// 非法：即便在运行时识别出 T == i32，也不能把具体值 0 当作 T 返回。 fn not_parametric<T: 'static>(x: T) ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "// 非法：不能根据类型参数 T 在运行时做类型分支并执行 T 专属操作。 fn specialize<T>(x: T) -> T {     if std::..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "fn swap<A, B>(a: A, b: B) -> (B, A) {     (b, a)  // 合法：签名允许 }  // 但下面这种签名在 Syst..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../02_intermediate/01_generics/01_generics.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "01_type_theory.md",
+        "04_category_theory.md",
+        "05_lambda_calculus.md",
+        "06_type_semantics.md",
+        "15_parametricity_and_theorems_for_free.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 11,
+      "pre_post": {
+        "pre": [
+          "[Type Theory](01_type_theory.md) · [Lambda Calculus](05_lambda_calculus.md) · [Parametricity and Theorems for Free](15_parametricity_and_theorems_for_free.md)"
+        ],
+        "post": [
+          "[Type Semantics](06_type_semantics.md) · [Category Theory](04_category_theory.md) · [Rust Generics](../../02_intermediate/01_generics/01_generics.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\04_formal\\01_ownership_logic\\01_linear_logic.md",
       "layer": "L4",
       "title": "线性逻辑与仿射逻辑",
@@ -46729,6 +46839,77 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\07_concurrency_semantics\\07_session_types.md",
+      "layer": "L4",
+      "title": "Session Types 与 Rust 通信协议",
+      "positioning": "",
+      "line_count": 278,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 六、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "use std::sync::mpsc::{channel, Sender, Receiver};  // 教学级：把“发送 i32 后结束”的协议封装成单用结..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// 协议：Client !String. ?i32. end pub struct SendName(Sender<String>); pub struct ..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use std::sync::mpsc::channel;  fn main() {     let (tx, rx) = channel::<i32>(); ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 10,
+          "should_fail": true,
+          "code_preview": "// 非法：试图把已经 move 的 tx 再次使用。 use std::sync::mpsc::channel;  fn main() {     let (..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../03_advanced/01_async/01_async.md",
+        "../01_ownership_logic/01_linear_logic.md",
+        "../01_ownership_logic/03_linear_logic_applications.md",
+        "../09_system_semantics/02_pi_calculus_for_rust.md",
+        "01_process_calculi_for_rust.md",
+        "04_algebraic_effects.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 17,
+      "pre_post": {
+        "pre": [
+          "[Process Calculi for Rust](01_process_calculi_for_rust.md) · [Pi Calculus for Rust](../09_system_semantics/02_pi_calculus_for_rust.md) · [Linear Logic Applications](../01_ownership_logic/03_linear_logic_applications.md) · [Channels](../../03_advanced/00_concurrency/01_concurrency.md)"
+        ],
+        "post": [
+          "[Algebraic Effects](04_algebraic_effects.md) · [Rust Async/Await](../../03_advanced/01_async/01_async.md) · [Linear Logic](../01_ownership_logic/01_linear_logic.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\04_formal\\08_algorithm_semantics\\01_hoare_logic_for_rust.md",
       "layer": "L4",
       "title": "Hoare 逻辑 for Rust 算法",
@@ -48606,6 +48787,57 @@
         ],
         "post": [
           "[知识图谱本体 v2](../../00_meta/knowledge_topology/kg_ontology_v2.md) · [语义空间](../../00_meta/00_framework/semantic_space.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\13_semantic_engineering\\05_knowledge_graph_reasoning.md",
+      "layer": "L4",
+      "title": "知识图谱推理（Knowledge Graph Reasoning）",
+      "positioning": "从**形式语义与推理算法**角度介绍知识图谱的演绎能力，补全「构建」与「互操作」之间的推理层，并以项目 KG v3 作为实例。",
+      "line_count": 258,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 六、反命题"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 42,
+          "should_fail": false,
+          "code_preview": "#[derive(Debug, Clone, PartialEq, Eq, Hash)] pub struct Triple {     subject: St..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/06_low_level_patterns/04_network_programming.md",
+        "../00_type_theory/04_category_theory.md",
+        "../02_separation_logic/01_rustbelt.md",
+        "01_ontology_engineering.md",
+        "02_description_logic_and_owl.md",
+        "03_knowledge_graph_construction.md",
+        "04_semantic_interoperability.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 5,
+      "pre_post": {
+        "pre": [
+          "[Ontology Engineering](01_ontology_engineering.md) · [Description Logic and OWL](02_description_logic_and_owl.md) · [Knowledge Graph Construction](03_knowledge_graph_construction.md) · [Network Programming](../../03_advanced/06_low_level_patterns/04_network_programming.md)"
+        ],
+        "post": [
+          "[Semantic Interoperability](04_semantic_interoperability.md) · [RustBelt](../02_separation_logic/01_rustbelt.md) · [Category Theory](../00_type_theory/04_category_theory.md)"
         ]
       },
       "backward_chains": 0,
@@ -67034,6 +67266,115 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\14_enterprise_architecture\\04_domain_driven_design_in_rust.md",
+      "layer": "L6",
+      "title": "领域驱动设计（DDD）在 Rust 中的战术模式",
+      "positioning": "将 Eric Evans 与 Vaughn Vernon 的 DDD 战术设计模式与 Rust 的类型系统、所有权和错误处理模型对齐，提供可在生产代码中落地的实现策略。",
+      "line_count": 328,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 三、反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)] pub struct Money {     amount..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 39,
+          "should_fail": false,
+          "code_preview": "#[derive(Debug, Clone)] pub struct Order {     id: OrderId,     items: Vec<Order..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 39,
+          "should_fail": false,
+          "code_preview": "pub struct OrderAggregate {     root: Order,     // 领域事件在事务边界内累积，提交后清空     domai..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 23,
+          "should_fail": false,
+          "code_preview": "use std::collections::HashMap;  pub trait OrderRepository {     fn by_id(&self, ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "pub struct PricingService;  impl PricingService {     pub fn discount_for_vip(or..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "// 非法：把不变量交给调用者维护。 impl Order {     pub fn set_items(&mut self, items: Vec<Order..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "impl Order {     pub fn approve(&mut self) -> Result<(), &'static str> {        ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "// 非法：聚合根直接持有另一个聚合根。 pub struct Order {     customer: Customer, // 应该是 CustomerI..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "pub struct Order {     customer_id: CustomerId, } ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/02_type_system/01_type_system.md",
+        "../../01_foundation/08_error_handling/01_error_handling_basics.md",
+        "../../05_comparative/00_paradigms/01_paradigm_matrix.md",
+        "../03_design_patterns/03_system_design_principles.md",
+        "../03_design_patterns/07_cqrs_event_sourcing.md",
+        "01_enterprise_architecture_frameworks.md",
+        "02_architecture_governance_and_adrs.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 0,
+      "pre_post": {
+        "pre": [
+          "[Enterprise Architecture Frameworks](01_enterprise_architecture_frameworks.md) · [Architecture Governance and ADRs](02_architecture_governance_and_adrs.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Error Handling](../../01_foundation/08_error_handling/01_error_handling_basics.md) · [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md)"
+        ],
+        "post": [
+          "[System Design Principles](../03_design_patterns/03_system_design_principles.md) · [Microservice Template](../../../examples/microservice_template.rs) · [CQRS and Event Sourcing](../03_design_patterns/07_cqrs_event_sourcing.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\07_future\\00_version_tracking\\01_rust_version_tracking.md",
       "layer": "L7",
       "title": "Rust 形式模型演进跟踪（1.79–1.97+）",
@@ -75467,6 +75808,76 @@
         ],
         "post": [
           "[AI Integration](01_ai_integration.md) · [Formal Methods](02_formal_methods.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\04_research_and_experimental\\11_rust_for_ai_model_serving.md",
+      "layer": "L7",
+      "title": "Rust 在 AI 模型服务与推理系统中的应用",
+      "positioning": "聚焦**模型服务层**（model serving / inference serving），把 LLM system architecture 中的推理部分下沉到工程实现，对齐国际 ML 系统工程实践与 Rust 生态。",
+      "line_count": 244,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 五、反命题"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "// 概念示例：Candle 加载模型并执行前向推理。 // 真实代码需对应 model files 与 tokenizer。 use candle_core:..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// 概念骨架：Scheduler 在每次解码步决定 batch 内容 pub struct Scheduler {     requests: Vec<Req..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "use axum::{extract::Json, response::IntoResponse, routing::post, Router}; use se..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../03_advanced/01_async/01_async.md",
+        "../../03_advanced/06_low_level_patterns/01_custom_allocators.md",
+        "../../06_ecosystem/10_performance/01_performance_optimization.md",
+        "05_rust_in_ai.md",
+        "08_llm_system_architecture.md",
+        "09_mlops_and_llmops.md",
+        "10_ai_safety_and_alignment.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 12,
+      "pre_post": {
+        "pre": [
+          "[LLM System Architecture](08_llm_system_architecture.md) · [MLOps and LLMOps](09_mlops_and_llmops.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Async/Await](../../03_advanced/01_async/01_async.md) · [Performance Optimization](../../06_ecosystem/10_performance/01_performance_optimization.md)"
+        ],
+        "post": [
+          "[Rust in AI](05_rust_in_ai.md) · [AI Safety and Alignment](10_ai_safety_and_alignment.md) · [Custom Allocators](../../03_advanced/06_low_level_patterns/01_custom_allocators.md)"
         ]
       },
       "backward_chains": 0,

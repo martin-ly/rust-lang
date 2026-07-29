@@ -3,33 +3,33 @@
 **EN**: Concept-layer International Authority Coverage
 **Summary**: 复用 maintenance P0/P1/P2 权威域分级，把审计扩展到 concept/ 权威层；量化覆盖率与缺口，为『对齐网络上的国际化权威相关内容』提供机器可复核基线。仅审计，不改正文。
 
-> 生成: 2026-07-29 · 扫描 concept/ 活跃 md: **568**（排除 archive/SUMMARY/README）
+> 生成: 2026-07-29 · 扫描 concept/ 活跃 md: **573**（排除 archive/SUMMARY/README）
 > P0 官方 / P1 学术形式化 / P2 社区生态，域定义复用 `scripts/maintenance/authority_coverage_dashboard.py`
 
 ## 总体覆盖率
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 562 | 98.9% |
-| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 487 | 85.7% |
-| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 449 | 79.0% |
-| **任一权威（P0∪P1∪P2）** | **568** | **100.0%** |
+| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 566 | 98.8% |
+| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 489 | 85.3% |
+| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 454 | 79.2% |
+| **任一权威（P0∪P1∪P2）** | **573** | **100.0%** |
 | 无任何国际权威引用（缺口） | 0 | 0.0% |
 
 ## 内容页口径覆盖率（排除 00_meta 工具页 / quiz / placeholders / sources 索引）
 
-> 内容页 **477** 页。00_meta 为知识库内部工具/导航/审计页，非 Rust 概念内容，其权威基线为 P0 官方文档；P1/P2 学术生态来源对其不适用，故单列口径。
+> 内容页 **482** 页。00_meta 为知识库内部工具/导航/审计页，非 Rust 概念内容，其权威基线为 P0 官方文档；P1/P2 学术生态来源对其不适用，故单列口径。
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方 | 476 | 99.8% |
-| P1 学术/形式化 | 433 | 90.8% |
-| P2 社区/生态 | 432 | 90.6% |
-| **任一权威** | **477** | **100.0%** |
+| P0 官方 | 480 | 99.6% |
+| P1 学术/形式化 | 435 | 90.2% |
+| P2 社区/生态 | 436 | 90.5% |
+| **任一权威** | **482** | **100.0%** |
 
-内容页 P1 缺口（44）: `concept/01_foundation/04_control_flow/03_let_chains.md` · `concept/01_foundation/04_control_flow/05_let_else.md` · `concept/02_intermediate/00_traits/08_negative_impls.md` · `concept/02_intermediate/00_traits/09_associated_type_defaults.md` · `concept/02_intermediate/01_generics/05_const_generics_and_trait_objects.md` · `concept/03_advanced/00_concurrency/04_send_sync_boundaries.md` · `concept/03_advanced/01_async/16_structured_concurrency.md` · `concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md` · `concept/03_advanced/02_unsafe/09_sanitizers.md` · `concept/03_advanced/04_ffi/04_async_ffi_boundary.md` · `concept/03_advanced/04_ffi/05_unsafe_extern_blocks.md` · `concept/04_formal/00_type_theory/10_dependent_refinement_types.md` · `concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md` · `concept/04_formal/07_concurrency_semantics/05_stm_semantics.md` · `concept/04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md` · `concept/04_formal/08_algorithm_semantics/03_iterator_correctness.md` · `concept/04_formal/09_system_semantics/02_pi_calculus_for_rust.md` · `concept/04_formal/09_system_semantics/03_component_based_semantics.md` · `concept/04_formal/09_system_semantics/06_systems_engineering_standards.md` · `concept/04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md` · `concept/04_formal/10_architecture_semantics/03_architecture_refinement.md` · `concept/04_formal/10_architecture_semantics/04_rust_architecture_constraints.md` · `concept/04_formal/11_computational_models/01_computational_semantics_framework.md` · `concept/04_formal/11_computational_models/02_computability_theory.md` · `concept/04_formal/11_computational_models/03_formal_languages_and_automata.md` · `concept/04_formal/11_computational_models/04_mathematical_functions_of_computation.md` · `concept/04_formal/11_computational_models/05_equivalence_of_computational_models.md` · `concept/04_formal/12_concurrency_models/03_parallel_concurrent_async_distributed_semantics.md` · `concept/04_formal/13_semantic_engineering/01_ontology_engineering.md` · `concept/04_formal/13_semantic_engineering/02_description_logic_and_owl.md`
+内容页 P1 缺口（47）: `concept/01_foundation/04_control_flow/03_let_chains.md` · `concept/01_foundation/04_control_flow/05_let_else.md` · `concept/02_intermediate/00_traits/08_negative_impls.md` · `concept/02_intermediate/00_traits/09_associated_type_defaults.md` · `concept/02_intermediate/01_generics/05_const_generics_and_trait_objects.md` · `concept/03_advanced/00_concurrency/04_send_sync_boundaries.md` · `concept/03_advanced/01_async/16_structured_concurrency.md` · `concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md` · `concept/03_advanced/02_unsafe/09_sanitizers.md` · `concept/03_advanced/04_ffi/04_async_ffi_boundary.md` · `concept/03_advanced/04_ffi/05_unsafe_extern_blocks.md` · `concept/04_formal/00_type_theory/10_dependent_refinement_types.md` · `concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md` · `concept/04_formal/07_concurrency_semantics/05_stm_semantics.md` · `concept/04_formal/07_concurrency_semantics/07_session_types.md` · `concept/04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md` · `concept/04_formal/08_algorithm_semantics/03_iterator_correctness.md` · `concept/04_formal/09_system_semantics/02_pi_calculus_for_rust.md` · `concept/04_formal/09_system_semantics/03_component_based_semantics.md` · `concept/04_formal/09_system_semantics/06_systems_engineering_standards.md` · `concept/04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md` · `concept/04_formal/10_architecture_semantics/03_architecture_refinement.md` · `concept/04_formal/10_architecture_semantics/04_rust_architecture_constraints.md` · `concept/04_formal/11_computational_models/01_computational_semantics_framework.md` · `concept/04_formal/11_computational_models/02_computability_theory.md` · `concept/04_formal/11_computational_models/03_formal_languages_and_automata.md` · `concept/04_formal/11_computational_models/04_mathematical_functions_of_computation.md` · `concept/04_formal/11_computational_models/05_equivalence_of_computational_models.md` · `concept/04_formal/12_concurrency_models/03_parallel_concurrent_async_distributed_semantics.md` · `concept/04_formal/13_semantic_engineering/01_ontology_engineering.md`
 
-内容页 P2 缺口（45）: `concept/02_intermediate/00_traits/08_negative_impls.md` · `concept/02_intermediate/00_traits/09_associated_type_defaults.md` · `concept/02_intermediate/01_generics/05_const_generics_and_trait_objects.md` · `concept/03_advanced/00_concurrency/04_send_sync_boundaries.md` · `concept/03_advanced/01_async/15_state_machine_semantics.md` · `concept/03_advanced/01_async/16_structured_concurrency.md` · `concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md` · `concept/03_advanced/02_unsafe/09_sanitizers.md` · `concept/03_advanced/04_ffi/05_unsafe_extern_blocks.md` · `concept/04_formal/00_type_theory/14_flux.md` · `concept/04_formal/00_type_theory/15_parametricity_and_theorems_for_free.md` · `concept/04_formal/03_operational_semantics/06_observational_equivalence.md` · `concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md` · `concept/04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md` · `concept/04_formal/08_algorithm_semantics/03_iterator_correctness.md` · `concept/04_formal/08_algorithm_semantics/04_unsafe_algorithm_invariants.md` · `concept/04_formal/08_algorithm_semantics/05_algorithm_equivalence.md` · `concept/04_formal/09_system_semantics/01_actor_model_semantics.md` · `concept/04_formal/09_system_semantics/02_pi_calculus_for_rust.md` · `concept/04_formal/09_system_semantics/06_systems_engineering_standards.md` · `concept/04_formal/10_architecture_semantics/01_software_architecture_formalization.md` · `concept/04_formal/10_architecture_semantics/03_architecture_refinement.md` · `concept/04_formal/10_architecture_semantics/04_rust_architecture_constraints.md` · `concept/04_formal/11_computational_models/01_computational_semantics_framework.md` · `concept/04_formal/11_computational_models/02_computability_theory.md` · `concept/04_formal/11_computational_models/04_mathematical_functions_of_computation.md` · `concept/04_formal/11_computational_models/05_equivalence_of_computational_models.md` · `concept/04_formal/12_concurrency_models/01_models_of_concurrency.md` · `concept/04_formal/12_concurrency_models/02_expressiveness_of_concurrent_models.md` · `concept/04_formal/13_semantic_engineering/01_ontology_engineering.md`
+内容页 P2 缺口（46）: `concept/02_intermediate/00_traits/08_negative_impls.md` · `concept/02_intermediate/00_traits/09_associated_type_defaults.md` · `concept/02_intermediate/01_generics/05_const_generics_and_trait_objects.md` · `concept/03_advanced/00_concurrency/04_send_sync_boundaries.md` · `concept/03_advanced/01_async/15_state_machine_semantics.md` · `concept/03_advanced/01_async/16_structured_concurrency.md` · `concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md` · `concept/03_advanced/02_unsafe/09_sanitizers.md` · `concept/03_advanced/04_ffi/05_unsafe_extern_blocks.md` · `concept/04_formal/00_type_theory/14_flux.md` · `concept/04_formal/00_type_theory/15_parametricity_and_theorems_for_free.md` · `concept/04_formal/03_operational_semantics/06_observational_equivalence.md` · `concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md` · `concept/04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md` · `concept/04_formal/08_algorithm_semantics/03_iterator_correctness.md` · `concept/04_formal/08_algorithm_semantics/04_unsafe_algorithm_invariants.md` · `concept/04_formal/08_algorithm_semantics/05_algorithm_equivalence.md` · `concept/04_formal/09_system_semantics/01_actor_model_semantics.md` · `concept/04_formal/09_system_semantics/02_pi_calculus_for_rust.md` · `concept/04_formal/09_system_semantics/06_systems_engineering_standards.md` · `concept/04_formal/10_architecture_semantics/01_software_architecture_formalization.md` · `concept/04_formal/10_architecture_semantics/03_architecture_refinement.md` · `concept/04_formal/10_architecture_semantics/04_rust_architecture_constraints.md` · `concept/04_formal/11_computational_models/01_computational_semantics_framework.md` · `concept/04_formal/11_computational_models/02_computability_theory.md` · `concept/04_formal/11_computational_models/04_mathematical_functions_of_computation.md` · `concept/04_formal/11_computational_models/05_equivalence_of_computational_models.md` · `concept/04_formal/12_concurrency_models/01_models_of_concurrency.md` · `concept/04_formal/12_concurrency_models/02_expressiveness_of_concurrent_models.md` · `concept/04_formal/13_semantic_engineering/01_ontology_engineering.md`
 
 ## 按层级覆盖率
 
@@ -39,10 +39,10 @@
 | L1 | 57 | 57 | 100.0% | 57 | 100.0% |
 | L2 | 41 | 41 | 100.0% | 41 | 100.0% |
 | L3 | 74 | 74 | 100.0% | 74 | 100.0% |
-| L4 | 95 | 95 | 100.0% | 95 | 100.0% |
+| L4 | 98 | 98 | 100.0% | 98 | 100.0% |
 | L5 | 27 | 27 | 100.0% | 27 | 100.0% |
-| L6 | 132 | 127 | 96.2% | 132 | 100.0% |
-| L7 | 72 | 71 | 98.6% | 72 | 100.0% |
+| L6 | 133 | 128 | 96.2% | 133 | 100.0% |
+| L7 | 73 | 71 | 97.3% | 73 | 100.0% |
 | L? | 3 | 3 | 100.0% | 3 | 100.0% |
 
 ## 核心缺口（L1-L4 且 无 P0 官方国际权威）

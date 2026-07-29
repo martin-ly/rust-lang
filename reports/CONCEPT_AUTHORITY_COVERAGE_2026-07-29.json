@@ -1,41 +1,41 @@
 {
   "date": "2026-07-29",
-  "scanned": 568,
+  "scanned": 573,
   "coverage": {
     "P0": [
-      562,
-      98.9
+      566,
+      98.8
     ],
     "P1": [
-      487,
-      85.7
+      489,
+      85.3
     ],
     "P2": [
-      449,
-      79.0
+      454,
+      79.2
     ],
     "any": [
-      568,
+      573,
       100.0
     ],
     "none": 0
   },
   "content_scope": {
-    "scanned": 477,
+    "scanned": 482,
     "P0": [
-      476,
-      99.8
+      480,
+      99.6
     ],
     "P1": [
-      433,
-      90.8
+      435,
+      90.2
     ],
     "P2": [
-      432,
-      90.6
+      436,
+      90.5
     ],
     "any": [
-      477,
+      482,
       100.0
     ],
     "gaps_p1": [
@@ -53,6 +53,7 @@
       "concept/04_formal/00_type_theory/10_dependent_refinement_types.md",
       "concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md",
       "concept/04_formal/07_concurrency_semantics/05_stm_semantics.md",
+      "concept/04_formal/07_concurrency_semantics/07_session_types.md",
       "concept/04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md",
       "concept/04_formal/08_algorithm_semantics/03_iterator_correctness.md",
       "concept/04_formal/09_system_semantics/02_pi_calculus_for_rust.md",
@@ -70,6 +71,7 @@
       "concept/04_formal/13_semantic_engineering/01_ontology_engineering.md",
       "concept/04_formal/13_semantic_engineering/02_description_logic_and_owl.md",
       "concept/04_formal/13_semantic_engineering/04_semantic_interoperability.md",
+      "concept/04_formal/13_semantic_engineering/05_knowledge_graph_reasoning.md",
       "concept/05_comparative/01_systems_languages/07_rust_vs_ada_spark.md",
       "concept/05_comparative/01_systems_languages/08_rust_vs_d.md",
       "concept/05_comparative/01_systems_languages/09_rust_vs_nim.md",
@@ -77,6 +79,7 @@
       "concept/06_ecosystem/03_design_patterns/19_model_driven_engineering.md",
       "concept/06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md",
       "concept/06_ecosystem/11_domain_applications/23_safety_critical_systems_engineering.md",
+      "concept/06_ecosystem/14_enterprise_architecture/04_domain_driven_design_in_rust.md",
       "concept/07_future/00_version_tracking/rust_1_100_preview.md",
       "concept/07_future/00_version_tracking/rust_1_97_1.md",
       "concept/07_future/00_version_tracking/rust_1_98_stabilized.md",
@@ -129,7 +132,8 @@
       "concept/07_future/02_preview_features/39_async_ioring_preview.md",
       "concept/07_future/04_research_and_experimental/08_llm_system_architecture.md",
       "concept/07_future/04_research_and_experimental/09_mlops_and_llmops.md",
-      "concept/07_future/04_research_and_experimental/10_ai_safety_and_alignment.md"
+      "concept/07_future/04_research_and_experimental/10_ai_safety_and_alignment.md",
+      "concept/07_future/04_research_and_experimental/11_rust_for_ai_model_serving.md"
     ]
   },
   "by_layer": {
@@ -154,9 +158,9 @@
       "any": 74
     },
     "L4": {
-      "n": 95,
-      "P0": 95,
-      "any": 95
+      "n": 98,
+      "P0": 98,
+      "any": 98
     },
     "L5": {
       "n": 27,
@@ -164,14 +168,14 @@
       "any": 27
     },
     "L6": {
-      "n": 132,
-      "P0": 127,
-      "any": 132
+      "n": 133,
+      "P0": 128,
+      "any": 133
     },
     "L7": {
-      "n": 72,
+      "n": 73,
       "P0": 71,
-      "any": 72
+      "any": 73
     },
     "L?": {
       "n": 3,

@@ -923,6 +923,40 @@ Kani（基于 CBMC 的 Rust 模型检测器）通过符号执行验证程序是�
 
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rust RFCs](https://rust-lang.github.io/rfcs/index.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
 >
+### 4.7 Rust 1.97.1：补丁语义与编译器信任边界
+
+> **[官方来源: Rust 1.97.1 Release Notes](https://doc.rust-lang.org/stable/releases.html)** · 2026-07-16  
+> 1.97.1 仅含一项变更：修复自 1.87 起存在的 LLVM 误编译（miscompilation）。该补丁 backport 了 LLVM 上游修复，并回退了一个会降低 bug 触发阈值的 rustc 变更。✅
+
+**语义意义**：补丁版本不改变语言语义，但提醒我们——即使 safe Rust 的类型系统与操作语义是“封闭的”，其最终语义仍由 LLVM 代码生成层实现。优化器对 UB 的假设与 Rust 的 `unsafe` 边界假设之间可能存在**实现层语义漂移**。
+
+| 层面 | 信任假设 | 1.97.1 教训 |
+|:---|:---|:---|
+| 类型系统 | safe 代码无 UB | 类型正确 ⟹ 源码语义正确 |
+| MIR | 中间表示保持源码语义 | rustc 变换正确 |
+| LLVM IR | 优化保持可观察行为 | **本次补丁修复的正是这一层** |
+| 机器码 | 处理器按语义执行 | 硬件/微码亦有边界 |
+
+**对 unsafe 代码的启示**：
+
+```rust,ignore
+// 危险直觉："我检查了 unsafe 块，所以等价表达安全"
+// 实际：LLVM 优化器可能基于对整个函数的别名/UB 假设进行变换，
+//       而 1.97.1 之前的触发条件与 unsafe 指针操作有关。
+
+// 推荐验证流程：
+// 1. cargo +stable test / miri test
+// 2. 如果涉及原始指针/FFI/内联汇编，用 `cargo miri test` 检查 Stacked/Tree Borrows
+// 3. 关键路径使用 Kani 验证行为等价
+```
+
+> **关键洞察**: 补丁版本的语义价值在于暴露“形式化语义 ⟹ 工业编译器实现”之间的信任链。形式化证明保证类型系统无 UB，但 LLVM 层的等价变换仍需工程验证。Rust 1.97.1 是“安全抽象依赖于整个工具链”的鲜活案例。
+> **延伸阅读**: 版本页 [`rust_1_97_1.md`](../../07_future/00_version_tracking/rust_1_97_1.md) · 工具链页 [`01_toolchain.md`](../../06_ecosystem/00_toolchain/01_toolchain.md) §LLVM/优化边界。
+
+---
+
+> **来源**: [Rust Release Notes](https://doc.rust-lang.org/stable/releases.html) · [Rust 1.97.0 Blog](https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
+>
 ## 五、机制组合的语义空间（Combinatorial Semantic Space）
 
 机制组合的语义空间把 Rust 特性视为可组合的**基础算子**，分析组合的表达力与代价：
@@ -1140,6 +1174,10 @@ Java ⊂ Rust（系统编程能力）
 | **模型驱动工程** | [`19_model_driven_engineering.md`](../../06_ecosystem/03_design_patterns/19_model_driven_engineering.md) | §1-§5 | 元分析 → CIM/PIM/PSM + DSL |
 | **语义工程** | [`13_semantic_engineering/README.md`](../../04_formal/13_semantic_engineering/README.md) | §1-§4 | 元分析 → 本体 / DL / KG / 互操作 |
 | **AI 系统架构** | [`08_llm_system_architecture.md`](../../07_future/04_research_and_experimental/08_llm_system_architecture.md) | §1-§5 | 元分析 → RAG / Agent / LLMOps |
+| **领域驱动设计（Rust）** | [`04_domain_driven_design_in_rust.md`](../../06_ecosystem/14_enterprise_architecture/04_domain_driven_design_in_rust.md) | §1-§5 | 元分析 → 限界上下文 / 聚合 / 仓储 |
+| **知识图谱推理** | [`05_knowledge_graph_reasoning.md`](../../04_formal/13_semantic_engineering/05_knowledge_graph_reasoning.md) | §1-§4 | 元分析 → OWL / SHACL / 推理机 |
+| **AI 模型服务（Rust）** | [`11_rust_for_ai_model_serving.md`](../../07_future/04_research_and_experimental/11_rust_for_ai_model_serving.md) | §1-§4 | 元分析 → Triton / Seldon / SLO / 能效 |
+| **Rust 1.97.1 补丁语义** | [`rust_1_97_1.md`](../../07_future/00_version_tracking/rust_1_97_1.md) | §1-§2 | 元分析 → LLVM 优化边界 / 工具链信任 |
 
 ---
 
@@ -1229,16 +1267,22 @@ graph TD
 
 | 论断 | 来源 | 可信度 |
 | :--- | :--- | :--- |
-| 表征空间定义 | Felleisen 1989 · *On the Expressive Power of Programming Languages* | ✅ 学术经典 |
-| Rust 类型系统图灵完备 | Leffler 2017 · *Rust Type System is Turing-Complete* | ✅ 技术证明 |
+| 表征空间定义 | [Felleisen 1991](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf) · *On the Expressive Power of Programming Languages* | ✅ 学术经典 |
+| Rust 类型系统图灵完备 | [Leffler 2017](https://sdleffler.github.io/RustTypeSystemTuringComplete/) · *Rust Type System is Turing-Complete* | ✅ 技术证明 |
 | 观察等价性 | Reynolds 1983 · relational parametricity | ✅ 学术经典 |
 | 分离逻辑与所有权对应 | O'Hearn 2007 · Separation Logic | ✅ 学术经典 |
 | 生命周期 = 区域类型 | Tofte & Talpin 1994 · Region-Based Memory Management | ✅ 学术经典 |
 | 线性逻辑 = 所有权根基 | Girard 1987 · Linear Logic | ✅ 学术经典 |
 | 绿色线程移除 | RFC 230 · Remove Runtime | ✅ 官方决策 |
 | Rust 设计哲学 | Rust Reference · TRPL | ✅ 官方文档 |
-| 参数性定理 | Wadler 1989 · Theorems for Free! | ✅ 学术经典 |
+| 参数性定理 | [Wadler 1989](https://people.mpi-sws.org/~dreyer/tor/papers/wadler.pdf) · *Theorems for Free!* | ✅ 学术经典 |
 | 内存模型 | C11 Standard §5.1.2.4 · Rustonomicon | ✅ 标准/官方 |
+| Rust 形式化基础 | [RustBelt (Jung et al., POPL 2018)](https://doi.org/10.1145/3158154) · Iris/Separation Logic | ✅ 学术论文 |
+| 别名模型（进化） | [Tree Borrows (Villani et al., 2025)](https://perso.crans.org/vanille/treebor/aux/preprint.pdf) | ✅ 最新预印本 |
+| 并发表达力层级 | Herlihy & Shavit (2011) · *The Art of Multiprocessor Programming* | ✅ 学术经典 |
+| 架构描述框架 | [ISO/IEC/IEEE 42010:2022](https://www.iso.org/standard/74296.html) · Systems and software engineering | ✅ 国际标准 |
+| 系统工程生命周期 | [ISO/IEC/IEEE 15288:2023](https://www.iso.org/standard/63711.html) | ✅ 国际标准 |
+| 本体与知识图谱 | [OWL 2 Primer](https://www.w3.org/TR/owl2-primer/) · [SHACL](https://www.w3.org/TR/shacl/) | ✅ W3C 标准 |
 | Effects System | Rust Effects Initiative · Yoshua Wuyts 2024 | ✅ 研究阶段 |
 | Const Trait / Generic Const Items | [RFC 3762](https://github.com/rust-lang/rfcs/pull/3762) · rust#113521 | ✅ 官方提案 |
 | Strict Provenance | Rust Reference · [RFC 3559](https://rust-lang.github.io/rfcs/3559-rust-has-provenance.html) | ✅ 官方文档 |
@@ -1264,9 +1308,9 @@ graph TD
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../02_sources/05_international_authority_index.md)
 
-**文档版本**: 1.1
-**最后更新: 2026-05-21
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**文档版本**: 1.2
+**最后更新**: 2026-07-29
+**状态**: 🔄 国际权威来源对齐中（Semantic Space Alignment Sprint 2026-07-29）：已补充精确论文/标准链接、Rust 1.97.1 补丁语义案例、新增页双向链接；剩余 Wave 2–4 子领域深度对齐待完成
 
 ### 10.3 边界测试：术语过载与跨层语义漂移（概念混淆）
 
