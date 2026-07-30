@@ -67,6 +67,10 @@
   - [九、来源与延伸阅读](#九来源与延伸阅读)
     - [9.1 权威外部来源](#91-权威外部来源)
     - [9.2 项目内部延伸阅读](#92-项目内部延伸阅读)
+  - [反例与边界](#反例与边界)
+    - [反例：Nim 的 ORC/ARC 与 Rust 所有权提供同等内存安全](#反例nim-的-orcarc-与-rust-所有权提供同等内存安全)
+    - [反例：Nim 的 `owned` 与 Rust 借用检查等价](#反例nim-的-owned-与-rust-借用检查等价)
+    - [反例：Nim 的 Concept 与 Rust Trait 是同一机制](#反例nim-的-concept-与-rust-trait-是同一机制)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -640,6 +644,54 @@ Nim 的优势场景：
 - [`concept/04_formal/01_ownership_logic/01_linear_logic.md`](../../04_formal/01_ownership_logic/01_linear_logic.md) — 线性逻辑（L4 所有权形式化）
 - [`concept/03_advanced/02_unsafe/01_unsafe.md`](../../03_advanced/02_unsafe/01_unsafe.md) — Unsafe Rust 边界
 - [`concept/05_comparative/03_domain_comparisons/01_safety_boundaries.md`](../03_domain_comparisons/01_safety_boundaries.md) — 安全边界全景
+
+---
+
+## 反例与边界
+
+本节用具体反例澄清 Rust 与 Nim 在内存管理、并发安全与类型抽象方面的常见误解。
+
+### 反例：Nim 的 ORC/ARC 与 Rust 所有权提供同等内存安全
+
+**错误推论**：Nim 选择 `--mm:orc` 或 `--mm:arc` 后，其内存安全保证与 Rust safe 子集相当。
+
+**反例**：
+
+| 威胁 | Rust safe | Nim ORC/ARC |
+|:---|:---|:---|
+| Use-after-free | 编译期排除 | 引用计数可降低风险，但 `ptr`/`--mm:none` 下无保护 |
+| 悬垂引用 | 生命周期检查排除 | `owned` 运行时检查；裸 `ptr` 无检查 |
+| 数据竞争 | 编译期排除 | 无编译期保证 |
+| 循环引用泄漏 | `Rc<RefCell>` 需显式结构 | ARC 需 `.cursor`/`=trace`；ORC 有循环回收但仍可能遗漏复杂情况 |
+
+- Rust 的内存安全来自**编译期类型系统**；Nim 的 ORC/ARC 来自**运行时引用计数 + 析构钩子**。前者在可执行文件生成前排除错误，后者在运行时管理生命周期。
+
+### 反例：Nim 的 `owned` 与 Rust 借用检查等价
+
+**错误推论**：Nim 的 `owned` 唯一引用提供与 Rust 所有权/借用相同级别的编译期保证。
+
+**反例**：
+
+- Rust 的所有权规则适用于所有值、引用与泛型，并由借用检查器全局验证。
+- Nim 的 `owned` 是**实验性**特性，且未覆盖所有引用场景；unowned 引用在运行时检测，而非编译期。
+- Rust 的 `&mut T` 保证无别名访问；Nim 没有等价的编译期“单一可变 XOR 多重只读”规则。
+
+### 反例：Nim 的 Concept 与 Rust Trait 是同一机制
+
+**错误推论**：Nim 的 `concept` 与 Rust 的 `trait` 都是静态接口抽象，可互换使用。
+
+**反例**：
+
+| 特性 | Rust Trait | Nim Concept |
+|:---|:---|:---|
+| 实现方式 | 显式 `impl Trait for Type` | 隐式满足：只要类型有需要的操作即可 |
+| 接口边界可审计性 | 可在 crate 边界强制检查 | 依赖“鸭子类型”，约束不如 trait 显式 |
+| 生命周期约束 | trait bound 可携带生命周期 | 无生命周期系统，无法表达借用协议 |
+| 并发标记 | `Send`/`Sync` 是 trait | 无内建等价物 |
+
+- Rust trait 更适合大型团队协作，因为接口契约在类型签名中显式声明；Nim concept 更灵活，但也更依赖文档与约定。
+
+> **边界总结**：Nim 通过“策略选择”让开发者按需切换安全级别；Rust 通过“默认安全 + 显式 unsafe”将安全证明嵌入类型系统。两者在快速原型与长期基础设施之间有明确的工程权衡。
 
 ---
 

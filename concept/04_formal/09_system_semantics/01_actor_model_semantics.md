@@ -37,3 +37,51 @@ actor = ⟨地址, 邮箱, 行为⟩
 完整形式化、Rust 映射、反例与边界分析见：
 
 > [`concept/04_formal/07_concurrency_semantics/03_actor_semantics.md`](../07_concurrency_semantics/03_actor_semantics.md)
+
+---
+
+## 反例：把 Actor 当作共享内存使用
+
+下面这段代码不是 Actor 模型，而是用 `Arc<Mutex<T>>` 模拟的共享状态；它违反了 Actor 的**封装边界**与**地址即能力**两条核心语义：
+
+```rust,compile_fail
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+// 错误示范：两个“actor”直接共享可变状态
+fn main() {
+    let state = Arc::new(Mutex::new(0));
+    let s1 = Arc::clone(&state);
+    let s2 = Arc::clone(&state);
+
+    thread::spawn(move || { *s1.lock().unwrap() += 1; });
+    thread::spawn(move || { *s2.lock().unwrap() += 1; });
+}
+```
+
+**判定依据**：在 Actor 模型中，状态只能通过消息异步修改；任何直接共享可变状态的实现都退化为共享内存并发，丢失了 Actor 的故障隔离与位置透明性保证。
+
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Actor 模型系统语义))
+    基本三元组
+      地址
+      邮箱
+      行为
+    系统语义核心
+      封装边界
+      地址即能力
+      位置透明性
+      监督树错误传播
+    Rust 映射
+      std::sync::mpsc
+      actix / tokio actor crate
+    形式化入口
+      Hewitt 公理
+      Agha 配置转换
+      04_formal/07_concurrency_semantics/03_actor_semantics.md
+```

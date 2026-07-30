@@ -165,6 +165,18 @@ mindmap
 
 ---
 
+## 反例与边界
+
+> 本节澄清 nightly 周期跟踪页最容易被误读的边界。
+
+| 常见误解 | 反例 | 正确理解 |
+|---|---|---|
+| "nightly 特性按列表顺序稳定" | `TAIT` 与 `RTN` 同为 nightly only，但稳定节奏相互独立 | 列表顺序与稳定优先级无关 |
+| "experimental 特性可以安全试用" | `BorrowSanitizer` 为 prototype，API 与行为可能大幅变动 | experimental / prototype 阶段不适合生产依赖 |
+| "本页特性都会出现在 1.99.0 stable" | 只有进入 beta 分支的 nightly 项才会随 1.99.0 稳定 | 稳定清单以 `rust_1_99_stabilized.md` 与官方 release notes 为准 |
+| "使用 nightly 特性不影响 MSRV" | `#![feature(async_drop)]` 会让 crate 无法在任何 stable rustc 编译 | nightly 特性直接把 MSRV 提升到 nightly toolchain |
+| "FCP 完成等于稳定日期确定" | `derive(CoercePointee)` 虽已 FCP finished，仍可能因实现问题调整 | FCP 完成只说明设计方向达成一致，不保证发布时间 |
+
 ## 五、来源与延伸阅读
 
 - [Rust Forge](https://forge.rust-lang.org/)
@@ -172,7 +184,6 @@ mindmap
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
 - [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md)
 - [Rust 版本跟踪](01_rust_version_tracking.md)
-
 
 ## 补充国际权威来源（P1/P2 覆盖）
 

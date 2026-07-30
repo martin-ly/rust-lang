@@ -66,7 +66,12 @@
     - [9.1 权威外部来源](#91-权威外部来源)
     - [9.2 项目内部延伸阅读](#92-项目内部延伸阅读)
   - [国际权威来源](#国际权威来源)
+  - [反例与边界](#反例与边界)
+    - [反例：unsafe Rust 只要写得好就等价于 SPARK 安全子集](#反例unsafe-rust-只要写得好就等价于-spark-安全子集)
+    - [反例：Rust 的 Send/Sync 保证并发程序无死锁](#反例rust-的-sendsync-保证并发程序无死锁)
+    - [反例：SPARK 证明无运行时错误意味着系统无缺陷](#反例spark-证明无运行时错误意味着系统无缺陷)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [补充国际权威来源（P1/P2 覆盖）](#补充国际权威来源p1p2-覆盖)
 
 ---
 
@@ -568,6 +573,72 @@ Ada/SPARK 的传统强项：
 
 ---
 
+## 反例与边界
+
+本节用具体反例澄清 Rust 与 Ada/SPARK 对比中的常见误解。
+
+### 反例：unsafe Rust 只要写得好就等价于 SPARK 安全子集
+
+**错误推论**：`unsafe` Rust 块经过人工审查后，其可信度与 SPARK 子集经 GNATprove 自动证明相当。
+
+**反例**：
+
+- SPARK 子集从语法上剔除指针、动态分配、异常传播等不可证明特性，GNATprove 可对剩余代码自动证明 **Absence of Run-Time Errors (AoRTE)**。
+- Rust 的 `unsafe` 块允许裸指针、类型双关、未同步可变静态量等操作，编译器不检查这些操作是否违反 safe Rust 不变量；人工审查 + Miri/Kani 只能提供局部证据，无法保证整个 `unsafe` 块无 UB。
+- 因此 `unsafe` Rust 是“显式逃逸后由程序员负责”，SPARK 子集是“从语言层面限定可证明范围”，两者安全模型不同。
+
+### 反例：Rust 的 Send/Sync 保证并发程序无死锁
+
+**错误推论**：因为 safe Rust 在编译期排除数据竞争，所以 Rust 并发程序不会发生并发错误。
+
+**反例**：
+
+- `Send`/`Sync` 只保证类型可安全转移/共享，不保证锁的获取顺序。
+- 如下 safe Rust 代码完全可通过编译，但会死锁：
+
+```rust,ignore
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let a = Arc::new(Mutex::new(0));
+    let b = Arc::new(Mutex::new(0));
+
+    let a1 = Arc::clone(&a);
+    let b1 = Arc::clone(&b);
+    let h1 = thread::spawn(move || {
+        let _ga = a1.lock().unwrap();
+        let _gb = b1.lock().unwrap();
+    });
+
+    let a2 = Arc::clone(&a);
+    let b2 = Arc::clone(&b);
+    let h2 = thread::spawn(move || {
+        let _gb = b2.lock().unwrap();   // 相反顺序
+        let _ga = a2.lock().unwrap();
+    });
+
+    h1.join().unwrap();
+    h2.join().unwrap();
+}
+```
+
+- Ada/SPARK 的 Ravenscar 子集通过禁止 `select`、动态任务创建等降低死锁风险，但仍需 Ceiling Protocol 分析；Rust 不提供同等语言级活性保证。
+
+### 反例：SPARK 证明无运行时错误意味着系统无缺陷
+
+**错误推论**：SPARK 代码通过 GNATprove 后，整个软件就是“零缺陷”。
+
+**反例**：
+
+- 形式化验证只能证明“程序满足规格”；如果规格本身遗漏了边界条件（如传感器量程、异常输入），证明无意义。
+- SPARK 子集之外的代码（C 驱动、汇编、完整 Ada 组件）不在证明范围内，成为 trusted computing base (TCB) 缺口。
+- 认证标准（DO-178C / DO-333）要求形式化证据与测试证据互补，而非互相替代。
+
+> **边界总结**：Rust 的 `unsafe` 与 Ada/SPARK 的“退出 SPARK 子集”都是能力边界；两者都不能被自动证明覆盖。选型时应比较“需要多少代码留在可证明子集内”，而不是假设某一方天然更安全。
+
+---
+
 ## 🧭 思维导图（Mindmap）
 
 ```mermaid
@@ -597,7 +668,6 @@ mindmap
 ```
 
 > **认知功能**: 将 Rust 与 Ada/SPARK 的对比折叠为“通用类型系统安全”与“安全关键子集证明”两条路线，帮助在不同工业语境下选择技术栈。
-
 
 ## 补充国际权威来源（P1/P2 覆盖）
 

@@ -67,6 +67,10 @@
     - [10.2 D 权威来源](#102-d-权威来源)
     - [10.3 对比与演进阅读](#103-对比与演进阅读)
     - [10.4 国际权威来源](#104-国际权威来源)
+  - [反例与边界](#反例与边界)
+    - [反例：D 的 @safe 与 Rust 的 safe 等价](#反例d-的-safe-与-rust-的-safe-等价)
+    - [反例：Rust 的所有权只是“没有 GC 的 GC”](#反例rust-的所有权只是没有-gc-的-gc)
+    - [反例：D 的 DIP 1000 等价于 Rust 借用检查](#反例d-的-dip-1000-等价于-rust-借用检查)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -690,6 +694,62 @@ D 的元编程灵活性极高，但字符串 `mixin` 也引入“字符串拼接
 - [Ownership Types for Flexible Alias Protection](https://doi.org/10.1007/3-540-45337-7_13) — doi.org，所有权类型理论基础
 - [The Rust Programming Language Blog](https://blog.rust-lang.org/) — blog.rust-lang.org，官方语言与生态演进
 - [crates.io](https://crates.io/) — crates.io，Rust 包注册表与生态规模
+
+---
+
+## 反例与边界
+
+本节用具体反例说明 Rust 与 D 在内存安全、并发安全与借用检查方面的能力边界。
+
+### 反例：D 的 @safe 与 Rust 的 safe 等价
+
+**错误推论**：D 的 `@safe` 子集在编译期排除的未定义行为范围与 Rust safe 子集相同。
+
+**反例**：
+
+| 威胁 | Rust safe | D @safe |
+|:---|:---|:---|
+| Use-after-free | 编译期排除 | 依赖 GC/scope；裸指针仅在 `@system` |
+| 数据竞争 | 编译期排除（Send/Sync） | `@safe` 不保证；`shared`/`immutable` 是约定 |
+| 悬垂切片 | 生命周期检查排除 | DIP 1000 局部检查，覆盖范围小于 Rust |
+| 类型双关 | 禁止 | 禁止 |
+
+- Rust safe 同时覆盖**内存安全**与**数据竞争自由**；D `@safe` 主要覆盖特定未定义行为，不覆盖并发错误。
+- D 默认模式是 `@system`，代码需显式选择 `@safe`；Rust 默认 safe，`unsafe` 需显式标注。
+
+### 反例：Rust 的所有权只是“没有 GC 的 GC”
+
+**错误推论**：Rust 用所有权替代 GC，最终目的只是避免垃圾回收停顿。
+
+**反例**：
+
+- 所有权的核心贡献是**将资源协议编码进类型**，从而在编译期排除 UAF、DF、悬垂引用与数据竞争；无 GC 停顿只是副作用之一。
+- 纯引用计数（如 Nim ARC、Swift ARC）也无 GC 停顿，但仍可能因循环引用泄漏，且无法像 Rust 借用检查器那样在编译期排除别名冲突。
+- D 的 `scope` 守卫与手动 `GC.free` 提供确定性清理，但不提供编译期别名安全保证。
+
+### 反例：D 的 DIP 1000 等价于 Rust 借用检查
+
+**错误推论**：D 的 `-preview=dip1000` scope 指针规则与 Rust 生命周期系统等价。
+
+**反例**：
+
+- Rust 生命周期参数化适用于所有引用、泛型与 `async` 状态机；D DIP 1000 主要针对 `@safe` 代码中的栈地址逃逸。
+- Rust 的借用规则（单一可变 XOR 多重只读）是全局不变量；D 的 `scope` 是局部注解，不强制同一数据的读写别名约束。
+- 如下 Rust 代码会在编译期被拒绝：
+
+```rust,ignore
+// Rust: 编译错误，不能同时拥有可变借用与不可变借用
+fn main() {
+    let mut s = String::from("D");
+    let r1 = &s;
+    let r2 = &mut s; // 错误：cannot borrow `s` as mutable because it is also borrowed as immutable
+    println!("{} {}", r1, r2);
+}
+```
+
+- D 中类似的指针/切片别名问题仍可能通过 `@system` 代码或未启用 DIP 1000 的路径出现。
+
+> **边界总结**：Rust 通过“默认安全 + 显式 unsafe”在类型系统中嵌入资源协议；D 通过“默认 @system + 可选 @safe + GC”保留 C++ 式灵活性。两者安全强度差异不是实现细节，而是设计语言的本体论差异。
 
 ---
 

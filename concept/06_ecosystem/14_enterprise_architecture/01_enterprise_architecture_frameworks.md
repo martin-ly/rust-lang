@@ -66,6 +66,7 @@ TOGAF ADM 阶段到 Cargo workspace 决策表：
   - [六、反命题与边界](#六反命题与边界)
     - [反命题：企业架构是“文档工作”，不直接产生工程价值](#反命题企业架构是文档工作不直接产生工程价值)
     - [边界：EA 框架不能替代具体的设计模式与形式化验证](#边界ea-框架不能替代具体的设计模式与形式化验证)
+    - [反例：EA 框架的常见误解](#反例ea-框架的常见误解)
   - [七、嵌入式测验（Embedded Quiz）](#七嵌入式测验embedded-quiz)
     - [测验 1：BDAT 四维分别指什么？（记忆层）](#测验-1bdat-四维分别指什么记忆层)
     - [测验 2：TOGAF ADM 中哪个阶段负责定义技术平台？（理解层）](#测验-2togaf-adm-中哪个阶段负责定义技术平台理解层)
@@ -73,6 +74,7 @@ TOGAF ADM 阶段到 Cargo workspace 决策表：
     - [测验 4：在 Rust 工程中，Cargo workspace 对应企业架构的哪个概念？（应用层）](#测验-4在-rust-工程中cargo-workspace-对应企业架构的哪个概念应用层)
     - [测验 5：为什么说 EA 框架不能替代形式化验证？（分析层）](#测验-5为什么说-ea-框架不能替代形式化验证分析层)
   - [八、🧭 思维导图（Mindmap）](#八-思维导图mindmap)
+  - [补充国际权威来源（P1/P2 覆盖）](#补充国际权威来源p1p2-覆盖)
 
 ---
 
@@ -277,6 +279,14 @@ EA 框架提供**分类法和治理语言**，但不提供：
 
 因此，本目录的 EA 内容应与 `concept/04_formal/10_architecture_semantics/` 的形式化架构语义、`concept/06_ecosystem/03_design_patterns/` 的设计模式、`concept/03_advanced/00_concurrency/` 的并发模型联合使用。
 
+### 反例：EA 框架的常见误解
+
+| 误解 | 反例场景 | 为什么错误 |
+|---|---|---|
+| "采用 TOGAF 就能保证项目成功" | 某团队完整执行 ADM 各阶段并产出大量文档，却未验证核心并发协议，上线后出现数据竞争 | TOGAF 提供分类法和治理语言，不保证实现正确性；并发协议仍需形式化验证或测试 |
+| "一个框架适合所有组织" | 初创团队照搬 FEAF 的六参考模型和完整合规流程，治理开销超过工程收益 | EA 框架必须裁剪；ADM 的"裁剪"原则要求显式声明哪些阶段被省略及原因 |
+| "企业架构只是文档工作" | 架构师独立绘制 diagrams 后归档，未与产品 backlog、CI 质量门或 ADR 关联 | EA 的价值在于决策约束、影响范围分析和审计轨迹，而非文档本身 |
+
 ---
 
 ## 七、嵌入式测验（Embedded Quiz）
@@ -380,7 +390,6 @@ mindmap
 ---
 
 > **来源**: [The Open Group — TOGAF Standard, 10th Edition](https://www.opengroup.org/togaf) · [Zachman Framework](https://www.zachman.com/) · [FEAF](https://www.whitehouse.gov/omb/management/egov/federal-enterprise-architecture/) · [ISO/IEC/IEEE 42010:2022](https://www.iso.org/standard/74296.html)
-
 
 ## 补充国际权威来源（P1/P2 覆盖）
 

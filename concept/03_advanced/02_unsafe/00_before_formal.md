@@ -166,6 +166,28 @@ L4 中部分段落包含数学符号（⊗, ⊸, !, ∀, ∃），这些符号�
 
 ---
 
+## 反例与边界
+
+### 反例：把形式化当作写 Rust 的必要前置
+
+常见误解：「不学完 L4 形式化层，就不敢写 `unsafe` 或高级并发代码。」这会把形式化变成不必要的心理门槛。
+
+实际上，Rust 的工程实践（如 Miri 测试、unsafe 审查清单、RAII 边界检查）足以覆盖绝大多数生产场景。L4 形式化的价值在于给编译器作者和研究者可证明的语义模型，而非普通开发者日常编码的前置条件。除非你的目标是：
+
+- 开发形式化验证工具（如 Kani、Creusot）；
+- 撰写 PL 研究论文；
+- 深入编译器后端（如 Polonius、Tree Borrows 实现）；
+
+否则遇到 L4 内容难以理解，**跳过它是正确策略**，优先保证代码能通过 `cargo test`、`miri` 和 clippy。
+
+### 反例：用教学类比替代严格证明
+
+L4 中部分符号（如 ⊗、⊸、!）标注为「教学类比」，目的是建立直觉。一个边界错误是把这些类比当作定理直接用于安全证明：
+
+> 不能仅凭「所有权像线性逻辑」这一直觉，就断言某段 `unsafe` 代码在 Stacked/Tree Borrows 下合法。
+
+正确做法：对 `unsafe` 代码的 soundness 论证，应回归 [Rust Reference](https://doc.rust-lang.org/reference/)、[Rustonomicon](https://doc.rust-lang.org/nomicon/) 和 Miri 实验；如需学术论文级别的保证，再引用 RustBelt、Tree Borrows 等原始论文。
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

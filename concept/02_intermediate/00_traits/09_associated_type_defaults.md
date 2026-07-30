@@ -70,6 +70,9 @@ mindmap
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 常见错误](#42-常见错误)
+  - [反例与边界](#反例与边界)
+    - [反例：在 stable Rust 中使用关联类型默认值](#反例在-stable-rust-中使用关联类型默认值)
+    - [反例：默认实现假设默认类型](#反例默认实现假设默认类型)
   - [五、Stable 替代方案](#五stable-替代方案)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [补充国际权威来源（P1/P2 覆盖）](#补充国际权威来源p1p2-覆盖)
@@ -357,6 +360,39 @@ fn main() {}
 | 与 specialization 混淆 | 默认 impl 被特化后类型不一致 | 需遵循 coherence |
 
 ---
+
+## 反例与边界
+
+### 反例：在 stable Rust 中使用关联类型默认值
+
+关联类型默认值是 nightly-only 特性。在 stable 工具链上直接写 `type Output = i32;` 会被编译器拒绝：
+
+```rust,compile_fail,E0658
+trait Producer {
+    type Output = i32;
+    fn produce(&self) -> Self::Output;
+}
+```
+
+错误 `E0658` 表明该特性尚未稳定。若需在 stable 代码中实现类似效果，应使用泛型参数默认值、辅助 trait 或默认类型包装等替代方案。
+
+### 反例：默认实现假设默认类型
+
+即使启用了 nightly，默认方法也不能假设默认关联类型就是声明时的默认值：
+
+```rust,compile_fail
+#![feature(associated_type_defaults)]
+
+trait Increment {
+    type Output = i32;
+    fn increment(&self) -> Self::Output {
+        self.get() + 1
+    }
+    fn get(&self) -> Self::Output;
+}
+```
+
+上述代码编译失败，因为 `Self::Output` 在默认实现中被视为抽象的关联类型，而不是 `i32`；`+ 1` 对任意 `Output` 不一定合法。若默认实现确实需要加法，应为 `Output` 加上 `Add` bound，或把默认实现写在覆盖类型已知的 impl 中。
 
 ## 五、Stable 替代方案
 

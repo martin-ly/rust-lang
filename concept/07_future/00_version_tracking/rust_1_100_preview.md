@@ -220,6 +220,18 @@ Cargo 将支持在依赖中标记 `public = true/false`，以区分「依赖类�
 
 ---
 
+## 反例与边界
+
+> 本节澄清 nightly 周期跟踪页最容易被误读的边界。
+
+| 常见误解 | 反例 | 正确理解 |
+|---|---|---|
+| "nightly 特性一定会进入下个 stable" | `Specialization` 已长期处于 nightly only 状态 | nightly 可用 **≠** 稳定承诺 |
+| "FCP finished 表示下一版本必稳定" | `derive(CoercePointee)` 仍可能因实现细节或 edition 兼容性延后 | FCP 完成只说明设计方向达成一致，不保证发布时间 |
+| "使用 nightly 特性不影响 MSRV" | `#![feature(gen_blocks)]` 会让 crate 无法在任何 stable rustc 编译 | nightly 特性直接把 MSRV 提升到 nightly toolchain |
+| "本页列表就是 1.100 稳定清单" | 本页明确为**周期跟踪**；稳定清单需等 beta 分支切分后建立 | 稳定特性以官方 release notes 与 `rust_1_100_stabilized.md` 为准 |
+| "experimental / prototype 特性可以安全试用" | `BorrowSanitizer` 为 prototype，API 与行为可能大幅变动 | experimental 与 prototype 阶段不适合生产依赖 |
+
 ## 七、来源与延伸阅读
 
 - [Rust Forge — Release Versions](https://forge.rust-lang.org/)
@@ -241,7 +253,6 @@ Cargo 将支持在依赖中标记 `public = true/false`，以区分「依赖类�
 **文档版本**: 1.0
 **最后更新**: 2026-07-23
 **状态**: 🧪 周期跟踪骨架
-
 
 ## 补充国际权威来源（P1/P2 覆盖）
 

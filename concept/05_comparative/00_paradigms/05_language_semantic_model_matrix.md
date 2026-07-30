@@ -530,6 +530,53 @@ async fn 返回 Future<Output = T>
 
 ---
 
+## 反例与边界
+
+本节以具体反例说明矩阵使用中容易出现的过度简化。这些反例不针对某一语言，而是说明“维度得分高”不等于“在所有场景都适用”。
+
+### 反例：Rust 在所有语义维度都领先
+
+| 维度 | 误判 | 反例 |
+|:---|:---|:---|
+| 类型系统 | Rust 的类型系统比 Haskell/OCaml 更强 | Haskell 支持高阶多态与 GADTs，Idris/Agda 支持依赖类型；Rust 停在 B+ 是 deliberate 的工程取舍 |
+| 效应系统 | Rust 的 `async`/`unsafe` 覆盖所有副作用 | Rust 的 `async` 不追踪 I/O 能力、异常能力或状态能力；Koka/Eff 的代数效应可统一建模任意效果 |
+| 验证生态 | Rust 的验证工具链比 SPARK 更成熟 | SPARK Prover 可对完整子集自动证明 AoRTE；Rust 的 Kani/Verus 仍需标注且状态空间有限 |
+| 编译目标 | Rust 的多后端比 Nim/OCaml 更灵活 | Nim 可 transpile 到 C/C++/JS/ObjC；Rust 官方目标强，但 ObjC 等目标依赖第三方 |
+
+### 反例：依赖类型可以替代所有权系统
+
+**错误推论**：既然 Idris/Agda 能在类型里证明任意程序性质，那么它们的内存安全模型优于 Rust。
+
+**反例**：
+
+- 依赖类型的证明成本显著更高：写 `Vect n a` 需要构造证明项，而 Rust 的 `Vec<T>` 通过运行时检查加 panic 在工程上更可行。
+- 依赖类型语言通常运行在 GC（Idris/Agda）上，无法提供 Rust 的确定性析构与 `no_std` 能力。
+- 类型系统表达力与运行时控制是不同维度；Idris 在“类型系统”维度得 A，但在“编译目标/运行时确定性”维度弱于 Rust。
+
+### 反例：GC 加借用检查等价于 Rust
+
+**错误推论**：给 Go/Java 加上 scope 借用检查或线性类型库，就能获得 Rust 的内存安全。
+
+**反例**：
+
+- Go/Java 的 GC 保证无悬垂指针，但无法提供确定性析构；RAII 资源（文件句柄、锁）的释放时机仍由 GC 决定。
+- 库级线性类型（如 Linear Haskell、Scala 的线性类型提案）不改变运行时的别名模型，无法像 Rust 借用检查器那样在编译期全局排除 UAF。
+- 因此这些语言在“内存安全模型”维度仍为 B（GC/ARC），无法自动升级为 A。
+
+### 反例：unsafe Rust 与 safe C++ 等价
+
+**错误推论**：Rust 进入 `unsafe` 块后就和 C++ 的 safe 子集一样不安全。
+
+**反例**：
+
+- C++ 的 safe 子集（如 Core Guidelines、RAII）仍允许合法但危险的别名（多个 `std::shared_ptr` 循环引用、悬垂 `std::string_view`）。
+- Rust 的 `unsafe` 块只是将验证责任交给程序员；离开 `unsafe` 块后 safe Rust 的不变量仍然成立，且 Miri 可动态检测部分 UB。
+- 因此 Rust 在“内存安全模型”维度仍为 A（safe Rust 子集），而 C++ 为 C（RAII + 手动）。
+
+> **边界总结**：矩阵的评级描述的是语言在某一维度上的“能力峰值”，而不是“所有代码都能自动达到峰值”。实际项目中的安全性取决于程序员选择留在哪个子集、使用哪些工具、在边界处付出多少验证成本。
+
+---
+
 ## 十一、思维导图（Mindmap）
 
 ```mermaid

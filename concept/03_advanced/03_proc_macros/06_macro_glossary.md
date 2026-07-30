@@ -63,6 +63,9 @@
   - [反命题](#反命题)
   - [反向推理](#反向推理)
   - [过渡段](#过渡段)
+  - [反例与边界](#反例与边界)
+    - [反例：认为宏内定义的变量在调用点可见](#反例认为宏内定义的变量在调用点可见)
+    - [反例：在 `expr` 片段后紧跟非法分隔](#反例在-expr-片段后紧跟非法分隔)
   - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
@@ -714,6 +717,39 @@ const SIZE: usize = compute_size!(some_input);
 >
 
 ---
+
+## 反例与边界
+
+### 反例：认为宏内定义的变量在调用点可见
+
+一个典型的 hygiene 误解：宏里 `let x = ...`，调用后外面就能用 `x`。
+
+```rust,compile_fail,E0425
+macro_rules! let_x {
+    () => {
+        let x = 42;
+    };
+}
+
+fn main() {
+    let_x!();
+    println!("{}", x);
+}
+```
+
+错误 `E0425` 表明 `x` 在 `main` 的作用域里找不到。Rust 的 `macro_rules!` 卫生性保证：宏内部定义的局部标识符不会泄漏到调用点。如果确实需要把值“带出来”，应让宏展开为**表达式**（如 `let x = make_value!();`），或在宏参数中传入要绑定的标识符。
+
+### 反例：在 `expr` 片段后紧跟非法分隔
+
+声明宏的 `expr` 片段有严格的局部歧义约束：它后面只能跟 `=>`、`,` 或 `;`。下面的模式会失败：
+
+```rust,compile_fail
+macro_rules! bad_expr_suffix {
+    ($e:expr + $rest:tt) => { $e };
+}
+```
+
+边界说明：编译器无法确定 `expr` 的结束位置，因此拒绝这类模式。解决：用 `tt` 捕获整个表达式，或在宏内部通过规则结构间接提取。
 
 ## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）
 

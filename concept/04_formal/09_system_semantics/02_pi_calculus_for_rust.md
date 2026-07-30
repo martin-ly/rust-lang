@@ -10,7 +10,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页：π 演算系统语义入口。
 > **定位**: 从**系统语义**（动态拓扑、channel 移动性、名称传递作为结构演化机制）角度为 π 演算提供导航入口。完整形式化骨架、CSP/CCS/π 与 Rust 原语对应见 [`04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md`](../07_concurrency_semantics/01_process_calculi_for_rust.md)。
 > **前置概念**: [Process Calculi for Rust](../07_concurrency_semantics/01_process_calculi_for_rust.md) · [Actor Model Semantics](01_actor_model_semantics.md)
-> **后置概念**: [Component-Based Semantics](03_component_based_semantics.md) · [Distributed Systems Semantics](04_distributed_systems_semantics.md)
+> **后置概念**: [Component-Based Semantics](03_component_based_semantics.md) · [Distributed Systems Semantics](04_distributed_systems_semantics.md) · [Async/Await](../../03_advanced/01_async/01_async.md)
 
 ---
 
@@ -91,6 +91,29 @@ fn main() {
 
 > [`concept/04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md`](../07_concurrency_semantics/01_process_calculi_for_rust.md)
 
+---
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((π 演算 for Rust 系统语义))
+    语法核心
+      并行 P|Q
+      名字限制 (νa)P
+      复制 !P
+    移动性
+      通道名作为值传递
+      动态拓扑演化
+    Rust 投影
+      Sender<Sender<T>>
+      Sender<Receiver<T>>
+      线性移动性近似
+    形式化入口
+      Milner 1999
+      Sangiorgi & Walker 2001
+      04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md
+```
 
 ## 补充国际权威来源（P1/P2 覆盖）
 

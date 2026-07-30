@@ -425,6 +425,41 @@ graph TB
 
 ---
 
+## 反例与边界
+
+### 反例：返回局部变量的引用
+
+一个常见误解是：只要函数签名写上生命周期标注，就能让引用“活得更久”。实际上，生命周期标注只是关系声明，不能创造内存。
+
+```rust,compile_fail,E0597
+fn dangling() -> &i32 {
+    let local = 42;
+    &local
+}
+
+fn main() {
+    let r = dangling();
+    println!("{}", r);
+}
+```
+
+错误本质：`local` 在 `dangling` 返回时会被 drop，返回的引用指向已释放栈内存。无论怎么标注 `'a`，编译器都会拒绝这种 dangling reference。正确做法是让调用方拥有该值，或返回 `i32`/`Box<i32>`/`Rc<i32>` 等 owned 类型。
+
+### 反例：同时持有可变与不可变借用
+
+另一个高频错误是认为“只要我不在同时读写，可变借用和不可变借用可以交替使用”：
+
+```rust,compile_fail,E0502
+fn main() {
+    let mut v = vec![1, 2, 3];
+    let first = &v[0];
+    v.push(4);           // 试图在持有 &v[0] 时修改 v
+    println!("{}", first);
+}
+```
+
+边界说明：`&v[0]` 的生命周期覆盖到 `println!` 之前，而 `v.push` 需要 `&mut v`。NLL 只能缩小到“最后使用”，但 `first` 的最后一次使用在 `println!`，因此与 `push` 重叠。解决：先完成只读使用，再修改。
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

@@ -62,6 +62,10 @@
   - [过渡段](#过渡段)
   - [定理链](#定理链)
   - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
+  - [反例与边界](#反例与边界)
+    - [反例：WASM 沙箱意味着完全安全](#反例wasm-沙箱意味着完全安全)
+    - [反例：Rust/WASM 默认比原生 Rust 快](#反例rustwasm-默认比原生-rust-快)
+    - [反例：线性内存模型等价于 Rust 的堆模型](#反例线性内存模型等价于-rust-的堆模型)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -420,6 +424,39 @@ WASM 工作流的工具链术语按编译—运行—封装三层组织：
 
 - **P1 学术/形式化**: [Haas et al.: Bringing the Web up to Speed with WebAssembly (PLDI 2017)](https://dl.acm.org/doi/10.1145/3062341.3062363)
 - **P2 生态/社区**: [docs.rs/wasm-bindgen — WASM 绑定权威 API 文档](https://docs.rs/wasm-bindgen)
+
+## 反例与边界
+
+以下反例针对 WASM 生态中最容易被过度简化的认知。
+
+### 反例：WASM 沙箱意味着完全安全
+
+| 误解 | 澄清 |
+|:---|:---|
+| “WASM 在沙箱里跑，所以不会被攻击。” | 沙箱隔离的是进程级访问；Spectre 等侧信道、恶意宿主导入、内存越界仍可能破坏安全。 |
+| “WASM 模块不能访问文件系统。” | 通过 WASI 导入，WASM 可以按能力模型（capability model）访问文件、网络、环境变量。 |
+
+沙箱提供的是**执行隔离**，不是**安全保证的充分条件**。
+
+### 反例：Rust/WASM 默认比原生 Rust 快
+
+| 场景 | 真实开销 |
+|:---|:---|
+| 频繁 Rust↔JS 字符串传递 | 每次都需要编码/拷贝，常成为实际瓶颈。 |
+| 大量使用 `wasm-bindgen` 胶水 | 边界调用有固定开销，小函数调用可能反而更慢。 |
+| 线性内存动态增长 | `memory.grow` 触发复制与页面对齐成本。 |
+
+WASM 的优势主要体现在计算密集、边界交互少的任务；IO 或频繁互操作场景未必优于原生代码。
+
+### 反例：线性内存模型等价于 Rust 的堆模型
+
+WASM 只有一个可导出的线性内存；Rust 的 `Box<T>`、`Vec<T>`、`String` 都分配在这同一块字节数组内：
+
+- 宿主可以通过 `Memory` 对象读取/写入整个线性内存；
+- WASM 没有对象级隔离，也没有 GC 堆的分代结构；
+- 悬垂指针、use-after-free 在 `unsafe` Rust 中仍可能破坏线性内存。
+
+因此，Rust 的内存安全保证不自动延伸到宿主与 WASM 之间的信任边界。
 
 ## 🧭 思维导图（Mindmap）
 

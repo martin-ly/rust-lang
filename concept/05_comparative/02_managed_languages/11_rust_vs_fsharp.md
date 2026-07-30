@@ -56,6 +56,11 @@
     - [8.2 F# 不适合的场景](#82-f-不适合的场景)
     - [8.3 常见误解澄清](#83-常见误解澄清)
     - [8.4 反命题决策树](#84-反命题决策树)
+  - [反例与边界](#反例与边界)
+    - [反例：F# 默认不可变 + GC 等于 Rust 的 safe 并发](#反例f-默认不可变--gc-等于-rust-的-safe-并发)
+    - [反例：Rust trait 与 F# 接口完全等价](#反例rust-trait-与-f-接口完全等价)
+    - [反例：Rust async 与 F# async 语义相同](#反例rust-async-与-f-async-语义相同)
+    - [反例：无 GC = 无内存管理复杂性](#反例无-gc--无内存管理复杂性)
   - [来源与延伸阅读](#来源与延伸阅读)
     - [国际权威参考](#国际权威参考)
     - [相关概念](#相关概念)
@@ -754,6 +759,77 @@ graph TD
 ```
 
 > **边界要点**: Rust 与 F# 的边界取决于**延迟敏感性**、**.NET 生态依赖**、**数据建模需求**和**目标平台**。两者在 .NET 云原生与系统边界项目中可以互补：Rust 负责性能关键原生组件，F# 负责业务逻辑与数据流。
+
+---
+
+## 反例与边界
+
+本节用具体反例澄清 Rust 与 F# 在内存安全、并发安全、类型抽象与异步模型方面的常见误解。
+
+### 反例：F# 默认不可变 + GC 等于 Rust 的 safe 并发
+
+**错误推论**：F# 默认不可变，又有 .NET GC 管理内存，因此并发安全与 Rust safe 相当。
+
+**反例**：
+
+- F# 的不可变性默认针对 `let` 绑定，但 `mutable`、`ref`、.NET 可变集合与 `lock` 仍允许共享可变状态。
+- F# 没有编译期机制阻止非线程安全对象跨 `Async`/`Task` 边界共享；开发者需手动使用 `MailboxProcessor` 或 .NET 同步原语。
+- Rust 的 `Send`/`Sync` 在编译期排除数据竞争；F# 依赖运行时约定与审查。
+
+### 反例：Rust trait 与 F# 接口完全等价
+
+**错误推论**：Rust `trait` 与 F# `interface` 都是接口抽象，可以直接映射。
+
+**反例**：
+
+| 特性 | Rust Trait | F# Interface |
+|:---|:---|:---|
+| 默认分发方式 | 静态单态化（零成本） | 接口引用动态分发 |
+| 实现方式 | 显式 `impl Trait for Type` | 显式 `interface ... with` / 对象表达式 |
+| 生命周期约束 | trait bound 可含生命周期 | 无生命周期系统 |
+| 关联类型 | `type Output;` | 无直接等价；可用成员约束模拟 |
+| 对象安全 | 受对象安全规则限制 | 无对象安全限制 |
+
+- Rust trait 更接近 typeclass，强调静态协议；F# interface 是 .NET 引用类型，强调动态多态与跨语言互操作。
+
+### 反例：Rust async 与 F# async 语义相同
+
+**错误推论**：两者都有 `async`/`await`，因此异步模型等价。
+
+**反例**：
+
+- Rust 的 `Future` 是**惰性状态机**，需要显式 `.await` 或执行器驱动；未 poll 的 `Future` 不会执行。
+- F# 的 `Async<'T>` 是**冷启动工作流**，需 `Async.Start`/`RunSynchronously` 触发；`Task` 计算表达式生成 .NET `Task`，更接近 C# async。
+- Rust 通过 `Send`/`Sync`/`Pin` 在编译期保证跨 await 点安全；F# 由 CLR 托管对象与不可变性约定保证。
+
+```fsharp
+// F#: async 工作流是冷启动，不会自动执行
+let work = async { printfn "hello" }
+// 此时不会输出；需显式启动
+Async.RunSynchronously(work)
+```
+
+```rust,ignore
+// Rust: Future 惰性，需 await/执行器
+async fn work() { println!("hello"); }
+
+fn main() {
+    let fut = work();   // 不会执行
+    // 需要 await 或 block_on(fut)
+}
+```
+
+### 反例：无 GC = 无内存管理复杂性
+
+**错误推论**：Rust 没有 GC，因此内存管理比 F# 简单。
+
+**反例**：
+
+- Rust 将内存管理复杂性前移到编译期：开发者需理解所有权、生命周期、借用规则、`Rc`/`Arc`/`RefCell` 等内部可变性模式。
+- F# 将内存管理复杂性隐藏到 .NET GC：开发者无需显式释放，但需关注 LOH、装箱、GC 暂停与 `IDisposable` 模式。
+- 对于一次性脚本或快速原型，F# 的 GC 模型心智负担更低；对于延迟敏感型系统软件，Rust 的 RAII 模型更可预测。
+
+> **边界总结**：Rust 与 F# 的差异不仅是语法风格，更是“资源协议前置到编译期”与“资源管理托管给运行时”的根本分工。两者在 .NET 云原生、数据密集应用中可互补：Rust 负责性能关键路径，F# 负责数据建模与业务逻辑。
 
 ---
 
