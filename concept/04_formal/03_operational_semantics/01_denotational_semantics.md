@@ -19,8 +19,9 @@
 
 > **来源**:
 >
-> [The Semantics of Programming Languages (Winskel)](https://www.cl.cam.ac.uk/~gw104/dens.pdf) ·
-> [Domain Theory (Abramsky & Jung)](https://www.cs.ox.ac.uk/files/298/handbook.pdf) ·
+> [Scott & Strachey 1971 — Toward a Mathematical Semantics for Computer Languages](https://www.cs.tufts.edu/~nr/cs257/archive/tony-hoare/mathematical-semantics.pdf) ·
+> [Winskel — The Formal Semantics of Programming Languages](https://www.cl.cam.ac.uk/~gw104/dens.pdf) ·
+> [Abramsky & Jung — Domain Theory](https://www.cs.ox.ac.uk/files/298/handbook.pdf) ·
 > [Wikipedia — Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics) ·
 > [Wikipedia — Domain Theory](https://en.wikipedia.org/wiki/Domain_theory)
 >
@@ -61,6 +62,7 @@
     - [10.3 边界测试：发散函数（`!`）的指称语义（编译错误）](#103-边界测试发散函数的指称语义编译错误)
     - [10.4 边界测试：`unsafe` 代码的语义鸿沟（运行时 UB）](#104-边界测试unsafe-代码的语义鸿沟运行时-ub)
     - [10.3 边界测试：不动点语义与递归类型的无限展开（编译错误）](#103-边界测试不动点语义与递归类型的无限展开编译错误)
+    - [10.5 边界测试：直接递归类型与无限大小（编译错误 E0072）](#105-边界测试直接递归类型与无限大小编译错误-e0072)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：指称语义（Denotational Semantics）的核心思想是什么？与操作语义有什么区别？（理解层）](#测验-1指称语义denotational-semantics的核心思想是什么与操作语义有什么区别理解层)
     - [测验 2：什么是"域"（Domain）？为什么需要引入 ⊥（bottom）元素？（理解层）](#测验-2什么是域domain为什么需要引入-bottom元素理解层)
@@ -169,8 +171,8 @@ Kleene 不动点定理:
   └── 发散程序映射到 ⊥
 ```
 
-> **不动点洞察**: **Kleene 不动点定理是递归的数学基础**——所有递归定义都可以通过最小不动点赋予语义。
-> (Source: [Abramsky & Jung — Domain Theory](https://www.cs.ox.ac.uk/files/298/handbook.pdf))
+> **不动点洞察**: **Kleene 不动点定理是递归的数学基础**——所有递归定义都可以通过最小不动点赋予语义。Scott 与 Strachey 的奠基工作正是用这类域论构造为命令式程序语言建立了组合化的数学语义。
+> (Source: [Scott & Strachey 1971 — Toward a Mathematical Semantics for Computer Languages](https://www.cs.tufts.edu/~nr/cs257/archive/tony-hoare/mathematical-semantics.pdf) · [Abramsky & Jung — Domain Theory](https://www.cs.ox.ac.uk/files/298/handbook.pdf))
 
 ---
 
@@ -445,6 +447,7 @@ graph TD
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [Winskel — Semantics](https://www.cl.cam.ac.uk/~gw104/dens.pdf) | ✅ 一级 | 经典教材 |
+| [Scott & Strachey 1971 — Toward a Mathematical Semantics for Computer Languages](https://www.cs.tufts.edu/~nr/cs257/archive/tony-hoare/mathematical-semantics.pdf) | ✅ 一级 | 指称语义奠基 |
 | [Abramsky & Jung — Domain Theory](https://www.cs.ox.ac.uk/files/298/handbook.pdf) | ✅ 一级 | 领域理论 |
 | [Wikipedia — Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics) | ✅ 二级 | 概述 |
 | [Wikipedia — Domain Theory](https://en.wikipedia.org/wiki/Domain_theory) | ✅ 二级 | 领域理论 |
@@ -579,9 +582,24 @@ fn main() {
 > (Source: [Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics)) ·
 > (Source: [Domain Theory](https://en.wikipedia.org/wiki/Domain_theory))
 
+### 10.5 边界测试：直接递归类型与无限大小（编译错误 E0072）
+
+```rust,compile_fail,E0072
+// ❌ E0072: 直接递归类型 `List` 具有无限大小
+struct List {
+    head: i32,
+    tail: List,
+}
+
+fn main() {}
+```
+
+> **修正**: 在指称语义中，递归类型 `μX.F(X)` 通过**最小不动点**解释，域论允许有限与无限展开共存。但 Rust 是严格求值且要求编译期确定类型大小，因此直接递归类型会导致 **E0072**（recursive type has infinite size）。必须通过间接层（`Box<List>`、`Rc<List>` 等）打破循环，把递归从值层级移到堆指针层级。这与 Haskell 的惰性递归类型（可无限）形成对比——Rust 的指称解释额外受「严格求值 + 静态大小」约束。
+> (Source: [Scott & Strachey 1971 — Toward a Mathematical Semantics for Computer Languages](https://www.cs.tufts.edu/~nr/cs257/archive/tony-hoare/mathematical-semantics.pdf) · [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html))
+
 ## 嵌入式测验（Embedded Quiz）
 
-「嵌入式测验（Embedded Quiz）」涉及测验 1：指称语义（Denotational Semantics）的核…、测验 2：什么是"域"（Domain）？为什么需要引入 ⊥（botto…、测验 3：Rust 的严格求值（strict/eager evalua…、测验 4：不动点定理（Knaster-Tarski）在递归函数语义中起…等5个方面，本节逐一说明其要点。
+「嵌入式测验（Embedded Quiz）」涉及测验 1：指称语义（Denotational Semantics）的核心思想与操作语义的区别、测验 2：什么是"域"（Domain）以及为什么需要引入 ⊥（bottom）元素、测验 3：Rust 的严格求值（strict/eager evaluation）在指称语义中如何体现、测验 4：不动点定理（Knaster-Tarski）在递归函数语义中起什么作用、测验 5：为什么 Rust 不允许直接递归类型等 5 个方面，本节逐一说明其要点。
 
 ### 测验 1：指称语义（Denotational Semantics）的核心思想是什么？与操作语义有什么区别？（理解层）
 

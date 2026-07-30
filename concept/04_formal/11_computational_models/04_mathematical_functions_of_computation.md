@@ -274,7 +274,7 @@ Scott 域的关键思想：
 
 ### 1.9 从数学函数到观察等价：外延性与上下文等价
 
-数学函数的外延性说：两个函数相等当且仅当它们对所有输入给出相同输出。在程序语言中，这一思想被推广为**观察等价性（observational equivalence）**：两个程序片段在任意合法上下文中都无法被外部观察者区分，则它们观察等价。Pierce 在 TAPL 的操作语义框架中将上下文等价作为 typed lambda calculus 中程序等价的标准定义（Pierce, 2002, Ch. 3 & Ch. 9）。Pitts 系统地发展了基于操作语义的程序等价理论，给出 CIU 等价与上下文等价的联系，并讨论高阶状态化语言中的推理方法（Pitts, 1997; Pitts & Stark, 1998）。
+数学函数的外延性说：两个函数相等当且仅当它们对所有输入给出相同输出。在程序语言中，这一思想被推广为**观察等价性（observational equivalence）**：两个程序片段在任意合法上下文中都无法被外部观察者区分，则它们观察等价。Pierce 在 TAPL 的操作语义框架中将上下文等价作为 typed lambda calculus 中程序等价的标准定义（Pierce, 2002, Ch. 3 & Ch. 9）。Pitts 系统地发展了基于操作语义的程序等价理论，给出 CIU 等价与上下文等价的联系，并讨论高阶状态化语言中的推理方法（Pitts, 1997; Pitts & Stark, 1998）。Rice 定理进一步说明：任何关于程序所计算函数的非平凡语义性质都不可判定，因此「两个程序是否观察等价」在一般情况下没有通用判定器（Rice, 1953; Sipser, 2013, §5.1）。
 
 > **教学类比（上下文等价）**
 >
@@ -492,7 +492,22 @@ fn produce_false() -> std::convert::Infallible {
 fn main() {}
 ```
 
-> **来源**: [Pierce 2002 — Types and Programming Languages, Ch. 9](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Girard, Lafont & Taylor 1989 — Proofs and Types](https://www.paultaylor.eu/stable/Proofs+Types.html)
+Rust 类型系统被设计为可判定的，因此无法表达任意逻辑命题。下面这个 `compile_fail,E0275` 反例展示了**类型层面尝试表达自指/不可判定性质**时，trait solver 因递归溢出而拒绝——这正是 Curry-Howard 对应中「可判定类型系统 vs 不可判定逻辑」张力的工程投影：
+
+```rust,compile_fail,E0275
+// 试图用一个自指的 trait 表达「所有类型都满足某性质」：
+// 这对应于逻辑中的非直谓（impredicative）自指，会导致求解无限递归。
+trait UniversalProperty {}
+impl<T> UniversalProperty for T where T: UniversalProperty {}
+
+fn prove<T: UniversalProperty>() {}
+
+fn main() {
+    prove::<()>(); // ERROR E0275: overflow evaluating the requirement
+}
+```
+
+> **来源**: [Pierce 2002 — Types and Programming Languages, Ch. 9](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Girard, Lafont & Taylor 1989 — Proofs and Types](https://www.paultaylor.eu/stable/Proofs+Types.html) · [Barendregt 1992 — Lambda Calculi with Types, §5](https://doi.org/10.1016/B978-0-444-88074-1.50009-9)
 
 ---
 
@@ -721,27 +736,34 @@ Ahmed 提出的 step-indexed logical relations 主要解决什么问题？
 
 ---
 
-## 六、权威来源索引
+## 六、权威来源 / International Authority References
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Church 1941 — The Calculi of Lambda-Conversion](https://doi.org/10.2307/2267173) | ✅ 一级 | λ 可定义性 |
+| [Turing 1936 — On computable numbers, with an application to the Entscheidungsproblem](https://doi.org/10.1112/plms/s2-42.1.230) | ✅ 一级 | 图灵机奠基；停机问题原始证明 |
 | [Church 1936 — An Unsolvable Problem of Elementary Number Theory](https://doi.org/10.2307/1968981) | ✅ 一级 | λ 可定义函数与 Church-Turing 论题 |
-| [Turing 1936 — On Computable Numbers](https://doi.org/10.1112/plms/s2-42.1.230) | ✅ 一级 | 图灵机与可计算性奠基 |
+| [Church 1941 — The Calculi of Lambda-Conversion](https://doi.org/10.2307/2267173) | ✅ 一级 | λ 可定义性 |
+| [Rice 1953 — Classes of Recursively Enumerable Sets and Their Decision Problems](https://doi.org/10.1090/S0002-9904-1953-09692-2) | ✅ 一级 | 语义性质不可判定性（Rice 定理） |
 | [Kleene 1943 — Recursive Predicates and Quantifiers](https://doi.org/10.2307/2268819) | ✅ 一级 | μ-递归函数 |
 | [Kleene 1952 — Introduction to Metamathematics](https://en.wikipedia.org/wiki/Introduction_to_Metamathematics) | ✅ 一级 | 递归函数论系统阐述 |
 | [Barendregt 1984 — The Lambda Calculus: Its Syntax and Semantics](https://doi.org/10.1016/S0049-237X(09)70349-9) | ✅ 一级 | λ 演算、Y 组合子、Curry-Howard |
 | [Barendregt 1992 — Lambda Calculi with Types](https://doi.org/10.1016/B978-0-444-88074-1.50009-9) | ✅ 一级 | 类型化 λ 演算与 Curry-Howard 分层 |
+| [Scott 1972 — Continuous Lattices](https://doi.org/10.1007/BFb0073967) | ✅ 一级 | 连续格与 Scott 域奠基 |
 | [Scott 1976 — Data types as lattices](https://doi.org/10.1137/0205037) | ✅ 一级 | Scott 域、不动点语义 |
 | [Scott 1982 — Domains for Denotational Semantics](https://www.cs.ox.ac.uk/files/3287/PRG19.pdf) | ✅ 一级 | Scott 域与指称语义教学 |
-| [Scott & Strachey — Denotational Semantics](https://www.cs.ox.ac.uk/files/3232/PRG06.pdf) | ✅ 一级 | 指称语义奠基 |
+| [Scott & Strachey 1971/2000 — Toward a Mathematical Semantics for Computer Languages](https://www.cs.ox.ac.uk/files/3232/PRG06.pdf) | ✅ 一级 | 指称语义奠基（PRG-6） |
+| [Strachey 1973 — The Varieties of Programming Language](https://doi.org/10.1016/S0065-2458(08)60314-4) | ✅ 一级 | 程序语言语义分类 |
 | [Girard, Lafont & Taylor 1989 — Proofs and Types](https://www.paultaylor.eu/stable/Proofs+Types.html) | ✅ 一级 | Curry-Howard 对应系统阐述 |
 | [Wadler 2015 — Propositions as Types](https://doi.org/10.1145/2699407) | ✅ 一级 | Curry-Howard 现代综述 |
 | [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) | ✅ 一级 | 类型化 λ 演算、操作语义、上下文等价 |
-| [Sipser 2012 — Introduction to the Theory of Computation, 3rd ed.](https://math.mit.edu/~sipser/book.html) | ✅ 一级 | 可计算性教材；图灵机计算函数 §3.1，Church-Turing 论题 §3.3，可判定性 §4.1 |
+| [Sipser 2013 — Introduction to the Theory of Computation, 3rd ed.](https://math.mit.edu/~sipser/book.html) | ✅ 一级 | 可计算性教材；图灵机计算函数 §3.1，Church-Turing 论题 §3.3，可判定性 §4.1 |
 | [Hopcroft, Motwani & Ullman 2006 — Introduction to Automata Theory, Languages, and Computation, 3rd ed.](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation) | ✅ 一级 | 图灵机 §8.2，模型等价 §8.5，递归函数/不可判定性 §9.1 |
 | [Soare 1987 — Recursively Enumerable Sets and Degrees](https://doi.org/10.1007/978-3-662-21917-0) | ✅ 一级 | 递归可枚举集合与度理论 |
 | [Soare 2016 — Turing Computability. Theory and Applications](https://doi.org/10.1007/978-3-642-31933-4) | ✅ 一级 | 现代可计算性教材，μ-递归 §1.3 |
+| [Cutland 1980 — Computability: An Introduction to Recursive Function Theory](https://doi.org/10.1017/CBO9780511574916) | ✅ 一级 | 递归函数与可计算性入门 |
+| [Kozen 1997 — Automata and Computability](https://doi.org/10.1007/978-1-4612-1844-9) | ✅ 一级 | 自动机、可计算性与复杂度理论 |
+| [Appel 2004 — Modern Compiler Implementation in Java/C/ML, 2nd ed.](https://www.cs.princeton.edu/~appel/modern/) | ✅ 一级 | 编译器实现与语义后端（Tiger Book） |
+| [Ord 2006 — The Many Forms of Hypercomputation](https://doi.org/10.1016/j.apal.2005.09.012) | ✅ 一级 | 超计算与 Church-Turing 边界讨论 |
 | [Felleisen 1991 — On the Expressive Power of Programming Languages](https://doi.org/10.1007/BF00119888) | ✅ 一级 | 表达力比较框架 |
 | [Felleisen & Flatt 1998 — Programming Languages and Their Calculi](https://www2.ccs.neu.edu/racket/pubs/scp91-felleisen.pdf) | ✅ 一级 | 表达力与演算扩展 |
 | [Pitts 1997 — Operationally-based theories of program equivalence](https://www.cl.cam.ac.uk/~amp12/papers/index.html) | ✅ 一级 | 上下文等价、CIU 等价与逻辑关系 |

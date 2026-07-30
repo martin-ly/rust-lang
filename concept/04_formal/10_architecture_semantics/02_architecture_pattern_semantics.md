@@ -17,11 +17,21 @@
 
 ---
 
-> **来源**: [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+> **来源**: [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) · [Rust Reference — Items and Visibility](https://doc.rust-lang.org/reference/visibility-and-privacy.html) · [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/traits.html#orphan-rules) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 
-> **权威来源 / Provenance**: 本节架构模式作为不变量集合与质量属性语义，主要对齐 Bass, Clements & Kazman (2021) 的 *Software Architecture in Practice* 中关于架构模式、质量属性场景与架构战术的论述。
+> **权威来源 / Provenance**: 本节架构模式作为不变量集合与质量属性语义，主要对齐 Shaw & Garlan (1996)、Bass, Clements & Kazman (2021) 的 *Software Architecture in Practice* 中关于架构模式、质量属性场景与架构战术的论述，并参考 ISO/IEC/IEEE 42010:2022 的架构描述框架、Medvidovic & Taylor (2000) 的 ADL 分类工作、Wermelinger (1994) 的形式化规格，以及 ACME/Wright/Rapide 等经典 ADL 原始论文。
 >
 > - **Bass, Clements & Kazman (2021)** — *Software Architecture in Practice* (4th ed.). SEI. [https://www.sei.cmu.edu/research-capabilities/books/book.cfm?assetid=669293](https://www.sei.cmu.edu/research-capabilities/books/book.cfm?assetid=669293)
+> - **Shaw & Garlan (1996)** — *Software Architecture: Perspectives on an Emerging Discipline*. Prentice Hall. [PDF](https://www.cs.cmu.edu/~search/articles/books/SA.book.pdf)
+> - **Garlan & Shaw (1993)** — *An Introduction to Software Architecture*. [https://doi.org/10.1142/9789812813032_0001](https://doi.org/10.1142/9789812813032_0001)
+> - **Medvidovic & Taylor (2000)** — *A Classification and Comparison Framework for Software Architecture Description Languages*. [https://doi.org/10.1109/32.825767](https://doi.org/10.1109/32.825767)
+> - **Wermelinger (1994)** — *Formal Specification of Software Architecture*. Science of Computer Programming, 23(2–3), 149–178. [https://doi.org/10.1016/0167-6423(94)00022-5](https://doi.org/10.1016/0167-6423(94)00022-5)
+> - **ISO/IEC/IEEE 42010:2022** — *Software and Systems Engineering — Architecture Description*. ISO, 2022. [https://www.iso.org/standard/74296.html](https://www.iso.org/standard/74296.html)
+> - **Garlan, Monroe & Wile (1997)** — *ACME: An Architecture Description Interchange Language*. In *Proceedings of CASCON'97*, 169–183.
+> - **Allen (1997)** — *A Formal Approach to Software Architecture*. Ph.D. thesis, Carnegie Mellon University. (Wright ADL based on CSP.)
+> - **Luckham et al. (1995)** — *Specification and Analysis of System Architecture Using Rapide*. IEEE Transactions on Software Engineering, 21(4), 336–355. [https://doi.org/10.1109/32.385970](https://doi.org/10.1109/32.385970)
+> - **Rust Reference — Items and Visibility** — [https://doc.rust-lang.org/reference/visibility-and-privacy.html](https://doc.rust-lang.org/reference/visibility-and-privacy.html)
+> - **Rust Reference — Orphan Rules** — [https://doc.rust-lang.org/reference/items/traits.html#orphan-rules](https://doc.rust-lang.org/reference/items/traits.html#orphan-rules)
 
 ---
 
@@ -68,6 +78,7 @@
     - [4.1 反例：编译通过的架构违规](#41-反例编译通过的架构违规)
     - [4.2 边界：模式不是互斥的](#42-边界模式不是互斥的)
     - [4.3 边界：编译器无法捕获所有语义违规](#43-边界编译器无法捕获所有语义违规)
+    - [4.4 编译期可捕获的架构违规](#44-编译期可捕获的架构违规)
   - [相关概念](#相关概念)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：分层架构中哪条边是被禁止的？](#测验-1分层架构中哪条边是被禁止的)
@@ -449,6 +460,50 @@ Rust 模块/crate 边界只能捕获**源码依赖方向**违规。以下问题�
 - 通过共享数据库 schema 隐式耦合（数据流违规但无源码依赖）；
 - 通过环境变量、配置字符串产生的隐式控制流。
 
+### 4.4 编译期可捕获的架构违规
+
+以下 `compile_fail` 块把“Layered 禁止跨层依赖”与“Domain 不得依赖 Infrastructure”编码为可见性规则，演示 Rust 编译器如何拒绝违规：
+
+```rust,compile_fail
+// ❌ 违规 1：Presentation 直接调用 Infrastructure（跨层依赖）
+mod application {
+    pub(in crate::application) mod infrastructure {
+        pub struct DbConnection;
+        impl DbConnection { pub fn save(_: u64) {} }
+    }
+    pub fn create_order(id: u64) { infrastructure::DbConnection::save(id); }
+}
+
+mod presentation {
+    use crate::application::infrastructure::DbConnection; //~ ERROR module `infrastructure` is private
+    pub fn submit_order() { DbConnection::save(1); }
+}
+
+fn main() {}
+```
+
+```rust,compile_fail
+// ❌ 违规 2：Domain crate 依赖 Infrastructure 的具体类型
+mod application {
+    pub(in crate::application) mod infrastructure {
+        pub struct PostgresPool;
+    }
+}
+
+mod domain {
+    // Domain 层应只依赖自己定义的 trait/类型，不能引用基础设施实现
+    use crate::application::infrastructure::PostgresPool; //~ ERROR module `infrastructure` is private
+
+    pub struct UserService {
+        pool: PostgresPool,
+    }
+}
+
+fn main() {}
+```
+
+> 工程实践：在真实 Cargo workspace 中，把层拆分为独立 crate 并让 `domain/Cargo.toml` 不声明 `infrastructure` 依赖，可使上述违规在 `cargo check` 阶段以 `unresolved import` 或 `no matching package` 形式失败。
+
 ---
 
 ## 相关概念
@@ -608,7 +663,7 @@ mindmap
 
 ---
 
-> **权威来源**: [Buschmann et al. — POSA](https://en.wikipedia.org/wiki/Pattern-Oriented_Software_Architecture) · [Fowler — Patterns of Enterprise Application Architecture](https://martinfowler.com/books/eaa.html) · [Cockburn — Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/) · [Palermo — Onion Architecture](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/) · [Martin — Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) · [Hohpe & Woolf — Enterprise Integration Patterns](https://www.enterpriseintegrationpatterns.com/)
+> **权威来源**: [Buschmann et al. — POSA](https://en.wikipedia.org/wiki/Pattern-Oriented_Software_Architecture) · [Fowler — Patterns of Enterprise Application Architecture](https://martinfowler.com/books/eaa.html) · [Cockburn — Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/) · [Palermo — Onion Architecture](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/) · [Martin — Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) · [Hohpe & Woolf — Enterprise Integration Patterns](https://www.enterpriseintegrationpatterns.com/) · [Shaw & Garlan (1996)](https://www.cs.cmu.edu/~search/articles/books/SA.book.pdf) · [Garlan & Shaw (1993)](https://doi.org/10.1142/9789812813032_0001) · [Medvidovic & Taylor (2000)](https://doi.org/10.1109/32.825767) · [ISO/IEC/IEEE 42010:2022](https://www.iso.org/standard/74296.html)
 > **文档版本**: 1.0
 > **最后更新**: 2026-07-28
 > **状态**: ✅ 新建

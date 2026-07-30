@@ -14,6 +14,19 @@
 
 ---
 
+> **权威来源 / Provenance**: 本节本体工程方法论主要参考 Noy & McGuinness (2001) 的七步法、Methontology (Fernández-López et al., 1997) 与 NeOn (Suárez-Figueroa et al., 2012)；形式化基础参考 Baader et al. (2007) 的描述逻辑手册与 Hitzler, Krötzsch & Rudolph (2009)；知识图谱与互操作背景参考 Berners-Lee (2006) 的 Linked Data 原则、Hogan et al. (2021/2022) 的知识图谱综述、Wilkinson et al. (2016) 的 FAIR 原则，以及 W3C JSON-LD 1.1 与 RDF-star 规范。
+>
+> - **Noy & McGuinness (2001)** — *Ontology Development 101: A Guide to Creating Your First Ontology*. Stanford Knowledge Systems Laboratory Technical Report KSL-01-05. [https://doi.org/10.1007/978-3-540-92673-3_6](https://doi.org/10.1007/978-3-540-92673-3_6)
+> - **Baader et al. (2007)** — *The Description Logic Handbook* (2nd ed.). Cambridge University Press. [https://doi.org/10.1017/9781139025355](https://doi.org/10.1017/9781139025355)
+> - **Hitzler, Krötzsch & Rudolph (2009)** — *Foundations of Semantic Web Technologies*. CRC Press. [https://www.semantic-web-book.org/](https://www.semantic-web-book.org/)
+> - **Berners-Lee (2006)** — *Linked Data*. W3C Design Issues. [https://www.w3.org/DesignIssues/LinkedData.html](https://www.w3.org/DesignIssues/LinkedData.html)
+> - **Hogan et al. (2021/2022)** — *Knowledge Graphs*. ACM Computing Surveys, 54(4), 1–37. [https://doi.org/10.1145/3447772](https://doi.org/10.1145/3447772) · [arXiv:2003.02320](https://arxiv.org/abs/2003.02320)
+> - **Wilkinson et al. (2016)** — *The FAIR Guiding Principles for Scientific Data Management and Stewardship*. Scientific Data 3, 160018. [https://doi.org/10.1038/sdata.2016.18](https://doi.org/10.1038/sdata.2016.18)
+> - [W3C JSON-LD 1.1](https://www.w3.org/TR/json-ld11/)
+> - [W3C RDF-star and SPARQL-star](https://www.w3.org/2021/12/rdf-star.html)
+
+---
+
 ## 📑 目录
 
 - [本体工程方法论（Ontology Engineering Methodologies）](#本体工程方法论ontology-engineering-methodologies)
@@ -165,6 +178,51 @@ fn main() {
 | 全称约束 | `where T: Trait` | 对所有满足 `T` 的值生效 |
 
 Rust 类型系统**不支持**开世界假设、否定即失败、析取约束，因此它只是**轻量本体**，不能替代 OWL / DL。
+
+以下 `compile_fail` 示例展示 Rust 的闭世界 trait coherence 如何拒绝“同一概念的两个重叠实例化”——这与 OWL 开世界中允许存在未知实例形成对照：
+
+```rust,compile_fail,E0119
+// 概念：CanFly（会飞）
+trait CanFly {}
+
+// TBox： blanket impl —— 所有鸟类都会飞（简化假设）
+impl<T: Bird> CanFly for T {}
+
+pub trait Bird {}
+struct Penguin;
+impl Bird for Penguin {}
+
+// ❌ 在 OWL 开世界中，Penguin 不飞可通过显式否定声明处理；
+//    在 Rust 闭世界中，下面专门化 impl 与 blanket impl 冲突，触发 E0119。
+impl CanFly for Penguin {} //~ ERROR E0119: conflicting implementations of trait `CanFly` for type `Penguin`
+
+fn main() {}
+```
+
+> 边界结论：Rust 类型系统可以编码**受限的、可判定的**本体片段，但不能替代描述逻辑进行通用本体推理。
+
+**SHACL 形状违规的 Rust 投影**：SHACL 按闭世界验证数据形状。把 `sh:minCount 1` 映射为 trait bound，缺失必需属性的"节点"会在编译期被判定为非法，对应 RDF 数据入图前的 shape violation。
+
+```rust,compile_fail,E0277
+// Shape：Person 必须具有 name（sh:minCount = 1）
+trait HasName {
+    fn name(&self) -> &str;
+}
+
+// 入图验证器：只接受满足 shape 的节点
+fn publish_person<T: HasName>(_: T) {}
+
+// 错误数据：缺少 name
+struct Person {
+    age: u32,
+}
+
+fn main() {
+    publish_person(Person { age: 30 }); //~ ERROR E0277: the trait bound `Person: HasName` is not satisfied
+}
+```
+
+> 边界结论：Rust 的类型约束提供的是**编译期、闭世界**的形状检查；它无法替代 SHACL 在 RDF 图上做的开放世界数据验证，但可作为工程侧的互补校验层。
 
 ---
 

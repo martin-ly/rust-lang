@@ -194,6 +194,24 @@ const B: u8 = A[2];
 fn main() { println!("{B}"); }
 ```
 
+---
+
+### 反例：const 上下文中的算术溢出
+
+```rust,compile_fail,E0080
+// rustc 1.97.0 实测：error[E0080]: attempt to compute `255_u8 + 1_u8`, which would overflow
+const OVERFLOW: u8 = 255 + 1;
+fn main() { println!("{}", OVERFLOW); }
+```
+
+**修正对照**：扩大类型或使用显式环绕运算。
+
+```rust
+const OK: u16 = 255 + 1;                       // 类型容纳结果
+const WRAP: u8 = 255u8.wrapping_add(1);        // 显式声明环绕语义
+fn main() { println!("{} {}", OK, WRAP); }
+```
+
 **陷阱要点**：常量求值是操作语义的受限执行——越界、溢出、panic 在 const 上下文一律编译期报错（E0080），而非推迟到运行时（Runtime）；这也说明 const 上下文是「可完全求值」的纯子集。
 
 ---

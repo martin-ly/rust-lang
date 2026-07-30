@@ -14,6 +14,17 @@
 
 ---
 
+> **来源**: [The Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html) ·
+> [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
+> [RustBelt](https://plv.mpi-sws.org/rustbelt/) ·
+> [Miri](https://github.com/rust-lang/miri) ·
+> [Kani](https://model-checking.github.io/kani/) ·
+> [Astrauskas et al. 2019 — Prusti](https://doi.org/10.1145/3360573) ·
+> [Denis 2021 — The Creusot Environment](https://hal-lara.archives-ouvertes.fr/hal-03526634/) ·
+> [Müller et al. — Viper](https://doi.org/10.3233/978-1-61499-810-5-104)
+
+---
+
 ## 📑 目录
 
 - [不安全算法的语义不变量（Semantic Invariants of Unsafe Algorithms）](#不安全算法的语义不变量semantic-invariants-of-unsafe-algorithms)
@@ -301,6 +312,73 @@ impl<T> Buffer<T> {
 
 安全 API 返回时，`self.inner` 必须满足 `Vec<T>` 的所有不变量：每个在 `len` 范围内的元素都已初始化。
 
+### 3.5 编译期捕捉：未对齐指针读取
+
+`std::ptr::read` 要求指针对齐到 `align_of::<T>()`。下面用 `const` 断言形式化该对齐要求：从地址 `1` 读取 `u32` 违反了 4 字节对齐约束，对应现实中 `&[u8]` 强转为 `*const u32` 后直接使用 `ptr.read()` 的错误。
+
+```rust,compile_fail
+// 读取 T 要求指针按 align_of::<T>() 对齐
+const fn require_aligned(addr: usize, align: usize) {
+    assert!(addr % align == 0, "unaligned pointer read");
+}
+
+// 错误：地址 1 不是 u32（对齐 4）的合法起始地址
+const _: () = require_aligned(1, 4);
+
+fn main() {}
+```
+
+> **修正**: 对可能未对齐的内存使用 `std::ptr::read_unaligned()`，或先复制到对齐的局部变量。直接用 `ptr.read()` 读取未对齐地址是 UB。
+> (Source: [The Rustonomicon — What is Undefined Behavior?](https://doc.rust-lang.org/nomicon/what-unsafe-does.html))
+
+---
+
+### 3.6 编译期捕捉：重叠缓冲区使用 `copy_nonoverlapping`
+
+`std::ptr::copy_nonoverlapping` 要求源与目标内存区域互不重叠。下面用 `const` 断言形式化该非重叠条件：同一块缓冲区中 `src=0, dst=1, len=3` 的区域发生重叠，对应现实中 `copy_nonoverlapping(ptr, ptr.add(1), buf.len() - 1)` 的错误用法。
+
+```rust,compile_fail
+// copy_nonoverlapping 要求 [src, src+len) 与 [dst, dst+len) 不重叠
+const fn require_non_overlapping(src_start: usize, dst_start: usize, len: usize) {
+    assert!(
+        dst_start >= src_start + len || src_start >= dst_start + len,
+        "copy_nonoverlapping requires non-overlapping regions"
+    );
+}
+
+// 错误：src=0, dst=1, len=3 在同一块缓冲区中重叠
+const _: () = require_non_overlapping(0, 1, 3);
+
+fn main() {}
+```
+
+> **修正**: 重叠内存复制必须使用 `std::ptr::copy`，它会按正确方向逐元素处理；`copy_nonoverlapping` 在重叠时产生 UB。
+> (Source: [std::ptr::copy_nonoverlapping](https://doc.rust-lang.org/std/ptr/fn.copy_nonoverlapping.html))
+
+---
+
+### 3.7 编译期捕捉：先 `set_len` 再初始化元素
+
+`Vec::set_len` 的前置条件是"新长度范围内的元素已经初始化"。下面用 `const` 断言形式化该循环不变量：已初始化元素数为 `0` 时却将长度设为 `4`，会把未初始化内存暴露为合法元素，导致 Drop 时释放垃圾指针。
+
+```rust,compile_fail
+// 循环不变量：set_len(new_len) 要求 [0, new_len) 已初始化
+const fn set_len_requires_init(init_count: usize, new_len: usize) {
+    assert!(
+        init_count >= new_len,
+        "set_len before initialization: uninitialized slots would be exposed"
+    );
+}
+
+// 错误：已初始化 0 个元素，却设置 len 为 4
+const _: () = set_len_requires_init(0, 4);
+
+fn main() {}
+```
+
+> **修正**: 正确顺序是先通过 `ptr.add(i).write(...)` 写入全部元素，再统一调用 `v.set_len(n)`。`set_len` 的调用点是"初始化已完成"的见证，不可前置。
+> (Source: [The Rustonomicon — Vec](https://doc.rust-lang.org/nomicon/vec.html))
+
 ---
 
 ## 四、验证工具
@@ -313,7 +391,7 @@ impl<T> Buffer<T> {
 | **Creusot** | Why3 / MLCFG | 对 Rust 子集进行精化/契约式验证 |
 | **Aeneas** | 函数式翻译 + Coq/Lean | 手工形式化证明，适合关键算法 |
 
-> **建议工作流**: 先用 Miri 在测试集上跑通，再用 Kani 对边界输入做有界验证，最后对核心路径补充 Prusti/Creusot 契约。这样能在工程成本与验证强度之间取得平衡。
+> **建议工作流**: 先用 Miri 在测试集上跑通，再用 Kani 对边界输入做有界验证，最后对核心路径补充 Prusti/Creusot 契约。Prusti 将 Rust 类型系统与 Viper 的权限模型结合，用于模块化规约与验证（Astrauskas et al., 2019）；Creusot 基于 Why3 / Coma 中间语言，将 Pearlite 规格翻译为最弱前置条件（Denis, 2021）；Viper 则是支撑 Prusti 等工具的中间验证语言和权限推理基础设施（Müller et al.）。这样能在工程成本与验证强度之间取得平衡。
 
 ---
 
@@ -437,9 +515,24 @@ for i in 0..n {
 > [Miri](https://github.com/rust-lang/miri) ·
 > [Kani](https://model-checking.github.io/kani/)
 >
-> **文档版本**: 1.0
-> **最后更新**: 2026-07-28
+> **文档版本**: 1.1
+> **最后更新**: 2026-07-30
 > **状态**: ✅ 新建权威页
+
+---
+
+## 权威来源索引
+
+| 来源 | 可信度 | 说明 |
+|:---|:---:|:---|
+| [The Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html) | ✅ 一级 | `unsafe` 块与契约权威定义 |
+| [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) | ✅ 一级 | Rust 不安全编程与 UB 边界 |
+| [RustBelt](https://plv.mpi-sws.org/rustbelt/) | ✅ 一级 | Rust 类型系统的 Iris 高阶分离逻辑证明 |
+| [Miri](https://github.com/rust-lang/miri) | ✅ 一级 | 动态检测 UB 的解释器 |
+| [Kani](https://model-checking.github.io/kani/) | ✅ 一级 | Rust 有界模型检测器 |
+| [Astrauskas et al. 2019 — Leveraging Rust Types for Modular Specification and Verification](https://doi.org/10.1145/3360573) | ✅ 一级 | Prusti 在 Rust 上的模块化验证方法 |
+| [Denis 2021 — The Creusot Environment for the Deductive Verification of Rust Programs](https://hal-lara.archives-ouvertes.fr/hal-03526634/) | ✅ 一级 | Creusot 演绎验证环境技术报告 |
+| [Müller et al. — Viper: A Verification Infrastructure for Permission-Based Reasoning](https://doi.org/10.3233/978-1-61499-810-5-104) | ✅ 一级 | Prusti 等工具依赖的权限推理中间语言 |
 
 ---
 

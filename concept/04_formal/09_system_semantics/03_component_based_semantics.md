@@ -50,6 +50,7 @@
     - [5.4 module 即架构单元](#54-module-即架构单元)
   - [六、反例与边界](#六反例与边界)
     - [反例：两个无死锁组件的组合可以死锁](#反例两个无死锁组件的组合可以死锁)
+    - [compile\_fail：跨层 trait 顺序错误](#compile_fail跨层-trait-顺序错误)
     - [边界：接口契约无法捕获所有涌现性质](#边界接口契约无法捕获所有涌现性质)
     - [边界：BIP 优先级消除非确定性的代价](#边界bip-优先级消除非确定性的代价)
   - [七、定理链与相关概念](#七定理链与相关概念)
@@ -342,6 +343,7 @@ pub mod climate_system {
 
 ```rust,ignore
 // ❌ 反例：两个（局部）无死锁的哲学家组件组合后形成全局死锁
+// 本示例使用 std::thread 演示运行时死锁；标记为 ignore 以避免在测试运行中挂起。
 use std::sync::{Arc, Mutex};
 
 struct Fork {
@@ -386,6 +388,34 @@ fn main() {
 - 死锁是**涌现性质**：它只出现在哲学家与叉子的全局配置中，由连接器（左右手叉子共享）的循环依赖引起。
 
 修正策略：破坏循环等待条件——例如所有哲学家按统一顺序拿叉，或引入仲裁组件（waiter）把多组件交互约束显式化。
+
+### compile_fail：跨层 trait 顺序错误
+
+组件分层架构要求依赖关系**自顶向下**：高层组件可以依赖低层组件的接口，但低层组件不应反向依赖高层组件。Rust 的 trait bound 能在编译期捕获这种**逆向依赖**。
+
+```rust,compile_fail,E0277
+// ❌ 跨层 trait 顺序错误：低层 Sensor 组件不应依赖高层 Controller 组件。
+// 逆向依赖意味着 Sensor 无法被单独实现，破坏了组件的可组合性。
+
+trait Controller {
+    fn decide(&self) -> i32;
+}
+
+// 错误：Sensor 位于低层，却要求实现者同时实现高层的 Controller。
+trait Sensor: Controller {
+    fn read(&self) -> f64;
+}
+
+struct Thermistor;
+
+impl Sensor for Thermistor {
+    fn read(&self) -> f64 { 25.0 }
+}
+```
+
+编译器输出 `E0277`，指出 `Thermistor` 未实现 `Controller`。这个错误对应组件语义中的**跨层依赖违规**：若允许低层依赖高层，则任何复用低层组件的场景都必须把上层控制逻辑一起拖入，导致配置无法独立组合。
+
+**修正**：将依赖方向反转，让 `Controller` 依赖 `Sensor`，或引入中间接口消除循环。
 
 ### 边界：接口契约无法捕获所有涌现性质
 

@@ -42,9 +42,10 @@
     - [反例："Actor 与 π 演算表达能力相同"](#反例actor-与-π-演算表达能力相同)
     - [反例："只要加锁，共享内存就能模拟任意消息传递"](#反例只要加锁共享内存就能模拟任意消息传递)
     - [边界：公平性与故障模型不可编码保持](#边界公平性与故障模型不可编码保持)
+    - [反例：Rust 类型系统对跨模型表达的编译期拦截](#反例rust-类型系统对跨模型表达的编译期拦截)
   - [四、定理链与相关概念](#四定理链与相关概念)
   - [五、认知路径](#五认知路径)
-  - [权威来源索引](#权威来源索引)
+  - [International Authority References（国际权威来源）](#international-authority-references国际权威来源)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：编码与表达能力](#测验-1编码与表达能力)
     - [测验 2：强互模拟与弱互模拟](#测验-2强互模拟与弱互模拟)
@@ -59,7 +60,7 @@
 
 ### 1.1 表达能力的三把尺子
 
-比较两个并发模型 "A 比 B 更具表达力" 之前，必须先固定**比较标准**。形式语义中常用三把尺子：
+比较两个并发模型 "A 比 B 更具表达力" 之前，必须先固定**比较标准**。形式语义中常用三把尺子（共享内存并发模型的工程语义与线性化理论由 Herlihy & Shavit, 2011 系统总结；进程代数中函数式计算与并发进程的对应关系则由 Milner, 1992 的 *Functions as Processes* 奠定）：
 
 ```text
 1. 编码能力（Encodability）
@@ -102,6 +103,8 @@ CSP 通道 c          ⟼  一个"通道 actor" C，持有消息队列
 ```
 
 这里的问题在于 CSP 的**会合（rendezvous）**要求发送与接收同步发生；Actor 模型是**异步邮箱**，消息发送后立即返回。要用 Actor 模拟一次 CSP 会合，必须引入 request-response（两次异步消息）加锁确认，这会改变故障语义：如果接收 actor 在确认前崩溃，发送方对"消息是否已被接收"的观测与 CSP 不同。
+
+> **类型化协议的额外约束**：上述编码只保证语法可译；若引入 session types（Honda 1993; Gay & Hole 2005; Wadler 2012），通道两端的类型必须互为对偶，某些看似可行的编码会因破坏线性使用或对偶性而被类型系统拒绝。这相当于在表达能力比较中再增加一条「类型安全保持」的尺子。
 
 ---
 
@@ -171,6 +174,8 @@ Felleisen（1991）提出：**比较两种语言/原语的表达力，要看"新
 ```
 
 "局部"是关键：翻译只替换一个子表达式，不改变程序其余部分的控制结构。这正好对应工程问题——`tokio::select!` 是不是一个**纯宏**就能实现？如果不是，它就在 Felleisen 意义上增加了表达力。
+
+> **Algebraic effects 作为表达力的另一条轴**：Plotkin & Pretnar (2009) 把效应操作的签名与解释器分离；Dolan et al. (2017) 进一步用 effect handlers 统一实现 async/await、异常、状态等语义。在 Felleisen 框架下，algebraic effects 通常比固定语义的 `async/await` 更具表达力，因为前者允许通过不同 handler 局部重解释同一套效应操作。
 
 ---
 
@@ -271,6 +276,80 @@ fn main() {
 
 > **边界总结**: 模型间编码保持的是**语法结构**和**某种弱行为等价**；公平性、分布、故障、消息顺序等"系统级语义"几乎必然需要在目标模型中重新建模。
 
+### 反例：Rust 类型系统对跨模型表达的编译期拦截
+
+Rust 的所有权、生命周期与 trait 系统会在编译期拒绝某些在形式模型中"语法可行"的程序。下列 `compile_fail` 示例说明表达力比较不能只看抽象语法，还要看类型系统是否允许相应实现落地。
+
+**`Send`/`Sync` 边界违反（E0277）**：`Rc<T>` 不是 `Send`，不能跨线程移动；形式模型中"复制引用"在 Rust 中不可表达。
+
+```rust,compile_fail,E0277
+use std::rc::Rc;
+use std::thread;
+
+fn main() {
+    let data = Rc::new(42);
+    thread::spawn(move || {
+        println!("{}", *data);
+    });
+}
+```
+
+**`async` 块捕获局部引用逃逸作用域（E0373）**：返回的 `Future` 不能持有对局部变量的引用。
+
+```rust,compile_fail,E0373
+fn make_future() -> impl std::future::Future<Output = ()> {
+    let s = String::from("captured");
+    async {
+        println!("{}", s);
+    }
+}
+
+fn main() {}
+```
+
+**π 演算通道移动性触发生命周期错误（E0597）**：把局部名字的引用作为消息传递，接收端在发送端作用域结束后仍使用该引用。
+
+```rust,compile_fail,E0597
+use std::sync::mpsc;
+
+fn main() {
+    let (tx, rx) = mpsc::channel::<&str>();
+    let received: &str;
+    {
+        let local = String::from("mobility");
+        tx.send(&local).unwrap();
+        received = rx.recv().unwrap();
+    }
+    println!("{}", received);
+}
+```
+
+**数据竞争被借用检查器拦截（E0499）**：同一作用域内不能同时存在两个可变借用。
+
+```rust,compile_fail,E0499
+fn main() {
+    let mut data = 0;
+    let r1 = &mut data;
+    let r2 = &mut data;
+
+    std::thread::scope(|s| {
+        s.spawn(|| { *r1 += 1; });
+        s.spawn(|| { *r2 += 1; });
+    });
+}
+```
+
+**通道类型协议错配（E0308）**：`Sender<i32>` 不接受 `String`，对应 session types 中的对偶类型不匹配。
+
+```rust,compile_fail,E0308
+use std::sync::mpsc;
+
+fn main() {
+    let (tx, _rx) = mpsc::channel::<i32>();
+    tx.send("hello".to_string()).unwrap();
+}
+```
+
 ---
 
 ## 四、定理链与相关概念
@@ -304,14 +383,23 @@ fn main() {
 
 ---
 
-## 权威来源索引
+## International Authority References（国际权威来源）
 
 - Felleisen, M. *On the Expressive Power of Programming Languages*. ESOP 1990 / LNCS 432, 1990, 351–375. [DOI](https://doi.org/10.1007/3-540-52592-0_60)（期刊版本：Science of Computer Programming 17(1–3), 1991, 35–75）
 - Sangiorgi, D., Walker, D. *The π-Calculus: A Theory of Mobile Processes*. Cambridge University Press, 2001. [DOI](https://doi.org/10.1017/CBO9780511777683)
 - van Glabbeek, R. J. *The Linear Time – Branching Time Spectrum*. CONCUR 1990 / LNCS 458, 1990, 278–297. [DOI](https://doi.org/10.1007/BFb0030039)
 - Milner, R. *Communication and Concurrency*. Prentice Hall, 1989. [DOI](https://doi.org/10.5555/28251)
+- Milner, R., Parrow, J., Walker, D. *A Calculus of Mobile Processes*. Information and Computation 100(1), 1992. [DOI](https://doi.org/10.1016/0890-5401(92)90008-4)
+- Milner, R. *Communicating and Mobile Systems: the π-Calculus*. Cambridge University Press, 1999.
+- Hoare, C. A. R. *Communicating Sequential Processes*. Communications of the ACM 21(8), 1978, 666–677. [DOI](https://doi.org/10.1145/359576.359585)
 - Hoare, C. A. R. *Communicating Sequential Processes*. Prentice Hall, 1985.
 - Hewitt, C. *Actor Model of Computation: Scalable Robust Information Systems*. arXiv:1008.1459, 2010. [arXiv](https://arxiv.org/abs/1008.1459)
+- Honda, K. "Types for Dyadic Interaction." *CONCUR 1993*, LNCS 715, 1993, 509–523. [DOI](https://doi.org/10.1007/3-540-57208-2_35)
+- Gay, S. J., Hole, M. "Subtyping for Session Types in the Pi Calculus." *Acta Informatica* 42(2–3), 2005, 191–225. [DOI](https://doi.org/10.1007/s00236-005-0177-z)
+- Wadler, P. "Propositions as Sessions." *ICFP 2012*, 2012, 273–286. [DOI](https://doi.org/10.1145/2364527.2364568)
+- Plotkin, G. D., Pretnar, M. "Handlers of Algebraic Effects." *ESOP 2009*, LNCS 5502, 2009, 80–94. [DOI](https://doi.org/10.1007/978-3-642-00590-9_7)
+- Dolan, S., Eliopoulos, S., Hillerström, D., Madhavapeddy, A., Sivaramakrishnan, K. C., White, L. "Concurrent System Programming with Effect Handlers." *TFP 2017*, LNCS 10788, 2017, 98–117. [DOI](https://doi.org/10.1007/978-3-319-89719-6_6)
+- Herlihy, M., Shavit, N. *The Art of Multiprocessor Programming*. Morgan Kaufmann, 2011. [ScienceDirect](https://www.sciencedirect.com/book/9780123973375/the-art-of-multiprocessor-programming)
 - [std::sync::mpsc — Rust 标准库文档](https://doc.rust-lang.org/std/sync/mpsc/) —— Rust 通道语义与故障契约的官方来源
 - [Rust Reference — async blocks and closures](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks) —— `async/await` 状态机转换的语言级说明
 - [tokio::select! tutorial](https://tokio.rs/tokio/tutorial/select) —— `select!` 的工程用法（非官方 Rust，但为 tokio 生态权威文档）

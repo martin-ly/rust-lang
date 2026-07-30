@@ -82,7 +82,8 @@
 
 1. **Hoare 1969 原始公理化**：赋值公理、顺序/条件/循环推理规则、推论规则（Rule of Consequence）——「循环不变式」是推理的核心发明；
 2. **Floyd 1967 断言方法**：在流程图边上标注断言，验证条件是「每条路径的断言传递性」——Hoare 逻辑的前身；
-3. **Dijkstra 最弱前置条件（wp）**：`wp(C, Q)` 给出保证 Q 的最弱 P——把「验证」转为「计算」，是后续验证器（Dafny/Frama-C 风格）的理论基础。
+3. **Dijkstra 最弱前置条件（wp）**：`wp(C, Q)` 给出保证 Q 的最弱 P——把「验证」转为「计算」，是后续验证器（Dafny/Frama-C 风格）的理论基础；
+4. **O'Hearn, Reynolds & Yang 2001 分离逻辑**：将 Hoare 逻辑扩展到带指针/别名的堆程序，提出分离合取 `*` 与 frame rule，使 Rust 所有权形式化成为可能。
 
 与操作语义的分工：操作语义说「程序怎么跑」，公理语义说「程序满足什么性质」——Rust 验证工具（Kani/Prusti）在两者间建立对应。
 
@@ -103,7 +104,7 @@ Hoare 逻辑的核心公理包括：
 | **条件规则** | \(\frac{\{P \land B\}C_1\{Q\},\ \{P \land \neg B\}C_2\{Q\}}{\{P\}\text{if }B\text{ then }C_1\text{ else }C_2\{Q\}}\) | `if` / `match` 表达式 |
 | **循环规则** | \(\frac{\{I \land B\}C\{I\}}{\{I\}\text{while }B\text{ do }C\{I \land \neg B\}}\) | `while` / `loop`（需循环不变式） |
 
-> **关键洞察**: Hoare 逻辑的**赋值公理**假设变量是无别名的（aliasing-free）。在 Rust 中，这一假设由**所有权（Ownership）系统**在编译期保证——`&mut T` 的独占性确保了赋值操作的公理化不会受到别名干扰。这与 C/C++ 形成鲜明对比：C 中任意指针可能别名同一内存，导致赋值公理失效，需要更复杂的分离逻辑来恢复。来源: [Hoare 1969] · 来源: [Separation Logic — Reynolds 2002]
+> **关键洞察**: Hoare 逻辑的**赋值公理**假设变量是无别名的（aliasing-free）。在 Rust 中，这一假设由**所有权（Ownership）系统**在编译期保证——`&mut T` 的独占性确保了赋值操作的公理化不会受到别名干扰。这与 C/C++ 形成鲜明对比：C 中任意指针可能别名同一内存，导致赋值公理失效，需要更复杂的分离逻辑来恢复。来源: [Hoare 1969] · [O'Hearn, Reynolds & Yang 2001 — Local Reasoning about Programs that Alter Data Structures](https://doi.org/10.1007/3-540-44802-0_1) · 来源: [Separation Logic — Reynolds 2002]
 
 ### 1.2 最弱前置条件（Weakest Precondition）
 >
@@ -258,7 +259,7 @@ let s2 = s1;                      // { moved(Σ, s1) ∧ no_borrows_active(s2) }
 // println!("{}", s1);           // ❌ 编译错误: s1 已失效
 ```
 
-> **形式化洞察**: Rust 的赋值公理比标准 Hoare 逻辑更复杂，因为它不仅是**状态更新**（`Q[x/e]`），还是**资源转移**——`s1` 的所有权被"消耗"并转移到 `s2`。这与分离逻辑中的**框架规则**（Frame Rule）天然契合：赋值操作只影响局部资源，不变的部分自动保持。(Source: [Separation Logic — Reynolds 2002](https://www.cs.cmu.edu/~jcr/seplogic.pdf)) · (Source: [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/))
+> **形式化洞察**: Rust 的赋值公理比标准 Hoare 逻辑更复杂，因为它不仅是**状态更新**（`Q[x/e]`），还是**资源转移**——`s1` 的所有权被"消耗"并转移到 `s2`。这与分离逻辑中的**框架规则**（Frame Rule）天然契合：赋值操作只影响局部资源，不变的部分自动保持。(Source: [O'Hearn, Reynolds & Yang 2001](https://doi.org/10.1007/3-540-44802-0_1) · [Separation Logic — Reynolds 2002](https://www.cs.cmu.edu/~jcr/seplogic.pdf)) · (Source: [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/))
 
 ### 3.2 所有权转移的 wp 计算
 >
@@ -611,24 +612,18 @@ fn bad_loop(n: u32) -> u32 {
 
 ### 10.2 边界测试：借用不变式违反的验证失败（验证错误）
 
-```rust,ignore
-use prusti_contracts::*;
-
-#[requires(x > 0)]
-#[ensures(result > 0)]
+```rust,compile_fail,E0506
+// 共享借用活跃时修改被借用数据，违反借用不变式。
 fn borrow_violation(x: &mut i32) -> i32 {
     let r = &*x;        // 共享借用 &i32
-    *x = *x + 1;        // ❌ 编译错误: 违反借用不变式1
-                        //   (共享借用 r 活跃时修改 x)
+    *x = *x + 1;        // ❌ E0506: 共享借用 r 活跃时修改 *x
     *r
 }
 
-// Prusti 在此会提前失败——不是验证失败，而是编译失败。
-// 这说明 Rust 编译器的借用检查本身就是公理验证的第一道防线。
-// Prusti 只需验证编译通过后的代码的功能性正确性。
+fn main() {}
 ```
 
-> **修正**: Rust 编译器的借用检查器可以被视为一个**全自动的、零成本的公理验证器**。它自动推断并验证了借用规则的不变式（3.3 节），无需程序员手动书写 `{P} C {Q}`。这是 Hoare 逻辑从学术走向工业的最成功实践——将公理规约"编译"进类型系统（Type System）。(Source: [Rust Reference — Borrowing](https://doc.rust-lang.org/reference/expressions.html?highlight=borrow#evaluation-order)) · (Source: [RustBelt Paper](https://doi.org/10.1145/3158154))
+> **修正**: Rust 编译器的借用检查器可以被视为一个**全自动的、零成本的公理验证器**。它自动推断并验证了借用规则的不变式（3.3 节），无需程序员手动书写 `{P} C {Q}`。上述代码在 safe Rust 中直接触发 **E0506**（cannot assign to `*x` because it is borrowed），Prusti/Creusot 等工具根本不会进入验证阶段——借用检查是公理验证的第一道防线。这是 Hoare 逻辑从学术走向工业的最成功实践——将公理规约"编译"进类型系统（Type System）。(Source: [Rust Reference — Borrowing](https://doc.rust-lang.org/reference/expressions.html?highlight=borrow#evaluation-order)) · (Source: [RustBelt — Jung et al. 2018](https://doi.org/10.1145/3158154))
 
 ### 10.3 边界测试：unsafe 块的公理逃逸（运行时 UB）
 
@@ -669,7 +664,7 @@ fn undefined_behavior() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-「嵌入式测验（Embedded Quiz）」涉及测验 1：Hoare 三元组 `{P} C {Q}` 中，P、C、Q…、测验 2：什么是"最弱前置条件"（Weakest Preconditi…、测验 3：Rust 的 `unsafe` 块为什么特别需要形式化验证？…、测验 4：分离逻辑（Separation Logic）的"框架规则"（…等5个方面，本节逐一说明其要点。
+「嵌入式测验（Embedded Quiz）」涉及测验 1：Hoare 三元组 `{P} C {Q}` 中 P、C、Q 的含义、测验 2：最弱前置条件（Weakest Precondition, wp）的定义与作用、测验 3：Rust 的 `unsafe` 块为什么特别需要形式化验证、测验 4：分离逻辑（Separation Logic）的"框架规则"（Frame Rule）对 Rust 所有权建模的重要性、测验 5：Creusot 和 Prusti 在验证 Rust 程序时分别依赖什么后端等 5 个方面，本节逐一说明其要点。
 
 ### 测验 1：Hoare 三元组 `{P} C {Q}` 中，P、C、Q 分别代表什么？（理解层）
 
@@ -1007,7 +1002,7 @@ fn factorial(n: Int) -> Int {
 
 ---
 
-> **权威来源**: [Verus](https://github.com/verus-lang/verus) · [Kani](https://model-checking.github.io/kani/) · [Winskel 1993 — The Formal Semantics of Programming Languages](https://mitpress.mit.edu/9780262731034) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Hoare 1969 — An Axiomatic Basis for Computer Programming](https://doi.org/10.1145/363235.363259) · [Dijkstra 1975 — Guarded Commands, Nondeterminacy and Formal Derivation of Programs](https://doi.org/10.1145/360933.360975)
+> **权威来源**: [Verus](https://github.com/verus-lang/verus) · [Kani](https://model-checking.github.io/kani/) · [Winskel 1993 — The Formal Semantics of Programming Languages](https://mitpress.mit.edu/9780262731034) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt — Jung et al. 2018](https://doi.org/10.1145/3158154) · [Hoare 1969 — An Axiomatic Basis for Computer Programming](https://doi.org/10.1145/363235.363259) · [Dijkstra 1975 — Guarded Commands, Nondeterminacy and Formal Derivation of Programs](https://doi.org/10.1145/360933.360975) · [O'Hearn, Reynolds & Yang 2001 — Local Reasoning about Programs that Alter Data Structures](https://doi.org/10.1007/3-540-44802-0_1)
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.0

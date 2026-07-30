@@ -285,6 +285,18 @@ fn main() {
 }
 ```
 
+CFG 与递归数据类型都允许自我指涉，但 Rust 要求递归类型必须经 `Box`、`Rc` 等间接层打破无限展开，否则会报 `E0072`（recursive type has infinite size）：
+
+```rust,compile_fail,E0072
+struct Node {
+    next: Node, // ERROR E0072: 直接递归导致类型大小无限
+}
+
+fn main() {}
+```
+
+这与下推自动机形成对照：PDA 用栈处理任意深度的嵌套，而 Rust 类型系统用显式堆间接保证每个值都有有限大小。
+
 **LL/LR 解析**是编译器构造 CFG 解析器的两类经典算法：
 
 - **LL(k)**：自顶向下、向前看 k 个符号。Rust 的 `macro_rules!` 部分匹配采用类似 LL 的预测策略。
@@ -759,7 +771,7 @@ fn main() {
 
 #### 1.13.1 自动机、λ 演算与 Church-Turing 论题
 
-无类型 λ 演算与图灵机在计算能力上等价，而 λ 项的合法语法本身也可以视为一种形式语言。Barendregt 把 λ 演算的语法、归约理论与可计算函数统一起来：λ 项的集合由上下文无关文法定义，但其归约行为（β-归约）则进入半可判定领域。
+无类型 λ 演算与图灵机在计算能力上等价，而 λ 项的合法语法本身也可以视为一种形式语言。Barendregt 把 λ 演算的语法、归约理论与可计算函数统一起来：λ 项的集合由上下文无关文法定义，但其归约行为（β-归约）则进入半可判定领域（Barendregt, 1984, §2.1, §3.2; Church, 1936; Turing, 1936）。
 
 ```text
 λ 项的文法（CFG）:
@@ -771,7 +783,7 @@ fn main() {
 
 Rust 的闭包与 λ 抽象有直观对应，但 Rust 的类型系统、所有权和求值策略使其行为与无类型 λ 演算不同。详见 [Lambda Calculus](../00_type_theory/05_lambda_calculus.md)。
 
-> **来源**: [Barendregt 1984 — The Lambda Calculus: Its Syntax andSemantics, §2.1, §3.2](https://doi.org/10.1016/B978-0-444-87508-2.50006-X) · [Church 1936 — An Unsolvable Problem of Elementary Number Theory](https://doi.org/10.2307/1968981)
+> **来源**: [Barendregt 1984 — The Lambda Calculus: Its Syntax and Semantics, §2.1, §3.2](https://doi.org/10.1016/B978-0-444-87508-2.50006-X) · [Church 1936 — An Unsolvable Problem of Elementary Number Theory](https://doi.org/10.2307/1968981) · [Turing 1936 — On Computable Numbers](https://doi.org/10.1112/plms/s2-42.1.230) · [Sipser 2013 — Introduction to the Theory of Computation](https://math.mit.edu/~sipser/book.html) · [Soare 2016 — Turing Computability](https://doi.org/10.1007/978-3-642-31933-4) · [Cutland 1980 — Computability](https://doi.org/10.1017/CBO9780511574916)
 
 #### 1.13.2 类型系统作为形式语言：Pierce 的视角
 
@@ -940,23 +952,35 @@ fn main() {}
 
 ---
 
-## 四、国际权威来源与延伸阅读
+## 四、权威来源 / International Authority References
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Hopcroft, Motwani & Ullman — Introduction to Automata Theory, Languages, and Computation, 3rd ed. (2006)](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation) | ✅ 一级 | 自动机理论经典教材；DFA/NFA §2，泵引理 §4.1/§7.2，Myhill-Nerode §4.4，PCP §9.4 |
-| [Sipser — Introduction to the Theory of Computation, 3rd ed. (2012)](https://math.mit.edu/~sipser/book.html) | ✅ 一级 | 可计算性与复杂度理论；正则泵引理 §1.4，CFG 泵引理 §2.3，Myhill-Nerode §1.4，可判定性 §4，Rice §5.1，PCP §5.2 |
+| [Turing 1936 — On computable numbers, with an application to the Entscheidungsproblem](https://doi.org/10.1112/plms/s2-42.1.230) | ✅ 一级 | 图灵机奠基；停机问题原始证明 |
+| [Church 1936 — An Unsolvable Problem of Elementary Number Theory](https://doi.org/10.2307/1968981) | ✅ 一级 | λ 可定义函数；Church-Turing 论题 |
+| [Rice 1953 — Classes of Recursively Enumerable Sets and Their Decision Problems](https://doi.org/10.1090/S0002-9904-1953-09692-2) | ✅ 一级 | 语义性质不可判定性（Rice 定理） |
+| [Hopcroft, Motwani & Ullman 2006 — Introduction to Automata Theory, Languages, and Computation, 3rd ed.](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation) | ✅ 一级 | 自动机理论经典教材；DFA/NFA §2，泵引理 §4.1/§7.2，Myhill-Nerode §4.4，PCP §9.4 |
+| [Sipser 2013 — Introduction to the Theory of Computation, 3rd ed.](https://math.mit.edu/~sipser/book.html) | ✅ 一级 | 可计算性与复杂度理论；正则泵引理 §1.4，CFG 泵引理 §2.3，Myhill-Nerode §1.4，可判定性 §4，Rice §5.1，PCP §5.2 |
+| [Soare 2016 — Turing Computability. Theory and Applications](https://doi.org/10.1007/978-3-642-31933-4) | ✅ 一级 | 现代可计算性理论；算术层级 |
+| [Cutland 1980 — Computability: An Introduction to Recursive Function Theory](https://doi.org/10.1017/CBO9780511574916) | ✅ 一级 | 递归函数与可计算性入门 |
+| [Kozen 1997 — Automata and Computability](https://doi.org/10.1007/978-1-4612-1844-9) | ✅ 一级 | 自动机、可计算性与复杂度理论 |
+| [Appel 2004 — Modern Compiler Implementation in Java/C/ML, 2nd ed.](https://www.cs.princeton.edu/~appel/modern/) | ✅ 一级 | 编译器实现与语义后端（Tiger Book） |
 | [Chomsky 1956 — Three Models for the Description of Language](https://doi.org/10.1109/TIT.1956.1056813) | ✅ 一级 | Chomsky 层级奠基论文 |
 | [Rabin & Scott 1959 — Finite Automata and Their Decision Problems](https://doi.org/10.1515/9781400882618-010) | ✅ 一级 | NFA-DFA 等价与幂集构造 |
 | [Myhill 1957 — Finite Automata and the Representation of Events](https://doi.org/10.1515/9781400882618-008) | ✅ 一级 | Myhill-Nerode 定理前身 |
 | [Nerode 1958 — Linear Automaton Transformations](https://doi.org/10.2307/1993204) | ✅ 一级 | Myhill-Nerode 定理的代数形式 |
-| [Barendregt — The Lambda Calculus: Its Syntax and Semantics, revised ed. (1984)](https://doi.org/10.1016/B978-0-444-87508-2.50006-X) | ✅ 一级 | λ 演算标准参考书；连接形式语言与可计算性 |
+| [Barendregt 1984 — The Lambda Calculus: Its Syntax and Semantics](https://doi.org/10.1016/B978-0-444-87508-2.50006-X) | ✅ 一级 | λ 演算标准参考书；连接形式语言与可计算性 |
+| [Scott 1972 — Continuous Lattices](https://doi.org/10.1007/BFb0073967) | ✅ 一级 | 连续格与 Scott 域奠基 |
 | [Scott 1976 — Data Types as Lattices](https://doi.org/10.1137/0205037) | ✅ 一级 | Scott 域与指称语义；数据类型作为格的奠基 |
-| [Pierce — Types and Programming Languages (2002)](https://www.cis.upenn.edu/~bcpierce/tapl/) | ✅ 一级 | 类型系统作为形式语言；Ch. 9–12, 22 |
+| [Scott & Strachey 1971/2000 — Toward a Mathematical Semantics for Computer Languages](https://www.cs.ox.ac.uk/files/3232/PRG06.pdf) | ✅ 一级 | 指称语义奠基文献（PRG-6） |
+| [Strachey 1973 — The Varieties of Programming Language](https://doi.org/10.1016/S0065-2458(08)60314-4) | ✅ 一级 | 程序语言语义分类 |
+| [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) | ✅ 一级 | 类型系统作为形式语言；Ch. 9–12, 22 |
+| [Wadler 2015 — Propositions as Types](https://doi.org/10.1145/2699407) | ✅ 一级 | Curry-Howard 对应现代综述 |
 | [Felleisen 1991 — On the Expressive Power of Programming Languages](https://www.cs.tufts.edu/~nr/cs257/archive/matthias-felleisen/expressive-as-published.pdf) | ✅ 一级 | 表达力比较框架；局部 vs 全局变换 |
 | [Ahmed 2006 — Step-Indexed Syntactic Logical Relations for Recursive and Quantified Types](https://doi.org/10.1007/11693024_6) | ✅ 一级 | step-indexed logical relations；证明程序等价 |
 | [Pitts 1997 — Operationally-Based Theories of Program Equivalence](https://www.cl.cam.ac.uk/~amp12/papers/index.html) | ✅ 一级 | 基于操作语义的程序等价；CIU 与 logical relations |
 | [Pitts & Stark 1998 — Operational Reasoning for Functions with Local State](https://www.cl.cam.ac.uk/~amp12/papers/operfl/operfl.pdf) | ✅ 一级 | 高阶状态化语言的观察等价推理 |
+| [Ord 2006 — The Many Forms of Hypercomputation](https://doi.org/10.1016/j.apal.2005.09.012) | ✅ 一级 | 超计算与 Church-Turing 边界讨论 |
 | [Rust Reference — Introduction](https://doc.rust-lang.org/reference/introduction.html) | ✅ P0 | Rust 官方参考手册 |
 | [Rust Reference — Macros By Example](https://doc.rust-lang.org/reference/macros-by-example.html) | ✅ P0 | 声明宏官方规格 |
 | [Rust Reference — Expressions](https://doc.rust-lang.org/reference/expressions.html) | ✅ P0 | Rust 表达式语法 |

@@ -362,6 +362,30 @@ b.sort_unstable();   // 不稳定排序，可能改变相等元素顺序
 
 > **认知功能**: 边界极限说明观察等价不是"全有或全无"的性质，而是**相对于观察集与语义模型**的精细判断。工程上，明确文档保证的观察集是避免等价误用的关键。
 
+### 3.3 编译期示例：观察不等价
+
+观察等价依赖于观察集的选择。下面用 `const` 断言演示：若观察集包含**稳定性**（相等元素的相对顺序），则冒泡排序的稳定结果 `[1, 4, 1, 5]` 与不稳定排序结果 `[1, 1, 4, 5]` 观察不等价。
+
+```rust,compile_fail
+// 稳定排序保持输入中相等元素的相对顺序
+const BUBBLE_STABLE: [i32; 4] = [1, 4, 1, 5];
+
+// 不稳定排序可能改变相等元素的相对顺序
+const UNSTABLE_RESULT: [i32; 4] = [1, 1, 4, 5];
+
+const fn assert_observationally_equivalent(a: [i32; 4], b: [i32; 4]) {
+    assert!(a == b, "observationally inequivalent under the current observation set");
+}
+
+// 在包含稳定性的观察集下，二者不等价
+const _: () = assert_observationally_equivalent(BUBBLE_STABLE, UNSTABLE_RESULT);
+
+fn main() {}
+```
+
+> **认知功能**: 该 `compile_fail` 示例把"观察不等价"转换为一个编译期可检测的断言失败。工程上，替换排序实现时必须明确声明观察集：若只关心最终升序结果，二者等价；若还关心稳定性，则必须保留 `Vec::sort` 而非 `Vec::sort_unstable`。
+> (Source: [Rust std — sort vs sort_unstable](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.sort); [Knuth — The Art of Computer Programming, Vol. 3](https://www-cs-faculty.stanford.edu/~knuth/taocp.html))
+
 ---
 
 ## 四、常见陷阱

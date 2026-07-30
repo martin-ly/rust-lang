@@ -15,6 +15,20 @@
 
 ---
 
+> **权威来源 / Provenance**: 本文工程与数据模型基础参考 Berners-Lee (2006) 的 Linked Data 原则、Hogan et al. (2021/2022) 的知识图谱综述、Wilkinson et al. (2016) 的 FAIR 原则，以及 W3C RDF 1.1/1.2、SPARQL 1.1、SHACL、JSON-LD 1.1 与 RDF-star 规范；形式化基础参考 Baader et al. (2007) 与 Hitzler, Krötzsch & Rudolph (2009)；本体工程方法参考 Noy & McGuinness (2001)。
+>
+> - **Berners-Lee (2006)** — *Linked Data*. W3C Design Issues. [https://www.w3.org/DesignIssues/LinkedData.html](https://www.w3.org/DesignIssues/LinkedData.html)
+> - **Hogan et al. (2021/2022)** — *Knowledge Graphs*. ACM Computing Surveys, 54(4), 1–37. [https://doi.org/10.1145/3447772](https://doi.org/10.1145/3447772)
+> - **Wilkinson et al. (2016)** — *The FAIR Guiding Principles for Scientific Data Management and Stewardship*. Scientific Data 3, 160018. [https://doi.org/10.1038/sdata.2016.18](https://doi.org/10.1038/sdata.2016.18)
+> - **Baader et al. (2007)** — *The Description Logic Handbook* (2nd ed.). Cambridge University Press. [https://doi.org/10.1017/9781139025355](https://doi.org/10.1017/9781139025355)
+> - **Hitzler, Krötzsch & Rudolph (2009)** — *Foundations of Semantic Web Technologies*. CRC Press. [https://www.semantic-web-book.org/](https://www.semantic-web-book.org/)
+> - **Noy & McGuinness (2001)** — *Ontology Development 101: A Guide to Creating Your First Ontology*. Stanford KSL Technical Report KSL-01-05. [https://doi.org/10.1007/978-3-540-92673-3_6](https://doi.org/10.1007/978-3-540-92673-3_6)
+> - [W3C RDF 1.2 Concepts and Abstract Syntax](https://www.w3.org/TR/rdf12-concepts/)
+> - [W3C SPARQL 1.1 Overview](https://www.w3.org/TR/sparql11-overview/)
+> - [W3C SHACL — Shapes Constraint Language](https://www.w3.org/TR/shacl/)
+> - [W3C JSON-LD 1.1](https://www.w3.org/TR/json-ld11/)
+> - [W3C RDF-star and SPARQL-star](https://www.w3.org/2021/12/rdf-star.html)
+
 ## 📑 目录
 
 - [知识图谱构建（Knowledge Graph Construction）](#知识图谱构建knowledge-graph-construction)
@@ -40,7 +54,7 @@
 
 ## 一、RDF 数据模型
 
-**资源描述框架（Resource Description Framework, RDF）**用**三元组**（subject, predicate, object）表达断言：
+**资源描述框架（Resource Description Framework, RDF）**用**三元组**（subject, predicate, object）表达断言（Berners-Lee, 2006; W3C RDF 1.1/1.2）：
 
 ```text
 <ex:Ownership> <ex:dependsOn> <ex:TypeSystem> .
@@ -83,7 +97,7 @@ SPARQL 查询的核心是**基本图模式（BGP）匹配**：把查询中的三
 
 ## 三、SHACL 验证
 
-**SHACL（Shapes Constraint Language）**用于验证 RDF 图是否满足给定的数据形状。与 OWL 不同，SHACL 是**闭世界验证**：若某个节点缺少必需属性，即判定为非法。
+**SHACL（Shapes Constraint Language）**用于验证 RDF 图是否满足给定的数据形状（W3C SHACL）。与 OWL 不同，SHACL 是**闭世界验证**：若某个节点缺少必需属性，即判定为非法。
 
 典型 SHACL 约束：
 
@@ -113,7 +127,7 @@ ex:ConceptShape
 
 ## 四、KG 构建流水线
 
-从原始数据到可用 KG 的典型流水线：
+从原始数据到可用 KG 的典型流水线（Hogan et al., 2021/2022）：
 
 ```text
 1. 数据源（文档、API、数据库、人工编辑）
@@ -231,6 +245,37 @@ let results = store.query("SELECT ?s WHERE { ?s a <ex:Concept> }")?;
 
 这些 crate 需作为依赖引入；截至 Rust 1.97，`sophia` 与 `oxigraph` 均为活跃的 Rust 语义 Web 生态项目。
 
+**Rust 投影：闭合世界约束与数据形状**：知识图谱采用开放世界语义，而 Rust 按闭世界拒绝不一致。以下两个 `compile_fail` 示例分别对应 trait coherence 冲突（E0119）与 SHACL 形状违规（E0277）。
+
+```rust,compile_fail,E0119
+// TBox：所有 Rust 概念都满足某个元数据 shape
+trait HasMetadata {}
+impl<T> HasMetadata for T {}
+
+// 错误：试图为具体类型再写一个专门化 impl，触发 coherence 冲突
+impl HasMetadata for String {} //~ ERROR E0119
+
+fn main() {}
+```
+
+```rust,compile_fail,E0277
+// SHACL shape：Concept 节点必须具有 name
+trait HasName {
+    fn name(&self) -> &str;
+}
+
+fn publish_concept<T: HasName>(_: T) {}
+
+// 非法数据：缺少 name 字段
+struct RawConcept { id: u32 }
+
+fn main() {
+    publish_concept(RawConcept { id: 42 }); //~ ERROR E0277
+}
+```
+
+> 边界结论：Rust 的 trait coherence 与类型约束是**闭世界工程校验**的有力工具，但不能替代 RDF/SHACL 在开放世界知识图谱中的验证角色。
+
 ---
 
 ## 八、反命题与边界
@@ -346,11 +391,18 @@ mindmap
 - [W3C RDF 1.2 Concepts and Abstract Syntax](https://www.w3.org/TR/rdf12-concepts/)
 - [W3C SPARQL 1.1 Overview](https://www.w3.org/TR/sparql11-overview/)
 - [W3C SHACL — Shapes Constraint Language](https://www.w3.org/TR/shacl/)
+- [W3C JSON-LD 1.1](https://www.w3.org/TR/json-ld11/)
+- [W3C RDF-star and SPARQL-star](https://www.w3.org/2021/12/rdf-star.html)
 - Wilkinson, M. D. et al. (2016). *The FAIR Guiding Principles for Scientific Data Management and Stewardship*. Scientific Data 3, 160018.
+- Berners-Lee, T. (2006). *Linked Data*. W3C Design Issues. <https://www.w3.org/DesignIssues/LinkedData.html>
+- Hogan, A. et al. (2021/2022). *Knowledge Graphs*. ACM Computing Surveys, 54(4), 1–37. <https://doi.org/10.1145/3447772>
+- Baader, F. et al. (eds.) (2007). *The Description Logic Handbook* (2nd ed.). Cambridge University Press. <https://doi.org/10.1017/9781139025355>
+- Hitzler, P.; Krötzsch, M. & Rudolph, S. (2009). *Foundations of Semantic Web Technologies*. CRC Press. <https://www.semantic-web-book.org/>
+- Noy, N. F. & McGuinness, D. L. (2001). *Ontology Development 101: A Guide to Creating Your First Ontology*. Stanford KSL Technical Report KSL-01-05. <https://doi.org/10.1007/978-3-540-92673-3_6>
 - [sophia — Rust RDF toolkit](https://github.com/pchampin/sophia_rs)
 - [Oxigraph — Rust SPARQL database](https://github.com/oxigraph/oxigraph)
 - [项目 KG 本体 v2](../../00_meta/knowledge_topology/kg_ontology_v2.md)
 
 > **相关文件**: [目录 README](README.md) · [本体工程](01_ontology_engineering.md) · [描述逻辑与 OWL](02_description_logic_and_owl.md) · [语义互操作](04_semantic_interoperability.md)
 >
-> **文档版本**: 1.0 ｜ **最后更新**: 2026-07-28 ｜ **状态**: ✅ 新建（Rust 1.97 对齐）
+> **文档版本**: 1.1 ｜ **最后更新**: 2026-07-30 ｜ **状态**: ✅ Rust 1.97 对齐

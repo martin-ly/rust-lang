@@ -37,8 +37,8 @@ Rust 的并发与分布式表达能力是其核心卖点之一。`semantic_space
 |---:|---|---|---|
 | 01 | `01_actor_model_semantics.md` | Actor 模型系统语义入口；权威形式化见 [`07_concurrency_semantics/03_actor_semantics.md`](../07_concurrency_semantics/03_actor_semantics.md) | ⏳ 待创建（stub） |
 | 02 | `02_pi_calculus_for_rust.md` | π 演算系统语义入口；权威形式化见 [`07_concurrency_semantics/01_process_calculi_for_rust.md`](../07_concurrency_semantics/01_process_calculi_for_rust.md) | ⏳ 待创建（stub） |
-| 03 | `03_component_based_semantics.md` | 组件化系统语义：BIP、接口、组合与涌现行为 | ⏳ 待创建 |
-| 04 | `04_distributed_systems_semantics.md` | 分布式系统语义：共识、一致性、容错的形式化 | ⏳ 待创建 |
+| 03 | `03_component_based_semantics.md` | 组件化系统语义：BIP、接口、组合与涌现行为 | ✅ 已创建 |
+| 04 | `04_distributed_systems_semantics.md` | 分布式系统语义：共识、一致性、容错的形式化 | ✅ 已创建 |
 | 05 | `05_reactive_systems_semantics.md` | 反应式系统语义：Reactive streams、backpressure、时态逻辑 | ✅ 已创建 |
 | 06 | `06_systems_engineering_standards.md` | ISO/IEC/IEEE 15288 系统生命周期过程、V-model、SysML v2 语义与 Rust 映射 | ✅ 已创建 |
 
@@ -49,8 +49,14 @@ Rust 的并发与分布式表达能力是其核心卖点之一。`semantic_space
 - **P0 经典**: C. Hewitt, "Actor Model of Computation" (2017)
 - **P0 专著**: R. Milner, "Communicating and Mobile Systems: The π-Calculus" (1999)
 - **P0 专著**: C. A. R. Hoare, "Communicating Sequential Processes" (1985)
-- **P1 框架**: J. Sifakis, "A Framework for Component-based Construction" (2005) / BIP framework
+- **P0 共识**: M. Castro & B. Liskov, "Practical Byzantine Fault Tolerance" (OSDI 1999) — PBFT
+- **P0 时钟/自动机**: R. Alur & D. L. Dill, "A Theory of Timed Automata" (TCS 126, 1994)
+- **P1 框架**: J. Sifakis, "A Framework for Component-based Construction" (CAV 2005) / BIP framework
+- **P1 专著**: M. Shaw & D. Garlan, *Software Architecture: Perspectives on an Emerging Discipline* (Prentice Hall, 1996)
+- **P1 同步假设**: N. Halbwachs, *Synchronous Programming of Reactive Systems* (Kluwer, 1993)
+- **P1 部分同步**: C. Dwork, N. Lynch & L. Stockmeyer, "Consensus in the Presence of Partial Synchrony" (JACM 35(2), 1988)
 - **P1 论文**: Rouhi et al., "Towards a formal model of patterns and pattern languages" (2018)
+- **P2 安全标准**: RTCA DO-178C · ISO 26262 · IEC 61508 · Ferrocene qualification
 - **P1 生态**: [Tokio](https://tokio.rs/) · [Actix](https://actix.rs/) · [Tonic](https://github.com/hyperium/tonic)
 
 ---

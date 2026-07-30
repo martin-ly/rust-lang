@@ -63,7 +63,7 @@
 
 ### 1.1 图灵等价
 
-如果两种计算模型都能计算完全相同的部分可计算函数集合，则称它们是**图灵等价（Turing-equivalent）**的。直观地说：只要一种语言可以模拟通用图灵机，它就能表达任何其他图灵完备模型所能表达的算法。
+如果两种计算模型都能计算完全相同的部分可计算函数集合，则称它们是**图灵等价（Turing-equivalent）**的。直观地说：只要一种语言可以模拟通用图灵机，它就能表达任何其他图灵完备模型所能表达的算法。Turing 的原始论文与 Church 的 λ 可定义性研究共同奠定了这一等价观察（Turing, 1936; Church, 1936; Sipser, 2013, §3.3）。
 
 ```text
 图灵等价的典型模型：
@@ -188,7 +188,19 @@ Rust 编译器在不同阶段处理的问题正好落在不同类别：
 | 过程宏展开 | 半可判定（RE） | 可能发散，编译器设置步数上限 |
 | 常量求值（const fn） | 半可判定（RE） | CTFE 有步数上限 |
 
-**Post 对应问题（PCP）**是另一个经典不可判定问题：给定一组「多米诺骨牌」，每块上下各有一个字符串，问是否存在一个排列使得拼接后的上串等于下串。PCP 常被用来证明各种程序分析问题的不可判定性。
+`const fn` 中的无界递归或计算溢出会被编译器以 `E0080` 拒绝，这正是把半可判定问题限制在可判定工程片段中的显式截断：
+
+```rust,compile_fail,E0080
+const fn diverge_in_const() -> i32 {
+    diverge_in_const() // ERROR E0080: 常量求值无法终止
+}
+
+const X: i32 = diverge_in_const();
+
+fn main() {}
+```
+
+**Post 对应问题（PCP）**是另一个经典不可判定问题：给定一组「多米诺骨牌」，每块上下各有一个字符串，问是否存在一个排列使得拼接后的上串等于下串。PCP 常被用来证明各种程序分析问题的不可判定性（Sipser, 2013, §5.2; Hopcroft, Motwani & Ullman, 2006, §9.4）。
 
 ```rust
 // Rust 视角：以下函数在输入上串 == 下串时返回 true，否则可能不停机
@@ -825,24 +837,38 @@ Felleisen 框架认为，只有无法通过局部宏表达的构造才提升表�
 
 ---
 
-## 七、权威来源索引
+## 七、权威来源 / International Authority References
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Turing 1936 — On Computable Numbers](https://doi.org/10.1112/plms/s2-42.1.230) | ✅ 一级 | 图灵机与可计算性奠基 |
+| [Turing 1936 — On computable numbers, with an application to the Entscheidungsproblem](https://doi.org/10.1112/plms/s2-42.1.230) | ✅ 一级 | 图灵机奠基；停机问题原始证明 |
 | [Church 1936 — An Unsolvable Problem of Elementary Number Theory](https://doi.org/10.2307/1968981) | ✅ 一级 | λ 可定义函数与 Church-Turing 论题 |
-| [Sipser 1996/2012 — Introduction to the Theory of Computation](https://math.mit.edu/~sipser/book.html) | ✅ 一级 | Rice 定理、RE/co-RE、泵引理、PCP（Ch4-5, Ch1-2） |
+| [Rice 1953 — Classes of Recursively Enumerable Sets and Their Decision Problems](https://doi.org/10.1090/S0002-9904-1953-09692-2) | ✅ 一级 | 语义性质不可判定性（Rice 定理） |
+| [Sipser 2013 — Introduction to the Theory of Computation, 3rd ed.](https://math.mit.edu/~sipser/book.html) | ✅ 一级 | Rice 定理、RE/co-RE、泵引理、PCP（Ch4-5, Ch1-2） |
 | [Soare 1987 — Recursively Enumerable Sets and Degrees](https://doi.org/10.1007/978-3-662-02460-7) | ✅ 一级 | 递归可枚举集合与度理论 |
 | [Soare 2016 — Turing Computability: Theory and Applications](https://doi.org/10.1007/978-3-642-31933-4) | ✅ 一级 | 可计算性理论现代教材 |
+| [Cutland 1980 — Computability: An Introduction to Recursive Function Theory](https://doi.org/10.1017/CBO9780511574916) | ✅ 一级 | 递归函数与可计算性入门 |
 | [Hopcroft & Ullman 1979 — Introduction to Automata Theory, Languages, and Computation](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation) | ✅ 一级 | 自动机与形式语言奠基 |
 | [Hopcroft, Motwani & Ullman 2006 — Introduction to Automata Theory, Languages, and Computation, 3rd ed.](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation) | ✅ 一级 | 泵引理、Myhill-Nerode、CFG（Ch1-2, 4, 7） |
+| [Kozen 1997 — Automata and Computability](https://doi.org/10.1007/978-1-4612-1844-9) | ✅ 一级 | 自动机、可计算性与复杂度理论 |
+| [Appel 2004 — Modern Compiler Implementation in Java/C/ML, 2nd ed.](https://www.cs.princeton.edu/~appel/modern/) | ✅ 一级 | 编译器实现与语义后端（Tiger Book） |
+| [Myhill 1957 — Finite Automata and the Representation of Events](https://doi.org/10.1515/9781400882618-008) | ✅ 一级 | Myhill-Nerode 定理前身 |
+| [Nerode 1958 — Linear Automaton Transformations](https://doi.org/10.2307/1993204) | ✅ 一级 | Myhill-Nerode 定理的代数形式 |
 | [Barendregt 1984 — The Lambda Calculus: Its Syntax and Semantics](https://doi.org/10.1016/S0049-237X(09)70070-8) | ✅ 一级 | λ 演算、Y 组合子 |
+| [Scott 1972 — Continuous Lattices](https://doi.org/10.1007/BFb0073967) | ✅ 一级 | 连续格与 Scott 域奠基 |
 | [Scott 1976 — Data Types as Lattices](https://doi.org/10.1137/0205037) | ✅ 一级 | Scott 域与指称语义 |
+| [Scott & Strachey 1971/2000 — Toward a Mathematical Semantics for Computer Languages](https://www.cs.ox.ac.uk/files/3232/PRG06.pdf) | ✅ 一级 | 指称语义奠基（PRG-6） |
+| [Strachey 1973 — The Varieties of Programming Language](https://doi.org/10.1016/S0065-2458(08)60314-4) | ✅ 一级 | 程序语言语义分类 |
 | [Girard, Lafont & Taylor 1989 — Proofs and Types](https://doi.org/10.1017/CBO9780511569907) | ✅ 一级 | Curry-Howard 对应 |
+| [Wadler 2015 — Propositions as Types](https://doi.org/10.1145/2699407) | ✅ 一级 | Curry-Howard 现代综述 |
 | [Felleisen 1991 — On the Expressive Power of Programming Languages](https://doi.org/10.1007/BF00119888) | ✅ 一级 | 表达力比较框架 |
 | [Felleisen & Flatt 1998 — Programming Languages and Their Calculi](https://www2.ccs.neu.edu/racket/pubs/scp91-felleisen.pdf) | ✅ 一级 | 表达力与演算扩展 |
+| [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) | ✅ 一级 | 类型化 λ 演算、上下文等价与类型系统 |
+| [Pitts 1997 — Operationally-based theories of program equivalence](https://www.cl.cam.ac.uk/~amp12/papers/index.html) | ✅ 一级 | 基于操作语义的程序等价 |
+| [Ahmed 2006 — Step-indexed syntactic logical relations](https://doi.org/10.1007/11693024_6) | ✅ 一级 | Step-indexed logical relations |
+| [Ord 2006 — The Many Forms of Hypercomputation](https://doi.org/10.1016/j.apal.2005.09.012) | ✅ 一级 | 超计算与 Church-Turing 边界讨论 |
 | [Plotkin 1981 — SOS](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf) | ✅ 一级 | 结构化操作语义 |
-| [Rust Reference — Async functions](https://doc.rust-lang.org/reference/items/functions.html#async-functions) | ✅ 一级 | Rust async 函数语义 |
+| [Rust Reference — Async functions](https://doc.rust-lang.org/reference/items/functions.html#async-functions) | ✅ P0 | Rust async 函数语义 |
 | [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html) | ✅ 一级 | Rust async/await 设计 |
 | [RFC 3058 — Try trait v2](https://rust-lang.github.io/rfcs/3058-try-trait-v2.html) | ✅ 一级 | `?` / `try` 块设计 |
 | [RFC 2996 — Async await for streams](https://rust-lang.github.io/rfcs/2996-async-await-for-streams.html) | ✅ 一级 | `for await` 异步迭代设计 |

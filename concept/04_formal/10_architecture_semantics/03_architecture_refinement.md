@@ -18,7 +18,22 @@
 
 ---
 
-> **来源**: [Cargo Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) · [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) · [Wermelinger — Formal Specification of Software Architecture (1994)](https://doi.org/10.1016/0167-6423(94)00022-5)
+> **来源**: [Cargo Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) · [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) · [Rust Reference — Items and Visibility](https://doc.rust-lang.org/reference/visibility-and-privacy.html) · [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/traits.html#orphan-rules) · [Wermelinger — Formal Specification of Software Architecture (1994)](https://doi.org/10.1016/0167-6423(94)00022-5)
+
+---
+
+> **权威来源 / Provenance**: 本节架构精化关系主要参考 Wermelinger (1994) 对软件架构形式化规格的定义，以及 Shaw & Garlan (1996) 关于组件-连接件-配置三元组与架构风格的论述；Rust 映射部分与 ISO/IEC/IEEE 42010:2022 的架构描述框架一致，并参考 Medvidovic & Taylor (2000) 的 ADL 分类与 ACME/Wright/Rapide 等经典 ADL 原始论文。
+>
+> - **Wermelinger (1994)** — *Formal Specification of Software Architecture*. Science of Computer Programming, 23(2–3), 149–178. [https://doi.org/10.1016/0167-6423(94)00022-5](https://doi.org/10.1016/0167-6423(94)00022-5)
+> - **Shaw & Garlan (1996)** — *Software Architecture: Perspectives on an Emerging Discipline*. Prentice Hall. [PDF](https://www.cs.cmu.edu/~search/articles/books/SA.book.pdf)
+> - **Garlan & Shaw (1993)** — *An Introduction to Software Architecture*. [https://doi.org/10.1142/9789812813032_0001](https://doi.org/10.1142/9789812813032_0001)
+> - **Medvidovic & Taylor (2000)** — *A Classification and Comparison Framework for Software Architecture Description Languages*. IEEE Transactions on Software Engineering, 26(1), 70–93. [https://doi.org/10.1109/32.825767](https://doi.org/10.1109/32.825767)
+> - **ISO/IEC/IEEE 42010:2022** — *Software and Systems Engineering — Architecture Description*. ISO, 2022. [https://www.iso.org/standard/74296.html](https://www.iso.org/standard/74296.html)
+> - **Garlan, Monroe & Wile (1997)** — *ACME: An Architecture Description Interchange Language*. In *Proceedings of CASCON'97*, 169–183.
+> - **Allen (1997)** — *A Formal Approach to Software Architecture*. Ph.D. thesis, Carnegie Mellon University. (Wright ADL based on CSP.)
+> - **Luckham et al. (1995)** — *Specification and Analysis of System Architecture Using Rapide*. IEEE Transactions on Software Engineering, 21(4), 336–355. [https://doi.org/10.1109/32.385970](https://doi.org/10.1109/32.385970)
+> - **Rust Reference — Items and Visibility** — [https://doc.rust-lang.org/reference/visibility-and-privacy.html](https://doc.rust-lang.org/reference/visibility-and-privacy.html)
+> - **Rust Reference — Orphan Rules** — [https://doc.rust-lang.org/reference/items/traits.html#orphan-rules](https://doc.rust-lang.org/reference/items/traits.html#orphan-rules)
 
 ---
 
@@ -40,6 +55,7 @@
   - [三、边界与反例](#三边界与反例)
     - [3.1 反例：拆分不保持事务语义](#31-反例拆分不保持事务语义)
     - [3.2 反例：错误的依赖方向破坏精化](#32-反例错误的依赖方向破坏精化)
+    - [3.3 编译期可捕获的精化违约](#33-编译期可捕获的精化违约)
   - [四、相关概念](#四相关概念)
   - [五、嵌入式测验（Embedded Quiz）](#五嵌入式测验embedded-quiz)
     - [测验 1：架构精化的核心判定标准是什么？（理解层）](#测验-1架构精化的核心判定标准是什么理解层)
@@ -296,20 +312,23 @@ order-service ──HTTP──→ inventory-service
 
 即便分层结构正确，若具体实现中领域层反向依赖基础设施层，精化同样失败。Rust 编译器可以捕获这类错误：
 
-```rust,ignore
+```rust,compile_fail
 // 抽象规格要求：domain 不依赖 infrastructure。
 // 下面在 domain 模块中引用 infrastructure 的具体类型，违反精化关系。
 
-mod infrastructure {
-    pub struct PostgresPool;
+mod application {
+    // infrastructure 仅对 application 层可见
+    pub(in crate::application) mod infrastructure {
+        pub struct PostgresPool;
+    }
 }
 
 mod domain {
     // ❌ 编译错误：domain 不能依赖 infrastructure 的具体实现
-    use crate::infrastructure::PostgresPool;
+    use crate::application::infrastructure::PostgresPool;
 
     pub struct UserService {
-        pool: PostgresPool,
+        pool: PostgresPool, //~ ERROR module `infrastructure` is private
     }
 }
 
@@ -317,6 +336,35 @@ fn main() {}
 ```
 
 > **修正**: 将 `PostgresPool` 的引用移到 `infrastructure` 模块中的适配器实现，让 `domain` 只依赖自己定义的 `trait`。
+
+### 3.3 编译期可捕获的精化违约
+
+以下 `compile_fail` 块进一步展示：当精化后的具体实现违反抽象架构的依赖方向时，Rust 可见性规则如何在编译期拒绝：
+
+```rust,compile_fail
+// 抽象规格：UserService 位于 Application 层，只能依赖 Domain 层定义的端口。
+// 精化错误：application 直接持有 infrastructure 的 PostgresPool。
+
+mod domain {
+    pub trait UserRepository: Send + Sync {}
+}
+
+// 将 infrastructure 放在 private 的 adapter 模块下，模拟 workspace 中 application 无法访问 infrastructure crate
+mod adapter {
+    pub(in crate::adapter) mod infrastructure {
+        pub struct PostgresPool;
+    }
+}
+
+mod application {
+    // 错误：application 层不应直接依赖 infrastructure 的具体类型
+    pub struct UserService {
+        pool: crate::adapter::infrastructure::PostgresPool, //~ ERROR module `infrastructure` is private
+    }
+}
+
+fn main() {}
+```
 
 ---
 
@@ -436,7 +484,7 @@ mindmap
 
 ---
 
-> **权威来源**: [Wermelinger — Formal Specification of Software Architecture (1994)](https://doi.org/10.1016/0167-6423(94)00022-5) · [Shaw & Garlan — Software Architecture: Perspectives on an Emerging Discipline (1996)](https://doi.org/10.1142/9789812799609_0001) · [Garlan & Shaw — An Introduction to Software Architecture (1993)](https://doi.org/10.1142/9789812813032_0001) · [BIP Framework](https://www-verimag.imag.fr/BIP-Framework.html)
+> **权威来源**: [Wermelinger — Formal Specification of Software Architecture (1994)](https://doi.org/10.1016/0167-6423(94)00022-5) · [Shaw & Garlan — Software Architecture: Perspectives on an Emerging Discipline (1996)](https://doi.org/10.1142/9789812799609_0001) · [Garlan & Shaw — An Introduction to Software Architecture (1993)](https://doi.org/10.1142/9789812813032_0001) · [ISO/IEC/IEEE 42010:2022](https://www.iso.org/standard/74296.html) · [BIP Framework](https://www-verimag.imag.fr/BIP-Framework.html)
 >
 > **文档版本**: 1.0
 > **最后更新**: 2026-07-28

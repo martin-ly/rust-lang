@@ -37,6 +37,9 @@
     - [2.4 异步：Future 与事件循环](#24-异步future-与事件循环)
     - [2.5 分布式：偏序与共识](#25-分布式偏序与共识)
     - [2.6 进程代数与 session types 视角](#26-进程代数与-session-types-视角)
+      - [2.6.1 进程代数：CSP、CCS、π 演算](#261-进程代数cspccsπ-演算)
+      - [2.6.2 Session types：把协议写进类型](#262-session-types把协议写进类型)
+      - [2.6.3 Algebraic effects 与 async/await 的表达能力对比](#263-algebraic-effects-与-asyncawait-的表达能力对比)
   - [三、语义交集与常见误解](#三语义交集与常见误解)
     - [3.1 包含关系](#31-包含关系)
     - [3.2 编程语言层面的常见误配](#32-编程语言层面的常见误配)
@@ -48,7 +51,7 @@
     - [反例：async 总是比 sync 快](#反例async-总是比-sync-快)
     - [反例：并行即并发](#反例并行即并发)
   - [六、相关概念](#六相关概念)
-  - [七、权威来源索引](#七权威来源索引)
+  - [七、International Authority References（国际权威来源）](#七international-authority-references国际权威来源)
   - [八、嵌入式测验（Embedded Quiz）](#八嵌入式测验embedded-quiz)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
@@ -95,7 +98,7 @@ trace(P || Q) = { t | t 在 P 的动作集上的投影 ∈ trace(P)
 
 ### 2.3 并行：PRAM 与线性化
 
-并行计算的经典抽象是 **PRAM（Parallel Random Access Machine）**：多个处理器在**同一时刻**执行指令。在 Rust 的共享内存并行中，更实用的模型是 **linearizability**：每个并发操作看起来都在某个瞬间原子完成，且该瞬间落在调用与返回之间。
+并行计算的经典抽象是 **PRAM（Parallel Random Access Machine）**：多个处理器在**同一时刻**执行指令。在 Rust 的共享内存并行中，更实用的模型是 **linearizability**（Herlihy & Shavit, 2011）：每个并发操作看起来都在某个瞬间原子完成，且该瞬间落在调用与返回之间。
 
 ```text
 P ─op▶ P'   且   Q ─op▶ Q'    可以在同一物理时刻发生
@@ -110,6 +113,19 @@ async fn f() -> T   ≈   fn f(k: impl FnOnce(T) -> ())
 ```
 
 调用 `f()` 不执行函数体，而是返回一个 `Future`；事件循环/执行器在 Future 就绪时调用其 `poll`，通过 waker 机制在 I/O 完成时恢复执行。
+
+`async` 块对局部变量的捕获同样受编译期生命期约束。下面的 `compile_fail` 反例展示：若 `async` 块试图携带局部变量的引用逃逸当前函数，编译器会报 E0373：
+
+```rust,compile_fail,E0373
+fn make_future() -> impl std::future::Future<Output = ()> {
+    let s = String::from("captured");
+    async {
+        println!("{}", s); // async 块捕获了局部变量 s 的引用
+    }
+}
+
+fn main() {}
+```
 
 ### 2.5 分布式：偏序与共识
 
@@ -130,11 +146,28 @@ e₁ → e₂  当且仅当
 
 #### 2.6.1 进程代数：CSP、CCS、π 演算
 
-- **CSP（Communicating Sequential Processes）** — [Hoare 1985](http://www.usingcsp.com/cspbook.pdf)：以**同步会合（rendezvous）**为核心，进程通过命名通道交换事件；并行组合 `P || Q` 要求共享事件同步发生；外部选择 `[]` 让环境决定进程走向。Rust 的 `mpsc::sync_channel(0)` 与 `select!` 是其工程投影，但 Rust 默认 channel 是有缓冲的，二者并非同构（详见 [同层：进程代数与 Rust](../07_concurrency_semantics/01_process_calculi_for_rust.md)）。
+- **CSP（Communicating Sequential Processes）** — Hoare (1978, [Hoare 1985](http://www.usingcsp.com/cspbook.pdf))：以**同步会合（rendezvous）**为核心，进程通过命名通道交换事件；并行组合 `P || Q` 要求共享事件同步发生；外部选择 `[]` 让环境决定进程走向。Rust 的 `mpsc::sync_channel(0)` 与 `select!` 是其工程投影，但 Rust 默认 channel 是有缓冲的，二者并非同构（详见 [同层：进程代数与 Rust](../07_concurrency_semantics/01_process_calculi_for_rust.md)）。
 - **CCS（Calculus of Communicating Systems）** — [Milner 1989](https://www.research.ed.ac.uk/en/publications/communication-and-concurrency/)：以极小语法（前缀、选择、并行、限制、重标记）定义带标签迁移系统，并给出**强/弱互模拟**作为行为等价标准。互模拟为比较并发实现是否可替换提供了方法论基准，但 Rust 程序本身没有标注迁移系统，因此不能直接套用等价证明。
-- **π 演算** — [Milner, Parrow & Walker 1992](https://doi.org/10.1016/0890-5401(92)90008-4)：在 CCS 基础上引入**通道名作为一等消息**，从而建模通信拓扑的动态变化（mobility）。Rust 中 `Sender<T>` 本身可作为值被移动或嵌入消息，正是这一思想的类型系统近似。
+- **π 演算** — [Milner, Parrow & Walker 1992](https://doi.org/10.1016/0890-5401(92)90008-4); Milner (1999)：在 CCS 基础上引入**通道名作为一等消息**，从而建模通信拓扑的动态变化（mobility）。Rust 中 `Sender<T>` 本身可作为值被移动或嵌入消息，正是这一思想的类型系统近似。Milner (1992) 的 *Functions as Processes* 进一步说明函数式计算可编码为进程交互，为 Rust 中把闭包/异步任务视为进程提供了理论支持。
 
 > **小结**：三种演算共同把「并发」从实现细节提升为**交互模式**的研究对象；它们解释 Rust 通道与选择的血统，也标示出 Rust 所有权类型系统带来的额外静态约束。
+
+π 演算的「移动性」允许通道名作为消息传递，但 Rust 的生命周期规则会阻止引用逃逸其作用域。下面的 `compile_fail` 反例展示：若试图通过通道发送局部值的引用，E0597 会在编译期拦截这一不安全的通道移动：
+
+```rust,compile_fail,E0597
+use std::sync::mpsc;
+
+fn main() {
+    let (tx, rx) = mpsc::channel::<&str>();
+    let received: &str;
+    {
+        let local = String::from("mobility");
+        tx.send(&local).unwrap(); // 把局部名字作为消息传递
+        received = rx.recv().unwrap();
+    } // local 在此 drop，但 received 仍持有它的引用
+    println!("{}", received);
+}
+```
 
 #### 2.6.2 Session types：把协议写进类型
 
@@ -254,6 +287,35 @@ fn main() {
 
 `thread::spawn` 创建的是**并发**控制流；只有在多核上实际同时执行时，它才转化为**并行**。
 
+Rust 的类型系统还会拒绝两类常见并发错误。第一，`Send` 边界违反（E0277）：非 `Send` 类型不能跨线程移动。
+
+```rust,compile_fail,E0277
+use std::rc::Rc;
+use std::thread;
+
+fn main() {
+    let data = Rc::new(42);
+    thread::spawn(move || {
+        println!("{}", *data);
+    });
+}
+```
+
+第二，数据竞争模式被借用检查器拦截（E0499）：同一作用域内不能对同一数据创建两个可变借用，即使它们被交给不同线程。
+
+```rust,compile_fail,E0499
+fn main() {
+    let mut data = 0;
+    let r1 = &mut data;
+    let r2 = &mut data;
+
+    std::thread::scope(|s| {
+        s.spawn(|| { *r1 += 1; });
+        s.spawn(|| { *r2 += 1; });
+    });
+}
+```
+
 ### 4.2 并行：rayon 数据并行
 
 ```rust,ignore
@@ -348,16 +410,19 @@ async fn main() {
 
 ---
 
-## 七、权威来源索引
+## 七、International Authority References（国际权威来源）
 
 - [std::thread — Rust 标准库文档](https://doc.rust-lang.org/std/thread/)（P0 官方）
 - [Asynchronous Programming in Rust Book](https://rust-lang.github.io/async-book/)（P0 官方 Rust 项目文档）
 - [std::sync::mpsc — Rust 标准库文档](https://doc.rust-lang.org/std/sync/mpsc/)（P0 官方）
 - [rayon docs.rs](https://docs.rs/rayon/latest/rayon/) · [tokio docs.rs](https://docs.rs/tokio/latest/tokio/)
 - Lee, E. A. "The Problem with Threads." *IEEE Computer* 39(5), 2006, 33–42.
+- Hoare, C. A. R. *Communicating Sequential Processes*. Communications of the ACM 21(8), 1978, 666–677. [DOI](https://doi.org/10.1145/359576.359585)
 - Hoare, C. A. R. *Communicating Sequential Processes*. Prentice Hall, 1985. [作者授权电子版](http://www.usingcsp.com/cspbook.pdf)（项目记录：2026-07-12 本网络 DNS 未解析，保留备查）
 - Lamport, L. "Time, Clocks, and the Ordering of Events in a Distributed System." *Communications of the ACM* 21(7), 1978, 558–565.
+- Herlihy, M., Shavit, N. *The Art of Multiprocessor Programming*. Morgan Kaufmann, 2011. [ScienceDirect](https://www.sciencedirect.com/book/9780123973375/the-art-of-multiprocessor-programming)
 - Milner, R. *Communication and Concurrency*. Prentice Hall, 1989. [Edinburgh Research Explorer](https://www.research.ed.ac.uk/en/publications/communication-and-concurrency/)
+- Milner, R. *Communicating and Mobile Systems: the π-Calculus*. Cambridge University Press, 1999.
 - Milner, R., Parrow, J., Walker, D. "A Calculus of Mobile Processes." *Information and Computation* 100(1), 1992, 1–77. [DOI](https://doi.org/10.1016/0890-5401(92)90008-4)
 - Honda, K. "Types for Dyadic Interaction." *CONCUR 1993*, LNCS 715, 1993, 509–523. [DOI](https://doi.org/10.1007/3-540-57208-2_35)
 - Gay, S. J., Hole, M. "Subtyping for Session Types in the Pi Calculus." *Acta Informatica* 42(2–3), 2005, 191–225. [DOI](https://doi.org/10.1007/s00236-005-0177-z)

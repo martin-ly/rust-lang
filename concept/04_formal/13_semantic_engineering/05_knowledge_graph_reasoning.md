@@ -14,7 +14,19 @@
 
 ---
 
-> **来源**: [W3C OWL 2 Web Ontology Language](https://www.w3.org/TR/owl2-overview/) · [W3C SHACL](https://www.w3.org/TR/shacl/) · [W3C SPARQL 1.1 Entailment Regimes](https://www.w3.org/TR/sparql11-entailment/) · [Hitzler, Krötzsch, Rudolph — *Foundations of Semantic Web Technologies*](https://www.semantic-web-book.org/) · [Oxigraph](https://docs.rs/oxigraph/latest/oxigraph/) · [The Rust Reference](https://doc.rust-lang.org/reference/)
+> **权威来源 / Provenance**: 本文形式化与推理基础参考 Baader et al. (2007) 的描述逻辑手册、Hitzler, Krötzsch & Rudolph (2009) 的语义网技术基础；知识图谱综述参考 Hogan et al. (2021/2022)；互操作与数据治理参考 Berners-Lee (2006) 的 Linked Data 原则、Wilkinson et al. (2016) 的 FAIR 原则，以及 W3C OWL 2、SHACL、SPARQL 1.1 Entailment、JSON-LD 1.1 与 RDF-star 规范；本体工程方法参考 Noy & McGuinness (2001)。
+>
+> - **Baader et al. (2007)** — *The Description Logic Handbook* (2nd ed.). Cambridge University Press. [https://doi.org/10.1017/9781139025355](https://doi.org/10.1017/9781139025355)
+> - **Hitzler, Krötzsch & Rudolph (2009)** — *Foundations of Semantic Web Technologies*. CRC Press. [https://www.semantic-web-book.org/](https://www.semantic-web-book.org/)
+> - **Hogan et al. (2021/2022)** — *Knowledge Graphs*. ACM Computing Surveys, 54(4), 1–37. [https://doi.org/10.1145/3447772](https://doi.org/10.1145/3447772)
+> - **Berners-Lee (2006)** — *Linked Data*. W3C Design Issues. [https://www.w3.org/DesignIssues/LinkedData.html](https://www.w3.org/DesignIssues/LinkedData.html)
+> - **Wilkinson et al. (2016)** — *The FAIR Guiding Principles for Scientific Data Management and Stewardship*. Scientific Data 3, 160018. [https://doi.org/10.1038/sdata.2016.18](https://doi.org/10.1038/sdata.2016.18)
+> - **Noy & McGuinness (2001)** — *Ontology Development 101: A Guide to Creating Your First Ontology*. Stanford KSL Technical Report KSL-01-05. [https://doi.org/10.1007/978-3-540-92673-3_6](https://doi.org/10.1007/978-3-540-92673-3_6)
+> - [W3C OWL 2 Web Ontology Language](https://www.w3.org/TR/owl2-overview/)
+> - [W3C SHACL](https://www.w3.org/TR/shacl/)
+> - [W3C SPARQL 1.1 Entailment Regimes](https://www.w3.org/TR/sparql11-entailment/)
+> - [W3C JSON-LD 1.1](https://www.w3.org/TR/json-ld11/)
+> - [W3C RDF-star and SPARQL-star](https://www.w3.org/2021/12/rdf-star.html)
 
 ---
 
@@ -47,7 +59,7 @@ mindmap
 
 ## 一、权威定义
 
-**知识图谱推理**（KG Reasoning）指从显式声明的三元组出发，通过形式语义规则导出隐式知识的过程。核心问题包括：
+**知识图谱推理**（KG Reasoning）指从显式声明的三元组出发，通过形式语义规则导出隐式知识的过程（Hogan et al., 2021/2022; Baader et al., 2007）。核心问题包括：
 
 1. **演绎推理**（deductive reasoning）：基于模型论语义推导逻辑后承。
 2. **规则推理**（rule-based inference）：基于 if-then 规则前向或后向链式推导。
@@ -82,7 +94,7 @@ K ⊨ φ  表示 φ 是 K 的逻辑后承。
 
 这些规则可通过**饱和**（saturation）算法实现：反复应用规则直到无新三元组产生。
 
-### 2.2 OWL 2 表达力谱系
+### 2.2 OWL 2 表达力谱系（W3C OWL 2）
 
 | 片段 | 可表达 | 推理复杂度 | Rust 适用性 |
 |---|---|---|---|
@@ -113,7 +125,7 @@ ancestor(X, Z) :- parent(X, Y), ancestor(Y, Z).
 
 ## 四、SHACL 约束验证
 
-SHACL 不用于推导新知识，而是**检查已有数据是否满足形状约束**。
+SHACL 不用于推导新知识，而是**检查已有数据是否满足形状约束**（W3C SHACL）。
 
 ```turtle
 ex:PersonShape a sh:NodeShape ;
@@ -181,6 +193,39 @@ impl SimpleReasoner {
 }
 ```
 
+### 闭合世界约束的编译期投影
+
+推理系统按语义导出隐式知识；Rust 则按闭世界在编译期拒绝不一致。以下示例分别展示 trait coherence 冲突（E0119）与 SHACL 形状违规（E0277）的 Rust 类比。
+
+```rust,compile_fail,E0119
+// TBox：所有资源都可通过默认规则到达
+trait Reachable {}
+impl<T> Reachable for T {}
+
+// 错误：对具体类型再声明一条 impl，与 blanket impl 冲突
+impl Reachable for u32 {} //~ ERROR E0119
+
+fn main() {}
+```
+
+```rust,compile_fail,E0277
+// SHACL shape：推理规则要求每个 Person 节点必须有 email
+trait HasEmail {
+    fn email(&self) -> &str;
+}
+
+fn validate<T: HasEmail>(_: T) {}
+
+// 非法数据：缺少 email
+struct Person { name: String }
+
+fn main() {
+    validate(Person { name: "Alice".into() }); //~ ERROR E0277
+}
+```
+
+> 边界结论：Rust 的 coherence 与类型约束可作为**工程侧一致性预演**，但不能替代 OWL/SHACL 在开放世界知识库上的形式推理与验证。
+
 ---
 
 ## 六、反命题与边界
@@ -212,6 +257,9 @@ OWL 2 DL 基于描述逻辑，**不能表达**任意 Datalog 规则（例如需�
 - **P1 学术/形式化**
   - [Hitzler, Krötzsch, Rudolph — *Foundations of Semantic Web Technologies*](https://www.semantic-web-book.org/)
   - [Baader et al. — *The Description Logic Handbook*](https://doi.org/10.1017/9781139025355)
+  - [Hogan et al. — *Knowledge Graphs* (ACM Computing Surveys)](https://doi.org/10.1145/3447772)
+  - [Noy & McGuinness — *Ontology Development 101*](https://doi.org/10.1007/978-3-540-92673-3_6)
+  - [Wilkinson et al. — *The FAIR Guiding Principles*](https://doi.org/10.1038/sdata.2016.18)
   - [OWL 2 Web Ontology Language — Direct Semantics](https://www.w3.org/TR/owl2-direct-semantics/)
 
 - **P0 官方标准**
@@ -219,6 +267,9 @@ OWL 2 DL 基于描述逻辑，**不能表达**任意 Datalog 规则（例如需�
   - [W3C OWL 2](https://www.w3.org/TR/owl2-overview/)
   - [W3C SHACL](https://www.w3.org/TR/shacl/)
   - [W3C SPARQL 1.1 Entailment Regimes](https://www.w3.org/TR/sparql11-entailment/)
+  - [W3C JSON-LD 1.1](https://www.w3.org/TR/json-ld11/)
+  - [W3C RDF-star and SPARQL-star](https://www.w3.org/2021/12/rdf-star.html)
+  - [W3C Linked Data](https://www.w3.org/DesignIssues/LinkedData.html)
 
 - **P2 生态/社区**
   - [Oxigraph (Rust RDF store)](https://docs.rs/oxigraph/latest/oxigraph/)

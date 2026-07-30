@@ -107,6 +107,23 @@ Rust 通过所有权和借用规则保证“源代码层面无 UB”。但如果
 
 > 注意：这并不削弱 Rust 所有权模型的价值，而是说明编译器后端的正确性也是安全保证的一部分。
 
+### 3.4 Rust 层面的 poison/UB 类比：`MaybeUninit::uninit().assume_init()`
+
+Rust 标准库中的 `MaybeUninit::uninit().assume_init()` 与 LLVM 的 `poison`/`undef` 有相似的语义效果：它们在**类型系统层面是合法的**，但产生的位模式可能是未初始化的；一旦这些值被实际消费（如参与运算、作为条件分支、或被打印），就会触发未定义行为。
+
+```rust
+use std::mem::MaybeUninit;
+
+fn main() {
+    // 可以编译，但 x 的位模式未初始化
+    let x: i32 = unsafe { MaybeUninit::uninit().assume_init() };
+    // 以下行为是 UB：消费了一个可能为 poison/undef 的值
+    println!("{}", x);
+}
+```
+
+> **要点**：`assume_init()` 把“值已初始化”的证明责任交给程序员；如果证明不成立，安全 Rust 代码也会像 LLVM IR 中解引用 poison 指针一样产生 UB。这与 1.97.1 案例的共同点在于——**危险操作在源代码/IR 中看起来合法，但底层语义已失效**。
+
 ---
 
 ## 4. The `freeze` Instruction
@@ -179,6 +196,8 @@ load (select cond, ptr_1, ptr_2)
 
 Rust 1.97.0 将 `None` 的判别值改为 `-1`。LLVM 将其解释为大无符号偏移 `2^32 - 1`，导致读取数 GB 之外的未映射页，几乎必然 segfault。
 
+> **形式化验证视角**：此类 IR 变换的语义保持性可以通过 Alive（Lopes et al., 2015）等窥孔优化验证工具来担保；Lee et al. (2017) 则讨论了在 LLVM 中协调高层优化与低层代码表达时如何避免类似的 UB 引入问题。
+
 ---
 
 ## 6. 反例与常见误解
@@ -211,7 +230,8 @@ Rust 1.97.0 将 `None` 的判别值改为 `-1`。LLVM 将其解释为大无符�
 - **P0 官方**: [LLVM Language Reference — Poison Values](https://llvm.org/docs/LangRef.html#poison-values)
 - **P0 官方**: [LLVM Language Reference — Undefined Behavior](https://llvm.org/docs/LangRef.html#undefined-behavior)
 - **P0 官方**: [LLVM Language Reference — freeze Instruction](https://llvm.org/docs/LangRef.html#freeze-instruction)
-- **P1 论文**: [Taming Undefined Behavior in LLVM (PLDI 2017)](https://dl.acm.org/doi/10.1145/3062341.3062382)
+- **P1 论文**: [Taming Undefined Behavior in LLVM (PLDI 2017)](https://dl.acm.org/doi/10.1145/3062341.3062382) — Lee et al. (2017)
+- **P1 论文**: [Alive: Provably Correct Peephole Optimizations (PLDI 2015)](https://doi.org/10.1145/2737924.2737965) — Lopes et al. (2015)
 - **P1 技术博客**: [byteiota — Rust 1.97.1: LLVM Miscompilation Fix](https://byteiota.com/rust-1-97-1-llvm-miscompilation-fix/)
 - **P1 社区讨论**: [LWN.net — Version 1.97.0 of Rust released](https://lwn.net/Articles/1082032/)
 - **P0 官方 issue**: [rust-lang/rust#159035](https://github.com/rust-lang/rust/issues/159035)

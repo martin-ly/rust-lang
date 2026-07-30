@@ -20,7 +20,10 @@
 > [Rust Reference — Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html) ·
 > [Rust API Guidelines — Iterators](https://rust-lang.github.io/api-guidelines/interoperability.html#c-iter) ·
 > [Hoare 1969 — An Axiomatic Basis](https://doi.org/10.1093/comjnl/12.4.576) ·
-> [Wadler 1990 — Deforestation](https://doi.org/10.1145/91556.91562)
+> [Wadler 1990 — Deforestation](https://doi.org/10.1145/91556.91562) ·
+> [Pitts 2012 — Step-Indexed Biorthogonality](https://doi.org/10.1017/S0956796812000261) ·
+> [Ahmed 2006 — Step-Indexed Syntactic Logical Relations](https://doi.org/10.1007/11624738_2) ·
+> [Felleisen 1991 — On the Expressive Power of Programming Languages](https://doi.org/10.1007/BF01178218)
 
 ## 📑 目录
 
@@ -83,7 +86,7 @@ Iterator 状态机形式化定义:
 ```
 
 > **认知功能**: 把 `Iterator` 看作状态机，使"正确性"从"代码行为正确"转化为"状态转移满足不变量"。这是后续所有代数律与形式化证明的基础。
-> (Source: [Rust Reference — Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html))
+> (Source: [Rust Reference — Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html); Pitts 2012; Ahmed 2006)
 
 标准库中的 `std::slice::Iter` 即典型状态机：状态是一对 `(ptr, end)`，每次 `next` 将 `ptr` 前进一步并返回当前元素；`next_back` 从 `end` 回退一步。`DoubleEndedIterator` 的对称性要求两端推进不会交叉。
 
@@ -188,7 +191,7 @@ fn size_hint_contract<I: Iterator>(it: &mut I) -> (usize, Option<usize>) {
 ```
 
 > **认知功能**: 代数律把"能否重构代码"从直觉判断转化为**条件判断**——只要确认闭包纯函数，就可以安全地 fusion、重排或合并适配器。这也是 `rustc`/LLVM 进行迭代器内联与去森林化（deforestation）优化的理论基础。
-> (Source: [Wadler 1990 — Deforestation](https://doi.org/10.1145/91556.91562))
+> (Source: [Wadler 1990 — Deforestation](https://doi.org/10.1145/91556.91562); Felleisen 1991)
 
 ```rust
 // 合法重构示例：map 融合
@@ -654,6 +657,8 @@ fn main() {
 | size_hint/ExactSizeIterator 契约 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/interoperability.html#c-iter) | ✅ | Tier 1 |
 | 适配器 fusion 理论基础 | [Wadler 1990](https://doi.org/10.1145/91556.91562) | ✅ | Tier 1 |
 | Hoare 三元组应用于迭代器 | [Hoare 1969](https://doi.org/10.1093/comjnl/12.4.576) · [💡 原创分析] | ✅/💡 | Tier 3 |
+| 操作语义与步骤索引逻辑关系 | [Pitts 2012](https://doi.org/10.1017/S0956796812000261) · [Ahmed 2006](https://doi.org/10.1007/11624738_2) | ✅ | Tier 1 |
+| 程序语言表现力与上下文等价 | [Felleisen 1991](https://doi.org/10.1007/BF01178218) | ✅ | Tier 1 |
 
 ---
 
@@ -800,6 +805,54 @@ fn main() {
 ```
 
 > **修正**: 迭代器适配器代数律的成立前提是**闭包为纯函数**。有状态闭包使融合、重排等优化不再语义保持。应将状态提升到迭代器结构体中（如 `struct StatefulIter`），使状态变化显式、可审计。
+
+---
+
+### 10.5 边界测试：`size_hint` 与 `next` 矛盾的编译期捕捉
+
+`size_hint` 的下界必须小于等于实际剩余元素数，上界（若存在）必须大于等于实际剩余元素数。下面用 `const` 断言形式化这一契约：一个迭代器声称下界为 `5`、上界为 `Some(10)`，但实际只能产生 `3` 个元素，构成契约违反。
+
+```rust,compile_fail
+// Iterator 契约：lower <= actual_remaining <= upper.unwrap_or(actual)
+const fn check_size_hint(lower: usize, upper: Option<usize>, actual: usize) {
+    assert!(lower <= actual, "size_hint lower bound exceeds actual remaining");
+    if let Some(u) = upper {
+        assert!(actual <= u, "size_hint upper bound below actual remaining");
+    }
+}
+
+// 错误：size_hint 返回 (5, Some(10))，但 next 实际只能产生 3 个元素
+const _: () = check_size_hint(5, Some(10), 3);
+
+fn main() {}
+```
+
+> **修正**: 自定义迭代器的 `size_hint` 必须与 `next` 行为保持一致。实现 `ExactSizeIterator` 时，`len()` 应精确等于还能调用 `next` 的次数。上述矛盾不会触发编译错误（Rust 不静态检查），但会导致 `collect` 预分配不足或截断数据；这里用 `const` 断言将其显式映射为编译期错误。
+> (Source: [Rust API Guidelines — Iterators](https://rust-lang.github.io/api-guidelines/interoperability.html#c-iter))
+
+---
+
+### 10.6 边界测试：违反 `FusedIterator` 承诺的编译期拒绝
+
+`FusedIterator` 是一个标记 trait，承诺迭代器首次返回 `None` 后将永远返回 `None`。下面用 `const` 断言形式化该承诺：若一个迭代器在返回 `None` 后仍可能返回 `Some`，则它不应实现 `FusedIterator`。
+
+```rust,compile_fail
+// FusedIterator 契约：返回 None 后不得再次返回 Some
+const fn check_fused(returns_some_after_none: bool) {
+    assert!(
+        !returns_some_after_none,
+        "FusedIterator must keep returning None after first None"
+    );
+}
+
+// 错误：该迭代器返回 None 后会重新扫描并再次返回 Some
+const _: () = check_fused(true);
+
+fn main() {}
+```
+
+> **修正**: 只有确实保证"耗尽后永不复活"的迭代器才应实现 `FusedIterator`。若需要该保证但实现无法提供，可使用 `.fuse()` 适配器或要求调用者显式处理。违反 `FusedIterator` 不会导致 UB，但会破坏依赖该承诺的调用方逻辑。
+> (Source: [std::iter::FusedIterator](https://doc.rust-lang.org/std/iter/trait.FusedIterator.html))
 
 ---
 

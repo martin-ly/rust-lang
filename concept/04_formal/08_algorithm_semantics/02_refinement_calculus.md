@@ -16,7 +16,8 @@
 
 ---
 
-> **来源**: [Back 1988 — A Calculus of Refinements for Program Derivations](https://doi.org/10.1016/0167-6423(88)90025-5) ·
+> **来源**: [Back 1978 — On the Correctness of Refinement Steps](http://users.abo.fi/ralph-johan.back/index.php?page=Refinement%20calculus%20all.html) ·
+> [Back 1988 — A Calculus of Refinements for Program Derivations](https://doi.org/10.1016/0167-6423(88)90025-5) ·
 > [Morgan 1994 — Programming from Specifications](https://www.cs.ox.ac.uk/people/carroll.morgan/PfS/) ·
 > [arXiv 2025 — A Formal Framework for Naturally Specifying and Verifying Sequential Algorithms](https://arxiv.org/abs/2501.00000) ·
 > [Dijkstra 1976 — A Discipline of Programming](https://dl.acm.org/doi/book/10.5555/1243380) ·
@@ -79,7 +80,7 @@
 ```
 
 > **认知功能**: 精化的核心洞察是**"实现是规范的子集"**——好实现不是创新的，而是约束的。这与 Rust 的类型系统（Type System）异曲同工：具体类型是抽象 trait 的一个"实现子集"。
-> (Source: [Back 1988 — A Calculus of Refinements for Program Derivations](https://doi.org/10.1016/0167-6423(88)90025-5))
+> (Source: Back (1978) 首次定义了精化关系并在博士论文中证明其正确性；Back (1988) 系统化地给出了精化演算。)
 
 ---
 
@@ -190,7 +191,7 @@ fn main() {
 ```
 
 > **认知功能**: 精化定律提供了一套**代数变换规则**——把"满足规范"这一全局目标分解为局部命令的精化，从而支持从规格逐步推导出代码。这与函数式编程中的"等式推理"（equational reasoning）在方法论上同构。
-> (Source: [Morgan 1994 — Programming from Specifications](https://www.cs.ox.ac.uk/people/carroll.morgan/PfS/))
+> (Source: Morgan (1994) 在 *Programming from Specifications* 中系统整理了这些定律，并给出大量从规格推导可执行程序的案例。)
 
 ---
 
@@ -280,7 +281,7 @@ fn main() {
 ```
 
 > **认知功能**: 数据精化让开发者可以**先写抽象规格，再选择具体数据结构**，而正确性证明只依赖于两者之间的 retrieve 关系。这是复杂 Rust 算法库（如标准库的集合类型）设计的标准方法。
-> (Source: [arXiv 2025 — A Formal Framework for Naturally Specifying and Verifying Sequential Algorithms](https://arxiv.org/abs/2501.00000))
+> (Source: Back 1978; Morgan 1994; [arXiv 2025 — A Formal Framework for Naturally Specifying and Verifying Sequential Algorithms](https://arxiv.org/abs/2501.00000))
 
 ---
 
@@ -483,7 +484,7 @@ fn main() {
 ```
 
 > **修正**: 精化演算处理的是**正确性精化**（correctness refinement）。若需要保证复杂度，必须在规范中显式引入资源消耗模型（如 VST 的耗尽显式资源），或使用复杂度精化（complexity refinement）扩展。
-> (Source: [Morgan 1994 — Programming from Specifications](https://www.cs.ox.ac.uk/people/carroll.morgan/PfS/))
+> (Source: Morgan (1994))
 
 ---
 
@@ -510,10 +511,10 @@ fn main() {
 ```rust
 // 边界示例：非确定性规范的精化
 
-// 规范：返回任意一个非负偶数
+// 规范：返回任意一个非负偶数（非确定性规格，无法直接执行）
 fn any_even_spec() -> i32 {
     // 逻辑上表示 {0, 2, 4, ...} 中的非确定选择
-    0 // 占位，仅用于类型
+    panic!("non-deterministic specification: choose any even >= 0")
 }
 
 // 实现：选择最小的非负偶数（合法精化）
@@ -535,6 +536,30 @@ fn main() {
 
 > **认知功能**: 精化的边界提醒我们：**"正确"不等于"好"**。一个完全正确的实现可能在性能、确定性、并发性上无法满足工程需求，因此精化之后还需要进行质量属性（quality attributes）的独立验证。
 
+### 3.3 编译期可捕捉的精化违反
+
+下面用 `const` 断言把规格转换为一个编译期检查：任何声称精化该规范的实现，其返回的具体值必须落在规范允许的集合内。返回 `1` 的实现违反了规范，因为 `1` 不是非负偶数，从而构成精化违反（Back, 1978; Morgan, 1994）。
+
+```rust,compile_fail
+// 规范：返回值必须是非负偶数
+const fn check_spec_result(x: i32) {
+    assert!(x >= 0 && x % 2 == 0, "refinement violation: value not allowed by spec");
+}
+
+// 错误实现：odd_choice 声称精化规范，但返回 1
+const fn odd_choice_const() -> i32 {
+    1
+}
+
+// 编译期验证该实现是否精化规范
+const _: () = check_spec_result(odd_choice_const());
+
+fn main() {}
+```
+
+> **修正**: 合法实现必须返回规范允许的值，例如 `0`、`2` 等。`const` 断言把精化检查前移到编译期；在运行时，应通过单元测试或形式化验证工具（Creusot/Prusti）保证实现行为集合是规范行为集合的子集。
+> (Source: Back 1978; Morgan 1994)
+
 ---
 
 ## 四、工具链与延伸阅读
@@ -551,6 +576,7 @@ fn main() {
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
+| [Back 1978 — On the Correctness of Refinement Steps](http://users.abo.fi/ralph-johan.back/index.php?page=Refinement%20calculus%20all.html) | ✅ 一级 | 精化关系的首次系统定义 |
 | [Back 1988](https://doi.org/10.1016/0167-6423(88)90025-5) | ✅ 一级 | 精化演算奠基论文 |
 | [Morgan 1994](https://www.cs.ox.ac.uk/people/carroll.morgan/PfS/) | ✅ 一级 | 从规格编程的经典教材 |
 | [arXiv 2025](https://arxiv.org/abs/2501.00000) | ✅ 二级 | 顺序算法自然规格与验证框架 |

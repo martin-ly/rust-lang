@@ -24,6 +24,7 @@
 > [Kahn, *The Semantics of a Simple Language for Parallel Programming*, 1974](https://dl.acm.org/doi/10.1145/800233.807045) ·
 > [Lee & Sangiovanni-Vincentelli, *A Framework for Comparing Models of Computation*, IEEE TCAD 1998](https://ieeexplore.ieee.org/document/660400) ·
 > [Halbwachs, *Synchronous Programming of Reactive Systems*, Kluwer 1993](https://link.springer.com/book/10.1007/978-1-4757-3785-3) ·
+> [Alur & Dill, *A Theory of Timed Automata*, Theoretical Computer Science 126, 1994](https://doi.org/10.1016/0304-3975(94)90010-8) ·
 > [futures-rs — `Stream`](https://docs.rs/futures/latest/futures/stream/trait.Stream.html) ·
 > [tokio-stream docs](https://docs.rs/tokio-stream/latest/tokio_stream/) ·
 > [tokio::sync::mpsc docs](https://docs.rs/tokio/latest/tokio/sync/mpsc/)
@@ -47,6 +48,8 @@
   - [二、定理链](#二定理链)
   - [三、反例与边界](#三反例与边界)
     - [反例：无界缓冲保障安全但违反活性/资源界](#反例无界缓冲保障安全但违反活性资源界)
+    - [compile\_fail：背压契约违反](#compile_fail背压契约违反)
+    - [compile\_fail：非法状态机转移](#compile_fail非法状态机转移)
   - [四、相关概念](#四相关概念)
   - [五、嵌入式测验（Embedded Quiz）](#五嵌入式测验embedded-quiz)
     - [测验 1：Kahn 进程网络确定性的前提是什么？（理解层）](#测验-1kahn-进程网络确定性的前提是什么理解层)
@@ -133,6 +136,7 @@ Rust 中的 KPN 投影：
 // 概念示意：两个 Kahn 节点通过有界 FIFO 边连接
 // 节点 A: 产生自然数序列
 // 节点 B: 将每个数平方后输出
+// 标记为 ignore：需要 tokio runtime；下方 §三提供 companion compile_fail 反例。
 
 use tokio::sync::mpsc;
 
@@ -207,6 +211,20 @@ async fn consumer(mut rx: mpsc::Receiver<i32>) {
 
 **同步假设（synchrony hypothesis）**：计算在 tick 内瞬时完成，因此在一个 tick 内不存在「部分输出」。这极大简化了形式验证，但要求 worst-case 执行时间远小于 tick 周期。违反同步假设会导致**时钟违例（clock violation）**。
 
+**时态自动机（Timed Automata, Alur & Dill 1994）** 位于两类模型之间：它在普通状态机上添加**时钟变量**与**时钟约束**，可以表达「事件必须在某时间窗口内发生」这类定量时态性质。形式化地：
+
+```text
+Timed Automaton ::= ⟨S, s₀, Σ, C, E, I⟩
+  S  : 状态集合
+  s₀ : 初始状态
+  Σ  : 事件/动作集合
+  C  : 时钟变量集合
+  E  : 带时钟约束的转移集合  (guard, reset)
+  I  : 状态不变量 (location invariant)
+```
+
+时态自动机的模型检验（如 UPPAAL）可判定有界时钟下的可达性，是验证硬实时反应式系统的重要工具。Rust 的 `tokio::time::timeout` 与 `IntervalStream` 可视为时态约束的工程投影，但不具备形式自动机的可判定验证能力。
+
 **异步模型**放弃全局 tick，采用事件驱动的偏序；正确性不再依赖「瞬时完成」，而依赖：
 
 - 每条事件最终被处理（活性，liveness）；
@@ -241,6 +259,7 @@ Sink<T, Error = E>: 推送端；生产者通过 start_send / poll_ready 推送 t
 `Stream` 对应数据流节点的**输出边**（token 从节点流出），`Sink` 对应**输入边**（token 流入节点）。一个完整的反应式 actor 通常是 `Stream + Sink` 的组合：从某处拉取、变换、再推送。
 
 ```rust,ignore
+// 需要 futures crate 与 async runtime；标记为 ignore 以避免 CI 直编失败。
 use futures::{Sink, SinkExt, Stream, StreamExt};
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -338,6 +357,74 @@ let (tx, mut rx) = mpsc::channel::<Vec<u8>>(8);
 ```
 
 > **边界**: 即使使用有界通道，若长期 λ > μ，系统仍会以延迟增加的方式饱和；背压只改变拥塞的呈现形式，不消除根本 overload。此时需要分片、降级或丢弃策略。
+
+### compile_fail：背压契约违反
+
+反应式系统的生产者若声明自己需要「可背压发送器」（`send` 返回 `Future`，窗口耗尽时挂起），则在编译期就不能接受「无界发送器」。下面用 trait bound 把这条背压契约编码进类型：
+
+```rust,compile_fail,E0277
+// 背压契约：发送操作必须是可挂起的，因此发送器必须实现 BoundedSender
+trait BoundedSender {
+    fn send(&self, item: i32) -> impl std::future::Future<Output = ()>;
+}
+
+struct BoundedChannel<const CAP: usize>;
+impl<const CAP: usize> BoundedSender for BoundedChannel<CAP> {
+    async fn send(&self, _item: i32) {}
+}
+
+struct UnboundedChannel; // 无界通道：send 立即完成，不传播背压
+
+// 生产者要求输入必须满足背压契约
+fn producer<S: BoundedSender>(tx: S) {
+    let _ = tx.send(42);
+}
+
+fn main() {
+    producer(UnboundedChannel); // E0277: UnboundedChannel 未实现 BoundedSender
+}
+```
+
+编译器输出 `E0277`，指出 `UnboundedChannel` 不满足 `BoundedSender` 约束。这对应反应式语义中的**背压契约违反**：把无界通道传入要求背压的生产者，会在运行期失去有界性与传播性（§1.3），导致内存无限增长。
+
+**修正**：使用实现 `BoundedSender` 的有界通道，或显式把无界发送器包装为带 `Semaphore` 的信用制发送器。
+
+### compile_fail：非法状态机转移
+
+在同步反应式语言（如 SCADE/Esterel）中，状态转移是编译期可静态检查的。Rust 可用**类型状态（type-state）模式**把「哪些事件在哪个状态下合法」编码进类型，使非法转移在编译期被拒绝。
+
+```rust,compile_fail,E0599
+// 类型状态：用泛型参数 S 表示泵的当前状态
+struct Idle;
+struct Running;
+struct Fault;
+
+struct Pump<S>(S);
+
+impl Pump<Idle> {
+    // 仅在 Idle 状态下允许 Start
+    fn start(self) -> Pump<Running> { Pump(Running) }
+}
+
+impl Pump<Running> {
+    fn stop(self) -> Pump<Idle> { Pump(Idle) }
+    fn overheat(self) -> Pump<Fault> { Pump(Fault) }
+}
+
+impl Pump<Fault> {
+    fn reset(self) -> Pump<Idle> { Pump(Idle) }
+}
+
+fn main() {
+    let pump = Pump(Idle);
+    // ❌ 非法转移：Idle 状态下没有 stop 方法
+    let pump = pump.stop();
+}
+```
+
+编译器输出 `E0599`，指出 `Pump<Idle>` 上不存在 `stop` 方法。这对应反应式状态机语义中的**非法转移**：`stop` 事件在 `Idle` 状态下没有定义，运行期若被触发将违反状态机契约。类型状态模式把这种契约前置到编译期。
+
+**修正**：确保每个事件处理只在合法状态下定义；或使用 `match`/Result 在运行期返回错误（见 §6.3）。
 
 ---
 

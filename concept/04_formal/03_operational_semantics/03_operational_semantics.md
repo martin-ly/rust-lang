@@ -23,7 +23,8 @@
 > [Plotkin 1981 — A Structural Approach to Operational Semantics](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf) ·
 > [Felleisen & Flatt — Modular Semantics](https://doi.org/10.1145/263690.263803) ·
 > [Felleisen & Hieb 1992 — The Revised Report on the Syntactic Theories of Sequential Control and State](https://doi.org/10.1017/S0956796800001368) ·
-> [RustBelt Paper](https://doi.org/10.1145/3158154) ·
+> [Wright & Felleisen 1994 — A Syntactic Approach to Type Soundness](https://doi.org/10.1006/inco.1994.1093) ·
+> [Jung et al. 2018 — RustBelt: Securing the Foundations of Rust](https://doi.org/10.1145/3158154) ·
 > [Stacked Borrows Paper](https://doi.org/10.1145/3371106)
 
 ## 📑 目录
@@ -73,7 +74,7 @@
     - [10.2 边界测试：panic 的栈展开语义（运行时行为）](#102-边界测试panic-的栈展开语义运行时行为)
     - [10.3 边界测试：形式化规则违反导致的编译错误（编译错误）](#103-边界测试形式化规则违反导致的编译错误编译错误)
     - [10.4 边界测试：悬垂引用的形式化禁止（编译错误）](#104-边界测试悬垂引用的形式化禁止编译错误)
-    - [10.5 边界测试：形式化语义中的非确定性选择（运行时行为差异）](#105-边界测试形式化语义中的非确定性选择运行时行为差异)
+    - [10.5 边界测试：形式化语义中的非确定性选择（编译错误）](#105-边界测试形式化语义中的非确定性选择编译错误)
     - [10.6 边界测试：堆叠借用（Stacked Borrows）与原始指针的别名（运行时 UB）](#106-边界测试堆叠借用stacked-borrows与原始指针的别名运行时-ub)
     - [10.7 边界测试：求值顺序与副作用的交互（运行时 UB）](#107-边界测试求值顺序与副作用的交互运行时-ub)
     - [10.3 边界测试：求值顺序与副作用的确定性（编译错误）](#103-边界测试求值顺序与副作用的确定性编译错误)
@@ -171,8 +172,8 @@
   └─────────────────┴─────────────────┴─────────────────┘
 ```
 
-> **语义洞察**: 小步语义是**并发和运行时（Runtime）分析**的基础——它允许在任意步骤插入检查点，这是 RustBelt 验证 unsafe 代码的关键。
-> (Source: [Pierce 2002 — TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/))
+> **语义洞察**: 小步语义是**并发和运行时（Runtime）分析**的基础——它允许在任意步骤插入检查点，这是 RustBelt 验证 unsafe 代码的关键。Pierce (2002) 在 *TAPL* 中以小步/大步对照为标准教法；RustBelt 则基于 Iris 框架为 λRust 建立小步操作语义（Jung et al. 2018）。
+> (Source: [Pierce 2002 — TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. 2018 — RustBelt](https://doi.org/10.1145/3158154))
 
 ---
 
@@ -204,8 +205,8 @@
   └── 是证明合流性（confluence）的关键工具
 ```
 
-> **上下文洞察**: 求值上下文是**结构归纳**的核心——它使我们可以对程序结构进行归纳证明，而非枚举（Enum）所有可能的程序。
-> (Source: [Felleisen & Hieb — The Revised Report on the Syntactic Theories of Sequential Control and State](https://doi.org/10.1017/S0956796800001368))
+> **上下文洞察**: 求值上下文是**结构归纳**的核心——它使我们可以对程序结构进行归纳证明，而非枚举（Enum）所有可能的程序。Felleisen & Hieb (1992) 用求值上下文精确刻画「下一个可约式」的位置；Wright & Felleisen (1994) 则在此基础上给出类型声音性的句法证明。
+> (Source: [Felleisen & Hieb 1992](https://doi.org/10.1017/S0956796800001368) · [Wright & Felleisen 1994](https://doi.org/10.1006/inco.1994.1093))
 
 ---
 
@@ -251,8 +252,8 @@
   这些规则构成了"抽象机器"的规范
 ```
 
-> **规则洞察**: 操作语义规则是**公理化的执行模型**——每条规则对应一个可能的计算步骤，所有规则的闭包（Closures）定义了程序的完整行为。
-> (Source: [Plotkin 1981 — A Structural Approach to Operational Semantics](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf))
+> **规则洞察**: 操作语义规则是**公理化的执行模型**——每条规则对应一个可能的计算步骤，所有规则的闭包（Closures）定义了程序的完整行为。Plotkin (1981) 的「结构化操作语义」（SOS）正是这种规则风格的典范。
+> (Source: [Plotkin 1981](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf))
 
 ---
 
@@ -327,8 +328,8 @@ Rust 操作语义的独特挑战:
   └── 用于 Miri 动态检测 UB
 ```
 
-> **Rust 特殊性**: Rust 的操作语义必须同时处理**值语义**（所有权（Ownership）转移）和**引用（Reference）语义**（借用（Borrowing）约束）——这比传统命令式语言复杂得多。
-> (Source: [Stacked Borrows Paper](https://doi.org/10.1145/3371106)) · (Source: [Tree Borrows](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html))
+> **Rust 特殊性**: Rust 的操作语义必须同时处理**值语义**（所有权（Ownership）转移）和**引用（Reference）语义**（借用（Borrowing）约束）——这比传统命令式语言复杂得多。RustBelt 在 Iris 中为 λRust 建立了这一组合模型的小步操作语义及其 soundness 证明。
+> (Source: [Jung et al. 2018 — RustBelt: Securing the Foundations of Rust](https://doi.org/10.1145/3158154)) · (Source: [Stacked Borrows Paper](https://doi.org/10.1145/3371106)) · (Source: [Tree Borrows](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html))
 
 ---
 
@@ -415,7 +416,7 @@ Future 作为状态机对象:
   编译器优化验证:
   ├── 证明优化不改变语义
   ├── 需要源语言和目标语言的操作语义
-  └── 活跃研究领域（LLVM 的 Alive 工具）
+  └── 活跃研究领域（LLVM 的 Alive 工具：Lopes et al. 2015；Lee et al. 2017）
 
   教学:
   ├── 理解 Rust 所有权和借用的精确含义
@@ -423,8 +424,8 @@ Future 作为状态机对象:
   └── 调试复杂的生命周期问题
 ```
 
-> **应用洞察**: 操作语义不仅是**理论研究工具**——它直接支撑了 Rust 的验证工具链（Miri、RustBelt）和教学材料。
-> (Source: [a-mir-formality](https://github.com/rust-lang/a-mir-formality))
+> **应用洞察**: 操作语义不仅是**理论研究工具**——它直接支撑了 Rust 的验证工具链（Miri、RustBelt）和教学材料。Alive 等工具则把同样思路用于编译器优化：为 LLVM IR 的源程序与优化后程序建立小步语义，并用 SMT 验证两者观察等价。
+> (Source: [a-mir-formality](https://github.com/rust-lang/a-mir-formality)) · (Source: [Lopes et al. 2015 — Alive: Provably Correct Peephole Optimizations](https://doi.org/10.1145/2813885.2737965)) · (Source: [Lee et al. 2017 — Reconciling High-Level Optimizations and Low-Level Code in LLVM](https://doi.org/10.1145/3133887))
 
 ---
 
@@ -840,12 +841,16 @@ Trait 系统是 Rust 形式化验证中「最后的主要堡垒」。其难度�
 
 ## 权威来源索引
 
->
->
->
->
->
->
+| 来源 | 可信度 | 说明 |
+|:---|:---:|:---|
+| [Plotkin 1981 — A Structural Approach to Operational Semantics](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf) | ✅ 一级 | 结构化操作语义（SOS）奠基 |
+| [Felleisen & Hieb 1992 — The Revised Report on the Syntactic Theories of Sequential Control and State](https://doi.org/10.1017/S0956796800001368) | ✅ 一级 | 求值上下文与可约式定位技术 |
+| [Wright & Felleisen 1994 — A Syntactic Approach to Type Soundness](https://doi.org/10.1006/inco.1994.1093) | ✅ 一级 | 基于小步语法的类型声音性证明 |
+| [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) | ✅ 一级 | 类型与编程语言标准教材（TAPL） |
+| [Winskel 1993 — The Formal Semantics of Programming Languages](https://mitpress.mit.edu/9780262731034) | ✅ 一级 | 形式语义经典教材 |
+| [Jung et al. 2018 — RustBelt: Securing the Foundations of Rust](https://doi.org/10.1145/3158154) | ✅ 一级 | Rust 所有权/借用的小步操作语义与内存安全 |
+
+> **引用惯例**: 文中使用 *Author(s) Year* 的学术引用格式，并在本表给出完整书目与链接。涉及 Rust 专属内存模型（Stacked/Tree Borrows）时同时引用 RustBelt 与 Miri 相关论文。
 
 ---
 
@@ -907,11 +912,11 @@ fn main() {
 
 ### 10.3 边界测试：形式化规则违反导致的编译错误（编译错误）
 
-```rust,compile_fail
+```rust,compile_fail,E0502
 fn main() {
-    let x = 5;
+    let mut x = 5;
     let r1 = &x;
-    let r2 = &mut x; // ❌ 编译错误: 不能同时拥有共享引用和可变引用
+    let r2 = &mut x; // ❌ E0502: 不能同时拥有共享引用和可变引用
     println!("{} {}", r1, r2);
 }
 ```
@@ -920,10 +925,10 @@ fn main() {
 
 ### 10.4 边界测试：悬垂引用的形式化禁止（编译错误）
 
-```rust,compile_fail
+```rust,compile_fail,E0106
 fn dangle() -> &i32 {
     let x = 5;
-    &x // ❌ 编译错误: `x` 在返回值后将被释放
+    &x // ❌ E0106 / E0515: 返回引用指向局部变量 `x`
 } // x 在这里被 drop，但返回值引用了它
 
 fn main() {
@@ -934,22 +939,20 @@ fn main() {
 
 > **修正**: 在形式化语义中，局部变量 `x` 的生命周期（Lifetimes） `ℓ_x` 受限于函数作用域。当函数返回时，`x` 的存储被释放，生命周期结束。返回 `&x` 意味着返回的引用生命周期 `ℓ_r` 必须满足 `ℓ_r ⊆ ℓ_x`，但函数返回后 `ℓ_x` 已结束，因此 `ℓ_r` 无法有效。编译器通过**生命周期推断**发现这一矛盾：返回类型的隐式生命周期参数 `'a` 无法与任何输入参数匹配（因为 `x` 是局部变量），因此无法构造有效的生命周期约束。这与 C/C++ 的悬垂指针（编译器通常不报错）形成鲜明对比——Rust 将"使用已释放内存"这一运行时错误转化为编译期类型错误。(Source: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · [RustBelt Paper](https://doi.org/10.1145/3158154))
 
-### 10.5 边界测试：形式化语义中的非确定性选择（运行时行为差异）
+### 10.5 边界测试：形式化语义中的非确定性选择（编译错误）
 
-```rust
+```rust,compile_fail,E0499
 fn main() {
     let mut x = 0;
     let r1 = &mut x;
-    let r2 = &mut x;
-    // 在形式化语义中，此程序是未定义的（UB）
-    // 但实际编译器可能产生不同行为：
-    // 某些版本可能编译通过（NLL 前），某些版本编译错误（NLL 后）
-    // *r1 = 1;
-    // *r2 = 2;
+    let r2 = &mut x; // ❌ E0499: 不能同时持有两个 &mut x
+    // 在形式化语义中，此程序违反了借用不变式；
+    // 现代 Rust（NLL/Polonius 后）在编译期即拒绝。
+    println!("{} {}", r1, r2);
 }
 ```
 
-> **修正**: Rust 的形式化语义（如 RustBelt、Stacked Borrows、Tree Borrows）定义了程序的"合法"与"非法"行为。但编译器实现是演进的：旧版编译器可能接受某些形式化上非法的程序（保守性不足），新版编译器可能拒绝（更精确的分析）。这导致**语义与实现的不一致**：形式化语义说"这是 UB"，但旧编译器"它能编译"。Rust 的策略：逐步收紧编译器，使实现趋近形式化语义。NLL、Polonius、MIR  borrow checker 都是这一进程的体现。这与 C/C++ 的 "实现定义行为"（compiler-specific）不同——Rust 的目标是"形式化语义定义行为，编译器实现语义"。但完全对齐是长期过程，期间存在过渡状态。(Source: [RustBelt Paper](https://doi.org/10.1145/3158154) · [Stacked Borrows vs Tree Borrows](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html))
+> **修正**: Rust 的形式化语义（如 RustBelt、Stacked Borrows、Tree Borrows）定义了程序的"合法"与"非法"行为。编译器实现不断演进：旧版编译器可能接受某些形式化上非法的程序（保守性不足），新版编译器则通过 NLL、Polonius、MIR borrow checker 更精确地拒绝。上述代码在现代 Rust 1.97 下直接触发 **E0499**（cannot borrow `x` as mutable more than once at a time）。这与 C/C++ 的 "实现定义行为"（compiler-specific）不同——Rust 的目标是"形式化语义定义行为，编译器实现语义"。(Source: [Jung et al. 2018 — RustBelt](https://doi.org/10.1145/3158154) · [Stacked Borrows vs Tree Borrows](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html))
 
 ### 10.6 边界测试：堆叠借用（Stacked Borrows）与原始指针的别名（运行时 UB）
 
@@ -983,13 +986,12 @@ fn main() {
 
 > **修正**: Rust 明确指定了大多数表达式的**求值顺序**：元组/数组元素左到右、`let` 绑定右到左（先求值右侧）、函数参数左到右（但注意：这是 2024 Edition 的变更，旧 Edition 未指定）。但某些边缘情况：1) `a + b` 中 `a` 和 `b` 的求值顺序；2) 方法调用的 receiver 和参数顺序；3) 闭包（Closures）参数捕获顺序。依赖求值顺序的代码是脆弱的——不同编译器版本或优化级别可能改变行为。安全模式：将副作用分离到独立语句，不依赖复合表达式中的求值顺序。这与 C/C++ 的"大多数求值顺序未指定"（UB 来源之一）或 Java 的"左到右求值"（明确指定）不同——Rust 趋向于更明确的求值顺序，但仍在演进中。来源: [Rust Reference — Evaluation Order](https://doc.rust-lang.org/reference/introduction.html) · 来源: [Rust Edition 2024]
 
-### 10.3 边界测试：求值顺序与副作用的确定性（编译错误）
+### 10.3 边界测试：求值顺序与副作用的确定性（编译错误 E0502）
 
-```rust,compile_fail
+```rust,compile_fail,E0502
 fn main() {
     let mut x = 0;
-    // ❌ 运行时 UB: 同一标量值的 &mut 和 & 别名（在 unsafe 中）
-    // 但在 safe Rust 中，以下代码是合法的：
+    // ❌ E0502: 同一标量值的 &mut 和 & 不能同时活跃
     let r = &mut x;
     *r += 1;
     let s = &x; // 错误: 不能从 &mut x 创建 &x
@@ -999,14 +1001,41 @@ fn main() {
 
 > **修正**: Rust 的操作语义明确定义了**求值顺序**和**别名规则**。safe Rust 中，`&mut T` 和 `&T` 不能同时指向同一数据（编译期保证）。但在 `unsafe` 块中，可以通过裸指针创建别名：`*const T` 和 `*mut T` 同时指向同一地址是**合法**的，但解引用时若存在 `&mut` 活跃则 UB。Stacked Borrows / Tree Borrows 模型定义了**精确规则**：1) 创建 `&mut` 会"弹出"（pop）所有重叠的共享引用；2) 通过 `&mut` 创建 `*mut` 保留 `&mut` 的权限；3) 从 `*mut` 重新创建 `&` 或 `&mut` 需满足无活跃冲突借用。这与 C 的"无别名假设"（strict aliasing rule，编译器假设 `int*` 和 `float*` 不别名）或 LLVM 的 `noalias` 元数据类似——Rust 的别名规则更严格，但允许通过 unsafe 显式控制。(Source: [Rust Reference — Evaluation Order](https://doc.rust-lang.org/reference/expressions.html#evaluation-order) · [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/))
 
+### 10.8 边界测试：所有权移动后使用的形式化禁止（编译错误 E0382）
+
+```rust,compile_fail,E0382
+fn main() {
+    let v = vec![1, 2, 3];
+    let w = v;            // 所有权从 v 转移到 w
+    println!("{:?}", v);  // ❌ E0382: borrow of moved value `v`
+}
+```
+
+> **修正**: Rust 操作语义把 `let w = v;` 建模为**资源转移**：`v` 对 `Vec` 的所有权被消耗并转移到 `w`，原绑定 `v` 不再有效。形式化上，状态从 `owns(Σ, v, Vec)` 变为 `owns(Σ', w, Vec) ∧ ¬alive(Σ', v)`。试图在转移后使用 `v` 会触发 **E0382**，因为编译器无法在形式上构造一个已失效绑定的值。这与 C++ 的隐式拷贝或 Java 的引用赋值形成鲜明对比——Rust 把「使用已移动值」这一运行时错误转化为编译期类型错误。
+> (Source: [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html) · [Jung et al. 2018 — RustBelt](https://doi.org/10.1145/3158154))
+
+### 10.9 边界测试：共享借用与可变借用互斥（编译错误 E0502）
+
+```rust,compile_fail,E0502
+fn main() {
+    let mut s = String::from("hello");
+    let r1 = &s;              // 共享借用（只读）
+    let r2 = &mut s;          // ❌ E0502: cannot borrow `s` as mutable because it is also borrowed as immutable
+    println!("{} {}", r1, r2);
+}
+```
+
+> **修正**: 操作语义中的借用不变式要求：对同一内存位置，要么存在任意数量的共享借用 `&T`，要么存在一个可变借用 `&mut T`，二者**互斥**。`r1` 的生命周期在 `println!` 处仍然活跃，因此 `r2 = &mut s` 违反了该不变式，编译器拒绝并报告 **E0502**。形式化上，这对应于线性逻辑中的资源分裂：`own(s)` 可分裂为多个 `read(s)` 或一个 `write(s)`，但不能同时分裂为 `read(s)` 与 `write(s)`。
+> (Source: [Rust Reference — Borrowing](https://doc.rust-lang.org/reference/expressions.html) · [Stacked Borrows](https://doi.org/10.1145/3371106))
+
 ### 10.2 边界测试：match 分支返回类型不一致
 
-```rust,compile_fail
+```rust,compile_fail,E0308
 fn main() {
     let x = Some(5);
     let v = match x {
         Some(n) => n,
-        // ❌ 编译错误: match arm 类型不匹配
+        // ❌ E0308: match arm 类型不匹配
         None => "none",
     };
     println!("{}", v);
@@ -1017,7 +1046,7 @@ fn main() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-本组测验围绕测验 1：小步语义 vs 大步语义（理解层）、测验 2：求值上下文（Evaluation Contexts）（应用层）、测验 3：Rust 操作语义的独特性（分析层）、测验 4：形式化覆盖边界（评价层）等方面设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用检查」或「运行时行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
+本组测验围绕测验 1：小步语义 vs 大步语义（理解层）、测验 2：求值上下文（Evaluation Contexts）（应用层）、测验 3：Rust 操作语义的独特性（分析层）、测验 4：形式化覆盖边界（评价层）、测验 5：操作语义 vs 测试（分析层）等方面设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用检查」或「运行时行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
 
 ### 测验 1：小步语义 vs 大步语义（理解层）
 

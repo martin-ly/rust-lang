@@ -371,6 +371,18 @@ fn main() {
 
 从可计算性角度看，`factorial` 是一个全递归函数；但 Rust 的类型系统不验证其全性（totality）。验证全性需要依赖外部工具（如 `termination` 证明器）或受限制的语言子集。
 
+Rust 的 `const fn` 子集要求编译期终止，无界递归或溢出会触发 `E0080`——这是 Church-Turing 论题在工程语言中的显式截断：
+
+```rust,compile_fail,E0080
+const fn unbounded_search() -> u32 {
+    unbounded_search() // ERROR E0080: 常量求值无法终止
+}
+
+const X: u32 = unbounded_search();
+
+fn main() {}
+```
+
 下面的示例用 Rust 模拟 μ-递归中的**无界极小化**：
 
 ```rust
@@ -828,7 +840,7 @@ Rust 编译器是否会拒绝一个它无法证明终止的递归函数？
 
 ---
 
-## 六、权威来源索引
+## 六、权威来源 / International Authority References
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -839,17 +851,25 @@ Rust 编译器是否会拒绝一个它无法证明终止的递归函数？
 | [Kleene 1952 — Introduction to Metamathematics](https://en.wikipedia.org/wiki/Introduction_to_Metamathematics) | ✅ 一级 | 递归函数论；算术层级 |
 | [Rice 1953 — Classes of Recursively Enumerable Sets](https://doi.org/10.1090/S0002-9904-1953-09692-2) | ✅ 一级 | Rice 定理 |
 | [Post 1946 — A variant of a recursively unsolvable problem](https://doi.org/10.1090/S0002-9904-1946-08555-9) | ✅ 一级 | Post 对应问题 |
-| [Sipser 2012 — Introduction to the Theory of Computation, 3rd ed.](https://math.mit.edu/~sipser/book.html) | ✅ 一级 | 可计算性教材；图灵机 §3.1、可判定性 §4.1–4.2、Rice §5.1、PCP §5.2、归约与完备性 §§5.1, 5.3, 6.1 |
-| [Soare 1987 — Recursively Enumerable Sets and Degrees](https://doi.org/10.1007/978-3-662-21917-0) | ✅ 一级 | 递归可枚举集合与度理论 |
+| [Sipser 2013 — Introduction to the Theory of Computation, 3rd ed.](https://math.mit.edu/~sipser/book.html) | ✅ 一级 | 可计算性教材；图灵机 §3.1、可判定性 §4.1–4.2、Rice §5.1、PCP §5.2、归约与完备性 §§5.1, 5.3, 6.1 |
 | [Soare 2016 — Turing Computability. Theory and Applications](https://doi.org/10.1007/978-3-642-31933-4) | ✅ 一级 | 现代可计算性教材；算术层级 §3.4 |
+| [Cutland 1980 — Computability: An Introduction to Recursive Function Theory](https://doi.org/10.1017/CBO9780511574916) | ✅ 一级 | 递归函数与可计算性入门 |
 | [Hopcroft, Motwani & Ullman 2006 — Introduction to Automata Theory, Languages, and Computation, 3rd ed.](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation) | ✅ 一级 | 自动机与形式语言；图灵机变体 §8、不可判定性 §9、PCP §9.4 |
+| [Kozen 1997 — Automata and Computability](https://doi.org/10.1007/978-1-4612-1844-9) | ✅ 一级 | 自动机、可计算性与复杂度理论 |
+| [Appel 2004 — Modern Compiler Implementation in Java/C/ML, 2nd ed.](https://www.cs.princeton.edu/~appel/modern/) | ✅ 一级 | 编译器实现与语义后端（Tiger Book） |
 | [Barendregt 1984 — The Lambda Calculus: Its Syntax and Semantics](https://doi.org/10.1016/B978-0-444-87508-2.50006-X) | ✅ 一级 | λ 演算标准参考书；Y 组合子 §6.5、可计算函数 §6.3 |
 | [Barendregt 1992 — Lambda Calculi with Types](https://doi.org/10.1016/B978-0-444-88074-1.50018-9) | ✅ 一级 | λ 立方；类型系统与可判定性 |
 | [Barendregt 1997 — The Impact of the Lambda Calculus](https://doi.org/10.1093/logcom/7.2.181) | ✅ 一级 | λ 演算对计算理论的影响 |
+| [Scott 1972 — Continuous Lattices](https://doi.org/10.1007/BFb0073967) | ✅ 一级 | 连续格与 Scott 域奠基 |
 | [Scott 1976 — Data types as lattices](https://doi.org/10.1137/0205037) | ✅ 一级 | Scott 域与指称语义；递归类型不动点 |
+| [Scott & Strachey 1971/2000 — Toward a Mathematical Semantics for Computer Languages](https://www.cs.ox.ac.uk/files/3232/PRG06.pdf) | ✅ 一级 | 指称语义奠基文献（PRG-6） |
+| [Strachey 1973 — The Varieties of Programming Language](https://doi.org/10.1016/S0065-2458(08)60314-4) | ✅ 一级 | 程序语言语义分类 |
+| [Wadler 2015 — Propositions as Types](https://doi.org/10.1145/2699407) | ✅ 一级 | Curry-Howard 对应现代综述 |
+| [Ord 2006 — The Many Forms of Hypercomputation](https://doi.org/10.1016/j.apal.2005.09.012) | ✅ 一级 | 超计算与 Church-Turing 边界讨论 |
 | [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) | ✅ 一级 | 简单类型/Church 类型化 §9、上下文等价 Ch. 8、递归类型 Ch. 20、多态 Ch. 23 |
 | [Girard, Taylor & Lafont 1989 — Proofs and Types](https://www.paultaylor.eu/stable/Proofs+Types.html) | ✅ 一级 | Curry-Howard 对应 |
 | [Felleisen 1991 — On the expressive power of programming languages](https://www.cs.tufts.edu/~nr/cs257/archive/matthias-felleisen/expressive-as-published.pdf) | ✅ 一级 | 表达力框架 |
+| [Felleisen & Flatt 1998 — Programming Languages and Their Calculi](https://www2.ccs.neu.edu/racket/pubs/scp91-felleisen.pdf) | ✅ 一级 | 表达力与演算扩展 |
 | [Pitts 1997 — Operationally-based theories of program equivalence](https://www.cl.cam.ac.uk/~amp12/papers/index.html) | ✅ 一级 | 操作语义、CIU 与上下文等价 |
 | [Ahmed 2006 — Step-indexed syntactic logical relations](https://doi.org/10.1007/11693024_6) | ✅ 一级 | Step-indexed logical relations |
 | [Jung et al. 2018 — RustBelt](https://plv.mpi-sws.org/rustbelt/) | ✅ 一级 | Rust safe/unsafe 边界的逻辑关系证明 |

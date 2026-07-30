@@ -31,10 +31,12 @@
     - [反例："Rust mpsc 就是 CSP"](#反例rust-mpsc-就是-csp)
     - [反例："Actor 邮箱保证全局 FIFO"](#反例actor-邮箱保证全局-fifo)
     - [反例："Petri 网只是流程图"](#反例petri-网只是流程图)
+    - [反例：async 块捕获局部引用逃逸作用域（E0373）](#反例async-块捕获局部引用逃逸作用域e0373)
+    - [反例：通道类型协议错配（E0308）](#反例通道类型协议错配e0308)
   - [三、相关概念](#三相关概念)
   - [四、嵌入式测验（Embedded Quiz）](#四嵌入式测验embedded-quiz)
   - [五、🧭 思维导图（Mindmap）](#五-思维导图mindmap)
-  - [权威来源索引](#权威来源索引)
+  - [International Authority References（国际权威来源）](#international-authority-references国际权威来源)
 
 ---
 
@@ -98,11 +100,39 @@ fn main() {
 }
 ```
 
-共享内存模型的**关键风险**是死锁与数据竞争；Rust 的所有权系统消除了数据竞争，但**死锁仍是运行时性质**（例如两线程以不同顺序获取两把锁）。
+共享内存模型的**关键风险**是死锁与数据竞争；Rust 的所有权系统消除了数据竞争（Herlihy & Shavit, 2011 将无数据竞争保证视为并发数据结构可组合性的核心前提），但**死锁仍是运行时性质**（例如两线程以不同顺序获取两把锁）。
+
+下面的 `compile_fail` 反例说明 Rust 如何在编译期拦截跨线程类型错误与数据竞争模式：
+
+```rust,compile_fail,E0277
+use std::rc::Rc;
+use std::thread;
+
+fn main() {
+    // Rc<T> 不是 Send，不能跨线程移动
+    let data = Rc::new(42);
+    thread::spawn(move || {
+        println!("{}", *data);
+    });
+}
+```
+
+```rust,compile_fail,E0499
+fn main() {
+    let mut data = 0;
+    let r1 = &mut data;
+    let r2 = &mut data; // 第二次可变借用被禁止
+
+    std::thread::scope(|s| {
+        s.spawn(|| { *r1 += 1; });
+        s.spawn(|| { *r2 += 1; });
+    });
+}
+```
 
 ### 1.3 消息传递模型
 
-消息传递模型把进程/线程视为自治实体，彼此不共享地址空间，通过发送/接收消息通信。它内部又可细分为三种经典骨架：CSP、Actor、π 演算。
+消息传递模型把进程/线程视为自治实体，彼此不共享地址空间，通过发送/接收消息通信。它内部又可细分为三种经典骨架：CSP（Hoare, 1978; 1985）、Actor（Hewitt, 1973; Agha, 1986）与 π 演算（Milner, 1999）；CCS 作为 π 演算的直接前身由 Milner (1989) 系统阐述。
 
 #### CSP：同步通道与会合
 
@@ -149,7 +179,7 @@ impl Actor for Counter {
 
 #### π 演算：移动通道
 
-π 演算（Milner, Parrow & Walker 1992）在 CCS 之上增加**通道名作为消息传递**的能力，从而建模通信拓扑的动态变化——即**移动性（mobility）**。系统的通道结构在运行时演化。
+π 演算（Milner, Parrow & Walker 1992; Milner, 1999）在 CCS 之上增加**通道名作为消息传递**的能力，从而建模通信拓扑的动态变化——即**移动性（mobility）**。系统的通道结构在运行时演化。Milner (1992) 的 *Functions as Processes* 进一步证明函数式计算可编码为进程交互，这为 Rust 中把闭包/通道作为一等值传递提供了理论背景。
 
 Rust 中最接近移动性的工程事实是 `Sender<T>` 本身可以作为消息被发送：
 
@@ -170,6 +200,25 @@ fn main() {
     work_tx.send(7).unwrap();
 }
 ```
+
+但 Rust 的所有权与生命周期约束会在通道移动性上附加额外限制：下面的 `compile_fail` 反例说明，如果试图通过通道发送一个指向局部值的借用名字，生命周期检查会阻止它逃逸作用域：
+
+```rust,compile_fail,E0597
+use std::sync::mpsc;
+
+fn main() {
+    let (tx, rx) = mpsc::channel::<&str>();
+    let received: &str;
+    {
+        let local = String::from("mobility");
+        tx.send(&local).unwrap(); // 想把局部名字作为消息传递
+        received = rx.recv().unwrap();
+    } // local 在此 drop，但 received 仍持有它的引用
+    println!("{}", received);
+}
+```
+
+在消息传递模型之上，**session types**（Honda 1993; Gay & Hole 2005; Wadler 2012）把通信协议本身编码为类型，保证通道两端在顺序、分支与递归上的一致性；**algebraic effects**（Plotkin & Pretnar 2009; Dolan et al. 2017）则把控制流与效应解释分离，可用来统一表达并发、异常、状态等语义。二者在 Rust 中尚未进入标准库，但为 `async/await`、类型化 actor 与 effect system 研究提供了形式语义背景。
 
 ### 1.4 Petri 网
 
@@ -245,6 +294,39 @@ actor_b.do_send(Use); // 可能 Use 先于 Init 被处理
 - **同步**：一个变迁需要多个前置库所同时有令牌才能触发。
 
 把 Petri 网当成流程图会忽略其**局部因果语义**与**可达性分析**能力。
+
+### 反例：async 块捕获局部引用逃逸作用域（E0373）
+
+`async` 块默认按引用捕获局部变量；若返回的 `Future` 超出被捕获变量的生命周期，编译器会报 E0373。这相当于把「并发/异步任务的生命周期」写进了类型系统：
+
+```rust,compile_fail,E0373
+fn make_future() -> impl std::future::Future<Output = ()> {
+    let s = String::from("captured");
+    async {
+        println!("{}", s); // async 块按引用捕获 s，但 Future 试图逃逸作用域
+    }
+}
+
+fn main() {}
+```
+
+**修正**：将 `s` 移入 `async` 块内部，或改用 `async move { ... }` 明确按值捕获。
+
+### 反例：通道类型协议错配（E0308）
+
+`mpsc::channel::<T>()` 把协议中的消息类型 `T` 编码为 Rust 类型参数。若发送端与接收端对 `T` 的约定不一致，编译器直接拒绝，这正是 session types「对偶类型在编译期匹配」思想的最朴素体现：
+
+```rust,compile_fail,E0308
+use std::sync::mpsc;
+
+fn main() {
+    let (tx, _rx) = mpsc::channel::<i32>();
+    // Sender<i32> 与 String 不兼容：协议类型错配
+    tx.send("hello".to_string()).unwrap();
+}
+```
+
+**修正**：统一通道两端类型 `T`，或引入显式协议枚举（如 `enum Msg { Init, Data(i32), Done }`）。
 
 ---
 
@@ -340,14 +422,21 @@ mindmap
 
 ---
 
-## 权威来源索引
+## International Authority References（国际权威来源）
 
 - Hoare, C. A. R. *Communicating Sequential Processes*. Communications of the ACM 21(8), 1978, 666–677. [DOI](https://doi.org/10.1145/359576.359585)
 - Hoare, C. A. R. *Communicating Sequential Processes*. Prentice Hall, 1985.
 - Hewitt, C., Bishop, P., Steiger, R. *A Universal Modular ACTOR Formalism for Artificial Intelligence*. IJCAI 1973. [PDF（IJCAI 官方）](https://www.ijcai.org/Proceedings/73/Papers/027B.pdf)
 - Hewitt, C. *Actor Model of Computation: Scalable Robust Information Systems*. arXiv:1008.1459. [arXiv](https://arxiv.org/abs/1008.1459)
+- Milner, R. *Communication and Concurrency*. Prentice Hall, 1989. [DOI](https://doi.org/10.5555/28251)
 - Milner, R., Parrow, J., Walker, D. *A Calculus of Mobile Processes*. Information and Computation 100(1), 1992. [DOI](https://doi.org/10.1016/0890-5401(92)90008-4)
 - Milner, R. *Communicating and Mobile Systems: the π-Calculus*. Cambridge University Press, 1999.
+- Honda, K. "Types for Dyadic Interaction." *CONCUR 1993*, LNCS 715, 1993, 509–523. [DOI](https://doi.org/10.1007/3-540-57208-2_35)
+- Gay, S. J., Hole, M. "Subtyping for Session Types in the Pi Calculus." *Acta Informatica* 42(2–3), 2005, 191–225. [DOI](https://doi.org/10.1007/s00236-005-0177-z)
+- Wadler, P. "Propositions as Sessions." *ICFP 2012*, 2012, 273–286. [DOI](https://doi.org/10.1145/2364527.2364568)
+- Plotkin, G. D., Pretnar, M. "Handlers of Algebraic Effects." *ESOP 2009*, LNCS 5502, 2009, 80–94. [DOI](https://doi.org/10.1007/978-3-642-00590-9_7)
+- Dolan, S., Eliopoulos, S., Hillerström, D., Madhavapeddy, A., Sivaramakrishnan, K. C., White, L. "Concurrent System Programming with Effect Handlers." *TFP 2017*, LNCS 10788, 2017, 98–117. [DOI](https://doi.org/10.1007/978-3-319-89719-6_6)
+- Herlihy, M., Shavit, N. *The Art of Multiprocessor Programming*. Morgan Kaufmann, 2011. [ScienceDirect](https://www.sciencedirect.com/book/9780123973375/the-art-of-multiprocessor-programming)
 - Reisig, W. *Petri Nets: An Introduction*. Springer, 1985.
 - [std::sync::mpsc — Rust 标准库文档](https://doc.rust-lang.org/std/sync/mpsc/) · [std::sync::Mutex — Rust 标准库文档](https://doc.rust-lang.org/std/sync/struct.Mutex.html) · [The Rust Programming Language: Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 

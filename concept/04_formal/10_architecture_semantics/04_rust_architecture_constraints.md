@@ -17,9 +17,25 @@
 ---
 
 > **来源**: [Rust Reference — Items and Visibility](https://doc.rust-lang.org/reference/visibility-and-privacy.html) ·
+> [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/traits.html#orphan-rules) ·
 > [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) ·
 > [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) ·
 > [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+
+---
+
+> **权威来源 / Provenance**: 本节 Rust 架构约束分析主要基于 Rust Reference（Items and Visibility、Orphan Rules）、Rust API Guidelines 与 Cargo Book；软件架构理论基础参考 Shaw & Garlan (1996)、Garlan & Shaw (1993)、Medvidovic & Taylor (2000)、Wermelinger (1994)、ISO/IEC/IEEE 42010:2022 与 ACME/Wright/Rapide 等经典 ADL 工作。
+>
+> - **Shaw & Garlan (1996)** — *Software Architecture: Perspectives on an Emerging Discipline*. Prentice Hall. [PDF](https://www.cs.cmu.edu/~search/articles/books/SA.book.pdf)
+> - **Garlan & Shaw (1993)** — *An Introduction to Software Architecture*. [https://doi.org/10.1142/9789812813032_0001](https://doi.org/10.1142/9789812813032_0001)
+> - **Medvidovic & Taylor (2000)** — *A Classification and Comparison Framework for Software Architecture Description Languages*. [https://doi.org/10.1109/32.825767](https://doi.org/10.1109/32.825767)
+> - **Wermelinger (1994)** — *Formal Specification of Software Architecture*. [https://doi.org/10.1016/0167-6423(94)00022-5](https://doi.org/10.1016/0167-6423(94)00022-5)
+> - **ISO/IEC/IEEE 42010:2022** — *Software and Systems Engineering — Architecture Description*. ISO, 2022. [https://www.iso.org/standard/74296.html](https://www.iso.org/standard/74296.html)
+> - **Garlan, Monroe & Wile (1997)** — *ACME: An Architecture Description Interchange Language*. In *Proceedings of CASCON'97*, 169–183.
+> - **Allen (1997)** — *A Formal Approach to Software Architecture*. Ph.D. thesis, Carnegie Mellon University. (Wright ADL based on CSP.)
+> - **Luckham et al. (1995)** — *Specification and Analysis of System Architecture Using Rapide*. IEEE Transactions on Software Engineering, 21(4), 336–355. [https://doi.org/10.1109/32.385970](https://doi.org/10.1109/32.385970)
+> - **Rust Reference — Items and Visibility** — [https://doc.rust-lang.org/reference/visibility-and-privacy.html](https://doc.rust-lang.org/reference/visibility-and-privacy.html)
+> - **Rust Reference — Orphan Rules** — [https://doc.rust-lang.org/reference/items/traits.html#orphan-rules](https://doc.rust-lang.org/reference/items/traits.html#orphan-rules)
 
 ## 📑 目录
 
@@ -39,9 +55,11 @@
     - [4.1 反例：`pub` 但内部类型泄漏](#41-反例pub-但内部类型泄漏)
     - [4.2 反例：crate 边界未阻止语义版本破坏](#42-反例crate-边界未阻止语义版本破坏)
     - [4.3 边界：孤儿规则限制跨 crate 的 trait 实现](#43-边界孤儿规则限制跨-crate-的-trait-实现)
+    - [4.4 反例：冲突的 trait 实现触发 `E0119`](#44-反例冲突的-trait-实现触发-e0119)
   - [五、相关概念](#五相关概念)
   - [六、嵌入式测验（Embedded Quiz）](#六嵌入式测验embedded-quiz)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -74,7 +92,7 @@ Crate 是 Rust 的三重边界：
 
 ### 1.3 Workspace：产品线与架构耦合
 
-Cargo workspace 允许一组 crate 共享 `Cargo.lock` 和 target 目录，但**不共享 privacy 边界**。_workspace 是构建产物组织，不是运行时架构单元_。滥用 workspace 共享内部类型会导致隐式跨 crate 耦合。
+Cargo workspace 允许一组 crate 共享 `Cargo.lock` 和 target 目录，但**不共享 privacy 边界**。*workspace 是构建产物组织，不是运行时架构单元*。滥用 workspace 共享内部类型会导致隐式跨 crate 耦合。
 
 ### 1.4 ABI 与跨边界契约
 
@@ -149,19 +167,26 @@ fn greet_user(repo: &dyn UserRepository, id: u64) -> String {
 
 ## 四、反例与边界
 
-### 4.1 反例：`pub` 但内部类型泄漏
+### 4.1 反例：`pub` 类型泄漏私有字段类型
 
-```rust,ignore
+公开结构体的字段若使用 crate 外部无法命名的私有类型，编译器会拒绝这种“private-in-public”泄漏：
+
+```rust,compile_fail
 mod secret {
-    pub struct Token(pub(crate) String);
+    struct InternalToken; // 仅模块内可见，完全私有
 }
 
-// 虽然 Token 是 pub，但无法构造其内部字段，导致"公开类型但私有构造"
-// 注意：在同一 crate 内 pub(crate) 字段可见；跨 crate 场景下该字段不可访问。
-fn leak(t: secret::Token) {
-    let _ = t.0; // 同 crate 内可访问；跨 crate 会报错 private field
+// ❌ 公开类型泄漏了私有字段类型
+pub struct TokenIssuer {
+    pub token: secret::InternalToken, //~ ERROR struct `InternalToken` is private
 }
+
+fn main() {}
 ```
+
+> 架构含义：crate 的公开 API 是其架构契约。任何 `pub` 结构体的字段类型都必须是外部可调用的，否则下游组件无法命名或构造该契约，导致信息隐藏边界被意外破坏。
+>
+> 说明：若内部类型使用 `pub(crate)`，现代 Rust 会触发 `private_interfaces` lint（默认 warn）；本例使用完全私有类型以在 `compile_fail` 中直接得到硬错误。
 
 ### 4.2 反例：crate 边界未阻止语义版本破坏
 
@@ -169,14 +194,36 @@ fn leak(t: secret::Token) {
 
 ### 4.3 边界：孤儿规则限制跨 crate 的 trait 实现
 
-```rust,compile_fail
-use std::fmt::Display;
+[Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/traits.html#orphan-rules) 规定：不能为在当前 crate 外部定义的类型实现外部 trait，否则多个 crate 可能为同一类型+trait 组合提供相互冲突的实现，破坏全局一致性。
 
-// 错误：不能为外部类型实现外部 trait
-impl Display for serde_json::Value {
+```rust,compile_fail
+// 错误：不能为外部类型实现外部 trait（违反 orphan rules）
+impl std::fmt::Display for std::vec::Vec<u8> {
     fn fmt(&self, _f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result { Ok(()) }
 }
+
+fn main() {}
 ```
+
+> 架构含义：orphan rules 把 trait 实现的定义位置约束为“本地类型或本地 trait 至少占一个”，从而保证跨 crate 组合时任意抽象替换都是确定性的。
+
+### 4.4 反例：冲突的 trait 实现触发 `E0119`
+
+`coherence` 规则保证任意类型+trait 组合最多只有一个 `impl`。以下代码同时声明 blanket impl 与专门化 impl，导致冲突：
+
+```rust,compile_fail
+trait Drawable {}
+
+// 为所有类型提供 blanket 实现
+impl<T> Drawable for T {}
+
+// ❌ 冲突：u32 已被上面的 blanket impl 覆盖
+impl Drawable for u32 {} //~ ERROR E0119: conflicting implementations of trait `Drawable` for type `u32`
+
+fn main() {}
+```
+
+> 架构含义：coherence 是架构组合的全局一致性保证。多个 crate 或模块若能为同一类型实现同一 trait，替换抽象实现时将产生不确定性，破坏架构的可推断性与可替换性。
 
 ---
 
@@ -224,3 +271,21 @@ mindmap
       Coherence
       Send/Sync
 ```
+
+---
+
+## 权威来源索引
+
+- [Rust Reference — Items and Visibility](https://doc.rust-lang.org/reference/visibility-and-privacy.html)
+- [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/traits.html#orphan-rules)
+- [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+- [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html)
+- [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+- **Shaw & Garlan (1996)** — *Software Architecture: Perspectives on an Emerging Discipline*. [PDF](https://www.cs.cmu.edu/~search/articles/books/SA.book.pdf)
+- **Garlan & Shaw (1993)** — *An Introduction to Software Architecture*. [https://doi.org/10.1142/9789812813032_0001](https://doi.org/10.1142/9789812813032_0001)
+- **Medvidovic & Taylor (2000)** — *A Classification and Comparison Framework for Software Architecture Description Languages*. [https://doi.org/10.1109/32.825767](https://doi.org/10.1109/32.825767)
+- **Wermelinger (1994)** — *Formal Specification of Software Architecture*. [https://doi.org/10.1016/0167-6423(94)00022-5](https://doi.org/10.1016/0167-6423(94)00022-5)
+- **ISO/IEC/IEEE 42010:2022** — *Software and Systems Engineering — Architecture Description*. [https://www.iso.org/standard/74296.html](https://www.iso.org/standard/74296.html)
+- **Garlan, Monroe & Wile (1997)** — *ACME: An Architecture Description Interchange Language*. In *Proceedings of CASCON'97*, 169–183.
+- **Allen (1997)** — *A Formal Approach to Software Architecture*. Ph.D. thesis, Carnegie Mellon University. (Wright ADL based on CSP.)
+- **Luckham et al. (1995)** — *Specification and Analysis of System Architecture Using Rapide*. IEEE Transactions on Software Engineering, 21(4), 336–355. [https://doi.org/10.1109/32.385970](https://doi.org/10.1109/32.385970)

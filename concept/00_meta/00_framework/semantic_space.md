@@ -63,6 +63,7 @@
     - [6.2 表征空间的包含关系](#62-表征空间的包含关系)
     - [6.3 Rust 与依赖类型的边界](#63-rust-与依赖类型的边界)
     - [6.4 知识体系导航：从元层到实践层](#64-知识体系导航从元层到实践层)
+    - [6.4.1 形式化与工程子空间的索引](#641-形式化与工程子空间的索引)
   - [七、反命题分析（Anti-Propositions）](#七反命题分析anti-propositions)
     - [7.1 "Rust 可以表达任何程序"](#71-rust-可以表达任何程序)
     - [7.2 "safe Rust 的封闭性限制了表达力"](#72-safe-rust-的封闭性限制了表达力)
@@ -170,7 +171,7 @@ Rust 让你思考所有权和生命周期。
 
 **过渡解释**: Rust 编译器不是简单的语法检查器，它是一个**语义过滤器**。
 它排除的不仅是语法错误的代码，更是那些可能在运行时导致 UB 的程序。
-但这个过滤是有代价的：某些合法的、有用的程序模式也被排除了（如自引用结构、绿色线程）。
+但这个过滤是有代价的：某些程序模式的表达受到限制——自引用结构需要借助 <code>Pin</code> 才能安全表达（[RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)），绿色线程则已在 Rust 1.0 前被正式移除（[RFC 230](https://rust-lang.github.io/rfcs/0230-remove-runtime.html)）。
 理解这条边界，是掌握 Rust 设计哲学的关键。
 
 ### 第 4 步：等价表达怎么选择？
@@ -225,7 +226,7 @@ Rust 的表征空间由以下核心算子构成：
 ```text
 Rust 表征空间 R = ⟨O, B, L, T, G, M, A, U⟩
 
-O : Own(T)        — 所有权算子（线性资源）
+O : Own(T)        — 所有权算子（affine 资源：默认必须被使用，但允许通过 mem::forget 等显式跳过 Drop）
 B : Borrow(T, m)  — 借用算子（m ∈ {shared, exclusive}）
 L : Lifetime('a)  — 生命周期算子（区域约束）
 T : Trait(B)      — Trait 算子（行为抽象）
@@ -235,7 +236,7 @@ A : Async         — 异步算子（协作式并发）
 U : Unsafe        — Unsafe 算子（逃逸舱口）
 ```
 
-每个算子的表征能力范围：
+每个算子的表征能力范围（本算子分解为原创综合；各算子的语义边界以 [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) 与 [TRPL](https://doc.rust-lang.org/book/title-page.html) 为权威依据）：
 
 | 算子 | 能直接表达 | 能曲折表达 | 不能表达 |
 | :--- | :--- | :--- | :--- |
@@ -302,12 +303,12 @@ fn illegal_combinations() {
 - **封闭的例子**：所有权规则在「move + 借用 + Drop」下封闭——任何组合都不产生规则外状态；类型构造（struct/enum/泛型/引用）在组合下封闭——任意嵌套仍是合法类型；
 - **不封闭的例子**：`unsafe` 打破封闭——safe 规则的任意组合 safe，但加入 `unsafe` 后组合结果需要外部论证；宏展开打破「源码即语义」的封闭——语义需在展开后求值。
 
-工程价值：封闭性是「局部推理」的形式化前提——封闭域内的代码可只看局部就判定正确性；不封闭点（`unsafe`、FFI、宏）是审查精力的投放处。设计库 API 时，「是否保持调用方的封闭域」是核心判据。
+工程价值：封闭性是「局部推理」的形式化前提——封闭域内的代码可只看局部就判定正确性（O'Hearn, Reynolds & Yang 2001；参见 [权威来源](#九知识来源关系provenance)）；不封闭点（`unsafe`、FFI、宏）是审查精力的投放处。设计库 API 时，「是否保持调用方的封闭域」是核心判据。
 
 ### 2.1 封闭世界假设
 
 > **来源: [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html)** · **[Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)** · **[RustBelt (Jung et al., POPL 2018)](https://doi.org/10.1145/3158154)** Safe Rust 是一个**封闭的形式系统**（[**T-166**](theorem_registry.md)）。
-> 它有明确的公理、推理规则，和封闭性保证：任何在 safe 子集中编译通过的程序，都不会触发内存不安全行为（假设编译器没有 bug）。
+> 它有明确的公理、推理规则，和封闭性保证：在 RustBelt 形式化模型覆盖的 safe 子集与选定标准库原语范围内，编译通过的程序不会触发内存不安全行为；该保证以编译器/运行时无 bug、且未进入 `unsafe` 块为前提。
 > RustBelt 在 Iris 分离逻辑中形式化证明了：safe Rust 类型系统与标准库核心原语保证内存安全、无数据竞争、无 use-after-free。✅
 
 **Safe Rust 的形式化结构**：
@@ -430,7 +431,7 @@ Unsafe Rust 不是"关闭所有检查"，而是**打开特定的逃逸门**：
 └─────────────────────────────────────────────────────────────┘
 ```
 
-> 本三维框架受 Felleisen 表达力谱系启发：语言设计通过刻意排除某些程序模式来换取可判定的静态保证。
+> 本三维框架受 Felleisen 表达力谱系启发，并是对 Rust 设计空间进行的**原创综合**：语言设计通过刻意排除某些程序模式来换取可判定的静态保证。
 > [来源: [Felleisen 1991, *On the Expressive Power of Programming Languages*](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf)]
 
 ### 3.2 能且高效表达（Sweet Spot）
@@ -440,7 +441,7 @@ Unsafe Rust 不是"关闭所有检查"，而是**打开特定的逃逸门**：
 | **系统编程** | 所有权 + `unsafe` | 完全 | 零 | 内存安全 |
 | **零成本抽象** | 泛型 + 单态化 | 完全 | 零 | 类型一致 |
 | **fearless 并发** | `Send`/`Sync` + 借用 | 完全 | 零 | 无数据竞争 |
-| **确定性资源管理** | RAII + `Drop` | 完全 | 零 | 无泄漏（线性）|
+| **确定性资源管理** | RAII + `Drop` | 完全 | 零 | 无自动 GC 但可能泄漏（affine）[^affine] |
 | **编译期计算** | `const generics` + `const fn` | 部分 | 零 | 常量求值 |
 | **类型级约束** | Trait bounds + 关联类型 | 完全 | 零 | 接口一致性 |
 
@@ -484,16 +485,16 @@ Unsafe Rust 不是"关闭所有检查"，而是**打开特定的逃逸门**：
 Rust 的表征空间不是静态的。
 以下特性正在或可能扩展表征空间：
 
-| 特性 | 状态 | 扩展的表征能力 | 对封闭性的影响 |
-| :--- | :--- | :--- | :--- |
-| **Const Generics** | 稳定（2021+）| 编译期值参数化（数组长度、常量计算）| 无（编译期保持封闭）|
-| **GATs** | 稳定（2023）| 泛型关联类型、高阶类型编程 | 无（类型系统扩展）|
-| **Specialization** | 不稳定 | 特化实现、默认实现优化 | 轻微（需确保一致性）|
-| **Const Trait** | 提案中 | Trait 方法在 const 上下文可用 | 无（编译期扩展）|
-| **Effects / `try` blocks** | 研究中 | 结构化效果处理、代数效应 | 中等（新的控制流抽象）|
-| **Type Alias Impl Trait** | 稳定 | 抽象返回类型的命名 | 无（语法糖）|
-| **Generic Const Items** | 提案中 | 泛型常量、编译期计算扩展 | 无（编译期扩展）|
-| **Arbitrary Self Types** | 部分稳定 | 自定义方法接收者类型 | 轻微（语法扩展）|
+| 特性 | 状态 | 扩展的表征能力 | 对封闭性的影响 | 来源 |
+| :--- | :--- | :--- | :--- | :--- |
+| **Const Generics** | 稳定（1.51+）| 编译期值参数化（数组长度、常量计算）| 无（编译期保持封闭）| [RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html) · [1.51 release notes](https://blog.rust-lang.org/2021/03/25/Rust-1.51.0.html) |
+| **GATs** | 稳定（1.65+）| 泛型关联类型、高阶类型编程 | 无（类型系统扩展）| [RFC 1598](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) · [1.65 release notes](https://blog.rust-lang.org/2022/11/03/Rust-1.65.0.html) |
+| **Specialization** | 不稳定 | 特化实现、默认实现优化 | 轻微（需确保一致性）| [RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html) · [rust#31844](https://github.com/rust-lang/rust/issues/31844) |
+| **Const Trait** | 提案中 | Trait 方法在 const 上下文可用 | 无（编译期扩展）| [RFC 3762](https://github.com/rust-lang/rfcs/pull/3762) |
+| **Effects / `try` blocks** | 研究中 | 结构化效果处理、代数效应 | 中等（新的控制流抽象）| [RFC 2388](https://rust-lang.github.io/rfcs/2388-try-expr.html) · [Rust Effects Initiative](https://rust-lang.github.io/rust-project-goals/2024h2/Rust-for-SciComp.html) |
+| **Type Alias Impl Trait** | 稳定（1.75+）| 抽象返回类型的命名 | 无（语法糖）| [RFC 2515](https://rust-lang.github.io/rfcs/2515-type_alias_impl_trait.html) · [1.75 release notes](https://blog.rust-lang.org/2023/12/28/Rust-1.75.0.html) |
+| **Generic Const Items** | 提案中 | 泛型常量、编译期计算扩展 | 无（编译期扩展）| [rust#113521](https://github.com/rust-lang/rust/issues/113521) |
+| **Arbitrary Self Types** | 部分稳定 | 自定义方法接收者类型 | 轻微（语法扩展）| [RFC 2362](https://rust-lang.github.io/rfcs/2362-arbitrary-self-types.html) · [rust#44874](https://github.com/rust-lang/rust/issues/44874) |
 
 > **关键洞察**: Rust 的语言演化遵循"**保持封闭性，扩展表达力**"的原则。
 > 所有新特性都在 safe 子集的框架内添加，不破坏现有封闭性定理。
@@ -909,7 +910,7 @@ Miri（Rust 的中间表示解释器）通过执行 MIR 并检查 Stacked Borrow
 | 验证目标 | Miri 能力 | 等价表达应用 |
 |:---|:---|:---|
 | **use-after-free** | ✅ 检测悬垂指针解引用 | 验证 `Box::into_raw` + `from_raw` 对译的内存安全 |
-| **数据竞争** | ✅ 检测非原子并发访问 | 验证 `Arc<Mutex<T>>` 等价于 `&mut T` 的线程安全替代 |
+| **数据竞争** | ✅ 检测非原子并发访问 | 验证 `Arc<Mutex<T>>` 提供共享所有权与内部可变性；它与 `&mut T` 的独占借用语义不同，仅在“线程安全地提供可变访问”这一需求上可观察等价（Herlihy & Shavit 2011；[Rust Reference — Interior Mutability](https://doc.rust-lang.org/reference/interior-mutability.html)）|
 | **别名违规** | ✅ 检测 Stacked/Tree Borrows 违规 | 验证 `unsafe { &mut *raw_ptr }` 与 `&mut T` 的边界等价 |
 | **循环引用泄漏** | ❌ 不检测（非 UB）| `Rc` 循环引用是安全漏洞，非 Miri 职责 |
 | **逻辑错误** | ❌ 不检测 | Miri 不验证功能正确性 |
@@ -938,7 +939,7 @@ Kani（基于 CBMC 的 Rust 模型检测器）通过符号执行验证程序是�
    └─ 最快但不可信
 ```
 
-> **关键洞察**: 等价表达的语义保持存在**验证层次**——Miri 保证"不等价的表达不会引入 UB"，Kani 保证"等价表达在规范层面行为一致"，而 RustBelt 保证"整个类型系统的元正确性"。日常工程中，Miri 用于 unsafe 边界验证，Kani 用于关键路径的等价性确认。
+> **关键洞察**: 等价表达的语义保持存在**验证层次**——Miri 保证"不等价的表达不会引入 UB"，Kani 保证"等价表达在规范层面行为一致"，而 RustBelt 对 Rust 形式化模型及选定的 std 原语建立了可靠性证明（soundness proof），并不覆盖整个工业编译器或所有库实现（Jung et al., POPL 2018 §scope）。日常工程中，Miri 用于 unsafe 边界验证，Kani 用于关键路径的等价性确认。
 > **深入阅读**: Miri 的别名模型详见 [`03_unsafe.md`](../../03_advanced/02_unsafe/01_unsafe.md) §5.5-5.6；Kani 的应用场景详见 [`04_rustbelt.md`](../../04_formal/02_separation_logic/01_rustbelt.md) §7.3。
 
 ---
@@ -991,11 +992,11 @@ Kani（基于 CBMC 的 Rust 模型检测器）通过符号执行验证程序是�
 
 ### 5.1 基础算子的代数表示
 
-将 Rust 的核心机制抽象为代数算子：
+将 Rust 的核心机制抽象为代数算子（本代数为**原创综合**，算子语义以 [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) 为权威依据）：
 
 ```text
 基础算子:
-  Own(T)         — 线性所有权（资源唯一控制）
+  Own(T)         — affine 所有权（资源唯一控制，但允许显式放弃）
   Borrow(T, S)   — 共享借用（多个只读引用）
   Borrow(T, E)   — 独占借用（单个读写引用）
   Lifetime('a)   — 区域约束（引用有效期限）
@@ -1044,7 +1045,7 @@ Rust 的机制组合遵循**约束满足的封闭世界**。
   编译期保证                      运行时检查              硬件保证         无保证
 ```
 
-[来源: [Rust Reference — Interior Mutability](https://doc.rust-lang.org/reference/interior-mutability.html) · [TRPL — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)]
+[来源: 本设计空间维度图为**原创综合**，各维度端点的语义以 [Rust Reference — Interior Mutability](https://doc.rust-lang.org/reference/interior-mutability.html) · [Rust Reference — Concurrency](https://doc.rust-lang.org/reference/concurrency.html) · [TRPL — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) 为权威依据]
 
 ### 5.3 组合选择决策树
 
@@ -1095,38 +1096,44 @@ graph TD
 | **封闭性** | safe 封闭，unsafe 逃逸 | 完全开放 | 纯函数封闭，IO 逃逸 | 运行时封闭 | 类型封闭 |
 | **表达力等价** | 与 C++ 等价（图灵完备） | 基准 | 与 Rust 等价 | 与 Rust 等价 | 与 Rust 等价 |
 | **有效表达差异** | 零成本安全 | 零成本但不安全 | 安全但有 GC | 简单但不零成本 | 安全但有 VM |
-| **不能表达** | GC、继承、异常 | —（几乎无限制） | 无 GC 的系统编程 | 零成本抽象 | 无 VM 的系统编程 |
+| **不能表达** | GC、继承、异常 | 无语言级强制安全边界（仍可表达所有图灵可计算程序；代价是封闭性） | 无 GC 的系统编程 | 零成本抽象 | 无 VM 的系统编程 |
 | **错误捕获时机** | 编译期 | 编译期 + 运行时 | 编译期 | 编译期 + 运行时 | 运行时为主 |
 | **内存安全保证** | 编译期完全 | 无（依赖程序员） | 编译期（GC 辅助） | 运行时（GC） | 运行时（VM） |
 | **并发安全保证** | 编译期（Send/Sync） | 无（依赖程序员） | 运行时（STM/GHC） | 运行时（channel） | 运行时（JMM） |
 
-[来源: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rust Reference — Concurrency](https://doc.rust-lang.org/reference/concurrency.html) · [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe.html)]
+[来源: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rust Reference — Concurrency](https://doc.rust-lang.org/reference/concurrency.html) · [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe.html) · C++: [Stroustrup 2012](https://www.stroustrup.com/4th.html) · [ISO/IEC 14882:2024](https://www.iso.org/standard/83626.html) · Haskell: [Haskell 2010 Report](https://www.haskell.org/onlinereport/haskell2010/) · Go: [The Go Programming Language Specification](https://go.dev/ref/spec) · [Go Concurrency Patterns](https://go.dev/doc/effective_go#concurrency) · Java: [JLS 21](https://docs.oracle.com/javase/specs/jls/se21/html/index.html)]
 
 ### 6.2 表征空间的包含关系
 
 ```text
-表征空间包含关系（按表达能力）:
+表征空间包含关系（按表达能力；本图为原创综合，维度定义参考 Felleisen 1991）：
 
 C++ ⊃ Rust ⊃ safe Rust
   │       │
   │       └─ unsafe Rust 扩展了 safe Rust 的表征空间
   │          但破坏了封闭性
   │
-  └─ C++ 的表征空间最大（几乎无限制）
+  └─ C++ 的表征空间最宽（缺乏语言级强制安全边界，
+     可表达任意低层操作；Stroustrup 2012；ISO/IEC 14882:2024）
      但代价是零封闭性保证
 
-Haskell ⊃ Rust（纯函数子集）
-  └─ Haskell 的纯函数子集与 safe Rust 观察等价
-     但 Haskell 的 IO monad 和 Rust 的所有权是
-     两种不同的封闭性机制
+Haskell 与 Rust（纯函数 / safe 子集对比）
+  └─ 二者在“无显式副作用的核心片段”上可部分对比：
+     Haskell 惰性求值、GC 管理、纯函数类型系统；
+     Rust 严格求值、所有权管理、线性/affine 类型系统。
+     .lazy vs strict、GC vs ownership 使“观察等价”仅在极受限
+     上下文中成立（Bird 1998；Rust Reference — Evaluation Order）。
 
-Go ≈ Rust（并发模型不同）
-  └─ Go 的 goroutine + channel 与 Rust 的 async/await
-     在表达力上等价，但语义不等价（抢占 vs 协作）
+Go 与 Rust（并发模型对比）
+  └─ 表达力对比需限定上下文：Go 的 goroutine + channel 根植于
+     Hoare CSP（Hoare 1978）；Rust async/await 基于 Future 与
+     协作式调度（RFC 2394、RFC 3208）。二者在“表达并发程序”
+     上图灵等价，但调度语义、抢占/协作、内存模型差异显著。
 
-Java ⊂ Rust（系统编程能力）
-  └─ Java 无法表达无 VM 的系统编程
-     Rust 可以表达 Java 的所有高层抽象（通过库）
+Java 与 Rust（高层抽象对比）
+  └─ Java 无法表达无 VM 的系统编程。Rust 的多数高层抽象
+     可通过库表达，但运行时反射、动态类加载、泛型擦除后的
+     运行时类型行为与 Rust 有显著差异（JLS 21；Rust Reference）。
 ```
 
 ### 6.3 Rust 与依赖类型的边界
@@ -1294,7 +1301,7 @@ graph TD
 | 断言 | 前提条件 ⟹ 结论 | 反例/边界条件 | 典型场景 | 失效条件 |
 | :--- | :--- | :--- | :--- | :--- |
 | **Safe Rust 是语义封闭的** | 借用检查器 + 类型系统 ⟹ 无 UB | unsafe 块、`mem::forget`、FFI | 日常开发 | unsafe 比例过高 |
-| **所有权保证确定性析构** | 唯一 owner + 作用域结束 ⟹ Drop 调用 | `mem::forget`、`ManuallyDrop`、循环引用 | RAII | 故意跳过 Drop |
+| **所有权保证确定性析构（非无泄漏）** | 唯一 owner + 作用域结束 ⟹ Drop 调用 | `mem::forget`、`ManuallyDrop`、<code>Rc</code> 循环引用 | RAII | 故意跳过 Drop |
 | **借用规则保证无数据竞争** | &T 共享 / &mut T 独占 ⟹ 无同时读写 | `UnsafeCell`、unsafe impl Send/Sync | 并发编程 | unsafe 突破 |
 | **泛型单态化保持语义** | 编译期展开 ⟹ 等价于手写代码 | `dyn Trait` 打破单态化、二进制膨胀 | 零成本抽象 | 过度泛化 |
 | **参数性定理限制实现** | `fn f<T>(x: T) -> T` ⟹ 只能返回 x 或 panic | `Default` bound、`unsafe`、 specialization | API 设计 | 显式打破参数性 |
@@ -1311,16 +1318,25 @@ graph TD
 | 表征空间定义 | [Felleisen 1991](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf) · *On the Expressive Power of Programming Languages* | ✅ 学术经典 |
 | Rust 类型系统图灵完备 | [Leffler 2017](https://sdleffler.github.io/RustTypeSystemTuringComplete/) · *Rust Type System is Turing-Complete* | ✅ 技术证明 |
 | 观察等价性 | Reynolds 1983 · relational parametricity | ✅ 学术经典 |
-| 分离逻辑与所有权对应 | O'Hearn 2007 · Separation Logic | ✅ 学术经典 |
+| 分离逻辑与局部推理 | O'Hearn, Reynolds & Yang 2001 · *Local Reasoning about Programs that Alter Data Structures* · [O'Hearn 2007 · Separation Logic](https://www.cs.ucl.ac.uk/staff/p.ohearn/papers/separationlogic.pdf) | ✅ 学术经典 |
 | 生命周期 = 区域类型 | Tofte & Talpin 1994 · Region-Based Memory Management | ✅ 学术经典 |
 | 线性逻辑 = 所有权根基 | Girard 1987 · Linear Logic | ✅ 学术经典 |
+| affine 类型与泄漏可能性 | Walker 2005 · *Substructural Type Systems* · [Rust Reference — std::mem::forget](https://doc.rust-lang.org/std/mem/fn.forget.html) | ✅ 学术/官方 |
+| 自引用结构与 Pin | [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html) · Pin API | ✅ 官方决策 |
 | 绿色线程移除 | RFC 230 · Remove Runtime | ✅ 官方决策 |
 | Rust 设计哲学 | Rust Reference · TRPL | ✅ 官方文档 |
 | 参数性定理 | [Wadler 1989](https://people.mpi-sws.org/~dreyer/tor/papers/wadler.pdf) · *Theorems for Free!* | ✅ 学术经典 |
-| 内存模型 | C11 Standard §5.1.2.4 · Rustonomicon | ✅ 标准/官方 |
+| 内存模型 | [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html) · [Rustonomicon — Memory Model](https://doc.rust-lang.org/nomicon/meet-safe-and-unsafe.html) · C11/C++11 并发模型参考 [Batty et al. 2011](https://doi.org/10.1145/1926385.1926393) | ✅ 标准/官方 |
 | Rust 形式化基础 | [RustBelt (Jung et al., POPL 2018)](https://doi.org/10.1145/3158154) · Iris/Separation Logic | ✅ 学术论文 |
 | 别名模型（进化） | [Tree Borrows (Villani et al., 2025)](https://perso.crans.org/vanille/treebor/aux/preprint.pdf) | ✅ 最新预印本 |
 | 并发表达力层级 | [Herlihy & Shavit 2011, *The Art of Multiprocessor Programming*](https://www.sciencedirect.com/book/9780123973375/the-art-of-multiprocessor-programming) | ✅ 学术经典 |
+| C++ 语言边界与封闭性 | Stroustrup 2012 · *The C++ Programming Language, 4th ed.* · [ISO/IEC 14882:2024](https://www.iso.org/standard/83626.html) | ✅ 标准/教材 |
+| Haskell 语义与求值 | [Haskell 2010 Report](https://www.haskell.org/onlinereport/haskell2010/) · Bird 1998 · *Introduction to Functional Programming using Haskell* | ✅ 官方/教材 |
+| Rust 求值顺序 | [Rust Reference — Evaluation Order](https://doc.rust-lang.org/reference/expressions.html#evaluation-order) | ✅ 官方文档 |
+| CSP 与并发 | Hoare 1978 · *Communicating Sequential Processes* | ✅ 学术经典 |
+| Rust async/await | [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html) · [RFC 3208](https://rust-lang.github.io/rfcs/3208-async-trait.html) | ✅ 官方决策 |
+| Go 并发模型 | [The Go Programming Language Specification](https://go.dev/ref/spec) · [Go Concurrency Patterns](https://go.dev/doc/effective_go#concurrency) | ✅ 官方文档 |
+| Java 语言语义 | [JLS 21](https://docs.oracle.com/javase/specs/jls/se21/html/index.html) | ✅ 官方文档 |
 | 架构描述框架 | [ISO/IEC/IEEE 42010:2022](https://www.iso.org/standard/74296.html) · Systems and software engineering | ✅ 国际标准 |
 | 系统工程生命周期 | [ISO/IEC/IEEE 15288:2023](https://www.iso.org/standard/63711.html) | ✅ 国际标准 |
 | 本体与知识图谱 | [OWL 2 Primer](https://www.w3.org/TR/owl2-primer/) · [SHACL](https://www.w3.org/TR/shacl/) · [RDF 1.1 Concepts](https://www.w3.org/TR/rdf11-concepts/) | ✅ W3C 标准 |
@@ -1332,6 +1348,8 @@ graph TD
 | Total / 非 total 语言 | Pierce 2002 · Types and Programming Languages | ✅ 标准教材 |
 | 表达力差异框架 | Felleisen 1991 · On the Expressive Power of Programming Languages | ✅ 学术经典 |
 | 依赖类型 | Bove & Dybjer 2009 · Dependent Types at Work | ✅ 学术教程 |
+
+[^affine]: Rust 的所有权更准确地说是 **affine** 而非线性（linear）：affine 类型要求值默认必须被使用，但允许通过 `std::mem::forget`、`ManuallyDrop` 或引用计数循环显式放弃析构，从而泄漏内存。见 Walker 2005 · *Substructural Type Systems* 与 [Rust Reference — std::mem::forget](https://doc.rust-lang.org/std/mem/fn.forget.html)。
 
 ---
 
@@ -1351,12 +1369,12 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference — Introduction](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Felleisen 1991](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf) · [Wadler 1989](https://people.mpi-sws.org/~dreyer/tor/papers/wadler.pdf) · [Leffler 2017](https://sdleffler.github.io/RustTypeSystemTuringComplete/) · [RustBelt (Jung et al., POPL 2018)](https://doi.org/10.1145/3158154) · [Pierce 2002 TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../02_sources/05_international_authority_index.md)；2026-07-29 全面追溯关键命题来源，注册 T-164–T-167 定理链，替换泛化首页链接为具体章节/论文锚点
+> **权威来源**: [Rust Reference — Introduction](https://doc.rust-lang.org/reference/introduction.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Felleisen 1991](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf) · [Wadler 1989](https://people.mpi-sws.org/~dreyer/tor/papers/wadler.pdf) · [Leffler 2017](https://sdleffler.github.io/RustTypeSystemTuringComplete/) · [RustBelt (Jung et al., POPL 2018)](https://doi.org/10.1145/3158154) · [Pierce 2002 TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/) · Walker 2005 · Bird 1998 · Hoare 1978 · Batty et al. 2011 · Stroustrup 2012 · O'Hearn, Reynolds & Yang 2001 · [RFC 230](https://rust-lang.github.io/rfcs/0230-remove-runtime.html) · [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html) · [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html) · [RFC 3208](https://rust-lang.github.io/rfcs/3208-async-trait.html) · [JLS 21](https://docs.oracle.com/javase/specs/jls/se21/html/index.html) · [ISO/IEC 14882:2024](https://www.iso.org/standard/83626.html)
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch 8](../02_sources/05_international_authority_index.md)；2026-07-29 全面追溯关键命题来源，注册 T-164–T-167 定理链，替换泛化首页链接为具体章节/论文锚点；2026-07-30 修正 affine/linear、自引用结构/Pin、跨语言对比、RustBelt 范围等过度断言，并补充国际权威来源
 
-**文档版本**: 1.2.1
-**最后更新**: 2026-07-29
-**状态**: ✅ 国际权威来源对齐 Sprint 2026-07-29 完成 Wave 1（semantic_space.md 关键命题追溯）；剩余 Wave 2–4 子领域深度对齐待完成
+**文档版本**: 1.2.2
+**最后更新**: 2026-07-30
+**状态**: ✅ 国际权威来源对齐 Sprint 2026-07-30 完成 Wave 2（semantic_space.md 过度断言修正与来源补充）
 
 ### 10.3 边界测试：术语过载与跨层语义漂移（概念混淆）
 

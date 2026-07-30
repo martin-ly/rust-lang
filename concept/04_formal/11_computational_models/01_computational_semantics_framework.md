@@ -53,10 +53,10 @@
 └─────────────────┴─────────────────┴─────────────────┘
 ```
 
-- **操作语义（Operational）**：用抽象机器或重写规则描述「程序一步一步如何运行」。
-- **指称语义（Denotational）**：把程序映射为数学对象（通常是域上的连续函数），强调「程序表示什么」。
+- **操作语义（Operational）**：用抽象机器或重写规则描述「程序一步一步如何运行」。Plotkin 的结构化操作语义（SOS）是现代教材与工具中的标准表述（Plotkin, 1981; Winskel, 1993, Ch. 2）。
+- **指称语义（Denotational）**：把程序映射为数学对象（通常是域上的连续函数），强调「程序表示什么」。Scott 与 Strachey 的域论语义为递归构造提供了数学基础（Scott & Strachey, 1971/2000; Scott, 1976）。
 - **公理语义（Axiomatic）**：用霍尔逻辑 `{P} C {Q}` 描述命令前后断言关系，强调「程序满足什么规约」。
-- **类型语义（Type）**：把类型视为对程序行为的静态分类，回答「哪些值可以出现在哪些位置」。
+- **类型语义（Type）**：把类型视为对程序行为的静态分类，回答「哪些值可以出现在哪些位置」。Pierce 将类型系统作为程序语义的核心透镜之一（Pierce, 2002, Ch. 1 & Ch. 9）。
 
 ---
 
@@ -76,7 +76,7 @@
     └── 若 C 确实把 P 状态变为 Q 状态，则 ⊢ {P} C {Q} 可证
 ```
 
-> **认知要点**：没有哪一种语义能回答所有问题。证明编译器正确性常用操作语义；证明程序等价性常用指称语义；验证安全属性常用公理语义；静态保证则依赖类型语义。
+> **认知要点**：没有哪一种语义能回答所有问题。证明编译器正确性常用操作语义；证明程序等价性常用指称语义；验证安全属性常用公理语义；静态保证则依赖类型语义。Felleisen 的表达力框架进一步区分「计算能力」与「表达能力」：所有图灵完备模型能计算相同函数，但表达同一概念所需的局部/全局变换代价不同（Felleisen, 1991; Felleisen & Flatt, 1998）。
 
 ---
 
@@ -144,7 +144,7 @@ fn main() {
 
 ### 1.5 计算语义与 Church-Turing 论题
 
-**Church-Turing 论题**（Church 1936; Turing 1936）不是一条可在形式系统内证明的定理，而是关于「有效可计算」边界的经验性/哲学性论断：
+**Church-Turing 论题**（Church, 1936; Turing, 1936）不是一条可在形式系统内证明的定理，而是关于「有效可计算」边界的经验性/哲学性论断。它得到 Sipser、Soare、Cutland、Hopcroft-Motwani-Ullman 等教材的共同强调（Sipser, 2013, §3.3; Soare, 2016, §1.1; Cutland, 1980, §8.1; Hopcroft, Motwani & Ullman, 2006, §8.6）：
 
 > 任何可被人类或机械「有效计算」的函数，都可以由图灵机计算，也可以由无类型 λ 演算表达，也可以由部分递归函数定义。
 
@@ -156,15 +156,15 @@ fn main() {
            ≡  通用寄存器机  ≡  所有图灵完备编程语言（无资源限制）
 ```
 
-- **图灵机**从「状态-磁带」角度刻画计算：一条无限长磁带、一个读写头、有限状态控制器。
-- **λ 演算**从「函数与应用」角度刻画计算：通过 λ 抽象与 β 归约表达任意可计算函数。
-- **部分递归函数**从「函数构造」角度刻画计算：从零、后继、投影出发，经组合、原始递归与无界最小化得到所有可计算函数。
+- **图灵机**从「状态-磁带」角度刻画计算：一条无限长磁带、一个读写头、有限状态控制器（Turing, 1936; Sipser, 2013, §3.1）。
+- **λ 演算**从「函数与应用」角度刻画计算：通过 λ 抽象与 β 归约表达任意可计算函数（Church, 1936; Barendregt, 1984, §6.3）。
+- **部分递归函数**从「函数构造」角度刻画计算：从零、后继、投影出发，经组合、原始递归与无界最小化得到所有可计算函数（Kleene, 1952; Cutland, 1980, §3.1）。
 
-它们之间的相互模拟（simulation）正是**计算语义**要回答的问题：给定一种语言的程序，如何把它映射到另一种语义模型，并证明映射保持可观察行为。
+它们之间的相互模拟（simulation）正是**计算语义**要回答的问题：给定一种语言的程序，如何把它映射到另一种语义模型，并证明映射保持可观察行为。超计算（hypercomputation）研究则探讨若允许无限资源或非图灵计算模型，能否超越 Church-Turing 边界（Ord, 2006）。
 
 #### Rust const 求值：受约束的可计算性
 
-Rust 的 **const 求值（const evaluation）** 是 Church-Turing 论题在工程语言中的一个**受约束实例**。`const fn` 与 `const` 上下文允许在编译期执行计算，但这些计算被严格限制，以保证编译期终止性、确定性与无堆分配：
+Rust 的 **const 求值（const evaluation）** 是 Church-Turing 论题在工程语言中的一个**受约束实例**。`const fn` 与 `const` 上下文允许在编译期执行计算，但这些计算被严格限制，以保证编译期终止性、确定性与无堆分配（Sipser, 2013, §3.3; Cutland, 1980, §8.1）：
 
 | 能力 | const 上下文 | 说明 |
 |:---|:---:|:---|
@@ -184,9 +184,22 @@ const fn heap_alloc_in_const() -> Vec<i32> {
 }
 ```
 
+`const fn` 中的无界递归或算术溢出会在编译期触发 `E0080`（evaluation of constant value failed），这直接体现了 Church-Turing 论题在受约束子集中的投影：通用计算允许不终止，但编译期求值必须被强制截断：
+
+```rust,compile_fail,E0080
+const fn forever() -> i32 {
+    forever() // ERROR E0080: 常量求值器在有限步内无法完成，
+              // 说明 const 上下文不允许无界递归
+}
+
+const X: i32 = forever();
+
+fn main() {}
+```
+
 > **认知要点**：const 求值不是「可计算性更弱」——它在理论上仍是图灵完备的受限子集；其限制主要来自**编译期资源与确定性要求**，而非计算理论本身。循环、递归、条件都能写，但一旦超出内部解释器的步数/迭代上限，编译器会报告 `evaluation of constant value failed`。
 
-> **来源**: [Church 1936 / Church-Turing 论题综述](https://arxiv.org/abs/cs/0503082) · Turing 1936 — *On computable numbers, with an application to the Entscheidungsproblem* · [Winskel 1993 — The Formal Semantics of Programming Languages](https://www.cs.cmu.edu/~crary/819-f09/Winskel.pdf) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
+> **来源**: [Church 1936 / Church-Turing 论题综述](https://arxiv.org/abs/cs/0503082) · [Turing 1936 — On computable numbers, with an application to the Entscheidungsproblem](https://doi.org/10.1112/plms/s2-42.1.230) · [Sipser 2013 — Introduction to the Theory of Computation, 3rd ed.](https://math.mit.edu/~sipser/book.html) · [Cutland 1980 — Computability: An Introduction to Recursive Function Theory](https://doi.org/10.1017/CBO9780511574916) · [Winskel 1993 — The Formal Semantics of Programming Languages](https://www.cs.cmu.edu/~crary/819-f09/Winskel.pdf) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 
 ---
 
@@ -269,16 +282,32 @@ const fn heap_alloc_in_const() -> Vec<i32> {
 
 ---
 
-## 五、权威来源索引
+## 五、权威来源 / International Authority References
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [Plotkin 1981 — SOS](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf) | ✅ 一级 | 结构化操作语义奠基 |
+| [Turing 1936 — On computable numbers, with an application to the Entscheidungsproblem](https://doi.org/10.1112/plms/s2-42.1.230) | ✅ 一级 | 图灵机奠基；停机问题原始证明 |
+| [Church 1936 — An Unsolvable Problem of Elementary Number Theory](https://doi.org/10.2307/1968981) | ✅ 一级 | λ 可定义函数；Church-Turing 论题 |
+| [Rice 1953 — Classes of Recursively Enumerable Sets and Their Decision Problems](https://doi.org/10.1090/S0002-9904-1953-09692-2) | ✅ 一级 | 语义性质不可判定性（Rice 定理） |
+| [Felleisen 1991 — On the Expressive Power of Programming Languages](https://doi.org/10.1007/BF00119888) | ✅ 一级 | 表达力比较框架；局部 vs 全局变换 |
+| [Felleisen & Flatt 1998 — Programming Languages and Their Calculi](https://www2.ccs.neu.edu/racket/pubs/scp91-felleisen.pdf) | ✅ 一级 | 表达力与演算扩展 |
+| [Sipser 2013 — Introduction to the Theory of Computation, 3rd ed.](https://math.mit.edu/~sipser/book.html) | ✅ 一级 | 可计算性、形式语言与复杂度理论标准教材 |
+| [Soare 2016 — Turing Computability. Theory and Applications](https://doi.org/10.1007/978-3-642-31933-4) | ✅ 一级 | 现代可计算性理论；算术层级 |
+| [Cutland 1980 — Computability: An Introduction to Recursive Function Theory](https://doi.org/10.1017/CBO9780511574916) | ✅ 一级 | 递归函数与可计算性入门 |
+| [Hopcroft, Motwani & Ullman 2006 — Introduction to Automata Theory, Languages, and Computation, 3rd ed.](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation) | ✅ 一级 | 自动机与形式语言经典教材 |
+| [Kozen 1997 — Automata and Computability](https://doi.org/10.1007/978-1-4612-1844-9) | ✅ 一级 | 自动机、可计算性与复杂度理论 |
+| [Appel 2004 — Modern Compiler Implementation in Java/C/ML, 2nd ed.](https://www.cs.princeton.edu/~appel/modern/) | ✅ 一级 | 编译器实现与语义后端（Tiger Book） |
+| [Barendregt 1984 — The Lambda Calculus: Its Syntax and Semantics](https://doi.org/10.1016/B978-0-444-87508-2.50006-X) | ✅ 一级 | λ 演算标准参考书 |
+| [Scott 1972 — Continuous Lattices](https://doi.org/10.1007/BFb0073967) | ✅ 一级 | 连续格与 Scott 域奠基 |
+| [Scott 1976 — Data types as lattices](https://doi.org/10.1137/0205037) | ✅ 一级 | 数据类型作为格；Scott 域与指称语义 |
+| [Scott & Strachey 1971/2000 — Toward a Mathematical Semantics for Computer Languages](https://www.cs.ox.ac.uk/files/3232/PRG06.pdf) | ✅ 一级 | 指称语义奠基文献（PRG-6） |
+| [Strachey 1973 — The Varieties of Programming Language](https://doi.org/10.1016/S0065-2458(08)60314-4) | ✅ 一级 | 程序语言语义分类 |
+| [Wadler 2015 — Propositions as Types](https://doi.org/10.1145/2699407) | ✅ 一级 | Curry-Howard 对应现代综述 |
+| [Ord 2006 — The Many Forms of Hypercomputation](https://doi.org/10.1016/j.apal.2005.09.012) | ✅ 一级 | 超计算与 Church-Turing 边界讨论 |
+| [Plotkin 1981 — A Structural Approach to Operational Semantics](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf) | ✅ 一级 | 结构化操作语义奠基 |
 | [Winskel 1993 — The Formal Semantics of Programming Languages](https://www.cs.cmu.edu/~crary/819-f09/Winskel.pdf) | ✅ 一级 | 形式语义教材（CMU 课程 PDF） |
 | [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) | ✅ 一级 | 类型与编程语言（TAPL 主页） |
-| [Church 1936 / 论题综述](https://arxiv.org/abs/cs/0503082) | ✅ 一级 | Church-Turing 论题综述（arXiv cs/0503082） |
-| [Scott & Strachey — Denotational Semantics](https://www.cs.ox.ac.uk/files/3232/PRG06.pdf) | ✅ 一级 | 指称语义奠基 |
-| [Rust Reference — Unsafe blocks](https://doc.rust-lang.org/reference/unsafe-keyword.html#unsafe-blocks) | ✅ 一级 | Rust unsafe 块语义 |
+| [Rust Reference — Unsafe blocks](https://doc.rust-lang.org/reference/unsafe-keyword.html#unsafe-blocks) | ✅ P0 | Rust unsafe 块语义 |
 
 ---
 

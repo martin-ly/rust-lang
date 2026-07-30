@@ -16,7 +16,8 @@
 
 ---
 
-> **来源**: [Hoare 1969 — An Axiomatic Basis](https://doi.org/10.1093/comjnl/12.4.576) · · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [Hoare 1969 — An Axiomatic Basis](https://doi.org/10.1093/comjnl/12.4.576) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) ·
+> [Dijkstra 1975 — Guarded Commands, Nondeterminacy and Formal Derivation of Programs](https://doi.org/10.1145/360933.360975) ·
 > [Dijkstra 1976 — A Discipline of Programming](https://dl.acm.org/doi/book/10.5555/1243380) ·
 > [Wikipedia — Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic) ·
 > [Wikipedia — Predicate Transformer Semantics](https://en.wikipedia.org/wiki/Predicate_transformer_semantics) ·
@@ -110,8 +111,8 @@ Hoare 三元组的形式化定义:
   └─────────────┴─────────────────────────┴─────────────────────────┘
 ```
 
-> **认知功能**: Hoare 三元组是**程序验证的原子单位**——它将"程序正确性"这一模糊概念转化为可验证的数学陈述：给定前提，执行代码，得到保证。这与 Rust 类型系统（Type System）的"给定输入类型，执行函数，得到输出类型"在结构上同构。
-> (Source: [Hoare 1969 — An Axiomatic Basis for Computer Programming](https://doi.org/10.1093/comjnl/12.4.576))
+> **认知功能**: Hoare 三元组是**程序验证的原子单位**——它将"程序正确性"这一模糊概念转化为可验证的数学陈述：给定前提，执行代码，得到保证。Hoare (1969) 首次系统提出 `{P} C {Q}` 框架，把程序正确性归约为逻辑蕴含。这与 Rust 类型系统（Type System）的"给定输入类型，执行函数，得到输出类型"在结构上同构。
+> (Source: [Hoare 1969](https://doi.org/10.1093/comjnl/12.4.576))
 
 ---
 
@@ -247,7 +248,7 @@ Hoare 逻辑的局限性 → 分离逻辑的扩展:
   ├── 经典逻辑需要显式声明 "x ≠ y"
   └── 导致前置条件爆炸
 
-  分离逻辑的关键扩展 (Reynolds/O'Hearn):
+  分离逻辑的关键扩展 (Reynolds 2002 / O'Hearn, Reynolds & Yang 2001):
   ├── 引入分离合取 P * Q
   ├── 语义: P 和 Q 在不相交的内存上成立
   ├── (x ↦ 3) * (y ↦ 4) → x 和 y 指向不同地址
@@ -277,7 +278,7 @@ graph LR
 ```
 
 > **认知功能**: 从 Hoare 到分离逻辑的演进揭示了**形式化方法如何响应实践需求**——经典 Hoare 逻辑无法优雅处理别名，分离逻辑通过"资源分离"的原语解决了这一问题，而 Rust 的 ownership 系统可以看作是分离逻辑的工程化实现。
-> (Source: [Reynolds 2002 — Separation Logic](https://www.cs.cmu.edu/~jcr/seplogic.pdf))
+> (Source: [O'Hearn, Reynolds & Yang 2001 — Local Reasoning about Programs that Alter Data Structures](https://doi.org/10.1007/3-540-44802-0_1) · [Reynolds 2002 — Separation Logic](https://www.cs.cmu.edu/~jcr/seplogic.pdf))
 
 ---
 
@@ -501,8 +502,10 @@ Rust unsafe 代码的 Hoare 三元组视角:
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
 | [Hoare 1969](https://doi.org/10.1093/comjnl/12.4.576) | ✅ 一级 | 奠基论文，CACM |
+| [Dijkstra 1975 — Guarded Commands](https://doi.org/10.1145/360933.360975) | ✅ 一级 | wp 演算奠基（谓词转换器） |
 | [Dijkstra 1976](https://dl.acm.org/doi/book/10.5555/1243380) | ✅ 一级 | WP 演算，经典著作 |
 | [Floyd 1967](https://doi.org/10.1007/978-94-011-1793-7_4) | ✅ 一级 | 程序语义奠基 |
+| [O'Hearn, Reynolds & Yang 2001 — Local Reasoning about Programs that Alter Data Structures](https://doi.org/10.1007/3-540-44802-0_1) | ✅ 一级 | 分离逻辑奠基 |
 | [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/) | ✅ 一级 | 类型与程序语言 |
 | [Wikipedia — Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic) | ✅ 三级 | 概念入门 |
 | [Wikipedia — Predicate Transformer](https://en.wikipedia.org/wiki/Predicate_transformer_semantics) | ✅ 三级 | WP 概念 |
@@ -561,12 +564,15 @@ graph TD
 
 ## 权威来源索引
 
->
->
->
->
->
->
+| 来源 | 可信度 | 说明 |
+|:---|:---:|:---|
+| [Hoare 1969 — An Axiomatic Basis for Computer Programming](https://doi.org/10.1093/comjnl/12.4.576) | ✅ 一级 | 霍尔逻辑与 `{P} C {Q}` 三元组奠基 |
+| [Dijkstra 1975 — Guarded Commands, Nondeterminacy and Formal Derivation of Programs](https://doi.org/10.1145/360933.360975) | ✅ 一级 | 最弱前置条件（wp）/ 谓词转换器语义奠基 |
+| [Winskel 1993 — The Formal Semantics of Programming Languages](https://mitpress.mit.edu/9780262731034) | ✅ 一级 | 形式语义教材；公理语义与声音性/完备性 |
+| [O'Hearn, Reynolds & Yang 2001 — Local Reasoning about Programs that Alter Data Structures](https://doi.org/10.1007/3-540-44802-0_1) | ✅ 一级 | 分离逻辑奠基；借用/所有权的逻辑模型 |
+| [Jung et al. 2018 — RustBelt: Securing the Foundations of Rust](https://doi.org/10.1145/3158154) | ✅ 一级 | Rust 所有权/借用与并发 unsafe 的 Iris 形式化 |
+
+> **引用惯例**: 文中以 *Author(s) Year* 标注关键论断；本表提供完整书目与 DOI/链接。Hoare (1969) 与 Dijkstra (1975) 对应经典公理语义，O'Hearn et al. (2001) 与 Jung et al. (2018) 对应 Rust 所需的分离逻辑扩展。
 
 ---
 
@@ -730,7 +736,7 @@ fn main() {}
 
 ## 嵌入式测验（Embedded Quiz）
 
-本组测验围绕测验 1：Hoare 三元组（理解层）、测验 2：最弱前置条件（Weakest Precondition）（应…、测验 3：循环不变量（应用层）、测验 4：Rust 类型系统对 Hoare 逻辑的编码（分析层）等方面设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用（Borrowing）检查」或「运行时行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
+本组测验围绕测验 1：Hoare 三元组（理解层）、测验 2：最弱前置条件（Weakest Precondition）（应用层）、测验 3：循环不变量（应用层）、测验 4：Rust 类型系统对 Hoare 逻辑的编码（分析层）、测验 5：Hoare 逻辑的局限性与 Rust 扩展（评价层）等方面设计，按 Bloom 认知层级从记忆/理解递进到应用/分析。每题给出一段最小化代码或一条论断，判定目标是「能否通过 rustc 1.97（edition 2024）的类型检查与借用（Borrowing）检查」或「运行时行为是否符合预期」。建议先遮住答案自行作答，再核对编译器诊断（E0xxx）与修复方案——每道错题都对应一条语言规则的边界，这正是本节要建立的判定依据。
 
 ### 测验 1：Hoare 三元组（理解层）
 

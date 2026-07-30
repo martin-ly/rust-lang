@@ -35,11 +35,11 @@
 
 | # | 文件 | 主题 | 状态 |
 |---:|---|---|---|
-| 01 | `01_hoare_logic_for_rust.md` | Hoare 逻辑在 Rust 算法中的实践入口；完整理论见 [`03_operational_semantics/02_hoare_logic.md`](../03_operational_semantics/02_hoare_logic.md) | ⏳ 待创建（stub） |
-| 02 | `02_refinement_calculus.md` | 算法精化：从规范到实现的逐步推导 | ⏳ 待创建 |
-| 03 | `03_iterator_correctness.md` | `Iterator` trait 的语义规范与正确性证明 | ⏳ 待创建 |
-| 04 | `04_unsafe_algorithm_invariants.md` | `unsafe` 算法内部的前置/后置条件与不变量 | ⏳ 待创建 |
-| 05 | `05_algorithm_equivalence.md` | 算法实现的观察等价性与复杂度语义 | ⏳ 待创建 |
+| 01 | `01_hoare_logic_for_rust.md` | Hoare 逻辑在 Rust 算法中的实践入口；完整理论见 [`03_operational_semantics/02_hoare_logic.md`](../03_operational_semantics/02_hoare_logic.md) | ✅ 已创建 |
+| 02 | `02_refinement_calculus.md` | 算法精化：从规范到实现的逐步推导 | ✅ 已创建 |
+| 03 | `03_iterator_correctness.md` | `Iterator` trait 的语义规范与正确性证明 | ✅ 已创建 |
+| 04 | `04_unsafe_algorithm_invariants.md` | `unsafe` 算法内部的前置/后置条件与不变量 | ✅ 已创建 |
+| 05 | `05_algorithm_equivalence.md` | 算法实现的观察等价性与复杂度语义 | ✅ 已创建 |
 
 ---
 

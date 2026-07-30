@@ -14,11 +14,11 @@
 
 ---
 
-> **来源**: [Hoare 1969 — An Axiomatic Basis](https://doi.org/10.1093/comjnl/12.4.576) · [Cambridge Hoare Logic Notes](https://www.cl.cam.ac.uk/archive/mjcg/HL/Lectures/) · [Floyd 1967 — Assigning Meanings to Programs](https://doi.org/10.1007/978-94-011-1793-7_4) · [Dijkstra 1976 — A Discipline of Programming](https://dl.acm.org/doi/book/10.5555/1243380) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
+> **来源**: [Hoare 1969 — An Axiomatic Basis](https://doi.org/10.1093/comjnl/12.4.576) · [Cambridge Hoare Logic Notes](https://www.cl.cam.ac.uk/archive/mjcg/HL/Lectures/) · [Floyd 1967 — Assigning Meanings to Programs](https://doi.org/10.1007/978-94-011-1793-7_4) · [Dijkstra 1976 — A Discipline of Programming](https://dl.acm.org/doi/book/10.5555/1243380) · [Reynolds 2002 — Separation Logic](https://doi.org/10.1109/LICS.2002.1029817) · [Astrauskas et al. 2019 — Prusti](https://doi.org/10.1145/3360573) · [Denis 2021 — The Creusot Environment](https://hal-lara.archives-ouvertes.fr/hal-03526634/) · [Müller et al. — Viper](https://doi.org/10.3233/978-1-61499-810-5-104) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 
 ## 一、算法语义的 Hoare 视角
 
-算法 = 输入域 + 输出规范 + 终止性 + 复杂度。Hoare 三元组 `{P} C {Q}` 给算法提供了**可验证的语义契约**：
+算法 = 输入域 + 输出规范 + 终止性 + 复杂度。Hoare (1969) 提出的 Hoare 三元组 `{P} C {Q}` 给算法提供了**可验证的语义契约**：
 
 ```text
 { P(n) }            // 前置：输入满足的问题约束
@@ -194,7 +194,7 @@ fn main() {
 
 ## 六、unsafe 算法不变量
 
-以 `std::slice::from_raw_parts` 为例，调用者必须维持的内存安全前置条件包括：
+以 `std::slice::from_raw_parts` 为例，调用者必须维持的内存安全前置条件包括（这些条件可用 Reynolds (2002) 的分离逻辑进行形式化刻画）：
 
 ```text
 前置 P :
@@ -247,6 +247,26 @@ fn main() {
 > }
 > ```
 
+### 6.3 违反 Hoare 前置条件：借用别名冲突（unsafe borrow misuse）
+
+下面的 `compile_fail` 示例展示了一个常见的 Hoare 前置条件违反：在已持有独占可变借用（`&mut`）的内存区域上，又尝试建立不可变借用（`&`）。这种 `unsafe borrow misuse` 会破坏算法要求的别名隔离不变量；Rust 借用检查器会在编译期拒绝这种别名冲突，对应错误码 `E0502`。
+
+```rust,compile_fail,E0502
+fn main() {
+    let mut v = vec![1, 2, 3];
+
+    // 独占可变借用：承诺在 r 存活期间不存在其他别名
+    let r = &mut v[0];
+
+    // 错误：在 &mut 借用仍然有效时，又创建 & 借用
+    let s = &v;
+
+    println!("{} {}", r, s.len());
+}
+```
+
+> **修正**: 若算法规范要求“同一内存区域在某一阶段只能有一个可变引用”，则实现必须在退出 `r` 的作用域后再创建其他借用。Hoare 逻辑中的不变量与 Rust 的借用规则共同保证了这一点；一旦违反，编译器将直接拒绝。
+
 ## 七、工具链映射
 
 现代 Rust 验证工具可将上述非形式化契约转化为机器可检查的 Hoare 规格。
@@ -256,6 +276,8 @@ fn main() {
 | **Creusot** | Why3 / Coma / 最弱前置条件 | `#[requires(...)]` / `#[ensures(...)]` / `#[invariant(...)]` / `#[variant(...)]` | 无界功能正确性：排序、搜索、代数规约 |
 | **Prusti** | Viper / 分离逻辑 | `#[requires]` / `#[ensures]` / `#[invariant]` | 堆数据结构、分离逻辑教学 |
 | **Kani** | CBMC / 有界模型检测 | `#[kani::requires]` / `#[kani::ensures]` / `#[kani::loop_invariant]` | 有界反例查找、安全关键组件 |
+
+> **形式化来源**: Prusti 将 Rust 类型系统与 Viper 的权限模型结合，用于模块化规约与验证（Astrauskas et al., 2019）；Creusot 基于 Why3 / Coma 中间语言，将 Pearlite 规格翻译为最弱前置条件（Denis, 2021）；Viper 则是支撑 Prusti 等工具的中间验证语言和权限推理基础设施（Müller et al.）。
 
 - Creusot 详情见 [`04_formal/04_model_checking/11_creusot.md`](../04_model_checking/11_creusot.md)
 - Kani 详情见 [`04_formal/04_model_checking/09_kani.md`](../04_model_checking/09_kani.md)
@@ -290,6 +312,10 @@ fn main() {
 | [Creusot 官方文档](https://creusot.rs/) | ✅ 一级 | Rust 演绎验证工具 |
 | [Kani 官方文档](https://model-checking.github.io/kani/) | ✅ 一级 | Rust 有界模型检测器 |
 | [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) | ✅ 一级 | Rust 分离逻辑验证器 |
+| [Reynolds 2002 — Separation Logic: A Logic for Shared Mutable Data Structures](https://doi.org/10.1109/LICS.2002.1029817) | ✅ 一级 | 堆/指针程序形式化推理基础 |
+| [Astrauskas et al. 2019 — Leveraging Rust Types for Modular Specification and Verification](https://doi.org/10.1145/3360573) | ✅ 一级 | Prusti 在 Rust 上的模块化验证方法 |
+| [Denis 2021 — The Creusot Environment for the Deductive Verification of Rust Programs](https://hal-lara.archives-ouvertes.fr/hal-03526634/) | ✅ 一级 | Creusot 演绎验证环境技术报告 |
+| [Müller et al. — Viper: A Verification Infrastructure for Permission-Based Reasoning](https://doi.org/10.3233/978-1-61499-810-5-104) | ✅ 一级 | Prusti 等工具依赖的权限推理中间语言 |
 
 ---
 

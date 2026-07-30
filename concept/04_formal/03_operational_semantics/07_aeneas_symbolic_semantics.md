@@ -317,7 +317,7 @@ LLBC
 Coq / Lean / HOL4 代码
 ```
 
-Aeneas 的特殊之处：不仅证明内存安全（Memory Safety），还生成纯函数式规范，使开发者可进一步证明功能正确性。
+Aeneas 的特殊之处：不仅证明内存安全（Memory Safety），还生成纯函数式规范，使开发者可进一步证明功能正确性（Ho & Protzenko, 2022）。随后 POPL 2024 的符号化语义工作在此基础上给出了借用检查声音性的系统证明（Ho, Fromherz & Protzenko, 2024）。
 
 ### 7.2 Rust / Aeneas 风格示例
 

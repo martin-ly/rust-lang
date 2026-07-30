@@ -14,13 +14,18 @@
 
 ---
 
-> **来源**: [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html) · [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) · [Shaw & Garlan — Software Architecture (1996)](https://www.cs.cmu.edu/~search/articles/books/SA.book.pdf)
+> **来源**: [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html) · [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) · [Rust Reference — Items and Visibility](https://doc.rust-lang.org/reference/visibility-and-privacy.html) · [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/traits.html#orphan-rules) · [Shaw & Garlan — Software Architecture (1996)](https://www.cs.cmu.edu/~search/articles/books/SA.book.pdf)
 
-> **权威来源 / Provenance**: 本节软件架构形式化模型与 ISO/IEC/IEEE 42010:2022 架构描述框架对齐；组件-连接件-配置三元组与架构描述语言（ADL）讨论参考 Shaw & Garlan (1996) 与 Medvidovic & Taylor (2000)。
+> **权威来源 / Provenance**: 本节软件架构形式化模型与 ISO/IEC/IEEE 42010:2022 架构描述框架对齐；组件-连接件-配置三元组与架构描述语言（ADL）讨论参考 Shaw & Garlan (1996)、Medvidovic & Taylor (2000) 与 Wermelinger (1994)；ACME、Wright、Rapide 等经典 ADL 参考其原始论文；Rust 映射部分参考 Rust Reference 的 Modules、Traits、Items and Visibility 与 Orphan Rules。
 >
 > - **ISO/IEC/IEEE 42010:2022** — *Software and Systems Engineering — Architecture Description*. ISO, 2022. [https://www.iso.org/standard/74296.html](https://www.iso.org/standard/74296.html)
 > - **Shaw & Garlan (1996)** — *Software Architecture: Perspectives on an Emerging Discipline*. Prentice Hall. [PDF](https://www.cs.cmu.edu/~search/articles/books/SA.book.pdf)
-> - **Medvidovic & Taylor (2000)** — *A Classification and Comparison Framework for Software Architecture Description Languages*. IEEE Transactions on Software Engineering. [https://ieeexplore.ieee.org/document/845372](https://ieeexplore.ieee.org/document/845372)
+> - **Garlan & Shaw (1993)** — *An Introduction to Software Architecture*. In *Advances in Software Engineering and Knowledge Engineering* (Vol. 1). World Scientific. [https://doi.org/10.1142/9789812813032_0001](https://doi.org/10.1142/9789812813032_0001)
+> - **Medvidovic & Taylor (2000)** — *A Classification and Comparison Framework for Software Architecture Description Languages*. IEEE Transactions on Software Engineering, 26(1), 70–93. [https://doi.org/10.1109/32.825767](https://doi.org/10.1109/32.825767)
+> - **Wermelinger (1994)** — *Formal Specification of Software Architecture*. Science of Computer Programming, 23(2–3), 149–178. [https://doi.org/10.1016/0167-6423(94)00022-5](https://doi.org/10.1016/0167-6423(94)00022-5)
+> - **Garlan, Monroe & Wile (1997)** — *ACME: An Architecture Description Interchange Language*. In *Proceedings of CASCON'97*, 169–183.
+> - **Allen (1997)** — *A Formal Approach to Software Architecture*. Ph.D. thesis, Carnegie Mellon University. (Wright ADL based on CSP.)
+> - **Luckham et al. (1995)** — *Specification and Analysis of System Architecture Using Rapide*. IEEE Transactions on Software Engineering, 21(4), 336–355. [https://doi.org/10.1109/32.385970](https://doi.org/10.1109/32.385970)
 
 ---
 
@@ -64,6 +69,7 @@ ISO/IEC/IEEE 42010 视点与 Rust crate 结构映射：
   - [二、反命题与边界](#二反命题与边界)
     - [反命题：相同组件在不同配置中具有相同语义](#反命题相同组件在不同配置中具有相同语义)
     - [边界：ADL 与实现语言的鸿沟](#边界adl-与实现语言的鸿沟)
+    - [编译期反例：层间绕过触发 `E0433`](#编译期反例层间绕过触发-e0433)
   - [三、相关概念](#三相关概念)
   - [四、嵌入式测验（Embedded Quiz）](#四嵌入式测验embedded-quiz)
     - [测验 1：软件架构三元组包含哪三个要素？（记忆层）](#测验-1软件架构三元组包含哪三个要素记忆层)
@@ -428,6 +434,43 @@ ADL 描述的约束（如“禁止循环依赖”）不会自动在实现语言�
 - ADL 中的“层间不绕过”需要团队规范 + 代码审查。
 - 事件广播的“生产者不阻塞消费者”需要运行时语义保证。
 
+### 编译期反例：层间绕过触发 `E0433`
+
+把 Layered 架构的层映射为 crate 后，跨层直接引用基础设施类型会在编译期失败：
+
+```rust,compile_fail
+// 抽象语义：Presentation 层只能依赖 Application 层。
+// 以下代码在同一 crate 内模拟层，演示 presentation 直接调用 infrastructure 时报错。
+
+mod application {
+    // infrastructure 仅对 application 层可见，模拟“下层封装”
+    pub(in crate::application) mod infrastructure {
+        pub struct DbConnection;
+        impl DbConnection {
+            pub fn save(_: u64) {}
+        }
+    }
+
+    // application 层暴露用例入口
+    pub fn create_order(id: u64) { infrastructure::DbConnection::save(id); }
+}
+
+mod presentation {
+    // ❌ 架构违规：presentation 直接导入 infrastructure，跳过 application 层
+    use crate::application::infrastructure::DbConnection;
+
+    pub fn submit_order() {
+        DbConnection::save(1);
+    }
+}
+
+fn main() {
+    presentation::submit_order();
+}
+```
+
+> 说明：本例在同一 crate 内仅作示意；在真实 workspace 中，把层拆分为独立 crate 并让 `presentation/Cargo.toml` 不声明 `infrastructure` 依赖，即可使跨层导入在 `cargo check` 阶段直接失败。
+
 ---
 
 ## 三、相关概念
@@ -508,8 +551,12 @@ Pipe-Filter 通过“数据单向流动、过滤器无共享状态”的约束�
 ## 五、权威来源索引
 
 - **Shaw & Garlan** — *Software Architecture: Perspectives on an Emerging Discipline* (1996). [PDF](https://www.cs.cmu.edu/~search/articles/books/SA.book.pdf)
-- **Garlan & Shaw** — *An Introduction to Software Architecture* (1993). [CMU ABLE](https://www.cs.cmu.edu/~able/introduction_to_software_architecture.htm)
-- **Medvidovic & Taylor** — *A Classification and Comparison Framework for Software Architecture Description Languages* (2000). [IEEE Xplore](https://ieeexplore.ieee.org/document/845372)
+- **Garlan & Shaw** — *An Introduction to Software Architecture* (1993). [https://doi.org/10.1142/9789812813032_0001](https://doi.org/10.1142/9789812813032_0001)
+- **Medvidovic & Taylor** — *A Classification and Comparison Framework for Software Architecture Description Languages* (2000). [https://doi.org/10.1109/32.825767](https://doi.org/10.1109/32.825767)
+- **Wermelinger (1994)** — *Formal Specification of Software Architecture*. [https://doi.org/10.1016/0167-6423(94)00022-5](https://doi.org/10.1016/0167-6423(94)00022-5)
+- **Garlan, Monroe & Wile (1997)** — *ACME: An Architecture Description Interchange Language*. In *Proceedings of CASCON'97*, 169–183.
+- **Allen (1997)** — *A Formal Approach to Software Architecture*. Ph.D. thesis, Carnegie Mellon University. (Wright ADL based on CSP.)
+- **Luckham et al. (1995)** — *Specification and Analysis of System Architecture Using Rapide*. [https://doi.org/10.1109/32.385970](https://doi.org/10.1109/32.385970)
 - **ISO/IEC/IEEE 42010:2022** — *Software and Systems Engineering — Architecture Description*. ISO, 2022. [https://www.iso.org/standard/74296.html](https://www.iso.org/standard/74296.html)
 - **ADR GitHub Organization** — *Architecture Decision Records*. Michael Nygard 模板与 Rust 项目实践索引. [https://adr.github.io/](https://adr.github.io/)
 - **SEI — ATAM** — *Architecture Tradeoff Analysis Method*. Carnegie Mellon University. [https://www.sei.cmu.edu/research-capabilities/all-work/display.cfm?customel_datapageid_4050=21306](https://www.sei.cmu.edu/research-capabilities/all-work/display.cfm?customel_datapageid_4050=21306)

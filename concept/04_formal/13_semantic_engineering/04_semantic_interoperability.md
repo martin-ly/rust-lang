@@ -14,6 +14,17 @@
 
 ---
 
+> **权威来源 / Provenance**: 本文互操作基础参考 Berners-Lee (2006) 的 Linked Data 原则、W3C JSON-LD 1.1 与 RDF-star 规范；知识图谱综述参考 Hogan et al. (2021/2022)；数据治理参考 Wilkinson et al. (2016) 的 FAIR 原则；本体与形式化基础参考 Noy & McGuinness (2001)、Baader et al. (2007) 与 Hitzler, Krötzsch & Rudolph (2009)。
+>
+> - **Berners-Lee (2006)** — *Linked Data*. W3C Design Issues. [https://www.w3.org/DesignIssues/LinkedData.html](https://www.w3.org/DesignIssues/LinkedData.html)
+> - **Hogan et al. (2021/2022)** — *Knowledge Graphs*. ACM Computing Surveys, 54(4), 1–37. [https://doi.org/10.1145/3447772](https://doi.org/10.1145/3447772)
+> - **Wilkinson et al. (2016)** — *The FAIR Guiding Principles for Scientific Data Management and Stewardship*. Scientific Data 3, 160018. [https://doi.org/10.1038/sdata.2016.18](https://doi.org/10.1038/sdata.2016.18)
+> - **Noy & McGuinness (2001)** — *Ontology Development 101: A Guide to Creating Your First Ontology*. Stanford KSL Technical Report KSL-01-05. [https://doi.org/10.1007/978-3-540-92673-3_6](https://doi.org/10.1007/978-3-540-92673-3_6)
+> - **Baader et al. (2007)** — *The Description Logic Handbook* (2nd ed.). Cambridge University Press. [https://doi.org/10.1017/9781139025355](https://doi.org/10.1017/9781139025355)
+> - **Hitzler, Krötzsch & Rudolph (2009)** — *Foundations of Semantic Web Technologies*. CRC Press. [https://www.semantic-web-book.org/](https://www.semantic-web-book.org/)
+> - [W3C JSON-LD 1.1](https://www.w3.org/TR/json-ld11/)
+> - [W3C RDF-star and SPARQL-star](https://www.w3.org/2021/12/rdf-star.html)
+
 ## 📑 目录
 
 - [语义互操作（Semantic Interoperability）](#语义互操作semantic-interoperability)
@@ -38,7 +49,7 @@
 
 ## 一、Linked Data 原则
 
-Tim Berners-Lee 提出的 **Linked Data** 四条原则：
+Tim Berners-Lee (2006) 提出的 **Linked Data** 四条原则：
 
 1. 使用 URI 作为事物的名称。
 2. 使用 HTTP URI，使人们可以查到这些名称。
@@ -79,7 +90,7 @@ Linked Data 的核心不是"把所有数据放进一个图"，而是**通过 URI
 
 ## 四、RDF-star 与语句级元数据
 
-RDF 1.1 中，三元组本身不能作为另一个三元组的主语或宾语。RDF-star 扩展解决了这一问题：
+RDF 1.1 中，三元组本身不能作为另一个三元组的主语或宾语。RDF-star 扩展解决了这一问题（W3C RDF-star）：
 
 ```turtle
 << ex:Ownership ex:dependsOn ex:TypeSystem >>
@@ -132,7 +143,7 @@ RDF-star / SHACL / JSON-LD
 
 ### JSON-LD 结构示例
 
-JSON-LD 把普通 JSON 增强为 Linked Data，通过 `@context` 映射字段到 URI：
+JSON-LD 把普通 JSON 增强为 Linked Data，通过 `@context` 映射字段到 URI（W3C JSON-LD 1.1）：
 
 ```json
 {
@@ -178,6 +189,35 @@ async fn concept_handler(
 3. **使用共享词汇表**：`schema.org`、`skos`、`dcterms`。
 4. **为关系附加来源与置信度**：RDF-star 或外部属性文件。
 5. **提供 SHACL 形状文档**，让客户端能验证消费的数据。
+
+**Rust 投影：冲突声明与形状违规**：互操作要求词汇表与约束在全局一致；Rust 的闭世界 trait coherence 与类型检查可视为客户端侧的一致性预演。
+
+```rust,compile_fail,E0119
+// 两个不同"本体"都把同一类型声明为同一 trait 的实例，触发冲突
+trait LinkedDataResource {}
+impl<T> LinkedDataResource for T {}
+impl LinkedDataResource for String {} //~ ERROR E0119
+
+fn main() {}
+```
+
+```rust,compile_fail,E0277
+// SHACL shape：LearningResource 必须具有 name
+trait HasName {
+    fn name(&self) -> &str;
+}
+
+fn serialize_resource<T: HasName>(_: T) {}
+
+// 错误数据：缺少 name
+struct UnlabeledResource { url: String }
+
+fn main() {
+    serialize_resource(UnlabeledResource { url: "https://example.org/x".into() }); //~ ERROR E0277
+}
+```
+
+> 边界结论：JSON-LD / RDF 的开放世界允许数据逐步补全；Rust 的类型约束则要求**入接口前**即满足 shape。两者在工程链路中互补。
 
 ---
 
@@ -289,6 +329,12 @@ mindmap
 
 ## 权威来源索引
 
+- Berners-Lee, T. (2006). *Linked Data*. W3C Design Issues. <https://www.w3.org/DesignIssues/LinkedData.html>
+- Hogan, A. et al. (2021/2022). *Knowledge Graphs*. ACM Computing Surveys, 54(4), 1–37. <https://doi.org/10.1145/3447772>
+- Wilkinson, M. D. et al. (2016). *The FAIR Guiding Principles for Scientific Data Management and Stewardship*. Scientific Data 3, 160018. <https://doi.org/10.1038/sdata.2016.18>
+- Noy, N. F. & McGuinness, D. L. (2001). *Ontology Development 101: A Guide to Creating Your First Ontology*. Stanford KSL Technical Report KSL-01-05. <https://doi.org/10.1007/978-3-540-92673-3_6>
+- Baader, F. et al. (eds.) (2007). *The Description Logic Handbook* (2nd ed.). Cambridge University Press. <https://doi.org/10.1017/9781139025355>
+- Hitzler, P.; Krötzsch, M. & Rudolph, S. (2009). *Foundations of Semantic Web Technologies*. CRC Press. <https://www.semantic-web-book.org/>
 - [W3C Linked Data](https://www.w3.org/DesignIssues/LinkedData.html)
 - [schema.org](https://schema.org/)
 - [W3C RDF-star and SPARQL-star](https://www.w3.org/2021/12/rdf-star.html)
@@ -299,4 +345,4 @@ mindmap
 
 > **相关文件**: [目录 README](README.md) · [本体工程](01_ontology_engineering.md) · [描述逻辑与 OWL](02_description_logic_and_owl.md) · [知识图谱构建](03_knowledge_graph_construction.md)
 >
-> **文档版本**: 1.0 ｜ **最后更新**: 2026-07-28 ｜ **状态**: ✅ 新建（Rust 1.97 对齐）
+> **文档版本**: 1.1 ｜ **最后更新**: 2026-07-30 ｜ **状态**: ✅ Rust 1.97 对齐

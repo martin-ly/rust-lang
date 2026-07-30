@@ -23,12 +23,19 @@
 > [INCOSE — Systems Engineering Handbook v5](https://www.incose.org/publications) ·
 > [OMG SysML v2 Specification](https://www.omg.org/spec/SysML/) ·
 > [Ferrocene Language Specification](https://spec.ferrocene.dev/) ·
+> [RTCA DO-178C — Software Considerations in Airborne Systems and Equipment Certification](https://my.rtca.org/) ·
+> [ISO 26262 — Road vehicles — Functional safety](https://www.iso.org/standard/68383.html) ·
+> [IEC 61508 — Functional safety of E/E/PE safety-related systems](https://webstore.iec.ch/publication/66912) ·
 > [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 
-> **权威来源 / Provenance**: 本节系统生命周期、V-model 与验证确认（V&V）语义直接对齐 ISO/IEC/IEEE 15288:2023 与 INCOSE Systems Engineering Handbook 第 5 版。
+> **权威来源 / Provenance**: 本节系统生命周期、V-model 与验证确认（V&V）语义直接对齐 ISO/IEC/IEEE 15288:2023 与 INCOSE Systems Engineering Handbook 第 5 版；安全关键映射对齐 RTCA DO-178C、ISO 26262、IEC 61508 与 Ferrocene 资格鉴定。
 >
 > - **ISO/IEC/IEEE 15288:2023** — *Systems and Software Engineering — System Life Cycle Processes*. ISO, 2023. [https://www.iso.org/standard/63711.html](https://www.iso.org/standard/63711.html)
 > - **INCOSE** — *Systems Engineering Handbook: A Guide for System Life Cycle Processes and Activities* (5th ed.). Wiley, 2023. [https://www.incose.org/incose-members/featured-content/incose-handbooks](https://www.incose.org/incose-members/featured-content/incose-handbooks)
+> - **RTCA DO-178C** — *Software Considerations in Airborne Systems and Equipment Certification*. RTCA, 2011. [https://my.rtca.org/](https://my.rtca.org/)
+> - **ISO 26262** — *Road vehicles — Functional safety*. ISO, 2018. [https://www.iso.org/standard/68383.html](https://www.iso.org/standard/68383.html)
+> - **IEC 61508** — *Functional safety of electrical/electronic/programmable electronic safety-related systems*. IEC, 2010. [https://webstore.iec.ch/publication/66912](https://webstore.iec.ch/publication/66912)
+> - **Ferrocene** — *Ferrocene Language Specification* / TÜV SÜD qualification. [https://spec.ferrocene.dev/](https://spec.ferrocene.dev/)
 
 ---
 
@@ -464,6 +471,29 @@ pub extern "C" fn _start() -> ! {
 }
 ```
 
+`no_std` 项目必须显式提供 `#[panic_handler]`；若错误地提供两个，编译器会报 `E0152`（发现重复的 lang item `panic_impl`）：
+
+```rust,compile_fail,E0152
+#![no_std]
+
+use core::panic::PanicInfo;
+
+#[panic_handler]
+fn panic_handler_a(_info: &PanicInfo) -> ! {
+    loop {}
+}
+
+// ❌ 错误：no_std 程序只能有一个 panic_handler
+#[panic_handler]
+fn panic_handler_b(_info: &PanicInfo) -> ! {
+    loop {}
+}
+
+fn main() {}
+```
+
+在安全关键 Rust 项目中，这个错误常见于把多个 crate 或启动文件链接在一起时：每个子模块若各自定义 `#[panic_handler]`，链接阶段就会产生 `E0152`。DO-178C / ISO 26262 / IEC 61508 项目需要把 panic 策略作为工具链资格证据的一部分明确记录，确保全项目只有一个经鉴定的处理函数。
+
 在 15288 视角下，`no_std` 的边界对应 **技术过程** 中的“架构约束”和“设计决策”：
 
 - 选择 `no_std` 是一项架构决策，需要记录于设计记录
@@ -634,7 +664,10 @@ Ferrocene 提供的是**工具链资格鉴定证据**，它是安全案例的必
 - **Brewer 2000 / Gilbert & Lynch 2002** — CAP Theorem: *Towards Robust Distributed Systems* (PODC 2000) and *Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services* (SIGACT 2002). [https://dl.acm.org/doi/10.1145/343477.343502](https://dl.acm.org/doi/10.1145/343477.343502) · [https://dl.acm.org/doi/10.1145/564585.564601](https://dl.acm.org/doi/10.1145/564585.564601)
 - **Fischer, Lynch & Paterson 1985** — *Impossibility of Distributed Consensus with One Faulty Process* (JACM 1985). [https://dl.acm.org/doi/10.1145/3149.214121](https://dl.acm.org/doi/10.1145/3149.214121)
 - **Abadi 2010** — PACELC model: *Consistency Tradeoffs in Modern Distributed Database System Design* (IEEE Computer 2012, first presented 2010). [https://cs-www.cs.yale.edu/homes/dna/papers/abadi-pacelc.pdf](https://cs-www.cs.yale.edu/homes/dna/papers/abadi-pacelc.pdf)
-- **Ferrocene** — [Ferrocene Language Specification](https://spec.ferrocene.dev/)
+- **RTCA DO-178C** — *Software Considerations in Airborne Systems and Equipment Certification*. RTCA, 2011. [https://my.rtca.org/](https://my.rtca.org/)
+- **ISO 26262** — *Road vehicles — Functional safety*. ISO, 2018. [https://www.iso.org/standard/68383.html](https://www.iso.org/standard/68383.html)
+- **IEC 61508** — *Functional safety of electrical/electronic/programmable electronic safety-related systems*. IEC, 2010. [https://webstore.iec.ch/publication/66912](https://webstore.iec.ch/publication/66912)
+- **Ferrocene** — [Ferrocene Language Specification](https://spec.ferrocene.dev/) / TÜV SÜD qualification
 - **Rust Project** — [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 
 > **相关文件**: [同层：Actor 模型系统语义](01_actor_model_semantics.md) · [同层：分布式系统语义](04_distributed_systems_semantics.md) · [同层：反应式系统语义](05_reactive_systems_semantics.md) · [安全关键系统工程](../../06_ecosystem/11_domain_applications/23_safety_critical_systems_engineering.md)

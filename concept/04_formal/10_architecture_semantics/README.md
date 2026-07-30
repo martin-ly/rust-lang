@@ -35,10 +35,10 @@
 
 | # | 文件 | 主题 | 状态 |
 |---:|---|---|---|
-| 01 | `01_software_architecture_formalization.md` | 软件架构形式化：ADL、组件/连接件/配置、架构风格 | ⏳ 待创建 |
-| 02 | `02_architecture_pattern_semantics.md` | 常见架构模式的语义：Layered、Hexagonal、Microkernel、Event-Driven | ⏳ 待创建 |
-| 03 | `03_architecture_refinement.md` | 架构精化：从抽象架构到 Rust 实现的保持性 | ⏳ 待创建 |
-| 04 | `04_rust_architecture_constraints.md` | Rust 模块系统、crate 边界、ABI 对架构语义的约束 | ⏳ 待创建 |
+| 01 | `01_software_architecture_formalization.md` | 软件架构形式化：ADL、组件/连接件/配置、架构风格 | ✅ 已创建，含国际权威来源与 Rust 示例 |
+| 02 | `02_architecture_pattern_semantics.md` | 常见架构模式的语义：Layered、Hexagonal、Microkernel、Event-Driven | ✅ 已创建，含架构模式不变量与编译期反例 |
+| 03 | `03_architecture_refinement.md` | 架构精化：从抽象架构到 Rust 实现的保持性 | ✅ 已创建，含精化映射与违约反例 |
+| 04 | `04_rust_architecture_constraints.md` | Rust 模块系统、crate 边界、ABI 对架构语义的约束 | ✅ 已创建，含模块/crate/ABI 约束与编译期反例 |
 
 ---
 

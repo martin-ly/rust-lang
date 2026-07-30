@@ -23,6 +23,8 @@
 > [Brewer, *Towards Robust Distributed Systems*, PODC 2000 (CAP 猜想)](https://doi.org/10.1145/343477.343502) ·
 > [Gilbert & Lynch, *Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services*, ACM SIGACT News 33(2), 2002](https://doi.org/10.1145/564585.564601) ·
 > [Lamport, *Time, Clocks, and the Ordering of Events in a Distributed System*, Communications of the ACM 21(7), 1978](https://doi.org/10.1145/359545.359563) ·
+> [Castro & Liskov, *Practical Byzantine Fault Tolerance*, OSDI 1999 (PBFT)](https://dl.acm.org/doi/10.5555/296806.296824) ·
+> [Dwork, Lynch & Stockmeyer, *Consensus in the Presence of Partial Synchrony*, JACM 35(2), 1988](https://dl.acm.org/doi/10.1145/42282.42283) ·
 > [raft-rs 文档](https://docs.rs/raft/latest/raft/) ·
 > [tonic 文档](https://docs.rs/tonic/latest/tonic/) ·
 > [libp2p 文档](https://docs.rs/libp2p/latest/libp2p/)
@@ -40,9 +42,11 @@
     - [1.4 CAP 定理的形式含义](#14-cap-定理的形式含义)
     - [1.5 一致性模型谱系](#15-一致性模型谱系)
     - [1.6 容错模型](#16-容错模型)
+    - [1.7 部分同步模型与 PBFT](#17-部分同步模型与-pbft)
   - [二、Rust 映射：raft-rs、tonic、libp2p](#二rust-映射raft-rstoniclibp2p)
   - [三、反例与边界](#三反例与边界)
     - [反例：异步网络中单个故障进程即可阻止确定性共识](#反例异步网络中单个故障进程即可阻止确定性共识)
+    - [compile\_fail：消息类型未实现 Send/Sync](#compile_fail消息类型未实现-sendsync)
     - [边界：CAP 不是「三选二」的菜单](#边界cap-不是三选二的菜单)
     - [边界：一致性模型不能解决所有并发错误](#边界一致性模型不能解决所有并发错误)
   - [四、定理链与相关概念](#四定理链与相关概念)
@@ -162,6 +166,32 @@ Byzantine 容错 ⊃ Crash-recovery 容错 ⊃ Crash-stop 容错
 
 即：能容忍拜占庭故障的协议也能处理崩溃停止，但反之不成立。
 
+### 1.7 部分同步模型与 PBFT
+
+FLP 不可能性依赖于**完全异步**网络假设。工程实践中常用的绕过方式是引入**部分同步（partial synchrony）**假设：系统大部分时间内 behaves 近似同步，但允许偶尔的异步阶段。Dwork, Lynch & Stockmeyer（1988）给出了部分同步模型下的共识可能条件：
+
+```text
+部分同步假设:
+  ∃ 未知上界 Δ 与 未知全局稳定时间 GST，
+  使得 GST 之后所有消息在 Δ 内送达。
+
+结论: 在该模型下，存在可终止的确定性共识协议（如 Paxos、Raft）。
+```
+
+当故障模型从 crash-stop 提升到 **Byzantine** 时，经典结果是 Castro & Liskov（1999）提出的 **PBFT（Practical Byzantine Fault Tolerance）**：
+
+```text
+PBFT 语义要点:
+  - 3f + 1 个副本可容忍 f 个拜占庭节点
+  - 三阶段协议: pre-prepare → prepare → commit
+  - 安全性: 所有诚实节点对提交顺序达成一致
+  - 活性: 在部分同步假设下，视图变更（view change）保证最终推进
+```
+
+Rust 映射：PBFT 类算法通常需要数字签名、消息摘要与可序列化的状态机复制；工程实现中，`ed25519-dalek`、`sha2` 与 `prost` 常作为密码学与序列化层，而共识状态机本身则对应一个 `Send + Sync` 的共享状态（见 §三 compile_fail 反例）。
+
+> **过渡**: 形式模型确立后，下面看 Rust 生态如何把这些模型封装为 crate API；同时必须注意，跨线程/网络边界的消息必须满足 `Send + Sync`，否则会在编译期被捕获。
+
 ---
 
 ## 二、Rust 映射：raft-rs、tonic、libp2p
@@ -255,6 +285,34 @@ async fn async_2pc(coordinator: NodeId, cohorts: Vec<NodeId>) -> Decision {
 
 **修正**：引入超时与 leader 切换（如 Raft 的 election timeout），或接受概率性终止（如 Ben-Or 随机化共识），或换用部分同步模型（如 Paxos 的实际部署）。
 
+### compile_fail：消息类型未实现 Send/Sync
+
+在分布式系统中，消息必须跨越线程与网络边界。Rust 要求这类类型同时满足 `Send`（可安全移到其他线程）与 `Sync`（可安全被多线程共享引用）。若消息包含 `Rc<T>`、`Cell<T>` 或裸指针等不可跨线程类型，编译器会在路由/分发点拒绝。
+
+```rust,compile_fail,E0277
+use std::rc::Rc;
+
+// ❌ 反例：分布式消息使用了 Rc<String>，它既不是 Send 也不是 Sync。
+// 当节点尝试把该消息交给线程池或网络发送任务时，类型系统拒绝。
+#[derive(Clone)]
+struct Packet {
+    payload: Rc<String>,
+}
+
+fn route<P: Send + Sync>(p: P) {
+    drop(p);
+}
+
+fn main() {
+    let pkt = Packet { payload: Rc::new("hello".into()) };
+    route(pkt); // E0277: Packet 未实现 Send
+}
+```
+
+编译器输出 `E0277`，指出 `Packet` 因包含 `Rc<String>` 而不满足 `Send`。这在分布式语义中对应**消息不可串行化/不可跨边界传输**：`Rc` 的引用计数是线程局部的，若被发送到另一个线程，两个线程的计数器将失去同步，破坏内存安全。
+
+**修正**：把 `Rc` 替换为 `Arc`（原子引用计数），或把数据序列化为无共享所有权的字节缓冲区再发送。
+
 ### 边界：CAP 不是「三选二」的菜单
 
 常见误解是「CP 系统或 AP 系统」。精确的说法是：
@@ -306,6 +364,8 @@ async fn async_2pc(coordinator: NodeId, cohorts: Vec<NodeId>) -> Decision {
 - Brewer, E. *Towards Robust Distributed Systems*. Proceedings of the 19th ACM Symposium on Principles of Distributed Computing (PODC), 2000, 7. [DOI](https://doi.org/10.1145/343477.343502)
 - Gilbert, S., Lynch, N. *Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services*. ACM SIGACT News 33(2), 2002, 51–59. [DOI](https://doi.org/10.1145/564585.564601)
 - Lamport, L. *Time, Clocks, and the Ordering of Events in a Distributed System*. Communications of the ACM 21(7), 1978, 558–565. [DOI](https://doi.org/10.1145/359545.359563)
+- Castro, M., Liskov, B. *Practical Byzantine Fault Tolerance*. Proceedings of the 3rd OSDI, 1999, 173–186. [ACM DL](https://dl.acm.org/doi/10.5555/296806.296824)
+- Dwork, C., Lynch, N., Stockmeyer, L. *Consensus in the Presence of Partial Synchrony*. Journal of the ACM 35(2), 1988, 288–323. [DOI](https://doi.org/10.1145/42282.42283)
 - [raft-rs（docs.rs）](https://docs.rs/raft/latest/raft/) · [raft-rs 仓库](https://github.com/tikv/raft-rs)
 - [tonic（docs.rs）](https://docs.rs/tonic/latest/tonic/) · [tonic 仓库](https://github.com/hyperium/tonic)
 - [libp2p（docs.rs）](https://docs.rs/libp2p/latest/libp2p/) · [libp2p 仓库](https://github.com/libp2p/rust-libp2p)
