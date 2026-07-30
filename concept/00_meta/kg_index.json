@@ -4,7 +4,7 @@
     "generated": "2026-07-11",
     "rust_version": "1.97.0+",
     "source": "concept/",
-    "entity_count": 603,
+    "entity_count": 604,
     "schema": "simple KG index"
   },
   "entities": [
@@ -323,6 +323,29 @@
         {
           "title": "Enterprise Architecture Frameworks",
           "path": "../../06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:00_meta/00_framework/semantic_model_reasoning_methodology.md",
+      "path": "00_meta/00_framework/semantic_model_reasoning_methodology.md",
+      "title": "",
+      "en": "Semantic Model Reasoning Methodology",
+      "summary": "Methodology unifying six thinking representations — definition, attribute matrix, example, counterexample, scenario, and theorem chain — for analyzing and teaching Rust semantic models.",
+      "bloom": "L1-L7",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Semantic Space",
+          "path": "semantic_space.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Type Theory",
+          "path": "../../04_formal/00_type_theory/01_type_theory.md"
         }
       ],
       "theorems": [],
@@ -8856,6 +8879,10 @@
         {
           "title": "Distributed Systems Semantics",
           "path": "04_distributed_systems_semantics.md"
+        },
+        {
+          "title": "Async/Await",
+          "path": "../../03_advanced/01_async/01_async.md"
         }
       ],
       "theorems": [],

@@ -10,19 +10,19 @@
     "core_generic_ratio": 0.0,
     "core_lacking_semantic": 0,
     "global_predicate_distribution": {
-      "ex:hasPart": 4020,
+      "ex:hasPart": 4026,
       "ex:dependsOn": 1902,
-      "ex:entails": 1367,
-      "ex:relatedTo": 919,
-      "ex:refines": 498,
+      "ex:entails": 1369,
+      "ex:relatedTo": 912,
+      "ex:refines": 497,
       "ex:partOf": 456,
       "ex:appliesTo": 127
     },
     "core_predicate_distribution": {
-      "ex:dependsOn": 1031,
-      "ex:hasPart": 621,
-      "ex:entails": 387,
-      "ex:relatedTo": 288,
+      "ex:dependsOn": 1030,
+      "ex:hasPart": 622,
+      "ex:entails": 389,
+      "ex:relatedTo": 286,
       "ex:refines": 140,
       "ex:partOf": 109,
       "ex:appliesTo": 31
@@ -188,7 +188,7 @@
       ],
       [
         "ex:entails",
-        35
+        36
       ],
       [
         "ex:relatedTo",
@@ -240,7 +240,7 @@
     "ex:ConcurrencyPatterns": [
       [
         "ex:dependsOn",
-        14
+        13
       ],
       [
         "ex:entails",
@@ -576,7 +576,7 @@
       ],
       [
         "ex:relatedTo",
-        11
+        9
       ],
       [
         "ex:entails",
@@ -730,7 +730,7 @@
       ],
       [
         "ex:entails",
-        12
+        13
       ],
       [
         "ex:relatedTo",

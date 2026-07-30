@@ -1,0 +1,72 @@
+{
+  "summary": {
+    "date": "2026-07-31",
+    "scanned": 612,
+    "counts": {
+      "D1": 2,
+      "D2": 0,
+      "D3": 0,
+      "D4": 0,
+      "D5": 0,
+      "D6": 2
+    },
+    "pct": {
+      "D1": 0.3,
+      "D2": 0.0,
+      "D3": 0.0,
+      "D4": 0.0,
+      "D5": 0.0,
+      "D6": 0.3
+    },
+    "D2_base_files_with_asp_and_bloom": 359,
+    "flagged_files": 4
+  },
+  "examples": {
+    "D1": [
+      [
+        "concept/00_meta/00_framework/semantic_layer_alignment_index.md",
+        "Bloom [3, 4, 5] 与 层次定位/层级 [0] 无交集"
+      ],
+      [
+        "concept/00_meta/00_framework/semantic_model_reasoning_methodology.md",
+        "Bloom [1, 2, 3, 4, 5, 6, 7] 与 层次定位/层级 [0] 无交集"
+      ]
+    ],
+    "D2": [],
+    "D3": [],
+    "D4": [],
+    "D5": [],
+    "D6": [
+      [
+        "concept/00_meta/00_framework/README.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/07_future/00_version_tracking/README.md",
+        "Summary 为空"
+      ]
+    ]
+  },
+  "per_file": {
+    "concept/00_meta/00_framework/README.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/00_meta/00_framework/semantic_layer_alignment_index.md": {
+      "D1": [
+        "Bloom [3, 4, 5] 与 层次定位/层级 [0] 无交集"
+      ]
+    },
+    "concept/00_meta/00_framework/semantic_model_reasoning_methodology.md": {
+      "D1": [
+        "Bloom [1, 2, 3, 4, 5, 6, 7] 与 层次定位/层级 [0] 无交集"
+      ]
+    },
+    "concept/07_future/00_version_tracking/README.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    }
+  }
+}

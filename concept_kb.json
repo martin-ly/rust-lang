@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 584,
-    "generated_at": "2026-07-30T15:19:15.015170+00:00"
+    "total_files": 585,
+    "generated_at": "2026-07-30T16:03:54.411979+00:00"
   },
   "files": [
     {
@@ -891,7 +891,7 @@
       "layer": "L0",
       "title": "语义分层映射索引",
       "positioning": "",
-      "line_count": 210,
+      "line_count": 214,
       "theorem_chains": [
         {
           "text": "### 反例：\"算法正确 ⟹ 系统正确\"",
@@ -935,6 +935,66 @@
         ],
         "post": [
           "> [Enterprise Architecture Frameworks](../../06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\00_framework\\semantic_model_reasoning_methodology.md",
+      "layer": "L0",
+      "title": "语义模型推理方法论",
+      "positioning": "",
+      "line_count": 256,
+      "theorem_chains": [
+        {
+          "text": "- 定理之间尽量形成 `⟹` 推理链。",
+          "type": "paragraph"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 六、反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "compile_fail",
+            "E0502"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "fn main() {     let mut v = vec![1, 2, 3];     let first = &v[0];     v.push(4);..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 3,
+          "should_fail": true,
+          "code_preview": "// 实际为 unsafe，无法 compile_fail 直接演示， // 但可通过 Miri 检测：两个裸指针同时写同一块内存 ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../04_formal/00_type_theory/01_type_theory.md",
+        "../../04_formal/09_system_semantics/01_actor_model_semantics.md",
+        "../../04_formal/12_concurrency_models/02_expressiveness_of_concurrent_models.md",
+        "knowledge_mindmap.md",
+        "semantic_layer_alignment_index.md",
+        "semantic_space.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": true,
+      "mermaid_blocks": 2,
+      "matrix_rows": 12,
+      "pre_post": {
+        "pre": [
+          "> [Semantic Space](semantic_space.md) ·"
+        ],
+        "post": [
+          "> [Type Theory](../../04_formal/00_type_theory/01_type_theory.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -7466,7 +7526,7 @@
       "layer": "L0",
       "title": "推理判定树图谱（Reasoning Judgment Tree Atlas）",
       "positioning": "",
-      "line_count": 743,
+      "line_count": 882,
       "theorem_chains": [
         {
           "text": "| [Async/Await](../../03_advanced/01_async/01_async.md) | 推理/定理节 ×7 | 定理矩阵（10 行，含 ⟹ 推理链） · 推理链层级图 |",
@@ -7597,6 +7657,7 @@
         "../../02_intermediate/06_macros_and_metaprogramming/06_attributes_by_category.md",
         "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../03_advanced/00_concurrency/02_send_sync_auto_traits.md",
         "../../03_advanced/00_concurrency/03_concurrency_patterns.md",
         "../../03_advanced/00_concurrency/05_cross_platform_concurrency.md",
         "../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md",
@@ -7701,6 +7762,9 @@
         "../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md",
         "../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md",
         "../../04_formal/07_concurrency_semantics/03_actor_semantics.md",
+        "../../04_formal/13_semantic_engineering/01_ontology_engineering.md",
+        "../../04_formal/13_semantic_engineering/02_description_logic_and_owl.md",
+        "../../04_formal/13_semantic_engineering/03_knowledge_graph_construction.md",
         "../../05_comparative/00_paradigms/01_paradigm_matrix.md",
         "../../05_comparative/00_paradigms/02_execution_model_isomorphism.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
@@ -7865,8 +7929,8 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 8,
-      "matrix_rows": 412,
+      "mermaid_blocks": 12,
+      "matrix_rows": 413,
       "pre_post": {
         "pre": [],
         "post": []
@@ -42495,7 +42559,7 @@
       "layer": "L4",
       "title": "Safety Tags（安全标签）",
       "positioning": "",
-      "line_count": 21,
+      "line_count": 23,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -43887,7 +43951,7 @@
       "layer": "L4",
       "title": "形式化方法在 Rust 中的应用（已合并）",
       "positioning": "",
-      "line_count": 29,
+      "line_count": 31,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -58504,7 +58568,7 @@
       "layer": "L6",
       "title": "形式化设计模式理论 (Formal Design Pattern Theory)",
       "positioning": "",
-      "line_count": 13,
+      "line_count": 15,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -59026,7 +59090,7 @@
       "layer": "L6",
       "title": "模式组合代数：设计模式的结构化关联与冲突分析",
       "positioning": "",
-      "line_count": 13,
+      "line_count": 15,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -65582,7 +65646,7 @@
       "layer": "L6",
       "title": "Rust 游戏开发（已合并）",
       "positioning": "",
-      "line_count": 24,
+      "line_count": 34,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -66342,7 +66406,7 @@
       "layer": "L6",
       "title": "形式化算法理论",
       "positioning": "",
-      "line_count": 13,
+      "line_count": 23,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],

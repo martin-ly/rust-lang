@@ -17,10 +17,10 @@
 
 | 谓词 | 计数 | 占比（核心） |
 |:---|---:|---:|
-| `ex:dependsOn` | 1031 | 39.55% |
-| `ex:hasPart` | 621 | 23.82% |
-| `ex:entails` | 387 | 14.84% |
-| `ex:relatedTo` | 288 | 11.05% |
+| `ex:dependsOn` | 1030 | 39.51% |
+| `ex:hasPart` | 622 | 23.86% |
+| `ex:entails` | 389 | 14.92% |
+| `ex:relatedTo` | 286 | 10.97% |
 | `ex:refines` | 140 | 5.37% |
 | `ex:partOf` | 109 | 4.18% |
 | `ex:appliesTo` | 31 | 1.19% |

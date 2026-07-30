@@ -10,7 +10,7 @@
 > 根据 AGENTS.md §2 Canonical 规则，同一预览主题只保留一个 `concept/` 权威页；
 > 本文件仅保留入口链接，避免双权威页。
 >
-> **国际权威参考**: [Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html) · [RFC 2632 — Const Traits](https://github.com/rust-lang/rfcs/pull/2632) · [Tracking Issue #67792](https://github.com/rust-lang/rust/issues/67792)
+> **国际权威参考**: [Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html) · [RFC 2632 — Const Traits](https://github.com/rust-lang/rfcs/pull/2632) · [Tracking Issue #67792](https://github.com/rust-lang/rust/issues/67792) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [docs.rs/kani](https://docs.rs/kani)
 > **前置概念**: [Const Generics](../../02_intermediate/01_generics/02_const_generics.md)
 > **后置概念**: [Const Trait Impl Preview](06_const_trait_impl_preview.md) · [Const Items and Const Fn](../../01_foundation/07_modules_and_items/09_const_items_and_const_fn.md)
 >

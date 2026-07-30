@@ -155,6 +155,10 @@
 
 ## International Authority References（国际权威来源）
 
+- [Rust Reference — Introduction](https://doc.rust-lang.org/reference/introduction.html) — Rust 官方语义参考（P0）
+- [Rust Async Book](https://rust-lang.github.io/async-book/) — Rust 官方异步编程指南（P0）
+- [RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) — Rust 所有权与并发原语形式化基础（P1）
+- [Aeneas Verification Framework](https://github.com/AeneasVerif/aeneas) — Rust 符号语义与验证工具（P2）
 - [ISO/IEC/IEEE 42010:2022 — Systems and software engineering — Architecture description](https://www.iso.org/standard/74296.html)
 - [ISO/IEC/IEEE 15288:2023 — Systems and software engineering — System life cycle processes](https://www.iso.org/standard/63711.html)
 - [Shaw & Garlan 1996, *Software Architecture: Perspectives on an Emerging Discipline*](https://doi.org/10.5555/257572)

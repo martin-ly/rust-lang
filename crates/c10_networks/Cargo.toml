@@ -126,7 +126,8 @@ anyhow = { workspace = true }
 axum = { workspace = true }
 ring = { workspace = true }
 # 2026-07-04: cargo update 后同步到当前解析版本
-mongodb = "3.7.0"
+# 2026-07-30: cargo update 3.7.0 -> 3.8.0 (hybrid-array 传递依赖路径)
+mongodb = "3.8.0"
 # 2026-07-27: 升级至 lapin 4.x，示例代码已适配新 API
 lapin = "4.10.0"
 # 2026-07-08: kube 0.98 -> 4.0.0，k8s-openapi 0.24 -> 0.25，消除 backoff unmaintained 传递依赖

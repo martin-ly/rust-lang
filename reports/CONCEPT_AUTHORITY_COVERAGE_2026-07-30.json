@@ -1,41 +1,41 @@
 {
   "date": "2026-07-30",
-  "scanned": 574,
+  "scanned": 578,
   "coverage": {
     "P0": [
-      568,
-      99.0
+      573,
+      99.1
     ],
     "P1": [
-      537,
-      93.6
+      540,
+      93.4
     ],
     "P2": [
-      501,
-      87.3
+      504,
+      87.2
     ],
     "any": [
-      574,
+      578,
       100.0
     ],
     "none": 0
   },
   "content_scope": {
-    "scanned": 483,
+    "scanned": 485,
     "P0": [
-      482,
-      99.8
+      485,
+      100.0
     ],
     "P1": [
-      483,
+      485,
       100.0
     ],
     "P2": [
-      483,
+      485,
       100.0
     ],
     "any": [
-      483,
+      485,
       100.0
     ],
     "gaps_p1": [],
@@ -43,9 +43,9 @@
   },
   "by_layer": {
     "L0": {
-      "n": 67,
-      "P0": 67,
-      "any": 67
+      "n": 69,
+      "P0": 69,
+      "any": 69
     },
     "L1": {
       "n": 57,
@@ -63,9 +63,9 @@
       "any": 74
     },
     "L4": {
-      "n": 98,
-      "P0": 98,
-      "any": 98
+      "n": 99,
+      "P0": 99,
+      "any": 99
     },
     "L5": {
       "n": 27,
@@ -73,13 +73,13 @@
       "any": 27
     },
     "L6": {
-      "n": 134,
-      "P0": 130,
-      "any": 134
+      "n": 135,
+      "P0": 131,
+      "any": 135
     },
     "L7": {
       "n": 73,
-      "P0": 71,
+      "P0": 72,
       "any": 73
     },
     "L?": {
@@ -89,80 +89,5 @@
     }
   },
   "core_gaps_l1_l4_no_p0": [],
-  "none_any": [],
-  "crates_docs": {
-    "total": 568,
-    "kinds": {
-      "stub": 504,
-      "content": 62,
-      "index_readme": 2
-    },
-    "content": 62,
-    "covered": 62,
-    "pct": 100.0,
-    "gaps": [],
-    "per_crate": {
-      "c01_ownership_borrow_scope": {
-        "content": 5,
-        "covered": 5
-      },
-      "c02_type_system": {
-        "content": 4,
-        "covered": 4
-      },
-      "c03_control_fn": {
-        "content": 5,
-        "covered": 5
-      },
-      "c04_generic": {
-        "content": 2,
-        "covered": 2
-      },
-      "c05_threads": {
-        "content": 4,
-        "covered": 4
-      },
-      "c06_async": {
-        "content": 4,
-        "covered": 4
-      },
-      "c07_process": {
-        "content": 13,
-        "covered": 13
-      },
-      "c08_algorithms": {
-        "content": 6,
-        "covered": 6
-      },
-      "c09_design_pattern": {
-        "content": 4,
-        "covered": 4
-      },
-      "c10_networks": {
-        "content": 10,
-        "covered": 10
-      },
-      "c11_macro_system_proc": {
-        "content": 1,
-        "covered": 1
-      },
-      "c12_wasm": {
-        "content": 3,
-        "covered": 3
-      },
-      "c17_resolver_v3_public_demo": {
-        "content": 1,
-        "covered": 1
-      }
-    },
-    "skipped": {
-      "index_readme": [
-        "crates/c15_verification_tools/docs/README.md",
-        "crates/c16_gui/docs/README.md"
-      ],
-      "code_listing": [],
-      "quiz": []
-    },
-    "dead_canonical": []
-  }
+  "none_any": []
 }

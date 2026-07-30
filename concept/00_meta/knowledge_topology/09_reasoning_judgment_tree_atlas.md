@@ -31,6 +31,7 @@
 | 类型不匹配 | `expected ... found ...` / trait bound unsatisfied | [类型不匹配判定树](#33-类型不匹配判定树) |
 | 运行时 panic | `unwrap` panic / index out of bounds / deadlock | [运行时 panic 判定树](#34-运行时-panic-判定树) |
 | unsafe 相关 | UB / Miri 报错 / soundness 质疑 | [unsafe 判定树](#35-unsafe-判定树) |
+| Pin / 自引用 | `Pin<T>` / 自引用结构 / 递归 async fn (E0733) | [Pin 与自引用判定树](#df-pin-01-pin-与自引用判定树) |
 
 ---
 
@@ -267,6 +268,46 @@ flowchart TD
 > 形状语义修正（2026-07-12）：§3.1–§3.5 的 `F1–F3` 修复策略叶子原为子程序形 `[[…]]`，但它们是具体修复动作（如「缩小可变借用范围 / 使用 Cell/RefCell/Mutex」）而非跨页跳转引用，按「叶子即机制」标准统一改为矩形 `[…]`；本页 mermaid 内 `[[` 跳出叶子归零。
 
 > 中间层桥接：上述 5 条修复策略对应的权威概念页见 §四「按修复策略索引」（[Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [Error Handling Deep Dive](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md) · [FFI Advanced](../../03_advanced/04_ffi/02_ffi_advanced.md) · [Unsafe Rust Patterns](../../03_advanced/02_unsafe/04_unsafe_rust_patterns.md) · [Miri](../../04_formal/04_model_checking/08_miri.md) · [Kani](../../04_formal/04_model_checking/09_kani.md)），叶子不再跳出本页。
+
+---
+
+## OWL 2 与 SHACL 选型判定树 {#df-owl-01-owl-2-与-shacl-选型判定树}
+
+> 机器可读结构见 [`decision_trees.yaml`](decision_trees.yaml) 中 `DF-OWL-01`。本树覆盖 `ex:OWL`、`ex:SHACL`、`ex:DescriptionLogic`。
+
+本判定树面向**语义工程（semantic engineering）**场景：当需要为一个领域建立本体或形状约束时，在 OWL 2 的四个 profile（EL / QL / RL / DL）与 SHACL 之间做出选型。它不同于 Rust 编译错误判定树，而是一棵**语言 / 工具选型树**，因此判定节点采用定性分支。
+
+### 选型路径说明
+
+1. **是否需要 OWL 推理？** 若答案为「否」——即只需要声明哪些 RDF 图结构合法、哪些不合法——直接选 **SHACL**。SHACL 是形状约束语言（shapes constraint language），不负责概念包含推理。
+2. **是否需要大规模实例查询？** 若「否」，则 **OWL 2 EL** 足以完成术语层（TBox）的高效推理。
+3. **是否需要与关系数据库强集成？** 若「是」，则 **OWL 2 QL** 可将 SPARQL 查询重写成 SQL，直接利用 RDBMS。
+4. **是否需要规则式推理？** 若「是」，则 **OWL 2 RL** 适合以规则引擎（如 Datalog）实现的场景。
+5. 否则，选 **OWL 2 DL**，它提供 SROIQ(D) 的完整表达力，但推理复杂度更高。
+
+```mermaid
+flowchart TD
+    O[需要为领域建模] --> Q1{是否需要多项式时间可判定的概念包含推理？}
+    Q1 -->|是| Q2{是否需要基于大规模实例数据的查询重写？}
+    Q1 -->|否| C5[结论：SHACL]
+    Q2 -->|是| Q3{是否需要与关系数据库强集成、通过 SQL 重写回答查询？}
+    Q2 -->|否| C1[结论：OWL 2 EL]
+    Q3 -->|是| C2[结论：OWL 2 QL]
+    Q3 -->|否| Q4{是否需要规则式推理并与 RDF 三元组存储兼容？}
+    Q4 -->|是| C3[结论：OWL 2 RL]
+    Q4 -->|否| C4[结论：OWL 2 DL]
+    C1 --> V[验证回边：用 reasoner / SHACL validator 跑样例数据，检查推理时间与查询正确性]
+    C2 --> V
+    C3 --> V
+    C4 --> V
+    C5 --> V
+```
+
+### 与相关概念页的回边
+
+- 需要了解 description logic 与 OWL 2 profile 的形式化差异 → [Description Logic and OWL](../../04_formal/13_semantic_engineering/02_description_logic_and_owl.md)
+- 需要了解 SHACL 形状约束与 RDF 验证 → [Knowledge Graph Construction](../../04_formal/13_semantic_engineering/03_knowledge_graph_construction.md)
+- 需要语义工程方法论总览 → [Ontology Engineering Methodologies](../../04_formal/13_semantic_engineering/01_ontology_engineering.md)
 
 <!-- GENERATED-INDEX: 以下「数据驱动索引」节由 scripts/generate_knowledge_topology_atlas.py 自动生成；人工策展内容写在标记之前。 -->
 
@@ -732,6 +773,104 @@ flowchart TD
     F3 --> V7
     F4 --> V7
 ```
+
+### 7.3 并发进展条件选型判定树
+
+> 来源：[decision_trees.yaml](decision_trees.yaml) · `J-PROGRESS-01`
+> 锚点：[#j-progress-01-并发进展条件选型判定树](#j-progress-01-并发进展条件选型判定树)
+
+本树用于在 Rust 生态中为并发数据结构选择恰当的同步原语：从阻塞式的 `std::sync::Mutex` / `parking_lot`，到无锁的 `crossbeam::queue`，再到需要自定义的 wait-free 算法。判定核心是关键路径可接受的**最大延迟 / 阻塞时间**、**竞争强度**以及**是否要求有限步骤完成（wait-free）**。
+
+```mermaid
+flowchart TD
+    P[需求：为并发数据结构选择同步机制] --> Q1{"关键路径 p99 阻塞容差是否 ≤ 1 μs？"}
+    Q1 -->|否| Q2{"是否需要比 std Mutex 更低常数开销/更小内存（实例 ≥1000 或竞争 ≥10^4 ops/s）？"}
+    Q2 -->|否| R1[结论：std::sync::Mutex / RwLock + Arc]
+    Q2 -->|是| R2[结论：parking_lot]
+    Q1 -->|是| Q3{"是否要求任意线程在有限步骤内完成（wait-free / 无饥饿）？"}
+    Q3 -->|否| R3[结论：crossbeam::queue 等 lock-free 结构]
+    Q3 -->|是| R4[结论：自定义 wait-free 算法]
+    R1 --> V1[验证回边：benchmark latency tail + cargo miri / loom / stress test]
+    R2 --> V1
+    R3 --> V1
+    R4 --> V1
+```
+
+**决策要点**：
+
+- 若关键路径可接受阻塞（p99 > 1 μs），优先使用阻塞式互斥；当竞争强度或实例规模较大时，用 `parking_lot` 降低常数开销。
+- 若关键路径不能阻塞，先评估是否需要 **wait-free**（每个线程在有限步骤内完成）。若是，则通常需要自定义算法并经过严格形式化/测试验证。
+- 若仅要求 **lock-free**（系统整体持续进展，允许个别线程延迟），`crossbeam::queue` 等成熟无锁结构是更稳妥的工程选择。
+
+**权威页回边**：
+
+- 阻塞原语与 `Send`/`Sync` 约束见 [并发模型](../../03_advanced/00_concurrency/01_concurrency.md) 与 [Send/Sync](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md)。
+- 无锁结构与内存序见 [Lock-free](../../03_advanced/00_concurrency/07_lock_free.md) 与 [Atomics and Memory Ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md)。
+- 形式化正确性见 [Linearizability](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md)。
+
+### 7.3 Pin 与自引用判定树 {#df-pin-01-pin-与自引用判定树}
+
+> 本判定树回答：当结构体内部持有指向自身的引用，或 `async fn` 编译后的状态机出现自引用时，是否需要 `Pin<T>`，以及选择哪种 `Pin` 包装。
+
+```mermaid
+flowchart TD
+    P[Pin / 自引用入口] --> Q1{"类型 T 中指向自身字段的引用/指针数是否 ≥1 个？"}
+    Q1 -->|否| R1[根因：无自引用字段，无需 Pin]
+    Q1 -->|是| Q2{"是否需要跨 ≥1 个 .await 点保持引用活跃？"}
+    Q2 -->|是| R2[根因：async future 自引用；递归 async fn 需 Pin + indirection（E0733）]
+    Q2 -->|否| Q3{"T: Unpin 的实现数是否 = 1？"}
+    Q3 -->|是| R3[根因：Unpin 自引用；栈上临时固定可用 Pin<&mut T>]
+    Q3 -->|否| R4[根因：!Unpin 自引用；需 Pin<Box<T>> 或 unsafe Pin::new_unchecked + PhantomPinned]
+    R1 --> V1[验证回边：cargo check]
+    R2 --> V1
+    R3 --> V1
+    R4 --> V1
+```
+
+- **R1**：无自引用时，普通 `&mut T` 或 owned `T` 即可，无需引入 `Pin`。
+- **R2**：async 状态机可能自引用；递归 `async fn` 需要先 `Box::pin` 或 `async move` 包装，否则报 E0733。
+- **R3**：`T: Unpin` 时，`Pin<&mut T>` 不额外约束，但可用于 API 兼容；临时栈固定可用 `std::pin::pin!`。
+- **R4**：`T: !Unpin` 时，需堆分配 `Pin<Box<T>>`；手动 `!Unpin` 类型须用 `PhantomPinned` 并 `unsafe` 构造 `Pin::new_unchecked`。
+
+修复策略与权威页：
+
+- 见 [Pin and Unpin](../../03_advanced/01_async/08_pin_unpin.md)
+- 见 [Async Programming](../../03_advanced/01_async/01_async.md)
+- 见 [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
+
+### 7.4 unsafe 借用降级判定树 {#df-unsafe-raw-02-unsafe-借用降级判定树}
+
+> 机器可读结构见 [`decision_trees.yaml`](decision_trees.yaml) 中 `DF-UNSAFE-RAW-02`。
+
+本判定树回答：在 unsafe Rust 中需要访问内存时，应该选择 `&T` / `&mut T` / `*const T` / `*mut T` 中的哪一种。降级到 raw pointer 会丢失编译期保证，因此仅在借用检查器无法表达所需模式时才进行。
+
+```mermaid
+flowchart TD
+    U[unsafe 内存访问入口] --> Q1{"是否存在借用检查器无法接受的别名冲突（多个活跃引用中 ≥1 个可变）？"}
+    Q1 -->|是| Q2{"是否需要写入操作（写入操作数 ≥ 1）？"}
+    Q1 -->|否| L1[结论：优先使用 &T / &mut T]
+    Q2 -->|是| L2[结论：使用 *mut T]
+    Q2 -->|否| Q3{"是否为 FFI / 自引用 / 跨生命周期边界的只读访问？"}
+    Q3 -->|是| L3[结论：使用 *const T]
+    Q3 -->|否| L4[结论：使用 Cell/RefCell/UnsafeCell 等内部可变性]
+    L1 --> V1[验证回边：cargo check；裸指针解引用用 cargo miri test]
+    L2 --> V1
+    L3 --> V1
+    L4 --> V1
+```
+
+判定要点：
+
+- 若借用检查器已能接受访问模式，优先保留 `&T` / `&mut T`，不要无故降级。
+- 需要写入且存在别名冲突时，使用 `*mut T`；程序员必须手动保证唯一性、合法地址与对齐。
+- 只需要跨边界只读观察时，使用 `*const T`；允许自由别名，但解引用仍需 `unsafe`。
+- 若冲突来自共享可变需求，先考虑 `Cell` / `RefCell` / `UnsafeCell`，避免引入不必要的裸指针。
+
+修复策略与权威页：
+
+- 见 [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
+- 见 [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)
+- 见 [Interior Mutability](../../02_intermediate/02_memory_management/02_interior_mutability.md)
 
 ---
 

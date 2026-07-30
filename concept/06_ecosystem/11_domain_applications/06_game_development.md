@@ -21,3 +21,13 @@
 >
 > **受众**: [进阶]
 > **内容分级**: [综述级]
+>
+> ---
+>
+> ## 国际权威参考 / International Authority References（P0 · P1 · P2）
+>
+> > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
+>
+> - **P0 官方**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
+> - **P1 学术/形式化**: [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+> - **P2 生态/社区**: [docs.rs/bevy](https://docs.rs/bevy) · [docs.rs/wgpu](https://docs.rs/wgpu)

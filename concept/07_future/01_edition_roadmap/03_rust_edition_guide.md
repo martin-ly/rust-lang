@@ -9,7 +9,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **前置概念**: [Rust Edition Guide](02_edition_guide.md)
 > **后置概念**: [Rust Edition Guide](02_edition_guide.md)
-> **主要来源**: [Rust Edition Guide](02_edition_guide.md) · [TRPL — Appendix E](https://doc.rust-lang.org/book/appendix-05-editions.html) · [RFC 2052 — Epochs](https://rust-lang.github.io/rfcs/2052-epochs.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**: [Rust Edition Guide](02_edition_guide.md) · [TRPL — Appendix E](https://doc.rust-lang.org/book/appendix-05-editions.html) · [RFC 2052 — Epochs](https://rust-lang.github.io/rfcs/2052-epochs.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) · [Rust Blog — Rust 1.82.0](https://blog.rust-lang.org/2024/10/17/Rust-1.82.0.html) · [crates.io — cargo](https://crates.io/crates/cargo)
 
 > **注意**: 本主题内容已整合到 `concept/07_future/44_edition_guide.md`。
 > 请以 [concept/07_future/44_edition_guide.md](02_edition_guide.md) 为权威来源。

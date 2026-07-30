@@ -1439,3 +1439,207 @@ trees:
       - {from: CONC-F7, to: CONC-V1, label: "验证"}
       - {from: CONC-F8, to: CONC-V1, label: "验证"}
       - {from: CONC-F9, to: CONC-V1, label: "验证"}
+
+  # ==========================================================================
+  # 新增：OWL 2 profile / SHACL 选型决策树
+  # 来源: 09_reasoning_judgment_tree_atlas.md
+  # ==========================================================================
+
+  - id: DF-OWL-01
+    title_zh: OWL 2 与 SHACL 选型判定树
+    title_en: OWL 2 Profile and SHACL Selection Tree
+    source:
+      file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
+      anchor: "#df-owl-01-owl-2-与-shacl-选型判定树"
+    covered_concepts: [ex:DescriptionLogicAndOWL, ex:KnowledgeGraphConstruction, ex:OntologyEngineeringMethodologies]
+    nodes:
+      - id: O-ENTRY
+        type: condition
+        label: "入口：需要为领域建模并选择本体 / 约束语言"
+      - id: O-Q1
+        type: decision
+        condition: "是否需要多项式时间可判定的概念包含推理（TBox reasoning）？"
+        quantitative: false
+      - id: O-Q2
+        type: decision
+        condition: "是否需要基于大规模实例数据的查询重写（ABox query answering）？"
+        quantitative: false
+      - id: O-Q3
+        type: decision
+        condition: "是否需要与关系数据库强集成、通过 SQL 重写回答查询？"
+        quantitative: false
+      - id: O-Q4
+        type: decision
+        condition: "是否需要规则式推理并与 RDF 三元组存储兼容？"
+        quantitative: false
+      - {id: O-C1, type: conclusion, label: "结论：OWL 2 EL —— 适合术语推理与大规模 TBox"}
+      - {id: O-C2, type: conclusion, label: "结论：OWL 2 QL —— 适合关系数据库查询重写"}
+      - {id: O-C3, type: conclusion, label: "结论：OWL 2 RL —— 适合规则引擎与 RDF 存储"}
+      - {id: O-C4, type: conclusion, label: "结论：OWL 2 DL —— 适合需要完整表达力的形式化建模"}
+      - {id: O-C5, type: conclusion, label: "结论：SHACL —— 适合以形状约束为主、无需 OWL 推理的场景"}
+      - {id: O-V1, type: conclusion, label: "验证回边：用 reasoner / SHACL validator 跑样例数据，检查推理时间与查询正确性"}
+    edges:
+      - {from: O-ENTRY, to: O-Q1, label: "入口"}
+      - {from: O-Q1, to: O-Q2, label: "是"}
+      - {from: O-Q1, to: O-C5, label: "否"}
+      - {from: O-Q2, to: O-Q3, label: "是"}
+      - {from: O-Q2, to: O-C1, label: "否"}
+      - {from: O-Q3, to: O-C2, label: "是"}
+      - {from: O-Q3, to: O-Q4, label: "否"}
+      - {from: O-Q4, to: O-C3, label: "是"}
+      - {from: O-Q4, to: O-C4, label: "否"}
+      - {from: O-C1, to: O-V1, label: "验证"}
+      - {from: O-C2, to: O-V1, label: "验证"}
+      - {from: O-C3, to: O-V1, label: "验证"}
+      - {from: O-C4, to: O-V1, label: "验证"}
+      - {from: O-C5, to: O-V1, label: "验证"}
+
+  # ==========================================================================
+  # 新增：J-PROGRESS-01 并发进展条件选型判定树
+  # 来源: 09_reasoning_judgment_tree_atlas.md
+  # ==========================================================================
+
+  - id: J-PROGRESS-01
+    title_zh: 并发进展条件选型判定树
+    title_en: Concurrent Progress Condition Selection Tree
+    source:
+      file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
+      anchor: "#j-progress-01-并发进展条件选型判定树"
+    covered_concepts: [ex:ConcurrencyModels, ex:LockingPrimitives, ex:AtomicsAndMemoryOrdering]
+    nodes:
+      - id: P
+        type: condition
+        label: "需求：为并发数据结构/原语选择同步机制（std::sync::Mutex / parking_lot / crossbeam / custom wait-free）"
+      - id: Q1
+        type: decision
+        condition: "关键路径上最大可接受阻塞/挂起时间是否 ≤ 1 μs（p99）？"
+        quantitative: true
+        threshold: "p99 阻塞容差 ≤ 1 μs"
+      - id: Q2
+        type: decision
+        condition: "是否需要比 std::sync::Mutex 更低的常数开销、更小内存占用或公平性保证（实例数 ≥ 1000 或竞争频率 ≥ 10^4 ops/s）？"
+        quantitative: true
+        threshold: "实例数 ≥ 1000 或竞争频率 ≥ 10^4 ops/s"
+      - id: Q3
+        type: decision
+        condition: "是否要求任意线程在有限步骤内完成操作（wait-free / 无饥饿保证）？"
+        quantitative: true
+        threshold: "需要 wait-free 有限步骤保证"
+      - {id: R1, type: conclusion, label: "结论：std::sync::Mutex / RwLock + Arc（阻塞式互斥，简单可维护）"}
+      - {id: R2, type: conclusion, label: "结论：parking_lot（更低开销、更小尺寸、支持读写锁与条件变量）"}
+      - {id: R3, type: conclusion, label: "结论：crossbeam::queue / lock-free structures（无锁、高吞吐、允许个别线程延迟）"}
+      - {id: R4, type: conclusion, label: "结论：自定义 wait-free 算法（有限步骤保证，适合硬实时/安全关键路径）"}
+      - {id: V1, type: conclusion, label: "验证回边：benchmark latency tail + cargo miri / loom / stress test"}
+    edges:
+      - {from: P, to: Q1, label: "入口"}
+      - {from: Q1, to: Q2, label: "否"}
+      - {from: Q1, to: Q3, label: "是"}
+      - {from: Q2, to: R1, label: "否"}
+      - {from: Q2, to: R2, label: "是"}
+      - {from: Q3, to: R4, label: "是"}
+      - {from: Q3, to: R3, label: "否"}
+      - {from: R1, to: V1, label: "验证"}
+      - {from: R2, to: V1, label: "验证"}
+      - {from: R3, to: V1, label: "验证"}
+      - {from: R4, to: V1, label: "验证"}
+
+  # ==========================================================================
+  # 新增：DF-UNSAFE-RAW-02 unsafe 借用降级判定树
+  # 来源: 09_reasoning_judgment_tree_atlas.md
+  # ==========================================================================
+
+  - id: DF-UNSAFE-RAW-02
+    title_zh: unsafe 借用降级判定树
+    title_en: Unsafe Raw Pointer Downgrade Decision Tree
+    source:
+      file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
+      anchor: "#df-unsafe-raw-02-unsafe-借用降级判定树"
+    covered_concepts: [ex:SafeAndEffectiveUnsafeRust, ex:UnsafeReference, ex:Borrowing]
+    rustc_error_codes: [E0133]
+    nodes:
+      - id: U
+        type: condition
+        label: "入口：在 unsafe 代码中需要访问内存，候选类型为 &T / &mut T / *const T / *mut T"
+        rustc_error_codes: [E0133]
+      - id: Q1
+        type: decision
+        condition: "目标访问模式是否存在借用检查器无法接受的别名冲突（多个活跃引用中 ≥1 个可变）？"
+        quantitative: true
+        threshold: "不可接受别名冲突 ≥ 1"
+      - id: Q2
+        type: decision
+        condition: "是否需要通过该指针执行写入操作（写入操作数 ≥ 1）？"
+        quantitative: true
+        threshold: "写入操作数 ≥ 1"
+      - id: Q3
+        type: decision
+        condition: "是否为 FFI、自引用结构或跨越生命周期边界的只读访问（场景数 ≥ 1）？"
+        quantitative: true
+        threshold: "跨边界只读场景数 ≥ 1"
+      - {id: L1, type: conclusion, label: "结论：优先使用 &T / &mut T，保留编译期别名 XOR 可变性保证"}
+      - {id: L2, type: conclusion, label: "结论：使用 *mut T，程序员手动保证唯一性、合法地址与对齐"}
+      - {id: L3, type: conclusion, label: "结论：使用 *const T，程序员手动保证合法地址与对齐"}
+      - {id: L4, type: conclusion, label: "结论：优先使用 Cell/RefCell/UnsafeCell 等内部可变性，避免不必要的裸指针"}
+      - {id: V1, type: conclusion, label: "验证回边：cargo check；裸指针解引用用 cargo miri test 检测 Stacked/Tree Borrows"}
+    edges:
+      - {from: U, to: Q1, label: "入口"}
+      - {from: Q1, to: Q2, label: "是"}
+      - {from: Q1, to: L1, label: "否"}
+      - {from: Q2, to: L2, label: "是"}
+      - {from: Q2, to: Q3, label: "否"}
+      - {from: Q3, to: L3, label: "是"}
+      - {from: Q3, to: L4, label: "否"}
+      - {from: L1, to: V1, label: "验证"}
+      - {from: L2, to: V1, label: "验证"}
+      - {from: L3, to: V1, label: "验证"}
+      - {from: L4, to: V1, label: "验证"}
+
+  # ==========================================================================
+  # 新增：DF-PIN-01 Pin / 自引用判定树
+  # 来源: 09_reasoning_judgment_tree_atlas.md
+  # ==========================================================================
+
+  - id: DF-PIN-01
+    title_zh: Pin 与自引用判定树
+    title_en: Pin and Self-Referential Types Decision Tree
+    source:
+      file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
+      anchor: "#df-pin-01-pin-与自引用判定树"
+    covered_concepts: [ex:PinAndUnpin, ex:AsyncProgramming, ex:Lifetimes]
+    rustc_error_codes: [E0733]
+    nodes:
+      - id: P
+        type: condition
+        label: "症状：需要判断自引用结构或 async future 是否需要 Pin<T>"
+      - id: Q1
+        type: decision
+        condition: "类型 T 中指向自身字段的引用/指针数是否 ≥1 个？"
+        quantitative: true
+        threshold: "自引用字段数 ≥ 1"
+      - id: Q2
+        type: decision
+        condition: "该类型是否需要跨 ≥1 个 .await 协作点保持引用活跃？"
+        quantitative: true
+        threshold: "跨 await 点数 ≥ 1"
+      - id: Q3
+        type: decision
+        condition: "T: Unpin 的实现数是否 = 1？"
+        quantitative: true
+        threshold: "Unpin impl 数 = 1"
+      - {id: R1, type: conclusion, label: "根因：无自引用字段，无需 Pin"}
+      - {id: R2, type: conclusion, label: "根因：async future 自引用；递归 async fn 需 Pin + indirection（E0733）"}
+      - {id: R3, type: conclusion, label: "根因：Unpin 自引用；栈上临时固定可用 Pin<&mut T>"}
+      - {id: R4, type: conclusion, label: "根因：!Unpin 自引用；需 Pin<Box<T>> 或 unsafe Pin::new_unchecked + PhantomPinned"}
+      - {id: V1, type: conclusion, label: "验证回边：cargo check；unsafe 固定用 cargo miri test"}
+    edges:
+      - {from: P, to: Q1, label: "入口"}
+      - {from: Q1, to: R1, label: "否"}
+      - {from: Q1, to: Q2, label: "是"}
+      - {from: Q2, to: R2, label: "是"}
+      - {from: Q2, to: Q3, label: "否"}
+      - {from: Q3, to: R3, label: "是"}
+      - {from: Q3, to: R4, label: "否"}
+      - {from: R1, to: V1, label: "验证"}
+      - {from: R2, to: V1, label: "验证"}
+      - {from: R3, to: V1, label: "验证"}
+      - {from: R4, to: V1, label: "验证"}

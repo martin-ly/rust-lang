@@ -6,6 +6,8 @@
 
 > **权威来源**: 本主题已合并至 [`../../07_future/02_preview_features/03_safety_tags_preview.md`](../../07_future/02_preview_features/03_safety_tags_preview.md)，本文件保留为重定向（Redirect stub）。
 >
+> **国际权威来源**: [RFC PR #3842 — Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) (P0) · [Rao et al., “Annotating and Auditing the Safety Properties of Unsafe Rust”, arXiv:2504.21312](https://arxiv.org/abs/2504.21312) (P1) · [safety-lib on docs.rs](https://docs.rs/safety-lib) (P2)
+>
 > 根据 AGENTS.md §2 Canonical 规则，同一概念只能有一个权威页。
 > 经 2026-07-12 审计，本文件与预览权威页内容高度重复（v2 相似度 0.855），且未包含独立的形式化（分离逻辑）推导内容——其形式化语义（契约的谓词逻辑表示、与 Kani/Prusti/Verus 的映射）已由 08 号权威页「二、形式化语义」一节覆盖。形式化视角的延伸阅读见：
 >
