@@ -50,6 +50,7 @@
     - [4.3 计算理论、表达力与 Curry-Howard 背景](#43-计算理论表达力与-curry-howard-背景)
     - [4.4 指称语义与完全抽象](#44-指称语义与完全抽象)
     - [4.5 Rust 官方与工程参考](#45-rust-官方与工程参考)
+    - [4.6 Rust 形式化验证生态](#46-rust-形式化验证生态)
   - [五、嵌入式测验（Embedded Quiz）](#五嵌入式测验embedded-quiz)
     - [测验 1：观察等价性的核心判断标准是什么？（理解层）](#测验-1观察等价性的核心判断标准是什么理解层)
     - [测验 2：以下两个函数是否观察等价？为什么？（应用层）](#测验-2以下两个函数是否观察等价为什么应用层)
@@ -614,6 +615,13 @@ fn main() {
 - **Rust Reference.** [https://doc.rust-lang.org/reference/introduction.html](https://doc.rust-lang.org/reference/introduction.html) —— Rust 官方语义参考，是判断"合法上下文"的 P0 权威来源。
 - **The Rust Programming Language (TRPL).** [https://doc.rust-lang.org/book/](https://doc.rust-lang.org/book/) —— Rust 官方学习资料，对所有权、借用、unsafe 边界有权威描述。
 - **Rust Reference — `std::hint::black_box`.** [https://doc.rust-lang.org/std/hint/fn.black_box.html](https://doc.rust-lang.org/std/hint/fn.black_box.html) —— 说明编译器观察边界的显式控制。
+
+### 4.6 Rust 形式化验证生态
+
+- **Aeneas.** [https://aeneasverif.github.io/](https://aeneasverif.github.io/) —— Rust 的符号化语义与验证框架，基于 PL 理论将 Rust 程序翻译为纯函数式规约，是理解 Rust 操作语义与观察等价的重要工具链。
+- **Verus.** [https://github.com/verus-lang/verus](https://github.com/verus-lang/verus) —— Rust 系统级代码的 SMT 验证工具，支持证明 unsafe/safe 抽象的行为等价性。
+- **Creusot.** [https://github.com/creusot-rs/creusot](https://github.com/creusot-rs/creusot) —— 基于 Why3 的 Rust 形式化验证工具，通过前置/后置条件与不变量验证程序等价与正确性。
+- **Jung et al. (2018).** *RustBelt: Securing the Foundations of the Rust Programming Language.* POPL 2018. ACM. DOI: [10.1145/3158154](https://dl.acm.org/doi/10.1145/3158154) —— ACM 数字图书馆中 RustBelt 的正式出版页面，使用 Iris 分离逻辑证明 safe/unsafe 边上下文等价。
 
 ---
 

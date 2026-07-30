@@ -424,20 +424,22 @@ mindmap
 
 ## International Authority References（国际权威来源）
 
-- Hoare, C. A. R. *Communicating Sequential Processes*. Communications of the ACM 21(8), 1978, 666–677. [DOI](https://doi.org/10.1145/359576.359585)
+- Hoare, C. A. R. *Communicating Sequential Processes*. Communications of the ACM 21(8), 1978, 666–677. [DOI](https://doi.org/10.1145/359576.359585) · [ACM DL](https://dl.acm.org/doi/10.1145/359576.359585)
 - Hoare, C. A. R. *Communicating Sequential Processes*. Prentice Hall, 1985.
 - Hewitt, C., Bishop, P., Steiger, R. *A Universal Modular ACTOR Formalism for Artificial Intelligence*. IJCAI 1973. [PDF（IJCAI 官方）](https://www.ijcai.org/Proceedings/73/Papers/027B.pdf)
 - Hewitt, C. *Actor Model of Computation: Scalable Robust Information Systems*. arXiv:1008.1459. [arXiv](https://arxiv.org/abs/1008.1459)
 - Milner, R. *Communication and Concurrency*. Prentice Hall, 1989. [DOI](https://doi.org/10.5555/28251)
 - Milner, R., Parrow, J., Walker, D. *A Calculus of Mobile Processes*. Information and Computation 100(1), 1992. [DOI](https://doi.org/10.1016/0890-5401(92)90008-4)
 - Milner, R. *Communicating and Mobile Systems: the π-Calculus*. Cambridge University Press, 1999.
-- Honda, K. "Types for Dyadic Interaction." *CONCUR 1993*, LNCS 715, 1993, 509–523. [DOI](https://doi.org/10.1007/3-540-57208-2_35)
+- Honda, K. "Types for Dyadic Interaction." *CONCUR 1993*, LNCS 715, 1993, 509–523. [DOI](https://doi.org/10.1007/3-540-57208-2_35) · [Springer](https://link.springer.com/chapter/10.1007/3-540-57208-2_35)
 - Gay, S. J., Hole, M. "Subtyping for Session Types in the Pi Calculus." *Acta Informatica* 42(2–3), 2005, 191–225. [DOI](https://doi.org/10.1007/s00236-005-0177-z)
 - Wadler, P. "Propositions as Sessions." *ICFP 2012*, 2012, 273–286. [DOI](https://doi.org/10.1145/2364527.2364568)
 - Plotkin, G. D., Pretnar, M. "Handlers of Algebraic Effects." *ESOP 2009*, LNCS 5502, 2009, 80–94. [DOI](https://doi.org/10.1007/978-3-642-00590-9_7)
 - Dolan, S., Eliopoulos, S., Hillerström, D., Madhavapeddy, A., Sivaramakrishnan, K. C., White, L. "Concurrent System Programming with Effect Handlers." *TFP 2017*, LNCS 10788, 2017, 98–117. [DOI](https://doi.org/10.1007/978-3-319-89719-6_6)
 - Herlihy, M., Shavit, N. *The Art of Multiprocessor Programming*. Morgan Kaufmann, 2011. [ScienceDirect](https://www.sciencedirect.com/book/9780123973375/the-art-of-multiprocessor-programming)
 - Reisig, W. *Petri Nets: An Introduction*. Springer, 1985.
+- [The Rust Async Book](https://rust-lang.github.io/async-book/) — Rust 异步并发模型官方指南
+- [crossbeam-channel — docs.rs](https://docs.rs/crossbeam-channel/latest/crossbeam_channel/) — Rust 生态中 CSP 风格通道与 `select!` 的实现参考
 - [std::sync::mpsc — Rust 标准库文档](https://doc.rust-lang.org/std/sync/mpsc/) · [std::sync::Mutex — Rust 标准库文档](https://doc.rust-lang.org/std/sync/struct.Mutex.html) · [The Rust Programming Language: Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 
 > **相关文件**: [L4 进程代数](../07_concurrency_semantics/01_process_calculi_for_rust.md) · [L4 Actor 语义](../07_concurrency_semantics/03_actor_semantics.md) · [并发模型表达能力比较](02_expressiveness_of_concurrent_models.md) · [五范式语义边界](03_parallel_concurrent_async_distributed_semantics.md)

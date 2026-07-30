@@ -25,6 +25,10 @@
 > · [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
 > · [Rust Internals Forum](https://internals.rust-lang.org/)
 > · [releases.rs — nightly 1.99.0](https://releases.rs/)
+> · [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/)
+> · [The Unstable Book](https://doc.rust-lang.org/nightly/unstable-book/)
+> · [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/)
+> · [rust-lang/rust repository](https://github.com/rust-lang/rust)
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 > **前置概念**: [Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md) · [Cargo 入门](../../06_ecosystem/01_cargo/15_cargo_getting_started.md)
@@ -168,3 +172,8 @@ mindmap
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
 - [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md)
 - [Rust 版本跟踪](01_rust_version_tracking.md)
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [RustBelt project](https://plv.mpi-sws.org/rustbelt/)

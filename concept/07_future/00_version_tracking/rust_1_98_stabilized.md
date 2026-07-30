@@ -16,7 +16,10 @@
 > · [Rust 1.98.0 Release Notes (beta)](https://releases.rs/docs/1.98.0/) ·
 > [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
-> [RFC Book](https://rust-lang.github.io/rfcs/)
+> [RFC Book](https://rust-lang.github.io/rfcs/) ·
+> [Rust Blog](https://blog.rust-lang.org/) ·
+> [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) ·
+> [RustBelt (PLV MPI-SWS)](https://plv.mpi-sws.org/rustbelt/)
 >
 > **前置概念**: [Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.97 稳定特性](rust_1_97_stabilized.md)
 > **后置概念**: [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md) · [Rust 1.99+ 前沿特性预览](rust_1_99_preview.md)

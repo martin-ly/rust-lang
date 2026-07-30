@@ -14,7 +14,7 @@
 
 ---
 
-> **来源**: [ISO/IEC/IEEE 42010:2022](https://www.iso.org/standard/74296.html) · [IEEE 1471-2000](https://standards.ieee.org/standard/1471-2000.html) · [Rust RFCs](https://github.com/rust-lang/rfcs) · [SEI ATAM](https://www.sei.cmu.edu/research-capabilities/all-work/display.cfm?customel_datapageid_4050=21306) · [Nygard ADR Template](https://github.com/joelparkerhenderson/architecture-decision-record) · [ThoughtWorks Tech Radar](https://www.thoughtworks.com/radar)
+> **来源**: [ISO/IEC/IEEE 42010:2022](https://www.iso.org/standard/74296.html) · [IEEE 1471-2000](https://standards.ieee.org/standard/1471-2000.html) · [Rust RFCs](https://github.com/rust-lang/rfcs) · [SEI ATAM](https://www.sei.cmu.edu/research-capabilities/all-work/display.cfm?customel_datapageid_4050=21306) · [Nygard ADR Template](https://github.com/joelparkerhenderson/architecture-decision-record) · [ThoughtWorks Tech Radar](https://www.thoughtworks.com/radar) · [Jansen & Bosch 2005, Architecture Decisions](https://doi.org/10.1109/WICSA.2005.61) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) · [Rust RFCs Book](https://rust-lang.github.io/rfcs/) · [The Rust Blog](https://blog.rust-lang.org/)
 
 ---
 

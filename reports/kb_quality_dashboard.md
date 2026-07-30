@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-30T10:46:48.822621+00:00
+> 生成时间: 2026-07-30T12:15:21.008932+00:00
 > 扫描文件数: 583
 
 ## 全局指标
@@ -9,10 +9,10 @@
 |:---|:---|:---|:---|
 | 总文件数 | 583 | 27 | ✅ |
 | 总定理链 (⟹) | 2192 | ≥270 | ✅ |
-| 总反命题 | 870 | ≥40 | ✅ |
+| 总反命题 | 874 | ≥40 | ✅ |
 | 总 Mermaid 图 | 1133 | ≥50 | ✅ |
-| 编译验证代码块 | 5629 | ≥150 | ✅ |
-| 定理矩阵总行 | 26469 | — | — |
+| 编译验证代码块 | 5667 | ≥150 | ✅ |
+| 定理矩阵总行 | 26552 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
 | docs/content/knowledge 死链数量 | 0 | 0 | ✅ |
 | 反向推理 (⟸) | 363 | ≥50 | ✅ |
@@ -151,7 +151,7 @@
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\05_axiomatic_semantics.md | L4 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\06_observational_equivalence.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\07_aeneas_symbolic_semantics.md | L4 | 过渡段落不足 (0 < 3); 定理链不足 (1 < 3); 缺失反命题 |
-| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\08_constant_evaluation.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失反命题 |
+| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\08_constant_evaluation.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\09_llvm_ir_poison_ub.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\04_formal\04_model_checking\01_verification_toolchain.md | L4 | 过渡段落不足 (0 < 3); 缺失反命题 |
 | E:\_src\rust-lang\concept\04_formal\04_model_checking\02_formal_methods.md | L4 | 缺失认知路径; 缺失反命题 |
@@ -677,15 +677,15 @@
 | E:\_src\rust-lang\concept\04_formal\02_separation_logic\02_separation_logic.md | L4 | 871 | 4 | 0 | 0 | 2 | 2 | 10 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\02_separation_logic\03_safety_tags_in_formal.md | L4 | 21 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 研究者 | 研究者级 |
 | E:\_src\rust-lang\concept\04_formal\02_separation_logic\04_borrow_sanitizer_in_formal.md | L4 | 213 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\01_denotational_semantics.md | L4 | 727 | 3 | 0 | 0 | 4 | 2 | 10 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\02_hoare_logic.md | L4 | 927 | 3 | 0 | 0 | 2 | 3 | 8 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\03_operational_semantics.md | L4 | 1188 | 3 | 0 | 0 | 2 | 2 | 13 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\01_denotational_semantics.md | L4 | 728 | 3 | 0 | 0 | 4 | 2 | 10 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\02_hoare_logic.md | L4 | 930 | 3 | 0 | 0 | 2 | 3 | 8 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\03_operational_semantics.md | L4 | 1218 | 3 | 0 | 0 | 2 | 2 | 15 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\04_evaluation_strategies.md | L4 | 721 | 0 | 0 | 0 | 2 | 1 | 14 | 0 | ❌ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\05_axiomatic_semantics.md | L4 | 1059 | 5 | 0 | 0 | 4 | 1 | 15 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\06_observational_equivalence.md | L4 | 891 | 0 | 0 | 0 | 2 | 1 | 19 | 0 | ❌ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\07_aeneas_symbolic_semantics.md | L4 | 491 | 1 | 0 | 0 | 0 | 2 | 4 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\08_constant_evaluation.md | L4 | 222 | 0 | 0 | 0 | 0 | 1 | 6 | 0 | ❌ | ✅ | ✅ | 研究者 | 研究者级 |
-| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\09_llvm_ir_poison_ub.md | L4 | 264 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\08_constant_evaluation.md | L4 | 240 | 0 | 0 | 0 | 1 | 1 | 8 | 0 | ❌ | ✅ | ✅ | 研究者 | 研究者级 |
+| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\09_llvm_ir_poison_ub.md | L4 | 284 | 0 | 0 | 0 | 1 | 1 | 1 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\04_formal\04_model_checking\01_verification_toolchain.md | L4 | 1586 | 3 | 0 | 0 | 0 | 5 | 17 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\04_model_checking\02_formal_methods.md | L4 | 29 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 研究者 | 研究者级 |
 | E:\_src\rust-lang\concept\04_formal\04_model_checking\03_aerospace_certification_formal_methods.md | L4 | 1148 | 3 | 0 | 0 | 1 | 2 | 7 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
@@ -723,33 +723,33 @@
 | E:\_src\rust-lang\concept\04_formal\07_concurrency_semantics\06_distributed_consensus_theory.md | L4 | 870 | 23 | 0 | 0 | 7 | 1 | 3 | 0 | ❌ | ✅ | ✅ | 专家 | 综述级 |
 | E:\_src\rust-lang\concept\04_formal\07_concurrency_semantics\07_session_types.md | L4 | 311 | 0 | 0 | 0 | 3 | 1 | 4 | 0 | ❌ | ✅ | ✅ | None | None |
 | E:\_src\rust-lang\concept\04_formal\08_algorithm_semantics\01_hoare_logic_for_rust.md | L4 | 426 | 0 | 0 | 0 | 0 | 1 | 10 | 0 | ❌ | ✅ | ✅ | 研究者 | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\08_algorithm_semantics\02_refinement_calculus.md | L4 | 732 | 0 | 0 | 0 | 2 | 2 | 6 | 0 | ❌ | ✅ | ✅ | 研究者 | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\08_algorithm_semantics\03_iterator_correctness.md | L4 | 937 | 0 | 0 | 0 | 2 | 1 | 12 | 0 | ❌ | ✅ | ✅ | 研究者 | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\08_algorithm_semantics\04_unsafe_algorithm_invariants.md | L4 | 479 | 0 | 0 | 0 | 2 | 1 | 8 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\08_algorithm_semantics\05_algorithm_equivalence.md | L4 | 583 | 0 | 0 | 0 | 2 | 1 | 5 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\08_algorithm_semantics\02_refinement_calculus.md | L4 | 757 | 0 | 0 | 0 | 2 | 2 | 7 | 0 | ❌ | ✅ | ✅ | 研究者 | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\08_algorithm_semantics\03_iterator_correctness.md | L4 | 990 | 0 | 0 | 0 | 2 | 1 | 14 | 0 | ❌ | ✅ | ✅ | 研究者 | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\08_algorithm_semantics\04_unsafe_algorithm_invariants.md | L4 | 572 | 0 | 0 | 0 | 2 | 1 | 11 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\08_algorithm_semantics\05_algorithm_equivalence.md | L4 | 607 | 0 | 0 | 0 | 2 | 1 | 6 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\09_system_semantics\01_actor_model_semantics.md | L4 | 40 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\09_system_semantics\02_pi_calculus_for_rust.md | L4 | 75 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | ❌ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\09_system_semantics\03_component_based_semantics.md | L4 | 593 | 5 | 0 | 0 | 2 | 1 | 7 | 4 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\09_system_semantics\04_distributed_systems_semantics.md | L4 | 461 | 1 | 0 | 0 | 2 | 1 | 6 | 6 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\09_system_semantics\05_reactive_systems_semantics.md | L4 | 492 | 2 | 0 | 0 | 2 | 1 | 5 | 8 | ❌ | ✅ | ✅ | 研究者 | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\09_system_semantics\06_systems_engineering_standards.md | L4 | 681 | 0 | 0 | 0 | 2 | 1 | 4 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\09_system_semantics\05_reactive_systems_semantics.md | L4 | 562 | 2 | 0 | 0 | 2 | 1 | 7 | 8 | ❌ | ✅ | ✅ | 研究者 | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\09_system_semantics\06_systems_engineering_standards.md | L4 | 714 | 0 | 0 | 0 | 2 | 1 | 5 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\10_architecture_semantics\01_software_architecture_formalization.md | L4 | 610 | 0 | 0 | 0 | 2 | 1 | 2 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\10_architecture_semantics\02_architecture_pattern_semantics.md | L4 | 664 | 0 | 0 | 0 | 2 | 1 | 7 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\10_architecture_semantics\03_architecture_refinement.md | L4 | 486 | 0 | 0 | 0 | 2 | 1 | 4 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\10_architecture_semantics\04_rust_architecture_constraints.md | L4 | 276 | 0 | 0 | 0 | 4 | 1 | 5 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\11_computational_models\01_computational_semantics_framework.md | L4 | 316 | 0 | 0 | 0 | 1 | 1 | 3 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\11_computational_models\02_computability_theory.md | L4 | 919 | 0 | 0 | 0 | 1 | 1 | 13 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\11_computational_models\03_formal_languages_and_automata.md | L4 | 1150 | 0 | 0 | 0 | 2 | 2 | 14 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\11_computational_models\04_mathematical_functions_of_computation.md | L4 | 820 | 0 | 0 | 0 | 1 | 1 | 18 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\11_computational_models\05_equivalence_of_computational_models.md | L4 | 903 | 0 | 0 | 0 | 1 | 1 | 14 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\12_concurrency_models\01_models_of_concurrency.md | L4 | 402 | 0 | 0 | 0 | 4 | 1 | 9 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\12_concurrency_models\02_expressiveness_of_concurrent_models.md | L4 | 459 | 3 | 0 | 0 | 3 | 1 | 4 | 0 | ✅ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\12_concurrency_models\03_parallel_concurrent_async_distributed_semantics.md | L4 | 497 | 0 | 0 | 0 | 3 | 2 | 7 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\13_semantic_engineering\01_ontology_engineering.md | L4 | 324 | 0 | 0 | 0 | 3 | 1 | 2 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\13_semantic_engineering\02_description_logic_and_owl.md | L4 | 445 | 0 | 0 | 0 | 4 | 2 | 4 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\13_semantic_engineering\03_knowledge_graph_construction.md | L4 | 357 | 0 | 0 | 0 | 3 | 1 | 3 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\13_semantic_engineering\04_semantic_interoperability.md | L4 | 303 | 0 | 0 | 0 | 3 | 1 | 1 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\13_semantic_engineering\05_knowledge_graph_reasoning.md | L4 | 258 | 0 | 0 | 0 | 3 | 1 | 1 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\10_architecture_semantics\02_architecture_pattern_semantics.md | L4 | 670 | 0 | 0 | 0 | 2 | 1 | 7 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\10_architecture_semantics\03_architecture_refinement.md | L4 | 492 | 0 | 0 | 0 | 2 | 1 | 4 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\10_architecture_semantics\04_rust_architecture_constraints.md | L4 | 292 | 0 | 0 | 0 | 4 | 1 | 5 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\11_computational_models\01_computational_semantics_framework.md | L4 | 345 | 0 | 0 | 0 | 1 | 1 | 4 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\11_computational_models\02_computability_theory.md | L4 | 939 | 0 | 0 | 0 | 1 | 1 | 14 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\11_computational_models\03_formal_languages_and_automata.md | L4 | 1174 | 0 | 0 | 0 | 2 | 2 | 15 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\11_computational_models\04_mathematical_functions_of_computation.md | L4 | 842 | 0 | 0 | 0 | 1 | 1 | 19 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\11_computational_models\05_equivalence_of_computational_models.md | L4 | 929 | 0 | 0 | 0 | 1 | 1 | 15 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\12_concurrency_models\01_models_of_concurrency.md | L4 | 446 | 0 | 0 | 0 | 6 | 1 | 11 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\12_concurrency_models\02_expressiveness_of_concurrent_models.md | L4 | 547 | 3 | 0 | 0 | 4 | 1 | 9 | 0 | ✅ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\12_concurrency_models\03_parallel_concurrent_async_distributed_semantics.md | L4 | 546 | 0 | 0 | 0 | 3 | 2 | 10 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\13_semantic_engineering\01_ontology_engineering.md | L4 | 347 | 0 | 0 | 0 | 3 | 1 | 3 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\13_semantic_engineering\02_description_logic_and_owl.md | L4 | 484 | 0 | 0 | 0 | 4 | 2 | 5 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\13_semantic_engineering\03_knowledge_graph_construction.md | L4 | 409 | 0 | 0 | 0 | 3 | 1 | 5 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\13_semantic_engineering\04_semantic_interoperability.md | L4 | 349 | 0 | 0 | 0 | 3 | 1 | 3 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\13_semantic_engineering\05_knowledge_graph_reasoning.md | L4 | 310 | 0 | 0 | 0 | 3 | 1 | 3 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
 | E:\_src\rust-lang\concept\05_comparative\00_paradigms\01_paradigm_matrix.md | L5 | 1301 | 8 | 0 | 0 | 5 | 9 | 12 | 16 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\05_comparative\00_paradigms\02_execution_model_isomorphism.md | L5 | 1049 | 3 | 0 | 0 | 1 | 6 | 13 | 0 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | E:\_src\rust-lang\concept\05_comparative\00_paradigms\03_cpp_rust_surface_features.md | L5 | 296 | 0 | 0 | 0 | 0 | 1 | 4 | 0 | ❌ | ✅ | ✅ | 进阶 | 研究者级 |

@@ -990,6 +990,8 @@ fn main() {}
 | [pest crate documentation](https://docs.rs/pest) | ✅ 二级 | PEG 解析器生成器 |
 | [lalrpop documentation](https://lalrpop.github.io/lalrpop/) | ✅ 二级 | LR(1)/LALR 解析器生成器 |
 | [syn crate documentation](https://docs.rs/syn) | ✅ 二级 | Rust 语法树解析 |
+| [rustc-dev-guide — Parser](https://rustc-dev-guide.rust-lang.org/parser.html) | ✅ P0 | Rust 编译器解析器实现架构 |
+| [regex](https://crates.io/crates/regex) · [nom](https://crates.io/crates/nom) · [pest](https://crates.io/crates/pest) · [lalrpop](https://crates.io/crates/lalrpop) · [syn](https://crates.io/crates/syn) on crates.io | ✅ 二级 | Rust 解析生态 crate 注册表 |
 
 ---
 
@@ -1171,3 +1173,9 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「形式语言与自动机」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [KRust: A Formal Executable Semantics of Rust](https://arxiv.org/abs/1804.10806)
+- [RustBelt project](https://plv.mpi-sws.org/rustbelt/)

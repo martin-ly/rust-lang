@@ -207,8 +207,16 @@ async fn orphan_task() {
 
 ## 八、参考来源
 
-- Async Book structured concurrency (WIP): <https://rust-lang.github.io/async-book/>
+- Async Book structured concurrency (WIP): <https://rust-lang.github.io/async-book/02_reference/27_structured_concurrency.html>
 - Martin Sustrik, *Structured Concurrency*: <https://www.250bpm.com/p/structured-concurrency>
 - Swift Concurrency: <https://docs.swift.org/swift-book/documentation/the-swift-programming-language/concurrency/>
 - Kotlin Coroutines: <https://kotlinlang.org/docs/coroutine-context-and-dispatchers.html>
 - Project Loom StructuredTaskScope: <https://openjdk.org/jeps/453>
+- Tokio `JoinSet` API documentation: <https://docs.rs/tokio/latest/tokio/task/struct.JoinSet.html>
+- `async-scoped` crate documentation: <https://docs.rs/async-scoped/latest/async_scoped/>
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [RustBelt project](https://plv.mpi-sws.org/rustbelt/)
+- [Polymorphic Context-free Session Types](https://arxiv.org/abs/2106.06658)

@@ -10,9 +10,9 @@
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 567 | 98.8% |
-| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 495 | 86.2% |
-| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 455 | 79.3% |
+| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 568 | 99.0% |
+| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 537 | 93.6% |
+| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 501 | 87.3% |
 | **任一权威（P0∪P1∪P2）** | **574** | **100.0%** |
 | 无任何国际权威引用（缺口） | 0 | 0.0% |
 
@@ -22,14 +22,10 @@
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方 | 481 | 99.6% |
-| P1 学术/形式化 | 441 | 91.3% |
-| P2 社区/生态 | 437 | 90.5% |
+| P0 官方 | 482 | 99.8% |
+| P1 学术/形式化 | 483 | 100.0% |
+| P2 社区/生态 | 483 | 100.0% |
 | **任一权威** | **483** | **100.0%** |
-
-内容页 P1 缺口（42）: `concept/01_foundation/04_control_flow/03_let_chains.md` · `concept/01_foundation/04_control_flow/05_let_else.md` · `concept/02_intermediate/00_traits/08_negative_impls.md` · `concept/02_intermediate/00_traits/09_associated_type_defaults.md` · `concept/02_intermediate/01_generics/05_const_generics_and_trait_objects.md` · `concept/03_advanced/00_concurrency/04_send_sync_boundaries.md` · `concept/03_advanced/01_async/16_structured_concurrency.md` · `concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md` · `concept/03_advanced/02_unsafe/09_sanitizers.md` · `concept/03_advanced/04_ffi/04_async_ffi_boundary.md` · `concept/03_advanced/04_ffi/05_unsafe_extern_blocks.md` · `concept/04_formal/00_type_theory/10_dependent_refinement_types.md` · `concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md` · `concept/04_formal/07_concurrency_semantics/05_stm_semantics.md` · `concept/04_formal/07_concurrency_semantics/07_session_types.md` · `concept/04_formal/08_algorithm_semantics/03_iterator_correctness.md` · `concept/04_formal/09_system_semantics/02_pi_calculus_for_rust.md` · `concept/04_formal/09_system_semantics/03_component_based_semantics.md` · `concept/04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md` · `concept/04_formal/10_architecture_semantics/03_architecture_refinement.md` · `concept/04_formal/10_architecture_semantics/04_rust_architecture_constraints.md` · `concept/04_formal/11_computational_models/03_formal_languages_and_automata.md` · `concept/04_formal/11_computational_models/05_equivalence_of_computational_models.md` · `concept/04_formal/12_concurrency_models/03_parallel_concurrent_async_distributed_semantics.md` · `concept/04_formal/13_semantic_engineering/01_ontology_engineering.md` · `concept/04_formal/13_semantic_engineering/04_semantic_interoperability.md` · `concept/04_formal/13_semantic_engineering/05_knowledge_graph_reasoning.md` · `concept/05_comparative/01_systems_languages/07_rust_vs_ada_spark.md` · `concept/05_comparative/01_systems_languages/08_rust_vs_d.md` · `concept/05_comparative/01_systems_languages/09_rust_vs_nim.md`
-
-内容页 P2 缺口（46）: `concept/02_intermediate/00_traits/08_negative_impls.md` · `concept/02_intermediate/00_traits/09_associated_type_defaults.md` · `concept/02_intermediate/01_generics/05_const_generics_and_trait_objects.md` · `concept/03_advanced/00_concurrency/04_send_sync_boundaries.md` · `concept/03_advanced/01_async/15_state_machine_semantics.md` · `concept/03_advanced/01_async/16_structured_concurrency.md` · `concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md` · `concept/03_advanced/02_unsafe/09_sanitizers.md` · `concept/03_advanced/04_ffi/05_unsafe_extern_blocks.md` · `concept/04_formal/00_type_theory/14_flux.md` · `concept/04_formal/00_type_theory/15_parametricity_and_theorems_for_free.md` · `concept/04_formal/03_operational_semantics/06_observational_equivalence.md` · `concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md` · `concept/04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md` · `concept/04_formal/08_algorithm_semantics/03_iterator_correctness.md` · `concept/04_formal/08_algorithm_semantics/04_unsafe_algorithm_invariants.md` · `concept/04_formal/08_algorithm_semantics/05_algorithm_equivalence.md` · `concept/04_formal/09_system_semantics/01_actor_model_semantics.md` · `concept/04_formal/09_system_semantics/02_pi_calculus_for_rust.md` · `concept/04_formal/09_system_semantics/06_systems_engineering_standards.md` · `concept/04_formal/10_architecture_semantics/01_software_architecture_formalization.md` · `concept/04_formal/10_architecture_semantics/03_architecture_refinement.md` · `concept/04_formal/10_architecture_semantics/04_rust_architecture_constraints.md` · `concept/04_formal/11_computational_models/01_computational_semantics_framework.md` · `concept/04_formal/11_computational_models/02_computability_theory.md` · `concept/04_formal/11_computational_models/04_mathematical_functions_of_computation.md` · `concept/04_formal/12_concurrency_models/01_models_of_concurrency.md` · `concept/04_formal/12_concurrency_models/02_expressiveness_of_concurrent_models.md` · `concept/04_formal/13_semantic_engineering/01_ontology_engineering.md` · `concept/04_formal/13_semantic_engineering/02_description_logic_and_owl.md`
 
 ## 按层级覆盖率
 
@@ -41,7 +37,7 @@
 | L3 | 74 | 74 | 100.0% | 74 | 100.0% |
 | L4 | 98 | 98 | 100.0% | 98 | 100.0% |
 | L5 | 27 | 27 | 100.0% | 27 | 100.0% |
-| L6 | 134 | 129 | 96.3% | 134 | 100.0% |
+| L6 | 134 | 130 | 97.0% | 134 | 100.0% |
 | L7 | 73 | 71 | 97.3% | 73 | 100.0% |
 | L? | 3 | 3 | 100.0% | 3 | 100.0% |
 
@@ -84,6 +80,7 @@
 | c11_macro_system_proc | 1 | 1 |
 | c12_wasm | 3 | 3 |
 | c17_resolver_v3_public_demo | 1 | 1 |
+
 
 ### crates stub canonical 链接健康度
 

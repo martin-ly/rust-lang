@@ -774,6 +774,10 @@ Ahmed 提出的 step-indexed logical relations 主要解决什么问题？
 | [Jung et al. 2018 — RustBelt: Securing the Foundations of the Rust Programming Language](https://plv.mpi-sws.org/rustbelt/) | ✅ 一级 | Rust safe/unsafe 边界的逻辑关系证明 |
 | [Rust Reference — Closures](https://doc.rust-lang.org/reference/types/closure.html) | ✅ 一级 | Rust 闭包 |
 | [TRPL — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html) | ✅ 一级 | Rust 迭代器 |
+| [Shen 2005 — Church-Turing Thesis: A Survey (arXiv:cs/0503082)](https://arxiv.org/abs/cs/0503082) | ✅ 二级 | Church-Turing 论题综述，支撑「部分递归 = λ-可定义 = 图灵可计算」等价链 |
+| [Jung et al. 2018 — RustBelt (POPL 2018, ACM DL)](https://dl.acm.org/doi/10.1145/3158154) | ✅ 一级 | Rust safe/unsafe 边界的 step-indexed logical relations 正式证明 |
+| [Jung et al. 2018 — RustBelt (arXiv:1705.05376)](https://arxiv.org/abs/1705.05376) | ✅ 一级 | RustBelt 预印本，与 ACM 正式版互补 |
+| [Rust Reference — Functions](https://doc.rust-lang.org/reference/items/functions.html) | ✅ 一级 | Rust 函数项语法与语义 |
 
 ---
 
@@ -839,3 +843,9 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「计算的数学函数」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念与国际权威来源，可作为本页的快速导航与复习索引。
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [Aeneas](https://github.com/AeneasVerif/aeneas)
+- [Verus](https://github.com/verus-lang/verus)

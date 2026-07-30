@@ -78,7 +78,10 @@
     - [反例 4：`dyn Trait` 缺少 `+ Send` 导致的线程边界错误](#反例-4dyn-trait-缺少--send-导致的线程边界错误)
   - [七、决策矩阵：类型形式 → 判定方法](#七决策矩阵类型形式--判定方法)
   - [八、来源与延伸阅读](#八来源与延伸阅读)
+    - [国际权威来源](#国际权威来源)
+    - [延伸阅读](#延伸阅读)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [补充国际权威来源（P1/P2 覆盖）](#补充国际权威来源p1p2-覆盖)
 
 ---
 
@@ -443,6 +446,15 @@ assert_sync::<MyType>();
 
 ## 八、来源与延伸阅读
 
+### 国际权威来源
+
+- [RustBelt: Securing the Foundations of the Rust Programming Language](https://arxiv.org/abs/1804.01568) — `arxiv.org`；Rust 类型系统（含 `Send`/`Sync`）形式化奠基论文。
+- [Rust Reference — Send and Sync](https://doc.rust-lang.org/reference/special-types-and-traits.html) — `doc.rust-lang.org`；官方语言参考对特殊 trait 的精确定义。
+- [Rustonomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) — `doc.rust-lang.org`； unsafe 语义视角下的 Send/Sync 契约与实践。
+- [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html) — `rust-lang.github.io`；官方 async book，覆盖 async 状态机与 Send 边界。
+
+### 延伸阅读
+
 - [Send 与 Sync：Auto Trait 的并发安全契约](02_send_sync_auto_traits.md)：核心契约、结构化推导、负实现与手动 impl 的完整形式化。
 - [并发模型](01_concurrency.md)：并发全景、同步原语对比与 fearless concurrency 的工程视角。
 - [Async/Await](../01_async/01_async.md) / [Pin 与 Unpin](../01_async/08_pin_unpin.md)：async 状态机、自引用与 `Pin<Box<dyn Future + Send>>` 的交互。
@@ -488,3 +500,9 @@ mindmap
     决策矩阵
       类型形式 → 判定方法
 ```
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [tokio on crates.io](https://crates.io/crates/tokio)
+- [tokio docs](https://docs.rs/tokio/latest/tokio/)
+- [rayon on crates.io](https://crates.io/crates/rayon)

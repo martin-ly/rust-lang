@@ -29,7 +29,11 @@
 > [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) ·
 > [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/) ·
 > [Tokio docs — Async in Depth](https://docs.rs/tokio/latest/tokio/) ·
-> [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)
+> [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html) ·
+> [Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) ·
+> [Tokio API — spawn_blocking](https://docs.rs/tokio/latest/tokio/task/fn.spawn_blocking.html) ·
+> [tokio-uring](https://docs.rs/tokio-uring/latest/tokio_uring/) ·
+> [Rust Blog — Async/await is stable in Rust 1.39](https://blog.rust-lang.org/2019/11/07/Async-await-stable.html)
 
 ---
 
@@ -75,6 +79,7 @@ mindmap
   - [六、判定树](#六判定树)
   - [七、反例与失效模式](#七反例与失效模式)
   - [八、相关概念](#八相关概念)
+  - [国际权威来源](#国际权威来源)
 
 ---
 
@@ -227,4 +232,14 @@ flowchart TD
 
 ---
 
-> **权威来源**: [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) · [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/) · [Tokio docs](https://docs.rs/tokio/latest/tokio/)
+## 国际权威来源
+
+- [Tokio API — spawn_blocking](https://docs.rs/tokio/latest/tokio/task/fn.spawn_blocking.html)
+- [tokio-uring](https://docs.rs/tokio-uring/latest/tokio_uring/)
+- [async-ffi crate](https://crates.io/crates/async-ffi)
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [RustBelt project](https://plv.mpi-sws.org/rustbelt/)
+- [Polymorphic Context-free Session Types](https://arxiv.org/abs/2106.06658)

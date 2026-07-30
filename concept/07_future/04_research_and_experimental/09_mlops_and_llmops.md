@@ -16,7 +16,7 @@
 > **后置概念**: [AI Safety and Alignment](10_ai_safety_and_alignment.md) · [LLM System Architecture](08_llm_system_architecture.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **主要来源**: [Huyen — Designing Machine Learning Systems](https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/) · [DeepLearning.AI — MLOps Specialization](https://www.deeplearning.ai/courses/machine-learning-engineering-for-production-mlops/)
+> **主要来源**: [Huyen — Designing Machine Learning Systems](https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/) · [DeepLearning.AI — MLOps Specialization](https://www.deeplearning.ai/courses/machine-learning-engineering-for-production-mlops/) · [arXiv — MLOps: Overview, Definition, and Architecture](https://arxiv.org/abs/2005.12473) · [docs.rs — candle-core](https://docs.rs/candle-core) · [docs.rs — polars](https://docs.rs/polars) · [docs.rs — axum](https://docs.rs/axum)
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 
@@ -540,7 +540,7 @@ LLMOps 需要管理 prompt、检索上下文和开放式文本输出评估，而
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Huyen — Designing Machine Learning Systems](https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/) · [DeepLearning.AI — MLOps Specialization](https://www.deeplearning.ai/courses/machine-learning-engineering-for-production-mlops/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Huyen — Designing Machine Learning Systems](https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/) · [DeepLearning.AI — MLOps Specialization](https://www.deeplearning.ai/courses/machine-learning-engineering-for-production-mlops/) · [arXiv — MLOps: Overview, Definition, and Architecture](https://arxiv.org/abs/2005.12473) · [docs.rs — candle-core](https://docs.rs/candle-core) · [docs.rs — polars](https://docs.rs/polars) · [docs.rs — axum](https://docs.rs/axum)
 >
 > **文档版本**: 1.0
 > **最后更新**: 2026-07-28

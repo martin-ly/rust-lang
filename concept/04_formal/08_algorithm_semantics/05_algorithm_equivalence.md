@@ -444,6 +444,10 @@ fn main() {}
 | [Rust std — HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html) | ✅ 一级 | 迭代顺序不保证的权威说明 |
 | [rayon documentation](https://github.com/rayon-rs/rayon) | ✅ 二级 | Rust 数据并行与调度非确定性 |
 | [arXiv 2025 — A Formal Framework for Naturally Specifying and Verifying Sequential Algorithms](https://arxiv.org/) | ⚠️ 二级 | 顺序算法自然规格与验证 |
+| [Plotkin 1977 — LCF Considered as a Programming Language](https://doi.org/10.1016/0304-3975(77)90044-5) | ✅ 一级 | 上下文等价与指称语义经典基础 |
+| [Aeneas — Rust 程序验证框架](https://aeneasverif.github.io/) | ✅ 一级 | Rust 算法与数据结构的精化证明工具 |
+| [Creusot — Rust 形式化验证](https://github.com/creusot-rs/creusot) | ✅ 二级 | 基于 Why3 的 Rust 程序正确性验证 |
+| [Verus — Verified Rust for Systems](https://github.com/verus-lang/verus) | ✅ 二级 | Rust 系统代码的 SMT 形式化验证生态 |
 
 ---
 

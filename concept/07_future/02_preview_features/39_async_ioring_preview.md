@@ -21,6 +21,12 @@
 > [tokio-rs/tokio-uring](https://github.com/tokio-rs/tokio-uring) ·
 > [glommio](https://github.com/DataDog/glommio) ·
 > [RFC 3610 — Async Fn in Traits](https://rust-lang.github.io/rfcs//3610-project-exploit-rust.html)
+>
+> **国际权威来源**:
+> [tokio-uring API docs (docs.rs)](https://docs.rs/tokio-uring/latest/tokio_uring/) ·
+> [tokio-uring crate (crates.io)](https://crates.io/crates/tokio-uring) ·
+> [monoio crate (crates.io)](https://crates.io/crates/monoio) ·
+> [uringscope: io_uring observability and hazards (arXiv)](https://arxiv.org/abs/2606.15137)
 
 ---
 

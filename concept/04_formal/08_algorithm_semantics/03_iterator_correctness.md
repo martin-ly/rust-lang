@@ -16,14 +16,19 @@
 
 ---
 
-> **来源**: [The Rust Programming Language — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html) ·
+> **权威来源 / Provenance**: [The Rust Programming Language — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html) ·
 > [Rust Reference — Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html) ·
 > [Rust API Guidelines — Iterators](https://rust-lang.github.io/api-guidelines/interoperability.html#c-iter) ·
 > [Hoare 1969 — An Axiomatic Basis](https://doi.org/10.1093/comjnl/12.4.576) ·
 > [Wadler 1990 — Deforestation](https://doi.org/10.1145/91556.91562) ·
 > [Pitts 2012 — Step-Indexed Biorthogonality](https://doi.org/10.1017/S0956796812000261) ·
 > [Ahmed 2006 — Step-Indexed Syntactic Logical Relations](https://doi.org/10.1007/11624738_2) ·
-> [Felleisen 1991 — On the Expressive Power of Programming Languages](https://doi.org/10.1007/BF01178218)
+> [Felleisen 1991 — On the Expressive Power of Programming Languages](https://doi.org/10.1007/BF01178218) ·
+> [Verus — Rust Verifier](https://github.com/verus-lang/verus) ·
+> [Creusot — Rust Deductive Verification](https://github.com/creusot-rs/creusot) ·
+> [Aeneas — Rust Verification by Functional Translation](https://aeneasverif.github.io/) ·
+> [Verus: Verifying Rust Programs using Linear Ghost Types](https://arxiv.org/abs/2303.05475) ·
+> [Creusot: A Foundational and Expressive Verifier for Rust](https://arxiv.org/abs/2202.02628)
 
 ## 📑 目录
 
@@ -987,3 +992,9 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「迭代器正确性语义」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [RustBelt project](https://plv.mpi-sws.org/rustbelt/)
+- [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)

@@ -778,6 +778,9 @@ graph TD
 - [NuGet](https://www.nuget.org/)
 - [MSBuild](https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild)
 - [F# Software Foundation](https://fsharp.org/)
+- [RustBelt: Securing the Foundations of Rust (DOI)](https://doi.org/10.1145/3158154)
+- [Expert F# 4.0 (Springer)](https://link.springer.com/book/10.1007/978-1-4842-0509-2)
+- [The Rust Programming Language Blog](https://blog.rust-lang.org/)
 
 ### 相关概念
 

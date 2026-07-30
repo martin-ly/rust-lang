@@ -443,12 +443,16 @@ fn main() {
 
 ---
 
-## 国际权威参考 / International Authority References（P2 生态）
+## 国际权威来源 / International Authority Sources
 
 - [Rust 1.95.0 发布公告 — `if-let-guards` 稳定化](https://blog.rust-lang.org/2026/04/24/Rust-1.95.0.html)
 - [Rust 1.88.0 发布公告 — `let_chains` 在 Edition 2024 稳定化](https://blog.rust-lang.org/2026/01/29/Rust-1.88.0.html)
 - [RFC 2497 — if-let-chains](https://rust-lang.github.io/rfcs/2497-if-let-chains.html)
 - [RFC 2294 — if-let-guard](https://rust-lang.github.io/rfcs/2294-if-let-guard.html)
+- [Rust Reference — If let expressions](https://doc.rust-lang.org/reference/expressions/if-expr.html#if-let-expressions)
+- [Rust Reference — Match expressions](https://doc.rust-lang.org/reference/expressions/match-expr.html)
+- [The Rust Programming Language — Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html)
+- [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/)
 
 ---
 
@@ -534,3 +538,8 @@ match input {
 
 > **反命题**: "`let chains` 允许在 `if` 条件中任意组合 `||` 和 `&&`。" —— 错误。Rust 明确禁止在 `let chains` 中使用 `||`，因为右侧绑定在左侧为真时可能未创建，导致变量未定义。
 > **边界**: `let chains` 仅适用于 `if`/`while` 条件；不能用于 `match` 臂或表达式上下文，`match` 臂需使用 `if-let guards`（Rust 1.82+）。
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [RustBelt project](https://plv.mpi-sws.org/rustbelt/)
+- [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)

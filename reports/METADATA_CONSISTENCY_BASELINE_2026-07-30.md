@@ -109,15 +109,19 @@
 
 ### D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥（0）
 
+
 ### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（1）
 
 - `concept/04_formal/04_model_checking/11_creusot.md` — A/S/P=A 允许 [1, 2] 与 Bloom [4, 5] 无交集
 
 ### D3 关键字段同文件重声明（0）
 
+
 ### D4 文首块 Rust 版本号自矛盾（0）
 
+
 ### D5 稳定层正文残留 nightly/preview/unstable（0）
+
 
 ### D6 Summary 低信息量模板套话（6）
 

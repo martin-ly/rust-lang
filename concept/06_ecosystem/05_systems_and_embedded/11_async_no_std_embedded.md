@@ -228,4 +228,10 @@ flowchart TD
 
 ---
 
-> **权威来源**: [Embassy Book](https://embassy.dev/book/) · [RTIC Book](https://rtic.rs/2/book/en/) · [Rust Embedded Book](https://docs.rust-embedded.org/book/)
+> **权威来源**: [Embassy Book](https://embassy.dev/book/) · [RTIC Book](https://rtic.rs/2/book/en/) · [Rust Embedded Book](https://docs.rust-embedded.org/book/) · [Embassy Executor on docs.rs](https://docs.rs/embassy-executor/) · [Embassy crates on crates.io](https://crates.io/crates/embassy-executor) · [Embassy repository](https://github.com/embassy-rs/embassy) · [RTIC crate on crates.io](https://crates.io/crates/rtic)
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [RustBelt project](https://plv.mpi-sws.org/rustbelt/)
+- [Polymorphic Context-free Session Types](https://arxiv.org/abs/2106.06658)

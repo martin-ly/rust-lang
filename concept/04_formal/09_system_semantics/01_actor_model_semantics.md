@@ -14,7 +14,7 @@
 
 ---
 
-> **来源**: [Hewitt, *Actor Model of Computation*, arXiv:1008.1459](https://arxiv.org/abs/1008.1459) · [Agha, *Actors*, MIT Press 1986](https://mitpress.mit.edu/9780262010929/actors/) · [TRPL — Message Passing](https://doc.rust-lang.org/book/ch16-02-message-passing.html)
+> **来源 / Provenance**: [Hewitt, *Actor Model of Computation*, arXiv:1008.1459](https://arxiv.org/abs/1008.1459) · [Agha, *Actors*, MIT Press 1986](https://mitpress.mit.edu/9780262010929/actors/) · [TRPL — Message Passing](https://doc.rust-lang.org/book/ch16-02-message-passing.html) · [Actor model papers on Semantic Scholar](https://www.semanticscholar.org/search?q=actor%20model%20concurrent%20computation&sort=relevance) · [actix — Actor framework for Rust, crates.io](https://crates.io/crates/actix)
 
 ## 系统语义要点
 

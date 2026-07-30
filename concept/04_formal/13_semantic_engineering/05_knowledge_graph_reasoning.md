@@ -27,6 +27,11 @@
 > - [W3C SPARQL 1.1 Entailment Regimes](https://www.w3.org/TR/sparql11-entailment/)
 > - [W3C JSON-LD 1.1](https://www.w3.org/TR/json-ld11/)
 > - [W3C RDF-star and SPARQL-star](https://www.w3.org/2021/12/rdf-star.html)
+> - [Rust RFCs](https://github.com/rust-lang/rfcs) — Rust 语言特性演化的官方 canonical 追踪，为 KG 中概念-版本映射提供 P0 输入。
+> - [Hogan et al. — *Knowledge Graphs* (arXiv)](https://arxiv.org/abs/2003.02320) — P1 学术/形式化；知识图谱综述预印本。
+> - [Hogan et al. — *Knowledge Graphs* (ACM Computing Surveys)](https://dl.acm.org/doi/10.1145/3447772) — P1 学术/形式化；ACM 数字图书馆正式版本。
+> - [Oxigraph on crates.io](https://crates.io/crates/oxigraph) — P2 生态/社区；Rust RDF store。
+> - [Sophia on crates.io](https://crates.io/crates/sophia) — P2 生态/社区；Rust RDF 库。
 
 ---
 

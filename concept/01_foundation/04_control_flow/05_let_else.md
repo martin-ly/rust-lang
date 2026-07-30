@@ -13,11 +13,11 @@
 > **前置概念**: [Control Flow](01_control_flow.md) · [Patterns](02_patterns.md) · [Let Chains](03_let_chains.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) · [术语表](../../00_meta/01_terminology/01_terminology_glossary.md)
 > **后置概念**: [Statements and Expressions](04_statements_and_expressions.md) · [Option/Result Idioms](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md)
 >
-> **权威来源**:
+> **权威来源 / Provenance**:
 > · [Rust Reference — Let statements](https://doc.rust-lang.org/reference/statements.html#let-statements) ·
 > [RFC 3137 — let_else](https://rust-lang.github.io/rfcs/3137-let-else.html) ·
-> [TRPL — Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html) ·
-> [Rust 1.65 Release Notes](https://blog.rust-lang.org/2022/11/03/Rust-1.65.0.html)
+> [Rust 1.65 Release Notes](https://blog.rust-lang.org/2022/11/03/Rust-1.65.0.html) ·
+> [Tracking Issue — let_else](https://github.com/rust-lang/rust/issues/87335)
 
 ---
 
@@ -70,6 +70,7 @@ mindmap
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
   - [反命题与边界](#反命题与边界)
+  - [补充国际权威来源（P1/P2 覆盖）](#补充国际权威来源p1p2-覆盖)
 
 ---
 
@@ -368,6 +369,7 @@ fn main() {}
 - [Rust Reference — Let statements](https://doc.rust-lang.org/reference/statements.html#let-statements)
 - [RFC 3137 — let_else](https://rust-lang.github.io/rfcs/3137-let-else.html)
 - [Rust 1.65 Release Notes](https://blog.rust-lang.org/2022/11/03/Rust-1.65.0.html)
+- [TRPL — Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html)
 - [Let Chains 权威页](03_let_chains.md)
 - [Pattern Matching 权威页](02_patterns.md)
 
@@ -398,3 +400,8 @@ fn main() {}
 
 > **反命题**: "`let-else` 的 else 分支可以像普通 `else` 一样继续执行后续代码。" —— 错误。`let-else` 的 else 分支必须发散（返回 `!` 或结束当前作用域），否则失败路径泄漏会导致后续代码使用未绑定变量。
 > **边界**: `let-else` 只适用于 irrefutable 左侧的 refutable 模式；不可反驳模式不需要 else，且 else 分支不能用于 `let` 绑定非模式值。
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [RustBelt project](https://plv.mpi-sws.org/rustbelt/)
+- [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)

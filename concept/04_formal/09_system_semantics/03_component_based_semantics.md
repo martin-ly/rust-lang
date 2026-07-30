@@ -24,7 +24,11 @@
 > Shaw, M. & Garlan, D. *Software Architecture: Perspectives on an Emerging Discipline*. Prentice Hall, 1996 ·
 > [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html) ·
 > [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) ·
-> [std::sync::mpsc](https://doc.rust-lang.org/std/sync/mpsc/)
+> [std::sync::mpsc](https://doc.rust-lang.org/std/sync/mpsc/) ·
+> [Gössler & Sifakis, *Composition for component-based modeling*, Sci. Comput. Program. 2005 (doi.org)](https://doi.org/10.1016/j.scico.2004.05.014) ·
+> [Gössler & Sifakis 2005 (ACM DL)](https://dl.acm.org/doi/abs/10.1016/j.scico.2004.05.014) ·
+> [Sifakis, *A Framework for Component-based Construction* (Semantic Scholar)](https://www.semanticscholar.org/paper/A-Framework-for-Component-based-Construction-Sifakis) ·
+> [tokio crate (crates.io)](https://crates.io/crates/tokio)
 >
 > ⚠️ **声明**: 本页呈现的是**组件化形式语义骨架与教学级 Rust 映射**，非经机器验证的 BIP→Rust 同构证明。BIP 的优先级/交互语义有完整的操作语义与模型检验工具集；Rust 的 trait/module 是**工程实现基质**，「对应」指结构化类比，而非双模拟等价。
 

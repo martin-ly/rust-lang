@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 583,
-    "generated_at": "2026-07-30T10:46:48.823623+00:00"
+    "generated_at": "2026-07-30T12:15:21.008932+00:00"
   },
   "files": [
     {
@@ -42402,7 +42402,7 @@
       "layer": "L4",
       "title": "指称语义与领域理论",
       "positioning": "探讨 Rust 的**指称语义**（Denotational Semantics）基础——从 Scott-Strachey 方法到完备偏序（CPO）、不动点理论，分析 Rust 类型如何通过数学对象赋予意义。",
-      "line_count": 727,
+      "line_count": 728,
       "theorem_chains": [
         {
           "text": "| 指称语义与领域理论 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -42524,7 +42524,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 10,
+      "matrix_rows": 11,
       "pre_post": {
         "pre": [
           "[Type Theory](../00_type_theory/01_type_theory.md) · [Operational Semantics](03_operational_semantics.md) · [Linear Logic](../01_ownership_logic/01_linear_logic.md)",
@@ -42543,7 +42543,7 @@
       "layer": "L4",
       "title": "Hoare 逻辑：程序验证的形式化基础与 Rust 契约",
       "positioning": "系统讲解 **Hoare 逻辑（霍尔逻辑）**——从前置条件、后置条件、循环不变量的经典形式化，到最弱前置条件演算，揭示 Hoare 逻辑如何为 Rust 的 unsafe 代码契约、内部不变量和形式化验证工具提供理论基础。",
-      "line_count": 927,
+      "line_count": 930,
       "theorem_chains": [
         {
           "text": "| Hoare 逻辑：程序验证的形式化基础与 Rust 契约 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -42643,7 +42643,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 3,
-      "matrix_rows": 29,
+      "matrix_rows": 35,
       "pre_post": {
         "pre": [
           "[Ownership Formalization](../01_ownership_logic/02_ownership_formal.md) · [Verification Toolchain](../04_model_checking/01_verification_toolchain.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)",
@@ -42662,7 +42662,7 @@
       "layer": "L4",
       "title": "操作语义：程序行为的形式化定义",
       "positioning": "介绍 **操作语义（Operational Semantics）**——通过形式化规则定义程序的执行步骤，分析小步语义（Small-Step）与大步语义（Big-Step）的对比，以及 Rust 的所有权（Ownership）、借用（Borrowing）和并发操作的形式化建模方法。",
-      "line_count": 1188,
+      "line_count": 1218,
       "theorem_chains": [
         {
           "text": "| 操作语义：程序行为的形式化定义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -42724,19 +42724,21 @@
         },
         {
           "flags": [
-            "compile_fail"
+            "compile_fail",
+            "E0502"
           ],
           "lines": 7,
           "should_fail": true,
-          "code_preview": "fn main() {     let x = 5;     let r1 = &x;     let r2 = &mut x; // ❌ 编译错误: 不能同时..."
+          "code_preview": "fn main() {     let mut x = 5;     let r1 = &x;     let r2 = &mut x; // ❌ E0502:..."
         },
         {
           "flags": [
-            "compile_fail"
+            "compile_fail",
+            "E0106"
           ],
           "lines": 10,
           "should_fail": true,
-          "code_preview": "fn dangle() -> &i32 {     let x = 5;     &x // ❌ 编译错误: `x` 在返回值后将被释放 } // x 在这里被..."
+          "code_preview": "fn dangle() -> &i32 {     let x = 5;     &x // ❌ E0106 / E0515: 返回引用指向局部变量 `x` }..."
         },
         {
           "flags": [
@@ -42765,15 +42767,35 @@
         },
         {
           "flags": [
-            "compile_fail"
+            "compile_fail",
+            "E0502"
           ],
-          "lines": 10,
+          "lines": 9,
           "should_fail": true,
-          "code_preview": "fn main() {     let mut x = 0;     // ❌ 运行时 UB: 同一标量值的 &mut 和 & 别名（在 unsafe 中）  ..."
+          "code_preview": "fn main() {     let mut x = 0;     // ❌ E0502: 同一标量值的 &mut 和 & 不能同时活跃     let r ..."
         },
         {
           "flags": [
-            "compile_fail"
+            "compile_fail",
+            "E0382"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "fn main() {     let v = vec![1, 2, 3];     let w = v;            // 所有权从 v 转移到 w..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0502"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "fn main() {     let mut s = String::from(\"hello\");     let r1 = &s;             ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0308"
           ],
           "lines": 10,
           "should_fail": true,
@@ -42793,7 +42815,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 64,
+      "matrix_rows": 71,
       "pre_post": {
         "pre": [
           "[Type Theory](../00_type_theory/01_type_theory.md) · [Ownership Formal](../01_ownership_logic/02_ownership_formal.md) · [Linear Logic](../01_ownership_logic/01_linear_logic.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)"
@@ -43395,9 +43417,13 @@
       "layer": "L4",
       "title": "常量求值（Constant Evaluation）",
       "positioning": "",
-      "line_count": 222,
+      "line_count": 240,
       "theorem_chains": [],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -43436,6 +43462,21 @@
           "lines": 4,
           "should_fail": false,
           "code_preview": "const A: [u8; 3] = [1, 2, 3]; const B: u8 = A[2]; fn main() { println!(\"{B}\"); }..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0080"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "// rustc 1.97.0 实测：error[E0080]: attempt to compute `255_u8 + 1_u8`, which would..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "const OK: u16 = 255 + 1;                       // 类型容纳结果 const WRAP: u8 = 255u8...."
         }
       ],
       "sources": [],
@@ -43468,14 +43509,21 @@
       "layer": "L4",
       "title": "LLVM IR 中的 Poison、Undefined Behavior 与 Freeze",
       "positioning": "",
-      "line_count": 264,
+      "line_count": 284,
       "theorem_chains": [],
       "anti_propositions": [
         {
           "title": "## 6. 反例"
         }
       ],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "use std::mem::MaybeUninit;  fn main() {     // 可以编译，但 x 的位模式未初始化     let x: i32 ..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../03_advanced/02_unsafe/06_memory_model.md",
@@ -47163,7 +47211,7 @@
       "layer": "L4",
       "title": "算法精化演算（Refinement Calculus for Rust Algorithms）",
       "positioning": "系统讲解**算法精化演算**——从抽象规范到可执行 Rust 实现的逐步推导，包括谓词转换语义、精化定律、数据精化与排序算法的精化链，揭示形式化方法如何指导 Rust 算法设计与验证。",
-      "line_count": 732,
+      "line_count": 757,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47208,7 +47256,15 @@
           "flags": [],
           "lines": 24,
           "should_fail": false,
-          "code_preview": "// 边界示例：非确定性规范的精化  // 规范：返回任意一个非负偶数 fn any_even_spec() -> i32 {     // 逻辑上表示 {0,..."
+          "code_preview": "// 边界示例：非确定性规范的精化  // 规范：返回任意一个非负偶数（非确定性规格，无法直接执行） fn any_even_spec() -> i32 {  ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 15,
+          "should_fail": true,
+          "code_preview": "// 规范：返回值必须是非负偶数 const fn check_spec_result(x: i32) {     assert!(x >= 0 && x % ..."
         }
       ],
       "sources": [],
@@ -47225,7 +47281,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 2,
-      "matrix_rows": 13,
+      "matrix_rows": 14,
       "pre_post": {
         "pre": [
           "[Hoare Logic](../03_operational_semantics/02_hoare_logic.md) · [Formal Algorithm Theory](../00_type_theory/13_formal_algorithm_theory.md) · [Pattern Composition Algebra](../00_type_theory/12_pattern_composition_algebra.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)"
@@ -47242,7 +47298,7 @@
       "layer": "L4",
       "title": "迭代器正确性语义（Iterator Correctness Semantics）",
       "positioning": "从形式化语义角度刻画 Rust `Iterator` trait 与适配器链的契约：状态机视图、不变量、代数律，以及自定义迭代器的实现义务。连接算法语义、Hoare 逻辑与 Rust 标准库迭代器生态。",
-      "line_count": 937,
+      "line_count": 990,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47328,6 +47384,22 @@
           "lines": 16,
           "should_fail": false,
           "code_preview": "fn main() {     let v = vec![1, 2, 3];     let mut counter = 0;      // 有状态闭包：每次..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 13,
+          "should_fail": true,
+          "code_preview": "// Iterator 契约：lower <= actual_remaining <= upper.unwrap_or(actual) const fn che..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 13,
+          "should_fail": true,
+          "code_preview": "// FusedIterator 契约：返回 None 后不得再次返回 Some const fn check_fused(returns_some_after..."
         }
       ],
       "sources": [],
@@ -47342,7 +47414,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 13,
+      "matrix_rows": 15,
       "pre_post": {
         "pre": [
           "[Iterator Patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) · [Hoare Logic for Rust Algorithms](01_hoare_logic_for_rust.md) · [Hoare Logic](../03_operational_semantics/02_hoare_logic.md)"
@@ -47359,7 +47431,7 @@
       "layer": "L4",
       "title": "不安全算法的语义不变量（Semantic Invariants of Unsafe Algorithms）",
       "positioning": "系统讲解 Rust `unsafe` 算法的语义契约——从安全 API 与不安全实现之间的抽象屏障，到指针有效性、初始化、对齐、别名隔离等运行时不变量，以及循环不变量在维护 `Vec`、`MaybeUninit` 等数据结构正确性中的作用。",
-      "line_count": 479,
+      "line_count": 572,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47428,6 +47500,30 @@
         },
         {
           "flags": [
+            "compile_fail"
+          ],
+          "lines": 10,
+          "should_fail": true,
+          "code_preview": "// 读取 T 要求指针按 align_of::<T>() 对齐 const fn require_aligned(addr: usize, align: us..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 13,
+          "should_fail": true,
+          "code_preview": "// copy_nonoverlapping 要求 [src, src+len) 与 [dst, dst+len) 不重叠 const fn require_n..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 13,
+          "should_fail": true,
+          "code_preview": "// 循环不变量：set_len(new_len) 要求 [0, new_len) 已初始化 const fn set_len_requires_init(in..."
+        },
+        {
+          "flags": [
             "ignore"
           ],
           "lines": 8,
@@ -47447,7 +47543,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 18,
+      "matrix_rows": 27,
       "pre_post": {
         "pre": [
           "[Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Memory Model](../../03_advanced/02_unsafe/06_memory_model.md) · [Hoare Logic](../03_operational_semantics/02_hoare_logic.md)"
@@ -47464,7 +47560,7 @@
       "layer": "L4",
       "title": "算法实现的观察等价性（Observational Equivalence of Algorithm Implementations）",
       "positioning": "系统讲解 **算法实现的观察等价性**——从\"相同输入产生相同可观察输出\"的基本定义，到复杂度、非确定性与精化序对等价关系的刻画，帮助判断 Rust 中同一算法的不同实现何时可以互换、何时必须区分。",
-      "line_count": 583,
+      "line_count": 607,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47498,6 +47594,14 @@
           "lines": 9,
           "should_fail": false,
           "code_preview": "let mut a = vec![3, 1, 4, 1, 5, 9, 2, 6]; let mut b = a.clone();  a.sort();     ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 15,
+          "should_fail": true,
+          "code_preview": "// 稳定排序保持输入中相等元素的相对顺序 const BUBBLE_STABLE: [i32; 4] = [1, 4, 1, 5];  // 不稳定排序可能改..."
         },
         {
           "flags": [],
@@ -47819,7 +47923,7 @@
       "layer": "L4",
       "title": "反应式系统语义（Reactive Systems Semantics）",
       "positioning": "从数据流（dataflow）、Kahn 进程网络、同步/异步语言与背压协议四个角度，形式化刻画反应式系统的语义，并将其映射到 Rust 的 `Stream`/`Sink`、`tokio::sync::mpsc` 与 `tokio-stream` 生态。",
-      "line_count": 492,
+      "line_count": 562,
       "theorem_chains": [
         {
           "text": "| T-RS-03 | 有界缓冲 ⟹ 资源安全 | 背压条件 (1)(2) 成立 | 数据路径内存使用有上界 |",
@@ -47878,6 +47982,24 @@
           "lines": 5,
           "should_fail": false,
           "code_preview": "// ✅ 修正：有界窗口 B = 8 let (tx, mut rx) = mpsc::channel::<Vec<u8>>(8); // 上游: tx.sen..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0277"
+          ],
+          "lines": 21,
+          "should_fail": true,
+          "code_preview": "// 背压契约：发送操作必须是可挂起的，因此发送器必须实现 BoundedSender trait BoundedSender {     fn send(&s..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0599"
+          ],
+          "lines": 27,
+          "should_fail": true,
+          "code_preview": "// 类型状态：用泛型参数 S 表示泵的当前状态 struct Idle; struct Running; struct Fault;  struct Pump..."
         }
       ],
       "sources": [],
@@ -47911,7 +48033,7 @@
       "layer": "L4",
       "title": "系统工程标准与 Rust 映射",
       "positioning": "从系统生命周期、V&V 与模型语义三个维度，建立系统工程标准与 Rust 安全关键/嵌入式实现的映射框架。",
-      "line_count": 681,
+      "line_count": 714,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47943,6 +48065,15 @@
           "lines": 16,
           "should_fail": false,
           "code_preview": "#![no_std] #![no_main]  use core::panic::PanicInfo;  #[panic_handler] fn panic(_..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0152"
+          ],
+          "lines": 17,
+          "should_fail": true,
+          "code_preview": "#![no_std]  use core::panic::PanicInfo;  #[panic_handler] fn panic_handler_a(_in..."
         },
         {
           "flags": [
@@ -48040,7 +48171,7 @@
       "layer": "L4",
       "title": "架构模式语义（Architecture Pattern Semantics）",
       "positioning": "从形式化视角定义常见架构模式的语义不变量，将其表述为依赖图、控制流与数据流的约束，并映射到 Rust 的模块、trait 与 workspace 机制。本文是 [Architecture Patterns](../../06_ecosystem/03_design_patterns/08_architecture_patterns.md) 的形式化深化，连接高层设计模式与实现级语义。",
-      "line_count": 664,
+      "line_count": 670,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -48135,7 +48266,7 @@
       "layer": "L4",
       "title": "架构精化",
       "positioning": "从形式化视角定义软件架构精化关系，建立抽象架构元素到 Rust crate/module/trait 具体实现的逐步映射，给出不变量保持的证明义务，并用反例说明“拆分≠精化”。",
-      "line_count": 486,
+      "line_count": 492,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -48210,7 +48341,7 @@
       "layer": "L4",
       "title": "Rust 架构语义约束（Rust Architecture Semantics Constraints）",
       "positioning": "系统分析 Rust 的模块系统、crate 边界、可见性规则、ABI 与 workspace 机制如何**约束**软件架构的语义——哪些架构不变量可以被编译器强制执行，哪些仍需工程自律。",
-      "line_count": 276,
+      "line_count": 292,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -48245,7 +48376,7 @@
           ],
           "lines": 11,
           "should_fail": true,
-          "code_preview": "mod secret {     pub(crate) struct InternalToken; // 仅 crate 内部可见 }  // ❌ 公开函数泄漏..."
+          "code_preview": "mod secret {     struct InternalToken; // 仅模块内可见，完全私有 }  // ❌ 公开类型泄漏了私有字段类型 pub ..."
         },
         {
           "flags": [
@@ -48253,7 +48384,7 @@
           ],
           "lines": 7,
           "should_fail": true,
-          "code_preview": "use std::fmt::Display;  // 错误：不能为外部类型实现外部 trait impl Display for serde_json::Val..."
+          "code_preview": "// 错误：不能为外部类型实现外部 trait（违反 orphan rules） impl std::fmt::Display for std::vec::Ve..."
         },
         {
           "flags": [
@@ -48294,7 +48425,7 @@
       "layer": "L4",
       "title": "计算语义统一框架（A Unified Framework of Computational Semantics）",
       "positioning": "把操作、指称、公理、类型四种语义统一为观察同一程序行为的四种互补视角，为后续可计算性、形式语言与程序等价性讨论奠定共同语言。",
-      "line_count": 316,
+      "line_count": 345,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -48322,6 +48453,15 @@
           "lines": 5,
           "should_fail": true,
           "code_preview": "const fn heap_alloc_in_const() -> Vec<i32> {     vec![1, 2, 3] // ERROR: vec! 宏在..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0080"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "const fn forever() -> i32 {     forever() // ERROR E0080: 常量求值器在有限步内无法完成，       ..."
         }
       ],
       "sources": [],
@@ -48340,7 +48480,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 16,
+      "matrix_rows": 32,
       "pre_post": {
         "pre": [
           "[Async/Await](../../03_advanced/01_async/01_async.md) · [Lambda Calculus](../00_type_theory/05_lambda_calculus.md) · [Type Theory](../00_type_theory/01_type_theory.md)"
@@ -48357,7 +48497,7 @@
       "layer": "L4",
       "title": "可计算性理论（Computability Theory）",
       "positioning": "从图灵机、递归函数与 Church-Turing 论题出发，刻画「可计算」的形式边界；补充归约与完备性、算术层级、Curry-Howard 与类型化 λ 演算视角；并通过 Rust 实例展示可判定性、不可判定性、Rice 定理、Post 对应问题、递归类型与观察等价在语言实现中的投影。",
-      "line_count": 919,
+      "line_count": 939,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -48370,6 +48510,15 @@
           "lines": 8,
           "should_fail": false,
           "code_preview": "fn factorial(n: u64) -> u64 {     if n == 0 { 1 } else { n * factorial(n - 1) } ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0080"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "const fn unbounded_search() -> u32 {     unbounded_search() // ERROR E0080: 常量求值..."
         },
         {
           "flags": [],
@@ -48472,7 +48621,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 31,
+      "matrix_rows": 39,
       "pre_post": {
         "pre": [
           "[Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Lambda Calculus](../00_type_theory/05_lambda_calculus.md) · [Type Theory](../00_type_theory/01_type_theory.md) · [Type Checking and Inference](../00_type_theory/07_type_checking_and_inference.md)"
@@ -48489,7 +48638,7 @@
       "layer": "L4",
       "title": "形式语言与自动机（Formal Languages and Automata）",
       "positioning": "从 Chomsky 层级、泵引理、Myhill-Nerode 定理、闭包性质、NFA/DFA 等价构造与自动机对应关系出发，定位 Rust 语法子集、解析生态（nom/pest/lalrpop/syn）与 typestate 模式在形式语言谱系中的位置，并桥接 λ 演算、类型理论与指称语义的国际权威视角。",
-      "line_count": 1150,
+      "line_count": 1174,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -48523,6 +48672,15 @@
           "lines": 25,
           "should_fail": false,
           "code_preview": "/// 用 PDA 识别平衡括号（仅 '(' 与 ')'）。 /// 每读到一个 '(' 入栈，读到 ')' 出栈；最终栈空则接受。 fn pda_balanc..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0072"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "struct Node {     next: Node, // ERROR E0072: 直接递归导致类型大小无限 }  fn main() {} ..."
         },
         {
           "flags": [
@@ -48613,7 +48771,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 2,
-      "matrix_rows": 41,
+      "matrix_rows": 53,
       "pre_post": {
         "pre": [
           "[Lambda Calculus](../00_type_theory/05_lambda_calculus.md) · [Type Theory](../00_type_theory/01_type_theory.md) · [Type Inference](../00_type_theory/03_type_inference.md)"
@@ -48630,7 +48788,7 @@
       "layer": "L4",
       "title": "计算的数学函数（Mathematical Functions of Computation）",
       "positioning": "把可计算函数视为数学对象，连接 λ 可定义性、不动点组合子、μ-递归、部分递归函数、Curry-Howard 对应、Scott 域、观察等价与 Felleisen 表达力框架，并通过 Rust 函数/闭包/迭代器展示理论与实现的对应与张力。",
-      "line_count": 820,
+      "line_count": 842,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -48736,6 +48894,15 @@
           "code_preview": "fn produce_false() -> std::convert::Infallible {     42i32 }  fn main() {} ..."
         },
         {
+          "flags": [
+            "compile_fail",
+            "E0275"
+          ],
+          "lines": 11,
+          "should_fail": true,
+          "code_preview": "// 试图用一个自指的 trait 表达「所有类型都满足某性质」： // 这对应于逻辑中的非直谓（impredicative）自指，会导致求解无限递归。 tra..."
+        },
+        {
           "flags": [],
           "lines": 10,
           "should_fail": false,
@@ -48778,7 +48945,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 38,
+      "matrix_rows": 45,
       "pre_post": {
         "pre": [
           "[Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Lambda Calculus](../00_type_theory/05_lambda_calculus.md) · [Computability Theory](02_computability_theory.md)"
@@ -48795,7 +48962,7 @@
       "layer": "L4",
       "title": "计算模型等价性（Equivalence of Computational Models）",
       "positioning": "从图灵等价、模型间编码与 Felleisen 表达力三个角度，说明「所有图灵完备语言计算能力相同」与「工程语言表达能力不同」为何同时成立，并把这一理论映射到 Rust 的 `async/await` 与 `?` 等语法构造。",
-      "line_count": 903,
+      "line_count": 929,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -48817,6 +48984,15 @@
           "lines": 15,
           "should_fail": true,
           "code_preview": "// ❌ 编译错误：不受限的关联类型递归会触发 trait solver 的递归深度限制。 // Rust 刻意将类型约束求解限制在可判定片段内，避免跌入不可判..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0080"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "const fn diverge_in_const() -> i32 {     diverge_in_const() // ERROR E0080: 常量求值..."
         },
         {
           "flags": [],
@@ -48911,7 +49087,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 45,
+      "matrix_rows": 59,
       "pre_post": {
         "pre": [
           "[Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Computational Semantics Framework](01_computational_semantics_framework.md) · [Computability Theory](02_computability_theory.md) · [Mathematical Functions of Computation](04_mathematical_functions_of_computation.md)"
@@ -48928,11 +49104,17 @@
       "layer": "L4",
       "title": "并发模型谱系（Models of Concurrency）",
       "positioning": "从**模型谱系**角度给出并发计算的形式分类：共享内存、消息传递（CSP/Actor/π）、Petri 网，并把它们映射到 Rust 的 `std::sync`、`mpsc`、异步运行时与 Actor 框架，避免把工程原语误当成理论模型的同构实现。",
-      "line_count": 402,
+      "line_count": 446,
       "theorem_chains": [],
       "anti_propositions": [
         {
           "title": "## 二、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
         },
         {
           "title": "### 反例"
@@ -49011,6 +49193,24 @@
           "lines": 5,
           "should_fail": false,
           "code_preview": "// ❌ 错误假设：A、B 同时向 C 发送 Init 与 Use， // 认为 Init 一定先被处理。 actor_a.do_send(Init); act..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0373"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "fn make_future() -> impl std::future::Future<Output = ()> {     let s = String::..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0308"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "use std::sync::mpsc;  fn main() {     let (tx, _rx) = mpsc::channel::<i32>();   ..."
         }
       ],
       "sources": [],
@@ -49043,7 +49243,7 @@
       "layer": "L4",
       "title": "并发模型表达能力比较（Expressiveness of Concurrent Models）",
       "positioning": "从**编码、互模拟与 Felleisen 表达力框架**三个维度，比较共享内存、CSP、Actor、π 演算等并发模型的表达能力边界，并解释 Rust 的 `tokio::select!`、`async/await` 等原语在形式表达力坐标系中的位置。",
-      "line_count": 459,
+      "line_count": 547,
       "theorem_chains": [
         {
           "text": "| T-ECM-03 | 强互模拟 ⟹ 弱互模拟 | 弱互模拟定义更宽松 | 若两系统强互模拟，则必然弱互模拟；反之不成立 |",
@@ -49061,6 +49261,9 @@
       "anti_propositions": [
         {
           "title": "## 三、反例"
+        },
+        {
+          "title": "### 反例"
         },
         {
           "title": "### 反例"
@@ -49097,6 +49300,51 @@
           "lines": 15,
           "should_fail": false,
           "code_preview": "use std::sync::{Arc, Mutex}; use std::thread;  fn main() {     // 用共享内存 + 锁模拟\"消息..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0277"
+          ],
+          "lines": 10,
+          "should_fail": true,
+          "code_preview": "use std::rc::Rc; use std::thread;  fn main() {     let data = Rc::new(42);     t..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0373"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "fn make_future() -> impl std::future::Future<Output = ()> {     let s = String::..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0597"
+          ],
+          "lines": 13,
+          "should_fail": true,
+          "code_preview": "use std::sync::mpsc;  fn main() {     let (tx, rx) = mpsc::channel::<&str>();   ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0499"
+          ],
+          "lines": 11,
+          "should_fail": true,
+          "code_preview": "fn main() {     let mut data = 0;     let r1 = &mut data;     let r2 = &mut data..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0308"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "use std::sync::mpsc;  fn main() {     let (tx, _rx) = mpsc::channel::<i32>();   ..."
         }
       ],
       "sources": [],
@@ -49130,7 +49378,7 @@
       "layer": "L4",
       "title": "同步 · 并发 · 并行 · 异步 · 分布式的语义边界",
       "positioning": "在单一页中形式化区分「同步/并发/并行/异步/分布式」五种计算范式，标定它们的语义交集、包含关系与 Rust 原语的落点，避免把实现细节或性能目标当成范式定义。",
-      "line_count": 497,
+      "line_count": 546,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -49154,6 +49402,15 @@
           "code_preview": "fn make_future() -> impl std::future::Future<Output = ()> {     let s = String::..."
         },
         {
+          "flags": [
+            "compile_fail",
+            "E0597"
+          ],
+          "lines": 13,
+          "should_fail": true,
+          "code_preview": "use std::sync::mpsc;  fn main() {     let (tx, rx) = mpsc::channel::<&str>();   ..."
+        },
+        {
           "flags": [],
           "lines": 10,
           "should_fail": false,
@@ -49173,6 +49430,24 @@
           "lines": 14,
           "should_fail": false,
           "code_preview": "use std::sync::mpsc; use std::thread;  fn main() {     let (tx, rx) = mpsc::chan..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0277"
+          ],
+          "lines": 10,
+          "should_fail": true,
+          "code_preview": "use std::rc::Rc; use std::thread;  fn main() {     let data = Rc::new(42);     t..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0499"
+          ],
+          "lines": 11,
+          "should_fail": true,
+          "code_preview": "fn main() {     let mut data = 0;     let r1 = &mut data;     let r2 = &mut data..."
         },
         {
           "flags": [
@@ -49231,7 +49506,7 @@
       "layer": "L4",
       "title": "本体工程方法论（Ontology Engineering Methodologies）",
       "positioning": "从**方法论**角度比较三种经典本体工程方法，并给出把它们应用到 Rust 知识体系的具体步骤；避免把「本体」简单等同于「分类树」。",
-      "line_count": 324,
+      "line_count": 347,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -49253,11 +49528,21 @@
         },
         {
           "flags": [
-            "compile_fail"
+            "compile_fail",
+            "E0119"
           ],
           "lines": 16,
           "should_fail": true,
           "code_preview": "// 概念：CanFly（会飞） trait CanFly {}  // TBox： blanket impl —— 所有鸟类都会飞（简化假设） impl<T:..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0277"
+          ],
+          "lines": 17,
+          "should_fail": true,
+          "code_preview": "// Shape：Person 必须具有 name（sh:minCount = 1） trait HasName {     fn name(&self) ->..."
         }
       ],
       "sources": [],
@@ -49290,7 +49575,7 @@
       "layer": "L4",
       "title": "描述逻辑与 OWL（Description Logic and OWL）",
       "positioning": "从**形式逻辑**角度介绍描述逻辑家族与 OWL 2 profiles，帮助读者理解知识图谱本体的可判定推理边界，并把 trait 一致性求解类比为约束满足问题。",
-      "line_count": 445,
+      "line_count": 484,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -49314,6 +49599,15 @@
           "code_preview": "struct Person {     name: String,     // minCount=1, maxCount=1, datatype=string..."
         },
         {
+          "flags": [
+            "compile_fail",
+            "E0277"
+          ],
+          "lines": 17,
+          "should_fail": true,
+          "code_preview": "// SHACL shape：Person 必须具有 name（sh:minCount = 1） trait HasName {     fn name(&se..."
+        },
+        {
           "flags": [],
           "lines": 25,
           "should_fail": false,
@@ -49327,7 +49621,8 @@
         },
         {
           "flags": [
-            "compile_fail"
+            "compile_fail",
+            "E0119"
           ],
           "lines": 10,
           "should_fail": true,
@@ -49363,7 +49658,7 @@
       "layer": "L4",
       "title": "知识图谱构建（Knowledge Graph Construction）",
       "positioning": "从**工程实现**角度介绍如何把非结构化或多源数据转化为可查询、可验证的知识图谱，并把项目 KG v3 作为 Rust 知识体系持续演进的实例。",
-      "line_count": 357,
+      "line_count": 409,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -49398,6 +49693,24 @@
           "lines": 7,
           "should_fail": false,
           "code_preview": "// 概念示意：使用 oxigraph 进行 SPARQL 查询 use oxigraph::store::Store;  let store = Store:..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0119"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "// TBox：所有 Rust 概念都满足某个元数据 shape trait HasMetadata {} impl<T> HasMetadata for T ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0277"
+          ],
+          "lines": 14,
+          "should_fail": true,
+          "code_preview": "// SHACL shape：Concept 节点必须具有 name trait HasName {     fn name(&self) -> &str; }..."
         }
       ],
       "sources": [],
@@ -49429,7 +49742,7 @@
       "layer": "L4",
       "title": "语义互操作（Semantic Interoperability）",
       "positioning": "从**互操作**角度介绍如何让不同系统、不同词汇表的语义资产相互理解，并给出 Rust 服务端与客户端场景下的工程映射。",
-      "line_count": 303,
+      "line_count": 349,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -49450,6 +49763,24 @@
           "lines": 14,
           "should_fail": false,
           "code_preview": "// 概念示意：axum handler 根据 Accept 头返回 JSON-LD 或 Turtle use axum::{extract::Accept, ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0119"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "// 两个不同\"本体\"都把同一类型声明为同一 trait 的实例，触发冲突 trait LinkedDataResource {} impl<T> Linked..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0277"
+          ],
+          "lines": 14,
+          "should_fail": true,
+          "code_preview": "// SHACL shape：LearningResource 必须具有 name trait HasName {     fn name(&self) -> ..."
         }
       ],
       "sources": [],
@@ -49482,7 +49813,7 @@
       "layer": "L4",
       "title": "知识图谱推理（Knowledge Graph Reasoning）",
       "positioning": "从**形式语义与推理算法**角度介绍知识图谱的演绎能力，补全「构建」与「互操作」之间的推理层，并以项目 KG v3 作为实例。",
-      "line_count": 258,
+      "line_count": 310,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -49501,6 +49832,24 @@
           "lines": 42,
           "should_fail": false,
           "code_preview": "#[derive(Debug, Clone, PartialEq, Eq, Hash)] pub struct Triple {     subject: St..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0119"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "// TBox：所有资源都可通过默认规则到达 trait Reachable {} impl<T> Reachable for T {}  // 错误：对具体类..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0277"
+          ],
+          "lines": 14,
+          "should_fail": true,
+          "code_preview": "// SHACL shape：推理规则要求每个 Person 节点必须有 email trait HasEmail {     fn email(&self) ..."
         }
       ],
       "sources": [],

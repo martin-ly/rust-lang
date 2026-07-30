@@ -876,6 +876,10 @@ Rust 编译器是否会拒绝一个它无法证明终止的递归函数？
 | [Rust Reference — Type inference](https://doc.rust-lang.org/reference/type-inference.html) | ✅ P0 | Rust 类型推断 |
 | [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html) | ✅ P0 | Rust trait 系统 |
 | [a-mir-formality](https://github.com/rust-lang/a-mir-formality) | ✅ 一级 | Rust 形式化规格 |
+| [Gray et al. 2023 — Debugging Trait Errors as Logic Programs](https://arxiv.org/abs/2309.05137) | ✅ 一级 | arXiv；Rust trait 约束作为一阶遗传 Harrop 子句/逻辑程序，与 trait 求解可判定性边界相关 |
+| [Rust Compiler Development Guide — Trait resolution](https://rustc-dev-guide.rust-lang.org/traits/resolution.html) | ✅ P0 | 官方 rustc trait 求解与 resolution 机制 |
+| [A MIR Formality Book](https://rust-lang.github.io/a-mir-formality/) | ✅ P0 | Rust 类型团队对 MIR 与类型/ trait 系统的官方形式化模型 |
+| [Rust Blog — Officially announcing the types team](https://blog.rust-lang.org/2023/01/20/types-announcement.html) | ✅ P0 | 类型团队公告，含 a-mir-formality 与 Rust 类型系统形式化路线 |
 
 ---
 

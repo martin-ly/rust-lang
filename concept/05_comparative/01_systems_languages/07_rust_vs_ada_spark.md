@@ -65,6 +65,7 @@
   - [九、来源与延伸阅读](#九来源与延伸阅读)
     - [9.1 权威外部来源](#91-权威外部来源)
     - [9.2 项目内部延伸阅读](#92-项目内部延伸阅读)
+  - [国际权威来源](#国际权威来源)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -537,6 +538,10 @@ Ada/SPARK 的传统强项：
 - [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 - [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 - [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+- [RustBelt: Securing the Foundations of the Rust Programming Language](https://doi.org/10.1145/3158154)
+- [Aeneas: Rust Verification by Functional Translation](https://aeneasverif.github.io/)
+- [Verus — Rust deductive verifier](https://github.com/verus-lang/verus)
+- [Creusot — deductive verification of Rust programs](https://github.com/creusot-rs/creusot)
 
 ### 9.2 项目内部延伸阅读
 
@@ -552,6 +557,14 @@ Ada/SPARK 的传统强项：
 - [`concept/07_future/02_preview_features/30_rust_in_space.md`](../../07_future/02_preview_features/30_rust_in_space.md) — Rust in Space
 - [`concept/03_advanced/02_unsafe/01_unsafe.md`](../../03_advanced/02_unsafe/01_unsafe.md) — Unsafe Rust
 - [`concept/05_comparative/03_domain_comparisons/01_safety_boundaries.md`](../03_domain_comparisons/01_safety_boundaries.md) — 安全边界全景
+
+---
+
+## 国际权威来源
+
+- [RustBelt: Securing the Foundations of the Rust Programming Language](https://dl.acm.org/doi/10.1145/3158154) — ACM TOPLAS 2018 (P1: dl.acm.org)
+- [Aeneas: Rust Verification by Functional Translation](https://github.com/AeneasVerif/aeneas) — AeneasVerif GitHub repository (P1: github.com/AeneasVerif)
+- [Verus — Rust deductive verifier](https://github.com/verus-lang/verus) — Microsoft Research (P2: github.com/verus-lang)
 
 ---
 
@@ -584,3 +597,9 @@ mindmap
 ```
 
 > **认知功能**: 将 Rust 与 Ada/SPARK 的对比折叠为“通用类型系统安全”与“安全关键子集证明”两条路线，帮助在不同工业语境下选择技术栈。
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [RustBelt project](https://plv.mpi-sws.org/rustbelt/)
+- [KRust: A Formal Executable Semantics of Rust](https://arxiv.org/abs/1804.10806)

@@ -381,6 +381,10 @@ INT4 量化可能显著降低模型能力；对于需要高精度推理的任务
 - **P2 社区**
   - [Hugging Face Rust](https://huggingface.co/docs/candle/index)
   - [Rust ML](https://www.arewelearningyet.com/)
+  - [ort crate docs](https://docs.rs/ort) — ONNX Runtime Rust 绑定
+  - [candle-core crate docs](https://docs.rs/candle-core) — Hugging Face 纯 Rust ML 框架
+  - [burn crate on crates.io](https://crates.io/crates/burn) — Rust 深度学习框架
+  - [llama-cpp-rs crate on crates.io](https://crates.io/crates/llama-cpp-rs) — llama.cpp 的 Rust 绑定
 
 ---
 

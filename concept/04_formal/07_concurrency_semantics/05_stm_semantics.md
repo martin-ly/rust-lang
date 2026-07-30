@@ -31,7 +31,11 @@
 > [ScalaSTM 文档](https://nbronson.github.io/scala-stm/) ·
 > [Rust `stm` crate 文档](https://docs.rs/stm/latest/stm/) ·
 > [Rust 标准库 `std::sync` 文档](https://doc.rust-lang.org/std/sync/) ·
-> [The Rustonomicon — Races](https://doc.rust-lang.org/nomicon/races.html)
+> [The Rustonomicon — Races](https://doc.rust-lang.org/nomicon/races.html) ·
+> [ACM DL — Harris et al., *Composable Memory Transactions*, PPoPP 2005](https://dl.acm.org/doi/10.1145/1065944.1065952) ·
+> [Springer — Dice, Shalev & Shavit, *Transactional Locking II* (TL2), DISC 2006](https://link.springer.com/chapter/10.1007/11864219_14) ·
+> [RustBelt — Formal Foundations for the Rust Programming Language, MPI-SWS](https://plv.mpi-sws.org/rustbelt/) ·
+> [crates.io — `stm` crate](https://crates.io/crates/stm)
 >
 > ⚠️ **声明**: 本页呈现的是**形式语义骨架与教学级代码**，用于建立直觉而非机器验证的等价证明。Rust 语言与标准库**没有** STM；文中 `stm` crate 代码标注 `rust,ignore`（该 crate 非 workspace 依赖，仅示意 API 形态，以 [docs.rs/stm](https://docs.rs/stm/latest/stm/) 为准）；Haskell / Clojure / Scala / C++ 代码以各自语言 fence 给出，不参与 Rust 编译验证。
 

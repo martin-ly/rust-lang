@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [Rust Reference — Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics) · [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html)
+> **来源**: [Rust Reference — Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics) · [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) · [The Rustc Dev Guide — Trait Objects](https://rustc-dev-guide.rust-lang.org/backend/trait-objects.html) · [Rust Blog — Const Generics MVP Hits Beta](https://blog.rust-lang.org/2021/02/26/const-generics-mvp-launch.html)
 
 ---
 
@@ -59,6 +59,7 @@ mindmap
   - [五、判定树](#五判定树)
   - [六、反例与失效模式](#六反例与失效模式)
   - [七、相关概念](#七相关概念)
+  - [补充国际权威来源（P1/P2 覆盖）](#补充国际权威来源p1p2-覆盖)
 
 ---
 
@@ -239,4 +240,9 @@ flowchart TD
 
 ---
 
-> **权威来源**: [Rust Reference — Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics) · [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html)
+> **权威来源**: [Rust Reference — Const Generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics) · [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) · [The Rustc Dev Guide — Trait Objects](https://rustc-dev-guide.rust-lang.org/backend/trait-objects.html) · [Rust Blog — Const Generics MVP Hits Beta](https://blog.rust-lang.org/2021/02/26/const-generics-mvp-launch.html)
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [RustBelt project](https://plv.mpi-sws.org/rustbelt/)
+- [KRust: A Formal Executable Semantics of Rust](https://arxiv.org/abs/1804.10806)

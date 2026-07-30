@@ -448,6 +448,10 @@ async fn 返回 Future<Output = T>
 - [Koka Language Documentation](https://koka-lang.github.io/koka/doc/index.html)
 - [Eff Language](https://www.eff-lang.org/)
 - [Liquid Haskell](https://ucsd-progsys.github.io/liquidhaskell-blog/)
+- [arXiv cs.PL (Programming Languages)](https://arxiv.org/list/cs.PL/recent)
+- [Rust Compiler Development Guide](https://rustc-dev-guide.rust-lang.org/)
+- [Verus — Rust SMT Verifier](https://github.com/verus-lang/verus)
+- [Creusot — Rust Verification with Why3](https://github.com/creusot-rs/creusot)
 
 ### 8.3 相关概念链接
 

@@ -308,6 +308,10 @@ fn main() {}
 | [Winskel 1993 — The Formal Semantics of Programming Languages](https://www.cs.cmu.edu/~crary/819-f09/Winskel.pdf) | ✅ 一级 | 形式语义教材（CMU 课程 PDF） |
 | [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) | ✅ 一级 | 类型与编程语言（TAPL 主页） |
 | [Rust Reference — Unsafe blocks](https://doc.rust-lang.org/reference/unsafe-keyword.html#unsafe-blocks) | ✅ P0 | Rust unsafe 块语义 |
+| [Church-Turing 论题综述 (arxiv.org)](https://arxiv.org/abs/cs/0503082) | ✅ P1 | Church-Turing 论题非形式化综述 |
+| [Rustc Dev Guide — Const Evaluation](https://rustc-dev-guide.rust-lang.org/const-eval.html) | ✅ P2 | Rust 常量求值内部机制 |
+| [Aeneas — Characteristic Formulae for Rust Verification](https://aeneasverif.github.io/) | ✅ P1/P2 | Rust 程序形式化验证与语义提取 |
+| [Verus — Verified Rust for Low-Level Systems](https://github.com/verus-lang/verus) | ✅ P2 | Rust 系统级形式化验证生态 |
 
 ---
 

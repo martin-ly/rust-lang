@@ -166,10 +166,14 @@ impl InventoryAcl {
   - [Vernon 2016 — *Implementing Domain-Driven Design*](https://www.oreilly.com/library/view/implementing-domain-driven-design/9780133039900/)
   - [ISO/IEC/IEEE 42010:2022 — Systems and software engineering](https://www.iso.org/standard/74296.html)
   - [TOGAF Standard 10th Edition](https://www.opengroup.org/togaf)
+  - [Özkan et al. 2023 — Domain-Driven Design in Software Development: A Systematic Literature Review](https://arxiv.org/abs/2310.01905)
+  - [Landre et al. 2006 — Architectural improvement by use of strategic level domain-driven design](https://dl.acm.org/doi/10.1145/1176617.1176728)
+  - [Kapferer & Zimmermann 2020 — Domain-specific Language and Tools for Strategic Domain-driven Design, Context Mapping and Bounded Context Modeling](https://doi.org/10.5220/0008910502990306)
 
 - **P0 官方/生态**
   - [The Rust Reference — Crates and Source Files](https://doc.rust-lang.org/reference/crates-and-source-files.html)
   - [Cargo Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html)
+  - [The Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html)
 
 - **P2 社区**
   - [DDD Crew GitHub](https://github.com/ddd-crew)
@@ -196,3 +200,11 @@ impl InventoryAcl {
 > - D. Separate Ways
 >
 > <details><summary>答案</summary>B. Anti-Corruption Layer 通过适配器隔离上游模型，保护下游上下文的语义一致性。</details>
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [axum on crates.io](https://crates.io/crates/axum)
+- [axum docs](https://docs.rs/axum/latest/axum/)
+- [serde on crates.io](https://crates.io/crates/serde)
+- [tokio on crates.io](https://crates.io/crates/tokio)

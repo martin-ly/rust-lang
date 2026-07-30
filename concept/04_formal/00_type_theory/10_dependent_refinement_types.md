@@ -695,11 +695,11 @@ Dafny 的 `requires`/`ensures` 是契约，Dafny 编译器将其翻译成验证�
 
 ### 5.1 反例：运行时值不能进入 Rust 类型
 
-```rust,ignore
+```rust,compile_fail,E0435
 fn runtime_value_into_type() {
     let n = std::env::args().len();
     // ❌ 编译错误：n 不是 const，不能作为数组长度
-    // let arr: [i32; n] = [0; n];
+    let _arr: [i32; n] = [0; n];
 }
 ```
 
@@ -904,6 +904,10 @@ fn state_machine_demo() {
 - [Pierce 2002, *Types and Programming Languages*](https://www.cis.upenn.edu/~bcpierce/tapl/)
 - [Wikipedia — Dependent type](https://en.wikipedia.org/wiki/Dependent_type)
 - [Wikipedia — Refinement type](https://en.wikipedia.org/wiki/Refinement_type)
+- [Aeneas Documentation](https://aeneasverif.github.io/)
+- [Aeneas: Rust Verification by Functional Translation](https://arxiv.org/abs/2206.07185)
+- [Vazou et al. 2014 — Refinement Types for Haskell (DOI)](https://doi.org/10.1145/2628136.2628161)
+- [Verus: Verifying Rust Programs using Linear Ghost Types](https://arxiv.org/abs/2303.05491)
 
 ### Rust 生态形式化工具
 

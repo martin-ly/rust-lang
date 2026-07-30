@@ -51,6 +51,7 @@ Rust 投影层面，本目录把**类型系统**视为一种轻量级闭世界�
 | 02 | `02_description_logic_and_owl.md` | 描述逻辑（ALC、SHOIN、SROIQ）与 OWL 2 profiles | ✅ 已创建 |
 | 03 | `03_knowledge_graph_construction.md` | RDF/SPARQL/SHACL、知识图谱构建、实体解析、FAIR 原则 | ✅ 已创建 |
 | 04 | `04_semantic_interoperability.md` | Linked Data、schema.org、本体对齐、RDF-star | ✅ 已创建 |
+| 05 | `05_knowledge_graph_reasoning.md` | 知识图谱推理：本体推理、规则推理、Rust 投影 | ✅ 已创建 |
 
 ---
 

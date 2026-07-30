@@ -429,6 +429,10 @@ async fn main() {
 - Wadler, P. "Propositions as Sessions." *ICFP 2012*, 2012, 273–286. [DOI](https://doi.org/10.1145/2364527.2364568)
 - Plotkin, G. D., Pretnar, M. "Handlers of Algebraic Effects." *ESOP 2009*, LNCS 5502, 2009, 80–94. [DOI](https://doi.org/10.1007/978-3-642-00590-9_7)
 - Dolan, S., Eliopoulos, S., Hillerström, D., Madhavapeddy, A., Sivaramakrishnan, K. C., White, L. "Concurrent System Programming with Effect Handlers." *TFP 2017*, LNCS 10788, 2017, 98–117. [DOI](https://doi.org/10.1007/978-3-319-89719-6_6)
+- [ACM Digital Library — Hoare, "Communicating Sequential Processes" (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)（P1 学术）
+- [IEEE Xplore — Lee, "The Problem with Threads" (IEEE Computer 2006)](https://ieeexplore.ieee.org/document/1635491)（P1 学术）
+- [Springer — Honda, "Types for Dyadic Interaction" (CONCUR 1993)](https://link.springer.com/chapter/10.1007/3-540-57208-2_35)（P1 学术）
+- [crates.io — rayon](https://crates.io/crates/rayon) · [crates.io — tokio](https://crates.io/crates/tokio)（P2 生态）
 
 > **相关文件**: [同层：并发模型谱系](01_models_of_concurrency.md) · [同层：进程代数](../07_concurrency_semantics/01_process_calculi_for_rust.md) · [同层：Actor 语义](../07_concurrency_semantics/03_actor_semantics.md)
 >

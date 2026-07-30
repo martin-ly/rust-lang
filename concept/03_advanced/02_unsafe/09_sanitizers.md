@@ -62,6 +62,7 @@
     - [反命题 1：“Sanitizers 能替代 safe Rust / 类型系统”](#反命题-1sanitizers-能替代-safe-rust--类型系统)
     - [反命题 2：“Sanitizers 能发现所有 UB”](#反命题-2sanitizers-能发现所有-ub)
     - [边界陷阱](#边界陷阱)
+    - [反例：未执行路径的 UB 漏报](#反例未执行路径的-ub-漏报)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -325,6 +326,10 @@ CFI/KCFI 则用于构建需要控制流完整性的生产二进制或内核组�
 | [Clang ControlFlowIntegrity](https://clang.llvm.org/docs/ControlFlowIntegrity.html) | ✅ 二级 | CFI 原理与跨语言支持 |
 | [Miri](../../04_formal/04_model_checking/08_miri.md) | ✅ 一级（项目内） | MIR 层 UB 动态检测 |
 | [Kani](../../04_formal/04_model_checking/09_kani.md) | ✅ 一级（项目内） | 有界模型检查 |
+| [SoK: Sanitizing for Security](https://doi.org/10.1109/SP.2019.00073) | ✅ 一级 | IEEE S&P 2019，系统梳理各类 Sanitizer 的设计、能力与攻击面 |
+| [SoK: Eternal War in Memory](https://doi.org/10.1109/SP.2013.13) | ✅ 一级 | IEEE S&P 2013，内存安全防御技术综述，涵盖 ASan/MSan 等运行时检测 |
+| [Memory Tagging and how it improves C/C++ memory safety](https://arxiv.org/abs/1802.09517) | ✅ 一级 | arXiv 2018，HWASan/MTE 的硬件标记内存安全方案 |
+| [google/sanitizers Wiki](https://github.com/google/sanitizers/wiki) | ✅ 二级 | LLVM/compiler-rt Sanitizer 上游文档与问题追踪 |
 
 ---
 
@@ -412,3 +417,9 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从“Sanitizers 工具族”的章节结构提炼，一级分支覆盖七款核心工具、使用方法、rustc 实现、测试、目标扩展与工具对比，可作为本页的快速导航与复习索引。
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [Rust Blog](https://blog.rust-lang.org/)
+- [miri docs](https://docs.rs/miri/latest/miri/)

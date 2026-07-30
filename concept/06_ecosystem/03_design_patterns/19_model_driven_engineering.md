@@ -23,7 +23,11 @@
 > [Fowler, *Domain-Specific Languages*, Addison-Wesley 2010](https://martinfowler.com/books/dsl.html) ·
 > [Voelter et al., *DSL Engineering*, 2013](https://dslbook.org/) ·
 > [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html) ·
-> [Serde](https://serde.rs/)
+> [Serde](https://serde.rs/) ·
+> [arXiv — Model-Driven Engineering papers](https://arxiv.org/search/?query=%22model+driven+engineering%22+DSL&searchtype=all) ·
+> [Semantic Scholar — Model-Driven Engineering research](https://www.semanticscholar.org/search?q=model%20driven%20engineering&sort=relevance) ·
+> [GitHub — serde-rs/serde](https://github.com/serde-rs/serde) ·
+> [GitHub — rust-lang/rust proc-macro expansion](https://github.com/rust-lang/rust/tree/master/compiler/rustc_expand)
 
 ---
 
@@ -489,3 +493,10 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从 MDA 抽象、DSL 工程、变换语义和 Rust 投影四个维度梳理内容，可作为复习与导航索引。
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [serde on crates.io](https://crates.io/crates/serde)
+- [serde docs](https://docs.rs/serde/latest/serde/)
+- [Aeneas](https://github.com/AeneasVerif/aeneas)

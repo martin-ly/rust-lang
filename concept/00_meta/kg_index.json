@@ -315,7 +315,12 @@
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [],
       "postrequisites": [],
-      "theorems": [],
+      "theorems": [
+        "T-164",
+        "T-165",
+        "T-166",
+        "T-167"
+      ],
       "related_crates": []
     },
     {
@@ -412,6 +417,10 @@
         "T-161",
         "T-162",
         "T-163",
+        "T-164",
+        "T-165",
+        "T-166",
+        "T-167",
         "T-199",
         "T-200",
         "T-201",
@@ -5758,7 +5767,7 @@
       "path": "03_advanced/05_inline_assembly/01_inline_assembly.md",
       "title": "",
       "en": "Inline Assembly",
-      "summary": "Low-level inline assembly in Rust using `asm!` and `global_asm!`, covering syntax, constraints, platform-specific features, and safety boundaries.",
+      "summary": "Low-level inline assembly in Rust using `asm!`, `global_asm!`, and `naked_asm!`, covering syntax, constraints, `clobber_abi`, platform-specific features, and safety boundaries.",
       "bloom": "L4-L5",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [
@@ -6946,7 +6955,7 @@
       "path": "04_formal/01_ownership_logic/02_ownership_formal.md",
       "title": "",
       "en": "Ownership Formalization",
-      "summary": "Ownership. Guide to 03 Ownership Formal.",
+      "summary": "Formal models of Rust ownership: affine/linear types, fractional permissions, region-based lifetimes, and place-capability graphs.",
       "bloom": "L4",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [

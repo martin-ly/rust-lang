@@ -16,6 +16,8 @@
 > ⚠️ **声明**: 本页呈现的是**形式语义骨架与教学级代码**，用于建立协议类型直觉。Rust 标准库没有原生 session-type 检查；文中涉及的“协议编码”依赖所有权和线性使用约定，而非编译器自动验证协议状态机。
 
 > **权威来源 / Provenance**: Honda, K. (1993). *Types for Dyadic Interaction*. CONCUR 1993 / LNCS 715, 509–523. 该论文首次提出 session type，用线性类型刻画双向通信协议的状态演化；其多党异步扩展见 Honda, Yoshida & Carbone (2008). *Multiparty Asynchronous Session Types*. POPL 2008. 完整 session types 文献索引见 [Session Types Bibliography](http://groups.inf.ed.ac.uk/abcd/session-types-bibliography.html).
+>
+> 其他权威来源 / Additional authoritative links: [ACM — Honda, Yoshida & Carbone 2008](https://dl.acm.org/doi/10.1145/1328438.1328472) · [ACM — Wadler 2012](https://dl.acm.org/doi/10.1145/2103656.2103661) · [Springer — Honda 1993](https://link.springer.com/chapter/10.1007/3-540-58043-3_19) · [docs.rs — session_types](https://docs.rs/session_types/latest/session_types/)
 
 ---
 

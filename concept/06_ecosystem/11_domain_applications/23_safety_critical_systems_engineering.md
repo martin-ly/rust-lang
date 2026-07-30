@@ -394,6 +394,10 @@ Kani 是基于 CBMC 的模型检查器，适合验证边界明确的属性，如
 - **RTCA DO-333** — *Formal Methods Supplement to DO-178C and DO-278A*. RTCA, 2011.
 - **Ferrous Systems / Ferrocene** — [Ferrocene Language Specification](https://spec.ferrocene.dev/)
 - **Rust Foundation** — [Safety-Critical Rust Consortium](https://rustfoundation.org/safety-critical-rust-consortium/)
+- **Aeneas** — [Aeneas Project](https://aeneasverif.github.io/)
+- **Verus** — [Verus Repository](https://github.com/verus-lang/verus)
+- **Kani** — [Kani Model Checker](https://github.com/model-checking/kani)
+- **Prusti** — [Prusti Repository](https://github.com/viperproject/prusti)
 
 > **相关文件**: [安全关键 Rust 专题索引](21_safety_critical_topic_index.md) · [AUTOSAR 与 Rust](22_autosar_and_rust.md) · [Rust 嵌入式系统开发](../05_systems_and_embedded/03_embedded_systems.md) · [航空航天认证与形式化方法](../../04_formal/04_model_checking/03_aerospace_certification_formal_methods.md) · [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md)
 >
@@ -427,3 +431,9 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从概念、标准、资格鉴定、形式方法和边界五个维度组织内容，可作为复习与导航索引。
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [RustBelt project](https://plv.mpi-sws.org/rustbelt/)
+- [KRust: A Formal Executable Semantics of Rust](https://arxiv.org/abs/1804.10806)

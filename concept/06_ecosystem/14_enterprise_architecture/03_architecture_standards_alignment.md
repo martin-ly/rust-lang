@@ -14,7 +14,7 @@
 
 ---
 
-> **来源**: [ISO/IEC/IEEE 42010:2022](https://www.iso.org/standard/74296.html) · [IEEE 1471-2000](https://standards.ieee.org/standard/1471-2000.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [ISO/IEC/IEEE 12207:2017](https://www.iso.org/standard/63712.html) · [ISO/IEC/IEEE 15288:2023](https://www.iso.org/standard/63711.html) · [ISO/IEC 25010:2023](https://www.iso.org/standard/78175.html) · [SWEBOK v4](https://www.computer.org/education/bodies-of-knowledge/software-engineering)
+> **来源**: [ISO/IEC/IEEE 42010:2022](https://www.iso.org/standard/74296.html) · [IEEE 1471-2000](https://standards.ieee.org/standard/1471-2000.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [ISO/IEC/IEEE 12207:2017](https://www.iso.org/standard/63712.html) · [ISO/IEC/IEEE 15288:2023](https://www.iso.org/standard/63711.html) · [ISO/IEC 25010:2023](https://www.iso.org/standard/78175.html) · [SWEBOK v4](https://www.computer.org/education/bodies-of-knowledge/software-engineering) · [ISO/IEC/IEEE 42010:2022 (IEEE Xplore)](https://ieeexplore.ieee.org/document/9954109) · [The Rust Reference](https://doc.rust-lang.org/reference/) · [Rust Compiler Development Guide](https://rustc-dev-guide.rust-lang.org/)
 
 ---
 
@@ -340,3 +340,10 @@ mindmap
 ---
 
 > **来源**: [ISO/IEC/IEEE 42010:2022](https://www.iso.org/standard/74296.html) · [ISO/IEC/IEEE 12207:2017](https://www.iso.org/standard/63712.html) · [ISO/IEC/IEEE 15288:2023](https://www.iso.org/standard/63711.html) · [ISO/IEC 25010:2023](https://www.iso.org/standard/78175.html) · [SWEBOK v4](https://www.computer.org/education/bodies-of-knowledge/software-engineering)
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [axum on crates.io](https://crates.io/crates/axum)
+- [axum docs](https://docs.rs/axum/latest/axum/)
+- [serde on crates.io](https://crates.io/crates/serde)

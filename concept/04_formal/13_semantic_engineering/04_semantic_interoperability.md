@@ -24,6 +24,10 @@
 > - **Hitzler, Krötzsch & Rudolph (2009)** — *Foundations of Semantic Web Technologies*. CRC Press. [https://www.semantic-web-book.org/](https://www.semantic-web-book.org/)
 > - [W3C JSON-LD 1.1](https://www.w3.org/TR/json-ld11/)
 > - [W3C RDF-star and SPARQL-star](https://www.w3.org/2021/12/rdf-star.html)
+> - [Hogan et al. (2020) — *Knowledge Graphs* on arXiv](https://arxiv.org/abs/2003.02320)
+> - [Hogan et al. (2021) — *Knowledge Graphs* in ACM Computing Surveys](https://dl.acm.org/doi/10.1145/3447772)
+> - [Rust `json-ld` crate on crates.io](https://crates.io/crates/json-ld)
+> - [Rust `json-ld` crate documentation on docs.rs](https://docs.rs/json-ld/)
 
 ## 📑 目录
 

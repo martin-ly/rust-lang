@@ -22,8 +22,12 @@
 > · [Rust Forge — Release Versions](https://forge.rust-lang.org/)
 > · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 > · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> · [The Rust Programming Language Blog](https://blog.rust-lang.org/)
 > · [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
 > · [Rust Internals Forum](https://internals.rust-lang.org/)
+> · [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/)
+> · [docs.rs — Rust 文档托管](https://docs.rs/)
+> · [crates.io — Rust 包注册表](https://crates.io/)
 > · [releases.rs — nightly 1.100.0](https://releases.rs/)
 >
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
@@ -237,3 +241,8 @@ Cargo 将支持在依赖中标记 `public = true/false`，以区分「依赖类�
 **文档版本**: 1.0
 **最后更新**: 2026-07-23
 **状态**: 🧪 周期跟踪骨架
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [RustBelt project](https://plv.mpi-sws.org/rustbelt/)

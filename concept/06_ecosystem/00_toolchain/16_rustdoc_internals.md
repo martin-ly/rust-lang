@@ -19,7 +19,9 @@
 > [Rustc Dev Guide — Rustdoc Internals](https://rustc-dev-guide.rust-lang.org/rustdoc-internals.html) ·
 > [Rustdoc Book](https://doc.rust-lang.org/rustdoc/) ·
 > [RFC 1946 — Intra-rustdoc links](https://github.com/rust-lang/rfcs/pull/1946) ·
-> [RFC 2963 — Rustdoc JSON](https://rust-lang.github.io/rfcs/2963-rustdoc-json.html)
+> [RFC 2963 — Rustdoc JSON](https://rust-lang.github.io/rfcs/2963-rustdoc-json.html) ·
+> [rustdoc source tree — `src/librustdoc`](https://github.com/rust-lang/rust/tree/master/src/librustdoc) ·
+> [Askama crate docs](https://docs.rs/askama/)
 
 ---
 
@@ -66,6 +68,7 @@
     - [边界：跨 crate 文档与本地文档的差异](#边界跨-crate-文档与本地文档的差异)
     - [常见陷阱：`compile_fail` doctest 的 error code 漂移](#常见陷阱compile_fail-doctest-的-error-code-漂移)
     - [常见陷阱：CSS / JS 静态资源缓存](#常见陷阱css--js-静态资源缓存)
+    - [反例：intra-doc link 在 reexport 后失效](#反例intra-doc-link-在-reexport-后失效)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
   - [相关概念链接](#相关概念链接)
 
@@ -643,3 +646,9 @@ mindmap
 - [rustc Query System](../../04_formal/05_rustc_internals/01_rustc_query_system.md) — rustdoc 复用的查询基础设施
 - [Name Resolution and HIR](../../04_formal/05_rustc_internals/04_name_resolution_and_hir.md) — rustdoc 输入的编译器表示
 - [Compiler Internals](04_compiler_internals.md) — rustc 内部机制总览
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [RustBelt project](https://plv.mpi-sws.org/rustbelt/)
+- [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)

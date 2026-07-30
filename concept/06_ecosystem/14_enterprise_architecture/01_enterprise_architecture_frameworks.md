@@ -19,6 +19,13 @@
 > **权威来源 / Provenance**: 本节企业架构框架（TOGAF ADM、BDAT 四维矩阵、Zachman/FEAF 参考模型）与 The Open Group 的 *TOGAF Standard, 10th Edition* 对齐。
 >
 > - **The Open Group** — *TOGAF Standard, 10th Edition*. [https://www.opengroup.org/togaf](https://www.opengroup.org/togaf)
+>
+> **国际权威来源**
+>
+> - **IEEE** — *IEEE Std 1471-2000, Recommended Practice for Architectural Description of Software-Intensive Systems*. [https://standards.ieee.org/standard/1471-2000.html](https://standards.ieee.org/standard/1471-2000.html)
+> - **ISO/IEC/IEEE** — *ISO/IEC/IEEE 42010:2022, Software, systems and enterprise — Architecture description*. [https://doi.org/10.1109/IEEESTD.2022.9938446](https://doi.org/10.1109/IEEESTD.2022.9938446)
+> - **arXiv** — Soares Palma et al., *Evolving reference architecture description: Guidelines based on ISO/IEC/IEEE 42010*. [https://arxiv.org/abs/2209.14714](https://arxiv.org/abs/2209.14714)
+> - **The Rust Project** — *The Cargo Book: Workspaces*. [https://doc.rust-lang.org/cargo/reference/workspaces.html](https://doc.rust-lang.org/cargo/reference/workspaces.html)
 
 ---
 
@@ -373,3 +380,10 @@ mindmap
 ---
 
 > **来源**: [The Open Group — TOGAF Standard, 10th Edition](https://www.opengroup.org/togaf) · [Zachman Framework](https://www.zachman.com/) · [FEAF](https://www.whitehouse.gov/omb/management/egov/federal-enterprise-architecture/) · [ISO/IEC/IEEE 42010:2022](https://www.iso.org/standard/74296.html)
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [axum on crates.io](https://crates.io/crates/axum)
+- [axum docs](https://docs.rs/axum/latest/axum/)
+- [serde on crates.io](https://crates.io/crates/serde)

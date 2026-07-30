@@ -17,6 +17,10 @@
 > **来源**: [The Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html) ·
 > [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
 > [RustBelt](https://plv.mpi-sws.org/rustbelt/) ·
+> [RustBelt (arXiv)](https://arxiv.org/abs/1705.05376) ·
+> [Aeneas](https://aeneasverif.github.io/) ·
+> [Creusot (GitHub)](https://github.com/creusot-rs/creusot) ·
+> [Rust Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) ·
 > [Miri](https://github.com/rust-lang/miri) ·
 > [Kani](https://model-checking.github.io/kani/) ·
 > [Astrauskas et al. 2019 — Prusti](https://doi.org/10.1145/3360573) ·

@@ -32,6 +32,9 @@
 > - **Luckham et al. (1995)** — *Specification and Analysis of System Architecture Using Rapide*. IEEE Transactions on Software Engineering, 21(4), 336–355. [https://doi.org/10.1109/32.385970](https://doi.org/10.1109/32.385970)
 > - **Rust Reference — Items and Visibility** — [https://doc.rust-lang.org/reference/visibility-and-privacy.html](https://doc.rust-lang.org/reference/visibility-and-privacy.html)
 > - **Rust Reference — Orphan Rules** — [https://doc.rust-lang.org/reference/items/traits.html#orphan-rules](https://doc.rust-lang.org/reference/items/traits.html#orphan-rules)
+> - **Rust Design Patterns** — [https://rust-lang.github.io/patterns/](https://rust-lang.github.io/patterns/)
+> - **docs.rs — cargo-depgraph** — [https://docs.rs/cargo-depgraph](https://docs.rs/cargo-depgraph)
+> - **docs.rs — cargo-modules** — [https://docs.rs/cargo-modules](https://docs.rs/cargo-modules)
 
 ---
 
@@ -667,3 +670,9 @@ mindmap
 > **文档版本**: 1.0
 > **最后更新**: 2026-07-28
 > **状态**: ✅ 新建
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [RustBelt project](https://plv.mpi-sws.org/rustbelt/)
+- [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)

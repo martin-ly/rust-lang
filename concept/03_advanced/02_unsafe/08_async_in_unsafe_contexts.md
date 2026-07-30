@@ -18,12 +18,16 @@
 
 ---
 
-> **来源**:
+> **来源 / Provenance**:
 > [Rust Reference — Async Blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks) ·
 > [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-keyword.html) ·
 > [RFC 2349 — Pin](https://rust-lang.github.io/rfcs/2349-pin.html) ·
 > [RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html) ·
-> [Rust Async Book — Executing Futures](https://rust-lang.github.io/async-book/02_execution/02_future.html)
+> [Rust Async Book — Executing Futures](https://rust-lang.github.io/async-book/02_execution/02_future.html) ·
+> [RustBelt — formal foundations of Rust unsafe](https://plv.mpi-sws.org/rustbelt/) ·
+> [rustc-dev-guide — async/await lowering](https://rustc-dev-guide.rust-lang.org/async-await.html) ·
+> [The Rustonomicon — Unsafe Rust](https://doc.rust-lang.org/nomicon/) ·
+> [pin-project crate](https://crates.io/crates/pin-project)
 
 ---
 

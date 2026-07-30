@@ -20,7 +20,10 @@
 > [async-book — Execution Model](https://rust-lang.github.io/async-book/01_getting_started/02_why_async.html) ·
 > [Harel — Statecharts: A Visual Formalism for Complex Systems (1987)](https://www.sciencedirect.com/science/article/pii/0167642387900359) ·
 > [van der Aalst — Process Mining](https://www.springer.com/gp/book/9783662498507) ·
-> [Petri Nets](https://www.informatik.uni-hamburg.de/TGI/PetriNets/)
+> [Petri Nets](https://www.informatik.uni-hamburg.de/TGI/PetriNets/) ·
+> [Rust Blog — Async-await on stable Rust](https://blog.rust-lang.org/2019/11/07/Async-await-stable/) ·
+> [docs.rs — futures crate](https://docs.rs/futures/latest/futures/) ·
+> [RustBelt — formal foundations of Rust](https://plv.mpi-sws.org/rustbelt/)
 > **权威来源**: 本页为 Rust async 状态机语义与通用状态机模型的 L3-L4 权威页；BPMN / Petri 网 / π 演算 / 时态逻辑等完整形式化内容统一维护在 L6 [`17_workflow_theory.md`](../../06_ecosystem/03_design_patterns/17_workflow_theory.md)。
 
 ---

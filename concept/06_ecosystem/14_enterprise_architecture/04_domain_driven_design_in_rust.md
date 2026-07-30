@@ -323,6 +323,12 @@ pub struct Order {
 - **P2 社区**
   - [DDD Crew GitHub](https://github.com/ddd-crew)
   - [Rust Internals — Domain Modeling](https://internals.rust-lang.org/)
+  - [ddd — crates.io](https://crates.io/crates/ddd)
+  - [ddd — docs.rs](https://docs.rs/ddd)
+
+- **P1 学术/方法学（扩展）**
+  - [Patterns on Deriving APIs and their Endpoints from Domain Models](https://dl.acm.org/doi/fullHtml/10.1145/3489449.3489976) — ACM, 2021（基于战略/战术 DDD 模式进行 API 端点推导）
+  - [Domain-Driven Design for Microservices Architecture Systems Development: A Systematic Mapping Study](https://ieeexplore.ieee.org/document/10568262/) — IEEE, 2023
 
 ---
 

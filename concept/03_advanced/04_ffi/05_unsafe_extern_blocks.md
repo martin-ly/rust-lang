@@ -27,11 +27,15 @@
 
 ---
 
-> **来源**:
+> **权威来源 / Provenance**:
 > [Rust Reference — External Blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) ·
 > [Rust Edition Guide 2024 — unsafe extern blocks](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-extern.html) ·
 > [RFC 3484 — unsafe extern blocks](https://rust-lang.github.io/rfcs/3484-unsafe-extern-blocks.html) ·
-> [The Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html)
+> [The Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) ·
+> [Rust Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) ·
+> [bindgen docs](https://docs.rs/bindgen/latest/bindgen/) ·
+> [RustBelt: Securing the Foundations of the Rust Programming Language (ACM)](https://dl.acm.org/doi/10.1145/3158154) ·
+> [Stacked Borrows: An Aliasing Model for Rust (ACM)](https://dl.acm.org/doi/10.1145/3371109)
 
 ---
 

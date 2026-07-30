@@ -27,7 +27,11 @@
 > [Rust Project Goals 2025H1 — const traits](https://rust-lang.github.io/rust-project-goals/2025h1/const-trait.html) ·
 > [Leijen 2014 — Koka: Programming with Row Polymorphic Effect Types](https://doi.org/10.1145/263344.263363) ·
 > [Leijen 2017 — Structured Asynchrony with Algebraic Effects](https://doi.org/10.1145/3009837.3009897) ·
-> [Pretnar 2015 — An Introduction to Algebraic Effects and Handlers](https://www.eff-lang.org/handlers-tutorial.pdf)
+> [Pretnar 2015 — An Introduction to Algebraic Effects and Handlers](https://www.eff-lang.org/handlers-tutorial.pdf) ·
+> [Bauer 2018 — What is algebraic about algebraic effects and handlers?](https://arxiv.org/abs/1807.05923) ·
+> [Leijen 2017 — Structured Asynchrony with Algebraic Effects (ACM)](https://dl.acm.org/doi/10.1145/3009837.3009897) ·
+> [Async/Await Stabilization in Rust 1.39](https://blog.rust-lang.org/2019/11/07/Async-await-stable.html) ·
+> [Rust Reference — Async Functions](https://doc.rust-lang.org/reference/items/functions.html#async-functions)
 >
 > ⚠️ **声明**: 本页呈现的是**形式语义骨架与教学级代码**，用于建立直觉而非机器验证的等价证明。Rust 目前没有原生的用户定义代数效应处理器；文中涉及 Rust 统一 effect 关键字的语法均为 **探索性/不稳定提案**，不代表已稳定的语言特性。
 
@@ -661,6 +665,13 @@ Eff 的 handler 默认**多次续延**（multi-shot），因此可以自然实�
 | 可以组合多个独立效果 | `async` + `Result` 需要手动嵌套类型 |
 
 `async` 是**单一效果**（异步挂起）的语法糖，不是通用 handler 机制。把它误认为通用 effect handler 会导致错误的设计假设，例如试图用 async 块实现用户级状态、日志或事务效果。
+
+```rust,compile_fail,E0728
+// Rust 没有通用 perform/resume；.await 只能出现在 async 上下文中
+fn main() {
+    let _ = std::future::ready(42).await; // error[E0728]
+}
+```
 
 ---
 

@@ -876,6 +876,9 @@ Felleisen 框架认为，只有无法通过局部宏表达的构造才提升表�
 | [nom documentation](https://docs.rs/nom) | ✅ 二级 | Rust parser combinator 框架 |
 | [pest.rs](https://pest.rs/) | ✅ 二级 | Rust PEG 解析器 |
 | [LALRPOP book](https://lalrpop.github.io/lalrpop/) | ✅ 二级 | Rust LR 解析器生成器 |
+| [Weiss, Patterson & Ahmed 2018 — Rust Distilled: An Expressive Tower of Languages](https://arxiv.org/abs/1806.02693) | ✅ 一级 | Rust 的形式化语义塔与表达力分层 |
+| [Jung et al. 2018 — RustBelt: Securing the Foundations of the Rust Programming Language](https://plv.mpi-sws.org/rustbelt/popl18/) | ✅ 一级 | Rust 不安全代码的机器检测安全证明（Iris 分离逻辑） |
+| [Aeneas — Rust Verification Toolchain](https://github.com/AeneasVerif/aeneas) | ✅ 二级 | 将 Rust 翻译为纯函数式表示以进行等价性/正确性证明 |
 
 ---
 

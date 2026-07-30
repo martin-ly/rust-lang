@@ -36,6 +36,10 @@
 > - **ISO 26262** — *Road vehicles — Functional safety*. ISO, 2018. [https://www.iso.org/standard/68383.html](https://www.iso.org/standard/68383.html)
 > - **IEC 61508** — *Functional safety of electrical/electronic/programmable electronic safety-related systems*. IEC, 2010. [https://webstore.iec.ch/publication/66912](https://webstore.iec.ch/publication/66912)
 > - **Ferrocene** — *Ferrocene Language Specification* / TÜV SÜD qualification. [https://spec.ferrocene.dev/](https://spec.ferrocene.dev/)
+> - **ISO/IEC/IEEE 15288:2023 (DOI)** — *Systems and Software Engineering — System Life Cycle Processes*. [https://doi.org/10.1109/IEEESTD.2023.10123367](https://doi.org/10.1109/IEEESTD.2023.10123367)
+> - **Verus** — *Verifying Rust Programs using Linear Ghost Types* (OOPSLA 2023). [https://doi.org/10.1145/3586037](https://doi.org/10.1145/3586037)
+> - **Creusot** — Deductive verification for Rust. [https://github.com/creusot-rs/creusot](https://github.com/creusot-rs/creusot)
+> - **Aeneas** — Rust verification framework. [https://aeneasverif.github.io](https://aeneasverif.github.io)
 
 ---
 

@@ -157,7 +157,7 @@ trees:
     source:
       file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
       anchor: "#33-类型不匹配判定树"
-    covered_concepts: [ex:Traits, ex:Generics, ex:ErrorHandling, ex:AsyncAdvanced]
+    covered_concepts: [ex:Traits, ex:Generics, ex:ErrorHandlingBasics, ex:AsyncAdvanced]
     rustc_error_codes: [E0277, E0283, E0308, E0282, E0061]
     nodes:
       - id: T
@@ -222,7 +222,7 @@ trees:
     source:
       file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
       anchor: "#34-运行时-panic-判定树"
-    covered_concepts: [ex:Panic, ex:ErrorHandling, ex:Concurrency, ex:ForeignFunctionInterfaceFFI, ex:UnsafeRust]
+    covered_concepts: [ex:Panic, ex:ErrorHandlingBasics, ex:ConcurrencyModels, ex:RustFFI, ex:SafeAndEffectiveUnsafeRust]
     nodes:
       - {id: P, type: condition, label: "症状：运行时 panic（unwrap panic / index out of bounds / deadlock）"}
       - id: Q1
@@ -283,7 +283,7 @@ trees:
     source:
       file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
       anchor: "#35-unsafe-判定树"
-    covered_concepts: [ex:UnsafeRust, ex:MiriRustUndefinedBehaviorDetector, ex:KaniRustBoundedModelChecker]
+    covered_concepts: [ex:SafeAndEffectiveUnsafeRust, ex:MiriRustUndefinedBehaviorDetector, ex:KaniRustBoundedModelChecker]
     nodes:
       - {id: U, type: condition, label: "症状：unsafe 相关问题（UB / Miri 报错 / soundness 质疑）"}
       - id: Q1
@@ -333,7 +333,7 @@ trees:
     source:
       file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
       anchor: "#n-闭环总图问题--判定--推理--决策--验证--回边"
-    covered_concepts: [ex:Borrowing, ex:Lifetimes, ex:Concurrency, ex:UnsafeRust]
+    covered_concepts: [ex:Borrowing, ex:Lifetimes, ex:ConcurrencyModels, ex:SafeAndEffectiveUnsafeRust]
     nodes:
       - {id: K0, type: condition, label: "闭环入口：症状 J-*"}
       - id: K1
@@ -447,7 +447,7 @@ trees:
     source:
       file: concept/00_meta/00_framework/concept_definition_decision_forest.md
       anchor: "#三借用判定树"
-    covered_concepts: [ex:Borrowing, ex:InteriorMutability, ex:UnsafeRust]
+    covered_concepts: [ex:Borrowing, ex:InteriorMutability, ex:SafeAndEffectiveUnsafeRust]
     rustc_error_codes: [E0499, E0501, E0502, E0597]
     nodes:
       - {id: D, type: condition, label: "概念定义：借用是通过引用（&T / &mut T）临时访问值，不转移所有权"}
@@ -698,7 +698,7 @@ trees:
     source:
       file: concept/00_meta/00_framework/concept_definition_decision_forest.md
       anchor: "#七并发判定树"
-    covered_concepts: [ex:Concurrency, ex:Ownership, ex:Borrowing]
+    covered_concepts: [ex:ConcurrencyModels, ex:Ownership, ex:Borrowing]
     rustc_error_codes: [E0277]
     nodes:
       - {id: D, type: condition, label: "概念定义：Rust 通过类型系统（Send/Sync）在编译期排除数据竞争"}
@@ -834,7 +834,7 @@ trees:
     source:
       file: concept/00_meta/00_framework/concept_definition_decision_forest.md
       anchor: "#九unsafe-判定树"
-    covered_concepts: [ex:UnsafeRust, ex:ForeignFunctionInterfaceFFI, ex:MiriRustUndefinedBehaviorDetector, ex:KaniRustBoundedModelChecker]
+    covered_concepts: [ex:SafeAndEffectiveUnsafeRust, ex:RustFFI, ex:MiriRustUndefinedBehaviorDetector, ex:KaniRustBoundedModelChecker]
     nodes:
       - {id: D, type: condition, label: "概念定义：unsafe 是安全边界逃逸舱口，标记程序员手动维护的不变式"}
       - {id: P1, type: condition, label: "前提 P1：unsafe 块内可执行 5 类 unsafe 操作"}
@@ -897,7 +897,7 @@ trees:
     source:
       file: concept/00_meta/00_framework/concept_definition_decision_forest.md
       anchor: "#十判定森林交叉一致性"
-    covered_concepts: [ex:Ownership, ex:Borrowing, ex:Lifetimes, ex:Traits, ex:Generics, ex:Concurrency, ex:AsyncProgramming, ex:UnsafeRust]
+    covered_concepts: [ex:Ownership, ex:Borrowing, ex:Lifetimes, ex:Traits, ex:Generics, ex:ConcurrencyModels, ex:AsyncProgramming, ex:SafeAndEffectiveUnsafeRust]
     nodes:
       - {id: O, type: conclusion, label: "所有权判定树（DF-OWN-01）"}
       - {id: B, type: conclusion, label: "借用判定树（DF-BORROW-02）"}
@@ -929,7 +929,7 @@ trees:
     source:
       file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
       anchor: "#71-名称解析判定树"
-    covered_concepts: [ex:Modules, ex:NamesScopesAndResolution]
+    covered_concepts: [ex:ModulesAndPaths, ex:NamesScopesAndResolution]
     rustc_error_codes: [E0433, E0425, E0412]
     nodes:
       - id: D
@@ -983,7 +983,7 @@ trees:
     source:
       file: concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md
       anchor: "#72-字段访问判定树"
-    covered_concepts: [ex:Structs, ex:TypeSystem]
+    covered_concepts: [ex:Structs, ex:TypeSystemBasics]
     rustc_error_codes: [E0609, E0023, E0026, E0027, E0063, E0531]
     nodes:
       - id: D
@@ -1041,7 +1041,7 @@ trees:
     source:
       file: concept/00_meta/knowledge_topology/11_semantic_model_atlas.md
       anchor: "#语言选择决策树"
-    covered_concepts: [ex:ProgrammingLanguageFoundations, ex:ComprehensiveRustMapping, ex:TypeSystem, ex:MemoryManagement, ex:EffectsAndPurity, ex:FormalMethods]
+    covered_concepts: [ex:ProgrammingLanguageFoundations, ex:ComprehensiveRustMapping, ex:TypeSystemBasics, ex:MemoryManagement, ex:EffectsAndPurity, ex:FormalMethodsLayerOverview]
     nodes:
       - id: DF-LANG-01-ENTRY
         type: condition
@@ -1130,7 +1130,7 @@ trees:
     source:
       file: concept/00_meta/knowledge_topology/11_semantic_model_atlas.md
       anchor: "#并发分布式模型选择决策树"
-    covered_concepts: [ex:Concurrency, ex:AsyncProgramming, ex:ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, ex:ConcurrencySemanticsFormalModelsOfConcurrentComputation, ex:ParallelDistributedPatternSpectrum, ex:UnsafeRust]
+    covered_concepts: [ex:ConcurrencyModels, ex:AsyncProgramming, ex:ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, ex:ConcurrencySemanticsFormalModelsOfConcurrentComputation, ex:ParallelDistributedPatternSpectrum, ex:SafeAndEffectiveUnsafeRust]
     nodes:
       - id: DF-CONC-DIST-01-ENTRY
         type: condition
@@ -1241,7 +1241,7 @@ trees:
         ex:FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems,
         ex:ZeroCostAbstractions,
         ex:MemoryManagement,
-        ex:UnsafeRust,
+        ex:SafeAndEffectiveUnsafeRust,
       ]
     nodes:
       - id: LANG-B
@@ -1329,7 +1329,7 @@ trees:
       anchor: "#并发分布式模型选择决策树-j-conc-01"
     covered_concepts:
       [
-        ex:Concurrency,
+        ex:ConcurrencyModels,
         ex:AsyncProgramming,
         ex:DistributedSystems,
         ex:DistributedConsensus,
@@ -1338,7 +1338,7 @@ trees:
         ex:SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts,
         ex:ParallelDistributedPatternSpectrum,
         ex:ProcessCalculiForRustCSPCCSAndThePiCalculus,
-        ex:UnsafeRust,
+        ex:SafeAndEffectiveUnsafeRust,
       ]
     nodes:
       - id: CONC-B

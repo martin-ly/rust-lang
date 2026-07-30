@@ -74,6 +74,8 @@ mindmap
     - [4.2 常见错误](#42-常见错误)
   - [五、Stable 替代方案](#五stable-替代方案)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
+    - [国际权威来源](#国际权威来源)
+  - [补充国际权威来源（P1/P2 覆盖）](#补充国际权威来源p1p2-覆盖)
 
 ---
 
@@ -365,3 +367,14 @@ fn main() {
 - [RFC 19 — Opt-in builtin traits](https://rust-lang.github.io/rfcs/0019-opt-in-builtin-traits.html)
 - [Send 与 Sync 权威页](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md)
 - [Pin 与 Unpin 权威页](../../03_advanced/01_async/08_pin_unpin.md)
+
+### 国际权威来源
+
+- [RustBelt project](https://plv.mpi-sws.org/rustbelt/) — MPI-SWS 对 Rust 类型系统与库安全性的形式化研究项目（plv.mpi-sws.org）
+- [RustBelt: Securing the Foundations of the Rust Programming Language](https://dl.acm.org/doi/10.1145/3158154) — POPL 2018，Rust 语义与类型系统形式化奠基论文（dl.acm.org）
+- [Rust Compiler Development Guide — Trait Resolution](https://rustc-dev-guide.rust-lang.org/traits/resolution.html) — rustc 编译器 trait 求解机制官方文档（rustc-dev-guide.rust-lang.org）
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [Verus](https://github.com/verus-lang/verus)
+- [Creusot](https://github.com/creusot-rs/creusot)

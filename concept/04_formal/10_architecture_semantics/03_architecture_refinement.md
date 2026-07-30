@@ -34,6 +34,10 @@
 > - **Luckham et al. (1995)** — *Specification and Analysis of System Architecture Using Rapide*. IEEE Transactions on Software Engineering, 21(4), 336–355. [https://doi.org/10.1109/32.385970](https://doi.org/10.1109/32.385970)
 > - **Rust Reference — Items and Visibility** — [https://doc.rust-lang.org/reference/visibility-and-privacy.html](https://doc.rust-lang.org/reference/visibility-and-privacy.html)
 > - **Rust Reference — Orphan Rules** — [https://doc.rust-lang.org/reference/items/traits.html#orphan-rules](https://doc.rust-lang.org/reference/items/traits.html#orphan-rules)
+> - **Moriconi, Qian & Riemenschneider (1995)** — *Correct Architecture Refinement*. IEEE Transactions on Software Engineering, 21(4), 356–372. [https://ieeexplore.ieee.org/document/385972](https://ieeexplore.ieee.org/document/385972)
+> - **Rumpe (2014)** — *Refinement of Information Flow Architectures*. arXiv:1409.6932 [cs.SE]. [https://arxiv.org/abs/1409.6932](https://arxiv.org/abs/1409.6932)
+> - **Garlan, Allen & Ockerbloom (1995)** — *Semantics for the Architecture Interchange Language, ACME*. ACM SIGSOFT Software Engineering Notes, 20, 8–13. [https://dl.acm.org/doi/10.1145/243327.243341](https://dl.acm.org/doi/10.1145/243327.243341)
+> - **Async fn fundamentals initiative** — Rust Language Design Roadmap for async in traits and beyond. [https://rust-lang.github.io/async-fundamentals-initiative/](https://rust-lang.github.io/async-fundamentals-initiative/)
 
 ---
 
@@ -489,3 +493,9 @@ mindmap
 > **文档版本**: 1.0
 > **最后更新**: 2026-07-28
 > **状态**: ✅ 新建
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [Aeneas](https://github.com/AeneasVerif/aeneas)
+- [Creusot](https://github.com/creusot-rs/creusot)

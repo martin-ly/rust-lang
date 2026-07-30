@@ -403,6 +403,10 @@ fn main() {
 - [std::sync::mpsc — Rust 标准库文档](https://doc.rust-lang.org/std/sync/mpsc/) —— Rust 通道语义与故障契约的官方来源
 - [Rust Reference — async blocks and closures](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks) —— `async/await` 状态机转换的语言级说明
 - [tokio::select! tutorial](https://tokio.rs/tokio/tutorial/select) —— `select!` 的工程用法（非官方 Rust，但为 tokio 生态权威文档）
+- [RustBelt: securing the foundations of the Rust programming language](https://plv.mpi-sws.org/rustbelt/) —— MPI-SWS 对 Rust 所有权与并发原语的形式化基础
+- [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) —— Rust 官方异步编程书的权威参考
+- [docs.rs: tokio::select!](https://docs.rs/tokio/latest/tokio/macro.select.html) —— tokio `select!` 宏的 API 文档与行为契约
+- [Async await is stable](https://blog.rust-lang.org/2019/11/07/Async-await-stable.html) —— Rust 官方博客宣布 `async/await` 稳定的语言级说明
 
 > **相关文件**: [同层：Models of Concurrency](01_models_of_concurrency.md) · [同层 07：Process Calculi](../07_concurrency_semantics/01_process_calculi_for_rust.md) · [同层 07：Actor Semantics](../07_concurrency_semantics/03_actor_semantics.md) · [同层 08：Algorithm Equivalence](../08_algorithm_semantics/05_algorithm_equivalence.md)
 >

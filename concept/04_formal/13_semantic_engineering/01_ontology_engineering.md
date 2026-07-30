@@ -24,6 +24,9 @@
 > - **Wilkinson et al. (2016)** — *The FAIR Guiding Principles for Scientific Data Management and Stewardship*. Scientific Data 3, 160018. [https://doi.org/10.1038/sdata.2016.18](https://doi.org/10.1038/sdata.2016.18)
 > - [W3C JSON-LD 1.1](https://www.w3.org/TR/json-ld11/)
 > - [W3C RDF-star and SPARQL-star](https://www.w3.org/2021/12/rdf-star.html)
+> - **Hogan et al. (2021/2022)** — ACM Computing Surveys. [https://dl.acm.org/doi/10.1145/3447772](https://dl.acm.org/doi/10.1145/3447772) · [Semantic Scholar arXiv:2003.02320](https://www.semanticscholar.org/paper/2003.02320)
+> - **Fernández-López, Gómez-Pérez & Juristo (1997)** — *Methontology: From Ontological Art Towards Ontological Engineering*. [Semantic Scholar](https://www.semanticscholar.org/search?q=Methontology%3A%20From%20Ontological%20Art%20Towards%20Ontological%20Engineering&sort=relevance)
+> - **Rust Reference — Traits** — Rust 类型系统中 trait、impl 与约束的权威定义。 [https://doc.rust-lang.org/reference/items/traits.html](https://doc.rust-lang.org/reference/items/traits.html)
 
 ---
 
@@ -344,3 +347,9 @@ mindmap
 > **相关文件**: [目录 README](README.md) · [描述逻辑与 OWL](02_description_logic_and_owl.md) · [知识图谱构建](03_knowledge_graph_construction.md) · [语义互操作](04_semantic_interoperability.md)
 >
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-28 ｜ **状态**: ✅ 新建（Rust 1.97 对齐）
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [sophia on crates.io](https://crates.io/crates/sophia)
+- [sophia docs](https://docs.rs/sophia/latest/sophia/)

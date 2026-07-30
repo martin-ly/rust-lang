@@ -3,16 +3,16 @@
   "scanned": 574,
   "coverage": {
     "P0": [
-      567,
-      98.8
+      568,
+      99.0
     ],
     "P1": [
-      495,
-      86.2
+      537,
+      93.6
     ],
     "P2": [
-      455,
-      79.3
+      501,
+      87.3
     ],
     "any": [
       574,
@@ -23,113 +23,23 @@
   "content_scope": {
     "scanned": 483,
     "P0": [
-      481,
-      99.6
+      482,
+      99.8
     ],
     "P1": [
-      441,
-      91.3
+      483,
+      100.0
     ],
     "P2": [
-      437,
-      90.5
+      483,
+      100.0
     ],
     "any": [
       483,
       100.0
     ],
-    "gaps_p1": [
-      "concept/01_foundation/04_control_flow/03_let_chains.md",
-      "concept/01_foundation/04_control_flow/05_let_else.md",
-      "concept/02_intermediate/00_traits/08_negative_impls.md",
-      "concept/02_intermediate/00_traits/09_associated_type_defaults.md",
-      "concept/02_intermediate/01_generics/05_const_generics_and_trait_objects.md",
-      "concept/03_advanced/00_concurrency/04_send_sync_boundaries.md",
-      "concept/03_advanced/01_async/16_structured_concurrency.md",
-      "concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md",
-      "concept/03_advanced/02_unsafe/09_sanitizers.md",
-      "concept/03_advanced/04_ffi/04_async_ffi_boundary.md",
-      "concept/03_advanced/04_ffi/05_unsafe_extern_blocks.md",
-      "concept/04_formal/00_type_theory/10_dependent_refinement_types.md",
-      "concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md",
-      "concept/04_formal/07_concurrency_semantics/05_stm_semantics.md",
-      "concept/04_formal/07_concurrency_semantics/07_session_types.md",
-      "concept/04_formal/08_algorithm_semantics/03_iterator_correctness.md",
-      "concept/04_formal/09_system_semantics/02_pi_calculus_for_rust.md",
-      "concept/04_formal/09_system_semantics/03_component_based_semantics.md",
-      "concept/04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md",
-      "concept/04_formal/10_architecture_semantics/03_architecture_refinement.md",
-      "concept/04_formal/10_architecture_semantics/04_rust_architecture_constraints.md",
-      "concept/04_formal/11_computational_models/03_formal_languages_and_automata.md",
-      "concept/04_formal/11_computational_models/05_equivalence_of_computational_models.md",
-      "concept/04_formal/12_concurrency_models/03_parallel_concurrent_async_distributed_semantics.md",
-      "concept/04_formal/13_semantic_engineering/01_ontology_engineering.md",
-      "concept/04_formal/13_semantic_engineering/04_semantic_interoperability.md",
-      "concept/04_formal/13_semantic_engineering/05_knowledge_graph_reasoning.md",
-      "concept/05_comparative/01_systems_languages/07_rust_vs_ada_spark.md",
-      "concept/05_comparative/01_systems_languages/08_rust_vs_d.md",
-      "concept/05_comparative/01_systems_languages/09_rust_vs_nim.md",
-      "concept/06_ecosystem/00_toolchain/16_rustdoc_internals.md",
-      "concept/06_ecosystem/03_design_patterns/19_model_driven_engineering.md",
-      "concept/06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md",
-      "concept/06_ecosystem/11_domain_applications/23_safety_critical_systems_engineering.md",
-      "concept/06_ecosystem/14_enterprise_architecture/04_domain_driven_design_in_rust.md",
-      "concept/06_ecosystem/14_enterprise_architecture/05_strategic_domain_driven_design_in_rust.md",
-      "concept/07_future/00_version_tracking/rust_1_100_preview.md",
-      "concept/07_future/00_version_tracking/rust_1_97_1.md",
-      "concept/07_future/00_version_tracking/rust_1_98_stabilized.md",
-      "concept/07_future/00_version_tracking/rust_1_99_preview.md",
-      "concept/07_future/02_preview_features/39_async_ioring_preview.md",
-      "concept/07_future/04_research_and_experimental/09_mlops_and_llmops.md"
-    ],
-    "gaps_p2": [
-      "concept/02_intermediate/00_traits/08_negative_impls.md",
-      "concept/02_intermediate/00_traits/09_associated_type_defaults.md",
-      "concept/02_intermediate/01_generics/05_const_generics_and_trait_objects.md",
-      "concept/03_advanced/00_concurrency/04_send_sync_boundaries.md",
-      "concept/03_advanced/01_async/15_state_machine_semantics.md",
-      "concept/03_advanced/01_async/16_structured_concurrency.md",
-      "concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md",
-      "concept/03_advanced/02_unsafe/09_sanitizers.md",
-      "concept/03_advanced/04_ffi/05_unsafe_extern_blocks.md",
-      "concept/04_formal/00_type_theory/14_flux.md",
-      "concept/04_formal/00_type_theory/15_parametricity_and_theorems_for_free.md",
-      "concept/04_formal/03_operational_semantics/06_observational_equivalence.md",
-      "concept/04_formal/07_concurrency_semantics/04_algebraic_effects.md",
-      "concept/04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md",
-      "concept/04_formal/08_algorithm_semantics/03_iterator_correctness.md",
-      "concept/04_formal/08_algorithm_semantics/04_unsafe_algorithm_invariants.md",
-      "concept/04_formal/08_algorithm_semantics/05_algorithm_equivalence.md",
-      "concept/04_formal/09_system_semantics/01_actor_model_semantics.md",
-      "concept/04_formal/09_system_semantics/02_pi_calculus_for_rust.md",
-      "concept/04_formal/09_system_semantics/06_systems_engineering_standards.md",
-      "concept/04_formal/10_architecture_semantics/01_software_architecture_formalization.md",
-      "concept/04_formal/10_architecture_semantics/03_architecture_refinement.md",
-      "concept/04_formal/10_architecture_semantics/04_rust_architecture_constraints.md",
-      "concept/04_formal/11_computational_models/01_computational_semantics_framework.md",
-      "concept/04_formal/11_computational_models/02_computability_theory.md",
-      "concept/04_formal/11_computational_models/04_mathematical_functions_of_computation.md",
-      "concept/04_formal/12_concurrency_models/01_models_of_concurrency.md",
-      "concept/04_formal/12_concurrency_models/02_expressiveness_of_concurrent_models.md",
-      "concept/04_formal/13_semantic_engineering/01_ontology_engineering.md",
-      "concept/04_formal/13_semantic_engineering/02_description_logic_and_owl.md",
-      "concept/04_formal/13_semantic_engineering/04_semantic_interoperability.md",
-      "concept/05_comparative/00_paradigms/05_language_semantic_model_matrix.md",
-      "concept/05_comparative/02_managed_languages/09_rust_vs_haskell.md",
-      "concept/05_comparative/02_managed_languages/11_rust_vs_fsharp.md",
-      "concept/06_ecosystem/03_design_patterns/19_model_driven_engineering.md",
-      "concept/06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md",
-      "concept/06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md",
-      "concept/06_ecosystem/14_enterprise_architecture/02_architecture_governance_and_adrs.md",
-      "concept/06_ecosystem/14_enterprise_architecture/03_architecture_standards_alignment.md",
-      "concept/06_ecosystem/14_enterprise_architecture/05_strategic_domain_driven_design_in_rust.md",
-      "concept/07_future/00_version_tracking/rust_1_98_stabilized.md",
-      "concept/07_future/02_preview_features/39_async_ioring_preview.md",
-      "concept/07_future/04_research_and_experimental/08_llm_system_architecture.md",
-      "concept/07_future/04_research_and_experimental/09_mlops_and_llmops.md",
-      "concept/07_future/04_research_and_experimental/10_ai_safety_and_alignment.md",
-      "concept/07_future/04_research_and_experimental/11_rust_for_ai_model_serving.md"
-    ]
+    "gaps_p1": [],
+    "gaps_p2": []
   },
   "by_layer": {
     "L0": {
@@ -164,7 +74,7 @@
     },
     "L6": {
       "n": 134,
-      "P0": 129,
+      "P0": 130,
       "any": 134
     },
     "L7": {

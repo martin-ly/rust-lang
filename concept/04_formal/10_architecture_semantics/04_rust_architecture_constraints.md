@@ -36,6 +36,10 @@
 > - **Luckham et al. (1995)** — *Specification and Analysis of System Architecture Using Rapide*. IEEE Transactions on Software Engineering, 21(4), 336–355. [https://doi.org/10.1109/32.385970](https://doi.org/10.1109/32.385970)
 > - **Rust Reference — Items and Visibility** — [https://doc.rust-lang.org/reference/visibility-and-privacy.html](https://doc.rust-lang.org/reference/visibility-and-privacy.html)
 > - **Rust Reference — Orphan Rules** — [https://doc.rust-lang.org/reference/items/traits.html#orphan-rules](https://doc.rust-lang.org/reference/items/traits.html#orphan-rules)
+> - **RustBelt: Securing the Foundations of the Rust Programming Language** (Jung et al., POPL 2018) — [https://plv.mpi-sws.org/rustbelt/popl18/](https://plv.mpi-sws.org/rustbelt/popl18/)
+> - **Rust RFC 1105 — API Evolution** — [https://rust-lang.github.io/rfcs/1105-api-evolution.html](https://rust-lang.github.io/rfcs/1105-api-evolution.html)
+> - **cargo-semver-checks** — [https://crates.io/crates/cargo-semver-checks](https://crates.io/crates/cargo-semver-checks)
+> - **Rust Reference — External Blocks** — [https://doc.rust-lang.org/reference/items/external-blocks.html](https://doc.rust-lang.org/reference/items/external-blocks.html)
 
 ## 📑 目录
 
@@ -289,3 +293,7 @@ mindmap
 - **Garlan, Monroe & Wile (1997)** — *ACME: An Architecture Description Interchange Language*. In *Proceedings of CASCON'97*, 169–183.
 - **Allen (1997)** — *A Formal Approach to Software Architecture*. Ph.D. thesis, Carnegie Mellon University. (Wright ADL based on CSP.)
 - **Luckham et al. (1995)** — *Specification and Analysis of System Architecture Using Rapide*. IEEE Transactions on Software Engineering, 21(4), 336–355. [https://doi.org/10.1109/32.385970](https://doi.org/10.1109/32.385970)
+- **RustBelt: Securing the Foundations of the Rust Programming Language** (Jung et al., POPL 2018) — [https://plv.mpi-sws.org/rustbelt/popl18/](https://plv.mpi-sws.org/rustbelt/popl18/)
+- **Rust RFC 1105 — API Evolution** — [https://rust-lang.github.io/rfcs/1105-api-evolution.html](https://rust-lang.github.io/rfcs/1105-api-evolution.html)
+- **cargo-semver-checks** — [https://crates.io/crates/cargo-semver-checks](https://crates.io/crates/cargo-semver-checks)
+- **Rust Reference — External Blocks** — [https://doc.rust-lang.org/reference/items/external-blocks.html](https://doc.rust-lang.org/reference/items/external-blocks.html)

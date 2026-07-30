@@ -542,7 +542,7 @@ LLM 生成的工具调用参数可能是幻觉或格式错误。严格 schema �
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Huyen — Designing Machine Learning Systems](https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/) · [Yao et al. — ReAct](https://arxiv.org/abs/2210.03629) · [Schick et al. — Toolformer](https://arxiv.org/abs/2302.04761)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Huyen — Designing Machine Learning Systems](https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/) · [Yao et al. — ReAct](https://arxiv.org/abs/2210.03629) · [Schick et al. — Toolformer](https://arxiv.org/abs/2302.04761) · [Wang et al. — A Survey on Large Language Model Based Autonomous Agents](https://doi.org/10.1007/s11704-024-40231-1) · [Zhao et al. — A Survey of Large Language Models](https://doi.org/10.48550/arXiv.2303.18223) · [Qdrant Rust client documentation](https://docs.rs/qdrant-client) · [candle-core crate](https://crates.io/crates/candle-core)
 >
 > **文档版本**: 1.0
 > **最后更新**: 2026-07-28

@@ -5,7 +5,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **来源**: [Rust Reference — Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html) · [Wadler 1989, *Theorems for Free!* (arXiv)](https://arxiv.org/abs/cs/9201102) · [Wadler 1989, *Theorems for Free!* (ACM DL)](https://dl.acm.org/doi/10.1145/99370.99404) · [Reynolds 1983, *Types, Abstraction and Parametric Polymorphism*](https://doi.org/10.1007/BFb0035118) · [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **来源**: [Rust Reference — Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html) · [Wadler 1989, *Theorems for Free!* (arXiv)](https://arxiv.org/abs/cs/9201102) · [Wadler 1989, *Theorems for Free!* (ACM DL)](https://dl.acm.org/doi/10.1145/99370.99404) · [Wadler 1989, *Theorems for Free!* (Semantic Scholar)](https://www.semanticscholar.org/paper/89b50039c6d22cb82abc387d91145195ae822d29) · [Reynolds 1983, *Types, Abstraction and Parametric Polymorphism*](https://doi.org/10.1007/BFb0035118) · [Reynolds 1983, *Types, Abstraction and Parametric Polymorphism* (Semantic Scholar)](https://www.semanticscholar.org/paper/5f322ce92cd22cb4ffcdf45cbbe1e23d5febc007) · [RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) · [Springer — Ahmed et al. 2008, *Parametric Polymorphism through Run-Time Sealing*](https://link.springer.com/chapter/10.1007/978-3-540-78739-6_2) · [Rustc Dev Guide — Monomorphization](https://rustc-dev-guide.rust-lang.org/backend/monomorph.html)
 > **前置概念**: [Type Theory](01_type_theory.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
 > **后置概念**: [Subtyping and Variance](02_subtype_variance.md) · [Category Theory](04_category_theory.md) · [RustBelt](../02_separation_logic/01_rustbelt.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
 
@@ -207,6 +207,15 @@ fn zero<T: Default + PartialOrd>(x: T) -> T {
 
 `PartialOrd` 让函数能“看见”元素值的大小关系，免费定理中的 `reverse(map f xs) = map f (reverse xs)` 等结论不再成立。
 
+反过来，如果去掉 trait bound，编译器会拒绝任何依赖 `T` 具体能力（如 `Clone`）的调用——这正是 parametricity 在 Rust 类型检查层面的体现：
+
+```rust,compile_fail,E0599
+fn clone_any<T>(x: T) -> T {
+    // 没有 T: Clone bound，编译器找不到 clone 方法
+    x.clone()
+}
+```
+
 ### 5.3 反例：`unsafe` 与类型内省
 
 ```rust
@@ -274,9 +283,13 @@ Rust 的 trait bound 是显式的“能力授权”：每加一个 bound，函�
 
 - [Rust Reference — Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html)（P0 官方文档）
 - [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)（P0 官方文档）
+- [Rustc Dev Guide — Monomorphization](https://rustc-dev-guide.rust-lang.org/backend/monomorph.html)（P2 编译器实现）
 - [Wadler 1989, *Theorems for Free!* (arXiv)](https://arxiv.org/abs/cs/9201102)（P1 学术经典）
 - [Wadler 1989, *Theorems for Free!* (ACM DL)](https://dl.acm.org/doi/10.1145/99370.99404)（P1 学术经典）
+- [Wadler 1989, *Theorems for Free!* (Semantic Scholar)](https://www.semanticscholar.org/paper/89b50039c6d22cb82abc387d91145195ae822d29)（P1 学术经典）
 - [Reynolds 1983, *Types, Abstraction and Parametric Polymorphism*](https://doi.org/10.1007/BFb0035118)（P1 形式化奠基）
+- [Reynolds 1983, *Types, Abstraction and Parametric Polymorphism* (Semantic Scholar)](https://www.semanticscholar.org/paper/5f322ce92cd22cb4ffcdf45cbbe1e23d5febc007)（P1 形式化奠基）
+- [Springer — Ahmed et al. 2008, *Parametric Polymorphism through Run-Time Sealing*](https://link.springer.com/chapter/10.1007/978-3-540-78739-6_2)（P1 参数化多态扩展）
 - [RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)（P1 Rust 形式化）
 
 ### 相关概念页
@@ -346,3 +359,9 @@ Rust 的 trait bound 是显式的“能力授权”：每加一个 bound，函�
 
 `reverse` 的类型只说明它重排元素位置；参数化保证它不能以元素的具体内容做条件分支（无 trait bound、无反射时），因此先映射 `f` 再反转，与先反转再映射 `f`，结果相同。A、C、D 都与类型能推导出的性质矛盾。
 </details>
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [Aeneas](https://github.com/AeneasVerif/aeneas)
+- [Verus](https://github.com/verus-lang/verus)

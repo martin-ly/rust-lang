@@ -1,28 +1,28 @@
 {
   "summary": {
     "date": "2026-07-30",
-    "total_relations": 9256,
+    "total_relations": 9272,
     "generic_relation_annotation_count": 0,
     "generic_ratio_global": 0.0,
     "core_entities": 50,
-    "core_relations": 2602,
+    "core_relations": 2603,
     "core_generic_count": 0,
     "core_generic_ratio": 0.0,
     "core_lacking_semantic": 0,
     "global_predicate_distribution": {
-      "ex:hasPart": 4003,
-      "ex:dependsOn": 1896,
-      "ex:entails": 1364,
-      "ex:relatedTo": 918,
+      "ex:hasPart": 4009,
+      "ex:dependsOn": 1897,
+      "ex:entails": 1366,
+      "ex:relatedTo": 919,
       "ex:refines": 498,
-      "ex:partOf": 450,
+      "ex:partOf": 456,
       "ex:appliesTo": 127
     },
     "core_predicate_distribution": {
       "ex:dependsOn": 1027,
       "ex:hasPart": 621,
       "ex:entails": 387,
-      "ex:relatedTo": 287,
+      "ex:relatedTo": 288,
       "ex:refines": 140,
       "ex:partOf": 109,
       "ex:appliesTo": 31
@@ -528,7 +528,7 @@
       ],
       [
         "ex:relatedTo",
-        10
+        11
       ]
     ],
     "ex:ParallelDistributedPatternSpectrum": [

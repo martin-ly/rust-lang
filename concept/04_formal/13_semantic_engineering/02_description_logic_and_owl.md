@@ -477,6 +477,9 @@ mindmap
 - [W3C JSON-LD 1.1](https://www.w3.org/TR/json-ld11/)
 - [W3C RDF-star and SPARQL-star](https://www.w3.org/2021/12/rdf-star.html)
 - [Rust Reference — Trait and Lifetime Bounds](https://doc.rust-lang.org/reference/trait-bounds.html)
+- [arXiv:2308.04814 — Conjunctive Query Answering over Unrestricted OWL 2 Ontologies](https://arxiv.org/abs/2308.04814)
+- [crates.io — horned-owl](https://crates.io/crates/horned-owl)
+- [docs.rs — sophia](https://docs.rs/sophia/)
 
 > **相关文件**: [目录 README](README.md) · [本体工程](01_ontology_engineering.md) · [知识图谱构建](03_knowledge_graph_construction.md) · [语义互操作](04_semantic_interoperability.md)
 >

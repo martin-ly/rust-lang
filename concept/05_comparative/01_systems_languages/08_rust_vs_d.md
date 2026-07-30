@@ -66,6 +66,7 @@
     - [10.1 Rust 权威来源](#101-rust-权威来源)
     - [10.2 D 权威来源](#102-d-权威来源)
     - [10.3 对比与演进阅读](#103-对比与演进阅读)
+    - [10.4 国际权威来源](#104-国际权威来源)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -682,6 +683,13 @@ D 的元编程灵活性极高，但字符串 `mixin` 也引入“字符串拼接
 - [Rust vs C++](01_rust_vs_cpp.md)
 - [Rust vs Zig](06_rust_vs_zig.md)
 - [Rust vs Go](03_rust_vs_go.md)
+
+### 10.4 国际权威来源
+
+- [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) — arxiv.org，Rust 形式化语义模型
+- [Ownership Types for Flexible Alias Protection](https://doi.org/10.1007/3-540-45337-7_13) — doi.org，所有权类型理论基础
+- [The Rust Programming Language Blog](https://blog.rust-lang.org/) — blog.rust-lang.org，官方语言与生态演进
+- [crates.io](https://crates.io/) — crates.io，Rust 包注册表与生态规模
 
 ---
 

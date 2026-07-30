@@ -18,7 +18,8 @@
 > · [RFC 2532 — Associated type defaults](https://rust-lang.github.io/rfcs/2532-associated-type-defaults.html) ·
 > [Tracking Issue #29661](https://github.com/rust-lang/rust/issues/29661) ·
 > [Rust Reference — Associated Types](https://doc.rust-lang.org/reference/items/traits.html#associated-types) ·
-> [Rust Unstable Book](https://doc.rust-lang.org/nightly/unstable-book/index.html)
+> [Rust Unstable Book — `associated_type_defaults`](https://doc.rust-lang.org/nightly/unstable-book/language-features/associated-type-defaults.html) ·
+> [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/)
 
 ---
 
@@ -71,6 +72,7 @@ mindmap
     - [4.2 常见错误](#42-常见错误)
   - [五、Stable 替代方案](#五stable-替代方案)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
+  - [补充国际权威来源（P1/P2 覆盖）](#补充国际权威来源p1p2-覆盖)
 
 ---
 
@@ -392,3 +394,10 @@ fn main() {}
 - [Rust Reference — Associated Types](https://doc.rust-lang.org/reference/items/traits.html#associated-types)
 - [Advanced Traits 权威页](04_advanced_traits.md)
 - [Specialization 预览页](../../07_future/02_preview_features/31_specialization_preview.md)
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [RustBelt project](https://plv.mpi-sws.org/rustbelt/)
+- [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)
+- [Verus](https://github.com/verus-lang/verus)
+- [Creusot](https://github.com/creusot-rs/creusot)

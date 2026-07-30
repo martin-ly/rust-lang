@@ -81,6 +81,7 @@ mindmap
     - [6.2 反例： Flux 不能表达任意归纳性质](#62-反例-flux-不能表达任意归纳性质)
     - [6.3 反例：细化谓词超出 SMT 片段会失败](#63-反例细化谓词超出-smt-片段会失败)
     - [6.4 反例：需要 nightly 工具链](#64-反例需要-nightly-工具链)
+    - [6.5 反例：Flux 以 Rust 借用检查为前提](#65-反例flux-以-rust-借用检查为前提)
   - [七、来源与延伸阅读](#七来源与延伸阅读)
     - [权威来源](#权威来源)
     - [关键论文](#关键论文)
@@ -445,6 +446,19 @@ error: Flux requires a nightly rustc toolchain pinned in rust-toolchain.toml
 
 > **修正**: Flux 是 rustc 驱动插件，依赖编译器内部 API，因此必须使用项目指定的 nightly 工具链。这限制了它在生产 CI 中的直接使用。
 
+### 6.5 反例：Flux 以 Rust 借用检查为前提
+
+```rust,compile_fail,E0502
+fn main() {
+    let mut x = 1;
+    let r = &x;          // 共享借用（不可变）
+    let m = &mut x;      // 错误：不能同时可变借用 x
+    println!("{} {}", r, m);
+}
+```
+
+> **说明**: Flux 的强更新 / 弱更新 / 强引用分析都以 Rust 借用检查已经排除的别名为前提。普通 Rust 会先用 `E0502` 拒绝“共享引用与可变引用共存”；Flux 再在此基础上推断细化类型如何随所有权变化。
+
 ---
 
 ## 七、来源与延伸阅读
@@ -455,6 +469,9 @@ error: Flux requires a nightly rustc toolchain pinned in rust-toolchain.toml
 - [Flux 官方文档](https://flux-rs.github.io/flux/)
 - [Flux 在线演示](https://flux-rs.github.io/flux/playground.html)
 - [Flux Demo 仓库](https://github.com/flux-rs/flux-demo)
+- [Generic Refinement Types (POPL 2025) — doi.org](https://doi.org/10.1145/3704886)
+- [Verus GitHub](https://github.com/verus-lang/verus)
+- [Creusot GitHub](https://github.com/creusot-rs/creusot)
 
 ### 关键论文
 

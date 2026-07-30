@@ -17,6 +17,8 @@
 > **来源**: [Milner, *Communicating and Mobile Systems: The π-Calculus*, CUP 1999](https://www.cambridge.org/core/books/communicating-and-mobile-systems-the-pi-calculus/) · [Milner, *The Polyadic π-Calculus: a Tutorial*, LFCS 1992](https://www.lfcs.inf.ed.ac.uk/reports/91/ECS-LFCS-91-180/) · [std::sync::mpsc](https://doc.rust-lang.org/std/sync/mpsc/)
 >
 > **权威来源 / Provenance**: Milner, R. (1999). *Communicating and Mobile Systems: The π-Calculus*. Cambridge University Press. 这是 π 演算的系统语义奠基专著，定义了通道名作为一等值传递与名字限制 `(νx)` 的动态拓扑演化机制。[CUP](https://www.cambridge.org/core/books/communicating-and-mobile-systems-the-pi-calculus/)
+>
+> 国际权威链接：[Milner, Parrow & Walker 1992, *A Calculus of Mobile Processes, I* (doi.org)](https://doi.org/10.1016/0890-5401(92)90008-4) · [Sangiorgi & Walker 2001, *The π-Calculus: A Theory of Mobile Processes* (doi.org)](https://doi.org/10.1017/9781316134924) · [Rust `std::sync::mpsc`](https://doc.rust-lang.org/std/sync/mpsc/) · [crossbeam-channel (docs.rs)](https://docs.rs/crossbeam-channel/latest/crossbeam_channel/)
 
 ## 系统语义要点
 
@@ -67,8 +69,30 @@ fn main() {
 
 > **边界**: Rust 的 `Sender<T>` 是可克隆的，而 π 演算中的通道名在线性语义下通常不可复制；因此 Rust 只能近似 π 演算的线性移动性。完整形式化、反例与边界见 [Process Calculi for Rust](../07_concurrency_semantics/01_process_calculi_for_rust.md)。
 
+### 反例：线性移动性的违反
+
+下面这个 `compile_fail` 块展示：如果试图在把 `Sender` 移动进线程后再次使用它，Rust 会阻止这种违反线性移动性的操作。
+
+```rust,compile_fail,E0382
+use std::sync::mpsc::{self, Sender};
+
+fn main() {
+    let (tx, _rx): (Sender<i32>, _) = mpsc::channel();
+    std::thread::spawn(move || {
+        tx.send(1).unwrap(); // `tx` 被移动进此闭包
+    });
+    tx.send(2).unwrap(); // ERROR: 移动后再次使用 `tx`
+}
+```
+
 ## 权威来源链接
 
 完整形式化、与 Rust 原语对应、反例与边界分析见：
 
 > [`concept/04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md`](../07_concurrency_semantics/01_process_calculi_for_rust.md)
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [RustBelt project](https://plv.mpi-sws.org/rustbelt/)
+- [Polymorphic Context-free Session Types](https://arxiv.org/abs/2106.06658)

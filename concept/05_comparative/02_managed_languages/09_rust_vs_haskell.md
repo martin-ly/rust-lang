@@ -831,6 +831,10 @@ fn sum_to_n(n: i64) -> i64 {
 - [Liquid Haskell Paper (Vazou et al.)](https://arxiv.org/abs/2001.10820)
 - [Linear Haskell Paper (Bernardy et al.)](https://arxiv.org/abs/1710.09756)
 - [System FC: Equality Constraints and Coercions](https://www.microsoft.com/en-us/research/publication/system-f-with-type-equality-coercions/)
+- [RustBelt paper (Jung et al., POPL 2018)](https://doi.org/10.1145/3158154)
+- [Composable Memory Transactions (Harris et al., PPoPP 2005)](https://doi.org/10.1145/1065944.1065952)
+- [Linear Haskell (Bernardy et al., ICFP 2018)](https://doi.org/10.1145/3236765)
+- [Verus verifier](https://github.com/verus-lang/verus)
 
 ### 相关概念
 

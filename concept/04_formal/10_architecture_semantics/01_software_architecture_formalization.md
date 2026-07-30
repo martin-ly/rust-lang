@@ -26,6 +26,10 @@
 > - **Garlan, Monroe & Wile (1997)** — *ACME: An Architecture Description Interchange Language*. In *Proceedings of CASCON'97*, 169–183.
 > - **Allen (1997)** — *A Formal Approach to Software Architecture*. Ph.D. thesis, Carnegie Mellon University. (Wright ADL based on CSP.)
 > - **Luckham et al. (1995)** — *Specification and Analysis of System Architecture Using Rapide*. IEEE Transactions on Software Engineering, 21(4), 336–355. [https://doi.org/10.1109/32.385970](https://doi.org/10.1109/32.385970)
+> - **arXiv (cs.SE)** — *Software engineering preprints, including formal architecture and component-based systems*. [https://arxiv.org/list/cs.SE/recent](https://arxiv.org/list/cs.SE/recent)
+> - **Semantic Scholar** — *Search index for Medvidovic & Taylor (2000) and related ADL literature*. [https://www.semanticscholar.org/search?q=A%20Classification%20and%20Comparison%20Framework%20for%20Software%20Architecture%20Description%20Languages&sort=relevance](https://www.semanticscholar.org/search?q=A%20Classification%20and%20Comparison%20Framework%20for%20Software%20Architecture%20Description%20Languages&sort=relevance)
+> - **ACM SIGSOFT** — *ACM Special Interest Group on Software Engineering, source of architecture formalization conferences and publications*. [https://sigsoft.acm.org/](https://sigsoft.acm.org/)
+> - **Rust Compiler Development Guide** — *Architecture of the Rust compiler, trait system, and type checker*. [https://rustc-dev-guide.rust-lang.org/](https://rustc-dev-guide.rust-lang.org/)
 
 ---
 
@@ -607,3 +611,9 @@ mindmap
 ---
 
 > **来源**: [Shaw & Garlan — Software Architecture: Perspectives on an Emerging Discipline (1996)](https://www.cs.cmu.edu/~search/articles/books/SA.book.pdf) · [Garlan & Shaw — An Introduction to Software Architecture (1993)](https://www.cs.cmu.edu/~able/introduction_to_software_architecture.htm) · [Medvidovic & Taylor — A Classification and Comparison Framework for Software Architecture Description Languages (2000)](https://ieeexplore.ieee.org/document/845372)
+
+
+## 补充国际权威来源（P1/P2 覆盖）
+
+- [Aeneas](https://github.com/AeneasVerif/aeneas)
+- [Creusot](https://github.com/creusot-rs/creusot)

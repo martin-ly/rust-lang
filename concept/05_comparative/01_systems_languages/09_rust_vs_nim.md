@@ -16,6 +16,7 @@
 > **主要来源**: [Nim Manual](https://nim-lang.org/docs/manual.html) · [Nim Destructors and Move Semantics](https://nim-lang.org/docs/destructors.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Nim Manual](https://nim-lang.org/docs/manual.html) · [Nim Destructors and Move Semantics](https://nim-lang.org/docs/destructors.html) · [Nim by Example — Concurrency](https://nim-by-example.github.io/concurrency/)
+> **国际权威来源 / Provenance**: [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [A Lightweight Formalism for Reference Lifetimes and Borrowing in Rust](https://doi.org/10.1145/3443420) · [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 ---
 
 > **变更日志**:
