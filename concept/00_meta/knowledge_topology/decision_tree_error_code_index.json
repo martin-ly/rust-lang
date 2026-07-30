@@ -1,6 +1,6 @@
 {
-  "version": "1.1",
-  "date": "2026-07-15",
+  "version": "1.2",
+  "date": "2026-07-30",
   "description": "rustc error code -> decision tree/node lookup",
   "source": "concept/00_meta/knowledge_topology/decision_trees.yaml",
   "node_index": {
@@ -233,6 +233,61 @@
         "node_label": "症状：生命周期错误（lifetime may not live long enough）",
         "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
         "source_anchor": "#32-生命周期判定树"
+      }
+    ],
+    "E0152": [
+      {
+        "tree_id": "DF-NOSTD-01",
+        "node_id": "C7",
+        "tree_title_zh": "是否/何时使用 no_std / bare-metal",
+        "tree_title_en": "When to Use no_std / Bare-Metal Decision Tree",
+        "node_label": "结论：自定义 lang item 时避免 E0152 重复 lang item",
+        "source_file": "concept/00_meta/knowledge_topology/11_semantic_model_atlas.md",
+        "source_anchor": "#df-nostd-01"
+      }
+    ],
+    "E0463": [
+      {
+        "tree_id": "DF-NOSTD-01",
+        "node_id": "C6",
+        "tree_title_zh": "是否/何时使用 no_std / bare-metal",
+        "tree_title_en": "When to Use no_std / Bare-Metal Decision Tree",
+        "node_label": "结论：评估自己写 PAC/HAL 或换平台（注意 E0463 找不到 crate）",
+        "source_file": "concept/00_meta/knowledge_topology/11_semantic_model_atlas.md",
+        "source_anchor": "#df-nostd-01"
+      }
+    ],
+    "E0507": [
+      {
+        "tree_id": "DF-ALGDS-01",
+        "node_id": "C5",
+        "tree_title_zh": "算法与数据结构选型",
+        "tree_title_en": "Algorithm and Data Structure Selection Decision Tree",
+        "node_label": "结论：自定义数据结构时注意 E0507（move out of borrowed content）",
+        "source_file": "concept/00_meta/knowledge_topology/11_semantic_model_atlas.md",
+        "source_anchor": "#df-algds-01"
+      }
+    ],
+    "E0616": [
+      {
+        "tree_id": "DF-SECARCH-01",
+        "node_id": "V1",
+        "tree_title_zh": "安全架构选型",
+        "tree_title_en": "Security Architecture Selection Decision Tree",
+        "node_label": "验证回边：安全审查 + cargo audit + 注意私有字段/边界 E0616",
+        "source_file": "concept/00_meta/knowledge_topology/11_semantic_model_atlas.md",
+        "source_anchor": "#df-secarch-01"
+      }
+    ],
+    "E0506": [
+      {
+        "tree_id": "DF-DATADIST-01",
+        "node_id": "V1",
+        "tree_title_zh": "数据密集型/分布式系统选型",
+        "tree_title_en": "Data-Intensive / Distributed System Selection Decision Tree",
+        "node_label": "验证回边：原型 + 负载测试 + 注意不可变状态赋值 E0506",
+        "source_file": "concept/00_meta/knowledge_topology/11_semantic_model_atlas.md",
+        "source_anchor": "#df-datadist-01"
       }
     ]
   },
@@ -516,6 +571,51 @@
         "source_file": "concept/00_meta/knowledge_topology/09_reasoning_judgment_tree_atlas.md",
         "source_anchor": "#32-生命周期判定树"
       }
+    ],
+    "E0152": [
+      {
+        "tree_id": "DF-NOSTD-01",
+        "tree_title_zh": "是否/何时使用 no_std / bare-metal",
+        "tree_title_en": "When to Use no_std / Bare-Metal Decision Tree",
+        "source_file": "concept/00_meta/knowledge_topology/11_semantic_model_atlas.md",
+        "source_anchor": "#df-nostd-01"
+      }
+    ],
+    "E0463": [
+      {
+        "tree_id": "DF-NOSTD-01",
+        "tree_title_zh": "是否/何时使用 no_std / bare-metal",
+        "tree_title_en": "When to Use no_std / Bare-Metal Decision Tree",
+        "source_file": "concept/00_meta/knowledge_topology/11_semantic_model_atlas.md",
+        "source_anchor": "#df-nostd-01"
+      }
+    ],
+    "E0117": [
+      {
+        "tree_id": "DF-ALGDS-01",
+        "tree_title_zh": "算法与数据结构选型",
+        "tree_title_en": "Algorithm and Data Structure Selection Decision Tree",
+        "source_file": "concept/00_meta/knowledge_topology/11_semantic_model_atlas.md",
+        "source_anchor": "#df-algds-01"
+      }
+    ],
+    "E0301": [
+      {
+        "tree_id": "DF-SECARCH-01",
+        "tree_title_zh": "安全架构选型",
+        "tree_title_en": "Security Architecture Selection Decision Tree",
+        "source_file": "concept/00_meta/knowledge_topology/11_semantic_model_atlas.md",
+        "source_anchor": "#df-secarch-01"
+      }
+    ],
+    "E0596": [
+      {
+        "tree_id": "DF-DATADIST-01",
+        "tree_title_zh": "数据密集型/分布式系统选型",
+        "tree_title_en": "Data-Intensive / Distributed System Selection Decision Tree",
+        "source_file": "concept/00_meta/knowledge_topology/11_semantic_model_atlas.md",
+        "source_anchor": "#df-datadist-01"
+      }
     ]
   },
   "descriptions": {
@@ -540,7 +640,14 @@
     "E0700": "hidden type for `impl Trait` captures lifetime that does not appear in bounds",
     "E0729": "feature `async_await` is required（async/await 特性门）",
     "E0733": "recursive async function（递归 async fn）",
-    "E0759": "function cannot return a value referencing data owned by the current function"
+    "E0759": "function cannot return a value referencing data owned by the current function",
+    "E0152": "duplicate lang item（自定义 no_std 运行时时重复 lang item）",
+    "E0463": "can't find crate for ...（目标平台缺少 PAC/HAL crate）",
+    "E0117": "only traits defined in the current crate can be implemented for arbitrary types（孤儿规则）",
+    "E0301": "cannot mutably borrow in a pattern with multiple bindings",
+    "E0507": "cannot move out of borrowed content（自定义数据结构时误移动借用数据）",
+    "E0506": "cannot assign to `X` because it is borrowed（共享状态下对不可变借用赋值）",
+    "E0616": "field `X` of struct `Y` is private（安全边界/私有字段访问）"
   },
   "authority_pages": {
     "E0106": "concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
@@ -564,6 +671,13 @@
     "E0700": "concept/03_advanced/01_async/02_async_advanced.md",
     "E0729": "concept/03_advanced/01_async/01_async.md",
     "E0733": "concept/03_advanced/01_async/01_async.md",
-    "E0759": "concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md"
+    "E0759": "concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md",
+    "E0152": "concept/06_ecosystem/05_systems_and_embedded/18_panic_runtime_no_std.md",
+    "E0463": "concept/06_ecosystem/05_systems_and_embedded/17_pac_hal_implementation.md",
+    "E0117": "concept/02_intermediate/00_traits/04_advanced_traits.md",
+    "E0301": "concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+    "E0507": "concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+    "E0506": "concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+    "E0616": "concept/02_intermediate/05_modules_and_visibility/01_module_system.md"
   }
 }

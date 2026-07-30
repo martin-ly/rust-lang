@@ -4,7 +4,7 @@
     "generated": "2026-07-11",
     "rust_version": "1.97.0+",
     "source": "concept/",
-    "entity_count": 604,
+    "entity_count": 627,
     "schema": "simple KG index"
   },
   "entities": [
@@ -270,6 +270,45 @@
       "related_crates": []
     },
     {
+      "id": "concept:00_meta/00_framework/rust_api_guidelines_canonical.md",
+      "path": "00_meta/00_framework/rust_api_guidelines_canonical.md",
+      "title": "",
+      "en": "Rust API Guidelines Canonical Guide",
+      "summary": "A systematic, example-driven guide to the Rust API Guidelines naming conventions, type conventions, predictability, flexibility, and debugging contracts, with idiomatic examples and counter-examples for each guideline.",
+      "bloom": "L3-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Type System",
+          "path": "../../01_foundation/02_type_system/01_type_system.md"
+        },
+        {
+          "title": "Traits",
+          "path": "../../02_intermediate/00_traits/01_traits.md"
+        },
+        {
+          "title": "Error Handling",
+          "path": "../../02_intermediate/03_error_handling/01_error_handling.md"
+        },
+        {
+          "title": "Iterator Idioms",
+          "path": "../../01_foundation/05_collections/03_iterator_idioms.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Idioms Spectrum",
+          "path": "../../06_ecosystem/03_design_patterns/02_idioms_spectrum.md"
+        },
+        {
+          "title": "Algorithm Engineering Practice",
+          "path": "../../06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:00_meta/00_framework/semantic_bridge_algorithms_patterns.md",
       "path": "00_meta/00_framework/semantic_bridge_algorithms_patterns.md",
       "title": "语义桥：算法、设计模式与工作流模式的统一谱系",
@@ -311,7 +350,7 @@
       "title": "",
       "en": "Semantic Layer Alignment Index",
       "summary": "A cross-layer index mapping algorithm semantics → system semantics → architecture semantics → enterprise architecture, showing refinement relationships and Rust engineering mappings for each layer.",
-      "bloom": "L3-L5",
+      "bloom": "L0-L7",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [
         {
@@ -334,7 +373,7 @@
       "title": "",
       "en": "Semantic Model Reasoning Methodology",
       "summary": "Methodology unifying six thinking representations — definition, attribute matrix, example, counterexample, scenario, and theorem chain — for analyzing and teaching Rust semantic models.",
-      "bloom": "L1-L7",
+      "bloom": "L0-L7",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [
         {
@@ -348,7 +387,9 @@
           "path": "../../04_formal/00_type_theory/01_type_theory.md"
         }
       ],
-      "theorems": [],
+      "theorems": [
+        "T-01"
+      ],
       "related_crates": []
     },
     {
@@ -2186,6 +2227,41 @@
       "related_crates": []
     },
     {
+      "id": "concept:01_foundation/05_collections/03_iterator_idioms.md",
+      "path": "01_foundation/05_collections/03_iterator_idioms.md",
+      "title": "",
+      "en": "Iterator Idioms in Rust",
+      "summary": "A systematic guide to idiomatic Rust iterator combinators including `filter_map`, `flat_map`, `reduce`, `try_for_each`, `partition`, `find_map`, `try_fold`, `peekable`, `fuse`, `cycle`, `zip`, `enumerate`, `step_by`, `skip_while`, `take_while`, `inspect`, `by_ref`, and `chain`, with examples and counter-examples.",
+      "bloom": "L2-L3",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Collections",
+          "path": "01_collections.md"
+        },
+        {
+          "title": "Ownership",
+          "path": "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
+        },
+        {
+          "title": "Error Handling",
+          "path": "../../02_intermediate/03_error_handling/01_error_handling.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Idioms Spectrum",
+          "path": "../../06_ecosystem/03_design_patterns/02_idioms_spectrum.md"
+        },
+        {
+          "title": "Type Conversions",
+          "path": "../../02_intermediate/04_types_and_conversions/07_type_conversions.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:01_foundation/06_strings_and_text/01_strings_and_text.md",
       "path": "01_foundation/06_strings_and_text/01_strings_and_text.md",
       "title": "",
@@ -3683,6 +3759,41 @@
         {
           "title": "Error Handling Deep Dive",
           "path": "02_error_handling_deep_dive.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:02_intermediate/03_error_handling/05_error_idioms.md",
+      "path": "02_intermediate/03_error_handling/05_error_idioms.md",
+      "title": "",
+      "en": "Rust Error Handling Idioms",
+      "summary": "Idiomatic Rust error-handling patterns: `map_err`, `with_context`, `ok_or`/`ok_or_else`, `transpose`, `flatten`, `inspect_err`, error chains via `Error::source()`, and the thiserror/anyhow layering strategy.",
+      "bloom": "L3-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Error Handling Basics",
+          "path": "../../01_foundation/08_error_handling/01_error_handling_basics.md"
+        },
+        {
+          "title": "Error Handling Deep Dive",
+          "path": "02_error_handling_deep_dive.md"
+        },
+        {
+          "title": "Type Conversions",
+          "path": "../04_types_and_conversions/07_type_conversions.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Async Error Handling",
+          "path": "../../03_advanced/01_async/01_async.md"
+        },
+        {
+          "title": "Logging and Observability",
+          "path": "../../06_ecosystem/00_toolchain/02_logging_observability.md"
         }
       ],
       "theorems": [],
@@ -9908,6 +10019,45 @@
       "related_crates": []
     },
     {
+      "id": "concept:04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md",
+      "path": "04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md",
+      "title": "",
+      "en": "Embedded Formal Memory Model",
+      "summary": "Device memory attributes (Device/Normal/Strongly-ordered), DMA/cache coherence, fence/compiler_fence, MPU regions and Rust memory safety, and the formalization of volatile peripheral-register semantics.",
+      "bloom": "L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "内存模型",
+          "path": "../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md"
+        },
+        {
+          "title": "Unsafe Rust",
+          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
+        },
+        {
+          "title": "裸机启动与链接脚本",
+          "path": "../../06_ecosystem/05_systems_and_embedded/13_bare_metal_boot_linker_script.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "no_std 同步原语",
+          "path": "../../06_ecosystem/05_systems_and_embedded/15_no_std_synchronization_primitives.md"
+        },
+        {
+          "title": "PAC 与 HAL 实现",
+          "path": "../../06_ecosystem/05_systems_and_embedded/17_pac_hal_implementation.md"
+        },
+        {
+          "title": "嵌入式内存分配器",
+          "path": "../../06_ecosystem/05_systems_and_embedded/16_embedded_memory_allocators.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:04_formal/README.md",
       "path": "04_formal/README.md",
       "title": "L4 形式化理论层",
@@ -12463,6 +12613,75 @@
       "related_crates": []
     },
     {
+      "id": "concept:06_ecosystem/03_design_patterns/21_microkernel_architecture.md",
+      "path": "06_ecosystem/03_design_patterns/21_microkernel_architecture.md",
+      "title": "微内核架构模式",
+      "en": "Microkernel Architecture Pattern",
+      "summary": "A software architecture pattern that keeps a minimal core and pushes functionality into isolated, dynamically loadable plugins or services.",
+      "bloom": "L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Traits",
+          "path": "../../02_intermediate/00_traits/01_traits.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "架构设计模式",
+          "path": "08_architecture_patterns.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/03_design_patterns/22_embedded_safety_critical_patterns.md",
+      "path": "06_ecosystem/03_design_patterns/22_embedded_safety_critical_patterns.md",
+      "title": "嵌入式安全关键模式",
+      "en": "Embedded Safety-Critical Patterns",
+      "summary": "A set of Rust design patterns for building safe, deterministic, and fault-tolerant embedded and safety-critical systems.",
+      "bloom": "L5-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "所有权",
+          "path": "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "FFI",
+          "path": "../../03_advanced/04_ffi/01_rust_ffi.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/03_design_patterns/23_pipeline_filter_blackboard_interpreter.md",
+      "path": "06_ecosystem/03_design_patterns/23_pipeline_filter_blackboard_interpreter.md",
+      "title": "管道-过滤器、黑板与解释器架构",
+      "en": "Pipeline-Filter, Blackboard and Interpreter Architectures",
+      "summary": "Three classic architectural patterns for data flow processing, collaborative problem solving, and domain-specific language execution in Rust.",
+      "bloom": "L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Iterator",
+          "path": "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "事件驱动架构",
+          "path": "06_event_driven_architecture.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:06_ecosystem/04_web_and_networking/01_distributed_systems.md",
       "path": "06_ecosystem/04_web_and_networking/01_distributed_systems.md",
       "title": "",
@@ -13077,6 +13296,340 @@
       "related_crates": []
     },
     {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/13_bare_metal_boot_linker_script.md",
+      "path": "06_ecosystem/05_systems_and_embedded/13_bare_metal_boot_linker_script.md",
+      "title": "",
+      "en": "Bare-Metal Boot and Linker Scripts",
+      "summary": "Bare-metal boot flow from reset vector to main: linker scripts, vector tables, `_start` initialization, `.data`/`.bss` setup, `#[link_section]`, `#[used]`, `#[no_mangle]`, and ARM memory aliases (CCM/DTCM/ITCM).",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 嵌入式系统开发",
+          "path": "03_embedded_systems.md"
+        },
+        {
+          "title": "Unsafe Rust",
+          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
+        },
+        {
+          "title": "交叉编译",
+          "path": "02_cross_compilation.md"
+        },
+        {
+          "title": "Cargo build-std",
+          "path": "../01_cargo/22_build_std.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Cortex-M 异常模型",
+          "path": "14_interrupt_and_exception_model.md"
+        },
+        {
+          "title": "panic_handler 与 no_std 运行时",
+          "path": "18_panic_runtime_no_std.md"
+        },
+        {
+          "title": "嵌入式内存分配器",
+          "path": "16_embedded_memory_allocators.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/14_interrupt_and_exception_model.md",
+      "path": "06_ecosystem/05_systems_and_embedded/14_interrupt_and_exception_model.md",
+      "title": "",
+      "en": "Interrupt and Exception Model",
+      "summary": "Cortex-M exception model (NMI, HardFault, SVC, PendSV, SysTick), NVIC/CLIC, BASEPRI/Primask, interrupt nesting, tail-chaining, fault register analysis, and a RISC-V interrupt controller comparison.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 嵌入式系统开发",
+          "path": "03_embedded_systems.md"
+        },
+        {
+          "title": "裸机启动与链接脚本",
+          "path": "13_bare_metal_boot_linker_script.md"
+        },
+        {
+          "title": "并发基础",
+          "path": "../../03_advanced/00_concurrency/01_concurrency.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "no_std 同步原语",
+          "path": "15_no_std_synchronization_primitives.md"
+        },
+        {
+          "title": "PAC 与 HAL 实现",
+          "path": "17_pac_hal_implementation.md"
+        },
+        {
+          "title": "panic_handler 与 no_std 运行时",
+          "path": "18_panic_runtime_no_std.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/15_no_std_synchronization_primitives.md",
+      "path": "06_ecosystem/05_systems_and_embedded/15_no_std_synchronization_primitives.md",
+      "title": "",
+      "en": "no_std Synchronization Primitives",
+      "summary": "Synchronization in bare-metal no_std: critical-section single/multi-core implementations, Mutex<RefCell<T>>, spinlocks, bare_metal::Mutex, priority ceiling, priority inversion, and lock-free ring buffers.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Cortex-M 异常模型",
+          "path": "14_interrupt_and_exception_model.md"
+        },
+        {
+          "title": "并发基础",
+          "path": "../../03_advanced/00_concurrency/01_concurrency.md"
+        },
+        {
+          "title": "原子操作",
+          "path": "../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "PAC 与 HAL 实现",
+          "path": "17_pac_hal_implementation.md"
+        },
+        {
+          "title": "嵌入式内存分配器",
+          "path": "16_embedded_memory_allocators.md"
+        },
+        {
+          "title": "嵌入式形式化内存模型",
+          "path": "../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/16_embedded_memory_allocators.md",
+      "path": "06_ecosystem/05_systems_and_embedded/16_embedded_memory_allocators.md",
+      "title": "",
+      "en": "Embedded Memory Allocators",
+      "summary": "Memory allocation in no_std: TLSF/embedded-alloc, buddy allocator, slab/arena, static memory pools, #[global_allocator], OOM handler, and compiler_builtins integration.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "裸机启动与链接脚本",
+          "path": "13_bare_metal_boot_linker_script.md"
+        },
+        {
+          "title": "Cargo build-std",
+          "path": "../01_cargo/22_build_std.md"
+        },
+        {
+          "title": "堆内存管理",
+          "path": "../../02_intermediate/02_memory_management/01_memory_management.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "PAC 与 HAL 实现",
+          "path": "17_pac_hal_implementation.md"
+        },
+        {
+          "title": "panic_handler 与 no_std 运行时",
+          "path": "18_panic_runtime_no_std.md"
+        },
+        {
+          "title": "嵌入式形式化内存模型",
+          "path": "../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/17_pac_hal_implementation.md",
+      "path": "06_ecosystem/05_systems_and_embedded/17_pac_hal_implementation.md",
+      "title": "",
+      "en": "PAC and HAL Implementation",
+      "summary": "svd2rust-generated PAC structure, register read/modify/write bitfield APIs, type-state HAL, clock/GPIO/UART/SPI/I2C initialization sequences, and DMA plus interrupt integration.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 嵌入式系统开发",
+          "path": "03_embedded_systems.md"
+        },
+        {
+          "title": "裸机启动与链接脚本",
+          "path": "13_bare_metal_boot_linker_script.md"
+        },
+        {
+          "title": "Cortex-M 异常模型",
+          "path": "14_interrupt_and_exception_model.md"
+        },
+        {
+          "title": "泛型与 Trait Bounds",
+          "path": "../../02_intermediate/01_generics/01_generics.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "panic_handler 与 no_std 运行时",
+          "path": "18_panic_runtime_no_std.md"
+        },
+        {
+          "title": "no_std 同步原语",
+          "path": "15_no_std_synchronization_primitives.md"
+        },
+        {
+          "title": "嵌入式内存分配器",
+          "path": "16_embedded_memory_allocators.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/18_panic_runtime_no_std.md",
+      "path": "06_ecosystem/05_systems_and_embedded/18_panic_runtime_no_std.md",
+      "title": "",
+      "en": "panic_handler and no_std Runtime",
+      "summary": "panic_handler, eh_personality lang item, panic = abort/unwind linkage impact, custom panic messages, panic-probe, and defmt-panic for embedded systems.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 嵌入式系统开发",
+          "path": "03_embedded_systems.md"
+        },
+        {
+          "title": "裸机启动与链接脚本",
+          "path": "13_bare_metal_boot_linker_script.md"
+        },
+        {
+          "title": "Unsafe Rust",
+          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "嵌入式内存分配器",
+          "path": "16_embedded_memory_allocators.md"
+        },
+        {
+          "title": "PAC 与 HAL 实现",
+          "path": "17_pac_hal_implementation.md"
+        },
+        {
+          "title": "嵌入式形式化内存模型",
+          "path": "../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/19_safety_critical_bare_metal_os.md",
+      "path": "06_ecosystem/05_systems_and_embedded/19_safety_critical_bare_metal_os.md",
+      "title": "",
+      "en": "Safety-Critical Bare-Metal Operating Systems in Rust",
+      "summary": "Survey of Rust-based safety-critical bare-metal operating systems and qualification paths: Ferrocene, Tock, Hubris, seL4 userspace, and RTIC.",
+      "bloom": "L5-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "安全关键系统工程",
+          "path": "../11_domain_applications/23_safety_critical_systems_engineering.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "交叉编译",
+          "path": "02_cross_compilation.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/20_embedded_debugging_logging.md",
+      "path": "06_ecosystem/05_systems_and_embedded/20_embedded_debugging_logging.md",
+      "title": "",
+      "en": "Embedded Debugging and Logging",
+      "summary": "Rust embedded debugging and logging: probe-rs, defmt, RTT, semihosting, embedded-test, QEMU emulation, and real-hardware strategies for observability under resource constraints.",
+      "bloom": "L3-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 嵌入式系统开发",
+          "path": "03_embedded_systems.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "实时操作系统",
+          "path": "../06_data_and_distributed/01_application_domains.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/21_riscv_avr_embedded.md",
+      "path": "06_ecosystem/05_systems_and_embedded/21_riscv_avr_embedded.md",
+      "title": "",
+      "en": "RISC-V and AVR Embedded Rust Development",
+      "summary": "Authoritative guide to bare-metal Rust on RISC-V and AVR — target triples, interrupt controllers, PAC/HAL ecosystems, ABI/calling conventions, and low-power modes, with explicit boundary cases where Rust support diverges from mainstream Cortex-M.",
+      "bloom": "L3-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 嵌入式系统开发",
+          "path": "03_embedded_systems.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "裸机与嵌入式中的 Async：no_std 异步运行时",
+          "path": "11_async_no_std_embedded.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/22_embedded_protocol_drivers.md",
+      "path": "06_ecosystem/05_systems_and_embedded/22_embedded_protocol_drivers.md",
+      "title": "嵌入式协议与外设驱动",
+      "en": "Embedded Protocol and Peripheral Drivers",
+      "summary": "Embedded protocol drivers — how Rust abstracts DMA, watchdogs, RTCs, ADCs, PWM, I²C, SPI, CAN, and USB through embedded-hal, embedded-hal-async, and type-safe state machines.",
+      "bloom": "L3-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 嵌入式系统开发",
+          "path": "03_embedded_systems.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "异步 no_std 嵌入式",
+          "path": "11_async_no_std_embedded.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:06_ecosystem/05_systems_and_embedded/README.md",
       "path": "06_ecosystem/05_systems_and_embedded/README.md",
       "title": "系统与嵌入式（Systems & Embedded）",
@@ -13340,6 +13893,92 @@
       "related_crates": []
     },
     {
+      "id": "concept:06_ecosystem/06_data_and_distributed/10_data_intensive_systems_design.md",
+      "path": "06_ecosystem/06_data_and_distributed/10_data_intensive_systems_design.md",
+      "title": "",
+      "en": "Data-Intensive Systems Design",
+      "summary": "Data-Intensive Systems Design — design principles for storage engines (B-tree/LSM), transaction isolation, replication/sharding, message delivery semantics, stream processing (watermarks/state), and batch scheduling, with Rust ecosystem examples.",
+      "bloom": "L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Database Systems",
+          "path": "04_database_systems.md"
+        },
+        {
+          "title": "Data Engineering",
+          "path": "05_data_engineering.md"
+        },
+        {
+          "title": "Distributed Consensus",
+          "path": "06_distributed_consensus.md"
+        },
+        {
+          "title": "Stream Processing Ecosystem",
+          "path": "03_stream_processing_ecosystem.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Distributed Systems Protocols",
+          "path": "11_distributed_systems_protocols.md"
+        },
+        {
+          "title": "Performance Engineering Architecture",
+          "path": "../10_performance/02_performance_engineering_architecture.md"
+        },
+        {
+          "title": "Cloud Native",
+          "path": "../04_web_and_networking/02_cloud_native.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/06_data_and_distributed/11_distributed_systems_protocols.md",
+      "path": "06_ecosystem/06_data_and_distributed/11_distributed_systems_protocols.md",
+      "title": "",
+      "en": "Distributed Systems Protocols",
+      "summary": "Distributed Systems Protocols — engineering tour of Paxos/Raft, gossip protocols, 2PC/TCC, distributed locks, CRDT/vector clocks, and leader election, with Rust ecosystem implementations (raft-rs, openraft, artillery) and links to the consensus theory canonical page.",
+      "bloom": "L5-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Distributed Consensus",
+          "path": "06_distributed_consensus.md"
+        },
+        {
+          "title": "CRDT Type Zoo",
+          "path": "08_crdt_type_zoo.md"
+        },
+        {
+          "title": "Causal Ordering and Vector Clocks",
+          "path": "09_causal_ordering_vector_clocks.md"
+        },
+        {
+          "title": "Network Protocols",
+          "path": "../04_web_and_networking/07_network_protocols.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Data-Intensive Systems Design",
+          "path": "10_data_intensive_systems_design.md"
+        },
+        {
+          "title": "Blockchain",
+          "path": "../11_domain_applications/01_blockchain.md"
+        },
+        {
+          "title": "Cloud Native",
+          "path": "../04_web_and_networking/02_cloud_native.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:06_ecosystem/07_security_and_cryptography/01_security_practices.md",
       "path": "06_ecosystem/07_security_and_cryptography/01_security_practices.md",
       "title": "",
@@ -13426,6 +14065,49 @@
         {
           "title": "DevOps and CI/CD",
           "path": "../00_toolchain/03_devops_and_ci_cd.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/07_security_and_cryptography/04_security_architecture.md",
+      "path": "06_ecosystem/07_security_and_cryptography/04_security_architecture.md",
+      "title": "",
+      "en": "Security Architecture",
+      "summary": "Security Architecture — identity-centric design (Zero Trust, RBAC/ABAC/ReBAC), federated authentication (OAuth2/OIDC/JWT), threat modeling (STRIDE/Attack Trees), secure software development lifecycle (SDL), and supply-chain assurance (cargo-audit/vet/sigstore) plus confidential computing, mapped to Rust engineering practices.",
+      "bloom": "L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Security Practices",
+          "path": "01_security_practices.md"
+        },
+        {
+          "title": "Security and Cryptography",
+          "path": "02_security_cryptography.md"
+        },
+        {
+          "title": "Cargo Vet and Supply-Chain Auditing",
+          "path": "03_cargo_vet_supply_chain.md"
+        },
+        {
+          "title": "Type System",
+          "path": "../../01_foundation/02_type_system/01_type_system.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Blockchain",
+          "path": "../11_domain_applications/01_blockchain.md"
+        },
+        {
+          "title": "Cloud Native",
+          "path": "../04_web_and_networking/02_cloud_native.md"
+        },
+        {
+          "title": "Microservice Patterns",
+          "path": "../03_design_patterns/05_microservice_patterns.md"
         }
       ],
       "theorems": [],
@@ -13618,6 +14300,49 @@
         {
           "title": "Async",
           "path": "../../03_advanced/01_async/01_async.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/10_performance/02_performance_engineering_architecture.md",
+      "path": "06_ecosystem/10_performance/02_performance_engineering_architecture.md",
+      "title": "",
+      "en": "Performance Engineering Architecture",
+      "summary": "Performance Engineering Architecture — system-level performance methodology: flamegraphs, perf/eBPF, heap profiling (dhat-rs/heaptrack), lock contention, NUMA, memory alignment, pprof, tracing/metrics, and SLO/SLI/performance budgets, with Rust examples and ecosystem tooling.",
+      "bloom": "L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Performance Optimization",
+          "path": "01_performance_optimization.md"
+        },
+        {
+          "title": "Concurrency",
+          "path": "../../03_advanced/00_concurrency/01_concurrency.md"
+        },
+        {
+          "title": "Async/Await",
+          "path": "../../03_advanced/01_async/01_async.md"
+        },
+        {
+          "title": "Memory Management",
+          "path": "../../02_intermediate/02_memory_management/01_memory_management.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Data-Intensive Systems Design",
+          "path": "../06_data_and_distributed/10_data_intensive_systems_design.md"
+        },
+        {
+          "title": "Cloud Native",
+          "path": "../04_web_and_networking/02_cloud_native.md"
+        },
+        {
+          "title": "Microservice Patterns",
+          "path": "../03_design_patterns/05_microservice_patterns.md"
         }
       ],
       "theorems": [],
@@ -14198,6 +14923,76 @@
         {
           "title": "认证工具链与认证包清单",
           "path": "../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/11_domain_applications/24_advanced_data_structures_implementation.md",
+      "path": "06_ecosystem/11_domain_applications/24_advanced_data_structures_implementation.md",
+      "title": "",
+      "en": "Advanced Data Structures Implementation in Rust",
+      "summary": "Rust implementations and complexity analysis of union-find, trie, segment/Fenwick trees, skip list, red-black tree, rope, ring buffer, work-stealing queue, and lock-free queue, with application scenarios and boundary tests.",
+      "bloom": "L5-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Ownership",
+          "path": "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
+        },
+        {
+          "title": "Generics",
+          "path": "../../02_intermediate/01_generics/01_generics.md"
+        },
+        {
+          "title": "Data Structures in Rust",
+          "path": "09_data_structures_in_rust.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Parallel Algorithms",
+          "path": "25_parallel_algorithms.md"
+        },
+        {
+          "title": "Algorithm Engineering Practice",
+          "path": "08_algorithm_engineering_practice.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/11_domain_applications/25_parallel_algorithms.md",
+      "path": "06_ecosystem/11_domain_applications/25_parallel_algorithms.md",
+      "title": "",
+      "en": "Parallel Algorithms in Rust",
+      "summary": "Parallel algorithms in Rust: prefix sum, parallel graph algorithms (BFS, SSSP, MST), fork-join, work-stealing, NUMA awareness, parallel scan/reduce, and the Rayon implementation principles.",
+      "bloom": "L5-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Concurrency",
+          "path": "../../03_advanced/00_concurrency/01_concurrency.md"
+        },
+        {
+          "title": "Data Structures in Rust",
+          "path": "09_data_structures_in_rust.md"
+        },
+        {
+          "title": "Advanced Data Structures",
+          "path": "24_advanced_data_structures_implementation.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Algorithm Engineering Practice",
+          "path": "08_algorithm_engineering_practice.md"
+        },
+        {
+          "title": "Async",
+          "path": "../../03_advanced/01_async/01_async.md"
         }
       ],
       "theorems": [],

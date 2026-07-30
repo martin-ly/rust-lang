@@ -22,7 +22,11 @@
 > [Algorithm Engineering (Saunders / Demetrescu)](https://people.mpi-inf.mpg.de/~mehlhorn/LEDAbook.html) ·
 > [Rust Atomics and Locks](https://marabos.nl/atomics/) ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
-> [Rust for Rustaceans](https://rust-for-rustaceans.com/)
+> [Rust for Rustaceans](https://rust-for-rustaceans.com/) ·
+> [crossbeam crate](https://docs.rs/crossbeam/) ·
+> [im crate](https://docs.rs/im/) ·
+> [slab crate](https://docs.rs/slab/) ·
+> [Rust Unofficial Algorithms](https://github.com/EbTech/rust-algorithms)
 
 ---
 
@@ -48,6 +52,7 @@
     - [12.1 边界测试：Fenwick 树索引越界](#121-边界测试fenwick-树索引越界)
     - [12.2 边界测试：Rope split 索引越界](#122-边界测试rope-split-索引越界)
     - [12.3 边界测试：红黑树重复插入](#123-边界测试红黑树重复插入)
+  - [相关概念](#相关概念)
   - [十三、思维导图](#十三思维导图)
   - [十四、国际权威参考](#十四国际权威参考)
 
@@ -338,6 +343,13 @@ fn main() {
 
 ---
 
+---
+
+## 相关概念
+
+- [Rust vs Haskell：函数式类型系统与命令式性能的对照](../../05_comparative/02_managed_languages/09_rust_vs_haskell.md)
+- [形式化算法理论](../../04_formal/00_type_theory/13_formal_algorithm_theory.md)
+
 ## 十三、思维导图
 
 ```mermaid
@@ -368,6 +380,8 @@ mindmap
 
 - **P1 学术**: [Introduction to Algorithms (Cormen et al.)](https://mitpress.mit.edu/books/introduction-algorithms-fourth-edition)
 - **P1 学术**: [Algorithm Engineering (Saunders / Demetrescu)](https://people.mpi-inf.mpg.de/~mehlhorn/LEDAbook.html)
+- **P1 学术**: [Pugh — Skip Lists: A Probabilistic Alternative to Balanced Trees (ACM)](https://dl.acm.org/doi/10.1145/78973.78977)
+- **P1 学术**: [Guibas & Sedgewick — A Dichromatic Framework for Balanced Trees (IEEE)](https://ieeexplore.ieee.org/document/4567957)
 - **P0 官方**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 - **P1 并发**: [Rust Atomics and Locks](https://marabos.nl/atomics/)
 - **P1 书籍**: [Rust for Rustaceans](https://rust-for-rustaceans.com/)

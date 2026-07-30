@@ -74,6 +74,7 @@
     - [9.2 RTIC 资源未声明导致编译失败](#92-rtic-资源未声明导致编译失败)
     - [9.3 no\_std 裸机代码错误使用 std](#93-no_std-裸机代码错误使用-std)
   - [十、权威来源索引](#十权威来源索引)
+  - [相关概念](#相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -552,6 +553,8 @@ fn main() {
 - **Oxide Computer — Hubris** — [https://hubris.oxide.computer/](https://hubris.oxide.computer/)
 - **seL4 Foundation** — [https://sel4.systems/](https://sel4.systems/)
 - **RTIC Framework** — [https://rtic.rs/](https://rtic.rs/)
+- **seL4: Formal Verification of an OS Kernel (SOSP'09)** — [https://dl.acm.org/doi/10.1145/1629575.1629596](https://dl.acm.org/doi/10.1145/1629575.1629596)
+- **Tock: Towards Safe and Secure Embedded Systems (SOSP'17)** — [https://dl.acm.org/doi/10.1145/3132747.3132786](https://dl.acm.org/doi/10.1145/3132747.3132786)
 - **Rust Foundation — Safety-Critical Rust Consortium** — [https://rustfoundation.org/safety-critical-rust-consortium/](https://rustfoundation.org/safety-critical-rust-consortium/)
 - **ISO 26262** — *Road vehicles — Functional safety*. ISO, 2018.
 - **IEC 61508** — *Functional safety of electrical/electronic/programmable electronic safety-related systems*. IEC, 2010.
@@ -564,6 +567,13 @@ fn main() {
 > [形式化验证工具链](../../04_formal/04_model_checking/01_verification_toolchain.md)
 >
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-30 ｜ **状态**: ✅ 新建（Rust 1.97 对齐）
+
+---
+
+## 相关概念
+
+- [Rust vs Ada/SPARK：安全关键系统语言对比](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)
+- [软件架构形式化](../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md)
 
 ## 🧭 思维导图（Mindmap）
 

@@ -11,14 +11,14 @@
 > **受众**: [专家]
 > **Bloom 层级**: L4
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+P** — Application + Procedure
+> **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: P×Cre — 设计可移植、类型安全的嵌入式外设抽象
 > **前置概念**: [Rust 嵌入式系统开发](03_embedded_systems.md) · [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md) · [Cortex-M 异常模型](14_interrupt_and_exception_model.md) · [泛型与 Trait Bounds](../../02_intermediate/01_generics/01_generics.md)
 > **后置概念**: [panic_handler 与 no_std 运行时](18_panic_runtime_no_std.md) · [no_std 同步原语](15_no_std_synchronization_primitives.md) · [嵌入式内存分配器](16_embedded_memory_allocators.md)
 
 ---
 
-> **来源**: [svd2rust](https://docs.rs/svd2rust/) · [embedded-hal](https://docs.rs/embedded-hal/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [Embassy Book](https://embassy.dev/book/) · [cortex-m crate](https://docs.rs/cortex-m/)
+> **来源**: [svd2rust](https://docs.rs/svd2rust/) · [embedded-hal](https://docs.rs/embedded-hal/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [Embassy Book](https://embassy.dev/book/) · [cortex-m crate](https://docs.rs/cortex-m/) · [Strom — Typestate Programming (IEEE)](https://ieeexplore.ieee.org/document/6312929)
 
 ---
 
@@ -375,6 +375,9 @@ static mut BUF: [u8; 256] = [0; 256];
 - [嵌入式内存分配器](16_embedded_memory_allocators.md)
 - [panic_handler 与 no_std 运行时](18_panic_runtime_no_std.md)
 - [泛型与 Trait Bounds](../../02_intermediate/01_generics/01_generics.md)
+- [Rust vs Zig：系统编程的两种显式路径](../../05_comparative/01_systems_languages/06_rust_vs_zig.md)
+- [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
+- [安全关键裸机 OS 与 Rust](../../06_ecosystem/05_systems_and_embedded/19_safety_critical_bare_metal_os.md)
 
 ---
 

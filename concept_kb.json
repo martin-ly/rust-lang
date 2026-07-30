@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 608,
-    "generated_at": "2026-07-30T19:35:20.054702+00:00"
+    "generated_at": "2026-07-30T20:47:14.541507+00:00"
   },
   "files": [
     {
@@ -756,7 +756,7 @@
       "layer": "L0",
       "title": "Rust API Guidelines 权威指南",
       "positioning": "本页是 Rust API Guidelines 在 `concept/` 中的**唯一权威解释页**，系统讲解 C-COMMON、C-CONV、C-SINGULAR、C-GETTER、C-STRUCT-BOUNDS、C-VALID、C-RATIONAL、C-STABLE、C-UNUSED、C-CALLER、C-QUESTION、C-CONFIRM、C-DEREF、C-CLONE、C-DEBUG、C-SERDE、C-FAILURE、C-PLACEHOLDER、C-INTERMEDIATE、C-ENTITY、C-METHOD 等核心约定，并给出 Rust 示例与反例。",
-      "line_count": 622,
+      "line_count": 623,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -954,11 +954,11 @@
         },
         {
           "flags": [
-            "compile_fail"
+            "ignore"
           ],
-          "lines": 8,
-          "should_fail": true,
-          "code_preview": "struct Engine; struct Car { engine: Engine }  impl std::ops::Deref for Car {    ..."
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// ❌ 反模式：用 Deref 模拟继承；编译通过，但违反 API Guidelines C-DEREF struct Engine; struct Car ..."
         }
       ],
       "sources": [],
@@ -1180,7 +1180,7 @@
       "layer": "L0",
       "title": "语义模型推理方法论",
       "positioning": "",
-      "line_count": 256,
+      "line_count": 292,
       "theorem_chains": [
         {
           "text": "- 定理之间尽量形成 `⟹` 推理链。",
@@ -1213,10 +1213,50 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../01_foundation/05_collections/03_iterator_idioms.md",
+        "../../02_intermediate/03_error_handling/05_error_idioms.md",
+        "../../02_intermediate/04_types_and_conversions/07_type_conversions.md",
         "../../04_formal/00_type_theory/01_type_theory.md",
         "../../04_formal/09_system_semantics/01_actor_model_semantics.md",
         "../../04_formal/12_concurrency_models/02_expressiveness_of_concurrent_models.md",
+        "../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md",
+        "../../06_ecosystem/03_design_patterns/01_patterns.md",
+        "../../06_ecosystem/03_design_patterns/02_idioms_spectrum.md",
+        "../../06_ecosystem/03_design_patterns/05_microservice_patterns.md",
+        "../../06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md",
+        "../../06_ecosystem/03_design_patterns/09_pattern_implementation_comparison.md",
+        "../../06_ecosystem/03_design_patterns/18_api_design_patterns.md",
+        "../../06_ecosystem/03_design_patterns/21_microkernel_architecture.md",
+        "../../06_ecosystem/03_design_patterns/22_embedded_safety_critical_patterns.md",
+        "../../06_ecosystem/03_design_patterns/23_pipeline_filter_blackboard_interpreter.md",
+        "../../06_ecosystem/04_web_and_networking/01_distributed_systems.md",
+        "../../06_ecosystem/05_systems_and_embedded/03_embedded_systems.md",
+        "../../06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md",
+        "../../06_ecosystem/05_systems_and_embedded/13_bare_metal_boot_linker_script.md",
+        "../../06_ecosystem/05_systems_and_embedded/14_interrupt_and_exception_model.md",
+        "../../06_ecosystem/05_systems_and_embedded/15_no_std_synchronization_primitives.md",
+        "../../06_ecosystem/05_systems_and_embedded/16_embedded_memory_allocators.md",
+        "../../06_ecosystem/05_systems_and_embedded/17_pac_hal_implementation.md",
+        "../../06_ecosystem/05_systems_and_embedded/18_panic_runtime_no_std.md",
+        "../../06_ecosystem/05_systems_and_embedded/19_safety_critical_bare_metal_os.md",
+        "../../06_ecosystem/05_systems_and_embedded/20_embedded_debugging_logging.md",
+        "../../06_ecosystem/05_systems_and_embedded/21_riscv_avr_embedded.md",
+        "../../06_ecosystem/05_systems_and_embedded/22_embedded_protocol_drivers.md",
+        "../../06_ecosystem/06_data_and_distributed/10_data_intensive_systems_design.md",
+        "../../06_ecosystem/06_data_and_distributed/11_distributed_systems_protocols.md",
+        "../../06_ecosystem/07_security_and_cryptography/04_security_architecture.md",
+        "../../06_ecosystem/10_performance/02_performance_engineering_architecture.md",
+        "../../06_ecosystem/11_domain_applications/16_quantum_computing_rust.md",
+        "../../06_ecosystem/11_domain_applications/24_advanced_data_structures_implementation.md",
+        "../../06_ecosystem/11_domain_applications/25_parallel_algorithms.md",
+        "../../07_future/02_preview_features/07_stable_abi_preview.md",
+        "../../07_future/02_preview_features/30_rust_in_space.md",
+        "../../07_future/04_research_and_experimental/01_ai_integration.md",
+        "../../07_future/04_research_and_experimental/08_llm_system_architecture.md",
         "knowledge_mindmap.md",
+        "rust_api_guidelines_canonical.md",
+        "semantic_bridge_algorithms_patterns.md",
         "semantic_layer_alignment_index.md",
         "semantic_space.md"
       ],
@@ -14522,7 +14562,7 @@
       "layer": "L1",
       "title": "迭代器惯用组合（Iterator Idioms）",
       "positioning": "本页系统讲解 Rust 标准库 `Iterator` trait 的常用组合子，帮助读者用惰性求值链替代命令式循环，写出更短、更快、更安全的代码。",
-      "line_count": 524,
+      "line_count": 525,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -23943,7 +23983,7 @@
       "layer": "L2",
       "title": "Rust 错误处理惯用法（Error Idioms）",
       "positioning": "本页聚焦 Rust 错误处理的**惯用组合子与工程分层**，是 `01_error_handling.md` 的进阶补充与 `02_error_handling_deep_dive.md` 的实战聚焦页。",
-      "line_count": 483,
+      "line_count": 484,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -57122,7 +57162,7 @@
       "layer": "L6",
       "title": "设计模式概览",
       "positioning": "",
-      "line_count": 4061,
+      "line_count": 4062,
       "theorem_chains": [
         {
           "text": "| **RAII** | 资源泄漏 | 确定性资源管理 ⟹ `Drop`自动调用 | 所有权（Ownership）+作用域 | 边界：`mem::forget`、引用（Reference）循环泄漏 |",
@@ -57363,11 +57403,9 @@
           "code_preview": "// 组件接口 trait FileSystemComponent {     fn name(&self) -> &str;     fn size(&sel..."
         },
         {
-          "flags": [
-            "compile_fail"
-          ],
+          "flags": [],
           "lines": 14,
-          "should_fail": true,
+          "should_fail": false,
           "code_preview": "// ❌ 不推荐：在 trait 中要求 add，File 被迫实现无意义方法 trait Component {     fn add(&mut self, ..."
         },
         {
@@ -57415,10 +57453,12 @@
           "code_preview": "// 请求类型 struct Request { path: String, authenticated: bool }  // 处理结果：Continue 表..."
         },
         {
-          "flags": [],
-          "lines": 13,
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
           "should_fail": false,
-          "code_preview": "// ❌ 边界：链尾没有 FinalHandler，导致 Err(\"未处理\") fn main() {     let mut auth = AuthHandl..."
+          "code_preview": "// ❌ 边界：链尾没有 FinalHandler，导致 Err(\"未处理\") // 延续上一节 AuthHandler / LogHandler / Requ..."
         },
         {
           "flags": [],
@@ -60480,7 +60520,7 @@
       "layer": "L6",
       "title": "微内核架构模式",
       "positioning": "",
-      "line_count": 301,
+      "line_count": 312,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -60524,6 +60564,9 @@
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/01_generics.md",
         "../../02_intermediate/05_modules_and_visibility/01_module_system.md",
+        "../../04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../06_ecosystem/05_systems_and_embedded/05_os_kernel.md",
         "01_patterns.md",
         "05_microservice_patterns.md",
         "06_event_driven_architecture.md",
@@ -60549,7 +60592,7 @@
       "layer": "L6",
       "title": "嵌入式安全关键模式",
       "positioning": "",
-      "line_count": 455,
+      "line_count": 467,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -60639,6 +60682,9 @@
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../03_advanced/04_ffi/01_rust_ffi.md",
+        "../../04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md",
+        "../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md",
+        "../../06_ecosystem/11_domain_applications/23_safety_critical_systems_engineering.md",
         "01_patterns.md",
         "21_microkernel_architecture.md"
       ],
@@ -60662,7 +60708,7 @@
       "layer": "L6",
       "title": "管道-过滤器、黑板与解释器架构",
       "positioning": "",
-      "line_count": 444,
+      "line_count": 454,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -60719,6 +60765,8 @@
         "../../02_intermediate/01_generics/01_generics.md",
         "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md",
+        "../../05_comparative/00_paradigms/05_language_semantic_model_matrix.md",
         "01_patterns.md",
         "06_event_driven_architecture.md",
         "07_cqrs_event_sourcing.md",
@@ -63443,7 +63491,7 @@
       "layer": "L6",
       "title": "裸机启动与链接脚本",
       "positioning": "",
-      "line_count": 469,
+      "line_count": 472,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -63543,6 +63591,9 @@
       "sources": [],
       "cross_references": [
         "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md",
+        "../../05_comparative/01_systems_languages/06_rust_vs_zig.md",
+        "../../06_ecosystem/05_systems_and_embedded/19_safety_critical_bare_metal_os.md",
         "../01_cargo/22_build_std.md",
         "02_cross_compilation.md",
         "03_embedded_systems.md",
@@ -63570,7 +63621,7 @@
       "layer": "L6",
       "title": "Cortex-M 与 RISC-V 中断异常模型",
       "positioning": "",
-      "line_count": 376,
+      "line_count": 379,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -63654,6 +63705,9 @@
       "sources": [],
       "cross_references": [
         "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md",
+        "../../05_comparative/01_systems_languages/06_rust_vs_zig.md",
+        "../../06_ecosystem/05_systems_and_embedded/19_safety_critical_bare_metal_os.md",
         "03_embedded_systems.md",
         "13_bare_metal_boot_linker_script.md",
         "15_no_std_synchronization_primitives.md",
@@ -63680,7 +63734,7 @@
       "layer": "L6",
       "title": "no_std 同步原语",
       "positioning": "",
-      "line_count": 422,
+      "line_count": 424,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -63782,6 +63836,7 @@
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md",
         "../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "14_interrupt_and_exception_model.md",
         "16_embedded_memory_allocators.md",
         "17_pac_hal_implementation.md"
@@ -63806,7 +63861,7 @@
       "layer": "L6",
       "title": "嵌入式内存分配器",
       "positioning": "",
-      "line_count": 370,
+      "line_count": 372,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -63883,6 +63938,7 @@
       "cross_references": [
         "../../02_intermediate/02_memory_management/01_memory_management.md",
         "../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md",
+        "../../05_comparative/01_systems_languages/06_rust_vs_zig.md",
         "../01_cargo/22_build_std.md",
         "13_bare_metal_boot_linker_script.md",
         "17_pac_hal_implementation.md",
@@ -63908,7 +63964,7 @@
       "layer": "L6",
       "title": "PAC 与 HAL 实现",
       "positioning": "",
-      "line_count": 417,
+      "line_count": 420,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -64032,6 +64088,9 @@
       "sources": [],
       "cross_references": [
         "../../02_intermediate/01_generics/01_generics.md",
+        "../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md",
+        "../../05_comparative/01_systems_languages/06_rust_vs_zig.md",
+        "../../06_ecosystem/05_systems_and_embedded/19_safety_critical_bare_metal_os.md",
         "03_embedded_systems.md",
         "13_bare_metal_boot_linker_script.md",
         "14_interrupt_and_exception_model.md",
@@ -64059,7 +64118,7 @@
       "layer": "L6",
       "title": "panic_handler 与 no_std 运行时",
       "positioning": "",
-      "line_count": 344,
+      "line_count": 346,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -64152,6 +64211,7 @@
       "cross_references": [
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md",
+        "../../05_comparative/01_systems_languages/06_rust_vs_zig.md",
         "03_embedded_systems.md",
         "13_bare_metal_boot_linker_script.md",
         "16_embedded_memory_allocators.md",
@@ -64177,7 +64237,7 @@
       "layer": "L6",
       "title": "安全关键裸机操作系统与 Rust",
       "positioning": "从 Ferrocene 语言子集与工具链资格鉴定出发，系统比较 Tock、Hubris、seL4+Rust、RTIC 四种安全关键裸机/微内核/实时并发架构的设计哲学、隔离机制与认证边界。",
-      "line_count": 604,
+      "line_count": 614,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -64255,6 +64315,8 @@
         "../../00_meta/01_terminology/01_terminology_glossary.md",
         "../../04_formal/04_model_checking/01_verification_toolchain.md",
         "../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md",
+        "../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md",
+        "../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md",
         "../11_domain_applications/23_safety_critical_systems_engineering.md",
         "02_cross_compilation.md",
         "03_embedded_systems.md",
@@ -64283,11 +64345,14 @@
       "layer": "L6",
       "title": "嵌入式调试与日志",
       "positioning": "系统梳理 Rust 嵌入式开发中的调试与日志技术——从 probe-rs 工具链到 defmt 帧格式、RTT/semihosting/UART 选型、embedded-test 与 QEMU 仿真，再到真实硬件调试策略。",
-      "line_count": 667,
+      "line_count": 701,
       "theorem_chains": [],
       "anti_propositions": [
         {
           "title": "## 七、反命题"
+        },
+        {
+          "title": "## 反例"
         }
       ],
       "code_blocks": [
@@ -64362,11 +64427,21 @@
           "lines": 7,
           "should_fail": false,
           "code_preview": "// 使用 cortex-m crate 配置 ITM use cortex_m::peripheral::ITM;  unsafe {     (*ITM::..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：高频循环中无流量控制地写 RTT loop {     let sample = adc.read(&mut pin).unwrap();   ..."
         }
       ],
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../06_ecosystem/09_testing_and_quality/03_testing.md",
         "../06_data_and_distributed/01_application_domains.md",
         "../10_performance/01_performance_optimization.md",
         "../11_domain_applications/23_safety_critical_systems_engineering.md",
@@ -64392,7 +64467,7 @@
       "layer": "L6",
       "title": "RISC-V 与 AVR 嵌入式 Rust 开发",
       "positioning": "系统对比 RISC-V 与 AVR 在 Rust 嵌入式生态中的目标三元组、中断架构、PAC/HAL 栈、ABI 约定与低功耗模式，帮助工程师在两款非 ARM 架构上做出技术选型与代码实现决策。",
-      "line_count": 608,
+      "line_count": 616,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -64479,6 +64554,8 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md",
+        "../../05_comparative/01_systems_languages/06_rust_vs_zig.md",
         "02_cross_compilation.md",
         "03_embedded_systems.md",
         "05_os_kernel.md",
@@ -64506,11 +64583,14 @@
       "layer": "L6",
       "title": "嵌入式协议与外设驱动",
       "positioning": "系统梳理 Rust 嵌入式生态中对常见片上外设与总线协议的抽象方式，重点说明 `embedded-hal` / `embedded-hal-async` 的 trait 设计、驱动状态机建模、错误处理与边界风险。",
-      "line_count": 920,
+      "line_count": 957,
       "theorem_chains": [],
       "anti_propositions": [
         {
           "title": "## 十四、反命题"
+        },
+        {
+          "title": "## 反例"
         }
       ],
       "code_blocks": [
@@ -64657,12 +64737,22 @@
           "lines": 7,
           "should_fail": false,
           "code_preview": "// ❌ 边界示例：子任务死锁但主循环仍喂狗 loop {     // sensor_task 已死锁，未更新数据     usb_task.poll(); ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：未开启 I2C1 时钟就发起传输 fn init_i2c(i2c: &mut I2c1, scl: &mut Pin, sda: &mut Pi..."
         }
       ],
       "sources": [],
       "cross_references": [
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../03_advanced/01_async/01_async.md",
+        "../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md",
+        "../../05_comparative/01_systems_languages/06_rust_vs_zig.md",
         "03_embedded_systems.md",
         "09_embedded_hal_1_0_migration.md",
         "11_async_no_std_embedded.md"
@@ -64670,7 +64760,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 52,
+      "matrix_rows": 53,
       "pre_post": {
         "pre": [
           "[Rust 嵌入式系统开发](03_embedded_systems.md) ·"
@@ -65964,7 +66054,7 @@
       "layer": "L6",
       "title": "数据密集型系统设计：存储、事务、复制与流批一体",
       "positioning": "",
-      "line_count": 669,
+      "line_count": 691,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -65972,6 +66062,9 @@
         },
         {
           "title": "### 3.1 反命题"
+        },
+        {
+          "title": "## 反例"
         }
       ],
       "code_blocks": [
@@ -66014,6 +66107,8 @@
       "cross_references": [
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/01_async/01_async.md",
+        "../../05_comparative/02_managed_languages/01_rust_vs_java.md",
+        "../../06_ecosystem/14_enterprise_architecture/04_domain_driven_design_in_rust.md",
         "../04_web_and_networking/02_cloud_native.md",
         "../10_performance/02_performance_engineering_architecture.md",
         "03_stream_processing_ecosystem.md",
@@ -66042,7 +66137,7 @@
       "layer": "L6",
       "title": "分布式系统协议：共识、传播、事务与时序",
       "positioning": "",
-      "line_count": 735,
+      "line_count": 757,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -66050,6 +66145,9 @@
         },
         {
           "title": "### 3.1 反命题"
+        },
+        {
+          "title": "## 反例"
         }
       ],
       "code_blocks": [
@@ -66098,6 +66196,8 @@
       "cross_references": [
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/01_async/01_async.md",
+        "../../04_formal/07_concurrency_semantics/06_distributed_consensus_theory.md",
+        "../../05_comparative/02_managed_languages/01_rust_vs_java.md",
         "../04_web_and_networking/02_cloud_native.md",
         "../04_web_and_networking/07_network_protocols.md",
         "../11_domain_applications/01_blockchain.md",
@@ -66483,7 +66583,7 @@
       "layer": "L6",
       "title": "安全架构：身份、信任、威胁与供应链的系统设计",
       "positioning": "",
-      "line_count": 804,
+      "line_count": 832,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -66491,6 +66591,9 @@
         },
         {
           "title": "### 3.1 反命题"
+        },
+        {
+          "title": "## 反例"
         }
       ],
       "code_blocks": [
@@ -66541,12 +66644,22 @@
           "lines": 10,
           "should_fail": false,
           "code_preview": "// ❌ 错误：提前返回的非常量时间比较（运行时信息泄露风险） fn insecure_compare(a: &[u8], b: &[u8]) -> bool ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：密钥硬编码在源码中 const JWT_SECRET: &str = \"my-super-secret-key-12345\";  fn sign..."
         }
       ],
       "sources": [],
       "cross_references": [
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md",
+        "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
+        "../../06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md",
         "../03_design_patterns/05_microservice_patterns.md",
         "../04_web_and_networking/02_cloud_native.md",
         "../04_web_and_networking/07_network_protocols.md",
@@ -67487,7 +67600,7 @@
       "layer": "L6",
       "title": "性能工程架构：系统级测量、分析与优化",
       "positioning": "",
-      "line_count": 771,
+      "line_count": 794,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -67495,6 +67608,9 @@
         },
         {
           "title": "### 7.1 反命题"
+        },
+        {
+          "title": "## 反例"
         }
       ],
       "code_blocks": [
@@ -67572,6 +67688,8 @@
         "../../02_intermediate/02_memory_management/01_memory_management.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/01_async/01_async.md",
+        "../../05_comparative/00_paradigms/02_execution_model_isomorphism.md",
+        "../../06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md",
         "../03_design_patterns/05_microservice_patterns.md",
         "../04_web_and_networking/02_cloud_native.md",
         "../06_data_and_distributed/10_data_intensive_systems_design.md",
@@ -70423,7 +70541,7 @@
       "layer": "L6",
       "title": "高级数据结构 Rust 实现",
       "positioning": "本页讲解生产级/竞赛级常用高级数据结构的 Rust 实现要点、复杂度分析与适用场景，代码主要位于 `crates/c08_algorithms/src/data_structure/`。",
-      "line_count": 380,
+      "line_count": 394,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -70546,6 +70664,8 @@
         "../../00_meta/01_terminology/01_terminology_glossary.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../02_intermediate/01_generics/01_generics.md",
+        "../../04_formal/00_type_theory/13_formal_algorithm_theory.md",
+        "../../05_comparative/02_managed_languages/09_rust_vs_haskell.md",
         "08_algorithm_engineering_practice.md",
         "09_data_structures_in_rust.md",
         "25_parallel_algorithms.md"
@@ -70570,7 +70690,7 @@
       "layer": "L6",
       "title": "并行算法",
       "positioning": "本页讲解 Rust 中利用多核的并行算法设计，覆盖数据并行、任务并行、图并行与调度器原理，代码位于 `crates/c08_algorithms/src/algorithms/parallel_algorithms.rs`。",
-      "line_count": 370,
+      "line_count": 380,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -70681,8 +70801,10 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/01_async/01_async.md",
-        "../../03_advanced/02_concurrency/01_concurrency.md",
+        "../../04_formal/00_type_theory/13_formal_algorithm_theory.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "08_algorithm_engineering_practice.md",
         "09_data_structures_in_rust.md",
         "24_advanced_data_structures_implementation.md"
@@ -70693,7 +70815,7 @@
       "matrix_rows": 11,
       "pre_post": {
         "pre": [
-          "[Concurrency](../../03_advanced/02_concurrency/01_concurrency.md) · [Data Structures in Rust](09_data_structures_in_rust.md) · [Advanced Data Structures](24_advanced_data_structures_implementation.md)"
+          "[Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Data Structures in Rust](09_data_structures_in_rust.md) · [Advanced Data Structures](24_advanced_data_structures_implementation.md)"
         ],
         "post": [
           "[Algorithm Engineering Practice](08_algorithm_engineering_practice.md) · [Async](../../03_advanced/01_async/01_async.md)"

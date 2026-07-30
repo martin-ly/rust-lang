@@ -11,14 +11,14 @@
 > **受众**: [研究者]
 > **Bloom 层级**: L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **S** — Structure
+> **A/S/P 标记**: **P** — Procedure
 > **双维定位**: P×Ana — 形式化分析嵌入式内存访问的可见性与安全性
 > **前置概念**: [内存模型](../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [裸机启动与链接脚本](../../06_ecosystem/05_systems_and_embedded/13_bare_metal_boot_linker_script.md)
 > **后置概念**: [no_std 同步原语](../../06_ecosystem/05_systems_and_embedded/15_no_std_synchronization_primitives.md) · [PAC 与 HAL 实现](../../06_ecosystem/05_systems_and_embedded/17_pac_hal_implementation.md) · [嵌入式内存分配器](../../06_ecosystem/05_systems_and_embedded/16_embedded_memory_allocators.md)
 
 ---
 
-> **来源**: [ARMv7-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0403/latest/) · [ARMv8-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0553/latest/) · [Rust Reference — Volatile](https://doc.rust-lang.org/reference/behavior-not-considered-unsafe.html#invalid-data) · [Rust Atomics and Locks](https://marabos.nl/atomics/) · [Ferrocene Language Specification](https://spec.ferrocene.dev/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Tock Book](https://book.tockos.org/) · [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/)
+> **来源**: [ARMv7-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0403/latest/) · [ARMv8-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0553/latest/) · [Rust Reference — Volatile](https://doc.rust-lang.org/reference/behavior-not-considered-unsafe.html#invalid-data) · [Rust Atomics and Locks](https://marabos.nl/atomics/) · [Ferrocene Language Specification](https://spec.ferrocene.dev/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Tock Book](https://book.tockos.org/) · [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [cortex-m crate](https://docs.rs/cortex-m/) · [critical-section crate](https://docs.rs/critical-section/) · [Rust Embedded WG](https://github.com/rust-embedded/wg)
 
 ---
 

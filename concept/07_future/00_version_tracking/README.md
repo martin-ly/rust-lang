@@ -1,7 +1,7 @@
-# Rust 版本跟踪专题
+> **EN**: Rust Version Tracking
+> **Summary**: Centralized tracking of Rust stable/nightly version semantics, feature stabilization, and migration decision trees from 1.90 through 1.99+.
 
-**EN**: Rust Version Tracking
-**Summary**: Centralized tracking of Rust stable/nightly version semantics, feature stabilization, and migration decision trees from 1.90 through 1.99+.
+# Rust 版本跟踪专题
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5–L7

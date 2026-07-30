@@ -11,14 +11,14 @@
 > **受众**: [专家]
 > **Bloom 层级**: L4
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+P** — Application + Procedure
+> **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: P×Eva — 评估不同 no_std 同步策略的适用性
 > **前置概念**: [Cortex-M 异常模型](14_interrupt_and_exception_model.md) · [并发基础](../../03_advanced/00_concurrency/01_concurrency.md) · [原子操作](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md)
 > **后置概念**: [PAC 与 HAL 实现](17_pac_hal_implementation.md) · [嵌入式内存分配器](16_embedded_memory_allocators.md) · [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
 
 ---
 
-> **来源**: [critical-section crate](https://docs.rs/critical-section/) · [cortex-m crate](https://docs.rs/cortex-m/) · [bare-metal crate](https://docs.rs/bare-metal/) · [Rust Atomics and Locks](https://marabos.nl/atomics/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [RTIC Book](https://rtic.rs/2/book/en/) · [spin crate](https://docs.rs/spin/)
+> **来源**: [critical-section crate](https://docs.rs/critical-section/) · [cortex-m crate](https://docs.rs/cortex-m/) · [bare-metal crate](https://docs.rs/bare-metal/) · [Rust Atomics and Locks](https://marabos.nl/atomics/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [RTIC Book](https://rtic.rs/2/book/en/) · [spin crate](https://docs.rs/spin/) · [Michael & Scott — Simple, Fast, and Practical Non-Blocking and Blocking Concurrent Queue Algorithms (ACM)](https://dl.acm.org/doi/10.1145/248052.248106) · [Herlihy — Wait-Free Synchronization (ACM)](https://dl.acm.org/doi/10.1145/114005.102808)
 
 ---
 
@@ -384,6 +384,8 @@ with(|cs| {
 - [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
 - [并发基础](../../03_advanced/00_concurrency/01_concurrency.md)
 - [原子操作](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md)
+- [Rust vs C++：形式系统模型 vs 机制工程模型](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
+- [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
 
 ---
 

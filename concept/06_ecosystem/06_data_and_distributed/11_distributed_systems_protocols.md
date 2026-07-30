@@ -44,6 +44,8 @@
     - [6.1 边界测试：Redlock 时钟回拨导致锁失效（运行时安全漏洞）](#61-边界测试redlock-时钟回拨导致锁失效运行时安全漏洞)
     - [6.2 边界测试：CRDT 合并忽略业务语义（逻辑错误）](#62-边界测试crdt-合并忽略业务语义逻辑错误)
     - [6.3 边界测试：向量时钟比较误判并发（逻辑错误）](#63-边界测试向量时钟比较误判并发逻辑错误)
+  - [反例 / 边界测试 / 常见陷阱](#反例--边界测试--常见陷阱)
+    - [用 Gossip 协议传播必须立即一致的集群元数据](#用-gossip-协议传播必须立即一致的集群元数据)
   - [相关概念](#相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
@@ -684,6 +686,25 @@ fn main() {
 
 ---
 
+## 反例 / 边界测试 / 常见陷阱
+
+### 用 Gossip 协议传播必须立即一致的集群元数据
+
+**错误场景**：系统把“当前 Leader 是谁”这类关键元数据通过 Gossip 广播；由于 Gossip 是随机两两交换，不同节点在同一时刻看到不同 Leader，导致脑裂和重复写。
+
+```text
+❌ 错误设计：
+  节点 A: 通过 gossip 得知 Leader = N1（最新一轮）
+  节点 B: 尚未收到本轮 gossip，仍认为 Leader = N2
+  结果：A 和 B 同时向不同 Leader 提交写请求，破坏一致性
+```
+
+**为何错误**：Gossip 提供的是最终一致性和概率收敛，不保证全序和即时一致性；把它用于强一致状态（如 Leader、分片映射）会违反安全属性。
+
+**正确做法**：集群元数据、Leader 身份、配置变更等强一致状态应通过 Raft/Paxos 或 etcd/ZooKeeper 维护；Gossip 仅用于成员发现、缓存失效、指标聚合等可容忍延迟一致的场景。
+
+---
+
 ## 相关概念
 
 - [Distributed Consensus](06_distributed_consensus.md) — Paxos/Raft/PBFT 完整理论与 Rust 实现
@@ -694,6 +715,8 @@ fn main() {
 - [Network Protocols](../04_web_and_networking/07_network_protocols.md) — QUIC、gRPC、序列化
 - [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) — 并发原语
 - [Async/Await](../../03_advanced/01_async/01_async.md) — 异步网络 I/O
+- [Rust vs Java：系统编程与托管运行时的范式对比](../../05_comparative/02_managed_languages/01_rust_vs_java.md)
+- [分布式共识与不可能性理论](../../04_formal/07_concurrency_semantics/06_distributed_consensus_theory.md)
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 

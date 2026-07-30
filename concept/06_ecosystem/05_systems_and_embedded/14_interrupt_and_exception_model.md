@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [ARMv7-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0403/latest/) · [ARMv8-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0553/latest/) · [RISC-V Privileged Spec](https://riscv.org/technical/specifications/) · [RISC-V CLIC Spec](https://github.com/riscv/riscv-fast-interrupt/blob/master/clic.adoc) · [cortex-m crate](https://docs.rs/cortex-m/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [RTIC Book](https://rtic.rs/2/book/en/) · [Rust Atomics and Locks](https://marabos.nl/atomics/)
+> **来源**: [ARMv7-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0403/latest/) · [ARMv8-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0553/latest/) · [RISC-V Privileged Spec](https://riscv.org/technical/specifications/) · [RISC-V CLIC Spec](https://github.com/riscv/riscv-fast-interrupt/blob/master/clic.adoc) · [cortex-m crate](https://docs.rs/cortex-m/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [RTIC Book](https://rtic.rs/2/book/en/) · [Rust Atomics and Locks](https://marabos.nl/atomics/) · [A Survey of Rust Embedded Development (arXiv)](https://arxiv.org/abs/2311.05063)
 
 ---
 
@@ -330,6 +330,9 @@ unsafe { cortex_m::register::basepri::write(4 << 4) }
 - [panic_handler 与 no_std 运行时](18_panic_runtime_no_std.md)
 - [并发基础](../../03_advanced/00_concurrency/01_concurrency.md)
 - [RTIC 框架](03_embedded_systems.md)
+- [Rust vs Zig：系统编程的两种显式路径](../../05_comparative/01_systems_languages/06_rust_vs_zig.md)
+- [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
+- [安全关键裸机 OS 与 Rust](../../06_ecosystem/05_systems_and_embedded/19_safety_critical_bare_metal_os.md)
 
 ---
 

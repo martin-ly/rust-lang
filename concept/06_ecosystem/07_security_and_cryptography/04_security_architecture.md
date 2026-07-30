@@ -20,7 +20,7 @@
 
 ---
 
-> **来源**: [RFC 7519 — JWT](https://tools.ietf.org/html/rfc7519) · [RFC 7662 — Token Introspection](https://tools.ietf.org/html/rfc7662) · [NIST SP 800-63 — Digital Identity Guidelines](https://pages.nist.gov/800-63-3/) · [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/) · [cargo-audit](https://github.com/RustSec/rustsec/tree/main/cargo-audit) · [cargo-vet](https://mozilla.github.io/cargo-vet/) · [Rust Secure Code WG](https://github.com/rust-secure-code/wg)
+> **来源**: [RFC 7519 — JWT](https://tools.ietf.org/html/rfc7519) · [RFC 7662 — Token Introspection](https://tools.ietf.org/html/rfc7662) · [NIST SP 800-63 — Digital Identity Guidelines](https://pages.nist.gov/800-63-3/) · [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/) · [cargo-audit](https://github.com/RustSec/rustsec/tree/main/cargo-audit) · [cargo-vet](https://mozilla.github.io/cargo-vet/) · [Rust Secure Code WG](https://github.com/rust-secure-code/wg) · [Zero Trust Architecture: A Survey (arXiv)](https://arxiv.org/abs/2503.11659)
 
 ## 📑 目录
 
@@ -44,6 +44,8 @@
     - [6.1 边界测试：JWT 无签名验证导致身份伪造（运行时安全漏洞）](#61-边界测试jwt-无签名验证导致身份伪造运行时安全漏洞)
     - [6.2 边界测试：RBAC 角色过度授权（逻辑漏洞）](#62-边界测试rbac-角色过度授权逻辑漏洞)
     - [6.3 边界测试：时序侧信道泄露密码比较结果（运行时信息泄露）](#63-边界测试时序侧信道泄露密码比较结果运行时信息泄露)
+  - [反例 / 边界测试 / 常见陷阱](#反例--边界测试--常见陷阱)
+    - [把 JWT 签名密钥硬编码在源码或普通环境变量中](#把-jwt-签名密钥硬编码在源码或普通环境变量中)
   - [相关概念](#相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
@@ -750,6 +752,31 @@ fn insecure_compare(a: &[u8], b: &[u8]) -> bool {
 
 ---
 
+## 反例 / 边界测试 / 常见陷阱
+
+### 把 JWT 签名密钥硬编码在源码或普通环境变量中
+
+**错误场景**：为了部署方便，把 HMAC 对称密钥或 RSA 私钥直接写在 `const JWT_SECRET: &str = "..."` 或 `.env` 文件里，并随仓库提交。
+
+```rust,ignore
+// ❌ 错误：密钥硬编码在源码中
+const JWT_SECRET: &str = "my-super-secret-key-12345";
+
+fn sign_token(claims: &Claims) -> String {
+    jsonwebtoken::encode(
+        &Header::default(),
+        claims,
+        &EncodingKey::from_secret(JWT_SECRET.as_bytes()),
+    ).unwrap()
+}
+```
+
+**为何错误**：源码一旦泄露（开源、内部仓库暴露、供应链攻击），攻击者即可伪造任意 JWT；同时硬编码密钥无法轮换，也无法审计谁访问过密钥。
+
+**正确做法**：使用专用密钥管理系统（KMS/HSM/Vault）或云托管密钥；运行时通过安全通道注入密钥，并启用自动轮换、最小权限访问和审计日志；高安全场景使用非对称算法并把私钥留在独立签名服务中。
+
+---
+
 ## 相关概念
 
 - [Security Practices](01_security_practices.md) — 通用安全编程实践
@@ -760,6 +787,8 @@ fn insecure_compare(a: &[u8], b: &[u8]) -> bool {
 - [Network Protocols](../04_web_and_networking/07_network_protocols.md) — TLS 1.3 / mTLS
 - [Type System](../../01_foundation/02_type_system/01_type_system.md) — 用类型编码安全不变量
 - [Error Handling](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md) — 安全敏感错误处理
+- [Rust 安全保证的边界条件全景](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md)
+- [企业架构框架：TOGAF · Zachman · FEAF · BDAT](../../06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md)
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 

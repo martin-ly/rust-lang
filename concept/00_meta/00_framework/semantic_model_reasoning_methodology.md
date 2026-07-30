@@ -17,7 +17,10 @@
 > **后置概念**:
 > [Type Theory](../../04_formal/00_type_theory/01_type_theory.md) ·
 > [Actor Model Semantics](../../04_formal/09_system_semantics/01_actor_model_semantics.md) ·
-> [Expressiveness of Concurrent Models](../../04_formal/12_concurrency_models/02_expressiveness_of_concurrent_models.md)
+> [Expressiveness of Concurrent Models](../../04_formal/12_concurrency_models/02_expressiveness_of_concurrent_models.md) ·
+> [Idioms Spectrum](../../06_ecosystem/03_design_patterns/02_idioms_spectrum.md) ·
+> [Embedded Systems](../../06_ecosystem/05_systems_and_embedded/03_embedded_systems.md) ·
+> [Algorithms–Patterns Semantic Bridge](semantic_bridge_algorithms_patterns.md)
 > **主要来源**:
 > [Bloom 1956, *Taxonomy of Educational Objectives*](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) ·
 > [Wadler 1989, *Theorems for Free!*](https://doi.org/10.1007/3-540-50945-2_6) ·
@@ -25,10 +28,11 @@
 
 ---
 
-> **Bloom 层级**: L1-L7
+> **Bloom 层级**: L0-L7
 **变更日志**:
 
 - v1.0 (2026-07-30): 初始版本——建立语义模型六要素推理方法论
+- v1.1 (2026-07-30): Wave 5——纳入 bare-metal / no_std、惯用法、算法/模式/架构、安全/数据/分布式语义层与决策树 DF-NOSTD-01 / DF-ALGDS-01 / DF-SECARCH-01 / DF-DATADIST-01
 
 ---
 
@@ -252,4 +256,36 @@ mindmap
 
 ---
 
-> **版本信息**: v1.0 · 2026-07-30 · 对齐 Rust 1.97.1+ (Edition 2024)
+---
+
+## 八、bare-metal / no_std / 嵌入式语义层
+
+本小节把 Wave 1–4 新增的 no_std / bare-metal / 嵌入式内容映射到 L0–L7 语义层级，形成从术语到未来方向的完整推理链。对应的可判定决策树见 [`DF-NOSTD-01`](../knowledge_topology/decision_trees.yaml)。
+
+- **L0 术语层**：no_std、PAC、HAL、BSP、linker script、ISR 等核心术语统一见 [`术语表`](../../00_meta/01_terminology/01_terminology_glossary.md)。
+- **L1 启动与运行时**：裸机启动流程、内存布局、链接脚本与 `panic_handler` 见 [`裸机启动与链接脚本`](../../06_ecosystem/05_systems_and_embedded/13_bare_metal_boot_linker_script.md)、[`panic_handler 与 no_std 运行时`](../../06_ecosystem/05_systems_and_embedded/18_panic_runtime_no_std.md)。
+- **L2 中断与同步**：Cortex-M/RISC-V 中断异常模型、no_std 同步原语与全局分配器见 [`Cortex-M 与 RISC-V 中断异常模型`](../../06_ecosystem/05_systems_and_embedded/14_interrupt_and_exception_model.md)、[`no_std 同步原语`](../../06_ecosystem/05_systems_and_embedded/15_no_std_synchronization_primitives.md)、[`嵌入式内存分配器`](../../06_ecosystem/05_systems_and_embedded/16_embedded_memory_allocators.md)。
+- **L3 设备抽象**：PAC/HAL 实现与协议驱动见 [`PAC 与 HAL 实现`](../../06_ecosystem/05_systems_and_embedded/17_pac_hal_implementation.md)、[`嵌入式协议与外设驱动`](../../06_ecosystem/05_systems_and_embedded/22_embedded_protocol_drivers.md)。
+- **L4 异步与形式化**：no_std 异步运行时与嵌入式形式化内存模型见 [`裸机与嵌入式中的 Async`](../../06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md)、[`嵌入式形式化内存模型`](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)。
+- **L5 安全关键系统**：Ferrocene / Tock / Hubris / seL4 等安全关键 bare-metal OS 见 [`安全关键裸机操作系统与 Rust`](../../06_ecosystem/05_systems_and_embedded/19_safety_critical_bare_metal_os.md)、[`嵌入式安全关键模式`](../../06_ecosystem/03_design_patterns/22_embedded_safety_critical_patterns.md)。
+- **L6 跨架构可移植性**：RISC-V / AVR 移植、调试与日志见 [`RISC-V 与 AVR 嵌入式 Rust 开发`](../../06_ecosystem/05_systems_and_embedded/21_riscv_avr_embedded.md)、[`嵌入式调试与日志`](../../06_ecosystem/05_systems_and_embedded/20_embedded_debugging_logging.md)。
+- **L7 未来方向**：AI+嵌入式、Rust in Space、stable ABI 见 [`AI 集成`](../../07_future/04_research_and_experimental/01_ai_integration.md)、[`Rust in Space 预览`](../../07_future/02_preview_features/30_rust_in_space.md)、[`Stable ABI 预览`](../../07_future/02_preview_features/07_stable_abi_preview.md)。
+
+---
+
+## 九、惯用法 / 算法 / 模式 / 架构语义层
+
+本小节把 Wave 6–9 新增的惯用法、算法、设计模式、架构与安全/数据/分布式内容映射到 L0–L7。对应的可判定决策树见 [`DF-ALGDS-01`](../knowledge_topology/decision_trees.yaml)、[`DF-SECARCH-01`](../knowledge_topology/decision_trees.yaml)、[`DF-DATADIST-01`](../knowledge_topology/decision_trees.yaml)。
+
+- **L0 基础条目**：API Guidelines 条目与 Iterator 组合子见 [`Rust API Guidelines 权威指南`](rust_api_guidelines_canonical.md)、[`迭代器惯用组合`](../../01_foundation/05_collections/03_iterator_idioms.md)。
+- **L1 惯用法**：Error / Type 惯用法见 [`Rust 错误处理惯用法`](../../02_intermediate/03_error_handling/05_error_idioms.md)、[`类型转换`](../../02_intermediate/04_types_and_conversions/07_type_conversions.md)、[`惯用法谱系全景`](../../06_ecosystem/03_design_patterns/02_idioms_spectrum.md)。
+- **L2 算法与数据结构**：高级数据结构与并行算法见 [`高级数据结构 Rust 实现`](../../06_ecosystem/11_domain_applications/24_advanced_data_structures_implementation.md)、[`并行算法`](../../06_ecosystem/11_domain_applications/25_parallel_algorithms.md)。
+- **L3 模式补全**：GoF 补全、微内核、管道-过滤器见 [`设计模式概览`](../../06_ecosystem/03_design_patterns/01_patterns.md)、[`模式实现对比`](../../06_ecosystem/03_design_patterns/09_pattern_implementation_comparison.md)、[`API 设计模式`](../../06_ecosystem/03_design_patterns/18_api_design_patterns.md)、[`微内核架构模式`](../../06_ecosystem/03_design_patterns/21_microkernel_architecture.md)、[`管道-过滤器、黑板与解释器架构`](../../06_ecosystem/03_design_patterns/23_pipeline_filter_blackboard_interpreter.md)。
+- **L4 安全与数据架构**：安全架构、数据密集型系统设计见 [`安全架构：身份、信任、威胁与供应链的系统设计`](../../06_ecosystem/07_security_and_cryptography/04_security_architecture.md)、[`数据密集型系统设计`](../../06_ecosystem/06_data_and_distributed/10_data_intensive_systems_design.md)。
+- **L5 协议与性能工程**：分布式协议、性能工程架构见 [`分布式系统协议`](../../06_ecosystem/06_data_and_distributed/11_distributed_systems_protocols.md)、[`性能工程架构`](../../06_ecosystem/10_performance/02_performance_engineering_architecture.md)。
+- **L6 跨领域决策**：何时 no_std、何时微服务、何时 CQRS/事件溯源见 [`语义桥：算法、设计模式与工作流模式的统一谱系`](semantic_bridge_algorithms_patterns.md)、[`分布式系统：Rust 在微服务与集群中的工程实践`](../../06_ecosystem/04_web_and_networking/01_distributed_systems.md)、[`微服务架构模式`](../../06_ecosystem/03_design_patterns/05_microservice_patterns.md)、[`CQRS & Event Sourcing`](../../06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md)。
+- **L7 前沿架构**：AI/LLM 系统架构、量子/空间计算模式见 [`LLM 系统架构`](../../07_future/04_research_and_experimental/08_llm_system_architecture.md)、[`Rust 量子计算生态`](../../06_ecosystem/11_domain_applications/16_quantum_computing_rust.md)、[`Rust in Space 预览`](../../07_future/02_preview_features/30_rust_in_space.md)。
+
+---
+
+> **版本信息**: v1.1 · 2026-07-30 · 对齐 Rust 1.97.1+ (Edition 2024)

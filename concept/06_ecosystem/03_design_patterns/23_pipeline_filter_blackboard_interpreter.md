@@ -24,7 +24,8 @@
 > [POSA — Pattern-Oriented Software Architecture](https://www.dre.vanderbilt.edu/~schmidt/POSA/) ·
 > [Unix Philosophy](https://en.wikipedia.org/wiki/Unix_philosophy) ·
 > [Dragon Book — Compilers](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) ·
-> [Crafting Interpreters](https://craftinginterpreters.com/)
+> [Crafting Interpreters](https://craftinginterpreters.com/) ·
+> [The Hearsay-II Speech-Understanding System (ACM)](https://dl.acm.org/doi/10.1145/356810.356816)
 
 ---
 
@@ -409,6 +410,13 @@ fn main() {
 **修正**：引入解析器生成器（`lalrpop`、`peg`）或解析组合子（`nom`、`chumsky`），将文法从代码中分离。
 
 ---
+
+---
+
+## 相关概念
+
+- [统一语言 × 语义模型表达力矩阵](../../05_comparative/00_paradigms/05_language_semantic_model_matrix.md)
+- [架构模式语义](../../04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md)
 
 ## 🧭 思维导图（Mindmap）
 

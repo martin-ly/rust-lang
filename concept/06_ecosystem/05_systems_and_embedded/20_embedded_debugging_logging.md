@@ -21,7 +21,9 @@
 ---
 
 > **来源**: [probe-rs](https://probe.rs/) ·
+> [probe-rs crate](https://crates.io/crates/probe-rs) ·
 > [defmt](https://defmt.ferrous-systems.com/) ·
+> [defmt crate](https://crates.io/crates/defmt) ·
 > [Knurling](https://knurling.ferrous-systems.com/) ·
 > [RTT target](https://github.com/probe-rs/rtt-target) ·
 > [embedded-test](https://github.com/probe-rs/embedded-test) ·
@@ -71,6 +73,9 @@
     - [7.4 边界 4：硬件断点数量受限于 MCU](#74-边界-4硬件断点数量受限于-mcu)
     - [7.5 边界 5：SWO 引脚复用可能牺牲 GPIO](#75-边界-5swo-引脚复用可能牺牲-gpio)
   - [八、权威来源索引](#八权威来源索引)
+  - [反例 / 边界测试 / 常见陷阱](#反例--边界测试--常见陷阱)
+    - [tight loop 中无节制 RTT 日志导致静默丢日志](#tight-loop-中无节制-rtt-日志导致静默丢日志)
+  - [相关概念](#相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -617,6 +622,7 @@ ARM Cortex-M 的 **FPB（Flash Patch and Breakpoint）** 提供有限数量的�
 - **The Embedded Rust Book** — [https://docs.rust-embedded.org/book/index.html](https://docs.rust-embedded.org/book/index.html)
 - **OpenOCD** — [https://openocd.org/](https://openocd.org/)
 - **QEMU** — [https://www.qemu.org/](https://www.qemu.org/)
+- **A Survey of Rust Embedded Development (arXiv)** — [https://arxiv.org/abs/2311.05063](https://arxiv.org/abs/2311.05063)
 - **SEGGER J-Link** — [https://www.segger.com/products/debug-probes/j-link/](https://www.segger.com/products/debug-probes/j-link/)
 - **ARM Cortex-M 调试技术参考** — [https://developer.arm.com/documentation/ddi0403/latest/](https://developer.arm.com/documentation/ddi0403/latest/)
 
@@ -625,6 +631,34 @@ ARM Cortex-M 的 **FPB（Flash Patch and Breakpoint）** 提供有限数量的�
 > [性能优化](../10_performance/01_performance_optimization.md)
 >
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-30 ｜ **状态**: ✅ 新建（Rust 1.97 对齐）
+
+---
+
+## 反例 / 边界测试 / 常见陷阱
+
+### tight loop 中无节制 RTT 日志导致静默丢日志
+
+**错误场景**：在传感器采样循环中每 1 ms 输出一条 `rprintln!` 日志，但主机端 `cargo-embed` 因 CPU 负载未能及时拉取 RTT up-buffer；日志被循环覆盖，出现大量缺失。
+
+```rust,ignore
+// ❌ 错误：高频循环中无流量控制地写 RTT
+loop {
+    let sample = adc.read(&mut pin).unwrap();
+    rprintln!("adc={}", sample); // 若主机拉取慢，旧日志被覆盖
+    delay_ms(1);
+}
+```
+
+**为何错误**：RTT 本质上是目标 RAM 中的环形缓冲区；写入速度超过调试器读取速度时，新数据会覆盖尚未取出的旧数据，且不会报错。
+
+**正确做法**：降低日志频率、聚合多条采样后再输出，或改用 `defmt` 减少单条日志字节数；对关键路径使用非覆盖模式（若 HAL 支持）并在主机端确保足够带宽。
+
+---
+
+## 相关概念
+
+- [Rust vs C++：形式系统模型 vs 机制工程模型](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
+- [测试生态：单元测试、集成测试与验证策略](../../06_ecosystem/09_testing_and_quality/03_testing.md)
 
 ## 🧭 思维导图（Mindmap）
 

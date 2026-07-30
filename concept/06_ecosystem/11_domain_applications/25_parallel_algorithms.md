@@ -12,7 +12,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 本页讲解 Rust 中利用多核的并行算法设计，覆盖数据并行、任务并行、图并行与调度器原理，代码位于 `crates/c08_algorithms/src/algorithms/parallel_algorithms.rs`。
 >
-> **前置概念**: [Concurrency](../../03_advanced/02_concurrency/01_concurrency.md) · [Data Structures in Rust](09_data_structures_in_rust.md) · [Advanced Data Structures](24_advanced_data_structures_implementation.md)
+> **前置概念**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Data Structures in Rust](09_data_structures_in_rust.md) · [Advanced Data Structures](24_advanced_data_structures_implementation.md)
 > **后置概念**: [Algorithm Engineering Practice](08_algorithm_engineering_practice.md) · [Async](../../03_advanced/01_async/01_async.md)
 
 ---
@@ -48,6 +48,7 @@
     - [9.1 边界测试：空输入的前缀和](#91-边界测试空输入的前缀和)
     - [9.2 边界测试：BFS 起点孤立](#92-边界测试bfs-起点孤立)
     - [9.3 边界测试：单线程环境](#93-边界测试单线程环境)
+  - [相关概念](#相关概念)
   - [十、思维导图](#十思维导图)
   - [十一、国际权威参考](#十一国际权威参考)
 
@@ -327,6 +328,13 @@ fn main() {
 
 ---
 
+---
+
+## 相关概念
+
+- [Rust vs C++：形式系统模型 vs 机制工程模型](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
+- [形式化算法理论](../../04_formal/00_type_theory/13_formal_algorithm_theory.md)
+
 ## 十、思维导图
 
 ```mermaid
@@ -357,6 +365,8 @@ mindmap
 
 - **P1 学术**: [Introduction to Algorithms (Cormen et al.)](https://mitpress.mit.edu/books/introduction-algorithms-fourth-edition)
 - **P1 学术**: [Algorithm Engineering (Saunders / Demetrescu)](https://people.mpi-inf.mpg.de/~mehlhorn/LEDAbook.html)
+- **P1 学术**: [Blumofe & Leiserson — Scheduling Multithreaded Computations by Work Stealing (ACM)](https://dl.acm.org/doi/10.1145/209936.209958)
+- **P1 学术**: [Blelloch — Prefix Sums and Their Applications (IEEE)](https://ieeexplore.ieee.org/document/42122)
 - **P1 并发**: [Rust Atomics and Locks](https://marabos.nl/atomics/)
 - **P2 生态**: [Rayon docs](https://docs.rs/rayon/latest/rayon/)
 - **P0 官方**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)

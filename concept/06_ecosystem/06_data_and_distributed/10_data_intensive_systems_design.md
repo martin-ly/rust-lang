@@ -16,7 +16,7 @@
 > **前置概念**: [Database Systems](04_database_systems.md) · [Data Engineering](05_data_engineering.md) · [Distributed Consensus](06_distributed_consensus.md) · [Stream Processing Ecosystem](03_stream_processing_ecosystem.md)
 > **后置概念**: [Distributed Systems Protocols](11_distributed_systems_protocols.md) · [Performance Engineering Architecture](../10_performance/02_performance_engineering_architecture.md) · [Cloud Native](../04_web_and_networking/02_cloud_native.md)
 >
-> **来源**: [Designing Data-Intensive Applications — Martin Kleppmann](https://dataintensive.net/) · [DDIA 作者演讲与博客](https://martin.kleppmann.com/) · [Calm Theorem — Ameloot et al.](https://dl.acm.org/doi/10.1145/263690.263807) · [Apache Kafka Documentation](https://kafka.apache.org/documentation/) · [Apache Flink Documentation](https://nightlies.apache.org/flink/flink-docs-stable/) · [Apache Spark Documentation](https://spark.apache.org/docs/latest/)
+> **来源**: [Designing Data-Intensive Applications — Martin Kleppmann](https://dataintensive.net/) · [DDIA 作者演讲与博客](https://martin.kleppmann.com/) · [Calm Theorem — Ameloot et al.](https://dl.acm.org/doi/10.1145/263690.263807) · [Apache Kafka Documentation](https://kafka.apache.org/documentation/) · [Apache Flink Documentation](https://nightlies.apache.org/flink/flink-docs-stable/) · [Apache Spark Documentation](https://spark.apache.org/docs/latest/) · [mini-redis](https://github.com/tokio-rs/mini-redis) · [sled](https://github.com/spacejam/sled) · [lapin](https://github.com/amqp-rs/lapin) · [Outbox pattern — microservices.io](https://microservices.io/patterns/data/outbox.html)
 
 ---
 
@@ -44,6 +44,8 @@
     - [6.1 边界测试：丢失更新与写偏斜（并发异常）](#61-边界测试丢失更新与写偏斜并发异常)
     - [6.2 边界测试：流处理 watermark 过晚导致数据静默丢失（逻辑错误）](#62-边界测试流处理-watermark-过晚导致数据静默丢失逻辑错误)
     - [6.3 边界测试：至少一次语义下重复消费（逻辑错误）](#63-边界测试至少一次语义下重复消费逻辑错误)
+  - [反例 / 边界测试 / 常见陷阱](#反例--边界测试--常见陷阱)
+    - [Cache-aside 写路径只更新数据库而忘记失效缓存](#cache-aside-写路径只更新数据库而忘记失效缓存)
   - [相关概念](#相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
@@ -614,6 +616,25 @@ fn main() {
 
 ---
 
+## 反例 / 边界测试 / 常见陷阱
+
+### Cache-aside 写路径只更新数据库而忘记失效缓存
+
+**错误场景**：服务使用缓存加速读请求，但写接口只把新值写入数据库，未同步失效或更新缓存；后续读请求仍命中旧缓存，返回脏数据。
+
+```text
+❌ 错误时序：
+  1. 用户 A 读取 key=42 → cache miss → DB 值 = "old" → 缓存写入 "old"
+  2. 用户 B 写入 key=42 = "new" → 只更新 DB
+  3. 用户 A 再次读取 key=42 → cache hit → 返回 "old"（脏读）
+```
+
+**为何错误**：Cache-aside 模式下缓存与数据库是两个独立存储；写操作若不主动失效缓存，二者的状态会在缓存 TTL 到期前一直不一致。
+
+**正确做法**：采用 write-through（写时同步更新缓存）、write-around（写时直接失效缓存），或引入带版本号的缓存条目并在读取时校验；高一致场景使用数据库变更事件（CDC）异步刷新缓存。
+
+---
+
 ## 相关概念
 
 - [Database Systems](04_database_systems.md) — 数据库系统基础
@@ -625,6 +646,8 @@ fn main() {
 - [Cloud Native](../04_web_and_networking/02_cloud_native.md) — 云原生部署
 - [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) — 并发模型
 - [Async/Await](../../03_advanced/01_async/01_async.md) — 异步编程
+- [Rust vs Java：系统编程与托管运行时的范式对比](../../05_comparative/02_managed_languages/01_rust_vs_java.md)
+- [领域驱动设计（DDD）在 Rust 中的战术模式](../../06_ecosystem/14_enterprise_architecture/04_domain_driven_design_in_rust.md)
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 

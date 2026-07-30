@@ -3,124 +3,31 @@
     "date": "2026-07-31",
     "scanned": 635,
     "counts": {
-      "D1": 2,
-      "D2": 4,
+      "D1": 0,
+      "D2": 0,
       "D3": 0,
       "D4": 0,
-      "D5": 2,
-      "D6": 2
+      "D5": 0,
+      "D6": 0
     },
     "pct": {
-      "D1": 0.3,
-      "D2": 0.6,
+      "D1": 0.0,
+      "D2": 0.0,
       "D3": 0.0,
       "D4": 0.0,
-      "D5": 0.3,
-      "D6": 0.3
+      "D5": 0.0,
+      "D6": 0.0
     },
     "D2_base_files_with_asp_and_bloom": 377,
-    "flagged_files": 9
+    "flagged_files": 0
   },
   "examples": {
-    "D1": [
-      [
-        "concept/00_meta/00_framework/semantic_layer_alignment_index.md",
-        "Bloom [3, 4, 5] 与 层次定位/层级 [0] 无交集"
-      ],
-      [
-        "concept/00_meta/00_framework/semantic_model_reasoning_methodology.md",
-        "Bloom [1, 2, 3, 4, 5, 6, 7] 与 层次定位/层级 [0] 无交集"
-      ]
-    ],
-    "D2": [
-      [
-        "concept/04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md",
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/05_systems_and_embedded/15_no_std_synchronization_primitives.md",
-        "A/S/P=A 允许 [1, 2] 与 Bloom [4] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/05_systems_and_embedded/16_embedded_memory_allocators.md",
-        "A/S/P=A 允许 [1, 2] 与 Bloom [4] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/05_systems_and_embedded/17_pac_hal_implementation.md",
-        "A/S/P=A 允许 [1, 2] 与 Bloom [4] 无交集"
-      ]
-    ],
+    "D1": [],
+    "D2": [],
     "D3": [],
     "D4": [],
-    "D5": [
-      [
-        "concept/06_ecosystem/05_systems_and_embedded/16_embedded_memory_allocators.md",
-        "稳定层 nightly/preview 关键词 4 处"
-      ],
-      [
-        "concept/06_ecosystem/05_systems_and_embedded/18_panic_runtime_no_std.md",
-        "稳定层 nightly/preview 关键词 2 处"
-      ]
-    ],
-    "D6": [
-      [
-        "concept/00_meta/00_framework/README.md",
-        "Summary 为空"
-      ],
-      [
-        "concept/07_future/00_version_tracking/README.md",
-        "Summary 为空"
-      ]
-    ]
+    "D5": [],
+    "D6": []
   },
-  "per_file": {
-    "concept/00_meta/00_framework/README.md": {
-      "D6": [
-        "Summary 为空"
-      ]
-    },
-    "concept/00_meta/00_framework/semantic_layer_alignment_index.md": {
-      "D1": [
-        "Bloom [3, 4, 5] 与 层次定位/层级 [0] 无交集"
-      ]
-    },
-    "concept/00_meta/00_framework/semantic_model_reasoning_methodology.md": {
-      "D1": [
-        "Bloom [1, 2, 3, 4, 5, 6, 7] 与 层次定位/层级 [0] 无交集"
-      ]
-    },
-    "concept/04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/05_systems_and_embedded/15_no_std_synchronization_primitives.md": {
-      "D2": [
-        "A/S/P=A 允许 [1, 2] 与 Bloom [4] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/05_systems_and_embedded/16_embedded_memory_allocators.md": {
-      "D2": [
-        "A/S/P=A 允许 [1, 2] 与 Bloom [4] 无交集"
-      ],
-      "D5": [
-        "稳定层 nightly/preview 关键词 4 处"
-      ]
-    },
-    "concept/06_ecosystem/05_systems_and_embedded/17_pac_hal_implementation.md": {
-      "D2": [
-        "A/S/P=A 允许 [1, 2] 与 Bloom [4] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/05_systems_and_embedded/18_panic_runtime_no_std.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 2 处"
-      ]
-    },
-    "concept/07_future/00_version_tracking/README.md": {
-      "D6": [
-        "Summary 为空"
-      ]
-    }
-  }
+  "per_file": {}
 }

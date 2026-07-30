@@ -11,14 +11,14 @@
 > **受众**: [专家]
 > **Bloom 层级**: L4
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A** — Application
+> **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: P×Eva — 在资源受限环境中选择合适的内存策略
 > **前置概念**: [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md) · [Cargo build-std](../01_cargo/22_build_std.md) · [堆内存管理](../../02_intermediate/02_memory_management/01_memory_management.md)
 > **后置概念**: [PAC 与 HAL 实现](17_pac_hal_implementation.md) · [panic_handler 与 no_std 运行时](18_panic_runtime_no_std.md) · [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
 
 ---
 
-> **来源**: [embedded-alloc crate](https://docs.rs/embedded-alloc/) · [linked_list_allocator crate](https://docs.rs/linked_list_allocator/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [alloc crate](https://doc.rust-lang.org/alloc/index.html) · [compiler_builtins](https://github.com/rust-lang/compiler-builtins) · [Tock Book](https://book.tockos.org/)
+> **来源**: [embedded-alloc crate](https://docs.rs/embedded-alloc/) · [linked_list_allocator crate](https://docs.rs/linked_list_allocator/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [alloc crate](https://doc.rust-lang.org/alloc/index.html) · [compiler_builtins](https://github.com/rust-lang/compiler-builtins) · [Tock Book](https://book.tockos.org/) · [TLSF: A New Dynamic Memory Allocator for Real-Time Systems (Springer)](https://link.springer.com/article/10.1007/s11241-008-9052-7)
 
 ---
 
@@ -328,6 +328,8 @@ fn USART1() {
 - [panic_handler 与 no_std 运行时](18_panic_runtime_no_std.md)
 - [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
 - [堆内存管理](../../02_intermediate/02_memory_management/01_memory_management.md)
+- [Rust vs Zig：系统编程的两种显式路径](../../05_comparative/01_systems_languages/06_rust_vs_zig.md)
+- [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
 
 ---
 

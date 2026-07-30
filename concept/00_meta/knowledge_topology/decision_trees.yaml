@@ -20,8 +20,8 @@
 #
 # 校验: python scripts/check_decision_trees.py [--strict]
 
-version: "1.1"
-date: "2026-07-16"
+version: "1.2"
+date: "2026-07-30"
 maintainer: "concept/00_meta/knowledge_topology"
 validator: "scripts/check_decision_trees.py"
 kg: "concept/00_meta/kg_data_v3.json"
@@ -1643,3 +1643,264 @@ trees:
       - {from: R2, to: V1, label: "验证"}
       - {from: R3, to: V1, label: "验证"}
       - {from: R4, to: V1, label: "验证"}
+
+  # ==========================================================================
+  # Wave 5 新增：no_std / bare-metal / 惯用法 / 算法 / 安全 / 数据 / 分布式
+  # ==========================================================================
+
+  - id: DF-NOSTD-01
+    title_zh: 是否/何时使用 no_std / bare-metal
+    title_en: When to Use no_std / Bare-Metal Decision Tree
+    source:
+      file: concept/00_meta/knowledge_topology/11_semantic_model_atlas.md
+      anchor: "#df-nostd-01"
+    covered_concepts:
+      [
+        ex:EmbeddedSystems,
+        ex:AsyncInNo_stdAndEmbeddedSystems,
+        ex:CustomAllocators,
+        ex:TheRustRuntime,
+        ex:FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems,
+      ]
+    rustc_error_codes: [E0152, E0463]
+    nodes:
+      - id: ENTRY
+        type: condition
+        label: "入口：判断是否应使用 no_std / bare-metal"
+      - id: Q1
+        type: decision
+        condition: "目标 RAM + Flash 是否 ≤ 256 KB？"
+        quantitative: true
+        threshold: "RAM + Flash ≤ 256 KB"
+      - id: Q2
+        type: decision
+        condition: "硬实时抖动容差是否 ≤ 100 μs？"
+        quantitative: true
+        threshold: "抖动 ≤ 100 μs"
+      - id: Q3
+        type: decision
+        condition: "是否需要自定义 panic handler / 全局分配器（需求项数 ≥ 1）？"
+        quantitative: true
+        threshold: "自定义运行时需求 ≥ 1"
+      - id: Q4
+        type: decision
+        condition: "是否已有目标平台的 no_std PAC / HAL crate（可用 crate 数 ≥ 1）？"
+        quantitative: true
+        threshold: "可用 PAC/HAL crate ≥ 1"
+      - id: Q5
+        type: decision
+        condition: "是否可接受 nightly / 手写寄存器封装（场景数 ≥ 1）？"
+        quantitative: true
+        threshold: "手写 PAC 场景 ≥ 1"
+      - {id: C1, type: conclusion, label: "结论：使用 std 目标即可，无需 no_std"}
+      - {id: C2, type: conclusion, label: "结论：使用 no_std + alloc，保留动态分配"}
+      - {id: C3, type: conclusion, label: "结论：使用 no_std + RTIC / embassy 异步运行时"}
+      - {id: C4, type: conclusion, label: "结论：bare-metal + 自定义 panic handler / global_allocator"}
+      - {id: C5, type: conclusion, label: "结论：bare-metal + embedded-alloc / panic-probe 现成方案"}
+      - {id: C6, type: conclusion, label: "结论：评估自己写 PAC/HAL 或换平台（注意 E0463 找不到 crate）", rustc_error_codes: [E0463]}
+      - {id: C7, type: conclusion, label: "结论：自定义 lang item 时避免 E0152 重复 lang item", rustc_error_codes: [E0152]}
+    edges:
+      - {from: ENTRY, to: Q1, label: "入口"}
+      - {from: Q1, to: Q2, label: "是"}
+      - {from: Q1, to: C1, label: "否"}
+      - {from: Q2, to: Q3, label: "是"}
+      - {from: Q2, to: C2, label: "否"}
+      - {from: Q3, to: Q4, label: "是"}
+      - {from: Q3, to: C3, label: "否"}
+      - {from: Q4, to: C5, label: "是"}
+      - {from: Q4, to: Q5, label: "否"}
+      - {from: Q5, to: C4, label: "是"}
+      - {from: Q5, to: C6, label: "否"}
+      - {from: C4, to: C7, label: "边界"}
+
+  - id: DF-ALGDS-01
+    title_zh: 算法与数据结构选型
+    title_en: Algorithm and Data Structure Selection Decision Tree
+    source:
+      file: concept/00_meta/knowledge_topology/11_semantic_model_atlas.md
+      anchor: "#df-algds-01"
+    covered_concepts:
+      [
+        ex:AlgorithmSemantics,
+        ex:FormalAlgorithmTheory,
+        ex:Iterators,
+        ex:IdiomsSpectrum,
+        ex:ParallelDistributedPatternSpectrum,
+      ]
+    rustc_error_codes: [E0117]
+    nodes:
+      - id: ENTRY
+        type: condition
+        label: "入口：为问题选择算法或数据结构实现"
+      - id: Q1
+        type: decision
+        condition: "数据规模 N 是否 > 10^6 或单核 CPU 预算不足？"
+        quantitative: true
+        threshold: "N > 10^6 或 CPU 不足"
+      - id: Q2
+        type: decision
+        condition: "std 已提供的结构（Vec/HashMap/BTreeMap/Heap）能否满足全部核心操作？"
+        quantitative: true
+        threshold: "std 结构缺失核心操作 = 0"
+      - id: Q3
+        type: decision
+        condition: "是否需要跨线程并行或 NUMA 感知？"
+        quantitative: true
+        threshold: "并行/NUMA 需求 = 是"
+      - id: Q4
+        type: decision
+        condition: "自定义结构是否涉及 unsafe 不变式（≥1 个）或需要形式化验证？"
+        quantitative: true
+        threshold: "unsafe 不变式 ≥ 1"
+      - {id: C1, type: conclusion, label: "结论：直接使用 std 集合 / Iterator 适配器"}
+      - {id: C2, type: conclusion, label: "结论：使用 Rayon / crossbeam / 并行前缀和等并行算法"}
+      - {id: C3, type: conclusion, label: "结论：自定义安全数据结构（arena/slab/并查集/线段树等）"}
+      - {id: C4, type: conclusion, label: "结论：自定义结构 + Kani / Miri 验证 unsafe 不变式"}
+      - {id: C5, type: conclusion, label: "结论：自定义数据结构时注意 E0507（move out of borrowed content）", rustc_error_codes: [E0507]}
+      - {id: V1, type: conclusion, label: "验证回边：benchmark + cargo test + cargo miri / kani"}
+    edges:
+      - {from: ENTRY, to: Q1, label: "入口"}
+      - {from: Q1, to: Q3, label: "是"}
+      - {from: Q1, to: Q2, label: "否"}
+      - {from: Q2, to: C1, label: "是"}
+      - {from: Q2, to: Q4, label: "否"}
+      - {from: Q3, to: C2, label: "是"}
+      - {from: Q3, to: Q4, label: "否"}
+      - {from: Q4, to: C4, label: "是"}
+      - {from: Q4, to: C3, label: "否"}
+      - {from: C3, to: C5, label: "边界: 外部 trait impl"}
+      - {from: C1, to: V1, label: "验证"}
+      - {from: C2, to: V1, label: "验证"}
+      - {from: C3, to: V1, label: "验证"}
+      - {from: C4, to: V1, label: "验证"}
+      - {from: C5, to: V1, label: "验证"}
+
+  - id: DF-SECARCH-01
+    title_zh: 安全架构选型
+    title_en: Security Architecture Selection Decision Tree
+    source:
+      file: concept/00_meta/knowledge_topology/11_semantic_model_atlas.md
+      anchor: "#df-secarch-01"
+    covered_concepts:
+      [
+        ex:SecurityAndCryptography,
+        ex:NetworkSecurityInRust,
+        ex:EnterpriseArchitecture,
+        ex:ProcessSecurityAndSandboxingInRust,
+      ]
+    rustc_error_codes: [E0301]
+    nodes:
+      - id: ENTRY
+        type: condition
+        label: "入口：选择身份、授权与信任模型"
+      - id: Q1
+        type: decision
+        condition: "用户/主体数量是否 ≥ 10^4 或需要跨组织授权？"
+        quantitative: true
+        threshold: "主体数 ≥ 10^4 或跨组织"
+      - id: Q2
+        type: decision
+        condition: "授权决策是否依赖 ≥ 3 类动态属性（环境、风险、资源属性）？"
+        quantitative: true
+        threshold: "动态属性类数 ≥ 3"
+      - id: Q3
+        type: decision
+        condition: "是否需要外部身份联邦（OAuth2/OIDC/SAML，外部 IdP 数 ≥ 1）？"
+        quantitative: true
+        threshold: "外部 IdP ≥ 1"
+      - id: Q4
+        type: decision
+        condition: "微服务/网络边界数是否 ≥ 10 且要求默认不信任？"
+        quantitative: true
+        threshold: "边界数 ≥ 10"
+      - {id: C1, type: conclusion, label: "结论：RBAC（角色基础访问控制）"}
+      - {id: C2, type: conclusion, label: "结论：ABAC（属性基础访问控制）"}
+      - {id: C3, type: conclusion, label: "结论：OAuth2 / OIDC 联邦认证"}
+      - {id: C4, type: conclusion, label: "结论：零信任架构（mTLS、持续验证、最小权限）"}
+      - {id: C5, type: conclusion, label: "结论：组合 RBAC + ABAC + OAuth2 分层模型"}
+      - {id: V1, type: conclusion, label: "验证回边：安全审查 + cargo audit + 注意私有字段/边界 E0616", rustc_error_codes: [E0616]}
+    edges:
+      - {from: ENTRY, to: Q1, label: "入口"}
+      - {from: Q1, to: Q3, label: "是"}
+      - {from: Q1, to: Q2, label: "否"}
+      - {from: Q2, to: C2, label: "是"}
+      - {from: Q2, to: C1, label: "否"}
+      - {from: Q3, to: Q4, label: "是"}
+      - {from: Q3, to: C5, label: "否"}
+      - {from: Q4, to: C4, label: "是"}
+      - {from: Q4, to: C5, label: "否"}
+      - {from: C1, to: V1, label: "验证"}
+      - {from: C2, to: V1, label: "验证"}
+      - {from: C3, to: V1, label: "验证"}
+      - {from: C4, to: V1, label: "验证"}
+      - {from: C5, to: V1, label: "验证"}
+
+  - id: DF-DATADIST-01
+    title_zh: 数据密集型/分布式系统选型
+    title_en: Data-Intensive / Distributed System Selection Decision Tree
+    source:
+      file: concept/00_meta/knowledge_topology/11_semantic_model_atlas.md
+      anchor: "#df-datadist-01"
+    covered_concepts:
+      [
+        ex:DistributedSystems,
+        ex:DistributedConsensus,
+        ex:CqrsEventSourcing,
+        ex:MicroservicePatterns,
+        ex:ApplicationDomains,
+      ]
+    rustc_error_codes: [E0596]
+    nodes:
+      - id: ENTRY
+        type: condition
+        label: "入口：为数据密集型或分布式系统选择架构"
+      - id: Q1
+        type: decision
+        condition: "团队/服务边界是否 ≥ 3 个独立部署单元？"
+        quantitative: true
+        threshold: "独立部署单元 ≥ 3"
+      - id: Q2
+        type: decision
+        condition: "读写比例差距是否 ≥ 10:1 且存在复杂查询？"
+        quantitative: true
+        threshold: "读写比 ≥ 10:1"
+      - id: Q3
+        type: decision
+        condition: "是否需要审计/回溯完整状态变更历史？"
+        quantitative: true
+        threshold: "审计需求 = 是"
+      - id: Q4
+        type: decision
+        condition: "跨服务强一致性写入比例是否 ≥ 80%？"
+        quantitative: true
+        threshold: "强一致性写入 ≥ 80%"
+      - id: Q5
+        type: decision
+        condition: "单体能否在 p99 ≤ 50 ms 内满足目标负载？"
+        quantitative: true
+        threshold: "p99 ≤ 50 ms"
+      - {id: C1, type: conclusion, label: "结论：单体 + 关系型数据库（足够简单）"}
+      - {id: C2, type: conclusion, label: "结论：微服务 + gRPC / 服务网格（最终一致性）"}
+      - {id: C3, type: conclusion, label: "结论：CQRS（命令查询职责分离）"}
+      - {id: C4, type: conclusion, label: "结论：事件溯源（Event Sourcing）"}
+      - {id: C5, type: conclusion, label: "结论：强一致性分布式事务 / Saga / 2PC"}
+      - {id: C6, type: conclusion, label: "结论：最终一致性 + CRDT / 事件总线"}
+      - {id: V1, type: conclusion, label: "验证回边：原型 + 负载测试 + 注意不可变状态赋值 E0506", rustc_error_codes: [E0506]}
+    edges:
+      - {from: ENTRY, to: Q1, label: "入口"}
+      - {from: Q1, to: Q2, label: "是"}
+      - {from: Q1, to: Q5, label: "否"}
+      - {from: Q2, to: C3, label: "是"}
+      - {from: Q2, to: Q3, label: "否"}
+      - {from: Q3, to: C4, label: "是"}
+      - {from: Q3, to: Q4, label: "否"}
+      - {from: Q4, to: C5, label: "是"}
+      - {from: Q4, to: C2, label: "否"}
+      - {from: Q5, to: C1, label: "是"}
+      - {from: Q5, to: C6, label: "否"}
+      - {from: C1, to: V1, label: "验证"}
+      - {from: C2, to: V1, label: "验证"}
+      - {from: C3, to: V1, label: "验证"}
+      - {from: C4, to: V1, label: "验证"}
+      - {from: C5, to: V1, label: "验证"}
+      - {from: C6, to: V1, label: "验证"}

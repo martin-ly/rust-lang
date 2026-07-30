@@ -23,7 +23,8 @@
 > [OSDev Wiki — Microkernel](https://wiki.osdev.org/Microkernel) ·
 > [seL4 Reference Manual](https://sel4.systems/Info/Docs/seL4-refman.pdf) ·
 > [Effective Rust](https://www.lurklurk.org/effective-rust/) ·
-> [Zero To Production In Rust](https://www.zero2prod.com/)
+> [Zero To Production In Rust](https://www.zero2prod.com/) ·
+> [seL4: Formal Verification of an OS Kernel (SOSP'09)](https://dl.acm.org/doi/10.1145/1629575.1629596)
 
 ---
 
@@ -267,6 +268,14 @@ struct PluginA { other: Rc<RefCell<dyn Plugin>> }
 - 或改用 WASM 等沙箱运行时（`wasmtime`），用模块接口版本化隔离 ABI 风险。
 
 ---
+
+---
+
+## 相关概念
+
+- [Rust vs C++：形式系统模型 vs 机制工程模型](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
+- [架构模式语义](../../04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md)
+- [Rust 操作系统内核开发](../../06_ecosystem/05_systems_and_embedded/05_os_kernel.md)
 
 ## 🧭 思维导图（Mindmap）
 

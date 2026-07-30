@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [ARMv7-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0403/latest/) · [ARMv8-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0553/latest/) · [cortex-m-rt](https://docs.rs/cortex-m-rt/) · [Ferrocene Language Specification](https://spec.ferrocene.dev/)
+> **来源**: [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [ARMv7-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0403/latest/) · [ARMv8-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0553/latest/) · [cortex-m-rt](https://docs.rs/cortex-m-rt/) · [Ferrocene Language Specification](https://spec.ferrocene.dev/) · [A Survey of Rust Embedded Development (arXiv)](https://arxiv.org/abs/2311.05063)
 
 ---
 
@@ -422,6 +422,9 @@ static DMA_BUF: [u8; 256] = [0; 256];
 - [Cargo build-std](../01_cargo/22_build_std.md)
 - [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
 - [交叉编译](02_cross_compilation.md)
+- [Rust vs Zig：系统编程的两种显式路径](../../05_comparative/01_systems_languages/06_rust_vs_zig.md)
+- [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
+- [安全关键裸机 OS 与 Rust](../../06_ecosystem/05_systems_and_embedded/19_safety_critical_bare_metal_os.md)
 
 ---
 

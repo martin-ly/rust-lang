@@ -22,7 +22,8 @@
 > [std::error::Error](https://doc.rust-lang.org/std/error/trait.Error.html) ·
 > [thiserror crate](https://docs.rs/thiserror/latest/thiserror/) ·
 > [anyhow crate](https://docs.rs/anyhow/latest/anyhow/) ·
-> [Rust Error Handling Patterns](https://doc.rust-lang.org/rust-by-example/error.html)
+> [Rust Error Handling Patterns](https://doc.rust-lang.org/rust-by-example/error.html) ·
+> [RustBelt: Securing the Foundations of the Rust Programming Language](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ---
 

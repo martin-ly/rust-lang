@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [Rust Reference — Panic Handler](https://doc.rust-lang.org/reference/runtime.html#the-panic_handler-attribute) · [Rust Reference — Lang Items](https://doc.rust-lang.org/reference/attributes.html#lang-items) · [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [panic-probe crate](https://docs.rs/panic-probe/) · [defmt-panic crate](https://docs.rs/defmt-panic/) · [Ferrocene Language Specification](https://spec.ferrocene.dev/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/)
+> **来源**: [Rust Reference — Panic Handler](https://doc.rust-lang.org/reference/runtime.html#the-panic_handler-attribute) · [Rust Reference — Lang Items](https://doc.rust-lang.org/reference/attributes.html#lang-items) · [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [panic-probe crate](https://docs.rs/panic-probe/) · [defmt-panic crate](https://docs.rs/defmt-panic/) · [Ferrocene Language Specification](https://spec.ferrocene.dev/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [RustBelt: Securing the Foundations of the Rust Programming Language](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ---
 
@@ -301,6 +301,8 @@ fn panic(_info: &PanicInfo) -> ! {
 - [嵌入式内存分配器](16_embedded_memory_allocators.md)
 - [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
 - [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
+- [Rust vs Zig：系统编程的两种显式路径](../../05_comparative/01_systems_languages/06_rust_vs_zig.md)
+- [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
 
 ---
 

@@ -21,7 +21,8 @@
 > [The Rust Programming Language — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html) ·
 > [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html) ·
 > [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) ·
-> [Effective Rust](https://www.effective-rust.com/)
+> [Effective Rust](https://www.effective-rust.com/) ·
+> [RustBelt: Securing the Foundations of the Rust Programming Language](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 ---
 

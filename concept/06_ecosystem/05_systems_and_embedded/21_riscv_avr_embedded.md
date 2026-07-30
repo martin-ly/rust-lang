@@ -23,7 +23,7 @@
 
 ---
 
-> **来源**: [RISC-V Specifications](https://riscv.org/technical/specifications/) · [Rust Embedded Working Group — riscv-rt](https://github.com/rust-embedded/riscv-rt) · [Rust Embedded Working Group — riscv](https://github.com/rust-embedded/riscv) · [avr-rust GitHub](https://github.com/avr-rust) · [rahix/avr-hal](https://github.com/rahix/avr-hal) · [Embassy RISC-V support](https://embassy.dev/) · [RTIC](https://rtic.rs/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/index.html)
+> **来源**: [RISC-V Specifications](https://riscv.org/technical/specifications/) · [Rust Embedded Working Group — riscv-rt](https://github.com/rust-embedded/riscv-rt) · [Rust Embedded Working Group — riscv](https://github.com/rust-embedded/riscv) · [avr-rust GitHub](https://github.com/avr-rust) · [rahix/avr-hal](https://github.com/rahix/avr-hal) · [Embassy RISC-V support](https://embassy.dev/) · [RTIC](https://rtic.rs/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/index.html) · [A Survey of Rust Embedded Development (arXiv)](https://arxiv.org/abs/2311.05063) · [riscv-rt crate](https://docs.rs/riscv-rt/) · [riscv crate](https://docs.rs/riscv/) · [avr-rust organization](https://github.com/avr-rust)
 
 ---
 
@@ -55,6 +55,7 @@
     - [边界 4：RISC-V 中断向量表不保存浮点状态](#边界-4risc-v-中断向量表不保存浮点状态)
   - [八、常见陷阱](#八常见陷阱)
   - [九、权威来源索引](#九权威来源索引)
+  - [相关概念](#相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -558,6 +559,13 @@ fn show() {
 | [Rust Reference — Panic Handler](https://doc.rust-lang.org/reference/runtime.html#the-panic_handler-attribute) | ✅ 一级 | panic handler 官方说明 |
 
 ---
+
+---
+
+## 相关概念
+
+- [Rust vs Zig：系统编程的两种显式路径](../../05_comparative/01_systems_languages/06_rust_vs_zig.md)
+- [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
 
 ## 🧭 思维导图（Mindmap）
 

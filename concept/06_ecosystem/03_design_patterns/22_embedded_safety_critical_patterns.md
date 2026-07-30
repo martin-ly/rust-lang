@@ -25,7 +25,9 @@
 > [embedded-hal](https://docs.rs/embedded-hal/latest/embedded_hal/) ·
 > [RTIC Book](https://rtic.rs/2/book/en/) ·
 > [IEC 61508 — Functional Safety](https://webstore.iec.ch/publication/66912) ·
-> [NASA JPL — 10 Rules for Safety-Critical Code](https://spinoff.nasa.gov/JPL-Rules-for-Safety-Critical-Software)
+> [NASA JPL — 10 Rules for Safety-Critical Code](https://spinoff.nasa.gov/JPL-Rules-for-Safety-Critical-Software) ·
+> [A Survey of Rust Embedded Development (arXiv)](https://arxiv.org/abs/2311.05063) ·
+> [Towards Safe Rust for Aerospace and Safety-Critical Applications (arXiv)](https://arxiv.org/abs/2405.18135)
 
 ---
 
@@ -419,6 +421,14 @@ static mut COUNTER: u32 = 0;
 **修正**：使用 `critical_section`、`Mutex`、原子类型或 RTIC 的资源模型管理共享状态。
 
 ---
+
+---
+
+## 相关概念
+
+- [Rust vs Ada/SPARK：安全关键系统语言对比](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)
+- [架构模式语义](../../04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md)
+- [安全关键系统工程](../../06_ecosystem/11_domain_applications/23_safety_critical_systems_engineering.md)
 
 ## 🧭 思维导图（Mindmap）
 

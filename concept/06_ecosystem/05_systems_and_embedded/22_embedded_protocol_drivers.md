@@ -79,7 +79,10 @@
     - [14.3 USB 枚举时序严格](#143-usb-枚举时序严格)
     - [14.4 I²C 时钟拉伸可能导致 hang](#144-ic-时钟拉伸可能导致-hang)
     - [14.5 Watchdog 只在主循环喂狗会掩盖子任务死锁](#145-watchdog-只在主循环喂狗会掩盖子任务死锁)
+  - [反例 / 边界测试 / 常见陷阱](#反例--边界测试--常见陷阱)
+    - [未使能外设时钟就直接操作 I²C/SPI 寄存器](#未使能外设时钟就直接操作-icspi-寄存器)
   - [十五、权威来源索引](#十五权威来源索引)
+  - [相关概念](#相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -848,6 +851,32 @@ loop {
 
 ---
 
+## 反例 / 边界测试 / 常见陷阱
+
+### 未使能外设时钟就直接操作 I²C/SPI 寄存器
+
+**错误场景**：初始化 I²C 时只配置了 GPIO 复用和波特率，却忘记在 RCC 中使能 I²C 外设时钟；随后调用 `write_read` 永远返回超时或总线错误。
+
+```rust,ignore
+// ❌ 错误：未开启 I2C1 时钟就发起传输
+fn init_i2c(i2c: &mut I2c1, scl: &mut Pin, sda: &mut Pin) {
+    scl.set_alt_mode(AltMode::I2C1);
+    sda.set_alt_mode(AltMode::I2C1);
+    // 缺失：rcc.enable_peripheral(Peripheral::I2C1);
+    i2c.set_speed(100_000);
+}
+
+fn read_eeprom(i2c: &mut I2c1) {
+    i2c.write_read(0x50, &[0x00], &mut [0; 8]).unwrap(); // 永远无应答
+}
+```
+
+**为何错误**：ARM/RISC-V MCU 上电后默认关闭大部分外设时钟以节能；未使能时钟时对应外设寄存器不可写、总线状态机不工作，任何传输都会失败。
+
+**正确做法**：在使用外设前显式调用 `rcc.enable_peripheral(...)` 或 HAL 提供的时钟使能函数，并在初始化顺序上将“时钟使能”放在“引脚配置”和“协议参数配置”之前。
+
+---
+
 ## 十五、权威来源索引
 
 | 来源 | 链接 | 用途 |
@@ -859,8 +888,16 @@ loop {
 | usb-device | <https://docs.rs/usb-device/latest/usb_device/> | USB 设备框架 |
 | Knurling | <https://knurling.ferrous-systems.com/> | `defmt` 调试与日志 |
 | The Embedded Rust Book | <https://docs.rust-embedded.org/book/index.html> | 嵌入式 Rust 入门 |
+| Typestate Programming (IEEE) | <https://ieeexplore.ieee.org/document/6312929> | 类型状态机形式化基础 |
 
 ---
+
+---
+
+## 相关概念
+
+- [Rust vs Zig：系统编程的两种显式路径](../../05_comparative/01_systems_languages/06_rust_vs_zig.md)
+- [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
 
 ## 🧭 思维导图（Mindmap）
 

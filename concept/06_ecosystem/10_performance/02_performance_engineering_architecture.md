@@ -53,6 +53,8 @@
     - [9.1 边界测试：perf 采样偏差（测量误差）](#91-边界测试perf-采样偏差测量误差)
     - [9.2 边界测试：false sharing 导致伪竞争（运行时性能退化）](#92-边界测试false-sharing-导致伪竞争运行时性能退化)
     - [9.3 边界测试：堆分析器本身改变分配行为（测量误差）](#93-边界测试堆分析器本身改变分配行为测量误差)
+  - [反例 / 边界测试 / 常见陷阱](#反例--边界测试--常见陷阱)
+    - [在 debug 模式下做性能剖析并据此优化](#在-debug-模式下做性能剖析并据此优化)
   - [相关概念](#相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
@@ -723,6 +725,26 @@ let counters: Vec<Padded> = (0..8).map(|_| Padded(AtomicU64::new(0))).collect();
 
 ---
 
+## 反例 / 边界测试 / 常见陷阱
+
+### 在 debug 模式下做性能剖析并据此优化
+
+**错误场景**：开发者运行 `cargo run`（默认 debug）后看到某个函数耗时占比高，于是投入大量精力重写算法；上线 release 后发现该函数根本不是热点。
+
+```text
+❌ 错误流程：
+  cargo run                  # debug 模式，未优化，含溢出检查、断言
+  perf record -F 99 -g -- ./target/debug/myapp
+  # 火焰图显示某函数占比 30%
+  # 重写后再次用 debug 验证 → 占比下降
+```
+
+**为何错误**：debug 模式关闭了大量编译器优化，包含整数溢出检查、debug_assert、未内联的泛型等，测得的调用栈和耗时与生产 release 差异巨大；据此优化会浪费工时，甚至引入不必要的 unsafe 或复杂度。
+
+**正确做法**：所有性能测量必须在 `--release` 或等效优化配置下进行；微基准使用 Criterion.rs 并报告统计置信区间；上线前将优化前后同时在 release 模式下对比，确保收益真实存在。
+
+---
+
 ## 相关概念
 
 - [Performance Optimization](01_performance_optimization.md) — 微基准、编译器优化、标准库模式
@@ -732,6 +754,8 @@ let counters: Vec<Padded> = (0..8).map(|_| Padded(AtomicU64::new(0))).collect();
 - [Data-Intensive Systems Design](../06_data_and_distributed/10_data_intensive_systems_design.md) — 大数据系统性能
 - [Cloud Native](../04_web_and_networking/02_cloud_native.md) — 云原生可观测性
 - [Microservice Patterns](../03_design_patterns/05_microservice_patterns.md) — 服务性能边界
+- [Rust 执行模型同构性矩阵](../../05_comparative/00_paradigms/02_execution_model_isomorphism.md)
+- [企业架构框架：TOGAF · Zachman · FEAF · BDAT](../../06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md)
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 

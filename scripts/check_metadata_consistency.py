@@ -142,6 +142,10 @@ D5_WHITELIST_FILES = {
         "Tier 2/3 no_std 目标须 nightly + -Z build-std 为工具链事实；rustc book 仅 nightly 路径托管（URL 规则已排除）",
     "concept/06_ecosystem/05_systems_and_embedded/12_gpu_programming_and_hpc.md":
         "rust-gpu 绑定固定编译器版本、std::simd portable SIMD 未稳定、nvptx64 目标须 nightly -Z build-std 均为截至 1.97 的工具链事实陈述（与既有 10_target_tier_platform_support.md 同质）",
+    "concept/06_ecosystem/05_systems_and_embedded/16_embedded_memory_allocators.md":
+        "页面主题涉及 `-Z build-std` 与 `allocator_api` 等截至 1.97.0 仍为 nightly-only 的工具链事实；自定义全局分配器在裸机目标上必须重编 core/alloc，属技术现状陈述",
+    "concept/06_ecosystem/05_systems_and_embedded/18_panic_runtime_no_std.md":
+        "`panic_immediate_abort` / `build-std-features` 等体积优化选项截至 1.97.0 仍依赖 `-Z build-std`，页面主题为 panic 运行时机制与 nightly 工具链事实的边界说明",
     "concept/06_ecosystem/05_systems_and_embedded/21_riscv_avr_embedded.md":
         "AVR Rust 目标截至 1.97.0 仍为 nightly-only / 需 -Z build-std；RISC-V 自定义 target 与实验性扩展亦属工具链事实陈述，非稳定层残留不稳定依赖",
     "concept/06_ecosystem/13_quizzes/03_quiz_security_testing.md":

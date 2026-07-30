@@ -1,7 +1,7 @@
-# 知识框架元模型
+> **EN**: Knowledge Framework Meta-Model
+> **Summary**: Meta-framework defining the cognitive architecture, semantic space, and competency topology used across the Rust knowledge base.
 
-**EN**: Knowledge Framework Meta-Model
-**Summary**: Meta-framework defining the cognitive architecture, semantic space, and competency topology used across the Rust knowledge base.
+# 知识框架元模型
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L0–L7
