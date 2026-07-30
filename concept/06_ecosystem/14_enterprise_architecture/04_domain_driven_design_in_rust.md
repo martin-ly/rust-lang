@@ -1,9 +1,9 @@
+> **Summary**: A practical mapping of DDD tactical patterns — entities, value objects, aggregates, domain services, repositories, and domain events — to Rust's ownership, type system, and trait mechanisms.
 > **内容分级**: [专家级]
 
 # 领域驱动设计（DDD）在 Rust 中的战术模式
 
 **EN**: Domain-Driven Design Tactical Patterns in Rust
-**Summary**: A practical mapping of DDD tactical patterns — entities, value objects, aggregates, domain services, repositories, and domain events — to Rust's ownership, type system, and trait mechanisms.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5-L6

@@ -1,8 +1,8 @@
 # Session Types 与 Rust 通信协议
 
 **EN**: Session Types and Rust Communication Protocols
-**Summary**: A formal introduction to binary and multiparty session types, their linear typing discipline, and how Rust's ownership/borrowing and channel APIs can encode protocol safety without a native session-type extension.
 
+> **Summary**: A formal introduction to binary and multiparty session types, their linear typing discipline, and how Rust's ownership/borrowing and channel APIs can encode protocol safety without a native session-type extension.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4
 > **权威来源**: 本文件为 `concept/` 权威页。

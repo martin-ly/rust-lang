@@ -219,8 +219,12 @@
 
 ### 学术通用
 
-- **TAPL (Pierce 2002)**: <https://www.cis.upenn.edu/~bcpierce/tapl/>
-- **Software Foundations**: <https://softwarefoundations.cis.upenn.edu/>
+- **TAPL (Pierce 2002)**: <https://www.cis.upenn.edu/~bcpierce/tapl/> — 类型系统与编程语言基础
+- **Software Foundations**: <https://softwarefoundations.cis.upenn.edu/> — Coq 形式化基础课程
+- **Winskel 1993, *The Formal Semantics of Programming Languages***: <https://www.cl.cam.ac.uk/~gw104/> — 操作语义、指称语义、公理语义与并发语义经典教材
+- **Wadler 1989, *Theorems for Free!***: <https://doi.org/10.1007/3-540-50945-2_6> — 参数多态的自由定理（参数性）
+- **Herlihy & Shavit 2011, *The Art of Multiprocessor Programming***: <https://www.sciencedirect.com/book/9780123973375/the-art-of-multiprocessor-programming> — 共享内存并发、线性化、wait-free/lock-free 层次
+- **Reynolds 1983, *Types, Abstraction and Parametric Polymorphism***: <https://doi.org/10.1016/B978-0-444-87874-5.50025-3> — 参数性的逻辑关系奠基
 
 ---
 
@@ -366,8 +370,12 @@
 | Rust for Rustaceans | <https://rustforrustaceans.com/> | 中高级 Rust 开发者进阶书 | [`concept/02_intermediate/00_traits/01_traits.md`](../../02_intermediate/00_traits/01_traits.md) · [`concept/03_advanced/02_unsafe/01_unsafe.md`](../../03_advanced/02_unsafe/01_unsafe.md) |
 | Effective Rust | <https://www.lurklurk.org/effective-rust/> | 基于条目的 Rust 工程实践建议 | [`concept/02_intermediate/05_modules_and_visibility/03_api_naming_conventions.md`](../../02_intermediate/05_modules_and_visibility/03_api_naming_conventions.md) |
 | The Little Book of Rust Books | <https://lborb.github.io/book/> | 官方与非官方 Rust 书籍索引 | 元索引（本文件） |
+| Winskel 1993, *The Formal Semantics of Programming Languages* | <https://www.cl.cam.ac.uk/~gw104/> | 程序设计语言形式语义经典教材 | [`concept/04_formal/03_operational_semantics/03_operational_semantics.md`](../../04_formal/03_operational_semantics/03_operational_semantics.md) |
+| Wadler 1989, *Theorems for Free!* | <https://doi.org/10.1007/3-540-50945-2_6> | 参数性与自由定理经典论文 | [`concept/04_formal/00_type_theory/15_parametricity_and_theorems_for_free.md`](../../04_formal/00_type_theory/15_parametricity_and_theorems_for_free.md) |
+| Herlihy & Shavit 2011, *The Art of Multiprocessor Programming* | <https://www.sciencedirect.com/book/9780123973375/the-art-of-multiprocessor-programming> | 共享内存并发与进展条件权威教材 | [`concept/04_formal/12_concurrency_models/02_expressiveness_of_concurrent_models.md`](../../04_formal/12_concurrency_models/02_expressiveness_of_concurrent_models.md) |
 
 > **P2-1 说明**：本节来源从 3 扩展到 8；连同官方文档、形式化生态、工业生态、企业架构、系统工程、语义工程、AI 系统，项目国际权威来源索引总数从 60+ 扩展到 95+。
+> **P6 补充**：新增 Winskel / Wadler / Herlihy & Shavit / Reynolds 参数性来源，并映射到对应 `concept/` 权威页。
 
 ---
 

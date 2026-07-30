@@ -224,6 +224,7 @@
     - [🔗 推荐学习路径](#-推荐学习路径)
     - [📖 Rustonomicon 逐章对标表](#-rustonomicon-逐章对标表)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [与表征空间（Semantic Space）的映射](#与表征空间semantic-space的映射)
 
 <!-- L3::权威定义 -->
 
@@ -3465,3 +3466,13 @@ mindmap
       补充章节Miri 的使用方法与限制
       补充章节stdptrread/write vs
 ```
+
+---
+
+## 与表征空间（Semantic Space）的映射
+
+> 本页对应 [`concept/00_meta/00_framework/semantic_space.md`](../../00_meta/00_framework/semantic_space.md) 的 **§2 安全 Rust 的语义封闭性** 与 **§5 机制组合的语义空间**：
+>
+> - **unsafe 是 safe Rust 封闭世界的“逃逸舱口”**：它不改变类型系统规则，但允许程序员手动承诺并维护不变量。
+> - **Safety Invariant / Validity Invariant** 是语义空间中“非法组合实际上是安全的”的手工证明义务。
+> - **unsafe × 借用 × 生命周期** 的组合是语义空间中最危险的区域：它把编译器排除的 UB 空间重新打开，需要形式化记忆模型（Stacked/Tree Borrows）来验证。

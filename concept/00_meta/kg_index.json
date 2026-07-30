@@ -4,7 +4,7 @@
     "generated": "2026-07-11",
     "rust_version": "1.97.0+",
     "source": "concept/",
-    "entity_count": 602,
+    "entity_count": 603,
     "schema": "simple KG index"
   },
   "entities": [
@@ -302,6 +302,29 @@
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [],
       "postrequisites": [],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:00_meta/00_framework/semantic_layer_alignment_index.md",
+      "path": "00_meta/00_framework/semantic_layer_alignment_index.md",
+      "title": "",
+      "en": "Semantic Layer Alignment Index",
+      "summary": "A cross-layer index mapping algorithm semantics → system semantics → architecture semantics → enterprise architecture, showing refinement relationships and Rust engineering mappings for each layer.",
+      "bloom": "L3-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Semantic Space",
+          "path": "semantic_space.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Enterprise Architecture Frameworks",
+          "path": "../../06_ecosystem/14_enterprise_architecture/01_enterprise_architecture_frameworks.md"
+        }
+      ],
       "theorems": [],
       "related_crates": []
     },

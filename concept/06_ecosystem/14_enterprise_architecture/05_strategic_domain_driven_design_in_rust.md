@@ -1,9 +1,9 @@
+> **Summary**: A practical mapping of Strategic DDD patterns — bounded context, context mapping, subdomain classification, and anti-corruption layers — to Rust crates, workspaces, modules, and FFI boundaries.
 > **内容分级**: [专家级]
 
 # 战略领域驱动设计（Strategic DDD）在 Rust 中的实践
 
 **EN**: Strategic Domain-Driven Design in Rust
-**Summary**: A practical mapping of Strategic DDD patterns — bounded context, context mapping, subdomain classification, and anti-corruption layers — to Rust crates, workspaces, modules, and FFI boundaries.
 
 > **Rust 版本**: 1.97.1+ (Edition 2024)
 > **Bloom 层级**: L5-L7
@@ -200,7 +200,6 @@ impl InventoryAcl {
 > - D. Separate Ways
 >
 > <details><summary>答案</summary>B. Anti-Corruption Layer 通过适配器隔离上游模型，保护下游上下文的语义一致性。</details>
-
 
 ## 补充国际权威来源（P1/P2 覆盖）
 

@@ -1,9 +1,9 @@
+> **Summary**: A systems-level guide to deploying and serving AI/ML models with Rust — covering ONNX Runtime, Candle, quantization strategies, batching, caching, and latency/throughput trade-offs in production inference pipelines.
 > **内容分级**: [专家级]
 
 # Rust 在 AI 模型服务与推理系统中的应用
 
 **EN**: Rust for AI Model Serving and Inference Systems
-**Summary**: A systems-level guide to deploying and serving AI/ML models with Rust — covering ONNX Runtime, Candle, quantization strategies, batching, caching, and latency/throughput trade-offs in production inference pipelines.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5-L7

@@ -162,6 +162,7 @@ mindmap
     - [测验 5：反例分析（分析层）](#测验-5反例分析分析层)
   - [十二、延伸阅读与自测](#十二延伸阅读与自测)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [与表征空间（Semantic Space）的映射](#与表征空间semantic-space的映射)
 
 ## 一、权威定义（Definition）
 
@@ -2029,3 +2030,13 @@ let word = get_first_word(s.clone()); // s 仍有效
 > 无数据竞争 ⟸ 可变借用（Mutable Borrow）独占性 ⟸ Send/Sync 自动推导
 
 - **P2 生态/社区**: [Learn Rust With Entirely Too Many Linked Lists](https://rust-unofficial.github.io/too-many-lists/)
+
+---
+
+## 与表征空间（Semantic Space）的映射
+
+> 本页对应 [`concept/00_meta/00_framework/semantic_space.md`](../../00_meta/00_framework/semantic_space.md) 的 **§2 安全 Rust 的语义封闭性** 与 **§5 机制组合的语义空间**：
+>
+> - **所有权算子 `Own(T)`** 是语义空间的基础线性资源算子；它支撑了 safe Rust 的封闭世界假设。
+> - **Move 语义** 体现线性逻辑中“资源不可复制”的约束，对应语义空间 `Own(T) × Own(T) → ❌ E0382` 的非法组合。
+> - **确定性析构 / RAII** 把资源生命周期从运行时 GC 前移到编译期 + Drop，对应语义空间“能且高效表达”的零成本资源管理。

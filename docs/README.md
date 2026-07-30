@@ -31,4 +31,10 @@
 
 ---
 
+## 目录编号说明
+
+`docs/` 一级目录当前编号为 `00_meta`、`02_learning`、`03_reference`、`04_guides`、`05_practice`、`08_usage_guides`、`09_toolchain`、`12_research_notes`、`15_rust_formal_engineering_system`。`10` 号段暂未使用，保留给未来可能新增的“中间层集成指南”专题；跳号原因按 AGENTS.md §4.0-3 在此登记。
+
+---
+
 > 本目录不含 `concept/`（概念文件）和 `knowledge/`（知识索引），请参阅项目根目录的 [知识架构说明](../README.md)。

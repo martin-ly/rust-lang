@@ -51,6 +51,22 @@ UNNUMBERED_SERIES_DIRS = {
     "concept/00_meta/00_framework",
     "concept/00_meta/knowledge_topology",
     "concept/07_future/00_version_tracking",
+    # 以下目录已按专题系列约定补充 README.md 索引，允许无序号结构
+    "content/ecosystem",
+    "content/ecosystem/deep_dives",
+    "content/safety_critical",
+    "docs/00_meta/analysis",
+    "docs/00_meta/analysis/semantic_space_alignment",
+    "docs/00_meta/history",
+    "docs/02_learning/quizzes",
+    "docs/03_reference/quick_reference",
+    "docs/08_usage_guides/workflow",
+    "docs/12_research_notes/02_formal_methods/coq_skeleton",
+    "docs/15_rust_formal_engineering_system/03_practical_applications/memory",
+    "docs/15_rust_formal_engineering_system/03_practical_applications/performance",
+    "knowledge/03_advanced/unsafe",
+    "knowledge/04_expert/miri",
+    "knowledge/06_ecosystem/databases",
 }
 
 # N5 一级目录连续性检查对象（顶层）
@@ -159,10 +175,12 @@ def main() -> int:
         if nums:
             expected = list(range(min(nums), max(nums) + 1))
             gaps = sorted(set(expected) - set(nums))
-            if gaps:
+            # AGENTS.md §4.0-3：大目录（≥15 个编号子目录）可留空号，
+            # 但须在该目录 README 记录空号原因。
+            if gaps and len(nums) < 15:
                 add("WARN", "N5", top,
                     f"一级目录跳号: 缺 {', '.join(f'{g:02d}' for g in gaps)}"
-                    "（大目录留空号须在 README 记录原因，AGENTS.md §4.0-3）")
+                    "（小目录须重排；大目录留空号须在 README 记录原因，AGENTS.md §4.0-3）")
 
     # --- 输出 ---
     n_err = sum(1 for f in findings if f[0] == "ERROR")
@@ -237,12 +255,20 @@ def check_name(name: str, path: str, is_dir: bool, rel_dir: str, add):
         # crates/*/docs/ 下 tier_0N_* 为 §4.0-6  sanctioned 结构，不告警
         if re.fullmatch(r"tier_0\d+_[a-z0-9_]+", name) and rel_dir.replace(os.sep, "/").startswith("crates/"):
             return
+        # 已登记的无序号专题系列目录且存在 README.md 索引，按 AGENTS.md §4.0-4 豁免
+        path_norm = path.replace(os.sep, "/")
+        if path_norm in UNNUMBERED_SERIES_DIRS and os.path.exists(os.path.join(ROOT, path, "README.md")):
+            return
         # 无序号 snake_case 目录：专题系列/既有结构，WARN 提示需 README 索引（§4.0-4）
         add("WARN", "N1", path,
             "无序号目录（专题系列须集中于同一目录并有 README 索引，AGENTS.md §4.0-4）")
         return
 
     if name.endswith(".md"):
+        rel_dir_norm = rel_dir.replace(os.sep, "/")
+        # 已登记的无序号专题系列目录且存在 README.md 索引：专题系列可无序号，不告警
+        if rel_dir_norm in UNNUMBERED_SERIES_DIRS and os.path.exists(os.path.join(ROOT, rel_dir, "README.md")):
+            return
         if in_series_dir(rel_dir):
             add("WARN", "N1", path, "无序号专题系列文件（WARN，系列目录约定）")
         else:

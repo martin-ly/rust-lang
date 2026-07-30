@@ -179,6 +179,43 @@ Felleisen（1991）提出：**比较两种语言/原语的表达力，要看"新
 
 ---
 
+### 1.6 Herlihy & Shavit 并发进展条件
+
+Herlihy & Shavit (2011) 从**共享内存并发对象**的角度给出另一组表达力/正确性分层——**进展条件（progress conditions）**：
+
+```text
+1. wait-free（无等待）
+   每个线程都能在有限步内完成操作，无论其他线程是否被挂起、延迟或崩溃。
+
+2. lock-free（无锁）
+   系统整体持续进展：至少有一个线程能在有限步内完成操作。
+   允许个别线程饥饿（starvation），但不允许全局死锁。
+
+3. obstruction-free（无阻碍）
+   如果线程在一段时间内单独运行（无其他线程竞争），则能在有限步内完成操作。
+   允许活锁（livelock），只要最终能遇到无争用窗口。
+
+4. blocking（基于锁）
+   依赖互斥锁；若持有锁的线程被挂起，其他线程可能无限等待。
+```
+
+**与模型编码的关系**：wait-free/lock-free/obstruction-free 不是"能不能编码"的问题，而是"编码后是否保持**进展保证**"的问题。一个 wait-free 算法如果被人用锁重新实现，即使功能等价，也丢失了 wait-free 的进展语义。
+
+**Rust 生态映射**：
+
+| 进展条件 | Rust 生态代表 | 说明 |
+|---|---|---|
+| wait-free | `crossbeam::epoch`（部分路径）、无锁数据结构 | 最难实现，通常只用于核心原子操作 |
+| lock-free | `crossbeam::queue`、`parking_lot::Mutex` 的某些算法 | 系统整体进展，但个别线程可能饥饿 |
+| obstruction-free | 某些 STM（Software Transactional Memory）设计 | 本库未大规模使用 |
+| blocking | `std::sync::Mutex`、`std::sync::RwLock` | 最常用，但依赖调度公平性 |
+
+> **关键区分**：`parking_lot::Mutex` 在实现上可能使用自旋 + 阻塞，从外部契约看仍是 blocking；`crossbeam::queue` 的 `push`/`pop` 提供 lock-free 保证。选型时必须区分"实现没用锁"与"接口承诺 lock-free"。
+
+**判定依据**：进展条件是**系统语义**层面的保证，不能仅通过功能测试验证；需要形式化论证（线性化 + 进展证明）或权威文档声明。
+
+---
+
 ## 二、Rust 实例：`tokio::select!` 与状态机
 
 `tokio::select!` 等待多个异步操作中的**第一个就绪者**，并执行对应分支。它看起来像宏，但无法仅通过普通过程宏在不改变 Rust 语义的情况下实现：
@@ -361,6 +398,7 @@ fn main() {
 | T-ECM-03 | 强互模拟 ⟹ 弱互模拟 | 弱互模拟定义更宽松 | 若两系统强互模拟，则必然弱互模拟；反之不成立 |
 | T-ECM-04 | `tokio::select!` 非纯库可表达 | 需要编译器生成 Future 状态机 + 同时保存多分支中间状态 | 在 Felleisen 框架下，`select!` 增加 Rust async 表达力 |
 | T-ECM-05 | 编码不保公平性/故障模型 | 公平性与故障是目标模型未定义的额外假设 | 跨模型等价声明必须显式限定观察集 |
+| T-ECM-06 | wait-free ⟹ lock-free ⟹ obstruction-free | Herlihy & Shavit 进展条件层次 | 功能等价不保持进展条件；选型需区分接口契约与实现细节 |
 
 **相关概念**:
 
@@ -375,7 +413,7 @@ fn main() {
 
 ## 五、认知路径
 
-> **认知路径**: 模型谱系 ⟹ 编码能力 ⟹ 互模拟等价 ⟹ 编码丢失的语义 ⟹ Felleisen 框架 ⟹ Rust `select!` 实例 ⟹ 反例边界。
+> **认知路径**: 模型谱系 ⟹ 编码能力 ⟹ 互模拟等价 ⟹ 编码丢失的语义 ⟹ Felleisen 框架 ⟹ Herlihy & Shavit 进展条件 ⟹ Rust `select!` 实例 ⟹ 反例边界。
 
 学习顺序建议：先读 [Models of Concurrency](01_models_of_concurrency.md) 建立各模型的形式骨架，再读本页理解它们之间的表达力关系；随后通过 [Process Calculi for Rust](../07_concurrency_semantics/01_process_calculi_for_rust.md) 与 [Actor Semantics](../07_concurrency_semantics/03_actor_semantics.md) 把理论落回 Rust 原语；最后在 [Five Models Definition Matrix](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md) 中把五范式坐标补齐。
 
@@ -521,6 +559,10 @@ mindmap
         编码能力
         互模拟等价
         Felleisen 框架
+      Herlihy & Shavit 进展条件
+        wait-free
+        lock-free
+        obstruction-free
       模型互编码
         Actor → π
         CSP → Actor 的限制

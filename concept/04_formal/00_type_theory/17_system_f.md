@@ -1,8 +1,8 @@
 # System F 与 Rust 泛型多态
 
 **EN**: System F and Rust Generic Polymorphism
-**Summary**: A self-contained introduction to Girard-Reynolds System F (polymorphic lambda calculus), its typing rules, erasure semantics, and how Rust's monomorphized generics approximate parametric polymorphism while staying type-safe.
 
+> **Summary**: A self-contained introduction to Girard-Reynolds System F (polymorphic lambda calculus), its typing rules, erasure semantics, and how Rust's monomorphized generics approximate parametric polymorphism while staying type-safe.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4
 > **权威来源**: 本文件为 `concept/` 权威页。

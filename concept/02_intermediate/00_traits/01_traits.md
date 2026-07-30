@@ -236,6 +236,7 @@ mindmap
     - [Parser Combinator](#parser-combinator)
     - [关联类型 vs 泛型参数决策](#关联类型-vs-泛型参数决策)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [与表征空间（Semantic Space）的映射](#与表征空间semantic-space的映射)
 
 ## 一、权威定义（Definition）
 
@@ -3200,3 +3201,13 @@ trait Parser<'a> {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/enum_dispatch — 生态权威 API 文档](https://docs.rs/enum_dispatch) · [docs.rs/serde — 生态权威 API 文档](https://docs.rs/serde)
+
+---
+
+## 与表征空间（Semantic Space）的映射
+
+> 本页对应 [`concept/00_meta/00_framework/semantic_space.md`](../../00_meta/00_framework/semantic_space.md) 的 **§4 等价表达的语义保持** 与 **§5 机制组合的语义空间**：
+>
+> - **Trait 算子 `Trait(T)`** 提供行为抽象，是语义空间中实现“多态替换”而不引入运行时差异的核心机制。
+> - **`dyn Trait` vs `impl Trait` vs `enum + match`** 对应语义空间 §4 的等价表达谱系：行为等价但分发策略不同。
+> - **`Trait(T) × Generic<T>`** 组合生成 `impl Trait / dyn Trait`，说明泛型与 trait 共同扩展了 Rust 的表征能力。

@@ -179,6 +179,7 @@ mindmap
     - [测验 5：Split Borrow（分析层）](#测验-5split-borrow分析层)
   - [十、延伸阅读与自测](#十延伸阅读与自测)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
+  - [与表征空间（Semantic Space）的映射](#与表征空间semantic-space的映射)
 
 ## 一、权威定义（Definition）
 
@@ -2157,3 +2158,13 @@ Rust 支持 **Split Borrow**（字段级借用分析）：编译器能识别 `p.
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [Learn Rust With Entirely Too Many Linked Lists](https://rust-unofficial.github.io/too-many-lists/)
+
+---
+
+## 与表征空间（Semantic Space）的映射
+
+> 本页对应 [`concept/00_meta/00_framework/semantic_space.md`](../../00_meta/00_framework/semantic_space.md) 的 **§2 安全 Rust 的语义封闭性** 与 **§5 机制组合的语义空间**：
+>
+> - **借用算子 `Borrow(T, mode)`** 是语义空间中连接所有权与生命周期的中间算子：`Borrow(T, shared) × Lifetime('a) → &'a T`。
+> - **共享借用与可变借用的互斥** 对应语义空间中的非法组合 `Borrow(T, shared) × Borrow(T, exclusive) → ❌ E0502`。
+> - **Split Borrow / NLL** 是在不破坏封闭性的前提下，对借用规则做最大实用化扩展的局部精化。

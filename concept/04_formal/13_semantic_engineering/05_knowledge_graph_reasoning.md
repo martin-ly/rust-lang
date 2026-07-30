@@ -1,9 +1,9 @@
+> **Summary**: Formal foundations of knowledge graph reasoning — RDFS/OWL entailment, rule-based inference, SHACL validation, and query federation — with mappings to Rust semantic-web tooling and the project KG v3.
 > **内容分级**: [专家级]
 
 # 知识图谱推理（Knowledge Graph Reasoning）
 
 **EN**: Knowledge Graph Reasoning
-**Summary**: Formal foundations of knowledge graph reasoning — RDFS/OWL entailment, rule-based inference, SHACL validation, and query federation — with mappings to Rust semantic-web tooling and the project KG v3.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4-L5

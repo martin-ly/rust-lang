@@ -10,7 +10,7 @@
 > **受众**: [研究者]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A** — Application
+> **A/S/P 标记**: **P** — Professional / Expert
 > **双维定位**: T×Fml — 工具链与形式化验证
 > **定位**: 将 Creusot 从学术研究工具还原为算法与数据结构功能正确性验证的可选工具，理解其与 Kani/Verus/Prusti/Aeneas 的边界。学习本页前应先掌握 L3 [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) 与 L4 [Ownership Formalization](../01_ownership_logic/02_ownership_formal.md) 的基础。
 > **前置概念**: [Verification Toolchain](01_verification_toolchain.md) · [现代验证工具生态](04_modern_verification_tools.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)

@@ -56,6 +56,7 @@
   - [测验：元层框架与知识体系架构（L0）](00_meta/05_quizzes/01_quiz_meta_framework.md)
   - [Rust Semantic Expressiveness: A Panoramic Survey（Rust 语义表达力全景梳理）](00_meta/00_framework/semantic_expressiveness.md)
   - [Rust 表征空间（Semantic / Representational Space）](00_meta/00_framework/semantic_space.md)
+  - [语义分层映射索引（Semantic Layer Alignment Index）](00_meta/00_framework/semantic_layer_alignment_index.md)
   - [权威来源清单与知识来源关系分析](00_meta/02_sources/03_sources.md)
   - [来源索引（Sources Index）](sources/INDEX.md)
   - [RFC 索引（RFC Index）](sources/rfc_index.md)
