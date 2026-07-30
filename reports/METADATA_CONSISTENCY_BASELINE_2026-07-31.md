@@ -1,17 +1,17 @@
 # 元数据一致性基线（语义质量门 P0-1）
 
-**日期**: 2026-07-31  **扫描**: 612 concept 活跃文件（排除 archive）  **模式**: strict
+**日期**: 2026-07-31  **扫描**: 635 concept 活跃文件（排除 archive）  **模式**: strict
 
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
 | D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥 | 2 | 0.3% | >0 | FAIL |
-| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 0 (基=359) | 0.0% | >=5% | pass |
-| D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
+| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 8 (基=374) | 1.3% | >=5% | pass |
+| D3 关键字段同文件重声明 | 4 | 0.6% | >0 | FAIL |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
-| D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
-| D6 Summary 低信息量模板套话 | 2 | 0.3% | >=3% | pass |
+| D5 稳定层正文残留 nightly/preview/unstable | 2 | 0.3% | >0 | FAIL |
+| D6 Summary 低信息量模板套话 | 5 | 0.8% | >=3% | pass |
 
-**受影响文件总数**: 4 / 612
+**受影响文件总数**: 16 / 635
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -51,6 +51,7 @@
 - `concept/06_ecosystem/00_toolchain/15_z_flags_reference.md` — 页面主题即 nightly-only `-Z` 选项系统化清单（与既有 -Z 类白名单页同质）
 - `concept/06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md` — Tier 2/3 no_std 目标须 nightly + -Z build-std 为工具链事实；rustc book 仅 nightly 路径托管（URL 规则已排除）
 - `concept/06_ecosystem/05_systems_and_embedded/12_gpu_programming_and_hpc.md` — rust-gpu 绑定固定编译器版本、std::simd portable SIMD 未稳定、nvptx64 目标须 nightly -Z build-std 均为截至 1.97 的工具链事实陈述（与既有 10_target_tier_platform_support.md 同质）
+- `concept/06_ecosystem/05_systems_and_embedded/21_riscv_avr_embedded.md` — AVR Rust 目标截至 1.97.0 仍为 nightly-only / 需 -Z build-std；RISC-V 自定义 target 与实验性扩展亦属工具链事实陈述，非稳定层残留不稳定依赖
 - `concept/06_ecosystem/13_quizzes/03_quiz_security_testing.md` — quiz 题目/解析以 cargo vet 工具链可用性与 #[bench] nightly 状态为考点，nightly 为考点内容本身
 - `concept/sources/rfc_index.md` — RFC 索引：状态列记录各 RFC nightly/每日构建版状态，即索引内容本身（同 sources/INDEX.md 既有登记）
 - `concept/00_meta/00_framework/semantic_space.md` — 元框架页：nightly/preview 作为版本演进维度概念名引用（语义空间坐标轴描述）
@@ -112,26 +113,42 @@
 - `concept/00_meta/00_framework/semantic_layer_alignment_index.md` — Bloom [3, 4, 5] 与 层次定位/层级 [0] 无交集
 - `concept/00_meta/00_framework/semantic_model_reasoning_methodology.md` — Bloom [1, 2, 3, 4, 5, 6, 7] 与 层次定位/层级 [0] 无交集
 
-### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（0）
+### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（8）
 
+- `concept/04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5] 无交集
+- `concept/06_ecosystem/05_systems_and_embedded/15_no_std_synchronization_primitives.md` — A/S/P=A 允许 [1, 2] 与 Bloom [4] 无交集
+- `concept/06_ecosystem/05_systems_and_embedded/16_embedded_memory_allocators.md` — A/S/P=A 允许 [1, 2] 与 Bloom [4] 无交集
+- `concept/06_ecosystem/05_systems_and_embedded/17_pac_hal_implementation.md` — A/S/P=A 允许 [1, 2] 与 Bloom [4] 无交集
+- `concept/06_ecosystem/06_data_and_distributed/10_data_intensive_systems_design.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [6] 无交集
+- `concept/06_ecosystem/06_data_and_distributed/11_distributed_systems_protocols.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
+- `concept/06_ecosystem/07_security_and_cryptography/04_security_architecture.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [6] 无交集
+- `concept/06_ecosystem/10_performance/02_performance_engineering_architecture.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [6] 无交集
 
-### D3 关键字段同文件重声明（0）
+### D3 关键字段同文件重声明（4）
 
+- `concept/06_ecosystem/06_data_and_distributed/10_data_intensive_systems_design.md` — Rust 版本 声明 2 次: ['1.97.0+ (Edition 2024)', '1.97.0+ (Edition 2024)']
+- `concept/06_ecosystem/06_data_and_distributed/11_distributed_systems_protocols.md` — Rust 版本 声明 2 次: ['1.97.0+ (Edition 2024)', '1.97.0+ (Edition 2024)']
+- `concept/06_ecosystem/07_security_and_cryptography/04_security_architecture.md` — Rust 版本 声明 2 次: ['1.97.0+ (Edition 2024)', '1.97.0+ (Edition 2024)']
+- `concept/06_ecosystem/10_performance/02_performance_engineering_architecture.md` — Rust 版本 声明 2 次: ['1.97.0+ (Edition 2024)', '1.97.0+ (Edition 2024)']
 
 ### D4 文首块 Rust 版本号自矛盾（0）
 
+- `concept/06_ecosystem/05_systems_and_embedded/16_embedded_memory_allocators.md` — 稳定层 nightly/preview 关键词 4 处
+- `concept/06_ecosystem/05_systems_and_embedded/18_panic_runtime_no_std.md` — 稳定层 nightly/preview 关键词 2 处
 
-### D5 稳定层正文残留 nightly/preview/unstable（0）
-
-
-### D6 Summary 低信息量模板套话（2）
+### D6 Summary 低信息量模板套话（5）
 
 - `concept/00_meta/00_framework/README.md` — Summary 为空
+- `concept/06_ecosystem/03_design_patterns/21_microkernel_architecture.md` — Summary 为空
+- `concept/06_ecosystem/03_design_patterns/22_embedded_safety_critical_patterns.md` — Summary 为空
+- `concept/06_ecosystem/03_design_patterns/23_pipeline_filter_blackboard_interpreter.md` — Summary 为空
 - `concept/07_future/00_version_tracking/README.md` — Summary 为空
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 
 - D1 Bloom互斥 2 (>0)
+- D3 字段重声明 4 (>0)
+- D5 稳定层nightly残留 2 (>0)
 
 ## 机器可读
 

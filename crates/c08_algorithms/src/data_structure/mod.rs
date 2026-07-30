@@ -12,13 +12,17 @@ pub mod lru_cache;
 pub mod persistent_segment_tree;
 pub mod priority_queue;
 pub mod red_black_tree;
+pub mod ring_buffer;
+pub mod rope;
 pub mod segtree;
 pub mod skip_list;
 pub mod sparse_table;
 pub mod stack;
 pub mod treap;
+pub mod trie;
 pub mod treiber_stack;
 pub mod w_tinylfu_cache;
+pub mod work_stealing_queue;
 
 pub use arc_cache::ArcCache;
 pub use clock_cache::ClockCache;

@@ -142,6 +142,8 @@ D5_WHITELIST_FILES = {
         "Tier 2/3 no_std 目标须 nightly + -Z build-std 为工具链事实；rustc book 仅 nightly 路径托管（URL 规则已排除）",
     "concept/06_ecosystem/05_systems_and_embedded/12_gpu_programming_and_hpc.md":
         "rust-gpu 绑定固定编译器版本、std::simd portable SIMD 未稳定、nvptx64 目标须 nightly -Z build-std 均为截至 1.97 的工具链事实陈述（与既有 10_target_tier_platform_support.md 同质）",
+    "concept/06_ecosystem/05_systems_and_embedded/21_riscv_avr_embedded.md":
+        "AVR Rust 目标截至 1.97.0 仍为 nightly-only / 需 -Z build-std；RISC-V 自定义 target 与实验性扩展亦属工具链事实陈述，非稳定层残留不稳定依赖",
     "concept/06_ecosystem/13_quizzes/03_quiz_security_testing.md":
         "quiz 题目/解析以 cargo vet 工具链可用性与 #[bench] nightly 状态为考点，nightly 为考点内容本身",
     "concept/sources/rfc_index.md":

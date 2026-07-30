@@ -39,6 +39,9 @@ pub mod rust_2024_features;
 // 算法执行模式
 pub mod execution_modes;
 
+// 并行算法
+pub mod parallel_algorithms;
+
 // 算法验证和证明
 pub mod verification {
     pub mod complexity_analysis;

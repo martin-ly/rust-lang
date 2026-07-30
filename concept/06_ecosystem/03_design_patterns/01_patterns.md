@@ -39,6 +39,7 @@
 
 - v1.0 (2026-05-12): 初始版本
 - v1.1 (2026-05-12): Wave 3 扩展——新增模式、反模式、语言对比、学术来源
+- v1.2 (2026-07-31): Wave 8 扩展——新增 Abstract Factory、Bridge、Composite、Flyweight、Mediator、Interpreter、Chain of Responsibility、Template Method 8 个 GoF 模式完整小节，含 Rust 实现、语言对比与边界测试
 
 ---
 
@@ -972,6 +973,771 @@ fn load(path: &str) -> Result<Config, Error> {
 > [来源: [TRPL](https://doc.rust-lang.org/book/title-page.html)]
 > **选型决策**: 编写库 → **thiserror**（生态最轻）；构建 CLI/终端应用 → **miette**（诊断美观）；复杂状态机/领域错误 → **snafu**（结构化上下文）。
 > **来源**: [thiserror docs] · [miette docs] · [snafu docs] · 可信度: ✅
+
+---
+
+### 4.10 Abstract Factory 抽象工厂模式
+
+**定义**：提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。抽象工厂强调**产品族**（product family）的一致性——同一工厂生产的所有产品彼此配套。 [来源: [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_pattern)]
+
+**适用场景**：
+
+- 跨平台 UI 工具包（Windows/macOS/Linux 控件族）
+- 主题系统（浅色/深色主题下的按钮、输入框、标签）
+- 数据库访问层（MySQL/PostgreSQL/SQLite 的连接、命令、结果集）
+
+**Rust 实现**：
+
+```rust
+// 产品族：按钮与复选框
+trait Button { fn render(&self); }
+trait Checkbox { fn render(&self); }
+
+// 抽象工厂：定义产品族创建接口
+trait GuiFactory {
+    fn create_button(&self) -> Box<dyn Button>;
+    fn create_checkbox(&self) -> Box<dyn Checkbox>;
+}
+
+// Windows 产品族
+struct WinButton;
+impl Button for WinButton { fn render(&self) { println!("Windows 风格按钮"); } }
+
+struct WinCheckbox;
+impl Checkbox for WinCheckbox { fn render(&self) { println!("Windows 风格复选框"); } }
+
+struct WinFactory;
+impl GuiFactory for WinFactory {
+    fn create_button(&self) -> Box<dyn Button> { Box::new(WinButton) }
+    fn create_checkbox(&self) -> Box<dyn Checkbox> { Box::new(WinCheckbox) }
+}
+
+// macOS 产品族
+struct MacButton;
+impl Button for MacButton { fn render(&self) { println!("macOS 风格按钮"); } }
+
+struct MacCheckbox;
+impl Checkbox for MacCheckbox { fn render(&self) { println!("macOS 风格复选框"); } }
+
+struct MacFactory;
+impl GuiFactory for MacFactory {
+    fn create_button(&self) -> Box<dyn Button> { Box::new(MacButton) }
+    fn create_checkbox(&self) -> Box<dyn Checkbox> { Box::new(MacCheckbox) }
+}
+
+// 客户端只依赖抽象工厂，运行期注入具体工厂
+fn build_dialog(factory: &dyn GuiFactory) {
+    factory.create_button().render();
+    factory.create_checkbox().render();
+}
+
+fn main() {
+    let os = std::env::var("OS").unwrap_or_else(|_| "windows".to_string());
+    if os == "macos" {
+        build_dialog(&MacFactory);
+    } else {
+        build_dialog(&WinFactory);
+    }
+}
+```
+
+**与其他语言对比**：
+
+- **C++/Java**：抽象工厂通常依赖继承层次与虚函数，工厂返回 `Product*` 或泛型 `T extends Product`；Rust 用 trait object 或 `impl Trait` 表达抽象产品，无继承但编译器保证产品族一致性。
+- **Go**：通过接口组合实现，但缺少编译期对产品族一致性的约束；Rust 的 trait bounds 可以强制 `Button` 与 `Checkbox` 来自同一实现者。
+
+> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · 可信度: ✅
+
+#### 边界测试：产品族混合（运行时一致性风险）
+
+抽象工厂的核心不变式是**同一工厂生产的产品才能混用**。以下代码绕过工厂直接混用不同族产品，Rust 编译器不会阻止（因为 `&dyn Button` 与 `&dyn Checkbox` 本身是合法类型），但运行期的类型断言会失败——这证明抽象工厂的保护一旦被绕过，错误只能在运行期发现。
+
+```rust
+// 假设客户端要求传入同一工厂的两个产品
+trait Button { fn family(&self) -> &'static str; }
+trait Checkbox { fn family(&self) -> &'static str; }
+
+struct WinButton; impl Button for WinButton { fn family(&self) -> &'static str { "win" } }
+struct MacCheckbox; impl Checkbox for MacCheckbox { fn family(&self) -> &'static str { "mac" } }
+
+// ❌ 错误：直接混用不同族产品，失去抽象工厂的保护
+fn mixed_dialog(button: &dyn Button, checkbox: &dyn Checkbox) {
+    assert_eq!(button.family(), checkbox.family(), "产品族不一致");
+}
+
+fn main() {
+    mixed_dialog(&WinButton, &MacCheckbox); // 运行期 panic，而非编译期保证
+}
+```
+
+> **修正**：客户端应只持有 `&dyn GuiFactory`，所有产品由同一工厂创建，从而在产品族层面保持静态一致性。
+
+---
+
+### 4.11 Bridge 桥接模式
+
+**定义**：将抽象部分与它的实现部分分离，使它们都可以独立地变化。Bridge 模式用**组合**替代继承，避免类层次在两个维度上组合爆炸。 [来源: [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_pattern)]
+
+**适用场景**：
+
+- 图形绘制：形状（Circle/Square）与渲染器（OpenGL/Vulkan/Software）两个维度独立变化
+- 设备控制：遥控器（Basic/Advanced）与设备（TV/Radio）独立变化
+- 消息发送：消息类型（Text/Image）与发送通道（Email/SMS/Push）独立变化
+
+**Rust 实现**：
+
+```rust
+// 实现维度：设备
+trait Device {
+    fn is_enabled(&self) -> bool;
+    fn volume(&self) -> u8;
+    fn set_volume(&mut self, percent: u8);
+}
+
+struct Tv { on: bool, volume: u8 }
+impl Tv { fn new() -> Self { Self { on: true, volume: 30 } } }
+
+impl Device for Tv {
+    fn is_enabled(&self) -> bool { self.on }
+    fn volume(&self) -> u8 { self.volume }
+    fn set_volume(&mut self, percent: u8) { self.volume = percent.min(100); }
+}
+
+// 抽象维度：遥控器（持有一个 Device，而非继承设备）
+trait Remote {
+    fn toggle_power(&mut self);
+    fn volume_up(&mut self);
+}
+
+struct BasicRemote<D: Device> { device: D }
+
+impl<D: Device> BasicRemote<D> {
+    fn new(device: D) -> Self { Self { device } }
+}
+
+impl<D: Device> Remote for BasicRemote<D> {
+    fn toggle_power(&mut self) { /* 切换 self.device.on */ }
+    fn volume_up(&mut self) {
+        self.device.set_volume(self.device.volume().saturating_add(10));
+    }
+}
+
+fn main() {
+    let tv = Tv::new();
+    let mut remote = BasicRemote::new(tv);
+    remote.volume_up();
+}
+```
+
+**与其他语言对比**：
+
+- **C++**：Bridge 常通过 pimpl（pointer to implementation）实现，运行时通过虚函数桥接；Rust 可用泛型参数在编译期桥接，零开销，或 `Box<dyn Device>` 实现运行时替换。
+- **Java**：抽象类持有实现接口引用；Rust 中 trait + 泛型/动态分发是等价物，且所有权系统防止悬空实现引用。
+
+> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · 可信度: ✅
+
+#### 边界测试：实现接口未实现（编译错误）
+
+Bridge 要求抽象与实现均通过接口交互。若具体设备未实现 `Device` trait，编译器会拒绝构造遥控器——这比运行时检查更早暴露问题。
+
+```rust,compile_fail
+trait Device { fn volume(&self) -> u8; }
+trait Remote { fn volume_up(&mut self); }
+
+struct BasicRemote<D: Device> { device: D }
+
+struct Radio; // ❌ 未实现 Device
+
+fn main() {
+    let _remote = BasicRemote { device: Radio }; // E0277: Radio 不实现 Device
+}
+```
+
+> **修正**：为 `Radio` 实现 `Device`，或让 `BasicRemote` 持有 `Box<dyn Device>` 以支持运行时替换。
+
+---
+
+### 4.12 Composite 组合模式
+
+**定义**：将对象组合成树形结构以表示“部分-整体”的层次结构。Composite 使客户端对单个对象和组合对象的使用具有一致性。 [来源: [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_pattern)]
+
+**适用场景**：
+
+- 文件系统（文件与目录统一为条目）
+- UI 组件树（容器与叶子节点统一为组件）
+- 组织结构图、文档章节树
+
+**Rust 实现**：
+
+```rust
+// 组件接口
+trait FileSystemComponent {
+    fn name(&self) -> &str;
+    fn size(&self) -> usize;
+    fn print(&self, indent: usize);
+}
+
+// 叶子节点：文件
+struct File { name: String, content: Vec<u8> }
+
+impl FileSystemComponent for File {
+    fn name(&self) -> &str { &self.name }
+    fn size(&self) -> usize { self.content.len() }
+    fn print(&self, indent: usize) {
+        println!("{}📄 {} ({} bytes)", "  ".repeat(indent), self.name, self.size());
+    }
+}
+
+// 组合节点：目录
+struct Directory {
+    name: String,
+    children: Vec<Box<dyn FileSystemComponent>>,
+}
+
+impl Directory {
+    fn new(name: &str) -> Self { Self { name: name.to_string(), children: vec![] } }
+    fn add(&mut self, child: Box<dyn FileSystemComponent>) { self.children.push(child); }
+}
+
+impl FileSystemComponent for Directory {
+    fn name(&self) -> &str { &self.name }
+    fn size(&self) -> usize { self.children.iter().map(|c| c.size()).sum() }
+    fn print(&self, indent: usize) {
+        println!("{}📁 {}", "  ".repeat(indent), self.name);
+        for child in &self.children { child.print(indent + 1); }
+    }
+}
+
+fn main() {
+    let mut root = Directory::new("root");
+    let mut docs = Directory::new("docs");
+    docs.add(Box::new(File { name: "readme.md".to_string(), content: vec![0; 120] }));
+    root.add(Box::new(docs));
+    root.add(Box::new(File { name: "Cargo.toml".to_string(), content: vec![0; 80] }));
+    root.print(0);
+    println!("Total size: {} bytes", root.size());
+}
+```
+
+**与其他语言对比**：
+
+- **C++/Java**：Composite 常通过抽象类提供 `add`/`remove` 默认实现，叶子节点可能继承不必要的空方法；Rust 的 trait 不含字段，组合节点与叶子节点可分别实现同一 trait，避免“叶子被迫实现 add”的尴尬。
+- **Haskell**：用递归代数数据类型 `data FS = File ... | Dir [FS]` 表达，Rust 的 enum 同样适用；当叶子与组合的行为差异较大时，trait object 树比 enum 更灵活。
+
+> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · 可信度: ✅
+
+#### 边界测试：叶子节点不支持 add（设计选择）
+
+在 Rust 中，若把 `add` 放进公共 trait，则叶子节点（File）也必须实现它，常见做法是让 `add` 返回 `Result` 或 panic。更惯用的做法是把组合操作仅放在 `Directory` 上，trait 只暴露统一遍历接口。
+
+```rust
+// ❌ 不推荐：在 trait 中要求 add，File 被迫实现无意义方法
+trait Component {
+    fn add(&mut self, child: Box<dyn Component>);
+    fn size(&self) -> usize;
+}
+
+struct File;
+impl Component for File {
+    fn add(&mut self, _child: Box<dyn Component>) {
+        panic!("File 不能添加子节点"); // 运行时才能发现误用
+    }
+    fn size(&self) -> usize { 0 }
+}
+```
+
+> **修正**：将 `add`/`remove` 保留在 `Directory` 这类组合节点类型上，`Component` trait 仅声明统一操作（`size`/`print`），让误用成为编译错误。
+
+---
+
+### 4.13 Flyweight 享元模式
+
+**定义**：运用共享技术有效地支持大量细粒度对象。享元把对象状态拆分为**内部状态（intrinsic，共享）**与**外部状态（extrinsic，由客户端传入）**，从而显著降低内存占用。 [来源: [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_pattern)]
+
+**适用场景**：
+
+- 游戏中大量重复模型（树木、粒子、贴图图块）
+- 文本编辑器中的字符/字形渲染
+- 字符串驻留（string interning）与符号表
+
+**Rust 实现**：
+
+```rust
+use std::collections::HashMap;
+use std::sync::Arc;
+
+// 内部状态：共享、不可变
+#[derive(Clone, Debug, PartialEq, Eq, Hash)]
+struct TreeType {
+    name: &'static str,
+    color: &'static str,
+    texture: &'static str,
+}
+
+impl TreeType {
+    fn draw(&self, x: i32, y: i32) {
+        println!("在 ({}, {}) 绘制 {} [{} / {}]", x, y, self.name, self.color, self.texture);
+    }
+}
+
+// 享元工厂：保证相同内部状态只创建一次
+struct TreeFactory {
+    types: HashMap<TreeType, Arc<TreeType>>,
+}
+
+impl TreeFactory {
+    fn new() -> Self { Self { types: HashMap::new() } }
+
+    fn get(&mut self, name: &'static str, color: &'static str, texture: &'static str) -> Arc<TreeType> {
+        let key = TreeType { name, color, texture };
+        self.types.entry(key.clone()).or_insert_with(|| Arc::new(key)).clone()
+    }
+}
+
+// 外部状态：每个实例独立
+struct Tree { x: i32, y: i32, kind: Arc<TreeType> }
+
+impl Tree { fn draw(&self) { self.kind.draw(self.x, self.y); } }
+
+fn main() {
+    let mut factory = TreeFactory::new();
+    let mut forest: Vec<Tree> = Vec::new();
+
+    for i in 0..1000 {
+        let kind = factory.get("松树", "深绿", "粗糙");
+        forest.push(Tree { x: i % 100, y: i / 100, kind });
+    }
+
+    println!("树实例数量: {}", forest.len());
+    println!("共享类型对象数量: {}", factory.types.len());
+}
+```
+
+**与其他语言对比**：
+
+- **C++**：享元通常通过指针共享，需手动管理生命周期，悬空指针是常见 bug；Rust 的 `Arc` 提供线程安全共享，`Rc` 提供单线程共享，编译器拒绝可变共享，天然保护内部状态不被误改。
+- **Java**：字符串常量池是享元的经典实现，但所有对象在堆上；Rust 的 `Arc<TreeType>` 同样是堆分配，但可通过 `Copy` 的轻量 ID（如 `Symbol(u32)`）进一步压缩外部状态。
+
+> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · 可信度: ✅
+
+#### 边界测试：误改共享内部状态（编译错误）
+
+享元模式要求内部状态不可变。若客户端拿到 `Arc<TreeType>` 后试图修改，Rust 的类型系统会阻止数据竞争与非法共享写。
+
+```rust,compile_fail
+use std::sync::Arc;
+
+struct Flyweight { value: String }
+
+fn main() {
+    let shared = Arc::new(Flyweight { value: "shared".to_string() });
+    // ❌ 编译错误：无法通过 Arc 获取可变引用
+    shared.value.push_str(" mutated");
+}
+```
+
+> **修正**：内部状态使用 `Arc<ImmutableType>` 或 `Rc<ImmutableType>`；若确实需要“可变共享状态”，则它不再是享元，应重新设计为独立对象或使用 `Arc<Mutex<T>>` 并承认同步成本。
+
+---
+
+### 4.14 Mediator 中介者模式
+
+**定义**：用一个中介对象来封装一系列对象之间的交互。中介者使各对象不需要显式相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。 [来源: [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_pattern)]
+
+**适用场景**：
+
+- 聊天室：用户不直接互相引用，通过聊天室转发消息
+- 航空管制：飞机通过塔台协调起降
+- UI 表单：多个输入控件通过表单控制器联动
+
+**Rust 实现**：
+
+```rust
+use std::collections::HashMap;
+
+// 同事 trait
+trait Participant {
+    fn id(&self) -> &str;
+    fn receive(&self, from: &str, message: &str);
+}
+
+// 中介者
+trait ChatRoom {
+    fn register(&mut self, participant: Box<dyn Participant>);
+    fn send(&self, from: &str, to: &str, message: &str);
+    fn broadcast(&self, from: &str, message: &str);
+}
+
+struct Room {
+    participants: HashMap<String, Box<dyn Participant>>,
+}
+
+impl Room {
+    fn new() -> Self { Self { participants: HashMap::new() } }
+}
+
+impl ChatRoom for Room {
+    fn register(&mut self, participant: Box<dyn Participant>) {
+        let id = participant.id().to_string();
+        self.participants.insert(id, participant);
+    }
+
+    fn send(&self, from: &str, to: &str, message: &str) {
+        if let Some(p) = self.participants.get(to) {
+            p.receive(from, message);
+        }
+    }
+
+    fn broadcast(&self, from: &str, message: &str) {
+        for (id, p) in &self.participants {
+            if id != from { p.receive(from, message); }
+        }
+    }
+}
+
+struct User { id: String, name: String }
+
+impl User {
+    fn new(id: &str, name: &str) -> Self { Self { id: id.to_string(), name: name.to_string() } }
+}
+
+impl Participant for User {
+    fn id(&self) -> &str { &self.id }
+    fn receive(&self, from: &str, message: &str) {
+        println!("[{}] {} 收到来自 {} 的消息: {}", self.id, self.name, from, message);
+    }
+}
+
+fn main() {
+    let mut room = Room::new();
+    room.register(Box::new(User::new("u1", "Alice")));
+    room.register(Box::new(User::new("u2", "Bob")));
+    room.broadcast("u1", "大家好！");
+}
+```
+
+**与其他语言对比**：
+
+- **C++/Java**：中介者常与 Observer 结合，同事通过回调或事件总线通信；Rust 中可用 `mpsc` 通道实现异步中介者，避免共享可变状态。
+- **Go/Node.js**：channel 天然适合中介者模式，但类型安全较弱；Rust 的 trait object 或泛型通道 `mpsc::Sender<Event>` 提供编译期类型保证。
+
+> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · 可信度: ✅
+
+#### 边界测试：同事反向持有中介者导致循环引用（运行时泄漏风险）
+
+中介者的常见陷阱是让同事持有中介者的强引用，而中介者又持有同事，形成 `Rc`/`RefCell` 循环。这段代码可以编译，但会在运行期造成引用计数循环泄漏；Rust 可通过 `Weak` 或重新设计所有权（如事件通道）避免。
+
+```rust
+use std::cell::RefCell;
+use std::rc::Rc;
+
+struct Mediator {
+    colleagues: Vec<Rc<RefCell<Colleague>>>,
+}
+
+struct Colleague {
+    mediator: Rc<RefCell<Mediator>>, // ❌ 强引用循环
+}
+
+fn main() {
+    let m = Rc::new(RefCell::new(Mediator { colleagues: vec![] }));
+    let c = Rc::new(RefCell::new(Colleague { mediator: m.clone() }));
+    m.borrow_mut().colleagues.push(c.clone());
+    // 循环引用导致内存泄漏，与 GoF 中介者“简化依赖”的初衷相悖
+}
+```
+
+> **修正**：让同事不直接持有中介者，而是通过函数参数或事件通道通信；若必须反向引用，使用 `Weak<Rc<RefCell<Mediator>>>`。
+
+---
+
+### 4.15 Interpreter 解释器模式
+
+**定义**：给定一个语言，定义它的文法的一种表示，并定义一个解释器，使用该表示来解释语言中的句子。Interpreter 适用于**小型、特定领域语言（DSL）**。 [来源: [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_pattern)]
+
+**适用场景**：
+
+- 简单的规则引擎、查询语言、配置文件表达式
+- 计算器、正则表达式引擎原型
+- 需要频繁变化的小语言原型（复杂语言应使用解析器生成器）
+
+**Rust 实现**：
+
+```rust
+use std::collections::HashMap;
+
+// 上下文：变量绑定
+struct Context<'a> { vars: HashMap<&'a str, i64> }
+impl<'a> Context<'a> {
+    fn new() -> Self { Self { vars: HashMap::new() } }
+    fn set(&mut self, name: &'a str, value: i64) { self.vars.insert(name, value); }
+    fn get(&self, name: &str) -> i64 { *self.vars.get(name).unwrap_or(&0) }
+}
+
+// 表达式文法：数字、变量、加法、减法
+trait Expr { fn eval(&self, ctx: &Context) -> i64; }
+
+struct Num(i64);
+impl Expr for Num { fn eval(&self, _ctx: &Context) -> i64 { self.0 } }
+
+struct Var(&'static str);
+impl Expr for Var { fn eval(&self, ctx: &Context) -> i64 { ctx.get(self.0) } }
+
+struct Add(Box<dyn Expr>, Box<dyn Expr>);
+impl Expr for Add { fn eval(&self, ctx: &Context) -> i64 { self.0.eval(ctx) + self.1.eval(ctx) } }
+
+struct Sub(Box<dyn Expr>, Box<dyn Expr>);
+impl Expr for Sub { fn eval(&self, ctx: &Context) -> i64 { self.0.eval(ctx) - self.1.eval(ctx) } }
+
+fn main() {
+    let mut ctx = Context::new();
+    ctx.set("x", 10);
+    ctx.set("y", 3);
+
+    // (x + y) - 5
+    let expr = Sub(Box::new(Add(Box::new(Var("x")), Box::new(Var("y")))),
+                   Box::new(Num(5)));
+    println!("result = {}", expr.eval(&ctx)); // 8
+}
+```
+
+**与其他语言对比**：
+
+- **Java/C++**：Interpreter 常用类层次 + 双重分发（`accept`/`visit`）实现；Rust 可直接用 `enum` 或 trait object 表达文法，`match` 提供穷尽性检查，避免遗漏语法节点。
+- **Haskell/Lisp**：代数数据类型与模式匹配是解释器的原生表达；Rust 的 `enum` 与此同构，性能与表达力接近。
+
+> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · 可信度: ✅
+
+#### 边界测试：变量未定义（运行时错误与设计权衡）
+
+简单解释器常对未定义变量返回默认值，但更安全的设计是让 `eval` 返回 `Result<i64, EvalError>`，将未定义变量转化为显式错误处理。
+
+```rust
+// ❌ 边界/反例：未定义变量静默返回 0，掩盖逻辑错误
+struct Context { vars: std::collections::HashMap<String, i64> }
+impl Context {
+    fn get(&self, name: &str) -> i64 { *self.vars.get(name).unwrap_or(&0) }
+}
+
+// ✅ 更安全的做法：Result 传播
+#[derive(Debug)]
+enum EvalError { UndefinedVar(String) }
+
+trait SafeExpr { fn eval(&self, ctx: &Context) -> Result<i64, EvalError>; }
+
+struct SafeVar(String);
+impl SafeExpr for SafeVar {
+    fn eval(&self, ctx: &Context) -> Result<i64, EvalError> {
+        ctx.vars.get(&self.0).copied()
+            .ok_or_else(|| EvalError::UndefinedVar(self.0.clone()))
+    }
+}
+```
+
+> **关键洞察**：解释器模式的边界在于**文法复杂度**。当 `match` 分支超过十余个或文法频繁变化时，应迁移到 `nom`、`chumsky` 等解析器组合子或 `lalrpop`、`peg` 等生成器，而非继续手写类层次。
+
+---
+
+### 4.16 Chain of Responsibility 责任链模式
+
+**定义**：使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合。将这些对象连成一条链，并沿着这条链传递请求，直到有一个对象处理它为止。 [来源: [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_pattern)]
+
+**适用场景**：
+
+- HTTP 中间件链（认证 → 日志 → 限流 → 业务）
+- GUI 事件冒泡与处理
+- 审批流、异常处理链
+
+**Rust 实现**：
+
+```rust
+// 请求类型
+struct Request { path: String, authenticated: bool }
+
+// 处理结果：Continue 表示继续传递，Done 表示已处理
+trait Handler {
+    fn handle(&self, req: &Request) -> Result<String, String>;
+    fn set_next(&mut self, next: Box<dyn Handler>);
+}
+
+struct BaseHandler { next: Option<Box<dyn Handler>> }
+impl BaseHandler {
+    fn new() -> Self { Self { next: None } }
+    fn pass(&self, req: &Request) -> Result<String, String> {
+        match &self.next {
+            Some(h) => h.handle(req),
+            None => Err(format!("{} 未处理", req.path)),
+        }
+    }
+}
+
+struct AuthHandler { base: BaseHandler }
+impl AuthHandler {
+    fn new() -> Self { Self { base: BaseHandler::new() } }
+}
+impl Handler for AuthHandler {
+    fn set_next(&mut self, next: Box<dyn Handler>) { self.base.next = Some(next); }
+    fn handle(&self, req: &Request) -> Result<String, String> {
+        if !req.authenticated && req.path.starts_with("/admin") {
+            return Err("未认证".to_string());
+        }
+        println!("[Auth] 通过");
+        self.base.pass(req)
+    }
+}
+
+struct LogHandler { base: BaseHandler }
+impl LogHandler {
+    fn new() -> Self { Self { base: BaseHandler::new() } }
+}
+impl Handler for LogHandler {
+    fn set_next(&mut self, next: Box<dyn Handler>) { self.base.next = Some(next); }
+    fn handle(&self, req: &Request) -> Result<String, String> {
+        println!("[Log] {}", req.path);
+        self.base.pass(req)
+    }
+}
+
+struct FinalHandler;
+impl Handler for FinalHandler {
+    fn set_next(&mut self, _next: Box<dyn Handler>) {}
+    fn handle(&self, req: &Request) -> Result<String, String> {
+        Ok(format!("处理 {}", req.path))
+    }
+}
+
+fn main() {
+    let mut auth = AuthHandler::new();
+    let mut log = LogHandler::new();
+    log.set_next(Box::new(FinalHandler));
+    auth.set_next(Box::new(log));
+
+    let req = Request { path: "/admin/users".to_string(), authenticated: true };
+    println!("{:?}", auth.handle(&req));
+}
+```
+
+**与其他语言对比**：
+
+- **C++/Java**：责任链常通过继承共享 `successor` 字段；Rust 无继承，使用组合（`BaseHandler` 结构体）或函数组合（`Vec<Box<dyn Fn>>`）实现。
+- **Go/Node.js**：中间件常以函数链表达（`handler1(handler2(final))`）；Rust 的 `tower` crate 提供生产级 `Service` trait + `Layer` 组合，类型安全更强。
+
+> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [Tower Docs](https://docs.rs/tower/latest/tower/) · 可信度: ✅
+
+#### 边界测试：链尾未处理（运行时错误）
+
+责任链必须保证至少有一个终结处理者，否则请求会滑落链尾。Rust 可通过 `Option` 显式建模“无后继”的情况，但无法静态保证“必有处理者”——这通常由应用层约定或类型级列表保证。
+
+```rust,ignore
+// ❌ 边界：链尾没有 FinalHandler，导致 Err("未处理")
+// 延续上一节 AuthHandler / LogHandler / Request 定义
+fn main() {
+    let mut auth = AuthHandler::new();
+    let log = LogHandler::new();
+    auth.set_next(Box::new(log)); // log 没有 next
+
+    let req = Request { path: "/dashboard".to_string(), authenticated: false };
+    match auth.handle(&req) {
+        Ok(r) => println!("{}", r),
+        Err(e) => println!("❌ 滑落链尾: {}", e),
+    }
+}
+```
+
+> **修正**：链尾使用一个默认的 `FinalHandler` 返回成功或明确的错误；或者使用类型级链表（HList）在编译期保证链非空。
+
+---
+
+### 4.17 Template Method 模板方法模式
+
+**定义**：定义一个操作中的算法骨架，而将一些步骤延迟到子类中。模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。 [来源: [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_pattern)]
+
+**适用场景**：
+
+- 数据处理管道：打开 → 读取 → 解析 → 分析 → 报告，其中解析/分析步骤可变
+- 游戏 AI：感知 → 决策 → 执行，决策步骤可变
+- 测试框架：setup → test → teardown
+
+**Rust 实现**：
+
+```rust
+// 算法骨架由 trait 默认方法定义，可变步骤由实现者提供
+trait DataMiner {
+    // 模板方法
+    fn mine(&self, path: &str) -> String {
+        let file = self.open_file(path);
+        let raw = self.extract(&file);
+        let data = self.parse(&raw);
+        let report = self.analyze(&data);
+        self.send(&report);
+        report
+    }
+
+    // 必须实现的步骤
+    fn open_file(&self, path: &str) -> String;
+    fn extract(&self, file: &str) -> String;
+    fn parse(&self, raw: &str) -> Vec<String>;
+
+    // 默认实现，可覆盖
+    fn analyze(&self, data: &[String]) -> String {
+        format!("分析了 {} 条数据", data.len())
+    }
+    fn send(&self, report: &str) {
+        println!("发送报告: {}", report);
+    }
+}
+
+struct CsvMiner { delimiter: char }
+impl CsvMiner { fn new(delimiter: char) -> Self { Self { delimiter } } }
+
+impl DataMiner for CsvMiner {
+    fn open_file(&self, path: &str) -> String { format!("CSV({})", path) }
+    fn extract(&self, file: &str) -> String { format!("raw {}", file) }
+    fn parse(&self, raw: &str) -> Vec<String> {
+        raw.split(self.delimiter).map(|s| s.to_string()).collect()
+    }
+}
+
+fn main() {
+    let miner = CsvMiner::new(',');
+    miner.mine("data.csv");
+}
+```
+
+**与其他语言对比**：
+
+- **C++/Java**：模板方法通过抽象类 + 虚函数实现，子类继承并重写；Rust 无继承，使用 trait 默认方法表达算法骨架，实现者提供必要方法。
+- **Rust vs 策略模式**：模板方法的定制点在类型定义时固定，策略模式的算法可在运行期替换。若定制点超过 2 个或需要运行期切换，优先使用 Strategy。
+
+> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · 可信度: ✅
+
+#### 边界测试：未实现必要步骤（编译错误）
+
+Template Method 通过 trait 强制实现者提供抽象步骤；遗漏实现会在编译期报错，这比运行时才发现算法缺失更安全。
+
+```rust,compile_fail
+trait DataMiner {
+    fn mine(&self, path: &str) -> String {
+        let file = self.open_file(path);
+        let raw = self.extract(&file);
+        file // 占位
+    }
+    fn open_file(&self, path: &str) -> String;
+    fn extract(&self, file: &str) -> String;
+}
+
+struct BadMiner;
+impl DataMiner for BadMiner {
+    fn open_file(&self, path: &str) -> String { format!("open {}", path) }
+    // ❌ 忘记实现 extract
+}
+
+fn main() {
+    let _miner = BadMiner;
+}
+```
+
+> **修正**：为 `BadMiner` 实现 `extract`，或重新评估是否应使用 enum + `match` 等更灵活的算法组织方式。
 
 ---
 
@@ -3263,6 +4029,14 @@ mindmap
       Command 模式
       Visitor 模式
       Strategy 模式
+      Abstract Factory 模式
+      Bridge 模式
+      Composite 模式
+      Flyweight 模式
+      Mediator 模式
+      Interpreter 模式
+      Chain of Responsibility 模式
+      Template Method 模式
     反模式 Anti-patterns
       Over-engineering
       Premature
@@ -3270,9 +4044,18 @@ mindmap
     创建型模式
       Builder 模式
       Factory 模式
+      Abstract Factory 模式
     结构型模式
       Adapter 模式
+      Bridge 模式
+      Composite 模式
       Decorator 模式
+      Flyweight 模式
+    行为型模式
+      Chain of Responsibility 模式
+      Interpreter 模式
+      Mediator 模式
+      Template Method 模式
 ```
 
-> **认知功能**: 本 mindmap 从本页「Design Patterns 设计模式」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+> **认知功能**: 本 mindmap 从本页「Design Patterns 设计模式」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。 Wave 8 新增 8 个 GoF 模式后，mindmap 按 GoF 三大类别重新组织，便于快速定位模式类别。

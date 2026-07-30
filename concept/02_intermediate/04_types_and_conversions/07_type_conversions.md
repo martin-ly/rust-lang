@@ -46,6 +46,11 @@
     - [3.3 `From` / `Into`](#33-from--into)
     - [3.4 `TryFrom` / `TryInto`](#34-tryfrom--tryinto)
     - [3.5 孤儿规则](#35-孤儿规则)
+    - [3.6 `Cow<T>`：Clone-on-Write](#36-cowtclone-on-write)
+    - [3.7 `AsRef`、`Borrow`、`ToOwned` 的选择](#37-asrefborrowtoowned-的选择)
+    - [3.8 `Deref` 与 `AsRef` 的边界](#38-deref-与-asref-的边界)
+    - [3.9 `From` / `TryFrom` 转换链](#39-from--tryfrom-转换链)
+    - [3.10 `Pin` 使用决策](#310-pin-使用决策)
   - [四、示例与反例](#四示例与反例)
     - [4.1 正确示例：自定义错误类型](#41-正确示例自定义错误类型)
     - [4.2 反例：滥用 `as` 导致截断](#42-反例滥用-as-导致截断)
@@ -215,6 +220,176 @@ fn main() {}
 > **错误诊断**: `error[E0117]: only traits defined in the current crate can be implemented for arbitrary types` (Source: [The Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules))
 > **修正**: 使用 newtype 包装外部类型：`struct MyInt(i32); impl Display for MyInt { ... }` (Source: [TRPL — Newtype Pattern](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#using-the-newtype-pattern-to-implement-external-traits-on-external-types))
 > [来源: [The Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)]
+
+### 3.6 `Cow<T>`：Clone-on-Write
+
+`std::borrow::Cow<T>`（Clone-on-Write）在"借用已存在的数据"与"需要修改时克隆"之间自动切换，是返回"可能拥有的字符串/切片"的首选类型。
+
+```rust
+use std::borrow::Cow;
+
+/// 把输入规范化：若无需修改则返回借用，否则返回拥有的 String
+fn normalize(input: &str) -> Cow<'_, str> {
+    if input.chars().all(|c| c.is_ascii_lowercase()) {
+        Cow::Borrowed(input)
+    } else {
+        Cow::Owned(input.to_lowercase())
+    }
+}
+
+fn main() {
+    let a = normalize("hello");
+    assert!(matches!(a, Cow::Borrowed(_)));
+
+    let b = normalize("Hello");
+    assert!(matches!(b, Cow::Owned(_)));
+    assert_eq!(b, "hello");
+}
+```
+
+> **关键洞察**: `Cow` 把"零拷贝快速路径"与"必要时安全克隆"统一到一个类型中。API 返回 `Cow<str>` 可让调用方按需转为 `String` 或继续借用。来源: [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html)
+
+### 3.7 `AsRef`、`Borrow`、`ToOwned` 的选择
+
+三者都提供"某种形式的转换"，但语义与使用场景不同：
+
+| Trait | 方向 | 关键约束 | 典型用途 |
+|:---|:---|:---|:---|
+| `AsRef<T>` | `&self → &T` | 无额外约束（除引用等价） | 函数参数接受更通用类型，如 `impl AsRef<Path>` |
+| `Borrow<T>` | `&self → &T` | `Hash`/`Eq`/`Ord` 与 `T` 一致 | 集合键查询，如 `HashMap::get("key")` 用 `&str` 查 `String` 键 |
+| `ToOwned` | `&self → Owned` | 从借用构造拥有值 | `Cow` 的基础，`str` → `String` |
+
+```rust
+use std::borrow::Borrow;
+use std::collections::HashMap;
+
+fn count_keys<K, V>(map: &HashMap<K, V>, key: &str) -> Option<&V>
+where
+    K: Borrow<str> + Eq + std::hash::Hash,
+{
+    map.get(key) // 可用 &str 查询 K 键
+}
+```
+
+> **决策要点**：
+>
+> - 只想让函数接受 `&str` / `&[T]` / `&Path` 等通用引用 → `AsRef`。
+> - 需要把借用类型当作集合键使用，且要求 `Hash`/`Eq` 一致 → `Borrow`。
+> - 需要从借用类型构造拥有副本 → `ToOwned`。
+> 来源: [std::borrow::Borrow](https://doc.rust-lang.org/std/borrow/trait.Borrow.html) · [std::convert::AsRef](https://doc.rust-lang.org/std/convert/trait.AsRef.html)
+
+### 3.8 `Deref` 与 `AsRef` 的边界
+
+`Deref` 是"解引用协议"，只应为智能指针或透明包装器实现；`AsRef` 是"引用转换协议"，可用于更广泛的"可视为"场景。
+
+```rust
+use std::ops::Deref;
+
+// ✅ Deref：透明包装器
+pub struct SmartBuffer<T> { data: Vec<T> }
+
+impl<T> Deref for SmartBuffer<T> {
+    type Target = [T];
+    fn deref(&self) -> &[T] { &self.data }
+}
+
+// ✅ AsRef：函数接受更通用类型
+pub fn print_bytes<B: AsRef<[u8]>>(b: B) {
+    println!("{:?}", b.as_ref());
+}
+```
+
+反例：
+
+```rust,compile_fail
+struct Engine;
+struct Car { engine: Engine }
+
+// ❌ 错误：用 Deref 模拟继承
+impl Deref for Car {
+    type Target = Engine;
+    fn deref(&self) -> &Engine { &self.engine }
+}
+```
+
+> **修正**: `Car` 不是 `Engine` 的智能指针；应提供 `fn engine(&self) -> &Engine`。来源: [Rust API Guidelines — C-DEREF](https://rust-lang.github.io/api-guidelines/predictability.html#c-deref)
+
+### 3.9 `From` / `TryFrom` 转换链
+
+多个 `From` 实现可以自动串联，形成类型安全的转换链。`?` 运算符会逐层调用 `From::from`。
+
+```rust
+use std::io;
+
+#[derive(Debug)]
+enum AppError {
+    Io(io::Error),
+    Parse(std::num::ParseIntError),
+}
+
+impl From<io::Error> for AppError {
+    fn from(e: io::Error) -> Self { AppError::Io(e) }
+}
+
+impl From<std::num::ParseIntError> for AppError {
+    fn from(e: std::num::ParseIntError) -> Self { AppError::Parse(e) }
+}
+
+fn read_and_parse(path: &str) -> Result<i32, AppError> {
+    let content = std::fs::read_to_string(path)?; // io::Error → AppError
+    let n: i32 = content.trim().parse()?;         // ParseIntError → AppError
+    Ok(n)
+}
+```
+
+`TryFrom` 链则适合可能失败的转换：
+
+```rust
+use std::convert::TryFrom;
+
+fn clamp_u8(x: i32) -> Result<u8, &'static str> {
+    if x < 0 || x > 255 {
+        Err("out of u8 range")
+    } else {
+        Ok(u8::try_from(x).unwrap()) // 此处已知安全
+    }
+}
+```
+
+### 3.10 `Pin` 使用决策
+
+`Pin<P>` 保证指针指向的值**不会被移动**，用于自引用结构、异步 Future 与某些流式 API。
+
+```rust
+use std::pin::Pin;
+use std::marker::PhantomPinned;
+
+struct SelfReferential {
+    data: String,
+    ptr: *const String,
+    _pin: PhantomPinned,
+}
+
+impl SelfReferential {
+    fn new(data: String) -> Pin<Box<Self>> {
+        let mut boxed = Box::pin(Self {
+            data,
+            ptr: std::ptr::null(),
+            _pin: PhantomPinned,
+        });
+        let ptr = &boxed.data as *const String;
+        unsafe { boxed.as_mut().get_unchecked_mut().ptr = ptr; }
+        boxed
+    }
+}
+```
+
+> **决策树**：
+>
+> - 类型包含自引用字段（字段指向同类型的其他字段）→ 需要 `Pin`。
+> - 类型被 `async`/`await` 使用 → 编译器自动处理 `Pin`。
+> - 普通值没有自引用 → **不要**用 `Pin`，它会把 API 变复杂。
+> 来源: [RFC 2349 — Pin](https://rust-lang.github.io/rfcs/2349-pin.html) · [TRPL — Pin](https://doc.rust-lang.org/book/ch20-04-advanced-types.html)
 
 ---
 
@@ -492,6 +667,17 @@ mindmap
       1.1 形式化定义
       1.2 直觉解释
     二、概念属性矩阵
+    三、技术细节
+      3.1 隐式强制
+      3.2 显式转换
+      3.3 From/Into
+      3.4 TryFrom/TryInto
+      3.5 孤儿规则
+      3.6 Cow
+      3.7 AsRef/Borrow/ToOwned
+      3.8 Deref 边界
+      3.9 From/TryFrom 链
+      3.10 Pin 决策
     五、反命题与边界分析
       5.1 反命题树
       5.2 边界极限

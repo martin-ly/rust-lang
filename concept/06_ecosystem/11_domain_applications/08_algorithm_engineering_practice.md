@@ -86,6 +86,12 @@
     - [性能优化](#性能优化)
     - [生产实践](#生产实践)
   - [8. 实测示例：AoS → SoA 的缓存友好重构（2026-07-12 回填）](#8-实测示例aos--soa-的缓存友好重构2026-07-12-回填)
+  - [9. 性能诊断与容量规划](#9-性能诊断与容量规划)
+    - [9.1 火焰图与 perf 诊断](#91-火焰图与-perf-诊断)
+    - [9.2 eBPF 动态追踪](#92-ebpf-动态追踪)
+    - [9.3 缓存对齐与伪共享](#93-缓存对齐与伪共享)
+    - [9.4 堆分配分析：dhat-rs 与 heaptrack](#94-堆分配分析dhat-rs-与-heaptrack)
+    - [9.5 容量规划与性能预算](#95-容量规划与性能预算)
   - [过渡段](#过渡段)
   - [定理链](#定理链)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
@@ -2102,6 +2108,120 @@ fn main() {
 
 ---
 
+## 9. 性能诊断与容量规划
+
+本节把算法工程从"写出正确代码"推进到"在生产负载下持续满足性能目标"。核心方法论是"测量 → 定位 → 优化 → 回归"，任何优化必须附可复现的基准证据。
+
+### 9.1 火焰图与 perf 诊断
+
+`perf` 是 Linux 上最权威的 CPU 性能采样工具。配合 `cargo-flamegraph` 可快速生成火焰图，直观展示热点调用栈。
+
+```bash
+# 安装
+cargo install flamegraph
+
+# 生成火焰图（需 root 或在 perf_event_paranoid 允许时）
+cargo flamegraph --bin my_app
+
+# 用 perf stat 看 IPC、缓存未命中
+perf stat -e cycles,instructions,L1-dcache-load-misses ./target/release/my_app
+```
+
+> **判读原则**：火焰图中宽度代表样本比例，而非绝对时间。先看"平顶"——宽且深的调用栈是主要热点；再看自顶向下首次分叉处，决定拆分或内联。来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/profiling.html)
+
+### 9.2 eBPF 动态追踪
+
+eBPF 允许在内核态安全运行沙箱程序，适合观测生产环境的系统调用、I/O、调度、内存分配，而无需修改应用代码。
+
+```bash
+# 使用 bpftrace 追踪文件打开
+bpftrace -e 'tracepoint:syscalls:sys_enter_openat { printf("%s opened %s\n", comm, str(args->filename)); }'
+
+# 使用 cargo-bpf / aya 在 Rust 中加载 eBPF 程序
+```
+
+> **适用场景**：火焰图看不到的 I/O 延迟、锁竞争、上下文切换、TCP 重传等系统级瓶颈。来源: [BPF Performance Tools (Gregg)](http://www.brendangregg.com/bpf-performance-tools-book.html)
+
+### 9.3 缓存对齐与伪共享
+
+多线程并发写入同一缓存行（64 字节）的不同字段会导致**伪共享（false sharing）**，性能可能下降 10-100 倍。
+
+```rust
+use std::sync::atomic::{AtomicU64, Ordering};
+
+// ❌ 两个计数器可能位于同一缓存行，导致伪共享
+#[derive(Default)]
+struct BadCounters {
+    a: AtomicU64,
+    b: AtomicU64,
+}
+
+// ✅ 用 #[repr(align(64))] 让每个计数器独占缓存行
+#[derive(Default)]
+#[repr(align(64))]
+struct CachePaddedCounter {
+    value: AtomicU64,
+}
+
+fn main() {
+    let counter = CachePaddedCounter::default();
+    counter.value.fetch_add(1, Ordering::Relaxed);
+}
+```
+
+> **判定**：当 `perf c2c` 或 `cachegrind` 显示高缓存行争用，且线程数增加时吞吐不升反降，即可能是伪共享。来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)
+
+### 9.4 堆分配分析：dhat-rs 与 heaptrack
+
+CPU 热点解决后，下一步常是分配热点。`dhat-rs` 是 Rust 专用的堆分配分析器，`heaptrack` 是 Linux 通用工具。
+
+```toml
+# Cargo.toml (dev-dependencies)
+[dev-dependencies]
+dhat = "0.3"
+```
+
+```rust
+#[cfg(feature = "dhat-heap")]
+#[global_allocator]
+static ALLOC: dhat::Alloc = dhat::Alloc;
+
+fn main() {
+    #[cfg(feature = "dhat-heap")]
+    let _profiler = dhat::Profiler::new_heap();
+
+    // 你的代码
+}
+```
+
+> **关键指标**：分配次数/秒、峰值 RSS、临时分配比例。目标是"少分配、连续分配、复用分配"。来源: [dhat-rs docs](https://docs.rs/dhat/latest/dhat/) · [heaptrack docs](https://github.com/KDE/heaptrack)
+
+### 9.5 容量规划与性能预算
+
+性能预算是把 SLO（Service Level Objective）转化为可量化的资源约束：
+
+| SLO | 性能预算 | 测量方式 |
+|:---|:---|:---|
+| P99 延迟 < 100 ms | 单次请求 CPU < 10 ms | Criterion + 负载测试 |
+| 吞吐量 > 10k RPS | 每请求堆分配 < 1 KB | dhat / heaptrack |
+| 可用性 > 99.9% | 超时/重试后失败率 < 0.1% | 灰度监控 |
+
+```rust
+// 容量规划示例：根据目标 QPS 反推所需实例数
+fn required_instances(qps_target: u64, single_instance_qps: u64, redundancy_factor: f64) -> u64 {
+    ((qps_target as f64 / single_instance_qps as f64) * redundancy_factor).ceil() as u64
+}
+
+fn main() {
+    let instances = required_instances(100_000, 5_000, 1.5);
+    assert_eq!(instances, 30);
+}
+```
+
+> **原则**：性能预算应在设计阶段定义，在 CI 中回归，而不是上线后再救火。来源: [Google SRE Book — Service Level Objectives](https://sre.google/workbook/implementing-slos/)
+
+---
+
 ## 过渡段
 
 > **过渡**: 从复杂度分析过渡到具体实现，可以理解理论边界与实际常数因子的差异。
@@ -2177,4 +2297,10 @@ mindmap
     6. 实战案例
       6.1 推荐系统
       6.2 实时排行榜
+    9. 性能诊断与容量规划
+      9.1 火焰图 perf
+      9.2 eBPF
+      9.3 缓存对齐
+      9.4 dhat heaptrack
+      9.5 性能预算
 ```

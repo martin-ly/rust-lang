@@ -1,25 +1,25 @@
 {
   "summary": {
     "date": "2026-07-31",
-    "scanned": 612,
+    "scanned": 635,
     "counts": {
       "D1": 2,
-      "D2": 0,
+      "D2": 4,
       "D3": 0,
       "D4": 0,
-      "D5": 0,
+      "D5": 2,
       "D6": 2
     },
     "pct": {
       "D1": 0.3,
-      "D2": 0.0,
+      "D2": 0.6,
       "D3": 0.0,
       "D4": 0.0,
-      "D5": 0.0,
+      "D5": 0.3,
       "D6": 0.3
     },
-    "D2_base_files_with_asp_and_bloom": 359,
-    "flagged_files": 4
+    "D2_base_files_with_asp_and_bloom": 377,
+    "flagged_files": 9
   },
   "examples": {
     "D1": [
@@ -32,10 +32,36 @@
         "Bloom [1, 2, 3, 4, 5, 6, 7] 与 层次定位/层级 [0] 无交集"
       ]
     ],
-    "D2": [],
+    "D2": [
+      [
+        "concept/04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md",
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5] 无交集"
+      ],
+      [
+        "concept/06_ecosystem/05_systems_and_embedded/15_no_std_synchronization_primitives.md",
+        "A/S/P=A 允许 [1, 2] 与 Bloom [4] 无交集"
+      ],
+      [
+        "concept/06_ecosystem/05_systems_and_embedded/16_embedded_memory_allocators.md",
+        "A/S/P=A 允许 [1, 2] 与 Bloom [4] 无交集"
+      ],
+      [
+        "concept/06_ecosystem/05_systems_and_embedded/17_pac_hal_implementation.md",
+        "A/S/P=A 允许 [1, 2] 与 Bloom [4] 无交集"
+      ]
+    ],
     "D3": [],
     "D4": [],
-    "D5": [],
+    "D5": [
+      [
+        "concept/06_ecosystem/05_systems_and_embedded/16_embedded_memory_allocators.md",
+        "稳定层 nightly/preview 关键词 4 处"
+      ],
+      [
+        "concept/06_ecosystem/05_systems_and_embedded/18_panic_runtime_no_std.md",
+        "稳定层 nightly/preview 关键词 2 处"
+      ]
+    ],
     "D6": [
       [
         "concept/00_meta/00_framework/README.md",
@@ -61,6 +87,34 @@
     "concept/00_meta/00_framework/semantic_model_reasoning_methodology.md": {
       "D1": [
         "Bloom [1, 2, 3, 4, 5, 6, 7] 与 层次定位/层级 [0] 无交集"
+      ]
+    },
+    "concept/04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md": {
+      "D2": [
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5] 无交集"
+      ]
+    },
+    "concept/06_ecosystem/05_systems_and_embedded/15_no_std_synchronization_primitives.md": {
+      "D2": [
+        "A/S/P=A 允许 [1, 2] 与 Bloom [4] 无交集"
+      ]
+    },
+    "concept/06_ecosystem/05_systems_and_embedded/16_embedded_memory_allocators.md": {
+      "D2": [
+        "A/S/P=A 允许 [1, 2] 与 Bloom [4] 无交集"
+      ],
+      "D5": [
+        "稳定层 nightly/preview 关键词 4 处"
+      ]
+    },
+    "concept/06_ecosystem/05_systems_and_embedded/17_pac_hal_implementation.md": {
+      "D2": [
+        "A/S/P=A 允许 [1, 2] 与 Bloom [4] 无交集"
+      ]
+    },
+    "concept/06_ecosystem/05_systems_and_embedded/18_panic_runtime_no_std.md": {
+      "D5": [
+        "稳定层 nightly/preview 关键词 2 处"
       ]
     },
     "concept/07_future/00_version_tracking/README.md": {
