@@ -16,7 +16,7 @@
 > **后置概念**: [AI Integration](01_ai_integration.md) · [Formal Methods](02_formal_methods.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **主要来源**: [Ouyang et al. — Training language models to follow instructions with human feedback](https://arxiv.org/abs/2203.02155) · [Bai et al. — Constitutional AI: Harmlessness from AI Feedback](https://arxiv.org/abs/2212.08073) · [Russell — Human Compatible: AI and the Problem of Control](https://people.eecs.berkeley.edu/~russell/hc.html)
+> **主要来源**: [Ouyang et al. — Training language models to follow instructions with human feedback](https://arxiv.org/abs/2203.02155) · [Bai et al. — Constitutional AI: Harmlessness from AI Feedback](https://arxiv.org/abs/2212.08073) · [Russell — Human Compatible: AI and the Problem of Control](https://people.eecs.berkeley.edu/~russell/hc.html) · [Mitchell et al. — Model Cards for Model Reporting](https://arxiv.org/abs/1810.03993)
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 

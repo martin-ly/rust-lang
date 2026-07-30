@@ -14,7 +14,7 @@
 
 ---
 
-> **来源**: [Huyen — *Designing Machine Learning Systems*](https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/) · [MLCommons Inference Rules](https://mlcommons.org/inference/) · [NVIDIA Triton Inference Server](https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/index.html) · [Hugging Face Inference API docs](https://huggingface.co/docs/api-inference/index) · [Seldon Core](https://docs.seldon.io/seldon-core-2/) · [ONNX Runtime docs](https://onnxruntime.ai/docs/) · [Hugging Face Candle](https://github.com/huggingface/candle) · [LLM Inference Survey (arXiv)](https://arxiv.org/abs/2401.00066) · [vLLM / PagedAttention](https://arxiv.org/abs/2309.06180) · [TensorRT-LLM](https://developer.nvidia.com/tensorrt-llm)
+> **来源**: [Huyen — *Designing Machine Learning Systems*](https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/) · [MLCommons Inference Benchmarks](https://mlcommons.org/benchmarks/inference/) · [MLCommons Inference Rules](https://mlcommons.org/inference/) · [NVIDIA Triton Inference Server](https://docs.nvidia.com/deeplearning/triton-inference-server/user-guide/docs/index.html) · [Hugging Face Inference API docs](https://huggingface.co/docs/api-inference/index) · [Seldon Core](https://docs.seldon.io/seldon-core-2/) · [ONNX Runtime docs](https://onnxruntime.ai/docs/) · [Hugging Face Candle](https://github.com/huggingface/candle) · [LLM Inference Survey (arXiv)](https://arxiv.org/abs/2401.00066) · [vLLM / PagedAttention](https://arxiv.org/abs/2309.06180) · [TensorRT-LLM](https://developer.nvidia.com/tensorrt-llm)
 
 ---
 

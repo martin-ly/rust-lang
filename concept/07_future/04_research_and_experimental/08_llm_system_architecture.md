@@ -16,7 +16,7 @@
 > **后置概念**: [MLOps and LLMOps](09_mlops_and_llmops.md) · [AI Safety and Alignment](10_ai_safety_and_alignment.md) · [AI Integration](01_ai_integration.md)
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
-> **主要来源**: [Huyen — Designing Machine Learning Systems](https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/) · [Yao et al. — ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629) · [Schick et al. — Toolformer: Language Models Can Teach Themselves to Use Tools](https://arxiv.org/abs/2302.04761)
+> **主要来源**: [Huyen — Designing Machine Learning Systems](https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/) · [Yao et al. — ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629) · [Schick et al. — Toolformer: Language Models Can Teach Themselves to Use Tools](https://arxiv.org/abs/2302.04761) · [Zhao et al. — A Survey of Large Language Models](https://arxiv.org/abs/2303.18223)
 >
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 

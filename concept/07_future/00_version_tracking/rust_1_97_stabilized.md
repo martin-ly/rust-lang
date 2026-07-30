@@ -13,7 +13,8 @@
 >
 > **权威来源**:
 >
-> · [Rust 1.97.0 Release Notes](https://releases.rs/docs/1.97.0/) ·
+> · [Announcing Rust 1.97.0 — Rust Blog](https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/) ·
+> [Rust 1.97.0 Release Notes](https://releases.rs/docs/1.97.0/) ·
 > [Rust 1.97.1 Release Notes](https://releases.rs/docs/1.97.1/) ·
 > [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [TRPL](https://doc.rust-lang.org/book/title-page.html) ·

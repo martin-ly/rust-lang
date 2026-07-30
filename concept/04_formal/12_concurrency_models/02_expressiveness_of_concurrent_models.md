@@ -19,6 +19,7 @@
 > [Sangiorgi & Walker, *The π-Calculus: A Theory of Mobile Processes*, Cambridge UP 2001](https://doi.org/10.1017/CBO9780511777683) ·
 > [van Glabbeek, *The Linear Time – Branching Time Spectrum*, CONCUR 1990 / LNCS 458](https://doi.org/10.1007/BFb0030039) ·
 > [Milner, *Communication and Concurrency*, Prentice Hall 1989](https://doi.org/10.5555/28251) ·
+> [Herlihy & Shavit, *The Art of Multiprocessor Programming*, Morgan Kaufmann 2011](https://www.sciencedirect.com/book/9780123973375/the-art-of-multiprocessor-programming) ·
 > [std::sync::mpsc — Rust 标准库文档](https://doc.rust-lang.org/std/sync/mpsc/) ·
 > [Rust Reference — async blocks and closures](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks)
 >

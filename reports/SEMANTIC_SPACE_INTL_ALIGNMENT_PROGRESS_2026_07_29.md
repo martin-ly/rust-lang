@@ -104,20 +104,20 @@
 
 ## 三、质量门回归状态
 
-最近一次全质量门回归 `bash scripts/run_quality_gates.sh`（任务 ID：`bash-ee36w9rt`）已完成，结果：
+最终全质量门回归 `bash scripts/run_quality_gates.sh`（任务 ID：`bash-tfzt9tzb`）已完成，结果：
 
 ```text
 ✅ All 23 quality gates passed (23 blocking + 5 semantic observe).
 ```
 
-此前回归（任务 ID：`bash-yrtyeml2`）曾出现 2 处失败，已定位并修复：
+本次最终回归覆盖 23 个阻断门：Cargo Check/Test/Clippy/Audit/Vet、mdbook Build、KB Auditor Link Check、Content Overlap Detection、i18n Term Coverage、Mermaid Syntax、Topology Quality、KG SHACL、Canonical Uniqueness、Concept Consistency Audit、Concept Authority Coverage、Examples Compile、Naming Convention、Quiz System、Metadata Consistency、Concept Code Blocks、Mindmap Coverage、Semantic Health、Content Overlap v2。5 个语义观察门（Stub Purity、Cross-Domain Coverage、KG Relation Precision、Decision Tree rustc Error Code Coverage、Version Semantic Injection）均通过。
 
-| 失败门 | 根因 | 修复 |
+历史修复（已在最终回归前解决）：
+
+| 曾失败门 | 根因 | 修复 |
 |---|---|---|
 | Concept Consistency Audit (strict) | `rust_1_98_preview.md:849` 引用 `rust_1_97_1.md` 的 `§十连续性`，但目标文件无该段落 | 改为 `§5、§7`（目标文件存在的“迁移与验证”和“与 Rust 1.97.0 的关系”） |
-| Quiz System (strict) | `quiz_registry.yaml` 中 `embedded_quizzes` 统计为 325 页 / 1406 块，实际为 326 页 / 1409 块 | 更新为 `pages: 326`、`total_blocks: 1409` |
-
-覆盖的 23 个阻断门包括：Cargo Check/Test/Clippy/Audit/Vet、mdbook Build、KB Auditor Link Check、Content Overlap Detection、i18n Term Coverage、Mermaid Syntax、Topology Quality、KG SHACL、Canonical Uniqueness、Concept Consistency Audit、Concept Authority Coverage、Examples Compile、Naming Convention、Quiz System、Metadata Consistency、Concept Code Blocks、Mindmap Coverage、Semantic Health、Content Overlap v2。5 个语义观察门（Stub Purity、Cross-Domain Coverage、KG Relation Precision、Decision Tree rustc Error Code Coverage、Version Semantic Injection）均通过。
+| Quiz System (strict) | `quiz_registry.yaml` 中 `embedded_quizzes` 统计与实际不一致 | 更新为 `pages: 326`、`total_blocks: 1422` |
 
 已单独验证的关键门：
 
@@ -125,7 +125,7 @@
 |---|---|---|
 | 知识体系审计 | `python scripts/kb_auditor.py --link-check` | ✅ 通过（死链 0，跨层问题 0） |
 | 概念一致性 | `python scripts/concept_consistency_auditor.py --strict` | ✅ 通过（无效引用 0） |
-| 测验体系 | `python scripts/check_quiz_system.py --strict` | ✅ 通过（22 quiz / 326 页 / 1409 块一致） |
+| 测验体系 | `python scripts/check_quiz_system.py --strict` | ✅ 通过（22 quiz / 326 页 / 1422 块一致） |
 | 概念代码块 | `python scripts/check_concept_code_blocks.py --strict` | ✅ 通过（rot=0） |
 | 版本语义注入 | `python scripts/check_version_semantic_injection.py --strict` | ✅ 通过（74/74 映射） |
 | KG SHACL | `python scripts/check_kg_shapes.py --strict` | ✅ 通过 |
@@ -146,7 +146,7 @@
 2. **Wave 5 收尾** ✅
    - 为新增/修改页补充 `concept→quiz` 回链（quiz 系统双向链接 22/22）。
    - 已检查 `concept/SUMMARY.md` 包含新增页（如 `05_strategic_domain_driven_design_in_rust.md`）。
-   - 全质量门回归已通过（任务 `bash-3shorozq`），本报告为完成版。
+   - 最终全质量门回归已通过（任务 `bash-tfzt9tzb`），本报告为完成版。
 
 ### 中期（持续维护）
 
@@ -179,7 +179,7 @@
 |---|---|---|
 | 新增内容触发 overlap-v2 阻断 | 已控 | 所有新增正文均在 `concept/` 权威页；无跨目录重复；triage 可处理项保持 0。 |
 | 代码块标注腐烂 | 已修复 | 子任务中发现的 `CF_WRONG_CODE` 已通过重新验证；当前 `rot=0`。 |
-| 全门回归运行时过长 | 已完成 | 全质量门 `bash-ee36w9rt` 已通过（23 阻断 + 5 观察）。 |
+| 全门回归运行时过长 | 已完成 | 最终全质量门 `bash-tfzt9tzb` 已通过（23 阻断 + 5 观察）。 |
 | KG 刷新后 generic ratio 反弹 | 已控 | 刷新后核心 generic_ratio=0.00%，总 generic_ratio=0.00%。 |
 
 ---

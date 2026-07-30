@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 583,
-    "generated_at": "2026-07-29T15:51:17.502888+00:00"
+    "generated_at": "2026-07-30T09:45:28.008019+00:00"
   },
   "files": [
     {
@@ -891,7 +891,7 @@
       "layer": "L0",
       "title": "Rust 表征空间（Semantic / Representational Space）",
       "positioning": "本文件是 `concept/` 知识体系的**元层总论**，从表征空间（Representational Space）与语义空间（Semantic Space）的视角，系统分析 Rust 语言\"能表达什么\"、\"不能表达什么\"、\"等价表达的组合关系\"，以及其内部机制的完备性与封闭性。",
-      "line_count": 1460,
+      "line_count": 1462,
       "theorem_chains": [
         {
           "text": "| 类型系统 | safe 代码无 UB | 类型正确 ⟹ 源码语义正确 |",
@@ -30840,7 +30840,7 @@
       "layer": "L3",
       "title": "Unsafe Rust 安全编程",
       "positioning": "",
-      "line_count": 3458,
+      "line_count": 3468,
       "theorem_chains": [
         {
           "text": "- v1.1 (2026-05-13): 重构增强——定理一致性（Coherence）矩阵扩展至10行（⟹推理链）、反命题决策树×4、认知路径六步递进、章节过渡段落、层次一致性标注",
@@ -30973,6 +30973,14 @@
           "lines": 26,
           "should_fail": false,
           "code_preview": "// 边界: 未定义行为（UB）的微妙性  fn undefined_behavior_example() {     let mut x = 0i32;   ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "// Rust Reference 的形式化推论：裸指针解引用等 unsafe 操作必须出现在 unsafe 上下文中 fn main() {     let ..."
         },
         {
           "flags": [],
@@ -41385,7 +41393,7 @@
       "layer": "L4",
       "title": "所有权形式化",
       "positioning": "",
-      "line_count": 1697,
+      "line_count": 1722,
       "theorem_chains": [
         {
           "text": "| 定理 | ⟹ 推理链 | 前提 | 结论 | 被哪些定理依赖 | 失效条件 | L1 概念映射 |",
@@ -41438,6 +41446,14 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "// 所有权形式化的核心推论：同一 place 不能同时持有两个可变能力 fn main() {     let mut x = 0;     let r1 =..."
+        },
         {
           "flags": [],
           "lines": 25,
@@ -47763,7 +47779,7 @@
       "layer": "L4",
       "title": "反应式系统语义（Reactive Systems Semantics）",
       "positioning": "从数据流（dataflow）、Kahn 进程网络、同步/异步语言与背压协议四个角度，形式化刻画反应式系统的语义，并将其映射到 Rust 的 `Stream`/`Sink`、`tokio::sync::mpsc` 与 `tokio-stream` 生态。",
-      "line_count": 473,
+      "line_count": 475,
       "theorem_chains": [
         {
           "text": "| T-RS-03 | 有界缓冲 ⟹ 资源安全 | 背压条件 (1)(2) 成立 | 数据路径内存使用有上界 |",
@@ -48917,7 +48933,7 @@
       "layer": "L4",
       "title": "并发模型表达能力比较（Expressiveness of Concurrent Models）",
       "positioning": "从**编码、互模拟与 Felleisen 表达力框架**三个维度，比较共享内存、CSP、Actor、π 演算等并发模型的表达能力边界，并解释 Rust 的 `tokio::select!`、`async/await` 等原语在形式表达力坐标系中的位置。",
-      "line_count": 458,
+      "line_count": 459,
       "theorem_chains": [
         {
           "text": "| T-ECM-03 | 强互模拟 ⟹ 弱互模拟 | 弱互模拟定义更宽松 | 若两系统强互模拟，则必然弱互模拟；反之不成立 |",
@@ -70471,7 +70487,7 @@
       "layer": "L7",
       "title": "Rust 1.97.1 稳定补丁",
       "positioning": "",
-      "line_count": 505,
+      "line_count": 507,
       "theorem_chains": [
         {
           "text": "> 从元层看，1.97.1 事件是“形式化语义 ⟹ 工业编译器实现”信任链的鲜活案例：safe Rust 的封闭性定理保证源码级无 UB，但 LLVM 优化层的等价变换仍需工程验证。关于这一信任边界的系统讨论，见 [`concept/00_meta/00_framework/semantic_space.md`](../../00_meta/00_framework/semantic_space.md) §4.7 “Rust 1.97.1：补丁语义与编译器信任边界”。",
@@ -70604,7 +70620,7 @@
       "layer": "L7",
       "title": "Rust 1.97.0 稳定特性",
       "positioning": "",
-      "line_count": 573,
+      "line_count": 574,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [

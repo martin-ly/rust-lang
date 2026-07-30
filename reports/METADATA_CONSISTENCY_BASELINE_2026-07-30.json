@@ -1,0 +1,99 @@
+{
+  "summary": {
+    "date": "2026-07-30",
+    "scanned": 608,
+    "counts": {
+      "D1": 0,
+      "D2": 1,
+      "D3": 0,
+      "D4": 0,
+      "D5": 0,
+      "D6": 6
+    },
+    "pct": {
+      "D1": 0.0,
+      "D2": 0.2,
+      "D3": 0.0,
+      "D4": 0.0,
+      "D5": 0.0,
+      "D6": 1.0
+    },
+    "D2_base_files_with_asp_and_bloom": 357,
+    "flagged_files": 7
+  },
+  "examples": {
+    "D1": [],
+    "D2": [
+      [
+        "concept/04_formal/04_model_checking/11_creusot.md",
+        "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5] 无交集"
+      ]
+    ],
+    "D3": [],
+    "D4": [],
+    "D5": [],
+    "D6": [
+      [
+        "concept/04_formal/00_type_theory/17_system_f.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/04_formal/07_concurrency_semantics/07_session_types.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/04_formal/13_semantic_engineering/05_knowledge_graph_reasoning.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/06_ecosystem/14_enterprise_architecture/04_domain_driven_design_in_rust.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/06_ecosystem/14_enterprise_architecture/05_strategic_domain_driven_design_in_rust.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/07_future/04_research_and_experimental/11_rust_for_ai_model_serving.md",
+        "Summary 为空"
+      ]
+    ]
+  },
+  "per_file": {
+    "concept/04_formal/00_type_theory/17_system_f.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/04_formal/04_model_checking/11_creusot.md": {
+      "D2": [
+        "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5] 无交集"
+      ]
+    },
+    "concept/04_formal/07_concurrency_semantics/07_session_types.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/04_formal/13_semantic_engineering/05_knowledge_graph_reasoning.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/06_ecosystem/14_enterprise_architecture/04_domain_driven_design_in_rust.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/06_ecosystem/14_enterprise_architecture/05_strategic_domain_driven_design_in_rust.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/07_future/04_research_and_experimental/11_rust_for_ai_model_serving.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    }
+  }
+}

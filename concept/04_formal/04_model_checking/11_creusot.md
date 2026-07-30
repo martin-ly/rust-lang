@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [Creusot 官方文档](https://creusot.rs/) · [Creusot GitHub](https://github.com/creusot-rs/creusot) · [Creusot User Guide](https://guide.creusot.rs/) · [Why3 Platform](http://why3.lri.fr/) · [Denis et al., ICFEM 2022 — Creusot: A Foundry for the Deductive Verification of Rust Programs](https://doi.org/10.1007/978-3-031-17244-1_9) · [Denis & Jourdan, PLDI 2023 — COMeT](https://pldi23.sigplan.org/details/pldi-2023-pldi/64/Flux-Liquid-Types-for-Rust) · [Matsushita et al. — RustHorn (PLDI 2020)](https://doi.org/10.1145/3385412.3386022) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
+> **来源**: [Creusot 官方文档](https://creusot.rs/) · [Creusot Project Site](https://creusot-rs.github.io/) · [Creusot GitHub](https://github.com/creusot-rs/creusot) · [Creusot User Guide](https://guide.creusot.rs/) · [Why3 Platform](http://why3.lri.fr/) · [Denis et al., ICFEM 2022 — Creusot: A Foundry for the Deductive Verification of Rust Programs](https://doi.org/10.1007/978-3-031-17244-1_9) · [Denis & Jourdan, PLDI 2023 — COMeT](https://pldi23.sigplan.org/details/pldi-2023-pldi/64/Flux-Liquid-Types-for-Rust) · [Matsushita et al. — RustHorn (PLDI 2020)](https://doi.org/10.1145/3385412.3386022) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 
 ---
 

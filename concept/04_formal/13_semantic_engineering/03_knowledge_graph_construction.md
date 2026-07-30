@@ -11,7 +11,7 @@
 > **定位**: 从**工程实现**角度介绍如何把非结构化或多源数据转化为可查询、可验证的知识图谱，并把项目 KG v3 作为 Rust 知识体系持续演进的实例。
 > **前置概念**: [语义工程目录 README](README.md) · [本体工程](01_ontology_engineering.md) · [描述逻辑与 OWL](02_description_logic_and_owl.md) · [L3 流处理语义](../../03_advanced/06_low_level_patterns/05_stream_processing_semantics.md)
 > **后置概念**: [语义互操作](04_semantic_interoperability.md) · [知识图谱本体 v2](../../00_meta/knowledge_topology/kg_ontology_v2.md)
-> **来源**: [W3C RDF 1.2](https://www.w3.org/TR/rdf12-concepts/) · [W3C SPARQL 1.1](https://www.w3.org/TR/sparql11-overview/) · [W3C SHACL](https://www.w3.org/TR/shacl/) · [Knowledge Graphs survey (arXiv)](https://arxiv.org/abs/2003.02320) · [Rust RFCs](https://github.com/rust-lang/rfcs) · [Oxigraph (Rust RDF store)](https://docs.rs/oxigraph/latest/oxigraph/)
+> **来源**: [W3C RDF 1.1 Concepts](https://www.w3.org/TR/rdf11-concepts/) · [W3C RDF 1.2](https://www.w3.org/TR/rdf12-concepts/) · [W3C SPARQL 1.1](https://www.w3.org/TR/sparql11-overview/) · [W3C SHACL](https://www.w3.org/TR/shacl/) · [Knowledge Graphs survey (arXiv)](https://arxiv.org/abs/2003.02320) · [KG Embeddings Survey (Wang et al., 2017)](https://arxiv.org/abs/1709.07604) · [Rust RFCs](https://github.com/rust-lang/rfcs) · [Oxigraph (Rust RDF store)](https://docs.rs/oxigraph/latest/oxigraph/)
 
 ---
 

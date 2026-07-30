@@ -21,8 +21,10 @@
   - [一、描述逻辑语法与语义](#一描述逻辑语法与语义)
   - [二、表达力阶梯：ALC → SHOIN → SROIQ](#二表达力阶梯alc--shoin--sroiq)
   - [三、OWL 2 profiles：EL / QL / RL](#三owl-2-profilesel--ql--rl)
-  - [四、RDF 1.1 与属性图扩展（RDF* / SPARQL*）](#四rdf-11-与属性图扩展rdf--sparql)
+    - [选型决策树](#选型决策树)
+  - [四、RDF 1.1 与属性图扩展（RDF\*/ SPARQL\*）](#四rdf-11-与属性图扩展rdf-sparql)
   - [五、SHACL：RDF 图的形状约束](#五shaclrdf-图的形状约束)
+    - [与 Rust 类型系统 / derive 宏的类比](#与-rust-类型系统--derive-宏的类比)
   - [六、Tableaux 推理](#六tableaux-推理)
   - [七、可满足性与复杂度](#七可满足性与复杂度)
   - [八、Rust 映射：trait 一致性作为约束满足](#八rust-映射trait-一致性作为约束满足)
@@ -119,7 +121,7 @@ flowchart TD
 
 ---
 
-## 四、RDF 1.1 与属性图扩展（RDF* / SPARQL*）
+## 四、RDF 1.1 与属性图扩展（RDF*/ SPARQL*）
 
 RDF 1.1 将数据建模为 **(subject, predicate, object)** 三元组集合。RDF 图谱没有内置的"属性图"概念，但可以通过**具体化（reification）**或 **RDF/*** 扩展来表达带元数据的边。
 
@@ -428,13 +430,13 @@ mindmap
 
 ## 权威来源索引
 
-- Baader, F.; Calvanese, D.; McGuinness, D.; Nardi, D. & Patel-Schneider, P. (eds.) (2007). *The Description Logic Handbook*. Cambridge University Press, 2nd ed.
+- Baader, F.; Calvanese, D.; McGuinness, D.; Nardi, D. & Patel-Schneider, P. (eds.) (2007). [*The Description Logic Handbook*](https://dl.acm.org/doi/book/10.5555/1065378). Cambridge University Press, 2nd ed.
 - [W3C OWL 2 Web Ontology Language — Document Overview](https://www.w3.org/TR/owl2-overview/)
 - [W3C OWL 2 Primer](https://www.w3.org/TR/owl2-primer/)
 - [W3C OWL 2 Profiles](https://www.w3.org/TR/owl2-profiles/)
 - [W3C RDF 1.1 Concepts and Abstract Syntax](https://www.w3.org/TR/rdf11-concepts/)
 - [W3C SHACL — Shapes Constraint Language](https://www.w3.org/TR/shacl/)
-- Hartig, O. & Thompson, B. (2014). Foundations of an Alternative Approach to Reification in RDF. arXiv:1406.3399. https://arxiv.org/abs/1406.3399
+- Hartig, O. & Thompson, B. (2014). Foundations of an Alternative Approach to Reification in RDF. arXiv:1406.3399. <https://arxiv.org/abs/1406.3399>
 - [Rust Reference — Trait and Lifetime Bounds](https://doc.rust-lang.org/reference/trait-bounds.html)
 
 > **相关文件**: [目录 README](README.md) · [本体工程](01_ontology_engineering.md) · [知识图谱构建](03_knowledge_graph_construction.md) · [语义互操作](04_semantic_interoperability.md)
