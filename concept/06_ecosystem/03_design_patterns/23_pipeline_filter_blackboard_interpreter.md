@@ -32,9 +32,7 @@
 ## 一、权威定义
 
 > **[POSA](https://www.dre.vanderbilt.edu/~schmidt/POSA/) 管道-过滤器（Pipe-and-Filter）** 将系统组织为数据流经过的一系列处理步骤（过滤器），数据通过管道（pipes）在过滤器之间传递。每个过滤器独立完成输入到输出的转换。
-
 > **[POSA 黑板（Blackboard）](https://www.dre.vanderbilt.edu/~schmidt/POSA/)** 将问题求解所需的共享数据放在黑板上，多个独立的知识源（Knowledge Sources）观察黑板状态并贡献部分解，控制器协调求解过程。
-
 > **[GoF 解释器（Interpreter）](https://en.wikipedia.org/wiki/Design_pattern)** 为特定领域语言定义文法表示与解释器。解释器架构通常包含词法/语法分析、AST、求值/执行三个层次。
 
 Rust 对这三种架构的共性支持：
