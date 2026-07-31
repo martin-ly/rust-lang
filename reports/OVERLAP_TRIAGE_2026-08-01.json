@@ -12,7 +12,7 @@
     "SERIES": [
       {
         "sim": 1.0,
-        "kw_sim": 0.398,
+        "kw_sim": 0.357,
         "title_sim": 1.0,
         "shared": 60,
         "same_dir": true,
@@ -21,7 +21,7 @@
         "t1": "Rust 1.100+ 前沿特性预览",
         "t2": "Rust 1.99+ 前沿特性预览",
         "lines1": 260,
-        "lines2": 295
+        "lines2": 339
       },
       {
         "sim": 1.0,
@@ -1437,19 +1437,6 @@
         "title_sim": 0.5,
         "shared": 6,
         "same_dir": true,
-        "f1": "crates/c05_threads/docs/tier_01_foundations/02_navigation.md",
-        "f2": "crates/c05_threads/docs/tier_01_foundations/03_glossary.md",
-        "t1": "C05 Threads 主索引导航",
-        "t2": "C05 Threads 术语表",
-        "lines1": 22,
-        "lines2": 22
-      },
-      {
-        "sim": 0.818,
-        "kw_sim": 0.818,
-        "title_sim": 0.5,
-        "shared": 6,
-        "same_dir": true,
         "f1": "crates/c04_generic/docs/00_master_index.md",
         "f2": "crates/c04_generic/docs/tier_01_foundations/01_project_overview.md",
         "t1": "C04 泛型编程 - 主索引",
@@ -1571,6 +1558,19 @@
         "f2": "crates/c04_generic/docs/tier_01_foundations/04_faq.md",
         "t1": "C04 泛型编程 - 术语表",
         "t2": "C04 泛型编程 - 常见问题",
+        "lines1": 22,
+        "lines2": 22
+      },
+      {
+        "sim": 0.818,
+        "kw_sim": 0.818,
+        "title_sim": 0.5,
+        "shared": 6,
+        "same_dir": true,
+        "f1": "crates/c05_threads/docs/tier_01_foundations/02_navigation.md",
+        "f2": "crates/c05_threads/docs/tier_01_foundations/03_glossary.md",
+        "t1": "C05 Threads 主索引导航",
+        "t2": "C05 Threads 术语表",
         "lines1": 22,
         "lines2": 22
       },

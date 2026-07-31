@@ -24,7 +24,7 @@
 #[cfg(not(any(
     all(target_arch = "arm", target_os = "none"),
     all(target_arch = "riscv32", target_os = "none")
-)))))]
+)))]
 extern crate std;
 
 use core::cell::Cell;
@@ -104,7 +104,7 @@ impl<'a> Executor<'a> {
     #[cfg(not(any(
         all(target_arch = "arm", target_os = "none"),
         all(target_arch = "riscv32", target_os = "none")
-    )))))]
+    )))]
     pub fn run(&self) {
         while self.run_once() {
             // host 模拟：推进模拟硬件时间
@@ -140,7 +140,7 @@ static COUNTER: AtomicU32 = AtomicU32::new(0);
 #[cfg(not(any(
     all(target_arch = "arm", target_os = "none"),
     all(target_arch = "riscv32", target_os = "none")
-)))))]
+)))]
 fn advance_hardware_clock() {
     HARDWARE_CLOCK.store(true, Ordering::Relaxed);
 }
@@ -167,7 +167,7 @@ impl Future for TimerFuture {
 #[cfg(not(any(
     all(target_arch = "arm", target_os = "none"),
     all(target_arch = "riscv32", target_os = "none")
-)))))]
+)))]
 fn current_time() -> u32 {
     if HARDWARE_CLOCK.swap(false, Ordering::Relaxed) {
         COUNTER.fetch_add(1, Ordering::Relaxed);
@@ -195,7 +195,7 @@ static TASK1: SyncCell<Cell<Option<Pin<&'static mut dyn Future<Output = ()>>>>> 
 #[cfg(not(any(
     all(target_arch = "arm", target_os = "none"),
     all(target_arch = "riscv32", target_os = "none")
-)))))]
+)))]
 fn main() {
     let raw = &raw mut FUT1;
     let fut1: Pin<&'static mut TimerFuture> = unsafe { Pin::new_unchecked(&mut *raw) };

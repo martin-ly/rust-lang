@@ -21,7 +21,7 @@
 #[cfg(not(any(
     all(target_arch = "arm", target_os = "none"),
     all(target_arch = "riscv32", target_os = "none")
-))))]
+)))]
 fn main() {
     println!("=== QEMU 演示 ===");
     println!("本示例需要在 ARM 嵌入式目标上运行。");

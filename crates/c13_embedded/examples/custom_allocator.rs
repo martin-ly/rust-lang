@@ -26,7 +26,7 @@
 #[cfg(not(any(
     all(target_arch = "arm", target_os = "none"),
     all(target_arch = "riscv32", target_os = "none")
-))))]
+)))]
 extern crate std;
 
 use core::alloc::{GlobalAlloc, Layout};
@@ -63,7 +63,7 @@ impl BumpPointerAlloc {
     #[cfg(not(any(
         all(target_arch = "arm", target_os = "none"),
         all(target_arch = "riscv32", target_os = "none")
-    ))))]
+    )))]
     fn with_critical_section<R>(&self, f: impl FnOnce() -> R) -> R {
         f()
     }
@@ -153,7 +153,7 @@ fn panic(_: &core::panic::PanicInfo) -> ! {
 #[cfg(not(any(
     all(target_arch = "arm", target_os = "none"),
     all(target_arch = "riscv32", target_os = "none")
-))))]
+)))]
 fn main() {
     let mut pool = [0u8; 1024];
     let alloc = BumpPointerAlloc::empty();
