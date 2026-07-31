@@ -28,7 +28,9 @@
 
 ## 一、什么是 Panic
 
-**Panic** 是 Rust 提供的机制，用于阻止函数正常返回，以响应通常不可恢复的错误条件。(Source: [Rust Reference — Panic](https://doc.rust-lang.org/reference/panic.html), [TRPL Ch9 — Unrecoverable Errors](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html))
+**Panic** 是 Rust 提供的机制，用于阻止函数正常返回，以响应通常不可恢复的错误条件。
+(Source: [Rust Reference — Panic](https://doc.rust-lang.org/reference/panic.html),
+[TRPL Ch9 — Unrecoverable Errors](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html))
 
 - 某些语言结构（如数组越界索引）会自动 panic。
 - 标准库通过 `panic!` 宏（Macro）提供显式 panic 能力。
@@ -77,7 +79,8 @@ fn panic(_info: &PanicInfo) -> ! {
 
 - 并非所有目标都支持 `unwind`。
 - 使用 `std` 链接时，可通过 `-C panic` 选择策略；大多数目标默认 `unwind`。
-- 可通过 `std::panic::set_hook` 在运行时（Runtime）修改标准库 panic 行为。(Source: [std::panic::set_hook](https://doc.rust-lang.org/std/panic/fn.set_hook.html))
+- 可通过 `std::panic::set_hook` 在运行时（Runtime）修改标准库 panic 行为。
+  (Source: [std::panic::set_hook](https://doc.rust-lang.org/std/panic/fn.set_hook.html))
 - 链接 `no_std` binary、dylib、cdylib 或 staticlib 时必须自行指定 panic handler。
 
 ---
