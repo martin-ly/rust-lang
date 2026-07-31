@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 647,
-    "generated_at": "2026-07-31T13:15:15.167170+00:00"
+    "generated_at": "2026-07-31T13:18:57.161051+00:00"
   },
   "files": [
     {
@@ -49565,7 +49565,7 @@
       "layer": "L4",
       "title": "算法精化演算（Refinement Calculus for Rust Algorithms）",
       "positioning": "系统讲解**算法精化演算**——从抽象规范到可执行 Rust 实现的逐步推导，包括谓词转换语义、精化定律、数据精化与排序算法的精化链，揭示形式化方法如何指导 Rust 算法设计与验证。",
-      "line_count": 757,
+      "line_count": 758,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -49652,7 +49652,7 @@
       "layer": "L4",
       "title": "迭代器正确性语义（Iterator Correctness Semantics）",
       "positioning": "从形式化语义角度刻画 Rust `Iterator` trait 与适配器链的契约：状态机视图、不变量、代数律，以及自定义迭代器的实现义务。连接算法语义、Hoare 逻辑与 Rust 标准库迭代器生态。",
-      "line_count": 1001,
+      "line_count": 1003,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -49785,7 +49785,7 @@
       "layer": "L4",
       "title": "不安全算法的语义不变量（Semantic Invariants of Unsafe Algorithms）",
       "positioning": "系统讲解 Rust `unsafe` 算法的语义契约——从安全 API 与不安全实现之间的抽象屏障，到指针有效性、初始化、对齐、别名隔离等运行时不变量，以及循环不变量在维护 `Vec`、`MaybeUninit` 等数据结构正确性中的作用。",
-      "line_count": 576,
+      "line_count": 580,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -49914,7 +49914,7 @@
       "layer": "L4",
       "title": "算法实现的观察等价性（Observational Equivalence of Algorithm Implementations）",
       "positioning": "系统讲解 **算法实现的观察等价性**——从\"相同输入产生相同可观察输出\"的基本定义，到复杂度、非确定性与精化序对等价关系的刻画，帮助判断 Rust 中同一算法的不同实现何时可以互换、何时必须区分。",
-      "line_count": 611,
+      "line_count": 612,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -51087,7 +51087,7 @@
       "layer": "L4",
       "title": "计算语义统一框架（A Unified Framework of Computational Semantics）",
       "positioning": "把操作、指称、公理、类型四种语义统一为观察同一程序行为的四种互补视角，为后续可计算性、形式语言与程序等价性讨论奠定共同语言。",
-      "line_count": 349,
+      "line_count": 350,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -51905,7 +51905,7 @@
       "layer": "L4",
       "title": "并发模型表达能力比较（Expressiveness of Concurrent Models）",
       "positioning": "从**编码、互模拟与 Felleisen 表达力框架**三个维度，比较共享内存、CSP、Actor、π 演算等并发模型的表达能力边界，并解释 Rust 的 `tokio::select!`、`async/await` 等原语在形式表达力坐标系中的位置。",
-      "line_count": 593,
+      "line_count": 594,
       "theorem_chains": [
         {
           "text": "| T-ECM-03 | 强互模拟 ⟹ 弱互模拟 | 弱互模拟定义更宽松 | 若两系统强互模拟，则必然弱互模拟；反之不成立 |",
@@ -70152,7 +70152,7 @@
       "layer": "L6",
       "title": "安全实践：Rust 代码的防御性编程",
       "positioning": "系统讲解 Rust **安全编程实践**——从输入验证、加密使用、到审计和供应链安全，揭示如何在 Rust 的内存安全（Memory Safety）基础上构建全面的安全防御体系。",
-      "line_count": 1319,
+      "line_count": 1324,
       "theorem_chains": [
         {
           "text": "| 安全 实践：Rust 代码的防御性编程 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -73587,7 +73587,7 @@
       "layer": "L6",
       "title": "Rust 工业应用案例研究",
       "positioning": "",
-      "line_count": 542,
+      "line_count": 543,
       "theorem_chains": [
         {
           "text": "| Rust 工业级案例研究 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -78835,7 +78835,7 @@
       "layer": "L7",
       "title": "Rust 1.97.1 稳定补丁",
       "positioning": "",
-      "line_count": 515,
+      "line_count": 514,
       "theorem_chains": [
         {
           "text": "> 从元层看，1.97.1 事件是“形式化语义 ⟹ 工业编译器实现”信任链的鲜活案例：safe Rust 的封闭性定理保证源码级无 UB，但 LLVM 优化层的等价变换仍需工程验证。关于这一信任边界的系统讨论，见 [`concept/00_meta/00_framework/semantic_space.md`](../../00_meta/00_framework/semantic_space.md) §4.7 “Rust 1.97.1：补丁语义与编译器信任边界”。",

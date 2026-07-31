@@ -8,10 +8,10 @@
 | D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 0 (基=396) | 0.0% | >=5% | pass |
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
-| D5 稳定层正文残留 nightly/preview/unstable | 3 | 0.4% | >0 | FAIL |
+| D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
 | D6 Summary 低信息量模板套话 | 15 | 2.2% | >=3% | pass |
 
-**受影响文件总数**: 17 / 674
+**受影响文件总数**: 15 / 674
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -105,6 +105,9 @@
 - `concept/04_formal/04_model_checking/04_modern_verification_tools.md` — 验证工具矩阵客观陈述 Flux 需 nightly 及 BorrowSanitizer/Safety Tags 等 preview 特性链接，非稳定层依赖
 - `concept/04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md` — rustc 内部机制页：`-Zmir-opt-level` nightly 标志作为 MIR 优化调参事实陈述
 - `concept/06_ecosystem/10_performance/02_performance_engineering_architecture.md` — 性能工程页：portable_simd 为 nightly-only 工具链事实，页面主题即 SIMD 选型与 stable/nightly 边界
+- `concept/06_ecosystem/05_systems_and_embedded/13_bare_metal_boot_linker_script.md` — 裸机启动页：`-Z build-std` / 自定义 target / nightly-only 目标为工具链事实陈述
+- `concept/06_ecosystem/05_systems_and_embedded/23_no_std_and_bare_metal_idioms.md` — no_std 惯用法页：`-Z build-std` / 实验性目标 / nightly 工具链事实为裸机开发客观边界
+- `concept/06_ecosystem/10_performance/03_algorithms_and_complexity_idioms.md` — 算法惯用法页：`portable_simd` / `#![feature]` 等 nightly-only 边界为 SIMD/unsafe 优化选型事实陈述
 
 另有两类规则级排除：WASI Preview 1/2/3（WASM 规范版本专名）与 URL 路径中的 nightly（官方文档固定托管路径）。
 
@@ -122,11 +125,8 @@
 ### D4 文首块 Rust 版本号自矛盾（0）
 
 
-### D5 稳定层正文残留 nightly/preview/unstable（3）
+### D5 稳定层正文残留 nightly/preview/unstable（0）
 
-- `concept/06_ecosystem/05_systems_and_embedded/13_bare_metal_boot_linker_script.md` — 稳定层 nightly/preview 关键词 1 处
-- `concept/06_ecosystem/05_systems_and_embedded/23_no_std_and_bare_metal_idioms.md` — 稳定层 nightly/preview 关键词 2 处
-- `concept/06_ecosystem/10_performance/03_algorithms_and_complexity_idioms.md` — 稳定层 nightly/preview 关键词 2 处
 
 ### D6 Summary 低信息量模板套话（15）
 
@@ -145,7 +145,7 @@
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 
-- D5 稳定层nightly残留 3 (>0)
+- 无（全部通过）
 
 ## 机器可读
 

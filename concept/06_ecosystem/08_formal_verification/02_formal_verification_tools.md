@@ -33,7 +33,7 @@
 
 ## 📑 目录
 
-- [Formal Verification Tools（形式化验证工具生态）](#formal-verification-tools形式化验证工具生态)
+- [形式化验证工具生态](#形式化验证工具生态)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 形式化验证的层次模型](#11-形式化验证的层次模型)

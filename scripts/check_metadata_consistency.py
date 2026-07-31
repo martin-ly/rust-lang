@@ -268,6 +268,14 @@ D5_WHITELIST_FILES = {
     # （portable_simd 截至 Rust 1.97.0 仍为 nightly-only，页面主题即性能工程中的 SIMD 选型边界）。
     "concept/06_ecosystem/10_performance/02_performance_engineering_architecture.md":
         "性能工程页：portable_simd 为 nightly-only 工具链事实，页面主题即 SIMD 选型与 stable/nightly 边界",
+    # ---- 2026-07-31 Wave F/P1 国际对齐新建/扩展页：nightly/preview 提及均为裸机、链接脚本、
+    # 算法复杂度中的工具链事实陈述或边界标注，非稳定层正文残留不稳定依赖。
+    "concept/06_ecosystem/05_systems_and_embedded/13_bare_metal_boot_linker_script.md":
+        "裸机启动页：`-Z build-std` / 自定义 target / nightly-only 目标为工具链事实陈述",
+    "concept/06_ecosystem/05_systems_and_embedded/23_no_std_and_bare_metal_idioms.md":
+        "no_std 惯用法页：`-Z build-std` / 实验性目标 / nightly 工具链事实为裸机开发客观边界",
+    "concept/06_ecosystem/10_performance/03_algorithms_and_complexity_idioms.md":
+        "算法惯用法页：`portable_simd` / `#![feature]` 等 nightly-only 边界为 SIMD/unsafe 优化选型事实陈述",
 }
 
 
