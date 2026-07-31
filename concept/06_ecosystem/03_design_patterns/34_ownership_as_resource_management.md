@@ -17,7 +17,11 @@
 > [Tofte & Talpin — Region-Based Memory Management](https://doi.org/10.1016/0890-5401(94)00052-3) ·
 > [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 >
-> **前置概念**: [所有权（Ownership）](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [析构函数与 Drop Scope](../../04_formal/05_rustc_internals/09_destructors.md) · [Rust 惯用法谱系](02_idioms_spectrum.md)
+> **前置概念**:
+> [所有权（Ownership）](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [析构函数与 Drop Scope](../../04_formal/05_rustc_internals/09_destructors.md) ·
+> [Rust 惯用法谱系](02_idioms_spectrum.md) ·
+> [Rust vs C++：资源管理对比](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **后置概念**:
 > [作用域守卫与延迟清理](35_scope_guard_and_deferred_cleanup.md) ·
 > [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) ·
@@ -253,9 +257,52 @@ fn share_counter() {
 
 ---
 
-## 七、反例：RAII 的常见陷阱
+## 七、RAII 与性能
 
-### 6.1 循环引用导致泄漏
+RAII 经常被误解为「有运行时开销」。实际上，Rust 的 `Drop` 调用由编译器在编译期插入，不引入额外的运行时簿记或垃圾回收器。与手动 `malloc`/`free` 相比，RAII 类型的释放代码在生成的机器码层面通常等价。
+
+性能方面的注意事项：
+
+- **避免在 hot path 上创建大量小 guard**：虽然单次 `Drop` 无开销，但大量 tiny guard 会增加函数 prologue/epilogue 大小。
+- **注意 `Drop` 链长度**：深嵌套结构体的级联析构可能增加指令缓存压力。
+- **自定义 `Drop` 不要做冗余工作**：例如，在 `Drop` 中记录日志或发送指标应谨慎，避免 I/O 阻塞析构。
+
+在绝大多数场景下，RAII 提供的安全性与可维护性远超其理论上的边际成本。
+
+---
+
+## 八、RAII 的测试策略
+
+由于 `Drop` 由编译器自动插入，测试时可以通过副作用（如计数器、日志）验证释放是否发生：
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+static DROP_COUNT: AtomicUsize = AtomicUsize::new(0);
+
+struct CountedDrop;
+impl Drop for CountedDrop {
+    fn drop(&mut self) {
+        DROP_COUNT.fetch_add(1, Ordering::SeqCst);
+    }
+}
+
+fn main() {
+    {
+        let _a = CountedDrop;
+        let _b = CountedDrop;
+    }
+    assert_eq!(DROP_COUNT.load(Ordering::SeqCst), 2);
+}
+```
+
+在集成测试中，可结合临时目录、mock 资源等手段验证「异常路径下资源仍被释放」。
+
+---
+
+## 九、反例：RAII 的常见陷阱
+
+### 9.1 循环引用导致泄漏
 
 ```rust
 use std::cell::RefCell;
@@ -275,7 +322,7 @@ fn main() {
 
 **修正**：使用弱引用 `Weak<T>` 打破循环，或改用 arena / 所有权清晰的树形结构。
 
-### 7.2 忘记释放裸指针资源
+### 9.2 忘记释放裸指针资源
 
 ```rust,unsafe
 use std::alloc::{alloc, dealloc, Layout};
@@ -290,7 +337,7 @@ unsafe fn leak() {
 
 **修正**：将裸指针包装进 RAII 类型，在 `Drop` 中释放。
 
-### 7.3 在 `Drop` 中 panic 或阻塞
+### 9.3 在 `Drop` 中 panic 或阻塞
 
 `Drop` 实现应尽量避免 panic 或长时间阻塞：
 
@@ -301,7 +348,7 @@ unsafe fn leak() {
 
 ---
 
-## 七、RAII 与错误处理的协同
+## 九、RAII 与错误处理的协同
 
 `?` 运算符与 RAII 天然协同：函数中任意 early return 都会触发已创建守卫的 `Drop`。
 
@@ -334,7 +381,7 @@ impl<'a> Drop for BackupGuard<'a> {
 
 ---
 
-## 八、决策树：何时使用 RAII
+## 十、决策树：何时使用 RAII
 
 ```mermaid
 graph TD
@@ -349,7 +396,7 @@ graph TD
 
 ---
 
-## 九、思维导图
+## 十一、思维导图
 
 ```mermaid
 mindmap
@@ -381,7 +428,7 @@ mindmap
 
 ---
 
-## 十、相关概念
+## 十二、相关概念
 
 | 概念 | 关系 |
 |:---|:---|
@@ -394,7 +441,7 @@ mindmap
 
 ---
 
-## 十一、权威来源索引
+## 十三、权威来源索引
 
 - Tofte, M. & Talpin, J.-P. "Region-Based Memory Management." *Information and Computation*, 1994. [https://doi.org/10.1016/0890-5401(94)00052-3](https://doi.org/10.1016/0890-5401(94)00052-3)
 - [The Rustonomicon — RAII](https://doc.rust-lang.org/nomicon/raii.html)

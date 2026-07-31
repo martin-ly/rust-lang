@@ -35,6 +35,13 @@
 - `panic-halt`:  panic 处理策略
 - `volatile-register`: 内存映射寄存器访问
 
+## 可编译示例
+
+- [最小 bare-metal 程序](examples/minimal_bare_metal.rs)
+- [QEMU 演示](examples/qemu_demo.rs)
+- [自定义 bare-metal async executor](examples/custom_async_executor.rs)
+- [自定义 bump allocator](examples/custom_allocator.rs)
+
 ## 文档
 
 - [完整索引](docs/00_meta/00_master_index.md)

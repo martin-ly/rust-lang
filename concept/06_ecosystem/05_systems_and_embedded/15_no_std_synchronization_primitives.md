@@ -14,7 +14,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: P×Eva — 评估不同 no_std 同步策略的适用性
 > **前置概念**: [Cortex-M 异常模型](14_interrupt_and_exception_model.md) · [并发基础](../../03_advanced/00_concurrency/01_concurrency.md) · [原子操作](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md)
-> **后置概念**: [PAC 与 HAL 实现](17_pac_hal_implementation.md) · [嵌入式内存分配器](16_embedded_memory_allocators.md) · [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
+> **后置概念**: [PAC 与 HAL 实现](17_pac_hal_implementation.md) · [嵌入式内存分配器](16_embedded_memory_allocators.md) · [自定义裸机异步执行器](28_custom_bare_metal_async_executor.md) · [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
 
 ---
 

@@ -15,7 +15,7 @@
 > **双维定位**: C×Ana — 分析 Pin 不动性对自引用（Reference）的必要性
 > **定位**: 深入分析 Rust 中 **Pin<&mut T>** 和 **Unpin** 的设计动机——解决自引用（Reference）类型（self-referential structs）在内存移动时的安全问题，探讨 Pin 与 Future、Generator 的交互，以及 async/await 的状态机实现。
 > **前置概念**: [Async](01_async.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)
-> **后置概念**: [Unsafe](../02_unsafe/01_unsafe.md) · [Gen Blocks](../../07_future/02_preview_features/25_gen_blocks_preview.md)
+> **后置概念**: [Unsafe](../02_unsafe/01_unsafe.md) · [Gen Blocks](../../07_future/02_preview_features/25_gen_blocks_preview.md) · [Pin 与自引用类型的形式语义](../../04_formal/03_operational_semantics/12_pin_and_self_referential_semantics.md)
 
 ---
 

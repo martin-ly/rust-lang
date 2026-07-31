@@ -64,37 +64,37 @@
     - [5.2](#52)
     - [5.3](#53)
     - [5.4](#54)
-    - [5.5 `Cow<T>`：按需克隆的借用/拥有二相性](#55-cowt按需克隆的借用拥有二相性)
-    - [5.6 Deref / AsRef / Borrow 边界选型](#56-deref--asref--borrow-边界选型)
+    - [5.5](#55)
+    - [5.6](#56)
   - [六、L3 资源级惯用法](#六l3-资源级惯用法)
     - [6.1](#61)
     - [6.2](#62)
     - [6.3](#63)
     - [6.4](#64)
     - [6.5](#65)
-    - [6.6 所有权移动惯用法：`move`、`mem::take/replace`、`Option::take`](#66-所有权移动惯用法movememtakereplaceoptiontake)
-    - [6.7 `MaybeUninit<T>`：延迟初始化与数组安全构造](#67-maybeuninitt延迟初始化与数组安全构造)
-    - [6.8 unsafe 惯用法边界：raw pointer、`transmute` 与 SAFETY 注释](#68-unsafe-惯用法边界raw-pointertransmute-与-safety-注释)
+    - [6.6](#66)
+    - [6.7](#67)
+    - [6.8](#68)
   - [七、L4 控制级惯用法](#七l4-控制级惯用法)
     - [7.1](#71)
     - [7.2](#72)
     - [7.3](#73)
     - [7.4](#74)
-    - [7.5 错误处理惯用法全谱：从 `ok_or` 到 `thiserror`/`anyhow`](#75-错误处理惯用法全谱从-ok_or-到-thiserroranyhow)
-    - [7.6 Iterator 高级适配器：`try_fold`、`peekable`、`fuse`、`cycle`](#76-iterator-高级适配器try_foldpeekablefusecycle)
+    - [7.5](#75)
+    - [7.6](#76)
   - [八、L5 并发级惯用法](#八l5-并发级惯用法)
     - [8.1](#81)
     - [8.2](#82)
     - [8.3](#83)
     - [8.4](#84)
     - [8.5](#85)
-    - [8.6 async 运行时惯用法：`Pin`、任务调度、取消安全与背压](#86-async-运行时惯用法pin任务调度取消安全与背压)
+    - [8.6](#86)
   - [九、L6 架构级惯用法](#九l6-架构级惯用法)
     - [9.1](#91)
     - [9.2](#92)
     - [9.3](#93)
     - [9.4](#94)
-    - [9.5 `no_std` / 裸机惯用法：`#[global_allocator]`、`#[panic_handler]`、临界区](#95-no_std--裸机惯用法global_allocatorpanic_handler临界区)
+    - [9.5](#95)
   - [十、反惯用法](#十反惯用法)
     - [常见反惯用清单](#常见反惯用清单)
   - [十一、Rust 1.95 新惯用法](#十一rust-195-新惯用法)
@@ -642,7 +642,9 @@ greeting(&String::from("Rust")); // &String → 自动解引用为 &str
 greeting(&"Rust".to_owned());    // &String
 ```
 
-### 5.5 `Cow<T>`：按需克隆的借用/拥有二相性
+### 5.5
+
+**`Cow<T>`：按需克隆的借用/拥有二相性**
 
 > **EN**: Clone-on-Write with `Cow<T>`
 > **Summary**: `Cow<T>` lets functions accept either borrowed or owned data and defer cloning until mutation is actually required.
@@ -721,7 +723,9 @@ graph TD
     F -->|是| G[使用 T / String / Vec<T>]
 ```
 
-### 5.6 Deref / AsRef / Borrow 边界选型
+### 5.6
+
+**Deref / AsRef / Borrow 边界选型**
 
 > **EN**: Choosing Between `Deref`, `AsRef`, and `Borrow`
 > **Summary**: Use `Deref` only for smart-pointer transparency, `AsRef` for cheap reference conversions, and `Borrow` for hash-/compare-stable borrowing.
@@ -934,7 +938,9 @@ impl RawBuffer {
 
 **等价性**: `ManuallyDrop<T>` 与 `T` 同布局，仅在元层面抑制 `Drop` 调用的自动注入；不引入运行时开销。它与 `mem::forget` 的区别在于保留了值的所有权，可在之后手动析构。
 
-### 6.6 所有权移动惯用法：`move`、`mem::take/replace`、`Option::take`
+### 6.6
+
+**所有权移动惯用法：`move`、`mem::take/replace`、`Option::take`**
 
 > **EN**: Ownership Transfer Idioms: `move`, `mem::take`, and `mem::replace`
 > **Summary**: Move values outright or swap them with a default/trivial value to take ownership while leaving a valid placeholder behind.
@@ -1016,7 +1022,9 @@ graph TD
     F -->|否| H[重新设计所有权流或使用 unsafe]
 ```
 
-### 6.7 `MaybeUninit<T>`：延迟初始化与数组安全构造
+### 6.7
+
+**`MaybeUninit<T>`：延迟初始化与数组安全构造**
 
 > **EN**: Delayed Initialization with `MaybeUninit<T>`
 > **Summary**: `MaybeUninit<T>` reserves memory for `T` without requiring immediate initialization, enabling safe incremental array construction before assuming initialization.
@@ -1098,7 +1106,9 @@ graph TD
     A -->|否| E[直接使用 T / Default]
 ```
 
-### 6.8 unsafe 惯用法边界：raw pointer、`transmute` 与 SAFETY 注释
+### 6.8
+
+**unsafe 惯用法边界：raw pointer、`transmute` 与 SAFETY 注释**
 
 > **EN**: Unsafe Idiom Boundaries: Raw Pointers, `transmute`, and SAFETY Comments
 > **Summary**: Unsafe Rust relies on explicit contracts—alignment, lifetime, and aliasing for raw pointers; invariants for `transmute`; and mandatory SAFETY comments documenting why each `unsafe` block is sound.
@@ -1281,7 +1291,9 @@ let squares: Vec<i32> = (0..10).map(|n| n * n).collect();
 let squares = (0..10).map(|n| n * n).collect::<Vec<i32>>();
 ```
 
-### 7.5 错误处理惯用法全谱：从 `ok_or` 到 `thiserror`/`anyhow`
+### 7.5
+
+**错误处理惯用法全谱：从 `ok_or` 到 `thiserror`/`anyhow`**
 
 > **EN**: Error-Handling Idiom Spectrum: `ok_or`, `map_err`, Custom Errors, and `thiserror` vs `anyhow`
 > **Summary**: Rust error handling spans lightweight conversions with `ok_or`/`map_err`, typed library errors built with `thiserror`, and ergonomic application errors aggregated by `anyhow`.
@@ -1383,7 +1395,9 @@ graph TD
     I -->|是| J[map_err]
 ```
 
-### 7.6 Iterator 高级适配器：`try_fold`、`peekable`、`fuse`、`cycle`
+### 7.6
+
+**Iterator 高级适配器：`try_fold`、`peekable`、`fuse`、`cycle`**
 
 > **EN**: Advanced Iterator Adapters: `try_fold`, `peekable`, `fuse`, and `cycle`
 > **Summary**: Specialized iterator adapters let you short-circuit on error with `try_fold`, inspect the next item without consuming it, handle fused iterators, and repeat sequences indefinitely.
@@ -1619,7 +1633,9 @@ fn parallel_sum(data: &[i32]) -> i32 {
 
 **等价性**: `scope(f)` 在 `f` 返回前 join 所有由 `s` 派生的线程，因此 `s.spawn` 的闭包可安全捕获非 `'static` 引用。与 `thread::spawn` 要求 `'static` 闭包相比，省去了 `Arc` 原子计数与堆分配，是零成本的结构化并发原语。
 
-### 8.6 async 运行时惯用法：`Pin`、任务调度、取消安全与背压
+### 8.6
+
+**async 运行时惯用法：`Pin`、任务调度、取消安全与背压**
 
 > **EN**: Async Runtime Idioms: `Pin`, Spawning, Cancellation Safety, Backpressure, and Graceful Shutdown
 > **Summary**: Async Rust relies on `Pin<&mut Future>` for self-referential futures, structured spawning with `tokio::spawn`/`JoinSet`, CPU-bound offloading via `spawn_blocking`, and explicit cancellation-safe I/O with backpressure.
@@ -1810,7 +1826,9 @@ impl Worker {
 }
 ```
 
-### 9.5 `no_std` / 裸机惯用法：`#[global_allocator]`、`#[panic_handler]`、临界区
+### 9.5
+
+**`no_std` / 裸机惯用法：`#[global_allocator]`、`#[panic_handler]`、临界区**
 
 > **EN**: `no_std` / Bare-Metal Idioms: Global Allocator, Panic Handler, and Interrupt-Free Critical Sections
 > **Summary**: In `#![no_std]` environments, Rust requires explicit `#[global_allocator]`, `#[panic_handler]`, and carefully bounded critical sections to provide memory allocation, panic handling, and interrupt-safe shared state.

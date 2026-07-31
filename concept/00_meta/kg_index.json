@@ -4,7 +4,7 @@
     "generated": "2026-07-11",
     "rust_version": "1.97.0+",
     "source": "concept/",
-    "entity_count": 653,
+    "entity_count": 667,
     "schema": "simple KG index"
   },
   "entities": [
@@ -1293,6 +1293,19 @@
       "related_crates": []
     },
     {
+      "id": "concept:00_meta/knowledge_topology/12_semantic_properties_atlas.md",
+      "path": "00_meta/knowledge_topology/12_semantic_properties_atlas.md",
+      "title": "",
+      "en": "Semantic Properties Atlas",
+      "summary": "Curated synonym, antonym, hyponym, entailment, mutex, and counter-example relations for core Rust concepts, materialized as KG semantic predicates.",
+      "bloom": "L0",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [],
+      "postrequisites": [],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:00_meta/knowledge_topology/kg_ontology_v2.md",
       "path": "00_meta/knowledge_topology/kg_ontology_v2.md",
       "title": "Rust 知识体系知识图谱本体规范 v2.0（RDF 1.2 / RDF-star / SKOS 对齐版）",
@@ -1574,6 +1587,52 @@
         {
           "title": "Macros",
           "path": "../../03_advanced/03_proc_macros/01_macros.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:01_foundation/00_start/08_compile_time_correctness.md",
+      "path": "01_foundation/00_start/08_compile_time_correctness.md",
+      "title": "",
+      "en": "Compile-Time Correctness",
+      "summary": "A unifying view of how Rust's type system, ownership, borrow checker, typestate, const generics, and exhaustive pattern matching move classes of runtime errors to compile-time.",
+      "bloom": "L1-L2",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "术语表（Terminology Glossary）",
+          "path": "../../00_meta/01_terminology/01_terminology_glossary.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "类型状态模式（Typestate）",
+          "path": "../../06_ecosystem/03_design_patterns/32_typestate_deep_dive.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:01_foundation/00_start/09_fearless_refactoring.md",
+      "path": "01_foundation/00_start/09_fearless_refactoring.md",
+      "title": "",
+      "en": "Fearless Refactoring",
+      "summary": "How Rust's exhaustive pattern matching, type system, borrow checker, ? operator, and zero-cost abstractions form a safety net that makes large-scale refactoring reliable and error-driven.",
+      "bloom": "L1-L2",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "术语表（Terminology Glossary）",
+          "path": "../../00_meta/01_terminology/01_terminology_glossary.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "错误处理进阶",
+          "path": "../../02_intermediate/03_error_handling/01_error_handling.md"
         }
       ],
       "theorems": [],
@@ -4625,6 +4684,10 @@
         {
           "title": "Unsafe Rust",
           "path": "../02_unsafe/01_unsafe.md"
+        },
+        {
+          "title": "Send/Sync 并发语义边界",
+          "path": "../../04_formal/07_concurrency_semantics/08_send_sync_semantics.md"
         }
       ],
       "theorems": [
@@ -5026,6 +5089,10 @@
         {
           "title": "Gen Blocks",
           "path": "../../07_future/02_preview_features/25_gen_blocks_preview.md"
+        },
+        {
+          "title": "Pin 与自引用类型的形式语义",
+          "path": "../../04_formal/03_operational_semantics/12_pin_and_self_referential_semantics.md"
         }
       ],
       "theorems": [],
@@ -5309,6 +5376,10 @@
         {
           "title": "Concurrency Patterns",
           "path": "../00_concurrency/03_concurrency_patterns.md"
+        },
+        {
+          "title": "async/await 状态机的操作语义",
+          "path": "../../04_formal/03_operational_semantics/11_async_state_machine_semantics.md"
         }
       ],
       "theorems": [],
@@ -6075,6 +6146,10 @@
         {
           "title": "Ownership",
           "path": "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
+        },
+        {
+          "title": "Traits",
+          "path": "../../02_intermediate/00_traits/01_traits.md"
         }
       ],
       "postrequisites": [
@@ -7381,7 +7456,7 @@
       "path": "04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md",
       "title": "",
       "en": "Tree Borrows Deep Dive",
-      "summary": "深入解析 Rust 别名模型的演进：从 Stacked Borrows 到 Tree Borrows，理解其设计动机、核心规则、与 Miri 的关系及生产实践影响。",
+      "summary": "深入解析 Rust 别名模型的演进：从 Stacked Borrows 到 Tree Borrows，理解其设计动机、权限状态机、与 Miri 的关系、语义差异、迁移影响及生产实践。",
       "bloom": "L4-L5",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [],
@@ -10271,6 +10346,10 @@
         {
           "title": "Semantic Model Atlas",
           "path": "../../00_meta/knowledge_topology/11_semantic_model_atlas.md"
+        },
+        {
+          "title": "Atomics and Memory Ordering",
+          "path": "../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md"
         }
       ],
       "postrequisites": [
@@ -12671,7 +12750,7 @@
       "path": "06_ecosystem/03_design_patterns/02_idioms_spectrum.md",
       "title": "Rust 惯用法谱系全景（Idioms Spectrum）",
       "en": "Idioms Spectrum",
-      "summary": "Idioms Spectrum: Rust ecosystem tools, crates, and engineering practices.",
+      "summary": "Idioms Spectrum: a cross-layer catalog of Rust idioms covering ownership transfer, clone-on-write, unsafe boundaries, error handling, advanced iterators, async runtime patterns, and bare-metal practices.",
       "bloom": "L3-L5",
       "rust_version": "1.97.0 stable (Edition 2024)",
       "prerequisites": [
@@ -13177,6 +13256,10 @@
         {
           "title": "Async",
           "path": "../../03_advanced/01_async/01_async.md"
+        },
+        {
+          "title": "Paradigm Matrix",
+          "path": "../../05_comparative/00_paradigms/01_paradigm_matrix.md"
         }
       ],
       "postrequisites": [
@@ -13187,6 +13270,52 @@
         {
           "title": "FFI Patterns",
           "path": "../../03_advanced/04_ffi/07_ffi_patterns.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/03_design_patterns/34_ownership_as_resource_management.md",
+      "path": "06_ecosystem/03_design_patterns/34_ownership_as_resource_management.md",
+      "title": "",
+      "en": "Ownership as Resource Management",
+      "summary": "Engineering practices for RAII in Rust: Mutex guards, file handles, temporary files, transaction rollback, drop order, and comparisons with Go/Zig/D deferred cleanup.",
+      "bloom": "L3-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "所有权（Ownership）",
+          "path": "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "作用域守卫与延迟清理",
+          "path": "35_scope_guard_and_deferred_cleanup.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/03_design_patterns/35_scope_guard_and_deferred_cleanup.md",
+      "path": "06_ecosystem/03_design_patterns/35_scope_guard_and_deferred_cleanup.md",
+      "title": "",
+      "en": "Scope Guard and Deferred Cleanup",
+      "summary": "Using scopeguard crate, defer! macro, ScopeGuard::with_strategy, and custom guards to guarantee cleanup on early return or panic, and how this complements RAII and Drop.",
+      "bloom": "L3-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Ownership as Resource Management",
+          "path": "34_ownership_as_resource_management.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "错误处理进阶",
+          "path": "../../02_intermediate/03_error_handling/01_error_handling.md"
         }
       ],
       "theorems": [],
@@ -13955,6 +14084,10 @@
           "path": "16_embedded_memory_allocators.md"
         },
         {
+          "title": "自定义裸机异步执行器",
+          "path": "28_custom_bare_metal_async_executor.md"
+        },
+        {
           "title": "嵌入式形式化内存模型",
           "path": "../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md"
         }
@@ -13992,6 +14125,10 @@
         {
           "title": "panic_handler 与 no_std 运行时",
           "path": "18_panic_runtime_no_std.md"
+        },
+        {
+          "title": "嵌入式内存布局与堆安全",
+          "path": "29_embedded_memory_layout_and_heap_safety.md"
         },
         {
           "title": "嵌入式形式化内存模型",
@@ -14203,6 +14340,10 @@
         {
           "title": "no_std 同步原语",
           "path": "15_no_std_synchronization_primitives.md"
+        },
+        {
+          "title": "Rust vs C++",
+          "path": "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md"
         }
       ],
       "postrequisites": [
@@ -14217,6 +14358,22 @@
         {
           "title": "异步 no_std 嵌入式",
           "path": "11_async_no_std_embedded.md"
+        },
+        {
+          "title": "no_std 启动流程与运行时深度解析",
+          "path": "27_no_std_startup_runtime_deep_dive.md"
+        },
+        {
+          "title": "自定义裸机异步执行器",
+          "path": "28_custom_bare_metal_async_executor.md"
+        },
+        {
+          "title": "嵌入式内存布局与堆安全",
+          "path": "29_embedded_memory_layout_and_heap_safety.md"
+        },
+        {
+          "title": "安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508",
+          "path": "30_misra_rust_safety_critical_guidelines.md"
         }
       ],
       "theorems": [],
@@ -14246,6 +14403,10 @@
         {
           "title": "no_std 与裸机惯用法",
           "path": "23_no_std_and_bare_metal_idioms.md"
+        },
+        {
+          "title": "Rust vs C++",
+          "path": "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md"
         }
       ],
       "postrequisites": [
@@ -14289,6 +14450,10 @@
         {
           "title": "Unsafe Rust",
           "path": "../../03_advanced/02_unsafe/01_unsafe.md"
+        },
+        {
+          "title": "Rust vs C++",
+          "path": "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md"
         }
       ],
       "postrequisites": [
@@ -14332,6 +14497,10 @@
         {
           "title": "实时系统概念",
           "path": "03_embedded_systems.md#三实时系统"
+        },
+        {
+          "title": "Rust vs Ada/SPARK",
+          "path": "../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md"
         }
       ],
       "postrequisites": [
@@ -14346,6 +14515,162 @@
         {
           "title": "嵌入式调试与日志",
           "path": "20_embedded_debugging_logging.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/27_no_std_startup_runtime_deep_dive.md",
+      "path": "06_ecosystem/05_systems_and_embedded/27_no_std_startup_runtime_deep_dive.md",
+      "title": "",
+      "en": "no_std Startup and Runtime Deep Dive",
+      "summary": "End-to-end walkthrough of a `#![no_std]` bare-metal program from reset vector through linker script, `_start`, `.data`/`.bss` initialization, `#[panic_handler]`, and optional `#[global_allocator]`.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 嵌入式系统开发",
+          "path": "03_embedded_systems.md"
+        },
+        {
+          "title": "裸机启动与链接脚本",
+          "path": "13_bare_metal_boot_linker_script.md"
+        },
+        {
+          "title": "panic_handler 与 no_std 运行时",
+          "path": "18_panic_runtime_no_std.md"
+        },
+        {
+          "title": "嵌入式内存分配器",
+          "path": "16_embedded_memory_allocators.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Cortex-M 与 RISC-V 中断异常模型",
+          "path": "14_interrupt_and_exception_model.md"
+        },
+        {
+          "title": "no_std 同步原语",
+          "path": "15_no_std_synchronization_primitives.md"
+        },
+        {
+          "title": "自定义裸机异步执行器",
+          "path": "28_custom_bare_metal_async_executor.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/28_custom_bare_metal_async_executor.md",
+      "path": "06_ecosystem/05_systems_and_embedded/28_custom_bare_metal_async_executor.md",
+      "title": "",
+      "en": "Custom Bare-Metal Async Executor",
+      "summary": "Building a `#![no_std]` single-threaded async executor from scratch: `Future`, `RawWaker`, `Waker`, static task arena, interrupt-to-waker integration, and no-heap `Pin` patterns.",
+      "bloom": "L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Async/Await",
+          "path": "../../03_advanced/01_async/01_async.md"
+        },
+        {
+          "title": "Pin 与 Unpin",
+          "path": "../../03_advanced/01_async/08_pin_unpin.md"
+        },
+        {
+          "title": "裸机与嵌入式中的 Async",
+          "path": "11_async_no_std_embedded.md"
+        },
+        {
+          "title": "no_std 同步原语",
+          "path": "15_no_std_synchronization_primitives.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "裸机中的 Async",
+          "path": "11_async_no_std_embedded.md"
+        },
+        {
+          "title": "嵌入式 RTOS 与安全关键框架对比",
+          "path": "26_embedded_rtos_and_safety_critical_frameworks.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/29_embedded_memory_layout_and_heap_safety.md",
+      "path": "06_ecosystem/05_systems_and_embedded/29_embedded_memory_layout_and_heap_safety.md",
+      "title": "",
+      "en": "Embedded Memory Layout and Heap Safety",
+      "summary": "Deep dive into bare-metal memory layout: linker-script sections, stack placement, heap-stack collision, stack overflow detection, `.noinit`, backup RAM, and scatter-file comparisons for ARM.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "裸机启动与链接脚本",
+          "path": "13_bare_metal_boot_linker_script.md"
+        },
+        {
+          "title": "嵌入式内存分配器",
+          "path": "16_embedded_memory_allocators.md"
+        },
+        {
+          "title": "no_std 启动流程与运行时",
+          "path": "27_no_std_startup_runtime_deep_dive.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "安全关键裸机操作系统",
+          "path": "19_safety_critical_bare_metal_os.md"
+        },
+        {
+          "title": "嵌入式调试与日志",
+          "path": "20_embedded_debugging_logging.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/30_misra_rust_safety_critical_guidelines.md",
+      "path": "06_ecosystem/05_systems_and_embedded/30_misra_rust_safety_critical_guidelines.md",
+      "title": "",
+      "en": "MISRA-Rust and Safety-Critical Embedded Guidelines",
+      "summary": "Mapping MISRA C/C++ guidelines to Rust, Ferrocene Language Specification restrictions, IEC 61508 / ISO 26262 process requirements, and Safety-Critical Rust Consortium activities for bare-metal embedded systems.",
+      "bloom": "L5-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "安全关键裸机操作系统",
+          "path": "19_safety_critical_bare_metal_os.md"
+        },
+        {
+          "title": "Rust 嵌入式系统开发",
+          "path": "03_embedded_systems.md"
+        },
+        {
+          "title": "no_std 同步原语",
+          "path": "15_no_std_synchronization_primitives.md"
+        },
+        {
+          "title": "嵌入式内存布局与堆安全",
+          "path": "29_embedded_memory_layout_and_heap_safety.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "认证工具链与认证包清单",
+          "path": "../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md"
+        },
+        {
+          "title": "嵌入式 RTOS 与安全关键框架对比",
+          "path": "26_embedded_rtos_and_safety_critical_frameworks.md"
         }
       ],
       "theorems": [],
@@ -15721,6 +16046,131 @@
       "related_crates": []
     },
     {
+      "id": "concept:06_ecosystem/11_domain_applications/26_zero_copy_parsing_in_rust.md",
+      "path": "06_ecosystem/11_domain_applications/26_zero_copy_parsing_in_rust.md",
+      "title": "",
+      "en": "Zero-Copy Parsing in Rust",
+      "summary": "Engineering patterns for zero-copy parsing in Rust: borrowed input lifetimes, nom/winnow combinator strategies, and serde zero-copy deserialization with real-world HTTP/log/binary protocol examples.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Ownership",
+          "path": "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
+        },
+        {
+          "title": "Borrowing",
+          "path": "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md"
+        },
+        {
+          "title": "Lifetimes",
+          "path": "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md"
+        },
+        {
+          "title": "零拷贝解析与序列化优化",
+          "path": "../../03_advanced/06_low_level_patterns/02_zero_copy_parsing.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "算法工程实践",
+          "path": "08_algorithm_engineering_practice.md"
+        },
+        {
+          "title": "网络协议实现",
+          "path": "../12_networking/03_custom_protocol_implementation.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/11_domain_applications/27_ownership_aware_algorithms.md",
+      "path": "06_ecosystem/11_domain_applications/27_ownership_aware_algorithms.md",
+      "title": "",
+      "en": "Ownership-Aware Algorithms in Rust",
+      "summary": "How Rust's ownership model shapes algorithmic interfaces: in-place mutation, Cow, borrow-checker-friendly two-pointer/sliding-window patterns, and index-based graph algorithms.",
+      "bloom": "L3-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Ownership",
+          "path": "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
+        },
+        {
+          "title": "Borrowing",
+          "path": "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md"
+        },
+        {
+          "title": "Collections & Slices",
+          "path": "../../01_foundation/05_collections/01_collections.md"
+        },
+        {
+          "title": "Smart Pointers",
+          "path": "../../02_intermediate/02_memory_management/04_smart_pointers.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "算法工程实践",
+          "path": "08_algorithm_engineering_practice.md"
+        },
+        {
+          "title": "高级数据结构 Rust 实现",
+          "path": "24_advanced_data_structures_implementation.md"
+        },
+        {
+          "title": "并行算法",
+          "path": "25_parallel_algorithms.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/11_domain_applications/28_unsafe_algorithm_invariants.md",
+      "path": "06_ecosystem/11_domain_applications/28_unsafe_algorithm_invariants.md",
+      "title": "",
+      "en": "Unsafe Algorithm Invariants in Rust",
+      "summary": "Engineering unsafe algorithm contracts in Rust: precondition/postcondition/invariant discipline, SAFETY comments, loop invariants in sorting/searching/graph algorithms, lock-free queue invariants, SIMD preconditions, and verification tool selection.",
+      "bloom": "L4-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Unsafe Rust",
+          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
+        },
+        {
+          "title": "Memory Model",
+          "path": "../../03_advanced/02_unsafe/06_memory_model.md"
+        },
+        {
+          "title": "并发",
+          "path": "../../03_advanced/00_concurrency/01_concurrency.md"
+        },
+        {
+          "title": "不安全算法的语义不变量",
+          "path": "../../04_formal/08_algorithm_semantics/04_unsafe_algorithm_invariants.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "算法工程实践",
+          "path": "08_algorithm_engineering_practice.md"
+        },
+        {
+          "title": "并行算法",
+          "path": "25_parallel_algorithms.md"
+        },
+        {
+          "title": "高级数据结构 Rust 实现",
+          "path": "24_advanced_data_structures_implementation.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:06_ecosystem/12_networking/01_advanced_network_protocols.md",
       "path": "06_ecosystem/12_networking/01_advanced_network_protocols.md",
       "title": "",
@@ -16288,6 +16738,37 @@
       "related_crates": []
     },
     {
+      "id": "concept:07_future/00_version_tracking/feature_domain_matrix_198.md",
+      "path": "07_future/00_version_tracking/feature_domain_matrix_198.md",
+      "title": "Rust 1.98.0 特性 × 领域反查矩阵",
+      "en": "Rust 1.98.0 Feature × Domain Reverse-Lookup Matrix",
+      "summary": "把 Rust 1.98.0 周期（含 1.98.0 beta 已冻结的稳定项与 RFC 已合并的实现跟踪项）从“版本页单点罗列”重构为“特性 × 9 领域”反查矩阵，标注每个特性的跨领域影响与对应核心 concept 页锚点；为 1.98.0 stable 发布后的语义注入检查提供可机器复核的映射基础。",
+      "bloom": "L4（分析）/ L5（评价：跨领域一致性（Coherence）判定）/ L7（版本治理）",
+      "rust_version": "**1.98.0+**（Edition 2024）",
+      "prerequisites": [
+        {
+          "title": "Rust 版本跟踪",
+          "path": "01_rust_version_tracking.md"
+        },
+        {
+          "title": "Rust 1.98.0 稳定特性",
+          "path": "rust_1_98_stabilized.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Rust 1.98+ 前沿特性预览",
+          "path": "rust_1_98_preview.md"
+        },
+        {
+          "title": "迁移判定树",
+          "path": "migration_198_decision_tree.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:07_future/00_version_tracking/migration_197_decision_tree.md",
       "path": "07_future/00_version_tracking/migration_197_decision_tree.md",
       "title": "Rust 1.97 兼容性迁移判定树",
@@ -16305,6 +16786,29 @@
         {
           "title": "Rust 1.97 前沿预览",
           "path": "rust_1_97_preview.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:07_future/00_version_tracking/migration_198_decision_tree.md",
+      "path": "07_future/00_version_tracking/migration_198_decision_tree.md",
+      "title": "Rust 1.98 兼容性迁移判定树",
+      "en": "Rust 1.98 Compatibility Migration Decision Trees",
+      "summary": "Executable decision trees that turn Rust 1.98.0's compatibility changes into \"am I affected → root cause → concrete migration step\" flows, covering four stabilized-in-beta scenarios: `PanicHookInfo` `'static` lifetime, mingw-w64 toolchain update, Solaris `File::lock` removal, and `-Zemscripten-wasm-eh` removal — every leaf is an actionable fix rather than a jump link.",
+      "bloom": "L3-L4（应用/分析：将版本变更映射到具体代码修复）",
+      "rust_version": "**1.98.0+ (Edition 2024)**",
+      "prerequisites": [
+        {
+          "title": "Rust 1.98 稳定特性",
+          "path": "rust_1_98_stabilized.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Rust 1.98+ 前沿预览",
+          "path": "rust_1_98_preview.md"
         }
       ],
       "theorems": [],
@@ -16634,9 +17138,9 @@
       "path": "07_future/00_version_tracking/rust_1_98_stabilized.md",
       "title": "Rust 1.98.0 稳定特性",
       "en": "Rust 1.98.0 Stabilized Features",
-      "summary": "Rust 1.98.0 于 2026-08-20 进入 stable 通道。本文档按官方发布笔记汇总已稳定的语言、标准库、Cargo、Rustdoc 与目标平台变更；2026-07-16 起基于 1.98.0 beta 实测预填充，稳定发布后最终核对。",
+      "summary": "Rust 1.98.0 (stable 2026-08-20) 完整稳定特性汇总：语言语义、编译器/平台、标准库 API、宏/derive 与兼容性变更，均附权威来源与迁移要点。",
       "bloom": "L2-L3",
-      "rust_version": "**1.98.0 stable**（预计 2026-08-20；当前基于 beta 分支实测）",
+      "rust_version": "**1.98.0 stable**（基于 beta/RC；预计 2026-08-20 发布）",
       "prerequisites": [
         {
           "title": "Rust 版本跟踪",

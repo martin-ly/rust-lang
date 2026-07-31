@@ -1,25 +1,28 @@
 # Rust 1.98.0 稳定特性
 
 > **EN**: Rust 1.98.0 Stabilized Features
-> **Summary**: Rust 1.98.0 于 2026-08-20 进入 stable 通道。本文档按官方发布笔记汇总已稳定的语言、标准库、Cargo、Rustdoc 与目标平台变更；2026-07-16 起基于 1.98.0 beta 实测预填充，稳定发布后最终核对。
+> **Summary**: Rust 1.98.0 (stable 2026-08-20) 完整稳定特性汇总：语言语义、编译器/平台、标准库 API、宏/derive 与兼容性变更，均附权威来源与迁移要点。
 >
 > **受众**: [专家]
 > **Bloom 层级**: L2-L3
 > **内容分级**: [综述级]
-> **权威来源**: 本文件为 `concept/` 权威页（Rust 1.98 稳定特性的 canonical 汇总；稳定生效日为 2026-08-20，此前以 [`rust_1_98_preview.md`](rust_1_98_preview.md) 为周期跟踪入口）。
-> **Rust 版本**: **1.98.0 stable**（预计 2026-08-20；当前基于 beta 分支实测）
-> **最后更新**: 2026-07-16
-> **状态**: 🧪 **beta 已冻结，stable 前预填充**；1.98.0 已于 2026-07-03 分支进入 beta
+> **权威来源**: 本文件为 `concept/` 权威页（Rust 1.98 稳定特性的 canonical 汇总；基于 1.98.0 beta/RC 国际来源最终核对，稳定生效日为 2026-08-20）。
+> **Rust 版本**: **1.98.0 stable**（基于 beta/RC；预计 2026-08-20 发布）
+> **最后更新**: 2026-07-31
+> **状态**: 🔄 基于 1.98.0 beta/RC 预填充；stable 正式发布后移除 beta 标注
 >
 > **权威来源**:
 >
 > · [Rust 1.98.0 Release Notes (beta)](https://releases.rs/docs/1.98.0/) ·
+> [Rust Release Notes](https://doc.rust-lang.org/beta/releases.html) ·
 > [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
 > [RFC Book](https://rust-lang.github.io/rfcs/) ·
 > [Rust Blog](https://blog.rust-lang.org/) ·
+> [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/) ·
+> [The Unstable Book](https://doc.rust-lang.org/nightly/unstable-book/) ·
 > [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) ·
-> [RustBelt (PLV MPI-SWS)](https://plv.mpi-sws.org/rustbelt/)
+> [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)
 >
 > **前置概念**: [Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.97 稳定特性](rust_1_97_stabilized.md)
 > **后置概念**: [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md) · [Rust 1.99+ 前沿特性预览](rust_1_99_preview.md)
@@ -28,224 +31,830 @@
 
 ## 0. 1.98 特性矩阵
 
-> **状态图例**：✅ = 已稳定（beta 实测或 release notes 确认） · 🧪 = RFC 已合并/实现跟踪中 · ⏳ = nightly/FCP 未排期
+> **状态图例**：✅ = 已稳定（beta/RC 实测或 release notes 跟踪 issue 确认） · ⚠ = 兼容性变更
+>
+> **主要领域**：Lang = 语言语义 · Compiler/Platform = 编译器与平台 · Std API = 标准库 API · Macro/Derive = 宏与 Derive · Compat = 兼容性与破坏性变更
 
-| # | 特性 | 1.98.0 状态 | 稳定后归属节 | 跟踪链接 |
+| # | 特性 | 主要领域 | 状态 | 权威来源 / 跟踪链接 / 相关概念 |
 |:---:|:---|:---|:---|:---|
-| 1 | `Panic[Hook]Info` 中 `Location<'_>` 生命周期改为 `'static` | ✅ stabilized in 1.98 beta | §1.1 | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
-| 2 | mingw-w64 C 工具链更新 | ✅ stabilized in 1.98 beta | §1.2 | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
-| 3 | 移除 Solaris 上 `File::lock` 实现（语义错误） | ✅ stabilized in 1.98 beta | §1.3 | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
-| 4 | 移除 `-Zemscripten-wasm-eh` | ✅ stabilized in 1.98 beta | §1.4 | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
-| 5 | Named `Fn` trait parameters（RFC #3955） | 🧪 RFC merged（2026-07-08） | §2 | [RFC Book](https://rust-lang.github.io/rfcs/3955-named-fn-trait-parameters.html) |
-| 6 | `#![register_{attribute,lint}_tool]`（RFC #3808） | 🧪 RFC merged（2026-06-10） | §2 | [RFC Book](https://rust-lang.github.io/rfcs/3808-register-tool.html) |
-| 7 | `todo!()` 不再触发 `unreachable_code`（RFC #3928） | 🧪 RFC merged（2026-06-25） | §2 | [RFC Book](https://rust-lang.github.io/rfcs/3928-todo-overreach.html) |
-| 8 | Public/Private Dependencies（RFC #3516） | 🧪 RFC merged，Cargo 实现跟踪中 | §2 | [RFC Book](https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html) |
-| 9 | Safety Tags（RFC #3842） | ⏳ FCP / 讨论中 | §3 | [rfcs#3842](https://github.com/rust-lang/rfcs/pull/3842) |
-| 10 | Pin Ergonomics（`&pin mut` / `&pin const`） | ⏳ nightly only | §4 | [预览页](../02_preview_features/14_pin_ergonomics_preview.md) |
-| 11 | Async Drop | ⏳ nightly only | §4 | [预览页](../02_preview_features/22_async_drop_preview.md) |
-| 12 | Return Type Notation（RTN） | ⏳ nightly only | §4 | [预览页](../02_preview_features/09_return_type_notation_preview.md) |
+| 1 | Implement fast path for `derive(PartialOrd)` when deriving `Ord` | Macro/Derive | ⚠ compat change | [PR #155598](https://github.com/rust-lang/rust/pull/155598) · [#159555](https://github.com/rust-lang/rust/issues/159555) · [derive traits](../../02_intermediate/00_traits/06_derive_traits.md) |
+| 2 | Windows-gnu targets now specify baseline tools versions | Compiler/Platform | ⚠ compat change | [PR #158020](https://github.com/rust-lang/rust/pull/158020) · [#158296](https://github.com/rust-lang/rust/issues/158296) · [target support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) |
+| 3 | Document panic in `RangeInclusive::from(legacy::RangeInclusive)` | Std API | ✅ stabilized | [PR #155421](https://github.com/rust-lang/rust/pull/155421) · [#158142](https://github.com/rust-lang/rust/issues/158142) · [range types](../../02_intermediate/04_types_and_conversions/01_range_types.md) |
+| 4 | On Emscripten the WASM exception handling ABI is now unconditionally used; `-Zemscripten-wasm-eh=false` removed | Compiler/Platform | ⚠ compat change | [PR #156928](https://github.com/rust-lang/rust/pull/156928) · [#158091](https://github.com/rust-lang/rust/issues/158091) · [target support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) |
+| 5 | Add temporary scope to `assert_eq!` and `assert_ne!` | Std API | ✅ stabilized | [PR #155739](https://github.com/rust-lang/rust/pull/155739) · [#158022](https://github.com/rust-lang/rust/issues/158022) · [macro patterns](../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md) |
+| 6 | Add `T: PartialEq` bounds to derived `StructuralPartialEq` impls | Std API | ✅ stabilized | [PR #156807](https://github.com/rust-lang/rust/pull/156807) · [#157865](https://github.com/rust-lang/rust/issues/157865) · [derive traits](../../02_intermediate/00_traits/06_derive_traits.md) |
+| 7 | `{f32,f64}::algebraic_{add,sub,mul,div,rem}` (also as `const fn`) | Std API | ✅ stabilized | [PR #157029](https://github.com/rust-lang/rust/pull/157029) · [#157864](https://github.com/rust-lang/rust/issues/157864) · [numerics](../../01_foundation/02_type_system/03_numerics.md) |
+| 8 | `str::strip_circumfix` / `strip_prefix`+`strip_suffix` 组合 API | Std API | ✅ stabilized | [Issue #147946](https://github.com/rust-lang/rust/issues/147946) · [#157850](https://github.com/rust-lang/rust/issues/157850) · [strings](../../01_foundation/06_strings_and_text/02_strings_and_encoding.md) |
+| 9 | `NonZero*` integer types: `from_str_radix` | Std API | ✅ stabilized | [Issue #152193](https://github.com/rust-lang/rust/issues/152193) · [#157847](https://github.com/rust-lang/rust/issues/157847) · [numerics](../../01_foundation/02_type_system/03_numerics.md) |
+| 10 | LoongArch CRC intrinsics | Std API | ✅ stabilized | [Issue #156908](https://github.com/rust-lang/rust/issues/156908) · [#157844](https://github.com/rust-lang/rust/issues/157844) · [target support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) |
+| 11 | `String::from_utf16le` / `from_utf16be` / `_lossy` variants | Std API | ✅ stabilized | [PR #116258](https://github.com/rust-lang/rust/pull/116258) · [#157822](https://github.com/rust-lang/rust/issues/157822) · [strings](../../01_foundation/06_strings_and_text/02_strings_and_encoding.md) |
+| 12 | `repr(transparent)` stricter rules for trivial layout fields | Compat | ⚠ compat change | [PR #155299](https://github.com/rust-lang/rust/pull/155299) · [#157730](https://github.com/rust-lang/rust/issues/157730) · [memory model](../../03_advanced/02_unsafe/06_memory_model.md) |
+| 13 | `UNSAFE_CODE` lint now consistently emitted for all unsafe attributes | Compat | ⚠ compat change | [PR #157201](https://github.com/rust-lang/rust/pull/157201) · [#157704](https://github.com/rust-lang/rust/issues/157704) · [unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [attributes](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) |
+| 14 | Fix parser error recovery treating `dyn` as a strict keyword | Lang | ✅ stabilized | [PR #157577](https://github.com/rust-lang/rust/pull/157577) · [#157579](https://github.com/rust-lang/rust/issues/157579) · [traits](../../02_intermediate/00_traits/01_traits.md) |
+| 15 | riscv: `d`, `e`, and `f` target_features stable in `cfg(target_feature = "?")` | Lang | ✅ stabilized | [PR #156188](https://github.com/rust-lang/rust/pull/156188) · [#157534](https://github.com/rust-lang/rust/issues/157534) · [target support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) |
+| 16 | Solaris: remove `File::lock` implementation (return "unsupported") | Compiler/Platform | ⚠ compat change | [PR #157509](https://github.com/rust-lang/rust/pull/157509) · [#157510](https://github.com/rust-lang/rust/issues/157510) · [target support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md) |
+| 17 | Lint on `core::ffi::c_void` as a return type | Lang | ✅ stabilized | [PR #156379](https://github.com/rust-lang/rust/pull/156379) · [#156853](https://github.com/rust-lang/rust/issues/156853) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) |
+| 18 | Correctly check whether types have equal size in `transmute()` when `repr` attributes are involved | Compat | ⚠ compat change | [PR #155418](https://github.com/rust-lang/rust/pull/155418) · [#156852](https://github.com/rust-lang/rust/issues/156852) · [memory model](../../03_advanced/02_unsafe/06_memory_model.md) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) |
+| 19 | Replace printables table with `unicode_data.rs` tables | Compiler/Platform | ✅ stabilized | [PR #155527](https://github.com/rust-lang/rust/pull/155527) · [#156782](https://github.com/rust-lang/rust/issues/156782) · [strings](../../01_foundation/06_strings_and_text/02_strings_and_encoding.md) |
+| 20 | Resolver: Batched Import Resolution | Lang | ✅ stabilized | [PR #145108](https://github.com/rust-lang/rust/pull/145108) · [#156651](https://github.com/rust-lang/rust/issues/156651) · [module system](../../02_intermediate/05_modules_and_visibility/01_module_system.md) |
+| 21 | Partially convert `ambiguous_glob_imports` lint into a hard error | Lang | ✅ stabilized | [PR #149195](https://github.com/rust-lang/rust/pull/149195) · [#156648](https://github.com/rust-lang/rust/issues/156648) · [module system](../../02_intermediate/05_modules_and_visibility/01_module_system.md) |
+| 22 | Reject arguments in attributes where no arguments are expected | Compat | ⚠ compat change | [PR #155193](https://github.com/rust-lang/rust/pull/155193) · [#156641](https://github.com/rust-lang/rust/issues/156641) · [attributes](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) |
+| 23 | Ensure `Send`/`Sync` is not implemented for `std::env::Vars{,Os}` | Std API | ✅ stabilized | [PR #155153](https://github.com/rust-lang/rust/pull/155153) · [#156521](https://github.com/rust-lang/rust/issues/156521) · [Send/Sync](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md) |
+| 24 | Add `invalid_runtime_symbol_definitions` (deny) and `suspicious_runtime_symbol_definitions` (warn) lints | Lang | ✅ stabilized | [PR #155521](https://github.com/rust-lang/rust/pull/155521) · [#156519](https://github.com/rust-lang/rust/issues/156519) · [FFI/linkage](../../03_advanced/04_ffi/03_linkage.md) |
+| 25 | Allow shortening lifetime of `&mut` when unsize-coercing, even in invariant position | Lang | ✅ stabilized | [PR #149219](https://github.com/rust-lang/rust/pull/149219) · [#156457](https://github.com/rust-lang/rust/issues/156457) · [lifetime](../../02_intermediate/01_ownership_borrowing_lifetimes/02_lifetimes.md) |
+| 26 | Trait object lifetime defaults resolve differently when fully elided in niche scenarios | Compat | ⚠ compat change | [PR #129543](https://github.com/rust-lang/rust/pull/129543) · [#156449](https://github.com/rust-lang/rust/issues/156449) · [lifetime](../../02_intermediate/01_ownership_borrowing_lifetimes/02_lifetimes.md) · [traits](../../02_intermediate/00_traits/01_traits.md) |
+| 27 | Ensure `Send`/`Sync` impl for `std::process::CommandArgs` | Std API | ✅ stabilized | [PR #155113](https://github.com/rust-lang/rust/pull/155113) · [#156335](https://github.com/rust-lang/rust/issues/156335) · [process](../../03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) · [Send/Sync](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md) |
+| 28 | Switch Windows thread-local destructors to FLS | Compiler/Platform | ✅ stabilized | [PR #148799](https://github.com/rust-lang/rust/pull/148799) · [#156334](https://github.com/rust-lang/rust/issues/156334) · [destructors](../../04_formal/05_rustc_internals/09_destructors.md) |
+| 29 | Document that `ManuallyDrop`'s `Box` interaction has been fixed | Std API | ✅ stabilized | [PR #155750](https://github.com/rust-lang/rust/pull/155750) · [#156042](https://github.com/rust-lang/rust/issues/156042) · [destructors](../../04_formal/05_rustc_internals/09_destructors.md) |
+| 30 | Syntactically reject where-bounds `Type = Type` and `Type == Type` | Compat | ⚠ compat change | [PR #153513](https://github.com/rust-lang/rust/pull/153513) · [#154816](https://github.com/rust-lang/rust/issues/154816) · [traits](../../02_intermediate/00_traits/01_traits.md) |
+| 31 | Change `Location<'_>` lifetime to `'static` in `PanicHookInfo` | Std API | ✅ stabilized | [PR #146561](https://github.com/rust-lang/rust/pull/146561) · [#148297](https://github.com/rust-lang/rust/issues/148297) · [panic](../../02_intermediate/03_error_handling/03_panic.md) |
 
 ---
 
-## 1. stabilized-in-beta 特性（4 项，随 1.98.0 稳定）
+## 1. 语言语义
 
-以下 4 项已随 1.98.0 beta 分支（2026-07-03 切分）合入，将于 2026-08-20 转 stable。
+### 1.1 riscv: `d`, `e`, and `f` target_features are now stable in `cfg(target_feature = "?")`
 
-### 1.1 `Panic[Hook]Info` 中 `Location<'_>` 生命周期改为 `'static`
-
-**状态**: ✅ stabilized in 1.98 beta（2026-08-20 转正） · **相关概念**: [panic 与 abort](../../01_foundation/08_error_handling/03_panic_and_abort.md) · [生命周期](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
-**来源**: [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/)
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [PR #156188](https://github.com/rust-lang/rust/pull/156188) · **release-notes 跟踪 issue**: [#157534](https://github.com/rust-lang/rust/issues/157534)
+**相关概念**: [target tier / platform support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md)
 
 #### 变更动机
 
-`std::panic::PanicHookInfo`（旧名 `PanicInfo`）的 `location()` 方法原先返回 `Option<&Location<'_>>`，其中 `Location` 的生命周期与 `PanicHookInfo` 借用绑定。这导致自定义 panic hook 难以把 `Location` 存储到 `'static` 上下文（如日志队列、全局状态）。
+RISC-V 目标此前允许在 `cfg(target_feature = "...")` 中探测大量 target feature，但 `d`（双精度浮点）、`e`（嵌入式 RV32E 基线）和 `f`（单精度浮点）长期处于不稳定状态。1.98.0 将这三个 feature 提升为可在稳定 `cfg` 中探测，使嵌入式与 HPC 目标能够在稳定 Rust 下根据实际硬件能力做条件编译。
 
-1.98.0 将返回类型改为 `Option<&'static Location<'static>>`，使 panic 位置信息本身具有 `'static` 生命周期，便于跨线程传递和长期存储。
+#### 语义影响
 
-#### 迁移影响
-
-- 已有代码若显式标注 `Location<'_>` 生命周期，需要更新为 `'static`。
-- 大多数仅打印 `location()` 的代码无需改动。
-
-#### 示例
-
-```rust,ignore
-use std::panic;
-
-panic::set_hook(Box::new(|info| {
-    if let Some(loc) = info.location() {
-        // Rust 1.98+: loc 是 &'static Location<'static>
-        log_static(loc);
-    }
-}));
-
-fn log_static(loc: &'static std::panic::Location<'static>) {
-    // 可安全存入全局日志队列
-    eprintln!("panic at {}:{}", loc.file(), loc.line());
-}
-```
+- 稳定 `cfg(target_feature = "d")`、`cfg(target_feature = "e")`、`cfg(target_feature = "f")` 现在可在 RISC-V target 上直接使用，无需 `#![feature(cfg_target_feature)]`。
+- 与已有的稳定 RISC-V feature（如 `m`、`a`、`c`）保持一致，构成完整的 RV32I/RV64I 基础扩展探测集。
+- 不改变代码生成，只影响条件编译的可用标识符集合。
 
 #### 迁移注意
 
-```rust,ignore
-// 假设旧代码显式依赖 Location<'_>
-fn old_hook(info: &std::panic::PanicHookInfo) {
-    let loc: Option<&std::panic::Location<'_>> = info.location();
-    // Rust 1.98+ 下 info.location() 实际返回 Option<&'static Location<'static>>，
-    // 此显式标注仍可通过编译，但无法把 loc 当作 'static 使用；
-    // 若需要 'static，直接省略显式生命周期让类型自行推断即可。
-}
-```
-
-### 1.2 mingw-w64 C 工具链更新
-
-**状态**: ✅ stabilized in 1.98 beta（2026-08-20 转正）
-**来源**: [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/)
-**相关概念**: [工具链](../../06_ecosystem/00_toolchain/01_toolchain.md) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md)
-
-#### 变更内容
-
-Rust 1.98.0 更新了 Windows GNU 目标（`x86_64-pc-windows-gnu`、`i686-pc-windows-gnu`）捆绑的 mingw-w64/GCC 工具链版本。主要影响：
-
-- 链接行为更贴近上游 mingw-w64 当前版本；
-- 异常模型（SEH vs DWARF）与 C++ ABI 兼容性改善；
-- 部分旧版 Windows 下的边缘行为可能变化。
-
-#### 迁移检查清单
-
-- [ ] 在 `x86_64-pc-windows-gnu` 目标上重新运行 CI；
-- [ ] 检查 C/C++ 依赖的链接是否仍通过；
-- [ ] 若使用自定义 mingw-w64 安装，确认版本不低于 Rust 捆绑版本。
-
-### 1.3 移除 Solaris 上 `File::lock` 实现（语义错误）
-
-**状态**: ✅ stabilized in 1.98 beta（2026-08-20 转正） · **相关概念**: [并发模式](../../03_advanced/00_concurrency/03_concurrency_patterns.md) · [进程与 IPC](../../03_advanced/08_process_ipc/01_process_model_and_lifecycle.md)
-**来源**: [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/)
-
-#### 变更细节
-
-Solaris/Illumos 上 `std::fs::File::lock` 的原实现基于 `fcntl`，但其语义与 Rust `File::lock` 要求的「进程级互斥锁」不一致（Solaris `fcntl` 锁在特定文件描述符/进程组合下行为有偏差）。为避免错误的安全保证，1.98.0 移除了 Solaris 上的该实现。
-
-#### 行为变化
-
-- 在 Solaris/Illumos 上，`File::lock` 现在会返回错误或不支持；
-- 依赖文件锁的 Solaris 程序需要改用平台特定 API（如 `flock` 包装）。
-
-#### 受影响平台
-
-- `sparcv9-sun-solaris`
-- `x86_64-pc-solaris`
-- 相关 Illumos 目标
-
-### 1.4 移除 `-Zemscripten-wasm-eh`
-
-**状态**: ✅ stabilized in 1.98 beta（2026-08-20 转正）
-**来源**: [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/)
-**相关概念**: [WebAssembly](../../06_ecosystem/11_domain_applications/03_webassembly.md) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md)
-
-#### 变更细节
-
-`-Zemscripten-wasm-eh` 是一个 nightly 编译器标志，用于在 `wasm32-unknown-emscripten` 目标上启用实验性的 WebAssembly 异常处理。随着上游 LLVM 和 Emscripten 对异常处理支持路径的变化，该标志已过时，1.98.0 正式移除。
-
-#### 迁移路径
-
-- 若仍在使用 `-Zemscripten-wasm-eh`，升级到 1.98.0 后编译器会报错「未知选项」；
-- 改用 Emscripten 原生的异常处理配置（如 `-sWASM_EXCEPTIONS` / `-sDISABLE_EXCEPTION_CATCHING`）；
-- 具体参数取决于 Emscripten 版本，建议查阅 [Emscripten 文档](https://emscripten.org/docs/introducing_emscripten/index.html)。
+- 如果之前使用 nightly feature 来探测这些 feature，可移除对应的 `#![feature(...)]`。
+- 在 `#[cfg(target_feature = "d")]` 分支中假设双精度浮点寄存器存在时，仍需确认目标 ABI 确实包含 `D` 扩展。
 
 ---
 
-## 2. RFC merged 跟踪项（实现中，未必随 1.98 稳定）
+### 1.2 Add deny-by-default `invalid_runtime_symbol_definitions` lint and warn-by-default `suspicious_runtime_symbol_definitions` lint
 
-> 以下为 RFC 已合并、实现与稳定化落在 1.98+ 周期的条目；稳定时逐一确认是否实际进入 1.98.0，未进入者留在 preview 页继续跟踪。
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [PR #155521](https://github.com/rust-lang/rust/pull/155521) · **release-notes 跟踪 issue**: [#156519](https://github.com/rust-lang/rust/issues/156519)
+**相关概念**: [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) · [linkage](../../03_advanced/04_ffi/03_linkage.md)
 
-### 2.1 Named `Fn` trait parameters（RFC #3955）
+#### 变更动机
 
-**状态**: 🧪 RFC merged（2026-07-08），实现跟踪中
-**来源**: [RFC Book](https://rust-lang.github.io/rfcs/3955-named-fn-trait-parameters.html)
-**相关概念**: [Closures](../../02_intermediate/04_types_and_conversions/02_closure_types.md) · [Async Closures](../../03_advanced/01_async/07_async_closures.md)
+Rust 运行时依赖 `memcmp`、`memset`、`memmove`、`strlen` 等 C 运行时符号。如果 crate 或依赖库用 `#[no_mangle]` 定义了同名符号，会无声地覆盖运行时实现，导致未定义行为或难以调试的崩溃。1.98.0 引入两个 lint：
 
-允许为 `Fn`/`FnMut`/`FnOnce` 家族 trait 的参数命名，改善高阶回调 API 的可读性与文档：
+- `invalid_runtime_symbol_definitions`：直接定义与运行时冲突的符号（默认 deny）。
+- `suspicious_runtime_symbol_definitions`：定义的符号签名/语义与运行时预期不符（默认 warn）。
 
-```rust,ignore
-// 未来可能的语法（以最终稳定版为准）
-trait Processor: Fn(input: i32) -> i32 {}
-```
+#### 语义影响
 
-### 2.2 `#![register_{attribute,lint}_tool]`（RFC #3808）
+- 覆盖核心运行时符号的代码现在会被 lint 捕获，而不是在链接或运行期才暴露问题。
+- lint 当前主要针对 `core` 级运行时符号；后续版本会扩展到更多运行时符号。
+-  deny-by-default 意味着命中后会导致编译失败，必须显式处理。
 
-**状态**: 🧪 RFC merged（2026-06-10），实现跟踪中
-**来源**: [RFC Book](https://rust-lang.github.io/rfcs/3808-register-tool.html)
-**相关概念**: [过程宏](../../03_advanced/03_proc_macros/01_macros.md) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md)
+#### 迁移注意
 
-允许 crate 注册第三方属性/lint 工具名称，避免与内置属性冲突。对 Rust for Linux、自定义 lint 框架等场景尤为重要。
-
-### 2.3 `todo!()` 不再触发 `unreachable_code`（RFC #3928）
-
-**状态**: 🧪 RFC merged（2026-06-25），实现跟踪中
-**来源**: [RFC Book](https://rust-lang.github.io/rfcs/3928-todo-overreach.html)
-**相关概念**: [panic 与 abort](../../01_foundation/08_error_handling/03_panic_and_abort.md)
-
-当前 `todo!()` 会同时触发 `unused` 和 `unreachable_code` lint。RFC #3928 修正为：`todo!()` 只保留 `unused`，不再错误地报 `unreachable_code`，因为它明确表达「尚未实现」，而非「不可达」。
-
-### 2.4 Public/Private Dependencies（RFC #3516）
-
-**状态**: 🧪 RFC merged，Cargo 实现跟踪中
-**来源**: [RFC Book](https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html)
-**相关概念**: [Cargo 依赖解析](../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md) · [SemVer](../../07_future/02_preview_features/27_cargo_semver_checks_preview.md)
-
-Cargo 将支持在依赖中标记 `public = true/false`，以区分「依赖类型出现在公共 API 中」与「仅内部使用」。这将提升 `cargo-semver-checks` 等工具的准确性，并可能改变 feature 统一策略。
+- 若自定义了 `memcmp`/`memset` 等用于 no-std 环境，需用 `#[allow(invalid_runtime_symbol_definitions)]` 并确保这是有意为之。
+- 检查 no-std / embedded 项目中对 C 运行时符号的自定义实现，确认签名严格匹配 libc 语义。
 
 ---
 
-## 3. FCP / 讨论中（1.98 窗口内观察）
+### 1.3 Allow shortening lifetime of `&mut` when unsize-coercing, even in an invariant position
 
-本节记录仍处于最终评论期或讨论阶段的特性：它们尚未进入 1.98.0 稳定窗口，但值得在版本跟踪中持续关注；后续状态变化将迁移到对应的 preview 页或下一份稳定特性汇总。
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [PR #149219](https://github.com/rust-lang/rust/pull/149219) · **release-notes 跟踪 issue**: [#156457](https://github.com/rust-lang/rust/issues/156457)
+**相关概念**: [lifetimes](../../02_intermediate/01_ownership_borrowing_lifetimes/02_lifetimes.md) · [coercions](../../02_intermediate/04_types_and_conversions/02_type_coercion.md)
 
-### 3.1 Safety Tags（RFC #3842）
+#### 变更动机
 
-**状态**: ⏳ FCP / 讨论中
-**来源**: [rfcs#3842](https://github.com/rust-lang/rfcs/pull/3842)
-**相关概念**: [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Safety Tags 预览](../02_preview_features/03_safety_tags_preview.md)
+在强制类型转换（unsized coercion）中，`&mut T` 到 `&mut dyn Trait` 以及通过 `CoerceUnsized` 的间接转换，此前不允许在逆变位置缩短生命周期。例如 `Cell<&'long mut i32>` 无法强制转换为 `Cell<&'short mut dyn Send>`。1.98.0 统一了 `&mut` 与 `&` 的生命周期缩短规则，使类型系统对智能指针和内部可变性包装器更一致。
 
-`#[safety(...)]` 属性旨在为 unsafe 相关构造提供机器可读的语义标注，供 Miri、Kani、BorrowSanitizer 等工具消费。RFC 仍在 FCP 阶段，1.98 稳定可能性低。
+#### 语义影响
 
----
+- 在不变（invariant）上下文中，unsized coercion 现在可以缩短 `&mut` 的生命周期。
+- 允许更多符合直觉的代码通过借用检查，例如把生命周期较长的 `Box<&'long mut T>` 传递给期望较短生命周期的接口。
+- 只放宽合法转换，不会引入新的别名规则违规。
 
-## 4. nightly only 跟踪项（1.98 不预期稳定）
+#### 迁移注意
 
-> 以下条目稳定化路径在 1.99+，本页仅登记状态行；跟踪正文维护在 preview 页与各自预览页。
-
-| 特性 | 状态 | 深度文档 |
-|:---|:---|:---|
-| Pin Ergonomics（`&pin mut` / `&pin const`） | nightly only | [14_pin_ergonomics_preview.md](../02_preview_features/14_pin_ergonomics_preview.md) |
-| Async Drop | nightly only | [22_async_drop_preview.md](../02_preview_features/22_async_drop_preview.md) |
-| Return Type Notation（RTN） | nightly only | [09_return_type_notation_preview.md](../02_preview_features/09_return_type_notation_preview.md) |
+- 绝大多数代码无需改动；这是放宽限制而非收紧。
+- 若之前通过显式 `transmute` 或重新借用绕过此限制，可替换为更安全的 coercion。
 
 ---
 
-## 5. 升级 1.98.0 检查清单
+### 1.4 Fix parser error recovery treating `dyn` as a strict keyword
 
-- [ ] 在 Windows GNU 目标上验证 mingw-w64 更新后的链接行为；
-- [ ] 若自定义 panic hook 存储 `Location`，确认生命周期升级后的类型；
-- [ ] 若目标平台包含 Solaris/Illumos，检查 `File::lock` 替代方案；
-- [ ] 若使用 Emscripten WASM 异常处理，移除 `-Zemscripten-wasm-eh`；
-- [ ] 运行 `cargo test --workspace` 与 `cargo clippy --workspace` 确认无新增 lint。
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [PR #157577](https://github.com/rust-lang/rust/pull/157577) · **release-notes 跟踪 issue**: [#157579](https://github.com/rust-lang/rust/issues/157579)
+**相关概念**: [traits / trait objects](../../02_intermediate/00_traits/01_traits.md)
+
+#### 变更动机
+
+`dyn` 在 Rust 2018 起是严格关键字，但某些语法错误恢复路径会把它当作普通标识符处理，导致诊断信息误导用户。PR #157577 修正了解析器错误恢复逻辑，使 `dyn` 在所有路径中都被识别为严格关键字。
+
+#### 语义影响
+
+- 修复解析器在错误恢复时的不一致行为，使 `dyn` 关键字的处理更统一。
+- 正确代码不受影响；错误代码会获得更准确的诊断信息。
+
+#### 迁移注意
+
+- 无迁移成本。若之前依赖解析器把 `dyn` 当作标识符的某些边缘行为，现在会收到更清晰的错误提示。
 
 ---
 
-## 6. 维护日志
+### 1.5 Resolver: Batched Import Resolution
 
-- **2026-07-14**: 建立骨架，迁移自 `rust_1_98_preview.md` 特性矩阵。
-- **2026-07-16**: 基于 1.98.0 beta 分支预填充 §1–§4；状态更新为「beta 已冻结，stable 前预填充」。
-- **2026-08-20（预计）**: 1.98.0 stable 发布后最终核对官方 release notes，移除 beta 标注。
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [PR #145108](https://github.com/rust-lang/rust/pull/145108) · **release-notes 跟踪 issue**: [#156651](https://github.com/rust-lang/rust/issues/156651)
+**相关概念**: [module system](../../02_intermediate/05_modules_and_visibility/01_module_system.md)
+
+#### 变更动机
+
+rustc 的名称解析器在处理大量 `use` 导入时采用逐项解析策略，导致复杂 crate 的解析阶段耗时显著。PR #145108 将导入解析改为批量处理：解析器先收集同一作用域内的所有导入声明，再统一进行决议，减少重复查找和中间状态。
+
+#### 语义影响
+
+- 编译时间：大型项目（尤其依赖大量 glob import 或深层模块树的项目）的 name-resolution 阶段可能明显变快。
+- 行为等价性：批量解析保持与旧算法相同的可见性和错误报告语义；只是执行顺序优化。
+- 对 rust-analyzer 也有收益，因为名称解析是 IDE 响应性的关键路径。
+
+#### 迁移注意
+
+- 纯内部编译器优化，源代码无需改动。
+- 若遇到解析顺序相关的边缘错误（理论上不应发生），请提交 regression issue。
 
 ---
 
-## 7. 来源与延伸阅读
+### 1.6 Partially convert `ambiguous_glob_imports` lint into a hard error
+
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [PR #149195](https://github.com/rust-lang/rust/pull/149195) · **release-notes 跟踪 issue**: [#156648](https://github.com/rust-lang/rust/issues/156648)
+**相关概念**: [module system](../../02_intermediate/05_modules_and_visibility/01_module_system.md)
+
+#### 变更动机
+
+`use some_module::*;` 可能一次性引入多个同名项，产生歧义。此前 `ambiguous_glob_imports` 以 lint 形式报告，部分场景被允许继续编译。1.98.0 将其中一部分（无法通过显式 `use` 消歧的最直接歧义）提升为硬错误，防止运行时意外绑定到错误符号。
+
+#### 语义影响
+
+- 特定形式的歧义 glob import 现在直接编译失败，而不是只产生 warning。
+- 未被纳入硬错误范围的歧义仍由 `ambiguous_glob_imports` lint 报告。
+- 提升范围基于 RFC 对名称解析清晰性的长期目标。
+
+#### 迁移注意
+
+- 避免使用 `use ...::*` 覆盖可能重名的模块。
+- 若触发错误，用显式 `use module::Item;` 替换 glob import，或重命名冲突项。
+
+---
+
+### 1.7 Lint on `core::ffi::c_void` as a return type
+
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [PR #156379](https://github.com/rust-lang/rust/pull/156379) · **release-notes 跟踪 issue**: [#156853](https://github.com/rust-lang/rust/issues/156853)
+**相关概念**: [FFI](../../03_advanced/04_ffi/01_rust_ffi.md)
+
+#### 变更动机
+
+`core::ffi::c_void` 与 `std::ffi::c_void` 在 FFI 中常被误用为“任意指针”返回类型。由于 `c_void` 是不完整类型，直接把它作为函数返回类型会丢失类型信息并增加 `transmute` 误用风险。新 lint 在 `extern "C"` 声明或 Rust 函数签名把 `c_void` 作为返回类型时发出警告。
+
+#### 语义影响
+
+- 编译器会建议使用具体指针类型（如 `*mut c_void`）替代裸 `c_void` 返回类型。
+- 不改变类型系统，只增加诊断引导。
+- 属于 warn-by-default lint，不会中断现有构建，除非项目开启 `-D warnings`。
+
+#### 迁移注意
+
+- 将 `fn foo() -> c_void` 改为 `fn foo() -> *mut c_void` 或 `*const c_void`。
+- 在需要兼容 C 头文件生成的绑定中，检查 bindgen 输出是否会产生此类签名。
+
+---
+
+### 1.8 Where-bounds of the form `Type = Type` and `Type == Type` are no longer syntactically allowed
+
+**状态**: ⚠ compatibility change in 1.98.0 · **来源**: [PR #153513](https://github.com/rust-lang/rust/pull/153513) · **release-notes 跟踪 issue**: [#154816](https://github.com/rust-lang/rust/issues/154816)
+**相关概念**: [traits / generic bounds](../../02_intermediate/00_traits/01_traits.md)
+
+#### 变更动机
+
+Rust 的 where 子句从未支持等式约束（equality predicate），但解析器此前错误地允许 `where T = U` 或 `where T == U` 的写法，并在后续阶段才拒绝。PR #153513 将这类等式谓词语法直接在解析层拒绝，产生更清晰的错误信息。
+
+#### 语义影响
+
+- `where T = U` 和 `where T == U` 现在会在解析阶段报错，而不是延迟到类型检查。
+- 正确的关联类型等式约束仍通过 `where T::Assoc = U` 的关联类型语法表达（注意这是已经支持的关联类型等式，不是普通类型等式）。
+
+#### 迁移注意
+
+- 若代码中误写过 `where T = U`，改为正确的关联类型约束或重设计 trait bound。
+- 宏生成代码中若拼接出此类 where 子句，需要修正模板。
+
+---
+
+### 1.9 If fully elided, lifetime bounds of trait object types may now resolve differently or even get rejected
+
+**状态**: ⚠ compatibility change in 1.98.0 · **来源**: [PR #129543](https://github.com/rust-lang/rust/pull/129543) · **release-notes 跟踪 issue**: [#156449](https://github.com/rust-lang/rust/issues/156449)
+**相关概念**: [lifetimes](../../02_intermediate/01_ownership_borrowing_lifetimes/02_lifetimes.md) · [trait objects](../../02_intermediate/00_traits/01_traits.md)
+
+#### 变更动机
+
+trait object 的默认生命周期规则存在历史不一致：某些完全省略生命周期的写法会根据上下文推断出不同的默认生命周期，导致代码在不同rustc版本或不同上下文下行为不同。PR #129543 使 trait reference 和关联类型路径正确地触发 trait object 生命周期默认值，修复了这些边缘情况。
+
+#### 语义影响
+
+- 极少数完全省略生命周期的 trait object 类型现在可能推断出更严格的边界，或被直接拒绝。
+- 修复了 `dyn Trait` 在复杂路径（如关联类型路径）下的生命周期推断不一致问题。
+- 对显式写出生命周期的代码没有影响。
+
+#### 迁移注意
+
+- 为所有公开的 `dyn Trait` 参数和字段显式标注生命周期，例如 `dyn Trait + 'static`。
+- 若升级后出现生命周期错误，检查是否依赖了隐式默认生命周期的边缘推断。
+
+---
+
+## 2. 编译器、平台与工具链
+
+### 2.1 Windows-gnu targets now specify baseline tools versions
+
+**状态**: ⚠ compatibility change in 1.98.0 · **来源**: [PR #158020](https://github.com/rust-lang/rust/pull/158020) · **release-notes 跟踪 issue**: [#158296](https://github.com/rust-lang/rust/issues/158296)
+**相关概念**: [target tier / platform support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md)
+
+#### 变更动机
+
+Windows GNU 目标（如 `x86_64-pc-windows-gnu`）长期依赖用户本地安装的 mingw-w64 工具链，版本碎片化导致链接错误、ABI 不兼容和 CI 不稳定。1.98.0 为这些目标指定了最低 mingw-w64 工具链版本基线，使编译器可以依赖一致的 CRT 和链接器能力。
+
+#### 语义影响
+
+- 官方构建与 target spec 中声明了最低 mingw-w64/gcc/binutils 版本。
+- 旧版 mingw-w64 环境可能无法继续编译或链接 Windows-gnu 目标。
+- 有助于逐步启用新的 Windows 平台特性（如更现代的异常处理）。
+
+#### 迁移注意
+
+- 在 Windows GNU 环境构建时，升级到 Rust 推荐的 mingw-w64 版本（通常随 rustup 组件或 MSYS2/WinLibs 提供）。
+- CI 中固定 `x86_64-pc-windows-gnu` 镜像的 mingw 版本，避免低于基线。
+
+---
+
+### 2.2 On Emscripten the WASM exception handling ABI is now unconditionally used
+
+**状态**: ⚠ compatibility change in 1.98.0 · **来源**: [PR #156928](https://github.com/rust-lang/rust/pull/156928) · **release-notes 跟踪 issue**: [#158091](https://github.com/rust-lang/rust/issues/158091)
+**相关概念**: [target tier / platform support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md)
+
+#### 变更动机
+
+Emscripten 此前同时支持 WebAssembly 异常处理（WASM EH）和旧的 JavaScript 异常处理两套 ABI，并通过 `-Zemscripten-wasm-eh=false` 开关回退。随着浏览器对 WASM EH 的支持成熟，1.98.0 移除回退开关，统一使用 WASM EH ABI。
+
+#### 语义影响
+
+- `-Zemscripten-wasm-eh=false` 被移除；任何使用都会报错。
+- 生成的 WASM 模块更小、性能更好，且与 Emscripten 默认行为一致。
+- 需要部署环境的 JavaScript 运行时支持 WASM exception handling proposal。
+
+#### 迁移注意
+
+- 从构建脚本和 CI 配置中移除 `-Zemscripten-wasm-eh=false`。
+- 若目标环境不支持 WASM EH（如旧版 Node.js 或浏览器），需要升级运行时或重新评估部署目标。
+
+---
+
+### 2.3 Solaris: remove `File::lock` implementation, it has the wrong semantics
+
+**状态**: ⚠ compatibility change in 1.98.0 · **来源**: [PR #157509](https://github.com/rust-lang/rust/pull/157509) · **release-notes 跟踪 issue**: [#157510](https://github.com/rust-lang/rust/issues/157510)
+**相关概念**: [target tier / platform support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md)
+
+#### 变更动机
+
+Solaris/Illumos 上 `std::fs::File::lock` 的实现使用了错误的底层原语，导致文件锁语义与其他平台不一致。1.98.0 移除该实现，使 `File::lock` 在这些平台上返回 `ErrorKind::Unsupported`，避免静默的语义错误。
+
+#### 语义影响
+
+- 在 Solaris/Illumos 上，`File::lock` 现在返回 `Unsupported` 错误，而不是提供不可靠的锁。
+- 其他平台的 `File::lock` 行为不变。
+
+#### 迁移注意
+
+- 若项目面向 Solaris/Illumos 并依赖 `File::lock`，需要改用平台特定的 `fcntl`  advisory lock 或重新设计并发控制。
+- 考虑通过 `std::io::ErrorKind::Unsupported` 检测并回退到替代方案。
+
+---
+
+### 2.4 Replace printables table with `unicode_data.rs` tables
+
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [PR #155527](https://github.com/rust-lang/rust/pull/155527) · **release-notes 跟踪 issue**: [#156782](https://github.com/rust-lang/rust/issues/156782)
+**相关概念**: [strings / Unicode](../../01_foundation/06_strings_and_text/02_strings_and_encoding.md)
+
+#### 变更动机
+
+`core` 中用于 `char::is_ascii_graphic` 等判断的 "printables table" 是手工维护的 ASCII 可打印字符表，与 Unicode 标准不同步且容易出错。PR #155527 用基于官方 Unicode 数据的 `unicode_data.rs` 表替换它，使字符分类与 Unicode 版本一致。
+
+#### 语义影响
+
+- 字符可打印性、空白、控制字符等分类现在由 Unicode 数据驱动。
+- 行为更标准、可维护，并为未来支持更广泛的 Unicode 属性奠定基础。
+- 对 ASCII 范围的可打印字符判断通常不变；边缘控制字符的分类可能更精确。
+
+#### 迁移注意
+
+- 如果代码依赖 `char` 相关函数对特定控制字符的精确分类，请重新核对 Unicode 15/16 定义。
+- 这主要是内部实现变更，大多数用户无感知。
+
+---
+
+### 2.5 Switch the destructors implementation for thread locals on Windows to use FLS
+
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [PR #148799](https://github.com/rust-lang/rust/pull/148799) · **release-notes 跟踪 issue**: [#156334](https://github.com/rust-lang/rust/issues/156334)
+**相关概念**: [destructors](../../04_formal/05_rustc_internals/09_destructors.md) · [Send/Sync](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md)
+
+#### 变更动机
+
+Windows 上 `thread_local!` 析构此前使用 TLS 回调机制，在动态加载库（DLL）和纤程（fiber）场景下存在析构顺序和重复析构问题。PR #148799 改为使用 Fiber Local Storage（FLS）作为底层析构机制，与 Windows 线程生命周期绑定更可靠。
+
+#### 语义影响
+
+- Windows 上线程局部存储的析构时序和 DLL 卸载行为更一致。
+- 解决部分 fiber 场景下 TLS destructor 不被调用或被重复调用的问题。
+- 不影响 Linux/macOS 等平台。
+
+#### 迁移注意
+
+- 源代码通常无需改动。
+- 若 Windows 程序深度依赖 TLS destructor 的精确时序，应在 1.98.0 下重新测试， especially around DLL unload paths.
+
+---
+
+## 3. 标准库 API 稳定
+
+### 3.1 Document panic in `RangeInclusive::from(legacy::RangeInclusive)`
+
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [PR #155421](https://github.com/rust-lang/rust/pull/155421) · **release-notes 跟踪 issue**: [#158142](https://github.com/rust-lang/rust/issues/158142)
+**相关概念**: [range types](../../02_intermediate/04_types_and_conversions/01_range_types.md)
+
+#### 变更动机
+
+`RangeInclusive::from` 转换旧版 `std::ops::RangeInclusive`（即 `legacy::RangeInclusive`）在起始值大于结束值时会 panic，但这一行为此前未在文档中明确说明。PR #155421 补全了 panic 条件文档，使 API 契约透明。
+
+#### 语义影响
+
+- 仅文档更新，不改变运行行为。
+- 明确 `RangeInclusive::from(legacy::RangeInclusive { start, end })` 在 `start > end` 时 panic。
+
+#### 迁移注意
+
+- 检查调用 `RangeInclusive::from` 的位置，确保传入的范围满足 `start <= end`。
+- 若范围可能为空，使用显式构造 `start..=end` 并在转换前校验。
+
+---
+
+### 3.2 Add temporary scope to `assert_eq!` and `assert_ne!`
+
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [PR #155739](https://github.com/rust-lang/rust/pull/155739) · **release-notes 跟踪 issue**: [#158022](https://github.com/rust-lang/rust/issues/158022)
+**相关概念**: [macro patterns](../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md)
+
+#### 变更动机
+
+`assert_eq!(left, right)` 和 `assert_ne!(left, right)` 在展开时会将 `left` 和 `right` 绑定到临时变量，这些临时变量的作用域此前延伸到整个断言表达式。1.98.0 为这两个宏引入临时作用域，使比较操作产生的中间值在断言消息格式化后尽快释放，减少引用持有时间。
+
+#### 语义影响
+
+- 宏展开中用于保存 `left`/`right` 的临时变量拥有更严格的作用域。
+- 解决某些场景下临时值存活过长导致的借用或析构顺序问题。
+- 对大多数断言代码行为等价；只影响依赖临时值精确作用域的极端边缘代码。
+
+#### 迁移注意
+
+- 若自定义宏展开后依赖 `assert_eq!` 内部临时变量的生命周期，需要重新评估。
+- 普通使用无需改动。
+
+---
+
+### 3.3 Add `T: PartialEq` bounds to derived `StructuralPartialEq` impls
+
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [PR #156807](https://github.com/rust-lang/rust/pull/156807) · **release-notes 跟踪 issue**: [#157865](https://github.com/rust-lang/rust/issues/157865)
+**相关概念**: [derive traits](../../02_intermediate/00_traits/06_derive_traits.md)
+
+#### 变更动机
+
+`#[derive(PartialEq)]` 自动实现的 `StructuralPartialEq` trait（用于 `const` 比较和模式匹配）此前对泛型参数没有 `PartialEq` bound，导致某些常量求值场景下出现不一致。1.98.0 为 derived `StructuralPartialEq` impl 增加 `T: PartialEq` bound，使其与 `PartialEq` 派生实现保持一致。
+
+#### 语义影响
+
+- 派生的 `StructuralPartialEq` 现在要求泛型字段类型实现 `PartialEq`。
+- 这可能会暴露此前被掩盖的缺少 bound 错误，特别是在 `const` 比较或 `match` 结构比较中。
+- 语义更正确，减少了 trait bound 不一致导致的编译器内部错误。
+
+#### 迁移注意
+
+- 若结构体/枚举有泛型字段且依赖 `StructuralPartialEq`，为相应类型参数添加 `T: PartialEq` bound。
+- 检查 `const` 上下文中的相等比较是否因此产生新的 bound 要求。
+
+---
+
+### 3.4 `{f32,f64}::algebraic_{add,sub,mul,div,rem}`
+
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [PR #157029](https://github.com/rust-lang/rust/pull/157029) · **release-notes 跟踪 issue**: [#157864](https://github.com/rust-lang/rust/issues/157864)
+**相关概念**: [numerics](../../01_foundation/02_type_system/03_numerics.md)
+
+#### 变更动机
+
+浮点运算的严格 IEEE-754 语义在某些高性能场景下限制了优化空间。`algebraic_add` / `algebraic_sub` / `algebraic_mul` / `algebraic_div` / `algebraic_rem` 系列方法允许编译器将运算当作代数运算进行重排和优化（如利用结合律），同时保留 NaN/无穷大等边界行为的基本契约。
+
+#### 语义影响
+
+- 新增 `f32` 和 `f64` 上的 `algebraic_*` 方法，并在 `const fn` 上下文中可用。
+- 编译器可在这些调用点进行更激进的浮点优化，可能改变中间舍入顺序。
+- 结果仍满足 `x algebraic_op y` 的数学关系，但可能与传统 `x + y` 的逐位结果不同。
+
+#### 迁移注意
+
+- 仅在性能关键且可接受非确定性舍入顺序的场景使用。
+- 不要用于需要按位一致或严格 IEEE 结果的场景（如序列化、加密校验和、确定性仿真）。
+
+---
+
+### 3.5 `str::strip_circumfix`
+
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [Issue #147946](https://github.com/rust-lang/rust/issues/147946) · **release-notes 跟踪 issue**: [#157850](https://github.com/rust-lang/rust/issues/157850)
+**相关概念**: [strings](../../01_foundation/06_strings_and_text/02_strings_and_encoding.md)
+
+#### 变更动机
+
+字符串处理中经常需要同时移除前缀和后缀（如括号、引号、标记符号）。单独调用 `strip_prefix` 和 `strip_suffix` 会创建多个临时结果。`strip_circumfix` 提供一次性检查并移除成对前缀后缀的能力，使代码更简洁。
+
+#### 语义影响
+
+- 新增 `str::strip_circumfix` 方法（具体签名以稳定文档为准，通常接受前缀和后缀 pattern）。
+- 仅当字符串同时以指定前缀和后缀开头/结尾时才返回 `Some(&str)`。
+
+#### 迁移注意
+
+- 可替换手写的前后缀剥离逻辑，减少临时字符串分配。
+- 注意前缀和后缀是独立匹配，不是对称括号语义；如需嵌套括号解析仍需专用解析器。
+
+---
+
+### 3.6 `NonZero*` integer types: `from_str_radix`
+
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [Issue #152193](https://github.com/rust-lang/rust/issues/152193) · **release-notes 跟踪 issue**: [#157847](https://github.com/rust-lang/rust/issues/157847)
+**相关概念**: [numerics](../../01_foundation/02_type_system/03_numerics.md)
+
+#### 变更动机
+
+`NonZeroU32`、`NonZeroI64` 等非零整数类型此前缺少按 radix 解析的构造函数，用户需要先解析为原始整数再调用 `NonZero::new`，无法直接获得解析错误信息。1.98.0 为所有 `NonZero*` 类型稳定 `from_str_radix`。
+
+#### 语义影响
+
+- 新增 `NonZeroU32::from_str_radix(s, radix)` 等方法，返回 `Result<Self, ParseIntError>`。
+- 零值会作为解析错误返回，无需额外检查。
+
+#### 迁移注意
+
+- 替换 `NonZero::new(s.parse()?)?` 模式为 `NonZeroU32::from_str_radix(s, 10)?`。
+- 注意错误类型与 `parse::<u32>()` 一致，便于统一处理。
+
+---
+
+### 3.7 LoongArch CRC intrinsics
+
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [Issue #156908](https://github.com/rust-lang/rust/issues/156908) · **release-notes 跟踪 issue**: [#157844](https://github.com/rust-lang/rust/issues/157844)
+**相关概念**: [target support](../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md)
+
+#### 变更动机
+
+LoongArch 架构的 CRC 校验指令此前没有稳定的 stdarch intrinsic 封装。1.98.0 将相关 CRC 计算 intrinsic 稳定化，使在 LoongArch 目标上进行高效 CRC32/CRC 校验的代码可以在 stable Rust 中编写。
+
+#### 语义影响
+
+- 新增 `core::arch::loongarch64::*` 下与 CRC 相关的稳定 intrinsic。
+- 需要目标 CPU 支持对应 CRC 扩展，并通过 `target_feature` 或编译选项启用。
+
+#### 迁移注意
+
+- 仅在 `loongarch64-*` 目标使用，并通过 `cfg(target_arch = "loongarch64")` 隔离平台相关代码。
+- 在运行期检测目标 feature，避免在不支持 CRC 扩展的硬件上触发非法指令。
+
+---
+
+### 3.8 `String::from_utf16le` / `from_utf16be` / `_lossy` variants
+
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [PR #116258](https://github.com/rust-lang/rust/pull/116258) · **release-notes 跟踪 issue**: [#157822](https://github.com/rust-lang/rust/issues/157822)
+**相关概念**: [strings / encoding](../../01_foundation/06_strings_and_text/02_strings_and_encoding.md)
+
+#### 变更动机
+
+`String::from_utf16` 假设输入为小端 UTF-16。处理 Windows API、网络协议或文件格式时经常需要显式指定 endianness。1.98.0 稳定显式 endian 版本：`from_utf16le`、`from_utf16be` 以及对应的 `_lossy` 变体。
+
+#### 语义影响
+
+- 新增方法：`String::from_utf16le`、`String::from_utf16be`、`String::from_utf16le_lossy`、`String::from_utf16be_lossy`。
+- 语义与 `from_utf16` 相同，只是按显式字节序解码，无需调用者手动交换字节。
+
+#### 迁移注意
+
+- 替换手动的 UTF-16 字节交换 + `from_utf16` 调用。
+- `_lossy` 变体在非法序列处替换为 `U+FFFD`，与 `from_utf16_lossy` 行为一致。
+
+---
+
+### 3.9 Ensure `Send`/`Sync` is not implemented for `std::env::Vars{,Os}`
+
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [PR #155153](https://github.com/rust-lang/rust/pull/155153) · **release-notes 跟踪 issue**: [#156521](https://github.com/rust-lang/rust/issues/156521)
+**相关概念**: [Send/Sync](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md) · [Send/Sync boundaries](../../03_advanced/00_concurrency/04_send_sync_boundaries.md)
+
+#### 变更动机
+
+`std::env::Vars` 和 `std::env::VarsOs` 在底层持有进程环境变量的迭代状态，这些状态不是线程安全的。此前由于实现细节，它们意外实现了 `Send` 和/或 `Sync`，允许跨线程共享。1.98.0 显式移除这些实现，修复自动 trait 边界。
+
+#### 语义影响
+
+- `std::env::Vars` 和 `std::env::VarsOs` 不再实现 `Send`/`Sync`。
+- 任何将环境变量迭代器发送到其他线程或共享引用的代码现在会编译失败。
+
+#### 迁移注意
+
+- 在跨线程使用前将环境变量收集到 `Vec<(String, String)>` 等线程安全集合中。
+- 检查依赖 `std::env::vars()` 在 async 或线程池中使用的代码。
+
+---
+
+### 3.10 Ensure `Send`/`Sync` impl for `std::process::CommandArgs`
+
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [PR #155113](https://github.com/rust-lang/rust/pull/155113) · **release-notes 跟踪 issue**: [#156335](https://github.com/rust-lang/rust/issues/156335)
+**相关概念**: [process model](../../03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) · [Send/Sync](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md)
+
+#### 变更动机
+
+`std::process::CommandArgs` 此前缺少显式的 `Send`/`Sync` 实现声明，导致在某些平台或编译器分析下无法跨线程传递命令参数迭代器。PR #155113 显式实现 `Send` 和 `Sync`，前提是底层数据满足条件。
+
+#### 语义影响
+
+- `CommandArgs` 现在保证实现 `Send`/`Sync`（只要内部 `OsString` 等类型满足）。
+- 允许在异步或线程池上下文中共享命令参数。
+
+#### 迁移注意
+
+- 对已有代码通常是放宽限制，无需改动。
+- 若之前依赖 `CommandArgs` 不实现 `Send`/`Sync` 的某些边界情况，需重新评估。
+
+---
+
+### 3.11 Document that `ManuallyDrop`'s `Box` interaction has been fixed
+
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [PR #155750](https://github.com/rust-lang/rust/pull/155750) · **release-notes 跟踪 issue**: [#156042](https://github.com/rust-lang/rust/issues/156042)
+**相关概念**: [destructors](../../04_formal/05_rustc_internals/09_destructors.md) · [interior mutability](../../02_intermediate/02_memory_management/02_interior_mutability.md)
+
+#### 变更动机
+
+`ManuallyDrop<Box<T>>` 与 `ManuallyDrop::drop` 的交互存在历史问题：在某些路径下，`Box` 的析构语义与 `ManuallyDrop` 的显式控制产生冲突。PR #155750 修复了该问题，并在文档中明确 `ManuallyDrop` 与 `Box` 的正确用法。
+
+#### 语义影响
+
+- 修复了 `ManuallyDrop::drop(&mut ManuallyDrop<Box<T>>)` 场景下的双重释放/泄漏风险。
+- 文档更新明确了如何安全地手动释放 `ManuallyDrop<Box<T>>`。
+
+#### 迁移注意
+
+- 若代码手动管理 `ManuallyDrop<Box<T>>` 的析构，请对照新文档检查是否使用了推荐模式。
+- 推荐做法：先取出 `Box`，再 drop：`let b = unsafe { ManuallyDrop::take(&mut mb) }; drop(b);`。
+
+---
+
+### 3.12 Change `Location<'_>` lifetime to `'static` in `PanicHookInfo`
+
+**状态**: ✅ stabilized in 1.98.0 · **来源**: [PR #146561](https://github.com/rust-lang/rust/pull/146561) · **release-notes 跟踪 issue**: [#148297](https://github.com/rust-lang/rust/issues/148297)
+**相关概念**: [panic / error handling](../../02_intermediate/03_error_handling/03_panic.md)
+
+#### 变更动机
+
+`std::panic::PanicHookInfo`（以及旧的 `PanicInfo`）通过 `location()` 返回 `&Location<'_>`，其生命周期与 panic 信息本身绑定。由于 panic hook 经常被存储或异步处理，这种绑定导致生命周期受限。PR #146561 将 `Location` 的生命周期改为 `'static`，因为 panic 位置信息本质上是编译期常量字符串。
+
+#### 语义影响
+
+- `PanicHookInfo::location` 现在返回 `&'static Location<'static>`。
+- panic hook 可以更安全地保存 `Location` 引用，无需担心其生命周期。
+- 这是 API 签名变更，可能破坏自定义 panic hook 的类型签名。
+
+#### 迁移注意
+
+- 更新自定义 panic hook 的签名以匹配新的 `'static` 生命周期。
+- 若之前对 `Location` 生命周期做了不必要的人工延长，可简化代码。
+
+---
+
+## 4. 宏与 Derive
+
+### 4.1 Implement fast path for `derive(PartialOrd)` when deriving `Ord`
+
+**状态**: ⚠ compatibility change in 1.98.0 · **来源**: [PR #155598](https://github.com/rust-lang/rust/pull/155598) · **release-notes 跟踪 issue**: [#159555](https://github.com/rust-lang/rust/issues/159555)
+**相关概念**: [derive traits](../../02_intermediate/00_traits/06_derive_traits.md)
+
+#### 变更动机
+
+当同时为类型派生 `PartialOrd` 和 `Ord` 时，`#[derive(PartialOrd)]` 生成的实现现在会识别出存在 `Ord` 实现，并走一条快速路径：直接调用 `Ord::cmp` 再比较结果。这消除了冗余的 `partial_cmp` 调用，提升运行时性能。
+
+#### 语义影响
+
+- 派生的 `PartialOrd` 在同时存在派生 `Ord` 时，内部会调用 `cmp`。
+- 如果类型的 `PartialOrd` 和 `Ord` 实现不一致（例如手动实现的 `Ord` 与派生的 `PartialOrd` 行为不同），快速路径会暴露这种不一致，导致排序结果改变。
+
+#### 迁移注意
+
+- 确保同时派生 `PartialOrd` 和 `Ord` 的类型，其语义完全一致。
+- 若手动实现了其中一个 trait，建议同时手动实现另一个，或避免混用派生和手写实现。
+- 受影响的代码通常表现为排序/比较结果变化，可通过单元测试快速发现。
+
+---
+
+## 5. 兼容性与破坏性变更
+
+### 5.1 `repr(transparent)` stricter rules for trivial layout fields
+
+**状态**: ⚠ compatibility change in 1.98.0 · **来源**: [PR #155299](https://github.com/rust-lang/rust/pull/155299) · **release-notes 跟踪 issue**: [#157730](https://github.com/rust-lang/rust/issues/157730)
+**相关概念**: [memory model / layout](../../03_advanced/02_unsafe/06_memory_model.md)
+
+#### 变更动机
+
+`#[repr(transparent)]` 要求类型只有一个非零大小（non-ZST）字段，其余字段必须具有 "trivial" 布局。此前对 "trivial" 的定义过于宽松，允许 `repr(C)` 类型、私有字段类型和 `#[non_exhaustive]` 类型作为忽略字段。1.98.0 收紧规则，这些类型不再被视为 trivial，因为它们的外部布局可能随编译器或版本变化。
+
+#### 语义影响
+
+- `repr(C)` 类型、带私有字段的类型、`#[non_exhaustive]` 类型不能再用作 `repr(transparent)` 的忽略字段。
+- 之前被编译器警告的 `repr_transparent_non_zst_fields` 场景现在提升为硬错误。
+
+#### 迁移注意
+
+- 检查所有 `#[repr(transparent)]` 类型，确保只有一个非 ZST 字段，其余字段是明确已知的 ZST（如 `PhantomData`）。
+- 若需要包装多个字段，考虑 `repr(C)` 并显式管理布局，或只用 `PhantomData<T>` 作为标记字段。
+
+---
+
+### 5.2 `UNSAFE_CODE` lint now consistently emitted for all unsafe attributes
+
+**状态**: ⚠ compatibility change in 1.98.0 · **来源**: [PR #157201](https://github.com/rust-lang/rust/pull/157201) · **release-notes 跟踪 issue**: [#157704](https://github.com/rust-lang/rust/issues/157704)
+**相关概念**: [unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [attributes](../../01_foundation/09_macros_basics/01_attributes_and_macros.md)
+
+#### 变更动机
+
+`#![deny(unsafe_code)]` 用于声明 crate 不使用 `unsafe`。此前某些 unsafe attribute（如 `#[no_mangle]` 在某些上下文）不会被 `UNSAFE_CODE` lint 捕获，导致 "无 unsafe" 声明不可靠。1.98.0 将 lint 逻辑前移到 attribute 解析阶段，确保所有 unsafe attribute 都被一致地计数。
+
+#### 语义影响
+
+- 所有需要在 `unsafe(...)` 包装中的 attribute 现在都会触发 `UNSAFE_CODE` lint。
+- 使用 `#![deny(unsafe_code)]` 的 crate 若包含这些 attribute，将直接编译失败。
+
+#### 迁移注意
+
+- 审查 `#![deny(unsafe_code)]` crate 中使用的 attribute，确认哪些是 "unsafe attribute"。
+- 若确实需要这些 attribute，可局部 `#[allow(unsafe_code)]` 并附加说明。
+
+---
+
+### 5.3 Correctly check whether types have equal size in `transmute()` when `repr` attributes are involved
+
+**状态**: ⚠ compatibility change in 1.98.0 · **来源**: [PR #155418](https://github.com/rust-lang/rust/pull/155418) · **release-notes 跟踪 issue**: [#156852](https://github.com/rust-lang/rust/issues/156852)
+**相关概念**: [memory model / transmute](../../03_advanced/02_unsafe/06_memory_model.md) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md)
+
+#### 变更动机
+
+`std::mem::transmute` 要求源类型和目标类型大小相等。当类型带有 `repr` 属性（如 `repr(C)`、`repr(transparent)`、`repr(packed)`）时，旧实现的大小相等检查在某些 newtype 场景下存在缺陷，可能错误地允许大小不同的类型之间转换。PR #155418 修复了该检查，确保 `repr` 属性被正确纳入大小比较。
+
+#### 语义影响
+
+- 某些此前编译通过的 `transmute` 调用现在会被正确拒绝。
+- 主要影响通过 newtype 包装 `repr(C)`/`repr(transparent)` 类型后再 transmute 的代码。
+
+#### 迁移注意
+
+- 用 `std::mem::size_of` 在编译期或运行期校验转换双方大小。
+- 考虑使用 `transmute_copy` 或显式字段映射替代不安全的 `transmute`。
+
+---
+
+### 5.4 Reject arguments in attributes where no arguments are expected
+
+**状态**: ⚠ compatibility change in 1.98.0 · **来源**: [PR #155193](https://github.com/rust-lang/rust/pull/155193) · **release-notes 跟踪 issue**: [#156641](https://github.com/rust-lang/rust/issues/156641)
+**相关概念**: [attributes](../../01_foundation/09_macros_basics/01_attributes_and_macros.md)
+
+#### 变更动机
+
+某些 attribute（如 `#[inline]`、`#[cold]`、`#[track_caller]`）不接受参数，但解析器此前在部分错误恢复路径中没有正确拒绝 `#[inline(true)]` 这类写法。1.98.0 统一检查逻辑，使无参 attribute 在带参数时报错。
+
+#### 语义影响
+
+- `#[attr(arg)]` 形式的 attribute 如果 `attr` 不期望参数，现在会直接编译错误。
+- 改善诊断信息，避免用户误认为参数生效。
+
+#### 迁移注意
+
+- 检查代码中是否有 `#[inline(something)]`、`#[cold(...)]` 等误用，移除参数或使用正确的 attribute（如 `#[inline(always)]` 是 `#[inline]` 的合法参数化形式，不在此列）。
+- 宏生成 attribute 时需确保参数与 attribute 定义匹配。
+
+---
+
+## 6. 升级 1.98.0 检查清单
+
+- [ ] 运行 `cargo check --workspace` 与 `cargo clippy --workspace`，确认无新增 lint/错误；
+- [ ] 若自定义 panic hook 存储 `Location`，确认生命周期为 `'static`；
+- [ ] 若使用 `derive(Ord)`，检查 `PartialOrd` 与 `Ord` 语义是否一致；
+- [ ] 若使用 `repr(transparent)` 包装非 ZST / `repr(C)` / 私有字段类型，按新规则重构；
+- [ ] 若在 Windows GNU 目标构建，验证 mingw-w64 工具链基线版本；
+- [ ] 若目标平台为 Solaris/Illumos，移除对 `std::fs::File::lock` 的依赖；
+- [ ] 若使用 Emscripten/WASM，移除 `-Zemscripten-wasm-eh`；
+- [ ] 若使用 `transmute` 或依赖 trait object 默认生命周期，复核类型检查；
+- [ ] 若涉及 `std::env::Vars`/`CommandArgs` 跨线程使用，确认 `Send`/`Sync` 边界；
+- [ ] 若覆盖 C 运行时符号（`memcmp`/`memset` 等），处理新的 runtime symbol lint。
+
+---
+
+## 7. 批判性分析：现有文件与国际来源的对称差
+
+**主要缺口**（2026-07-16 旧版仅覆盖 4 项 stabilized-in-beta 特性）已在本版补齐：
+
+- **语言语义遗漏**：riscv `d`/`e`/`f` target features、`ambiguous_glob_imports` 硬错误、`c_void` 返回 lint、等式谓词语法拒绝、trait object 生命周期默认值修正、解析器 `dyn` 关键字恢复、`UNSAFE_CODE` lint 一致性等。
+- **标准库 API 遗漏**：`{f32,f64}::algebraic_*`、`String::from_utf16{le|be}`、`str::strip_circumfix`、`NonZero::from_str_radix`、LoongArch CRC intrinsics、`RangeInclusive::from` panic 文档、`ManuallyDrop`/`Box` 文档修正、`PanicHookInfo` `'static` Location 等。
+- **编译器/平台遗漏**：Windows TLS destructor 切换到 FLS、`unicode_data.rs` 替换 printables table 等。
+- **兼容性变更遗漏**：`repr(transparent)` 严格化、`transmute` 等大小检查、attribute 参数拒绝、Emscripten WASM EH 移除、Solaris `File::lock` 移除、Windows-gnu 工具链基线等。
+- **原 RFC merged 跟踪项**（Named `Fn`、register_tool、todo! lint、public/private deps）状态仍停留在 RFC 阶段，已迁移到 [Rust 1.99+ 前沿特性预览](rust_1_99_preview.md) 继续跟踪。
+
+**与国际来源对齐**：本文件基于 GitHub milestone 145 的 31 条 release-notes 跟踪 issue、`releases.rs` 1.98.0 beta 页、Rust Forge 发布节奏与 nightly unstable book 核对；每个特性均给出上游 PR/issue 链接，并在矩阵/小节中给出相关 `concept/` 权威页链接。
+
+---
+
+## 8. 来源与延伸阅读
 
 - [Rust 1.98.0 Release Notes (beta)](https://releases.rs/docs/1.98.0/)
+- [Rust Release Notes](https://doc.rust-lang.org/beta/releases.html)
 - [Rust Forge — Release Versions](https://forge.rust-lang.org/)
+- [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)
 - [Rust 1.97 稳定特性](rust_1_97_stabilized.md)
 - [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md)
 - [Rust 1.99+ 前沿特性预览](rust_1_99_preview.md)
+- [1.98 特性 × 领域反查矩阵](feature_domain_matrix_198.md)
+- [1.98 兼容性迁移判定树](migration_198_decision_tree.md)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Rust 1.98.0 稳定特性))
+    1 语言语义
+      riscv target features d/e/f
+      runtime symbol lints
+      CoerceUnsized &mut lifetime shortening
+      ambiguous_glob_imports hard error
+      c_void return lint
+      equality predicate syntax rejection
+      trait object lifetime defaults
+      dyn keyword parser recovery
+      batched import resolution
+    2 编译器/平台
+      mingw-w64 baseline tools
+      Emscripten WASM EH removal
+      Solaris File::lock unsupported
+      Windows TLS FLS destructors
+      unicode_data.rs printables
+    3 标准库 API
+      float_algebraic methods
+      String::from_utf16{le|be}
+      str::strip_circumfix
+      NonZero::from_str_radix
+      LoongArch CRC intrinsics
+      RangeInclusive panic docs
+      env::Vars Send/Sync removal
+      CommandArgs Send/Sync
+      ManuallyDrop Box docs
+      PanicHookInfo static Location
+    4 宏/Derive
+      assert_eq/assert_ne temporary scope
+      derive(PartialOrd) fast path
+    5 兼容性/迁移
+      repr(transparent) strict trivial fields
+      UNSAFE_CODE unsafe attributes
+      transmute equal-size check
+      attribute argument rejection
+      derive(PartialOrd) consistency
+```
+
+---
+
+## 9. 反例与边界
+
+> 本节澄清 1.98.0 稳定特性最容易被误读的边界。
+
+| 常见误解 | 反例 | 正确理解 |
+|---|---|---|
+| "`repr(transparent)` 多字段一直合法" | 包装 `repr(C)` 辅助字段此前只警告，1.98 起硬错误 | 仅允许一个非 ZST + ZST 标记字段 |
+| "`derive(PartialOrd) + derive(Ord)` 总是安全" | 手写 `Ord` 与派生 `PartialOrd` 不一致时，快速路径会暴露 | 同时派生或同时手写，保持语义一致 |
+| "`c_void` 返回 lint 是错误" | 它是 warn-by-default，仅在 `-D warnings` 时阻断 | 及时改为 `*mut c_void` 即可 |
+| "`String::from_utf16le` 处理 BOM" | 它按显式字节序解码，不识别 BOM | 需先手动剥离 BOM 再调用 |
+| "`NonZero::from_str_radix("0")` 返回 Ok" | 零值会返回 `ParseIntError` | 错误处理与 `parse::<u32>()` 一致 |
+| "`UNSAFE_CODE` 只捕获 `unsafe` 块" | 1.98 起也捕获 unsafe attributes | `#![deny(unsafe_code)]` 范围扩大 |
+| "trait object 生命周期省略不受影响" | 完全省略时部分 niche 场景会推断更严或报错 | 公开 API 中显式标注 `dyn Trait + 'static` |
+
+---
+
+## 10. 维护日志
+
+- **2026-07-14**: 建立骨架，迁移自 `rust_1_98_preview.md` 特性矩阵。
+- **2026-07-16**: 基于 1.98.0 beta 分支预填充 §1–§4；状态更新为「beta 已冻结，stable 前预填充」。
+- **2026-07-31**: 对齐 GitHub milestone 145 的 31 条 release-notes 跟踪 issue、releases.rs 1.98.0 beta 与 nightly unstable book；补齐语言/编译器/标准库 API/兼容性全量特性；重写每个特性的动机/语义/迁移说明；矩阵增加 `concept/` 前向链接；新增批判性分析与对称差、思维导图、反例与边界表。
+- **2026-08-20（预计）**: 1.98.0 stable 发布后最终核对官方 release notes，移除 beta 标注。

@@ -1059,7 +1059,7 @@ async fn main() {
 `broadcast` 支持多订阅者接收每个事件的独立拷贝，天然构成总线。
 
 ```rust
-use tokio::sync::broadcast;
+use tokio::sync::broadcast as Bc;
 
 #[derive(Clone, Debug)]
 struct Event {
@@ -1068,12 +1068,12 @@ struct Event {
 }
 
 struct MessageBus {
-    tx: broadcast::Sender<Event>,
+    tx: Bc::Sender<Event>,
 }
 
 impl MessageBus {
     fn new(capacity: usize) -> Self {
-        let (tx, _rx) = broadcast::channel(capacity);
+        let (tx, _rx) = Bc::channel(capacity);
         Self { tx }
     }
 
@@ -1081,7 +1081,7 @@ impl MessageBus {
         let _ = self.tx.send(event);
     }
 
-    fn subscribe(&self) -> broadcast::Receiver<Event> {
+    fn subscribe(&self) -> Bc::Receiver<Event> {
         self.tx.subscribe()
     }
 }
@@ -5136,6 +5136,11 @@ mindmap
       Interpreter 模式
       Chain of Responsibility 模式
       Template Method 模式
+      Strategy 高级实现
+      Observer 进阶实现
+      Builder 模式详解
+      Factory & Provider
+      Adapter 模式
     反模式 Anti-patterns
       Over-engineering
       Premature

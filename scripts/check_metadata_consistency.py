@@ -39,6 +39,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONCEPT = os.path.join(ROOT, "concept")
 
 FIELD_RE = re.compile(r"^>\s*\*\*(.+?)\*\*\s*[:：]\s*(.*?)\s*$")
+# 文首块中也可能出现不带 ">" 前缀的 **K**: V 元数据（与 AGENTS.md 模板一致）
+HEAD_FIELD_RE = re.compile(r"^\*\*(.+?)\*\*\s*[:：]\s*(.*?)\s*$")
 BLOOM_RANGE_RE = re.compile(r"L\s*(\d+)\s*[-–—~]\s*L?\s*(\d+)")
 BLOOM_SINGLE_RE = re.compile(r"L\s*(\d+)")
 LEVEL_RE = re.compile(r"L\s*(\d+)")
@@ -50,7 +52,7 @@ NIGHTLY_RE = re.compile(r"\b(nightly|preview|unstable)\b|\bfeature\s*\(", re.IGN
 
 SUMMARY_LOW_PATTERNS = [
     re.compile(r"^\s*(a|an)\s+(guide|overview|introduction)\s+(to|of|on|about|for)\b", re.IGNORECASE),
-    re.compile(r"core rust concept", re.IGNORECASE),
+    re.compile(r"^\s*core\s+rust\s+concept\s*[:：—-]", re.IGNORECASE),
     re.compile(r"^\s*(this\s+(document|file|page|note))\s+(covers?|describes?|explains?)\b", re.IGNORECASE),
     re.compile(r"^\s*(comprehensive|an?\s+in-depth)\s+(analysis|review|look|overview)\s+(of|on|into)\b", re.IGNORECASE),
     re.compile(r"^\s*(a|an)?\s*(comprehensive|complete)\s+guide\s+to\b", re.IGNORECASE),
@@ -113,6 +115,8 @@ D5_WHITELIST_FILES = {
         "-Zbuild-std 截至 1.97 仍为 nightly 特性，页面主题即该特性",
     "concept/06_ecosystem/11_domain_applications/03_webassembly.md":
         "#![feature(panic_handler)] 自定义 panic handler 截至 1.97 仍为 nightly-only（wasm32-unknown-unknown 场景）",
+    "concept/06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md":
+        "SIMD 边界小节：std::simd portable SIMD 截至 1.97.0 仍未稳定、target_feature 与 nightly 工具链状态为 SIMD 工程选型事实陈述",
     "concept/sources/INDEX.md":
         "来源索引：Unstable Book(UNB) 作为权威来源条目及其 nightly 状态标注即索引内容本身",
     # ---- 2026-07-13 逐文件复核登记（W0-W5 新建/扩展页 + 既有页补登记）----
@@ -276,6 +280,12 @@ D5_WHITELIST_FILES = {
         "no_std 惯用法页：`-Z build-std` / 实验性目标 / nightly 工具链事实为裸机开发客观边界",
     "concept/06_ecosystem/10_performance/03_algorithms_and_complexity_idioms.md":
         "算法惯用法页：`portable_simd` / `#![feature]` 等 nightly-only 边界为 SIMD/unsafe 优化选型事实陈述",
+    # ---- 2026-07-31 Wave B3+B4 国际对齐新建页：nightly/preview 提及均为裸机启动/安全关键
+    # 工具链事实陈述或标准映射中的边界标注，非稳定层正文残留不稳定依赖。
+    "concept/06_ecosystem/05_systems_and_embedded/27_no_std_startup_runtime_deep_dive.md":
+        "no_std 启动与运行时深度页：`-Z build-std` / 自定义 target / nightly-only 目标为裸机工具链事实陈述",
+    "concept/06_ecosystem/05_systems_and_embedded/30_misra_rust_safety_critical_guidelines.md":
+        "安全关键嵌入式 Rust 指南页：nightly/preview 提及为 Ferrocene/MISRA-Rust 合格子集与工具链边界的事实陈述",
 }
 
 
@@ -321,6 +331,16 @@ def parse_file(path: str):
             break
         head.append(ln)
     head_text = "\n".join(head)
+
+    # 补充解析文首块中不带 ">" 前缀的 **K**: V 字段（AGENTS.md 模板格式）
+    # 仅当该 key 尚未被带 ">" 的版本覆盖时，避免正文列表项误匹配
+    for ln in head:
+        m = HEAD_FIELD_RE.match(ln)
+        if m:
+            k = m.group(1).strip()
+            v = m.group(2).strip()
+            if k not in fields:
+                fields.setdefault(k, []).append(v)
 
     def first(key):
         return fields.get(key, [None])[0]

@@ -1,44 +1,45 @@
 {
   "date": "2026-07-31",
-  "scanned": 642,
+  "scanned": 649,
   "coverage": {
     "P0": [
-      616,
+      623,
       96.0
     ],
     "P1": [
-      567,
-      88.3
+      569,
+      87.7
     ],
     "P2": [
-      559,
-      87.1
+      563,
+      86.7
     ],
     "any": [
-      642,
+      649,
       100.0
     ],
     "none": 0
   },
   "content_scope": {
-    "scanned": 548,
+    "scanned": 555,
     "P0": [
-      527,
+      534,
       96.2
     ],
     "P1": [
-      511,
-      93.2
+      513,
+      92.4
     ],
     "P2": [
-      538,
-      98.2
+      542,
+      97.7
     ],
     "any": [
-      548,
+      555,
       100.0
     ],
     "gaps_p1": [
+      "concept/01_foundation/00_start/09_fearless_refactoring.md",
       "concept/02_intermediate/04_types_and_conversions/02_closure_types.md",
       "concept/02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
       "concept/02_intermediate/06_macros_and_metaprogramming/04_declarative_macros.md",
@@ -66,18 +67,24 @@
       "concept/06_ecosystem/03_design_patterns/31_object_pool.md",
       "concept/06_ecosystem/03_design_patterns/32_typestate_deep_dive.md",
       "concept/06_ecosystem/03_design_patterns/33_anti_patterns.md",
+      "concept/06_ecosystem/03_design_patterns/34_ownership_as_resource_management.md",
+      "concept/06_ecosystem/03_design_patterns/35_scope_guard_and_deferred_cleanup.md",
       "concept/06_ecosystem/04_web_and_networking/11_kubernetes_rust.md",
       "concept/06_ecosystem/05_systems_and_embedded/23_no_std_and_bare_metal_idioms.md",
       "concept/06_ecosystem/05_systems_and_embedded/24_embedded_hal_and_driver_idioms.md",
       "concept/06_ecosystem/05_systems_and_embedded/25_memory_mapped_peripherals_and_typestate.md",
       "concept/06_ecosystem/05_systems_and_embedded/26_embedded_rtos_and_safety_critical_frameworks.md",
       "concept/06_ecosystem/10_performance/03_algorithms_and_complexity_idioms.md",
+      "concept/06_ecosystem/11_domain_applications/26_zero_copy_parsing_in_rust.md",
+      "concept/06_ecosystem/11_domain_applications/27_ownership_aware_algorithms.md",
       "concept/06_ecosystem/14_enterprise_architecture/06_clean_architecture_in_rust.md",
       "concept/06_ecosystem/14_enterprise_architecture/07_hexagonal_architecture_in_rust.md",
       "concept/06_ecosystem/14_enterprise_architecture/08_microservices_patterns_in_rust.md",
       "concept/07_future/03_edition_differences/01_edition_2021_to_2024.md"
     ],
     "gaps_p2": [
+      "concept/01_foundation/00_start/08_compile_time_correctness.md",
+      "concept/01_foundation/00_start/09_fearless_refactoring.md",
       "concept/02_intermediate/04_types_and_conversions/02_closure_types.md",
       "concept/02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
       "concept/02_intermediate/07_iterators_and_closures/02_closures.md",
@@ -86,6 +93,7 @@
       "concept/04_formal/09_system_semantics/07_concurrent_and_parallel_semantics.md",
       "concept/04_formal/09_system_semantics/08_memory_ordering_and_atomics.md",
       "concept/04_formal/13_semantic_engineering/07_kg_owl_shacl_semantics.md",
+      "concept/06_ecosystem/03_design_patterns/34_ownership_as_resource_management.md",
       "concept/07_future/00_version_tracking/feature_domain_matrix_198.md",
       "concept/07_future/00_version_tracking/migration_198_decision_tree.md"
     ]
@@ -97,9 +105,9 @@
       "any": 70
     },
     "L1": {
-      "n": 58,
-      "P0": 58,
-      "any": 58
+      "n": 60,
+      "P0": 60,
+      "any": 60
     },
     "L2": {
       "n": 45,
@@ -122,9 +130,9 @@
       "any": 27
     },
     "L6": {
-      "n": 180,
-      "P0": 155,
-      "any": 180
+      "n": 185,
+      "P0": 160,
+      "any": 185
     },
     "L7": {
       "n": 76,

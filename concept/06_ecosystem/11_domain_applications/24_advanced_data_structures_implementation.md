@@ -38,12 +38,14 @@
   - [二、并查集（Union-Find / DSU）](#二并查集union-find--dsu)
   - [三、Trie（前缀树）](#三trie前缀树)
   - [四、线段树与 Fenwick 树](#四线段树与-fenwick-树)
+    - [4.1 线段树 Lazy Propagation](#41-线段树-lazy-propagation)
   - [五、跳表（Skip List）](#五跳表skip-list)
   - [六、红黑树（Red-Black Tree）](#六红黑树red-black-tree)
   - [七、Rope（绳索）](#七rope绳索)
   - [八、环形缓冲区（Ring Buffer）](#八环形缓冲区ring-buffer)
   - [九、Work-Stealing Queue](#九work-stealing-queue)
   - [十、无锁队列（Lock-Free Queue）](#十无锁队列lock-free-queue)
+    - [10.1 Lock-Free 内存回收语义](#101-lock-free-内存回收语义)
   - [十一、反例与陷阱](#十一反例与陷阱)
     - [反例 1：在并查集中递归路径压缩导致栈溢出](#反例-1在并查集中递归路径压缩导致栈溢出)
     - [反例 2：Ring Buffer 容量为 0](#反例-2ring-buffer-容量为-0)
@@ -463,6 +465,7 @@ mindmap
     线性/区间
       Fenwick 树
       线段树
+        Lazy Propagation
       Ring Buffer
     集合/映射
       Trie
@@ -475,6 +478,7 @@ mindmap
     并发
       Work-Stealing Queue
       Lock-Free Queue
+      内存回收语义
 ```
 
 > **认知功能**: 本 mindmap 按"线性区间、集合映射、图、文本、并发"五类组织高级数据结构，便于按问题域选型。来源: [Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms-fourth-edition)
@@ -489,7 +493,10 @@ mindmap
 - **P1 学术**: [Guibas & Sedgewick — A Dichromatic Framework for Balanced Trees (IEEE)](https://ieeexplore.ieee.org/document/4567957)
 - **P0 官方**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 - **P1 并发**: [Rust Atomics and Locks](https://marabos.nl/atomics/)
+- **P1 并发**: [Michael & Scott — Simple, Fast, and Practical Non-Blocking and Blocking Concurrent Queue Algorithms (PODC 1996)](https://dl.acm.org/doi/10.1145/248052.248106)
+- **P1 并发**: [Hart et al. — Performance of Memory Reclamation for Lockless Synchronization](https://dl.acm.org/doi/10.1145/2555243.2555261)
 - **P1 书籍**: [Rust for Rustaceans](https://rust-for-rustaceans.com/)
+- **P2 生态**: [crossbeam-epoch docs](https://docs.rs/crossbeam-epoch/latest/crossbeam_epoch/)
 
 ---
 

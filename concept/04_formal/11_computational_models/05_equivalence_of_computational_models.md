@@ -38,7 +38,7 @@
       - [Curry-Howard 对应：命题即类型](#curry-howard-对应命题即类型)
       - [Rust 闭包 / 迭代器与数学函数的精确对应与张力](#rust-闭包--迭代器与数学函数的精确对应与张力)
   - [二、Felleisen 表达力框架](#二felleisen-表达力框架)
-      - [Rice 定理与编译器优化正确性](#rice-定理与编译器优化正确性)
+    - [Rice 定理与编译器优化正确性](#rice-定理与编译器优化正确性)
   - [三、Rust 中的局部变换与宏表达](#三rust-中的局部变换与宏表达)
     - [3.1 `async/await`：Future 状态机的局部去糖](#31-asyncawaitfuture-状态机的局部去糖)
     - [3.2 `?` 运算符：`Try` 分支的宏表达](#32--运算符try-分支的宏表达)
@@ -441,7 +441,7 @@ Curry-Howard 同构指出：
 enum Either<A, B> { Left(A), Right(B) }
 
 // A ⇒ (B ⇒ A)：如果 A 成立，则无论 B 如何都可得到 A
-fn k<A, B>(a: A) -> impl Fn(B) -> A {
+fn k<A, B>(a: A) -> impl FnOnce(B) -> A {
     move |_| a
 }
 

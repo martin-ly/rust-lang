@@ -14,6 +14,7 @@
 > **定位**: 从工程应用角度讲解 parser combinator（nom/winnow）与 serde 的零拷贝模式，覆盖生命周期约束、streaming/complete 语义差异、实战协议解析案例。
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [零拷贝解析与序列化优化](../../03_advanced/06_low_level_patterns/02_zero_copy_parsing.md)
 > **后置概念**: [算法工程实践](08_algorithm_engineering_practice.md) · [网络协议实现](../12_networking/03_custom_protocol_implementation.md)
+> **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
 ---
 
@@ -45,8 +46,9 @@
     - [反例 2：在 nom 中错误使用 complete 处理流式输入](#反例-2在-nom-中错误使用-complete-处理流式输入)
     - [反例 3：serde borrow 与临时缓冲区](#反例-3serde-borrow-与临时缓冲区)
   - [八、决策树](#八决策树)
-  - [九、国际权威参考](#九国际权威参考)
-  - [十、思维导图](#十思维导图)
+  - [九、相关概念](#九相关概念)
+  - [十、国际权威参考](#十国际权威参考)
+  - [十一、思维导图](#十一思维导图)
 
 ---
 
@@ -86,7 +88,8 @@ fn parse_header<'a>(input: &'a [u8]) -> Option<(&'a [u8], u32)> {
 | 输出引用的切片范围必须在输入范围内 | `&input[start..end]` 要求 `start <= end <= len` | panic 或编译期范围检查 |
 | 同一输入不能同时可变借用与不可变借用 | 解析器读取输入时，业务层不能再修改输入 | 编译错误 E0502/E0503 |
 
-```rust
+```rust,ignore
+// 依赖上一节定义的 parse_header；此处仅展示生命周期用法
 fn main() {
     let buf = vec![0x01, 0x02, 0x03, 0x04, 0x05];
     let (rest, n) = parse_header(&buf).unwrap();
@@ -487,7 +490,15 @@ graph TD
 
 ---
 
-## 九、国际权威参考
+## 九、相关概念
+
+- [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) — L5 系统语言对比：零拷贝与生命周期在 C++ 中的等价机制
+- [网络协议实现](../12_networking/03_custom_protocol_implementation.md) — L5-L6 领域应用：零拷贝解析在协议实现中的落地
+- [算法工程实践](08_algorithm_engineering_practice.md) — L4-L5 工程方法：性能测量、缓存布局与生产实践
+
+---
+
+## 十、国际权威参考
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
@@ -504,7 +515,7 @@ graph TD
 
 ---
 
-## 十、思维导图
+## 十一、思维导图
 
 ```mermaid
 mindmap

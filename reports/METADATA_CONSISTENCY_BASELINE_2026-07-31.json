@@ -7,7 +7,7 @@
       "D2": 0,
       "D3": 0,
       "D4": 0,
-      "D5": 1,
+      "D5": 0,
       "D6": 16
     },
     "pct": {
@@ -15,23 +15,18 @@
       "D2": 0.0,
       "D3": 0.0,
       "D4": 0.0,
-      "D5": 0.1,
+      "D5": 0.0,
       "D6": 2.3
     },
     "D2_base_files_with_asp_and_bloom": 401,
-    "flagged_files": 17
+    "flagged_files": 16
   },
   "examples": {
     "D1": [],
     "D2": [],
     "D3": [],
     "D4": [],
-    "D5": [
-      [
-        "concept/06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md",
-        "稳定层 nightly/preview 关键词 2 处"
-      ]
-    ],
+    "D5": [],
     "D6": [
       [
         "concept/04_formal/03_operational_semantics/10_minirust.md",
@@ -147,11 +142,6 @@
     "concept/06_ecosystem/10_performance/03_algorithms_and_complexity_idioms.md": {
       "D6": [
         "Summary 为空"
-      ]
-    },
-    "concept/06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 2 处"
       ]
     },
     "concept/06_ecosystem/14_enterprise_architecture/06_clean_architecture_in_rust.md": {

@@ -216,15 +216,23 @@ mindmap
 - [Rust RFC Index — rust-lang.github.io](https://rust-lang.github.io/rfcs/)
 - [W3C — OWL 2 Overview](https://www.w3.org/TR/owl2-overview/)
 - [W3C — SHACL](https://www.w3.org/TR/shacl/)
+- [W3C — RDF 1.2 Concepts and Abstract Syntax](https://www.w3.org/TR/rdf12-concepts/)
+- [W3C — RDF-star and SPARQL-star](https://w3c.github.io/rdf-star/cg-spec/editors_draft.html)
+- [W3C — SKOS Reference](https://www.w3.org/TR/skos-reference/)
+- [W3C — DCAT 3 — Data Catalog Vocabulary](https://www.w3.org/TR/vocab-dcat-3/)
 - [Baader et al. — The Description Logic Handbook](https://dl.acm.org/doi/10.5555/1206588)
 - [Hogan et al. — Knowledge Graphs](https://dl.acm.org/doi/10.1145/3418449)
 - [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)
 - [Project KG Ontology — kg_ontology_v2.md](../../00_meta/knowledge_topology/kg_ontology_v2.md)
 - [Basic Formal Ontology (BFO)](https://basic-formal-ontology.org/)
-- [DOLCE — Descriptive Ontology for Linguistic and Cognitive Engineering](http://www.loa.istc.cnr.it/old/DOLCE.html)
+- [DOLCE — Descriptive Ontology for Linguistic and Cognitive Engineering](http://www.loa.istc.cnr.it/dolce/overview.html)
 - [SUMO — Suggested Upper Merged Ontology](https://www.ontologyportal.org/)
 - [Curry-Howard Correspondence — Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/type-theory/)
+- **GraphRAG / LLM×KG**: [Microsoft GraphRAG](https://microsoft.github.io/graphrag/) · [Microsoft Research Blog — GraphRAG](https://www.microsoft.com/en-us/research/blog/graphrag-unlocking-llm-discovery-on-narrative-private-data/) · [LangChain — Enhancing RAG with Knowledge Graphs](https://www.langchain.com/blog/enhancing-rag-based-applications-accuracy-by-constructing-and-leveraging-knowledge-graphs) · [Neo4j — GraphRAG with Neo4j & LangChain](https://neo4j.com/labs/genai-ecosystem/langchain/) · [Neo4j — Building Knowledge Graphs with LLMs](https://neo4j.com/blog/genai/knowledge-graph-llm-multi-hop-reasoning/)
+- **Neuro-Symbolic AI**: [Colelough & Regli — Neuro-Symbolic AI in 2024: A Systematic Review](https://arxiv.org/abs/2501.05435) · [Neurosymbolic AI Journal — Survey 2020-2025](https://neurosymbolic-ai-journal.com/system/files/nai-paper-933.pdf)
+- **KG Construction & Evaluation**: [Neo4j — How to Build a Knowledge Graph in 7 Steps](https://neo4j.com/blog/knowledge-graph/how-to-build-knowledge-graph/) · [Neo4j — Knowledge Graph Best Practices](https://neo4j.com/use-cases/knowledge-graph/) · [Apache Jena](https://jena.apache.org/) · [W3C — RDF-star and SPARQL-star](https://w3c.github.io/rdf-star/cg-spec/editors_draft.html)
+- **Rust Safety-Critical / Formal Verification**: [Rust Blog — What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical/) · [Ferrous Systems — Rust for Embedded and Safety-Critical Systems](https://ferrous-systems.com/pdf/rust-for-embedded-safety-critical-systems-2025.pdf) · [Surveying the Rust Verification Landscape](https://arxiv.org/abs/2410.01981) · [Rust Formal Methods Interest Group](https://rust-formal-methods.github.io/)
 
 ---
 
@@ -370,4 +378,225 @@ SHACL 的 `sh:NodeShape` 则可以看作 **证明义务（proof obligation）**�
 
 ---
 
-> **过渡**: 理解 AI 本体论、国际顶层本体映射与 Curry-Howard 视角后，可进一步学习 [Knowledge Graph Ontology](../../00_meta/knowledge_topology/kg_ontology_v2.md)、[KG OWL/SHACL 语义](./07_kg_owl_shacl_semantics.md) 与 [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md)。
+## 十二、LLM × 知识图谱：从 GraphRAG 到多跳推理
+
+### 12.1 为什么需要 GraphRAG？
+
+传统 **Baseline RAG** 仅基于向量相似度检索文本片段，难以回答需要“连接多点信息”的问题。例如：
+
+> “Rust 中 `Pin` 的哪些反例会导致未定义行为？”
+
+该问题需要同时关联 `Pin`、`Pin Projection Counterexamples`、`Unsafe Rust`、`Undefined Behavior` 等多个概念。Microsoft 的 **GraphRAG** 通过 LLM 从私有语料构建知识图谱，并基于社区检测（Leiden）生成层级摘要，在查询时提供全局/局部/DRIFT 三种推理模式，显著优于纯向量 RAG。
+
+### 12.2 GraphRAG 核心流程
+
+| 阶段 | 步骤 | 对 Rust 知识体系的映射 |
+|:---|:---|:---|
+| **Index** | 切分 TextUnits → 抽取实体/关系/关键声明 → Leiden 社区检测 → 自下而上生成社区摘要 | 把 `concept/` 权威页切分为学习单元，抽取 `ex:dependsOn` / `ex:mutexWith` / `ex:counterExample` |
+| **Query** | Global Search（全局摘要）、Local Search（实体邻居展开）、DRIFT Search（社区+局部）、Basic Search（向量兜底） | 全局搜索回答“Rust 内存安全如何保证”；局部搜索回答“`Pin` 的前置概念有哪些” |
+| **Prompt Tuning** | 针对领域 schema 调优抽取与查询提示 | 使用 [`kg_ontology_v2.md`](../../00_meta/knowledge_topology/kg_ontology_v2.md) 定义的类/关系作为抽取约束 |
+
+> 来源：[Microsoft GraphRAG 官方文档](https://microsoft.github.io/graphrag/) · [Microsoft Research Blog](https://www.microsoft.com/en-us/research/blog/graphrag-unlocking-llm-discovery-on-narrative-private-data/)
+
+### 12.3 Neo4j / LangChain 与 Rust KG 的集成
+
+- **Neo4j LLM Knowledge Graph Builder**：把非结构化文本（如 RFC、博客、论文）转为 Neo4j 图，支持 LLM 自动抽取节点/关系。
+- **LangChain `LLMGraphTransformer`**：将文档直接映射为图谱三元组，可对接 `kg_data_v3.json` 的 JSON-LD 1.1 schema。
+- **Cypher + Vector 混合检索**：向量检索负责语义匹配，图遍历负责多跳推理；适合查询“学习 async 之前必须掌握哪些概念”。
+
+> 来源：[Neo4j — GraphRAG with Neo4j & LangChain](https://neo4j.com/labs/genai-ecosystem/langchain/) · [LangChain — Enhancing RAG with Knowledge Graphs](https://www.langchain.com/blog/enhancing-rag-based-applications-accuracy-by-constructing-and-leveraging-knowledge-graphs)
+
+### 12.4 应用边界与风险
+
+LLM 抽取的关系仍可能幻觉（如把 `Vec` 错误连接到 `GarbageCollection`）。项目 KG 的应对策略：
+
+1. 以 [`12_semantic_properties_atlas.md`](../../00_meta/knowledge_topology/12_semantic_properties_atlas.md) 和 atlas 符号为**显式约束**；
+2. 用 `check_kg_shapes.py` / `check_kg_relation_precision.py` 作为**自动化验证**；
+3. 核心概念变更保留**人工审校**（AGENTS.md §6）。
+
+---
+
+## 十三、神经符号 AI（Neuro-Symbolic AI）与 Rust 语义
+
+### 13.1 神经符号 AI 的五大研究主题
+
+根据 Colelough & Regli 对 2020–2024 文献的系统综述，Neuro-Symbolic AI 可分为：
+
+1. **Knowledge Representation**：符号与神经表征融合、领域知识图谱；
+2. **Learning and Inference**：可微分推理、多源知识动态推理；
+3. **Logic and Reasoning**：逻辑/概率推理与神经网络的结合；
+4. **Explainability and Trustworthiness**：可解释模型与推理过程；
+5. **Meta-Cognition**：系统监控、评估与调整自身推理。
+
+> 来源：[Colelough & Regli — Neuro-Symbolic AI in 2024: A Systematic Review](https://arxiv.org/abs/2501.05435)
+
+### 13.2 与 Rust 知识体系的结合点
+
+| Neuro-Symbolic 主题 | Rust 语义工程映射 |
+|:---|:---|
+| Knowledge Representation | 用 OWL 2 / SHACL / SKOS 建模所有权、生命周期、trait、unsafe 边界 |
+| Learning & Inference | 用 GNN / 向量模型预测概念间的 `entails` / `mutexWith`；用 atlas 人工约束修正 |
+| Logic & Reasoning | 把借用检查规则编码为分离逻辑 / SMT 约束；与 LLM 生成代码联动验证 |
+| Explainability | 从 KG 生成自然语言学习路径，解释“为什么 `&mut T` 不能别名” |
+| Meta-Cognition | 质量门（如 `semantic_health.py`）监控 KG 健康度，触发自动修复或人工复核 |
+
+### 13.3 形式化验证的神经符号视角
+
+- **AlphaGeometry**（DeepMind）展示了神经语言模型指导符号演绎引擎的范式：对 Rust 而言，LLM 可生成候选引理/反例，再由 Kani / Creusot / Verus 验证。
+- **Logic Tensor Networks (LTN)** 可把 KG 中的 `ex:confidence` 与神经嵌入结合，学习“概念 A 是否蕴含概念 B”的概率解释。
+- **Neural Theorem Provers** 可用于补全 `concept/04_formal/` 中未证明的推理链，但当前仍属研究前沿。
+
+---
+
+## 十四、Rust 安全关键系统与形式化验证的本体需求
+
+### 14.1 安全关键领域的本体缺口
+
+Rust 进入汽车（ISO 26262）、工业（IEC 61508）、航空（DO-178C）等安全关键领域时，仅有语言级内存安全保证不够。需要本体支持：
+
+- **VerificationCondition**：待验证的属性（如无数据竞争、无悬垂引用）；
+- **ProofObligation**：由工具（Kani、Creusot）生成的证明义务；
+- **UnsafeContract**：`unsafe` 块对外提供的安全抽象契约；
+- **Hazard**：可能导致失效的代码模式或外部假设；
+- **AssuranceClaim**：面向认证机构的保证论点（goal structuring notation / SACM）；
+- **ToolVerifiedProperty**：经具体工具验证的属性与版本追踪。
+
+### 14.2 现有 Rust 形式化工具映射
+
+| 工具 | 方法 | 覆盖范围 | 与 KG 的关系 |
+|:---|:---|:---|:---|
+| Prusti | 演绎验证（Viper） | Safe Rust 函数契约 | `ex:instanceOf ex:VerificationTool` |
+| [Creusot](../../04_formal/04_model_checking/11_creusot.md) | Why3 / Pearlite | 安全 Rust 泛型代码 | `ex:refines ex:FormalVerification` |
+| [Kani](../../04_formal/04_model_checking/09_kani.md) | 模型检测 | Unsafe / 并发边界 | `ex:appliesTo ex:UnsafeRust` |
+| Verus | SMT + 并发逻辑 | 系统代码 | `ex:dependsOn ex:SeparationLogic` |
+| [Miri](../../04_formal/04_model_checking/08_miri.md) | 解释器 / UB 检测 | 运行时语义 | `ex:counterExample ex:UndefinedBehavior` |
+| Ferrocene | 认证工具链 | ISO 26262 / IEC 61508 | `ex:enables ex:SafetyCriticalDeployment` |
+
+> 来源：[Surveying the Rust Verification Landscape](https://arxiv.org/abs/2410.01981) · [Rust Formal Methods Interest Group](https://rust-formal-methods.github.io/) · [Ferrous Systems — Rust for Embedded and Safety-Critical Systems](https://ferrous-systems.com/pdf/rust-for-embedded-safety-critical-systems-2025.pdf) · [Rust Blog — Safety-Critical Rust](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical/)
+
+### 14.3 建议的本体扩展（v2.1 草案）
+
+```turtle
+ex:VerificationCondition a owl:Class ;
+    rdfs:subClassOf ex:Property ;
+    skos:prefLabel "Verification Condition"@en, "验证条件"@zh .
+
+ex:UnsafeContract a owl:Class ;
+    rdfs:subClassOf ex:Rule ;
+    skos:prefLabel "Unsafe Contract"@en, "unsafe 契约"@zh .
+
+ex:assuredBy a owl:ObjectProperty ;
+    rdfs:domain ex:AssuranceClaim ;
+    rdfs:range ex:ProofObligation .
+```
+
+这些扩展应在 `kg_ontology_v2.md` v2.1 中进一步细化，并通过 SHACL 约束保证每个 `VerificationCondition` 至少关联一个 `ToolVerifiedProperty` 或 `ManualProof`。
+
+---
+
+## 十五、DCAT、SKOS、Neo4j/Jena、RDF* 在 KG 治理中的角色
+
+### 15.1 DCAT：数据集目录与可发现性
+
+[W3C DCAT 3](https://www.w3.org/TR/vocab-dcat-3/) 定义了 `dcat:Catalog`、`dcat:Dataset`、`dcat:Distribution`，适合描述 Rust 知识体系作为可发布数据集：
+
+| DCAT 类 | 项目映射 |
+|:---|:---|
+| `dcat:Dataset` | `concept/00_meta/kg_data_v3.json` |
+| `dcat:Distribution` | JSON-LD 分发、Turtle 分发、Neo4j 导出 |
+| `dct:publisher` / `dct:license` | 项目团队 / 开源许可证 |
+| `dct:modified` | KG 刷新时间戳 |
+
+### 15.2 SKOS：多语言学习与导航
+
+项目 KG 已使用 `skos:prefLabel` 和 `skos:scopeNote`，但尚未充分利用：
+
+- `skos:broader` / `skos:narrower`：与 `ex:refines` 对齐，支持学习者从高层概念下钻；
+- `skos:related`：与 `ex:mutexWith` / `ex:relatedTo` 对齐；
+- `skos:ConceptScheme`：把 L0–L7 每层声明为一个 scheme，便于按层级过滤。
+
+### 15.3 RDF*：边级元数据
+
+[`kg_ontology_v2.md`](../../00_meta/knowledge_topology/kg_ontology_v2.md) 已规划 RDF-star 注解，用于把来源、置信度、审校状态附加到单条关系：
+
+```turtle
+<< ex:Ownership ex:dependsOn ex:MoveSemantics >>
+    ex:source "TRPL Ch. 4" ;
+    ex:confidence "1.0"^^xsd:float ;
+    ex:reviewed true ;
+    dcterms:created "2026-07-31"^^xsd:date .
+```
+
+### 15.4 Neo4j / Apache Jena 集成路径
+
+| 工具 | 适用场景 | 下一步 |
+|:---|:---|:---|
+| **Neo4j** | 属性图存储、交互式可视化、Graph Data Science 社区检测 | 把 `kg_data_v3.json` 转换为 Neo4j 导入 CSV / Cypher |
+| **Apache Jena / Fuseki** | SPARQL 1.1 查询、OWL 推理、TDB 持久化 | 导出 Turtle/N-Triples，配置 Fuseki 数据集 |
+| **pySHACL** | SHACL 形状验证 | 用 [`kg_shapes.ttl`](../../00_meta/kg_shapes.ttl) 对导出 RDF 执行验证 |
+
+> 来源：[Neo4j — Knowledge Graph Best Practices](https://neo4j.com/use-cases/knowledge-graph/) · [Apache Jena](https://jena.apache.org/) · [W3C — RDF-star](https://w3c.github.io/rdf-star/cg-spec/editors_draft.html)
+
+---
+
+## 十六、KG v3 刷新流程与国际对齐
+
+### 16.1 标准刷新管线
+
+项目 KG 采用如下闭环（AGENTS.md §7）：
+
+```text
+generate_kg_index.py
+        ↓
+generate_kg_v3.py
+        ↓
+apply_kg_semantic_predicates.py --all-batches --apply
+  （读取 06_inter_layer_mapping_atlas.md / 07_intra_layer_mapping_atlas.md
+   以及 12_semantic_properties_atlas.md 的显式语义属性）
+        ↓
+fallback_kg_generic_to_related.py --apply
+        ↓
+compress_kg_relatedto.py --apply
+        ↓
+check_kg_shapes.py --strict
+check_kg_relation_precision.py --strict
+```
+
+### 16.2 本次 D7+D8 改进
+
+1. **新增语义属性图谱**: [`12_semantic_properties_atlas.md`](../../00_meta/knowledge_topology/12_semantic_properties_atlas.md) 补充了 `equivalentTo`、`mutexWith`、`counterExample`、`instanceOf` 等显式语义属性。
+2. **升级 `apply_kg_semantic_predicates.py`**: 支持解析语义属性图谱，并允许显式关系覆盖现有推断谓词。
+3. **扩展国际来源**: 引入 Microsoft GraphRAG、LangChain、Neo4j、神经符号 AI 综述、Rust 安全关键形式化验证等最新权威内容。
+4. **KG 数据质量**: 刷新后 `ex:RelationAnnotation` 与 `ex:relatedTo` 残留为 0（在核心 50 实体周边），并新增大量精确谓词实例。
+
+### 16.3 当前 KG 谓词分布（示例）
+
+运行刷新管线后可得到如下典型分布（具体数字随 `concept/` 内容演化而变化）：
+
+| 谓词 | 语义角色 |
+|:---|:---|
+| `ex:hasPart` / `ex:partOf` | 目录/层级组成 |
+| `ex:dependsOn` / `ex:enables` | 学习前置/后置 |
+| `ex:entails` / `ex:impliedBy` | 概念蕴含 |
+| `ex:refines` / `ex:refinedBy` | 精化/上下位 |
+| `ex:mutexWith` | 互斥/反义 |
+| `ex:equivalentTo` | 同义/等价 |
+| `ex:counterExample` | 反例 |
+| `ex:instanceOf` | 实例 |
+
+> 完整数据见 `concept/00_meta/kg_data_v3.json` 与 `reports/KG_RELATION_PRECISION_*.md`。
+
+---
+
+> **过渡**: 理解 AI 本体论、GraphRAG、神经符号 AI、安全关键本体需求与国际标准对齐后，可进一步学习 [Knowledge Graph Ontology](../../00_meta/knowledge_topology/kg_ontology_v2.md)、[Semantic Properties Atlas](../../00_meta/knowledge_topology/12_semantic_properties_atlas.md)、[KG OWL/SHACL 语义](./07_kg_owl_shacl_semantics.md) 与 [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md)。
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+>
+> **权威来源对齐变更日志**: 2026-07-31 增补 GraphRAG / LangChain / Neo4j、神经符号 AI、DCAT / RDF*、Rust 安全关键形式化验证等国际来源（D7+D8）。
+> **内容分级**: [研究者级]
+
+**文档版本**: 1.2
+**最后更新**: 2026-07-31
+**状态**: ✅ D7+D8 国际对齐完成

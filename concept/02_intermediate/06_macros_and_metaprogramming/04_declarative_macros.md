@@ -284,8 +284,8 @@ fn private_fn() {}
 - `#[macro_export]` 将宏导出到 crate 根，可被外部 crate 使用。
 - Rust 2018+ 支持 `#[macro_use]` 与 crate 级 `use` 导入宏。
 
-```rust
-// 在 crate 根 re-export
+```rust,ignore
+// 在 crate 根 re-export（假设 my_macro 已在其他模块定义）
 pub use my_macro;
 ```
 
@@ -518,7 +518,7 @@ macro_rules! bad_double {
 
 fn main() {
     let mut c = 0;
-    let expensive = || { c += 1; c };
+    let mut expensive = || { c += 1; c };
     let _ = bad_double!(expensive());
     assert_eq!(c, 2); // 闭包被调用了两次！
 }

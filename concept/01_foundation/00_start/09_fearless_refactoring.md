@@ -17,7 +17,12 @@
 > [Martin Fowler — Refactoring: Improving the Design of Existing Code](https://martinfowler.com/books/refactoring.html) ·
 > [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 >
-> **前置概念**: [所有权（Ownership）](../01_ownership_borrow_lifetime/01_ownership.md) · [借用（Borrowing）](../01_ownership_borrow_lifetime/02_borrowing.md) · [错误处理基础](../08_error_handling/01_error_handling_basics.md)
+> **前置概念**:
+> [术语表（Terminology Glossary）](../../00_meta/01_terminology/01_terminology_glossary.md) ·
+> [学习指南](../../00_meta/04_navigation/07_learning_guide.md) ·
+> [所有权（Ownership）](../01_ownership_borrow_lifetime/01_ownership.md) ·
+> [借用（Borrowing）](../01_ownership_borrow_lifetime/02_borrowing.md) ·
+> [错误处理基础](../08_error_handling/01_error_handling_basics.md)
 > **后置概念**:
 > [错误处理进阶](../../02_intermediate/03_error_handling/01_error_handling.md) ·
 > [类型系统基础](../02_type_system/01_type_system.md) ·
@@ -242,6 +247,8 @@ Fearless refactoring 不仅依赖工具，也依赖正确的心理模型：
 - 公开 API 变更需同步更新调用方与文档测试。
 - 新增枚举变体必须提供迁移示例。
 - 重构 PR 应单独提交，不与功能改动混在一个 commit 中，便于回滚与审查。
+
+在跨团队合作时，Rust 的类型签名还充当了「隐性契约」：只要模块的公开 API 类型不变，内部重构不会破坏依赖方。这种特性使得基础库维护者可以持续改进实现，而下游团队只需关注 API 变更通知。
 
 ---
 

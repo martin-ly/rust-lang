@@ -8,10 +8,10 @@
 | D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 0 (基=401) | 0.0% | >=5% | pass |
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
-| D5 稳定层正文残留 nightly/preview/unstable | 1 | 0.1% | >0 | FAIL |
+| D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
 | D6 Summary 低信息量模板套话 | 16 | 2.3% | >=3% | pass |
 
-**受影响文件总数**: 17 / 684
+**受影响文件总数**: 16 / 684
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -37,6 +37,7 @@
 - `concept/06_ecosystem/01_cargo/03_resolver_v3_public_feature_unification.md` — public-dependency 实验特性完整检查需 nightly，页面主题即该特性
 - `concept/06_ecosystem/01_cargo/22_build_std.md` — -Zbuild-std 截至 1.97 仍为 nightly 特性，页面主题即该特性
 - `concept/06_ecosystem/11_domain_applications/03_webassembly.md` — #![feature(panic_handler)] 自定义 panic handler 截至 1.97 仍为 nightly-only（wasm32-unknown-unknown 场景）
+- `concept/06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md` — SIMD 边界小节：std::simd portable SIMD 截至 1.97.0 仍未稳定、target_feature 与 nightly 工具链状态为 SIMD 工程选型事实陈述
 - `concept/sources/INDEX.md` — 来源索引：Unstable Book(UNB) 作为权威来源条目及其 nightly 状态标注即索引内容本身
 - `concept/00_meta/05_quizzes/01_quiz_meta_framework.md` — L0 测验框架页：quiz 题目/解析以 nightly feature(custom_borrowck)、rustc 插件 unstable 为概念辨析考点，非正文依赖
 - `concept/01_foundation/02_type_system/02_never_type.md` — never_type feature 截至 1.97 仍未稳定，页面主题即 `!` 类型及其稳定化路径（含 nightly 边界标注）
@@ -115,19 +116,13 @@
 
 ### D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥（0）
 
-
 ### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（0）
-
 
 ### D3 关键字段同文件重声明（0）
 
-
 ### D4 文首块 Rust 版本号自矛盾（0）
 
-
-### D5 稳定层正文残留 nightly/preview/unstable（1）
-
-- `concept/06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md` — 稳定层 nightly/preview 关键词 2 处
+### D5 稳定层正文残留 nightly/preview/unstable（0）
 
 ### D6 Summary 低信息量模板套话（16）
 
@@ -146,7 +141,7 @@
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 
-- D5 稳定层nightly残留 1 (>0)
+- 无（全部通过）
 
 ## 机器可读
 

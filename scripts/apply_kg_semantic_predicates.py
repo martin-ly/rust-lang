@@ -64,6 +64,7 @@ CONCEPT = ROOT / "concept"
 KG_PATH = CONCEPT / "00_meta" / "kg_data_v3.json"
 INTRA_ATLAS = CONCEPT / "00_meta" / "knowledge_topology" / "07_intra_layer_mapping_atlas.md"
 INTER_ATLAS = CONCEPT / "00_meta" / "knowledge_topology" / "06_inter_layer_mapping_atlas.md"
+SEMANTIC_ATLAS = CONCEPT / "00_meta" / "knowledge_topology" / "12_semantic_properties_atlas.md"
 
 # 核心 50 实体路径，与 scripts/check_kg_relation_precision.py 保持一致
 CORE_PATHS = [
@@ -316,6 +317,42 @@ def parse_atlas(atlas_rel: str) -> list[tuple[str, str, str, str]]:
     return rows
 
 
+def parse_semantic_atlas(atlas_rel: str) -> list[tuple[str, str, str, str]]:
+    """解析语义属性图谱（12_semantic_properties_atlas.md）。
+
+    表格列为：源概念 | 关系谓词 | 目标概念 | 依据与边界。
+    关系谓词可直接是 `ex:equivalentTo`、`ex:mutexWith` 等完整 IRI，
+    也支持去掉前缀的 `equivalentTo`、`mutexWith`。
+    """
+    text = (CONCEPT / atlas_rel).read_text(encoding="utf-8")
+    rows: list[tuple[str, str, str, str]] = []
+    for line in text.splitlines():
+        if "|" not in line or "---" in line:
+            continue
+        parts = [p.strip() for p in line.split("|")]
+        while parts and not parts[0]:
+            parts = parts[1:]
+        while parts and not parts[-1]:
+            parts = parts[:-1]
+        if len(parts) != 4:
+            continue
+        src_md, pred_md, tgt_md, reason = parts
+        if src_md in ("源概念", "概念") or "关系" in pred_md:
+            continue
+        pred = None
+        if pred_md.startswith("ex:") and pred_md in SEMANTIC_PREDICATES:
+            pred = pred_md
+        elif f"ex:{pred_md}" in SEMANTIC_PREDICATES:
+            pred = f"ex:{pred_md}"
+        if pred is None:
+            continue
+        src_path = resolve_path(atlas_rel, parse_md_link(src_md) or "")
+        tgt_path = resolve_path(atlas_rel, parse_md_link(tgt_md) or "")
+        if src_path and tgt_path:
+            rows.append((src_path, pred, tgt_path, reason))
+    return rows
+
+
 def build_atlas_map(atlas_rels: list[str]) -> dict[tuple[str, str], tuple[str, str, str]]:
     """构建 (src_path, tgt_path) -> (symbol, predicate, reason) 映射。
 
@@ -332,6 +369,20 @@ def build_atlas_map(atlas_rels: list[str]) -> dict[tuple[str, str], tuple[str, s
                     rev = (tgt_path, src_path)
                     if rev not in mapping:
                         mapping[rev] = (sym, pred, reason)
+    return mapping
+
+
+def build_semantic_atlas_map(atlas_rel: str) -> dict[tuple[str, str], tuple[str, str, str]]:
+    """从语义属性图谱构建 (src_path, tgt_path) -> (relation, predicate, reason) 映射。"""
+    mapping: dict[tuple[str, str], tuple[str, str, str]] = {}
+    for src_path, pred, tgt_path, reason in parse_semantic_atlas(atlas_rel):
+        key = (src_path, tgt_path)
+        if key not in mapping:
+            mapping[key] = (pred, pred, reason)
+            if pred in SYMMETRIC_PREDICATES:
+                rev = (tgt_path, src_path)
+                if rev not in mapping:
+                    mapping[rev] = (pred, pred, reason)
     return mapping
 
 
@@ -474,6 +525,11 @@ def main() -> int:
             "00_meta/knowledge_topology/06_inter_layer_mapping_atlas.md",
         ]
     )
+    semantic_atlas_map = build_semantic_atlas_map(
+        "00_meta/knowledge_topology/12_semantic_properties_atlas.md"
+    )
+    # 语义属性图谱中的显式关系优先级更高
+    atlas_map.update(semantic_atlas_map)
 
     before_type = Counter(r.get("@type", "UNKNOWN") for r in relations)
     before_pred = Counter(r.get("ex:predicate", "UNKNOWN") for r in relations)
@@ -497,8 +553,15 @@ def main() -> int:
         old_type = r.get("@type", "ex:RelationAnnotation")
         old_pred = r.get("ex:predicate", "ex:relatedTo")
 
-        # 决定目标谓词
-        if old_pred in SEMANTIC_PREDICATES:
+        # 决定目标谓词：显式语义属性图谱优先于现有谓词
+        atlas_hit = atlas_map.get((s_path, o_path))
+        if atlas_hit:
+            _sym, pred, reason = atlas_hit
+            new_pred = pred
+            confidence = 0.95
+            source = f"atlas:{reason[:120]}"
+            rule = "atlas-semantic"
+        elif old_pred in SEMANTIC_PREDICATES:
             new_pred = old_pred
             confidence = r.get("ex:confidence", 0.9)
             source = r.get("ex:source", "existing")

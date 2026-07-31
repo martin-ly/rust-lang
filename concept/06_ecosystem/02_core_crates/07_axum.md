@@ -343,7 +343,7 @@ mindmap
       Handler 返回临时引用
     版本说明
       axum 0.8
-      MSRV 1.75 / 本库 1.97.0+
+      第三方 crate MSRV 1.75 / 本库基线 1.97.1+
       Tower 0.5 中间件
 ```
 

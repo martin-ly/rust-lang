@@ -3,7 +3,7 @@
 """check_msrv_consistency.py — MSRV 单一事实源一致性检查。
 
 根 `Cargo.toml` 的 `[workspace.package] rust-version` 是项目 MSRV 的唯一事实源
-（当前 1.97.0）。本脚本检查：
+（当前 1.97.1）。本脚本检查：
 
 1. **Cargo.toml**：所有 workspace 成员 crate 的 `rust-version` 必须为
    `rust-version.workspace = true`（继承）或与根 MSRV 一致。
@@ -41,7 +41,7 @@ THIRD_PARTY_HINTS = (
     "tokio", "sqlx", "seaorm", "sea orm", "embassy", "rust for linux", "debian",
     "ferrocene", "开源库", "库作者", "第三方", "third-party", "third party",
     "上游", "内核", "kernel", "dynosaur", "resolver", "embedded-hal", "embedded_hal",
-    "示例值",
+    "serde", "axum", "示例值",
 )
 
 VER = r"(1\.\d+(?:\.\d+)?)"

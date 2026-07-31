@@ -14,7 +14,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: P×Eva — 在资源受限环境中选择合适的内存策略
 > **前置概念**: [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md) · [Cargo build-std](../01_cargo/22_build_std.md) · [堆内存管理](../../02_intermediate/02_memory_management/01_memory_management.md)
-> **后置概念**: [PAC 与 HAL 实现](17_pac_hal_implementation.md) · [panic_handler 与 no_std 运行时](18_panic_runtime_no_std.md) · [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
+> **后置概念**: [PAC 与 HAL 实现](17_pac_hal_implementation.md) · [panic_handler 与 no_std 运行时](18_panic_runtime_no_std.md) · [嵌入式内存布局与堆安全](29_embedded_memory_layout_and_heap_safety.md) · [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
 
 ---
 
@@ -57,6 +57,8 @@ mindmap
     - [2.1 启用 alloc](#21-启用-alloc)
     - [2.2 OOM handler](#22-oom-handler)
   - [三、TLSF 与 `embedded-alloc`](#三tlsf-与-embedded-alloc)
+    - [3.1 `alloc-cortex-m`](#31-alloc-cortex-m)
+    - [3.2 自定义 bump allocator](#32-自定义-bump-allocator)
   - [四、buddy allocator](#四buddy-allocator)
   - [五、slab 与 arena](#五slab-与-arena)
     - [slab allocator](#slab-allocator)
@@ -116,15 +118,36 @@ static ALLOCATOR: DummyAllocator = DummyAllocator;
 
 ### 2.2 OOM handler
 
-在稳定 Rust 中，`no_std` + `alloc` 仍需要处理分配失败。旧 nightly 使用 `#[alloc_error_handler]`；当前推荐做法是在分配调用处检查返回值，或在自定义分配器中触发 panic/复位。
+在稳定 Rust 中，`#[alloc_error_handler]` 仍不稳定，因此 `no_std` + `alloc` 需要其他策略处理分配失败。当前推荐做法：
+
+1. 在自定义分配器的 `alloc` 中返回 `null`；调用方使用 `Vec::try_reserve` 或检查 `GlobalAlloc::alloc` 返回值；
+2. 在分配器内部直接触发 `panic` 或系统复位，避免返回空指针后产生悬空解引用；
+3. 使用 `panic-immediate-abort` 等 build-std feature 进一步压缩 panic 路径代码体积。
 
 ```rust,ignore
-#[alloc_error_handler]
-fn oom(_layout: Layout) -> ! {
-    // 旧 nightly 接口；稳定通道已逐步迁移
-    cortex_m::peripheral::SCB::sys_reset();
+#![no_std]
+extern crate alloc;
+
+use alloc::alloc::GlobalAlloc;
+use core::alloc::Layout;
+
+struct SafeAlloc;
+
+unsafe impl GlobalAlloc for SafeAlloc {
+    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
+        let ptr = raw_alloc(layout); // 假设底层接口
+        if ptr.is_null() {
+            // 策略 A：panic/复位，避免静默失败
+            panic!("OOM");
+        }
+        ptr
+    }
+
+    unsafe fn dealloc(&self, _ptr: *mut u8, _layout: Layout) {}
 }
 ```
+
+旧 nightly 使用的 `#[alloc_error_handler]` 仅适用于旧项目或特殊工具链；稳定通道项目应避免依赖。
 
 判定依据：裸机中不存在 OS 的 `mmap` 或 overcommit；分配失败必须被显式处理，否则会导致未定义行为或静默错误。
 
@@ -170,6 +193,74 @@ SECTIONS
 ```
 
 判定依据：TLSF 的 O(1) WCET 使其成为硬实时系统的首选动态分配器；但它仍会产生碎片，长期运行需监控堆使用率。
+
+### 3.1 `alloc-cortex-m`
+
+[alloc-cortex-m](https://docs.rs/alloc-cortex-m/) 是 `embedded-alloc` 的前身/变体，专门为 Cortex-M 提供基于 TLSF 的全局分配器。虽然新项目更推荐使用 `embedded-alloc`，但维护 legacy 代码或阅读早期嵌入式 Rust 资料时仍会频繁遇到。
+
+```rust,ignore
+#![no_std]
+extern crate alloc;
+
+use alloc_cortex_m::CortexMHeap;
+
+#[global_allocator]
+static HEAP: CortexMHeap = CortexMHeap::empty();
+
+fn init_heap() {
+    extern "C" {
+        static mut _heap_start: u8;
+        static mut _heap_end: u8;
+    }
+    let start = unsafe { &mut _heap_start as *mut u8 };
+    let end = unsafe { &mut _heap_end as *mut u8 };
+    let size = end as usize - start as usize;
+    unsafe { HEAP.init(start, size); }
+}
+```
+
+### 3.2 自定义 bump allocator
+
+教学或资源极度受限场景下可实现最简单的 bump allocator：只分配、不释放，通过临界区保证单核中断安全。The Embedded Rust Book 将其作为理解 `GlobalAlloc` 的入门示例，但明确建议生产环境使用成熟 crate。
+
+```rust,ignore
+#![no_std]
+extern crate alloc;
+
+use core::alloc::{GlobalAlloc, Layout};
+use core::cell::UnsafeCell;
+use core::ptr;
+
+struct BumpPointerAlloc {
+    head: UnsafeCell<usize>,
+    end: usize,
+}
+
+unsafe impl Sync for BumpPointerAlloc {}
+
+unsafe impl GlobalAlloc for BumpPointerAlloc {
+    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
+        cortex_m::interrupt::free(|_| {
+            let head = self.head.get();
+            let align = layout.align();
+            let size = layout.size();
+            let start = ((*head + align - 1) / align) * align;
+            if start + size > self.end {
+                ptr::null_mut()
+            } else {
+                *head = start + size;
+                start as *mut u8
+            }
+        })
+    }
+
+    unsafe fn dealloc(&self, _ptr: *mut u8, _layout: Layout) {
+        // bump allocator 不释放
+    }
+}
+```
+
+判定依据：bump allocator 实现简单、无外部碎片，但无法释放内存；适合阶段化批处理或生命周期单一的临时对象。
 
 ---
 

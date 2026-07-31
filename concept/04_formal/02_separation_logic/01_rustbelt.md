@@ -13,7 +13,7 @@
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价安全性定理的假设边界
 > **前置依赖**: [L4 所有权（Ownership）形式化](../01_ownership_logic/02_ownership_formal.md) · L4 类型论 · L4 线性逻辑
-> **后置延伸**: [L7 形式化方法](../../07_future/04_research_and_experimental/02_formal_methods.md) · [L6 验证工具](../../06_ecosystem/00_toolchain/01_toolchain.md)
+> **后置延伸**: [L7 形式化方法](../../07_future/04_research_and_experimental/02_formal_methods.md) · [L6 验证工具](../../06_ecosystem/00_toolchain/01_toolchain.md) · [形式化视角下的 unsafe 契约](../01_ownership_logic/07_unsafe_contracts_formal.md)
 > **跨层映射**: L4→L7 机械证明 → 自动化验证 | L4→L6 逻辑规则 → 工具实现
 > **定理链编号**: T-110 Iris 逻辑可靠性 → T-111 高阶幽灵状态 → T-112 类型系统（Type System） soundness
 > **层级**: L4 形式化理论

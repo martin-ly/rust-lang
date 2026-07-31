@@ -521,16 +521,19 @@ fn main() {
 ### 反例 ❌：不标注导致无法跨线程使用
 
 ```rust,compile_fail,E0277
-use std::ptr::NonNull;
+use std::marker::PhantomData;
+use std::rc::Rc;
 
+// 模拟一个 FFI 句柄：裸指针本身可 Send，但我们用 PhantomData 标记其底层资源不可跨线程
 pub struct SafeHandle {
-    ptr: NonNull<()>,
+    ptr: *mut (),
+    _not_send: PhantomData<Rc<()>>,
 }
 
 fn main() {
     use std::sync::Arc;
-    let h = Arc::new(SafeHandle { ptr: NonNull::dangling() });
-    std::thread::spawn(move || { let _ = h; });
+    let h = Arc::new(SafeHandle { ptr: std::ptr::null_mut(), _not_send: PhantomData });
+    std::thread::spawn(move || { let _h = h; });
 }
 ```
 

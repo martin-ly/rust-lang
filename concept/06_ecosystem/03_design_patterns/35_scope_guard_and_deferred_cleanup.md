@@ -17,7 +17,12 @@
 > [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) ·
 > [Rust Reference — Destructors](https://doc.rust-lang.org/reference/destructors.html)
 >
-> **前置概念**: [Ownership as Resource Management](34_ownership_as_resource_management.md) · [Rust 惯用法谱系](02_idioms_spectrum.md) · [析构函数与 Drop Scope](../../04_formal/05_rustc_internals/09_destructors.md)
+> **前置概念**:
+> [Ownership as Resource Management](34_ownership_as_resource_management.md) ·
+> [Rust 惯用法谱系](02_idioms_spectrum.md) ·
+> [析构函数与 Drop Scope](../../04_formal/05_rustc_internals/09_destructors.md) ·
+> [Rust vs Go：defer 机制对比](../../05_comparative/01_systems_languages/03_rust_vs_go.md) ·
+> [Rust vs D：scope 语句对比](../../05_comparative/01_systems_languages/08_rust_vs_d.md)
 > **后置概念**:
 > [错误处理进阶](../../02_intermediate/03_error_handling/01_error_handling.md) ·
 > [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) ·
@@ -214,7 +219,7 @@ let guard = guard(&mut v, |v| {
 
 选择策略可以让清理动作与事务语义精确对应。
 
-### 4.1 策略选择示例
+### 5.1 策略选择示例
 
 事务处理中，`OnSuccess` 可用于提交，`OnUnwind` 可用于回滚：
 
@@ -249,7 +254,23 @@ fn transfer(from: &mut Account, to: &mut Account, amount: u64) -> Result<(), Err
 
 ---
 
-## 六、与 `?` 和 early return 的集成
+## 七、与语言级 defer 的对比
+
+Go、Zig、D 等语言在语法层面提供 `defer`，Rust 则通过库与类型系统实现类似能力。二者差异如下：
+
+| 特性 | Go/Zig/D defer | Rust scope guard |
+|:---|:---|:---|
+| 语法位置 | 语句级，写在资源获取之后 | 表达式级，创建一个值 |
+| 执行时机 | 函数/作用域退出时 LIFO | `Drop` 触发，同样 LIFO |
+| 编译期检查 | 不检查是否遗漏 | 值必须被使用（可被 `_` 绑定） |
+| 策略粒度 | Go 只有一种；Zig 有 `errdefer` | `Always`/`OnSuccess`/`OnUnwind` |
+| 与借用系统配合 | 无 | 闭包捕获受生命周期约束 |
+
+Rust 的选择体现了其设计哲学：不引入专用语法，而是用通用的所有权和 `Drop` 机制表达同一概念。结果是 scope guard 与整个类型系统无缝集成，但也要求开发者理解闭包捕获与生命周期。
+
+---
+
+## 八、与 `?` 和 early return 的集成
 
 Scope guard 与 Rust 的 `?` 运算符配合极佳：在函数任意位置 early return，已创建的 guard 都会按栈顺序 drop。
 
@@ -280,9 +301,9 @@ impl<F: FnOnce()> Drop for ScopeGuard<F> {
 
 ---
 
-## 七、反例：scope guard 的误用
+## 九、反例：scope guard 的误用
 
-### 6.1 双重释放风险
+### 9.1 双重释放风险
 
 ```rust,ignore
 use std::ptr;
@@ -317,7 +338,7 @@ impl<F: FnOnce()> Drop for ScopeGuard<F> {
 
 **修正**：一个资源只能有一个所有者负责释放；要么用 RAII 类型，要么用 scope guard，不要同时使用两者管理同一资源。
 
-### 6.2 清理顺序错误
+### 9.2 清理顺序错误
 
 多个 `defer!` 按 LIFO 执行。如果业务逻辑要求「先打开的后关闭」，则 `defer!` 顺序必须与之对应。顺序写反会导致依赖资源提前释放。
 
@@ -339,7 +360,7 @@ impl<F: FnOnce()> Drop for ScopeGuard<F> {
 }
 ```
 
-### 6.3 在 guard 闭包中捕获已移动值
+### 8.3 在 guard 闭包中捕获已移动值
 
 Scope guard 的回调通常需要在创建点捕获环境。若捕获的值之后被移动，闭包可能无法编译：
 
@@ -363,7 +384,7 @@ impl<F: FnOnce()> Drop for ScopeGuard<F> {
 
 ---
 
-## 八、决策树：选择清理策略
+## 十、决策树：选择清理策略
 
 ```mermaid
 graph TD
@@ -379,7 +400,25 @@ graph TD
 
 ---
 
-## 九、思维导图
+## 十一、性能考量与零成本抽象
+
+Scope guard 在运行时只增加一个 `Drop` 调用的开销，与手写 `try`/`finally` 或语言级 `defer` 等价。`scopeguard` crate 的设计保证：
+
+- 无堆分配：guard 本身是栈上的小结构体。
+- 无动态分发：闭包通过泛型单态化，调用点内联。
+- 无异常簿记：依赖 Rust 的栈展开机制，不引入额外运行时状态。
+
+因此，在 hot path 上使用 scope guard 通常是可以接受的。但需注意：
+
+- 避免在 guard 回调中执行重 I/O 或复杂计算。
+- 大量嵌套 guard 会增加栈帧大小和指令缓存压力。
+- 若清理动作极其简单（如单个变量复位），直接写 `Drop` 或 RAII 类型可能更清晰。
+
+从工程角度看，scope guard 的价值在于把「正常路径」与「清理路径」解耦：业务代码专注于成功流程，而失败、回滚、日志等横切关注点由 guard 统一处理。这种解耦在复杂函数中显著降低认知负荷，同时保持零额外抽象成本。它是 Rust 在不引入专用语法的前提下，复用所有权与 `Drop` 机制实现高表达力资源管理的典型范例，体现了 Rust「用类型系统解决横切关注点」的设计哲学。
+
+---
+
+## 十二、思维导图
 
 ```mermaid
 mindmap
@@ -409,7 +448,7 @@ mindmap
 
 ---
 
-## 十、相关概念
+## 十三、相关概念
 
 | 概念 | 关系 |
 |:---|:---|
@@ -421,7 +460,7 @@ mindmap
 
 ---
 
-## 十一、权威来源索引
+## 十四、权威来源索引
 
 - [scopeguard crate docs](https://docs.rs/scopeguard/latest/scopeguard/)
 - [The Rustonomicon — RAII](https://doc.rust-lang.org/nomicon/raii.html)

@@ -1359,8 +1359,8 @@ impl Add for Point {
 
 #### C-DEREF：仅智能指针实现 `Deref` / `DerefMut`
 
-```rust,compile_fail
-// ❌ 反例：用 Deref 模拟继承
+```rust
+// ❌ 反例：用 Deref 模拟继承（能编译，但违背 API 设计意图）
 use std::ops::Deref;
 struct Engine;
 impl Engine { fn start(&self) {} }
@@ -1373,6 +1373,7 @@ fn main() { Car { engine: Engine }.start(); }
 ```
 
 > 修正：提供显式 `fn engine(&self) -> &Engine`。见 [边界测试 12.3](#123-边界测试deref-反模式)。
+> 说明：`Deref` 多态允许上面的调用通过编译；此处标注为反例是因为用 `Deref` 模拟继承会隐藏领域语义，并非编译错误。
 
 #### C-CTOR：构造器是静态固有方法
 

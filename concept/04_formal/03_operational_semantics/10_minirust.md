@@ -1,7 +1,7 @@
 # MiniRust：Rust 操作语义的可执行模型
 
 **EN**: MiniRust: An Executable Operational Semantics for Rust
-**Summary**: MiniRust 是 Ralf Jung 等人构建的 Rust 核心语言可执行小步操作语义，用于精确刻画所有权、借用、裸指针与内存模型（Tree Borrows）之间的交互，为 Miri、Aeneas 等工具提供形式化基线。
+**Summary**: MiniRust 是 Ralf Jung 等人倡导的 Rust 核心语言可执行小步操作语义，通过显式抽象机状态（表达式/语句、值、类型、内存接口）精确刻画所有权、借用、裸指针与别名模型（Stacked/Tree Borrows）的交互，为 Miri、Aeneas 与 Rust 官方语义规范化提供形式化基线。
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4-L5
@@ -10,13 +10,14 @@
 > **最后更新**: 2026-07-31
 >
 > **前置概念**: [操作语义：程序行为的形式化定义](03_operational_semantics.md) · [Tree Borrows 深度解析](../01_ownership_logic/05_tree_borrows_deep_dive.md) · [Behavior Considered Undefined](../01_ownership_logic/06_behavior_considered_undefined.md) · [Memory Model](../../03_advanced/02_unsafe/06_memory_model.md)
-> **后置概念**: [Miri](../04_model_checking/08_miri.md) · [Aeneas Symbolic Semantics](07_aeneas_symbolic_semantics.md) · [Kani](../04_model_checking/09_kani.md)
+> **后置概念**: [Miri](../04_model_checking/08_miri.md) · [Aeneas Symbolic Semantics](07_aeneas_symbolic_semantics.md) · [Kani](../04_model_checking/09_kani.md) · [async/await 状态机的操作语义](11_async_state_machine_semantics.md) · [Pin 与自引用类型的形式语义](12_pin_and_self_referential_semantics.md)
 >
 > **国际权威来源**:
-> [MiniRust GitHub](https://github.com/RalfJung/minirust) ·
+> [MiniRust GitHub](https://github.com/minirust/minirust) ·
+> [Ralf Jung — MiniRust vision](https://github.com/minirust/minirust) ·
 > [Ralf Jung — Tree Borrows blog](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html) ·
 > [Tree Borrows paper (PLDI 2025)](https://perso.crans.org/vanile/treebor/) ·
-> [Stacked Borrows (POPL 2019)](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) ·
+> [Stacked Borrows (POPL 2020)](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) ·
 > [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) ·
 > [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
 
@@ -35,29 +36,56 @@ Rust 的编译器（rustc）是一个庞大且不断演进的工程系统，直�
 
 ---
 
-## 1. 核心抽象：表达式、值与配置
+## 1. 核心抽象：表达式、语句、值与配置
 
-MiniRust 把程序状态抽象为五元组（configuration）：
+MiniRust 把程序状态抽象为抽象机配置（configuration）：
 
 ```text
-⟨e, ρ, σ, τ, A⟩
+⟨P, ρ, σ, τ, A, κ⟩
 ```
 
 | 分量 | 含义 | Rust 对应 |
 |---|---|---|
-| `e` | 当前待归约的表达式 / 语句 | MIR 基本块中的语句序列 |
+| `P` | 当前待执行的程序点（语句/终结符） | MIR 基本块中的语句序列 |
 | `ρ` | 局部变量环境（variable → location）| 栈帧中的局部变量表 |
 | `σ` | 堆 / 栈内存（location → byte）| 运行时的内存字节 |
 | `τ` | 每个内存位置的类型元数据（对齐、有效值、生命周期）| 类型布局与 validity |
 | `A` | 别名模型状态（Stacked/Tree Borrows 的 tag 权限）| Miri 的 borrow tracker |
+| `κ` | 调用栈 / continuation | unwind、函数返回地址 |
 
-### 1.1 值与位置
+### 1.1 值（Values）与类型（Types）
 
-- **值（value）**：立即数（integer、bool、enum discriminant）或指针（ptr = ⟨address, provenance, tag⟩）。
-- **位置（place）**：变量名或解引用 `*p`，求值后得到内存地址。
-- **所有权的语义**：`let x = v;` 在 `ρ` 中新建绑定，并把 `v` 对应资源标记为「属于 `x`」。`move y` 把资源从 `x` 转移到 `y`，原绑定失效。
+在 MiniRust 中，**值**是高层结构化对象（如数学整数、元组、枚举变体、指针），而**类型**只是值与底层字节之间的编解码器（codec）。这一分离让「读取未初始化内存」「类型有效性」等概念变得可形式化：
 
-### 1.2 小步归约示例
+```text
+Value ::= Int(n) | Bool(b) | Enum(discr, fields) | Tuple(vals) | Ptr(addr, provenance, tag)
+Type  ::= Bool | Int(size) | Tuple(tys) | Enum(variants) | Array(ty, n) | Reference(ty, mut, tag)
+```
+
+- **表示关系（representation relation）**：`value : ty` 且 `bytes_of(value) : ty` 同时成立时，才能做类型化读写。
+- **指针值**包含地址、provenance（属于哪一次分配）和 tag（Stacked/Tree Borrows 中的借用标识）。
+
+### 1.2 表达式与语句的小步语义
+
+MiniRust 把 MIR 的语句分为赋值、存储、函数调用等，终结符（terminator）负责控制流。核心规则可写成：
+
+```text
+⟨assign(place, e); rest, ρ, σ, τ, A⟩
+→ ⟨rest, ρ, σ[addr(place) ↦ encode(⟦e⟧, τ(place))], τ, A'⟩
+```
+
+其中 `⟦e⟧` 表示在环境 `ρ` 下求值表达式，`A'` 是别名模型对这次写访问的更新结果。
+
+所有权转移规则：
+
+```text
+⟨let x = move y; rest, ρ, σ, τ, A⟩
+→ ⟨rest, ρ[x↦ρ(y)], σ, τ[y↦invalid], A⟩
+```
+
+`move` 把 `y` 对应的 location 标记为**失效**（或保留 provenance 但不可再按原类型读取），这对应 Rust 中「移动后使用」报 `E0382` 的语义根源。
+
+### 1.3 小步归约示例
 
 ```text
 ⟨let mut x = 0; x = 1; x, ρ, σ, τ, A⟩
@@ -70,7 +98,28 @@ MiniRust 把程序状态抽象为五元组（configuration）：
 
 ---
 
-## 2. 借用与别名模型：Stacked vs Tree
+## 2. 内存接口：把内存模型参数化
+
+MiniRust 最重要的设计决策之一是引入**内存接口（memory interface）**：语言语义不直接实现内存，而是对内存提出一组操作原语，让不同的别名模型去实现。
+
+```text
+Memory trait:
+  fn allocate(&mut self, size, align) -> Pointer
+  fn deallocate(&mut self, ptr)
+  fn load(&mut self, ptr, ty) -> Result<Value>
+  fn store(&mut self, ptr, ty, value) -> Result<()>
+  fn retag(&mut self, ptr, kind) -> Pointer
+```
+
+这种参数化意味着：
+
+- **基本内存模型（basic memory model）**：只检查对齐与初始化，不追踪别名，适合教学与快速原型。
+- **Tree Borrows 内存模型**：把每次 `retag` 看成在借用树中创建子节点，读写时检查节点权限状态机。
+- **未来模型**：只要实现同一接口，就可以在 MiniRust 抽象机上替换，从而评估对现有代码的影响。
+
+---
+
+## 3. 借用与别名模型：Stacked vs Tree
 
 MiniRust 把别名模型抽象为一个**可替换模块**。两种模型对同一程序的判定可能不同：
 
@@ -79,14 +128,15 @@ MiniRust 把别名模型抽象为一个**可替换模块**。两种模型对同�
 | 通过裸指针重新借用后复用原引用 | ❌ 可能判 UB（栈顺序被破坏） | ✅ 允许，父引用仍可读 |
 | 共享引用后通过另一共享引用写（无数据竞争前提下）| ❌ 严格禁止 | ❌ 仍禁止 |
 | 子树独立演化 | 不支持 | 支持；不同分支可独立失效 |
+| 保留两阶段借用（reserved mutable） | 需要特殊处理 | 原生支持 |
 
-### 2.1 Tree Borrows 的权限状态机
+### 3.1 Tree Borrows 的权限状态机
 
 每个内存位置的权限是一棵**借用树**：
 
 - **根（root）**：原始分配或 `&mut` 最初产生的引用。
 - **子节点**：由父引用重借用（reborrow）产生。
-- **状态**：`Active` / `Frozen` / `Disabled` 等；读/写操作会沿树传播并检查兼容性。
+- **状态**：`Active`（可读可写） / `Frozen`（只读） / `Disabled`（不可访问） / `Reserved`（两阶段可变借用的预备态）。
 
 ```rust,ignore
 // Tree Borrows 允许：父引用在子引用创建后仍可读
@@ -103,7 +153,7 @@ unsafe {
 
 ---
 
-## 3. 与 Miri、Aeneas、Kani 的关系
+## 4. 与 Miri、Aeneas、Kani 的关系
 
 | 工具 | 如何利用 MiniRust/语义模型 | 区别 |
 |---|---|---|
@@ -116,7 +166,9 @@ unsafe {
 
 ---
 
-## 4. 反例：MiniRust 能捕获但类型系统不能的 UB
+## 5. 反例：MiniRust 能捕获但类型系统不能的 UB
+
+### 5.1 子借用期间通过父指针写
 
 ```rust,ignore
 fn main() {
@@ -134,36 +186,72 @@ fn main() {
 
 **修正**：避免在子借用存活期间通过父指针写；或在写之前结束子借用的生命周期。
 
----
+### 5.2 读取未初始化 padding
 
-## 5. 国际权威来源与延伸阅读
+```rust,ignore
+#[repr(C)]
+struct WithPadding {
+    a: u8,
+    b: u32,
+}
 
-- **MiniRust 实现**: [github.com/RalfJung/minirust](https://github.com/RalfJung/minirust)
-- **Tree Borrows 论文**: Villani et al., *Tree Borrows*, PLDI 2025 · [预印本](https://perso.crans.org/vanile/treebor/aux/preprint.pdf) · [DOI](https://doi.org/10.1145/3735592)
-- **Stacked Borrows 论文**: Jung et al., *Stacked Borrows: An Aliasing Model for Rust*, POPL 2019 · [项目页](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
-- **Ralf Jung 博客**: [Tree Borrows 讲解](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html)
-- **Rust 官方**: [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) · [Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
+fn main() {
+    let s: WithPadding = unsafe { std::mem::zeroed() };
+    let bytes = unsafe {
+        std::slice::from_raw_parts(
+            &s as *const _ as *const u8,
+            std::mem::size_of::<WithPadding>()
+        )
+    };
+    println!("{:?}", &bytes[1..4]); // 读取 padding：UB
+}
+```
 
----
+### 5.3 指针 provenance 丢失
 
-## 6. 思维导图
-
-```mermaid
-mindmap
-  root((MiniRust 操作语义))
-    核心配置 ⟨e, ρ, σ, τ, A⟩
-    小步归约规则
-    所有权转移语义
-    借用树 / Tree Borrows
-    Stacked Borrows 对比
-    Miri 动态检测
-    Aeneas 符号化翻译
-    UCG / Reference 基线
+```rust,ignore
+fn main() {
+    let v = vec![1, 2, 3];
+    let addr = v.as_ptr() as usize;
+    drop(v);
+    let _restored = addr as *const i32; // provenance 已失效，解引用即 UB
+}
 ```
 
 ---
 
-## 7. 后续深化方向
+## 6. 国际权威来源与延伸阅读
+
+- **MiniRust 实现**: [github.com/minirust/minirust](https://github.com/minirust/minirust)
+- **MiniRust 愿景**: Ralf Jung, *MiniRust — a precise specification for "Rust lite / MIR plus"* · [GitHub README](https://github.com/minirust/minirust)
+- **Tree Borrows 论文**: Villani et al., *Tree Borrows*, PLDI 2025 · [项目页](https://perso.crans.org/vanile/treebor/) · [DOI](https://doi.org/10.1145/3735592)
+- **Stacked Borrows 论文**: Jung et al., *Stacked Borrows: An Aliasing Model for Rust*, POPL 2020 · [项目页](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
+- **Ralf Jung 博客**: [Tree Borrows 讲解](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html)
+- **Rust 官方**: [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) · [Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
+- **相关形式化工作**: [a-mir-formality](https://github.com/rust-lang/a-mir-formality) · [Ferrocene Language Specification](https://spec.ferrocene.dev/)
+
+---
+
+## 7. 思维导图
+
+```mermaid
+mindmap
+  root((MiniRust 操作语义))
+    抽象机配置 ⟨P, ρ, σ, τ, A, κ⟩
+    表达式 / 语句小步归约
+    值与类型的编解码器
+    内存接口 Memory trait
+    别名模型可插拔
+      Stacked Borrows
+      Tree Borrows
+    所有权 move 语义
+    Miri / Aeneas / Kani 基线
+    UCG / Reference 对齐
+```
+
+---
+
+## 8. 后续深化方向
 
 1. 将 MiniRust 配置形式化到 [计算语义框架](../11_computational_models/01_computational_semantics_framework.md) 的「程序 ↔ 图灵机模拟」视角。
 2. 在 [Tree Borrows 深度解析](../01_ownership_logic/05_tree_borrows_deep_dive.md) 中补充「从 MiniRust 配置到 borrow tree 的构造算法」。

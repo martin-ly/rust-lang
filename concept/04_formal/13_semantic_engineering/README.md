@@ -52,6 +52,8 @@ Rust 投影层面，本目录把**类型系统**视为一种轻量级闭世界�
 | 03 | `03_knowledge_graph_construction.md` | RDF/SPARQL/SHACL、知识图谱构建、实体解析、FAIR 原则 | ✅ 已创建 |
 | 04 | `04_semantic_interoperability.md` | Linked Data、schema.org、本体对齐、RDF-star | ✅ 已创建 |
 | 05 | `05_knowledge_graph_reasoning.md` | 知识图谱推理：本体推理、规则推理、Rust 投影 | ✅ 已创建 |
+| 06 | `06_ai_ontology_and_rust_semantics.md` | AI 本体论 × Rust 语义工程（GraphRAG、Neuro-Symbolic、安全关键本体） | ✅ 已创建 |
+| 07 | `07_kg_owl_shacl_semantics.md` | KG 的 OWL/SHACL 语义形式化 | ✅ 已创建 |
 
 ---
 

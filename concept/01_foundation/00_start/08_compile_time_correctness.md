@@ -18,7 +18,11 @@
 > [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
 > [TRPL — What is Ownership?](https://doc.rust-lang.org/book/ch04-00-ownership.html)
 >
-> **前置概念**: [所有权（Ownership）](../01_ownership_borrow_lifetime/01_ownership.md) · [借用（Borrowing）](../01_ownership_borrow_lifetime/02_borrowing.md)
+> **前置概念**:
+> [术语表（Terminology Glossary）](../../00_meta/01_terminology/01_terminology_glossary.md) ·
+> [Bloom 认知层级](../../00_meta/00_framework/bloom_taxonomy.md) ·
+> [所有权（Ownership）](../01_ownership_borrow_lifetime/01_ownership.md) ·
+> [借用（Borrowing）](../01_ownership_borrow_lifetime/02_borrowing.md)
 > **后置概念**:
 > [类型状态模式（Typestate）](../../06_ecosystem/03_design_patterns/32_typestate_deep_dive.md) ·
 > [常量泛型（Const Generics）](../../02_intermediate/01_generics/02_const_generics.md) ·
@@ -217,6 +221,8 @@ fn safe_split(data: &mut [u8]) -> (&mut [u8], &mut [u8]) {
 - **降低回归成本**：类型系统充当回归测试的「免费」补充，修改 API 后所有调用点自动失效。
 - **增强重构信心**：大规模代码库调整时，编译错误清单相当于「待办事项」，避免遗漏。
 - **文档化不变量**：类型签名、生命周期参数、`must_use` 等本身就是机器可检查的文档。
+
+这种「编译即验证」的特性在大型项目和长期维护中尤为重要：当代码库达到数十万行时，人工 review 难以覆盖所有修改路径，而类型系统对每次变更都进行全局一致性检查。它把「是否能通过编译」从单纯的语法门槛提升为语义安全门槛，使团队能够以更高频率发布和重构。
 
 ### 6.2 边界：编译期正确性不能替代什么
 

@@ -22,6 +22,7 @@
 > [异步 no_std 嵌入式](11_async_no_std_embedded.md) ·
 > [目标平台支持等级](10_target_tier_platform_support.md) ·
 > [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) ·
+> [安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508](30_misra_rust_safety_critical_guidelines.md) ·
 > [嵌入式图形](07_embedded_graphics.md)
 
 ---

@@ -163,7 +163,7 @@ fn parallel_sum(data: &[i32]) -> i32 {
 
 ### 反例：数据竞争
 
-```rust,compile_fail,E0133
+```rust
 static mut COUNTER: i32 = 0;
 
 fn main() {
@@ -172,7 +172,9 @@ fn main() {
 }
 ```
 
-**修正**: 使用 `Arc<Mutex<T>>` 或原子操作；避免 `static mut`。
+> 说明：上面的代码**可以编译**（`static mut` 访问在 `unsafe` 块内被允许），但两个线程并发读写同一地址，构成数据竞争，运行时行为未定义。此处作为反例展示，请勿在生产代码中照搬。
+>
+> **修正**: 使用 `Arc<Mutex<T>>` 或原子操作；避免 `static mut`。
 
 ### 边界：内存模型不保证无锁算法正确性
 

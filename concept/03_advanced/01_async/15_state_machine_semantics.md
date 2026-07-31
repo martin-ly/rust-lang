@@ -10,7 +10,7 @@
 > **内容分级**: [专家级]
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **前置概念**: [Async/Await](01_async.md) · [Control Flow](../../01_foundation/04_control_flow/01_control_flow.md) · [Enums and Pattern Matching](../../01_foundation/04_control_flow/02_patterns.md)
-> **后置概念**: [Workflow Theory & Formalization](../../06_ecosystem/03_design_patterns/17_workflow_theory.md) · [Concurrency Patterns](../00_concurrency/03_concurrency_patterns.md)
+> **后置概念**: [Workflow Theory & Formalization](../../06_ecosystem/03_design_patterns/17_workflow_theory.md) · [Concurrency Patterns](../00_concurrency/03_concurrency_patterns.md) · [async/await 状态机的操作语义](../../04_formal/03_operational_semantics/11_async_state_machine_semantics.md)
 > **向下引用（Reference）**: [Enums and Pattern Matching](../../01_foundation/04_control_flow/02_patterns.md) · [Control Flow](../../01_foundation/04_control_flow/01_control_flow.md)
 
 ---
@@ -206,6 +206,7 @@ mindmap
 - [`../../06_ecosystem/03_design_patterns/17_workflow_theory.md`](../../06_ecosystem/03_design_patterns/17_workflow_theory.md) — 工作流理论与形式化（L6 权威页）
 - [`../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md`](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) — 迭代器（Iterator）是状态机的 L2 实例
 - [`../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md`](../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md) — 进程演算
+- [`../../04_formal/03_operational_semantics/11_async_state_machine_semantics.md`](../../04_formal/03_operational_semantics/11_async_state_machine_semantics.md) — async/await 状态机的 L4-L5 形式语义
 
 ---
 

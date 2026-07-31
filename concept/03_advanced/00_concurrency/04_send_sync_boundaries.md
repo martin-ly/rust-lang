@@ -19,7 +19,7 @@
 > [Traits](../../02_intermediate/00_traits/01_traits.md) ·
 > [Trait Objects / 分发机制](../../02_intermediate/00_traits/02_dispatch_mechanisms.md) ·
 > [Async/Await](../01_async/01_async.md)
-> **后置概念**: [并发模式](03_concurrency_patterns.md) · [跨平台并发](05_cross_platform_concurrency.md) · [Unsafe Rust](../02_unsafe/01_unsafe.md)
+> **后置概念**: [并发模式](03_concurrency_patterns.md) · [跨平台并发](05_cross_platform_concurrency.md) · [Unsafe Rust](../02_unsafe/01_unsafe.md) · [Send/Sync 并发语义边界](../../04_formal/07_concurrency_semantics/08_send_sync_semantics.md)
 > **前置依赖**:
 > [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
 > [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) ·
@@ -460,6 +460,7 @@ assert_sync::<MyType>();
 - [Async/Await](../01_async/01_async.md) / [Pin 与 Unpin](../01_async/08_pin_unpin.md)：async 状态机、自引用与 `Pin<Box<dyn Future + Send>>` 的交互。
 - [Trait Objects / 分发机制](../../02_intermediate/00_traits/02_dispatch_mechanisms.md)：object safety、`dyn Trait` 的内存布局与 vtable。
 - [Unsafe Rust](../02_unsafe/01_unsafe.md)：手动实现 Send/Sync 的语义责任与常见反模式。
+- [Send/Sync 并发语义边界](../../04_formal/07_concurrency_semantics/08_send_sync_semantics.md)：L4-L5 形式化语义入口。
 
 ---
 

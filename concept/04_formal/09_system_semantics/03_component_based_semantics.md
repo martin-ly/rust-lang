@@ -259,6 +259,10 @@ trait Actuator {
 Rust 的 struct 与其 `impl` 对应组件的 **Behavior + State**：struct 持有局部状态，`impl` 定义状态迁移。
 
 ```rust
+enum Command {
+    Adjust(f64),
+}
+
 struct Thermostat {
     target: f64,
     current: f64,

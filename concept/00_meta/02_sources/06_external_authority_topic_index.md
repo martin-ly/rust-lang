@@ -49,6 +49,16 @@
   - [十二、维护流程](#十二维护流程)
   - [十三、新增国际化来源映射（2026-07-31）](#十三新增国际化来源映射2026-07-31)
   - [十四、UCG / rustc-dev-guide / 形式化验证工具深度映射（P3）](#十四ucg--rustc-dev-guide--形式化验证工具深度映射p3)
+    - [14.1 Unsafe Code Guidelines 细化映射](#141-unsafe-code-guidelines-细化映射)
+    - [14.2 rustc-dev-guide 细化映射](#142-rustc-dev-guide-细化映射)
+    - [14.3 形式化验证工具映射](#143-形式化验证工具映射)
+    - [14.4 后续维护动作](#144-后续维护动作)
+  - [十五、惯用法 / 算法 / 设计模式 / Rust 特有解决方案映射（F 专项，2026-07-31）](#十五惯用法--算法--设计模式--rust-特有解决方案映射f-专项2026-07-31)
+    - [15.1 惯用法来源映射](#151-惯用法来源映射)
+    - [15.2 算法来源映射](#152-算法来源映射)
+    - [15.3 设计模式来源映射](#153-设计模式来源映射)
+    - [15.4 Rust 特有解决方案来源映射](#154-rust-特有解决方案来源映射)
+    - [15.5 维护动作](#155-维护动作)
 
 ---
 
@@ -287,6 +297,14 @@ rustc-dev-guide 主题为**编译器实现细节**，项目 L4/L6 已有概述�
 | [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) | 自定义 target、链接脚本、启动序列 | `concept/06_ecosystem/05_systems_and_embedded/13_bare_metal_boot_linker_script.md`、`23_no_std_and_bare_metal_idioms.md` | ✅ |
 | [Embassy](https://github.com/embassy-rs/embassy) | Async embedded executor | `concept/06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md`、`26_embedded_rtos_and_safety_critical_frameworks.md` | ✅ |
 | [Hubris](https://github.com/oxidecomputer/hubris) / [Ariel OS](https://github.com/ariel-os/ariel-os) / [RTIC](https://github.com/rtic-rs/rtic) / [Tock](https://github.com/tock/tock) / [Ferrocene](https://ferrous-systems.com/ferrocene/) | 嵌入式 RTOS 与安全关键框架 | `concept/06_ecosystem/05_systems_and_embedded/26_embedded_rtos_and_safety_critical_frameworks.md` | ✅ |
+| [Ferrous Systems — Booting a Cortex-M Microcontroller](https://rust-training.ferrous-systems.com/latest/book/booting-cortex-m) | 复位向量、向量表、`_start`、`.data`/`.bss`、启动 soundness | `concept/06_ecosystem/05_systems_and_embedded/27_no_std_startup_runtime_deep_dive.md`、`13_bare_metal_boot_linker_script.md` | ✅ |
+| [cortex-m-rt](https://docs.rs/cortex-m-rt/) / [riscv-rt](https://docs.rs/riscv-rt/) | 目标运行时入口、`#[entry]`、链接脚本 | `concept/06_ecosystem/05_systems_and_embedded/27_no_std_startup_runtime_deep_dive.md`、`23_no_std_and_bare_metal_idioms.md` | ✅ |
+| [Embassy Executor](https://docs.rs/embassy-executor/) / [RTIC Book — async tasks](https://rtic.rs/2/book/en/) | 裸机 async executor、Waker、ISR 驱动调度 | `concept/06_ecosystem/05_systems_and_embedded/28_custom_bare_metal_async_executor.md`、`11_async_no_std_embedded.md` | ✅ |
+| [flip-link](https://github.com/knurling-rs/flip-link) / [ARM Compiler scatter files](https://developer.arm.com/documentation/100748/latest) | 栈溢出保护、scatter file、内存布局 | `concept/06_ecosystem/05_systems_and_embedded/29_embedded_memory_layout_and_heap_safety.md`、`13_bare_metal_boot_linker_script.md` | ✅ |
+| [MISRARust: Mapping MISRA-C++ Coding Guidelines to the Rust Programming Language](https://arxiv.org/html/2605.23490v1) | MISRA-Rust 规则映射、编码规范 | `concept/06_ecosystem/05_systems_and_embedded/30_misra_rust_safety_critical_guidelines.md` | ✅ |
+| [Ferrocene Language Specification](https://spec.ferrocene.dev/) / [Ferrocene core certification news](https://ferrous-systems.com/blog/ferrocene-libcore-news-release/) | 合格语言子集、core 库 SIL 2 认证 | `concept/06_ecosystem/05_systems_and_embedded/30_misra_rust_safety_critical_guidelines.md`、`19_safety_critical_bare_metal_os.md` | ✅ |
+| [Rust Blog — What does it take to ship Rust in safety-critical?](https://blog.rust-lang.org/2026/01/14/what-does-it-take-to-ship-rust-in-safety-critical/) | 安全关键 Rust 生态现状、依赖生命周期、async runtime 鉴定 | `concept/06_ecosystem/05_systems_and_embedded/30_misra_rust_safety_critical_guidelines.md` | ✅ |
+| [Safety-Critical Rust Consortium](https://rustfoundation.org/safety-critical-rust-consortium/) / [Safety-Critical Rust coding guidelines](https://github.com/rustfoundation/safety-critical-rust-coding-guidelines) | 编码指南、MC/DC、目标平台就绪清单 | `concept/06_ecosystem/05_systems_and_embedded/30_misra_rust_safety_critical_guidelines.md` | ✅ |
 | [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | Idioms、design patterns、anti-patterns、FFI patterns | `concept/06_ecosystem/03_design_patterns/02_idioms_spectrum.md`、`33_anti_patterns.md`、`concept/03_advanced/04_ffi/07_ffi_patterns.md` | ✅ |
 | [Rust API Guidelines Checklist](https://rust-lang.github.io/api-guidelines/checklist.html) | C-XXXX 指南逐项映射 | `concept/00_meta/00_framework/rust_api_guidelines_canonical.md` | ✅ |
 | [Mark Richards — Software Architecture Patterns 2nd ed.](https://www.oreilly.com/library/view/software-architecture-patterns/9781098134280/) | Layered、Event-driven、Microkernel、Microservices、Space-based、SOA、Pipeline | `concept/06_ecosystem/03_design_patterns/08_architecture_patterns.md`、`concept/04_formal/10_architecture_semantics/05_architecture_styles_formal_constraints.md` | ✅ |
@@ -346,3 +364,49 @@ rustc-dev-guide 主题为**编译器实现细节**，项目 L4/L6 已有概述�
 1. **P5 联动**：将 MiniRust/Tree Borrows 的操作语义细节反向注入 [Tree Borrows Deep Dive](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md) 与 [Operational Semantics](../../04_formal/03_operational_semantics/03_operational_semantics.md)。
 2. **季度审计**：每季度用 `scripts/check_authority_freshness.py` 复核上述 URL 的 200/301 状态；失效链接在 §十一 登记并修复。
 3. **新增工具**：若 Rust 形式化生态出现新工具（如 BorrowSanitizer 稳定化），按本表格式追加一行，并同步到 [Verification Toolchain](../../04_formal/04_model_checking/01_verification_toolchain.md)。
+
+---
+
+## 十五、惯用法 / 算法 / 设计模式 / Rust 特有解决方案映射（F 专项，2026-07-31）
+
+本表记录 F 专项新建/补全页与国际权威来源的对应关系，用于季度审计与持续对齐。
+
+### 15.1 惯用法来源映射
+
+| 主题 | 项目页 | 国际权威来源 |
+|:---|:---|:---|
+| `Cow<T>` / clone-on-write | [Rust 惯用法谱系全景](../../06_ecosystem/03_design_patterns/02_idioms_spectrum.md) | [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) |
+| 错误处理（`ok_or`/`map_err`/thiserror/anyhow） | [Rust 惯用法谱系全景](../../06_ecosystem/03_design_patterns/02_idioms_spectrum.md) | [Rust Book Ch.9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [thiserror docs](https://docs.rs/thiserror) · [anyhow docs](https://docs.rs/anyhow) |
+| Iterator 高级适配器 | [Rust 惯用法谱系全景](../../06_ecosystem/03_design_patterns/02_idioms_spectrum.md) | [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html) |
+| async 运行时惯用法 | [Rust 惯用法谱系全景](../../06_ecosystem/03_design_patterns/02_idioms_spectrum.md) | [Tokio Docs](https://docs.rs/tokio) · [Rust Async Book](https://rust-lang.github.io/async-book/) |
+| no_std / 裸机惯用法 | [Rust 惯用法谱系全景](../../06_ecosystem/03_design_patterns/02_idioms_spectrum.md) | [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [cortex-m docs](https://docs.rs/cortex-m) |
+| unsafe 惯用法边界 | [Rust 惯用法谱系全景](../../06_ecosystem/03_design_patterns/02_idioms_spectrum.md) | [The Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) |
+
+### 15.2 算法来源映射
+
+| 主题 | 项目页 | 国际权威来源 |
+|:---|:---|:---|
+| 零拷贝解析 | [Rust 零拷贝解析](../../06_ecosystem/11_domain_applications/26_zero_copy_parsing_in_rust.md) | [nom docs](https://docs.rs/nom) · [winnow docs](https://docs.rs/winnow) · [serde lifetimes](https://serde.rs/lifetimes.html) |
+| 所有权感知算法 | [所有权感知算法](../../06_ecosystem/11_domain_applications/27_ownership_aware_algorithms.md) | [The Rust Performance Book](https://nnethercote.github.io/perf-book/) · [std::slice](https://doc.rust-lang.org/std/slice/) |
+| unsafe 算法不变式 | [unsafe 算法不变式](../../06_ecosystem/11_domain_applications/28_unsafe_algorithm_invariants.md) | [Rust Reference — Unsafe](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Rust Atomics and Locks](https://marabos.nl/atomics/) · [Kani docs](https://model-checking.github.io/kani/) |
+
+### 15.3 设计模式来源映射
+
+| 主题 | 项目页 | 国际权威来源 |
+|:---|:---|:---|
+| Builder / Factory / Adapter / Observer / Strategy | [设计模式概览](../../06_ecosystem/03_design_patterns/01_patterns.md) | [GoF — Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) · [refactoring.guru](https://refactoring.guru/design-patterns) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) |
+
+### 15.4 Rust 特有解决方案来源映射
+
+| 主题 | 项目页 | 国际权威来源 |
+|:---|:---|:---|
+| 编译期正确性 | [编译期正确性](../../01_foundation/00_start/08_compile_time_correctness.md) | [RFC 2000 Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) · [Strom & Yemini 1986 Typestate](https://doi.org/10.1145/512644.512659) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) |
+| fearless 重构 | [fearless 重构](../../01_foundation/00_start/09_fearless_refactoring.md) | [TRPL — Patterns](https://doc.rust-lang.org/book/ch18-00-patterns.html) · [Martin Fowler — Refactoring](https://refactoring.com/) |
+| 所有权即资源管理 | [所有权即资源管理](../../06_ecosystem/03_design_patterns/34_ownership_as_resource_management.md) | [Rust Reference — Destructors](https://doc.rust-lang.org/reference/destructors.html) · [Rustonomicon — Drop Flags](https://doc.rust-lang.org/nomicon/destructors.html) |
+| 作用域守卫与延迟清理 | [作用域守卫与延迟清理](../../06_ecosystem/03_design_patterns/35_scope_guard_and_deferred_cleanup.md) | [scopeguard crate](https://docs.rs/scopeguard) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) |
+
+### 15.5 维护动作
+
+1. 每季度审计上述链接可用性（`scripts/check_authority_freshness.py`）。
+2. F 专项页内容更新后，同步调整本表映射关系。
+3. 新增惯用法/算法/模式/Rust 方案页时，按本表格式追加一行。

@@ -18,7 +18,8 @@
 > **后置概念**:
 > [Atomics and Memory Ordering](../00_concurrency/06_atomics_and_memory_ordering.md) ·
 > [Inline Assembly](../05_inline_assembly/01_inline_assembly.md) ·
-> [Tree Borrows](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md)
+> [Tree Borrows](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md) ·
+> [形式化视角下的 unsafe 契约](../../04_formal/01_ownership_logic/07_unsafe_contracts_formal.md)
 > **定理链**: Byte Model → Provenance → UB Boundary
 > **主要来源**:
 > [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html) ·
@@ -301,6 +302,7 @@ cargo miri test（需每日构建版工具链）
 |:---|:---|
 | [Behavior Considered Undefined](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md) | 内存模型定义了 UB 的边界 |
 | [Tree Borrows](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md) | 别名模型是内存模型的一部分 |
+| [形式化视角下的 unsafe 契约](../../04_formal/01_ownership_logic/07_unsafe_contracts_formal.md) | unsafe 代码必须满足的形式化边界 |
 | [Atomics and Memory Ordering](../00_concurrency/06_atomics_and_memory_ordering.md) | 并发内存语义依赖内存模型 |
 | [Inline Assembly](../05_inline_assembly/01_inline_assembly.md) | 内联汇编必须遵守内存模型约束 |
 | [Unsafe Rust](01_unsafe.md) | 内存模型主要约束 unsafe 代码 |

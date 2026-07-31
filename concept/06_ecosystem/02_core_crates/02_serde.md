@@ -282,7 +282,7 @@ fn main() {
 ## 五、版本说明
 
 - **当前稳定版本**：serde 1.0.x（语义化主版本 1.0 已长期稳定；最新 patch 版本见 [crates.io/serde](https://crates.io/crates/serde)）。
-- **MSRV 政策**：serde 1.0 系列支持较宽的 Rust 版本窗口，通常兼容多个 Edition；具体 MSRV 以 crate 主页 / `Cargo.toml` `rust-version` 字段为准。本知识库以 **Rust 1.97.0+ (Edition 2024)** 为基线。
+- **MSRV 政策**：serde 1.0 系列支持较宽的 Rust 版本窗口，通常兼容多个 Edition；具体 MSRV 以 crate 主页 / `Cargo.toml` `rust-version` 字段为准。本知识库以 **Rust 1.97.1+ (Edition 2024)** 为基线。
 - **Edition 2024 注意点**：serde derive 宏在 Edition 2024 下无需额外配置；`Cargo.toml` 中使用 `edition.workspace = true` 时，依赖仍使用标准 `serde = { version = "1", features = ["derive"] }`。
 - **近期特性动向**（稳定后将在版本追踪页更新）：serde 核心 trait 保持高度稳定，新增能力通常体现在格式 crate（`serde_json` 的 `arbitrary_precision`、`toml` 的 `preserve_order` 等）和 `serde_derive` 的更多属性支持上。
 
@@ -387,6 +387,7 @@ impl Serialize for Uuid {
 
 - 字段级：`#[serde(rename = "userName")]` 仅改变该字段。
 - 结构体级：`#[serde(rename_all = "camelCase")]` 把所有字段统一映射为 camelCase。
+
 </details>
 
 ---

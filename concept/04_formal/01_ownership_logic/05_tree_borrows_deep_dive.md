@@ -5,15 +5,15 @@
 # Tree Borrows 深度解析
 >
 > **EN**: Tree Borrows Deep Dive
-> **Summary**: 深入解析 Rust 别名模型的演进：从 Stacked Borrows 到 Tree Borrows，理解其设计动机、核心规则、与 Miri 的关系及生产实践影响。
+> **Summary**: 深入解析 Rust 别名模型的演进：从 Stacked Borrows 到 Tree Borrows，理解其设计动机、权限状态机、与 Miri 的关系、语义差异、迁移影响及生产实践。
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶] Unsafe Rust、形式化方法、运行时（Runtime）工具开发者
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: C×Str
-> **前置依赖**: [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [所有权（Ownership）形式化](02_ownership_formal.md) · [Miri](../04_model_checking/08_miri.md)
-> **后置延伸**: [BorrowSanitizer](../02_separation_logic/04_borrow_sanitizer_in_formal.md) · [BorrowSanitizer 预览/活跃跟踪](../../07_future/02_preview_features/24_borrow_sanitizer.md) · [Safety Tags](../../07_future/02_preview_features/03_safety_tags_preview.md) · [AutoVerus / Verus](../../07_future/02_preview_features/33_autoverus_preview.md) · [Miri](../04_model_checking/08_miri.md)
+> **前置依赖**: [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [所有权（Ownership）形式化](02_ownership_formal.md) · [Miri](../04_model_checking/08_miri.md) · [MiniRust](../03_operational_semantics/10_minirust.md)
+> **后置延伸**: [BorrowSanitizer](../02_separation_logic/04_borrow_sanitizer_in_formal.md) · [BorrowSanitizer 预览/活跃跟踪](../../07_future/02_preview_features/24_borrow_sanitizer.md) · [Safety Tags](../../07_future/02_preview_features/03_safety_tags_preview.md) · [AutoVerus / Verus](../../07_future/02_preview_features/33_autoverus_preview.md) · [Miri](../04_model_checking/08_miri.md) · [形式化 unsafe 契约](07_unsafe_contracts_formal.md)
 >
 > **来源**: [Villani et al. — Tree Borrows (PLDI 2025)](https://perso.crans.org/vanile/treebor/) · [Tree Borrows — DOI 10.1145/3735592](https://doi.org/10.1145/3735592) · [Miri 文档 — Tree Borrows](https://github.com/rust-lang/miri/blob/master/src/borrow_tracker/mod.rs) · [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) · [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > **内容重叠提示**: 本文与 [`archive/docs/content/academic/10_tree_borrows_guide.md`](../../../archive/05_formal_methods/02_academic_tools/10_tree_borrows_guide.md)（归档只读） 内容高度重叠。`docs/` 版本提供专项深入；`concept/` 版本为项目权威主轨。
@@ -27,7 +27,7 @@
 
 本页关于 Stacked Borrows / Tree Borrows 别名模型的事实与比较，直接引用以下权威来源：
 
-- **Stacked Borrows** — Jung et al., *Stacked Borrows: An Aliasing Model for Rust*, POPL 2019 (广泛称为 2020 年扩展版本) · [项目主页](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
+- **Stacked Borrows** — Jung et al., *Stacked Borrows: An Aliasing Model for Rust*, POPL 2020 · [项目主页](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
 - **Tree Borrows** — Villani et al., *Tree Borrows*, PLDI 2025 · [预印本 PDF](https://perso.crans.org/vanille/treebor/aux/preprint.pdf) · [Ralf Jung 博客讲解](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html)
 
 关键论断：Tree Borrows 用树形权限状态机替代 Stacked Borrows 的线性栈，使“通过裸指针重新借用后复用原引用”等合法 unsafe 模式不再被误报为 UB，同时保持对真 UB 的检测能力。
@@ -78,13 +78,14 @@ let r2 = &mut x; // 重新借用
 
 ## 三、Tree Borrows 核心规则
 
-本节聚焦「Tree Borrows 核心规则」，覆盖树结构、权限状态与转换规则。论述顺序由定义到边界：先明确「Tree Borrows 核心规则」在「Tree Borrows 深度解析」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「Tree Borrows 核心规则」的判定标准，并指出它在全页论证链中的位置。
+本节聚焦「Tree Borrows 核心规则」，覆盖树结构、权限状态与转换规则。
 
 ### 3.1 树结构
 
 - 每次借用（Borrowing）创建一个节点。
 - 子节点代表从父节点派生出的新借用（Borrowing）。
 - 节点可以独立失效，不一定要遵循 LIFO。
+- 同一父节点下可存在多个并行的子节点（例如两阶段借用中的 reserved mutable 与多个 shared 引用）。
 
 ### 3.2 权限状态
 
@@ -95,16 +96,20 @@ let r2 = &mut x; // 重新借用
 | **Active** | 可读可写 |
 | **Frozen** | 只读 |
 | **Disabled** | 不可访问 |
+| **Reserved** | 两阶段可变借用的预备态：允许与共享引用共存，一旦被写则升级为 Active 并冻结兄弟 |
 
 ### 3.3 转换规则
 
 - 写访问会禁用所有不兼容的兄弟 tag（而非整个栈）。
 - 读访问会将相关 tag 转为 Frozen。
-- 子节点的访问不会随意使父节点失效。
+- 子节点的访问不会随意使父节点失效；父节点在子树结束后可恢复。
+- 两阶段借用（`&mut` 在创建后先读再写）通过 Reserved 状态得到原生支持。
 
 ---
 
-## 四、Tree Borrows vs Stacked Borrows
+## 四、Tree Borrows vs Stacked Borrows：语义差异与迁移影响
+
+### 4.1 结构差异
 
 | 维度 | Stacked Borrows | Tree Borrows |
 |:---|:---|:---|
@@ -114,6 +119,37 @@ let r2 = &mut x; // 重新借用
 | 误报 | 较多 | 较少 |
 | 漏报 | 较少 | 理论上可能略多（但仍在安全边界内） |
 | 教学难度 | 较直观 | 需要理解树与权限状态 |
+| 两阶段借用 | 需额外规则 | 原生支持 Reserved 态 |
+
+### 4.2 典型代码差异
+
+**场景 A：父引用在子借用后复用**
+
+```rust,ignore
+let mut x = 0;
+let r1 = &mut x;
+let r2 = unsafe { &mut *(r1 as *mut i32) };
+unsafe { *r2 = 1; }
+assert_eq!(*r1, 1); // Stacked: UB；Tree: OK
+```
+
+**场景 B：通过裸指针派生多个兄弟引用**
+
+```rust,ignore
+let mut x = 0;
+let raw = &mut x as *mut i32;
+let r1 = unsafe { &mut *raw };
+let r2 = unsafe { &mut *raw }; // 与 r1 同层兄弟
+unsafe { *r1 = 1; }            // Tree：使 r2 Disabled，r1 仍 Active
+// *r2 = 2;                    // Tree：UB（Disabled）
+```
+
+### 4.3 迁移影响
+
+- **对 safe Rust 用户**：无直接影响；借用检查器不变。
+- **对 unsafe 代码维护者**：Miri 默认 Tree Borrows 后，一些原本需要 `#[allow(invalid_reference_casting)]` 或额外裸指针技巧的代码可以更自然地编写；但仍需以 UCG/Reference 为准。
+- **对标准库验证**：RustBelt/RefinedRust 等基础证明正在向 Tree Borrows 迁移（研究进行中）。
+- **对 Miri CI**：建议同时跑 `-Zmiri-tree-borrows` 与 `-Zmiri-stacked-borrows`，确保代码不依赖某一模型的宽松角落。
 
 ---
 
@@ -124,6 +160,17 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 ```
 
 自 Rust 1.72 起，Tree Borrows 已成为 Miri 默认模型。Stacked Borrows 仍可通过 `MIRIFLAGS="-Zmiri-stacked-borrows"` 启用。 (Source: [Miri 文档 — Tree Borrows](https://github.com/rust-lang/miri/blob/master/src/borrow_tracker/mod.rs))
+
+### 选择建议
+
+```bash
+# 默认推荐：Tree Borrows
+MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
+
+# 若 Tree Borrows 通过但代码在 Stacked Borrows 下失败，
+# 说明代码依赖了更宽松的别名规则；优先修复代码，
+# 除非能证明该模式在官方内存模型中会被接受。
+```
 
 ---
 
@@ -153,7 +200,7 @@ BorrowSanitizer 的目标是运行时（Runtime）检测 Tree Borrows 违规。�
 
 ---
 
-## 八、嵌入式测验
+## 九、嵌入式测验
 
 **测验 1**: Tree Borrows 相比 Stacked Borrows 的主要优势是什么？
 
@@ -184,6 +231,7 @@ B
 - [AutoVerus / Verus](../../07_future/02_preview_features/33_autoverus_preview.md) · [深度](../04_model_checking/07_autoverus.md)
 - [Miri](../04_model_checking/08_miri.md)
 - [MiniRust：Rust 操作语义的可执行模型](../03_operational_semantics/10_minirust.md)
+- [形式化视角下的 unsafe 契约](07_unsafe_contracts_formal.md)
 - [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
 - [形式化验证工具生态](../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md)
 - [Rust 1.98+ 预览](../../07_future/00_version_tracking/rust_1_98_preview.md)
@@ -191,10 +239,10 @@ B
 ---
 
 > **权威来源**: [Villani et al. — Tree Borrows (PLDI 2025)](https://perso.crans.org/vanile/treebor/) · [Tree Borrows — DOI 10.1145/3735592](https://doi.org/10.1145/3735592) · [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) · [Miri 文档 — Tree Borrows](https://github.com/rust-lang/miri/blob/master/src/borrow_tracker/mod.rs) · [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) · [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
-> **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文）；2026-07-31 新增语义差异与迁移影响小节 [Authority Source Sprint Batch L4](../../00_meta/02_sources/05_international_authority_index.md)
 
-**文档版本**: 1.0
-**最后更新**: 2026-07-10
+**文档版本**: 1.1
+**最后更新**: 2026-07-31
 **状态**: ✅ 权威来源对齐完成 (Batch L4)
 
 ---
@@ -235,6 +283,7 @@ fn main() {
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
+- **P1 学术**: [Villani et al. — *Tree Borrows*, PLDI 2025](https://perso.crans.org/vanile/treebor/) · [Jung et al. — *Stacked Borrows*, POPL 2020](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
 - **P2 生态/社区**: [formal-land/coq-of-rust](https://github.com/formal-land/coq-of-rust) · [AeneasVerif/aeneas](https://github.com/AeneasVerif/aeneas)
 
 ## 🧭 思维导图（Mindmap）
@@ -246,10 +295,14 @@ mindmap
     Stacked Borrows 的核心限制
     Tree Borrows 核心规则
       1 树结构
-      2 权限状态
+      2 权限状态 Active Frozen Disabled Reserved
       3 转换规则
     Tree Borrows vs Stacked Borrows
+      语义差异
+      迁移影响
     Miri 中使用 Tree Borrows
+    BorrowSanitizer 影响
+    Rust 1.97.1 语义定位
 ```
 
 > **认知功能**: 本 mindmap 从本页章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

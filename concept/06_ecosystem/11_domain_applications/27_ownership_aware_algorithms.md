@@ -12,8 +12,9 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P+S** — Procedure + Structure
 > **定位**: 系统讲解 Rust 所有权模型如何决定算法接口设计，覆盖原地修改、写时复制、借用检查友好的双指针/滑动窗口、基于索引的图/树算法等实战模式。
-> **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Slices](../../01_foundation/05_collections/03_slices.md) · [Smart Pointers](../../02_intermediate/02_memory_management/04_smart_pointers.md)
+> **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Collections & Slices](../../01_foundation/05_collections/01_collections.md) · [Smart Pointers](../../02_intermediate/02_memory_management/04_smart_pointers.md)
 > **后置概念**: [算法工程实践](08_algorithm_engineering_practice.md) · [高级数据结构 Rust 实现](24_advanced_data_structures_implementation.md) · [并行算法](25_parallel_algorithms.md)
+> **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
 ---
 
@@ -40,8 +41,9 @@
     - [反例 2：在迭代时修改集合](#反例-2在迭代时修改集合)
     - [反例 3：双指针越界](#反例-3双指针越界)
   - [七、决策树](#七决策树)
-  - [八、国际权威参考](#八国际权威参考)
-  - [九、思维导图](#九思维导图)
+  - [八、相关概念](#八相关概念)
+  - [九、国际权威参考](#九国际权威参考)
+  - [十、思维导图](#十思维导图)
 
 ---
 
@@ -170,19 +172,20 @@ fn main() {
 
 ### 3.3 array_chunks
 
-把一维切片按固定长度 N 重解释为 `&mut [[T; N]]`，在需要数组语义时避免手动索引。
+把一维切片按固定长度 N 重解释为固定大小数组的迭代。Rust 1.97.0 stable 中 `chunks_exact_mut(N)` 返回 `&mut [T]`；`array_chunks_mut::<N>()` 返回 `&mut [T; N]` 更类型安全，但截至 1.97.0 仍未进入稳定通道。
 
 ```rust
 fn main() {
     let mut data: Vec<u8> = vec![1, 2, 3, 4, 5, 6, 7, 8];
-    let chunks = data.array_chunks_mut::<4>();
-    for chunk in chunks {
-        // chunk: &mut [u8; 4]
+    for chunk in data.chunks_exact_mut(4) {
+        // chunk: &mut [u8]
         chunk.reverse();
     }
     assert_eq!(data, vec![4, 3, 2, 1, 8, 7, 6, 5]);
 }
 ```
+
+> **未来变体**：`array_chunks_mut::<4>()` 进入稳定通道后，可写 `for chunk in data.array_chunks_mut::<4>() { chunk.reverse(); }`，其中 `chunk` 类型为 `&mut [u8; 4]`。
 
 ---
 
@@ -332,7 +335,7 @@ fn main() {
 
 ### 反例 2：在迭代时修改集合
 
-```rust,compile_fail,E0499
+```rust,compile_fail,E0502
 fn main() {
     let mut v = vec![1, 2, 3];
     for x in &v {
@@ -418,7 +421,15 @@ graph TD
 
 ---
 
-## 八、国际权威参考
+## 八、相关概念
+
+- [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) — L5 系统语言对比：所有权模型对算法接口的跨语言影响
+- [所有权性能优化](../../03_advanced/06_low_level_patterns/06_ownership_performance_optimization.md) — L3-L4：避免克隆、Cow、零拷贝与内存布局
+- [高级数据结构 Rust 实现](24_advanced_data_structures_implementation.md) — L5-L6：用所有权模型实现生产级数据结构
+
+---
+
+## 九、国际权威参考
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
@@ -432,7 +443,7 @@ graph TD
 
 ---
 
-## 九、思维导图
+## 十、思维导图
 
 ```mermaid
 mindmap

@@ -226,10 +226,11 @@ flowchart TD
 - [交叉编译](02_cross_compilation.md)
 - [Async FFI Boundary](../../03_advanced/04_ffi/04_async_ffi_boundary.md)
 - [Async 中的 Unsafe](../../03_advanced/02_unsafe/08_async_in_unsafe_contexts.md)
+- [自定义裸机异步执行器](28_custom_bare_metal_async_executor.md)
 
 ---
 
-> **权威来源**: [Embassy Book](https://embassy.dev/book/) · [RTIC Book](https://rtic.rs/2/book/en/) · [Rust Embedded Book](https://docs.rust-embedded.org/book/) · [Embassy Executor on docs.rs](https://docs.rs/embassy-executor/) · [Embassy crates on crates.io](https://crates.io/crates/embassy-executor) · [Embassy repository](https://github.com/embassy-rs/embassy) · [RTIC crate on crates.io](https://crates.io/crates/rtic)
+> **权威来源**: [Embassy Book](https://embassy.dev/book/) · [RTIC Book](https://rtic.rs/2/book/en/) · [Rust Embedded Book](https://docs.rust-embedded.org/book/) · [Embassy Executor on docs.rs](https://docs.rs/embassy-executor/) · [Embassy crates on crates.io](https://crates.io/crates/embassy-executor) · [Embassy repository](https://github.com/embassy-rs/embassy) · [RTIC crate on crates.io](https://crates.io/crates/rtic) · [Rust Reference — async/await](https://doc.rust-lang.org/reference/expressions.html#await-expressions)
 
 ## 补充国际权威来源（P1/P2 覆盖）
 
