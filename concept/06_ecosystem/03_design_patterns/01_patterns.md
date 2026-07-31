@@ -40,6 +40,7 @@
 - v1.0 (2026-05-12): 初始版本
 - v1.1 (2026-05-12): Wave 3 扩展——新增模式、反模式、语言对比、学术来源
 - v1.2 (2026-07-31): Wave 8 扩展——新增 Abstract Factory、Bridge、Composite、Flyweight、Mediator、Interpreter、Chain of Responsibility、Template Method 8 个 GoF 模式完整小节，含 Rust 实现、语言对比与边界测试
+- v1.3 (2026-07-31): Wave 9 扩展——新增 Builder 模式详解、Factory & Provider、Adapter 模式、Observer 进阶实现、Strategy 高级实现语义映射
 
 ---
 
@@ -361,6 +362,195 @@ impl<S: PaymentStrategy> ShoppingCart<S> {
 - **Go**: 接口值隐式实现；Rust trait 需显式实现，静态分发默认内联。
 
 > **来源**: [GoF Design Patterns] · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · 可信度: ✅
+
+#### Strategy 高级实现
+
+> **EN**: Advanced Strategy Pattern Implementations
+
+**定义**：Strategy 模式将一组可互换的算法封装为独立的策略单元，使调用方在运行期或编译期按需切换算法。Rust 中策略的实现形态可分为 **动态分发（`dyn Trait`）**、**静态泛型（`T: Strategy`）**、**枚举分发（`enum + match`）** 与 **闭包策略（`Fn` trait）** 四种，选型关键在于"算法集合是否在编译期闭合"与"是否需要运行期异构替换"。
+
+**属性**：
+
+- **接口统一**：所有策略对外暴露一致的 `trait` 或 `enum` 操作。
+- **调用方解耦**：调用方只依赖策略接口，不依赖具体实现。
+- **替换粒度**：运行期替换 ⟹ `dyn Trait`；编译期替换 ⟹ 泛型/枚举/闭包。
+- **零成本可选**：静态泛型通过单态化实现零运行时开销。
+
+**关系**：
+
+- 与 **State 模式**：State 强调"状态改变行为"，Strategy 强调"算法替换行为"。
+- 与 **Template Method**：Template Method 在骨架中预留钩子，Strategy 整体替换算法。
+- 与 **Trait Object / 泛型 / Enum**：Rust 用类型系统三件套表达 GoF 策略的多态维度。
+
+**正例 1：动态分发策略（`dyn Trait`）**
+
+适用于运行期需要切换算法的场景。
+
+```rust
+trait Formatter {
+    fn format(&self, record: &str) -> String;
+}
+
+struct JsonFormatter;
+impl Formatter for JsonFormatter {
+    fn format(&self, record: &str) -> String {
+        format!("{{\"message\":\"{}\"}}", record)
+    }
+}
+
+struct Logger<'a> {
+    formatter: &'a dyn Formatter,
+}
+
+impl<'a> Logger<'a> {
+    fn log(&self, msg: &str) {
+        println!("{}", self.formatter.format(msg));
+    }
+}
+
+fn main() {
+    let json = JsonFormatter;
+    let logger = Logger { formatter: &json };
+    logger.log("hello");
+}
+```
+
+**正例 2：静态泛型策略（零成本抽象）**
+
+编译期确定策略类型，消除 vtable 与指针间接。
+
+```rust
+trait Formatter {
+    fn format(&self, record: &str) -> String;
+}
+
+struct PlainFormatter;
+impl Formatter for PlainFormatter {
+    fn format(&self, record: &str) -> String {
+        record.into()
+    }
+}
+
+struct Logger<F: Formatter> {
+    formatter: F,
+}
+
+impl<F: Formatter> Logger<F> {
+    fn log(&self, msg: &str) {
+        println!("{}", self.formatter.format(msg));
+    }
+}
+
+fn main() {
+    let logger = Logger { formatter: PlainFormatter };
+    logger.log("hello");
+}
+```
+
+**正例 3：枚举分发策略（闭合算法集）**
+
+算法集合闭合且有限时，枚举 + `match` 比分发更简洁、零开销。
+
+```rust
+enum OutputFormat {
+    Plain,
+    Json,
+    Hex,
+}
+
+impl OutputFormat {
+    fn format(&self, record: &str) -> String {
+        match self {
+            OutputFormat::Plain => record.to_string(),
+            OutputFormat::Json => format!("{{\"message\":\"{}\"}}", record),
+            OutputFormat::Hex => record.bytes().map(|b| format!("{:02x}", b)).collect(),
+        }
+    }
+}
+
+struct Logger {
+    format: OutputFormat,
+}
+
+impl Logger {
+    fn log(&self, msg: &str) {
+        println!("{}", self.format.format(msg));
+    }
+}
+
+fn main() {
+    let logger = Logger { format: OutputFormat::Hex };
+    logger.log("hi");
+}
+```
+
+**正例 4：闭包策略（行为参数化）**
+
+当策略只是一段短小的判定/转换逻辑时，闭包是最轻量的策略载体。
+
+```rust
+struct Filter<P> {
+    predicate: P,
+}
+
+impl<P: Fn(&i32) -> bool> Filter<P> {
+    fn new(predicate: P) -> Self {
+        Self { predicate }
+    }
+
+    fn apply(&self, items: &[i32]) -> Vec<i32> {
+        items.iter().copied().filter(|x| (self.predicate)(x)).collect()
+    }
+}
+
+fn main() {
+    let evens = Filter::new(|x| x % 2 == 0);
+    println!("{:?}", evens.apply(&[1, 2, 3, 4]));
+}
+```
+
+**反例：非对象安全 trait 不能创建 `dyn Trait`（编译错误）**
+
+```rust,compile_fail
+trait Strategy {
+    fn execute<T>(&self, input: T) -> T; // 泛型方法导致 trait 非对象安全
+}
+
+fn run(_s: &dyn Strategy) {}
+```
+
+> **修正**：将泛型方法改为具体类型参数，或改用泛型静态策略。
+
+**Mermaid 图：Strategy 实现形态谱系**
+
+```mermaid
+graph TD
+    S[Strategy 模式] --> D[动态分发 dyn Trait]
+    S --> G[静态泛型 T: Strategy]
+    S --> E[枚举分发 enum + match]
+    S --> C[闭包策略 Fn]
+    D -->|运行期切换| V[vtable 间接调用]
+    G -->|编译期确定| M[单态化零开销]
+    E -->|闭合有限| Z[零开销 + 穷尽检查]
+    C -->|一次性行为| L[最小样板]
+```
+
+**决策树：如何选择策略实现形态**
+
+```mermaid
+graph TD
+    A[需要策略化替换？] --> B{算法集合是否编译期闭合？}
+    B -->|是，且有限| C[enum + match]
+    B -->|是，但类型多/需多态| D[泛型 T: Strategy]
+    B -->|否，运行期异构| E[dyn Trait]
+    A -->|只是短逻辑片段| F[闭包 Fn]
+    C --> G[零成本 + 穷尽匹配]
+    D --> H[零成本 + 类型约束]
+    E --> I[vtable + 运行期灵活]
+    F --> J[最小抽象]
+```
+
+> **来源**: [GoF Design Patterns] · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · 可信度: ✅
 
 ### 4.4 State Machine 模式
 
@@ -765,6 +955,194 @@ fn display_system(mut reader: EventReader<TemperatureChanged>) {
 > **来源**: [GoF Design Patterns] · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Bevy Docs] · 可信度: ✅
 > **过渡**：从动态加载的 Plugin 到事件驱动的 Observer，Rust 的模式谱系覆盖了编译期到运行时（Runtime）的全生命周期（Lifetimes）。理解这些实现机制后，必须警惕其对立面——反模式。
 [来源: [Async Book](https://rust-lang.github.io/async-book/index.html)]
+
+#### Observer 进阶实现
+
+> **EN**: Advanced Observer Implementations
+
+**定义**：Observer 模式建立对象间的一对多依赖，当 Subject 状态变化时自动通知所有 Observer。基础 Observer 使用回调列表或 `Weak<T>` 打破循环引用；进阶实现则面向**异步/并发**场景，利用 `tokio::sync::watch`、**actor pub-sub** 与**消息总线**实现更松耦合、更可扩展的事件拓扑。
+
+**属性**：
+
+- **生命周期解耦**：发送者与接收者不必同时存在。
+- **背压可控**：通道容量限制防止生产者压垮消费者。
+- **拓扑灵活**：支持广播、多播、topic 路由。
+- **类型安全**：事件类型由编译器保证，避免 `interface{}` 式类型断言。
+
+**关系**：
+
+- 与 **Mediator**：Observer 直接建立 Subject-Observer 关系；Mediator 通过中心节点路由，Observer 常作为 Mediator 的通信机制。
+- 与 **Strategy**：回调/处理器本身可视为策略，Observer 是策略的多订阅者组织形式。
+- 与 **Channel**：Rust 的 `mpsc`/`broadcast`/`watch` 是 Observer 的异步基础设施。
+
+**正例 1：`tokio::sync::watch` 单值广播**
+
+`watch` 通道维护一个可克隆的最新值，适合"配置/状态变化通知"场景。
+
+```rust
+use tokio::sync::watch;
+
+struct ConfigSubject {
+    tx: watch::Sender<String>,
+}
+
+impl ConfigSubject {
+    fn new(initial: String) -> (Self, watch::Receiver<String>) {
+        let (tx, rx) = watch::channel(initial);
+        (Self { tx }, rx)
+    }
+
+    fn update(&self, value: String) {
+        let _ = self.tx.send(value);
+    }
+}
+
+#[tokio::main]
+async fn main() {
+    let (subject, mut rx) = ConfigSubject::new("v1".into());
+
+    tokio::spawn(async move {
+        let _ = rx.changed().await;
+        println!("observer sees: {}", *rx.borrow());
+    });
+
+    subject.update("v2".into());
+    tokio::time::sleep(std::time::Duration::from_millis(10)).await;
+}
+```
+
+**正例 2：Actor pub-sub（基于 tokio mpsc）**
+
+每个订阅者对应一个 actor 任务，Publisher 通过 `mpsc::Sender` 扇出事件。
+
+```rust
+use tokio::sync::mpsc;
+
+struct Publisher<T> {
+    subscribers: Vec<mpsc::Sender<T>>,
+}
+
+impl<T: Clone + Send + 'static> Publisher<T> {
+    fn new() -> Self {
+        Self { subscribers: vec![] }
+    }
+
+    fn subscribe(&mut self, tx: mpsc::Sender<T>) {
+        self.subscribers.push(tx);
+    }
+
+    async fn publish(&self, msg: T) {
+        for tx in &self.subscribers {
+            let _ = tx.send(msg.clone()).await;
+        }
+    }
+}
+
+#[tokio::main]
+async fn main() {
+    let (tx1, mut rx1) = mpsc::channel(16);
+    let (tx2, mut rx2) = mpsc::channel(16);
+
+    let mut publisher = Publisher::<String>::new();
+    publisher.subscribe(tx1);
+    publisher.subscribe(tx2);
+
+    publisher.publish("hello".into()).await;
+
+    assert_eq!(rx1.recv().await, Some("hello".into()));
+    assert_eq!(rx2.recv().await, Some("hello".into()));
+}
+```
+
+**正例 3：消息总线拓扑（基于 tokio broadcast）**
+
+`broadcast` 支持多订阅者接收每个事件的独立拷贝，天然构成总线。
+
+```rust
+use tokio::sync::broadcast;
+
+#[derive(Clone, Debug)]
+struct Event {
+    topic: String,
+    payload: String,
+}
+
+struct MessageBus {
+    tx: broadcast::Sender<Event>,
+}
+
+impl MessageBus {
+    fn new(capacity: usize) -> Self {
+        let (tx, _rx) = broadcast::channel(capacity);
+        Self { tx }
+    }
+
+    fn publish(&self, event: Event) {
+        let _ = self.tx.send(event);
+    }
+
+    fn subscribe(&self) -> broadcast::Receiver<Event> {
+        self.tx.subscribe()
+    }
+}
+
+#[tokio::main]
+async fn main() {
+    let bus = MessageBus::new(64);
+    let mut rx = bus.subscribe();
+
+    bus.publish(Event { topic: "user".into(), payload: "login".into() });
+
+    let event = rx.recv().await.unwrap();
+    println!("{:?}", event);
+}
+```
+
+**反例：Observer 状态使用 `Rc<RefCell<T>>` 跨线程（编译错误）**
+
+```rust,compile_fail
+use std::rc::Rc;
+use std::cell::RefCell;
+
+fn main() {
+    let state = Rc::new(RefCell::new(0));
+    std::thread::spawn(move || {
+        *state.borrow_mut() += 1;
+    });
+}
+```
+
+> **修正**：异步/多线程 Observer 使用 `tokio::sync::watch`、`mpsc` 或 `Arc<Mutex<T>>` 等 `Send` 类型。
+
+**Mermaid 图：Observer 进阶拓扑**
+
+```mermaid
+graph TD
+    S[Subject] --> W[tokio::sync::watch]
+    S --> P[Publisher Actor]
+    S --> B[Message Bus]
+    W --> O1[Observer 1]
+    W --> O2[Observer 2]
+    P -->|mpsc| A1[Actor 1]
+    P -->|mpsc| A2[Actor 2]
+    B -->|broadcast| R1[Receiver 1]
+    B -->|broadcast| R2[Receiver 2]
+```
+
+**决策树：Observer 实现选型**
+
+```mermaid
+graph TD
+    A[需要一对多通知？] --> B{通知内容是否只需最新值？}
+    B -->|是| C[tokio::sync::watch]
+    B -->|否，需每条消息| D{订阅者是否独立 actor？}
+    D -->|是| E[mpsc-based pub-sub]
+    D -->|否，需广播总线| F[tokio::sync::broadcast]
+    A --> G{是否需要打破循环引用？}
+    G -->|是| H["Weak<T> / channel 解耦"]
+```
+
+> **来源**: [GoF Design Patterns] · [Tokio Docs — sync](https://docs.rs/tokio/latest/tokio/sync/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · 可信度: ✅
 
 ### 4.7 Rust 特有高级模式
 >
@@ -1738,6 +2116,727 @@ fn main() {
 ```
 
 > **修正**：为 `BadMiner` 实现 `extract`，或重新评估是否应使用 enum + `match` 等更灵活的算法组织方式。
+
+---
+
+### 4.18 Builder 模式详解
+
+> **EN**: Builder Pattern Deep Dive
+
+**定义**：Builder 模式将复杂对象的构造过程拆分为多个步骤，通过链式 API 或分阶段方法逐步填充字段，最终在 `build()` 中产出完整对象。Rust 的所有权模型使 Builder 天然支持**消费式链式调用**（`mut self`），同时也支持**非消费式复用**（`&mut self`）与**类型状态 Builder**（通过泛型在编译期强制必填字段）。
+
+**属性**：
+
+- **分步构造**：将多参数构造拆为可读的方法链。
+- **必填/可选分离**：必填字段通过 `Option` + `build()` 校验，或类型状态保证。
+- **所有权可预测**：消费式 Builder 在 `build()` 时转移字段所有权，避免部分移动问题。
+- **可复用性**：非消费式 Builder 适合反复构造相似对象。
+
+**关系**：
+
+- 与 **Typestate**：类型状态 Builder 是 Typestate 模式在构造场景的应用。
+- 与 **Factory**：Builder 聚焦"如何逐步构造一个复杂值"，Factory 聚焦"按条件创建哪一类值"。
+- 与 **Default trait**：可选字段默认值可通过 `Default` 提供。
+
+**正例 1：消费式 Builder（必填 + 可选字段分离）**
+
+```rust
+struct DatabaseConfig {
+    host: String,
+    port: u16,
+    username: String,
+    timeout: u64,
+}
+
+struct DatabaseConfigBuilder {
+    host: Option<String>,
+    port: Option<u16>,
+    username: Option<String>,
+    timeout: Option<u64>,
+}
+
+impl DatabaseConfigBuilder {
+    fn new() -> Self {
+        Self {
+            host: None,
+            port: None,
+            username: None,
+            timeout: None,
+        }
+    }
+
+    fn host(mut self, value: &str) -> Self {
+        self.host = Some(value.into());
+        self
+    }
+
+    fn port(mut self, value: u16) -> Self {
+        self.port = Some(value);
+        self
+    }
+
+    fn username(mut self, value: &str) -> Self {
+        self.username = Some(value.into());
+        self
+    }
+
+    fn timeout(mut self, value: u64) -> Self {
+        self.timeout = Some(value);
+        self
+    }
+
+    fn build(self) -> Result<DatabaseConfig, &'static str> {
+        Ok(DatabaseConfig {
+            host: self.host.ok_or("host is required")?,
+            port: self.port.unwrap_or(5432),
+            username: self.username.ok_or("username is required")?,
+            timeout: self.timeout.unwrap_or(30),
+        })
+    }
+}
+
+fn main() {
+    let config = DatabaseConfigBuilder::new()
+        .host("localhost")
+        .username("admin")
+        .timeout(60)
+        .build()
+        .unwrap();
+    println!("{}:{} {}", config.host, config.port, config.username);
+}
+```
+
+**正例 2：非消费式 Builder（可复用构建器）**
+
+```rust
+struct QueryBuilder {
+    columns: Vec<String>,
+    from: String,
+    where_clauses: Vec<String>,
+}
+
+impl QueryBuilder {
+    fn new(from: &str) -> Self {
+        Self {
+            columns: vec![],
+            from: from.into(),
+            where_clauses: vec![],
+        }
+    }
+
+    fn select(&mut self, column: &str) -> &mut Self {
+        self.columns.push(column.into());
+        self
+    }
+
+    fn and_where(&mut self, clause: &str) -> &mut Self {
+        self.where_clauses.push(clause.into());
+        self
+    }
+
+    fn build(&self) -> String {
+        let columns = if self.columns.is_empty() { "*" } else { &self.columns.join(", ") };
+        let conditions = if self.where_clauses.is_empty() {
+            "1=1".to_string()
+        } else {
+            self.where_clauses.join(" AND ")
+        };
+        format!("SELECT {} FROM {} WHERE {}", columns, self.from, conditions)
+    }
+}
+
+fn main() {
+    let mut qb = QueryBuilder::new("users");
+    qb.select("id").select("name").and_where("active = 1");
+    println!("{}", qb.build());
+}
+```
+
+**正例 3：类型状态 Builder（编译期强制必填字段）**
+
+```rust
+use std::marker::PhantomData;
+
+struct Server {
+    host: String,
+    port: u16,
+}
+
+struct NoHost;
+struct HostSet;
+
+struct ServerBuilder<State> {
+    host: Option<String>,
+    port: u16,
+    _marker: PhantomData<State>,
+}
+
+impl ServerBuilder<NoHost> {
+    fn new() -> Self {
+        Self {
+            host: None,
+            port: 8080,
+            _marker: PhantomData,
+        }
+    }
+
+    fn host(self, value: &str) -> ServerBuilder<HostSet> {
+        ServerBuilder {
+            host: Some(value.into()),
+            port: self.port,
+            _marker: PhantomData,
+        }
+    }
+}
+
+impl ServerBuilder<HostSet> {
+    fn port(mut self, value: u16) -> Self {
+        self.port = value;
+        self
+    }
+
+    fn build(self) -> Server {
+        Server {
+            host: self.host.unwrap(),
+            port: self.port,
+        }
+    }
+}
+
+fn main() {
+    let server = ServerBuilder::new()
+        .host("127.0.0.1")
+        .port(3000)
+        .build();
+    println!("{}:{}", server.host, server.port);
+}
+```
+
+**反例：类型状态 Builder 在未设置必填字段时调用 `build()`（编译错误）**
+
+```rust,compile_fail
+use std::marker::PhantomData;
+
+struct NoHost;
+struct HostSet;
+
+struct ServerBuilder<State> {
+    host: Option<String>,
+    _marker: PhantomData<State>,
+}
+
+impl ServerBuilder<NoHost> {
+    fn new() -> Self {
+        Self { host: None, _marker: PhantomData }
+    }
+}
+
+impl ServerBuilder<HostSet> {
+    fn build(self) -> String {
+        self.host.unwrap()
+    }
+}
+
+fn main() {
+    let builder = ServerBuilder::new();
+    let _ = builder.build(); // ❌ ServerBuilder<NoHost> 没有 build 方法
+}
+```
+
+> **修正**：先调用 `.host(...)` 将状态迁移到 `HostSet`，再调用 `build()`。
+
+**选型矩阵**
+
+| 变体 | 所有权 | 必填保证 | 可复用 | 适用场景 |
+|:---|:---|:---:|:---:|:---|
+| 消费式 Builder | `mut self` → `Self` | 运行期 `Option` 校验 | ❌ | 字段多、链式调用、一次性构造 |
+| 非消费式 Builder | `&mut self` | 运行期校验 | ✅ | 需反复生成相似对象 |
+| Typestate Builder | `self` 状态迁移 | 编译期类型保证 | ❌ | 必填字段少、强约束配置 |
+
+**Mermaid 图：Builder 变体关系**
+
+```mermaid
+graph TD
+    B[Builder 模式] --> C[消费式 Builder]
+    B --> N[非消费式 Builder]
+    B --> T[Typestate Builder]
+    C -->|链式 + 运行期校验| R[Result<T, Error>]
+    N -->|&mut self 复用| M[多次 build]
+    T -->|泛型状态迁移| S[编译期必填保证]
+```
+
+**决策树：Builder 变体选择**
+
+```mermaid
+graph TD
+    A[对象构造复杂？] --> B{是否需要复用构建器？}
+    B -->|是| C[非消费式 &mut self Builder]
+    B -->|否| D{必填字段能否编译期强制？}
+    D -->|能，且状态少| E[Typestate Builder]
+    D -->|不能/字段多| F[消费式 Builder]
+    C --> G[运行期校验 + 复用]
+    E --> H[编译期强保证]
+    F --> I[链式 API + 运行期校验]
+```
+
+> **来源**: [GoF Design Patterns] · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · 可信度: ✅
+
+### 4.19 Factory & Provider
+
+> **EN**: Factory & Provider Patterns in Rust
+
+**定义**：Factory 模式将"创建哪个具体对象"的决策从调用方中抽离出来；Provider/Service Locator 进一步将依赖的查找与组装集中化。Rust 没有实现继承，因此工厂形态退化为**关联函数构造**、**Simple Factory**、**Factory Method trait**、**Abstract Factory trait** 与 **Provider/Service Locator trait** 的组合，依赖注入则通过**泛型参数**、**`Arc<dyn Trait>`** 与**组合根（composition root）**实现。
+
+**属性**：
+
+- **创建逻辑集中**：对象创建规则统一在工厂/Provider 中维护。
+- **调用方解耦**：调用方依赖抽象（trait / enum），不依赖具体类型。
+- **开放/闭合选择**：开放类型集用 `dyn Trait`，闭合类型集用 `enum + match`。
+- **生命周期可预测**：Rust 所有权决定工厂返回的是值、`Box<dyn>` 还是 `Arc<dyn>`。
+
+**关系**：
+
+- 与 **Builder**：Factory 回答"创建什么"，Builder 回答"如何分步构造"。
+- 与 **Abstract Factory**：Abstract Factory 强调**产品族**一致性，Factory Method 强调**单个产品**的创建委托。
+- 与 **Dependency Injection**：Provider/Service Locator 是 DI 的"查找"形态，泛型参数与 `Arc<dyn Trait>` 是 DI 的"注入"形态。
+
+**正例 1：关联函数构造函数（最轻量工厂）**
+
+```rust
+struct Config {
+    port: u16,
+}
+
+impl Config {
+    fn new(port: u16) -> Self {
+        Self { port }
+    }
+
+    fn from_env() -> Self {
+        let port = std::env::var("PORT")
+            .ok()
+            .and_then(|s| s.parse().ok())
+            .unwrap_or(8080);
+        Self { port }
+    }
+}
+
+fn main() {
+    let default = Config::new(3000);
+    let from_env = Config::from_env();
+    println!("ports: {} {}", default.port, from_env.port);
+}
+```
+
+**正例 2：Simple Factory（闭合类型集）**
+
+```rust
+trait Animal {
+    fn speak(&self);
+}
+
+struct Dog;
+struct Cat;
+
+impl Animal for Dog {
+    fn speak(&self) {
+        println!("Woof");
+    }
+}
+
+impl Animal for Cat {
+    fn speak(&self) {
+        println!("Meow");
+    }
+}
+
+enum AnimalKind {
+    Dog,
+    Cat,
+}
+
+fn create_animal(kind: AnimalKind) -> Box<dyn Animal> {
+    match kind {
+        AnimalKind::Dog => Box::new(Dog),
+        AnimalKind::Cat => Box::new(Cat),
+    }
+}
+
+fn main() {
+    create_animal(AnimalKind::Dog).speak();
+}
+```
+
+**正例 3：Factory Method（开放类型集）**
+
+```rust
+trait Transport {
+    fn send(&self, data: &[u8]);
+}
+
+trait TransportFactory {
+    fn create(&self) -> Box<dyn Transport>;
+}
+
+struct TcpTransport;
+impl Transport for TcpTransport {
+    fn send(&self, _data: &[u8]) {
+        println!("TCP");
+    }
+}
+
+struct UdpTransport;
+impl Transport for UdpTransport {
+    fn send(&self, _data: &[u8]) {
+        println!("UDP");
+    }
+}
+
+struct TcpFactory;
+impl TransportFactory for TcpFactory {
+    fn create(&self) -> Box<dyn Transport> {
+        Box::new(TcpTransport)
+    }
+}
+
+struct UdpFactory;
+impl TransportFactory for UdpFactory {
+    fn create(&self) -> Box<dyn Transport> {
+        Box::new(UdpTransport)
+    }
+}
+
+fn route(factory: &dyn TransportFactory) {
+    factory.create().send(b"hello");
+}
+
+fn main() {
+    route(&TcpFactory);
+    route(&UdpFactory);
+}
+```
+
+**正例 4：Abstract Factory 扩展（日志产品族）**
+
+同一工厂创建的 `Logger` 与 `Formatter` 配套使用，保证产品族一致性。
+
+```rust
+trait Logger {
+    fn log(&self, msg: &str);
+}
+
+trait Formatter {
+    fn format(&self, msg: &str) -> String;
+}
+
+trait LoggingFactory {
+    fn create_formatter(&self) -> Box<dyn Formatter>;
+    fn create_logger(&self, formatter: Box<dyn Formatter>) -> Box<dyn Logger>;
+}
+
+struct PlainFormatter;
+impl Formatter for PlainFormatter {
+    fn format(&self, msg: &str) -> String {
+        msg.into()
+    }
+}
+
+struct ConsoleLogger {
+    formatter: Box<dyn Formatter>,
+}
+impl Logger for ConsoleLogger {
+    fn log(&self, msg: &str) {
+        println!("{}", self.formatter.format(msg));
+    }
+}
+
+struct DevFactory;
+impl LoggingFactory for DevFactory {
+    fn create_formatter(&self) -> Box<dyn Formatter> {
+        Box::new(PlainFormatter)
+    }
+
+    fn create_logger(&self, formatter: Box<dyn Formatter>) -> Box<dyn Logger> {
+        Box::new(ConsoleLogger { formatter })
+    }
+}
+
+fn setup(factory: &dyn LoggingFactory) {
+    let formatter = factory.create_formatter();
+    let logger = factory.create_logger(formatter);
+    logger.log("app started");
+}
+
+fn main() {
+    setup(&DevFactory);
+}
+```
+
+**正例 5：Provider trait 与依赖注入形态**
+
+```rust
+use std::sync::Arc;
+
+trait Repository {
+    fn get(&self, id: u64) -> Option<String>;
+}
+
+struct InMemoryRepo;
+impl Repository for InMemoryRepo {
+    fn get(&self, _id: u64) -> Option<String> {
+        Some("data".into())
+    }
+}
+
+// 形态一：泛型参数注入（零成本）
+struct AppGeneric<R: Repository> {
+    repo: R,
+}
+
+impl<R: Repository> AppGeneric<R> {
+    fn fetch(&self, id: u64) -> Option<String> {
+        self.repo.get(id)
+    }
+}
+
+// 形态二：Arc<dyn Trait> 注入（运行期多态）
+struct AppDynamic {
+    repo: Arc<dyn Repository + Send + Sync>,
+}
+
+impl AppDynamic {
+    fn new(repo: Arc<dyn Repository + Send + Sync>) -> Self {
+        Self { repo }
+    }
+
+    fn fetch(&self, id: u64) -> Option<String> {
+        self.repo.get(id)
+    }
+}
+
+// 形态三：组合根集中装配
+fn compose_app() -> AppDynamic {
+    let repo: Arc<dyn Repository + Send + Sync> = Arc::new(InMemoryRepo);
+    AppDynamic::new(repo)
+}
+
+fn main() {
+    let generic = AppGeneric { repo: InMemoryRepo };
+    println!("generic: {:?}", generic.fetch(1));
+
+    let dynamic = compose_app();
+    println!("dynamic: {:?}", dynamic.fetch(1));
+}
+```
+
+**反例：跨线程使用 `Rc<dyn Trait>` 导致编译错误**
+
+```rust,compile_fail
+use std::rc::Rc;
+
+trait Repository {
+    fn get(&self, id: u64);
+}
+
+struct InMemoryRepo;
+impl Repository for InMemoryRepo {
+    fn get(&self, _id: u64) {}
+}
+
+fn spawn_worker(repo: Rc<dyn Repository>) {
+    std::thread::spawn(move || {
+        repo.get(1);
+    });
+}
+
+fn main() {}
+```
+
+> **修正**：跨线程依赖注入使用 `Arc<dyn Repository + Send + Sync>`。
+
+**Mermaid 图：Factory & Provider 形态谱系**
+
+```mermaid
+graph TD
+    F[Factory & Provider] --> A[关联函数构造函数]
+    F --> S[Simple Factory enum+match]
+    F --> M[Factory Method trait]
+    F --> AF[Abstract Factory trait族]
+    F --> P[Provider/Service Locator trait]
+    F --> DI[依赖注入]
+    DI --> G[泛型参数]
+    DI --> D[Arc<dyn Trait>]
+    DI --> C[组合根 Composition Root]
+    AF -->|产品族一致性| CP[同一工厂产品配套]
+```
+
+**决策树：创建模式选型**
+
+```mermaid
+graph TD
+    A[需要封装对象创建？] --> B{类型集是否开放？}
+    B -->|闭合| C[Simple Factory enum+match]
+    B -->|开放| D{创建逻辑是否需子类型化？}
+    D -->|是| E[Factory Method trait]
+    D -->|否，只需一族产品| F[Abstract Factory trait]
+    A -->|需要查找/注入依赖| G[Provider trait / DI]
+    G --> H{依赖生命周期？}
+    H -->|编译期已知| I[泛型参数]
+    H -->|运行期共享| J[Arc<dyn Trait>]
+    H -->|集中装配| K[组合根]
+```
+
+> **来源**: [GoF Design Patterns] · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [refactoring.guru — Factory Method](https://refactoring.guru/design-patterns/factory-method) · [refactoring.guru — Abstract Factory](https://refactoring.guru/design-patterns/abstract-factory) · 可信度: ✅
+
+### 4.20 Adapter 模式
+
+> **EN**: Adapter Pattern in Rust
+
+**定义**：Adapter 模式将一个类的接口转换成客户希望的另一个接口，使原本因接口不兼容而不能一起工作的类可以协同工作。Rust 中最惯用的 Adapter 形态是 **newtype + trait 实现**：通过包装外部类型并为本地 trait 实现，绕过孤儿规则（Orphan Rule），在编译期完成类型适配。
+
+**属性**：
+
+- **接口转换**：将 `Adaptee` 的接口映射到 `Target` 接口。
+- **零成本**：newtype 包装在运行期无额外开销。
+- **孤儿规则边界**：不能为外部类型实现外部 trait，newtype 是标准绕行方案。
+- **语义隔离**：适配器可加入校验或单位转换，避免直接暴露原始类型。
+
+**关系**：
+
+- 与 **Bridge**：Adapter 解决**已有**接口不兼容问题；Bridge 预先**分离抽象与实现**，使二者可独立演进。
+- 与 **Decorator**：Adapter 改变接口，Decorator 在不改变接口的前提下增强行为。
+- 与 **Newtype**：Adapter 常借助 Newtype 绕过孤儿规则。
+
+**正例 1：trait 适配第三方类型（newtype + trait）**
+
+```rust
+mod legacy {
+    pub struct Point {
+        pub x: f64,
+        pub y: f64,
+    }
+
+    impl Point {
+        pub fn coords(&self) -> (f64, f64) {
+            (self.x, self.y)
+        }
+    }
+}
+
+trait Drawable {
+    fn draw(&self);
+}
+
+struct PointAdapter(legacy::Point);
+
+impl Drawable for PointAdapter {
+    fn draw(&self) {
+        let (x, y) = self.0.coords();
+        println!("draw point at ({}, {})", x, y);
+    }
+}
+
+fn render(item: &dyn Drawable) {
+    item.draw();
+}
+
+fn main() {
+    render(&PointAdapter(legacy::Point { x: 1.0, y: 2.0 }));
+}
+```
+
+**正例 2：newtype wrapper 适配（带不变量的领域类型）**
+
+```rust
+struct Username(String);
+
+impl Username {
+    fn new(s: &str) -> Result<Self, &'static str> {
+        if s.is_empty() || s.len() > 32 {
+            Err("username length must be 1..=32")
+        } else {
+            Ok(Self(s.into()))
+        }
+    }
+
+    fn as_str(&self) -> &str {
+        &self.0
+    }
+}
+
+fn greet(name: &Username) {
+    println!("Hello, {}", name.as_str());
+}
+
+fn main() {
+    let name = Username::new("Alice").unwrap();
+    greet(&name);
+}
+```
+
+**反例：Adapter 单位转换错误（运行时逻辑错误）**
+
+```rust
+struct Inch(f64);
+struct Mm(f64);
+
+// ❌ 错误：转换因子写错，编译器无法发现
+impl From<Inch> for Mm {
+    fn from(inch: Inch) -> Self {
+        Mm(inch.0 * 10.0) // 应该是 25.4
+    }
+}
+
+fn main() {
+    let mm: Mm = Inch(1.0).into();
+    println!("{} mm", mm.0); // 输出 10.0，而非 25.4
+}
+```
+
+> **修正**：将转换因子封装为命名常量或测试覆盖；对关键单位使用 newtype + 明确转换函数，并添加单元测试。
+
+**Adapter vs Bridge 明确对比**
+
+| 维度 | Adapter | Bridge |
+|:---|:---|:---|
+| **目的** | 让已有不兼容接口协同工作 | 提前分离抽象与实现，支持独立变化 |
+| **介入时机** | 事后适配 | 事前设计 |
+| **核心机制** | newtype / wrapper + trait 实现 | 组合 + trait / 泛型参数 |
+| **类型关系** | 一个对象适配到另一个接口 | 抽象层与实现层双向独立 |
+| **Rust 表达** | `struct Adapter(Target)` + `impl Trait for Adapter` | `struct Abstraction<T: Implementor>` 或 `Box<dyn Implementor>` |
+
+**Mermaid 图：Adapter 结构**
+
+```mermaid
+classDiagram
+    class Target {
+        <<trait>>
+        +request()
+    }
+    class Adapter {
+        -adaptee: Adaptee
+        +request()
+    }
+    class Adaptee {
+        +specific_request()
+    }
+    Target <|.. Adapter : 实现
+    Adapter o-- Adaptee : 包装
+```
+
+**决策树：何时使用 Adapter**
+
+```mermaid
+graph TD
+    A[需要复用已有类型？] --> B{该类型是否已实现目标 trait？}
+    B -->|是| C[直接使用]
+    B -->|否| D{目标 trait 是否本地？}
+    D -->|是| E[newtype + impl Trait]
+    D -->|否| F[无法直接适配；考虑 facade 或重新设计接口]
+    E --> G[零成本类型转换]
+```
+
+> **来源**: [GoF Design Patterns] · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [refactoring.guru — Adapter](https://refactoring.guru/design-patterns/adapter) · 可信度: ✅
 
 ---
 
@@ -3921,7 +5020,7 @@ fn main() {
 **维护者**: Rust 学习项目团队
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Design Patterns](https://rust-unofficial.github.io/patterns/), [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/), [GoF — Design Patterns: Elements of Reusable Object-Oriented Software](https://en.wikipedia.org/wiki/Design_Patterns), [refactoring.guru — Design Patterns](https://refactoring.guru/design-patterns), [Tokio Docs](https://docs.rs/tokio/latest/tokio/)
 >
 
 ## ⚠️ 反例与陷阱

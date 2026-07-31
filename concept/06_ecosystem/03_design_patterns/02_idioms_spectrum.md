@@ -3,7 +3,7 @@
 > **代码状态**: ✅ 含可编译示例
 >
 > **EN**: Idioms Spectrum
-> **Summary**: Idioms Spectrum: Rust ecosystem tools, crates, and engineering practices.
+> **Summary**: Idioms Spectrum: a cross-layer catalog of Rust idioms covering ownership transfer, clone-on-write, unsafe boundaries, error handling, advanced iterators, async runtime patterns, and bare-metal practices.
 > **受众**: [进阶]
 > **内容分级**: [专家级]
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -32,6 +32,7 @@
 
 - v1.0 (2026-05-21): 初始版本——七层惯用法谱系 + 等价变换 + 反惯用法判定树 + Clippy 对齐
 - v1.2 (2026-07-31): P4 国际化对齐——新增 `ManuallyDrop`、`scoped threads` 两个惯用法小节，新增「惯用法与 23/43 模式模型衔接」映射表
+- v1.3 (2026-07-31): 补全惯用法语义——新增 `Cow<T>`、所有权移动、`Deref`/`AsRef`/`Borrow` 边界、`MaybeUninit<T>`、unsafe 边界、错误处理全谱、`Iterator` 高级适配器、async 运行时、`no_std` 裸机九个小节。
 
 ---
 
@@ -63,28 +64,37 @@
     - [5.2](#52)
     - [5.3](#53)
     - [5.4](#54)
+    - [5.5 `Cow<T>`：按需克隆的借用/拥有二相性](#55-cowt按需克隆的借用拥有二相性)
+    - [5.6 Deref / AsRef / Borrow 边界选型](#56-deref--asref--borrow-边界选型)
   - [六、L3 资源级惯用法](#六l3-资源级惯用法)
     - [6.1](#61)
     - [6.2](#62)
     - [6.3](#63)
     - [6.4](#64)
     - [6.5](#65)
+    - [6.6 所有权移动惯用法：`move`、`mem::take/replace`、`Option::take`](#66-所有权移动惯用法movememtakereplaceoptiontake)
+    - [6.7 `MaybeUninit<T>`：延迟初始化与数组安全构造](#67-maybeuninitt延迟初始化与数组安全构造)
+    - [6.8 unsafe 惯用法边界：raw pointer、`transmute` 与 SAFETY 注释](#68-unsafe-惯用法边界raw-pointertransmute-与-safety-注释)
   - [七、L4 控制级惯用法](#七l4-控制级惯用法)
     - [7.1](#71)
     - [7.2](#72)
     - [7.3](#73)
     - [7.4](#74)
+    - [7.5 错误处理惯用法全谱：从 `ok_or` 到 `thiserror`/`anyhow`](#75-错误处理惯用法全谱从-ok_or-到-thiserroranyhow)
+    - [7.6 Iterator 高级适配器：`try_fold`、`peekable`、`fuse`、`cycle`](#76-iterator-高级适配器try_foldpeekablefusecycle)
   - [八、L5 并发级惯用法](#八l5-并发级惯用法)
     - [8.1](#81)
     - [8.2](#82)
     - [8.3](#83)
     - [8.4](#84)
     - [8.5](#85)
+    - [8.6 async 运行时惯用法：`Pin`、任务调度、取消安全与背压](#86-async-运行时惯用法pin任务调度取消安全与背压)
   - [九、L6 架构级惯用法](#九l6-架构级惯用法)
     - [9.1](#91)
     - [9.2](#92)
     - [9.3](#93)
     - [9.4](#94)
+    - [9.5 `no_std` / 裸机惯用法：`#[global_allocator]`、`#[panic_handler]`、临界区](#95-no_std--裸机惯用法global_allocatorpanic_handler临界区)
   - [十、反惯用法](#十反惯用法)
     - [常见反惯用清单](#常见反惯用清单)
   - [十一、Rust 1.95 新惯用法](#十一rust-195-新惯用法)
@@ -632,6 +642,165 @@ greeting(&String::from("Rust")); // &String → 自动解引用为 &str
 greeting(&"Rust".to_owned());    // &String
 ```
 
+### 5.5 `Cow<T>`：按需克隆的借用/拥有二相性
+
+> **EN**: Clone-on-Write with `Cow<T>`
+> **Summary**: `Cow<T>` lets functions accept either borrowed or owned data and defer cloning until mutation is actually required.
+
+> 来源: [Rust std — `std::borrow::Cow`](https://doc.rust-lang.org/std/borrow/enum.Cow.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+
+**概念与属性**
+
+`Cow<'a, B>`（Clone-on-Write）是 `std::borrow` 提供的枚举，有两种状态：
+
+- `Borrowed(&'a B)`：仅持有借用，零分配。
+- `Owned(B::Owned)`：拥有数据，在需要写时克隆。
+
+关键方法：
+
+- `as_ref()` → 统一返回 `&B`，无论当前状态。
+- `to_mut()` → 需要可变访问时，如果是 `Borrowed` 则克隆为 `Owned`。
+- `into_owned()` → 强制转换为拥有值（`Borrowed` 时触发克隆）。
+
+**与其他惯用法的关系**：`Cow` 是 `Borrow`/`ToOwned` trait 的具体产物，常用于替代「参数既可能是 `&str` 又可能是 `String`」时的人工重载或提前克隆。
+
+**正例**：
+
+```rust
+use std::borrow::Cow;
+
+fn append_suffix<'a>(s: Cow<'a, str>, suffix: &str) -> Cow<'a, str> {
+    if s.ends_with(suffix) {
+        s
+    } else {
+        let mut owned = s.into_owned();
+        owned.push_str(suffix);
+        Cow::Owned(owned)
+    }
+}
+
+fn main() {
+    let borrowed = append_suffix(Cow::Borrowed("hello"), "!");
+    let owned = append_suffix(Cow::Owned("hello".to_string()), "!");
+    println!("{} {}", borrowed, owned);
+}
+```
+
+**反例/陷阱**：
+
+```rust,ignore
+use std::borrow::Cow;
+
+fn bad(s: Cow<str>) {
+    // 陷阱：即使不修改输入也调用 into_owned，破坏了 Borrowed 的零分配优势。
+    let _ = s.into_owned();
+}
+```
+
+**思维导图**：
+
+```mermaid
+mindmap
+  root((Cow<T>))
+    Borrowed[Borrowed<T><br/>零拷贝借用]
+    Owned[Owned<T><br/>写时克隆]
+    as_ref[as_ref：统一只读视图]
+    to_mut[to_mut：写时才克隆]
+    into_owned[into_owned：强制拥有]
+```
+
+**决策树**：
+
+```mermaid
+graph TD
+    A[函数参数类型选择] --> B{调用方通常提供字面量/借用?}
+    B -->|是| C{是否需要修改输入?}
+    C -->|是| D[使用 Cow<T><br/>读时零拷贝，写时克隆]
+    C -->|否| E[使用 &T / &str]
+    B -->|否| F{调用方必须拥有数据?}
+    F -->|是| G[使用 T / String / Vec<T>]
+```
+
+### 5.6 Deref / AsRef / Borrow 边界选型
+
+> **EN**: Choosing Between `Deref`, `AsRef`, and `Borrow`
+> **Summary**: Use `Deref` only for smart-pointer transparency, `AsRef` for cheap reference conversions, and `Borrow` for hash-/compare-stable borrowing.
+
+> 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Reference — Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html)
+
+**概念与语义差异**
+
+| Trait | 核心语义 | 自动强制转换 | 等价性要求 | 典型使用场景 |
+|:---|:---|:---:|:---:|:---|
+| `Deref` | 智能指针/包装器对目标类型的**透明解引用** | ✅ 是 | 无 | `Box<T>`、`Vec<T>`、`String` 代理内部值 |
+| `AsRef<T>` | 廉价引用转换 | ❌ 否 | 无 | 函数参数接受更宽泛类型：`&str`/`&String` → `AsRef<str>` |
+| `Borrow<T>` | 转换后的引用与原值在**哈希/比较/排序**上一致 | ❌ 否 | 必须保持 `Eq`/`Hash`/`Ord` | 集合键查找：`HashSet<String>::contains(&str)` |
+
+**与其他惯用法的关系**：三者共同回答「函数应该接受什么参数」的问题，但绝不能互换；`Deref` 是智能指针专属，`AsRef` 是转换层，`Borrow` 是集合语义层。
+
+**正例**：
+
+```rust
+use std::collections::HashSet;
+
+fn lookup(set: &HashSet<String>, key: &str) -> bool {
+    // HashSet::contains 要求 String: Borrow<str>，保证 key 与存储值的哈希一致。
+    set.contains(key)
+}
+
+fn main() {
+    let mut set = HashSet::new();
+    set.insert("rust".to_string());
+    assert!(lookup(&set, "rust"));
+}
+```
+
+**反例/陷阱**：
+
+```rust,ignore
+use std::ops::Deref;
+
+struct Animal { name: String }
+struct Dog(Animal);
+
+// 反模式：用 Deref 模拟「继承」
+impl Deref for Dog {
+    type Target = Animal;
+    fn deref(&self) -> &Animal { &self.0 }
+}
+
+fn main() {
+    let d = Dog(Animal { name: "Rex".into() });
+    // 隐式通过 Deref 访问，读者无法一眼区分 Dog 与 Animal。
+    println!("{}", d.name);
+}
+```
+
+**思维导图**：
+
+```mermaid
+mindmap
+  root((引用转换 trait))
+    Deref[Deref<br/>智能指针透明代理]
+    AsRef[AsRef<br/>廉价引用转换]
+    Borrow[Borrow<br/>哈希/比较一致]
+    AntiPattern[反模式：Deref 模拟继承]
+```
+
+**决策树**：
+
+```mermaid
+graph TD
+    A[需要让类型透明调用目标方法?] -->|是| B{是否智能指针/包装器?}
+    B -->|是| C[实现 Deref]
+    B -->|否| D[不要滥用 Deref<br/>改用组合或显式方法]
+    A -->|否| E[仅需廉价引用转换?]
+    E -->|是| F[实现 AsRef<T>]
+    E -->|否| G{用于集合键查找且要求哈希/比较一致?}
+    G -->|是| H[实现 Borrow<T>]
+    G -->|否| I[保持普通方法或新类型]
+```
+
 ---
 
 ## 六、L3 资源级惯用法
@@ -765,6 +934,247 @@ impl RawBuffer {
 
 **等价性**: `ManuallyDrop<T>` 与 `T` 同布局，仅在元层面抑制 `Drop` 调用的自动注入；不引入运行时开销。它与 `mem::forget` 的区别在于保留了值的所有权，可在之后手动析构。
 
+### 6.6 所有权移动惯用法：`move`、`mem::take/replace`、`Option::take`
+
+> **EN**: Ownership Transfer Idioms: `move`, `mem::take`, and `mem::replace`
+> **Summary**: Move values outright or swap them with a default/trivial value to take ownership while leaving a valid placeholder behind.
+
+> 来源: [Rust std — `std::mem::take`](https://doc.rust-lang.org/std/mem/fn.take.html) · [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html)
+
+**概念与属性**
+
+- `move`：闭包按值捕获变量，常用于把所有权转移到新任务或异步上下文。
+- `std::mem::take(&mut T)`：要求 `T: Default`，取走当前值并留下默认值。
+- `std::mem::replace(&mut T, new)`：取走当前值并留下指定的 `new`。
+- `Option::take(&mut self)`：取走 `Some(x)` 并留下 `None`。
+
+这些惯用法的共同特征：**在不复制数据的情况下转移所有权，同时保证原位置仍处于合法状态**。
+
+**与其他惯用法的关系**：它们是 RAII 与所有权系统的「微调螺丝」，常用于状态机转换、Builder 消费、`Option` 字段的临时提取。
+
+**正例**：
+
+```rust
+#[derive(Debug, Default, PartialEq)]
+enum State { #[default] Idle, Running(String) }
+
+fn transition(state: &mut State) -> State {
+    // 取走旧状态，留下 Idle，无需克隆。
+    std::mem::replace(state, State::Idle)
+}
+
+fn take_option(opt: &mut Option<String>) -> Option<String> {
+    opt.take()
+}
+
+fn main() {
+    let mut s = State::Running("db".into());
+    let old = transition(&mut s);
+    println!("old={:?}, now={:?}", old, s);
+    assert_eq!(s, State::Idle);
+
+    let mut o = Some("x".to_string());
+    assert_eq!(take_option(&mut o), Some("x".to_string()));
+    assert_eq!(o, None);
+}
+```
+
+**反例/陷阱**：
+
+```rust,ignore
+#[derive(Clone, Default)]
+struct Session { id: u64, data: String }
+
+fn bad(session: &mut Session) -> Session {
+    let cloned = session.clone(); // 不必要的完整克隆
+    *session = Session::default();
+    cloned
+}
+```
+
+**思维导图**：
+
+```mermaid
+mindmap
+  root((所有权移动惯用法))
+    move[move 闭包<br/>捕获所有权]
+    take[mem::take<br/>取走留 Default]
+    replace[mem::replace<br/>取走留指定值]
+    option_take[Option::take<br/>取 Some 留 None]
+```
+
+**决策树**：
+
+```mermaid
+graph TD
+    A[需要取走 &mut T 的所有权] --> B{T 实现 Default?}
+    B -->|是| C[mem::take 更惯用]
+    B -->|否| D{是否有明确替换值?}
+    D -->|是| E[mem::replace]
+    D -->|否| F{该值是否为 Option?}
+    F -->|是| G[Option::take]
+    F -->|否| H[重新设计所有权流或使用 unsafe]
+```
+
+### 6.7 `MaybeUninit<T>`：延迟初始化与数组安全构造
+
+> **EN**: Delayed Initialization with `MaybeUninit<T>`
+> **Summary**: `MaybeUninit<T>` reserves memory for `T` without requiring immediate initialization, enabling safe incremental array construction before assuming initialization.
+
+> 来源: [Rustonomicon — `MaybeUninit`](https://doc.rust-lang.org/nomicon/vec-maybe-uninit.html) · [Rust std — `MaybeUninit`](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html)
+
+**概念与属性**
+
+- `MaybeUninit<T>` 是一块**可能未初始化**的 `T` 大小内存，不会自动调用 `T` 的 `Drop`。
+- `write(&mut self, val)` 显式初始化。
+- `assume_init()` 断言已初始化，之后由调用者负责管理生命周期。
+- 与 `ManuallyDrop<T>` 组合可避免在「尚未确认是否初始化」时触发未定义行为。
+
+**与其他惯用法的关系**：它是 `ManuallyDrop` 与原始内存管理的中间层，常用于自定义集合、数组批量初始化、FFI 接收缓冲区。
+
+**正例**：
+
+```rust
+use std::mem::{self, MaybeUninit};
+
+fn fill_array() -> [String; 3] {
+    let mut arr: [MaybeUninit<String>; 3] = unsafe {
+        // SAFETY: MaybeUninit<T> 允许未初始化。
+        MaybeUninit::uninit().assume_init()
+    };
+    for i in 0..3 {
+        arr[i].write(format!("item{}", i));
+    }
+    // SAFETY: 数组每个元素都已被初始化。
+    unsafe { mem::transmute_copy(&mut arr) }
+}
+
+fn main() {
+    let arr = fill_array();
+    for s in &arr { println!("{}", s); }
+}
+```
+
+**反例/陷阱**：
+
+```rust,ignore
+use std::mem::MaybeUninit;
+
+unsafe {
+    let x: MaybeUninit<String> = MaybeUninit::uninit();
+    // UB：未初始化内存被当作已初始化的 String 析构。
+    let _s = x.assume_init();
+}
+```
+
+**与 `ManuallyDrop` 组合**：
+
+```rust,ignore
+use std::mem::{ManuallyDrop, MaybeUninit};
+
+// 在不确定是否已初始化时，用 ManuallyDrop 包装，
+// 避免 assume_init 之前 drop 未初始化的值。
+let slot: MaybeUninit<ManuallyDrop<String>> = MaybeUninit::uninit();
+```
+
+**思维导图**：
+
+```mermaid
+mindmap
+  root((MaybeUninit<T>))
+    uninit[uninit：保留未初始化内存]
+    write[write：显式初始化]
+    assume_init[assume_init：断言已完成初始化]
+    ManuallyDrop[组合 ManuallyDrop<br/>防止误 drop]
+```
+
+**决策树**：
+
+```mermaid
+graph TD
+    A[需要构造未初始化数组或延迟初始化?] -->|是| B{是否所有元素都能被可靠初始化?}
+    B -->|是| C[MaybeUninit<T> 数组 + write + assume_init]
+    B -->|否| D[改用 Vec/Option 或重新设计构造过程]
+    A -->|否| E[直接使用 T / Default]
+```
+
+### 6.8 unsafe 惯用法边界：raw pointer、`transmute` 与 SAFETY 注释
+
+> **EN**: Unsafe Idiom Boundaries: Raw Pointers, `transmute`, and SAFETY Comments
+> **Summary**: Unsafe Rust relies on explicit contracts—alignment, lifetime, and aliasing for raw pointers; invariants for `transmute`; and mandatory SAFETY comments documenting why each `unsafe` block is sound.
+
+> 来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Rust std — `std::ptr`](https://doc.rust-lang.org/std/ptr/index.html)
+
+**概念与属性**
+
+原始指针 `*const T` / `*mut T` 的契约：
+
+- **对齐**：指针必须按 `T` 的对齐要求对齐。
+- **生命周期**：解引用得到的引用的生命周期由调用者保证，编译器不检查。
+- **别名**：同时存在重叠的可变与不可变引用或写入违反 stacked borrows/aliasing 模型。
+
+`std::mem::transmute` 的契约：
+
+- 源类型与目标类型**大小必须相同**。
+- 转换后的位模式必须**语义合法**（如不能把任意 `u32` 当作 `bool`）。
+- 优先使用 safe 转换：`as`/`try_into`/`From`/`Into`。
+
+SAFETY 注释规范：每个 `unsafe { ... }` 块前必须解释「为什么这段代码满足 unsafe 前提」；封装 safe API 时，文档应写明调用者需要保证的不变式。
+
+**与其他惯用法的关系**：unsafe 是其他安全抽象的「地基」；所有高层惯用法在 `unsafe`/transmute 面前都可能失效（见定理一致性矩阵的失效条件）。
+
+**正例**：
+
+```rust
+use std::slice;
+
+/// SAFETY: `ptr` must be non-null, properly aligned, and point to `len` valid `i32`s.
+unsafe fn as_i32_slice<'a>(ptr: *const i32, len: usize) -> &'a [i32] {
+    // SAFETY: caller guarantees a valid aligned slice of `len` elements.
+    unsafe { slice::from_raw_parts(ptr, len) }
+}
+
+fn main() {
+    let data = [1, 2, 3];
+    let s = unsafe { as_i32_slice(data.as_ptr(), data.len()) };
+    println!("{:?}", s);
+}
+```
+
+**反例/陷阱**：
+
+```rust,ignore
+use std::mem;
+
+let f: f32 = 1.0;
+// 大小相同但语义完全错误：f32 的位模式不是合法的 bool。
+let b: bool = unsafe { mem::transmute(f) };
+```
+
+**思维导图**：
+
+```mermaid
+mindmap
+  root((unsafe 边界))
+    align[对齐要求]
+    lifetime[生命周期保证]
+    alias[别名规则]
+    transmute[transmute<br/>大小+语义相容]
+    safety_comment[SAFETY 注释]
+```
+
+**决策树**：
+
+```mermaid
+graph TD
+    A[需要使用 unsafe?] -->|是| B{是否能用 safe API 替代?}
+    B -->|是| C[优先使用 safe API]
+    B -->|否| D{操作类型?}
+    D -->|原始指针| E[检查对齐/生命周期/别名，写 SAFETY 注释]
+    D -->|transmute| F[确认大小相等、语义相容、目标不变式]
+    D -->|FFI| G[封装为 safe fn，文档化契约]
+```
+
 ---
 
 ## 七、L4 控制级惯用法
@@ -869,6 +1279,186 @@ let squares: Vec<i32> = (0..10).map(|n| n * n).collect();
 
 // 或利用类型推断（变量类型已指定）
 let squares = (0..10).map(|n| n * n).collect::<Vec<i32>>();
+```
+
+### 7.5 错误处理惯用法全谱：从 `ok_or` 到 `thiserror`/`anyhow`
+
+> **EN**: Error-Handling Idiom Spectrum: `ok_or`, `map_err`, Custom Errors, and `thiserror` vs `anyhow`
+> **Summary**: Rust error handling spans lightweight conversions with `ok_or`/`map_err`, typed library errors built with `thiserror`, and ergonomic application errors aggregated by `anyhow`.
+
+> 来源: [Rust API Guidelines — Errors](https://rust-lang.github.io/api-guidelines/interoperability.html#c-good-err) · [thiserror docs](https://docs.rs/thiserror/latest/thiserror/) · [anyhow docs](https://docs.rs/anyhow/latest/anyhow/)
+
+**概念与属性**
+
+- `Option::ok_or` / `Option::ok_or_else`：把 `Option` 转成 `Result`；优先使用 `ok_or_else` 避免在 `Some` 时构造错误。
+- `Result::map_err`：转换错误类型或添加上下文。
+- 自定义 `Error`：库对外暴露可 `match` 的强类型错误。
+- `thiserror`：为库自动实现 `Error`/`Display`/`From`。
+- `anyhow`：为应用提供简洁的上下文传播与 `?`。
+
+**选型矩阵**：
+
+| 场景 | 推荐方案 | 原因 |
+|:---|:---|:---|
+| 库（library）公共 API | 自定义枚举 + `thiserror` | 调用方需要区分错误种类 |
+| 应用（application/bin） | `anyhow` / `eyre` | 快速添加上下文、向上传播 |
+| 脚本/原型 | `Box<dyn std::error::Error>` / `String` | 快速验证 |
+| `Option` → `Result` | `ok_or_else` | 懒构造错误值 |
+| 错误类型不匹配 | `map_err` | 转换并保留因果链 |
+
+**与其他惯用法的关系**：错误处理是 L4 控制级惯用法的核心，与 `?` 传播、`let-else` 早退、`Iterator` 的 `try_fold` 等形成完整的控制流工具链。
+
+**正例**：
+
+```rust
+use std::fmt;
+
+#[derive(Debug)]
+struct ConfigError { key: String }
+
+impl fmt::Display for ConfigError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "invalid config key: {}", self.key)
+    }
+}
+
+impl std::error::Error for ConfigError {}
+
+fn port_from_env() -> Result<u16, ConfigError> {
+    std::env::var("PORT")
+        .map_err(|_| ConfigError { key: "PORT".into() })?
+        .parse()
+        .map_err(|_| ConfigError { key: "PORT".into() })
+}
+
+#[derive(Debug)]
+struct User;
+fn find_user(_id: u64) -> Option<User> { None }
+
+fn user_or_not_found(id: u64) -> Result<User, &'static str> {
+    find_user(id).ok_or_else(|| "user not found")
+}
+
+fn main() {
+    // SAFETY: single-threaded test process, no concurrent readers of this env var.
+    unsafe { std::env::set_var("PORT", "8080"); }
+    println!("{:?}", port_from_env());
+    println!("{:?}", user_or_not_found(1));
+}
+```
+
+**反例/陷阱**：
+
+```rust,ignore
+fn bad(opt: Option<i32>) -> Result<i32, String> {
+    // 陷阱：即使 opt 是 Some，也会分配字符串。
+    opt.ok_or(format!("expensive error: {}", 42))
+}
+```
+
+**思维导图**：
+
+```mermaid
+mindmap
+  root((错误处理全谱))
+    ok_or_else[ok_or_else：懒构造错误]
+    map_err[map_err：转换错误类型]
+    custom_error[自定义 Error：库 API]
+    thiserror[thiserror：derive Error/Display]
+    anyhow[anyhow：应用级上下文传播]
+```
+
+**决策树**：
+
+```mermaid
+graph TD
+    A[需要返回错误?] --> B{写库还是写应用?}
+    B -->|库| C{错误是否需要被调用方区分?}
+    C -->|是| D[自定义 Error enum + thiserror]
+    C -->|否| E[使用 std::io::Error 或轻量 String]
+    B -->|应用| F[anyhow / eyre]
+    A --> G{只有 Option 缺失?}
+    G -->|是| H[ok_or_else 生成错误]
+    H --> I{需要转换错误类型?}
+    I -->|是| J[map_err]
+```
+
+### 7.6 Iterator 高级适配器：`try_fold`、`peekable`、`fuse`、`cycle`
+
+> **EN**: Advanced Iterator Adapters: `try_fold`, `peekable`, `fuse`, and `cycle`
+> **Summary**: Specialized iterator adapters let you short-circuit on error with `try_fold`, inspect the next item without consuming it, handle fused iterators, and repeat sequences indefinitely.
+
+> 来源: [Rust std — `Iterator`](https://doc.rust-lang.org/std/iter/trait.Iterator.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+
+**概念与属性**
+
+- `try_fold`：带累加器的遍历，遇到 `Err` 立即短路。
+- `peekable`：允许「lookahead」而不消耗元素。
+- `fuse`：把迭代器包装为「首次返回 `None` 后永远返回 `None`」的语义。
+- `cycle`：无限重复底层序列，常用于轮询或回环测试。
+
+**与其他惯用法的关系**：它们是 L4 控制级「Iterator 链」的延伸，与函数式组合子、`?` 传播共同构成惰性控制流。
+
+**正例**：
+
+```rust
+fn sum_until_negative(nums: &[i32]) -> Result<i32, &'static str> {
+    nums.iter().try_fold(0, |acc, &n| {
+        if n < 0 { Err("negative encountered") } else { Ok(acc + n) }
+    })
+}
+
+fn skip_duplicates<I: Iterator<Item=i32>>(iter: I) -> impl Iterator<Item=i32> {
+    let mut peek = iter.peekable();
+    std::iter::from_fn(move || {
+        let cur = peek.next()?;
+        while peek.peek() == Some(&cur) {
+            peek.next();
+        }
+        Some(cur)
+    })
+}
+
+fn main() {
+    assert_eq!(sum_until_negative(&[1, 2, 3]), Ok(6));
+    assert_eq!(sum_until_negative(&[1, -1, 3]).unwrap_err(), "negative encountered");
+
+    let v: Vec<_> = skip_duplicates([1, 1, 2, 2, 3].into_iter()).collect();
+    assert_eq!(v, vec![1, 2, 3]);
+}
+```
+
+**反例/陷阱**：
+
+```rust,ignore
+// 陷阱：在无限 cycle 上调用 collect 会导致程序挂起。
+let v = [1, 2].iter().cycle().collect::<Vec<_>>();
+```
+
+**思维导图**：
+
+```mermaid
+mindmap
+  root((Iterator 高级适配器))
+    try_fold[try_fold<br/>错误短路累加]
+    peekable[peekable<br/>预读不消费]
+    fuse[fuse<br/>None 后恒定 None]
+    cycle[cycle<br/>无限循环序列]
+```
+
+**决策树**：
+
+```mermaid
+graph TD
+    A[需要遍历并聚合结果] --> B{聚合可能提前失败?}
+    B -->|是| C[try_fold / try_for_each]
+    B -->|否| D[fold / reduce]
+    A --> E{需要预读下一项?}
+    E -->|是| F[peekable]
+    A --> G{需要无限重复序列?}
+    G -->|是| H[cycle]
+    G -->|否| I{迭代器可能不规范地在 None 后返回 Some?}
+    I -->|是| J[fuse]
 ```
 
 ---
@@ -1029,6 +1619,94 @@ fn parallel_sum(data: &[i32]) -> i32 {
 
 **等价性**: `scope(f)` 在 `f` 返回前 join 所有由 `s` 派生的线程，因此 `s.spawn` 的闭包可安全捕获非 `'static` 引用。与 `thread::spawn` 要求 `'static` 闭包相比，省去了 `Arc` 原子计数与堆分配，是零成本的结构化并发原语。
 
+### 8.6 async 运行时惯用法：`Pin`、任务调度、取消安全与背压
+
+> **EN**: Async Runtime Idioms: `Pin`, Spawning, Cancellation Safety, Backpressure, and Graceful Shutdown
+> **Summary**: Async Rust relies on `Pin<&mut Future>` for self-referential futures, structured spawning with `tokio::spawn`/`JoinSet`, CPU-bound offloading via `spawn_blocking`, and explicit cancellation-safe I/O with backpressure.
+
+> 来源: [Tokio Docs](https://docs.rs/tokio/latest/tokio/) · [The Rust Async Book](https://rust-lang.github.io/async-book/) · [Rust Reference — async/await](https://doc.rust-lang.org/reference/expressions/await-expr.html)
+
+**概念与属性**
+
+- `Pin<&mut Future>`：保证 Future 在多次 `poll` 之间内存位置稳定，是自引用结构与 async 状态机的前提。
+- `tokio::spawn`：启动 `'static` 任务；`JoinSet` 提供结构化并发，子任务不逃逸父作用域。
+- `spawn_blocking`：把 CPU 密集或阻塞式 IO  offload 到独立线程池，避免阻塞 async executor。
+- **Cancellation safety**：Future 被 drop 时资源状态仍保持一致；接收器/IO 操作应选择 cancellation-safe 原语。
+- **Backpressure**：通过有界 channel、`tokio::sync::Semaphore` 或 `JoinSet` 限制在途任务数量。
+- **Graceful shutdown**：使用 `tokio_util::sync::CancellationToken` 或 channel close 通知任务退出。
+
+**与其他惯用法的关系**：async 运行时是 L5 并发惯用法在 I/O 密集场景下的工程化延伸，与 `Pin`、所有权移动、`?` 传播深度耦合。
+
+**正例**：
+
+```rust,ignore
+use tokio::task::JoinSet;
+
+async fn process_all(items: Vec<i32>) -> Vec<i32> {
+    let mut set = JoinSet::new();
+    for item in items {
+        set.spawn(async move { item * 2 });
+    }
+    let mut out = Vec::new();
+    while let Some(res) = set.join_next().await {
+        out.push(res.unwrap());
+    }
+    out
+}
+```
+
+```rust,ignore
+use tokio::sync::mpsc;
+
+async fn safe_loop(mut rx: mpsc::Receiver<i32>) {
+    loop {
+        tokio::select! {
+            Some(v) = rx.recv() => println!("{}", v),
+            else => break,
+        }
+    }
+}
+```
+
+**反例/陷阱**：
+
+```rust,ignore
+async fn bad(mutex: std::sync::Mutex<i32>) {
+    let guard = mutex.lock().unwrap();
+    // 危险：在 .await 点仍持有 std::sync::MutexGuard，会阻塞 executor 线程。
+    tokio::time::sleep(std::time::Duration::from_secs(1)).await;
+    drop(guard);
+}
+```
+
+**思维导图**：
+
+```mermaid
+mindmap
+  root((async 运行时惯用法))
+    Pin[Pin<&mut Future><br/>位置稳定]
+    JoinSet[JoinSet<br/>结构化并发]
+    spawn_blocking[spawn_blocking<br/>阻塞任务 offload]
+    cancellation[cancellation safety]
+    backpressure[backpressure<br/>有界资源]
+    shutdown[graceful shutdown]
+```
+
+**决策树**：
+
+```mermaid
+graph TD
+    A[需要并发执行多个 async 任务?] --> B{任务是否同类型且数量动态?}
+    B -->|是| C[JoinSet]
+    B -->|否| D[tokio::spawn + 手动 JoinHandle]
+    A --> E{任务包含阻塞/CPU 工作?}
+    E -->|是| F[spawn_blocking]
+    A --> G{是否需要外部取消信号?}
+    G -->|是| H[CancellationToken + select!]
+    A --> I{接收端是否可能被丢弃?}
+    I -->|是| J[确保操作是 cancellation-safe]
+```
+
 ---
 
 ## 九、L6 架构级惯用法
@@ -1130,6 +1808,92 @@ impl Worker {
         }
     }
 }
+```
+
+### 9.5 `no_std` / 裸机惯用法：`#[global_allocator]`、`#[panic_handler]`、临界区
+
+> **EN**: `no_std` / Bare-Metal Idioms: Global Allocator, Panic Handler, and Interrupt-Free Critical Sections
+> **Summary**: In `#![no_std]` environments, Rust requires explicit `#[global_allocator]`, `#[panic_handler]`, and carefully bounded critical sections to provide memory allocation, panic handling, and interrupt-safe shared state.
+
+> 来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [Rust Embedded Discovery](https://docs.rust-embedded.org/discovery/) · [cortex-m docs](https://docs.rs/cortex-m/latest/cortex_m/)
+
+**概念与属性**
+
+- `#![no_std]`：不链接标准库，仅依赖 `core`（以及可选的 `alloc`）。
+- `#[global_allocator]`：为 `alloc` crate 提供堆分配器（如 `linked_list_allocator`、`embedded-alloc`）。
+- `#[panic_handler]`：处理 panic；裸机中通常进入无限循环或触发硬件复位。
+- **Interrupt-free critical section**：通过临时禁用中断保护共享可变状态，时间必须尽可能短。
+
+**与其他惯用法的关系**：no_std 是 L3-L6 惯用法在资源受限目标上的裁剪，常与自定义 `global_allocator`、FFI、unsafe 原始内存管理共同出现。
+
+**正例**：
+
+```rust,ignore
+#![no_std]
+
+use core::panic::PanicInfo;
+
+#[panic_handler]
+fn panic(_info: &PanicInfo) -> ! {
+    loop {}
+}
+
+#[cfg(feature = "alloc")]
+extern crate alloc;
+```
+
+```rust,ignore
+use linked_list_allocator::LockedHeap;
+
+#[global_allocator]
+static ALLOCATOR: LockedHeap = LockedHeap::empty();
+```
+
+```rust,ignore
+use cortex_m::interrupt;
+use core::cell::RefCell;
+
+static COUNTER: RefCell<u32> = RefCell::new(0);
+
+interrupt::free(|_| {
+    *COUNTER.borrow_mut() += 1;
+});
+```
+
+**反例/陷阱**：
+
+```rust,compile_fail
+#![no_std]
+
+fn bad() {
+    // 错误：no_std 环境下 std 不可用。
+    let _ = std::vec::Vec::new();
+}
+```
+
+**思维导图**：
+
+```mermaid
+mindmap
+  root((no_std / 裸机))
+    no_std[#![no_std]<br/>不链接 std]
+    global_allocator[#[global_allocator]<br/>堆分配器]
+    panic_handler[#[panic_handler]<br/>panic 处理]
+    critical_section[中断自由临界区]
+```
+
+**决策树**：
+
+```mermaid
+graph TD
+    A[目标环境是否支持 std?] -->|是| B[使用 std，无需本节]
+    A -->|否| C[是否需要堆分配?]
+    C -->|是| D[配置 #[global_allocator]]
+    C -->|否| E[仅用 core + 静态内存]
+    A --> F[是否需要 panic 处理?]
+    F -->|是| G[实现 #[panic_handler]]
+    A --> H[是否需要中断间共享可变状态?]
+    H -->|是| I[使用中断自由临界区 + 合适同步原语]
 ```
 
 ---
@@ -1398,6 +2162,7 @@ Rust 惯用法既可独立存在，也常作为经典设计模式在 Rust 中的
 > [Rust Reference](https://doc.rust-lang.org/reference/introduction.html),
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html),
 > [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
+> [Tokio Docs](https://docs.rs/tokio/latest/tokio/) · [The Rust Async Book](https://rust-lang.github.io/async-book/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [Rust Embedded Discovery](https://docs.rust-embedded.org/discovery/) · [thiserror](https://docs.rs/thiserror/latest/thiserror/) · [anyhow](https://docs.rs/anyhow/latest/anyhow/) · [nom](https://docs.rs/nom/latest/nom/) · [winnow](https://docs.rs/winnow/latest/winnow/)
 > **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../00_meta/02_sources/05_international_authority_index.md)
 > **相关文件**:
 >

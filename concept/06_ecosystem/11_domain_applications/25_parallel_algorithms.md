@@ -40,6 +40,10 @@
   - [五、并行扫描与归约](#五并行扫描与归约)
   - [六、NUMA 感知](#六numa-感知)
   - [七、Rayon 实现原理](#七rayon-实现原理)
+    - [7.1 ParallelIterator 语义](#71-paralleliterator-语义)
+    - [7.2 rayon::Scope / spawn](#72-rayonscope--spawn)
+    - [7.3 Lock-Free Linearizability](#73-lock-free-linearizability)
+    - [7.4 Memory Ordering](#74-memory-ordering)
   - [八、反例与陷阱](#八反例与陷阱)
     - [反例 1：在并行循环中修改共享可变状态](#反例-1在并行循环中修改共享可变状态)
     - [反例 2：任务粒度过细](#反例-2任务粒度过细)
@@ -243,6 +247,141 @@ fn parallel_sum(data: &[i64]) -> i64 {
 
 > **关键洞察**：Rayon 把"递归串行算法"通过 `join` 或 `par_iter` 自动并行化，调用方无需管理线程。来源: [Rayon docs](https://docs.rs/rayon/latest/rayon/)
 
+### 7.1 ParallelIterator 语义
+
+`ParallelIterator` 是 Rayon 对「可并行遍历集合」的抽象。它的关键语义保证：
+
+1. **顺序无关性**：`par_iter()` 不保证元素处理顺序，依赖顺序的算法（如依赖前一项状态的前缀和）需要特殊处理；
+2. **折叠与归约**：`fold` 对每个子范围独立累加，`reduce` 把子结果合并，要求合并操作满足结合律；
+3. **惰性执行**：`par_iter().map(...).filter(...)` 不立即执行，直到遇到 `collect()` / `sum()` / `reduce()` 等终结操作；
+4. **Send/Sync 保证**：闭包与数据必须满足 `Send`，闭包捕获的共享状态必须满足 `Sync`。
+
+```rust,ignore
+use rayon::prelude::*;
+
+fn parallel_word_lengths(texts: &[String]) -> usize {
+    texts
+        .par_iter()
+        .map(|s| s.len())
+        .reduce(|| 0, |a, b| a + b)
+}
+```
+
+> **注意**：`reduce` 的 identity 函数 `|| 0` 与合并函数 `|a, b| a + b` 必须满足结合律与单位元律，否则结果可能随任务拆分方式变化。
+
+### 7.2 rayon::Scope / spawn
+
+`rayon::scope` 允许在当前线程阻塞等待的同时，向线程池提交子任务。子任务可以借用父线程栈上的数据（因为 scope 保证所有子任务完成后才返回）。
+
+```rust,ignore
+use rayon::scope;
+
+fn parallel_search(haystack: &[i32], needle: i32) -> Option<usize> {
+    let mut result: Option<usize> = None;
+    scope(|s| {
+        let mid = haystack.len() / 2;
+        let (left, right) = haystack.split_at(mid);
+        s.spawn(|_| {
+            if let Some(idx) = linear_search(left, needle) {
+                // 注意：多个线程可能同时找到结果，需要同步写入
+            }
+        });
+        s.spawn(|_| {
+            if let Some(idx) = linear_search(right, needle) {
+                result = Some(idx + mid);
+            }
+        });
+    });
+    result
+}
+
+fn linear_search(arr: &[i32], needle: i32) -> Option<usize> {
+    arr.iter().position(|&x| x == needle)
+}
+```
+
+> **安全保证**：`scope` 确保所有 `spawn` 的任务在 scope 结束前完成，因此子任务可以安全借用父作用域的引用。这与裸 `std::thread::spawn` 不同——后者要求 `'static` 闭包。
+
+### 7.3 Lock-Free Linearizability
+
+Lock-free 算法保证至少有一个线程在有限步内完成操作（系统整体持续进展）。其正确性通常用 **linearizability** 描述：每个并发操作看起来都在某个瞬间原子完成。
+
+**与 Rayon 的区别**：
+
+| 维度 | Rayon fork-join | Lock-free 数据结构 |
+|---|---|---|
+| 抽象层级 | 任务并行框架 | 共享状态并发原语 |
+| 典型实现 | `par_iter()` / `join()` | `crossbeam::queue::ArrayQueue` |
+| 同步机制 | work-stealing deque | CAS 循环 |
+| 正确性标准 | 结果确定性 | linearizability |
+
+```rust,ignore
+use crossbeam::queue::ArrayQueue;
+use std::sync::Arc;
+
+fn lock_free_producer_consumer() {
+    let q = Arc::new(ArrayQueue::new(1024));
+    let q2 = Arc::clone(&q);
+
+    std::thread::spawn(move || {
+        for i in 0..100 {
+            loop {
+                if q2.push(i).is_ok() { break; }
+            }
+        }
+    });
+
+    for _ in 0..100 {
+        loop {
+            if let Some(v) = q.pop() {
+                println!("{}", v);
+                break;
+            }
+        }
+    }
+}
+```
+
+### 7.4 Memory Ordering
+
+并行算法中，原子操作的内存序决定线程间可见性。Rust 标准库提供五种 ordering：
+
+| Ordering | 语义 | 适用场景 |
+|---|---|---|
+| `Relaxed` | 仅保证原子性 | 单调计数器，不依赖顺序 |
+| `Acquire` | 读操作，建立 happens-before | 读取共享指针/标志 |
+| `Release` | 写操作，建立 happens-before | 写入共享指针/标志 |
+| `AcqRel` | 读+写同时建立 | CAS 循环 |
+| `SeqCst` | 全局一致顺序 | 多线程状态机、flag 同步 |
+
+```rust
+use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
+use std::sync::Arc;
+use std::thread;
+
+fn memory_ordering_example() {
+    let data = AtomicUsize::new(0);
+    let ready = AtomicBool::new(false);
+
+    let ready_ref = Arc::new(ready);
+    let data_ref = Arc::new(data);
+
+    let r = Arc::clone(&ready_ref);
+    let d = Arc::clone(&data_ref);
+    thread::spawn(move || {
+        d.store(42, Ordering::Release);
+        r.store(true, Ordering::Release);
+    });
+
+    while !ready_ref.load(Ordering::Acquire) {
+        thread::yield_now();
+    }
+    assert_eq!(data_ref.load(Ordering::Acquire), 42);
+}
+```
+
+> **建议**：默认使用 `Acquire`/`Release` 组合；仅在能证明全局顺序必要时使用 `SeqCst`，因为更强的顺序会限制编译器/CPU 优化。来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)
+
 ---
 
 ## 八、反例与陷阱
@@ -352,6 +491,12 @@ mindmap
       Fork-Join
       Work-Stealing
       NUMA 感知
+    Rayon 语义
+      ParallelIterator
+      rayon::Scope / spawn
+    并发原语
+      Lock-Free Linearizability
+      Memory Ordering
     生态
       Rayon
       crossbeam
@@ -368,8 +513,11 @@ mindmap
 - **P1 学术**: [Blumofe & Leiserson — Scheduling Multithreaded Computations by Work Stealing (ACM)](https://dl.acm.org/doi/10.1145/209936.209958)
 - **P1 学术**: [Blelloch — Prefix Sums and Their Applications (IEEE)](https://ieeexplore.ieee.org/document/42122)
 - **P1 并发**: [Rust Atomics and Locks](https://marabos.nl/atomics/)
+- **P1 并发**: [Herlihy & Shavit — The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452)
 - **P2 生态**: [Rayon docs](https://docs.rs/rayon/latest/rayon/)
+- **P2 生态**: [crossbeam docs](https://docs.rs/crossbeam/latest/crossbeam/)
 - **P0 官方**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+- **P0 官方**: [Rust Reference — Atomics](https://doc.rust-lang.org/reference/items/associated-items.html)
 - **P1 性能**: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)
 
 ---

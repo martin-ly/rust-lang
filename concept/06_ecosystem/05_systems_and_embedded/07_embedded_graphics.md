@@ -2,6 +2,7 @@
 > [研究者]
 >
 > **Bloom 层级**: L5-L6
+>
 # Rust 嵌入式图形开发
 
 > **EN**: Embedded Graphics Development with Rust

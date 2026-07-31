@@ -42,7 +42,7 @@
 
 ## 📑 目录
 
-- [API Design Patterns（API 设计模式）](#api-design-patternsapi-设计模式)
+- [API 设计模式](#api-设计模式)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 REST：表述性状态转移](#11-rest表述性状态转移)

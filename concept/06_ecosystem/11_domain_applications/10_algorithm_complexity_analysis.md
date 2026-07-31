@@ -142,6 +142,89 @@ fn merge_sort_space<T: Ord + Clone>(arr: &[T]) -> Vec<T> {
 // 但均摊到 n 次操作后，每次平均 O(1)。
 ```
 
+### 5.1 势能方法摊还分析
+
+势能方法（Potential Method）把数据结构视为一个具有「势能」的物理系统。每次操作的**摊还代价**定义为：
+
+```text
+摊还代价 = 实际代价 + 操作后的势能 - 操作前的势能
+        = 实际代价 + ΔΦ
+```
+
+其中 `Φ(D_i)` 表示第 `i` 次操作后数据结构的势能。若势能设计得当，昂贵的操作会消耗之前积累的势能，而便宜的操作则积累势能。
+
+**经典示例：`Vec::push`**
+
+设 `Φ = 2n - m`，其中 `n` 为当前元素数，`m` 为容量。当容量足够时：
+
+| 操作 | 实际代价 | ΔΦ | 摊还代价 |
+|---|---|---|---|
+| 普通 push（不扩容） | 1 | `+2` | 3 |
+| 扩容 push（容量翻倍） | `n+1` | `-(n-2)` | 3 |
+
+因此 `Vec::push` 的摊还代价为 O(1)。
+
+```rust
+fn push_amortized_analysis() {
+    let mut v = Vec::with_capacity(4);
+    for i in 0..10 {
+        v.push(i); // 前 4 次不扩容，第 5 次扩容到 8，第 9 次扩容到 16
+    }
+    // 总拷贝次数 ≈ n，均摊到 n 次操作为 O(1)
+}
+```
+
+**决策树：何时使用势能方法？**
+
+```mermaid
+graph TD
+    A[需要摊还分析?] --> B{操作序列中是否存在周期性昂贵操作?}
+    B -->|是| C{昂贵操作是否由前期便宜操作积累的资源支付?}
+    C -->|是| D[使用势能方法]
+    C -->|否| E[使用聚合分析或记账方法]
+    B -->|否| F[可能不需要摊还分析]
+```
+
+### 5.2 缓存复杂度简介
+
+现代 CPU 的内存层级意味着：**算法复杂度不仅要看比较/访问次数，还要看缓存未命中次数**。缓存复杂度（Cache Complexity）描述算法执行过程中 cache miss 的数量，通常用「缓存无关模型（Cache-Oblivious Model）」或「外部内存模型（External Memory Model）」分析。
+
+| 复杂度模型 | 关注点 | 示例 |
+|---|---|---|
+| RAM 模型 | 基本操作次数 | 比较次数、赋值次数 |
+| 外部内存模型 | I/O 次数（块传输） | 外部排序的扫描趟数 |
+| 缓存无关模型 | 自动适应任意缓存行大小 | 分块矩阵乘法、van Emde Boas 布局 |
+
+**Rust 工程启示**：
+
+- 顺序访问 `Vec<T>` 的缓存友好度远高于链表；
+- 分块（tiling）可将矩阵乘法的缓存复杂度从 O(n³) 降到 O(n³ / √Z)，其中 Z 为缓存大小；
+- `rayon` 等并行库在拆分数组时尽量保持连续子数组，以提升局部性。
+
+```rust
+// ❌ 列优先访问，缓存未命中高
+fn sum_columns_bad(matrix: &[Vec<f64>], n: usize) -> Vec<f64> {
+    let mut sums = vec![0.0; n];
+    for col in 0..n {
+        for row in 0..n {
+            sums[col] += matrix[row][col];
+        }
+    }
+    sums
+}
+
+// ✅ 行优先访问，缓存友好
+fn sum_rows_good(matrix: &[Vec<f64>], n: usize) -> Vec<f64> {
+    let mut sums = vec![0.0; n];
+    for row in 0..n {
+        for col in 0..n {
+            sums[row] += matrix[row][col];
+        }
+    }
+    sums
+}
+```
+
 ## 6. 复杂度速查表
 
 | 复杂度 | 增长速度 | 示例算法 |
@@ -197,6 +280,9 @@ criterion_main!(benches);
 
 - **P2 生态/社区**: [docs.rs/rayon — 生态权威 API 文档](https://docs.rs/rayon) · [docs.rs/petgraph — 生态权威 API 文档](https://docs.rs/petgraph)
 - **P1 学术/形式化**: [Skiena: The Algorithm Design Manual (2nd ed., Springer)](https://link.springer.com/book/10.1007/978-1-84800-070-4)
+- **P1 学术**: [CLRS — Introduction to Algorithms (4th ed., MIT Press)](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)
+- **P1 学术**: [Frigo et al. — Cache-Oblivious Algorithms (ACM Transactions on Algorithms)](https://dl.acm.org/doi/10.1145/805685.805687)
+- **P1 学术**: [Aggarwal & Vitter — The Input/Output Complexity of Sorting and Related Problems (Communications of the ACM)](https://dl.acm.org/doi/10.1145/48529.48535)
 
 ---
 
@@ -240,4 +326,9 @@ mindmap
       4.1 主定理Master Theorem
       4.2 递归树
     5. 摊销分析
+      5.1 势能方法
+      5.2 缓存复杂度
+    6. 复杂度速查表
+    7. Rust 性能基准测试
+    8. 最佳实践
 ```

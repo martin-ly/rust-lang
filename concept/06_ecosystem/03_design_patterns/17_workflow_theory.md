@@ -40,7 +40,7 @@
 
 ## 📑 目录
 
-- [Workflow Theory \& Formalization（工作流理论与形式化）](#workflow-theory--formalization工作流理论与形式化)
+- [工作流理论与形式化](#工作流理论与形式化)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 工作流管理联盟（WfMC）定义](#11-工作流管理联盟wfmc定义)

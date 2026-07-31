@@ -73,6 +73,7 @@
     - [测验 5：Rust 的 panic handler 在嵌入式系统中通常如何配置？（理解层）](#测验-5rust-的-panic-handler-在嵌入式系统中通常如何配置理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
+  - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---

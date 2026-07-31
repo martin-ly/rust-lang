@@ -55,6 +55,7 @@
   - [2. 性能调优实战](#2-性能调优实战)
     - [2.1 CPU 优化](#21-cpu-优化)
       - [SIMD 优化](#simd-优化)
+      - [SIMD 边界与选型](#simd-边界与选型)
       - [缓存友好的数据布局](#缓存友好的数据布局)
     - [2.2 内存优化](#22-内存优化)
       - [对象池](#对象池)
@@ -861,6 +862,59 @@ pub unsafe fn simd_dot_product(a: &[f32], b: &[f32]) -> f32 {
 }
 ```
 
+#### SIMD 边界与选型
+
+SIMD 优化有三条边界必须明确，否则轻则代码无法编译，重则运行时产生非法指令（SIGILL）或未定义行为（UB）：
+
+| 边界 | 含义 | 典型错误 | 规避方法 |
+|---|---|---|---|
+| **target_feature** | 函数需要特定 CPU 特性（如 `avx2`、`sse4.2`） | 在旧 CPU 上调用 AVX2 函数 → SIGILL | 编译期 `#[target_feature(enable = "...")]` + 运行时 `is_x86_feature_detected!` 检测 |
+| **portable_simd vs core::arch** | 可移植抽象 vs 平台相关 intrinsics | 手写 x86 intrinsics 无法移植到 ARM | 稳定环境用 `packed_simd`/`wide`； nightly 用 `std::simd`；性能关键路径用 `core::arch` + 条件编译 |
+| **对齐与越界** | SIMD load/store 要求有效地址，对齐 load 还要求地址对齐 | `_mm256_load_ps` 传入未对齐指针 → UB | 优先用 `loadu`/`storeu`；循环后处理 remainder |
+
+```rust
+#[cfg(target_arch = "x86_64")]
+use std::arch::x86_64::*;
+
+// 编译期声明：调用者必须保证 avx2 可用
+#[target_feature(enable = "avx2")]
+unsafe fn avx2_sum(a: &[f32]) -> f32 {
+    // SAFETY: 调用者已通过 is_x86_feature_detected!("avx2") 确认支持，
+    //         且 slice 长度与指针有效性由调用者保证。
+    let mut sum = _mm256_setzero_ps();
+    let chunks = a.len() / 8;
+    for i in 0..chunks {
+        let v = _mm256_loadu_ps(a.as_ptr().add(i * 8));
+        sum = _mm256_add_ps(sum, v);
+    }
+    // 归约与 remainder 省略
+    0.0
+}
+
+fn safe_sum(a: &[f32]) -> f32 {
+    #[cfg(target_arch = "x86_64")]
+    {
+        if is_x86_feature_detected!("avx2") {
+            return unsafe { avx2_sum(a) };
+        }
+    }
+    a.iter().sum()
+}
+```
+
+**选型决策树**：
+
+```mermaid
+graph TD
+    A[需要 SIMD 加速?] --> B{是否需要跨平台?}
+    B -->|是| C{是否能用 nightly?}
+    C -->|是| D[std::simd portable_simd]
+    C -->|否| E[packed_simd / wide crate]
+    B -->|否| F{是否追求极致性能?}
+    F -->|是| G[core::arch intrinsics + target_feature]
+    F -->|否| H[packed_simd / wide crate]
+```
+
 #### 缓存友好的数据布局
 
 ```rust
@@ -1119,6 +1173,74 @@ pub async fn batch_write_example() {
     }
 }
 ```
+
+---
+
+### 2.4 Roofline 性能模型
+
+Roofline 模型是一种可视化性能瓶颈的方法，它把算法的**运算强度（operational intensity）**与硬件的**峰值算力**、**内存带宽**进行对比，判断瓶颈位于「算力上限」还是「内存带宽上限」。
+
+**核心公式**：
+
+```text
+attainable_flops = min(peak_flops, operational_intensity × memory_bandwidth)
+```
+
+其中：
+- **operational intensity** = 浮点运算次数 / 访问的字节数（FLOP/Byte）；
+- **peak_flops** = CPU 峰值浮点性能（受 SIMD、频率、核心数影响）；
+- **memory_bandwidth** = 内存子系统峰值带宽。
+
+**Roofline 图形解读**：
+
+```text
+  性能 (FLOP/s)
+       │
+ peak ├─────────────────────────────── 算力屋顶
+       │                             ╱
+       │                           ╱
+       │                         ╱   内存带宽屋顶
+       │                       ╱   ╱
+       │                     ╱   ╱
+       │                   ╱   ╱
+       │                 ╱   ╱
+       │               ╱   ╱
+       │             ╱   ╱
+       │           ● A   ╱          A: 低运算强度，受内存带宽限制
+       │         ● B   ╱            B: 高运算强度，受算力限制
+       │       ╱   ╱
+       │     ╱   ╱
+       └────────────────────────────────
+         低         运算强度          高
+```
+
+**Rust 工程应用**：
+
+| 算法 | 运算强度 | 典型瓶颈 | 优化方向 |
+|---|---|---|---|
+| 向量加法 | 低（1 FLOP/12 Byte） | 内存带宽 | 改布局、合并循环、减少分支 |
+| 矩阵乘法 | 中高 | 算力 | SIMD、分块、多线程 |
+| 哈希表查找 | 低 | 内存延迟 | 预取、紧凑键、减少指针跳转 |
+
+**判定流程**：先用 `perf` 或 `linpak`/`stream` 基准测出本机 peak_flops 与 memory_bandwidth，再估算目标算法的 operational intensity，绘制 Roofline 图定位瓶颈。若点位于内存带宽屋顶下方，优先优化数据布局与访存模式；若位于算力屋顶下方，优先上 SIMD/多线程。
+
+```rust
+/// 简单估算向量加法的运算强度
+fn vector_add_intensity(n: usize) -> f64 {
+    // n 次 f32 加法 = n FLOP
+    // 读取 a: 4n bytes, 读取 b: 4n bytes, 写入 c: 4n bytes
+    let flops = n as f64;
+    let bytes = 12.0 * n as f64;
+    flops / bytes
+}
+
+fn main() {
+    let intensity = vector_add_intensity(1_000_000);
+    assert!((intensity - 1.0 / 12.0).abs() < 1e-9);
+}
+```
+
+> **来源**: [Williams et al. — Roofline: An Insightful Visual Performance Model for Multicore Architectures (ACM, 2009)](https://dl.acm.org/doi/10.1145/1498765.1498785)
 
 ---
 
@@ -2246,6 +2368,10 @@ fn main() {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P1 学术/形式化**: [Skiena: The Algorithm Design Manual (2nd ed., Springer)](https://link.springer.com/book/10.1007/978-1-84800-070-4)
+- **P1 学术/性能**: [Williams et al. — Roofline: An Insightful Visual Performance Model for Multicore Architectures (ACM, 2009)](https://dl.acm.org/doi/10.1145/1498765.1498785)
+- **P0 官方**: [Rust Reference — Inline Assembly and target_feature](https://doc.rust-lang.org/reference/attributes/codegen.html#the-target_feature-attribute)
+- **P2 生态**: [packed_simd docs](https://docs.rs/packed_simd/latest/packed_simd/)
+- **P2 生态**: [wide crate docs](https://docs.rs/wide/latest/wide/)
 
 ## ⚠️ 反例与陷阱
 
@@ -2287,7 +2413,12 @@ mindmap
       1.2 缓存策略
     2. 性能调优实战
       2.1 CPU 优化
+        SIMD 优化
+        SIMD 边界与选型
+        缓存友好的数据布局
       2.2 内存优化
+      2.3 I/O 优化
+      2.4 Roofline 性能模型
     3. 算法可靠性
       3.1 容错设计
       3.2 降级策略

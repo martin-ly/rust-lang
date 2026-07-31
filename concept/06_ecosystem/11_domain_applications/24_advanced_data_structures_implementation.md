@@ -137,6 +137,71 @@ fn main() {
 
 > **选型**：点更新 + 前缀和 → Fenwick；区间更新/区间最值 → 线段树。来源: [fenwick.rs](../../../../crates/c08_algorithms/src/data_structure/fenwick.rs) · [segtree.rs](../../../../crates/c08_algorithms/src/data_structure/segtree.rs)
 
+### 4.1 线段树 Lazy Propagation
+
+区间更新 + 区间查询（如「区间加、区间求和」）若用朴素线段树，每次更新需要 O(n) 个节点。Lazy propagation（延迟传播）把更新操作暂存在节点上，仅在访问子节点时才下推，使单次区间更新/查询保持 O(log n)。
+
+**核心不变式**：
+
+```text
+1. 每个节点维护对应区间的聚合值（如和、最值）。
+2. 每个节点维护一个待下推的 lazy 标记，表示对该区间整体尚未应用到子节点的修改。
+3. 查询或更新进入子节点前，必须先把当前节点的 lazy 标记下推到左右子节点。
+```
+
+```rust,ignore
+struct SegTree {
+    n: usize,
+    sum: Vec<i64>,   // 区间和
+    lazy: Vec<i64>,  // 待下推的区间加标记
+}
+
+impl SegTree {
+    fn new(n: usize) -> Self {
+        Self { n, sum: vec![0; 4 * n], lazy: vec![0; 4 * n] }
+    }
+
+    fn push(&mut self, node: usize, l: usize, r: usize) {
+        if self.lazy[node] == 0 || l == r {
+            return;
+        }
+        let mid = (l + r) / 2;
+        let left = node * 2;
+        let right = node * 2 + 1;
+        self.sum[left] += self.lazy[node] * (mid - l + 1) as i64;
+        self.sum[right] += self.lazy[node] * (r - mid) as i64;
+        self.lazy[left] += self.lazy[node];
+        self.lazy[right] += self.lazy[node];
+        self.lazy[node] = 0;
+    }
+
+    fn range_add(&mut self, node: usize, l: usize, r: usize, ql: usize, qr: usize, val: i64) {
+        if ql > r || qr < l { return; }
+        if ql <= l && r <= qr {
+            self.sum[node] += val * (r - l + 1) as i64;
+            self.lazy[node] += val;
+            return;
+        }
+        self.push(node, l, r);
+        let mid = (l + r) / 2;
+        self.range_add(node * 2, l, mid, ql, qr, val);
+        self.range_add(node * 2 + 1, mid + 1, r, ql, qr, val);
+        self.sum[node] = self.sum[node * 2] + self.sum[node * 2 + 1];
+    }
+
+    fn range_sum(&mut self, node: usize, l: usize, r: usize, ql: usize, qr: usize) -> i64 {
+        if ql > r || qr < l { return 0; }
+        if ql <= l && r <= qr { return self.sum[node]; }
+        self.push(node, l, r);
+        let mid = (l + r) / 2;
+        self.range_sum(node * 2, l, mid, ql, qr) +
+        self.range_sum(node * 2 + 1, mid + 1, r, ql, qr)
+    }
+}
+```
+
+> **Rust 实现要点**：线段树通常用数组表示，避免 `Box` 指针自引用；lazy 数组与 sum 数组同步更新，下推操作必须发生在访问子节点之前。
+
 ---
 
 ## 五、跳表（Skip List）
@@ -265,6 +330,46 @@ fn main() {
 ```
 
 > **来源**: [lock_free_queue.rs](../../../../crates/c08_algorithms/src/data_structure/lock_free_queue.rs)
+
+### 10.1 Lock-Free 内存回收语义
+
+Lock-free 数据结构通过 CAS 移除节点后，不能立即 `drop` 该节点——其他线程可能仍在读取它。内存回收（Memory Reclamation）解决「何时安全释放被移除节点」的问题。
+
+**三种主流方案**：
+
+| 方案 | 机制 | 优点 | 缺点 |
+|---|---|---|---|
+| **Hazard Pointers** | 每个线程声明正在访问的节点，回收时检查是否被 hazard | 延迟低，无批量延迟 | 实现复杂，需要线程本地存储 |
+| **Epoch-Based Reclamation (EBR)** | 全局 epoch 计数，节点延迟到所有进入当前 epoch 的线程退出后释放 | 实现相对简单，crossbeam-epoch 成熟 | 存在 grace period 延迟，不适用于阻塞线程 |
+| **QSBR / RCU** | 读线程注册临界区，更新后等待所有读线程退出 | 读操作无开销 | 写延迟高，依赖操作系统/运行时 |
+
+crossbeam-epoch 是 Rust 生态最常用的 EBR 实现，其不变式：
+
+```text
+1. 节点从数据结构中移除后，先放入本地 garbage list。
+2. 当前线程进入/退出 epoch 临界区时，检查全局 epoch 是否推进。
+3. 当所有在移除时活跃的 epoch 临界区都退出后，节点可被安全释放。
+```
+
+```rust,ignore
+use crossbeam::epoch::{self, Atomic, Owned};
+use std::sync::atomic::Ordering;
+
+struct Node<T> {
+    value: T,
+    next: Atomic<Node<T>>,
+}
+
+unsafe fn retire_node<T>(node: *mut Node<T>) {
+    // 将节点加入 crossbeam-epoch 的 garbage list
+    let guard = epoch::pin();
+    guard.defer_unchecked(move || {
+        let _ = Box::from_raw(node);
+    });
+}
+```
+
+> **关键洞察**：内存回收是无锁算法的「另一半正确性」——只保证 CAS 成功不够，还必须保证没有线程在读取已释放内存。来源: [Rust Atomics and Locks](https://marabos.nl/atomics/)
 
 ---
 

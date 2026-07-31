@@ -7,7 +7,6 @@
 > **Bloom 层级**: L4-L5
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **权威来源**: 本文件为 `concept/` 权威页（MiniRust / Rust 可执行操作语义的 project 内 canonical 入口）。
-> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **最后更新**: 2026-07-31
 >
 > **前置概念**: [操作语义：程序行为的形式化定义](03_operational_semantics.md) · [Tree Borrows 深度解析](../01_ownership_logic/05_tree_borrows_deep_dive.md) · [Behavior Considered Undefined](../01_ownership_logic/06_behavior_considered_undefined.md) · [Memory Model](../../03_advanced/02_unsafe/06_memory_model.md)

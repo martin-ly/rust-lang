@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 650,
-    "generated_at": "2026-07-31T14:38:59.139131+00:00"
+    "total_files": 657,
+    "generated_at": "2026-07-31T15:28:22.226947+00:00"
   },
   "files": [
     {
@@ -10026,6 +10026,178 @@
         ]
       },
       "backward_chains": 2,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\00_start\\08_compile_time_correctness.md",
+      "layer": "L1",
+      "title": "编译期正确性综合哲学",
+      "positioning": "将 Rust 多个核心机制统一在「编译期正确性」框架下，帮助学习者理解「为什么 Rust 编译器如此严格」以及这种严格性带来的工程价值。",
+      "line_count": 276,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 五、反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "fn main() {     let r;     {         let x = 5;         r = &x;          // ❌ x ..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "fn main() {     let x = 5;     let r = &x;     println!(\"{r}\");     // ✅ x 的生命周期..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 14,
+          "should_fail": true,
+          "code_preview": "enum Color {     Red,     Green,     Blue, }  fn rgb(c: Color) -> &'static str {..."
+        },
+        {
+          "flags": [],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "struct Disconnected; struct Connected;  struct TcpClient<State> {     _state: st..."
+        },
+        {
+          "flags": [
+            "unsafe"
+          ],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "use std::slice;  fn buggy_split(data: &mut [u8]) -> (&mut [u8], &mut [u8]) {    ..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "fn safe_split(data: &mut [u8]) -> (&mut [u8], &mut [u8]) {     let mid = data.le..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../02_intermediate/01_generics/02_const_generics.md",
+        "../../02_intermediate/03_error_handling/01_error_handling.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../06_ecosystem/03_design_patterns/32_typestate_deep_dive.md",
+        "../01_ownership_borrow_lifetime/01_ownership.md",
+        "../01_ownership_borrow_lifetime/02_borrowing.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 18,
+      "pre_post": {
+        "pre": [
+          "[所有权（Ownership）](../01_ownership_borrow_lifetime/01_ownership.md) · [借用（Borrowing）](../01_ownership_borrow_lifetime/02_borrowing.md)"
+        ],
+        "post": [
+          "> [类型状态模式（Typestate）](../../06_ecosystem/03_design_patterns/32_typestate_deep_dive.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\01_foundation\\00_start\\09_fearless_refactoring.md",
+      "layer": "L1",
+      "title": "Fearless Refactoring 工程指南",
+      "positioning": "从工程实践角度说明 Rust 为什么能支持「大胆重构」：把重构风险从「运行期未知」转化为「编译器可枚举的错误清单」。",
+      "line_count": 311,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 七、反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "enum Event {     Click(i32, i32),     Key(char), }  fn handle(e: Event) -> &'sta..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 14,
+          "should_fail": true,
+          "code_preview": "enum Event {     Click(i32, i32),     Key(char),     Scroll(i32), // 新增变体 }  fn ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 18,
+          "should_fail": true,
+          "code_preview": "struct Config {     timeout_ms: u64, }  impl Config {     fn connect_timeout(&se..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use std::fs::File; use std::io::{self, Read};  fn read_config(path: &str) -> Res..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// 重构前 fn authorize(user_id: String) -> bool {     !user_id.is_empty() }  fn mai..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 22,
+          "should_fail": true,
+          "code_preview": "#[derive(Debug, Clone, PartialEq, Eq)] struct UserId(String);  impl UserId {    ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn calculate_total(prices: &[f64]) -> f64 {     let mut total = 0.0;     for p i..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn process(items: Vec<i32>) -> i32 {     let mut sum = 0;     for i in items {  ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../02_intermediate/01_generics/01_generics.md",
+        "../../02_intermediate/03_error_handling/01_error_handling.md",
+        "../01_ownership_borrow_lifetime/01_ownership.md",
+        "../01_ownership_borrow_lifetime/02_borrowing.md",
+        "../02_type_system/01_type_system.md",
+        "../08_error_handling/01_error_handling_basics.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 24,
+      "pre_post": {
+        "pre": [
+          "[所有权（Ownership）](../01_ownership_borrow_lifetime/01_ownership.md) · [借用（Borrowing）](../01_ownership_borrow_lifetime/02_borrowing.md) · [错误处理基础](../08_error_handling/01_error_handling_basics.md)"
+        ],
+        "post": [
+          "> [错误处理进阶](../../02_intermediate/03_error_handling/01_error_handling.md) ·"
+        ]
+      },
+      "backward_chains": 0,
       "templated_chains": 0
     },
     {
@@ -45926,7 +46098,7 @@
       "layer": "L4",
       "title": "MiniRust：Rust 操作语义的可执行模型",
       "positioning": "",
-      "line_count": 172,
+      "line_count": 171,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59617,7 +59789,7 @@
       "layer": "L6",
       "title": "设计模式概览",
       "positioning": "",
-      "line_count": 4062,
+      "line_count": 4440,
       "theorem_chains": [
         {
           "text": "| **RAII** | 资源泄漏 | 确定性资源管理 ⟹ `Drop`自动调用 | 所有权（Ownership）+作用域 | 边界：`mem::forget`、引用（Reference）循环泄漏 |",
@@ -59646,6 +59818,10 @@
         {
           "text": "| **State Machine** | 状态转换遗漏 | 穷尽性匹配 ⟹ 非法转换编译错误 | `enum`+`match` | 边界：状态>20时enum难以维护 |",
           "type": "table_row"
+        },
+        {
+          "text": "- **替换粒度**：运行期替换 ⟹ `dyn Trait`；编译期替换 ⟹ 泛型/枚举/闭包。",
+          "type": "paragraph"
         },
         {
           "text": "| GoF 模式依赖继承/运行时多态 | 范式转换（如 Template Method → Trait 默认方法） | §六 命题二 C2_1 | 强行套用原始结构 ⟹ `dyn Trait` 滥用（C2_2） |",
@@ -59724,6 +59900,38 @@
           "code_preview": "struct ShoppingCart<S: PaymentStrategy> {     strategy: S, }  impl<S: PaymentStr..."
         },
         {
+          "flags": [],
+          "lines": 27,
+          "should_fail": false,
+          "code_preview": "trait Formatter {     fn format(&self, record: &str) -> String; }  struct JsonFo..."
+        },
+        {
+          "flags": [],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "trait Formatter {     fn format(&self, record: &str) -> String; }  struct PlainF..."
+        },
+        {
+          "flags": [],
+          "lines": 31,
+          "should_fail": false,
+          "code_preview": "enum OutputFormat {     Plain,     Json,     Hex, }  impl OutputFormat {     fn ..."
+        },
+        {
+          "flags": [],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "struct Filter<P> {     predicate: P, }  impl<P: Fn(&i32) -> bool> Filter<P> {   ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "trait Strategy {     fn execute<T>(&self, input: T) -> T; // 泛型方法导致 trait 非对象安全 ..."
+        },
+        {
           "flags": [
             "ignore"
           ],
@@ -59786,6 +59994,32 @@
           "lines": 16,
           "should_fail": false,
           "code_preview": "// Bevy 风格的事件系统（概念示意） use bevy::prelude::*;  #[derive(Event)] struct Temperature..."
+        },
+        {
+          "flags": [],
+          "lines": 30,
+          "should_fail": false,
+          "code_preview": "use tokio::sync::watch;  struct ConfigSubject {     tx: watch::Sender<String>, }..."
+        },
+        {
+          "flags": [],
+          "lines": 37,
+          "should_fail": false,
+          "code_preview": "use tokio::sync::mpsc;  struct Publisher<T> {     subscribers: Vec<mpsc::Sender<..."
+        },
+        {
+          "flags": [],
+          "lines": 38,
+          "should_fail": false,
+          "code_preview": "use tokio::sync::broadcast;  #[derive(Clone, Debug)] struct Event {     topic: S..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 10,
+          "should_fail": true,
+          "code_preview": "use std::rc::Rc; use std::cell::RefCell;  fn main() {     let state = Rc::new(Re..."
         },
         {
           "flags": [],
@@ -60162,7 +60396,7 @@
       ],
       "transitions": 8,
       "has_cognitive_path": true,
-      "mermaid_blocks": 6,
+      "mermaid_blocks": 10,
       "matrix_rows": 202,
       "pre_post": {
         "pre": [
@@ -60180,7 +60414,7 @@
       "layer": "L6",
       "title": "Rust 惯用法谱系全景（Idioms Spectrum）",
       "positioning": "本文件从**纵向抽象层级**梳理 Rust 的惯用法（idioms）——从词法糖到架构模式的高效、等效、简洁表达方式，与 `01_patterns.md` 的设计模式形成互补：后者聚焦「设计模式」（面向问题），本文件聚焦「惯用法」（面向表达）。",
-      "line_count": 1826,
+      "line_count": 2592,
       "theorem_chains": [
         {
           "text": "一致性矩阵把每条惯用法拆为“前提 ⟹ 结论”：`?` 运算符在 well-typed 前提下展开为等效 `match`（零成本）；",
@@ -60302,6 +60536,34 @@
           "code_preview": "// 惯用：接受最通用的借用类型 fn greeting(name: &str) -> String { // 非 &String     format!(\"H..."
         },
         {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "use std::borrow::Cow;  fn append_suffix<'a>(s: Cow<'a, str>, suffix: &str) -> Co..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use std::borrow::Cow;  fn bad(s: Cow<str>) {     // 陷阱：即使不修改输入也调用 into_owned，破坏了..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use std::collections::HashSet;  fn lookup(set: &HashSet<String>, key: &str) -> b..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "use std::ops::Deref;  struct Animal { name: String } struct Dog(Animal);  // 反模式..."
+        },
+        {
           "flags": [
             "ignore"
           ],
@@ -60332,6 +60594,56 @@
           "code_preview": "use std::mem::ManuallyDrop; use std::alloc::{alloc, dealloc, Layout};  // 惯用：自定义..."
         },
         {
+          "flags": [],
+          "lines": 23,
+          "should_fail": false,
+          "code_preview": "#[derive(Debug, Default, PartialEq)] enum State { #[default] Idle, Running(Strin..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "#[derive(Clone, Default)] struct Session { id: u64, data: String }  fn bad(sessi..."
+        },
+        {
+          "flags": [],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "use std::mem::{self, MaybeUninit};  fn fill_array() -> [String; 3] {     let mut..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "use std::mem::MaybeUninit;  unsafe {     let x: MaybeUninit<String> = MaybeUnini..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "use std::mem::{ManuallyDrop, MaybeUninit};  // 在不确定是否已初始化时，用 ManuallyDrop 包装， //..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "use std::slice;  /// SAFETY: `ptr` must be non-null, properly aligned, and point..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "use std::mem;  let f: f32 = 1.0; // 大小相同但语义完全错误：f32 的位模式不是合法的 bool。 let b: bool ..."
+        },
+        {
           "flags": [
             "ignore"
           ],
@@ -60358,6 +60670,34 @@
           "lines": 6,
           "should_fail": false,
           "code_preview": "// 惯用：turbofish 显式收集类型 let squares: Vec<i32> = (0..10).map(|n| n * n).collect();..."
+        },
+        {
+          "flags": [],
+          "lines": 35,
+          "should_fail": false,
+          "code_preview": "use std::fmt;  #[derive(Debug)] struct ConfigError { key: String }  impl fmt::Di..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "fn bad(opt: Option<i32>) -> Result<i32, String> {     // 陷阱：即使 opt 是 Some，也会分配字符..."
+        },
+        {
+          "flags": [],
+          "lines": 25,
+          "should_fail": false,
+          "code_preview": "fn sum_until_negative(nums: &[i32]) -> Result<i32, &'static str> {     nums.iter..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "// 陷阱：在无限 cycle 上调用 collect 会导致程序挂起。 let v = [1, 2].iter().cycle().collect::<Vec..."
         },
         {
           "flags": [
@@ -60396,6 +60736,30 @@
           "code_preview": "// 惯用：scope 线程借用本地数据 fn parallel_sum(data: &[i32]) -> i32 {     let mut total = ..."
         },
         {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "use tokio::task::JoinSet;  async fn process_all(items: Vec<i32>) -> Vec<i32> {  ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "use tokio::sync::mpsc;  async fn safe_loop(mut rx: mpsc::Receiver<i32>) {     lo..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "async fn bad(mutex: std::sync::Mutex<i32>) {     let guard = mutex.lock().unwrap..."
+        },
+        {
           "flags": [],
           "lines": 12,
           "should_fail": false,
@@ -60424,6 +60788,38 @@
           "lines": 22,
           "should_fail": false,
           "code_preview": "// 惯用：错误内核模式（Erlang 思想在 Rust 中的编码） struct ErrorKernel {     state: Mutex<CoreSta..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "#![no_std] #![feature(lang_items)]  use core::panic::PanicInfo;  #[panic_handler..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "use linked_list_allocator::LockedHeap;  #[global_allocator] static ALLOCATOR: Lo..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "use cortex_m::interrupt; use core::cell::RefCell;  static COUNTER: RefCell<u32> ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "#![no_std]  fn bad() {     // 错误：no_std 环境下 std 不可用。     let _ = std::vec::Vec::..."
         },
         {
           "flags": [],
@@ -60554,8 +60950,8 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 6,
-      "matrix_rows": 78,
+      "mermaid_blocks": 24,
+      "matrix_rows": 88,
       "pre_post": {
         "pre": [
           "[Patterns](01_patterns.md)"
@@ -64071,6 +64467,213 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\03_design_patterns\\34_ownership_as_resource_management.md",
+      "layer": "L6",
+      "title": "Ownership as Resource Management（RAII 模式实践）",
+      "positioning": "将 Rust 的 ownership 语义具体化为资源管理工程模式，覆盖获取-使用-释放全生命周期、drop order 细节以及与同类语言机制的对比。",
+      "line_count": 370,
+      "theorem_chains": [
+        {
+          "text": "| **获取即初始化** | 构造成功 ⟹ 资源有效 | 不会出现「半初始化」状态 |",
+          "type": "table_row"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 六、反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "use std::sync::Mutex;  fn increment(counter: &Mutex<i32>) {     let mut guard = ..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "use std::fs::File; use std::io::{Write, Result};  fn write_log(path: &str, msg: ..."
+        },
+        {
+          "flags": [],
+          "lines": 34,
+          "should_fail": false,
+          "code_preview": "use std::fs; use std::path::{Path, PathBuf}; use std::sync::atomic::{AtomicU64, ..."
+        },
+        {
+          "flags": [],
+          "lines": 29,
+          "should_fail": false,
+          "code_preview": "struct Transaction<'a> {     db: &'a mut Database,     committed: bool, }  struc..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "struct PrintOnDrop(&'static str); impl Drop for PrintOnDrop {     fn drop(&mut s..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "struct PrintOnDrop(&'static str); impl Drop for PrintOnDrop {     fn drop(&mut s..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "use std::cell::RefCell; use std::rc::Rc;  struct Node {     next: RefCell<Option..."
+        },
+        {
+          "flags": [
+            "unsafe"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "use std::alloc::{alloc, dealloc, Layout};  unsafe fn leak() {     let layout = L..."
+        },
+        {
+          "flags": [],
+          "lines": 25,
+          "should_fail": false,
+          "code_preview": "use std::fs::File; use std::io::{self, Write};  fn create_backup(path: &str) -> ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../04_formal/05_rustc_internals/09_destructors.md",
+        "02_idioms_spectrum.md",
+        "35_scope_guard_and_deferred_cleanup.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 18,
+      "pre_post": {
+        "pre": [
+          "[所有权（Ownership）](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [析构函数与 Drop Scope](../../04_formal/05_rustc_internals/09_destructors.md) · [Rust 惯用法谱系](02_idioms_spectrum.md)"
+        ],
+        "post": [
+          "> [作用域守卫与延迟清理](35_scope_guard_and_deferred_cleanup.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\03_design_patterns\\35_scope_guard_and_deferred_cleanup.md",
+      "layer": "L6",
+      "title": "Scope Guard / Deferred Cleanup（作用域守卫与延迟清理）",
+      "positioning": "聚焦「延迟清理」这一特定工程模式：当清理动作不适合封装为独立 RAII 类型，或需要在作用域退出时执行任意回调时使用 scope guard。",
+      "line_count": 391,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 七、反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "use scopeguard::defer;  fn process_file(path: &str) -> std::io::Result<()> {    ..."
+        },
+        {
+          "flags": [],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "struct ScopeGuard<F: FnOnce()>(Option<F>);  impl<F: FnOnce()> ScopeGuard<F> {   ..."
+        },
+        {
+          "flags": [],
+          "lines": 22,
+          "should_fail": false,
+          "code_preview": "use std::fs::File; use std::io::{self, Read};  fn read_with_cleanup(path: &str) ..."
+        },
+        {
+          "flags": [],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "use std::panic;  fn may_panic() {     let guard = ScopeGuard::new(|| println!(\"p..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use scopeguard::{guard, Strategy};  let mut v = vec![1, 2, 3]; let guard = guard..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "use scopeguard::{guard, OnSuccess, OnUnwind};  fn transfer(from: &mut Account, t..."
+        },
+        {
+          "flags": [],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "use std::fs::File; use std::io::{self, Read};  fn read_and_log(path: &str) -> io..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 29,
+          "should_fail": false,
+          "code_preview": "use std::ptr;  struct RawBuffer(*mut u8);  impl Drop for RawBuffer {     fn drop..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "fn wrong_order() {     let guard_a = ScopeGuard::new(|| println!(\"cleanup A\")); ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 14,
+          "should_fail": true,
+          "code_preview": "fn moved_value() {     let msg = String::from(\"cleanup\");     let _guard = Scope..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../02_intermediate/03_error_handling/01_error_handling.md",
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../04_formal/05_rustc_internals/09_destructors.md",
+        "02_idioms_spectrum.md",
+        "34_ownership_as_resource_management.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 11,
+      "pre_post": {
+        "pre": [
+          "[Ownership as Resource Management](34_ownership_as_resource_management.md) · [Rust 惯用法谱系](02_idioms_spectrum.md) · [析构函数与 Drop Scope](../../04_formal/05_rustc_internals/09_destructors.md)"
+        ],
+        "post": [
+          "> [错误处理进阶](../../02_intermediate/03_error_handling/01_error_handling.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\04_web_and_networking\\01_distributed_systems.md",
       "layer": "L6",
       "title": "分布式 系统：Rust 在微服务 与集群中的工程实践",
@@ -65770,7 +66373,7 @@
       "layer": "L6",
       "title": "Rust 嵌入式系统开发",
       "positioning": "探讨 Rust 在嵌入式系统领域的应用——从 `no_std` 到裸机编程，分析内存安全（Memory Safety）如何保证关键系统的可靠性。",
-      "line_count": 1037,
+      "line_count": 1038,
       "theorem_chains": [
         {
           "text": "| Rust 嵌入式系统开发 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -66037,7 +66640,7 @@
       "layer": "L6",
       "title": "Rust 操作系统内核开发",
       "positioning": "",
-      "line_count": 551,
+      "line_count": 552,
       "theorem_chains": [
         {
           "text": "| 操作系统与内核：Rust 的系统级编程 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -66363,7 +66966,7 @@
       "layer": "L6",
       "title": "Rust 嵌入式图形开发",
       "positioning": "",
-      "line_count": 1213,
+      "line_count": 1214,
       "theorem_chains": [
         {
           "text": "| Rust 嵌入式图形系统开发 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -71667,7 +72270,7 @@
       "layer": "L6",
       "title": "性能工程架构：系统级测量、分析与优化",
       "positioning": "",
-      "line_count": 1090,
+      "line_count": 1097,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -72970,7 +73573,7 @@
       "layer": "L6",
       "title": "算法工程实践 (Algorithm Engineering Practice)",
       "positioning": "",
-      "line_count": 2307,
+      "line_count": 2438,
       "theorem_chains": [
         {
           "text": "| 复杂度分析 ⟹ 可扩展性预测 | 大 O 与内存占用评估 | 指导算法选型 |",
@@ -73031,6 +73634,12 @@
         },
         {
           "flags": [],
+          "lines": 28,
+          "should_fail": false,
+          "code_preview": "#[cfg(target_arch = \"x86_64\")] use std::arch::x86_64::*;  // 编译期声明：调用者必须保证 avx2 ..."
+        },
+        {
+          "flags": [],
           "lines": 38,
           "should_fail": false,
           "code_preview": "/// 不友好的 AOS (Array of Structures) #[derive(Clone)] pub struct ParticleAOS {    ..."
@@ -73054,6 +73663,12 @@
           "lines": 54,
           "should_fail": false,
           "code_preview": "use tokio::fs::File; use tokio::io::{AsyncWriteExt, BufWriter}; use tokio::sync:..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "/// 简单估算向量加法的运算强度 fn vector_add_intensity(n: usize) -> f64 {     // n 次 f32 加法 =..."
         },
         {
           "flags": [
@@ -73187,8 +73802,8 @@
       ],
       "transitions": 6,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
-      "matrix_rows": 28,
+      "mermaid_blocks": 2,
+      "matrix_rows": 36,
       "pre_post": {
         "pre": [
           "[Type System Basics](../../01_foundation/02_type_system/01_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)"
@@ -73317,7 +73932,7 @@
       "layer": "L6",
       "title": "Rust 算法复杂度分析",
       "positioning": "",
-      "line_count": 244,
+      "line_count": 335,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -73340,6 +73955,18 @@
           "lines": 4,
           "should_fail": false,
           "code_preview": "// Vec::push 是摊销 O(1)： // 大多数 push 只需写入元素；偶尔触发扩容，代价为 O(n)， // 但均摊到 n 次操作后，每次平均 O..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn push_amortized_analysis() {     let mut v = Vec::with_capacity(4);     for i ..."
+        },
+        {
+          "flags": [],
+          "lines": 22,
+          "should_fail": false,
+          "code_preview": "// ❌ 列优先访问，缓存未命中高 fn sum_columns_bad(matrix: &[Vec<f64>], n: usize) -> Vec<f64> ..."
         },
         {
           "flags": [],
@@ -73371,8 +73998,8 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
-      "matrix_rows": 11,
+      "mermaid_blocks": 2,
+      "matrix_rows": 18,
       "pre_post": {
         "pre": [
           "[Type System Basics](../../01_foundation/02_type_system/01_type_system.md) · [Functions](../../01_foundation/07_modules_and_items/02_functions.md) · [Collections](../../01_foundation/05_collections/01_collections.md)"
@@ -75022,6 +75649,425 @@
         ],
         "post": [
           "[Algorithm Engineering Practice](08_algorithm_engineering_practice.md) · [Async](../../03_advanced/01_async/01_async.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\11_domain_applications\\26_zero_copy_parsing_in_rust.md",
+      "layer": "L6",
+      "title": "Rust 零拷贝解析实战",
+      "positioning": "从工程应用角度讲解 parser combinator（nom/winnow）与 serde 的零拷贝模式，覆盖生命周期约束、streaming/complete 语义差异、实战协议解析案例。",
+      "line_count": 543,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 七、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn parse_header<'a>(input: &'a [u8]) -> Option<(&'a [u8], u32)> {     if input.l..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn main() {     let buf = vec![0x01, 0x02, 0x03, 0x04, 0x05];     let (rest, n) ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 29,
+          "should_fail": false,
+          "code_preview": "use nom::{     IResult,     bytes::complete::{tag, take, take_while},     sequen..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use nom::bytes::streaming::take; use nom::bytes::complete::take as take_complete..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "use nom::{IResult, error::ErrorKind};  #[derive(Debug)] enum ParseError<'a> {   ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 22,
+          "should_fail": false,
+          "code_preview": "use winnow::{     PResult,     Parser,     combinator::seq,     token::take_whil..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "use winnow::stream::Stateful;  #[derive(Debug, Default)] struct ParseContext {  ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "use serde::Deserialize;  #[derive(Debug, Deserialize)] struct BorrowedRecord<'a>..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "use serde::Deserialize; use std::borrow::Cow;  #[derive(Debug, Deserialize)] str..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use serde_bytes::ByteBuf; use serde::Deserialize;  #[derive(Debug, Deserialize)]..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 22,
+          "should_fail": false,
+          "code_preview": "use nom::{     IResult,     bytes::complete::{tag, take_until, take_while1},    ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "use winnow::{PResult, Parser, combinator::seq, token::take_while};  #[derive(Deb..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "use nom::{     IResult,     bytes::complete::{tag, take},     number::complete::..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：parse_name 返回 String，把每个名字都复制到堆上 fn parse_name_bad(input: &str) -> Strin..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "use nom::bytes::complete::take; use nom::IResult;  // ❌ 错误：TCP 流分片到达时，2 字节输入会被 c..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "use serde::Deserialize;  #[derive(Deserialize)] struct Record<'a> {     #[serde(..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+        "../../03_advanced/06_low_level_patterns/02_zero_copy_parsing.md",
+        "../12_networking/03_custom_protocol_implementation.md",
+        "08_algorithm_engineering_practice.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 13,
+      "pre_post": {
+        "pre": [
+          "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [零拷贝解析与序列化优化](../../03_advanced/06_low_level_patterns/02_zero_copy_parsing.md)"
+        ],
+        "post": [
+          "[算法工程实践](08_algorithm_engineering_practice.md) · [网络协议实现](../12_networking/03_custom_protocol_implementation.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\11_domain_applications\\27_ownership_aware_algorithms.md",
+      "layer": "L6",
+      "title": "Rust 所有权感知算法",
+      "positioning": "系统讲解 Rust 所有权模型如何决定算法接口设计，覆盖原地修改、写时复制、借用检查友好的双指针/滑动窗口、基于索引的图/树算法等实战模式。",
+      "line_count": 467,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 六、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 22,
+          "should_fail": false,
+          "code_preview": "// 形态 1：原地修改，零分配 fn reverse_in_place(arr: &mut [i32]) {     arr.reverse(); }  //..."
+        },
+        {
+          "flags": [],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "fn quicksort<T: Ord>(arr: &mut [T]) {     if arr.len() <= 1 {         return;   ..."
+        },
+        {
+          "flags": [],
+          "lines": 23,
+          "should_fail": false,
+          "code_preview": "fn batch_normalize_vectors(vectors: &mut [[f32; 3]]) {     for v in vectors.iter..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "fn main() {     let mut data: Vec<u8> = vec![1, 2, 3, 4, 5, 6, 7, 8];     let ch..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "fn remove_duplicates(nums: &mut [i32]) -> usize {     if nums.is_empty() {      ..."
+        },
+        {
+          "flags": [],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "fn min_sub_array_len(target: i32, nums: &[i32]) -> usize {     let mut left = 0;..."
+        },
+        {
+          "flags": [],
+          "lines": 37,
+          "should_fail": false,
+          "code_preview": "#[derive(Default)] struct Graph {     adj: Vec<Vec<usize>>, }  impl Graph {     ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0502"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "fn main() {     let mut v = vec![3, 1, 2];     v.sort_by(|a, b| {         let _n..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "fn main() {     let mut v = vec![3, 1, 2];     let n = v.len(); // 提前快照     v.so..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0499"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "fn main() {     let mut v = vec![1, 2, 3];     for x in &v {         if *x == 2 ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn main() {     let mut v = vec![1, 2, 3];     let should_push = v.iter().any(|&..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "fn buggy_two_sum(nums: &[i32], target: i32) -> Option<(usize, usize)> {     let ..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "fn two_sum(nums: &[i32], target: i32) -> Option<(usize, usize)> {     let mut le..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+        "../../01_foundation/05_collections/03_slices.md",
+        "../../02_intermediate/02_memory_management/04_smart_pointers.md",
+        "08_algorithm_engineering_practice.md",
+        "24_advanced_data_structures_implementation.md",
+        "25_parallel_algorithms.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 13,
+      "pre_post": {
+        "pre": [
+          "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Slices](../../01_foundation/05_collections/03_slices.md) · [Smart Pointers](../../02_intermediate/02_memory_management/04_smart_pointers.md)"
+        ],
+        "post": [
+          "[算法工程实践](08_algorithm_engineering_practice.md) · [高级数据结构 Rust 实现](24_advanced_data_structures_implementation.md) · [并行算法](25_parallel_algorithms.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\11_domain_applications\\28_unsafe_algorithm_invariants.md",
+      "layer": "L6",
+      "title": "Rust Unsafe 算法不变式",
+      "positioning": "从算法工程角度讲解 unsafe 块的契约设计、循环不变式、并发数据结构与 SIMD 前置条件，并给出 Miri/Kani/Verus/Creusot 的选型建议。",
+      "line_count": 456,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 六、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "/// # Safety /// - `src` and `dst` must be valid for reads/writes of `count * si..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// ❌ 不好的注释 unsafe { *ptr }  // ✅ 好的注释 // SAFETY: `ptr` 来自合法 Box::into_raw，且本函数持有..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "fn partition<T: Ord>(arr: &mut [T]) -> usize {     let len = arr.len();     if l..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "fn binary_search(arr: &[i32], target: i32) -> Option<usize> {     let mut left =..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 67,
+          "should_fail": false,
+          "code_preview": "use std::sync::atomic::{AtomicPtr, Ordering}; use std::ptr;  struct Node<T> {   ..."
+        },
+        {
+          "flags": [],
+          "lines": 36,
+          "should_fail": false,
+          "code_preview": "#[cfg(target_arch = \"x86_64\")] use std::arch::x86_64::*;  #[target_feature(enabl..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：未检查 ptr 是否为空 unsafe fn deref_bad<T>(ptr: *const T) -> &T {     &*ptr }  ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "fn buggy_vec<T>() -> Vec<T> {     let mut v = Vec::with_capacity(4);     unsafe ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：在函数外部调用未启用 target_feature 的 SIMD 函数 unsafe fn avx_add(a: &[f32], b: &[f3..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../03_advanced/02_unsafe/06_memory_model.md",
+        "../../04_formal/08_algorithm_semantics/04_unsafe_algorithm_invariants.md",
+        "08_algorithm_engineering_practice.md",
+        "24_advanced_data_structures_implementation.md",
+        "25_parallel_algorithms.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 13,
+      "pre_post": {
+        "pre": [
+          "[Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Memory Model](../../03_advanced/02_unsafe/06_memory_model.md) · [并发](../../03_advanced/00_concurrency/01_concurrency.md) · [不安全算法的语义不变量](../../04_formal/08_algorithm_semantics/04_unsafe_algorithm_invariants.md)",
+          "从算法工程角度讲解 unsafe 块的契约设计、循环不变式、并发数据结构与 SIMD 前置条件，并给出 Miri/Kani/Verus/Creusot 的选型建议。"
+        ],
+        "post": [
+          "[算法工程实践](08_algorithm_engineering_practice.md) · [并行算法](25_parallel_algorithms.md) · [高级数据结构 Rust 实现](24_advanced_data_structures_implementation.md)"
         ]
       },
       "backward_chains": 0,
