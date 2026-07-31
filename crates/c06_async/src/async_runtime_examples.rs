@@ -182,11 +182,11 @@ impl TokioExamples {
     }
 }
 
-/// 3. async-std 运行时示例 [历史参考]
-/// 3. async-std runtime example
+/// 3. async-std 运行时示例（历史参考）
+/// 3. async-std runtime example (historical reference)
 ///
-/// 展示 async-std 的标准库风格 API [历史参考]
-/// async-std standard library API [historical reference]
+/// 展示 async-std 的标准库风格 API（历史参考）
+/// async-std standard library API (historical reference)
 #[allow(unused)]
 pub struct AsyncStdExamples {
     file_cache: Arc<Mutex<HashMap<String, String>>>,

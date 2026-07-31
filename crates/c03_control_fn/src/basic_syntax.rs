@@ -58,8 +58,7 @@ where
     /// # Return Value
     /// # return value
     /// # 示例
-    /// # Examples
-    /// # example
+    /// ```rust
     /// use c03_control_fn::basic_syntax::BasicSyntaxDemo;
     ///
     /// let demo = BasicSyntaxDemo::new(42);
@@ -83,8 +82,7 @@ where
     /// * `new_data` - 新数据值
     /// * `new_data` -
     /// # 示例
-    /// # Examples
-    /// # example
+    /// ```rust
     /// use c03_control_fn::basic_syntax::BasicSyntaxDemo;
     ///
     /// let mut demo = BasicSyntaxDemo::new(42);
@@ -134,8 +132,7 @@ where
     /// Returns数据的字符串表示
     /// represent
     /// # 示例
-    /// # Examples
-    /// # example
+    /// ```rust
     /// use c03_control_fn::basic_syntax::BasicSyntaxDemo;
     ///
     /// let demo = BasicSyntaxDemo::new(42);

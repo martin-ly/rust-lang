@@ -44,7 +44,7 @@ pub enum WasmRuntime {
 }
 
 /// # 示例
-/// # example
+/// ```rust
 /// use c12_wasm::rust_195_features::detect_runtime;
 /// let rt = detect_runtime();
 /// ```
@@ -126,7 +126,7 @@ cfg_select! {
 /// - `Err` 其他所有值
 /// - `Err` its all
 /// # 示例
-/// # example
+/// ```rust
 /// use c12_wasm::rust_195_features::ffi_bool_from_u8;
 /// assert_eq!(ffi_bool_from_u8(1), Ok(true));
 /// assert!(ffi_bool_from_u8(2).is_err());
@@ -263,7 +263,7 @@ pub fn validate_import_name(name: &str) -> Result<&str, &'static str> {
 /// 分类后的结果字符串或错误信息
 /// classification after result or error message
 /// # 示例
-/// # example
+/// ```rust
 /// use c12_wasm::rust_195_features::process_js_optional_value;
 /// assert_eq!(
 ///     process_js_optional_value(Some("42")),
@@ -372,7 +372,7 @@ pub fn parse_global_init(input: Option<&str>) -> Result<String, &'static str> {
 /// 范围有效返回 `true`，否则返回 `false`
 /// scope effective `true`， `false`
 /// # 示例
-/// # example
+/// ```rust
 /// use c12_wasm::rust_195_features::is_valid_port_range;
 /// use core::range::RangeInclusive;
 /// assert!(is_valid_port_range(&(1..=1024).into()));

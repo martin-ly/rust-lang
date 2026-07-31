@@ -16,7 +16,7 @@
 //! ### 核心异步原语
 //! - [`futures`] - Future 状态机与组合子
 //! - [`streams`] - Stream 异步流与背压
-//! - [`r#await`] - async/await 语义
+//! - `r#await` - async/await 语义
 //! - [`tokio`] - Tokio 运行时
 //! - [`smol`] - Smol 轻量级运行时
 //! - [`actix`] - Actix Actor 框架
@@ -29,7 +29,7 @@
 //! - [`async_runtime`] - 运行时对比与选择
 //! - [`async_runtime_examples`] - 运行时示例
 //! - [`async_ecosystem_comprehensive`] - 异步生态分析
-//! - [`rust_186_features`]..[`rust_198_features`] - 按 Rust 版本组织的特性示例
+//! - [`rust_186_features`]..`rust_198_features` (nightly-only) - 按 Rust 版本组织的特性示例
 //!
 //! ## 快速开始
 //!
@@ -135,7 +135,7 @@ pub mod utils;
 /// - 教学代码需要在 `dyn Trait` 场景下演示，因此 `async_trait` 仍是必要 workaround。
 /// - 原生 AFIDT（async fn in dyn trait）仍处于 nightly 实验（rust-lang/rust#133119），未进入 stable。
 /// - `dynosaur 0.3.1` 提供 stable 兼容的 dyn async trait 方案，但本 crate 暂不引入，继续以 `async_trait` 作为教学示例。
-/// - 详见 [`afit_dyn_tracking`] 模块的对比分析。
+/// - 详见 `afit_dyn_tracking` 模块（nightly-only）的对比分析。
 pub mod advanced_tools;
 
 // ============================================================================

@@ -268,12 +268,10 @@ pub mod termination_proofs {
     /// φ(n) = n
     ///
     /// 性质:
-    /// :
+    /// ```text
     /// 1. φ(n) ≥ 0  (非负)
-    /// 1. φ(n) ≥ 0 ()
     /// 2. 每次迭代 φ 严格递减
     /// 3. φ = 0 时循环终止
-    /// 3. φ = 0 circulation
     /// ```
     pub async fn countdown_with_proof(mut n: u64) {
         println!("\n=== 终止性证明: 倒计时 ===");

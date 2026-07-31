@@ -31,6 +31,7 @@
 //! Action can :
 //! 1. Send(actor, message): 发送消息
 //! 3. Become(new_behavior): 改变行为
+//! ```
 //!
 //! ### 1.2 Actor 系统的语义规则
 //! ### 1.2 Actor system rule
@@ -82,6 +83,7 @@
 //! - EventDemultiplexer: 事件多路分解器（如 epoll, kqueue）
 //! - EventLoop: 事件循环
 //! 处理器: handler: Event → Action
+//! ```
 //!
 //! ### 2.2 Reactor 的执行模型
 //! ### 2.2 Reactor
@@ -501,6 +503,7 @@ pub mod actix_analysis {
     /// - synchronous : i32
     /// - Future: impl Future<Output = i32>
     /// - MessageResponse: 自定义响应
+    /// ```
     ///
     /// ## 3. Actor 生命周期
     /// ## 3. Actor lifetime
@@ -509,6 +512,7 @@ pub mod actix_analysis {
     /// lifetime :
     /// - started(): Actor 启动时
     /// - stopped(): Actor 已停止
+    /// ```
     pub async fn analyze_actix_features() {
         println!("\n=== Actix 框架特性分析 ===");
 

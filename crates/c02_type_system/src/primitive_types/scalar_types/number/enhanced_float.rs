@@ -53,8 +53,7 @@ pub mod float_types {
     /// - 特殊值：NaN、+∞、-∞
     /// - ：NaN、+∞、-∞
     /// # 示例
-    /// # Examples
-    /// # example
+    /// ```rust
     /// let value: f32 = std::f32::consts::PI;
     /// let max: f32 = f32::MAX;
     /// let min: f32 = f32::MIN;
@@ -181,8 +180,7 @@ pub mod float_types {
     /// - 特殊值：NaN、+∞、-∞
     /// - ：NaN、+∞、-∞
     /// # 示例
-    /// # Examples
-    /// # example
+    /// ```rust
     /// let value: f64 = std::f64::consts::PI;
     /// let max: f64 = f64::MAX;
     /// let min: f64 = f64::MIN;

@@ -227,7 +227,6 @@ impl AsyncIteratorAdapterExamples {
 ///             → RTN: Return Type Notation (nightly / RFC)
 ///               → Async Drop (nightly)
 ///                 → Gen blocks / AsyncIterator (nightly)
-/// ```
 pub struct AsyncEvolutionTimeline;
 
 // ============================================================================

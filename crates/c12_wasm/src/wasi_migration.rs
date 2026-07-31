@@ -46,7 +46,7 @@
 /// ```
 ///
 /// ## 运行
-/// ## Run
+/// ```text
 /// wasmtime target/wasm32-wasip1/debug/my_app.wasm
 /// ```
 pub struct Wasip1Basics;
@@ -142,8 +142,7 @@ WASI Capability-Based Security:
 /// | **WIT** | 接口定义语言（类似 IDL） |
 /// | **WIT** | definition （similar to IDL） |
 /// ## 编译命令
-/// ## command
-/// ## 编译command
+/// ```text
 /// cargo build --target wasm32-wasip2
 /// ```
 pub struct Wasip2ComponentModel;
@@ -222,7 +221,7 @@ wasip1 vs wasip2:
 /// - `wit-bindgen` — WIT 绑定generator
 /// - `cargo-component` — 组件模型 Cargo 插件
 /// ## 安装
-/// ##
+/// ```text
 /// cargo install wasm-tools
 /// cargo install cargo-component
 /// ```

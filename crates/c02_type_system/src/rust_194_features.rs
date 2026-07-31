@@ -256,8 +256,7 @@ pub fn harmonic_number_approx(n: u64) -> f64 {
 /// 在此之前，可以使用 `c as usize` 或此包装函数。
 /// in this 's before ，can `c as usize` or this function 。
 /// # 示例
-/// # Examples
-/// # example
+/// ```rust
 /// use c02_type_system::rust_194_features::char_to_usize;
 /// let c = 'A';
 /// let value = char_to_usize(c);

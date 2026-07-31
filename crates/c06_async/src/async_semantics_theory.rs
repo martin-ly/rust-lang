@@ -51,6 +51,7 @@
 //! 2. 右单位元: m >>= return ≡ m
 //! 2. : m >>= return ≡ m
 //! 3. 结合律:   (m >>= f) >>= g ≡ m >>= (λx. f(x) >>= g)
+//! ```
 //!
 //! ## 2. 异步与同步的等价关系
 //! ## 2. async and synchronous etc.
@@ -201,6 +202,7 @@ pub mod state_machine_example {
     /// δ(Waiting(n), cx) = (Pending, Waiting(n+1))  if n < max_polls
     /// δ(Waiting(max_polls), cx) = (Ready(result), Complete)
     /// δ(Complete, cx) = undefined (不会被调用)
+    /// ```
     pub struct ExplicitStateMachine {
         state: TaskState,
         max_polls: u32,
@@ -566,8 +568,7 @@ pub mod monad_laws {
     }
 
     /// ## 法则 2: 右单位元 (Right Identity)
-    /// m >>= return ≡ m
-    /// ```
+    /// `m >>= return ≡ m`
     pub async fn verify_right_identity() {
         println!("\n=== Monad 法则 2: 右单位元 ===");
 
@@ -585,8 +586,7 @@ pub mod monad_laws {
     }
 
     /// ## 法则 3: 结合律 (Associativity)
-    /// (m >>= f) >>= g ≡ m >>= (λx. f(x) >>= g)
-    /// ```
+    /// `(m >>= f) >>= g ≡ m >>= (λx. f(x) >>= g)`
     pub async fn verify_associativity() {
         println!("\n=== Monad 法则 3: 结合律 ===");
 

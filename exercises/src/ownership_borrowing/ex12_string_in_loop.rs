@@ -17,8 +17,8 @@
 //! - 使用 `names.iter().map(...).collect()`
 //! - `format!("Hello, {}!", name)` 创建新的 `String`
 
-/// 为每个名字生成问候语并返回 Vec<String>
-/// Generates a greeting for each name and returns a Vec<String>
+/// 为每个名字生成问候语并返回 `Vec<String>`
+/// Generates a greeting for each name and returns a `Vec<String>`
 pub fn build_greetings(names: &[&str]) -> Vec<String> {
     names
         .iter()

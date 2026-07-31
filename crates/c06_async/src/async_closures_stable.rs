@@ -5,9 +5,9 @@
 //! 无需任何 nightly feature gate。
 //!
 //! 权威来源：
-//! - RFC 3668: https://rust-lang.github.io/rfcs/3668-async-closures.html
-//! - Rust Reference: https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures
-//! - TRPL Ch17: https://doc.rust-lang.org/book/ch17-00-async-await.html
+//! - RFC 3668: <https://rust-lang.github.io/rfcs/3668-async-closures.html>
+//! - Rust Reference: <https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures>
+//! - TRPL Ch17: <https://doc.rust-lang.org/book/ch17-00-async-await.html>
 
 use std::time::Duration;
 

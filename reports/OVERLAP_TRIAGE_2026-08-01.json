@@ -1437,6 +1437,19 @@
         "title_sim": 0.5,
         "shared": 6,
         "same_dir": true,
+        "f1": "crates/c05_threads/docs/tier_01_foundations/02_navigation.md",
+        "f2": "crates/c05_threads/docs/tier_01_foundations/03_glossary.md",
+        "t1": "C05 Threads 主索引导航",
+        "t2": "C05 Threads 术语表",
+        "lines1": 22,
+        "lines2": 22
+      },
+      {
+        "sim": 0.818,
+        "kw_sim": 0.818,
+        "title_sim": 0.5,
+        "shared": 6,
+        "same_dir": true,
         "f1": "crates/c04_generic/docs/00_master_index.md",
         "f2": "crates/c04_generic/docs/tier_01_foundations/01_project_overview.md",
         "t1": "C04 泛型编程 - 主索引",
@@ -1558,19 +1571,6 @@
         "f2": "crates/c04_generic/docs/tier_01_foundations/04_faq.md",
         "t1": "C04 泛型编程 - 术语表",
         "t2": "C04 泛型编程 - 常见问题",
-        "lines1": 22,
-        "lines2": 22
-      },
-      {
-        "sim": 0.818,
-        "kw_sim": 0.818,
-        "title_sim": 0.5,
-        "shared": 6,
-        "same_dir": true,
-        "f1": "crates/c05_threads/docs/tier_01_foundations/02_navigation.md",
-        "f2": "crates/c05_threads/docs/tier_01_foundations/03_glossary.md",
-        "t1": "C05 Threads 主索引导航",
-        "t2": "C05 Threads 术语表",
         "lines1": 22,
         "lines2": 22
       },
@@ -5129,12 +5129,12 @@
         "title_sim": 0.333,
         "shared": 6,
         "same_dir": true,
-        "f1": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/02_command.md",
-        "f2": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/01_creational/05_singleton.md",
-        "t1": "Command 形式化分析 {#command-形式化分析}",
-        "t2": "Singleton 形式化分析 {#singleton-形式化分析}",
-        "lines1": 918,
-        "lines2": 821
+        "f1": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/02_structural/05_facade.md",
+        "f2": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/02_structural/02_bridge.md",
+        "t1": "Facade 形式化分析 {#facade-形式化分析}",
+        "t2": "Bridge 形式化分析 {#bridge-形式化分析}",
+        "lines1": 901,
+        "lines2": 836
       },
       {
         "sim": 0.538,
@@ -5142,12 +5142,12 @@
         "title_sim": 0.333,
         "shared": 6,
         "same_dir": true,
-        "f1": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/02_structural/05_facade.md",
-        "f2": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/02_structural/02_bridge.md",
-        "t1": "Facade 形式化分析 {#facade-形式化分析}",
-        "t2": "Bridge 形式化分析 {#bridge-形式化分析}",
-        "lines1": 901,
-        "lines2": 836
+        "f1": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/02_command.md",
+        "f2": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/01_creational/05_singleton.md",
+        "t1": "Command 形式化分析 {#command-形式化分析}",
+        "t2": "Singleton 形式化分析 {#singleton-形式化分析}",
+        "lines1": 918,
+        "lines2": 821
       },
       {
         "sim": 0.537,

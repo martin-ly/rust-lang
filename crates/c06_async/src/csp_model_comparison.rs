@@ -42,6 +42,7 @@
 //!     | P || Q (parallelism combination )
 //!     | P ||| Q                 (交错组合)
 //!     | P ||| Q (combination )
+//! ```
 //!
 //!
 //! ### 1.2 Channel 语义
@@ -108,6 +109,7 @@
 //! 语法:
 //! :
 //! go func() { ... }()  // 启动新 goroutine
+//! ```
 //!
 //! ### 2.2 Channel
 //!
@@ -154,6 +156,7 @@
 //! async fn foo() { ... } // async function
 //! foo().await // etc.
 //! tokio::spawn(async { ... })  // 生成任务
+//! ```
 //!
 //! ### 3.2 Channel
 //! ```text
@@ -186,7 +189,6 @@
 //! │ 性能            │ GC 暂停                  │ 零成本抽象               │
 //! │ performance │ GC │ cost │
 //! └─────────────────┴──────────────────────────┴──────────────────────────┘
-//! ```
 use std::time::Duration;
 use tokio::sync::mpsc;
 use tokio::time::sleep;
@@ -583,6 +585,7 @@ pub mod pipeline {
     use super::*;
 
     /// Golang 风格
+    /// ```text
     /// func gen(nums ...int) <-chan int {
     ///     out := make(chan int)
     ///     go func() {

@@ -16,7 +16,7 @@ pub mod wasmedge_advanced {
     /// - high concurrency
     /// - concurrency
     /// # 使用方式
-    /// # way
+    /// ```text
     /// wasmedge --allow-net --enable-threads server.wasm
     /// ```
     pub fn run_http_server() -> Result<(), Box<dyn std::error::Error>> {
@@ -74,9 +74,8 @@ pub mod wasi_nn_examples {
     /// graph classification example
     /// classification example
     /// # 注意
-    /// #
-    /// 实际实现需要使用 WASI-NN bindings
-    /// actual WASI -NN bindings
+    /// 实际实现需要使用 WASI-NN bindings。
+    /// ```text
     /// wasmedge --enable-wasi-nn --enable-wasi-nn-tensorflow app.wasm
     /// ```
     #[allow(dead_code)]
@@ -148,8 +147,7 @@ pub mod wasi_nn_examples {
 /// WASI-Crypto 示例
 pub mod wasi_crypto_examples {
     /// 数据加密示例
-    /// data example
-    /// example
+    /// ```text
     /// wasmedge --enable-wasi-crypto app.wasm
     /// ```
     pub fn encrypt_data(data: &[u8], _key: &[u8]) -> Result<Vec<u8>, String> {
@@ -206,8 +204,7 @@ pub mod threading_examples {
     use std::thread;
 
     /// 并行处理数据
-    /// parallelism data
-    /// parallelism
+    /// ```text
     /// wasmedge --enable-threads app.wasm
     /// ```
     pub fn parallel_process(data: &[i32], num_threads: usize) -> Vec<i32> {

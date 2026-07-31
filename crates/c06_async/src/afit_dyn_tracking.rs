@@ -16,6 +16,7 @@
 //! AFIT (1.75.0): async fn in trait ✅
 //!   └── 但 trait object (dyn Trait) 不支持 async fn ❌
 //!           └── AFIDT (1.97+ nightly): 原生支持 dyn async trait ✅
+//! ```
 //!
 //! # 权威来源
 //! # Authoritative Sources
@@ -52,7 +53,6 @@
 /// fn create_source() -> Box<dyn DataSource> {
 ///     Box::new(Database)
 /// }
-/// ```
 pub struct AfidtExamples;
 
 /// 数据源 trait —— 使用原生 async fn
