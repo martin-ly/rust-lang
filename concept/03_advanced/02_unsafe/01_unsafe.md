@@ -2571,6 +2571,9 @@ fn main() {
   - 安全代码允许对联合体字段取 `&raw const/mut`
 - **[Rust 1.93](../../07_future/00_version_tracking/rust_1_93_stabilized.md)**
   - `MaybeUninit` 切片（Slice） API（`assume_init_ref/mut`、`write_copy/clone_of_slice`、`assume_init_drop`）
+- **[Rust 1.98](../../07_future/00_version_tracking/rust_1_98_stabilized.md)**
+  - `UNSAFE_CODE` lint 一致覆盖所有 unsafe attributes
+  - 涉及 `repr` 属性时 `transmute` 更严格地检查等大小
 
 ## 相关概念链接
 

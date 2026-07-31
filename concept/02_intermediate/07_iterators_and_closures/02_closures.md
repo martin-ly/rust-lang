@@ -287,13 +287,18 @@ Rust 1.85 稳定了异步闭包，语法为 `async || { ... }` 或 `async move |
 
 ```rust
 // Rust 1.85+
-let client = reqwest::Client::new();
-let fetch = async move |url: &str| -> Result<String, reqwest::Error> {
-    client.get(url).send().await?.text().await
-};
+#[tokio::main]
+async fn main() -> Result<(), reqwest::Error> {
+    let client = reqwest::Client::new();
+    let fetch = async move |url: &str| -> Result<String, reqwest::Error> {
+        client.get(url).send().await?.text().await
+    };
 
-// 调用异步闭包产生 Future
-let html = fetch("https://example.com").await?;
+    // 调用异步闭包产生 Future
+    let html = fetch("https://example.com").await?;
+    println!("{}", html);
+    Ok(())
+}
 ```
 
 异步闭包与普通 `async move` 块的关键差异：

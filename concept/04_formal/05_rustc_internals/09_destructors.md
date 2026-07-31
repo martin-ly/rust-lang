@@ -212,6 +212,12 @@ fn main() {
 
 ---
 
+## Rust 1.98.0 兼容性注意
+
+> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 将 Windows 线程局部析构实现切换到 FLS，并文档化/修复了 `ManuallyDrop<Box<T>>` 的交互。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md)。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

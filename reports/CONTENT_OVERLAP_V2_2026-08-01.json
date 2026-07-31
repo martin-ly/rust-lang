@@ -4,34 +4,21 @@
   "indexed": 1585,
   "threshold": 0.5,
   "min_shared": 5,
-  "candidates": 663833,
-  "hits": 510,
+  "candidates": 666841,
+  "hits": 509,
   "overlaps": [
     {
       "sim": 1.0,
-      "kw_sim": 0.302,
+      "kw_sim": 0.398,
       "title_sim": 1.0,
-      "shared": 65,
-      "same_dir": true,
-      "f1": "concept/07_future/00_version_tracking/feature_domain_matrix_197.md",
-      "f2": "concept/07_future/00_version_tracking/feature_domain_matrix_198.md",
-      "t1": "Rust 1.97.0 特性 × 领域反查矩阵",
-      "t2": "Rust 1.98.0 特性 × 领域反查矩阵",
-      "lines1": 305,
-      "lines2": 219
-    },
-    {
-      "sim": 1.0,
-      "kw_sim": 0.745,
-      "title_sim": 1.0,
-      "shared": 62,
+      "shared": 60,
       "same_dir": true,
       "f1": "concept/07_future/00_version_tracking/rust_1_100_preview.md",
       "f2": "concept/07_future/00_version_tracking/rust_1_99_preview.md",
       "t1": "Rust 1.100+ 前沿特性预览",
       "t2": "Rust 1.99+ 前沿特性预览",
       "lines1": 260,
-      "lines2": 191
+      "lines2": 295
     },
     {
       "sim": 1.0,
@@ -97,6 +84,19 @@
       "t2": "实践项目 13: 简易数据库引擎 {#实践项目-13-简易数据库引擎}",
       "lines1": 108,
       "lines2": 108
+    },
+    {
+      "sim": 0.818,
+      "kw_sim": 0.818,
+      "title_sim": 0.5,
+      "shared": 6,
+      "same_dir": true,
+      "f1": "crates/c05_threads/docs/tier_01_foundations/02_navigation.md",
+      "f2": "crates/c05_threads/docs/tier_01_foundations/03_glossary.md",
+      "t1": "C05 Threads 主索引导航",
+      "t2": "C05 Threads 术语表",
+      "lines1": 22,
+      "lines2": 22
     },
     {
       "sim": 0.818,
@@ -225,19 +225,6 @@
       "f2": "crates/c04_generic/docs/tier_01_foundations/04_faq.md",
       "t1": "C04 泛型编程 - 术语表",
       "t2": "C04 泛型编程 - 常见问题",
-      "lines1": 22,
-      "lines2": 22
-    },
-    {
-      "sim": 0.818,
-      "kw_sim": 0.818,
-      "title_sim": 0.5,
-      "shared": 6,
-      "same_dir": true,
-      "f1": "crates/c05_threads/docs/tier_01_foundations/02_navigation.md",
-      "f2": "crates/c05_threads/docs/tier_01_foundations/03_glossary.md",
-      "t1": "C05 Threads 主索引导航",
-      "t2": "C05 Threads 术语表",
       "lines1": 22,
       "lines2": 22
     },
@@ -6413,7 +6400,7 @@
       "f2": "concept/00_meta/knowledge_topology/02_attribute_relationship_atlas.md",
       "t1": "目录",
       "t2": "属性关系图谱（Attribute Relationship Atlas）",
-      "lines1": 677,
+      "lines1": 678,
       "lines2": 562
     },
     {

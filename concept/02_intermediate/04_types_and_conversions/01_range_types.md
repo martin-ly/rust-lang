@@ -64,6 +64,7 @@
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
+  - [Rust 1.98.0 兼容性注意](#rust-1980-兼容性注意)
   - [国际权威参考 / International Authority References（P2 生态）](#国际权威参考--international-authority-referencesp2-生态)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
@@ -659,6 +660,12 @@ fn main() {
 
 > 区间操作安全 ⟸ RangeInclusive 边界 ⟸ 迭代器协议
 > 切片（Slice）索引正确 ⟸ Range 范围检查 ⟸ 借用（Borrowing）规则
+
+---
+
+## Rust 1.98.0 兼容性注意
+
+> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 文档明确了 `RangeInclusive::from(legacy::RangeInclusive)` 在 `start > end` 时会 panic；升级后应校验范围边界。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md)。
 
 ---
 

@@ -1,12 +1,12 @@
 # 重叠对分类（P1 改写执行清单）
 
-**来源**: `reports/CONTENT_OVERLAP_V2_2026-08-01.json`  **总对数**: 510
+**来源**: `reports/CONTENT_OVERLAP_V2_2026-08-01.json`  **总对数**: 509
 
 | 分类 | 数量 | 处置 |
 |---|:---:|:---|
 | MERGE | 0 | 应合并近克隆（留一删余或 stub 化） |
 | DOCS_INTERNAL | 0 | docs/ 内同主题互抄（合并或互链） |
-| SERIES | 108 | 保留但标注为版本系列/分章（白名单） |
+| SERIES | 107 | 保留但标注为版本系列/分章（白名单） |
 | REVIEWED | 402 | 已批量复核确认非重复（stub/模板系列/同领域术语共现，白名单） |
 | REVIEW | 0 | 人工复核 |
 
@@ -20,11 +20,10 @@
 | sim | 文件1 | 文件2 |
 |:---:|:---|:---|
 
-## SERIES（108）Top 25
+## SERIES（107）Top 25
 
 | sim | 文件1 | 文件2 |
 |:---:|:---|:---|
-| 1.0 | `concept/07_future/00_version_tracking/feature_domain_matrix_197.md` | `concept/07_future/00_version_tracking/feature_domain_matrix_198.md` |
 | 1.0 | `concept/07_future/00_version_tracking/rust_1_100_preview.md` | `concept/07_future/00_version_tracking/rust_1_99_preview.md` |
 | 1.0 | `crates/c10_networks/docs/07_rust_190_examples_collection.md` | `crates/c10_networks/docs/08_rust_190_examples_part2.md` |
 | 0.889 | `crates/c09_design_pattern/docs/05_c09_comprehensive_enhancement_report_2025_10_19.md` | `crates/c09_design_pattern/docs/15_rust_190_comprehensive_enhancement_report.md` |
@@ -49,6 +48,7 @@
 | 0.719 | `docs/05_practice/04_project_03_calculator.md` | `docs/05_practice/07_project_06_concurrent_downloader.md` |
 | 0.719 | `docs/05_practice/04_project_03_calculator.md` | `docs/05_practice/08_project_07_chat_server.md` |
 | 0.719 | `docs/05_practice/04_project_03_calculator.md` | `docs/05_practice/12_project_11_web_server.md` |
+| 0.719 | `docs/05_practice/04_project_03_calculator.md` | `docs/05_practice/15_project_14_async_runtime.md` |
 
 ## REVIEWED（402）Top 25
 
@@ -56,6 +56,7 @@
 |:---:|:---|:---|
 | 0.846 | `crates/c08_algorithms/docs/tier_01_foundations/01_project_overview.md` | `crates/c08_algorithms/docs/tier_01_foundations/02_navigation.md` |
 | 0.846 | `crates/c01_ownership_borrow_scope/docs/tier_03_references/03_lifetimes_reference.md` | `crates/c01_ownership_borrow_scope/docs/tier_04_advanced/01_advanced_lifetime_patterns.md` |
+| 0.818 | `crates/c05_threads/docs/tier_01_foundations/02_navigation.md` | `crates/c05_threads/docs/tier_01_foundations/03_glossary.md` |
 | 0.818 | `crates/c04_generic/docs/00_master_index.md` | `crates/c04_generic/docs/tier_01_foundations/01_project_overview.md` |
 | 0.818 | `crates/c04_generic/docs/00_master_index.md` | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md` |
 | 0.818 | `crates/c04_generic/docs/00_master_index.md` | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md` |
@@ -66,7 +67,6 @@
 | 0.818 | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md` | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md` |
 | 0.818 | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md` | `crates/c04_generic/docs/tier_01_foundations/04_faq.md` |
 | 0.818 | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md` | `crates/c04_generic/docs/tier_01_foundations/04_faq.md` |
-| 0.818 | `crates/c05_threads/docs/tier_01_foundations/02_navigation.md` | `crates/c05_threads/docs/tier_01_foundations/03_glossary.md` |
 | 0.8 | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md` | `crates/c01_ownership_borrow_scope/docs/03_mind_map.md` |
 | 0.8 | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md` | `crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md` |
 | 0.8 | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md` | `crates/c01_ownership_borrow_scope/docs/15_visualization_index.md` |

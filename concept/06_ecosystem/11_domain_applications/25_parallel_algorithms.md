@@ -166,7 +166,8 @@ fn main() {
 
 Fork-Join 是最自然的并行分治模型：任务分成两个子任务，分别执行，再合并结果。
 
-```rust
+```rust,ignore
+// 依赖 workspace crate c08_algorithms，在独立测试 harness 中无法解析路径
 use c08_algorithms::algorithms::parallel_algorithms::fork_join_sum;
 
 fn main() {

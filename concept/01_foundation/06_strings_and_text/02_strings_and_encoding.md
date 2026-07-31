@@ -96,6 +96,7 @@ mindmap
   - [实践](#实践)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
+  - [Rust 1.98.0 兼容性注意](#rust-1980-兼容性注意)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
 
@@ -887,6 +888,12 @@ fn main() {
 
 > 跨编码安全 ⟸ OsStr/CString 区分 ⟸ 平台抽象
 > 零拷贝解析 ⟸ 字符串切片（String Slice） ⟸ 生命周期（Lifetimes）借用（Borrowing）
+
+## Rust 1.98.0 兼容性注意
+
+> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 稳定了 `String::from_utf16le` / `from_utf16be` 及其 `_lossy` 变体、`str::strip_circumfix`，并用 `unicode_data.rs` 表替换了可打印字符表。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md)。
+
+---
 
 ## 📋 关键属性
 

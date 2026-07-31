@@ -68,6 +68,7 @@
     - [测验 1：Send 与 Sync 的契约（🟢 基础）](#测验-1send-与-sync-的契约-基础)
     - [测验 2：`Rc` 跨线程的编译期拒绝（🟡 进阶）](#测验-2rc-跨线程的编译期拒绝-进阶)
     - [测验 3：auto trait 的手动实现边界（🔴 专家）](#测验-3auto-trait-的手动实现边界-专家)
+  - [Rust 1.98.0 兼容性注意](#rust-1980-兼容性注意)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -618,6 +619,12 @@ flowchart TD
 **B 正确**。按本页 §一与反例 3：Send/Sync 是 **unsafe auto trait**——手动实现必须用 `unsafe impl`，因为编译器无法验证跨线程安全性这一语义不变量（invariant），证明责任转移给程序员。C 错：显式 `!Send`/`!Sync` 负实现在 stable 不可用，stable 上的 opt-out 惯用法是 `PhantomData<*const T>` 之类（§3.2/§3.3）。
 
 </details>
+
+## Rust 1.98.0 兼容性注意
+
+> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 显式移除了 `std::env::Vars` / `VarsOs` 的 `Send`/`Sync` 实现，并显式为 `std::process::CommandArgs` 添加了 `Send`/`Sync` 实现。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md)。
+
+---
 
 ## 🧭 思维导图（Mindmap）
 

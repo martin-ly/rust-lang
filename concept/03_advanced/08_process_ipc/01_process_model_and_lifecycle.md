@@ -460,6 +460,12 @@ fn main() -> std::io::Result<()> {
 
 ---
 
+## Rust 1.98.0 兼容性注意
+
+> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 显式为 `std::process::CommandArgs` 实现了 `Send` / `Sync`，允许其在异步或线程池上下文中共享。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md)。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

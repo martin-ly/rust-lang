@@ -80,6 +80,7 @@
   - [八、来源与延伸阅读](#八来源与延伸阅读)
     - [国际权威来源](#国际权威来源)
     - [延伸阅读](#延伸阅读)
+  - [Rust 1.98.0 兼容性注意](#rust-1980-兼容性注意)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
   - [补充国际权威来源（P1/P2 覆盖）](#补充国际权威来源p1p2-覆盖)
 
@@ -461,6 +462,12 @@ assert_sync::<MyType>();
 - [Trait Objects / 分发机制](../../02_intermediate/00_traits/02_dispatch_mechanisms.md)：object safety、`dyn Trait` 的内存布局与 vtable。
 - [Unsafe Rust](../02_unsafe/01_unsafe.md)：手动实现 Send/Sync 的语义责任与常见反模式。
 - [Send/Sync 并发语义边界](../../04_formal/07_concurrency_semantics/08_send_sync_semantics.md)：L4-L5 形式化语义入口。
+
+---
+
+## Rust 1.98.0 兼容性注意
+
+> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 移除了 `std::env::Vars` / `VarsOs` 的 `Send`/`Sync` 实现，跨线程传递环境变量迭代器会编译失败；`CommandArgs` 则显式实现 `Send`/`Sync`。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md)。
 
 ---
 

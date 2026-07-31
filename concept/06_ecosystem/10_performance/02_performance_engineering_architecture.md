@@ -542,17 +542,22 @@ struct GoodLayout {
 > **分配频率**常常是比分配大小更关键的性能瓶颈。Rust 中常用三种技术减少分配：**arena（ bump allocator ）**、**对象池**、**预分配容器容量**。
 
 ```rust
-// ✅ 预分配容量，避免热循环中反复 realloc
-let mut buf = Vec::with_capacity(1024);
-for item in items {
-    buf.push(item);
-}
+fn main() {
+    // ✅ 预分配容量，避免热循环中反复 realloc
+    let items: Vec<i32> = (0..100).collect();
+    let mut buf = Vec::with_capacity(1024);
+    for item in items {
+        buf.push(item);
+    }
 
-// ✅ bumpalo：短期对象的快速分配与一次性释放
-use bumpalo::Bump;
-let arena = Bump::new();
-let parsed: &[u8] = arena.alloc_slice_copy(input);
-// 离开作用域时整个 arena 一起释放
+    // ✅ bumpalo：短期对象的快速分配与一次性释放
+    use bumpalo::Bump;
+    let arena = Bump::new();
+    let input = b"hello";
+    let parsed: &[u8] = arena.alloc_slice_copy(input);
+    // 离开作用域时整个 arena 一起释放
+    println!("parsed len = {}", parsed.len());
+}
 ```
 
 **对象池示例（连接/缓冲区复用）**：

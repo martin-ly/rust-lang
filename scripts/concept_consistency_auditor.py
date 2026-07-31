@@ -478,7 +478,7 @@ def extract_sections(content: str) -> list[tuple[str, int]]:
     """提取文件中的章节编号:## 2.1 xxx(阿拉伯)与 ## 二、xxx(中文数字,映射为阿拉伯值)"""
     sections = []
     for i, line in enumerate(content.split("\n"), 1):
-        m = re.match(r'#{2,4}\s+(\d+(?:\.\d+)*)(?:\s+|$)', line)
+        m = re.match(r'#{2,4}\s+(\d+(?:\.\d+)*)\.?(?:\s+|$)', line)
         if m:
             sections.append((m.group(1), i))
             continue

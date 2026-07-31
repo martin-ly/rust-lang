@@ -980,6 +980,9 @@ struct Point {
 
 - **[Rust 1.94](../../07_future/00_version_tracking/rust_1_94_stabilized.md)**
   - std 宏改为经 prelude 导入（兼容性变更）
+- **[Rust 1.98](../../07_future/00_version_tracking/rust_1_98_stabilized.md)**
+  - 无参属性被传参时直接报错
+  - `UNSAFE_CODE` lint 一致覆盖所有 unsafe attributes
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 

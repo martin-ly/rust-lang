@@ -235,6 +235,7 @@ mindmap
     - [数据库抽象层](#数据库抽象层)
     - [Parser Combinator](#parser-combinator)
     - [关联类型 vs 泛型参数决策](#关联类型-vs-泛型参数决策)
+  - [Rust 1.98.0 兼容性注意](#rust-1980-兼容性注意)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [与表征空间（Semantic Space）的映射](#与表征空间semantic-space的映射)
 
@@ -3193,6 +3194,12 @@ trait Parser<'a> {
 | 调用方标注 | 不需要 | 通常需要 |
 | 表达关系 | 一对一 | 一对多 |
 | 典型场景 | Iterator::Item、Backend::Row | Container<T>、Map<K, V> |
+
+---
+
+## Rust 1.98.0 兼容性注意
+
+> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 在语法层拒绝 `where T = U` / `where T == U` 等式谓词，修复了解析器将 `dyn` 视为普通标识符的错误恢复路径，并收紧了 trait object 完全省略生命周期时的默认推断。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md)。
 
 ---
 

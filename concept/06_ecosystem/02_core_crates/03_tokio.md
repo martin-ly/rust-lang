@@ -280,6 +280,7 @@ Tokio 默认的 `#[tokio::main]` 使用哪种调度模型？
 
 ```rust
 #[tokio::main(flavor = "current_thread")]
+async fn main() {}
 ```
 
 </details>

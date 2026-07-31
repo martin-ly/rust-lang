@@ -73,7 +73,7 @@ fn create_client() -> Client {
 
 ### 2.3 POST JSON
 
-```rust
+```rust,no_run
 use serde_json::json;
 
 #[tokio::main]

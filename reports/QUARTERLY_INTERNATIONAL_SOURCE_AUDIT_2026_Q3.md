@@ -86,14 +86,14 @@ All commands were executed as part of E9+E10 sign-off (see §6 for results).
 
 ## 6. Post-Update Validation
 
-After applying the action items, the following gates were re-run:
+After applying the action items, the following gates were re-run on 2026-07-31:
 
 | Gate | Command | Result |
 |---|---|---|
-| Concept code blocks | `python scripts/check_concept_code_blocks.py --strict` | PASS (rot=0) |
-| Link health | `python scripts/kb_auditor.py` | PASS |
-| Metadata consistency | `python scripts/check_metadata_consistency.py --strict` | PASS |
-| Authority coverage | `python scripts/check_concept_authority_coverage.py --strict --include-crates` | PASS |
+| Concept code blocks | `python scripts/check_concept_code_blocks.py --strict` | PASS — candidate pass=300 fail=0; compile_fail ok=1043 unexpected_pass=0 wrong_code=0 |
+| Link health | `python scripts/kb_auditor.py` | PASS — 666 files, 0 dead links, 0 cross-layer issues |
+| Metadata consistency | `python scripts/check_metadata_consistency.py --strict` | PASS — D1–D6 all 0 |
+| Authority coverage | `python scripts/check_concept_authority_coverage.py --strict --include-crates` | PASS — concept any=100% none=0 core L1–L4 gaps=0; crates 62/62=100% |
 
 ---
 

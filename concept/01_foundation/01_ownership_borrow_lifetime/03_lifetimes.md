@@ -152,6 +152,7 @@ mindmap
     - [常见陷阱](#常见陷阱)
     - [最佳实践](#最佳实践)
     - [调试技巧](#调试技巧)
+  - [Rust 1.98.0 兼容性注意](#rust-1980-兼容性注意)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ## 一、权威定义（Definition）
@@ -1579,6 +1580,12 @@ Rust 1.31 引入的 **Non-Lexical Lifetimes (NLL)** 使借用的有效期基于*
 - 显式标注所有生命周期以理解编译器错误。
 - 使用单元测试验证引用作用域边界。
 - 仔细阅读编译器建议，通常可直接定位问题。
+
+---
+
+## Rust 1.98.0 兼容性注意
+
+> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 放宽了 unsized coercion 中 `&mut` 的生命周期缩短规则（即使在不变位置），并收紧了 trait object 完全省略生命周期时的默认推断。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md)。
 
 ---
 

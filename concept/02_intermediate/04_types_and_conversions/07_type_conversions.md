@@ -70,6 +70,7 @@
     - [测验 1：转换方式选择](#测验-1转换方式选择)
     - [测验 2：孤儿规则](#测验-2孤儿规则)
   - [认知路径](#认知路径)
+  - [Rust 1.98.0 兼容性注意](#rust-1980-兼容性注意)
   - [国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp0-官方--p1-学术--p2-生态)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
@@ -648,6 +649,12 @@ D. 本地 newtype `struct Bytes(Vec<u8>)`
 > **权威来源**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html), [std::convert](https://doc.rust-lang.org/std/convert/index.html)
 > **权威来源对齐变更日志**: 2026-07-04 创建 [Rust 1.97.0 Reference、std::convert、Rust By Example 对齐](https://doc.rust-lang.org/std/convert/index.html)
 > **状态**: ✅ 权威来源对齐完成
+
+---
+
+## Rust 1.98.0 兼容性注意
+
+> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 允许在 unsized coercion 中（包括不变位置）缩短 `&mut` 的生命周期，使 `&mut T` 到 `&mut dyn Trait` 等转换在更多场景下通过类型检查。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md)。
 
 ---
 
