@@ -310,6 +310,7 @@ L0 惯用法的特点是「无争议」：它们不改变程序的抽象结构�
 ```rust,ignore
 use std::fs::File;
 use std::io;
+use std::io::Read;
 
 fn read_file(path: &str) -> Result<String, io::Error> {
     let mut file = match File::open(path) {
@@ -329,6 +330,7 @@ fn read_file(path: &str) -> Result<String, io::Error> {
 ```rust,ignore
 use std::fs::File;
 use std::io;
+use std::io::Read;
 
 fn read_file(path: &str) -> Result<String, io::Error> {
     let mut file = File::open(path)?;
@@ -358,6 +360,7 @@ fn classify(value: Option<Result<i32, Error>>) -> &'static str {
         Some(Ok(0)) => "zero",
         Some(Err(_)) => "error",
         None => "missing",
+        _ => "other", // guard 不参与穷尽性检查，需兜底
     }
 }
 ```
@@ -528,11 +531,11 @@ struct FileHandle<P> {
 }
 
 impl FileHandle<ReadPermission> {
-    fn read(&self, buf: &mut [u8]) -> io::Result<usize> { /* ... */ }
+    fn read(&self, _buf: &mut [u8]) -> io::Result<usize> { Ok(0) }
 }
 
 impl FileHandle<WritePermission> {
-    fn write(&mut self, buf: &[u8]) -> io::Result<usize> { /* ... */ }
+    fn write(&mut self, _buf: &[u8]) -> io::Result<usize> { Ok(0) }
 }
 ```
 
@@ -913,6 +916,10 @@ struct LocalCache {
 
 ```rust,ignore
 // 惯用：Actor 单线程处理（概念性，基于 actix 风格）
+trait Actor<M> {
+    fn handle(&mut self, msg: M);
+}
+
 struct CounterActor {
     count: i32,
 }
@@ -923,7 +930,7 @@ enum CounterMsg {
 }
 
 // Actor 的 mailbox 保证 &mut self 的独占访问
-impl Actor for CounterActor {
+impl Actor<CounterMsg> for CounterActor {
     fn handle(&mut self, msg: CounterMsg) {
         match msg {
             CounterMsg::Increment => self.count += 1,

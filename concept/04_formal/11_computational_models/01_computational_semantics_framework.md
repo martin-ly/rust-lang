@@ -223,6 +223,7 @@ fn main() {}
 
 - [Lambda Calculus](../00_type_theory/05_lambda_calculus.md) — λ 演算与函数抽象
 - [Operational Semantics](../03_operational_semantics/03_operational_semantics.md) — 程序行为的小步/大步规则
+- [MiniRust](../03_operational_semantics/10_minirust.md) — Rust 核心语言的可执行小步操作语义实例
 - [Denotational Semantics](../03_operational_semantics/01_denotational_semantics.md) — 程序到数学对象的映射
 - [Axiomatic Semantics](../03_operational_semantics/05_axiomatic_semantics.md) — 霍尔逻辑与程序规约
 - [Type Semantics](../00_type_theory/06_type_semantics.md) — 类型作为语义分类

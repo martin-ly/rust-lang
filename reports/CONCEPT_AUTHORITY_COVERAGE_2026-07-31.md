@@ -3,33 +3,33 @@
 **EN**: Concept-layer International Authority Coverage
 **Summary**: 复用 maintenance P0/P1/P2 权威域分级，把审计扩展到 concept/ 权威层；量化覆盖率与缺口，为『对齐网络上的国际化权威相关内容』提供机器可复核基线。仅审计，不改正文。
 
-> 生成: 2026-07-31 · 扫描 concept/ 活跃 md: **641**（排除 archive/SUMMARY/README）
+> 生成: 2026-07-31 · 扫描 concept/ 活跃 md: **642**（排除 archive/SUMMARY/README）
 > P0 官方 / P1 学术形式化 / P2 社区生态，域定义复用 `scripts/maintenance/authority_coverage_dashboard.py`
 
 ## 总体覆盖率
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 615 | 95.9% |
-| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 566 | 88.3% |
-| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 559 | 87.2% |
-| **任一权威（P0∪P1∪P2）** | **641** | **100.0%** |
+| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 616 | 96.0% |
+| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 567 | 88.3% |
+| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 559 | 87.1% |
+| **任一权威（P0∪P1∪P2）** | **642** | **100.0%** |
 | 无任何国际权威引用（缺口） | 0 | 0.0% |
 
 ## 内容页口径覆盖率（排除 00_meta 工具页 / quiz / placeholders / sources 索引）
 
-> 内容页 **547** 页。00_meta 为知识库内部工具/导航/审计页，非 Rust 概念内容，其权威基线为 P0 官方文档；P1/P2 学术生态来源对其不适用，故单列口径。
+> 内容页 **548** 页。00_meta 为知识库内部工具/导航/审计页，非 Rust 概念内容，其权威基线为 P0 官方文档；P1/P2 学术生态来源对其不适用，故单列口径。
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方 | 526 | 96.2% |
-| P1 学术/形式化 | 510 | 93.2% |
-| P2 社区/生态 | 538 | 98.4% |
-| **任一权威** | **547** | **100.0%** |
+| P0 官方 | 527 | 96.2% |
+| P1 学术/形式化 | 511 | 93.2% |
+| P2 社区/生态 | 538 | 98.2% |
+| **任一权威** | **548** | **100.0%** |
 
 内容页 P1 缺口（37）: `concept/02_intermediate/04_types_and_conversions/02_closure_types.md` · `concept/02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md` · `concept/02_intermediate/06_macros_and_metaprogramming/04_declarative_macros.md` · `concept/02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md` · `concept/02_intermediate/07_iterators_and_closures/02_closures.md` · `concept/03_advanced/04_ffi/06_ffi_deep_dive.md` · `concept/03_advanced/04_ffi/07_ffi_patterns.md` · `concept/03_advanced/05_inline_assembly/02_inline_assembly_extended.md` · `concept/04_formal/09_system_semantics/08_memory_ordering_and_atomics.md` · `concept/04_formal/10_architecture_semantics/05_architecture_styles_formal_constraints.md` · `concept/06_ecosystem/02_core_crates/02_serde.md` · `concept/06_ecosystem/02_core_crates/03_tokio.md` · `concept/06_ecosystem/02_core_crates/04_clap.md` · `concept/06_ecosystem/02_core_crates/05_tracing.md` · `concept/06_ecosystem/02_core_crates/06_reqwest.md` · `concept/06_ecosystem/02_core_crates/07_axum.md` · `concept/06_ecosystem/02_core_crates/08_sqlx.md` · `concept/06_ecosystem/03_design_patterns/24_repository_and_unit_of_work.md` · `concept/06_ecosystem/03_design_patterns/25_hexagonal_ports_and_adapters.md` · `concept/06_ecosystem/03_design_patterns/26_circuit_breaker.md` · `concept/06_ecosystem/03_design_patterns/27_bulkhead.md` · `concept/06_ecosystem/03_design_patterns/28_retry.md` · `concept/06_ecosystem/03_design_patterns/29_saga.md` · `concept/06_ecosystem/03_design_patterns/30_outbox.md` · `concept/06_ecosystem/03_design_patterns/31_object_pool.md` · `concept/06_ecosystem/03_design_patterns/32_typestate_deep_dive.md` · `concept/06_ecosystem/03_design_patterns/33_anti_patterns.md` · `concept/06_ecosystem/04_web_and_networking/11_kubernetes_rust.md` · `concept/06_ecosystem/05_systems_and_embedded/23_no_std_and_bare_metal_idioms.md` · `concept/06_ecosystem/05_systems_and_embedded/24_embedded_hal_and_driver_idioms.md`
 
-内容页 P2 缺口（9）: `concept/02_intermediate/04_types_and_conversions/02_closure_types.md` · `concept/02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md` · `concept/02_intermediate/07_iterators_and_closures/02_closures.md` · `concept/03_advanced/05_inline_assembly/02_inline_assembly_extended.md` · `concept/04_formal/09_system_semantics/07_concurrent_and_parallel_semantics.md` · `concept/04_formal/09_system_semantics/08_memory_ordering_and_atomics.md` · `concept/04_formal/13_semantic_engineering/07_kg_owl_shacl_semantics.md` · `concept/07_future/00_version_tracking/feature_domain_matrix_198.md` · `concept/07_future/00_version_tracking/migration_198_decision_tree.md`
+内容页 P2 缺口（10）: `concept/02_intermediate/04_types_and_conversions/02_closure_types.md` · `concept/02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md` · `concept/02_intermediate/07_iterators_and_closures/02_closures.md` · `concept/03_advanced/05_inline_assembly/02_inline_assembly_extended.md` · `concept/04_formal/03_operational_semantics/10_minirust.md` · `concept/04_formal/09_system_semantics/07_concurrent_and_parallel_semantics.md` · `concept/04_formal/09_system_semantics/08_memory_ordering_and_atomics.md` · `concept/04_formal/13_semantic_engineering/07_kg_owl_shacl_semantics.md` · `concept/07_future/00_version_tracking/feature_domain_matrix_198.md` · `concept/07_future/00_version_tracking/migration_198_decision_tree.md`
 
 ## 按层级覆盖率
 
@@ -39,7 +39,7 @@
 | L1 | 58 | 58 | 100.0% | 58 | 100.0% |
 | L2 | 45 | 45 | 100.0% | 45 | 100.0% |
 | L3 | 77 | 77 | 100.0% | 77 | 100.0% |
-| L4 | 105 | 105 | 100.0% | 105 | 100.0% |
+| L4 | 106 | 106 | 100.0% | 106 | 100.0% |
 | L5 | 27 | 27 | 100.0% | 27 | 100.0% |
 | L6 | 180 | 155 | 86.1% | 180 | 100.0% |
 | L7 | 76 | 75 | 98.7% | 76 | 100.0% |
@@ -84,7 +84,6 @@
 | c11_macro_system_proc | 1 | 1 |
 | c12_wasm | 3 | 3 |
 | c17_resolver_v3_public_demo | 1 | 1 |
-
 
 ### crates stub canonical 链接健康度
 

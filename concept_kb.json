@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 649,
-    "generated_at": "2026-07-31T13:39:26.393600+00:00"
+    "total_files": 650,
+    "generated_at": "2026-07-31T14:38:59.139131+00:00"
   },
   "files": [
     {
@@ -2600,7 +2600,7 @@
       "layer": "L0",
       "title": "外部权威来源主题索引（External Authority Topic Index）",
       "positioning": "将 TRPL、Reference、Rust By Example、Nomicon、Edition Guide、Async Book、rustc-dev-guide、API Guidelines、Unsafe Code Guidelines 的 SUMMARY 主题与项目 `concept/` 进行主题对齐，形成可持续的“权威来源 ↔ 项目概念”双向地图。",
-      "line_count": 296,
+      "line_count": 349,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -2672,6 +2672,7 @@
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../03_advanced/02_unsafe/02_unsafe_boundary_panorama.md",
         "../../03_advanced/02_unsafe/03_nll_and_polonius.md",
+        "../../03_advanced/02_unsafe/04_unsafe_rust_patterns.md",
         "../../03_advanced/02_unsafe/06_memory_model.md",
         "../../03_advanced/02_unsafe/09_sanitizers.md",
         "../../03_advanced/03_proc_macros/01_macros.md",
@@ -2690,9 +2691,20 @@
         "../../04_formal/00_type_theory/02_subtype_variance.md",
         "../../04_formal/00_type_theory/07_type_checking_and_inference.md",
         "../../04_formal/00_type_theory/09_type_system_reference.md",
+        "../../04_formal/00_type_theory/14_flux.md",
         "../../04_formal/01_ownership_logic/04_borrow_checking_decidability.md",
+        "../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md",
         "../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md",
+        "../../04_formal/02_separation_logic/01_rustbelt.md",
+        "../../04_formal/03_operational_semantics/03_operational_semantics.md",
+        "../../04_formal/03_operational_semantics/07_aeneas_symbolic_semantics.md",
         "../../04_formal/03_operational_semantics/08_constant_evaluation.md",
+        "../../04_formal/04_model_checking/01_verification_toolchain.md",
+        "../../04_formal/04_model_checking/04_modern_verification_tools.md",
+        "../../04_formal/04_model_checking/07_autoverus.md",
+        "../../04_formal/04_model_checking/08_miri.md",
+        "../../04_formal/04_model_checking/09_kani.md",
+        "../../04_formal/04_model_checking/11_creusot.md",
         "../../04_formal/05_rustc_internals/01_rustc_query_system.md",
         "../../04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md",
         "../../04_formal/05_rustc_internals/03_trait_solver_in_rustc.md",
@@ -2714,6 +2726,7 @@
         "../../06_ecosystem/00_toolchain/07_rustdoc_196_changes.md",
         "../../06_ecosystem/00_toolchain/09_llvm_backend_and_codegen.md",
         "../../06_ecosystem/00_toolchain/10_rustc_driver_and_stable_mir.md",
+        "../../06_ecosystem/00_toolchain/12_rustc_bootstrap.md",
         "../../06_ecosystem/00_toolchain/13_compiler_testing.md",
         "../../06_ecosystem/00_toolchain/16_rustdoc_internals.md",
         "../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md",
@@ -2731,12 +2744,13 @@
         "../04_navigation/03_concept_index.md",
         "01_authority_source_map.md",
         "04_topic_authority_alignment_map.md",
-        "05_international_authority_index.md"
+        "05_international_authority_index.md",
+        "https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 140,
+      "matrix_rows": 168,
       "pre_post": {
         "pre": [
           "[Authority Source Map](01_authority_source_map.md) · [International Authority Index](05_international_authority_index.md) · [Topic-Authority Alignment Map](04_topic_authority_alignment_map.md)"
@@ -27317,7 +27331,7 @@
       "layer": "L2",
       "title": "Rust 闭包：捕获语义、Trait 层级与工程实践",
       "positioning": "系统阐述 Rust 闭包的语法、捕获机制、`Fn`/`FnMut`/`FnOnce` 语义层级、`move` 闭包、函数指针强制转换、异步闭包与典型反模式，覆盖从基础使用到工程决策的完整链条。",
-      "line_count": 751,
+      "line_count": 752,
       "theorem_chains": [
         {
           "text": "| 理解捕获模式 ⟹ 正确选择 trait | 知道环境如何使用 | 能写出正确的泛型约束 | 高 |",
@@ -33728,7 +33742,7 @@
       "layer": "L3",
       "title": "Rust 内存模型（Memory Model）",
       "positioning": "",
-      "line_count": 544,
+      "line_count": 546,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将字节模型、provenance 和 UB 边界串联起来。",
@@ -36811,7 +36825,7 @@
       "layer": "L3",
       "title": "Rust FFI：与外部代码的安全边界",
       "positioning": "系统分析 Rust 与 C/C++ 等外部代码交互的**Foreign Function Interface (FFI)** 机制，探讨 `extern` 块、ABI 兼容、`unsafe` 边界管理以及 `bindgen`/`cbindgen` 工具链。",
-      "line_count": 1058,
+      "line_count": 1078,
       "theorem_chains": [
         {
           "text": "| Rust FFI：与外部代码的安全边界 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -36839,25 +36853,25 @@
           "flags": [
             "ignore"
           ],
-          "lines": 29,
+          "lines": 33,
           "should_fail": false,
-          "code_preview": "// 外部类型（不透明）：extern 块内只允许函数与静态变量声明。 // `type FILE;` 属于不稳定的 extern types 特性；稳定 Ru..."
+          "code_preview": "use std::ffi::{c_char, c_int, c_void};  // 外部类型（不透明）：extern 块内只允许函数与静态变量声明。 // `..."
         },
         {
           "flags": [
             "ignore"
           ],
-          "lines": 40,
+          "lines": 42,
           "should_fail": false,
-          "code_preview": "// 模式: 不透明指针（Opaque Pointer） // C 端: typedef struct Connection Connection;  // 稳..."
+          "code_preview": "use std::ffi::{c_char, c_int, CString};  // 模式: 不透明指针（Opaque Pointer） // C 端: ty..."
         },
         {
           "flags": [
             "ignore"
           ],
-          "lines": 32,
+          "lines": 34,
           "should_fail": false,
-          "code_preview": "// 将 Rust 闭包传递给 C 的回调机制  extern \"C\" {     // C 函数接受回调: void register_callback(vo..."
+          "code_preview": "use std::ffi::{c_int, c_void};  // 将 Rust 闭包传递给 C 的回调机制  unsafe extern \"C\" {    ..."
         },
         {
           "flags": [
@@ -36939,23 +36953,23 @@
           ],
           "lines": 14,
           "should_fail": false,
-          "code_preview": "use std::ffi::CString; use std::os::raw::c_char;  extern \"C\" {     fn process_st..."
+          "code_preview": "use std::ffi::CString; use std::os::raw::c_char;  unsafe extern \"C\" {     fn pro..."
         },
         {
           "flags": [
             "ignore"
           ],
-          "lines": 9,
+          "lines": 15,
           "should_fail": false,
-          "code_preview": "fn call_process(input: &str) {     let c_string = CString::new(input).unwrap(); ..."
+          "code_preview": "use std::ffi::CString;  unsafe extern \"C\" {     fn process_string(s: *mut std::o..."
         },
         {
           "flags": [
             "ignore"
           ],
-          "lines": 11,
+          "lines": 17,
           "should_fail": false,
-          "code_preview": "fn call_process(input: &str) {     let c_string = CString::new(input).unwrap(); ..."
+          "code_preview": "use std::ffi::CString;  unsafe extern \"C\" {     fn process_string(s: *mut std::o..."
         },
         {
           "flags": [
@@ -37729,7 +37743,7 @@
       "layer": "L3",
       "title": "Unknown",
       "positioning": "在 [`01_rust_ffi.md`](01_rust_ffi.md) 的基础上，聚焦 Rust FFI 的**可复用设计模式**：如何把 Rust 类型安全地暴露给 C，如何管理跨语言所有权，以及如何在 FFI 边界上保留 Rust 的线程安全保证。",
-      "line_count": 600,
+      "line_count": 603,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -37772,9 +37786,9 @@
           "flags": [
             "ignore"
           ],
-          "lines": 61,
+          "lines": 63,
           "should_fail": false,
-          "code_preview": "pub struct MySet {     data: Vec<i32>, }  impl MySet {     fn new() -> Self { Se..."
+          "code_preview": "use std::ffi::c_int;  pub struct MySet {     data: Vec<i32>, }  impl MySet {    ..."
         },
         {
           "flags": [
@@ -37826,15 +37840,15 @@
           "flags": [
             "ignore"
           ],
-          "lines": 7,
+          "lines": 9,
           "should_fail": false,
-          "code_preview": "/// 不推荐：把 Rust 切片当作 C 字符串处理，丢失长度信息且限制数据内容 #[unsafe(no_mangle)] pub unsafe extern..."
+          "code_preview": "use std::ffi::{c_char, c_int};  /// 不推荐：把 Rust 切片当作 C 字符串处理，丢失长度信息且限制数据内容 #[unsa..."
         },
         {
           "flags": [
             "ignore"
           ],
-          "lines": 55,
+          "lines": 54,
           "should_fail": false,
           "code_preview": "use std::ffi::{c_char, c_int, CStr, CString}; use std::ptr;  #[repr(C)] #[derive..."
         },
@@ -44235,7 +44249,7 @@
       "layer": "L4",
       "title": "Tree Borrows 深度解析",
       "positioning": "",
-      "line_count": 255,
+      "line_count": 256,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -44287,6 +44301,7 @@
         "../../07_future/02_preview_features/24_borrow_sanitizer.md",
         "../../07_future/02_preview_features/33_autoverus_preview.md",
         "../02_separation_logic/04_borrow_sanitizer_in_formal.md",
+        "../03_operational_semantics/10_minirust.md",
         "../04_model_checking/07_autoverus.md",
         "../04_model_checking/08_miri.md",
         "02_ownership_formal.md"
@@ -45023,7 +45038,7 @@
       "layer": "L4",
       "title": "操作语义：程序行为的形式化定义",
       "positioning": "介绍 **操作语义（Operational Semantics）**——通过形式化规则定义程序的执行步骤，分析小步语义（Small-Step）与大步语义（Big-Step）的对比，以及 Rust 的所有权（Ownership）、借用（Borrowing）和并发操作的形式化建模方法。",
-      "line_count": 1220,
+      "line_count": 1224,
       "theorem_chains": [
         {
           "text": "| 操作语义：程序行为的形式化定义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -45171,7 +45186,8 @@
         "../01_ownership_logic/01_linear_logic.md",
         "../01_ownership_logic/02_ownership_formal.md",
         "../02_separation_logic/01_rustbelt.md",
-        "../02_separation_logic/02_separation_logic.md"
+        "../02_separation_logic/02_separation_logic.md",
+        "10_minirust.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
@@ -45901,6 +45917,62 @@
       "pre_post": {
         "pre": [],
         "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\03_operational_semantics\\10_minirust.md",
+      "layer": "L4",
+      "title": "MiniRust：Rust 操作语义的可执行模型",
+      "positioning": "",
+      "line_count": 172,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 4. 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// Tree Borrows 允许：父引用在子引用创建后仍可读 let mut data = 0; let r1: *mut i32 = &mut data;..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "fn main() {     let mut x = 5;     let r = &mut x as *mut i32;     unsafe {     ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/02_unsafe/06_memory_model.md",
+        "../01_ownership_logic/05_tree_borrows_deep_dive.md",
+        "../01_ownership_logic/06_behavior_considered_undefined.md",
+        "../04_model_checking/08_miri.md",
+        "../04_model_checking/09_kani.md",
+        "../11_computational_models/01_computational_semantics_framework.md",
+        "03_operational_semantics.md",
+        "07_aeneas_symbolic_semantics.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 15,
+      "pre_post": {
+        "pre": [
+          "[操作语义：程序行为的形式化定义](03_operational_semantics.md) · [Tree Borrows 深度解析](../01_ownership_logic/05_tree_borrows_deep_dive.md) · [Behavior Considered Undefined](../01_ownership_logic/06_behavior_considered_undefined.md) · [Memory Model](../../03_advanced/02_unsafe/06_memory_model.md)"
+        ],
+        "post": [
+          "[Miri](../04_model_checking/08_miri.md) · [Aeneas Symbolic Semantics](07_aeneas_symbolic_semantics.md) · [Kani](../04_model_checking/09_kani.md)"
+        ]
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -51104,7 +51176,7 @@
       "layer": "L4",
       "title": "计算语义统一框架（A Unified Framework of Computational Semantics）",
       "positioning": "把操作、指称、公理、类型四种语义统一为观察同一程序行为的四种互补视角，为后续可计算性、形式语言与程序等价性讨论奠定共同语言。",
-      "line_count": 350,
+      "line_count": 351,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -51152,6 +51224,7 @@
         "../03_operational_semantics/01_denotational_semantics.md",
         "../03_operational_semantics/03_operational_semantics.md",
         "../03_operational_semantics/05_axiomatic_semantics.md",
+        "../03_operational_semantics/10_minirust.md",
         "02_computability_theory.md",
         "04_mathematical_functions_of_computation.md",
         "05_equivalence_of_computational_models.md"
@@ -52614,7 +52687,7 @@
       "layer": "L4",
       "title": "原关系",
       "positioning": "",
-      "line_count": 428,
+      "line_count": 429,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60107,7 +60180,7 @@
       "layer": "L6",
       "title": "Rust 惯用法谱系全景（Idioms Spectrum）",
       "positioning": "本文件从**纵向抽象层级**梳理 Rust 的惯用法（idioms）——从词法糖到架构模式的高效、等效、简洁表达方式，与 `01_patterns.md` 的设计模式形成互补：后者聚焦「设计模式」（面向问题），本文件聚焦「惯用法」（面向表达）。",
-      "line_count": 1771,
+      "line_count": 1826,
       "theorem_chains": [
         {
           "text": "一致性矩阵把每条惯用法拆为“前提 ⟹ 结论”：`?` 运算符在 well-typed 前提下展开为等效 `match`（零成本）；",
@@ -60136,17 +60209,9 @@
           "flags": [
             "ignore"
           ],
-          "lines": 12,
+          "lines": 16,
           "should_fail": false,
-          "code_preview": "fn read_file(path: &str) -> Result<String, io::Error> {     let mut file = match..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 7,
-          "should_fail": false,
-          "code_preview": "fn read_file(path: &str) -> Result<String, io::Error> {     let mut file = File:..."
+          "code_preview": "use std::fs::File; use std::io; use std::io::Read;  fn read_file(path: &str) -> ..."
         },
         {
           "flags": [
@@ -60154,23 +60219,31 @@
           ],
           "lines": 11,
           "should_fail": false,
-          "code_preview": "// Rust 1.95.0+ 惯用：match 中使用 if let guards fn classify(value: Option<Result<i32,..."
+          "code_preview": "use std::fs::File; use std::io; use std::io::Read;  fn read_file(path: &str) -> ..."
         },
         {
           "flags": [
             "ignore"
           ],
-          "lines": 11,
+          "lines": 14,
           "should_fail": false,
-          "code_preview": "// 惯用：if let 局部绑定 if let Some(value) = map.get(&key) {     process(value); }  //..."
+          "code_preview": "use std::io::Error;  // Rust 1.95.0+ 惯用：match 中使用 if let guards fn classify(valu..."
         },
         {
           "flags": [
             "ignore"
           ],
-          "lines": 15,
+          "lines": 17,
           "should_fail": false,
-          "code_preview": "// 惯用：Iterator 消费链 let sum_of_squares: i32 = numbers     .iter()     .filter(|&&..."
+          "code_preview": "use std::collections::HashMap;  let map: HashMap<i32, String> = HashMap::new(); ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "let numbers = vec![-3, -2, -1, 0, 1, 2, 3];  // 惯用：Iterator 消费链 let sum_of_squar..."
         },
         {
           "flags": [],
@@ -60182,25 +60255,25 @@
           "flags": [
             "ignore"
           ],
-          "lines": 28,
+          "lines": 32,
           "should_fail": false,
-          "code_preview": "// 惯用：Typestate 编码连接状态 struct Disconnected; struct Connected;  struct Client<Sta..."
+          "code_preview": "use std::io::{self, Error}; use std::marker::PhantomData; use std::net::TcpStrea..."
         },
         {
           "flags": [
             "ignore"
           ],
-          "lines": 13,
+          "lines": 15,
           "should_fail": false,
-          "code_preview": "// 惯用：PhantomData 标记生命周期关系 struct Iter<'a, T: 'a> {     ptr: *const T,     end: ..."
+          "code_preview": "use std::marker::PhantomData;  // 惯用：PhantomData 标记生命周期关系 struct Iter<'a, T: 'a>..."
         },
         {
           "flags": [
             "ignore"
           ],
-          "lines": 17,
+          "lines": 22,
           "should_fail": false,
-          "code_preview": "// 惯用：ZST 作为能力标记（Capability） struct ReadPermission; struct WritePermission;  str..."
+          "code_preview": "use std::io; use std::marker::PhantomData;  type RawFd = i32;  // 惯用：ZST 作为能力标记（..."
         },
         {
           "flags": [],
@@ -60218,9 +60291,9 @@
           "flags": [
             "ignore"
           ],
-          "lines": 11,
+          "lines": 15,
           "should_fail": false,
-          "code_preview": "// 惯用：trait bound 组合 fn process<T>(item: T) where     T: Display + Debug + Seria..."
+          "code_preview": "use std::fmt::{Debug, Display};  trait Serialize {}  // 惯用：trait bound 组合 fn pro..."
         },
         {
           "flags": [],
@@ -60232,9 +60305,9 @@
           "flags": [
             "ignore"
           ],
-          "lines": 12,
+          "lines": 16,
           "should_fail": false,
-          "code_preview": "// 惯用：RAII 锁守卫 {     let guard = mutex.lock().unwrap(); // 获取锁     // guard 在作用域..."
+          "code_preview": "use std::sync::Mutex;  let mutex = Mutex::new(0);  // 惯用：RAII 锁守卫 {     let guar..."
         },
         {
           "flags": [
@@ -60262,9 +60335,9 @@
           "flags": [
             "ignore"
           ],
-          "lines": 10,
+          "lines": 12,
           "should_fail": false,
-          "code_preview": "// 惯用：Iterator 消费链（零成本抽象） let max_even: Option<i32> = numbers     .iter()     .f..."
+          "code_preview": "let numbers = vec![1, 2, 3, 4, 5, 6];  // 惯用：Iterator 消费链（零成本抽象） let max_even: O..."
         },
         {
           "flags": [],
@@ -60276,9 +60349,9 @@
           "flags": [
             "ignore"
           ],
-          "lines": 21,
+          "lines": 27,
           "should_fail": false,
-          "code_preview": "// 惯用：早期返回 + 守卫子句 fn process(data: Option<&[u8]>) -> Result<Output, Error> {    ..."
+          "code_preview": "#[derive(Debug)] enum Error { EmptyInput, TooShort, Checksum } struct Output; fn..."
         },
         {
           "flags": [],
@@ -60290,25 +60363,25 @@
           "flags": [
             "ignore"
           ],
-          "lines": 15,
+          "lines": 18,
           "should_fail": false,
-          "code_preview": "// 惯用：结构化推导线程安全 #[derive(Clone)] struct Config {     name: String,      // Strin..."
+          "code_preview": "use std::cell::RefCell; use std::collections::HashMap;  // 惯用：结构化推导线程安全 #[derive..."
         },
         {
           "flags": [
             "ignore"
           ],
-          "lines": 21,
+          "lines": 25,
           "should_fail": false,
-          "code_preview": "// 惯用：Actor 单线程处理（概念性，基于 actix 风格） struct CounterActor {     count: i32, }  enum..."
+          "code_preview": "// 惯用：Actor 单线程处理（概念性，基于 actix 风格） trait Actor<M> {     fn handle(&mut self, msg..."
         },
         {
           "flags": [
             "ignore"
           ],
-          "lines": 11,
+          "lines": 13,
           "should_fail": false,
-          "code_preview": "// 惯用：channel + 所有权转移 let (tx, rx) = mpsc::channel(); let data = vec![1, 2, 3]; ..."
+          "code_preview": "use std::sync::mpsc;  // 惯用：channel + 所有权转移 let (tx, rx) = mpsc::channel(); let ..."
         },
         {
           "flags": [],
@@ -63495,7 +63568,7 @@
       "layer": "L6",
       "title": "重试模式（Retry）",
       "positioning": "将 transient-fault handling 的 Retry 模式与 Rust 的 `Future`、trait、错误类型对齐，实现可组合、可观测的重试中间件。",
-      "line_count": 173,
+      "line_count": 175,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -63802,7 +63875,7 @@
       "layer": "L6",
       "title": "Unknown",
       "positioning": "系统梳理 Rust 生态中常见**反模式（anti-patterns）**——它们能编译、能短期解决问题，但会引入性能、可维护性或正确性债务；每个反模式都给出地道替代方案与可编译的“反例 → 正例”对照。",
-      "line_count": 745,
+      "line_count": 746,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -63955,9 +64028,9 @@
           "flags": [
             "ignore"
           ],
-          "lines": 17,
+          "lines": 18,
           "should_fail": false,
-          "code_preview": "use std::thread;  static mut COUNTER: u32 = 0;  fn main() {     let mut handles ..."
+          "code_preview": "#![allow(static_mut_refs)] use std::thread;  static mut COUNTER: u32 = 0;  fn ma..."
         },
         {
           "flags": [],
@@ -67089,7 +67162,7 @@
       "layer": "L6",
       "title": "no_std 同步原语",
       "positioning": "",
-      "line_count": 459,
+      "line_count": 463,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -67133,9 +67206,9 @@
           "flags": [
             "ignore"
           ],
-          "lines": 27,
+          "lines": 29,
           "should_fail": false,
-          "code_preview": "use core::sync::atomic::{AtomicBool, Ordering}; use core::hint::spin_loop;  pub ..."
+          "code_preview": "#![no_std]  use core::sync::atomic::{AtomicBool, Ordering}; use core::hint::spin..."
         },
         {
           "flags": [
@@ -67157,9 +67230,9 @@
           "flags": [
             "ignore"
           ],
-          "lines": 41,
+          "lines": 43,
           "should_fail": false,
-          "code_preview": "use core::sync::atomic::{AtomicUsize, Ordering};  const N: usize = 16;  pub stru..."
+          "code_preview": "#![no_std]  use core::sync::atomic::{AtomicUsize, Ordering};  const N: usize = 1..."
         },
         {
           "flags": [
@@ -67474,7 +67547,7 @@
       "layer": "L6",
       "title": "panic_handler 与 no_std 运行时",
       "positioning": "",
-      "line_count": 378,
+      "line_count": 388,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -67494,9 +67567,9 @@
           "flags": [
             "ignore"
           ],
-          "lines": 22,
+          "lines": 28,
           "should_fail": false,
-          "code_preview": "use core::fmt::Write; use core::panic::PanicInfo;  struct UartWriter;  impl Writ..."
+          "code_preview": "#![no_std]  use core::fmt::Write; use core::panic::PanicInfo;  unsafe extern \"C\"..."
         },
         {
           "flags": [
@@ -67518,9 +67591,9 @@
           "flags": [
             "ignore"
           ],
-          "lines": 15,
+          "lines": 19,
           "should_fail": false,
-          "code_preview": "use core::panic::PanicInfo;  #[panic_handler] fn panic(info: &PanicInfo) -> ! { ..."
+          "code_preview": "#![no_std]  use core::panic::PanicInfo;  fn log_panic_loc(_file: &str, _line: u3..."
         },
         {
           "flags": [
@@ -68134,7 +68207,7 @@
       "layer": "L6",
       "title": "`#![no_std]` 与裸机编程惯用法",
       "positioning": "",
-      "line_count": 726,
+      "line_count": 730,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -68170,9 +68243,9 @@
           "flags": [
             "ignore"
           ],
-          "lines": 34,
+          "lines": 38,
           "should_fail": false,
-          "code_preview": "#![no_std] #![no_main]  use core::panic::PanicInfo;  #[no_mangle] pub unsafe ext..."
+          "code_preview": "#![no_std] #![no_main]  use core::panic::PanicInfo;  #[unsafe(no_mangle)] pub un..."
         },
         {
           "flags": [
@@ -79275,7 +79348,7 @@
       "layer": "L7",
       "title": "Rust 1.98+ 前沿特性预览",
       "positioning": "",
-      "line_count": 897,
+      "line_count": 899,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -79291,9 +79364,9 @@
           "flags": [
             "ignore"
           ],
-          "lines": 10,
+          "lines": 12,
           "should_fail": false,
-          "code_preview": "   trait LocProvider<'a> {        fn location(&self) -> &'a Location<'a>;    }  ..."
+          "code_preview": "   use std::panic::{Location, PanicInfo};     trait LocProvider<'a> {        fn ..."
         },
         {
           "flags": [

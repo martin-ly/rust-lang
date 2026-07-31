@@ -93,6 +93,7 @@ Run: `python scripts/check_kg_relation_precision.py --strict`
 Run: `python scripts/check_version_semantic_injection.py --strict`
 
 - [ ] Rust 1.90–1.97 stable feature count mapped = _**/**_
+- [ ] Rust 1.98+ beta features mapped (non-blocking observation) = _**/**_
 - [ ] Each version tracking page links back to its `concept/` authority page
 - [ ] Each `concept/` authority page links forward to relevant version tracking pages
 

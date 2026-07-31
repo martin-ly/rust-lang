@@ -20,6 +20,9 @@ Select 5–8 pages from the priority list below, ensuring coverage across L1–L
 | P1 | `concept/02_intermediate/00_traits/01_traits.md` | [TRPL Ch10](https://doc.rust-lang.org/book/ch10-02-traits.html), [RFC 255](https://rust-lang.github.io/rfcs/0255-object-safety.html) | L2 core |
 | P1 | `concept/03_advanced/00_concurrency/02_send_sync_auto_traits.md` | [Rustonomicon — Send/Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) | Cross-domain boundary |
 | P1 | `concept/03_advanced/02_unsafe/01_unsafe.md` | [Rust Reference — unsafe keyword](https://doc.rust-lang.org/reference/unsafe-keyword.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) | L3 expert |
+| P1 | `concept/04_formal/03_operational_semantics/10_minirust.md` | [MiniRust GitHub](https://github.com/RalfJung/minirust), [Tree Borrows paper](https://perso.crans.org/vanile/treebor/) | L4 formal baseline |
+| P1 | `concept/04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md` | [Tree Borrows paper](https://perso.crans.org/vanile/treebor/), [Miri borrow tracker](https://github.com/rust-lang/miri/blob/master/src/borrow_tracker/mod.rs) | L4 memory model |
+| P2 | `concept/06_ecosystem/08_formal_verification/02_formal_verification_tools.md` | [Kani](https://model-checking.github.io/kani/), [Verus](https://verus-lang.github.io/verus/guide/), [Creusot](https://creusot-rs.github.io/) | L5-L6 ecosystem |
 
 ---
 
@@ -60,6 +63,9 @@ python scripts/kb_auditor.py --link-check
 
 # Authority semantic keyword coverage
 python scripts/authority_semantic_diff.py --strict
+
+# Concept authority coverage (P0/P1/P2 + crates docs)
+python scripts/check_concept_authority_coverage.py --strict --include-crates
 
 # Cross-domain coverage (no P0 gaps)
 python scripts/check_cross_domain_coverage.py --strict

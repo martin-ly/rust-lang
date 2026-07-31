@@ -183,6 +183,7 @@ B
 - [Safety Tags](../../07_future/02_preview_features/03_safety_tags_preview.md) · [深度形式化](../../07_future/02_preview_features/03_safety_tags_preview.md)
 - [AutoVerus / Verus](../../07_future/02_preview_features/33_autoverus_preview.md) · [深度](../04_model_checking/07_autoverus.md)
 - [Miri](../04_model_checking/08_miri.md)
+- [MiniRust：Rust 操作语义的可执行模型](../03_operational_semantics/10_minirust.md)
 - [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
 - [形式化验证工具生态](../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md)
 - [Rust 1.98+ 预览](../../07_future/00_version_tracking/rust_1_98_preview.md)

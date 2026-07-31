@@ -1,17 +1,17 @@
 # 元数据一致性基线（语义质量门 P0-1）
 
-**日期**: 2026-07-31  **扫描**: 676 concept 活跃文件（排除 archive）  **模式**: strict
+**日期**: 2026-07-31  **扫描**: 677 concept 活跃文件（排除 archive）  **模式**: strict
 
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
 | D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥 | 0 | 0.0% | >0 | pass |
-| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 0 (基=397) | 0.0% | >=5% | pass |
-| D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
+| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 0 (基=398) | 0.0% | >=5% | pass |
+| D3 关键字段同文件重声明 | 1 | 0.1% | >0 | FAIL |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
 | D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
-| D6 Summary 低信息量模板套话 | 15 | 2.2% | >=3% | pass |
+| D6 Summary 低信息量模板套话 | 16 | 2.4% | >=3% | pass |
 
-**受影响文件总数**: 15 / 676
+**受影响文件总数**: 16 / 677
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -115,21 +115,19 @@
 
 ### D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥（0）
 
-
 ### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（0）
 
+### D3 关键字段同文件重声明（1）
 
-### D3 关键字段同文件重声明（0）
-
+- `concept/04_formal/03_operational_semantics/10_minirust.md` — Rust 版本 声明 2 次: ['1.97.0+ (Edition 2024)', '1.97.0+ (Edition 2024)']
 
 ### D4 文首块 Rust 版本号自矛盾（0）
 
-
 ### D5 稳定层正文残留 nightly/preview/unstable（0）
 
+### D6 Summary 低信息量模板套话（16）
 
-### D6 Summary 低信息量模板套话（15）
-
+- `concept/04_formal/03_operational_semantics/10_minirust.md` — Summary 为空
 - `concept/04_formal/09_system_semantics/07_concurrent_and_parallel_semantics.md` — Summary 为空
 - `concept/04_formal/09_system_semantics/08_memory_ordering_and_atomics.md` — Summary 为空
 - `concept/06_ecosystem/03_design_patterns/24_repository_and_unit_of_work.md` — Summary 为空
@@ -141,11 +139,10 @@
 - `concept/06_ecosystem/03_design_patterns/30_outbox.md` — Summary 为空
 - `concept/06_ecosystem/03_design_patterns/31_object_pool.md` — Summary 为空
 - `concept/06_ecosystem/03_design_patterns/32_typestate_deep_dive.md` — Summary 为空
-- `concept/06_ecosystem/10_performance/03_algorithms_and_complexity_idioms.md` — Summary 为空
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 
-- 无（全部通过）
+- D3 字段重声明 1 (>0)
 
 ## 机器可读
 

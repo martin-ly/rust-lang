@@ -1196,6 +1196,10 @@ Rust 操作语义的复杂性来源：
 
 ---
 
+> **相关权威页**: [MiniRust：Rust 操作语义的可执行模型](10_minirust.md) 给出了 Rust 核心语言的小步语义配置 ⟨e, ρ, σ, τ, A⟩，并把 Tree Borrows / Stacked Borrows 作为可插拔别名模型接入，可作为本文形式化基线的补充实现视角。
+
+---
+
 ## 🧭 思维导图（Mindmap）
 
 ```mermaid

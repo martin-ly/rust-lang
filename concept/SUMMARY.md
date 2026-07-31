@@ -299,6 +299,7 @@
   - [Type Inference Complexity（类型推断复杂度）](04_formal/00_type_theory/08_type_inference_complexity.md)
   - [观察等价性（Observational Equivalence）](04_formal/03_operational_semantics/06_observational_equivalence.md)
   - [Aeneas Symbolic Semantics（Aeneas 符号化语义）](04_formal/03_operational_semantics/07_aeneas_symbolic_semantics.md)
+  - [MiniRust：Rust 操作语义的可执行模型](04_formal/03_operational_semantics/10_minirust.md)
   - [Miri：Rust 未定义行为动态检测器](04_formal/04_model_checking/08_miri.md)
   - [Kani：Rust 有界模型检查器](04_formal/04_model_checking/09_kani.md)
   - [认证工具链与认证包清单](04_formal/04_model_checking/10_certified_toolchains_and_packages.md)

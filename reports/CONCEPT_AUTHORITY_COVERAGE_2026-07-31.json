@@ -1,41 +1,41 @@
 {
   "date": "2026-07-31",
-  "scanned": 641,
+  "scanned": 642,
   "coverage": {
     "P0": [
-      615,
-      95.9
+      616,
+      96.0
     ],
     "P1": [
-      566,
+      567,
       88.3
     ],
     "P2": [
       559,
-      87.2
+      87.1
     ],
     "any": [
-      641,
+      642,
       100.0
     ],
     "none": 0
   },
   "content_scope": {
-    "scanned": 547,
+    "scanned": 548,
     "P0": [
-      526,
+      527,
       96.2
     ],
     "P1": [
-      510,
+      511,
       93.2
     ],
     "P2": [
       538,
-      98.4
+      98.2
     ],
     "any": [
-      547,
+      548,
       100.0
     ],
     "gaps_p1": [
@@ -82,6 +82,7 @@
       "concept/02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
       "concept/02_intermediate/07_iterators_and_closures/02_closures.md",
       "concept/03_advanced/05_inline_assembly/02_inline_assembly_extended.md",
+      "concept/04_formal/03_operational_semantics/10_minirust.md",
       "concept/04_formal/09_system_semantics/07_concurrent_and_parallel_semantics.md",
       "concept/04_formal/09_system_semantics/08_memory_ordering_and_atomics.md",
       "concept/04_formal/13_semantic_engineering/07_kg_owl_shacl_semantics.md",
@@ -111,9 +112,9 @@
       "any": 77
     },
     "L4": {
-      "n": 105,
-      "P0": 105,
-      "any": 105
+      "n": 106,
+      "P0": 106,
+      "any": 106
     },
     "L5": {
       "n": 27,
