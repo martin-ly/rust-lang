@@ -61,8 +61,8 @@
 | 22 | Reject arguments in attributes where no arguments are expected | Compat | ⚠ compat change | [PR #155193](https://github.com/rust-lang/rust/pull/155193) · [#156641](https://github.com/rust-lang/rust/issues/156641) · [attributes](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) |
 | 23 | Ensure `Send`/`Sync` is not implemented for `std::env::Vars{,Os}` | Std API | ✅ stabilized | [PR #155153](https://github.com/rust-lang/rust/pull/155153) · [#156521](https://github.com/rust-lang/rust/issues/156521) · [Send/Sync](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md) |
 | 24 | Add `invalid_runtime_symbol_definitions` (deny) and `suspicious_runtime_symbol_definitions` (warn) lints | Lang | ✅ stabilized | [PR #155521](https://github.com/rust-lang/rust/pull/155521) · [#156519](https://github.com/rust-lang/rust/issues/156519) · [FFI/linkage](../../03_advanced/04_ffi/03_linkage.md) |
-| 25 | Allow shortening lifetime of `&mut` when unsize-coercing, even in invariant position | Lang | ✅ stabilized | [PR #149219](https://github.com/rust-lang/rust/pull/149219) · [#156457](https://github.com/rust-lang/rust/issues/156457) · [lifetime](../../02_intermediate/01_ownership_borrowing_lifetimes/02_lifetimes.md) |
-| 26 | Trait object lifetime defaults resolve differently when fully elided in niche scenarios | Compat | ⚠ compat change | [PR #129543](https://github.com/rust-lang/rust/pull/129543) · [#156449](https://github.com/rust-lang/rust/issues/156449) · [lifetime](../../02_intermediate/01_ownership_borrowing_lifetimes/02_lifetimes.md) · [traits](../../02_intermediate/00_traits/01_traits.md) |
+| 25 | Allow shortening lifetime of `&mut` when unsize-coercing, even in invariant position | Lang | ✅ stabilized | [PR #149219](https://github.com/rust-lang/rust/pull/149219) · [#156457](https://github.com/rust-lang/rust/issues/156457) · [lifetime](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) |
+| 26 | Trait object lifetime defaults resolve differently when fully elided in niche scenarios | Compat | ⚠ compat change | [PR #129543](https://github.com/rust-lang/rust/pull/129543) · [#156449](https://github.com/rust-lang/rust/issues/156449) · [lifetime](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [traits](../../02_intermediate/00_traits/01_traits.md) |
 | 27 | Ensure `Send`/`Sync` impl for `std::process::CommandArgs` | Std API | ✅ stabilized | [PR #155113](https://github.com/rust-lang/rust/pull/155113) · [#156335](https://github.com/rust-lang/rust/issues/156335) · [process](../../03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) · [Send/Sync](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md) |
 | 28 | Switch Windows thread-local destructors to FLS | Compiler/Platform | ✅ stabilized | [PR #148799](https://github.com/rust-lang/rust/pull/148799) · [#156334](https://github.com/rust-lang/rust/issues/156334) · [destructors](../../04_formal/05_rustc_internals/09_destructors.md) |
 | 29 | Document that `ManuallyDrop`'s `Box` interaction has been fixed | Std API | ✅ stabilized | [PR #155750](https://github.com/rust-lang/rust/pull/155750) · [#156042](https://github.com/rust-lang/rust/issues/156042) · [destructors](../../04_formal/05_rustc_internals/09_destructors.md) |
@@ -123,7 +123,7 @@ Rust 运行时依赖 `memcmp`、`memset`、`memmove`、`strlen` 等 C 运行时�
 ### 1.3 Allow shortening lifetime of `&mut` when unsize-coercing, even in an invariant position
 
 **状态**: ✅ stabilized in 1.98.0 · **来源**: [PR #149219](https://github.com/rust-lang/rust/pull/149219) · **release-notes 跟踪 issue**: [#156457](https://github.com/rust-lang/rust/issues/156457)
-**相关概念**: [lifetimes](../../02_intermediate/01_ownership_borrowing_lifetimes/02_lifetimes.md) · [coercions](../../02_intermediate/04_types_and_conversions/02_type_coercion.md)
+**相关概念**: [lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [coercions](../../02_intermediate/04_types_and_conversions/07_type_conversions.md)
 
 #### 变更动机
 
@@ -252,7 +252,7 @@ Rust 的 where 子句从未支持等式约束（equality predicate），但解�
 ### 1.9 If fully elided, lifetime bounds of trait object types may now resolve differently or even get rejected
 
 **状态**: ⚠ compatibility change in 1.98.0 · **来源**: [PR #129543](https://github.com/rust-lang/rust/pull/129543) · **release-notes 跟踪 issue**: [#156449](https://github.com/rust-lang/rust/issues/156449)
-**相关概念**: [lifetimes](../../02_intermediate/01_ownership_borrowing_lifetimes/02_lifetimes.md) · [trait objects](../../02_intermediate/00_traits/01_traits.md)
+**相关概念**: [lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [trait objects](../../02_intermediate/00_traits/01_traits.md)
 
 #### 变更动机
 

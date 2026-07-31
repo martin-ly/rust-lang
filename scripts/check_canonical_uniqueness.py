@@ -64,6 +64,25 @@ MIN_STEM_LEN = 4
 # 进阶关系豁免后缀：词干 = 基础词干 + 后缀 视为合法分层（如 L1 basics → L2 主页 → deep dive）
 PROGRESSION_SUFFIXES = ("basics", "basic", "advanced", "deep_dive")
 
+# 人工复核白名单：确认为主题不同的误报对（路径为仓库相对路径，正斜杠）。
+# 登记格式：frozenset({file1, file2})。判定顺序在相似度比较之前。
+IGNORE_PAIRS = {
+    # 复核 2026-08-01：W317 误报。open_enums_preview（开放枚举预览特性）与
+    # complex_numbers_preview（复数类型预览特性）为 02_preview_features 下两个完全不同的
+    # nightly 特性跟踪页，仅共享 `_preview` 后缀，主题无重叠，属词干误判。
+    frozenset({
+        "concept/07_future/02_preview_features/34_open_enums_preview.md",
+        "concept/07_future/02_preview_features/38_complex_numbers_preview.md",
+    }),
+    # 复核 2026-08-01：W318 误报。rust_for_linux（Linux 内核 Rust 支持）与
+    # rust_for_ai_model_serving（AI 模型服务场景）为 04_research_and_experimental 下两个
+    # 完全不同的研究领域入口页，仅共享前缀 "rust_for_"，主题无重叠，属词干误判。
+    frozenset({
+        "concept/07_future/04_research_and_experimental/04_rust_for_linux.md",
+        "concept/07_future/04_research_and_experimental/11_rust_for_ai_model_serving.md",
+    }),
+}
+
 
 def _strip_progression(s: str) -> str:
     """去掉词干末尾的进阶后缀(仅一层)。"""
@@ -90,6 +109,19 @@ def normalize(text: str) -> str:
     text = text.lower()
     text = re.sub(r"[（）()\[\]【】：:，,。·\-—_`'\s]+", "", text)
     return text
+
+
+def _in_ignore_pairs(f1: str, f2: str) -> bool:
+    """检查文件对是否在人工复核白名单中（支持完整路径与 basename 对，容忍 NN_ 重编号）。"""
+    f1, f2 = f1.replace("\\", "/"), f2.replace("\\", "/")
+    if frozenset({f1, f2}) in IGNORE_PAIRS:
+        return True
+    b1, b2 = f1.rsplit("/", 1)[-1], f2.rsplit("/", 1)[-1]
+    for pair in IGNORE_PAIRS:
+        bases = {p.rsplit("/", 1)[-1] for p in pair}
+        if frozenset({b1, b2}) == bases:
+            return True
+    return False
 
 
 def is_stub(text: str, size: int) -> bool:
@@ -155,6 +187,8 @@ def check_a(pages: list[dict]) -> list[dict]:
     canonicals = [p for p in pages if p["canonical"] and not p["stub"]]
     findings = []
     for p1, p2 in combinations(canonicals, 2):
+        if _in_ignore_pairs(p1["rel"], p2["rel"]):
+            continue
         s1, s2 = stem_of(p1["path"].name), stem_of(p2["path"].name)
         if len(s1) < MIN_STEM_LEN or len(s2) < MIN_STEM_LEN:
             continue
@@ -210,6 +244,8 @@ def check_b(pages: list[dict]) -> list[dict]:
     findings = []
     for group in by_dir.values():
         for p1, p2 in combinations(group, 2):
+            if _in_ignore_pairs(p1["rel"], p2["rel"]):
+                continue
             s1, s2 = stem_of(p1["path"].name), stem_of(p2["path"].name)
             if len(s1) < MIN_STEM_LEN or len(s2) < MIN_STEM_LEN:
                 continue

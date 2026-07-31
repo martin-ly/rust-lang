@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 666,
-    "generated_at": "2026-07-31T16:18:03.390001+00:00"
+    "generated_at": "2026-07-31T16:28:10.177669+00:00"
   },
   "files": [
     {
@@ -37994,7 +37994,7 @@
       "layer": "L3",
       "title": "Unknown",
       "positioning": "在 [`01_rust_ffi.md`](01_rust_ffi.md) 的基础上，聚焦 Rust FFI 的**可复用设计模式**：如何把 Rust 类型安全地暴露给 C，如何管理跨语言所有权，以及如何在 FFI 边界上保留 Rust 的线程安全保证。",
-      "line_count": 603,
+      "line_count": 606,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -38122,9 +38122,9 @@
             "compile_fail",
             "E0277"
           ],
-          "lines": 12,
+          "lines": 15,
           "should_fail": true,
-          "code_preview": "use std::ptr::NonNull;  pub struct SafeHandle {     ptr: *mut (), }  fn main() {..."
+          "code_preview": "use std::marker::PhantomData; use std::rc::Rc;  // 模拟一个 FFI 句柄：裸指针本身可 Send，但我们用 ..."
         }
       ],
       "sources": [],
@@ -51192,7 +51192,7 @@
       "layer": "L4",
       "title": "并发与并行语义（Concurrent and Parallel Semantics）",
       "positioning": "从 happens-before、内存模型、进程代数三个维度理解 Rust 并发（`std::thread`、atomics、channels、async）的形式边界，并链接到 Actor、CSP、π-calculus 三种经典并发模型。",
-      "line_count": 238,
+      "line_count": 240,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -51222,12 +51222,9 @@
           "code_preview": "fn parallel_sum(data: &[i32]) -> i32 {     let mut total = 0;     std::thread::s..."
         },
         {
-          "flags": [
-            "compile_fail",
-            "E0133"
-          ],
+          "flags": [],
           "lines": 7,
-          "should_fail": true,
+          "should_fail": false,
           "code_preview": "static mut COUNTER: i32 = 0;  fn main() {     std::thread::spawn(|| unsafe { COU..."
         }
       ],
@@ -68439,7 +68436,7 @@
       "layer": "L6",
       "title": "嵌入式内存分配器",
       "positioning": "",
-      "line_count": 495,
+      "line_count": 497,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -81476,17 +81473,26 @@
       "layer": "L7",
       "title": "Rust 1.98.0 稳定特性",
       "positioning": "",
-      "line_count": 754,
+      "line_count": 861,
       "theorem_chains": [],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "## 9. 反例"
+        }
+      ],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
         "../../01_foundation/02_type_system/03_numerics.md",
         "../../01_foundation/06_strings_and_text/02_strings_and_encoding.md",
         "../../01_foundation/09_macros_basics/01_attributes_and_macros.md",
+        "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/00_traits/06_derive_traits.md",
+        "../../02_intermediate/02_memory_management/02_interior_mutability.md",
+        "../../02_intermediate/03_error_handling/03_panic.md",
         "../../02_intermediate/04_types_and_conversions/01_range_types.md",
+        "../../02_intermediate/04_types_and_conversions/07_type_conversions.md",
         "../../02_intermediate/05_modules_and_visibility/01_module_system.md",
         "../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
         "../../03_advanced/00_concurrency/02_send_sync_auto_traits.md",
@@ -81508,7 +81514,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 32,
+      "matrix_rows": 40,
       "pre_post": {
         "pre": [
           "[Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.97 稳定特性](rust_1_97_stabilized.md)"
@@ -85777,7 +85783,7 @@
       "layer": "L7",
       "title": "Unknown",
       "positioning": "",
-      "line_count": 346,
+      "line_count": 351,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -85828,9 +85834,9 @@
         },
         {
           "flags": [],
-          "lines": 4,
+          "lines": 9,
           "should_fail": false,
-          "code_preview": "if let Some(x) = opt && x > 0 && let Some(y) = f(x) {     println!(\"{} {}\", x, y..."
+          "code_preview": "fn f(x: i32) -> Option<i32> { Some(x * 2) }  fn main() {     let opt = Some(3); ..."
         },
         {
           "flags": [],

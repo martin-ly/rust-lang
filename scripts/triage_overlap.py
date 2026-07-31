@@ -67,6 +67,11 @@ SERIES_PATH_RE = [
     # 对齐状态表行（创建型 5 模式 / 结构型 7 模式 / 行为型 11 模式 / 工作流 3 模式 / 分布式 9 模式，
     # 清单互不重叠）。均为子目录导航索引，合并或 stub 化会破坏目录导航，登记 SERIES。
     re.compile(r"docs/12_research_notes/08_software_design_theory/(\d\d_[^/]+/)+README\.md"),
+    # 复核 2026-08-01：concept/07_future/00_version_tracking/feature_domain_matrix_1NN.md 为版本特性 × 领域
+    # 反查矩阵系列。197 矩阵 §6 维护规则明确说明“复制本文件为 feature_domain_matrix_1XX.md，保留 9 列
+    # 顺序不变”；各版本行（特性列表）与单元格锚点均不同，共享的是矩阵模板骨架，属版本快照系列，
+    # 非概念正文重复。登记 SERIES 以避免 MERGE 阻断并覆盖未来 1.99/1.100 等新增矩阵。
+    re.compile(r"concept/07_future/00_version_tracking/feature_domain_matrix_1\d{2}\.md$"),
 ]
 
 # ---------------------------------------------------------------------------

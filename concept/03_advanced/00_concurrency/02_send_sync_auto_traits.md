@@ -33,6 +33,11 @@
 > [std::marker::Send](https://doc.rust-lang.org/std/marker/trait.Send.html) ·
 > [std::marker::Sync](https://doc.rust-lang.org/std/marker/trait.Sync.html) ·
 > [RFC 0019 — Opt-in builtin traits](https://rust-lang.github.io/rfcs/0019-opt-in-builtin-traits.html)
+>
+> **变更日志**:
+>
+> - v1.0 (2026-05-12): 初始版本，建立 Send/Sync 形式化契约、auto trait 推导、判定矩阵、反例与 unsafe 手动 impl 边界
+> - v1.1 (2026-07-31): Q3 国际来源审计——在 unsafe 手动 impl 正例中新增 Rustonomicon `Carton<T>` 模式，说明可借用 `Box<T>` 已验证契约来约束自定义指针类型的 Send/Sync 实现。
 
 ## 📑 目录
 
@@ -429,6 +434,17 @@ struct MmapHandle {
 //         类型不提供 &self 的写路径 ⟹ 转移所有权不会引入数据竞争。
 unsafe impl Send for MmapHandle {}
 // 故意不 impl Sync：&MmapHandle 共享虽只读，但保守起见不承诺
+
+/// 另一个常见模式：自定义“类 Box”指针可以借用标准库已验证的契约。
+/// Rustonomicon 中的 Carton<T> 示例表明，若类型语义与 `Box<T>` 相同，
+/// 可直接用 `where Box<T>: Send` / `where Box<T>: Sync` 作为人工 impl 的约束，
+/// 从而复用 `Box` 的安全论证（见 [Rustonomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html)）。
+struct Carton<T>(std::ptr::NonNull<T>);
+
+// Safety: Carton 拥有唯一的堆指针，语义与 Box<T> 相同；
+//         因此 Send/Sync 条件与 Box<T> 完全一致。
+unsafe impl<T> Send for Carton<T> where Box<T>: Send {}
+unsafe impl<T> Sync for Carton<T> where Box<T>: Sync {}
 
 impl MmapHandle {
     fn write_byte(&mut self, off: usize, b: u8) {

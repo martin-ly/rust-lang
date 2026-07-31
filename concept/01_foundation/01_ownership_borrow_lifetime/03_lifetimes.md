@@ -43,6 +43,7 @@
 - v2.2 (2026-05-19): 补全权威来源标注——新增跨语言生命周期（Lifetimes）对比矩阵（C++ / Haskell / Go），补充 Polonius 与 Tree Borrows 来源，深化 NLL → Polonius 演进论证
 - v2.4 (2026-07-28): P2 跨层去重——§1.3b 中 NLL/Polonius 详细算法与演进链迁移至 L3/L4 权威页 [NLL 与 Polonius](../../03_advanced/02_unsafe/03_nll_and_polonius.md)，本页保留 L1 直觉与形式化演进链概要
 - v2.3 (2026-07-28): P1 语义补齐——扩展生命周期省略规则（trait object 默认边界、`const`/`static` 隐式 `'static`、函数指针/闭包 trait elision、`'_` placeholder），明确 `'static ⊑ 'a` 中 `⊑` 表示 outlives 且与 subtype 方向相反；Rust 版本更新至 1.97.1+
+- v2.5 (2026-07-31): Q3 国际来源审计——在 `'_` placeholder 示例旁补充 Rust Reference "using `'_` is preferred" 的偏好说明，强化与 [Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) 的锚点对齐。
 - v2.1 (2026-05-13): Phase BC 形式化深化——新增§1.3b Tofte-Talpin 区域推断算法的 Rust 适配（原始 ML 算法概述、三项关键适配、Rust 约束生成与求解两阶段算法、与 Polonius 演进关系）
 - v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡
 
@@ -327,6 +328,7 @@ fn borrowed_trait_object<'a>(s: &'a str) -> Box<dyn std::fmt::Display + 'a> {
 }
 
 // '_ 占位符：避免 dyn Trait 默认 'static，同时无需命名生命周期
+// Rust Reference 指出：在路径中使用 `'_` 是 preferred 写法（参见 Lifetime Elision 章）。
 fn elided_trait_object(s: &str) -> Box<dyn std::fmt::Display + '_> {
     Box::new(s)
 }

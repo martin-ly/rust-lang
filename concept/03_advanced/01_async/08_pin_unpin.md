@@ -39,6 +39,7 @@
 > - v1.0 (2026-05-12): 初始版本，覆盖 Pin/Unpin 核心概念、API 契约、自引用构建与常见陷阱
 > - v1.1 (2026-07-28): P1 语义补齐——新增 structural pinning、`Pin::set`、非结构 vs 结构字段投影、`Pin<&mut ManuallyDrop<T>>` 不可创建的原因；引用 std::pin 模块文档；Rust 版本更新至 1.97.1+
 > - v1.2 (2026-07-28): P2-4 深化——新增 `std::pin::Pin` 逐 API 对照表（构造/访问/转换/投影），链接到官方方法锚点；补充 `Pin::map_unchecked_mut` 与 structural pinning 的关系及 `ManuallyDrop` 反模式
+> - v1.3 (2026-07-31): Q3 国际来源审计——新增 `std::pin::pin!` 栈上固定完整示例，链接到官方 macro 锚点；与 [std::pin](https://doc.rust-lang.org/std/pin/index.html) 文档对齐。
 
 ## 📑 目录
 >
@@ -761,6 +762,33 @@ fn main() {
 > 1) `Box::pin(SelfRef::new())` — 堆分配 + Pin；
 > 2) `pin_utils::pin_mut!` — 栈上 Pin（unsafe）；
 > 3) `std::pin::pin!`（1.68+，安全栈 Pin）。
+>
+> **栈上 Pin 示例（`pin!`）**：
+>
+> ```rust
+> use std::marker::PhantomPinned;
+> use std::pin::{pin, Pin};
+>
+> /// 一个需要固定地址的类型：包含自引用字段时应使用 PhantomPinned。
+> struct SelfRef {
+>     data: String,
+>     _pin: PhantomPinned,
+> }
+>
+> fn stack_pin_demo() {
+>     let value = SelfRef {
+>         data: String::from("pinned on stack"),
+>         _pin: PhantomPinned,
+>     };
+>     // pin! 在栈上固定 value，返回 Pin<&mut SelfRef>；
+>     // value 在作用域结束前不会被移动，离开作用域后自动 drop。
+>     let pinned: Pin<&mut SelfRef> = pin!(value);
+>     assert_eq!(pinned.data, "pinned on stack");
+> }
+> ```
+>
+> [来源: [std::pin::pin macro](https://doc.rust-lang.org/std/pin/macro.pin.html)]
+>
 > `Unpin` trait 标记"移动安全"的类型：
 > 大多数类型自动实现 `Unpin`，但含自引用字段的类型应 `!Unpin`（通过 `PhantomPinned`）。
 > 这与 C++ 的 `this` 指针（对象移动后 `this` 不变，但内部指针可能悬垂）或 Swift 的引用类型（堆分配不移动）不同

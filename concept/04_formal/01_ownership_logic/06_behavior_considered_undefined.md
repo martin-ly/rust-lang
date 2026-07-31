@@ -15,6 +15,7 @@
 > - v1.0 (2026-07-10): 初始版本，覆盖 Rust Reference UB 清单核心条目
 > - v1.1 (2026-07-28): P1 语义补齐——扩展悬垂/未对齐指针细节（`isize::MAX` span 边界、`size_of_val`、引用/`Box` 显式存活期、misaligned place projection）、无效值边界（union/padding 读取例外）；更新 Rust 版本至 1.97.1+
 > - v1.2 (2026-07-28): P2-5 深化——将 §二 UB 清单 11 项及 §三 细节逐条链接到 Rust Reference `r-undefined.*` 规则锚点；新增 §七 BCU 规则锚点映射表
+> - v1.3 (2026-07-31): Q3 国际来源审计——在 §二 UB 清单顶部复现 Rust Reference 关于清单非穷尽、未来可能增减的警告，避免读者将当前清单视为不变规范。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
 > **前置依赖**: [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Atomics and Memory Ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) · [Pointer Aliasing](02_ownership_formal.md)
@@ -41,6 +42,9 @@
 ---
 
 ## 二、UB 清单
+
+> **Reference 警告**：下列清单**非穷尽**，未来可能增减；Rust 目前尚未对 unsafe 代码建立完整的形式化语义模型。此外，列表中的某些行为在未来版本中可能被定义为合法——本清单不承诺任何条目“永远 UB”。
+> (Source: [Rust Reference — Behavior Considered Undefined § warning](https://doc.rust-lang.org/reference/behavior-considered-undefined.html))
 
 本节聚焦「UB 清单」，覆盖数据竞争（Data races）、访问悬垂或基于未对齐指针的 place、越界 place projection、破坏指针别名规则等方面。论述顺序由定义到边界：先明确「UB 清单」在「未定义行为清单（Behavior Considered Undefined）」中的确切含义与适用范围，再给出可核验的例证或数据，最后标注它与相邻主题的分界线。读完后应能用一句话复述「UB 清单」的判定标准，并指出它在全页论证链中的位置。
 
