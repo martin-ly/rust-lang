@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 666,
-    "generated_at": "2026-07-31T19:28:49.936421+00:00"
+    "generated_at": "2026-07-31T19:32:51.341915+00:00"
   },
   "files": [
     {
@@ -81713,7 +81713,7 @@
       "layer": "L7",
       "title": "Rust 1.99+ 前沿特性预览",
       "positioning": "",
-      "line_count": 297,
+      "line_count": 339,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -81746,7 +81746,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 45,
+      "matrix_rows": 77,
       "pre_post": {
         "pre": [
           "[Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md) · [Cargo 入门](../../06_ecosystem/01_cargo/15_cargo_getting_started.md)"

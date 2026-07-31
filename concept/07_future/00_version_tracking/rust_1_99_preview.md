@@ -16,7 +16,7 @@
 > **当前阶段**: 🧪 Nightly 实验性 / 设计或 MCP 阶段
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **状态**: 特性集高度不确定，稳定时间和具体内容以官方发布为准
-> **最后更新**: 2026-07-31
+> **最后更新**: 2026-08-01
 >
 > **权威来源**:
 >
@@ -99,6 +99,48 @@ mindmap
 | `extern "custom"` | FCP finished | [tracking issue](https://github.com/rust-lang/rust/issues/127030) |
 
 > **维护约定**：每两周按 Rust Forge 发布节奏核对本表；1.99.0 进入 beta 后（预计 2026-08-14）将状态迁移更新，稳定后建立 `rust_1_99_stabilized.md`。
+
+---
+
+## 零之一、1.99+ 周期国际上游动态（2026-08-01 releases.rs 巡检）
+
+> **来源**: [releases.rs](https://releases.rs/)（2026-08-01 12:50 UTC 生成）· 仅收录已进入 `final-comment-period` / `proposed-final-comment-period` / `disposition-merge` 等实质性推进阶段、可能进入 1.99/1.100 稳定周期的 PR。
+
+| 特性 | 当前阶段 | 领域 | 跟踪 PR / 说明 |
+|:---|:---|:---|:---|
+| `windows_process_extensions_main_thread_handle` | waiting-on-review / needs-fcp | Platform/Std | PR #160108 — Windows 主线程句柄扩展 |
+| `c_variadic_naked_functions` | final-comment-period / disposition-merge | Language/FFI | PR #159746 — C 变参 naked 函数 ABI |
+| Attributes on closure and method call expressions | blocked / needs-fcp | Language | PR #159581 — 闭包/方法调用表达式上的属性 |
+| 128-bit integers via vector registers in `asm!` (x86) | final-comment-period / disposition-merge | Language/Inline-asm | PR #159525 — x86 `asm!` 128 位整数向量寄存器传参 |
+| `mpmc_channel` | waiting-on-fcp | Std/Concurrency | PR #158729 — 多生产者多消费者通道 |
+| s390x `backchain` target-feature | proposed-final-comment-period | Platform | PR #158612 — s390x backchain 目标特性 |
+| `extern "custom"` | waiting-on-review / disposition-merge | Language/FFI | PR #158504 — 自定义 ABI（已在 §零 收录，此处复核） |
+| `size_of_val_raw` / `align_of_val_raw` / `Layout::for_value_raw` | waiting-on-review / disposition-merge | Language/Unsafe | PR #158729 — 裸大小/对齐计算 |
+| `#[optimize]` attribute | proposed-final-comment-period | Language/Attributes | PR #157572 — 优化属性 |
+| `Rng` / `SystemRng` | proposed-final-comment-period | Std/Random | PR #157273 — 新随机数生成器 API |
+| `-Zprofile-sample-use` | proposed-final-comment-period | Compiler/LLVM | PR #157168 — PGO sample-based profile |
+| Never type (`!`) stabilization | blocked / finished-fcp / needs-ref-pr | Language | PR #155942 — `!` 类型稳定化（已在 §零 收录，此处复核） |
+| `ptr::try_cast_aligned` | blocked | Std/Unsafe | PR #154770 — 对齐指针尝试转换 |
+| `fN::BITS` | waiting-on-review | Std/Numerics | PR #154170 — 浮点 `BITS` 常量 |
+| `alignment_type` (partial stabilize) | proposed-final-comment-period / waiting-on-fcp | Std/Unsafe | PR #154065 — 对齐类型 |
+| rustdoc `--merge` / `--parts-out-dir` / `--include-parts-dir` | blocked | Tooling | PR #153261 — rustdoc 分段合并 |
+| `refcell_try_map` | waiting-on-author | Std/Collections | PR #152122 — RefCell 映射 |
+| `proc_macro_value` | waiting-on-review / needs-fcp | Macros | PR #152092 — 过程宏值 |
+| `-Cdebuginfo-compression` | waiting-on-author | Compiler/LLVM | PR #151973 — 调试信息压缩 |
+| `doc_cfg` | waiting-on-review / blocked | Tooling | PR #150625 — rustdoc cfg 文档 |
+| `supertrait_item_shadowing` | proposed-final-comment-period | Language/Traits | PR #150055 — 超trait项遮蔽 |
+| Frontmatter | blocked / finished-fcp | Language/Tooling | PR #148605 — 文件前置元数据 |
+| Stack-protector | proposed-final-comment-period / blocked | Compiler/Security | PR #148051 — 栈保护 |
+| `debug_closure_helpers` | blocked | Tooling | PR #146369 — 闭包调试辅助 |
+| `-Cmin-function-alignment` | blocked / waiting-on-docs | Compiler/LLVM | PR #146099 — 函数最小对齐 |
+| `breakpoint` intrinsic | proposed-final-comment-period | Language | PR #142824 — 断点内建函数 |
+| `more_qualified_paths` | waiting-on-author | Language | PR #142325 — 更多限定路径 |
+| `#[align(N)]` on functions (`fn_align`) | blocked / waiting-on-docs | Language/Attributes | PR #141922 — 函数对齐属性 |
+| `offset_of_slice` | waiting-on-author | Language/Unsafe | PR #140261 — 切片字段偏移 |
+| `derive(CoercePointee)` | blocked / finished-fcp | Type system | PR #139673 — 强制点ee派生（已在 §零 收录，此处复核） |
+| ATPIT (associated type position impl Trait) | proposed-final-comment-period / blocked | Type system | PR #133820 — 关联类型位置 impl Trait |
+
+> **判断**：上述 PR 多数处于 FCP 或排队阶段，**不能保证全部进入 1.99.0 stable**；它们将按 Rust 列车模型在 1.99.0/1.100.0/更晚版本中分批落地。本表仅作为国际上游最新动态的本地索引，具体以对应版本的官方 release notes 为准。
 
 ---
 
