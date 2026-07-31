@@ -11,7 +11,7 @@
 > **Bloom 层级**: L3-L5
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: P×Eva — 评估与优化生成代码质量
-> **前置概念**: [过程宏（Procedural Macro）](02_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md) · [泛型（Generics）](../../02_intermediate/01_generics/01_generics.md)
+> **前置概念**: [过程宏（Procedural Macro）](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md) · [泛型（Generics）](../../02_intermediate/01_generics/01_generics.md)
 > **后置概念**: [生产级宏（Macro）开发](05_production_grade_macro_development.md) · [宏调试与诊断](04_macro_debugging_and_diagnostics.md)
 >
 > **主要来源**:

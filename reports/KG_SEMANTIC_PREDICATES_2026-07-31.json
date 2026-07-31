@@ -18,95 +18,95 @@
     "framework"
   ],
   "min_confidence": 0.75,
-  "processed_entities": 564,
-  "processed_relations": 19232,
-  "processed_generic_remaining": 802,
-  "changed_relations": 8910,
+  "processed_entities": 581,
+  "processed_relations": 19702,
+  "processed_generic_remaining": 864,
+  "changed_relations": 9094,
   "below_threshold_skipped": 0,
   "batch_statistics": [
     {
       "batch": "l1",
       "entities": 52,
-      "relations": 1515,
+      "relations": 1530,
       "generic_remaining": 67,
-      "generic_ratio": 0.0442
+      "generic_ratio": 0.0438
     },
     {
       "batch": "l2",
-      "entities": 41,
-      "relations": 1202,
-      "generic_remaining": 44,
+      "entities": 44,
+      "relations": 1257,
+      "generic_remaining": 46,
       "generic_ratio": 0.0366
     },
     {
       "batch": "async",
       "entities": 16,
-      "relations": 545,
+      "relations": 558,
       "generic_remaining": 18,
-      "generic_ratio": 0.033
+      "generic_ratio": 0.0323
     },
     {
       "batch": "unsafe",
-      "entities": 10,
-      "relations": 394,
-      "generic_remaining": 11,
-      "generic_ratio": 0.0279
+      "entities": 11,
+      "relations": 397,
+      "generic_remaining": 12,
+      "generic_ratio": 0.0302
     },
     {
       "batch": "formal",
-      "entities": 98,
-      "relations": 1893,
+      "entities": 99,
+      "relations": 1906,
       "generic_remaining": 80,
-      "generic_ratio": 0.0423
+      "generic_ratio": 0.042
     },
     {
       "batch": "l5",
       "entities": 27,
-      "relations": 699,
+      "relations": 708,
       "generic_remaining": 22,
-      "generic_ratio": 0.0315
+      "generic_ratio": 0.0311
     },
     {
       "batch": "l6_concept",
-      "entities": 125,
-      "relations": 2288,
+      "entities": 135,
+      "relations": 2428,
       "generic_remaining": 134,
-      "generic_ratio": 0.0586
+      "generic_ratio": 0.0552
     },
     {
       "batch": "l7",
       "entities": 73,
-      "relations": 1375,
-      "generic_remaining": 73,
-      "generic_ratio": 0.0531
+      "relations": 1401,
+      "generic_remaining": 93,
+      "generic_ratio": 0.0664
     },
     {
       "batch": "l3_rem",
-      "entities": 43,
-      "relations": 946,
-      "generic_remaining": 47,
-      "generic_ratio": 0.0497
+      "entities": 44,
+      "relations": 919,
+      "generic_remaining": 45,
+      "generic_ratio": 0.049
     },
     {
       "batch": "meta_navigation",
       "entities": 29,
-      "relations": 3485,
+      "relations": 3509,
       "generic_remaining": 63,
-      "generic_ratio": 0.0181
+      "generic_ratio": 0.018
     },
     {
       "batch": "ecosystem",
-      "entities": 151,
-      "relations": 2621,
+      "entities": 161,
+      "relations": 2762,
       "generic_remaining": 136,
-      "generic_ratio": 0.0519
+      "generic_ratio": 0.0492
     },
     {
       "batch": "future",
-      "entities": 73,
-      "relations": 1375,
-      "generic_remaining": 73,
-      "generic_ratio": 0.0531
+      "entities": 74,
+      "relations": 1413,
+      "generic_remaining": 93,
+      "generic_ratio": 0.0658
     },
     {
       "batch": "rustc_internals",
@@ -118,29 +118,29 @@
     {
       "batch": "framework",
       "entities": 24,
-      "relations": 585,
-      "generic_remaining": 29,
-      "generic_ratio": 0.0496
+      "relations": 605,
+      "generic_remaining": 50,
+      "generic_ratio": 0.0826
     }
   ],
   "before_type_distribution": {
-    "ex:RelationAnnotation": 9584
+    "ex:RelationAnnotation": 9813
   },
   "after_type_distribution": {
-    "ex:relatedTo": 6979,
-    "ex:dependsOn": 1011,
-    "ex:entails": 920,
-    "ex:RelationAnnotation": 674
+    "ex:relatedTo": 7101,
+    "ex:dependsOn": 1045,
+    "ex:entails": 948,
+    "ex:RelationAnnotation": 719
   },
   "before_predicate_distribution": {
-    "ex:relatedTo": 7578,
-    "ex:dependsOn": 1056,
-    "ex:entails": 950
+    "ex:relatedTo": 7743,
+    "ex:dependsOn": 1091,
+    "ex:entails": 979
   },
   "after_predicate_distribution": {
-    "ex:relatedTo": 7578,
-    "ex:dependsOn": 1056,
-    "ex:entails": 950
+    "ex:relatedTo": 7743,
+    "ex:dependsOn": 1091,
+    "ex:entails": 979
   },
   "changes_sample": [
     {
@@ -2304,7 +2304,7 @@
     {
       "@id": "_:rel177",
       "subject": "ex:ModulesAndPaths",
-      "object": "ex:CoreCrates",
+      "object": "ex:CoreCratesIndex",
       "subject_path": "01_foundation/07_modules_and_items/01_modules_and_paths.md",
       "object_path": "06_ecosystem/02_core_crates/01_core_crates.md",
       "old_type": "ex:RelationAnnotation",

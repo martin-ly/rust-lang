@@ -109,7 +109,7 @@ graph TD
 | 构造函数 / 初始化列表 | 结构体字面量 / `new` 约定 | [Construction](../../02_intermediate/00_traits/05_construction_and_initialization.md) |
 | 默认构造 / `constexpr` | `Default` / `const fn` | [Construction](../../02_intermediate/00_traits/05_construction_and_initialization.md) |
 | 三/五/零法则 | `Copy` / `Clone` / `Drop` | [Construction §5](../../02_intermediate/00_traits/05_construction_and_initialization.md) |
-| 预处理器 / `#define` | `macro_rules!` / `#[cfg]` | [Preprocessor vs Macros](../../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md) |
+| 预处理器 / `#define` | `macro_rules!` / `#[cfg]` | [Preprocessor vs Macros](../../02_intermediate/06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md) |
 | 模板元编程 / `constexpr` | `const fn` / 类型级状态机 | [Traits §5.8.4](../../02_intermediate/00_traits/01_traits.md) |
 
 ### 2.5 ABI 与运行时簇
@@ -202,7 +202,7 @@ RTTI / Friend / Preprocessor（逐个主题扫尾）
 | 底层系统 / 嵌入式 | [C++ ABI Object Model](../../05_comparative/01_systems_languages/02_cpp_abi_object_model.md) | [Rust FFI](../../03_advanced/04_ffi/01_rust_ffi.md) |
 | 游戏 / 高性能计算 | [Variable Model](../../01_foundation/03_values_and_references/03_variable_model.md) | [Move 语义](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) |
 | 企业后端 | [Exception Safety](../../02_intermediate/03_error_handling/04_exception_safety_rust_cpp.md) | [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) |
-| 编译器 / 元编程 | [Preprocessor vs Macros](../../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md) | [Macros](../../03_advanced/03_proc_macros/01_macros.md) |
+| 编译器 / 元编程 | [Preprocessor vs Macros](../../02_intermediate/06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md) | [Macros](../../03_advanced/03_proc_macros/01_macros.md) |
 
 ## 五、主题簇选择决策树
 
@@ -230,7 +230,7 @@ flowchart TD
 - 异常安全深度 ✅ [Exception Safety](../../02_intermediate/03_error_handling/04_exception_safety_rust_cpp.md)
 - SFINAE / 模板元编程 ✅ [Traits §5.8](../../02_intermediate/00_traits/01_traits.md)
 - 构造/初始化/运算符/RTTI/友元 ✅ [Surface Features](../../05_comparative/00_paradigms/03_cpp_rust_surface_features.md) + 专门文件
-- 预处理器 vs 宏 ✅ [Preprocessor vs Macros](../../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md)
+- 预处理器 vs 宏 ✅ [Preprocessor vs Macros](../../02_intermediate/06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md)
 
 ## 七、L1 / L2 / L3 总结
 

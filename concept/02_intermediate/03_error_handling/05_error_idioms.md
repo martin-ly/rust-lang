@@ -130,7 +130,10 @@ fn main() -> anyhow::Result<()> {
 把 `Option` 转成 `Result`，当值为 `None` 时返回错误。
 
 ```rust
-fn find_user(id: u64) -> Option<User> { /* ... */ }
+#[derive(Debug, PartialEq)]
+struct User { id: u64 }
+
+fn find_user(_id: u64) -> Option<User> { None }
 
 fn get_user(id: u64) -> Result<User, &'static str> {
     find_user(id).ok_or("user not found")

@@ -315,11 +315,14 @@
 | **Trait Bounds** | [L2: Trait](../../02_intermediate/00_traits/01_traits.md) | L2 泛型、L4 约束求解 | 应用 | ← Trait + 泛型 → where 子句 |
 | **Trait Objects (dyn)** | [L1: 类型系统](../../01_foundation/02_type_system/01_type_system.md) | L2 Trait、L4 存在类型 | 分析 | ⊘ 泛型 → 动态分发 |
 | **Typestate Pattern** | [L6: 设计模式](../../06_ecosystem/03_design_patterns/01_patterns.md) | L1 所有权、L2 泛型 | 分析 | ← 所有权 → 编译期状态机 |
-| **Core Crates** | [L6: 核心库谱系](../../06_ecosystem/02_core_crates/01_core_crates.md) | L1-L5 全部 | 应用 | ← 概念 → 工程选型 |
-| **serde** | [L6: 核心库谱系](../../06_ecosystem/02_core_crates/01_core_crates.md) | L2 Trait、L1 类型系统 | 应用 | ← derive → 序列化 |
-| **tokio** | [L6: 核心库谱系](../../06_ecosystem/02_core_crates/01_core_crates.md) | L3 async、L1 Send/Sync | 应用 | ← 运行时 → 异步生态 |
-| **axum** | [L6: 核心库谱系](../../06_ecosystem/02_core_crates/01_core_crates.md) | L2 Trait、L3 async | 应用 | ← Handler → Web 后端 |
-| **clap** | [L6: 核心库谱系](../../06_ecosystem/02_core_crates/01_core_crates.md) | L2 Trait、L1 类型系统 | 应用 | ← Parser → CLI |
+| **Core Crates** | [L6: 核心库谱系索引](../../06_ecosystem/02_core_crates/01_core_crates.md) | L1-L5 全部 | 应用 | ← 概念 → 工程选型 |
+| **serde** | [L6: Serde](../../06_ecosystem/02_core_crates/02_serde.md) | L2 Trait、L1 类型系统 | 应用 | ← derive → 序列化 |
+| **tokio** | [L6: Tokio](../../06_ecosystem/02_core_crates/03_tokio.md) | L3 async、L1 Send/Sync | 应用 | ← 运行时 → 异步生态 |
+| **clap** | [L6: Clap](../../06_ecosystem/02_core_crates/04_clap.md) | L2 Trait、L1 类型系统 | 应用 | ← Parser → CLI |
+| **tracing** | [L6: Tracing](../../06_ecosystem/02_core_crates/05_tracing.md) | L2 Trait、L3 async | 应用 | ← span → 可观测性 |
+| **reqwest** | [L6: Reqwest](../../06_ecosystem/02_core_crates/06_reqwest.md) | L3 async、L2 Trait | 应用 | ← Client → HTTP 客户端 |
+| **axum** | [L6: Axum](../../06_ecosystem/02_core_crates/07_axum.md) | L2 Trait、L3 async | 应用 | ← Handler → Web 后端 |
+| **sqlx** | [L6: SQLx](../../06_ecosystem/02_core_crates/08_sqlx.md) | L2 泛型、L3 宏、L1 生命周期 | 应用 | ← query! → 类型安全 SQL |
 | **Application Domains** | [L6: 应用主题](../../06_ecosystem/06_data_and_distributed/01_application_domains.md) | L1-L5、L6 Crates | 评价 | ← 概念+crate → 工程落地 |
 | **Web Backend** | [L6: 应用主题](../../06_ecosystem/06_data_and_distributed/01_application_domains.md) | L3 async、L2 Trait | 应用 | ← axum+tokio → 微服务 |
 | **Embedded Rust** | [L6: 应用主题](../../06_ecosystem/06_data_and_distributed/01_application_domains.md) | L3 unsafe、L1 no_std | 应用 | ← embassy → 裸机 |

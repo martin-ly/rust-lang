@@ -63,7 +63,9 @@ mindmap
   - [九、边界测试](#九边界测试)
     - [9.1 边界测试：在单核裸机中使用自旋锁（死锁）](#91-边界测试在单核裸机中使用自旋锁死锁)
     - [9.2 边界测试：临界区内调用可能阻塞的操作](#92-边界测试临界区内调用可能阻塞的操作)
-  - [十、相关概念](#十相关概念)
+  - [十、no_std 同步原语属性矩阵](#十no_std-同步原语属性矩阵)
+  - [十一、同步策略决策树](#十一同步策略决策树)
+  - [十二、相关概念](#十二相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -376,7 +378,39 @@ with(|cs| {
 
 ---
 
-## 十、相关概念
+## 十、no_std 同步原语属性矩阵
+
+| 机制 | 原子性保证 | 中断安全 | 多核/SMP | 典型开销 | 最佳适用场景 |
+|:---|:---|:---:|:---:|:---|:---|
+| `critical_section::with` + `Mutex<RefCell<T>>` | 关中断 / 全局自旋锁 | ✅ | 可配（多核需全局锁） | 关中断延迟 | 中断与主循环共享非 `Sync` 数据 |
+| `bare_metal::Mutex` | 同 critical-section（旧生态） | ✅ | 单核 | 低 | 维护旧代码 |
+| 自旋锁（`SpinLock`） | 原子自旋等待 | ❌（单核死锁风险） | ✅ | 总线占用 | 多核早期启动、SMP |
+| `AtomicXxx` | 硬件原子指令 | ✅ | ✅（需正确 Ordering） | 最低 | 计数器、标志、单字共享 |
+| SPSC ring buffer | 原子头/尾索引 | ✅ | 否 | 极低 | 中断-主循环批量数据流 |
+| RTIC `#[shared]` 资源 | 优先级天花板 | ✅ | 单核 | 零额外 | RTIC 任务间共享资源 |
+
+> **补充**：对于没有原生 64-bit 或 compare-exchange 指令的目标（如某些 RISC-V MCU），可使用 [`portable-atomic`](https://docs.rs/portable-atomic/) crate 提供缺失的原子操作。
+
+---
+
+## 十一、同步策略决策树
+
+```mermaid
+graph TD
+    A[需要保护共享资源] --> B{资源是否可表示为单字整数/标志?}
+    B -->|是| C[AtomicXxx]
+    B -->|否| D{是否运行在 RTIC 框架?}
+    D -->|是| E[RTIC shared resource]
+    D -->|否| F{是否单核裸机?}
+    F -->|是| G[critical_section::Mutex<RefCell<T>>]
+    F -->|否| H{是否高竞争或跨核?}
+    H -->|是| I[自旋锁 + 关本地中断]
+    H -->|否| J[临界区 + 原子状态机]
+```
+
+---
+
+## 十二、相关概念
 
 - [Cortex-M 异常模型](14_interrupt_and_exception_model.md)
 - [PAC 与 HAL 实现](17_pac_hal_implementation.md)
@@ -386,6 +420,7 @@ with(|cs| {
 - [原子操作](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md)
 - [Rust vs C++：形式系统模型 vs 机制工程模型](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 - [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
+- [`#![no_std]` 与裸机编程惯用法](23_no_std_and_bare_metal_idioms.md)
 
 ---
 

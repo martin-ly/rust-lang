@@ -11,7 +11,7 @@
 > **Bloom 层级**: L3-L4
 > **A/S/P 标记**: **P** — Procedure
 > **双维定位**: P×App — 宏（Macro）调试与错误诊断流程
-> **前置概念**: [过程宏（Procedural Macro）](02_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md)
+> **前置概念**: [过程宏（Procedural Macro）](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md)
 > **后置概念**: [生产级宏（Macro）开发](05_production_grade_macro_development.md) · [rustc 编译器诊断](../../06_ecosystem/00_toolchain/11_compiler_diagnostics_and_ui_tests.md)
 >
 > **主要来源**:
@@ -374,7 +374,7 @@ impl rustc_driver::Callbacks for MyCallbacks {
 
 ## 🔗 概念关系
 
-- **上位（is-a）**：[过程宏](02_proc_macro.md) 的工程化支撑层（调试 / 诊断 / 性能）。
+- **上位（is-a）**：[过程宏](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) 的工程化支撑层（调试 / 诊断 / 性能）。
 - **下位（实例）**：cargo expand、syn::Error、proc-macro-error、`--timings` 四组工具。
 - **组合**：与 [宏卫生](09_macro_hygiene.md)（Span 决定错误定位精度）组合。
 - **依赖**：依赖 [常用开发工具](../../01_foundation/10_testing_basics/02_useful_development_tools.md) 的工具链。

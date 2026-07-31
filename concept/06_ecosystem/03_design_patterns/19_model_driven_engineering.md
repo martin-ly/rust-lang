@@ -13,7 +13,7 @@
 > **A/S/P 标记**: **P+S+A** — Procedure + Structure + Application
 > **双维定位**: C×Syn — 综合模型抽象与代码生成的结构映射
 > **定位**: 从 MDA 抽象层、DSL 工程与模型变换语义出发，将模型驱动思想映射到 Rust 的宏系统与类型驱动生成。
-> **前置概念**: [元编程与宏](../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md) · [形式化设计模式理论](11_formal_design_pattern_theory.md) · [模式组合代数](16_pattern_composition_algebra.md) · [工作流理论与形式化](17_workflow_theory.md)
+> **前置概念**: [元编程与宏](../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md) · [形式化设计模式理论](11_formal_design_pattern_theory.md) · [模式组合代数](16_pattern_composition_algebra.md) · [工作流理论与形式化](17_workflow_theory.md)
 > **后置概念**: [API 设计模式](18_api_design_patterns.md) · [Rust 嵌入式系统开发](../05_systems_and_embedded/03_embedded_systems.md) · [语言语义模型矩阵](../../05_comparative/00_paradigms/05_language_semantic_model_matrix.md)
 
 ---
@@ -53,11 +53,11 @@
     - [边界：Rust 宏不是完整的语言工作台](#边界rust-宏不是完整的语言工作台)
     - [边界：过程宏的错误信息可控性有限](#边界过程宏的错误信息可控性有限)
   - [九、嵌入式测验（Embedded Quiz）](#九嵌入式测验embedded-quiz)
-    - [测验 1：MDA 三层模型中，哪个层描述业务意图而不关心计算平台？](#测验-1mda-三层模型中哪个层描述业务意图而不关心计算平台)
-    - [测验 2：内部 DSL 与外部 DSL 的核心区别是什么？](#测验-2内部-dsl-与外部-dsl-的核心区别是什么)
-    - [测验 3：在 Rust 中，过程宏（proc-macro）最接近于 MDE 中的哪个概念？](#测验-3在-rust-中过程宏proc-macro最接近于-mde-中的哪个概念)
-    - [测验 4：Serde 在 MDE 映射中主要承担什么角色？](#测验-4serde-在-mde-映射中主要承担什么角色)
-    - [测验 5：往返工程（Round-Trip Engineering）的主要难点是什么？](#测验-5往返工程round-trip-engineering的主要难点是什么)
+      - [测验 1：MDA 三层模型中，哪个层描述业务意图而不关心计算平台？](#测验-1mda-三层模型中哪个层描述业务意图而不关心计算平台)
+      - [测验 2：内部 DSL 与外部 DSL 的核心区别是什么？](#测验-2内部-dsl-与外部-dsl-的核心区别是什么)
+      - [测验 3：在 Rust 中，过程宏（proc-macro）最接近于 MDE 中的哪个概念？](#测验-3在-rust-中过程宏proc-macro最接近于-mde-中的哪个概念)
+      - [测验 4：Serde 在 MDE 映射中主要承担什么角色？](#测验-4serde-在-mde-映射中主要承担什么角色)
+      - [测验 5：往返工程（Round-Trip Engineering）的主要难点是什么？](#测验-5往返工程round-trip-engineering的主要难点是什么)
   - [十、权威来源索引](#十权威来源索引)
   - [反例与边界](#反例与边界)
     - [反例：代码生成必然消除所有 bug](#反例代码生成必然消除所有-bug)

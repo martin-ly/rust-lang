@@ -4,7 +4,7 @@
     "generated": "2026-07-11",
     "rust_version": "1.97.0+",
     "source": "concept/",
-    "entity_count": 627,
+    "entity_count": 647,
     "schema": "simple KG index"
   },
   "entities": [
@@ -266,6 +266,19 @@
           "path": "pattern_semantic_space_index.md"
         }
       ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:00_meta/00_framework/README.md",
+      "path": "00_meta/00_framework/README.md",
+      "title": "",
+      "en": "Knowledge Framework Meta-Model",
+      "summary": "Meta-framework defining the cognitive architecture, semantic space, and competency topology used across the Rust knowledge base.",
+      "bloom": "L0–L7",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [],
+      "postrequisites": [],
       "theorems": [],
       "related_crates": []
     },
@@ -2861,7 +2874,7 @@
       "postrequisites": [
         {
           "title": "Proc Macros",
-          "path": "../../03_advanced/03_proc_macros/02_proc_macro.md"
+          "path": "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md"
         },
         {
           "title": "DSL",
@@ -3215,7 +3228,7 @@
         },
         {
           "title": "Proc Macros",
-          "path": "../../03_advanced/03_proc_macros/02_proc_macro.md"
+          "path": "../06_macros_and_metaprogramming/05_procedural_macros.md"
         }
       ],
       "theorems": [],
@@ -3831,21 +3844,11 @@
       "path": "02_intermediate/04_types_and_conversions/02_closure_types.md",
       "title": "",
       "en": "Closure Types",
-      "summary": "Rust closure types, capture modes, `Fn`/`FnMut`/`FnOnce` traits, and lifetime interactions.",
+      "summary": "Redirect stub: Rust closure types and capture semantics are now maintained in the canonical closures page.",
       "bloom": "L2-L3",
       "rust_version": "1.97.0+ (Edition 2024)",
-      "prerequisites": [
-        {
-          "title": "Traits",
-          "path": "../00_traits/01_traits.md"
-        }
-      ],
-      "postrequisites": [
-        {
-          "title": "Async",
-          "path": "../../03_advanced/01_async/01_async.md"
-        }
-      ],
+      "prerequisites": [],
+      "postrequisites": [],
       "theorems": [],
       "related_crates": []
     },
@@ -4179,7 +4182,7 @@
         },
         {
           "title": "Proc Macro",
-          "path": "../../03_advanced/03_proc_macros/02_proc_macro.md"
+          "path": "05_procedural_macros.md"
         },
         {
           "title": "Trait",
@@ -4204,8 +4207,8 @@
       "path": "02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
       "title": "",
       "en": "Macro Patterns",
-      "summary": "Macros — Macro engineering patterns: DRY code generation, API design, and compile-time computation without harming readability.",
-      "bloom": "L3-L4",
+      "summary": "Index/stub for macro engineering patterns; full content moved to declarative and procedural macro canonical pages.",
+      "bloom": "L3",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [
         {
@@ -4219,8 +4222,8 @@
       ],
       "postrequisites": [
         {
-          "title": "Proc Macros",
-          "path": "../../03_advanced/03_proc_macros/02_proc_macro.md"
+          "title": "Metaprogramming",
+          "path": "06_metaprogramming.md"
         },
         {
           "title": "DSL",
@@ -4231,8 +4234,78 @@
       "related_crates": []
     },
     {
-      "id": "concept:02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md",
-      "path": "02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md",
+      "id": "concept:02_intermediate/06_macros_and_metaprogramming/04_declarative_macros.md",
+      "path": "02_intermediate/06_macros_and_metaprogramming/04_declarative_macros.md",
+      "title": "",
+      "en": "Declarative Macros",
+      "summary": "Declarative macros in Rust: `macro_rules!` syntax, hygiene, fragment specifiers, repetitions, TT-munching, and common pitfalls.",
+      "bloom": "L2-L3",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Attributes and Macros",
+          "path": "../../01_foundation/09_macros_basics/01_attributes_and_macros.md"
+        },
+        {
+          "title": "Traits",
+          "path": "../00_traits/01_traits.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Procedural Macros",
+          "path": "05_procedural_macros.md"
+        },
+        {
+          "title": "DSL",
+          "path": "02_dsl_and_embedding.md"
+        },
+        {
+          "title": "Metaprogramming",
+          "path": "06_metaprogramming.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
+      "path": "02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
+      "title": "",
+      "en": "Procedural Macros",
+      "summary": "Procedural macros in Rust: derive, attribute, and function-like macros, `TokenStream` manipulation, syn/quote workflow, and span hygiene.",
+      "bloom": "L3-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Attributes and Macros",
+          "path": "../../01_foundation/09_macros_basics/01_attributes_and_macros.md"
+        },
+        {
+          "title": "Declarative Macros",
+          "path": "04_declarative_macros.md"
+        },
+        {
+          "title": "Traits",
+          "path": "../00_traits/01_traits.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Builder Pattern",
+          "path": "../../06_ecosystem/03_design_patterns/01_patterns.md"
+        },
+        {
+          "title": "Serde Patterns",
+          "path": "../00_traits/03_serde_patterns.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md",
+      "path": "02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md",
       "title": "",
       "en": "Metaprogramming",
       "summary": "Metaprogramming: intermediate Rust mechanisms, patterns, and practical examples.",
@@ -4251,7 +4324,7 @@
       "postrequisites": [
         {
           "title": "Proc Macros",
-          "path": "../../03_advanced/03_proc_macros/02_proc_macro.md"
+          "path": "05_procedural_macros.md"
         },
         {
           "title": "DSL",
@@ -4262,8 +4335,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md",
-      "path": "02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md",
+      "id": "concept:02_intermediate/06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md",
+      "path": "02_intermediate/06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md",
       "title": "",
       "en": "C Preprocessor vs Rust Macros",
       "summary": "Comparison between the C preprocessor (textual substitution) and Rust macros (hygienic syntax-tree metaprogramming), covering conditional compilation, include guards, and macro hygiene.",
@@ -4286,7 +4359,7 @@
       "postrequisites": [
         {
           "title": "Proc Macro",
-          "path": "../../03_advanced/03_proc_macros/02_proc_macro.md"
+          "path": "05_procedural_macros.md"
         },
         {
           "title": "DSL and Embedding",
@@ -4297,8 +4370,8 @@
       "related_crates": []
     },
     {
-      "id": "concept:02_intermediate/06_macros_and_metaprogramming/06_attributes_by_category.md",
-      "path": "02_intermediate/06_macros_and_metaprogramming/06_attributes_by_category.md",
+      "id": "concept:02_intermediate/06_macros_and_metaprogramming/08_attributes_by_category.md",
+      "path": "02_intermediate/06_macros_and_metaprogramming/08_attributes_by_category.md",
       "title": "",
       "en": "Attributes by Category",
       "summary": "Rust attributes are metadata annotations that influence compilation, code generation, diagnostics, linking, and tooling. This page categorizes attributes by purpose and maps them to their authoritative sources in The Rust Reference.",
@@ -4317,7 +4390,7 @@
       "postrequisites": [
         {
           "title": "Procedural Macros",
-          "path": "../../03_advanced/03_proc_macros/02_proc_macro.md"
+          "path": "05_procedural_macros.md"
         },
         {
           "title": "Conditional Compilation",
@@ -4361,6 +4434,45 @@
         {
           "title": "Performance",
           "path": "../../06_ecosystem/10_performance/01_performance_optimization.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:02_intermediate/07_iterators_and_closures/02_closures.md",
+      "path": "02_intermediate/07_iterators_and_closures/02_closures.md",
+      "title": "",
+      "en": "Closures",
+      "summary": "Rust closures: capture modes, the `Fn`/`FnMut`/`FnOnce` trait family, `move` closures, coercion rules, async closures (1.85+), and common pitfalls.",
+      "bloom": "L2-L3",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Ownership",
+          "path": "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
+        },
+        {
+          "title": "Borrowing",
+          "path": "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md"
+        },
+        {
+          "title": "Traits",
+          "path": "../00_traits/01_traits.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Iterator Patterns",
+          "path": "01_iterator_patterns.md"
+        },
+        {
+          "title": "Async Closures",
+          "path": "../../03_advanced/01_async/07_async_closures.md"
+        },
+        {
+          "title": "Advanced Traits",
+          "path": "../00_traits/04_advanced_traits.md"
         }
       ],
       "theorems": [],
@@ -5502,6 +5614,29 @@
       "related_crates": []
     },
     {
+      "id": "concept:03_advanced/02_unsafe/10_std_unsafe_internals.md",
+      "path": "03_advanced/02_unsafe/10_std_unsafe_internals.md",
+      "title": "",
+      "en": "Standard Library Unsafe Internals",
+      "summary": "Conceptual survey of how the Rust standard library uses `unsafe` internally: `Vec` raw parts, `HashMap`/`BTreeMap` invariants, `UnsafeCell`, `MaybeUninit`, raw slice helpers, internal invariants, and why the safe abstractions are sound.",
+      "bloom": "L3-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Unsafe Rust",
+          "path": "01_unsafe.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Unsafe 集合内部实现：Vec、Arc、Mutex",
+          "path": "../07_unsafe_internals/01_unsafe_collections_internals.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:03_advanced/03_proc_macros/01_macros.md",
       "path": "03_advanced/03_proc_macros/01_macros.md",
       "title": "",
@@ -5524,35 +5659,13 @@
     {
       "id": "concept:03_advanced/03_proc_macros/02_proc_macro.md",
       "path": "03_advanced/03_proc_macros/02_proc_macro.md",
-      "title": "",
+      "title": "过程宏：编译期代码生成的元编程工具",
       "en": "Procedural Macros",
-      "summary": "Authoritative guide to procedural macros: derive, attribute, and function-like macros.",
+      "summary": "Redirect stub for procedural macros; full coverage now lives at the canonical L3-L4 page.",
       "bloom": "L4-L5",
       "rust_version": "1.97.0+ (Edition 2024)",
-      "prerequisites": [
-        {
-          "title": "Macros",
-          "path": "01_macros.md"
-        },
-        {
-          "title": "Trait",
-          "path": "../../02_intermediate/00_traits/01_traits.md"
-        },
-        {
-          "title": "Type System",
-          "path": "../../01_foundation/02_type_system/01_type_system.md"
-        }
-      ],
-      "postrequisites": [
-        {
-          "title": "Serde Patterns",
-          "path": "../../02_intermediate/00_traits/03_serde_patterns.md"
-        },
-        {
-          "title": "Builder Pattern",
-          "path": "../../06_ecosystem/03_design_patterns/01_patterns.md"
-        }
-      ],
+      "prerequisites": [],
+      "postrequisites": [],
       "theorems": [],
       "related_crates": [
         "c11_macro_system_proc"
@@ -5569,11 +5682,11 @@
       "prerequisites": [
         {
           "title": "过程宏（Procedural Macro）",
-          "path": "02_proc_macro.md"
+          "path": "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md"
         },
         {
           "title": "元编程",
-          "path": "../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md"
+          "path": "../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md"
         },
         {
           "title": "泛型（Generics）",
@@ -5606,11 +5719,11 @@
       "prerequisites": [
         {
           "title": "过程宏（Procedural Macro）",
-          "path": "02_proc_macro.md"
+          "path": "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md"
         },
         {
           "title": "元编程",
-          "path": "../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md"
+          "path": "../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md"
         }
       ],
       "postrequisites": [
@@ -5639,7 +5752,7 @@
       "prerequisites": [
         {
           "title": "过程宏（Procedural Macro）",
-          "path": "02_proc_macro.md"
+          "path": "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md"
         }
       ],
       "postrequisites": [
@@ -5920,6 +6033,29 @@
       "related_crates": []
     },
     {
+      "id": "concept:03_advanced/04_ffi/06_ffi_deep_dive.md",
+      "path": "03_advanced/04_ffi/06_ffi_deep_dive.md",
+      "title": "",
+      "en": "FFI Deep Dive: C ABI, Calling Conventions and Linking",
+      "summary": "Deep dive into the mechanical layer of Rust FFI: C ABI basics, `repr(C)` layout, `extern` blocks, `unsafe extern` functions, calling conventions, C variadics, panic boundaries, `cdylib`/`staticlib`, linking, symbol mangling, and common pitfalls.",
+      "bloom": "L3-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust FFI",
+          "path": "01_rust_ffi.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Async FFI 边界",
+          "path": "04_async_ffi_boundary.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:03_advanced/05_inline_assembly/01_inline_assembly.md",
       "path": "03_advanced/05_inline_assembly/01_inline_assembly.md",
       "title": "",
@@ -5957,6 +6093,29 @@
         {
           "title": "Kernel Development",
           "path": "../../07_future/04_research_and_experimental/04_rust_for_linux.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:03_advanced/05_inline_assembly/02_inline_assembly_extended.md",
+      "path": "03_advanced/05_inline_assembly/02_inline_assembly_extended.md",
+      "title": "",
+      "en": "Inline Assembly Extended Topics: `no_std`, Kernel Code and Cross-Platform Vector Constraints",
+      "summary": "Advanced / `no_std` / kernel-oriented `asm!` use: `asm!` in `no_std`, `global_asm!` for startup code, calling from interrupt handlers, vector constraints beyond s390x, PowerPC / LoongArch notes, integration with `core::arch`, and Miri limitations for assembly.",
+      "bloom": "L3-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "内联汇编 (Inline Assembly)",
+          "path": "01_inline_assembly.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Custom Allocators",
+          "path": "../06_low_level_patterns/01_custom_allocators.md"
         }
       ],
       "theorems": [],
@@ -9976,6 +10135,45 @@
       "related_crates": []
     },
     {
+      "id": "concept:04_formal/13_semantic_engineering/06_ai_ontology_and_rust_semantics.md",
+      "path": "04_formal/13_semantic_engineering/06_ai_ontology_and_rust_semantics.md",
+      "title": "",
+      "en": "AI Ontology and Rust Semantics",
+      "summary": "Bridging knowledge engineering, large language models, and formal Rust semantics: how ontologies, knowledge graphs, and LLM-assisted extraction can represent, reason about, and validate Rust language concepts.",
+      "bloom": "L4-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Knowledge Graph Ontology",
+          "path": "../../00_meta/knowledge_topology/kg_ontology_v2.md"
+        },
+        {
+          "title": "Semantic Model Atlas",
+          "path": "../../00_meta/knowledge_topology/11_semantic_model_atlas.md"
+        },
+        {
+          "title": "Linear Logic",
+          "path": "../01_ownership_logic/01_linear_logic.md"
+        },
+        {
+          "title": "Operational Semantics",
+          "path": "../03_operational_semantics/03_operational_semantics.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Formal Methods Industrialization",
+          "path": "../../07_future/04_research_and_experimental/02_formal_methods.md"
+        },
+        {
+          "title": "LLM System Architecture",
+          "path": "../../07_future/04_research_and_experimental/08_llm_system_architecture.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:04_formal/13_semantic_engineering/README.md",
       "path": "04_formal/13_semantic_engineering/README.md",
       "title": "",
@@ -12152,8 +12350,8 @@
       "id": "concept:06_ecosystem/02_core_crates/01_core_crates.md",
       "path": "06_ecosystem/02_core_crates/01_core_crates.md",
       "title": "",
-      "en": "Core Crates",
-      "summary": "Core Crates. Guide to 03 Core Crates.",
+      "en": "Core Crates Index",
+      "summary": "Navigation index for canonical `concept/` pages covering Rust's core ecosystem crates: serde, tokio, clap, tracing, reqwest, axum, and sqlx.",
       "bloom": "L2-L6",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [
@@ -12166,6 +12364,167 @@
         {
           "title": "Application Domains",
           "path": "../06_data_and_distributed/01_application_domains.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/02_core_crates/02_serde.md",
+      "path": "06_ecosystem/02_core_crates/02_serde.md",
+      "title": "",
+      "en": "Serde",
+      "summary": "Serde is Rust's canonical serialization framework, using derive macros and the Serialize/Deserialize traits to map Rust ADTs to JSON, TOML, YAML, MessagePack, and other formats with zero-cost abstraction.",
+      "bloom": "L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Ownership",
+          "path": "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "tokio",
+          "path": "./03_tokio.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/02_core_crates/03_tokio.md",
+      "path": "06_ecosystem/02_core_crates/03_tokio.md",
+      "title": "",
+      "en": "Tokio Asynchronous Runtime",
+      "summary": "Tokio is the de-facto Rust asynchronous runtime that schedules `Future` tasks across a work-stealing thread pool while upholding `Send`/`Sync` and `Pin` safety.",
+      "bloom": "L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "所有权与借用",
+          "path": "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "axum",
+          "path": "./07_axum.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/02_core_crates/04_clap.md",
+      "path": "06_ecosystem/02_core_crates/04_clap.md",
+      "title": "",
+      "en": "clap — Command-Line Argument Parser for Rust",
+      "summary": "A canonical guide to `clap`, Rust's de-facto derive-driven CLI argument parser, covering its key traits, idiomatic usage, common pitfalls, and ecosystem integration.",
+      "bloom": "L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Traits",
+          "path": "../../02_intermediate/00_traits/01_traits.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Cargo Script",
+          "path": "../../06_ecosystem/01_cargo/01_cargo_script.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/02_core_crates/05_tracing.md",
+      "path": "06_ecosystem/02_core_crates/05_tracing.md",
+      "title": "",
+      "en": "Structured Application Tracing with `tracing`",
+      "summary": "`tracing` is a Rust framework for emitting structured, context-aware diagnostics through spans and events, designed to compose across async/await boundaries and integrate with OpenTelemetry and the broader observability stack.",
+      "bloom": "L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Traits",
+          "path": "../../02_intermediate/00_traits/01_traits.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Application Domains",
+          "path": "../06_data_and_distributed/01_application_domains.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/02_core_crates/06_reqwest.md",
+      "path": "06_ecosystem/02_core_crates/06_reqwest.md",
+      "title": "",
+      "en": "reqwest — Ergonomic Async HTTP Client for Rust",
+      "summary": "A canonical guide to the reqwest crate: reusable `Client`, fluent `RequestBuilder`, connection pooling, TLS, cookies, proxies, and common async HTTP pitfalls.",
+      "bloom": "L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Async/Await",
+          "path": "../../03_advanced/01_async/01_async.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "HTTP 客户端开发",
+          "path": "../04_web_and_networking/04_http_client_development.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/02_core_crates/07_axum.md",
+      "path": "06_ecosystem/02_core_crates/07_axum.md",
+      "title": "",
+      "en": "axum — Tokio's Ergonomic Web Framework",
+      "summary": "A focused canonical guide to axum's type-safe routing, Tower middleware integration, state sharing, and async handler model in Rust's tokio ecosystem.",
+      "bloom": "L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "所有权",
+          "path": "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "tokio",
+          "path": "./03_tokio.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/02_core_crates/08_sqlx.md",
+      "path": "06_ecosystem/02_core_crates/08_sqlx.md",
+      "title": "",
+      "en": "sqlx — Compile-Time Checked Async SQL Toolkit",
+      "summary": "sqlx is the Rust SQL toolkit that uses procedural macros to check SQL queries against a live database schema at compile time, providing type-safe async database access without an ORM DSL.",
+      "bloom": "L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Ownership",
+          "path": "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Core Crates Index",
+          "path": "./01_core_crates.md"
         }
       ],
       "theorems": [],
@@ -12580,7 +12939,7 @@
       "prerequisites": [
         {
           "title": "元编程与宏",
-          "path": "../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md"
+          "path": "../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md"
         },
         {
           "title": "形式化设计模式理论",
@@ -12889,7 +13248,7 @@
       "path": "06_ecosystem/04_web_and_networking/08_high_performance_network_service_architecture.md",
       "title": "",
       "en": "High-Performance Network Service Architecture",
-      "summary": "Building high-performance network services in Rust: zero-copy, io_uring, lock-free structures, NUMA awareness, and multi-queue networking.",
+      "summary": "Building production high-performance network services in Rust: zero-copy, io_uring, lock-free structures, NUMA awareness, multi-queue networking, observability, graceful shutdown, connection pooling, timeouts/backpressure, health checks, and deployment concerns.",
       "bloom": "L4-L5",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [
@@ -12967,6 +13326,41 @@
         {
           "title": "Glommio 与 Thread-per-Core",
           "path": "05_glommio_and_thread_per_core.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/04_web_and_networking/11_kubernetes_rust.md",
+      "path": "06_ecosystem/04_web_and_networking/11_kubernetes_rust.md",
+      "title": "",
+      "en": "Rust Services on Kubernetes",
+      "summary": "Engineering practices for deploying Rust microservices on Kubernetes: containerization, ConfigMaps, Secrets, operators, sidecars, health probes, graceful shutdown, and resource limits.",
+      "bloom": "L4-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Cloud Native",
+          "path": "02_cloud_native.md"
+        },
+        {
+          "title": "Web 框架",
+          "path": "03_web_frameworks.md"
+        },
+        {
+          "title": "Async/Await",
+          "path": "../../03_advanced/01_async/01_async.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Service Mesh",
+          "path": "../../06_ecosystem/07_security_and_cryptography/04_security_architecture.md"
+        },
+        {
+          "title": "Observability",
+          "path": "../00_toolchain/02_logging_observability.md"
         }
       ],
       "theorems": [],
@@ -13630,6 +14024,96 @@
       "related_crates": []
     },
     {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/23_no_std_and_bare_metal_idioms.md",
+      "path": "06_ecosystem/05_systems_and_embedded/23_no_std_and_bare_metal_idioms.md",
+      "title": "",
+      "en": "`no_std` and Bare-Metal Idioms",
+      "summary": "Practical idioms for `#![no_std]` and bare-metal Rust: crate setup, panic handler, custom alloc, critical-section, memory fences, static safety, build-std, target JSON, linker scripts, cortex-m-rt/riscv-rt entry patterns, Embassy executor, and common anti-patterns.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 嵌入式系统开发",
+          "path": "03_embedded_systems.md"
+        },
+        {
+          "title": "裸机启动与链接脚本",
+          "path": "13_bare_metal_boot_linker_script.md"
+        },
+        {
+          "title": "panic_handler 与 no_std 运行时",
+          "path": "18_panic_runtime_no_std.md"
+        },
+        {
+          "title": "嵌入式内存分配器",
+          "path": "16_embedded_memory_allocators.md"
+        },
+        {
+          "title": "no_std 同步原语",
+          "path": "15_no_std_synchronization_primitives.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "PAC 与 HAL 实现",
+          "path": "17_pac_hal_implementation.md"
+        },
+        {
+          "title": "embedded-hal 与驱动惯用法",
+          "path": "24_embedded_hal_and_driver_idioms.md"
+        },
+        {
+          "title": "异步 no_std 嵌入式",
+          "path": "11_async_no_std_embedded.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/24_embedded_hal_and_driver_idioms.md",
+      "path": "06_ecosystem/05_systems_and_embedded/24_embedded_hal_and_driver_idioms.md",
+      "title": "",
+      "en": "Embedded-HAL and Driver Idioms",
+      "summary": "Idioms for writing and using embedded drivers with `embedded-hal` 1.0: digital I/O, SPI/I2C/UART trait contracts, type-state pins, shared buses, DMA buffer ownership, error handling, `defmt`, and probe-rs debugging.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 嵌入式系统开发",
+          "path": "03_embedded_systems.md"
+        },
+        {
+          "title": "PAC 与 HAL 实现",
+          "path": "17_pac_hal_implementation.md"
+        },
+        {
+          "title": "embedded-hal 1.0 迁移",
+          "path": "09_embedded_hal_1_0_migration.md"
+        },
+        {
+          "title": "no_std 与裸机惯用法",
+          "path": "23_no_std_and_bare_metal_idioms.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "嵌入式协议与外设驱动",
+          "path": "22_embedded_protocol_drivers.md"
+        },
+        {
+          "title": "异步 no_std 嵌入式",
+          "path": "11_async_no_std_embedded.md"
+        },
+        {
+          "title": "嵌入式调试与日志",
+          "path": "20_embedded_debugging_logging.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:06_ecosystem/05_systems_and_embedded/README.md",
       "path": "06_ecosystem/05_systems_and_embedded/README.md",
       "title": "系统与嵌入式（Systems & Embedded）",
@@ -13765,7 +14249,7 @@
       "path": "06_ecosystem/06_data_and_distributed/05_data_engineering.md",
       "title": "",
       "en": "Data Engineering",
-      "summary": "Data Engineering. Guide to 48 Data Engineering.",
+      "summary": "Data Engineering — Rust-native data pipelines with columnar memory, ETL patterns, lakehouse storage, and streaming ingestion.",
       "bloom": "L3-L4",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [],
@@ -13983,7 +14467,7 @@
       "path": "06_ecosystem/07_security_and_cryptography/01_security_practices.md",
       "title": "",
       "en": "Security Practices",
-      "summary": "Security Practices — Security practices: input validation, cryptography, auditing, and supply-chain security atop memory safety.",
+      "summary": "Security Practices — defensive programming in Rust: systematic input validation, cryptographic misuse prevention, secret handling with secrecy/zeroize, sandboxing and memory-safety boundaries, and supply-chain security with cargo-audit/vet/deny, atop memory safety.",
       "bloom": "L3-L5",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [
@@ -14310,7 +14794,7 @@
       "path": "06_ecosystem/10_performance/02_performance_engineering_architecture.md",
       "title": "",
       "en": "Performance Engineering Architecture",
-      "summary": "Performance Engineering Architecture — system-level performance methodology: flamegraphs, perf/eBPF, heap profiling (dhat-rs/heaptrack), lock contention, NUMA, memory alignment, pprof, tracing/metrics, and SLO/SLI/performance budgets, with Rust examples and ecosystem tooling.",
+      "summary": "Performance Engineering Architecture — system-level performance methodology: flamegraphs (perf/cargo-flamegraph/samply), heap profiling (dhat-rs/heaptrack), cache/layout, allocation reduction, SIMD/portable SIMD, async overhead, io_uring, lock contention, NUMA, pprof, tracing/metrics, and SLO/SLI/performance budgets, with Rust examples and ecosystem tooling.",
       "bloom": "L6",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [
@@ -15585,6 +16069,19 @@
           "path": "rust_1_97_preview.md"
         }
       ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:07_future/00_version_tracking/README.md",
+      "path": "07_future/00_version_tracking/README.md",
+      "title": "",
+      "en": "Rust Version Tracking",
+      "summary": "Centralized tracking of Rust stable/nightly version semantics, feature stabilization, and migration decision trees from 1.90 through 1.99+.",
+      "bloom": "L5–L7",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [],
+      "postrequisites": [],
       "theorems": [],
       "related_crates": []
     },
@@ -17167,6 +17664,57 @@
         {
           "title": "Network Programming",
           "path": "../../03_advanced/06_low_level_patterns/04_network_programming.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:07_future/03_edition_differences/01_edition_2021_to_2024.md",
+      "path": "07_future/03_edition_differences/01_edition_2021_to_2024.md",
+      "title": "",
+      "en": "Rust Edition 2021 → 2024 Differences",
+      "summary": "Authoritative guide to the major language, library, and toolchain differences between Rust Edition 2021 and Edition 2024, with migration paths and semantic rationale.",
+      "bloom": "L2-L3",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Editions",
+          "path": "../../00_meta/01_terminology/01_terminology_glossary.md"
+        },
+        {
+          "title": "Async/Await",
+          "path": "../../03_advanced/01_async/01_async.md"
+        },
+        {
+          "title": "Traits",
+          "path": "../../02_intermediate/00_traits/01_traits.md"
+        },
+        {
+          "title": "FFI",
+          "path": "../../03_advanced/04_ffi/01_rust_ffi.md"
+        },
+        {
+          "title": "Let Chains",
+          "path": "../../01_foundation/04_control_flow/03_let_chains.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Async Closures",
+          "path": "../../03_advanced/01_async/07_async_closures.md"
+        },
+        {
+          "title": "Unsafe Extern Blocks",
+          "path": "../../03_advanced/04_ffi/05_unsafe_extern_blocks.md"
+        },
+        {
+          "title": "Rust 1.85 Stabilized Features",
+          "path": "../00_version_tracking/rust_1_90_stabilized.md"
+        },
+        {
+          "title": "Rust 1.88 Stabilized Features",
+          "path": "../00_version_tracking/rust_1_90_stabilized.md"
         }
       ],
       "theorems": [],

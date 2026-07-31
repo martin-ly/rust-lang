@@ -82,7 +82,7 @@ flowchart LR
 |:---|:---|:---|
 | 如何定义共享行为？ | `trait` / 泛型约束 | [Traits](../../02_intermediate/00_traits/01_traits.md), [Generics](../../02_intermediate/01_generics/01_generics.md) |
 | 需要编译期多态还是运行时多态？ | 泛型单态化 / `dyn Trait` | [Dispatch Mechanisms](../../02_intermediate/00_traits/02_dispatch_mechanisms.md), [Type Erasure](../../03_advanced/06_low_level_patterns/03_type_erasure.md) |
-| 需要领域特定语言？ | 声明宏 / 过程宏 | [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md), [Proc Macros](../../03_advanced/03_proc_macros/02_proc_macro.md) |
+| 需要领域特定语言？ | 声明宏 / 过程宏 | [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md), [Proc Macros](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) |
 
 ### 3.6 工具链与生态场景
 
@@ -380,8 +380,8 @@ flowchart TD
 | [`assert_matches!`：模式匹配断言的形式化语义](../../02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md) | 决策/场景节 ×1 · mermaid 判定图 ×2 | 使用场景与最佳实践 |
 | [DSL 与嵌入 式设计：Rust 中的领域特定语言](../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
 | [宏模式：编译期代码生成的工程实践](../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md) | 决策/场景节 ×1 · mermaid 判定图 ×1 | 测验 4：过程宏（proc macro）分为哪三类？它们分别用于什么场景？（理… |
-| [元编程：Rust 的编译期代码生成与变换](../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md) | 决策/场景节 ×2 · mermaid 判定图 ×2 | 元编程技术选型矩阵 · 选型决策树 |
-| [属性分类详解](../../02_intermediate/06_macros_and_metaprogramming/06_attributes_by_category.md) | 决策/场景节 ×1 | 判断推理与决策树 |
+| [元编程：Rust 的编译期代码生成与变换](../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md) | 决策/场景节 ×2 · mermaid 判定图 ×2 | 元编程技术选型矩阵 · 选型决策树 |
+| [属性分类详解](../../02_intermediate/06_macros_and_metaprogramming/08_attributes_by_category.md) | 决策/场景节 ×1 | 判断推理与决策树 |
 | [Rust 迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) | 决策/场景节 ×1 · mermaid 判定图 ×1 | 测验 6：`Iterator::fuse()` 的作用是什么？在什么场景下需要… |
 
 ### L3 高级概念层（42 个概念）
@@ -412,7 +412,7 @@ flowchart TD
 | [Rust 内存模型](../../03_advanced/02_unsafe/06_memory_model.md) | 决策/场景节 ×1 | 反命题决策树 |
 | [Unsafe 参考](../../03_advanced/02_unsafe/07_unsafe_reference.md) | 决策/场景节 ×1 | 反命题决策树 |
 | [Macros](../../03_advanced/03_proc_macros/01_macros.md) | 决策/场景节 ×8 · mermaid 判定图 ×6 | 决策/边界判定树（Decision / Boundary Tree） · "宏 vs 泛型/函数？" 决策树 |
-| [过程宏：编译期代码生成的元编程工具](../../03_advanced/03_proc_macros/02_proc_macro.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
+| [过程宏：编译期代码生成的元编程工具](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
 | [Rust FFI：与外部代码的安全边界](../../03_advanced/04_ffi/01_rust_ffi.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
 | [FFI 高级主题：跨语言边界的安全与性能](../../03_advanced/04_ffi/02_ffi_advanced.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |
 | [自定义分配器与内存布局优化](../../03_advanced/06_low_level_patterns/01_custom_allocators.md) | mermaid 判定图 ×1 | mermaid 判定节点图 |

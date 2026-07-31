@@ -7,7 +7,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: S×Eva — 评估宏（Macro）卫生性设计
-> **前置依赖**: [过程宏（Procedural Macro）](02_proc_macro.md) · [syn/quote 参考](08_syn_quote_reference.md)
+> **前置依赖**: [过程宏（Procedural Macro）](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) · [syn/quote 参考](08_syn_quote_reference.md)
 > **后置概念**: [生产级宏（Macro）开发](05_production_grade_macro_development.md) · [宏调试与诊断](04_macro_debugging_and_diagnostics.md)
 > **定理链**: Hygiene ⟹ Span Selection ⟹ Name Collision Prevention
 >
@@ -940,7 +940,7 @@ Mark 表示宏展开层级:
 
 ## 🔗 概念关系
 
-- **上位（is-a）**：[过程宏](02_proc_macro.md) 的语义核心专题。
+- **上位（is-a）**：[过程宏](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) 的语义核心专题。
 - **下位（实例）**：声明宏卫生、过程宏 Span、跨 crate 作用域规则。
 - **组合**：与 [宏调试与诊断](04_macro_debugging_and_diagnostics.md)（Span 与错误定位）组合。
 - **依赖**：依赖 [关键字](../../01_foundation/00_start/06_keywords.md) 与标识符解析规则。

@@ -31,6 +31,7 @@
 **变更日志**:
 
 - v1.0 (2026-05-21): 初始版本——七层惯用法谱系 + 等价变换 + 反惯用法判定树 + Clippy 对齐
+- v1.2 (2026-07-31): P4 国际化对齐——新增 `ManuallyDrop`、`scoped threads` 两个惯用法小节，新增「惯用法与 23/43 模式模型衔接」映射表
 
 ---
 
@@ -67,6 +68,7 @@
     - [6.2](#62)
     - [6.3](#63)
     - [6.4](#64)
+    - [6.5](#65)
   - [七、L4 控制级惯用法](#七l4-控制级惯用法)
     - [7.1](#71)
     - [7.2](#72)
@@ -77,6 +79,7 @@
     - [8.2](#82)
     - [8.3](#83)
     - [8.4](#84)
+    - [8.5](#85)
   - [九、L6 架构级惯用法](#九l6-架构级惯用法)
     - [9.1](#91)
     - [9.2](#92)
@@ -95,6 +98,7 @@
     - [L0-L7 纵向映射](#l0-l7-纵向映射)
     - [相关概念](#相关概念)
   - [十五、惯用法选择的认知路径](#十五惯用法选择的认知路径)
+  - [十六、惯用法与 23/43 模式模型衔接](#十六惯用法与-2343-模式模型衔接)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：惯用法谱系的编译错误](#十边界测试惯用法谱系的编译错误)
     - [10.1 边界测试：`unwrap` 的滥用（运行时 panic）](#101-边界测试unwrap-的滥用运行时-panic)
@@ -141,6 +145,7 @@ mindmap
       RAII[RAII 守卫<br/>自动资源释放]
       Scopeguard[Scopeguard<br/>作用域退出]
       Pin[Pin 不动性<br/>堆上位置稳定]
+      ManuallyDrop[ManuallyDrop<br/>显式析构控制]
     L4控制级
       Iterator链[Iterator 链<br/>惰性求值]
       递归转循环[递归→循环<br/>避免栈溢出]
@@ -149,6 +154,7 @@ mindmap
       SendSync[Send/Sync 边界<br/>编译期线程安全]
       Actor[Actor 单线程<br/>避免锁竞争]
       Channel[Channel 所有权<br/>move 防竞争]
+      ScopedThreads[scoped threads<br/>结构化借用线程]
     L6架构级
       TowerService[Tower Service<br/>服务态射复合]
       洋葱中间件[洋葱中间件<br/>横切关注点分离]
@@ -680,6 +686,41 @@ impl SelfReferential {
 | `RwLock<T>` | 是 | 是（OS 锁） | 多线程多读单写 |
 | `AtomicT` | 是 | 无（硬件指令） | 简单类型的无锁操作 |
 
+### 6.5
+
+> 来源: [Rustonomicon §4.5](https://doc.rust-lang.org/nomicon/perf-profiling.html) · [std::mem::ManuallyDrop](https://doc.rust-lang.org/std/mem/struct.ManuallyDrop.html) ManuallyDrop：显式控制析构
+> **惯用**: 当需要手动决定资源释放时机、抑制默认 `Drop` 或实现自定义释放协议时，使用 `ManuallyDrop<T>` 包装值。
+
+```rust,ignore
+use std::mem::ManuallyDrop;
+use std::alloc::{alloc, dealloc, Layout};
+
+// 惯用：自定义分配器封装中显式控制内存释放
+struct RawBuffer {
+    ptr: *mut u8,
+    layout: Layout,
+}
+
+impl RawBuffer {
+    fn new(size: usize) -> Option<Self> {
+        let layout = Layout::array::<u8>(size).ok()?;
+        let ptr = unsafe { alloc(layout) };
+        if ptr.is_null() {
+            return None;
+        }
+        Some(Self { ptr, layout })
+    }
+
+    fn dispose(self) {
+        // ManuallyDrop 阻止自动 Drop，让我们按自定义协议释放
+        let mut this = ManuallyDrop::new(self);
+        unsafe { dealloc(this.ptr, this.layout) };
+    }
+}
+```
+
+**等价性**: `ManuallyDrop<T>` 与 `T` 同布局，仅在元层面抑制 `Drop` 调用的自动注入；不引入运行时开销。它与 `mem::forget` 的区别在于保留了值的所有权，可在之后手动析构。
+
 ---
 
 ## 七、L4 控制级惯用法
@@ -900,6 +941,32 @@ fn pop<T>(head: &Atomic<Node<T>>) -> Option<T> {
     }
 }
 ```
+
+### 8.5
+
+> [Rust 1.63 RFC — Scoped Threads](https://rust-lang.github.io/rfcs/3151-scoped-threads.html) · [std::thread::scope](https://doc.rust-lang.org/std/thread/fn.scope.html) 结构化作用域线程
+> **惯用**: 用 `std::thread::scope` 启动借用栈上数据的线程，保证所有子线程在作用域结束前汇合，避免 `Arc` 与 `'static` 闭包的额外开销。
+
+```rust
+// 惯用：scope 线程借用本地数据
+fn parallel_sum(data: &[i32]) -> i32 {
+    let mut total = 0;
+    std::thread::scope(|s| {
+        s.spawn(|| {
+            // 此处闭包可借用 data，因为 scope 保证它比 data 活得更短
+            let first: i32 = data[..data.len()/2].iter().sum();
+            first
+        });
+        let handle = s.spawn(|| {
+            data[data.len()/2..].iter().sum::<i32>()
+        });
+        total = handle.join().unwrap();
+    }); // 所有子线程必须在此点前 join
+    total
+}
+```
+
+**等价性**: `scope(f)` 在 `f` 返回前 join 所有由 `s` 派生的线程，因此 `s.spawn` 的闭包可安全捕获非 `'static` 引用。与 `thread::spawn` 要求 `'static` 闭包相比，省去了 `Arc` 原子计数与堆分配，是零成本的结构化并发原语。
 
 ---
 
@@ -1238,6 +1305,29 @@ typestate 模式借 PhantomData 使非法状态不可表示（编译期安全）
 > **文档版本**: 1.1
 > **最后更新: 2026-05-21
 > **状态**: ✅ 惯用法谱系全景 v1.1 — 新增认知路径
+
+---
+
+## 十六、惯用法与 23/43 模式模型衔接
+
+> **来源**: [GoF Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) · [POSA — Pattern-Oriented Software Architecture](https://en.wikipedia.org/wiki/Pattern-Oriented_Software_Architecture) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+
+Rust 惯用法既可独立存在，也常作为经典设计模式在 Rust 中的实现载体。下表把核心惯用法映射到 GoF 23 模式与 POSA 43 模式中的相关条目，避免「惯用法 vs 设计模式」的割裂学习。
+
+| 惯用法 | GoF 23 安全子集 | POSA 43 扩展 | Rust 化要点 |
+|:---|:---|:---|:---|
+| **RAII** | 与 Proxy、Flyweight、Facade 的资源管理侧面衔接 | Unit of Work、Gateway、Leasing | 用 `Drop` 把释放协议编码进类型 |
+| **Newtype** | Adapter（类型适配）、Value Object 思想 | DTO、Quantity、Range | `#[repr(transparent)]` 零成本区分 |
+| **Typestate** | Builder（编译期必填校验）、State（状态机） | Protocol、Half-Object plus Protocol | 泛型状态参数 + `PhantomData` |
+| **Builder** | Builder | Factory、Whole-Part | 消费型 `self` 链保证一次构造 |
+| **`?` 传播 / Result 链** | Chain of Responsibility（错误处理链） | Context Object、Exception Handling | 显式传播替代异常 |
+| **Cow** | Flyweight（共享默认值） | Copy-on-Write | `Borrowed`/`Owned` 二相枚举 |
+| **Iterator 链** | Iterator | Pipeline | 惰性求值 + LLVM 向量化 |
+| **Pin 不动性** | — | — | 自引用结构与异步 Future 的位置稳定 |
+| **ManuallyDrop** | — | — | 自定义释放协议与 unsafe 边界 |
+| **Scoped Threads** | — | — | 结构化并发：借用栈数据的安全线程 |
+
+> **认知功能**: 本表建立「惯用法 ↔ 设计模式」的双向索引。当学习者遇到某一 GoF/POSA 模式时，可快速定位 Rust 中对应的惯用法实现；反之，掌握惯用法后也能理解其背后更通用的模式结构。
 
 ---
 

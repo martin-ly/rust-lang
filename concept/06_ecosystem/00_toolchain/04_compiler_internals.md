@@ -796,7 +796,7 @@ fn undefined_behavior() {
 - [生命周期（Lifetimes）](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) — 借用规则、NLL
 - [Trait](../../02_intermediate/00_traits/01_traits.md) — 多态、Trait 解析
 - [Async/Await](../../03_advanced/01_async/01_async.md) — 状态机转换、MIR 生成
-- [宏系统](../../03_advanced/03_proc_macros/02_proc_macro.md) — 宏展开、 hygiene
+- [宏系统](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) — 宏展开、 hygiene
 - [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) — Miri、UB、别名模型
 - [NLL 与 Polonius](../../03_advanced/02_unsafe/03_nll_and_polonius.md) — 借用检查演进
 - [形式化验证](../../04_formal/04_model_checking/01_verification_toolchain.md) — Kani、Prusti、MIRI

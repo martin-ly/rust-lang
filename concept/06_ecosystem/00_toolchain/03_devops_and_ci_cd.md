@@ -49,6 +49,13 @@
     - [2.2 Docker 多阶段构建优化](#22-docker-多阶段构建优化)
     - [2.3 交叉编译 CI 集成](#23-交叉编译-ci-集成)
     - [2.4 缓存策略与增量构建](#24-缓存策略与增量构建)
+    - [2.5 Rust CI/CD 最佳实践全景](#25-rust-cicd-最佳实践全景)
+      - [2.5.1 GitHub Actions 矩阵设计](#251-github-actions-矩阵设计)
+      - [2.5.2 缓存：rust-cache 与 sccache](#252-缓存rust-cache-与-sccache)
+      - [2.5.3 测试：cargo-nextest](#253-测试cargo-nextest)
+      - [2.5.4 安全与供应链：cargo-audit / cargo-deny / cargo-vet](#254-安全与供应链cargo-audit--cargo-deny--cargo-vet)
+      - [2.5.5 交叉编译与 Release 二进制](#255-交叉编译与-release-二进制)
+      - [2.5.6 可复现构建与 MSRV 检查](#256-可复现构建与-msrv-检查)
   - [三、DevOps 决策矩阵](#三devops-决策矩阵)
     - [3.1 发布自动化决策](#31-发布自动化决策)
     - [3.2 安全策略矩阵](#32-安全策略矩阵)
@@ -71,6 +78,8 @@
     - [测验 3：Rust 的 `cross` 工具如何简化 CI 中的交叉编译？（理解层）](#测验-3rust-的-cross-工具如何简化-ci-中的交叉编译理解层)
     - [测验 4：在 Rust 项目的 CI 中，为什么建议同时运行 `clippy`、`rustfmt` 和 `cargo test`？（理解层）](#测验-4在-rust-项目的-ci-中为什么建议同时运行-clippyrustfmt-和-cargo-test理解层)
     - [测验 5：`cargo-release` 或 `release-plz` 在 Rust 发布工作流中有什么作用？（理解层）](#测验-5cargo-release-或-release-plz-在-rust-发布工作流中有什么作用理解层)
+    - [测验 6：`cargo-nextest` 相比 `cargo test` 的核心优势是什么？（理解层）](#测验-6cargo-nextest-相比-cargo-test-的核心优势是什么理解层)
+    - [测验 7：为什么 `cargo-deny` 适合作为 CI 中的策略门禁？（理解层）](#测验-7为什么-cargo-deny-适合作为-ci-中的策略门禁理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
   - [补充视角：WebAssembly 项目的 CI/CD 实践](#补充视角webassembly-项目的-cicd-实践)
@@ -460,6 +469,202 @@ graph LR
 
 > **认知功能**: 缓存策略的**核心权衡**——缓存越大命中率越高，但恢复时间也越长；rust-cache 通过智能键选择和定期清理实现了平衡点。
 > [来源: [Swatinem/rust-cache](https://github.com/Swatinem/rust-cache)]
+
+---
+
+### 2.5 Rust CI/CD 最佳实践全景
+
+本节将 Rust CI/CD 的关键实践按“快反馈 → 深验证 → 安全 → 发布”四层组织，覆盖任务要求的 GitHub Actions 矩阵、`rust-cache`、`cargo-nextest`、供应链审计、交叉编译、发布二进制、`sccache`、可复现构建与 MSRV 检查。
+
+#### 2.5.1 GitHub Actions 矩阵设计
+
+矩阵应同时覆盖平台、Rust 版本与 feature 组合，但矩阵笛卡尔积过大会拖慢反馈，需用 `exclude` 或分阶段 Job 控制：
+
+```yaml
+# .github/workflows/ci.yml
+name: CI
+on: [push, pull_request]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - run: cargo fmt --check
+      - run: cargo clippy --all-targets --all-features -- -D warnings
+      - run: cargo doc --no-deps
+
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        rust: [stable, beta]
+        features: ["--all-features", "--no-default-features"]
+        exclude:
+          # beta 只需在一个平台验证即可
+          - os: macos-latest
+            rust: beta
+          - os: windows-latest
+            rust: beta
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@${{ matrix.rust }}
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo test ${{ matrix.features }}
+```
+
+> **关键洞察**: `fail-fast: false` 确保单个矩阵项失败不会取消其他平台验证；`exclude` 用于削减不必要的组合，避免 CI 时间随矩阵规模指数膨胀。[来源: [GitHub Actions Workflow Syntax](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)]
+
+#### 2.5.2 缓存：`rust-cache` 与 `sccache`
+
+| 工具 | 粒度 | 适用场景 | 配置要点 |
+|:---|:---|:---|:---|
+| `Swatinem/rust-cache` | 整个 `~/.cargo` + `target/` | 大多数 GitHub Actions 项目 | 自动处理键与清理 |
+| `sccache` | 编译产物级（LLVM IR/对象文件） | 大型 workspace / 自托管缓存 | 需 S3/GCS/Azure Blob 后端 |
+| `cargo-chef` | 依赖层缓存 | Docker 多阶段构建 | 单独缓存依赖编译 |
+
+`sccache` 可与 `rust-cache` 叠加：
+
+```yaml
+      - uses: Swatinem/rust-cache@v2
+      - name: Install sccache
+        run: |
+          cargo install sccache --locked
+          echo "RUSTC_WRAPPER=sccache" >> "$GITHUB_ENV"
+          echo "SCCACHE_BUCKET=my-rust-cache" >> "$GITHUB_ENV"
+```
+
+> **来源**: [sccache](https://github.com/mozilla/sccache) · [cargo-chef](https://github.com/LukeMathWalker/cargo-chef)
+> **陷阱规避**: `RUSTC_WRAPPER` 会改变增量编译行为，调试构建失败时建议先禁用 sccache 排除干扰。
+
+#### 2.5.3 测试：`cargo-nextest`
+
+`cargo-nextest` 提供更可靠的测试执行模型：
+
+```text
+nextest 核心改进:
+  · 每个测试作为独立进程运行，隔离全局状态污染
+  · 基于测试历史做重试与分片（partitioning）
+  · 丰富的 JUnit/XML 输出，便于 CI 解析
+  · 支持 per-test 超时，避免挂起测试拖垮流水线
+```
+
+```yaml
+      - run: cargo install cargo-nextest --locked
+      - run: cargo nextest run --all-features
+      - run: cargo test --doc  # nextest 不运行 doctest，需单独执行
+```
+
+> **来源**: [cargo-nextest](https://nexte.st/) · [nextest Partitioning](https://nexte.st/book/partitioning.html)
+> **关键洞察**: 对于包含 `static` 状态或环境变量依赖的测试集，nextest 的进程隔离能显著降低 flaky 率。
+
+#### 2.5.4 安全与供应链：`cargo-audit` / `cargo-deny` / `cargo-vet`
+
+三种工具覆盖不同层面的安全与合规：
+
+| 工具 | 检查内容 | CI 阶段 | 阻止合并 |
+|:---|:---|:---:|:---:|
+| `cargo-audit` | RustSec 已知漏洞 | PR + 定时 | 高危/严重 |
+| `cargo-deny` | 许可证、漏洞、禁止依赖、特性重复 | PR | 策略违规 |
+| `cargo-vet` | 供应链审计（人工审查记录） | 发布前/PR | 未审计 crate |
+
+`cargo-deny` 配置示例：
+
+```toml
+# deny.toml
+[advisories]
+yanked = "warn"
+ignore = []
+
+[licenses]
+allow = ["MIT", "Apache-2.0", "BSD-3-Clause"]
+confidence-threshold = 0.8
+
+[bans]
+multiple-versions = "warn"
+deny = [{ name = "openssl-sys" }]  # 强制使用 rustls
+```
+
+> **来源**: [cargo-audit](https://github.com/RustSec/rustsec/tree/main/cargo-audit) · [cargo-deny](https://embarkstudios.github.io/cargo-deny/) · [cargo-vet](https://mozilla.github.io/cargo-vet/)
+> **关键洞察**: 安全策略应“左移”到 PR 阶段，但 `cargo-vet` 的人工审计记录属于持续运营成本，小型团队可按发布节奏执行而非每次 PR。
+
+#### 2.5.5 交叉编译与 Release 二进制
+
+发布二进制需同时考虑目标平台、静态链接与签名：
+
+```yaml
+  release:
+    strategy:
+      matrix:
+        target:
+          - x86_64-unknown-linux-gnu
+          - x86_64-unknown-linux-musl
+          - aarch64-unknown-linux-gnu
+          - x86_64-pc-windows-msvc
+          - aarch64-apple-darwin
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo install cross --locked
+      - run: cross build --release --target ${{ matrix.target }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: binary-${{ matrix.target }}
+          path: target/${{ matrix.target }}/release/myapp
+```
+
+> **来源**: [cross-rs](https://github.com/cross-rs/cross) · [cargo-dist](https://github.com/axodotdev/cargo-dist)
+> **关键洞察**: 对于 CLI 工具，`cargo-dist` 可自动生成 Homebrew tap、GitHub Release 与安装脚本；对于嵌入式/边缘场景，`cross` 仍然是更可控的选择。
+
+#### 2.5.6 可复现构建与 MSRV 检查
+
+**可复现构建（Reproducible Builds）**要求不同时间、不同机器编译得到相同二进制哈希。Rust 的可复现性受以下因素影响：
+
+```text
+可复现构建 checklist:
+  ✅ 提交 Cargo.lock（二进制项目必须）
+  ✅ 固定 Rust 工具链版本（rust-toolchain.toml）
+  ✅ 使用 --remap-path-prefix 消除构建路径差异
+  ✅ 固定 SOURCE_DATE_EPOCH 控制编译时间戳
+  ✅ 避免 build.rs 中读取非确定性输入（如当前时间）
+```
+
+```toml
+# Cargo.toml
+[profile.release]
+strip = true
+lto = "thin"
+
+# .cargo/config.toml
+[build]
+rustflags = ["--remap-path-prefix", "=/project"]
+```
+
+**MSRV（Minimum Supported Rust Version）检查**：
+
+```yaml
+      - uses: dtolnay/rust-toolchain@1.78.0
+      - run: cargo check --all-features
+```
+
+或使用 `cargo-msrv` 自动探测：
+
+```bash
+cargo install cargo-msrv
+cargo msrv verify
+```
+
+> **来源**: [cargo-msrv](https://github.com/foresterre/cargo-msrv) · [Reproducible Builds](https://reproducible-builds.org/)
+> **关键洞察**: 可复现构建是供应链安全（SLSA）的基础；MSRV 检查应在 CI 中固定一个 Job，防止新语法意外破坏下游用户。
 
 ---
 
@@ -853,6 +1058,30 @@ Rust 编译器进行大量优化和类型检查（LLVM 后端、单态化（Mono
 自动化版本管理：更新 Cargo.toml 版本号、生成 changelog、创建 git tag、发布到 crates.io。减少人工操作错误，规范发布流程。
 </details>
 
+---
+
+### 测验 6：`cargo-nextest` 相比 `cargo test` 的核心优势是什么？（理解层）
+
+**题目**: `cargo-nextest` 相比 `cargo test` 的核心优势是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`cargo-nextest` 将每个测试作为独立进程运行，隔离全局状态污染，支持 per-test 超时、JUnit 输出与测试分片，显著降低 flaky 测试率。
+</details>
+
+---
+
+### 测验 7：为什么 `cargo-deny` 适合作为 CI 中的策略门禁？（理解层）
+
+**题目**: 为什么 `cargo-deny` 适合作为 CI 中的策略门禁？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+`cargo-deny` 可统一检查许可证兼容性、已知漏洞（advisories）、禁止依赖与特性重复，将合规策略编码为配置文件，在 PR 阶段自动阻止违规依赖进入代码库。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **DevOps 与 CI/CD：Rust 的持续交付工程实践** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
@@ -901,6 +1130,15 @@ mindmap
       GitHub Actions 工作流设计
       Docker 多阶段构建优化
       交叉编译 CI 集成
+      缓存策略与增量构建
+      Rust CI CD 最佳实践全景
+        GitHub Actions 矩阵设计
+        rust-cache 与 sccache
+        cargo-nextest
+        cargo-audit 与 cargo-deny
+        cargo-vet
+        Release 二进制与交叉编译
+        可复现构建与 MSRV
     DevOps 决策矩阵
       发布自动化决策
       安全策略矩阵

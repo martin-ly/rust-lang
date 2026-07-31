@@ -22,28 +22,18 @@
 > **后置概念**: [云原生生态](02_cloud_native.md) · [设计模式](../03_design_patterns/01_patterns.md)
 >
 > **来源**:
-> [axum](https://docs.rs/axum/) ·
-> [actix-web](https://docs.rs/actix-web/) ·
-> [Rocket](https://rocket.rs/) ·
-> [reqwest](https://docs.rs/reqwest/latest/reqwest/) ·
-> [Tauri](https://tauri.app/) ·
-> [Dioxus](https://dioxuslabs.com/) ·
-> [Leptos](https://leptos.dev/) ·
-> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
-> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
-> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
----
-
-> **来源**:
 > [Axum](https://docs.rs/axum/latest/axum/) ·
 > [Actix-web](https://actix.rs/) ·
 > [Rocket](https://rocket.rs/) ·
 > [Poem](https://docs.rs/poem/latest/poem/) ·
 > [Tokio](https://tokio.rs/) ·
+> [Tower](https://docs.rs/tower/latest/tower/) ·
 > [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/) ·
-> [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html)
-> **前置依赖**: [Type Theory](../../04_formal/00_type_theory/01_type_theory.md)
-> **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
+> [RFC 2394 — async/await](https://rust-lang.github.io/rfcs//2394-async_await.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+
+---
 
 ## 📑 目录
 
@@ -64,12 +54,14 @@
   - [四、中间件机制深度对比](#四中间件机制深度对比)
     - [4.1 中间件模型分类](#41-中间件模型分类)
     - [4.2 中间件对比矩阵](#42-中间件对比矩阵)
+    - [4.3 测试生态对比](#43-测试生态对比)
   - [五、性能基准与资源效率](#五性能基准与资源效率)
     - [5.1 TechEmpower 基准解读](#51-techempower-基准解读)
     - [5.2 资源占用对比](#52-资源占用对比)
   - [六、选型决策框架](#六选型决策框架)
     - [6.1 "选哪个框架？" 决策树](#61-选哪个框架-决策树)
     - [6.2 场景化推荐矩阵](#62-场景化推荐矩阵)
+    - [6.3 快速选择检查表](#63-快速选择检查表)
   - [七、反命题与边界分析](#七反命题与边界分析)
     - [7.1 反命题："Axum 总是最佳选择"](#71-反命题axum-总是最佳选择)
     - [7.2 反命题："Web 框架性能决定一切"](#72-反命题web-框架性能决定一切)
@@ -81,9 +73,9 @@
   - [十、边界测试：Web 框架的编译错误](#十边界测试web-框架的编译错误)
     - [10.1 边界测试：axum 处理函数的签名约束（编译错误）](#101-边界测试axum-处理函数的签名约束编译错误)
     - [10.2 边界测试：共享状态的生命周期与 `Clone` 约束（编译错误）](#102-边界测试共享状态的生命周期与-clone-约束编译错误)
-    - [10.6 边界测试：HTTP 请求的 body 大小限制与内存 DoS（运行时 OOM）](#106-边界测试http-请求的-body-大小限制与内存-dos运行时-oom)
-    - [10.5 边界测试：Axum 的 extractor 顺序与请求体消耗（运行时 panic）](#105-边界测试axum-的-extractor-顺序与请求体消耗运行时-panic)
+    - [10.3 边界测试：HTTP 请求的 body 大小限制与内存 DoS（运行时 OOM）](#103-边界测试http-请求的-body-大小限制与内存-dos运行时-oom)
     - [10.4 边界测试：Axum 的 extractor 顺序与请求体消耗（运行时 panic）](#104-边界测试axum-的-extractor-顺序与请求体消耗运行时-panic)
+    - [10.5 边界测试：重复提取请求体的简化错误示例（运行时 panic）](#105-边界测试重复提取请求体的简化错误示例运行时-panic)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`axum` 框架的核心设计特点是什么？（理解层）](#测验-1axum-框架的核心设计特点是什么理解层)
     - [测验 2：`actix-web` 与 `axum` 在架构上有什么主要区别？（理解层）](#测验-2actix-web-与-axum-在架构上有什么主要区别理解层)
@@ -153,8 +145,9 @@ Rust Web 框架演进:
   2022: Poem v1.0 — OpenAPI 优先、模块化设计
         [Poem docs](https://docs.rs/poem/latest/poem/)
 
-  2024: Axum 0.7 / Actix-web 4.x / Rocket 0.5 — 生态成熟期
-        [来源: crates.io 版本记录]
+  2024–2026: Axum 0.7+ / Actix-web 4.x / Rocket 0.5 — 生态成熟期
+        各框架 API 已稳定，围绕 Tower/tonic 的生态持续收敛
+        [来源: crates.io 版本记录] · [Axum releases](https://github.com/tokio-rs/axum/releases)
 ```
 
 > **洞察**: Rust Web 框架经历了从"百花齐放"到"头部收敛"的过程——Axum 和 Actix-web 占据生态主导地位，Rocket 坚守声明式哲学，Poem 填补 OpenAPI/GraphQL  niche。[💡 原创分析](../../00_meta/00_framework/methodology.md)
@@ -557,6 +550,41 @@ fn main() {
 
 ---
 
+### 4.3 测试生态对比
+
+测试是框架工程体验的重要组成。四个框架都支持单元测试，但在集成测试（启动完整 HTTP 服务器并发送请求）的便利性上有差异：
+
+| **测试能力** | **Axum** | **Actix-web** | **Rocket** | **Poem** |
+|:---|:---|:---|:---|:---|
+| **单元测试 Handler** | `Router::oneshot` / `tower::ServiceExt::oneshot` | `test::init_service` + `TestRequest` | `Client::tracked` / `dispatch` | `Route::call` |
+| **集成测试启动服务器** | `tokio::net::TcpListener` + `axum::serve` | `test::start` | `rocket::local::asynchronous::Client` | `poem::Server` + 随机端口 |
+| **请求构建** | `http::Request::builder()` | `TestRequest` | `Client` API | `poem::Request::builder()` |
+| **状态注入** | `Router::with_state` | `app_data` | `State` / `ManagedState` | `Route::data` |
+| **异步测试** | 原生 `#[tokio::test]` | 原生 `#[actix_web::test]` | 原生 `#[rocket::async_test]` | 原生 `#[tokio::test]` |
+| **生态工具** | `reqwest` / `tower-test` | `actix-web::test` | `rocket::local` | `poem-test` |
+
+```rust,ignore
+// Axum 集成测试示例
+use axum::{body::Body, http::Request, routing::get, Router};
+use tower::ServiceExt;
+
+async fn hello() -> &'static str { "hello" }
+
+#[tokio::test]
+async fn test_hello() {
+    let app = Router::new().route("/", get(hello));
+    let response = app
+        .oneshot(Request::builder().uri("/").body(Body::empty()).unwrap())
+        .await
+        .unwrap();
+    assert_eq!(response.status(), 200);
+}
+```
+
+> **关键洞察**: Axum 的测试利用 `tower::ServiceExt::oneshot`，与中间件栈共享同一抽象；Rocket 的本地客户端最贴近“真实请求”语义；Actix-web 的 `test` 模块历史最久、文档最丰富。测试选型常与框架选型一致，但迁移成本低于业务逻辑迁移。[来源: [axum testing](https://docs.rs/axum/latest/axum/#testing)] · [来源: [Rocket Testing](https://rocket.rs/v0.5/guide/testing/)]
+
+---
+
 ## 五、性能基准与资源效率
 
 框架性能讨论必须以可复现的基准为依据，TechEmpower 是事实标准的公共基准，但读它需要纪律：
@@ -671,6 +699,30 @@ graph TD
 | 服务端渲染 (SSR) | **Axum / Actix-web** | 与 Askama/Leptos 集成最佳 [Leptos docs](https://docs.rs/leptos/latest/leptos/) |
 | 区块链/Web3 后端 | **Axum / Actix-web** | 与 ethers-rs、solana-client 生态兼容 [ethers-rs docs](https://docs.rs/ethers/latest/ethers/) |
 | AWS Lambda/Serverless | **Poem / Axum** | poem-lambda / lambda_http 适配成熟 [AWS Lambda Rust runtime](https://github.com/awslabs/aws-lambda-rust-runtime) |
+
+### 6.3 快速选择检查表
+
+将“选哪个框架”简化为三问：
+
+```text
+第一问：是否需要与 tonic/gRPC 共享 Tower 中间件栈？
+  是 → Axum（默认选择）
+  否 → 第二问
+
+第二问：是否偏好声明式宏/编译期路由验证，或团队需要最快原型速度？
+  是 → Rocket
+  否 → 第三问
+
+第三问：是否需要原生 OpenAPI/GraphQL 生成，或主要面向文档驱动开发？
+  是 → Poem
+  否 → 第四问
+
+第四问：是否需要最成熟社区、Actor 并发模型，或企业长期维护？
+  是 → Actix-web
+  否 → Axum（回到 safest default）
+```
+
+> **关键洞察**: 对 2024–2026 年的新项目，**Axum 是 safest default**；只有在声明式 API（Rocket）、原生 OpenAPI（Poem）或成熟 Actor 生态（Actix-web）成为硬约束时才偏离。
 
 ---
 
@@ -926,7 +978,7 @@ fn app(state: Arc<AppState>) -> Router {
 > 与 Go 的 `map`（非并发安全（Concurrency Safety），需 `sync.RWMutex` 包裹）或 Node.js 的单线程事件循环（无并发修改问题）不同，Rust 在类型层面要求显式同步原语。
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-03-shared-state.html)] · [来源: [axum Documentation](https://docs.rs/axum/)]
 
-### 10.6 边界测试：HTTP 请求的 body 大小限制与内存 DoS（运行时 OOM）
+### 10.3 边界测试：HTTP 请求的 body 大小限制与内存 DoS（运行时 OOM）
 
 ```rust,compile_fail
 use axum::{Router, routing::post, extract::Json};
@@ -953,7 +1005,7 @@ fn app() -> Router {
 > 这与 Node.js 的 `body-parser`（默认 100KB 限制）、Go 的 `http.MaxBytesReader`、Python 的 Flask（`MAX_CONTENT_LENGTH`）类似——生产环境的 Web 服务必须配置请求限制。
 > [来源: [axum Documentation](https://docs.rs/axum/)] · [来源: [OWASP DoS](https://owasp.org/www-community/attacks/Denial_of_Service)]
 
-### 10.5 边界测试：Axum 的 extractor 顺序与请求体消耗（运行时 panic）
+### 10.4 边界测试：Axum 的 extractor 顺序与请求体消耗（运行时 panic）
 
 ```rust,compile_fail
 use axum::{extract::Json, routing::post, Router};
@@ -982,7 +1034,7 @@ async fn handler(Json(payload): Json<Payload>, /* Json(payload2): Json<Payload> 
 > 这与 Tower 的 `Service` 抽象一致：body 是 `http_body::Body` trait，消费后不可复用。
 > [来源: [Axum Extractors](https://docs.rs/axum/)] · [来源: [Tower Service](https://docs.rs/tower/)]
 
-### 10.4 边界测试：Axum 的 extractor 顺序与请求体消耗（运行时 panic）
+### 10.5 边界测试：重复提取请求体的简化错误示例（运行时 panic）
 
 ```rust,compile_fail
 use axum::{extract::Json, routing::post, Router};
@@ -1090,17 +1142,23 @@ mindmap
       Axum Tokio 生态的原生扩展
       Actix-web Actor
       Rocket 声明式编程与类型安全
+      Poem 模块化与 OpenAPI
     异步运行时集成对比
       运行时绑定策略
       运行时兼容性矩阵
     中间件机制深度对比
       中间件模型分类
       中间件对比矩阵
+      测试生态对比
     性能基准与资源效率
       TechEmpower 基准解读
       资源占用对比
     选型决策框架
+      决策树
       场景化推荐矩阵
+      快速选择检查表
 ```
 
 > **认知功能**: 本 mindmap 从本页「Rust Web 框架对比与选型」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+>
+> **跨层链接（L5）**: 将 Rust Web 框架与 TypeScript 生态对比，参见 [Rust vs TypeScript](../../05_comparative/02_managed_languages/08_rust_vs_typescript.md)。

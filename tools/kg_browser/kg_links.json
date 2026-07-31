@@ -188,7 +188,7 @@
   "ex:MemoryModel": "concept/03_advanced/02_unsafe/06_memory_model.md",
   "ex:UnsafeReference": "concept/03_advanced/02_unsafe/07_unsafe_reference.md",
   "ex:Macros_03procmacros": "concept/03_advanced/03_proc_macros/01_macros.md",
-  "ex:ProceduralMacros": "concept/03_advanced/03_proc_macros/02_proc_macro.md",
+  "ex:ProceduralMacros": "concept/02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
   "ex:ProceduralMacroCodeGenerationOptimization": "concept/03_advanced/03_proc_macros/03_proc_macro_code_generation_optimization.md",
   "ex:MacroDebuggingAndDiagnostics": "concept/03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md",
   "ex:ProductionGradeMacroDevelopment": "concept/03_advanced/03_proc_macros/05_production_grade_macro_development.md",

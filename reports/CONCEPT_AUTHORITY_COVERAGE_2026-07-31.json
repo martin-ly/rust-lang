@@ -1,45 +1,67 @@
 {
   "date": "2026-07-31",
-  "scanned": 601,
+  "scanned": 616,
   "coverage": {
     "P0": [
-      588,
-      97.8
+      603,
+      97.9
     ],
     "P1": [
-      562,
-      93.5
+      561,
+      91.1
     ],
     "P2": [
-      527,
-      87.7
+      538,
+      87.3
     ],
     "any": [
-      601,
+      616,
       100.0
     ],
     "none": 0
   },
   "content_scope": {
-    "scanned": 507,
+    "scanned": 522,
     "P0": [
-      499,
-      98.4
+      514,
+      98.5
     ],
     "P1": [
-      507,
-      100.0
+      506,
+      96.9
     ],
     "P2": [
-      507,
-      100.0
+      518,
+      99.2
     ],
     "any": [
-      507,
+      522,
       100.0
     ],
-    "gaps_p1": [],
-    "gaps_p2": []
+    "gaps_p1": [
+      "concept/02_intermediate/04_types_and_conversions/02_closure_types.md",
+      "concept/02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
+      "concept/02_intermediate/06_macros_and_metaprogramming/04_declarative_macros.md",
+      "concept/02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
+      "concept/02_intermediate/07_iterators_and_closures/02_closures.md",
+      "concept/03_advanced/04_ffi/06_ffi_deep_dive.md",
+      "concept/03_advanced/05_inline_assembly/02_inline_assembly_extended.md",
+      "concept/06_ecosystem/02_core_crates/02_serde.md",
+      "concept/06_ecosystem/02_core_crates/03_tokio.md",
+      "concept/06_ecosystem/02_core_crates/04_clap.md",
+      "concept/06_ecosystem/02_core_crates/05_tracing.md",
+      "concept/06_ecosystem/02_core_crates/06_reqwest.md",
+      "concept/06_ecosystem/02_core_crates/07_axum.md",
+      "concept/06_ecosystem/02_core_crates/08_sqlx.md",
+      "concept/06_ecosystem/04_web_and_networking/11_kubernetes_rust.md",
+      "concept/07_future/03_edition_differences/01_edition_2021_to_2024.md"
+    ],
+    "gaps_p2": [
+      "concept/02_intermediate/04_types_and_conversions/02_closure_types.md",
+      "concept/02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
+      "concept/02_intermediate/07_iterators_and_closures/02_closures.md",
+      "concept/03_advanced/05_inline_assembly/02_inline_assembly_extended.md"
+    ]
   },
   "by_layer": {
     "L0": {
@@ -53,19 +75,19 @@
       "any": 58
     },
     "L2": {
-      "n": 42,
-      "P0": 42,
-      "any": 42
+      "n": 45,
+      "P0": 45,
+      "any": 45
     },
     "L3": {
-      "n": 74,
-      "P0": 74,
-      "any": 74
+      "n": 76,
+      "P0": 76,
+      "any": 76
     },
     "L4": {
-      "n": 100,
-      "P0": 100,
-      "any": 100
+      "n": 101,
+      "P0": 101,
+      "any": 101
     },
     "L5": {
       "n": 27,
@@ -73,14 +95,14 @@
       "any": 27
     },
     "L6": {
-      "n": 154,
-      "P0": 142,
-      "any": 154
+      "n": 162,
+      "P0": 150,
+      "any": 162
     },
     "L7": {
-      "n": 73,
-      "P0": 72,
-      "any": 73
+      "n": 74,
+      "P0": 73,
+      "any": 74
     },
     "L?": {
       "n": 3,

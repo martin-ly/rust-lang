@@ -1,29 +1,29 @@
 {
   "summary": {
     "date": "2026-07-31",
-    "total_relations": 9584,
+    "total_relations": 9773,
     "generic_relation_annotation_count": 0,
     "generic_ratio_global": 0.0,
     "core_entities": 50,
-    "core_relations": 2646,
+    "core_relations": 2685,
     "core_generic_count": 0,
     "core_generic_ratio": 0.0,
     "core_lacking_semantic": 0,
     "global_predicate_distribution": {
-      "ex:hasPart": 4084,
-      "ex:dependsOn": 2015,
-      "ex:entails": 1424,
-      "ex:relatedTo": 949,
-      "ex:refines": 527,
-      "ex:partOf": 458,
-      "ex:appliesTo": 127
+      "ex:hasPart": 4153,
+      "ex:dependsOn": 2084,
+      "ex:entails": 1441,
+      "ex:relatedTo": 978,
+      "ex:refines": 539,
+      "ex:partOf": 450,
+      "ex:appliesTo": 128
     },
     "core_predicate_distribution": {
-      "ex:dependsOn": 1066,
+      "ex:dependsOn": 1104,
       "ex:hasPart": 622,
       "ex:entails": 392,
-      "ex:relatedTo": 286,
-      "ex:refines": 140,
+      "ex:relatedTo": 285,
+      "ex:refines": 142,
       "ex:partOf": 109,
       "ex:appliesTo": 31
     }
@@ -86,14 +86,14 @@
     "ex:AdvancedTraits": [
       [
         "ex:entails",
-        11
-      ],
-      [
-        "ex:dependsOn",
-        7
+        12
       ],
       [
         "ex:relatedTo",
+        8
+      ],
+      [
+        "ex:dependsOn",
         7
       ]
     ],
@@ -142,11 +142,11 @@
     "ex:AsyncClosures": [
       [
         "ex:dependsOn",
-        6
+        7
       ],
       [
         "ex:entails",
-        3
+        6
       ],
       [
         "ex:refines",
@@ -159,11 +159,11 @@
         6
       ],
       [
-        "ex:entails",
-        4
+        "ex:refines",
+        5
       ],
       [
-        "ex:refines",
+        "ex:entails",
         4
       ]
     ],
@@ -184,11 +184,11 @@
     "ex:AsyncProgramming": [
       [
         "ex:dependsOn",
-        100
+        109
       ],
       [
         "ex:entails",
-        38
+        36
       ],
       [
         "ex:relatedTo",
@@ -212,7 +212,7 @@
     "ex:Borrowing": [
       [
         "ex:dependsOn",
-        34
+        35
       ],
       [
         "ex:relatedTo",
@@ -226,7 +226,7 @@
     "ex:ConcurrencyModels": [
       [
         "ex:dependsOn",
-        84
+        85
       ],
       [
         "ex:entails",
@@ -272,11 +272,11 @@
       ],
       [
         "ex:entails",
-        5
+        4
       ],
       [
         "ex:relatedTo",
-        2
+        3
       ]
     ],
     "ex:DispatchMechanisms": [
@@ -324,7 +324,7 @@
     "ex:FutureAndExecutorMechanisms": [
       [
         "ex:dependsOn",
-        11
+        12
       ],
       [
         "ex:refines",
@@ -352,7 +352,7 @@
     "ex:Generics": [
       [
         "ex:dependsOn",
-        65
+        68
       ],
       [
         "ex:entails",
@@ -360,7 +360,7 @@
       ],
       [
         "ex:relatedTo",
-        18
+        16
       ]
     ],
     "ex:InteriorMutability": [
@@ -380,7 +380,7 @@
     "ex:Lifetimes": [
       [
         "ex:dependsOn",
-        19
+        20
       ],
       [
         "ex:relatedTo",
@@ -408,7 +408,7 @@
     "ex:LinearAndAffineLogic": [
       [
         "ex:dependsOn",
-        17
+        18
       ],
       [
         "ex:relatedTo",
@@ -468,7 +468,7 @@
       ],
       [
         "ex:entails",
-        11
+        10
       ],
       [
         "ex:relatedTo",
@@ -506,7 +506,7 @@
     "ex:Ownership": [
       [
         "ex:dependsOn",
-        129
+        138
       ],
       [
         "ex:relatedTo",
@@ -544,7 +544,7 @@
     "ex:PinAndUnpin": [
       [
         "ex:dependsOn",
-        24
+        25
       ],
       [
         "ex:entails",
@@ -600,7 +600,7 @@
     "ex:RustFFI": [
       [
         "ex:dependsOn",
-        26
+        27
       ],
       [
         "ex:entails",
@@ -608,7 +608,7 @@
       ],
       [
         "ex:refines",
-        6
+        7
       ]
     ],
     "ex:SafeAndEffectiveUnsafeRust": [
@@ -628,7 +628,7 @@
     "ex:SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts": [
       [
         "ex:dependsOn",
-        7
+        8
       ],
       [
         "ex:entails",
@@ -670,7 +670,7 @@
     "ex:Traits": [
       [
         "ex:dependsOn",
-        95
+        104
       ],
       [
         "ex:entails",
@@ -678,7 +678,7 @@
       ],
       [
         "ex:relatedTo",
-        21
+        20
       ]
     ],
     "ex:TypeLevelProgramming": [
@@ -712,7 +712,7 @@
     "ex:TypeSystemBasics": [
       [
         "ex:dependsOn",
-        151
+        150
       ],
       [
         "ex:relatedTo",

@@ -216,7 +216,7 @@ C++ 的 OO 特性是**语法内建**的：构造函数、运算符、`friend` �
 - [cppreference: dynamic_cast](https://en.cppreference.com/w/cpp/language/dynamic_cast)
 - [cppreference: Friend](https://en.cppreference.com/w/cpp/language/friend)
 - [RTTI 与动态类型识别](../../02_intermediate/04_types_and_conversions/05_rtti_and_dynamic_typing.md)
-- [C 预处理器 vs Rust 宏（Macro）](../../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md)
+- [C 预处理器 vs Rust 宏（Macro）](../../02_intermediate/06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md)
 - [异常安全](../../02_intermediate/03_error_handling/04_exception_safety_rust_cpp.md)
 - [构造与初始化](../../02_intermediate/00_traits/05_construction_and_initialization.md)
 - [友元 vs 模块隐私](../../02_intermediate/05_modules_and_visibility/02_friend_vs_module_privacy.md)

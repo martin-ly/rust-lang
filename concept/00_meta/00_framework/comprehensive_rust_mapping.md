@@ -142,7 +142,7 @@ Day 4: Android 与高级主题 (4 小时)
 | **Android Build System** | [`06_ecosystem/17_cross_compilation.md`](../../06_ecosystem/05_systems_and_embedded/02_cross_compilation.md) | §3 Android NDK | 补充 AOSP 集成 |
 | **AIDL & FFI** | [`03_advanced/04_ffi/01_rust_ffi.md`](../../03_advanced/04_ffi/01_rust_ffi.md) | §2 C 互操作 | 补充 JNI/NDK 绑定 |
 | **Async Rust** | [`03_advanced/01_async/01_async.md`](../../03_advanced/01_async/01_async.md) | §1–3 全部 | 补充 `async fn` 状态机 |
-| **Macros & Testing** | [`02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md`](../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md) | §1–2 全部 | 补充声明宏 hygiene |
+| **Macros & Testing** | [`02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md`](../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md) | 全文 | 补充声明宏 hygiene |
 
 ---
 

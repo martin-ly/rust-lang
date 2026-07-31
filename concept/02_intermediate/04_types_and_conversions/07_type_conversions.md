@@ -263,7 +263,7 @@ fn main() {
 use std::borrow::Borrow;
 use std::collections::HashMap;
 
-fn count_keys<K, V>(map: &HashMap<K, V>, key: &str) -> Option<&V>
+fn count_keys<'a, K, V>(map: &'a HashMap<K, V>, key: &'a str) -> Option<&'a V>
 where
     K: Borrow<str> + Eq + std::hash::Hash,
 {

@@ -6,7 +6,7 @@
 # 性能工程架构：系统级测量、分析与优化
 
 > **EN**: Performance Engineering Architecture
-> **Summary**: Performance Engineering Architecture — system-level performance methodology: flamegraphs, perf/eBPF, heap profiling (dhat-rs/heaptrack), lock contention, NUMA, memory alignment, pprof, tracing/metrics, and SLO/SLI/performance budgets, with Rust examples and ecosystem tooling.
+> **Summary**: Performance Engineering Architecture — system-level performance methodology: flamegraphs (perf/cargo-flamegraph/samply), heap profiling (dhat-rs/heaptrack), cache/layout, allocation reduction, SIMD/portable SIMD, async overhead, io_uring, lock contention, NUMA, pprof, tracing/metrics, and SLO/SLI/performance budgets, with Rust examples and ecosystem tooling.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: L6
@@ -16,7 +16,7 @@
 > **前置概念**: [Performance Optimization](01_performance_optimization.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Async/Await](../../03_advanced/01_async/01_async.md) · [Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md)
 > **后置概念**: [Data-Intensive Systems Design](../06_data_and_distributed/10_data_intensive_systems_design.md) · [Cloud Native](../04_web_and_networking/02_cloud_native.md) · [Microservice Patterns](../03_design_patterns/05_microservice_patterns.md)
 >
-> **来源**: [Systems Performance — Brendan Gregg](http://www.brendangregg.com/systems-performance-book.html) · [BPF Performance Tools — Brendan Gregg](http://www.brendangregg.com/bpf-performance-tools-book.html) · [Flamegraphs](https://www.brendangregg.com/flamegraphs.html) · [Linux perf](https://perf.wiki.kernel.org/) · [eBPF.io](https://ebpf.io/) · [dhat-rs](https://docs.rs/dhat/latest/dhat/) · [heaptrack](https://github.com/KDE/heaptrack) · [pprof-rs](https://github.com/tikv/pprof-rs) · [The Rust Performance Book](https://nnethercote.github.io/perf-book/)
+> **来源**: [Systems Performance — Brendan Gregg](http://www.brendangregg.com/systems-performance-book.html) · [BPF Performance Tools — Brendan Gregg](http://www.brendangregg.com/bpf-performance-tools-book.html) · [Flamegraphs](https://www.brendangregg.com/flamegraphs.html) · [cargo-flamegraph](https://github.com/flamegraph-rs/flamegraph) · [samply](https://github.com/mstange/samply) · [Linux perf](https://perf.wiki.kernel.org/) · [eBPF.io](https://ebpf.io/) · [dhat-rs](https://docs.rs/dhat/latest/dhat/) · [heaptrack](https://github.com/KDE/heaptrack) · [pprof-rs](https://github.com/tikv/pprof-rs) · [bumpalo](https://docs.rs/bumpalo/) · [The Rust Performance Book](https://nnethercote.github.io/perf-book/) · [tokio-uring](https://docs.rs/tokio-uring/) · [io_uring paper](https://kernel.dk/io_uring.pdf)
 
 ---
 
@@ -61,6 +61,7 @@
 **变更日志**:
 
 - v1.0 (2026-07-30): Wave 9 新增——性能工程架构权威页，覆盖火焰图、perf/eBPF、堆分析、锁竞争、NUMA、内存对齐、pprof、tracing/metrics、SLO/SLI 与性能预算
+- v1.1 (2026-07-31): Wave D 扩展——新增 cargo-flamegraph、samply、缓存/布局优化、分配减少、SIMD/portable SIMD、async 运行时开销、io_uring 深入
 
 ---
 
@@ -277,6 +278,73 @@ bpftrace -e 'profile:hz:99 /comm == "my-rust-app"/ { @stack[kstack] = count(); }
 
 ---
 
+### 2.4 cargo-flamegraph：一行命令生成火焰图
+
+> **[cargo-flamegraph](https://github.com/flamegraph-rs/flamegraph)** 是 Rust 生态的火焰图生成工具，封装了 `perf`（Linux）/ `dtrace`（macOS）采样与 Brendan Gregg 的火焰图脚本，使用 `cargo flamegraph --release` 即可直接得到 SVG。
+
+```bash
+# 安装
+cargo install flamegraph
+
+# 对默认二进制生成火焰图（默认 --release）
+cargo flamegraph
+
+# 指定 bench target 与自定义参数
+cargo flamegraph --bench my_bench -- --ignored
+
+# 输出文件：flamegraph.svg
+```
+
+**与 `perf` 的关系**：
+
+| 维度 | 手动 `perf` | `cargo flamegraph` |
+|:---|:---|:---|
+| 采样后端 | Linux `perf` | Linux `perf` / macOS `dtrace` / Windows xperf |
+| 调用栈解析 | 需手动 `stackcollapse-perf.pl` | 自动解析并生成 SVG |
+| Rust 符号 | 需 `RUSTFLAGS="-C force-frame-pointers=yes"` | 默认尝试；建议显式设置 |
+| 适用场景 | 服务器/容器精细控制 | 本地快速定位热点 |
+
+**关键纪律**：
+
+- 始终加 `--release`；debug 模式的调用栈与热点分布和线上差异巨大。
+- 在 CI/容器内使用时确保 `perf_event_paranoid` 允许用户态采样。
+- 对异步程序，宽塔可能落在 `poll` 调度层，需结合 `tracing` span 才能定位业务 handler。
+
+> **关键洞察**: `cargo flamegraph` 把“从采样到可视化”的流程压缩为一条命令，降低了火焰图的使用门槛，但测量纪律（release、frame pointers、足够样本）仍需人工保证。
+> [来源: [cargo-flamegraph README](https://github.com/flamegraph-rs/flamegraph)] · [来源: [Brendan Gregg — Flame Graphs](https://www.brendangregg.com/flamegraphs.html)]
+
+---
+
+### 2.5 samply：Firefox Profiler 格式的采样器
+
+> **[samply](https://github.com/mstange/samply)** 是 Mozilla 开发的采样 profiler，输出 **Firefox Profiler** 兼容格式（支持时间轴、线程、标记），特别适合分析 Rust 程序的时序行为与多线程交互。
+
+```bash
+# 安装
+cargo install samply
+
+# 对 release 二进制采样并自动打开浏览器（生成可交互的 profiler 视图）
+samply record ./target/release/myapp --arg value
+
+# 也可以指定输出 JSON 后导入 https://profiler.firefox.com
+samply record -o profile.json ./target/release/myapp
+```
+
+**与 `perf`/flamegraph 的互补场景**：
+
+| 场景 | 推荐工具 |
+|:---|:---|
+| 只看 CPU 热点占比 | `cargo flamegraph` / `perf` |
+| 观察多线程时序、阻塞、锁等待 | `samply` |
+| macOS 本地开发 | `samply`（dtrace 需要 root，samply 更轻量） |
+| 需要可共享的 Web 可视化 | `samply`（Firefox Profiler URL） |
+| CI 自动化回归 | `perf` / `pprof-rs` |
+
+> **关键洞察**: `samply` 的价值不在“找出最热函数”，而在“理解函数何时被调用、与谁并发、被什么阻塞”。对于 async/await 程序的调度卡顿分析尤为有效。
+> [来源: [samply GitHub](https://github.com/mstange/samply)] · [来源: [Firefox Profiler](https://profiler.firefox.com/)]
+
+---
+
 ## 三、内存分析
 
 ### 3.1 堆分析：dhat-rs 与 heaptrack
@@ -425,6 +493,221 @@ NUMA 优化原则:
 
 > **关键洞察**: NUMA 本地性对超高性能场景（如数据库、HPC）至关重要，但对普通 Web 服务影响较小。优化前先确认瓶颈确实在内存访问。
 > [来源: [NUMA FAQ](https://www.kernel.org/doc/html/latest/admin-guide/mm/numa-memory-policy.html)]
+
+---
+
+### 3.4 缓存与内存布局优化
+
+> **CPU 缓存层次**决定了程序实际能跑多快。Rust 程序员能直接控制的是**结构体字段顺序、对齐、热字段聚簇**，让频繁访问的数据落在同一缓存行，减少 cache miss。
+
+**字段排序影响结构体大小与缓存效率**：
+
+```rust
+// ❌ 差布局：大量 padding，64 字节只装 3 个有效字段
+#[derive(Default)]
+struct BadLayout {
+    flag: bool,      // 1 + 7 padding
+    id: u64,         // 8
+    count: u32,      // 4
+    name: [u8; 4],   // 4
+} // 24 bytes
+
+// ✅ 好布局：按大小降序排列，padding 最小
+#[derive(Default)]
+struct GoodLayout {
+    id: u64,         // 8
+    count: u32,      // 4
+    name: [u8; 4],   // 4
+    flag: bool,      // 1 + 7 padding
+} // 24 bytes（但热字段连续）
+```
+
+> 判定依据：可用 `cargo build --release` 后 `std::mem::size_of::<T>()` 实测；对热点结构体，用 `#[repr(C)]` 显式控制布局时需谨慎，因为默认 Rust 会重排字段优化。
+
+**热字段聚簇**：把同一条代码路径访问的字段放在一起，避免跨缓存行读取。例如网络包头解析时，把长度、类型、标志位放在结构体前 8 字节。
+
+> [来源: [Rust Performance Book — Type Sizes](https://nnethercote.github.io/perf-book/type-sizes.html)]
+
+---
+
+### 3.5 分配减少：arena、对象池与预分配
+
+> **分配频率**常常是比分配大小更关键的性能瓶颈。Rust 中常用三种技术减少分配：**arena（ bump allocator ）**、**对象池**、**预分配容器容量**。
+
+```rust
+// ✅ 预分配容量，避免热循环中反复 realloc
+let mut buf = Vec::with_capacity(1024);
+for item in items {
+    buf.push(item);
+}
+
+// ✅ bumpalo：短期对象的快速分配与一次性释放
+use bumpalo::Bump;
+let arena = Bump::new();
+let parsed: &[u8] = arena.alloc_slice_copy(input);
+// 离开作用域时整个 arena 一起释放
+```
+
+**对象池示例（连接/缓冲区复用）**：
+
+```rust,ignore
+// 使用 crossbeam::queue::ArrayQueue 做无锁缓冲区池
+use crossbeam::queue::ArrayQueue;
+
+static POOL: once_cell::sync::Lazy<ArrayQueue<Vec<u8>>> =
+    once_cell::sync::Lazy::new(|| ArrayQueue::new(128));
+
+fn acquire_buffer() -> Vec<u8> {
+    POOL.pop().unwrap_or_else(|| Vec::with_capacity(8192))
+}
+
+fn release_buffer(mut buf: Vec<u8>) {
+    buf.clear();
+    let _ = POOL.push(buf);
+}
+```
+
+**常见策略矩阵**：
+
+| 问题 | 方案 | 代表 crate |
+|:---|:---|:---|
+| 热循环中小对象频繁分配 | arena / bump allocator | `bumpalo` |
+| 解析器产生大量临时对象 | arena + 生命周期借用 | `bumpalo` |
+| 网络缓冲区反复 alloc/free | 对象池 | `crossbeam::queue::ArrayQueue` |
+| Vec 动态扩容 | 预分配 capacity | std |
+| 短字符串分配 | 小字符串优化 | `smol_str`, `compact_str` |
+
+> **关键洞察**: arena 的“一起释放”语义与 Rust 所有权模型天然契合——用短期借用的 arena 替代大量独立 Box，能显著降低分配器压力，但要求被分配对象的生命周期不超过 arena。
+> [来源: [Rust Performance Book — Heap Allocations](https://nnethercote.github.io/perf-book/heap-allocations.html)] · [来源: [bumpalo docs](https://docs.rs/bumpalo/)]
+
+---
+
+### 3.6 SIMD 与 portable SIMD
+
+> **SIMD（Single Instruction Multiple Data）** 允许一条指令同时处理多个数据元素。Rust 有两条使用路径：**编译器自动向量化**（推荐优先）与 **显式 portable SIMD**（`std::simd`，nightly 特性 `portable_simd`，或在稳定版用 `packed_simd_2`/`wide`）。
+
+**自动向量化**：
+
+```rust
+pub fn sum_squares(v: &[f64]) -> f64 {
+    v.iter().map(|x| x * x).sum()
+}
+```
+
+编译器在 `-C target-cpu=native` 或 `-C target-feature=+avx2` 下常能自动向量化。先用 `cargo asm` 确认是否生成 `vfmadd`/`vpadd` 等 SIMD 指令，再决定是否手写 SIMD。
+
+**显式 portable SIMD（nightly）**：
+
+```rust,ignore
+#![feature(portable_simd)]
+use std::simd::{f64x4, Simd};
+
+pub fn sum_squares_simd(v: &[f64]) -> f64 {
+    let chunks = v.chunks_exact(4);
+    let remainder = chunks.remainder();
+    let sum_vec: f64x4 = chunks.map(|c| Simd::from_array([c[0], c[1], c[2], c[3]]))
+        .map(|x| x * x)
+        .fold(f64x4::splat(0.0), |a, b| a + b);
+    let mut sum = sum_vec.reduce_add();
+    for &x in remainder {
+        sum += x * x;
+    }
+    sum
+}
+```
+
+**陷阱**：
+
+- 手动 SIMD 代码可读性差、边界处理繁琐，常不如编译器自动向量化。
+- 跨平台需处理不同 vector width（SSE/AVX/AVX-512/NEON）。
+- `std::simd` 尚未 stable；稳定版可用 `wide` / `packed_simd_2`。
+
+> **关键洞察**: SIMD 的首要原则是“先测自动向量化”。手动 SIMD 应留给已确认的热点且数据宽度规整的场景；过早手动 SIMD 是常见的过度优化。
+> [来源: [Rust Performance Book — SIMD](https://nnethercote.github.io/perf-book/simd.html)] · [来源: [std::simd tracking issue](https://github.com/rust-lang/rust/issues/86656)]
+
+---
+
+### 3.7 async 运行时开销
+
+> **async/await 不是零成本抽象的上限**。任务创建、waker 唤醒、跨线程调度都有开销；过度细分任务或滥用 `spawn` 会让运行时开销超过业务收益。
+
+**任务内存成本**：Tokio 任务至少包含 future 本身、join handle 元数据、waker 状态，通常数百字节到数 KB。把每个包都 `spawn` 会迅速耗尽内存。
+
+```rust,ignore
+// ❌ 过度细分：每个元素都 spawn
+for item in items {
+    tokio::spawn(process_one(item));
+}
+
+// ✅ 批量处理或 stream 流水线
+use futures::stream::{self, StreamExt};
+stream::iter(items)
+    .map(|x| async move { process_one(x).await })
+    .buffer_unordered(64)
+    .collect::<Vec<_>>()
+    .await;
+```
+
+**阻塞操作必须 offload**：
+
+```rust,ignore
+// ❌ 在 async worker 线程执行 CPU 密集或同步 I/O
+async fn bad() {
+    std::thread::sleep(std::time::Duration::from_secs(1)); // 阻塞 worker
+}
+
+// ✅ 使用 spawn_blocking
+tokio::task::spawn_blocking(|| {
+    std::thread::sleep(std::time::Duration::from_secs(1));
+}).await?;
+```
+
+**关键指标**：
+
+- 任务调度延迟（tokio RuntimeMetrics）
+- worker 线程 starvation 时间
+- spawned task 总数与完成速率
+
+> **关键洞察**: async 的收益来自 I/O 等待期间的并发复用。任务粒度应匹配 I/O 边界，而不是把同步代码拆成无数 future。
+> [来源: [Tokio RuntimeMetrics](https://docs.rs/tokio/latest/tokio/runtime/struct.RuntimeMetrics.html)] · [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
+
+---
+
+### 3.8 io_uring 深入：与 epoll 的边界
+
+> **`io_uring`**（Linux 5.1+）用一对共享内存环形队列（SQ/CQ）替代“一次 I/O 一次 syscall”，在 NVMe/高速网络场景下能显著降低延迟与 CPU 占用。Rust 生态主要通过 `tokio-uring` 与 `io-uring` crate 使用。
+
+**缓冲注册的所有权约束**：
+
+`IORING_REGISTER_BUFFERS` 预注册内存后，内核可直接 DMA。`tokio-uring` 要求缓冲区参数为 `'static`，因为缓冲区在内核持有期间不能被 Rust 释放——这一硬件约束被编码进类型系统：
+
+```rust,ignore
+use tokio_uring::fs::File;
+
+let buf = vec![0u8; 4096];
+let file = File::open("data.bin").await?;
+let (res, buf) = file.read_at(buf, 0).await;
+let n = res?;
+// buf 的所有权在 future 完成后返回
+```
+
+**与 epoll 的边界**：
+
+| 场景 | 推荐 |
+|:---|:---|
+| 千兆以下网络、通用 Web 服务 | epoll + tokio（成熟度/可移植性） |
+| NVMe 存储、高 IOPS | io_uring |
+| 100K+ QPS 网络服务 + Linux 5.10+ | 评估 tokio-uring |
+| 跨平台需求 | 不能用 io_uring（Linux only） |
+
+**生产注意**：
+
+- 内核版本探测：部分 opcode（如 `IORING_OP_READ_MULTISHOT`）需要 6.x。
+- 错误处理：`io_uring` 的完成队列可能返回 `-EAGAIN`、`-EINTR`，需与 syscall 语义对齐。
+- 调试难度比 epoll 高，建议先用标准 tokio 建立基线，再按 profile 证据切换。
+
+> **关键洞察**: io_uring 是“异步 syscall 批处理”，不是银弹。只有在 IOPS/QPS 已触达 epoll 瓶颈且团队能承担 Linux 专属复杂度时才引入。
+> [来源: [tokio-uring docs](https://docs.rs/tokio-uring/)] · [来源: [io_uring paper](https://kernel.dk/io_uring.pdf)]
 
 ---
 
@@ -772,14 +1055,27 @@ mindmap
     CPU 分析
       perf
       火焰图
+      cargo-flamegraph
+      samply
       pprof-rs
       eBPF
     内存分析
       dhat-rs
       heaptrack
       内存对齐
+      缓存布局优化
+      分配减少 arena
       false sharing
       NUMA
+    SIMD 与向量化
+      自动向量化
+      portable SIMD
+    async 运行时开销
+      任务粒度
+      spawn_blocking
+    io_uring
+      缓冲注册
+      与 epoll 边界
     并发优化
       锁竞争
       lock-free

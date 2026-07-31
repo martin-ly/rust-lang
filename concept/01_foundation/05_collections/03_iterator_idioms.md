@@ -118,7 +118,7 @@ let nums: Vec<i32> = lines
 `flat_map` 先映射，再把每个结果展平为单一迭代器。适合"每个元素产生多个元素"的场景。
 
 ```rust
-fn words_in_lines(lines: &[&str]) -> Vec<&str> {
+fn words_in_lines<'a>(lines: &'a [&str]) -> Vec<&'a str> {
     lines.iter().flat_map(|line| line.split_whitespace()).collect()
 }
 

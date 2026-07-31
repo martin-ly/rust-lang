@@ -77,7 +77,9 @@ mindmap
     - [8.1 边界测试：向量表未对齐（链接错误 / 启动崩溃）](#81-边界测试向量表未对齐链接错误--启动崩溃)
     - [8.2 边界测试：`.data` 复制源地址错误](#82-边界测试data-复制源地址错误)
     - [8.3 边界测试：CCM 上放 DMA 缓冲区（运行时静默错误）](#83-边界测试ccm-上放-dma-缓冲区运行时静默错误)
-  - [九、相关概念](#九相关概念)
+  - [九、链接属性与链接器指令矩阵](#九链接属性与链接器指令矩阵)
+  - [十、决策树：启动失败诊断](#十决策树启动失败诊断)
+  - [十一、相关概念](#十一相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -414,7 +416,45 @@ static DMA_BUF: [u8; 256] = [0; 256];
 
 ---
 
-## 九、相关概念
+## 九、链接属性与链接器指令矩阵
+
+| 属性 / 指令 | 作用对象 | 语义 | 裸机典型用途 | 注意 |
+|:---|:---|:---|:---|:---|
+| `#[no_mangle]` | 函数/静态项 | 禁用 Rust 符号名混淆 | `_start`、`Reset`、中断处理、C ABI | 不能与重载/泛型实例共享同名 |
+| `#[export_name = "..."]` | 函数/静态项 | 显式指定链接符号名 | 向量表项、bootloader 链式加载 | 优先级高于 `#[no_mangle]` |
+| `#[link_section = ".name"]` | 函数/静态项 | 放入指定 ELF section | 向量表、bootloader 版本、配置字 | section 必须在链接脚本中定义 |
+| `#[used]` | 静态项 | 防止 LLVM 优化删除符号 | panic 信息表、启动标记 | 仍需链接脚本 `KEEP` 防止 section 被 GC |
+| `#[used(linker)]`（nightly） | 静态项 | 强制链接器级别保留 | 同上 | 不需要 `KEEP` 配合 |
+| `KEEP(...)` | 链接脚本 | 阻止 `--gc-sections` 回收 | 向量表、init 数组、启动标记 | 与 `#[used]` 互补 |
+| `ALIGN(n)` | 链接脚本 | 按 n 字节对齐当前位置 | 向量表（256/512 字节）、DMA 缓冲区 | 对齐需与硬件要求一致 |
+| `AT(_loadaddr)` | 链接脚本 | 设置 section 加载地址（LMA） | `.data` 在 Flash、运行在 RAM | 配合 `LOADADDR` 使用 |
+| `LOADADDR(.data)` | 链接脚本 | 返回 section 的 LMA | 启动代码读取 `.data` 源地址 | LLD/GNU ld 语义基本一致 |
+| `> RAM` / `> FLASH` | 链接脚本 | 设置 section 运行地址（VMA） | 代码/只读数据放 Flash，可写数据放 RAM | 必须与 `MEMORY` 命令中的区域名匹配 |
+
+判定依据：属性决定“编译器输出什么符号”，链接器指令决定“符号放到哪里”。两者不一致是裸机启动失败的高发原因。
+
+---
+
+## 十、决策树：启动失败诊断
+
+```mermaid
+graph TD
+    A[上电后无法启动/立即 HardFault] --> B{调试器能否连接?}
+    B -->|否| C[检查电源/时钟/复位/调试接口]
+    B -->|是| D{PC 是否指向 Reset Handler?}
+    D -->|否| E[向量表未对齐/栈顶错误/链接脚本 memory.x 不匹配]
+    D -->|是| F{是否停在 _start 或 main?}
+    F -->|否| G[检查 .data/.bss 初始化是否越界或覆盖向量表]
+    F -->|是| H{全局变量初始值是否正确?}
+    H -->|否| I[.data 复制方向/源地址错误]
+    H -->|是| J{外设访问是否总线 fault?}
+    J -->|是| K[时钟未使能/外设地址错误/MPU 配置]
+    J -->|否| L[检查 main 返回或栈溢出]
+```
+
+---
+
+## 十一、相关概念
 
 - [Cortex-M 异常模型](14_interrupt_and_exception_model.md)
 - [panic_handler 与 no_std 运行时](18_panic_runtime_no_std.md)
@@ -425,6 +465,7 @@ static DMA_BUF: [u8; 256] = [0; 256];
 - [Rust vs Zig：系统编程的两种显式路径](../../05_comparative/01_systems_languages/06_rust_vs_zig.md)
 - [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
 - [安全关键裸机 OS 与 Rust](../../06_ecosystem/05_systems_and_embedded/19_safety_critical_bare_metal_os.md)
+- [`#![no_std]` 与裸机编程惯用法](23_no_std_and_bare_metal_idioms.md)
 
 ---
 

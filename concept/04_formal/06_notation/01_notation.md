@@ -18,7 +18,7 @@
 
 ---
 
-> **跨层回溯**: [宏系统](../../03_advanced/03_proc_macros/01_macros.md) · [过程宏（Procedural Macro）](../../03_advanced/03_proc_macros/02_proc_macro.md)
+> **跨层回溯**: [宏系统](../../03_advanced/03_proc_macros/01_macros.md) · [过程宏（Procedural Macro）](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md)
 
 ---
 

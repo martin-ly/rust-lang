@@ -81,7 +81,7 @@ flowchart LR
 |:---|:---|:---|
 | 如何定义共享行为？ | `trait` / 泛型约束 | [Traits](../../02_intermediate/00_traits/01_traits.md), [Generics](../../02_intermediate/01_generics/01_generics.md) |
 | 需要编译期多态还是运行时多态？ | 泛型单态化 / `dyn Trait` | [Dispatch Mechanisms](../../02_intermediate/00_traits/02_dispatch_mechanisms.md), [Type Erasure](../../03_advanced/06_low_level_patterns/03_type_erasure.md) |
-| 需要领域特定语言？ | 声明宏 / 过程宏 | [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md), [Proc Macros](../../03_advanced/03_proc_macros/02_proc_macro.md) |
+| 需要领域特定语言？ | 声明宏 / 过程宏 | [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md), [Proc Macros](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) |
 
 ### 3.6 工具链与生态场景
 

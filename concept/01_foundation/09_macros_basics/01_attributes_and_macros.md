@@ -17,7 +17,7 @@
 > **双维定位**: C×App — 应用属性和宏（Macro）扩展
 > **定位**: 系统讲解 Rust **属性（attributes）**和**声明宏（macro_rules!）**——从编译期元编程的基础语法到模式匹配（Pattern Matching）、递归宏和卫生性，揭示 Rust 如何在编译期生成代码同时保持类型安全。
 > **前置概念**: [Type System](../02_type_system/01_type_system.md) · [Modules](../07_modules_and_items/01_modules_and_paths.md)
-> **后置概念**: [Proc Macros](../../03_advanced/03_proc_macros/02_proc_macro.md) · [DSL](../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md)
+> **后置概念**: [Proc Macros](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) · [DSL](../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md)
 
 ---
 
@@ -604,11 +604,11 @@ graph TD
 ## 相关概念
 
 - **上层概念**: [Type System](../02_type_system/01_type_system.md) · [Modules](../07_modules_and_items/01_modules_and_paths.md)
-- **下层概念**: [Proc Macros](../../03_advanced/03_proc_macros/02_proc_macro.md) · [DSL](../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md)
+- **下层概念**: [Proc Macros](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) · [DSL](../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md)
 
 - [Type System](../02_type_system/01_type_system.md) — 类型系统（Type System）
 - [Modules](../07_modules_and_items/01_modules_and_paths.md) — 模块（Module）系统
-- [Proc Macros](../../03_advanced/03_proc_macros/02_proc_macro.md) — 过程宏（Procedural Macro）
+- [Proc Macros](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) — 过程宏（Procedural Macro）
 - [DSL](../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md) — DSL 模式
 
 ---

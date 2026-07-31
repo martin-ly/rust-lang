@@ -1,7 +1,7 @@
 > **EN**: C11 Macro System Proc
 > **Summary**: Stub README for the c11_macro_system_proc procedural-macro subcrate; points to the canonical procedural macro concept.
 >
-> **权威来源**: [concept/03_advanced/03_proc_macros/02_proc_macro.md](../../../../concept/03_advanced/03_proc_macros/02_proc_macro.md)
+> **权威来源**: [concept/02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md](../../../../concept/02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md)
 
 # C11 Macro System Proc
 

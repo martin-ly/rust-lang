@@ -157,9 +157,9 @@
 | [`assert_matches!`：模式匹配断言的形式化语义](../../02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md) | L2 进阶概念层 | 进阶 | 综述级 | A | L2-L4 | — |
 | [DSL 与嵌入 式设计：Rust 中的领域特定语言](../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md) | L2 进阶概念层 | 进阶 | 综述级 | — | L3-L4 | — |
 | [宏模式：编译期代码生成的工程实践](../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md) | L2 进阶概念层 | 进阶 | 综述级 | — | L3-L4 | — |
-| [元编程：Rust 的编译期代码生成与变换](../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md) | L2 进阶概念层 | 进阶 | 综述级 | — | L4-L5 | — |
-| [C 预处理器 vs Rust 宏：从文本替换到语法树](../../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md) | L2 进阶概念层 | 进阶 | 参考级 | — | L2-L4 | — |
-| [属性分类详解](../../02_intermediate/06_macros_and_metaprogramming/06_attributes_by_category.md) | L2 进阶概念层 | 进阶 | 进阶 | S | L2-L3 | — |
+| [元编程：Rust 的编译期代码生成与变换](../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md) | L2 进阶概念层 | 进阶 | 综述级 | — | L4-L5 | — |
+| [C 预处理器 vs Rust 宏：从文本替换到语法树](../../02_intermediate/06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md) | L2 进阶概念层 | 进阶 | 参考级 | — | L2-L4 | — |
+| [属性分类详解](../../02_intermediate/06_macros_and_metaprogramming/08_attributes_by_category.md) | L2 进阶概念层 | 进阶 | 进阶 | S | L2-L3 | — |
 | [Rust 迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) | L2 进阶概念层 | 进阶 | 综述级 | — | L3-L4 | — |
 | [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) | L3 高级概念层 | 专家 | 专家级 | — | L3-L5 | — |
 | [Send 与 Sync：Auto Trait 的并发安全契约](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md) | L3 高级概念层 | 专家 | 专家级 | S | L3-L4 | — |
@@ -189,7 +189,7 @@
 | [Rust 内存模型](../../03_advanced/02_unsafe/06_memory_model.md) | L3 高级概念层 | 专家 | 专家级 | S | L2-L4 | Byte Model → Provenance → UB Boundary |
 | [Unsafe 参考](../../03_advanced/02_unsafe/07_unsafe_reference.md) | L3 高级概念层 | 专家 | 专家级 | S | L2-L4 | Unsafe Keyword → Unsafe Block → Unsafe Operation → UB Contract |
 | [Macros](../../03_advanced/03_proc_macros/01_macros.md) | L3 高级概念层 | 专家 | 专家级 | — | L3-L4 | — |
-| [过程宏：编译期代码生成的元编程工具](../../03_advanced/03_proc_macros/02_proc_macro.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | — |
+| [过程宏：编译期代码生成的元编程工具](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) | L3 高级概念层 | 专家 | 专家级 | — | L4-L5 | — |
 | [过程宏代码生成优化](../../03_advanced/03_proc_macros/03_proc_macro_code_generation_optimization.md) | L3 高级概念层 | 专家 | 专家级 | — | L3-L5 | — |
 | [宏调试与诊断](../../03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md) | L3 高级概念层 | 专家 | 专家级 | P | L3-L4 | — |
 | [生产级宏开发](../../03_advanced/03_proc_macros/05_production_grade_macro_development.md) | L3 高级概念层 | 专家 | 专家级 | — | L3-L5 | — |

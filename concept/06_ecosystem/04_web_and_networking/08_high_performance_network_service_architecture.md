@@ -5,7 +5,7 @@
 # 高性能网络服务架构 (High-Performance Network Service Architecture)
 >
 > **EN**: High-Performance Network Service Architecture
-> **Summary**: Building high-performance network services in Rust: zero-copy, io_uring, lock-free structures, NUMA awareness, and multi-queue networking.
+> **Summary**: Building production high-performance network services in Rust: zero-copy, io_uring, lock-free structures, NUMA awareness, multi-queue networking, observability, graceful shutdown, connection pooling, timeouts/backpressure, health checks, and deployment concerns.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: L4-L5
@@ -14,7 +14,7 @@
 > **前置概念**: [Type System Basics](../../01_foundation/02_type_system/01_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)
 > **后置概念**: [Performance Optimization](../10_performance/01_performance_optimization.md)
 > **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
-> **主要来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
+> **主要来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [tokio-tracing](https://docs.rs/tracing/latest/tracing/) · [metrics-rs](https://docs.rs/metrics/latest/metrics/) · [reqwest](https://docs.rs/reqwest/) · [axum](https://docs.rs/axum/) · [Tower](https://docs.rs/tower/) · [Kubernetes Docs](https://kubernetes.io/docs/) · [Google SRE Book](https://sre.google/sre-book/table-of-contents/) · [Zero To Production in Rust](https://www.zero-to-production.com/)
 
 ---
 
@@ -25,7 +25,7 @@
 
 # 高性能网络服务架构
 
-**主题**: 零拷贝、io_uring、无锁架构、NUMA优化
+**主题**: 零拷贝、io_uring、无锁架构、NUMA优化、生产可观测性、优雅关闭、连接池、超时背压、健康检查、部署关切
 **难度**: ⭐⭐⭐⭐⭐
 **预计学习时间**: 20-25 小时
 
@@ -73,6 +73,12 @@
     - [8.1 架构选择决策树](#81-架构选择决策树)
     - [8.2 性能优化检查清单](#82-性能优化检查清单)
     - [8.3 系统调优参数](#83-系统调优参数)
+  - [9. 生产级可观测性](#9-生产级可观测性)
+  - [10. 优雅关闭](#10-优雅关闭)
+  - [11. 连接池与上游管理](#11-连接池与上游管理)
+  - [12. 超时与背压](#12-超时与背压)
+  - [13. 健康检查设计](#13-健康检查设计)
+  - [14. 部署关切](#14-部署关切)
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
   - [总结](#总结)
     - [关键技术对比](#关键技术对比)
@@ -2055,6 +2061,257 @@ echo "✅ 系统调优完成！"
 
 ---
 
+## 9. 生产级可观测性
+
+> **可观测性三支柱**（日志、指标、追踪）是高性能服务持续调优的基础。Rust 生态以 `tracing` 为核心，通过 `tracing-opentelemetry` 接入分布式追踪，用 `metrics-rs` 输出 Prometheus 指标。
+
+```rust,ignore
+// Cargo.toml
+// [dependencies]
+// tracing = "0.1"
+// tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt", "json"] }
+// metrics = "0.24"
+// metrics-exporter-prometheus = "0.16"
+
+use tracing::{info, instrument};
+use metrics::{counter, histogram, gauge};
+use std::time::Instant;
+
+#[instrument(skip(db))]
+async fn handle_user(db: &PgPool, id: i64) -> Result<User, StatusCode> {
+    let start = Instant::now();
+    counter!("http_requests_total", "route" => "user") -> 1;
+    gauge!("active_requests", 1.0);
+
+    let user = sqlx::query_as!(User, "SELECT * FROM users WHERE id = $1", id)
+        .fetch_one(db)
+        .await
+        .map_err(|_| StatusCode::NOT_FOUND)?;
+
+    histogram!(
+        "http_request_duration_seconds",
+        start.elapsed().as_secs_f64(),
+        "route" => "user"
+    );
+    info!(user_id = id, "user fetched");
+    Ok(user)
+}
+
+// Prometheus endpoint
+fn start_metrics_server() {
+    metrics_exporter_prometheus::PrometheusBuilder::new()
+        .install_recorder()
+        .unwrap();
+}
+```
+
+**健康检查端点设计**：
+
+```rust,ignore
+use axum::{routing::get, Json, Router};
+use serde_json::json;
+
+async fn health() -> Json<serde_json::Value> {
+    Json(json!({
+        "status": "ok",
+        "version": env!("CARGO_PKG_VERSION"),
+    }))
+}
+
+async fn ready() -> Result<Json<serde_json::Value>, StatusCode> {
+    // 检查数据库等依赖
+    check_db().await.map_err(|_| StatusCode::SERVICE_UNAVAILABLE)?;
+    Ok(Json(json!({"status": "ready"})))
+}
+
+let app = Router::new()
+    .route("/healthz", get(health))
+    .route("/readyz", get(ready));
+```
+
+> **关键洞察**: 指标告诉你“有问题”，追踪告诉你“在哪里”，日志告诉你“为什么”。三者必须关联同一个 request ID 才能在生产环境快速定位根因。
+> [来源: [Google SRE Book — Monitoring](https://sre.google/sre-book/monitoring-distributed-systems/)] · [来源: [tokio-tracing](https://docs.rs/tracing/)] · [来源: [metrics-rs](https://docs.rs/metrics/)]
+
+---
+
+## 10. 优雅关闭
+
+> **优雅关闭**保证在收到终止信号后，先停止接收新连接，再等待 in-flight 请求完成，最后释放资源。Tokio 中通常组合 `tokio::signal::ctrl_c` 与 `tokio::sync::watch` 实现 drain。
+
+```rust,ignore
+use axum::serve;
+use tokio::{signal, sync::watch};
+use std::time::Duration;
+
+#[tokio::main]
+async fn main() {
+    let (tx, rx) = watch::channel(false);
+
+    let app = build_app();
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
+
+    let server = serve(listener, app)
+        .with_graceful_shutdown(shutdown_signal(rx));
+
+    // 启动后等待关闭信号
+    server.await.unwrap();
+    // 给 in-flight 请求一个最大等待时间
+    tokio::time::timeout(Duration::from_secs(30), drain_in_flight()).await.ok();
+    info!("shutdown complete");
+}
+
+async fn shutdown_signal(mut rx: watch::Receiver<bool>) {
+    signal::ctrl_c().await.unwrap();
+    let _ = rx.changed().await; // 或直接使用 ctrl_c 触发
+}
+```
+
+**Kubernetes 集成注意**：
+
+- `preStop` hook 给应用发送 `SIGTERM`，Pod 的 `terminationGracePeriodSeconds` 决定最大等待时间。
+- readiness probe 应在收到 SIGTERM 后立即失败，避免新流量进入。
+- 若 graceful shutdown 超时，Kubernetes 会发送 `SIGKILL`。
+
+> **关键洞察**: 优雅关闭不是“无限等待”，而是**在业务可接受的最大时间内有序释放**。必须设定硬超时，否则故障节点会拖垮编排器的滚动升级。
+> [来源: [Kubernetes — Termination of Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination)] · [来源: [axum graceful shutdown](https://docs.rs/axum/latest/axum/serve/struct.Serve.html)]
+
+---
+
+## 11. 连接池与上游管理
+
+> **HTTP 连接池**减少 TCP/TLS 握手开销。`reqwest::Client` 内部维护池；对上游服务应复用同一 `Client`，并配置连接/空闲超时。
+
+```rust,ignore
+use reqwest::Client;
+use std::time::Duration;
+
+let client = Client::builder()
+    .pool_max_idle_per_host(32)
+    .idle_timeout(Duration::from_secs(60))
+    .connect_timeout(Duration::from_secs(5))
+    .timeout(Duration::from_secs(30))
+    .build()?;
+
+// 复用 client 发起请求
+let resp = client.get("https://api.example.com/user/1").send().await?;
+```
+
+**连接池参数含义**：
+
+| 参数 | 作用 | 建议 |
+|:---|:---|:---|
+| `pool_max_idle_per_host` | 每个 host 最大空闲连接 | 32-100，根据上游并发度 |
+| `idle_timeout` | 空闲连接回收 | 60s，避免占用过多 FD |
+| `connect_timeout` | TCP 连接建立超时 | 5s |
+| `timeout` | 整体请求超时 | 30s 或按业务 SLA |
+| HTTP/2 | 多路复用单连接 | 适合高并发小请求 |
+
+> **关键洞察**: 连接池大小不是越大越好。过多的空闲连接会消耗文件描述符与上游资源；过小的池会导致频繁握手。应结合上游吞吐与延迟实测调优。
+> [来源: [reqwest docs](https://docs.rs/reqwest/)] · [来源: [hyper connection pooling](https://docs.rs/hyper/)]
+
+---
+
+## 12. 超时与背压
+
+> **超时**防止请求无限挂起；**背压**防止系统被突发流量压垮。Rust 生态常用 Tower 中间件实现：`Timeout`、`RateLimit`、`LoadShed`、`Retry`。
+
+```rust,ignore
+use tower::{ServiceBuilder, timeout::TimeoutLayer, limit::RateLimitLayer};
+use std::time::Duration;
+
+let service = ServiceBuilder::new()
+    .layer(TimeoutLayer::new(Duration::from_secs(5)))
+    .layer(RateLimitLayer::new(100, Duration::from_secs(1)))
+    .service(handler);
+```
+
+**背压的三种形态**：
+
+| 机制 | 作用 | 实现 |
+|:---|:---|:---|
+| 并发限制 | 限制同时处理的请求数 | `tokio::sync::Semaphore` |
+| 速率限制 | 限制单位时间请求数 | Tower `RateLimitLayer` |
+| 负载丢弃 | 过载时快速失败 | Tower `LoadShedLayer` |
+
+**级联超时传递**：
+
+```rust,ignore
+use axum::extract::Request;
+use tower_http::timeout::TimeoutLayer;
+
+let app = Router::new()
+    .route("/api/*path", get(api_handler))
+    .layer(TimeoutLayer::new(Duration::from_secs(10)));
+```
+
+> **关键洞察**: 超时应该分层设置（客户端总超时 > 网关超时 > 服务超时 > 数据库超时），并确保 deadline 向下游传递，避免“上游已放弃，下游还在跑”的资源浪费。
+> [来源: [Tower docs](https://docs.rs/tower/)] · [来源: [Google SRE Book — Handling Overload](https://sre.google/sre-book/handling-overload/)]
+
+---
+
+## 13. 健康检查设计
+
+> **健康检查**分三种 probe：liveness（存活，决定是否需要重启）、readiness（就绪，决定是否接收流量）、startup（启动，替代 liveness 的初始检查）。
+
+**设计原则**：
+
+- **liveness 必须简单**：只检查进程是否还活着，避免依赖故障导致级联重启。
+- **readiness 检查依赖**：数据库、缓存、消息队列等依赖可用时才返回 ready。
+- **避免副作用**：健康检查不应写数据库、不应触发业务逻辑。
+- **返回结构化信息**：便于编排器与监控解析。
+
+```rust,ignore
+async fn liveness() -> &'static str { "ok" }
+
+async fn readiness(State(deps): State<Dependencies>) -> StatusCode {
+    if deps.db.ping().await.is_ok() && deps.cache.ping().await.is_ok() {
+        StatusCode::OK
+    } else {
+        StatusCode::SERVICE_UNAVAILABLE
+    }
+}
+```
+
+> **关键洞察**: 健康检查端点被频繁调用，必须保持低开销。把“业务健康”与“依赖健康”分开到 readiness，避免 liveness 因瞬时依赖抖动导致 Pod 反复重启。
+> [来源: [Kubernetes Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)]
+
+---
+
+## 14. 部署关切
+
+> **高性能网络服务的部署**不仅关乎代码，还涉及镜像体积、静态链接、资源限制、编排策略与发布流程。
+
+**镜像与构建优化**：
+
+```dockerfile
+# 多阶段构建，减小最终镜像
+FROM rust:1.97 AS builder
+WORKDIR /app
+COPY . .
+RUN cargo build --release
+
+FROM gcr.io/distroless/cc-debian12
+COPY --from=builder /app/target/release/myapp /usr/local/bin/myapp
+ENTRYPOINT ["/usr/local/bin/myapp"]
+```
+
+**部署清单**：
+
+| 关切 | 建议 |
+|:---|:---|
+| 镜像体积 | 使用 distroless / alpine / scratch（静态链接 MUSL） |
+| 静态链接 | `cargo build --target x86_64-unknown-linux-musl` |
+| 资源限制 | 设置 CPU/memory request/limit，预留 headroom |
+| 水平扩展 | HPA 基于 CPU/自定义指标；避免基于内存（Go-style GC 不适用 Rust） |
+| 发布策略 | canary / blue-green，配合 readiness/liveness probe |
+| 配置管理 | 环境变量 + configmap；secrets 用 Kubernetes secrets 或外部 KMS |
+| 可观测性 |  sidecar/stdout 输出日志；Prometheus scrape annotations |
+
+> **关键洞察**: Rust 的二进制体积小、启动快、内存占用稳定，非常适合容器化与 serverless。但如果没有合理的资源限制与优雅关闭，高并发服务的优势会在编排器层面被抵消。
+> [来源: [Distroless](https://github.com/GoogleContainerTools/distroless)] · [来源: [Kubernetes Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)] · [来源: [Zero To Production in Rust](https://www.zero-to-production.com/)]
+
+---
+
 ## ⚠️ 反例与陷阱
 
 **陷阱：零拷贝缓冲区复用时旧视图未释放**。高性能网络服务复用 read buffer 是常态，但只要还持有指向 buffer 的切片（Slice），就不能清空/重填它——借用（Borrowing）检查器把「悬垂视图」问题从运行时（Runtime）崩溃前移到编译期：
@@ -2125,11 +2382,11 @@ fn process(buf: &mut Vec<u8>) -> usize {
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]；2026-07-31 Wave D 扩展生产可观测性、优雅关闭、连接池、超时背压、健康检查、部署关切
 
-**文档版本**: 1.1
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**文档版本**: 1.2
+**最后更新**: 2026-07-31
+**状态**: ✅ Wave D 扩展完成
 
 ## 过渡段
 
@@ -2154,8 +2411,9 @@ fn process(buf: &mut Vec<u8>) -> usize {
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
-- **P2 生态/社区**: [docs.rs/tokio-tungstenite — 生态权威 API 文档](https://docs.rs/tokio-tungstenite) · [docs.rs/axum — 生态权威 API 文档](https://docs.rs/axum)
+- **P2 生态/社区**: [docs.rs/tokio-tungstenite — 生态权威 API 文档](https://docs.rs/tokio-tungstenite) · [docs.rs/axum — 生态权威 API 文档](https://docs.rs/axum) · [docs.rs/tracing](https://docs.rs/tracing) · [docs.rs/metrics](https://docs.rs/metrics) · [docs.rs/reqwest](https://docs.rs/reqwest) · [docs.rs/tower](https://docs.rs/tower)
 - **P1 学术/形式化**: [Hoare: Communicating Sequential Processes (CACM 1978)](https://dl.acm.org/doi/10.1145/359576.359585)
+- **P0 官方/平台**: [Kubernetes Documentation](https://kubernetes.io/docs/) · [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
 
 ---
 
@@ -2183,6 +2441,30 @@ mindmap
     无锁网络架构
       Lock-Free数据结构
       Per-Core架构
+    NUMA感知优化
+      内存亲和性
+      中断绑定
+    多队列网络编程
+      RSS RPS RFS
+      XPS
+    生产级可观测性
+      tracing
+      metrics
+      健康检查
+    优雅关闭
+      信号处理
+      drain
+    连接池与上游
+      reqwest
+      keep alive
+    超时与背压
+      Tower Timeout
+      RateLimit
+      Semaphore
+    部署关切
+      容器镜像
+      K8s probes
+      静态链接
 ```
 
 > **认知功能**: 本 mindmap 从本页「高性能网络服务架构 High-Performance」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

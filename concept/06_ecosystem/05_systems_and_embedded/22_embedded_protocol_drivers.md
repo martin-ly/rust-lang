@@ -800,6 +800,10 @@ fn start_adc_dma(dma: &mut Dma) {
 ### 14.2 SPI 片选必须在整个事务期间保持低电平
 
 ```rust
+// 最小 trait 定义，仅用于示例编译
+trait SpiBus { fn write(&mut self, _: &[u8]) -> Result<(), ()> { Ok(()) } fn read(&mut self, _: &mut [u8]) -> Result<(), ()> { Ok(()) } }
+trait OutputPin { fn set_low(&mut self) -> Result<(), ()> { Ok(()) } fn set_high(&mut self) -> Result<(), ()> { Ok(()) } }
+
 // ❌ 边界示例：错误地在两次传输之间释放 CS
 fn bad_read(spi: &mut impl SpiBus, cs: &mut impl OutputPin) {
     cs.set_low().ok();
@@ -898,6 +902,7 @@ fn read_eeprom(i2c: &mut I2c1) {
 
 - [Rust vs Zig：系统编程的两种显式路径](../../05_comparative/01_systems_languages/06_rust_vs_zig.md)
 - [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
+- [`embedded-hal` 与驱动惯用法](24_embedded_hal_and_driver_idioms.md)
 
 ## 🧭 思维导图（Mindmap）
 

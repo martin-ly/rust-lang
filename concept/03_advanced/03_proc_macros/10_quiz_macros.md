@@ -32,7 +32,7 @@
 >
 > **前置概念**: [宏（Macro）模式](../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md)
 > [Macros](01_macros.md) ·
-> [Proc Macros](02_proc_macro.md) ·
+> [Proc Macros](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) ·
 > [Type System](../../01_foundation/02_type_system/01_type_system.md)
 >
 > **对应练习**:
@@ -276,7 +276,7 @@ impl PartialEq for Point {
 
 **自定义 derive**：通过 `proc_macro_derive` 创建自己的 derive 宏（Macro）。
 
-**知识点**：derive 宏是最常用的过程宏（Procedural Macro），消除了大量 boilerplate。理解其生成的代码有助于调试复杂的 trait 约束问题。[→ 过程宏详解](02_proc_macro.md)
+**知识点**：derive 宏是最常用的过程宏（Procedural Macro），消除了大量 boilerplate。理解其生成的代码有助于调试复杂的 trait 约束问题。[→ 过程宏详解](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md)
 
 </details>
 
@@ -329,7 +329,7 @@ fn add(a: i32, b: i32) -> i32 {
 - 属性宏：**修改**已有 AST 节点（函数、结构体（Struct）等）
 - 函数宏（`proc_macro`）：**生成**新代码，通过 `!` 调用
 
-**知识点**：属性宏是构建编译期 AOP（面向切面编程）和代码生成工具的核心机制。`tokio::main`、`test`、`derive` 都是属性宏。[→ 过程宏（Procedural Macro）详解](02_proc_macro.md)
+**知识点**：属性宏是构建编译期 AOP（面向切面编程）和代码生成工具的核心机制。`tokio::main`、`test`、`derive` 都是属性宏。[→ 过程宏（Procedural Macro）详解](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md)
 
 </details>
 
@@ -630,7 +630,7 @@ macro_rules! make_vec {
 ## 五、规范题型补充：单选 · 多选 · 判断
 
 > 本节按四级题型规范补充单选、多选与判断题，知识点与
-> [Macros](01_macros.md)、[Proc Macros](02_proc_macro.md) 权威页一致；
+> [Macros](01_macros.md)、[Proc Macros](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) 权威页一致；
 > 干扰项针对常见误解设计。
 
 ### Q11. 🟢【单选】声明宏（`macro_rules!`）与普通函数最本质的区别是？
@@ -719,7 +719,7 @@ macro_rules! make_vec {
 |:---:|:---|:---|
 | 10/10 | 🏆 宏系统已内化 | 尝试为 crates/ 编写自定义 derive 或属性宏 |
 | 7–9/10 | ✅ 核心概念掌握 | 强化 [宏练习](../../exercises/src/macros)，阅读 `vec!` 等标准宏的源码 |
-| 4–6/10 | 🔄 需巩固基础 | 重读 [Macros](01_macros.md) · [Proc Macros](02_proc_macro.md) |
+| 4–6/10 | 🔄 需巩固基础 | 重读 [Macros](01_macros.md) · [Proc Macros](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) |
 | 0–3/10 | 📚 建议重新开始 | 从 [宏基础](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) 开始，配合 [TLBoRM](https://danielkeep.github.io/tlborm/book/) |
 
 ---

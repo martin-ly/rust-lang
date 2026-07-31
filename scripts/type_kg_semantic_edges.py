@@ -99,7 +99,7 @@ CURATED_INSTANCE: list[tuple[str, str, str, str]] = [
     ("ex:ProceduralMacros", "ex:Macros", "I3-self-evident-kind",
      "01_foundation/09_macros_basics/01_attributes_and_macros.md:4 关键术语"
      "“宏 (Macro) · 声明宏 (Declarative Macro) · 过程宏 (Procedural Macro)”；"
-     "03_advanced/03_proc_macros/02_proc_macro.md:170“三种宏（Macro）的编译期执行模型相同”——过程宏是宏的一种"),
+     "02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md:170“三种宏（Macro）的编译期执行模型相同”——过程宏是宏的一种"),
     ("ex:DerivableTraits", "ex:Traits", "I3-self-evident-kind",
      "02_intermediate/00_traits/06_derive_traits.md:7 Summary"
      "“标准库中可通过 #[derive(...)] 自动实现的 trait 参考”——可派生 trait 是 trait 的一个子范畴"),

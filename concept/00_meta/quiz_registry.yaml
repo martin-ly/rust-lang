@@ -1,5 +1,5 @@
 schema_version: 1
-generated: '2026-07-13'
+generated: '2026-07-31'
 purpose: 全库测验资产机器可读注册表（W3-a）。人类可读索引见 concept/00_meta/04_navigation/15_quiz_registry.md；一致性由 scripts/check_quiz_system.py 校验。
 standalone_quizzes:
 - path: concept/01_foundation/11_quizzes/01_quiz_type_system.md
@@ -252,7 +252,7 @@ standalone_quizzes:
   quiz_to_concept: true
   concept_pages:
   - concept/03_advanced/03_proc_macros/01_macros.md
-  - concept/03_advanced/03_proc_macros/02_proc_macro.md
+  - concept/02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md
   concept_to_quiz_backlink: true
 - path: concept/04_formal/04_model_checking/06_quiz_formal_methods.md
   layer: L4
@@ -439,8 +439,8 @@ standalone_quizzes:
   concept_to_quiz_backlink: true
 embedded_quizzes:
   description: concept/ 页面内嵌入式测验（### 测验 N + <details> 答题块），按页聚合
-  pages: 326
-  total_blocks: 1422
+  pages: 340
+  total_blocks: 1476
   items:
   - path: concept/00_meta/00_framework/bloom_taxonomy.md
     blocks: 3
@@ -692,8 +692,8 @@ embedded_quizzes:
     blocks: 3
   - path: concept/03_advanced/03_proc_macros/01_macros.md
     blocks: 4
-  - path: concept/03_advanced/03_proc_macros/02_proc_macro.md
-    blocks: 5
+  - path: concept/02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md
+    blocks: 4
   - path: concept/03_advanced/03_proc_macros/08_syn_quote_reference.md
     blocks: 3
   - path: concept/03_advanced/04_ffi/01_rust_ffi.md

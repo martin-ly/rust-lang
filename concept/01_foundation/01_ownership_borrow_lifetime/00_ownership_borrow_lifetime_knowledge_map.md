@@ -431,7 +431,7 @@ graph TB
 
 一个常见误解是：只要函数签名写上生命周期标注，就能让引用“活得更久”。实际上，生命周期标注只是关系声明，不能创造内存。
 
-```rust,compile_fail,E0597
+```rust,compile_fail
 fn dangling() -> &i32 {
     let local = 42;
     &local

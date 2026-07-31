@@ -185,8 +185,10 @@ graph TB
 | [03_unsafe.md](02_unsafe/01_unsafe.md) | Unsafe Rust | 裸指针、FFI、UB 边界、Safety 契约、Miri | ✅ v1.0 | 所有 L1-L2 概念 | RustBelt (unsafe 验证), C++ 对比 |
 | [04_macros.md](03_proc_macros/01_macros.md) | 宏系统 | `macro_rules!`、过程宏（Procedural Macro）、DSL、卫生宏 | ✅ v1.0 | Type System + Trait | 生态 (代码生成), AI (模板生成) |
 | [05_rust_ffi.md](04_ffi/01_rust_ffi.md) | FFI 跨语言 | extern 块、ABI 兼容、类型映射、bindgen、回调封装 | ✅ v1.0 | Type System + Unsafe | 生态 (跨语言), C++ 对比 |
+| [06_ffi_deep_dive.md](04_ffi/06_ffi_deep_dive.md) | FFI 深度解析 | C ABI、`repr(C)`、调用约定、变长参数、panic 边界、链接与符号 | ✅ v1.0 | FFI + Type System | 生态 (跨语言), C++ 对比 |
 | 06_pin_unpin.md | Pin 与 Unpin | 自引用（Reference）类型、PhantomPinned、async 状态机、Pin API 契约 | ✅ v1.0 | Ownership + Generics | Async, Gen Blocks |
-| [07_proc_macro.md](03_proc_macros/02_proc_macro.md) | 过程宏（Procedural Macro） | Derive/Attribute/Function-like、TokenStream、syn/quote | ✅ v1.0 | Trait + Type System | 生态 (代码生成), DSL |
+| [10_std_unsafe_internals.md](02_unsafe/10_std_unsafe_internals.md) | 标准库 unsafe 内部实现 | Vec raw parts、HashMap/BTreeMap 不变量、UnsafeCell、MaybeUninit | ✅ v1.0 | Unsafe + Memory | RustBelt, Custom Allocators |
+| [07_proc_macro.md](../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) | 过程宏（Procedural Macro） | Derive/Attribute/Function-like、TokenStream、syn/quote | ✅ v1.0 | Trait + Type System | 生态 (代码生成), DSL |
 | [08_nll_and_polonius.md](02_unsafe/03_nll_and_polonius.md) | NLL 与 Polonius | 非词法生命周期、数据流分析、Origin 模型、借用检查演进 | ✅ v1.0 | Borrowing, Lifetimes | RustBelt, Pin |
 | [19_parallel_distributed_pattern_spectrum.md](00_concurrency/08_parallel_distributed_pattern_spectrum.md) | 并行-分布式谱系 | 线程池→工作窃取→Actor→CSP→数据流→共识的连续体 | ✅ v1.0 | Concurrency, Async | Distributed Systems |
 | [20_stream_processing_semantics.md](06_low_level_patterns/05_stream_processing_semantics.md) | 流处理语义 | Dataflow Model、Watermark、Exactly-Once、Differential Dataflow | ✅ v1.0 | Concurrency, Async | Stream Processing Ecosystem |
@@ -200,10 +202,13 @@ graph TB
 - [Async Closures（异步闭包）](01_async/07_async_closures.md)
 - [GAT 与 Async 交叉边界语义](01_async/14_gat_async_boundary.md)
 - [FFI 高级主题：跨语言边界的安全与性能](04_ffi/02_ffi_advanced.md)
+- [FFI 深度解析：C ABI、调用约定与链接](04_ffi/06_ffi_deep_dive.md)
 - [并发 模式：从消息 传递到锁自由的数据结构](00_concurrency/03_concurrency_patterns.md)
 - 原子操作（Atomic Operations）与内存序：无锁并发的精确控制
 - [Unsafe Rust 模式：安全抽象的核心技术](02_unsafe/04_unsafe_rust_patterns.md)
-- 内联汇编（Inline Assembly）：`asm!` 宏（Macro）与跨平台 SIMD
+- [标准库 unsafe 内部实现概念解析](02_unsafe/10_std_unsafe_internals.md)
+- [内联汇编 (Inline Assembly)](05_inline_assembly/01_inline_assembly.md)
+- [内联汇编扩展主题：`no_std`、内核与跨平台向量约束](05_inline_assembly/02_inline_assembly_extended.md)
 - [自定义分配器与内存布局优化](06_low_level_patterns/01_custom_allocators.md)
 - [零拷贝解析与序列化优化](06_low_level_patterns/02_zero_copy_parsing.md)
 - [无锁编程与内存模型](00_concurrency/07_lock_free.md)

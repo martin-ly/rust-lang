@@ -7,7 +7,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: S×App — 应用 syn/quote API
-> **前置依赖**: [过程宏（Procedural Macro）](02_proc_macro.md) · [宏术语表](06_macro_glossary.md)
+> **前置依赖**: [过程宏（Procedural Macro）](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) · [宏术语表](06_macro_glossary.md)
 > **后置概念**: [生产级宏（Macro）开发](05_production_grade_macro_development.md) · [宏卫生性](09_macro_hygiene.md)
 > **定理链**: Parse Input ⟹ Transform AST ⟹ Emit Tokens
 >

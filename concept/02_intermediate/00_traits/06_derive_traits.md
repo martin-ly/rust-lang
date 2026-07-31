@@ -15,7 +15,7 @@
 > [Traits](../../01_foundation/02_type_system/01_type_system.md) ·
 > [Structs and Enums](../../01_foundation/03_values_and_references/01_reference_semantics.md) ·
 > [Terminology Glossary](../../00_meta/01_terminology/01_terminology_glossary.md)
-> **后置概念**: [Advanced Traits](04_advanced_traits.md) · [Proc Macros](../../03_advanced/03_proc_macros/02_proc_macro.md)
+> **后置概念**: [Advanced Traits](04_advanced_traits.md) · [Proc Macros](../06_macros_and_metaprogramming/05_procedural_macros.md)
 > **定理链**: N/A — 参考级文档
 > **主要来源**:
 > [Rust Reference — Derive](https://doc.rust-lang.org/reference/attributes/derive.html) ·
@@ -293,7 +293,7 @@ struct User {
 |:---|:---|
 | [Traits](../../01_foundation/02_type_system/01_type_system.md) | derive 是 trait 实现的语法糖 |
 | [Advanced Traits](04_advanced_traits.md) | 手动实现 trait 替代默认 derive 行为 |
-| [Proc Macros](../../03_advanced/03_proc_macros/02_proc_macro.md) | 第三方 derive 通过过程宏（Procedural Macro）实现 |
+| [Proc Macros](../06_macros_and_metaprogramming/05_procedural_macros.md) | 第三方 derive 通过过程宏（Procedural Macro）实现 |
 
 ---
 
@@ -378,7 +378,7 @@ struct User {
 ## 🔗 概念关系
 
 - **上位（is-a）**：[Traits](01_traits.md) trait impl 的自动生成入口。
-- **下位（实例）**：自定义 derive 需 [Proc Macros](../../03_advanced/03_proc_macros/02_proc_macro.md)。
+- **下位（实例）**：自定义 derive 需 [Proc Macros](../06_macros_and_metaprogramming/05_procedural_macros.md)。
 - **对偶**：与手写 impl 相对，见 [Implementations](../../01_foundation/07_modules_and_items/06_implementations.md)。
 - **组合**：与 [Structs](../../01_foundation/07_modules_and_items/04_structs.md) / [Enumerations](../../01_foundation/07_modules_and_items/05_enumerations.md) 组合。
 - **依赖**：展开卫生见 [Macro Hygiene](../../03_advanced/03_proc_macros/09_macro_hygiene.md)。

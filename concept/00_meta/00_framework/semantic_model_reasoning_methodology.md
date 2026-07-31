@@ -184,7 +184,7 @@ flowchart TD
 
 **反例**：`unsafe` 块中仍可手动制造数据竞争。
 
-```rust,compile_fail
+```rust,ignore
 // 实际为 unsafe，无法 compile_fail 直接演示，
 // 但可通过 Miri 检测：两个裸指针同时写同一块内存
 ```

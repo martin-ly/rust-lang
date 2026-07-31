@@ -78,7 +78,7 @@ flowchart TD
 | [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) | 正确 + 错误 | ABI 约定、生命周期桥接 |
 | [Atomics and Memory Ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) | 边界 + 反例 | 错误 memory order、happens-before |
 | [Lock-free](../../03_advanced/00_concurrency/07_lock_free.md) | 边界 + 反例 | ABA、内存回收 |
-| [Proc Macros](../../03_advanced/03_proc_macros/02_proc_macro.md) | 正确 + 错误 | derive/attribute/function-like |
+| [Proc Macros](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) | 正确 + 错误 | derive/attribute/function-like |
 
 ### 3.4 L4 形式化理论层
 
@@ -233,9 +233,9 @@ flowchart TD
 | [`assert_matches!`：模式匹配断言的形式化语义](../../02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md) | 示例/反例节 ×7 · compile_fail ×4 | 编译验证示例 · 边界测试：assert_matches 的编译错误 |
 | [DSL 与嵌入 式设计：Rust 中的领域特定语言](../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md) | 示例/反例节 ×8 · compile_fail ×2 | 常见陷阱 · 边界测试：DSL 与嵌入的编译错误 |
 | [宏模式：编译期代码生成的工程实践](../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md) | 示例/反例节 ×8 · compile_fail ×2 | 常见陷阱 · 边界测试：宏模式的编译错误 |
-| [元编程：Rust 的编译期代码生成与变换](../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md) | 示例/反例节 ×7 · compile_fail ×3 | 常见陷阱 · 边界测试：元编程的编译错误 |
-| [C 预处理器 vs Rust 宏：从文本替换到语法树](../../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md) | 示例/反例节 ×1 | 副作用陷阱 |
-| [属性分类详解](../../02_intermediate/06_macros_and_metaprogramming/06_attributes_by_category.md) | 示例/反例节 ×8 · compile_fail ×1 | 技术细节与示例 · 示例与反例 |
+| [元编程：Rust 的编译期代码生成与变换](../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md) | 示例/反例节 ×7 · compile_fail ×3 | 常见陷阱 · 边界测试：元编程的编译错误 |
+| [C 预处理器 vs Rust 宏：从文本替换到语法树](../../02_intermediate/06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md) | 示例/反例节 ×1 | 副作用陷阱 |
+| [属性分类详解](../../02_intermediate/06_macros_and_metaprogramming/08_attributes_by_category.md) | 示例/反例节 ×8 · compile_fail ×1 | 技术细节与示例 · 示例与反例 |
 | [Rust 迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) | 示例/反例节 ×16 · compile_fail ×3 | 常见陷阱 · 边界测试：迭代器模式的编译错误 |
 
 ### L3 高级概念层（47 个概念）
@@ -267,7 +267,7 @@ flowchart TD
 | [NLL 与 Polonius：借用检查器的演进](../../03_advanced/02_unsafe/03_nll_and_polonius.md) | 示例/反例节 ×8 · compile_fail ×1 | 常见陷阱 · 编译错误示例 |
 | [Rust 内存模型](../../03_advanced/02_unsafe/06_memory_model.md) | compile_fail ×2 | compile_fail 代码块 |
 | [Macros](../../03_advanced/03_proc_macros/01_macros.md) | 示例/反例节 ×13 · compile_fail ×4 | 示例与反例（Examples & Counter-examples） · 正确示例：`macro_rules!` 声明宏 |
-| [过程宏：编译期代码生成的元编程工具](../../03_advanced/03_proc_macros/02_proc_macro.md) | 示例/反例节 ×7 · compile_fail ×7 | 常见陷阱 · 编译错误示例 |
+| [过程宏：编译期代码生成的元编程工具](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) | 示例/反例节 ×7 · compile_fail ×7 | 常见陷阱 · 编译错误示例 |
 | [生产级宏开发](../../03_advanced/03_proc_macros/05_production_grade_macro_development.md) | 示例/反例节 ×1 | 完整示例 |
 | [syn & quote 完整参考](../../03_advanced/03_proc_macros/08_syn_quote_reference.md) | 示例/反例节 ×3 · compile_fail ×1 | 9. 实测示例：derive 宏的最小可用骨架（2026-07-12 回填） · ⚠️ 反例与陷阱 |
 | [宏卫生性完整参考](../../03_advanced/03_proc_macros/09_macro_hygiene.md) | 示例/反例节 ×3 · compile_fail ×1 | 9. 实测示例：声明宏的变量卫生（2026-07-12 回填） · ⚠️ 反例与陷阱 |

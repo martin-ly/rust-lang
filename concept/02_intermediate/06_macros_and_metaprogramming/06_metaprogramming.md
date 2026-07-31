@@ -13,7 +13,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 深入分析 Rust **元编程（Metaprogramming）**的技术体系——从声明式宏的模式匹配（Pattern Matching）、过程宏（Procedural Macro）的语法树操作，到 derive 宏的代码生成、quote/syn 工具体系，揭示 Rust 如何在编译期实现类型安全的代码变换同时保持宏卫生性（Hygiene）。
 > **前置概念**: [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) · [Macro Patterns](03_macro_patterns.md)
-> **后置概念**: [Proc Macros](../../03_advanced/03_proc_macros/02_proc_macro.md) · [DSL](02_dsl_and_embedding.md)
+> **后置概念**: [Proc Macros](05_procedural_macros.md) · [DSL](02_dsl_and_embedding.md)
 
 ---
 
@@ -593,7 +593,7 @@ graph TD
 
 - [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) — 属性与声明宏（Declarative Macro）基础
 - [Macro Patterns](03_macro_patterns.md) — 宏的工程模式
-- [Proc Macros](../../03_advanced/03_proc_macros/02_proc_macro.md) — 过程宏高级主题
+- [Proc Macros](05_procedural_macros.md) — 过程宏高级主题
 - [DSL](02_dsl_and_embedding.md) — 领域特定语言嵌入
 
 ---
@@ -643,7 +643,7 @@ fn main() {
 本节的边界用例覆盖元编程的四类典型失败：
 
 - **过程宏 TokenStream 解析失败**：输入不是合法 Rust 语法时 `syn::parse` 报错——友好诊断要求宏作者用 `syn::Error::new_spanned` 把错误绑回具体 token 而非 `unwrap` panic；
-- **常量泛型的非常量表达式**：`[T; N + 1]` 类泛型常量运算被拒（`generic_const_exprs` 仍 nightly）——stable 上只能独立使用 const 参数；
+- **常量泛型的非常量表达式**：`[T; N + 1]` 类泛型常量运算被拒（`generic_const_exprs` 仍为实验性特性）——stable 上只能独立使用 const 参数；
 - **常量泛型的表达式复杂度**：const 上下文中的递归/循环受步数限制（`long_running_const_eval`）——编译期计算不是图灵完备的免费午餐；
 - **编译期递归深度**：宏与类型级递归受 `recursion_limit`（默认 128）约束——深层结构需提升属性或改迭代式构造。
 

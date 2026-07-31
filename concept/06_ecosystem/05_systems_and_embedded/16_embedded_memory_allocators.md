@@ -67,7 +67,9 @@ mindmap
   - [九、边界测试](#九边界测试)
     - [9.1 边界测试：未初始化堆就使用 `Box`](#91-边界测试未初始化堆就使用-box)
     - [9.2 边界测试：中断中使用 `Vec::push`](#92-边界测试中断中使用-vecpush)
-  - [十、相关概念](#十相关概念)
+  - [十、嵌入式分配器属性矩阵](#十嵌入式分配器属性矩阵)
+  - [十一、堆策略决策树](#十一堆策略决策树)
+  - [十二、相关概念](#十二相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -320,7 +322,38 @@ fn USART1() {
 
 ---
 
-## 十、相关概念
+## 十、嵌入式分配器属性矩阵
+
+| 分配器 | 分配复杂度 | 释放复杂度 | 外部碎片 | 内部碎片 | 确定性 | 推荐场景 |
+|:---|:---:|:---:|:---:|:---:|:---:|:---|
+| TLSF (`embedded-alloc`) | O(1) | O(1) | 中 | 低 | 高 | 硬实时动态分配 |
+| Buddy | O(log n) | O(log n) | 低 | 高 | 中 | 块大小分布均匀、资源充足 |
+| Slab | O(1) | O(1) | 无（跨尺寸） | 低 | 极高 | 固定尺寸对象频繁分配/释放 |
+| Arena | O(1) | 整体 O(1) | 无 | 无 | 极高 | 阶段化批处理、解析阶段 |
+| Static Pool (`heapless::Pool`) | N/A | N/A | 无 | 无 | 完全 | 安全关键、认证系统 |
+
+判定依据：选择分配器的核心权衡是“灵活性 vs 确定性”。无认证要求的复杂协议栈可接受 TLSF；安全关键路径优先静态池。
+
+---
+
+## 十一、堆策略决策树
+
+```mermaid
+graph TD
+    A[需要内存分配?] --> B{对象生命周期是否全部已知?}
+    B -->|是| C[静态数组 / Static Pool / heapless]
+    B -->|否| D{是否需要跨阶段存活?}
+    D -->|否| E[Arena 分配器]
+    D -->|是| F{对象尺寸是否固定?}
+    F -->|是| G[Slab 分配器]
+    F -->|否| H{是否需要硬实时 WCET?}
+    H -->|是| I[TLSF]
+    H -->|否| J[Buddy 或通用分配器]
+```
+
+---
+
+## 十二、相关概念
 
 - [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md)
 - [Cargo build-std](../01_cargo/22_build_std.md)
@@ -330,6 +363,7 @@ fn USART1() {
 - [堆内存管理](../../02_intermediate/02_memory_management/01_memory_management.md)
 - [Rust vs Zig：系统编程的两种显式路径](../../05_comparative/01_systems_languages/06_rust_vs_zig.md)
 - [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
+- [`#![no_std]` 与裸机编程惯用法](23_no_std_and_bare_metal_idioms.md)
 
 ---
 

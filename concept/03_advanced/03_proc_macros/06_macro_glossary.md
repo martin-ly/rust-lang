@@ -7,7 +7,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: S×Mem — 宏（Macro）术语结构化索引
-> **前置依赖**: [过程宏（Procedural Macro）](02_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md)
+> **前置依赖**: [过程宏（Procedural Macro）](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md)
 > **后置概念**: [宏（Macro）卫生性](09_macro_hygiene.md) · [syn/quote 参考](08_syn_quote_reference.md)
 > **定理链**: Terminology Standardization ⟹ Concept Alignment ⟹ Communication Efficiency
 >

@@ -131,7 +131,7 @@
 - `concept/02_intermediate/03_error_handling/02_error_handling_deep_dive.md` — 错误处理深入：从 Result 到自定义错误生态
 - `concept/02_intermediate/03_error_handling/04_exception_safety_rust_cpp.md` — 异常安全：C++ 与 Rust 的错误处理哲学
 - `concept/02_intermediate/04_types_and_conversions/01_range_types.md` — Rust 范围类型语义：`std::ops::Range` → `core::range`
-- `concept/02_intermediate/04_types_and_conversions/02_closure_types.md` — 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义
+- `concept/02_intermediate/07_iterators_and_closures/02_closures.md` — Rust 闭包：捕获语义、Trait 层级与工程实践
 - `concept/02_intermediate/04_types_and_conversions/03_newtype_and_wrapper.md` — Newtype 与包装器模式：类型安全的零成本抽象
 - `concept/02_intermediate/04_types_and_conversions/04_type_system_advanced.md` — 高级类型系统：从关联类型到类型级编程
 - `concept/02_intermediate/04_types_and_conversions/05_rtti_and_dynamic_typing.md` — RTTI 与动态类型识别：从 C++ 到 Rust
@@ -167,7 +167,7 @@
 - `concept/02_intermediate/03_error_handling/03_panic.md` — Panic 机制
 - `concept/03_advanced/02_unsafe/07_unsafe_reference.md` — Unsafe 参考（Unsafe Reference）
 - `concept/03_advanced/03_proc_macros/01_macros.md` — Macros（宏系统）
-- `concept/03_advanced/03_proc_macros/02_proc_macro.md` — 过程宏：编译期代码生成的元编程工具
+- `concept/02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md` — 过程宏：derive、attribute、function-like 与 TokenStream 操作
 - `concept/03_advanced/03_proc_macros/10_quiz_macros.md` — 测验：宏系统（L3 试点扩展）
 - `concept/03_advanced/03_proc_macros/11_conditional_compilation.md` — 条件编译（Conditional Compilation）
 - `concept/03_advanced/04_ffi/01_rust_ffi.md` — Rust FFI：与外部代码的安全边界

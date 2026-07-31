@@ -1,13 +1,13 @@
 > **内容分级**: [综述级]
-> [综述级]
 > **代码状态**: ✅ 含可编译示例
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 # Data Engineering（数据工程）
 >
 > **EN**: Data Engineering
-> **Summary**: Data Engineering. Guide to 48 Data Engineering.
+> **Summary**: Data Engineering — Rust-native data pipelines with columnar memory, ETL patterns, lakehouse storage, and streaming ingestion.
 >
+> **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
@@ -16,7 +16,7 @@
 > **前置依赖**: [类型系统（Type System）](../../01_foundation/02_type_system/01_type_system.md) · [泛型（Generics）](../../02_intermediate/01_generics/01_generics.md) · Async/Await · Machine Learning Ecosystem
 > **后置延伸**: [流处理生态](03_stream_processing_ecosystem.md) · [云原生](../04_web_and_networking/02_cloud_native.md) · [性能优化](../10_performance/01_performance_optimization.md)
 >
-> **来源**: [polars](https://docs.rs/polars/) · [arrow-rs](https://docs.rs/arrow/) · [datafusion](https://docs.rs/datafusion/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**: [polars](https://docs.rs/polars/) · [arrow-rs](https://docs.rs/arrow/) · [datafusion](https://docs.rs/datafusion/) · [Apache Arrow](https://arrow.apache.org/) · [Delta Lake](https://delta.io/) · [Fluvio](https://www.fluvio.io/) · [Redpanda](https://redpanda.com/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
 ---
 
@@ -43,17 +43,22 @@
     - [3.1 批处理摄取](#31-批处理摄取)
     - [3.2 流处理摄取](#32-流处理摄取)
     - [3.3 变更数据捕获（CDC）](#33-变更数据捕获cdc)
+    - [3.4 流处理平台：Fluvio 与 Redpanda](#34-流处理平台fluvio-与-redpanda)
   - [四、数据转换层（Transformation）](#四数据转换层transformation)
     - [4.1 DataFrame 转换](#41-dataframe-转换)
     - [4.2 SQL 查询引擎](#42-sql-查询引擎)
     - [4.3 Rust 中的 ETL 管道骨架](#43-rust-中的-etl-管道骨架)
+    - [4.4 列式内存与零拷贝：Apache Arrow](#44-列式内存与零拷贝apache-arrow)
   - [五、数据存储层（Storage）](#五数据存储层storage)
     - [5.1 列式存储：Parquet](#51-列式存储parquet)
     - [5.2 对象存储抽象](#52-对象存储抽象)
     - [5.3 数据湖与 Delta Lake](#53-数据湖与-delta-lake)
+    - [5.4 Lakehouse 架构](#54-lakehouse-架构)
   - [六、数据服务层（Serving）](#六数据服务层serving)
     - [6.1 查询加速](#61-查询加速)
     - [6.2 数据 API](#62-数据-api)
+    - [6.3 异步 I/O 与数据管道](#63-异步-io-与数据管道)
+    - [6.4 ETL 模式与调度](#64-etl-模式与调度)
   - [七、Rust 数据工程的技术优势](#七rust-数据工程的技术优势)
   - [八、反命题与边界](#八反命题与边界)
     - [8.1 反命题树](#81-反命题树)
@@ -70,6 +75,8 @@
     - [测验 3：为什么列式存储（Columnar Storage）比行式存储更适合分析查询？（理解层）](#测验-3为什么列式存储columnar-storage比行式存储更适合分析查询理解层)
     - [测验 4：`datafusion` 在 Rust 中提供什么功能？（理解层）](#测验-4datafusion-在-rust-中提供什么功能理解层)
     - [测验 5：Rust 的内存安全如何帮助数据管道避免生产事故？（理解层）](#测验-5rust-的内存安全如何帮助数据管道避免生产事故理解层)
+    - [测验 6：Arrow 的“零拷贝”在什么范围内成立？（理解层）](#测验-6arrow-的零拷贝在什么范围内成立理解层)
+    - [测验 7：Lakehouse 相比传统数据仓库的主要优势是什么？（理解层）](#测验-7lakehouse-相比传统数据仓库的主要优势是什么理解层)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
@@ -309,6 +316,34 @@ PostgreSQL WAL（Write-Ahead Log）:
 
 ---
 
+### 3.4 流处理平台：Fluvio 与 Redpanda
+
+除 Kafka 外，Rust 生态与两种新兴流平台高度相关：
+
+- **Fluvio**: 用 Rust 从头编写的流处理平台，提供类 Kafka 的 topic/partition 语义，原生支持 WebAssembly 转换（SmartModules）。适合边缘计算与轻量级事件流。
+- **Redpanda**: C++ 实现、兼容 Kafka 协议的流平台，无 ZooKeeper，单节点即可低延迟运行。Rust 客户端可通过 `rdkafka` 或原生 `redpanda` 兼容 API 接入。
+
+```rust,ignore
+// Fluvio 消费示例
+use fluvio::{consumer::Record, Offset, TopicProducer};
+use futures_util::StreamExt;
+
+async fn consume_fluvio(topic: &str) -> anyhow::Result<()> {
+    let consumer = fluvio::consumer(topic, 0).await?;
+    let mut stream = consumer.stream(Offset::beginning()).await?;
+    while let Some(Ok(record)) = stream.next().await {
+        let value = String::from_utf8_lossy(record.value());
+        println!("{} => {}", record.offset(), value);
+    }
+    Ok(())
+}
+```
+
+> **来源**: [Fluvio Docs](https://www.fluvio.io/docs/) · [Redpanda Docs](https://docs.redpanda.com/)
+> **判定依据**: 需要极低部署复杂度且消息量中等 → Fluvio；需要 Kafka 兼容但想减少运维 → Redpanda；已有 Kafka 生态 → rdkafka。
+
+---
+
 ## 四、数据转换层（Transformation）
 
 数据转换层是把原始数据变成可信数据资产的核心环节，Rust 生态提供三种互补的转换范式：
@@ -471,6 +506,41 @@ impl EtlPipeline {
 
 ---
 
+### 4.4 列式内存与零拷贝：Apache Arrow
+
+Apache Arrow 是跨语言的列式内存格式标准，`arrow-rs` 是其 Rust 实现。核心优势：
+
+```text
+Arrow 列式内存模型:
+  ┌─────────────────────────────────────────────────────────────┐
+  │  同一内存布局被 polars / DataFusion / ML 框架共享            │
+  │  · 无序列化/反序列化开销 → 零拷贝互操作                       │
+  │  · SIMD 友好 → 向量化计算                                   │
+  │  · Schema 显式声明 → 类型漂移在边界暴露                       │
+  └─────────────────────────────────────────────────────────────┘
+```
+
+```rust,ignore
+// Arrow RecordBatch 零拷贝示例
+use arrow::array::{Int32Array, StringArray};
+use arrow::record_batch::RecordBatch;
+use std::sync::Arc;
+
+fn build_batch() -> arrow::error::Result<RecordBatch> {
+    let ids = Arc::new(Int32Array::from(vec![1, 2, 3])) as _;
+    let names = Arc::new(StringArray::from(vec!["a", "b", "c"])) as _;
+    RecordBatch::try_from_iter(vec![
+        ("id", ids),
+        ("name", names),
+    ])
+}
+```
+
+> **来源**: [Apache Arrow Rust](https://arrow.apache.org/rust/) · [arrow-rs docs](https://docs.rs/arrow/latest/arrow/)
+> **关键洞察**: Arrow 的零拷贝只在**同一进程内**成立；跨进程/网络传输仍需序列化（Arrow IPC、Flight、gRPC）。把 Arrow 当作“内存中的 Parquet”而非通用通信协议，是避免性能幻觉的前提。
+
+---
+
 ## 五、数据存储层（Storage）
 
 存储层的三个工程主题：
@@ -588,6 +658,31 @@ Rust 生态:
 
 ---
 
+### 5.4 Lakehouse 架构
+
+Lakehouse 在对象存储上叠加事务层与元数据管理，统一数据湖（低成本存储）与数据仓库（结构化分析）的能力：
+
+```text
+Lakehouse 核心组件:
+  ┌─────────────────────────────────────────────────────────────┐
+  │  存储层: S3 / GCS / Azure Blob（Parquet 文件）               │
+  ├─────────────────────────────────────────────────────────────┤
+  │  事务层: Delta Lake / Apache Iceberg / Apache Hudi           │
+  │  · ACID、时间旅行、schema 演化                                │
+  ├─────────────────────────────────────────────────────────────┤
+  │   catalogs: Hive / Glue / Unity                               │
+  │  · 表级元数据与权限管理                                       │
+  ├─────────────────────────────────────────────────────────────┤
+  │  查询引擎: DataFusion / polars / DuckDB                      │
+  │  · SQL / DataFrame 直接查询湖内数据                           │
+  └─────────────────────────────────────────────────────────────┘
+```
+
+> **来源**: [Lakehouse Paper — CIDR 2021](https://www.cidrdb.org/cidr2021/papers/cidr2021_paper17.pdf) · [Apache Iceberg](https://iceberg.apache.org/) · [Apache Hudi](https://hudi.apache.org/)
+> **关键洞察**: Rust 在 Lakehouse 中的定位是“高性能查询引擎与连接器”——DataFusion 可直接查询 Delta/Iceberg 表，polars 适合内存分析，delta-rs 提供无 JVM 依赖的写入路径。
+
+---
+
 ## 六、数据服务层（Serving）
 
 数据服务层把处理好的数据交付给查询负载，两条主线分别解决“快”与“可达”：
@@ -682,6 +777,63 @@ async fn analytics_handler(
 
 > **来源**: [axum Documentation](https://docs.rs/axum/latest/axum/) ·
 > [DataFusion as a Service](https://arrow.apache.org/datafusion/user-guide/example-usage.html)
+
+---
+
+### 6.3 异步 I/O 与数据管道
+
+数据工程工作负载通常是 I/O  bound（等待网络、对象存储、数据库），异步 I/O 让单进程可同时发起数千个并发请求：
+
+```rust,ignore
+// 并发读取多个 Parquet 文件并合并
+use object_store::ObjectStore;
+use futures::stream::{self, StreamExt};
+
+async fn parallel_read_files(
+    store: Arc<dyn ObjectStore>,
+    paths: Vec<object_store::path::Path>,
+) -> anyhow::Result<Vec<bytes::Bytes>> {
+    let bodies = stream::iter(paths)
+        .map(|path| {
+            let store = Arc::clone(&store);
+            async move {
+                let result = store.get(&path).await?;
+                Ok::<_, anyhow::Error>(result.bytes().await?)
+            }
+        })
+        .buffer_unordered(50)  // 最多 50 个并发读取
+        .collect::<Vec<_>>()
+        .await;
+
+    bodies.into_iter().collect::<Result<Vec<_>, _>>()
+}
+```
+
+> **关键洞察**: `buffer_unordered` 的并发度应根据下游处理能力（CPU、内存、网络带宽）调整，过高的并发会放大尾延迟与内存占用，反而降低吞吐。
+
+### 6.4 ETL 模式与调度
+
+生产级 ETL 常见模式：
+
+```text
+ETL 调度模式:
+  ┌─────────────────────────────────────────────────────────────┐
+  │  定时批处理（Cron / Kubernetes CronJob）                     │
+  │  · 简单可靠，适合小时/天级报表                                │
+  ├─────────────────────────────────────────────────────────────┤
+  │  事件驱动（Kafka → Rust consumer）                           │
+  │  · 近实时，需处理背压与 Exactly-Once 语义                     │
+  ├─────────────────────────────────────────────────────────────┤
+  │  增量同步（CDC / 水印）                                       │
+  │  · 只处理变更，减少 I/O                                       │
+  ├─────────────────────────────────────────────────────────────┤
+  │  回填与重放（Lakehouse 时间旅行）                             │
+  │  · 利用 Delta/Iceberg 版本号重跑历史分区                      │
+  └─────────────────────────────────────────────────────────────┘
+```
+
+> **来源**: [Airflow Concepts](https://airflow.apache.org/docs/apache-airflow/stable/concepts/index.html) · [Kubernetes CronJob](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)
+> **判定依据**: 延迟要求低且可预测 → CronJob；需要近实时 → 事件驱动；需要可追溯与重放 → Lakehouse + CDC。
 
 ---
 
@@ -927,7 +1079,6 @@ rustc 1.97.0 实测（`catch_unwind` 复现）：`sum_column_bad(["10", "xx", "2
 - [安全与密码学](../07_security_and_cryptography/02_security_cryptography.md) — 数据加密、合规性
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **Rust 版本**: 1.97.0+ (Edition 2024)
 
 ## 嵌入式测验（Embedded Quiz）
 
@@ -991,6 +1142,30 @@ Apache Arrow 的 Rust 实现，提供列式内存格式标准。`polars`、`data
 数据管道常处理外部不可信数据（CSV、JSON、Parquet）。Rust 的边界检查和类型安全防止了解析过程中的缓冲区溢出和数据损坏，避免了 C/C++ 解析器中常见的安全漏洞。
 </details>
 
+---
+
+### 测验 6：Arrow 的“零拷贝”在什么范围内成立？（理解层）
+
+**题目**: Arrow 的“零拷贝”在什么范围内成立？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Arrow 的零拷贝只在同一进程内成立：polars、DataFusion、ML 框架共享同一列式内存布局。跨进程或网络传输仍需序列化（Arrow IPC、Flight、gRPC），不存在“零序列化”的跨进程方案。
+</details>
+
+---
+
+### 测验 7：Lakehouse 相比传统数据仓库的主要优势是什么？（理解层）
+
+**题目**: Lakehouse 相比传统数据仓库的主要优势是什么？
+
+<details>
+<summary>✅ 答案与解析</summary>
+
+Lakehouse 在廉价对象存储上叠加事务层（Delta/Iceberg/Hudi），同时提供数据湖的开放格式与数据仓库的 ACID、时间旅行、schema 演化能力，避免 vendor lock-in 并支持 AI/ML 直接访问原始数据。
+</details>
+
 ## 认知路径
 
 > **认知路径**: 从 Rust 核心语言特性出发，经由 **Data Engineering（数据工程）** 的生态/前沿实践，通向系统化工程能力与未来语言演进方向。
@@ -1014,17 +1189,22 @@ mindmap
       批处理摄取
       流处理摄取
       变更数据捕获 CDC
+      Fluvio 与 Redpanda
     数据转换层 Transformation
       DataFrame 转换
       SQL 查询引擎
       Rust 中的 ETL 管道骨架
+      Apache Arrow 列式内存
     数据存储层 Storage
       列式存储 Parquet
       对象存储抽象
       数据湖与 Delta Lake
+      Lakehouse 架构
     数据服务层 Serving
       查询加速
       数据 API
+      异步 I/O 与数据管道
+      ETL 模式与调度
 ```
 
 > **认知功能**: 本 mindmap 从本页「Data Engineering 数据工程」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

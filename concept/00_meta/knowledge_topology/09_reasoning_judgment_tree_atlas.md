@@ -435,8 +435,8 @@ flowchart TD
 | [`assert_matches!`：模式匹配断言的形式化语义](../../02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md) | 推理/定理节 ×4 | 反命题与边界分析 · 反命题树 |
 | [DSL 与嵌入 式设计：Rust 中的领域特定语言](../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md) | 推理/定理节 ×4 | 反命题与边界分析 · 反命题树 |
 | [宏模式：编译期代码生成的工程实践](../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md) | 推理/定理节 ×4 | 反命题与边界分析 · 反命题树 |
-| [元编程：Rust 的编译期代码生成与变换](../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md) | 推理/定理节 ×4 | 反命题与边界分析 · 反命题树 |
-| [属性分类详解](../../02_intermediate/06_macros_and_metaprogramming/06_attributes_by_category.md) | 推理/定理节 ×3 | 反命题与边界分析 · 反命题树 |
+| [元编程：Rust 的编译期代码生成与变换](../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md) | 推理/定理节 ×4 | 反命题与边界分析 · 反命题树 |
+| [属性分类详解](../../02_intermediate/06_macros_and_metaprogramming/08_attributes_by_category.md) | 推理/定理节 ×3 | 反命题与边界分析 · 反命题树 |
 | [Rust 迭代器模式](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) | 推理/定理节 ×3 | 反命题与边界分析 · 逆向推理链（Backward Reasoning） |
 
 ### L3 高级概念层（53 个概念）
@@ -463,7 +463,7 @@ flowchart TD
 | [Rust 内存模型](../../03_advanced/02_unsafe/06_memory_model.md) | 推理/定理节 ×2 · 定理链元数据 ✓ | 反命题决策树 · 反向推理 |
 | [Unsafe 参考](../../03_advanced/02_unsafe/07_unsafe_reference.md) | 推理/定理节 ×2 · 定理链元数据 ✓ | 反命题决策树 · 反向推理 |
 | [Macros](../../03_advanced/03_proc_macros/01_macros.md) | 推理/定理节 ×9 | 反命题决策树一："宏和函数等价" · 反命题决策树二："宏可以执行任意计算" |
-| [过程宏：编译期代码生成的元编程工具](../../03_advanced/03_proc_macros/02_proc_macro.md) | 推理/定理节 ×4 | 反命题与边界分析 · 反命题树 |
+| [过程宏：编译期代码生成的元编程工具](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) | 推理/定理节 ×4 | 反命题与边界分析 · 反命题树 |
 | [过程宏代码生成优化](../../03_advanced/03_proc_macros/03_proc_macro_code_generation_optimization.md) | 推理/定理节 ×3 | 定理链 · 反命题 |
 | [宏调试与诊断](../../03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md) | 推理/定理节 ×3 | 定理链 · 反命题 |
 | [生产级宏开发](../../03_advanced/03_proc_macros/05_production_grade_macro_development.md) | 推理/定理节 ×3 | 定理链 · 反命题 |

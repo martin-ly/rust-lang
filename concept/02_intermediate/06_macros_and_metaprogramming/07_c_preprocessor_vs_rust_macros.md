@@ -13,7 +13,7 @@
 > **A/S/P 标记**: C+S — Comparison + Structure
 > **双维定位**: C×Ana
 > **前置概念**: [Macros](../../03_advanced/03_proc_macros/01_macros.md) · [Generics](../01_generics/01_generics.md) · [Traits](../00_traits/01_traits.md)
-> **后置概念**: [Proc Macro](../../03_advanced/03_proc_macros/02_proc_macro.md) · [DSL and Embedding](02_dsl_and_embedding.md)
+> **后置概念**: [Proc Macro](05_procedural_macros.md) · [DSL and Embedding](02_dsl_and_embedding.md)
 > **主要来源**:
 > · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
 > [System F](https://en.wikipedia.org/wiki/System_F) ·
@@ -197,7 +197,7 @@ fn max<T: Ord>(a: T, b: T) -> T {
 - 自定义属性宏修改函数/结构体（Struct）
 - 编译期 DSL 解析
 
-详见 [Proc Macro](../../03_advanced/03_proc_macros/02_proc_macro.md)。
+详见 [Proc Macro](05_procedural_macros.md)。
 
 ---
 

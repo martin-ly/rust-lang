@@ -44,7 +44,7 @@ actor = ⟨地址, 邮箱, 行为⟩
 
 下面这段代码不是 Actor 模型，而是用 `Arc<Mutex<T>>` 模拟的共享状态；它违反了 Actor 的**封装边界**与**地址即能力**两条核心语义：
 
-```rust,compile_fail
+```rust
 use std::sync::{Arc, Mutex};
 use std::thread;
 

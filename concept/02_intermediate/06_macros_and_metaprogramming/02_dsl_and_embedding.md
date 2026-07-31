@@ -10,7 +10,7 @@
 > **Bloom 层级**: L3-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 分析 Rust 中 **DSL（领域特定语言）**的构建方法——从宏（Macro）驱动的内嵌 DSL（如 html!、sql!）、到外部 DSL 的解析器 [来源: [Parsing in Rust](https://rustc-dev-guide.rust-lang.org/)]组合子（parser combinators），再到 Rust 作为宿主语言的嵌入策略，揭示类型安全 DSL 的设计模式。
-> **前置概念**: [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) · [Macros](../../03_advanced/03_proc_macros/01_macros.md) · [Proc Macro](../../03_advanced/03_proc_macros/02_proc_macro.md) · [Trait](../00_traits/01_traits.md)
+> **前置概念**: [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) · [Macros](../../03_advanced/03_proc_macros/01_macros.md) · [Proc Macro](05_procedural_macros.md) · [Trait](../00_traits/01_traits.md)
 > **后置概念**: [Serde Patterns](../00_traits/03_serde_patterns.md) · [WebAssembly](../../06_ecosystem/11_domain_applications/03_webassembly.md)
 
 ---
@@ -532,7 +532,7 @@ graph TD
 ## 相关概念
 
 - [Macros](../../03_advanced/03_proc_macros/01_macros.md) — 声明式宏
-- [Proc Macro](../../03_advanced/03_proc_macros/02_proc_macro.md) — 过程宏（Procedural Macro）
+- [Proc Macro](05_procedural_macros.md) — 过程宏（Procedural Macro）
 - [Trait](../00_traits/01_traits.md) — Trait 系统
 - [Serde Patterns](../00_traits/03_serde_patterns.md) — Serde 序列化
 
@@ -866,8 +866,8 @@ fn main() {
 
 ## 🔗 概念关系
 
-- **上位（is-a）**：[Metaprogramming](04_metaprogramming.md) 元编程的应用形态。
-- **下位（实例）**：复杂 DSL 实例见 [Proc Macro](../../03_advanced/03_proc_macros/02_proc_macro.md)。
+- **上位（is-a）**：[Metaprogramming](06_metaprogramming.md) 元编程的应用形态。
+- **下位（实例）**：复杂 DSL 实例见 [Proc Macro](05_procedural_macros.md)。
 - **对偶**：与外部 DSL（独立解析器）相对——嵌入式复用宿主语言语法。
 - **组合**：与 [Macro Patterns](03_macro_patterns.md) 的展开技巧组合。
 - **依赖**：展开正确性依赖 [Macro Hygiene](../../03_advanced/03_proc_macros/09_macro_hygiene.md)。

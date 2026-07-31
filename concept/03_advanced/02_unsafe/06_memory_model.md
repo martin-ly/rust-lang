@@ -111,7 +111,7 @@ Rust 内存的最基本单位是**字节（byte）**。与硬件字节不同，R
 
 抽象字节的区分直接影响程序是否存在未定义行为（UB）。例如：
 
-- 读取未初始化内存是 UB（除 `union` 字段和结构体（Struct） padding 外）。
+- 读取未初始化内存是 UB（除 `union` 字段等极少数明确允许的场景外；**结构体 padding 字节属于未初始化内存，读取 padding 是 UB**）。
 - 指针的 provenance 决定了解引用（Reference）是否合法。
 
 ## 三、Provenance
@@ -154,7 +154,7 @@ let val = unsafe { x.assume_init() };
 内存模型与 UB 清单紧密相关：
 
 - 访问悬垂指针指向的内存是 UB。
-- 访问未初始化字节（除允许场景外）是 UB。
+- 访问未初始化字节（包括结构体 padding；除 `union` 字段等明确允许场景外）是 UB。
 - 破坏指针别名规则是 UB。
 
 参见 [Behavior Considered Undefined](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md) 获取完整 UB 清单。
@@ -464,14 +464,14 @@ Rust 内存模型中的"抽象字节"可以区分哪些状态？
 关于未初始化内存，下列说法正确的是？
 
 - A. 读取未初始化内存总是安全的
-- B. 读取未初始化内存是 UB（除 `union` 字段和结构体（Struct） padding 外）；`MaybeUninit<T>` 是处理未初始化内存的核心类型
+- B. 读取未初始化内存是 UB（除 `union` 字段等明确允许场景外；**读取结构体 padding 是 UB**）；`MaybeUninit<T>` 是处理未初始化内存的核心类型
 - C. `MaybeUninit::assume_init()` 是安全函数
 - D. 未初始化字节的值固定为 0
 
 <details>
 <summary>✅ 答案</summary>
 
-**B 正确**。按本页「二、字节」与「四、初始化与 MaybeUninit」：读取未初始化内存是 UB（除允许场景外）；`MaybeUninit::uninit()` 与 `write()` 是 Safe 操作，而 `assume_init()` / `assume_init_ref()` 是 **Unsafe**——断言已初始化，证明责任在程序员（C 错）。D 错：未初始化字节不包含确定值。
+**B 正确**。按本页「二、字节」与「四、初始化与 MaybeUninit」：读取未初始化内存是 UB（包括结构体 padding；除 `union` 字段等明确允许场景外）；`MaybeUninit::uninit()` 与 `write()` 是 Safe 操作，而 `assume_init()` / `assume_init_ref()` 是 **Unsafe**——断言已初始化，证明责任在程序员（C 错）。D 错：未初始化字节不包含确定值。
 
 </details>
 
@@ -495,10 +495,10 @@ Rust 内存模型中的"抽象字节"可以区分哪些状态？
 
 ---
 
-> **Rust 1.91 起**：
-> `ptr::with_exposed_provenance(_mut)` 稳定，为整数↔指针往返提供显式 provenance 暴露路径；
+> **Rust 1.84.0 起**：
+> `ptr::with_exposed_provenance(_mut)` 稳定（const 上下文 1.91.0 起），为整数↔指针往返提供显式 provenance 暴露路径；
 > **1.96 起**「valid for read/write」定义重构（排除 null，由各方法单独声明例外），统一指针有效性契约。
-> 详见 [1.91 版本页](../../07_future/00_version_tracking/rust_1_91_stabilized.md) 与 [1.96 版本页](../../07_future/00_version_tracking/rust_1_96_stabilized.md)（特性矩阵节）。
+> 详见 [Rust 1.84.0 Release Notes](https://blog.rust-lang.org/2025/01/09/Rust-1.84.0.html) 与 [1.96 版本页](../../07_future/00_version_tracking/rust_1_96_stabilized.md)（特性矩阵节）。
 
 ## 🧭 思维导图（Mindmap）
 

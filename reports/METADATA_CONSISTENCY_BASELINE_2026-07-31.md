@@ -1,17 +1,17 @@
 # 元数据一致性基线（语义质量门 P0-1）
 
-**日期**: 2026-07-31  **扫描**: 635 concept 活跃文件（排除 archive）  **模式**: strict
+**日期**: 2026-07-31  **扫描**: 651 concept 活跃文件（排除 archive）  **模式**: strict
 
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
 | D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥 | 0 | 0.0% | >0 | pass |
-| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 0 (基=377) | 0.0% | >=5% | pass |
+| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 0 (基=389) | 0.0% | >=5% | pass |
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
 | D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
 | D6 Summary 低信息量模板套话 | 0 | 0.0% | >=3% | pass |
 
-**受影响文件总数**: 0 / 635
+**受影响文件总数**: 0 / 651
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -77,7 +77,6 @@
 - `concept/03_advanced/00_concurrency/02_send_sync_auto_traits.md` — auto traits 实验性状态（E0658）为客观事实陈述
 - `concept/03_advanced/01_async/06_async_boundary_panorama.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
 - `concept/03_advanced/02_unsafe/03_nll_and_polonius.md` — Polonius 借用检查器仅 nightly 可用为客观事实陈述（页面主题即其对比）
-- `concept/03_advanced/03_proc_macros/02_proc_macro.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
 - `concept/03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md` — -Zunpretty/trace_macros 等 nightly 调试标志为工具链事实陈述（页面主题即调试手段）
 - `concept/03_advanced/03_proc_macros/05_production_grade_macro_development.md` — 演进方向节：nightly 特性状态为版本演进上下文陈述
 - `concept/03_advanced/03_proc_macros/06_macro_glossary.md` — 术语条目：Span::def_site()/-Zunpretty nightly-only 为定义内容本身的客观事实
@@ -105,6 +104,7 @@
 - `concept/04_formal/00_type_theory/14_flux.md` — Flux 页面主题即研究原型；nightly 为其 rust-toolchain 要求与限制说明，文首 Rust 版本字段已显式声明
 - `concept/04_formal/04_model_checking/04_modern_verification_tools.md` — 验证工具矩阵客观陈述 Flux 需 nightly 及 BorrowSanitizer/Safety Tags 等 preview 特性链接，非稳定层依赖
 - `concept/04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md` — rustc 内部机制页：`-Zmir-opt-level` nightly 标志作为 MIR 优化调参事实陈述
+- `concept/06_ecosystem/10_performance/02_performance_engineering_architecture.md` — 性能工程页：portable_simd 为 nightly-only 工具链事实，页面主题即 SIMD 选型与 stable/nightly 边界
 
 另有两类规则级排除：WASI Preview 1/2/3（WASM 规范版本专名）与 URL 路径中的 nightly（官方文档固定托管路径）。
 
@@ -112,15 +112,21 @@
 
 ### D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥（0）
 
+
 ### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（0）
+
 
 ### D3 关键字段同文件重声明（0）
 
+
 ### D4 文首块 Rust 版本号自矛盾（0）
+
 
 ### D5 稳定层正文残留 nightly/preview/unstable（0）
 
+
 ### D6 Summary 低信息量模板套话（0）
+
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 

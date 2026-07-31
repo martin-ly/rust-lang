@@ -378,6 +378,7 @@ static mut BUF: [u8; 256] = [0; 256];
 - [Rust vs Zig：系统编程的两种显式路径](../../05_comparative/01_systems_languages/06_rust_vs_zig.md)
 - [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
 - [安全关键裸机 OS 与 Rust](../../06_ecosystem/05_systems_and_embedded/19_safety_critical_bare_metal_os.md)
+- [`embedded-hal` 与驱动惯用法](24_embedded_hal_and_driver_idioms.md)
 
 ---
 

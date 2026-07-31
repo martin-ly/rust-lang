@@ -1827,3 +1827,735 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「Type Theory 类型论基础」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+## 十三、Hindley-Milner Algorithm W 完整形式化
+
+**EN**: Hindley-Milner Algorithm W Formalization
+**Summary**: Algorithmic presentation of HM type inference, including Algorithm W, unification with occurs check, and constraint generation/solving, as a supplement to the core rules in §3.
+
+> **来源**: [Damas & Milner 1982, *Principal Type-Schemes for Functional Programs* (POPL)](https://dl.acm.org/doi/10.1145/582153.582176) · [Pierce 2002, *TAPL* Ch.22](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Wikipedia — Hindley-Milner Type System](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)
+
+本节补充 §3 中给出的算法 W 核心规则，将其展开为完整的算法描述、统一子（unifier）求解与约束生成/求解流程。这些算法是 Rust 局部类型推断（Type Inference）的理论原型；Rust 实际使用双向类型检查（bidirectional type checking）+ trait 约束求解，但 HM 的合一思想仍是底层核心。
+
+---
+
+### 13.1 单态类型、类型方案与约束
+
+**单态类型** $\tau$ 是 HM 算法直接操作的类型：
+
+$$\tau ::= \alpha \mid \tau_1 \to \tau_2 \mid C(\tau_1, ..., \tau_n)$$
+
+其中 $\alpha$ 为类型变量，$C$ 为基础类型构造器（如 `Int`, `Bool`, `Vec`）。Rust 的 `Vec<T>`、`Option<T>` 等对应 $C(\tau)$。
+
+**类型方案** $\sigma$ 引入全称量化，用于表达 let-多态：
+
+$$\sigma ::= \tau \mid \forall \alpha_1...\alpha_n.\, \tau$$
+
+**类型约束** $C$ 描述两个类型必须相等：
+
+$$C ::= \tau_1 = \tau_2 \mid C_1 \land C_2 \mid \top \mid \bot$$
+
+- $\tau_1 = \tau_2$：类型相等约束
+- $C_1 \land C_2$：约束合取
+- $\top$：空约束（恒可满足）
+- $\bot$：不可满足
+
+> **与 Rust 的对应**: Rust 函数签名中的 `T: Trait` 不是 HM 的等式约束，而是 Horn 子句约束；但其内部仍然需要统一类型变量与具体类型。
+
+---
+
+### 13.2 Algorithm W 伪代码
+
+Algorithm W 以表达式 $e$ 和类型环境 $\Gamma$ 为输入，输出一个替换 $S$ 和一个类型 $\tau$；若约束不可解则失败。
+
+```text
+W(Γ, x) =
+  if x:σ ∈ Γ where σ = ∀α₁...αₙ.τ
+  then ([], τ[αᵢ := βᵢ])   (βᵢ 是新类型变量)
+  else fail
+
+W(Γ, λx.e) =
+  let β be a new type variable
+  let (S₁, τ₁) = W(Γ ∪ {x:β}, e)
+  return (S₁, S₁(β) → τ₁)
+
+W(Γ, e₁ e₂) =
+  let (S₁, τ₁) = W(Γ, e₁)
+  let (S₂, τ₂) = W(S₁(Γ), e₂)
+  let β be a new type variable
+  let S₃ = unify(S₂(τ₁), τ₂ → β)
+  return (S₃ ∘ S₂ ∘ S₁, S₃(β))
+
+W(Γ, let x = e₁ in e₂) =
+  let (S₁, τ₁) = W(Γ, e₁)
+  let Γ' = S₁(Γ) ∪ {x: gen(S₁(Γ), τ₁)}
+  let (S₂, τ₂) = W(Γ', e₂)
+  return (S₂ ∘ S₁, τ₂)
+```
+
+**泛化（Generalization）** 将不在环境中自由出现的类型变量量化为全称变量：
+
+$$\text{gen}(\Gamma, \tau) = \forall \alpha_1...\alpha_n.\, \tau$$
+
+其中 $\{\alpha_1, ..., \alpha_n\} = \text{FV}(\tau) \setminus \text{FV}(\Gamma)$。
+
+**实例化（Instantiation）** 将全称变量替换为新的类型变量：
+
+$$\text{inst}(\forall \alpha_1...\alpha_n.\, \tau) = \tau[\alpha_i := \beta_i]$$
+
+> **关键洞察**: let-多态是 HM 的灵魂——`let id = λx.x in ...` 中的 `id` 可获得类型 $\forall\alpha.\alpha\to\alpha$，而 `(λid. id 5 (id "hello")) (λx.x)` 中的 `id` 只是单态函数，无法同时实例化为 `Int` 和 `String`。Rust 的闭包推断同样受此限制：`|x| x` 在具体调用处被单态化。
+
+---
+
+### 13.3 统一算法与出现检查
+
+**替换** $S$ 是类型变量到类型的有限映射：
+
+$$S = [\alpha_1 := \tau_1, ..., \alpha_n := \tau_n]$$
+
+统一算法 `unify(τ₁, τ₂)` 返回最一般统一子（MGU），使 $S(\tau_1) = S(\tau_2)$。
+
+```text
+unify(τ, τ) = []
+
+unify(α, τ) =
+  if α = τ then []
+  else if α ∈ FV(τ) then fail   (occurs check)
+  else [α := τ]
+
+unify(τ, α) = unify(α, τ)
+
+unify(τ₁ → τ₂, τ₃ → τ₄) =
+  let S₁ = unify(τ₁, τ₃)
+  let S₂ = unify(S₁(τ₂), S₁(τ₄))
+  return S₂ ∘ S₁
+
+unify(C(τ₁,...,τₙ), C(τ₁',...,τₙ')) =
+  unify each pair recursively
+
+unify(τ₁, τ₂) = fail   (if constructors differ)
+```
+
+**出现检查（Occurs Check）** 拒绝形如 $\alpha = \alpha \to \beta$ 的递归约束，防止构造无限类型：
+
+```rust,ignore
+// ❌ 错误：尝试自应用，导致 α = α → ⊥
+fn omega<F>(f: F) -> !
+where
+    F: Fn(F) -> !,
+{
+    f(f)  // E0277: F 不能同时作为参数类型和函数类型
+}
+```
+
+> **理论意义**: 出现检查保证了 HM 类型推断的终止性和可判定性。没有它，Y 组合子可直接类型化，系统将不再保持类型安全。
+
+---
+
+### 13.4 约束生成与求解
+
+**约束生成算法 C** 从语法结构生成等式约束集合，是 Algorithm W 的等价描述形式：
+
+```text
+C(Γ, x : τ) =
+  if x:σ ∈ Γ
+  then let τ' = inst(σ)
+       return {τ = τ'}
+  else fail
+
+C(Γ, λx.e : τ) =
+  let α, β be new type variables
+  let C₁ = C(Γ ∪ {x:α}, e : β)
+  return C₁ ∪ {τ = α → β}
+
+C(Γ, e₁ e₂ : τ) =
+  let α be a new type variable
+  let C₁ = C(Γ, e₁ : α → τ)
+  let C₂ = C(Γ, e₂ : α)
+  return C₁ ∪ C₂
+
+C(Γ, let x = e₁ in e₂ : τ) =
+  let α be a new type variable
+  let C₁ = C(Γ, e₁ : α)
+  let S = solve(C₁)
+  let σ = gen(S(Γ), S(α))
+  let C₂ = C(Γ ∪ {x:σ}, e₂ : τ)
+  return C₁ ∪ C₂
+```
+
+**约束求解算法 Solve** 逐步消解约束：
+
+```text
+solve({}) = []
+
+solve({τ = τ} ∪ C) = solve(C)
+
+solve({α = τ} ∪ C) =
+  if α = τ then solve(C)
+  else if α ∈ FV(τ) then fail
+  else let S = [α := τ]
+       let S' = solve(S(C))
+       return S' ∘ S
+
+solve({τ = α} ∪ C) = solve({α = τ} ∪ C)
+
+solve({τ₁ → τ₂ = τ₃ → τ₄} ∪ C) =
+  solve({τ₁ = τ₃, τ₂ = τ₄} ∪ C)
+
+solve({C(τ₁,...) = C'(τ₁',...)} ∪ C) =
+  if C ≠ C' then fail
+  else solve({τ₁ = τ₁', ...} ∪ C)
+```
+
+> **Rust 对应**: `rustc` 的类型检查器并不直接运行 Algorithm W，而是先生成类型约束图（包括 trait 约束、生命周期约束、等式约束），再调用 Chalk/Solve 求解。HM 的合一逻辑是其中等式约束求解的简化原型。
+
+---
+
+### 13.5 正确性定理
+
+**定理 HM-1（Soundness）**: 若 $W(\Gamma, e) = (S, \tau)$，则 $S(\Gamma) \vdash e : \tau$。
+
+**定理 HM-2（Completeness）**: 若存在 $\tau'$ 使得 $\Gamma' \vdash e : \tau'$，则 $W(\Gamma, e)$ 成功，且存在替换 $R$ 使 $\tau' = R(\tau)$。
+
+**定理 HM-3（Principal Typing）**: Algorithm W 推导出的类型是最一般的（principal）：任何其他有效类型都是它的实例。
+
+> **来源**: [Damas & Milner 1982](https://dl.acm.org/doi/10.1145/582153.582176) · [Pierce 2002, *TAPL* Ch.22](https://www.cis.upenn.edu/~bcpierce/tapl/)
+
+---
+
+## 十四、替换引理与类型安全证明结构
+
+**EN**: Substitution Lemma and Type-Safety Proof Structure
+**Summary**: Detailed proof outline for the Substitution Lemma and the Progress + Preservation argument that underlies type soundness, expanding the compact statement in §4.
+
+> **来源**: [Pierce 2002, *TAPL* Ch.8](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Wright & Felleisen 1994, *A Syntactic Approach to Type Soundness*](https://dl.acm.org/doi/10.1145/191177.191628)
+
+§4 已给出 Progress + Preservation 的定理陈述和推理链。本节给出完整的结构归纳证明骨架，这是类型安全的元定理（meta-theorem）的标准教学方法。Rust 的完整类型安全证明远比此复杂（需引入所有权、生命周期、trait 求解），但 λ→ 核心仍是理解所有扩展的基石。
+
+---
+
+### 14.1 替换引理
+
+**引理 14.1（Substitution Lemma / 项替换）**: 如果 $\Gamma, x:\tau_1 \vdash e : \tau_2$ 且 $\Gamma \vdash v : \tau_1$，则 $\Gamma \vdash e[x := v] : \tau_2$。
+
+形式化：
+
+$$\Gamma, x:\tau_1 \vdash e : \tau_2 \;\land\; \Gamma \vdash v : \tau_1 \;\rightarrow\; \Gamma \vdash e[x := v] : \tau_2$$
+
+**证明（结构归纳法）**: 对 $e$ 的结构进行归纳。
+
+**基础情况**:
+
+- **$e = x$**: $e[x := v] = v$。由变量规则，$\Gamma, x:\tau_1 \vdash x : \tau_2$ 蕴含 $\tau_1 = \tau_2$；又 $\Gamma \vdash v : \tau_1$，故 $\Gamma \vdash v : \tau_2$。
+- **$e = y$ 且 $y \neq x$**: $e[x := v] = y$。由变量规则，$y:\tau_2 \in (\Gamma, x:\tau_1)$ 且 $y \neq x$，故 $y:\tau_2 \in \Gamma$，因此 $\Gamma \vdash y : \tau_2$。
+- **$e = c$（常量）**: 常量类型不依赖环境，直接有 $\Gamma \vdash c : \tau_c$。
+
+**归纳步骤**: 假设对所有真子表达式引理成立（IH）。
+
+- **$e = e_1(e_2)$**: $e[x := v] = (e_1[x := v])(e_2[x := v])$。由应用规则前提和 IH，可得 $\Gamma \vdash e_1[x := v] : \tau_a \to \tau_2$ 与 $\Gamma \vdash e_2[x := v] : \tau_a$；再应用应用规则即得结论。
+- **$e = \lambda y:\tau_a.\, e_b$**: 设 $y \neq x$（可通过 α-转换保证）。$e[x := v] = \lambda y:\tau_a.\, (e_b[x := v])$。由抽象规则得 $\Gamma, x:\tau_1, y:\tau_a \vdash e_b : \tau_b$；交换环境顺序并应用 IH 得 $\Gamma, y:\tau_a \vdash e_b[x := v] : \tau_b$；再应用抽象规则即得结论。
+- **条件表达式与 let 绑定**: 类似地，对子表达式应用 IH 后再应用对应类型规则。
+
+由结构归纳法，替换引理对所有表达式成立。$\square$
+
+---
+
+### 14.2 进展性
+
+**定理 14.2（Progress）**: 如果 $\Gamma \vdash e : \tau$ 且 $\Gamma$ 良形，则 $e$ 是值，或存在 $e'$ 使 $e \to e'$。
+
+形式化：
+
+$$\Gamma \vdash e : \tau \;\rightarrow\; (e \in \text{Value}) \lor (\exists e'.\, e \to e')$$
+
+**证明（结构归纳法）**: 设 $P(e)$ 为上述命题。
+
+**基础情况**: 值（整数、布尔、单元、函数抽象）显然是值，$P(v)$ 成立。
+
+**归纳步骤**:
+
+- **$e = e_1(e_2)$**: 由应用规则，$\Gamma \vdash e_1 : \tau_1 \to \tau_2$ 且 $\Gamma \vdash e_2 : \tau_1$。
+  - 若 $e_1 \to e_1'$，由上下文规则 $e_1(e_2) \to e_1'(e_2)$。
+  - 若 $e_1$ 是值 $v_1$，则 $v_1$ 必为函数抽象 $\lambda x:\tau_1.\, e_b$。
+    - 若 $e_2 \to e_2'$，则 $v_1(e_2) \to v_1(e_2')$。
+    - 若 $e_2$ 是值 $v_2$，则 $(\lambda x:\tau_1.\, e_b)(v_2) \to e_b[x := v_2]$（β-归约）。
+- **$e = \text{if } e_1 \text{ then } e_2 \text{ else } e_3$**: 由条件规则，$\Gamma \vdash e_1 : \text{bool}$。
+  - 若 $e_1 \to e_1'$，整个条件式可求值。
+  - 若 $e_1$ 是值，则必为 $true$ 或 $false$，分别归约为 $e_2$ 或 $e_3$。
+- **$e = \text{let } x = e_1 \text{ in } e_2$**: 由 let 规则，$\Gamma \vdash e_1 : \tau_1$。
+  - 若 $e_1 \to e_1'$，整个 let 式可求值。
+  - 若 $e_1$ 是值 $v_1$，则 $\text{let } x = v_1 \text{ in } e_2 \to e_2[x := v_1]$。
+
+由结构归纳法，进展性成立。$\square$
+
+---
+
+### 14.3 保持性
+
+**定理 14.3（Preservation / Subject Reduction）**: 如果 $\Gamma \vdash e : \tau$ 且 $e \to e'$，则 $\Gamma \vdash e' : \tau$。
+
+形式化：
+
+$$\Gamma \vdash e : \tau \;\land\; e \to e' \;\rightarrow\; \Gamma \vdash e' : \tau$$
+
+**证明（对求值关系归纳）**: 对推导 $e \to e'$ 所使用的规则进行归纳。
+
+**基础情况**:
+
+- **β-归约** $(\lambda x:\tau_1.\, e_b)(v) \to e_b[x := v]$: 由应用规则得 $\Gamma, x:\tau_1 \vdash e_b : \tau_2$ 与 $\Gamma \vdash v : \tau_1$；应用替换引理即得 $\Gamma \vdash e_b[x := v] : \tau_2$。
+- **条件归约** $\text{if } true \text{ then } e_2 \text{ else } e_3 \to e_2$（以及 $false$ 情形）：直接由条件规则前提得 $\Gamma \vdash e_2 : \tau$ 或 $\Gamma \vdash e_3 : \tau$。
+- **let 归约** $\text{let } x = v \text{ in } e \to e[x := v]$：由 let 规则与替换引理可得。
+
+**归纳步骤**（上下文求值）:
+
+- **$\dfrac{e_1 \to e_1'}{e_1(e_2) \to e_1'(e_2)}$**: 由应用规则得 $\Gamma \vdash e_1 : \tau_1 \to \tau_2$；由 IH 得 $\Gamma \vdash e_1' : \tau_1 \to \tau_2$；再应用应用规则。
+- **$\dfrac{e_2 \to e_2'}{v(e_2) \to v(e_2')}$**: 类似，对右侧子表达式应用 IH。
+- **条件/let 上下文**: 对条件或 let 的可归约子表达式应用 IH，再重新应用原类型规则。
+
+由对求值规则的归纳，保持性成立。$\square$
+
+---
+
+### 14.4 类型安全
+
+**定理 14.4（Type Safety）**: 良型程序在求值过程中不会到达卡住状态（stuck state）。
+
+形式化：若 $\Gamma \vdash e : \tau$，则不存在卡住表达式 $e_{\text{stuck}}$ 使得 $e \to^* e_{\text{stuck}}$。
+
+其中 $e \to^* e'$ 表示多步求值，**卡住表达式**定义为：不是值且不存在 $e''$ 使 $e \to e''$。
+
+**证明**: 结合进展性与保持性，对求值步数 $n$ 归纳。
+
+**引理 14.5（类型安全归纳引理）**: 若 $\Gamma \vdash e : \tau$ 且 $e \to^n e'$，则 $e'$ 是值或可以继续求值。
+
+- **基础** $n = 0$: $e' = e$，由进展性直接成立。
+- **归纳** $n \to n+1$: 设 $e \to^n e'' \to e'$。由 IH，$e''$ 是值或可继续求值；因 $e'' \to e'$，$e''$ 不是值，故可继续求值。由保持性得 $\Gamma \vdash e'' : \tau$ 且 $\Gamma \vdash e' : \tau$；再由进展性，$e'$ 是值或可继续求值。
+
+**反证法完成主证明**: 假设存在 $e_{\text{stuck}}$ 使 $e \to^* e_{\text{stuck}}$。由引理 14.5，$e_{\text{stuck}}$ 是值或可继续求值；但卡住状态既不是值也无法继续求值，矛盾。$\square$
+
+> **关键洞察**: Progress 保证「不会卡住」，Preservation 保证「类型代代相传」。二者合起来即类型安全。Rust 的 `unsafe`、FFI、`panic`、非终止等不在此保证范围内——详见 §5.1 反命题决策树。
+
+---
+
+## 十五、八类类型错误反例
+
+**EN**: Eight Counterexamples of Type Errors
+**Summary**: Eight representative failures that demarcate the soundness boundary of Rust's type system, from function-app mismatch to trait resolution failure.
+
+> **来源**: [Pierce 2002, *TAPL* Ch.8](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Rust Reference — Error Codes](https://doc.rust-lang.org/error_codes/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+
+本节给出八类典型的类型错误/失败模式，作为 §9 与 §10 边界测试的补充。每个反例标明违反的规则、编译器错误码（如适用）以及理论根源。
+
+---
+
+### 15.1 反例 1：函数应用类型不匹配
+
+```rust,ignore
+fn add(x: i32, y: i32) -> i32 {
+    x + y
+}
+
+fn main() {
+    let result = add(5, "hello");  // E0308
+}
+```
+
+**形式化分析**:
+
+$$\frac{\Gamma \vdash \text{add} : \text{Int} \times \text{Int} \to \text{Int} \quad \Gamma \vdash (5, "hello") : \text{Int} \times \&\text{Str}}{\Gamma \vdash \text{add}(5, "hello") : ?}$$
+
+约束冲突：$\&\text{Str} = \text{Int}$ 不可解。
+
+**理论根源**: 违反函数应用规则；统一算法因构造器不同而失败。
+
+---
+
+### 15.2 反例 2：未绑定变量
+
+```rust,ignore
+fn main() {
+    let x = y + 5;  // E0425
+}
+```
+
+**形式化分析**: $\Gamma = \{\}$，变量规则要求 $y \in \text{dom}(\Gamma)$，但 $y \notin \text{dom}(\Gamma)$。
+
+**理论根源**: 自由变量在闭式程序中不可类型化。
+
+---
+
+### 15.3 反例 3：无限类型（出现检查失败）
+
+```rust,ignore
+fn omega<F>(f: F) -> !
+where
+    F: Fn(F) -> !,
+{
+    f(f)  // E0277
+}
+```
+
+**形式化分析**: 由 $f(f)$ 得到约束 $\tau_f = \tau_f \to \bot$，即 $\alpha = \alpha \to \beta$。统一算法的出现检查拒绝此类递归约束。
+
+**理论根源**: 无类型 λ 演算允许 Y 组合子，但 HM/λ→ 通过类型结构阻止自指。
+
+---
+
+### 15.4 反例 4：多态限制违反
+
+```rust,ignore
+fn lambda_poly() {
+    let f = |x| x;  // 单态推断
+    let a: i32 = f(5);
+    let b: String = f("hello".to_string());  // E0308
+}
+```
+
+**形式化分析**:
+
+在 HM 中：
+
+```text
+let id = λx.x in          // id : ∀α.α → α
+  let a = id 5 in         // α = Int
+    let b = id "hello"    // α = String，合法
+
+(λid. id 5 (id "hello")) (λx.x)  // 错误：id 不是多态
+```
+
+**理论根源**: HM 仅允许 let-绑定变量多态化；Rust 闭包参数与 Lambda 绑定变量一样被单态化。
+
+---
+
+### 15.5 反例 5：类型不安全操作（unsafe UB）
+
+```rust
+use std::ptr;
+
+unsafe fn bad_deref() {
+    let ptr: *const i32 = ptr::null();
+    let val = *ptr;  // 未定义行为
+}
+```
+
+**形式化分析**: Safe Rust 的进展性保证不会解引用空指针、不会使用悬垂引用、不会发生数据竞争。`unsafe` 块显式弃权该保证。
+
+**理论根源**: 类型安全不等于无运行时错误；`panic` 是安全受控崩溃，UB 则违反类型系统语义。
+
+---
+
+### 15.6 反例 6：约束求解失败
+
+```rust
+fn complex_failure<T, U, V>(
+    f: impl Fn(T) -> U,
+    g: impl Fn(U) -> V,
+    h: impl Fn(V) -> T,
+) -> impl Fn(T) -> T {
+    move |x| h(g(f(x)))
+}
+
+fn use_complex() {
+    let f: fn(i32) -> String = |x| x.to_string();
+    let g: fn(String) -> bool = |s| s.is_empty();
+    let h: fn(bool) -> f64 = |b| if b { 1.0 } else { 0.0 };
+    let composed = complex_failure(f, g, h);  // 错误：T 同时为 i32 与 f64
+}
+```
+
+**形式化分析**: 约束 $h \circ g \circ f : T \to T$ 要求 $\text{Float} = \text{Int}$，不可满足。
+
+**理论根源**: 函数组合链的输入/输出类型无法同时统一。
+
+---
+
+### 15.7 反例 7：生命周期错误（区域代数）
+
+```rust,ignore
+fn dangling_reference() -> &i32 {
+    let x = 5;
+    &x  // E0515
+}
+```
+
+**形式化分析**:
+
+- $x : \text{Int}$，生命周期为 `'local`
+- `&x : &'local Int`
+- 返回类型期望 `&'a Int`，要求 `'local : 'a`
+- 但 `'local` 在作用域结束时失效，outlives 约束不可满足。
+
+**理论根源**: 生命周期是偏序约束系统；返回局部引用违反区域包含关系。
+
+---
+
+### 15.8 反例 8：Trait 解析失败
+
+```rust
+// 违反孤儿规则
+// impl std::fmt::Display for Vec<i32> {}  // E0117
+
+// 矛盾实现
+trait Same<T> {
+    fn is_same(&self, other: &T) -> bool;
+}
+
+impl<T> Same<T> for T {
+    fn is_same(&self, other: &T) -> bool { self == other }
+}
+
+// 若再添加以下实现，则与上一条冲突：
+// impl<T, U> Same<U> for T where T: PartialEq<U> { ... }  // E0119
+```
+
+**形式化分析**:
+
+- **孤儿规则（Orphan Rule）**: impl 必须位于当前 crate 的 trait 或当前 crate 的类型上。
+- **一致性（Coherence）**: 对任意类型，最多只有一个 impl 适用。
+
+**理论根源**: trait 解析的可判定性与单态化安全性要求全局唯一实现。
+
+---
+
+### 15.9 八类反例总结
+
+| 反例 | 违反规则 | 错误类型 | 理论根源 |
+|:---|:---|:---|:---|
+| 函数应用类型不匹配 | 应用规则 | 编译期 E0308 | 统一失败 |
+| 未绑定变量 | 变量规则 | 编译期 E0425 | 自由变量 |
+| 无限类型 | 出现检查 | 编译期 E0277 | 递归类型限制 |
+| 多态限制 | let-多态规则 | 编译期 E0308 | HM 单态限制 |
+| unsafe UB | 安全边界 | 运行时 UB | 类型系统弃权 |
+| 约束求解失败 | 约束可满足性 | 编译期 | 类型不一致 |
+| 生命周期错误 | outlives | 编译期 E0515 | 区域代数 |
+| Trait 解析失败 | 孤儿规则/一致性 | 编译期 E0117/E0119 | impl 全局唯一 |
+
+---
+
+## 十六、国际课程与文献对齐
+
+**EN**: International Course and Literature Alignment
+**Summary**: Mapping of core type-theoretic concepts to ETH Zurich, Cambridge, EPFL and Stanford CS242 curricula, extending the source index in §10.
+
+> **来源**: [ETH Zurich — Rust Programming](https://inf.ethz.ch/courses) · [University of Cambridge — Computer Science Tripos](https://www.cl.cam.ac.uk/teaching/) · [EPFL — IC School](https://www.epfl.ch/schools/ic/) · [Stanford CS242: Programming Languages](https://cs242.stanford.edu/)
+
+本节将类型论核心主题与欧洲顶尖院校课程及 Stanford CS242 的讲授内容进行对齐，便于读者定位进一步学习路径。
+
+---
+
+### 16.1 ETH Zurich（瑞士联邦理工学院）
+
+**课程**: Rust Programming
+**讲师**: David Evangelista
+**链接**: [https://inf.ethz.ch/courses](https://inf.ethz.ch/courses)
+
+| ETH 内容 | Rust 概念 | 本页对应 |
+|:---|:---|:---|
+| Type System Basics | 类型系统基础 | §1、§3 |
+| Generics & Traits | 泛型与 Trait | §2.1、§4 L2 |
+| Type Inference | 类型推断 | §3、§13 |
+| Type Safety | 类型安全 | §4、§14 |
+| Curry-Howard | 类型即命题 | §3、§10.3 |
+
+**课程特点**: 欧洲顶尖理工院校，强调类型系统的实际应用与理论基础结合，Curry-Howard 对应章节与本页高度契合。
+
+---
+
+### 16.2 University of Cambridge（剑桥大学）
+
+**课程**: Computer Science Tripos（Types 模块）
+**链接**: [https://www.cl.cam.ac.uk/teaching/](https://www.cl.cam.ac.uk/teaching/)
+
+| Cambridge 内容 | Rust 概念 | 本页对应 |
+|:---|:---|:---|
+| Type Systems | 类型系统理论 | §1、§3 |
+| Simply Typed Lambda | 简单类型 λ 演算 | §3 |
+| System F | 系统 F（多态） | §4 L2、§6 Step 4 |
+| Hindley-Milner | HM 类型系统 | §3、§13 |
+| Type Safety Proofs | 类型安全证明 | §4、§14 |
+| Curry-Howard | 柯里-霍华德对应 | §3、§10.3 |
+| Subtyping | 子类型 | §10.4 |
+| Variance | 型变 | §2.2、§2.3 |
+
+**课程特点**: 理论基础扎实，涵盖从 λ→ 到 System F 的完整类型理论，强调形式化证明。
+
+---
+
+### 16.3 EPFL（瑞士洛桑联邦理工学院）
+
+**课程**: Concurrent and Parallel Programming
+**链接**: [https://www.epfl.ch/schools/ic/](https://www.epfl.ch/schools/ic/)
+
+| EPFL 内容 | Rust 概念 | 本页对应 |
+|:---|:---|:---|
+| Type-Based Concurrency | 基于类型的并发 | §4 L3 |
+| Send/Sync Traits | 线程安全 Trait | §4 L3、§11 |
+| Type Safety & Parallelism | 类型安全与并行 | §4 T1 |
+| Generic Programming | 泛型编程 | §2.1、§6 Step 4 |
+
+**课程特点**: 并发编程理论深厚，强调类型系统在并发安全（Concurrency Safety）中的作用。
+
+---
+
+### 16.4 Stanford CS242
+
+**课程**: CS242: Programming Languages
+**链接**: [https://cs242.stanford.edu/](https://cs242.stanford.edu/)
+
+| Stanford 内容 | 本文档位置 | 对齐状态 |
+|:---|:---|:---|
+| Lecture 6-10: Type Systems | §1、§3、§13 | ✅ |
+| Lecture 11-15: Polymorphism | §2.1、§4 L2、§6 Step 4 | ✅ |
+| Lecture 16-20: Curry-Howard | §3、§10.3 | ✅ |
+| Progress Theorem | §4、§14.2 | ✅ |
+| Preservation Theorem | §4、§14.3 | ✅ |
+
+> **核心推荐**: CS242 Lecture 16-20 对 Curry-Howard 对应的讲解与本页 §3 的积/余积/函数类型映射互补；Lecture 6-10 的 Progress/Preservation 证明是本页 §14 的直接来源。
+
+---
+
+### 16.5 课程对比总结
+
+| 大学/课程 | 核心侧重点 | 与本页关联度 | 特色内容 |
+|:---|:---|:---:|:---|
+| **ETH Zurich** | 类型基础、泛型、类型安全 | ⭐⭐⭐⭐⭐ | 实践导向，Curry-Howard |
+| **Cambridge** | 类型理论、形式化证明 | ⭐⭐⭐⭐⭐ | λ 演算到 System F |
+| **EPFL** | 类型与并发安全 | ⭐⭐⭐⭐ | 并发理论，Send/Sync |
+| **Stanford CS242** | 类型系统 + Curry-Howard | ⭐⭐⭐⭐⭐ | 完整 PL 课程，证明技术 |
+
+---
+
+## 十七、Rust 1.93/1.94/1.97 类型系统形式化片段
+
+**EN**: Rust 1.93/1.94/1.97 Type-System Formal Snippets
+**Summary**: Formalized snippets for LUB inference, Copy specialization removal, offset_of well-formedness, never type, type ascription, and ControlFlow::ok, focusing on type-theoretic impact rather than release-note boilerplate.
+
+> **来源**: [Rust 1.93 Release Notes](https://blog.rust-lang.org/2025/08/28/Rust-1.93.0.html) · [Rust 1.97 Release Notes](https://blog.rust-lang.org/2026/03/05/Rust-1.97.0.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [releases.rs](https://releases.rs/)
+
+以下形式化片段选自旧研究笔记中与类型系统直接相关的更新，作为 [`concept/07_future/00_version_tracking/rust_1_93_stabilized.md`](../../07_future/00_version_tracking/rust_1_93_stabilized.md) 与 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md) 的补充。已列入版本跟踪页的内容（如 `MaybeUninit` API、`as_array` 等）此处不再重复。
+
+---
+
+### 17.1 Rust 1.93：LUB 推断与 Copy specialization
+
+#### LUB 推断修正
+
+Rust 1.93 修正了 `if c { e₁ } else { e₂ }` 分支的 least upper bound（LUB）推断，使函数项与安全性的 coerce 行为更严格。
+
+**定义 LUB1（LUB 类型推断）**: 设 $\Gamma \vdash e_1 : \tau_1$、$\Gamma \vdash e_2 : \tau_2$，则条件表达式的类型为 $\mathrm{LUB}(\tau_1, \tau_2)$；若不存在则编译错误。
+
+$$\frac{\Gamma \vdash e_1 : \tau_1 \quad \Gamma \vdash e_2 : \tau_2}{\Gamma \vdash \text{if } c \text{ then } e_1 \text{ else } e_2 : \mathrm{LUB}(\tau_1, \tau_2)}$$
+
+**定理 LUB-T1**: LUB 推断修正后，若 $\tau_1$ 与 $\tau_2$ 无最小上界，则条件表达式被拒绝。
+
+> **Rust 影响**: 此前某些函数项分支会错误地 coerce 到不安全的公共类型；1.93 后类型检查器更保守，减少隐式类型转换导致的 soundness 风险。
+
+#### Copy specialization 移除
+
+**定义 COP1（Copy 与 specialization）**: Rust 1.93 前 `impl Copy for T` 可依赖生命周期 specialization；1.93 后该内部 specialization 被移除，`Copy` 与 `Clone` 的 impl 解析不再有此路径。
+
+**定理 COP-T1**: 1.93 后 `Copy`/`Clone` 的 impl 解析对生命周期参数保持一致；对 `Clone + Copy` 类型的 `clone()` 调用语义不变，但编译器内部解析路径简化。
+
+> **形式化意义**: specialization 会引入额外的类型层面分情况讨论；移除后，`Copy` 实现的判定更接近纯语法规则，有助于 coherence 与可预测性。
+
+---
+
+### 17.2 Rust 1.93：offset_of、never type 与 type ascription
+
+以下三项在 1.93 中以更严格的 well-formedness 检查或 lint 形式出现。
+
+#### offset_of well-formedness
+
+**定义 OFFSET1**: `offset_of!(Type, field)` 良形当且仅当：
+
+1. `Type` 为有效结构体（Struct）/联合体类型；
+2. `field` 为该类型的有效字段名；
+3. 类型布局可确定。
+
+**定理 OFFSET-T1**: 若 `offset_of!(τ, f)` 通过 well-formedness 检查，则其值为 $\tau$ 中字段 $f$ 的字节偏移，类型为 `usize`。
+
+```rust
+use std::mem::offset_of;
+
+struct Point { x: f64, y: f64 }
+
+const X_OFFSET: usize = offset_of!(Point, x);
+// Y_OFFSET = offset_of!(Point, z)  // 错误：字段不存在
+```
+
+#### Never type `!`
+
+**定义 BOT1**: 类型 $\bot$（`!`）无 inhabitant，且满足 $\forall \tau.\, \bot <: \tau$。
+
+**定理 BOT-T1**: 若 $\Gamma \vdash e : \bot$，则 $e$ 不终止或无正常返回值；`!` 可 coerce 到任意类型；控制流分析中 `!` 分支视为不可达。
+
+```rust
+fn always_panic() -> ! {
+    panic!("diverges")
+}
+
+let x: i32 = always_panic();  // ✅ ! coerce 到 i32
+```
+
+#### Type ascription
+
+**定义 ASC1**: 表达式 `e: T` 的语义为：显式将 $e$ 标注为类型 $\tau$；类型检查要求 $\Gamma \vdash e : \tau$；若 $e$ 的推断类型 $\tau'$ 与 $\tau$ 不兼容则编译错误。
+
+**定理 ASC-T1**: $\Gamma \vdash (e : \tau) : \tau$ 当且仅当 $\Gamma \vdash e : \tau$；ascription 不改变类型，仅约束推断。
+
+```rust,ignore
+let v = vec![1, 2, 3];
+let x = (v.len()): usize;  // ascription 显式指定类型
+```
+
+---
+
+### 17.3 Rust 1.97：ControlFlow::ok 类型规则
+
+**特性**: `ControlFlow::ok()` 方法稳定化，将 `ControlFlow<B, C>` 转换为 `Option<C>`。
+
+**定义 CF-OK1**:
+
+```text
+Γ ⊢ e : ControlFlow<B, C>
+─────────────────────────────── (CF-OK1)
+Γ ⊢ e.ok() : Option<C>
+```
+
+**语义定义**:
+
+$$\text{ok}(\text{ControlFlow}::\text{Continue}(c)) = \text{Some}(c)$$
+$$\text{ok}(\text{ControlFlow}::\text{Break}(_)) = \text{None}$$
+
+**定理 CF-OK-T1（ControlFlow::ok 类型安全）**: 若 $\Gamma \vdash e : \text{ControlFlow}\langle B, C \rangle$，则：
+
+1. $e.\text{ok}() : \text{Option}\langle C \rangle$；
+2. 若 $e \downarrow \text{Continue}(c)$，则 $e.\text{ok}() \downarrow \text{Some}(c)$；
+3. 若 $e \downarrow \text{Break}(b)$，则 $e.\text{ok}() \downarrow \text{None}$。
+
+**证明**: 由 `ControlFlow` 的构造器归纳与 `ok()` 的实现直接得出。$\square$
+
+```rust,ignore
+use std::ops::ControlFlow;
+
+fn find_negative(items: &[i32]) -> Option<i32> {
+    items.iter().try_for_each(|&item| {
+        if item < 0 { ControlFlow::Break(item) }
+        else        { ControlFlow::Continue(()) }
+    }).ok()?  // ControlFlow<i32, ()> → Option<i32>
+}
+```
+
+> **类型理论意义**: `ControlFlow<B, C>` 与 `Option<C>` 之间存在自然的幺半群同态；`ok()` 将 Break 信息折叠为 `None`，保持 Continue 分支的类型信息。这与早期返回（early return）和可选值（optional value）的编程模式统一。
+
+---
+
+### 17.4 形式化影响总结
+
+| 特性 | 类型系统影响 | 证明/规则状态 |
+|:---|:---|:---|
+| LUB 推断修正 | 条件表达式类型更严格 | 规则 LUB1、定理 LUB-T1 |
+| Copy specialization 移除 | impl 解析路径简化 | 规则 COP1、定理 COP-T1 |
+| `offset_of!` well-formedness | 布局可计算性前提 | 规则 OFFSET1、定理 OFFSET-T1 |
+| never type `!` | 底部类型与子类型 | 定义 BOT1、定理 BOT-T1 |
+| type ascription | 显式约束推断 | 定义 ASC1、定理 ASC-T1 |
+| `ControlFlow::ok()` | 类型转换规则 | 规则 CF-OK1、定理 CF-OK-T1 |

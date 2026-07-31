@@ -89,6 +89,8 @@ Rust API Guidelines（rust-lang.github.io/api-guidelines）是 Rust 生态的**�
 5. **生态集成（Ecosystem Integration）**：C-SERDE、C-PLACEHOLDER、C-INTERMEDIATE、C-ENTITY。
 
 > **核心原则**：库的公共 API 是**对外承诺**。每个公开项的名字、trait 实现、panic 条件、错误类型都是承诺的一部分，变更承诺即可能破坏下游代码。
+>
+> **编号说明**：本页使用的 `C-COMMON`、`C-CONV`、`C-SINGULAR` 等编号是为便于结构化教学而重新组织的**教学编号**，并非 [Rust API Guidelines 官方 Checklist](https://rust-lang.github.io/api-guidelines/checklist.html) 中的原始编号（官方编号如 `C-CASE`、`C-CONV`、`C-GETTER`、`C-COMMON-TRAITS` 等）。如需核对官方条目，请直接参考 [Rust API Guidelines — Checklist](https://rust-lang.github.io/api-guidelines/checklist.html) 与 [Naming](https://rust-lang.github.io/api-guidelines/naming.html)。
 
 ---
 
@@ -369,9 +371,12 @@ impl Stack {
 危险或不可逆操作应要求显式确认，例如消费 `self`、返回 `Result`、使用 `remove`/`delete` 等明确命名。
 
 ```rust
+struct Database;
+type DbError = ();
+
 impl Database {
     /// 删除数据库；不可逆。
-    pub fn drop(self) -> Result<(), DbError> { /* ... */ }
+    pub fn drop(self) -> Result<(), DbError> { Ok(()) }
 }
 ```
 
@@ -423,6 +428,8 @@ pub struct LargeBuffer { data: Vec<u8> }
 几乎所有公共类型都应实现 `Debug`，这是 Rust 错误处理与日志生态的基础。
 
 ```rust
+use std::time::Duration;
+
 #[derive(Debug)]
 pub struct Config { timeout: Duration }
 ```

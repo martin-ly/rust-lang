@@ -12,9 +12,9 @@
 > **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Eva — 评估宏（Macro）库工程实践
 > **前置概念**:
-> [过程宏（Procedural Macro）](02_proc_macro.md) ·
+> [过程宏（Procedural Macro）](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) ·
 > [宏（Macro）调试与诊断](04_macro_debugging_and_diagnostics.md) ·
-> [元编程](../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md) ·
+> [元编程](../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md) ·
 > [Cargo 注册表与包发布](../../06_ecosystem/01_cargo/08_cargo_registries_and_publishing.md)
 > **后置概念**:
 > [Cargo semver-checks](../../07_future/02_preview_features/27_cargo_semver_checks_preview.md) ·

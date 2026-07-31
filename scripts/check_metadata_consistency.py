@@ -198,8 +198,6 @@ D5_WHITELIST_FILES = {
         "演进方向节：nightly 特性状态为版本演进上下文陈述",
     "concept/03_advanced/02_unsafe/03_nll_and_polonius.md":
         "Polonius 借用检查器仅 nightly 可用为客观事实陈述（页面主题即其对比）",
-    "concept/03_advanced/03_proc_macros/02_proc_macro.md":
-        "演进方向节：nightly 特性状态为版本演进上下文陈述",
     "concept/03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md":
         "-Zunpretty/trace_macros 等 nightly 调试标志为工具链事实陈述（页面主题即调试手段）",
     "concept/03_advanced/03_proc_macros/05_production_grade_macro_development.md":
@@ -266,6 +264,10 @@ D5_WHITELIST_FILES = {
         "验证工具矩阵客观陈述 Flux 需 nightly 及 BorrowSanitizer/Safety Tags 等 preview 特性链接，非稳定层依赖",
     "concept/04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md":
         "rustc 内部机制页：`-Zmir-opt-level` nightly 标志作为 MIR 优化调参事实陈述",
+    # ---- 2026-07-31 Wave E 实跑复核：以下文件 nightly/preview 提及均为工具链事实陈述
+    # （portable_simd 截至 Rust 1.97.0 仍为 nightly-only，页面主题即性能工程中的 SIMD 选型边界）。
+    "concept/06_ecosystem/10_performance/02_performance_engineering_architecture.md":
+        "性能工程页：portable_simd 为 nightly-only 工具链事实，页面主题即 SIMD 选型与 stable/nightly 边界",
 }
 
 

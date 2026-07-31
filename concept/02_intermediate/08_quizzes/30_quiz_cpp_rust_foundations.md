@@ -14,7 +14,7 @@
 > **前置概念**:
 >
 > [RTTI](../04_types_and_conversions/05_rtti_and_dynamic_typing.md) ·
-> [Preprocessor vs Macros](../06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md) ·
+> [Preprocessor vs Macros](../06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md) ·
 > [Exception Safety](../03_error_handling/04_exception_safety_rust_cpp.md) ·
 > [Construction](../00_traits/05_construction_and_initialization.md) ·
 > [Friend vs Privacy](../05_modules_and_visibility/02_friend_vs_module_privacy.md) ·
@@ -224,7 +224,7 @@ Rust 中复合类型的 `Drop`/`Clone`/`Copy` 行为由字段自动推导。如�
 > 本节按四级题型规范补充单选、多选与判断题，知识点与
 > [Exception Safety](../03_error_handling/04_exception_safety_rust_cpp.md)、
 > [Move Semantics](../../01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md)、
-> [Preprocessor vs Macros](../06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md) 权威页一致；
+> [Preprocessor vs Macros](../06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md) 权威页一致；
 > 干扰项针对常见误解设计。
 
 ### 问题 9：🟡【单选】C++ 异常与 Rust panic 的关键设计区别是什么？
@@ -301,6 +301,6 @@ Rust 中复合类型的 `Drop`/`Clone`/`Copy` 行为由字段自动推导。如�
 
 **答案：错**
 
-**解析**：C 预处理器在**文本**层面替换，发生在解析之前，因此有括号陷阱、多重求值、标识符意外捕获等经典问题；`macro_rules!` 在 **token/语法**层面工作，展开发生于解析之后，且默认**卫生**：宏内部引入的局部标识符不会与调用点同名标识符冲突。详见 [Preprocessor vs Macros](../06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md) 的对比矩阵。
+**解析**：C 预处理器在**文本**层面替换，发生在解析之前，因此有括号陷阱、多重求值、标识符意外捕获等经典问题；`macro_rules!` 在 **token/语法**层面工作，展开发生于解析之后，且默认**卫生**：宏内部引入的局部标识符不会与调用点同名标识符冲突。详见 [Preprocessor vs Macros](../06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md) 的对比矩阵。
 
 </details>

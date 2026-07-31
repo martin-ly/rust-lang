@@ -46,13 +46,13 @@
 | 异常安全深度 | P0 | ✅ 完成 | [Exception Safety](../../02_intermediate/03_error_handling/04_exception_safety_rust_cpp.md) |
 | SFINAE / 模板元编程 | P1 | ✅ 完成 | [Traits §5.8](../../02_intermediate/00_traits/01_traits.md) |
 | 构造/初始化/运算符/RTTI/友元 | P1 | ✅ 完成 | [Surface Features](../../05_comparative/00_paradigms/03_cpp_rust_surface_features.md) + 专门文件 |
-| 预处理器 vs 宏 | P2 | ✅ 完成 | [Preprocessor vs Macros](../../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md) |
+| 预处理器 vs 宏 | P2 | ✅ 完成 | [Preprocessor vs Macros](../../02_intermediate/06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md) |
 | 统一路线图 | — | ✅ 新增 | [C/C++ Engineering Roadmap](../00_framework/cpp_rust_engineering_roadmap.md) |
 
 ### Phase B 专门文件清单
 
 - [RTTI 与动态类型识别](../../02_intermediate/04_types_and_conversions/05_rtti_and_dynamic_typing.md) — C++ `typeid`/`dynamic_cast` vs Rust `Any`/`TypeId`
-- [C 预处理器 vs Rust 宏](../../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md) — 文本替换 vs 语法树卫生性
+- [C 预处理器 vs Rust 宏](../../02_intermediate/06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md) — 文本替换 vs 语法树卫生性
 - [异常安全](../../02_intermediate/03_error_handling/04_exception_safety_rust_cpp.md) — strong/basic/no-throw vs `Result`/`panic`
 - [构造与初始化](../../02_intermediate/00_traits/05_construction_and_initialization.md) — 构造函数 vs 结构体字面量
 - [友元 vs 模块可见性](../../02_intermediate/05_modules_and_visibility/02_friend_vs_module_privacy.md) — `friend` vs `pub(crate)`/`pub(super)`
@@ -80,7 +80,7 @@
 | [PL Foundations Roadmap](../00_framework/pl_foundations_roadmap.md) | 00_meta | 通用 PL 基座导航 |
 | [Foundations Gap Closure Index](13_foundations_gap_closure_index.md) | 00_meta | 本文件：补全状态追踪 |
 | [RTTI and Dynamic Typing](../../02_intermediate/04_types_and_conversions/05_rtti_and_dynamic_typing.md) | 02_intermediate | C++ RTTI vs Rust `Any` |
-| [Preprocessor vs Macros](../../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md) | 02_intermediate | C 预处理器 vs Rust 宏 |
+| [Preprocessor vs Macros](../../02_intermediate/06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md) | 02_intermediate | C 预处理器 vs Rust 宏 |
 | [Exception Safety](../../02_intermediate/03_error_handling/04_exception_safety_rust_cpp.md) | 02_intermediate | 异常安全深度对比 |
 | [Construction and Initialization](../../02_intermediate/00_traits/05_construction_and_initialization.md) | 02_intermediate | 构造与初始化对比 |
 | [Friend vs Module Privacy](../../02_intermediate/05_modules_and_visibility/02_friend_vs_module_privacy.md) | 02_intermediate | 友元 vs 模块可见性 |

@@ -77,7 +77,7 @@ flowchart TD
 | [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) | 正确 + 错误 | ABI 约定、生命周期桥接 |
 | [Atomics and Memory Ordering](../../03_advanced/00_concurrency/05_atomics_and_memory_ordering.md) | 边界 + 反例 | 错误 memory order、happens-before |
 | [Lock-free](../../03_advanced/00_concurrency/06_lock_free.md) | 边界 + 反例 | ABA、内存回收 |
-| [Proc Macros](../../03_advanced/03_proc_macros/02_proc_macro.md) | 正确 + 错误 | derive/attribute/function-like |
+| [Proc Macros](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) | 正确 + 错误 | derive/attribute/function-like |
 
 ### 3.4 L4 形式化理论层
 

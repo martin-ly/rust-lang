@@ -71,7 +71,7 @@
 内联汇编（inline assembly）是「在 Rust 代码中嵌入目标架构机器指令」的机制，五个核心概念：
 
 1. **为什么需要内联汇编**：正当场景只有四类——访问编译器不暴露的 CPU 特性（特殊控制寄存器、`cpuid`、`rdtsc` 精确计时）、实现硬件协议要求的精确指令序列（内存屏障 `mfence`、原子原语的底层实现）、手写超越编译器的极限优化（极罕见，需基准证明）、以及操作系统/嵌入式开发（系统调用入口、上下文切换）。反模式：用汇编「优化」普通算术——现代 LLVM 几乎总是做得更好。
-2. **`asm!` 宏基础语法**：`asm!("指令模板", 操作数列表)`——模板中 `{}`/`{name}` 引用（Reference）操作数；操作数按方向分 `in("reg") expr`（输入）、`out("reg") ret`（输出）、`inout("reg") expr => ret`、`lateout`、`sym`（符号地址）、`const`（立即数）、`clobber_abi("C")`（按调用约定声明被破坏的寄存器）。2020 起稳定（`std::arch::asm`，取代旧 `llvm_asm!`）。
+2. **`asm!` 宏基础语法**：`asm!("指令模板", 操作数列表)`——模板中 `{}`/`{name}` 引用（Reference）操作数；操作数按方向分 `in("reg") expr`（输入）、`out("reg") ret`（输出）、`inout("reg") expr => ret`、`lateout`、`sym`（符号地址）、`const`（整数常量表达式）、`label { block }`（局部跳转目标）、`clobber_abi("C")`（按调用约定声明被破坏的寄存器）。2020 起稳定（`std::arch::asm`，取代旧 `llvm_asm!`）。
 3. **三个稳定宏**：除 `asm!` 外，`global_asm!` 在模块级插入汇编，`naked_asm!` 用于 `#[unsafe(naked)]` 函数的完整函数体——两者都只能使用 `sym`/`const` 操作数。
 4. **约束系统（Constraints）**：`"reg"`（任意通用寄存器）、架构特定类（x86 的 `"rax"`/`"eax"` 显式寄存器、 `"m"` 内存操作数在部分架构可用）。编译器据约束分配寄存器并插入必要的 mov——约束是「Rust 世界与汇编世界的类型系统（Type System）」。
 5. **Clobber 与 Options**：`options(...)` 声明副作用——`nostack`（不碰栈）、`preserves_flags`（不改标志寄存器）、`readonly`/`pure`（内存访问语义，影响优化器重排）、`nomem`、`att_syntax`。未声明的副作用（如写了内存却加 `nomem`）使优化器基于错误假设重排代码——静默错误，比崩溃难查十倍。
@@ -131,7 +131,9 @@ assert_eq!(x, 15);
 | `ymm_reg` | YMM 寄存器 (256-bit) | x86_64 |
 | `zmm_reg` | ZMM 寄存器 (512-bit) | x86_64 |
 | `mem` | 内存地址 | 所有平台 |
-| `imm` / `const` | 立即数 / 常量 | 所有平台 |
+| `const` | 整数常量表达式，直接格式化进模板 | 所有平台 |
+| `sym` | 函数或 static 的 mangled 符号名 | 所有平台 |
+| `label` | `label { block }` 提供 asm 内跳转目标 | 所有平台 |
 
 ```rust
 // 命名操作数 + 向量寄存器约束 (aarch64)
@@ -171,13 +173,88 @@ unsafe {
 
 | Option | 含义 |
 |:---|:---|
-| `pure` | 无副作用，可被优化掉若输出未使用 |
+| `pure` | 无副作用，可被优化掉若输出未使用；必须与 `nomem` 或 `readonly` 同用 |
 | `nomem` | 不访问内存，允许编译器重排 |
 | `readonly` | 只读内存，不写入 |
-| `nostack` | 不修改栈指针 |
+| `nostack` | 不修改栈指针；此时 `push`/`pop` 为 UB |
 | `preserves_flags` | 不修改条件码/标志寄存器 |
-| `noreturn` | 永不返回（如无限循环、panic） |
+| `noreturn` | 不 fall through；可跳转到 `label` 块，块返回 `()` 时整个 `asm!` 返回 `()` |
 | `att_syntax` / `intel_syntax` | x86 汇编语法风格 |
+| `raw` | 模板字符串按原始汇编解析，`{`/`}` 无特殊含义（常用于 `include_str!`） |
+
+> **约束**：`global_asm!` 与 `naked_asm!` 仅支持 `att_syntax` 与 `raw` 选项；其余选项在函数体外无意义。
+
+### 1.5 Label 操作数
+
+`label { block }` 把一段 Rust 代码块作为汇编跳转目标。汇编模板通过占位符获得该块的地址，并可直接跳转执行；块执行完毕后，`asm!` 表达式返回。
+
+- 块的类型必须是 `()` 或 `!`；块内开启**新的 safety context**，即使外层已在 `unsafe` 块中，块内的 `unsafe` 操作仍需再包一层 `unsafe`。
+- 在启用控制流保护（如 x86-64 `cf-protection`）的目标上，**禁止间接跳转**到 label 地址；必须直接跳转。
+- `noreturn` 选项下，允许通过 `jmp {}` 进入 label 块并返回 `()`，从而使整个 `asm!` 表达式返回 `()`。
+
+```rust
+#[cfg(target_arch = "x86_64")]
+unsafe {
+    core::arch::asm!(
+        "jmp {}",
+        label {
+            println!("entered via asm label");
+        },
+        options(noreturn),
+    );
+}
+```
+
+### 1.6 模板修饰符（Template Modifiers）
+
+占位符可附加单字符修饰符 `{name:modifier}`，控制寄存器名以何种宽度/视图插入模板，**不影响寄存器分配**。
+
+| 架构 | 寄存器类 | 常用修饰符 | 示例输出 |
+|:---|:---|:---|:---|
+| x86-64 | `reg` | `:r` / `:e` / `:x` / `:l` / `:h` | `rax` / `eax` / `ax` / `al` / `ah` |
+| x86-64 | `xmm_reg` / `ymm_reg` / `zmm_reg` | `:x` / `:y` / `:z` | `xmm0` / `ymm0` / `zmm0` |
+| AArch64 | `reg` | `:x` / `:w` | `x0` / `w0` |
+| AArch64 | `vreg` | `:b` / `:h` / `:s` / `:d` / `:q` / `:v` | `v0.b` / `v0.s` / `v0.d` 等 |
+| ARM | `qreg` | `:e` / `:f` | 128-bit NEON quad 寄存器的低/高 doubleword |
+| s390x | `reg` / `reg_addr` | 无（默认 `%rN`） | `%r0` / `%r1` |
+
+> **注意**：每个占位符只允许**一个**修饰符；`{:er}` 这类组合会被编译器拒绝。Rust 对 `reg` 默认使用完整寄存器名（与 GCC 根据操作数类型推断不同），因此访问子寄存器时必须显式加修饰符。
+
+```rust
+#[cfg(target_arch = "x86_64")]
+unsafe {
+    let mut x: u16 = 0x1234;
+    core::arch::asm!(
+        "xchg {x:l}, {x:h}",
+        x = inout(reg_abcd) x,
+    );
+    assert_eq!(x, 0x3412);
+}
+```
+
+### 1.7 `clobber_abi`：按调用约定声明寄存器破坏
+
+`clobber_abi("ABI")` 让编译器自动插入指定调用约定下不会被调用方保留的寄存器作为 `lateout`。它是手工维护 `out("rax") _` 列表的替代方案。
+
+- 可多次使用，取各 ABI 破坏寄存器集合的并集。
+- 使用 `clobber_abi` 时，**所有输出操作数必须使用显式寄存器**（不能用 `out(reg)` 等通用类），避免与隐式 clobber 重叠。
+- 显式输出寄存器优先级高于隐式 clobber：若某寄存器已列为输出，则不再额外插入 clobber。
+
+```rust
+#[cfg(target_arch = "x86_64")]
+unsafe {
+    extern "C" fn callee() -> i32 { 42 }
+
+    let z: i32;
+    core::arch::asm!(
+        "call {}",
+        sym callee,
+        out("rax") z,
+        clobber_abi("C"),
+    );
+    assert_eq!(z, 42);
+}
+```
 
 ---
 
@@ -453,6 +530,32 @@ unsafe {
     );
 }
 ```
+
+### 4.3 `#[unsafe(naked)]` 与 `naked_asm!` 的规则
+
+`naked_asm!` 只能出现在标注 `#[unsafe(naked)]` 的函数体内，并且**构成整个函数的汇编体**——编译器不会生成 prologue、epilogue 或任何额外指令。
+
+| 规则 | 说明 |
+|:---|:---|
+| 可用操作数 | 仅 `sym` 与 `const`，不允许 `in`/`out`/`inout`/`lateout`/`label` |
+| 可用选项 | 仅 `att_syntax` 与 `raw`；`nostack`、`preserves_flags` 等无意义 |
+| 调用约定责任 | 必须手动遵守函数 ABI：参数/返回值按约定寄存器传递，caller-saved 寄存器按需保存 |
+| 控制流 | 通常以 `ret` 或等价指令结束；若函数声明返回 `!`，可无限循环或触发 trap |
+| 栈帧 | 无编译器生成的栈帧；自行管理栈指针对齐与 red-zone |
+
+```rust,ignore
+#[unsafe(naked)]
+extern "C" fn naked_add(a: i32, b: i32) -> i32 {
+    unsafe {
+        core::arch::naked_asm!(
+            "lea eax, [rdi + rsi]",
+            "ret",
+        )
+    }
+}
+```
+
+> **风险**：`naked` 函数的错误很难通过常规测试发现——栈未对齐、漏保存寄存器、错误返回地址都会以静默崩溃或更远的 UB 形式表现。仅在必须手写入口/上下文切换时使用。
 
 ---
 

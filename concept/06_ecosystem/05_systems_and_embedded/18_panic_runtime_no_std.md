@@ -68,7 +68,9 @@ mindmap
   - [八、边界测试](#八边界测试)
     - [8.1 边界测试：`no_std` 中未提供 panic handler](#81-边界测试no_std-中未提供-panic-handler)
     - [8.2 边界测试：`panic = "unwind"` 在 `no_std` 中链接失败](#82-边界测试panic--unwind-在-no_std-中链接失败)
-  - [九、相关概念](#九相关概念)
+  - [九、panic 策略与运行属性矩阵](#九panic-策略与运行属性矩阵)
+  - [十、panic / 调试策略决策树](#十panic--调试策略决策树)
+  - [十一、相关概念](#十一相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -293,7 +295,36 @@ fn panic(_info: &PanicInfo) -> ! {
 
 ---
 
-## 九、相关概念
+## 九、panic 策略与运行属性矩阵
+
+| 策略 | 栈展开 | `eh_personality` | panic 消息 | 固件体积 | 调试能力 | 推荐场景 |
+|:---|:---:|:---:|:---:|:---:|:---|:---|
+| `panic = "unwind"` | ✅ | 需要 | 完整 | 大 | 可捕获调用栈 | host 测试、仿真 |
+| `panic = "abort"` | ❌ | 不需要 | 可通过 `PanicInfo` 自定义 | 中 | 文件/行号 | 一般嵌入式固件 |
+| `panic-immediate-abort` | ❌ | 不需要 | 无 | 最小 | 无 | 体积极度敏感（如 bootloader） |
+
+判定依据：裸机项目默认选择 `panic = "abort"`；在需要最小体积且无需调试信息时，使用 `build-std-features = ["panic-immediate-abort"]`。
+
+---
+
+## 十、panic / 调试策略决策树
+
+```mermaid
+graph TD
+    A[选择 panic 与调试方案] --> B{当前阶段?}
+    B -->|开发/调试| C[panic-probe + defmt + probe-rs]
+    B -->|量产| D{是否需要故障日志?}
+    D -->|是| E{日志量是否大?}
+    E -->|是| F[defmt + 非易失日志区]
+    E -->|否| G[UART 输出错误码 + 复位]
+    D -->|否| H{是否需要自动恢复?}
+    H -->|是| I[panic-reset / 看门狗]
+    H -->|否| J[panic-halt]
+```
+
+---
+
+## 十一、相关概念
 
 - [Rust 嵌入式系统开发](03_embedded_systems.md)
 - [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md)
@@ -303,6 +334,7 @@ fn panic(_info: &PanicInfo) -> ! {
 - [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
 - [Rust vs Zig：系统编程的两种显式路径](../../05_comparative/01_systems_languages/06_rust_vs_zig.md)
 - [嵌入式形式化内存模型](../../04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md)
+- [`#![no_std]` 与裸机编程惯用法](23_no_std_and_bare_metal_idioms.md)
 
 ---
 

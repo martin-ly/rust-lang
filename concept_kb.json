@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 608,
-    "generated_at": "2026-07-30T20:47:14.541507+00:00"
+    "total_files": 624,
+    "generated_at": "2026-07-31T12:06:43.712717+00:00"
   },
   "files": [
     {
@@ -309,7 +309,7 @@
         "../../02_intermediate/03_error_handling/04_exception_safety_rust_cpp.md",
         "../../02_intermediate/04_types_and_conversions/05_rtti_and_dynamic_typing.md",
         "../../02_intermediate/05_modules_and_visibility/02_friend_vs_module_privacy.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md",
         "../../03_advanced/03_proc_macros/01_macros.md",
         "../../03_advanced/04_ffi/01_rust_ffi.md",
         "../../05_comparative/00_paradigms/03_cpp_rust_surface_features.md",
@@ -756,7 +756,7 @@
       "layer": "L0",
       "title": "Rust API Guidelines 权威指南",
       "positioning": "本页是 Rust API Guidelines 在 `concept/` 中的**唯一权威解释页**，系统讲解 C-COMMON、C-CONV、C-SINGULAR、C-GETTER、C-STRUCT-BOUNDS、C-VALID、C-RATIONAL、C-STABLE、C-UNUSED、C-CALLER、C-QUESTION、C-CONFIRM、C-DEREF、C-CLONE、C-DEBUG、C-SERDE、C-FAILURE、C-PLACEHOLDER、C-INTERMEDIATE、C-ENTITY、C-METHOD 等核心约定，并给出 Rust 示例与反例。",
-      "line_count": 623,
+      "line_count": 630,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -876,9 +876,9 @@
         },
         {
           "flags": [],
-          "lines": 5,
+          "lines": 8,
           "should_fail": false,
-          "code_preview": "impl Database {     /// 删除数据库；不可逆。     pub fn drop(self) -> Result<(), DbError> ..."
+          "code_preview": "struct Database; type DbError = ();  impl Database {     /// 删除数据库；不可逆。     pub ..."
         },
         {
           "flags": [],
@@ -902,9 +902,9 @@
         },
         {
           "flags": [],
-          "lines": 3,
+          "lines": 5,
           "should_fail": false,
-          "code_preview": "#[derive(Debug)] pub struct Config { timeout: Duration } ..."
+          "code_preview": "use std::time::Duration;  #[derive(Debug)] pub struct Config { timeout: Duration..."
         },
         {
           "flags": [],
@@ -1204,10 +1204,10 @@
         },
         {
           "flags": [
-            "compile_fail"
+            "ignore"
           ],
           "lines": 3,
-          "should_fail": true,
+          "should_fail": false,
           "code_preview": "// 实际为 unsafe，无法 compile_fail 直接演示， // 但可通过 Miri 检测：两个裸指针同时写同一块内存 ..."
         }
       ],
@@ -2048,14 +2048,15 @@
         "../../02_intermediate/02_memory_management/04_smart_pointers.md",
         "../../02_intermediate/03_error_handling/03_panic.md",
         "../../02_intermediate/03_error_handling/04_exception_safety_rust_cpp.md",
-        "../../02_intermediate/04_types_and_conversions/02_closure_types.md",
         "../../02_intermediate/04_types_and_conversions/04_type_system_advanced.md",
         "../../02_intermediate/04_types_and_conversions/06_unions.md",
         "../../02_intermediate/04_types_and_conversions/07_type_conversions.md",
         "../../02_intermediate/05_modules_and_visibility/03_api_naming_conventions.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/06_attributes_by_category.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/04_declarative_macros.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/08_attributes_by_category.md",
         "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
+        "../../02_intermediate/07_iterators_and_closures/02_closures.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/00_concurrency/04_send_sync_boundaries.md",
         "../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md",
@@ -2074,7 +2075,6 @@
         "../../03_advanced/02_unsafe/06_memory_model.md",
         "../../03_advanced/02_unsafe/09_sanitizers.md",
         "../../03_advanced/03_proc_macros/01_macros.md",
-        "../../03_advanced/03_proc_macros/02_proc_macro.md",
         "../../03_advanced/03_proc_macros/11_conditional_compilation.md",
         "../../03_advanced/04_ffi/01_rust_ffi.md",
         "../../03_advanced/04_ffi/03_linkage.md",
@@ -2485,7 +2485,7 @@
       "layer": "L0",
       "title": "全局概念索引（Concept Index）",
       "positioning": "本文件是 `concept/` 知识体系的**倒排索引**，从概念名称快速定位到定义文件、交叉引用位置、Bloom 认知层级和语义链接关系。",
-      "line_count": 801,
+      "line_count": 804,
       "theorem_chains": [
         {
           "text": "| **定理一致性矩阵** | 27 | 每文件的 ⟹ 推理链表格 | 🔷 元结构 |",
@@ -2560,6 +2560,13 @@
         "../../06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md",
         "../../06_ecosystem/01_cargo/12_cargo_subcommands_and_plugins.md",
         "../../06_ecosystem/02_core_crates/01_core_crates.md",
+        "../../06_ecosystem/02_core_crates/02_serde.md",
+        "../../06_ecosystem/02_core_crates/03_tokio.md",
+        "../../06_ecosystem/02_core_crates/04_clap.md",
+        "../../06_ecosystem/02_core_crates/05_tracing.md",
+        "../../06_ecosystem/02_core_crates/06_reqwest.md",
+        "../../06_ecosystem/02_core_crates/07_axum.md",
+        "../../06_ecosystem/02_core_crates/08_sqlx.md",
         "../../06_ecosystem/03_design_patterns/01_patterns.md",
         "../../06_ecosystem/03_design_patterns/04_system_composability.md",
         "../../06_ecosystem/05_systems_and_embedded/03_embedded_systems.md",
@@ -2587,7 +2594,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 344,
+      "matrix_rows": 347,
       "pre_post": {
         "pre": [],
         "post": []
@@ -3722,7 +3729,7 @@
         "../../02_intermediate/03_error_handling/04_exception_safety_rust_cpp.md",
         "../../02_intermediate/04_types_and_conversions/05_rtti_and_dynamic_typing.md",
         "../../02_intermediate/05_modules_and_visibility/02_friend_vs_module_privacy.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md",
         "../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md",
         "../../04_formal/00_type_theory/12_pattern_composition_algebra.md",
         "../../04_formal/03_operational_semantics/04_evaluation_strategies.md",
@@ -4140,9 +4147,10 @@
         "../../02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md",
         "../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md",
         "../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/06_attributes_by_category.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/08_attributes_by_category.md",
         "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/00_concurrency/02_send_sync_auto_traits.md",
@@ -4172,7 +4180,6 @@
         "../../03_advanced/02_unsafe/06_memory_model.md",
         "../../03_advanced/02_unsafe/07_unsafe_reference.md",
         "../../03_advanced/03_proc_macros/01_macros.md",
-        "../../03_advanced/03_proc_macros/02_proc_macro.md",
         "../../03_advanced/03_proc_macros/03_proc_macro_code_generation_optimization.md",
         "../../03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md",
         "../../03_advanced/03_proc_macros/05_production_grade_macro_development.md",
@@ -4743,9 +4750,10 @@
         "../../02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md",
         "../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md",
         "../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/06_attributes_by_category.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/08_attributes_by_category.md",
         "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/00_concurrency/02_send_sync_auto_traits.md",
@@ -4775,7 +4783,6 @@
         "../../03_advanced/02_unsafe/06_memory_model.md",
         "../../03_advanced/02_unsafe/07_unsafe_reference.md",
         "../../03_advanced/03_proc_macros/01_macros.md",
-        "../../03_advanced/03_proc_macros/02_proc_macro.md",
         "../../03_advanced/03_proc_macros/03_proc_macro_code_generation_optimization.md",
         "../../03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md",
         "../../03_advanced/03_proc_macros/05_production_grade_macro_development.md",
@@ -5168,8 +5175,9 @@
         "../../02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md",
         "../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md",
         "../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/06_attributes_by_category.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/08_attributes_by_category.md",
         "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/00_concurrency/02_send_sync_auto_traits.md",
@@ -5196,7 +5204,6 @@
         "../../03_advanced/02_unsafe/06_memory_model.md",
         "../../03_advanced/02_unsafe/07_unsafe_reference.md",
         "../../03_advanced/03_proc_macros/01_macros.md",
-        "../../03_advanced/03_proc_macros/02_proc_macro.md",
         "../../03_advanced/04_ffi/01_rust_ffi.md",
         "../../03_advanced/04_ffi/02_ffi_advanced.md",
         "../../03_advanced/04_ffi/03_linkage.md",
@@ -5489,9 +5496,10 @@
         "../../02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md",
         "../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md",
         "../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/06_attributes_by_category.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/08_attributes_by_category.md",
         "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/00_concurrency/02_send_sync_auto_traits.md",
@@ -5518,7 +5526,6 @@
         "../../03_advanced/02_unsafe/03_nll_and_polonius.md",
         "../../03_advanced/02_unsafe/06_memory_model.md",
         "../../03_advanced/03_proc_macros/01_macros.md",
-        "../../03_advanced/03_proc_macros/02_proc_macro.md",
         "../../03_advanced/03_proc_macros/05_production_grade_macro_development.md",
         "../../03_advanced/03_proc_macros/08_syn_quote_reference.md",
         "../../03_advanced/03_proc_macros/09_macro_hygiene.md",
@@ -6148,7 +6155,7 @@
           "type": "table_row"
         },
         {
-          "text": "| [元编程：Rust 的编译期代码生成与变换](../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md) | ⟹ | [DSL 与嵌入 式设计：Rust 中的领域特定语言](../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md) | 后置概念引用（蕴含/导向） |",
+          "text": "| [元编程：Rust 的编译期代码生成与变换](../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md) | ⟹ | [DSL 与嵌入 式设计：Rust 中的领域特定语言](../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md) | 后置概念引用（蕴含/导向） |",
           "type": "table_row"
         },
         {
@@ -7479,8 +7486,8 @@
         "../../02_intermediate/05_modules_and_visibility/03_api_naming_conventions.md",
         "../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md",
         "../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/00_concurrency/02_send_sync_auto_traits.md",
         "../../03_advanced/00_concurrency/03_concurrency_patterns.md",
@@ -7928,8 +7935,9 @@
         "../../02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md",
         "../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md",
         "../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/06_attributes_by_category.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/08_attributes_by_category.md",
         "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/00_concurrency/02_send_sync_auto_traits.md",
@@ -7952,7 +7960,6 @@
         "../../03_advanced/02_unsafe/06_memory_model.md",
         "../../03_advanced/02_unsafe/07_unsafe_reference.md",
         "../../03_advanced/03_proc_macros/01_macros.md",
-        "../../03_advanced/03_proc_macros/02_proc_macro.md",
         "../../03_advanced/03_proc_macros/03_proc_macro_code_generation_optimization.md",
         "../../03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md",
         "../../03_advanced/03_proc_macros/05_production_grade_macro_development.md",
@@ -9452,8 +9459,7 @@
       "code_blocks": [
         {
           "flags": [
-            "compile_fail",
-            "E0597"
+            "compile_fail"
           ],
           "lines": 10,
           "should_fail": true,
@@ -14597,7 +14603,7 @@
           "flags": [],
           "lines": 10,
           "should_fail": false,
-          "code_preview": "fn words_in_lines(lines: &[&str]) -> Vec<&str> {     lines.iter().flat_map(|line..."
+          "code_preview": "fn words_in_lines<'a>(lines: &'a [&str]) -> Vec<&'a str> {     lines.iter().flat..."
         },
         {
           "flags": [],
@@ -17347,7 +17353,7 @@
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../00_meta/04_navigation/08_learning_mvp_path.md",
         "../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md",
-        "../../03_advanced/03_proc_macros/02_proc_macro.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
         "../../07_future/00_version_tracking/rust_1_94_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_95_stabilized.md",
         "../02_type_system/01_type_system.md",
@@ -17363,7 +17369,7 @@
           "[Type System](../02_type_system/01_type_system.md) · [Modules](../07_modules_and_items/01_modules_and_paths.md)"
         ],
         "post": [
-          "[Proc Macros](../../03_advanced/03_proc_macros/02_proc_macro.md) · [DSL](../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md)"
+          "[Proc Macros](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) · [DSL](../../02_intermediate/06_macros_and_metaprogramming/02_dsl_and_embedding.md)"
         ]
       },
       "backward_chains": 2,
@@ -20196,8 +20202,8 @@
         "../../01_foundation/07_modules_and_items/04_structs.md",
         "../../01_foundation/07_modules_and_items/05_enumerations.md",
         "../../01_foundation/07_modules_and_items/06_implementations.md",
-        "../../03_advanced/03_proc_macros/02_proc_macro.md",
         "../../03_advanced/03_proc_macros/09_macro_hygiene.md",
+        "../06_macros_and_metaprogramming/05_procedural_macros.md",
         "01_traits.md",
         "04_advanced_traits.md"
       ],
@@ -20210,7 +20216,7 @@
           "> [Traits](../../01_foundation/02_type_system/01_type_system.md) ·"
         ],
         "post": [
-          "[Advanced Traits](04_advanced_traits.md) · [Proc Macros](../../03_advanced/03_proc_macros/02_proc_macro.md)"
+          "[Advanced Traits](04_advanced_traits.md) · [Proc Macros](../06_macros_and_metaprogramming/05_procedural_macros.md)"
         ]
       },
       "backward_chains": 0,
@@ -23983,7 +23989,7 @@
       "layer": "L2",
       "title": "Rust 错误处理惯用法（Error Idioms）",
       "positioning": "本页聚焦 Rust 错误处理的**惯用组合子与工程分层**，是 `01_error_handling.md` 的进阶补充与 `02_error_handling_deep_dive.md` 的实战聚焦页。",
-      "line_count": 484,
+      "line_count": 487,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -24014,9 +24020,9 @@
         },
         {
           "flags": [],
-          "lines": 11,
+          "lines": 14,
           "should_fail": false,
-          "code_preview": "fn find_user(id: u64) -> Option<User> { /* ... */ }  fn get_user(id: u64) -> Res..."
+          "code_preview": "#[derive(Debug, PartialEq)] struct User { id: u64 }  fn find_user(_id: u64) -> O..."
         },
         {
           "flags": [
@@ -24283,207 +24289,28 @@
       "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\04_types_and_conversions\\02_closure_types.md",
       "layer": "L2",
       "title": "闭包类型系统：Fn、FnMut、FnOnce 的捕获语义",
-      "positioning": "深入分析 Rust 闭包（Closures）的**类型系统（Type System）**——`Fn`、`FnMut`、`FnOnce` 三者的捕获规则、自动 trait 推导、以及闭包与函数指针的本质区别。",
-      "line_count": 878,
-      "theorem_chains": [
-        {
-          "text": "| 回调只读捕获、可多次调用 | `Fn` 约束 | §4.1 反命题树 TRUE | 闭包修改捕获状态 ⟹ 不满足 `Fn` |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 回调需修改捕获状态 | `FnMut`（调用需 `&mut`） | §4.1 反命题树 ALT | 跨线程共享 ⟹ 需 `Send` + 同步保护 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 回调消费捕获、只调用一次 | `FnOnce` | §4.1 反命题树 TRUE2 | 多次调用 ⟹ 编译错误 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 闭包需逃离定义作用域 | `move` 闭包取得捕获所有权 | 捕获规则（RFC 1558） | 借用捕获 ⟹ 生命周期不够长（E0373） |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 借用即可满足需求 | 默认按借用捕获 | 捕获规则 | 闭包比被借值活得久 ⟹ 编译拒绝 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| API 接受回调的默认约束 | 优先 `Fn`（对调用者最灵活） | 最佳实践 | 过度放宽到 `FnOnce` ⟹ 实现者受限 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 回调参数生命周期需对调用方泛化 | HRTB `for<'a>` | Rustonomicon — HRTB | 省略 HRTB ⟹ 生命周期推断失败 |",
-          "type": "table_row"
-        },
-        {
-          "text": "- 测验 1（理解层）：`Fn`/`FnMut`/`FnOnce` 的选择——由闭包体对捕获变量的使用方式决定（读 ⟹ Fn，改 ⟹ FnMut，消耗 ⟹ FnOnce），trait 是自动推断不可手动选择；",
-          "type": "paragraph"
-        },
-        {
-          "text": "| 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 闭包类型系统：Fn、FnMut、FnOnce 的捕获语义 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |",
-          "type": "table_row"
-        }
-      ],
-      "anti_propositions": [
-        {
-          "title": "## 四、反命题"
-        },
-        {
-          "title": "### 4.1 反命题"
-        }
-      ],
-      "code_blocks": [
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 16,
-          "should_fail": false,
-          "code_preview": "// 概念示例：编译器如何展开闭包 let x = 5; let closure = |y| x + y;  // 编译器展开为类似: struct __Clo..."
-        },
-        {
-          "flags": [],
-          "lines": 16,
-          "should_fail": false,
-          "code_preview": "let mut s = String::from(\"hello\"); let mut n = 0;  // 推导 1: 只读 → &T 捕获 → Fn let ..."
-        },
-        {
-          "flags": [],
-          "lines": 22,
-          "should_fail": false,
-          "code_preview": "let s = String::from(\"hello\");  // 默认: 编译器选择 &s（不可变借用（Immutable Borrow）） let f1 ..."
-        },
-        {
-          "flags": [
-            "compile_fail"
-          ],
-          "lines": 18,
-          "should_fail": true,
-          "code_preview": "fn takes_fn(f: fn(i32) -> i32) -> i32 {     f(42) }  fn main() {     let multipl..."
-        },
-        {
-          "flags": [],
-          "lines": 16,
-          "should_fail": false,
-          "code_preview": "fn call_dynamic(f: &dyn Fn(i32) -> i32) -> i32 {     f(42) // 动态分发（vtable 查找） } ..."
-        },
-        {
-          "flags": [
-            "compile_fail"
-          ],
-          "lines": 13,
-          "should_fail": true,
-          "code_preview": "fn call_fn(f: impl Fn()) {     f(); }  fn main() {     let s = String::from(\"hel..."
-        },
-        {
-          "flags": [
-            "compile_fail"
-          ],
-          "lines": 8,
-          "should_fail": true,
-          "code_preview": "fn main() {     // ❌ 编译错误: 递归闭包的类型无法推断     let fib = |n: i32| -> i32 {         i..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 10,
-          "should_fail": false,
-          "code_preview": "fn main() {     let f = match true {         true => |x: i32| x + 1,         fal..."
-        },
-        {
-          "flags": [
-            "compile_fail"
-          ],
-          "lines": 7,
-          "should_fail": true,
-          "code_preview": "fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {     // ❌ 编译错误: 不能返回 y，因为..."
-        },
-        {
-          "flags": [],
-          "lines": 3,
-          "should_fail": false,
-          "code_preview": "let s = String::from(\"hello\"); let f = || drop(s); ..."
-        },
-        {
-          "flags": [
-            "compile_fail"
-          ],
-          "lines": 5,
-          "should_fail": true,
-          "code_preview": "fn make_closure() -> impl Fn() -> i32 {     let x = 5;     || x } ..."
-        },
-        {
-          "flags": [],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "fn make_closure() -> impl Fn() -> i32 {     let x = 5;     move || x  // x 被 cop..."
-        },
-        {
-          "flags": [],
-          "lines": 7,
-          "should_fail": false,
-          "code_preview": "fn take_fn(f: fn(i32) -> i32) {}  fn main() {     let closure = |x| x + 1;     t..."
-        },
-        {
-          "flags": [],
-          "lines": 2,
-          "should_fail": false,
-          "code_preview": "let f: fn(i32) -> i32 = |x| x + 1; // ✅ ..."
-        },
-        {
-          "flags": [],
-          "lines": 6,
-          "should_fail": false,
-          "code_preview": "let mut s = String::from(\"hello\"); let f = || {     s.push_str(\" world\");     pr..."
-        },
-        {
-          "flags": [],
-          "lines": 4,
-          "should_fail": false,
-          "code_preview": "let add = |a: i32, b: i32| -> i32 { a + b }; let inc = |x: i32| x + 1;   // 类型推断..."
-        },
-        {
-          "flags": [],
-          "lines": 4,
-          "should_fail": false,
-          "code_preview": "let s = String::from(\"hello\"); let closure = move || println!(\"{}\", s); // s 被移入..."
-        }
-      ],
+      "positioning": "",
+      "line_count": 68,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../../00_meta/00_framework/methodology.md",
         "../../00_meta/01_terminology/01_terminology_glossary.md",
-        "../../00_meta/04_navigation/08_learning_mvp_path.md",
-        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
-        "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../01_foundation/07_modules_and_items/02_functions.md",
-        "../../03_advanced/01_async/01_async.md",
         "../../03_advanced/01_async/07_async_closures.md",
-        "../00_traits/01_traits.md",
-        "../01_generics/01_generics.md",
-        "../07_iterators_and_closures/01_iterator_patterns.md"
+        "../07_iterators_and_closures/01_iterator_patterns.md",
+        "../07_iterators_and_closures/02_closures.md"
       ],
       "transitions": 0,
-      "has_cognitive_path": true,
-      "mermaid_blocks": 4,
-      "matrix_rows": 34,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 0,
       "pre_post": {
-        "pre": [
-          "[Traits](../00_traits/01_traits.md) ·"
-        ],
-        "post": [
-          "[Async](../../03_advanced/01_async/01_async.md) ·"
-        ]
+        "pre": [],
+        "post": []
       },
-      "backward_chains": 3,
+      "backward_chains": 0,
       "templated_chains": 0
     },
     {
@@ -25928,13 +25755,13 @@
         "../../00_meta/04_navigation/08_learning_mvp_path.md",
         "../../01_foundation/09_macros_basics/01_attributes_and_macros.md",
         "../../03_advanced/03_proc_macros/01_macros.md",
-        "../../03_advanced/03_proc_macros/02_proc_macro.md",
         "../../03_advanced/03_proc_macros/09_macro_hygiene.md",
         "../../06_ecosystem/11_domain_applications/03_webassembly.md",
         "../00_traits/01_traits.md",
         "../00_traits/03_serde_patterns.md",
         "03_macro_patterns.md",
-        "04_metaprogramming.md"
+        "05_procedural_macros.md",
+        "06_metaprogramming.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
@@ -25942,7 +25769,7 @@
       "matrix_rows": 26,
       "pre_post": {
         "pre": [
-          "[Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) · [Macros](../../03_advanced/03_proc_macros/01_macros.md) · [Proc Macro](../../03_advanced/03_proc_macros/02_proc_macro.md) · [Trait](../00_traits/01_traits.md)"
+          "[Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) · [Macros](../../03_advanced/03_proc_macros/01_macros.md) · [Proc Macro](05_procedural_macros.md) · [Trait](../00_traits/01_traits.md)"
         ],
         "post": [
           "[Serde Patterns](../00_traits/03_serde_patterns.md) · [WebAssembly](../../06_ecosystem/11_domain_applications/03_webassembly.md)"
@@ -25955,23 +25782,54 @@
       "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\06_macros_and_metaprogramming\\03_macro_patterns.md",
       "layer": "L2",
       "title": "宏模式：编译期代码生成的工程实践",
-      "positioning": "深入分析 Rust **宏（Macro）的工程模式**——从 DRY 代码生成、API 设计到编译期计算，揭示如何在不牺牲可读性的前提下利用宏提升代码复用和类型安全。",
-      "line_count": 881,
+      "positioning": "保留宏模式的高级选型视角与交叉引用入口，具体概念推导已迁移到上述两个权威页。",
+      "line_count": 88,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../01_foundation/09_macros_basics/01_attributes_and_macros.md",
+        "../00_traits/01_traits.md",
+        "02_dsl_and_embedding.md",
+        "04_declarative_macros.md",
+        "05_procedural_macros.md",
+        "06_metaprogramming.md",
+        "07_c_preprocessor_vs_rust_macros.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 0,
+      "pre_post": {
+        "pre": [
+          "[Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) · [Traits](../00_traits/01_traits.md)"
+        ],
+        "post": [
+          "[Metaprogramming](06_metaprogramming.md) · [DSL](02_dsl_and_embedding.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\06_macros_and_metaprogramming\\04_declarative_macros.md",
+      "layer": "L2",
+      "title": "声明宏：`macro_rules!`、卫生性与 TT-munching",
+      "positioning": "系统讲解 `macro_rules!` 的语法、卫生性、重复模式、TT-munching 等高级技术，以及声明宏与过程宏的选型边界。",
+      "line_count": 662,
       "theorem_chains": [
         {
-          "text": "- **反命题 2：「`macro_rules!` 能做到过程宏的一切」** —— 错误。`macro_rules!` 只有模式匹配（Pattern Matching）与 token 替换——无法分析类型信息（不知道 `$x` 是不是结构体（Struct））、无法访问外部状态、无法生成标识符拼接（`concat_idents!` 仍 nightly）。需要语义分析 ⟹ 过程宏 + syn。",
-          "type": "paragraph"
-        },
-        {
-          "text": "| 宏模式：编译期代码生成的工程实践 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
+          "text": "| 理解片段分类符 ⟹ 正确匹配输入 | 知道 expr/tt/ident 等差异 | 能写出稳健的宏规则 | 高 |",
           "type": "table_row"
         },
         {
-          "text": "| 宏模式：编译期代码生成的工程实践 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |",
+          "text": "| 掌握 hygiene ⟹ 避免命名污染 | 理解宏作用域隔离 | 能设计安全的宏 API | 高 |",
           "type": "table_row"
         },
         {
-          "text": "| 宏模式：编译期代码生成的工程实践 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |",
+          "text": "| 识别声明宏边界 ⟹ 正确选型 | 知道类型分析与标识符拼接限制 | 能在声明宏与过程宏间选择 | 高 |",
           "type": "table_row"
         }
       ],
@@ -25986,53 +25844,79 @@
       "code_blocks": [
         {
           "flags": [],
-          "lines": 55,
+          "lines": 5,
           "should_fail": false,
-          "code_preview": "// 为多个类型实现相同 Trait  macro_rules! impl_display {     ($($t:ty),* $(,)?) => {     ..."
+          "code_preview": "macro_rules! foo {     (pattern1) => { expansion1 };     (pattern2) => { expansi..."
         },
         {
           "flags": [],
-          "lines": 46,
+          "lines": 8,
           "should_fail": false,
-          "code_preview": "// cfg 与宏结合的条件编译  // 平台特定实现 macro_rules! platform_specific {     () => {        ..."
+          "code_preview": "macro_rules! say_hello {     () => {         println!(\"Hello, world!\");     }; }..."
         },
         {
           "flags": [],
-          "lines": 48,
+          "lines": 8,
           "should_fail": false,
-          "code_preview": "// 编译期计算的宏技巧  // 计算参数个数 macro_rules! count_args {     () => { 0 };     ($head:tt..."
+          "code_preview": "macro_rules! double {     ($x:expr) => {         ($x) * 2     }; }  let n = doub..."
         },
         {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 19,
+          "flags": [],
+          "lines": 11,
           "should_fail": false,
-          "code_preview": "macro_rules! ambiguous {     ($e:expr) => { println!(\"expr: {}\", $e) };     ($i:..."
+          "code_preview": "macro_rules! declare_x {     () => {         let x = 42;     }; }  fn main() {  ..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "macro_rules! use_x {     ($x:expr) => {         println!(\"{}\", $x)     }; }  fn ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "macro_rules! type_alias {     ($name:ident = $ty:ty) => {         type $name = $..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "macro_rules! vec_like {     ($($x:expr),* $(,)?) => {         {             let ..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "macro_rules! count_tts {     () => { 0 };     ($head:tt $($tail:tt)*) => {      ..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "#[macro_export] macro_rules! internal_api {     () => {         $crate::private_..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "// 在 crate 根 re-export pub use my_macro; ..."
         },
         {
           "flags": [
             "compile_fail"
           ],
-          "lines": 23,
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "macro_rules! bad {     ($e:expr + $rest:tt) => { ... }; } ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 11,
           "should_fail": true,
           "code_preview": "macro_rules! declare_x {     () => {         let x = 42;     }; }  fn main() {  ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 12,
-          "should_fail": false,
-          "code_preview": "macro_rules! count_tts {     () => { 0 };     ($odd:tt $($a:tt $b:tt)*) => { 1 +..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 18,
-          "should_fail": false,
-          "code_preview": "macro_rules! unsafe_op {     ($op:expr) => {         unsafe { $op }     }; }  fn..."
         },
         {
           "flags": [
@@ -26040,46 +25924,206 @@
           ],
           "lines": 9,
           "should_fail": true,
-          "code_preview": "macro_rules! deep {     () => { deep!() }; }  fn main() {     // ❌ 编译错误: recursi..."
+          "code_preview": "macro_rules! count_tts {     () => { 0 };     ($odd:tt $($a:tt $b:tt)*) => { 1 +..."
         },
         {
           "flags": [
-            "ignore"
+            "compile_fail"
           ],
-          "lines": 16,
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "macro_rules! deep {     () => { deep!() }; }  fn main() {     deep!(); // ❌ recu..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
           "should_fail": false,
-          "code_preview": "macro_rules! bad_match {     ($e:expr) => { $e + 1 }; }  fn main() {     // ❌ 编译..."
+          "code_preview": "macro_rules! bad_double {     ($x:expr) => { $x + $x }; }  fn main() {     let m..."
         }
       ],
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/01_terminology_glossary.md",
-        "../../00_meta/02_sources/05_international_authority_index.md",
-        "../../00_meta/04_navigation/08_learning_mvp_path.md",
         "../../01_foundation/09_macros_basics/01_attributes_and_macros.md",
-        "../../03_advanced/03_proc_macros/02_proc_macro.md",
         "../00_traits/01_traits.md",
-        "../01_generics/01_generics.md",
         "02_dsl_and_embedding.md",
-        "04_metaprogramming.md"
+        "05_procedural_macros.md",
+        "06_metaprogramming.md",
+        "07_c_preprocessor_vs_rust_macros.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 16,
+      "matrix_rows": 41,
       "pre_post": {
         "pre": [
           "[Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) · [Traits](../00_traits/01_traits.md)"
         ],
         "post": [
-          "[Proc Macros](../../03_advanced/03_proc_macros/02_proc_macro.md) · [DSL](02_dsl_and_embedding.md)"
+          "[Procedural Macros](05_procedural_macros.md) · [DSL](02_dsl_and_embedding.md) · [Metaprogramming](06_metaprogramming.md)"
         ]
       },
-      "backward_chains": 3,
+      "backward_chains": 2,
       "templated_chains": 0
     },
     {
-      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\06_macros_and_metaprogramming\\04_metaprogramming.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\06_macros_and_metaprogramming\\05_procedural_macros.md",
+      "layer": "L2",
+      "title": "过程宏：derive、attribute、function-like 与 TokenStream 操作",
+      "positioning": "系统讲解过程宏的三种类型、编译期执行模型、`TokenStream` 操作、`syn`/`quote` 工作流，以及 span/hygiene 的工程实践。",
+      "line_count": 652,
+      "theorem_chains": [
+        {
+          "text": "| 理解三种过程宏 ⟹ 正确选型 | 知道 derive/attribute/function-like 的差异 | 能为场景选择合适宏类型 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 掌握 syn/quote ⟹ 实现复杂宏 | 会解析和生成 TokenStream | 能开发自定义 derive/attribute | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 重视 span/hygiene ⟹ 高质量宏 | 理解错误定位与命名空间隔离 | 能写出用户友好的宏 | 高 |",
+          "type": "table_row"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 四、反命题"
+        },
+        {
+          "title": "### 4.1 反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// Derive 宏示例: #[derive(Hello)] #[proc_macro_derive(Hello)] pub fn hello_derive(..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use proc_macro::TokenStream;  #[proc_macro] pub fn identity(input: TokenStream) ..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use proc_macro2::TokenStream; use quote::quote;  let tokens: TokenStream = quote..."
+        },
+        {
+          "flags": [],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "use proc_macro::TokenStream; use quote::quote; use syn::{parse_macro_input, Deri..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// 使用方 #[derive(Hello)] struct Foo;  // 生成的代码大致为: impl Hello for Foo {     fn he..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "#[derive(Builder)] #[builder(setter(into))] struct Config { ... } ..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "#[proc_macro_derive(Builder, attributes(builder))] pub fn builder_derive(input: ..."
+        },
+        {
+          "flags": [],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "#[proc_macro_attribute] pub fn trace(attr: TokenStream, item: TokenStream) -> To..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "#[proc_macro] pub fn make_answer(input: TokenStream) -> TokenStream {     if !in..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "use proc_macro2::Span; use quote::quote;  let bad = syn::Error::new(Span::call_s..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use quote::quote_spanned;  // field 来自 syn 解析的输入 quote_spanned! { field.span()=>..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "// 在 proc-macro = true 的 crate 中: pub fn helper() {} // ❌ 过程宏 crate 不能导出普通项 ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "#[proc_macro_derive(Modify)] pub fn modify(input: TokenStream) -> TokenStream { ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "#[proc_macro_derive(Bad)] pub fn bad_derive(input: TokenStream) -> TokenStream {..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "#[my_attr(foo = )] // ❌ 属性参数不是合法表达式/元属性 struct Item; ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../01_foundation/09_macros_basics/01_attributes_and_macros.md",
+        "../../06_ecosystem/03_design_patterns/01_patterns.md",
+        "../00_traits/01_traits.md",
+        "../00_traits/03_serde_patterns.md",
+        "04_declarative_macros.md",
+        "06_metaprogramming.md",
+        "07_c_preprocessor_vs_rust_macros.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": true,
+      "mermaid_blocks": 2,
+      "matrix_rows": 38,
+      "pre_post": {
+        "pre": [
+          "[Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) · [Declarative Macros](04_declarative_macros.md) · [Traits](../00_traits/01_traits.md)"
+        ],
+        "post": [
+          "[Builder Pattern](../../06_ecosystem/03_design_patterns/01_patterns.md) · [Serde Patterns](../00_traits/03_serde_patterns.md)"
+        ]
+      },
+      "backward_chains": 2,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\06_macros_and_metaprogramming\\06_metaprogramming.md",
       "layer": "L2",
       "title": "元编程：Rust 的编译期代码生成与变换",
       "positioning": "深入分析 Rust **元编程（Metaprogramming）**的技术体系——从声明式宏的模式匹配（Pattern Matching）、过程宏（Procedural Macro）的语法树操作，到 derive 宏的代码生成、quote/syn 工具体系，揭示 Rust 如何在编译期实现类型安全的代码变换同时保持宏卫生性（Hygiene）。",
@@ -26174,12 +26218,12 @@
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../00_meta/04_navigation/08_learning_mvp_path.md",
         "../../01_foundation/09_macros_basics/01_attributes_and_macros.md",
-        "../../03_advanced/03_proc_macros/02_proc_macro.md",
         "../../03_advanced/03_proc_macros/05_production_grade_macro_development.md",
         "../01_generics/03_type_level_programming.md",
         "../04_types_and_conversions/05_rtti_and_dynamic_typing.md",
         "02_dsl_and_embedding.md",
         "03_macro_patterns.md",
+        "05_procedural_macros.md",
         "https://github.com/rust-lang/rfcs/blob/master/text/0911-const-fn.md"
       ],
       "transitions": 0,
@@ -26191,14 +26235,14 @@
           "[Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) · [Macro Patterns](03_macro_patterns.md)"
         ],
         "post": [
-          "[Proc Macros](../../03_advanced/03_proc_macros/02_proc_macro.md) · [DSL](02_dsl_and_embedding.md)"
+          "[Proc Macros](05_procedural_macros.md) · [DSL](02_dsl_and_embedding.md)"
         ]
       },
       "backward_chains": 3,
       "templated_chains": 0
     },
     {
-      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\06_macros_and_metaprogramming\\05_c_preprocessor_vs_rust_macros.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\06_macros_and_metaprogramming\\07_c_preprocessor_vs_rust_macros.md",
       "layer": "L2",
       "title": "C 预处理器 vs Rust 宏：从文本替换到语法树",
       "positioning": "",
@@ -26249,12 +26293,12 @@
       "cross_references": [
         "../../01_foundation/09_macros_basics/01_attributes_and_macros.md",
         "../../03_advanced/03_proc_macros/01_macros.md",
-        "../../03_advanced/03_proc_macros/02_proc_macro.md",
         "../../05_comparative/README.md",
         "../00_traits/01_traits.md",
         "../01_generics/01_generics.md",
         "../08_quizzes/30_quiz_cpp_rust_foundations.md",
-        "02_dsl_and_embedding.md"
+        "02_dsl_and_embedding.md",
+        "05_procedural_macros.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -26265,14 +26309,14 @@
           "[Macros](../../03_advanced/03_proc_macros/01_macros.md) · [Generics](../01_generics/01_generics.md) · [Traits](../00_traits/01_traits.md)"
         ],
         "post": [
-          "[Proc Macro](../../03_advanced/03_proc_macros/02_proc_macro.md) · [DSL and Embedding](02_dsl_and_embedding.md)"
+          "[Proc Macro](05_procedural_macros.md) · [DSL and Embedding](02_dsl_and_embedding.md)"
         ]
       },
       "backward_chains": 0,
       "templated_chains": 0
     },
     {
-      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\06_macros_and_metaprogramming\\06_attributes_by_category.md",
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\06_macros_and_metaprogramming\\08_attributes_by_category.md",
       "layer": "L2",
       "title": "属性分类详解（Attributes by Category）",
       "positioning": "",
@@ -26380,9 +26424,9 @@
         "../../00_meta/00_framework/methodology.md",
         "../../01_foundation/07_modules_and_items/01_modules_and_paths.md",
         "../../01_foundation/09_macros_basics/01_attributes_and_macros.md",
-        "../../03_advanced/03_proc_macros/02_proc_macro.md",
         "../../03_advanced/03_proc_macros/11_conditional_compilation.md",
-        "../../03_advanced/05_inline_assembly/01_inline_assembly.md"
+        "../../03_advanced/05_inline_assembly/01_inline_assembly.md",
+        "05_procedural_macros.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
@@ -26393,7 +26437,7 @@
           "[Attributes and Declarative Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) · [Modules and Paths](../../01_foundation/07_modules_and_items/01_modules_and_paths.md)"
         ],
         "post": [
-          "[Procedural Macros](../../03_advanced/03_proc_macros/02_proc_macro.md) · [Conditional Compilation](../../03_advanced/03_proc_macros/11_conditional_compilation.md) · [Inline Assembly](../../03_advanced/05_inline_assembly/01_inline_assembly.md)"
+          "[Procedural Macros](05_procedural_macros.md) · [Conditional Compilation](../../03_advanced/03_proc_macros/11_conditional_compilation.md) · [Inline Assembly](../../03_advanced/05_inline_assembly/01_inline_assembly.md)"
         ]
       },
       "backward_chains": 4,
@@ -26665,6 +26709,182 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\07_iterators_and_closures\\02_closures.md",
+      "layer": "L2",
+      "title": "Rust 闭包：捕获语义、Trait 层级与工程实践",
+      "positioning": "系统阐述 Rust 闭包的语法、捕获机制、`Fn`/`FnMut`/`FnOnce` 语义层级、`move` 闭包、函数指针强制转换、异步闭包与典型反模式，覆盖从基础使用到工程决策的完整链条。",
+      "line_count": 738,
+      "theorem_chains": [
+        {
+          "text": "| 理解捕获模式 ⟹ 正确选择 trait | 知道环境如何使用 | 能写出正确的泛型约束 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 掌握 `move` 语义 ⟹ 避免生命周期错误 | 知道借用与所有权转移的区别 | 能安全返回或跨线程传递闭包 | 高 |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 区分 `fn` 指针与闭包 ⟹ 正确设计 API | 知道类型擦除与内联的权衡 | 能在泛型与 `dyn` 之间做选择 | 高 |",
+          "type": "table_row"
+        }
+      ],
+      "anti_propositions": [
+        {
+          "title": "## 四、反命题"
+        },
+        {
+          "title": "### 4.1 反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "let x = 5; let add_x = |y| x + y;  // 概念上展开为： // struct __Closure<'a> { x: &'a i..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "let s = String::from(\"hello\"); let mut n = 0;  let read = || println!(\"{}\", s); ..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "fn call_fn<F>(f: F) where F: Fn() { f(); } fn call_fnmut<F>(mut f: F) where F: F..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "let s = String::from(\"data\"); let f = move || println!(\"{}\", s);  f(); // printl..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "let a = String::from(\"a\"); let mut b = String::from(\"b\");  let f = || {     prin..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "let f1 = |x: i32| x + 1; let f2 = |x: i32| x + 1;  // let same: bool = f1 == f2;..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "let closures: Vec<Box<dyn Fn(i32) -> i32>> = vec![     Box::new(|x| x + 1),     ..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "struct LoudDrop(&'static str); impl Drop for LoudDrop {     fn drop(&mut self) {..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "let f: fn(i32) -> i32 = |x| x + 1; assert_eq!(f(5), 6);  let n = 1; let g = |x| ..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// Rust 1.85+ let client = reqwest::Client::new(); let fetch = async move |url: ..."
+        },
+        {
+          "flags": [],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "use std::fs::File;  fn main() -> std::io::Result<()> {     // 模式 1：迭代器适配器（Fn）   ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "fn takes_fn(f: impl Fn()) {     f(); }  fn main() {     let mut n = 0;     takes..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 10,
+          "should_fail": true,
+          "code_preview": "fn call_twice(f: impl FnOnce()) {     f();     f(); // ❌ value used after move }..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "fn make_closure() -> impl Fn() {     let s = String::from(\"local\");     || print..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "fn main() {     let n = 1;     let f: fn(i32) -> i32 = |x| x + n; // ❌ expected ..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "fn main() {     let n = 42;     let f = move || n; // n 是 Copy，move 实际发生的是按值复制  ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "// 需要 Rust 1.85+ async fn example() {     let s = String::from(\"async\");     let..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "let mut v = vec![1, 2, 3]; let f1 = || v.len(); let f2 = || v.push(4); let f3 = ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../00_meta/04_navigation/08_learning_mvp_path.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+        "../../01_foundation/07_modules_and_items/02_functions.md",
+        "../../03_advanced/01_async/07_async_closures.md",
+        "../00_traits/01_traits.md",
+        "../00_traits/04_advanced_traits.md",
+        "../04_types_and_conversions/02_closure_types.md",
+        "01_iterator_patterns.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": true,
+      "mermaid_blocks": 2,
+      "matrix_rows": 43,
+      "pre_post": {
+        "pre": [
+          "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Traits](../00_traits/01_traits.md)"
+        ],
+        "post": [
+          "[Iterator Patterns](01_iterator_patterns.md) · [Async Closures](../../03_advanced/01_async/07_async_closures.md) · [Advanced Traits](../00_traits/04_advanced_traits.md)"
+        ]
+      },
+      "backward_chains": 2,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\02_intermediate\\08_quizzes\\30_quiz_cpp_rust_foundations.md",
       "layer": "L2",
       "title": "测验：C/C++ → Rust 基础知识对比",
@@ -26681,7 +26901,7 @@
         "../03_error_handling/04_exception_safety_rust_cpp.md",
         "../04_types_and_conversions/05_rtti_and_dynamic_typing.md",
         "../05_modules_and_visibility/02_friend_vs_module_privacy.md",
-        "../06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md"
+        "../06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -33010,7 +33230,6 @@
         "../../04_formal/05_rustc_internals/08_type_layout.md",
         "../../07_future/00_version_tracking/feature_domain_matrix_197.md",
         "../../07_future/00_version_tracking/migration_197_decision_tree.md",
-        "../../07_future/00_version_tracking/rust_1_91_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_96_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_97_1.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
@@ -33281,6 +33500,144 @@
         ],
         "post": [
           "> [Miri](../../04_formal/04_model_checking/08_miri.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\02_unsafe\\10_std_unsafe_internals.md",
+      "layer": "L3",
+      "title": "标准库 unsafe 内部实现概念解析",
+      "positioning": "从**概念层面**解析标准库如何在 `unsafe` 原语之上构建安全抽象，重点说明内部不变量（invariants）与 public API 之间的信任边界；不追求完整重实现，而是建立阅读、审查和扩展 std 风格代码的心智模型。",
+      "line_count": 563,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "### 7.1 反例"
+        },
+        {
+          "title": "### 7.2 反例"
+        },
+        {
+          "title": "### 7.3 反例"
+        },
+        {
+          "title": "### 7.4 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 22,
+          "should_fail": false,
+          "code_preview": "use std::cell::UnsafeCell;  pub struct MyCell<T> {     value: UnsafeCell<T>, }  ..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use std::mem::MaybeUninit;  fn demo() {     let mut x = MaybeUninit::<i32>::unin..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use std::slice;  fn safe_view(data: &[u8]) -> &[u8] {     // 从有效引用构造原始切片是安全的    ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "// Vec::push 概念实现 pub fn push(&mut self, value: T) {     if self.len == self.cap..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "use std::collections::HashMap;  fn demo() {     let mut map = HashMap::new();   ..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use std::collections::BTreeMap;  fn demo() {     let mut map = BTreeMap::new(); ..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "struct LoudDrop(&'static str); impl Drop for LoudDrop {     fn drop(&mut self) {..."
+        },
+        {
+          "flags": [
+            "no_run"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use std::mem::MaybeUninit;  fn main() {     let x = MaybeUninit::<i32>::uninit()..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use std::mem::MaybeUninit;  fn main() {     let mut x = MaybeUninit::<i32>::unin..."
+        },
+        {
+          "flags": [
+            "no_run"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn main() {     let mut v = Vec::<String>::with_capacity(10);     unsafe {      ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// 只有在确实写入了 len 个元素后才能 set_len unsafe {     std::ptr::write(v.as_mut_ptr().add(0..."
+        },
+        {
+          "flags": [
+            "no_run"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use std::slice;  fn main() {     let ptr: *const u8 = std::ptr::null();     unsa..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "use std::cell::Cell;  struct Bad {     data: Cell<i32>, }  // ❌ 错误：Cell 不是 Sync，..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../02_intermediate/02_memory_management/01_memory_management.md",
+        "../../02_intermediate/02_memory_management/02_interior_mutability.md",
+        "../06_low_level_patterns/01_custom_allocators.md",
+        "../07_unsafe_internals/01_unsafe_collections_internals.md",
+        "01_unsafe.md",
+        "04_unsafe_rust_patterns.md",
+        "06_memory_model.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 6,
+      "pre_post": {
+        "pre": [
+          "> [Unsafe Rust](01_unsafe.md) ·"
+        ],
+        "post": [
+          "> [Unsafe 集合内部实现：Vec、Arc、Mutex](../07_unsafe_internals/01_unsafe_collections_internals.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -33854,7 +34211,7 @@
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/01_generics.md",
         "../../02_intermediate/01_generics/02_const_generics.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md",
         "../../04_formal/00_type_theory/01_type_theory.md",
         "../../04_formal/README.md",
         "../../06_ecosystem/README.md",
@@ -33881,172 +34238,24 @@
       "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\03_proc_macros\\02_proc_macro.md",
       "layer": "L3",
       "title": "过程宏：编译期代码生成的元编程工具",
-      "positioning": "深入分析 Rust **过程宏（Procedural Macros）**的三种类型（derive、attribute、function-like）——它们的编译期执行模型、TokenStream 操作、卫生性（hygiene）保证，以及与 `macro_rules!` 的本质差异。",
-      "line_count": 1180,
-      "theorem_chains": [
-        {
-          "text": "| 过程宏：编译期代码生成的元编程工具 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 过程宏：编译期代码生成的元编程工具 正确用法 ⟹ 常见陷阱 | 忽略边界条件 | 编译错误或运行时（Runtime） bug | 高 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 过程宏：编译期代码生成的元编程工具 常见陷阱 ⟹ 深度掌握 | 系统学习反模式 | 能进行代码审查与优化 | 高 |",
-          "type": "table_row"
-        }
-      ],
-      "anti_propositions": [
-        {
-          "title": "## 四、反命题"
-        },
-        {
-          "title": "### 4.1 反命题"
-        }
-      ],
-      "code_blocks": [
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 29,
-          "should_fail": false,
-          "code_preview": "// 过程宏的基本签名  // Derive 宏 #[proc_macro_derive(MyTrait)] pub fn my_trait_derive(in..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 38,
-          "should_fail": false,
-          "code_preview": "// 典型 derive 宏实现（使用 syn + quote）  use proc_macro::TokenStream; use quote::quote;..."
-        },
-        {
-          "flags": [
-            "compile_fail"
-          ],
-          "lines": 10,
-          "should_fail": true,
-          "code_preview": "// 错误: 在函数内部定义过程宏 fn main() {     // ❌ 编译错误: 过程宏必须在 crate 根级别定义     // #[proc_ma..."
-        },
-        {
-          "flags": [
-            "compile_fail"
-          ],
-          "lines": 9,
-          "should_fail": true,
-          "code_preview": "use proc_macro::TokenStream;  // 错误: 过程宏函数签名不匹配 #[proc_macro_derive(MyTrait)] pu..."
-        },
-        {
-          "flags": [
-            "compile_fail"
-          ],
-          "lines": 7,
-          "should_fail": true,
-          "code_preview": "// 错误: 在 proc-macro crate 中使用非 proc_macro 导出 #[proc_macro] pub fn my_macro(input..."
-        },
-        {
-          "flags": [
-            "compile_fail"
-          ],
-          "lines": 21,
-          "should_fail": true,
-          "code_preview": "use proc_macro::TokenStream; use quote::quote; use syn::{parse_macro_input, Deri..."
-        },
-        {
-          "flags": [
-            "compile_fail"
-          ],
-          "lines": 21,
-          "should_fail": true,
-          "code_preview": "use proc_macro::TokenStream; use quote::quote;  #[proc_macro_derive(MyTrait)] pu..."
-        },
-        {
-          "flags": [
-            "compile_fail"
-          ],
-          "lines": 10,
-          "should_fail": true,
-          "code_preview": "use proc_macro::TokenStream; use quote::quote;  #[proc_macro_derive(MyDerive)] p..."
-        },
-        {
-          "flags": [
-            "compile_fail"
-          ],
-          "lines": 8,
-          "should_fail": true,
-          "code_preview": "fn main() {     let mut v = vec![1, 2, 3];     let r = &v;     // ❌ 编译错误: 已存在不可变..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 14,
-          "should_fail": false,
-          "code_preview": "// 1. syn 解析输入 let input = parse_macro_input!(input as DeriveInput);  // 2. 处理 A..."
-        },
-        {
-          "flags": [],
-          "lines": 7,
-          "should_fail": false,
-          "code_preview": "use proc_macro::TokenStream;  #[proc_macro] pub fn my_macro(input: TokenStream) ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 29,
-          "should_fail": false,
-          "code_preview": "use syn::parse::{Parse, ParseStream}; use syn::{Ident, Token, LitStr};  struct S..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 16,
-          "should_fail": false,
-          "code_preview": "use syn::{Error, Data};  #[proc_macro_derive(Builder)] pub fn derive_builder(inp..."
-        },
-        {
-          "flags": [],
-          "lines": 6,
-          "should_fail": false,
-          "code_preview": "#[test] fn test_compile_fail() {     let t = trybuild::TestCases::new();     t.c..."
-        }
-      ],
+      "positioning": "",
+      "line_count": 12,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../../00_meta/02_sources/05_international_authority_index.md",
-        "../../00_meta/04_navigation/08_learning_mvp_path.md",
-        "../../01_foundation/02_type_system/01_type_system.md",
-        "../../01_foundation/09_macros_basics/01_attributes_and_macros.md",
-        "../../02_intermediate/00_traits/01_traits.md",
-        "../../02_intermediate/00_traits/03_serde_patterns.md",
-        "../../04_formal/README.md",
-        "../../06_ecosystem/03_design_patterns/01_patterns.md",
-        "../../06_ecosystem/README.md",
-        "../README.md",
-        "01_macros.md",
-        "03_proc_macro_code_generation_optimization.md",
-        "04_macro_debugging_and_diagnostics.md",
-        "05_production_grade_macro_development.md",
-        "09_macro_hygiene.md",
-        "10_quiz_macros.md"
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md"
       ],
       "transitions": 0,
-      "has_cognitive_path": true,
-      "mermaid_blocks": 3,
-      "matrix_rows": 48,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 0,
       "pre_post": {
-        "pre": [
-          "[Macros](01_macros.md) · [Trait](../../02_intermediate/00_traits/01_traits.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md)"
-        ],
-        "post": [
-          "[Serde Patterns](../../02_intermediate/00_traits/03_serde_patterns.md) · [Builder Pattern](../../06_ecosystem/03_design_patterns/01_patterns.md)"
-        ]
+        "pre": [],
+        "post": []
       },
-      "backward_chains": 3,
+      "backward_chains": 0,
       "templated_chains": 0
     },
     {
@@ -34180,8 +34389,8 @@
       "sources": [],
       "cross_references": [
         "../../02_intermediate/01_generics/01_generics.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md",
-        "02_proc_macro.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md",
         "03_proc_macro_code_generation_optimization.md",
         "04_macro_debugging_and_diagnostics.md",
         "05_production_grade_macro_development.md"
@@ -34192,7 +34401,7 @@
       "matrix_rows": 9,
       "pre_post": {
         "pre": [
-          "[过程宏（Procedural Macro）](02_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md) · [泛型（Generics）](../../02_intermediate/01_generics/01_generics.md)"
+          "[过程宏（Procedural Macro）](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md) · [泛型（Generics）](../../02_intermediate/01_generics/01_generics.md)"
         ],
         "post": [
           "[生产级宏（Macro）开发](05_production_grade_macro_development.md) · [宏调试与诊断](04_macro_debugging_and_diagnostics.md)"
@@ -34310,9 +34519,9 @@
       "sources": [],
       "cross_references": [
         "../../01_foundation/10_testing_basics/02_useful_development_tools.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md",
         "../../06_ecosystem/00_toolchain/11_compiler_diagnostics_and_ui_tests.md",
-        "02_proc_macro.md",
         "04_macro_debugging_and_diagnostics.md",
         "05_production_grade_macro_development.md",
         "09_macro_hygiene.md"
@@ -34323,7 +34532,7 @@
       "matrix_rows": 10,
       "pre_post": {
         "pre": [
-          "[过程宏（Procedural Macro）](02_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md)"
+          "[过程宏（Procedural Macro）](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md)"
         ],
         "post": [
           "[生产级宏（Macro）开发](05_production_grade_macro_development.md) · [rustc 编译器诊断](../../06_ecosystem/00_toolchain/11_compiler_diagnostics_and_ui_tests.md)"
@@ -34448,11 +34657,11 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md",
         "../../06_ecosystem/01_cargo/08_cargo_registries_and_publishing.md",
         "../../06_ecosystem/03_design_patterns/13_engineering_and_production_patterns.md",
         "../../07_future/02_preview_features/27_cargo_semver_checks_preview.md",
-        "02_proc_macro.md",
         "04_macro_debugging_and_diagnostics.md",
         "05_production_grade_macro_development.md"
       ],
@@ -34462,7 +34671,7 @@
       "matrix_rows": 12,
       "pre_post": {
         "pre": [
-          "> [过程宏（Procedural Macro）](02_proc_macro.md) ·"
+          "> [过程宏（Procedural Macro）](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) ·"
         ],
         "post": [
           "> [Cargo semver-checks](../../07_future/02_preview_features/27_cargo_semver_checks_preview.md) ·"
@@ -34735,10 +34944,10 @@
       "sources": [],
       "cross_references": [
         "../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md",
         "/crates/c11_macro_system_proc/docs/tier_01_foundations/02_navigation.md",
         "/crates/c11_macro_system_proc/docs/tier_01_foundations/04_faq.md",
-        "02_proc_macro.md",
         "08_syn_quote_reference.md",
         "09_macro_hygiene.md"
       ],
@@ -34748,7 +34957,7 @@
       "matrix_rows": 4,
       "pre_post": {
         "pre": [
-          "[过程宏（Procedural Macro）](02_proc_macro.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md)"
+          "[过程宏（Procedural Macro）](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) · [元编程](../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md)"
         ],
         "post": [
           "[宏（Macro）卫生性](09_macro_hygiene.md) · [syn/quote 参考](08_syn_quote_reference.md)"
@@ -35047,9 +35256,9 @@
       "sources": [],
       "cross_references": [
         "../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
         "/crates/c11_macro_system_proc/docs/tier_01_foundations/03_glossary.md",
         "/crates/c11_macro_system_proc/docs/tier_02_guides/README.md",
-        "02_proc_macro.md",
         "05_production_grade_macro_development.md",
         "06_macro_glossary.md",
         "09_macro_hygiene.md"
@@ -35060,7 +35269,7 @@
       "matrix_rows": 11,
       "pre_post": {
         "pre": [
-          "[过程宏（Procedural Macro）](02_proc_macro.md) · [宏术语表](06_macro_glossary.md)"
+          "[过程宏（Procedural Macro）](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) · [宏术语表](06_macro_glossary.md)"
         ],
         "post": [
           "[宏（Macro）卫生性](09_macro_hygiene.md) · [生产级宏开发](05_production_grade_macro_development.md)"
@@ -35378,10 +35587,10 @@
       "sources": [],
       "cross_references": [
         "../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
         "/crates/c11_macro_system_proc/docs/tier_03_references/01_declarative_macros_complete_reference.md",
         "/crates/c11_macro_system_proc/docs/tier_03_references/02_procedural_macro_api_reference.md",
         "/crates/c11_macro_system_proc/docs/tier_03_references/04_macro_hygiene_reference.md",
-        "02_proc_macro.md",
         "04_macro_debugging_and_diagnostics.md",
         "05_production_grade_macro_development.md",
         "06_macro_glossary.md",
@@ -35393,7 +35602,7 @@
       "matrix_rows": 4,
       "pre_post": {
         "pre": [
-          "[过程宏（Procedural Macro）](02_proc_macro.md) · [宏术语表](06_macro_glossary.md)"
+          "[过程宏（Procedural Macro）](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) · [宏术语表](06_macro_glossary.md)"
         ],
         "post": [
           "[生产级宏（Macro）开发](05_production_grade_macro_development.md) · [宏卫生性](09_macro_hygiene.md)"
@@ -35661,10 +35870,10 @@
       "cross_references": [
         "../../01_foundation/00_start/06_keywords.md",
         "../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
         "/crates/c11_macro_system_proc/docs/tier_03_references/01_declarative_macros_complete_reference.md",
         "/crates/c11_macro_system_proc/docs/tier_03_references/02_procedural_macro_api_reference.md",
         "/crates/c11_macro_system_proc/docs/tier_03_references/03_syn_quote_reference.md",
-        "02_proc_macro.md",
         "04_macro_debugging_and_diagnostics.md",
         "05_production_grade_macro_development.md",
         "08_syn_quote_reference.md"
@@ -35675,7 +35884,7 @@
       "matrix_rows": 19,
       "pre_post": {
         "pre": [
-          "[过程宏（Procedural Macro）](02_proc_macro.md) · [syn/quote 参考](08_syn_quote_reference.md)"
+          "[过程宏（Procedural Macro）](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) · [syn/quote 参考](08_syn_quote_reference.md)"
         ],
         "post": [
           "[生产级宏（Macro）开发](05_production_grade_macro_development.md) · [宏调试与诊断](04_macro_debugging_and_diagnostics.md)"
@@ -35857,8 +36066,8 @@
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../01_foundation/09_macros_basics/01_attributes_and_macros.md",
         "../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
-        "01_macros.md",
-        "02_proc_macro.md"
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
+        "01_macros.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -36715,11 +36924,195 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\04_ffi\\06_ffi_deep_dive.md",
+      "layer": "L3",
+      "title": "FFI 深度解析：C ABI、调用约定与链接",
+      "positioning": "系统剖析 Rust 与 C 世界交互的**机械层**：从 ABI/调用约定到 `repr(C)` 布局，从 `unsafe extern` 函数到 `cdylib`/`staticlib` 链接产物，从符号修饰到 panic 边界，建立 FFI 代码审查与工程决策的完整 checklist。",
+      "line_count": 706,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "### 10.1 反例"
+        },
+        {
+          "title": "### 10.2 反例"
+        },
+        {
+          "title": "### 10.3 反例"
+        },
+        {
+          "title": "### 10.4 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "#[repr(C)] pub struct Point {     pub x: f64,     pub y: f64, } ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "#[repr(transparent)] pub struct FileDescriptor(c_int);  #[repr(C, align(16))] pu..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "#[repr(u8)] pub enum Color { Red = 0, Green = 1, Blue = 2 }  #[repr(C)] pub unio..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "unsafe extern \"C\" {     fn abs(x: i32) -> i32;     fn malloc(size: usize) -> *mu..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "unsafe extern \"C\" {     safe fn abs(x: i32) -> i32; }  fn main() {     println!(..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "#[unsafe(no_mangle)] pub extern \"C\" fn rust_add(a: i32, b: i32) -> i32 {     a +..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "unsafe extern \"C\" {     fn printf(fmt: *const c_char, ...) -> c_int; } ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use std::ffi::CString;  pub fn rust_print_int(msg: &str, value: i32) {     let f..."
+        },
+        {
+          "flags": [
+            "no_run"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use std::panic;  extern \"C\" fn callback() {     // 若 panic 未被捕获，跨越 FFI 边界 → abor..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "extern \"C\" fn safe_callback() -> c_int {     match panic::catch_unwind(|| {     ..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "#[unsafe(no_mangle)] pub extern \"C\" fn ffi_version() -> u32 {     1 } ..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "#[unsafe(no_mangle)] pub extern \"C\" fn public_add(a: i32, b: i32) -> i32 { a + b..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 13,
+          "should_fail": true,
+          "code_preview": "pub struct Point { x: f64, y: f64 }  #[deny(improper_ctypes)] unsafe extern \"C\" ..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "#[repr(C)] pub struct Point { x: f64, y: f64 } ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use std::ffi::CString; use std::os::raw::c_char;  unsafe extern \"C\" {     fn pro..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "fn fixed(input: &str) {     let cstr = CString::new(input).unwrap();     unsafe ..."
+        },
+        {
+          "flags": [
+            "no_run"
+          ],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "use std::ffi::CString; use std::os::raw::{c_char, c_int};  unsafe extern \"C\" {  ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use std::os::raw::c_void;  unsafe extern \"C\" {     fn free(ptr: *mut c_void); } ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "unsafe {     drop(Box::from_raw(ptr as *mut i32)); // 用 Rust 分配器释放 } ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/02_type_system/01_type_system.md",
+        "../../02_intermediate/02_memory_management/01_memory_management.md",
+        "../02_unsafe/01_unsafe.md",
+        "../02_unsafe/06_memory_model.md",
+        "01_rust_ffi.md",
+        "02_ffi_advanced.md",
+        "03_linkage.md",
+        "04_async_ffi_boundary.md",
+        "05_unsafe_extern_blocks.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 44,
+      "pre_post": {
+        "pre": [
+          "> [Rust FFI](01_rust_ffi.md) ·"
+        ],
+        "post": [
+          "> [Async FFI 边界](04_async_ffi_boundary.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\05_inline_assembly\\01_inline_assembly.md",
       "layer": "L3",
       "title": "内联汇编 (Inline Assembly)",
       "positioning": "深入分析 Rust `asm!` 宏（Macro）的语法、约束系统、寄存器管理，以及 x86_64、aarch64、RISC-V、s390x 四大平台的差异，重点覆盖 Rust 1.96 为 s390x 引入的向量寄存器支持。",
-      "line_count": 884,
+      "line_count": 987,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -36746,6 +37139,24 @@
           "lines": 8,
           "should_fail": false,
           "code_preview": "unsafe {     asm!(         \"cpuid\",         out(\"eax\") _, out(\"ebx\") _, out(\"ecx..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "#[cfg(target_arch = \"x86_64\")] unsafe {     core::arch::asm!(         \"jmp {}\", ..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "#[cfg(target_arch = \"x86_64\")] unsafe {     let mut x: u16 = 0x1234;     core::a..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "#[cfg(target_arch = \"x86_64\")] unsafe {     extern \"C\" fn callee() -> i32 { 42 }..."
         },
         {
           "flags": [
@@ -36800,6 +37211,14 @@
           "lines": 42,
           "should_fail": false,
           "code_preview": "// ❌ 错误：忘记声明 clobber 寄存器 unsafe {     let mut x: u64 = 10;     asm!(         \"mo..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "#[unsafe(naked)] extern \"C\" fn naked_add(a: i32, b: i32) -> i32 {     unsafe {  ..."
         },
         {
           "flags": [],
@@ -36942,7 +37361,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 70,
+      "matrix_rows": 86,
       "pre_post": {
         "pre": [
           "[Unsafe Rust](../02_unsafe/01_unsafe.md) · [FFI](../04_ffi/01_rust_ffi.md) · [Platform Support](../../06_ecosystem/05_systems_and_embedded/02_cross_compilation.md) · [Unsafe Rust 模式](../02_unsafe/04_unsafe_rust_patterns.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)",
@@ -36950,6 +37369,139 @@
         ],
         "post": [
           "[Rust for Linux](../../07_future/04_research_and_experimental/04_rust_for_linux.md) · [Kernel Development](../../07_future/04_research_and_experimental/04_rust_for_linux.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\03_advanced\\05_inline_assembly\\02_inline_assembly_extended.md",
+      "layer": "L3",
+      "title": "内联汇编扩展主题：`no_std`、内核与跨平台向量约束",
+      "positioning": "在 [内联汇编基础](01_inline_assembly.md) 之上，聚焦 `no_std`、裸机启动、中断上下文、PowerPC/LoongArch 等扩展架构，以及 `core::arch` 与 Miri 验证边界，形成面向系统级开发的内联汇编决策框架。",
+      "line_count": 538,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "### 7.1 反例"
+        },
+        {
+          "title": "### 7.2 反例"
+        },
+        {
+          "title": "### 7.3 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "#![no_std]  #[cfg(target_arch = \"x86_64\")] pub unsafe fn read_tsc() -> u64 {    ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "#![no_std]  // 暴露 Rust 入口符号给启动汇编 core::arch::global_asm!(     r#\"     .section ...."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "#[cfg(target_arch = \"x86_64\")] unsafe extern \"x86-interrupt\" fn timer_handler(fr..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 33,
+          "should_fail": false,
+          "code_preview": "#[unsafe(naked)] extern \"C\" fn naked_isr() {     unsafe {         core::arch::na..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "#[cfg(all(target_arch = \"powerpc64\", target_feature = \"altivec\"))] unsafe fn vec..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "#[cfg(target_arch = \"loongarch64\")] unsafe fn read_cpucfg(reg: u32) -> u32 {    ..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "#[cfg(target_arch = \"x86_64\")] fn read_tsc_safe() -> u64 {     // core::arch 提供安..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "#![no_std]  core::arch::global_asm!(     \"mov {x}, 42\",     x = out(reg) _, // ❌..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "#![no_std]  core::arch::global_asm!(     \"mov rax, 42\", ); ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "#[unsafe(naked)] extern \"C\" fn broken_isr() {     unsafe {         core::arch::n..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "unsafe fn broken_copy(src: *const u8, dst: *mut u8) {     core::arch::asm!(     ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../02_intermediate/02_memory_management/01_memory_management.md",
+        "../../06_ecosystem/05_systems_and_embedded/02_cross_compilation.md",
+        "../../07_future/00_version_tracking/rust_1_96_stabilized.md",
+        "../../07_future/04_research_and_experimental/04_rust_for_linux.md",
+        "../02_unsafe/01_unsafe.md",
+        "../04_ffi/06_ffi_deep_dive.md",
+        "../06_low_level_patterns/01_custom_allocators.md",
+        "../06_low_level_patterns/07_rust_runtime.md",
+        "01_inline_assembly.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 12,
+      "pre_post": {
+        "pre": [
+          "> [内联汇编 (Inline Assembly)](01_inline_assembly.md) ·"
+        ],
+        "post": [
+          "> [Custom Allocators](../06_low_level_patterns/01_custom_allocators.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -39573,7 +40125,7 @@
       "layer": "L4",
       "title": "Type Theory（类型论基础）",
       "positioning": "",
-      "line_count": 1830,
+      "line_count": 2562,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 深度重构——定理一致性（Coherence）矩阵扩展至11行（带⟹推理链），新增3个反命题决策树，认知路径重构为5步递进，全章补充Wikipedia/Pierce TAPL/Cardelli引用与L1-L3层次一致性标注",
@@ -39704,6 +40256,30 @@
         },
         {
           "title": "### 5.3 反命题"
+        },
+        {
+          "title": "### 15.1 反例"
+        },
+        {
+          "title": "### 15.2 反例"
+        },
+        {
+          "title": "### 15.3 反例"
+        },
+        {
+          "title": "### 15.4 反例"
+        },
+        {
+          "title": "### 15.5 反例"
+        },
+        {
+          "title": "### 15.6 反例"
+        },
+        {
+          "title": "### 15.7 反例"
+        },
+        {
+          "title": "### 15.8 反例"
         }
       ],
       "code_blocks": [
@@ -39906,6 +40482,100 @@
           "lines": 9,
           "should_fail": false,
           "code_preview": "// 从上下文\"向下\"推断 fn make_vec() -> Vec<i32> {     Vec::new()  // ✅ 从返回类型推断 T = i32 }..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：尝试自应用，导致 α = α → ⊥ fn omega<F>(f: F) -> ! where     F: Fn(F) -> !, {    ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn add(x: i32, y: i32) -> i32 {     x + y }  fn main() {     let result = add(5,..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "fn main() {     let x = y + 5;  // E0425 } ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "fn omega<F>(f: F) -> ! where     F: Fn(F) -> !, {     f(f)  // E0277 } ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "fn lambda_poly() {     let f = |x| x;  // 单态推断     let a: i32 = f(5);     let b:..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use std::ptr;  unsafe fn bad_deref() {     let ptr: *const i32 = ptr::null();   ..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "fn complex_failure<T, U, V>(     f: impl Fn(T) -> U,     g: impl Fn(U) -> V,    ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "fn dangling_reference() -> &i32 {     let x = 5;     &x  // E0515 } ..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// 违反孤儿规则 // impl std::fmt::Display for Vec<i32> {}  // E0117  // 矛盾实现 trait Sam..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use std::mem::offset_of;  struct Point { x: f64, y: f64 }  const X_OFFSET: usize..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "fn always_panic() -> ! {     panic!(\"diverges\") }  let x: i32 = always_panic(); ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "let v = vec![1, 2, 3]; let x = (v.len()): usize;  // ascription 显式指定类型 ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "use std::ops::ControlFlow;  fn find_negative(items: &[i32]) -> Option<i32> {    ..."
         }
       ],
       "sources": [],
@@ -39921,6 +40591,8 @@
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../05_comparative/00_paradigms/01_paradigm_matrix.md",
         "../../07_future/00_version_tracking/01_rust_version_tracking.md",
+        "../../07_future/00_version_tracking/rust_1_93_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
         "../../07_future/04_research_and_experimental/02_formal_methods.md",
         "../../07_future/04_research_and_experimental/03_evolution.md",
         "../01_ownership_logic/01_linear_logic.md",
@@ -39930,7 +40602,7 @@
       "transitions": 3,
       "has_cognitive_path": true,
       "mermaid_blocks": 6,
-      "matrix_rows": 163,
+      "matrix_rows": 210,
       "pre_post": {
         "pre": [
           "> [Type System](../../01_foundation/02_type_system/01_type_system.md) ·"
@@ -46461,9 +47133,9 @@
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../00_meta/03_audit/02_asp_marking_guide.md",
         "../../01_foundation/00_start/06_keywords.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../03_advanced/03_proc_macros/01_macros.md",
-        "../../03_advanced/03_proc_macros/02_proc_macro.md",
         "../04_model_checking/05_programming_language_foundations.md",
         "../06_notation/01_notation.md",
         "06_names_and_resolution.md",
@@ -47147,9 +47819,9 @@
       "cross_references": [
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../00_meta/03_audit/02_asp_marking_guide.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../03_advanced/03_proc_macros/01_macros.md",
-        "../../03_advanced/03_proc_macros/02_proc_macro.md",
         "../06_notation/01_notation.md",
         "10_lexical_structure.md",
         "11_items_reference.md",
@@ -47199,8 +47871,8 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/02_sources/05_international_authority_index.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
         "../../03_advanced/03_proc_macros/01_macros.md",
-        "../../03_advanced/03_proc_macros/02_proc_macro.md",
         "../04_model_checking/05_programming_language_foundations.md",
         "../05_rustc_internals/10_lexical_structure.md"
       ],
@@ -48569,11 +49241,9 @@
       ],
       "code_blocks": [
         {
-          "flags": [
-            "compile_fail"
-          ],
+          "flags": [],
           "lines": 13,
-          "should_fail": true,
+          "should_fail": false,
           "code_preview": "use std::sync::{Arc, Mutex}; use std::thread;  // 错误示范：两个“actor”直接共享可变状态 fn main..."
         }
       ],
@@ -50828,6 +51498,54 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\13_semantic_engineering\\06_ai_ontology_and_rust_semantics.md",
+      "layer": "L4",
+      "title": "Unknown",
+      "positioning": "",
+      "line_count": 267,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 五、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/knowledge_topology/11_semantic_model_atlas.md",
+        "../../00_meta/knowledge_topology/kg_ontology_v2.md",
+        "../../03_advanced/04_ffi/05_unsafe_extern_blocks.md",
+        "../../07_future/00_version_tracking/rust_1_90_stabilized.md",
+        "../../07_future/04_research_and_experimental/02_formal_methods.md",
+        "../../07_future/04_research_and_experimental/08_llm_system_architecture.md",
+        "../01_ownership_logic/01_linear_logic.md",
+        "../03_operational_semantics/03_operational_semantics.md"
+      ],
+      "transitions": 2,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 17,
+      "pre_post": {
+        "pre": [
+          "[Knowledge Graph Ontology](../../00_meta/knowledge_topology/kg_ontology_v2.md) · [Semantic Model Atlas](../../00_meta/knowledge_topology/11_semantic_model_atlas.md) · [Linear Logic](../01_ownership_logic/01_linear_logic.md) · [Operational Semantics](../03_operational_semantics/03_operational_semantics.md)"
+        ],
+        "post": [
+          "[Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) · [LLM System Architecture](../../07_future/04_research_and_experimental/08_llm_system_architecture.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\04_formal\\14_embedded_semantics\\01_embedded_formal_memory_model.md",
       "layer": "L4",
       "title": "嵌入式形式化内存模型",
@@ -51310,7 +52028,7 @@
         "../../02_intermediate/03_error_handling/04_exception_safety_rust_cpp.md",
         "../../02_intermediate/04_types_and_conversions/05_rtti_and_dynamic_typing.md",
         "../../02_intermediate/05_modules_and_visibility/02_friend_vs_module_privacy.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/05_c_preprocessor_vs_rust_macros.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/07_c_preprocessor_vs_rust_macros.md",
         "../../04_formal/01_ownership_logic/02_ownership_formal.md",
         "../01_systems_languages/01_rust_vs_cpp.md",
         "../01_systems_languages/02_cpp_abi_object_model.md"
@@ -54440,7 +55158,7 @@
       "layer": "L6",
       "title": "DevOps 与 CI/CD：Rust 的持续交付工程实践",
       "positioning": "系统分析 Rust **DevOps 工程实践**——从 GitHub Actions 工作流设计、cargo-release 发布自动化、交叉编译 CI 集成，到 Docker 镜像优化、构建缓存策略、CI 测试矩阵与安全审计（cargo-audit、cargo-deny），揭示 Rust 项目如何从代码提交到生产部署实现高可靠持续交付。",
-      "line_count": 910,
+      "line_count": 1148,
       "theorem_chains": [
         {
           "text": "| DevOps 与 CI/CD：Rust 的持续交付工程实践 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -54535,7 +55253,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 3,
-      "matrix_rows": 32,
+      "matrix_rows": 40,
       "pre_post": {
         "pre": [
           "[Toolchain](01_toolchain.md) · [Cross Compilation](../05_systems_and_embedded/02_cross_compilation.md)",
@@ -54640,10 +55358,10 @@
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/01_generics.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
         "../../03_advanced/01_async/01_async.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../03_advanced/02_unsafe/03_nll_and_polonius.md",
-        "../../03_advanced/03_proc_macros/02_proc_macro.md",
         "../../04_formal/04_model_checking/01_verification_toolchain.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../07_future/01_edition_roadmap/04_roadmap.md",
@@ -56944,119 +57662,77 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\02_core_crates\\01_core_crates.md",
       "layer": "L6",
-      "title": "Core Crates（核心开源库谱系）",
+      "title": "Core Crates（核心开源库谱系索引）",
       "positioning": "",
-      "line_count": 1496,
-      "theorem_chains": [
-        {
-          "text": "> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。",
-          "type": "paragraph"
-        },
-        {
-          "text": "| **serde 是序列化标准** | derive宏简化实现 ⟹ | 跨格式统一API | 编译时间增加 | 几乎所有项目必需 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| **tokio 是 async 运行时主流** | 生态最丰富 ⟹ | 生产验证 | 学习曲线 | IO密集型应用 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| **clap 简化 CLI 解析** | derive宏 ⟹ | 自动生成help | 编译时间 | 命令行工具 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| **rayon 简化数据并行** | parallel迭代器 ⟹ | 自动负载均衡 | 非所有场景适用 | CPU密集型任务 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| **thiserror/anyhow 简化错误** | 类型安全/人体工学 ⟹ | 减少样板代码 | 隐式转换注意 | 错误处理（Error Handling）策略 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| **cargo audit 检测漏洞** | Advisory DB ⟹ | 供应链安全 | 零日漏洞延迟 | CI必需步骤 |",
-          "type": "table_row"
-        },
-        {
-          "text": "> **⟹ 推理链**: C1-C5 的**安全保证都不超出 Rust 编译器的 safe 子集**——crate 的安全性本质上是 Rust 类型系统（Type System）的组合应用。C6 是供应链层面的元保证，独立于单个 crate 的正确性。",
-          "type": "paragraph"
-        }
-      ],
+      "line_count": 413,
+      "theorem_chains": [],
       "anti_propositions": [
         {
-          "title": "## 六、反命题"
-        },
-        {
-          "title": "## 反命题"
+          "title": "## 八、反命题"
         }
       ],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/01_generics/01_generics.md",
+        "../../03_advanced/01_async/01_async.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../03_advanced/03_proc_macros/01_macros.md",
+        "../../05_comparative/00_paradigms/05_language_semantic_model_matrix.md",
+        "../06_data_and_distributed/01_application_domains.md",
+        "./02_serde.md",
+        "./03_tokio.md",
+        "./04_clap.md",
+        "./05_tracing.md",
+        "./06_reqwest.md",
+        "./07_axum.md",
+        "./08_sqlx.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 3,
+      "matrix_rows": 83,
+      "pre_post": {
+        "pre": [
+          "> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·"
+        ],
+        "post": [
+          "[Application Domains](../06_data_and_distributed/01_application_domains.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\02_core_crates\\02_serde.md",
+      "layer": "L6",
+      "title": "Serde 序列化框架",
+      "positioning": "",
+      "line_count": 448,
+      "theorem_chains": [],
+      "anti_propositions": [],
       "code_blocks": [
         {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 8,
+          "flags": [],
+          "lines": 30,
           "should_fail": false,
-          "code_preview": "use rayon::prelude::*;  // 自动 work-stealing：将大数据集分片到线程池 let sum: i32 = (0..1_000..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 6,
-          "should_fail": false,
-          "code_preview": "use parking_lot::Mutex; // 无 poisoning，API 更简洁  let data = Mutex::new(0); *data...."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 7,
-          "should_fail": false,
-          "code_preview": "use dashmap::DashMap;  let map = DashMap::new(); map.insert(\"key\", 42); // 并发读写无..."
+          "code_preview": "// Cargo.toml // [dependencies] // serde = { version = \"1\", features = [\"derive\"..."
         },
         {
           "flags": [],
-          "lines": 41,
+          "lines": 34,
           "should_fail": false,
-          "code_preview": "// 模拟 serde 的核心抽象：编译期派生与类型同构 // 实际使用需添加 serde 依赖；此处展示类型约束模式 trait Serialize { fn..."
-        },
-        {
-          "flags": [],
-          "lines": 26,
-          "should_fail": false,
-          "code_preview": "// 模拟 tokio 的核心抽象：Future trait 的类型安全保证 use std::future::Future; use std::pin::Pi..."
+          "code_preview": "// Cargo.toml // [dependencies] // serde = { version = \"1\", features = [\"derive\"..."
         },
         {
           "flags": [
             "ignore"
           ],
-          "lines": 50,
+          "lines": 19,
           "should_fail": false,
-          "code_preview": "/ ✅ Cargo.toml // [dependencies] // axum = \"0.8\" // sqlx = { version = \"0.8\", fe..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 13,
-          "should_fail": false,
-          "code_preview": "// ✅ Leptos 最小示例 use leptos::*;  #[component] fn App() -> impl IntoView {     le..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 17,
-          "should_fail": false,
-          "code_preview": "// ✅ Embassy 异步闪烁 LED use embassy_executor::Spawner; use embassy_time::{Duration..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 24,
-          "should_fail": false,
-          "code_preview": "// ✅ Bevy ECS 最小示例 use bevy::prelude::*;  #[derive(Component)] struct Player { h..."
+          "code_preview": "// Axum + serde_json 返回 JSON 的典型片段 use axum::{Json, Router, routing::get}; use s..."
         },
         {
           "flags": [
@@ -57064,94 +57740,688 @@
           ],
           "lines": 12,
           "should_fail": false,
-          "code_preview": "// ✅ Candle：极简推理 use candle_core::{Device, Tensor};  fn main() -> anyhow::Result..."
-        },
-        {
-          "flags": [
-            "compile_fail"
-          ],
-          "lines": 14,
-          "should_fail": true,
-          "code_preview": "use serde::Deserialize;  #[derive(Deserialize)] struct Config {     host: String..."
+          "code_preview": "use serde::Serialize; use some_crate::ExternalId;  impl Serialize for ExternalId..."
         },
         {
           "flags": [],
-          "lines": 15,
+          "lines": 25,
           "should_fail": false,
-          "code_preview": "use tokio::task;  fn main() {     // ❌ 运行时 panic: there is no reactor running   ..."
+          "code_preview": "use serde::Serialize; use std::fmt;  #[derive(Debug)] struct ExternalId(u64); //..."
         },
         {
           "flags": [
-            "compile_fail"
-          ],
-          "lines": 18,
-          "should_fail": true,
-          "code_preview": "use thiserror::Error;  #[derive(Error, Debug)] enum AppError {     #[error(\"io e..."
-        },
-        {
-          "flags": [
-            "compile_fail"
+            "ignore"
           ],
           "lines": 11,
-          "should_fail": true,
-          "code_preview": "use tokio::sync::mpsc;  async fn tokio_task() {     let (tx, mut rx) = mpsc::cha..."
+          "should_fail": false,
+          "code_preview": "use serde::Deserialize;  #[derive(Deserialize, Debug)] struct Task {     task_id..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use serde::Deserialize;  #[derive(Deserialize, Debug)] #[serde(rename_all = \"cam..."
         },
         {
           "flags": [
-            "compile_fail"
+            "ignore"
           ],
-          "lines": 14,
-          "should_fail": true,
-          "code_preview": "use rayon::prelude::*;  fn main() {     let v: Vec<i32> = (0..100).collect();   ..."
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "let user: User = serde_json::from_str(r#\"{}\"#).unwrap(); ..."
         },
         {
-          "flags": [
-            "compile_fail"
-          ],
-          "lines": 21,
-          "should_fail": true,
-          "code_preview": "use thiserror::Error;  #[derive(Error, Debug)] enum MyError {     #[error(\"io er..."
-        },
-        {
-          "flags": [
-            "compile_fail"
-          ],
+          "flags": [],
           "lines": 17,
-          "should_fail": true,
-          "code_preview": "use tokio::runtime::Runtime;  fn main() {     let rt = Runtime::new().unwrap(); ..."
+          "should_fail": false,
+          "code_preview": "use serde::Deserialize;  #[derive(Deserialize, Debug)] struct User {     #[serde..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "use serde::Serialize; use external_crate::Uuid;  impl Serialize for Uuid {     f..."
         }
       ],
       "sources": [],
       "cross_references": [
-        "../../00_meta/00_framework/methodology.md",
-        "../../00_meta/02_sources/05_international_authority_index.md",
-        "../../00_meta/04_navigation/10_problem_graph.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/01_generics/01_generics.md",
-        "../../03_advanced/00_concurrency/01_concurrency.md",
-        "../../03_advanced/01_async/01_async.md",
-        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../02_intermediate/03_error_handling/01_error_handling.md",
         "../../03_advanced/03_proc_macros/01_macros.md",
-        "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
-        "../../07_future/04_research_and_experimental/01_ai_integration.md",
-        "../../07_future/04_research_and_experimental/02_formal_methods.md",
-        "../../07_future/04_research_and_experimental/03_evolution.md",
-        "../00_toolchain/01_toolchain.md",
-        "../03_design_patterns/01_patterns.md",
-        "../04_web_and_networking/10_tokio_runtime_internals.md",
-        "../06_data_and_distributed/01_application_domains.md"
+        "../../05_comparative/02_managed_languages/01_rust_vs_java.md",
+        "../06_data_and_distributed/01_application_domains.md",
+        "./03_tokio.md",
+        "./06_reqwest.md",
+        "./07_axum.md"
       ],
-      "transitions": 3,
-      "has_cognitive_path": true,
-      "mermaid_blocks": 7,
-      "matrix_rows": 258,
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 20,
       "pre_post": {
         "pre": [
           "> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·"
         ],
         "post": [
-          "[Application Domains](../06_data_and_distributed/01_application_domains.md)"
+          "> [tokio](./03_tokio.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\02_core_crates\\03_tokio.md",
+      "layer": "L6",
+      "title": "Tokio 异步运行时",
+      "positioning": "",
+      "line_count": 407,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// Cargo.toml // [dependencies] // tokio = { version = \"1\", features = [\"full\"] ..."
+        },
+        {
+          "flags": [],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "use tokio::time::{sleep, Duration};  #[tokio::main] async fn main() {     let wo..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "use tokio::task;  #[tokio::main] async fn main() {     // ✅ CPU 密集或同步 I/O 应放到 bl..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use tokio::task;  fn main() {     // 运行时 panic: there is no reactor running     ..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "#[tokio::main] async fn main() {     let handle = tokio::spawn(async { 42 });   ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "#[tokio::main] async fn main() {     tokio::spawn(async {         // ❌ 阻塞操作占用 to..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "#[tokio::main] async fn main() {     tokio::task::spawn_blocking(|| {         //..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use tokio::sync::mpsc;  async fn mixed_task() {     let (tx, mut rx) = mpsc::cha..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use tokio::sync::mpsc;  #[tokio::main] async fn main() {     let (tx, mut rx) = ..."
+        },
+        {
+          "flags": [],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "#[tokio::main(flavor = \"current_thread\")] ..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "fn main() {     let _ = tokio::spawn(async { 42 }); } ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/01_generics/01_generics.md",
+        "../../03_advanced/00_concurrency/02_send_sync_auto_traits.md",
+        "../../03_advanced/01_async/01_async.md",
+        "../../03_advanced/01_async/08_pin_unpin.md",
+        "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
+        "../04_web_and_networking/10_tokio_runtime_internals.md",
+        "../06_data_and_distributed/01_application_domains.md",
+        "./05_tracing.md",
+        "./07_axum.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 22,
+      "pre_post": {
+        "pre": [
+          "> [所有权与借用](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·"
+        ],
+        "post": [
+          "> [axum](./07_axum.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\02_core_crates\\04_clap.md",
+      "layer": "L6",
+      "title": "clap：Rust 命令行参数解析权威页",
+      "positioning": "",
+      "line_count": 482,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "// ✅ Cargo.toml // [dependencies] // clap = { version = \"4.5\", features = [\"deri..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 50,
+          "should_fail": false,
+          "code_preview": "// ✅ Cargo.toml // [dependencies] // clap = { version = \"4.5\", features = [\"deri..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "use clap::{Arg, Command};  let cmd = Command::new(\"dynamic\")     .version(\"1.0\")..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 14,
+          "should_fail": true,
+          "code_preview": "use clap::Parser;  #[derive(Parser)] struct Cli {     // 假设 Custom 未实现 FromStr  ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 23,
+          "should_fail": false,
+          "code_preview": "use clap::Parser; use std::str::FromStr;  #[derive(Parser)] struct Cli {     val..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "use clap::Parser;  #[derive(Parser)] struct Cli {     #[arg(short, long)]     ve..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use clap::Parser;  #[derive(Parser)] struct Cli {     #[arg(short, long)]     ve..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use clap::{Parser, Subcommand};  #[derive(Parser)] struct Cli {     // 缺少 #[comm..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use clap::{Parser, Subcommand};  #[derive(Parser)] struct Cli {     #[command(su..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/03_error_handling/01_error_handling.md",
+        "../../03_advanced/03_proc_macros/01_macros.md",
+        "../../05_comparative/02_managed_languages/02_rust_vs_python.md",
+        "../../06_ecosystem/01_cargo/01_cargo_script.md",
+        "../../06_ecosystem/05_systems_and_embedded/04_cli_development.md",
+        "../../06_ecosystem/06_data_and_distributed/01_application_domains.md",
+        "./01_core_crates.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 17,
+      "pre_post": {
+        "pre": [
+          "> [Traits](../../02_intermediate/00_traits/01_traits.md) ·"
+        ],
+        "post": [
+          "> [Cargo Script](../../06_ecosystem/01_cargo/01_cargo_script.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\02_core_crates\\05_tracing.md",
+      "layer": "L6",
+      "title": "`tracing`：结构化追踪与可观测性",
+      "positioning": "",
+      "line_count": 405,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "// Cargo.toml // [dependencies] // tracing = \"0.1\" // tracing-subscriber = { ver..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 29,
+          "should_fail": false,
+          "code_preview": "// Cargo.toml // tracing = \"0.1\" // tracing-subscriber = { version = \"0.3\", feat..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "use tracing::{info, info_span};  fn main() {     tracing_subscriber::fmt()      ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：先记录事件，再初始化 subscriber fn main() {     tracing::info!(\"this will be LOST\"..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// ✅ 正确：先安装 subscriber，再记录事件 fn main() {     tracing_subscriber::fmt::init();   ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：password 会被写入日志 #[tracing::instrument] async fn login(user: String, pass..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// ✅ 正确：显式跳过敏感字段 #[tracing::instrument(skip(password))] async fn login(user: Str..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误： spawned task 的事件没有 request_id 上下文 #[tracing::instrument] async fn handl..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// ✅ 正确：使用 tokio::spawn 的 tracing 集成或手动 instrument use tracing::Instrument;  #[t..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/03_error_handling/01_error_handling.md",
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../03_advanced/01_async/01_async.md",
+        "../../05_comparative/02_managed_languages/01_rust_vs_java.md",
+        "../04_web_and_networking/10_tokio_runtime_internals.md",
+        "../06_data_and_distributed/01_application_domains.md",
+        "01_core_crates.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 16,
+      "pre_post": {
+        "pre": [
+          "> [Traits](../../02_intermediate/00_traits/01_traits.md) ·"
+        ],
+        "post": [
+          "> [Application Domains](../06_data_and_distributed/01_application_domains.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\02_core_crates\\06_reqwest.md",
+      "layer": "L6",
+      "title": "reqwest：Rust 生态的异步 HTTP 客户端",
+      "positioning": "",
+      "line_count": 410,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 23,
+          "should_fail": false,
+          "code_preview": "// ✅ Cargo.toml // [dependencies] // reqwest = { version = \"0.13\", features = [\"..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 28,
+          "should_fail": false,
+          "code_preview": "use reqwest::{Client, header}; use std::time::Duration;  #[tokio::main] async fn..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "use reqwest::Client; use serde_json::json;  #[tokio::main] async fn main() -> Re..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// ❌ 每次都创建新的 Client，没有连接池，HTTP/2 多路复用也失效 async fn fetch_user(id: u64) -> Result<..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "use reqwest::Client; use std::sync::Arc;  // ✅ 通过 Arc 共享同一个 Client，复用连接池 #[deriv..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// ❌ 如果服务器返回 4xx/5xx，.json() 会尝试把错误页解析成目标类型，反序列化失败 let user: User = client     ...."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use reqwest::StatusCode;  // ✅ 先检查状态码，再消费响应体 let response = client.get(\"https://..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "// ❌ 编译错误：不能在非 async fn 中直接 await fn fetch_sync() -> Result<String, reqwest::Err..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// ✅ 使用 #[tokio::main] 或 Runtime::block_on 进入异步上下文 #[tokio::main] async fn main(..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/03_error_handling/01_error_handling.md",
+        "../../03_advanced/01_async/01_async.md",
+        "../../03_advanced/01_async/04_future_and_executor_mechanisms.md",
+        "../../05_comparative/02_managed_languages/03_rust_vs_javascript.md",
+        "../04_web_and_networking/01_distributed_systems.md",
+        "../04_web_and_networking/03_web_frameworks.md",
+        "../04_web_and_networking/04_http_client_development.md",
+        "./01_core_crates.md",
+        "https://github.com/seanmonstar/reqwest/blob/master/CHANGELOG.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 28,
+      "pre_post": {
+        "pre": [
+          "> [Async/Await](../../03_advanced/01_async/01_async.md) ·"
+        ],
+        "post": [
+          "> [HTTP 客户端开发](../04_web_and_networking/04_http_client_development.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\02_core_crates\\07_axum.md",
+      "layer": "L6",
+      "title": "axum（Tokio 官方 Web 框架）",
+      "positioning": "",
+      "line_count": 466,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "// ✅ Cargo.toml // [dependencies] // axum = \"0.8\" // tokio = { version = \"1\", fe..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 74,
+          "should_fail": false,
+          "code_preview": "// ✅ Cargo.toml // [dependencies] // axum = \"0.8\" // tokio = { version = \"1\", fe..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "// ❌ 编译错误：State 类型不匹配 use axum::{extract::State, routing::get, Router};  #[deriv..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "// ✅ 统一 State 类型 #[derive(Clone)] struct AppState {     db: String,     assets: ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "// ❌ 运行时性能下降：阻塞 tokio worker 线程 use axum::{routing::get, Router}; use std::time:..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// ✅ 非阻塞 async handler use axum::{routing::get, Router}; use std::time::Duration..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// ❌ 编译错误：&str 的生命周期无法跨 await 返回 use axum::{routing::get, Router};  async fn bad..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// ✅ 正确的 handler 签名 use axum::{response::Html, routing::get, Router};  async fn ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../03_advanced/01_async/01_async.md",
+        "../../05_comparative/02_managed_languages/08_rust_vs_typescript.md",
+        "./01_core_crates.md",
+        "./03_tokio.md",
+        "./05_tracing.md",
+        "./06_reqwest.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 36,
+      "pre_post": {
+        "pre": [
+          "> [所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·"
+        ],
+        "post": [
+          "> [tokio](./03_tokio.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\02_core_crates\\08_sqlx.md",
+      "layer": "L6",
+      "title": "sqlx：编译期类型安全的异步 SQL 工具包",
+      "positioning": "",
+      "line_count": 341,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "// Cargo.toml // [dependencies] // sqlx = { version = \"0.9\", features = [\"runtim..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 35,
+          "should_fail": false,
+          "code_preview": "// Cargo.toml // sqlx = { version = \"0.9\", features = [\"runtime-tokio\", \"postgre..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "// 环境变量 DATABASE_URL 未设置，也没有 sqlx-data.json let row = sqlx::query!(\"SELECT name ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "#[derive(sqlx::FromRow)] struct User {     id: i64,     username: String, // 数据库..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "#[derive(sqlx::FromRow)] struct User {     id: i64,     name: String, }  let use..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+        "../../02_intermediate/01_generics/01_generics.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
+        "../../03_advanced/01_async/01_async.md",
+        "../../05_comparative/02_managed_languages/06_rust_vs_csharp.md",
+        "../06_data_and_distributed/02_database_access.md",
+        "../06_data_and_distributed/04_database_systems.md",
+        "./01_core_crates.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 19,
+      "pre_post": {
+        "pre": [
+          "> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·"
+        ],
+        "post": [
+          "> [Core Crates Index](./01_core_crates.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -60492,7 +61762,7 @@
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/01_terminology_glossary.md",
-        "../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md",
         "../../05_comparative/00_paradigms/05_language_semantic_model_matrix.md",
         "../05_systems_and_embedded/03_embedded_systems.md",
         "11_formal_design_pattern_theory.md",
@@ -60506,7 +61776,7 @@
       "matrix_rows": 12,
       "pre_post": {
         "pre": [
-          "[元编程与宏](../../02_intermediate/06_macros_and_metaprogramming/04_metaprogramming.md) · [形式化设计模式理论](11_formal_design_pattern_theory.md) · [模式组合代数](16_pattern_composition_algebra.md) · [工作流理论与形式化](17_workflow_theory.md)"
+          "[元编程与宏](../../02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md) · [形式化设计模式理论](11_formal_design_pattern_theory.md) · [模式组合代数](16_pattern_composition_algebra.md) · [工作流理论与形式化](17_workflow_theory.md)"
         ],
         "post": [
           "[API 设计模式](18_api_design_patterns.md) · [Rust 嵌入式系统开发](../05_systems_and_embedded/03_embedded_systems.md) · [语言语义模型矩阵](../../05_comparative/00_paradigms/05_language_semantic_model_matrix.md)"
@@ -60708,7 +61978,7 @@
       "layer": "L6",
       "title": "管道-过滤器、黑板与解释器架构",
       "positioning": "",
-      "line_count": 454,
+      "line_count": 452,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -61035,7 +62305,7 @@
       "layer": "L6",
       "title": "Rust Web 框架对比与选型",
       "positioning": "对比分析 Rust 主流 Web 框架——Axum、Actix-web、Rocket、Poem——从架构设计、运行时（Runtime）集成、中间件机制到性能特征，建立系统化的选型决策框架。",
-      "line_count": 1107,
+      "line_count": 1165,
       "theorem_chains": [
         {
           "text": "| 新项目 + Tower 生态兼容（如 Tonic gRPC） | Axum | §6.1 决策树 Q1/Q2 | 团队不熟 Tower/`Service` ⟹ 学习曲线陡（§7.1 F1） |",
@@ -61112,6 +62382,14 @@
         },
         {
           "flags": [
+            "ignore"
+          ],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "// Axum 集成测试示例 use axum::{body::Body, http::Request, routing::get, Router}; use ..."
+        },
+        {
+          "flags": [
             "compile_fail"
           ],
           "lines": 17,
@@ -61159,8 +62437,7 @@
         "../../02_intermediate/00_traits/01_traits.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
         "../../03_advanced/01_async/01_async.md",
-        "../../04_formal/00_type_theory/01_type_theory.md",
-        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../05_comparative/02_managed_languages/08_rust_vs_typescript.md",
         "../03_design_patterns/01_patterns.md",
         "../13_quizzes/01_quiz_networking_async_ecosystem.md",
         "02_cloud_native.md"
@@ -61168,12 +62445,10 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 4,
-      "matrix_rows": 56,
+      "matrix_rows": 63,
       "pre_post": {
         "pre": [
-          "[Async](../../03_advanced/01_async/01_async.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)",
-          "[Type Theory](../../04_formal/00_type_theory/01_type_theory.md)",
-          "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
+          "[Async](../../03_advanced/01_async/01_async.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)"
         ],
         "post": [
           "[云原生生态](02_cloud_native.md) · [设计模式](../03_design_patterns/01_patterns.md)"
@@ -61636,7 +62911,7 @@
       "layer": "L6",
       "title": "高性能网络服务架构 (High-Performance Network Service Architecture)",
       "positioning": "",
-      "line_count": 2189,
+      "line_count": 2471,
       "theorem_chains": [
         {
           "text": "| 零拷贝 ⟹ 降低延迟 | 避免用户态与内核态间数据拷贝 | 提升网络 I/O 吞吐 |",
@@ -61773,6 +63048,62 @@
         },
         {
           "flags": [
+            "ignore"
+          ],
+          "lines": 38,
+          "should_fail": false,
+          "code_preview": "// Cargo.toml // [dependencies] // tracing = \"0.1\" // tracing-subscriber = { ver..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "use axum::{routing::get, Json, Router}; use serde_json::json;  async fn health()..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "use axum::serve; use tokio::{signal, sync::watch}; use std::time::Duration;  #[t..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use reqwest::Client; use std::time::Duration;  let client = Client::builder()   ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "use tower::{ServiceBuilder, timeout::TimeoutLayer, limit::RateLimitLayer}; use s..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use axum::extract::Request; use tower_http::timeout::TimeoutLayer;  let app = Ro..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "async fn liveness() -> &'static str { \"ok\" }  async fn readiness(State(deps): St..."
+        },
+        {
+          "flags": [
             "compile_fail"
           ],
           "lines": 6,
@@ -61799,7 +63130,7 @@
       "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 23,
+      "matrix_rows": 41,
       "pre_post": {
         "pre": [
           "[Type System Basics](../../01_foundation/02_type_system/01_type_system.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)"
@@ -62092,6 +63423,83 @@
         ],
         "post": [
           "[Executor 公平性与调度](../../03_advanced/01_async/10_executor_fairness_and_scheduling.md) · [高性能网络服务架构](08_high_performance_network_service_architecture.md) · [Glommio 与 Thread-per-Core](05_glommio_and_thread_per_core.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\04_web_and_networking\\11_kubernetes_rust.md",
+      "layer": "L6",
+      "title": "Rust 服务与 Kubernetes",
+      "positioning": "系统分析 Rust 服务在 Kubernetes 上的工程实践——从容器化、配置注入、健康探针、优雅关闭到资源约束与 operator 扩展，建立可复现的部署决策框架。",
+      "line_count": 652,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 六、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 28,
+          "should_fail": false,
+          "code_preview": "use std::env;  #[derive(Debug, Clone)] struct AppConfig {     database_url: Stri..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 44,
+          "should_fail": false,
+          "code_preview": "// kube-rs Operator 骨架：监听自定义资源 MyApp use kube::{     api::{Api, ListParams, Reso..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "// axum 健康检查示例 use axum::{routing::get, Router}; use std::sync::Arc;  async fn l..."
+        },
+        {
+          "flags": [],
+          "lines": 28,
+          "should_fail": false,
+          "code_preview": "use std::sync::Arc; use std::sync::atomic::{AtomicBool, Ordering}; use tokio::si..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/00_framework/methodology.md",
+        "../../03_advanced/01_async/01_async.md",
+        "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
+        "../../06_ecosystem/07_security_and_cryptography/04_security_architecture.md",
+        "../00_toolchain/02_logging_observability.md",
+        "../00_toolchain/03_devops_and_ci_cd.md",
+        "02_cloud_native.md",
+        "03_web_frameworks.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 25,
+      "pre_post": {
+        "pre": [
+          "[Cloud Native](02_cloud_native.md) · [Web 框架](03_web_frameworks.md) · [Async/Await](../../03_advanced/01_async/01_async.md)"
+        ],
+        "post": [
+          "[Service Mesh](../../06_ecosystem/07_security_and_cryptography/04_security_architecture.md) · [Observability](../00_toolchain/02_logging_observability.md)"
         ]
       },
       "backward_chains": 0,
@@ -64583,7 +65991,7 @@
       "layer": "L6",
       "title": "嵌入式协议与外设驱动",
       "positioning": "系统梳理 Rust 嵌入式生态中对常见片上外设与总线协议的抽象方式，重点说明 `embedded-hal` / `embedded-hal-async` 的 trait 设计、驱动状态机建模、错误处理与边界风险。",
-      "line_count": 957,
+      "line_count": 961,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -64716,9 +66124,9 @@
         },
         {
           "flags": [],
-          "lines": 10,
+          "lines": 14,
           "should_fail": false,
-          "code_preview": "// ❌ 边界示例：错误地在两次传输之间释放 CS fn bad_read(spi: &mut impl SpiBus, cs: &mut impl Outpu..."
+          "code_preview": "// 最小 trait 定义，仅用于示例编译 trait SpiBus { fn write(&mut self, _: &[u8]) -> Result<()..."
         },
         {
           "flags": [],
@@ -65354,7 +66762,7 @@
       "layer": "L6",
       "title": "Data Engineering（数据工程）",
       "positioning": "",
-      "line_count": 1031,
+      "line_count": 1211,
       "theorem_chains": [
         {
           "text": "| Data Engineering（数据工程） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -65396,6 +66804,14 @@
           "flags": [
             "ignore"
           ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// Fluvio 消费示例 use fluvio::{consumer::Record, Offset, TopicProducer}; use future..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
           "lines": 42,
           "should_fail": false,
           "code_preview": "// ETL 转换：用户行为数据清洗 use polars::prelude::*;  fn transform_user_events(df: LazyFra..."
@@ -65415,6 +66831,14 @@
           "lines": 54,
           "should_fail": false,
           "code_preview": "// 完整的 Rust ETL 管道骨架 use tokio::sync::mpsc; use tokio::task;  struct EtlPipeline..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// Arrow RecordBatch 零拷贝示例 use arrow::array::{Int32Array, StringArray}; use arro..."
         },
         {
           "flags": [],
@@ -65443,6 +66867,14 @@
           "lines": 33,
           "should_fail": false,
           "code_preview": "// axum + DataFusion：数据即服务 use axum::{routing::get, Router, extract::Query, Json..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 23,
+          "should_fail": false,
+          "code_preview": "// 并发读取多个 Parquet 文件并合并 use object_store::ObjectStore; use futures::stream::{sel..."
         },
         {
           "flags": [
@@ -66227,7 +67659,7 @@
       "layer": "L6",
       "title": "安全实践：Rust 代码的防御性编程",
       "positioning": "系统讲解 Rust **安全编程实践**——从输入验证、加密使用、到审计和供应链安全，揭示如何在 Rust 的内存安全（Memory Safety）基础上构建全面的安全防御体系。",
-      "line_count": 1105,
+      "line_count": 1319,
       "theorem_chains": [
         {
           "text": "| 安全 实践：Rust 代码的防御性编程 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -66264,6 +67696,54 @@
           "lines": 56,
           "should_fail": false,
           "code_preview": "// 输入验证模式  // 1. 解析而非验证（Parse, Don't Validate） pub struct Email(String);  impl E..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "use std::str::FromStr;  // ✅ Newtype + 解析即验证 #[derive(Debug, Clone)] pub struct ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use subtle::ConstantTimeEq;  // ❌ 非常量时间：早期返回泄露信息 fn bad_verify(a: &[u8], b: &[u8..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：固定 nonce 使用 AES-GCM let nonce = Nonce::from_slice(b\"fixed123\"); let ciph..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "use argon2::{Argon2, PasswordHasher, password_hash::SaltString};  let salt = Sal..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use secrecy::{ExposeSecret, Secret}; use zeroize::Zeroizing;  // ✅ Secret<T>：禁止 ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// ✅ 安全封装：unsafe 块最小化，前置条件文档化 /// # Safety /// - ptr 必须非空且对齐 /// - ptr 指向有效内存且 l..."
         },
         {
           "flags": [
@@ -66329,7 +67809,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 77,
+      "matrix_rows": 103,
       "pre_post": {
         "pre": [
           "[Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Error Handling](../../02_intermediate/03_error_handling/02_error_handling_deep_dive.md)",
@@ -67600,7 +69080,7 @@
       "layer": "L6",
       "title": "性能工程架构：系统级测量、分析与优化",
       "positioning": "",
-      "line_count": 794,
+      "line_count": 1090,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -67641,6 +69121,64 @@
           "lines": 28,
           "should_fail": false,
           "code_preview": "use std::sync::atomic::{AtomicU64, Ordering}; use std::thread;  #[repr(align(64)..."
+        },
+        {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "// ❌ 差布局：大量 padding，64 字节只装 3 个有效字段 #[derive(Default)] struct BadLayout {     fl..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "// ✅ 预分配容量，避免热循环中反复 realloc let mut buf = Vec::with_capacity(1024); for item in ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// 使用 crossbeam::queue::ArrayQueue 做无锁缓冲区池 use crossbeam::queue::ArrayQueue;  st..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "pub fn sum_squares(v: &[f64]) -> f64 {     v.iter().map(|x| x * x).sum() } ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "#![feature(portable_simd)] use std::simd::{f64x4, Simd};  pub fn sum_squares_sim..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// ❌ 过度细分：每个元素都 spawn for item in items {     tokio::spawn(process_one(item)); }..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// ❌ 在 async worker 线程执行 CPU 密集或同步 I/O async fn bad() {     std::thread::sleep(s..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "use tokio_uring::fs::File;  let buf = vec![0u8; 4096]; let file = File::open(\"da..."
         },
         {
           "flags": [
@@ -67698,7 +69236,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 2,
-      "matrix_rows": 44,
+      "matrix_rows": 66,
       "pre_post": {
         "pre": [
           "[Performance Optimization](01_performance_optimization.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Async/Await](../../03_advanced/01_async/01_async.md) · [Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md)"
@@ -79282,6 +80820,131 @@
         ],
         "post": [
           "[Tokio Runtime Internals](../../06_ecosystem/04_web_and_networking/10_tokio_runtime_internals.md) · [Network Programming](../../03_advanced/06_low_level_patterns/04_network_programming.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\03_edition_differences\\01_edition_2021_to_2024.md",
+      "layer": "L7",
+      "title": "Unknown",
+      "positioning": "",
+      "line_count": 340,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 六、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// 2024 Edition：更自然的签名 trait DataSource {     async fn fetch(&self, id: u64) -> ..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "let f = async |x: i32| -> i32 {     tokio::time::sleep(Duration::from_millis(10)..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "// 2021 Edition：在 Edition 2024 下必须写成 unsafe extern extern \"C\" {     fn printf(fm..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "use std::ffi::c_char;  // 2024 Edition unsafe extern \"C\" {     safe fn strlen(s:..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "// 2024 Edition：精确捕获 'a，但不捕获 T fn make_iter<'a, T>(slice: &'a [T]) -> impl Itera..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "if let Some(x) = opt && x > 0 && let Some(y) = f(x) {     println!(\"{} {}\", x, y..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "// 2024 Edition #[unsafe(no_mangle)] pub extern \"C\" fn my_entry() {} ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "// 2024 Edition 下编译失败 extern \"C\" {     fn c_api(); } ..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "unsafe extern \"C\" {     fn c_api(); } ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 3,
+          "should_fail": true,
+          "code_preview": "// edition = \"2021\" 下不可用 if let Some(x) = opt && x > 0 {} ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "fn bad<'a, T>(slice: &'a [T]) -> impl Iterator<Item = &'a T> {     slice.iter() ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../01_foundation/04_control_flow/03_let_chains.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../03_advanced/01_async/01_async.md",
+        "../../03_advanced/01_async/07_async_closures.md",
+        "../../03_advanced/04_ffi/01_rust_ffi.md",
+        "../../03_advanced/04_ffi/05_unsafe_extern_blocks.md",
+        "../../06_ecosystem/01_cargo/03_resolver_v3_public_feature_unification.md",
+        "../00_version_tracking/rust_1_90_stabilized.md",
+        "../02_preview_features/25_gen_blocks_preview.md"
+      ],
+      "transitions": 2,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 15,
+      "pre_post": {
+        "pre": [
+          "[Editions](../../00_meta/01_terminology/01_terminology_glossary.md) · [Async/Await](../../03_advanced/01_async/01_async.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) · [Let Chains](../../01_foundation/04_control_flow/03_let_chains.md)"
+        ],
+        "post": [
+          "[Async Closures](../../03_advanced/01_async/07_async_closures.md) · [Unsafe Extern Blocks](../../03_advanced/04_ffi/05_unsafe_extern_blocks.md) · [Rust 1.85 Stabilized Features](../00_version_tracking/rust_1_90_stabilized.md) · [Rust 1.88 Stabilized Features](../00_version_tracking/rust_1_90_stabilized.md)"
         ]
       },
       "backward_chains": 0,

@@ -7,7 +7,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **A+P** — Application + Procedure
 > **双维定位**: A×Eva — 评估宏（Macro）使用场景与限制
-> **前置依赖**: [过程宏（Procedural Macro）](02_proc_macro.md) · [宏术语表](06_macro_glossary.md)
+> **前置依赖**: [过程宏（Procedural Macro）](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) · [宏术语表](06_macro_glossary.md)
 > **后置概念**: [宏（Macro）卫生性](09_macro_hygiene.md) · [生产级宏开发](05_production_grade_macro_development.md)
 > **定理链**: Common Question ⟹ Mechanism Explanation ⟹ Best Practice
 >

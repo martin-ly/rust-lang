@@ -137,7 +137,7 @@ graph TB
 |:---|:---|:---|:---|:---|:---|
 | [01_toolchain.md](00_toolchain/01_toolchain.md) | 工具链 | Cargo、SemVer、Clippy、交叉编译、Miri | ✅ v1.0 | L4 类型论(编译器)、L3 Unsafe(Miri) | 可复现构建、质量门禁 |
 | [02_patterns.md](03_design_patterns/01_patterns.md) | 设计模式 | Typestate、Builder、Newtype、RAII、Zero-cost | ✅ v1.0 | L1 Ownership、L2 Trait、L5 对比 | 可维护代码结构 |
-| [03_core_crates.md](02_core_crates/01_core_crates.md) | 核心库谱系 | serde、tokio、axum、clap、tracing、sqlx 等 40+ crate | ✅ v1.0 | L1-L5 全部概念 | 工程选型决策 |
+| [03_core_crates.md](02_core_crates/01_core_crates.md) | 核心库谱系索引 | serde、tokio、clap、tracing、reqwest、axum、sqlx 等核心 crate 导航 | ✅ v2.0 | L1-L5 全部概念 | 工程选型决策 |
 | [04_application_domains.md](06_data_and_distributed/01_application_domains.md) | 应用主题 | Web、CLI、嵌入式、游戏、区块链、数据工程、系统、GUI | ✅ v1.0 | L1-L5 全部概念 + 核心 crate | 领域工程落地 |
 | [05_formal_ecosystem_tower.md](08_formal_verification/01_formal_ecosystem_tower.md) | 形式化生态塔 | 核心 crate 的形式化根基/可组合性/可观测性三维评估；L0-L4 形式化分层 | ✅ v1.0 | L4 类型论、L3 Async/Unsafe | 形式化选型决策 |
 | [06_blockchain.md](11_domain_applications/01_blockchain.md) | 区块链合约安全 | Solana/Substrate/Near、合约安全形式化、Kani 验证、无重入/溢出 | ✅ v1.0 | L1 Ownership、L3 Unsafe、L4 RustBelt | 链上安全保证 |

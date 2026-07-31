@@ -8,7 +8,7 @@
 
 >
 > **EN**: Security Practices
-> **Summary**: Security Practices — Security practices: input validation, cryptography, auditing, and supply-chain security atop memory safety.
+> **Summary**: Security Practices — defensive programming in Rust: systematic input validation, cryptographic misuse prevention, secret handling with secrecy/zeroize, sandboxing and memory-safety boundaries, and supply-chain security with cargo-audit/vet/deny, atop memory safety.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: L3-L5
@@ -24,10 +24,18 @@
 
 > **来源**: [Rust Secure Code Guidelines](https://anssi-fr.github.io/rust-guide/) ·
 > [OWASP Rust Security](https://owasp.org/www-project-devsecops-guideline/latest/02a-Static-Application-Security-Testing) ·
-> [cargo-audit [来源: [cargo-audit](https://github.com/RustSec/rustsec/tree/main/cargo-audit)]](<https://github.com/RustSec/rustsec/tree/main/cargo-audit>) ·
+> [OWASP Input Validation Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html) ·
+> [OWASP Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html) ·
+> [cargo-audit](https://github.com/RustSec/rustsec/tree/main/cargo-audit) ·
+> [cargo-vet](https://mozilla.github.io/cargo-vet/) ·
+> [cargo-deny](https://embarkstudios.github.io/cargo-deny/) ·
 > [Rust CVEs](https://nvd.nist.gov/vuln/search/results?form_type=Basic&results_type=overview&search_type=all&isCpeNameSearch=false&query=rust) ·
 > [ANSSI Rust Guidelines](https://messervices.cyber.gouv.fr/documents-guides/anssi-guide-programming_rules_to_develop_secure_applications_with_rust-v1.0.pdf) ·
-> [Wikipedia — Defense in Depth](https://en.wikipedia.org/wiki/Defense_in_depth_(computing))
+> [Wikipedia — Defense in Depth](https://en.wikipedia.org/wiki/Defense_in_depth_(computing)) ·
+> [secrecy crate](https://docs.rs/secrecy/) ·
+> [zeroize crate](https://docs.rs/zeroize/) ·
+> [subtle crate](https://docs.rs/subtle/) ·
+> [ring crate](https://docs.rs/ring/)
 > **前置依赖**: [Type Theory](../../04_formal/00_type_theory/01_type_theory.md)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
@@ -399,6 +407,207 @@ Rust 安全审计工具:
 
 > **审计洞察**: Rust 的**工具链生态**使安全审计可以**自动化**——从依赖漏洞到运行时（Runtime）未定义行为，覆盖完整攻击面。
 > [来源: [cargo-geiger](https://github.com/rust-secure-code/cargo-geiger)]
+
+---
+
+### 2.4 输入验证系统化
+
+> **“解析而非验证”（Parse, Don't Validate）** 是 Rust 安全的核心模式：通过类型系统使非法状态不可表示，把验证前置到解析阶段。
+
+```rust,ignore
+use std::str::FromStr;
+
+// ✅ Newtype + 解析即验证
+#[derive(Debug, Clone)]
+pub struct Email(String);
+
+#[derive(Debug)]
+pub struct InvalidEmail;
+
+impl FromStr for Email {
+    type Err = InvalidEmail;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        if s.contains('@') && s.len() < 254 {
+            Ok(Email(s.to_lowercase()))
+        } else {
+            Err(InvalidEmail)
+        }
+    }
+}
+
+// 使用
+let email: Email = "user@example.com".parse()?;
+// 非法字符串无法构造 Email 类型
+```
+
+**系统化输入验证清单**：
+
+| 威胁 | 防御手段 | Rust 做法 |
+|:---|:---|:---|
+| 注入攻击 | 拒绝控制字符、长度限制、白名单 | `chars().any(|c| c.is_control())` + `MAX_LEN` |
+| 整数溢出 | 使用 `checked_add`/`saturating_add` | 标准库溢出检查（debug panic / release wrap，建议显式处理） |
+| 反序列化炸弹 | 限制递归深度、容器大小、字符串长度 | serde `deserialize_with` 自定义校验 |
+| 拒绝服务 | 超时、资源配额、流控 | `tokio::time::timeout`、`Semaphore` |
+| 路径遍历 | 使用 `std::path::Path::canonicalize` + 白名单前缀 | 拒绝 `..` 与绝对路径拼接 |
+
+> **关键洞察**: 输入验证不是“加个 if”，而是**把已验证状态编码进类型**。调用者拿到 `Email` 就无需再次验证；未通过验证的值无法进入系统核心。
+> [来源: [Parse, Don't Validate — Alexis King](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)] · [来源: [OWASP Input Validation](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html)]
+
+---
+
+### 2.5 密码学 misuse：不要重复造轮子
+
+> **密码学头号禁忌是手写算法**。Rust 生态提供经过审计的实现：`ring`、`rustls`、`aes-gcm`、`chacha20poly1305`、`sha2`、`blake3`、`ed25519-dalek`、`rand::rngs::OsRng`。
+
+**常量时间比较防御时序攻击**：
+
+```rust,ignore
+use subtle::ConstantTimeEq;
+
+// ❌ 非常量时间：早期返回泄露信息
+fn bad_verify(a: &[u8], b: &[u8]) -> bool {
+    a == b
+}
+
+// ✅ 常量时间
+fn good_verify(a: &[u8], b: &[u8]) -> bool {
+    a.ct_eq(b).into()
+}
+```
+
+**nonce/IV 复用是灾难**：
+
+```rust,ignore
+// ❌ 错误：固定 nonce 使用 AES-GCM
+let nonce = Nonce::from_slice(b"fixed123");
+let ciphertext = cipher.encrypt(nonce, plaintext)?;
+
+// ✅ 每次加密使用唯一 nonce（通常随机或计数器）
+let mut nonce_bytes = [0u8; 12];
+OsRng.fill_bytes(&mut nonce_bytes);
+let nonce = Nonce::from_slice(&nonce_bytes);
+let ciphertext = cipher.encrypt(nonce, plaintext)?;
+```
+
+> 判定依据：AES-GCM 的 nonce 复用会导致密钥流 XOR，攻击者可直接恢复明文。永远不要让 nonce 重复。
+
+**密钥派生**：原始密码不能直接当密钥，应使用 `argon2` 或 `pbkdf2`：
+
+```rust,ignore
+use argon2::{Argon2, PasswordHasher, password_hash::SaltString};
+
+let salt = SaltString::generate(&mut OsRng);
+let argon2 = Argon2::default();
+let password_hash = argon2.hash_password(password.as_bytes(), &salt)?.to_string();
+```
+
+> **关键洞察**: Rust 的类型系统能防止密钥/密文混淆，但无法防止开发者**复用 nonce、使用固定 IV、手写流密码**。密码学安全依赖“使用经过审计的库 + 遵循参数化最佳实践”。
+> [来源: [ring crate](https://docs.rs/ring/)] · [来源: [subtle crate](https://docs.rs/subtle/)] · [来源: [OWASP Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)]
+
+---
+
+### 2.6 Secret 处理：内存中的敏感数据
+
+> **普通 `String`/`Vec<u8>` 在 drop 时不会覆盖内存**，密码可能残留在堆上，被 core dump、交换分区或后续分配读取。应使用 `secrecy` + `zeroize`。
+
+```rust,ignore
+use secrecy::{ExposeSecret, Secret};
+use zeroize::Zeroizing;
+
+// ✅ Secret<T>：禁止 Debug/Display 暴露，Drop 时 zeroize
+let password = Secret::new(String::from("super_secret_123"));
+// println!("{}", password); // 编译错误：Display 被隐藏
+let _ = password.expose_secret(); // 显式暴露，作用域内用完即清
+
+// ✅ Zeroizing<T>：栈/堆上敏感数组自动清零
+let mut key = Zeroizing::new([0u8; 32]);
+OsRng.fill_bytes(&mut *key);
+// key 离开作用域时自动 zeroize
+```
+
+**深层防护**：
+
+| 层级 | 技术 | 说明 |
+|:---|:---|:---|
+| 防止交换 | `mlock` / `mlock2` | 将敏感页锁定在物理内存 |
+| 防止 core dump | `madvise(MADV_DONTDUMP)` | 排除敏感内存 |
+| 匿名内存 | `memfd_secret`（Linux 5.14+） | 仅进程可见，禁止内核直接读取 |
+| 日志防泄露 | `secrecy::Secret` | Debug/Display 默认隐藏 |
+| 编译期防护 | 避免 secret 进入 `.rodata` | 常量字符串会进入只读段 |
+
+> **关键洞察**: `zeroize` 的价值不仅是“调用一次清零”，而是把清零语义绑定到类型生命周期。`Zeroizing<T>` 的 Drop 保证即使发生 panic，密钥也不会残留于 Rust 栈/堆。
+> [来源: [secrecy crate](https://docs.rs/secrecy/)] · [来源: [zeroize crate](https://docs.rs/zeroize/)] · [来源: [CWE-226](https://cwe.mitre.org/data/definitions/226.html)]
+
+---
+
+### 2.7 沙箱与边界安全
+
+> **Rust 的内存安全只覆盖 safe 子集**。FFI、网络输入、WASM 边界、序列化边界都是漏洞富集区，需要沙箱与显式契约。
+
+**FFI 边界 checklist**：
+
+```rust,ignore
+// ✅ 安全封装：unsafe 块最小化，前置条件文档化
+/// # Safety
+/// - ptr 必须非空且对齐
+/// - ptr 指向有效内存且 len <= 实际长度
+/// - 调用期间无其他可变引用重叠
+unsafe fn process_raw(ptr: *const u8, len: usize) -> &[u8] {
+    std::slice::from_raw_parts(ptr, len)
+}
+```
+
+| 边界类型 | 风险 | 缓解 |
+|:---|:---|:---|
+| C FFI | 悬挂指针、ABI 不匹配 | `bindgen`/`cbindgen`，显式 `repr(C)`，`unsafe` 封装层 |
+| 网络输入 | 解析器崩溃、协议状态机绕过 | 长度限制、状态机穷尽匹配、fuzzing |
+| 反序列化 | 栈溢出、类型混淆 | `serde` + 自定义校验、限制递归深度 |
+| WASM | 宿主函数注入、资源耗尽 | `wasmtime` 燃料限制、能力模型 |
+| 子进程 | 命令注入 | `std::process::Command` 参数列表而非 shell 字符串 |
+
+> **关键洞察**: 沙箱不是替代安全编码，而是**纵深防御**的最后一层。即使 safe Rust 代码存在逻辑漏洞，沙箱也能限制爆炸半径。
+> [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)] · [来源: [ANSSI Rust Guide](https://anssi-fr.github.io/rust-guide/)] · [来源: [wasmtime docs](https://docs.rs/wasmtime/)]
+
+---
+
+### 2.8 供应链安全工具链深化
+
+> **平均 Rust 项目依赖 100+ crates**。依赖攻击面包括 typo-squatting、恶意 build.rs、维护者账户接管、废弃依赖漏洞。
+
+```bash
+# cargo-audit：扫描已知 CVE/RUSTSEC
+cargo audit
+
+# cargo-deny：策略执行（许可证、漏洞、来源、重复依赖）
+cargo deny check advisories
+
+# cargo-vet：人工/聚合审计追踪
+cargo vet init
+cargo vet inspect tokio@1.53.0
+cargo vet certify tokio@1.53.0 --criteria safe-to-deploy
+
+# cargo-geiger：统计 unsafe 密度
+cargo geiger
+
+# 锁定依赖与来源
+cargo tree --depth 2
+cargo tree -d  # 重复依赖
+```
+
+**供应链最佳实践**：
+
+| 实践 | 工具/机制 | 频率 |
+|:---|:---|:---|
+| 漏洞扫描 | `cargo audit` / `cargo deny` | 每次 CI / 每日 |
+| 审计追踪 | `cargo vet` + 公共审计导入 | 新增依赖时 |
+| unsafe 审计 | `cargo geiger` + 人工 review | 季度 |
+| 依赖最小化 | `cargo tree --depth` 评审 | 设计评审 |
+| 锁定文件 | `Cargo.lock` 提交 | 每次 release |
+| 私有 registry | Nexus / Cloudsmith / 自建 | 企业环境 |
+| 签名验证 | Sigstore / crates.io 发布签名 | 逐步落地 |
+
+> **关键洞察**: `cargo audit` 查已知漏洞，`cargo vet` 建信任链，`cargo deny` 执行策略。三者叠加才能把供应链风险从“事后发现”转为“事前门禁”。
+> [来源: [RustSec](https://rustsec.org/)] · [来源: [cargo-vet docs](https://mozilla.github.io/cargo-vet/)] · [来源: [cargo-deny docs](https://embarkstudios.github.io/cargo-deny/)] · [来源: [Sigstore](https://www.sigstore.dev/)]
 
 ---
 
@@ -882,11 +1091,11 @@ cargo audit
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 10](../../00_meta/02_sources/05_international_authority_index.md)；2026-07-31 Wave D 扩展输入验证、密码学 misuse、secret 处理、沙箱边界与供应链工具链
 
-**文档版本**: 1.1
-**最后更新**: 2026-06-20
-**状态**: ✅ 概念文件创建完成
+**文档版本**: 1.2
+**最后更新**: 2026-07-31
+**状态**: ✅ Wave D 扩展完成
 
 ---
 
@@ -1092,9 +1301,14 @@ mindmap
       不安全边界的管理
       供应链安全
     技术细节
-      输入验证与清洗
-      加密与安全原语
+      输入验证系统化
+      Parse Don't Validate
+      密码学 misuse 防御
+      常量时间比较
+      Secret 处理 zeroize
+      沙箱与边界安全
       审计工具链
+      cargo audit vet deny
     供应链安全与 CVE 跟踪
       Cargo
       Cargo CVE-2026-5222
