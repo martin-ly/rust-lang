@@ -50,6 +50,7 @@
   - [三、RTT 与 semihosting 对比](#三rtt-与-semihosting-对比)
     - [3.1 RTT（rtt-target / rtt-log）](#31-rttrtt-target--rtt-log)
     - [3.2 Semihosting](#32-semihosting)
+    - [3.2.1 Semihosting 权威来源映射](#321-semihosting-权威来源映射)
     - [3.3 UART 日志](#33-uart-日志)
     - [3.4 四者综合对比](#34-四者综合对比)
   - [四、embedded-test](#四embedded-test)
@@ -60,6 +61,7 @@
     - [5.1 qemu-system-arm / RISC-V](#51-qemu-system-arm--risc-v)
     - [5.2 Semihosting exit 与 GDB stub](#52-semihosting-exit-与-gdb-stub)
     - [5.3 与 cargo 集成](#53-与-cargo-集成)
+    - [5.4 QEMU 仿真权威来源映射](#54-qemu-仿真权威来源映射)
   - [六、真实硬件调试策略](#六真实硬件调试策略)
     - [6.1 printf 式追踪](#61-printf-式追踪)
     - [6.2 ITM / SWO](#62-itm--swo)
@@ -317,6 +319,21 @@ Semihosting 缺点：
 - **不适合生产**：会显著改变时序，无法在产品中启用；
 - **仅当调试器连接时工作**。
 
+### 3.2.1 Semihosting 权威来源映射
+
+> [The Embedded Rust Book — Semihosting](https://docs.rust-embedded.org/book/start/semihosting.html) 与 ARM 半主机规范定义了目标固件通过调试器调用主机服务的标准接口。在 ARM Cortex-M 上，这一机制通常通过 `BKPT 0xAB` 陷阱实现，对应的 Rust 封装为 [`cortex-m-semihosting`](https://docs.rs/cortex-m-semihosting/)。
+
+| 能力 | 标准/实现 | 典型用途 |
+|:---|:---|:---|
+| 字符/字符串输出 | `cortex_m_semihosting::hprintln!` | 启动阶段简单日志 |
+| 主机文件 I/O | `cortex_m_semihosting::fs` / `sh` | 测试固件读取参考数据 |
+| 程序退出 | `cortex_m_semihosting::debug::exit` | QEMU/测试框架报告结果 |
+| 调试器依赖 | ARM Semihosting ABI | 仅在连接调试器时工作 |
+
+判定依据：Semihosting 是“零外设”调试输出的权威方案，但因其陷阱开销，只适用于 bring-up、CI/QEMU 与测试退出场景，不能用于生产实时路径。
+
+> **来源**: [The Embedded Rust Book — Semihosting](https://docs.rust-embedded.org/book/start/semihosting.html) · [ARM Semihosting ABI](https://developer.arm.com/documentation/100863/latest/) · [cortex-m-semihosting crate](https://docs.rs/cortex-m-semihosting/)
+
 ### 3.3 UART 日志
 
 UART（通用异步收发器）是最传统的嵌入式日志输出方式：
@@ -485,6 +502,20 @@ runner = "qemu-system-arm -machine micro:bit -semihosting -kernel"
 ```
 
 然后 `cargo run` 会自动调用 QEMU。配合 `cortex-m-rt` 的 `exit` 支持，可实现“编译-仿真-退出”一键闭环。
+
+### 5.4 QEMU 仿真权威来源映射
+
+> [QEMU](https://www.qemu.org/) 是嵌入式开发中功能级仿真的权威工具。[The Embedded Rust Book — QEMU](https://docs.rust-embedded.org/book/start/qemu.html) 展示了如何在不连接真实硬件的情况下验证启动流程、`semihosting` 输出与单元测试。QEMU 的机器模型由 `qemu-system-arm -machine help` / `qemu-system-riscv32 -machine help` 列出，选择模型时必须确认外设覆盖度与 semihosting/GDB stub 支持。
+
+| 仿真目标 | QEMU 机器模型 | 关键验证点 |
+|:---|:---|:---|
+| ARM Cortex-M (micro:bit / nRF51) | `micro:bit`、`netduinoplus2` 等 | 启动流程、semihosting `exit`、GDB stub |
+| RISC-V (HiFive1 / E310) | `sifive_e`、`sifive_u` | 启动代码、中断向量、外设寄存器 |
+| 自定义目标 | 自定义 device tree / machine 参数 | 链接脚本、内存布局、启动顺序 |
+
+判定依据：QEMU 适合作为算法与启动流程的回归平台，但**不能替代真实硬件验证**——它不精确建模外设时序、硬件 errata 与低功耗行为。最终测试必须在目标硬件上完成。
+
+> **来源**: [QEMU 官方文档](https://www.qemu.org/docs/master/) · [The Embedded Rust Book — QEMU](https://docs.rust-embedded.org/book/start/qemu.html) · [cortex-m-quickstart QEMU 示例](https://github.com/rust-embedded/cortex-m-quickstart)
 
 ---
 

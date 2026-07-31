@@ -79,6 +79,7 @@ mindmap
     - [8.3 边界测试：CCM 上放 DMA 缓冲区（运行时静默错误）](#83-边界测试ccm-上放-dma-缓冲区运行时静默错误)
   - [九、链接属性与链接器指令矩阵](#九链接属性与链接器指令矩阵)
   - [十、决策树：启动失败诊断](#十决策树启动失败诊断)
+  - [附录：Embedonomicon 映射](#附录embedonomicon-映射)
   - [十一、相关概念](#十一相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
@@ -451,6 +452,23 @@ graph TD
     J -->|是| K[时钟未使能/外设地址错误/MPU 配置]
     J -->|否| L[检查 main 返回或栈溢出]
 ```
+
+---
+
+## 附录：Embedonomicon 映射
+
+> [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) 是 Rust Embedded Working Group 维护的裸机底层指南，专注于“如何从零构建一个可启动的 `#![no_std]` 程序”。本页内容与其核心主题对应如下：
+
+| 本页主题 | Embedonomicon 核心内容 | 对应本页章节 |
+|:---|:---|:---|
+| 自定义 target 与 `build-std` | 创建 target JSON、选择链接器、启用 `build-std` | [八、`build-std` 与自定义 target JSON](23_no_std_and_bare_metal_idioms.md#八build-std-与自定义-target-json)（参见 [`no_std` 与裸机惯用法](23_no_std_and_bare_metal_idioms.md)） |
+| 链接脚本与内存布局 | `MEMORY`、`SECTIONS`、`AT>`、LMA/VMA 分离、KEEP/ALIGN | [三、链接脚本核心](#三链接脚本核心) |
+| 启动序列与 `_start` | 复位向量、`.data`/`.bss` 初始化、调用 `main` | [二、启动流程：从复位到 main](#二启动流程从复位到-main) |
+| 自定义运行时 crate | `#[panic_handler]`、向量表、链接符号约定、位置无关代码 | [四、Rust 段属性与链接器提示](#四rust-段属性与链接器提示)、[五、位置无关代码 ROPI/RWPI](#五位置无关代码-ropirwpi) |
+
+判定依据：当 `cortex-m-rt`/`riscv-rt` 的默认行为不满足需求时，Embedonomicon 是手写启动代码与链接脚本的首要权威；本页是其核心概念在 Rust 1.97 时代的精炼版与故障诊断补充。
+
+> **来源**: [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/)
 
 ---
 

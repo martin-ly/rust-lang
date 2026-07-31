@@ -25,6 +25,7 @@
 ## 📑 目录
 
 - [声明宏：`macro_rules!`、卫生性与 TT-munching](#声明宏macro_rules卫生性与-tt-munching)
+  - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 声明宏的定位](#11-声明宏的定位)
     - [1.2 `macro_rules!` 基本结构](#12-macro_rules-基本结构)
@@ -219,6 +220,7 @@ let v = vec_like![1, 2, 3,];
 ```
 
 重复分隔符：
+
 - `,` 逗号分隔
 - `;` 分号分隔
 - `=>` 箭头分隔
@@ -597,11 +599,11 @@ fn main() {
 
 | 来源 | 类型 | 链接 | 覆盖主题 |
 |---|---|---|---|
-| Rust Reference — Macros by Example | P1 | https://doc.rust-lang.org/reference/macros-by-example.html | 语法、片段、重复、卫生性 |
-| Rust Reference — Macros | P1 | https://doc.rust-lang.org/reference/macros.html | 宏系统总览 |
-| TRPL Ch19 — Macros | P1 | https://doc.rust-lang.org/book/ch19-06-macros.html | 入门与使用模式 |
-| The Little Book of Rust Macros | P2 | https://veykril.github.io/tlborm/ | 高级技巧、陷阱 |
-| Rust API Guidelines — Macros | P2 | https://rust-lang.github.io/api-guidelines/macros.html | API 设计 |
+| Rust Reference — Macros by Example | P1 | <https://doc.rust-lang.org/reference/macros-by-example.html> | 语法、片段、重复、卫生性 |
+| Rust Reference — Macros | P1 | <https://doc.rust-lang.org/reference/macros.html> | 宏系统总览 |
+| TRPL Ch19 — Macros | P1 | <https://doc.rust-lang.org/book/ch19-06-macros.html> | 入门与使用模式 |
+| The Little Book of Rust Macros | P2 | <https://veykril.github.io/tlborm/> | 高级技巧、陷阱 |
+| Rust API Guidelines — Macros | P2 | <https://rust-lang.github.io/api-guidelines/macros.html> | API 设计 |
 
 ---
 

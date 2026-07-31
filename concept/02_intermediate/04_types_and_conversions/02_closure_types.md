@@ -14,6 +14,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为学习入口 stub；完整概念解释请见：
+>
 > - [`concept/02_intermediate/07_iterators_and_closures/02_closures.md`](../07_iterators_and_closures/02_closures.md) — Rust 闭包唯一权威页
 >
 > 根据 AGENTS.md §2 Canonical 规则，通用 Rust 闭包概念解释统一维护在 `concept/02_intermediate/07_iterators_and_closures/02_closures.md`；本文件仅保留路径与链接。

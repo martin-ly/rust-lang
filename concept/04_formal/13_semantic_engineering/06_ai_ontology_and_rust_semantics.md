@@ -12,20 +12,33 @@
 
 ## 📑 目录
 
-- [AI 本体论与 Rust 语义工程](#ai-本体论与-rust-语义工程)
-  - [一、为什么需要 AI 本体论来刻画 Rust 语义？](#一为什么需要-ai-本体论来刻画-rust-语义)
-  - [二、核心概念栈](#二核心概念栈)
-    - [2.1 本体（Ontology）](#21-本体ontology)
-    - [2.2 知识图谱（Knowledge Graph）](#22-知识图谱knowledge-graph)
-    - [2.3 形式语义嵌入](#23-形式语义嵌入)
-    - [2.4 LLM 辅助的语义提取](#24-llm-辅助的语义提取)
-  - [三、Rust 语义的 KG 建模实践](#三rust-语义的-kg-建模实践)
-  - [四、从自然语言到形式契约](#四从自然语言到形式契约)
-  - [五、反例与局限](#五反例与局限)
-  - [六、关键属性](#六关键属性)
-  - [七、思维导图](#七思维导图)
-  - [八、国际权威来源](#八国际权威来源)
-  - [九、嵌入式测验](#九嵌入式测验)
+- [📑 目录](#-目录)
+- [一、为什么需要 AI 本体论来刻画 Rust 语义？](#一为什么需要-ai-本体论来刻画-rust-语义)
+- [二、核心概念栈](#二核心概念栈)
+  - [2.1 本体（Ontology）](#21-本体ontology)
+  - [2.2 知识图谱（Knowledge Graph）](#22-知识图谱knowledge-graph)
+  - [2.3 形式语义嵌入](#23-形式语义嵌入)
+  - [2.4 LLM 辅助的语义提取](#24-llm-辅助的语义提取)
+- [三、Rust 语义的 KG 建模实践](#三rust-语义的-kg-建模实践)
+- [四、从自然语言到形式契约](#四从自然语言到形式契约)
+- [五、反例与局限](#五反例与局限)
+  - [反例 1：LLM 幻觉导致错误关系](#反例-1llm-幻觉导致错误关系)
+  - [反例 2：形式化过度导致维护爆炸](#反例-2形式化过度导致维护爆炸)
+  - [反例 3：把动态运行信息误认为静态语义](#反例-3把动态运行信息误认为静态语义)
+- [六、关键属性](#六关键属性)
+- [七、思维导图](#七思维导图)
+- [八、国际权威来源](#八国际权威来源)
+- [九、嵌入式测验](#九嵌入式测验)
+  - [测验 1：本体作用](#测验-1本体作用)
+  - [测验 2：谓词语义](#测验-2谓词语义)
+  - [测验 3：LLM 局限](#测验-3llm-局限)
+- [十、Rust 核心概念与国际顶层本体的对齐](#十rust-核心概念与国际顶层本体的对齐)
+  - [10.1 核心概念映射表](#101-核心概念映射表)
+  - [10.2 映射的工程意义](#102-映射的工程意义)
+- [十一、Curry-Howard 视角：类型即命题、程序即证明](#十一curry-howard-视角类型即命题程序即证明)
+  - [11.1 与 OWL 公理的对照](#111-与-owl-公理的对照)
+  - [11.2 程序作为 OWL 实例](#112-程序作为-owl-实例)
+  - [11.3 从 Curry-Howard 到 KG 质量门](#113-从-curry-howard-到-kg-质量门)
 
 ---
 
@@ -36,7 +49,7 @@ Rust 的语义空间包含多个异构模型：
 - **类型系统**（trait、lifetime、泛型）
 - **所有权与借用**（线性/仿射逻辑、别名模型）
 - **并发语义**（Send/Sync、Future、Waker）
-- ** unsafe 边界**（provenance、内存模型、FFI）
+- **unsafe 边界**（provenance、内存模型、FFI）
 - **工程生态**（crate、macro、async runtime）
 
 这些模型之间既有蕴含关系（如 `Send` 是类型系统的并发投影），也有互斥关系（如 `&mut T` 与同时存在的 `*mut T` 写操作）。传统的自然语言文档难以保证**一致性、可推理性、可扩展性**。AI 本体论提供：
@@ -208,6 +221,10 @@ mindmap
 - [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Oxide: The Essence of Rust](https://arxiv.org/abs/1903.00982)
 - [Project KG Ontology — kg_ontology_v2.md](../../00_meta/knowledge_topology/kg_ontology_v2.md)
+- [Basic Formal Ontology (BFO)](https://basic-formal-ontology.org/)
+- [DOLCE — Descriptive Ontology for Linguistic and Cognitive Engineering](http://www.loa.istc.cnr.it/old/DOLCE.html)
+- [SUMO — Suggested Upper Merged Ontology](https://www.ontologyportal.org/)
+- [Curry-Howard Correspondence — Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/type-theory/)
 
 ---
 
@@ -263,4 +280,94 @@ AI 本体论在 Rust 知识体系中的主要价值是什么？
 
 ---
 
-> **过渡**: 理解 AI 本体论与 KG 后，可进一步学习 [Knowledge Graph Ontology](../../00_meta/knowledge_topology/kg_ontology_v2.md) 与 [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md)。
+## 十、Rust 核心概念与国际顶层本体的对齐
+
+将 Rust 语义概念映射到国际通用的顶层本体（upper ontology），可以在跨语言、跨项目的知识集成中保持语义稳定。以下选取三种影响力最大的顶层本体：
+
+- **BFO（Basic Formal Ontology）**：以连续体（continuant）与发生（occurrent）为核心，强调实体在时间中的存在方式。
+- **DOLCE（Descriptive Ontology for Linguistic and Cognitive Engineering）**：认知语言学导向，区分物理对象、非物理对象、抽象、质量、时间区间等。
+- **SUMO（Suggested Upper Merged Ontology）**：面向推理的大型上层本体，包含 `Entity`、`Class`、`Attribute`、`Process` 等高层类。
+
+### 10.1 核心概念映射表
+
+| Rust concept | BFO class | DOLCE class | SUMO class | Notes |
+|:---|:---|:---|:---|:---|
+| `Type` | `bfo:GenericallyDependentContinuant`（作为 Information Content Entity） | `dolce:Abstract` | `sumo:SetOrClass` | 类型是规范/共相，具体值是它的实例；在 OWL 中对应一个 `owl:Class`。 |
+| `Value` | `bfo:SpecificallyDependentContinuant` 或 `bfo:IndependentContinuant`（运行时对象） | `dolce:PhysicalObject` / `dolce:Quality` | `sumo:Entity` | 运行时类型的具体居民；原始值更像 `Quality`，堆分配值更像 `Object`。 |
+| `Lifetime` | `bfo:TemporalRegion` | `dolce:TimeInterval` | `sumo:TimeInterval` | 借用/引用有效的时间区间；`'static` 对应整个程序执行时间。 |
+| `Ownership` | `bfo:Role`（实现性关系） | `dolce:SocialObject` / `dolce:Quality` | `sumo:Property` | 值在任意时刻有且仅有一个所有者；所有者是可转让的 `Role`。 |
+| `Borrow` | `bfo:RelationalQuality` 或 `bfo:Role` | `dolce:Perdurant` / `dolce:State` | `sumo:Permission` | 在作用域内临时获得访问权而不转移所有权；是一种受时间约束的许可。 |
+| `Trait` | `bfo:GenericallyDependentContinuant` | `dolce:Abstract` | `sumo:Attribute` / `sumo:Class` | 行为约束的接口规范；`impl Trait for Type` 相当于把类型归入该属性类。 |
+| `Function` | `bfo:GenericallyDependentContinuant`（ICE）；运行时可调用角色对应 `bfo:Function` | `dolce:Process` / `dolce:Abstract` | `sumo:Function` / `sumo:Procedure` | 函数体是信息内容实体；一次调用是一个 `Process`。 |
+| `Module` | `bfo:GenericallyDependentContinuant`（ICE） | `dolce:NonPhysicalObject` / `dolce:Abstract` | `sumo:Collection` | 命名空间与可见性边界，本质上是 items 的集合。 |
+| `Crate` | `bfo:GenericallyDependentContinuant`（ICE） | `dolce:NonPhysicalObject` / `dolce:Artifact` | `sumo:ComputerProgram` / `sumo:Artifact` | 编译与分发单元；作为可被版本化的工程制品。 |
+| `Unsafe` | `bfo:Role` / `bfo:Disposition` | `dolce:Quality` | `sumo:Attribute` | 标记一段代码或操作的安全保证超出了类型系统可验证范围。 |
+
+### 10.2 映射的工程意义
+
+1. **跨项目对齐**：当把 Rust 知识与 C++/Java/Python 知识图谱合并时，顶层本体的映射减少了术语冲突。例如 Rust `Lifetime` 与 C++ 对象生存期都可落在 `bfo:TemporalRegion` 下。
+2. **推理边界清晰化**：BFO 区分 `Continuant` 与 `Occurrent` 提醒我们：类型系统约束是静态的 ICE（continuant），而借用检查的实际执行是编译期过程（occurrent）。
+3. **LLM 消歧**：在提示中给出 "map this Rust concept to BFO/DOLCE/SUMO" 的约束，可降低模型把 `Ownership` 与 `Borrow` 混为一谈的概率。
+
+> 注意：任何跨本体的映射都是**近似**的。Rust 的 `Ownership` 并非法学意义上的财产权，也不是纯逻辑关系；它更接近一种编译期可静态检查的 **资源管理角色**。映射时应保留 `skos:scopeNote` 说明近似程度。
+
+---
+
+## 十一、Curry-Howard 视角：类型即命题、程序即证明
+
+Rust 的类型系统与逻辑之间存在着深刻的 **Curry-Howard 对应**（Curry-Howard correspondence）：
+
+| 逻辑侧 | 类型侧 / Rust 侧 |
+|:---|:---|
+| 命题（Proposition） | 类型 `T` |
+| 证明（Proof） | 具有类型 `T` 的值/表达式 `e : T` |
+| 蕴涵 `A ⇒ B` | 函数类型 `fn(A) -> B` |
+| 合取 `A ∧ B` | 乘积类型 `(A, B)` |
+| 析取 `A ∨ B` | 和类型 `enum { A, B }` |
+| 矛盾 `⊥` | 空类型 `!`（never type） |
+| 全称量词 `∀x. P(x)` | 泛型 `fn<T>(x: T) -> ...` |
+
+### 11.1 与 OWL 公理的对照
+
+在 OWL 中，一条公理如 `SubClassOf(A B)` 表示 "凡是 A 都是 B"，即 `A ⇒ B`。这与 Rust 中的 **子类型 / trait bound** 惊人地相似：
+
+```turtle
+# OWL：A 蕴涵 B
+ex:A rdfs:subClassOf ex:B .
+
+# Rust 对应：凡是实现 A 的类型也满足 B
+fn use_a<T: A + B>(x: T) { }
+```
+
+更进一步的映射：
+
+- **类型构造子** `fn(A) -> B` 对应 **逻辑蕴涵**；函数体就是一个从 `A` 的证明构造 `B` 的证明的变换。
+- **生命周期约束** `'a: 'b` 对应 **时序逻辑的蕴含**："在 `'a` 有效的任何时刻，`'b` 都有效"。
+- **编译错误** `E0308`（类型不匹配）对应 **证明失败**：程序无法构造出目标命题的证明。
+
+### 11.2 程序作为 OWL 实例
+
+把一个 Rust 程序看作 OWL 解释域中的个体（individual）：
+
+```turtle
+# 个体 my_vec 是 Vec<i32> 的一个实例，即 Vec<i32> 命题的一个证明
+ex:my_vec rdf:type ex:Vec_i32 .
+
+# 该实例同时满足 Clone trait，对应于一个额外的命题证明
+ex:my_vec ex:instanceOf ex:Clone .
+```
+
+SHACL 的 `sh:NodeShape` 则可以看作 **证明义务（proof obligation）**：每个被验证的节点必须提供满足该 shape 的"证据"。例如，要求一个概念节点必须有 `ex:bloomLevel`，等价于要求"证明该节点确实属于某个 Bloom 层级"。
+
+### 11.3 从 Curry-Howard 到 KG 质量门
+
+本项目质量门 `check_kg_shapes.py` 与 `check_kg_relation_precision.py` 本质上是在做两类 **机械化证明检查**：
+
+1. **Shape 检查**：每个实体是否携带了必需的属性（类比：类型构造是否正确）。
+2. **谓词精度检查**：核心实体之间是否使用了具体语义谓词而非泛泛的 `relatedTo`（类比：证明中是否使用了有效的推理规则）。
+
+> 因此，可以把 KG 的维护理解为一种 **大规模的形式化证明活动**：每个概念是一个命题，每条例关系是一道推理规则，每次质量门通过都是一次全局一致性证明的更新。
+
+---
+
+> **过渡**: 理解 AI 本体论、国际顶层本体映射与 Curry-Howard 视角后，可进一步学习 [Knowledge Graph Ontology](../../00_meta/knowledge_topology/kg_ontology_v2.md)、[KG OWL/SHACL 语义](./07_kg_owl_shacl_semantics.md) 与 [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md)。

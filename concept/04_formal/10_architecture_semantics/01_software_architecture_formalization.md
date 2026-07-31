@@ -83,6 +83,7 @@ ISO/IEC/IEEE 42010 视点与 Rust crate 结构映射：
     - [测验 5：架构风格为什么能导出可推断性质？（分析层）](#测验-5架构风格为什么能导出可推断性质分析层)
   - [五、权威来源索引](#五权威来源索引)
   - [六、🧭 思维导图（Mindmap）](#六-思维导图mindmap)
+  - [补充国际权威来源（P1/P2 覆盖）](#补充国际权威来源p1p2-覆盖)
 
 ---
 
@@ -611,7 +612,6 @@ mindmap
 ---
 
 > **来源**: [Shaw & Garlan — Software Architecture: Perspectives on an Emerging Discipline (1996)](https://www.cs.cmu.edu/~search/articles/books/SA.book.pdf) · [Garlan & Shaw — An Introduction to Software Architecture (1993)](https://www.cs.cmu.edu/~able/introduction_to_software_architecture.htm) · [Medvidovic & Taylor — A Classification and Comparison Framework for Software Architecture Description Languages (2000)](https://ieeexplore.ieee.org/document/845372)
-
 
 ## 补充国际权威来源（P1/P2 覆盖）
 

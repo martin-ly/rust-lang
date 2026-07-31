@@ -47,6 +47,7 @@
   - [十、Unsafe Code Guidelines 主题映射](#十unsafe-code-guidelines-主题映射)
   - [十一、未覆盖缺口清单](#十一未覆盖缺口清单)
   - [十二、维护流程](#十二维护流程)
+  - [十三、新增国际化来源映射（2026-07-31）](#十三新增国际化来源映射2026-07-31)
 
 ---
 
@@ -270,3 +271,25 @@ rustc-dev-guide 主题为**编译器实现细节**，项目 L4/L6 已有概述�
 ---
 
 > **维护规范**: 本索引与 `tmp/authority_alignment_audit.py` 联动，季度复跑后应同步更新缺口清单状态。
+
+---
+
+## 十三、新增国际化来源映射（2026-07-31）
+
+本轮全面对齐后新增/深化的国际权威来源及其项目映射：
+
+| 来源 | 主题 | 项目对应页 | 状态 |
+|:---|:---|:---|:---:|
+| [Mara Bos — Rust Atomics and Locks](https://mara.nl/atomics/) | Memory ordering、happens-before、fences、consume ordering、 myths | `concept/04_formal/09_system_semantics/08_memory_ordering_and_atomics.md` | ✅ |
+| [The Embedded Rust Book](https://docs.rust-embedded.org/book/) | no_std、peripherals、typestate、HAL design patterns | `concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md`、`23_no_std_and_bare_metal_idioms.md`、`24_embedded_hal_and_driver_idioms.md` | ✅ |
+| [Discovery Book](https://docs.rust-embedded.org/discovery/) | STM32F3DISCOVERY 入门实验 | `concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md` 学习路径 | ✅ |
+| [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) | 自定义 target、链接脚本、启动序列 | `concept/06_ecosystem/05_systems_and_embedded/13_bare_metal_boot_linker_script.md`、`23_no_std_and_bare_metal_idioms.md` | ✅ |
+| [Embassy](https://github.com/embassy-rs/embassy) | Async embedded executor | `concept/06_ecosystem/05_systems_and_embedded/11_async_no_std_embedded.md`、`26_embedded_rtos_and_safety_critical_frameworks.md` | ✅ |
+| [Hubris](https://github.com/oxidecomputer/hubris) / [Ariel OS](https://github.com/ariel-os/ariel-os) / [RTIC](https://github.com/rtic-rs/rtic) / [Tock](https://github.com/tock/tock) / [Ferrocene](https://ferrous-systems.com/ferrocene/) | 嵌入式 RTOS 与安全关键框架 | `concept/06_ecosystem/05_systems_and_embedded/26_embedded_rtos_and_safety_critical_frameworks.md` | ✅ |
+| [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) | Idioms、design patterns、anti-patterns、FFI patterns | `concept/06_ecosystem/03_design_patterns/02_idioms_spectrum.md`、`33_anti_patterns.md`、`concept/03_advanced/04_ffi/07_ffi_patterns.md` | ✅ |
+| [Rust API Guidelines Checklist](https://rust-lang.github.io/api-guidelines/checklist.html) | C-XXXX 指南逐项映射 | `concept/00_meta/00_framework/rust_api_guidelines_canonical.md` | ✅ |
+| [Mark Richards — Software Architecture Patterns 2nd ed.](https://www.oreilly.com/library/view/software-architecture-patterns/9781098134280/) | Layered、Event-driven、Microkernel、Microservices、Space-based、SOA、Pipeline | `concept/06_ecosystem/03_design_patterns/08_architecture_patterns.md`、`concept/04_formal/10_architecture_semantics/05_architecture_styles_formal_constraints.md` | ✅ |
+| [BFO](https://basic-formal-ontology.org/) / [DOLCE](http://www.loa.istc.cnr.it/old/DOLCE.html) / [SUMO](https://www.ontologyportal.org/) | Top-level ontology alignment | `concept/04_formal/13_semantic_engineering/06_ai_ontology_and_rust_semantics.md` | ✅ |
+| W3C OWL 2 / SHACL | KG formal semantics | `concept/04_formal/13_semantic_engineering/07_kg_owl_shacl_semantics.md` | ✅ |
+| [Martin Fowler](https://martinfowler.com/) / [microservices.io](https://microservices.io/) | Microservices、CQRS、Event Sourcing、Circuit Breaker 等 | `concept/06_ecosystem/03_design_patterns/` 相关页 | ✅ |
+| [Manning — Idiomatic Rust](https://www.manning.com/books/idiomatic-rust) / CLRS / Sedgewick / Knuth | Idioms、algorithms、complexity | `concept/06_ecosystem/03_design_patterns/02_idioms_spectrum.md`、`concept/06_ecosystem/10_performance/03_algorithms_and_complexity_idioms.md` | ✅ |

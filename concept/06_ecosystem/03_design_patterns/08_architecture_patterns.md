@@ -38,7 +38,7 @@
 
 ## 📑 目录
 
-- [Architecture Patterns（架构设计模式）](#architecture-patterns架构设计模式)
+- [架构设计模式](#架构设计模式)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 分层架构（Layered Architecture）](#11-分层架构layered-architecture)
@@ -46,6 +46,12 @@
     - [1.3 洋葱架构（Onion Architecture）](#13-洋葱架构onion-architecture)
     - [1.4 整洁架构（Clean Architecture）](#14-整洁架构clean-architecture)
     - [1.5 Serverless / FaaS（无服务器/函数即服务）](#15-serverless--faas无服务器函数即服务)
+    - [1.6 事件驱动架构（Event-Driven Architecture）](#16-事件驱动架构event-driven-architecture)
+    - [1.7 微内核架构（Microkernel Architecture）](#17-微内核架构microkernel-architecture)
+    - [1.8 微服务架构（Microservices Architecture）](#18-微服务架构microservices-architecture)
+    - [1.9 空间架构（Space-Based Architecture）](#19-空间架构space-based-architecture)
+    - [1.10 面向服务架构（Service-Oriented Architecture, SOA）](#110-面向服务架构service-oriented-architecture-soa)
+    - [1.11 管道-过滤器架构（Pipeline / Pipe-and-Filter Architecture）](#111-管道-过滤器架构pipeline--pipe-and-filter-architecture)
   - [二、概念属性矩阵](#二概念属性矩阵)
   - [三、分层架构](#三分层架构)
     - [3.1 经典四层模型](#31-经典四层模型)
@@ -94,6 +100,7 @@
 **变更日志**:
 
 - v1.0 (2026-05-25): 初始创建——分层/六边形/洋葱/整洁/Serverless 架构模式对比，含 Rust 实现骨架与边界测试
+- v1.1 (2026-07-31): 扩展 Mark Richards *Software Architecture Patterns* 架构风格——事件驱动、微内核、微服务、空间架构、SOA、管道-过滤器；更新概念属性矩阵、思维导图与相关概念链接
 
 ---
 
@@ -231,25 +238,185 @@
 
 > **来源**: [AWS — Serverless](https://aws.amazon.com/serverless/) · [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/) · [Google Cloud Functions](https://cloud.google.com/functions)
 
+### 1.6 事件驱动架构（Event-Driven Architecture）
+
+> **[Mark Richards — Software Architecture Patterns](https://www.oreilly.com/library/view/software-architecture-patterns/9781098134280/)** 事件驱动架构通过**事件**解耦生产者与消费者：生产者不感知消费者的存在，消费者通过订阅事件契约（event schema）异步（Async）响应。
+
+```text
+┌─────────────┐      ┌──────────────┐      ┌─────────────┐
+│  Producer   │─────→│ Event Broker │←─────│  Consumer   │
+│ (Order Svc) │      │ (Kafka/NATS) │      │(Inventory)  │
+└─────────────┘      └──────────────┘      └─────────────┘
+                              │
+                              ↓
+                       ┌──────────────┐
+                       │ Event Store  │
+                       └──────────────┘
+```
+
+| 维度 | 说明 |
+|---|---|
+| **定义** | 组件通过异步事件进行通信，控制流经 broker/mediator，生产者与消费者无直接依赖。 |
+| **何时使用** | 高并发异步流、需要水平扩展消费者、事件溯源、多团队协作且消费方不确定。 |
+| **Rust 生态映射** | `tokio::sync::broadcast/mpsc`（进程内）、`rdkafka`/`lapin`/`nats`/`fluvio`（分布式）、`serde` 事件 schema、Rust 的 `enum` 提供编译期穷尽匹配。 |
+| **权衡** | ✅ 松耦合、可扩展、容错隔离；❌ 调试链路复杂、最终一致性、schema 治理成本高。 |
+| **反指征** | 强同步一致性、低延迟点对点、消费者极少且稳定的简单工作流。 |
+
+> **深度阅读**: [事件驱动架构](06_event_driven_architecture.md)
+
+### 1.7 微内核架构（Microkernel Architecture）
+
+> **[Mark Richards — Software Architecture Patterns](https://www.oreilly.com/library/view/software-architecture-patterns/9781098134280/)** 微内核架构把系统拆分为**最小化核心**与一组围绕核心运行的**插件（plugins）**。核心负责资源调度与生命周期，插件通过统一接口扩展功能。
+
+```text
+┌──────────────────────────────────────┐
+│           Microkernel Core           │
+│  注册表 │ 调度器 │ 能力仲裁 │ 生命周期 │
+└───────────────┬──────────────────────┘
+                │ trait Plugin
+    ┌───────────┼───────────┐
+    ▼           ▼           ▼
+┌───────┐   ┌───────┐   ┌───────┐
+│Plugin A│   │Plugin B│   │Plugin C│
+└───────┘   └───────┘   └───────┘
+```
+
+| 维度 | 说明 |
+|---|---|
+| **定义** | 核心仅含最少通用功能；业务功能以插件形式动态加载/卸载，插件间不直接交互。 |
+| **何时使用** | 需要运行时扩展（插件市场）、产品家族、IDE/浏览器/可定制平台、不想承担微服务运维成本。 |
+| **Rust 生态映射** | `trait Plugin` + `Box<dyn Plugin>`；动态加载用 `libloading`；沙箱用 `wasmtime`；IPC 用 `tokio`/`tarpc`。 |
+| **权衡** | ✅ 运行时扩展、隔离故障、核心稳定；❌ 核心可能成为瓶颈、插件版本管理复杂、隔离有性能开销。 |
+| **反指征** | 无扩展需求、对单进程性能极度敏感、团队无力维护插件契约。 |
+
+> **深度阅读**: [微内核架构模式](21_microkernel_architecture.md)
+
+### 1.8 微服务架构（Microservices Architecture）
+
+> **[Mark Richards — Software Architecture Patterns](https://www.oreilly.com/library/view/software-architecture-patterns/9781098134280/)** 微服务架构将系统拆分为围绕业务能力（bounded context）组织的小型、**独立部署**服务，每个服务拥有独立数据存储，通过网络契约通信。
+
+```text
+┌─────────┐     ┌─────────────┐     ┌─────────┐     ┌─────────┐
+│  Client │────→│ API Gateway │────→│ Order   │────→│ Payment │
+└─────────┘     │  (axum)     │     │ Service │     │ Service │
+                └─────────────┘     └────┬────┘     └────┬────┘
+                                         │               │
+                                         └───────┬───────┘
+                                                 ▼
+                                          ┌─────────────┐
+                                          │ Message Bus │
+                                          └─────────────┘
+```
+
+| 维度 | 说明 |
+|---|---|
+| **定义** | 服务是独立部署单元，不共享数据库，通过同步（HTTP/gRPC）或异步（消息）契约交互。 |
+| **何时使用** | 多团队独立发布、需要独立扩缩、不同服务可用异构技术、高可用要求。 |
+| **Rust 生态映射** | `axum`/`tonic`/`tower`（服务与中间件）、`consul`/`etcd-client`（服务发现）、`rdkafka`/`nats`（异步集成）、`opentelemetry`/`tracing`（可观测性）。 |
+| **权衡** | ✅ 独立部署/扩展、技术异构、故障隔离；❌ 分布式复杂度、网络延迟、数据一致性困难、运维成本高。 |
+| **反指征** | 小团队（< 3 个）、业务简单、无独立扩缩需求、强跨服务事务。 |
+
+> **深度阅读**: [微服务架构模式](05_microservice_patterns.md)
+
+### 1.9 空间架构（Space-Based Architecture）
+
+> **[Mark Richards — Software Architecture Patterns](https://www.oreilly.com/library/view/software-architecture-patterns/9781098134280/)** 空间架构（又称基于空间的架构 / 云架构）通过**内存数据网格**（Data Grid）消除传统数据库瓶颈：处理单元（Processing Unit, PU）无共享数据库，状态来自可水平扩展的内存网格，并通过异步复制保持一致性。
+
+```text
+        ┌─────────────┐
+        │ Load Balancer│
+        └──────┬──────┘
+               │
+    ┌──────────┼──────────┐
+    ▼          ▼          ▼
+┌──────┐  ┌──────┐  ┌──────┐
+│ PU 1 │  │ PU 2 │  │ PU 3 │
+└──┬───┘  └──┬───┘  └──┬───┘
+   │         │         │
+   └─────────┼─────────┘
+             ▼
+    ┌─────────────────┐
+    │   Data Grid     │
+    │ (in-memory KV)  │
+    └─────────────────┘
+```
+
+| 维度 | 说明 |
+|---|---|
+| **定义** | 处理单元自治、无共享数据库；状态保存在内存数据网格中，读写通过网格完成，异步复制到持久存储。 |
+| **何时使用** | 极端可变负载、高吞吐读写、会话/状态密集型应用、传统数据库成为瓶颈。 |
+| **Rust 生态映射** | 内存并发映射 `dashmap`；分布式 KV `tikv`/`noria`；零拷贝序列化 `rkyv`/`flatbuffers`；网格协议可用 `redis`/`valkey` 作为过渡。 |
+| **权衡** | ✅ 高吞吐、弹性扩展、消除 DB 热点；❌ 最终一致性、数据网格运维复杂、网络分区风险、内存成本。 |
+| **反指征** | 数据集远超内存、强 ACID 跨实体事务、运维成熟度不足。 |
+
+### 1.10 面向服务架构（Service-Oriented Architecture, SOA）
+
+> **[Mark Richards — Microservices vs. Service-Oriented Architecture](https://www.oreilly.com/library/view/microservices-vs-service-oriented/9781491956624/)** SOA 强调**粗粒度企业服务**通过标准化契约和**企业服务总线（ESB）**进行集成，注重企业级可复用与治理。
+
+```text
+┌─────────────────────────────────────────────────────┐
+│                  Enterprise Service Bus             │
+│        路由 │ 转换 │ 编排 │ 协议适配 │ 安全           │
+└────────┬─────────────────────────────────┬──────────┘
+         │                               │
+    ┌────▼────┐   ┌────────┐   ┌────────▼────┐
+    │ Billing │   │  CRM   │   │  Inventory  │
+    │ Service │   │Service │   │   Service   │
+    └─────────┘   └────────┘   └─────────────┘
+```
+
+| 维度 | 说明 |
+|---|---|
+| **定义** | 以业务服务为中心，通过 ESB 或标准化协议集成；强调共享数据模型、可复用与集中治理。 |
+| **何时使用** | 企业内跨部门系统集成、遗留系统暴露标准化接口、需要强契约与集中治理。 |
+| **Rust 生态映射** | 契约优先用 `utoipa`（OpenAPI）/`prost`（gRPC）；服务注册用 `consul`；消息总线用 `nats`/`kafka`；SOAP 在 Rust 中不常见，通常用 REST/gRPC 替代。 |
+| **权衡** | ✅ 服务可复用、统一治理、遗留集成；❌ ESB 易成瓶颈、发布节奏慢、共享 schema 增加耦合。 |
+| **反指征** | 小团队快速迭代、云原生独立部署诉求强、无遗留集成需求。 |
+
+### 1.11 管道-过滤器架构（Pipeline / Pipe-and-Filter Architecture）
+
+> **[POSA — Pattern-Oriented Software Architecture](https://www.dre.vanderbilt.edu/~schmidt/POSA/)** 管道-过滤器架构把系统组织为**数据流**经过的一系列**过滤器**，每个过滤器独立完成输入到输出的转换，数据通过管道（pipes）传递。
+
+```text
+Source ──→ [Filter A] ──→ [Filter B] ──→ [Filter C] ──→ Sink
+             │               │               │
+             ▼               ▼               ▼
+           trim           uppercase       dedup
+```
+
+| 维度 | 说明 |
+|---|---|
+| **定义** | 过滤器不共享状态，仅通过管道传递数据；每个过滤器对输入做纯转换，输出仅依赖输入。 |
+| **何时使用** | 数据转换/ETL、编译器流水线、日志/音视频处理、流式计算、需要阶段独立演进的场景。 |
+| **Rust 生态映射** | 零成本：`Iterator`/`Stream` 适配器；并发管道：`tokio::sync::mpsc` + `spawn`；并行阶段：`rayon`；解析器流水线：`nom`/`pest`/`winnow`。 |
+| **权衡** | ✅ 阶段解耦、易于并行、天然数据流可视化；❌ 端到端延迟累积、跨阶段错误处理复杂、不适合复杂控制流。 |
+| **反指征** | 需要大量共享可变状态、复杂分支/回退逻辑、低延迟请求-响应。 |
+
+> **深度阅读**: [管道-过滤器、黑板与解释器架构](23_pipeline_filter_blackboard_interpreter.md)
+
+> **来源**: [Mark Richards — Software Architecture Patterns, 2nd ed.](https://www.oreilly.com/library/view/software-architecture-patterns/9781098134280/) · [Martin Fowler — Microservices](https://martinfowler.com/articles/microservices.html) · [Martin Fowler — Microkernel](https://martinfowler.com/articles/microkernel.html) · [POSA](https://www.dre.vanderbilt.edu/~schmidt/POSA/)
+
 ---
 
 ## 二、概念属性矩阵
 
-| **维度** | **分层架构** | **六边形架构** | **洋葱架构** | **整洁架构** | **Serverless** |
-|:---|:---|:---|:---|:---|:---|
-| **核心思想** | 水平抽象层级 | 端口/适配器隔离 | 领域在中心 | 依赖向内 | 事件驱动、按需执行 |
-| **依赖方向** | 上层 → 下层 | 外部 → 内部 | 外层 → 内层 | 外层 → 内层 | 无（函数无状态）|
-| **领域位置** | 中间层 | 六边形中心 | 最内层 | 最内层（Entities）| 函数内 |
-| **框架耦合** | 高（基础设施在最底层）| 低 | 低 | 低 | 极高（平台锁定）|
-| **可测试性** | 中（需模拟下层）| 高（直接测试核心）| 高 | 高 | 中（本地模拟困难）|
-| **Rust 适配性** | 良好 | 优秀（Trait 即端口）| 优秀 | 优秀 | 良好（cargo-lambda）|
-| **主要来源** | Fowler EAA | Cockburn | Palermo | Martin | AWS / Azure / GCP |
+| **维度** | **分层架构** | **六边形架构** | **洋葱架构** | **整洁架构** | **Serverless** | **事件驱动** | **微内核** | **微服务** | **空间架构** | **SOA** | **管道-过滤器** |
+|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
+| **核心思想** | 水平抽象层级 | 端口/适配器隔离 | 领域在中心 | 依赖向内 | 事件驱动、按需执行 | 异步事件解耦 | 核心 + 插件 | 独立部署服务 | 内存数据网格 | 企业服务总线集成 | 数据流转换 |
+| **依赖方向** | 上层 → 下层 | 外部 → 内部 | 外层 → 内层 | 外层 → 内层 | 无（函数无状态）| 生产者/消费者均不直接依赖 | 插件 → 核心 | 服务间仅契约依赖 | PU → 数据网格 | 服务 → ESB | 前一阶段 → 后一阶段 |
+| **领域位置** | 中间层 | 六边形中心 | 最内层 | 最内层（Entities）| 函数内 | 事件契约 | 核心/插件 | 各服务内部 | 处理单元内 | 企业服务层 | 过滤器内 |
+| **框架耦合** | 高（基础设施在最底层）| 低 | 低 | 低 | 极高（平台锁定）| 中（Broker）| 中（核心稳定）| 低 | 中（数据网格）| 高（ESB/协议）| 低 |
+| **可测试性** | 中（需模拟下层）| 高（直接测试核心）| 高 | 高 | 中（本地模拟困难）| 中（需模拟 Broker）| 高（插件独立）| 高（边界契约）| 中（网格模拟）| 中（ESB 模拟）| 高（阶段独立）|
+| **Rust 适配性** | 良好 | 优秀（Trait 即端口）| 优秀 | 优秀 | 良好（cargo-lambda）| 优秀（enum + channel）| 优秀（trait Plugin）| 优秀（tonic/axum）| 良好（dashmap/tikv）| 良好（utoipa/tonic）| 优秀（Iterator/Stream）|
+| **主要来源** | Fowler EAA | Cockburn | Palermo | Martin | AWS / Azure / GCP | Richards / Fowler | Richards / Fowler | Richards / Fowler | Richards | Richards / Fowler | POSA / Fowler |
 
 > **来源**:
 > [Cockburn — Hexagonal](https://alistair.cockburn.us/hexagonal-architecture/) ·
 > [Palermo — Onion](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/) ·
 > [Martin — Clean](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) ·
-> [AWS — Serverless](https://aws.amazon.com/serverless/)
+> [AWS — Serverless](https://aws.amazon.com/serverless/) ·
+> [Mark Richards — Software Architecture Patterns](https://www.oreilly.com/library/view/software-architecture-patterns/9781098134280/) ·
+> [POSA](https://www.dre.vanderbilt.edu/~schmidt/POSA/)
 
 ---
 
@@ -1198,9 +1365,12 @@ async fn risky_handler(event: LambdaEvent<OrderRequest>) -> Result<Value, Error>
 - [CQRS & Event Sourcing](07_cqrs_event_sourcing.md) — 命令查询分离、事件溯源、Saga
 - [微服务架构模式](05_microservice_patterns.md) — 服务发现、熔断、Saga
 - [事件驱动架构](06_event_driven_architecture.md) — 发布-订阅、消息队列、Reactive Streams
+- [微内核架构模式](21_microkernel_architecture.md) — 插件、能力隔离、核心调度
+- [管道-过滤器、黑板与解释器架构](23_pipeline_filter_blackboard_interpreter.md) — 数据流、阶段解耦
 - [设计模式](01_patterns.md) — GoF 模式、Rust 特有模式（RAII、Typestate）
 - [分布式系统](../04_web_and_networking/01_distributed_systems.md) — gRPC、Raft、Actor
 - [云原生](../04_web_and_networking/02_cloud_native.md) — Kubernetes、容器化、可观测性
+- [架构风格的形式化约束](../../04_formal/10_architecture_semantics/05_architecture_styles_formal_constraints.md) — 不变量、通信拓扑、并发模型、Rust 编码提示
 - [公理语义](../../04_formal/03_operational_semantics/05_axiomatic_semantics.md) — Hoare 逻辑、正确性证明
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
@@ -1368,6 +1538,13 @@ mindmap
       架构特征
       Rust 在 Serverless
       冷启动与性能优化
+    Mark Richards 扩展模式
+      事件驱动架构
+      微内核架构
+      微服务架构
+      空间架构
+      面向服务架构 SOA
+      管道-过滤器架构
 ```
 
 > **认知功能**: 本 mindmap 从本页「Architecture Patterns 架构设计模式」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。

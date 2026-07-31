@@ -1,33 +1,184 @@
 {
   "summary": {
     "date": "2026-07-31",
-    "scanned": 651,
+    "scanned": 674,
     "counts": {
       "D1": 0,
       "D2": 0,
       "D3": 0,
       "D4": 0,
-      "D5": 0,
-      "D6": 0
+      "D5": 3,
+      "D6": 15
     },
     "pct": {
       "D1": 0.0,
       "D2": 0.0,
       "D3": 0.0,
       "D4": 0.0,
-      "D5": 0.0,
-      "D6": 0.0
+      "D5": 0.4,
+      "D6": 2.2
     },
-    "D2_base_files_with_asp_and_bloom": 389,
-    "flagged_files": 0
+    "D2_base_files_with_asp_and_bloom": 396,
+    "flagged_files": 17
   },
   "examples": {
     "D1": [],
     "D2": [],
     "D3": [],
     "D4": [],
-    "D5": [],
-    "D6": []
+    "D5": [
+      [
+        "concept/06_ecosystem/05_systems_and_embedded/13_bare_metal_boot_linker_script.md",
+        "稳定层 nightly/preview 关键词 1 处"
+      ],
+      [
+        "concept/06_ecosystem/05_systems_and_embedded/23_no_std_and_bare_metal_idioms.md",
+        "稳定层 nightly/preview 关键词 2 处"
+      ],
+      [
+        "concept/06_ecosystem/10_performance/03_algorithms_and_complexity_idioms.md",
+        "稳定层 nightly/preview 关键词 2 处"
+      ]
+    ],
+    "D6": [
+      [
+        "concept/04_formal/09_system_semantics/07_concurrent_and_parallel_semantics.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/04_formal/09_system_semantics/08_memory_ordering_and_atomics.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/06_ecosystem/03_design_patterns/24_repository_and_unit_of_work.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/06_ecosystem/03_design_patterns/25_hexagonal_ports_and_adapters.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/06_ecosystem/03_design_patterns/26_circuit_breaker.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/06_ecosystem/03_design_patterns/27_bulkhead.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/06_ecosystem/03_design_patterns/28_retry.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/06_ecosystem/03_design_patterns/29_saga.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/06_ecosystem/03_design_patterns/30_outbox.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/06_ecosystem/03_design_patterns/31_object_pool.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/06_ecosystem/03_design_patterns/32_typestate_deep_dive.md",
+        "Summary 为空"
+      ],
+      [
+        "concept/06_ecosystem/10_performance/03_algorithms_and_complexity_idioms.md",
+        "Summary 为空"
+      ]
+    ]
   },
-  "per_file": {}
+  "per_file": {
+    "concept/04_formal/09_system_semantics/07_concurrent_and_parallel_semantics.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/04_formal/09_system_semantics/08_memory_ordering_and_atomics.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/06_ecosystem/03_design_patterns/24_repository_and_unit_of_work.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/06_ecosystem/03_design_patterns/25_hexagonal_ports_and_adapters.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/06_ecosystem/03_design_patterns/26_circuit_breaker.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/06_ecosystem/03_design_patterns/27_bulkhead.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/06_ecosystem/03_design_patterns/28_retry.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/06_ecosystem/03_design_patterns/29_saga.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/06_ecosystem/03_design_patterns/30_outbox.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/06_ecosystem/03_design_patterns/31_object_pool.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/06_ecosystem/03_design_patterns/32_typestate_deep_dive.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/06_ecosystem/05_systems_and_embedded/13_bare_metal_boot_linker_script.md": {
+      "D5": [
+        "稳定层 nightly/preview 关键词 1 处"
+      ]
+    },
+    "concept/06_ecosystem/05_systems_and_embedded/23_no_std_and_bare_metal_idioms.md": {
+      "D5": [
+        "稳定层 nightly/preview 关键词 2 处"
+      ]
+    },
+    "concept/06_ecosystem/10_performance/03_algorithms_and_complexity_idioms.md": {
+      "D5": [
+        "稳定层 nightly/preview 关键词 2 处"
+      ],
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/06_ecosystem/14_enterprise_architecture/06_clean_architecture_in_rust.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/06_ecosystem/14_enterprise_architecture/07_hexagonal_architecture_in_rust.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    },
+    "concept/06_ecosystem/14_enterprise_architecture/08_microservices_patterns_in_rust.md": {
+      "D6": [
+        "Summary 为空"
+      ]
+    }
+  }
 }

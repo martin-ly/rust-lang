@@ -80,6 +80,7 @@ mindmap
   - [七、反例与失效模式](#七反例与失效模式)
   - [八、相关概念](#八相关概念)
   - [国际权威来源](#国际权威来源)
+  - [补充国际权威来源（P1/P2 覆盖）](#补充国际权威来源p1p2-覆盖)
 
 ---
 
@@ -237,7 +238,6 @@ flowchart TD
 - [Tokio API — spawn_blocking](https://docs.rs/tokio/latest/tokio/task/fn.spawn_blocking.html)
 - [tokio-uring](https://docs.rs/tokio-uring/latest/tokio_uring/)
 - [async-ffi crate](https://crates.io/crates/async-ffi)
-
 
 ## 补充国际权威来源（P1/P2 覆盖）
 

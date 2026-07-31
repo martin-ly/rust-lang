@@ -14,6 +14,7 @@
 > **受众**: [进阶]
 > **Bloom 层级**: L3
 > **权威来源**: 本文件为索引 stub；通用 Rust 宏概念解释请见：
+>
 > - [`04_declarative_macros.md`](04_declarative_macros.md) — `macro_rules!`、卫生性、重复模式、TT-munching
 > - [`05_procedural_macros.md`](05_procedural_macros.md) — derive/attribute/function-like 过程宏、TokenStream、syn/quote
 >

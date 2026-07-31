@@ -39,6 +39,7 @@
 | 02 | `02_architecture_pattern_semantics.md` | 常见架构模式的语义：Layered、Hexagonal、Microkernel、Event-Driven | ✅ 已创建，含架构模式不变量与编译期反例 |
 | 03 | `03_architecture_refinement.md` | 架构精化：从抽象架构到 Rust 实现的保持性 | ✅ 已创建，含精化映射与违约反例 |
 | 04 | `04_rust_architecture_constraints.md` | Rust 模块系统、crate 边界、ABI 对架构语义的约束 | ✅ 已创建，含模块/crate/ABI 约束与编译期反例 |
+| 05 | `05_architecture_styles_formal_constraints.md` | 主流架构风格的形式化约束：结构不变量、通信拓扑、并发模型、Rust 编码提示 | ✅ 已创建，含约束矩阵与并发模型映射图 |
 
 ---
 

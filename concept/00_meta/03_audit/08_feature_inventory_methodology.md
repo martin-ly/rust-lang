@@ -2,7 +2,6 @@
 
 > **EN**: Rust Language Feature Inventory Methodology
 > **Summary**: 用于周期性盘点 Rust 语言特性覆盖度、识别 concept/ 缺口并制定回填计划的对称差分析方法。
-
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。

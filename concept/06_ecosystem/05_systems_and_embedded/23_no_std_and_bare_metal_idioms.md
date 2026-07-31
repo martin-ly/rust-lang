@@ -86,6 +86,7 @@ mindmap
     - [13.4 边界测试：`Vec` 在未初始化堆上使用](#134-边界测试vec-在未初始化堆上使用)
   - [十四、决策树：裸机技术栈选择](#十四决策树裸机技术栈选择)
   - [十五、相关概念](#十五相关概念)
+  - [十六、权威来源索引](#十六权威来源索引)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -657,8 +658,25 @@ graph TD
 
 ---
 
-> **权威来源**: [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [cortex-m-rt 文档](https://docs.rs/cortex-m-rt/) · [riscv-rt 文档](https://docs.rs/riscv-rt/) · [critical-section crate](https://docs.rs/critical-section/) · [Embassy Book](https://embassy.dev/book/) · [Ferrous Systems](https://ferrous-systems.com/) · [Knurling](https://knurling.ferrous-systems.com/)
->
+## 十六、权威来源索引
+
+- **[The Embedded Rust Book](https://docs.rust-embedded.org/book/)** — Rust Embedded Working Group 官方指南，覆盖 `no_std`、内存映射外设、静态保证、设计模式与移植性。
+  - 重点章节：[Introduction](https://docs.rust-embedded.org/book/intro/index.html)、[Peripherals](https://docs.rust-embedded.org/book/peripherals/index.html)、[Static Guarantees](https://docs.rust-embedded.org/book/static-guarantees/index.html)、[Design Patterns](https://docs.rust-embedded.org/book/design-patterns/index.html)。
+
+- **[The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/)** — 裸机底层实现权威，覆盖自定义 target、链接脚本、启动序列与自定义运行时 crate。
+
+- **[Embassy Book](https://embassy.dev/book/)** — Embassy 异步框架官方文档，覆盖 `no_std` async executor、HAL、time driver、网络栈与最佳实践。
+
+- **[Ferrous Systems](https://ferrous-systems.com/)** — Rust 嵌入式培训与咨询，提供 Ferrocene 安全关键工具链、认证路径与生产化经验。
+
+- **[Knurling](https://knurling.ferrous-systems.com/)** — Ferrous Systems 的嵌入式 Rust 项目集，包括 `defmt`、probe-rs 工作流前身、`embedded-test` 模板与硬件开发板支持。
+
+- **[cortex-m-rt](https://docs.rs/cortex-m-rt/)** / **[riscv-rt](https://docs.rs/riscv-rt/)** — ARM Cortex-M 与 RISC-V 的官方运行时入口 crate。
+
+- **[critical-section crate](https://docs.rs/critical-section/)** — 跨平台临界区抽象的事实标准。
+
+- **[Rust Reference — no_std](https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute)** — `#![no_std]` 属性的语言级规范。
+
 > **权威来源对齐变更日志**: 2026-07-31 创建
 
 **文档版本**: 1.0

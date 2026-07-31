@@ -681,9 +681,24 @@ graph TD
 
 ### 学习路径
 
-1. **入门**: `no_std` 环境 → 内存映射寄存器 → UART 驱动
-2. **进阶**: 中断处理 → HAL 设计模式 → FFI 与 C 互操作
-3. **高级**: RTIC 实时中断驱动 → Embassy 异步（Async）框架 → 裸机性能优化
+以下路径将官方教程与本概念页对应起来，从动手实验到系统设计递进：
+
+1. **入门：硬件交互与 `no_std`**
+   - 跟随 [Discovery Book](https://docs.rust-embedded.org/discovery/) 在 micro:bit 上完成 LED、按钮、UART 实验，建立“寄存器 → PAC → HAL”的直观认识。
+   - 对照 [The Embedded Rust Book — Introduction](https://docs.rust-embedded.org/book/intro/index.html) 理解 `#![no_std]`、`panic_handler`、交叉编译与目标三元组。
+   - 概念页支撑：[Rust 嵌入式系统开发](#rust-嵌入式系统开发) 的“核心概念”与“硬件抽象层”。
+
+2. **进阶：中断、并发与裸机启动**
+   - 阅读 [The Embedded Rust Book — Peripheral Access](https://docs.rust-embedded.org/book/peripherals/index.html) 与 [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) 的自定义 target、链接脚本与启动序列章节。
+   - 通过 [RTIC Book](https://rtic.rs/) 掌握基于优先级的资源冲突分析。
+   - 概念页支撑：[裸机启动与链接脚本](13_bare_metal_boot_linker_script.md)、[no_std 同步原语](15_no_std_synchronization_primitives.md)。
+
+3. **高级：异步运行时、安全关键与生态深度**
+   - 学习 [Embassy Book](https://embassy.dev/book/) 的 `no_std` async executor、time driver 与网络栈。
+   - 参考 [Ferrous Systems 培训资料](https://ferrous-systems.com/) 与 [Knurling 项目](https://knurling.ferrous-systems.com/) 进行 `defmt`、测试与生产化实践。
+   - 概念页支撑：[异步 no_std 嵌入式](11_async_no_std_embedded.md)、[安全关键裸机 OS 与 Rust](19_safety_critical_bare_metal_os.md)。
+
+> **权威来源映射**: 本学习路径以 [Discovery Book](https://docs.rust-embedded.org/discovery/) 提供动手入口，以 [The Embedded Rust Book](https://docs.rust-embedded.org/book/) 作为概念权威，[The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) 作为裸机底层参考，[Embassy Book](https://embassy.dev/book/) 作为异步框架参考。
 
 ---
 

@@ -4,7 +4,7 @@
     "generated": "2026-07-11",
     "rust_version": "1.97.0+",
     "source": "concept/",
-    "entity_count": 647,
+    "entity_count": 653,
     "schema": "simple KG index"
   },
   "entities": [
@@ -6056,6 +6056,41 @@
       "related_crates": []
     },
     {
+      "id": "concept:03_advanced/04_ffi/07_ffi_patterns.md",
+      "path": "03_advanced/04_ffi/07_ffi_patterns.md",
+      "title": "",
+      "en": "FFI Patterns in Rust",
+      "summary": "Design patterns for safe and ergonomic Rust FFI: object-based opaque APIs, type consolidation wrappers, `Box::into_raw/from_raw` lifecycle, zero-copy slices, cross-boundary error handling, and `Send`/`Sync` annotations.",
+      "bloom": "L4-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust FFI",
+          "path": "01_rust_ffi.md"
+        },
+        {
+          "title": "Unsafe",
+          "path": "../02_unsafe/01_unsafe.md"
+        },
+        {
+          "title": "Ownership",
+          "path": "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Async FFI Boundary",
+          "path": "04_async_ffi_boundary.md"
+        },
+        {
+          "title": "Unsafe Extern Blocks",
+          "path": "05_unsafe_extern_blocks.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:03_advanced/05_inline_assembly/01_inline_assembly.md",
       "path": "03_advanced/05_inline_assembly/01_inline_assembly.md",
       "title": "",
@@ -9522,6 +9557,49 @@
       "related_crates": []
     },
     {
+      "id": "concept:04_formal/10_architecture_semantics/05_architecture_styles_formal_constraints.md",
+      "path": "04_formal/10_architecture_semantics/05_architecture_styles_formal_constraints.md",
+      "title": "",
+      "en": "Architecture Styles Formal Constraints",
+      "summary": "Formal invariants, communication topology, concurrency models, failure propagation boundaries, and Rust type-system encodings for major architecture styles.",
+      "bloom": "L5-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Architecture Patterns",
+          "path": "../../06_ecosystem/03_design_patterns/08_architecture_patterns.md"
+        },
+        {
+          "title": "Architecture Pattern Semantics",
+          "path": "02_architecture_pattern_semantics.md"
+        },
+        {
+          "title": "Rust Architecture Constraints",
+          "path": "04_rust_architecture_constraints.md"
+        },
+        {
+          "title": "Concurrency",
+          "path": "../../03_advanced/00_concurrency/01_concurrency.md"
+        },
+        {
+          "title": "Async/Await",
+          "path": "../../03_advanced/01_async/01_async.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Architecture Refinement",
+          "path": "03_architecture_refinement.md"
+        },
+        {
+          "title": "Pattern Composition Algebra",
+          "path": "../00_type_theory/12_pattern_composition_algebra.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:04_formal/10_architecture_semantics/README.md",
       "path": "04_formal/10_architecture_semantics/README.md",
       "title": "架构语义（Architecture Semantics）",
@@ -10158,6 +10236,41 @@
         {
           "title": "Operational Semantics",
           "path": "../03_operational_semantics/03_operational_semantics.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Formal Methods Industrialization",
+          "path": "../../07_future/04_research_and_experimental/02_formal_methods.md"
+        },
+        {
+          "title": "LLM System Architecture",
+          "path": "../../07_future/04_research_and_experimental/08_llm_system_architecture.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:04_formal/13_semantic_engineering/07_kg_owl_shacl_semantics.md",
+      "path": "04_formal/13_semantic_engineering/07_kg_owl_shacl_semantics.md",
+      "title": "",
+      "en": "KG OWL/SHACL Semantics",
+      "summary": "Formal interpretation of the project knowledge graph in OWL 2 and SHACL: class hierarchy, property axioms, inverse relations, and validation shapes over `concept/00_meta/kg_data_v3.json`.",
+      "bloom": "L4-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Knowledge Graph Ontology",
+          "path": "../../00_meta/knowledge_topology/kg_ontology_v2.md"
+        },
+        {
+          "title": "AI Ontology and Rust Semantics",
+          "path": "./06_ai_ontology_and_rust_semantics.md"
+        },
+        {
+          "title": "Semantic Model Atlas",
+          "path": "../../00_meta/knowledge_topology/11_semantic_model_atlas.md"
         }
       ],
       "postrequisites": [
@@ -13041,6 +13154,45 @@
       "related_crates": []
     },
     {
+      "id": "concept:06_ecosystem/03_design_patterns/33_anti_patterns.md",
+      "path": "06_ecosystem/03_design_patterns/33_anti_patterns.md",
+      "title": "",
+      "en": "Rust Anti-patterns",
+      "summary": "Common Rust anti-patterns and their idiomatic alternatives: clone-to-silence-borrow-checker, OOP emulation, stringly-typed APIs, unwrap cascades, mutex-guard-across-await, premature async, and shared mutable global state.",
+      "bloom": "L3-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Idioms Spectrum",
+          "path": "02_idioms_spectrum.md"
+        },
+        {
+          "title": "Ownership",
+          "path": "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
+        },
+        {
+          "title": "Traits",
+          "path": "../../02_intermediate/00_traits/01_traits.md"
+        },
+        {
+          "title": "Async",
+          "path": "../../03_advanced/01_async/01_async.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "API Design Patterns",
+          "path": "18_api_design_patterns.md"
+        },
+        {
+          "title": "FFI Patterns",
+          "path": "../../03_advanced/04_ffi/07_ffi_patterns.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:06_ecosystem/04_web_and_networking/01_distributed_systems.md",
       "path": "06_ecosystem/04_web_and_networking/01_distributed_systems.md",
       "title": "",
@@ -14104,6 +14256,92 @@
         {
           "title": "异步 no_std 嵌入式",
           "path": "11_async_no_std_embedded.md"
+        },
+        {
+          "title": "嵌入式调试与日志",
+          "path": "20_embedded_debugging_logging.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/25_memory_mapped_peripherals_and_typestate.md",
+      "path": "06_ecosystem/05_systems_and_embedded/25_memory_mapped_peripherals_and_typestate.md",
+      "title": "",
+      "en": "Memory-Mapped Peripherals and Typestate Programming",
+      "summary": "Memory-mapped peripherals, volatile access, PAC, and typestate programming in embedded Rust: using the type system to encode hardware state machines and design contracts.",
+      "bloom": "L3-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 嵌入式系统开发",
+          "path": "03_embedded_systems.md"
+        },
+        {
+          "title": "裸机启动与链接脚本",
+          "path": "13_bare_metal_boot_linker_script.md"
+        },
+        {
+          "title": "Type System",
+          "path": "../../01_foundation/02_type_system/01_type_system.md"
+        },
+        {
+          "title": "Unsafe Rust",
+          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "PAC 与 HAL 实现",
+          "path": "17_pac_hal_implementation.md"
+        },
+        {
+          "title": "embedded-hal 与驱动惯用法",
+          "path": "24_embedded_hal_and_driver_idioms.md"
+        },
+        {
+          "title": "异步 no_std 嵌入式",
+          "path": "11_async_no_std_embedded.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/26_embedded_rtos_and_safety_critical_frameworks.md",
+      "path": "06_ecosystem/05_systems_and_embedded/26_embedded_rtos_and_safety_critical_frameworks.md",
+      "title": "",
+      "en": "Embedded RTOS and Safety-Critical Frameworks",
+      "summary": "Comparative survey of Rust embedded RTOS and safety-critical frameworks: Hubris, Ariel OS, RTIC, Tock, Ferrocene, and Embassy, with architecture, scheduling, safety guarantees, and selection guidance.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 嵌入式系统开发",
+          "path": "03_embedded_systems.md"
+        },
+        {
+          "title": "安全关键裸机 OS 与 Rust",
+          "path": "19_safety_critical_bare_metal_os.md"
+        },
+        {
+          "title": "异步 no_std 嵌入式",
+          "path": "11_async_no_std_embedded.md"
+        },
+        {
+          "title": "实时系统概念",
+          "path": "03_embedded_systems.md#三实时系统"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "认证工具链与认证包清单",
+          "path": "../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md"
+        },
+        {
+          "title": "性能优化",
+          "path": "../10_performance/01_performance_optimization.md"
         },
         {
           "title": "嵌入式调试与日志",

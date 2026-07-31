@@ -10,7 +10,7 @@
 > 本主题在 knowledge 中有系统化的知识索引：原子操作（Atomic Operations）
 > **受众**: [专家]
 > **Bloom 层级**: L4-L5
-> **权威来源**: 本文件为 `concept/` 权威页。
+> **权威来源**: 本文件为 L3 实践速查页；Rust 内存序与原子操作的形式化权威解释已迁移至 [`concept/04_formal/09_system_semantics/08_memory_ordering_and_atomics.md`](../../04_formal/09_system_semantics/08_memory_ordering_and_atomics.md)。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: P×Eva — 评估原子操作（Atomic Operations）内存序的选型
 > **定位**: 深入分析 Rust **原子类型（Atomic）**和**内存排序（Memory Ordering [来源: [Atomic Ordering](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html)]）**——从基本的 load/store 到 compare-and-swap 和释放-获取语义，揭示无锁编程中硬件内存模型的精确控制。

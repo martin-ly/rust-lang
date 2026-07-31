@@ -66,6 +66,7 @@ mindmap
   - [七、反命题与边界](#七反命题与边界)
     - [反例：孤儿任务泄漏](#反例孤儿任务泄漏)
   - [八、参考来源](#八参考来源)
+  - [补充国际权威来源（P1/P2 覆盖）](#补充国际权威来源p1p2-覆盖)
 
 ---
 
@@ -214,7 +215,6 @@ async fn orphan_task() {
 - Project Loom StructuredTaskScope: <https://openjdk.org/jeps/453>
 - Tokio `JoinSet` API documentation: <https://docs.rs/tokio/latest/tokio/task/struct.JoinSet.html>
 - `async-scoped` crate documentation: <https://docs.rs/async-scoped/latest/async_scoped/>
-
 
 ## 补充国际权威来源（P1/P2 覆盖）
 

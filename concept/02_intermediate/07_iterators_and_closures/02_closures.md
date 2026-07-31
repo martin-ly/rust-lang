@@ -25,6 +25,7 @@
 ## 📑 目录
 
 - [Rust 闭包：捕获语义、Trait 层级与工程实践](#rust-闭包捕获语义trait-层级与工程实践)
+  - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 闭包的本质：匿名结构体 + 调用约定](#11-闭包的本质匿名结构体--调用约定)
     - [1.2 捕获方式：不可变引用、可变引用与移动](#12-捕获方式不可变引用可变引用与移动)
@@ -166,6 +167,7 @@ f();
 ```
 
 `move` 的典型用途：
+
 - 跨线程传递闭包（要求 `'static`）
 - 将非 `'static` 的局部变量生命周期延长至闭包本身
 - 在异步任务或迭代器适配器中转移所有权
@@ -195,6 +197,7 @@ let f = || {
 ```
 
 推断优先级：
+
 1. 若变量在闭包体中只被读取 → `&T`（`Fn`）
 2. 若需要修改 → `&mut T`（`FnMut`）
 3. 若需要将变量移出闭包体 → `T`（`FnOnce`）
@@ -293,6 +296,7 @@ let html = fetch("https://example.com").await?;
 ```
 
 异步闭包与普通 `async move` 块的关键差异：
+
 - `async ||` 可在调用时传入参数，每次调用产生新的 `Future`
 - 捕获发生在闭包**创建时**，`.await` 发生在调用后的 `Future` 执行时
 - 跨任务传递时通常需要 `async move ||` 以满足 `'static`
@@ -669,13 +673,13 @@ let f3 = || drop(v);
 
 | 来源 | 类型 | 链接 | 覆盖主题 |
 |---|---|---|---|
-| Rust Reference — Closure Types | P1 官方参考 | https://doc.rust-lang.org/reference/types/closure.html | 类型、捕获、trait |
-| Rust Reference — Closure Expressions | P1 官方参考 | https://doc.rust-lang.org/reference/expressions/closure-expr.html | 语法、move、async closures |
-| TRPL Ch13 — Closures | P1 官方教程 | https://doc.rust-lang.org/book/ch13-01-closures.html | 使用模式、捕获、Fn/FnMut/FnOnce |
-| Rust By Example — Closures | P2 官方示例 | https://doc.rust-lang.org/rust-by-example/fn/closures.html | 交互式示例 |
-| RFC 1558 — Closures | P1 设计文档 | https://github.com/rust-lang/rfcs/pull/1558 | `Fn`/`FnMut`/`FnOnce` 设计 |
-| RFC 3668 — Async Closures | P1 设计文档 | https://github.com/rust-lang/rfcs/pull/3668 | 异步闭包 |
-| Rustonomicon — Functions & Closures | P2 高级资料 | https://doc.rust-lang.org/nomicon/hrtb.html | 生命周期、高阶 trait bound |
+| Rust Reference — Closure Types | P1 官方参考 | <https://doc.rust-lang.org/reference/types/closure.html> | 类型、捕获、trait |
+| Rust Reference — Closure Expressions | P1 官方参考 | <https://doc.rust-lang.org/reference/expressions/closure-expr.html> | 语法、move、async closures |
+| TRPL Ch13 — Closures | P1 官方教程 | <https://doc.rust-lang.org/book/ch13-01-closures.html> | 使用模式、捕获、Fn/FnMut/FnOnce |
+| Rust By Example — Closures | P2 官方示例 | <https://doc.rust-lang.org/rust-by-example/fn/closures.html> | 交互式示例 |
+| RFC 1558 — Closures | P1 设计文档 | <https://github.com/rust-lang/rfcs/pull/1558> | `Fn`/`FnMut`/`FnOnce` 设计 |
+| RFC 3668 — Async Closures | P1 设计文档 | <https://github.com/rust-lang/rfcs/pull/3668> | 异步闭包 |
+| Rustonomicon — Functions & Closures | P2 高级资料 | <https://doc.rust-lang.org/nomicon/hrtb.html> | 生命周期、高阶 trait bound |
 
 ---
 

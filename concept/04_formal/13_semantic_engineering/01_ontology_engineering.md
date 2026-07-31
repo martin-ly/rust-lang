@@ -46,6 +46,7 @@
   - [八、嵌入式测验（Embedded Quiz）](#八嵌入式测验embedded-quiz)
   - [九、🧭 思维导图（Mindmap）](#九-思维导图mindmap)
   - [权威来源索引](#权威来源索引)
+  - [补充国际权威来源（P1/P2 覆盖）](#补充国际权威来源p1p2-覆盖)
 
 ---
 
@@ -347,7 +348,6 @@ mindmap
 > **相关文件**: [目录 README](README.md) · [描述逻辑与 OWL](02_description_logic_and_owl.md) · [知识图谱构建](03_knowledge_graph_construction.md) · [语义互操作](04_semantic_interoperability.md)
 >
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-28 ｜ **状态**: ✅ 新建（Rust 1.97 对齐）
-
 
 ## 补充国际权威来源（P1/P2 覆盖）
 

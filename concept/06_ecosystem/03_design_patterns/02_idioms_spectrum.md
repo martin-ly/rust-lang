@@ -114,6 +114,12 @@
     - [测验 3：什么是"早返回"（Early Return）模式？Rust 中通常如何实现？（理解层）](#测验-3什么是早返回early-return模式rust-中通常如何实现理解层)
     - [测验 4：`todo!()` 和 `unimplemented!()` 宏在开发中有什么用途？（理解层）](#测验-4todo-和-unimplemented-宏在开发中有什么用途理解层)
     - [测验 5：Rust 的 `must_use` 属性有什么作用？什么类型的返回值通常应该标记它？（理解层）](#测验-5rust-的-must_use-属性有什么作用什么类型的返回值通常应该标记它理解层)
+  - [十七、Functional Programming 惯用法](#十七functional-programming-惯用法)
+    - [17.1 Iterator combinators as control-flow idiom](#171-iterator-combinators-as-control-flow-idiom)
+    - [17.2 Lazy evaluation with iterators and closures](#172-lazy-evaluation-with-iterators-and-closures)
+    - [17.3 `Option` / `Result` combinators：`map`、`and_then`、`or_else`](#173-option--result-combinatorsmapand_thenor_else)
+    - [17.4 Avoiding mutation via `fold` / `scan`](#174-avoiding-mutation-via-fold--scan)
+    - [17.5 决策树：imperative loop vs iterator chain](#175-决策树imperative-loop-vs-iterator-chain)
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
@@ -1567,6 +1573,156 @@ fn main() {
 
 警告调用方不要忽略返回值。通常用于 `Result`（错误处理（Error Handling））、`Iterator`（惰性计算未执行）和表示重要副作用结果的类型。
 </details>
+
+## 十七、Functional Programming 惯用法
+
+Rust 的函数式特性不是“用闭包替代一切”，而是把**无副作用的数据转换**、**惰性求值**和**代数类型组合子**作为控制流与状态管理的惯用工具。本节点与 L4 控制级惯用法形成互补：当问题可表达为“对集合/可选值/错误值的一系列纯转换”时，函数式写法往往更短、更可组合，且同样零成本。
+
+### 17.1 Iterator combinators as control-flow idiom
+
+把 `for` 循环表达为 `filter` / `map` / `fold` / `scan` 等组合子链，使控制流（分支、累积、提前终止）显式化，并让编译器更容易进行向量化、循环融合等优化。
+
+**反例（命令式金字塔）**:
+
+```rust
+fn average_even(numbers: &[i32]) -> Option<f64> {
+    let mut sum = 0;
+    let mut count = 0;
+    for &n in numbers {
+        if n % 2 == 0 {
+            sum += n;
+            count += 1;
+        }
+    }
+    if count == 0 { return None; }
+    Some(sum as f64 / count as f64)
+}
+```
+
+**正例（组合子链）**:
+
+```rust
+fn average_even(numbers: &[i32]) -> Option<f64> {
+    let (sum, count) = numbers
+        .iter()
+        .filter(|&&n| n % 2 == 0)
+        .copied()
+        .fold((0, 0), |(sum, count), n| (sum + n, count + 1));
+    (count > 0).then(|| sum as f64 / count as f64)
+}
+```
+
+### 17.2 Lazy evaluation with iterators and closures
+
+Iterator 链是**惰性**的：在调用 `collect` / `fold` / `for_each` 之前不会执行任何计算。闭包同样可延迟求值，例如 `std::lazy::LazyCell` 或自定义 `Thunk`。
+
+```rust
+fn expensive(n: i32) -> i32 {
+    println!("computing {n}");
+    n * n
+}
+
+fn main() {
+    let iter = (0..5).map(|n| expensive(n)); // 此时没有打印
+    // 直到消费：
+    let sum: i32 = iter.take(2).sum();
+    println!("sum = {sum}");
+}
+```
+
+> 输出只有 `computing 0`、`computing 1` 和 `sum = 1`，因为 `take(2)` 让后续元素从未被求值。
+
+### 17.3 `Option` / `Result` combinators：`map`、`and_then`、`or_else`
+
+用组合子替代嵌套 `if let`，把“成功路径”保持在左侧主线上，错误/缺失处理作为后缀。
+
+```rust
+// ✅ 正例：组合子链
+fn parse_port(s: &str) -> Option<u16> {
+    s.parse::<u16>().ok().filter(|&p| p >= 1024)
+}
+
+fn lookup_config(key: &str) -> Result<String, std::env::VarError> {
+    std::env::var(key)
+        .map(|v| v.trim().to_string())
+        .and_then(|v| if v.is_empty() { Err(std::env::VarError::NotPresent) } else { Ok(v) })
+}
+```
+
+```rust
+// ❌ 反例：嵌套 if let / match
+fn lookup_config(key: &str) -> Result<String, std::env::VarError> {
+    match std::env::var(key) {
+        Ok(v) => {
+            let v = v.trim().to_string();
+            if v.is_empty() {
+                Err(std::env::VarError::NotPresent)
+            } else {
+                Ok(v)
+            }
+        }
+        Err(e) => Err(e),
+    }
+}
+```
+
+### 17.4 Avoiding mutation via `fold` / `scan`
+
+当状态转换可用纯函数表达时，用 `fold` 显式传递累加器，避免可变变量。
+
+```rust
+// ✅ 正例：fold 表达状态机
+#[derive(Debug, PartialEq)]
+enum State { A, B, C }
+
+fn transition_all(initial: State, inputs: &[char]) -> State {
+    inputs.iter().fold(initial, |state, &ch| match (state, ch) {
+        (State::A, 'a') => State::B,
+        (State::B, 'b') => State::C,
+        _ => State::A,
+    })
+}
+
+fn main() {
+    assert_eq!(transition_all(State::A, &['a', 'b']), State::C);
+}
+```
+
+```rust
+// ✅ 正例：scan 带中间状态生成序列
+fn running_max(numbers: &[i32]) -> Vec<i32> {
+    numbers
+        .iter()
+        .scan(i32::MIN, |max_so_far, &n| {
+            *max_so_far = (*max_so_far).max(n);
+            Some(*max_so_far)
+        })
+        .collect()
+}
+
+fn main() {
+    assert_eq!(running_max(&[3, 1, 4, 1, 5, 9, 2]), vec![3, 3, 4, 4, 5, 9, 9]);
+}
+```
+
+### 17.5 决策树：imperative loop vs iterator chain
+
+```mermaid
+graph TD
+    A[需要遍历集合] --> B{是否需要可变状态<br/>跨越多次迭代?}
+    B -->|是| C{状态是否复杂<br/>且无法用 fold/scan 表达?}
+    C -->|是| D[保留命令式循环]
+    C -->|否| E[用 fold / scan 显式传递状态]
+    B -->|否| F{是否只需过滤/映射/聚合?}
+    F -->|是| G[Iterator 链: filter / map / fold / collect]
+    F -->|否| H{是否需要提前终止或惰性求值?}
+    H -->|是| I[Iterator 惰性链 + take / find / any]
+    H -->|否| J[保留命令式循环]
+```
+
+> **使用建议**：先用 Iterator 链尝试表达；若出现 `continue`/`break` 嵌套、需要跨迭代维护复杂可变结构，或性能剖析显示组合子未优化，再回退到显式循环。
+
+---
 
 ## 认知路径
 

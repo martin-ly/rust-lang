@@ -1,17 +1,17 @@
 # 元数据一致性基线（语义质量门 P0-1）
 
-**日期**: 2026-07-31  **扫描**: 651 concept 活跃文件（排除 archive）  **模式**: strict
+**日期**: 2026-07-31  **扫描**: 674 concept 活跃文件（排除 archive）  **模式**: strict
 
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
 | D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥 | 0 | 0.0% | >0 | pass |
-| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 0 (基=389) | 0.0% | >=5% | pass |
+| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 0 (基=396) | 0.0% | >=5% | pass |
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
-| D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
-| D6 Summary 低信息量模板套话 | 0 | 0.0% | >=3% | pass |
+| D5 稳定层正文残留 nightly/preview/unstable | 3 | 0.4% | >0 | FAIL |
+| D6 Summary 低信息量模板套话 | 15 | 2.2% | >=3% | pass |
 
-**受影响文件总数**: 0 / 651
+**受影响文件总数**: 17 / 674
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -122,15 +122,30 @@
 ### D4 文首块 Rust 版本号自矛盾（0）
 
 
-### D5 稳定层正文残留 nightly/preview/unstable（0）
+### D5 稳定层正文残留 nightly/preview/unstable（3）
 
+- `concept/06_ecosystem/05_systems_and_embedded/13_bare_metal_boot_linker_script.md` — 稳定层 nightly/preview 关键词 1 处
+- `concept/06_ecosystem/05_systems_and_embedded/23_no_std_and_bare_metal_idioms.md` — 稳定层 nightly/preview 关键词 2 处
+- `concept/06_ecosystem/10_performance/03_algorithms_and_complexity_idioms.md` — 稳定层 nightly/preview 关键词 2 处
 
-### D6 Summary 低信息量模板套话（0）
+### D6 Summary 低信息量模板套话（15）
 
+- `concept/04_formal/09_system_semantics/07_concurrent_and_parallel_semantics.md` — Summary 为空
+- `concept/04_formal/09_system_semantics/08_memory_ordering_and_atomics.md` — Summary 为空
+- `concept/06_ecosystem/03_design_patterns/24_repository_and_unit_of_work.md` — Summary 为空
+- `concept/06_ecosystem/03_design_patterns/25_hexagonal_ports_and_adapters.md` — Summary 为空
+- `concept/06_ecosystem/03_design_patterns/26_circuit_breaker.md` — Summary 为空
+- `concept/06_ecosystem/03_design_patterns/27_bulkhead.md` — Summary 为空
+- `concept/06_ecosystem/03_design_patterns/28_retry.md` — Summary 为空
+- `concept/06_ecosystem/03_design_patterns/29_saga.md` — Summary 为空
+- `concept/06_ecosystem/03_design_patterns/30_outbox.md` — Summary 为空
+- `concept/06_ecosystem/03_design_patterns/31_object_pool.md` — Summary 为空
+- `concept/06_ecosystem/03_design_patterns/32_typestate_deep_dive.md` — Summary 为空
+- `concept/06_ecosystem/10_performance/03_algorithms_and_complexity_idioms.md` — Summary 为空
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 
-- 无（全部通过）
+- D5 稳定层nightly残留 3 (>0)
 
 ## 机器可读
 

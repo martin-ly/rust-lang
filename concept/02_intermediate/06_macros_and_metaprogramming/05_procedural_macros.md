@@ -25,6 +25,7 @@
 ## 📑 目录
 
 - [过程宏：derive、attribute、function-like 与 TokenStream 操作](#过程宏deriveattributefunction-like-与-tokenstream-操作)
+  - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 过程宏的本质](#11-过程宏的本质)
     - [1.2 三种过程宏](#12-三种过程宏)
@@ -171,6 +172,7 @@ let tokens: TokenStream = quote! {
 ### 2.2 syn + quote 工作流
 
 标准工作流：
+
 1. `syn::parse(input)` 将 `TokenStream` 解析为 AST（`DeriveInput`/`ItemFn`/...）
 2. 遍历 AST，提取需要的信息
 3. 使用 `quote!` 生成新的 `TokenStream`
@@ -508,6 +510,7 @@ struct Item;
 - Derive 宏：为 struct/enum 派生 trait 实现
 - 属性宏：修饰并可能重写 item
 - 函数式宏：像 `macro_rules!` 一样调用，可处理复杂语法
+
 </details>
 
 ---
@@ -580,13 +583,13 @@ struct Item;
 
 | 来源 | 类型 | 链接 | 覆盖主题 |
 |---|---|---|---|
-| Rust Reference — Procedural Macros | P1 | https://doc.rust-lang.org/reference/procedural-macros.html | 三种过程宏、执行模型 |
-| TRPL Ch19 — Macros | P1 | https://doc.rust-lang.org/book/ch19-06-macros.html | 入门与对比 |
-| syn crate | P2 | https://docs.rs/syn/latest/syn/ | AST 解析 |
-| quote crate | P2 | https://docs.rs/quote/latest/quote/ | 代码生成 |
-| proc-macro2 crate | P2 | https://docs.rs/proc-macro2/latest/proc_macro2/ | 可测试 TokenStream |
-| proc-macro-workshop | P2 | https://github.com/dtolnay/proc-macro-workshop | 实践教程 |
-| RFC 1566 — Proc Macro | P1 | https://github.com/rust-lang/rfcs/pull/1566 | 设计背景 |
+| Rust Reference — Procedural Macros | P1 | <https://doc.rust-lang.org/reference/procedural-macros.html> | 三种过程宏、执行模型 |
+| TRPL Ch19 — Macros | P1 | <https://doc.rust-lang.org/book/ch19-06-macros.html> | 入门与对比 |
+| syn crate | P2 | <https://docs.rs/syn/latest/syn/> | AST 解析 |
+| quote crate | P2 | <https://docs.rs/quote/latest/quote/> | 代码生成 |
+| proc-macro2 crate | P2 | <https://docs.rs/proc-macro2/latest/proc_macro2/> | 可测试 TokenStream |
+| proc-macro-workshop | P2 | <https://github.com/dtolnay/proc-macro-workshop> | 实践教程 |
+| RFC 1566 — Proc Macro | P1 | <https://github.com/rust-lang/rfcs/pull/1566> | 设计背景 |
 
 ---
 

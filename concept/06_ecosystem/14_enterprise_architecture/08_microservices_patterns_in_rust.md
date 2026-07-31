@@ -9,7 +9,7 @@
 > **Bloom 层级**: L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 将 Richardson 的微服务模式与 Rust 的企业工程实践对齐：服务拆分、通信模式、数据一致性、可观测性与部署。
-> **前置概念**: [Microservice Patterns](../03_design_patterns/05_microservice_patterns.md) · [Hexagonal Architecture in Enterprise](07_hexagonal_architecture_in_rust.md) · [Saga](29_saga.md) · [Outbox](30_outbox.md)
+> **前置概念**: [Microservice Patterns](../03_design_patterns/05_microservice_patterns.md) · [Hexagonal Architecture in Enterprise](07_hexagonal_architecture_in_rust.md) · [Saga](../03_design_patterns/29_saga.md) · [Outbox](../03_design_patterns/30_outbox.md)
 > **后置概念**: [Clean Architecture in Rust](06_clean_architecture_in_rust.md) · [Event-Driven Architecture](../03_design_patterns/06_event_driven_architecture.md)
 
 ---
