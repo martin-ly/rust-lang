@@ -1,0 +1,3 @@
+# KG SHACL / RDF 验证依赖（隔离安装：python -m venv .venv && .venv/Scripts/pip install -r requirements-kg.txt）
+pyshacl>=0.40.0
+rdflib>=7.0.0
