@@ -70,6 +70,7 @@ fn main() {
 ## 📑 目录
 
 - [RustBelt 与验证工具链](#rustbelt-与验证工具链)
+  - [权威来源 / Provenance](#权威来源--provenance)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 Wikipedia 权威定义](#11-wikipedia-权威定义)
@@ -923,6 +924,7 @@ jobs:
 ## 📑 目录
 
 - [RustBelt 与验证工具链](#rustbelt-与验证工具链)
+  - [权威来源 / Provenance](#权威来源--provenance)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 Wikipedia 权威定义](#11-wikipedia-权威定义)

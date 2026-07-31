@@ -9,7 +9,7 @@
 > **Bloom 层级**: L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 将 Chris Richardson 的 Transactional Outbox 模式与 Rust 的异步数据库访问、消息发布、幂等消费对齐，保证事件驱动架构中的数据一致性。
-> **前置概念**: [Saga](29_saga.md) · [Event-Driven Architecture](06_event_driven_architecture.md) · [CQRS and Event Sourcing](07_cqrs_event_sourcing.md)
+> **前置概念**: [Saga](29_saga.md) · [Event-Driven Architecture](06_event_driven_architecture.md) · [CQRS and Event Sourcing](07_cqrs_event_sourcing.md) · [Comparative Layer README](../../05_comparative/README.md)
 > **后置概念**: [Microservice Patterns](05_microservice_patterns.md)
 
 ---

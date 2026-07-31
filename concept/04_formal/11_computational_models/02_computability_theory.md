@@ -47,7 +47,7 @@
     - [测验 4：Rust 对递归函数的全性（分析层）](#测验-4rust-对递归函数的全性分析层)
     - [测验 5：不可判定问题的工程处理（评价层）](#测验-5不可判定问题的工程处理评价层)
     - [测验 6：归约、算术层级与 Rust 投影（综合层）](#测验-6归约算术层级与-rust-投影综合层)
-  - [六、权威来源索引](#六权威来源索引)
+  - [六、权威来源 / International Authority References](#六权威来源--international-authority-references)
   - [七、🧭 思维导图（Mindmap）](#七-思维导图mindmap)
 
 ---

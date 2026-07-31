@@ -360,7 +360,6 @@ Rust 的 trait bound 是显式的“能力授权”：每加一个 bound，函�
 `reverse` 的类型只说明它重排元素位置；参数化保证它不能以元素的具体内容做条件分支（无 trait bound、无反射时），因此先映射 `f` 再反转，与先反转再映射 `f`，结果相同。A、C、D 都与类型能推导出的性质矛盾。
 </details>
 
-
 ## 补充国际权威来源（P1/P2 覆盖）
 
 - [Aeneas](https://github.com/AeneasVerif/aeneas)

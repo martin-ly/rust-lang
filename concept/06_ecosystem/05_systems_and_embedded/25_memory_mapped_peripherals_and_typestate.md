@@ -14,7 +14,7 @@
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: P×App — 将类型系统应用于硬件寄存器与外设状态机
 > **定位**: 系统讲解嵌入式 Rust 中“内存映射外设”的访问方式——从原始 `volatile` 读写，到 PAC 生成的类型安全 API，再到用 Typestate 把外设状态机编码进 Rust 类型系统，从而把运行时错误转为编译期拒绝。
-> **前置概念**: [Rust 嵌入式系统开发](03_embedded_systems.md) · [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
+> **前置概念**: [Rust 嵌入式系统开发](03_embedded_systems.md) · [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **后置概念**: [PAC 与 HAL 实现](17_pac_hal_implementation.md) · [embedded-hal 与驱动惯用法](24_embedded_hal_and_driver_idioms.md) · [异步 no_std 嵌入式](11_async_no_std_embedded.md)
 
 ---

@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-07-31T13:10:13.232022+00:00
+> 生成时间: 2026-07-31T13:15:15.166171+00:00
 > 扫描文件数: 647
 
 ## 全局指标
@@ -701,8 +701,8 @@
 | E:\_src\rust-lang\concept\03_advanced\04_ffi\05_unsafe_extern_blocks.md | L3 | 572 | 0 | 0 | 0 | 3 | 2 | 14 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\03_advanced\04_ffi\06_ffi_deep_dive.md | L3 | 714 | 0 | 0 | 0 | 4 | 2 | 19 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\03_advanced\04_ffi\07_ffi_patterns.md | L3 | 600 | 0 | 0 | 0 | 6 | 1 | 14 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
-| E:\_src\rust-lang\concept\03_advanced\05_inline_assembly\01_inline_assembly.md | L3 | 987 | 0 | 0 | 0 | 1 | 1 | 31 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
-| E:\_src\rust-lang\concept\03_advanced\05_inline_assembly\02_inline_assembly_extended.md | L3 | 538 | 0 | 0 | 0 | 3 | 2 | 11 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
+| E:\_src\rust-lang\concept\03_advanced\05_inline_assembly\01_inline_assembly.md | L3 | 991 | 0 | 0 | 0 | 1 | 1 | 31 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
+| E:\_src\rust-lang\concept\03_advanced\05_inline_assembly\02_inline_assembly_extended.md | L3 | 546 | 0 | 0 | 0 | 3 | 2 | 11 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\03_advanced\06_low_level_patterns\01_custom_allocators.md | L3 | 906 | 3 | 3 | 0 | 2 | 2 | 12 | 0 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\03_advanced\06_low_level_patterns\02_zero_copy_parsing.md | L3 | 952 | 3 | 3 | 0 | 2 | 2 | 13 | 0 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\03_advanced\06_low_level_patterns\03_type_erasure.md | L3 | 923 | 4 | 3 | 0 | 2 | 2 | 11 | 0 | ✅ | ✅ | ✅ | 专家 | 专家级 |
@@ -724,7 +724,7 @@
 | E:\_src\rust-lang\concept\03_advanced\08_process_ipc\08_process_performance_engineering.md | L3 | 284 | 8 | 2 | 0 | 1 | 2 | 5 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\03_advanced\08_process_ipc\09_process_testing_and_benchmarking.md | L3 | 299 | 8 | 2 | 0 | 1 | 2 | 7 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\03_advanced\08_process_ipc\10_modern_process_libraries.md | L3 | 281 | 8 | 2 | 0 | 1 | 2 | 8 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\00_type_theory\01_type_theory.md | L4 | 2562 | 29 | 0 | 0 | 12 | 6 | 40 | 3 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\00_type_theory\01_type_theory.md | L4 | 2563 | 29 | 0 | 0 | 12 | 6 | 40 | 3 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\00_type_theory\02_subtype_variance.md | L4 | 715 | 6 | 0 | 0 | 2 | 3 | 11 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\00_type_theory\03_type_inference.md | L4 | 789 | 3 | 0 | 0 | 2 | 3 | 9 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\00_type_theory\04_category_theory.md | L4 | 856 | 3 | 0 | 0 | 2 | 2 | 11 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
@@ -738,7 +738,7 @@
 | E:\_src\rust-lang\concept\04_formal\00_type_theory\12_pattern_composition_algebra.md | L4 | 792 | 3 | 0 | 0 | 2 | 1 | 15 | 0 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\00_type_theory\13_formal_algorithm_theory.md | L4 | 339 | 3 | 0 | 0 | 0 | 1 | 6 | 6 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\00_type_theory\14_flux.md | L4 | 500 | 0 | 0 | 0 | 6 | 1 | 18 | 0 | ❌ | ✅ | ✅ | 研究者 | 综述级 |
-| E:\_src\rust-lang\concept\04_formal\00_type_theory\15_parametricity_and_theorems_for_free.md | L4 | 368 | 0 | 0 | 0 | 5 | 1 | 9 | 0 | ❌ | ✅ | ✅ | None | None |
+| E:\_src\rust-lang\concept\04_formal\00_type_theory\15_parametricity_and_theorems_for_free.md | L4 | 367 | 0 | 0 | 0 | 5 | 1 | 9 | 0 | ❌ | ✅ | ✅ | None | None |
 | E:\_src\rust-lang\concept\04_formal\00_type_theory\16_expressive_power.md | L4 | 362 | 0 | 0 | 0 | 4 | 1 | 9 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\04_formal\00_type_theory\17_system_f.md | L4 | 274 | 0 | 0 | 0 | 3 | 1 | 6 | 0 | ❌ | ✅ | ✅ | None | None |
 | E:\_src\rust-lang\concept\04_formal\01_ownership_logic\01_linear_logic.md | L4 | 1291 | 14 | 0 | 0 | 4 | 6 | 13 | 3 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
@@ -747,13 +747,13 @@
 | E:\_src\rust-lang\concept\04_formal\01_ownership_logic\04_borrow_checking_decidability.md | L4 | 467 | 3 | 0 | 0 | 1 | 3 | 10 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\01_ownership_logic\05_tree_borrows_deep_dive.md | L4 | 255 | 0 | 0 | 0 | 1 | 1 | 4 | 0 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\01_ownership_logic\06_behavior_considered_undefined.md | L4 | 286 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | ❌ | ✅ | ✅ | 专家 | 研究者级 |
-| E:\_src\rust-lang\concept\04_formal\02_separation_logic\01_rustbelt.md | L4 | 1500 | 5 | 0 | 0 | 1 | 6 | 17 | 10 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\02_separation_logic\01_rustbelt.md | L4 | 1502 | 5 | 0 | 0 | 1 | 6 | 17 | 10 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\02_separation_logic\02_separation_logic.md | L4 | 871 | 4 | 0 | 0 | 2 | 2 | 10 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\02_separation_logic\03_safety_tags_in_formal.md | L4 | 23 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 研究者 | 研究者级 |
 | E:\_src\rust-lang\concept\04_formal\02_separation_logic\04_borrow_sanitizer_in_formal.md | L4 | 213 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\01_denotational_semantics.md | L4 | 728 | 3 | 0 | 0 | 4 | 2 | 10 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\02_hoare_logic.md | L4 | 930 | 3 | 0 | 0 | 2 | 3 | 8 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
-| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\03_operational_semantics.md | L4 | 1218 | 3 | 0 | 0 | 2 | 2 | 15 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\03_operational_semantics.md | L4 | 1220 | 3 | 0 | 0 | 2 | 2 | 15 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\04_evaluation_strategies.md | L4 | 721 | 0 | 0 | 0 | 2 | 1 | 14 | 0 | ❌ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\05_axiomatic_semantics.md | L4 | 1059 | 5 | 0 | 0 | 4 | 1 | 15 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\06_observational_equivalence.md | L4 | 899 | 0 | 0 | 0 | 2 | 1 | 19 | 0 | ❌ | ✅ | ✅ | 研究者 | 专家级 |

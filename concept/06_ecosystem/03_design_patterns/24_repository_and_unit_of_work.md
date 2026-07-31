@@ -9,7 +9,7 @@
 > **Bloom 层级**: L5-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 将 Evans / Vernon 的 DDD 战术模式（Repository、Aggregate、Domain Event）与 Rust 的所有权、trait、错误处理模型对齐，提供可在生产落地的实现策略。
-> **前置概念**: [DDD Tactical Patterns in Rust](../14_enterprise_architecture/04_domain_driven_design_in_rust.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Error Handling](../../01_foundation/08_error_handling/01_error_handling_basics.md)
+> **前置概念**: [DDD Tactical Patterns in Rust](../14_enterprise_architecture/04_domain_driven_design_in_rust.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Error Handling](../../01_foundation/08_error_handling/01_error_handling_basics.md) · [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md)
 > **后置概念**: [Hexagonal Architecture](25_hexagonal_ports_and_adapters.md) · [CQRS and Event Sourcing](07_cqrs_event_sourcing.md)
 
 ---

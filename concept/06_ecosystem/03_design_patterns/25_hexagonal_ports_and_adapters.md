@@ -9,7 +9,7 @@
 > **Bloom 层级**: L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 将 Cockburn 的六边形架构（又称 Ports & Adapters）与 Rust 的 trait/workspace/Cargo 特性对齐，建立可测试、可替换的领域核心。
-> **前置概念**: [Architecture Patterns](08_architecture_patterns.md) · [DDD Tactical Patterns](../14_enterprise_architecture/04_domain_driven_design_in_rust.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
+> **前置概念**: [Architecture Patterns](08_architecture_patterns.md) · [DDD Tactical Patterns](../14_enterprise_architecture/04_domain_driven_design_in_rust.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md)
 > **后置概念**: [Repository and Unit of Work](24_repository_and_unit_of_work.md) · [Clean Architecture](../14_enterprise_architecture/06_clean_architecture_in_rust.md) · [CQRS and Event Sourcing](07_cqrs_event_sourcing.md)
 
 ---

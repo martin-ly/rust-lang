@@ -9,7 +9,7 @@
 > **Bloom 层级**: L5-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 将 transient-fault handling 的 Retry 模式与 Rust 的 `Future`、trait、错误类型对齐，实现可组合、可观测的重试中间件。
-> **前置概念**: [Error Handling](../../01_foundation/08_error_handling/01_error_handling_basics.md) · [Async](../../03_advanced/01_async/01_async.md) · [Circuit Breaker](26_circuit_breaker.md)
+> **前置概念**: [Error Handling](../../01_foundation/08_error_handling/01_error_handling_basics.md) · [Async](../../03_advanced/01_async/01_async.md) · [Circuit Breaker](26_circuit_breaker.md) · [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md)
 > **后置概念**: [Bulkhead](27_bulkhead.md) · [Saga](29_saga.md)
 
 ---

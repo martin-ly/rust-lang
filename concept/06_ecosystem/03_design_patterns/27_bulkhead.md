@@ -9,7 +9,7 @@
 > **Bloom 层级**: L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 将 Nygard 的舱壁模式映射到 Rust 的线程池、异步任务、内存配额与容器资源限制，建立多层次的故障隔离。
-> **前置概念**: [Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) · [Async Runtime](../../03_advanced/01_async/01_async.md) · [Circuit Breaker](26_circuit_breaker.md)
+> **前置概念**: [Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) · [Async Runtime](../../03_advanced/01_async/01_async.md) · [Circuit Breaker](26_circuit_breaker.md) · [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md)
 > **后置概念**: [Retry](28_retry.md) · [Microservice Patterns](05_microservice_patterns.md)
 
 ---

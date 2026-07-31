@@ -9,7 +9,7 @@
 > **Bloom 层级**: L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 将 Garcia-Molina / Hohpe / Richardson 的 Saga 模式与 Rust 的类型系统、错误处理、异步执行模型对齐，实现可编排或可事件驱动的长事务。
-> **前置概念**: [DDD Tactical Patterns](../14_enterprise_architecture/04_domain_driven_design_in_rust.md) · [Event-Driven Architecture](06_event_driven_architecture.md) · [CQRS and Event Sourcing](07_cqrs_event_sourcing.md)
+> **前置概念**: [DDD Tactical Patterns](../14_enterprise_architecture/04_domain_driven_design_in_rust.md) · [Event-Driven Architecture](06_event_driven_architecture.md) · [CQRS and Event Sourcing](07_cqrs_event_sourcing.md) · [Comparative Layer README](../../05_comparative/README.md)
 > **后置概念**: [Outbox](30_outbox.md) · [Microservice Patterns](05_microservice_patterns.md)
 
 ---

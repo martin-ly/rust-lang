@@ -9,7 +9,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 系统梳理 Rust 生态中常见**反模式（anti-patterns）**——它们能编译、能短期解决问题，但会引入性能、可维护性或正确性债务；每个反模式都给出地道替代方案与可编译的“反例 → 正例”对照。
 >
-> **前置概念**: [Idioms Spectrum](02_idioms_spectrum.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Async](../../03_advanced/01_async/01_async.md)
+> **前置概念**: [Idioms Spectrum](02_idioms_spectrum.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Async](../../03_advanced/01_async/01_async.md) · [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md)
 > **后置概念**: [API Design Patterns](18_api_design_patterns.md) · [FFI Patterns](../../03_advanced/04_ffi/07_ffi_patterns.md)
 
 ---

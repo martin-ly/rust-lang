@@ -13,7 +13,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Cre — 在资源受限硬件上组装可运行、可维护的裸机 crate
-> **前置概念**: [Rust 嵌入式系统开发](03_embedded_systems.md) · [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md) · [panic_handler 与 no_std 运行时](18_panic_runtime_no_std.md) · [嵌入式内存分配器](16_embedded_memory_allocators.md) · [no_std 同步原语](15_no_std_synchronization_primitives.md)
+> **前置概念**: [Rust 嵌入式系统开发](03_embedded_systems.md) · [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md) · [panic_handler 与 no_std 运行时](18_panic_runtime_no_std.md) · [嵌入式内存分配器](16_embedded_memory_allocators.md) · [no_std 同步原语](15_no_std_synchronization_primitives.md) · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **后置概念**: [PAC 与 HAL 实现](17_pac_hal_implementation.md) · [embedded-hal 与驱动惯用法](24_embedded_hal_and_driver_idioms.md) · [异步 no_std 嵌入式](11_async_no_std_embedded.md)
 
 ---

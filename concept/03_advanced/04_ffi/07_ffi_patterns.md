@@ -9,7 +9,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 在 [`01_rust_ffi.md`](01_rust_ffi.md) 的基础上，聚焦 Rust FFI 的**可复用设计模式**：如何把 Rust 类型安全地暴露给 C，如何管理跨语言所有权，以及如何在 FFI 边界上保留 Rust 的线程安全保证。
 >
-> **前置概念**: [Rust FFI](01_rust_ffi.md) · [Unsafe](../02_unsafe/01_unsafe.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
+> **前置概念**: [Rust FFI](01_rust_ffi.md) · [Unsafe](../02_unsafe/01_unsafe.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)
 > **后置概念**: [Async FFI Boundary](04_async_ffi_boundary.md) · [Unsafe Extern Blocks](05_unsafe_extern_blocks.md)
 
 ---

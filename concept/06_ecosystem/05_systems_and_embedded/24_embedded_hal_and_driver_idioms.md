@@ -13,7 +13,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Cre — 编写可移植、类型安全的嵌入式设备驱动
-> **前置概念**: [Rust 嵌入式系统开发](03_embedded_systems.md) · [PAC 与 HAL 实现](17_pac_hal_implementation.md) · [embedded-hal 1.0 迁移](09_embedded_hal_1_0_migration.md) · [no_std 与裸机惯用法](23_no_std_and_bare_metal_idioms.md)
+> **前置概念**: [Rust 嵌入式系统开发](03_embedded_systems.md) · [PAC 与 HAL 实现](17_pac_hal_implementation.md) · [embedded-hal 1.0 迁移](09_embedded_hal_1_0_migration.md) · [no_std 与裸机惯用法](23_no_std_and_bare_metal_idioms.md) · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **后置概念**: [嵌入式协议与外设驱动](22_embedded_protocol_drivers.md) · [异步 no_std 嵌入式](11_async_no_std_embedded.md) · [嵌入式调试与日志](20_embedded_debugging_logging.md)
 
 ---

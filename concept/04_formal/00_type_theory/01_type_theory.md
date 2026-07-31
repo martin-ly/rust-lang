@@ -1827,6 +1827,7 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「Type Theory 类型论基础」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+>
 ## 十三、Hindley-Milner Algorithm W 完整形式化
 
 **EN**: Hindley-Milner Algorithm W Formalization

@@ -9,7 +9,7 @@
 > **Bloom 层级**: L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 将 Robert C. Martin 的 Clean Architecture 与 Rust 的工程结构（workspace、crate、trait、模块可见性）对齐，明确依赖方向与测试策略。
-> **前置概念**: [Enterprise Architecture Frameworks](01_enterprise_architecture_frameworks.md) · [Hexagonal / Ports & Adapters](../03_design_patterns/25_hexagonal_ports_and_adapters.md) · [DDD Tactical Patterns](04_domain_driven_design_in_rust.md)
+> **前置概念**: [Enterprise Architecture Frameworks](01_enterprise_architecture_frameworks.md) · [Hexagonal / Ports & Adapters](../03_design_patterns/25_hexagonal_ports_and_adapters.md) · [DDD Tactical Patterns](04_domain_driven_design_in_rust.md) · [Comparative Layer README](../../05_comparative/README.md)
 > **后置概念**: [Microservices Patterns in Rust](08_microservices_patterns_in_rust.md) · [Repository and Unit of Work](../03_design_patterns/24_repository_and_unit_of_work.md)
 
 ---

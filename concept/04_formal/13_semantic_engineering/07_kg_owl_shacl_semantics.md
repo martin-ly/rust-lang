@@ -5,7 +5,7 @@
 > **Bloom 层级**: L4-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
-> **前置概念**: [Knowledge Graph Ontology](../../00_meta/knowledge_topology/kg_ontology_v2.md) · [AI Ontology and Rust Semantics](./06_ai_ontology_and_rust_semantics.md) · [Semantic Model Atlas](../../00_meta/knowledge_topology/11_semantic_model_atlas.md)
+> **前置概念**: [Knowledge Graph Ontology](../../00_meta/knowledge_topology/kg_ontology_v2.md) · [AI Ontology and Rust Semantics](./06_ai_ontology_and_rust_semantics.md) · [Semantic Model Atlas](../../00_meta/knowledge_topology/11_semantic_model_atlas.md) · [Atomics and Memory Ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md)
 > **后置概念**: [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) · [LLM System Architecture](../../07_future/04_research_and_experimental/08_llm_system_architecture.md)
 
 ---

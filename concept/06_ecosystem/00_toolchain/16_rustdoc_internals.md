@@ -71,6 +71,7 @@
     - [反例：intra-doc link 在 reexport 后失效](#反例intra-doc-link-在-reexport-后失效)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
   - [相关概念链接](#相关概念链接)
+  - [补充国际权威来源（P1/P2 覆盖）](#补充国际权威来源p1p2-覆盖)
 
 ---
 
@@ -646,7 +647,6 @@ mindmap
 - [rustc Query System](../../04_formal/05_rustc_internals/01_rustc_query_system.md) — rustdoc 复用的查询基础设施
 - [Name Resolution and HIR](../../04_formal/05_rustc_internals/04_name_resolution_and_hir.md) — rustdoc 输入的编译器表示
 - [Compiler Internals](04_compiler_internals.md) — rustc 内部机制总览
-
 
 ## 补充国际权威来源（P1/P2 覆盖）
 

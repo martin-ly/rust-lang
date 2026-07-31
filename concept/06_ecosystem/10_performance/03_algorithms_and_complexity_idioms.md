@@ -9,7 +9,7 @@
 > **Bloom 层级**: L3-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 补全 `concept/` 在算法领域的 Rust 特化内容：把 CLRS/Leiserson/Sedgewick 的通用算法思想翻译为 Rust 的迭代器、借用、零拷贝、SIMD、并行迭代器实现策略。
-> **前置概念**: [Iterator](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [Performance Optimization](01_performance_optimization.md)
+> **前置概念**: [Iterator](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [Performance Optimization](01_performance_optimization.md) · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **后置概念**: [c08_algorithms crate docs](../../../crates/c08_algorithms/docs/README.md) · [Idioms Spectrum](../03_design_patterns/02_idioms_spectrum.md)
 
 ---

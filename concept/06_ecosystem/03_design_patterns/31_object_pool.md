@@ -9,7 +9,7 @@
 > **Bloom 层级**: L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 将 GoF 对象池模式与 Rust 的所有权、生命周期、RAII 结合，实现零泄漏、可复用的资源池。
-> **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [RAII](../03_design_patterns/02_idioms_spectrum.md) · [Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md)
+> **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [RAII](../03_design_patterns/02_idioms_spectrum.md) · [Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) · [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md)
 > **后置概念**: [Flyweight（已覆盖于 01_patterns.md）](01_patterns.md) · [Performance Optimization](../10_performance/01_performance_optimization.md)
 
 ---

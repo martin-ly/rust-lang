@@ -14,7 +14,7 @@
 > **A/S/P 标记**: **S+A+Eva** — Structure + Application + Evaluation
 > **双维定位**: C×Eva — 比较与评价面向嵌入式与安全关键的 Rust 框架
 > **定位**: 系统比较六种 Rust 嵌入式/安全关键方案——Hubris、Ariel OS、RTIC、Tock、Ferrocene、Embassy——从架构、调度、内存安全、async 支持、认证状态到典型场景，帮助工程师在技术栈选型时做出有据决策。
-> **前置概念**: [Rust 嵌入式系统开发](03_embedded_systems.md) · [安全关键裸机 OS 与 Rust](19_safety_critical_bare_metal_os.md) · [异步 no_std 嵌入式](11_async_no_std_embedded.md) · [实时系统概念](03_embedded_systems.md#三实时系统)
+> **前置概念**: [Rust 嵌入式系统开发](03_embedded_systems.md) · [安全关键裸机 OS 与 Rust](19_safety_critical_bare_metal_os.md) · [异步 no_std 嵌入式](11_async_no_std_embedded.md) · [实时系统概念](03_embedded_systems.md#三实时系统) · [Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)
 > **后置概念**: [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) · [性能优化](../10_performance/01_performance_optimization.md) · [嵌入式调试与日志](20_embedded_debugging_logging.md)
 
 ---

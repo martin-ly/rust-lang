@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 647,
-    "generated_at": "2026-07-31T13:10:13.233024+00:00"
+    "generated_at": "2026-07-31T13:15:15.167170+00:00"
   },
   "files": [
     {
@@ -37849,6 +37849,7 @@
       "sources": [],
       "cross_references": [
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../02_intermediate/00_traits/01_traits.md",
         "../02_unsafe/01_unsafe.md",
         "01_rust_ffi.md",
         "04_async_ffi_boundary.md",
@@ -37860,7 +37861,7 @@
       "matrix_rows": 7,
       "pre_post": {
         "pre": [
-          "[Rust FFI](01_rust_ffi.md) · [Unsafe](../02_unsafe/01_unsafe.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)"
+          "[Rust FFI](01_rust_ffi.md) · [Unsafe](../02_unsafe/01_unsafe.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)"
         ],
         "post": [
           "[Async FFI Boundary](04_async_ffi_boundary.md) · [Unsafe Extern Blocks](05_unsafe_extern_blocks.md)"
@@ -37874,7 +37875,7 @@
       "layer": "L3",
       "title": "内联汇编 (Inline Assembly)",
       "positioning": "深入分析 Rust `asm!` 宏（Macro）的语法、约束系统、寄存器管理，以及 x86_64、aarch64、RISC-V、s390x 四大平台的差异，重点覆盖 Rust 1.96 为 s390x 引入的向量寄存器支持。",
-      "line_count": 987,
+      "line_count": 991,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -38141,7 +38142,7 @@
       "layer": "L3",
       "title": "内联汇编扩展主题：`no_std`、内核与跨平台向量约束",
       "positioning": "在 [内联汇编基础](01_inline_assembly.md) 之上，聚焦 `no_std`、裸机启动、中断上下文、PowerPC/LoongArch 等扩展架构，以及 `core::arch` 与 Miri 验证边界，形成面向系统级开发的内联汇编决策框架。",
-      "line_count": 538,
+      "line_count": 546,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -40887,7 +40888,7 @@
       "layer": "L4",
       "title": "Type Theory（类型论基础）",
       "positioning": "",
-      "line_count": 2562,
+      "line_count": 2563,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 深度重构——定理一致性（Coherence）矩阵扩展至11行（带⟹推理链），新增3个反命题决策树，认知路径重构为5步递进，全章补充Wikipedia/Pierce TAPL/Cardelli引用与L1-L3层次一致性标注",
@@ -43233,7 +43234,7 @@
       "layer": "L4",
       "title": "Parametricity 与免费定理（Parametricity and Theorems for Free）",
       "positioning": "",
-      "line_count": 368,
+      "line_count": 367,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -44345,7 +44346,7 @@
       "layer": "L4",
       "title": "RustBelt 与验证工具链",
       "positioning": "",
-      "line_count": 1500,
+      "line_count": 1502,
       "theorem_chains": [
         {
           "text": "- [2.2 ⟹ 推理链](#22--推理链)",
@@ -45006,7 +45007,7 @@
       "layer": "L4",
       "title": "操作语义：程序行为的形式化定义",
       "positioning": "介绍 **操作语义（Operational Semantics）**——通过形式化规则定义程序的执行步骤，分析小步语义（Small-Step）与大步语义（Big-Step）的对比，以及 Rust 的所有权（Ownership）、借用（Borrowing）和并发操作的形式化建模方法。",
-      "line_count": 1218,
+      "line_count": 1220,
       "theorem_chains": [
         {
           "text": "| 操作语义：程序行为的形式化定义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -52617,6 +52618,7 @@
       "cross_references": [
         "../../00_meta/knowledge_topology/11_semantic_model_atlas.md",
         "../../00_meta/knowledge_topology/kg_ontology_v2.md",
+        "../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md",
         "../../07_future/04_research_and_experimental/02_formal_methods.md",
         "../../07_future/04_research_and_experimental/08_llm_system_architecture.md",
         "./06_ai_ontology_and_rust_semantics.md"
@@ -52627,7 +52629,7 @@
       "matrix_rows": 16,
       "pre_post": {
         "pre": [
-          "[Knowledge Graph Ontology](../../00_meta/knowledge_topology/kg_ontology_v2.md) · [AI Ontology and Rust Semantics](./06_ai_ontology_and_rust_semantics.md) · [Semantic Model Atlas](../../00_meta/knowledge_topology/11_semantic_model_atlas.md)"
+          "[Knowledge Graph Ontology](../../00_meta/knowledge_topology/kg_ontology_v2.md) · [AI Ontology and Rust Semantics](./06_ai_ontology_and_rust_semantics.md) · [Semantic Model Atlas](../../00_meta/knowledge_topology/11_semantic_model_atlas.md) · [Atomics and Memory Ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md)"
         ],
         "post": [
           "[Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) · [LLM System Architecture](../../07_future/04_research_and_experimental/08_llm_system_architecture.md)"
@@ -63252,6 +63254,7 @@
       "cross_references": [
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../01_foundation/08_error_handling/01_error_handling_basics.md",
+        "../../05_comparative/00_paradigms/01_paradigm_matrix.md",
         "../14_enterprise_architecture/04_domain_driven_design_in_rust.md",
         "07_cqrs_event_sourcing.md",
         "25_hexagonal_ports_and_adapters.md"
@@ -63262,7 +63265,7 @@
       "matrix_rows": 7,
       "pre_post": {
         "pre": [
-          "[DDD Tactical Patterns in Rust](../14_enterprise_architecture/04_domain_driven_design_in_rust.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Error Handling](../../01_foundation/08_error_handling/01_error_handling_basics.md)"
+          "[DDD Tactical Patterns in Rust](../14_enterprise_architecture/04_domain_driven_design_in_rust.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Error Handling](../../01_foundation/08_error_handling/01_error_handling_basics.md) · [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md)"
         ],
         "post": [
           "[Hexagonal Architecture](25_hexagonal_ports_and_adapters.md) · [CQRS and Event Sourcing](07_cqrs_event_sourcing.md)"
@@ -63323,6 +63326,7 @@
       "sources": [],
       "cross_references": [
         "../../02_intermediate/00_traits/01_traits.md",
+        "../../05_comparative/00_paradigms/01_paradigm_matrix.md",
         "../14_enterprise_architecture/04_domain_driven_design_in_rust.md",
         "../14_enterprise_architecture/06_clean_architecture_in_rust.md",
         "07_cqrs_event_sourcing.md",
@@ -63335,7 +63339,7 @@
       "matrix_rows": 6,
       "pre_post": {
         "pre": [
-          "[Architecture Patterns](08_architecture_patterns.md) · [DDD Tactical Patterns](../14_enterprise_architecture/04_domain_driven_design_in_rust.md) · [Traits](../../02_intermediate/00_traits/01_traits.md)"
+          "[Architecture Patterns](08_architecture_patterns.md) · [DDD Tactical Patterns](../14_enterprise_architecture/04_domain_driven_design_in_rust.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md)"
         ],
         "post": [
           "[Repository and Unit of Work](24_repository_and_unit_of_work.md) · [Clean Architecture](../14_enterprise_architecture/06_clean_architecture_in_rust.md) · [CQRS and Event Sourcing](07_cqrs_event_sourcing.md)"
@@ -63382,6 +63386,7 @@
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../01_foundation/08_error_handling/01_error_handling_basics.md",
         "../../03_advanced/00_concurrency/03_concurrency_patterns.md",
+        "../../05_comparative/00_paradigms/01_paradigm_matrix.md",
         "05_microservice_patterns.md",
         "27_bulkhead.md",
         "28_retry.md"
@@ -63392,7 +63397,7 @@
       "matrix_rows": 4,
       "pre_post": {
         "pre": [
-          "[Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) · [Error Handling](../../01_foundation/08_error_handling/01_error_handling_basics.md) · [State Machine](../../01_foundation/02_type_system/01_type_system.md)"
+          "[Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) · [Error Handling](../../01_foundation/08_error_handling/01_error_handling_basics.md) · [State Machine](../../01_foundation/02_type_system/01_type_system.md) · [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md)"
         ],
         "post": [
           "[Bulkhead](27_bulkhead.md) · [Retry](28_retry.md) · [Microservice Patterns](05_microservice_patterns.md)"
@@ -63446,6 +63451,7 @@
       "cross_references": [
         "../../03_advanced/00_concurrency/03_concurrency_patterns.md",
         "../../03_advanced/01_async/01_async.md",
+        "../../05_comparative/00_paradigms/01_paradigm_matrix.md",
         "05_microservice_patterns.md",
         "26_circuit_breaker.md",
         "28_retry.md"
@@ -63456,7 +63462,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) · [Async Runtime](../../03_advanced/01_async/01_async.md) · [Circuit Breaker](26_circuit_breaker.md)"
+          "[Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) · [Async Runtime](../../03_advanced/01_async/01_async.md) · [Circuit Breaker](26_circuit_breaker.md) · [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md)"
         ],
         "post": [
           "[Retry](28_retry.md) · [Microservice Patterns](05_microservice_patterns.md)"
@@ -63502,6 +63508,7 @@
       "cross_references": [
         "../../01_foundation/08_error_handling/01_error_handling_basics.md",
         "../../03_advanced/01_async/01_async.md",
+        "../../05_comparative/00_paradigms/01_paradigm_matrix.md",
         "26_circuit_breaker.md",
         "27_bulkhead.md",
         "29_saga.md"
@@ -63512,7 +63519,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[Error Handling](../../01_foundation/08_error_handling/01_error_handling_basics.md) · [Async](../../03_advanced/01_async/01_async.md) · [Circuit Breaker](26_circuit_breaker.md)"
+          "[Error Handling](../../01_foundation/08_error_handling/01_error_handling_basics.md) · [Async](../../03_advanced/01_async/01_async.md) · [Circuit Breaker](26_circuit_breaker.md) · [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md)"
         ],
         "post": [
           "[Bulkhead](27_bulkhead.md) · [Saga](29_saga.md)"
@@ -63564,6 +63571,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../05_comparative/README.md",
         "../14_enterprise_architecture/04_domain_driven_design_in_rust.md",
         "05_microservice_patterns.md",
         "06_event_driven_architecture.md",
@@ -63576,7 +63584,7 @@
       "matrix_rows": 6,
       "pre_post": {
         "pre": [
-          "[DDD Tactical Patterns](../14_enterprise_architecture/04_domain_driven_design_in_rust.md) · [Event-Driven Architecture](06_event_driven_architecture.md) · [CQRS and Event Sourcing](07_cqrs_event_sourcing.md)"
+          "[DDD Tactical Patterns](../14_enterprise_architecture/04_domain_driven_design_in_rust.md) · [Event-Driven Architecture](06_event_driven_architecture.md) · [CQRS and Event Sourcing](07_cqrs_event_sourcing.md) · [Comparative Layer README](../../05_comparative/README.md)"
         ],
         "post": [
           "[Outbox](30_outbox.md) · [Microservice Patterns](05_microservice_patterns.md)"
@@ -63628,6 +63636,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../05_comparative/README.md",
         "05_microservice_patterns.md",
         "06_event_driven_architecture.md",
         "07_cqrs_event_sourcing.md",
@@ -63639,7 +63648,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[Saga](29_saga.md) · [Event-Driven Architecture](06_event_driven_architecture.md) · [CQRS and Event Sourcing](07_cqrs_event_sourcing.md)"
+          "[Saga](29_saga.md) · [Event-Driven Architecture](06_event_driven_architecture.md) · [CQRS and Event Sourcing](07_cqrs_event_sourcing.md) · [Comparative Layer README](../../05_comparative/README.md)"
         ],
         "post": [
           "[Microservice Patterns](05_microservice_patterns.md)"
@@ -63685,6 +63694,7 @@
       "cross_references": [
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../03_advanced/00_concurrency/03_concurrency_patterns.md",
+        "../../05_comparative/00_paradigms/01_paradigm_matrix.md",
         "../03_design_patterns/02_idioms_spectrum.md",
         "../10_performance/01_performance_optimization.md",
         "01_patterns.md"
@@ -63695,7 +63705,7 @@
       "matrix_rows": 6,
       "pre_post": {
         "pre": [
-          "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [RAII](../03_design_patterns/02_idioms_spectrum.md) · [Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md)"
+          "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [RAII](../03_design_patterns/02_idioms_spectrum.md) · [Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) · [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md)"
         ],
         "post": [
           "[Flyweight（已覆盖于 01_patterns.md）](01_patterns.md) · [Performance Optimization](../10_performance/01_performance_optimization.md)"
@@ -63749,6 +63759,7 @@
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../02_intermediate/01_generics/01_generics.md",
         "../../02_intermediate/01_generics/03_type_level_programming.md",
+        "../../05_comparative/00_paradigms/05_language_semantic_model_matrix.md",
         "01_patterns.md",
         "02_idioms_spectrum.md"
       ],
@@ -63758,7 +63769,7 @@
       "matrix_rows": 7,
       "pre_post": {
         "pre": [
-          "[Type System](../../01_foundation/02_type_system/01_type_system.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [PhantomData](../../02_intermediate/01_generics/03_type_level_programming.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)"
+          "[Type System](../../01_foundation/02_type_system/01_type_system.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [PhantomData](../../02_intermediate/01_generics/03_type_level_programming.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Language Semantic Model Matrix](../../05_comparative/00_paradigms/05_language_semantic_model_matrix.md)"
         ],
         "post": [
           "[Builder](01_patterns.md) · [State Machine](01_patterns.md) · [Idioms Spectrum](02_idioms_spectrum.md)"
@@ -63948,6 +63959,7 @@
         "../../02_intermediate/00_traits/01_traits.md",
         "../../03_advanced/01_async/01_async.md",
         "../../03_advanced/04_ffi/07_ffi_patterns.md",
+        "../../05_comparative/00_paradigms/01_paradigm_matrix.md",
         "02_idioms_spectrum.md",
         "18_api_design_patterns.md"
       ],
@@ -63957,7 +63969,7 @@
       "matrix_rows": 24,
       "pre_post": {
         "pre": [
-          "[Idioms Spectrum](02_idioms_spectrum.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Async](../../03_advanced/01_async/01_async.md)"
+          "[Idioms Spectrum](02_idioms_spectrum.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Traits](../../02_intermediate/00_traits/01_traits.md) · [Async](../../03_advanced/01_async/01_async.md) · [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md)"
         ],
         "post": [
           "[API Design Patterns](18_api_design_patterns.md) · [FFI Patterns](../../03_advanced/04_ffi/07_ffi_patterns.md)"
@@ -68232,6 +68244,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "02_cross_compilation.md",
         "03_embedded_systems.md",
         "11_async_no_std_embedded.md",
@@ -68249,7 +68262,7 @@
       "matrix_rows": 44,
       "pre_post": {
         "pre": [
-          "[Rust 嵌入式系统开发](03_embedded_systems.md) · [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md) · [panic_handler 与 no_std 运行时](18_panic_runtime_no_std.md) · [嵌入式内存分配器](16_embedded_memory_allocators.md) · [no_std 同步原语](15_no_std_synchronization_primitives.md)"
+          "[Rust 嵌入式系统开发](03_embedded_systems.md) · [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md) · [panic_handler 与 no_std 运行时](18_panic_runtime_no_std.md) · [嵌入式内存分配器](16_embedded_memory_allocators.md) · [no_std 同步原语](15_no_std_synchronization_primitives.md) · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
         ],
         "post": [
           "[PAC 与 HAL 实现](17_pac_hal_implementation.md) · [embedded-hal 与驱动惯用法](24_embedded_hal_and_driver_idioms.md) · [异步 no_std 嵌入式](11_async_no_std_embedded.md)"
@@ -68394,6 +68407,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "03_embedded_systems.md",
         "09_embedded_hal_1_0_migration.md",
         "11_async_no_std_embedded.md",
@@ -68410,7 +68424,7 @@
       "matrix_rows": 38,
       "pre_post": {
         "pre": [
-          "[Rust 嵌入式系统开发](03_embedded_systems.md) · [PAC 与 HAL 实现](17_pac_hal_implementation.md) · [embedded-hal 1.0 迁移](09_embedded_hal_1_0_migration.md) · [no_std 与裸机惯用法](23_no_std_and_bare_metal_idioms.md)"
+          "[Rust 嵌入式系统开发](03_embedded_systems.md) · [PAC 与 HAL 实现](17_pac_hal_implementation.md) · [embedded-hal 1.0 迁移](09_embedded_hal_1_0_migration.md) · [no_std 与裸机惯用法](23_no_std_and_bare_metal_idioms.md) · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
         ],
         "post": [
           "[嵌入式协议与外设驱动](22_embedded_protocol_drivers.md) · [异步 no_std 嵌入式](11_async_no_std_embedded.md) · [嵌入式调试与日志](20_embedded_debugging_logging.md)"
@@ -68541,6 +68555,7 @@
       "cross_references": [
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "03_embedded_systems.md",
         "11_async_no_std_embedded.md",
         "13_bare_metal_boot_linker_script.md",
@@ -68553,7 +68568,7 @@
       "matrix_rows": 14,
       "pre_post": {
         "pre": [
-          "[Rust 嵌入式系统开发](03_embedded_systems.md) · [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)"
+          "[Rust 嵌入式系统开发](03_embedded_systems.md) · [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
         ],
         "post": [
           "[PAC 与 HAL 实现](17_pac_hal_implementation.md) · [embedded-hal 与驱动惯用法](24_embedded_hal_and_driver_idioms.md) · [异步 no_std 嵌入式](11_async_no_std_embedded.md)"
@@ -68636,6 +68651,7 @@
       "sources": [],
       "cross_references": [
         "../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md",
+        "../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md",
         "../10_performance/01_performance_optimization.md",
         "03_embedded_systems.md",
         "11_async_no_std_embedded.md",
@@ -68648,7 +68664,7 @@
       "matrix_rows": 57,
       "pre_post": {
         "pre": [
-          "[Rust 嵌入式系统开发](03_embedded_systems.md) · [安全关键裸机 OS 与 Rust](19_safety_critical_bare_metal_os.md) · [异步 no_std 嵌入式](11_async_no_std_embedded.md) · [实时系统概念](03_embedded_systems.md#三实时系统)"
+          "[Rust 嵌入式系统开发](03_embedded_systems.md) · [安全关键裸机 OS 与 Rust](19_safety_critical_bare_metal_os.md) · [异步 no_std 嵌入式](11_async_no_std_embedded.md) · [实时系统概念](03_embedded_systems.md#三实时系统) · [Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)"
         ],
         "post": [
           "[认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) · [性能优化](../10_performance/01_performance_optimization.md) · [嵌入式调试与日志](20_embedded_debugging_logging.md)"
@@ -71784,6 +71800,7 @@
         "../../02_intermediate/01_generics/01_generics.md",
         "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../03_design_patterns/02_idioms_spectrum.md",
         "01_performance_optimization.md"
       ],
@@ -71793,7 +71810,7 @@
       "matrix_rows": 6,
       "pre_post": {
         "pre": [
-          "[Iterator](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [Performance Optimization](01_performance_optimization.md)"
+          "[Iterator](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [Performance Optimization](01_performance_optimization.md) · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
         ],
         "post": [
           "[c08_algorithms crate docs](../../../crates/c08_algorithms/docs/README.md) · [Idioms Spectrum](../03_design_patterns/02_idioms_spectrum.md)"
@@ -76159,6 +76176,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../05_comparative/README.md",
         "../03_design_patterns/24_repository_and_unit_of_work.md",
         "../03_design_patterns/25_hexagonal_ports_and_adapters.md",
         "01_enterprise_architecture_frameworks.md",
@@ -76171,7 +76189,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[Enterprise Architecture Frameworks](01_enterprise_architecture_frameworks.md) · [Hexagonal / Ports & Adapters](../03_design_patterns/25_hexagonal_ports_and_adapters.md) · [DDD Tactical Patterns](04_domain_driven_design_in_rust.md)"
+          "[Enterprise Architecture Frameworks](01_enterprise_architecture_frameworks.md) · [Hexagonal / Ports & Adapters](../03_design_patterns/25_hexagonal_ports_and_adapters.md) · [DDD Tactical Patterns](04_domain_driven_design_in_rust.md) · [Comparative Layer README](../../05_comparative/README.md)"
         ],
         "post": [
           "[Microservices Patterns in Rust](08_microservices_patterns_in_rust.md) · [Repository and Unit of Work](../03_design_patterns/24_repository_and_unit_of_work.md)"
@@ -76223,6 +76241,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../05_comparative/README.md",
         "../03_design_patterns/25_hexagonal_ports_and_adapters.md",
         "01_enterprise_architecture_frameworks.md",
         "05_strategic_domain_driven_design_in_rust.md",
@@ -76235,7 +76254,7 @@
       "matrix_rows": 6,
       "pre_post": {
         "pre": [
-          "[Hexagonal / Ports & Adapters](../03_design_patterns/25_hexagonal_ports_and_adapters.md) · [Enterprise Architecture Frameworks](01_enterprise_architecture_frameworks.md) · [Strategic DDD](05_strategic_domain_driven_design_in_rust.md)"
+          "[Hexagonal / Ports & Adapters](../03_design_patterns/25_hexagonal_ports_and_adapters.md) · [Enterprise Architecture Frameworks](01_enterprise_architecture_frameworks.md) · [Strategic DDD](05_strategic_domain_driven_design_in_rust.md) · [Comparative Layer README](../../05_comparative/README.md)"
         ],
         "post": [
           "[Clean Architecture in Rust](06_clean_architecture_in_rust.md) · [Microservices Patterns in Rust](08_microservices_patterns_in_rust.md)"
@@ -76279,6 +76298,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../05_comparative/README.md",
         "../03_design_patterns/05_microservice_patterns.md",
         "../03_design_patterns/06_event_driven_architecture.md",
         "../03_design_patterns/29_saga.md",
@@ -76292,7 +76312,7 @@
       "matrix_rows": 9,
       "pre_post": {
         "pre": [
-          "[Microservice Patterns](../03_design_patterns/05_microservice_patterns.md) · [Hexagonal Architecture in Enterprise](07_hexagonal_architecture_in_rust.md) · [Saga](../03_design_patterns/29_saga.md) · [Outbox](../03_design_patterns/30_outbox.md)"
+          "[Microservice Patterns](../03_design_patterns/05_microservice_patterns.md) · [Hexagonal Architecture in Enterprise](07_hexagonal_architecture_in_rust.md) · [Saga](../03_design_patterns/29_saga.md) · [Outbox](../03_design_patterns/30_outbox.md) · [Comparative Layer README](../../05_comparative/README.md)"
         ],
         "post": [
           "[Clean Architecture in Rust](06_clean_architecture_in_rust.md) · [Event-Driven Architecture](../03_design_patterns/06_event_driven_architecture.md)"

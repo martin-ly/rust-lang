@@ -9,7 +9,7 @@
 > **Bloom 层级**: L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 将 Michael Nygard 的 Release It! 断路器模式与 Rust 的并发原语、类型系统对齐，实现线程安全的弹性中间件。
-> **前置概念**: [Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) · [Error Handling](../../01_foundation/08_error_handling/01_error_handling_basics.md) · [State Machine](../../01_foundation/02_type_system/01_type_system.md)
+> **前置概念**: [Concurrency Patterns](../../03_advanced/00_concurrency/03_concurrency_patterns.md) · [Error Handling](../../01_foundation/08_error_handling/01_error_handling_basics.md) · [State Machine](../../01_foundation/02_type_system/01_type_system.md) · [Paradigm Matrix](../../05_comparative/00_paradigms/01_paradigm_matrix.md)
 > **后置概念**: [Bulkhead](27_bulkhead.md) · [Retry](28_retry.md) · [Microservice Patterns](05_microservice_patterns.md)
 
 ---

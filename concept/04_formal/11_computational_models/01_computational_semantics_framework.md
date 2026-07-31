@@ -24,13 +24,14 @@
     - [1.3 Rust 示例：`let x = 1 + 1`](#13-rust-示例let-x--1--1)
     - [1.4 `unsafe` 作为公理契约](#14-unsafe-作为公理契约)
     - [1.5 计算语义与 Church-Turing 论题](#15-计算语义与-church-turing-论题)
+      - [Rust const 求值：受约束的可计算性](#rust-const-求值受约束的可计算性)
   - [二、反命题与边界分析](#二反命题与边界分析)
   - [三、相关概念](#三相关概念)
   - [四、嵌入式测验（Embedded Quiz）](#四嵌入式测验embedded-quiz)
     - [测验 1：四种语义的核心问题（理解层）](#测验-1四种语义的核心问题理解层)
     - [测验 2：`unsafe` 的最合适语义视角（分析层）](#测验-2unsafe-的最合适语义视角分析层)
     - [测验 3：指称语义的普遍性（评价层）](#测验-3指称语义的普遍性评价层)
-  - [五、权威来源索引](#五权威来源索引)
+  - [五、权威来源 / International Authority References](#五权威来源--international-authority-references)
   - [六、🧭 思维导图（Mindmap）](#六-思维导图mindmap)
 
 ---
