@@ -623,6 +623,7 @@ async fn parallel_sum(numbers: Vec<i32>) -> i32 {
 ### 反例 ❌
 
 ```rust,ignore
+#![allow(static_mut_refs)]
 use std::thread;
 
 static mut COUNTER: u32 = 0;

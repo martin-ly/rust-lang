@@ -20,8 +20,8 @@
 > **定位**: 本文件从**形式模型维度**跟踪 Rust 语言特性的演进，而非版本特性清单。仅收录对 Rust 的**所有权（Ownership）模型、类型系统（Type System）、异步（Async）语义、Unsafe 边界**有结构性影响的特性。
 > **原则**: 琐碎语法糖点到为止，聚焦"形式化语义发生了什么变化"。
 > **更新频率**: 每 6 周对齐 stable release，每季度审计。
-> **状态**: v1.74（2026-07-18 更新，对齐 Rust 1.97.1 stable；本地 nightly 1.99.0（2026-06-26），1.98/1.99 nightly 前瞻跟踪中）。
-> Rust 1.97.1 已于 2026-07-16 进入 stable；`rust_1_97_stabilized.md` 为 1.97.0 特性参考入口，`rust_1_97_1.md` 为 1.97.1 补丁跟踪页，`rust_1_97_preview.md` 仅保留未稳定候选。
+> **状态**: v1.75（2026-07-31 更新，对齐 Rust 1.97.1 stable；1.98.0 beta 已冻结，预计 2026-08-20 进入 stable；已新增 `feature_domain_matrix_198.md` 与 `migration_198_decision_tree.md` 进行 1.98 语义对齐）。
+> Rust 1.97.1 已于 2026-07-16 进入 stable；`rust_1_97_stabilized.md` 为 1.97.0 特性参考入口，`rust_1_97_1.md` 为 1.97.1 补丁跟踪页，`rust_1_97_preview.md` 仅保留未稳定候选；`rust_1_98_stabilized.md`、`feature_domain_matrix_198.md`、`migration_198_decision_tree.md` 为 1.98 周期跟踪矩阵与迁移判定权威页。
 > 新增 Rust 1.98 nightly 前瞻代码示例（4 crates: c02/c06/c08/c13）。
 > 核心概念来源标注率 100% 达标。全项目 Bloom 层级标注 1567/1567（100%）。
 > **本次对齐**:

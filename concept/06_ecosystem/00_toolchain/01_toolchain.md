@@ -34,6 +34,9 @@
 >
 > **Rust 1.97.1 补丁提示**：
 > Rust 1.97.1（2026-07-16）修复 LLVM 优化导致的误编译，该问题自 1.87 起存在。建议所有 Rust 1.87+ 项目升级，详见 [`rust_1_97_1.md`](../../07_future/00_version_tracking/rust_1_97_1.md)。
+>
+> **Rust 1.98.0 变更提示**：
+> Rust 1.98.0 更新 Windows GNU 目标捆绑的 mingw-w64 C 工具链，并移除 `-Zemscripten-wasm-eh`。详见 [`rust_1_98_stabilized.md`](../../07_future/00_version_tracking/rust_1_98_stabilized.md)。
 
 ---
 

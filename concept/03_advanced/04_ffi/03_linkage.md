@@ -389,7 +389,7 @@ pub extern "C" fn hook() {}
 ```rust,ignore
 // #[link_name] / #[link(name)] 参数现在会被校验：非法（如空串）参数报错
 #[link(name = "mynative")]           // 非空、合法的库名
-extern "C" {
+unsafe extern "C" {
     #[link_name = "native_symbol"]   // 非空、合法的符号名
     fn native_symbol();
 }
@@ -431,6 +431,9 @@ static MY_DATA: [u8; 4] = [0; 4];
   - `x86_64-unknown-linux-gnu` 默认使用 lld 链接器
 - **[Rust 1.95](../../07_future/00_version_tracking/rust_1_95_stabilized.md)**
   - `--remap-path-scope` 稳定（§3.1）
+- **[Rust 1.98](../../07_future/00_version_tracking/rust_1_98_stabilized.md)**
+  - Windows GNU 目标 mingw-w64 C 工具链更新（影响链接行为、异常模型、C++ ABI 兼容性）
+  - `-Zemscripten-wasm-eh` 移除
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 

@@ -240,9 +240,9 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 
 use core::panic::PanicInfo;
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn _start() -> ! {
-    extern "C" {
+    unsafe extern "C" {
         static mut _sbss: u8;
         static mut _ebss: u8;
         static mut _sdata: u8;
@@ -250,13 +250,17 @@ pub unsafe extern "C" fn _start() -> ! {
         static _sidata: u8;
     }
     let bss_size = core::ptr::addr_of!(_ebss) as usize - core::ptr::addr_of!(_sbss) as usize;
-    core::ptr::write_bytes(core::ptr::addr_of_mut!(_sbss), 0, bss_size);
+    unsafe {
+        core::ptr::write_bytes(core::ptr::addr_of_mut!(_sbss), 0, bss_size);
+    }
     let data_size = core::ptr::addr_of!(_edata) as usize - core::ptr::addr_of!(_sdata) as usize;
-    core::ptr::copy_nonoverlapping(
-        core::ptr::addr_of!(_sidata),
-        core::ptr::addr_of_mut!(_sdata),
-        data_size,
-    );
+    unsafe {
+        core::ptr::copy_nonoverlapping(
+            core::ptr::addr_of!(_sidata),
+            core::ptr::addr_of_mut!(_sdata),
+            data_size,
+        );
+    }
     main()
 }
 

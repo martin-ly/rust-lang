@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 647,
-    "generated_at": "2026-07-31T13:18:57.161051+00:00"
+    "total_files": 649,
+    "generated_at": "2026-07-31T13:39:26.393600+00:00"
   },
   "files": [
     {
@@ -12887,7 +12887,7 @@
       "layer": "L1",
       "title": "数值类型与运算：从整数到浮点的完整图景",
       "positioning": "系统讲解 Rust **数值类型**——从整数、浮点、饱和运算到类型转换和溢出行为，揭示 Rust 如何在安全性与性能之间做出精确的设计选择。",
-      "line_count": 1150,
+      "line_count": 1158,
       "theorem_chains": [
         {
           "text": "| 数值类型与运算：从整数到浮点的完整图景 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -13057,6 +13057,7 @@
         "../../07_future/00_version_tracking/rust_1_91_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_94_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_98_stabilized.md",
         "../00_start/02_zero_cost_abstractions.md",
         "../01_ownership_borrow_lifetime/01_ownership.md",
         "../05_collections/01_collections.md",
@@ -23693,7 +23694,7 @@
       "layer": "L2",
       "title": "错误处理进阶",
       "positioning": "补齐审计 §2.4 / §4 P2-2 缺口#7。本页此前仅有 1.97 横幅回链，无 Windows/Unix `ErrorKind` 映射差异。本节只补**映射差异与迁移判定**，不重复 `Result`/`?` 概念推导。完整判定树见 [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) §7。",
-      "line_count": 2932,
+      "line_count": 2935,
       "theorem_chains": [
         {
           "text": "- [4.1 引理：Result\\<T,E\\> ⟹ 和类型强制错误处理](#41-引理resultte--和类型强制错误处理)",
@@ -24287,6 +24288,7 @@
         "../../07_future/00_version_tracking/feature_domain_matrix_197.md",
         "../../07_future/00_version_tracking/migration_197_decision_tree.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_98_stabilized.md",
         "../00_traits/01_traits.md",
         "../01_generics/01_generics.md",
         "02_error_handling_deep_dive.md"
@@ -24443,7 +24445,7 @@
       "layer": "L2",
       "title": "Panic 机制",
       "positioning": "",
-      "line_count": 272,
+      "line_count": 276,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -24485,6 +24487,7 @@
         "../../03_advanced/06_low_level_patterns/07_rust_runtime.md",
         "../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md",
         "../../07_future/00_version_tracking/rust_1_92_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_98_stabilized.md",
         "01_error_handling.md"
       ],
       "transitions": 0,
@@ -27048,7 +27051,7 @@
       "layer": "L2",
       "title": "Rust 迭代器模式",
       "positioning": "深入探讨 Rust 迭代器（Iterator）模式——从适配器链到自定义迭代器，分析惰性求值、性能特征和最佳实践。",
-      "line_count": 1466,
+      "line_count": 1468,
       "theorem_chains": [
         {
           "text": "| 逐元素变换 | `map`（惰性适配器） | §1.3 惰性求值 | 没有消费者 ⟹ 不执行任何计算（§10.2） |",
@@ -27289,6 +27292,7 @@
         "../../07_future/00_version_tracking/rust_1_94_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_96_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_98_stabilized.md",
         "../00_traits/01_traits.md",
         "../01_generics/01_generics.md",
         "../04_types_and_conversions/02_closure_types.md"
@@ -27313,7 +27317,7 @@
       "layer": "L2",
       "title": "Rust 闭包：捕获语义、Trait 层级与工程实践",
       "positioning": "系统阐述 Rust 闭包的语法、捕获机制、`Fn`/`FnMut`/`FnOnce` 语义层级、`move` 闭包、函数指针强制转换、异步闭包与典型反模式，覆盖从基础使用到工程决策的完整链条。",
-      "line_count": 742,
+      "line_count": 751,
       "theorem_chains": [
         {
           "text": "| 理解捕获模式 ⟹ 正确选择 trait | 知道环境如何使用 | 能写出正确的泛型约束 | 高 |",
@@ -27464,6 +27468,7 @@
         "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../01_foundation/07_modules_and_items/02_functions.md",
         "../../03_advanced/01_async/07_async_closures.md",
+        "../../07_future/00_version_tracking/rust_1_98_stabilized.md",
         "../00_traits/01_traits.md",
         "../00_traits/04_advanced_traits.md",
         "../04_types_and_conversions/02_closure_types.md",
@@ -33723,7 +33728,7 @@
       "layer": "L3",
       "title": "Rust 内存模型（Memory Model）",
       "positioning": "",
-      "line_count": 515,
+      "line_count": 544,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将字节模型、provenance 和 UB 边界串联起来。",
@@ -33817,6 +33822,14 @@
           "lines": 19,
           "should_fail": false,
           "code_preview": "// edition = \"2024\", rust = \"1.97\" —— repr(align) 抬高对齐；cfg 查询目标；二者正交 use std::sy..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.98\" —— 直接获取 Box 管理的裸指针，不创建中间引用 let mut boxed = Bo..."
         }
       ],
       "sources": [],
@@ -33834,6 +33847,7 @@
         "../../07_future/00_version_tracking/rust_1_96_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_97_1.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_98_stabilized.md",
         "../00_concurrency/06_atomics_and_memory_ordering.md",
         "../05_inline_assembly/01_inline_assembly.md",
         "01_unsafe.md",
@@ -36797,7 +36811,7 @@
       "layer": "L3",
       "title": "Rust FFI：与外部代码的安全边界",
       "positioning": "系统分析 Rust 与 C/C++ 等外部代码交互的**Foreign Function Interface (FFI)** 机制，探讨 `extern` 块、ABI 兼容、`unsafe` 边界管理以及 `bindgen`/`cbindgen` 工具链。",
-      "line_count": 1055,
+      "line_count": 1058,
       "theorem_chains": [
         {
           "text": "| Rust FFI：与外部代码的安全边界 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -36972,6 +36986,7 @@
         "../../07_future/00_version_tracking/rust_1_91_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_93_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_98_stabilized.md",
         "../02_unsafe/01_unsafe.md",
         "../README.md"
       ],
@@ -37154,7 +37169,7 @@
       "layer": "L3",
       "title": "Linkage（链接）",
       "positioning": "本小节为 Rust 1.97.0 在「编译器符号发射 ⟷ 链接器输入 ⟷ ABI 契约」边界的**交叉语义**补全，对应审计缺口（[`GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md`](../../../reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md) §2.4、§4 P2-2 缺口#1）。原 `mangling / linker / export_name / v0` 在本页 0 命中，现补齐。",
-      "line_count": 487,
+      "line_count": 490,
       "theorem_chains": [
         {
           "text": "选型判定：Rust 用 Rust ⟹ `lib`；C/C++ 项目静态嵌入 ⟹ `staticlib`；动态加载/多语言共享 ⟹ `cdylib`；`dylib` 仅在「全 Rust 动态插件」场景考虑（且优先评估 `abi_stable` crate 的稳定 ABI 方案）。",
@@ -37289,6 +37304,7 @@
         "../../07_future/00_version_tracking/rust_1_90_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_95_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_98_stabilized.md",
         "../../07_future/01_edition_roadmap/02_edition_guide.md",
         "../02_unsafe/01_unsafe.md",
         "02_ffi_advanced.md"
@@ -48053,7 +48069,7 @@
       "layer": "L4",
       "title": "属性（Attributes）",
       "positioning": "",
-      "line_count": 230,
+      "line_count": 233,
       "theorem_chains": [
         {
           "text": "3. **机制推理**: 通过 ⟹ 定理链将属性元数据与编译器行为串联起来。",
@@ -48132,6 +48148,7 @@
         "../../03_advanced/03_proc_macros/11_conditional_compilation.md",
         "../../06_ecosystem/00_toolchain/05_compiler_infrastructure.md",
         "../../06_ecosystem/00_toolchain/11_compiler_diagnostics_and_ui_tests.md",
+        "../../07_future/00_version_tracking/rust_1_98_stabilized.md",
         "02_mir_codegen_llvm_primer.md",
         "11_items_reference.md",
         "15_generics_compiler_behavior.md"
@@ -55908,7 +55925,7 @@
       "layer": "L6",
       "title": "工具链与 Cargo",
       "positioning": "",
-      "line_count": 2065,
+      "line_count": 2068,
       "theorem_chains": [
         {
           "text": "| **断言** | **前提** | **结论（⟹ 推理链）** | **工具链组件** | **失效条件** |",
@@ -56100,6 +56117,7 @@
         "../../07_future/00_version_tracking/01_rust_version_tracking.md",
         "../../07_future/00_version_tracking/rust_1_97_1.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_98_stabilized.md",
         "../../07_future/04_research_and_experimental/01_ai_integration.md",
         "../../07_future/04_research_and_experimental/02_formal_methods.md",
         "../03_design_patterns/01_patterns.md",
@@ -57794,7 +57812,7 @@
       "layer": "L6",
       "title": "Cargo 依赖解析",
       "positioning": "把“`cargo build` 时到底选了哪个版本、为什么选这个版本、特性如何合并”讲清楚。",
-      "line_count": 593,
+      "line_count": 596,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -57824,6 +57842,7 @@
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../07_future/00_version_tracking/rust_1_96_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_98_stabilized.md",
         "05_cargo_build_scripts.md",
         "08_cargo_registries_and_publishing.md"
       ],
@@ -65678,7 +65697,7 @@
       "layer": "L6",
       "title": "Rust 嵌入式系统开发",
       "positioning": "探讨 Rust 在嵌入式系统领域的应用——从 `no_std` 到裸机编程，分析内存安全（Memory Safety）如何保证关键系统的可靠性。",
-      "line_count": 1028,
+      "line_count": 1037,
       "theorem_chains": [
         {
           "text": "| Rust 嵌入式系统开发 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -65786,6 +65805,7 @@
         "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../04_formal/00_type_theory/01_type_theory.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../07_future/00_version_tracking/rust_1_98_stabilized.md",
         "../06_data_and_distributed/01_application_domains.md",
         "../10_performance/01_performance_optimization.md",
         "02_cross_compilation.md",
@@ -66560,7 +66580,7 @@
       "layer": "L6",
       "title": "Target Tier 平台支持全景：分层保证与 1.90–1.97 变迁",
       "positioning": "",
-      "line_count": 145,
+      "line_count": 149,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -66590,6 +66610,7 @@
         "../../07_future/00_version_tracking/rust_1_90_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_94_stabilized.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
+        "../../07_future/00_version_tracking/rust_1_98_stabilized.md",
         "../00_toolchain/08_platform_rust_integration.md",
         "../00_toolchain/15_z_flags_reference.md",
         "01_wasi.md",
@@ -76760,6 +76781,53 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\00_version_tracking\\feature_domain_matrix_198.md",
+      "layer": "L7",
+      "title": "Rust 1.98.0 特性 × 领域反查矩阵",
+      "positioning": "",
+      "line_count": 219,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+        "../../01_foundation/09_macros_basics/01_attributes_and_macros.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/03_error_handling/01_error_handling.md",
+        "../../02_intermediate/03_error_handling/03_panic.md",
+        "../../02_intermediate/04_types_and_conversions/02_closure_types.md",
+        "../../03_advanced/01_async/01_async.md",
+        "../../03_advanced/01_async/07_async_closures.md",
+        "../../03_advanced/01_async/08_pin_unpin.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../03_advanced/04_ffi/01_rust_ffi.md",
+        "../../03_advanced/04_ffi/03_linkage.md",
+        "../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md",
+        "../../06_ecosystem/11_domain_applications/03_webassembly.md",
+        "../02_preview_features/27_cargo_semver_checks_preview.md",
+        "01_rust_version_tracking.md",
+        "02_editions.md",
+        "migration_198_decision_tree.md",
+        "rust_1_98_preview.md",
+        "rust_1_98_stabilized.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 18,
+      "pre_post": {
+        "pre": [
+          "[Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.98.0 稳定特性](rust_1_98_stabilized.md)"
+        ],
+        "post": [
+          "[Rust 1.98+ 前沿特性预览](rust_1_98_preview.md) · [迁移判定树](migration_198_decision_tree.md)（P2-4）"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\07_future\\00_version_tracking\\migration_197_decision_tree.md",
       "layer": "L7",
       "title": "Rust 1.97 兼容性迁移判定树",
@@ -76924,6 +76992,77 @@
         ],
         "post": [
           "> [Rust 1.97 前沿预览](rust_1_97_preview.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\07_future\\00_version_tracking\\migration_198_decision_tree.md",
+      "layer": "L7",
+      "title": "Rust 1.98 兼容性迁移判定树",
+      "positioning": "",
+      "line_count": 338,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 1.98 起生命周期不匹配 trait LocProvider<'a> {     ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.98\" —— 与 1.98 返回类型对齐 trait LocProvider {     fn l..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.97\" —— 1.98 起 Solaris 上 File::lock 不再保证 use std::..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// edition = \"2024\", rust = \"1.98\" —— 使用 fs2 的 FileExt use fs2::FileExt; use std..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+        "../../02_intermediate/03_error_handling/01_error_handling.md",
+        "../../03_advanced/04_ffi/01_rust_ffi.md",
+        "../../03_advanced/04_ffi/03_linkage.md",
+        "../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md",
+        "../../06_ecosystem/11_domain_applications/03_webassembly.md",
+        "01_rust_version_tracking.md",
+        "feature_domain_matrix_198.md",
+        "rust_1_98_preview.md",
+        "rust_1_98_stabilized.md",
+        "rust_1_99_preview.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 6,
+      "matrix_rows": 18,
+      "pre_post": {
+        "pre": [
+          "> [Rust 1.98 稳定特性](rust_1_98_stabilized.md) ·"
+        ],
+        "post": [
+          "> [Rust 1.98+ 前沿预览](rust_1_98_preview.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -79264,7 +79403,7 @@
       "layer": "L7",
       "title": "Rust 1.98.0 稳定特性",
       "positioning": "",
-      "line_count": 254,
+      "line_count": 252,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [

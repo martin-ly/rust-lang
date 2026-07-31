@@ -142,3 +142,7 @@ fn main() {
   - 29 个 RISC-V target feature 稳定（含 RVA22U64 / RVA23U64 profile 大部）
 - **[Rust 1.97](../../07_future/00_version_tracking/rust_1_97_stabilized.md)**
   - `nvptx64-nvidia-cuda` 基线提升
+- **[Rust 1.98](../../07_future/00_version_tracking/rust_1_98_stabilized.md)**
+  - Windows GNU 目标（`x86_64-pc-windows-gnu` / `i686-pc-windows-gnu`）mingw-w64 工具链更新
+  - Solaris/Illumos 上 `std::fs::File::lock` 实现移除
+  - `-Zemscripten-wasm-eh` 移除

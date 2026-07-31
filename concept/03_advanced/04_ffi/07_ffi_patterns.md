@@ -213,6 +213,8 @@ impl Drop for CPlugin {
 ### 正例 ✅
 
 ```rust,ignore
+use std::ffi::c_int;
+
 pub struct MySet {
     data: Vec<i32>,
 }
@@ -385,6 +387,8 @@ pub unsafe extern "C" fn checksum_slow(data: *const u8, len: usize) -> u32 {
 ### 反例 ❌：缺少长度，依赖 NUL 终止
 
 ```rust,ignore
+use std::ffi::{c_char, c_int};
+
 /// 不推荐：把 Rust 切片当作 C 字符串处理，丢失长度信息且限制数据内容
 #[unsafe(no_mangle)]
 pub unsafe extern "C" fn sum_cstring(data: *const c_char) -> c_int {
@@ -437,9 +441,8 @@ impl DbError {
 
 /// 线程局部最后错误详情（仅作示意，真实场景可用对象关联存储）。
 thread_local! {
-    static LAST_ERROR: std::cell::RefCell<CString> = const {
-        std::cell::RefCell::new(CString::new("").unwrap())
-    };
+    static LAST_ERROR: std::cell::RefCell<CString> =
+        std::cell::RefCell::new(CString::new("").unwrap());
 }
 
 fn set_last_error(err: DbError) {

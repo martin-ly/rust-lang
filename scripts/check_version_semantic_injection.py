@@ -36,6 +36,11 @@ VERSION_FILES: list[tuple[str, str]] = [
     ("1.97", "rust_1_97_stabilized.md"),
 ]
 
+# Beta/preview version tracking pages: scanned and reported, but do not affect --strict.
+BETA_FILES: list[tuple[str, str]] = [
+    ("1.98", "rust_1_98_stabilized.md"),
+]
+
 # Patch release pages that need bidirectional semantic links to concept/ authority pages.
 # Each entry maps patch version filename to the set of concept pages it should link to
 # (and which should link back).
@@ -234,6 +239,43 @@ def evaluate() -> dict:
     }
 
 
+def evaluate_beta() -> dict:
+    """Scan beta/preview version tracking pages for semantic injection coverage.
+
+    Beta pages are reported separately and do not affect --strict, because their
+    feature set is still subject to change before stable release.
+    """
+    all_features: list[dict] = []
+
+    for version, filename in BETA_FILES:
+        features = extract_features(version, filename)
+        backlinks = find_concept_backlinks(filename)
+        for feat in features:
+            feat["normalized"] = normalize_text(feat["feature"])
+            forward_links = find_concept_links_in_row(feat["row"], filename)
+            feat["concept_links"] = list(dict.fromkeys(forward_links))
+            forward = bool(forward_links)
+            backlink_mentions = list(dict.fromkeys([
+                rel for rel, info in backlinks.items()
+                if feature_mentioned_in_concept(feat["feature"], info["text"])
+            ]))
+            feat["backlink_mentions"] = backlink_mentions
+            feat["mapped"] = forward or bool(backlink_mentions)
+        all_features.extend(features)
+
+    mapped = [f for f in all_features if f["mapped"]]
+    unmapped = [f for f in all_features if not f["mapped"]]
+
+    return {
+        "total": len(all_features),
+        "mapped_count": len(mapped),
+        "unmapped_count": len(unmapped),
+        "coverage_rate": round(len(mapped) / len(all_features) * 100, 1) if all_features else 0.0,
+        "features": all_features,
+        "unmapped": unmapped,
+    }
+
+
 def evaluate_patches() -> dict:
     """Check bidirectional semantic links for patch release pages."""
     all_patches: list[dict] = []
@@ -308,15 +350,26 @@ def format_report(result: dict, date_str: str) -> str:
     lines = [
         f"# Version Semantic Injection Baseline Report ({date_str})",
         "",
-        "> 检查 Rust 1.90–1.97 稳定特性及补丁版本页在版本跟踪页与 `concept/` 权威页之间的双向链接覆盖。",
+        "> 检查 Rust 1.90–1.97 稳定特性、1.98 beta 特性及补丁版本页在版本跟踪页与 `concept/` 权威页之间的双向链接覆盖。",
         "",
-        "## 汇总",
+        "## 汇总（稳定版本）",
         "",
         f"- 版本范围：1.90 – 1.97（共 {len(VERSION_FILES)} 个稳定版本）",
         f"- 提取特性数：{result['total']}",
         f"- 已映射：{result['mapped_count']} ({result['coverage_rate']}%)",
         f"- 未映射：{result['unmapped_count']}",
     ]
+    beta_result = result.get("beta", {})
+    if beta_result.get("total"):
+        lines.extend([
+            "",
+            "## 汇总（beta / 预览版本）",
+            "",
+            f"- 版本范围：{', '.join(v for v, _ in BETA_FILES)}（beta / 预览，不影响 --strict）",
+            f"- 提取特性数：{beta_result['total']}",
+            f"- 已映射：{beta_result['mapped_count']} ({beta_result['coverage_rate']}%)",
+            f"- 未映射：{beta_result['unmapped_count']}",
+        ])
     lines.extend(patch_lines)
     lines.extend([
         "",
@@ -347,6 +400,24 @@ def format_report(result: dict, date_str: str) -> str:
                 lines.append(f"- {f['feature']} ← {backs}")
         lines.append("")
 
+    if beta_result.get("total"):
+        lines.append("## 已映射 beta 特性（按版本分组）")
+        lines.append("")
+        beta_grouped: dict[str, list[dict]] = {}
+        for f in beta_result["features"]:
+            if f["mapped"]:
+                beta_grouped.setdefault(f["version"], []).append(f)
+        for version in sorted(beta_grouped):
+            lines.append(f"### {version}（beta）")
+            for f in beta_grouped[version]:
+                if f["concept_links"]:
+                    links = ", ".join(f"`{p}`" for p in f["concept_links"])
+                    lines.append(f"- {f['feature']} → {links}")
+                elif f.get("backlink_mentions"):
+                    backs = ", ".join(f"`{p}`" for p in f["backlink_mentions"])
+                    lines.append(f"- {f['feature']} ← {backs}")
+            lines.append("")
+
     lines.append("## 维护说明")
     lines.append("")
     lines.append("- 未映射特性需在版本跟踪页添加指向 `concept/` 权威页的链接，")
@@ -359,7 +430,7 @@ def format_report(result: dict, date_str: str) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="检查 Rust 1.90–1.97 稳定特性及补丁版本的版本语义注入双向链接覆盖"
+        description="检查 Rust 1.90–1.97 稳定特性、1.98 beta 特性及补丁版本的版本语义注入双向链接覆盖"
     )
     parser.add_argument("--strict", action="store_true", help="覆盖率 < 80%% 或补丁双向链接不完整时 exit 1")
     parser.add_argument("--json", action="store_true", help="仅输出 JSON 到 stdout")
@@ -368,6 +439,7 @@ def main() -> int:
 
     result = evaluate()
     result["patches"] = evaluate_patches()
+    result["beta"] = evaluate_beta()
     date_str = _dt.datetime.now().strftime("%Y_%m_%d")
 
     if args.json:

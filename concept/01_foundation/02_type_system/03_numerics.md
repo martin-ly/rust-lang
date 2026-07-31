@@ -20,6 +20,9 @@
 > **后置概念**: [Zero Cost Abstractions](../00_start/02_zero_cost_abstractions.md) · [Collections](../05_collections/01_collections.md)
 > **Rust 1.97.0 变更提示**：
 > Rust 1.97.0 稳定化了 `NonZero<T>` 的位操作方法，详见 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)。
+>
+> **Rust 1.98.0 变更提示**：
+> Rust 1.98.0 稳定化 `NonZero<T>::from_str_radix`、`f32`/`f64` 的 `add_algebraic` 等 `float_algebraic` 运算、`int_format_into`，以及 `Box::as_ptr`/`Box::as_mut_ptr`。详见 [`rust_1_98_stabilized.md`](../../07_future/00_version_tracking/rust_1_98_stabilized.md)。
 
 ---
 
@@ -643,6 +646,11 @@ const fn is_nan_const(x: f64) -> bool {
   - `{float}` 在未约束时回退到 `f32`
   - 整数位查询方法
   - `NonZero` 位查询方法
+- **[Rust 1.98](../../07_future/00_version_tracking/rust_1_98_stabilized.md)**
+  - `NonZero<T>::from_str_radix`
+  - `f32`/`f64` `add_algebraic` / `sub_algebraic` / `mul_algebraic` / `div_algebraic`（`float_algebraic`）
+  - `int_format_into`
+  - `Box::as_ptr` / `Box::as_mut_ptr`（虽在 `Box<T>` 上，但常用于 unsafe/FFI 数值缓冲场景）
 
 ## 相关概念
 

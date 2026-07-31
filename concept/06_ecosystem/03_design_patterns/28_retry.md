@@ -18,7 +18,9 @@
 > [Microsoft — Cloud Design Patterns: Retry](https://learn.microsoft.com/en-us/azure/architecture/patterns/retry) ·
 > [AWS — Retry pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/retry-pattern.html) ·
 > [Vaucher et al. — A Comprehensive Empirical Study on Transient Fault Handling](https://doi.org/10.1145/3377811.3380415) ·
-> [Exponential Backoff and Jitter (AWS Blog)](https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/)
+> [Exponential Backoff and Jitter (AWS Blog)](https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/) ·
+> [docs.rs — backoff](https://docs.rs/backoff) ·
+> [docs.rs — tokio-retry](https://docs.rs/tokio-retry)
 
 ---
 

@@ -161,6 +161,10 @@ Panic 可以是可恢复的，也可以是不可恢复的，具体取决于 pani
 
 > 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
 
+- **[Rust 1.98](../../07_future/00_version_tracking/rust_1_98_stabilized.md)**
+  - `PanicHookInfo::location()` / `PanicInfo::location()` 返回类型收紧为 `Option<&'static Location<'static>>`
+  - `todo!()` 不再触发 `unreachable_code` lint
+
 - **[Rust 1.92](../../07_future/00_version_tracking/rust_1_92_stabilized.md)**
   - `Location::file_as_c_str`
 

@@ -180,6 +180,8 @@ fn get_value() -> Option<u32> {
 自旋锁通过原子变量忙等待获取锁，不依赖 OS 调度，常用于多核 bare-metal 或早期启动阶段。
 
 ```rust,ignore
+#![no_std]
+
 use core::sync::atomic::{AtomicBool, Ordering};
 use core::hint::spin_loop;
 
@@ -277,6 +279,8 @@ mod app {
 单生产者单消费者（SPSC）ring buffer 可以用原子索引实现，无需临界区，适合中断与主循环之间的高效数据传递。
 
 ```rust,ignore
+#![no_std]
+
 use core::sync::atomic::{AtomicUsize, Ordering};
 
 const N: usize = 16;
@@ -288,7 +292,7 @@ pub struct SpscRing<T, const N: usize> {
 }
 
 impl<T: Copy + Default, const N: usize> SpscRing<T, N> {
-    pub const fn new() -> Self {
+    pub fn new() -> Self {
         Self {
             buffer: [T::default(); N],
             head: AtomicUsize::new(0),

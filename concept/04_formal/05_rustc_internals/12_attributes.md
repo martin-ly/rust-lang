@@ -16,6 +16,9 @@
 > **定理链**: Attribute → Metadata → Compiler Behavior
 >
 > **来源**: [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes.html) · [Aho, Sethi & Ullman — Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
+>
+> **Rust 1.98.0 变更提示**：
+> Rust 1.98.0 周期跟踪 `#![register_{attribute,lint}_tool]`（RFC #3808），允许 crate 注册第三方属性/lint 工具名称，避免与内置属性冲突。详见 [`rust_1_98_stabilized.md`](../../07_future/00_version_tracking/rust_1_98_stabilized.md)。
 
 ---
 

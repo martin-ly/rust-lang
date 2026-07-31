@@ -109,8 +109,14 @@ fn panic(_info: &PanicInfo) -> ! {
 通过 UART 或 semihosting 输出 panic 位置信息，便于现场调试。
 
 ```rust,ignore
+#![no_std]
+
 use core::fmt::Write;
 use core::panic::PanicInfo;
+
+unsafe extern "C" {
+    fn uart_putc(b: u8);
+}
 
 struct UartWriter;
 
@@ -118,7 +124,7 @@ impl Write for UartWriter {
     fn write_str(&mut self, s: &str) -> core::fmt::Result {
         // 通过 UART 发送字符串
         for b in s.bytes() {
-            uart_putc(b);
+            unsafe { uart_putc(b); }
         }
         Ok(())
     }
@@ -193,7 +199,12 @@ extern "C" fn eh_personality() {}
 在 `panic = "abort"` 下仍可通过 `PanicInfo` 获取消息、位置和 payload。
 
 ```rust,ignore
+#![no_std]
+
 use core::panic::PanicInfo;
+
+fn log_panic_loc(_file: &str, _line: u32) {}
+fn log_panic_message(_msg: &core::panic::PanicMessage) {}
 
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
@@ -201,10 +212,9 @@ fn panic(info: &PanicInfo) -> ! {
         // 输出文件名、行号
         log_panic_loc(loc.file(), loc.line());
     }
-    if let Some(msg) = info.message() {
-        // 输出格式化消息
-        log_panic_message(msg);
-    }
+    // `info.message()` 在 Rust 1.97+ 直接返回 `PanicMessage<'_>`
+    let msg = info.message();
+    log_panic_message(&msg);
     loop {}
 }
 ```

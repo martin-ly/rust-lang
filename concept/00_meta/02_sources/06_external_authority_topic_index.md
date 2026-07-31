@@ -48,6 +48,7 @@
   - [十一、未覆盖缺口清单](#十一未覆盖缺口清单)
   - [十二、维护流程](#十二维护流程)
   - [十三、新增国际化来源映射（2026-07-31）](#十三新增国际化来源映射2026-07-31)
+  - [十四、UCG / rustc-dev-guide / 形式化验证工具深度映射（P3）](#十四ucg--rustc-dev-guide--形式化验证工具深度映射p3)
 
 ---
 
@@ -293,3 +294,55 @@ rustc-dev-guide 主题为**编译器实现细节**，项目 L4/L6 已有概述�
 | W3C OWL 2 / SHACL | KG formal semantics | `concept/04_formal/13_semantic_engineering/07_kg_owl_shacl_semantics.md` | ✅ |
 | [Martin Fowler](https://martinfowler.com/) / [microservices.io](https://microservices.io/) | Microservices、CQRS、Event Sourcing、Circuit Breaker 等 | `concept/06_ecosystem/03_design_patterns/` 相关页 | ✅ |
 | [Manning — Idiomatic Rust](https://www.manning.com/books/idiomatic-rust) / CLRS / Sedgewick / Knuth | Idioms、algorithms、complexity | `concept/06_ecosystem/03_design_patterns/02_idioms_spectrum.md`、`concept/06_ecosystem/10_performance/03_algorithms_and_complexity_idioms.md` | ✅ |
+| [Kani](https://model-checking.github.io/kani/) / [Miri](https://github.com/rust-lang/miri) / [Creusot](https://github.com/creusot-rs/creusot) / [Verus](https://verus-lang.github.io/verus/guide/) / [Aeneas](https://github.com/AeneasVerif/aeneas) / [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) / [Flux](https://flux-rs.github.io/flux/) / [AutoVerus](https://github.com/secure-foundations/verus/tree/main/source/verus-std) | Rust 形式化验证工具链：模型检查、符号执行、演绎验证、精炼类型 | `concept/04_formal/04_model_checking/01_verification_toolchain.md`、`08_miri.md`、`09_kani.md`、`11_creusot.md`、`07_autoverus.md`、`concept/04_formal/03_operational_semantics/07_aeneas_symbolic_semantics.md`、`concept/04_formal/00_type_theory/14_flux.md` | ✅ |
+| [MiniRust](https://github.com/RalfJung/minirust) / [Tree Borrows](https://github.com/RalfJung/tree-borrows) / [Stacked Borrows](https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md) | Rust 操作语义、别名模型、内存模型 | `concept/04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md`、`06_behavior_considered_undefined.md`、`concept/04_formal/03_operational_semantics/03_operational_semantics.md` | ✅ |
+
+---
+
+## 十四、UCG / rustc-dev-guide / 形式化验证工具深度映射（P3）
+
+> 本节把 `Unsafe Code Guidelines`、`rustc-dev-guide` 以及 Rust 形式化验证生态的**具体章节/子项目**与项目 `concept/` 权威页做细化对齐，为 P5（MiniRust/Tree Borrows/计算语义模型）和季度国际来源审计提供可追溯基线。
+
+### 14.1 Unsafe Code Guidelines 细化映射
+
+| UCG 主题 / 子页 | 项目对应页 | 状态 |
+|:---|:---|:---:|
+| [Introduction / Scope](https://rust-lang.github.io/unsafe-code-guidelines/) | [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) §官方来源 | ✅ |
+| [Data layout: Structs, Tuples, Enums, Unions](https://rust-lang.github.io/unsafe-code-guidelines/layout/structs-and-tuples.html) | [Type Layout](../../04_formal/05_rustc_internals/08_type_layout.md) · [Unions](../../02_intermediate/04_types_and_conversions/06_unions.md) | ✅ |
+| [Validity](https://rust-lang.github.io/unsafe-code-guidelines/glossary.html#validity) / [What is undefined behavior?](https://rust-lang.github.io/unsafe-code-guidelines/glossary.html#undefined-behavior) | [Behavior Considered Undefined](../../04_formal/01_ownership_logic/06_behavior_considered_undefined.md) · [Memory Model](../../03_advanced/02_unsafe/06_memory_model.md) | ✅ |
+| [Stacked Borrows (wip)](https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md) / [Tree Borrows](https://github.com/RalfJung/tree-borrows) | [Tree Borrows Deep Dive](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md) | ✅ |
+| [Provenance](https://rust-lang.github.io/unsafe-code-guidelines/glossary.html#pointer-provenance) / [Strict Provenance](https://doc.rust-lang.org/std/ptr/index.html#strict-provenance) | [Memory Model](../../03_advanced/02_unsafe/06_memory_model.md) · [Unsafe Patterns](../../03_advanced/02_unsafe/04_unsafe_rust_patterns.md) | ✅ |
+| [Atomic orderings](https://rust-lang.github.io/unsafe-code-guidelines/glossary.html#memory-ordering) | [Atomics and Memory Ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) | ✅ |
+
+### 14.2 rustc-dev-guide 细化映射
+
+| rustc-dev-guide 主题 / 子页 | 项目对应页 | 状态 |
+|:---|:---|:---:|
+| [About this guide](https://rustc-dev-guide.rust-lang.org/) / [How to build and run](https://rustc-dev-guide.rust-lang.org/building/how-to-build-and-run.html) | [Compiler Internals](../../06_ecosystem/00_toolchain/04_compiler_internals.md) · [rustc Bootstrap](../../06_ecosystem/00_toolchain/12_rustc_bootstrap.md) | ✅ |
+| [Queries and incremental](https://rustc-dev-guide.rust-lang.org/query.html) | [The Rustc Query System](../../04_formal/05_rustc_internals/01_rustc_query_system.md) | ✅ |
+| [The lexer and parser](https://rustc-dev-guide.rust-lang.org/the-parser.html) / [Macro expansion](https://rustc-dev-guide.rust-lang.org/macro-expansion.html) | [Lexical Structure](../../04_formal/05_rustc_internals/10_lexical_structure.md) · [Name Resolution and HIR](../../04_formal/05_rustc_internals/04_name_resolution_and_hir.md) | ✅ |
+| [MIR](https://rustc-dev-guide.rust-lang.org/mir/index.html) / [MIR passes](https://rustc-dev-guide.rust-lang.org/mir/mir_passes.html) / [Dataflow](https://rustc-dev-guide.rust-lang.org/mir/dataflow.html) | [MIR, Codegen and LLVM IR Primer](../../04_formal/05_rustc_internals/02_mir_codegen_llvm_primer.md) | ✅ |
+| [Type inference](https://rustc-dev-guide.rust-lang.org/type-inference.html) / [Trait solving](https://rustc-dev-guide.rust-lang.org/traits/resolution.html) | [Type Checking and Inference in rustc](../../04_formal/00_type_theory/07_type_checking_and_inference.md) · [The Trait Solver in rustc](../../04_formal/05_rustc_internals/03_trait_solver_in_rustc.md) | ✅ |
+| [Borrow checking](https://rustc-dev-guide.rust-lang.org/borrow_check.html) / [Region inference](https://rustc-dev-guide.rust-lang.org/borrow_check/region_inference.html) / [Polonius](https://rustc-dev-guide.rust-lang.org/borrow_check/polonius.html) | [NLL and Polonius](../../03_advanced/02_unsafe/03_nll_and_polonius.md) · [Borrow Checking Decidability](../../04_formal/01_ownership_logic/04_borrow_checking_decidability.md) | ✅ |
+| [Codegen / LLVM](https://rustc-dev-guide.rust-lang.org/backend/index.html) / [Stable MIR](https://rustc-dev-guide.rust-lang.org/stable-mir.html) | [LLVM Backend and Code Generation](../../06_ecosystem/00_toolchain/09_llvm_backend_and_codegen.md) · [rustc Driver and Stable MIR](../../06_ecosystem/00_toolchain/10_rustc_driver_and_stable_mir.md) | ✅ |
+| [Rustdoc](https://rustc-dev-guide.rust-lang.org/rustdoc.html) / [Rustdoc tests](https://rustc-dev-guide.rust-lang.org/rustdoc-internals/rustdoc-tests.html) | [Rustdoc Internals](../../06_ecosystem/00_toolchain/16_rustdoc_internals.md) | ✅ |
+| [Sanitizers](https://rustc-dev-guide.rust-lang.org/sanitizers.html) | [Sanitizers](../../03_advanced/02_unsafe/09_sanitizers.md) | ✅ |
+
+### 14.3 形式化验证工具映射
+
+| 工具 | 官方入口 | 项目对应页 | 覆盖重点 |
+|:---|:---|:---|:---|
+| **Miri** | [rust-lang/miri](https://github.com/rust-lang/miri) · [Miri Book](https://miri-labs.github.io/book/) | [04_formal/04_model_checking/08_miri.md](../../04_formal/04_model_checking/08_miri.md) | UB 检测、Tree Borrows、unsafe 代码审计 |
+| **Kani** | [model-checking.github.io/kani](https://model-checking.github.io/kani/) | [04_formal/04_model_checking/09_kani.md](../../04_formal/04_model_checking/09_kani.md) | 模型检查、`#[kani::proof]`、标准库 harness |
+| **Creusot** | [creusot-rs.github.io](https://creusot-rs.github.io/) · [GitHub](https://github.com/creusot-rs/creusot) | [04_formal/04_model_checking/11_creusot.md](../../04_formal/04_model_checking/11_creusot.md) | Why3 后端、契约、幽灵类型 |
+| **Verus** | [verus-lang.github.io/verus/guide/](https://verus-lang.github.io/verus/guide/) · [GitHub](https://github.com/verus-lang/verus) | [04_formal/04_model_checking/07_autoverus.md](../../04_formal/04_model_checking/07_autoverus.md) | 低级系统代码验证、 ownership 编码 |
+| **Aeneas** | [AeneasVerif/aeneas](https://github.com/AeneasVerif/aeneas) · [charon](https://github.com/AeneasVerif/charon) | [04_formal/03_operational_semantics/07_aeneas_symbolic_semantics.md](../../04_formal/03_operational_semantics/07_aeneas_symbolic_semantics.md) | 符号语义、从 MIR 到 LLBC |
+| **Prusti** | [pm.inf.ethz.ch/research/prusti.html](https://www.pm.inf.ethz.ch/research/prusti.html) · [GitHub](https://github.com/viperproject/prusti) | [04_formal/04_model_checking/04_modern_verification_tools.md](../../04_formal/04_model_checking/04_modern_verification_tools.md) | Viper 后端、分离逻辑 |
+| **Flux** | [flux-rs.github.io/flux/](https://flux-rs.github.io/flux/) · [GitHub](https://github.com/flux-rs/flux) | [04_formal/00_type_theory/14_flux.md](../../04_formal/00_type_theory/14_flux.md) | 精炼类型、索引类型 |
+| **Coq / RustBelt** | [PLV MPI-SWS — RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Iris Project](https://iris-project.org/) | [04_formal/02_separation_logic/01_rustbelt.md](../../04_formal/02_separation_logic/01_rustbelt.md) | 分离逻辑、所有权协议 |
+
+### 14.4 后续维护动作
+
+1. **P5 联动**：将 MiniRust/Tree Borrows 的操作语义细节反向注入 [Tree Borrows Deep Dive](../../04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md) 与 [Operational Semantics](../../04_formal/03_operational_semantics/03_operational_semantics.md)。
+2. **季度审计**：每季度用 `scripts/check_authority_freshness.py` 复核上述 URL 的 200/301 状态；失效链接在 §十一 登记并修复。
+3. **新增工具**：若 Rust 形式化生态出现新工具（如 BorrowSanitizer 稳定化），按本表格式追加一行，并同步到 [Verification Toolchain](../../04_formal/04_model_checking/01_verification_toolchain.md)。

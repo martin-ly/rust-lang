@@ -191,6 +191,8 @@ FFI（外部函数接口）的技术细节集中在「声明、类型、回调�
 >
 
 ```rust,ignore
+use std::ffi::{c_char, c_int, c_void};
+
 // 外部类型（不透明）：extern 块内只允许函数与静态变量声明。
 // `type FILE;` 属于不稳定的 extern types 特性；稳定 Rust 应使用私有零大小类型。
 #[repr(C)]
@@ -203,7 +205,7 @@ pub type Callback = extern "C" fn(data: *mut c_void) -> c_int;
 
 // 声明外部函数
 #[link(name = "mylib")]  // 链接库名
-extern "C" {
+unsafe extern "C" {
     // 简单函数
     fn abs(x: i32) -> i32;
 
@@ -215,9 +217,11 @@ extern "C" {
 }
 
 // 从 Rust 调用
-unsafe {
-    let result = abs(-42);
-    assert_eq!(result, 42);
+fn main() {
+    unsafe {
+        let result = abs(-42);
+        assert_eq!(result, 42);
+    }
 }
 ```
 
@@ -235,6 +239,8 @@ unsafe {
 >
 
 ```rust,ignore
+use std::ffi::{c_char, c_int, CString};
+
 // 模式: 不透明指针（Opaque Pointer）
 // C 端: typedef struct Connection Connection;
 
@@ -245,7 +251,7 @@ pub struct Connection {
     _private: [u8; 0],
 }
 
-extern "C" {
+unsafe extern "C" {
     fn connection_new(host: *const c_char) -> *mut Connection;
     fn connection_send(conn: *mut Connection, data: *const u8, len: usize) -> c_int;
     fn connection_close(conn: *mut Connection);
@@ -285,9 +291,11 @@ impl Drop for SafeConnection {
 >
 
 ```rust,ignore
+use std::ffi::{c_int, c_void};
+
 // 将 Rust 闭包传递给 C 的回调机制
 
-extern "C" {
+unsafe extern "C" {
     // C 函数接受回调: void register_callback(void (*cb)(int, void*), void* user_data);
     fn register_callback(
         cb: extern "C" fn(event: c_int, user_data: *mut c_void),
@@ -616,6 +624,9 @@ fn demo(e: Option<FromBytesUntilNulError>) {
   - `system` ABI C 风格可变参数函数稳定
 - **[Rust 1.97](../../07_future/00_version_tracking/rust_1_97_stabilized.md)**
   - `Copy for ffi::FromBytesUntilNulError`
+- **[Rust 1.98](../../07_future/00_version_tracking/rust_1_98_stabilized.md)**
+  - Windows GNU 目标 mingw-w64 工具链更新（影响 C/C++ 依赖链接行为）
+  - `-Zemscripten-wasm-eh` 移除（Emscripten/WASM 异常处理需改用 `-sWASM_EXCEPTIONS`）
 
 ## 相关概念
 
@@ -907,7 +918,7 @@ pub struct Student {
 use std::ffi::CString;
 use std::os::raw::c_char;
 
-extern "C" {
+unsafe extern "C" {
     fn process_string(s: *mut c_char);
 }
 
@@ -932,6 +943,12 @@ fn call_process(input: &str) {
 这是 FFI 中最常见的**所有权转移陷阱**：
 
 ```rust,ignore
+use std::ffi::CString;
+
+unsafe extern "C" {
+    fn process_string(s: *mut std::os::raw::c_char);
+}
+
 fn call_process(input: &str) {
     let c_string = CString::new(input).unwrap();
     let ptr = c_string.into_raw();  // 所有权转移给 C
@@ -952,6 +969,12 @@ fn call_process(input: &str) {
 **正确模式**：
 
 ```rust,ignore
+use std::ffi::CString;
+
+unsafe extern "C" {
+    fn process_string(s: *mut std::os::raw::c_char);
+}
+
 fn call_process(input: &str) {
     let c_string = CString::new(input).unwrap();
     let ptr = c_string.into_raw();

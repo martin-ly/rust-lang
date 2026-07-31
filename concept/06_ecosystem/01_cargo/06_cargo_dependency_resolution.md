@@ -520,6 +520,9 @@ Feature unification 指同一 crate 在一个主版本内只编译一次，并�
 
 > 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
 
+- **[Rust 1.98](../../07_future/00_version_tracking/rust_1_98_stabilized.md)**
+  - Public/Private Dependencies（RFC #3516）进入实现跟踪：`[dependencies] serde = { public = true }` 将让 Cargo 机器判定依赖变化是否构成 SemVer 破坏
+
 - **[Rust 1.96](../../07_future/00_version_tracking/rust_1_96_stabilized.md)**
   - Cargo git + alternate registry 共存；CVE-2026-5222/5223 修复（§3.1–3.2）
 

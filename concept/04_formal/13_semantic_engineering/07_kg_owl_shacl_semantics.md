@@ -366,6 +366,7 @@ mindmap
 - [W3C — RDF 1.2 Concepts and Abstract Syntax](https://www.w3.org/TR/rdf12-concepts/)
 - [W3C — JSON-LD 1.1](https://www.w3.org/TR/json-ld11/)
 - [W3C — SKOS Reference](https://www.w3.org/TR/skos-reference/)
+- [Rust Reference — Introduction](https://doc.rust-lang.org/reference/introduction.html)（本 KG 形式化解释所服务的 Rust 语言语义权威来源）
 - [Baader et al. — The Description Logic Handbook](https://dl.acm.org/doi/10.5555/1206588)
 - [Hogan et al. — Knowledge Graphs (ACM Comput. Surv. 2021)](https://dl.acm.org/doi/10.1145/3418449)
 - [Project KG Ontology — kg_ontology_v2.md](../../00_meta/knowledge_topology/kg_ontology_v2.md)

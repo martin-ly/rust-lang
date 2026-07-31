@@ -64,6 +64,7 @@
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
+  - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -704,6 +705,15 @@ let f3 = || drop(v);
 - **组合**: [Iterator Patterns](01_iterator_patterns.md) — 迭代器适配器大量使用闭包传递转换逻辑。
 - **深化**: [Async Closures](../../03_advanced/01_async/07_async_closures.md) — 异步闭包是普通闭包与 async 的交叉。
 - **旧权威页重定向**: 本页合并并替代 [`02_intermediate/04_types_and_conversions/02_closure_types.md`](../04_types_and_conversions/02_closure_types.md) 成为闭包唯一权威页。
+
+---
+
+## 版本兼容性 / Version Compatibility
+
+> 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
+
+- **[Rust 1.98](../../07_future/00_version_tracking/rust_1_98_stabilized.md)**
+  - Named `Fn` trait parameters（RFC #3955）：允许在 `Fn`/`FnMut`/`FnOnce` 及 `AsyncFn*` 的泛型参数列表中为参数命名，名称不参与类型等价判定与 ABI，仅用于文档与 IDE 提示
 
 ---
 

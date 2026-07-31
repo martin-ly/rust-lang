@@ -308,6 +308,9 @@ L0 惯用法的特点是「无争议」：它们不改变程序的抽象结构�
 **非惯用**:
 
 ```rust,ignore
+use std::fs::File;
+use std::io;
+
 fn read_file(path: &str) -> Result<String, io::Error> {
     let mut file = match File::open(path) {
         Ok(f) => f,
@@ -324,6 +327,9 @@ fn read_file(path: &str) -> Result<String, io::Error> {
 **惯用**:
 
 ```rust,ignore
+use std::fs::File;
+use std::io;
+
 fn read_file(path: &str) -> Result<String, io::Error> {
     let mut file = File::open(path)?;
     let mut contents = String::new();
@@ -342,6 +348,8 @@ fn read_file(path: &str) -> Result<String, io::Error> {
 **Rust 1.95 新增**: `if let` guards in match arms：
 
 ```rust,ignore
+use std::io::Error;
+
 // Rust 1.95.0+ 惯用：match 中使用 if let guards
 fn classify(value: Option<Result<i32, Error>>) -> &'static str {
     match value {
@@ -362,6 +370,12 @@ fn classify(value: Option<Result<i32, Error>>) -> &'static str {
 > **惯用**: 当只关心一个变体时，用 `if let` 替代 `match`。
 
 ```rust,ignore
+use std::collections::HashMap;
+
+let map: HashMap<i32, String> = HashMap::new();
+let key = 0;
+fn process(_value: &String) {}
+
 // 惯用：if let 局部绑定
 if let Some(value) = map.get(&key) {
     process(value);
@@ -380,6 +394,8 @@ match map.get(&key) {
 > **惯用**: 利用 `Iterator` 和 `Option`/`Result` 的链式方法组合计算。
 
 ```rust,ignore
+let numbers = vec![-3, -2, -1, 0, 1, 2, 3];
+
 // 惯用：Iterator 消费链
 let sum_of_squares: i32 = numbers
     .iter()
@@ -436,6 +452,10 @@ impl Meters {
 > **惯用**: 利用泛型（Generics）和 `PhantomData` 将状态编码到类型中，使非法状态不可表示。
 
 ```rust,ignore
+use std::io::{self, Error};
+use std::marker::PhantomData;
+use std::net::TcpStream;
+
 // 惯用：Typestate 编码连接状态
 struct Disconnected;
 struct Connected;
@@ -471,6 +491,8 @@ impl Client<Connected> {
 > **惯用**: 用 `PhantomData` 在不占用内存的情况下，向类型系统（Type System）传递额外的约束信息。
 
 ```rust,ignore
+use std::marker::PhantomData;
+
 // 惯用：PhantomData 标记生命周期关系
 struct Iter<'a, T: 'a> {
     ptr: *const T,
@@ -491,6 +513,11 @@ struct MyBox<T> {
 > **惯用**: 利用零大小类型（如 `()`、`PhantomData<T>`、`!`）作为编译期标记，无运行时（Runtime）开销。
 
 ```rust,ignore
+use std::io;
+use std::marker::PhantomData;
+
+type RawFd = i32;
+
 // 惯用：ZST 作为能力标记（Capability）
 struct ReadPermission;
 struct WritePermission;
@@ -569,6 +596,10 @@ let first = buf.first(); // 透明调用 [T]::first
 > **惯用**: 用 `+` 组合 trait bounds 表达「能力交集」，用 `where` 子句处理复杂约束。
 
 ```rust,ignore
+use std::fmt::{Debug, Display};
+
+trait Serialize {}
+
 // 惯用：trait bound 组合
 fn process<T>(item: T)
 where
@@ -578,7 +609,7 @@ where
 }
 
 // 1.95+ 精确捕获（precise capturing）:
-fn callback() -> impl Fn() + use<> { /* ... */ }
+fn callback() -> impl Fn() + use<> { || {} }
 ```
 
 ### 5.4
@@ -617,6 +648,10 @@ L3 与 L2 的分界：L2 管「接口形状」，L3 管「接口背后的资源�
 > **惯用**: 将资源获取与释放绑定到值的生命周期（Lifetimes），利用 `Drop` 自动清理。
 
 ```rust,ignore
+use std::sync::Mutex;
+
+let mutex = Mutex::new(0);
+
 // 惯用：RAII 锁守卫
 {
     let guard = mutex.lock().unwrap(); // 获取锁
@@ -746,6 +781,8 @@ L4 控制级惯用法处理错误与可选性的传播链：
 > **惯用**: 用 Iterator 的懒性求值链替代命令式循环，利用 LLVM 优化生成高效代码。
 
 ```rust,ignore
+let numbers = vec![1, 2, 3, 4, 5, 6];
+
 // 惯用：Iterator 消费链（零成本抽象）
 let max_even: Option<i32> = numbers
     .iter()
@@ -790,6 +827,12 @@ fn sum_fold(nums: &[i32]) -> i32 {
 > **惯用**: 用早期返回减少嵌套层级，用守卫子句（guard clause）快速排除非法输入。
 
 ```rust,ignore
+#[derive(Debug)]
+enum Error { EmptyInput, TooShort, Checksum }
+struct Output;
+fn validate_checksum(_data: &[u8]) -> bool { true }
+fn parse(_data: &[u8]) -> Output { Output }
+
 // 惯用：早期返回 + 守卫子句
 fn process(data: Option<&[u8]>) -> Result<Output, Error> {
     let data = data.ok_or(Error::EmptyInput)?;        // 守卫 1
@@ -844,6 +887,9 @@ L5 并发级惯用法的四个支柱：
 > **惯用**: 通过 `#[derive]` 或显式 `unsafe impl` 标记类型的线程安全属性，利用编译器推导复合类型的安全性。
 
 ```rust,ignore
+use std::cell::RefCell;
+use std::collections::HashMap;
+
 // 惯用：结构化推导线程安全
 #[derive(Clone)]
 struct Config {
@@ -894,6 +940,8 @@ impl Actor for CounterActor {
 > **惯用**: 通过 channel 发送值时利用 move 语义，编译期排除 use-after-send。
 
 ```rust,ignore
+use std::sync::mpsc;
+
 // 惯用：channel + 所有权转移
 let (tx, rx) = mpsc::channel();
 let data = vec![1, 2, 3];

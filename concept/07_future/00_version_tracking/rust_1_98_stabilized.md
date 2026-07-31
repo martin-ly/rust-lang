@@ -53,9 +53,8 @@
 
 ### 1.1 `Panic[Hook]Info` 中 `Location<'_>` 生命周期改为 `'static`
 
-**状态**: ✅ stabilized in 1.98 beta（2026-08-20 转正）
+**状态**: ✅ stabilized in 1.98 beta（2026-08-20 转正） · **相关概念**: [panic 与 abort](../../01_foundation/08_error_handling/03_panic_and_abort.md) · [生命周期](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
 **来源**: [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/)
-**相关概念**: [panic 与 abort](../../01_foundation/08_error_handling/03_panic_and_abort.md) · [生命周期](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
 
 #### 变更动机
 
@@ -120,9 +119,8 @@ Rust 1.98.0 更新了 Windows GNU 目标（`x86_64-pc-windows-gnu`、`i686-pc-wi
 
 ### 1.3 移除 Solaris 上 `File::lock` 实现（语义错误）
 
-**状态**: ✅ stabilized in 1.98 beta（2026-08-20 转正）
+**状态**: ✅ stabilized in 1.98 beta（2026-08-20 转正） · **相关概念**: [并发模式](../../03_advanced/00_concurrency/03_concurrency_patterns.md) · [进程与 IPC](../../03_advanced/08_process_ipc/01_process_model_and_lifecycle.md)
 **来源**: [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/)
-**相关概念**: [并发模式](../../03_advanced/00_concurrency/03_concurrency_patterns.md) · [进程与 IPC](../../03_advanced/08_process_ipc/01_process_model_and_lifecycle.md)
 
 #### 变更细节
 

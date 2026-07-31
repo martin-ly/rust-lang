@@ -904,6 +904,8 @@ fn main() {
   - `core::range` Copy 类型（§2.1）
 - **[Rust 1.97](../../07_future/00_version_tracking/rust_1_97_stabilized.md)**
   - `Default for RepeatN`
+- **[Rust 1.98](../../07_future/00_version_tracking/rust_1_98_stabilized.md)**
+  - `core::range::{RangeFull, RangeTo}` 下沉到 `core`（服务 `no_std`）
 
 ## 相关概念
 

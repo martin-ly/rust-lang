@@ -106,6 +106,8 @@ std::panic::set_hook(Box::new(|info| {
 2. **Trait 实现中的生命周期等式**。例如为 `PanicInfo<'a>` 实现某 trait，并把 `location()` 的结果类型写作 `&'a Location<'a>`：
 
    ```rust,ignore
+   use std::panic::{Location, PanicInfo};
+
    trait LocProvider<'a> {
        fn location(&self) -> &'a Location<'a>;
    }
@@ -409,7 +411,7 @@ impl AsyncDrop for AsyncFile {
 | `int_format_into` | [#152544](https://github.com/rust-lang/rust/pull/152544) | 整数直接格式化到现有缓冲区，避免 `write!` 的堆分配 |
 | `core::range::{RangeFull, RangeTo}` / `legacy::*` | [#156629](https://github.com/rust-lang/rust/pull/156629) | 将 `std::ops::RangeFull`、`std::ops::RangeTo` 下沉到 `core::range`，服务 `no_std` |
 | `NonZero<T>::from_str_radix` | [#157877](https://github.com/rust-lang/rust/pull/157877) | 按指定进制解析非零整数，结果为 0 时返回 `Err` |
-| `Box::as_ptr` / `Box::as_mut_ptr` | #157876 | 不物化引用（Reference）的原始指针（Raw Pointer）访问，对 aliasing model 更友好 |
+| `Box::as_ptr` / `Box::as_mut_ptr` | [#157876](https://github.com/rust-lang/rust/pull/157876) | 不物化引用（Reference）的原始指针（Raw Pointer）访问，对 aliasing model 更友好 |
 | `hex_literal_case` (rustfmt) | [rustfmt #6935](https://github.com/rust-lang/rustfmt/pull/6935) | 十六进制字面量大小写风格配置 |
 
 ```rust,ignore

@@ -35,6 +35,9 @@
 > (Source: [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html))
 > **Rust 1.97.0 变更提示**：
 > Rust 1.97.0 将 `must_use` lint 扩展到 `Result<T, !>` 与 `ControlFlow<!, T>`，详见 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)。
+>
+> **Rust 1.98.0 变更提示**：
+> Rust 1.98.0 将 `PanicHookInfo::location()` / `PanicInfo::location()` 的返回类型从 `Option<&Location<'_>>` 收紧为 `Option<&'static Location<'static>>`，便于在 panic hook 中长期存储位置信息。详见 [`rust_1_98_stabilized.md`](../../07_future/00_version_tracking/rust_1_98_stabilized.md) §1.1。
 
 ---
 **变更日志**:

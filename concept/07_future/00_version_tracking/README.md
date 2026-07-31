@@ -40,6 +40,8 @@
 | [`rust_1_97_preview.md`](rust_1_97_preview.md) | Rust 1.97 未稳定候选前瞻 |
 | [`rust_1_98_preview.md`](rust_1_98_preview.md) | Rust 1.98 nightly 前瞻 |
 | [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md) | Rust 1.98 稳定特性语义（待发布） |
+| [`feature_domain_matrix_198.md`](feature_domain_matrix_198.md) | Rust 1.98 特性域矩阵 |
+| [`migration_198_decision_tree.md`](migration_198_decision_tree.md) | Rust 1.98 兼容性迁移判定树 |
 | [`rust_1_99_preview.md`](rust_1_99_preview.md) | Rust 1.99 nightly 前瞻 |
 | [`rust_1_100_preview.md`](rust_1_100_preview.md) | Rust 1.100 远期前瞻 |
 | [`feature_domain_matrix_197.md`](feature_domain_matrix_197.md) | Rust 1.97 特性域矩阵 |

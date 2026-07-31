@@ -64,6 +64,8 @@
     - [2. 与类型对齐 / `repr(C)` / `repr(align)` 的正交关系](#2-与类型对齐--reprc--repralign-的正交关系)
     - [3. 与原子指令生成的关系（查询 → codegen 分支）](#3-与原子指令生成的关系查询--codegen-分支)
     - [4. 跨平台边界与旧名废弃说明](#4-跨平台边界与旧名废弃说明)
+  - [Rust 1.98.0 交叉语义](#rust-1980-交叉语义)
+    - [1. `Box::as_ptr` / `Box::as_mut_ptr` 的别名模型意义](#1-boxas_ptr--boxas_mut_ptr-的别名模型意义)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
@@ -407,6 +409,35 @@ fn align_check() {
 > [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) ·
 > [`42_type_layout.md`](../../04_formal/05_rustc_internals/08_type_layout.md) ·
 > [`11_atomics_and_memory_ordering.md`](../00_concurrency/06_atomics_and_memory_ordering.md)
+
+---
+
+## Rust 1.98.0 交叉语义
+
+> **适用版本**: Rust 1.98.0+ (Edition 2024)
+> **交叉域**: 内存模型（Memory Model）× 堆分配语义 × 裸指针（Raw Pointer）
+> **本小节性质**: 交叉语义补充，**只增不删**。
+
+### 1. `Box::as_ptr` / `Box::as_mut_ptr` 的别名模型意义
+
+Rust 1.98.0 稳定了 `Box<T>::as_ptr` 与 `Box<T>::as_mut_ptr`（[releases.rs 1.98.0](https://releases.rs/docs/1.98.0/)，PR [#157876](https://github.com/rust-lang/rust/pull/157876)）。这对 unsafe/FFI 代码有两层语义价值：
+
+1. **避免物化引用（Reference）**：旧写法 `&*boxed as *const T` 或 `&mut *boxed as *mut T` 会先构造一个引用再转裸指针；`as_ptr`/`as_mut_ptr` 直接返回裸指针，不经过 `&T`/`&mut T` 的借用检查与别名承诺，对 Stacked Borrows / Tree Borrows 更友好。
+2. **不转移所有权**：返回的裸指针借用了 `Box` 的所有权，但 `Box` 本身不被消耗；调用者仍需负责最终释放 `Box`（或将其 `into_raw` 后接管释放责任）。
+
+```rust,ignore
+// edition = "2024", rust = "1.98" —— 直接获取 Box 管理的裸指针，不创建中间引用
+let mut boxed = Box::new(42);
+let ptr: *mut i32 = boxed.as_mut_ptr();
+unsafe { *ptr = 100; }
+assert_eq!(*boxed, 100);
+```
+
+> **关键边界**：`as_mut_ptr` 返回的裸指针与 `Box` 指向同一份分配，因此在该裸指针活跃期间不能同时创建另一个可能违反别名规则的引用。例如，在 `*ptr = 100` 之后立即读取 `*boxed` 是安全的（因为 `ptr` 已用完），但若在持有 `ptr` 时又通过 `&mut *boxed` 创建新的可变引用，则可能触发 Tree Borrows 违规（取决于具体使用顺序）。
+
+> **来源**:
+> [Rust 1.98.0 Release Notes — Libraries](https://releases.rs/docs/1.98.0/) ·
+> 版本页 [`rust_1_98_stabilized.md`](../../07_future/00_version_tracking/rust_1_98_stabilized.md)（§2.1）
 
 ---
 

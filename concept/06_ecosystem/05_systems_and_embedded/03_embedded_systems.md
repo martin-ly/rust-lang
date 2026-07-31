@@ -1005,6 +1005,15 @@ fn main() {
 
 ---
 
+## 版本兼容性 / Version Compatibility
+
+> 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
+
+- **[Rust 1.98](../../07_future/00_version_tracking/rust_1_98_stabilized.md)**
+  - Solaris/Illumos 上 `std::fs::File::lock` 实现移除；依赖文件锁的 Solaris/Illumos 程序需改用平台特定 API（如 `flock` 包装）
+
+---
+
 ## 🧭 思维导图（Mindmap）
 
 ```mermaid
