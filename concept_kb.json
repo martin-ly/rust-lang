@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 666,
-    "generated_at": "2026-07-31T17:22:24.375550+00:00"
+    "generated_at": "2026-07-31T19:28:49.936421+00:00"
   },
   "files": [
     {
@@ -24709,7 +24709,7 @@
       "layer": "L2",
       "title": "Panic 机制",
       "positioning": "",
-      "line_count": 276,
+      "line_count": 279,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -26689,7 +26689,7 @@
       "layer": "L2",
       "title": "声明宏：`macro_rules!`、卫生性与 TT-munching",
       "positioning": "系统讲解 `macro_rules!` 的语法、卫生性、重复模式、TT-munching 等高级技术，以及声明宏与过程宏的选型边界。",
-      "line_count": 664,
+      "line_count": 666,
       "theorem_chains": [
         {
           "text": "| 理解片段分类符 ⟹ 正确匹配输入 | 知道 expr/tt/ident 等差异 | 能写出稳健的宏规则 | 高 |",
@@ -26827,7 +26827,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 41,
+      "matrix_rows": 43,
       "pre_post": {
         "pre": [
           "[Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) · [Traits](../00_traits/01_traits.md)"
@@ -27599,7 +27599,7 @@
       "layer": "L2",
       "title": "Rust 闭包：捕获语义、Trait 层级与工程实践",
       "positioning": "系统阐述 Rust 闭包的语法、捕获机制、`Fn`/`FnMut`/`FnOnce` 语义层级、`move` 闭包、函数指针强制转换、异步闭包与典型反模式，覆盖从基础使用到工程决策的完整链条。",
-      "line_count": 771,
+      "line_count": 774,
       "theorem_chains": [
         {
           "text": "| 理解捕获模式 ⟹ 正确选择 trait | 知道环境如何使用 | 能写出正确的泛型约束 | 高 |",
@@ -27759,7 +27759,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 43,
+      "matrix_rows": 46,
       "pre_post": {
         "pre": [
           "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Traits](../00_traits/01_traits.md)"
@@ -37840,7 +37840,7 @@
       "layer": "L3",
       "title": "FFI 深度解析：C ABI、调用约定与链接",
       "positioning": "系统剖析 Rust 与 C 世界交互的**机械层**：从 ABI/调用约定到 `repr(C)` 布局，从 `unsafe extern` 函数到 `cdylib`/`staticlib` 链接产物，从符号修饰到 panic 边界，建立 FFI 代码审查与工程决策的完整 checklist。",
-      "line_count": 720,
+      "line_count": 722,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -38453,7 +38453,7 @@
       "layer": "L3",
       "title": "内联汇编扩展主题：`no_std`、内核与跨平台向量约束",
       "positioning": "在 [内联汇编基础](01_inline_assembly.md) 之上，聚焦 `no_std`、裸机启动、中断上下文、PowerPC/LoongArch 等扩展架构，以及 `core::arch` 与 Miri 验证边界，形成面向系统级开发的内联汇编决策框架。",
-      "line_count": 546,
+      "line_count": 548,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -51297,7 +51297,7 @@
       "layer": "L4",
       "title": "内存序与原子操作（Memory Ordering and Atomics）",
       "positioning": "",
-      "line_count": 624,
+      "line_count": 626,
       "theorem_chains": [
         {
           "text": "| 独立计数器 | `Relaxed` | 用计数器值推断其他变量状态 ⟹ 需 Acquire/Release |",
@@ -51751,7 +51751,7 @@
       "layer": "L4",
       "title": "架构风格的形式化约束",
       "positioning": "从形式化视角定义主流架构风格（architecture styles）的语义约束，将高层架构决策转写为可在 Rust 中编码、检查的不变量；是 [Architecture Patterns](../../06_ecosystem/03_design_patterns/08_architecture_patterns.md) 与 [Architecture Pattern Semantics](02_architecture_pattern_semantics.md) 的形式化补充。",
-      "line_count": 419,
+      "line_count": 420,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -81713,7 +81713,7 @@
       "layer": "L7",
       "title": "Rust 1.99+ 前沿特性预览",
       "positioning": "",
-      "line_count": 295,
+      "line_count": 297,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -81746,7 +81746,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 43,
+      "matrix_rows": 45,
       "pre_post": {
         "pre": [
           "[Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md) · [Cargo 入门](../../06_ecosystem/01_cargo/15_cargo_getting_started.md)"

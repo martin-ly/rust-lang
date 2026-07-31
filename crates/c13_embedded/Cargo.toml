@@ -34,7 +34,7 @@ bindgen = { workspace = true }
 
 # criterion 仅在 host 类目标（x86_64 / aarch64 / wasm32）上用作 dev-dependency，
 # 避免它及其传递依赖（either、itertools 等）在 ARM/RISC-V 裸机交叉编译时被拉取。
-[target.'cfg(not(any(target_arch = "arm", target_arch = "riscv32", target_arch = "riscv64"))).dev-dependencies']
+[target."cfg(any(target_arch = \"x86_64\", target_arch = \"aarch64\", target_arch = \"wasm32\"))".dev-dependencies]
 criterion = { workspace = true }
 
 [lib]

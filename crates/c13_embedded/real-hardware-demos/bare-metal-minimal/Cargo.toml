@@ -1,0 +1,28 @@
+[workspace]
+
+[package]
+name = "bare-metal-minimal"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.80"
+authors = ["Rust Embedded Learning Community"]
+description = "Minimal no_std bare-metal examples for ARM Cortex-M and RISC-V"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+
+[target.'cfg(target_arch = "arm")'.dependencies]
+cortex-m = { version = "0.7.7", features = ["inline-asm"] }
+cortex-m-rt = "0.7.5"
+panic-halt = "0.2"
+
+[target.'cfg(target_arch = "riscv32")'.dependencies]
+riscv = { version = "0.12.1", features = ["critical-section-single-hart"] }
+riscv-rt = { version = "0.18.0", features = ["single-hart", "memory"] }
+panic-halt = "0.2"
+
+[profile.release]
+opt-level = "z"
+lto = true
+strip = true
+panic = "abort"
