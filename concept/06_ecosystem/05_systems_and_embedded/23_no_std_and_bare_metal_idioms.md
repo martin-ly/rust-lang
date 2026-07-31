@@ -681,9 +681,17 @@ graph TD
 
 - **[Rust Reference — no_std](https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute)** — `#![no_std]` 属性的语言级规范。
 
-> **权威来源对齐变更日志**: 2026-07-31 创建
+- **[probe.rs 文档](https://probe.rs/docs/)** — 基于 CMSIS-DAP / J-Link / ST-Link 的 Rust 嵌入式调试与烧录工作流。
 
-**文档版本**: 1.0
+- **[defmt Book](https://defmt.ferrous-systems.com/)** — Ferrous Systems 开发的零开销日志框架，替代 `println!` 的裸机调试方案。
+
+- **[Knurling-rs](https://knurling.ferrous-systems.com/)** — Ferrous Systems 的嵌入式 Rust 项目集，包括 `defmt`、`embedded-test`、probe-rs 工作流模板与硬件支持包。
+
+- **[Ferrous Systems Training — Embedded Rust](https://ferrous-systems.com/training/)** — 面向生产级嵌入式 Rust 的培训与认证路径，覆盖 `no_std`、Embassy、RTIC、安全关键实践。
+
+> **权威来源对齐变更日志**: 2026-07-31 创建；2026-07-31 Wave H 补充 probe-rs、defmt、Knurling、Ferrous Systems 国际来源。
+
+**文档版本**: 1.1
 **最后更新**: 2026-07-31
 **状态**: ✅ 概念文件创建完成
 

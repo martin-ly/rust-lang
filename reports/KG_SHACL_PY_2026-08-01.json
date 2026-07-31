@@ -1,0 +1,14 @@
+{
+  "date": "2026-08-01",
+  "engine": "pySHACL",
+  "engine_version": "0.40.1",
+  "kg_file": "concept/00_meta/kg_data_v3.json",
+  "shapes_file": "concept/00_meta/kg_shapes.ttl",
+  "inference": "rdfs",
+  "triples": 118334,
+  "entities": 667,
+  "relations": 10170,
+  "conforms": true,
+  "violations_total": 0,
+  "violations_by_type": {}
+}

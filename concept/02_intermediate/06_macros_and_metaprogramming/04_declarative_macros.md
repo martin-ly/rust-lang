@@ -604,6 +604,8 @@ fn main() {
 | TRPL Ch19 — Macros | P1 | <https://doc.rust-lang.org/book/ch19-06-macros.html> | 入门与使用模式 |
 | The Little Book of Rust Macros | P2 | <https://veykril.github.io/tlborm/> | 高级技巧、陷阱 |
 | Rust API Guidelines — Macros | P2 | <https://rust-lang.github.io/api-guidelines/macros.html> | API 设计 |
+| Kohlbecker, E. E. et al. “Hygienic Macro Expansion.” *LFP 1986*. | P1 | <https://dl.acm.org/doi/10.1145/319838.319859> | 卫生宏扩展奠基论文 |
+| Clinger, W. & Rees, J. “Macros That Work.” *POPL 1991*. | P1 | <https://dl.acm.org/doi/10.1145/99583.99607> | 引用透明宏扩展，Rust `$crate` 与作用域模型参考 |
 
 ---
 

@@ -21,6 +21,7 @@
 - [三、SHACL 验证形状](#三shacl-验证形状)
   - [3.1 sh:NodeShape](#31-shnodeshape)
   - [3.2 sh:PropertyShape](#32-shpropertyshape)
+  - [3.3 真实 SHACL 引擎验证（Wave I）](#33-真实-shacl-引擎验证wave-i)
 - [四、逆关系补全](#四逆关系补全)
 - [五、项目 KG 的 JSON-LD 片段](#五项目-kg-的-json-ld-片段)
 - [六、反例与局限](#六反例与局限)
@@ -31,6 +32,9 @@
 - [七、关键属性](#七关键属性)
 - [八、思维导图](#八思维导图)
 - [九、国际权威来源](#九国际权威来源)
+  - [标准与规范](#标准与规范)
+  - [引擎与工业实现](#引擎与工业实现)
+  - [学术与语言权威](#学术与语言权威)
 - [十、嵌入式测验](#十嵌入式测验)
   - [测验 1：OWL 类层级](#测验-1owl-类层级)
   - [测验 2：SHACL 形状](#测验-2shacl-形状)
@@ -126,7 +130,7 @@ KG 中的关系分为两类：
 
 ## 三、SHACL 验证形状
 
-SHACL（Shapes Constraint Language）用于验证 KG 中的每个节点是否符合预期形状。项目 KG 的验证入口规划在 `concept/00_meta/kg_shapes.ttl`。
+SHACL（Shapes Constraint Language）用于验证 KG 中的每个节点是否符合预期形状。项目 KG 的正式 SHACL 形状定义在 [`concept/00_meta/kg_shapes.ttl`](../../00_meta/kg_shapes.ttl)，并通过 [`scripts/validate_kg_shacl.py`](../../../scripts/validate_kg_shacl.py) 在隔离的 pySHACL 虚拟环境中执行真实引擎验证。
 
 ### 3.1 sh:NodeShape
 
@@ -143,7 +147,7 @@ ex:ConceptShape a sh:NodeShape ;
     sh:property [
         sh:path ex:bloomLevel ;
         sh:datatype xsd:string ;
-        sh:pattern "^L[0-7]$" ;
+        sh:pattern "^L[0-7].*$|^Meta$" ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] .
@@ -177,6 +181,25 @@ ex:MutexIrreflexiveShape a sh:PropertyShape ;
         """
     ] .
 ```
+
+### 3.3 真实 SHACL 引擎验证（Wave I）
+
+Wave I 将原来的 Python 近似校验升级为真实 SHACL 引擎验证：
+
+- **形状文件**：[`concept/00_meta/kg_shapes.ttl`](../../00_meta/kg_shapes.ttl)
+- **验证脚本**：[`scripts/validate_kg_shacl.py`](../../../scripts/validate_kg_shacl.py)
+- **引擎**：pySHACL 0.40+，运行在隔离虚拟环境 `tools/kg_shacl/.venv`
+- **推理**：`rdfs`（在验证前执行 RDFS 次符号推理）
+- **数据**：从 `concept/00_meta/kg_data_v3.json` 自动转换为标准 RDF（含 JSON-LD 语言标签、URI 引用、xsd:date / xsd:float 类型字面量）
+- **输出**：`reports/KG_SHACL_PY_<date>.md` 与 `.json`
+
+运行方式：
+
+```bash
+python scripts/validate_kg_shacl.py --strict
+```
+
+`--strict` 模式下，任何 SHACL violation 都会以 exit 1 阻断质量门。当前 KG v3（667 实体 / 10170 关系）已满足 `--strict` 零 violation。
 
 ---
 
@@ -313,7 +336,7 @@ ex:Ownership ex:bloomLevel "L1"^^xsd:string .
 ### 局限
 
 - OWL 2 DL 对传递性、对称性、自反性组合有复杂限制；将 `ex:equivalentTo` 同时设为传递、对称、自反时，需确保不违反全局限制。
-- SHACL 验证需要具体执行引擎（如 TopBraid、Apache Jena、pySHACL），目前项目质量门通过 Python 脚本近似检查，尚未接入完整 SHACL 引擎。
+- SHACL 验证已在 Wave I 接入真实引擎 pySHACL；后续可进一步对照 Apache Jena SHACL 或 TopBraid 进行交叉验证，以发现引擎实现差异。
 
 ---
 
@@ -326,6 +349,8 @@ ex:Ownership ex:bloomLevel "L1"^^xsd:string .
 | 等价映射 | `owl:equivalentClass` | OWL 2 |
 | 属性类型 | `owl:ObjectProperty` / `owl:DatatypeProperty` | OWL 2 |
 | 验证形状 | `sh:NodeShape` / `sh:PropertyShape` | SHACL |
+| 验证引擎 | pySHACL 0.40.1 | 隔离虚拟环境 `tools/kg_shacl/.venv` |
+| 推理策略 | `rdfs` 次符号推理 | pySHACL `inference="rdfs"` |
 | 逆属性 | `owl:inverseOf` | OWL 2 |
 | KG 数据源 | `concept/00_meta/kg_data_v3.json` | 项目 KG v3 |
 
@@ -346,6 +371,8 @@ mindmap
       PropertyShape
       范围约束
       模式约束
+      pySHACL 引擎
+      --strict 质量门
     逆关系
       dependsOn ↔ enables
       entails ↔ impliedBy
@@ -361,11 +388,26 @@ mindmap
 
 ## 九、国际权威来源
 
+### 标准与规范
+
 - [W3C — OWL 2 Web Ontology Language](https://www.w3.org/TR/owl2-overview/)
 - [W3C — SHACL](https://www.w3.org/TR/shacl/)
+- [W3C — SHACL Advanced Features](https://www.w3.org/TR/shacl-af/)
 - [W3C — RDF 1.2 Concepts and Abstract Syntax](https://www.w3.org/TR/rdf12-concepts/)
+- [W3C — RDF-star and SPARQL-star](https://w3c.github.io/rdf-star/)（关系元数据与注解三元组）
 - [W3C — JSON-LD 1.1](https://www.w3.org/TR/json-ld11/)
 - [W3C — SKOS Reference](https://www.w3.org/TR/skos-reference/)
+- [W3C — PROV-O](https://www.w3.org/TR/prov-o/)（数据来源与溯源）
+
+### 引擎与工业实现
+
+- [pySHACL — Python SHACL Validator](https://github.com/RDFLib/pySHACL)（项目 Wave I 采用的 SHACL 引擎）
+- [Apache Jena — SHACL](https://jena.apache.org/documentation/shacl/)（Java 生态的 SHACL 实现，可作为交叉验证引擎）
+- [Neo4j — Graph Data Science Library](https://neo4j.com/docs/graph-data-science/current/)（工业图数据库与算法参考）
+- [Neo4j — RDF / Ontology Import](https://neo4j.com/labs/neosemantics/)（RDF → Neo4j 的互操作）
+
+### 学术与语言权威
+
 - [Rust Reference — Introduction](https://doc.rust-lang.org/reference/introduction.html)（本 KG 形式化解释所服务的 Rust 语言语义权威来源）
 - [Baader et al. — The Description Logic Handbook](https://dl.acm.org/doi/10.5555/1206588)
 - [Hogan et al. — Knowledge Graphs (ACM Comput. Surv. 2021)](https://dl.acm.org/doi/10.1145/3418449)

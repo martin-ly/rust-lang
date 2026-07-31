@@ -19,7 +19,8 @@
 ## 目标平台
 
 - **Host**: `x86_64`（模拟/文档构建）
-- **目标**: `thumbv7em-none-eabihf`（ARM Cortex-M4/M7）
+- **ARM**: `thumbv7em-none-eabihf`（ARM Cortex-M4F，如 STM32F4 / Nucleo-F446RE）
+- **RISC-V**: `riscv32imac-unknown-none-elf`（通用 32-bit RISC-V MCU，如 SiFive FE310 / GD32VF103）
 
 ## 功能特性
 
@@ -37,10 +38,27 @@
 
 ## 可编译示例
 
+### Host 可编译 / 裸机骨架
+
 - [最小 bare-metal 程序](examples/minimal_bare_metal.rs)
 - [QEMU 演示](examples/qemu_demo.rs)
 - [自定义 bare-metal async executor](examples/custom_async_executor.rs)
 - [自定义 bump allocator](examples/custom_allocator.rs)
+
+### 真实目标可编译
+
+- [ARM Cortex-M 最小 blinky](examples/cortex_m_minimal_blinky.rs) — `thumbv7em-none-eabihf`
+- [RISC-V 最小 blinky](examples/riscv_minimal_blinky.rs) — `riscv32imac-unknown-none-elf`
+
+编译命令：
+
+```bash
+# ARM
+cargo build -p c13_embedded --target thumbv7em-none-eabihf --example cortex_m_minimal_blinky
+
+# RISC-V
+cargo build -p c13_embedded --target riscv32imac-unknown-none-elf --example riscv_minimal_blinky
+```
 
 ## 文档
 

@@ -549,16 +549,25 @@ fn show() {
 |:---|:---:|:---|
 | [RISC-V Specifications](https://riscv.org/technical/specifications/) | ✅ 一级 | RISC-V 官方 ISA 与特权架构规范 |
 | [The rustc book — Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html) | ✅ 一级 | Rust 官方目标 Tier 清单 |
-| [riscv-rt](https://github.com/rust-embedded/riscv-rt) | ✅ 二级 | RISC-V 裸机启动与中断运行时 |
-| [rust-embedded/riscv](https://github.com/rust-embedded/riscv) | ✅ 二级 | RISC-V 通用 PAC/CSR 访问 crate |
+| [riscv-rt](https://github.com/rust-embedded/riscv-rt) / [docs.rs](https://docs.rs/riscv-rt/) | ✅ 二级 | RISC-V 裸机启动与中断运行时 |
+| [rust-embedded/riscv](https://github.com/rust-embedded/riscv) / [docs.rs](https://docs.rs/riscv/) | ✅ 二级 | RISC-V 通用 PAC/CSR 访问 crate |
+| [esp-hal](https://github.com/esp-rs/esp-hal) | ✅ 二级 | ESP32-C3/C6/H2 等 RISC-V 芯片的生产级 HAL |
 | [avr-rust GitHub](https://github.com/avr-rust) | ✅ 二级 | AVR Rust 社区组织入口 |
 | [rahix/avr-hal](https://github.com/rahix/avr-hal) | ✅ 二级 | 主流 AVR HAL 与 Arduino 支持 |
-| [Embassy](https://embassy.dev/) | ✅ 二级 | 异步嵌入式运行时，含 RISC-V 后端 |
-| [RTIC](https://rtic.rs/) | ✅ 二级 | 实时中断驱动并发框架 |
+| [Embassy](https://embassy.dev/) / [Embassy Book](https://embassy.dev/book/) | ✅ 二级 | 异步嵌入式运行时，含 RISC-V 后端 |
+| [RTIC](https://rtic.rs/) / [RTIC Book](https://rtic.rs/2/book/en/) | ✅ 二级 | 实时中断驱动并发框架 |
 | [The Embedded Rust Book](https://docs.rust-embedded.org/book/index.html) | ✅ 一级 | 官方嵌入式 Rust 指南 |
 | [Rust Reference — Panic Handler](https://doc.rust-lang.org/reference/runtime.html#the-panic_handler-attribute) | ✅ 一级 | panic handler 官方说明 |
 
----
+## 十、实测案例
+
+`crates/c13_embedded/examples/riscv_minimal_blinky.rs` 针对 `riscv32imac-unknown-none-elf` 提供了最小可编译骨架：
+
+```bash
+cargo build -p c13_embedded --target riscv32imac-unknown-none-elf --example riscv_minimal_blinky
+```
+
+该示例使用 `riscv-rt` 入口、RAM-only `memory.x` 布局，并通过 `riscv::asm::nop()` 实现忙等延时，可在 QEMU virt 或从 RAM 启动的 RISC-V 开发板上作为 blinky 模板。
 
 ---
 
@@ -610,6 +619,6 @@ mindmap
 
 ---
 
-**文档版本**: 1.0
-**最后更新**: 2026-07-30
-**状态**: ✅ 概念文件创建完成
+**文档版本**: 1.1
+**最后更新**: 2026-07-31
+**状态**: ✅ Wave H 国际来源与实测案例补充完成

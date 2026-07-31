@@ -2246,7 +2246,7 @@ unsafe fn bad_deref() {
 
 ### 15.6 反例 6：约束求解失败
 
-```rust
+```rust,compile_fail
 fn complex_failure<T, U, V>(
     f: impl Fn(T) -> U,
     g: impl Fn(U) -> V,
@@ -2300,7 +2300,7 @@ trait Same<T> {
     fn is_same(&self, other: &T) -> bool;
 }
 
-impl<T> Same<T> for T {
+impl<T: PartialEq> Same<T> for T {
     fn is_same(&self, other: &T) -> bool { self == other }
 }
 

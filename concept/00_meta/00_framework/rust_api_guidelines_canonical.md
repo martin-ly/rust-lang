@@ -168,6 +168,8 @@ C-COMMON 覆盖 Rust API 中最基础的命名规则。一致的命名让调用�
 惯用：无参或主要参数的构造器叫 `new`；需要额外配置参数的构造器用 `with_*`。
 
 ```rust
+use std::time::Duration;
+
 pub struct Config {
     timeout: Duration,
 }
@@ -207,6 +209,11 @@ let bytes: Vec<u8> = s.into_bytes();  // into_：消费 self
 惯用：访问器不加 `get_` 前缀，修改器用 `set_*`。
 
 ```rust
+pub struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
 impl Rectangle {
     pub fn width(&self) -> u32 { self.width }
     pub fn set_width(&mut self, width: u32) { self.width = width; }
@@ -220,6 +227,11 @@ impl Rectangle {
 惯用：返回 `bool` 的方法用 `is_*`、`has_*`、`can_*`。
 
 ```rust
+pub struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
 impl Rectangle {
     pub fn is_empty(&self) -> bool { self.width == 0 || self.height == 0 }
     pub fn has_area(&self) -> bool { self.width > 0 && self.height > 0 }
@@ -390,10 +402,14 @@ pub fn take_n<T>(slice: &[T], n: usize) -> &[T] {
 公共 API 的排序、迭代顺序、错误消息等若无文档保证，不应被调用方依赖。需要稳定顺序时显式文档化。
 
 ```rust
-/// 按键的升序返回条目。
-///
-/// 迭代顺序是稳定的、公开保证的语义。
-pub fn sorted_entries(&self) -> impl Iterator<Item = (&str, &i32)> { /* ... */ }
+pub struct EntryMap;
+
+impl EntryMap {
+    /// 按键的升序返回条目。
+    ///
+    /// 迭代顺序是稳定的、公开保证的语义。
+    pub fn sorted_entries(&self) -> impl Iterator<Item = (&str, &i32)> { std::iter::empty() }
+}
 ```
 
 ### 6.3 未使用值（C-UNUSED）
@@ -401,8 +417,12 @@ pub fn sorted_entries(&self) -> impl Iterator<Item = (&str, &i32)> { /* ... */ }
 返回 `Result`、`Option`、`Iterator` 或重要副作用结果的方法应标记 `#[must_use]`。
 
 ```rust
+use std::io;
+
+pub struct Config;
+
 #[must_use]
-pub fn read_config(path: &str) -> Result<Config, io::Error> { /* ... */ }
+pub fn read_config(path: &str) -> Result<Config, io::Error> { Ok(Config) }
 ```
 
 反例：返回 `Result` 的方法未标 `#[must_use]`，调用方可能静默丢弃错误。
@@ -416,8 +436,11 @@ pub fn read_config(path: &str) -> Result<Config, io::Error> { /* ... */ }
 API 应让调用方写更少的类型标注、犯更少的错误。优先使用 `impl Trait`、默认参数、builder。
 
 ```rust
+use std::io;
+use std::net::{TcpStream, ToSocketAddrs};
+
 // ✅ 调用方无需 turbofish
-pub fn connect(addr: impl ToSocketAddrs) -> io::Result<TcpStream> { /* ... */ }
+pub fn connect(addr: impl ToSocketAddrs) -> io::Result<TcpStream> { TcpStream::connect(addr) }
 ```
 
 ### 7.2 疑问方法（C-QUESTION）
@@ -425,9 +448,15 @@ pub fn connect(addr: impl ToSocketAddrs) -> io::Result<TcpStream> { /* ... */ }
 返回 `Option` 或 `Result` 且语义为"尝试做某事"的方法可用 `try_*` 前缀。
 
 ```rust
+use std::collections::TryReserveError;
+
+pub struct Stack {
+    inner: Vec<i32>,
+}
+
 impl Stack {
-    pub fn pop(&mut self) -> Option<i32> { /* ... */ }
-    pub fn try_reserve(&mut self, additional: usize) -> Result<(), TryReserveError> { /* ... */ }
+    pub fn pop(&mut self) -> Option<i32> { self.inner.pop() }
+    pub fn try_reserve(&mut self, additional: usize) -> Result<(), TryReserveError> { self.inner.try_reserve(additional) }
 }
 ```
 
@@ -536,6 +565,10 @@ pub enum ConfigError {
 提供 `Default` 实现，并在文档中说明默认值。
 
 ```rust
+pub struct Config {
+    timeout: u32,
+}
+
 impl Default for Config {
     fn default() -> Self {
         Self { timeout: 30 }
@@ -552,10 +585,21 @@ impl Default for Config {
 复杂转换应提供可检查、可复用的中间类型，而非一次性函数。
 
 ```rust
+#[derive(Debug)]
+pub enum UrlError {
+    Invalid,
+}
+
 pub struct ParsedUrl { scheme: String, host: String, path: String }
 
 impl ParsedUrl {
-    pub fn parse(s: &str) -> Result<Self, UrlError> { /* ... */ }
+    pub fn parse(s: &str) -> Result<Self, UrlError> {
+        let parts: Vec<&str> = s.splitn(3, '/').collect();
+        if parts.len() < 2 {
+            return Err(UrlError::Invalid);
+        }
+        Ok(Self { scheme: parts[0].into(), host: parts[1].into(), path: parts.get(2).unwrap_or(&"").to_string() })
+    }
     pub fn scheme(&self) -> &str { &self.scheme }
 }
 ```

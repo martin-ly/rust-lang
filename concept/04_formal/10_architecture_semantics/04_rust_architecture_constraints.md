@@ -129,18 +129,20 @@ Cargo workspace 允许一组 crate 共享 `Cargo.lock` 和 target 目录，但**
 ### 3.1 分层架构的可见性实现
 
 ```rust
-// crate::layered 内部：presentation 只能依赖 application
-mod application {
-    pub(in crate::layered) fn use_case() {}
-}
+mod layered {
+    // crate::layered 内部：presentation 只能依赖 application
+    mod application {
+        pub(in crate::layered) fn use_case() {}
+    }
 
-mod infrastructure {
-    // 无法访问 presentation，因为 presentation 未对其公开
-}
+    mod infrastructure {
+        // 无法访问 presentation，因为 presentation 未对其公开
+    }
 
-mod presentation {
-    use crate::layered::application::use_case;
-    pub fn handle() { use_case(); }
+    mod presentation {
+        use crate::layered::application::use_case;
+        pub fn handle() { use_case(); }
+    }
 }
 ```
 

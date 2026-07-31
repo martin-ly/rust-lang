@@ -26,6 +26,7 @@
 > - **Martin Fowler** — *Patterns of Enterprise Application Architecture* (EAA) 与相关架构文章. [https://martinfowler.com/books/eaa.html](https://martinfowler.com/books/eaa.html)
 > - **M. Shaw & D. Garlan (1996)** — *Software Architecture: Perspectives on an Emerging Discipline*. Prentice Hall. [PDF](https://www.cs.cmu.edu/~search/articles/books/SA.book.pdf)
 > - **Garlan & Shaw (1993)** — *An Introduction to Software Architecture*. [https://doi.org/10.1142/9789812813032_0001](https://doi.org/10.1142/9789812813032_0001)
+> - **Allen, R. & Garlan, D. (1997)** — *A Formal Basis for Architectural Connection*. ACM TOSEM 6(3):213–249. [https://dl.acm.org/doi/10.1145/258077.258078](https://dl.acm.org/doi/10.1145/258077.258078)
 > - **C. A. R. Hoare (1978)** — *Communicating Sequential Processes* (CSP).
 > - **G. Agha (1986)** — *Actors: A Model of Concurrent Computation in Distributed Systems*.
 

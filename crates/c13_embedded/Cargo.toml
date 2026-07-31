@@ -23,10 +23,18 @@ cortex-m-rt = { workspace = true }
 panic-halt = { workspace = true }
 volatile-register = { workspace = true }
 
+# 仅在 RISC-V 嵌入式目标下启用真实硬件依赖
+[target.'cfg(target_arch = "riscv32")'.dependencies]
+riscv = { workspace = true }
+riscv-rt = { workspace = true }
+panic-halt = { workspace = true }
+
 [build-dependencies]
 bindgen = { workspace = true }
 
-[dev-dependencies]
+# criterion 仅在 host 类目标（x86_64 / aarch64 / wasm32）上用作 dev-dependency，
+# 避免它及其传递依赖（either、itertools 等）在 ARM/RISC-V 裸机交叉编译时被拉取。
+[target.'cfg(not(any(target_arch = "arm", target_arch = "riscv32", target_arch = "riscv64"))).dev-dependencies']
 criterion = { workspace = true }
 
 [lib]

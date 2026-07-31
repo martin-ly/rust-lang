@@ -209,7 +209,7 @@ pub fn hello_derive(input: TokenStream) -> TokenStream {
 
 Derive 宏为被标注类型生成附加 impl，**不能修改原类型定义**。
 
-```rust
+```rust,ignore
 // 使用方
 #[derive(Hello)]
 struct Foo;
@@ -222,7 +222,7 @@ impl Hello for Foo {
 
 Derive 辅助属性（helper attributes）：
 
-```rust
+```rust,ignore
 #[derive(Builder)]
 #[builder(setter(into))]
 struct Config { ... }
@@ -230,7 +230,7 @@ struct Config { ... }
 
 辅助属性需要在 derive 宏注册时声明：
 
-```rust
+```rust,ignore
 #[proc_macro_derive(Builder, attributes(builder))]
 pub fn builder_derive(input: TokenStream) -> TokenStream { ... }
 ```

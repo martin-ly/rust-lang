@@ -218,7 +218,7 @@ fn clone_any<T>(x: T) -> T {
 
 ### 5.3 反例：`unsafe` 与类型内省
 
-```rust
+```rust,compile_fail,E0512
 use std::any::{Any, TypeId};
 
 fn suspicious<T: 'static>(x: T) -> T {

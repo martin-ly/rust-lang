@@ -59,10 +59,17 @@ MLOps（Machine Learning Operations）将软件工程实践扩展到机器学习
 与软件 CI/CD 类似，ML 流水线也应以代码形式版本化：
 
 ```rust
+use semver::Version;
+
+#[derive(Debug)]
+pub enum PipelineError {
+    StepFailed,
+}
+
 // 概念性流水线步骤抽象
 pub struct PipelineStep<T> {
     pub name: &'static str,
-    pub version: semver::Version,
+    pub version: Version,
     pub run: Box<dyn Fn(&T) -> Result<T, PipelineError>>,
 }
 

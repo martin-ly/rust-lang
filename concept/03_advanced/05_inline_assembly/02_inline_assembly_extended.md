@@ -34,7 +34,9 @@
 > [core::arch](https://doc.rust-lang.org/core/arch/index.html) ·
 > [Miri](https://github.com/rust-lang/miri) ·
 > [PowerPC ELF ABI](https://openpowerfoundation.org/specifications/abi/) ·
-> [LoongArch ELF ABI](https://loongson.github.io/LoongArch-Documentation/LoongArch-ELF-ABI-EN.html)
+> [LoongArch ELF ABI](https://loongson.github.io/LoongArch-Documentation/LoongArch-ELF-ABI-EN.html) ·
+> Sarkar, S. et al. “The Semantics of x86-CC Multiprocessor Machine Code.” *POPL 2009*. [https://dl.acm.org/doi/10.1145/1480881.1480929](https://dl.acm.org/doi/10.1145/1480881.1480929) ·
+> Alglave, J. et al. “The Semantics of Power and ARM Multiprocessor Machine Code.” *DAMP 2009*. [https://dl.acm.org/doi/10.1145/1481839.1481842](https://dl.acm.org/doi/10.1145/1481839.1481842)
 
 ---
 

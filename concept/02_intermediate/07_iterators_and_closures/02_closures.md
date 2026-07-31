@@ -104,19 +104,25 @@ assert_eq!(add_x(3), 8);
 | 消费/移动捕获 | `T` | `FnOnce` | `call_once(self)`，只能调用一次 |
 
 ```rust
-let s = String::from("hello");
-let mut n = 0;
-
-let read = || println!("{}", s);          // 捕获 &s      → Fn
-let mut write = || { n += 1; };            // 捕获 &mut n  → FnMut
-let consume = || drop(s);                  // 捕获 s (move) → FnOnce
-
-read();
-read();
-write();
-write();
-consume();
-// consume(); // ❌ 已消费
+// 注意：三种捕获模式不能在同一作用域内同时存在，以下分开展示
+{
+    let s = String::from("hello");
+    let read = || println!("{}", s); // 捕获 &s → Fn
+    read();
+    read();
+}
+{
+    let mut n = 0;
+    let mut write = || { n += 1; }; // 捕获 &mut n → FnMut
+    write();
+    write();
+}
+{
+    let s = String::from("hello");
+    let consume = || drop(s); // 捕获 s (move) → FnOnce
+    consume();
+    // consume(); // ❌ 已消费
+}
 ```
 
 > **推导原则**: 编译器优先选择不可变借用；若闭包体需要修改，则升级为可变借用；若需要将捕获移出闭包体（如 `drop`），则升级为按值移动。
@@ -141,13 +147,21 @@ fn call_fn<F>(f: F) where F: Fn() { f(); }
 fn call_fnmut<F>(mut f: F) where F: FnMut() { f(); }
 fn call_fnonce<F>(f: F) where F: FnOnce() { f(); }
 
-let s = String::from("hi");
-let ro = || println!("{}", s);     // Fn
-let mut rw = || { let _ = &mut s; }; // 仅示意，实际不能同时存在
-let once = || drop(s);             // FnOnce
-
-// 任何 Fn 闭包都可传给 FnMut / FnOnce 约束
-// 任何 FnMut 闭包都可传给 FnOnce 约束
+{
+    let s = String::from("hi");
+    let ro = || println!("{}", s); // Fn
+    call_fn(ro);
+}
+{
+    let mut s = String::from("hi");
+    let mut rw = || { let _ = &mut s; }; // FnMut
+    call_fnmut(rw);
+}
+{
+    let s = String::from("hi");
+    let once = || drop(s); // FnOnce
+    call_fnonce(once);
+}
 ```
 
 > **设计建议**: 函数参数约束应优先使用最严格的 trait（能用 `Fn` 不用 `FnMut`，能用 `FnMut` 不用 `FnOnce`），这样调用方最灵活。
@@ -270,7 +284,7 @@ let f: fn(i32) -> i32 = |x| x + 1;
 assert_eq!(f(5), 6);
 
 let n = 1;
-let g = |x| x + n;
+let g = |x: i32| x + n;
 // let p: fn(i32) -> i32 = g; // ❌ 捕获了 n，无法转换
 ```
 
@@ -686,6 +700,9 @@ let f3 = || drop(v);
 | RFC 1558 — Closures | P1 设计文档 | <https://github.com/rust-lang/rfcs/pull/1558> | `Fn`/`FnMut`/`FnOnce` 设计 |
 | RFC 3668 — Async Closures | P1 设计文档 | <https://github.com/rust-lang/rfcs/pull/3668> | 异步闭包 |
 | Rustonomicon — Functions & Closures | P2 高级资料 | <https://doc.rust-lang.org/nomicon/hrtb.html> | 生命周期、高阶 trait bound |
+| Landin, P. J. “The Mechanical Evaluation of Expressions.” *The Computer Journal*, 1964. | P1 学术 | <https://doi.org/10.1093/comjnl/6.4.308> | 闭包概念起源（SECD 机 + 环境捕获） |
+| Plotkin, G. D. “Call-by-Name, Call-by-Value and the λ-Calculus.” *Theoretical Computer Science*, 1975. | P1 学术 | <https://doi.org/10.1016/0304-3975(75)90017-1> | λ-演算与调用约定，Rust `Fn` 层级语义基础 |
+| Jung, R. et al. “RustBelt: Securing the Foundations of the Rust Programming Language.” *POPL 2018*. | P1 学术 | <https://plv.mpi-sws.org/rustbelt/> | Rust 高阶函数与闭包的形式化安全基础 |
 
 ---
 

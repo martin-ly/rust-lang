@@ -724,6 +724,10 @@ cortex-m-rt = "0.7.5"
 panic-halt = "1.0.0"
 volatile-register = "0.2.2"
 
+# RISC-V 裸机运行时/CSR 访问（2026-07-31 Wave H 新增）
+riscv = "0.16.1"
+riscv-rt = "0.18.0"
+
 # 工作区特性标志配置 - 优化编译时间和依赖管理
 # 注意: 工作区依赖不能设为可选，特性标志在各crate中配置
 

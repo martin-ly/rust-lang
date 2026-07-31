@@ -173,6 +173,8 @@ mindmap
 | `-Ctarget-cpu` 转为 target-modifier | 支持 AVR、AMDGCN、NVPTX 等目标更细粒度 CPU 选择 | [rust-lang/rust#159513](https://github.com/rust-lang/rust/pull/159513) |
 | `cfg_select!` 模块发现 | rustfmt 支持通过 `cfg_select!` 发现模块 | nightly rustfmt |
 | riscv64-unknown-linux-musl 晋升 Tier 2 | 带 host tools 的 Tier 2 支持 | [rust-lang/rust#158608](https://github.com/rust-lang/rust/pull/158608) |
+| const-eval 提前中止含泛型查询 | 常量求值在类型含泛型时尽早中止，避免无意义错误扩散 | [rust-lang/rust#159513](https://github.com/rust-lang/rust/pull/159513) |
+| Hermit/Aero 文件系统错误码调整 | `hermit`/`aero` 文件系统错误由 `from_raw_os_error(22)` 改为 `unsupported()` | [rust-lang/rust#159513](https://github.com/rust-lang/rust/pull/159513) |
 
 ### 2.4 Ongoing Stabilization PRs（可能进入 1.99.0 beta 的候选）
 

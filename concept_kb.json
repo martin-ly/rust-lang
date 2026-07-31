@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 666,
-    "generated_at": "2026-07-31T17:01:47.904555+00:00"
+    "generated_at": "2026-07-31T17:22:24.375550+00:00"
   },
   "files": [
     {
@@ -756,7 +756,7 @@
       "layer": "L0",
       "title": "Rust API Guidelines 权威指南",
       "positioning": "本页是 Rust API Guidelines 在 `concept/` 中的**唯一权威解释页**，系统讲解 C-COMMON、C-CONV、C-SINGULAR、C-GETTER、C-STRUCT-BOUNDS、C-VALID、C-RATIONAL、C-STABLE、C-UNUSED、C-CALLER、C-QUESTION、C-CONFIRM、C-DEREF、C-CLONE、C-DEBUG、C-SERDE、C-FAILURE、C-PLACEHOLDER、C-INTERMEDIATE、C-ENTITY、C-METHOD 等核心约定，并给出 Rust 示例与反例。",
-      "line_count": 1754,
+      "line_count": 1798,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -766,9 +766,9 @@
       "code_blocks": [
         {
           "flags": [],
-          "lines": 16,
+          "lines": 18,
           "should_fail": false,
-          "code_preview": "pub struct Config {     timeout: Duration, }  impl Config {     /// 默认构造     pub..."
+          "code_preview": "use std::time::Duration;  pub struct Config {     timeout: Duration, }  impl Con..."
         },
         {
           "flags": [],
@@ -778,15 +778,15 @@
         },
         {
           "flags": [],
-          "lines": 5,
+          "lines": 10,
           "should_fail": false,
-          "code_preview": "impl Rectangle {     pub fn width(&self) -> u32 { self.width }     pub fn set_wi..."
+          "code_preview": "pub struct Rectangle {     width: u32,     height: u32, }  impl Rectangle {     ..."
         },
         {
           "flags": [],
-          "lines": 5,
+          "lines": 10,
           "should_fail": false,
-          "code_preview": "impl Rectangle {     pub fn is_empty(&self) -> bool { self.width == 0 || self.he..."
+          "code_preview": "pub struct Rectangle {     width: u32,     height: u32, }  impl Rectangle {     ..."
         },
         {
           "flags": [],
@@ -852,27 +852,27 @@
         },
         {
           "flags": [],
-          "lines": 5,
+          "lines": 9,
           "should_fail": false,
-          "code_preview": "/// 按键的升序返回条目。 /// /// 迭代顺序是稳定的、公开保证的语义。 pub fn sorted_entries(&self) -> impl It..."
+          "code_preview": "pub struct EntryMap;  impl EntryMap {     /// 按键的升序返回条目。     ///     /// 迭代顺序是稳定..."
         },
         {
           "flags": [],
-          "lines": 3,
+          "lines": 7,
           "should_fail": false,
-          "code_preview": "#[must_use] pub fn read_config(path: &str) -> Result<Config, io::Error> { /* ......"
+          "code_preview": "use std::io;  pub struct Config;  #[must_use] pub fn read_config(path: &str) -> ..."
         },
         {
           "flags": [],
-          "lines": 3,
+          "lines": 6,
           "should_fail": false,
-          "code_preview": "// ✅ 调用方无需 turbofish pub fn connect(addr: impl ToSocketAddrs) -> io::Result<TcpS..."
+          "code_preview": "use std::io; use std::net::{TcpStream, ToSocketAddrs};  // ✅ 调用方无需 turbofish pub..."
         },
         {
           "flags": [],
-          "lines": 5,
+          "lines": 11,
           "should_fail": false,
-          "code_preview": "impl Stack {     pub fn pop(&mut self) -> Option<i32> { /* ... */ }     pub fn t..."
+          "code_preview": "use std::collections::TryReserveError;  pub struct Stack {     inner: Vec<i32>, ..."
         },
         {
           "flags": [],
@@ -920,15 +920,15 @@
         },
         {
           "flags": [],
-          "lines": 6,
+          "lines": 10,
           "should_fail": false,
-          "code_preview": "impl Default for Config {     fn default() -> Self {         Self { timeout: 30 ..."
+          "code_preview": "pub struct Config {     timeout: u32, }  impl Default for Config {     fn defaul..."
         },
         {
           "flags": [],
-          "lines": 7,
+          "lines": 18,
           "should_fail": false,
-          "code_preview": "pub struct ParsedUrl { scheme: String, host: String, path: String }  impl Parsed..."
+          "code_preview": "#[derive(Debug)] pub enum UrlError {     Invalid, }  pub struct ParsedUrl { sche..."
         },
         {
           "flags": [],
@@ -15530,7 +15530,7 @@
           "flags": [],
           "lines": 9,
           "should_fail": false,
-          "code_preview": "fn indexed_words(words: &[&str]) -> Vec<(usize, &str)> {     words.iter().enumer..."
+          "code_preview": "fn indexed_words<'a>(words: &[&'a str]) -> Vec<(usize, &'a str)> {     words.ite..."
         },
         {
           "flags": [],
@@ -26895,19 +26895,25 @@
           "code_preview": "use proc_macro::TokenStream; use quote::quote; use syn::{parse_macro_input, Deri..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 9,
           "should_fail": false,
           "code_preview": "// 使用方 #[derive(Hello)] struct Foo;  // 生成的代码大致为: impl Hello for Foo {     fn he..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 4,
           "should_fail": false,
           "code_preview": "#[derive(Builder)] #[builder(setter(into))] struct Config { ... } ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 3,
           "should_fail": false,
           "code_preview": "#[proc_macro_derive(Builder, attributes(builder))] pub fn builder_derive(input: ..."
@@ -27593,7 +27599,7 @@
       "layer": "L2",
       "title": "Rust 闭包：捕获语义、Trait 层级与工程实践",
       "positioning": "系统阐述 Rust 闭包的语法、捕获机制、`Fn`/`FnMut`/`FnOnce` 语义层级、`move` 闭包、函数指针强制转换、异步闭包与典型反模式，覆盖从基础使用到工程决策的完整链条。",
-      "line_count": 757,
+      "line_count": 771,
       "theorem_chains": [
         {
           "text": "| 理解捕获模式 ⟹ 正确选择 trait | 知道环境如何使用 | 能写出正确的泛型约束 | 高 |",
@@ -27625,13 +27631,13 @@
         },
         {
           "flags": [],
-          "lines": 14,
+          "lines": 20,
           "should_fail": false,
-          "code_preview": "let s = String::from(\"hello\"); let mut n = 0;  let read = || println!(\"{}\", s); ..."
+          "code_preview": "// 注意：三种捕获模式不能在同一作用域内同时存在，以下分开展示 {     let s = String::from(\"hello\");     let re..."
         },
         {
           "flags": [],
-          "lines": 12,
+          "lines": 20,
           "should_fail": false,
           "code_preview": "fn call_fn<F>(f: F) where F: Fn() { f(); } fn call_fnmut<F>(mut f: F) where F: F..."
         },
@@ -27669,7 +27675,7 @@
           "flags": [],
           "lines": 7,
           "should_fail": false,
-          "code_preview": "let f: fn(i32) -> i32 = |x| x + 1; assert_eq!(f(5), 6);  let n = 1; let g = |x| ..."
+          "code_preview": "let f: fn(i32) -> i32 = |x| x + 1; assert_eq!(f(5), 6);  let n = 1; let g = |x: ..."
         },
         {
           "flags": [],
@@ -37834,7 +37840,7 @@
       "layer": "L3",
       "title": "FFI 深度解析：C ABI、调用约定与链接",
       "positioning": "系统剖析 Rust 与 C 世界交互的**机械层**：从 ABI/调用约定到 `repr(C)` 布局，从 `unsafe extern` 函数到 `cdylib`/`staticlib` 链接产物，从符号修饰到 panic 边界，建立 FFI 代码审查与工程决策的完整 checklist。",
-      "line_count": 714,
+      "line_count": 720,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -37859,21 +37865,21 @@
         },
         {
           "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use std::os::raw::c_int;  #[repr(transparent)] pub struct FileDescriptor(c_int);..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "use std::os::raw::c_int;  #[repr(u8)] pub enum Color { Red = 0, Green = 1, Blue ..."
+        },
+        {
+          "flags": [],
           "lines": 8,
           "should_fail": false,
-          "code_preview": "#[repr(transparent)] pub struct FileDescriptor(c_int);  #[repr(C, align(16))] pu..."
-        },
-        {
-          "flags": [],
-          "lines": 9,
-          "should_fail": false,
-          "code_preview": "#[repr(u8)] pub enum Color { Red = 0, Green = 1, Blue = 2 }  #[repr(C)] pub unio..."
-        },
-        {
-          "flags": [],
-          "lines": 6,
-          "should_fail": false,
-          "code_preview": "unsafe extern \"C\" {     fn abs(x: i32) -> i32;     fn malloc(size: usize) -> *mu..."
+          "code_preview": "use std::ffi::c_void;  unsafe extern \"C\" {     fn abs(x: i32) -> i32;     fn mal..."
         },
         {
           "flags": [],
@@ -41599,9 +41605,11 @@
           "code_preview": "use std::ptr;  unsafe fn bad_deref() {     let ptr: *const i32 = ptr::null();   ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 15,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "fn complex_failure<T, U, V>(     f: impl Fn(T) -> U,     g: impl Fn(U) -> V,    ..."
         },
         {
@@ -43606,9 +43614,12 @@
           "code_preview": "fn clone_any<T>(x: T) -> T {     // 没有 T: Clone bound，编译器找不到 clone 方法     x.clon..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail",
+            "E0512"
+          ],
           "lines": 12,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "use std::any::{Any, TypeId};  fn suspicious<T: 'static>(x: T) -> T {     if Type..."
         },
         {
@@ -50253,7 +50264,9 @@
           "code_preview": "fn main() {     let mut v = vec![1, 2, 3];      // 独占可变借用：承诺在 r 存活期间不存在其他别名     ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 9,
           "should_fail": false,
           "code_preview": "while lo < hi {     let mid = lo + (hi - lo) / 2;     match slice[mid].cmp(targe..."
@@ -51654,7 +51667,7 @@
       "layer": "L4",
       "title": "Rust 架构语义约束（Rust Architecture Semantics Constraints）",
       "positioning": "系统分析 Rust 的模块系统、crate 边界、可见性规则、ABI 与 workspace 机制如何**约束**软件架构的语义——哪些架构不变量可以被编译器强制执行，哪些仍需工程自律。",
-      "line_count": 300,
+      "line_count": 302,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -51673,9 +51686,9 @@
       "code_blocks": [
         {
           "flags": [],
-          "lines": 14,
+          "lines": 16,
           "should_fail": false,
-          "code_preview": "// crate::layered 内部：presentation 只能依赖 application mod application {     pub(in ..."
+          "code_preview": "mod layered {     // crate::layered 内部：presentation 只能依赖 application     mod app..."
         },
         {
           "flags": [],
@@ -52443,7 +52456,9 @@
           "code_preview": "use std::num::ParseIntError;  fn with_question(s: &str) -> Result<i32, ParseIntE..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 30,
           "should_fail": false,
           "code_preview": "use std::num::ParseIntError;  fn with_try_block(s: &str, t: &str) -> Result<i32,..."
@@ -53324,7 +53339,7 @@
       "layer": "L4",
       "title": "原关系",
       "positioning": "",
-      "line_count": 429,
+      "line_count": 471,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -53353,7 +53368,7 @@
       "transitions": 2,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 16,
+      "matrix_rows": 18,
       "pre_post": {
         "pre": [
           "[Knowledge Graph Ontology](../../00_meta/knowledge_topology/kg_ontology_v2.md) · [AI Ontology and Rust Semantics](./06_ai_ontology_and_rust_semantics.md) · [Semantic Model Atlas](../../00_meta/knowledge_topology/11_semantic_model_atlas.md) · [Atomics and Memory Ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md)"
@@ -64108,7 +64123,9 @@
           "code_preview": "// ❌ 边界：主循环卡死，未喂狗，看门狗触发系统复位 fn main() {     let mut wdt = Watchdog::new(100);   ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 3,
           "should_fail": false,
           "code_preview": "// ❌ 反模式：生产代码 unwrap 可能在运行时 panic let value = sensor.read().unwrap(); ..."
@@ -68092,7 +68109,7 @@
       "layer": "L6",
       "title": "裸机启动与链接脚本",
       "positioning": "",
-      "line_count": 531,
+      "line_count": 563,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -69089,7 +69106,7 @@
       "layer": "L6",
       "title": "RISC-V 与 AVR 嵌入式 Rust 开发",
       "positioning": "系统对比 RISC-V 与 AVR 在 Rust 嵌入式生态中的目标三元组、中断架构、PAC/HAL 栈、ABI 约定与低功耗模式，帮助工程师在两款非 ARM 架构上做出技术选型与代码实现决策。",
-      "line_count": 616,
+      "line_count": 625,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -69188,7 +69205,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 67,
+      "matrix_rows": 68,
       "pre_post": {
         "pre": [
           "[Rust 嵌入式系统开发](03_embedded_systems.md) ·"
@@ -69205,7 +69222,7 @@
       "layer": "L6",
       "title": "嵌入式协议与外设驱动",
       "positioning": "系统梳理 Rust 嵌入式生态中对常见片上外设与总线协议的抽象方式，重点说明 `embedded-hal` / `embedded-hal-async` 的 trait 设计、驱动状态机建模、错误处理与边界风险。",
-      "line_count": 962,
+      "line_count": 966,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -69265,7 +69282,9 @@
           "code_preview": "use embedded_hal::i2c::I2c;  const ADDR: u8 = 0x50; // 7-bit EEPROM 地址  pub fn e..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 13,
           "should_fail": false,
           "code_preview": "pub trait I2c<A: AddressMode = SevenBitAddress> {     type Error;     fn read(&m..."
@@ -69302,12 +69321,14 @@
         },
         {
           "flags": [],
-          "lines": 19,
+          "lines": 23,
           "should_fail": false,
-          "code_preview": "pub enum UsbState {     Default,     Addressed(u8),     Configured { config: u8,..."
+          "code_preview": "pub struct SetupPacket; #[derive(Debug)] pub enum UsbError { Invalid }  pub enum..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 9,
           "should_fail": false,
           "code_preview": "// Embassy 风格伪代码 #[embassy_executor::task] async fn can_rx_task(mut can: Can<'st..."
@@ -69331,7 +69352,9 @@
           "code_preview": "use defmt::{error, warn};  fn handle_i2c_error(e: I2cError) {     match e {     ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "// ❌ 边界示例：DMA 使用栈缓冲区 fn start_adc_dma(dma: &mut Dma) {     let mut buf: [u16; 64..."
@@ -69343,19 +69366,25 @@
           "code_preview": "// 最小 trait 定义，仅用于示例编译 trait SpiBus { fn write(&mut self, _: &[u8]) -> Result<()..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "// ❌ 边界示例：主循环长时间阻塞导致枚举失败 loop {     heavy_computation(); // 耗时 > 10 ms     usb_d..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 5,
           "should_fail": false,
           "code_preview": "// ❌ 边界示例：没有超时机制的 I²C 主循环 loop {     i2c.write(ADDR, &[cmd]); // 若从设备一直拉低 SCL，此调..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 7,
           "should_fail": false,
           "code_preview": "// ❌ 边界示例：子任务死锁但主循环仍喂狗 loop {     // sensor_task 已死锁，未更新数据     usb_task.poll(); ..."
@@ -69400,7 +69429,7 @@
       "layer": "L6",
       "title": "`#![no_std]` 与裸机编程惯用法",
       "positioning": "",
-      "line_count": 730,
+      "line_count": 738,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -69729,7 +69758,7 @@
       "layer": "L6",
       "title": "内存映射外设与 Typestate 编程",
       "positioning": "系统讲解嵌入式 Rust 中“内存映射外设”的访问方式——从原始 `volatile` 读写，到 PAC 生成的类型安全 API，再到用 Typestate 把外设状态机编码进 Rust 类型系统，从而把运行时错误转为编译期拒绝。",
-      "line_count": 608,
+      "line_count": 609,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -70060,7 +70089,7 @@
       "layer": "L6",
       "title": "自定义裸机异步执行器",
       "positioning": "",
-      "line_count": 423,
+      "line_count": 439,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -76463,7 +76492,7 @@
       "layer": "L6",
       "title": "并行算法",
       "positioning": "本页讲解 Rust 中利用多核的并行算法设计，覆盖数据并行、任务并行、图并行与调度器原理，代码位于 `crates/c08_algorithms/src/algorithms/parallel_algorithms.rs`。",
-      "line_count": 529,
+      "line_count": 531,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -76520,9 +76549,9 @@
         },
         {
           "flags": [],
-          "lines": 8,
+          "lines": 10,
           "should_fail": false,
-          "code_preview": "// 概念性 NUMA 分区求和 fn numa_aware_sum(data: &[i64], numa_nodes: usize) -> i64 {    ..."
+          "code_preview": "use rayon::prelude::*;  // 概念性 NUMA 分区求和 fn numa_aware_sum(data: &[i64], numa_no..."
         },
         {
           "flags": [],
@@ -85937,7 +85966,7 @@
       "layer": "L7",
       "title": "Unknown",
       "positioning": "",
-      "line_count": 357,
+      "line_count": 360,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -85956,9 +85985,9 @@
       "code_blocks": [
         {
           "flags": [],
-          "lines": 6,
+          "lines": 9,
           "should_fail": false,
-          "code_preview": "// 2024 Edition：更自然的签名 trait DataSource {     async fn fetch(&self, id: u64) -> ..."
+          "code_preview": "// 2024 Edition：更自然的签名 #[derive(Clone)] struct Record;  trait DataSource {     a..."
         },
         {
           "flags": [],
@@ -87183,7 +87212,7 @@
       "layer": "L7",
       "title": "MLOps 与 LLMOps：模型生命周期工程化",
       "positioning": "",
-      "line_count": 560,
+      "line_count": 567,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -87199,9 +87228,9 @@
       "code_blocks": [
         {
           "flags": [],
-          "lines": 20,
+          "lines": 27,
           "should_fail": false,
-          "code_preview": "// 概念性流水线步骤抽象 pub struct PipelineStep<T> {     pub name: &'static str,     pub v..."
+          "code_preview": "use semver::Version;  #[derive(Debug)] pub enum PipelineError {     StepFailed, ..."
         },
         {
           "flags": [],
@@ -87258,7 +87287,7 @@
       "layer": "L7",
       "title": "AI 安全与对齐：RLHF、Constitutional AI 与形式化验证",
       "positioning": "",
-      "line_count": 416,
+      "line_count": 426,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -87274,9 +87303,9 @@
       "code_blocks": [
         {
           "flags": [],
-          "lines": 19,
+          "lines": 29,
           "should_fail": false,
-          "code_preview": "// 概念性：用类型系统标记\"已过滤输入\"与\"原始输入\" pub struct RawPrompt(String); pub struct SanitizedP..."
+          "code_preview": "// 概念性：用类型系统标记\"已过滤输入\"与\"原始输入\" pub struct SafetyPolicy; impl SafetyPolicy {     pu..."
         }
       ],
       "sources": [],

@@ -575,6 +575,8 @@ graph TD
 - Bos, M. *Rust Atomics and Locks*. §3 “Memory Ordering.” [https://mara.nl/atomics/memory-ordering.html](https://mara.nl/atomics/memory-ordering.html)
 - Lamport, L. “Time, Clocks, and the Ordering of Events in a Distributed System.” *CACM 21(7)*, 1978. [https://doi.org/10.1145/359545.359563](https://doi.org/10.1145/359545.359563)
 - Lamport, L. “How to Make a Multiprocessor Computer That Correctly Executes Multiprocess Programs.” *IEEE TC 28(9)*, 1979. [https://doi.org/10.1109/TC.1979.1675439](https://doi.org/10.1109/TC.1979.1675439)
+- Batty, M., Owens, S., Sarkar, S., Sewell, P. & Weber, T. “Mathematizing C++ Concurrency.” *POPL 2011*. [https://dl.acm.org/doi/10.1145/1926385.1926394](https://dl.acm.org/doi/10.1145/1926385.1926394)
+- Owens, S., Sarkar, S. & Sewell, P. “A Better x86 Memory Model: x86-TSO.” *TPHOLs 2009*. [https://link.springer.com/chapter/10.1007/978-3-642-03359-9_27](https://link.springer.com/chapter/10.1007/978-3-642-03359-9_27)
 - [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html)
 - [Rust Reference — Atomics](https://doc.rust-lang.org/reference/items/static-items.html)
 - [std::sync::atomic — Rust Standard Library](https://doc.rust-lang.org/std/sync/atomic/index.html)

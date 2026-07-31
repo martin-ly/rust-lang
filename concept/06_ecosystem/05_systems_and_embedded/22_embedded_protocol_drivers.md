@@ -454,7 +454,7 @@ where
 
 `embedded-hal` 1.x 的 `I2c` trait 合并了读写方法：
 
-```rust
+```rust,ignore
 pub trait I2c<A: AddressMode = SevenBitAddress> {
     type Error;
     fn read(&mut self, address: A, read: &mut [u8]) -> Result<(), Self::Error>;
@@ -674,6 +674,10 @@ impl Adc<Ready> {
 运行期状态，适合状态多、转移依赖运行时输入的场景。
 
 ```rust
+pub struct SetupPacket;
+#[derive(Debug)]
+pub enum UsbError { Invalid }
+
 pub enum UsbState {
     Default,
     Addressed(u8),
@@ -682,7 +686,7 @@ pub enum UsbState {
 }
 
 impl UsbState {
-    pub fn on_setup(&mut self, request: SetupPacket) -> Result<(), UsbError> {
+    pub fn on_setup(&mut self, _request: SetupPacket) -> Result<(), UsbError> {
         match self {
             UsbState::Default => { /* 仅允许 SET_ADDRESS */ }
             UsbState::Addressed(_) => { /* 允许 GET_DESCRIPTOR, SET_CONFIG */ }
@@ -698,7 +702,7 @@ impl UsbState {
 
 在 Embassy/RTIC 中，状态转移常由 async 函数表达，等待事件自然成为 `.await` 点。
 
-```rust
+```rust,ignore
 // Embassy 风格伪代码
 #[embassy_executor::task]
 async fn can_rx_task(mut can: Can<'static>) {
@@ -787,7 +791,7 @@ fn handle_i2c_error(e: I2cError) {
 
 ### 14.1 DMA 缓冲区不能位于栈上
 
-```rust
+```rust,ignore
 // ❌ 边界示例：DMA 使用栈缓冲区
 fn start_adc_dma(dma: &mut Dma) {
     let mut buf: [u16; 64] = [0; 64];
@@ -819,7 +823,7 @@ fn bad_read(spi: &mut impl SpiBus, cs: &mut impl OutputPin) {
 
 ### 14.3 USB 枚举时序严格
 
-```rust
+```rust,ignore
 // ❌ 边界示例：主循环长时间阻塞导致枚举失败
 loop {
     heavy_computation(); // 耗时 > 10 ms
@@ -831,7 +835,7 @@ loop {
 
 ### 14.4 I²C 时钟拉伸可能导致 hang
 
-```rust
+```rust,ignore
 // ❌ 边界示例：没有超时机制的 I²C 主循环
 loop {
     i2c.write(ADDR, &[cmd]); // 若从设备一直拉低 SCL，此调用永久阻塞
@@ -842,7 +846,7 @@ loop {
 
 ### 14.5 Watchdog 只在主循环喂狗会掩盖子任务死锁
 
-```rust
+```rust,ignore
 // ❌ 边界示例：子任务死锁但主循环仍喂狗
 loop {
     // sensor_task 已死锁，未更新数据

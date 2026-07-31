@@ -395,7 +395,23 @@ unsafe fn TIM2_IRQHandler() {
 
 ---
 
-> **权威来源**: [Rust Reference — async/await](https://doc.rust-lang.org/reference/expressions.html#await-expressions) · [Embassy Executor on docs.rs](https://docs.rs/embassy-executor/) · [RTIC Book](https://rtic.rs/2/book/en/) · [Rust Embedded Book — Concurrency](https://docs.rust-embedded.org/book/concurrency/)
+> **权威来源**: [Rust Reference — async/await](https://doc.rust-lang.org/reference/expressions.html#await-expressions) · [Embassy Executor on docs.rs](https://docs.rs/embassy-executor/) · [Embassy Book](https://embassy.dev/book/) · [RTIC Book](https://rtic.rs/2/book/en/) · [Rust Embedded Book — Concurrency](https://docs.rust-embedded.org/book/concurrency/) · [Future trait RFC](https://rust-lang.github.io/rfcs/2418-futures.html) · [Marabos — Rust Atomics and Locks](https://marabos.nl/atomics/)
+
+## 十一、实测案例
+
+`crates/c13_embedded/examples/custom_async_executor.rs` 是上述骨架的工程化实现，并已验证可在以下目标编译：
+
+- `thumbv7em-none-eabihf`：ARM Cortex-M4F，idle 时使用 `cortex_m::asm::wfi()`。
+- `riscv32imac-unknown-none-elf`：RISC-V 32-bit MCU，idle 时使用 `riscv::asm::wfi()`。
+
+编译命令：
+
+```bash
+cargo build -p c13_embedded --target thumbv7em-none-eabihf --example custom_async_executor
+cargo build -p c13_embedded --target riscv32imac-unknown-none-elf --example custom_async_executor
+```
+
+---
 
 ## 🧭 思维导图（Mindmap）
 

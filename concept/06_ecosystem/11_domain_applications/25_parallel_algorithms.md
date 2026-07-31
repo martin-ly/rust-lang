@@ -218,6 +218,8 @@ NUMA（Non-Uniform Memory Access）下，访问本地节点内存比远程节点
 Rust 生态中可使用 `hwloc` / `numa` crate 获取拓扑信息。生产级 NUMA 优化通常需要自定义分配器与线程绑定。
 
 ```rust
+use rayon::prelude::*;
+
 // 概念性 NUMA 分区求和
 fn numa_aware_sum(data: &[i64], numa_nodes: usize) -> i64 {
     let chunk_size = (data.len() + numa_nodes - 1) / numa_nodes;

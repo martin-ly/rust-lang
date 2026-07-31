@@ -217,6 +217,16 @@ Rust 的类型系统和验证工具可以在 AI 系统的**非神经部分**提�
 
 ```rust
 // 概念性：用类型系统标记"已过滤输入"与"原始输入"
+pub struct SafetyPolicy;
+impl SafetyPolicy {
+    pub fn check(&self, _input: &str) -> bool { true }
+}
+
+#[derive(Debug)]
+pub enum SafetyError {
+    PolicyViolation,
+}
+
 pub struct RawPrompt(String);
 pub struct SanitizedPrompt(String);
 

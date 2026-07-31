@@ -325,7 +325,7 @@ fn main() {
 
 以下二分查找循环的不变量是什么？
 
-```rust
+```rust,ignore
 while lo < hi {
     let mid = lo + (hi - lo) / 2;
     match slice[mid].cmp(target) {

@@ -472,6 +472,38 @@ graph TD
 
 ---
 
+## 附录 B：实测 `memory.x` 生成模板
+
+`crates/c13_embedded/build.rs` 在 ARM / RISC-V 目标下会自动生成最小 `memory.x`，使 `cortex-m-rt` / `riscv-rt` 在没有具体 PAC 的情况下也能完成链接验证。
+
+```ld
+/* memory.x — ARM Cortex-M 示例（STM32F4 风格） */
+MEMORY
+{
+  FLASH (rx) : ORIGIN = 0x08000000, LENGTH = 1024K
+  RAM   (rwx): ORIGIN = 0x20000000, LENGTH = 128K
+}
+_stack_top = ORIGIN(RAM) + LENGTH(RAM);
+```
+
+```ld
+/* memory.x — RISC-V RAM-only 示例（QEMU virt / SiFive FE310 风格） */
+MEMORY
+{
+  RAM (rwxa) : ORIGIN = 0x80000000, LENGTH = 128K
+}
+REGION_ALIAS("REGION_TEXT", RAM);
+REGION_ALIAS("REGION_RODATA", RAM);
+REGION_ALIAS("REGION_DATA", RAM);
+REGION_ALIAS("REGION_BSS", RAM);
+REGION_ALIAS("REGION_HEAP", RAM);
+REGION_ALIAS("REGION_STACK", RAM);
+```
+
+> **注意**：上述地址与大小仅为编译/链接验证用途，真实硬件必须替换为芯片参考手册中的内存映射。
+
+---
+
 ## 十一、相关概念
 
 - [Cortex-M 异常模型](14_interrupt_and_exception_model.md)
@@ -487,12 +519,12 @@ graph TD
 
 ---
 
-> **权威来源**: [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [ARMv7-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0403/latest/) · [ARMv8-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0553/latest/) · [cortex-m-rt 文档](https://docs.rs/cortex-m-rt/) · [Ferrocene Language Specification](https://spec.ferrocene.dev/) · [GNU ld 手册](https://sourceware.org/binutils/docs/ld/)
+> **权威来源**: [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [ARMv7-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0403/latest/) · [ARMv8-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0553/latest/) · [cortex-m-rt 文档](https://docs.rs/cortex-m-rt/) · [riscv-rt 文档](https://docs.rs/riscv-rt/) · [Ferrocene Language Specification](https://spec.ferrocene.dev/) · [GNU ld 手册](https://sourceware.org/binutils/docs/ld/) · [probe.rs 文档](https://probe.rs/docs/)
 >
-> **权威来源对齐变更日志**: 2026-07-30 创建
+> **权威来源对齐变更日志**: 2026-07-30 创建；2026-07-31 Wave H 补充 riscv-rt、probe-rs 来源。
 
-**文档版本**: 1.0
-**最后更新**: 2026-07-30
+**文档版本**: 1.1
+**最后更新**: 2026-07-31
 **状态**: ✅ 概念文件创建完成
 
 ---

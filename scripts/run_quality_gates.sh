@@ -48,6 +48,7 @@ run_gate "Mermaid Syntax Check" python scripts/check_mermaid_syntax.py
 # 2026-07-12 转正：topology / kg_shapes / canonical_uniqueness / concept_consistency。
 run_gate "Topology Quality (strict)" python scripts/check_topology_quality.py --strict
 run_gate "KG SHACL Validation (strict)" python scripts/check_kg_shapes.py --strict
+run_gate "KG SHACL Real Engine Validation (strict)" E:/_src/rust-lang/tools/kg_shacl/.venv/Scripts/python scripts/validate_kg_shacl.py --strict
 run_gate "Canonical Uniqueness (strict)" python scripts/check_canonical_uniqueness.py --strict
 run_gate "Concept Consistency Audit (strict)" python scripts/concept_consistency_auditor.py --strict
 # 2026-07-14 转正（R4 评估 reports/OBSERVE_GATE_PROMOTION_REVIEW_R4_2026_07_14.md，--strict 实跑 exit=0）：

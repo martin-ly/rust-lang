@@ -550,8 +550,9 @@ graph TD
 - **[Discovery Book](https://docs.rust-embedded.org/discovery/)** — 在 micro:bit 上动手实践内存映射外设与 Typestate。
 - **[The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/)** — 裸机底层实现、自定义 target、链接脚本与启动序列。
 - **[svd2rust](https://docs.rs/svd2rust/)** — PAC 生成工具文档。
+- **[cortex-m-rt 文档](https://docs.rs/cortex-m-rt/)** / **[riscv-rt 文档](https://docs.rs/riscv-rt/)** — 真实目标可编译示例的运行时入口。
 
-> **权威来源对齐变更日志**: 2026-07-31 创建
+> **权威来源对齐变更日志**: 2026-07-31 创建；2026-07-31 Wave H 补充运行时入口来源。
 
 ---
 

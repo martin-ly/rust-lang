@@ -6,14 +6,19 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 
 # ============================================================
-# Rust 知识体系知识图谱 — SHACL 数据形状
-# 用途：验证 kg_data_v3.json / Turtle 数据的质量与一致性
-# 注：v1 kg_data.json 与 v2 kg_data_v2.json 已退役至 archive/2026/（2026-07-12）
-# 标准：W3C SHACL
+# Rust 知识体系知识图谱 — SHACL 数据形状（v3 正式版）
+# 用途：对 concept/00_meta/kg_data_v3.json 执行真实 SHACL 引擎验证
+# 标准：W3C SHACL 1.0、OWL 2、JSON-LD 1.1
+# 引擎：pySHACL 0.40+
+# 更新：2026-08-01（Wave I — KG SHACL 真实引擎验证与国际对齐）
 # ============================================================
 
+# ------------------------------------------------------------
+# 顶层知识图谱节点形状
+# ------------------------------------------------------------
 ex:KnowledgeGraphShape
     a sh:NodeShape ;
     sh:targetClass ex:KnowledgeGraph ;
@@ -29,42 +34,53 @@ ex:KnowledgeGraphShape
         sh:pattern "^\\d+\\.\\d+\\.\\d+\\+?$" ;
         sh:maxCount 1 ;
         sh:name "Rust version" ;
+    ] ;
+    sh:property [
+        sh:path ex:entityCount ;
+        sh:datatype xsd:integer ;
+        sh:maxCount 1 ;
+        sh:name "entity count" ;
+    ] ;
+    sh:property [
+        sh:path ex:relationCount ;
+        sh:datatype xsd:integer ;
+        sh:maxCount 1 ;
+        sh:name "relation count" ;
     ] .
 
 # ------------------------------------------------------------
-# 实体通用形状
+# 实体通用形状（Concept / Theory / Model / Primitive）
 # ------------------------------------------------------------
 ex:EntityShape
     a sh:NodeShape ;
-    sh:targetObjectsOf rdf:type ;  # 作用于所有 rdf:type 的宾语
-    sh:or (
-        [ sh:class ex:Concept ]
-        [ sh:class ex:Theory ]
-        [ sh:class ex:Model ]
-        [ sh:class ex:Property ]
-        [ sh:class ex:Rule ]
-        [ sh:class ex:Primitive ]
-    ) ;
+    sh:targetClass ex:Concept ;
+    sh:targetClass ex:Theory ;
+    sh:targetClass ex:Model ;
+    sh:targetClass ex:Primitive ;
     sh:property [
         sh:path skos:prefLabel ;
-        sh:minCount 2 ;  # 至少 en + zh
-        sh:uniqueLang true ;  # 每种语言一个首选标签
+        sh:datatype rdf:langString ;
+        sh:minCount 2 ;
+        sh:uniqueLang true ;
         sh:name "preferred label" ;
         sh:message "每个实体必须至少提供英文和中文的 skos:prefLabel。"@zh ;
     ] ;
     sh:property [
-        sh:path skos:definition ;
+        sh:path skos:scopeNote ;
         sh:datatype rdf:langString ;
         sh:minCount 1 ;
-        sh:name "definition" ;
-    ] .
-
-# ------------------------------------------------------------
-# Concept 专用形状
-# ------------------------------------------------------------
-ex:ConceptShape
-    a sh:NodeShape ;
-    sh:targetClass ex:Concept ;
+        sh:name "scope note / definition" ;
+        sh:message "每个实体必须至少提供一条 skos:scopeNote。"@zh ;
+    ] ;
+    sh:property [
+        sh:path ex:path ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:pattern "^([^/].*\\.md|[^/].*/.*\\.md)$" ;
+        sh:name "Markdown path" ;
+        sh:message "ex:path 必须是相对 concept/ 的 .md 文件路径。"@zh ;
+    ] ;
     sh:property [
         sh:path ex:layer ;
         sh:datatype xsd:string ;
@@ -74,13 +90,36 @@ ex:ConceptShape
         sh:name "cognitive layer" ;
     ] ;
     sh:property [
-        sh:path ex:bloom ;
+        sh:path ex:domain ;
         sh:datatype xsd:string ;
-        sh:in ( "Remember" "Understand" "Apply" "Analyze" "Evaluate" "Create" ) ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "knowledge domain" ;
+    ] ;
+    sh:property [
+        sh:path ex:bloomLevel ;
+        sh:datatype xsd:string ;
+        sh:pattern "^L[0-7].*$|^Meta$" ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
         sh:name "Bloom level" ;
+        sh:message "Bloom 层级须以 L0-L7 开头，或 Meta。"@zh ;
     ] ;
+    sh:property [
+        sh:path ex:rustVersion ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "Rust version" ;
+        sh:message "每个实体须提供 ex:rustVersion。"@zh ;
+    ] .
+
+# ------------------------------------------------------------
+# Concept 专用形状
+# ------------------------------------------------------------
+ex:ConceptShape
+    a sh:NodeShape ;
+    sh:targetClass ex:Concept ;
     sh:property [
         sh:path ex:asp ;
         sh:datatype xsd:string ;
@@ -91,27 +130,37 @@ ex:ConceptShape
 
 # ------------------------------------------------------------
 # 关系类型合法性形状
+# 作用于所有已知关系谓词的主体
 # ------------------------------------------------------------
-ex:RelationShape
+ex:RelationSubjectShape
     a sh:NodeShape ;
-    sh:targetSubjectsOf ex:dependsOn, ex:entails, ex:mutexWith,
-                         ex:refines, ex:equivalentTo, ex:counterExample,
-                         ex:instanceOf, ex:appliesTo, ex:relatedTo ;
+    sh:targetSubjectsOf ex:hasPart ;
+    sh:targetSubjectsOf ex:partOf ;
+    sh:targetSubjectsOf ex:dependsOn ;
+    sh:targetSubjectsOf ex:enables ;
+    sh:targetSubjectsOf ex:entails ;
+    sh:targetSubjectsOf ex:mutexWith ;
+    sh:targetSubjectsOf ex:refines ;
+    sh:targetSubjectsOf ex:equivalentTo ;
+    sh:targetSubjectsOf ex:counterExample ;
+    sh:targetSubjectsOf ex:instanceOf ;
+    sh:targetSubjectsOf ex:appliesTo ;
+    sh:targetSubjectsOf ex:relatedTo ;
     sh:property [
         sh:path [ sh:alternativePath (
-            ex:dependsOn ex:entails ex:mutexWith ex:refines
-            ex:equivalentTo ex:counterExample ex:instanceOf ex:appliesTo
-            ex:relatedTo
+            ex:hasPart ex:partOf ex:dependsOn ex:enables ex:entails
+            ex:mutexWith ex:refines ex:equivalentTo ex:counterExample
+            ex:instanceOf ex:appliesTo ex:relatedTo
         ) ] ;
         sh:nodeKind sh:IRI ;
         sh:name "relation target" ;
-        sh:message "关系目标必须是 IRI（知识图谱中的实体）。"@zh ;
+        sh:message "关系目标必须是知识图谱中的实体 IRI。"@zh ;
     ] .
 
 # ------------------------------------------------------------
-# RDF-star 注解形状
+# RDF-star 注解形状（关系元数据节点）
 # ------------------------------------------------------------
-ex:AnnotationShape
+ex:RelationAnnotationShape
     a sh:NodeShape ;
     sh:targetClass ex:RelationAnnotation ;
     sh:property [
@@ -196,8 +245,19 @@ ex:appliesTo a owl:ObjectProperty ;
     rdfs:label "applies to"@en, "适用于"@zh ;
     owl:inverseOf ex:governedBy .
 
-ex:relatedTo a owl:ObjectProperty,
-        owl:SymmetricProperty ;
+ex:relatedTo a owl:ObjectProperty, owl:SymmetricProperty ;
     rdfs:label "related to"@en, "相关于"@zh ;
     rdfs:comment "用于 atlas、导航索引、SUMMARY.md 等弱语义连接的兜底谓词。"@zh ;
     owl:inverseOf ex:relatedTo .
+
+ex:hasPart a owl:ObjectProperty ;
+    rdfs:label "has part"@en, "包含"@zh ;
+    owl:inverseOf ex:partOf .
+
+ex:partOf a owl:ObjectProperty ;
+    rdfs:label "part of"@en, "属于"@zh ;
+    owl:inverseOf ex:hasPart .
+
+ex:enables a owl:ObjectProperty ;
+    rdfs:label "enables"@en, "使能"@zh ;
+    owl:inverseOf ex:dependsOn .

@@ -110,22 +110,27 @@ def main():
     core_ids = {path_to_id[p] for p in CORE_PATHS if p in path_to_id}
     missing_core_paths = [p for p in CORE_PATHS if p not in path_to_id]
 
-    # Global predicate distribution based on @type (the instantiated RDF predicate)
-    global_type_counts = Counter(r.get("@type", "UNKNOWN") for r in relations)
+    # Global predicate distribution based on ex:predicate (supports both RDF-star
+    # reified relations with @type=ex:RelationAnnotation and legacy relations
+    # whose @type was the predicate itself).
+    def relation_predicate(r: dict) -> str:
+        return r.get("ex:predicate") or r.get("@type", "UNKNOWN")
+
+    global_type_counts = Counter(relation_predicate(r) for r in relations)
     total = len(relations)
     generic_count = global_type_counts.get("ex:RelationAnnotation", 0)
     generic_ratio = generic_count / total if total else 0.0
 
     # Core-50 coverage
     core_relations = [r for r in relations if r.get("ex:subject") in core_ids or r.get("ex:object") in core_ids]
-    core_type_counts = Counter(r.get("@type", "UNKNOWN") for r in core_relations)
+    core_type_counts = Counter(relation_predicate(r) for r in core_relations)
     core_total = len(core_relations)
     core_generic_count = core_type_counts.get("ex:RelationAnnotation", 0)
     core_generic_ratio = core_generic_count / core_total if core_total else 0.0
 
     per_entity_semantic = {eid: [] for eid in core_ids}
     for r in core_relations:
-        pred = r.get("@type", "")
+        pred = relation_predicate(r)
         if pred in SEMANTIC_PREDICATES:
             for end in (r.get("ex:subject"), r.get("ex:object")):
                 if end in core_ids:

@@ -385,7 +385,7 @@ fn main() {
 
 ### 8.3 边界测试：安全关键代码使用 unwrap（设计风险）
 
-```rust
+```rust,ignore
 // ❌ 反模式：生产代码 unwrap 可能在运行时 panic
 let value = sensor.read().unwrap();
 ```

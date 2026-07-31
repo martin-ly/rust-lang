@@ -37,7 +37,9 @@
 > [RFC 3484 — unsafe extern blocks](https://rust-lang.github.io/rfcs/3484-unsafe-extern-blocks.html) ·
 > [RFC 3722 — Explicit extern ABIs](https://rust-lang.github.io/rfcs/3722-explicit-extern-abis.html) ·
 > [libc crate docs](https://docs.rs/libc/latest/libc/) ·
-> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) ·
+> Turcotte, A., Arteca, E. & Richards, G. “Reasoning About Foreign Function Interfaces Without Modelling the Foreign Language.” *ECOOP 2019*. [https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ECOOP.2019.16](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ECOOP.2019.16) ·
+> Matthews, J. & Findler, R. B. “Operational Semantics for Multi-Language Programs.” *ACM TOPLAS 31(3)*, 2009. [https://dl.acm.org/doi/10.1145/1498926.1498930](https://dl.acm.org/doi/10.1145/1498926.1498930)
 
 ---
 
@@ -208,6 +210,8 @@ Rust 侧可用 `std::mem::size_of`/`align_of` 验证，但**不能完全替代**
 | `#[repr(C, packed)]` | 无填充、按 1 对齐 | 仅当 C 侧明确 `__attribute__((packed))` 时使用 |
 
 ```rust
+use std::os::raw::c_int;
+
 #[repr(transparent)]
 pub struct FileDescriptor(c_int);
 
@@ -228,6 +232,8 @@ Rust 默认 `enum` 的布局不稳定，不能安全传给 C。应使用：
 - `#[repr(C)] union`：与 C union 布局一致，访问变体需 unsafe。
 
 ```rust
+use std::os::raw::c_int;
+
 #[repr(u8)]
 pub enum Color { Red = 0, Green = 1, Blue = 2 }
 
@@ -249,6 +255,8 @@ pub union Value {
 自 Rust 1.82 起，`unsafe extern "ABI" {}` 可在所有 Edition 中使用；自 Edition 2024 起，`extern "ABI" {}` 不再被隐式允许，必须写 `unsafe extern`。
 
 ```rust
+use std::ffi::c_void;
+
 unsafe extern "C" {
     fn abs(x: i32) -> i32;
     fn malloc(size: usize) -> *mut c_void;

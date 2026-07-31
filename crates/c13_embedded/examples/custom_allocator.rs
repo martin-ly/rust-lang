@@ -1,17 +1,32 @@
-//! 自定义 bump allocator 示例（host 可编译）
+//! 自定义 bump allocator 示例（host / ARM / RISC-V 三目标可编译）
 //!
 //! 演示如何实现 `GlobalAlloc` 并在 `#![no_std]` 环境中使用。
 //! host 目标下不注册为全局分配器（避免与 std 冲突），而是直接调用实例方法；
-//! ARM 目标下可通过 `#[global_allocator]` 注册。
+//! ARM/RISC-V 目标下可通过 `#[global_allocator]` 注册。
 //!
 //! 对应 concept 页：
 //! `concept/06_ecosystem/05_systems_and_embedded/16_embedded_memory_allocators.md`
 //! `concept/06_ecosystem/05_systems_and_embedded/29_embedded_memory_layout_and_heap_safety.md`
 
-#![cfg_attr(target_arch = "arm", no_std)]
-#![cfg_attr(target_arch = "arm", no_main)]
+#![cfg_attr(
+    any(
+        all(target_arch = "arm", target_os = "none"),
+        all(target_arch = "riscv32", target_os = "none")
+    ),
+    no_std
+)]
+#![cfg_attr(
+    any(
+        all(target_arch = "arm", target_os = "none"),
+        all(target_arch = "riscv32", target_os = "none")
+    ),
+    no_main
+)]
 
-#[cfg(not(target_arch = "arm"))]
+#[cfg(not(any(
+    all(target_arch = "arm", target_os = "none"),
+    all(target_arch = "riscv32", target_os = "none")
+))))]
 extern crate std;
 
 use core::alloc::{GlobalAlloc, Layout};
@@ -45,15 +60,24 @@ impl BumpPointerAlloc {
     }
 
     /// host 演示用：不依赖中断临界区
-    #[cfg(not(target_arch = "arm"))]
+    #[cfg(not(any(
+        all(target_arch = "arm", target_os = "none"),
+        all(target_arch = "riscv32", target_os = "none")
+    ))))]
     fn with_critical_section<R>(&self, f: impl FnOnce() -> R) -> R {
         f()
     }
 
     /// ARM 目标下通过关中断实现临界区
-    #[cfg(target_arch = "arm")]
+    #[cfg(all(target_arch = "arm", target_os = "none"))]
     fn with_critical_section<R>(&self, f: impl FnOnce() -> R) -> R {
         cortex_m::interrupt::free(|_| f())
+    }
+
+    /// RISC-V 目标下通过关中断实现临界区
+    #[cfg(all(target_arch = "riscv32", target_os = "none"))]
+    fn with_critical_section<R>(&self, f: impl FnOnce() -> R) -> R {
+        riscv::interrupt::free(|| f())
     }
 }
 
@@ -81,14 +105,14 @@ unsafe impl GlobalAlloc for BumpPointerAlloc {
 }
 
 // ---------------------------------------------------------------------------
-// 入口：host 演示分配过程；ARM 目标下注册为全局分配器
+// 入口：host 演示分配过程；裸机目标下注册为全局分配器
 // ---------------------------------------------------------------------------
 
-#[cfg(target_arch = "arm")]
+#[cfg(all(target_arch = "arm", target_os = "none"))]
 #[global_allocator]
 static HEAP: BumpPointerAlloc = BumpPointerAlloc::empty();
 
-#[cfg(target_arch = "arm")]
+#[cfg(all(target_arch = "arm", target_os = "none"))]
 #[cortex_m_rt::entry]
 fn main() -> ! {
     static mut POOL: [u8; 1024] = [0; 1024];
@@ -99,13 +123,37 @@ fn main() -> ! {
     loop {}
 }
 
-#[cfg(target_arch = "arm")]
+#[cfg(all(target_arch = "arm", target_os = "none"))]
 #[panic_handler]
 fn panic(_: &core::panic::PanicInfo) -> ! {
     loop {}
 }
 
-#[cfg(not(target_arch = "arm"))]
+#[cfg(all(target_arch = "riscv32", target_os = "none"))]
+#[global_allocator]
+static HEAP: BumpPointerAlloc = BumpPointerAlloc::empty();
+
+#[cfg(all(target_arch = "riscv32", target_os = "none"))]
+#[riscv_rt::entry]
+fn main() -> ! {
+    static mut POOL: [u8; 1024] = [0; 1024];
+    unsafe {
+        HEAP.init(POOL.as_mut_ptr(), POOL.len());
+    }
+    // 应用代码...
+    loop {}
+}
+
+#[cfg(all(target_arch = "riscv32", target_os = "none"))]
+#[panic_handler]
+fn panic(_: &core::panic::PanicInfo) -> ! {
+    loop {}
+}
+
+#[cfg(not(any(
+    all(target_arch = "arm", target_os = "none"),
+    all(target_arch = "riscv32", target_os = "none")
+))))]
 fn main() {
     let mut pool = [0u8; 1024];
     let alloc = BumpPointerAlloc::empty();

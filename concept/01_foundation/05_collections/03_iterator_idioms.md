@@ -314,7 +314,7 @@ fn main() {
 `enumerate` 为每个元素附上索引 `(idx, item)`。注意：索引是 `usize` 类型。
 
 ```rust
-fn indexed_words(words: &[&str]) -> Vec<(usize, &str)> {
+fn indexed_words<'a>(words: &[&'a str]) -> Vec<(usize, &'a str)> {
     words.iter().enumerate().map(|(i, w)| (i + 1, *w)).collect()
 }
 

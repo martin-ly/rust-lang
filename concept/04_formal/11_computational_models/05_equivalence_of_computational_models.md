@@ -580,12 +580,12 @@ match Try::branch(expr) {
 use std::num::ParseIntError;
 
 fn with_question(s: &str) -> Result<i32, ParseIntError> {
-    let n: i32 = s.parse()?;
+    let n = s.parse::<i32>()?;
     Ok(n + 1)
 }
 
 fn desugared(s: &str) -> Result<i32, ParseIntError> {
-    match s.parse() {
+    match s.parse::<i32>() {
         Ok(n) => Ok(n + 1),
         Err(e) => return Err(e),
     }
@@ -607,7 +607,7 @@ fn main() {
 
 `try { ... }` 块把 `?` 的错误传播范围限制在一个表达式内，避免 `?` 直接返回外层函数。它在语义上可以局部去糖为对 `Try` trait 的显式 match 组合：
 
-```rust
+```rust,ignore
 use std::num::ParseIntError;
 
 fn with_try_block(s: &str, t: &str) -> Result<i32, ParseIntError> {

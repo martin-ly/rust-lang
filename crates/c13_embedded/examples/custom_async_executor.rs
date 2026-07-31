@@ -1,15 +1,30 @@
-//! 自定义裸机异步执行器示例（host 可编译）
+//! 自定义裸机异步执行器示例（host / ARM / RISC-V 三目标可编译）
 //!
 //! 演示如何在 `#![no_std]` 环境中用 `Future`、`RawWaker`、`Waker` 构建最小 executor。
-//! 在 host 目标下用模拟的“硬件计数器”触发唤醒；在 ARM 目标下可替换为真实定时器 ISR。
+//! 在 host 目标下用模拟的“硬件计数器”触发唤醒；在 ARM/RISC-V 目标下替换为真实低功耗等待。
 //!
 //! 对应 concept 页：
 //! `concept/06_ecosystem/05_systems_and_embedded/28_custom_bare_metal_async_executor.md`
 
-#![cfg_attr(target_arch = "arm", no_std)]
-#![cfg_attr(target_arch = "arm", no_main)]
+#![cfg_attr(
+    any(
+        all(target_arch = "arm", target_os = "none"),
+        all(target_arch = "riscv32", target_os = "none")
+    ),
+    no_std
+)]
+#![cfg_attr(
+    any(
+        all(target_arch = "arm", target_os = "none"),
+        all(target_arch = "riscv32", target_os = "none")
+    ),
+    no_main
+)]
 
-#[cfg(not(target_arch = "arm"))]
+#[cfg(not(any(
+    all(target_arch = "arm", target_os = "none"),
+    all(target_arch = "riscv32", target_os = "none")
+)))))]
 extern crate std;
 
 use core::cell::Cell;
@@ -46,7 +61,7 @@ fn make_waker() -> Waker {
 
 // ---------------------------------------------------------------------------
 // SyncCell：host 下让 `Cell` 静态变量满足 `Sync` 以通过编译；
-// ARM no_std 裸机中单线程使用同样安全。
+// ARM/RISC-V no_std 裸机中单线程使用同样安全。
 // ---------------------------------------------------------------------------
 
 pub struct SyncCell<T: ?Sized>(T);
@@ -86,7 +101,10 @@ impl<'a> Executor<'a> {
         active || WAKE_FLAG.swap(false, Ordering::Acquire)
     }
 
-    #[cfg(not(target_arch = "arm"))]
+    #[cfg(not(any(
+        all(target_arch = "arm", target_os = "none"),
+        all(target_arch = "riscv32", target_os = "none")
+    )))))]
     pub fn run(&self) {
         while self.run_once() {
             // host 模拟：推进模拟硬件时间
@@ -95,11 +113,19 @@ impl<'a> Executor<'a> {
         }
     }
 
-    #[cfg(target_arch = "arm")]
+    #[cfg(all(target_arch = "arm", target_os = "none"))]
     pub fn run(&self) -> ! {
         loop {
             self.run_once();
             cortex_m::asm::wfi();
+        }
+    }
+
+    #[cfg(all(target_arch = "riscv32", target_os = "none"))]
+    pub fn run(&self) -> ! {
+        loop {
+            self.run_once();
+            riscv::asm::wfi();
         }
     }
 }
@@ -111,7 +137,10 @@ impl<'a> Executor<'a> {
 static HARDWARE_CLOCK: AtomicBool = AtomicBool::new(false);
 static COUNTER: AtomicU32 = AtomicU32::new(0);
 
-#[cfg(not(target_arch = "arm"))]
+#[cfg(not(any(
+    all(target_arch = "arm", target_os = "none"),
+    all(target_arch = "riscv32", target_os = "none")
+)))))]
 fn advance_hardware_clock() {
     HARDWARE_CLOCK.store(true, Ordering::Relaxed);
 }
@@ -135,7 +164,10 @@ impl Future for TimerFuture {
     }
 }
 
-#[cfg(not(target_arch = "arm"))]
+#[cfg(not(any(
+    all(target_arch = "arm", target_os = "none"),
+    all(target_arch = "riscv32", target_os = "none")
+)))))]
 fn current_time() -> u32 {
     if HARDWARE_CLOCK.swap(false, Ordering::Relaxed) {
         COUNTER.fetch_add(1, Ordering::Relaxed);
@@ -143,9 +175,12 @@ fn current_time() -> u32 {
     COUNTER.load(Ordering::Relaxed)
 }
 
-#[cfg(target_arch = "arm")]
+#[cfg(any(
+    all(target_arch = "arm", target_os = "none"),
+    all(target_arch = "riscv32", target_os = "none")
+))]
 fn current_time() -> u32 {
-    // 真实项目应读取 SysTick 或定时器寄存器
+    // 真实项目应读取 SysTick / CLINT mtime 或定时器寄存器
     0
 }
 
@@ -157,7 +192,10 @@ static mut FUT1: TimerFuture = TimerFuture { expires_at: 3 };
 static TASK1: SyncCell<Cell<Option<Pin<&'static mut dyn Future<Output = ()>>>>> =
     SyncCell(Cell::new(None));
 
-#[cfg(not(target_arch = "arm"))]
+#[cfg(not(any(
+    all(target_arch = "arm", target_os = "none"),
+    all(target_arch = "riscv32", target_os = "none")
+)))))]
 fn main() {
     let raw = &raw mut FUT1;
     let fut1: Pin<&'static mut TimerFuture> = unsafe { Pin::new_unchecked(&mut *raw) };
@@ -170,7 +208,7 @@ fn main() {
     std::println!("custom async executor demo finished");
 }
 
-#[cfg(target_arch = "arm")]
+#[cfg(all(target_arch = "arm", target_os = "none"))]
 #[cortex_m_rt::entry]
 fn main() -> ! {
     let raw = &raw mut FUT1;
@@ -182,7 +220,25 @@ fn main() -> ! {
     executor.run()
 }
 
-#[cfg(target_arch = "arm")]
+#[cfg(all(target_arch = "riscv32", target_os = "none"))]
+#[riscv_rt::entry]
+fn main() -> ! {
+    let raw = &raw mut FUT1;
+    let fut1: Pin<&'static mut TimerFuture> = unsafe { Pin::new_unchecked(&mut *raw) };
+    TASK1.0.set(Some(fut1));
+
+    let tasks: &[&SyncCell<Cell<Option<Pin<&'static mut dyn Future<Output = ()>>>>>] = &[&TASK1];
+    let executor = Executor::new(tasks);
+    executor.run()
+}
+
+#[cfg(all(target_arch = "arm", target_os = "none"))]
+#[panic_handler]
+fn panic(_: &core::panic::PanicInfo) -> ! {
+    loop {}
+}
+
+#[cfg(all(target_arch = "riscv32", target_os = "none"))]
 #[panic_handler]
 fn panic(_: &core::panic::PanicInfo) -> ! {
     loop {}
