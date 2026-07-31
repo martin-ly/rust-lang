@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 666,
-    "generated_at": "2026-07-31T16:28:10.177669+00:00"
+    "generated_at": "2026-07-31T16:39:02.752405+00:00"
   },
   "files": [
     {
@@ -11347,7 +11347,7 @@
       "layer": "L1",
       "title": "Lifetimes（生命周期）",
       "positioning": "",
-      "line_count": 1588,
+      "line_count": 1590,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡",
@@ -11456,7 +11456,7 @@
       "code_blocks": [
         {
           "flags": [],
-          "lines": 26,
+          "lines": 27,
           "should_fail": false,
           "code_preview": "// Trait object 默认 'static：裸 dyn Trait 只能持有 'static 数据 fn static_trait_object() ..."
         },
@@ -26835,7 +26835,7 @@
       "layer": "L2",
       "title": "过程宏：derive、attribute、function-like 与 TokenStream 操作",
       "positioning": "系统讲解过程宏的三种类型、编译期执行模型、`TokenStream` 操作、`syn`/`quote` 工作流，以及 span/hygiene 的工程实践。",
-      "line_count": 655,
+      "line_count": 661,
       "theorem_chains": [
         {
           "text": "| 理解三种过程宏 ⟹ 正确选型 | 知道 derive/attribute/function-like 的差异 | 能为场景选择合适宏类型 | 高 |",
@@ -26860,10 +26860,12 @@
       ],
       "code_blocks": [
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 15,
           "should_fail": false,
-          "code_preview": "// Derive 宏示例: #[derive(Hello)] #[proc_macro_derive(Hello)] pub fn hello_derive(..."
+          "code_preview": "// Derive 宏示例: #[derive(Hello)]；需在 proc-macro crate 中编译，此处仅展示形状 #[proc_macro_der..."
         },
         {
           "flags": [],
@@ -26902,16 +26904,20 @@
           "code_preview": "#[proc_macro_derive(Builder, attributes(builder))] pub fn builder_derive(input: ..."
         },
         {
-          "flags": [],
-          "lines": 17,
+          "flags": [
+            "ignore"
+          ],
+          "lines": 22,
           "should_fail": false,
-          "code_preview": "#[proc_macro_attribute] pub fn trace(attr: TokenStream, item: TokenStream) -> To..."
+          "code_preview": "// 需在 proc-macro crate 中编译；此处仅展示 syn/quote 的使用形状 use proc_macro::TokenStream; us..."
         },
         {
-          "flags": [],
-          "lines": 15,
+          "flags": [
+            "ignore"
+          ],
+          "lines": 16,
           "should_fail": false,
-          "code_preview": "#[proc_macro] pub fn make_answer(input: TokenStream) -> TokenStream {     if !in..."
+          "code_preview": "// 宏定义需在 proc-macro crate，宏使用在普通 crate；此处仅展示形状 #[proc_macro] pub fn make_answer(..."
         },
         {
           "flags": [],
@@ -27578,7 +27584,7 @@
       "layer": "L2",
       "title": "Rust 闭包：捕获语义、Trait 层级与工程实践",
       "positioning": "系统阐述 Rust 闭包的语法、捕获机制、`Fn`/`FnMut`/`FnOnce` 语义层级、`move` 闭包、函数指针强制转换、异步闭包与典型反模式，覆盖从基础使用到工程决策的完整链条。",
-      "line_count": 752,
+      "line_count": 757,
       "theorem_chains": [
         {
           "text": "| 理解捕获模式 ⟹ 正确选择 trait | 知道环境如何使用 | 能写出正确的泛型约束 | 高 |",
@@ -27658,9 +27664,9 @@
         },
         {
           "flags": [],
-          "lines": 9,
+          "lines": 14,
           "should_fail": false,
-          "code_preview": "// Rust 1.85+ let client = reqwest::Client::new(); let fetch = async move |url: ..."
+          "code_preview": "// Rust 1.85+ #[tokio::main] async fn main() -> Result<(), reqwest::Error> {    ..."
         },
         {
           "flags": [],
@@ -28126,7 +28132,7 @@
       "layer": "L3",
       "title": "Send 与 Sync：Auto Trait 的并发安全契约",
       "positioning": "",
-      "line_count": 623,
+      "line_count": 639,
       "theorem_chains": [
         {
           "text": "> **Send 契约**：`T: Send` ⟹ 将 `T` 的**所有权（Ownership）转移**到另一个线程是安全的。",
@@ -28258,7 +28264,7 @@
         },
         {
           "flags": [],
-          "lines": 19,
+          "lines": 30,
           "should_fail": false,
           "code_preview": "/// 内存映射句柄：OS 保证映射页可跨线程访问； /// 所有写操作仅通过 &mut self 方法暴露 ⟹ 不存在共享可变，Send 安全。 struct..."
         },
@@ -31645,7 +31651,7 @@
       "layer": "L3",
       "title": "Pin 与 Unpin：自引用类型的不动性保证",
       "positioning": "深入分析 Rust 中 **Pin<&mut T>** 和 **Unpin** 的设计动机——解决自引用（Reference）类型（self-referential structs）在内存移动时的安全问题，探讨 Pin 与 Future、Generator 的交互，以及 async/await 的状态机实现。",
-      "line_count": 1192,
+      "line_count": 1220,
       "theorem_chains": [
         {
           "text": "| 必须自引用且固定后不再移动 | `Pin<Box<T>>` 或 `pin_mut!` | §4.1 反命题树 TRUE | 之后仍需移动 ⟹ 违反 Pin 契约 |",
@@ -31774,6 +31780,12 @@
           "lines": 24,
           "should_fail": false,
           "code_preview": "use std::pin::Pin;  struct SelfRef {     data: String,     ptr: *const String, }..."
+        },
+        {
+          "flags": [],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "> use std::marker::PhantomPinned; > use std::pin::{pin, Pin}; > > /// 一个需要固定地址的类..."
         },
         {
           "flags": [
@@ -44595,7 +44607,7 @@
       "layer": "L4",
       "title": "未定义行为清单（Behavior Considered Undefined）",
       "positioning": "",
-      "line_count": 286,
+      "line_count": 290,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -59506,7 +59518,7 @@
       "layer": "L6",
       "title": "Serde 序列化框架",
       "positioning": "",
-      "line_count": 449,
+      "line_count": 448,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -59540,7 +59552,7 @@
         },
         {
           "flags": [],
-          "lines": 25,
+          "lines": 24,
           "should_fail": false,
           "code_preview": "use serde::Serialize; use std::fmt;  #[derive(Debug)] struct ExternalId(u64); //..."
         },
@@ -59614,7 +59626,7 @@
       "layer": "L6",
       "title": "Tokio 异步运行时",
       "positioning": "",
-      "line_count": 407,
+      "line_count": 408,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -59678,9 +59690,9 @@
         },
         {
           "flags": [],
-          "lines": 2,
+          "lines": 3,
           "should_fail": false,
-          "code_preview": "#[tokio::main(flavor = \"current_thread\")] ..."
+          "code_preview": "#[tokio::main(flavor = \"current_thread\")] async fn main() {} ..."
         },
         {
           "flags": [],
@@ -65639,7 +65651,9 @@
           "code_preview": "use reqwest::Client; use std::time::Duration;  fn create_client() -> Client {   ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "no_run"
+          ],
           "lines": 16,
           "should_fail": false,
           "code_preview": "use serde_json::json;  #[tokio::main] async fn main() -> Result<(), Box<dyn std:..."
@@ -73169,7 +73183,7 @@
       "layer": "L6",
       "title": "性能工程架构：系统级测量、分析与优化",
       "positioning": "",
-      "line_count": 1097,
+      "line_count": 1102,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -73219,9 +73233,9 @@
         },
         {
           "flags": [],
-          "lines": 12,
+          "lines": 17,
           "should_fail": false,
-          "code_preview": "// ✅ 预分配容量，避免热循环中反复 realloc let mut buf = Vec::with_capacity(1024); for item in ..."
+          "code_preview": "fn main() {     // ✅ 预分配容量，避免热循环中反复 realloc     let items: Vec<i32> = (0..100).c..."
         },
         {
           "flags": [
@@ -76435,7 +76449,7 @@
       "layer": "L6",
       "title": "并行算法",
       "positioning": "本页讲解 Rust 中利用多核的并行算法设计，覆盖数据并行、任务并行、图并行与调度器原理，代码位于 `crates/c08_algorithms/src/algorithms/parallel_algorithms.rs`。",
-      "line_count": 528,
+      "line_count": 529,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -76477,10 +76491,12 @@
           "code_preview": "use c08_algorithms::algorithms::parallel_algorithms::parallel_kruskal;  fn main(..."
         },
         {
-          "flags": [],
-          "lines": 7,
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
           "should_fail": false,
-          "code_preview": "use c08_algorithms::algorithms::parallel_algorithms::fork_join_sum;  fn main() {..."
+          "code_preview": "// 依赖 workspace crate c08_algorithms，在独立测试 harness 中无法解析路径 use c08_algorithms::a..."
         },
         {
           "flags": [],
@@ -81473,7 +81489,7 @@
       "layer": "L7",
       "title": "Rust 1.98.0 稳定特性",
       "positioning": "",
-      "line_count": 861,
+      "line_count": 1082,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -81489,7 +81505,6 @@
         "../../01_foundation/09_macros_basics/01_attributes_and_macros.md",
         "../../02_intermediate/00_traits/01_traits.md",
         "../../02_intermediate/00_traits/06_derive_traits.md",
-        "../../02_intermediate/02_memory_management/02_interior_mutability.md",
         "../../02_intermediate/03_error_handling/03_panic.md",
         "../../02_intermediate/04_types_and_conversions/01_range_types.md",
         "../../02_intermediate/04_types_and_conversions/07_type_conversions.md",
@@ -81514,7 +81529,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 40,
+      "matrix_rows": 42,
       "pre_post": {
         "pre": [
           "[Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.97 稳定特性](rust_1_97_stabilized.md)"
@@ -81531,7 +81546,7 @@
       "layer": "L7",
       "title": "Rust 1.99+ 前沿特性预览",
       "positioning": "",
-      "line_count": 191,
+      "line_count": 295,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -81558,12 +81573,13 @@
         "../02_preview_features/31_specialization_preview.md",
         "../02_preview_features/35_f16_f128_preview.md",
         "01_rust_version_tracking.md",
-        "rust_1_98_preview.md"
+        "rust_1_98_preview.md",
+        "rust_1_98_stabilized.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 21,
+      "matrix_rows": 43,
       "pre_post": {
         "pre": [
           "[Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md) · [Cargo 入门](../../06_ecosystem/01_cargo/15_cargo_getting_started.md)"
@@ -85783,7 +85799,7 @@
       "layer": "L7",
       "title": "Unknown",
       "positioning": "",
-      "line_count": 351,
+      "line_count": 357,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -85808,9 +85824,9 @@
         },
         {
           "flags": [],
-          "lines": 6,
+          "lines": 12,
           "should_fail": false,
-          "code_preview": "let f = async |x: i32| -> i32 {     tokio::time::sleep(Duration::from_millis(10)..."
+          "code_preview": "use std::time::Duration;  #[tokio::main] async fn main() {     let f = async |x:..."
         },
         {
           "flags": [

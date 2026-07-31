@@ -188,8 +188,7 @@ use std::fmt;
 #[derive(Debug)]
 struct ExternalId(u64); // 占位外部类型
 
-#[derive(Debug, Serialize)]
-#[serde(transparent)]
+#[derive(Debug)]
 struct ExternalIdWrapper(ExternalId);
 
 impl fmt::Display for ExternalId {

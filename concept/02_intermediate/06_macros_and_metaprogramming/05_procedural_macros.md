@@ -94,8 +94,8 @@
 | 属性宏 | `#[proc_macro_attribute]` | `#[name(args)]` | 修饰并可能重写 item |
 | 函数式宏 | `#[proc_macro]` | `name!(...)` | 自定义语法扩展 |
 
-```rust
-// Derive 宏示例: #[derive(Hello)]
+```rust,ignore
+// Derive 宏示例: #[derive(Hello)]；需在 proc-macro crate 中编译，此处仅展示形状
 #[proc_macro_derive(Hello)]
 pub fn hello_derive(input: TokenStream) -> TokenStream {
     let ast = syn::parse(input).unwrap();
@@ -104,11 +104,11 @@ pub fn hello_derive(input: TokenStream) -> TokenStream {
 
 // 属性宏示例: #[route("GET", "/")]
 #[proc_macro_attribute]
-pub fn route(args: TokenStream, input: TokenStream) -> TokenStream { ... }
+pub fn route(args: TokenStream, input: TokenStream) -> TokenStream { todo!() }
 
 // 函数式宏示例: sql!("SELECT ...")
 #[proc_macro]
-pub fn sql(input: TokenStream) -> TokenStream { ... }
+pub fn sql(input: TokenStream) -> TokenStream { todo!() }
 ```
 
 > **能力对比**: Derive 宏最受限（只能追加 impl），属性宏最灵活（可重写整个 item），函数式宏最接近 `macro_rules!` 的调用形式。
@@ -244,10 +244,15 @@ pub fn builder_derive(input: TokenStream) -> TokenStream { ... }
 
 属性宏接收两个 `TokenStream`：**属性参数**和**被标注项**。它可以完全重写被标注项。
 
-```rust
+```rust,ignore
+// 需在 proc-macro crate 中编译；此处仅展示 syn/quote 的使用形状
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::{parse_macro_input, ItemFn};
+
 #[proc_macro_attribute]
 pub fn trace(attr: TokenStream, item: TokenStream) -> TokenStream {
-    let func = parse_macro_input!(item as syn::ItemFn);
+    let func = parse_macro_input!(item as ItemFn);
     let name = &func.sig.ident;
     let body = &func.block;
 
@@ -272,7 +277,8 @@ pub fn trace(attr: TokenStream, item: TokenStream) -> TokenStream {
 
 函数式宏看起来像 `macro_rules!` 调用，但由过程宏实现。
 
-```rust
+```rust,ignore
+// 宏定义需在 proc-macro crate，宏使用在普通 crate；此处仅展示形状
 #[proc_macro]
 pub fn make_answer(input: TokenStream) -> TokenStream {
     if !input.is_empty() {

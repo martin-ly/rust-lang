@@ -1,7 +1,7 @@
 # 内容重叠检测 v2（语义质量门 P0-3）
 
 **日期**: 2026-08-01  **扫描**: 2002 文件（concept/knowledge/docs/content/crates，排除 archive/book/target）
-**纳入索引**: 1585（已剔除真 stub/空关键词）  **候选对(共享>=5词)**: 663833
+**纳入索引**: 1585（已剔除真 stub/空关键词）  **候选对(共享>=5词)**: 664167
 **阈值**: 0.5  **命中对**: 510（同目录 510 / 跨目录 0）
 
 > 本版修正旧版『0 重复』假象：全文关键词（非前50）、纳入 crates、不豁免假 stub、同目录也检、去掉标题 x1.5 主导。
@@ -11,7 +11,7 @@
 | sim | kw | title | 共享词 | 同目录 | 文件1（行） | 文件2（行） |
 |:---:|:---:|:---:|:---:|:---:|:---|:---|
 | 1.0 | 0.302 | 1.0 | 65 | Y | `concept/07_future/00_version_tracking/feature_domain_matrix_197.md`(305) | `concept/07_future/00_version_tracking/feature_domain_matrix_198.md`(219) |
-| 1.0 | 0.745 | 1.0 | 62 | Y | `concept/07_future/00_version_tracking/rust_1_100_preview.md`(260) | `concept/07_future/00_version_tracking/rust_1_99_preview.md`(191) |
+| 1.0 | 0.398 | 1.0 | 59 | Y | `concept/07_future/00_version_tracking/rust_1_100_preview.md`(260) | `concept/07_future/00_version_tracking/rust_1_99_preview.md`(295) |
 | 1.0 | 0.357 | 1.0 | 6 | Y | `crates/c10_networks/docs/07_rust_190_examples_collection.md`(857) | `crates/c10_networks/docs/08_rust_190_examples_part2.md`(857) |
 | 0.889 | 0.889 | 0.5 | 5 | Y | `crates/c09_design_pattern/docs/05_c09_comprehensive_enhancement_report_2025_10_19.md`(15) | `crates/c09_design_pattern/docs/15_rust_190_comprehensive_enhancement_report.md`(15) |
 | 0.846 | 0.846 | 0.5 | 8 | Y | `crates/c08_algorithms/docs/tier_01_foundations/01_project_overview.md`(22) | `crates/c08_algorithms/docs/tier_01_foundations/02_navigation.md`(22) |

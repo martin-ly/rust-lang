@@ -1,9 +1,9 @@
 # Rust 1.99+ 前沿特性预览
 
-> **代码状态**: [跟踪级 — 待补充]
+> **代码状态**: [跟踪级 — 持续更新]
 >
 > **EN**: Rust 1.99+ Preview
-> **Summary**: Rust 1.99 and beyond: nightly language features, compiler infrastructure, and ecosystem trends tracked for future stabilization.
+> **Summary**: Rust 1.99 and beyond: nightly language features, compiler infrastructure, stabilized-in-progress APIs, and ecosystem trends tracked for future stabilization.
 > **Rust 版本**: 1.99.0 (nightly preview)
 >
 > **受众**: [专家]
@@ -16,6 +16,7 @@
 > **当前阶段**: 🧪 Nightly 实验性 / 设计或 MCP 阶段
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **状态**: 特性集高度不确定，稳定时间和具体内容以官方发布为准
+> **最后更新**: 2026-07-31
 >
 > **权威来源**:
 >
@@ -45,23 +46,37 @@ mindmap
       gen blocks
       async_drop
       Specialization
+      effects / keyword generics
+      never type stabilization
     类型系统
-      TAIT
+      TAIT / ATPIT
       RTN
       Arbitrary self types
+      derive(CoercePointee)
     安全与形式化
       Safety tags
       BorrowSanitizer
+      contracts
     平台与性能
       f16 / f128
       Portable SIMD
       Field projections
+      extern custom
+      target-cpu modifiers
+    编译器与工具
+      next-gen trait solver
+      Polonius
+      Cranelift
+      rustdoc merge / doc_cfg
+      profile-sample-use
 ```
 
-## 零、1.99 周期跟踪清单（2026-07-16 初始）
+---
+
+## 零、1.99 周期跟踪清单（2026-07-31 更新）
 
 > **状态取值**：`stabilized in 1.99 beta`（已随 1.99.0 beta 分支合入）/ `RFC merged`（RFC 已合并，实现跟踪中）/ `FCP`（最终评论期）/ `nightly only`（nightly 可用，未排期）/ `design`（设计/MCP 阶段）。
-> **实测来源**：[Rust Forge](https://forge.rust-lang.org/)（2026-07-16）· [releases.rs](https://releases.rs/)
+> **实测来源**：[Rust Forge](https://forge.rust-lang.org/)（2026-07-31）· [releases.rs 1.99.0](https://releases.rs/docs/1.99.0/)
 
 | 特性 | 状态 | 跟踪链接 |
 |:---|:---|:---|
@@ -72,13 +87,16 @@ mindmap
 | Effects system / keyword generics | experimental | [预览页](../02_preview_features/01_effects_system.md) |
 | Safety tags | FCP / 讨论中 | [rfcs#3842](https://github.com/rust-lang/rfcs/pull/3842) · [预览页](../02_preview_features/03_safety_tags_preview.md) |
 | `derive(CoercePointee)` | FCP finished | [预览页](../02_preview_features/05_derive_coerce_pointee_preview.md) |
-| Type Alias Impl Trait（TAIT） | nightly only | [预览页](../02_preview_features/17_type_alias_impl_trait_preview.md) |
+| Type Alias Impl Trait（TAIT）/ ATPIT | nightly only | [预览页](../02_preview_features/17_type_alias_impl_trait_preview.md) |
 | `const_trait_impl`（`~const`） | nightly only | [预览页](../02_preview_features/06_const_trait_impl_preview.md) |
 | Portable SIMD | nightly only | [预览页](../02_preview_features/29_aarch64_sve_sme_preview.md) |
 | `f16` / `f128` | nightly only | [预览页](../02_preview_features/35_f16_f128_preview.md) |
 | Arbitrary self types | nightly only | [预览页](../02_preview_features/18_arbitrary_self_types_preview.md) |
 | Field projections | experimental | [Project Goals](https://rust-lang.github.io/rust-project-goals/2026/field-projections.html) · [预览页](../02_preview_features/23_field_projections_preview.md) |
 | BorrowSanitizer | prototype | [Project Goals](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html) · [预览页](../02_preview_features/24_borrow_sanitizer.md) |
+| Contracts (`contracts` feature) | experimental | [Unstable Book](https://doc.rust-lang.org/nightly/unstable-book/language-features/contracts.html) |
+| Never type (`!`) stabilization | proposed-FCP | [Project Goals](https://rust-lang.github.io/rust-project-goals/2026/never-type.html) |
+| `extern "custom"` | FCP finished | [tracking issue](https://github.com/rust-lang/rust/issues/127030) |
 
 > **维护约定**：每两周按 Rust Forge 发布节奏核对本表；1.99.0 进入 beta 后（预计 2026-08-14）将状态迁移更新，稳定后建立 `rust_1_99_stabilized.md`。
 
@@ -86,19 +104,15 @@ mindmap
 
 ## 一、语言特性预览
 
-本节聚焦 1.99 周期内仍在 nightly 或实验阶段的语言级特性，包括生成器、异步析构、特化与返回类型标注等；这些特性尚未确定是否能在 1.99.0 稳定，因此仅提供状态快照并指向各自的深度预览页。
+本节聚焦 1.99 周期内仍在 nightly 或实验阶段的语言级特性。
 
 ### 1.1 `gen` blocks / 异步生成器
 
-**状态**: 🧪 nightly only
-
-`gen { yield x; }` 提供零成本的同步迭代器生成语法，`async gen` / `for await` 则面向异步 `Stream` 生产。该特性有望在 1.99+ 窗口继续推进。
+`gen { yield x; }` 提供零成本的同步迭代器生成语法，`async gen` / `for await` 则面向异步 `Stream` 生产。
 
 **深度文档**: [25_gen_blocks_preview.md](../02_preview_features/25_gen_blocks_preview.md)
 
 ### 1.2 Async Drop
-
-**状态**: 🧪 nightly only
 
 为异步上下文提供异步析构语义，解决 `Drop::drop` 不能 `.await` 的长期痛点。
 
@@ -106,25 +120,31 @@ mindmap
 
 ### 1.3 Return Type Notation（RTN）
 
-**状态**: 🧪 nightly only
-
 `fn foo() -> impl Trait<method(): Send>` 式语法，用于约束不透明返回类型关联项的 bound。
 
 **深度文档**: [09_return_type_notation_preview.md](../02_preview_features/09_return_type_notation_preview.md)
 
 ### 1.4 Specialization
 
-**状态**: 🧪 nightly only
-
 允许为泛型 impl 的特定类型子集提供更优实现，卡在 `min_specialization` 的 soundness 论证上。
 
 **深度文档**: [31_specialization_preview.md](../02_preview_features/31_specialization_preview.md)
 
+### 1.5 Effects system / keyword generics
+
+在泛型参数中抽象 `async`/`unsafe`/`const` 等效果，目标是统一 `AsyncFn*`、`const fn` 与 unsafe 的泛型表达。
+
+**深度文档**: [01_effects_system.md](../02_preview_features/01_effects_system.md)
+
+### 1.6 Never type (`!`) 稳定化推进
+
+`never_type` 特性已进入候选稳定化阶段，1.99 周期可能进入 FCP。其落地会进一步消除 `!` 与 `()` 之间的 fallback 歧义。
+
+**跟踪**: [rust-lang/rust#35121](https://github.com/rust-lang/rust/issues/35121) · [Project Goals](https://rust-lang.github.io/rust-project-goals/2026/never-type.html)
+
 ---
 
 ## 二、编译器与工具链预览
-
-本节跟踪影响 rustc 核心架构与日常开发体验的编译器基础设施进展，包括 trait 求解器、借用检查框架与 Cranelift 后端；这些项目主要提升编译速度或扩展可证明的代码模式，通常不会立即改变稳定语言表面。
 
 ### 2.1 Next-gen trait solver / Polonius
 
@@ -137,11 +157,65 @@ mindmap
 
 **深度文档**: [16_cranelift_backend_preview.md](../02_preview_features/16_cranelift_backend_preview.md)
 
+### 2.3 最新 nightly 进展（2026-07-31 快照）
+
+来源：[releases.rs 1.99.0 nightly](https://releases.rs/docs/1.99.0/)
+
+| 进展 | 说明 | 跟踪 |
+|:---|:---|:---|
+| `#[diagnostic::opaque]` | 隐藏宏展开后的 backtrace，改善宏诊断可读性 | [rust-lang/rust#158608](https://github.com/rust-lang/rust/pull/158608) |
+| `invalid_reference_casting` 允许直接访问 `UnsafeCell` 内容 | lint 不再强制要求通过 `.get()` 访问 | [rust-lang/rust#159960](https://github.com/rust-lang/rust/pull/159960) |
+| runtime symbols lint 精细化 | 仅在期望 `!` 返回类型时把 `()` 视为可疑 | [rust-lang/rust#159513](https://github.com/rust-lang/rust/pull/159513) |
+| `semicolon_in_expressions_from_macros` 拆分 | 非本地宏的 lint 拆分为独立 lint | [rust-lang/rust#158325](https://github.com/rust-lang/rust/pull/158325) |
+| NonNull layout 保证文档化 | 为形式化验证与 unsafe 代码提供更强保证 | [rust-lang/rust#158325](https://github.com/rust-lang/rust/pull/158325) |
+| `Step::forward/backward_overflowing` | 支持 `RangeInclusive` 循环优化 | [rust-lang/rust#156976](https://github.com/rust-lang/rust/pull/156976) |
+| `Box<[T; N], A>` 实现 `IntoIterator` | 允许 boxed 数组直接迭代 | [rust-lang/rust#156976](https://github.com/rust-lang/rust/pull/156976) |
+| `-Ctarget-cpu` 转为 target-modifier | 支持 AVR、AMDGCN、NVPTX 等目标更细粒度 CPU 选择 | [rust-lang/rust#159513](https://github.com/rust-lang/rust/pull/159513) |
+| `cfg_select!` 模块发现 | rustfmt 支持通过 `cfg_select!` 发现模块 | nightly rustfmt |
+| riscv64-unknown-linux-musl 晋升 Tier 2 | 带 host tools 的 Tier 2 支持 | [rust-lang/rust#158608](https://github.com/rust-lang/rust/pull/158608) |
+
+### 2.4 Ongoing Stabilization PRs（可能进入 1.99.0 beta 的候选）
+
+来源：[releases.rs Ongoing Stabilization PRs](https://releases.rs/)（2026-07-31）
+
+- `windows_process_extensions_main_thread_handle`
+- `c_variadic_naked_functions`
+- attributes on closure and method call expressions
+- 128-bit integer via vector registers in `asm!` on x86
+- `mpmc_channel`
+- s390x target-feature backchain
+- `extern "custom"`
+- `size_of_val_raw` / `align_of_val_raw` / `Layout::for_value_raw`
+- `optimize` attribute
+- `Rng` / `SystemRng`
+- `-Zprofile-sample-use`
+- never type stabilization
+- `tcp_deferaccept`
+- `#![rustfmt::skip]` and other inner tool attributes
+- `ptr::try_cast_aligned`
+- `fN::BITS`
+- `alignment_type`
+- rustdoc `--merge` / `--parts-out-dir` / `--include-parts-dir`
+- `-Zinstrument-mcount`
+- `refcell_try_map`
+- `proc_macro_value`
+- `-Cdebuginfo-compression`
+- `doc_cfg`
+- `supertrait_item_shadowing`
+- Frontmatter
+- stack-protector
+- `debug_closure_helpers`
+- `-Cmin-function-alignment`
+- `breakpoint`
+- `more_qualified_paths`
+- `fn_align`: `#[align(N)]` on functions
+- `offset_of_slice`
+- `derive(CoercePointee)`
+- associated type position impl Trait（ATPIT）
+
 ---
 
 ## 三、标准库与目标平台预览
-
-本节汇总 1.99 周期内在标准库 API 与目标平台层面的实验性进展，目前以扩展浮点类型和可移植 SIMD 为代表；这些 API 的形态、ABI 与稳定时间表仍在收敛，需结合具体硬件目标谨慎使用。
 
 ### 3.1 `f16` / `f128`
 
@@ -155,9 +229,31 @@ mindmap
 
 **深度文档**: [29_aarch64_sve_sme_preview.md](../02_preview_features/29_aarch64_sve_sme_preview.md)
 
+### 3.3 Field projections
+
+允许通过 field projection 语法安全地访问嵌套字段，减少手写 unsafe 投影。
+
+**深度文档**: [23_field_projections_preview.md](../02_preview_features/23_field_projections_preview.md)
+
 ---
 
-## 四、维护与跟踪流程
+## 四、RFC / MCP 最新进展
+
+| RFC / MCP | 主题 | 状态 | 链接 |
+|:---|:---|:---|:---|
+| RFC #3955 | Named `Fn` trait parameters | RFC merged（2026-07-08） | [RFC Book](https://rust-lang.github.io/rfcs/3955-named-fn-trait-parameters.html) |
+| RFC #3808 | `#![register_{attribute,lint}_tool]` | RFC merged（2026-06-10） | [RFC Book](https://rust-lang.github.io/rfcs/3808-register-tool.html) |
+| RFC #3928 | `todo!()` 不再触发 `unreachable_code` | RFC merged（2026-06-25） | [RFC Book](https://rust-lang.github.io/rfcs/3928-todo-overreach.html) |
+| RFC #3516 | Public/Private Dependencies | RFC merged，Cargo 实现跟踪中 | [RFC Book](https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html) |
+| RFC #3842 | Safety Tags | FCP / 讨论中 | [rfcs#3842](https://github.com/rust-lang/rfcs/pull/3842) |
+| MCP | `derive(CoercePointee)` | FCP finished | [tracking issue](https://github.com/rust-lang/rust/issues/127030) |
+| MCP | `extern "custom"` | FCP finished | [tracking issue](https://github.com/rust-lang/rust/issues/127030) |
+
+这些 RFC/MCP 的落地时间取决于实现进度；1.99.0 稳定版本未必全部包含。
+
+---
+
+## 五、维护与跟踪流程
 
 1. **每两周巡检**：对照 Rust Forge、releases.rs、Inside Rust Blog 更新 §零清单。
 2. **beta 分支切分后**：将已稳定的 nightly 项状态改为 `stabilized in 1.99 beta`，并准备 `rust_1_99_stabilized.md`。
@@ -177,14 +273,22 @@ mindmap
 | "使用 nightly 特性不影响 MSRV" | `#![feature(async_drop)]` 会让 crate 无法在任何 stable rustc 编译 | nightly 特性直接把 MSRV 提升到 nightly toolchain |
 | "FCP 完成等于稳定日期确定" | `derive(CoercePointee)` 虽已 FCP finished，仍可能因实现问题调整 | FCP 完成只说明设计方向达成一致，不保证发布时间 |
 
-## 五、来源与延伸阅读
+---
+
+## 六、来源与延伸阅读
 
 - [Rust Forge](https://forge.rust-lang.org/)
 - [releases.rs](https://releases.rs/)
 - [Inside Rust Blog](https://blog.rust-lang.org/inside-rust/)
+- [The Unstable Book](https://doc.rust-lang.org/nightly/unstable-book/)
+- [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)
 - [Rust 1.98+ 前沿特性预览](rust_1_98_preview.md)
+- [Rust 1.98.0 稳定特性](rust_1_98_stabilized.md)
 - [Rust 版本跟踪](01_rust_version_tracking.md)
 
-## 补充国际权威来源（P1/P2 覆盖）
+---
+
+## 国际权威来源补充
 
 - [RustBelt project](https://plv.mpi-sws.org/rustbelt/)
+- [Rust RFCs 索引](https://rust-lang.github.io/rfcs/)
