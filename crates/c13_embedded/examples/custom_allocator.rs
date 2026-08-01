@@ -52,6 +52,11 @@ impl BumpPointerAlloc {
         }
     }
 
+    /// # Safety
+    ///
+    /// 调用者必须保证 `start..start+size` 指向一块有效且独占的内存区域，
+    /// 且该内存区域满足 allocator 所需的地址对齐要求。
+    /// 此函数不能并发重入，裸机场景下由 `with_critical_section` 提供保护。
     pub unsafe fn init(&self, start: *mut u8, size: usize) {
         unsafe {
             *self.head.get() = start as usize;
@@ -88,7 +93,7 @@ unsafe impl GlobalAlloc for BumpPointerAlloc {
                 let head = self.head.get();
                 let align = layout.align();
                 let size = layout.size();
-                let start = ((*head + align - 1) / align) * align;
+                let start = (*head).next_multiple_of(align);
                 if start + size > *self.end.get() {
                     ptr::null_mut()
                 } else {

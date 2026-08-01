@@ -834,6 +834,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-22 cargo update 补丁升级 (4.6.3 -> 4.6.4)；本 crate 尚未经过正式代码审计。"
 
+[[exemptions.clap]]
+version = "4.6.5"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-01 cargo update 补丁升级 (4.6.4 -> 4.6.5)；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.clap_builder]]
 version = "4.6.0"
 criteria = "safe-to-run"
@@ -845,6 +851,12 @@ version = "4.6.2"
 criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-16 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
+[[exemptions.clap_builder]]
+version = "4.6.5"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-01 cargo update 补丁升级 (4.6.2 -> 4.6.5)；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.clap_lex]]
 version = "1.1.0"
@@ -1930,6 +1942,12 @@ notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计�
 version = "0.13.0"
 criteria = "safe-to-run"
 
+[[exemptions.html-escape]]
+version = "0.2.15"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-01 cargo update 补丁升级 (0.2.14 -> 0.2.15)；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
 [[exemptions.http]]
 version = "1.4.2"
 criteria = "safe-to-run"
@@ -2663,6 +2681,12 @@ version = "3.3.0"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.ntex-macros]]
+version = "3.4.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-01 cargo update 补丁升级 (3.3.0 -> 3.4.0)；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.ntex-net]]
 version = "3.13.0"
@@ -4380,6 +4404,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-20 cargo update 补丁升级；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.time]]
+version = "0.3.55"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-01 cargo update 补丁升级 (0.3.54 -> 0.3.55)；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.time-core]]
 version = "0.1.9"
 criteria = "safe-to-run"
@@ -5397,6 +5427,12 @@ version = "0.3.10"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.xcursor]]
+version = "0.3.11"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-01 cargo update 补丁升级 (0.3.10 -> 0.3.11)；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.xkbcommon-dl]]
 version = "0.4.2"

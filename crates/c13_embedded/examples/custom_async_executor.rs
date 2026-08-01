@@ -68,16 +68,19 @@ pub struct SyncCell<T: ?Sized>(T);
 
 unsafe impl<T: ?Sized> Sync for SyncCell<T> {}
 
+/// 静态任务槽类型别名，减少复杂嵌套类型在多处重复出现。
+type TaskSlot = SyncCell<Cell<Option<Pin<&'static mut dyn Future<Output = ()>>>>>;
+
 // ---------------------------------------------------------------------------
 // 静态任务槽与执行器
 // ---------------------------------------------------------------------------
 
 pub struct Executor<'a> {
-    tasks: &'a [&'a SyncCell<Cell<Option<Pin<&'static mut dyn Future<Output = ()>>>>>],
+    tasks: &'a [&'a TaskSlot],
 }
 
 impl<'a> Executor<'a> {
-    pub fn new(tasks: &'a [&'a SyncCell<Cell<Option<Pin<&'static mut dyn Future<Output = ()>>>>>]) -> Self {
+    pub fn new(tasks: &'a [&'a TaskSlot]) -> Self {
         Self { tasks }
     }
 
@@ -189,8 +192,7 @@ fn current_time() -> u32 {
 // ---------------------------------------------------------------------------
 
 static mut FUT1: TimerFuture = TimerFuture { expires_at: 3 };
-static TASK1: SyncCell<Cell<Option<Pin<&'static mut dyn Future<Output = ()>>>>> =
-    SyncCell(Cell::new(None));
+static TASK1: TaskSlot = SyncCell(Cell::new(None));
 
 #[cfg(not(any(
     all(target_arch = "arm", target_os = "none"),
@@ -201,7 +203,7 @@ fn main() {
     let fut1: Pin<&'static mut TimerFuture> = unsafe { Pin::new_unchecked(&mut *raw) };
     TASK1.0.set(Some(fut1));
 
-    let tasks: &[&SyncCell<Cell<Option<Pin<&'static mut dyn Future<Output = ()>>>>>] = &[&TASK1];
+    let tasks: &[&TaskSlot] = &[&TASK1];
     let executor = Executor::new(tasks);
     executor.run();
 
@@ -215,7 +217,7 @@ fn main() -> ! {
     let fut1: Pin<&'static mut TimerFuture> = unsafe { Pin::new_unchecked(&mut *raw) };
     TASK1.0.set(Some(fut1));
 
-    let tasks: &[&SyncCell<Cell<Option<Pin<&'static mut dyn Future<Output = ()>>>>>] = &[&TASK1];
+    let tasks: &[&TaskSlot] = &[&TASK1];
     let executor = Executor::new(tasks);
     executor.run()
 }
@@ -227,7 +229,7 @@ fn main() -> ! {
     let fut1: Pin<&'static mut TimerFuture> = unsafe { Pin::new_unchecked(&mut *raw) };
     TASK1.0.set(Some(fut1));
 
-    let tasks: &[&SyncCell<Cell<Option<Pin<&'static mut dyn Future<Output = ()>>>>>] = &[&TASK1];
+    let tasks: &[&TaskSlot] = &[&TASK1];
     let executor = Executor::new(tasks);
     executor.run()
 }
