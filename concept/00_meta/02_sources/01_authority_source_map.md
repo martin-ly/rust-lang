@@ -3,10 +3,9 @@
 > **EN**: Authority Source Map
 > **Summary**: A concept-by-concept map from core Rust topics to their authoritative sources in official docs, academic formalizations, and community authorities, with cross-language counterparts.
 >
-> | 概念 | 官方来源 | 学术来源 | 社区权威 | C++ 对标 | Haskell 对标 | Go 对标 | 备注 |
-> | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+> 本表按概念维度罗列官方来源、学术来源、社区权威及 C++/Haskell/Go 对标，详见下方正文表格。
 >
-> | **Ownership** | TRPL Ch4 · Reference § Ownership Types | Ralf Jung *"RustBelt: Securing the Foundations of the Rust Programming Language"* (POPL 2018) · Clarke *"Ownership Types
+> **Ownership** | TRPL Ch4 · Reference § Ownership Types | Ralf Jung *"RustBelt: Securing the Foundations of the Rust Programming Language"* (POPL 2018) · Clarke *"Ownership Types
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [进阶]
 > **Bloom 层级**: L4-L5

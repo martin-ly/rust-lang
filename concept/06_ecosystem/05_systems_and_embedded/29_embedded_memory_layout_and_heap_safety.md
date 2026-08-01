@@ -318,10 +318,10 @@ LR_IROM1 0x08000000 0x00080000
 
 | 概念 | GNU ld | ARM scatter |
 |:---|:---|:---|
-  区域声明 | `MEMORY { ... }` | `LR_xxx / ER_xxx` |
-  加载/运行地址 | `AT>` | 区域嵌套 |
-  段选择 | `*(.text*)` | `.ANY (+RO)` |
-  不初始化段 | `(NOLOAD)` | 使用 ZI 段或 UNINIT |
+| 区域声明 | `MEMORY { ... }` | `LR_xxx / ER_xxx` |
+| 加载/运行地址 | `AT>` | 区域嵌套 |
+| 段选择 | `*(.text*)` | `.ANY (+RO)` |
+| 不初始化段 | `(NOLOAD)` | 使用 ZI 段或 UNINIT |
 
 判定依据：Rust 嵌入式生态主要使用 GNU ld / LLD，但向 ARM Compiler 迁移时 scatter file 的对应关系必须理解清楚，尤其是 ZI（Zero-Initialized）对应 `.bss`。
 

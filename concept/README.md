@@ -129,7 +129,7 @@
 
 ## 六、演进计划
 
-历史演进计划参见 [`archive/2026/concept_archive/PLAN_concept_knowledge_system_v2.md`](../archive/2026/concept_archive/PLAN_concept_knowledge_system_v2.md)（归档只读；该目录由 `concept/archive/` 于 2026-07-12 迁往顶层归档）。
+历史演进计划参见 [`archive/03_concept_history/01_legacy_concept_pages/PLAN_concept_knowledge_system_v2.md`](../archive/03_concept_history/01_legacy_concept_pages/PLAN_concept_knowledge_system_v2.md)（归档只读；该目录由 `concept/archive/` 于 2026-07-12 迁往顶层归档）。
 
 ---
 

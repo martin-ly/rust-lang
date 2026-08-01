@@ -34,3 +34,17 @@ use-boolean-and = true
 [output.html.fold]
 enable = true
 level = 1
+
+# PDF 输出（mdbook-pandoc + pandoc + xelatex）
+[output.pandoc]
+optional = true
+
+[output.pandoc.profile.pdf]
+output-file = "rust-concept-knowledge-base.pdf"
+to = "latex"
+pdf-engine = "xelatex"
+file-scope = true
+number-sections = true
+standalone = true
+table-of-contents = true
+include-in-header = ["pandoc-header.tex"]

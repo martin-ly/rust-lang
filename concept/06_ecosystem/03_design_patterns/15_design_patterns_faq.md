@@ -133,7 +133,9 @@
 └─ 否 → 不需要设计模式
 ```
 
-**相关**: [](tier_01_foundations/04_faq.md完整FAQ) | [项目概览](/crates/c09_design_pattern/docs/tier_01_foundations/01_project_overview.md)
+**相关**:
+[完整FAQ](tier_01_foundations/04_faq.md) |
+[项目概览](/crates/c09_design_pattern/docs/tier_01_foundations/01_project_overview.md)
 
 ---
 
@@ -167,7 +169,7 @@
 | 性能开销 | 虚函数表   | 零成本抽象（Zero-Cost Abstraction） ✅         |
 | 状态保证 | 运行时（Runtime）检查 | 编译时检查 ✅         |
 
-**相关**: [](tier_01_foundations/04_faq.md完整FAQ) | [术语表](/crates/c09_design_pattern/docs/tier_01_foundations/03_glossary.md)
+**相关**: [完整FAQ](tier_01_foundations/04_faq.md) | [术语表](/crates/c09_design_pattern/docs/tier_01_foundations/03_glossary.md)
 
 ---
 
@@ -208,7 +210,7 @@
 | 事件通知     | Observer  | 一对多依赖           |
 | 状态管理     | State     | Typestate 编译时保证 |
 
-**相关**: [](tier_01_foundations/04_faq.md完整FAQ) | [主索引导航](/crates/c09_design_pattern/docs/tier_01_foundations/02_navigation.md)
+**相关**: [完整FAQ](tier_01_foundations/04_faq.md) | [主索引导航](/crates/c09_design_pattern/docs/tier_01_foundations/02_navigation.md)
 
 ---
 
@@ -249,7 +251,7 @@ fn get_config() -> &'static Config {
 
 **vs lazy_static**: `OnceLock` 是标准库类型，更推荐使用
 
-**相关**: [](tier_01_foundations/04_faq.md完整FAQ) | [术语表](/crates/c09_design_pattern/docs/tier_01_foundations/03_glossary.md#oncelock)
+**相关**: [完整FAQ](tier_01_foundations/04_faq.md) | [术语表](/crates/c09_design_pattern/docs/tier_01_foundations/03_glossary.md#oncelock)
 
 ---
 
@@ -304,7 +306,7 @@ let request = RequestBuilder::new()
 - ✅ 零运行时开销
 - ✅ 防止非法状态
 
-**相关**: [](tier_01_foundations/04_faq.md完整FAQ) | [术语表](/crates/c09_design_pattern/docs/tier_01_foundations/03_glossary.md#typestate-模式)
+**相关**: [完整FAQ](tier_01_foundations/04_faq.md) | [术语表](/crates/c09_design_pattern/docs/tier_01_foundations/03_glossary.md#typestate-模式)
 
 ---
 
@@ -349,7 +351,7 @@ trait Observer {
 | :--- | :--- | :--- || Channel | 简单、解耦       | 需要克隆数据 |
 | GATs    | 零拷贝、类型安全 | 复杂度较高   |
 
-**相关**: [](tier_01_foundations/04_faq.md完整FAQ) | [术语表](/crates/c09_design_pattern/docs/tier_01_foundations/03_glossary.md#gats-generic-associated-types)
+**相关**: [完整FAQ](tier_01_foundations/04_faq.md) | [术语表](/crates/c09_design_pattern/docs/tier_01_foundations/03_glossary.md#gats-generic-associated-types)
 
 ---
 
@@ -379,7 +381,7 @@ trait Observer {
 | 上下文切换 | 操作系统调度     | 用户态调度   |
 | 适用场景   | 并行计算         | 异步（Async） I/O     |
 
-**相关**: [](tier_01_foundations/04_faq.md完整FAQ) | [术语表](/crates/c09_design_pattern/docs/tier_01_foundations/03_glossary.md#asyncawait)
+**相关**: [完整FAQ](tier_01_foundations/04_faq.md) | [术语表](/crates/c09_design_pattern/docs/tier_01_foundations/03_glossary.md#asyncawait)
 
 ---
 
@@ -421,7 +423,7 @@ trait Observer {
 - ❌ 为了模式而模式
 - ❌ 忽略简单解决方案
 
-**相关**: [](tier_01_foundations/04_faq.md完整FAQ) | [项目概览](/crates/c09_design_pattern/docs/tier_01_foundations/01_project_overview.md)
+**相关**: [完整FAQ](tier_01_foundations/04_faq.md) | [项目概览](/crates/c09_design_pattern/docs/tier_01_foundations/01_project_overview.md)
 
 ---
 
