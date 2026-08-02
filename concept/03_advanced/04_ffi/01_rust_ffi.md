@@ -12,7 +12,10 @@
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 系统分析 Rust 与 C/C++ 等外部代码交互的**Foreign Function Interface (FFI)** 机制，探讨 `extern` 块、ABI 兼容、`unsafe` 边界管理以及 `bindgen`/`cbindgen` 工具链。
-> **前置概念**: [Unsafe](../02_unsafe/01_unsafe.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md)
+> **前置概念**:
+> [Unsafe](../02_unsafe/01_unsafe.md) ·
+> [Type System](../../01_foundation/02_type_system/01_type_system.md) ·
+> [Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md)
 > **后置概念**: [Application Domains](../../06_ecosystem/06_data_and_distributed/01_application_domains.md)
 
 ---

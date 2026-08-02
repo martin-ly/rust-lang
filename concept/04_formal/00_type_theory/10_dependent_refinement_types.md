@@ -9,11 +9,25 @@
 > **内容分级**: [综述级]
 > **前置概念**: [Type Theory](01_type_theory.md) · [Const Generics](../../02_intermediate/01_generics/02_const_generics.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)
 > **后置概念**: [Formal Ecosystem Tower](../../06_ecosystem/08_formal_verification/01_formal_ecosystem_tower.md)
-> **主要来源**: [Rust Reference — Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html) · [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) · [Idris 2 Language Reference](https://idris2.readthedocs.io/en/latest/) · [Agda Language Reference](https://agda.readthedocs.io/en/latest/) · [Liquid Haskell Blog](https://ucsd-progsys.github.io/liquidhaskell-blog/) · [Vazou et al. 2014 — Refinement Types for Haskell](https://ucsd-progsys.github.io/liquidhaskell/) · [F* Tutorial](https://www.fstar-lang.org/tutorial/) · [Dafny Docs](https://dafny.org/) · [Pierce 2002, *Types and Programming Languages*](https://www.cis.upenn.edu/~bcpierce/tapl/)
+> **主要来源**:
+> [Rust Reference — Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html) ·
+> [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) ·
+> [Idris 2 Language Reference](https://idris2.readthedocs.io/en/latest/) ·
+> [Agda Language Reference](https://agda.readthedocs.io/en/latest/) ·
+> [Liquid Haskell Blog](https://ucsd-progsys.github.io/liquidhaskell-blog/) ·
+> [Vazou et al. 2014 — Refinement Types for Haskell](https://ucsd-progsys.github.io/liquidhaskell/) ·
+> [F* Tutorial](https://www.fstar-lang.org/tutorial/) ·
+> [Dafny Docs](https://dafny.org/) ·
+> [Pierce 2002, *Types and Programming Languages*](https://www.cis.upenn.edu/~bcpierce/tapl/)
 
 ---
 
-> **声明**: 本页使用形式化符号辅助直觉理解，所呈现的“定理/规则/推论”为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Idris 2](https://idris2.readthedocs.io/)、[Agda](https://agda.readthedocs.io/)、[Coq](https://coq.inria.fr/)、[Lean](https://leanprover.github.io/)、[Liquid Haskell](https://ucsd-progsys.github.io/liquidhaskell-blog/)、[F*](https://www.fstar-lang.org/) 或 [Dafny](https://dafny.org/)。
+> **声明**:
+> 本页使用形式化符号辅助直觉理解，所呈现的“定理/规则/推论”为**教学类比**，非经机器验证的严格数学证明。
+> 如需严格形式化验证，
+> 请参考 [Idris 2](https://idris2.readthedocs.io/)、[Agda](https://agda.readthedocs.io/)、[Coq](https://coq.inria.fr/)、
+> [Lean](https://leanprover.github.io/)、[Liquid Haskell](https://ucsd-progsys.github.io/liquidhaskell-blog/)、
+> [F*](https://www.fstar-lang.org/) 或 [Dafny](https://dafny.org/)。
 
 ---
 
@@ -268,7 +282,8 @@ Rust 的类型规则不包含这种替换。Rust 的函数返回类型可以是 
 
 例如，对 `div : Int -> { v : Int | v != 0 } -> Int`，调用 `div x 0` 会产生 VC `0 != 0`，SMT 立即反驳，类型检查失败。
 
-Liquid Haskell  further restricts refinements to a **decidable logic fragment**（量词受限的线性算术、未解释函数、集合/映射操作等），以保证 SMT 求解可在合理时间内终止。这与完整依赖类型形成对比：Coq/Agda 允许任意归纳证明，但需要更多的人工交互。
+Liquid Haskell  further restricts refinements to a **decidable logic fragment**（量词受限的线性算术、未解释函数、集合/映射操作等），以保证 SMT 求解可在合理时间内终止。
+这与完整依赖类型形成对比：Coq/Agda 允许任意归纳证明，但需要更多的人工交互。
 
 ### 2.3 Liquid Haskell 风格的细化类型
 
@@ -310,13 +325,15 @@ Curry-Howard 同构指出：**类型 = 命题，程序 = 证明**。依赖类型
 | 全称量词 `∀x:A. P(x)` | Π-type `Π(x:A). P(x)` | 依赖函数 |
 | 存在量词 `∃x:A. P(x)` | Σ-type `Σ(x:A). P(x)` | 带证据的配对 |
 
-在依赖类型语言中，写一个类型正确的程序就是写出一个证明。例如，写一个 `plusCommutes : (n m : Nat) -> n + m = m + n` 的函数，就是证明自然数加法的交换律。Rust 的类型系统只覆盖 Curry-Howard 同构的前三行（函数、积、和），以及非常受限的“编译期常量作为类型索引”，不能表达全称/存在量词对应的依赖类型。
+在依赖类型语言中，写一个类型正确的程序就是写出一个证明。例如，写一个 `plusCommutes : (n m : Nat) -> n + m = m + n` 的函数，就是证明自然数加法的交换律。
+Rust 的类型系统只覆盖 Curry-Howard 同构的前三行（函数、积、和），以及非常受限的“编译期常量作为类型索引”，不能表达全称/存在量词对应的依赖类型。
 
 ---
 
 ## 三、Rust 的依赖类型片段
 
-Rust 没有完整依赖类型，但提供了多个**受限片段**，足以表达部分“值进类型”的用例。本节说明这些片段的能力与边界，并链接到已有的权威页——const generics 的语法细节见 [Const Generics](../../02_intermediate/01_generics/02_const_generics.md)，泛型系统总览见 [Generics](../../02_intermediate/01_generics/01_generics.md)，类型论背景见 [Type Theory](01_type_theory.md)。
+Rust 没有完整依赖类型，但提供了多个**受限片段**，足以表达部分“值进类型”的用例。
+本节说明这些片段的能力与边界，并链接到已有的权威页——const generics 的语法细节见 [Const Generics](../../02_intermediate/01_generics/02_const_generics.md)，泛型系统总览见 [Generics](../../02_intermediate/01_generics/01_generics.md)，类型论背景见 [Type Theory](01_type_theory.md)。
 
 ### 3.1 const generics：值参数化的类型
 
@@ -336,7 +353,8 @@ fn const_generic_demo() {
 }
 ```
 
-`[T; N]` 的类型依赖 `N`，且 `Foo<T, 3>` 与 `Foo<T, 4>` 是不同的类型。这与依赖类型语言中的“值索引类型”有表面相似，但本质差异在于：**`N` 必须是编译期可求值的常量**，不能来自运行时计算。
+`[T; N]` 的类型依赖 `N`，且 `Foo<T, 3>` 与 `Foo<T, 4>` 是不同的类型。
+这与依赖类型语言中的“值索引类型”有表面相似，但本质差异在于：**`N` 必须是编译期可求值的常量**，不能来自运行时计算。
 
 维度泛型矩阵是 const generics 的工业级用例：
 
@@ -387,7 +405,8 @@ fn matrix_demo() {
 }
 ```
 
-这里 `Matrix<R, C> * Matrix<C, K> -> Matrix<R, K>` 用 const 参数在类型层面编码矩阵维度，使维度错配成为编译错误。这与依赖类型语言中“形状索引的张量”目标一致，但 Rust 只能在编译期常量上操作。
+这里 `Matrix<R, C> * Matrix<C, K> -> Matrix<R, K>` 用 const 参数在类型层面编码矩阵维度，使维度错配成为编译错误。
+这与依赖类型语言中“形状索引的张量”目标一致，但 Rust 只能在编译期常量上操作。
 
 ### 3.2 关联常量与 const 参数的互补
 

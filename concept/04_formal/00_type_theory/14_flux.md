@@ -9,11 +9,18 @@
 > **内容分级**: [综述级]
 > **前置概念**: [Dependent Types and Refinement Types](10_dependent_refinement_types.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Generics](../../02_intermediate/01_generics/01_generics.md)
 > **后置概念**: [Modern Verification Tools](../04_model_checking/04_modern_verification_tools.md) · [Formal Verification Tools](../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md)
-> **主要来源**: [Flux GitHub](https://github.com/flux-rs/flux) · [Flux Documentation](https://flux-rs.github.io/flux/) · [Lehmann et al., PLDI 2023 — Flux: Liquid Types for Rust](https://ranjitjhala.github.io/static/flux-pldi23.pdf) · [Lehmann et al., OOPSLA 2022 — Flux: Liquid Types for Rust](https://arxiv.org/pdf/2207.04034.pdf) · [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html)
+> **主要来源**:
+> [Flux GitHub](https://github.com/flux-rs/flux) ·
+> [Flux Documentation](https://flux-rs.github.io/flux/) ·
+> [Lehmann et al., PLDI 2023 — Flux: Liquid Types for Rust](https://ranjitjhala.github.io/static/flux-pldi23.pdf) ·
+> [Lehmann et al., OOPSLA 2022 — Flux: Liquid Types for Rust](https://arxiv.org/pdf/2207.04034.pdf) ·
+> [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html)
 
 ---
 
-> **声明**: 本页使用形式化符号辅助直觉理解，所呈现的“定理/规则/推论”为**教学类比**，非经机器验证的严格数学证明。Flux 是一个研究原型；其语法、支持的 Rust 子集和安装方式以 [Flux 官方仓库](https://github.com/flux-rs/flux) 与 [Flux 文档](https://flux-rs.github.io/flux/) 为准。
+> **声明**:
+> 本页使用形式化符号辅助直觉理解，所呈现的“定理/规则/推论”为**教学类比**，非经机器验证的严格数学证明。
+> Flux 是一个研究原型；其语法、支持的 Rust 子集和安装方式以 [Flux 官方仓库](https://github.com/flux-rs/flux) 与 [Flux 文档](https://flux-rs.github.io/flux/) 为准。
 
 ---
 

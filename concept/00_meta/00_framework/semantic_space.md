@@ -11,10 +11,25 @@
 > **方法论对齐**: Felleisen 1991 "On the Expressive Power of Programming Languages" · Reynolds 1983 relational parametricity · Wadler 1989 "Theorems for Free!" · Leffler 2017 "Rust's Type System is Turing-Complete" · RustBelt (Jung et al., POPL 2018)
 > **定理链**: T-166 Safe Rust 语义封闭性 → T-164 Rust 类型系统图灵完备性 → T-165 观察等价 → T-167 参数多态约束
 >
-> **来源**: [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) · [Felleisen 1991](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf) · [Wadler 1989](https://people.mpi-sws.org/~dreyer/tor/papers/wadler.pdf) · [Leffler 2017](https://sdleffler.github.io/RustTypeSystemTuringComplete/) · [RustBelt (Jung et al., POPL 2018)](https://doi.org/10.1145/3158154) · [Pierce 2002 TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)
+> **来源**:
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html) ·
+> [Felleisen 1991](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf) ·
+> [Wadler 1989](https://people.mpi-sws.org/~dreyer/tor/papers/wadler.pdf) ·
+> [Leffler 2017](https://sdleffler.github.io/RustTypeSystemTuringComplete/) ·
+> [RustBelt (Jung et al., POPL 2018)](https://doi.org/10.1145/3158154) ·
+> [Pierce 2002 TAPL](https://www.cis.upenn.edu/~bcpierce/tapl/)
 ---
 
-> **来源**: [Rust Reference — Introduction](https://doc.rust-lang.org/reference/introduction.html) · [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe.html) · [Rust RFCs Index](https://rust-lang.github.io/rfcs/index.html) · [RustBelt (Jung et al., POPL 2018)](https://doi.org/10.1145/3158154) · [Felleisen 1991](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf) · [Wadler 1989](https://people.mpi-sws.org/~dreyer/tor/papers/wadler.pdf) · [Leffler 2017](https://sdleffler.github.io/RustTypeSystemTuringComplete/)
+> **来源**:
+> [Rust Reference — Introduction](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe.html) ·
+> [Rust RFCs Index](https://rust-lang.github.io/rfcs/index.html) ·
+> [RustBelt (Jung et al., POPL 2018)](https://doi.org/10.1145/3158154) ·
+> [Felleisen 1991](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf) ·
+> [Wadler 1989](https://people.mpi-sws.org/~dreyer/tor/papers/wadler.pdf) ·
+> [Leffler 2017](https://sdleffler.github.io/RustTypeSystemTuringComplete/)
 
 ## 📑 目录
 
@@ -160,7 +175,11 @@ Rust 让你思考所有权和生命周期。
 
 **核心问题**: 为什么 Rust 选择了所有权、借用、Trait、生命周期，而不是继承、GC、异常？
 
-> **来源**: [Girard 1987, *Linear Logic*](https://www.cs.cmu.edu/~fp/courses/15816-s12/misc/girard87linear.pdf) · [O'Hearn 2007, *Separation Logic*](https://www.cs.ucl.ac.uk/staff/p.ohearn/papers/separationlogic.pdf) · [Tofte & Talpin 1994, *Region-Based Memory Management*](https://doi.org/10.1145/177675.177847) · [Wadler & Blott 1989, *How to Make ad-hoc Polymorphism Less ad hoc*](https://doi.org/10.1145/75277.75283)
+> **来源**:
+> [Girard 1987, *Linear Logic*](https://www.cs.cmu.edu/~fp/courses/15816-s12/misc/girard87linear.pdf) ·
+> [O'Hearn 2007, *Separation Logic*](https://www.cs.ucl.ac.uk/staff/p.ohearn/papers/separationlogic.pdf) ·
+> [Tofte & Talpin 1994, *Region-Based Memory Management*](https://doi.org/10.1145/177675.177847) ·
+> [Wadler & Blott 1989, *How to Make ad-hoc Polymorphism Less ad hoc*](https://doi.org/10.1145/75277.75283)
 > **过渡解释**: 这些算子不是随机选择的，而是围绕一个核心目标——**在零运行时成本的前提下保证内存安全**——进行的形式化设计。
 > 所有权来自线性逻辑（Girard 1987），借用来自分离逻辑（O'Hearn 2007），Trait 来自 Haskell 的类型类（Wadler & Blott 1989），生命周期来自区域类型（Tofte & Talpin 1994）。
 > Rust 的独特之处在于：它将这四个理论工具整合为一个工业可用的语言。
@@ -200,7 +219,14 @@ const generics 扩展了编译期计算能力，GATs 扩展了关联类型的表
 
 ---
 
-> **来源**: [Rust Reference — Introduction](https://doc.rust-lang.org/reference/introduction.html) · [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe.html) · [Rust RFCs Index](https://rust-lang.github.io/rfcs/index.html) · [RustBelt (Jung et al., POPL 2018)](https://doi.org/10.1145/3158154) · [Felleisen 1991](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf) · [Wadler 1989](https://people.mpi-sws.org/~dreyer/tor/papers/wadler.pdf) · [Leffler 2017](https://sdleffler.github.io/RustTypeSystemTuringComplete/)
+> **来源**:
+> [Rust Reference — Introduction](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe.html) ·
+> [Rust RFCs Index](https://rust-lang.github.io/rfcs/index.html) ·
+> [RustBelt (Jung et al., POPL 2018)](https://doi.org/10.1145/3158154) ·
+> [Felleisen 1991](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf) ·
+> [Wadler 1989](https://people.mpi-sws.org/~dreyer/tor/papers/wadler.pdf) ·
+> [Leffler 2017](https://sdleffler.github.io/RustTypeSystemTuringComplete/)
 >
 ## 一、表征空间的定义（Definition of Representational Space）
 
@@ -294,7 +320,14 @@ fn illegal_combinations() {
 
 ---
 
-> **来源**: [Rust Reference — Introduction](https://doc.rust-lang.org/reference/introduction.html) · [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe.html) · [Rust RFCs Index](https://rust-lang.github.io/rfcs/index.html) · [RustBelt (Jung et al., POPL 2018)](https://doi.org/10.1145/3158154) · [Felleisen 1991](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf) · [Wadler 1989](https://people.mpi-sws.org/~dreyer/tor/papers/wadler.pdf) · [Leffler 2017](https://sdleffler.github.io/RustTypeSystemTuringComplete/)
+> **来源**:
+> [Rust Reference — Introduction](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe.html) ·
+> [Rust RFCs Index](https://rust-lang.github.io/rfcs/index.html) ·
+> [RustBelt (Jung et al., POPL 2018)](https://doi.org/10.1145/3158154) ·
+> [Felleisen 1991](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf) ·
+> [Wadler 1989](https://people.mpi-sws.org/~dreyer/tor/papers/wadler.pdf) ·
+> [Leffler 2017](https://sdleffler.github.io/RustTypeSystemTuringComplete/)
 >
 ## 二、语义封闭性（Semantic Closure）
 
@@ -398,7 +431,14 @@ Unsafe Rust 不是"关闭所有检查"，而是**打开特定的逃逸门**：
 
 ---
 
-> **来源**: [Rust Reference — Introduction](https://doc.rust-lang.org/reference/introduction.html) · [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe.html) · [Rust RFCs Index](https://rust-lang.github.io/rfcs/index.html) · [RustBelt (Jung et al., POPL 2018)](https://doi.org/10.1145/3158154) · [Felleisen 1991](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf) · [Wadler 1989](https://people.mpi-sws.org/~dreyer/tor/papers/wadler.pdf) · [Leffler 2017](https://sdleffler.github.io/RustTypeSystemTuringComplete/)
+> **来源**:
+> [Rust Reference — Introduction](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe.html) ·
+> [Rust RFCs Index](https://rust-lang.github.io/rfcs/index.html) ·
+> [RustBelt (Jung et al., POPL 2018)](https://doi.org/10.1145/3158154) ·
+> [Felleisen 1991](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf) ·
+> [Wadler 1989](https://people.mpi-sws.org/~dreyer/tor/papers/wadler.pdf) ·
+> [Leffler 2017](https://sdleffler.github.io/RustTypeSystemTuringComplete/)
 >
 ## 三、能表达 vs 不能表达的边界（Expressibility Boundary）
 
@@ -477,7 +517,11 @@ Unsafe Rust 不是"关闭所有检查"，而是**打开特定的逃逸门**：
 | **协程（绿色线程）** | 与 OS 线程模型冲突 | `async`（协作式，非抢占）| RFC 230 | ⚠️ 可能新形式 |
 | **效果系统（Effects）** | 复杂度、与现有模型冲突 | 无直接替代 | — | ✅ 研究中 |
 
-> **来源**: [RFC 230 — Remove Runtime](https://rust-lang.github.io/rfcs/0230-remove-runtime.html) · [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Rust Reference — The ? Operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator) · [Rust Reference — Interior Mutability](https://doc.rust-lang.org/reference/interior-mutability.html)
+> **来源**:
+> [RFC 230 — Remove Runtime](https://rust-lang.github.io/rfcs/0230-remove-runtime.html) ·
+> [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) ·
+> [Rust Reference — The ? Operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator) ·
+> [Rust Reference — Interior Mutability](https://doc.rust-lang.org/reference/interior-mutability.html)
 > “绿色线程”的移除由 RFC 230 正式记录；异常、GC、继承、隐式转换的排除记录于 Rust Reference 与设计文档，并由 Felleisen 表达力框架解释为“通过全局设计选择排除某些程序模式，以换取可判定的静态保证”。
 
 ### 3.5 未来扩展：表征空间的演化
@@ -616,13 +660,23 @@ Rust 目前用三种不兼容的语法表达三种效果：
 
 ---
 
-> **来源**: [Rust Reference — Introduction](https://doc.rust-lang.org/reference/introduction.html) · [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe.html) · [Rust RFCs Index](https://rust-lang.github.io/rfcs/index.html) · [RustBelt (Jung et al., POPL 2018)](https://doi.org/10.1145/3158154) · [Felleisen 1991](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf) · [Wadler 1989](https://people.mpi-sws.org/~dreyer/tor/papers/wadler.pdf) · [Leffler 2017](https://sdleffler.github.io/RustTypeSystemTuringComplete/)
+> **来源**:
+> [Rust Reference — Introduction](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe.html) ·
+> [Rust RFCs Index](https://rust-lang.github.io/rfcs/index.html) ·
+> [RustBelt (Jung et al., POPL 2018)](https://doi.org/10.1145/3158154) ·
+> [Felleisen 1991](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf) ·
+> [Wadler 1989](https://people.mpi-sws.org/~dreyer/tor/papers/wadler.pdf) ·
+> [Leffler 2017](https://sdleffler.github.io/RustTypeSystemTuringComplete/)
 
 ## 四、等价表达的语义保持（Equivalent Expressions & Semantic Preservation）
 
 等价表达的语义保持研究"同一意图的多种写法是否语义相同"。谱系与四组判定：
 
-> **形式化深入**: 操作/指称/公理/类型四种语义如何共同刻画「等价」，见 [`04_formal/11_computational_models/01_computational_semantics_framework.md`](../../04_formal/11_computational_models/01_computational_semantics_framework.md)；Rust 算法实现的观察等价与精化，见 [`04_formal/08_algorithm_semantics/05_algorithm_equivalence.md`](../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md)；
+> **形式化深入**:
+> 操作/指称/公理/类型四种语义如何共同刻画「等价」，
+> 见 [`04_formal/11_computational_models/01_computational_semantics_framework.md`](../../04_formal/11_computational_models/01_computational_semantics_framework.md)；
+> Rust 算法实现的观察等价与精化，见 [`04_formal/08_algorithm_semantics/05_algorithm_equivalence.md`](../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md)；
 > Rust 泛型的参数性与免费定理，见 [`04_formal/00_type_theory/15_parametricity_and_theorems_for_free.md`](../../04_formal/00_type_theory/15_parametricity_and_theorems_for_free.md)（[**T-165**](theorem_registry.md) · [**T-167**](theorem_registry.md)）。
 
 - **继承 → Trait + 组合**：`class Dog extends Animal` 与 `impl Animal for Dog` + 字段组合在意图上等价（"是一种" + 复用），但语义不同：继承隐式携带虚表与子类型协变，trait 组合是静态分派 + 无子类型。判定：需要运行时多态 → `dyn Trait`；只需代码复用 → 组合 + 泛型，零成本。
@@ -939,12 +993,20 @@ Kani（基于 CBMC 的 Rust 模型检测器）通过符号执行验证程序是�
    └─ 最快但不可信
 ```
 
-> **关键洞察**: 等价表达的语义保持存在**验证层次**——Miri 保证"不等价的表达不会引入 UB"，Kani 保证"等价表达在规范层面行为一致"，而 RustBelt 对 Rust 形式化模型及选定的 std 原语建立了可靠性证明（soundness proof），并不覆盖整个工业编译器或所有库实现（Jung et al., POPL 2018 §scope）。日常工程中，Miri 用于 unsafe 边界验证，Kani 用于关键路径的等价性确认。
+> **关键洞察**:
+> 等价表达的语义保持存在**验证层次**——Miri 保证"不等价的表达不会引入 UB"，Kani 保证"等价表达在规范层面行为一致"，而 RustBelt 对 Rust 形式化模型及选定的 std 原语建立了可靠性证明（soundness proof），并不覆盖整个工业编译器或所有库实现（Jung et al., POPL 2018 §scope）。日常工程中，Miri 用于 unsafe 边界验证，Kani 用于关键路径的等价性确认。
 > **深入阅读**: Miri 的别名模型详见 [`03_unsafe.md`](../../03_advanced/02_unsafe/01_unsafe.md) §5.5-5.6；Kani 的应用场景详见 [`04_rustbelt.md`](../../04_formal/02_separation_logic/01_rustbelt.md) §7.3。
 
 ---
 
-> **来源**: [Rust Reference — Introduction](https://doc.rust-lang.org/reference/introduction.html) · [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe.html) · [Rust RFCs Index](https://rust-lang.github.io/rfcs/index.html) · [RustBelt (Jung et al., POPL 2018)](https://doi.org/10.1145/3158154) · [Felleisen 1991](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf) · [Wadler 1989](https://people.mpi-sws.org/~dreyer/tor/papers/wadler.pdf) · [Leffler 2017](https://sdleffler.github.io/RustTypeSystemTuringComplete/)
+> **来源**:
+> [Rust Reference — Introduction](https://doc.rust-lang.org/reference/introduction.html) ·
+> [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe.html) ·
+> [Rust RFCs Index](https://rust-lang.github.io/rfcs/index.html) ·
+> [RustBelt (Jung et al., POPL 2018)](https://doi.org/10.1145/3158154) ·
+> [Felleisen 1991](https://www.cs.tufts.edu/comp/150FP/archive/matthias-felleisen/expressive-as-published.pdf) ·
+> [Wadler 1989](https://people.mpi-sws.org/~dreyer/tor/papers/wadler.pdf) ·
+> [Leffler 2017](https://sdleffler.github.io/RustTypeSystemTuringComplete/)
 >
 ### 4.7 Rust 1.97.1：补丁语义与编译器信任边界
 

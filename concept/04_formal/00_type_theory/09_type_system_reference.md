@@ -14,7 +14,13 @@
 > **后置概念**: [Subtyping and Variance](02_subtype_variance.md) · [Behavior Considered Undefined](../01_ownership_logic/06_behavior_considered_undefined.md) · [Application Binary Interface](../05_rustc_internals/05_application_binary_interface.md)
 > **定理链**: Type → Kind → Size/Align → Lifetime → Trait Bounds
 >
-> **来源**: [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Cardelli & Wegner — On Understanding Types](https://doi.org/10.1145/6041.6042) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html) ·
+> [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [Cardelli & Wegner — On Understanding Types](https://doi.org/10.1145/6041.6042) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ---
 
@@ -401,7 +407,14 @@ Rust 类型系统的形式化基于：
 >
 ---
 
-> **权威来源**: [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html) · [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Cardelli & Wegner 1985 — On Understanding Types, Data Abstraction, and Polymorphism](https://dl.acm.org/doi/10.1145/6041.6042) · [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+> **权威来源**:
+> [Rust Reference — Type System](https://doc.rust-lang.org/reference/types.html) ·
+> [Rust Reference — Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html) ·
+> [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [Cardelli & Wegner 1985 — On Understanding Types, Data Abstraction, and Polymorphism](https://dl.acm.org/doi/10.1145/6041.6042) ·
+> [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
+> [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.0

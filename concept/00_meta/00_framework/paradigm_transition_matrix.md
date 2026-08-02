@@ -261,7 +261,11 @@ quadrantChart
 
 ---
 
-> **相关文件**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md) · [范式矩阵](../../05_comparative/00_paradigms/01_paradigm_matrix.md) · [学习指南](../04_navigation/07_learning_guide.md)
+> **相关文件**:
+> [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) ·
+> [Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md) ·
+> [范式矩阵](../../05_comparative/00_paradigms/01_paradigm_matrix.md) ·
+> [学习指南](../04_navigation/07_learning_guide.md)
 
 ## 认知路径
 

@@ -208,7 +208,9 @@ impl<T: Ord + Clone> DataStructure<T> for Node<T> {
 
 ### 3.5 递归细化：递归 ↔ Composite 后序遍历 ↔ 工作流 Sequence
 
-递归（Recursion）是算法层最自然的自相似分解手段；Composite 模式通过递归数据结构（Tree = Leaf | Node(Tree, Tree)）把这种自相似性显式化；工作流中的 **Sequence** 模式则把递归展开后的计算步骤线性化——三者共享同一语义：**"对相同操作的重复应用，直到达到不可再分的基例"**。
+递归（Recursion）是算法层最自然的自相似分解手段；
+Composite 模式通过递归数据结构（Tree = Leaf | Node(Tree, Tree)）把这种自相似性显式化；
+工作流中的 **Sequence** 模式则把递归展开后的计算步骤线性化——三者共享同一语义：**"对相同操作的重复应用，直到达到不可再分的基例"**。
 
 #### 概念对应
 

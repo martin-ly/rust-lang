@@ -399,7 +399,8 @@ Rust 的效应系统边界不是技术债务，而是**有意识的工程哲学�
 
 > "Rust experimented with all of these concepts at some point in its history, it wasn't out of ignorance that they were excluded."citeweb_search:1#13
 
-Rust 在**表达能力**与**性能可控性**之间选择了后者，通过将效应限制为编译期可消除的语法结构，维持了系统编程语言的核心承诺。这一边界使 Rust 区别于 Koka、Eff、Haskell 等以效应为首要抽象的语言，也区别于 Scala 3 等尝试在托管运行时中融合能力系统的语言。
+Rust 在**表达能力**与**性能可控性**之间选择了后者，通过将效应限制为编译期可消除的语法结构，维持了系统编程语言的核心承诺。
+这一边界使 Rust 区别于 Koka、Eff、Haskell 等以效应为首要抽象的语言，也区别于 Scala 3 等尝试在托管运行时中融合能力系统的语言。
 
 ---
 

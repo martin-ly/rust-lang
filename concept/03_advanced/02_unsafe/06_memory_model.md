@@ -310,7 +310,11 @@ cargo miri test（需每日构建版工具链）
 
 ---
 
-> **权威来源**: [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html) · [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) · [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
+> **权威来源**:
+> [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html) ·
+> [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) ·
+> [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
 
 ## 过渡段
 
@@ -391,9 +395,19 @@ fn align_check() {
 
 ### 3. 与原子指令生成的关系（查询 → codegen 分支）
 
-原子指令通常要求操作数**自然对齐**：例如多字节原子的 load/store/CAS 需要地址按操作数宽度对齐；16 字节原子（如 `AtomicU128` 在支持的目标上）可能要求 16 字节对齐；32 位目标上的 64 位原子是否可由单条指令完成，取决于该目标的对齐与指令集。当对齐**不被保证**时，后端要么插入对齐检查/屏障，要么退回到 `compiler_rt` 的 `__atomic_*` libcall，要么在编译期拒绝。`cfg(target_has_atomic_primitive_alignment)` 让可移植代码**在编译期**区分这些情形（原理见 [`11_atomics_and_memory_ordering.md`](../00_concurrency/06_atomics_and_memory_ordering.md) 已引用（Reference）的 LLVM Atomic Instructions；该页 §Rust 1.97.0 交叉语义 给出 codegen 侧的对称说明）。
+原子指令通常要求操作数**自然对齐**：
+例如多字节原子的 load/store/CAS 需要地址按操作数宽度对齐；
+16 字节原子（如 `AtomicU128` 在支持的目标上）可能要求 16 字节对齐；
+32 位目标上的 64 位原子是否可由单条指令完成，取决于该目标的对齐与指令集。
+当对齐**不被保证**时，后端要么插入对齐检查/屏障，要么退回到 `compiler_rt` 的 `__atomic_*` libcall，要么在编译期拒绝。
+`cfg(target_has_atomic_primitive_alignment)` 让可移植代码**在编译期**区分这些情形（原理见 [`11_atomics_and_memory_ordering.md`](../00_concurrency/06_atomics_and_memory_ordering.md) 已引用（Reference）的 LLVM Atomic Instructions；
+该页 §Rust 1.97.0 交叉语义 给出 codegen 侧的对称说明）。
 
-> **取值域**：根据 [Rust Reference — Conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)，`cfg(target_has_atomic_primitive_alignment)` 可取值为 `"8"`、`"16"`、`"32"`、`"64"`、`"128"`、`"ptr"`，分别对应原子宽度（位）或指针宽度。例如 `"64"` 表示：在该目标上，64 位原子类型（如 `AtomicU64`）的对齐等于对应原始整数类型（`u64`）的对齐。若该 cfg 不成立，则后端可能退回到 libcall 或要求显式对齐保证。
+> **取值域**：
+> 根据 [Rust Reference — Conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html)，
+> `cfg(target_has_atomic_primitive_alignment)` 可取值为 `"8"`、`"16"`、`"32"`、`"64"`、`"128"`、`"ptr"`，分别对应原子宽度（位）或指针宽度。
+> 例如 `"64"` 表示：在该目标上，64 位原子类型（如 `AtomicU64`）的对齐等于对应原始整数类型（`u64`）的对齐。
+> 若该 cfg 不成立，则后端可能退回到 libcall 或要求显式对齐保证。
 
 ### 4. 跨平台边界与旧名废弃说明
 
@@ -522,7 +536,10 @@ Rust 内存模型中的"抽象字节"可以区分哪些状态？
 <details>
 <summary>✅ 答案</summary>
 
-**B 正确**。按本页「三、Provenance」：provenance 说明指针指向哪个分配，将带 provenance 的指针转译为整数再转回**可能丢失** provenance（A 错）。「六、别名模型」：Rust 正从 Stacked Borrows（基于栈的借用（Borrowing）权限追踪，严格但限制较多）向 Tree Borrows（基于树的权限模型，对更多合法 unsafe 模式更宽容）演进。C 错：本页明确警告"Rust 的内存模型目前尚不完整，部分细节尚未最终确定"。
+**B 正确**。
+按本页「三、Provenance」：provenance 说明指针指向哪个分配，将带 provenance 的指针转译为整数再转回**可能丢失** provenance（A 错）。
+「六、别名模型」：Rust 正从 Stacked Borrows（基于栈的借用（Borrowing）权限追踪，严格但限制较多）向 Tree Borrows（基于树的权限模型，对更多合法 unsafe 模式更宽容）演进。
+C 错：本页明确警告"Rust 的内存模型目前尚不完整，部分细节尚未最终确定"。
 
 </details>
 

@@ -155,7 +155,9 @@ Rust API Guidelines（rust-lang.github.io/api-guidelines）是 Rust 生态的**�
 
 > **核心原则**：库的公共 API 是**对外承诺**。每个公开项的名字、trait 实现、panic 条件、错误类型都是承诺的一部分，变更承诺即可能破坏下游代码。
 >
-> **编号说明**：本页使用的 `C-COMMON`、`C-CONV`、`C-SINGULAR` 等编号是为便于结构化教学而重新组织的**教学编号**，并非 [Rust API Guidelines 官方 Checklist](https://rust-lang.github.io/api-guidelines/checklist.html) 中的原始编号（官方编号如 `C-CASE`、`C-CONV`、`C-GETTER`、`C-COMMON-TRAITS` 等）。如需核对官方条目，请直接参考 [Rust API Guidelines — Checklist](https://rust-lang.github.io/api-guidelines/checklist.html) 与 [Naming](https://rust-lang.github.io/api-guidelines/naming.html)。
+> **编号说明**：
+> 本页使用的 `C-COMMON`、`C-CONV`、`C-SINGULAR` 等编号是为便于结构化教学而重新组织的**教学编号**，并非 [Rust API Guidelines 官方 Checklist](https://rust-lang.github.io/api-guidelines/checklist.html) 中的原始编号（官方编号如 `C-CASE`、`C-CONV`、`C-GETTER`、`C-COMMON-TRAITS` 等）。
+> 如需核对官方条目，请直接参考 [Rust API Guidelines — Checklist](https://rust-lang.github.io/api-guidelines/checklist.html) 与 [Naming](https://rust-lang.github.io/api-guidelines/naming.html)。
 
 ---
 
