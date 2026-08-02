@@ -15,7 +15,16 @@
 > **前置依赖**: [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Miri](../04_model_checking/08_miri.md) · [所有权（Ownership）形式化](../01_ownership_logic/02_ownership_formal.md) · Tree Borrows
 > **后置延伸**: [Safety Tags](../../07_future/02_preview_features/03_safety_tags_preview.md) · [AutoVerus](../04_model_checking/07_autoverus.md)
 >
-> **来源**: [BorrowSanitizer 项目主页](https://borrowsanitizer.com/) · [Rust Project Goal #624](https://github.com/rust-lang/rust-project-goals/issues/624) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [LLVM — Alias Analysis](https://llvm.org/docs/AliasAnalysis.html) · [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [BorrowSanitizer 项目主页](https://borrowsanitizer.com/) ·
+> [Rust Project Goal #624](https://github.com/rust-lang/rust-project-goals/issues/624) ·
+> [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [LLVM — Alias Analysis](https://llvm.org/docs/AliasAnalysis.html) ·
+> [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **前置概念**: N/A
 > **后置概念**: N/A
 ---
@@ -161,7 +170,14 @@ Rust 与 C/C++ 的多语言互操作场景，可在原生执行速度下检测�
 
 ---
 
-> **权威来源**: [Rust Project Goal #624](https://github.com/rust-lang/rust-project-goals/issues/624) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Iris Project](https://iris-project.org/)
+> **权威来源**:
+> [Rust Project Goal #624](https://github.com/rust-lang/rust-project-goals/issues/624) ·
+> [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Iris Project](https://iris-project.org/)
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.0

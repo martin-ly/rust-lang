@@ -11,10 +11,18 @@
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 探讨 Rust 的**指称语义**（Denotational Semantics）基础——从 Scott-Strachey 方法到完备偏序（CPO）、不动点理论，分析 Rust 类型如何通过数学对象赋予意义。
-> **前置概念**: [Type Theory](../00_type_theory/01_type_theory.md) · [Operational Semantics](03_operational_semantics.md) · [Linear Logic](../01_ownership_logic/01_linear_logic.md)
-> **后置概念**: [Category Theory](../00_type_theory/04_category_theory.md) · [RustBelt](../02_separation_logic/01_rustbelt.md)
+> **前置概念**:
+> [Type Theory](../00_type_theory/01_type_theory.md) ·
+> [Operational Semantics](03_operational_semantics.md) ·
+> [Linear Logic](../01_ownership_logic/01_linear_logic.md)
+> **后置概念**:
+> [Category Theory](../00_type_theory/04_category_theory.md) ·
+> [RustBelt](../02_separation_logic/01_rustbelt.md)
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [RustBelt](https://plv.mpi-sws.org/rustbelt/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**:
