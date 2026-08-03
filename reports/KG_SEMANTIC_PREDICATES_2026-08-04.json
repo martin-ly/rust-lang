@@ -18,60 +18,60 @@
     "framework"
   ],
   "min_confidence": 0.75,
-  "processed_entities": 612,
-  "processed_relations": 20582,
-  "processed_generic_remaining": 905,
-  "changed_relations": 9448,
+  "processed_entities": 616,
+  "processed_relations": 20721,
+  "processed_generic_remaining": 922,
+  "changed_relations": 9504,
   "below_threshold_skipped": 0,
   "batch_statistics": [
     {
       "batch": "l1",
       "entities": 54,
-      "relations": 1574,
-      "generic_remaining": 67,
-      "generic_ratio": 0.0426
+      "relations": 1575,
+      "generic_remaining": 68,
+      "generic_ratio": 0.0432
     },
     {
       "batch": "l2",
       "entities": 44,
-      "relations": 1302,
-      "generic_remaining": 46,
-      "generic_ratio": 0.0353
+      "relations": 1304,
+      "generic_remaining": 47,
+      "generic_ratio": 0.036
     },
     {
       "batch": "async",
       "entities": 16,
-      "relations": 567,
-      "generic_remaining": 18,
-      "generic_ratio": 0.0317
+      "relations": 571,
+      "generic_remaining": 19,
+      "generic_ratio": 0.0333
     },
     {
       "batch": "unsafe",
       "entities": 12,
-      "relations": 418,
-      "generic_remaining": 12,
-      "generic_ratio": 0.0287
+      "relations": 434,
+      "generic_remaining": 24,
+      "generic_ratio": 0.0553
     },
     {
       "batch": "formal",
       "entities": 104,
-      "relations": 1942,
-      "generic_remaining": 79,
-      "generic_ratio": 0.0407
+      "relations": 1946,
+      "generic_remaining": 81,
+      "generic_ratio": 0.0416
     },
     {
       "batch": "l5",
       "entities": 27,
-      "relations": 715,
+      "relations": 717,
       "generic_remaining": 22,
-      "generic_ratio": 0.0308
+      "generic_ratio": 0.0307
     },
     {
       "batch": "l6_concept",
-      "entities": 154,
-      "relations": 2660,
+      "entities": 158,
+      "relations": 2713,
       "generic_remaining": 154,
-      "generic_ratio": 0.0579
+      "generic_ratio": 0.0568
     },
     {
       "batch": "l7",
@@ -90,16 +90,16 @@
     {
       "batch": "meta_navigation",
       "entities": 30,
-      "relations": 3568,
+      "relations": 3572,
       "generic_remaining": 63,
-      "generic_ratio": 0.0177
+      "generic_ratio": 0.0176
     },
     {
       "batch": "ecosystem",
-      "entities": 182,
-      "relations": 2997,
+      "entities": 186,
+      "relations": 3050,
       "generic_remaining": 156,
-      "generic_ratio": 0.0521
+      "generic_ratio": 0.0511
     },
     {
       "batch": "future",
@@ -124,13 +124,13 @@
     }
   ],
   "before_type_distribution": {
-    "ex:RelationAnnotation": 10192
+    "ex:RelationAnnotation": 10266
   },
   "after_type_distribution": {
-    "ex:relatedTo": 6994,
-    "ex:entails": 1155,
-    "ex:dependsOn": 1078,
-    "ex:RelationAnnotation": 744,
+    "ex:relatedTo": 7028,
+    "ex:entails": 1166,
+    "ex:dependsOn": 1089,
+    "ex:RelationAnnotation": 762,
     "ex:equivalentTo": 98,
     "ex:refines": 63,
     "ex:enables": 43,
@@ -139,14 +139,14 @@
     "ex:counterExample": 2
   },
   "before_predicate_distribution": {
-    "ex:relatedTo": 8075,
-    "ex:dependsOn": 1111,
-    "ex:entails": 1006
+    "ex:relatedTo": 8127,
+    "ex:dependsOn": 1122,
+    "ex:entails": 1017
   },
   "after_predicate_distribution": {
-    "ex:relatedTo": 7659,
-    "ex:entails": 1187,
-    "ex:dependsOn": 1125,
+    "ex:relatedTo": 7711,
+    "ex:entails": 1198,
+    "ex:dependsOn": 1136,
     "ex:equivalentTo": 98,
     "ex:refines": 63,
     "ex:enables": 43,

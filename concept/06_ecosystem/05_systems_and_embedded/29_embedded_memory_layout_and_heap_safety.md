@@ -82,6 +82,8 @@ mindmap
     - [8.3 边界测试：CCM 上运行代码或 DMA](#83-边界测试ccm-上运行代码或-dma)
   - [九、相关概念](#九相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [国际化权威来源补充（International Authority Sources）](#国际化权威来源补充international-authority-sources)
+  - [国际化权威来源补充（International Authority Sources）](#国际化权威来源补充international-authority-sources-1)
 
 ---
 
@@ -384,6 +386,7 @@ _heap_end = STACK_TOP;
 > **权威来源**: [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [Ferrous Systems — Booting a Cortex-M Microcontroller](https://rust-training.ferrous-systems.com/latest/book/booting-cortex-m) · [flip-link](https://github.com/knurling-rs/flip-link) · [ARM Compiler scatter files](https://developer.arm.com/documentation/100748/latest)
 >
 > **P0 官方来源**:
+>
 > - [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html)
 > - [Rust Reference — `#[link_section]`](https://doc.rust-lang.org/reference/abi.html#the-link_section-attribute)
 > - [Rust core — `GlobalAlloc`](https://doc.rust-lang.org/core/alloc/trait.GlobalAlloc.html)
@@ -415,8 +418,8 @@ mindmap
 
 ## 国际化权威来源补充（International Authority Sources）
 
-- https://arxiv.org/abs/2311.05063
+- <https://arxiv.org/abs/2311.05063>
 
 ## 国际化权威来源补充（International Authority Sources）
 
-- https://rust-unofficial.github.io/patterns/
+- <https://rust-unofficial.github.io/patterns/>

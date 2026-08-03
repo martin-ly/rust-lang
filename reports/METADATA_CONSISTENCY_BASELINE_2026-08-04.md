@@ -1,17 +1,17 @@
 # 元数据一致性基线（语义质量门 P0-1）
 
-**日期**: 2026-08-04  **扫描**: 733 concept 活跃文件（排除 archive）  **模式**: strict
+**日期**: 2026-08-04  **扫描**: 736 concept 活跃文件（排除 archive）  **模式**: strict
 
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
 | D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥 | 0 | 0.0% | >0 | pass |
-| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 12 (基=434) | 1.6% | >=5% | pass |
+| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 12 (基=437) | 1.6% | >=5% | pass |
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
-| D5 稳定层正文残留 nightly/preview/unstable | 1 | 0.1% | >0 | FAIL |
+| D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
 | D6 Summary 低信息量模板套话 | 0 | 0.0% | >=3% | pass |
 
-**受影响文件总数**: 13 / 733
+**受影响文件总数**: 12 / 736
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -118,6 +118,7 @@
 - `concept/05_comparative/04_verification_and_contracts/01_contracts_comparison.md` — 跨语言契约对比：nightly/preview 为 Rust Contracts / C++26 / 验证工具状态客观陈述
 - `concept/03_advanced/02_unsafe/11_in_place_pinned_initialization.md` — 原地初始化权威页：nightly/preview 为 `pin-init` / in-place initialization 提案与工具链状态客观陈述
 - `concept/04_formal/15_language_specification/02_ferrocene_language_specification.md` — FLS 权威页：nightly/preview 为 FLS 认证子集未覆盖语言特性的客观边界陈述
+- `concept/06_ecosystem/05_systems_and_embedded/36_defmt_probe_rs_architecture.md` — defmt/probe-rs 架构页：示例 TOML 中的 `[unstable]` 为 cargo unstable 配置表片段，属工具链事实陈述
 
 另有两类规则级排除：WASI Preview 1/2/3（WASM 规范版本专名）与 URL 路径中的 nightly（官方文档固定托管路径）。
 
@@ -147,16 +148,15 @@
 ### D4 文首块 Rust 版本号自矛盾（0）
 
 
-### D5 稳定层正文残留 nightly/preview/unstable（1）
+### D5 稳定层正文残留 nightly/preview/unstable（0）
 
-- `concept/06_ecosystem/05_systems_and_embedded/36_defmt_probe_rs_architecture.md` — 稳定层 nightly/preview 关键词 1 处
 
 ### D6 Summary 低信息量模板套话（0）
 
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 
-- D5 稳定层nightly残留 1 (>0)
+- 无（全部通过）
 
 ## 机器可读
 

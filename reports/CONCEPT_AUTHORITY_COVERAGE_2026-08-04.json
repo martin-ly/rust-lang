@@ -1,42 +1,42 @@
 {
   "date": "2026-08-04",
-  "scanned": 696,
+  "scanned": 699,
   "coverage": {
     "P0": [
-      687,
-      98.7
+      691,
+      98.9
     ],
     "P1": [
       644,
-      92.5
+      92.1
     ],
     "P2": [
-      613,
-      88.1
+      615,
+      88.0
     ],
     "any": [
-      695,
-      99.9
+      699,
+      100.0
     ],
-    "none": 1
+    "none": 0
   },
   "content_scope": {
-    "scanned": 601,
+    "scanned": 604,
     "P0": [
-      597,
-      99.3
+      601,
+      99.5
     ],
     "P1": [
       587,
-      97.7
+      97.2
     ],
     "P2": [
-      592,
-      98.5
+      594,
+      98.3
     ],
     "any": [
-      600,
-      99.8
+      604,
+      100.0
     ],
     "gaps_p1": [
       "concept/03_advanced/02_unsafe/11_in_place_pinned_initialization.md",
@@ -52,7 +52,10 @@
       "concept/06_ecosystem/05_systems_and_embedded/33_sei_cert_c_to_rust_mapping.md",
       "concept/06_ecosystem/05_systems_and_embedded/34_embassy_framework_deep_dive.md",
       "concept/06_ecosystem/05_systems_and_embedded/35_rtic_framework_deep_dive.md",
-      "concept/06_ecosystem/05_systems_and_embedded/36_defmt_probe_rs_architecture.md"
+      "concept/06_ecosystem/05_systems_and_embedded/36_defmt_probe_rs_architecture.md",
+      "concept/06_ecosystem/16_algorithm_patterns/12_number_theoretic_algorithms.md",
+      "concept/06_ecosystem/16_algorithm_patterns/13_advanced_string_algorithms.md",
+      "concept/06_ecosystem/16_algorithm_patterns/14_network_flow_and_matching.md"
     ],
     "gaps_p2": [
       "concept/04_formal/03_operational_semantics/13_in_place_initialization_semantics.md",
@@ -63,7 +66,8 @@
       "concept/04_formal/15_language_specification/04_a_mir_formality_type_system_spec.md",
       "concept/05_comparative/04_verification_and_contracts/00_verification_and_contracts_overview.md",
       "concept/05_comparative/04_verification_and_contracts/01_contracts_comparison.md",
-      "concept/06_ecosystem/05_systems_and_embedded/33_sei_cert_c_to_rust_mapping.md"
+      "concept/06_ecosystem/05_systems_and_embedded/33_sei_cert_c_to_rust_mapping.md",
+      "concept/06_ecosystem/16_algorithm_patterns/14_network_flow_and_matching.md"
     ]
   },
   "by_layer": {
@@ -98,9 +102,9 @@
       "any": 29
     },
     "L6": {
-      "n": 216,
-      "P0": 208,
-      "any": 215
+      "n": 219,
+      "P0": 212,
+      "any": 219
     },
     "L7": {
       "n": 75,
@@ -114,9 +118,7 @@
     }
   },
   "core_gaps_l1_l4_no_p0": [],
-  "none_any": [
-    "concept/06_ecosystem/05_systems_and_embedded/33_sei_cert_c_to_rust_mapping.md"
-  ],
+  "none_any": [],
   "crates_docs": {
     "total": 569,
     "kinds": {

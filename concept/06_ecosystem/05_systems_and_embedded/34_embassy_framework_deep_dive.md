@@ -20,7 +20,8 @@
 > [Embedded-HAL 1.0 迁移与 Embassy 生产状态](09_embedded_hal_1_0_migration.md)
 > **后置概念**: [嵌入式网络与 IoT 协议](31_embedded_networking_and_iot_protocols.md) ·
 > [Cortex-M 与 RISC-V 中断异常模型](14_interrupt_and_exception_model.md) ·
-> [嵌入式 RTOS 与安全关键框架对比](26_embedded_rtos_and_safety_critical_frameworks.md)
+> [嵌入式 RTOS 与安全关键框架对比](26_embedded_rtos_and_safety_critical_frameworks.md) ·
+> [Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)
 >
 > **来源**: [Embassy Book](https://embassy.dev/book/) ·
 > [Embassy repository](https://github.com/embassy-rs/embassy) ·

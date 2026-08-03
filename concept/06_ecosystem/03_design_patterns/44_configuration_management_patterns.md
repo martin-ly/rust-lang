@@ -18,7 +18,8 @@
 > **后置概念**:
 > [Clean Architecture](../14_enterprise_architecture/06_clean_architecture_in_rust.md) ·
 > [Observability and SRE Patterns](../14_enterprise_architecture/09_observability_and_sre_patterns.md) ·
-> [Microservice Patterns](05_microservice_patterns.md)
+> [Microservice Patterns](05_microservice_patterns.md) ·
+> [Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)
 >
 > **来源**:
 > [config crate docs](https://docs.rs/config/latest/config/) ·

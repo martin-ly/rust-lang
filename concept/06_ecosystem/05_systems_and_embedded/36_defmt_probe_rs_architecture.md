@@ -15,7 +15,7 @@
 > **双维定位**: P×App — 理解并组装面向裸机的低带宽、低侵入调试链路
 > **定位**: 系统讲解 Rust 嵌入式调试的事实标准链路——defmt 的帧编码与压缩、probe-rs 的探针/目标/会话/烧录/RTT 架构、DAP/JTAG/SWD 协议差异、flip-link 的栈溢出保护、Knurling app-template 的工程实践，以及与 `rtt-target`/`rtt-logger` 的 trade-off。
 > **前置概念**: [Rust 嵌入式系统开发](03_embedded_systems.md) · [嵌入式调试与日志](20_embedded_debugging_logging.md) · [no_std 启动流程与运行时深度解析](27_no_std_startup_runtime_deep_dive.md)
-> **后置概念**: [安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508](30_misra_rust_safety_critical_guidelines.md) · [no_std Rust 中的嵌入式网络与 IoT 协议](31_embedded_networking_and_iot_protocols.md) · [嵌入式测试与 CI 策略](32_embedded_testing_and_ci_strategies.md)
+> **后置概念**: [安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508](30_misra_rust_safety_critical_guidelines.md) · [no_std Rust 中的嵌入式网络与 IoT 协议](31_embedded_networking_and_iot_protocols.md) · [嵌入式测试与 CI 策略](32_embedded_testing_and_ci_strategies.md) · [Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)
 
 ---
 

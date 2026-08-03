@@ -1,20 +1,20 @@
 {
   "summary": {
     "date": "2026-08-04",
-    "total_relations": 10192,
+    "total_relations": 10266,
     "generic_relation_annotation_count": 0,
     "generic_ratio_global": 0.0,
     "core_entities": 50,
-    "core_relations": 2769,
+    "core_relations": 2785,
     "core_generic_count": 0,
     "core_generic_ratio": 0.0,
     "core_lacking_semantic": 0,
     "global_predicate_distribution": {
-      "ex:hasPart": 4218,
-      "ex:dependsOn": 2192,
-      "ex:entails": 1630,
+      "ex:hasPart": 4249,
+      "ex:dependsOn": 2203,
+      "ex:entails": 1642,
       "ex:relatedTo": 849,
-      "ex:refines": 587,
+      "ex:refines": 607,
       "ex:partOf": 430,
       "ex:appliesTo": 128,
       "ex:equivalentTo": 98,
@@ -24,9 +24,9 @@
       "ex:counterExample": 2
     },
     "core_predicate_distribution": {
-      "ex:dependsOn": 1137,
-      "ex:hasPart": 624,
-      "ex:entails": 440,
+      "ex:dependsOn": 1139,
+      "ex:hasPart": 637,
+      "ex:entails": 441,
       "ex:relatedTo": 256,
       "ex:refines": 140,
       "ex:partOf": 105,
@@ -194,7 +194,7 @@
     "ex:AsyncProgramming": [
       [
         "ex:dependsOn",
-        112
+        113
       ],
       [
         "ex:entails",
@@ -464,7 +464,7 @@
       ],
       [
         "ex:entails",
-        13
+        14
       ],
       [
         "ex:mutexWith",
@@ -624,7 +624,7 @@
     "ex:SafeAndEffectiveUnsafeRust": [
       [
         "ex:dependsOn",
-        131
+        132
       ],
       [
         "ex:entails",

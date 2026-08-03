@@ -313,6 +313,10 @@ D5_WHITELIST_FILES = {
     # nightly/preview 为 FLS 未覆盖语言特性的客观边界陈述。
     "concept/04_formal/15_language_specification/02_ferrocene_language_specification.md":
         "FLS 权威页：nightly/preview 为 FLS 认证子集未覆盖语言特性的客观边界陈述",
+    # ---- 2026-08-04 P3 惯用法/嵌入式缺口补全：defmt/probe-rs 架构页。页面示例包含 Cargo
+    # 配置 `[unstable]` 表，为 cargo unstable 工具链事实的 TOML 片段，非稳定层残留不稳定依赖。
+    "concept/06_ecosystem/05_systems_and_embedded/36_defmt_probe_rs_architecture.md":
+        "defmt/probe-rs 架构页：示例 TOML 中的 `[unstable]` 为 cargo unstable 配置表片段，属工具链事实陈述",
 }
 
 

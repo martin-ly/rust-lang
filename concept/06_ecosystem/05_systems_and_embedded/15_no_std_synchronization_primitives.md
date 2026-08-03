@@ -431,6 +431,7 @@ graph TD
 > **权威来源**: [critical-section crate](https://docs.rs/critical-section/) · [cortex-m crate](https://docs.rs/cortex-m/) · [bare-metal crate](https://docs.rs/bare-metal/) · [Rust Atomics and Locks](https://marabos.nl/atomics/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [RTIC Book](https://rtic.rs/2/book/en/) · [spin crate](https://docs.rs/spin/)
 >
 > **P0 官方来源**:
+>
 > - [Rust Reference — `#![no_std]`](https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute)
 > - [Rust core — `core::sync::atomic`](https://doc.rust-lang.org/core/sync/atomic/)
 > - [The Rustonomicon](https://doc.rust-lang.org/nomicon/)

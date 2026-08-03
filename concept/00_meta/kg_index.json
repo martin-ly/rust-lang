@@ -4,7 +4,7 @@
     "generated": "2026-07-11",
     "rust_version": "1.97.0+",
     "source": "concept/",
-    "entity_count": 681,
+    "entity_count": 686,
     "schema": "simple KG index"
   },
   "entities": [
@@ -5731,6 +5731,19 @@
       "related_crates": []
     },
     {
+      "id": "concept:03_advanced/02_unsafe/README.md",
+      "path": "03_advanced/02_unsafe/README.md",
+      "title": "Unsafe Rust 专题",
+      "en": "Unsafe Rust Topic Index",
+      "summary": "Directory index for `concept/03_advanced/02_unsafe/` — unsafe blocks, safety contracts, memory model, sanitizers, std unsafe internals, and in-place / pinned initialization patterns.",
+      "bloom": "L3-L4",
+      "rust_version": null,
+      "prerequisites": [],
+      "postrequisites": [],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:03_advanced/03_proc_macros/01_macros.md",
       "path": "03_advanced/03_proc_macros/01_macros.md",
       "title": "",
@@ -7852,13 +7865,13 @@
       "prerequisites": [
         {
           "title": "Unsafe Rust",
-          "path": "../../../03_advanced/02_unsafe/01_unsafe.md"
+          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
         }
       ],
       "postrequisites": [
         {
           "title": "In-place & Pinned Initialization Patterns",
-          "path": "../../../03_advanced/02_unsafe/11_in_place_pinned_initialization.md"
+          "path": "../../03_advanced/02_unsafe/11_in_place_pinned_initialization.md"
         }
       ],
       "theorems": [],
@@ -8190,7 +8203,7 @@
         },
         {
           "title": "形式化 Unsafe 契约",
-          "path": "07_unsafe_contracts_formal.md"
+          "path": "../01_ownership_logic/07_unsafe_contracts_formal.md"
         },
         {
           "title": "Kani",
@@ -14672,6 +14685,146 @@
         {
           "title": "安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508",
           "path": "30_misra_rust_safety_critical_guidelines.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/33_sei_cert_c_to_rust_mapping.md",
+      "path": "06_ecosystem/05_systems_and_embedded/33_sei_cert_c_to_rust_mapping.md",
+      "title": "",
+      "en": "SEI CERT C to Rust Rule Mapping",
+      "summary": "Maps SEI CERT C coding-standard rules to safe Rust idioms, unsafe mitigations, and safety-critical adoption notes.",
+      "bloom": "L3",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "C-to-Rust Translation Ecosystem",
+          "path": "08_c_to_rust_translation.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Embedded RTOS and Safety-Critical Frameworks",
+          "path": "26_embedded_rtos_and_safety_critical_frameworks.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/34_embassy_framework_deep_dive.md",
+      "path": "06_ecosystem/05_systems_and_embedded/34_embassy_framework_deep_dive.md",
+      "title": "",
+      "en": "Embassy Async Framework Deep Dive",
+      "summary": "Architectural deep dive into the Embassy embedded async runtime: executor, time driver, networking, USB, and hardware abstraction integration.",
+      "bloom": "L3-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Async/Await",
+          "path": "../../03_advanced/01_async/01_async.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "嵌入式网络与 IoT 协议",
+          "path": "31_embedded_networking_and_iot_protocols.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/35_rtic_framework_deep_dive.md",
+      "path": "06_ecosystem/05_systems_and_embedded/35_rtic_framework_deep_dive.md",
+      "title": "",
+      "en": "RTIC Real-Time Task Scheduling Framework Deep Dive",
+      "summary": "Deep dive into RTIC's priority-ceiling scheduling, resource analysis, monotonic timers, and scheduling correctness reasoning.",
+      "bloom": "L3-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 嵌入式系统开发",
+          "path": "03_embedded_systems.md"
+        },
+        {
+          "title": "Cortex-M 与 RISC-V 中断异常模型",
+          "path": "14_interrupt_and_exception_model.md"
+        },
+        {
+          "title": "no_std 同步原语",
+          "path": "15_no_std_synchronization_primitives.md"
+        },
+        {
+          "title": "异步 no_std 嵌入式",
+          "path": "11_async_no_std_embedded.md"
+        },
+        {
+          "title": "嵌入式 RTOS 与安全关键框架对比",
+          "path": "26_embedded_rtos_and_safety_critical_frameworks.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "自定义裸机异步执行器",
+          "path": "28_custom_bare_metal_async_executor.md"
+        },
+        {
+          "title": "嵌入式调试与日志",
+          "path": "20_embedded_debugging_logging.md"
+        },
+        {
+          "title": "安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508",
+          "path": "30_misra_rust_safety_critical_guidelines.md"
+        },
+        {
+          "title": "Rust vs Ada/SPARK",
+          "path": "../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/36_defmt_probe_rs_architecture.md",
+      "path": "06_ecosystem/05_systems_and_embedded/36_defmt_probe_rs_architecture.md",
+      "title": "",
+      "en": "defmt / probe-rs / Knurling Debugging Architecture",
+      "summary": "Architecture and protocol principles of the defmt log frame format, probe-rs DAP/JTAG/SWD probe protocol, and Knurling tooling ecosystem.",
+      "bloom": "L3",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 嵌入式系统开发",
+          "path": "03_embedded_systems.md"
+        },
+        {
+          "title": "嵌入式调试与日志",
+          "path": "20_embedded_debugging_logging.md"
+        },
+        {
+          "title": "no_std 启动流程与运行时深度解析",
+          "path": "27_no_std_startup_runtime_deep_dive.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508",
+          "path": "30_misra_rust_safety_critical_guidelines.md"
+        },
+        {
+          "title": "no_std Rust 中的嵌入式网络与 IoT 协议",
+          "path": "31_embedded_networking_and_iot_protocols.md"
+        },
+        {
+          "title": "嵌入式测试与 CI 策略",
+          "path": "32_embedded_testing_and_ci_strategies.md"
+        },
+        {
+          "title": "Rust vs Ada/SPARK",
+          "path": "../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md"
         }
       ],
       "theorems": [],

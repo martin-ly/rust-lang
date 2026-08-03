@@ -15,7 +15,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **定位**: 在 Rust 的类型系统与溢出保护下实现竞赛与密码学常用数论算法，强调“先防溢出、再谈效率”。
-> **前置概念**: [算法模式概述](00_algorithm_patterns_overview.md) · [所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [整数类型](../../01_foundation/02_types/02_integer_types.md) · [泛型](../../02_intermediate/01_generics/01_generics.md)
+> **前置概念**: [算法模式概述](00_algorithm_patterns_overview.md) · [所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [数值类型](../../01_foundation/02_type_system/03_numerics.md) · [泛型](../../02_intermediate/01_generics/01_generics.md)
 > **后置概念**: [随机化与概率算法](09_randomized_and_probabilistic_algorithms.md) · [图算法 Rust 实现](03_graph_algorithms_in_rust.md) · [算法与竞赛编程](../11_domain_applications/07_algorithms_competitive_programming.md)
 > **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
@@ -475,7 +475,7 @@ graph TD
 - [随机化与概率算法](09_randomized_and_probabilistic_algorithms.md) — L5-L6：Miller-Rabin、Pollard's rho 等大整数算法
 - [图算法 Rust 实现](03_graph_algorithms_in_rust.md) — L5-L6：数论在图计数中的应用
 - [算法与竞赛编程](../11_domain_applications/07_algorithms_competitive_programming.md) — L6：竞赛中的数论技巧与陷阱
-- [整数类型](../../01_foundation/02_types/02_integer_types.md) — L0-L1：Rust 整数溢出行为
+- [数值类型](../../01_foundation/02_type_system/03_numerics.md) — L0-L1：Rust 整数溢出行为
 - [泛型](../../02_intermediate/01_generics/01_generics.md) — L2：用泛型抽象不同整数宽度
 
 ---

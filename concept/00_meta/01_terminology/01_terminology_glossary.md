@@ -8,7 +8,7 @@
 > **标准来源**: TRPL · Rust Reference · std API Docs · Rustnomicon · Async Book · Cargo Book · Edition Guide
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L0
-> **状态**: ✅ v3.3 — 已覆盖 201 个高频术语（超过 150 目标），全部含英文对照；关键术语已在 L1–L4 概念文档完成首次出现双语标注
+> **状态**: ✅ v3.4 — 已覆盖 212 个高频术语（超过 150 目标），全部含英文对照；关键术语已在 L1–L4 概念文档完成首次出现双语标注
 > **冻结日期**: 2026-06-10（v3.0 冻结）；2026-06-22 起跟踪 1.97 术语；2026-06-24 完成双语标注
 > **维护规则**: 仅当 Rust 官方术语变更或新增核心语言关键字/API 时才更新，常规生态术语不扩展
 
@@ -420,6 +420,16 @@
 | 通 | 通道 | Channel | L2 |
 | 错 | 错误处理 | Error Handling | L2 |
 | 闭 | 闭包 | Closures | L1 |
+| 拒 | Rejection Type | Rejection Type | L2-L3 |
+| 分 | 分层配置管理 | Layered Configuration Management | L2-L3 |
+| 数 | 数论算法 | Number-Theoretic Algorithms | L2 |
+| 字 | 高级字符串算法 | Advanced String Algorithms | L2-L3 |
+| 网 | 网络流与匹配算法 | Network Flow and Matching Algorithms | L2-L3 |
+| 概 | 概率与近似数据结构 | Probabilistic and Approximate Data Structures | L2-L3 |
+| SE | SEI CERT C → Rust 规则映射 | SEI CERT C to Rust Rule Mapping | L3 |
+| Em | Embassy 异步框架 | Embassy Async Framework | L3-L4 |
+| RT | RTIC 实时任务调度框架 | RTIC Real-Time Task Scheduling Framework | L3-L4 |
+| de | defmt / probe-rs 调试架构 | defmt / probe-rs Debugging Architecture | L3 |
 
 ---
 

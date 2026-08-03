@@ -18,7 +18,8 @@
 > **后置概念**:
 > [Hexagonal / Ports & Adapters](25_hexagonal_ports_and_adapters.md) ·
 > [DDD Tactical Patterns](../14_enterprise_architecture/04_domain_driven_design_in_rust.md) ·
-> [API Design and SemVer Idioms](39_api_design_and_semver_idioms.md)
+> [API Design and SemVer Idioms](39_api_design_and_semver_idioms.md) ·
+> [Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)
 >
 > **来源**:
 > [Zero To Production in Rust](https://www.zero2prod.com/) ·
@@ -342,6 +343,9 @@ fn build_newsletter_request(raw: RawSubscribeRequest) -> Result<SubscribeRequest
 }
 
 # #[derive(Debug, Default)] pub struct RawSubscribeRequest { pub email: Option<String>, pub name: Option<String> }
+# impl TryFrom<RawSubscribeRequest> for SubscribeRequest { type Error = SubscribeRejection; fn try_from(raw: RawSubscribeRequest) -> Result<Self, Self::Error> { let email_raw = raw.email.ok_or(SubscribeRejection::MissingEmail)?; let email = SubscriberEmail::try_from(email_raw)?; let name_raw = raw.name.ok_or(SubscribeRejection::MissingName)?; let name = SubscriberName::try_from(name_raw)?; Ok(SubscribeRequest { email, name }) } }
+# impl TryFrom<String> for SubscriberEmail { type Error = SubscribeRejection; fn try_from(raw: String) -> Result<Self, Self::Error> { let trimmed = raw.trim(); if trimmed.is_empty() { return Err(SubscribeRejection::InvalidEmail { raw, reason: "email is empty".into() }); } if !trimmed.contains('@') || trimmed.split('@').count() != 2 { return Err(SubscribeRejection::InvalidEmail { raw, reason: "missing a single '@'".into() }); } Ok(SubscriberEmail(trimmed.to_lowercase())) } }
+# impl TryFrom<String> for SubscriberName { type Error = SubscribeRejection; fn try_from(raw: String) -> Result<Self, Self::Error> { let trimmed = raw.trim(); if trimmed.is_empty() { return Err(SubscribeRejection::InvalidName { raw, reason: "name is empty".into() }); } if trimmed.len() > 256 { return Err(SubscribeRejection::InvalidName { raw, reason: "name exceeds 256 characters".into() }); } Ok(SubscriberName(trimmed.to_string())) } }
 
 fn main() {
     let raw = RawSubscribeRequest {

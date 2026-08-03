@@ -21,6 +21,8 @@
 > [Safety-Critical Bare-Metal OS](19_safety_critical_bare_metal_os.md)
 >
 > **来源**: [SEI CERT C Coding Standard](https://wiki.sei.cmu.edu/confluence/display/c/SEI+CERT+C+Coding+Standard) ·
+> [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe.html) ·
+> [The Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
 > [Rust Safety-Critical Rust Consortium](https://rustfoundation.org/safety-critical-rust-consortium/) ·
 > [Ferrous Systems — Safety-Critical Rust](https://ferrous-systems.com/safety-critical-rust/) ·
 > [MISRA C:2025 Addendum 6](../../../content/safety_critical/10_standards/04_misra_c_2025_addendum_6_guide.md)

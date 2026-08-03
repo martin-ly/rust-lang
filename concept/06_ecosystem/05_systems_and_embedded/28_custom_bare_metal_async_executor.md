@@ -69,6 +69,8 @@ mindmap
   - [十、相关概念](#十相关概念)
   - [十一、实测案例](#十一实测案例)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [国际化权威来源补充（International Authority Sources）](#国际化权威来源补充international-authority-sources)
+  - [国际化权威来源补充（International Authority Sources）](#国际化权威来源补充international-authority-sources-1)
 
 ---
 
@@ -440,8 +442,8 @@ mindmap
 
 ## 国际化权威来源补充（International Authority Sources）
 
-- https://arxiv.org/abs/2311.05063
+- <https://arxiv.org/abs/2311.05063>
 
 ## 国际化权威来源补充（International Authority Sources）
 
-- https://rust-unofficial.github.io/patterns/
+- <https://rust-unofficial.github.io/patterns/>

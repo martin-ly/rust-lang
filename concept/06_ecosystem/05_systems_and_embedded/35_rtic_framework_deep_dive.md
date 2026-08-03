@@ -15,7 +15,7 @@
 > **双维定位**: P×App — 在资源受限硬件上实现可预测、无死锁的硬实时调度
 > **定位**: 系统讲解 RTIC（Real-Time Interrupt-driven Concurrency）如何利用 Rust 所有权与 Cortex-M NVIC 优先级实现零开销、编译期可分析的实时任务调度；覆盖任务/资源模型、优先级天花板协议、`lock` 临界区、`rtic-monotonics`、软硬件任务、调度正确性推理及与 Embassy/裸机中断的对比。
 > **前置概念**: [Rust 嵌入式系统开发](03_embedded_systems.md) · [Cortex-M 与 RISC-V 中断异常模型](14_interrupt_and_exception_model.md) · [no_std 同步原语](15_no_std_synchronization_primitives.md) · [异步 no_std 嵌入式](11_async_no_std_embedded.md) · [嵌入式 RTOS 与安全关键框架对比](26_embedded_rtos_and_safety_critical_frameworks.md)
-> **后置概念**: [自定义裸机异步执行器](28_custom_bare_metal_async_executor.md) · [嵌入式调试与日志](20_embedded_debugging_logging.md) · [安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508](30_misra_rust_safety_critical_guidelines.md)
+> **后置概念**: [自定义裸机异步执行器](28_custom_bare_metal_async_executor.md) · [嵌入式调试与日志](20_embedded_debugging_logging.md) · [安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508](30_misra_rust_safety_critical_guidelines.md) · [Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)
 
 ---
 

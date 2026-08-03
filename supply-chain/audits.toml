@@ -16,25 +16,50 @@ criteria = "safe-to-run"
 version = "0.11.0"
 notes = "2026-07-27: aes-gcm 0.11.0 (RustCrypto 官方维护) 为 c10_networks 的 benchmark 依赖，仅用于本地加密示例，不处理网络输入。"
 
+[[audits.aho-corasick]]
+criteria = "safe-to-run"
+version = "1.1.5"
+notes = "2026-08-04: aho-corasick 1.1.5 (BurntSushi 官方维护) 为 ripgrep/regex 传递依赖，仅用于本地文本匹配示例与测试路径，不处理不可信网络输入。"
+
 [[audits.amq-protocol]]
 criteria = "safe-to-run"
 version = "10.6.2"
 notes = "2026-07-27: amq-protocol 10.6.2 (AMQP 官方协议实现) 为 lapin 4.10.0 升级后的传递依赖，仅用于 AMQP 示例/测试路径。"
+
+[[audits.amq-protocol]]
+criteria = "safe-to-run"
+version = "10.6.3"
+notes = "2026-08-04: amq-protocol 10.6.3 (AMQP 官方协议实现) 为 lapin 传递依赖版本升级，仅用于 AMQP 示例/测试路径。"
 
 [[audits.amq-protocol-tcp]]
 criteria = "safe-to-run"
 version = "10.6.2"
 notes = "2026-07-27: amq-protocol-tcp 10.6.2 为 lapin 4.10.0 的 TCP 传输层传递依赖，仅用于 AMQP 示例/测试路径。"
 
+[[audits.amq-protocol-tcp]]
+criteria = "safe-to-run"
+version = "10.6.3"
+notes = "2026-08-04: amq-protocol-tcp 10.6.3 为 lapin 4.10.0 的 TCP 传输层传递依赖版本升级，仅用于 AMQP 示例/测试路径。"
+
 [[audits.amq-protocol-types]]
 criteria = "safe-to-run"
 version = "10.6.2"
 notes = "2026-07-27: amq-protocol-types 10.6.2 为 lapin 4.10.0 的 AMQP 类型系统传递依赖，仅用于 AMQP 示例/测试路径。"
 
+[[audits.amq-protocol-types]]
+criteria = "safe-to-run"
+version = "10.6.3"
+notes = "2026-08-04: amq-protocol-types 10.6.3 为 lapin 4.10.0 的 AMQP 类型系统传递依赖版本升级，仅用于 AMQP 示例/测试路径。"
+
 [[audits.amq-protocol-uri]]
 criteria = "safe-to-run"
 version = "10.6.2"
 notes = "2026-07-27: amq-protocol-uri 10.6.2 为 lapin 4.10.0 的 AMQP URI 解析传递依赖，仅用于 AMQP 示例/测试路径。"
+
+[[audits.amq-protocol-uri]]
+criteria = "safe-to-run"
+version = "10.6.3"
+notes = "2026-08-04: amq-protocol-uri 10.6.3 为 lapin 4.10.0 的 AMQP URI 解析传递依赖版本升级，仅用于 AMQP 示例/测试路径。"
 
 [[audits.async-compat]]
 criteria = "safe-to-run"
@@ -86,6 +111,11 @@ criteria = "safe-to-run"
 version = "0.10.1"
 notes = "2026-07-27: ctr 0.10.1 (RustCrypto 官方维护) 为 aes-gcm 0.11 升级后的传递依赖，仅用于 benchmark 中的本地加密示例。"
 
+[[audits.data-encoding]]
+criteria = "safe-to-run"
+version = "2.11.1"
+notes = "2026-08-04: data-encoding 2.11.1 (ia0 官方维护) 为 base64/hex 编码工具传递依赖，仅用于本地编解码示例与测试路径。"
+
 [[audits.event-listener]]
 criteria = "safe-to-run"
 version = "5.4.2"
@@ -131,10 +161,25 @@ criteria = "safe-to-run"
 version = "4.10.0"
 notes = "2026-07-27: lapin 4.10.0 (AMQP 官方 Rust 客户端) 为 c10_networks 的 AMQP 示例依赖，仅用于本地 RabbitMQ 示例，不处理不可信网络输入。"
 
+[[audits.lru]]
+criteria = "safe-to-run"
+version = "0.18.2"
+notes = "2026-08-04: lru 0.18.2 (jeromefroe 官方维护) 为缓存数据结构传递依赖，仅用于本地算法示例与测试路径。"
+
 [[audits.nom]]
 criteria = "safe-to-run"
 version = "8.0.0"
 notes = "2026-07-27: nom 8.0.0 (Geal 官方维护) 为 lapin 4.10.0 / x509-parser 的解析器传递依赖，仅用于 AMQP 示例/测试路径。"
+
+[[audits.ntex-net]]
+criteria = "safe-to-run"
+version = "3.14.0"
+notes = "2026-08-04: ntex-net 3.14.0 (ntex 官方维护) 为 ntex 网络框架传递依赖，仅用于本地网络服务示例与测试路径。"
+
+[[audits.ntex-rt]]
+criteria = "safe-to-run"
+version = "3.16.0"
+notes = "2026-08-04: ntex-rt 3.16.0 (ntex 官方维护) 为 ntex 运行时传递依赖，仅用于本地异步网络示例与测试路径。"
 
 [[audits.p12-keystore]]
 criteria = "safe-to-run"
@@ -155,6 +200,11 @@ notes = "2026-07-27: polyval 0.7.3 (RustCrypto 官方维护) 为 aes-gcm 0.11 �
 criteria = "safe-to-run"
 version = "0.23.6"
 notes = "2026-07-27: rustls-connector 0.23.6 为 lapin 4.10.0 的 TLS 连接封装传递依赖，仅用于 AMQP 示例/测试路径。"
+
+[[audits.rustls-connector]]
+criteria = "safe-to-run"
+version = "0.23.7"
+notes = "2026-08-04: rustls-connector 0.23.7 为 rustls TLS 连接抽象传递依赖，仅用于本地 TLS 示例与测试路径。"
 
 [[audits.safetensors]]
 criteria = "safe-to-run"
@@ -245,6 +295,11 @@ notes = "2026-07-27: toml_parser 1.1.3 (toml-rs 官方维护) 为 cargo update �
 criteria = "safe-to-run"
 version = "0.6.1"
 notes = "2026-07-27: universal-hash 0.6.1 (RustCrypto 官方维护) 为 aes-gcm 0.11 升级后的传递依赖，仅用于 benchmark 中的本地加密示例。"
+
+[[audits.webbrowser]]
+criteria = "safe-to-run"
+version = "1.2.3"
+notes = "2026-08-04: webbrowser 1.2.3 (amodm 官方维护) 为打开系统浏览器传递依赖，仅用于本地文档/链接示例，不处理网络输入。"
 
 [[audits.x509-parser]]
 criteria = "safe-to-run"

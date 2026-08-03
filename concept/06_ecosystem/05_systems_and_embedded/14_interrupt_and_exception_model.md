@@ -339,6 +339,7 @@ unsafe { cortex_m::register::basepri::write(4 << 4) }
 > **权威来源**: [ARMv7-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0403/latest/) · [ARMv8-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0553/latest/) · [RISC-V Privileged Spec](https://riscv.org/technical/specifications/) · [RISC-V CLIC Spec](https://github.com/riscv/riscv-fast-interrupt/blob/master/clic.adoc) · [cortex-m crate](https://docs.rs/cortex-m/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [RTIC Book](https://rtic.rs/2/book/en/) · [Rust Atomics and Locks](https://marabos.nl/atomics/)
 >
 > **P0 官方来源**:
+>
 > - [Rust Reference — `extern "C"` 函数限定符](https://doc.rust-lang.org/reference/items/functions.html#extern-function-qualifier)
 > - [Rust Reference — `#[no_mangle]`](https://doc.rust-lang.org/reference/abi.html#the-no_mangle-attribute)
 > - [Rust Reference — 可变静态项](https://doc.rust-lang.org/reference/items/static-items.html#mutable-statics)

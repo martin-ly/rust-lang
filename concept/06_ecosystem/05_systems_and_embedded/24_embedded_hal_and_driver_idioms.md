@@ -565,6 +565,7 @@ graph TD
 > **权威来源**: [embedded-hal 1.0 docs](https://docs.rs/embedded-hal/1.0.0/embedded_hal/) · [embedded-hal-async docs](https://docs.rs/embedded-hal-async/latest/embedded_hal_async/) · [embedded-io docs](https://docs.rs/embedded-io/latest/embedded_io/) · [shared-bus crate](https://docs.rs/shared-bus/) · [embassy-sync crate](https://docs.rs/embassy-sync/) · [defmt docs](https://docs.rs/defmt/) · [probe-rs](https://probe.rs/) · [Embassy Book](https://embassy.dev/book/) · [Knurling](https://knurling.ferrous-systems.com/)
 >
 > **P0 官方来源**:
+>
 > - [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)
 > - [Rust std — `Result`](https://doc.rust-lang.org/std/result/)
 > - [Rust std — `PhantomData`](https://doc.rust-lang.org/std/marker/struct.PhantomData.html)

@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 702,
-    "generated_at": "2026-08-03T21:39:05.318751+00:00"
+    "total_files": 709,
+    "generated_at": "2026-08-03T21:52:54.946614+00:00"
   },
   "files": [
     {
@@ -67115,7 +67115,7 @@
       "layer": "L6",
       "title": "Rejection Type 模式（Rejection Type Pattern）",
       "positioning": "将输入校验、请求解析与领域错误显式分离，通过类型化的 Rejection 提升 Rust Web 服务的可测试性与错误可读性。",
-      "line_count": 525,
+      "line_count": 537,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -67151,7 +67151,7 @@
         },
         {
           "flags": [],
-          "lines": 37,
+          "lines": 48,
           "should_fail": false,
           "code_preview": "# use std::fmt; # #[derive(Debug, Clone, PartialEq)] pub struct SubscriberEmail(..."
         },
@@ -67192,6 +67192,7 @@
         "../../02_intermediate/00_traits/03_serde_patterns.md",
         "../../02_intermediate/03_error_handling/01_error_handling.md",
         "../../02_intermediate/04_types_and_conversions/07_type_conversions.md",
+        "../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md",
         "../14_enterprise_architecture/04_domain_driven_design_in_rust.md",
         "25_hexagonal_ports_and_adapters.md",
         "39_api_design_and_semver_idioms.md"
@@ -67206,6 +67207,104 @@
         ],
         "post": [
           "> [Hexagonal / Ports & Adapters](25_hexagonal_ports_and_adapters.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\03_design_patterns\\44_configuration_management_patterns.md",
+      "layer": "L6",
+      "title": "分层配置管理模式（Layered Configuration Management Patterns）",
+      "positioning": "将\"默认值 → 配置文件 → 环境变量 → 密钥\"的分层加载与验证模式系统化，帮助 Rust 服务在 12-Factor 原则下安全、可测试地管理配置。",
+      "line_count": 556,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 五、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 84,
+          "should_fail": false,
+          "code_preview": "use std::collections::HashMap; use std::env;  #[derive(Debug, PartialEq)] pub st..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 57,
+          "should_fail": false,
+          "code_preview": "use config::{Config, ConfigError, Environment, File}; use serde::Deserialize;  #..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 29,
+          "should_fail": false,
+          "code_preview": "use figment::{     Figment,     providers::{Env, Format, Toml}, }; use serde::De..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 20,
+          "should_fail": false,
+          "code_preview": "use serde::Deserialize;  #[derive(Debug, Deserialize)] pub struct Config {     p..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 35,
+          "should_fail": false,
+          "code_preview": "use secrecy::{ExposeSecret, SecretString}; use serde::Deserialize;  #[derive(Deb..."
+        },
+        {
+          "flags": [],
+          "lines": 29,
+          "should_fail": false,
+          "code_preview": "# use std::collections::HashMap; # #[derive(Debug, PartialEq)] pub struct AppCon..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：把环境相关值写死在代码里 const DATABASE_URL: &str = \"postgres://prod-db.internal/app..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/08_error_handling/01_error_handling_basics.md",
+        "../../02_intermediate/00_traits/03_serde_patterns.md",
+        "../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md",
+        "../14_enterprise_architecture/06_clean_architecture_in_rust.md",
+        "../14_enterprise_architecture/09_observability_and_sre_patterns.md",
+        "05_microservice_patterns.md",
+        "25_hexagonal_ports_and_adapters.md",
+        "39_api_design_and_semver_idioms.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 5,
+      "pre_post": {
+        "pre": [
+          "> [Serde Patterns](../../02_intermediate/00_traits/03_serde_patterns.md) ·"
+        ],
+        "post": [
+          "> [Clean Architecture](../14_enterprise_architecture/06_clean_architecture_in_rust.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -72555,7 +72654,7 @@
       "layer": "L6",
       "title": "SEI CERT C → Rust 规则映射",
       "positioning": "",
-      "line_count": 461,
+      "line_count": 467,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -72584,7 +72683,7 @@
         {
           "flags": [
             "compile_fail",
-            "E0503"
+            "E0506"
           ],
           "lines": 9,
           "should_fail": true,
@@ -72696,6 +72795,142 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\05_systems_and_embedded\\34_embassy_framework_deep_dive.md",
+      "layer": "L6",
+      "title": "Embassy 异步框架深度解析",
+      "positioning": "",
+      "line_count": 538,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 十、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "#![no_std] #![no_main]  use embassy_executor::Spawner; use embassy_time::{Durati..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 22,
+          "should_fail": false,
+          "code_preview": "use embassy_executor::Spawner; use embassy_sync::blocking_mutex::raw::ThreadMode..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "use embassy_time::{Duration, Instant, Timer, Ticker};  async fn timeout_demo() {..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 25,
+          "should_fail": false,
+          "code_preview": "use embassy_net::{Config, Stack, StackResources}; use embassy_net::tcp::TcpSocke..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 36,
+          "should_fail": false,
+          "code_preview": "use embassy_usb::Builder; use embassy_usb::class::cdc_acm::{CdcAcmClass, State};..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "use embassy_sync::blocking_mutex::raw::ThreadModeRawMutex; use embassy_sync::cha..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "use embedded_hal_async::spi::SpiDevice; use embedded_hal_async::digital::Wait;  ..."
+        },
+        {
+          "flags": [
+            "ignore",
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "#[interrupt] fn USART1() {     // 错误：中断函数不是 async，不能 await     some_async_fn().a..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "static USART1_WAKER: AtomicWaker = AtomicWaker::new();  #[interrupt] fn USART1()..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "#[embassy_executor::task] async fn bad_task() {     loop {         // 错误：busy-lo..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use embassy_sync::signal::Signal; use static_cell::StaticCell;  static FLAG: Sta..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/01_async/01_async.md",
+        "../../03_advanced/01_async/08_pin_unpin.md",
+        "../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md",
+        "09_embedded_hal_1_0_migration.md",
+        "11_async_no_std_embedded.md",
+        "14_interrupt_and_exception_model.md",
+        "26_embedded_rtos_and_safety_critical_frameworks.md",
+        "28_custom_bare_metal_async_executor.md",
+        "31_embedded_networking_and_iot_protocols.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 35,
+      "pre_post": {
+        "pre": [
+          "[Async/Await](../../03_advanced/01_async/01_async.md) ·"
+        ],
+        "post": [
+          "[嵌入式网络与 IoT 协议](31_embedded_networking_and_iot_protocols.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\05_systems_and_embedded\\35_rtic_framework_deep_dive.md",
       "layer": "L6",
       "title": "RTIC 实时任务调度框架深度解析",
@@ -72794,6 +73029,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md",
         "03_embedded_systems.md",
         "11_async_no_std_embedded.md",
         "14_interrupt_and_exception_model.md",
@@ -72812,7 +73048,104 @@
           "[Rust 嵌入式系统开发](03_embedded_systems.md) · [Cortex-M 与 RISC-V 中断异常模型](14_interrupt_and_exception_model.md) · [no_std 同步原语](15_no_std_synchronization_primitives.md) · [异步 no_std 嵌入式](11_async_no_std_embedded.md) · [嵌入式 RTOS 与安全关键框架对比](26_embedded_rtos_and_safety_critical_frameworks.md)"
         ],
         "post": [
-          "[自定义裸机异步执行器](28_custom_bare_metal_async_executor.md) · [嵌入式调试与日志](20_embedded_debugging_logging.md) · [安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508](30_misra_rust_safety_critical_guidelines.md)"
+          "[自定义裸机异步执行器](28_custom_bare_metal_async_executor.md) · [嵌入式调试与日志](20_embedded_debugging_logging.md) · [安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508](30_misra_rust_safety_critical_guidelines.md) · [Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\05_systems_and_embedded\\36_defmt_probe_rs_architecture.md",
+      "layer": "L6",
+      "title": "defmt / probe-rs / Knurling 调试架构与原理",
+      "positioning": "系统讲解 Rust 嵌入式调试的事实标准链路——defmt 的帧编码与压缩、probe-rs 的探针/目标/会话/烧录/RTT 架构、DAP/JTAG/SWD 协议差异、flip-link 的栈溢出保护、Knurling app-template 的工程实践，以及与 `rtt-target`/`rtt-logger` 的 trade-off。",
+      "line_count": 585,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 八、反例"
+        },
+        {
+          "title": "### 8.1 反例"
+        },
+        {
+          "title": "### 8.2 反例"
+        },
+        {
+          "title": "### 8.3 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "// 目标端只发索引和两个 u32 defmt::info!(\"Sensor reading: temp={}, pressure={}\", temp, pre..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// Cargo.toml 中按 profile 控制 [features] defmt-default = [] defmt-trace = [] defmt..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use defmt::Format;  #[derive(Format)] struct SensorReading {     temperature: i1..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 22,
+          "should_fail": false,
+          "code_preview": "// src/main.rs #![no_std] #![no_main]  use defmt::*; use defmt_rtt as _; use pan..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：defmt 不支持动态格式模板 let fmt = \"x={}\"; defmt::info!(\"{}\", fmt, x); ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：在 tight loop 中高频输出 defmt loop {     defmt::trace!(\"sample={}\", adc.read(..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md",
+        "03_embedded_systems.md",
+        "14_interrupt_and_exception_model.md",
+        "20_embedded_debugging_logging.md",
+        "27_no_std_startup_runtime_deep_dive.md",
+        "30_misra_rust_safety_critical_guidelines.md",
+        "31_embedded_networking_and_iot_protocols.md",
+        "32_embedded_testing_and_ci_strategies.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 3,
+      "matrix_rows": 26,
+      "pre_post": {
+        "pre": [
+          "[Rust 嵌入式系统开发](03_embedded_systems.md) · [嵌入式调试与日志](20_embedded_debugging_logging.md) · [no_std 启动流程与运行时深度解析](27_no_std_startup_runtime_deep_dive.md)"
+        ],
+        "post": [
+          "[安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508](30_misra_rust_safety_critical_guidelines.md) · [no_std Rust 中的嵌入式网络与 IoT 协议](31_embedded_networking_and_iot_protocols.md) · [嵌入式测试与 CI 策略](32_embedded_testing_and_ci_strategies.md) · [Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)"
         ]
       },
       "backward_chains": 0,
@@ -82461,6 +82794,506 @@
         ],
         "post": [
           "[算法与复杂度惯用法](../10_performance/03_algorithms_and_complexity_idioms.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\16_algorithm_patterns\\12_number_theoretic_algorithms.md",
+      "layer": "L6",
+      "title": "数论算法 Rust 实现",
+      "positioning": "在 Rust 的类型系统与溢出保护下实现竞赛与密码学常用数论算法，强调“先防溢出、再谈效率”。",
+      "line_count": 518,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 五、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 22,
+          "should_fail": false,
+          "code_preview": "const MOD: u64 = 1_000_000_007;  fn mod_add(a: u64, b: u64) -> u64 {     let s =..."
+        },
+        {
+          "flags": [],
+          "lines": 23,
+          "should_fail": false,
+          "code_preview": "const MOD: u64 = 1_000_000_007;  fn mod_mul(a: u64, b: u64) -> u64 {     ((a as ..."
+        },
+        {
+          "flags": [],
+          "lines": 38,
+          "should_fail": false,
+          "code_preview": "fn gcd(mut a: u64, mut b: u64) -> u64 {     while b != 0 {         let t = a % b..."
+        },
+        {
+          "flags": [],
+          "lines": 35,
+          "should_fail": false,
+          "code_preview": "fn sieve_eratosthenes(n: usize) -> Vec<bool> {     let mut is_prime = vec![true;..."
+        },
+        {
+          "flags": [],
+          "lines": 29,
+          "should_fail": false,
+          "code_preview": "fn extended_gcd(a: i64, b: i64) -> (i64, i64, i64) {     if b == 0 {         ret..."
+        },
+        {
+          "flags": [],
+          "lines": 46,
+          "should_fail": false,
+          "code_preview": "const MOD: u64 = 1_000_000_007;  fn mod_mul(a: u64, b: u64) -> u64 {     ((a as ..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "const MOD: u64 = 1_000_000_007;  // ❌ 错误：release 模式下结果错误 fn bad_mod_mul(a: u64, ..."
+        },
+        {
+          "flags": [],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "const MOD: u64 = 1_000_000_006; // 合数  fn mod_pow(mut base: u64, mut exp: u64, m..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：直接相乘模数，未检查是否可解 fn naive_crt(a1: i64, m1: i64, a2: i64, m2: i64) -> i64 {..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：线性递归，深度 O(n)，会栈溢出 fn bad_pow(base: u64, exp: u64) -> u64 {     if exp ==..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/02_type_system/03_numerics.md",
+        "../../02_intermediate/01_generics/01_generics.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../11_domain_applications/07_algorithms_competitive_programming.md",
+        "00_algorithm_patterns_overview.md",
+        "03_graph_algorithms_in_rust.md",
+        "09_randomized_and_probabilistic_algorithms.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 30,
+      "pre_post": {
+        "pre": [
+          "[算法模式概述](00_algorithm_patterns_overview.md) · [所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [数值类型](../../01_foundation/02_type_system/03_numerics.md) · [泛型](../../02_intermediate/01_generics/01_generics.md)"
+        ],
+        "post": [
+          "[随机化与概率算法](09_randomized_and_probabilistic_algorithms.md) · [图算法 Rust 实现](03_graph_algorithms_in_rust.md) · [算法与竞赛编程](../11_domain_applications/07_algorithms_competitive_programming.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\16_algorithm_patterns\\13_advanced_string_algorithms.md",
+      "layer": "L6",
+      "title": "高级字符串算法",
+      "positioning": "在 Rust 所有权与 UTF-8 安全模型下实现竞赛与工程中常用的高级字符串算法，重点解决“按字节还是按字符”的索引问题。",
+      "line_count": 656,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 五、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 45,
+          "should_fail": false,
+          "code_preview": "fn z_function(s: &[u8]) -> Vec<usize> {     let n = s.len();     let mut z = vec..."
+        },
+        {
+          "flags": [],
+          "lines": 84,
+          "should_fail": false,
+          "code_preview": "use std::collections::{HashMap, VecDeque};  struct AhoCorasick {     next: Vec<H..."
+        },
+        {
+          "flags": [],
+          "lines": 80,
+          "should_fail": false,
+          "code_preview": "use std::collections::HashMap;  struct State {     len: usize,     link: usize, ..."
+        },
+        {
+          "flags": [],
+          "lines": 56,
+          "should_fail": false,
+          "code_preview": "fn manacher(s: &[u8]) -> Vec<usize> {     // t = \"^#a#b#a#$\"，p[i] 表示以 i 为中心的回文半径..."
+        },
+        {
+          "flags": [],
+          "lines": 43,
+          "should_fail": false,
+          "code_preview": "fn suffix_array_naive(s: &[u8]) -> Vec<usize> {     let n = s.len();     let mut..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "// 结构示意，完整实现需处理两个根节点（偶根 -1、奇根 0）与失败链接。 struct PalindromicTree {     // next[node..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误示例：运行时会 panic；不应直接提交给 checker fn main() {     let s = \"Rust 字符串\";     // ..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "fn char_safe_prefix(s: &str, n: usize) -> &str {     match s.char_indices().nth(..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：查询时只检查当前节点，遗漏通过失败指针到达的模式 fn bad_search(&self, text: &[u8]) -> Vec<usize>..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：O(n^2 log n)，n=10^5 时不可接受 fn bad_suffix_array(s: &str) -> Vec<usize> {  ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0502"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "fn main() {     let mut s = String::from(\"abc\");     // ❌ 错误：遍历 s 的不可变借用期间不能修改 s..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../11_domain_applications/26_zero_copy_parsing_in_rust.md",
+        "00_algorithm_patterns_overview.md",
+        "03_graph_algorithms_in_rust.md",
+        "04_cache_friendly_and_simd_algorithms.md",
+        "07_string_algorithms_in_rust.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 28,
+      "pre_post": {
+        "pre": [
+          "[字符串算法 Rust 实现](07_string_algorithms_in_rust.md) · [算法模式概述](00_algorithm_patterns_overview.md) · [所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [借用](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)"
+        ],
+        "post": [
+          "[缓存友好与 SIMD 算法](04_cache_friendly_and_simd_algorithms.md) · [图算法 Rust 实现](03_graph_algorithms_in_rust.md) · [零拷贝解析](../11_domain_applications/26_zero_copy_parsing_in_rust.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\16_algorithm_patterns\\14_network_flow_and_matching.md",
+      "layer": "L6",
+      "title": "网络流与匹配算法",
+      "positioning": "在 Rust 所有权与索引型图表示下，系统讲解网络流、匹配与强连通结构的核心算法、复杂度与反模式。",
+      "line_count": 834,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 七、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 34,
+          "should_fail": false,
+          "code_preview": "#[derive(Debug, Clone)] struct Edge {     to: usize,     rev: usize,     cap: i6..."
+        },
+        {
+          "flags": [],
+          "lines": 76,
+          "should_fail": false,
+          "code_preview": "use std::usize;  #[derive(Debug, Clone)] struct Edge { to: usize, rev: usize, ca..."
+        },
+        {
+          "flags": [],
+          "lines": 74,
+          "should_fail": false,
+          "code_preview": "use std::collections::VecDeque;  #[derive(Debug, Clone)] struct Edge { to: usize..."
+        },
+        {
+          "flags": [],
+          "lines": 83,
+          "should_fail": false,
+          "code_preview": "use std::collections::VecDeque;  #[derive(Debug, Clone)] struct Edge { to: usize..."
+        },
+        {
+          "flags": [],
+          "lines": 91,
+          "should_fail": false,
+          "code_preview": "use std::collections::VecDeque;  struct BipartiteGraph {     n_left: usize,     ..."
+        },
+        {
+          "flags": [],
+          "lines": 77,
+          "should_fail": false,
+          "code_preview": "const INF: i64 = i64::MAX / 4;  fn hungarian(cost: &[Vec<i64>]) -> (i64, Vec<usi..."
+        },
+        {
+          "flags": [],
+          "lines": 72,
+          "should_fail": false,
+          "code_preview": "fn tarjan_scc(adj: &[Vec<usize>]) -> Vec<Vec<usize>> {     let n = adj.len();   ..."
+        },
+        {
+          "flags": [],
+          "lines": 53,
+          "should_fail": false,
+          "code_preview": "fn find_bridges(adj: &[Vec<usize>]) -> Vec<(usize, usize)> {     let n = adj.len..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0502"
+          ],
+          "lines": 18,
+          "should_fail": true,
+          "code_preview": "#[derive(Debug, Clone)] struct Edge { to: usize, rev: usize, cap: i64 }  #[deriv..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：在容量为 10^9 的图上使用 Ford-Fulkerson // 增广次数可达 10^9 次，运行时间无法接受。 let mut net = ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：只添加正向边，无法撤销错误分配的流量 self.adj[u].push(Edge { to: v, rev: 0, cap }); ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：成本或势能累加时可能溢出 i32 let cur = cost[i0][j] - u[i0] - v[j]; ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../../crates/c08_algorithms/docs/README.md",
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "03_graph_algorithms_in_rust.md",
+        "05_greedy_and_approximation_algorithms.md",
+        "06_dynamic_programming_in_rust.md",
+        "09_randomized_and_probabilistic_algorithms.md",
+        "15_probabilistic_data_structures.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 16,
+      "pre_post": {
+        "pre": [
+          "[图算法 Rust 实现](03_graph_algorithms_in_rust.md) · [动态规划 Rust 实现](06_dynamic_programming_in_rust.md) · [贪心算法](05_greedy_and_approximation_algorithms.md) · [所有权](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)"
+        ],
+        "post": [
+          "[概率与近似数据结构](15_probabilistic_data_structures.md) · [随机化与概率算法](09_randomized_and_probabilistic_algorithms.md) · [c08_algorithms crate docs](../../../crates/c08_algorithms/docs/README.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\16_algorithm_patterns\\15_probabilistic_data_structures.md",
+      "layer": "L6",
+      "title": "概率与近似数据结构",
+      "positioning": "系统讲解用可控误差换取亚线性内存的概率/近似数据结构，覆盖成员查询、基数估计、频率估计、有序集合与流式采样，并给出 Rust 实现与参数调优要点。",
+      "line_count": 686,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 九、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 53,
+          "should_fail": false,
+          "code_preview": "use std::collections::hash_map::DefaultHasher; use std::hash::{Hash, Hasher};  p..."
+        },
+        {
+          "flags": [],
+          "lines": 69,
+          "should_fail": false,
+          "code_preview": "use std::collections::hash_map::DefaultHasher; use std::hash::{Hash, Hasher};  p..."
+        },
+        {
+          "flags": [],
+          "lines": 61,
+          "should_fail": false,
+          "code_preview": "use std::collections::hash_map::DefaultHasher; use std::hash::{Hash, Hasher};  p..."
+        },
+        {
+          "flags": [],
+          "lines": 42,
+          "should_fail": false,
+          "code_preview": "pub struct SplitMix64 {     state: u64, }  impl SplitMix64 {     pub fn new(seed..."
+        },
+        {
+          "flags": [],
+          "lines": 85,
+          "should_fail": false,
+          "code_preview": "use std::cmp::Ordering;  pub struct SplitMix64 {     state: u64, }  impl SplitMi..."
+        },
+        {
+          "flags": [],
+          "lines": 102,
+          "should_fail": false,
+          "code_preview": "use std::cmp::Ordering;  pub struct SplitMix64 {     state: u64, }  impl SplitMi..."
+        },
+        {
+          "flags": [],
+          "lines": 28,
+          "should_fail": false,
+          "code_preview": "use std::collections::HashSet;  struct Bloom {     bits: Vec<bool>,     k: usize..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：把 HyperLogLog 退化成“单次最大前导零” // 导致方差极大，估计值可能在真实基数附近剧烈波动。 let mut max_rank ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：取多行估计的平均会引入额外正偏差 let estimate: u64 = table.iter().map(|row| row[hash]).s..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：把 key 本身当优先级会导致树退化成 BST 最坏情况 let priority = key; ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../../crates/c08_algorithms/docs/README.md",
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../01_foundation/05_collections/01_collections.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "02_ownership_aware_data_structures.md",
+        "04_cache_friendly_and_simd_algorithms.md",
+        "09_randomized_and_probabilistic_algorithms.md",
+        "11_online_and_streaming_algorithms.md",
+        "14_network_flow_and_matching.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 13,
+      "pre_post": {
+        "pre": [
+          "[随机化与概率算法](09_randomized_and_probabilistic_algorithms.md) · [在线与流式算法](11_online_and_streaming_algorithms.md) · [所有权感知的数据结构](02_ownership_aware_data_structures.md) · [集合类型与哈希策略](../../01_foundation/05_collections/01_collections.md)"
+        ],
+        "post": [
+          "[网络流与匹配算法](14_network_flow_and_matching.md) · [缓存友好与 SIMD 算法](04_cache_friendly_and_simd_algorithms.md) · [c08_algorithms crate docs](../../../crates/c08_algorithms/docs/README.md)"
         ]
       },
       "backward_chains": 0,
