@@ -595,8 +595,8 @@ hashbrown = "0.17.1"  # 2026-05-09: cargo update
 # itertools: 迭代器工具库
 # 2026-07-11: 0.14.0 -> 0.15.0 (cargo update 提示落后最新，c04 示例已验证)
 itertools = "0.15.0"
-# lru: LRU缓存实现 - 2026-04-18: 升级至 0.17.0
-lru = "0.18.0"
+# lru: LRU缓存实现 - 2026-04-18: 升级至 0.17.0; 2026-08-03: cargo update 0.18.0 -> 0.18.2
+lru = "0.18.2"
 
 # Web 和 GUI 框架 - 2025年12月11日最新稳定版本
 # tauri 已移除，使用 egui/iced 替代 (解决 GTK3 安全漏洞)
@@ -779,11 +779,11 @@ const-hex = "=1.19.1"
 # - tokio: 1.53.0 -> 1.53.1 (cargo update 2026-07-21)
 # - tokio-util: 0.7.18 -> 0.7.19 (cargo update 2026-07-21, workspace 依赖同步)
 # - libc: 0.2.187 -> 0.2.188 (cargo update 2026-07-21, workspace 依赖同步)
-# - ntex-rt: 3.15.5 -> 3.15.7 (cargo update 2026-07-21, ntex 传递依赖)
+# - ntex-rt: 3.15.7 -> 3.16.0 (cargo update 2026-08-03, ntex 传递依赖)
 # - xxhash-rust: 0.8.17 -> 0.8.18 (cargo update 2026-07-21, redis/server_fn 传递依赖)
 # - redis: 1.4.1 -> 1.5.0 (workspace 依赖同步 2026-07-30)
 # - ntex-bytes: 1.8.0 -> 1.9.0 (cargo update 2026-07-17, ntex 传递依赖)
-# - ntex-net: 3.13.0 -> 3.13.1 (cargo update 2026-07-17, ntex 传递依赖)
+# - ntex-net: 3.13.1 -> 3.14.0 (cargo update 2026-08-03, ntex 传递依赖)
 # - ntex-tls: 3.7.0 -> 3.8.0 (cargo update 2026-07-17, ntex 传递依赖)
 # - ntex: 3.10.1 -> 3.12.0 (workspace 依赖同步 2026-07-30)
 # - tokio-macros: 2.7.0 -> 2.7.1 (cargo update 2026-07-17, tokio 传递依赖)
@@ -815,8 +815,8 @@ const-hex = "=1.19.1"
 #     glob: 0.3.3 -> 0.3.4
 #     leptos_router: 0.8.14 -> 0.8.15
 #     libp2p-gossipsub: 0.49.4 -> 0.49.5
-#     surrealdb 系列: 3.2.1 -> 3.2.3 (surrealdb, surrealdb-collections, surrealdb-core,
-#       surrealdb-strand, surrealdb-types, surrealdb-types-derive)
+#     surrealdb 系列: 3.2.3 -> 3.2.4 (surrealdb, surrealdb-collections, surrealdb-core,
+#       surrealdb-strand, surrealdb-types, surrealdb-types-derive) (cargo update 2026-08-03)
 #     syn 3.x: 3.0.2 -> 3.0.3 (cxx 等传递依赖)
 # - workspace 依赖同步 (cargo update 2026-07-22):
 #     clap: 4.6.3 -> 4.6.4
@@ -875,6 +875,23 @@ const-hex = "=1.19.1"
 #     ntex-macros: 3.3.0 -> 3.4.0
 #     subsecond* 系列: 0.7.9 -> 0.7.10 (subsecond, subsecond-types)
 #     xcursor: 0.3.10 -> 0.3.11
+# - 传递依赖 (cargo update 2026-08-03):
+#     aho-corasick: 1.1.4 -> 1.1.5 (c08_algorithms 直接依赖，Cargo.toml 已同步)
+#     amq-protocol* 系列: 10.6.2 -> 10.6.3 (amq-protocol, amq-protocol-tcp,
+#       amq-protocol-types, amq-protocol-uri; lapin 传递依赖)
+#     data-encoding* 系列: 2.11.0 -> 2.11.1 (data-encoding, data-encoding-macro,
+#       data-encoding-macro-internal)
+#     lru: 0.18.0 -> 0.18.2 (workspace 依赖同步；Cargo.lock 中 0.16.4 为另一传递依赖版本)
+#     ntex-net: 3.13.1 -> 3.14.0 (ntex 传递依赖)
+#     ntex-rt: 3.15.7 -> 3.16.0 (ntex 传递依赖)
+#     rustls-connector: 0.23.6 -> 0.23.7 (lapin 传递依赖)
+#     sentry* 系列: 0.49.0 -> 0.49.1 (sentry, sentry-backtrace, sentry-contexts,
+#       sentry-core, sentry-debug-images, sentry-panic, sentry-tracing, sentry-types;
+#       c06_async 直接依赖，Cargo.toml 已同步)
+#     surrealdb* 系列: 3.2.3 -> 3.2.4 (surrealdb, surrealdb-collections, surrealdb-core,
+#       surrealdb-strand, surrealdb-types, surrealdb-types-derive; c10_networks 直接依赖，
+#       Cargo.toml 已同步)
+#     webbrowser: 1.2.2 -> 1.2.3
 # - sqlx 0.8.6 -> 0.9.0: cargo update 2026-05-31 重大版本升级，需验证兼容性
 # - tracing-opentelemetry 0.32.1 -> 0.33.0: 已升级至 0.33.0
 # - unicode-width 0.2.0 -> 0.2.2: 已升级，传递依赖兼容性问题已解决

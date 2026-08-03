@@ -1,25 +1,25 @@
 {
   "summary": {
     "date": "2026-08-04",
-    "scanned": 727,
+    "scanned": 733,
     "counts": {
       "D1": 0,
       "D2": 12,
       "D3": 0,
       "D4": 0,
-      "D5": 0,
+      "D5": 1,
       "D6": 0
     },
     "pct": {
       "D1": 0.0,
-      "D2": 1.7,
+      "D2": 1.6,
       "D3": 0.0,
       "D4": 0.0,
-      "D5": 0.0,
+      "D5": 0.1,
       "D6": 0.0
     },
-    "D2_base_files_with_asp_and_bloom": 428,
-    "flagged_files": 12
+    "D2_base_files_with_asp_and_bloom": 434,
+    "flagged_files": 13
   },
   "examples": {
     "D1": [],
@@ -75,7 +75,12 @@
     ],
     "D3": [],
     "D4": [],
-    "D5": [],
+    "D5": [
+      [
+        "concept/06_ecosystem/05_systems_and_embedded/36_defmt_probe_rs_architecture.md",
+        "稳定层 nightly/preview 关键词 1 处"
+      ]
+    ],
     "D6": []
   },
   "per_file": {
@@ -97,6 +102,11 @@
     "concept/06_ecosystem/05_systems_and_embedded/32_embedded_testing_and_ci_strategies.md": {
       "D2": [
         "A/S/P=A 允许 [1, 2] 与 Bloom [5] 无交集"
+      ]
+    },
+    "concept/06_ecosystem/05_systems_and_embedded/36_defmt_probe_rs_architecture.md": {
+      "D5": [
+        "稳定层 nightly/preview 关键词 1 处"
       ]
     },
     "concept/06_ecosystem/14_enterprise_architecture/09_observability_and_sre_patterns.md": {

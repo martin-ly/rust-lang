@@ -68,7 +68,9 @@ pnet_macros_support = { version = "0.35", optional = true }
 
 # Search / vector database / document-graph database ecosystem examples
 meilisearch-sdk = { version = "0.33.0", default-features = false, features = ["reqwest", "tls"], optional = true }
-surrealdb = { version = "3.2.0", default-features = false, features = ["protocol-ws", "rustls"], optional = true }
+# 2026-07-30: 3.2.0 -> 3.2.3 (cargo update)
+# 2026-08-03: cargo update 3.2.3 -> 3.2.4
+surrealdb = { version = "3.2.4", default-features = false, features = ["protocol-ws", "rustls"], optional = true }
 vector = { version = "0.4.1", optional = true }
 
 # Cloud vendor SDK examples

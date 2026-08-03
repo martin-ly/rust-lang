@@ -1,42 +1,42 @@
 {
   "date": "2026-08-04",
-  "scanned": 690,
+  "scanned": 696,
   "coverage": {
     "P0": [
-      685,
-      99.3
+      687,
+      98.7
     ],
     "P1": [
       644,
-      93.3
+      92.5
     ],
     "P2": [
-      608,
+      613,
       88.1
     ],
     "any": [
-      690,
-      100.0
+      695,
+      99.9
     ],
-    "none": 0
+    "none": 1
   },
   "content_scope": {
-    "scanned": 595,
+    "scanned": 601,
     "P0": [
-      595,
-      100.0
+      597,
+      99.3
     ],
     "P1": [
       587,
-      98.7
+      97.7
     ],
     "P2": [
-      587,
-      98.7
+      592,
+      98.5
     ],
     "any": [
-      595,
-      100.0
+      600,
+      99.8
     ],
     "gaps_p1": [
       "concept/03_advanced/02_unsafe/11_in_place_pinned_initialization.md",
@@ -46,7 +46,13 @@
       "concept/04_formal/15_language_specification/02_ferrocene_language_specification.md",
       "concept/04_formal/15_language_specification/04_a_mir_formality_type_system_spec.md",
       "concept/04_formal/15_language_specification/05_specification_evidence_from_rustc_tests.md",
-      "concept/05_comparative/04_verification_and_contracts/00_verification_and_contracts_overview.md"
+      "concept/05_comparative/04_verification_and_contracts/00_verification_and_contracts_overview.md",
+      "concept/06_ecosystem/03_design_patterns/43_rejection_type_pattern.md",
+      "concept/06_ecosystem/03_design_patterns/44_configuration_management_patterns.md",
+      "concept/06_ecosystem/05_systems_and_embedded/33_sei_cert_c_to_rust_mapping.md",
+      "concept/06_ecosystem/05_systems_and_embedded/34_embassy_framework_deep_dive.md",
+      "concept/06_ecosystem/05_systems_and_embedded/35_rtic_framework_deep_dive.md",
+      "concept/06_ecosystem/05_systems_and_embedded/36_defmt_probe_rs_architecture.md"
     ],
     "gaps_p2": [
       "concept/04_formal/03_operational_semantics/13_in_place_initialization_semantics.md",
@@ -56,7 +62,8 @@
       "concept/04_formal/15_language_specification/03_executable_specification_minirust.md",
       "concept/04_formal/15_language_specification/04_a_mir_formality_type_system_spec.md",
       "concept/05_comparative/04_verification_and_contracts/00_verification_and_contracts_overview.md",
-      "concept/05_comparative/04_verification_and_contracts/01_contracts_comparison.md"
+      "concept/05_comparative/04_verification_and_contracts/01_contracts_comparison.md",
+      "concept/06_ecosystem/05_systems_and_embedded/33_sei_cert_c_to_rust_mapping.md"
     ]
   },
   "by_layer": {
@@ -91,9 +98,9 @@
       "any": 29
     },
     "L6": {
-      "n": 210,
-      "P0": 206,
-      "any": 210
+      "n": 216,
+      "P0": 208,
+      "any": 215
     },
     "L7": {
       "n": 75,
@@ -107,7 +114,9 @@
     }
   },
   "core_gaps_l1_l4_no_p0": [],
-  "none_any": [],
+  "none_any": [
+    "concept/06_ecosystem/05_systems_and_embedded/33_sei_cert_c_to_rust_mapping.md"
+  ],
   "crates_docs": {
     "total": 569,
     "kinds": {

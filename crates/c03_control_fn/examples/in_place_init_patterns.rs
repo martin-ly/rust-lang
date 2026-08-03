@@ -10,7 +10,7 @@
 
 use std::marker::PhantomPinned;
 use std::mem::MaybeUninit;
-use std::pin::{pin, Pin};
+use std::pin::{Pin, pin};
 
 /// 示例 1: MaybeUninit 基础模式
 fn maybeuninit_write_assume_init() {

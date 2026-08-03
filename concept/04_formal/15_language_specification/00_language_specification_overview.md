@@ -6,6 +6,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
+> **关联 L3 页**: [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
 
 ---
 
@@ -15,11 +16,11 @@ Rust 目前没有单一“圣经式”规范，而是由多个互补文档/工�
 
 | 坐标 | 回答的问题 | 当前角色 | 关键入口 |
 |---|---|---|---|
-| **The Rust Reference** | “Rust 应该怎么工作？” | 官方主要参考，但[明确声明 not normative](https://doc.rust-lang.org/reference/introduction.html) | https://doc.rust-lang.org/reference/introduction.html |
-| **Ferrocene Language Specification (FLS)** | “安全关键子集被规范地禁止/允许什么？” | 已捐赠给 Rust Project 的规范性语言规范，带规则标识符与限制子集 | https://spec.ferrocene.dev/ |
-| **a-mir-formality** | “类型系统、trait 求解、借用检查的形式化规则长什么样？” | Rust 官方的 MIR/类型系统形式化模型 | https://rust-lang.github.io/a-mir-formality/ |
-| **MiniRust / Miri** | “如果按某一组规则执行，程序会触发什么 UB？” | 可执行操作语义与动态 UB 检测 | https://github.com/minirust/minirust · https://github.com/rust-lang/miri |
-| **rustc 测试套件** | “编译器实际接受/拒绝哪些程序？” | 规范一致性证据库，非规范本身 | https://github.com/rust-lang/rust/tree/master/tests |
+| **The Rust Reference** | “Rust 应该怎么工作？” | 官方主要参考，但[明确声明 not normative](https://doc.rust-lang.org/reference/introduction.html) | <https://doc.rust-lang.org/reference/introduction.html> |
+| **Ferrocene Language Specification (FLS)** | “安全关键子集被规范地禁止/允许什么？” | 已捐赠给 Rust Project 的规范性语言规范，带规则标识符与限制子集 | <https://spec.ferrocene.dev/> |
+| **a-mir-formality** | “类型系统、trait 求解、借用检查的形式化规则长什么样？” | Rust 官方的 MIR/类型系统形式化模型 | <https://rust-lang.github.io/a-mir-formality/> |
+| **MiniRust / Miri** | “如果按某一组规则执行，程序会触发什么 UB？” | 可执行操作语义与动态 UB 检测 | <https://github.com/minirust/minirust> · <https://github.com/rust-lang/miri> |
+| **rustc 测试套件** | “编译器实际接受/拒绝哪些程序？” | 规范一致性证据库，非规范本身 | <https://github.com/rust-lang/rust/tree/master/tests> |
 
 > **核心关系**：Reference 描述意图，FLS 在认证子集上增加规范性约束，a-mir-formality 与 MiniRust 提供形式化/可执行语义，rustc tests 提供经验证据。五者之间的不一致，正是“规范缺口”的精确位置。
 
@@ -56,17 +57,17 @@ L5 经验证据        rustc tests（ui / mir-opt / codegen-llvm / compiletest�
 
 | 主题 | 权威来源 | URL | 在规范谱系中的位置 |
 |---|---|---|---|
-| 官方规范工作启动 | RFC 3355 — The Rust Specification | https://rust-lang.github.io/rfcs/3355-rust-spec.html | L2 技术规范的路线图 |
-| 实验性规范 2026 目标 | Rust Project Goals 2026 | https://rust-lang.github.io/rust-project-goals/2026/experimental-language-specification.html | L1→L2 的演进计划 |
-| FLS 上游化目标 | Rust Project Goals 2025H1 | https://rust-lang.github.io/rust-project-goals/2025h1/spec-fls-publish.html | L2 进入 rust-lang 基础设施 |
-| 跟踪 issue | rust-lang/rust #113527 | https://github.com/rust-lang/rust/issues/113527 | 进度与依赖 PR |
-| 非规范参考 | The Rust Reference | https://doc.rust-lang.org/reference/introduction.html | L1 用户参考 |
-| 规范性安全关键规范 | Ferrocene Language Specification | https://spec.ferrocene.dev/ | L2 技术规范 |
-| 类型系统形式化 | a-mir-formality | https://github.com/rust-lang/a-mir-formality | L3 形式化规约 |
-| 可执行操作语义 | MiniRust | https://github.com/minirust/minirust | L4 可执行规约 |
-| UB 动态检测 | Miri | https://github.com/rust-lang/miri | L4 的工具实现 |
-| 操作语义共识 | Unsafe Code Guidelines | https://rust-lang.github.io/unsafe-code-guidelines/ | L1-L2 与 L3-L4 之间的桥梁 |
-| 测试框架 | rustc-dev-guide — Compiletest | https://rustc-dev-guide.rust-lang.org/tests/compiletest.html | L5 证据方法论 |
+| 官方规范工作启动 | RFC 3355 — The Rust Specification | <https://rust-lang.github.io/rfcs/3355-rust-spec.html> | L2 技术规范的路线图 |
+| 实验性规范 2026 目标 | Rust Project Goals 2026 | <https://rust-lang.github.io/rust-project-goals/2026/experimental-language-specification.html> | L1→L2 的演进计划 |
+| FLS 上游化目标 | Rust Project Goals 2025H1 | <https://rust-lang.github.io/rust-project-goals/2025h1/spec-fls-publish.html> | L2 进入 rust-lang 基础设施 |
+| 跟踪 issue | rust-lang/rust #113527 | <https://github.com/rust-lang/rust/issues/113527> | 进度与依赖 PR |
+| 非规范参考 | The Rust Reference | <https://doc.rust-lang.org/reference/introduction.html> | L1 用户参考 |
+| 规范性安全关键规范 | Ferrocene Language Specification | <https://spec.ferrocene.dev/> | L2 技术规范 |
+| 类型系统形式化 | a-mir-formality | <https://github.com/rust-lang/a-mir-formality> | L3 形式化规约 |
+| 可执行操作语义 | MiniRust | <https://github.com/minirust/minirust> | L4 可执行规约 |
+| UB 动态检测 | Miri | <https://github.com/rust-lang/miri> | L4 的工具实现 |
+| 操作语义共识 | Unsafe Code Guidelines | <https://rust-lang.github.io/unsafe-code-guidelines/> | L1-L2 与 L3-L4 之间的桥梁 |
+| 测试框架 | rustc-dev-guide — Compiletest | <https://rustc-dev-guide.rust-lang.org/tests/compiletest.html> | L5 证据方法论 |
 
 ---
 

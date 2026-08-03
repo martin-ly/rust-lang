@@ -27,7 +27,8 @@ uuid = { workspace = true }
 num_cpus = { workspace = true }
 tokio-stream = { workspace = true }
 petgraph = { workspace = true, optional = true }
-aho-corasick = { version = "1.1.4", optional = true }
+# 2026-08-03: cargo update 1.1.4 -> 1.1.5
+aho-corasick = { version = "1.1.5", optional = true }
 crossbeam-epoch = { workspace = true }
 # ONNX / 纯 Rust 推理引擎示例依赖（可选，需启用 with-ort-tract）
 ort = { version = "=2.0.0-rc.12", optional = true }

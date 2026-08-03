@@ -7,6 +7,7 @@
 > **Ferrocene 版本**: 26.02.0（基于 rustc 1.92）
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
+> **关联 L3 页**: [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
 
 ---
 

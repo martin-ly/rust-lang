@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 699,
-    "generated_at": "2026-08-03T20:55:47.710952+00:00"
+    "total_files": 702,
+    "generated_at": "2026-08-03T21:39:05.318751+00:00"
   },
   "files": [
     {
@@ -53992,7 +53992,7 @@
       "layer": "L4",
       "title": "Rust 语言规范生态总览",
       "positioning": "",
-      "line_count": 133,
+      "line_count": 134,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -54002,6 +54002,7 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../06_ecosystem/00_toolchain/10_rustc_driver_and_stable_mir.md",
         "../../06_ecosystem/00_toolchain/13_compiler_testing.md",
         "../02_separation_logic/01_rustbelt.md",
@@ -54070,7 +54071,7 @@
       "layer": "L4",
       "title": "Ferrocene 语言规范（FLS）",
       "positioning": "",
-      "line_count": 179,
+      "line_count": 180,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -54098,6 +54099,7 @@
       "sources": [],
       "cross_references": [
         "../../../content/safety_critical/07_case_studies/01_case_study_01_ferrocene_certification.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../06_ecosystem/00_toolchain/13_compiler_testing.md",
         "../04_model_checking/01_verification_toolchain.md",
         "01_rust_reference_and_normative_gap.md"
@@ -54118,7 +54120,7 @@
       "layer": "L4",
       "title": "可执行规范：MiniRust 与 Miri",
       "positioning": "",
-      "line_count": 192,
+      "line_count": 193,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -54153,6 +54155,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../03_advanced/02_unsafe/01_unsafe.md",
         "../01_ownership_logic/05_tree_borrows_deep_dive.md",
         "../03_operational_semantics/10_minirust.md",
         "../04_model_checking/08_miri.md",
@@ -54175,7 +54178,7 @@
       "layer": "L4",
       "title": "a-mir-formality：MIR / 类型系统 / trait 求解的形式化模型",
       "positioning": "",
-      "line_count": 191,
+      "line_count": 192,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -54202,6 +54205,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../03_advanced/02_unsafe/01_unsafe.md",
         "../00_type_theory/01_type_theory.md",
         "../04_model_checking/01_verification_toolchain.md",
         "01_rust_reference_and_normative_gap.md",
@@ -54223,7 +54227,7 @@
       "layer": "L4",
       "title": "从 rustc 测试套件提取规范证据",
       "positioning": "",
-      "line_count": 164,
+      "line_count": 165,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -54242,6 +54246,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../03_advanced/02_unsafe/01_unsafe.md",
         "../../06_ecosystem/00_toolchain/10_rustc_driver_and_stable_mir.md",
         "../../06_ecosystem/00_toolchain/13_compiler_testing.md",
         "01_rust_reference_and_normative_gap.md",
@@ -67106,6 +67111,107 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\03_design_patterns\\43_rejection_type_pattern.md",
+      "layer": "L6",
+      "title": "Rejection Type 模式（Rejection Type Pattern）",
+      "positioning": "将输入校验、请求解析与领域错误显式分离，通过类型化的 Rejection 提升 Rust Web 服务的可测试性与错误可读性。",
+      "line_count": 525,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 五、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 41,
+          "should_fail": false,
+          "code_preview": "use std::fmt;  /// 已校验的订阅请求（核心领域值对象） #[derive(Debug, Clone, PartialEq)] pub stru..."
+        },
+        {
+          "flags": [],
+          "lines": 76,
+          "should_fail": false,
+          "code_preview": "# use std::fmt; # #[derive(Debug, Clone, PartialEq)] pub struct SubscriberEmail(..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 50,
+          "should_fail": false,
+          "code_preview": "use axum::{     extract::FromRequest,     http::{Request, StatusCode},     respo..."
+        },
+        {
+          "flags": [],
+          "lines": 37,
+          "should_fail": false,
+          "code_preview": "# use std::fmt; # #[derive(Debug, Clone, PartialEq)] pub struct SubscriberEmail(..."
+        },
+        {
+          "flags": [],
+          "lines": 43,
+          "should_fail": false,
+          "code_preview": "# use std::fmt; # #[derive(Debug, Clone, PartialEq)] pub struct SubscriberEmail(..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：所有失败都用 String，调用方无法区分缺少字段与格式非法 pub fn parse_subscribe(req: &RawSubscribe..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// ❌ 错误：应用服务里仍检查字符串格式 pub async fn subscribe(req: RawSubscribeRequest, pool: PgP..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "// ⚠️ 边界：虽然用了 enum，但只有一个变体 pub enum SubscribeRejection {     Invalid(String), } ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/08_error_handling/01_error_handling_basics.md",
+        "../../02_intermediate/00_traits/03_serde_patterns.md",
+        "../../02_intermediate/03_error_handling/01_error_handling.md",
+        "../../02_intermediate/04_types_and_conversions/07_type_conversions.md",
+        "../14_enterprise_architecture/04_domain_driven_design_in_rust.md",
+        "25_hexagonal_ports_and_adapters.md",
+        "39_api_design_and_semver_idioms.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 6,
+      "pre_post": {
+        "pre": [
+          "> [Error Handling Basics](../../01_foundation/08_error_handling/01_error_handling_basics.md) ·"
+        ],
+        "post": [
+          "> [Hexagonal / Ports & Adapters](25_hexagonal_ports_and_adapters.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\04_web_and_networking\\01_distributed_systems.md",
       "layer": "L6",
       "title": "分布式 系统：Rust 在微服务 与集群中的工程实践",
@@ -72439,6 +72545,274 @@
         ],
         "post": [
           "> [安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508](30_misra_rust_safety_critical_guidelines.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\05_systems_and_embedded\\33_sei_cert_c_to_rust_mapping.md",
+      "layer": "L6",
+      "title": "SEI CERT C → Rust 规则映射",
+      "positioning": "",
+      "line_count": 461,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 八、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// C 风格宏：需要括号防止展开捕获 // #define SQUARE(x) ((x) * (x))  // Rust 声明宏：参数天然按语法树分组 mac..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn demo_dcl() {     let x: i32;          // ❌ 编译错误：可能未初始化     // println!(\"{}\", ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0503"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "fn main() {     let mut i = 0;     // let v = i + { i += 1; i }; // 可能符合直觉，但 C 的..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "fn safe_add_demo(a: u32, b: u32) -> Result<u32, ()> {     a.checked_add(b).ok_or..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "fn safe_index(data: &[u8], idx: usize) -> Option<u8> {     data.get(idx).copied(..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// SAFETY: offset 在已分配数组范围内，且 result 仍指向同一分配。 unsafe fn offset_within_same_objec..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "fn mem_demo() {     let s = String::from(\"hello\"); // 分配     drop(s);           ..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "fn safe_format(user_input: &str) -> String {     // 用户输入作为参数传入，不会解析为格式说明符     fo..."
+        },
+        {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "use std::sync::{Arc, Mutex};  fn shared_counter() {     let counter = Arc::new(M..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "/// 将 C 风格 `memcpy(dst, src, n)` 封装为 safe Rust 接口。 /// /// # Safety /// - `src` ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0308"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "fn main() {     let x: u32 = 300;     let y: u8 = x; // ❌ 编译错误：expected u8, foun..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "fn narrow(x: u32) -> Option<u8> {     if x <= u8::MAX as u32 { Some(x as u8) } e..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "// 反模式：在整个模块中散落裸指针解引用 pub fn read_register() -> u32 {     unsafe { core::ptr::re..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "pub struct GpioaOdr(*mut u32);  impl GpioaOdr {     // SAFETY: addr 必须是该芯片 GPIOA..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../../content/safety_critical/10_standards/04_misra_c_2025_addendum_6_guide.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../03_advanced/04_ffi/02_ffi_advanced.md",
+        "../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md",
+        "08_c_to_rust_translation.md",
+        "14_interrupt_and_exception_model.md",
+        "19_safety_critical_bare_metal_os.md",
+        "26_embedded_rtos_and_safety_critical_frameworks.md",
+        "30_misra_rust_safety_critical_guidelines.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 52,
+      "pre_post": {
+        "pre": [
+          "[C-to-Rust Translation Ecosystem](08_c_to_rust_translation.md) ·"
+        ],
+        "post": [
+          "[Embedded RTOS and Safety-Critical Frameworks](26_embedded_rtos_and_safety_critical_frameworks.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\05_systems_and_embedded\\35_rtic_framework_deep_dive.md",
+      "layer": "L6",
+      "title": "RTIC 实时任务调度框架深度解析",
+      "positioning": "系统讲解 RTIC（Real-Time Interrupt-driven Concurrency）如何利用 Rust 所有权与 Cortex-M NVIC 优先级实现零开销、编译期可分析的实时任务调度；覆盖任务/资源模型、优先级天花板协议、`lock` 临界区、`rtic-monotonics`、软硬件任务、调度正确性推理及与 Embassy/裸机中断的对比。",
+      "line_count": 581,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 八、反例"
+        },
+        {
+          "title": "### 8.1 反例"
+        },
+        {
+          "title": "### 8.2 反例"
+        },
+        {
+          "title": "### 8.3 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 23,
+          "should_fail": false,
+          "code_preview": "#[rtic::app(device = stm32f4::stm32f407, peripherals = true)] mod app {     #[sh..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "#[task(binds = TIM2, priority = 2, shared = [counter])] fn tick(mut cx: tick::Co..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "#[task(binds = TIM2, priority = 2, shared = [counter])] fn tick(mut cx: tick::Co..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 30,
+          "should_fail": false,
+          "code_preview": "#[rtic::app(device = stm32f4::stm32f407, dispatchers = [TIM5])] mod app {     us..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 52,
+          "should_fail": false,
+          "code_preview": "#![no_std] #![no_main]  #[rtic::app(device = stm32f4::stm32f407, peripherals = t..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 46,
+          "should_fail": false,
+          "code_preview": "#![no_std] #![no_main]  #[rtic::app(device = stm32f4::stm32f407, dispatchers = [..."
+        },
+        {
+          "flags": [
+            "ignore",
+            "compile_fail"
+          ],
+          "lines": 12,
+          "should_fail": true,
+          "code_preview": "#[rtic::app(device = stm32f4::stm32f407)] mod app {     #[shared]     struct Sha..."
+        },
+        {
+          "flags": [
+            "ignore",
+            "compile_fail"
+          ],
+          "lines": 17,
+          "should_fail": true,
+          "code_preview": "#[rtic::app(device = stm32f4::stm32f407)] mod app {     #[local]     struct Loca..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "#[task(binds = DMA1, priority = 4, shared = [adc_buf])] fn adc_done(mut cx: adc_..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "03_embedded_systems.md",
+        "11_async_no_std_embedded.md",
+        "14_interrupt_and_exception_model.md",
+        "15_no_std_synchronization_primitives.md",
+        "20_embedded_debugging_logging.md",
+        "26_embedded_rtos_and_safety_critical_frameworks.md",
+        "28_custom_bare_metal_async_executor.md",
+        "30_misra_rust_safety_critical_guidelines.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 3,
+      "matrix_rows": 20,
+      "pre_post": {
+        "pre": [
+          "[Rust 嵌入式系统开发](03_embedded_systems.md) · [Cortex-M 与 RISC-V 中断异常模型](14_interrupt_and_exception_model.md) · [no_std 同步原语](15_no_std_synchronization_primitives.md) · [异步 no_std 嵌入式](11_async_no_std_embedded.md) · [嵌入式 RTOS 与安全关键框架对比](26_embedded_rtos_and_safety_critical_frameworks.md)"
+        ],
+        "post": [
+          "[自定义裸机异步执行器](28_custom_bare_metal_async_executor.md) · [嵌入式调试与日志](20_embedded_debugging_logging.md) · [安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508](30_misra_rust_safety_critical_guidelines.md)"
         ]
       },
       "backward_chains": 0,

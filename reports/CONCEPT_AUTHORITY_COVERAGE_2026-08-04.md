@@ -3,33 +3,33 @@
 **EN**: Concept-layer International Authority Coverage
 **Summary**: 复用 maintenance P0/P1/P2 权威域分级，把审计扩展到 concept/ 权威层；量化覆盖率与缺口，为『对齐网络上的国际化权威相关内容』提供机器可复核基线。仅审计，不改正文。
 
-> 生成: 2026-08-04 · 扫描 concept/ 活跃 md: **690**（排除 archive/SUMMARY/README）
+> 生成: 2026-08-04 · 扫描 concept/ 活跃 md: **696**（排除 archive/SUMMARY/README）
 > P0 官方 / P1 学术形式化 / P2 社区生态，域定义复用 `scripts/maintenance/authority_coverage_dashboard.py`
 
 ## 总体覆盖率
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 685 | 99.3% |
-| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 644 | 93.3% |
-| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 608 | 88.1% |
-| **任一权威（P0∪P1∪P2）** | **690** | **100.0%** |
-| 无任何国际权威引用（缺口） | 0 | 0.0% |
+| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 687 | 98.7% |
+| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 644 | 92.5% |
+| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 613 | 88.1% |
+| **任一权威（P0∪P1∪P2）** | **695** | **99.9%** |
+| 无任何国际权威引用（缺口） | 1 | 0.1% |
 
 ## 内容页口径覆盖率（排除 00_meta 工具页 / quiz / placeholders / sources 索引）
 
-> 内容页 **595** 页。00_meta 为知识库内部工具/导航/审计页，非 Rust 概念内容，其权威基线为 P0 官方文档；P1/P2 学术生态来源对其不适用，故单列口径。
+> 内容页 **601** 页。00_meta 为知识库内部工具/导航/审计页，非 Rust 概念内容，其权威基线为 P0 官方文档；P1/P2 学术生态来源对其不适用，故单列口径。
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方 | 595 | 100.0% |
-| P1 学术/形式化 | 587 | 98.7% |
-| P2 社区/生态 | 587 | 98.7% |
-| **任一权威** | **595** | **100.0%** |
+| P0 官方 | 597 | 99.3% |
+| P1 学术/形式化 | 587 | 97.7% |
+| P2 社区/生态 | 592 | 98.5% |
+| **任一权威** | **600** | **99.8%** |
 
-内容页 P1 缺口（8）: `concept/03_advanced/02_unsafe/11_in_place_pinned_initialization.md` · `concept/04_formal/03_operational_semantics/13_in_place_initialization_semantics.md` · `concept/04_formal/15_language_specification/00_language_specification_overview.md` · `concept/04_formal/15_language_specification/01_rust_reference_and_normative_gap.md` · `concept/04_formal/15_language_specification/02_ferrocene_language_specification.md` · `concept/04_formal/15_language_specification/04_a_mir_formality_type_system_spec.md` · `concept/04_formal/15_language_specification/05_specification_evidence_from_rustc_tests.md` · `concept/05_comparative/04_verification_and_contracts/00_verification_and_contracts_overview.md`
+内容页 P1 缺口（14）: `concept/03_advanced/02_unsafe/11_in_place_pinned_initialization.md` · `concept/04_formal/03_operational_semantics/13_in_place_initialization_semantics.md` · `concept/04_formal/15_language_specification/00_language_specification_overview.md` · `concept/04_formal/15_language_specification/01_rust_reference_and_normative_gap.md` · `concept/04_formal/15_language_specification/02_ferrocene_language_specification.md` · `concept/04_formal/15_language_specification/04_a_mir_formality_type_system_spec.md` · `concept/04_formal/15_language_specification/05_specification_evidence_from_rustc_tests.md` · `concept/05_comparative/04_verification_and_contracts/00_verification_and_contracts_overview.md` · `concept/06_ecosystem/03_design_patterns/43_rejection_type_pattern.md` · `concept/06_ecosystem/03_design_patterns/44_configuration_management_patterns.md` · `concept/06_ecosystem/05_systems_and_embedded/33_sei_cert_c_to_rust_mapping.md` · `concept/06_ecosystem/05_systems_and_embedded/34_embassy_framework_deep_dive.md` · `concept/06_ecosystem/05_systems_and_embedded/35_rtic_framework_deep_dive.md` · `concept/06_ecosystem/05_systems_and_embedded/36_defmt_probe_rs_architecture.md`
 
-内容页 P2 缺口（8）: `concept/04_formal/03_operational_semantics/13_in_place_initialization_semantics.md` · `concept/04_formal/04_model_checking/12_rust_contracts.md` · `concept/04_formal/15_language_specification/00_language_specification_overview.md` · `concept/04_formal/15_language_specification/01_rust_reference_and_normative_gap.md` · `concept/04_formal/15_language_specification/03_executable_specification_minirust.md` · `concept/04_formal/15_language_specification/04_a_mir_formality_type_system_spec.md` · `concept/05_comparative/04_verification_and_contracts/00_verification_and_contracts_overview.md` · `concept/05_comparative/04_verification_and_contracts/01_contracts_comparison.md`
+内容页 P2 缺口（9）: `concept/04_formal/03_operational_semantics/13_in_place_initialization_semantics.md` · `concept/04_formal/04_model_checking/12_rust_contracts.md` · `concept/04_formal/15_language_specification/00_language_specification_overview.md` · `concept/04_formal/15_language_specification/01_rust_reference_and_normative_gap.md` · `concept/04_formal/15_language_specification/03_executable_specification_minirust.md` · `concept/04_formal/15_language_specification/04_a_mir_formality_type_system_spec.md` · `concept/05_comparative/04_verification_and_contracts/00_verification_and_contracts_overview.md` · `concept/05_comparative/04_verification_and_contracts/01_contracts_comparison.md` · `concept/06_ecosystem/05_systems_and_embedded/33_sei_cert_c_to_rust_mapping.md`
 
 ## 按层级覆盖率
 
@@ -41,7 +41,7 @@
 | L3 | 78 | 78 | 100.0% | 78 | 100.0% |
 | L4 | 119 | 119 | 100.0% | 119 | 100.0% |
 | L5 | 29 | 29 | 100.0% | 29 | 100.0% |
-| L6 | 210 | 206 | 98.1% | 210 | 100.0% |
+| L6 | 216 | 208 | 96.3% | 215 | 99.5% |
 | L7 | 75 | 74 | 98.7% | 75 | 100.0% |
 | L? | 3 | 3 | 100.0% | 3 | 100.0% |
 
