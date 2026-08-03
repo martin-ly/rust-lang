@@ -12,13 +12,27 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **P** — Professional / Expert
 > **双维定位**: T×Fml — 工具链与形式化验证
-> **定位**: 将 Creusot 从学术研究工具还原为算法与数据结构功能正确性验证的可选工具，理解其与 Kani/Verus/Prusti/Aeneas 的边界。学习本页前应先掌握 L3 [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) 与 L4 [Ownership Formalization](../01_ownership_logic/02_ownership_formal.md) 的基础。
-> **前置概念**: [Verification Toolchain](01_verification_toolchain.md) · [现代验证工具生态](04_modern_verification_tools.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
+> **定位**:
+> 将 Creusot 从学术研究工具还原为算法与数据结构功能正确性验证的可选工具，理解其与 Kani/Verus/Prusti/Aeneas 的边界。
+> 学习本页前应先掌握 L3 [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) 与 L4 [Ownership Formalization](../01_ownership_logic/02_ownership_formal.md) 的基础。
+> **前置概念**:
+> [Verification Toolchain](01_verification_toolchain.md) ·
+> [现代验证工具生态](04_modern_verification_tools.md) ·
+> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) ·
+> [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
 > **后置概念**: [Kani](09_kani.md) · [Miri](08_miri.md) · [AutoVerus](07_autoverus.md)
 
 ---
 
-> **来源**: [Creusot 官方文档](https://creusot.rs/) · [Creusot Project Site](https://creusot-rs.github.io/) · [Creusot GitHub](https://github.com/creusot-rs/creusot) · [Creusot User Guide](https://guide.creusot.rs/) · [Why3 Platform](http://why3.lri.fr/) · [Denis et al., ICFEM 2022 — Creusot: A Foundry for the Deductive Verification of Rust Programs](https://doi.org/10.1007/978-3-031-17244-1_9) · [Denis & Jourdan, PLDI 2023 — COMeT](https://pldi23.sigplan.org/details/pldi-2023-pldi/64/Flux-Liquid-Types-for-Rust) · [Matsushita et al. — RustHorn (PLDI 2020)](https://doi.org/10.1145/3385412.3386022) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
+> **来源**:
+> [Creusot 官方文档](https://creusot.rs/) · [Creusot Project Site](https://creusot-rs.github.io/) ·
+> [Creusot GitHub](https://github.com/creusot-rs/creusot) · [Creusot User Guide](https://guide.creusot.rs/) ·
+> [Why3 Platform](http://why3.lri.fr/) ·
+> [Denis et al., ICFEM 2022 — Creusot: A Foundry for the Deductive Verification of Rust Programs](https://doi.org/10.1007/978-3-031-17244-1_9) ·
+> [Denis & Jourdan, PLDI 2023 — COMeT](https://pldi23.sigplan.org/details/pldi-2023-pldi/64/Flux-Liquid-Types-for-Rust) ·
+> [Matsushita et al. — RustHorn (PLDI 2020)](https://doi.org/10.1145/3385412.3386022) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 
 ---
 
@@ -63,9 +77,12 @@
 
 ## 一、Creusot 是什么
 
-**Creusot** 是 INRIA 开发并开源的 **Rust 演绎验证器（deductive verifier）**。它将 Rust 程序的 MIR（中级中间表示）翻译为 **Coma**（Why3 平台的中间验证语言），再借助 Why3 生成验证条件（Verification Conditions, VC），最终由 SMT 求解器（Alt-Ergo、Z3、CVC4 等）或 Coq 交互式证明器自动/半自动地 discharge 这些条件。 (Source: [Creusot 官方文档](https://creusot.rs/))
+**Creusot** 是 INRIA 开发并开源的 **Rust 演绎验证器（deductive verifier）**。
+它将 Rust 程序的 MIR（中级中间表示）翻译为 **Coma**（Why3 平台的中间验证语言），再借助 Why3 生成验证条件（Verification Conditions, VC），最终由 SMT 求解器（Alt-Ergo、Z3、CVC4 等）或 Coq 交互式证明器自动/半自动地 discharge 这些条件。
+(Source: [Creusot 官方文档](https://creusot.rs/))
 
-> **关键洞察**: Creusot 不是测试框架，也不是模型检查器，而是**契约驱动的演绎验证器**。它回答的问题是："对于所有满足前置条件的输入，该函数是否永远不会 panic、溢出、违反断言，并且满足后置条件？"
+> **关键洞察**: Creusot 不是测试框架，也不是模型检查器，而是**契约驱动的演绎验证器**。
+> 它回答的问题是："对于所有满足前置条件的输入，该函数是否永远不会 panic、溢出、违反断言，并且满足后置条件？"
 >
 > 与 Kani 的有界模型检测不同，Creusot 的结论是**无界的**——只要循环不变量、终止度量与函数契约成立，结论对所有输入和路径有效。
 

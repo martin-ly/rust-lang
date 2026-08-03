@@ -447,7 +447,11 @@ fn main() {
 - [docs.rs: tokio::select!](https://docs.rs/tokio/latest/tokio/macro.select.html) —— tokio `select!` 宏的 API 文档与行为契约
 - [Async await is stable](https://blog.rust-lang.org/2019/11/07/Async-await-stable.html) —— Rust 官方博客宣布 `async/await` 稳定的语言级说明
 
-> **相关文件**: [同层：Models of Concurrency](01_models_of_concurrency.md) · [同层 07：Process Calculi](../07_concurrency_semantics/01_process_calculi_for_rust.md) · [同层 07：Actor Semantics](../07_concurrency_semantics/03_actor_semantics.md) · [同层 08：Algorithm Equivalence](../08_algorithm_semantics/05_algorithm_equivalence.md)
+> **相关文件**:
+> [同层：Models of Concurrency](01_models_of_concurrency.md) ·
+> [同层 07：Process Calculi](../07_concurrency_semantics/01_process_calculi_for_rust.md) ·
+> [同层 07：Actor Semantics](../07_concurrency_semantics/03_actor_semantics.md) ·
+> [同层 08：Algorithm Equivalence](../08_algorithm_semantics/05_algorithm_equivalence.md)
 >
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-28 ｜ **状态**: ✅ 新建权威页（Rust 1.97 对齐）
 

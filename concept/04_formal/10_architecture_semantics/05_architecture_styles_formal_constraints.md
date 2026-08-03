@@ -11,13 +11,24 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **定位**: 从形式化视角定义主流架构风格（architecture styles）的语义约束，将高层架构决策转写为可在 Rust 中编码、检查的不变量；是 [Architecture Patterns](../../06_ecosystem/03_design_patterns/08_architecture_patterns.md) 与 [Architecture Pattern Semantics](02_architecture_pattern_semantics.md) 的形式化补充。
-> **前置概念**: [Architecture Patterns](../../06_ecosystem/03_design_patterns/08_architecture_patterns.md) · [Architecture Pattern Semantics](02_architecture_pattern_semantics.md) · [Rust Architecture Constraints](04_rust_architecture_constraints.md) · [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Async/Await](../../03_advanced/01_async/01_async.md)
+> **定位**:
+> 从形式化视角定义主流架构风格（architecture styles）的语义约束，将高层架构决策转写为可在 Rust 中编码、检查的不变量；
+> 是 [Architecture Patterns](../../06_ecosystem/03_design_patterns/08_architecture_patterns.md) 与 [Architecture Pattern Semantics](02_architecture_pattern_semantics.md) 的形式化补充。
+> **前置概念**:
+> [Architecture Patterns](../../06_ecosystem/03_design_patterns/08_architecture_patterns.md) ·
+> [Architecture Pattern Semantics](02_architecture_pattern_semantics.md) ·
+> [Rust Architecture Constraints](04_rust_architecture_constraints.md) ·
+> [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) ·
+> [Async/Await](../../03_advanced/01_async/01_async.md)
 > **后置概念**: [Architecture Refinement](03_architecture_refinement.md) · [Pattern Composition Algebra](../00_type_theory/12_pattern_composition_algebra.md)
 
 ---
 
-> **来源**: [Rust Reference — Items and Visibility](https://doc.rust-lang.org/reference/visibility-and-privacy.html) · [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/traits.html#orphan-rules) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) · [tokio](https://docs.rs/tokio/) · [rayon](https://docs.rs/rayon/)
+> **来源**:
+> [Rust Reference — Items and Visibility](https://doc.rust-lang.org/reference/visibility-and-privacy.html) ·
+> [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/traits.html#orphan-rules) ·
+> [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) ·
+> [tokio](https://docs.rs/tokio/) · [rayon](https://docs.rs/rayon/)
 
 > **权威来源 / Provenance**: 本节架构风格的形式化约束主要对齐以下文献：
 >

@@ -8,17 +8,29 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
 > **权威来源**: 本文件为 `concept/` 权威页。
-> ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
+> ⚠️ **声明**:
+> 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。
+> 如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
 > **层次定位**: L4 形式化理论 / 公理语义子域 (Source: [Winskel 1993 — The Formal Semantics of Programming Languages](https://mitpress.mit.edu/9780262731034))
 > **A/S/P 标记**: **S+P** — Structure + Procedure
 > **双维定位**: C×Eva — 评价形式化规约的完备性
-> **前置依赖**: [Type Theory](../00_type_theory/01_type_theory.md) · [Ownership Formalization](../01_ownership_logic/02_ownership_formal.md) · [Operational Semantics](03_operational_semantics.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
-> **后置延伸**: [RustBelt](../02_separation_logic/01_rustbelt.md) · [Separation Logic](../02_separation_logic/02_separation_logic.md) · [Verification Toolchain](../04_model_checking/01_verification_toolchain.md)
+> **前置依赖**:
+> [Type Theory](../00_type_theory/01_type_theory.md) ·
+> [Ownership Formalization](../01_ownership_logic/02_ownership_formal.md) ·
+> [Operational Semantics](03_operational_semantics.md) ·
+> [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
+> **后置延伸**:
+> [RustBelt](../02_separation_logic/01_rustbelt.md) ·
+> [Separation Logic](../02_separation_logic/02_separation_logic.md) ·
+> [Verification Toolchain](../04_model_checking/01_verification_toolchain.md)
 > **跨层映射**: L4→L1 公理规约 ↔ 工程直觉 | L4→L3 Unsafe 边界 ↔ 公理失效区域
 > **定理链编号**: T-120 霍尔三元组可判定性 → T-121 wp 计算完备性 → T-122 所有权（Ownership）不变式可验证性
 > **后置概念**: [Comparative Studies](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [RustBelt](https://plv.mpi-sws.org/rustbelt/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
 ## 📑 目录
 
@@ -104,7 +116,12 @@ Hoare 逻辑的核心公理包括：
 | **条件规则** | \(\frac{\{P \land B\}C_1\{Q\},\ \{P \land \neg B\}C_2\{Q\}}{\{P\}\text{if }B\text{ then }C_1\text{ else }C_2\{Q\}}\) | `if` / `match` 表达式 |
 | **循环规则** | \(\frac{\{I \land B\}C\{I\}}{\{I\}\text{while }B\text{ do }C\{I \land \neg B\}}\) | `while` / `loop`（需循环不变式） |
 
-> **关键洞察**: Hoare 逻辑的**赋值公理**假设变量是无别名的（aliasing-free）。在 Rust 中，这一假设由**所有权（Ownership）系统**在编译期保证——`&mut T` 的独占性确保了赋值操作的公理化不会受到别名干扰。这与 C/C++ 形成鲜明对比：C 中任意指针可能别名同一内存，导致赋值公理失效，需要更复杂的分离逻辑来恢复。来源: [Hoare 1969] · [O'Hearn, Reynolds & Yang 2001 — Local Reasoning about Programs that Alter Data Structures](https://doi.org/10.1007/3-540-44802-0_1) · 来源: [Separation Logic — Reynolds 2002]
+> **关键洞察**:
+> Hoare 逻辑的**赋值公理**假设变量是无别名的（aliasing-free）。
+> 在 Rust 中，这一假设由**所有权（Ownership）系统**在编译期保证——`&mut T` 的独占性确保了赋值操作的公理化不会受到别名干扰。
+> 这与 C/C++ 形成鲜明对比：C 中任意指针可能别名同一内存，导致赋值公理失效，需要更复杂的分离逻辑来恢复。
+> 来源: [Hoare 1969] · [O'Hearn, Reynolds & Yang 2001 — Local Reasoning about Programs that Alter Data Structures](https://doi.org/10.1007/3-540-44802-0_1) ·
+> 来源: [Separation Logic — Reynolds 2002]
 
 ### 1.2 最弱前置条件（Weakest Precondition）
 >
@@ -259,7 +276,12 @@ let s2 = s1;                      // { moved(Σ, s1) ∧ no_borrows_active(s2) }
 // println!("{}", s1);           // ❌ 编译错误: s1 已失效
 ```
 
-> **形式化洞察**: Rust 的赋值公理比标准 Hoare 逻辑更复杂，因为它不仅是**状态更新**（`Q[x/e]`），还是**资源转移**——`s1` 的所有权被"消耗"并转移到 `s2`。这与分离逻辑中的**框架规则**（Frame Rule）天然契合：赋值操作只影响局部资源，不变的部分自动保持。(Source: [O'Hearn, Reynolds & Yang 2001](https://doi.org/10.1007/3-540-44802-0_1) · [Separation Logic — Reynolds 2002](https://www.cs.cmu.edu/~jcr/seplogic.pdf)) · (Source: [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/))
+> **形式化洞察**:
+> Rust 的赋值公理比标准 Hoare 逻辑更复杂，因为它不仅是**状态更新**（`Q[x/e]`），还是**资源转移**——`s1` 的所有权被"消耗"并转移到 `s2`。
+> 这与分离逻辑中的**框架规则**（Frame Rule）天然契合：赋值操作只影响局部资源，不变的部分自动保持。
+> (Source: [O'Hearn, Reynolds & Yang 2001](https://doi.org/10.1007/3-540-44802-0_1) ·
+> [Separation Logic — Reynolds 2002](https://www.cs.cmu.edu/~jcr/seplogic.pdf)) ·
+> (Source: [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/))
 
 ### 3.2 所有权转移的 wp 计算
 >
@@ -300,7 +322,11 @@ wp(let x = e, Q) =
             borrow(e, κ) → Q[x/e]     // 引入借用令牌 κ
 ```
 
-> **关键区别**: `Copy` 类型的 wp 就是标准 Hoare 赋值公理；`Move` 类型的 wp 引入了**资源消耗**，这是 Rust 所有权系统对公理语义的独特贡献。RustBelt 通过**Iris 幽灵状态**（ghost state）形式化地追踪这些资源令牌，使得 wp 计算可以精确建模所有权转移。(Source: [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/)) · (Source: [Iris Project](https://iris-project.org/))
+> **关键区别**:
+> `Copy` 类型的 wp 就是标准 Hoare 赋值公理；`Move` 类型的 wp 引入了**资源消耗**，这是 Rust 所有权系统对公理语义的独特贡献。
+> RustBelt 通过**Iris 幽灵状态**（ghost state）形式化地追踪这些资源令牌，使得 wp 计算可以精确建模所有权转移。
+> (Source: [RustBelt — Jung et al. 2018](https://plv.mpi-sws.org/rustbelt/popl18/)) ·
+> (Source: [Iris Project](https://iris-project.org/))
 
 ### 3.3 借用规则的不变式
 >
@@ -348,7 +374,13 @@ fn check_invariants() {
 }
 ```
 
-> **形式化表达**: 借用检查器通过**区域约束系统**（Region Constraint System）在编译期验证这三个不变式。NLL（Non-Lexical Lifetimes）将生命周期从词法作用域精确到**使用点**（use-site），使得不变式的验证更加精确。Polonius 进一步将区域约束转化为 Datalog 规则，实现 borrow check 的声明式表达。(Source: [Rust RFC 2094 — NLL](https://rust-lang.github.io/rfcs//2094-nll.html)) · (Source: [Polonius — rust-lang/polonius](https://github.com/rust-lang/polonius)) · (Source: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html))
+> **形式化表达**:
+> 借用检查器通过**区域约束系统**（Region Constraint System）在编译期验证这三个不变式。
+> NLL（Non-Lexical Lifetimes）将生命周期从词法作用域精确到**使用点**（use-site），使得不变式的验证更加精确。
+> Polonius 进一步将区域约束转化为 Datalog 规则，实现 borrow check 的声明式表达。
+> (Source: [Rust RFC 2094 — NLL](https://rust-lang.github.io/rfcs//2094-nll.html)) ·
+> (Source: [Polonius — rust-lang/polonius](https://github.com/rust-lang/polonius)) ·
+> (Source: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/items/generics.html))
 
 ### 3.4 unsafe 块的公理边界
 >
@@ -387,7 +419,12 @@ unsafe fn dereference_raw<T>(ptr: *const T) -> T {
 // 其中 unsafe_assumptions(ptr) 是程序员手动保证的前置条件
 ```
 
-> **关键洞察**: `unsafe` 块不是"无规则"的区域，而是**公理由程序员手动提供**的区域。Rust 的 `// SAFETY:` 注释文化正是公理语义在工程实践中的体现——程序员在 unsafe 块前显式声明所需的前置条件，这些条件构成了人工的霍尔三元组。然而，当前工具链（Prusti/Creusot/Kani）对 `unsafe` 的支持仍然有限，这是 Rust 形式化验证的最大缺口之一。(Source: [Rustonomicon — Unsafe Rust](https://doc.rust-lang.org/nomicon/meet-safe-and-unsafe.html)) · (Source: [RustBelt — Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/))
+> **关键洞察**:
+> `unsafe` 块不是"无规则"的区域，而是**公理由程序员手动提供**的区域。
+> Rust 的 `// SAFETY:` 注释文化正是公理语义在工程实践中的体现——程序员在 unsafe 块前显式声明所需的前置条件，这些条件构成了人工的霍尔三元组。
+> 然而，当前工具链（Prusti/Creusot/Kani）对 `unsafe` 的支持仍然有限，这是 Rust 形式化验证的最大缺口之一。
+> (Source: [Rustonomicon — Unsafe Rust](https://doc.rust-lang.org/nomicon/meet-safe-and-unsafe.html)) ·
+> (Source: [RustBelt — Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/))
 
 ---
 
@@ -429,7 +466,11 @@ fn increment_positive(x: i32) -> i32 {
 // wp(increment_positive, result > x) = (x + 1 > x) = true (given x > 0)
 ```
 
-> **局限**: Prusti 目前不支持 `unsafe` 块、并发、`dyn Trait` 和复杂的生命周期（Lifetimes）泛型（Generics）。其验证范围本质上是"安全的 Rust 子集"——这正是公理语义在工业工具中的典型边界。(Source: [Prusti Documentation](https://www.pm.inf.ethz.ch/research/prusti.html)) · (Source: [Viper Project](https://www.pm.inf.ethz.ch/research/viper.html))
+> **局限**:
+> Prusti 目前不支持 `unsafe` 块、并发、`dyn Trait` 和复杂的生命周期（Lifetimes）泛型（Generics）。
+> 其验证范围本质上是"安全的 Rust 子集"——这正是公理语义在工业工具中的典型边界。
+> (Source: [Prusti Documentation](https://www.pm.inf.ethz.ch/research/prusti.html)) ·
+> (Source: [Viper Project](https://www.pm.inf.ethz.ch/research/viper.html))
 
 ### 4.2 Creusot：Why3 逻辑下的 WP 计算
 >
@@ -458,7 +499,10 @@ pub fn increment(x: i32) -> i32 {
 // 结合前置条件 x > 0，验证通过。
 ```
 
-> **与 RustBelt 的关系**: Creusot 验证的是**功能性正确性**（函数输出满足规约），而 RustBelt 验证的是**内存安全（Memory Safety）性**（无悬垂指针、无数据竞争）。两者互补：Creusot 的 wp 计算假设底层内存安全已由 Rust 编译器保证，RustBelt 的形式化证明为这一假设提供了数学基础。(Source: [Creusot Documentation](https://creusot.rs/)) · (Source: [Why3 Platform](https://why3.lri.fr/))
+> **与 RustBelt 的关系**:
+> Creusot 验证的是**功能性正确性**（函数输出满足规约），而 RustBelt 验证的是**内存安全（Memory Safety）性**（无悬垂指针、无数据竞争）。
+> 两者互补：Creusot 的 wp 计算假设底层内存安全已由 Rust 编译器保证，RustBelt 的形式化证明为这一假设提供了数学基础。
+> (Source: [Creusot Documentation](https://creusot.rs/)) · (Source: [Why3 Platform](https://why3.lri.fr/))
 
 ### 4.3 Kani：符号执行与断言验证
 >
@@ -489,7 +533,12 @@ fn check_increment() {
 //   → (result > x) ✓
 ```
 
-> **局限与优势**: Kani 的优势是**全自动**（无需手动写循环不变式），局限是**路径爆炸**（复杂程序的状态空间过大）。它更适合验证小规模的核心抽象（如标准库原语），而非大型应用程序。这与公理语义的理论边界一致：全自动验证（无不变式辅助）仅在有限状态空间下可判定。(Source: [Kani Documentation](https://model-checking.github.io/kani/)) · (Source: [CBMC — C Bounded Model Checker](https://github.com/diffblue/cbmc))
+> **局限与优势**:
+> Kani 的优势是**全自动**（无需手动写循环不变式），局限是**路径爆炸**（复杂程序的状态空间过大）。
+> 它更适合验证小规模的核心抽象（如标准库原语），而非大型应用程序。
+> 这与公理语义的理论边界一致：全自动验证（无不变式辅助）仅在有限状态空间下可判定。
+> (Source: [Kani Documentation](https://model-checking.github.io/kani/)) ·
+> (Source: [CBMC — C Bounded Model Checker](https://github.com/diffblue/cbmc))
 
 ---
 
@@ -608,7 +657,11 @@ fn bad_loop(n: u32) -> u32 {
 // #[invariant(i <= n)]
 ```
 
-> **修正**: wp 计算的终止性依赖于循环不变式的存在。Dijkstra 的 wp 理论证明：若循环不变式存在，则 H_k 序列在有限步内收敛到不动点；若不存在，wp 计算可能不终止。这与 Rust 的借用检查形成对比——借用检查器总是终止的，因为它验证的是**语法可判定的**约束（生命周期（Lifetimes）包含），而非**语义不可判定的**不变式。(Source: [Dijkstra 1975](https://doi.org/10.1145/360933.360975)) · (Source: [Winskel 1993, §7.4](https://mitpress.mit.edu/9780262731034))
+> **修正**:
+> wp 计算的终止性依赖于循环不变式的存在。Dijkstra 的 wp 理论证明：若循环不变式存在，则 H_k 序列在有限步内收敛到不动点；若不存在，wp 计算可能不终止。
+> 这与 Rust 的借用检查形成对比——借用检查器总是终止的，因为它验证的是**语法可判定的**约束（生命周期（Lifetimes）包含），而非**语义不可判定的**不变式。
+> (Source: [Dijkstra 1975](https://doi.org/10.1145/360933.360975)) ·
+> (Source: [Winskel 1993, §7.4](https://mitpress.mit.edu/9780262731034))
 
 ### 10.2 边界测试：借用不变式违反的验证失败（验证错误）
 
@@ -623,7 +676,12 @@ fn borrow_violation(x: &mut i32) -> i32 {
 fn main() {}
 ```
 
-> **修正**: Rust 编译器的借用检查器可以被视为一个**全自动的、零成本的公理验证器**。它自动推断并验证了借用规则的不变式（3.3 节），无需程序员手动书写 `{P} C {Q}`。上述代码在 safe Rust 中直接触发 **E0506**（cannot assign to `*x` because it is borrowed），Prusti/Creusot 等工具根本不会进入验证阶段——借用检查是公理验证的第一道防线。这是 Hoare 逻辑从学术走向工业的最成功实践——将公理规约"编译"进类型系统（Type System）。(Source: [Rust Reference — Borrowing](https://doc.rust-lang.org/reference/expressions.html?highlight=borrow#evaluation-order)) · (Source: [RustBelt — Jung et al. 2018](https://doi.org/10.1145/3158154))
+> **修正**:
+> Rust 编译器的借用检查器可以被视为一个**全自动的、零成本的公理验证器**。
+> 它自动推断并验证了借用规则的不变式（3.3 节），无需程序员手动书写 `{P} C {Q}`。
+> 上述代码在 safe Rust 中直接触发 **E0506**（cannot assign to `*x` because it is borrowed），Prusti/Creusot 等工具根本不会进入验证阶段——借用检查是公理验证的第一道防线。这是 Hoare 逻辑从学术走向工业的最成功实践——将公理规约"编译"进类型系统（Type System）。
+> (Source: [Rust Reference — Borrowing](https://doc.rust-lang.org/reference/expressions.html?highlight=borrow#evaluation-order)) ·
+> (Source: [RustBelt — Jung et al. 2018](https://doi.org/10.1145/3158154))
 
 ### 10.3 边界测试：unsafe 块的公理逃逸（运行时 UB）
 
@@ -664,7 +722,12 @@ fn undefined_behavior() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-「嵌入式测验（Embedded Quiz）」涉及测验 1：Hoare 三元组 `{P} C {Q}` 中 P、C、Q 的含义、测验 2：最弱前置条件（Weakest Precondition, wp）的定义与作用、测验 3：Rust 的 `unsafe` 块为什么特别需要形式化验证、测验 4：分离逻辑（Separation Logic）的"框架规则"（Frame Rule）对 Rust 所有权建模的重要性、测验 5：Creusot 和 Prusti 在验证 Rust 程序时分别依赖什么后端等 5 个方面，本节逐一说明其要点。
+「嵌入式测验（Embedded Quiz）」涉及
+测验 1：Hoare 三元组 `{P} C {Q}` 中 P、C、Q 的含义、
+测验 2：最弱前置条件（Weakest Precondition, wp）的定义与作用、
+测验 3：Rust 的 `unsafe` 块为什么特别需要形式化验证、
+测验 4：分离逻辑（Separation Logic）的"框架规则"（Frame Rule）对 Rust 所有权建模的重要性、
+测验 5：Creusot 和 Prusti 在验证 Rust 程序时分别依赖什么后端等 5 个方面，本节逐一说明其要点。
 
 ### 测验 1：Hoare 三元组 `{P} C {Q}` 中，P、C、Q 分别代表什么？（理解层）
 
@@ -906,7 +969,12 @@ fn generic_trait_issue<T: PartialOrd + Copy>(x: T) -> T {
 // 无法直接处理高阶量化。
 ```
 
-> **修正**: 泛型（Generics）代码的公理验证需要**参数化规约**（parametric specifications）。当前工业工具的通用策略是**单态化**（monomorphization）——将泛型代码实例化为具体类型后分别验证。这与 Rust 编译器的策略一致（rustc 在 MIR 层进行单态化），但代价是验证时间随实例化数量线性增长。未来方向：利用**参数化多态的语义**（Reynolds' relational parametricity）一次性验证所有实例。来源: [Reynolds 1983 — Types, Abstraction and Parametric Polymorphism] · 来源: [Prusti GitHub Issues]
+> **修正**:
+> 泛型（Generics）代码的公理验证需要**参数化规约**（parametric specifications）。
+> 当前工业工具的通用策略是**单态化**（monomorphization）——将泛型代码实例化为具体类型后分别验证。
+> 这与 Rust 编译器的策略一致（rustc 在 MIR 层进行单态化），但代价是验证时间随实例化数量线性增长。
+> 未来方向：利用**参数化多态的语义**（Reynolds' relational parametricity）一次性验证所有实例。
+> 来源: [Reynolds 1983 — Types, Abstraction and Parametric Polymorphism] · 来源: [Prusti GitHub Issues]
 
 ### 10.5 边界测试：Kani 的路径爆炸与有界验证
 
@@ -1002,7 +1070,15 @@ fn factorial(n: Int) -> Int {
 
 ---
 
-> **权威来源**: [Verus](https://github.com/verus-lang/verus) · [Kani](https://model-checking.github.io/kani/) · [Winskel 1993 — The Formal Semantics of Programming Languages](https://mitpress.mit.edu/9780262731034) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt — Jung et al. 2018](https://doi.org/10.1145/3158154) · [Hoare 1969 — An Axiomatic Basis for Computer Programming](https://doi.org/10.1145/363235.363259) · [Dijkstra 1975 — Guarded Commands, Nondeterminacy and Formal Derivation of Programs](https://doi.org/10.1145/360933.360975) · [O'Hearn, Reynolds & Yang 2001 — Local Reasoning about Programs that Alter Data Structures](https://doi.org/10.1007/3-540-44802-0_1)
+> **权威来源**:
+> [Verus](https://github.com/verus-lang/verus) ·
+> [Kani](https://model-checking.github.io/kani/) ·
+> [Winskel 1993 — The Formal Semantics of Programming Languages](https://mitpress.mit.edu/9780262731034) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [RustBelt — Jung et al. 2018](https://doi.org/10.1145/3158154) ·
+> [Hoare 1969 — An Axiomatic Basis for Computer Programming](https://doi.org/10.1145/363235.363259) ·
+> [Dijkstra 1975 — Guarded Commands, Nondeterminacy and Formal Derivation of Programs](https://doi.org/10.1145/360933.360975) ·
+> [O'Hearn, Reynolds & Yang 2001 — Local Reasoning about Programs that Alter Data Structures](https://doi.org/10.1007/3-540-44802-0_1)
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.0

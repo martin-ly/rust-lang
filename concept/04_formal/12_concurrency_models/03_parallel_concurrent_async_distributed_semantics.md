@@ -4,13 +4,19 @@
 
 > **EN**: Semantics Boundaries of Parallel, Concurrent, Async, and Distributed Computation
 > **Summary**: Precise formal distinctions and overlaps among synchronous, concurrent, parallel, asynchronous, and distributed computation, mapped to Rust primitives.
-
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 在单一页中形式化区分「同步/并发/并行/异步/分布式」五种计算范式，标定它们的语义交集、包含关系与 Rust 原语的落点，避免把实现细节或性能目标当成范式定义。
-> **前置概念**: [并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · [Async/Await](../../03_advanced/01_async/01_async.md) · [并发模型谱系](01_models_of_concurrency.md) · [五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md)
-> **后置概念**: [进程代数与 Rust](../07_concurrency_semantics/01_process_calculi_for_rust.md) · [Actor 形式语义](../07_concurrency_semantics/03_actor_semantics.md) · [分布式系统语义](../09_system_semantics/04_distributed_systems_semantics.md)
+> **前置概念**:
+> [并发编程](../../03_advanced/00_concurrency/01_concurrency.md) ·
+> [Async/Await](../../03_advanced/01_async/01_async.md) ·
+> [并发模型谱系](01_models_of_concurrency.md) ·
+> [五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md)
+> **后置概念**:
+> [进程代数与 Rust](../07_concurrency_semantics/01_process_calculi_for_rust.md) ·
+> [Actor 形式语义](../07_concurrency_semantics/03_actor_semantics.md) ·
+> [分布式系统语义](../09_system_semantics/04_distributed_systems_semantics.md)
 
 ---
 
@@ -146,13 +152,22 @@ e₁ → e₂  当且仅当
 
 #### 2.6.1 进程代数：CSP、CCS、π 演算
 
-- **CSP（Communicating Sequential Processes）** — Hoare (1978, [Hoare 1985](http://www.usingcsp.com/cspbook.pdf))：以**同步会合（rendezvous）**为核心，进程通过命名通道交换事件；并行组合 `P || Q` 要求共享事件同步发生；外部选择 `[]` 让环境决定进程走向。Rust 的 `mpsc::sync_channel(0)` 与 `select!` 是其工程投影，但 Rust 默认 channel 是有缓冲的，二者并非同构（详见 [同层：进程代数与 Rust](../07_concurrency_semantics/01_process_calculi_for_rust.md)）。
-- **CCS（Calculus of Communicating Systems）** — [Milner 1989](https://www.research.ed.ac.uk/en/publications/communication-and-concurrency/)：以极小语法（前缀、选择、并行、限制、重标记）定义带标签迁移系统，并给出**强/弱互模拟**作为行为等价标准。互模拟为比较并发实现是否可替换提供了方法论基准，但 Rust 程序本身没有标注迁移系统，因此不能直接套用等价证明。
-- **π 演算** — [Milner, Parrow & Walker 1992](https://doi.org/10.1016/0890-5401(92)90008-4); Milner (1999)：在 CCS 基础上引入**通道名作为一等消息**，从而建模通信拓扑的动态变化（mobility）。Rust 中 `Sender<T>` 本身可作为值被移动或嵌入消息，正是这一思想的类型系统近似。Milner (1992) 的 *Functions as Processes* 进一步说明函数式计算可编码为进程交互，为 Rust 中把闭包/异步任务视为进程提供了理论支持。
+- **CSP（Communicating Sequential Processes）** — Hoare (1978, [Hoare 1985](http://www.usingcsp.com/cspbook.pdf))：
+  以**同步会合（rendezvous）**为核心，进程通过命名通道交换事件；
+  并行组合 `P || Q` 要求共享事件同步发生；外部选择 `[]` 让环境决定进程走向。
+  Rust 的 `mpsc::sync_channel(0)` 与 `select!` 是其工程投影，但 Rust 默认 channel 是有缓冲的，二者并非同构（详见 [同层：进程代数与 Rust](../07_concurrency_semantics/01_process_calculi_for_rust.md)）。
+- **CCS（Calculus of Communicating Systems）** — [Milner 1989](https://www.research.ed.ac.uk/en/publications/communication-and-concurrency/)：
+  以极小语法（前缀、选择、并行、限制、重标记）定义带标签迁移系统，并给出**强/弱互模拟**作为行为等价标准。
+  互模拟为比较并发实现是否可替换提供了方法论基准，但 Rust 程序本身没有标注迁移系统，因此不能直接套用等价证明。
+- **π 演算** — [Milner, Parrow & Walker 1992](https://doi.org/10.1016/0890-5401(92)90008-4);
+  Milner (1999)：在 CCS 基础上引入**通道名作为一等消息**，从而建模通信拓扑的动态变化（mobility）。
+  Rust 中 `Sender<T>` 本身可作为值被移动或嵌入消息，正是这一思想的类型系统近似。
+  Milner (1992) 的 *Functions as Processes* 进一步说明函数式计算可编码为进程交互，为 Rust 中把闭包/异步任务视为进程提供了理论支持。
 
 > **小结**：三种演算共同把「并发」从实现细节提升为**交互模式**的研究对象；它们解释 Rust 通道与选择的血统，也标示出 Rust 所有权类型系统带来的额外静态约束。
 
-π 演算的「移动性」允许通道名作为消息传递，但 Rust 的生命周期规则会阻止引用逃逸其作用域。下面的 `compile_fail` 反例展示：若试图通过通道发送局部值的引用，E0597 会在编译期拦截这一不安全的通道移动：
+π 演算的「移动性」允许通道名作为消息传递，但 Rust 的生命周期规则会阻止引用逃逸其作用域。
+下面的 `compile_fail` 反例展示：若试图通过通道发送局部值的引用，E0597 会在编译期拦截这一不安全的通道移动：
 
 ```rust,compile_fail,E0597
 use std::sync::mpsc;

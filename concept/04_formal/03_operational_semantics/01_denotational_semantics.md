@@ -180,7 +180,8 @@ Kleene 不动点定理:
 ```
 
 > **不动点洞察**: **Kleene 不动点定理是递归的数学基础**——所有递归定义都可以通过最小不动点赋予语义。Scott 与 Strachey 的奠基工作正是用这类域论构造为命令式程序语言建立了组合化的数学语义。
-> (Source: [Scott & Strachey 1971 — Toward a Mathematical Semantics for Computer Languages](https://www.cs.tufts.edu/~nr/cs257/archive/tony-hoare/mathematical-semantics.pdf) · [Abramsky & Jung — Domain Theory](https://www.cs.ox.ac.uk/files/298/handbook.pdf))
+> (Source: [Scott & Strachey 1971 — Toward a Mathematical Semantics for Computer Languages](https://www.cs.tufts.edu/~nr/cs257/archive/tony-hoare/mathematical-semantics.pdf) ·
+> [Abramsky & Jung — Domain Theory](https://www.cs.ox.ac.uk/files/298/handbook.pdf))
 
 ---
 
@@ -602,12 +603,20 @@ struct List {
 fn main() {}
 ```
 
-> **修正**: 在指称语义中，递归类型 `μX.F(X)` 通过**最小不动点**解释，域论允许有限与无限展开共存。但 Rust 是严格求值且要求编译期确定类型大小，因此直接递归类型会导致 **E0072**（recursive type has infinite size）。必须通过间接层（`Box<List>`、`Rc<List>` 等）打破循环，把递归从值层级移到堆指针层级。这与 Haskell 的惰性递归类型（可无限）形成对比——Rust 的指称解释额外受「严格求值 + 静态大小」约束。
+> **修正**:
+> 在指称语义中，递归类型 `μX.F(X)` 通过**最小不动点**解释，域论允许有限与无限展开共存。
+> 但 Rust 是严格求值且要求编译期确定类型大小，因此直接递归类型会导致 **E0072**（recursive type has infinite size）。
+> 必须通过间接层（`Box<List>`、`Rc<List>` 等）打破循环，把递归从值层级移到堆指针层级。这与 Haskell 的惰性递归类型（可无限）形成对比——Rust 的指称解释额外受「严格求值 + 静态大小」约束。
 > (Source: [Scott & Strachey 1971 — Toward a Mathematical Semantics for Computer Languages](https://www.cs.tufts.edu/~nr/cs257/archive/tony-hoare/mathematical-semantics.pdf) · [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html))
 
 ## 嵌入式测验（Embedded Quiz）
 
-「嵌入式测验（Embedded Quiz）」涉及测验 1：指称语义（Denotational Semantics）的核心思想与操作语义的区别、测验 2：什么是"域"（Domain）以及为什么需要引入 ⊥（bottom）元素、测验 3：Rust 的严格求值（strict/eager evaluation）在指称语义中如何体现、测验 4：不动点定理（Knaster-Tarski）在递归函数语义中起什么作用、测验 5：为什么 Rust 不允许直接递归类型等 5 个方面，本节逐一说明其要点。
+「嵌入式测验（Embedded Quiz）」涉及测验
+1：指称语义（Denotational Semantics）的核心思想与操作语义的区别、测验
+2：什么是"域"（Domain）以及为什么需要引入 ⊥（bottom）元素、测验
+3：Rust 的严格求值（strict/eager evaluation）在指称语义中如何体现、测验
+4：不动点定理（Knaster-Tarski）在递归函数语义中起什么作用、测验
+5：为什么 Rust 不允许直接递归类型等 5 个方面，本节逐一说明其要点。
 
 ### 测验 1：指称语义（Denotational Semantics）的核心思想是什么？与操作语义有什么区别？（理解层）
 

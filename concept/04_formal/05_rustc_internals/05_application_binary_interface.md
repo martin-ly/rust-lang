@@ -9,17 +9,30 @@
 > **受众**: [专家]
 > **Bloom 层级**: L2-L3
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **定位声明**: 本页为 Rust Reference 对应章节的**规范摘译与注解**（规范条文摘译 + 示例 + 交叉引用），非形式化推导或机器验证证明；形式化理论内容见 [MIR、Codegen 与 LLVM IR 入门](02_mir_codegen_llvm_primer.md)。依据 [A/S/P 标记规范](../../00_meta/03_audit/02_asp_marking_guide.md) §3.4，L4 形式化层同时容纳 S（Specification）规范分析类内容，故本页保留于 L4，Bloom 层级维持与内容相符的标注（理解/分析层的规范内容）。
+> **定位声明**:
+> 本页为 Rust Reference 对应章节的**规范摘译与注解**（规范条文摘译 + 示例 + 交叉引用），非形式化推导或机器验证证明；
+> 形式化理论内容见 [MIR、Codegen 与 LLVM IR 入门](02_mir_codegen_llvm_primer.md)。
+> 依据 [A/S/P 标记规范](../../00_meta/03_audit/02_asp_marking_guide.md) §3.4，L4 形式化层同时容纳 S（Specification）规范分析类内容，故本页保留于 L4，Bloom 层级维持与内容相符的标注（理解/分析层的规范内容）。
 > **A/S/P 标记**: **S** — Specification / Systems
 > **双维定位**: S×Sys — 语言与二进制接口
 > **前置依赖**: [Linkage](../../03_advanced/04_ffi/03_linkage.md) · [FFI Advanced](../../03_advanced/04_ffi/02_ffi_advanced.md) · [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md)
 > **后置概念**: [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Inline Assembly](../../03_advanced/05_inline_assembly/01_inline_assembly.md)
 > **定理链**: N/A — 语言规范/平台相关文档
-> **主要来源**: [Rust Reference — Application Binary Interface](https://doc.rust-lang.org/reference/items/external-blocks.html#abi) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/) · [System V AMD64 ABI](https://gitlab.com/x86-psABIs/x86-64-ABI) · [ARM Procedure Call Standard](https://developer.arm.com/documentation/ihi0042/latest/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/) · [System V AMD64 ABI](https://gitlab.com/x86-psABIs/x86-64-ABI) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
-
+> **主要来源**:
+> [Rust Reference — Application Binary Interface](https://doc.rust-lang.org/reference/items/external-blocks.html#abi) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/) ·
+> [System V AMD64 ABI](https://gitlab.com/x86-psABIs/x86-64-ABI) ·
+> [ARM Procedure Call Standard](https://developer.arm.com/documentation/ihi0042/latest/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/) ·
+> [System V AMD64 ABI](https://gitlab.com/x86-psABIs/x86-64-ABI) ·
+> [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html)
 >
-> **来源**: [Rust Reference — Application Binary Interface](https://doc.rust-lang.org/reference/abi.html) · [Rust Reference — extern functions](https://doc.rust-lang.org/reference/items/external-blocks.html) · [Rust Reference — external blocks](https://doc.rust-lang.org/reference/items/external-blocks.html)
-
+> **来源**:
+> [Rust Reference — Application Binary Interface](https://doc.rust-lang.org/reference/abi.html) ·
+> [Rust Reference — extern functions](https://doc.rust-lang.org/reference/items/external-blocks.html) ·
+> [Rust Reference — external blocks](https://doc.rust-lang.org/reference/items/external-blocks.html)
 > **Rust 1.97.0 变更提示**：
 > Rust 1.97.0 默认启用 v0 symbol mangling 方案，ABI 与符号可见性影响见 [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)。
 
@@ -150,7 +163,15 @@ pub fn name_in_rust() {}
 
 ---
 
-> **权威来源**: [Rust Reference — Application Binary Interface](https://doc.rust-lang.org/reference/items/external-blocks.html#abi) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Rust Reference — Application Binary Interface](https://doc.rust-lang.org/reference/abi.html) · [Rust Reference — extern functions](https://doc.rust-lang.org/reference/items/external-blocks.html) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
+> **权威来源**:
+> [Rust Reference — Application Binary Interface](https://doc.rust-lang.org/reference/items/external-blocks.html#abi) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/) ·
+> [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Rust Reference — Application Binary Interface](https://doc.rust-lang.org/reference/abi.html) ·
+> [Rust Reference — extern functions](https://doc.rust-lang.org/reference/items/external-blocks.html) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.0
@@ -162,7 +183,10 @@ pub fn name_in_rust() {}
 ## Rust 1.97.0 交叉语义（链接 / ABI）
 
 > **Edition / 版本**: Rust 1.97.0+ (Edition 2024)
-> **定位**: 本小节把上方「Rust 1.97.0 变更提示」横幅**展开**为 v0 × debuginfo demangle × linker_messages × backtrace 的交互矩阵，并阐明空 `export_name`/`link_name` 校验对 ABI 契约的意义；对应审计缺口（[`GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md`](../../../reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md) §2.4、§4 P2-2 缺口#5）。横幅原文保留。
+> **定位**:
+> 本小节把上方「Rust 1.97.0 变更提示」横幅**展开**为 v0 × debuginfo demangle × linker_messages × backtrace 的交互矩阵，并阐明空 `export_name`/`link_name` 校验对 ABI 契约的意义；
+> 对应审计缺口（[`GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md`](../../../reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md) §2.4、§4 P2-2 缺口#5）。
+> 横幅原文保留。
 
 ### A. v0 × debuginfo demangle × linker_messages × backtrace 交互矩阵
 
@@ -187,12 +211,14 @@ RUST_BACKTRACE=1 cargo run
 
 ### B. 空 `export_name` / `link_name` 校验对 ABI 契约的意义
 
-稳定的 ABI 契约依赖**两侧符号名的确定性**：导出侧（`export_name`/`no_mangle`）必须给出**非空、全局唯一**的字面符号，导入侧（`#[link_name]`/`#[link(name = "...")]`）必须给出**非空、合法**的目标符号/库名。Rust 1.97.0 把两类「空/非法符号名」从「可能被静默接受、链接期才暴露」提升为**编译期硬错误**，等价于把 ABI 契约的可验证性前移到编译期：
+稳定的 ABI 契约依赖**两侧符号名的确定性**：导出侧（`export_name`/`no_mangle`）必须给出**非空、全局唯一**的字面符号，导入侧（`#[link_name]`/`#[link(name = "...")]`）必须给出**非空、合法**的目标符号/库名。
+Rust 1.97.0 把两类「空/非法符号名」从「可能被静默接受、链接期才暴露」提升为**编译期硬错误**，等价于把 ABI 契约的可验证性前移到编译期：
 
 - 空 `#[export_name = ""]` → 导出符号名缺失，ABI 契约无法命名 → 拒绝。
 - 非法 `#[link_name]` / `#[link(name)]` → 导入侧目标不明确，ABI 绑定无法解析 → 拒绝。
 
-在 Edition 2024 下这些属性均须写在 `#[unsafe(...)]` 内（符号冲突属不安全来源）。迁移判定见 [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) §3。
+在 Edition 2024 下这些属性均须写在 `#[unsafe(...)]` 内（符号冲突属不安全来源）。
+迁移判定见 [`migration_197_decision_tree.md`](../../07_future/00_version_tracking/migration_197_decision_tree.md) §3。
 
 ```rust,ignore
 // Edition 2024 / Rust 1.97.0+ —— ABI 契约两端：导出字面符号 + 导入按名绑定
@@ -223,7 +249,9 @@ pub fn hook() {}
 > **来源**:
 > · [Rust 1.97.0 Release Notes](https://releases.rs/docs/1.97.0/)（Compatibility Notes：v0 mangling 默认对 debugger/profiler/backtrace 的影响、Warn on linker output、空 `export_name` 报错、`link_name`/`link(name)` 校验）
 > · [`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md) §2.7（v0 mangling）、§2.8（`linker_messages`）、§7/§7.2（空 `export_name` 与 `link_name` 校验）
-> · [Rust Reference — ABI](https://doc.rust-lang.org/reference/abi.html) · [Rust Reference — External Blocks / ABI](https://doc.rust-lang.org/reference/items/external-blocks.html) · [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html)
+> · [Rust Reference — ABI](https://doc.rust-lang.org/reference/abi.html)
+> · [Rust Reference — External Blocks / ABI](https://doc.rust-lang.org/reference/items/external-blocks.html)
+> · [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html)
 >
 > **交叉索引（反链）**:
 > · 版本事实源：[`rust_1_97_stabilized.md`](../../07_future/00_version_tracking/rust_1_97_stabilized.md)

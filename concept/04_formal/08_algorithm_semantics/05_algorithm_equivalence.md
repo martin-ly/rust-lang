@@ -9,8 +9,15 @@
 > **Bloom 层级**: L4
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 系统讲解 **算法实现的观察等价性**——从"相同输入产生相同可观察输出"的基本定义，到复杂度、非确定性与精化序对等价关系的刻画，帮助判断 Rust 中同一算法的不同实现何时可以互换、何时必须区分。
-> **前置概念**: [Hoare Logic](../03_operational_semantics/02_hoare_logic.md) · [Operational Semantics](../03_operational_semantics/03_operational_semantics.md) · [Iterator Patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) · [Semantic Space](../../00_meta/00_framework/semantic_space.md)
-> **后置概念**: [Refinement Calculus](02_refinement_calculus.md) · [Iterator Correctness](03_iterator_correctness.md) · [Formal Algorithm Theory](../00_type_theory/13_formal_algorithm_theory.md)
+> **前置概念**:
+> [Hoare Logic](../03_operational_semantics/02_hoare_logic.md) ·
+> [Operational Semantics](../03_operational_semantics/03_operational_semantics.md) ·
+> [Iterator Patterns](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) ·
+> [Semantic Space](../../00_meta/00_framework/semantic_space.md)
+> **后置概念**:
+> [Refinement Calculus](02_refinement_calculus.md) ·
+> [Iterator Correctness](03_iterator_correctness.md) ·
+> [Formal Algorithm Theory](../00_type_theory/13_formal_algorithm_theory.md)
 
 ---
 

@@ -485,7 +485,7 @@ memoffset = "0.9.1"
 # 2026-06-19: 2.0.0-rc.40 -> 2.0.0-rc.41
 # 2026-07-16: cargo update 自动解析至 2.0.0-rc.43
 # 2026-07-30: Sea-ORM 2.0 stable 已发布，升级至 2.0.0
-sea-orm = { version = "2.0.0", features = [
+sea-orm = { version = "2.0.1", features = [
     "sqlx-postgres",      # PostgreSQL支持
     "runtime-tokio-rustls", # tokio运行时和rustls支持
 ], default-features = false }

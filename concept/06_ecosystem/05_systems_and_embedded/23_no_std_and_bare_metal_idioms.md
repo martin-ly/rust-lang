@@ -13,12 +13,33 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Cre — 在资源受限硬件上组装可运行、可维护的裸机 crate
-> **前置概念**: [Rust 嵌入式系统开发](03_embedded_systems.md) · [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md) · [panic_handler 与 no_std 运行时](18_panic_runtime_no_std.md) · [嵌入式内存分配器](16_embedded_memory_allocators.md) · [no_std 同步原语](15_no_std_synchronization_primitives.md) · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
-> **后置概念**: [PAC 与 HAL 实现](17_pac_hal_implementation.md) · [embedded-hal 与驱动惯用法](24_embedded_hal_and_driver_idioms.md) · [异步 no_std 嵌入式](11_async_no_std_embedded.md) · [no_std 启动流程与运行时深度解析](27_no_std_startup_runtime_deep_dive.md) · [自定义裸机异步执行器](28_custom_bare_metal_async_executor.md) · [嵌入式内存布局与堆安全](29_embedded_memory_layout_and_heap_safety.md) · [安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508](30_misra_rust_safety_critical_guidelines.md)
+> **前置概念**:
+> [Rust 嵌入式系统开发](03_embedded_systems.md) ·
+> [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md) ·
+> [panic_handler 与 no_std 运行时](18_panic_runtime_no_std.md) ·
+> [嵌入式内存分配器](16_embedded_memory_allocators.md) ·
+> [no_std 同步原语](15_no_std_synchronization_primitives.md) ·
+> [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
+> **后置概念**:
+> [PAC 与 HAL 实现](17_pac_hal_implementation.md) ·
+> [embedded-hal 与驱动惯用法](24_embedded_hal_and_driver_idioms.md) ·
+> [异步 no_std 嵌入式](11_async_no_std_embedded.md) ·
+> [no_std 启动流程与运行时深度解析](27_no_std_startup_runtime_deep_dive.md) ·
+> [自定义裸机异步执行器](28_custom_bare_metal_async_executor.md) ·
+> [嵌入式内存布局与堆安全](29_embedded_memory_layout_and_heap_safety.md) ·
+> [安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508](30_misra_rust_safety_critical_guidelines.md)
 
 ---
 
-> **来源**: [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [cortex-m-rt](https://docs.rs/cortex-m-rt/) · [riscv-rt](https://docs.rs/riscv-rt/) · [critical-section crate](https://docs.rs/critical-section/) · [Embassy Book](https://embassy.dev/book/) · [Ferrous Systems](https://ferrous-systems.com/) · [Knurling](https://knurling.ferrous-systems.com/) · [Rust Reference — no_std](https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute)
+> **来源**:
+> [The Embedded Rust Book](https://docs.rust-embedded.org/book/) ·
+> [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) ·
+> [cortex-m-rt](https://docs.rs/cortex-m-rt/) ·
+> [riscv-rt](https://docs.rs/riscv-rt/) ·
+> [critical-section crate](https://docs.rs/critical-section/) ·
+> [Embassy Book](https://embassy.dev/book/) · [Ferrous Systems](https://ferrous-systems.com/) ·
+> [Knurling](https://knurling.ferrous-systems.com/) ·
+> [Rust Reference — no_std](https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute)
 
 ---
 

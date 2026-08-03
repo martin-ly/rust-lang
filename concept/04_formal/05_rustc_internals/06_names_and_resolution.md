@@ -8,16 +8,35 @@
 > **内容分级**: [研究者级]
 > **Bloom 层级**: L2-L4
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **定位声明**: 本页为 Rust Reference 对应章节的**规范摘译与注解**（规范条文摘译 + 示例 + 交叉引用），非形式化推导或机器验证证明；形式化理论内容见 [Rustc 名称解析与 HIR](04_name_resolution_and_hir.md)。依据 [A/S/P 标记规范](../../00_meta/03_audit/02_asp_marking_guide.md) §3.4，L4 形式化层同时容纳 S（Specification）规范分析类内容，故本页保留于 L4，Bloom 层级维持与内容相符的标注（理解/分析层的规范内容）。
+> **定位声明**:
+> 本页为 Rust Reference 对应章节的**规范摘译与注解**（规范条文摘译 + 示例 + 交叉引用），非形式化推导或机器验证证明；
+> 形式化理论内容见 [Rustc 名称解析与 HIR](04_name_resolution_and_hir.md)。
+> 依据 [A/S/P 标记规范](../../00_meta/03_audit/02_asp_marking_guide.md) §3.4，L4 形式化层同时容纳 S（Specification）规范分析类内容，
+> 故本页保留于 L4，Bloom 层级维持与内容相符的标注（理解/分析层的规范内容）。
 > **A/S/P 标记**: **S** — Specification
 > **双维定位**: S×Ana — 规范分析
-> **前置依赖**: [Modules and Paths](../../01_foundation/07_modules_and_items/01_modules_and_paths.md) · [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md)
-> **后置概念**: [Name Resolution and HIR](04_name_resolution_and_hir.md) · [Linkage](../../03_advanced/04_ffi/03_linkage.md) · [Names Reference](16_names_reference.md)
+> **前置依赖**:
+> [Modules and Paths](../../01_foundation/07_modules_and_items/01_modules_and_paths.md) ·
+> [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md)
+> **后置概念**:
+> [Name Resolution and HIR](04_name_resolution_and_hir.md) ·
+> [Linkage](../../03_advanced/04_ffi/03_linkage.md) ·
+> [Names Reference](16_names_reference.md)
 > **定理链**: Entity → Declaration → Scope → Namespace → Path → Resolution
-> **主要来源**: [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html) · [rustc-dev-guide — Name Resolution](https://rustc-dev-guide.rust-lang.org/name-resolution.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **主要来源**:
+> [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html) ·
+> [rustc-dev-guide — Name Resolution](https://rustc-dev-guide.rust-lang.org/name-resolution.html) ·
+> [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [Jung et al. — RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 >
-> **来源**: [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html) · [Rust Reference — Namespaces](https://doc.rust-lang.org/reference/names/namespaces.html) · [Rust Reference — Scopes](https://doc.rust-lang.org/reference/names/scopes.html) · [Rust Reference — Paths](https://doc.rust-lang.org/reference/paths.html) · [Rust Reference — Name Resolution](https://doc.rust-lang.org/reference/names/name-resolution.html) · [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)
+> **来源**:
+> [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html) ·
+> [Rust Reference — Namespaces](https://doc.rust-lang.org/reference/names/namespaces.html) ·
+> [Rust Reference — Scopes](https://doc.rust-lang.org/reference/names/scopes.html) ·
+> [Rust Reference — Paths](https://doc.rust-lang.org/reference/paths.html) ·
+> [Rust Reference — Name Resolution](https://doc.rust-lang.org/reference/names/name-resolution.html) ·
+> [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)
 
 ---
 
@@ -205,7 +224,15 @@ pub use inner::helper as public_helper; // 重导出并改名
 >
 ---
 
-> **权威来源**: [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) · [Rust Reference — Namespaces](https://doc.rust-lang.org/reference/names/namespaces.html) · [Rust Reference — Scopes](https://doc.rust-lang.org/reference/names/scopes.html) · [Rust Reference — Paths](https://doc.rust-lang.org/reference/paths.html) · [Rust Reference — Name Resolution](https://doc.rust-lang.org/reference/names/name-resolution.html) · [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)
+> **权威来源**:
+> [Rust Reference — Names](https://doc.rust-lang.org/reference/names.html) ·
+> [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [Jung et al. — RustBelt](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Rust Reference — Namespaces](https://doc.rust-lang.org/reference/names/namespaces.html) ·
+> [Rust Reference — Scopes](https://doc.rust-lang.org/reference/names/scopes.html) ·
+> [Rust Reference — Paths](https://doc.rust-lang.org/reference/paths.html) ·
+> [Rust Reference — Name Resolution](https://doc.rust-lang.org/reference/names/name-resolution.html) ·
+> [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html)
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.0

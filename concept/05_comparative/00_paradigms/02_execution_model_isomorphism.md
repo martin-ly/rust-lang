@@ -5,7 +5,11 @@
 > - `async-std` 已于 **2025-08-27** 被 [RUSTSEC-2025-0052](https://rustsec.org/advisories/RUSTSEC-2025-0052) 宣布停止维护，建议迁移到 **smol**；历史项目或需要更丰富生态时可评估 **Tokio**。
 > - `wasm32-wasi` 旧目标名已重命名为 **`wasm32-wasip1`**；WASI Preview 2 对应目标为 **`wasm32-wasip2`**。
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **内容分级**: [专家级]
@@ -19,8 +23,14 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 本文件从**数学模型同构性**视角系统梳理 Rust 的执行模型（同步/异步（Async）/并发/并行），并与 Go、理论模型（CSP/Actor/π 演算/进程代数）建立精确的对应关系。
 > **原则**: 不做"并发编程教程"，聚焦"Rust 的执行模型在数学上与什么同构、与什么不同构、同构的精确条件是什么"。
-> **分工声明（Canonical）**: 本页是**跨语言/跨模型对比视角**的权威页（同态/同构/互模拟三级的工程比较）；CSP/CCS/π 演算的**形式语义骨架**以 [L4 进程代数与 Rust](../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md) 为权威页，Actor 模型的**形式语义**以 [L4 Actor 模型形式语义](../../04_formal/07_concurrency_semantics/03_actor_semantics.md) 为权威页——本页 §六/§七 保留对比视角与结论表，不重复形式化推导（AGENTS.md §2 Canonical 规则；两页头部互相声明分工）。
-> **对齐来源**: [The Rust Async Book](https://rust-lang.github.io/async-book/index.html) · [Tokio Tutorial] · [Go Memory Model] · [Hoare CSP 1978] · [Milner π-Calculus 1992] · [Hewitt Actor 1973] · [Boehm & Adve PLDI 2008]
+> **分工声明（Canonical）**:
+> 本页是**跨语言/跨模型对比视角**的权威页（同态/同构/互模拟三级的工程比较）；
+> CSP/CCS/π 演算的**形式语义骨架**以 [L4 进程代数与 Rust](../../04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md) 为权威页，Actor 模型的**形式语义**以 [L4 Actor 模型形式语义](../../04_formal/07_concurrency_semantics/03_actor_semantics.md) 为权威页
+> ——本页 §六/§七 保留对比视角与结论表，不重复形式化推导（AGENTS.md §2 Canonical 规则；两页头部互相声明分工）。
+> **对齐来源**:
+> [The Rust Async Book](https://rust-lang.github.io/async-book/index.html) ·
+> [Tokio Tutorial] · [Go Memory Model] · [Hoare CSP 1978] · [Milner π-Calculus 1992] ·
+> [Hewitt Actor 1973] · [Boehm & Adve PLDI 2008]
 > **对比语言**: Rust · Go · Erlang · C++ · Java
 > **基准版本**: Rust 1.97.0 stable (Edition 2024)
 

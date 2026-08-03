@@ -5,8 +5,14 @@
 > **Bloom 层级**: L4-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+P** — Structure + Procedure
-> **前置概念**: [Knowledge Graph Ontology](../../00_meta/knowledge_topology/kg_ontology_v2.md) · [AI Ontology and Rust Semantics](./06_ai_ontology_and_rust_semantics.md) · [Semantic Model Atlas](../../00_meta/knowledge_topology/11_semantic_model_atlas.md) · [Atomics and Memory Ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md)
-> **后置概念**: [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) · [LLM System Architecture](../../07_future/04_research_and_experimental/08_llm_system_architecture.md)
+> **前置概念**:
+> [Knowledge Graph Ontology](../../00_meta/knowledge_topology/kg_ontology_v2.md) ·
+> [AI Ontology and Rust Semantics](./06_ai_ontology_and_rust_semantics.md) ·
+> [Semantic Model Atlas](../../00_meta/knowledge_topology/11_semantic_model_atlas.md) ·
+> [Atomics and Memory Ordering](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md)
+> **后置概念**:
+> [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md) ·
+> [LLM System Architecture](../../07_future/04_research_and_experimental/08_llm_system_architecture.md)
 
 ---
 
@@ -130,7 +136,8 @@ KG 中的关系分为两类：
 
 ## 三、SHACL 验证形状
 
-SHACL（Shapes Constraint Language）用于验证 KG 中的每个节点是否符合预期形状。项目 KG 的正式 SHACL 形状定义在 [`concept/00_meta/kg_shapes.ttl`](../../00_meta/kg_shapes.ttl)，并通过 [`scripts/validate_kg_shacl.py`](../../../scripts/validate_kg_shacl.py) 在隔离的 pySHACL 虚拟环境中执行真实引擎验证。
+SHACL（Shapes Constraint Language）用于验证 KG 中的每个节点是否符合预期形状。
+项目 KG 的正式 SHACL 形状定义在 [`concept/00_meta/kg_shapes.ttl`](../../00_meta/kg_shapes.ttl)，并通过 [`scripts/validate_kg_shacl.py`](../../../scripts/validate_kg_shacl.py) 在隔离的 pySHACL 虚拟环境中执行真实引擎验证。
 
 ### 3.1 sh:NodeShape
 

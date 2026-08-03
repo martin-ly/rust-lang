@@ -56,7 +56,8 @@ Pin<P> 的语义契约：
   pointee 必须保持位于同一内存地址且保持有效。
 ```
 
-这是一项**库级契约**，不依赖编译器魔法；违反契约的 unsafe 代码会导致 UB。 (Source: [std::pin module docs](https://doc.rust-lang.org/std/pin/index.html))
+这是一项**库级契约**，不依赖编译器魔法；违反契约的 unsafe 代码会导致 UB。
+(Source: [std::pin module docs](https://doc.rust-lang.org/std/pin/index.html))
 
 ### 1.1 形式化不变量
 
@@ -85,7 +86,8 @@ T: Unpin  ⟺  T 没有任何地址敏感状态，移动 T 总是安全的
 
 ## 3. 结构 Pinning（Structural Pinning）
 
-当类型承诺「被 pin 后，某字段也保持 pin 状态」时，称该字段是**结构 pinned**。投影规则：
+当类型承诺「被 pin 后，某字段也保持 pin 状态」时，称该字段是**结构 pinned**。
+投影规则：
 
 ```text
 structurally pinned field:
@@ -95,7 +97,8 @@ not structurally pinned field:
   Pin<&mut Outer> → &mut Field
 ```
 
-`pin-project` 等 crate 就是自动生成这些投影的安全封装。 (Source: [std::pin module docs](https://doc.rust-lang.org/std/pin/index.html))
+`pin-project` 等 crate 就是自动生成这些投影的安全封装。
+(Source: [std::pin module docs](https://doc.rust-lang.org/std/pin/index.html))
 
 ---
 
@@ -121,7 +124,7 @@ let inner: Pin<&mut Type> = unsafe {
 
 `async fn` 编译生成的状态机是典型的地址敏感类型：
 
-```text
+```rust,ignore
 async fn example() {
     let local = String::from("hello");
     let r = &local;
@@ -132,7 +135,7 @@ async fn example() {
 
 去糖后状态机：
 
-```text
+```rust,ignore
 struct ExampleFuture {
     local: String,
     r: *const String, // 指向 local
@@ -141,7 +144,8 @@ struct ExampleFuture {
 }
 ```
 
-`Future::poll` 接收 `Pin<&mut Self>` 正是为了保证 `local` 地址稳定，使 `r` 在挂起/恢复之间始终有效。详见 [async/await 状态机的操作语义](11_async_state_machine_semantics.md)。
+`Future::poll` 接收 `Pin<&mut Self>` 正是为了保证 `local` 地址稳定，使 `r` 在挂起/恢复之间始终有效。
+详见 [async/await 状态机的操作语义](11_async_state_machine_semantics.md)。
 
 ---
 

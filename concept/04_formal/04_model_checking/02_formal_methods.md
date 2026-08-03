@@ -6,7 +6,10 @@
 > **权威来源**: 本主题已合并至唯一权威页：
 > [`concept/07_future/04_research_and_experimental/02_formal_methods.md`](../../07_future/04_research_and_experimental/02_formal_methods.md)
 >
-> **国际权威来源**: [Rust Project Goals — Std safety verification](https://rust-lang.github.io/rust-project-goals/2024h2/std-verification.html) (P0) · [RustBelt: Securing the Foundations of Rust (PLV @ MPI-SWS)](https://plv.mpi-sws.org/rustbelt/popl18/paper.pdf) (P1) · [Verus](https://github.com/verus-lang/verus) (P2) · [Creusot](https://github.com/creusot-rs/creusot) (P2)
+> **国际权威来源**:
+> [Rust Project Goals — Std safety verification](https://rust-lang.github.io/rust-project-goals/2024h2/std-verification.html) (P0) ·
+> [RustBelt: Securing the Foundations of Rust (PLV @ MPI-SWS)](https://plv.mpi-sws.org/rustbelt/popl18/paper.pdf) (P1) ·
+> [Verus](https://github.com/verus-lang/verus) (P2) · [Creusot](https://github.com/creusot-rs/creusot) (P2)
 >
 > 根据 AGENTS.md §2 Canonical 规则，形式化方法（Formal Methods）的概念定义、
 > 验证层次、工具光谱（Kani / Creusot / Verus / Prusti / Miri / TLA+）、

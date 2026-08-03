@@ -4,13 +4,19 @@
 
 > **EN**: Models of Concurrency
 > **Summary**: A formal taxonomy of concurrent computation models — shared memory, message passing, CSP, Actor, π-calculus, and Petri nets — with their Rust incarnations.
-
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 从**模型谱系**角度给出并发计算的形式分类：共享内存、消息传递（CSP/Actor/π）、Petri 网，并把它们映射到 Rust 的 `std::sync`、`mpsc`、异步运行时与 Actor 框架，避免把工程原语误当成理论模型的同构实现。
-> **前置概念**: [L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) · [L4 进程代数与 Rust](../07_concurrency_semantics/01_process_calculi_for_rust.md) · [L4 Actor 形式语义](../07_concurrency_semantics/03_actor_semantics.md) · [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md)
-> **后置概念**: [并发模型表达能力比较](02_expressiveness_of_concurrent_models.md) · [五范式语义边界](03_parallel_concurrent_async_distributed_semantics.md) · [分布式系统语义](../09_system_semantics/04_distributed_systems_semantics.md)
+> **前置概念**:
+> [L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) ·
+> [L4 进程代数与 Rust](../07_concurrency_semantics/01_process_calculi_for_rust.md) ·
+> [L4 Actor 形式语义](../07_concurrency_semantics/03_actor_semantics.md) ·
+> [L5 五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md)
+> **后置概念**:
+> [并发模型表达能力比较](02_expressiveness_of_concurrent_models.md) ·
+> [五范式语义边界](03_parallel_concurrent_async_distributed_semantics.md) ·
+> [分布式系统语义](../09_system_semantics/04_distributed_systems_semantics.md)
 
 ---
 

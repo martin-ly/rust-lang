@@ -1,4 +1,7 @@
-> **本节关键术语**: 软件事务内存（Software Transactional Memory, STM） · 事务变量（Transactional Variable, TVar） · 原子块（Atomic Block） · 可串行性（Serializability） · 不透明性（Opacity） · 重试（Retry） · 竞争管理（Contention Management） — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
+> **本节关键术语**:
+>
+> 软件事务内存（Software Transactional Memory, STM） · 事务变量（Transactional Variable, TVar） · 原子块（Atomic Block） · 可串行性（Serializability） · 不透明性（Opacity） · 重试（Retry） · 竞争管理（Contention Management）
+> — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 
 # 软件事务内存（STM）形式语义：从 Herlihy-Moss 到 Rust 的「无 STM」设计
 
@@ -441,7 +444,8 @@ fn main() {
 }
 ```
 
-无锁结构的正确性条件（线性化点证明）与工程谱系分别见 [线性化与一致性谱系](./02_linearizability_and_consistency.md) 与 [L3 无锁编程](../../03_advanced/00_concurrency/07_lock_free.md)；`Send`/`Sync` 与数据竞争的官方定义见 [The Rustonomicon — Races](https://doc.rust-lang.org/nomicon/races.html) 与 [`std::sync` 文档](https://doc.rust-lang.org/std/sync/)。
+无锁结构的正确性条件（线性化点证明）与工程谱系分别见 [线性化与一致性谱系](./02_linearizability_and_consistency.md) 与 [L3 无锁编程](../../03_advanced/00_concurrency/07_lock_free.md)；
+`Send`/`Sync` 与数据竞争的官方定义见 [The Rustonomicon — Races](https://doc.rust-lang.org/nomicon/races.html) 与 [`std::sync` 文档](https://doc.rust-lang.org/std/sync/)。
 
 选型速查：
 
@@ -598,7 +602,10 @@ transaction_atomic {        // 原子块：编译器生成读写屏障
 }                           // 提交；冲突时整块重跑
 ```
 
-硬件侧的弧线更具戏剧性：Intel 于 2013 年（Haswell）随 TSX 提供商用 HTM（HLE 硬件锁省略 + RTM 受限事务内存），被视为 Herlihy-Moss 1993 设想的迟到兑现；随后接连受挫——2014 年早期 errata 导致微码禁用、2019 年 TAA（TSX Asynchronous Abort，INTEL-SA-00270）侧信道披露，10 代酷睿起 TSX 被陆续移除或默认禁用。Armv9-A 的 TME 为可选扩展，生态未成气候。
+硬件侧的弧线更具戏剧性：
+Intel 于 2013 年（Haswell）随 TSX 提供商用 HTM（HLE 硬件锁省略 + RTM 受限事务内存），被视为 Herlihy-Moss 1993 设想的迟到兑现；
+随后接连受挫——2014 年早期 errata 导致微码禁用、2019 年 TAA（TSX Asynchronous Abort，INTEL-SA-00270）侧信道披露，10 代酷睿起 TSX 被陆续移除或默认禁用。
+Armv9-A 的 TME 为可选扩展，生态未成气候。
 
 对系统语言的三点教训：
 
@@ -712,7 +719,11 @@ fn main() {
 }
 ```
 
-修复路径不是运行时事务，而是**类型化的同步原语**：`Arc<Mutex<u64>>`（§3.2 代码一）或 `Arc<AtomicU64>`（§3.2 代码三）。这正是 §3.1 第 1 条的可执行证据：STM 在 Haskell 中兜底的那类故障，在 Rust 中于类型层面不可表达。该保证的机器检查基础（`Send`/`Sync` 与借用规则）见 [Ownership & Borrowing](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 与 [L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md)。
+修复路径不是运行时事务，而是**类型化的同步原语**：`Arc<Mutex<u64>>`（§3.2 代码一）或 `Arc<AtomicU64>`（§3.2 代码三）。
+这正是 §3.1 第 1 条的可执行证据：STM 在 Haskell 中兜底的那类故障，在 Rust 中于类型层面不可表达。
+该保证的机器检查基础（`Send`/`Sync` 与借用规则）
+见 [Ownership & Borrowing](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) 与
+[L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md)。
 
 ---
 
@@ -778,7 +789,11 @@ fn main() {
 - ISO/IEC TS 19841:2015 *Technical Specification for C++ Extensions for Transactional Memory*
 - [Intel Security Advisory INTEL-SA-00270（TSX Asynchronous Abort）](https://www.intel.com/content/www/us/en/security-center/advisory/intel-sa-00270.html)
 
-> **相关文件**: [同层：进程代数](./01_process_calculi_for_rust.md) · [同层：线性化](./02_linearizability_and_consistency.md) · [同层：Actor 语义](./03_actor_semantics.md) · [同层：代数效应](./04_algebraic_effects.md) · [L5：Rust vs Haskell](../../05_comparative/02_managed_languages/09_rust_vs_haskell.md) · [L3：并发模式](../../03_advanced/00_concurrency/03_concurrency_patterns.md)
+> **相关文件**:
+> [同层：进程代数](./01_process_calculi_for_rust.md) · [同层：线性化](./02_linearizability_and_consistency.md) ·
+> [同层：Actor 语义](./03_actor_semantics.md) · [同层：代数效应](./04_algebraic_effects.md) ·
+> [L5：Rust vs Haskell](../../05_comparative/02_managed_languages/09_rust_vs_haskell.md) ·
+> [L3：并发模式](../../03_advanced/00_concurrency/03_concurrency_patterns.md)
 >
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-16 ｜ **状态**: ✅ W6 新建（Rust 1.97 对齐）
 
@@ -831,7 +846,9 @@ mindmap
       选型决策表
 ```
 
-> **认知功能**: 本图把 STM 拆为「谱系—正确性—实现—组合—对比—Rust—边界」七维：先建立「STM 解决什么问题、正确性如何定义」的理论坐标，再落到「Rust 为什么没有、用什么替代」的工程判断。建议与 [语言语义模型矩阵](../../05_comparative/00_paradigms/05_language_semantic_model_matrix.md) 的并发维度、以及 [代数效应与效应处理器](./04_algebraic_effects.md) 的「效应纪律」视角交叉阅读。
+> **认知功能**:
+> 本图把 STM 拆为「谱系—正确性—实现—组合—对比—Rust—边界」七维：先建立「STM 解决什么问题、正确性如何定义」的理论坐标，再落到「Rust 为什么没有、用什么替代」的工程判断。
+> 建议与 [语言语义模型矩阵](../../05_comparative/00_paradigms/05_language_semantic_model_matrix.md) 的并发维度、以及 [代数效应与效应处理器](./04_algebraic_effects.md) 的「效应纪律」视角交叉阅读。
 
 ---
 

@@ -1,4 +1,7 @@
-> **本节关键术语**: CSP · CCS · π 演算（π-calculus） · 进程代数（Process Algebra） · 会合（Rendezvous） · 外部选择（External Choice） · 移动性（Mobility） — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
+> **本节关键术语**:
+>
+> CSP · CCS · π 演算（π-calculus） · 进程代数（Process Algebra） · 会合（Rendezvous） · 外部选择（External Choice） · 移动性（Mobility）
+> — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 
 # 进程代数与 Rust 并发原语：CSP · CCS · π 演算
 
@@ -361,7 +364,11 @@ CSP 的 `[]` 不承诺任何分支优先级；`tokio::select!` 默认**随机**�
 - Milner, R. *Communicating and Mobile Systems: the π-Calculus*. Cambridge University Press, 1999. [Edinburgh 研究门户](https://www.research.ed.ac.uk/en/publications/communicating-and-mobile-systems-the-%CF%80-calculus/)
 - [std::sync::mpsc — Rust 标准库文档](https://doc.rust-lang.org/std/sync/mpsc/) · [crossbeam-channel](https://docs.rs/crossbeam-channel/latest/crossbeam_channel/) · [tokio::select!](https://tokio.rs/tokio/tutorial/select)
 
-> **相关文件**: [同层：线性化与一致性](02_linearizability_and_consistency.md) · [同层：Actor 语义](03_actor_semantics.md) · [L5 对比视角](../../05_comparative/00_paradigms/02_execution_model_isomorphism.md) · [L3 工程谱系](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md)
+> **相关文件**:
+> [同层：线性化与一致性](02_linearizability_and_consistency.md) ·
+> [同层：Actor 语义](03_actor_semantics.md) ·
+> [L5 对比视角](../../05_comparative/00_paradigms/02_execution_model_isomorphism.md) ·
+> [L3 工程谱系](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md)
 >
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-12 ｜ **状态**: ✅ W5-1 新建（Rust 1.97 对齐）
 

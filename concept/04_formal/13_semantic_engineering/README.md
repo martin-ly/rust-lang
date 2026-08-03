@@ -3,7 +3,8 @@
 # 语义工程与本体（Semantic Engineering and Ontology）
 
 > **EN**: Semantic Engineering and Ontology
-> **Summary**: Methodologies for designing, formalizing, constructing, and interoperating semantic artifacts—ontologies, description logics, knowledge graphs, and Linked Data—and their lightweight projections onto Rust's type system and project KG.
+> **Summary**:
+> Methodologies for designing, formalizing, constructing, and interoperating semantic artifacts—ontologies, description logics, knowledge graphs, and Linked Data—and their lightweight projections onto Rust's type system and project KG.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4-L5
@@ -11,8 +12,6 @@
 > **定位**: 从**语义工程**角度回答：如何为 Rust 知识体系设计、构建、验证和维护可机器消费的语义资产？
 > **前置概念**: [L4 形式化理论层](../README.md) · [知识图谱本体 v2](../../00_meta/knowledge_topology/kg_ontology_v2.md) · [语义空间](../../00_meta/00_framework/semantic_space.md)
 > **后置概念**: [本体工程](01_ontology_engineering.md) · [描述逻辑与 OWL](02_description_logic_and_owl.md) · [知识图谱构建](03_knowledge_graph_construction.md) · [语义互操作](04_semantic_interoperability.md)
-
----
 
 ## 📑 目录
 

@@ -14,12 +14,24 @@
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: T×Fml — 工具链与形式化验证
 > **定位**: 将 Kani 从"AWS 内部工具"还原为日常安全关键代码审查与教学的标准模型检查器。
-> **前置概念**: [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [现代验证工具生态](04_modern_verification_tools.md)
+> **前置概念**:
+> [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) ·
+> [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) ·
+> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·
+> [现代验证工具生态](04_modern_verification_tools.md)
 > **后置概念**: [Miri](08_miri.md) · [BorrowSanitizer](../02_separation_logic/04_borrow_sanitizer_in_formal.md)
 
 ---
 
-> **来源**: [Kani 官方文档](https://model-checking.github.io/kani/) · · [Kani — Rust Verification Model Checker](https://github.com/model-checking/kani) · [Clarke et al. — Behavioral Model Checking](https://doi.org/10.1145/876638.876643) · [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) · [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Kani 官方文档](https://model-checking.github.io/kani/) ·
+> · [Kani — Rust Verification Model Checker](https://github.com/model-checking/kani) ·
+> [Clarke et al. — Behavioral Model Checking](https://doi.org/10.1145/876638.876643) ·
+> [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Kani GitHub](https://github.com/model-checking/kani) ·
 > [CBMC](https://github.com/diffblue/cbmc) ·
 > [Kani 教程](https://model-checking.github.io/kani/tutorial-first-steps.html)

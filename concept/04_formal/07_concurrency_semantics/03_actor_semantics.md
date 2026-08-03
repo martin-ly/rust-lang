@@ -1,4 +1,7 @@
-> **本节关键术语**: Actor 模型 · 邮箱（Mailbox） · 行为替换（Become） · 监督树（Supervision Tree） · 位置透明性（Location Transparency） · 任其崩溃（Let It Crash） — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
+> **本节关键术语**:
+>
+> Actor 模型 · 邮箱（Mailbox） · 行为替换（Become） · 监督树（Supervision Tree） · 位置透明性（Location Transparency） · 任其崩溃（Let It Crash）
+> — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 
 # Actor 模型形式语义：从 Hewitt 公理到 Rust 生态
 
@@ -252,7 +255,9 @@ impl Actor for Counter {
 两条最容易踩的边界：
 
 1. **「Actor 邮箱是 FIFO」是错的**。Agha 语义中在途消息是多重集，无顺序；实现层面 actix/ractor 对**同一发送者**通常保持 FIFO，但跨发送者的交错顺序是调度结果。需要顺序时必须用**单 channel**（FIFO 契约）或在消息内携带序号。
-2. **「Actor 天然分布式」是有条件的**。位置透明性让发送语法不变，但 Agha 模型的公平性假设（消息最终到达）在跨网络时为假：消息可能丢失、延迟无界 ⟹ 分布式 actor 必须叠加确认/重传/超时协议（见 [L6 分布式共识](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) 与 [L6 因果序与向量时钟](../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md)）。
+
+2. **「Actor 天然分布式」是有条件的**。
+   位置透明性让发送语法不变，但 Agha 模型的公平性假设（消息最终到达）在跨网络时为假：消息可能丢失、延迟无界 ⟹ 分布式 actor 必须叠加确认/重传/超时协议（见 [L6 分布式共识](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) 与 [L6 因果序与向量时钟](../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md)）。
 
 ---
 

@@ -11,7 +11,10 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [验证工具链](01_verification_toolchain.md) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) ·
+> [验证工具链](01_verification_toolchain.md) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **后置概念**: N/A
 ---
 
@@ -675,7 +678,11 @@ let _ref = &mut x;     // Stacked Borrows: ptr 失效
 </details>
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/popl18/) · [Iris Project](https://iris-project.org/) · [Kani Documentation](https://model-checking.github.io/kani/)
+> **权威来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/popl18/) · [Iris Project](https://iris-project.org/) ·
+> [Kani Documentation](https://model-checking.github.io/kani/)
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.0

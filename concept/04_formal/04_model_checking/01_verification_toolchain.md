@@ -6,19 +6,34 @@
 > **Summary**: The Rust formal verification toolchain: Miri, Kani, Creusot, Verus, Prusti, and RustBelt.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **受众**: [研究者]
-> ⚠️ **声明**: 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
+> ⚠️ **声明**:
+> 本文件使用形式化符号辅助直觉理解，所呈现的"定理/引理/推论"为**教学类比**，非经机器验证的严格数学证明。
+> 如需严格形式化验证，请参考 [Verus](https://github.com/verus-lang/verus)、[Kani](https://model-checking.github.io/kani/)、[Coq](https://coq.inria.fr/)。
 >
 > **层级**: L4 形式化理论 → L6 工业实践
 > **A/S/P 标记**: **P** — Procedure
 > **双维定位**: P×Eva — 评估验证工具的 ROI 和适用性
-> **前置概念**: [RustBelt](../02_separation_logic/01_rustbelt.md) · [Ownership Formalization](../01_ownership_logic/02_ownership_formal.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
+> **前置概念**:
+> [RustBelt](../02_separation_logic/01_rustbelt.md) ·
+> [Ownership Formalization](../01_ownership_logic/02_ownership_formal.md) ·
+> [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
 > **后置概念**: [Formal Methods](../../07_future/04_research_and_experimental/02_formal_methods.md)
-> **主要来源**: [AWS Kani] · [Microsoft Verus] · [Creusot](https://creusot.rs/) · [Miri Book](https://github.com/rust-lang/miri) · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) · [Aeneas](https://github.com/AeneasVerif/aeneas) · [RefinedRust] · [a-mir-formality] · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **主要来源**:
+> [AWS Kani] · [Microsoft Verus] · [Creusot](https://creusot.rs/) ·
+> [Miri Book](https://github.com/rust-lang/miri) · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) ·
+> [Aeneas](https://github.com/AeneasVerif/aeneas) · [RefinedRust] · [a-mir-formality] ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > **Bloom 层级**: L3-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** · **[SOSP 2024 Verus](https://verus-lang.github.io/verus/guide/)** · **[PLDI 2024 RefinedRust](https://arxiv.org/abs/2404.03613)** · **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** ✅
+> **来源:
+> [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** ·
+> **[SOSP 2024 Verus](https://verus-lang.github.io/verus/guide/)** ·
+> **[PLDI 2024 RefinedRust](https://arxiv.org/abs/2404.03613)** ·
+> **来源: [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)** ✅
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 ---
 
 **变更日志**:

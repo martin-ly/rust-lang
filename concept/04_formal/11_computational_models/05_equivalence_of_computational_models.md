@@ -4,13 +4,19 @@
 
 > **EN**: Equivalence of Computational Models
 > **Summary**: Turing equivalence, expressiveness comparisons, and Felleisen's framework for measuring the expressive power of programming language constructs.
-
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 从图灵等价、模型间编码与 Felleisen 表达力三个角度，说明「所有图灵完备语言计算能力相同」与「工程语言表达能力不同」为何同时成立，并把这一理论映射到 Rust 的 `async/await` 与 `?` 等语法构造。
-> **前置概念**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Computational Semantics Framework](01_computational_semantics_framework.md) · [Computability Theory](02_computability_theory.md) · [Mathematical Functions of Computation](04_mathematical_functions_of_computation.md)
-> **后置概念**: [Algorithm Equivalence](../08_algorithm_semantics/05_algorithm_equivalence.md) · [Concurrency Models](../12_concurrency_models/README.md) · [Semantic Space](../../00_meta/00_framework/semantic_space.md)
+> **前置概念**:
+> [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) ·
+> [Computational Semantics Framework](01_computational_semantics_framework.md) ·
+> [Computability Theory](02_computability_theory.md) ·
+> [Mathematical Functions of Computation](04_mathematical_functions_of_computation.md)
+> **后置概念**:
+> [Algorithm Equivalence](../08_algorithm_semantics/05_algorithm_equivalence.md) ·
+> [Concurrency Models](../12_concurrency_models/README.md) ·
+> [Semantic Space](../../00_meta/00_framework/semantic_space.md)
 
 ---
 
@@ -163,7 +169,10 @@ fn main() {
 }
 ```
 
-> **来源**: [Sipser 1996/2012 — Introduction to the Theory of Computation, Ch4-5](https://math.mit.edu/~sipser/book.html) · [Soare 1987 — Recursively Enumerable Sets and Degrees](https://doi.org/10.1007/978-3-662-02460-7) · [Soare 2016 — Turing Computability: Theory and Applications](https://doi.org/10.1007/978-3-642-31933-4)
+> **来源**:
+> [Sipser 1996/2012 — Introduction to the Theory of Computation, Ch4-5](https://math.mit.edu/~sipser/book.html) ·
+> [Soare 1987 — Recursively Enumerable Sets and Degrees](https://doi.org/10.1007/978-3-662-02460-7) ·
+> [Soare 2016 — Turing Computability: Theory and Applications](https://doi.org/10.1007/978-3-642-31933-4)
 
 ---
 
@@ -233,7 +242,10 @@ fn main() {
 }
 ```
 
-> **来源**: [Hopcroft & Ullman 1979 — Introduction to Automata Theory, Languages, and Computation](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation) · [Sipser 2012 — Ch5](https://math.mit.edu/~sipser/book.html) · [Rust Reference — Type inference](https://doc.rust-lang.org/reference/type-inference.html)
+> **来源**:
+> [Hopcroft & Ullman 1979 — Introduction to Automata Theory, Languages, and Computation](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation) ·
+> [Sipser 2012 — Ch5](https://math.mit.edu/~sipser/book.html) ·
+> [Rust Reference — Type inference](https://doc.rust-lang.org/reference/type-inference.html)
 
 ---
 
@@ -287,7 +299,10 @@ fn main() {
 }
 ```
 
-> **来源**: [Turing 1936 — On Computable Numbers](https://doi.org/10.1112/plms/s2-42.1.230) · [Church 1936 — An Unsolvable Problem of Elementary Number Theory](https://doi.org/10.2307/1968981) · [Barendregt 1984 — The Lambda Calculus: Its Syntax and Semantics](https://doi.org/10.1016/S0049-237X(09)70070-8)
+> **来源**:
+> [Turing 1936 — On Computable Numbers](https://doi.org/10.1112/plms/s2-42.1.230) ·
+> [Church 1936 — An Unsolvable Problem of Elementary Number Theory](https://doi.org/10.2307/1968981) ·
+> [Barendregt 1984 — The Lambda Calculus: Its Syntax and Semantics](https://doi.org/10.1016/S0049-237X(09)70070-8)
 
 ---
 
@@ -370,7 +385,10 @@ fn main() {
 | `lalrpop` | LR(1) / LALR | Type-2 CFG 子集（无歧义） | 编程语言前端 |
 | `syn` | 手写递归下降 | Rust Token 流 → AST | 过程宏、代码分析 |
 
-> **来源**: [Hopcroft, Motwani & Ullman 2006 — Introduction to Automata Theory, Languages, and Computation, Ch1-2, 4, 7](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation) · [Sipser 2012 — Ch1-2](https://math.mit.edu/~sipser/book.html) · [nom documentation](https://docs.rs/nom) · [pest.rs](https://pest.rs/) · [LALRPOP book](https://lalrpop.github.io/lalrpop/)
+> **来源**:
+> [Hopcroft, Motwani & Ullman 2006 — Introduction to Automata Theory, Languages, and Computation, Ch1-2, 4, 7](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation) ·
+> [Sipser 2012 — Ch1-2](https://math.mit.edu/~sipser/book.html) ·
+> [nom documentation](https://docs.rs/nom) · [pest.rs](https://pest.rs/) · [LALRPOP book](https://lalrpop.github.io/lalrpop/)
 
 ---
 
@@ -480,7 +498,11 @@ fn main() {
 }
 ```
 
-> **来源**: [Barendregt 1984 — The Lambda Calculus: Its Syntax and Semantics](https://doi.org/10.1016/S0049-237X(09)70070-8) · [Scott 1976 — Data Types as Lattices](https://doi.org/10.1137/0205037) · [Girard, Lafont & Taylor 1989 — Proofs and Types](https://doi.org/10.1017/CBO9780511569907) · [Rust Reference — Closures](https://doc.rust-lang.org/reference/types/closure.html)
+> **来源**:
+> [Barendregt 1984 — The Lambda Calculus: Its Syntax and Semantics](https://doi.org/10.1016/S0049-237X(09)70070-8) ·
+> [Scott 1976 — Data Types as Lattices](https://doi.org/10.1137/0205037) ·
+> [Girard, Lafont & Taylor 1989 — Proofs and Types](https://doi.org/10.1017/CBO9780511569907) ·
+> [Rust Reference — Closures](https://doc.rust-lang.org/reference/types/closure.html)
 
 ---
 
@@ -504,7 +526,7 @@ Felleisen 框架的核心概念：
     └── 无法用局部宏表达，必须引入新的语义原语
 ```
 
-#### Rice 定理与编译器优化正确性
+### Rice 定理与编译器优化正确性
 
 Felleisen 框架与 Rice 定理共同决定了编译器优化的安全边界：
 

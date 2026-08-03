@@ -12,8 +12,12 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **A/S/P 标记**: **S+A** — Structure + Application
 > **双维定位**: C×Eva
-> **前置依赖**: [形式化验证](01_verification_toolchain.md) · [形式化验证工具生态](../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md)
-> **后置延伸**: [Safety Tags](../../07_future/02_preview_features/03_safety_tags_preview.md) · [BorrowSanitizer](../02_separation_logic/04_borrow_sanitizer_in_formal.md)
+> **前置依赖**:
+> [形式化验证](01_verification_toolchain.md) ·
+> [形式化验证工具生态](../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md)
+> **后置延伸**:
+> [Safety Tags](../../07_future/02_preview_features/03_safety_tags_preview.md) ·
+> [BorrowSanitizer](../02_separation_logic/04_borrow_sanitizer_in_formal.md)
 >
 > **来源**:
 > [Verus GitHub](https://github.com/verus-lang/verus) ·
@@ -189,7 +193,11 @@ B
 
 ---
 
-> **权威来源**: [Verus GitHub](https://github.com/verus-lang/verus) · [Verus 文档](https://verus-lang.github.io/verus/guide/) · [AutoVerus 论文 (OOPSLA 2025)](https://doi.org/10.1145/3763174) · [arXiv 版本](https://arxiv.org/abs/2409.13082) · [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
+> **权威来源**:
+> [Verus GitHub](https://github.com/verus-lang/verus) · [Verus 文档](https://verus-lang.github.io/verus/guide/) ·
+> [AutoVerus 论文 (OOPSLA 2025)](https://doi.org/10.1145/3763174) · [arXiv 版本](https://arxiv.org/abs/2409.13082) ·
+> [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html) · 
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html)
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.0

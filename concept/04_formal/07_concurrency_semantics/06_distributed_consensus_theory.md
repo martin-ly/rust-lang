@@ -1,4 +1,6 @@
-> **本节关键术语**: 共识（Consensus） · 安全性（Safety） · 活性（Liveness） · FLP 不可能性（FLP Impossibility） · 部分同步（Partial Synchrony） · 故障检测器（Failure Detector） · 法定人数（Quorum） · 拜占庭容错（Byzantine Fault Tolerance, BFT） · 状态机复制（State Machine Replication, SMR） — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
+> **本节关键术语**:
+> 共识（Consensus） · 安全性（Safety） · 活性（Liveness） · FLP 不可能性（FLP Impossibility） · 部分同步（Partial Synchrony） · 故障检测器（Failure Detector） · 法定人数（Quorum） · 拜占庭容错（Byzantine Fault Tolerance, BFT） · 状态机复制（State Machine Replication, SMR）
+> — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 
 # 分布式共识与不可能性理论：FLP · CAP · Paxos · Raft · BFT
 
@@ -10,7 +12,10 @@
 > **受众**: [专家]
 > **内容分级**: [综述级]
 > **前置概念**: [Linearizability](./02_linearizability_and_consistency.md) · [Process Calculi](./01_process_calculi_for_rust.md) · [Actor Semantics](./03_actor_semantics.md)
-> **后置概念**: [Distributed Consensus Ecosystem](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) · [CRDTs](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md) · [Causal Ordering](../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md)
+> **后置概念**:
+> [Distributed Consensus Ecosystem](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) ·
+> [CRDTs](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md) ·
+> [Causal Ordering](../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md)
 
 ---
 
@@ -353,7 +358,10 @@ PACELC 的教学价值在于把「权衡」从一次性的 CAP 声明变为**两
 
 ### 3.5 与一致性谱系页的分工
 
-CAP 中的「C」只是一致性光谱的端点（线性化/原子一致）。完整谱系——线性化、顺序一致、因果一致、最终一致的形式定义、强度排序与判定复杂度——权威页为 [线性化与一致性（Coherence）谱系](./02_linearizability_and_consistency.md)；因果一致的实现机制（向量时钟等）见 [L6 因果序页](../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md)。本页只消费「线性化」作为 CAP 的形式锚点，不重复谱系理论。
+CAP 中的「C」只是一致性光谱的端点（线性化/原子一致）。
+完整谱系——线性化、顺序一致、因果一致、最终一致的形式定义、强度排序与判定复杂度——权威页为 [线性化与一致性（Coherence）谱系](./02_linearizability_and_consistency.md)；
+因果一致的实现机制（向量时钟等）见 [L6 因果序页](../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md)。
+本页只消费「线性化」作为 CAP 的形式锚点，不重复谱系理论。
 
 ---
 
@@ -393,7 +401,9 @@ P2b : 若 v 被选定，则此后 proposer 发出的任何更大编号提案的�
 P2c : 选值规则（上框 Phase 2a）⟹ P2b
 ```
 
-**为什么多数派 ⟹ 安全**：任意两个多数派必有非空交集。设 (n,v) 已被多数派 Q 接受；更大编号 n' 的 Phase 1 必与 Q 交于某个 acceptor，该 acceptor 的 Promise 携带 (n,v)（或更晚的、由归纳同值的提案）⟹ P2c 强制 n' 选值 v ⟹ 归纳成立。**仲裁交集是 Paxos 安全性的全部支点**——这个支点在 §4.4 会被拜占庭故障腐蚀，届时需要把它加粗到 3f+1。
+**为什么多数派 ⟹ 安全**：
+任意两个多数派必有非空交集。设 (n,v) 已被多数派 Q 接受；更大编号 n' 的 Phase 1 必与 Q 交于某个 acceptor，该 acceptor 的 Promise 携带 (n,v)（或更晚的、由归纳同值的提案）⟹ P2c 强制 n' 选值 v ⟹ 归纳成立。
+**仲裁交集是 Paxos 安全性的全部支点**——这个支点在 §4.4 会被拜占庭故障腐蚀，届时需要把它加粗到 3f+1。
 
 **活性**：Paxos 不保证终止（FLP 允许如此）。反模式见 §七反例 5 的决斗提案者（dueling proposers）执行；工程出路是选出稳定 leader 并复用 Phase 1——即 Multi-Paxos。
 
@@ -433,7 +443,10 @@ State Machine Safety   : 某节点把 (index, v) 应用到状态机 ⟹
                          不存在另一节点在同 index 应用不同值
 ```
 
-链条式的证明直觉：Election Restriction（RequestVote 比较 `(lastLogTerm, lastLogIndex)`，候选人日志至少与投票人一样新才获票）⊕ Election Safety ⟹ **Leader Completeness**——term T 提交 ⟹ 多数派持有；term T+1 的 leader 至少从该多数派得一票，而该投票人持有此条目且日志不比候选人新 ⟹ 候选人必已持有；对任期归纳 ⟹ 所有更高任期 leader 亦然。再由 Log Matching ⟹ State Machine Safety。
+链条式的证明直觉：
+Election Restriction（RequestVote 比较 `(lastLogTerm, lastLogIndex)`，候选人日志至少与投票人一样新才获票）⊕ Election Safety ⟹ **Leader Completeness**——term T 提交 ⟹ 多数派持有；
+term T+1 的 leader 至少从该多数派得一票，而该投票人持有此条目且日志不比候选人新 ⟹ 候选人必已持有；
+对任期归纳 ⟹ 所有更高任期 leader 亦然。再由 Log Matching ⟹ State Machine Safety。
 
 与 Paxos 的两个结构性差异（等效但不同构）：
 
@@ -470,9 +483,13 @@ commit      : 广播 ⟨COMMIT, v, n, d⟩；集齐 2f+1 个匹配 COMMIT ⟹ co
 执行        : 按序号顺序执行已提交请求并回复客户端
 ```
 
-**为什么需要两次投票**：prepared 只是**本地**知识；commit 阶段把「prepared」扩散为「至少 f+1 个诚实节点掌握」的**分布式**知识。视图更替（view change）时，2f+1 个 VIEW-CHANGE 消息各自携带 P 集（已 prepared 的证明），其交集保证新 primary 看得见一切可能已提交的值 ⟹ 安全性跨视图保持。活性在 GST 后由超时与指数退避的视图更替保证；**安全性在纯异步下也成立**（§2.3 注脚的教科书实例）。
+**为什么需要两次投票**：
+prepared 只是**本地**知识；commit 阶段把「prepared」扩散为「至少 f+1 个诚实节点掌握」的**分布式**知识。
+视图更替（view change）时，2f+1 个 VIEW-CHANGE 消息各自携带 P 集（已 prepared 的证明），其交集保证新 primary 看得见一切可能已提交的值 ⟹ 安全性跨视图保持。
+活性在 GST 后由超时与指数退避的视图更替保证；**安全性在纯异步下也成立**（§2.3 注脚的教科书实例）。
 
-后续工作沿两个方向演进：线性化视图更替与流水线（HotStuff，Yin et al. 2019——三链 QC、门限签名、responsiveness），以及链式/权益加权治理（Tendermint 等）。这些变体的协议细节与生态对比见 [L6 生态页](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md)，本页不再展开。
+后续工作沿两个方向演进：线性化视图更替与流水线（HotStuff，Yin et al. 2019——三链 QC、门限签名、responsiveness），以及链式/权益加权治理（Tendermint 等）。
+这些变体的协议细节与生态对比见 [L6 生态页](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md)，本页不再展开。
 
 ---
 
@@ -559,8 +576,13 @@ loop {
 
 ### 5.3 openraft 与 hotstuff-rs
 
-- [openraft](https://docs.rs/openraft)（datafuselabs 维护）：异步 Raft；截至 2026-07，0.9 线为稳定维护线，0.10 线处于 alpha（最新 `0.10.0-alpha.29`）。其类型设计的标志是把协议标识建模为强类型——`Vote`、`LeaderId`/`CommittedLeaderId`、`LogId` 各自成类，杜绝「任期与日志索引混用」这类整数混淆缺陷；存储层以 `RaftStorage`/`RaftLogStorage` 等 trait 契约表达，存储实现的错误被 trait 边界局部化、可独立审计。复制状态机的业务接入面同样以 `RaftStateMachine` trait 显式化。openraft 已被 Databend、Danube 等生产系统用作元数据共识层。
-- [hotstuff-rs](https://docs.rs/hotstuff-rs/)：HotStuff 谱系的 Rust 实现。其中心抽象是**仲裁证书（Quorum Certificate, QC）作为一等值**：QC 由门限签名聚合而成、按所有权在视图间传递，「证书不可伪造 + 证书单所有者」分别由密码学与类型系统各管一半。
+- [openraft](https://docs.rs/openraft)（datafuselabs 维护）：异步 Raft；截至 2026-07，0.9 线为稳定维护线，0.10 线处于 alpha（最新 `0.10.0-alpha.29`）。
+  其类型设计的标志是把协议标识建模为强类型——`Vote`、`LeaderId`/`CommittedLeaderId`、`LogId` 各自成类，杜绝「任期与日志索引混用」这类整数混淆缺陷；
+  存储层以 `RaftStorage`/`RaftLogStorage` 等 trait 契约表达，存储实现的错误被 trait 边界局部化、可独立审计。
+  复制状态机的业务接入面同样以 `RaftStateMachine` trait 显式化。
+  openraft 已被 Databend、Danube 等生产系统用作元数据共识层。
+- [hotstuff-rs](https://docs.rs/hotstuff-rs/)：HotStuff 谱系的 Rust 实现。
+  其中心抽象是**仲裁证书（Quorum Certificate, QC）作为一等值**：QC 由门限签名聚合而成、按所有权在视图间传递，「证书不可伪造 + 证书单所有者」分别由密码学与类型系统各管一半。
 
 两个实现共享的 Rust 模式：**把协议不变量尽量搬进类型**（typestate/强标识/证书值），剩下搬不进的（活性、时序）交给确定性测试与运行时断言。
 
@@ -636,7 +658,9 @@ CRDT（Conflict-free Replicated Data Type，Shapiro et al. 2011）给出了 CAP 
 | 节点/延迟代价 | ≥ 2f+1（或 3f+1），写 ≥ 一次仲裁往返 | 无协调，本地延迟 |
 | 能力边界 | 可维持**全局不变量**（唯一性、余额非负……） | 只能表达与半格兼容的不变量（见 §七反例 6） |
 
-结论不是「CRDT 取代共识」，而是**分层**：能用半格表达的不变量下放给 CRDT（购物车、计数器、在线状态），必须全局仲裁的不变量上浮给共识（账号余额、唯一用户名、租约）。CRDT 的类型谱系（G-Counter、PN-Counter、OR-Set、RGA……）见 [L6 CRDT 谱系页](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md)；其下的因果一致层见 [因果序与向量时钟](../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md)。
+结论不是「CRDT 取代共识」，而是**分层**：能用半格表达的不变量下放给 CRDT（购物车、计数器、在线状态），必须全局仲裁的不变量上浮给共识（账号余额、唯一用户名、租约）。
+CRDT 的类型谱系（G-Counter、PN-Counter、OR-Set、RGA……）见 [L6 CRDT 谱系页](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md)；
+其下的因果一致层见 [因果序与向量时钟](../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md)。
 
 ---
 
@@ -665,7 +689,10 @@ n = 2f+1 时交集下界只有 1（§5.1 代码中 `bad` 分支），这 1 个�
 
 **反命题**: FLP 证明了共识不可能，所以 Paxos/Raft 之类只是「碰巧能用」。
 
-**反驳**: FLP 量词是**存在一条对抗调度**——证明构造的执行要求调度器无限期精确维持双价（§2.2），这类执行在现实时序分布下概率趋于零；且 FLP 的合取前提中任何一支被松开（部分同步/故障检测器/随机化，§2.3），共识即在严格数学意义下可解。Paxos/Raft 不是「绕过定理的运气」，而是**换了定理前提的合法解**。反向应用同样重要：审计一个声称「纯异步、确定性、保证终止」的共识方案时，结论应直接是「前提中必有隐藏的时间假设」，而不是「FLP 错了」。
+**反驳**: FLP 量词是**存在一条对抗调度**——证明构造的执行要求调度器无限期精确维持双价（§2.2），这类执行在现实时序分布下概率趋于零；
+且 FLP 的合取前提中任何一支被松开（部分同步/故障检测器/随机化，§2.3），共识即在严格数学意义下可解。
+Paxos/Raft 不是「绕过定理的运气」，而是**换了定理前提的合法解**。
+反向应用同样重要：审计一个声称「纯异步、确定性、保证终止」的共识方案时，结论应直接是「前提中必有隐藏的时间假设」，而不是「FLP 错了」。
 
 ---
 
@@ -673,7 +700,8 @@ n = 2f+1 时交集下界只有 1（§5.1 代码中 `bad` 分支），这 1 个�
 
 **反命题**: 系统设计时可以自由放弃 P，做一套「CA 系统」。
 
-**反驳**: 在跨节点部署中分区不是设计选项而是环境事实（Gilbert-Lynch 的形式化里，「允许一次分区」是执行空间的合法成员）。宣称 CA 的系统在分区时刻必然沉默地滑落进 CP 或 AP——典型失败形态是**双主脑裂**：
+**反驳**: 在跨节点部署中分区不是设计选项而是环境事实（Gilbert-Lynch 的形式化里，「允许一次分区」是执行空间的合法成员）。
+宣称 CA 的系统在分区时刻必然沉默地滑落进 CP 或 AP——典型失败形态是**双主脑裂**：
 
 ```text
 主备数据库 + 故障转移组件：
@@ -747,7 +775,9 @@ Paxos 论文对此完全诚实：Synod 只证安全性。活性来自协议外�
 
 ### 边界：共享内存对应物与共识数
 
-本页全部结果站在**消息传递**模型上。共享内存世界的平行理论：Loui & Abu-Amara 1987 证明异步读写寄存器 + 单崩溃下共识不可解；Herlihy 1991 的**共识数**（consensus number）把同步原语按「能解决几进程共识」分层——读写寄存器为 1，test-and-set/队列等为 2，compare-and-swap 为 ∞。这条线与 [线性化页](./02_linearizability_and_consistency.md) 的无锁结构谱系直接衔接，构成「单机并发」与「分布式共识」在不可能性层面的镜像。
+本页全部结果站在**消息传递**模型上。
+共享内存世界的平行理论：Loui & Abu-Amara 1987 证明异步读写寄存器 + 单崩溃下共识不可解；Herlihy 1991 的**共识数**（consensus number）把同步原语按「能解决几进程共识」分层——读写寄存器为 1，test-and-set/队列等为 2，compare-and-swap 为 ∞。
+这条线与 [线性化页](./02_linearizability_and_consistency.md) 的无锁结构谱系直接衔接，构成「单机并发」与「分布式共识」在不可能性层面的镜像。
 
 ---
 
@@ -790,7 +820,10 @@ Paxos 论文对此完全诚实：Synod 只证安全性。活性来自协议外�
 - Shapiro, M., Preguiça, N., Baquero, C. & Zawirski, M. *Conflict-free Replicated Data Types*. SSS 2011.
 - [raft-rs 文档](https://docs.rs/raft) · [openraft 文档](https://docs.rs/openraft) · [hotstuff-rs 文档](https://docs.rs/hotstuff-rs/) · [etcd-io/raft](https://github.com/etcd-io/raft) · [TiKV](https://github.com/tikv/tikv)
 
-> **相关文件**: [同层：进程代数](./01_process_calculi_for_rust.md) · [同层：线性化](./02_linearizability_and_consistency.md) · [同层：Actor 语义](./03_actor_semantics.md) · [L6 分布式共识生态](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) · [L6 CRDT 谱系](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md)
+> **相关文件**:
+> [同层：进程代数](./01_process_calculi_for_rust.md) · [同层：线性化](./02_linearizability_and_consistency.md) ·
+> [同层：Actor 语义](./03_actor_semantics.md) · [L6 分布式共识生态](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) ·
+> [L6 CRDT 谱系](../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md)
 >
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-16 ｜ **状态**: ✅ 新建（Rust 1.97 对齐）
 
@@ -860,7 +893,9 @@ mindmap
       CRDT 保全局不变量
 ```
 
-> **认知功能**: 本知识结构图把分布式共识理论拆为「规范—不可能性—算法—Rust 映射—对照边界」五维：先立规范与性质二分，再用 FLP/CAP 划定理边界，随后沿仲裁交集一条主线串起 Paxos/Raft/PBFT，最后落到 Rust 类型系统的实现安全机制与 CRDT 对照。建议与 [L6 生态页](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) 的工程视角并读：本页回答「为什么必须如此」，生态页回答「怎么用」。
+> **认知功能**:
+> 本知识结构图把分布式共识理论拆为「规范—不可能性—算法—Rust 映射—对照边界」五维：先立规范与性质二分，再用 FLP/CAP 划定理边界，随后沿仲裁交集一条主线串起 Paxos/Raft/PBFT，最后落到 Rust 类型系统的实现安全机制与 CRDT 对照。
+> 建议与 [L6 生态页](../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md) 的工程视角并读：本页回答「为什么必须如此」，生态页回答「怎么用」。
 
 ---
 

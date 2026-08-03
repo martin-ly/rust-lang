@@ -9,8 +9,16 @@
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 从图灵机、递归函数与 Church-Turing 论题出发，刻画「可计算」的形式边界；补充归约与完备性、算术层级、Curry-Howard 与类型化 λ 演算视角；并通过 Rust 实例展示可判定性、不可判定性、Rice 定理、Post 对应问题、递归类型与观察等价在语言实现中的投影。
-> **前置概念**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Lambda Calculus](../00_type_theory/05_lambda_calculus.md) · [Type Theory](../00_type_theory/01_type_theory.md) · [Type Checking and Inference](../00_type_theory/07_type_checking_and_inference.md)
-> **后置概念**: [Mathematical Functions of Computation](04_mathematical_functions_of_computation.md) · [Formal Languages and Automata](03_formal_languages_and_automata.md) · [Equivalence of Computational Models](05_equivalence_of_computational_models.md) · [Observational Equivalence](../03_operational_semantics/06_observational_equivalence.md)
+> **前置概念**:
+> [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) ·
+> [Lambda Calculus](../00_type_theory/05_lambda_calculus.md) ·
+> [Type Theory](../00_type_theory/01_type_theory.md) ·
+> [Type Checking and Inference](../00_type_theory/07_type_checking_and_inference.md)
+> **后置概念**:
+> [Mathematical Functions of Computation](04_mathematical_functions_of_computation.md) ·
+> [Formal Languages and Automata](03_formal_languages_and_automata.md) ·
+> [Equivalence of Computational Models](05_equivalence_of_computational_models.md) ·
+> [Observational Equivalence](../03_operational_semantics/06_observational_equivalence.md)
 
 ---
 
@@ -90,7 +98,11 @@ Turing 原始论文将「可计算数」定义为可被自动机（automatic mac
 
 Church 通过 λ 可定义函数给出了可计算性的第一条形式化道路（Church, 1936）；Turing 随后证明 λ 可定义函数与图灵机可计算函数类重合（Turing, 1937）。Barendregt 将这一等价链表述为「可计算性三大模型」的汇聚点（Barendregt, 1984, §6.3; Barendregt, 1997, §2）。
 
-> **来源**: [Church 1936 — An Unsolvable Problem](https://doi.org/10.2307/1968981) · [Turing 1936 — On Computable Numbers](https://doi.org/10.1112/plms/s2-42.1.230) · [Turing 1937 — Computability and λ-definability](https://doi.org/10.1112/jlms/s1-12.45.243) · [Barendregt 1984 — The Lambda Calculus](https://doi.org/10.1016/B978-0-444-87508-2.50006-X)
+> **来源**:
+> [Church 1936 — An Unsolvable Problem](https://doi.org/10.2307/1968981) ·
+> [Turing 1936 — On Computable Numbers](https://doi.org/10.1112/plms/s2-42.1.230) ·
+> [Turing 1937 — Computability and λ-definability](https://doi.org/10.1112/jlms/s1-12.45.243) ·
+> [Barendregt 1984 — The Lambda Calculus](https://doi.org/10.1016/B978-0-444-87508-2.50006-X)
 
 ---
 
@@ -202,7 +214,11 @@ Rice 定理的推论（不可判定的语义问题）：
 
 > **关键区分**：Rice 定理说的是「语义性质」不可判定；纯语法性质（如「程序是否包含 `unsafe` 块」）通常是可判定的。编译器擅长语法/类型检查，但无法判断任意函数的最终语义行为。
 >
-> **来源**: [Rice 1953 — Classes of Recursively Enumerable Sets](https://doi.org/10.1090/S0002-9904-1953-09692-2) · [Sipser 2012 — §5.1, pp. 217–221](https://math.mit.edu/~sipser/book.html) · [Hopcroft, Motwani & Ullman 2006 — §9.3](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation) · [Soare 1987 — Recursively Enumerable Sets and Degrees, Ch. IV](https://doi.org/10.1007/978-3-662-21917-0)
+> **来源**:
+> [Rice 1953 — Classes of Recursively Enumerable Sets](https://doi.org/10.1090/S0002-9904-1953-09692-2) ·
+> [Sipser 2012 — §5.1, pp. 217–221](https://math.mit.edu/~sipser/book.html) ·
+> [Hopcroft, Motwani & Ullman 2006 — §9.3](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation) ·
+> [Soare 1987 — Recursively Enumerable Sets and Degrees, Ch. IV](https://doi.org/10.1007/978-3-662-21917-0)
 
 ---
 
@@ -248,7 +264,11 @@ Soare 在 2016 年的现代教材中强调，RE/co-RE 分类不仅是理论工�
 
 > **认知要点**：RE/co-RE 分类解释了为什么某些问题可以「半自动」处理。静态分析器通常是 sound but incomplete：若程序有问题可能报告，但若无法判定则允许通过——这正是 RE 性质的工程对应物。
 >
-> **来源**: [Soare 1987 — Recursively Enumerable Sets and Degrees](https://doi.org/10.1007/978-3-662-21917-0) · [Soare 2016 — Turing Computability. Theory and Applications, §§1.4–1.5, §3.4](https://doi.org/10.1007/978-3-642-31933-4) · [Sipser 2012 — §§4.1–4.2](https://math.mit.edu/~sipser/book.html) · [Scott 1976 — Data types as lattices](https://doi.org/10.1137/0205037)
+> **来源**:
+> [Soare 1987 — Recursively Enumerable Sets and Degrees](https://doi.org/10.1007/978-3-662-21917-0) ·
+> [Soare 2016 — Turing Computability. Theory and Applications, §§1.4–1.5, §3.4](https://doi.org/10.1007/978-3-642-31933-4) ·
+> [Sipser 2012 — §§4.1–4.2](https://math.mit.edu/~sipser/book.html) ·
+> [Scott 1976 — Data types as lattices](https://doi.org/10.1137/0205037)
 
 ---
 
@@ -277,7 +297,10 @@ PCP 实例示例：
   因此这是一个「是」实例。
 ```
 
-**不可判定性**：PCP 是不可判定的。标准证明从 A_TM（或停机问题）通过图灵机计算历史（computation history）归约到 PCP。直观上，骨牌序列可以编码图灵机从初始格局到接受格局的完整计算历史，因此若能判定任意 PCP 实例，就能判定停机问题（Sipser, 2012, §5.2, pp. 227–233; Hopcroft, Motwani & Ullman, 2006, §9.4）。
+**不可判定性**：
+PCP 是不可判定的。
+标准证明从 A_TM（或停机问题）通过图灵机计算历史（computation history）归约到 PCP。
+直观上，骨牌序列可以编码图灵机从初始格局到接受格局的完整计算历史，因此若能判定任意 PCP 实例，就能判定停机问题（Sipser, 2012, §5.2, pp. 227–233; Hopcroft, Motwani & Ullman, 2006, §9.4）。
 
 ```text
 PCP 的工程意义：
@@ -287,7 +310,10 @@ PCP 的工程意义：
 └── 形式验证：PCP 是「局部匹配规则导致全局不可判定」的典型范例
 ```
 
-> **来源**: [Post 1946 — A variant of a recursively unsolvable problem](https://doi.org/10.1090/S0002-9904-1946-08555-9) · [Sipser 2012 — §5.2, pp. 227–233](https://math.mit.edu/~sipser/book.html) · [Hopcroft, Motwani & Ullman 2006 — §9.4](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation)
+> **来源**:
+> [Post 1946 — A variant of a recursively unsolvable problem](https://doi.org/10.1090/S0002-9904-1946-08555-9) ·
+> [Sipser 2012 — §5.2, pp. 227–233](https://math.mit.edu/~sipser/book.html) ·
+> [Hopcroft, Motwani & Ullman 2006 — §9.4](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation)
 
 ---
 
@@ -320,7 +346,10 @@ TOTAL = {⟨M⟩ | M 在所有输入上停机} 是 Π₂-完全的，因此既�
 
 > **认知要点**：归约不仅是理论工具，也是工程上判断「某静态分析问题能否完全自动化」的思维方式。若某问题可归约到停机问题，则精确判定它是不可行的。
 >
-> **来源**: [Sipser 2012 — §§5.1, 5.3, 6.1](https://math.mit.edu/~sipser/book.html) · [Hopcroft, Motwani & Ullman 2006 — §§9.2–9.4](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation) · [Soare 2016 — §3.4](https://doi.org/10.1007/978-3-642-31933-4) · [Scott 1976 — §3](https://doi.org/10.1137/0205037)
+> **来源**:
+> [Sipser 2012 — §§5.1, 5.3, 6.1](https://math.mit.edu/~sipser/book.html) ·
+> [Hopcroft, Motwani & Ullman 2006 — §§9.2–9.4](https://en.wikipedia.org/wiki/Introduction_to_Automata_Theory,_Languages,_and_Computation) ·
+> [Soare 2016 — §3.4](https://doi.org/10.1007/978-3-642-31933-4) · [Scott 1976 — §3](https://doi.org/10.1137/0205037)
 
 ---
 
@@ -349,7 +378,12 @@ Barendregt 的 λ 立方（λ-cube）把这三种扩展（多态、依赖、类�
 
 > **认知要点**：Curry-Howard 对应解释了为什么 Rust 的泛型、trait bound 与生命周期可以被看作「可计算证明」的片段；同时也解释了为什么某些类型系统扩展会跨越可判定性边界。
 >
-> **来源**: [Church 1940 — A Formulation of the Simple Theory of Types](https://doi.org/10.2307/2266170) · [Barendregt 1992 — Lambda Calculi with Types](https://doi.org/10.1016/B978-0-444-88074-1.50018-9) · [Barendregt 1997 — The Impact of the Lambda Calculus](https://doi.org/10.1093/logcom/7.2.181) · [Pierce 2002 — TAPL, Ch. 9](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Girard, Taylor & Lafont 1989 — Proofs and Types](https://www.paultaylor.eu/stable/Proofs+Types.html)
+> **来源**:
+> [Church 1940 — A Formulation of the Simple Theory of Types](https://doi.org/10.2307/2266170) ·
+> [Barendregt 1992 — Lambda Calculi with Types](https://doi.org/10.1016/B978-0-444-88074-1.50018-9) ·
+> [Barendregt 1997 — The Impact of the Lambda Calculus](https://doi.org/10.1093/logcom/7.2.181) ·
+> [Pierce 2002 — TAPL, Ch. 9](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [Girard, Taylor & Lafont 1989 — Proofs and Types](https://www.paultaylor.eu/stable/Proofs+Types.html)
 
 ---
 
@@ -588,7 +622,12 @@ fn main() {
 
 > **认知要点**：Rust 的类型系统不是「任意强大」的；它通过语法限制（orphan rules、递归深度、GAT well-formedness）在工程可判定性与表达力之间取得平衡。理解这些限制，有助于解释为什么某些「显然正确」的泛型代码会被编译器拒绝。
 >
-> **来源**: [Rust Reference — Type inference](https://doc.rust-lang.org/reference/type-inference.html) · [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html) · [a-mir-formality](https://github.com/rust-lang/a-mir-formality) · [Pierce 2002 — TAPL, Ch. 23](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Dreyer, Ahmed & Birkedal 2009 — Logical Step-Indexed Logical Relations](https://doi.org/10.2168/LMCS-7(2:16)2011)
+> **来源**:
+> [Rust Reference — Type inference](https://doc.rust-lang.org/reference/type-inference.html) ·
+> [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html) ·
+> [a-mir-formality](https://github.com/rust-lang/a-mir-formality) ·
+> [Pierce 2002 — TAPL, Ch. 23](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [Dreyer, Ahmed & Birkedal 2009 — Logical Step-Indexed Logical Relations](https://doi.org/10.2168/LMCS-7(2:16)2011)
 
 ---
 
@@ -685,7 +724,11 @@ Ahmed 的 step-indexed logical relations 为证明高阶状态化语言中的观
 
 > **认知要点**：观察等价是连接可计算性理论与 Rust 工程的关键概念。Rice 定理说明它不可精确判定，因此编译器优化、unsafe 抽象验证都采用安全近似或逻辑关系证明，而非穷举所有上下文。
 >
-> **来源**: [Pierce 2002 — TAPL, Ch. 8](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Pitts 1997 — Operationally-based theories of program equivalence](https://www.cl.cam.ac.uk/~amp12/papers/index.html) · [Ahmed 2006 — Step-indexed syntactic logical relations](https://doi.org/10.1007/11693024_6) · [Jung et al. 2018 — RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**:
+> [Pierce 2002 — TAPL, Ch. 8](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [Pitts 1997 — Operationally-based theories of program equivalence](https://www.cl.cam.ac.uk/~amp12/papers/index.html) ·
+> [Ahmed 2006 — Step-indexed syntactic logical relations](https://doi.org/10.1007/11693024_6) ·
+> [Jung et al. 2018 — RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
 ---
 

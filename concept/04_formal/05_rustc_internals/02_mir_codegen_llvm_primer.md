@@ -211,7 +211,10 @@ ValTree 的归纳结构（简化）:
 - 含有内部可变性（如 `Cell`）或 `UnsafeCell` 的值不能简单放入 `static` / `const`，因为 ValTree 假设值在编译期不可变。
 - 跨 crate 的常量序列化依赖 ValTree 的稳定编码；rustc 版本升级时需保持其兼容性。
 
-> **来源**: [Rustc Dev Guide — Constant Evaluation](https://rustc-dev-guide.rust-lang.org/const-eval/index.html) · [Rustc Dev Guide — Promoteds](https://rustc-dev-guide.rust-lang.org/mir/index.html) · [Rust Reference — Constant Evaluation](https://doc.rust-lang.org/reference/const_eval.html)
+> **来源**:
+> [Rustc Dev Guide — Constant Evaluation](https://rustc-dev-guide.rust-lang.org/const-eval/index.html) ·
+> [Rustc Dev Guide — Promoteds](https://rustc-dev-guide.rust-lang.org/mir/index.html) ·
+> [Rust Reference — Constant Evaluation](https://doc.rust-lang.org/reference/const_eval.html)
 
 ---
 

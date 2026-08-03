@@ -12,13 +12,27 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **内容定位**: **project-specific** — 本节为通用程序语言理论（λ 演算、停机问题、System F）在 Rust 知识体系中的教学桥梁，非 Rust 官方规范。Rust 权威语义请参见 [`类型系统基础`](../../01_foundation/02_type_system/01_type_system.md)。
 > **定位**: 从通用程序语言（PL）理论视角审视 Rust 的设计根基，建立从 λ 演算到 Rust 类型系统（Type System）的概念桥梁。
-> **前置概念**: [Type Theory](../00_type_theory/01_type_theory.md) · [Linear Logic](../01_ownership_logic/01_linear_logic.md) · [Ownership Formal](../01_ownership_logic/02_ownership_formal.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
-> **后置延伸**: [Effects System](../../07_future/02_preview_features/01_effects_system.md) · [Evolution](../../07_future/04_research_and_experimental/03_evolution.md)
+> **前置概念**:
+> [Type Theory](../00_type_theory/01_type_theory.md) ·
+> [Linear Logic](../01_ownership_logic/01_linear_logic.md) ·
+> [Ownership Formal](../01_ownership_logic/02_ownership_formal.md) ·
+> [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
+> **后置延伸**:
+> [Effects System](../../07_future/02_preview_features/01_effects_system.md) ·
+> [Evolution](../../07_future/04_research_and_experimental/03_evolution.md)
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [RustBelt](https://plv.mpi-sws.org/rustbelt/) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
-> **来源**: [TAPL — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [SF — Software Foundations](https://softwarefoundations.cis.upenn.edu/) · [CS 242 Stanford](https://stanford-cs242.github.io/f19/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/)
+> **来源**:
+> [TAPL — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
+> [SF — Software Foundations](https://softwarefoundations.cis.upenn.edu/) ·
+> [CS 242 Stanford](https://stanford-cs242.github.io/f19/) ·
+> [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 > **后置概念**: [Comparative Studies](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
 ## 目录
@@ -451,7 +465,11 @@ fn example() {
 
 ---
 
-> **权威来源**: [Verus](https://github.com/verus-lang/verus) · [Kani](https://model-checking.github.io/kani/) · [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [TAPL — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Oxide](https://arxiv.org/abs/1903.00982)
+> **权威来源**:
+> [Verus](https://github.com/verus-lang/verus) · [Kani](https://model-checking.github.io/kani/) ·
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [TAPL — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Oxide](https://arxiv.org/abs/1903.00982)
 > **权威来源对齐变更日志**: 2026-07-10 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [Authority Source Sprint Batch L4](../../00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.0

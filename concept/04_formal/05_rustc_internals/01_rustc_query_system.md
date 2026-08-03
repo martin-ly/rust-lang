@@ -11,10 +11,20 @@
 > **A/S/P 标记**: **F** — Formal / Infrastructure
 > **双维定位**: F×Inf — 编译器基础设施与形式化方法
 > **定位**: 将 `rustc` 从“顺序 pass 流水线”还原为“按需查询 + 缓存”的真实架构，理解增量编译的底层机制。
-> **前置概念**: [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Type Inference](../00_type_theory/03_type_inference.md) · [NLL and Polonius](../../03_advanced/02_unsafe/03_nll_and_polonius.md)
-> **后置概念**: [Compiler Internals](../../06_ecosystem/00_toolchain/04_compiler_internals.md) · [Compiler Infrastructure](../../06_ecosystem/00_toolchain/05_compiler_infrastructure.md)
+> **前置概念**:
+> [Type System](../../01_foundation/02_type_system/01_type_system.md) ·
+> [Type Inference](../00_type_theory/03_type_inference.md) ·
+> [NLL and Polonius](../../03_advanced/02_unsafe/03_nll_and_polonius.md)
+> **后置概念**:
+> [Compiler Internals](../../06_ecosystem/00_toolchain/04_compiler_internals.md) ·
+> [Compiler Infrastructure](../../06_ecosystem/00_toolchain/05_compiler_infrastructure.md)
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL](https://doc.rust-lang.org/book/title-page.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [RustBelt](https://plv.mpi-sws.org/rustbelt/) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [TRPL](https://doc.rust-lang.org/book/title-page.html) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **来源**: [Rustc Dev Guide — Queries](https://rustc-dev-guide.rust-lang.org/query.html) ·
@@ -570,7 +580,10 @@ Salsa 本身是从 `rustc` 查询系统中提取出来的通用框架，被 `rus
 ---
 
 > **权威来源**: [Rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) · [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> **权威来源对齐变更日志**: 2026-06-21 创建，对齐 Rust 1.97.0 编译器架构；2026-06-26 新增 `examples/incremental_practice/` 可运行增量编译实验 [P2 Deep Content Sprint](../../00_meta/02_sources/05_international_authority_index.md)；2026-07-09 新增 4.6 节 `type_of` / `predicates_of` 查询调用链实践 [P2-Q3 2026]
+> **权威来源对齐变更日志**:
+> 2026-06-21 创建，对齐 Rust 1.97.0 编译器架构；
+> 2026-06-26 新增 `examples/incremental_practice/` 可运行增量编译实验 [P2 Deep Content Sprint](../../00_meta/02_sources/05_international_authority_index.md)；
+> 2026-07-09 新增 4.6 节 `type_of` / `predicates_of` 查询调用链实践 [P2-Q3 2026]
 > [Authority Source Sprint Batch L4](../../00_meta/02_sources/05_international_authority_index.md)
 
 **文档版本**: 1.3

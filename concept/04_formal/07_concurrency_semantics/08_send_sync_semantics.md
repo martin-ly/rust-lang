@@ -9,8 +9,15 @@
 > **权威来源**: 本文件为 `concept/` 权威页（Send/Sync 并发语义边界的 canonical 入口）。
 > **最后更新**: 2026-07-31
 >
-> **前置概念**: [Send/Sync 边界判定](../../03_advanced/00_concurrency/04_send_sync_boundaries.md) · [Send 与 Sync：Auto Trait 的并发安全契约](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md) · [原子操作与内存序](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) · [RustBelt 与验证工具链](../02_separation_logic/01_rustbelt.md)
-> **后置概念**: [形式化 unsafe 契约](../01_ownership_logic/07_unsafe_contracts_formal.md) · [内存序与原子操作形式语义](../09_system_semantics/08_memory_ordering_and_atomics.md) · [async/await 状态机的操作语义](../03_operational_semantics/11_async_state_machine_semantics.md)
+> **前置概念**:
+> [Send/Sync 边界判定](../../03_advanced/00_concurrency/04_send_sync_boundaries.md) ·
+> [Send 与 Sync：Auto Trait 的并发安全契约](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md) ·
+> [原子操作与内存序](../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md) ·
+> [RustBelt 与验证工具链](../02_separation_logic/01_rustbelt.md)
+> **后置概念**:
+> [形式化 unsafe 契约](../01_ownership_logic/07_unsafe_contracts_formal.md) ·
+> [内存序与原子操作形式语义](../09_system_semantics/08_memory_ordering_and_atomics.md) ·
+> [async/await 状态机的操作语义](../03_operational_semantics/11_async_state_machine_semantics.md)
 >
 > **国际权威来源**:
 > [Rust Reference — Send and Sync](https://doc.rust-lang.org/reference/special-types-and-traits.html) ·

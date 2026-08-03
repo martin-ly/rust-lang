@@ -1,4 +1,6 @@
-> **本节关键术语**: Miri · 未定义行为（UB） · Stacked Borrows · Tree Borrows · 别名规则（Aliasing Rules） · MIR 解释器 — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
+> **本节关键术语**:
+> Miri · 未定义行为（UB） · Stacked Borrows · Tree Borrows · 别名规则（Aliasing Rules） · MIR 解释器
+> — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 >
 # Miri：Rust 未定义行为动态检测器
 
@@ -12,12 +14,19 @@
 > **A/S/P 标记**: **A** — Application
 > **双维定位**: T×Fml — 工具链与形式化验证
 > **定位**: 将 Miri 从“nightly 玩具”还原为日常 unsafe 代码审查与教学的标准工具。
-> **前置概念**: [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
+> **前置概念**:
+> [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) ·
+> [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) ·
+> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
 > **后置概念**: [Tree Borrows](../01_ownership_logic/05_tree_borrows_deep_dive.md) · [BorrowSanitizer](../02_separation_logic/04_borrow_sanitizer_in_formal.md) · [Kani](04_modern_verification_tools.md)
 
 ---
 
-> **来源**: [Miri 官方 README](https://github.com/rust-lang/miri) · [rustc-dev-guide — Miri](https://rustc-dev-guide.rust-lang.org/miri.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [TRPL — Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Miri 官方 README](https://github.com/rust-lang/miri) · [rustc-dev-guide — Miri](https://rustc-dev-guide.rust-lang.org/miri.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [TRPL — Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rustonomicon — What Unsafe Does](https://doc.rust-lang.org/nomicon/what-unsafe-does.html) ·
 > [Tree Borrows Paper](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html) ·
 > [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
@@ -58,7 +67,10 @@
 
 ## 一、Miri 是什么
 
-**Miri** 是 Rust 官方维护的 **MIR（Mid-level IR）解释器**。与 `rustc` 直接生成机器码不同，Miri 在 MIR 层面逐条解释执行程序，同时追踪每块内存的**有效性、初始化状态、借用（Borrowing）权限**和**别名关系**。当程序即将触发未定义行为（UB）时，Miri 会报错并指出具体位置。 (Source: [Miri 官方 README](https://github.com/rust-lang/miri))
+**Miri** 是 Rust 官方维护的 **MIR（Mid-level IR）解释器**。
+与 `rustc` 直接生成机器码不同，Miri 在 MIR 层面逐条解释执行程序，同时追踪每块内存的**有效性、初始化状态、借用（Borrowing）权限**和**别名关系**。
+当程序即将触发未定义行为（UB）时，Miri 会报错并指出具体位置。
+(Source: [Miri 官方 README](https://github.com/rust-lang/miri))
 
 > **关键洞察**: Miri 不是测试框架，而是**运行时（Runtime）语义检查器**。它回答的问题是：“这段代码在 Rust 抽象机上的执行是否违反了内存模型？”
 >

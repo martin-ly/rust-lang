@@ -1,4 +1,7 @@
-> **本节关键术语**: 代数效应（Algebraic Effects） · 效应操作（Effect Operation） · 效应处理器（Effect Handler） · 续延（Continuation） · 限定控制（Delimited Control） · 自由单子（Free Monad） · 关键字泛型（Keyword Generics） — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
+> **本节关键术语**:
+>
+> 代数效应（Algebraic Effects） · 效应操作（Effect Operation） · 效应处理器（Effect Handler） · 续延（Continuation） · 限定控制（Delimited Control） · 自由单子（Free Monad） · 关键字泛型（Keyword Generics）
+> — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 
 # 代数效应与效应处理器：从自由单子到 Rust 的关键字效果
 
@@ -513,7 +516,9 @@ Rust 不引入通用 effect handler 的原因不是技术无知，而是**有意
 
 ### 4.1 OCaml 5：运行时处理器
 
-OCaml 5（5.0 GA 于 2022-12，5.3 于 2025-01 发布并被视为 5.x 线的稳定/LTS 级版本）通过 `Effect` 模块把 effect handler 引入生产级语言。与 Koka 不同，OCaml 5 **没有静态 effect 类型系统**（截至 5.3），效果安全性由程序员保证；它的主要目标是支持用户级并发调度与生成器。效果最显性的收益体现在 **Eio**：一个基于 effect handler 实现的跨平台异步 I/O 库，可在不引入 `async/await` 关键字的情况下提供结构化并发与高吞吐量 I/O。
+OCaml 5（5.0 GA 于 2022-12，5.3 于 2025-01 发布并被视为 5.x 线的稳定/LTS 级版本）通过 `Effect` 模块把 effect handler 引入生产级语言。
+与 Koka 不同，OCaml 5 **没有静态 effect 类型系统**（截至 5.3），效果安全性由程序员保证；它的主要目标是支持用户级并发调度与生成器。
+效果最显性的收益体现在 **Eio**：一个基于 effect handler 实现的跨平台异步 I/O 库，可在不引入 `async/await` 关键字的情况下提供结构化并发与高吞吐量 I/O。
 
 **声明效果**：
 

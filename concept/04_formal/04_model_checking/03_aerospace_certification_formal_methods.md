@@ -10,13 +10,20 @@
 >
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **定位**: 系统讲解 **DO-178C 航空软件标准** 与 **DO-333 形式化方法补充** 的 Rust 映射——从软件等级 A~E 到定理证明、模型检查、抽象解释三类形式化方法在 Rust 生态中的工具链映射，分析 Rust 所有权（Ownership）系统在航空航天安全关键软件中的独特形式化优势。
-> **前置概念**: [形式化方法](02_formal_methods.md) · [Hoare 逻辑](../03_operational_semantics/02_hoare_logic.md) · [RustBelt](../02_separation_logic/01_rustbelt.md)
+> **定位**:
+> 系统讲解 **DO-178C 航空软件标准** 与 **DO-333 形式化方法补充** 的 Rust 映射——从软件等级 A~E 到定理证明、模型检查、抽象解释三类形式化方法在 Rust 生态中的工具链映射，分析 Rust 所有权（Ownership）系统在航空航天安全关键软件中的独特形式化优势。
+> **前置概念**:
+> [形式化方法](02_formal_methods.md) ·
+> [Hoare 逻辑](../03_operational_semantics/02_hoare_logic.md) ·
+> [RustBelt](../02_separation_logic/01_rustbelt.md)
 > **后置概念**: Unsafe · 并发安全（Concurrency Safety） · 验证工具链
 
 ---
 
-> **来源**: [DO-178C - Software Considerations in Airborne Systems](https://www.rtca.org/) · · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [DO-178C - Software Considerations in Airborne Systems](https://www.rtca.org/) ·
+> · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [DO-333 - Formal Methods Supplement](https://www.rtca.org/) ·
 > [DO-330 - Software Tool Qualification](https://www.rtca.org/) ·
 > [Ferrocene - Qualified Rust Compiler](https://ferrocene.dev/) ·

@@ -1,4 +1,7 @@
-> **本节关键术语**: 线性化（Linearizability） · 历史（History） · 线性化点（Linearization Point） · 顺序一致性（Sequential Consistency） · 因果一致性（Causal Consistency） · 最终一致性（Eventual Consistency） · CAP 定理 — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
+> **本节关键术语**:
+>
+> 线性化（Linearizability） · 历史（History） · 线性化点（Linearization Point） · 顺序一致性（Sequential Consistency） · 因果一致性（Causal Consistency） · 最终一致性（Eventual Consistency） · CAP 定理
+> — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 
 # 线性化与一致性谱系：从 Herlihy-Wing 到 Rust 无锁结构
 

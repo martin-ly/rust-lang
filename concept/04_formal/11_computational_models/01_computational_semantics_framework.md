@@ -9,8 +9,14 @@
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 把操作、指称、公理、类型四种语义统一为观察同一程序行为的四种互补视角，为后续可计算性、形式语言与程序等价性讨论奠定共同语言。
-> **前置概念**: [Async/Await](../../03_advanced/01_async/01_async.md) · [Lambda Calculus](../00_type_theory/05_lambda_calculus.md) · [Type Theory](../00_type_theory/01_type_theory.md)
-> **后置概念**: [Computability Theory](02_computability_theory.md) · [Mathematical Functions of Computation](04_mathematical_functions_of_computation.md) · [Equivalence of Computational Models](05_equivalence_of_computational_models.md)
+> **前置概念**:
+> [Async/Await](../../03_advanced/01_async/01_async.md) ·
+> [Lambda Calculus](../00_type_theory/05_lambda_calculus.md) ·
+> [Type Theory](../00_type_theory/01_type_theory.md)
+> **后置概念**:
+> [Computability Theory](02_computability_theory.md) ·
+> [Mathematical Functions of Computation](04_mathematical_functions_of_computation.md) ·
+> [Equivalence of Computational Models](05_equivalence_of_computational_models.md)
 
 ---
 
@@ -200,7 +206,13 @@ fn main() {}
 
 > **认知要点**：const 求值不是「可计算性更弱」——它在理论上仍是图灵完备的受限子集；其限制主要来自**编译期资源与确定性要求**，而非计算理论本身。循环、递归、条件都能写，但一旦超出内部解释器的步数/迭代上限，编译器会报告 `evaluation of constant value failed`。
 
-> **来源**: [Church 1936 / Church-Turing 论题综述](https://arxiv.org/abs/cs/0503082) · [Turing 1936 — On computable numbers, with an application to the Entscheidungsproblem](https://doi.org/10.1112/plms/s2-42.1.230) · [Sipser 2013 — Introduction to the Theory of Computation, 3rd ed.](https://math.mit.edu/~sipser/book.html) · [Cutland 1980 — Computability: An Introduction to Recursive Function Theory](https://doi.org/10.1017/CBO9780511574916) · [Winskel 1993 — The Formal Semantics of Programming Languages](https://www.cs.cmu.edu/~crary/819-f09/Winskel.pdf) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
+> **来源**:
+> [Church 1936 / Church-Turing 论题综述](https://arxiv.org/abs/cs/0503082) ·
+> [Turing 1936 — On computable numbers, with an application to the Entscheidungsproblem](https://doi.org/10.1112/plms/s2-42.1.230) ·
+> [Sipser 2013 — Introduction to the Theory of Computation, 3rd ed.](https://math.mit.edu/~sipser/book.html) ·
+> [Cutland 1980 — Computability: An Introduction to Recursive Function Theory](https://doi.org/10.1017/CBO9780511574916) ·
+> [Winskel 1993 — The Formal Semantics of Programming Languages](https://www.cs.cmu.edu/~crary/819-f09/Winskel.pdf) ·
+> [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 
 ---
 

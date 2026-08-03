@@ -18,7 +18,14 @@
 
 ---
 
-> **来源**: [ARMv7-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0403/latest/) · [ARMv8-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0553/latest/) · [Rust Reference — Volatile](https://doc.rust-lang.org/reference/behavior-not-considered-unsafe.html#invalid-data) · [Rust Atomics and Locks](https://marabos.nl/atomics/) · [Ferrocene Language Specification](https://spec.ferrocene.dev/) · [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Tock Book](https://book.tockos.org/) · [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [cortex-m crate](https://docs.rs/cortex-m/) · [critical-section crate](https://docs.rs/critical-section/) · [Rust Embedded WG](https://github.com/rust-embedded/wg)
+> **来源**:
+> [ARMv7-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0403/latest/) ·
+> [ARMv8-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0553/latest/) ·
+> [Rust Reference — Volatile](https://doc.rust-lang.org/reference/behavior-not-considered-unsafe.html#invalid-data) ·
+> [Rust Atomics and Locks](https://marabos.nl/atomics/) · [Ferrocene Language Specification](https://spec.ferrocene.dev/) ·
+> [RustBelt](https://plv.mpi-sws.org/rustbelt/) · [Tock Book](https://book.tockos.org/) ·
+> [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [cortex-m crate](https://docs.rs/cortex-m/) ·
+> [critical-section crate](https://docs.rs/critical-section/) · [Rust Embedded WG](https://github.com/rust-embedded/wg)
 
 ---
 
