@@ -172,3 +172,11 @@ mindmap
 - AWS. "Exponential Backoff and Jitter." *Architecture Blog*. [https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/](https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/)
 
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-31 ｜ **状态**: ✅ 新建权威页
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/book/10.5555/186897
+- https://rust-unofficial.github.io/patterns/
+- [The Rust Programming Language — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
+- [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)
+- [The Rust Programming Language — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html)

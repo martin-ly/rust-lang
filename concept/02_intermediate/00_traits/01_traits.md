@@ -3199,7 +3199,7 @@ trait Parser<'a> {
 
 ## Rust 1.98.0 兼容性注意
 
-> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 在语法层拒绝 `where T = U` / `where T == U` 等式谓词，修复了解析器将 `dyn` 视为普通标识符的错误恢复路径，并收紧了 trait object 完全省略生命周期时的默认推断。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md)。
+> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 在语法层拒绝 `where T = U` / `where T == U` 等式谓词，修复了解析器将 `dyn` 视为普通标识符的错误恢复路径，并收紧了 trait object 完全省略生命周期时的默认推断。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md) 与 [1.98 beta 深度解析：where 等式谓词语法拒绝](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-where-equality-syntax)。
 
 ---
 

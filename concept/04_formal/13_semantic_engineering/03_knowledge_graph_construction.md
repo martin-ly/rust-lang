@@ -386,6 +386,14 @@ mindmap
 
 ---
 
+## P0 官方来源
+
+- [The Rust RFC Book](https://rust-lang.github.io/rfcs/) — Rust 语言特性演化的官方 canonical 追踪，为 KG 概念-版本映射提供 P0 输入。
+- [The Rust Reference](https://doc.rust-lang.org/reference/) — Rust 语言语义的官方参考，为概念定义提供 canonical 来源。
+- [Ferrocene Language Specification](https://spec.ferrocene.dev/) — 经过鉴定的 Rust 语言规范，为语义工程提供 P0 形式化基准。
+
+---
+
 ## 权威来源索引
 
 - [W3C RDF 1.2 Concepts and Abstract Syntax](https://www.w3.org/TR/rdf12-concepts/)

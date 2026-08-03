@@ -332,3 +332,8 @@ mindmap
 - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-31 ｜ **状态**: ✅ 新建权威页
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/10.1145/3158154
+- https://blog.rust-lang.org/

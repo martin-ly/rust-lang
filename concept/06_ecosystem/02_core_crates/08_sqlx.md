@@ -338,3 +338,7 @@ mindmap
 | 数据库访问 | [`../06_data_and_distributed/02_database_access.md`](../06_data_and_distributed/02_database_access.md) | Rust 数据库访问模式对比 |
 | 数据库系统 | [`../06_data_and_distributed/04_database_systems.md`](../06_data_and_distributed/04_database_systems.md) | 关系型/NoSQL 数据库的工程选型 |
 | Rust vs C# | [`../../05_comparative/02_managed_languages/06_rust_vs_csharp.md`](../../05_comparative/02_managed_languages/06_rust_vs_csharp.md) | 类型安全数据库访问与企业生态的跨语言对比。
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/book/10.5555/186897

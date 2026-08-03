@@ -24,29 +24,42 @@
 #![cfg_attr(nightly, allow(internal_features))]
 #![allow(clippy::module_name_repetitions)]
 
-// 核心模块
+// 核心模块（所有目标可用）
 pub mod bare_metal_basics;
-pub mod cxx_interop;
-pub mod embassy_framework; // Embassy 异步嵌入式框架
-pub mod ffi_c_interop;
 pub mod hal_design_patterns;
 pub mod interrupt_handling;
 pub mod memory_mapped_registers;
 pub mod no_std_practices;
 pub mod raw_pointers_advanced;
-pub mod rtic_framework;
 pub mod rust_186_features;
+// 以下 Rust 版本特性演示模块使用 std/alloc 类型，在 ARM 裸机目标上排除。
+#[cfg(not(target_arch = "arm"))]
 pub mod rust_187_features;
 pub mod rust_188_features;
 pub mod rust_189_features;
+#[cfg(not(target_arch = "arm"))]
 pub mod rust_192_features;
+#[cfg(not(target_arch = "arm"))]
 pub mod rust_193_features;
+#[cfg(not(target_arch = "arm"))]
 pub mod rust_195_features; // Rust 1.95 特性 (裸指针 unchecked, PowerPC asm, cfg_select 嵌入式)
+#[cfg(not(target_arch = "arm"))]
 pub mod rust_196_features; // Rust 1.96.0+ 特性 (assert_matches!, core::range, From<T> for LazyCell/LazyLock, ManuallyDrop 模式)
+#[cfg(not(target_arch = "arm"))]
 pub mod rust_197_features;
-#[cfg(nightly)]
+#[cfg(all(nightly, not(target_arch = "arm")))]
 pub mod rust_198_features;
 
+// 以下模块依赖 std 或 host-only crate，在 ARM 裸机目标上排除，以保证 no_std 示例能链接。
+#[cfg(not(target_arch = "arm"))]
+pub mod cxx_interop;
+#[cfg(not(target_arch = "arm"))]
+pub mod embassy_framework; // Embassy 异步嵌入式框架
+#[cfg(not(target_arch = "arm"))]
+pub mod ffi_c_interop;
+#[cfg(not(target_arch = "arm"))]
+pub mod rtic_framework;
+#[cfg(not(target_arch = "arm"))]
 pub mod uart_driver; // RTIC 实时中断驱动并发
 
 // 库版本信息

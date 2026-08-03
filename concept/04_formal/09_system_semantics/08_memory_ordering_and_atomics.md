@@ -623,3 +623,15 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从“定义 → 选型 → 模式 → 误区 → 实现映射 → 决策”六个维度组织，可作为判断 `Ordering` 是否正确的快速检查清单。
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/10.1145/3158154
+- https://dl.acm.org/doi/10.1145/3371106
+- https://doc.rust-lang.org/reference/introduction.html
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://arxiv.org/abs/1804.07608
+- https://rust-unofficial.github.io/patterns/
+- https://blog.rust-lang.org/

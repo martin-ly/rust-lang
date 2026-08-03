@@ -475,3 +475,12 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从所有权模型出发，按接口形态、切片工具、经典算法模式、图/树表示组织，帮助读者在写算法前先判断所有权关系，再选择实现模式。
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/10.1145/3158154
+- https://rust-unofficial.github.io/patterns/
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://blog.rust-lang.org/

@@ -397,6 +397,11 @@ static mut BUF: [u8; 256] = [0; 256];
 > [Embassy Book](https://embassy.dev/book/) ·
 > [cortex-m crate](https://docs.rs/cortex-m/)
 >
+> **P0 官方来源**:
+> - [The Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> - [Rust core — `core::ptr::read_volatile`](https://doc.rust-lang.org/core/ptr/fn.read_volatile.html)
+> - [Rust core — `core::ptr::write_volatile`](https://doc.rust-lang.org/core/ptr/fn.write_volatile.html)
+>
 > **权威来源对齐变更日志**: 2026-07-30 创建
 
 **文档版本**: 1.0

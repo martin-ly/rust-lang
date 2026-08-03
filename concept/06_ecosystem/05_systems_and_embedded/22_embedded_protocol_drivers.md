@@ -24,7 +24,10 @@
 > [RTIC Book](https://rtic.rs/) ·
 > [usb-device](https://docs.rs/usb-device/latest/usb_device/) ·
 > [Knurling](https://knurling.ferrous-systems.com/) ·
-> [The Embedded Rust Book](https://docs.rust-embedded.org/book/index.html)
+> [The Embedded Rust Book](https://docs.rust-embedded.org/book/index.html) ·
+> [The Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html) ·
+> [The Rustonomicon — Foreign Function Interface](https://doc.rust-lang.org/nomicon/ffi.html) ·
+> [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 ---
 
@@ -897,6 +900,9 @@ fn read_eeprom(i2c: &mut I2c1) {
 | Knurling | <https://knurling.ferrous-systems.com/> | `defmt` 调试与日志 |
 | The Embedded Rust Book | <https://docs.rust-embedded.org/book/index.html> | 嵌入式 Rust 入门 |
 | Typestate Programming (IEEE) | <https://ieeexplore.ieee.org/document/6312929> | 类型状态机形式化基础 |
+| Rust Reference — Traits | <https://doc.rust-lang.org/reference/items/traits.html> | P0 官方：trait 与关联类型定义 |
+| Rust Reference — Unsafe Traits | <https://doc.rust-lang.org/reference/items/traits.html#unsafe-traits> | P0 官方：`unsafe impl` 契约 |
+| Rust std — `Result` | <https://doc.rust-lang.org/std/result/> | P0 官方：错误处理基础设施 |
 
 ---
 

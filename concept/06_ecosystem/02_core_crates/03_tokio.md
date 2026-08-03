@@ -405,3 +405,7 @@ fn main() {
 | tracing | [`./05_tracing.md`](./05_tracing.md) | 异步感知可观测性 |
 | 应用领域 | [`../06_data_and_distributed/01_application_domains.md`](../06_data_and_distributed/01_application_domains.md) | crate 的工程落地 |
 | Rust vs Go | [`../../05_comparative/01_systems_languages/03_rust_vs_go.md`](../../05_comparative/01_systems_languages/03_rust_vs_go.md) | 异步运行时与并发模型的跨语言对比。
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/10.1145/359576.359585

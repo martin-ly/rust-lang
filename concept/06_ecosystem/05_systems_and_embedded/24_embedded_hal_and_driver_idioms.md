@@ -85,6 +85,7 @@ mindmap
   - [十三、决策树：驱动实现选型](#十三决策树驱动实现选型)
   - [十四、相关概念](#十四相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [国际化权威来源补充（International Authority Sources）](#国际化权威来源补充international-authority-sources)
 
 ---
 
@@ -563,6 +564,11 @@ graph TD
 
 > **权威来源**: [embedded-hal 1.0 docs](https://docs.rs/embedded-hal/1.0.0/embedded_hal/) · [embedded-hal-async docs](https://docs.rs/embedded-hal-async/latest/embedded_hal_async/) · [embedded-io docs](https://docs.rs/embedded-io/latest/embedded_io/) · [shared-bus crate](https://docs.rs/shared-bus/) · [embassy-sync crate](https://docs.rs/embassy-sync/) · [defmt docs](https://docs.rs/defmt/) · [probe-rs](https://probe.rs/) · [Embassy Book](https://embassy.dev/book/) · [Knurling](https://knurling.ferrous-systems.com/)
 >
+> **P0 官方来源**:
+> - [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)
+> - [Rust std — `Result`](https://doc.rust-lang.org/std/result/)
+> - [Rust std — `PhantomData`](https://doc.rust-lang.org/std/marker/struct.PhantomData.html)
+>
 > **权威来源对齐变更日志**: 2026-07-31 创建
 
 **文档版本**: 1.0
@@ -607,3 +613,7 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从 trait 抽象、驱动设计、类型状态、总线共享、DMA 所有权与调试六个维度组织内容，可作为编写嵌入式驱动的快速导航索引。
+
+## 国际化权威来源补充（International Authority Sources）
+
+- <https://arxiv.org/abs/2311.05063>

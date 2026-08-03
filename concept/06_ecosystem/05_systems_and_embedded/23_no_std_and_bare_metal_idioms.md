@@ -5,7 +5,7 @@
 # `#![no_std]` 与裸机编程惯用法
 >
 > **EN**: `no_std` and Bare-Metal Idioms
-> **Summary**: Practical idioms for `#![no_std]` and bare-metal Rust: crate setup, panic handler, custom alloc, critical-section, memory fences, static safety, build-std, target JSON, linker scripts, cortex-m-rt/riscv-rt entry patterns, Embassy executor, and common anti-patterns.
+> **Summary**: Practical idioms for `#![no_std]` and bare-metal Rust: crate setup, panic handler, custom alloc, critical-section, memory fences, static safety, build-std, target JSON, linker scripts, cortex-m-rt/riscv-rt entry patterns, Embassy executor, probe-rs hardware-in-the-loop debugging, KG/SHACL semantics, and common anti-patterns.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [专家]
@@ -39,7 +39,15 @@
 > [critical-section crate](https://docs.rs/critical-section/) ·
 > [Embassy Book](https://embassy.dev/book/) · [Ferrous Systems](https://ferrous-systems.com/) ·
 > [Knurling](https://knurling.ferrous-systems.com/) ·
-> [Rust Reference — no_std](https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute)
+> [Rust Reference — no_std](https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute) ·
+> [The Rustonomicon](https://doc.rust-lang.org/nomicon/) ·
+> [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/) ·
+> [probe.rs](https://probe.rs/) ·
+> [defmt Book](https://defmt.ferrous-systems.com/) ·
+> [Ferrocene](https://ferrocene.dev/) ·
+> [Ferrocene Language Specification](https://spec.ferrocene.dev/) ·
+> [Tock OS](https://www.tockos.org/) ·
+> [Hubris OS](https://hubris.oxide.computer/)
 
 ---
 
@@ -74,6 +82,13 @@ mindmap
       cortex-m-rt
       riscv-rt
       Embassy executor
+      RTIC
+    硬件实测
+      probe-rs
+      defmt
+      RTT
+      ITM
+      QEMU
     反模式
       static mut
       栈上 DMA 缓冲区
@@ -98,7 +113,7 @@ mindmap
   - [八、`build-std` 与自定义 target JSON](#八build-std-与自定义-target-json)
   - [九、链接脚本核心约定](#九链接脚本核心约定)
   - [十、Embassy 裸机执行器](#十embassy-裸机执行器)
-  - [十一、常见 no\_std 反模式](#十一常见-no_std-反模式)
+  - [十一、常见 no_std 反模式](#十一常见-no_std-反模式)
   - [十二、反例与失效模式](#十二反例与失效模式)
   - [十三、边界测试](#十三边界测试)
     - [13.1 边界测试：`no_std` 中误用 `std`](#131-边界测试no_std-中误用-std)
@@ -106,8 +121,21 @@ mindmap
     - [13.3 边界测试：直接访问 `static mut`](#133-边界测试直接访问-static-mut)
     - [13.4 边界测试：`Vec` 在未初始化堆上使用](#134-边界测试vec-在未初始化堆上使用)
   - [十四、决策树：裸机技术栈选择](#十四决策树裸机技术栈选择)
-  - [十五、相关概念](#十五相关概念)
-  - [十六、权威来源索引](#十六权威来源索引)
+  - [十五、构建-运行-测试 no_std 最小可复现工作流](#十五构建-运行-测试-no_std-最小可复现工作流)
+    - [15.1 使用 cargo-generate 模板](#151-使用-cargo-generate-模板)
+    - [15.2 QEMU 仿真验证](#152-qemu-仿真验证)
+    - [15.3 `cargo embed` 与 `cargo run --target`](#153-cargo-embed-与-cargo-run---target)
+  - [十六、硬件实测与 probe-rs 调试](#十六硬件实测与-probe-rs-调试)
+    - [16.1 probe-rs 工具链](#161-probe-rs-工具链)
+    - [16.2 defmt 零开销日志](#162-defmt-零开销日志)
+    - [16.3 RTT / ITM / OpenOCD 对比](#163-rtt--itm--openocd-对比)
+    - [16.4 芯片验证工作流](#164-芯片验证工作流)
+    - [16.5 硬件实测流程（probe-rs / QEMU / RTT）](#165-硬件实测流程probe-rs--qemu--rtt)
+  - [十七、常见惯用法清单扩展](#十七常见惯用法清单扩展)
+  - [十八、知识图谱与 SHACL 语义衔接](#十八知识图谱与-shacl-语义衔接)
+  - [十九、国际化权威来源](#十九国际化权威来源)
+  - [二十、相关概念](#二十相关概念)
+  - [二十一、权威来源索引](#二十一权威来源索引)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -253,7 +281,7 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 
 ### 4.3 自定义 `_start` / 链接脚本
 
-当 `cortex-m-rt`/`riscv-rt` 不满足需求（如自定义启动序列、二级 bootloader、非标准向量表）时，可手写 `_start` 并在链接脚本中指定入口。
+当 `cortex-m-rt`/`riscv-rt` 不满足需求（如自定义启动序列、二级 bootloader、非标准向量表）时，可手写 `_start` 并在链接脚本中指定入口。更多启动细节见 [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md) 与 [no_std 启动流程与运行时深度解析](27_no_std_startup_runtime_deep_dive.md)。
 
 ```rust,ignore
 #![no_std]
@@ -295,7 +323,7 @@ fn panic(_info: &PanicInfo) -> ! {
 }
 ```
 
-> **注意**：自定义 `_start` 必须手动完成 `.bss` 清零、`.data` 复制、栈指针设置（部分硬件自动设置 SP）以及最终调用 `main`；细节见 [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md)。使用 `core::ptr::addr_of!` / `addr_of_mut!` 可避免直接对 `static mut` 取引用。
+> **注意**：自定义 `_start` 必须手动完成 `.bss` 清零、`.data` 复制、栈指针设置（部分硬件自动设置 SP）以及最终调用 `main`；使用 `core::ptr::addr_of!` / `addr_of_mut!` 可避免直接对 `static mut` 取引用。
 
 ---
 
@@ -343,7 +371,7 @@ fn push_sample(v: u8) {
 }
 ```
 
-判定依据：裸机中是否使用堆是早期架构决策。`heapless` 提供最可预测的行为；TLSF 提供确定性动态分配；通用分配器需要持续监控碎片。
+判定依据：裸机中是否使用堆是早期架构决策。`heapless` 提供最可预测的行为；TLSF 提供确定性动态分配；通用分配器需要持续监控碎片。更多堆安全分析见 [嵌入式内存布局与堆安全](29_embedded_memory_layout_and_heap_safety.md)。
 
 ---
 
@@ -505,7 +533,7 @@ SECTIONS
 }
 ```
 
-判定依据：链接脚本必须与芯片参考手册中的内存映射一致；`_sdata`/`_edata`/`_sbss`/`_ebss`/`_sidata`/`_stack_top` 等符号是启动代码与脚本之间的接口。
+判定依据：链接脚本必须与芯片参考手册中的内存映射一致；`_sdata`/`_edata`/`_sbss`/`_ebss`/`_sidata`/`_stack_top` 等符号是启动代码与脚本之间的接口。更多细节见 [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md)。
 
 ---
 
@@ -552,7 +580,7 @@ cortex-m-rt = "0.7"
 | `WFI`/`WFE` | 无任务时进入低功耗等待 |
 | `Spawner` | 用于在 `main` 中派生其它任务 |
 
-判定依据：Embassy 适合 I/O 密集、协议栈复杂的裸机设备；硬实时控制应评估 RTIC 或手写中断。
+判定依据：Embassy 适合 I/O 密集、协议栈复杂的裸机设备；硬实时控制应评估 RTIC 或手写中断。自定义执行器实现参考 [自定义裸机异步执行器](28_custom_bare_metal_async_executor.md)。
 
 ---
 
@@ -570,6 +598,8 @@ cortex-m-rt = "0.7"
 | 忽略 HAL 方法返回的 `Result` | 静默错误 | 显式 `unwrap`/`?` 或错误处理 |
 | 混合不同 `Ordering` 而不验证 | 内存顺序错误 | 按 happens-before 关系选择 |
 | 未开启 `compiler-builtins-mem` | 链接错误 `memcpy` 未定义 | 配置 `build-std-features` |
+| 在测试或 host 工具中假设裸机环境 | 无法运行 / 结果不一致 | 用 `cfg(target_os = "none")` 隔离或 `std` 代理测试 |
+| 自定义分配器未对齐 / 未处理零大小分配 | UB / 双释放 | 严格实现 `GlobalAlloc` 契约并审计 |
 
 ---
 
@@ -585,6 +615,8 @@ cortex-m-rt = "0.7"
 | DMA 数据错误 | 缓冲区在不可见 RAM 或 cache 未清洗 | 放到 DMA 可访问区并维护 cache 一致性 |
 | async 任务不运行 | Embassy time driver 未使能或 arena 太小 | 检查 features 与 task-arena-size |
 | `Box::new` 死机 | 堆未初始化 | `HEAP.init(...)` |
+| 中断 handler 数据竞争 | 非原子共享可变状态 | 使用 `Mutex<RefCell<T>>` 或原子 |
+| 自定义分配器 soundness 漏洞 | 未同步 / 未对齐 / 越界 | 实现 `alloc`/`dealloc`/`realloc` 契约并跑 miri / Kani |
 
 ---
 
@@ -613,7 +645,7 @@ fn main() {
 }
 ```
 
-> **修正**：提供 `#[panic_handler] fn panic(_: &core::panic::PanicInfo) -> ! { loop {} }`。
+> **修正**：提供 `#[panic_handler] fn panic(_: &core::panic::PanicInfo) -> ! { loop {} }`。更多运行时细节见 [panic_handler 与 no_std 运行时](18_panic_runtime_no_std.md)。
 
 ### 13.3 边界测试：直接访问 `static mut`
 
@@ -668,7 +700,504 @@ graph TD
 
 ---
 
-## 十五、相关概念
+## 十五、构建-运行-测试 no_std 最小可复现工作流
+
+### 15.1 使用 cargo-generate 模板
+
+Rust Embedded WG 与 Knurling 提供可立即运行的模板，避免从零配置链接脚本、向量表与 runner。
+
+```bash
+# Cortex-M 快速启动模板（Rust Embedded WG）
+cargo generate --git https://github.com/rust-embedded/cortex-m-quickstart
+
+# RISC-V 快速启动模板
+cargo generate --git https://github.com/riscv-rust/riscv-rust-quickstart
+
+# Knurling 应用模板（含 defmt、probe-rs、embedded-test）
+cargo generate --git https://github.com/knurling-rs/app-template
+```
+
+生成后的关键文件：
+
+```text
+├── Cargo.toml
+├── build.rs          # 告知 cortex-m-rt 链接脚本位置
+├── memory.x          # 芯片内存布局
+├── src/
+│   └── main.rs
+└── .cargo/
+    └── config.toml   # target、runner、build-std
+```
+
+`.cargo/config.toml` 示例：
+
+```toml
+[target.thumbv7em-none-eabihf]
+runner = "probe-rs run --chip STM32F407VG"
+rustflags = [
+  "-C", "link-arg=-Tlink.x",
+  "-C", "link-arg=-Tdefmt.x",
+]
+
+[build]
+target = "thumbv7em-none-eabihf"
+
+[unstable]
+build-std = ["core", "compiler_builtins"]
+build-std-features = ["compiler-builtins-mem"]
+```
+
+### 15.2 QEMU 仿真验证
+
+无硬件时，可用 QEMU 验证裸机镜像逻辑：
+
+```bash
+# 安装 qemu-system-arm（host 包管理器）
+# 编译后得到 ELF
+qemu-system-arm -M netduinoplus2 -cpu cortex-m4 \
+  -kernel target/thumbv7em-none-eabihf/release/app \
+  -nographic -S -s
+```
+
+`-S -s` 让 QEMU 启动时暂停并开启 GDB server（端口 1234），随后可用 `arm-none-eabi-gdb` 或 `gdb-multiarch` 连接单步调试。
+
+### 15.3 `cargo embed` 与 `cargo run --target`
+
+probe-rs 把烧录、RTT 日志、调试统一为 Cargo 子命令：
+
+```bash
+# 一键烧录并输出 RTT/defmt 日志
+cargo embed --release
+
+# 或使用 cargo runner（已在 .cargo/config.toml 配置）
+cargo run --release
+```
+
+`cargo embed` 读取项目根目录 `Embed.toml`：
+
+```toml
+[default.probe]
+protocol = "Swd"
+
+[default.flashing]
+enabled = true
+
+[default.rtt]
+enabled = true
+
+[default.gdb]
+enabled = false
+```
+
+判定依据：模板 + QEMU + probe-rs 构成“无硬件先仿真、有硬件再实测”的最小可复现工作流。
+
+---
+
+## 十六、硬件实测与 probe-rs 调试
+
+### 16.1 probe-rs 工具链
+
+[probe-rs](https://probe.rs/) 是用 Rust 编写的嵌入式调试与烧录工具链，支持 CMSIS-DAP、J-Link、ST-Link 等调试器，提供统一 CLI 与库 API。
+
+核心命令：
+
+| 命令 | 用途 |
+|:---|:---|
+| `probe-rs list` | 列出已连接调试器 |
+| `probe-rs chip list` | 列出支持的芯片 |
+| `probe-rs run --chip <CHIP> <ELF>` | 烧录并运行，自动附加 RTT |
+| `probe-rs attach --chip <CHIP>` | 附加到运行中的目标 |
+| `probe-rs download --chip <CHIP> <ELF>` | 仅下载固件 |
+| `cargo embed` | 基于 `Embed.toml` 的一体化工作流 |
+
+```bash
+# 运行并查看 RTT 输出
+probe-rs run --chip STM32F407VG target/thumbv7em-none-eabihf/release/app
+```
+
+### 16.2 defmt 零开销日志
+
+[defmt](https://defmt.ferrous-systems.com/) 是 Ferrous Systems 为资源受限目标设计的“deferred formatting”日志框架：目标端只传输原始数据，格式化在 host 端完成，显著降低二进制体积与运行时开销。
+
+```rust,ignore
+use defmt::*;
+
+#[entry]
+fn main() -> ! {
+    info!("booting, version={}", 1);
+    let sensor = 42;
+    debug!("sensor reading: {}", sensor);
+    loop { cortex_m::asm::wfi(); }
+}
+```
+
+`Cargo.toml`：
+
+```toml
+[dependencies]
+defmt = "0.3"
+defmt-rtt = "0.4"
+
+[features]
+default = ["defmt-default"]
+```
+
+链接脚本需包含 `defmt.x`：
+
+```rust,ignore
+// build.rs
+fn main() {
+    println!("cargo:rustc-link-arg=-Tdefmt.x");
+}
+```
+
+### 16.3 RTT / ITM / OpenOCD 对比
+
+| 技术 | 机制 | 优点 | 缺点 | 推荐场景 |
+|:---|:---|:---|:---|:---|
+| RTT (Segger Real-Time Transfer) | 环形缓冲区 + 调试器读取 | 低侵入、速度快、与 probe-rs 集成好 | 需要调试器连接 | 日常开发日志 |
+| ITM (Instrumentation Trace Macrocell) | ARM 专用跟踪单元 | 不占用 RAM 环 buffer，可时间戳 | 仅部分 Cortex-M 支持 | 高频事件 tracing |
+| OpenOCD | GDB server + 调试适配器 | 通用、芯片支持广泛 | 配置复杂、Rust 原生体验弱 | 已有 OpenOCD 基础设施 |
+| defmt | 延迟格式化 + 传输原始 token | 体积极小、适合 no_std | 需要 host 端解析与 probe-rs 支持 | 生产级 no_std 日志 |
+
+判定依据：新项目和纯 Rust 工作流优先 probe-rs + defmt/RTT；已有 OpenOCD 基础设施或需要 ITM 跟踪时保留对应工具链。
+
+### 16.4 芯片验证工作流
+
+硬件在环（HIL）验证通常包含以下步骤：
+
+1. **CI 构建**：`cargo build --release --target <target>` 在 host 编译器交叉编译。
+2. **静态检查**：`cargo clippy --target <target>` + `cargo vet`/`cargo audit`。
+3. **单元/集成测试（host）**：把算法层拆分到 `std` 可编译的 crate，用 `#[cfg(test)]` 在 host 跑。
+4. **QEMU 仿真**：验证启动流程与协议状态机。
+5. **probe-rs 下载 + RTT 断言**：在真实芯片跑 `embedded-test` 或手写断言，通过 defmt 输出结果。
+6. **回归记录**：把固件版本、芯片批次、测试日志绑定到 release note。
+
+```rust,ignore
+// embedded-test 示例（芯片端）
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn hal_gpio_toggle() {
+        let p = Peripherals::take().unwrap();
+        let mut led = Output::new(p.PA5, Level::Low);
+        led.set_high();
+        assert!(led.is_set_high());
+    }
+}
+```
+
+### 16.5 硬件实测流程（probe-rs / QEMU / RTT）
+
+本节给出从 host 检查、QEMU 仿真到真实硬件烧录的完整可复现命令，对应 crate 示例：
+
+- [`crates/c13_embedded/examples/no_std_qemu_blinky.rs`](../../../crates/c13_embedded/examples/no_std_qemu_blinky.rs)
+- [`crates/c13_embedded/examples/no_std_defmt_rtt.rs`](../../../crates/c13_embedded/examples/no_std_defmt_rtt.rs)
+- [`crates/c13_embedded/docs/no_std_hardware_workbench.md`](../../../crates/c13_embedded/docs/no_std_hardware_workbench.md)
+
+#### 环境准备
+
+```bash
+# 安装 ARM Cortex-M 目标
+rustup target add thumbv7m-none-eabi thumbv7em-none-eabihf
+
+# 安装 probe-rs 工具链与 cargo-embed
+cargo install probe-rs-tools --locked
+cargo install cargo-embed --locked
+
+# 安装 QEMU（Ubuntu 示例）
+sudo apt-get install qemu-system-arm
+```
+
+#### Host 编译检查
+
+```bash
+cargo check --workspace
+```
+
+预期输出：
+
+```text
+    Checking c13_embedded v3.1.0 (E:/_src/rust-lang/crates/c13_embedded)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in ...
+```
+
+#### 交叉编译 QEMU blinky
+
+```bash
+cargo build -p c13_embedded --target thumbv7m-none-eabi --example no_std_qemu_blinky
+```
+
+预期输出：
+
+```text
+   Compiling c13_embedded v3.1.0 (E:/_src/rust-lang/crates/c13_embedded)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in ...
+```
+
+#### QEMU 运行
+
+```bash
+qemu-system-arm -cpu cortex-m3 -machine stm32-f103c8 -nographic \
+  -kernel target/thumbv7m-none-eabi/debug/examples/no_std_qemu_blinky
+```
+
+预期现象：镜像成功启动并进入无限循环；无报错即表示链接脚本、启动代码与目标三元组一致。按 `Ctrl-A X` 退出 QEMU。
+
+#### 真实硬件烧录与 RTT 日志
+
+```bash
+probe-rs run --chip STM32F407VG \
+  target/thumbv7m-none-eabi/debug/examples/no_std_qemu_blinky
+```
+
+预期输出（片段）：
+
+```text
+     Erasing sectors ✔ [00:00:00] [##########] 16.00 KiB/16.00 KiB @ 45.00 KiB/s (eta 0s )
+ Programming pages   ✔ [00:00:00] [##########] 16.00 KiB/16.00 KiB @ 30.00 KiB/s (eta 0s )
+    Finished in 0.5s
+```
+
+#### defmt 零开销日志
+
+[`defmt`](https://defmt.ferrous-systems.com/) 在目标端只传输原始 token，格式化在 host 完成，适合 `no_std` 日志。
+
+启用目标依赖（在 `crates/c13_embedded/Cargo.toml` 中取消注释）：
+
+```toml
+[target.'cfg(target_arch = "arm")'.dependencies]
+defmt = "0.3"
+defmt-rtt = "0.4"
+panic-probe = { version = "0.3", features = ["print-defmt"] }
+```
+
+并在 `build.rs` 或 `.cargo/config.toml` 中加入：
+
+```text
+-C link-arg=-Tdefmt.x
+```
+
+编译运行：
+
+```bash
+cargo build -p c13_embedded --target thumbv7em-none-eabihf --example no_std_defmt_rtt
+probe-rs run --chip STM32F407VG \
+  target/thumbv7em-none-eabihf/debug/examples/no_std_defmt_rtt
+```
+
+预期 RTT 输出：
+
+```text
+INFO  booting, version=1
+DEBUG sensor reading: 42
+```
+
+判定依据：host `cargo check` 通过 + QEMU 可启动 + probe-rs 可烧录并输出 RTT，构成“无硬件先仿真、有硬件再实测”的最小闭环。
+
+---
+
+## 十七、常见惯用法清单扩展
+
+### 17.1 `build-std` 与自定义 target JSON
+
+见 [八、`build-std` 与自定义 target JSON](#八build-std-与自定义-target-json)。自定义 target 用于新芯片或特殊 ABI。
+
+### 17.2 链接脚本符号在 Rust 中引用
+
+```rust,ignore
+extern "C" {
+    static _stack_top: u8;
+    static _sheap: u8;
+    static _eheap: u8;
+}
+
+fn heap_bounds() -> (*mut u8, usize) {
+    unsafe {
+        let start = core::ptr::addr_of!(_sheap) as *mut u8;
+        let end = core::ptr::addr_of!(_eheap) as *mut u8;
+        (start, end.offset_from(start) as usize)
+    }
+}
+```
+
+### 17.3 `#[link_section]` 放置向量表与启动标记
+
+```rust,ignore
+#[unsafe(link_section = ".vector_table.reset_vector")]
+#[unsafe(no_mangle)]
+pub static __RESET_VECTOR: unsafe extern "C" fn() -> ! = _reset_handler;
+```
+
+### 17.4 `MaybeUninit` 与 MMIO 映射
+
+```rust,ignore
+use core::mem::MaybeUninit;
+
+const GPIOA_BASE: usize = 0x4002_0000;
+
+fn gpioa() -> &'static mut Gpioa {
+    unsafe {
+        &mut *(GPIOA_BASE as *mut MaybeUninit<Gpioa>)
+            .cast::<Gpioa>()
+    }
+}
+```
+
+### 17.5 `critical-section` 实现选择
+
+单核 Cortex-M/RISC-V 通常使用 `critical-section` 的 `restore-state` 或 `mutex` 后端；多核需要 `spin` 或架构特定 CAS 后端。
+
+```toml
+# Cargo.toml
+critical-section = { version = "1.1", features = ["restore-state-none"] }
+```
+
+### 17.6 单例模式：`Peripherals::take()`
+
+```rust,ignore
+use cortex_m::peripheral::Peripherals;
+
+#[entry]
+fn main() -> ! {
+    let mut cp = Peripherals::take().unwrap();
+    cp.DWT.enable_cycle_counter();
+    // ...
+}
+```
+
+`take()` 返回 `Option`，确保整个程序生命周期中只存在一个外设包装实例。
+
+### 17.7 GPIO 类型状态（typestate）
+
+```rust,ignore
+struct Pin<MODE> { port: u8, pin: u8, _mode: PhantomData<MODE> }
+struct Input;
+struct Output;
+
+impl Pin<Input> {
+    fn into_output(self) -> Pin<Output> { /* ... */ }
+}
+
+impl Pin<Output> {
+    fn set_high(&mut self) { /* ... */ }
+}
+```
+
+### 17.8 DMA 缓冲区与内存安全
+
+```rust,ignore
+// 静态 'static 缓冲区，避免栈释放后被 DMA 写入
+#[link_section = ".dma_buffer"]
+static mut DMA_BUF: [u8; 256] = [0; 256];
+
+unsafe fn start_tx() {
+    let buf: &'static mut [u8; 256] = &mut DMA_BUF;
+    core::sync::atomic::fence(Ordering::Release);
+    dma_start(buf.as_ptr(), buf.len());
+}
+```
+
+### 17.9 栈/堆布局决策
+
+| 策略 | 场景 | 风险 |
+|:---|:---|:---|
+| 纯静态分配 | 最简单、最可预测 | 灵活性差 |
+| `heapless` | 需要集合但拒绝堆碎片 | 容量需在编译期确定 |
+| TLSF/链表分配器 | 需要动态堆 | 碎片、同步、确定性 |
+| 双区 RAM | 将 DMA/缓存与栈分离 | 链接脚本复杂度增加 |
+
+更多内存布局分析见 [嵌入式内存布局与堆安全](29_embedded_memory_layout_and_heap_safety.md)。
+
+---
+
+## 十八、知识图谱与 SHACL 语义衔接
+
+将 `#![no_std]` 裸机项目建模为知识图谱时，可将关键实体抽象为以下 OWL/SHACL 类：
+
+| 本体类 | 示例实例 | 说明 |
+|:---|:---|:---|
+| `rust:Crate` | `bare_metal_app` | 一个 Rust crate |
+| `rust:Target` | `thumbv7em-none-eabihf` | 编译目标三元组 |
+| `rust:LinkerScript` | `memory.x` / `link.x` | 定义内存布局与 section 规则 |
+| `rust:PanicHandler` | `fn panic(&PanicInfo) -> !` | 必须提供的 panic 处理函数 |
+| `rust:GlobalAllocator` | `static HEAP: TlsfHeap` | 启用 `alloc` 的全局分配器 |
+| `rust:RuntimeEntry` | `cortex_m_rt::entry` | 启动入口运行时 |
+| `rust:CriticalSection` | `critical_section::with` | 临界区实现 |
+| `rust:MmioRegister` | `GPIOA` 寄存器映射 | 内存映射外设寄存器 |
+
+**SHACL 约束示例**：每个声明为裸机的 crate 必须至少有一个 `PanicHandler`。
+
+```turtle
+@prefix rust: <https://rust-lang.org/kg/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+rust:BareMetalCrateShape
+    a sh:NodeShape ;
+    sh:targetClass rust:Crate ;
+    sh:property [
+        sh:path rust:hasAttribute ;
+        sh:hasValue "no_std" ;
+    ] ;
+    sh:property [
+        sh:path rust:hasPanicHandler ;
+        sh:minCount 1 ;
+        sh:message "Every bare-metal #![no_std] crate must declare a panic_handler." ;
+    ] ;
+    sh:property [
+        sh:path rust:hasTarget ;
+        sh:minCount 1 ;
+        sh:message "Every bare-metal crate must specify a target triple or custom target JSON." ;
+    ] .
+
+rust:GlobalAllocatorShape
+    a sh:NodeShape ;
+    sh:targetClass rust:GlobalAllocator ;
+    sh:property [
+        sh:path rust:implementsTrait ;
+        sh:hasValue "GlobalAlloc" ;
+        sh:message "A global allocator must implement the GlobalAlloc trait." ;
+    ] .
+```
+
+**关系谓词**：在 KG 中使用具体语义谓词而非通用 `ex:relatedTo`：
+
+- `rust:dependsOn`：crate 依赖某个 runtime 或 hal。
+- `rust:requires`：target 需要特定的 linker script。
+- `rust:hasPart`：crate 包含 panic handler / allocator。
+- `rust:mutexWith`：单核自旋锁与 `critical_section` 在语义上互斥。
+- `rust:counterExample`：将常见反例（栈上 DMA 缓冲区）链接到推荐惯用法。
+
+判定依据：SHACL 约束可把“裸机 crate 必须有 panic handler、必须指定 target、使用堆时必须提供 GlobalAlloc”等工程纪律形式化，便于 CI 与知识图谱联合审计。
+
+---
+
+## 十九、国际化权威来源
+
+- **[The Embedded Rust Book](https://docs.rust-embedded.org/book/)** — Rust Embedded Working Group 官方指南：`<https://docs.rust-embedded.org/book/>`
+- **[The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/)** — 裸机底层实现权威：`<https://docs.rust-embedded.org/embedonomicon/>`
+- **[Knurling-rs](https://knurling.ferrous-systems.com/)** — Ferrous Systems 嵌入式 Rust 项目集（defmt、probe-rs 模板、embedded-test）：`<https://knurling.ferrous-systems.com/>`
+- **[Ferrous Systems](https://ferrous-systems.com/)** — 培训、咨询与 Ferrocene 工具链：`<https://ferrous-systems.com/>`
+- **[Rust Embedded Working Group GitHub](https://github.com/rust-embedded)** — 官方仓库组织：`<https://github.com/rust-embedded>`
+- **[Ferrocene](https://ferrocene.dev/)** — 安全关键 Rust 工具链与认证：`<https://ferrocene.dev/>`
+- **[Tock OS](https://www.tockos.org/)** — 用于微控制器的 Rust 嵌入式操作系统：`<https://www.tockos.org/>`
+- **[Hubris OS](https://hubris.oxide.computer/)** — Oxide Computer 的 Rust 微内核：`<https://hubris.oxide.computer/>`
+- **[Embassy](https://embassy.dev/)** — `no_std` async 框架：`<https://embassy.dev/>`
+- **[Embassy Book](https://embassy.dev/book/)** — Embassy 官方文档：`<https://embassy.dev/book/>`
+- **[RTIC](https://rtic.rs/)** — Real-Time Interrupt-driven Concurrency：`<https://rtic.rs/>`
+- **[cortex-m crate](https://docs.rs/cortex-m/)** — ARM Cortex-M 裸机核心抽象：`<https://docs.rs/cortex-m/>`
+- **[cortex-m-rt crate](https://docs.rs/cortex-m-rt/)** — Cortex-M 运行时入口：`<https://docs.rs/cortex-m-rt/>`
+- **[riscv-rt crate](https://docs.rs/riscv-rt/)** — RISC-V 运行时入口：`<https://docs.rs/riscv-rt/>`
+- **[probe.rs](https://probe.rs/)** — Rust 嵌入式调试与烧录：`<https://probe.rs/>`
+- **[probe-rs book](https://probe.rs/docs/)** — probe-rs 文档：`<https://probe.rs/docs/>`
+- **[defmt Book](https://defmt.ferrous-systems.com/)** — 零开销日志：`<https://defmt.ferrous-systems.com/>`
+- **[Rust Reference — no_std](https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute)** — 语言规范：`<https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute>`
+
+---
+
+## 二十、相关概念
 
 - [Rust 嵌入式系统开发](03_embedded_systems.md)
 - [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md)
@@ -678,12 +1207,16 @@ graph TD
 - [PAC 与 HAL 实现](17_pac_hal_implementation.md)
 - [embedded-hal 与驱动惯用法](24_embedded_hal_and_driver_idioms.md)
 - [异步 no_std 嵌入式](11_async_no_std_embedded.md)
+- [no_std 启动流程与运行时深度解析](27_no_std_startup_runtime_deep_dive.md)
+- [自定义裸机异步执行器](28_custom_bare_metal_async_executor.md)
+- [嵌入式内存布局与堆安全](29_embedded_memory_layout_and_heap_safety.md)
+- [安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508](30_misra_rust_safety_critical_guidelines.md)
 - [交叉编译](02_cross_compilation.md)
 - [安全关键裸机 OS 与 Rust](19_safety_critical_bare_metal_os.md)
 
 ---
 
-## 十六、权威来源索引
+## 二十一、权威来源索引
 
 - **[The Embedded Rust Book](https://docs.rust-embedded.org/book/)** — Rust Embedded Working Group 官方指南，覆盖 `no_std`、内存映射外设、静态保证、设计模式与移植性。
   - 重点章节：[Introduction](https://docs.rust-embedded.org/book/intro/index.html)、[Peripherals](https://docs.rust-embedded.org/book/peripherals/index.html)、[Static Guarantees](https://docs.rust-embedded.org/book/static-guarantees/index.html)、[Design Patterns](https://docs.rust-embedded.org/book/design-patterns/index.html)。
@@ -702,19 +1235,33 @@ graph TD
 
 - **[Rust Reference — no_std](https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute)** — `#![no_std]` 属性的语言级规范。
 
+- **[The Rustonomicon](https://doc.rust-lang.org/nomicon/)** (P0) — Rust 官方 unsafe Rust、FFI 与裸机底层语义权威。
+
+- **[rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/)** (P0) — Rust 编译器内部实现与 target 规范参考，适合深入理解 `build-std`、自定义 target JSON 与链接流程。
+
+- **[Ferrocene Language Specification](https://spec.ferrocene.dev/)** (P0) — 安全关键 Rust 工具链语言规范，与 bare-metal/embedded Rust 认证路径对齐。
+
+- **[The Embedded Rust Book](https://docs.rust-embedded.org/book/)** (P2) — Rust Embedded Working Group 官方生态指南。
+
 - **[probe.rs 文档](https://probe.rs/docs/)** — 基于 CMSIS-DAP / J-Link / ST-Link 的 Rust 嵌入式调试与烧录工作流。
 
 - **[defmt Book](https://defmt.ferrous-systems.com/)** — Ferrous Systems 开发的零开销日志框架，替代 `println!` 的裸机调试方案。
 
-- **[Knurling-rs](https://knurling.ferrous-systems.com/)** — Ferrous Systems 的嵌入式 Rust 项目集，包括 `defmt`、`embedded-test`、probe-rs 工作流模板与硬件支持包。
+- **[Ferrocene](https://ferrocene.dev/)** — 面向安全关键嵌入式 Rust 的认证工具链。
 
-- **[Ferrous Systems Training — Embedded Rust](https://ferrous-systems.com/training/)** — 面向生产级嵌入式 Rust 的培训与认证路径，覆盖 `no_std`、Embassy、RTIC、安全关键实践。
+- **[Tock OS](https://www.tockos.org/)** — Rust 编写的微控制器操作系统。
 
-> **权威来源对齐变更日志**: 2026-07-31 创建；2026-07-31 Wave H 补充 probe-rs、defmt、Knurling、Ferrous Systems 国际来源。
+- **[Hubris OS](https://hubris.oxide.computer/)** — Oxide Computer 的 Rust 微内核，强调类型安全 IPC。
 
-**文档版本**: 1.1
-**最后更新**: 2026-07-31
-**状态**: ✅ 概念文件创建完成
+- **[RTIC](https://rtic.rs/)** — 基于中断的硬实时并发框架。
+
+- **[Rust Embedded Working Group GitHub](https://github.com/rust-embedded)** — 官方 crate、模板与文档仓库。
+
+> **权威来源对齐变更日志**: 2026-07-31 创建；2026-08-03 Wave 补充 probe-rs、defmt、Knurling、Ferrous Systems、Tock、Hubris、RTIC、KG/SHACL 语义、硬件实测与最小可复现工作流；2026-08-03 新增 no_std 硬件实测工作台、c13_embedded crate 示例与 P0 来源（Rustonomicon、rustc-dev-guide、Ferrocene spec）。
+
+**文档版本**: 1.3
+**最后更新**: 2026-08-03
+**状态**: ✅ 概念文件持续维护中
 
 ---
 
@@ -749,10 +1296,27 @@ mindmap
       cortex-m-rt
       riscv-rt
       Embassy executor
+      RTIC
+    硬件实测
+      probe-rs
+      defmt
+      RTT
+      ITM
+      QEMU
     反模式
       static mut
       栈上 DMA 缓冲区
       临界区内阻塞
 ```
 
-> **认知功能**: 本 mindmap 从 crate 设置、启动入口、同步与顺序、静态安全、构建目标、运行时选择与反模式七个维度组织内容，可作为裸机 Rust 项目选型的快速导航索引。
+> **认知功能**: 本 mindmap 从 crate 设置、启动入口、同步与顺序、静态安全、构建目标、运行时选择、硬件实测与反模式八个维度组织内容，可作为裸机 Rust 项目选型与知识图谱构建的快速导航索引。
+
+---
+
+## 十二、国际学术参考（P1）
+
+> 以下来源将裸机/嵌入式 Rust 惯用法与学术研究对齐：
+> - [RustBelt: Securing the Foundations of Rust — ACM POPL 2018](https://doi.org/10.1145/3158154)
+> - [Stacked Borrows: An Aliasing Model for Rust — arXiv:1806.09173](https://arxiv.org/abs/1806.09173)
+> - [Tree Borrows — Orlieu & Pichardie, PLDI 2025](https://perso.crans.org/vanille/treebor/)
+> - [Ferrocene: Rust for Safety-Critical Systems — White Paper](https://ferrocene.dev/)

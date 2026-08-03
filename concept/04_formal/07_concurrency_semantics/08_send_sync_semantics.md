@@ -226,3 +226,15 @@ mindmap
       dyn Trait 缺 bound
     决策矩阵
 ```
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/10.1145/3158154
+- https://dl.acm.org/doi/10.1145/3371106
+- https://doc.rust-lang.org/reference/introduction.html
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://arxiv.org/abs/1804.07608
+- https://rust-unofficial.github.io/patterns/
+- https://blog.rust-lang.org/

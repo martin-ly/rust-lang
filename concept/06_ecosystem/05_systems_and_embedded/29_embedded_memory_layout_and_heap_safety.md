@@ -382,6 +382,11 @@ _heap_end = STACK_TOP;
 ---
 
 > **权威来源**: [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [Ferrous Systems — Booting a Cortex-M Microcontroller](https://rust-training.ferrous-systems.com/latest/book/booting-cortex-m) · [flip-link](https://github.com/knurling-rs/flip-link) · [ARM Compiler scatter files](https://developer.arm.com/documentation/100748/latest)
+>
+> **P0 官方来源**:
+> - [Rust Reference — Linkage](https://doc.rust-lang.org/reference/linkage.html)
+> - [Rust Reference — `#[link_section]`](https://doc.rust-lang.org/reference/abi.html#the-link_section-attribute)
+> - [Rust core — `GlobalAlloc`](https://doc.rust-lang.org/core/alloc/trait.GlobalAlloc.html)
 
 ## 🧭 思维导图（Mindmap）
 
@@ -407,3 +412,11 @@ mindmap
       BKPSRAM
       CCM/DTCM/ITCM
 ```
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://arxiv.org/abs/2311.05063
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://rust-unofficial.github.io/patterns/

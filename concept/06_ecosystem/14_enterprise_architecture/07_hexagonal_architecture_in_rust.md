@@ -160,3 +160,18 @@ mindmap
 - ISO/IEC/IEEE. *ISO/IEC/IEEE 42010:2022*. 2022.
 
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-31 ｜ **状态**: ✅ 新建权威页
+
+## P0 官方来源（P0 Official Rust Authority Sources）
+
+- [The Rust Reference: Traits — doc.rust-lang.org](https://doc.rust-lang.org/reference/items/traits.html)
+- [Cargo Workspaces — doc.rust-lang.org](https://doc.rust-lang.org/cargo/reference/workspaces.html)
+- [Asynchronous Programming in Rust — rust-lang.github.io](https://rust-lang.github.io/async-book/)
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/book/10.5555/186897
+- https://rust-unofficial.github.io/patterns/
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://blog.rust-lang.org/

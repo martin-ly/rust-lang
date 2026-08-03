@@ -283,6 +283,14 @@ OWL 2 DL 基于描述逻辑，**不能表达**任意 Datalog 规则（例如需�
 
 ---
 
+### P0 Rust 官方来源
+
+- [The Rust RFC Book](https://rust-lang.github.io/rfcs/) — Rust 语言特性演化的官方 canonical 追踪，为 KG 推理中的概念-版本映射提供 P0 输入。
+- [The Rust Reference](https://doc.rust-lang.org/reference/) — Rust 语言语义的官方参考，为推理所需的术语定义提供 canonical 来源。
+- [Ferrocene Language Specification](https://spec.ferrocene.dev/) — 经过鉴定的 Rust 语言规范，为形式推理提供 P0 语义基准。
+
+---
+
 ## 嵌入式测验
 
 > **Q1**. RDFS 推理通常采用什么算法导出所有隐式三元组？

@@ -194,3 +194,7 @@ mindmap
 - Klabnik, S. & Nichols, C. *The Rust Programming Language*, Ch. 10. [https://doc.rust-lang.org/book/ch10-00-generics.html](https://doc.rust-lang.org/book/ch10-00-generics.html)
 
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-31 ｜ **状态**: ✅ 新建权威页
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/book/10.5555/186897

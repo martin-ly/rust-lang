@@ -67,6 +67,7 @@ mindmap
     - [9.2 边界测试：未 `Pin` 的 Future 自引用](#92-边界测试未-pin-的-future-自引用)
     - [9.3 边界测试：ISR 中未保护地覆盖 Waker](#93-边界测试isr-中未保护地覆盖-waker)
   - [十、相关概念](#十相关概念)
+  - [十一、实测案例](#十一实测案例)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -436,3 +437,11 @@ mindmap
       无堆 Future
       无 await in ISR
 ```
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://arxiv.org/abs/2311.05063
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://rust-unofficial.github.io/patterns/

@@ -658,3 +658,8 @@ mindmap
       错误处理
       cargo expand 调试
 ```
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/10.1145/319838.319859
+- https://doc.rust-lang.org/reference/introduction.html

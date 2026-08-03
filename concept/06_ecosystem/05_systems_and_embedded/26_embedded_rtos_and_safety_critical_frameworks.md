@@ -79,6 +79,7 @@ mindmap
   - [十二、权威来源索引](#十二权威来源索引)
   - [十三、相关概念](#十三相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [国际化权威来源补充（International Authority Sources）](#国际化权威来源补充international-authority-sources)
 
 ---
 
@@ -510,3 +511,9 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从六个方案的核心特征与选型维度组织内容，可作为嵌入式/安全关键项目技术栈选型的快速导航索引。
+
+## 国际化权威来源补充（International Authority Sources）
+
+- <https://arxiv.org/abs/2311.05063>
+- <https://docs.rust-embedded.org/book/>
+- <https://spec.ferrocene.dev/> — Ferrocene 语言规范（P0 官方合格 Rust 工具链）

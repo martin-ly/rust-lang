@@ -204,3 +204,18 @@ mindmap
 - [packed_simd](https://docs.rs/packed_simd/latest/packed_simd/)
 
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-31 ｜ **状态**: ✅ 新建权威页
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/10.1145/3158154
+- https://rust-unofficial.github.io/patterns/
+
+## P0 官方来源（P0 Official Rust Authority Sources）
+
+- [Rust `Iterator` trait — doc.rust-lang.org](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
+- [Rust primitive slice — doc.rust-lang.org](https://doc.rust-lang.org/std/primitive.slice.html)
+- [The Rust Book: Iterators — doc.rust-lang.org](https://doc.rust-lang.org/book/ch13-02-iterators.html)
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://blog.rust-lang.org/

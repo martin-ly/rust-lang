@@ -1079,3 +1079,7 @@ mindmap
 - **2026-07-31**: 对齐 GitHub milestone 145 的 31 条 release-notes 跟踪 issue、releases.rs 1.98.0 beta 与 nightly unstable book；补齐语言/编译器/标准库 API/兼容性全量特性；重写每个特性的动机/语义/迁移说明；矩阵增加 `concept/` 前向链接；新增批判性分析与对称差、思维导图、反例与边界表。
 - **2026-08-01**: 按任务要求重新分组为「语言语义、编译器与平台、标准库与文档、宏与 Derive、兼容性与破坏性变更」五节；将 StructuralPartialEq、属性参数检查、PanicHookInfo `'static` 移入语言语义；新增 §5 兼容性视角子章节覆盖全部 11 项破坏性变更；调整小节格式使 `concept/` 前向链接位于标题后首行，提升 `check_version_semantic_injection.py` 映射识别率。
 - **2026-08-20（预计）**: 1.98.0 stable 发布后最终核对官方 release notes，移除 beta 标注。
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/10.1145/3158154

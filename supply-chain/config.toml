@@ -2140,6 +2140,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.ipnet]]
+version = "2.12.1"
+criteria = "safe-to-run"
+suggest = false
+notes = "cargo-vet 豁免；ipnet 2.12.1 为 hyper-util / if-watch 等传递依赖，网络地址处理库，无额外攻击面。"
+
 [[exemptions.is_terminal_polyfill]]
 version = "1.70.2"
 criteria = "safe-to-run"
@@ -2265,6 +2271,12 @@ version = "0.1.18"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.libredox]]
+version = "0.1.19"
+criteria = "safe-to-run"
+suggest = false
+notes = "cargo-vet 豁免；libredox 0.1.19 为 Redox OS 传递依赖，仅用于平台抽象，无网络/加密面。"
 
 [[exemptions.linebender_resource_handle]]
 version = "0.1.1"

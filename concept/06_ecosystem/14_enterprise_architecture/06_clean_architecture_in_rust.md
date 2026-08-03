@@ -169,3 +169,17 @@ mindmap
 - [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-31 ｜ **状态**: ✅ 新建权威页
+
+## P0 官方来源（P0 Official Rust Authority Sources）
+
+- [Cargo Workspaces — doc.rust-lang.org](https://doc.rust-lang.org/cargo/reference/workspaces.html)
+- [The Rust Reference: Traits — doc.rust-lang.org](https://doc.rust-lang.org/reference/items/traits.html)
+- [The Rust Reference: Modules and Visibility — doc.rust-lang.org](https://doc.rust-lang.org/reference/items/modules.html)
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/book/10.5555/186897
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://blog.rust-lang.org/

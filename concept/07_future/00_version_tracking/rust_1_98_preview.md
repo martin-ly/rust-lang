@@ -896,3 +896,248 @@ nightly 通道直接跟踪 master。1.97.1 的修复在合并进 master 后，�
 - **供应链声明**：若你的 crate 声明 `rust-version = "1.97.1"`，升级到 `1.98.0` 是自然的下一步；无需因为 1.97.1 是 patch release 而额外限制 1.98.0。
 
 > **总结**：1.97.1 的 LLVM 修复对 1.98 beta 是**向后必要的 backport**，对 nightly 是**已合并的前置正确性修复**。对终端用户而言，从 1.97.1 迁移到 1.98.0 stable 是平滑升级，只需关注 release 构建产物是否经过重新验证。
+
+---
+
+## 十一、1.98.0 beta 变更深度解析
+
+> 本节对 1.98.0 beta 中用户可见度最高的 **10 项变更**做「一句话动机 + 代码示例 + 语义要点 + 权威来源 + 相关 `concept/` 概念页」的 compact 解析。完整稳定版汇总见 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md)；本节重在展示变更与 `concept/` 权威概念的映射关系，方便从概念页回链复习。
+
+<a id="beta-panichookinfo-static"></a>
+### 11.1 `PanicHookInfo` 中 `Location<'_>` 生命周期 `'static` 化
+
+**状态**: ✅ stabilized in 1.98.0 beta · **来源**: [PR #146561](https://github.com/rust-lang/rust/pull/146561) · **跟踪 issue**: [#148297](https://github.com/rust-lang/rust/issues/148297)
+**相关概念**: [panic / error handling](../../02_intermediate/03_error_handling/03_panic.md) · [lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
+
+panic 发生位置（文件、行号、列）本质上是编译期静态字符串，因此 `PanicHookInfo::location()` 的返回类型从 `Option<&Location<'_>>` 收紧为 `Option<&'static Location<'static>>`。
+
+```rust,ignore
+std::panic::set_hook(Box::new(|info| {
+    // 1.98 后返回 &'static Location<'static>，可直接存入全局状态或跨 await 传递
+    let loc: &'static std::panic::Location<'static> = info.location().unwrap();
+    eprintln!("panic at {}:{}", loc.file(), loc.line());
+}));
+```
+
+- **语义要点**: `'static` 化消除了 panic hook 中 location 引用的不必要生命周期限制，使全局/异步处理更安全；但对把 `Location` 生命周期与 `PanicInfo` 局部生命周期精确绑定的泛型代码是破坏性变更。
+- **迁移提示**: 简单调用者无需改动；封装 panic location 的泛型 API 应把相关生命周期统一为 `'static`。
+- **完整分析**: 见本页 §0.1。
+
+<a id="beta-runtime-symbol-lints"></a>
+### 11.2 新增运行时符号定义 lint：`invalid_runtime_symbol_definitions` / `suspicious_runtime_symbol_definitions`
+
+**状态**: ✅ stabilized in 1.98.0 beta · **来源**: [PR #155521](https://github.com/rust-lang/rust/pull/155521) · **跟踪 issue**: [#156519](https://github.com/rust-lang/rust/issues/156519)
+**相关概念**: [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) · [linkage](../../03_advanced/04_ffi/03_linkage.md)
+
+Rust 运行时依赖 `memcmp`、`memset`、`memmove`、`strlen` 等 C 运行时符号。若 crate 用 `#[no_mangle]` 定义同名符号，会静默覆盖运行时实现，导致未定义行为。
+
+```rust,ignore
+// 1.98 前：可能静默链接，运行时崩溃
+// 1.98 后：默认 deny 的 `invalid_runtime_symbol_definitions` 会报错
+#[no_mangle]
+pub extern "C" fn memset(dest: *mut u8, c: i32, n: usize) -> *mut u8 {
+    // 自定义 memset，极可能破坏运行时假设
+    dest
+}
+```
+
+- **语义要点**: 把「核心运行时符号被覆盖」这一链接期/运行期风险提前到编译期捕获；`invalid_runtime_symbol_definitions` 默认 deny，`suspicious_runtime_symbol_definitions` 默认 warn。
+- **迁移提示**: no-std/embedded 项目中若确实需要自定义这些符号，应显式 `#[allow(invalid_runtime_symbol_definitions)]` 并严格匹配 libc 签名。
+
+<a id="beta-mut-lifetime-shorten"></a>
+### 11.3 unsizing coercion 中 `&mut` 生命周期缩短扩展到不变位置
+
+**状态**: ✅ stabilized in 1.98.0 beta · **来源**: [PR #149219](https://github.com/rust-lang/rust/pull/149219) · **跟踪 issue**: [#156457](https://github.com/rust-lang/rust/issues/156457)
+**相关概念**: [lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [coercions](../../02_intermediate/04_types_and_conversions/07_type_conversions.md)
+
+此前 `&mut T` 在逆变/协变位置可以通过 unsizing coercion 缩短生命周期，但在不变位置（如 `Cell<&mut T>`）被禁止。1.98 统一了 `&mut` 与 `&` 的缩短规则。
+
+```rust,ignore
+use std::cell::Cell;
+
+trait Marker {}
+impl Marker for i32 {}
+
+fn demo<'short>(cell: Cell<&'short mut dyn Marker>) {}
+
+fn caller<'long>(c: Cell<&'long mut i32>) {
+    // 1.98 前：不变位置不允许缩短生命周期，编译失败
+    // 1.98 后：允许将 &'long mut i32 强制转换为 &'short mut dyn Marker
+    demo(c);
+}
+```
+
+- **语义要点**: 放宽限制后，更多符合直觉的借用检查代码可通过；由于只改变生命周期，不引入新的别名关系，因此不会破坏内存安全。
+- **迁移提示**: 绝大多数代码无需改动；此前用 `transmute` 或显式重借用绕过此限制的代码可替换为更安全的 coercion。
+
+<a id="beta-ambiguous-glob-imports"></a>
+### 11.4 `ambiguous_glob_imports` 部分转为硬错误
+
+**状态**: ✅ stabilized in 1.98.0 beta（兼容性变更） · **来源**: [PR #149195](https://github.com/rust-lang/rust/pull/149195) · **跟踪 issue**: [#156648](https://github.com/rust-lang/rust/issues/156648)
+**相关概念**: [module system](../../02_intermediate/05_modules_and_visibility/01_module_system.md)
+
+`use module::*;` 可能一次性引入多个同名项。此前最直接的歧义只产生 lint，1.98 将其提升为硬错误。
+
+```rust,ignore
+mod a { pub struct Foo; }
+mod b { pub struct Foo; }
+
+use a::*;
+use b::*;
+
+fn main() {
+    // 1.98 前：可能只触发 ambiguous_glob_imports warning
+    // 1.98 后：硬错误，因为无法判断 Foo 来自 a 还是 b
+    let _ = Foo;
+}
+```
+
+- **语义要点**: 防止运行时意外绑定到错误符号；名称解析的清晰性是模块系统长期治理目标。
+- **迁移提示**: 用显式 `use a::Foo; use b::Foo as BFoo;` 替换歧义 glob import，或避免让多个模块导出同名项。
+
+<a id="beta-cvoid-return-lint"></a>
+### 11.5 `core::ffi::c_void` 作为返回类型触发 lint
+
+**状态**: ✅ stabilized in 1.98.0 beta · **来源**: [PR #156379](https://github.com/rust-lang/rust/pull/156379) · **跟踪 issue**: [#156853](https://github.com/rust-lang/rust/issues/156853)
+**相关概念**: [FFI](../../03_advanced/04_ffi/01_rust_ffi.md)
+
+`c_void` 是不完整类型，直接作为函数返回类型会丢失类型信息，并诱导调用者错误地使用 `transmute`。
+
+```rust,ignore
+use std::ffi::c_void;
+
+unsafe extern "C" {
+    // 1.98 前：合法但危险
+    // 1.98 后：warn-by-default lint，建议改为 *mut c_void / *const c_void
+    fn legacy_alloc() -> c_void;
+}
+
+// 推荐写法
+unsafe extern "C" {
+    fn modern_alloc() -> *mut c_void;
+}
+```
+
+- **语义要点**: 该 lint 不改变类型系统，只增加诊断引导；提醒 FFI 作者用具体指针类型表达「返回的是某个分配的地址」。
+- **迁移提示**: 将 `fn foo() -> c_void` 改为 `fn foo() -> *mut c_void`；检查 bindgen 输出是否生成此类签名。
+
+<a id="beta-where-equality-syntax"></a>
+### 11.6 where 子句拒绝 `Type = Type` / `Type == Type`
+
+**状态**: ⚠ compatibility change in 1.98.0 beta · **来源**: [PR #153513](https://github.com/rust-lang/rust/pull/153513) · **跟踪 issue**: [#154816](https://github.com/rust-lang/rust/issues/154816)
+**相关概念**: [traits / generic bounds](../../02_intermediate/00_traits/01_traits.md)
+
+Rust 的 where 子句从未支持普通类型等式约束，但解析器此前延迟到类型检查阶段才报错，诊断位置模糊。
+
+```rust,ignore
+// 1.98 前：解析通过，后续阶段才报错
+// 1.98 后：解析阶段直接拒绝，错误位置更明确
+fn bad<T, U>() where T = U {}
+
+// 正确的关联类型等式约束仍可用
+fn ok<T>() where T::Item = u32 {}
+```
+
+- **语义要点**: 把「不支持普通类型等式」这一事实提前到解析层，改善诊断；关联类型等式 `T::Assoc = U` 不受影响。
+- **迁移提示**: 宏生成 where 子句时避免产出 `T = U` / `T == U`；用 trait bound 或关联类型等式表达真实意图。
+
+<a id="beta-repr-transparent-stricter"></a>
+### 11.7 `repr(transparent)` 对 trivial 布局字段更严格
+
+**状态**: ⚠ compatibility change in 1.98.0 beta · **来源**: [PR #155299](https://github.com/rust-lang/rust/pull/155299) · **跟踪 issue**: [#157730](https://github.com/rust-lang/rust/issues/157730)
+**相关概念**: [memory model / layout](../../03_advanced/02_unsafe/06_memory_model.md)
+
+`#[repr(transparent)]` 要求类型只有一个非零大小字段，其余字段必须具有 "trivial" 布局。1.98 收紧 trivial 定义：`repr(C)` 类型、私有字段类型和 `#[non_exhaustive]` 类型不再被视为 trivial。
+
+```rust,ignore
+#[repr(C)]
+struct ZstTag; // 实际为零大小，但外部布局承诺不足
+
+#[repr(transparent)]
+struct Wrapper<T>(T, ZstTag); // 1.98 前可能被接受，1.98 后硬错误
+
+// 推荐：用 PhantomData<T> 作为零大小标记字段
+use std::marker::PhantomData;
+#[repr(transparent)]
+struct SafeWrapper<T>(T, PhantomData<T>);
+```
+
+- **语义要点**: transparent ABI 要求辅助字段的外部布局稳定可忽略；`repr(C)` / `non_exhaustive` / 私有字段类型的布局承诺不足以满足这一要求。
+- **迁移提示**: 检查所有 `#[repr(transparent)]` 类型，将辅助字段改为 `PhantomData<T>`，或改用 `#[repr(C)]` 并显式管理布局。
+
+<a id="beta-structural-partialeq-bound"></a>
+### 11.8 派生 `StructuralPartialEq` 增加 `T: PartialEq` bound
+
+**状态**: ✅ stabilized in 1.98.0 beta · **来源**: [PR #156807](https://github.com/rust-lang/rust/pull/156807) · **跟踪 issue**: [#157865](https://github.com/rust-lang/rust/issues/157865)
+**相关概念**: [derive traits](../../02_intermediate/00_traits/06_derive_traits.md)
+
+`#[derive(PartialEq)]` 自动实现的 `StructuralPartialEq` trait 此前对泛型参数没有 `PartialEq` bound，导致 const 比较/结构匹配场景下出现不一致。
+
+```rust,ignore
+#[derive(PartialEq)]
+struct Packet<T> {
+    payload: T,
+}
+
+// 1.98 后，派生的 StructuralPartialEq 实现等价于：
+// impl<T: PartialEq> StructuralPartialEq for Packet<T> {}
+// 若 T 未实现 PartialEq，const 上下文中的结构比较会报错
+```
+
+- **语义要点**: 使 `StructuralPartialEq` 与 `PartialEq` 的派生实现保持一致；可能暴露此前被掩盖的缺少 bound 错误。
+- **迁移提示**: 对依赖结构比较的泛型类型，显式添加 `T: PartialEq` bound。
+
+<a id="beta-windows-tls-destructors"></a>
+### 11.9 Windows TLS 析构切换到 FLS；`ManuallyDrop<Box<T>>` 交互修复
+
+**状态**: ✅ stabilized in 1.98.0 beta · **来源**: [PR #148799](https://github.com/rust-lang/rust/pull/148799)（FLS）· [PR #155750](https://github.com/rust-lang/rust/pull/155750)（ManuallyDrop Box）
+**相关概念**: [destructors](../../04_formal/05_rustc_internals/09_destructors.md)
+
+Windows 上 `thread_local!` 析构从 TLS 回调改为 FLS（Fiber Local Storage），解决了 DLL 卸载/纤程场景下析构时序和重复析构问题。同时，`ManuallyDrop<Box<T>>` 的显式 drop 路径得到修复，消除了双重释放/泄漏风险。
+
+```rust,ignore
+use std::mem::ManuallyDrop;
+
+let mut mb: ManuallyDrop<Box<i32>> = ManuallyDrop::new(Box::new(42));
+
+// 推荐模式：先取出 Box，再 drop，避免 ManuallyDrop 与 Box 的交互歧义
+let b = unsafe { ManuallyDrop::take(&mut mb) };
+drop(b);
+```
+
+- **语义要点**: FLS 与 Windows 线程生命周期绑定更可靠；`ManuallyDrop::drop(&mut ManuallyDrop<Box<T>>)` 的语义得到澄清和修复。
+- **迁移提示**: 源代码通常无需改动；深度依赖 Windows TLS destructor 精确时序的程序需在 1.98 下重新测试。
+
+<a id="beta-transmute-repr-size"></a>
+### 11.10 `transmute()` 在涉及 `repr` 属性时更严格地检查等大小
+
+**状态**: ⚠ compatibility change in 1.98.0 beta · **来源**: [PR #155418](https://github.com/rust-lang/rust/pull/155418) · **跟踪 issue**: [#156852](https://github.com/rust-lang/rust/issues/156852)
+**相关概念**: [memory model / transmute](../../03_advanced/02_unsafe/06_memory_model.md) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md)
+
+`std::mem::transmute` 要求源类型与目标类型大小相等。当类型带有 `repr` 属性时，旧实现的大小相等检查在某些 newtype 场景下存在缺陷。
+
+```rust,ignore
+#[repr(C)]
+struct Inner([u8; 8]);
+
+#[repr(transparent)]
+struct Wrap8(Inner);
+
+#[repr(transparent)]
+struct Wrap4(u32); // 4 字节
+
+// 1.98 前：可能错误地允许
+// 1.98 后：正确拒绝，因为 Wrap8 与 Wrap4 大小不同
+fn bad(w: Wrap8) -> Wrap4 {
+    unsafe { std::mem::transmute(w) }
+}
+```
+
+- **语义要点**: 修复 `repr` 属性参与下的 size equality 检查，防止通过 newtype 包装绕过 transmute 的大小相等前提。
+- **迁移提示**: 用 `std::mem::size_of` 在编译期或运行期校验转换双方大小；优先考虑 `transmute_copy` 或显式字段映射。
+
+---
+
+> **后置概念**
+>
+> 以上 10 项变更的详细迁移清单见 [`rust_1.98_stabilized.md`](rust_1_98_stabilized.md) §5「升级 1.98.0 检查清单」。

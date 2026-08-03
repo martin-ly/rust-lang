@@ -455,6 +455,59 @@ assert_eq!(*boxed, 100);
 > [Rust 1.98.0 Release Notes — Libraries](https://releases.rs/docs/1.98.0/) ·
 > 版本页 [`rust_1_98_stabilized.md`](../../07_future/00_version_tracking/rust_1_98_stabilized.md)（§2.1）
 
+### 2. `repr(transparent)` 对 trivial 布局字段更严格
+
+Rust 1.98.0 收紧了 `#[repr(transparent)]` 对“可忽略字段”的定义（[PR #155299](https://github.com/rust-lang/rust/pull/155299)，issue [#157730](https://github.com/rust-lang/rust/issues/157730)）。`repr(C)` 类型、带私有字段的类型、`#[non_exhaustive]` 类型不再被视为 trivial，因此不能作为 transparent 类型的辅助字段。
+
+```rust,ignore
+use std::marker::PhantomData;
+
+#[repr(C)]
+struct ZstTag; // 零大小，但外部布局承诺不足
+
+// 1.98 前可能被接受，1.98 后硬错误
+#[repr(transparent)]
+struct BadWrapper<T>(T, ZstTag);
+
+// 推荐：用 PhantomData<T> 作为已知的零大小标记字段
+#[repr(transparent)]
+struct GoodWrapper<T>(T, PhantomData<T>);
+```
+
+- **与本文的关系**：transparent ABI 依赖「只有一个非 ZST 字段，其余字段布局完全确定」的前提；本文 §七（内存对齐与 Layout）是理解该规则的基础。
+- **迁移提示**：搜索项目中的 `#[repr(transparent)]`，确保辅助字段仅为 `PhantomData` 等明确 ZST，或改用 `#[repr(C)]` 显式布局。
+- **来源**:
+> [Rust 1.98.0 Release Notes — Language](https://releases.rs/docs/1.98.0/) ·
+> 版本页 [`rust_1_98_stabilized.md`](../../07_future/00_version_tracking/rust_1_98_stabilized.md)（§1.7）·
+> [1.98 beta 深度解析](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-repr-transparent-stricter)
+
+### 3. `transmute()` 在涉及 `repr` 属性时更严格地检查等大小
+
+Rust 1.98.0 修复了 `std::mem::transmute` 的大小相等检查在涉及 `repr` 属性时的缺陷（[PR #155418](https://github.com/rust-lang/rust/pull/155418)，issue [#156852](https://github.com/rust-lang/rust/issues/156852)）。某些通过 newtype 包装 `repr(C)` / `repr(transparent)` 类型后再 transmute 的代码，此前被错误地允许，现在会被正确拒绝。
+
+```rust,ignore
+#[repr(C)]
+struct Inner([u8; 8]);
+
+#[repr(transparent)]
+struct Wrap8(Inner);
+
+#[repr(transparent)]
+struct Wrap4(u32);
+
+// 1.98 前可能错误地允许；1.98 后：大小不匹配，编译拒绝
+fn bad(w: Wrap8) -> Wrap4 {
+    unsafe { std::mem::transmute(w) }
+}
+```
+
+- **与本文的关系**：`transmute` 是 unsafe 代码中 layout 假设最密集的操作之一；本文 §二（抽象字节）、§七（Layout）、§九（常见反模式）共同构成其安全使用前提。
+- **迁移提示**：用 `std::mem::size_of` 校验源/目标类型大小，或改用 `transmute_copy` / 显式字段映射。
+- **来源**:
+> [Rust 1.98.0 Release Notes — Compatibility Notes](https://releases.rs/docs/1.98.0/) ·
+> 版本页 [`rust_1_98_stabilized.md`](../../07_future/00_version_tracking/rust_1_98_stabilized.md)（§5.5）·
+> [1.98 beta 深度解析](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-transmute-repr-size)
+
 ---
 
 ## 📋 关键属性

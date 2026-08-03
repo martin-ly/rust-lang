@@ -448,4 +448,12 @@ mindmap
 
 ---
 
+## P0 官方来源（P0 Official Sources）
+
+- [The Rust Programming Language — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html)
+- [Rust Reference — Enumerations](https://doc.rust-lang.org/reference/items/enumerations.html)
+- [Rust Reference — Match Expressions](https://doc.rust-lang.org/reference/expressions/match-expr.html)
+
+---
+
 **变更日志**: v1.0 (2026-07-31): Wave 8 新增管道-过滤器、黑板与解释器架构权威页，含 Rust 实现、对比矩阵、边界测试与反模式。

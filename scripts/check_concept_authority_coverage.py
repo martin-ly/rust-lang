@@ -244,6 +244,7 @@ def main():
     cn = len(crows)
     ccov = lambda k: (sum(1 for r in crows if r[k]), round(100 * sum(1 for r in crows if r[k]) / cn, 1)) if cn else (0, 0.0)
     cp0c, cp0p = ccov("P0"); cp1c, cp1p = ccov("P1"); cp2c, cp2p = ccov("P2"); canyc, canyp = ccov("any")
+    c_gaps_p0 = [r["path"] for r in crows if not r["P0"]]
     c_gaps_p1 = [r["path"] for r in crows if not r["P1"]]
     c_gaps_p2 = [r["path"] for r in crows if not r["P2"]]
     # 按层级分组
@@ -367,6 +368,12 @@ def main():
     open(json_path, "w", encoding="utf-8").write(json.dumps(payload, ensure_ascii=False, indent=2))
     print(f"[concept-authority] scanned={n}  P0={p0p}%  P1={p1p}%  P2={p2p}%  any={anyp}%  none={len(none)}")
     print(f"[concept-authority] content-scope n={cn}  P0={cp0p}%  P1={cp1p}%  P2={cp2p}%  any={canyp}%")
+    if c_gaps_p0:
+        print(f"[concept-authority] content-scope P0 gaps ({len(c_gaps_p0)}): " + " · ".join(c_gaps_p0))
+    if c_gaps_p1:
+        print(f"[concept-authority] content-scope P1 gaps ({len(c_gaps_p1)}): " + " · ".join(c_gaps_p1))
+    if c_gaps_p2:
+        print(f"[concept-authority] content-scope P2 gaps ({len(c_gaps_p2)}): " + " · ".join(c_gaps_p2))
     print(f"[concept-authority] core L1-L4 gaps (no P0): {len(core_gaps)}")
     print(f"[concept-authority] report: {os.path.relpath(md_path, ROOT)}")
     if args.strict:

@@ -412,4 +412,4 @@ fn main() { println!("{:?}", Wrapper { inner: NoDebug }); }
 
 ## Rust 1.98.0 兼容性注意
 
-> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 为派生的 `StructuralPartialEq` 增加 `T: PartialEq` bound，并在同时派生 `PartialOrd` 与 `Ord` 时走快速路径。混用手动/派生实现可能暴露语义不一致。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md)。
+> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 为派生的 `StructuralPartialEq` 增加 `T: PartialEq` bound，并在同时派生 `PartialOrd` 与 `Ord` 时走快速路径。混用手动/派生实现可能暴露语义不一致。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md) 与 [1.98 beta 深度解析：StructuralPartialEq bound](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-structural-partialeq-bound)。

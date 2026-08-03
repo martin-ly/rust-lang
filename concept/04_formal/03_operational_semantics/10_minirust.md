@@ -256,3 +256,13 @@ mindmap
 1. 将 MiniRust 配置形式化到 [计算语义框架](../11_computational_models/01_computational_semantics_framework.md) 的「程序 ↔ 图灵机模拟」视角。
 2. 在 [Tree Borrows 深度解析](../01_ownership_logic/05_tree_borrows_deep_dive.md) 中补充「从 MiniRust 配置到 borrow tree 的构造算法」。
 3. 每季度用 `scripts/check_authority_freshness.py` 复核 MiniRust/Tree Borrows 仓库链接与论文 DOI 的健康度。
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://arxiv.org/abs/1804.07608
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/10.1145/3158154
+- https://rust-unofficial.github.io/patterns/
+- https://blog.rust-lang.org/

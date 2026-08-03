@@ -1585,7 +1585,7 @@ Rust 1.31 引入的 **Non-Lexical Lifetimes (NLL)** 使借用的有效期基于*
 
 ## Rust 1.98.0 兼容性注意
 
-> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 放宽了 unsized coercion 中 `&mut` 的生命周期缩短规则（即使在不变位置），并收紧了 trait object 完全省略生命周期时的默认推断。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md)。
+> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 放宽了 unsized coercion 中 `&mut` 的生命周期缩短规则（即使在不变位置），并收紧了 trait object 完全省略生命周期时的默认推断。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md) 与 [1.98 beta 深度解析：&mut 生命周期缩短](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-mut-lifetime-shorten)。
 
 ---
 

@@ -434,6 +434,7 @@ static MY_DATA: [u8; 4] = [0; 4];
 - **[Rust 1.98](../../07_future/00_version_tracking/rust_1_98_stabilized.md)**
   - Windows GNU 目标 mingw-w64 C 工具链更新（影响链接行为、异常模型、C++ ABI 兼容性）
   - `-Zemscripten-wasm-eh` 移除
+  - [运行时符号 lints](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-runtime-symbol-lints)：覆盖 `memcmp`/`memset` 等 C 运行时符号将导致编译失败
 
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 

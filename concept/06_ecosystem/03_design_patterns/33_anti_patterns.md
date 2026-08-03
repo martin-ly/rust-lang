@@ -23,6 +23,32 @@
 
 ---
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((Rust 反模式))
+    借用检查逃避
+      Clone 消除错误
+      mem::take 替换克隆后清空
+    OOP 模拟
+      深继承层次
+      运行时多态替代方案
+    字符串类型 API
+      类型状态替代
+    错误处理
+      unwrap 级联
+      泛化错误类型丢失语义
+    异步误用
+      MutexGuard 跨 await
+      过早 async
+    全局可变状态
+      lazy_static 滥用
+      单例测试困难
+```
+
+---
+
 ## 📑 目录
 
 - [📑 目录](#-目录)
@@ -743,3 +769,7 @@ graph TD
 > **权威来源**: [Rust Design Patterns — Anti-patterns](https://rust-unofficial.github.io/patterns/anti_patterns/)
 > **状态**: ✅ 概念文件创建完成
 > **最后更新**: 2026-07-31
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/book/10.5555/186897

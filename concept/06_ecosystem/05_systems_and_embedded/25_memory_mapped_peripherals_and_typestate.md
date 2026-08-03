@@ -33,7 +33,10 @@
 > [The Embedded Rust Book — Peripherals as State Machines](https://docs.rust-embedded.org/book/static-guarantees/peripherals-as-state-machines.html) ·
 > [The Embedded Rust Book — Design Contracts](https://docs.rust-embedded.org/book/static-guarantees/design-contracts.html) ·
 > [Discovery Book](https://docs.rust-embedded.org/discovery/) · [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) ·
-> [svd2rust](https://docs.rs/svd2rust/) · [cortex-m crate](https://docs.rs/cortex-m/)
+> [svd2rust](https://docs.rs/svd2rust/) · [cortex-m crate](https://docs.rs/cortex-m/) ·
+> [The Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html) ·
+> [The Rustonomicon — Foreign Function Interface](https://doc.rust-lang.org/nomicon/ffi.html) ·
+> [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
 ---
 
@@ -97,6 +100,7 @@ mindmap
   - [十二、权威来源索引](#十二权威来源索引)
   - [十三、相关概念](#十三相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [国际化权威来源补充（International Authority Sources）](#国际化权威来源补充international-authority-sources)
 
 ---
 
@@ -565,6 +569,10 @@ graph TD
 - **[The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/)** — 裸机底层实现、自定义 target、链接脚本与启动序列。
 - **[svd2rust](https://docs.rs/svd2rust/)** — PAC 生成工具文档。
 - **[cortex-m-rt 文档](https://docs.rs/cortex-m-rt/)** / **[riscv-rt 文档](https://docs.rs/riscv-rt/)** — 真实目标可编译示例的运行时入口。
+- **P0 官方来源**:
+  - [Rust core — `core::ptr::read_volatile`](https://doc.rust-lang.org/core/ptr/fn.read_volatile.html)
+  - [Rust core — `core::ptr::write_volatile`](https://doc.rust-lang.org/core/ptr/fn.write_volatile.html)
+  - [Rust Reference — `repr(C)` 结构体布局](https://doc.rust-lang.org/reference/type-layout.html#reprc-structs)
 
 > **权威来源对齐变更日志**: 2026-07-31 创建；2026-07-31 Wave H 补充运行时入口来源。
 
@@ -620,3 +628,7 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从硬件寄存器、PAC 抽象、Typestate 状态机、设计契约与反例五个维度组织内容，可作为外设驱动设计与调试的导航索引。
+
+## 国际化权威来源补充（International Authority Sources）
+
+- <https://arxiv.org/abs/2311.05063>

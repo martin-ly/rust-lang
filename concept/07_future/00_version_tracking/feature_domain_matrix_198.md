@@ -291,3 +291,8 @@ mindmap
     4 特性 × 特性交互
     5 维护规则
 ```
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/10.1145/3158154
+- https://blog.rust-lang.org/

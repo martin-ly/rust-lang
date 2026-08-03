@@ -463,3 +463,8 @@ axum 内置提取器（`Json`、`Path`、`Query` 等）在提取失败时会调�
 > **文档版本**: 1.0
 > **最后更新**: 2026-07-31
 > **状态**: ✅ Wave D L6 生态 part 1 新建权威页
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/10.1145/359576.359585
+- https://github.com/tokio-rs/axum

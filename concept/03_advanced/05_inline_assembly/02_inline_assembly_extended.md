@@ -545,3 +545,13 @@ mindmap
       global_asm 不支持
       硬件验证不可替代
 ```
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/10.1145/3158154
+- https://doc.rust-lang.org/reference/introduction.html
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://rust-unofficial.github.io/patterns/
+- https://blog.rust-lang.org/

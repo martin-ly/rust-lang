@@ -656,6 +656,10 @@ ARM Cortex-M 的 **FPB（Flash Patch and Breakpoint）** 提供有限数量的�
 - **A Survey of Rust Embedded Development (arXiv)** — [https://arxiv.org/abs/2311.05063](https://arxiv.org/abs/2311.05063)
 - **SEGGER J-Link** — [https://www.segger.com/products/debug-probes/j-link/](https://www.segger.com/products/debug-probes/j-link/)
 - **ARM Cortex-M 调试技术参考** — [https://developer.arm.com/documentation/ddi0403/latest/](https://developer.arm.com/documentation/ddi0403/latest/)
+- **P0 官方来源**:
+  - [Rust Reference — `#[link_section]`](https://doc.rust-lang.org/reference/abi.html#the-link_section-attribute)
+  - [Rust Reference — `extern "C"` 函数限定符](https://doc.rust-lang.org/reference/items/functions.html#extern-function-qualifier)
+  - [The Rustonomicon](https://doc.rust-lang.org/nomicon/)
 
 > **相关文件**: [Rust 嵌入式系统开发](03_embedded_systems.md) ·
 > [安全关键系统工程](../11_domain_applications/23_safety_critical_systems_engineering.md) ·

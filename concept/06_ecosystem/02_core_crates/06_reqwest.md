@@ -408,3 +408,7 @@ reqwest 的所有网络 I/O 方法都返回 `Future`。必须在 `#[tokio::main]
 **文档版本**: 1.0
 **最后更新**: 2026-07-31
 **状态**: ✅ Wave D — L6 生态 part 1 新建 canonical 页
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/10.1145/359576.359585

@@ -75,6 +75,7 @@ mindmap
     - [9.3 边界测试：未提供 `panic_handler`](#93-边界测试未提供-panic_handler)
   - [十、相关概念](#十相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [国际化权威来源补充（International Authority Sources）](#国际化权威来源补充international-authority-sources)
 
 ---
 
@@ -555,3 +556,7 @@ mindmap
       probe-rs
       defmt
 ```
+
+## 国际化权威来源补充（International Authority Sources）
+
+- <https://arxiv.org/abs/2311.05063>

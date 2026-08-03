@@ -170,6 +170,13 @@ REVIEWED_PAIRS = {
         "concept/SUMMARY.md",
         "concept/00_meta/knowledge_topology/02_attribute_relationship_atlas.md",
     }),
+    # 复核 2026-08-04（族 K）：concept 两个重定向 stub（sim 0.521）。
+    # 02_closure_types.md 与 03_macro_patterns.md 均为 AGENTS.md §2/§4.3 规范的学习入口/重定向 stub，
+    # 正文仅含「权威来源」重定向块 + 相关概念链接。共享内容为 stub 模板骨架，非概念正文互抄，登记 REVIEWED。
+    frozenset({
+        "concept/02_intermediate/04_types_and_conversions/02_closure_types.md",
+        "concept/02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
+    }),
 }
 
 

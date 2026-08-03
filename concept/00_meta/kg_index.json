@@ -4,7 +4,7 @@
     "generated": "2026-07-11",
     "rust_version": "1.97.0+",
     "source": "concept/",
-    "entity_count": 667,
+    "entity_count": 670,
     "schema": "simple KG index"
   },
   "entities": [
@@ -633,7 +633,7 @@
       "en": "Topic-Authority Alignment Map",
       "summary": "维护 Rust 知识库中各概念主题与其权威来源（官方文档、学术论文、工业生态、路线图）之间的对齐关系，确保每个概念有单一可信解释来源。",
       "bloom": "L0",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": null,
       "prerequisites": [],
       "postrequisites": [],
       "theorems": [],
@@ -755,7 +755,7 @@
       "en": "Concept Consistency Audit Checklist",
       "summary": "Redirect stub for the concept consistency audit checklist; authoritative content is in audit_checklist.md.",
       "bloom": "L0",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": null,
       "prerequisites": [],
       "postrequisites": [],
       "theorems": [],
@@ -794,7 +794,7 @@
       "title": "内容分级与受众标签体系",
       "en": "Grading System",
       "summary": "Grading System — The content-grading and audience-label scheme, with rules for applying each tier across the concept base.",
-      "bloom": "L0",
+      "bloom": "...",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [],
       "postrequisites": [],
@@ -899,7 +899,7 @@
       "en": "Cross-layer Dependency and Implication Topology",
       "summary": "Redirect stub for the cross-layer dependency and implication topology; authoritative content is in inter_layer_map.md.",
       "bloom": "L0",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": null,
       "prerequisites": [],
       "postrequisites": [],
       "theorems": [],
@@ -1091,7 +1091,7 @@
       "en": "Placeholder",
       "summary": "This page is a generic placeholder for links in concept files that point to content not yet created.",
       "bloom": "L0",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": null,
       "prerequisites": [],
       "postrequisites": [],
       "theorems": [],
@@ -1351,7 +1351,7 @@
       "en": "Concept Meta Layer",
       "summary": "Overview and entry point for the concept documentation structure: navigation, metadata, audit, and governance layers that connect L0-L7 canonical concept pages.",
       "bloom": "L0",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": null,
       "prerequisites": [],
       "postrequisites": [],
       "theorems": [],
@@ -5985,14 +5985,6 @@
         {
           "title": "Unsafe",
           "path": "../02_unsafe/01_unsafe.md"
-        },
-        {
-          "title": "Type System",
-          "path": "../../01_foundation/02_type_system/01_type_system.md"
-        },
-        {
-          "title": "Memory Management",
-          "path": "../../02_intermediate/02_memory_management/01_memory_management.md"
         }
       ],
       "postrequisites": [
@@ -6521,28 +6513,12 @@
         {
           "title": "Unsafe Rust",
           "path": "../02_unsafe/01_unsafe.md"
-        },
-        {
-          "title": "Memory Management",
-          "path": "../../02_intermediate/02_memory_management/01_memory_management.md"
-        },
-        {
-          "title": "Interior Mutability",
-          "path": "../../02_intermediate/02_memory_management/02_interior_mutability.md"
         }
       ],
       "postrequisites": [
         {
           "title": "Custom Allocators",
           "path": "../06_low_level_patterns/01_custom_allocators.md"
-        },
-        {
-          "title": "Type Layout",
-          "path": "../../04_formal/05_rustc_internals/08_type_layout.md"
-        },
-        {
-          "title": "Separation Logic",
-          "path": "../../04_formal/02_separation_logic/02_separation_logic.md"
         }
       ],
       "theorems": [],
@@ -7563,7 +7539,7 @@
       "en": "Safety Tags in Formal Verification — Redirect Stub",
       "summary": "Redirect stub: the RFC #3842 `safety` attributes proposal — structured, tool-checkable annotations of `unsafe` function safety contracts, plus their predicate-logic formalization and mapping to Kani/Prusti/Verus — is canonically covered in `concept/07_future/02_preview_features/03_safety_tags_preview.md`; this page keeps only the pointer.",
       "bloom": "L4",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": null,
       "prerequisites": [
         {
           "title": "Unsafe",
@@ -7612,24 +7588,12 @@
         {
           "title": "Type Theory",
           "path": "../00_type_theory/01_type_theory.md"
-        },
-        {
-          "title": "Operational Semantics",
-          "path": "03_operational_semantics.md"
-        },
-        {
-          "title": "Linear Logic",
-          "path": "../01_ownership_logic/01_linear_logic.md"
         }
       ],
       "postrequisites": [
         {
           "title": "Category Theory",
           "path": "../00_type_theory/04_category_theory.md"
-        },
-        {
-          "title": "RustBelt",
-          "path": "../02_separation_logic/01_rustbelt.md"
         }
       ],
       "theorems": [],
@@ -7866,14 +7830,6 @@
         {
           "title": "RustBelt",
           "path": "../02_separation_logic/01_rustbelt.md"
-        },
-        {
-          "title": "Ownership Formalization",
-          "path": "../01_ownership_logic/02_ownership_formal.md"
-        },
-        {
-          "title": "Unsafe Rust",
-          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
         }
       ],
       "postrequisites": [
@@ -7894,7 +7850,7 @@
       "en": "Formal Methods (Merged Redirect)",
       "summary": "Merged Redirect stub — this former L4 page has been merged into the canonical Formal Methods page at `concept/07_future/04_research_and_experimental/02_formal_methods.md`.",
       "bloom": "L4",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": null,
       "prerequisites": [
         {
           "title": "Verification Toolchain",
@@ -7932,14 +7888,6 @@
         {
           "title": "形式化方法",
           "path": "02_formal_methods.md"
-        },
-        {
-          "title": "Hoare 逻辑",
-          "path": "../03_operational_semantics/02_hoare_logic.md"
-        },
-        {
-          "title": "RustBelt",
-          "path": "../02_separation_logic/01_rustbelt.md"
         }
       ],
       "postrequisites": [],
@@ -7995,18 +7943,6 @@
         {
           "title": "Type Theory",
           "path": "../00_type_theory/01_type_theory.md"
-        },
-        {
-          "title": "Linear Logic",
-          "path": "../01_ownership_logic/01_linear_logic.md"
-        },
-        {
-          "title": "Ownership Formal",
-          "path": "../01_ownership_logic/02_ownership_formal.md"
-        },
-        {
-          "title": "Unsafe Rust",
-          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
         }
       ],
       "postrequisites": [
@@ -8069,14 +8005,6 @@
         {
           "title": "Unsafe Rust",
           "path": "../../03_advanced/02_unsafe/01_unsafe.md"
-        },
-        {
-          "title": "Borrowing",
-          "path": "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md"
-        },
-        {
-          "title": "Ownership",
-          "path": "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
         }
       ],
       "postrequisites": [
@@ -8110,18 +8038,6 @@
         {
           "title": "Unsafe Rust",
           "path": "../../03_advanced/02_unsafe/01_unsafe.md"
-        },
-        {
-          "title": "Borrowing",
-          "path": "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md"
-        },
-        {
-          "title": "Ownership",
-          "path": "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
-        },
-        {
-          "title": "现代验证工具生态",
-          "path": "04_modern_verification_tools.md"
         }
       ],
       "postrequisites": [
@@ -8192,22 +8108,6 @@
         {
           "title": "Verification Toolchain",
           "path": "01_verification_toolchain.md"
-        },
-        {
-          "title": "现代验证工具生态",
-          "path": "04_modern_verification_tools.md"
-        },
-        {
-          "title": "Ownership",
-          "path": "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
-        },
-        {
-          "title": "Borrowing",
-          "path": "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md"
-        },
-        {
-          "title": "Unsafe Rust",
-          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
         }
       ],
       "postrequisites": [
@@ -8236,29 +8136,17 @@
       "en": "The Rustc Query System and Incremental Compilation",
       "summary": "Explains how `rustc` uses a demand-driven query system (`TyCtxt`), dependency graphs, and the red-green algorithm to enable fine-grained incremental compilation.",
       "bloom": "L2-L4",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": null,
       "prerequisites": [
         {
           "title": "Type System",
           "path": "../../01_foundation/02_type_system/01_type_system.md"
-        },
-        {
-          "title": "Type Inference",
-          "path": "../00_type_theory/03_type_inference.md"
-        },
-        {
-          "title": "NLL and Polonius",
-          "path": "../../03_advanced/02_unsafe/03_nll_and_polonius.md"
         }
       ],
       "postrequisites": [
         {
           "title": "Compiler Internals",
           "path": "../../06_ecosystem/00_toolchain/04_compiler_internals.md"
-        },
-        {
-          "title": "Compiler Infrastructure",
-          "path": "../../06_ecosystem/00_toolchain/05_compiler_infrastructure.md"
         }
       ],
       "theorems": [],
@@ -8306,7 +8194,7 @@
       "en": "The Trait Solver in rustc",
       "summary": "Explains how rustc resolves trait obligations through selection, fulfillment, and evaluation; covers the current solver, the next-generation solver, and coinduction.",
       "bloom": "L2-L4",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": null,
       "prerequisites": [
         {
           "title": "Type System",
@@ -8412,14 +8300,6 @@
         {
           "title": "Name Resolution and HIR",
           "path": "04_name_resolution_and_hir.md"
-        },
-        {
-          "title": "Linkage",
-          "path": "../../03_advanced/04_ffi/03_linkage.md"
-        },
-        {
-          "title": "Names Reference",
-          "path": "16_names_reference.md"
         }
       ],
       "theorems": [],
@@ -8954,14 +8834,6 @@
         {
           "title": "Distributed Consensus Ecosystem",
           "path": "../../06_ecosystem/06_data_and_distributed/06_distributed_consensus.md"
-        },
-        {
-          "title": "CRDTs",
-          "path": "../../06_ecosystem/06_data_and_distributed/08_crdt_type_zoo.md"
-        },
-        {
-          "title": "Causal Ordering",
-          "path": "../../06_ecosystem/06_data_and_distributed/09_causal_ordering_vector_clocks.md"
         }
       ],
       "theorems": [],
@@ -9148,32 +9020,12 @@
         {
           "title": "Hoare Logic",
           "path": "../03_operational_semantics/02_hoare_logic.md"
-        },
-        {
-          "title": "Operational Semantics",
-          "path": "../03_operational_semantics/03_operational_semantics.md"
-        },
-        {
-          "title": "Iterator Patterns",
-          "path": "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md"
-        },
-        {
-          "title": "Semantic Space",
-          "path": "../../00_meta/00_framework/semantic_space.md"
         }
       ],
       "postrequisites": [
         {
           "title": "Refinement Calculus",
           "path": "02_refinement_calculus.md"
-        },
-        {
-          "title": "Iterator Correctness",
-          "path": "03_iterator_correctness.md"
-        },
-        {
-          "title": "Formal Algorithm Theory",
-          "path": "../00_type_theory/13_formal_algorithm_theory.md"
         }
       ],
       "theorems": [],
@@ -9643,22 +9495,6 @@
         {
           "title": "Architecture Patterns",
           "path": "../../06_ecosystem/03_design_patterns/08_architecture_patterns.md"
-        },
-        {
-          "title": "Architecture Pattern Semantics",
-          "path": "02_architecture_pattern_semantics.md"
-        },
-        {
-          "title": "Rust Architecture Constraints",
-          "path": "04_rust_architecture_constraints.md"
-        },
-        {
-          "title": "Concurrency",
-          "path": "../../03_advanced/00_concurrency/01_concurrency.md"
-        },
-        {
-          "title": "Async/Await",
-          "path": "../../03_advanced/01_async/01_async.md"
         }
       ],
       "postrequisites": [
@@ -9709,28 +9545,12 @@
         {
           "title": "Async/Await",
           "path": "../../03_advanced/01_async/01_async.md"
-        },
-        {
-          "title": "Lambda Calculus",
-          "path": "../00_type_theory/05_lambda_calculus.md"
-        },
-        {
-          "title": "Type Theory",
-          "path": "../00_type_theory/01_type_theory.md"
         }
       ],
       "postrequisites": [
         {
           "title": "Computability Theory",
           "path": "02_computability_theory.md"
-        },
-        {
-          "title": "Mathematical Functions of Computation",
-          "path": "04_mathematical_functions_of_computation.md"
-        },
-        {
-          "title": "Equivalence of Computational Models",
-          "path": "05_equivalence_of_computational_models.md"
         }
       ],
       "theorems": [],
@@ -9748,36 +9568,12 @@
         {
           "title": "Concurrency",
           "path": "../../03_advanced/00_concurrency/01_concurrency.md"
-        },
-        {
-          "title": "Lambda Calculus",
-          "path": "../00_type_theory/05_lambda_calculus.md"
-        },
-        {
-          "title": "Type Theory",
-          "path": "../00_type_theory/01_type_theory.md"
-        },
-        {
-          "title": "Type Checking and Inference",
-          "path": "../00_type_theory/07_type_checking_and_inference.md"
         }
       ],
       "postrequisites": [
         {
           "title": "Mathematical Functions of Computation",
           "path": "04_mathematical_functions_of_computation.md"
-        },
-        {
-          "title": "Formal Languages and Automata",
-          "path": "03_formal_languages_and_automata.md"
-        },
-        {
-          "title": "Equivalence of Computational Models",
-          "path": "05_equivalence_of_computational_models.md"
-        },
-        {
-          "title": "Observational Equivalence",
-          "path": "../03_operational_semantics/06_observational_equivalence.md"
         }
       ],
       "theorems": [],
@@ -9877,32 +9673,12 @@
         {
           "title": "Concurrency",
           "path": "../../03_advanced/00_concurrency/01_concurrency.md"
-        },
-        {
-          "title": "Computational Semantics Framework",
-          "path": "01_computational_semantics_framework.md"
-        },
-        {
-          "title": "Computability Theory",
-          "path": "02_computability_theory.md"
-        },
-        {
-          "title": "Mathematical Functions of Computation",
-          "path": "04_mathematical_functions_of_computation.md"
         }
       ],
       "postrequisites": [
         {
           "title": "Algorithm Equivalence",
           "path": "../08_algorithm_semantics/05_algorithm_equivalence.md"
-        },
-        {
-          "title": "Concurrency Models",
-          "path": "../12_concurrency_models/README.md"
-        },
-        {
-          "title": "Semantic Space",
-          "path": "../../00_meta/00_framework/semantic_space.md"
         }
       ],
       "theorems": [],
@@ -9963,32 +9739,12 @@
         {
           "title": "L3 并发编程",
           "path": "../../03_advanced/00_concurrency/01_concurrency.md"
-        },
-        {
-          "title": "L4 进程代数与 Rust",
-          "path": "../07_concurrency_semantics/01_process_calculi_for_rust.md"
-        },
-        {
-          "title": "L4 Actor 形式语义",
-          "path": "../07_concurrency_semantics/03_actor_semantics.md"
-        },
-        {
-          "title": "L5 五模型定义矩阵",
-          "path": "../../05_comparative/00_paradigms/04_five_models_definition_matrix.md"
         }
       ],
       "postrequisites": [
         {
           "title": "并发模型表达能力比较",
           "path": "02_expressiveness_of_concurrent_models.md"
-        },
-        {
-          "title": "五范式语义边界",
-          "path": "03_parallel_concurrent_async_distributed_semantics.md"
-        },
-        {
-          "title": "分布式系统语义",
-          "path": "../09_system_semantics/04_distributed_systems_semantics.md"
         }
       ],
       "theorems": [],
@@ -10053,32 +9809,12 @@
         {
           "title": "并发编程",
           "path": "../../03_advanced/00_concurrency/01_concurrency.md"
-        },
-        {
-          "title": "Async/Await",
-          "path": "../../03_advanced/01_async/01_async.md"
-        },
-        {
-          "title": "并发模型谱系",
-          "path": "01_models_of_concurrency.md"
-        },
-        {
-          "title": "五模型定义矩阵",
-          "path": "../../05_comparative/00_paradigms/04_five_models_definition_matrix.md"
         }
       ],
       "postrequisites": [
         {
           "title": "进程代数与 Rust",
           "path": "../07_concurrency_semantics/01_process_calculi_for_rust.md"
-        },
-        {
-          "title": "Actor 形式语义",
-          "path": "../07_concurrency_semantics/03_actor_semantics.md"
-        },
-        {
-          "title": "分布式系统语义",
-          "path": "../09_system_semantics/04_distributed_systems_semantics.md"
         }
       ],
       "theorems": [],
@@ -10338,28 +10074,87 @@
         {
           "title": "Knowledge Graph Ontology",
           "path": "../../00_meta/knowledge_topology/kg_ontology_v2.md"
-        },
-        {
-          "title": "AI Ontology and Rust Semantics",
-          "path": "./06_ai_ontology_and_rust_semantics.md"
-        },
-        {
-          "title": "Semantic Model Atlas",
-          "path": "../../00_meta/knowledge_topology/11_semantic_model_atlas.md"
-        },
-        {
-          "title": "Atomics and Memory Ordering",
-          "path": "../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md"
         }
       ],
       "postrequisites": [
         {
           "title": "Formal Methods Industrialization",
           "path": "../../07_future/04_research_and_experimental/02_formal_methods.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:04_formal/13_semantic_engineering/08_computational_semantic_models.md",
+      "path": "04_formal/13_semantic_engineering/08_computational_semantic_models.md",
+      "title": "",
+      "en": "Computational Semantic Models",
+      "summary": "A Rust-centric survey of computational semantic models spanning operational, denotational, and axiomatic semantics, equivalent formal languages, mathematical denotations, and semantic perspectives on parallelism, concurrency, asynchrony, and distribution.",
+      "bloom": "L4-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "本体工程",
+          "path": "01_ontology_engineering.md"
         },
         {
-          "title": "LLM System Architecture",
-          "path": "../../07_future/04_research_and_experimental/08_llm_system_architecture.md"
+          "title": "描述逻辑与 OWL",
+          "path": "02_description_logic_and_owl.md"
+        },
+        {
+          "title": "知识图谱构建",
+          "path": "03_knowledge_graph_construction.md"
+        },
+        {
+          "title": "知识图谱推理",
+          "path": "05_knowledge_graph_reasoning.md"
+        },
+        {
+          "title": "AI 本体论与 Rust 语义",
+          "path": "06_ai_ontology_and_rust_semantics.md"
+        },
+        {
+          "title": "KG 的 OWL/SHACL 语义",
+          "path": "07_kg_owl_shacl_semantics.md"
+        },
+        {
+          "title": "操作语义",
+          "path": "../03_operational_semantics/03_operational_semantics.md"
+        },
+        {
+          "title": "类型论",
+          "path": "../00_type_theory/01_type_theory.md"
+        },
+        {
+          "title": "原子操作与内存序",
+          "path": "../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md"
+        },
+        {
+          "title": "内存模型",
+          "path": "../../03_advanced/02_unsafe/06_memory_model.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "形式化方法工业化",
+          "path": "../../07_future/04_research_and_experimental/02_formal_methods.md"
+        },
+        {
+          "title": "RustBelt",
+          "path": "../02_separation_logic/01_rustbelt.md"
+        },
+        {
+          "title": "aeneas",
+          "path": "../03_operational_semantics/07_aeneas_symbolic_semantics.md"
+        },
+        {
+          "title": "MiniRust",
+          "path": "../03_operational_semantics/10_minirust.md"
+        },
+        {
+          "title": "Tree Borrows",
+          "path": "../01_ownership_logic/05_tree_borrows_deep_dive.md"
         }
       ],
       "theorems": [],
@@ -12751,8 +12546,8 @@
       "title": "Rust 惯用法谱系全景（Idioms Spectrum）",
       "en": "Idioms Spectrum",
       "summary": "Idioms Spectrum: a cross-layer catalog of Rust idioms covering ownership transfer, clone-on-write, unsafe boundaries, error handling, advanced iterators, async runtime patterns, and bare-metal practices.",
-      "bloom": "L3-L5",
-      "rust_version": "1.97.0 stable (Edition 2024)",
+      "bloom": "L6",
+      "rust_version": "1.97.1+ (Edition 2024)",
       "prerequisites": [
         {
           "title": "Patterns",
@@ -12959,7 +12754,7 @@
       "en": "Formal Design Pattern Theory (Redirect Stub)",
       "summary": "Redirect stub — migrated to the L4 formal layer canonical page for formal foundations of design patterns.",
       "bloom": "L0",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": null,
       "prerequisites": [],
       "postrequisites": [],
       "theorems": [],
@@ -13073,7 +12868,7 @@
       "en": "Pattern Composition Algebra (Redirect Stub)",
       "summary": "Redirect stub — migrated to the L4 formal layer canonical page for algebraic composition of design patterns.",
       "bloom": "L0",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": null,
       "prerequisites": [],
       "postrequisites": [],
       "theorems": [],
@@ -13316,6 +13111,33 @@
         {
           "title": "错误处理进阶",
           "path": "../../02_intermediate/03_error_handling/01_error_handling.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/03_design_patterns/36_enterprise_and_software_architecture_alignment.md",
+      "path": "06_ecosystem/03_design_patterns/36_enterprise_and_software_architecture_alignment.md",
+      "title": "",
+      "en": "Enterprise and Software Architecture Alignment in Rust",
+      "summary": "Bridge enterprise architecture frameworks, software architecture quality attributes, and Rust design patterns by mapping TOGAF/ArchiMate/C4/DDD concepts to crates, traits, channels, and knowledge-graph governance.",
+      "bloom": "L4-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Patterns Overview",
+          "path": "01_patterns.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Future Roadmap",
+          "path": "../../07_future/01_edition_roadmap/04_roadmap.md"
+        },
+        {
+          "title": "Rust vs C++",
+          "path": "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md"
         }
       ],
       "theorems": [],
@@ -13908,28 +13730,12 @@
         {
           "title": "Pin 与 Unpin",
           "path": "../../03_advanced/01_async/08_pin_unpin.md"
-        },
-        {
-          "title": "Unsafe Rust",
-          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
-        },
-        {
-          "title": "交叉编译",
-          "path": "02_cross_compilation.md"
-        },
-        {
-          "title": "Rust vs C",
-          "path": "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md"
         }
       ],
       "postrequisites": [
         {
           "title": "Async FFI Boundary",
           "path": "../../03_advanced/04_ffi/04_async_ffi_boundary.md"
-        },
-        {
-          "title": "Async 中的 Unsafe",
-          "path": "../../03_advanced/02_unsafe/08_async_in_unsafe_contexts.md"
         }
       ],
       "theorems": [],
@@ -14317,63 +14123,19 @@
       "path": "06_ecosystem/05_systems_and_embedded/23_no_std_and_bare_metal_idioms.md",
       "title": "",
       "en": "`no_std` and Bare-Metal Idioms",
-      "summary": "Practical idioms for `#![no_std]` and bare-metal Rust: crate setup, panic handler, custom alloc, critical-section, memory fences, static safety, build-std, target JSON, linker scripts, cortex-m-rt/riscv-rt entry patterns, Embassy executor, and common anti-patterns.",
+      "summary": "Practical idioms for `#![no_std]` and bare-metal Rust: crate setup, panic handler, custom alloc, critical-section, memory fences, static safety, build-std, target JSON, linker scripts, cortex-m-rt/riscv-rt entry patterns, Embassy executor, probe-rs hardware-in-the-loop debugging, KG/SHACL semantics, and common anti-patterns.",
       "bloom": "L4",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [
         {
           "title": "Rust 嵌入式系统开发",
           "path": "03_embedded_systems.md"
-        },
-        {
-          "title": "裸机启动与链接脚本",
-          "path": "13_bare_metal_boot_linker_script.md"
-        },
-        {
-          "title": "panic_handler 与 no_std 运行时",
-          "path": "18_panic_runtime_no_std.md"
-        },
-        {
-          "title": "嵌入式内存分配器",
-          "path": "16_embedded_memory_allocators.md"
-        },
-        {
-          "title": "no_std 同步原语",
-          "path": "15_no_std_synchronization_primitives.md"
-        },
-        {
-          "title": "Rust vs C++",
-          "path": "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md"
         }
       ],
       "postrequisites": [
         {
           "title": "PAC 与 HAL 实现",
           "path": "17_pac_hal_implementation.md"
-        },
-        {
-          "title": "embedded-hal 与驱动惯用法",
-          "path": "24_embedded_hal_and_driver_idioms.md"
-        },
-        {
-          "title": "异步 no_std 嵌入式",
-          "path": "11_async_no_std_embedded.md"
-        },
-        {
-          "title": "no_std 启动流程与运行时深度解析",
-          "path": "27_no_std_startup_runtime_deep_dive.md"
-        },
-        {
-          "title": "自定义裸机异步执行器",
-          "path": "28_custom_bare_metal_async_executor.md"
-        },
-        {
-          "title": "嵌入式内存布局与堆安全",
-          "path": "29_embedded_memory_layout_and_heap_safety.md"
-        },
-        {
-          "title": "安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508",
-          "path": "30_misra_rust_safety_critical_guidelines.md"
         }
       ],
       "theorems": [],
@@ -14442,32 +14204,12 @@
         {
           "title": "裸机启动与链接脚本",
           "path": "13_bare_metal_boot_linker_script.md"
-        },
-        {
-          "title": "Type System",
-          "path": "../../01_foundation/02_type_system/01_type_system.md"
-        },
-        {
-          "title": "Unsafe Rust",
-          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
-        },
-        {
-          "title": "Rust vs C++",
-          "path": "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md"
         }
       ],
       "postrequisites": [
         {
           "title": "PAC 与 HAL 实现",
           "path": "17_pac_hal_implementation.md"
-        },
-        {
-          "title": "embedded-hal 与驱动惯用法",
-          "path": "24_embedded_hal_and_driver_idioms.md"
-        },
-        {
-          "title": "异步 no_std 嵌入式",
-          "path": "11_async_no_std_embedded.md"
         }
       ],
       "theorems": [],
@@ -14683,7 +14425,7 @@
       "en": "Systems and Embedded Topic Index",
       "summary": "Directory index for the `05_systems_and_embedded` topic cluster — WASI, cross-compilation, embedded systems, CLI development, OS kernels, robotics, embedded graphics, C-to-Rust translation, embedded-hal 1.0 migration, target tier platform support, no_std async, and GPU programming & HPC — the systems-facing layer of the L6 ecosystem tier.",
       "bloom": "L0",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": null,
       "prerequisites": [],
       "postrequisites": [],
       "theorems": [],
@@ -15532,7 +15274,7 @@
       "en": "Game Development (Merged Redirect)",
       "summary": "Merged Redirect stub — this page has been merged into the canonical Game Development page at `concept/06_ecosystem/11_domain_applications/05_game_development.md`.",
       "bloom": "L5-L6",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": null,
       "prerequisites": [
         {
           "title": "Game ECS",
@@ -15718,7 +15460,7 @@
       "en": "Formal Algorithm Theory (Redirect Stub)",
       "summary": "Redirect stub — migrated to the L4 formal layer canonical page for formal algorithm theory.",
       "bloom": "L0",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": null,
       "prerequisites": [],
       "postrequisites": [],
       "theorems": [],
@@ -16358,7 +16100,7 @@
       "en": "Networking Topic Index",
       "summary": "Directory index for the `12_networking` topic cluster — socket programming basics, protocol quick start, advanced protocols (gRPC/MQTT/QUIC/AMQP/GraphQL/SSE), network security, custom protocol implementation, and formal protocol theory — forming the protocol/mechanism layer that complements `04_web_and_networking`'s application-architecture layer.",
       "bloom": "L0",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": null,
       "prerequisites": [],
       "postrequisites": [],
       "theorems": [],
@@ -16611,6 +16353,29 @@
       "related_crates": []
     },
     {
+      "id": "concept:06_ecosystem/16_algorithm_patterns/01_algorithmic_paradigms.md",
+      "path": "06_ecosystem/16_algorithm_patterns/01_algorithmic_paradigms.md",
+      "title": "",
+      "en": "Algorithmic Paradigms in Rust",
+      "summary": "A catalog of classical algorithmic paradigms mapped to Rust idioms: divide-and-conquer, greedy, dynamic programming, backtracking, branch-and-bound, randomized, approximation, parallel, streaming, and cache-oblivious algorithms.",
+      "bloom": "L3-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "算法模式概述",
+          "path": "00_algorithm_patterns_overview.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "并行算法",
+          "path": "../11_domain_applications/25_parallel_algorithms.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:06_ecosystem/README.md",
       "path": "06_ecosystem/README.md",
       "title": "L6 生态工程层（Ecosystem & Engineering）",
@@ -16630,7 +16395,7 @@
       "en": "Rust Version Tracking",
       "summary": "Rust Version Tracking: emerging Rust language feature or ecosystem trend.",
       "bloom": "L3-L4",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": null,
       "prerequisites": [],
       "postrequisites": [],
       "theorems": [],
@@ -16742,7 +16507,7 @@
       "path": "07_future/00_version_tracking/feature_domain_matrix_198.md",
       "title": "Rust 1.98.0 特性 × 领域反查矩阵",
       "en": "Rust 1.98.0 Feature × Domain Reverse-Lookup Matrix",
-      "summary": "把 Rust 1.98.0 周期（含 1.98.0 beta 已冻结的稳定项与 RFC 已合并的实现跟踪项）从“版本页单点罗列”重构为“特性 × 9 领域”反查矩阵，标注每个特性的跨领域影响与对应核心 concept 页锚点；为 1.98.0 stable 发布后的语义注入检查提供可机器复核的映射基础。",
+      "summary": "把 Rust 1.98.0 稳定周期的 31 项特性从「版本页单点罗列」重构为「特性 × 9 领域」反查矩阵，标注每个特性的跨领域影响与对应核心 concept 页锚点；为 1.98.0 stable 发布后的语义注入检查提供可机器复核的映射基础。",
       "bloom": "L4（分析）/ L5（评价：跨领域一致性（Coherence）判定）/ L7（版本治理）",
       "rust_version": "**1.98.0+**（Edition 2024）",
       "prerequisites": [
@@ -16796,7 +16561,7 @@
       "path": "07_future/00_version_tracking/migration_198_decision_tree.md",
       "title": "Rust 1.98 兼容性迁移判定树",
       "en": "Rust 1.98 Compatibility Migration Decision Trees",
-      "summary": "Executable decision trees that turn Rust 1.98.0's compatibility changes into \"am I affected → root cause → concrete migration step\" flows, covering four stabilized-in-beta scenarios: `PanicHookInfo` `'static` lifetime, mingw-w64 toolchain update, Solaris `File::lock` removal, and `-Zemscripten-wasm-eh` removal — every leaf is an actionable fix rather than a jump link.",
+      "summary": "Executable decision trees that turn Rust 1.98.0's compatibility changes into \"am I affected → root cause → concrete migration step\" flows, covering 14 stabilized-in-beta/RC scenarios: `PanicHookInfo` `'static` lifetime, mingw-w64 toolchain baseline, Solaris `File::lock` removal, `-Zemscripten-wasm-eh` removal, `derive(PartialOrd)` fast path, `repr(transparent)` strict trivial fields, equality predicate syntax rejection, `transmute()` equal-size check, trait object lifetime defaults, `ambiguous_glob_imports` hard error, attribute argument rejection, `UNSAFE_CODE` unsafe attributes, `c_void` return lint, and `std::env::Vars{,Os}` `Send`/`Sync` removal — every leaf is an actionable fix rather than a jump link.",
       "bloom": "L3-L4（应用/分析：将版本变更映射到具体代码修复）",
       "rust_version": "**1.98.0+ (Edition 2024)**",
       "prerequisites": [
@@ -17169,7 +16934,7 @@
       "path": "07_future/00_version_tracking/rust_1_99_preview.md",
       "title": "Rust 1.99+ 前沿特性预览",
       "en": "Rust 1.99+ Preview",
-      "summary": "Rust 1.99 and beyond: nightly language features, compiler infrastructure, and ecosystem trends tracked for future stabilization.",
+      "summary": "Rust 1.99 and beyond: nightly language features, compiler infrastructure, stabilized-in-progress APIs, and ecosystem trends tracked for future stabilization.",
       "bloom": "L2-L3",
       "rust_version": "1.99.0 (nightly preview)",
       "prerequisites": [
@@ -17815,7 +17580,7 @@
       "en": "Const Trait Implementation Preview",
       "summary": "Redirect stub for the const trait implementations preview (`~const Trait`, `const impl`), linking to the canonical page covering nightly syntax, semantics, and migration boundaries.",
       "bloom": "L7",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": null,
       "prerequisites": [
         {
           "title": "Const Generics",
@@ -18882,7 +18647,7 @@
       "en": "Authority Source Index",
       "summary": "Index of authoritative sources used throughout the concept knowledge system.",
       "bloom": "Meta",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": null,
       "prerequisites": [],
       "postrequisites": [],
       "theorems": [],
@@ -18895,7 +18660,7 @@
       "en": "Rfc Index",
       "summary": "Rfc Index — An index tracking RFCs with structural impact on Rust's semantics, type system, memory model, concurrency, and ecosystem.",
       "bloom": "Meta",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": null,
       "prerequisites": [],
       "postrequisites": [],
       "theorems": [],
@@ -18924,7 +18689,7 @@
       "en": "Table of Contents",
       "summary": "mdBook navigation manifest for the `concept/` collection — the machine-read table of contents that drives the book's sidebar, reading order, and cross-page prev/next links.",
       "bloom": "Meta",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": null,
       "prerequisites": [],
       "postrequisites": [],
       "theorems": [],

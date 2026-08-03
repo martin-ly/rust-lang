@@ -551,3 +551,12 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从零拷贝解析的工程动机出发，按技术栈（nom/winnow/serde）与生命周期约束组织，帮助读者按输入形态与输出需求快速选型。
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/10.1145/3158154
+- https://rust-unofficial.github.io/patterns/
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://blog.rust-lang.org/

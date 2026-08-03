@@ -883,3 +883,9 @@ mindmap
     16 env::Vars Send/Sync 移除
     17 验证总览
 ```
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/10.1145/3158154
+- https://blog.rust-lang.org/
+- https://rust-lang.github.io/rfcs/

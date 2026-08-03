@@ -30,4 +30,4 @@
 
 % 用 ulem 的 \sout 覆盖 soul 的 \st，避免 verbatim/CJK 混排时 Reconstruction failed
 \usepackage{ulem}
-\AtBeginDocument{\renewcommand{\st}[1]{\sout{#1}}}
+\AtBeginDocument{\ifdefined\st\renewcommand{\st}[1]{\sout{#1}}\else\newcommand{\st}[1]{\sout{#1}}\fi}

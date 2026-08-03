@@ -871,7 +871,7 @@ pub mod evaluator;
 
 ## Rust 1.98.0 兼容性注意
 
-> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 将部分 `ambiguous_glob_imports` 歧义提升为硬错误，并启用了批量导入解析优化。升级后应避免可能重名的 glob import。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md)。
+> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 将部分 `ambiguous_glob_imports` 歧义提升为硬错误，并启用了批量导入解析优化。升级后应避免可能重名的 glob import。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md) 与 [1.98 beta 深度解析：glob import 硬错误](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-ambiguous-glob-imports)。
 
 ---
 

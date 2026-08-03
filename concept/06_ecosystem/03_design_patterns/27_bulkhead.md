@@ -171,3 +171,11 @@ mindmap
 - AWS. "Bulkhead Isolation pattern." *Prescriptive Guidance*. [https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/bulkhead-isolation.html](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/bulkhead-isolation.html)
 
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-31 ｜ **状态**: ✅ 新建权威页
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/book/10.5555/186897
+- https://rust-unofficial.github.io/patterns/
+- [The Rust Programming Language — Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
+- [The Rustonomicon — Atomics](https://doc.rust-lang.org/nomicon/atomics.html)
+- [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines/flexibility.html)

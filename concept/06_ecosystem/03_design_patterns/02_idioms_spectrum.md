@@ -14,7 +14,8 @@
 > [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) ·
 > [Rust Style Guide] · [Clippy Lints] ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
-> **基准版本**: Rust 1.97.0 stable (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
+> **Bloom 层级**: L6
 > **定理链**: N/A — 描述性/综述性/导航性文档，不涉及形式化定理链
 >
 > **来源**:
@@ -26,13 +27,13 @@
 > [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
-> **Bloom 层级**: L3-L5
-
 **变更日志**:
 
 - v1.0 (2026-05-21): 初始版本——七层惯用法谱系 + 等价变换 + 反惯用法判定树 + Clippy 对齐
 - v1.2 (2026-07-31): P4 国际化对齐——新增 `ManuallyDrop`、`scoped threads` 两个惯用法小节，新增「惯用法与 23/43 模式模型衔接」映射表
 - v1.3 (2026-07-31): 补全惯用法语义——新增 `Cow<T>`、所有权移动、`Deref`/`AsRef`/`Borrow` 边界、`MaybeUninit<T>`、unsafe 边界、错误处理全谱、`Iterator` 高级适配器、async 运行时、`no_std` 裸机九个小节。
+- v1.4 (2026-08-03): 提升为 L6 权威页；Bloom 层级统一为 L6；Rust 版本对齐 1.97.1+；补全 `matches!`、`vec![value; n]`、`collect()`、扩展 trait（extension trait）、默认 trait 方法、类型驱动设计等惯用法；将 RAII/Scopeguard 小节改为链接到 `34_ownership_as_resource_management.md` 与 `35_scope_guard_and_deferred_cleanup.md`；补充国际化权威来源链接。
+- v1.5 (2026-08-03): 补全 Builder 模式、零成本抽象、算法惯用法三个小节；权威来源索引拆分为 P1 学术/形式化来源与 P2 生态/官方/社区来源；全量 L0-L6 小节标题补齐。
 
 ---
 
@@ -50,51 +51,60 @@
     - [1.2 与 Clippy lint 的对齐](#12-与-clippy-lint-的对齐)
   - [二、惯用法谱系总览](#二惯用法谱系总览)
   - [三、L0 词法级惯用法](#三l0-词法级惯用法)
-    - [3.1](#31)
-    - [3.2](#32)
-    - [3.3](#33)
-    - [3.4](#34)
+    - [3.1 `?` 传播](#31--传播)
+    - [3.2 match 解构与 if let guards](#32-match-解构与-if-let-guards)
+    - [3.3 `if let` / `while let`](#33-if-let--while-let)
+    - [3.4 Iterator / Option 链式调用](#34-iterator--option-链式调用)
+    - [3.5 `matches!` 宏](#35-matches-宏)
+    - [3.6 `vec![value; n]` 重复字面量](#36-vecvalue-n-重复字面量)
   - [四、L1 类型级惯用法](#四l1-类型级惯用法)
-    - [4.1](#41)
-    - [4.2](#42)
-    - [4.3](#43)
-    - [4.4](#44)
+    - [4.1 Newtype](#41-newtype)
+    - [4.2 Typestate](#42-typestate)
+    - [4.3 PhantomData](#43-phantomdata)
+    - [4.4 零大小类型能力标记](#44-零大小类型能力标记)
+    - [4.5 类型驱动设计](#45-类型驱动设计)
+    - [4.6 Builder 模式](#46-builder-模式)
+    - [4.7 零成本抽象](#47-零成本抽象)
   - [五、L2 接口级惯用法](#五l2-接口级惯用法)
-    - [5.1](#51)
-    - [5.2](#52)
-    - [5.3](#53)
-    - [5.4](#54)
-    - [5.5](#55)
-    - [5.6](#56)
+    - [5.1 Into / From](#51-into--from)
+    - [5.2 Deref 多态](#52-deref-多态)
+    - [5.3 Trait Bound 组合](#53-trait-bound-组合)
+    - [5.4 Borrow / AsRef 参数化](#54-borrow--asref-参数化)
+    - [5.5 `Cow<T>`](#55-cowt)
+    - [5.6 Deref / AsRef / Borrow 边界选型](#56-deref--asref--borrow-边界选型)
+    - [5.7 默认 trait 方法](#57-默认-trait-方法)
+    - [5.8 扩展 trait (Extension Trait)](#58-扩展-trait-extension-trait)
   - [六、L3 资源级惯用法](#六l3-资源级惯用法)
-    - [6.1](#61)
-    - [6.2](#62)
-    - [6.3](#63)
-    - [6.4](#64)
-    - [6.5](#65)
-    - [6.6](#66)
-    - [6.7](#67)
-    - [6.8](#68)
+    - [6.1 RAII 资源管理](#61-raii-资源管理)
+    - [6.2 作用域守卫与延迟清理](#62-作用域守卫与延迟清理)
+    - [6.3 Pin 不动性](#63-pin-不动性)
+    - [6.4 内部可变性分层](#64-内部可变性分层)
+    - [6.5 ManuallyDrop](#65-manuallydrop)
+    - [6.6 所有权移动惯用法](#66-所有权移动惯用法)
+    - [6.7 MaybeUninit](#67-maybeuninit)
+    - [6.8 unsafe 边界](#68-unsafe-边界)
   - [七、L4 控制级惯用法](#七l4-控制级惯用法)
-    - [7.1](#71)
-    - [7.2](#72)
-    - [7.3](#73)
-    - [7.4](#74)
-    - [7.5](#75)
-    - [7.6](#76)
+    - [7.1 Iterator 消费链](#71-iterator-消费链)
+    - [7.2 递归 → 循环](#72-递归--循环)
+    - [7.3 早期返回与守卫子句](#73-早期返回与守卫子句)
+    - [7.4 `collect` 与 Turbofish](#74-collect-与-turbofish)
+    - [7.5 错误处理全谱](#75-错误处理全谱)
+    - [7.6 Iterator 高级适配器](#76-iterator-高级适配器)
+    - [7.7 `try_fold` 错误短路累加](#77-try_fold-错误短路累加)
+    - [7.8 算法惯用法](#78-算法惯用法)
   - [八、L5 并发级惯用法](#八l5-并发级惯用法)
-    - [8.1](#81)
-    - [8.2](#82)
-    - [8.3](#83)
-    - [8.4](#84)
-    - [8.5](#85)
-    - [8.6](#86)
+    - [8.1 Send/Sync 边界显式化](#81-sendsync-边界显式化)
+    - [8.2 Actor mailbox 单线程处理](#82-actor-mailbox-单线程处理)
+    - [8.3 CSP channel 所有权转移](#83-csp-channel-所有权转移)
+    - [8.4 无锁结构的 epoch 安全](#84-无锁结构的-epoch-安全)
+    - [8.5 结构化作用域线程](#85-结构化作用域线程)
+    - [8.6 async 运行时惯用法](#86-async-运行时惯用法)
   - [九、L6 架构级惯用法](#九l6-架构级惯用法)
-    - [9.1](#91)
-    - [9.2](#92)
-    - [9.3](#93)
-    - [9.4](#94)
-    - [9.5](#95)
+    - [9.1 Tower Service 态射复合](#91-tower-service-态射复合)
+    - [9.2 洋葱中间件模式](#92-洋葱中间件模式)
+    - [9.3 ECS 系统图与 Archetype](#93-ecs-系统图与-archetype)
+    - [9.4 错误内核模式](#94-错误内核模式)
+    - [9.5 `no_std` / 裸机惯用法](#95-no_std--裸机惯用法)
   - [十、反惯用法](#十反惯用法)
     - [常见反惯用清单](#常见反惯用清单)
   - [十一、Rust 1.95 新惯用法](#十一rust-195-新惯用法)
@@ -310,7 +320,7 @@ L0 是惯用法谱系的「零层」：单个表达式/语句层面的地道写�
 L0 惯用法的特点是「无争议」：它们不改变程序的抽象结构，只减少样板；clippy 的 `redundant_*`/`needless_*` lint 族大多作用于这一层。
 学习建议：L0 是「能编译」到「能读懂」的最短路径，任何新代码都应先过一遍 clippy 的 L0 级 lint。
 
-### 3.1
+### 3.1 `?` 传播
 
 > 来源: [Rust Reference §6.13](https://doc.rust-lang.org/reference/introduction.html) `?` 传播运算符
 > **惯用**: 在返回 `Result` 或 `Option` 的函数中，用 `?` 自动传播错误，替代显式 `match`。
@@ -352,7 +362,7 @@ fn read_file(path: &str) -> Result<String, io::Error> {
 
 **等价性**: `?` 是 `match` 的局部语法糖，不改变控制流语义。编译后生成相同的 MIR。 来源: [Rust Reference §6.13, TRPL §9](https://doc.rust-lang.org/reference/introduction.html)
 
-### 3.2
+### 3.2 match 解构与 if let guards
 
 > 来源: [Rust Reference §8, Rust 1.95 Release Notes](https://doc.rust-lang.org/reference/introduction.html) `match` 解构与模式守卫
 > **惯用**: 利用模式穷尽性检查和 `if` guards 将条件与解构合一。
@@ -377,31 +387,31 @@ fn classify(value: Option<Result<i32, Error>>) -> &'static str {
 
 **等价性**: `if let` guards 在语义上等价于嵌套 `match`，但减少了缩进层级和重复绑定。
 
-### 3.3
+### 3.3 `if let` / `while let`
 
 > 来源: [TRPL §6](https://doc.rust-lang.org/book/ch06-00-enums.html) `if let` / `while let` 局部绑定
-> **惯用**: 当只关心一个变体时，用 `if let` 替代 `match`。
+> **惯用**: 当只关心一个变体时，用 `if let` 替代 `match`；当需要循环处理同一模式直到耗尽时，用 `while let`。
 
-```rust,ignore
-use std::collections::HashMap;
+```rust
+fn main() {
+    let mut stack = vec![1, 2, 3];
 
-let map: HashMap<i32, String> = HashMap::new();
-let key = 0;
-fn process(_value: &String) {}
+    // 惯用：if let 局部绑定
+    if let Some(top) = stack.last() {
+        println!("top = {}", top);
+    }
 
-// 惯用：if let 局部绑定
-if let Some(value) = map.get(&key) {
-    process(value);
-}
-
-// 等价于：match（更冗长）
-match map.get(&key) {
-    Some(value) => process(value),
-    None => {},
+    // 惯用：while let 循环消费栈
+    while let Some(v) = stack.pop() {
+        println!("popped {}", v);
+    }
+    assert!(stack.is_empty());
 }
 ```
 
-### 3.4
+**等价性**: `if let PAT = EXPR { ... }` 等价于 `match EXPR { PAT => { ... }, _ => {} }`；`while let` 等价于重复 `match` 直到模式不匹配。二者均不改变控制流语义，只减少样板。 来源: [Rust Reference — if let expressions](https://doc.rust-lang.org/reference/expressions/if-expr.html) · [Rust Reference — while let loops](https://doc.rust-lang.org/reference/expressions/loop-expr.html#while-let-loops)
+
+### 3.4 Iterator / Option 链式调用
 
 > [Rust Iterator docs](https://doc.rust-lang.org/std/iter/trait.Iterator.html) 链式方法调用
 > **惯用**: 利用 `Iterator` 和 `Option`/`Result` 的链式方法组合计算。
@@ -425,6 +435,55 @@ for &n in &numbers {
 }
 ```
 
+### 3.5 `matches!` 宏
+
+> 来源: [Rust Reference — Macro `matches!`](https://doc.rust-lang.org/std/macro.matches.html) · [Rust 1.42 Release Notes](https://blog.rust-lang.org/2020/03/12/Rust-1.42.html)
+> **惯用**: 用 `matches!(value, pattern)` 将模式检查表达为布尔表达式，替代显式 `match` 或 `if let`。
+
+```rust
+#[derive(Debug, PartialEq)]
+enum Status { Idle, Running(u32), Error }
+
+fn main() {
+    let s = Status::Running(42);
+
+    // 惯用：matches! 作为布尔表达式
+    assert!(matches!(s, Status::Running(_)));
+    assert!(!matches!(s, Status::Error));
+
+    // 也可带守卫
+    assert!(matches!(s, Status::Running(n) if n > 10));
+}
+```
+
+**等价性**: `matches!(x, P)` 在语义上等价于 `match x { P => true, _ => false }`，但可直接嵌入 `if`、`assert!` 或闭包中，减少嵌套。 来源: [Rust Design Patterns — matches!](https://rust-unofficial.github.io/patterns/idioms/matches.html)
+
+### 3.6 `vec![value; n]` 重复字面量
+
+> 来源: [The Rust Reference — Array Expressions](https://doc.rust-lang.org/reference/expressions/array-expr.html) · [Rust by Example — vec!](https://doc.rust-lang.org/rust-by-example/std/vec.html)
+> **惯用**: 用 `vec![value; n]` 创建包含 `n` 个相同值的 `Vec`，避免手写循环。
+
+```rust
+fn main() {
+    // 惯用：重复字面量
+    let zeros = vec![0; 5];
+    assert_eq!(zeros, vec![0, 0, 0, 0, 0]);
+
+    // 也可以从列表构造
+    let nums = vec![1, 2, 3];
+    assert_eq!(nums.len(), 3);
+
+    // 非惯用：等价的命令式构造
+    let mut zeros_manual = Vec::with_capacity(5);
+    for _ in 0..5 {
+        zeros_manual.push(0);
+    }
+    assert_eq!(zeros, zeros_manual);
+}
+```
+
+**边界**: `vec![value; n]` 要求元素类型实现 `Clone`（因为 `n` 个值共享同一个初始化值）。对于非 `Clone` 类型，需使用 `std::iter::repeat_with` 或显式循环。 来源: [std::vec! macro](https://doc.rust-lang.org/std/macro.vec.html)
+
 ---
 
 ## 四、L1 类型级惯用法
@@ -438,7 +497,7 @@ L1 类型级惯用法利用类型系统本身消除错误类别，四个代表�
 
 判定依据：发现基本类型（`u64`/`String`）在 API 边界裸奔 → Newtype；发现「运行时检查是否已初始化」的注释 → Typestate。
 
-### 4.1
+### 4.1 Newtype
 
 > 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) Newtype 模式
 > **惯用**: 用单字段元组结构体（Struct）为已有类型赋予新的语义身份，零运行时（Runtime）成本。
@@ -459,7 +518,7 @@ impl Meters {
 
 **等价性**: `struct Meters(u64)` 与 `u64` 在内存布局上完全等价（`#[repr(transparent)]` 保证），但类型系统（Type System）将其视为不兼容类型。
 
-### 4.2
+### 4.2 Typestate
 
 > [Rust Design Patterns, Typestate](https://rust-unofficial.github.io/patterns/)) Typestate 模式
 > **惯用**: 利用泛型（Generics）和 `PhantomData` 将状态编码到类型中，使非法状态不可表示。
@@ -498,7 +557,7 @@ impl Client<Connected> {
 // client.connect("..."); // 编译错误！Client<Connected> 无 connect 方法
 ```
 
-### 4.3
+### 4.3 PhantomData
 
 > 来源: [Rustonomicon §4.6](https://doc.rust-lang.org/nomicon/index.html) PhantomData 标记
 > **惯用**: 用 `PhantomData` 在不占用内存的情况下，向类型系统（Type System）传递额外的约束信息。
@@ -520,7 +579,7 @@ struct MyBox<T> {
 }
 ```
 
-### 4.4
+### 4.4 零大小类型能力标记
 
 > 来源: [Rust Reference §6.28](https://doc.rust-lang.org/reference/introduction.html) Zero-Sized Types (ZST)
 > **惯用**: 利用零大小类型（如 `()`、`PhantomData<T>`、`!`）作为编译期标记，无运行时（Runtime）开销。
@@ -549,13 +608,241 @@ impl FileHandle<WritePermission> {
 }
 ```
 
+### 4.5 类型驱动设计
+
+> **EN**: Type-Driven Design
+> **Summary**: Encode domain invariants and protocol states in the type system so that illegal states, transitions, and representations become unrepresentable at compile time.
+
+> 来源: [Rust Design Patterns — Typestate](https://rust-unofficial.github.io/patterns/idioms/typestate.html) · [Parse, don't validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+
+**概念与属性**
+
+类型驱动设计不是单一技巧，而是将「运行时检查」前移到「类型构造」的设计哲学：
+
+- **Newtype**：区分同一底层类型的不同语义（`UserId` vs `OrderId`）。
+- **Typestate**：用泛型参数编码合法状态转移（`Client<Disconnected>` vs `Client<Connected>`）。
+- **Parse, don't validate**：校验一次后产出强类型值，下游函数签名即保证合法。
+- **枚举穷尽性**：用 `enum` 建模互斥状态空间，`match` 保证所有分支被处理。
+
+这些技术的共同目标：**让非法状态不可表示（make illegal states unrepresentable）**，从而把大量运行时错误转化为编译期错误。
+
+**正例**：
+
+```rust
+use std::str::FromStr;
+
+// 类型驱动：Email 一旦构造成功就一定是合法格式
+#[derive(Debug, Clone, PartialEq)]
+struct Email(String);
+
+#[derive(Debug, PartialEq)]
+struct InvalidEmail;
+
+impl FromStr for Email {
+    type Err = InvalidEmail;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        if s.contains('@') && !s.is_empty() {
+            Ok(Email(s.to_string()))
+        } else {
+            Err(InvalidEmail)
+        }
+    }
+}
+
+fn send_email(to: &Email, subject: &str) {
+    println!("sending '{}' to {:?}", subject, to.0);
+}
+
+fn main() {
+    let email: Email = "user@example.com".parse().expect("valid email");
+    send_email(&email, "Hello");
+
+    // 反例：如果 send_email 接受 &str，则每次调用前都要重复校验
+    // send_email("not-an-email", "Oops"); // 编译错误：类型不匹配
+}
+```
+
+**反例/陷阱**：
+
+```rust,ignore
+// 非类型驱动：到处用裸 String 表示 email，重复校验
+fn send_email_raw(to: &str, subject: &str) {
+    assert!(to.contains('@')); // 运行时检查，容易被遗漏
+    println!("sending '{}' to {}", subject, to);
+}
+```
+
+**思维导图**：
+
+```mermaid
+mindmap
+  root((类型驱动设计))
+    Newtype[Newtype<br/>语义区分]
+    Typestate[Typestate<br/>状态机]
+    ParseDontValidate[Parse, don't validate<br/>一次校验]
+    ExhaustiveMatch[穷尽 match<br/>分支覆盖]
+```
+
+**决策树**：
+
+```mermaid
+graph TD
+    A[需要保证某个值满足不变式?] -->|是| B{该不变式能否在构造时验证?}
+    B -->|是| C[封装为强类型<br/>下游签名直接要求该类型]
+    B -->|否| D[用 Typestate/PhantomData 编码状态]
+    A -->|否| E[保留原始类型]
+```
+
+### 4.6 Builder 模式
+
+> **EN**: Builder Pattern
+> **Summary**: Construct complex objects step-by-step with a consuming builder that enforces required fields and prevents invalid intermediate states.
+
+> 来源: [Rust Design Patterns — Builder](https://rust-unofficial.github.io/patterns/creational/builder.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+
+**概念与属性**
+
+Builder 模式将复杂对象的构造拆分为多个步骤，解决「构造器参数过多」或「某些字段必须在其他字段之前设置」的问题。Rust 中惯用的 Builder：
+
+- **独立 `Builder` 类型**：与被构建类型分离，拥有 `self` 消费式链式方法。
+- **必填字段在 `build()` 中校验**：利用类型系统或运行时检查，保证产物合法。
+- **消费 `self`**：防止同一个 builder 被复用，避免部分构造状态污染。
+
+**正例**：
+
+```rust
+#[derive(Debug, PartialEq)]
+struct Request {
+    method: String,
+    url: String,
+    headers: Vec<(String, String)>,
+    body: Option<String>,
+}
+
+#[derive(Debug, Default)]
+struct RequestBuilder {
+    method: Option<String>,
+    url: Option<String>,
+    headers: Vec<(String, String)>,
+    body: Option<String>,
+}
+
+impl RequestBuilder {
+    fn new() -> Self {
+        Self::default()
+    }
+
+    fn method(mut self, m: impl Into<String>) -> Self {
+        self.method = Some(m.into());
+        self
+    }
+
+    fn url(mut self, u: impl Into<String>) -> Self {
+        self.url = Some(u.into());
+        self
+    }
+
+    fn header(mut self, k: impl Into<String>, v: impl Into<String>) -> Self {
+        self.headers.push((k.into(), v.into()));
+        self
+    }
+
+    fn body(mut self, b: impl Into<String>) -> Self {
+        self.body = Some(b.into());
+        self
+    }
+
+    fn build(self) -> Result<Request, &'static str> {
+        Ok(Request {
+            method: self.method.ok_or("method is required")?,
+            url: self.url.ok_or("url is required")?,
+            headers: self.headers,
+            body: self.body,
+        })
+    }
+}
+
+fn main() {
+    let req = RequestBuilder::new()
+        .method("GET")
+        .url("https://example.com")
+        .header("Accept", "application/json")
+        .build()
+        .unwrap();
+    assert_eq!(req.method, "GET");
+}
+```
+
+**反例/陷阱**：
+
+```rust,ignore
+// 非惯用：构造器参数过多，调用时难以辨认每个参数含义
+let req = Request::new("GET", "https://example.com", vec![], None, true, false);
+```
+
+**与 Typestate 结合**：对「必须在设置 B 之前设置 A」的强约束，可用 Typestate 在编译期保证顺序，而普通 Builder 更适合可选字段多的场景。
+
+### 4.7 零成本抽象
+
+> **EN**: Zero-Cost Abstractions
+> **Summary**: Prefer abstractions that compile away, leaving no runtime overhead compared to hand-written low-level code.
+
+> 来源: [TRPL §13 — Performance](https://doc.rust-lang.org/book/ch13-04-performance.html) · [Rustonomicon — Zero-Cost Abstractions](https://doc.rust-lang.org/nomicon/index.html) · [Boehm — Zero-Overhead Principle](https://www.open-std.org/jtc1/sc22/wg21/docs/DPL/1767.pdf)
+
+**概念与属性**
+
+零成本抽象是 Rust 的核心设计承诺：**你不需要为没有使用的东西付费；你使用的东西，其成本不会高于手工实现**。典型体现：
+
+- **迭代器链**：高阶组合子经 LLVM 内联后等价于手写循环。
+- **Newtype / 泛型**：编译期类型擦除或单态化，不引入运行时开销。
+- **Trait 对象 vs 泛型**：泛型通过单态化实现零成本；`dyn Trait` 有动态分发成本，仅在需要运行时多态时使用。
+- **`?` 传播 / `match`**：控制流糖展开为等效分支。
+
+**正例**：
+
+```rust
+fn sum_of_squares(numbers: &[i32]) -> i32 {
+    numbers
+        .iter()
+        .filter(|&&n| n > 0)
+        .map(|n| n * n)
+        .sum()
+}
+
+fn main() {
+    let v = vec![-2, -1, 0, 1, 2, 3];
+    assert_eq!(sum_of_squares(&v), 14); // 1 + 4 + 9
+}
+```
+
+**反例/陷阱**：
+
+```rust,ignore
+// 非零成本：在热路径上使用 dyn Trait 或 Box<dyn Fn> 而未度量
+fn hot_path(values: &[i32], f: Box<dyn Fn(i32) -> i32>) -> i32 {
+    values.iter().map(|&n| f(n)).sum()
+}
+```
+
+**决策树**：
+
+```mermaid
+graph TD
+    A[需要抽象?] -->|是| B{是否需要运行时多态?}
+    B -->|否| C[使用泛型/Newtype/Iterator 链<br/>零成本]
+    B -->|是| D{性能是否可接受?}
+    D -->|是| E[使用 dyn Trait / enum dispatch]
+    D -->|否| F[重新设计为静态分发]
+```
+
 ---
 
 ## 五、L2 接口级惯用法
 
 接口级惯用法决定 crate 的 API 是否“像 Rust”。四条核心规则来自 Rust API Guidelines：实现 `From<T>` 自动获得 `Into<U>`（转换语义单向实现、双向可用）；`AsRef`/`Borrow` 让函数接受更宽泛的借用（Borrowing）类型；`Deref` 只用于智能指针（Smart Pointer）语义而非继承模拟；迭代器（Iterator）适配器优先于显式循环暴露内部结构。共同判据：接口应让调用方写更少的类型标注、犯更少的转换错误。
 
-### 5.1
+### 5.1 Into / From
 
 > 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) Into/From 转换链
 > **惯用**: 实现 `From<T>` 自动获得 `Into<U>`，利用类型推断（Type Inference）隐式转换。
@@ -578,7 +865,7 @@ fn connect(port: impl Into<Port>) {
 connect(8080u16); // Into::into(8080u16)
 ```
 
-### 5.2
+### 5.2 Deref 多态
 
 > 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) Deref/DerefMut 多态
 > **惯用**: 为智能指针（Smart Pointer）和包装类型实现 `Deref`，使其透明地代理内部值的方法。
@@ -603,7 +890,7 @@ let first = buf.first(); // 透明调用 [T]::first
 
 > **边界**: 过度使用 `Deref` 会导致「隐式转换陷阱」——用户可能意识不到正在通过代理调用。仅对「明显是某种类型的智能指针（Smart Pointer）/包装器」使用。 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 
-### 5.3
+### 5.3 Trait Bound 组合
 
 > 来源: [TRPL §10](https://doc.rust-lang.org/book/ch10-00-generics.html) Trait Bound 组合
 > **惯用**: 用 `+` 组合 trait bounds 表达「能力交集」，用 `where` 子句处理复杂约束。
@@ -625,7 +912,7 @@ where
 fn callback() -> impl Fn() + use<> { || {} }
 ```
 
-### 5.4
+### 5.4 Borrow / AsRef 参数化
 
 > 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) Borrow/AsRef 参数化
 > **惯用**: 函数参数接受 `&str` 而非 `&String`，`&[T]` 而非 `&Vec<T>`，最大化调用灵活性。
@@ -642,7 +929,7 @@ greeting(&String::from("Rust")); // &String → 自动解引用为 &str
 greeting(&"Rust".to_owned());    // &String
 ```
 
-### 5.5
+### 5.5 `Cow<T>`
 
 **`Cow<T>`：按需克隆的借用/拥有二相性**
 
@@ -723,7 +1010,7 @@ graph TD
     F -->|是| G[使用 T / String / Vec<T>]
 ```
 
-### 5.6
+### 5.6 Deref / AsRef / Borrow 边界选型
 
 **Deref / AsRef / Borrow 边界选型**
 
@@ -805,6 +1092,130 @@ graph TD
     G -->|否| I[保持普通方法或新类型]
 ```
 
+### 5.7 默认 trait 方法
+
+> **EN**: Default Trait Methods
+> **Summary**: Provide default implementations for trait methods so that implementors only need to override behavior that actually differs.
+
+> 来源: [Rust Reference — Trait Items](https://doc.rust-lang.org/reference/items/traits.html) · [TRPL §10.2](https://doc.rust-lang.org/book/ch10-02-traits.html)
+
+**概念与属性**
+
+Trait 中的方法可以带有默认实现。实现者可以选择：
+
+- **不重写**：直接继承默认行为，减少样板代码。
+- **重写**：提供自定义行为。
+
+默认方法常与关联类型、泛型约束结合，使 trait 既灵活又有合理的「开箱即用」行为。
+
+**正例**：
+
+```rust
+trait Greet {
+    fn name(&self) -> &str;
+
+    // 默认实现：利用 name() 构造问候语
+    fn greet(&self) -> String {
+        format!("Hello, {}!", self.name())
+    }
+}
+
+struct User { name: String }
+
+impl Greet for User {
+    fn name(&self) -> &str { &self.name }
+    // greet 使用默认实现
+}
+
+struct Robot { id: u32 }
+
+impl Greet for Robot {
+    fn name(&self) -> &str { "Robot" }
+
+    fn greet(&self) -> String {
+        format!("Beep boop, I am #{}", self.id)
+    }
+}
+
+fn main() {
+    let u = User { name: "Ada".into() };
+    let r = Robot { id: 42 };
+    println!("{}", u.greet());
+    println!("{}", r.greet());
+}
+```
+
+**反例/陷阱**：
+
+```rust,ignore
+trait Logger {
+    fn log(&self, msg: &str);
+    // 如果此处忘记默认实现，所有实现者都必须写重复的空实现或简单实现
+}
+```
+
+### 5.8 扩展 trait (Extension Trait)
+
+> **EN**: Extension Trait
+> **Summary**: Add methods to foreign types by defining a new trait with a blanket or targeted impl, without modifying the original type.
+
+> 来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns — Extension Traits](https://rust-unofficial.github.io/patterns/idioms/extension-traits.html)
+
+**概念与属性**
+
+扩展 trait（也称 "extension trait"、"blanket impl"）是为**无法修改的外部类型**添加方法的技术：
+
+- 定义一个新 trait，包含想要的方法。
+- 为外部类型实现该 trait（通常用 blanket impl 覆盖整个 trait 族）。
+- 调用方通过 `use ExtTrait;` 将方法引入作用域。
+
+这与 Ruby 的 monkey-patching 不同：扩展 trait 是显式的、受作用域控制的，不会全局污染类型。
+
+**正例**：
+
+```rust
+// 为所有 Iterator 添加一个便捷方法
+trait IteratorExt: Iterator {
+    fn sum_positives(self) -> <Self as Iterator>::Item
+    where
+        Self: Sized,
+        <Self as Iterator>::Item: Default + std::ops::Add<Output = <Self as Iterator>::Item>,
+        <Self as Iterator>::Item: PartialOrd,
+    {
+        self.filter(|x| *x > <Self as Iterator>::Item::default())
+            .fold(<Self as Iterator>::Item::default(), |a, b| a + b)
+    }
+}
+
+impl<I: Iterator> IteratorExt for I {}
+
+fn main() {
+    let v = vec![-1, 2, -3, 4];
+    assert_eq!(v.into_iter().sum_positives(), 6);
+}
+```
+
+**反例/陷阱**：
+
+```rust,ignore
+// 不要为过于宽泛的类型实现扩展 trait，以免造成方法名冲突或意外可用性
+impl<T> IteratorExt for T { ... } // 错误：T 不一定实现 Iterator
+```
+
+**思维导图**：
+
+```mermaid
+mindmap
+  root((接口级惯用法))
+    IntoFrom[Into/From<br/>隐式转换]
+    Deref[Deref<br/>智能指针透明]
+    TraitBounds[Trait Bound 组合]
+    AsRefBorrow[AsRef/Borrow<br/>参数泛化]
+    Cow[Cow<T><br/>写时克隆]
+    DefaultMethod[默认 trait 方法<br/>减少样板]
+    ExtensionTrait[扩展 trait<br/>为外部类型加方法]
+```
+
 ---
 
 ## 六、L3 资源级惯用法
@@ -818,48 +1229,29 @@ L3 资源级惯用法处理「获取-使用-释放」的完整周期，四个代
 
 L3 与 L2 的分界：L2 管「接口形状」，L3 管「接口背后的资源生命周期」——一个 API 可以 L2 满分但 L3 泄漏（如返回裸指针要求调用方释放）。
 
-### 6.1
+### 6.1 RAII 资源管理
 
-> 来源: [Rust Reference §10.8](https://doc.rust-lang.org/reference/introduction.html) RAII 守卫模式
+> 来源: [Rust Reference §10.8](https://doc.rust-lang.org/reference/introduction.html) RAII 守卫模式 · [Rustonomicon — RAII](https://doc.rust-lang.org/nomicon/raii.html)
 > **惯用**: 将资源获取与释放绑定到值的生命周期（Lifetimes），利用 `Drop` 自动清理。
 
-```rust,ignore
-use std::sync::Mutex;
+本节内容已在权威页详细展开，请参阅：
 
-let mutex = Mutex::new(0);
+> **权威来源**: [`concept/06_ecosystem/03_design_patterns/34_ownership_as_resource_management.md`](34_ownership_as_resource_management.md)
+>
+> 该页覆盖 RAII 工程实践、Drop order、并发 RAII、跨语言对比（Go/Zig/D）及测试策略。
 
-// 惯用：RAII 锁守卫
-{
-    let guard = mutex.lock().unwrap(); // 获取锁
-    // guard 在作用域结束时自动释放锁（Drop）
-    *guard += 1;
-} // 锁在此释放
+### 6.2 作用域守卫与延迟清理
 
-// 等价非惯用（显式释放，易遗漏）：
-// mutex.lock();
-// *data += 1;
-// mutex.unlock(); // 易遗漏！panic 时不会执行
-```
-
-### 6.2
-
-> [scopeguard crate docs](https://docs.rs/scopeguard/latest/scopeguard/) Scopeguard 退出处理
+> 来源: [scopeguard crate docs](https://docs.rs/scopeguard/latest/scopeguard/) · [Rustonomicon — RAII Guards](https://doc.rust-lang.org/nomicon/raii.html)
 > **惯用**: 用 `scopeguard` crate 或自定义守卫，保证「无论是否 panic，退出时执行某操作」。
 
-```rust,ignore
-// 惯用：scopeguard 保证退出处理
-use scopeguard::defer;
+本节内容已在权威页详细展开，请参阅：
 
-fn critical_section() {
-    let mut resource = acquire();
-    defer! {
-        cleanup(&mut resource); // 无论是否 panic，此代码在退出时执行
-    }
-    // ... 可能 panic 的操作
-}
-```
+> **权威来源**: [`concept/06_ecosystem/03_design_patterns/35_scope_guard_and_deferred_cleanup.md`](35_scope_guard_and_deferred_cleanup.md)
+>
+> 该页覆盖 `defer!` 宏、`ScopeGuard::with_strategy`、手写 std-only guard、与 RAII/`?` 的集成及反例。
 
-### 6.3
+### 6.3 Pin 不动性
 
 > 来源: [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html) Pin 不动性契约
 > **惯用**: 对自引用（Reference）结构和异步（Async） Future 使用 `Pin<&mut T>`，保证内存位置稳定。
@@ -889,7 +1281,7 @@ impl SelfReferential {
 }
 ```
 
-### 6.4
+### 6.4 内部可变性分层
 
 > 来源: [Rustonomicon §7, Rust std docs](https://doc.rust-lang.org/nomicon/index.html) 内部可变性分层
 > **惯用**: 根据场景选择适当的内部可变性原语，形成安全梯度。
@@ -903,7 +1295,7 @@ impl SelfReferential {
 | `RwLock<T>` | 是 | 是（OS 锁） | 多线程多读单写 |
 | `AtomicT` | 是 | 无（硬件指令） | 简单类型的无锁操作 |
 
-### 6.5
+### 6.5 ManuallyDrop
 
 > 来源: [Rustonomicon §4.5](https://doc.rust-lang.org/nomicon/perf-profiling.html) · [std::mem::ManuallyDrop](https://doc.rust-lang.org/std/mem/struct.ManuallyDrop.html) ManuallyDrop：显式控制析构
 > **惯用**: 当需要手动决定资源释放时机、抑制默认 `Drop` 或实现自定义释放协议时，使用 `ManuallyDrop<T>` 包装值。
@@ -938,7 +1330,7 @@ impl RawBuffer {
 
 **等价性**: `ManuallyDrop<T>` 与 `T` 同布局，仅在元层面抑制 `Drop` 调用的自动注入；不引入运行时开销。它与 `mem::forget` 的区别在于保留了值的所有权，可在之后手动析构。
 
-### 6.6
+### 6.6 所有权移动惯用法
 
 **所有权移动惯用法：`move`、`mem::take/replace`、`Option::take`**
 
@@ -1022,7 +1414,7 @@ graph TD
     F -->|否| H[重新设计所有权流或使用 unsafe]
 ```
 
-### 6.7
+### 6.7 MaybeUninit
 
 **`MaybeUninit<T>`：延迟初始化与数组安全构造**
 
@@ -1106,7 +1498,7 @@ graph TD
     A -->|否| E[直接使用 T / Default]
 ```
 
-### 6.8
+### 6.8 unsafe 边界
 
 **unsafe 惯用法边界：raw pointer、`transmute` 与 SAFETY 注释**
 
@@ -1198,7 +1590,7 @@ L4 控制级惯用法处理错误与可选性的传播链：
 
 判定依据：函数体出现 3 层以上缩进 → 用 let-else/组合子重构；错误吞掉（`let _ = ...`）→ 必须注释理由。
 
-### 7.1
+### 7.1 Iterator 消费链
 
 > [Rust Iterator docs, LLVM 优化指南](https://doc.rust-lang.org/std/iter/trait.Iterator.html) Iterator 消费链
 > **惯用**: 用 Iterator 的懒性求值链替代命令式循环，利用 LLVM 优化生成高效代码。
@@ -1217,7 +1609,7 @@ let max_even: Option<i32> = numbers
 // 实际性能与手写循环等价或更优
 ```
 
-### 7.2
+### 7.2 递归 → 循环
 
 > 来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/) 递归 → 循环变换
 > **惯用**: 当递归深度不可预测时，用显式栈或 `loop` 替代递归，避免栈溢出。
@@ -1244,7 +1636,7 @@ fn sum_fold(nums: &[i32]) -> i32 {
 }
 ```
 
-### 7.3
+### 7.3 早期返回与守卫子句
 
 > [Rust Style Guide](https://doc.rust-lang.org/style-guide/index.html) 早期返回与守卫子句
 > **惯用**: 用早期返回减少嵌套层级，用守卫子句（guard clause）快速排除非法输入。
@@ -1278,7 +1670,7 @@ fn process(data: Option<&[u8]>) -> Result<Output, Error> {
 // }
 ```
 
-### 7.4
+### 7.4 `collect` 与 Turbofish
 
 > [Rust docs, collect 方法](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect) `collect` 与 Turbofish
 > **惯用**: 用 `collect::<Vec<_>>()`（turbofish）显式指定目标类型，或利用类型推断（Type Inference）让编译器推断。
@@ -1291,7 +1683,7 @@ let squares: Vec<i32> = (0..10).map(|n| n * n).collect();
 let squares = (0..10).map(|n| n * n).collect::<Vec<i32>>();
 ```
 
-### 7.5
+### 7.5 错误处理全谱
 
 **错误处理惯用法全谱：从 `ok_or` 到 `thiserror`/`anyhow`**
 
@@ -1395,7 +1787,7 @@ graph TD
     I -->|是| J[map_err]
 ```
 
-### 7.6
+### 7.6 Iterator 高级适配器
 
 **Iterator 高级适配器：`try_fold`、`peekable`、`fuse`、`cycle`**
 
@@ -1475,6 +1867,151 @@ graph TD
     I -->|是| J[fuse]
 ```
 
+### 7.7 `try_fold` 错误短路累加
+
+> **EN**: Short-Circuit Aggregation with `try_fold`
+> **Summary**: Use `Iterator::try_fold` to traverse a sequence while accumulating a result and stopping immediately on the first `Err` or `None`.
+
+> 来源: [Rust std — `Iterator::try_fold`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.try_fold) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+
+**概念与属性**
+
+`try_fold` 是 `fold` 的容错版本：
+
+- 接收初始累加器和闭包 `FnMut(Acc, Item) -> Result<Acc, E>` 或 `Option<Acc>`。
+- 每次迭代尝试更新累加器；一旦闭包返回 `Err`/`None`，整个遍历立即短路返回。
+- 与 `?` 传播配合极佳：可在闭包内部调用可能失败的子操作。
+
+**正例**：
+
+```rust
+fn parse_and_sum(numbers: &[&str]) -> Result<i32, std::num::ParseIntError> {
+    numbers
+        .iter()
+        .try_fold(0, |acc, s| {
+            let n = s.parse::<i32>()?; // 失败立即短路
+            Ok(acc + n)
+        })
+}
+
+fn main() {
+    assert_eq!(parse_and_sum(&["1", "2", "3"]).unwrap(), 6);
+    assert!(parse_and_sum(&["1", "x", "3"]).is_err());
+}
+```
+
+**反例/陷阱**：
+
+```rust,ignore
+// 非惯用：手写循环 + 提前返回，丢失了 Iterator 的惰性组合能力
+fn parse_and_sum_manual(numbers: &[&str]) -> Result<i32, std::num::ParseIntError> {
+    let mut sum = 0;
+    for s in numbers {
+        sum += s.parse::<i32>()?;
+    }
+    Ok(sum)
+}
+```
+
+**思维导图**：
+
+```mermaid
+mindmap
+  root((try_fold))
+    fold[fold：无条件累加]
+    try_fold[try_fold：遇 Err/None 短路]
+    try_for_each[try_for_each：仅副作用]
+    question_mark[闭包内可用 ?]
+```
+
+### 7.8 算法惯用法
+
+> **EN**: Algorithm Idioms
+> **Summary**: Express common algorithmic patterns—sorting, grouping, windowing, memoization, and two-pointer scans—using the standard library and ownership-aware data structures.
+
+> 来源: [Rust Standard Library — Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html) · [Rust Algorithm Club](https://rust-algo.club/) · [The Rust Performance Book](https://nnethercote.github.io/perf-book/)
+
+**概念与属性**
+
+Rust 的算法惯用法强调：
+
+- **优先使用标准库**：`sort`、`binary_search`、`chunks`、`windows`、`dedup` 等已优化实现。
+- **迭代器表达算法**：filter/map/fold/scan 组合子通常比手写循环更短且同样高效。
+- **所有权感知**：利用 `Vec`、`HashMap`、`BTreeMap` 等的 move/borrow 语义避免不必要的克隆。
+- **Memoization 与 DP**：用 `Vec` 或 `HashMap` 缓存子问题结果，状态转移用纯函数表达。
+
+**正例**：
+
+```rust
+use std::collections::HashMap;
+
+// 惯用：分组计数
+fn frequency(nums: &[i32]) -> HashMap<i32, usize> {
+    nums.iter().fold(HashMap::new(), |mut acc, &n| {
+        *acc.entry(n).or_insert(0) += 1;
+        acc
+    })
+}
+
+// 惯用：滑动窗口
+fn max_sum_window(nums: &[i32], k: usize) -> Option<i32> {
+    if k == 0 || nums.len() < k { return None; }
+    let mut window: i32 = nums[..k].iter().sum();
+    let mut best = window;
+    for i in k..nums.len() {
+        window += nums[i] - nums[i - k];
+        best = best.max(window);
+    }
+    Some(best)
+}
+
+// 惯用：记忆化斐波那契
+fn fib(n: usize, memo: &mut [Option<u64>]) -> u64 {
+    if let Some(v) = memo[n] { return v; }
+    let v = match n {
+        0 => 0,
+        1 => 1,
+        _ => fib(n - 1, memo) + fib(n - 2, memo),
+    };
+    memo[n] = Some(v);
+    v
+}
+
+fn main() {
+    assert_eq!(frequency(&[1, 2, 2, 3, 2]).get(&2), Some(&3));
+    assert_eq!(max_sum_window(&[1, 2, 3, 4, 5], 2), Some(9));
+    let mut memo = vec![None; 20];
+    assert_eq!(fib(10, &mut memo), 55);
+}
+```
+
+**反例/陷阱**：
+
+```rust,ignore
+// 非惯用：递归无 memo，指数级复杂度
+fn fib_naive(n: u64) -> u64 {
+    match n {
+        0 => 0,
+        1 => 1,
+        _ => fib_naive(n - 1) + fib_naive(n - 2),
+    }
+}
+```
+
+**思维导图**：
+
+```mermaid
+mindmap
+  root((算法惯用法))
+    frequency[HashMap 计数]
+    window[滑动窗口]
+    memo[记忆化 / DP]
+    twopointer[双指针]
+    sort[std 排序与二分]
+```
+
+> **扩展阅读**: 经典数据结构（并查集、线段树、Fenwick 树）的 Rust 所有权感知实现见 [`concept/06_ecosystem/16_algorithm_patterns/02_ownership_aware_data_structures.md`](../16_algorithm_patterns/02_ownership_aware_data_structures.md)；图算法（BFS/DFS/Dijkstra/Bellman-Ford）的借用纪律与并行 frontier 见 [`03_graph_algorithms_in_rust.md`](../16_algorithm_patterns/03_graph_algorithms_in_rust.md)；缓存友好与 SIMD 优化见 [`04_cache_friendly_and_simd_algorithms.md`](../16_algorithm_patterns/04_cache_friendly_and_simd_algorithms.md)。
+
 ---
 
 ## 八、L5 并发级惯用法
@@ -1488,7 +2025,7 @@ L5 并发级惯用法的四个支柱：
 
 判定依据：代码中 `Arc<Mutex>` 数量 >5 且锁内逻辑复杂 → 考虑 actor 化（单所有者任务 + 通道）。
 
-### 8.1
+### 8.1 Send/Sync 边界显式化
 
 > 来源: [TRPL §16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) Send/Sync 边界显式化
 > **惯用**: 通过 `#[derive]` 或显式 `unsafe impl` 标记类型的线程安全属性，利用编译器推导复合类型的安全性。
@@ -1513,7 +2050,7 @@ struct LocalCache {
 // LocalCache 是 Send（若 T 是 Send），但不是 Sync
 ```
 
-### 8.2
+### 8.2 Actor mailbox 单线程处理
 
 > [Hewitt 1973, Actix docs](https://www.ijcai.org/Proceedings/73/Papers/027B.pdf) Actor mailbox 单线程处理
 > **惯用**: 利用 Actor 模型的单线程消息处理，避免显式锁，编译期保证状态独占访问。
@@ -1545,7 +2082,7 @@ impl Actor<CounterMsg> for CounterActor {
 // 无需 Mutex！编译期保证单线程访问
 ```
 
-### 8.3
+### 8.3 CSP channel 所有权转移
 
 > [Hoare CSP 1978, Rust std docs](https://doi.org/10.1145/359576.359585) CSP channel 所有权（Ownership）转移
 > **惯用**: 通过 channel 发送值时利用 move 语义，编译期排除 use-after-send。
@@ -1565,7 +2102,7 @@ tx.send(data).unwrap(); // data 的所有权转移到 channel
 let received = rx.recv().unwrap(); // 所有权从 channel 转移到 received
 ```
 
-### 8.4
+### 8.4 无锁结构的 epoch 安全
 
 > [crossbeam-epoch docs](https://docs.rs/crossbeam-epoch/latest/crossbeam_epoch/) 无锁结构的 epoch 安全
 > **惯用**: 使用 `crossbeam-epoch` 实现无锁数据结构的内存安全（Memory Safety）回收。
@@ -1607,7 +2144,7 @@ fn pop<T>(head: &Atomic<Node<T>>) -> Option<T> {
 }
 ```
 
-### 8.5
+### 8.5 结构化作用域线程
 
 > [Rust 1.63 RFC — Scoped Threads](https://rust-lang.github.io/rfcs/3151-scoped-threads.html) · [std::thread::scope](https://doc.rust-lang.org/std/thread/fn.scope.html) 结构化作用域线程
 > **惯用**: 用 `std::thread::scope` 启动借用栈上数据的线程，保证所有子线程在作用域结束前汇合，避免 `Arc` 与 `'static` 闭包的额外开销。
@@ -1633,7 +2170,7 @@ fn parallel_sum(data: &[i32]) -> i32 {
 
 **等价性**: `scope(f)` 在 `f` 返回前 join 所有由 `s` 派生的线程，因此 `s.spawn` 的闭包可安全捕获非 `'static` 引用。与 `thread::spawn` 要求 `'static` 闭包相比，省去了 `Arc` 原子计数与堆分配，是零成本的结构化并发原语。
 
-### 8.6
+### 8.6 async 运行时惯用法
 
 **async 运行时惯用法：`Pin`、任务调度、取消安全与背压**
 
@@ -1736,7 +2273,7 @@ L6 架构级惯用法是「跨模块（Module）/跨 crate 的结构决策」，
 
 L6 与 L5 的分界：L5 管「并发拓扑」（任务/通道的组织），L6 管「代码组织拓扑」（模块/crate/依赖的组织）——两者正交但互相约束（actor 架构往往要求特定的 crate 划分）。
 
-### 9.1
+### 9.1 Tower Service 态射复合
 
 > [Tower docs, Category Theory](https://docs.rs/tower/latest/tower/) Tower Service 态射复合
 > **惯用**: 将服务抽象为 `Service<Request>` trait，通过函数复合构建处理流水线。
@@ -1755,7 +2292,7 @@ trait Service<Request> {
 // 对应范畴论中的态射复合：f ∘ g
 ```
 
-### 9.2
+### 9.2 洋葱中间件模式
 
 > [Tower/Axum middleware docs](https://docs.rs/tower/latest/tower/) 洋葱中间件模式
 > **惯用**: 中间件以洋葱层方式包裹核心处理逻辑，每层处理横切关注点（日志、认证、限流）。
@@ -1774,7 +2311,7 @@ let app = ServiceBuilder::new()
 // 响应流向：handler → Validate → Compression → Trace
 ```
 
-### 9.3
+### 9.3 ECS 系统图与 Archetype
 
 > [Bevy ECS docs](https://bevy.org/learn/quick-start/getting-started/ecs/); [Data-Oriented Design Book](https://dataorienteddesign.com/dodbook/) ECS 系统图与 Archetype
 > **惯用**: 用 ECS（Entity-Component-System）将数据（Component）与行为（System）分离，通过 Archetype 实现缓存友好布局。
@@ -1797,7 +2334,7 @@ fn movement(mut query: Query<(&mut Position, &Velocity)>) {
 // Archetype：所有同时有 Position + Velocity 的实体存储在连续内存中
 ```
 
-### 9.4
+### 9.4 错误内核模式
 
 > [Armstrong 2003, Erlang Error Kernel](https://erlang.org/download/armstrong_thesis_2003.pdf) 错误内核模式（Error Kernel）
 > **惯用**: 将系统的核心状态集中在最小化的「错误内核」中，外围组件可失败重启，内核必须保持可用。
@@ -1826,7 +2363,7 @@ impl Worker {
 }
 ```
 
-### 9.5
+### 9.5 `no_std` / 裸机惯用法
 
 **`no_std` / 裸机惯用法：`#[global_allocator]`、`#[panic_handler]`、临界区**
 
@@ -2144,10 +2681,9 @@ typestate 模式借 PhantomData 使非法状态不可表示（编译期安全）
 > [Clippy Lints](https://rust-lang.github.io/rust-clippy//master/index.html) ·
 > [TRPL §13](https://doc.rust-lang.org/book/ch13-00-functional-features.html)
 >
-> **Rust 版本**: 1.97.0 stable (Edition 2024)
-> **文档版本**: 1.1
-> **最后更新: 2026-05-21
-> **状态**: ✅ 惯用法谱系全景 v1.1 — 新增认知路径
+> **文档版本**: 1.2
+> **最后更新**: 2026-08-03
+> **状态**: ✅ 惯用法谱系全景 v1.2 — 提升为 L6 权威页，补全常用惯用法与国际化来源
 
 ---
 
@@ -2176,18 +2712,60 @@ Rust 惯用法既可独立存在，也常作为经典设计模式在 Rust 中的
 
 ## 权威来源索引
 
-> **权威来源**:
-> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html),
-> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html),
-> [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-> [Tokio Docs](https://docs.rs/tokio/latest/tokio/) · [The Rust Async Book](https://rust-lang.github.io/async-book/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [Rust Embedded Discovery](https://docs.rust-embedded.org/discovery/) · [thiserror](https://docs.rs/thiserror/latest/thiserror/) · [anyhow](https://docs.rs/anyhow/latest/anyhow/) · [nom](https://docs.rs/nom/latest/nom/) · [winnow](https://docs.rs/winnow/latest/winnow/)
-> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [Authority Source Sprint Batch 9](../../00_meta/02_sources/05_international_authority_index.md)
+### P1 — 学术 / 形式化来源
+
+- [Jung et al. — RustBelt: Securing the Foundations of Rust (POPL 2018)](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [Jung et al. — Stacked Borrows / Tree Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
+- [Tofte & Talpin — Region-Based Memory Management, *Information and Computation* 1994](https://doi.org/10.1016/0890-5401(94)00052-3)
+- [Hoare — Communicating Sequential Processes](https://doi.org/10.1145/359576.359585)
+- [Hewitt, Bishop & Steiger — A Universal Modular ACTOR Formalism](https://dl.acm.org/doi/10.1145/1624775.1624804)
+- [Armstrong — Making reliable distributed systems in the presence of software errors (PhD thesis 2003)](https://erlang.org/download/armstrong_thesis_2003.pdf)
+- [Boehm — Zero-Overhead Principle (WG21 DPL 1767)](https://www.open-std.org/jtc1/sc22/wg21/docs/DPL/1767.pdf)
+- [arXiv: Rust Formal Verification Surveys](https://arxiv.org/search/?query=rust+formal+verification&searchtype=all)
+- [ACM Digital Library — Rust / Ownership Type Systems](https://dl.acm.org/action/doSearch?AllField=rust+ownership+type+system)
+- [IEEE Xplore — Rust Memory Safety / Concurrency](https://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText=rust%20memory%20safety)
+- [Springer — Rust Programming and Systems Verification](https://link.springer.com/search?query=rust+programming)
+- [Aeneas — Rust Verification Framework](https://aeneas-verif.org/)
+- [The Rust Verification Workshop](https://rustverify.com/)
+
+### P2 — 生态 / 官方 / 社区来源
+
+- [Rust Design Patterns — Idioms](https://rust-unofficial.github.io/patterns/idioms/)
+- [Rust Design Patterns — Design Patterns](https://rust-unofficial.github.io/patterns/design_patterns/index.html)
+- [Rust Design Patterns — Anti-patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html)
+- [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+- [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
+- [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+- [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+- [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
+- [Rust by Example](https://doc.rust-lang.org/rust-by-example/index.html)
+- [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html)
+- [Rust Style Guide](https://doc.rust-lang.org/style-guide/index.html)
+- [The Rust Performance Book](https://nnethercote.github.io/perf-book/)
+- [Rust Async Book](https://rust-lang.github.io/async-book/)
+- [The Embedded Rust Book](https://docs.rust-embedded.org/book/)
+- [Rust Embedded Discovery](https://docs.rust-embedded.org/discovery/)
+- [blog.rust-lang.org](https://blog.rust-lang.org/)
+- [Tokio Docs](https://docs.rs/tokio/latest/tokio/) · [tokio.rs](https://tokio.rs/)
+- [Tower Docs](https://docs.rs/tower/latest/tower/)
+- [Bevy Engine Docs](https://bevy.org/learn/)
+- [crossbeam docs](https://docs.rs/crossbeam/latest/crossbeam/)
+- [scopeguard docs](https://docs.rs/scopeguard/latest/scopeguard/)
+- [thiserror docs](https://docs.rs/thiserror/latest/thiserror/)
+- [anyhow docs](https://docs.rs/anyhow/latest/anyhow/)
+- [Rust Algorithm Club](https://rust-algo.club/)
+- [Parse, don't validate — Alexis King](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
+- [Data-Oriented Design Book](https://dataorienteddesign.com/dodbook/)
+
+> **权威来源对齐变更日志**: 2026-08-03 补全 P1/P2 国际化权威来源与 Rust 1.97.1 对齐
 > **相关文件**:
 >
 > [A/S/P 标记规范](../../00_meta/03_audit/02_asp_marking_guide.md) ·
 > [问题图谱](../../00_meta/04_navigation/10_problem_graph.md) ·
 > [范式转换矩阵](../../00_meta/00_framework/paradigm_transition_matrix.md)
 >
+> **状态**: ✅ L6 权威页已对齐 Rust 1.97.1 / Edition 2024
+
 
 ## 十、边界测试：惯用法谱系的编译错误
 

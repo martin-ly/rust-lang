@@ -27,12 +27,12 @@ flowchart LR
     S --> F[FFI 与跨语言]
     S --> A[抽象与设计]
     S --> T[工具链/生态]
-    M --> L1M[[L1 所有权/借用/生命周期]]
-    C --> L3C[[L3 并发/异步/无锁]]
-    E --> L2E[[L2 Result/错误处理深入]]
-    F --> L3F[[L3 FFI/Unsafe]]
-    A --> L2A[[L2 Trait/泛型/设计模式]]
-    T --> L6T[[L6 Cargo/工具链/工作流]]
+    M --> L1M[L1 所有权/借用/生命周期]
+    C --> L3C[L3 并发/异步/无锁]
+    E --> L2E[L2 Result/错误处理深入]
+    F --> L3F[L3 FFI/Unsafe]
+    A --> L2A[L2 Trait/泛型/设计模式]
+    T --> L6T[L6 Cargo/工具链/工作流]
 ```
 
 ---

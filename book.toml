@@ -36,15 +36,16 @@ enable = true
 level = 1
 
 # PDF 输出（mdbook-pandoc + pandoc + xelatex）
-[output.pandoc]
-optional = true
-
-[output.pandoc.profile.pdf]
-output-file = "rust-concept-knowledge-base.pdf"
-to = "latex"
-pdf-engine = "xelatex"
-file-scope = true
-number-sections = true
-standalone = true
-table-of-contents = true
-include-in-header = ["pandoc-header.tex"]
+# 已按用户要求暂停 PDF 编译；取消下方注释可重新启用。
+# [output.pandoc]
+# optional = true
+#
+# [output.pandoc.profile.pdf]
+# output-file = "rust-concept-knowledge-base.pdf"
+# to = "latex"
+# pdf-engine = "xelatex"
+# file-scope = true
+# number-sections = true
+# standalone = true
+# table-of-contents = true
+# include-in-header = ["pandoc-header.tex"]

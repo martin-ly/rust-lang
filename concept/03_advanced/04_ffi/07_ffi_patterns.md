@@ -24,6 +24,30 @@
 
 ---
 
+## 🧠 知识结构图
+
+```mermaid
+mindmap
+  root((FFI Patterns))
+    对象式不透明 API
+      虚表生命周期
+      Box::into_raw / from_raw
+    类型合并包装器
+      隐藏实现细节
+      统一 C 可见类型
+    零拷贝切片
+      &[T] / &str 跨边界
+      长度 + 指针契约
+    跨边界错误处理
+      错误码 + out 参数
+      自定义 Result 映射
+    Send / Sync 标注
+      线程安全承诺
+      文档化不变式
+```
+
+---
+
 ## 📑 目录
 
 - [📑 目录](#-目录)
@@ -603,3 +627,8 @@ graph TD
 > **权威来源**: [Rust Design Patterns — FFI](https://rust-unofficial.github.io/patterns/patterns/ffi/intro.html)
 > **状态**: ✅ 概念文件创建完成
 > **最后更新**: 2026-07-31
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/10.1145/3158154
+- https://doc.rust-lang.org/reference/introduction.html

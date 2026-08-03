@@ -445,3 +445,7 @@ serde 核心 crate 只提供 trait 与通用 `Serializer` / `Deserializer` 接�
 ---
 
 > **认知功能**: 本页建立 serde 的独立权威画像：从 trait 与 derive 宏的核心抽象出发，覆盖 JSON round-trip、字段映射、Web 组合、孤儿规则与默认值等关键工程陷阱，并以思维导图和测验巩固 L6 应用层记忆。使用建议：在学习网络 / Web crate 之前先掌握 serde 基础；遇到外部类型序列化问题时优先使用 newtype 模式。
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/10.1145/3158154

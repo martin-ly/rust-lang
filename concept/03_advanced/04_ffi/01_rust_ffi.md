@@ -630,6 +630,8 @@ fn demo(e: Option<FromBytesUntilNulError>) {
 - **[Rust 1.98](../../07_future/00_version_tracking/rust_1_98_stabilized.md)**
   - Windows GNU 目标 mingw-w64 工具链更新（影响 C/C++ 依赖链接行为）
   - `-Zemscripten-wasm-eh` 移除（Emscripten/WASM 异常处理需改用 `-sWASM_EXCEPTIONS`）
+  - [`core::ffi::c_void` 作为返回类型触发 lint](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-cvoid-return-lint)（建议改用 `*mut c_void` / `*const c_void`）
+  - [运行时符号 lints](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-runtime-symbol-lints)：防止覆盖 `memcmp`/`memset` 等 C 运行时符号
 
 ## 相关概念
 

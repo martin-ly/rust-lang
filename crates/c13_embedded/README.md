@@ -49,16 +49,25 @@
 
 - [ARM Cortex-M 最小 blinky](examples/cortex_m_minimal_blinky.rs) — `thumbv7em-none-eabihf`
 - [RISC-V 最小 blinky](examples/riscv_minimal_blinky.rs) — `riscv32imac-unknown-none-elf`
+- [no_std QEMU blinky](examples/no_std_qemu_blinky.rs) — `thumbv7m-none-eabi`（可在 QEMU 运行）
+- [no_std defmt + RTT 日志骨架](examples/no_std_defmt_rtt.rs) — `thumbv7em-none-eabihf`（需取消注释目标依赖）
 
 编译命令：
 
 ```bash
-# ARM
+# ARM Cortex-M4F
 cargo build -p c13_embedded --target thumbv7em-none-eabihf --example cortex_m_minimal_blinky
+
+# ARM Cortex-M3 (QEMU 兼容)
+cargo build -p c13_embedded --target thumbv7m-none-eabi --example no_std_qemu_blinky
 
 # RISC-V
 cargo build -p c13_embedded --target riscv32imac-unknown-none-elf --example riscv_minimal_blinky
 ```
+
+## no_std 硬件实测工作台
+
+- [no_std 硬件实测工作台指南](docs/no_std_hardware_workbench.md) — probe-rs / QEMU / RTT / defmt 完整流程
 
 ## 文档
 

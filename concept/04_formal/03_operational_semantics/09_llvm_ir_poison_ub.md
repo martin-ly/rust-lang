@@ -240,6 +240,14 @@ Rust 1.97.0 将 `None` 的判别值改为 `-1`。LLVM 将其解释为大无符�
 
 ---
 
+## P0 官方来源
+
+- [The Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
+- [Rust Compiler Development Guide — Code generation](https://rustc-dev-guide.rust-lang.org/backend/codegen.html)
+- [std::mem::MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html)
+
+---
+
 ## 🧭 思维导图（Mindmap）
 
 ```mermaid

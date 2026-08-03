@@ -308,4 +308,12 @@ mindmap
 
 ---
 
+## P0 官方来源（P0 Official Sources）
+
+- [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)
+- [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html)
+- [The Rustonomicon — Unwinding](https://doc.rust-lang.org/nomicon/unwinding.html)
+
+---
+
 **变更日志**: v1.0 (2026-07-31): Wave 8 新增微内核架构模式权威页，含 Rust 实现骨架、能力隔离、与单体/微服务对比、边界测试与反模式。

@@ -161,3 +161,8 @@ mindmap
 - [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
 
 > **文档版本**: 1.0 ｜ **最后更新**: 2026-07-31 ｜ **状态**: ✅ 新建权威页
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/book/10.5555/186897
+- https://rust-unofficial.github.io/patterns/

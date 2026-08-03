@@ -463,4 +463,12 @@ mindmap
 
 ---
 
+## P0 官方来源（P0 Official Sources）
+
+- [Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html)
+- [The Rustonomicon](https://doc.rust-lang.org/nomicon/)
+- [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines/type-safety.html)
+
+---
+
 **变更日志**: v1.0 (2026-07-31): Wave 8 新增嵌入式安全关键模式权威页，含 HAL/PAC、Typestate 外设、零成本驱动、安全关键状态机、看门狗、错误处理策略、边界测试与反模式。

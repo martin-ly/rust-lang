@@ -6,7 +6,7 @@ import os
 import sys
 import subprocess
 from pathlib import Path
-from concurrent.futures import ProcessPoolExecutor, as_completed
+
 
 try:
     from pypdf import PdfWriter
@@ -31,12 +31,17 @@ def read_inputs() -> list[str]:
 
 
 def merge_native_files(paths: list[str], out_path: Path) -> None:
-    with open(out_path, "wb") as out:
-        for p in paths:
-            src = BASE / p.replace("\\", "/")
-            with open(src, "rb") as src_f:
-                out.write(src_f.read())
-                out.write(b"\n")
+    inner_parts: list[str] = []
+    for p in paths:
+        src = BASE / p.replace("\\", "/")
+        text = src.read_text(encoding="utf-8").strip()
+        if not text:
+            continue
+        if text.startswith("[") and text.endswith("]"):
+            text = text[1:-1].strip()
+        if text:
+            inner_parts.append(text)
+    out_path.write_text("[\n" + ",\n".join(inner_parts) + "\n]\n", encoding="utf-8")
 
 
 def render_chunk(idx: int, paths: list[str]) -> tuple[int, int, Path | None]:
@@ -47,18 +52,21 @@ def render_chunk(idx: int, paths: list[str]) -> tuple[int, int, Path | None]:
     print(f"[chunk {idx}] merging {len(paths)} native files -> {native}")
     merge_native_files(paths, native)
 
+    def rel_posix(p: Path) -> str:
+        return str(p.relative_to(BASE).as_posix())
+
     cmd = [
         PANDOC,
-        str(native),
+        rel_posix(native),
         "-f", "native",
         "-t", "pdf",
         "--pdf-engine=lualatex",
         "--pdf-engine-opt=-interaction=nonstopmode",
         "--pdf-engine-opt=-halt-on-error",
-        "-o", str(pdf),
+        "-o", rel_posix(pdf),
         "--variable", "documentclass=report",
         "--variable", "lang=zh",
-        f"--include-in-header={HEADER}",
+        f"--include-in-header={rel_posix(HEADER)}",
         "--toc",
         "--number-sections",
     ]
@@ -99,10 +107,8 @@ def main() -> int:
     ]
 
     results: list[tuple[int, int, Path | None]] = []
-    with ProcessPoolExecutor(max_workers=WORKERS) as ex:
-        futures = {ex.submit(render_chunk, idx, paths): idx for idx, paths in chunks}
-        for future in as_completed(futures):
-            results.append(future.result())
+    for idx, paths in chunks:
+        results.append(render_chunk(idx, paths))
 
     results.sort(key=lambda r: r[0])
     failed = [(idx, rc) for idx, rc, pdf in results if rc != 0 or pdf is None]

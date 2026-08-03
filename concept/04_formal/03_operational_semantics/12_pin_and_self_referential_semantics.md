@@ -238,3 +238,14 @@ mindmap
       ManuallyDrop 包装
       栈 Pin 返回
 ```
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/10.1145/3158154
+- https://arxiv.org/abs/1804.07608
+- https://doc.rust-lang.org/reference/introduction.html
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://rust-unofficial.github.io/patterns/
+- https://blog.rust-lang.org/

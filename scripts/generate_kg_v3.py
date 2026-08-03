@@ -48,6 +48,37 @@ def concept_iri(en_title: str, path: str) -> str:
     return f"ex:{safe_path}"
 
 
+def normalize_bloom(bloom: str | None) -> str | None:
+    """将 Bloom 层级归一化为 SHACL 形状要求的格式：L[0-7] 或 L?，可连字符范围。"""
+    if not bloom:
+        return None
+    b = bloom.strip()
+    # 提取所有 L[0-7?]  token；忽略中文注释、括号、en-dash 等噪音
+    levels = re.findall(r"L[0-7?]", b)
+    if not levels:
+        # 特殊值映射
+        if b.lower() == "meta":
+            return "L0"
+        if b == "...":
+            return "L0"
+        return None
+    # 去重并保持顺序
+    seen = []
+    for lvl in levels:
+        if lvl not in seen:
+            seen.append(lvl)
+    if len(seen) == 1:
+        return seen[0]
+    return f"{seen[0]}-{seen[-1]}"
+
+
+def normalize_rust_version(version: str | None) -> str | None:
+    """缺失 Rust 版本时回退到项目基线，保证 SHACL rustVersion 必填。"""
+    if version:
+        return version
+    return "1.97.0+ (Edition 2024)"
+
+
 def map_bloom_to_class(bloom: str | None, path: str) -> str:
     """根据 Bloom 层级与路径推断 RDF 类。"""
     if not bloom:
@@ -146,8 +177,8 @@ def build_entities(index: dict, tax: dict | None = None) -> tuple[list[dict], di
         title: str = ent.get("title", "") or ent.get("en", "") or Path(path).stem
         en: str = ent.get("en", "")
         summary: str = ent.get("summary", "") or ""
-        bloom: str | None = ent.get("bloom")
-        version: str | None = ent.get("rust_version")
+        bloom: str | None = normalize_bloom(ent.get("bloom"))
+        version: str | None = normalize_rust_version(ent.get("rust_version"))
         theorems: list[str] = ent.get("theorems", [])
         crates: list[str] = ent.get("related_crates", [])
 

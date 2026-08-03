@@ -11,7 +11,7 @@
 > **Bloom 层级**: L4-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **受众**: [进阶]
-> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
+> **A/S/P 标记**: **S+A+P** — Structure + Applicati/on + Procedure
 > **双维定位**: P×App — 在 Kubernetes 上交付 Rust 服务
 > **定位**: 系统分析 Rust 服务在 Kubernetes 上的工程实践——从容器化、配置注入、健康探针、优雅关闭到资源约束与 operator 扩展，建立可复现的部署决策框架。
 > **前置概念**: [Cloud Native](02_cloud_native.md) · [Web 框架](03_web_frameworks.md) · [Async/Await](../../03_advanced/01_async/01_async.md)
@@ -57,6 +57,7 @@
     - [测验 4：为什么建议将 Secret 以卷挂载而非环境变量注入？（理解层）](#测验-4为什么建议将-secret-以卷挂载而非环境变量注入理解层)
     - [测验 5：kube-rs 在 Kubernetes 生态中主要解决什么问题？（理解层）](#测验-5kube-rs-在-kubernetes-生态中主要解决什么问题理解层)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [国际化权威来源补充（International Authority Sources）](#国际化权威来源补充international-authority-sources)
 
 ---
 
@@ -659,3 +660,9 @@ mindmap
 > **认知功能**: 本 mindmap 从本页「Rust 服务与 Kubernetes」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
 >
 > **跨层链接（L5）**: Kubernetes 生态中 Rust 与 Go 的对比，参见 [Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md)。
+
+## 国际化权威来源补充（International Authority Sources）
+
+- <https://dl.acm.org/doi/book/10.5555/186897>
+- <https://kubernetes.io/docs/home/>
+- <https://github.com/kube-rs/kube>

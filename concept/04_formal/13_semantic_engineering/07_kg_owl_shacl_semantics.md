@@ -475,3 +475,11 @@ mindmap
 ---
 
 > **过渡**: 掌握 KG 的 OWL/SHACL 解释后，可进一步学习 [AI Ontology and Rust Semantics](./06_ai_ontology_and_rust_semantics.md) 与 [Formal Methods Industrialization](../../07_future/04_research_and_experimental/02_formal_methods.md)。
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/10.1145/263690.263805
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://rust-unofficial.github.io/patterns/

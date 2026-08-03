@@ -771,3 +771,13 @@ mindmap
       引用逃逸生命期
       捕获闭包转 fn 指针
 ```
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://dl.acm.org/doi/10.1145/237721.237791
+- https://doc.rust-lang.org/reference/introduction.html
+
+## 国际化权威来源补充（International Authority Sources）
+
+- https://rust-unofficial.github.io/patterns/
+- https://blog.rust-lang.org/
