@@ -131,3 +131,11 @@ mindmap
       MiniRust 子集限制
       tests ≠ 规范
 ```
+
+---
+
+## 国际权威来源（P1/P2 补充）
+
+- [RustBelt: Securing the Foundations of the Rust Programming Language (POPL 2018)](https://dl.acm.org/doi/10.1145/3158154)
+- [Stacked Borrows: An Aliasing Model for Rust (POPL 2020)](https://dl.acm.org/doi/10.1145/3371109)
+- [Our Vision for the Rust Specification](https://blog.rust-lang.org/inside-rust/2023/11/15/spec-vision.html)

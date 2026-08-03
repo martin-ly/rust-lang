@@ -34,6 +34,7 @@
 - v1.3 (2026-07-31): 补全惯用法语义——新增 `Cow<T>`、所有权移动、`Deref`/`AsRef`/`Borrow` 边界、`MaybeUninit<T>`、unsafe 边界、错误处理全谱、`Iterator` 高级适配器、async 运行时、`no_std` 裸机九个小节。
 - v1.4 (2026-08-03): 提升为 L6 权威页；Bloom 层级统一为 L6；Rust 版本对齐 1.97.1+；补全 `matches!`、`vec![value; n]`、`collect()`、扩展 trait（extension trait）、默认 trait 方法、类型驱动设计等惯用法；将 RAII/Scopeguard 小节改为链接到 `34_ownership_as_resource_management.md` 与 `35_scope_guard_and_deferred_cleanup.md`；补充国际化权威来源链接。
 - v1.5 (2026-08-03): 补全 Builder 模式、零成本抽象、算法惯用法三个小节；权威来源索引拆分为 P1 学术/形式化来源与 P2 生态/官方/社区来源；全量 L0-L6 小节标题补齐。
+- v1.6 (2026-08-04): P5 批次语义空间梳理——新增 `TryFrom/TryInto`、`as_ref`/`unwrap_or_else`/`map_err` 组合子微惯用法、FFI 惯用法三节；新增「概念-属性-关系-示例-反例（CARE）总表」；更新主 mindmap 与接口级 mindmap；补充 P0/P1/P2 权威来源与相关概念链接。
 
 ---
 
@@ -74,6 +75,8 @@
     - [5.6 Deref / AsRef / Borrow 边界选型](#56-deref--asref--borrow-边界选型)
     - [5.7 默认 trait 方法](#57-默认-trait-方法)
     - [5.8 扩展 trait (Extension Trait)](#58-扩展-trait-extension-trait)
+    - [5.9 TryFrom / TryInto 安全转换](#59-tryfrom--tryinto-安全转换)
+    - [5.10 常用组合子惯用法：`as_ref`、`unwrap_or_else`、`map_err`](#510-常用组合子惯用法as_refunwrap_or_elsemap_err)
   - [六、L3 资源级惯用法](#六l3-资源级惯用法)
     - [6.1 RAII 资源管理](#61-raii-资源管理)
     - [6.2 作用域守卫与延迟清理](#62-作用域守卫与延迟清理)
@@ -105,6 +108,7 @@
     - [9.3 ECS 系统图与 Archetype](#93-ecs-系统图与-archetype)
     - [9.4 错误内核模式](#94-错误内核模式)
     - [9.5 `no_std` / 裸机惯用法](#95-no_std--裸机惯用法)
+    - [9.6 FFI 惯用法](#96-ffi-惯用法)
   - [十、反惯用法](#十反惯用法)
     - [常见反惯用清单](#常见反惯用清单)
   - [十一、Rust 1.95 新惯用法](#十一rust-195-新惯用法)
@@ -112,6 +116,7 @@
     - [12.1 惯用法选择决策树](#121-惯用法选择决策树)
     - [12.2 惯用法效率-认知负荷象限图](#122-惯用法效率-认知负荷象限图)
     - [12.3 惯用法效率矩阵](#123-惯用法效率矩阵)
+    - [12.4 概念-属性-关系-示例-反例总表](#124-概念-属性-关系-示例-反例总表)
   - [十三、定理推理链](#十三定理推理链)
     - [定理一致性矩阵（惯用法谱系专集）](#定理一致性矩阵惯用法谱系专集)
   - [十四、相关概念链接（L0-L7 映射）](#十四相关概念链接l0-l7-映射)
@@ -120,6 +125,8 @@
   - [十五、惯用法选择的认知路径](#十五惯用法选择的认知路径)
   - [十六、惯用法与 23/43 模式模型衔接](#十六惯用法与-2343-模式模型衔接)
   - [权威来源索引](#权威来源索引)
+    - [P1 — 学术 / 形式化来源](#p1--学术--形式化来源)
+    - [P2 — 生态 / 官方 / 社区来源](#p2--生态--官方--社区来源)
   - [十、边界测试：惯用法谱系的编译错误](#十边界测试惯用法谱系的编译错误)
     - [10.1 边界测试：`unwrap` 的滥用（运行时 panic）](#101-边界测试unwrap-的滥用运行时-panic)
     - [10.2 边界测试：`clone` 的隐式成本（逻辑错误）](#102-边界测试clone-的隐式成本逻辑错误)
@@ -165,8 +172,10 @@ mindmap
       PhantomData[PhantomData<br/>标记变型]
     L2接口级
       IntoFrom[Into/From<br/>隐式转换链]
+      TryFromInto[TryFrom/TryInto<br/>安全可失败转换]
       Deref[Deref 多态<br/>智能指针透明]
       TraitBound[Trait Bound 组合<br/>接口能力组合]
+      MicroCombinators[as_ref / unwrap_or_else / map_err<br/>组合子微惯用法]
     L3资源级
       RAII[RAII 守卫<br/>自动资源释放]
       Scopeguard[Scopeguard<br/>作用域退出]
@@ -185,6 +194,7 @@ mindmap
       TowerService[Tower Service<br/>服务态射复合]
       洋葱中间件[洋葱中间件<br/>横切关注点分离]
       ECS[ECS Archetype<br/>缓存友好布局]
+      FFI[FFI 惯用法<br/>跨语言边界安全]
 ```
 
 > **认知功能**: 本 mindmap 提供 Rust 惯用法的**七层抽象全景导航**，帮助读者建立「从语法糖到架构模式」的完整心智模型。
@@ -1208,12 +1218,145 @@ impl<T> IteratorExt for T { ... } // 错误：T 不一定实现 Iterator
 mindmap
   root((接口级惯用法))
     IntoFrom[Into/From<br/>隐式转换]
+    TryFromInto[TryFrom/TryInto<br/>安全可失败转换]
     Deref[Deref<br/>智能指针透明]
     TraitBounds[Trait Bound 组合]
     AsRefBorrow[AsRef/Borrow<br/>参数泛化]
     Cow[Cow<T><br/>写时克隆]
     DefaultMethod[默认 trait 方法<br/>减少样板]
     ExtensionTrait[扩展 trait<br/>为外部类型加方法]
+    MicroCombinators[as_ref / unwrap_or_else / map_err<br/>组合子微惯用法]
+```
+
+### 5.9 TryFrom / TryInto 安全转换
+
+> **EN**: Fallible Conversions with `TryFrom` / `TryInto`
+> **Summary**: Prefer `TryFrom`/`TryInto` for conversions that can fail, yielding a typed `Result` instead of panicking with `as` or returning a raw boolean.
+
+> 来源: [Rust API Guidelines — Interoperability](https://rust-lang.github.io/api-guidelines/interoperability.html) · [Rust std — `TryFrom`](https://doc.rust-lang.org/std/convert/trait.TryFrom.html) · [Rust std — `TryInto`](https://doc.rust-lang.org/std/convert/trait.TryInto.html)
+
+**概念与属性**
+
+`TryFrom<T>` / `TryInto<U>` 是 `From`/`Into` 的可失败版本。它们把「可能不合法的转换」表达为类型系统的一部分：
+
+- 当转换可能越界、格式错误或不满足不变式时，返回 `Result<U, E>` 而非 panic。
+- 实现 `TryFrom<T> for U` 自动获得 `TryInto<U> for T`。
+- 与 `?` 传播天然配合：`.try_into()?` 可在返回 `Result` 的函数中优雅传播。
+
+**与其他惯用法的关系**：`TryFrom` 是 `From` 的安全扩展；与 `?` 传播、`map_err`、自定义错误类型共同构成可失败转换链。
+
+**正例**：
+
+```rust
+#[derive(Debug, PartialEq)]
+struct Port(u16);
+
+#[derive(Debug, PartialEq)]
+struct InvalidPort(u32);
+
+impl TryFrom<u32> for Port {
+    type Error = InvalidPort;
+
+    fn try_from(value: u32) -> Result<Self, Self::Error> {
+        if value <= u16::MAX as u32 {
+            Ok(Port(value as u16))
+        } else {
+            Err(InvalidPort(value))
+        }
+    }
+}
+
+fn main() {
+    let p: Port = 8080u32.try_into().unwrap();
+    assert_eq!(p, Port(8080));
+
+    let bad: Result<Port, _> = 100_000u32.try_into();
+    assert_eq!(bad, Err(InvalidPort(100_000)));
+}
+```
+
+**反例/陷阱**：
+
+```rust
+fn bad_truncation(x: u32) -> u16 {
+    // 陷阱：静默截断，非法输入被掩盖。
+    x as u16
+}
+
+fn main() {
+    let _ = bad_truncation(100_000); // 34464，而非错误
+}
+```
+
+**决策树**：
+
+```mermaid
+graph TD
+    A[需要在类型间转换?] --> B{转换是否总合法?}
+    B -->|是| C[实现 From/Into]
+    B -->|否| D[实现 TryFrom/TryInto]
+    D --> E{错误是否需要被调用方区分?}
+    E -->|是| F[返回自定义 Error 类型]
+    E -->|否| G[使用 std::num::TryFromIntError 等标准错误]
+```
+
+### 5.10 常用组合子惯用法：`as_ref`、`unwrap_or_else`、`map_err`
+
+> **EN**: Common Combinator Idioms: `as_ref`, `unwrap_or_else`, and `map_err`
+> **Summary**: Use `as_ref` to borrow the contents of an owned optional/result, `unwrap_or_else` to provide lazy defaults, and `map_err` to transform error types while preserving the success path.
+
+> 来源: [Rust std — `Option`](https://doc.rust-lang.org/std/option/enum.Option.html) · [Rust std — `Result`](https://doc.rust-lang.org/std/result/enum.Result.html) · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+
+**概念与属性**
+
+这三个组合子是 `Option`/`Result` 上最常用的微惯用法：
+
+- `as_ref()` / `as_mut()`：把 `&Option<T>` 变成 `Option<&T>`，或 `&mut Option<T>` 变成 `Option<&mut T>`，避免消耗原值。
+- `unwrap_or_else(f)`：仅在 `None`/`Err` 时调用闭包 `f` 生成默认值，懒求值。
+- `map_err(f)`：转换错误类型，保留 `Ok` 分支不变；常与 `?` 配合统一错误类型。
+
+**与其他惯用法的关系**：它们是 `?` 传播和 Iterator 链的「细粒度补充」——在不适合提前返回或需要就地转换的场景下保持表达简洁。
+
+**正例**：
+
+```rust
+fn main() {
+    let opt: Option<String> = Some("hello".to_string());
+
+    // as_ref：借用内部值而不消耗 opt
+    let len = opt.as_ref().map(|s| s.len()).unwrap_or(0);
+    assert_eq!(len, 5);
+    assert!(opt.is_some()); // opt 仍可用
+
+    // unwrap_or_else：仅在 None 时调用闭包构造默认值
+    let name = opt.unwrap_or_else(|| "world".to_string());
+    assert_eq!(name, "hello");
+
+    // map_err：转换错误类型，保留 Ok 分支
+    let maybe: Result<i32, std::num::ParseIntError> = "x".parse();
+    let with_context: Result<i32, String> = maybe.map_err(|e| format!("parse failed: {e}"));
+    assert!(with_context.is_err());
+}
+```
+
+**反例/陷阱**：
+
+```rust,ignore
+fn bad(opt: Option<String>) -> usize {
+    // 陷阱：unwrap_or 会急切求值，即使 opt 是 Some 也会构造默认值。
+    opt.unwrap_or("default".to_string()).len()
+}
+```
+
+**思维导图**：
+
+```mermaid
+mindmap
+  root((常用组合子惯用法))
+    as_ref[as_ref / as_mut<br/>借而不取]
+    unwrap_or_else[unwrap_or_else<br/>懒默认值]
+    map_err[map_err<br/>错误类型转换]
+    ok_or_else[ok_or_else<br/>Option 转 Result]
 ```
 
 ---
@@ -2451,6 +2594,119 @@ graph TD
     H -->|是| I[使用中断自由临界区 + 合适同步原语]
 ```
 
+### 9.6 FFI 惯用法
+
+> **EN**: FFI Idioms: Safe Bindings, `unsafe` Boundaries, and ABI Conventions
+> **Summary**: Rust FFI relies on `extern "C"`, `#[repr(C)]`, raw pointers, and carefully documented `unsafe` boundaries to interoperate with foreign code without sacrificing Rust's memory-safety guarantees.
+
+> 来源: [The Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) · [Rust Reference — FFI](https://doc.rust-lang.org/reference/items/external-blocks.html) · [Rust API Guidelines — FFI](https://rust-lang.github.io/api-guidelines/ffi.html) · [bindgen docs](https://rust-lang.github.io/rust-bindgen/)
+
+**概念与属性**
+
+FFI（Foreign Function Interface）惯用法关注 Rust 与 C/其他语言代码交互时的安全与可移植性：
+
+- `extern "C"`：声明使用 C ABI 的函数；Rust 函数导出给 C 时也需标注。
+- `#[repr(C)]`：控制 struct/enum 的内存布局与 C 兼容。
+- 原始指针 `*const T` / `*mut T`：跨越 FFI 边界的引用不携带生命周期信息，调用方负责保证有效性。
+- 安全封装层：将 `unsafe` 调用封装在带 SAFETY 注释的 safe API 中，让调用方无需写 `unsafe`。
+- 不变式文档：跨越边界的指针有效性、所有权转移方向、线程安全假设必须显式文档化。
+
+**与其他惯用法的关系**：FFI 是 unsafe 边界、所有权移动、`MaybeUninit`、`ManuallyDrop` 惯用法的交汇点；也是 `no_std` 和嵌入式场景常用的扩展能力。
+
+**正例**：
+
+```rust,ignore
+// C 头文件：
+// int compute_sum(const int *data, size_t len);
+
+// Rust 绑定（unsafe block 集中封装）
+#[link(name = "compute")]
+extern "C" {
+    fn compute_sum(data: *const i32, len: usize) -> i32;
+}
+
+/// 安全封装：检查空指针与长度，说明 SAFETY 前提。
+///
+/// # Safety
+/// The returned value is correct only if `data` and `len` describe a valid,
+/// non-overlapping, properly aligned C slice for the lifetime of the call.
+pub fn safe_compute_sum(data: &[i32]) -> i32 {
+    if data.is_empty() {
+        return 0;
+    }
+    // SAFETY: `data` is a valid Rust slice, so its pointer is non-null,
+    // properly aligned, and points to `len` valid `i32`s during this call.
+    unsafe { compute_sum(data.as_ptr(), data.len()) }
+}
+```
+
+```rust
+// 导出 Rust 函数给 C：#[unsafe(no_mangle)] + extern "C"
+// Rust 1.97.1+ / Edition 2024 中 no_mangle 为 unsafe 属性
+#[repr(C)]
+pub struct Point {
+    pub x: f64,
+    pub y: f64,
+}
+
+#[unsafe(no_mangle)]
+pub extern "C" fn point_distance(a: &Point, b: &Point) -> f64 {
+    let dx = a.x - b.x;
+    let dy = a.y - b.y;
+    (dx * dx + dy * dy).sqrt()
+}
+
+fn main() {
+    let p1 = Point { x: 0.0, y: 0.0 };
+    let p2 = Point { x: 3.0, y: 4.0 };
+    assert_eq!(point_distance(&p1, &p2), 5.0);
+}
+```
+
+**反例/陷阱**：
+
+```rust,ignore
+// 陷阱：直接跨 FFI 返回 Rust 内部引用，未声明生命周期。
+extern "C" {
+    fn get_name() -> *const c_char; // 返回的指针有效多久？调用方是否负责释放？
+}
+
+// 陷阱：在 FFI 中使用非 #[repr(C)] 类型
+struct RustLayout {
+    a: u8,
+    b: u32,
+}
+// RustLayout 在 FFI 中的布局未定义，必须改为 #[repr(C)]
+```
+
+**思维导图**：
+
+```mermaid
+mindmap
+  root((FFI 惯用法))
+    extern_c[extern "C"<br/>C ABI]
+    repr_c[#[repr(C)]<br/>布局兼容]
+    raw_ptr[*const T / *mut T<br/>无生命周期引用]
+    safe_wrapper[安全封装层<br/>unsafe 边界内聚]
+    no_mangle[#[no_mangle]<br/>导出符号]
+    safety_doc[SAFETY 文档<br/>不变式说明]
+```
+
+**决策树**：
+
+```mermaid
+graph TD
+    A[需要与 C/外部代码交互?] -->|是| B{是否有现成绑定?}
+    B -->|是| C[使用 bindgen/cbindgen 生成]
+    B -->|否| D[手写 extern "C" 声明]
+    D --> E{是否传递复杂类型?}
+    E -->|是| F[使用 #[repr(C)] 定义兼容布局]
+    E -->|否| G[使用原始指针或标量]
+    D --> H{是否导出 Rust 函数?}
+    H -->|是| I[#[no_mangle] + extern "C"]
+    D --> J[封装为 safe API 并写 SAFETY 注释]
+```
+
 ---
 
 ## 十、反惯用法
@@ -2590,6 +2846,46 @@ quadrantChart
 | Arc | 中（原子计数） | 小（计数器） | 无 | ✅ 完全确定 |
 | Channel | 中（内存拷贝/move） | 中（缓冲） | 无 | ✅ 完全确定 |
 
+### 12.4 概念-属性-关系-示例-反例总表
+
+> **EN**: Concept–Attribute–Relation–Example–Counter-Example (CARE) Matrix
+> **Summary**: A unified table mapping each idiom to its defining attributes, related idioms, canonical example, and common anti-pattern.
+
+下表把本文覆盖的核心惯用法按「概念（Concept）-属性（Attribute）-关系（Relation）-示例（Example）-反例（Counter-example）」五维结构化，便于快速检索与教学对照。
+
+| 概念 | 核心属性 | 与其他惯用法的关系 | 典型示例 | 常见反例 |
+|:---|:---|:---|:---|:---|
+| `?` 传播 | 自动传播 `Result`/`Option`；零成本 | 依赖 `From`/`TryFrom` 错误转换；与 `map_err` 配合 | `File::open(path)?.read_to_string(&mut s)?;` | 用 `unwrap()` 跳过错误设计 |
+| `match` / `if let` | 穷尽性检查；局部绑定 | `matches!` 的语法糖基础；与 `let-else` 互补 | `if let Some(v) = opt { ... }` | 用 `match bool` 替代简单 `if` |
+| Newtype | 零成本类型区分；编译期语义隔离 | 与 Typestate、`#[repr(transparent)]` 配合 | `struct Meters(u64);` | 用裸 `u64` 表示多种语义 |
+| Typestate | 泛型编码状态；非法状态不可表示 | 依赖 `PhantomData`；与 Builder 模式结合 | `Client<Connected>` vs `Client<Disconnected>` | 用 `bool`/`String` 运行时检查状态 |
+| PhantomData | 零大小标记；变型/生命周期携带 | Newtype、Typestate、FFI 自引用结构的基础 | `PhantomData<&'a T>` 标记生命周期 | 用真实字段携带本可编译期保证的信息 |
+| Into / From | 隐式转换链；单向实现双向可用 | 与 `TryFrom`、泛型参数 `impl Into<T>` 配合 | `fn connect(port: impl Into<Port>)` | 手动写多个重载构造函数 |
+| TryFrom / TryInto | 可失败转换；返回 `Result` | `From` 的安全扩展；与 `?` 传播配合 | `let p: Port = 8080u32.try_into()?;` | 用 `as` 静默截断 |
+| Deref 多态 | 智能指针透明代理 | 与 `AsRef`/`Borrow` 区分；勿用于模拟继承 | `SmartBuffer<T>` 代理 `[T]` 方法 | 用 `Deref` 模拟子类继承 |
+| AsRef / Borrow | 廉价引用转换；哈希/比较一致 | 与 `Cow`、函数参数泛化配合 | `fn greet(name: &str)` | 参数类型用 `&String`/`&Vec<T>` |
+| `Cow<T>` | 借用/拥有二相；写时克隆 | 依赖 `Borrow`/`ToOwned` | `fn append_suffix(s: Cow<str>, ...)` | 无条件 `into_owned` 破坏零拷贝 |
+| RAII 守卫 | 资源与值生命周期绑定 | 与 `Drop`、作用域守卫、所有权移动配合 | `MutexGuard` 自动释放锁 | 要求调用方手动调用 `close()` |
+| 作用域守卫 | 退出时执行清理；panic 安全 | RAII 的补充；与 `defer!` 配合 | `scopeguard::guard` | 在多个返回点重复写清理代码 |
+| Pin 不动性 | 堆上位置稳定；自引用安全 | 与 async Future、`PhantomPinned` 配合 | `Pin<Box<SelfReferential>>` | 对普通类型滥用 `Pin` |
+| 内部可变性 | 运行时可变；对外不可变接口 | `Cell`/`RefCell`/`Mutex` 分层 | `RefCell<Vec<T>>` 单线程动态借用 | 在单线程场景用 `Mutex` |
+| `ManuallyDrop` | 抑制自动 `Drop`；显式析构控制 | 与 `MaybeUninit`、自定义分配器配合 | `ManuallyDrop::new(self)` + `dealloc` | 用 `mem::forget` 替代而丢失所有权 |
+| `MaybeUninit<T>` | 延迟初始化；未初始化内存安全 | 与 `ManuallyDrop`、数组构造配合 | `[MaybeUninit<T>; N]` 批量初始化 | 对未初始化值调用 `assume_init` |
+| Iterator 链 | 惰性求值；零成本组合 | 与 `collect`、`try_fold`、`filter`/`map` 配合 | `.filter(...).map(...).sum()` | 用手写循环暴露实现细节 |
+| `try_fold` | 错误短路累加 | Iterator 链 + `?` 传播 | `nums.iter().try_fold(0, \|a, &n\| Ok(a + n?))` | 手写循环丢失组合能力 |
+| 早期返回 | 减少嵌套；守卫子句 | 与 `?`、`let-else` 配合 | `let data = data.ok_or(Error::EmptyInput)?;` | 深层 `if`/`match` 箭头代码 |
+| `map_err` / `ok_or_else` | 懒错误构造/转换 | 与 `?`、自定义 Error 配合 | `.ok_or_else(\|\| "missing".to_string())?` | `.ok_or(format!("..."))` 急切求值 |
+| `as_ref` / `as_mut` | 借而不取；避免消耗原值 | 与 `unwrap_or_else`、`map` 配合 | `opt.as_ref().map(\|s\| s.len())` | `opt.map(\|s\| s.len())` 消耗原值 |
+| Send / Sync 边界 | 编译期线程安全标记 | 与 `Arc`、`Mutex`、Actor 配合 | `#[derive]` 自动推导复合类型 | 不必要的 `unsafe impl Send/Sync` |
+| Channel 所有权 | move 语义防竞争 | 与 `Send`、`Arc` 配合 | `tx.send(data).unwrap();` | 发送后继续访问已 move 的值 |
+| async 运行时 | `Pin` + 任务调度 + 取消安全 | 与 `spawn_blocking`、`JoinSet` 配合 | `tokio::select!` 分支 | `.await` 点持有 `std::sync::MutexGuard` |
+| Tower Service | 服务态射复合 | 与洋葱中间件、函数复合配合 | `Service<Request>` trait | 把同步服务直接硬编码进调用链 |
+| ECS Archetype | 数据与行为分离；缓存友好 | 与数据导向设计、系统图配合 | `Query<(&mut Position, &Velocity)>` | 面向对象实体继承层次 |
+| `no_std` / 裸机 | 显式分配器/panic 处理 | 与 FFI、unsafe、中断临界区配合 | `#[global_allocator]` + `#[panic_handler]` | 在裸机代码中直接使用 `std` |
+| FFI 惯用法 | `extern "C"` / `#[repr(C)]` / 安全封装 | 与 unsafe、原始指针、`MaybeUninit` 配合 | `safe_compute_sum(data: &[i32])` | 跨 FFI 返回内部引用且无生命周期说明 |
+
+> **认知功能**: 此表提供**五维知识卡片**，把每个惯用法从「是什么」「能做什么」「与谁配合」「怎么用」「别怎么用」五个角度固化。建议在复习或面试准备时将其作为速查表，在代码评审时作为反模式检查清单。
+
 ---
 
 ## 十三、定理推理链
@@ -2639,6 +2935,10 @@ typestate 模式借 PhantomData 使非法状态不可表示（编译期安全）
 - [L3 异步](../../03_advanced/01_async/01_async.md) —— async/await 与 Pin 不动性
 - [L3 并发](../../03_advanced/00_concurrency/01_concurrency.md) —— Send/Sync 与并发原语
 - [L5 Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md) —— 并发模型惯用法对比
+- [L1 类型转换与强制转换](../../01_foundation/02_type_system/04_coercion_and_casting.md) —— `as`、`From`/`Into`、`TryFrom`/`TryInto` 的语义边界
+- [L2 Derive Traits](../../02_intermediate/00_traits/06_derive_traits.md) —— 自动实现 `From`、`TryFrom` 等转换 trait
+- [L6 C 到 Rust 迁移](../../06_ecosystem/05_systems_and_embedded/08_c_to_rust_translation.md) —— FFI 绑定与跨语言翻译实践
+- [L6 SEI CERT C→Rust 映射](../../06_ecosystem/05_systems_and_embedded/33_sei_cert_c_to_rust_mapping.md) —— 安全关键 FFI 编码规范
 - [L7 版本跟踪](../../07_future/00_version_tracking/01_rust_version_tracking.md) —— 1.95/1.96 新惯用法来源
 
 ## 十五、惯用法选择的认知路径
@@ -2712,6 +3012,21 @@ Rust 惯用法既可独立存在，也常作为经典设计模式在 Rust 中的
 
 ## 权威来源索引
 
+### P0 — Rust 官方 / 一级权威来源
+
+> P0 来源为 Rust 项目官方文档与标准库，是语法、语义和 API 行为的最终事实源。
+
+- [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+- [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
+- [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+- [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
+- [Rust by Example](https://doc.rust-lang.org/rust-by-example/index.html)
+- [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+- [Rust Style Guide](https://doc.rust-lang.org/style-guide/index.html)
+- [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html)
+- [Rust RFCs](https://rust-lang.github.io/rfcs/)
+- [blog.rust-lang.org](https://blog.rust-lang.org/)
+
 ### P1 — 学术 / 形式化来源
 
 - [Jung et al. — RustBelt: Securing the Foundations of Rust (POPL 2018)](https://plv.mpi-sws.org/rustbelt/popl18/)
@@ -2728,19 +3043,13 @@ Rust 惯用法既可独立存在，也常作为经典设计模式在 Rust 中的
 - [Aeneas — Rust Verification Framework](https://aeneas-verif.org/)
 - [The Rust Verification Workshop](https://rustverify.com/)
 
-### P2 — 生态 / 官方 / 社区来源
+### P2 — 生态 / 社区 / 第三方来源
+
+> P2 来源为社区维护的指南、生态 crate 文档与第三方教程，补充官方文档未覆盖的工程实践。
 
 - [Rust Design Patterns — Idioms](https://rust-unofficial.github.io/patterns/idioms/)
 - [Rust Design Patterns — Design Patterns](https://rust-unofficial.github.io/patterns/design_patterns/index.html)
 - [Rust Design Patterns — Anti-patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html)
-- [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
-- [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
-- [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
-- [The Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
-- [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
-- [Rust by Example](https://doc.rust-lang.org/rust-by-example/index.html)
-- [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html)
-- [Rust Style Guide](https://doc.rust-lang.org/style-guide/index.html)
 - [The Rust Performance Book](https://nnethercote.github.io/perf-book/)
 - [Rust Async Book](https://rust-lang.github.io/async-book/)
 - [The Embedded Rust Book](https://docs.rust-embedded.org/book/)
@@ -2757,15 +3066,14 @@ Rust 惯用法既可独立存在，也常作为经典设计模式在 Rust 中的
 - [Parse, don't validate — Alexis King](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
 - [Data-Oriented Design Book](https://dataorienteddesign.com/dodbook/)
 
-> **权威来源对齐变更日志**: 2026-08-03 补全 P1/P2 国际化权威来源与 Rust 1.97.1 对齐
+> **权威来源对齐变更日志**: 2026-08-04 P5 批次梳理——拆分 P0 官方来源 / P1 学术形式化 / P2 生态社区三层；新增 FFI、TryFrom/TryInto、组合子微惯用法来源；与 Rust 1.97.1+ / Edition 2024 对齐
 > **相关文件**:
 >
 > [A/S/P 标记规范](../../00_meta/03_audit/02_asp_marking_guide.md) ·
 > [问题图谱](../../00_meta/04_navigation/10_problem_graph.md) ·
 > [范式转换矩阵](../../00_meta/00_framework/paradigm_transition_matrix.md)
 >
-> **状态**: ✅ L6 权威页已对齐 Rust 1.97.1 / Edition 2024
-
+> **状态**: ✅ L6 权威页 v1.6 已对齐 Rust 1.97.1+ / Edition 2024
 
 ## 十、边界测试：惯用法谱系的编译错误
 

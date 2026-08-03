@@ -1,21 +1,21 @@
 {
   "summary": {
     "date": "2026-08-04",
-    "total_relations": 10266,
+    "total_relations": 10304,
     "generic_relation_annotation_count": 0,
     "generic_ratio_global": 0.0,
     "core_entities": 50,
-    "core_relations": 2785,
+    "core_relations": 2786,
     "core_generic_count": 0,
     "core_generic_ratio": 0.0,
     "core_lacking_semantic": 0,
     "global_predicate_distribution": {
-      "ex:hasPart": 4249,
-      "ex:dependsOn": 2203,
-      "ex:entails": 1642,
-      "ex:relatedTo": 849,
-      "ex:refines": 607,
-      "ex:partOf": 430,
+      "ex:hasPart": 4269,
+      "ex:dependsOn": 2207,
+      "ex:entails": 1645,
+      "ex:relatedTo": 850,
+      "ex:refines": 615,
+      "ex:partOf": 432,
       "ex:appliesTo": 128,
       "ex:equivalentTo": 98,
       "ex:enables": 43,
@@ -24,7 +24,7 @@
       "ex:counterExample": 2
     },
     "core_predicate_distribution": {
-      "ex:dependsOn": 1139,
+      "ex:dependsOn": 1140,
       "ex:hasPart": 637,
       "ex:entails": 441,
       "ex:relatedTo": 256,
@@ -278,7 +278,7 @@
     "ex:DerivableTraits": [
       [
         "ex:dependsOn",
-        9
+        10
       ],
       [
         "ex:entails",

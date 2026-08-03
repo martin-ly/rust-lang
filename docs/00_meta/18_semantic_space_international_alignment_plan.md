@@ -1,10 +1,10 @@
 # Rust 语义空间国际权威来源对齐计划
 
-**EN**: International Authoritative Source Alignment Plan for Rust Semantic Space  
+**EN**: International Authoritative Source Alignment Plan for Rust Semantic Space
 **Summary**: 本计划系统推进 `e:/_src/rust-lang` 知识库在语义空间、计算语义、系统/软件/企业架构、AI 语义工程等领域与国际权威来源的全面对齐，确保概念权威页唯一、可验证、可持续演进。
 
-> **Rust 版本**: 1.97.1+ (Edition 2024)  
-> **计划波次**: Wave 0 – Wave 5  
+> **Rust 版本**: 1.97.1+ (Edition 2024)
+> **计划波次**: Wave 0 – Wave 5
 > **决策前提**: 仅对齐英文权威来源；非英文社区暂不覆盖；不引入阻碍未来扩展的刚性结构；用户自行提交，本计划负责持续执行与质量门回归。
 
 ---
@@ -160,6 +160,7 @@ reports/
 ---
 
 > **关联文件**
+>
 > - `archive/01_governance/02_project_plans/PLAN_Semantic_Space_Wave.md`
 > - `reports/SEMANTIC_SPACE_INTL_GAP_2026_07_29.md`
 > - `AGENTS.md` §2 Canonical 规则、§5 质量门、§6 红线

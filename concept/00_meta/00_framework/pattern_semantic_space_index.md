@@ -91,6 +91,7 @@ graph TD
   | **企业架构** | [Enterprise Architecture](../../06_ecosystem/14_enterprise_architecture/README.md) | TOGAF、Zachman、FEAF、BDAT、ADR、架构治理 |
   | **模型驱动工程** | [Model-Driven Engineering](../../06_ecosystem/03_design_patterns/19_model_driven_engineering.md) | MDA/MDE、DSL、语言工作台、模型转换 |
   | **AI 系统架构** | [LLM System Architecture](../../07_future/04_research_and_experimental/08_llm_system_architecture.md) | RAG、Agent、Multi-Agent、Tool Use |
+| **模式语义图谱** | [Rust Design and Architecture Patterns Semantic Atlas](../../06_ecosystem/03_design_patterns/47_rust_design_and_architecture_patterns_semantic_atlas.md) | Rust 特有模式、GoF、架构与企业模式统一语义地图 |
 
 ### 2.2 纵向：抽象层级维度
 
@@ -201,6 +202,7 @@ flowchart TD
 - [Pattern Composition Algebra](../../04_formal/00_type_theory/12_pattern_composition_algebra.md)
 - [Algorithm-Pattern Semantic Bridge](semantic_bridge_algorithms_patterns.md)
 - [Type System](../../01_foundation/02_type_system/01_type_system.md)
+- [Rust Design and Architecture Patterns Semantic Atlas](../../06_ecosystem/03_design_patterns/47_rust_design_and_architecture_patterns_semantic_atlas.md)
 
 ---
 

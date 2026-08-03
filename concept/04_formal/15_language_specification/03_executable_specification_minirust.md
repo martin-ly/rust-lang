@@ -190,3 +190,9 @@ mindmap
       运行时成本高
       不能替代测试
 ```
+
+---
+
+## 国际权威来源（P2 补充）
+
+- [Const Eval (Un)Safety Rules — Miri in const evaluation](https://blog.rust-lang.org/2022/09/15/const-eval-safety-rule-revision/)

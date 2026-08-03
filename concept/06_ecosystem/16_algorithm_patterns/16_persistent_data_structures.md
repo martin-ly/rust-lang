@@ -455,3 +455,9 @@ flowchart TD
 | 持久化线段树 | Rc 共享未变更子树，单点更新 O(log n) | 竞赛编程惯例；Okasaki 函数式线段树 |
 | 不可变队列 | 双栈 lazy 反转（Banker's Queue） | Okasaki §3.1.2 |
 | Rope | 平衡二叉字符串片段树 | Boehm et al. (1995); ropey crate 文档 |
+
+---
+
+## 国际权威来源（P1 补充）
+
+- [Driscoll, Sarnak, Sleator & Tarjan — Making Data Structures Persistent](https://dl.acm.org/doi/10.1145/5925.5934)

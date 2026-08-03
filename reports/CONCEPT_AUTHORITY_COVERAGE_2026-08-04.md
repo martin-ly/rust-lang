@@ -3,33 +3,29 @@
 **EN**: Concept-layer International Authority Coverage
 **Summary**: 复用 maintenance P0/P1/P2 权威域分级，把审计扩展到 concept/ 权威层；量化覆盖率与缺口，为『对齐网络上的国际化权威相关内容』提供机器可复核基线。仅审计，不改正文。
 
-> 生成: 2026-08-04 · 扫描 concept/ 活跃 md: **706**（排除 archive/SUMMARY/README）
+> 生成: 2026-08-04 · 扫描 concept/ 活跃 md: **708**（排除 archive/SUMMARY/README）
 > P0 官方 / P1 学术形式化 / P2 社区生态，域定义复用 `scripts/maintenance/authority_coverage_dashboard.py`
 
 ## 总体覆盖率
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 698 | 98.9% |
-| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 646 | 91.5% |
-| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 621 | 88.0% |
-| **任一权威（P0∪P1∪P2）** | **706** | **100.0%** |
+| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 700 | 98.9% |
+| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 669 | 94.5% |
+| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 633 | 89.4% |
+| **任一权威（P0∪P1∪P2）** | **708** | **100.0%** |
 | 无任何国际权威引用（缺口） | 0 | 0.0% |
 
 ## 内容页口径覆盖率（排除 00_meta 工具页 / quiz / placeholders / sources 索引）
 
-> 内容页 **610** 页。00_meta 为知识库内部工具/导航/审计页，非 Rust 概念内容，其权威基线为 P0 官方文档；P1/P2 学术生态来源对其不适用，故单列口径。
+> 内容页 **612** 页。00_meta 为知识库内部工具/导航/审计页，非 Rust 概念内容，其权威基线为 P0 官方文档；P1/P2 学术生态来源对其不适用，故单列口径。
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方 | 607 | 99.5% |
-| P1 学术/形式化 | 589 | 96.6% |
-| P2 社区/生态 | 600 | 98.4% |
-| **任一权威** | **610** | **100.0%** |
-
-内容页 P1 缺口（21）: `concept/03_advanced/02_unsafe/11_in_place_pinned_initialization.md` · `concept/04_formal/03_operational_semantics/13_in_place_initialization_semantics.md` · `concept/04_formal/15_language_specification/00_language_specification_overview.md` · `concept/04_formal/15_language_specification/01_rust_reference_and_normative_gap.md` · `concept/04_formal/15_language_specification/02_ferrocene_language_specification.md` · `concept/04_formal/15_language_specification/04_a_mir_formality_type_system_spec.md` · `concept/04_formal/15_language_specification/05_specification_evidence_from_rustc_tests.md` · `concept/05_comparative/04_verification_and_contracts/00_verification_and_contracts_overview.md` · `concept/06_ecosystem/03_design_patterns/43_rejection_type_pattern.md` · `concept/06_ecosystem/03_design_patterns/44_configuration_management_patterns.md` · `concept/06_ecosystem/03_design_patterns/45_dependency_injection_in_rust.md` · `concept/06_ecosystem/05_systems_and_embedded/33_sei_cert_c_to_rust_mapping.md` · `concept/06_ecosystem/05_systems_and_embedded/34_embassy_framework_deep_dive.md` · `concept/06_ecosystem/05_systems_and_embedded/35_rtic_framework_deep_dive.md` · `concept/06_ecosystem/05_systems_and_embedded/36_defmt_probe_rs_architecture.md` · `concept/06_ecosystem/05_systems_and_embedded/37_fallible_allocation_and_no_alloc_collections.md` · `concept/06_ecosystem/14_enterprise_architecture/10_production_rust_web_service_patterns.md` · `concept/06_ecosystem/16_algorithm_patterns/12_number_theoretic_algorithms.md` · `concept/06_ecosystem/16_algorithm_patterns/13_advanced_string_algorithms.md` · `concept/06_ecosystem/16_algorithm_patterns/14_network_flow_and_matching.md` · `concept/06_ecosystem/16_algorithm_patterns/16_persistent_data_structures.md`
-
-内容页 P2 缺口（10）: `concept/04_formal/03_operational_semantics/13_in_place_initialization_semantics.md` · `concept/04_formal/04_model_checking/12_rust_contracts.md` · `concept/04_formal/15_language_specification/00_language_specification_overview.md` · `concept/04_formal/15_language_specification/01_rust_reference_and_normative_gap.md` · `concept/04_formal/15_language_specification/03_executable_specification_minirust.md` · `concept/04_formal/15_language_specification/04_a_mir_formality_type_system_spec.md` · `concept/05_comparative/04_verification_and_contracts/00_verification_and_contracts_overview.md` · `concept/05_comparative/04_verification_and_contracts/01_contracts_comparison.md` · `concept/06_ecosystem/05_systems_and_embedded/33_sei_cert_c_to_rust_mapping.md` · `concept/06_ecosystem/16_algorithm_patterns/14_network_flow_and_matching.md`
+| P0 官方 | 609 | 99.5% |
+| P1 学术/形式化 | 612 | 100.0% |
+| P2 社区/生态 | 612 | 100.0% |
+| **任一权威** | **612** | **100.0%** |
 
 ## 按层级覆盖率
 
@@ -41,7 +37,7 @@
 | L3 | 78 | 78 | 100.0% | 78 | 100.0% |
 | L4 | 119 | 119 | 100.0% | 119 | 100.0% |
 | L5 | 29 | 29 | 100.0% | 29 | 100.0% |
-| L6 | 225 | 218 | 96.9% | 225 | 100.0% |
+| L6 | 227 | 220 | 96.9% | 227 | 100.0% |
 | L7 | 75 | 74 | 98.7% | 75 | 100.0% |
 | L? | 3 | 3 | 100.0% | 3 | 100.0% |
 

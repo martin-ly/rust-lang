@@ -1,17 +1,17 @@
 # 元数据一致性基线（语义质量门 P0-1）
 
-**日期**: 2026-08-04  **扫描**: 743 concept 活跃文件（排除 archive）  **模式**: strict
+**日期**: 2026-08-04  **扫描**: 745 concept 活跃文件（排除 archive）  **模式**: strict
 
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
 | D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥 | 0 | 0.0% | >0 | pass |
-| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 12 (基=444) | 1.6% | >=5% | pass |
+| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 13 (基=446) | 1.7% | >=5% | pass |
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
 | D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
 | D6 Summary 低信息量模板套话 | 0 | 0.0% | >=3% | pass |
 
-**受影响文件总数**: 12 / 743
+**受影响文件总数**: 13 / 745
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -121,6 +121,7 @@
 - `concept/04_formal/15_language_specification/02_ferrocene_language_specification.md` — FLS 权威页：nightly/preview 为 FLS 认证子集未覆盖语言特性的客观边界陈述
 - `concept/06_ecosystem/05_systems_and_embedded/36_defmt_probe_rs_architecture.md` — defmt/probe-rs 架构页：示例 TOML 中的 `[unstable]` 为 cargo unstable 配置表片段，属工具链事实陈述
 - `concept/06_ecosystem/05_systems_and_embedded/39_no_std_hardware_measurement_and_validation.md` — no_std 硬件实测页：nightly/preview/unstable 提及为 `-Z build-std`、nightly-only 目标或调试工具链事实，属裸机开发客观边界
+- `concept/06_ecosystem/16_algorithm_patterns/17_rust_algorithm_patterns_semantic_atlas.md` — 算法模式语义图谱页：nightly/preview/unstable 提及为 `std::simd`/target_feature 等 SIMD/性能工程工具链事实边界
 
 另有两类规则级排除：WASI Preview 1/2/3（WASM 规范版本专名）与 URL 路径中的 nightly（官方文档固定托管路径）。
 
@@ -129,7 +130,7 @@
 ### D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥（0）
 
 
-### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（12）
+### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（13）
 
 - `concept/06_ecosystem/03_design_patterns/37_event_sourcing_engine_patterns.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
 - `concept/06_ecosystem/03_design_patterns/38_api_gateway_and_service_mesh_patterns.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集

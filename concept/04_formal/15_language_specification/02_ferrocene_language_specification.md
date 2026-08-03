@@ -177,3 +177,9 @@ mindmap
       需叠加 MISRA Rust
       版本锁定
 ```
+
+---
+
+## 国际权威来源（P1 补充）
+
+- [Rust for Embedded Systems: Current State and Open Challenges](https://arxiv.org/abs/2311.05063)

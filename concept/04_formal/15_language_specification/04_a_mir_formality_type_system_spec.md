@@ -189,3 +189,10 @@ mindmap
       不是普通程序验证工具
       仍需与 Reference 同步
 ```
+
+---
+
+## 国际权威来源（P1 补充）
+
+- [Aeneas: Rust Verification by Functional Translation](https://arxiv.org/abs/2206.07185)
+- [Aeneas verification toolchain (GitHub)](https://github.com/AeneasVerif/aeneas)

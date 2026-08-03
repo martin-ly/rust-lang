@@ -535,3 +535,9 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「Embassy 异步框架深度解析」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+
+---
+
+## 国际权威来源（P1 补充）
+
+- [Rust for Embedded Systems: Current State and Open Challenges](https://arxiv.org/abs/2311.05063)

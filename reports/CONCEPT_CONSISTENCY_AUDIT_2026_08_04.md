@@ -1,9 +1,9 @@
 # 概念一致性审计报告 (Concept Consistency Audit)
 
-> 生成时间: 2026-08-04T05:58:47.523139
+> 生成时间: 2026-08-04T06:44:59.922774
 > 生成脚本: `scripts/concept_consistency_auditor.py`(扩展后监控 22 个核心概念)
-> 扫描文件数: 710
-> 提取概念定义数: 5176
+> 扫描文件数: 718
+> 提取概念定义数: 5199
 > 跨文件引用数: 329
 
 ## 目录
@@ -72,19 +72,19 @@
 | unsafe-UB | 552 | 155 |
 | RPITIT-RTN-TAIT-定义 | 485 | 53 |
 | effects-system-定义 | 367 | 42 |
-| Pin-自引用 | 282 | 78 |
-| 所有权-Move语义 | 275 | 98 |
-| allocator-api-GlobalAlloc | 197 | 45 |
+| Pin-自引用 | 283 | 78 |
+| 所有权-Move语义 | 276 | 98 |
+| allocator-api-GlobalAlloc | 213 | 47 |
 | Pin-投影-结构 | 181 | 38 |
 | const-trait-impl-定义 | 179 | 34 |
 | effects-system-现有 | 173 | 23 |
-| Send+Sync | 146 | 73 |
-| 所有权-作用域绑定 | 128 | 64 |
+| Send+Sync | 147 | 73 |
+| 所有权-作用域绑定 | 130 | 65 |
 | async-Future-状态机 | 114 | 50 |
 | 借用-可变独占 | 113 | 45 |
+| let-chains-守卫 | 107 | 37 |
 | unsafe-extern-块 | 107 | 18 |
 | 变型-定义 | 106 | 23 |
-| let-chains-守卫 | 106 | 37 |
 | 内部可变性-运行时检查 | 105 | 34 |
 | unsafe-extern-safe | 101 | 20 |
 | 生命周期-子类型-outlives | 100 | 28 |
@@ -113,7 +113,7 @@
 | Send/Sync边界-充分必要 | 23 | 7 |
 | Pin-定义 | 22 | 16 |
 | 借用-读写互斥 | 17 | 8 |
-| allocator-api-Allocator | 13 | 6 |
+| allocator-api-Allocator | 14 | 7 |
 | 所有权-Copy例外 | 11 | 7 |
 | 生命周期-Rule2 | 11 | 4 |
 | Pin-投影-安全 | 11 | 8 |

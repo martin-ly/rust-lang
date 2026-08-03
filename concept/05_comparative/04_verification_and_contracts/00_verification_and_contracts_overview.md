@@ -156,3 +156,11 @@ mindmap
       契约 ≠ 证明
       语法不可迁移
 ```
+
+---
+
+## 国际权威来源（P1/P2 补充）
+
+- [Kani: A Bounded Model Checker for Rust](https://arxiv.org/abs/2607.01504)
+- [Verus verifier (GitHub)](https://github.com/verus-lang/verus)
+- [Creusot verifier (GitHub)](https://github.com/creusot-rs/creusot)

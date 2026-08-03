@@ -653,3 +653,9 @@ graph TD
 
 > - [Gusfield — *Algorithms on Strings, Trees, and Sequences*](https://www.cs.ucdavis.edu/~gusfield/book.html)
 > - [Aho & Corasick (1975) — Efficient String Matching: An Aid to Bibliographic Search](https://doi.org/10.1145/360825.360855)
+
+---
+
+## 国际权威来源（P1 补充）
+
+- [Aho & Corasick — Efficient String Matching: An Aid to Bibliographic Search (CACM 1975)](https://dl.acm.org/doi/10.1145/360825.360855)

@@ -1,10 +1,10 @@
 {
   "summary": {
     "date": "2026-08-04",
-    "scanned": 743,
+    "scanned": 745,
     "counts": {
       "D1": 0,
-      "D2": 12,
+      "D2": 13,
       "D3": 0,
       "D4": 0,
       "D5": 0,
@@ -12,14 +12,14 @@
     },
     "pct": {
       "D1": 0.0,
-      "D2": 1.6,
+      "D2": 1.7,
       "D3": 0.0,
       "D4": 0.0,
       "D5": 0.0,
       "D6": 0.0
     },
-    "D2_base_files_with_asp_and_bloom": 444,
-    "flagged_files": 12
+    "D2_base_files_with_asp_and_bloom": 446,
+    "flagged_files": 13
   },
   "examples": {
     "D1": [],
@@ -135,6 +135,11 @@
       ]
     },
     "concept/06_ecosystem/16_algorithm_patterns/10_computational_geometry_algorithms.md": {
+      "D2": [
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
+      ]
+    },
+    "concept/06_ecosystem/16_algorithm_patterns/17_rust_algorithm_patterns_semantic_atlas.md": {
       "D2": [
         "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
       ]

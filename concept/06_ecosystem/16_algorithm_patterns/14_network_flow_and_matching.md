@@ -831,3 +831,10 @@ let cur = cost[i0][j] - u[i0] - v[j];
 | Hopcroft-Karp | BFS 分层 + 多路 DFS | Hopcroft & Karp (1973); CP Handbook |
 | 匈牙利算法 | O(n³) 势能实现 | Kuhn (1955); Munkres (1957) |
 | SCC / 桥 / 割点 | Tarjan DFS | Tarjan (1972); CP Handbook |
+
+---
+
+## 国际权威来源（P1/P2 补充）
+
+- [Edmonds & Karp — Theoretical Improvements in Algorithmic Efficiency for Network Flow Problems](https://dl.acm.org/doi/10.1145/321694.321699)
+- [pathfinding crate — Edmonds-Karp implementation](https://docs.rs/pathfinding/latest/pathfinding/directed/edmonds_karp/index.html)

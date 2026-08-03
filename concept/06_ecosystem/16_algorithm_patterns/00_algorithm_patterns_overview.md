@@ -406,6 +406,7 @@ graph TD
 
 ## 七、相关概念
 
+- [Rust 算法模式语义图谱](17_rust_algorithm_patterns_semantic_atlas.md) — L5-L6：算法模式语义空间总图、多维矩阵、决策树与跨模式关系
 - [算法与复杂度惯用法](../10_performance/03_algorithms_and_complexity_idioms.md) — L3-L6：迭代器算法、SIMD、并行迭代器与复杂度分析
 - [零拷贝解析](../11_domain_applications/26_zero_copy_parsing_in_rust.md) — L4-L5：parser combinator、serde borrow、生命周期约束
 - [所有权感知算法](../11_domain_applications/27_ownership_aware_algorithms.md) — L3-L5：split_at_mut、双指针、滑动窗口、index-based 图

@@ -5,16 +5,16 @@
 
 | 谓词 | 数量 |
 |---|---:|
-| hasPart | 4251 |
-| partOf | 431 |
+| hasPart | 4269 |
+| partOf | 432 |
 | refines | 552 |
-| dependsOn | 1114 |
-| entails | 476 |
+| dependsOn | 1117 |
+| entails | 477 |
 | equivalentTo | 0 |
 | appliesTo | 128 |
-| unchanged | 849 |
+| unchanged | 850 |
 
-- 修改总数: 6952
-- 未变更（仍 relatedTo）: 849
+- 修改总数: 6975
+- 未变更（仍 relatedTo）: 850
 
 规则说明：H1/H2 导航页 hasPart/partOf；H3 同目录进阶 refines；H4/H5 跨层 dependsOn/entails；H6 同路径 equivalentTo。

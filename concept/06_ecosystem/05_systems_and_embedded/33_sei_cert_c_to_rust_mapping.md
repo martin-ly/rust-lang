@@ -464,3 +464,10 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「SEI CERT C → Rust 规则映射」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+
+---
+
+## 国际权威来源（P1/P2 补充）
+
+- [RustMap: Towards Project-Scale C-to-Rust Migration via Program Analysis and LLM](https://arxiv.org/abs/2503.17741)
+- [c2rust crate — C to Rust translator](https://crates.io/crates/c2rust)

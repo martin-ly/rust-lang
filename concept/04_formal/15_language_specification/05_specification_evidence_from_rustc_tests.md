@@ -162,3 +162,9 @@ mindmap
       工具链漂移
       平台相关
 ```
+
+---
+
+## 国际权威来源（P1 补充）
+
+- [Assessing the alignment between the information needs of developers and the documentation of programming languages: a case study on Rust](https://arxiv.org/abs/2202.04431)

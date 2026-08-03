@@ -326,6 +326,10 @@ D5_WHITELIST_FILES = {
     # 属裸机嵌入式开发的客观边界陈述。
     "concept/06_ecosystem/05_systems_and_embedded/39_no_std_hardware_measurement_and_validation.md":
         "no_std 硬件实测页：nightly/preview/unstable 提及为 `-Z build-std`、nightly-only 目标或调试工具链事实，属裸机开发客观边界",
+    # ---- 2026-08-04 P5 算法模式语义图谱。页面讨论 `std::simd` portable SIMD、target_feature、
+    # nightly-only 算法优化选型；nightly/preview/unstable 提及为 SIMD/性能工程中的工具链事实边界。
+    "concept/06_ecosystem/16_algorithm_patterns/17_rust_algorithm_patterns_semantic_atlas.md":
+        "算法模式语义图谱页：nightly/preview/unstable 提及为 `std::simd`/target_feature 等 SIMD/性能工程工具链事实边界",
 }
 
 

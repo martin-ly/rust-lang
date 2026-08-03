@@ -582,3 +582,9 @@ mindmap
 - <https://probe.rs/>
 - <https://knurling.ferrous-systems.com/>
 - <https://docs.rust-embedded.org/book/>
+
+---
+
+## 国际权威来源（P1 补充）
+
+- [Rust for Embedded Systems: Current State and Open Challenges](https://arxiv.org/abs/2311.05063)

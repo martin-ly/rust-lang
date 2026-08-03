@@ -515,3 +515,9 @@ graph TD
 ## 国际学术参考（P1）
 
 > - [Cormen, Leiserson, Rivest & Stein — *Introduction to Algorithms*, 4th ed.](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)
+
+---
+
+## 国际权威来源（P1 补充）
+
+- [Rivest, Shamir & Adleman — A Method for Obtaining Digital Signatures and Public-Key Cryptosystems (CACM 1978)](https://dl.acm.org/doi/10.1145/359340.359342)

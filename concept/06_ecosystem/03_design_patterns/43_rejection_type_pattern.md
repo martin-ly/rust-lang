@@ -534,3 +534,9 @@ mindmap
       是否需结构化错误响应?
       是否需单独测试校验分支?
 ```
+
+---
+
+## 国际权威来源（P1 补充）
+
+- [Design Patterns: Abstraction and Reuse of Object-Oriented Design](https://link.springer.com/chapter/10.1007/978-3-642-59412-0_40)

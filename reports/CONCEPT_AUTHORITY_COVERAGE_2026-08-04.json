@@ -1,78 +1,45 @@
 {
   "date": "2026-08-04",
-  "scanned": 706,
+  "scanned": 708,
   "coverage": {
     "P0": [
-      698,
+      700,
       98.9
     ],
     "P1": [
-      646,
-      91.5
+      669,
+      94.5
     ],
     "P2": [
-      621,
-      88.0
+      633,
+      89.4
     ],
     "any": [
-      706,
+      708,
       100.0
     ],
     "none": 0
   },
   "content_scope": {
-    "scanned": 610,
+    "scanned": 612,
     "P0": [
-      607,
+      609,
       99.5
     ],
     "P1": [
-      589,
-      96.6
-    ],
-    "P2": [
-      600,
-      98.4
-    ],
-    "any": [
-      610,
+      612,
       100.0
     ],
-    "gaps_p1": [
-      "concept/03_advanced/02_unsafe/11_in_place_pinned_initialization.md",
-      "concept/04_formal/03_operational_semantics/13_in_place_initialization_semantics.md",
-      "concept/04_formal/15_language_specification/00_language_specification_overview.md",
-      "concept/04_formal/15_language_specification/01_rust_reference_and_normative_gap.md",
-      "concept/04_formal/15_language_specification/02_ferrocene_language_specification.md",
-      "concept/04_formal/15_language_specification/04_a_mir_formality_type_system_spec.md",
-      "concept/04_formal/15_language_specification/05_specification_evidence_from_rustc_tests.md",
-      "concept/05_comparative/04_verification_and_contracts/00_verification_and_contracts_overview.md",
-      "concept/06_ecosystem/03_design_patterns/43_rejection_type_pattern.md",
-      "concept/06_ecosystem/03_design_patterns/44_configuration_management_patterns.md",
-      "concept/06_ecosystem/03_design_patterns/45_dependency_injection_in_rust.md",
-      "concept/06_ecosystem/05_systems_and_embedded/33_sei_cert_c_to_rust_mapping.md",
-      "concept/06_ecosystem/05_systems_and_embedded/34_embassy_framework_deep_dive.md",
-      "concept/06_ecosystem/05_systems_and_embedded/35_rtic_framework_deep_dive.md",
-      "concept/06_ecosystem/05_systems_and_embedded/36_defmt_probe_rs_architecture.md",
-      "concept/06_ecosystem/05_systems_and_embedded/37_fallible_allocation_and_no_alloc_collections.md",
-      "concept/06_ecosystem/14_enterprise_architecture/10_production_rust_web_service_patterns.md",
-      "concept/06_ecosystem/16_algorithm_patterns/12_number_theoretic_algorithms.md",
-      "concept/06_ecosystem/16_algorithm_patterns/13_advanced_string_algorithms.md",
-      "concept/06_ecosystem/16_algorithm_patterns/14_network_flow_and_matching.md",
-      "concept/06_ecosystem/16_algorithm_patterns/16_persistent_data_structures.md"
+    "P2": [
+      612,
+      100.0
     ],
-    "gaps_p2": [
-      "concept/04_formal/03_operational_semantics/13_in_place_initialization_semantics.md",
-      "concept/04_formal/04_model_checking/12_rust_contracts.md",
-      "concept/04_formal/15_language_specification/00_language_specification_overview.md",
-      "concept/04_formal/15_language_specification/01_rust_reference_and_normative_gap.md",
-      "concept/04_formal/15_language_specification/03_executable_specification_minirust.md",
-      "concept/04_formal/15_language_specification/04_a_mir_formality_type_system_spec.md",
-      "concept/05_comparative/04_verification_and_contracts/00_verification_and_contracts_overview.md",
-      "concept/05_comparative/04_verification_and_contracts/01_contracts_comparison.md",
-      "concept/06_ecosystem/05_systems_and_embedded/33_sei_cert_c_to_rust_mapping.md",
-      "concept/06_ecosystem/16_algorithm_patterns/14_network_flow_and_matching.md"
-    ]
+    "any": [
+      612,
+      100.0
+    ],
+    "gaps_p1": [],
+    "gaps_p2": []
   },
   "by_layer": {
     "L0": {
@@ -106,9 +73,9 @@
       "any": 29
     },
     "L6": {
-      "n": 225,
-      "P0": 218,
-      "any": 225
+      "n": 227,
+      "P0": 220,
+      "any": 227
     },
     "L7": {
       "n": 75,

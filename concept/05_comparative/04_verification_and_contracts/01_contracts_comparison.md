@@ -265,3 +265,10 @@ mindmap
       属性不可机械迁移
       enforce 模式不可套用
 ```
+
+---
+
+## 国际权威来源（P2 补充）
+
+- [Verus verifier (GitHub)](https://github.com/verus-lang/verus)
+- [Creusot verifier (GitHub)](https://github.com/creusot-rs/creusot)

@@ -442,3 +442,9 @@ flowchart TD
 | `arrayvec::ArrayVec` | `try_push` 安全边界 | arrayvec crate docs |
 | `static_cell` | 编译期静态内存 + 运行时唯一 init | static_cell crate docs; Embassy examples |
 | `tinyvec` | 纯 safe Rust `ArrayVec` | tinyvec crate docs |
+
+---
+
+## 国际权威来源（P1 补充）
+
+- [Rust for Embedded Systems: Current State and Open Challenges](https://arxiv.org/abs/2311.05063)

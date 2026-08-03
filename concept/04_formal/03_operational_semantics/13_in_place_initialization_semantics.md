@@ -279,3 +279,11 @@ mindmap
 
 对已初始化的字段（`Written` 状态）必须调用 `drop`，否则资源泄漏；对未初始化字段（`Uninit`）不能调用 `drop`，因为 `drop` 会读取无效值导致 UB。
 </details>
+
+---
+
+## 国际权威来源（P1/P2 补充）
+
+- [RustBelt: Securing the Foundations of the Rust Programming Language (POPL 2018)](https://dl.acm.org/doi/10.1145/3158154)
+- [pinned-init crate docs](https://docs.rs/pinned-init/latest/pinned_init/)
+- [Announcing Rust 1.82.0 — in-place allocation APIs](https://blog.rust-lang.org/2024/10/17/Rust-1.82.0.html)

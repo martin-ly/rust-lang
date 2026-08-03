@@ -4,7 +4,7 @@
     "generated": "2026-07-11",
     "rust_version": "1.97.0+",
     "source": "concept/",
-    "entity_count": 688,
+    "entity_count": 689,
     "schema": "simple KG index"
   },
   "entities": [
@@ -13377,6 +13377,29 @@
         {
           "title": "微服务架构模式",
           "path": "05_microservice_patterns.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/03_design_patterns/47_rust_design_and_architecture_patterns_semantic_atlas.md",
+      "path": "06_ecosystem/03_design_patterns/47_rust_design_and_architecture_patterns_semantic_atlas.md",
+      "title": "Rust 设计模式与架构模式语义图谱",
+      "en": "Rust Design Pattern and Architecture Pattern Semantic Atlas",
+      "summary": "A unified semantic atlas mapping Rust-specific idioms, GoF design patterns, architecture patterns, and enterprise patterns into a single coordinate system with decision trees, comparison matrices, and composition algebra.",
+      "bloom": "L4-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Patterns",
+          "path": "01_patterns.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Pattern Composition Algebra",
+          "path": "../../04_formal/00_type_theory/12_pattern_composition_algebra.md"
         }
       ],
       "theorems": [],
