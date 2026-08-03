@@ -342,6 +342,14 @@ fn build_newsletter_request(raw: RawSubscribeRequest) -> Result<SubscribeRequest
 }
 
 # #[derive(Debug, Default)] pub struct RawSubscribeRequest { pub email: Option<String>, pub name: Option<String> }
+
+fn main() {
+    let raw = RawSubscribeRequest {
+        email: Some("charlie@example.com".into()),
+        name: Some("Charlie".into()),
+    };
+    let _ = build_newsletter_request(raw);
+}
 ```
 
 ### 3.5 单元测试

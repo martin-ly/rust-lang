@@ -293,7 +293,7 @@ static BOS_DESCRIPTOR: StaticCell<[u8; 256]> = StaticCell::new();
 static CONTROL_BUF: StaticCell<[u8; 64]> = StaticCell::new();
 static STATE: StaticCell<State> = StaticCell::new();
 
-async fn usb_task(usb: UsbDriver<'static>) {
+async fn usb_task(driver: UsbDriver<'static>) {
     let mut builder = Builder::new(
         driver,
         embassy_usb::Config::new(0xc0de, 0xcafe),
