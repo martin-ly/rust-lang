@@ -18,10 +18,10 @@
     "framework"
   ],
   "min_confidence": 0.75,
-  "processed_entities": 616,
-  "processed_relations": 20721,
+  "processed_entities": 617,
+  "processed_relations": 20745,
   "processed_generic_remaining": 922,
-  "changed_relations": 9504,
+  "changed_relations": 9516,
   "below_threshold_skipped": 0,
   "batch_statistics": [
     {
@@ -68,10 +68,10 @@
     },
     {
       "batch": "l6_concept",
-      "entities": 158,
-      "relations": 2713,
+      "entities": 159,
+      "relations": 2724,
       "generic_remaining": 154,
-      "generic_ratio": 0.0568
+      "generic_ratio": 0.0565
     },
     {
       "batch": "l7",
@@ -90,16 +90,16 @@
     {
       "batch": "meta_navigation",
       "entities": 30,
-      "relations": 3572,
+      "relations": 3574,
       "generic_remaining": 63,
       "generic_ratio": 0.0176
     },
     {
       "batch": "ecosystem",
-      "entities": 186,
-      "relations": 3050,
+      "entities": 187,
+      "relations": 3061,
       "generic_remaining": 156,
-      "generic_ratio": 0.0511
+      "generic_ratio": 0.051
     },
     {
       "batch": "future",
@@ -124,11 +124,11 @@
     }
   ],
   "before_type_distribution": {
-    "ex:RelationAnnotation": 10266
+    "ex:RelationAnnotation": 10278
   },
   "after_type_distribution": {
-    "ex:relatedTo": 7028,
-    "ex:entails": 1166,
+    "ex:relatedTo": 7039,
+    "ex:entails": 1167,
     "ex:dependsOn": 1089,
     "ex:RelationAnnotation": 762,
     "ex:equivalentTo": 98,
@@ -139,13 +139,13 @@
     "ex:counterExample": 2
   },
   "before_predicate_distribution": {
-    "ex:relatedTo": 8127,
+    "ex:relatedTo": 8138,
     "ex:dependsOn": 1122,
-    "ex:entails": 1017
+    "ex:entails": 1018
   },
   "after_predicate_distribution": {
-    "ex:relatedTo": 7711,
-    "ex:entails": 1198,
+    "ex:relatedTo": 7722,
+    "ex:entails": 1199,
     "ex:dependsOn": 1136,
     "ex:equivalentTo": 98,
     "ex:refines": 63,

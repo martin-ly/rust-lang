@@ -6,9 +6,9 @@
 
 - KG 文件: `concept/00_meta/kg_data_v3.json`
 - SHACL 形状: `concept/00_meta/kg_shapes.ttl`
-- RDF 三元组: 131980
-- 实体数: 681
-- 关系数: 10192
+- RDF 三元组: 133115
+- 实体数: 688
+- 关系数: 10278
 
 ## 验证结果
 

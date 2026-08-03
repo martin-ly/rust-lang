@@ -1,41 +1,41 @@
 {
   "date": "2026-08-04",
-  "scanned": 699,
+  "scanned": 706,
   "coverage": {
     "P0": [
-      691,
+      698,
       98.9
     ],
     "P1": [
-      644,
-      92.1
+      646,
+      91.5
     ],
     "P2": [
-      615,
+      621,
       88.0
     ],
     "any": [
-      699,
+      706,
       100.0
     ],
     "none": 0
   },
   "content_scope": {
-    "scanned": 604,
+    "scanned": 610,
     "P0": [
-      601,
+      607,
       99.5
     ],
     "P1": [
-      587,
-      97.2
+      589,
+      96.6
     ],
     "P2": [
-      594,
-      98.3
+      600,
+      98.4
     ],
     "any": [
-      604,
+      610,
       100.0
     ],
     "gaps_p1": [
@@ -49,13 +49,17 @@
       "concept/05_comparative/04_verification_and_contracts/00_verification_and_contracts_overview.md",
       "concept/06_ecosystem/03_design_patterns/43_rejection_type_pattern.md",
       "concept/06_ecosystem/03_design_patterns/44_configuration_management_patterns.md",
+      "concept/06_ecosystem/03_design_patterns/45_dependency_injection_in_rust.md",
       "concept/06_ecosystem/05_systems_and_embedded/33_sei_cert_c_to_rust_mapping.md",
       "concept/06_ecosystem/05_systems_and_embedded/34_embassy_framework_deep_dive.md",
       "concept/06_ecosystem/05_systems_and_embedded/35_rtic_framework_deep_dive.md",
       "concept/06_ecosystem/05_systems_and_embedded/36_defmt_probe_rs_architecture.md",
+      "concept/06_ecosystem/05_systems_and_embedded/37_fallible_allocation_and_no_alloc_collections.md",
+      "concept/06_ecosystem/14_enterprise_architecture/10_production_rust_web_service_patterns.md",
       "concept/06_ecosystem/16_algorithm_patterns/12_number_theoretic_algorithms.md",
       "concept/06_ecosystem/16_algorithm_patterns/13_advanced_string_algorithms.md",
-      "concept/06_ecosystem/16_algorithm_patterns/14_network_flow_and_matching.md"
+      "concept/06_ecosystem/16_algorithm_patterns/14_network_flow_and_matching.md",
+      "concept/06_ecosystem/16_algorithm_patterns/16_persistent_data_structures.md"
     ],
     "gaps_p2": [
       "concept/04_formal/03_operational_semantics/13_in_place_initialization_semantics.md",
@@ -72,9 +76,9 @@
   },
   "by_layer": {
     "L0": {
-      "n": 71,
-      "P0": 71,
-      "any": 71
+      "n": 72,
+      "P0": 72,
+      "any": 72
     },
     "L1": {
       "n": 60,
@@ -102,9 +106,9 @@
       "any": 29
     },
     "L6": {
-      "n": 219,
-      "P0": 212,
-      "any": 219
+      "n": 225,
+      "P0": 218,
+      "any": 225
     },
     "L7": {
       "n": 75,

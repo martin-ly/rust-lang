@@ -4,7 +4,7 @@
     "generated": "2026-07-11",
     "rust_version": "1.97.0+",
     "source": "concept/",
-    "entity_count": 686,
+    "entity_count": 688,
     "schema": "simple KG index"
   },
   "entities": [
@@ -821,6 +821,19 @@
       "en": "Rust Language Feature Inventory Methodology",
       "summary": "用于周期性盘点 Rust 语言特性覆盖度、识别 concept/ 缺口并制定回填计划的对称差分析方法。",
       "bloom": "L3-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [],
+      "postrequisites": [],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:00_meta/03_audit/09_kg_shacl_engine_validation.md",
+      "path": "00_meta/03_audit/09_kg_shacl_engine_validation.md",
+      "title": "KG SHACL 引擎验证",
+      "en": "KG SHACL Engine Validation",
+      "summary": "Describes how the knowledge graph is validated against W3C SHACL shapes using pySHACL, and how to interpret violation reports.",
+      "bloom": "L0",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [],
       "postrequisites": [],
@@ -14825,6 +14838,24 @@
         {
           "title": "Rust vs Ada/SPARK",
           "path": "../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/39_no_std_hardware_measurement_and_validation.md",
+      "path": "06_ecosystem/05_systems_and_embedded/39_no_std_hardware_measurement_and_validation.md",
+      "title": "",
+      "en": "no_std Hardware Measurement and Validation",
+      "summary": "Patterns and techniques for measuring stack/heap usage, cycle counts, interrupt latency, and power consumption on no_std embedded targets using probe-rs, DWT, ITM, semihosting, and QEMU.",
+      "bloom": "L3-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [],
+      "postrequisites": [
+        {
+          "title": "Embassy 框架深度解析",
+          "path": "34_embassy_framework_deep_dive.md"
         }
       ],
       "theorems": [],

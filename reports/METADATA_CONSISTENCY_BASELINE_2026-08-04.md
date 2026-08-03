@@ -1,17 +1,17 @@
 # 元数据一致性基线（语义质量门 P0-1）
 
-**日期**: 2026-08-04  **扫描**: 736 concept 活跃文件（排除 archive）  **模式**: strict
+**日期**: 2026-08-04  **扫描**: 743 concept 活跃文件（排除 archive）  **模式**: strict
 
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
 | D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥 | 0 | 0.0% | >0 | pass |
-| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 12 (基=437) | 1.6% | >=5% | pass |
+| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 12 (基=444) | 1.6% | >=5% | pass |
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
 | D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
 | D6 Summary 低信息量模板套话 | 0 | 0.0% | >=3% | pass |
 
-**受影响文件总数**: 12 / 736
+**受影响文件总数**: 12 / 743
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -20,6 +20,7 @@
 - `concept/00_meta/04_navigation/13_foundations_gap_closure_index.md` — L0 导航索引页，无概念正文，A/S/P 内容分级不适用
 - `concept/07_future/02_preview_features/33_autoverus_preview.md` — L7 预览跟踪页（非概念权威页），A/S/P 描述被跟踪对象属性
 - `concept/00_meta/01_terminology/03_bilingual_template.md` — L0 双语模板文件，A/S/P=A 为模板示例占位，不适用概念页分级规则
+- `concept/00_meta/03_audit/09_kg_shacl_engine_validation.md` — L0 元框架审计页，A/S/P=P 描述维护者验证程序，Bloom L0 不在概念页分级区间
 
 ### D5 稳定层 nightly/preview 豁免
 
@@ -119,6 +120,7 @@
 - `concept/03_advanced/02_unsafe/11_in_place_pinned_initialization.md` — 原地初始化权威页：nightly/preview 为 `pin-init` / in-place initialization 提案与工具链状态客观陈述
 - `concept/04_formal/15_language_specification/02_ferrocene_language_specification.md` — FLS 权威页：nightly/preview 为 FLS 认证子集未覆盖语言特性的客观边界陈述
 - `concept/06_ecosystem/05_systems_and_embedded/36_defmt_probe_rs_architecture.md` — defmt/probe-rs 架构页：示例 TOML 中的 `[unstable]` 为 cargo unstable 配置表片段，属工具链事实陈述
+- `concept/06_ecosystem/05_systems_and_embedded/39_no_std_hardware_measurement_and_validation.md` — no_std 硬件实测页：nightly/preview/unstable 提及为 `-Z build-std`、nightly-only 目标或调试工具链事实，属裸机开发客观边界
 
 另有两类规则级排除：WASI Preview 1/2/3（WASM 规范版本专名）与 URL 路径中的 nightly（官方文档固定托管路径）。
 

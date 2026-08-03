@@ -8,7 +8,7 @@
 > **标准来源**: TRPL · Rust Reference · std API Docs · Rustnomicon · Async Book · Cargo Book · Edition Guide
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L0
-> **状态**: ✅ v3.4 — 已覆盖 212 个高频术语（超过 150 目标），全部含英文对照；关键术语已在 L1–L4 概念文档完成首次出现双语标注
+> **状态**: ✅ v3.4 — 已覆盖 221 个高频术语（超过 150 目标），全部含英文对照；关键术语已在 L1–L4 概念文档完成首次出现双语标注（本轮新增 P4 no_std/KG SHACL/设计模式/企业架构术语 9 个）
 > **冻结日期**: 2026-06-10（v3.0 冻结）；2026-06-22 起跟踪 1.97 术语；2026-06-24 完成双语标注
 > **维护规则**: 仅当 Rust 官方术语变更或新增核心语言关键字/API 时才更新，常规生态术语不扩展
 
@@ -331,25 +331,32 @@
 | C | Copy | Copy | L2 |
 | C | crate | Crate | L1 |
 | D | Deref | Deref | L2 |
+| D | Dependency Injection | Dependency Injection | L3 |
 | D | Drop | Drop | L2 |
+| D | DWT | Data Watchpoint and Trace | L5+ |
 | E | Eq / PartialEq | Eq / PartialEq | L2 |
 | F | FFI | Foreign Function Interface | L3 |
 | F | From / Into | From / Into | L2 |
+| F | Fallible Allocation | Fallible Allocation | L3 |
 | F | Future | Future | L3 |
 | G | GAT | Generic Associated Types | L3 |
 | G | gRPC | gRPC | L5+ |
 | H | HashMap | HashMap | L1 |
 | H | Hoare 逻辑 | Hoare Logic | L4 |
+| H | Hardware Measurement and Validation | Hardware Measurement and Validation | L5+ |
 | H | HRTB | Higher-Ranked Trait Bounds | L3 |
 | I | if let | If Let | L1 |
 | I | Iris | Iris | L4 |
+| I | ITM | Instrumentation Trace Macrocell | L5+ |
 | K | Kani | Kani | L4 |
 | M | match | Match | L1 |
 | M | Miri | Miri | L4 |
 | M | Mutex | Mutual Exclusion | L2 |
+| N | no_alloc Collections | no_alloc Collections | L3 |
 | N | no_std | no_std | L5+ |
 | O | Option | Option | L1 |
 | P | panic | Panic | L1 |
+| P | Persistent Data Structures | Persistent Data Structures | L3 |
 | P | Pin | Pin | L3 |
 | P | Protobuf | Protocol Buffers | L5+ |
 | R | Rayon | Rayon | L5+ |
@@ -364,6 +371,7 @@
 | S | SeqCst | Sequentially Consistent | L3 |
 | S | Serde | Serde | L5+ |
 | S | Stream | Stream | L3 |
+| S | SHACL | Shapes Constraint Language | L0 |
 | S | Sync | Sync | L2 |
 | T | Tokio | Tokio | L5+ |
 | T | Tree Borrows | Tree Borrows | L4 |

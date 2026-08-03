@@ -78,6 +78,10 @@ D2_WHITELIST_FILES = {
     # L0 模板/元文件：文件本身是 concept/ 文件模板，A/S/P 为示例占位而非内容分级。
     "concept/00_meta/01_terminology/03_bilingual_template.md":
         "L0 双语模板文件，A/S/P=A 为模板示例占位，不适用概念页分级规则",
+    # L0 元框架/审计页：页面为知识图谱 SHACL 验证流程说明，A/S/P=P 描述维护者操作程序，
+    # Bloom L0（元信息层）天然不在 P 的 L4-7 区间内，属页面性质使然。
+    "concept/00_meta/03_audit/09_kg_shacl_engine_validation.md":
+        "L0 元框架审计页，A/S/P=P 描述维护者验证程序，Bloom L0 不在概念页分级区间",
 }
 
 # D5 显式登记白名单（2026-07-12 逐文件复核）：以下稳定层页面的 nightly/preview/unstable
@@ -317,6 +321,11 @@ D5_WHITELIST_FILES = {
     # 配置 `[unstable]` 表，为 cargo unstable 工具链事实的 TOML 片段，非稳定层残留不稳定依赖。
     "concept/06_ecosystem/05_systems_and_embedded/36_defmt_probe_rs_architecture.md":
         "defmt/probe-rs 架构页：示例 TOML 中的 `[unstable]` 为 cargo unstable 配置表片段，属工具链事实陈述",
+    # ---- 2026-08-04 P4 并行扩展：no_std 硬件实测页。页面讨论真实硬件/仿真器上的资源与实时行为
+    # 测量；nightly/preview/unstable 提及为 `-Z build-std`、nightly-only 目标或调试工具链事实，
+    # 属裸机嵌入式开发的客观边界陈述。
+    "concept/06_ecosystem/05_systems_and_embedded/39_no_std_hardware_measurement_and_validation.md":
+        "no_std 硬件实测页：nightly/preview/unstable 提及为 `-Z build-std`、nightly-only 目标或调试工具链事实，属裸机开发客观边界",
 }
 
 
