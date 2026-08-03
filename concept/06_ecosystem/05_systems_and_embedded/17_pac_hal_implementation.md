@@ -18,7 +18,14 @@
 
 ---
 
-> **来源**: [svd2rust](https://docs.rs/svd2rust/) · [embedded-hal](https://docs.rs/embedded-hal/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [Embassy Book](https://embassy.dev/book/) · [cortex-m crate](https://docs.rs/cortex-m/) · [Strom — Typestate Programming (IEEE)](https://ieeexplore.ieee.org/document/6312929)
+> **来源**:
+> [svd2rust](https://docs.rs/svd2rust/) ·
+> [embedded-hal](https://docs.rs/embedded-hal/) ·
+> [The Embedded Rust Book](https://docs.rust-embedded.org/book/) ·
+> [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) ·
+> [Embassy Book](https://embassy.dev/book/) ·
+> [cortex-m crate](https://docs.rs/cortex-m/) ·
+> [Strom — Typestate Programming (IEEE)](https://ieeexplore.ieee.org/document/6312929)
 
 ---
 
@@ -382,7 +389,13 @@ static mut BUF: [u8; 256] = [0; 256];
 
 ---
 
-> **权威来源**: [svd2rust](https://docs.rs/svd2rust/) · [embedded-hal](https://docs.rs/embedded-hal/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [Embassy Book](https://embassy.dev/book/) · [cortex-m crate](https://docs.rs/cortex-m/)
+> **权威来源**:
+> [svd2rust](https://docs.rs/svd2rust/) ·
+> [embedded-hal](https://docs.rs/embedded-hal/) ·
+> [The Embedded Rust Book](https://docs.rust-embedded.org/book/) ·
+> [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) ·
+> [Embassy Book](https://embassy.dev/book/) ·
+> [cortex-m crate](https://docs.rs/cortex-m/)
 >
 > **权威来源对齐变更日志**: 2026-07-30 创建
 
