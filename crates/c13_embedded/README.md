@@ -67,7 +67,7 @@ cargo build -p c13_embedded --target riscv32imac-unknown-none-elf --example risc
 
 ## no_std 硬件实测工作台
 
-- [no_std 硬件实测工作台指南](docs/no_std_hardware_workbench.md) — probe-rs / QEMU / RTT / defmt 完整流程
+- [no_std 硬件实测工作台指南](docs/05_no_std_hardware_workbench.md) — probe-rs / QEMU / RTT / defmt 完整流程
 
 ## 文档
 

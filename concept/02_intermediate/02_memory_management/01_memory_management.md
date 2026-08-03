@@ -1161,6 +1161,10 @@ c.borrow_mut().push_str("hello");     // 运行时检查的可变借用
 
 ### 补充章节：`MaybeUninit<T>` 的内存安全边界
 
+> **权威来源**: `MaybeUninit<T>`、原地初始化与固定初始化的完整概念解释已迁移至
+> [`concept/03_advanced/02_unsafe/11_in_place_pinned_initialization.md`](../../03_advanced/02_unsafe/11_in_place_pinned_initialization.md)。
+> 本节保留基础速查，详细语义、数组/结构体初始化、std in-place API、`pin-init` 与 `zeroize` 模式请见权威页。
+
 > **[Rust Reference: MaybeUninit](https://doc.rust-lang.org/reference/introduction.html)** `MaybeUninit<T>` 是 Rust 提供的**未初始化内存的安全抽象**。它包装一块 `size_of::<T>()` 字节的内存，但**不假设该内存已包含有效的 T 值**，从而避免编译器基于 Validity Invariant 做出错误优化。✅ 已验证
 > **[Rustonomicon: Untyped Memory](https://doc.rust-lang.org/nomicon/repr-rust.html)** 读取未初始化内存在 Rust 中是 UB，`MaybeUninit` 是 Safe Rust 中唯一合法处理未初始化堆栈/堆内存的方式。✅ 已验证
 
@@ -1634,22 +1638,11 @@ Deref 丢失容器信息（引用计数、Pin 保证），Projection 保持容�
 
 ### 11.5 与 In-place Initialization 的协同
 
-Field Projections 是 **in-place initialization**（原地初始化）的前提：
+> **权威来源**: 原地初始化与固定初始化的完整概念解释已迁移至
+> [`concept/03_advanced/02_unsafe/11_in_place_pinned_initialization.md`](../../03_advanced/02_unsafe/11_in_place_pinned_initialization.md)。
+> 本文仅保留 Field Projections 与 In-place Initialization 协同关系的索引说明，不重复概念正文。
 
-```rust,ignore
-// 愿景：无需先构造完整 T 再包装
-let box_point: Box<Point> = Box::uninit();
-box_point.x.write(1);  // 直接投影并初始化字段
-box_point.y.write(2);  // 无需构造临时 Point { x: 1, y: 2 }
-```
-
-**与 `MaybeUninit<T>` 的关系**：
-
-```text
-Box<MaybeUninit<T>>.field → Box<MaybeUninit<FieldType>>
-允许: 逐个字段初始化，最后 assume_init()
-禁止: 未初始化字段的读取
-```
+Field Projections 是 in-place initialization 的前置语言特性：通过智能指针字段投影，才能在 `Box<MaybeUninit<T>>` 上逐字段初始化而不构造临时 `T`。详见上述权威页 §四、§六 与 §十 决策树。
 
 ### 11.6 演进路线与跟踪
 
@@ -1802,17 +1795,11 @@ impl SelfRef {
 
 ### 12.7 Field Projections（Pin 投影与 In-place Initialization）
 
-**定义**：Field projections 关注如何安全地投影智能指针/容器到其字段，例如 `Pin<Box<T>>` 投影到 `Pin<Box<T.field>>`，或在原地初始化未初始化内存。
+> **权威来源**: 原地初始化与固定初始化的完整概念解释已迁移至
+> [`concept/03_advanced/02_unsafe/11_in_place_pinned_initialization.md`](../../03_advanced/02_unsafe/11_in_place_pinned_initialization.md)；
+> Pin 投影与 Field Projections 提案详见 [§十一 补充章节：Field Projections](#十一补充章节field-projectionsbeyond-the--旗舰主题)。
 
-**动机**：当前 Safe Rust 对 Pin 投影和未初始化字段的“最后一公里”支持不足，需要借助 unsafe 或每日构建版提案（如 `Pin::map_unchecked`、`field_init`）。
-
-```rust,ignore
-// Pin 投影的常见模式：安全地获取结构体子字段的 Pin
-let mut pinned: Pin<Box<SelfRef>> = SelfRef::new(String::from("x"));
-// 仍需 unsafe 或 Pin::map_unchecked 访问字段
-```
-
-> 详见 [§十一 补充章节：Field Projections](#十一补充章节field-projectionsbeyond-the--旗舰主题)。
+本节不再展开 in-place initialization 正文，仅保留与 Field Projections 协同的导航链接。根据 AGENTS.md §2 Canonical 规则，通用 Rust 概念解释统一维护在 `concept/03_advanced/02_unsafe/11_in_place_pinned_initialization.md`。
 
 ---
 

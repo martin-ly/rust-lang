@@ -904,6 +904,7 @@ nightly 通道直接跟踪 master。1.97.1 的修复在合并进 master 后，�
 > 本节对 1.98.0 beta 中用户可见度最高的 **10 项变更**做「一句话动机 + 代码示例 + 语义要点 + 权威来源 + 相关 `concept/` 概念页」的 compact 解析。完整稳定版汇总见 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md)；本节重在展示变更与 `concept/` 权威概念的映射关系，方便从概念页回链复习。
 
 <a id="beta-panichookinfo-static"></a>
+
 ### 11.1 `PanicHookInfo` 中 `Location<'_>` 生命周期 `'static` 化
 
 **状态**: ✅ stabilized in 1.98.0 beta · **来源**: [PR #146561](https://github.com/rust-lang/rust/pull/146561) · **跟踪 issue**: [#148297](https://github.com/rust-lang/rust/issues/148297)
@@ -924,6 +925,7 @@ std::panic::set_hook(Box::new(|info| {
 - **完整分析**: 见本页 §0.1。
 
 <a id="beta-runtime-symbol-lints"></a>
+
 ### 11.2 新增运行时符号定义 lint：`invalid_runtime_symbol_definitions` / `suspicious_runtime_symbol_definitions`
 
 **状态**: ✅ stabilized in 1.98.0 beta · **来源**: [PR #155521](https://github.com/rust-lang/rust/pull/155521) · **跟踪 issue**: [#156519](https://github.com/rust-lang/rust/issues/156519)
@@ -945,6 +947,7 @@ pub extern "C" fn memset(dest: *mut u8, c: i32, n: usize) -> *mut u8 {
 - **迁移提示**: no-std/embedded 项目中若确实需要自定义这些符号，应显式 `#[allow(invalid_runtime_symbol_definitions)]` 并严格匹配 libc 签名。
 
 <a id="beta-mut-lifetime-shorten"></a>
+
 ### 11.3 unsizing coercion 中 `&mut` 生命周期缩短扩展到不变位置
 
 **状态**: ✅ stabilized in 1.98.0 beta · **来源**: [PR #149219](https://github.com/rust-lang/rust/pull/149219) · **跟踪 issue**: [#156457](https://github.com/rust-lang/rust/issues/156457)
@@ -971,6 +974,7 @@ fn caller<'long>(c: Cell<&'long mut i32>) {
 - **迁移提示**: 绝大多数代码无需改动；此前用 `transmute` 或显式重借用绕过此限制的代码可替换为更安全的 coercion。
 
 <a id="beta-ambiguous-glob-imports"></a>
+
 ### 11.4 `ambiguous_glob_imports` 部分转为硬错误
 
 **状态**: ✅ stabilized in 1.98.0 beta（兼容性变更） · **来源**: [PR #149195](https://github.com/rust-lang/rust/pull/149195) · **跟踪 issue**: [#156648](https://github.com/rust-lang/rust/issues/156648)
@@ -996,6 +1000,7 @@ fn main() {
 - **迁移提示**: 用显式 `use a::Foo; use b::Foo as BFoo;` 替换歧义 glob import，或避免让多个模块导出同名项。
 
 <a id="beta-cvoid-return-lint"></a>
+
 ### 11.5 `core::ffi::c_void` 作为返回类型触发 lint
 
 **状态**: ✅ stabilized in 1.98.0 beta · **来源**: [PR #156379](https://github.com/rust-lang/rust/pull/156379) · **跟踪 issue**: [#156853](https://github.com/rust-lang/rust/issues/156853)
@@ -1022,6 +1027,7 @@ unsafe extern "C" {
 - **迁移提示**: 将 `fn foo() -> c_void` 改为 `fn foo() -> *mut c_void`；检查 bindgen 输出是否生成此类签名。
 
 <a id="beta-where-equality-syntax"></a>
+
 ### 11.6 where 子句拒绝 `Type = Type` / `Type == Type`
 
 **状态**: ⚠ compatibility change in 1.98.0 beta · **来源**: [PR #153513](https://github.com/rust-lang/rust/pull/153513) · **跟踪 issue**: [#154816](https://github.com/rust-lang/rust/issues/154816)
@@ -1042,6 +1048,7 @@ fn ok<T>() where T::Item = u32 {}
 - **迁移提示**: 宏生成 where 子句时避免产出 `T = U` / `T == U`；用 trait bound 或关联类型等式表达真实意图。
 
 <a id="beta-repr-transparent-stricter"></a>
+
 ### 11.7 `repr(transparent)` 对 trivial 布局字段更严格
 
 **状态**: ⚠ compatibility change in 1.98.0 beta · **来源**: [PR #155299](https://github.com/rust-lang/rust/pull/155299) · **跟踪 issue**: [#157730](https://github.com/rust-lang/rust/issues/157730)
@@ -1066,6 +1073,7 @@ struct SafeWrapper<T>(T, PhantomData<T>);
 - **迁移提示**: 检查所有 `#[repr(transparent)]` 类型，将辅助字段改为 `PhantomData<T>`，或改用 `#[repr(C)]` 并显式管理布局。
 
 <a id="beta-structural-partialeq-bound"></a>
+
 ### 11.8 派生 `StructuralPartialEq` 增加 `T: PartialEq` bound
 
 **状态**: ✅ stabilized in 1.98.0 beta · **来源**: [PR #156807](https://github.com/rust-lang/rust/pull/156807) · **跟踪 issue**: [#157865](https://github.com/rust-lang/rust/issues/157865)
@@ -1088,6 +1096,7 @@ struct Packet<T> {
 - **迁移提示**: 对依赖结构比较的泛型类型，显式添加 `T: PartialEq` bound。
 
 <a id="beta-windows-tls-destructors"></a>
+
 ### 11.9 Windows TLS 析构切换到 FLS；`ManuallyDrop<Box<T>>` 交互修复
 
 **状态**: ✅ stabilized in 1.98.0 beta · **来源**: [PR #148799](https://github.com/rust-lang/rust/pull/148799)（FLS）· [PR #155750](https://github.com/rust-lang/rust/pull/155750)（ManuallyDrop Box）
@@ -1109,6 +1118,7 @@ drop(b);
 - **迁移提示**: 源代码通常无需改动；深度依赖 Windows TLS destructor 精确时序的程序需在 1.98 下重新测试。
 
 <a id="beta-transmute-repr-size"></a>
+
 ### 11.10 `transmute()` 在涉及 `repr` 属性时更严格地检查等大小
 
 **状态**: ⚠ compatibility change in 1.98.0 beta · **来源**: [PR #155418](https://github.com/rust-lang/rust/pull/155418) · **跟踪 issue**: [#156852](https://github.com/rust-lang/rust/issues/156852)

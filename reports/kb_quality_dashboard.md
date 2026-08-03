@@ -1,25 +1,25 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-08-03T19:20:51.102214+00:00
-> 扫描文件数: 673
+> 生成时间: 2026-08-03T20:42:02.848753+00:00
+> 扫描文件数: 699
 
 ## 全局指标
 
 | 指标 | 数值 | 目标 | 状态 |
 |:---|:---|:---|:---|
-| 总文件数 | 673 | 27 | ✅ |
-| 总定理链 (⟹) | 2187 | ≥270 | ✅ |
-| 总反命题 | 1122 | ≥40 | ✅ |
-| 总 Mermaid 图 | 1338 | ≥50 | ✅ |
-| 编译验证代码块 | 6714 | ≥150 | ✅ |
-| 定理矩阵总行 | 28829 | — | — |
-| 死链数量 | 0 | 0 | ✅ |
+| 总文件数 | 699 | 27 | ✅ |
+| 总定理链 (⟹) | 2184 | ≥270 | ✅ |
+| 总反命题 | 1184 | ≥40 | ✅ |
+| 总 Mermaid 图 | 1381 | ≥50 | ✅ |
+| 编译验证代码块 | 6889 | ≥150 | ✅ |
+| 定理矩阵总行 | 29337 | — | — |
+| 死链数量 | 6 | 0 | ❌ |
 | docs/content/knowledge 死链数量 | 0 | 0 | ✅ |
 | 反向推理 (⟸) | 360 | ≥50 | ✅ |
 | 模板化 ⟹ | 0 | 0 | ✅ |
-| 前置概念覆盖率 | 591/598 | 100% | ⚠️ |
-| 后置概念覆盖率 | 591/598 | 100% | ⚠️ |
-| 双标签覆盖率 | 527/598 | >=95% | ⚠️ |
+| 前置概念覆盖率 | 608/624 | 100% | ⚠️ |
+| 后置概念覆盖率 | 608/624 | 100% | ⚠️ |
+| 双标签覆盖率 | 533/624 | >=95% | ⚠️ |
 | 非法标签组合 | 0 | 0 | ✅ |
 
 ## 按层级分布
@@ -29,11 +29,11 @@
 | L0 | 75 | 6.6 | 2.7 | 36/75 (48%) | 0.5 | 0 | 20/75 | 18/75 | 74/75 |
 | L1 | 60 | 4.9 | 6.4 | 57/60 (95%) | 2.2 | 0 | 60/60 | 60/60 | 60/60 |
 | L2 | 45 | 4.6 | 1.1 | 26/45 (57%) | 1.6 | 0 | 44/45 | 44/45 | 45/45 |
-| L3 | 78 | 5.2 | 2.0 | 54/78 (69%) | 1.4 | 0 | 77/78 | 77/78 | 77/78 |
-| L4 | 112 | 2.2 | 0.9 | 40/112 (35%) | 0.1 | 0 | 110/112 | 110/112 | 79/112 |
-| L5 | 27 | 3.1 | 1.4 | 19/27 (70%) | 0.0 | 0 | 27/27 | 27/27 | 27/27 |
-| L6 | 198 | 1.6 | 0.9 | 59/198 (29%) | 0.0 | 0 | 195/198 | 195/198 | 163/198 |
-| L7 | 78 | 1.8 | 0.6 | 41/78 (52%) | 0.0 | 0 | 78/78 | 78/78 | 76/78 |
+| L3 | 79 | 5.2 | 2.0 | 54/79 (68%) | 1.4 | 0 | 78/79 | 78/79 | 78/79 |
+| L4 | 120 | 2.0 | 0.8 | 40/120 (33%) | 0.1 | 0 | 112/120 | 112/120 | 80/120 |
+| L5 | 29 | 2.9 | 1.3 | 19/29 (65%) | 0.0 | 0 | 27/29 | 27/29 | 27/29 |
+| L6 | 213 | 1.5 | 0.8 | 59/213 (27%) | 0.0 | 0 | 210/213 | 210/213 | 168/213 |
+| L7 | 78 | 1.8 | 0.6 | 40/78 (51%) | 0.0 | 0 | 77/78 | 77/78 | 75/78 |
 
 ## 风险文件
 
@@ -110,6 +110,7 @@
 | E:\_src\rust-lang\concept\03_advanced\02_unsafe\08_async_in_unsafe_contexts.md | L3 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 反向推理不足 (⟸ 0 < 2) |
 | E:\_src\rust-lang\concept\03_advanced\02_unsafe\09_sanitizers.md | L3 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 反向推理不足 (⟸ 0 < 2) |
 | E:\_src\rust-lang\concept\03_advanced\02_unsafe\10_std_unsafe_internals.md | L3 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 反向推理不足 (⟸ 0 < 2) |
+| E:\_src\rust-lang\concept\03_advanced\02_unsafe\11_in_place_pinned_initialization.md | L3 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 反向推理不足 (⟸ 0 < 2) |
 | E:\_src\rust-lang\concept\03_advanced\03_proc_macros\02_proc_macro.md | L3 | 缺失认知路径; 缺失反命题; 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\03_advanced\03_proc_macros\10_quiz_macros.md | L3 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失反命题; 反向推理不足 (⟸ 0 < 2) |
 | E:\_src\rust-lang\concept\03_advanced\03_proc_macros\11_conditional_compilation.md | L3 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失反命题; 反向推理不足 (⟸ 0 < 2) |
@@ -168,6 +169,7 @@
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\10_minirust.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\11_async_state_machine_semantics.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (1 < 3); 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\12_pin_and_self_referential_semantics.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签; 缺失内容分级标签 |
+| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\13_in_place_initialization_semantics.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\04_formal\04_model_checking\01_verification_toolchain.md | L4 | 过渡段落不足 (0 < 3); 缺失反命题 |
 | E:\_src\rust-lang\concept\04_formal\04_model_checking\02_formal_methods.md | L4 | 缺失认知路径; 缺失反命题 |
 | E:\_src\rust-lang\concept\04_formal\04_model_checking\03_aerospace_certification_formal_methods.md | L4 | 过渡段落不足 (0 < 3) |
@@ -179,6 +181,7 @@
 | E:\_src\rust-lang\concept\04_formal\04_model_checking\09_kani.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\04_formal\04_model_checking\10_certified_toolchains_and_packages.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\04_formal\04_model_checking\11_creusot.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
+| E:\_src\rust-lang\concept\04_formal\04_model_checking\12_rust_contracts.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\04_formal\05_rustc_internals\01_rustc_query_system.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (1 < 3) |
 | E:\_src\rust-lang\concept\04_formal\05_rustc_internals\02_mir_codegen_llvm_primer.md | L4 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\04_formal\05_rustc_internals\03_trait_solver_in_rustc.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3) |
@@ -234,6 +237,12 @@
 | E:\_src\rust-lang\concept\04_formal\13_semantic_engineering\07_kg_owl_shacl_semantics.md | L4 | 缺失认知路径; 过渡段落不足 (2 < 3); 定理链不足 (0 < 3); 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\04_formal\13_semantic_engineering\08_computational_semantic_models.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
 | E:\_src\rust-lang\concept\04_formal\14_embedded_semantics\01_embedded_formal_memory_model.md | L4 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
+| E:\_src\rust-lang\concept\04_formal\15_language_specification\00_language_specification_overview.md | L4 | 缺失认知路径; 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
+| E:\_src\rust-lang\concept\04_formal\15_language_specification\01_rust_reference_and_normative_gap.md | L4 | 缺失认知路径; 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
+| E:\_src\rust-lang\concept\04_formal\15_language_specification\02_ferrocene_language_specification.md | L4 | 缺失认知路径; 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
+| E:\_src\rust-lang\concept\04_formal\15_language_specification\03_executable_specification_minirust.md | L4 | 缺失认知路径; 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
+| E:\_src\rust-lang\concept\04_formal\15_language_specification\04_a_mir_formality_type_system_spec.md | L4 | 缺失认知路径; 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
+| E:\_src\rust-lang\concept\04_formal\15_language_specification\05_specification_evidence_from_rustc_tests.md | L4 | 缺失认知路径; 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\05_comparative\00_paradigms\02_execution_model_isomorphism.md | L5 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\05_comparative\00_paradigms\03_cpp_rust_surface_features.md | L5 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\05_comparative\00_paradigms\05_language_semantic_model_matrix.md | L5 | 过渡段落不足 (2 < 3) |
@@ -257,6 +266,8 @@
 | E:\_src\rust-lang\concept\05_comparative\02_managed_languages\10_rust_vs_ocaml.md | L5 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\05_comparative\02_managed_languages\11_rust_vs_fsharp.md | L5 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\05_comparative\03_domain_comparisons\02_quiz_rust_vs_systems.md | L5 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
+| E:\_src\rust-lang\concept\05_comparative\04_verification_and_contracts\00_verification_and_contracts_overview.md | L5 | 缺失认知路径; 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
+| E:\_src\rust-lang\concept\05_comparative\04_verification_and_contracts\01_contracts_comparison.md | L5 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\02_logging_observability.md | L6 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\03_devops_and_ci_cd.md | L6 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\04_compiler_internals.md | L6 | 过渡段落不足 (0 < 3) |
@@ -328,6 +339,12 @@
 | E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\34_ownership_as_resource_management.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (1 < 3) |
 | E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\35_scope_guard_and_deferred_cleanup.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\36_enterprise_and_software_architecture_alignment.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
+| E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\37_event_sourcing_engine_patterns.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
+| E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\38_api_gateway_and_service_mesh_patterns.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
+| E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\39_api_design_and_semver_idioms.md | L6 | 定理链不足 (0 < 3) |
+| E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\40_testing_and_mocking_idioms.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签; 缺失内容分级标签 |
+| E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\41_ecs_and_data_oriented_design_patterns.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签; 缺失内容分级标签 |
+| E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\42_actor_model_and_message_passing_patterns.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\01_distributed_systems.md | L6 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\02_cloud_native.md | L6 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\03_web_frameworks.md | L6 | 过渡段落不足 (0 < 3) |
@@ -364,6 +381,8 @@
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\28_custom_bare_metal_async_executor.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\29_embedded_memory_layout_and_heap_safety.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\30_misra_rust_safety_critical_guidelines.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
+| E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\31_embedded_networking_and_iot_protocols.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
+| E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\32_embedded_testing_and_ci_strategies.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\06_ecosystem\06_data_and_distributed\02_database_access.md | L6 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\06_ecosystem\06_data_and_distributed\03_stream_processing_ecosystem.md | L6 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\06_ecosystem\06_data_and_distributed\04_database_systems.md | L6 | 过渡段落不足 (0 < 3) |
@@ -418,11 +437,18 @@
 | E:\_src\rust-lang\concept\06_ecosystem\14_enterprise_architecture\06_clean_architecture_in_rust.md | L6 | 缺失受众标签 |
 | E:\_src\rust-lang\concept\06_ecosystem\14_enterprise_architecture\07_hexagonal_architecture_in_rust.md | L6 | 缺失受众标签 |
 | E:\_src\rust-lang\concept\06_ecosystem\14_enterprise_architecture\08_microservices_patterns_in_rust.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
+| E:\_src\rust-lang\concept\06_ecosystem\14_enterprise_architecture\09_observability_and_sre_patterns.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
 | E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\00_algorithm_patterns_overview.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\01_algorithmic_paradigms.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
 | E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\02_ownership_aware_data_structures.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
 | E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\03_graph_algorithms_in_rust.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
 | E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\04_cache_friendly_and_simd_algorithms.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
+| E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\05_greedy_and_approximation_algorithms.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
+| E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\06_dynamic_programming_in_rust.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
+| E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\07_string_algorithms_in_rust.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
+| E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\09_randomized_and_probabilistic_algorithms.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
+| E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\10_computational_geometry_algorithms.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
+| E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\11_online_and_streaming_algorithms.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\01_rust_version_tracking.md | L7 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\02_editions.md | L7 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\feature_domain_matrix_197.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
@@ -458,7 +484,7 @@
 | E:\_src\rust-lang\concept\07_future\02_preview_features\17_type_alias_impl_trait_preview.md | L7 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\07_future\02_preview_features\18_arbitrary_self_types_preview.md | L7 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\07_future\02_preview_features\20_ergonomic_ref_counting_preview.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
-| E:\_src\rust-lang\concept\07_future\02_preview_features\21_rust_specification_preview.md | L7 | 过渡段落不足 (0 < 3) |
+| E:\_src\rust-lang\concept\07_future\02_preview_features\21_rust_specification_preview.md | L7 | 缺失前置概念; 缺失后置概念; 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\07_future\02_preview_features\22_async_drop_preview.md | L7 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\07_future\02_preview_features\23_field_projections_preview.md | L7 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\07_future\02_preview_features\24_borrow_sanitizer.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
@@ -483,6 +509,17 @@
 | E:\_src\rust-lang\concept\07_future\04_research_and_experimental\10_ai_safety_and_alignment.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | E:\_src\rust-lang\concept\07_future\04_research_and_experimental\11_rust_for_ai_model_serving.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
 | E:\_src\rust-lang\concept\07_future\05_quizzes\01_quiz_version_and_preview.md | L7 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
+
+## 死链检测
+
+| 来源文件 | 引用路径 | 解析后的绝对路径 |
+|:---|:---|:---|
+| E:\_src\rust-lang\concept\03_advanced\02_unsafe\11_in_place_pinned_initialization.md | ../01_async/16_async_dyn_trait.md | E:\_src\rust-lang\concept\03_advanced\01_async\16_async_dyn_trait.md |
+| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\13_in_place_initialization_semantics.md | ../../../00_meta/01_terminology/01_terminology_glossary.md | E:\_src\rust-lang\00_meta\01_terminology\01_terminology_glossary.md |
+| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\13_in_place_initialization_semantics.md | ../../../03_advanced/02_unsafe/01_unsafe.md | E:\_src\rust-lang\03_advanced\02_unsafe\01_unsafe.md |
+| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\13_in_place_initialization_semantics.md | ../../../03_advanced/02_unsafe/06_memory_model.md | E:\_src\rust-lang\03_advanced\02_unsafe\06_memory_model.md |
+| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\13_in_place_initialization_semantics.md | ../../../03_advanced/02_unsafe/11_in_place_pinned_initialization.md | E:\_src\rust-lang\03_advanced\02_unsafe\11_in_place_pinned_initialization.md |
+| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\13_in_place_initialization_semantics.md | ../../../07_future/02_preview_features/23_field_projections_preview.md | E:\_src\rust-lang\07_future\02_preview_features\23_field_projections_preview.md |
 
 ## docs/content/knowledge 死链检查
 
@@ -519,7 +556,7 @@
 | E:\_src\rust-lang\concept\00_meta\00_framework\theorem_inference_forest.md | L0 | 558 | 15 | 0 | 0 | 1 | 3 | 0 | 6 | ✅ | ❌ | ❌ | 研究者 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\00_framework\theorem_registry.md | L0 | 244 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\00_framework\todos.md | L0 | 349 | 1 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ❌ | ❌ | 专家 | 综述级 |
-| E:\_src\rust-lang\concept\00_meta\01_terminology\01_terminology_glossary.md | L0 | 467 | 1 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ❌ | ❌ | 初学者 | 综述级 |
+| E:\_src\rust-lang\concept\00_meta\01_terminology\01_terminology_glossary.md | L0 | 482 | 1 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ❌ | ❌ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\01_terminology\02_bilingual_template_v2.md | L0 | 327 | 0 | 2 | 0 | 5 | 1 | 5 | 0 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\01_terminology\03_bilingual_template.md | L0 | 167 | 0 | 0 | 0 | 1 | 1 | 1 | 0 | ❌ | ✅ | ✅ | 初学者 | 综述级 |
 | E:\_src\rust-lang\concept\00_meta\02_sources\01_authority_source_map.md | L0 | 215 | 1 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ❌ | ❌ | 进阶 | 综述级 |
@@ -712,6 +749,7 @@
 | E:\_src\rust-lang\concept\03_advanced\02_unsafe\08_async_in_unsafe_contexts.md | L3 | 285 | 0 | 0 | 0 | 4 | 2 | 5 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\03_advanced\02_unsafe\09_sanitizers.md | L3 | 426 | 0 | 0 | 0 | 3 | 1 | 3 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\03_advanced\02_unsafe\10_std_unsafe_internals.md | L3 | 571 | 0 | 0 | 0 | 4 | 2 | 13 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
+| E:\_src\rust-lang\concept\03_advanced\02_unsafe\11_in_place_pinned_initialization.md | L3 | 623 | 0 | 0 | 0 | 5 | 2 | 15 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\03_advanced\03_proc_macros\01_macros.md | L3 | 2573 | 26 | 3 | 0 | 8 | 9 | 59 | 8 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\03_advanced\03_proc_macros\02_proc_macro.md | L3 | 11 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\03_advanced\03_proc_macros\03_proc_macro_code_generation_optimization.md | L3 | 447 | 7 | 2 | 0 | 1 | 1 | 13 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
@@ -793,6 +831,7 @@
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\10_minirust.md | L4 | 269 | 0 | 0 | 0 | 1 | 1 | 4 | 0 | ❌ | ✅ | ✅ | None | None |
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\11_async_state_machine_semantics.md | L4 | 313 | 1 | 0 | 0 | 1 | 1 | 7 | 0 | ❌ | ✅ | ✅ | None | None |
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\12_pin_and_self_referential_semantics.md | L4 | 252 | 0 | 0 | 0 | 1 | 1 | 7 | 0 | ❌ | ✅ | ✅ | None | None |
+| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\13_in_place_initialization_semantics.md | L4 | 282 | 0 | 0 | 0 | 3 | 1 | 1 | 0 | ❌ | ✅ | ✅ | 形式化 / 专家 | 形式化 |
 | E:\_src\rust-lang\concept\04_formal\04_model_checking\01_verification_toolchain.md | L4 | 1601 | 3 | 0 | 0 | 0 | 5 | 17 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\04_model_checking\02_formal_methods.md | L4 | 34 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 研究者 | 研究者级 |
 | E:\_src\rust-lang\concept\04_formal\04_model_checking\03_aerospace_certification_formal_methods.md | L4 | 1155 | 3 | 0 | 0 | 1 | 2 | 7 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
@@ -804,6 +843,7 @@
 | E:\_src\rust-lang\concept\04_formal\04_model_checking\09_kani.md | L4 | 439 | 0 | 0 | 0 | 1 | 1 | 11 | 0 | ❌ | ✅ | ✅ | 研究者 | 综述级 |
 | E:\_src\rust-lang\concept\04_formal\04_model_checking\10_certified_toolchains_and_packages.md | L4 | 274 | 0 | 0 | 0 | 1 | 2 | 2 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\04_model_checking\11_creusot.md | L4 | 601 | 0 | 0 | 0 | 1 | 2 | 11 | 0 | ❌ | ✅ | ✅ | 研究者 | 专家级 |
+| E:\_src\rust-lang\concept\04_formal\04_model_checking\12_rust_contracts.md | L4 | 359 | 0 | 0 | 0 | 3 | 1 | 12 | 0 | ❌ | ✅ | ✅ | None | None |
 | E:\_src\rust-lang\concept\04_formal\05_rustc_internals\01_rustc_query_system.md | L4 | 653 | 1 | 0 | 0 | 1 | 4 | 5 | 0 | ❌ | ✅ | ✅ | 专家 | 综述级 |
 | E:\_src\rust-lang\concept\04_formal\05_rustc_internals\02_mir_codegen_llvm_primer.md | L4 | 486 | 8 | 3 | 0 | 2 | 2 | 3 | 0 | ✅ | ✅ | ✅ | 专家 | 综述级 |
 | E:\_src\rust-lang\concept\04_formal\05_rustc_internals\03_trait_solver_in_rustc.md | L4 | 484 | 3 | 3 | 0 | 1 | 2 | 10 | 0 | ❌ | ✅ | ✅ | 专家 | 综述级 |
@@ -865,6 +905,12 @@
 | E:\_src\rust-lang\concept\04_formal\13_semantic_engineering\07_kg_owl_shacl_semantics.md | L4 | 486 | 0 | 0 | 0 | 4 | 1 | 0 | 2 | ❌ | ✅ | ✅ | None | None |
 | E:\_src\rust-lang\concept\04_formal\13_semantic_engineering\08_computational_semantic_models.md | L4 | 655 | 0 | 0 | 0 | 5 | 1 | 9 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\14_embedded_semantics\01_embedded_formal_memory_model.md | L4 | 365 | 0 | 0 | 0 | 1 | 2 | 9 | 0 | ❌ | ✅ | ✅ | 研究者 | 研究者级 |
+| E:\_src\rust-lang\concept\04_formal\15_language_specification\00_language_specification_overview.md | L4 | 133 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\04_formal\15_language_specification\01_rust_reference_and_normative_gap.md | L4 | 151 | 0 | 0 | 0 | 1 | 1 | 2 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\04_formal\15_language_specification\02_ferrocene_language_specification.md | L4 | 179 | 0 | 0 | 0 | 1 | 1 | 2 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\04_formal\15_language_specification\03_executable_specification_minirust.md | L4 | 192 | 0 | 0 | 0 | 1 | 1 | 3 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\04_formal\15_language_specification\04_a_mir_formality_type_system_spec.md | L4 | 191 | 0 | 0 | 0 | 1 | 1 | 2 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\04_formal\15_language_specification\05_specification_evidence_from_rustc_tests.md | L4 | 164 | 0 | 0 | 0 | 1 | 1 | 1 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\05_comparative\00_paradigms\01_paradigm_matrix.md | L5 | 1307 | 8 | 0 | 0 | 5 | 9 | 12 | 16 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\05_comparative\00_paradigms\02_execution_model_isomorphism.md | L5 | 1059 | 3 | 0 | 0 | 1 | 6 | 13 | 0 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | E:\_src\rust-lang\concept\05_comparative\00_paradigms\03_cpp_rust_surface_features.md | L5 | 296 | 0 | 0 | 0 | 0 | 1 | 4 | 0 | ❌ | ✅ | ✅ | 进阶 | 研究者级 |
@@ -892,6 +938,8 @@
 | E:\_src\rust-lang\concept\05_comparative\02_managed_languages\11_rust_vs_fsharp.md | L5 | 893 | 0 | 0 | 0 | 7 | 2 | 8 | 0 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\05_comparative\03_domain_comparisons\01_safety_boundaries.md | L5 | 1182 | 8 | 0 | 0 | 1 | 8 | 9 | 9 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | E:\_src\rust-lang\concept\05_comparative\03_domain_comparisons\02_quiz_rust_vs_systems.md | L5 | 803 | 0 | 0 | 0 | 0 | 0 | 14 | 0 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
+| E:\_src\rust-lang\concept\05_comparative\04_verification_and_contracts\00_verification_and_contracts_overview.md | L5 | 159 | 0 | 0 | 0 | 2 | 1 | 1 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\05_comparative\04_verification_and_contracts\01_contracts_comparison.md | L5 | 268 | 0 | 0 | 0 | 2 | 1 | 6 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\01_toolchain.md | L6 | 2068 | 13 | 0 | 0 | 2 | 10 | 16 | 8 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\02_logging_observability.md | L6 | 784 | 3 | 0 | 0 | 2 | 4 | 9 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\03_devops_and_ci_cd.md | L6 | 1148 | 3 | 0 | 0 | 2 | 3 | 7 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
@@ -974,6 +1022,12 @@
 | E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\34_ownership_as_resource_management.md | L6 | 457 | 1 | 0 | 0 | 1 | 2 | 11 | 0 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\35_scope_guard_and_deferred_cleanup.md | L6 | 476 | 0 | 0 | 0 | 1 | 2 | 11 | 0 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\36_enterprise_and_software_architecture_alignment.md | L6 | 631 | 0 | 0 | 0 | 5 | 3 | 9 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\37_event_sourcing_engine_patterns.md | L6 | 721 | 0 | 0 | 0 | 4 | 2 | 13 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\38_api_gateway_and_service_mesh_patterns.md | L6 | 584 | 0 | 0 | 0 | 4 | 2 | 14 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\39_api_design_and_semver_idioms.md | L6 | 598 | 0 | 0 | 0 | 4 | 2 | 8 | 4 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\40_testing_and_mocking_idioms.md | L6 | 831 | 0 | 0 | 0 | 1 | 2 | 18 | 0 | ❌ | ✅ | ✅ | None | None |
+| E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\41_ecs_and_data_oriented_design_patterns.md | L6 | 487 | 0 | 0 | 0 | 3 | 3 | 5 | 0 | ❌ | ✅ | ✅ | None | None |
+| E:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\42_actor_model_and_message_passing_patterns.md | L6 | 382 | 0 | 0 | 0 | 2 | 2 | 4 | 0 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\01_distributed_systems.md | L6 | 853 | 3 | 0 | 0 | 2 | 2 | 9 | 0 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\02_cloud_native.md | L6 | 848 | 3 | 0 | 0 | 2 | 2 | 8 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\03_web_frameworks.md | L6 | 1165 | 4 | 0 | 0 | 3 | 4 | 12 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
@@ -1007,7 +1061,7 @@
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\20_embedded_debugging_logging.md | L6 | 736 | 0 | 0 | 0 | 2 | 1 | 10 | 0 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\21_riscv_avr_embedded.md | L6 | 626 | 0 | 0 | 0 | 0 | 1 | 10 | 0 | ❌ | ✅ | ✅ | 进阶 | 专题级 |
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\22_embedded_protocol_drivers.md | L6 | 972 | 0 | 0 | 0 | 2 | 1 | 25 | 0 | ❌ | ✅ | ✅ | 进阶 | None |
-| E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\23_no_std_and_bare_metal_idioms.md | L6 | 1323 | 0 | 0 | 0 | 1 | 3 | 24 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\23_no_std_and_bare_metal_idioms.md | L6 | 1340 | 0 | 0 | 0 | 1 | 3 | 24 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\24_embedded_hal_and_driver_idioms.md | L6 | 620 | 0 | 0 | 0 | 1 | 3 | 15 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\25_memory_mapped_peripherals_and_typestate.md | L6 | 635 | 0 | 0 | 0 | 1 | 4 | 13 | 0 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\26_embedded_rtos_and_safety_critical_frameworks.md | L6 | 520 | 0 | 0 | 0 | 4 | 3 | 6 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
@@ -1015,6 +1069,8 @@
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\28_custom_bare_metal_async_executor.md | L6 | 448 | 0 | 0 | 0 | 1 | 2 | 8 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\29_embedded_memory_layout_and_heap_safety.md | L6 | 423 | 0 | 0 | 0 | 1 | 2 | 4 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\30_misra_rust_safety_critical_guidelines.md | L6 | 327 | 0 | 0 | 0 | 1 | 2 | 3 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\31_embedded_networking_and_iot_protocols.md | L6 | 675 | 0 | 0 | 0 | 1 | 3 | 9 | 0 | ❌ | ✅ | ✅ | 专家 | 专题深度 |
+| E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\32_embedded_testing_and_ci_strategies.md | L6 | 629 | 0 | 0 | 0 | 2 | 2 | 5 | 0 | ❌ | ✅ | ✅ | 进阶/专家 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\06_data_and_distributed\01_application_domains.md | L6 | 1617 | 8 | 0 | 0 | 2 | 7 | 12 | 3 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\06_data_and_distributed\02_database_access.md | L6 | 883 | 3 | 0 | 0 | 2 | 2 | 8 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\06_data_and_distributed\03_stream_processing_ecosystem.md | L6 | 637 | 3 | 0 | 0 | 1 | 1 | 12 | 0 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
@@ -1046,7 +1102,7 @@
 | E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\05_game_development.md | L6 | 709 | 3 | 0 | 0 | 2 | 2 | 8 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\06_game_development.md | L6 | 34 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\07_algorithms_competitive_programming.md | L6 | 1366 | 0 | 0 | 0 | 1 | 1 | 31 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
-| E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\08_algorithm_engineering_practice.md | L6 | 2438 | 3 | 0 | 0 | 1 | 2 | 30 | 6 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\08_algorithm_engineering_practice.md | L6 | 2440 | 3 | 0 | 0 | 1 | 2 | 30 | 6 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\09_data_structures_in_rust.md | L6 | 338 | 3 | 0 | 0 | 0 | 2 | 10 | 6 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\10_algorithm_complexity_analysis.md | L6 | 335 | 0 | 0 | 0 | 0 | 2 | 8 | 0 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\11_cutting_edge_algorithms.md | L6 | 291 | 3 | 0 | 0 | 0 | 1 | 4 | 6 | ❌ | ✅ | ✅ | 专家 | 综述级 |
@@ -1063,8 +1119,8 @@
 | E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\22_autosar_and_rust.md | L6 | 215 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\23_safety_critical_systems_engineering.md | L6 | 487 | 0 | 0 | 0 | 6 | 1 | 5 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\24_advanced_data_structures_implementation.md | L6 | 506 | 0 | 0 | 0 | 4 | 1 | 17 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
-| E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\25_parallel_algorithms.md | L6 | 531 | 0 | 0 | 0 | 4 | 1 | 18 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
-| E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\26_zero_copy_parsing_in_rust.md | L6 | 563 | 0 | 0 | 0 | 4 | 2 | 16 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\25_parallel_algorithms.md | L6 | 675 | 0 | 0 | 0 | 5 | 3 | 20 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\26_zero_copy_parsing_in_rust.md | L6 | 565 | 0 | 0 | 0 | 4 | 2 | 16 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\27_ownership_aware_algorithms.md | L6 | 487 | 0 | 0 | 0 | 4 | 2 | 13 | 0 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\11_domain_applications\28_unsafe_algorithm_invariants.md | L6 | 466 | 0 | 0 | 0 | 4 | 2 | 9 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\12_networking\01_advanced_network_protocols.md | L6 | 332 | 3 | 0 | 0 | 0 | 3 | 8 | 6 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
@@ -1085,11 +1141,18 @@
 | E:\_src\rust-lang\concept\06_ecosystem\14_enterprise_architecture\06_clean_architecture_in_rust.md | L6 | 186 | 0 | 0 | 0 | 2 | 2 | 3 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\14_enterprise_architecture\07_hexagonal_architecture_in_rust.md | L6 | 178 | 0 | 0 | 0 | 2 | 2 | 3 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\14_enterprise_architecture\08_microservices_patterns_in_rust.md | L6 | 204 | 0 | 0 | 0 | 2 | 2 | 2 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\00_algorithm_patterns_overview.md | L6 | 487 | 0 | 0 | 0 | 5 | 2 | 14 | 0 | ❌ | ✅ | ✅ | None | None |
-| E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\01_algorithmic_paradigms.md | L6 | 1010 | 0 | 0 | 0 | 1 | 1 | 32 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\14_enterprise_architecture\09_observability_and_sre_patterns.md | L6 | 609 | 0 | 0 | 0 | 1 | 3 | 4 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\00_algorithm_patterns_overview.md | L6 | 491 | 0 | 0 | 0 | 5 | 2 | 14 | 0 | ❌ | ✅ | ✅ | None | None |
+| E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\01_algorithmic_paradigms.md | L6 | 1012 | 0 | 0 | 0 | 1 | 1 | 32 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\02_ownership_aware_data_structures.md | L6 | 489 | 0 | 0 | 0 | 4 | 2 | 9 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\03_graph_algorithms_in_rust.md | L6 | 665 | 0 | 0 | 0 | 4 | 2 | 11 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\04_cache_friendly_and_simd_algorithms.md | L6 | 423 | 0 | 0 | 0 | 5 | 2 | 11 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\05_greedy_and_approximation_algorithms.md | L6 | 473 | 0 | 0 | 0 | 4 | 2 | 7 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\06_dynamic_programming_in_rust.md | L6 | 434 | 0 | 0 | 0 | 4 | 2 | 9 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\07_string_algorithms_in_rust.md | L6 | 483 | 0 | 0 | 0 | 4 | 2 | 10 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\09_randomized_and_probabilistic_algorithms.md | L6 | 785 | 0 | 0 | 0 | 1 | 2 | 13 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\10_computational_geometry_algorithms.md | L6 | 601 | 0 | 0 | 0 | 5 | 2 | 11 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\16_algorithm_patterns\11_online_and_streaming_algorithms.md | L6 | 312 | 0 | 0 | 0 | 2 | 2 | 4 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\01_rust_version_tracking.md | L7 | 2699 | 3 | 0 | 0 | 0 | 3 | 9 | 0 | ✅ | ✅ | ✅ | 专家 | 综述级 |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\02_editions.md | L7 | 373 | 4 | 0 | 0 | 1 | 2 | 8 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\03_rust_release_process.md | L7 | 195 | 0 | 0 | 0 | 1 | 2 | 2 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
@@ -1109,16 +1172,16 @@
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_97_1.md | L7 | 514 | 1 | 0 | 0 | 3 | 1 | 3 | 0 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_97_preview.md | L7 | 147 | 0 | 0 | 0 | 0 | 1 | 3 | 0 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_97_stabilized.md | L7 | 574 | 0 | 0 | 0 | 0 | 1 | 15 | 0 | ❌ | ✅ | ✅ | 专家 | 综述级 |
-| E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_98_preview.md | L7 | 1144 | 0 | 0 | 0 | 0 | 1 | 21 | 0 | ❌ | ✅ | ✅ | 专家 | 实验级 |
+| E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_98_preview.md | L7 | 1154 | 0 | 0 | 0 | 0 | 1 | 21 | 0 | ❌ | ✅ | ✅ | 专家 | 实验级 |
 | E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_98_stabilized.md | L7 | 1086 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | ❌ | ✅ | ✅ | 专家 | 综述级 |
-| E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_99_preview.md | L7 | 339 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | ❌ | ✅ | ✅ | 专家 | 实验级 |
+| E:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_99_preview.md | L7 | 343 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | ❌ | ✅ | ✅ | 专家 | 实验级 |
 | E:\_src\rust-lang\concept\07_future\01_edition_roadmap\01_rust_edition_preview.md | L7 | 166 | 0 | 0 | 0 | 0 | 1 | 5 | 0 | ❌ | ✅ | ✅ | 进阶 | 研究者级 |
 | E:\_src\rust-lang\concept\07_future\01_edition_roadmap\02_edition_guide.md | L7 | 1062 | 3 | 0 | 0 | 2 | 2 | 14 | 0 | ✅ | ✅ | ✅ | 专家 | 综述级 |
 | E:\_src\rust-lang\concept\07_future\01_edition_roadmap\03_rust_edition_guide.md | L7 | 20 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 研究者 | 研究者级 |
 | E:\_src\rust-lang\concept\07_future\01_edition_roadmap\04_roadmap.md | L7 | 1133 | 3 | 0 | 0 | 2 | 3 | 17 | 0 | ✅ | ✅ | ✅ | 专家 | 综述级 |
 | E:\_src\rust-lang\concept\07_future\02_preview_features\01_effects_system.md | L7 | 1774 | 4 | 0 | 0 | 0 | 4 | 26 | 0 | ✅ | ✅ | ✅ | 专家 | 综述级 |
 | E:\_src\rust-lang\concept\07_future\02_preview_features\02_mcdc_coverage_preview.md | L7 | 639 | 3 | 0 | 0 | 2 | 4 | 6 | 0 | ✅ | ✅ | ✅ | 专家 | 实验级 |
-| E:\_src\rust-lang\concept\07_future\02_preview_features\03_safety_tags_preview.md | L7 | 719 | 3 | 0 | 0 | 3 | 4 | 6 | 0 | ✅ | ✅ | ✅ | 专家 | 实验级 |
+| E:\_src\rust-lang\concept\07_future\02_preview_features\03_safety_tags_preview.md | L7 | 733 | 3 | 0 | 0 | 3 | 4 | 6 | 0 | ✅ | ✅ | ✅ | 专家 | 实验级 |
 | E:\_src\rust-lang\concept\07_future\02_preview_features\04_parallel_frontend_preview.md | L7 | 718 | 3 | 0 | 0 | 3 | 4 | 6 | 0 | ✅ | ✅ | ✅ | 专家 | 实验级 |
 | E:\_src\rust-lang\concept\07_future\02_preview_features\05_derive_coerce_pointee_preview.md | L7 | 689 | 3 | 0 | 0 | 2 | 4 | 8 | 0 | ✅ | ✅ | ✅ | 专家 | 实验级 |
 | E:\_src\rust-lang\concept\07_future\02_preview_features\06_const_trait_impl_preview.md | L7 | 704 | 3 | 0 | 0 | 2 | 3 | 7 | 0 | ✅ | ✅ | ✅ | 专家 | 实验级 |
@@ -1136,7 +1199,7 @@
 | E:\_src\rust-lang\concept\07_future\02_preview_features\18_arbitrary_self_types_preview.md | L7 | 455 | 3 | 0 | 0 | 1 | 1 | 11 | 0 | ✅ | ✅ | ✅ | 专家 | 实验级 |
 | E:\_src\rust-lang\concept\07_future\02_preview_features\19_const_trait_preview.md | L7 | 20 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 专家 | 实验级 |
 | E:\_src\rust-lang\concept\07_future\02_preview_features\20_ergonomic_ref_counting_preview.md | L7 | 346 | 0 | 0 | 0 | 0 | 1 | 7 | 0 | ❌ | ✅ | ✅ | 专家 | 实验级 |
-| E:\_src\rust-lang\concept\07_future\02_preview_features\21_rust_specification_preview.md | L7 | 689 | 3 | 0 | 0 | 2 | 4 | 6 | 0 | ✅ | ✅ | ✅ | 专家 | 实验级 |
+| E:\_src\rust-lang\concept\07_future\02_preview_features\21_rust_specification_preview.md | L7 | 12 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\07_future\02_preview_features\22_async_drop_preview.md | L7 | 822 | 3 | 0 | 0 | 2 | 3 | 7 | 0 | ✅ | ✅ | ✅ | 专家 | 实验级 |
 | E:\_src\rust-lang\concept\07_future\02_preview_features\23_field_projections_preview.md | L7 | 452 | 3 | 0 | 0 | 1 | 1 | 10 | 0 | ✅ | ✅ | ✅ | 专家 | 实验级 |
 | E:\_src\rust-lang\concept\07_future\02_preview_features\24_borrow_sanitizer.md | L7 | 421 | 0 | 0 | 0 | 1 | 2 | 4 | 0 | ❌ | ✅ | ✅ | 专家 | 实验级 |
@@ -1155,7 +1218,7 @@
 | E:\_src\rust-lang\concept\07_future\02_preview_features\37_default_field_values_preview.md | L7 | 156 | 0 | 0 | 0 | 1 | 1 | 4 | 0 | ❌ | ✅ | ✅ | 专家 | 实验级 |
 | E:\_src\rust-lang\concept\07_future\02_preview_features\38_complex_numbers_preview.md | L7 | 152 | 0 | 0 | 0 | 1 | 1 | 3 | 0 | ❌ | ✅ | ✅ | 专家 | 实验级 |
 | E:\_src\rust-lang\concept\07_future\02_preview_features\39_async_ioring_preview.md | L7 | 252 | 0 | 0 | 0 | 2 | 1 | 2 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
-| E:\_src\rust-lang\concept\07_future\03_edition_differences\01_edition_2021_to_2024.md | L7 | 364 | 0 | 0 | 0 | 4 | 1 | 11 | 2 | ❌ | ✅ | ✅ | None | None |
+| E:\_src\rust-lang\concept\07_future\03_edition_differences\01_edition_2021_to_2024.md | L7 | 365 | 0 | 0 | 0 | 4 | 1 | 11 | 2 | ❌ | ✅ | ✅ | None | None |
 | E:\_src\rust-lang\concept\07_future\04_research_and_experimental\01_ai_integration.md | L7 | 1040 | 1 | 0 | 0 | 2 | 3 | 9 | 0 | ✅ | ✅ | ✅ | 专家 | 实验级 |
 | E:\_src\rust-lang\concept\07_future\04_research_and_experimental\02_formal_methods.md | L7 | 1754 | 9 | 0 | 0 | 1 | 10 | 9 | 3 | ✅ | ✅ | ✅ | 专家 | 实验级 |
 | E:\_src\rust-lang\concept\07_future\04_research_and_experimental\03_evolution.md | L7 | 2213 | 8 | 0 | 0 | 1 | 6 | 19 | 3 | ✅ | ✅ | ✅ | 专家 | 综述级 |
@@ -1167,4 +1230,4 @@
 | E:\_src\rust-lang\concept\07_future\04_research_and_experimental\09_mlops_and_llmops.md | L7 | 567 | 0 | 0 | 0 | 3 | 1 | 5 | 0 | ✅ | ✅ | ✅ | 专家 | 实验级 |
 | E:\_src\rust-lang\concept\07_future\04_research_and_experimental\10_ai_safety_and_alignment.md | L7 | 434 | 0 | 0 | 0 | 3 | 1 | 1 | 0 | ✅ | ✅ | ✅ | 专家 | 实验级 |
 | E:\_src\rust-lang\concept\07_future\04_research_and_experimental\11_rust_for_ai_model_serving.md | L7 | 419 | 0 | 0 | 0 | 4 | 1 | 4 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| E:\_src\rust-lang\concept\07_future\05_quizzes\01_quiz_version_and_preview.md | L7 | 356 | 0 | 0 | 0 | 1 | 0 | 3 | 0 | ❌ | ✅ | ✅ | 进阶 | 实验级 |
+| E:\_src\rust-lang\concept\07_future\05_quizzes\01_quiz_version_and_preview.md | L7 | 362 | 0 | 0 | 0 | 1 | 0 | 3 | 0 | ❌ | ✅ | ✅ | 进阶 | 实验级 |

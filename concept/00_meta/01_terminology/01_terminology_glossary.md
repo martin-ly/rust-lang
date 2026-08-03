@@ -8,7 +8,7 @@
 > **标准来源**: TRPL · Rust Reference · std API Docs · Rustnomicon · Async Book · Cargo Book · Edition Guide
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L0
-> **状态**: ✅ v3.2 — 已覆盖 183 个高频术语（超过 150 目标），全部含英文对照；关键术语已在 L1–L3 概念文档完成首次出现双语标注
+> **状态**: ✅ v3.3 — 已覆盖 201 个高频术语（超过 150 目标），全部含英文对照；关键术语已在 L1–L4 概念文档完成首次出现双语标注
 > **冻结日期**: 2026-06-10（v3.0 冻结）；2026-06-22 起跟踪 1.97 术语；2026-06-24 完成双语标注
 > **维护规则**: 仅当 Rust 官方术语变更或新增核心语言关键字/API 时才更新，常规生态术语不扩展
 
@@ -166,6 +166,15 @@
 - **动态分发** (Dynamic Dispatch) [L3] — 运行时通过 vtable 解析 trait 方法调用的机制，dyn Trait 使用 — [TRPL](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)
 - **静态分发** (Static Dispatch) [L3] — 编译期通过单态化将泛型替换为具体类型的调用机制 — [TRPL](https://doc.rust-lang.org/book/ch10-01-syntax.html)
 - **单态化** (Monomorphization) [L3] — 编译器为每个泛型具体类型生成独立代码实例的过程 — [Reference](https://doc.rust-lang.org/reference/items/generics.html#monomorphization)
+- **契约** (Contract) [L3] — 函数或数据结构的显式前置/后置/不变条件，违反 safety contract 即 UB — [MCP-759](https://github.com/rust-lang/compiler-team/issues/759)
+- **前置条件** (Precondition) [L3] — 函数调用前调用者必须保证的谓词 — [Hoare Logic](https://doi.org/10.1145/363235.363259)
+- **后置条件** (Postcondition) [L3] — 函数返回时实现者必须保证的谓词 — [Hoare Logic](https://doi.org/10.1145/363235.363259)
+- **不变量** (Invariant) [L3] — 数据结构在可见状态下始终成立的谓词 — [Hoare Logic](https://doi.org/10.1145/363235.363259)
+- **原地初始化** (In-place Initialization) [L3] — 在已分配内存地址上直接构造值，避免栈分配再复制 — [Rust Project Goals 2025H2](https://rust-lang.github.io/rust-project-goals/2025h2/in-place-initialization.html)
+- **固定初始化** (Pinned Initialization) [L3] — 保证自引用类型在初始化后不被移动的 Pin-aware 原地初始化 — [Rust-for-Linux](https://rust-for-linux.com/the-safe-pinned-initialization-problem)
+- **`MaybeUninit<T>`** (MaybeUninit) [L3] — 可能未初始化的 `T` 包装类型，允许延迟初始化而不触发 UB — [std](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html)
+- **`pin-init` / `pinned-init`** (pin-init) [L3] — Rust-for-Linux 提出的安全固定初始化宏/框架，支持 fallible 与 Pin-aware 构造 — [pin-init docs](https://rust.docs.kernel.org/pin_init/)
+- **`Zeroize`** (Zeroize) [L3] — 安全清零敏感数据的 trait 与包装器，防止编译器优化掉清零操作 — [zeroize crate](https://docs.rs/zeroize/latest/zeroize/)
 
 ## L4 形式化（Formal Methods）
 
@@ -188,6 +197,12 @@
 - **Creusot** (Creusot) [L4] — 基于 Why3 验证平台的 Rust 形式化验证工具，使用 ML 风格规范语言 — [Creusot Docs](https://creusot-rs.github.io/)
 - **Verus** (Verus) [L4] — 支持 Rust 的演绎验证与证明助手 — [Verus Docs](https://verus-lang.github.io/verus/guide/)
 - **Miri** (Miri) [L4] — 检测未定义行为的 Rust 中间表示解释器 — [Miri](https://github.com/rust-lang/miri)
+- **语言规范** (Language Specification) [L4] — 对 Rust 语言含义的精确、可审计描述，Reference 自陈 non-normative，FLS 提供认证子集规范 — [RFC 3355](https://rust-lang.github.io/rfcs/3355-rust-spec.html)
+- **可执行规范** (Executable Specification) [L4] — 可直接解释执行以给出程序行为/UB 判定的形式化规约，如 MiniRust — [MiniRust](https://github.com/minirust/minirust)
+- **Ferrocene Language Specification (FLS)** [L4] — 已捐赠给 Rust Project 的规范性语言规范，带规则标识符与认证子集限制 — [FLS](https://spec.ferrocene.dev/)
+- **a-mir-formality** [L4] — Rust 官方 MIR / 类型系统 / trait 求解 / 借用检查的形式化模型 — [a-mir-formality](https://github.com/rust-lang/a-mir-formality)
+- **MiniRust** [L4] — Rust 核心语言的可执行操作语义与抽象机模型 — [MiniRust](https://github.com/minirust/minirust)
+- **所有权断言** (Ownership Assertion) [L4] — 在契约中表达独占 points-to 或内存块所有权的分离逻辑原语，如 `owned<T>` / `alloc_block` — [MCP-942](https://github.com/rust-lang/compiler-team/issues/942)
 - **高级中间表示** (HIR) [L4] — High-level IR，Rust 编译器中经过类型推断和宏展开后的高级中间表示 — [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/hir.html)
 - **抽象语法树** (AST) [L4] — Abstract Syntax Tree，源代码解析后的树形结构表示，编译器前端输出 — [rustc-dev-guide](https://rustc-dev-guide.rust-lang.org/syntax-intro.html)
 

@@ -1,45 +1,63 @@
 {
   "date": "2026-08-04",
-  "scanned": 665,
+  "scanned": 690,
   "coverage": {
     "P0": [
-      660,
-      99.2
+      685,
+      99.3
     ],
     "P1": [
-      627,
-      94.3
+      644,
+      93.3
     ],
     "P2": [
-      591,
-      88.9
+      608,
+      88.1
     ],
     "any": [
-      665,
+      690,
       100.0
     ],
     "none": 0
   },
   "content_scope": {
-    "scanned": 570,
+    "scanned": 595,
     "P0": [
-      570,
+      595,
       100.0
     ],
     "P1": [
-      570,
-      100.0
+      587,
+      98.7
     ],
     "P2": [
-      570,
-      100.0
+      587,
+      98.7
     ],
     "any": [
-      570,
+      595,
       100.0
     ],
-    "gaps_p1": [],
-    "gaps_p2": []
+    "gaps_p1": [
+      "concept/03_advanced/02_unsafe/11_in_place_pinned_initialization.md",
+      "concept/04_formal/03_operational_semantics/13_in_place_initialization_semantics.md",
+      "concept/04_formal/15_language_specification/00_language_specification_overview.md",
+      "concept/04_formal/15_language_specification/01_rust_reference_and_normative_gap.md",
+      "concept/04_formal/15_language_specification/02_ferrocene_language_specification.md",
+      "concept/04_formal/15_language_specification/04_a_mir_formality_type_system_spec.md",
+      "concept/04_formal/15_language_specification/05_specification_evidence_from_rustc_tests.md",
+      "concept/05_comparative/04_verification_and_contracts/00_verification_and_contracts_overview.md"
+    ],
+    "gaps_p2": [
+      "concept/04_formal/03_operational_semantics/13_in_place_initialization_semantics.md",
+      "concept/04_formal/04_model_checking/12_rust_contracts.md",
+      "concept/04_formal/15_language_specification/00_language_specification_overview.md",
+      "concept/04_formal/15_language_specification/01_rust_reference_and_normative_gap.md",
+      "concept/04_formal/15_language_specification/03_executable_specification_minirust.md",
+      "concept/04_formal/15_language_specification/04_a_mir_formality_type_system_spec.md",
+      "concept/05_comparative/04_verification_and_contracts/00_verification_and_contracts_overview.md",
+      "concept/05_comparative/04_verification_and_contracts/01_contracts_comparison.md"
+    ]
   },
   "by_layer": {
     "L0": {
@@ -58,29 +76,29 @@
       "any": 45
     },
     "L3": {
-      "n": 77,
-      "P0": 77,
-      "any": 77
+      "n": 78,
+      "P0": 78,
+      "any": 78
     },
     "L4": {
-      "n": 111,
-      "P0": 111,
-      "any": 111
+      "n": 119,
+      "P0": 119,
+      "any": 119
     },
     "L5": {
-      "n": 27,
-      "P0": 27,
-      "any": 27
+      "n": 29,
+      "P0": 29,
+      "any": 29
     },
     "L6": {
-      "n": 195,
-      "P0": 191,
-      "any": 195
+      "n": 210,
+      "P0": 206,
+      "any": 210
     },
     "L7": {
-      "n": 76,
-      "P0": 75,
-      "any": 76
+      "n": 75,
+      "P0": 74,
+      "any": 75
     },
     "L?": {
       "n": 3,

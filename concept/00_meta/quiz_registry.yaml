@@ -439,8 +439,8 @@ standalone_quizzes:
   concept_to_quiz_backlink: true
 embedded_quizzes:
   description: concept/ 页面内嵌入式测验（### 测验 N + <details> 答题块），按页聚合
-  pages: 344
-  total_blocks: 1494
+  pages: 346
+  total_blocks: 1499
   items:
   - path: concept/00_meta/00_framework/bloom_taxonomy.md
     blocks: 3
@@ -768,6 +768,8 @@ embedded_quizzes:
     blocks: 5
   - path: concept/04_formal/03_operational_semantics/06_observational_equivalence.md
     blocks: 8
+  - path: concept/04_formal/03_operational_semantics/13_in_place_initialization_semantics.md
+    blocks: 2
   - path: concept/04_formal/04_model_checking/01_verification_toolchain.md
     blocks: 5
   - path: concept/04_formal/04_model_checking/03_aerospace_certification_formal_methods.md
@@ -820,6 +822,8 @@ embedded_quizzes:
     blocks: 3
   - path: concept/04_formal/13_semantic_engineering/07_kg_owl_shacl_semantics.md
     blocks: 3
+  - path: concept/04_formal/13_semantic_engineering/08_computational_semantic_models.md
+    blocks: 5
   - path: concept/04_formal/README.md
     blocks: 3
   - path: concept/05_comparative/00_paradigms/01_paradigm_matrix.md
@@ -934,6 +938,10 @@ embedded_quizzes:
     blocks: 5
   - path: concept/06_ecosystem/03_design_patterns/18_api_design_patterns.md
     blocks: 5
+  - path: concept/06_ecosystem/03_design_patterns/36_enterprise_and_software_architecture_alignment.md
+    blocks: 5
+  - path: concept/06_ecosystem/03_design_patterns/39_api_design_and_semver_idioms.md
+    blocks: 3
   - path: concept/06_ecosystem/04_web_and_networking/01_distributed_systems.md
     blocks: 5
   - path: concept/06_ecosystem/04_web_and_networking/02_cloud_native.md
@@ -1020,6 +1028,10 @@ embedded_quizzes:
     blocks: 5
   - path: concept/06_ecosystem/14_enterprise_architecture/03_architecture_standards_alignment.md
     blocks: 5
+  - path: concept/06_ecosystem/16_algorithm_patterns/01_algorithmic_paradigms.md
+    blocks: 5
+  - path: concept/06_ecosystem/16_algorithm_patterns/09_randomized_and_probabilistic_algorithms.md
+    blocks: 5
   - path: concept/06_ecosystem/README.md
     blocks: 3
   - path: concept/07_future/00_version_tracking/01_rust_version_tracking.md
@@ -1063,8 +1075,6 @@ embedded_quizzes:
   - path: concept/07_future/02_preview_features/18_arbitrary_self_types_preview.md
     blocks: 5
   - path: concept/07_future/02_preview_features/20_ergonomic_ref_counting_preview.md
-    blocks: 5
-  - path: concept/07_future/02_preview_features/21_rust_specification_preview.md
     blocks: 5
   - path: concept/07_future/02_preview_features/22_async_drop_preview.md
     blocks: 5
@@ -1124,12 +1134,6 @@ embedded_quizzes:
     blocks: 3
   - path: concept/sources/theorem_tier_spec.md
     blocks: 3
-  - path: concept/04_formal/13_semantic_engineering/08_computational_semantic_models.md
-    blocks: 5
-  - path: concept/06_ecosystem/03_design_patterns/36_enterprise_and_software_architecture_alignment.md
-    blocks: 5
-  - path: concept/06_ecosystem/16_algorithm_patterns/01_algorithmic_paradigms.md
-    blocks: 5
 exercises_tests:
   description: exercises/ 分层测试套件（#[test] 计数）
   test_files: 12

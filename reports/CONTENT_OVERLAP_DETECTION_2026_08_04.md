@@ -1,11 +1,13 @@
 # 四轨内容相似度检测报告
 
-- **扫描文件数**: 1167
+- **扫描文件数**: 1192
 - **相似度阈值**: 0.6
-- **潜在重复对**: 0
+- **潜在重复对**: 2
 
 | 相似度 | 文件1 | 文件2 | 标题1 | 标题2 |
 |:---|:---|:---|:---|:---|
+| 0.60 | `concept\04_formal\15_language_specification\01_rust_reference_and_normative_gap.md` | `docs\12_research_notes\01_alignment_matrices\34_rust_reference_alignment.md` | Rust Reference 与规范性缺口 | Rust Reference 对齐矩阵 {#rust-ref |
+| 0.60 | `concept\04_formal\15_language_specification\01_rust_reference_and_normative_gap.md` | `docs\12_research_notes\01_alignment_matrices\35_rust_reference_chapters_alignment.md` | Rust Reference 与规范性缺口 | Rust Reference 分章节深度对齐 {#rust- |
 
 ## 建议
 

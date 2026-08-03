@@ -57,6 +57,8 @@ mindmap
       Safety tags
       BorrowSanitizer
       contracts
+      in-place initialization
+      Rust Language Specification
     平台与性能
       f16 / f128
       Portable SIMD
@@ -94,7 +96,9 @@ mindmap
 | Arbitrary self types | nightly only | [预览页](../02_preview_features/18_arbitrary_self_types_preview.md) |
 | Field projections | experimental | [Project Goals](https://rust-lang.github.io/rust-project-goals/2026/field-projections.html) · [预览页](../02_preview_features/23_field_projections_preview.md) |
 | BorrowSanitizer | prototype | [Project Goals](https://rust-lang.github.io/rust-project-goals/2026/borrowsanitizer.html) · [预览页](../02_preview_features/24_borrow_sanitizer.md) |
-| Contracts (`contracts` feature) | experimental | [Unstable Book](https://doc.rust-lang.org/nightly/unstable-book/language-features/contracts.html) |
+| Contracts (`contracts` feature) | experimental | [Unstable Book](https://doc.rust-lang.org/nightly/unstable-book/language-features/contracts.html) · [概念权威页](../../04_formal/04_model_checking/12_rust_contracts.md) |
+| In-place initialization / `pin-init` | design / nightly | [Project Goals 2025H2](https://rust-lang.github.io/rust-project-goals/2025h2/in-place-initialization.html) · [概念权威页](../../03_advanced/02_unsafe/11_in_place_pinned_initialization.md) |
+| Rust Language Specification (RFC 3355 / FLS upstreaming) | experimental | [Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/experimental-language-specification.html) · [概念权威页](../../04_formal/15_language_specification/00_language_specification_overview.md) |
 | Never type (`!`) stabilization | proposed-FCP | [Project Goals](https://rust-lang.github.io/rust-project-goals/2026/never-type.html) |
 | `extern "custom"` | FCP finished | [tracking issue](https://github.com/rust-lang/rust/issues/127030) |
 

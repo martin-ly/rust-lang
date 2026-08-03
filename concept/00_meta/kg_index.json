@@ -4,7 +4,7 @@
     "generated": "2026-07-11",
     "rust_version": "1.97.0+",
     "source": "concept/",
-    "entity_count": 670,
+    "entity_count": 681,
     "schema": "simple KG index"
   },
   "entities": [
@@ -5708,6 +5708,29 @@
       "related_crates": []
     },
     {
+      "id": "concept:03_advanced/02_unsafe/11_in_place_pinned_initialization.md",
+      "path": "03_advanced/02_unsafe/11_in_place_pinned_initialization.md",
+      "title": "",
+      "en": "In-place and Pinned Initialization Patterns",
+      "summary": "Rust's safe and unsafe patterns for initializing memory in-place, covering `MaybeUninit<T>`, standard library in-place allocation APIs, manual `PhantomPinned` self-referential construction, and the `pin-init` / `pinned-init` engineering pattern.",
+      "bloom": "L3-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Unsafe Rust",
+          "path": "01_unsafe.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Field Projections",
+          "path": "../../07_future/02_preview_features/23_field_projections_preview.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:03_advanced/03_proc_macros/01_macros.md",
       "path": "03_advanced/03_proc_macros/01_macros.md",
       "title": "",
@@ -7819,6 +7842,29 @@
       "related_crates": []
     },
     {
+      "id": "concept:04_formal/03_operational_semantics/13_in_place_initialization_semantics.md",
+      "path": "04_formal/03_operational_semantics/13_in_place_initialization_semantics.md",
+      "title": "",
+      "en": "Operational Semantics of In-place Initialization",
+      "summary": "Formal models for in-place initialization in Rust, covering the initialization invariant, partial initialization states, panic-safety obligations, and the `PinInit` / `Init` trait semantics used by the `pin-init` crate.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)；`pin-init` / `pinned-init` 需 nightly",
+      "prerequisites": [
+        {
+          "title": "Unsafe Rust",
+          "path": "../../../03_advanced/02_unsafe/01_unsafe.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "In-place & Pinned Initialization Patterns",
+          "path": "../../../03_advanced/02_unsafe/11_in_place_pinned_initialization.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:04_formal/04_model_checking/01_verification_toolchain.md",
       "path": "04_formal/04_model_checking/01_verification_toolchain.md",
       "title": "",
@@ -8122,6 +8168,43 @@
         {
           "title": "AutoVerus",
           "path": "07_autoverus.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": [
+        "c15_verification_tools"
+      ]
+    },
+    {
+      "id": "concept:04_formal/04_model_checking/12_rust_contracts.md",
+      "path": "04_formal/04_model_checking/12_rust_contracts.md",
+      "title": "Rust 语言级契约：前置条件、后置条件与所有权断言",
+      "en": "Rust Language Contracts: Preconditions, Postconditions, and Ownership Assertions",
+      "summary": "Language-level `#[rustc_contracts::requires]`, `#[rustc_contracts::ensures]`, and `#[rustc_contracts::invariant]` for expressing safety and correctness contracts, including separation-logic ownership primitives `owned`/`alloc_block`.",
+      "bloom": "L4（形式化方法/验证工具生态），部分 L3 工程视角",
+      "rust_version": "1.97.0+ (Edition 2024)；`feature(contracts)` 与 `owned`/`alloc_block` 为 Nightly 实验性",
+      "prerequisites": [
+        {
+          "title": "Unsafe Rust",
+          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
+        },
+        {
+          "title": "形式化 Unsafe 契约",
+          "path": "07_unsafe_contracts_formal.md"
+        },
+        {
+          "title": "Kani",
+          "path": "09_kani.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Safety Tags 预览",
+          "path": "../../07_future/02_preview_features/03_safety_tags_preview.md"
+        },
+        {
+          "title": "跨语言契约对比",
+          "path": "../../05_comparative/04_verification_and_contracts/00_verification_and_contracts_overview.md"
         }
       ],
       "theorems": [],
@@ -11160,6 +11243,36 @@
       ]
     },
     {
+      "id": "concept:05_comparative/04_verification_and_contracts/00_verification_and_contracts_overview.md",
+      "path": "05_comparative/04_verification_and_contracts/00_verification_and_contracts_overview.md",
+      "title": "验证与契约生态导览",
+      "en": "Verification and Contracts Ecosystem Overview",
+      "summary": "A map of language-level and tool-level contract systems for Rust and related ecosystems, linking to the Rust Contracts canonical page and cross-language comparison.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [],
+      "postrequisites": [],
+      "theorems": [],
+      "related_crates": [
+        "c14_semantic_web"
+      ]
+    },
+    {
+      "id": "concept:05_comparative/04_verification_and_contracts/01_contracts_comparison.md",
+      "path": "05_comparative/04_verification_and_contracts/01_contracts_comparison.md",
+      "title": "契约系统对比：Rust、C++26、Ada/SPARK 与演绎验证器",
+      "en": "Comparative Contracts: Rust, C++26, Ada/SPARK, and Deductive Verifiers",
+      "summary": "Compare language-level and tool-level contract systems across Rust (MCP-759/942), C++26 (P2900), Ada/SPARK, and Rust verifiers (Kani, Prusti, Creusot, Verus).",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [],
+      "postrequisites": [],
+      "theorems": [],
+      "related_crates": [
+        "c14_semantic_web"
+      ]
+    },
+    {
       "id": "concept:05_comparative/README.md",
       "path": "05_comparative/README.md",
       "title": "L5 对比分析层（Comparative Analysis）",
@@ -13144,6 +13257,106 @@
       "related_crates": []
     },
     {
+      "id": "concept:06_ecosystem/03_design_patterns/37_event_sourcing_engine_patterns.md",
+      "path": "06_ecosystem/03_design_patterns/37_event_sourcing_engine_patterns.md",
+      "title": "事件溯源引擎模式（Event Sourcing Engine Patterns in Rust）",
+      "en": "Event Sourcing Engine Patterns in Rust",
+      "summary": "Engineering patterns for building event-sourced storage engines in Rust: event-store abstraction, snapshotting, optimistic concurrency, projection caching, and typestate-validated commands.",
+      "bloom": "L5-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "CQRS & Event Sourcing",
+          "path": "07_cqrs_event_sourcing.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Saga",
+          "path": "29_saga.md"
+        },
+        {
+          "title": "Outbox",
+          "path": "30_outbox.md"
+        },
+        {
+          "title": "Workflow Theory",
+          "path": "17_workflow_theory.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/03_design_patterns/38_api_gateway_and_service_mesh_patterns.md",
+      "path": "06_ecosystem/03_design_patterns/38_api_gateway_and_service_mesh_patterns.md",
+      "title": "API 网关与服务网格模式（API Gateway & Service Mesh Patterns in Rust）",
+      "en": "API Gateway and Service Mesh Patterns in Rust",
+      "summary": "Engineering patterns for API gateways and service meshes in Rust: routing, discovery, load balancing, retries, timeouts, rate limiting, observability, gRPC/tonic, axum/tower layers, and sidecar deployment.",
+      "bloom": "L5-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Microservice Patterns",
+          "path": "05_microservice_patterns.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Cloud Native",
+          "path": "../04_web_and_networking/02_cloud_native.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/03_design_patterns/39_api_design_and_semver_idioms.md",
+      "path": "06_ecosystem/03_design_patterns/39_api_design_and_semver_idioms.md",
+      "title": "",
+      "en": "API Design and SemVer Idioms in Rust",
+      "summary": "A practical guide to designing evolvable, SemVer-compliant public APIs in Rust, covering breaking-change taxonomy, compatibility-preserving idioms, and tooling.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.1+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust API Guidelines 权威指南",
+          "path": "../../00_meta/00_framework/rust_api_guidelines_canonical.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "cargo-semver-checks 预览",
+          "path": "../../07_future/02_preview_features/27_cargo_semver_checks_preview.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/03_design_patterns/42_actor_model_and_message_passing_patterns.md",
+      "path": "06_ecosystem/03_design_patterns/42_actor_model_and_message_passing_patterns.md",
+      "title": "Actor 模型与消息传递模式（Actor Model and Message Passing Patterns）",
+      "en": "Actor Model and Message Passing Patterns in Rust",
+      "summary": "Design-pattern treatment of the Actor model and message-passing idioms in Rust — covering std channels, actor-framework trade-offs, supervision boundaries, and when to prefer actors over shared-state concurrency.",
+      "bloom": "L3-L6",
+      "rust_version": "1.97.1+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "并发模式",
+          "path": "../../03_advanced/00_concurrency/03_concurrency_patterns.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "微服务架构模式",
+          "path": "05_microservice_patterns.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:06_ecosystem/04_web_and_networking/01_distributed_systems.md",
       "path": "06_ecosystem/04_web_and_networking/01_distributed_systems.md",
       "title": "",
@@ -14413,6 +14626,52 @@
         {
           "title": "嵌入式 RTOS 与安全关键框架对比",
           "path": "26_embedded_rtos_and_safety_critical_frameworks.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/31_embedded_networking_and_iot_protocols.md",
+      "path": "06_ecosystem/05_systems_and_embedded/31_embedded_networking_and_iot_protocols.md",
+      "title": "no_std Rust 中的嵌入式网络与 IoT 协议",
+      "en": "Embedded Networking and IoT Protocols in no_std Rust",
+      "summary": "A canonical guide to implementing network connectivity and IoT protocols in resource-constrained, no_std Rust environments, covering MQTT, CoAP, LoRaWAN, smoltcp, embassy-net, and security trade-offs.",
+      "bloom": "L4-L6",
+      "rust_version": "1.97.1+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "no_std 与裸机惯用法",
+          "path": "23_no_std_and_bare_metal_idioms.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "嵌入式 RTOS 与安全关键框架对比",
+          "path": "26_embedded_rtos_and_safety_critical_frameworks.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/32_embedded_testing_and_ci_strategies.md",
+      "path": "06_ecosystem/05_systems_and_embedded/32_embedded_testing_and_ci_strategies.md",
+      "title": "",
+      "en": "Embedded Testing and CI Strategies for no_std Rust",
+      "summary": "A practical guide to testing and continuous integration strategies for no_std Rust, spanning host-side unit tests, QEMU emulation, hardware-in-the-loop, static verification, and CI pipeline design.",
+      "bloom": "L5",
+      "rust_version": "1.97.1+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 嵌入式系统开发",
+          "path": "03_embedded_systems.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508",
+          "path": "30_misra_rust_safety_critical_guidelines.md"
         }
       ],
       "theorems": [],
@@ -15741,7 +16000,7 @@
       ],
       "postrequisites": [
         {
-          "title": "Parallel Algorithms",
+          "title": "并行与并发算法",
           "path": "25_parallel_algorithms.md"
         },
         {
@@ -15756,10 +16015,10 @@
       "id": "concept:06_ecosystem/11_domain_applications/25_parallel_algorithms.md",
       "path": "06_ecosystem/11_domain_applications/25_parallel_algorithms.md",
       "title": "",
-      "en": "Parallel Algorithms in Rust",
-      "summary": "Parallel algorithms in Rust: prefix sum, parallel graph algorithms (BFS, SSSP, MST), fork-join, work-stealing, NUMA awareness, parallel scan/reduce, and the Rayon implementation principles.",
+      "en": "Parallel and Concurrent Algorithms in Rust",
+      "summary": "Parallel and concurrent algorithms in Rust: task/data parallelism, fork-join, work-stealing, message passing, shared-state synchronization, NUMA awareness, and the Rayon implementation principles.",
       "bloom": "L5-L6",
-      "rust_version": "1.97.0+ (Edition 2024)",
+      "rust_version": "1.97.1+ (Edition 2024)",
       "prerequisites": [
         {
           "title": "Concurrency",
@@ -15862,7 +16121,7 @@
           "path": "24_advanced_data_structures_implementation.md"
         },
         {
-          "title": "并行算法",
+          "title": "并行与并发算法",
           "path": "25_parallel_algorithms.md"
         }
       ],
@@ -15901,7 +16160,7 @@
           "path": "08_algorithm_engineering_practice.md"
         },
         {
-          "title": "并行算法",
+          "title": "并行与并发算法",
           "path": "25_parallel_algorithms.md"
         },
         {
@@ -16368,8 +16627,31 @@
       ],
       "postrequisites": [
         {
-          "title": "并行算法",
+          "title": "并行与并发算法",
           "path": "../11_domain_applications/25_parallel_algorithms.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/16_algorithm_patterns/11_online_and_streaming_algorithms.md",
+      "path": "06_ecosystem/16_algorithm_patterns/11_online_and_streaming_algorithms.md",
+      "title": "",
+      "en": "Online and Streaming Algorithms in Rust",
+      "summary": "A systematic account of online and streaming algorithm models, their Rust idioms using iterators, channels, and async streams, and common sketching patterns with trade-offs and pitfalls.",
+      "bloom": "L5",
+      "rust_version": "1.97.1+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "算法模式概述",
+          "path": "00_algorithm_patterns_overview.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "算法与复杂度惯用法",
+          "path": "../10_performance/03_algorithms_and_complexity_idioms.md"
         }
       ],
       "theorems": [],
@@ -17618,37 +17900,6 @@
         {
           "title": "Rust for Linux",
           "path": "../04_research_and_experimental/04_rust_for_linux.md"
-        }
-      ],
-      "theorems": [],
-      "related_crates": []
-    },
-    {
-      "id": "concept:07_future/02_preview_features/21_rust_specification_preview.md",
-      "path": "07_future/02_preview_features/21_rust_specification_preview.md",
-      "title": "Rust 语言规范预研：从参考文档到形式化规范",
-      "en": "Rust Specification Preview",
-      "summary": "Preview of the official Rust specification effort and its relation to the Reference.",
-      "bloom": "L4-L5",
-      "rust_version": "1.97.0+ (Edition 2024)",
-      "prerequisites": [
-        {
-          "title": "Formal Methods",
-          "path": "../04_research_and_experimental/02_formal_methods.md"
-        },
-        {
-          "title": "RustBelt",
-          "path": "../../04_formal/02_separation_logic/01_rustbelt.md"
-        },
-        {
-          "title": "Ferrocene",
-          "path": "12_ferrocene_preview.md"
-        }
-      ],
-      "postrequisites": [
-        {
-          "title": "Version Tracking",
-          "path": "../00_version_tracking/01_rust_version_tracking.md"
         }
       ],
       "theorems": [],

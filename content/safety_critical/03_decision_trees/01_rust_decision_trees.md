@@ -3,7 +3,8 @@
 **EN**: Rust Decision Trees
 **Summary**: Rust应用决策树图集 Rust Decision Trees.
 
-> **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust 概念解释请见 [`concept/05_comparative/00_paradigms/01_paradigm_matrix.md`](../../../concept/05_comparative/00_paradigms/01_paradigm_matrix.md)。若 `concept/` 已覆盖相同主题，本文仅保留应用场景、案例与决策树，不重复概念推导。
+> **权威来源**: 本文件为 `content/` 专题深度内容入口；通用 Rust 概念解释请见 [`concept/05_comparative/00_paradigms/01_paradigm_matrix.md`](../../../concept/05_comparative/00_paradigms/01_paradigm_matrix.md)。
+> 若 `concept/` 已覆盖相同主题，本文仅保留应用场景、案例与决策树，不重复概念推导。
 > **Bloom 层级**: L4-L6
 >
 > 本文内容迁移自历史归档，已按 `AGENTS.md` 规则保留为安全关键领域专题实践。

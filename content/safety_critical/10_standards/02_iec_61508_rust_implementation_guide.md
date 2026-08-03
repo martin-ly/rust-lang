@@ -12,7 +12,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 IEC 61508-x:
 ├── Part 1: 一般要求
 ├── Part 2: 电气/电子/可编程电子系统的要求

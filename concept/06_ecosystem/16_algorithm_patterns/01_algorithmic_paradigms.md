@@ -20,7 +20,7 @@
 > [并行分布式模式谱系](../../03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md) ·
 > [算法与复杂度惯用法](../10_performance/03_algorithms_and_complexity_idioms.md)
 > **后置概念**:
-> [并行算法](../11_domain_applications/25_parallel_algorithms.md) ·
+> [并行与并发算法](../11_domain_applications/25_parallel_algorithms.md) ·
 > [算法工程实践](../11_domain_applications/08_algorithm_engineering_practice.md) ·
 > [c08_algorithms crate docs](../../../crates/c08_algorithms/docs/README.md)
 > **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
@@ -187,7 +187,7 @@ fn parallel_sum(nums: &[i64]) -> i64 {
 }
 ```
 
-> 注意：实际并行分治需要任务粒度阈值，否则调度开销会抵消收益。详见 [并行算法](../11_domain_applications/25_parallel_algorithms.md)；图算法的并行 frontier 扩展见 [`图算法 Rust 实现`](03_graph_algorithms_in_rust.md)。
+> 注意：实际并行分治需要任务粒度阈值，否则调度开销会抵消收益。详见 [并行与并发算法](../11_domain_applications/25_parallel_algorithms.md)；图算法的并行 frontier 扩展见 [`图算法 Rust 实现`](03_graph_algorithms_in_rust.md)。
 
 ---
 
@@ -425,6 +425,8 @@ fn max_profit_two_transactions(prices: &[i32]) -> i32 {
     sell2
 }
 ```
+
+> 更完整的 DP 实现细节（滚动数组、矩阵链乘法、边界安全）见 [`动态规划 Rust 实现`](06_dynamic_programming_in_rust.md)；字符串匹配、前缀树与后缀数组等专项算法见 [`字符串算法 Rust 实现`](07_string_algorithms_in_rust.md)。
 
 ---
 

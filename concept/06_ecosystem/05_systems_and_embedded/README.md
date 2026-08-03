@@ -41,3 +41,5 @@
 - [自定义裸机异步执行器](28_custom_bare_metal_async_executor.md)
 - [嵌入式内存布局与堆安全](29_embedded_memory_layout_and_heap_safety.md)
 - [安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508](30_misra_rust_safety_critical_guidelines.md)
+- [no_std Rust 中的嵌入式网络与 IoT 协议](31_embedded_networking_and_iot_protocols.md)
+- [no_std Rust 嵌入式测试与 CI 策略](32_embedded_testing_and_ci_strategies.md)

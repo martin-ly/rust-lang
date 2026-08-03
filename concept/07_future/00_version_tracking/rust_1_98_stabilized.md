@@ -1082,4 +1082,4 @@ mindmap
 
 ## 国际化权威来源补充（International Authority Sources）
 
-- https://dl.acm.org/doi/10.1145/3158154
+- <https://dl.acm.org/doi/10.1145/3158154>

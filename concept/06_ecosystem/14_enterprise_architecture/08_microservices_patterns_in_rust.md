@@ -195,9 +195,9 @@ mindmap
 
 ## 国际化权威来源补充（International Authority Sources）
 
-- https://dl.acm.org/doi/book/10.5555/186897
-- https://rust-unofficial.github.io/patterns/
+- <https://dl.acm.org/doi/book/10.5555/186897>
+- <https://rust-unofficial.github.io/patterns/>
 
 ## 国际化权威来源补充（International Authority Sources）
 
-- https://blog.rust-lang.org/
+- <https://blog.rust-lang.org/>

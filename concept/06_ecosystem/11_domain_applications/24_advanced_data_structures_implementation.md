@@ -13,7 +13,7 @@
 > **定位**: 本页讲解生产级/竞赛级常用高级数据结构的 Rust 实现要点、复杂度分析与适用场景，代码主要位于 `crates/c08_algorithms/src/data_structure/`。
 >
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Data Structures in Rust](09_data_structures_in_rust.md)
-> **后置概念**: [Parallel Algorithms](25_parallel_algorithms.md) · [Algorithm Engineering Practice](08_algorithm_engineering_practice.md)
+> **后置概念**: [并行与并发算法](25_parallel_algorithms.md) · [Algorithm Engineering Practice](08_algorithm_engineering_practice.md)
 
 ---
 

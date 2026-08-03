@@ -482,7 +482,7 @@ graph TD
 
 ## 国际化权威来源补充（International Authority Sources）
 
-- https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/
-- https://algs4.cs.princeton.edu/home/
-- https://dl.acm.org/doi/10.1145/321879.321884
-- https://rust-algo.club/data_structures/union_find/
+- <https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/>
+- <https://algs4.cs.princeton.edu/home/>
+- <https://dl.acm.org/doi/10.1145/321879.321884>
+- <https://rust-algo.club/data_structures/union_find/>

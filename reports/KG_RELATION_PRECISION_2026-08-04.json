@@ -1,21 +1,21 @@
 {
   "summary": {
     "date": "2026-08-04",
-    "total_relations": 10125,
+    "total_relations": 10192,
     "generic_relation_annotation_count": 0,
     "generic_ratio_global": 0.0,
     "core_entities": 50,
-    "core_relations": 2761,
+    "core_relations": 2769,
     "core_generic_count": 0,
     "core_generic_ratio": 0.0,
     "core_lacking_semantic": 0,
     "global_predicate_distribution": {
-      "ex:hasPart": 4213,
-      "ex:dependsOn": 2168,
-      "ex:entails": 1616,
-      "ex:relatedTo": 842,
-      "ex:refines": 571,
-      "ex:partOf": 429,
+      "ex:hasPart": 4218,
+      "ex:dependsOn": 2192,
+      "ex:entails": 1630,
+      "ex:relatedTo": 849,
+      "ex:refines": 587,
+      "ex:partOf": 430,
       "ex:appliesTo": 128,
       "ex:equivalentTo": 98,
       "ex:enables": 43,
@@ -24,7 +24,7 @@
       "ex:counterExample": 2
     },
     "core_predicate_distribution": {
-      "ex:dependsOn": 1129,
+      "ex:dependsOn": 1137,
       "ex:hasPart": 624,
       "ex:entails": 440,
       "ex:relatedTo": 256,
@@ -250,7 +250,7 @@
     "ex:ConcurrencyPatterns": [
       [
         "ex:dependsOn",
-        11
+        13
       ],
       [
         "ex:entails",
@@ -362,7 +362,7 @@
     "ex:Generics": [
       [
         "ex:dependsOn",
-        69
+        70
       ],
       [
         "ex:entails",
@@ -624,7 +624,7 @@
     "ex:SafeAndEffectiveUnsafeRust": [
       [
         "ex:dependsOn",
-        128
+        131
       ],
       [
         "ex:entails",
@@ -680,7 +680,7 @@
     "ex:Traits": [
       [
         "ex:dependsOn",
-        110
+        111
       ],
       [
         "ex:entails",
@@ -736,7 +736,7 @@
     "ex:TypeTheory": [
       [
         "ex:dependsOn",
-        27
+        28
       ],
       [
         "ex:entails",

@@ -8,7 +8,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 为 Rust 算法实现提供模式级概览，连接语言特性（所有权、借用、迭代器、并发）与经典算法思想。
 > **前置概念**: [Iterator](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Send/Sync](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md)
-> **后置概念**: [算法与复杂度惯用法](../10_performance/03_algorithms_and_complexity_idioms.md) · [零拷贝解析](../11_domain_applications/26_zero_copy_parsing_in_rust.md) · [所有权感知算法](../11_domain_applications/27_ownership_aware_algorithms.md) · [并行算法](../11_domain_applications/25_parallel_algorithms.md) · [c08_algorithms crate docs](../../../crates/c08_algorithms/docs/README.md)
+> **后置概念**: [算法与复杂度惯用法](../10_performance/03_algorithms_and_complexity_idioms.md) · [零拷贝解析](../11_domain_applications/26_zero_copy_parsing_in_rust.md) · [所有权感知算法](../11_domain_applications/27_ownership_aware_algorithms.md) · [并行与并发算法](../11_domain_applications/25_parallel_algorithms.md) · [c08_algorithms crate docs](../../../crates/c08_algorithms/docs/README.md)
 > **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
 ---
@@ -102,7 +102,8 @@ fn merge_in_place<T: Ord + Copy>(left: &mut [T], right: &mut [T]) {
 
 ### 3.3 动态规划
 
-Rust 中 DP 表通常用 `Vec` 或固定大小数组实现。自底向上填表时，注意索引边界。
+Rust 中 DP 表通常用 `Vec` 或固定大小数组实现。
+自底向上填表时，注意索引边界。详见 [`动态规划 Rust 实现`](06_dynamic_programming_in_rust.md)。
 
 ```rust
 fn fibonacci_dp(n: usize) -> u64 {
@@ -411,7 +412,9 @@ graph TD
 - [所有权感知的数据结构](02_ownership_aware_data_structures.md) — L5-L6：并查集、线段树、Fenwick 树的 Rust 实现
 - [图算法 Rust 实现](03_graph_algorithms_in_rust.md) — L5-L6：BFS/DFS/Dijkstra/Bellman-Ford、借用纪律与并行 frontier
 - [缓存友好与 SIMD 算法](04_cache_friendly_and_simd_algorithms.md) — L5-L6：SOA/AOS、循环分块、预取、`std::simd` 与 `unsafe` 边界
-- [并行算法](../11_domain_applications/25_parallel_algorithms.md) — L5-L6：分治并行、锁-free 结构与并行前缀和
+- [并行与并发算法](../11_domain_applications/25_parallel_algorithms.md) — L5-L6：分治并行、消息传递、共享状态同步、锁-free 结构与并行前缀和
+- [动态规划 Rust 实现](06_dynamic_programming_in_rust.md) — L5-L6：记忆化、填表、滚动数组与 Rust 所有权感知 DP 表
+- [字符串算法 Rust 实现](07_string_algorithms_in_rust.md) — L5-L6：KMP、Rabin-Karp、Trie、后缀数组与 UTF-8 边界安全
 - [c08_algorithms crate docs](../../../crates/c08_algorithms/docs/README.md) — 可编译代码示例
 
 ---
@@ -430,9 +433,9 @@ graph TD
 
 ## 国际化权威来源补充（International Authority Sources）
 
-- https://rust-unofficial.github.io/patterns/
-- https://doc.rust-lang.org/reference/introduction.html
-- https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/
+- <https://rust-unofficial.github.io/patterns/>
+- <https://doc.rust-lang.org/reference/introduction.html>
+- <https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/>
 
 ---
 
@@ -480,6 +483,7 @@ mindmap
 ## 十、国际学术参考（P1）
 
 > 以下来源用于将算法模式与形式化/学术文献对齐：
+>
 > - [Oxide: The Essence of Rust — arXiv:1903.00982](https://arxiv.org/abs/1903.00982)（Rust 形式语义基础）
 > - [RustBelt: Securing the Foundations of Rust — ACM POPL 2018](https://doi.org/10.1145/3158154)
 > - [Cache-Oblivious Algorithms and Data Structures — arXiv:cs/0504081](https://arxiv.org/abs/cs/0504081)

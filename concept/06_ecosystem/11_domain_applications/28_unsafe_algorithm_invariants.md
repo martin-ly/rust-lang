@@ -13,7 +13,7 @@
 > **A/S/P 标记**: **P+A** — Procedure + Application
 > **定位**: 从算法工程角度讲解 unsafe 块的契约设计、循环不变式、并发数据结构与 SIMD 前置条件，并给出 Miri/Kani/Verus/Creusot 的选型建议。
 > **前置概念**: [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Memory Model](../../03_advanced/02_unsafe/06_memory_model.md) · [并发](../../03_advanced/00_concurrency/01_concurrency.md) · [不安全算法的语义不变量](../../04_formal/08_algorithm_semantics/04_unsafe_algorithm_invariants.md)
-> **后置概念**: [算法工程实践](08_algorithm_engineering_practice.md) · [并行算法](25_parallel_algorithms.md) · [高级数据结构 Rust 实现](24_advanced_data_structures_implementation.md)
+> **后置概念**: [算法工程实践](08_algorithm_engineering_practice.md) · [并行与并发算法](25_parallel_algorithms.md) · [高级数据结构 Rust 实现](24_advanced_data_structures_implementation.md)
 > **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
 ---
@@ -404,7 +404,7 @@ graph TD
 
 - [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) — L5 系统语言对比：unsafe 契约与内存安全边界的跨语言视角
 - [不安全算法的语义不变量](../../04_formal/08_algorithm_semantics/04_unsafe_algorithm_invariants.md) — L4 形式化权威：Hoare 逻辑、内存不变量与抽象屏障
-- [并行算法](25_parallel_algorithms.md) — L5-L6：lock-free、memory ordering 与并发算法实践
+- [并行与并发算法](25_parallel_algorithms.md) — L5-L6：lock-free、memory ordering 与并发算法实践
 
 ---
 

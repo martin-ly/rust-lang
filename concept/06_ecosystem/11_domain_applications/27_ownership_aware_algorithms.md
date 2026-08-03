@@ -13,7 +13,7 @@
 > **A/S/P 标记**: **P+S** — Procedure + Structure
 > **定位**: 系统讲解 Rust 所有权模型如何决定算法接口设计，覆盖原地修改、写时复制、借用检查友好的双指针/滑动窗口、基于索引的图/树算法等实战模式。
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Collections & Slices](../../01_foundation/05_collections/01_collections.md) · [Smart Pointers](../../02_intermediate/02_memory_management/04_smart_pointers.md)
-> **后置概念**: [算法工程实践](08_algorithm_engineering_practice.md) · [高级数据结构 Rust 实现](24_advanced_data_structures_implementation.md) · [并行算法](25_parallel_algorithms.md)
+> **后置概念**: [算法工程实践](08_algorithm_engineering_practice.md) · [高级数据结构 Rust 实现](24_advanced_data_structures_implementation.md) · [并行与并发算法](25_parallel_algorithms.md)
 > **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 
 ---

@@ -1,10 +1,10 @@
 {
   "summary": {
     "date": "2026-08-04",
-    "scanned": 700,
+    "scanned": 727,
     "counts": {
       "D1": 0,
-      "D2": 3,
+      "D2": 12,
       "D3": 0,
       "D4": 0,
       "D5": 1,
@@ -12,18 +12,38 @@
     },
     "pct": {
       "D1": 0.0,
-      "D2": 0.4,
+      "D2": 1.7,
       "D3": 0.0,
       "D4": 0.0,
       "D5": 0.1,
       "D6": 0.0
     },
-    "D2_base_files_with_asp_and_bloom": 415,
-    "flagged_files": 3
+    "D2_base_files_with_asp_and_bloom": 428,
+    "flagged_files": 13
   },
   "examples": {
     "D1": [],
     "D2": [
+      [
+        "concept/06_ecosystem/03_design_patterns/37_event_sourcing_engine_patterns.md",
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
+      ],
+      [
+        "concept/06_ecosystem/03_design_patterns/38_api_gateway_and_service_mesh_patterns.md",
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
+      ],
+      [
+        "concept/06_ecosystem/05_systems_and_embedded/31_embedded_networking_and_iot_protocols.md",
+        "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5, 6] 无交集"
+      ],
+      [
+        "concept/06_ecosystem/05_systems_and_embedded/32_embedded_testing_and_ci_strategies.md",
+        "A/S/P=A 允许 [1, 2] 与 Bloom [5] 无交集"
+      ],
+      [
+        "concept/06_ecosystem/14_enterprise_architecture/09_observability_and_sre_patterns.md",
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
+      ],
       [
         "concept/06_ecosystem/16_algorithm_patterns/02_ownership_aware_data_structures.md",
         "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
@@ -35,19 +55,65 @@
       [
         "concept/06_ecosystem/16_algorithm_patterns/04_cache_friendly_and_simd_algorithms.md",
         "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
+      ],
+      [
+        "concept/06_ecosystem/16_algorithm_patterns/05_greedy_and_approximation_algorithms.md",
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
+      ],
+      [
+        "concept/06_ecosystem/16_algorithm_patterns/06_dynamic_programming_in_rust.md",
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
+      ],
+      [
+        "concept/06_ecosystem/16_algorithm_patterns/07_string_algorithms_in_rust.md",
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
+      ],
+      [
+        "concept/06_ecosystem/16_algorithm_patterns/10_computational_geometry_algorithms.md",
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
       ]
     ],
     "D3": [],
     "D4": [],
     "D5": [
       [
-        "concept/06_ecosystem/16_algorithm_patterns/04_cache_friendly_and_simd_algorithms.md",
-        "稳定层 nightly/preview 关键词 7 处"
+        "concept/04_formal/15_language_specification/05_specification_evidence_from_rustc_tests.md",
+        "稳定层 nightly/preview 关键词 3 处"
       ]
     ],
     "D6": []
   },
   "per_file": {
+    "concept/04_formal/15_language_specification/05_specification_evidence_from_rustc_tests.md": {
+      "D5": [
+        "稳定层 nightly/preview 关键词 3 处"
+      ]
+    },
+    "concept/06_ecosystem/03_design_patterns/37_event_sourcing_engine_patterns.md": {
+      "D2": [
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
+      ]
+    },
+    "concept/06_ecosystem/03_design_patterns/38_api_gateway_and_service_mesh_patterns.md": {
+      "D2": [
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
+      ]
+    },
+    "concept/06_ecosystem/05_systems_and_embedded/31_embedded_networking_and_iot_protocols.md": {
+      "D2": [
+        "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5, 6] 无交集"
+      ]
+    },
+    "concept/06_ecosystem/05_systems_and_embedded/32_embedded_testing_and_ci_strategies.md": {
+      "D2": [
+        "A/S/P=A 允许 [1, 2] 与 Bloom [5] 无交集"
+      ]
+    },
+    "concept/06_ecosystem/14_enterprise_architecture/09_observability_and_sre_patterns.md": {
+      "D2": [
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
+      ]
+    },
     "concept/06_ecosystem/16_algorithm_patterns/02_ownership_aware_data_structures.md": {
       "D2": [
         "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
@@ -61,9 +127,26 @@
     "concept/06_ecosystem/16_algorithm_patterns/04_cache_friendly_and_simd_algorithms.md": {
       "D2": [
         "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ],
-      "D5": [
-        "稳定层 nightly/preview 关键词 7 处"
+      ]
+    },
+    "concept/06_ecosystem/16_algorithm_patterns/05_greedy_and_approximation_algorithms.md": {
+      "D2": [
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
+      ]
+    },
+    "concept/06_ecosystem/16_algorithm_patterns/06_dynamic_programming_in_rust.md": {
+      "D2": [
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
+      ]
+    },
+    "concept/06_ecosystem/16_algorithm_patterns/07_string_algorithms_in_rust.md": {
+      "D2": [
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
+      ]
+    },
+    "concept/06_ecosystem/16_algorithm_patterns/10_computational_geometry_algorithms.md": {
+      "D2": [
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
       ]
     }
   }

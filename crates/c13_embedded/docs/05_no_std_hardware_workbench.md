@@ -5,22 +5,30 @@
 
 # no_std 硬件实测工作台（probe-rs / QEMU / RTT）
 
-> **权威来源**: 通用 Rust 概念解释统一维护在
+> **说明**：本文件是 `crates/c13_embedded/` 的本地操作指南，聚焦 host 命令与硬件实测步骤。底层概念解释请参见
 > [`concept/06_ecosystem/05_systems_and_embedded/23_no_std_and_bare_metal_idioms.md`](../../../concept/06_ecosystem/05_systems_and_embedded/23_no_std_and_bare_metal_idioms.md)。
-> 本文件为 `crates/c13_embedded/` 的本地操作指南。
 
 ---
 
 ## 目录
 
-- [前置准备](#前置准备)
-- [相关文件](#相关文件)
-- [Host 编译检查](#host-编译检查)
-- [QEMU 仿真运行](#qemu-仿真运行)
-- [真实硬件：probe-rs 烧录与 RTT 日志](#真实硬件probe-rs-烧录与-rtt-日志)
-- [defmt 零开销日志](#defmt-零开销日志)
-- [cargo-embed 一体化工作流](#cargo-embed-一体化工作流)
-- [常见问题](#常见问题)
+- [no\_std 硬件实测工作台（probe-rs / QEMU / RTT）](#no_std-硬件实测工作台probe-rs--qemu--rtt)
+  - [目录](#目录)
+  - [前置准备](#前置准备)
+  - [相关文件](#相关文件)
+  - [Host 编译检查](#host-编译检查)
+  - [QEMU 仿真运行](#qemu-仿真运行)
+    - [1. 交叉编译](#1-交叉编译)
+    - [2. QEMU 启动](#2-qemu-启动)
+  - [真实硬件：probe-rs 烧录与 RTT 日志](#真实硬件probe-rs-烧录与-rtt-日志)
+    - [1. 列出已连接调试器与芯片](#1-列出已连接调试器与芯片)
+    - [2. 烧录并运行](#2-烧录并运行)
+  - [defmt 零开销日志](#defmt-零开销日志)
+    - [启用步骤](#启用步骤)
+    - [编译与运行](#编译与运行)
+  - [cargo-embed 一体化工作流](#cargo-embed-一体化工作流)
+  - [常见问题](#常见问题)
+  - [国际权威来源](#国际权威来源)
 
 ---
 
@@ -118,10 +126,12 @@ qemu-system-arm -cpu cortex-m3 -machine stm32-f103c8 -nographic \
 - 按 `Ctrl-A` 然后 `X` 退出 QEMU。
 
 > **调试模式**：加上 `-S -s` 让 QEMU 启动时暂停并开启 GDB server（端口 1234）：
+>
 > ```bash
 > qemu-system-arm -cpu cortex-m3 -machine stm32-f103c8 -nographic -S -s \
 >   -kernel target/thumbv7m-none-eabi/debug/examples/no_std_qemu_blinky
 > ```
+>
 > 随后可用 `arm-none-eabi-gdb` 或 `gdb-multiarch` 连接单步调试。
 
 ---
@@ -241,8 +251,8 @@ cargo embed --release --example no_std_defmt_rtt --target thumbv7em-none-eabihf
 
 | 现象 | 根因 | 修复 |
 |:---|:---|:---|
-| `error: linker `rust-lld` not found` | 未安装 `rust-lld`（通常随 stable 提供） | `rustup component add rust-src` 并启用 `build-std` |
-| `undefined reference to `__CxxFrameHandler3'` / `rust_eh_personality` | panic 策略为 `unwind` | 在 `.cargo/config.toml` 或 `Cargo.toml` 中设置 `panic = "abort"` |
+| `error: linker`rust-lld`not found` | 未安装 `rust-lld`（通常随 stable 提供） | `rustup component add rust-src` 并启用 `build-std` |
+| `undefined reference to`__CxxFrameHandler3'` / `rust_eh_personality` | panic 策略为 `unwind` | 在 `.cargo/config.toml` 或 `Cargo.toml` 中设置 `panic = "abort"` |
 | `memory.x: No such file or directory` | `cortex-m-rt` 找不到链接脚本 | 放置 `memory.x` 到 crate 根，或让 `build.rs` 写入 `OUT_DIR` 并 `rustc-link-search` |
 | `probe-rs` 找不到芯片 | 芯片名称拼写错误或调试器未连接 | 使用 `probe-rs chip list` 确认；检查 USB 驱动 |
 | RTT 没有输出 | 固件未初始化 `defmt-rtt` 或 `Embed.toml` 未启用 RTT | 确认 `use defmt_rtt as _;` 且 `[default.rtt] enabled = true` |

@@ -113,7 +113,7 @@ mindmap
   - [八、`build-std` 与自定义 target JSON](#八build-std-与自定义-target-json)
   - [九、链接脚本核心约定](#九链接脚本核心约定)
   - [十、Embassy 裸机执行器](#十embassy-裸机执行器)
-  - [十一、常见 no_std 反模式](#十一常见-no_std-反模式)
+  - [十一、常见 no\_std 反模式](#十一常见-no_std-反模式)
   - [十二、反例与失效模式](#十二反例与失效模式)
   - [十三、边界测试](#十三边界测试)
     - [13.1 边界测试：`no_std` 中误用 `std`](#131-边界测试no_std-中误用-std)
@@ -121,7 +121,7 @@ mindmap
     - [13.3 边界测试：直接访问 `static mut`](#133-边界测试直接访问-static-mut)
     - [13.4 边界测试：`Vec` 在未初始化堆上使用](#134-边界测试vec-在未初始化堆上使用)
   - [十四、决策树：裸机技术栈选择](#十四决策树裸机技术栈选择)
-  - [十五、构建-运行-测试 no_std 最小可复现工作流](#十五构建-运行-测试-no_std-最小可复现工作流)
+  - [十五、构建-运行-测试 no\_std 最小可复现工作流](#十五构建-运行-测试-no_std-最小可复现工作流)
     - [15.1 使用 cargo-generate 模板](#151-使用-cargo-generate-模板)
     - [15.2 QEMU 仿真验证](#152-qemu-仿真验证)
     - [15.3 `cargo embed` 与 `cargo run --target`](#153-cargo-embed-与-cargo-run---target)
@@ -131,12 +131,28 @@ mindmap
     - [16.3 RTT / ITM / OpenOCD 对比](#163-rtt--itm--openocd-对比)
     - [16.4 芯片验证工作流](#164-芯片验证工作流)
     - [16.5 硬件实测流程（probe-rs / QEMU / RTT）](#165-硬件实测流程probe-rs--qemu--rtt)
+      - [环境准备](#环境准备)
+      - [Host 编译检查](#host-编译检查)
+      - [交叉编译 QEMU blinky](#交叉编译-qemu-blinky)
+      - [QEMU 运行](#qemu-运行)
+      - [真实硬件烧录与 RTT 日志](#真实硬件烧录与-rtt-日志)
+      - [defmt 零开销日志](#defmt-零开销日志)
   - [十七、常见惯用法清单扩展](#十七常见惯用法清单扩展)
+    - [17.1 `build-std` 与自定义 target JSON](#171-build-std-与自定义-target-json)
+    - [17.2 链接脚本符号在 Rust 中引用](#172-链接脚本符号在-rust-中引用)
+    - [17.3 `#[link_section]` 放置向量表与启动标记](#173-link_section-放置向量表与启动标记)
+    - [17.4 `MaybeUninit` 与 MMIO 映射](#174-maybeuninit-与-mmio-映射)
+    - [17.5 `critical-section` 实现选择](#175-critical-section-实现选择)
+    - [17.6 单例模式：`Peripherals::take()`](#176-单例模式peripheralstake)
+    - [17.7 GPIO 类型状态（typestate）](#177-gpio-类型状态typestate)
+    - [17.8 DMA 缓冲区与内存安全](#178-dma-缓冲区与内存安全)
+    - [17.9 栈/堆布局决策](#179-栈堆布局决策)
   - [十八、知识图谱与 SHACL 语义衔接](#十八知识图谱与-shacl-语义衔接)
   - [十九、国际化权威来源](#十九国际化权威来源)
   - [二十、相关概念](#二十相关概念)
   - [二十一、权威来源索引](#二十一权威来源索引)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [十二、国际学术参考（P1）](#十二国际学术参考p1)
 
 ---
 
@@ -895,7 +911,7 @@ mod tests {
 
 - [`crates/c13_embedded/examples/no_std_qemu_blinky.rs`](../../../crates/c13_embedded/examples/no_std_qemu_blinky.rs)
 - [`crates/c13_embedded/examples/no_std_defmt_rtt.rs`](../../../crates/c13_embedded/examples/no_std_defmt_rtt.rs)
-- [`crates/c13_embedded/docs/no_std_hardware_workbench.md`](../../../crates/c13_embedded/docs/no_std_hardware_workbench.md)
+- [`crates/c13_embedded/docs/05_no_std_hardware_workbench.md`](../../../crates/c13_embedded/docs/05_no_std_hardware_workbench.md)
 
 #### 环境准备
 
@@ -1316,6 +1332,7 @@ mindmap
 ## 十二、国际学术参考（P1）
 
 > 以下来源将裸机/嵌入式 Rust 惯用法与学术研究对齐：
+>
 > - [RustBelt: Securing the Foundations of Rust — ACM POPL 2018](https://doi.org/10.1145/3158154)
 > - [Stacked Borrows: An Aliasing Model for Rust — arXiv:1806.09173](https://arxiv.org/abs/1806.09173)
 > - [Tree Borrows — Orlieu & Pichardie, PLDI 2025](https://perso.crans.org/vanille/treebor/)

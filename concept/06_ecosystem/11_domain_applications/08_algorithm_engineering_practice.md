@@ -62,6 +62,7 @@
       - [内存映射文件 (mmap)](#内存映射文件-mmap)
     - [2.3 I/O 优化](#23-io-优化)
       - [异步批量写入](#异步批量写入)
+    - [2.4 Roofline 性能模型](#24-roofline-性能模型)
   - [3. 算法可靠性](#3-算法可靠性)
     - [3.1 容错设计](#31-容错设计)
       - [重试机制](#重试机制)
@@ -1187,6 +1188,7 @@ attainable_flops = min(peak_flops, operational_intensity × memory_bandwidth)
 ```
 
 其中：
+
 - **operational intensity** = 浮点运算次数 / 访问的字节数（FLOP/Byte）；
 - **peak_flops** = CPU 峰值浮点性能（受 SIMD、频率、核心数影响）；
 - **memory_bandwidth** = 内存子系统峰值带宽。

@@ -1,16 +1,16 @@
 > **内容分级**: [专家级]
 > **本节关键术语**: 并行前缀和 · 并行图算法 · fork-join · work-stealing · NUMA · 并行扫描 · 并行归约 · Rayon — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 
-# 并行算法
+# 并行与并发算法
 
-> **EN**: Parallel Algorithms in Rust
-> **Summary**: Parallel algorithms in Rust: prefix sum, parallel graph algorithms (BFS, SSSP, MST), fork-join, work-stealing, NUMA awareness, parallel scan/reduce, and the Rayon implementation principles.
+> **EN**: Parallel and Concurrent Algorithms in Rust
+> **Summary**: Parallel and concurrent algorithms in Rust: task/data parallelism, fork-join, work-stealing, message passing, shared-state synchronization, NUMA awareness, and the Rayon implementation principles.
 >
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 > **受众**: [专家]
 > **Bloom 层级**: L5-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **定位**: 本页讲解 Rust 中利用多核的并行算法设计，覆盖数据并行、任务并行、图并行与调度器原理，代码位于 `crates/c08_algorithms/src/algorithms/parallel_algorithms.rs`。
+> **定位**: 本页讲解 Rust 中利用多核的并行与并发算法设计，覆盖数据并行、任务并行、图并行、消息传递、共享状态同步与调度器原理，代码位于 `crates/c08_algorithms/src/algorithms/parallel_algorithms.rs`。
 >
 > **前置概念**: [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) · [Data Structures in Rust](09_data_structures_in_rust.md) · [Advanced Data Structures](24_advanced_data_structures_implementation.md)
 > **后置概念**: [Algorithm Engineering Practice](08_algorithm_engineering_practice.md) · [Async](../../03_advanced/01_async/01_async.md)
@@ -28,9 +28,14 @@
 
 ## 📑 目录
 
-- [并行算法](#并行算法)
+- [并行与并发算法](#并行与并发算法)
   - [📑 目录](#-目录)
   - [一、并行计算模型](#一并行计算模型)
+  - [一.5 权威定义、核心属性与概念关系](#一5-权威定义核心属性与概念关系)
+    - [1.5.1 权威定义](#151-权威定义)
+    - [1.5.2 关键属性](#152-关键属性)
+    - [1.5.3 概念关系](#153-概念关系)
+  - [一.6 并发模型选型决策树](#一6-并发模型选型决策树)
   - [二、并行前缀和（Parallel Prefix Sum / Scan）](#二并行前缀和parallel-prefix-sum--scan)
   - [三、并行图算法](#三并行图算法)
     - [3.1 并行 BFS](#31-并行-bfs)
@@ -44,10 +49,12 @@
     - [7.2 rayon::Scope / spawn](#72-rayonscope--spawn)
     - [7.3 Lock-Free Linearizability](#73-lock-free-linearizability)
     - [7.4 Memory Ordering](#74-memory-ordering)
+  - [七.5 标准库示例：分块并行归约](#七5-标准库示例分块并行归约)
   - [八、反例与陷阱](#八反例与陷阱)
     - [反例 1：在并行循环中修改共享可变状态](#反例-1在并行循环中修改共享可变状态)
     - [反例 2：任务粒度过细](#反例-2任务粒度过细)
     - [反例 3：忽略 Amdahl 定律](#反例-3忽略-amdahl-定律)
+    - [反例 4：将 `Rc` 跨线程移动](#反例-4将-rc-跨线程移动)
   - [九、边界测试](#九边界测试)
     - [9.1 边界测试：空输入的前缀和](#91-边界测试空输入的前缀和)
     - [9.2 边界测试：BFS 起点孤立](#92-边界测试bfs-起点孤立)
@@ -55,6 +62,7 @@
   - [相关概念](#相关概念)
   - [十、思维导图](#十思维导图)
   - [十一、国际权威参考](#十一国际权威参考)
+    - [11.1 与国际权威来源的对齐说明](#111-与国际权威来源的对齐说明)
 
 ---
 
@@ -73,6 +81,71 @@ Rust 中常用的并行抽象：
 | 无锁结构 | `crossbeam` / 自定义 | 高频共享状态 |
 
 > **Amdahl 定律**：加速比受限于串行部分比例。若串行部分占 10%，最大加速比为 10×。来源: [Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms-fourth-edition)
+
+---
+
+## 一.5 权威定义、核心属性与概念关系
+
+### 1.5.1 权威定义
+
+**并行（Parallelism）** 指利用多核同时执行独立计算以缩短 wall-clock 时间；**并发（Concurrency）** 指多个任务在重叠时间段内推进，可能通过分时、事件循环或线程交错实现。Rust 的算法视角通常同时涉及二者：并行算法强调**分解与合并**，并发算法强调**同步与通信**。
+
+> **来源**: [The Art of Multiprocessor Programming](https://dl.acm.org/doi/10.5555/2385452) · [Rust Atomics and Locks](https://marabos.nl/atomics/)
+
+### 1.5.2 关键属性
+
+| 属性 | 含义 | Rust 表达 |
+|:---|:---|:---|
+| **可分解性（Decomposability）** | 问题能否拆分为可独立执行的子任务 | `slice::chunks` / `split_at_mut` / `rayon::join` |
+| **可结合性（Associativity）** | 归约/合并操作是否满足结合律，从而允许任意分组 | `reduce` 要求 `⊗` 满足结合律 |
+| **通信模式（Communication Pattern）** | 任务间交换数据的方式 | `mpsc` / `Arc<Mutex<T>>` / 原子类型 |
+| **同步粒度（Synchronization Granularity）** | 临界区大小与频率 | `Mutex` 粗粒度 vs `Atomic*` 细粒度 |
+| **负载均衡（Load Balance）** | 各执行单元工作量是否均匀 | `rayon` work-stealing / 静态分块 |
+| **内存局部性（Locality）** | 数据是否靠近使用它的核心 | SOA / NUMA 分区 / 缓存行对齐 |
+
+### 1.5.3 概念关系
+
+```mermaid
+graph LR
+    A[并行与并发算法] --> B[数据并行]
+    A --> C[任务并行]
+    A --> D[消息传递]
+    A --> E[共享状态]
+    B --> F[par_iter / map-reduce]
+    C --> G[fork-join / spawn]
+    D --> H[mpsc / channel]
+    E --> I[Mutex / RwLock / Atomic]
+    E --> J[lock-free 结构]
+```
+
+> **认知功能**: 该关系图将并行/并发算法按“分解方式”与“通信方式”正交拆分，帮助读者从问题结构出发选择 Rust 抽象。
+
+---
+
+## 一.6 并发模型选型决策树
+
+```mermaid
+graph TD
+    A[需要同时推进多个任务?] --> B{任务间是否共享可变状态?}
+    B -->|否| C[消息传递: std::sync::mpsc / tokio::sync]
+    B -->|是| D{读写比例如何?}
+    D -->|读多写少| E[std::sync::RwLock 或 原子读计数]
+    D -->|频繁写| F[std::sync::Mutex 或 细粒度 Atomic]
+    D -->|极高竞争 / 实时性| G[crossbeam::queue / 自定义 lock-free]
+    C --> H{是否 CPU 密集型数据并行?}
+    H -->|是| I[rayon::par_iter / join]
+    H -->|否| J[async runtime: tokio::spawn]
+    F --> K[保持临界区最小化]
+    G --> L[证明 linearizability 与内存安全]
+```
+
+**选型说明**:
+
+- 消息传递天然避免数据竞争，适合生产者-消费者、流水线。
+- 共享可变状态需要 `Send`/`Sync` 边界；`Mutex` 简单但易成为瓶颈。
+- 高竞争场景优先 lock-free / wait-free 结构，但实现复杂度和正确性证明成本更高。
+
+> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [The Rust Programming Language — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 
 ---
 
@@ -387,6 +460,42 @@ fn memory_ordering_example() {
 
 ---
 
+## 七.5 标准库示例：分块并行归约
+
+下面的实现仅使用 `std::thread::scope`，不依赖 `rayon` 等外部 crate。`scope` 保证所有子线程在 scope 返回前结束，因此子任务可以安全借用父作用域的切片引用。
+
+```rust
+use std::thread;
+
+fn parallel_chunk_sum(data: &[i64], workers: usize) -> i64 {
+    if workers == 0 || data.is_empty() {
+        return data.iter().sum();
+    }
+    let chunk_size = (data.len() + workers - 1) / workers;
+    thread::scope(|s| {
+        let handles: Vec<_> = data
+            .chunks(chunk_size)
+            .map(|chunk| s.spawn(move || chunk.iter().sum::<i64>()))
+            .collect();
+        handles.into_iter().map(|h| h.join().unwrap()).sum()
+    })
+}
+
+fn main() {
+    let v: Vec<i64> = (1..=1000).collect();
+    assert_eq!(parallel_chunk_sum(&v, 4), v.iter().sum());
+}
+```
+
+> **要点**:
+>
+> - `thread::scope` 子线程借用非 `'static` 数据，是 Rust 标准库对 fork-join 模型的直接支持；
+> - 静态分块简单，但当各 chunk 工作量差异大时负载不均衡，此时应使用 work-stealing（如 Rayon）。
+>
+> **来源**: [The Rust Reference — Thread scopes](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
+
+---
+
 ## 八、反例与陷阱
 
 ### 反例 1：在并行循环中修改共享可变状态
@@ -422,6 +531,25 @@ result.par_iter().map(|x| parallel_part(x)).collect(); // 10%
 ```
 
 > **修正**：先优化串行瓶颈，再考虑并行化。来源: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)
+
+### 反例 4：将 `Rc` 跨线程移动
+
+```rust,compile_fail,E0277
+use std::rc::Rc;
+use std::thread;
+
+fn main() {
+    let counter = Rc::new(0);
+    let c = Rc::clone(&counter);
+    thread::spawn(move || {
+        println!("{}", c);
+    });
+}
+```
+
+> **错误原因**: `Rc<T>` 不是 `Send`，因为它使用非原子引用计数，跨线程移动会导致数据竞争。应改用 `Arc<T>`。
+>
+> **来源**: [The Rustonomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 
 ---
 
@@ -481,7 +609,7 @@ fn main() {
 
 ```mermaid
 mindmap
-  root((Parallel Algorithms))
+  root((并行与并发算法))
     数据并行
       并行前缀和
       并行扫描
@@ -494,18 +622,23 @@ mindmap
       Fork-Join
       Work-Stealing
       NUMA 感知
+    并发通信
+      消息传递 mpsc
+      共享状态 Mutex/RwLock
+      Lock-Free 结构
     Rayon 语义
       ParallelIterator
       rayon::Scope / spawn
-    并发原语
-      Lock-Free Linearizability
+    内存模型
       Memory Ordering
+      happens-before
     生态
       Rayon
       crossbeam
+      std::thread::scope
 ```
 
-> **认知功能**: 本 mindmap 按"数据并行、图并行、调度模型、生态"组织并行算法知识，帮助读者从算法选择到调度原理建立完整视图。来源: [Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms-fourth-edition)
+> **认知功能**: 本 mindmap 按“数据并行、图并行、调度模型、并发通信、内存模型、生态”组织并行与并发算法知识，帮助读者从问题结构、通信方式到调度原理建立完整视图。来源: [Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms-fourth-edition)
 
 ---
 
@@ -521,10 +654,21 @@ mindmap
 - **P2 生态**: [crossbeam docs](https://docs.rs/crossbeam/latest/crossbeam/)
 - **P0 官方**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 - **P0 官方**: [Rust Reference — Atomics](https://doc.rust-lang.org/reference/items/associated-items.html)
+- **P0 官方**: [The Rustonomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html)
+- **P0 官方**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 - **P1 性能**: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)
 
----
+### 11.1 与国际权威来源的对齐说明
+
+| 主题 | 权威来源 | 对齐要点 |
+|:---|:---|:---|
+| `Send`/`Sync` 边界 | The Rustonomicon | 跨线程移动/共享类型必须实现 `Send`/`Sync`；`Rc` 非 `Send` 是故意的性能-安全权衡 |
+| 线程作用域与借用 | The Rust Reference / TRPL ch16 | `std::thread::scope` 允许非 `'static` 借用，官方对 fork-join 模型的支持 |
+| 数据并行 API | Rayon docs | `ParallelIterator` 要求闭包 `Send`、归约操作满足结合律 |
+| 并发算法理论 | Herlihy & Shavit | linearizability、work-stealing、lock-free/wait-free 分类 |
+| 并行复杂度 | CLRS / Blelloch | 并行前缀和 `O(n/p + log p)`、Amdahl 定律 |
+| API 设计 | Rust API Guidelines | 并发类型应显式标注 `Send`/`Sync`、避免隐藏的全局状态 |
 
 > **权威来源**: [Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms-fourth-edition), [Rayon docs](https://docs.rs/rayon/latest/rayon/), [Rust Atomics and Locks](https://marabos.nl/atomics/)
-> **状态**: ✅ 概念文件创建完成
-> **最后更新**: 2026-07-30
+> **状态**: ✅ 概念文件扩展完成
+> **最后更新**: 2026-08-03

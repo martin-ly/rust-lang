@@ -117,6 +117,8 @@ D5_WHITELIST_FILES = {
         "#![feature(panic_handler)] 自定义 panic handler 截至 1.97 仍为 nightly-only（wasm32-unknown-unknown 场景）",
     "concept/06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md":
         "SIMD 边界小节：std::simd portable SIMD 截至 1.97.0 仍未稳定、target_feature 与 nightly 工具链状态为 SIMD 工程选型事实陈述",
+    "concept/06_ecosystem/16_algorithm_patterns/04_cache_friendly_and_simd_algorithms.md":
+        "页面主题为缓存友好与 SIMD 算法；std::simd portable SIMD / target_feature 稳定状态为截至 1.97.0 的工具链事实陈述，属 SIMD 工程选型边界说明",
     "concept/sources/INDEX.md":
         "来源索引：Unstable Book(UNB) 作为权威来源条目及其 nightly 状态标注即索引内容本身",
     # ---- 2026-07-13 逐文件复核登记（W0-W5 新建/扩展页 + 既有页补登记）----
@@ -286,6 +288,31 @@ D5_WHITELIST_FILES = {
         "no_std 启动与运行时深度页：`-Z build-std` / 自定义 target / nightly-only 目标为裸机工具链事实陈述",
     "concept/06_ecosystem/05_systems_and_embedded/30_misra_rust_safety_critical_guidelines.md":
         "安全关键嵌入式 Rust 指南页：nightly/preview 提及为 Ferrocene/MISRA-Rust 合格子集与工具链边界的事实陈述",
+    # ---- 2026-08-04 P2 语义缺口补全：Contracts 权威页。页面主题即 nightly-only
+    # `feature(contracts)` / MCP-759 / MCP-942，文首已显式声明 Nightly 实验性，nightly/preview
+    # 提及为特性状态客观陈述。
+    "concept/04_formal/04_model_checking/12_rust_contracts.md":
+        "Contracts 权威页：页面主题即 nightly-only `feature(contracts)` / MCP-759 / MCP-942；nightly/preview 为特性状态客观陈述",
+    # ---- 2026-08-04 P2 语义缺口补全：语言规范生态总览。页面引用 Rust 形式化项目
+    #（a-mir-formality / MiniRust / Miri / rustc tests）及 RFC 3355，nightly/preview 为工具链
+    # 事实或项目状态客观陈述。
+    "concept/04_formal/15_language_specification/00_language_specification_overview.md":
+        "语言规范生态权威页：nightly/preview 为形式化项目与 rustc 测试工具链状态客观陈述",
+    # ---- 2026-08-04 P2 语义缺口补全：验证与契约生态导览 & 跨语言契约对比。
+    # 页面主题包含 nightly `feature(contracts)` / C++26 preview / 工具 nightly 绑定，nightly/preview
+    # 为契约系统状态客观陈述。
+    "concept/05_comparative/04_verification_and_contracts/00_verification_and_contracts_overview.md":
+        "验证与契约生态导览：nightly/preview 为 Rust Contracts / 验证工具状态客观陈述",
+    "concept/05_comparative/04_verification_and_contracts/01_contracts_comparison.md":
+        "跨语言契约对比：nightly/preview 为 Rust Contracts / C++26 / 验证工具状态客观陈述",
+    # ---- 2026-08-04 P2 语义缺口补全：原地初始化与固定初始化。页面讨论 nightly-only
+    # `pin-init` / `allocator_api` / 语言 in-place init 提案状态，nightly/preview 为工具链事实陈述。
+    "concept/03_advanced/02_unsafe/11_in_place_pinned_initialization.md":
+        "原地初始化权威页：nightly/preview 为 `pin-init` / in-place initialization 提案与工具链状态客观陈述",
+    # ---- 2026-08-04 P2 语义缺口补全：Ferrocene 语言规范。页面讨论 FLS 限制子集，
+    # nightly/preview 为 FLS 未覆盖语言特性的客观边界陈述。
+    "concept/04_formal/15_language_specification/02_ferrocene_language_specification.md":
+        "FLS 权威页：nightly/preview 为 FLS 认证子集未覆盖语言特性的客观边界陈述",
 }
 
 

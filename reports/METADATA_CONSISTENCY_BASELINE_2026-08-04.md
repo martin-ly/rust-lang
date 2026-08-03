@@ -1,17 +1,17 @@
 # 元数据一致性基线（语义质量门 P0-1）
 
-**日期**: 2026-08-04  **扫描**: 700 concept 活跃文件（排除 archive）  **模式**: strict
+**日期**: 2026-08-04  **扫描**: 727 concept 活跃文件（排除 archive）  **模式**: strict
 
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
 | D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥 | 0 | 0.0% | >0 | pass |
-| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 3 (基=415) | 0.4% | >=5% | pass |
+| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 12 (基=428) | 1.7% | >=5% | pass |
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
 | D5 稳定层正文残留 nightly/preview/unstable | 1 | 0.1% | >0 | FAIL |
 | D6 Summary 低信息量模板套话 | 0 | 0.0% | >=3% | pass |
 
-**受影响文件总数**: 3 / 700
+**受影响文件总数**: 13 / 727
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -38,6 +38,7 @@
 - `concept/06_ecosystem/01_cargo/22_build_std.md` — -Zbuild-std 截至 1.97 仍为 nightly 特性，页面主题即该特性
 - `concept/06_ecosystem/11_domain_applications/03_webassembly.md` — #![feature(panic_handler)] 自定义 panic handler 截至 1.97 仍为 nightly-only（wasm32-unknown-unknown 场景）
 - `concept/06_ecosystem/11_domain_applications/08_algorithm_engineering_practice.md` — SIMD 边界小节：std::simd portable SIMD 截至 1.97.0 仍未稳定、target_feature 与 nightly 工具链状态为 SIMD 工程选型事实陈述
+- `concept/06_ecosystem/16_algorithm_patterns/04_cache_friendly_and_simd_algorithms.md` — 页面主题为缓存友好与 SIMD 算法；std::simd portable SIMD / target_feature 稳定状态为截至 1.97.0 的工具链事实陈述，属 SIMD 工程选型边界说明
 - `concept/sources/INDEX.md` — 来源索引：Unstable Book(UNB) 作为权威来源条目及其 nightly 状态标注即索引内容本身
 - `concept/00_meta/05_quizzes/01_quiz_meta_framework.md` — L0 测验框架页：quiz 题目/解析以 nightly feature(custom_borrowck)、rustc 插件 unstable 为概念辨析考点，非正文依赖
 - `concept/01_foundation/02_type_system/02_never_type.md` — never_type feature 截至 1.97 仍未稳定，页面主题即 `!` 类型及其稳定化路径（含 nightly 边界标注）
@@ -111,6 +112,12 @@
 - `concept/06_ecosystem/10_performance/03_algorithms_and_complexity_idioms.md` — 算法惯用法页：`portable_simd` / `#![feature]` 等 nightly-only 边界为 SIMD/unsafe 优化选型事实陈述
 - `concept/06_ecosystem/05_systems_and_embedded/27_no_std_startup_runtime_deep_dive.md` — no_std 启动与运行时深度页：`-Z build-std` / 自定义 target / nightly-only 目标为裸机工具链事实陈述
 - `concept/06_ecosystem/05_systems_and_embedded/30_misra_rust_safety_critical_guidelines.md` — 安全关键嵌入式 Rust 指南页：nightly/preview 提及为 Ferrocene/MISRA-Rust 合格子集与工具链边界的事实陈述
+- `concept/04_formal/04_model_checking/12_rust_contracts.md` — Contracts 权威页：页面主题即 nightly-only `feature(contracts)` / MCP-759 / MCP-942；nightly/preview 为特性状态客观陈述
+- `concept/04_formal/15_language_specification/00_language_specification_overview.md` — 语言规范生态权威页：nightly/preview 为形式化项目与 rustc 测试工具链状态客观陈述
+- `concept/05_comparative/04_verification_and_contracts/00_verification_and_contracts_overview.md` — 验证与契约生态导览：nightly/preview 为 Rust Contracts / 验证工具状态客观陈述
+- `concept/05_comparative/04_verification_and_contracts/01_contracts_comparison.md` — 跨语言契约对比：nightly/preview 为 Rust Contracts / C++26 / 验证工具状态客观陈述
+- `concept/03_advanced/02_unsafe/11_in_place_pinned_initialization.md` — 原地初始化权威页：nightly/preview 为 `pin-init` / in-place initialization 提案与工具链状态客观陈述
+- `concept/04_formal/15_language_specification/02_ferrocene_language_specification.md` — FLS 权威页：nightly/preview 为 FLS 认证子集未覆盖语言特性的客观边界陈述
 
 另有两类规则级排除：WASI Preview 1/2/3（WASM 规范版本专名）与 URL 路径中的 nightly（官方文档固定托管路径）。
 
@@ -119,11 +126,20 @@
 ### D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥（0）
 
 
-### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（3）
+### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（12）
 
+- `concept/06_ecosystem/03_design_patterns/37_event_sourcing_engine_patterns.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
+- `concept/06_ecosystem/03_design_patterns/38_api_gateway_and_service_mesh_patterns.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
+- `concept/06_ecosystem/05_systems_and_embedded/31_embedded_networking_and_iot_protocols.md` — A/S/P=A 允许 [1, 2] 与 Bloom [4, 5, 6] 无交集
+- `concept/06_ecosystem/05_systems_and_embedded/32_embedded_testing_and_ci_strategies.md` — A/S/P=A 允许 [1, 2] 与 Bloom [5] 无交集
+- `concept/06_ecosystem/14_enterprise_architecture/09_observability_and_sre_patterns.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
 - `concept/06_ecosystem/16_algorithm_patterns/02_ownership_aware_data_structures.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
 - `concept/06_ecosystem/16_algorithm_patterns/03_graph_algorithms_in_rust.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
 - `concept/06_ecosystem/16_algorithm_patterns/04_cache_friendly_and_simd_algorithms.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
+- `concept/06_ecosystem/16_algorithm_patterns/05_greedy_and_approximation_algorithms.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
+- `concept/06_ecosystem/16_algorithm_patterns/06_dynamic_programming_in_rust.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
+- `concept/06_ecosystem/16_algorithm_patterns/07_string_algorithms_in_rust.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
+- `concept/06_ecosystem/16_algorithm_patterns/10_computational_geometry_algorithms.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
 
 ### D3 关键字段同文件重声明（0）
 
@@ -133,7 +149,7 @@
 
 ### D5 稳定层正文残留 nightly/preview/unstable（1）
 
-- `concept/06_ecosystem/16_algorithm_patterns/04_cache_friendly_and_simd_algorithms.md` — 稳定层 nightly/preview 关键词 7 处
+- `concept/04_formal/15_language_specification/05_specification_evidence_from_rustc_tests.md` — 稳定层 nightly/preview 关键词 3 处
 
 ### D6 Summary 低信息量模板套话（0）
 

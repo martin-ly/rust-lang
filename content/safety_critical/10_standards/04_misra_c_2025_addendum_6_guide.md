@@ -19,7 +19,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 MISRA C:2025 总规则数: 143
 
 分类统计:

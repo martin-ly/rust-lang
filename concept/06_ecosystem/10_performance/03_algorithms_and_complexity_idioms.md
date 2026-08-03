@@ -207,8 +207,8 @@ mindmap
 
 ## 国际化权威来源补充（International Authority Sources）
 
-- https://dl.acm.org/doi/10.1145/3158154
-- https://rust-unofficial.github.io/patterns/
+- <https://dl.acm.org/doi/10.1145/3158154>
+- <https://rust-unofficial.github.io/patterns/>
 
 ## P0 官方来源（P0 Official Rust Authority Sources）
 
@@ -218,4 +218,4 @@ mindmap
 
 ## 国际化权威来源补充（International Authority Sources）
 
-- https://blog.rust-lang.org/
+- <https://blog.rust-lang.org/>

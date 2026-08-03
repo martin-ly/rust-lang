@@ -19,7 +19,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 主要监管机构:
 
 欧盟:

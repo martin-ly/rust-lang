@@ -164,6 +164,20 @@ Rust 社区已存在 `#[safety]` 相关的实验性讨论：
 > RFC #3842 提案使用 `#[safety::requires(...)]` 在 unsafe 函数上声明安全前提、`#[safety::checked(...)]` 在调用点显式消除标签，并与 Verus 的 `requires`/`ensures`、Kani 的 harness 假设、Miri/BorrowSanitizer 的动态检查标签集形成映射。
 > (Source: [RFC #3842 Safety Tags](https://github.com/rust-lang/rfcs/pull/3842) · [Safety Tags 研究仓库](https://github.com/safer-rust/safety-tags))
 
+### 1.4 与语言级 Contracts（MCP-759）的关系
+
+Safety Tags 与 Rust 语言级 Contracts 解决相近但不同的问题：
+
+- **Safety Tags** 是**标签词汇表**：它把 `/// # Safety` 中的常见前提（如 `valid_ptr`、`aligned`、`non_overlapping`）编码为机器可读的结构化标签，重在**统一术语与审计格式**；
+- **语言级 Contracts**（MCP-759 / `feature(contracts)`）是**契约表达式语言**：它提供 `#[rustc_contracts::requires]` / `#[rustc_contracts::ensures]` 等属性，允许用 Rust 表达式精确描述前后置条件，并配套 `owned`/`alloc_block` 等所有权断言，供编译器、Miri、Kani 等工具消费。
+
+简言之：**Safety Tags 说明“是什么安全属性”，Contracts 说明“该属性的精确条件是什么并如何验证”**。两者可以协同——Safety Tags 提供标准化词汇，Contracts 提供可执行语义。
+
+- 详见语言级 Contracts 权威页：[Rust 语言级 Contracts](../../04_formal/04_model_checking/12_rust_contracts.md)
+- 该页亦反向链接至本文：[Safety Tags 预览](../../07_future/02_preview_features/03_safety_tags_preview.md)
+
+> **来源**: [MCP-759 — Contracts](https://github.com/rust-lang/compiler-team/issues/759) · [rust-lang/rust #128044](https://github.com/rust-lang/rust/issues/128044)
+
 ---
 
 ## 二、形式化语义
