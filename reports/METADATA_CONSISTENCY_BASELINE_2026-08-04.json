@@ -7,7 +7,7 @@
       "D2": 12,
       "D3": 0,
       "D4": 0,
-      "D5": 1,
+      "D5": 0,
       "D6": 0
     },
     "pct": {
@@ -15,11 +15,11 @@
       "D2": 1.7,
       "D3": 0.0,
       "D4": 0.0,
-      "D5": 0.1,
+      "D5": 0.0,
       "D6": 0.0
     },
     "D2_base_files_with_asp_and_bloom": 428,
-    "flagged_files": 13
+    "flagged_files": 12
   },
   "examples": {
     "D1": [],
@@ -75,20 +75,10 @@
     ],
     "D3": [],
     "D4": [],
-    "D5": [
-      [
-        "concept/04_formal/15_language_specification/05_specification_evidence_from_rustc_tests.md",
-        "稳定层 nightly/preview 关键词 3 处"
-      ]
-    ],
+    "D5": [],
     "D6": []
   },
   "per_file": {
-    "concept/04_formal/15_language_specification/05_specification_evidence_from_rustc_tests.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 3 处"
-      ]
-    },
     "concept/06_ecosystem/03_design_patterns/37_event_sourcing_engine_patterns.md": {
       "D2": [
         "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"

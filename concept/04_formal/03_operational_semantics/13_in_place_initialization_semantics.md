@@ -1,6 +1,6 @@
 > **内容分级**: [形式化]
 >
-> **本节关键术语**: 初始化不变式 (Initialization Invariant) · 部分初始化 (Partial Initialization) · PinInit / Init · 操作语义 (Operational Semantics) · 地址稳定性 (Location Stability) — [完整对照表](../../../00_meta/01_terminology/01_terminology_glossary.md)
+> **本节关键术语**: 初始化不变式 (Initialization Invariant) · 部分初始化 (Partial Initialization) · PinInit / Init · 操作语义 (Operational Semantics) · 地址稳定性 (Location Stability) — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 >
 # 原地初始化的操作语义
 >
@@ -13,12 +13,12 @@
 > **A/S/P 标记**: **S** — Structure
 > **双维定位**: F×Eva — 评价初始化契约在形式模型中的充分性
 > **前置概念**:
-> [Unsafe Rust](../../../03_advanced/02_unsafe/01_unsafe.md) ·
-> [Memory Model](../../../03_advanced/02_unsafe/06_memory_model.md) ·
+> [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) ·
+> [Memory Model](../../03_advanced/02_unsafe/06_memory_model.md) ·
 > [Pin Formal Semantics](12_pin_and_self_referential_semantics.md)
 > **后置概念**:
-> [In-place & Pinned Initialization Patterns](../../../03_advanced/02_unsafe/11_in_place_pinned_initialization.md) ·
-> [Field Projections](../../../07_future/02_preview_features/23_field_projections_preview.md)
+> [In-place & Pinned Initialization Patterns](../../03_advanced/02_unsafe/11_in_place_pinned_initialization.md) ·
+> [Field Projections](../../07_future/02_preview_features/23_field_projections_preview.md)
 > **主要来源**:
 > [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html) ·
 > [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) ·
@@ -31,7 +31,7 @@
 > **内容去重提示**:
 > 本文为 In-place Initialization 的 **形式化 companion**。
 > 工程模式、代码示例与选型决策请见主权威页
-> [`concept/03_advanced/02_unsafe/11_in_place_pinned_initialization.md`](../../../03_advanced/02_unsafe/11_in_place_pinned_initialization.md)。
+> [`concept/03_advanced/02_unsafe/11_in_place_pinned_initialization.md`](../../03_advanced/02_unsafe/11_in_place_pinned_initialization.md)。
 
 ---
 

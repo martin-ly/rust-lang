@@ -19,7 +19,7 @@
 > [Smart Pointers](../../02_intermediate/02_memory_management/01_memory_management.md)
 > **后置概念**:
 > [Field Projections](../../07_future/02_preview_features/23_field_projections_preview.md) ·
-> [Async Dyn Trait](../01_async/16_async_dyn_trait.md) ·
+> [Async Trait Object Safety](../01_async/13_async_trait_object_safety.md) ·
 > [Unsafe Fields Preview](../../07_future/02_preview_features/11_unsafe_fields_preview.md) ·
 > [Pin Formal Semantics](../../04_formal/03_operational_semantics/12_pin_and_self_referential_semantics.md)
 > **主要来源**:
@@ -309,7 +309,7 @@ fn main() {
     Arc::get_mut(&mut a).unwrap().write(String::from("shared"));
 
     // 转换为 Arc<String>
-    let s: Arc<String> = unsafe { Arc::assume_init(a) };
+    let s: Arc<String> = unsafe { Arc::<MaybeUninit<String>>::assume_init(a) };
     assert_eq!(s.as_str(), "shared");
 }
 ```

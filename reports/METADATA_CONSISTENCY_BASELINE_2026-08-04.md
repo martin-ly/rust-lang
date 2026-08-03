@@ -8,10 +8,10 @@
 | D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 12 (基=428) | 1.7% | >=5% | pass |
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
-| D5 稳定层正文残留 nightly/preview/unstable | 1 | 0.1% | >0 | FAIL |
+| D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
 | D6 Summary 低信息量模板套话 | 0 | 0.0% | >=3% | pass |
 
-**受影响文件总数**: 13 / 727
+**受影响文件总数**: 12 / 727
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -147,16 +147,15 @@
 ### D4 文首块 Rust 版本号自矛盾（0）
 
 
-### D5 稳定层正文残留 nightly/preview/unstable（1）
+### D5 稳定层正文残留 nightly/preview/unstable（0）
 
-- `concept/04_formal/15_language_specification/05_specification_evidence_from_rustc_tests.md` — 稳定层 nightly/preview 关键词 3 处
 
 ### D6 Summary 低信息量模板套话（0）
 
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 
-- D5 稳定层nightly残留 1 (>0)
+- 无（全部通过）
 
 ## 机器可读
 

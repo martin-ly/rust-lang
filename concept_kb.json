@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 699,
-    "generated_at": "2026-08-03T20:42:02.849753+00:00"
+    "generated_at": "2026-08-03T20:55:47.710952+00:00"
   },
   "files": [
     {
@@ -22730,7 +22730,7 @@
       "layer": "L2",
       "title": "内存管理",
       "positioning": "",
-      "line_count": 2279,
+      "line_count": 2266,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -23078,14 +23078,6 @@
           "code_preview": "use std::pin::{pin, Pin};  struct SelfRef {     data: String,     // 指向 data 内部的..."
         },
         {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "// 愿景：无需先构造完整 T 再包装 let box_point: Box<Point> = Box::uninit(); box_point.x.write..."
-        },
-        {
           "flags": [],
           "lines": 17,
           "should_fail": false,
@@ -23122,14 +23114,6 @@
           "lines": 18,
           "should_fail": false,
           "code_preview": "use std::pin::Pin; use std::marker::PhantomPinned;  struct SelfRef {     data: S..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 4,
-          "should_fail": false,
-          "code_preview": "// Pin 投影的常见模式：安全地获取结构体子字段的 Pin let mut pinned: Pin<Box<SelfRef>> = SelfRef::new..."
         },
         {
           "flags": [],
@@ -23253,6 +23237,7 @@
         "../../03_advanced/01_async/01_async.md",
         "../../03_advanced/01_async/08_pin_unpin.md",
         "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../03_advanced/02_unsafe/11_in_place_pinned_initialization.md",
         "../../04_formal/02_separation_logic/01_rustbelt.md",
         "../00_traits/01_traits.md",
         "05_quiz_memory_management.md"
@@ -34574,7 +34559,7 @@
       "layer": "L3",
       "title": "原地初始化与固定初始化模式",
       "positioning": "",
-      "line_count": 623,
+      "line_count": 621,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -34632,7 +34617,7 @@
         },
         {
           "flags": [],
-          "lines": 17,
+          "lines": 15,
           "should_fail": false,
           "code_preview": "use std::mem::MaybeUninit; use std::sync::Arc;  fn main() {     let mut a: Arc<M..."
         },
@@ -34665,27 +34650,21 @@
           "code_preview": "use zeroize::{Zeroize, ZeroizeOnDrop, Zeroizing};  #[derive(Zeroize, ZeroizeOnDr..."
         },
         {
-          "flags": [
-            "compile_fail"
-          ],
+          "flags": [],
           "lines": 10,
-          "should_fail": true,
+          "should_fail": false,
           "code_preview": "use std::mem::MaybeUninit;  fn main() {     let x: MaybeUninit<String> = MaybeUn..."
         },
         {
-          "flags": [
-            "compile_fail"
-          ],
+          "flags": [],
           "lines": 8,
-          "should_fail": true,
+          "should_fail": false,
           "code_preview": "use std::mem::MaybeUninit;  fn main() {     let mut v: Vec<MaybeUninit<String>> ..."
         },
         {
-          "flags": [
-            "compile_fail"
-          ],
+          "flags": [],
           "lines": 7,
-          "should_fail": true,
+          "should_fail": false,
           "code_preview": "use std::mem::MaybeUninit;  fn main() {     // ❌ UB：bool 的 validity invariant 要求..."
         },
         {
@@ -34706,7 +34685,7 @@
         "../../07_future/02_preview_features/11_unsafe_fields_preview.md",
         "../../07_future/02_preview_features/23_field_projections_preview.md",
         "../01_async/08_pin_unpin.md",
-        "../01_async/16_async_dyn_trait.md",
+        "../01_async/13_async_trait_object_safety.md",
         "01_unsafe.md",
         "06_memory_model.md"
       ],
@@ -46776,11 +46755,11 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../00_meta/01_terminology/01_terminology_glossary.md",
-        "../../../03_advanced/02_unsafe/01_unsafe.md",
-        "../../../03_advanced/02_unsafe/06_memory_model.md",
-        "../../../03_advanced/02_unsafe/11_in_place_pinned_initialization.md",
-        "../../../07_future/02_preview_features/23_field_projections_preview.md",
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../../03_advanced/02_unsafe/06_memory_model.md",
+        "../../03_advanced/02_unsafe/11_in_place_pinned_initialization.md",
+        "../../07_future/02_preview_features/23_field_projections_preview.md",
         "12_pin_and_self_referential_semantics.md"
       ],
       "transitions": 0,
@@ -46789,10 +46768,10 @@
       "matrix_rows": 8,
       "pre_post": {
         "pre": [
-          "> [Unsafe Rust](../../../03_advanced/02_unsafe/01_unsafe.md) ·"
+          "> [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) ·"
         ],
         "post": [
-          "> [In-place & Pinned Initialization Patterns](../../../03_advanced/02_unsafe/11_in_place_pinned_initialization.md) ·"
+          "> [In-place & Pinned Initialization Patterns](../../03_advanced/02_unsafe/11_in_place_pinned_initialization.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -66707,7 +66686,7 @@
       "layer": "L6",
       "title": "Rust API 设计与 SemVer 惯用法",
       "positioning": "系统讲解如何在 Rust 中设计“可稳定演进”的公共 API：哪些变更属于破坏性变更、哪些惯用法能保留向后兼容、如何用工具自动验证。",
-      "line_count": 598,
+      "line_count": 599,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -72272,7 +72251,7 @@
       "layer": "L6",
       "title": "no_std Rust 中的嵌入式网络与 IoT 协议",
       "positioning": "系统讲解在 `no_std`/裸机环境中实现网络连接的约束、协议选型、栈实现与安全实践；与 [`01_advanced_network_protocols.md`](../12_networking/01_advanced_network_protocols.md) 互补，后者聚焦 `std` 生态，本页聚焦 `no_std`/嵌入式生态。",
-      "line_count": 675,
+      "line_count": 676,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -72366,7 +72345,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 3,
-      "matrix_rows": 100,
+      "matrix_rows": 101,
       "pre_post": {
         "pre": [
           "[no_std 与裸机惯用法](23_no_std_and_bare_metal_idioms.md) ·"
@@ -80633,7 +80612,7 @@
       "layer": "L6",
       "title": "Rust 中的可观测性与 SRE 模式（Observability and SRE Patterns）",
       "positioning": "从企业架构视角对齐 Google SRE 体系与 Rust 工程实践，覆盖可观测性三支柱、SLO 生命周期、错误预算、告警治理、事故响应与可观测性驱动开发。Rust 工具链细节参见 [`02_logging_observability.md`](../00_toolchain/02_logging_observability.md) 与 [`05_tracing.md`](../02_core_crates/05_tracing.md)。",
-      "line_count": 609,
+      "line_count": 610,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -81990,7 +81969,9 @@
           "code_preview": "// ❌ 风险：i64 溢出 fn cross_i64(o: (i64, i64), a: (i64, i64), b: (i64, i64)) -> i64 ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 10,
           "should_fail": false,
           "code_preview": "// 选择 <= 0：剔除共线中间点，得到最小顶点凸包 while lower.len() >= 2 && cross(lower[lower.len() - ..."
