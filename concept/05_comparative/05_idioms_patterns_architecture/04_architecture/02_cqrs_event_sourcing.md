@@ -151,3 +151,19 @@ pub fn add_stock_directly(state: &mut HashMap<String, u32>, sku: &str, qty: u32)
 - [Martin Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html)
 - [Martin Fowler — Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html)
 - [Greg Young — CQRS Documents](https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf)
+
+## 形式化基础
+
+本页的工程模式可追溯到以下 L4 形式化/理论权威页：
+
+- [架构模式语义](../../../04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md)
+- [分布式系统语义](../../../04_formal/09_system_semantics/04_distributed_systems_semantics.md)
+- [软件架构形式化](../../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md)
+
+## 来源与延伸阅读
+
+- [The Rust Programming Language](https://doc.rust-lang.org/book/)
+- [Rust Blog](https://blog.rust-lang.org/)
+- [crates.io](https://crates.io/)
+- [docs.rs](https://docs.rs/)
+- [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)

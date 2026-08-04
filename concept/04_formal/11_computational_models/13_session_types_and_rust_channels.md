@@ -51,6 +51,7 @@
     - [测验 3：多党会话类型的核心操作是什么？](#测验-3多党会话类型的核心操作是什么)
   - [七、权威来源 / International Authority References](#七权威来源--international-authority-references)
   - [八、🧭 思维导图（Mindmap）](#八-思维导图mindmap)
+  - [来源与延伸阅读](#来源与延伸阅读)
 
 ---
 
@@ -545,3 +546,11 @@ mindmap
       Wadler 2012
       Caires & Pfenning 2010
 ```
+
+## 来源与延伸阅读
+
+- [RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [Aeneas Project](https://aeneasverif.github.io/)
+- [Flux Refinement Types](https://flux-rs.github.io/)
+- [arXiv](https://arxiv.org/)
+- [ACM Digital Library](https://dl.acm.org/)

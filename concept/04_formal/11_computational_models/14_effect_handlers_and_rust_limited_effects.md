@@ -53,6 +53,7 @@
     - [测验 3：Rust 为什么没有通用 effect handlers？](#测验-3rust-为什么没有通用-effect-handlers)
   - [七、权威来源 / International Authority References](#七权威来源--international-authority-references)
   - [八、🧭 思维导图（Mindmap）](#八-思维导图mindmap)
+  - [来源与延伸阅读](#来源与延伸阅读)
 
 ---
 
@@ -593,3 +594,11 @@ mindmap
       Plotkin & Pretnar 2009
       Lindley 2014
 ```
+
+## 来源与延伸阅读
+
+- [RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [Aeneas Project](https://aeneasverif.github.io/)
+- [Flux Refinement Types](https://flux-rs.github.io/)
+- [arXiv](https://arxiv.org/)
+- [ACM Digital Library](https://dl.acm.org/)

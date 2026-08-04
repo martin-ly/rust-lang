@@ -1,51 +1,97 @@
 {
   "date": "2026-08-04",
-  "scanned": 742,
+  "scanned": 780,
   "coverage": {
     "P0": [
-      736,
-      99.2
+      764,
+      97.9
     ],
     "P1": [
-      701,
-      94.5
+      708,
+      90.8
     ],
     "P2": [
-      666,
-      89.8
+      687,
+      88.1
     ],
     "any": [
-      742,
-      100.0
+      777,
+      99.6
     ],
-    "none": 0
+    "none": 3
   },
   "content_scope": {
-    "scanned": 643,
+    "scanned": 679,
     "P0": [
-      642,
-      99.8
+      669,
+      98.5
     ],
     "P1": [
-      642,
-      99.8
+      649,
+      95.6
     ],
     "P2": [
-      643,
-      100.0
+      663,
+      97.6
     ],
     "any": [
-      643,
-      100.0
+      677,
+      99.7
     ],
     "gaps_p1": [
+      "concept/04_formal/11_computational_models/17_aeneas_verification_pipeline.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/01_idioms/01_iterator_chains.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/01_idioms/02_error_propagation.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/01_idioms/03_into_from_asref.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/01_idioms/04_newtype.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/01_idioms/05_typestate.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/01_idioms/06_raii_cleanup.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/01_idioms/07_builder.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/01_idioms/08_defer.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/02_algorithms/01_segment_tree.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/02_algorithms/02_trie.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/02_algorithms/03_union_find.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/02_algorithms/04_graph_algorithms.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/02_algorithms/05_lock_free_data_structures.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/03_design_patterns/01_strategy.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/03_design_patterns/02_command.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/03_design_patterns/03_visitor.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/03_design_patterns/04_state_machine.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/03_design_patterns/05_adapter.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/03_design_patterns/06_decorator.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/04_architecture/01_hexagonal_clean_architecture.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/04_architecture/02_cqrs_event_sourcing.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/04_architecture/03_microservices.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/04_architecture/05_plugin_system.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/04_architecture/06_event_bus.md",
+      "concept/06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md",
+      "concept/06_ecosystem/05_systems_and_embedded/54_linker_scripts_and_memory_layout.md",
+      "concept/06_ecosystem/05_systems_and_embedded/55_rtic_vs_embassy_real_time_frameworks.md",
+      "concept/06_ecosystem/05_systems_and_embedded/56_rust_for_linux_kernel_module_basics.md",
       "concept/06_ecosystem/14_enterprise_architecture/08_microservices_patterns_in_rust.md"
     ],
-    "gaps_p2": []
+    "gaps_p2": [
+      "concept/04_formal/11_computational_models/12_linear_logic_and_ownership.md",
+      "concept/04_formal/11_computational_models/14_effect_handlers_and_rust_limited_effects.md",
+      "concept/04_formal/11_computational_models/15_refinement_types_and_flux.md",
+      "concept/04_formal/11_computational_models/16_rustbelt_ownership_logic.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/01_idioms/02_error_propagation.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/01_idioms/03_into_from_asref.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/01_idioms/04_newtype.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/01_idioms/06_raii_cleanup.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/02_algorithms/01_segment_tree.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/02_algorithms/02_trie.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/02_algorithms/03_union_find.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/02_algorithms/04_graph_algorithms.md",
+      "concept/05_comparative/05_idioms_patterns_architecture/04_architecture/04_actor.md",
+      "concept/06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md",
+      "concept/06_ecosystem/05_systems_and_embedded/55_rtic_vs_embassy_real_time_frameworks.md",
+      "concept/06_ecosystem/05_systems_and_embedded/56_rust_for_linux_kernel_module_basics.md"
+    ]
   },
   "by_layer": {
     "L0": {
-      "n": 75,
+      "n": 76,
       "P0": 75,
       "any": 75
     },
@@ -65,19 +111,19 @@
       "any": 78
     },
     "L4": {
-      "n": 125,
-      "P0": 125,
-      "any": 125
+      "n": 131,
+      "P0": 131,
+      "any": 131
     },
     "L5": {
-      "n": 29,
-      "P0": 29,
-      "any": 29
+      "n": 55,
+      "P0": 49,
+      "any": 55
     },
     "L6": {
-      "n": 252,
-      "P0": 247,
-      "any": 252
+      "n": 257,
+      "P0": 249,
+      "any": 255
     },
     "L7": {
       "n": 75,
@@ -91,84 +137,9 @@
     }
   },
   "core_gaps_l1_l4_no_p0": [],
-  "none_any": [],
-  "crates_docs": {
-    "total": 569,
-    "kinds": {
-      "stub": 504,
-      "content": 63,
-      "index_readme": 2
-    },
-    "content": 63,
-    "covered": 63,
-    "pct": 100.0,
-    "gaps": [],
-    "per_crate": {
-      "c01_ownership_borrow_scope": {
-        "content": 5,
-        "covered": 5
-      },
-      "c02_type_system": {
-        "content": 4,
-        "covered": 4
-      },
-      "c03_control_fn": {
-        "content": 5,
-        "covered": 5
-      },
-      "c04_generic": {
-        "content": 2,
-        "covered": 2
-      },
-      "c05_threads": {
-        "content": 4,
-        "covered": 4
-      },
-      "c06_async": {
-        "content": 4,
-        "covered": 4
-      },
-      "c07_process": {
-        "content": 13,
-        "covered": 13
-      },
-      "c08_algorithms": {
-        "content": 6,
-        "covered": 6
-      },
-      "c09_design_pattern": {
-        "content": 4,
-        "covered": 4
-      },
-      "c10_networks": {
-        "content": 10,
-        "covered": 10
-      },
-      "c11_macro_system_proc": {
-        "content": 1,
-        "covered": 1
-      },
-      "c12_wasm": {
-        "content": 3,
-        "covered": 3
-      },
-      "c13_embedded": {
-        "content": 1,
-        "covered": 1
-      },
-      "c17_resolver_v3_public_demo": {
-        "content": 1,
-        "covered": 1
-      }
-    },
-    "skipped": {
-      "index_readme": [
-        "crates/c15_verification_tools/docs/README.md",
-        "crates/c16_gui/docs/README.md"
-      ],
-      "code_listing": [],
-      "quiz": []
-    },
-    "dead_canonical": []
-  }
+  "none_any": [
+    "concept/00_meta/05_ai_semantic_engineering/04_semantic_domain_alignment_matrix.md",
+    "concept/06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md",
+    "concept/06_ecosystem/05_systems_and_embedded/55_rtic_vs_embassy_real_time_frameworks.md"
+  ]
 }

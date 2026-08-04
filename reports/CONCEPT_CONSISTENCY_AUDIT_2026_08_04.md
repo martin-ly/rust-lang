@@ -1,9 +1,9 @@
 # 概念一致性审计报告 (Concept Consistency Audit)
 
-> 生成时间: 2026-08-04T20:53:06.732658
+> 生成时间: 2026-08-04T23:04:02.385570
 > 生成脚本: `scripts/concept_consistency_auditor.py`(扩展后监控 22 个核心概念)
-> 扫描文件数: 753
-> 提取概念定义数: 5287
+> 扫描文件数: 791
+> 提取概念定义数: 5331
 > 跨文件引用数: 340
 
 ## 目录
@@ -69,36 +69,36 @@
 
 | 概念 | 提取次数 | 涉及文件数 |
 |:---|:---|:---|
-| unsafe-UB | 558 | 159 |
+| unsafe-UB | 561 | 161 |
 | RPITIT-RTN-TAIT-定义 | 491 | 55 |
-| effects-system-定义 | 369 | 44 |
+| effects-system-定义 | 382 | 45 |
 | Pin-自引用 | 286 | 79 |
-| 所有权-Move语义 | 276 | 98 |
-| allocator-api-GlobalAlloc | 231 | 51 |
+| 所有权-Move语义 | 277 | 98 |
+| allocator-api-GlobalAlloc | 243 | 53 |
 | Pin-投影-结构 | 188 | 41 |
 | const-trait-impl-定义 | 180 | 35 |
 | effects-system-现有 | 173 | 23 |
 | Send+Sync | 147 | 73 |
-| 所有权-作用域绑定 | 133 | 67 |
-| 借用-可变独占 | 119 | 48 |
+| 所有权-作用域绑定 | 137 | 69 |
+| 借用-可变独占 | 120 | 49 |
 | async-Future-状态机 | 117 | 53 |
-| 生命周期-子类型-outlives | 110 | 31 |
+| 生命周期-子类型-outlives | 113 | 32 |
 | unsafe-extern-块 | 110 | 20 |
 | 内部可变性-运行时检查 | 109 | 36 |
 | 变型-定义 | 108 | 24 |
-| let-chains-守卫 | 107 | 37 |
-| unsafe-extern-safe | 102 | 21 |
+| let-chains-守卫 | 108 | 38 |
+| unsafe-extern-safe | 103 | 22 |
 | let-chains-链式 | 93 | 11 |
 | const-trait-impl-效果 | 90 | 21 |
 | RPITIT-RTN-TAIT-捕获 | 86 | 28 |
 | GAT-async-生命周期 | 83 | 20 |
-| 变型-规则 | 77 | 19 |
+| 变型-规则 | 80 | 21 |
+| 所有权-唯一所有权 | 74 | 39 |
 | GAT-async-边界 | 74 | 20 |
-| 所有权-唯一所有权 | 73 | 38 |
 | unsafe-契约 | 66 | 37 |
 | match-ergonomics-默认绑定 | 60 | 34 |
+| 内部可变性-定义 | 54 | 28 |
 | unsafe-superpowers-unsafe_op | 54 | 14 |
-| 内部可变性-定义 | 53 | 27 |
 | Sync | 52 | 26 |
 | unsafe-不变式 | 45 | 10 |
 | Send/Sync边界-trait对象 | 44 | 14 |

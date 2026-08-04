@@ -190,3 +190,11 @@ fn main() {}
 - [Refactoring Guru - Strategy Pattern](https://refactoring.guru/design-patterns/strategy)
 - GoF, *Design Patterns: Elements of Reusable Object-Oriented Software*, Strategy pattern.
 - The Rust Programming Language, Chapter 10: Generic Types, Traits, and Lifetimes.
+
+## 形式化基础
+
+本页的工程模式可追溯到以下 L4 形式化/理论权威页：
+
+- [形式化设计模式理论](../../../04_formal/00_type_theory/11_formal_design_pattern_theory.md)
+- [模式组合代数](../../../04_formal/00_type_theory/12_pattern_composition_algebra.md)
+- [类型系统进阶](../../../04_formal/00_type_theory/01_type_theory.md)

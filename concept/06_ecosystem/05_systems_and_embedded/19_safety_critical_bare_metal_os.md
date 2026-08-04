@@ -612,3 +612,12 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从工具链资格、能力安全微内核、形式化底座、实时并发框架和边界认知五个维度组织内容，可作为安全关键裸机 OS 选型的导航索引。
+
+## 来源与延伸阅读
+
+- [The Rust Reference](https://doc.rust-lang.org/reference/)
+- [Rust RFCs](https://rust-lang.github.io/rfcs/)
+- [The Rust Programming Language](https://doc.rust-lang.org/book/)
+- [docs.rs](https://docs.rs/)
+- [crates.io](https://crates.io/)
+- [Rust Embedded Book](https://docs.rust-embedded.org/)

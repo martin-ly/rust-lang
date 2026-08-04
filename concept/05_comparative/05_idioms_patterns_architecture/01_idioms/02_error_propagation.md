@@ -113,3 +113,11 @@ fn main() {
 - [The Rust Programming Language — Recoverable Errors with Result](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html)
 - [Rust Reference — The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator)
 - [Rust API Guidelines — Error Types](https://rust-lang.github.io/api-guidelines/interoperability.html#c-err-msg)
+
+## 形式化基础
+
+本页的工程模式可追溯到以下 L4 形式化/理论权威页：
+
+- [类型论基础](../../../04_formal/00_type_theory/01_type_theory.md)
+- [操作语义](../../../04_formal/03_operational_semantics/03_operational_semantics.md)
+- [λ 演算与可计算性](../../../04_formal/00_type_theory/05_lambda_calculus.md)

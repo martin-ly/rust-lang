@@ -241,3 +241,18 @@ fn main() {
 - [cp-algorithms: Segment Tree](https://cp-algorithms.com/data_structures/segment_tree.html) — 线段树的迭代与递归实现、懒标记扩展。
 - [Rust Standard Library: `std::ops::Add`](https://doc.rust-lang.org/std/ops/trait.Add.html) — 用于泛型聚合操作。
 - [Rust Standard Library: `std::default::Default`](https://doc.rust-lang.org/std/default/trait.Default.html) — 作为结合操作的单位元来源。
+
+## 形式化基础
+
+本页的工程模式可追溯到以下 L4 形式化/理论权威页：
+
+- [算法语义与霍尔逻辑](../../../04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md)
+- [算法等价性](../../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md)
+- [形式化算法理论](../../../04_formal/00_type_theory/13_formal_algorithm_theory.md)
+
+## 来源与延伸阅读
+
+- [The Rust Reference](https://doc.rust-lang.org/reference/)
+- [std::collections](https://doc.rust-lang.org/std/collections/)
+- [Rust RFCs](https://rust-lang.github.io/rfcs/)
+- [The Rust Programming Language](https://doc.rust-lang.org/book/)

@@ -78,6 +78,7 @@ mindmap
     - [8.3 边界测试：未经验证的 crates.io 依赖进入 SIL 路径](#83-边界测试未经验证的-cratesio-依赖进入-sil-路径)
   - [九、相关概念](#九相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [来源与延伸阅读](#来源与延伸阅读)
 
 ---
 
@@ -324,3 +325,12 @@ mindmap
       依赖审计
       覆盖率
 ```
+
+## 来源与延伸阅读
+
+- [The Rust Reference](https://doc.rust-lang.org/reference/)
+- [Rust RFCs](https://rust-lang.github.io/rfcs/)
+- [The Rust Programming Language](https://doc.rust-lang.org/book/)
+- [docs.rs](https://docs.rs/)
+- [crates.io](https://crates.io/)
+- [Rust Embedded Book](https://docs.rust-embedded.org/)

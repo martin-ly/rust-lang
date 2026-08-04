@@ -185,3 +185,12 @@ fn main() {
   - Windows GNU 目标（`x86_64-pc-windows-gnu` / `i686-pc-windows-gnu`）mingw-w64 工具链更新
   - Solaris/Illumos 上 `std::fs::File::lock` 实现移除
   - `-Zemscripten-wasm-eh` 移除
+
+## 来源与延伸阅读
+
+- [The Rust Reference](https://doc.rust-lang.org/reference/)
+- [Rust RFCs](https://rust-lang.github.io/rfcs/)
+- [The Rust Programming Language](https://doc.rust-lang.org/book/)
+- [docs.rs](https://docs.rs/)
+- [crates.io](https://crates.io/)
+- [Rust Embedded Book](https://docs.rust-embedded.org/)

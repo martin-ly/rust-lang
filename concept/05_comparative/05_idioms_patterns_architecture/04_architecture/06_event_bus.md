@@ -141,3 +141,11 @@ fn main() {
 - [tokio sync — broadcast](https://docs.rs/tokio/latest/tokio/sync/broadcast/index.html)
 - [NATS — Cloud Native Messaging](https://nats.io/)
 - [The Rust Programming Language — Message Passing](https://doc.rust-lang.org/book/ch16-02-message-passing.html)
+
+## 形式化基础
+
+本页的工程模式可追溯到以下 L4 形式化/理论权威页：
+
+- [架构模式语义](../../../04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md)
+- [分布式系统语义](../../../04_formal/09_system_semantics/04_distributed_systems_semantics.md)
+- [软件架构形式化](../../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md)

@@ -131,3 +131,11 @@ fn main() {}
 - [Rust API Guidelines — Newtype Pattern](https://rust-lang.github.io/api-guidelines/flexibility.html#c-newtype)
 - [The Rust Programming Language — Tuple Structs](https://doc.rust-lang.org/book/ch05-01-defining-structs.html#using-tuple-structs-without-named-fields-to-create-different-types)
 - [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)
+
+## 形式化基础
+
+本页的工程模式可追溯到以下 L4 形式化/理论权威页：
+
+- [类型论基础](../../../04_formal/00_type_theory/01_type_theory.md)
+- [操作语义](../../../04_formal/03_operational_semantics/03_operational_semantics.md)
+- [λ 演算与可计算性](../../../04_formal/00_type_theory/05_lambda_calculus.md)

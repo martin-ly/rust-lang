@@ -109,3 +109,11 @@ fn main() {
 - [Rust Design Patterns — Functional Programming / Idioms](https://rust-unofficial.github.io/patterns/functional/iterators.html)
 - [The Rust Programming Language — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html)
 - [Rust API Guidelines — Iterators](https://rust-lang.github.io/api-guidelines/flexibility.html#c-iter)
+
+## 形式化基础
+
+本页的工程模式可追溯到以下 L4 形式化/理论权威页：
+
+- [类型论基础](../../../04_formal/00_type_theory/01_type_theory.md)
+- [操作语义](../../../04_formal/03_operational_semantics/03_operational_semantics.md)
+- [λ 演算与可计算性](../../../04_formal/00_type_theory/05_lambda_calculus.md)

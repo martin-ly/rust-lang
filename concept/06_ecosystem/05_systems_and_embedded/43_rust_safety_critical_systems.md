@@ -133,6 +133,7 @@ mindmap
   - [十一、权威来源索引](#十一权威来源索引)
   - [十二、相关概念](#十二相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [来源与延伸阅读](#来源与延伸阅读)
 
 ---
 
@@ -1349,3 +1350,12 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从定义、标准、语义优势、unsafe 审计、形式验证、no_std、工具链、反例和决策九个维度组织内容，可作为 Rust 安全关键系统工程的知识导航索引。
+
+## 来源与延伸阅读
+
+- [The Rust Reference](https://doc.rust-lang.org/reference/)
+- [Rust RFCs](https://rust-lang.github.io/rfcs/)
+- [The Rust Programming Language](https://doc.rust-lang.org/book/)
+- [docs.rs](https://docs.rs/)
+- [crates.io](https://crates.io/)
+- [Rust Embedded Book](https://docs.rust-embedded.org/)

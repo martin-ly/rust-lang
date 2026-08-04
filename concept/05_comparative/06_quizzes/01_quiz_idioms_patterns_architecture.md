@@ -8,7 +8,7 @@
 **Rust 版本**: 1.97.0+ (Edition 2024)
 **权威来源**: 本文件为 `concept/` 权威页。
 **定理链**: N/A — 测验性/互动性文档，不涉及形式化定理链
-**前置概念**: [Rust 惯用法、算法、设计模式与架构模式](../05_idioms_patterns_architecture/README.md)
+**前置概念**: [Rust 惯用法、算法、设计模式与架构模式](../05_idioms_patterns_architecture/README.md) · [形式化设计模式理论](../../04_formal/00_type_theory/11_formal_design_pattern_theory.md) · [类型论基础](../../04_formal/00_type_theory/01_type_theory.md)
 
 ---
 
@@ -298,3 +298,9 @@ Actor 模型的核心是通过**异步消息传递**通信，避免共享可变�
 无锁结构通过原子操作避免互斥锁竞争，可提升可扩展性，但代码更复杂；Rust 类型系统保证无数据竞争的前提是正确使用 `Send`/`Sync` 和内存序。
 
 </details>
+
+## 来源与延伸阅读
+
+- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+- [The Rust Programming Language](https://doc.rust-lang.org/book/)
+- [The Rust Reference](https://doc.rust-lang.org/reference/)

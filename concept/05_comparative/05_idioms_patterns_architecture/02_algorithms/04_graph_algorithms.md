@@ -249,3 +249,11 @@ fn main() {
 - [cp-algorithms: Graphs](https://cp-algorithms.com/graph/index.html) — BFS、DFS、Dijkstra、Bellman-Ford、Kruskal、Prim 等实现。
 - [Rust Standard Library: `std::collections::BinaryHeap`](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html) — 优先队列实现。
 - [Rust Standard Library: `std::collections::VecDeque`](https://doc.rust-lang.org/std/collections/struct.VecDeque.html) — BFS 队列实现。
+
+## 形式化基础
+
+本页的工程模式可追溯到以下 L4 形式化/理论权威页：
+
+- [算法语义与霍尔逻辑](../../../04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md)
+- [算法等价性](../../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md)
+- [形式化算法理论](../../../04_formal/00_type_theory/13_formal_algorithm_theory.md)

@@ -1,6 +1,6 @@
 # 装饰器模式
 
-**EN**: Decorator Pattern  
+**EN**: Decorator Pattern
 **Summary**: Attach additional responsibilities to an object dynamically, providing a flexible alternative to subclassing for extending functionality.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
@@ -182,3 +182,11 @@ fn main() {
 - [Refactoring Guru - Decorator Pattern](https://refactoring.guru/design-patterns/decorator)
 - GoF, *Design Patterns: Elements of Reusable Object-Oriented Software*, Decorator pattern.
 - The Rust Programming Language, Chapter 10: Generic Types, Traits, and Lifetimes.
+
+## 形式化基础
+
+本页的工程模式可追溯到以下 L4 形式化/理论权威页：
+
+- [形式化设计模式理论](../../../04_formal/00_type_theory/11_formal_design_pattern_theory.md)
+- [模式组合代数](../../../04_formal/00_type_theory/12_pattern_composition_algebra.md)
+- [类型系统进阶](../../../04_formal/00_type_theory/01_type_theory.md)

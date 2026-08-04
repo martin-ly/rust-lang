@@ -231,3 +231,11 @@ fn main() {
 - [cp-algorithms: Trie](https://cp-algorithms.com/string/string_structures.html) — 前缀树的实现与应用。
 - [Rust Standard Library: `std::collections::HashMap`](https://doc.rust-lang.org/std/collections/struct.HashMap.html) — 子节点映射的标准实现。
 - [Rust Standard Library: `std::str::Chars`](https://doc.rust-lang.org/std/str/struct.Chars.html) — Unicode 字符迭代器。
+
+## 形式化基础
+
+本页的工程模式可追溯到以下 L4 形式化/理论权威页：
+
+- [算法语义与霍尔逻辑](../../../04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md)
+- [算法等价性](../../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md)
+- [形式化算法理论](../../../04_formal/00_type_theory/13_formal_algorithm_theory.md)

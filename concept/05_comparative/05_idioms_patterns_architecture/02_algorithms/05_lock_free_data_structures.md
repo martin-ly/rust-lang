@@ -154,3 +154,11 @@ fn use_stack<T>(s: &Stack<T>) {
 - [crossbeam-epoch crate docs](https://docs.rs/crossbeam-epoch/)
 - [Rust Atomics and Locks — Mara Bos](https://marabos.nl/atomics/)
 - [The Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html)
+
+## 形式化基础
+
+本页的工程模式可追溯到以下 L4 形式化/理论权威页：
+
+- [算法语义与霍尔逻辑](../../../04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md)
+- [算法等价性](../../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md)
+- [形式化算法理论](../../../04_formal/00_type_theory/13_formal_algorithm_theory.md)

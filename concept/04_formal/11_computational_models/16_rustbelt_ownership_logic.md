@@ -54,6 +54,7 @@
     - [测验 3：unsafe 代码在 RustBelt 中如何被验证？](#测验-3unsafe-代码在-rustbelt-中如何被验证)
   - [七、权威来源 / International Authority References](#七权威来源--international-authority-references)
   - [八、🧭 思维导图（Mindmap）](#八-思维导图mindmap)
+  - [来源与延伸阅读](#来源与延伸阅读)
 
 ---
 
@@ -138,7 +139,7 @@ RustBelt 的一个核心创新是**生命周期分数权限**（lifetime fractio
   'a: 'b   ⇔  α 包含 β       α 的权限范围覆盖 β
 ```
 
-这种建模允许 RustBelt 精确表达「多个只读引用共存」和「可变引用独占」的规则：
+这种建模使 RustBelt 能够精确刻画两条规则——多个只读引用可以共存，而可变引用必须独占：
 
 - 多个 `&{α} T` 的分数可以相加，但总和必须 ≤1。
 - `&mut{α} T` 必须持有完整的 1.0 权限，因此不能与其他 `&` 或 `&mut` 共存。
@@ -530,3 +531,11 @@ mindmap
       Iris Project
       Reynolds / O'Hearn
 ```
+
+## 来源与延伸阅读
+
+- [RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
+- [Aeneas Project](https://aeneasverif.github.io/)
+- [Flux Refinement Types](https://flux-rs.github.io/)
+- [arXiv](https://arxiv.org/)
+- [ACM Digital Library](https://dl.acm.org/)

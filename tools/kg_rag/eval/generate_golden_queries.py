@@ -113,7 +113,7 @@ def kg_derived_queries(kg: dict[str, Any], rng: random.Random) -> list[dict[str,
             query_text = tmpl.format(label=label)
             queries.append({
                 "query": query_text,
-                "expected_concepts": [concept_key, key_label],
+                "expected_concepts": [key_label],
                 "expected_sources": [source],
                 "layer": layer_from_entity(entity),
                 "domain": entity.get("ex:domain", "uncategorized"),
@@ -583,7 +583,7 @@ def main(argv: list[str] | None = None) -> int:
                 continue
             queries.append({
                 "query": query,
-                "expected_concepts": [normalize_for_key(short_id(entity.get("@id", "")))],
+                "expected_concepts": [normalize_for_key(label)],
                 "expected_sources": [path_to_source(path)],
                 "layer": layer_from_entity(entity),
                 "domain": entity.get("ex:domain", "uncategorized"),

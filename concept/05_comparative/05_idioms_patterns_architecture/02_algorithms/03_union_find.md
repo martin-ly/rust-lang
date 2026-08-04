@@ -220,3 +220,18 @@ fn main() {
 - *The Algorithm Design Manual* (Skiena), 3rd ed. — Union-Find 与最小生成树。
 - [cp-algorithms: Disjoint Set Union](https://cp-algorithms.com/data_structures/disjoint_set_union.html) — 并查集优化与扩展。
 - [Rust Standard Library: `std::vec::Vec`](https://doc.rust-lang.org/std/vec/struct.Vec.html) — 父指针数组实现。
+
+## 形式化基础
+
+本页的工程模式可追溯到以下 L4 形式化/理论权威页：
+
+- [算法语义与霍尔逻辑](../../../04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md)
+- [算法等价性](../../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md)
+- [形式化算法理论](../../../04_formal/00_type_theory/13_formal_algorithm_theory.md)
+
+## 来源与延伸阅读
+
+- [The Rust Reference](https://doc.rust-lang.org/reference/)
+- [std::collections](https://doc.rust-lang.org/std/collections/)
+- [Rust RFCs](https://rust-lang.github.io/rfcs/)
+- [The Rust Programming Language](https://doc.rust-lang.org/book/)

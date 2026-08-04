@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 790,
-    "generated_at": "2026-08-04T14:12:03.933494+00:00"
+    "generated_at": "2026-08-04T14:59:30.694627+00:00"
   },
   "files": [
     {
@@ -53984,7 +53984,7 @@
       "layer": "L4",
       "title": "线性逻辑与所有权：作为计算模型的资源演算（Linear Logic and Ownership: Resource Calculus as a Computational Model）",
       "positioning": "从**计算模型**视角把线性/仿射逻辑当作 Rust 所有权的**资源演算**：不重复介绍 Girard 的 sequent calculus，而是说明 `⊗, ⊸, !, &` 等连接词如何精确对应 Rust 的值移动、函数调用、共享借用、引用计数等工程机制，并为 [范畴论与 Rust](10_category_theory_and_rust.md) 的「仿射范畴直觉」与 [RustBelt 所有权逻辑](16_rustbelt_ownership_logic.md) 提供证明论语义基础。",
-      "line_count": 578,
+      "line_count": 579,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -54096,9 +54096,9 @@
             "compile_fail",
             "E0507"
           ],
-          "lines": 6,
+          "lines": 7,
           "should_fail": true,
-          "code_preview": "fn main() {     let s = String::from(\"not copy\");     let r = &s;     let _ = *r..."
+          "code_preview": "fn main() {     let s = String::from(\"not copy\");     let r = &s;     let s2 = *..."
         },
         {
           "flags": [],
@@ -54323,8 +54323,7 @@
         },
         {
           "flags": [
-            "compile_fail",
-            "E0277"
+            "compile_fail"
           ],
           "lines": 24,
           "should_fail": true,
@@ -59415,7 +59414,7 @@
       "layer": "L5",
       "title": "迭代器链",
       "positioning": "",
-      "line_count": 112,
+      "line_count": 121,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59443,6 +59442,9 @@
       "cross_references": [
         "../../../01_foundation/05_collections/01_collections.md",
         "../../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
+        "../../../04_formal/00_type_theory/01_type_theory.md",
+        "../../../04_formal/00_type_theory/05_lambda_calculus.md",
+        "../../../04_formal/03_operational_semantics/03_operational_semantics.md",
         "../02_algorithms/README.md"
       ],
       "transitions": 0,
@@ -59465,7 +59467,7 @@
       "layer": "L5",
       "title": "错误传播与 `?` 运算符",
       "positioning": "",
-      "line_count": 116,
+      "line_count": 125,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59492,7 +59494,10 @@
       "sources": [],
       "cross_references": [
         "../../../01_foundation/08_error_handling/01_error_handling_basics.md",
-        "../../../02_intermediate/03_error_handling/01_result_option.md",
+        "../../../02_intermediate/03_error_handling/01_error_handling.md",
+        "../../../04_formal/00_type_theory/01_type_theory.md",
+        "../../../04_formal/00_type_theory/05_lambda_calculus.md",
+        "../../../04_formal/03_operational_semantics/03_operational_semantics.md",
         "./03_into_from_asref.md"
       ],
       "transitions": 0,
@@ -59501,7 +59506,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[错误处理基础](../../../01_foundation/08_error_handling/01_error_handling_basics.md) · [Result 与 Option](../../../02_intermediate/03_error_handling/01_result_option.md)"
+          "[错误处理基础](../../../01_foundation/08_error_handling/01_error_handling_basics.md) · [Result 与 Option](../../../02_intermediate/03_error_handling/01_error_handling.md)"
         ],
         "post": [
           "[Into/From/AsRef](./03_into_from_asref.md)"
@@ -59515,7 +59520,7 @@
       "layer": "L5",
       "title": "Into / From / AsRef 转换惯用法",
       "positioning": "",
-      "line_count": 126,
+      "line_count": 135,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59543,6 +59548,9 @@
       "cross_references": [
         "../../../02_intermediate/00_traits/01_traits.md",
         "../../../02_intermediate/01_generics/01_generics.md",
+        "../../../04_formal/00_type_theory/01_type_theory.md",
+        "../../../04_formal/00_type_theory/05_lambda_calculus.md",
+        "../../../04_formal/03_operational_semantics/03_operational_semantics.md",
         "./02_error_propagation.md",
         "./04_newtype.md"
       ],
@@ -59566,7 +59574,7 @@
       "layer": "L5",
       "title": "Newtype 惯用法",
       "positioning": "",
-      "line_count": 134,
+      "line_count": 143,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59598,8 +59606,11 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../01_foundation/02_type_system/03_structs.md",
+        "../../../01_foundation/07_modules_and_items/04_structs.md",
         "../../../02_intermediate/00_traits/01_traits.md",
+        "../../../04_formal/00_type_theory/01_type_theory.md",
+        "../../../04_formal/00_type_theory/05_lambda_calculus.md",
+        "../../../04_formal/03_operational_semantics/03_operational_semantics.md",
         "./03_into_from_asref.md"
       ],
       "transitions": 0,
@@ -59608,7 +59619,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[结构体](../../../01_foundation/02_type_system/03_structs.md) · [Trait](../../../02_intermediate/00_traits/01_traits.md)"
+          "[结构体](../../../01_foundation/07_modules_and_items/04_structs.md) · [Trait](../../../02_intermediate/00_traits/01_traits.md)"
         ],
         "post": [
           "[Into/From/AsRef](./03_into_from_asref.md)"
@@ -59622,7 +59633,7 @@
       "layer": "L5",
       "title": "Typestate 惯用法",
       "positioning": "",
-      "line_count": 161,
+      "line_count": 170,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59648,8 +59659,11 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../../02_intermediate/00_traits/01_traits.md",
         "../../../02_intermediate/01_generics/01_generics.md",
-        "../../../03_advanced/04_unsafe/02_phantom_data.md",
+        "../../../04_formal/00_type_theory/01_type_theory.md",
+        "../../../04_formal/00_type_theory/05_lambda_calculus.md",
+        "../../../04_formal/03_operational_semantics/03_operational_semantics.md",
         "../03_design_patterns/04_state_machine.md"
       ],
       "transitions": 0,
@@ -59658,7 +59672,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[泛型](../../../02_intermediate/01_generics/01_generics.md) · [PhantomData](../../../03_advanced/04_unsafe/02_phantom_data.md)"
+          "[泛型](../../../02_intermediate/01_generics/01_generics.md) · [PhantomData](../../../02_intermediate/00_traits/01_traits.md)"
         ],
         "post": [
           "[状态机模式](../03_design_patterns/04_state_machine.md)"
@@ -59672,7 +59686,7 @@
       "layer": "L5",
       "title": "RAII 与 Cleanup 惯用法",
       "positioning": "",
-      "line_count": 140,
+      "line_count": 149,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59693,7 +59707,7 @@
           ],
           "lines": 8,
           "should_fail": true,
-          "code_preview": "struct Guard;  fn main() {     let guard = Guard;     drop(guard);     let _ = g..."
+          "code_preview": "struct Guard;  fn main() {     let guard = Guard;     drop(guard);     let _used..."
         },
         {
           "flags": [
@@ -59708,7 +59722,10 @@
       "sources": [],
       "cross_references": [
         "../../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
-        "../../../02_intermediate/02_memory_management/02_drop.md",
+        "../../../02_intermediate/02_memory_management/01_memory_management.md",
+        "../../../04_formal/00_type_theory/01_type_theory.md",
+        "../../../04_formal/00_type_theory/05_lambda_calculus.md",
+        "../../../04_formal/03_operational_semantics/03_operational_semantics.md",
         "./08_defer.md"
       ],
       "transitions": 0,
@@ -59717,7 +59734,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[所有权与借用](../../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Drop trait](../../../02_intermediate/02_memory_management/02_drop.md)"
+          "[所有权与借用](../../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Drop trait](../../../02_intermediate/02_memory_management/01_memory_management.md)"
         ],
         "post": [
           "[Defer](./08_defer.md)"
@@ -59731,7 +59748,7 @@
       "layer": "L5",
       "title": "Builder 惯用法",
       "positioning": "",
-      "line_count": 160,
+      "line_count": 169,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59757,8 +59774,11 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../01_foundation/02_type_system/03_structs.md",
+        "../../../01_foundation/07_modules_and_items/04_structs.md",
         "../../../01_foundation/08_error_handling/01_error_handling_basics.md",
+        "../../../04_formal/00_type_theory/01_type_theory.md",
+        "../../../04_formal/00_type_theory/05_lambda_calculus.md",
+        "../../../04_formal/03_operational_semantics/03_operational_semantics.md",
         "./05_typestate.md"
       ],
       "transitions": 0,
@@ -59767,7 +59787,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[结构体](../../../01_foundation/02_type_system/03_structs.md) · [错误处理](../../../01_foundation/08_error_handling/01_error_handling_basics.md)"
+          "[结构体](../../../01_foundation/07_modules_and_items/04_structs.md) · [错误处理](../../../01_foundation/08_error_handling/01_error_handling_basics.md)"
         ],
         "post": [
           "[Typestate](./05_typestate.md)"
@@ -59781,7 +59801,7 @@
       "layer": "L5",
       "title": "Defer 惯用法",
       "positioning": "",
-      "line_count": 137,
+      "line_count": 146,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59807,7 +59827,10 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../02_intermediate/02_memory_management/02_drop.md",
+        "../../../02_intermediate/02_memory_management/01_memory_management.md",
+        "../../../04_formal/00_type_theory/01_type_theory.md",
+        "../../../04_formal/00_type_theory/05_lambda_calculus.md",
+        "../../../04_formal/03_operational_semantics/03_operational_semantics.md",
         "./02_error_propagation.md",
         "./06_raii_cleanup.md"
       ],
@@ -59817,7 +59840,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[RAII / Cleanup](./06_raii_cleanup.md) · [Drop trait](../../../02_intermediate/02_memory_management/02_drop.md)"
+          "[RAII / Cleanup](./06_raii_cleanup.md) · [Drop trait](../../../02_intermediate/02_memory_management/01_memory_management.md)"
         ],
         "post": [
           "[错误传播](./02_error_propagation.md)"
@@ -59831,7 +59854,7 @@
       "layer": "L5",
       "title": "线段树",
       "positioning": "",
-      "line_count": 244,
+      "line_count": 253,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59865,6 +59888,9 @@
       "cross_references": [
         "../../../01_foundation/05_collections/01_collections.md",
         "../../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
+        "../../../04_formal/00_type_theory/13_formal_algorithm_theory.md",
+        "../../../04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md",
+        "../../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md",
         "../../../06_ecosystem/16_algorithm_patterns/01_algorithmic_paradigms.md",
         "../../../06_ecosystem/16_algorithm_patterns/04_cache_friendly_and_simd_algorithms.md",
         "../../../06_ecosystem/16_algorithm_patterns/18_competitive_programming_idioms.md",
@@ -59890,7 +59916,7 @@
       "layer": "L5",
       "title": "字典树",
       "positioning": "",
-      "line_count": 234,
+      "line_count": 243,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59930,6 +59956,9 @@
       "cross_references": [
         "../../../01_foundation/05_collections/01_collections.md",
         "../../../01_foundation/06_strings_and_text/01_strings_and_text.md",
+        "../../../04_formal/00_type_theory/13_formal_algorithm_theory.md",
+        "../../../04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md",
+        "../../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md",
         "../../../06_ecosystem/16_algorithm_patterns/02_ownership_aware_data_structures.md",
         "../../../06_ecosystem/16_algorithm_patterns/07_string_algorithms_in_rust.md",
         "../../../06_ecosystem/16_algorithm_patterns/18_competitive_programming_idioms.md",
@@ -59955,7 +59984,7 @@
       "layer": "L5",
       "title": "并查集",
       "positioning": "",
-      "line_count": 223,
+      "line_count": 232,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59994,7 +60023,9 @@
       "sources": [],
       "cross_references": [
         "../../../01_foundation/05_collections/01_collections.md",
+        "../../../04_formal/00_type_theory/13_formal_algorithm_theory.md",
         "../../../04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md",
+        "../../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md",
         "../../../06_ecosystem/16_algorithm_patterns/01_algorithmic_paradigms.md",
         "../../../06_ecosystem/16_algorithm_patterns/14_network_flow_and_matching.md",
         "../../../06_ecosystem/16_algorithm_patterns/18_competitive_programming_idioms.md",
@@ -60020,7 +60051,7 @@
       "layer": "L5",
       "title": "图算法",
       "positioning": "",
-      "line_count": 252,
+      "line_count": 261,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60059,6 +60090,9 @@
       "sources": [],
       "cross_references": [
         "../../../01_foundation/05_collections/01_collections.md",
+        "../../../04_formal/00_type_theory/13_formal_algorithm_theory.md",
+        "../../../04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md",
+        "../../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md",
         "../../../06_ecosystem/16_algorithm_patterns/01_algorithmic_paradigms.md",
         "../../../06_ecosystem/16_algorithm_patterns/03_graph_algorithms_in_rust.md",
         "../../../06_ecosystem/16_algorithm_patterns/14_network_flow_and_matching.md",
@@ -60085,7 +60119,7 @@
       "layer": "L5",
       "title": "无锁数据结构",
       "positioning": "",
-      "line_count": 153,
+      "line_count": 166,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60106,7 +60140,7 @@
             "compile_fail",
             "E0599"
           ],
-          "lines": 16,
+          "lines": 20,
           "should_fail": true,
           "code_preview": "use std::sync::atomic::{AtomicPtr, Ordering};  struct Node<T> {     data: T,    ..."
         }
@@ -60114,7 +60148,10 @@
       "sources": [],
       "cross_references": [
         "../../../03_advanced/00_concurrency/01_concurrency.md",
-        "../../../03_advanced/00_concurrency/02_send_sync.md",
+        "../../../03_advanced/00_concurrency/02_send_sync_auto_traits.md",
+        "../../../04_formal/00_type_theory/13_formal_algorithm_theory.md",
+        "../../../04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md",
+        "../../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md",
         "./04_graph_algorithms.md"
       ],
       "transitions": 0,
@@ -60123,7 +60160,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[并发基础](../../../03_advanced/00_concurrency/01_concurrency.md) · [Send / Sync](../../../03_advanced/00_concurrency/02_send_sync.md)"
+          "[并发基础](../../../03_advanced/00_concurrency/01_concurrency.md) · [Send / Sync](../../../03_advanced/00_concurrency/02_send_sync_auto_traits.md)"
         ],
         "post": [
           "[图算法](./04_graph_algorithms.md)"
@@ -60137,7 +60174,7 @@
       "layer": "L5",
       "title": "策略模式",
       "positioning": "",
-      "line_count": 193,
+      "line_count": 202,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60175,6 +60212,9 @@
         "../../../02_intermediate/00_traits/01_traits.md",
         "../../../02_intermediate/00_traits/02_dispatch_mechanisms.md",
         "../../../02_intermediate/01_generics/01_generics.md",
+        "../../../04_formal/00_type_theory/01_type_theory.md",
+        "../../../04_formal/00_type_theory/11_formal_design_pattern_theory.md",
+        "../../../04_formal/00_type_theory/12_pattern_composition_algebra.md",
         "./02_command.md",
         "./04_state_machine.md",
         "./06_decorator.md"
@@ -60199,7 +60239,7 @@
       "layer": "L5",
       "title": "命令模式",
       "positioning": "",
-      "line_count": 215,
+      "line_count": 224,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60237,6 +60277,9 @@
         "../../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
         "../../../01_foundation/05_collections/01_collections.md",
         "../../../02_intermediate/00_traits/01_traits.md",
+        "../../../04_formal/00_type_theory/01_type_theory.md",
+        "../../../04_formal/00_type_theory/11_formal_design_pattern_theory.md",
+        "../../../04_formal/00_type_theory/12_pattern_composition_algebra.md",
         "./01_strategy.md",
         "./03_visitor.md",
         "./04_state_machine.md"
@@ -60261,7 +60304,7 @@
       "layer": "L5",
       "title": "访问者模式",
       "positioning": "",
-      "line_count": 208,
+      "line_count": 217,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60299,6 +60342,9 @@
         "../../../02_intermediate/00_traits/01_traits.md",
         "../../../02_intermediate/00_traits/02_dispatch_mechanisms.md",
         "../../../03_advanced/06_low_level_patterns/03_type_erasure.md",
+        "../../../04_formal/00_type_theory/01_type_theory.md",
+        "../../../04_formal/00_type_theory/11_formal_design_pattern_theory.md",
+        "../../../04_formal/00_type_theory/12_pattern_composition_algebra.md",
         "./02_command.md",
         "./04_state_machine.md",
         "./05_adapter.md"
@@ -60323,7 +60369,7 @@
       "layer": "L5",
       "title": "状态机模式",
       "positioning": "",
-      "line_count": 187,
+      "line_count": 196,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60361,6 +60407,9 @@
         "../../../01_foundation/02_type_system/01_type_system.md",
         "../../../01_foundation/07_modules_and_items/05_enumerations.md",
         "../../../02_intermediate/01_generics/01_generics.md",
+        "../../../04_formal/00_type_theory/01_type_theory.md",
+        "../../../04_formal/00_type_theory/11_formal_design_pattern_theory.md",
+        "../../../04_formal/00_type_theory/12_pattern_composition_algebra.md",
         "./01_strategy.md",
         "./02_command.md",
         "./03_visitor.md"
@@ -60385,7 +60434,7 @@
       "layer": "L5",
       "title": "适配器模式",
       "positioning": "",
-      "line_count": 174,
+      "line_count": 183,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60423,6 +60472,9 @@
         "../../../01_foundation/02_type_system/05_data_abstraction_spectrum.md",
         "../../../02_intermediate/00_traits/01_traits.md",
         "../../../02_intermediate/00_traits/04_advanced_traits.md",
+        "../../../04_formal/00_type_theory/01_type_theory.md",
+        "../../../04_formal/00_type_theory/11_formal_design_pattern_theory.md",
+        "../../../04_formal/00_type_theory/12_pattern_composition_algebra.md",
         "./01_strategy.md",
         "./03_visitor.md",
         "./06_decorator.md"
@@ -60447,7 +60499,7 @@
       "layer": "L5",
       "title": "装饰器模式",
       "positioning": "",
-      "line_count": 185,
+      "line_count": 194,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60482,6 +60534,9 @@
         "../../../01_foundation/02_type_system/05_data_abstraction_spectrum.md",
         "../../../02_intermediate/00_traits/01_traits.md",
         "../../../02_intermediate/01_generics/01_generics.md",
+        "../../../04_formal/00_type_theory/01_type_theory.md",
+        "../../../04_formal/00_type_theory/11_formal_design_pattern_theory.md",
+        "../../../04_formal/00_type_theory/12_pattern_composition_algebra.md",
         "./01_strategy.md",
         "./04_state_machine.md",
         "./05_adapter.md"
@@ -60506,7 +60561,7 @@
       "layer": "L5",
       "title": "六边形架构与整洁架构",
       "positioning": "",
-      "line_count": 156,
+      "line_count": 165,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60535,6 +60590,9 @@
         "../../../03_advanced/00_concurrency/01_concurrency.md",
         "../../../03_advanced/01_async/01_async.md",
         "../../../03_advanced/04_ffi/01_rust_ffi.md",
+        "../../../04_formal/09_system_semantics/04_distributed_systems_semantics.md",
+        "../../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md",
+        "../../../04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md",
         "../03_design_patterns/01_strategy.md",
         "../03_design_patterns/05_adapter.md",
         "../03_design_patterns/06_decorator.md"
@@ -60559,7 +60617,7 @@
       "layer": "L5",
       "title": "CQRS / Event Sourcing",
       "positioning": "",
-      "line_count": 154,
+      "line_count": 163,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60582,6 +60640,9 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../../04_formal/09_system_semantics/04_distributed_systems_semantics.md",
+        "../../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md",
+        "../../../04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md",
         "../01_idioms/02_error_propagation.md",
         "../03_design_patterns/README.md",
         "./03_microservices.md",
@@ -60607,7 +60668,7 @@
       "layer": "L5",
       "title": "微服务",
       "positioning": "",
-      "line_count": 150,
+      "line_count": 159,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60630,6 +60691,9 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../../04_formal/09_system_semantics/04_distributed_systems_semantics.md",
+        "../../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md",
+        "../../../04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md",
         "./01_hexagonal_clean_architecture.md",
         "./04_actor.md",
         "./06_event_bus.md"
@@ -60654,7 +60718,7 @@
       "layer": "L5",
       "title": "Actor 模型",
       "positioning": "",
-      "line_count": 146,
+      "line_count": 155,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60681,7 +60745,10 @@
       "sources": [],
       "cross_references": [
         "../../../03_advanced/00_concurrency/01_concurrency.md",
-        "../../../03_advanced/00_concurrency/03_channels.md",
+        "../../../03_advanced/00_concurrency/03_concurrency_patterns.md",
+        "../../../04_formal/09_system_semantics/04_distributed_systems_semantics.md",
+        "../../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md",
+        "../../../04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md",
         "./03_microservices.md",
         "./06_event_bus.md"
       ],
@@ -60691,7 +60758,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[并发基础](../../../03_advanced/00_concurrency/01_concurrency.md) · [Channel](../../../03_advanced/00_concurrency/03_channels.md)"
+          "[并发基础](../../../03_advanced/00_concurrency/01_concurrency.md) · [Channel](../../../03_advanced/00_concurrency/03_concurrency_patterns.md)"
         ],
         "post": [
           "[事件总线](./06_event_bus.md) · [微服务](./03_microservices.md)"
@@ -60705,7 +60772,7 @@
       "layer": "L5",
       "title": "插件系统",
       "positioning": "",
-      "line_count": 144,
+      "line_count": 157,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60724,7 +60791,7 @@
             "compile_fail",
             "E0038"
           ],
-          "lines": 7,
+          "lines": 11,
           "should_fail": true,
           "code_preview": "pub trait Plugin {     fn name(&self) -> &'static str;     fn execute<T>(&self, ..."
         }
@@ -60733,6 +60800,9 @@
       "cross_references": [
         "../../../01_foundation/07_modules_and_items/01_modules_and_paths.md",
         "../../../02_intermediate/00_traits/01_traits.md",
+        "../../../04_formal/09_system_semantics/04_distributed_systems_semantics.md",
+        "../../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md",
+        "../../../04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md",
         "./06_event_bus.md"
       ],
       "transitions": 0,
@@ -60755,7 +60825,7 @@
       "layer": "L5",
       "title": "事件总线",
       "positioning": "",
-      "line_count": 144,
+      "line_count": 153,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60778,7 +60848,10 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../../03_advanced/00_concurrency/03_channels.md",
+        "../../../03_advanced/00_concurrency/03_concurrency_patterns.md",
+        "../../../04_formal/09_system_semantics/04_distributed_systems_semantics.md",
+        "../../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md",
+        "../../../04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md",
         "./02_cqrs_event_sourcing.md",
         "./04_actor.md"
       ],
@@ -60788,7 +60861,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[Channel](../../../03_advanced/00_concurrency/03_channels.md) · [Actor](./04_actor.md)"
+          "[Channel](../../../03_advanced/00_concurrency/03_concurrency_patterns.md) · [Actor](./04_actor.md)"
         ],
         "post": [
           "[CQRS / Event Sourcing](./02_cqrs_event_sourcing.md)"
@@ -60815,6 +60888,8 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../04_formal/00_type_theory/01_type_theory.md",
+        "../../04_formal/00_type_theory/11_formal_design_pattern_theory.md",
         "../05_idioms_patterns_architecture/README.md"
       ],
       "transitions": 0,
@@ -66635,218 +66710,21 @@
       "layer": "L6",
       "title": "CQRS & Event Sourcing（命令查询职责分离与事件溯源）",
       "positioning": "",
-      "line_count": 1580,
-      "theorem_chains": [
-        {
-          "text": "| CQRS & Event Sourcing（命令查询职责分离与事件溯源） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| CQRS & Event Sourcing（命令查询职责分离与事件溯源） 选型实践 ⟹ 常见陷阱 | 忽视版本兼容性与生态成熟度 | 技术债务或迁移成本 | 中 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| CQRS & Event Sourcing（命令查询职责分离与事件溯源） 陷阱规避 ⟹ 深度掌握 | 持续跟踪社区演进与最佳实践 | 能进行架构设计与技术预研 | 高 |",
-          "type": "table_row"
-        }
-      ],
-      "anti_propositions": [
-        {
-          "title": "## 七、反命题"
-        },
-        {
-          "title": "### 7.1 反命题"
-        },
-        {
-          "title": "### 反例"
-        }
-      ],
-      "code_blocks": [
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 20,
-          "should_fail": false,
-          "code_preview": "// CQS 在 Rust 中的直接体现  // 命令：改变状态，返回 ()（或 Result<(), Error>） fn place_order(cmd: ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 44,
-          "should_fail": false,
-          "code_preview": "// 事件溯源的核心：状态是事件的左折叠（left fold） #[derive(Debug, Clone, Serialize, Deserialize)] ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 62,
-          "should_fail": false,
-          "code_preview": "// 命令端：聚合根（Aggregate Root） #[derive(Debug)] struct OrderAggregate {     order_id..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 50,
-          "should_fail": false,
-          "code_preview": "// 查询端：物化视图（去规范化、针对查询优化） #[derive(Debug, Clone, Serialize, Deserialize)] struct ..."
-        },
-        {
-          "flags": [],
-          "lines": 12,
-          "should_fail": false,
-          "code_preview": "// 共享数据库策略：使用 PostgreSQL 的只读副本 // 命令端写入主库，查询端读取副本  // 数据库级分离策略： // 命令端 → EventSt..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 32,
-          "should_fail": false,
-          "code_preview": "// 事件存储的追加接口 // 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait] trait EventStore {   ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 47,
-          "should_fail": false,
-          "code_preview": "#[derive(Debug, Serialize, Deserialize)] struct OrderSnapshot {     stream_id: S..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 42,
-          "should_fail": false,
-          "code_preview": "// 事件版本化：通过枚举实现多版本兼容 #[derive(Debug, Clone, Serialize, Deserialize)] #[serde(tag..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 77,
-          "should_fail": false,
-          "code_preview": "// Saga：订单处理流程的编排 #[derive(Debug)] struct OrderSaga {     saga_id: Uuid,     ord..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 75,
-          "should_fail": false,
-          "code_preview": "// Outbox 模式：在同一数据库事务中写入聚合状态和事件 #[derive(Debug, Serialize, Deserialize)] struct ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 21,
-          "should_fail": false,
-          "code_preview": "// 最终一致性的时间边界分析 #[derive(Debug)] struct ConsistencyMetrics {     event_commit_la..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 75,
-          "should_fail": false,
-          "code_preview": "use serde::{Serialize, Deserialize}; use chrono::{DateTime, Utc}; use uuid::Uuid..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 70,
-          "should_fail": false,
-          "code_preview": "// 注意：Axum 0.8+ 使用原生 AFIT，不再需要 #[async_trait] pub trait CommandHandler<C: Comman..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 73,
-          "should_fail": false,
-          "code_preview": "use sqlx::{PgPool, Row};  pub struct PostgresEventStore {     pool: PgPool, }  /..."
-        },
-        {
-          "flags": [],
-          "lines": 58,
-          "should_fail": false,
-          "code_preview": "// 模块结构 // // order-service/ // ├── Cargo.toml // ├── src/ // │   ├── main.rs //..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 19,
-          "should_fail": false,
-          "code_preview": "// 性能退化测试：重建 100,000 个事件的聚合状态 fn benchmark_rebuild_without_snapshot() {     let ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 22,
-          "should_fail": false,
-          "code_preview": "// 错误示例：不使用 Outbox 模式的双写 async fn bad_example(db: &PgPool, kafka: &FutureProduce..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 41,
-          "should_fail": false,
-          "code_preview": "#[derive(Debug, Serialize, Deserialize)] struct OrderItemV1 {     product_id: Uu..."
-        },
-        {
-          "flags": [
-            "compile_fail",
-            "E0502"
-          ],
-          "lines": 8,
-          "should_fail": true,
-          "code_preview": "fn main() {     let mut events = vec![\"e1\", \"e2\"];     for e in &events {      /..."
-        },
-        {
-          "flags": [],
-          "lines": 7,
-          "should_fail": false,
-          "code_preview": "fn main() {     let mut events = vec![\"e1\", \"e2\"];     let new: Vec<&str> = even..."
-        }
-      ],
+      "line_count": 13,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../../02_intermediate/00_traits/01_traits.md",
-        "../../02_intermediate/01_generics/01_generics.md",
-        "../../03_advanced/01_async/01_async.md",
-        "../../04_formal/00_type_theory/01_type_theory.md",
-        "../../04_formal/03_operational_semantics/05_axiomatic_semantics.md",
-        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
-        "../../07_future/01_edition_roadmap/04_roadmap.md",
-        "../04_web_and_networking/01_distributed_systems.md",
-        "../04_web_and_networking/02_cloud_native.md",
-        "05_microservice_patterns.md",
-        "06_event_driven_architecture.md",
-        "08_architecture_patterns.md"
+        "../../05_comparative/05_idioms_patterns_architecture/04_architecture/02_cqrs_event_sourcing.md"
       ],
       "transitions": 0,
-      "has_cognitive_path": true,
-      "mermaid_blocks": 2,
-      "matrix_rows": 41,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 0,
       "pre_post": {
-        "pre": [
-          "[Async](../../03_advanced/01_async/01_async.md) · 事件驱动架构 · [泛型（Generics）](../../02_intermediate/01_generics/01_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md)",
-          "N/A",
-          "[Type Theory](../../04_formal/00_type_theory/01_type_theory.md)",
-          "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
-        ],
-        "post": [
-          "[Future Roadmap](../../07_future/01_edition_roadmap/04_roadmap.md)"
-        ]
+        "pre": [],
+        "post": []
       },
       "backward_chains": 0,
       "templated_chains": 0
@@ -71289,7 +71167,7 @@
       "layer": "L6",
       "title": "Rust API Guidelines 惯用法语义映射",
       "positioning": "将官方 [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) 的 30 条核心建议翻译为 Rust 惯用法与语义决策，补充 [Rust 惯用法谱系全景](02_idioms_spectrum.md) 的综述视角，并向下对齐 [API 设计模式](18_api_design_patterns.md) 中的具体工程决策。",
-      "line_count": 770,
+      "line_count": 776,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -71425,9 +71303,9 @@
         },
         {
           "flags": [],
-          "lines": 4,
+          "lines": 10,
           "should_fail": false,
-          "code_preview": "pub fn set_name(&mut self, name: impl Into<String>) {     self.name = name.into(..."
+          "code_preview": "pub struct NameSetter {     name: String, }  impl NameSetter {     pub fn set_na..."
         },
         {
           "flags": [],
