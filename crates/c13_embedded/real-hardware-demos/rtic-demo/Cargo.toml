@@ -17,7 +17,7 @@ rtic = { version = "2.2.0", features = ["thumbv7-backend"] }
 stm32f4xx-hal = { version = "0.23.0", features = ["stm32f407", "rtic2"] }
 
 # 嵌入式基础
-cortex-m = { version = "0.7.7", features = ["inline-asm"] }
+cortex-m = { version = "0.7.8", features = ["inline-asm"] }
 cortex-m-rt = "0.7.5"
 panic-halt = "0.2"
 
