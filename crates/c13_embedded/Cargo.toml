@@ -47,12 +47,22 @@ panic-halt = { workspace = true }
 # 禁用 default-features 避免与 esp-hal 的 restore-state 选择冲突。
 critical-section = { version = "1.2", default-features = false }
 
+# 仅在 AArch64 裸机目标下启用真实硬件依赖
+[target.'cfg(all(target_arch = "aarch64", target_os = "none"))'.dependencies]
+aarch64-cpu = "10.0"
+tock-registers = "0.9"
+panic-halt = { workspace = true }
+
+# 仅在 WebAssembly 裸机目标下启用最小依赖
+[target.'cfg(all(target_arch = "wasm32", target_os = "unknown"))'.dependencies]
+panic-halt = { workspace = true }
+
 [build-dependencies]
 bindgen = { workspace = true }
 
 # criterion 仅在 host 类目标（x86_64 / aarch64 / wasm32）上用作 dev-dependency，
 # 避免它及其传递依赖（either、itertools 等）在 ARM/RISC-V 裸机交叉编译时被拉取。
-[target."cfg(any(target_arch = \"x86_64\", target_arch = \"aarch64\", target_arch = \"wasm32\"))".dev-dependencies]
+[target."cfg(all(any(target_arch = \"x86_64\", target_arch = \"aarch64\", target_arch = \"wasm32\"), not(any(target_os = \"none\", target_os = \"unknown\"))))".dev-dependencies]
 criterion = { workspace = true }
 
 [lib]
@@ -81,7 +91,7 @@ esp32c3-hal = ["dep:esp-hal", "dep:esp-println"]
 unsafe_code = "allow"
 missing_docs = "allow"
 # 声明 nightly 预览模块使用的自定义 cfg，避免 unexpected_cfgs 警告
-unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)', 'cfg(kani)'] }
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(nightly)', 'cfg(kani)', 'cfg(bare_metal)'] }
 
 [lints.clippy]
 borrowed_box = "deny"

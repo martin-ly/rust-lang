@@ -1,8 +1,8 @@
 {
   "summary": {
     "date": "2026-08-05",
-    "entities": 709,
-    "relations": 10547,
+    "entities": 719,
+    "relations": 10621,
     "decision_trees": 3,
     "fault_trees": 2,
     "K1_missing_required": 0,

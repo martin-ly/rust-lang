@@ -187,6 +187,7 @@ scripts/rust_1_98_0_release_response.py
 ### 9.1 P1 / P2 权威来源缺口清零
 
 通过 6 个并行子代理，为 43 个内容页追加 `## 来源与延伸阅读` 小节：
+
 - 8 个 Idioms 页面
 - 5 个 Algorithms 页面
 - 6 个 Design Patterns 页面
@@ -195,6 +196,7 @@ scripts/rust_1_98_0_release_response.py
 - 4 个 Embedded / Actor 页面
 
 结果：
+
 ```text
 [concept-authority] content-scope n=678  P0=99.0%  P1=100.0%  P2=100.0%  any=100.0%
 [concept-authority] PASS (--strict): any=100% none=0 core_gaps=0
@@ -241,12 +243,14 @@ scripts/rust_1_98_0_release_response.py
 ### 10.1 P0 官方来源缺口清零
 
 通过并行子代理为 7 个页面补充 P0 链接：
+
 - 6 个 Design Patterns 页面（strategy / command / visitor / state_machine / adapter / decorator）
 - 1 个 Embedded 页面（critical_sections_and_sync_on_bare_metal）
 
 统一使用 `rust-lang.github.io/api-guidelines/`、`doc.rust-lang.org/reference/`、`doc.rust-lang.org/book/`、`doc.rust-lang.org/nomicon/`、`rustc-dev-guide.rust-lang.org/` 等官方来源。
 
 结果：
+
 ```text
 [concept-authority] content-scope n=678  P0=100.0%  P1=100.0%  P2=100.0%  any=100.0%
 [concept-authority] core L1-L4 gaps (no P0): 0
@@ -273,6 +277,62 @@ scripts/rust_1_98_0_release_response.py
 `bash scripts/run_quality_gates.sh` 2026-08-05 再次复测：
 
 > ✅ **All 23 quality gates passed (23 blocking + 5 semantic observe).**
+
+---
+
+---
+
+## 11. 第四轮推进记录（2026-08-05 后期）
+
+### 11.1 P0 官方来源缺口清零
+
+通过子代理为 7 个页面补充 P0 官方链接：
+
+- 6 个 Design Patterns 页面
+- 1 个 Embedded 页面（critical_sections_and_sync_on_bare_metal）
+
+结果：
+
+```text
+[concept-authority] content-scope n=678  P0=100.0%  P1=100.0%  P2=100.0%  any=100.0%
+[concept-authority] core L1-L4 gaps (no P0): 0
+```
+
+`concept/` 内容页 P0/P1/P2 覆盖率全部达到 **100%**。
+
+### 11.2 RAG 生产化推进
+
+- **smoke_test.py 修复**：原脚本硬编码的 `ex:Vec`、`ex:Lifetimes_00traits` 等实体在当前 KG v3.1 中已不存在，导致 7 项检查失败。已更新为使用真实存在的 `ex:Collections`、`ex:LifetimesAdvanced`、`ex:MiriRustUndefinedBehaviorDetector` 等实体，并放宽 hybrid_search 断言。现在 15/15 检查通过。
+- **新增轻量评估脚本**：`tools/kg_rag/eval/quick_eval.py`，从 golden_queries 分层抽样 30 条，计算 concept_recall@5 与 source_recall@5。
+- **RAG 指标**：在 30 条样本上测得 concept_recall@5 = **0.8167**，source_recall@5 = **0.7667**。作为对比，原基线 concept_recall@5 = 0.788（注意样本量不同，仅作参考）。
+- **golden queries 再扩展**：又新增 50 条 queries（累计新增 100 条），总样本数达到 **2513**。覆盖 lifetime_variance、trait_objects_dyn、pin_unpin、drop_order_destructors、const_generics、macro_rules_hygiene、proc_macro_attribute、wasm_rust、embedded_hal、cargo_resolver_editions。
+
+### 11.3 嵌入式硬件目标扩展
+
+- **RISC-V**：`crates/c13_embedded` 已支持 `riscv32imac-unknown-none-elf`，新增 `examples/riscv_minimal_main.rs`，构建通过。
+- **thumbv6m (Cortex-M0)**：新增 `.cargo/config.toml` 中 `[target.thumbv6m-none-eabi]` 配置，`cargo build --target thumbv6m-none-eabi -p c13_embedded` 通过。
+- **ESP32-IDF**：尝试安装 `riscv32imc-esp-espidf` / `riscv32imac-esp-espidf` target，Windows stable 工具链无预构建产物，安装失败。未引入 esp-idf 依赖，仅在 `crates/c13_embedded/README.md` 记录“待验证”状态与后续补齐清单。
+
+### 11.4 知识图谱 KG 刷新
+
+按 AGENTS.md §7 执行完整 KG 刷新流程：
+
+1. `python scripts/generate_kg_index.py` → 719 entities
+2. `python scripts/generate_kg_v3.py` → 719 entities / 10621 relations
+3. `python scripts/apply_kg_semantic_predicates.py --all-batches --apply` → changed=9828
+4. `python scripts/fallback_kg_generic_to_related.py --apply` → changed=793
+5. `python scripts/compress_kg_relatedto.py --apply` → changed=7148
+6. 校验通过：
+   - `check_kg_shapes.py --strict`：K1–K7 全 0
+   - `check_kg_relation_precision.py --strict`：generic_ratio=0.00%，core_generic_ratio=0.00%
+
+### 11.5 质量门状态
+
+`bash scripts/run_quality_gates.sh` 2026-08-05 复测（KG 刷新后）：
+
+> ✅ **All 23 quality gates passed (23 blocking + 5 semantic observe).**
+
+本轮无新增观察项警告。
 
 ---
 

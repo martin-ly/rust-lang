@@ -3,6 +3,15 @@
 version = 4
 
 [[package]]
+name = "aarch64-cpu"
+version = "10.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6a21cd0131c25c438e19cd6a774adf7e3f64f7f4d723022882facc2dee0f8bc9"
+dependencies = [
+ "tock-registers",
+]
+
+[[package]]
 name = "ab_glyph"
 version = "0.2.32"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2559,6 +2568,7 @@ dependencies = [
 name = "c13_embedded"
 version = "3.1.0"
 dependencies = [
+ "aarch64-cpu",
  "bindgen",
  "cortex-m",
  "cortex-m-rt",
@@ -2570,6 +2580,7 @@ dependencies = [
  "panic-halt",
  "riscv 0.16.1",
  "riscv-rt",
+ "tock-registers",
  "volatile-register",
 ]
 
@@ -17749,6 +17760,12 @@ name = "tinyvec_macros"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1f3ccbac311fea05f86f61904b462b55fb3df8837a366dfc601a0161d0532f20"
+
+[[package]]
+name = "tock-registers"
+version = "0.9.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2b9e2fdb3a1e862c0661768b7ed25390811df1947a8acbfbefe09b47078d93c4"
 
 [[package]]
 name = "tokenizers"

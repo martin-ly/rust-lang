@@ -5,9 +5,9 @@
   "kg_file": "concept/00_meta/kg_data_v3.json",
   "shapes_file": "concept/00_meta/kg_shapes.ttl",
   "inference": "rdfs",
-  "triples": 122608,
-  "entities": 709,
-  "relations": 10547,
+  "triples": 137567,
+  "entities": 719,
+  "relations": 10621,
   "conforms": true,
   "violations_total": 0,
   "violations_by_type": {}

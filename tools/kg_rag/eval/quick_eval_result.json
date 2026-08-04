@@ -1,0 +1,667 @@
+{
+  "metadata": {
+    "sample_size": 30,
+    "random_seed": 20260804,
+    "top_k": 5,
+    "kg_version": "3.1",
+    "kg_entity_count": 709,
+    "unmatched_expected_concepts": 0,
+    "unmatched_expected_sources": 6
+  },
+  "metrics": {
+    "concept_recall@5": 0.8167,
+    "source_recall@5": 0.7667
+  },
+  "layer_breakdown": {
+    "L0": {
+      "count": 4,
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    "L1": {
+      "count": 4,
+      "concept_recall@5": 0.75,
+      "source_recall@5": 0.75
+    },
+    "L2": {
+      "count": 4,
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    "L3": {
+      "count": 4,
+      "concept_recall@5": 0.75,
+      "source_recall@5": 0.5
+    },
+    "L4": {
+      "count": 4,
+      "concept_recall@5": 0.5,
+      "source_recall@5": 0.5
+    },
+    "L5": {
+      "count": 4,
+      "concept_recall@5": 0.625,
+      "source_recall@5": 0.5
+    },
+    "L6": {
+      "count": 3,
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    "L7": {
+      "count": 3,
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    }
+  },
+  "samples": [
+    {
+      "query": "Notation overview",
+      "layer": "L4",
+      "domain": "formal_methods",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:MacrosAdvanced",
+        "ex:OperatorsAndSymbols",
+        "ex:RustAPIGuidelinesCanonicalGuide",
+        "ex:RustLanguageContractsPreconditionsPostconditionsAndOwnershipAssertions",
+        "ex:EmbeddedFormalMemoryModel"
+      ],
+      "concept_hits": [],
+      "source_hits": [],
+      "concept_recall@5": 0.0,
+      "source_recall@5": 0.0
+    },
+    {
+      "query": "how does Unions work",
+      "layer": "L2",
+      "domain": "type_system",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:Unions",
+        "ex:Enumerations",
+        "ex:WorkflowTheoryFormalization",
+        "ex:StateMachineSemanticsAndWorkflowModels",
+        "ex:ConcurrencyModelsAsComputationalModelsCSPActorsTLAAndRust"
+      ],
+      "concept_hits": [
+        "ex:Unions"
+      ],
+      "source_hits": [
+        "ex:Unions"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "explain Cargo Profiles and Lints in rust",
+      "layer": "L6",
+      "domain": "ecosystem_toolchain",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:CargoProfilesAndLints",
+        "ex:CargoCommandsReference",
+        "ex:CargoManifestTargets",
+        "ex:Cargo197FeatureHighlights",
+        "ex:CargoConfiguration"
+      ],
+      "concept_hits": [
+        "ex:CargoProfilesAndLints"
+      ],
+      "source_hits": [
+        "ex:CargoProfilesAndLints"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "what is Safety Tags Preview",
+      "layer": "L7",
+      "domain": "version_evolution",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:SafetyTagsPreview",
+        "ex:SafetyTagsInFormalVerificationRedirectStub",
+        "ex:UnsafeFieldsPreview",
+        "ex:RustInSafetyCriticalSystems",
+        "ex:UnsafePinnedPreview"
+      ],
+      "concept_hits": [
+        "ex:SafetyTagsPreview"
+      ],
+      "source_hits": [
+        "ex:SafetyTagsPreview"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "explain Subtype and Variance in rust",
+      "layer": "L4",
+      "domain": "formal_methods",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:TypeCheckingAndInferenceInRustc",
+        "ex:Traits",
+        "ex:Generics",
+        "ex:GenericsCompilerBehavior",
+        "ex:RangeTypes"
+      ],
+      "concept_hits": [],
+      "source_hits": [],
+      "concept_recall@5": 0.0,
+      "source_recall@5": 0.0
+    },
+    {
+      "query": "What is separation logic and how does it model Rust ownership?",
+      "layer": "L5",
+      "domain": "formal_methods_verification",
+      "origin": "manual",
+      "result_ids": [
+        "ex:SeparationLogicForRustAnIrisAndRustBeltPerspective",
+        "ex:SeparationLogic",
+        "ex:RustBeltAndVerificationToolchain",
+        "ex:OwnershipAsResourceManagement",
+        "ex:ConcurrencyModels"
+      ],
+      "concept_hits": [
+        "ex:SeparationLogic"
+      ],
+      "source_hits": [],
+      "concept_recall@5": 0.5,
+      "source_recall@5": 0.0
+    },
+    {
+      "query": "what is Attribute Relationship Atlas",
+      "layer": "L0",
+      "domain": "meta_framework",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:SemanticModelAtlas",
+        "ex:AttributeRelationshipAtlas",
+        "ex:KGOWLSHACLSemantics",
+        "ex:KnowledgeGraphConstruction",
+        "ex:AttributesByCategory"
+      ],
+      "concept_hits": [
+        "ex:AttributeRelationshipAtlas"
+      ],
+      "source_hits": [
+        "ex:AttributeRelationshipAtlas"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "Aeneas symbolic semantics and verification pipeline",
+      "layer": "L5",
+      "domain": "formal_methods",
+      "origin": "curated",
+      "result_ids": [
+        "ex:AlgorithmSemantics",
+        "ex:ModernVerificationTools",
+        "ex:DescriptionLogicAndOWL",
+        "ex:ComputationalModelsAndComputability",
+        "ex:ObservationalEquivalence"
+      ],
+      "concept_hits": [],
+      "source_hits": [],
+      "concept_recall@5": 0.0,
+      "source_recall@5": 0.0
+    },
+    {
+      "query": "what is Bilingual Concept Template",
+      "layer": "L0",
+      "domain": "meta_framework",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:TemplateDeduplicationGuide",
+        "ex:BilingualConceptTemplateV2",
+        "ex:BilingualConceptTemplate",
+        "ex:SemanticModelAtlas",
+        "ex:ConceptDefinitionAtlas"
+      ],
+      "concept_hits": [
+        "ex:BilingualConceptTemplate"
+      ],
+      "source_hits": [
+        "ex:BilingualConceptTemplate"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "rust Send and Sync — Auto Traits as Compile-Time Concurrency Contracts tutorial",
+      "layer": "L3",
+      "domain": "concurrency",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts",
+        "ex:CompileTimeExecution",
+        "ex:Traits",
+        "ex:ParallelAndConcurrentAlgorithmsInRust",
+        "ex:SemanticsBoundariesOfParallelConcurrentAsyncAndDistributedComputation"
+      ],
+      "concept_hits": [
+        "ex:SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts"
+      ],
+      "source_hits": [
+        "ex:SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "what is C++ vs Rust: Construction, Operators, RTTI, and Friends",
+      "layer": "L5",
+      "domain": "comparative",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:CVsRustConstructionOperatorsRTTIAndFriends",
+        "ex:ConstructionAndInitialization",
+        "ex:CCToRustEngineeringComparisonRoadmap",
+        "ex:CToRustTranslation",
+        "ex:RustVsTypeScript"
+      ],
+      "concept_hits": [
+        "ex:CVsRustConstructionOperatorsRTTIAndFriends"
+      ],
+      "source_hits": [
+        "ex:CVsRustConstructionOperatorsRTTIAndFriends"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "difference between impl Trait and dyn Trait return types",
+      "layer": "L3",
+      "domain": "trait_objects_dyn",
+      "origin": "manual",
+      "result_ids": [
+        "ex:ConstGenericsAndTraitObjects",
+        "ex:NegativeImpls",
+        "ex:AdvancedTraits",
+        "ex:ConstTraitImplPreview",
+        "ex:SendSyncBoundaryJudgmentTraitObjectsClosuresAndAsyncStateMachines"
+      ],
+      "concept_hits": [
+        "ex:ConstGenericsAndTraitObjects"
+      ],
+      "source_hits": [],
+      "concept_recall@5": 0.5,
+      "source_recall@5": 0.0
+    },
+    {
+      "query": "explain Generic Associated Types (GATs) with examples",
+      "layer": "L2",
+      "domain": "type_system",
+      "origin": "augmented",
+      "result_ids": [
+        "ex:GenericAssociatedTypesGATs",
+        "ex:GenericAssociatedTypesGATsAtTheAsyncBoundary",
+        "ex:TypeSystemAdvanced",
+        "ex:DependentTypesAndRefinementTypes",
+        "ex:Generics"
+      ],
+      "concept_hits": [
+        "ex:GenericAssociatedTypesGATs"
+      ],
+      "source_hits": [
+        "ex:GenericAssociatedTypesGATs"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "explain Quiz Registry — Human-readable index of all assessment assets in the knowledge base. in rust",
+      "layer": "L0",
+      "domain": "meta_framework",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:QuizRegistryHumanReadableIndexOfAllAssessmentAssetsInTheKnowledgeBase",
+        "ex:ToolchainQuiz",
+        "ex:RAGEvaluationForTheRustKnowledgeGraph",
+        "ex:QuizRustVsSystems",
+        "ex:ExternalAuthorityTopicIndex"
+      ],
+      "concept_hits": [
+        "ex:QuizRegistryHumanReadableIndexOfAllAssessmentAssetsInTheKnowledgeBase"
+      ],
+      "source_hits": [
+        "ex:QuizRegistryHumanReadableIndexOfAllAssessmentAssetsInTheKnowledgeBase"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "interior mutability with Cell RefCell Mutex RwLock",
+      "layer": "L2",
+      "domain": "cross_domain",
+      "origin": "curated",
+      "result_ids": [
+        "ex:No_stdSynchronizationPrimitives",
+        "ex:InteriorMutability",
+        "ex:UnsafeCollectionsInternals",
+        "ex:Must_not_suspendLintPreview",
+        "ex:SmartPointers"
+      ],
+      "concept_hits": [
+        "ex:InteriorMutability"
+      ],
+      "source_hits": [
+        "ex:InteriorMutability"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "Algebraic Effects and Effect Handlers: From Free Monads to Rust Keyword Effects in production codebases",
+      "layer": "L4",
+      "domain": "formal_methods",
+      "origin": "augmented",
+      "result_ids": [
+        "ex:AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects",
+        "ex:RustVsOCamlOwnershipAndAlgebraicEffectsInSystemsAndFunctionalProgramming",
+        "ex:RustVsHaskell",
+        "ex:CompileTimeExecution",
+        "ex:VariableModel"
+      ],
+      "concept_hits": [
+        "ex:AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects"
+      ],
+      "source_hits": [
+        "ex:AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "how does Use Declarations work",
+      "layer": "L1",
+      "domain": "language_core",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:UseDeclarations",
+        "ex:ConstructionAndInitialization",
+        "ex:DeclarativeMacros",
+        "ex:MacrosBasics",
+        "ex:ConstItemsAndConstFunctions"
+      ],
+      "concept_hits": [
+        "ex:UseDeclarations"
+      ],
+      "source_hits": [
+        "ex:UseDeclarations"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "Architecture Standards Alignment overview",
+      "layer": "L6",
+      "domain": "uncategorized",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:ArchitectureStandardsAlignment",
+        "ex:EnterpriseArchitecture",
+        "ex:ArchitectureStylesFormalConstraints",
+        "ex:EnterpriseAndSoftwareArchitectureAlignmentInRust",
+        "ex:ArchitectureSemantics"
+      ],
+      "concept_hits": [
+        "ex:ArchitectureStandardsAlignment"
+      ],
+      "source_hits": [
+        "ex:ArchitectureStandardsAlignment"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "rust Compile Time Execution tutorial",
+      "layer": "L7",
+      "domain": "version_evolution",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:CompileTimeExecution",
+        "ex:MacroDebuggingAndDiagnostics",
+        "ex:CrossCompilation",
+        "ex:RustNetworkProgrammingQuickStart",
+        "ex:TheRustcQuerySystemAndIncrementalCompilation"
+      ],
+      "concept_hits": [
+        "ex:CompileTimeExecution"
+      ],
+      "source_hits": [
+        "ex:CompileTimeExecution"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "how does Process Performance Engineering in Rust work",
+      "layer": "L3",
+      "domain": "process_ipc",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:ProcessPerformanceEngineeringInRust",
+        "ex:ProcessTestingAndBenchmarkingInRust",
+        "ex:ProcessMonitoringAndDiagnosticsInRust",
+        "ex:ModernProcessManagementLibrariesInRust",
+        "ex:PerformanceOptimization"
+      ],
+      "concept_hits": [
+        "ex:ProcessPerformanceEngineeringInRust"
+      ],
+      "source_hits": [
+        "ex:ProcessPerformanceEngineeringInRust"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "rust Coercion and Casting tutorial",
+      "layer": "L1",
+      "domain": "type_system",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:CToRustTranslation",
+        "ex:TypeConversions",
+        "ex:CompileTimeExecution",
+        "ex:TheTraitSolverInRustc",
+        "ex:RefinementCalculusForRustAlgorithms"
+      ],
+      "concept_hits": [],
+      "source_hits": [],
+      "concept_recall@5": 0.0,
+      "source_recall@5": 0.0
+    },
+    {
+      "query": "Type System (Quiz) overview",
+      "layer": "L1",
+      "domain": "language_core",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:TypeSystemQuiz",
+        "ex:TypeTheory",
+        "ex:TypeSystemAdvanced",
+        "ex:TraitsAndGenericsQuiz",
+        "ex:TypeTheoryAndRustTheTypeSystemAsAComputationalModel"
+      ],
+      "concept_hits": [
+        "ex:TypeSystemQuiz"
+      ],
+      "source_hits": [
+        "ex:TypeSystemQuiz"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "explain Traits in rust",
+      "layer": "L2",
+      "domain": "type_system",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:Traits",
+        "ex:TheTraitSolverInRustc",
+        "ex:TypeErasure",
+        "ex:EditionGuide",
+        "ex:TypeSystemBasics"
+      ],
+      "concept_hits": [
+        "ex:Traits"
+      ],
+      "source_hits": [
+        "ex:Traits"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "how does Testing Basics work",
+      "layer": "L1",
+      "domain": "language_core",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:TestingBasics",
+        "ex:ModulesAndTestingQuiz",
+        "ex:TestingStrategies",
+        "ex:CompilerDiagnosticsAndUITests",
+        "ex:TestingEcosystem"
+      ],
+      "concept_hits": [
+        "ex:TestingBasics"
+      ],
+      "source_hits": [
+        "ex:TestingBasics"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "explain Quiz Rust Vs Systems in rust",
+      "layer": "L5",
+      "domain": "comparative",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:QuizRustVsSystems",
+        "ex:CToRustTranslation",
+        "ex:RustVsRuby",
+        "ex:RustVsJavaScript",
+        "ex:RustVsJava"
+      ],
+      "concept_hits": [
+        "ex:QuizRustVsSystems"
+      ],
+      "source_hits": [
+        "ex:QuizRustVsSystems"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "rust Rust Edition 2021 → 2024 Differences tutorial",
+      "layer": "L7",
+      "domain": "version_evolution",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:Rust2024EditionPreviewAndMigrationNotes",
+        "ex:RustEdition20212024Differences",
+        "ex:EditionGuide",
+        "ex:VersionEvolutionEditionsAndPreviewFeaturesQuiz",
+        "ex:CToRustTranslation"
+      ],
+      "concept_hits": [
+        "ex:RustEdition20212024Differences"
+      ],
+      "source_hits": [
+        "ex:RustEdition20212024Differences"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "Custom Network Protocol Implementation in Rust overview",
+      "layer": "L6",
+      "domain": "ecosystem_web",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:CustomNetworkProtocolImplementationInRust",
+        "ex:NetworkProtocols",
+        "ex:RustNetworkProgrammingQuickStart",
+        "ex:NetworkSecurityInRust",
+        "ex:NetworkProgramming"
+      ],
+      "concept_hits": [
+        "ex:CustomNetworkProtocolImplementationInRust"
+      ],
+      "source_hits": [
+        "ex:CustomNetworkProtocolImplementationInRust"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "Compare thiserror, anyhow, and eyre for error handling.",
+      "layer": "L3",
+      "domain": "error_handling_idioms",
+      "origin": "manual",
+      "result_ids": [
+        "ex:ErrorHandlingQuiz",
+        "ex:ErrorHandlingControlFlow",
+        "ex:ErrorHandlingIntermediate",
+        "ex:ErrorHandlingBasics",
+        "ex:RustErrorHandlingIdioms"
+      ],
+      "concept_hits": [
+        "ex:ErrorHandlingBasics"
+      ],
+      "source_hits": [],
+      "concept_recall@5": 0.5,
+      "source_recall@5": 0.0
+    },
+    {
+      "query": "what is Knowledge Graph Design: W3C SHACL/OWL Alignment and Ontology Engineering Methods",
+      "layer": "L0",
+      "domain": "meta_framework",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:KnowledgeGraphDesignW3CSHACLOWLAlignmentAndOntologyEngineeringMethods",
+        "ex:KGOWLSHACLSemantics",
+        "ex:KnowledgeGraphConstruction",
+        "ex:KnowledgeGraphOntologyV20",
+        "ex:SemanticEngineeringAndOntology"
+      ],
+      "concept_hits": [
+        "ex:KnowledgeGraphDesignW3CSHACLOWLAlignmentAndOntologyEngineeringMethods"
+      ],
+      "source_hits": [
+        "ex:KnowledgeGraphDesignW3CSHACLOWLAlignmentAndOntologyEngineeringMethods"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    },
+    {
+      "query": "Knowledge Graph Construction overview",
+      "layer": "L4",
+      "domain": "formal_methods",
+      "origin": "kg_template",
+      "result_ids": [
+        "ex:KnowledgeGraphConstruction",
+        "ex:KnowledgeGraphDesignW3CSHACLOWLAlignmentAndOntologyEngineeringMethods",
+        "ex:KGOWLSHACLSemantics",
+        "ex:KnowledgeGraphOntologyV20",
+        "ex:SemanticEngineeringAndOntology"
+      ],
+      "concept_hits": [
+        "ex:KnowledgeGraphConstruction"
+      ],
+      "source_hits": [
+        "ex:KnowledgeGraphConstruction"
+      ],
+      "concept_recall@5": 1.0,
+      "source_recall@5": 1.0
+    }
+  ]
+}

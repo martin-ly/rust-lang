@@ -45,18 +45,48 @@ linker = "clang"
 linker = "clang"
 
 # ============ 裸机交叉编译目标配置（Wave H） ============
-# 覆盖 [build] 中针对 host 的 `target-cpu=native`，避免破坏 ARM/RISC-V 交叉编译。
+# 覆盖 [build] 中针对 host 的 `target-cpu=native`，避免破坏 ARM/RISC-V/AArch64/WASM 交叉编译。
 # 2026-08-04 P9-3: 为 c13_embedded 的 no_std 示例补充 `-Tlink.x`，使 cortex-m-rt
 # 链接脚本与 memory.x 在 thumb 目标下自动生效。
+# 2026-08-04: 统一通过 `--cfg bare_metal` 标记，让 src/lib.rs / src/main.rs / examples
+# 在 host 与裸机目标间共享同一份条件编译逻辑。
+
 [target.thumbv7em-none-eabihf]
-rustflags = ["-C", "target-cpu=cortex-m4", "-C", "link-arg=-Tlink.x"]
+runner = "probe-rs run --chip STM32F446RETx"
+rustflags = [
+    "--cfg", "bare_metal",
+    "-C", "target-cpu=cortex-m4",
+    "-C", "link-arg=-Tlink.x",
+]
 
 [target.thumbv7m-none-eabi]
-rustflags = ["-C", "target-cpu=cortex-m3", "-C", "link-arg=-Tlink.x"]
+runner = "probe-rs run --chip STM32F103C8"
+rustflags = [
+    "--cfg", "bare_metal",
+    "-C", "target-cpu=cortex-m3",
+    "-C", "link-arg=-Tlink.x",
+]
+
+[target.thumbv6m-none-eabi]
+runner = "probe-rs run --chip nRF51822"
+rustflags = [
+    "--cfg", "bare_metal",
+    "-C", "target-cpu=cortex-m0",
+    "-C", "link-arg=-Tlink.x",
+]
+
+[target.thumbv8m.main-none-eabihf]
+runner = "probe-rs run --chip STM32H573AIIxQ"
+rustflags = [
+    "--cfg", "bare_metal",
+    "-C", "target-cpu=cortex-m33",
+    "-C", "link-arg=-Tlink.x",
+]
 
 [target.riscv32imac-unknown-none-elf]
 runner = "qemu-system-riscv32 -machine virt -nographic -kernel"
 rustflags = [
+    "--cfg", "bare_metal",
     "-C", "target-cpu=generic-rv32",
     "-C", "target-feature=+m,+a,+c",
     "-C", "link-arg=-Tmemory.x",
@@ -65,11 +95,27 @@ rustflags = [
 
 [target.riscv32imc-unknown-none-elf]
 rustflags = [
+    "--cfg", "bare_metal",
     "-C", "target-cpu=generic-rv32",
     "-C", "target-feature=+m,+c",
     # ESP32-C3 no_std 使用 esp-hal 1.x 自带的 linkall.x（含 memory.x / device.x / stack.x）。
     # 注意：c13_embedded 的 build.rs 在启用 `esp32c3-hal` feature 时会跳过通用 memory.x 生成。
     "-C", "link-arg=-Tlinkall.x",
+]
+
+[target.aarch64-unknown-none-softfloat]
+runner = "qemu-system-aarch64 -M virt -cpu cortex-a53 -nographic -kernel"
+rustflags = [
+    "--cfg", "bare_metal",
+    "-C", "target-cpu=cortex-a53",
+]
+
+[target.wasm32-unknown-unknown]
+runner = "wasmtime run"
+rustflags = [
+    "--cfg", "bare_metal",
+    "-C", "link-arg=--export=_start",
+    "-C", "link-arg=-zstack-size=65536",
 ]
 
 [registries.crates-io]

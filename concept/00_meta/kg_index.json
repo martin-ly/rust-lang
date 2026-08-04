@@ -4,7 +4,7 @@
     "generated": "2026-07-11",
     "rust_version": "1.97.0+",
     "source": "concept/",
-    "entity_count": 709,
+    "entity_count": 719,
     "schema": "simple KG index"
   },
   "entities": [
@@ -10040,6 +10040,144 @@
       "related_crates": []
     },
     {
+      "id": "concept:04_formal/11_computational_models/12_linear_logic_and_ownership.md",
+      "path": "04_formal/11_computational_models/12_linear_logic_and_ownership.md",
+      "title": "",
+      "en": "Linear Logic and Ownership: Resource Calculus as a Computational Model",
+      "summary": "Treats linear/affine logic as a computational model for Rust ownership, mapping Girard's linear connectives to Rust's move, borrow, Copy, Drop, and thread-shared resources, while distinguishing the structural proof theory from the engineering borrow checker.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Linear Logic",
+          "path": "../01_ownership_logic/01_linear_logic.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Session Types and Rust Channels",
+          "path": "13_session_types_and_rust_channels.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:04_formal/11_computational_models/13_session_types_and_rust_channels.md",
+      "path": "04_formal/11_computational_models/13_session_types_and_rust_channels.md",
+      "title": "",
+      "en": "Session Types and Rust Channels: Communication Protocols as a Computational Model",
+      "summary": "Treats binary and multiparty session types as a computational model for Rust channel-based communication, mapping Honda's session type syntax, Wadler's propositions-as-sessions correspondence, and linear channel usage to Rust ownership channels, type-state enums, and deadlock-free protocol design.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Linear Logic and Ownership",
+          "path": "12_linear_logic_and_ownership.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Effect Handlers and Rust Limited Effects",
+          "path": "14_effect_handlers_and_rust_limited_effects.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:04_formal/11_computational_models/14_effect_handlers_and_rust_limited_effects.md",
+      "path": "04_formal/11_computational_models/14_effect_handlers_and_rust_limited_effects.md",
+      "title": "",
+      "en": "Effect Handlers and Rust's Limited Effects: Control-Flow Abstractions as a Computational Model",
+      "summary": "Treats algebraic effects and handlers as a computational model for Rust's controlled effectful computations, mapping effect operations, resumptions, and handler framing to Rust's Result, Option, async/await, panics, unsafe, and scoped control-flow patterns, while explaining why Rust does not provide general effect handlers.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Algebraic Effects",
+          "path": "../07_concurrency_semantics/04_algebraic_effects.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Session Types and Rust Channels",
+          "path": "13_session_types_and_rust_channels.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:04_formal/11_computational_models/15_refinement_types_and_flux.md",
+      "path": "04_formal/11_computational_models/15_refinement_types_and_flux.md",
+      "title": "",
+      "en": "Refinement Types and Flux: Constraint Calculus as a Computational Model",
+      "summary": "Treats refinement types as a computational model for Rust's value-level constraints, mapping dependent refinements, liquid types, strong/weak updates, and ownership-aware verification to Flux's SMT-backed type system and its integration with Rust's ownership discipline.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)；Flux 需 nightly toolchain",
+      "prerequisites": [
+        {
+          "title": "Dependent Types and Refinement Types",
+          "path": "../00_type_theory/10_dependent_refinement_types.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "RustBelt Ownership Logic",
+          "path": "16_rustbelt_ownership_logic.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:04_formal/11_computational_models/16_rustbelt_ownership_logic.md",
+      "path": "04_formal/11_computational_models/16_rustbelt_ownership_logic.md",
+      "title": "",
+      "en": "RustBelt Ownership Logic: Memory Safety Proof as a Computational Model",
+      "summary": "Treats RustBelt's Iris-based ownership logic as a computational model for Rust's safe and unsafe abstractions, mapping lifetime fractional permissions, ownership predicates, invariant protocols, and the λRust operational semantics to Rust's borrow checker, unsafe boundaries, and verified standard-library primitives.",
+      "bloom": "L4-L7",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "RustBelt",
+          "path": "../02_separation_logic/01_rustbelt.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Aeneas Verification Pipeline",
+          "path": "17_aeneas_verification_pipeline.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:04_formal/11_computational_models/17_aeneas_verification_pipeline.md",
+      "path": "04_formal/11_computational_models/17_aeneas_verification_pipeline.md",
+      "title": "",
+      "en": "Aeneas Verification Pipeline: Symbolic Borrow Calculus as a Computational Model",
+      "summary": "Treats Aeneas's symbolic semantics as a computational model for Rust verification, mapping LLBC's explicit borrow/loan calculus, symbolic execution, region abstractions, and functional translation to Rust's borrow checker and proof-assistant backends.",
+      "bloom": "L4-L7",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Aeneas Symbolic Semantics",
+          "path": "../03_operational_semantics/07_aeneas_symbolic_semantics.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Formal Verification Tools",
+          "path": "../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:04_formal/11_computational_models/README.md",
       "path": "04_formal/11_computational_models/README.md",
       "title": "",
@@ -13053,24 +13191,6 @@
       "related_crates": []
     },
     {
-      "id": "concept:06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md",
-      "path": "06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md",
-      "title": "",
-      "en": "Cqrs Event Sourcing",
-      "summary": "Design patterns for separating read and write models (CQRS) and reconstructing state from immutable events (Event Sourcing) in Rust distributed systems.",
-      "bloom": "L4-L6",
-      "rust_version": "1.97.0+ (Edition 2024)",
-      "prerequisites": [],
-      "postrequisites": [
-        {
-          "title": "Future Roadmap",
-          "path": "../../07_future/01_edition_roadmap/04_roadmap.md"
-        }
-      ],
-      "theorems": [],
-      "related_crates": []
-    },
-    {
       "id": "concept:06_ecosystem/03_design_patterns/08_architecture_patterns.md",
       "path": "06_ecosystem/03_design_patterns/08_architecture_patterns.md",
       "title": "",
@@ -15573,6 +15693,213 @@
         {
           "title": "嵌入式硬件端到端验证",
           "path": "45_embedded_hardware_validation.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/52_no_std_allocators_and_panic_handlers.md",
+      "path": "06_ecosystem/05_systems_and_embedded/52_no_std_allocators_and_panic_handlers.md",
+      "title": "",
+      "en": "no_std Allocators and Panic Handlers",
+      "summary": "A canonical integration guide for `#![no_std]` runtimes: implementing `#[global_allocator]`, selecting embedded allocators, writing custom `#[panic_handler]`, handling OOM, and validating the resulting firmware on ARM Cortex-M and RISC-V hardware.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "no_std 与裸机 Rust",
+          "path": "38_no_std_bare_metal_rust.md"
+        },
+        {
+          "title": "嵌入式内存分配器",
+          "path": "16_embedded_memory_allocators.md"
+        },
+        {
+          "title": "panic_handler 与 no_std 运行时",
+          "path": "18_panic_runtime_no_std.md"
+        },
+        {
+          "title": "no_std alloc crate 生态",
+          "path": "48_no_std_alloc_crate_ecosystem.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "临界区与裸机同步",
+          "path": "53_critical_sections_and_sync_on_bare_metal.md"
+        },
+        {
+          "title": "链接脚本与内存布局",
+          "path": "54_linker_scripts_and_memory_layout.md"
+        },
+        {
+          "title": "嵌入式内存布局与堆安全",
+          "path": "29_embedded_memory_layout_and_heap_safety.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/53_critical_sections_and_sync_on_bare_metal.md",
+      "path": "06_ecosystem/05_systems_and_embedded/53_critical_sections_and_sync_on_bare_metal.md",
+      "title": "",
+      "en": "Critical Sections and Synchronization on Bare Metal",
+      "summary": "A canonical guide to safe shared-state synchronization in single-core and multi-core bare-metal Rust: disabling interrupts, the `critical-section` crate, `Mutex<RefCell<T>>`, atomic rings, priority ceilings, and hardware-validated examples for ARM Cortex-M and RISC-V.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "no_std 同步原语",
+          "path": "15_no_std_synchronization_primitives.md"
+        },
+        {
+          "title": "Cortex-M 与 RISC-V 中断异常模型",
+          "path": "14_interrupt_and_exception_model.md"
+        },
+        {
+          "title": "原子操作",
+          "path": "../../03_advanced/00_concurrency/06_atomics_and_memory_ordering.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "RTIC vs Embassy 实时框架对比",
+          "path": "55_rtic_vs_embassy_real_time_frameworks.md"
+        },
+        {
+          "title": "裸机中断与并发模型",
+          "path": "42_interrupts_and_concurrency_on_bare_metal.md"
+        },
+        {
+          "title": "嵌入式内存布局与堆安全",
+          "path": "29_embedded_memory_layout_and_heap_safety.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/54_linker_scripts_and_memory_layout.md",
+      "path": "06_ecosystem/05_systems_and_embedded/54_linker_scripts_and_memory_layout.md",
+      "title": "",
+      "en": "Linker Scripts and Memory Layout for Embedded Rust",
+      "summary": "A canonical reference for embedded linker scripts: MEMORY and SECTIONS commands, load vs. runtime addresses, `#[link_section]`, stack/heap placement, ARM CCM/DTCM/ITCM, RISC-V RAM-only boot, and build-validated examples for ARM Cortex-M and RISC-V targets.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "裸机启动与链接脚本",
+          "path": "13_bare_metal_boot_linker_script.md"
+        },
+        {
+          "title": "交叉编译",
+          "path": "02_cross_compilation.md"
+        },
+        {
+          "title": "嵌入式内存布局与堆安全",
+          "path": "29_embedded_memory_layout_and_heap_safety.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "no_std 分配器与 panic handler",
+          "path": "52_no_std_allocators_and_panic_handlers.md"
+        },
+        {
+          "title": "裸机 Rust",
+          "path": "47_bare_metal_rust.md"
+        },
+        {
+          "title": "RISC-V 与 AVR 嵌入式 Rust 开发",
+          "path": "21_riscv_avr_embedded.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/55_rtic_vs_embassy_real_time_frameworks.md",
+      "path": "06_ecosystem/05_systems_and_embedded/55_rtic_vs_embassy_real_time_frameworks.md",
+      "title": "",
+      "en": "RTIC vs Embassy: Real-Time Frameworks in Rust",
+      "summary": "A comparative canonical reference for RTIC and Embassy in embedded Rust: scheduling models, resource sharing, timing guarantees, hardware abstraction, memory footprint, and selection criteria for bare-metal real-time systems.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Embassy 异步框架深度解析",
+          "path": "34_embassy_framework_deep_dive.md"
+        },
+        {
+          "title": "RTIC 实时任务调度框架深度解析",
+          "path": "35_rtic_framework_deep_dive.md"
+        },
+        {
+          "title": "裸机与嵌入式中的 Async",
+          "path": "11_async_no_std_embedded.md"
+        },
+        {
+          "title": "临界区与裸机同步",
+          "path": "53_critical_sections_and_sync_on_bare_metal.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "RTOS 与 Rust 调度模型对比",
+          "path": "46_rtos_and_scheduling_in_rust.md"
+        },
+        {
+          "title": "嵌入式 RTOS 与安全关键框架对比",
+          "path": "26_embedded_rtos_and_safety_critical_frameworks.md"
+        },
+        {
+          "title": "嵌入式网络与 IoT 协议",
+          "path": "31_embedded_networking_and_iot_protocols.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/56_rust_for_linux_kernel_module_basics.md",
+      "path": "06_ecosystem/05_systems_and_embedded/56_rust_for_linux_kernel_module_basics.md",
+      "title": "",
+      "en": "Rust for Linux Kernel Module Basics",
+      "summary": "A hands-on canonical introduction to writing Linux kernel modules in Rust: module declaration, no_std/no_main runtime, panic handler, alloc configuration, C FFI bindings, kernel abstractions, and build/insmod/rmmod workflows aligned with the upstream Rust for Linux project.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust for Linux：操作系统内核中的内存安全",
+          "path": "../../07_future/04_research_and_experimental/04_rust_for_linux.md"
+        },
+        {
+          "title": "Unsafe Rust",
+          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
+        },
+        {
+          "title": "FFI",
+          "path": "../../03_advanced/04_ffi/01_rust_ffi.md"
+        },
+        {
+          "title": "no_std 与裸机 Rust",
+          "path": "38_no_std_bare_metal_rust.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "操作系统内核开发",
+          "path": "05_os_kernel.md"
+        },
+        {
+          "title": "C-to-Rust 翻译生态",
+          "path": "08_c_to_rust_translation.md"
+        },
+        {
+          "title": "安全关键系统",
+          "path": "43_rust_safety_critical_systems.md"
         }
       ],
       "theorems": [],

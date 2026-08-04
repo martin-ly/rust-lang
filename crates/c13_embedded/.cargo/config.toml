@@ -1,21 +1,41 @@
 # c13_embedded 目标专用配置
-# 仅在交叉编译到 ARM Cortex-M / RISC-V 目标时生效；host 构建不受影响。
+# 仅在交叉编译到 ARM Cortex-M / RISC-V / AArch64 / WebAssembly 目标时生效；host 构建不受影响。
+
+# 通用 no_std 标记，供 src/lib.rs / src/main.rs / examples 统一使用。
+# 在 host 目标上未定义该 cfg，因此 std 模块保持编译。
 
 [target.thumbv7em-none-eabihf]
 runner = "probe-rs run --chip STM32F446RETx"
 rustflags = [
+    "--cfg", "bare_metal",
     "-C", "link-arg=-Tlink.x",
 ]
 
 [target.thumbv7m-none-eabi]
 runner = "probe-rs run --chip STM32F103C8"
 rustflags = [
+    "--cfg", "bare_metal",
+    "-C", "link-arg=-Tlink.x",
+]
+
+[target.thumbv6m-none-eabi]
+runner = "probe-rs run --chip nRF51822"
+rustflags = [
+    "--cfg", "bare_metal",
+    "-C", "link-arg=-Tlink.x",
+]
+
+[target.thumbv8m.main-none-eabihf]
+runner = "probe-rs run --chip STM32H573AIIxQ"
+rustflags = [
+    "--cfg", "bare_metal",
     "-C", "link-arg=-Tlink.x",
 ]
 
 [target.riscv32imac-unknown-none-elf]
 runner = "qemu-system-riscv32 -machine virt -nographic -kernel"
 rustflags = [
+    "--cfg", "bare_metal",
     "-C", "link-arg=-Tmemory.x",
     "-C", "link-arg=-Tlink.x",
 ]
@@ -23,6 +43,21 @@ rustflags = [
 [target.riscv32imc-unknown-none-elf]
 runner = "qemu-system-riscv32 -machine virt -nographic -kernel"
 rustflags = [
+    "--cfg", "bare_metal",
     # ESP32-C3 no_std 使用 esp-hal 1.x 自带的 linkall.x。
     "-C", "link-arg=-Tlinkall.x",
+]
+
+[target.aarch64-unknown-none-softfloat]
+runner = "qemu-system-aarch64 -M virt -cpu cortex-a53 -nographic -kernel"
+rustflags = [
+    "--cfg", "bare_metal",
+]
+
+[target.wasm32-unknown-unknown]
+runner = "wasmtime run"
+rustflags = [
+    "--cfg", "bare_metal",
+    "-C", "link-arg=--export=_start",
+    "-C", "link-arg=-zstack-size=65536",
 ]

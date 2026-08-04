@@ -19,8 +19,8 @@
 //! ```
 
 // [来源: The Embedded Rust Book / Rust Reference]
-// 在 ARM Cortex-M 与 RISC-V 裸机目标上均禁用 std，确保 no_std 示例能链接。
-#![cfg_attr(any(target_arch = "arm", target_arch = "riscv32"), no_std)]
+// 在 ARM Cortex-M / RISC-V / AArch64 / WebAssembly 裸机目标上均禁用 std，确保 no_std 示例能链接。
+#![cfg_attr(bare_metal, no_std)]
 #![cfg_attr(nightly, feature(core_intrinsics, fn_align))]
 #![cfg_attr(nightly, allow(internal_features))]
 #![allow(clippy::module_name_repetitions)]
@@ -34,33 +34,33 @@ pub mod no_std_practices;
 pub mod raw_pointers_advanced;
 pub mod rust_186_features;
 // 以下 Rust 版本特性演示模块使用 std/alloc 类型，在 ARM/RISC-V 裸机目标上排除。
-#[cfg(not(any(target_arch = "arm", target_arch = "riscv32")))]
+#[cfg(not(bare_metal))]
 pub mod rust_187_features;
 pub mod rust_188_features;
 pub mod rust_189_features;
-#[cfg(not(any(target_arch = "arm", target_arch = "riscv32")))]
+#[cfg(not(bare_metal))]
 pub mod rust_192_features;
-#[cfg(not(any(target_arch = "arm", target_arch = "riscv32")))]
+#[cfg(not(bare_metal))]
 pub mod rust_193_features;
-#[cfg(not(any(target_arch = "arm", target_arch = "riscv32")))]
+#[cfg(not(bare_metal))]
 pub mod rust_195_features; // Rust 1.95 特性 (裸指针 unchecked, PowerPC asm, cfg_select 嵌入式)
-#[cfg(not(any(target_arch = "arm", target_arch = "riscv32")))]
+#[cfg(not(bare_metal))]
 pub mod rust_196_features; // Rust 1.96.0+ 特性 (assert_matches!, core::range, From<T> for LazyCell/LazyLock, ManuallyDrop 模式)
-#[cfg(not(any(target_arch = "arm", target_arch = "riscv32")))]
+#[cfg(not(bare_metal))]
 pub mod rust_197_features;
-#[cfg(all(nightly, not(any(target_arch = "arm", target_arch = "riscv32"))))]
+#[cfg(all(nightly, not(bare_metal)))]
 pub mod rust_198_features;
 
 // 以下模块依赖 std 或 host-only crate，在 ARM/RISC-V 裸机目标上排除，以保证 no_std 示例能链接。
-#[cfg(not(any(target_arch = "arm", target_arch = "riscv32")))]
+#[cfg(not(bare_metal))]
 pub mod cxx_interop;
-#[cfg(not(any(target_arch = "arm", target_arch = "riscv32")))]
+#[cfg(not(bare_metal))]
 pub mod embassy_framework; // Embassy 异步嵌入式框架
-#[cfg(not(any(target_arch = "arm", target_arch = "riscv32")))]
+#[cfg(not(bare_metal))]
 pub mod ffi_c_interop;
-#[cfg(not(any(target_arch = "arm", target_arch = "riscv32")))]
+#[cfg(not(bare_metal))]
 pub mod rtic_framework;
-#[cfg(not(any(target_arch = "arm", target_arch = "riscv32")))]
+#[cfg(not(bare_metal))]
 pub mod uart_driver; // RTIC 实时中断驱动并发
 
 // 库版本信息
@@ -71,8 +71,8 @@ pub fn get_library_info() -> LibraryInfo {
     LibraryInfo {
         name: "c13_embedded",
         version: VERSION,
-        target: if cfg!(target_arch = "arm") {
-            "embedded (ARM)"
+        target: if cfg!(bare_metal) {
+            "embedded (bare-metal)"
         } else {
             "host (simulation)"
         },
