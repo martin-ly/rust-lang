@@ -330,6 +330,21 @@ D5_WHITELIST_FILES = {
     # nightly-only 算法优化选型；nightly/preview/unstable 提及为 SIMD/性能工程中的工具链事实边界。
     "concept/06_ecosystem/16_algorithm_patterns/17_rust_algorithm_patterns_semantic_atlas.md":
         "算法模式语义图谱页：nightly/preview/unstable 提及为 `std::simd`/target_feature 等 SIMD/性能工程工具链事实边界",
+    # ---- 2026-08-04 P6 no_std/裸机/安全关键扩展：以下三页讨论 Embassy/no_std/安全关键系统，
+    # 其中 nightly/preview/unstable 提及为 `-Z build-std`、nightly-only 目标、 Embassy 实验特性或
+    # 形式化/认证工具链事实，属裸机嵌入式与安全关键开发的客观边界陈述。
+    "concept/06_ecosystem/05_systems_and_embedded/34_embassy_framework_deep_dive.md":
+        "Embassy 深度页：nightly/preview 为 `-Z build-std`、nightly-only 目标或 Embassy 实验特性的客观边界陈述",
+    "concept/06_ecosystem/05_systems_and_embedded/38_no_std_bare_metal_rust.md":
+        "no_std 裸机页：nightly/preview/unstable 为 `-Z build-std`、自定义 target、nightly-only 目标的工具链事实陈述",
+    "concept/06_ecosystem/05_systems_and_embedded/43_rust_safety_critical_systems.md":
+        "安全关键 Rust 页：nightly/preview 为 Ferrocene/Kani/Prusti 等形式化与认证工具链状态的客观边界陈述",
+    # ---- 2026-08-04 P7 WS-E embedded 语义完备化：新增端到端硬件验证页。
+    # 页面讨论 probe-rs + defmt + Embassy 在真实硬件/QEMU 上的验证工作流；nightly/preview/unstable
+    # 提及为 `-Z build-std`、nightly-only 目标或 Embassy 实验特性的客观边界陈述，属裸机嵌入式
+    # 开发工具链事实。
+    "concept/06_ecosystem/05_systems_and_embedded/45_embedded_hardware_validation.md":
+        "嵌入式硬件端到端验证页：nightly/preview/unstable 为 `-Z build-std`、nightly-only 目标或 Embassy 实验特性的客观边界陈述",
 }
 
 

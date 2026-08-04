@@ -97,6 +97,12 @@ mindmap
   - [认知路径](#认知路径)
     - [核心推理链](#核心推理链)
   - [Rust 1.98.0 兼容性注意](#rust-1980-兼容性注意)
+    - [显式字节序 UTF-16 解码：`from_utf16le` / `from_utf16be`](#显式字节序-utf-16-解码from_utf16le--from_utf16be)
+      - [代码示例](#代码示例)
+      - [迁移注意](#迁移注意)
+    - [一次性剥离成对前后缀：`str::strip_circumfix`](#一次性剥离成对前后缀strstrip_circumfix)
+    - [可打印字符表替换为 `unicode_data.rs`](#可打印字符表替换为-unicode_datars)
+      - [迁移注意](#迁移注意-1)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
 
@@ -891,7 +897,61 @@ fn main() {
 
 ## Rust 1.98.0 兼容性注意
 
-> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 稳定了 `String::from_utf16le` / `from_utf16be` 及其 `_lossy` 变体、`str::strip_circumfix`，并用 `unicode_data.rs` 表替换了可打印字符表。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md)。
+### 显式字节序 UTF-16 解码：`from_utf16le` / `from_utf16be`
+
+`String::from_utf16` 假设输入为小端 UTF-16。处理 Windows API、网络协议或文件格式时经常需要显式指定 endianness。Rust 1.98.0 稳定显式 endian 版本：`from_utf16le`、`from_utf16be` 以及对应的 `_lossy` 变体（[PR #116258](https://github.com/rust-lang/rust/pull/116258) · [#157822](https://github.com/rust-lang/rust/issues/157822)）。
+
+#### 代码示例
+
+```rust,ignore
+fn main() {
+    // 大端 UTF-16 编码的 "Rust"
+    let be: &[u16] = &[0x0052, 0x0075, 0x0073, 0x0074];
+    let s = String::from_utf16be(be).expect("valid UTF-16BE");
+    assert_eq!(s, "Rust");
+
+    // 小端 UTF-16 编码的 "Rust"
+    let le: &[u16] = &[0x5200, 0x7500, 0x7300, 0x7400];
+    let s = String::from_utf16le(le).expect("valid UTF-16LE");
+    assert_eq!(s, "Rust");
+
+    // lossy 变体在非法序列处替换为 U+FFFD
+    let broken = &[0xDC00, 0xD800]; // 孤立代理对
+    let s = String::from_utf16le_lossy(broken);
+    assert_eq!(s, "��");
+}
+```
+
+#### 迁移注意
+
+- 替换手动的 UTF-16 字节交换 + `from_utf16` 调用。
+- `_lossy` 变体在非法序列处替换为 `U+FFFD`，与 `from_utf16_lossy` 行为一致。
+- 这些方法按显式字节序解码，不识别 BOM；如需处理 BOM，应先手动剥离。
+
+### 一次性剥离成对前后缀：`str::strip_circumfix`
+
+字符串处理中经常需要同时移除前缀和后缀（如括号、引号、标记符号）。`str::strip_circumfix` 提供一次性检查并移除成对前缀后缀的能力（[#147946](https://github.com/rust-lang/rust/issues/147946) · [#157850](https://github.com/rust-lang/rust/issues/157850)）。
+
+```rust,ignore
+fn main() {
+    let quoted = "\"hello\"";
+    let inner = quoted.strip_circumfix("\"", "\"");
+    assert_eq!(inner, Some("hello"));
+
+    let not_paired = "\"hello";
+    assert_eq!(not_paired.strip_circumfix("\"", "\""), None);
+}
+```
+
+> **注意**：前缀和后缀是独立匹配，不是对称括号语义；如需嵌套括号解析仍需专用解析器。
+
+### 可打印字符表替换为 `unicode_data.rs`
+
+Rust 1.98.0 用基于官方 Unicode 数据的 `unicode_data.rs` 表替换了 `core` 中手工维护的 ASCII 可打印字符表（[PR #155527](https://github.com/rust-lang/rust/pull/155527) · [#156782](https://github.com/rust-lang/rust/issues/156782)）。这使 `char::is_ascii_graphic` 等分类与 Unicode 版本一致；对 ASCII 范围通常无感知，边缘控制字符分类可能更精确。
+
+#### 迁移注意
+
+- 完整 API 列表与权威来源见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md) §3.6 / §3.7 / §3.11。
 
 ---
 

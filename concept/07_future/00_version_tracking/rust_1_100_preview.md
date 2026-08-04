@@ -232,7 +232,24 @@ Cargo 将支持在依赖中标记 `public = true/false`，以区分「依赖类�
 | "本页列表就是 1.100 稳定清单" | 本页明确为**周期跟踪**；稳定清单需等 beta 分支切分后建立 | 稳定特性以官方 release notes 与 `rust_1_100_stabilized.md` 为准 |
 | "experimental / prototype 特性可以安全试用" | `BorrowSanitizer` 为 prototype，API 与行为可能大幅变动 | experimental 与 prototype 阶段不适合生产依赖 |
 
-## 七、来源与延伸阅读
+## 八、语义注入映射速查
+
+| 1.100 周期特性 | `concept/` 权威页 | 语义注入方向 |
+|---|---|---|
+| `gen` blocks / `async gen` | `02_preview_features/25_gen_blocks_preview.md` | 同步/异步生成器统一 |
+| `async_drop` | `02_preview_features/22_async_drop_preview.md` | 异步 Drop 语义 |
+| RTN / TAIT / ATPIT | `02_preview_features/09_return_type_notation_preview.md` · `17_type_alias_impl_trait_preview.md` | 返回类型表示法 |
+| Specialization | `02_preview_features/31_specialization_preview.md` | 泛型 impl 特化 |
+| Effects system / keyword generics | `02_preview_features/01_effects_system.md` | 效果参数多态 |
+| Safety tags | `02_preview_features/03_safety_tags_preview.md` | 安全标注机器可读 |
+| `derive(CoercePointee)` | `02_preview_features/05_derive_coerce_pointee_preview.md` | 智能指针强制转换 |
+| `f16` / `f128` | `02_preview_features/35_f16_f128_preview.md` | 扩展浮点类型 |
+| Portable SIMD / SVE / SME | `02_preview_features/29_aarch64_sve_sme_preview.md` | 跨平台向量抽象 |
+| Field projections | `02_preview_features/23_field_projections_preview.md` | 字段投影安全访问 |
+| BorrowSanitizer | `02_preview_features/24_borrow_sanitizer.md` | Tree Borrows 运行时检查 |
+| Public/private dependencies | `02_preview_features/27_cargo_semver_checks_preview.md` | Cargo SemVer 边界 |
+
+## 九、来源与延伸阅读
 
 - [Rust Forge — Release Versions](https://forge.rust-lang.org/)
 - [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)

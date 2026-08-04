@@ -153,6 +153,11 @@ mindmap
     - [最佳实践](#最佳实践)
     - [调试技巧](#调试技巧)
   - [Rust 1.98.0 兼容性注意](#rust-1980-兼容性注意)
+    - [`&mut` 在 unsized coercion 中的生命周期缩短扩展到不变位置](#mut-在-unsized-coercion-中的生命周期缩短扩展到不变位置)
+      - [动机与语义](#动机与语义)
+      - [代码示例](#代码示例)
+      - [迁移注意](#迁移注意)
+    - [trait object 完全省略生命周期时的默认推断收紧](#trait-object-完全省略生命周期时的默认推断收紧)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
 
 ## 一、权威定义（Definition）
@@ -1585,7 +1590,42 @@ Rust 1.31 引入的 **Non-Lexical Lifetimes (NLL)** 使借用的有效期基于*
 
 ## Rust 1.98.0 兼容性注意
 
-> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 放宽了 unsized coercion 中 `&mut` 的生命周期缩短规则（即使在不变位置），并收紧了 trait object 完全省略生命周期时的默认推断。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md) 与 [1.98 beta 深度解析：&mut 生命周期缩短](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-mut-lifetime-shorten)。
+### `&mut` 在 unsized coercion 中的生命周期缩短扩展到不变位置
+
+Rust 1.98.0 统一了 `&mut` 与 `&` 的生命周期缩短规则：在 unsized coercion 中，`&mut T` 到 `&mut dyn Trait`（或通过 `CoerceUnsized` 的间接转换）现在允许在**不变位置**缩短生命周期（[PR #149219](https://github.com/rust-lang/rust/pull/149219) · [#156457](https://github.com/rust-lang/rust/issues/156457)）。
+
+#### 动机与语义
+
+此前 `&mut T` 在逆变/协变位置可以通过 unsizing coercion 缩短生命周期，但在不变位置（如 `Cell<&mut T>`）被禁止。这导致像 `Cell<&'long mut i32>` 到 `Cell<&'short mut dyn Marker>` 这样符合直觉的转换无法通过借用检查。1.98 放宽该限制，因为缩短生命周期不引入新的别名关系，不会破坏内存安全。
+
+#### 代码示例
+
+```rust,ignore
+use std::cell::Cell;
+
+trait Marker {}
+impl Marker for i32 {}
+
+fn demo<'short>(cell: Cell<&'short mut dyn Marker>) {
+    // 期望：cell 内部保存的 &mut dyn Marker 生命周期不超过 'short
+}
+
+fn caller<'long>(c: Cell<&'long mut i32>) {
+    // 1.98 前：不变位置不允许缩短生命周期，编译失败
+    // 1.98 后：允许将 &'long mut i32 强制转换为 &'short mut dyn Marker
+    demo(c);
+}
+```
+
+#### 迁移注意
+
+- 绝大多数代码无需改动；这是放宽限制而非收紧。
+- 若之前通过 `transmute` 或显式重借用绕过此限制，可替换为更安全的 coercion。
+- 完整分析见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md) §1.3 与 [1.98 beta 深度解析](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-mut-lifetime-shorten)。
+
+### trait object 完全省略生命周期时的默认推断收紧
+
+Rust 1.98.0 还修复了 trait object 在完全省略生命周期时的默认推断不一致问题（[PR #129543](https://github.com/rust-lang/rust/pull/129543)）。极少数依赖隐式默认生命周期的边缘代码现在可能推断出更严格的边界。建议为公开 API 中的 `dyn Trait` 显式标注生命周期，例如 `dyn Trait + 'static`。
 
 ---
 

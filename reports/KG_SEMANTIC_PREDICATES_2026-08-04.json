@@ -18,60 +18,60 @@
     "framework"
   ],
   "min_confidence": 0.75,
-  "processed_entities": 618,
-  "processed_relations": 20805,
-  "processed_generic_remaining": 924,
-  "changed_relations": 9541,
+  "processed_entities": 622,
+  "processed_relations": 20951,
+  "processed_generic_remaining": 926,
+  "changed_relations": 9610,
   "below_threshold_skipped": 0,
   "batch_statistics": [
     {
       "batch": "l1",
       "entities": 54,
-      "relations": 1576,
+      "relations": 1577,
       "generic_remaining": 68,
       "generic_ratio": 0.0431
     },
     {
       "batch": "l2",
       "entities": 44,
-      "relations": 1305,
+      "relations": 1306,
       "generic_remaining": 47,
       "generic_ratio": 0.036
     },
     {
       "batch": "async",
       "entities": 16,
-      "relations": 571,
+      "relations": 568,
       "generic_remaining": 19,
-      "generic_ratio": 0.0333
+      "generic_ratio": 0.0335
     },
     {
       "batch": "unsafe",
       "entities": 12,
-      "relations": 434,
+      "relations": 436,
       "generic_remaining": 24,
-      "generic_ratio": 0.0553
+      "generic_ratio": 0.055
     },
     {
       "batch": "formal",
       "entities": 104,
-      "relations": 1948,
+      "relations": 1950,
       "generic_remaining": 81,
-      "generic_ratio": 0.0416
+      "generic_ratio": 0.0415
     },
     {
       "batch": "l5",
       "entities": 27,
-      "relations": 718,
+      "relations": 722,
       "generic_remaining": 22,
-      "generic_ratio": 0.0306
+      "generic_ratio": 0.0305
     },
     {
       "batch": "l6_concept",
-      "entities": 160,
-      "relations": 2750,
-      "generic_remaining": 155,
-      "generic_ratio": 0.0564
+      "entities": 163,
+      "relations": 2813,
+      "generic_remaining": 156,
+      "generic_ratio": 0.0555
     },
     {
       "batch": "l7",
@@ -83,23 +83,23 @@
     {
       "batch": "l3_rem",
       "entities": 44,
-      "relations": 936,
+      "relations": 937,
       "generic_remaining": 45,
-      "generic_ratio": 0.0481
+      "generic_ratio": 0.048
     },
     {
       "batch": "meta_navigation",
       "entities": 30,
-      "relations": 3575,
+      "relations": 3582,
       "generic_remaining": 63,
       "generic_ratio": 0.0176
     },
     {
       "batch": "ecosystem",
-      "entities": 188,
-      "relations": 3087,
-      "generic_remaining": 157,
-      "generic_ratio": 0.0509
+      "entities": 192,
+      "relations": 3153,
+      "generic_remaining": 158,
+      "generic_ratio": 0.0501
     },
     {
       "batch": "future",
@@ -118,19 +118,19 @@
     {
       "batch": "framework",
       "entities": 24,
-      "relations": 606,
+      "relations": 608,
       "generic_remaining": 50,
-      "generic_ratio": 0.0825
+      "generic_ratio": 0.0822
     }
   ],
   "before_type_distribution": {
-    "ex:RelationAnnotation": 10304
+    "ex:RelationAnnotation": 10374
   },
   "after_type_distribution": {
-    "ex:relatedTo": 7062,
-    "ex:entails": 1168,
-    "ex:dependsOn": 1090,
-    "ex:RelationAnnotation": 763,
+    "ex:relatedTo": 7105,
+    "ex:entails": 1181,
+    "ex:dependsOn": 1103,
+    "ex:RelationAnnotation": 764,
     "ex:equivalentTo": 98,
     "ex:refines": 63,
     "ex:enables": 43,
@@ -139,14 +139,14 @@
     "ex:counterExample": 2
   },
   "before_predicate_distribution": {
-    "ex:relatedTo": 8162,
-    "ex:dependsOn": 1123,
-    "ex:entails": 1019
+    "ex:relatedTo": 8206,
+    "ex:dependsOn": 1136,
+    "ex:entails": 1032
   },
   "after_predicate_distribution": {
-    "ex:relatedTo": 7746,
-    "ex:entails": 1200,
-    "ex:dependsOn": 1137,
+    "ex:relatedTo": 7790,
+    "ex:entails": 1213,
+    "ex:dependsOn": 1150,
     "ex:equivalentTo": 98,
     "ex:refines": 63,
     "ex:enables": 43,
@@ -703,6 +703,58 @@
     },
     {
       "@id": "_:rel53",
+      "subject": "ex:KnowledgeGraphOntologyV20",
+      "object": "ex:SemanticSpace",
+      "subject_path": "00_meta/knowledge_topology/kg_ontology_v2.md",
+      "object_path": "00_meta/00_framework/semantic_space.md",
+      "old_type": "ex:RelationAnnotation",
+      "old_predicate": "ex:dependsOn",
+      "new_predicate": "ex:dependsOn",
+      "rule": "existing-semantic",
+      "source": "prerequisite:../00_framework/semantic_space.md",
+      "confidence": 1.0
+    },
+    {
+      "@id": "_:rel54",
+      "subject": "ex:KnowledgeGraphOntologyV20",
+      "object": "ex:Methodology",
+      "subject_path": "00_meta/knowledge_topology/kg_ontology_v2.md",
+      "object_path": "00_meta/00_framework/methodology.md",
+      "old_type": "ex:RelationAnnotation",
+      "old_predicate": "ex:dependsOn",
+      "new_predicate": "ex:dependsOn",
+      "rule": "existing-semantic",
+      "source": "prerequisite:../00_framework/methodology.md",
+      "confidence": 1.0
+    },
+    {
+      "@id": "_:rel55",
+      "subject": "ex:KnowledgeGraphOntologyV20",
+      "object": "ex:AuthoritySourceMap",
+      "subject_path": "00_meta/knowledge_topology/kg_ontology_v2.md",
+      "object_path": "00_meta/02_sources/01_authority_source_map.md",
+      "old_type": "ex:RelationAnnotation",
+      "old_predicate": "ex:dependsOn",
+      "new_predicate": "ex:dependsOn",
+      "rule": "existing-semantic",
+      "source": "prerequisite:../02_sources/01_authority_source_map.md",
+      "confidence": 1.0
+    },
+    {
+      "@id": "_:rel56",
+      "subject": "ex:KnowledgeGraphOntologyV20",
+      "object": "ex:TerminologyGlossary",
+      "subject_path": "00_meta/knowledge_topology/kg_ontology_v2.md",
+      "object_path": "00_meta/01_terminology/01_terminology_glossary.md",
+      "old_type": "ex:RelationAnnotation",
+      "old_predicate": "ex:dependsOn",
+      "new_predicate": "ex:dependsOn",
+      "rule": "existing-semantic",
+      "source": "prerequisite:../01_terminology/01_terminology_glossary.md",
+      "confidence": 1.0
+    },
+    {
+      "@id": "_:rel57",
       "subject": "ex:PlPrerequisites",
       "object": "ex:Traits",
       "subject_path": "01_foundation/00_start/01_pl_prerequisites.md",
@@ -715,7 +767,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel54",
+      "@id": "_:rel58",
       "subject": "ex:PlPrerequisites",
       "object": "ex:Generics",
       "subject_path": "01_foundation/00_start/01_pl_prerequisites.md",
@@ -728,7 +780,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel55",
+      "@id": "_:rel59",
       "subject": "ex:ZeroCostAbstractions",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/00_start/02_zero_cost_abstractions.md",
@@ -741,7 +793,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel56",
+      "@id": "_:rel60",
       "subject": "ex:ZeroCostAbstractions",
       "object": "ex:Generics",
       "subject_path": "01_foundation/00_start/02_zero_cost_abstractions.md",
@@ -754,7 +806,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel57",
+      "@id": "_:rel61",
       "subject": "ex:ZeroCostAbstractions",
       "object": "ex:Traits",
       "subject_path": "01_foundation/00_start/02_zero_cost_abstractions.md",
@@ -767,7 +819,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel58",
+      "@id": "_:rel62",
       "subject": "ex:ZeroCostAbstractions",
       "object": "ex:RustVsC",
       "subject_path": "01_foundation/00_start/02_zero_cost_abstractions.md",
@@ -780,7 +832,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel59",
+      "@id": "_:rel63",
       "subject": "ex:ZeroCostAbstractions",
       "object": "ex:ToolchainAndCargo",
       "subject_path": "01_foundation/00_start/02_zero_cost_abstractions.md",
@@ -793,7 +845,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel60",
+      "@id": "_:rel64",
       "subject": "ex:ClosureBasics",
       "object": "ex:Traits",
       "subject_path": "01_foundation/00_start/03_closure_basics.md",
@@ -806,7 +858,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel61",
+      "@id": "_:rel65",
       "subject": "ex:ClosureBasics",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/00_start/03_closure_basics.md",
@@ -819,7 +871,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel62",
+      "@id": "_:rel66",
       "subject": "ex:ClosureBasics",
       "object": "ex:Borrowing",
       "subject_path": "01_foundation/00_start/03_closure_basics.md",
@@ -832,7 +884,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel63",
+      "@id": "_:rel67",
       "subject": "ex:ClosureBasics",
       "object": "ex:Iterators",
       "subject_path": "01_foundation/00_start/03_closure_basics.md",
@@ -845,7 +897,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel64",
+      "@id": "_:rel68",
       "subject": "ex:ClosureBasics",
       "object": "ex:AsyncProgramming",
       "subject_path": "01_foundation/00_start/03_closure_basics.md",
@@ -858,7 +910,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel65",
+      "@id": "_:rel69",
       "subject": "ex:ClosureBasics",
       "object": "ex:ClosureTypes",
       "subject_path": "01_foundation/00_start/03_closure_basics.md",
@@ -871,7 +923,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel66",
+      "@id": "_:rel70",
       "subject": "ex:EffectsAndPurity",
       "object": "ex:VariableModel",
       "subject_path": "01_foundation/00_start/04_effects_and_purity.md",
@@ -884,7 +936,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel67",
+      "@id": "_:rel71",
       "subject": "ex:EffectsAndPurity",
       "object": "ex:EvaluationStrategies",
       "subject_path": "01_foundation/00_start/04_effects_and_purity.md",
@@ -897,7 +949,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel68",
+      "@id": "_:rel72",
       "subject": "ex:EffectsAndPurity",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/00_start/04_effects_and_purity.md",
@@ -910,7 +962,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel69",
+      "@id": "_:rel73",
       "subject": "ex:EffectsAndPurity",
       "object": "ex:Borrowing",
       "subject_path": "01_foundation/00_start/04_effects_and_purity.md",
@@ -923,7 +975,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel70",
+      "@id": "_:rel74",
       "subject": "ex:EffectsAndPurity",
       "object": "ex:EffectSystem",
       "subject_path": "01_foundation/00_start/04_effects_and_purity.md",
@@ -936,7 +988,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel71",
+      "@id": "_:rel75",
       "subject": "ex:EffectsAndPurity",
       "object": "ex:AsyncProgramming",
       "subject_path": "01_foundation/00_start/04_effects_and_purity.md",
@@ -949,7 +1001,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel72",
+      "@id": "_:rel76",
       "subject": "ex:StandardIOAndProcess",
       "object": "ex:ErrorHandlingBasics",
       "subject_path": "01_foundation/00_start/05_std_io_and_process.md",
@@ -962,7 +1014,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel73",
+      "@id": "_:rel77",
       "subject": "ex:StandardIOAndProcess",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/00_start/05_std_io_and_process.md",
@@ -975,7 +1027,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel74",
+      "@id": "_:rel78",
       "subject": "ex:StandardIOAndProcess",
       "object": "ex:StringsAndText",
       "subject_path": "01_foundation/00_start/05_std_io_and_process.md",
@@ -988,7 +1040,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel75",
+      "@id": "_:rel79",
       "subject": "ex:StandardIOAndProcess",
       "object": "ex:AsyncProgramming",
       "subject_path": "01_foundation/00_start/05_std_io_and_process.md",
@@ -1001,7 +1053,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel76",
+      "@id": "_:rel80",
       "subject": "ex:StandardIOAndProcess",
       "object": "ex:ApplicationDomains",
       "subject_path": "01_foundation/00_start/05_std_io_and_process.md",
@@ -1014,7 +1066,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel77",
+      "@id": "_:rel81",
       "subject": "ex:StandardIOAndProcess",
       "object": "ex:TestingBasics",
       "subject_path": "01_foundation/00_start/05_std_io_and_process.md",
@@ -1027,7 +1079,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel78",
+      "@id": "_:rel82",
       "subject": "ex:Keywords",
       "object": "ex:MacrosBasics",
       "subject_path": "01_foundation/00_start/06_keywords.md",
@@ -1040,7 +1092,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel79",
+      "@id": "_:rel83",
       "subject": "ex:Keywords",
       "object": "ex:ModulesAndPaths",
       "subject_path": "01_foundation/00_start/06_keywords.md",
@@ -1053,7 +1105,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel80",
+      "@id": "_:rel84",
       "subject": "ex:OperatorsAndSymbols",
       "object": "ex:TypeSystemBasics",
       "subject_path": "01_foundation/00_start/07_operators_and_symbols.md",
@@ -1066,7 +1118,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel81",
+      "@id": "_:rel85",
       "subject": "ex:OperatorsAndSymbols",
       "object": "ex:Generics",
       "subject_path": "01_foundation/00_start/07_operators_and_symbols.md",
@@ -1079,7 +1131,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel82",
+      "@id": "_:rel86",
       "subject": "ex:OperatorsAndSymbols",
       "object": "ex:MacrosAdvanced",
       "subject_path": "01_foundation/00_start/07_operators_and_symbols.md",
@@ -1092,7 +1144,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel83",
+      "@id": "_:rel87",
       "subject": "ex:CompileTimeCorrectness",
       "object": "ex:TerminologyGlossary",
       "subject_path": "01_foundation/00_start/08_compile_time_correctness.md",
@@ -1105,7 +1157,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel84",
+      "@id": "_:rel88",
       "subject": "ex:FearlessRefactoring",
       "object": "ex:TerminologyGlossary",
       "subject_path": "01_foundation/00_start/09_fearless_refactoring.md",
@@ -1118,7 +1170,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel85",
+      "@id": "_:rel89",
       "subject": "ex:FearlessRefactoring",
       "object": "ex:ErrorHandlingIntermediate",
       "subject_path": "01_foundation/00_start/09_fearless_refactoring.md",
@@ -1131,7 +1183,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel86",
+      "@id": "_:rel90",
       "subject": "ex:OwnershipBorrowingLifetimesKnowledgeMap",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/01_ownership_borrow_lifetime/00_ownership_borrow_lifetime_knowledge_map.md",
@@ -1144,7 +1196,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel87",
+      "@id": "_:rel91",
       "subject": "ex:OwnershipBorrowingLifetimesKnowledgeMap",
       "object": "ex:Borrowing",
       "subject_path": "01_foundation/01_ownership_borrow_lifetime/00_ownership_borrow_lifetime_knowledge_map.md",
@@ -1157,7 +1209,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel88",
+      "@id": "_:rel92",
       "subject": "ex:OwnershipBorrowingLifetimesKnowledgeMap",
       "object": "ex:Lifetimes",
       "subject_path": "01_foundation/01_ownership_borrow_lifetime/00_ownership_borrow_lifetime_knowledge_map.md",
@@ -1170,7 +1222,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel89",
+      "@id": "_:rel93",
       "subject": "ex:OwnershipBorrowingLifetimesKnowledgeMap",
       "object": "ex:SmartPointers",
       "subject_path": "01_foundation/01_ownership_borrow_lifetime/00_ownership_borrow_lifetime_knowledge_map.md",
@@ -1183,7 +1235,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel90",
+      "@id": "_:rel94",
       "subject": "ex:OwnershipBorrowingLifetimesKnowledgeMap",
       "object": "ex:ConcurrencyModels",
       "subject_path": "01_foundation/01_ownership_borrow_lifetime/00_ownership_borrow_lifetime_knowledge_map.md",
@@ -1196,7 +1248,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel91",
+      "@id": "_:rel95",
       "subject": "ex:Ownership",
       "object": "ex:Borrowing",
       "subject_path": "01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
@@ -1209,7 +1261,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel92",
+      "@id": "_:rel96",
       "subject": "ex:Ownership",
       "object": "ex:Lifetimes",
       "subject_path": "01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
@@ -1222,7 +1274,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel93",
+      "@id": "_:rel97",
       "subject": "ex:Ownership",
       "object": "ex:MemoryManagement",
       "subject_path": "01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
@@ -1235,7 +1287,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel94",
+      "@id": "_:rel98",
       "subject": "ex:Lifetimes",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
@@ -1248,7 +1300,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel95",
+      "@id": "_:rel99",
       "subject": "ex:Lifetimes",
       "object": "ex:Borrowing",
       "subject_path": "01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
@@ -1261,7 +1313,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel96",
+      "@id": "_:rel100",
       "subject": "ex:MoveSemantics",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md",
@@ -1274,7 +1326,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel97",
+      "@id": "_:rel101",
       "subject": "ex:MoveSemantics",
       "object": "ex:VariableModel",
       "subject_path": "01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md",
@@ -1287,7 +1339,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel98",
+      "@id": "_:rel102",
       "subject": "ex:MoveSemantics",
       "object": "ex:Borrowing",
       "subject_path": "01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md",
@@ -1300,7 +1352,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel99",
+      "@id": "_:rel103",
       "subject": "ex:MoveSemantics",
       "object": "ex:LearningGuide",
       "subject_path": "01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md",
@@ -1313,7 +1365,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel100",
+      "@id": "_:rel104",
       "subject": "ex:MoveSemantics",
       "object": "ex:RustVsC",
       "subject_path": "01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md",
@@ -1326,7 +1378,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel101",
+      "@id": "_:rel105",
       "subject": "ex:MoveSemantics",
       "object": "ex:ConstructionAndInitialization",
       "subject_path": "01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md",
@@ -1339,7 +1391,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel102",
+      "@id": "_:rel106",
       "subject": "ex:BrownUniversityOwnershipInventory",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/01_ownership_borrow_lifetime/06_ownership_inventories_brown_book.md",
@@ -1352,7 +1404,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel103",
+      "@id": "_:rel107",
       "subject": "ex:TypeSystemBasics",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/02_type_system/01_type_system.md",
@@ -1365,7 +1417,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel104",
+      "@id": "_:rel108",
       "subject": "ex:NeverType",
       "object": "ex:TypeSystemBasics",
       "subject_path": "01_foundation/02_type_system/02_never_type.md",
@@ -1378,7 +1430,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel105",
+      "@id": "_:rel109",
       "subject": "ex:NeverType",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/02_type_system/02_never_type.md",
@@ -1391,7 +1443,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel106",
+      "@id": "_:rel110",
       "subject": "ex:NeverType",
       "object": "ex:ErrorHandlingBasics",
       "subject_path": "01_foundation/02_type_system/02_never_type.md",
@@ -1404,7 +1456,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel107",
+      "@id": "_:rel111",
       "subject": "ex:NeverType",
       "object": "ex:Generics",
       "subject_path": "01_foundation/02_type_system/02_never_type.md",
@@ -1417,7 +1469,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel108",
+      "@id": "_:rel112",
       "subject": "ex:NeverType",
       "object": "ex:AsyncProgramming",
       "subject_path": "01_foundation/02_type_system/02_never_type.md",
@@ -1430,7 +1482,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel109",
+      "@id": "_:rel113",
       "subject": "ex:Numerics",
       "object": "ex:TypeSystemBasics",
       "subject_path": "01_foundation/02_type_system/03_numerics.md",
@@ -1443,7 +1495,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel110",
+      "@id": "_:rel114",
       "subject": "ex:Numerics",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/02_type_system/03_numerics.md",
@@ -1456,7 +1508,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel111",
+      "@id": "_:rel115",
       "subject": "ex:Numerics",
       "object": "ex:ZeroCostAbstractions",
       "subject_path": "01_foundation/02_type_system/03_numerics.md",
@@ -1469,7 +1521,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel112",
+      "@id": "_:rel116",
       "subject": "ex:Numerics",
       "object": "ex:Collections",
       "subject_path": "01_foundation/02_type_system/03_numerics.md",
@@ -1482,7 +1534,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel113",
+      "@id": "_:rel117",
       "subject": "ex:CoercionAndCasting",
       "object": "ex:TypeSystemBasics",
       "subject_path": "01_foundation/02_type_system/04_coercion_and_casting.md",
@@ -1495,7 +1547,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel114",
+      "@id": "_:rel118",
       "subject": "ex:CoercionAndCasting",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/02_type_system/04_coercion_and_casting.md",
@@ -1508,7 +1560,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel115",
+      "@id": "_:rel119",
       "subject": "ex:CoercionAndCasting",
       "object": "ex:Traits",
       "subject_path": "01_foundation/02_type_system/04_coercion_and_casting.md",
@@ -1521,7 +1573,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel116",
+      "@id": "_:rel120",
       "subject": "ex:CoercionAndCasting",
       "object": "ex:RustFFI",
       "subject_path": "01_foundation/02_type_system/04_coercion_and_casting.md",
@@ -1534,7 +1586,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel117",
+      "@id": "_:rel121",
       "subject": "ex:CoercionAndCasting",
       "object": "ex:Generics",
       "subject_path": "01_foundation/02_type_system/04_coercion_and_casting.md",
@@ -1547,7 +1599,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel118",
+      "@id": "_:rel122",
       "subject": "ex:DataAbstractionSpectrum",
       "object": "ex:TypeSystemBasics",
       "subject_path": "01_foundation/02_type_system/05_data_abstraction_spectrum.md",
@@ -1560,7 +1612,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel119",
+      "@id": "_:rel123",
       "subject": "ex:DataAbstractionSpectrum",
       "object": "ex:VariableModel",
       "subject_path": "01_foundation/02_type_system/05_data_abstraction_spectrum.md",
@@ -1573,7 +1625,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel120",
+      "@id": "_:rel124",
       "subject": "ex:DataAbstractionSpectrum",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/02_type_system/05_data_abstraction_spectrum.md",
@@ -1586,7 +1638,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel121",
+      "@id": "_:rel125",
       "subject": "ex:DataAbstractionSpectrum",
       "object": "ex:Traits",
       "subject_path": "01_foundation/02_type_system/05_data_abstraction_spectrum.md",
@@ -1599,7 +1651,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel122",
+      "@id": "_:rel126",
       "subject": "ex:DataAbstractionSpectrum",
       "object": "ex:Generics",
       "subject_path": "01_foundation/02_type_system/05_data_abstraction_spectrum.md",
@@ -1612,7 +1664,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel123",
+      "@id": "_:rel127",
       "subject": "ex:DataAbstractionSpectrum",
       "object": "ex:TypeErasure",
       "subject_path": "01_foundation/02_type_system/05_data_abstraction_spectrum.md",
@@ -1625,7 +1677,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel124",
+      "@id": "_:rel128",
       "subject": "ex:ReferenceSemantics",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/03_values_and_references/01_reference_semantics.md",
@@ -1638,7 +1690,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel125",
+      "@id": "_:rel129",
       "subject": "ex:ReferenceSemantics",
       "object": "ex:Borrowing",
       "subject_path": "01_foundation/03_values_and_references/01_reference_semantics.md",
@@ -1651,7 +1703,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel126",
+      "@id": "_:rel130",
       "subject": "ex:ReferenceSemantics",
       "object": "ex:TypeSystemBasics",
       "subject_path": "01_foundation/03_values_and_references/01_reference_semantics.md",
@@ -1664,7 +1716,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel127",
+      "@id": "_:rel131",
       "subject": "ex:ReferenceSemantics",
       "object": "ex:MemoryManagement",
       "subject_path": "01_foundation/03_values_and_references/01_reference_semantics.md",
@@ -1677,7 +1729,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel128",
+      "@id": "_:rel132",
       "subject": "ex:ReferenceSemantics",
       "object": "ex:Generics",
       "subject_path": "01_foundation/03_values_and_references/01_reference_semantics.md",
@@ -1690,7 +1742,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel129",
+      "@id": "_:rel133",
       "subject": "ex:ValueSemanticsVsReferenceSemantics",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/03_values_and_references/02_value_vs_reference_semantics.md",
@@ -1703,7 +1755,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel130",
+      "@id": "_:rel134",
       "subject": "ex:ValueSemanticsVsReferenceSemantics",
       "object": "ex:VariableModel",
       "subject_path": "01_foundation/03_values_and_references/02_value_vs_reference_semantics.md",
@@ -1716,7 +1768,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel131",
+      "@id": "_:rel135",
       "subject": "ex:ValueSemanticsVsReferenceSemantics",
       "object": "ex:LearningGuide",
       "subject_path": "01_foundation/03_values_and_references/02_value_vs_reference_semantics.md",
@@ -1729,7 +1781,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel132",
+      "@id": "_:rel136",
       "subject": "ex:ValueSemanticsVsReferenceSemantics",
       "object": "ex:MoveSemantics",
       "subject_path": "01_foundation/03_values_and_references/02_value_vs_reference_semantics.md",
@@ -1742,7 +1794,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel133",
+      "@id": "_:rel137",
       "subject": "ex:ValueSemanticsVsReferenceSemantics",
       "object": "ex:Borrowing",
       "subject_path": "01_foundation/03_values_and_references/02_value_vs_reference_semantics.md",
@@ -1755,7 +1807,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel134",
+      "@id": "_:rel138",
       "subject": "ex:VariableModel",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/03_values_and_references/03_variable_model.md",
@@ -1768,7 +1820,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel135",
+      "@id": "_:rel139",
       "subject": "ex:VariableModel",
       "object": "ex:TypeSystemBasics",
       "subject_path": "01_foundation/03_values_and_references/03_variable_model.md",
@@ -1781,7 +1833,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel136",
+      "@id": "_:rel140",
       "subject": "ex:VariableModel",
       "object": "ex:Borrowing",
       "subject_path": "01_foundation/03_values_and_references/03_variable_model.md",
@@ -1794,7 +1846,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel137",
+      "@id": "_:rel141",
       "subject": "ex:VariableModel",
       "object": "ex:MemoryManagement",
       "subject_path": "01_foundation/03_values_and_references/03_variable_model.md",
@@ -1807,7 +1859,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel138",
+      "@id": "_:rel142",
       "subject": "ex:VariableModel",
       "object": "ex:EvaluationStrategies",
       "subject_path": "01_foundation/03_values_and_references/03_variable_model.md",
@@ -1820,7 +1872,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel139",
+      "@id": "_:rel143",
       "subject": "ex:ControlFlow",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/04_control_flow/01_control_flow.md",
@@ -1833,7 +1885,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel140",
+      "@id": "_:rel144",
       "subject": "ex:ControlFlow",
       "object": "ex:TypeSystemBasics",
       "subject_path": "01_foundation/04_control_flow/01_control_flow.md",
@@ -1846,7 +1898,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel141",
+      "@id": "_:rel145",
       "subject": "ex:ControlFlow",
       "object": "ex:Generics",
       "subject_path": "01_foundation/04_control_flow/01_control_flow.md",
@@ -1859,7 +1911,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel142",
+      "@id": "_:rel146",
       "subject": "ex:ControlFlow",
       "object": "ex:AsyncProgramming",
       "subject_path": "01_foundation/04_control_flow/01_control_flow.md",
@@ -1872,7 +1924,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel143",
+      "@id": "_:rel147",
       "subject": "ex:Patterns",
       "object": "ex:StatementsAndExpressions",
       "subject_path": "01_foundation/04_control_flow/02_patterns.md",
@@ -1885,7 +1937,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel144",
+      "@id": "_:rel148",
       "subject": "ex:LetChainsAndIfLetGuards",
       "object": "ex:StatementsAndExpressions",
       "subject_path": "01_foundation/04_control_flow/03_let_chains.md",
@@ -1898,7 +1950,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel145",
+      "@id": "_:rel149",
       "subject": "ex:StatementsAndExpressions",
       "object": "ex:ClosureBasics",
       "subject_path": "01_foundation/04_control_flow/04_statements_and_expressions.md",
@@ -1911,7 +1963,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel146",
+      "@id": "_:rel150",
       "subject": "ex:LetElseEarlyReturnOnPatternMismatch",
       "object": "ex:ControlFlow",
       "subject_path": "01_foundation/04_control_flow/05_let_else.md",
@@ -1924,7 +1976,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel147",
+      "@id": "_:rel151",
       "subject": "ex:LetElseEarlyReturnOnPatternMismatch",
       "object": "ex:Patterns",
       "subject_path": "01_foundation/04_control_flow/05_let_else.md",
@@ -1937,7 +1989,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel148",
+      "@id": "_:rel152",
       "subject": "ex:LetElseEarlyReturnOnPatternMismatch",
       "object": "ex:LetChainsAndIfLetGuards",
       "subject_path": "01_foundation/04_control_flow/05_let_else.md",
@@ -1950,7 +2002,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel149",
+      "@id": "_:rel153",
       "subject": "ex:LetElseEarlyReturnOnPatternMismatch",
       "object": "ex:ErrorHandlingIntermediate",
       "subject_path": "01_foundation/04_control_flow/05_let_else.md",
@@ -1963,7 +2015,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel150",
+      "@id": "_:rel154",
       "subject": "ex:LetElseEarlyReturnOnPatternMismatch",
       "object": "ex:TerminologyGlossary",
       "subject_path": "01_foundation/04_control_flow/05_let_else.md",
@@ -1976,7 +2028,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel151",
+      "@id": "_:rel155",
       "subject": "ex:LetElseEarlyReturnOnPatternMismatch",
       "object": "ex:StatementsAndExpressions",
       "subject_path": "01_foundation/04_control_flow/05_let_else.md",
@@ -1989,7 +2041,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel152",
+      "@id": "_:rel156",
       "subject": "ex:LetElseEarlyReturnOnPatternMismatch",
       "object": "ex:ErrorHandlingDeepDive",
       "subject_path": "01_foundation/04_control_flow/05_let_else.md",
@@ -2002,7 +2054,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel153",
+      "@id": "_:rel157",
       "subject": "ex:Collections",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/05_collections/01_collections.md",
@@ -2015,7 +2067,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel154",
+      "@id": "_:rel158",
       "subject": "ex:Collections",
       "object": "ex:SmartPointers",
       "subject_path": "01_foundation/05_collections/01_collections.md",
@@ -2028,7 +2080,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel155",
+      "@id": "_:rel159",
       "subject": "ex:CollectionsAdvanced",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/05_collections/02_collections_advanced.md",
@@ -2041,7 +2093,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel156",
+      "@id": "_:rel160",
       "subject": "ex:CollectionsAdvanced",
       "object": "ex:Borrowing",
       "subject_path": "01_foundation/05_collections/02_collections_advanced.md",
@@ -2054,7 +2106,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel157",
+      "@id": "_:rel161",
       "subject": "ex:CollectionsAdvanced",
       "object": "ex:Collections",
       "subject_path": "01_foundation/05_collections/02_collections_advanced.md",
@@ -2067,7 +2119,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel158",
+      "@id": "_:rel162",
       "subject": "ex:CollectionsAdvanced",
       "object": "ex:SmartPointers",
       "subject_path": "01_foundation/05_collections/02_collections_advanced.md",
@@ -2080,7 +2132,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel159",
+      "@id": "_:rel163",
       "subject": "ex:CollectionsAdvanced",
       "object": "ex:PerformanceOptimization",
       "subject_path": "01_foundation/05_collections/02_collections_advanced.md",
@@ -2093,7 +2145,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel160",
+      "@id": "_:rel164",
       "subject": "ex:IteratorIdiomsInRust",
       "object": "ex:Collections",
       "subject_path": "01_foundation/05_collections/03_iterator_idioms.md",
@@ -2106,7 +2158,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel161",
+      "@id": "_:rel165",
       "subject": "ex:IteratorIdiomsInRust",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/05_collections/03_iterator_idioms.md",
@@ -2119,7 +2171,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel162",
+      "@id": "_:rel166",
       "subject": "ex:IteratorIdiomsInRust",
       "object": "ex:ErrorHandlingIntermediate",
       "subject_path": "01_foundation/05_collections/03_iterator_idioms.md",
@@ -2132,7 +2184,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel163",
+      "@id": "_:rel167",
       "subject": "ex:IteratorIdiomsInRust",
       "object": "ex:IdiomsSpectrum",
       "subject_path": "01_foundation/05_collections/03_iterator_idioms.md",
@@ -2145,7 +2197,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel164",
+      "@id": "_:rel168",
       "subject": "ex:IteratorIdiomsInRust",
       "object": "ex:TypeConversions",
       "subject_path": "01_foundation/05_collections/03_iterator_idioms.md",
@@ -2158,7 +2210,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel165",
+      "@id": "_:rel169",
       "subject": "ex:StringsAndText",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/06_strings_and_text/01_strings_and_text.md",
@@ -2171,7 +2223,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel166",
+      "@id": "_:rel170",
       "subject": "ex:StringsAndText",
       "object": "ex:Borrowing",
       "subject_path": "01_foundation/06_strings_and_text/01_strings_and_text.md",
@@ -2184,7 +2236,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel167",
+      "@id": "_:rel171",
       "subject": "ex:StringsAndText",
       "object": "ex:TypeSystemBasics",
       "subject_path": "01_foundation/06_strings_and_text/01_strings_and_text.md",
@@ -2197,7 +2249,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel168",
+      "@id": "_:rel172",
       "subject": "ex:StringsAndText",
       "object": "ex:Collections",
       "subject_path": "01_foundation/06_strings_and_text/01_strings_and_text.md",
@@ -2210,7 +2262,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel169",
+      "@id": "_:rel173",
       "subject": "ex:StringsAndText",
       "object": "ex:RustFFI",
       "subject_path": "01_foundation/06_strings_and_text/01_strings_and_text.md",
@@ -2223,7 +2275,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel170",
+      "@id": "_:rel174",
       "subject": "ex:StringsAndEncoding",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/06_strings_and_text/02_strings_and_encoding.md",
@@ -2236,7 +2288,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel171",
+      "@id": "_:rel175",
       "subject": "ex:StringsAndEncoding",
       "object": "ex:TypeSystemBasics",
       "subject_path": "01_foundation/06_strings_and_text/02_strings_and_encoding.md",
@@ -2249,7 +2301,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel172",
+      "@id": "_:rel176",
       "subject": "ex:StringsAndEncoding",
       "object": "ex:Collections",
       "subject_path": "01_foundation/06_strings_and_text/02_strings_and_encoding.md",
@@ -2262,7 +2314,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel173",
+      "@id": "_:rel177",
       "subject": "ex:StringsAndEncoding",
       "object": "ex:RustFFI",
       "subject_path": "01_foundation/06_strings_and_text/02_strings_and_encoding.md",
@@ -2275,7 +2327,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel174",
+      "@id": "_:rel178",
       "subject": "ex:DisplayAndDebugFormatting",
       "object": "ex:StringsAndText",
       "subject_path": "01_foundation/06_strings_and_text/03_formatting_and_display.md",
@@ -2288,7 +2340,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel175",
+      "@id": "_:rel179",
       "subject": "ex:DisplayAndDebugFormatting",
       "object": "ex:Traits",
       "subject_path": "01_foundation/06_strings_and_text/03_formatting_and_display.md",
@@ -2301,7 +2353,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel176",
+      "@id": "_:rel180",
       "subject": "ex:DisplayAndDebugFormatting",
       "object": "ex:ErrorHandlingIntermediate",
       "subject_path": "01_foundation/06_strings_and_text/03_formatting_and_display.md",
@@ -2314,7 +2366,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel177",
+      "@id": "_:rel181",
       "subject": "ex:DisplayAndDebugFormatting",
       "object": "ex:DevelopmentToolsEcosystem",
       "subject_path": "01_foundation/06_strings_and_text/03_formatting_and_display.md",
@@ -2327,7 +2379,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel178",
+      "@id": "_:rel182",
       "subject": "ex:ModulesAndPaths",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/07_modules_and_items/01_modules_and_paths.md",
@@ -2340,7 +2392,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel179",
+      "@id": "_:rel183",
       "subject": "ex:ModulesAndPaths",
       "object": "ex:TypeSystemBasics",
       "subject_path": "01_foundation/07_modules_and_items/01_modules_and_paths.md",
@@ -2353,7 +2405,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel180",
+      "@id": "_:rel184",
       "subject": "ex:ModulesAndPaths",
       "object": "ex:CoreCratesIndex",
       "subject_path": "01_foundation/07_modules_and_items/01_modules_and_paths.md",
@@ -2366,7 +2418,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel181",
+      "@id": "_:rel185",
       "subject": "ex:ModulesAndPaths",
       "object": "ex:ToolchainAndCargo",
       "subject_path": "01_foundation/07_modules_and_items/01_modules_and_paths.md",
@@ -2379,7 +2431,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel182",
+      "@id": "_:rel186",
       "subject": "ex:Functions",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/07_modules_and_items/02_functions.md",
@@ -2392,7 +2444,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel183",
+      "@id": "_:rel187",
       "subject": "ex:Functions",
       "object": "ex:Traits",
       "subject_path": "01_foundation/07_modules_and_items/02_functions.md",
@@ -2405,7 +2457,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel184",
+      "@id": "_:rel188",
       "subject": "ex:UseDeclarations",
       "object": "ex:ModulesAndPaths",
       "subject_path": "01_foundation/07_modules_and_items/03_use_declarations.md",
@@ -2418,7 +2470,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel185",
+      "@id": "_:rel189",
       "subject": "ex:UseDeclarations",
       "object": "ex:Items",
       "subject_path": "01_foundation/07_modules_and_items/03_use_declarations.md",
@@ -2431,7 +2483,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel186",
+      "@id": "_:rel190",
       "subject": "ex:UseDeclarations",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/07_modules_and_items/03_use_declarations.md",
@@ -2444,7 +2496,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel187",
+      "@id": "_:rel191",
       "subject": "ex:UseDeclarations",
       "object": "ex:TerminologyGlossary",
       "subject_path": "01_foundation/07_modules_and_items/03_use_declarations.md",
@@ -2457,7 +2509,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel188",
+      "@id": "_:rel192",
       "subject": "ex:UseDeclarations",
       "object": "ex:Preludes",
       "subject_path": "01_foundation/07_modules_and_items/03_use_declarations.md",
@@ -2470,7 +2522,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel189",
+      "@id": "_:rel193",
       "subject": "ex:UseDeclarations",
       "object": "ex:IdiomaticRustAPINamingConventions",
       "subject_path": "01_foundation/07_modules_and_items/03_use_declarations.md",
@@ -2483,7 +2535,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel190",
+      "@id": "_:rel194",
       "subject": "ex:Structs",
       "object": "ex:TypeSystemBasics",
       "subject_path": "01_foundation/07_modules_and_items/04_structs.md",
@@ -2496,7 +2548,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel191",
+      "@id": "_:rel195",
       "subject": "ex:Structs",
       "object": "ex:Ownership",
       "subject_path": "01_foundation/07_modules_and_items/04_structs.md",
@@ -2509,7 +2561,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel192",
+      "@id": "_:rel196",
       "subject": "ex:Structs",
       "object": "ex:Functions",
       "subject_path": "01_foundation/07_modules_and_items/04_structs.md",
@@ -2522,7 +2574,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel193",
+      "@id": "_:rel197",
       "subject": "ex:Structs",
       "object": "ex:TerminologyGlossary",
       "subject_path": "01_foundation/07_modules_and_items/04_structs.md",
@@ -2535,7 +2587,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel194",
+      "@id": "_:rel198",
       "subject": "ex:Structs",
       "object": "ex:Enumerations",
       "subject_path": "01_foundation/07_modules_and_items/04_structs.md",
@@ -2548,7 +2600,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel195",
+      "@id": "_:rel199",
       "subject": "ex:Structs",
       "object": "ex:Implementations",
       "subject_path": "01_foundation/07_modules_and_items/04_structs.md",
@@ -2561,7 +2613,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel196",
+      "@id": "_:rel200",
       "subject": "ex:Structs",
       "object": "ex:Traits",
       "subject_path": "01_foundation/07_modules_and_items/04_structs.md",
@@ -2574,7 +2626,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel197",
+      "@id": "_:rel201",
       "subject": "ex:Enumerations",
       "object": "ex:TypeSystemBasics",
       "subject_path": "01_foundation/07_modules_and_items/05_enumerations.md",
@@ -2587,7 +2639,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel198",
+      "@id": "_:rel202",
       "subject": "ex:Enumerations",
       "object": "ex:Structs",
       "subject_path": "01_foundation/07_modules_and_items/05_enumerations.md",
@@ -2600,7 +2652,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel199",
+      "@id": "_:rel203",
       "subject": "ex:Enumerations",
       "object": "ex:Patterns",
       "subject_path": "01_foundation/07_modules_and_items/05_enumerations.md",
@@ -2613,7 +2665,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel200",
+      "@id": "_:rel204",
       "subject": "ex:Enumerations",
       "object": "ex:TerminologyGlossary",
       "subject_path": "01_foundation/07_modules_and_items/05_enumerations.md",
@@ -2626,7 +2678,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel201",
+      "@id": "_:rel205",
       "subject": "ex:Enumerations",
       "object": "ex:ErrorHandlingBasics",
       "subject_path": "01_foundation/07_modules_and_items/05_enumerations.md",
@@ -2639,7 +2691,7 @@
       "confidence": 0.95
     },
     {
-      "@id": "_:rel202",
+      "@id": "_:rel206",
       "subject": "ex:Enumerations",
       "object": "ex:ErrorHandlingIntermediate",
       "subject_path": "01_foundation/07_modules_and_items/05_enumerations.md",
@@ -2652,7 +2704,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel203",
+      "@id": "_:rel207",
       "subject": "ex:Enumerations",
       "object": "ex:TypeTheory",
       "subject_path": "01_foundation/07_modules_and_items/05_enumerations.md",
@@ -2665,7 +2717,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel204",
+      "@id": "_:rel208",
       "subject": "ex:Implementations",
       "object": "ex:Structs",
       "subject_path": "01_foundation/07_modules_and_items/06_implementations.md",
@@ -2678,7 +2730,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel205",
+      "@id": "_:rel209",
       "subject": "ex:Implementations",
       "object": "ex:Enumerations",
       "subject_path": "01_foundation/07_modules_and_items/06_implementations.md",
@@ -2691,7 +2743,7 @@
       "confidence": 1.0
     },
     {
-      "@id": "_:rel206",
+      "@id": "_:rel210",
       "subject": "ex:Implementations",
       "object": "ex:Traits",
       "subject_path": "01_foundation/07_modules_and_items/06_implementations.md",
@@ -2701,58 +2753,6 @@
       "new_predicate": "ex:dependsOn",
       "rule": "existing-semantic",
       "source": "prerequisite:../../02_intermediate/00_traits/01_traits.md",
-      "confidence": 1.0
-    },
-    {
-      "@id": "_:rel207",
-      "subject": "ex:Implementations",
-      "object": "ex:Functions",
-      "subject_path": "01_foundation/07_modules_and_items/06_implementations.md",
-      "object_path": "01_foundation/07_modules_and_items/02_functions.md",
-      "old_type": "ex:RelationAnnotation",
-      "old_predicate": "ex:dependsOn",
-      "new_predicate": "ex:dependsOn",
-      "rule": "existing-semantic",
-      "source": "prerequisite:02_functions.md",
-      "confidence": 1.0
-    },
-    {
-      "@id": "_:rel208",
-      "subject": "ex:Implementations",
-      "object": "ex:TerminologyGlossary",
-      "subject_path": "01_foundation/07_modules_and_items/06_implementations.md",
-      "object_path": "00_meta/01_terminology/01_terminology_glossary.md",
-      "old_type": "ex:RelationAnnotation",
-      "old_predicate": "ex:dependsOn",
-      "new_predicate": "ex:dependsOn",
-      "rule": "existing-semantic",
-      "source": "prerequisite:../../00_meta/01_terminology/01_terminology_glossary.md",
-      "confidence": 1.0
-    },
-    {
-      "@id": "_:rel209",
-      "subject": "ex:Implementations",
-      "object": "ex:Generics",
-      "subject_path": "01_foundation/07_modules_and_items/06_implementations.md",
-      "object_path": "02_intermediate/01_generics/01_generics.md",
-      "old_type": "ex:RelationAnnotation",
-      "old_predicate": "ex:entails",
-      "new_predicate": "ex:entails",
-      "rule": "existing-semantic",
-      "source": "postrequisite:../../02_intermediate/01_generics/01_generics.md",
-      "confidence": 1.0
-    },
-    {
-      "@id": "_:rel210",
-      "subject": "ex:Implementations",
-      "object": "ex:TypeConversions",
-      "subject_path": "01_foundation/07_modules_and_items/06_implementations.md",
-      "object_path": "02_intermediate/04_types_and_conversions/07_type_conversions.md",
-      "old_type": "ex:RelationAnnotation",
-      "old_predicate": "ex:entails",
-      "new_predicate": "ex:entails",
-      "rule": "existing-semantic",
-      "source": "postrequisite:../../02_intermediate/04_types_and_conversions/07_type_conversions.md",
       "confidence": 1.0
     }
   ]

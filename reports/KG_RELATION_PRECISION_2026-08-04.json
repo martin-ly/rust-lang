@@ -1,20 +1,20 @@
 {
   "summary": {
     "date": "2026-08-04",
-    "total_relations": 10304,
+    "total_relations": 10374,
     "generic_relation_annotation_count": 0,
     "generic_ratio_global": 0.0,
     "core_entities": 50,
-    "core_relations": 2786,
+    "core_relations": 2783,
     "core_generic_count": 0,
     "core_generic_ratio": 0.0,
     "core_lacking_semantic": 0,
     "global_predicate_distribution": {
-      "ex:hasPart": 4269,
-      "ex:dependsOn": 2207,
-      "ex:entails": 1645,
-      "ex:relatedTo": 850,
-      "ex:refines": 615,
+      "ex:hasPart": 4271,
+      "ex:dependsOn": 2231,
+      "ex:entails": 1658,
+      "ex:relatedTo": 861,
+      "ex:refines": 635,
       "ex:partOf": 432,
       "ex:appliesTo": 128,
       "ex:equivalentTo": 98,
@@ -24,8 +24,8 @@
       "ex:counterExample": 2
     },
     "core_predicate_distribution": {
-      "ex:dependsOn": 1140,
-      "ex:hasPart": 637,
+      "ex:dependsOn": 1139,
+      "ex:hasPart": 635,
       "ex:entails": 441,
       "ex:relatedTo": 256,
       "ex:refines": 140,
@@ -222,7 +222,7 @@
     "ex:Borrowing": [
       [
         "ex:dependsOn",
-        33
+        32
       ],
       [
         "ex:entails",
@@ -362,7 +362,7 @@
     "ex:Generics": [
       [
         "ex:dependsOn",
-        70
+        69
       ],
       [
         "ex:entails",
@@ -516,7 +516,7 @@
     "ex:Ownership": [
       [
         "ex:dependsOn",
-        138
+        137
       ],
       [
         "ex:relatedTo",
@@ -554,7 +554,7 @@
     "ex:PinAndUnpin": [
       [
         "ex:dependsOn",
-        27
+        26
       ],
       [
         "ex:entails",
@@ -610,7 +610,7 @@
     "ex:RustFFI": [
       [
         "ex:dependsOn",
-        27
+        28
       ],
       [
         "ex:entails",
@@ -624,7 +624,7 @@
     "ex:SafeAndEffectiveUnsafeRust": [
       [
         "ex:dependsOn",
-        132
+        134
       ],
       [
         "ex:entails",

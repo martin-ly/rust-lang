@@ -236,6 +236,12 @@ mindmap
     - [Parser Combinator](#parser-combinator)
     - [关联类型 vs 泛型参数决策](#关联类型-vs-泛型参数决策)
   - [Rust 1.98.0 兼容性注意](#rust-1980-兼容性注意)
+    - [where 子句拒绝 `Type = Type` / `Type == Type`](#where-子句拒绝-type--type--type--type)
+      - [反例：普通类型等式谓词](#反例普通类型等式谓词)
+      - [✅ 修正：使用 trait bound 或关联类型等式](#-修正使用-trait-bound-或关联类型等式)
+    - [解析器错误恢复：将 `dyn` 视为严格关键字](#解析器错误恢复将-dyn-视为严格关键字)
+    - [trait object 完全省略生命周期时的默认推断收紧](#trait-object-完全省略生命周期时的默认推断收紧)
+      - [迁移注意](#迁移注意)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [与表征空间（Semantic Space）的映射](#与表征空间semantic-space的映射)
 
@@ -3199,7 +3205,44 @@ trait Parser<'a> {
 
 ## Rust 1.98.0 兼容性注意
 
-> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 在语法层拒绝 `where T = U` / `where T == U` 等式谓词，修复了解析器将 `dyn` 视为普通标识符的错误恢复路径，并收紧了 trait object 完全省略生命周期时的默认推断。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md) 与 [1.98 beta 深度解析：where 等式谓词语法拒绝](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-where-equality-syntax)。
+### where 子句拒绝 `Type = Type` / `Type == Type`
+
+Rust 的 where 子句从未支持普通类型之间的等式约束（equality predicate），但解析器此前错误地允许 `where T = U` 或 `where T == U` 的写法，并在后续类型检查阶段才拒绝。Rust 1.98.0 将这类语法直接在解析层拒绝，产生更清晰的错误信息（[PR #153513](https://github.com/rust-lang/rust/pull/153513) · [#154816](https://github.com/rust-lang/rust/issues/154816)）。
+
+#### 反例：普通类型等式谓词
+
+```rust,ignore
+// 1.98 前：解析通过，后续阶段才报错
+// 1.98 后：解析阶段直接拒绝
+fn bad<T, U>() where T = U {}
+```
+
+#### ✅ 修正：使用 trait bound 或关联类型等式
+
+```rust
+trait HasItem {
+    type Item;
+}
+
+// 关联类型等式约束仍可用
+fn ok<T: HasItem>() where T::Item = u32 {}
+```
+
+> **注意**：关联类型等式 `T::Assoc = U` 不受影响；被拒绝的只是「普通类型之间直接写等号」的语法。
+
+### 解析器错误恢复：将 `dyn` 视为严格关键字
+
+`dyn` 自 Rust 2018 起就是严格关键字，但某些语法错误恢复路径此前会把它当作普通标识符处理，导致诊断信息误导用户。Rust 1.98.0 修正了这些路径（[PR #157577](https://github.com/rust-lang/rust/pull/157577)）。
+
+### trait object 完全省略生命周期时的默认推断收紧
+
+Rust 1.98.0 修复了 trait object 默认生命周期在复杂路径（如关联类型路径）下的推断不一致问题（[PR #129543](https://github.com/rust-lang/rust/pull/129543)）。建议公开 API 中显式写出 `dyn Trait + 'static`，避免依赖隐式默认。
+
+#### 迁移注意
+
+- 检查宏生成的 where 子句，避免产出 `where $A = $B` 或 `where $A == $B`。
+- 为 `dyn Trait` 参数和字段显式标注生命周期。
+- 完整分析见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md) §1.6 / §1.9 / §5.4 与 [1.98 beta 深度解析](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-where-equality-syntax)。
 
 ---
 

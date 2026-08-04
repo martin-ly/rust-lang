@@ -3,42 +3,42 @@
 **日期**: 2026-08-04  
 **模式**: 已写回 kg_data_v3.json  
 **置信度阈值**: 0.75  
-**处理实体数**: 618  **处理关系数**: 20805
+**处理实体数**: 622  **处理关系数**: 20951
 
 ## 1. 各批次通用谓词残留
 
 | 批次 | 实体数 | 关系数 | 通用谓词残留 | 占比 |
 |:---|---:|---:|---:|---:|
-| `l1` | 54 | 1576 | 68 | 4.31% |
-| `l2` | 44 | 1305 | 47 | 3.60% |
-| `async` | 16 | 571 | 19 | 3.33% |
-| `unsafe` | 12 | 434 | 24 | 5.53% |
-| `formal` | 104 | 1948 | 81 | 4.16% |
-| `l5` | 27 | 718 | 22 | 3.06% |
-| `l6_concept` | 160 | 2750 | 155 | 5.64% |
+| `l1` | 54 | 1577 | 68 | 4.31% |
+| `l2` | 44 | 1306 | 47 | 3.60% |
+| `async` | 16 | 568 | 19 | 3.35% |
+| `unsafe` | 12 | 436 | 24 | 5.50% |
+| `formal` | 104 | 1950 | 81 | 4.15% |
+| `l5` | 27 | 722 | 22 | 3.05% |
+| `l6_concept` | 163 | 2813 | 156 | 5.55% |
 | `l7` | 74 | 1489 | 94 | 6.31% |
-| `l3_rem` | 44 | 936 | 45 | 4.81% |
-| `meta_navigation` | 30 | 3575 | 63 | 1.76% |
-| `ecosystem` | 188 | 3087 | 157 | 5.09% |
+| `l3_rem` | 44 | 937 | 45 | 4.80% |
+| `meta_navigation` | 30 | 3582 | 63 | 1.76% |
+| `ecosystem` | 192 | 3153 | 158 | 5.01% |
 | `future` | 75 | 1501 | 94 | 6.26% |
 | `rustc_internals` | 17 | 309 | 5 | 1.62% |
-| `framework` | 24 | 606 | 50 | 8.25% |
+| `framework` | 24 | 608 | 50 | 8.22% |
 
-- 处理批次内通用谓词总计残留: **924**
+- 处理批次内通用谓词总计残留: **926**
 - 因低于置信度阈值跳过: **0**
 
 ## 2. 改动统计
 
-- 修改的关系数: 9541
+- 修改的关系数: 9610
 
 ## 3. 全局 @type 分布前后对比
 
 | 谓词 | 修改前 | 修改后 | Δ |
 |:---|---:|---:|---:|
-| `ex:relatedTo` | 0 | 7062 | +7062 |
-| `ex:entails` | 0 | 1168 | +1168 |
-| `ex:dependsOn` | 0 | 1090 | +1090 |
-| `ex:RelationAnnotation` | 10304 | 763 | -9541 |
+| `ex:relatedTo` | 0 | 7105 | +7105 |
+| `ex:entails` | 0 | 1181 | +1181 |
+| `ex:dependsOn` | 0 | 1103 | +1103 |
+| `ex:RelationAnnotation` | 10374 | 764 | -9610 |
 | `ex:equivalentTo` | 0 | 98 | +98 |
 | `ex:refines` | 0 | 63 | +63 |
 | `ex:enables` | 0 | 43 | +43 |
@@ -92,18 +92,18 @@
 | `_:rel50` | `00_meta/knowledge_topology/11_semantic_model_atlas.md` | `04_formal/00_type_theory/10_dependent_refinement_types.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
 | `_:rel51` | `00_meta/knowledge_topology/11_semantic_model_atlas.md` | `04_formal/07_concurrency_semantics/01_process_calculi_for_rust.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
 | `_:rel52` | `00_meta/knowledge_topology/11_semantic_model_atlas.md` | `05_comparative/00_paradigms/05_language_semantic_model_matrix.md` | `ex:entails` | `ex:entails` | existing-semantic | 1.00 |
-| `_:rel53` | `01_foundation/00_start/01_pl_prerequisites.md` | `02_intermediate/00_traits/01_traits.md` | `ex:entails` | `ex:entails` | atlas-semantic | 0.95 |
-| `_:rel54` | `01_foundation/00_start/01_pl_prerequisites.md` | `02_intermediate/01_generics/01_generics.md` | `ex:entails` | `ex:entails` | atlas-semantic | 0.95 |
-| `_:rel55` | `01_foundation/00_start/02_zero_cost_abstractions.md` | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
-| `_:rel56` | `01_foundation/00_start/02_zero_cost_abstractions.md` | `02_intermediate/01_generics/01_generics.md` | `ex:dependsOn` | `ex:dependsOn` | atlas-semantic | 0.95 |
-| `_:rel57` | `01_foundation/00_start/02_zero_cost_abstractions.md` | `02_intermediate/00_traits/01_traits.md` | `ex:dependsOn` | `ex:dependsOn` | atlas-semantic | 0.95 |
-| `_:rel58` | `01_foundation/00_start/02_zero_cost_abstractions.md` | `05_comparative/01_systems_languages/01_rust_vs_cpp.md` | `ex:entails` | `ex:entails` | atlas-semantic | 0.95 |
-| `_:rel59` | `01_foundation/00_start/02_zero_cost_abstractions.md` | `06_ecosystem/00_toolchain/01_toolchain.md` | `ex:entails` | `ex:entails` | atlas-semantic | 0.95 |
-| `_:rel60` | `01_foundation/00_start/03_closure_basics.md` | `02_intermediate/00_traits/01_traits.md` | `ex:dependsOn` | `ex:dependsOn` | atlas-semantic | 0.95 |
+| `_:rel53` | `00_meta/knowledge_topology/kg_ontology_v2.md` | `00_meta/00_framework/semantic_space.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel54` | `00_meta/knowledge_topology/kg_ontology_v2.md` | `00_meta/00_framework/methodology.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel55` | `00_meta/knowledge_topology/kg_ontology_v2.md` | `00_meta/02_sources/01_authority_source_map.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel56` | `00_meta/knowledge_topology/kg_ontology_v2.md` | `00_meta/01_terminology/01_terminology_glossary.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel57` | `01_foundation/00_start/01_pl_prerequisites.md` | `02_intermediate/00_traits/01_traits.md` | `ex:entails` | `ex:entails` | atlas-semantic | 0.95 |
+| `_:rel58` | `01_foundation/00_start/01_pl_prerequisites.md` | `02_intermediate/01_generics/01_generics.md` | `ex:entails` | `ex:entails` | atlas-semantic | 0.95 |
+| `_:rel59` | `01_foundation/00_start/02_zero_cost_abstractions.md` | `01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | `ex:dependsOn` | `ex:dependsOn` | existing-semantic | 1.00 |
+| `_:rel60` | `01_foundation/00_start/02_zero_cost_abstractions.md` | `02_intermediate/01_generics/01_generics.md` | `ex:dependsOn` | `ex:dependsOn` | atlas-semantic | 0.95 |
 
 ## 5. 结论
 
-⚠️ 处理批次内仍有 924 条通用谓词（低于阈值 0 条），需进一步处理。
+⚠️ 处理批次内仍有 926 条通用谓词（低于阈值 0 条），需进一步处理。
 
 ## 6. 机器可读
 

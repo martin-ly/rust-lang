@@ -35,6 +35,7 @@
 - v1.4 (2026-08-03): 提升为 L6 权威页；Bloom 层级统一为 L6；Rust 版本对齐 1.97.1+；补全 `matches!`、`vec![value; n]`、`collect()`、扩展 trait（extension trait）、默认 trait 方法、类型驱动设计等惯用法；将 RAII/Scopeguard 小节改为链接到 `34_ownership_as_resource_management.md` 与 `35_scope_guard_and_deferred_cleanup.md`；补充国际化权威来源链接。
 - v1.5 (2026-08-03): 补全 Builder 模式、零成本抽象、算法惯用法三个小节；权威来源索引拆分为 P1 学术/形式化来源与 P2 生态/官方/社区来源；全量 L0-L6 小节标题补齐。
 - v1.6 (2026-08-04): P5 批次语义空间梳理——新增 `TryFrom/TryInto`、`as_ref`/`unwrap_or_else`/`map_err` 组合子微惯用法、FFI 惯用法三节；新增「概念-属性-关系-示例-反例（CARE）总表」；更新主 mindmap 与接口级 mindmap；补充 P0/P1/P2 权威来源与相关概念链接。
+- v1.7 (2026-08-04): P7 WS-A 惯用法语义完备化——新增「错误处理惯用法」「集合惯用法」「宏惯用法」「FFI/C-API 惯用法」四节；补充对应思维导图、决策树、语义矩阵与反例；更新 CARE 总表与目录导航；对齐 Rust API Guidelines + Rust Design Patterns Idioms。
 
 ---
 
@@ -95,6 +96,9 @@
     - [7.6 Iterator 高级适配器](#76-iterator-高级适配器)
     - [7.7 `try_fold` 错误短路累加](#77-try_fold-错误短路累加)
     - [7.8 算法惯用法](#78-算法惯用法)
+    - [7.9 错误处理惯用法：`Result` 类型设计与 `?` 传播](#79-错误处理惯用法result-类型设计与--传播)
+    - [7.10 集合惯用法：`entry`、`retain`、容量预分配与选型](#710-集合惯用法entryretain容量预分配与选型)
+    - [7.11 宏惯用法：声明宏卫生性与过程宏边界](#711-宏惯用法声明宏卫生性与过程宏边界)
   - [八、L5 并发级惯用法](#八l5-并发级惯用法)
     - [8.1 Send/Sync 边界显式化](#81-sendsync-边界显式化)
     - [8.2 Actor mailbox 单线程处理](#82-actor-mailbox-单线程处理)
@@ -109,6 +113,7 @@
     - [9.4 错误内核模式](#94-错误内核模式)
     - [9.5 `no_std` / 裸机惯用法](#95-no_std--裸机惯用法)
     - [9.6 FFI 惯用法](#96-ffi-惯用法)
+    - [9.7 FFI/C-API 惯用法：暴露与消费 C ABI 的契约](#97-ffic-api-惯用法暴露与消费-c-abi-的契约)
   - [十、反惯用法](#十反惯用法)
     - [常见反惯用清单](#常见反惯用清单)
   - [十一、Rust 1.95 新惯用法](#十一rust-195-新惯用法)
@@ -125,8 +130,9 @@
   - [十五、惯用法选择的认知路径](#十五惯用法选择的认知路径)
   - [十六、惯用法与 23/43 模式模型衔接](#十六惯用法与-2343-模式模型衔接)
   - [权威来源索引](#权威来源索引)
+    - [P0 — Rust 官方 / 一级权威来源](#p0--rust-官方--一级权威来源)
     - [P1 — 学术 / 形式化来源](#p1--学术--形式化来源)
-    - [P2 — 生态 / 官方 / 社区来源](#p2--生态--官方--社区来源)
+    - [P2 — 生态 / 社区 / 第三方来源](#p2--生态--社区--第三方来源)
   - [十、边界测试：惯用法谱系的编译错误](#十边界测试惯用法谱系的编译错误)
     - [10.1 边界测试：`unwrap` 的滥用（运行时 panic）](#101-边界测试unwrap-的滥用运行时-panic)
     - [10.2 边界测试：`clone` 的隐式成本（逻辑错误）](#102-边界测试clone-的隐式成本逻辑错误)
@@ -2155,6 +2161,381 @@ mindmap
 
 > **扩展阅读**: 经典数据结构（并查集、线段树、Fenwick 树）的 Rust 所有权感知实现见 [`concept/06_ecosystem/16_algorithm_patterns/02_ownership_aware_data_structures.md`](../16_algorithm_patterns/02_ownership_aware_data_structures.md)；图算法（BFS/DFS/Dijkstra/Bellman-Ford）的借用纪律与并行 frontier 见 [`03_graph_algorithms_in_rust.md`](../16_algorithm_patterns/03_graph_algorithms_in_rust.md)；缓存友好与 SIMD 优化见 [`04_cache_friendly_and_simd_algorithms.md`](../16_algorithm_patterns/04_cache_friendly_and_simd_algorithms.md)。
 
+### 7.9 错误处理惯用法：`Result` 类型设计与 `?` 传播
+
+> **EN**: Error-Handling Idioms: `Result` Type Design and `?` Propagation
+> **Summary**: Align Rust API Guidelines and Rust Design Patterns for designing library errors (`std::error::Error`, causal chains) and idiomatic propagation with `?`, `From`, and `Result` aliases.
+
+> 来源: [Rust API Guidelines — Errors](https://rust-lang.github.io/api-guidelines/interoperability.html#c-good-err) · [Rust Design Patterns — Error Handling](https://rust-unofficial.github.io/patterns/idioms/error-handling.html) · [TRPL §9](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
+> **权威来源**: 本小节为 `concept/` 权威页 `02_idioms_spectrum.md` 的组成部分。
+
+**概念与属性**
+
+与 [7.5 节「错误处理全谱」](#75-错误处理全谱) 关注组合子分层不同，本节聚焦**面向 API 设计的错误类型契约**：
+
+- 库的错误类型必须实现 `std::error::Error`（C-ERROR），以便调用方通过 `Error::source()` 遍历因果链。
+- 实现 `Display` 面向终端用户，`Debug` 面向程序员；二者语义分离。
+- 为 `Result<T, MyError>` 定义类型别名，减少重复、统一传播。
+- 利用 `From` + `?` 把底层错误向上转换；必要时用 `map_err` 添加领域上下文，但不应丢失原始错误。
+- 绝不 panic 在输入校验、IO、解析等可恢复失败场景。
+
+**选型矩阵**：
+
+| 场景 | 错误类型 | 关键 trait / 工具 | 理由 |
+|:---|:---|:---|:---|
+| 库公共 API | 自定义 `enum MyError` | `Error`, `Display`, `Debug`, `From` | 调用方需要区分错误种类 |
+| 库内部快速传播 | `Result<T, MyError>` 别名 | `?` + `From` | 减少样板 |
+| 应用/二进制 | `anyhow::Result<T>` | `Context` | 关注人类可读上下文 |
+| 嵌套错误转换 | `map_err` / `#[from]` | 保留因果链 | 不丢失根因 |
+
+**正例**：
+
+```rust
+use std::error::Error;
+use std::fmt;
+use std::io;
+
+#[derive(Debug)]
+enum ConfigError {
+    MissingKey(&'static str),
+    Parse { key: &'static str, source: std::num::ParseIntError },
+    Io { path: String, source: io::Error },
+}
+
+impl fmt::Display for ConfigError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            ConfigError::MissingKey(k) => write!(f, "missing config key: {k}"),
+            ConfigError::Parse { key, .. } => write!(f, "failed to parse {key}"),
+            ConfigError::Io { path, .. } => write!(f, "I/O error reading {path}"),
+        }
+    }
+}
+
+impl Error for ConfigError {
+    fn source(&self) -> Option<&(dyn Error + 'static)> {
+        match self {
+            ConfigError::Parse { source, .. } => Some(source),
+            ConfigError::Io { source, .. } => Some(source),
+            _ => None,
+        }
+    }
+}
+
+impl From<io::Error> for ConfigError {
+    fn from(e: io::Error) -> Self {
+        ConfigError::Io { path: "unknown".into(), source: e }
+    }
+}
+
+type Result<T> = std::result::Result<T, ConfigError>;
+
+fn read_timeout() -> Result<u64> {
+    // ? uses From<io::Error>
+    let s = std::fs::read_to_string("app.conf")?;
+    let ms = s.trim().parse::<u64>()
+        .map_err(|e| ConfigError::Parse { key: "timeout", source: e })?;
+    Ok(ms)
+}
+
+fn main() {
+    let err = read_timeout().unwrap_err();
+    println!("{err}");
+    if let Some(src) = err.source() {
+        println!("caused by: {src}");
+    }
+}
+```
+
+**反例/陷阱**：
+
+```rust,compile_fail
+#[derive(Debug)]
+enum BadError { Parse(std::num::ParseIntError) }
+
+fn bad() -> Result<u64, BadError> {
+    // 陷阱：未实现 From<ParseIntError> / std::error::Error，
+    // 调用方无法通过 ? 自动转换，也破坏了因果链集成。
+    let n: u64 = "x".parse()?;
+    Ok(n)
+}
+```
+
+```rust,should_panic
+// 反惯用：库 API 在可恢复失败场景 panic
+fn parse_or_panic(s: &str) -> u64 {
+    s.parse().expect("parse failed")
+}
+
+fn main() {
+    parse_or_panic("not-a-number");
+}
+```
+
+**决策树**：
+
+```mermaid
+graph TD
+    A[函数可能失败?] -->|否| B[返回 T]
+    A -->|是| C[调用方需要区分错误种类?]
+    C -->|是| D[自定义 Error enum + impl std::error::Error]
+    C -->|否| E[应用代码?]
+    E -->|是| F[anyhow/eyre + Context]
+    E -->|否| G[轻量 String / Box<dyn Error>]
+    D --> H{需要转换底层错误?}
+    H -->|From 可自动| I[用 ? 传播]
+    H -->|需要添加领域上下文| J[map_err 保留 source]
+```
+
+**思维导图**：
+
+```mermaid
+mindmap
+  root((错误处理惯用法))
+    ErrorTrait[impl std::error::Error]
+    Source[Error::source 因果链]
+    DisplayDebug[Display / Debug 语义分离]
+    ResultAlias[Result<T> 别名]
+    FromQ[From + ? 传播]
+    MapErr[map_err 保留 source]
+```
+
+> **相关链接**: [L2 Rust 错误处理惯用法](../../02_intermediate/03_error_handling/05_error_idioms.md) · [Rust API Guidelines 惯用法语义映射](48_api_guidelines_idioms.md)
+
+---
+
+### 7.10 集合惯用法：`entry`、`retain`、容量预分配与选型
+
+> **EN**: Collection Idioms: `entry`, `retain`, Capacity Pre-Allocation, and Selection
+> **Summary**: Use `entry`, `retain`, `with_capacity`, `windows`, `chunks`, and the right std collection to write idiomatic, allocation-aware Rust.
+
+> 来源: [Rust std collections](https://doc.rust-lang.org/std/collections/index.html) · [Rust API Guidelines — C-COLLECTOR](https://rust-lang.github.io/api-guidelines/interoperability.html#c-collector) · [Rust Design Patterns — Collections](https://rust-unofficial.github.io/patterns/idioms/)
+> **权威来源**: 本小节为 `concept/` 权威页 `02_idioms_spectrum.md` 的组成部分。
+
+**概念与属性**
+
+Rust 标准库集合的惯用法核心：**避免重复查找、避免过度分配、选择语义匹配的容器**。
+
+- `entry(key).or_insert(v)`：一次查找即可完成「存在则取，不存在则插入」。
+- `retain(|x| ...)`：原地过滤，比 `filter + collect` 更节省。
+- `Vec::with_capacity(n)` / `HashMap::with_capacity(n)`：已知大小时预分配，减少重新分配。
+- `windows` / `chunks`：无需手动索引即可产生子视图。
+- `extend(iter)` / `collect()`：利用 `FromIterator` 统一构造集合。
+- 选择 `BTreeMap` 当需要有序/范围查询；`HashMap` 当仅需 O(1) 查找；`VecDeque` 当需要双端队列；`BinaryHeap` 当需要优先队列。
+
+**选型矩阵**：
+
+| 需求 | 首选 | 次选/备注 |
+|:---|:---|:---|
+| 按键快速查找 | `HashMap` | `BTreeMap` 提供有序性 |
+| 有序范围遍历 | `BTreeMap` / `BTreeSet` | `Vec`+sort 适用于静态数据 |
+| 双端队列 | `VecDeque` | `Vec` 头部插入为 O(n) |
+| 优先队列 | `BinaryHeap` | 按 `Ord` 取最大值 |
+| 去重且无序 | `HashSet` | `BTreeSet` 提供有序性 |
+| 滑动窗口子视图 | `Vec::windows` | 返回 `&[T]`，零拷贝 |
+
+**正例**：
+
+```rust
+use std::collections::{HashMap, HashSet, VecDeque};
+
+fn count_words(text: &str) -> HashMap<String, usize> {
+    let mut freq = HashMap::with_capacity(64);
+    for word in text.split_whitespace() {
+        *freq.entry(word.to_lowercase()).or_insert(0) += 1;
+    }
+    freq
+}
+
+fn dedup_in_place(nums: &mut Vec<i32>) {
+    nums.sort_unstable();
+    nums.dedup(); // 要求先排序
+}
+
+fn bfs_neighbors(start: i32, adj: &HashMap<i32, Vec<i32>>) -> Vec<i32> {
+    let mut seen = HashSet::new();
+    let mut q = VecDeque::new();
+    q.push_back(start);
+    seen.insert(start);
+    while let Some(v) = q.pop_front() {
+        for &n in adj.get(&v).unwrap_or(&Vec::new()) {
+            if seen.insert(n) { q.push_back(n); }
+        }
+    }
+    seen.into_iter().collect()
+}
+
+fn main() {
+    let mut v = vec![3, 1, 2, 1, 3];
+    dedup_in_place(&mut v);
+    assert_eq!(v, vec![1, 2, 3]);
+
+    let freq = count_words("hello world hello");
+    assert_eq!(freq.get("hello"), Some(&2));
+
+    let adj = HashMap::from([(0, vec![1, 2]), (1, vec![2]), (2, vec![])]);
+    assert_eq!(bfs_neighbors(0, &adj).len(), 3);
+}
+```
+
+**反例/陷阱**：
+
+```rust,ignore
+fn bad_count(text: &str) -> HashMap<String, usize> {
+    let mut freq = HashMap::new();
+    for word in text.split_whitespace() {
+        let key = word.to_lowercase();
+        if !freq.contains_key(&key) {
+            freq.insert(key.clone(), 0); // 重复查找 + 多余 clone
+        }
+        *freq.get_mut(&key).unwrap() += 1;
+    }
+    freq
+}
+```
+
+> 陷阱：对同一键执行 `contains_key` → `insert` → `get_mut` 是三次查找；应改用 `entry` 一次完成。
+
+**决策树**：
+
+```mermaid
+graph TD
+    A[需要存储一组值?] --> B{需要按键查找?}
+    B -->|是| C{是否需要有序?}
+    C -->|是| D[BTreeMap / BTreeSet]
+    C -->|否| E[HashMap / HashSet]
+    B -->|否| F{主要在尾部追加?}
+    F -->|是| G[Vec]
+    F -->|否| H{双端操作?}
+    H -->|是| I[VecDeque]
+    H -->|否| J{需要按优先级取?}
+    J -->|是| K[BinaryHeap]
+    J -->|否| L[重新建模问题]
+    A --> M{已知元素数量?}
+    M -->|是| N[with_capacity 预分配]
+```
+
+**思维导图**：
+
+```mermaid
+mindmap
+  root((集合惯用法))
+    entry[entry.or_insert 单次查找插入]
+    retain[retain 原地过滤]
+    capacity[with_capacity 预分配]
+    windows[windows/chunks 零拷贝子视图]
+    choose[按语义选容器]
+```
+
+> **相关链接**: [L1 迭代器惯用法](../../01_foundation/05_collections/03_iterator_idioms.md) · [L1 集合高级分析](../../01_foundation/05_collections/02_collections_advanced.md)
+
+---
+
+### 7.11 宏惯用法：声明宏卫生性与过程宏边界
+
+> **EN**: Macro Idioms: Declarative Macro Hygiene and Procedural Macro Boundaries
+> **Summary**: Write `macro_rules!` that compose with the rest of the type system through `tt`/repetition hygiene, and keep procedural macros thin, well-spanned, and testable.
+
+> 来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html) · [Rust Design Patterns — Macros](https://rust-unofficial.github.io/patterns/idioms/macros.html) · [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/index.html)
+> **权威来源**: 本小节为 `concept/` 权威页 `02_idioms_spectrum.md` 的组成部分。
+
+**概念与属性**
+
+宏是编译期代码生成，惯用法关键是**卫生性**、**可组合性**、**错误信息友好**：
+
+- 声明宏优先使用 `tt` / `ident` / `path` 片段，避免 `expr` / `stmt` 除非必要（减少意外求值与解析歧义）。
+- 用 `$($x:tt),*`（逗号分隔）或 `$($x:tt);*`（分号分隔）显式指定分隔符，避免重复模式歧义。
+- 在宏内部引入临时变量时依赖 hygiene，不要在调用方作用域泄漏私有名称。
+- 用 `compile_error!` 在宏展开时报出清晰错误。
+- 过程宏保持「薄壳」：解析与代码生成分离（`syn` parse + `quote!` emit），错误 span 指向用户源码。
+- 过程宏的测试：把核心逻辑抽到普通 crate，过程宏 crate 只做 `TokenStream` 转换。
+
+**正例**：
+
+```rust
+// 惯用：声明宏用 tt 片段，支持任意表达式而不多次求值
+macro_rules! ensure {
+    ($cond:expr, $fmt:literal $($arg:tt)*) => {
+        if !$cond {
+            return Err(format!($fmt $($arg)*));
+        }
+    };
+}
+
+macro_rules! seq {
+    ($name:ident; $start:expr, $end:expr) => {
+        {
+            let mut $name = Vec::new();
+            for i in $start..$end {
+                $name.push(i);
+            }
+            $name
+        }
+    };
+}
+
+fn demo() -> Result<(), String> {
+    ensure!(1 + 1 == 2, "math broken");
+    let xs = seq!(xs; 0, 3);
+    assert_eq!(xs, vec![0, 1, 2]);
+    Ok(())
+}
+
+fn main() {
+    demo().unwrap();
+}
+```
+
+**反例/陷阱**：
+
+```rust,compile_fail
+// 陷阱：宏引入的标识符受卫生性保护，不会泄漏到调用方作用域
+macro_rules! let_x { () => { let x = 1; }; }
+
+fn main() {
+    let_x!();
+    println!("{}", x); // 编译错误：x 不在作用域
+}
+```
+
+```rust,ignore
+// 陷阱：过程宏把解析与业务逻辑混在一起，导致错误 span 差、难以测试
+// 非惯用：在 proc macro crate 中直接手写字符串拼接生成代码
+// 惯用：syn 解析 -> 普通 crate 处理逻辑 -> quote! 生成
+```
+
+**决策树**：
+
+```mermaid
+graph TD
+    A[需要代码生成?] --> B{生成模式是否固定且简短?}
+    B -->|是| C[声明宏 macro_rules!]
+    B -->|否| D[过程宏 proc macro]
+    C --> E{需要匹配复杂语法?}
+    E -->|是| F[用 tt-munching 或专用片段]
+    E -->|否| G[简单重复模式]
+    D --> H{需要派生/属性/函数式?}
+    H -->|派生| I[derive macro]
+    H -->|属性| J[attribute macro]
+    H -->|函数式| K[function-like proc macro]
+    D --> L[用 syn/quote 并保持核心逻辑可测试]
+```
+
+**思维导图**：
+
+```mermaid
+mindmap
+  root((宏惯用法))
+    tt[tt 片段 提高组合性]
+    repetition[显式分隔符重复]
+    hygiene[卫生性 不泄漏名称]
+    compile_error[compile_error! 清晰报错]
+    proc_macro[过程宏薄壳 syn/quote]
+    span[良好 span 指向用户源码]
+```
+
+> **相关链接**: [L1 属性与声明宏](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) · [L3 过程宏](../../03_advanced/03_proc_macros/01_macros.md)
+
 ---
 
 ## 八、L5 并发级惯用法
@@ -2707,6 +3088,130 @@ graph TD
     D --> J[封装为 safe API 并写 SAFETY 注释]
 ```
 
+### 9.7 FFI/C-API 惯用法：暴露与消费 C ABI 的契约
+
+> **EN**: FFI/C-API Idioms: Contracts for Exposing and Consuming C ABIs
+> **Summary**: Align Rust API Guidelines FFI chapter and Rust Design Patterns to safely consume C libraries and expose Rust objects to C through opaque types, ownership transfer, and panic boundaries.
+
+> 来源: [Rust API Guidelines — FFI](https://rust-lang.github.io/api-guidelines/ffi.html) · [Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) · [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/) · [Rust Reference — unsafe extern blocks](https://doc.rust-lang.org/reference/items/external-blocks.html)
+> **权威来源**: 本小节为 `concept/` 权威页 `02_idioms_spectrum.md` 的组成部分。
+
+**概念与属性**
+
+FFI/C-API 惯用法把跨语言边界视为**严格的所有权与生命周期契约**：
+
+- **opaque 类型**：向 C 暴露 Rust 对象时，只导出 `*mut Foo` 或 `*const Foo`，不暴露字段布局；`Foo` 在 Rust 侧为普通 struct，通过不透明指针维护抽象。
+- **所有权转移方向**：`Box::into_raw` 把所有权交给 C；C 调用 `foo_free` 后 Rust 用 `Box::from_raw` 收回并 drop。借用给 C 时返回原始指针，但生命周期由 Rust 调用者保证。
+- **析构函数**：每个 `into_raw` 对应一个 `extern "C" fn foo_free(*mut Foo)`，避免 C 侧手动释放内存。
+- **panic 边界**：`extern "C"` 函数内部必须 catch panic（跨 FFI unwinding 是 UB），通常用 `std::panic::catch_unwind` 封装，或保证不 panic。
+- **ABI 兼容**：传入/传出结构体使用 `#[repr(C)]`；字符串使用 `CStr` / `CString` 进行编码转换；不要直接传递 `String` / `&str` / `Vec`。
+- **Edition 2024**：`unsafe extern blocks` 要求显式 `unsafe`；`#[unsafe(no_mangle)]` 替代旧的 `#[no_mangle]`。
+
+**Rust → C / C → Rust 语义矩阵**：
+
+| 方向 | 数据形态 | 惯用转换 | 所有权 |
+|:---|:---|:---|:---|
+| Rust → C 拥有 | `Box<T>` | `Box::into_raw` | C 负责调用 free |
+| Rust → C 借用 | `&T` / `&mut T` | `.as_ptr()` / `.as_mut_ptr()` | Rust 保留，C 仅在调用期间有效 |
+| C → Rust 拥有 | `*mut T` | `Box::from_raw`（或 unsafe 封装） | Rust 获得并 drop |
+| C → Rust 借用 | `*const T` + len | `std::slice::from_raw_parts` | 调用期间有效，不获取所有权 |
+| 字符串 Rust → C | `CString` | `.into_raw()` | C 负责释放或按协议处理 |
+| 字符串 C → Rust | `*const c_char` | `CStr::from_ptr` → `.to_str()?` / `.to_string_lossy()` | 复制后 Rust 拥有 |
+
+**正例**：
+
+```rust
+use std::ffi::{c_char, CStr, CString};
+
+/// 不透明类型：C 只拿到指针，看不到布局。
+pub struct LogConfig { level: u8, tag: String }
+
+/// 构造函数：转移所有权给 C。
+/// # Safety
+/// Caller receives ownership and must call `log_config_free`.
+#[unsafe(no_mangle)]
+pub extern "C" fn log_config_new(level: u8, tag: *const c_char) -> *mut LogConfig {
+    let tag = unsafe { CStr::from_ptr(tag) }
+        .to_string_lossy()
+        .into_owned();
+    Box::into_raw(Box::new(LogConfig { level, tag }))
+}
+
+/// 析构函数：C 归还所有权。
+/// # Safety
+/// `ptr` must be obtained from `log_config_new` and not already freed.
+#[unsafe(no_mangle)]
+pub extern "C" fn log_config_free(ptr: *mut LogConfig) {
+    if !ptr.is_null() {
+        let _ = unsafe { Box::from_raw(ptr) };
+    }
+}
+
+fn main() {
+    let tag = CString::new("engine").unwrap();
+    let cfg = log_config_new(2, tag.as_ptr());
+    assert!(!cfg.is_null());
+    log_config_free(cfg);
+}
+```
+
+**反例/陷阱**：
+
+```rust,compile_fail
+#![deny(improper_ctypes_definitions)]
+
+#[repr(C)]
+pub struct Bad {
+    name: String, // 陷阱：String 不是 C 兼容布局
+    data: Vec<u8>,
+}
+
+#[unsafe(no_mangle)]
+pub extern "C" fn give_bad() -> Bad {
+    Bad { name: "x".into(), data: vec![] }
+}
+```
+
+```rust,ignore
+// 陷阱：extern "C" 函数内部 panic 并跨越 FFI 边界 unwinding，属于未定义行为。
+#[unsafe(no_mangle)]
+pub extern "C" fn may_panic() {
+    panic!("crossing FFI boundary");
+}
+```
+
+**决策树**：
+
+```mermaid
+graph TD
+    A[需要跨语言边界?] --> B{方向?}
+    B -->|消费 C 库| C[bindgen / 手写 unsafe extern block]
+    B -->|暴露 Rust 给 C| D[#[repr(C)] 类型 + #[no_mangle] extern "C"]
+    D --> E{是否转移所有权?}
+    E -->|是| F[Box::into_raw + 配套 free 函数]
+    E -->|否| G[返回 *const T 并文档化生命周期]
+    C --> H{传递复杂类型?}
+    H -->|是| I[#[repr(C)] 定义镜像类型]
+    H -->|否| J[标量/原始指针]
+    A --> K{函数可能 panic?}
+    K -->|是| L[catch_unwind 或 redesign]
+```
+
+**思维导图**：
+
+```mermaid
+mindmap
+  root((FFI/C-API 惯用法))
+    opaque[opaque 类型 *mut T]
+    ownership[Box::into_raw / from_raw 所有权转移]
+    free[配套 free 析构函数]
+    panic[catch_unwind panic 边界]
+    repr_c[#[repr(C)] 布局兼容]
+    cstring[CString / CStr 字符串转换]
+```
+
+> **相关链接**: [L3 Rust FFI](../../03_advanced/04_ffi/01_rust_ffi.md) · [L3 FFI 模式](../../03_advanced/04_ffi/07_ffi_patterns.md) · [Rust API Guidelines 惯用法语义映射](48_api_guidelines_idioms.md)
+
 ---
 
 ## 十、反惯用法
@@ -2883,6 +3388,10 @@ quadrantChart
 | ECS Archetype | 数据与行为分离；缓存友好 | 与数据导向设计、系统图配合 | `Query<(&mut Position, &Velocity)>` | 面向对象实体继承层次 |
 | `no_std` / 裸机 | 显式分配器/panic 处理 | 与 FFI、unsafe、中断临界区配合 | `#[global_allocator]` + `#[panic_handler]` | 在裸机代码中直接使用 `std` |
 | FFI 惯用法 | `extern "C"` / `#[repr(C)]` / 安全封装 | 与 unsafe、原始指针、`MaybeUninit` 配合 | `safe_compute_sum(data: &[i32])` | 跨 FFI 返回内部引用且无生命周期说明 |
+| 错误处理惯用法 | `std::error::Error` / `Error::source` / `?` | 与 `From`/`map_err`/`Result` 别名配合 | `read_timeout() -> Result<u64>` | 库 API 对可恢复失败 panic |
+| 集合惯用法 | `entry` / `retain` / `with_capacity` / 选型 | 与 `Iterator`、`FromIterator` 配合 | `freq.entry(k).or_insert(0)` | 同一键多次查找、忽略容量预分配 |
+| 宏惯用法 | `tt` 片段 / 卫生性 / `compile_error!` | 与 `macro_rules!`、proc macro 配合 | `ensure!($cond, $fmt ...)` | 宏参数多次求值、过程宏混杂解析逻辑 |
+| FFI/C-API 惯用法 | opaque 类型 / `Box::into_raw` / panic 边界 | 与 `CString`/`CStr`、`#[repr(C)]` 配合 | `log_config_new` + `log_config_free` | 跨 FFI 传递 `String`/`Vec`、panic 越界 |
 
 > **认知功能**: 此表提供**五维知识卡片**，把每个惯用法从「是什么」「能做什么」「与谁配合」「怎么用」「别怎么用」五个角度固化。建议在复习或面试准备时将其作为速查表，在代码评审时作为反模式检查清单。
 

@@ -50,6 +50,8 @@ python -m venv .venv
   邻接表、路径遍历），不依赖 numpy / sentence-transformers。
 - `kg_rag.py` — 向量索引与混合检索。缓存键包含 KG 文件 mtime 与实体数，
   KG 重新生成后自动重建索引。
+- `llm_semantic_retriever.py` — 面向 LLM 的语义检索器（P7 新增）。支持
+  SKOS 实体链接、谓词约束多跳扩展、RDF-star 来源引用与可选的向量混合召回。
 - `smoke_test.py` — 可复跑冒烟测试（2026-07-12 新增）：
 
 ```bash

@@ -77,6 +77,12 @@ mindmap
   - [五之一、const fn 中的浮点运算](#五之一const-fn-中的浮点运算)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
+    - [Rust 1.98.0 详解：`float_algebraic` 运算](#rust-1980-详解float_algebraic-运算)
+      - [代码示例](#代码示例)
+      - [语义影响](#语义影响)
+      - [迁移注意](#迁移注意)
+    - [Rust 1.98.0 详解：`NonZero<T>::from_str_radix`](#rust-1980-详解nonzerotfrom_str_radix)
+      - [迁移注意](#迁移注意-1)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
   - [十二、边界测试：数值类型的编译错误](#十二边界测试数值类型的编译错误)
@@ -651,6 +657,51 @@ const fn is_nan_const(x: f64) -> bool {
   - `f32`/`f64` `add_algebraic` / `sub_algebraic` / `mul_algebraic` / `div_algebraic`（`float_algebraic`）
   - `int_format_into`
   - `Box::as_ptr` / `Box::as_mut_ptr`（虽在 `Box<T>` 上，但常用于 unsafe/FFI 数值缓冲场景）
+
+### Rust 1.98.0 详解：`float_algebraic` 运算
+
+浮点运算的严格 IEEE-754 语义在某些高性能场景下限制了优化空间。Rust 1.98.0 在 `f32`/`f64` 上稳定 `algebraic_add` / `algebraic_sub` / `algebraic_mul` / `algebraic_div` / `algebraic_rem`（[PR #157029](https://github.com/rust-lang/rust/pull/157029) · [#157864](https://github.com/rust-lang/rust/issues/157864)），允许编译器将运算当作代数运算进行重排和优化（如利用结合律做向量化），同时保留 NaN/无穷大等边界行为的基本契约。
+
+#### 代码示例
+
+```rust,ignore
+fn sum(arr: &[f32]) -> f32 {
+    arr.iter().copied().fold(0.0f32, |a, b| a.add_algebraic(b))
+}
+```
+
+#### 语义影响
+
+- 编译器可在这些调用点进行更激进的浮点优化，可能改变中间舍入顺序。
+- 结果仍满足数学关系，但可能与传统 `a + b` 的逐位结果不同。
+- 在 `const fn` 上下文中也可用。
+
+#### 迁移注意
+
+- 仅在性能关键且可接受非确定性舍入顺序的场景使用。
+- 不要用于需要按位一致或严格 IEEE 结果的场景（如序列化、加密校验和、确定性仿真）。
+
+### Rust 1.98.0 详解：`NonZero<T>::from_str_radix`
+
+`NonZeroU32`、`NonZeroI64` 等非零整数类型此前缺少按 radix 解析的构造函数。Rust 1.98.0 为所有 `NonZero*` 类型稳定 `from_str_radix`（[#152193](https://github.com/rust-lang/rust/issues/152193) · [#157847](https://github.com/rust-lang/rust/issues/157847)），返回 `Result<Self, ParseIntError>`；零值会作为解析错误返回。
+
+```rust,ignore
+use std::num::NonZeroU32;
+
+fn main() {
+    let n = NonZeroU32::from_str_radix("1a", 16).unwrap();
+    assert_eq!(n.get(), 26);
+
+    let zero = NonZeroU32::from_str_radix("0", 10);
+    assert!(zero.is_err());
+}
+```
+
+#### 迁移注意
+
+- 替换 `NonZero::new(s.parse()?)?` 模式为 `NonZeroU32::from_str_radix(s, 10)?`。
+- 错误类型与 `parse::<u32>()` 一致，便于统一处理。
+- 完整分析见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md) §3.8 / §3.9。
 
 ## 相关概念
 

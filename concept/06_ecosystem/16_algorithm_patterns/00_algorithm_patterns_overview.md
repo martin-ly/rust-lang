@@ -301,7 +301,147 @@ fn top_k(nums: &[i32], k: usize) -> Vec<i32> {
 
 ---
 
-## 四、复杂度与安全权衡
+## 四、算法语义分类学
+
+从计算语义角度，Rust 算法可按「问题结构 × 求解策略 × 执行模型」三维组织。这一分类学不引入新算法，而是为已有模式提供稳定的选型坐标系。
+
+### 4.1 按求解策略分类
+
+| 策略 | 问题特征 | Rust 惯用法 | 代表页 |
+|:---|:---|:---|:---|
+| 分治（Divide & Conquer） | 子问题独立、可合并 | `split_at_mut`、`rayon::join` | [算法范式深潜](01_algorithmic_paradigms.md) |
+| 贪心（Greedy） | 局部最优可导出全局最优 | 排序后单次扫描、`BinaryHeap` | [贪心与近似算法](05_greedy_and_approximation_algorithms.md) |
+| 动态规划（DP） | 重叠子问题、最优子结构 | `Vec` 填表、滚动数组 | [动态规划 Rust 实现](06_dynamic_programming_in_rust.md) |
+| 回溯（Backtracking） | 解空间树、约束满足 | 可变引用 + 状态恢复 | [算法范式深潜](01_algorithmic_paradigms.md) |
+| 分支限界（B&B） | 最优化搜索、上下界剪枝 | 优先队列 + 界限函数 | [算法范式深潜](01_algorithmic_paradigms.md) |
+| 随机化（Randomized） | 期望复杂度可控 | `rand`、`fastrand` | [随机化与概率算法](09_randomized_and_probabilistic_algorithms.md) |
+| 近似（Approximation） | NP-hard、可接受误差 | 贪心 + 随机舍入 | [贪心与近似算法](05_greedy_and_approximation_algorithms.md) |
+| 在线/流式（Online/Streaming） | 数据无法全部驻留 | Morris 计数器、Count-Min Sketch | [在线与流式算法](11_online_and_streaming_algorithms.md) |
+
+> **来源**: [CLRS 2022](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/) · [Kleinberg & Tardos — Algorithm Design](https://www.cs.princeton.edu/~wayne/kleinberg-tardos/)
+
+### 4.2 按执行模型分类
+
+| 执行模型 | 内存假设 | Rust 抽象 | 复杂度关注点 |
+|:---|:---|:---|:---|
+| 顺序（Sequential） | 全量数据在 RAM | `Iterator`、`&[T]` | 时间、辅助空间 |
+| 并行（Parallel） | 共享内存多核 | `rayon`、`crossbeam` | span、work、调度开销 |
+| 并发（Concurrent） | 共享状态、消息传递 | `std::sync`、`tokio` | 竞争、饥饿、活性 |
+| 流式（Streaming） | 单遍或有限遍扫描 | `Iterator`、固定大小 sketch | 每元素空间、更新/查询时间 |
+| 缓存无关（Cache-Oblivious） | 多层缓存层次未知 | 顺序 `Vec`、分块递归 | I/O 复杂度 |
+
+### 4.3 选型坐标系
+
+```mermaid
+graph TD
+    A[问题输入特征] --> B{数据是否可全部装入内存?}
+    B -->|否| C[流式 / Sketch 算法]
+    B -->|是| D{是否需要最优解?}
+    D -->|是| E{是否具备贪心选择性质?}
+    E -->|是| F[贪心]
+    E -->|否| G{是否存在重叠子问题?}
+    G -->|是| H[动态规划]
+    G -->|否| I[回溯 / 分支限界]
+    D -->|否| J[近似 / 随机化 / 启发式]
+    E --> F2[分治可作为子程序]
+```
+
+### 4.4 计算模型与 Rust 类型的对应
+
+- **全量顺序数据** → `&[T]` / `Vec<T>`：借用或拥有整段输入。
+- **流式数据** → `impl Iterator<Item = T>`：单次消费、惰性求值。
+- **动态集合** → `BinaryHeap`、`BTreeMap`、`HashMap`：摊还或最坏复杂度由类型系统封装。
+- **等价类** → `UnionFind`（索引型数组结构）。
+- **区间信息** → `SegmentTree` / `FenwickTree`（连续 `Vec` 堆式存储）。
+
+---
+
+## 五、计算等价视角
+
+同一算法思想在 Rust 中常有多种实现（迭代 vs 递归、原地 vs 复制、顺序 vs 并行）。若它们在相同输入上产生相同可观察输出且满足相同资源上界，则称这些实现**观察等价**（observationally equivalent）。
+
+### 5.1 迭代与递归的观察等价
+
+以阶乘为例：
+
+```rust
+fn factorial_iter(n: u64) -> u64 {
+    (1..=n).product()
+}
+
+fn factorial_rec(n: u64) -> u64 {
+    if n == 0 { 1 } else { n * factorial_rec(n - 1) }
+}
+
+fn main() {
+    for n in 0..=10 {
+        assert_eq!(factorial_iter(n), factorial_rec(n));
+    }
+}
+```
+
+**等价证明草图**：两者均满足不变式
+`f(k) = k!` 且最终返回 `n!`。迭代版通过累乘器维护 `acc = (i-1)!`，递归版通过调用栈展开同一数学归纳。对任意 `n ∈ u64` 且结果不溢出，二者观察等价。
+**非等价场景**：大 `n` 时递归版可能栈溢出，此时观察行为不同（panic vs 正常返回），因此**带资源约束的等价**需要额外前提。
+
+### 5.2 数据结构选择与 ADT 等价
+
+同一抽象数据类型可用不同底层结构实现：
+
+| ADT | 实现 A | 实现 B | 观察等价条件 |
+|:---|:---|:---|:---|
+| 栈 | `Vec` | `Box<Node>` 链表 | 压入/弹出序列一致；`Vec` 摊还 `O(1)`，链表严格 `O(1)` |
+| 优先队列 | `BinaryHeap` | 手写堆 | 插入 + 弹出序列的 multiset 一致 |
+| 映射 | `BTreeMap` | `HashMap` | 相同键集合与值；迭代顺序可能不同 |
+| 集合 | `Vec<bool>` | `HashSet<usize>` | 成员查询结果一致 |
+
+> 更形式化的定义见 [形式语义：算法等价](../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md) 与 [计算模型等价](../../04_formal/11_computational_models/05_equivalence_of_computational_models.md)。
+
+### 5.3 尾递归与循环的局部等价
+
+Rust 编译器**不保证**尾调用优化，但手写 `loop` 与尾递归函数在语义上可局部对应：
+
+```rust
+fn sum_loop(nums: &[i64]) -> i64 {
+    let mut acc = 0;
+    for &x in nums { acc += x; }
+    acc
+}
+
+// 逻辑等价但无 TCO 保证
+fn sum_tail_rec(nums: &[i64], acc: i64) -> i64 {
+    match nums.split_first() {
+        Some((&x, rest)) => sum_tail_rec(rest, acc + x),
+        None => acc,
+    }
+}
+
+fn main() {
+    let data = [1, 2, 3, 4, 5];
+    assert_eq!(sum_loop(&data), sum_tail_rec(&data, 0));
+}
+```
+
+**工程结论**：在 Rust 中优先使用 `loop` / `Iterator`，把尾递归视为证明工具而非运行依赖。
+
+### 5.4 正向/反向推理示例
+
+**正向推理**（从输入到输出）：
+
+1. 输入是 `&[T]` 且允许修改 → 选择 `&mut [T]` + `split_at_mut` 分治；
+2. 递归深度受 `log n` 限制 → 栈安全；
+3. 因此归并排序的 Rust 分治实现与原算法观察等价。
+
+**反向推理**（从目标反推实现）：
+
+1. 目标是 `O(1)` 额外空间排序；
+2. 归并排序需要 `O(n)` 辅助空间，不满足；
+3. 改用快速排序原地分区或堆排序；
+4. 检查借用检查器是否允许原地交换 → 是，使用 `slice::swap`。
+
+---
+
+## 六、复杂度与安全权衡
 
 | 模式 | 时间复杂度 | 空间复杂度 | 安全要点 |
 |:---|:---|:---|:---|
@@ -315,7 +455,7 @@ fn top_k(nums: &[i32], k: usize) -> Vec<i32> {
 
 ---
 
-## 五、反例与反模式
+## 七、反例与反模式
 
 ### 反例 1：递归无栈保护
 
@@ -381,7 +521,7 @@ for &x in data {
 
 ---
 
-## 六、决策树
+## 八、决策树
 
 ```mermaid
 graph TD
@@ -404,7 +544,7 @@ graph TD
 
 ---
 
-## 七、相关概念
+## 九、相关概念
 
 - [Rust 算法模式语义图谱](17_rust_algorithm_patterns_semantic_atlas.md) — L5-L6：算法模式语义空间总图、多维矩阵、决策树与跨模式关系
 - [算法与复杂度惯用法](../10_performance/03_algorithms_and_complexity_idioms.md) — L3-L6：迭代器算法、SIMD、并行迭代器与复杂度分析
@@ -420,7 +560,7 @@ graph TD
 
 ---
 
-## 八、权威来源索引
+## 十、权威来源索引
 
 - **P0 官方**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 - **P0 官方**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
@@ -440,7 +580,7 @@ graph TD
 
 ---
 
-## 九、思维导图
+## 十一、思维导图
 
 ```mermaid
 mindmap
@@ -475,13 +615,21 @@ mindmap
       HashMap/BTreeMap
       前缀和
       堆 Top-K
+    算法语义分类学
+      求解策略
+      执行模型
+      选型坐标系
+    计算等价视角
+      迭代/递归等价
+      ADT 实现等价
+      尾递归与循环
 ```
 
 > **认知功能**: 本 mindmap 从算法实现模式出发，按问题结构与 Rust 语言特性组织，帮助读者根据输入形态、所有权约束与性能目标快速选型。
 
 ---
 
-## 十、国际学术参考（P1）
+## 十二、国际学术参考（P1）
 
 > 以下来源用于将算法模式与形式化/学术文献对齐：
 >

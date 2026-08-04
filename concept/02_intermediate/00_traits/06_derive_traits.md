@@ -412,4 +412,59 @@ fn main() { println!("{:?}", Wrapper { inner: NoDebug }); }
 
 ## Rust 1.98.0 兼容性注意
 
-> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 为派生的 `StructuralPartialEq` 增加 `T: PartialEq` bound，并在同时派生 `PartialOrd` 与 `Ord` 时走快速路径。混用手动/派生实现可能暴露语义不一致。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md) 与 [1.98 beta 深度解析：StructuralPartialEq bound](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-structural-partialeq-bound)。
+### 派生 `StructuralPartialEq` 增加 `T: PartialEq` bound
+
+`#[derive(PartialEq)]` 自动实现的 `StructuralPartialEq` trait（用于 `const` 比较和结构匹配）此前对泛型参数没有 `PartialEq` bound，导致某些常量求值场景下出现不一致。Rust 1.98.0 为 derived `StructuralPartialEq` impl 增加 `T: PartialEq` bound，使其与 `PartialEq` 派生实现保持一致（[PR #156807](https://github.com/rust-lang/rust/pull/156807) · [#157865](https://github.com/rust-lang/rust/issues/157865)）。
+
+#### 代码示例
+
+```rust
+#[derive(PartialEq)]
+struct Packet<T> {
+    payload: T,
+}
+
+// 1.98 后，派生的 StructuralPartialEq 实现等价于：
+// impl<T: PartialEq> StructuralPartialEq for Packet<T> {}
+// 若 T 未实现 PartialEq，const 上下文中的结构比较会报错
+```
+
+#### 迁移注意
+
+- 若结构体/枚举有泛型字段且依赖 `StructuralPartialEq`，为相应类型参数添加 `T: PartialEq` bound。
+- 检查 `const` 上下文中的相等比较是否因此产生新的 bound 要求。
+
+### 同时派生 `PartialOrd` 与 `Ord` 时走快速路径
+
+Rust 1.98.0 优化了 `#[derive(PartialOrd)]`：当同时派生 `Ord` 时，生成的实现会直接调用 `Ord::cmp` 再比较结果，而不是走原来的 `partial_cmp` 链式比较（[PR #155598](https://github.com/rust-lang/rust/pull/155598) · [#159555](https://github.com/rust-lang/rust/issues/159555)）。
+
+#### 反例：手写 `Ord` 与派生 `PartialOrd` 语义不一致
+
+```rust,ignore
+#[derive(PartialEq, PartialOrd)]
+struct Priority(u32);
+
+impl Ord for Priority {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        // 与派生 PartialOrd 的语义不同！
+        other.0.cmp(&self.0)
+    }
+}
+
+impl Eq for Priority {}
+```
+
+1.98 前，排序可能按 `PartialOrd` 的升序；1.98 后，`PartialOrd` 内部调用 `cmp`，结果变为降序，测试会失败。
+
+#### ✅ 修正：统一派生或统一手写
+
+```rust
+#[derive(PartialEq, Eq, PartialOrd, Ord)]
+struct Priority(u32);
+```
+
+#### 迁移注意
+
+- 运行 `cargo test --workspace`，重点关注依赖 `sort`、`partial_cmp`、`cmp` 的断言。
+- 对不一致的类型，统一改为全派生或全手动实现。
+- 完整分析见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md) §1.8 / §4.1 / §5.1 与 [1.98 beta 深度解析](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-structural-partialeq-bound)。

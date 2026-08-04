@@ -55,6 +55,12 @@
     - [3.4 边界测试：C 结构体布局不匹配（编译错误 / 运行时 UB）](#34-边界测试c-结构体布局不匹配编译错误--运行时-ub)
     - [3.5 边界测试：裸指针生命周期与 FFI 边界（编译错误）](#35-边界测试裸指针生命周期与-ffi-边界编译错误)
     - [5.1 Rust 1.97 注记：`ffi::FromBytesUntilNulError` 实现 `Copy`](#51-rust-197-注记ffifrombytesuntilnulerror-实现-copy)
+    - [5.2 Rust 1.98 注记：运行时符号定义 lints](#52-rust-198-注记运行时符号定义-lints)
+      - [反例：覆盖 `memset` 导致编译失败](#反例覆盖-memset-导致编译失败)
+      - [✅ 修正：显式允许并严格匹配签名](#-修正显式允许并严格匹配签名)
+    - [5.3 Rust 1.98 注记：`c_void` 作为返回类型 lint](#53-rust-198-注记c_void-作为返回类型-lint)
+      - [反例：返回裸 `c_void`](#反例返回裸-c_void)
+      - [✅ 修正：返回 `*mut c_void` / `*const c_void`](#-修正返回-mut-c_void--const-c_void)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
   - [相关概念](#相关概念)
@@ -601,6 +607,72 @@ fn demo(e: Option<FromBytesUntilNulError>) {
 ```
 
 （rustc 1.97.0 `--edition 2024` 实测编译通过。）工程影响面小但消除了一个不一致：`from_bytes_until_nul` 是解析 C 字符串的推荐入口（比 `from_bytes_with_nul` 容忍缺失的 NUL 结尾），其错误类型现在可无损进入要求 `Copy` 的泛型（Generics）错误累加器。
+
+### 5.2 Rust 1.98 注记：运行时符号定义 lints
+
+Rust 1.98.0 新增两个 lint，用于防止 crate 意外覆盖 Rust 运行时依赖的 C 运行时符号（[PR #155521](https://github.com/rust-lang/rust/pull/155521) · [#156519](https://github.com/rust-lang/rust/issues/156519)）：
+
+- `invalid_runtime_symbol_definitions`（默认 **deny**）：直接定义与运行时冲突的符号（如 `memcmp`、`memset`、`memmove`、`strlen`）。
+- `suspicious_runtime_symbol_definitions`（默认 **warn**）：定义的符号签名/语义与运行时预期不符。
+
+#### 反例：覆盖 `memset` 导致编译失败
+
+```rust,ignore
+#[no_mangle]
+pub extern "C" fn memset(_dest: *mut u8, _c: i32, _n: usize) -> *mut u8 {
+    // 自定义 memset 会覆盖 C 运行时实现，1.98 起默认 deny
+    std::ptr::null_mut()
+}
+```
+
+1.98 前这段代码可能静默链接成功，运行时行为却未定义；1.98 起直接编译错误。
+
+#### ✅ 修正：显式允许并严格匹配签名
+
+```rust,ignore
+#[allow(invalid_runtime_symbol_definitions)]
+#[no_mangle]
+pub extern "C" fn memset(dest: *mut u8, c: i32, n: usize) -> *mut u8 {
+    // 仅在 no-std / embedded 等确实需要自定义实现时使用
+    // 必须严格匹配 libc 语义
+    libc::memset(dest, c, n)
+}
+```
+
+> **语义要点**：把链接期/运行期的 UB 风险提前到编译期捕获；no-std 项目若确实需要自定义这些符号，应显式 `#[allow(...)]` 并附说明。
+
+### 5.3 Rust 1.98 注记：`c_void` 作为返回类型 lint
+
+`core::ffi::c_void` / `std::ffi::c_void` 是不完整类型，直接作为函数返回类型会丢失类型信息并诱导 `transmute` 误用。Rust 1.98.0 引入 warn-by-default lint（[PR #156379](https://github.com/rust-lang/rust/pull/156379) · [#156853](https://github.com/rust-lang/rust/issues/156853)），建议改用具体指针类型。
+
+#### 反例：返回裸 `c_void`
+
+```rust,ignore
+use std::ffi::c_void;
+
+unsafe extern "C" {
+    // 1.98 前：合法但危险
+    // 1.98 后：触发 warn-by-default lint
+    fn legacy_alloc() -> c_void;
+}
+```
+
+#### ✅ 修正：返回 `*mut c_void` / `*const c_void`
+
+```rust,ignore
+use std::ffi::c_void;
+
+unsafe extern "C" {
+    fn modern_alloc() -> *mut c_void;
+}
+
+fn use_it() {
+    let ptr: *mut c_void = unsafe { modern_alloc() };
+    // 类型信息明确，无需在 c_void 上做 transmute
+}
+```
+
+> **迁移提示**：检查 bindgen 生成的绑定，若出现 `fn foo() -> c_void`，应改为 `*mut c_void`；开启 `-D warnings` 的项目需将此 lint 视为错误处理。完整说明见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md) §1.2 / §1.5。
 
 ## 六、来源与延伸阅读
 

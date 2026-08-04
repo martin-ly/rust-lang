@@ -43,3 +43,6 @@
 - [安全关键嵌入式 Rust 指南：MISRA-Rust、Ferrocene 与 IEC 61508](30_misra_rust_safety_critical_guidelines.md)
 - [no_std Rust 中的嵌入式网络与 IoT 协议](31_embedded_networking_and_iot_protocols.md)
 - [no_std Rust 嵌入式测试与 CI 策略](32_embedded_testing_and_ci_strategies.md)
+- [嵌入式 HAL 与 MMIO：从 trait 语义到类型安全的寄存器访问](41_embedded_hal_and_mmio.md)
+- [裸机并发：中断、NVIC、临界区与异步执行器](42_interrupts_and_concurrency_on_bare_metal.md)
+- [Rust 在安全关键系统中的应用](43_rust_safety_critical_systems.md)

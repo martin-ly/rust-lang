@@ -60,6 +60,11 @@
     - [测验 4：`pub(crate)` 与 `pub(super)`（分析层）](#测验-4pubcrate-与-pubsuper分析层)
     - [测验 5：模块与文件分离（应用层）](#测验-5模块与文件分离应用层)
   - [Rust 1.98.0 兼容性注意](#rust-1980-兼容性注意)
+    - [`ambiguous_glob_imports` 部分转为硬错误](#ambiguous_glob_imports-部分转为硬错误)
+      - [反例：歧义 glob import 导致编译失败](#反例歧义-glob-import-导致编译失败)
+      - [✅ 修正：显式导入或重命名](#-修正显式导入或重命名)
+      - [批量导入解析优化](#批量导入解析优化)
+      - [迁移注意](#迁移注意)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
@@ -871,7 +876,50 @@ pub mod evaluator;
 
 ## Rust 1.98.0 兼容性注意
 
-> **Rust 1.98.0 兼容性注意**: Rust 1.98.0 将部分 `ambiguous_glob_imports` 歧义提升为硬错误，并启用了批量导入解析优化。升级后应避免可能重名的 glob import。详见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md) 与 [1.98 beta 深度解析：glob import 硬错误](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-ambiguous-glob-imports)。
+### `ambiguous_glob_imports` 部分转为硬错误
+
+Rust 1.98.0 将部分 glob import 歧义从 lint 提升为硬错误（[PR #149195](https://github.com/rust-lang/rust/pull/149195) · [#156648](https://github.com/rust-lang/rust/issues/156648)）。当两个 `use module::*;` 引入同名项且无法通过显式 `use` 消歧时，编译器现在直接报错，而不是只产生 warning。
+
+#### 反例：歧义 glob import 导致编译失败
+
+```rust,ignore
+mod a { pub struct Foo; }
+mod b { pub struct Foo; }
+
+use a::*;
+use b::*;
+
+fn main() {
+    // 1.98 前：可能只触发 ambiguous_glob_imports warning
+    // 1.98 后：硬错误，因为无法判断 Foo 来自 a 还是 b
+    let _ = Foo;
+}
+```
+
+#### ✅ 修正：显式导入或重命名
+
+```rust
+mod a { pub struct Foo; }
+mod b { pub struct Foo; }
+
+use a::Foo;
+use b::Foo as BFoo;
+
+fn main() {
+    let _ = Foo;   // 来自 a
+    let _ = BFoo;  // 来自 b
+}
+```
+
+#### 批量导入解析优化
+
+同期稳定的 [PR #145108](https://github.com/rust-lang/rust/pull/145108) 将名称解析器从逐项解析改为批量处理同一作用域内的所有 `use` 声明。这是纯编译器内部优化，保持与旧算法相同的可见性和错误报告语义，但可能显著降低大型 crate 的解析阶段耗时。
+
+#### 迁移注意
+
+- 搜索项目中的 `use .*::\*;`，特别关注来自不同模块的同名类型/函数。
+- 用显式 `use module::Item;` 或 `use module::Item as Alias;` 替换歧义 glob import。
+- 完整分析见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md) §1.4 与 [1.98 beta 深度解析](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-ambiguous-glob-imports)。
 
 ---
 

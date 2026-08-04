@@ -43,6 +43,8 @@
       - [部分函数的定义域与值域](#部分函数的定义域与值域)
       - [Curry-Howard 对应：命题即类型](#curry-howard-对应命题即类型)
       - [Rust 闭包 / 迭代器与数学函数的精确对应与张力](#rust-闭包--迭代器与数学函数的精确对应与张力)
+    - [1.9 观察等价与上下文等价](#19-观察等价与上下文等价)
+    - [1.10 结构化操作语义基础](#110-结构化操作语义基础)
   - [二、Felleisen 表达力框架](#二felleisen-表达力框架)
     - [Rice 定理与编译器优化正确性](#rice-定理与编译器优化正确性)
   - [三、Rust 中的局部变换与宏表达](#三rust-中的局部变换与宏表达)
@@ -503,6 +505,271 @@ fn main() {
 > [Scott 1976 — Data Types as Lattices](https://doi.org/10.1137/0205037) ·
 > [Girard, Lafont & Taylor 1989 — Proofs and Types](https://doi.org/10.1017/CBO9780511569907) ·
 > [Rust Reference — Closures](https://doc.rust-lang.org/reference/types/closure.html)
+
+### 1.9 观察等价与上下文等价
+
+在比较两种计算模型或同一模型的两个程序时，最常用的形式化工具是**观察等价（observational equivalence）**与**上下文等价（contextual equivalence）**。它们把「两个实现是否可互换」转化为「任何外部上下文都无法区分它们」的数学命题。
+
+```text
+观察等价（≈_obs）:
+  程序 M 与 N 观察等价，当且仅当对任意闭合上下文 C[·]，
+  C[M] 与 C[N] 产生相同的外部可观察行为（返回值、标准输出、终止性、panic 等）。
+
+上下文等价（≈_ctx）:
+  一种更强的观察等价，要求上下文可以是任意带有「洞」的程序片段，
+  洞中可填入被比较的程序。
+```
+
+对 Rust 工程而言，这意味着：若两个函数在**所有调用上下文**中都无法被外部区分，就可以安全地互相替换。例如，阶乘的迭代实现与递归实现关于「输入-输出」是上下文等价的。
+
+```rust
+fn factorial_iter(n: u64) -> u64 {
+    let mut acc = 1;
+    for i in 1..=n {
+        acc *= i;
+    }
+    acc
+}
+
+fn factorial_rec(n: u64) -> u64 {
+    if n == 0 { 1 } else { n * factorial_rec(n - 1) }
+}
+
+fn main() {
+    for i in 0..=10 {
+        assert_eq!(factorial_iter(i), factorial_rec(i));
+    }
+}
+```
+
+> **认知功能**：观察等价与上下文等价把「重构是否安全」这一工程问题形式化。重构、内联、替换算法实现时，我们都在依赖某种观察等价关系。具体应用请参见 [Algorithm Equivalence](../08_algorithm_semantics/05_algorithm_equivalence.md)。
+> (Source: [Pitts 1997 — Operationally-based theories of program equivalence](https://www.cl.cam.ac.uk/~amp12/papers/index.html); [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/))
+
+---
+
+### 1.10 结构化操作语义基础
+
+**结构化操作语义（Structural Operational Semantics, SOS）** 由 Plotkin 提出，它通过一组规则定义程序如何从当前状态逐步演化到下一状态。SOS 是证明观察等价、上下文等价和编译器变换正确性的标准工具。
+
+对一个小型命令式语言，核心规则可写成：
+
+```text
+表达式求值（部分规则）：
+  ⟨n, σ⟩ → ⟨n, σ⟩                          （数值已是值）
+  ⟨e₁, σ⟩ → ⟨e₁', σ'⟩
+  ───────────────────────────────────────
+  ⟨e₁ + e₂, σ⟩ → ⟨e₁' + e₂, σ'⟩           （先求左操作数）
+
+  ⟨e₂, σ⟩ → ⟨e₂', σ'⟩
+  ───────────────────────────────────────
+  ⟨n + e₂, σ⟩ → ⟨n + e₂', σ'⟩             （再求右操作数）
+
+  ⟨n₁ + n₂, σ⟩ → ⟨n₁+n₂, σ⟩               （数值加法）
+
+语句执行（部分规则）：
+  ⟨x := n, σ⟩ → ⟨unit, σ[x ↦ n]⟩          （赋值更新存储）
+
+  ⟨S₁, σ⟩ → ⟨S₁', σ'⟩
+  ───────────────────────────────────────
+  ⟨S₁; S₂, σ⟩ → ⟨S₁'; S₂, σ'⟩             （顺序执行左语句）
+
+  ⟨unit; S₂, σ⟩ → ⟨S₂, σ⟩                 （左语句结束后继续）
+
+  ⟨if n then S₁ else S₂, σ⟩ → ⟨S₁, σ⟩     （n ≠ 0）
+  ⟨if 0 then S₁ else S₂, σ⟩ → ⟨S₂, σ⟩     （n = 0）
+
+  ⟨while e do S, σ⟩ → ⟨if e then (S; while e do S) else unit, σ⟩
+                                            （while 展开）
+```
+
+下面用 Rust 实现该微型语言的 AST 解释器，演示小步语义：
+
+```rust
+use std::collections::HashMap;
+
+#[derive(Clone, Debug, PartialEq)]
+enum Value {
+    Num(i64),
+    Unit,
+}
+
+#[derive(Clone, Debug)]
+enum Expr {
+    Num(i64),
+    Var(String),
+    Unit,
+    Add(Box<Expr>, Box<Expr>),
+    Mul(Box<Expr>, Box<Expr>),
+    Let(String, Box<Expr>, Box<Expr>),
+    If(Box<Expr>, Box<Expr>, Box<Expr>),
+    While(Box<Expr>, Box<Expr>),
+    Seq(Box<Expr>, Box<Expr>),
+    Assign(String, Box<Expr>),
+}
+
+fn is_value(e: &Expr) -> bool {
+    matches!(e, Expr::Num(_) | Expr::Unit)
+}
+
+fn eval_to_num(e: &Expr, env: &HashMap<String, Value>) -> i64 {
+    match e {
+        Expr::Num(n) => *n,
+        Expr::Var(x) => match env.get(x).expect("undefined variable") {
+            Value::Num(n) => *n,
+            Value::Unit => panic!("unit used as number"),
+        },
+        _ => panic!("not a number"),
+    }
+}
+
+fn step(e: Expr, env: &mut HashMap<String, Value>) -> Option<Expr> {
+    match e {
+        // 值已经终止
+        Expr::Num(_) | Expr::Unit => None,
+
+        // 变量在运行时被解析为存储中的值。
+        Expr::Var(x) => match env.get(&x).expect("undefined variable") {
+            Value::Num(n) => Some(Expr::Num(*n)),
+            Value::Unit => Some(Expr::Unit),
+        },
+
+        Expr::Add(l, r) => {
+            if !is_value(&l) {
+                Some(Expr::Add(Box::new(step(*l, env)?), r))
+            } else if !is_value(&r) {
+                Some(Expr::Add(l, Box::new(step(*r, env)?)))
+            } else {
+                let n = eval_to_num(&l, env) + eval_to_num(&r, env);
+                Some(Expr::Num(n))
+            }
+        }
+
+        Expr::Mul(l, r) => {
+            if !is_value(&l) {
+                Some(Expr::Mul(Box::new(step(*l, env)?), r))
+            } else if !is_value(&r) {
+                Some(Expr::Mul(l, Box::new(step(*r, env)?)))
+            } else {
+                let n = eval_to_num(&l, env) * eval_to_num(&r, env);
+                Some(Expr::Num(n))
+            }
+        }
+
+        Expr::Let(x, bound, body) => {
+            if !is_value(&bound) {
+                Some(Expr::Let(x, Box::new(step(*bound, env)?), body))
+            } else {
+                let v = match *bound {
+                    Expr::Num(n) => Value::Num(n),
+                    Expr::Unit => Value::Unit,
+                    _ => panic!("let bound to non-value"),
+                };
+                env.insert(x, v);
+                Some(*body)
+            }
+        }
+
+        Expr::If(cond, then_branch, else_branch) => {
+            if !is_value(&cond) {
+                Some(Expr::If(Box::new(step(*cond, env)?), then_branch, else_branch))
+            } else {
+                let n = eval_to_num(&cond, env);
+                Some(if n != 0 { *then_branch } else { *else_branch })
+            }
+        }
+
+        // while e do S  ⇢  if e then (S; while e do S) else unit
+        Expr::While(cond, body) => {
+            Some(Expr::If(
+                cond.clone(),
+                Box::new(Expr::Seq(
+                    body.clone(),
+                    Box::new(Expr::While(cond.clone(), body.clone())),
+                )),
+                Box::new(Expr::Unit),
+            ))
+        }
+
+        Expr::Seq(first, second) => {
+            if !is_value(&first) {
+                Some(Expr::Seq(Box::new(step(*first, env)?), second))
+            } else {
+                Some(*second)
+            }
+        }
+
+        Expr::Assign(x, rhs) => {
+            if !is_value(&rhs) {
+                Some(Expr::Assign(x, Box::new(step(*rhs, env)?)))
+            } else {
+                let v = match *rhs {
+                    Expr::Num(n) => Value::Num(n),
+                    Expr::Unit => Value::Unit,
+                    _ => panic!("assign non-value"),
+                };
+                env.insert(x, v);
+                Some(Expr::Unit)
+            }
+        }
+    }
+}
+
+fn eval(e: &Expr, env: &mut HashMap<String, Value>) -> Value {
+    let mut cur: Option<Expr> = Some(e.clone());
+    while let Some(c) = cur.take() {
+        match step(c, env) {
+            Some(next) => cur = Some(next),
+            None => break,
+        }
+    }
+    match cur.expect("evaluation did not terminate") {
+        Expr::Num(n) => Value::Num(n),
+        Expr::Unit => Value::Unit,
+        other => panic!("stuck at non-value: {:?}", other),
+    }
+}
+
+fn main() {
+    // 计算 5!：
+    // let n = 5; let acc = 1; while n { acc := acc * n; n := n - 1 }; acc
+    let program = Expr::Let(
+        "n".to_string(),
+        Box::new(Expr::Num(5)),
+        Box::new(Expr::Let(
+            "acc".to_string(),
+            Box::new(Expr::Num(1)),
+            Box::new(Expr::Seq(
+                Box::new(Expr::While(
+                    Box::new(Expr::Var("n".to_string())),
+                    Box::new(Expr::Seq(
+                        Box::new(Expr::Assign(
+                            "acc".to_string(),
+                            Box::new(Expr::Mul(
+                                Box::new(Expr::Var("acc".to_string())),
+                                Box::new(Expr::Var("n".to_string())),
+                            )),
+                        )),
+                        Box::new(Expr::Assign(
+                            "n".to_string(),
+                            Box::new(Expr::Add(
+                                Box::new(Expr::Var("n".to_string())),
+                                Box::new(Expr::Num(-1)),
+                            )),
+                        )),
+                    )),
+                )),
+                Box::new(Expr::Var("acc".to_string())),
+            )),
+        )),
+    );
+
+    let mut env = HashMap::new();
+    assert_eq!(eval(&program, &mut env), Value::Num(120));
+}
+```
+
+> **认知功能**：SOS 把程序执行看作状态机上的状态转移。观察等价、上下文等价和 Felleisen 表达力框架都建立在「哪些状态转移是外部可观察的」这一基础之上。Rust 的 MIR 与 LLVM IR 都可以看作 SOS 的工程化表示。
+> (Source: [Plotkin 1981 — A Structural Approach to Operational Semantics](https://homepages.inf.ed.ac.uk/gdp/publications/sos_jlap.pdf))
 
 ---
 

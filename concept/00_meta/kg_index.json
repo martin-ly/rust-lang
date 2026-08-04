@@ -4,7 +4,7 @@
     "generated": "2026-07-11",
     "rust_version": "1.97.0+",
     "source": "concept/",
-    "entity_count": 689,
+    "entity_count": 693,
     "schema": "simple KG index"
   },
   "entities": [
@@ -1326,8 +1326,38 @@
       "summary": "Upgraded KG ontology aligned with RDF 1.2, RDF-star, SKOS multilingual labels, and SHACL validation.",
       "bloom": "Meta",
       "rust_version": "1.97.0+ (Edition 2024)",
-      "prerequisites": [],
-      "postrequisites": [],
+      "prerequisites": [
+        {
+          "title": "`concept/00_meta/00_framework/semantic_space.md`",
+          "path": "../00_framework/semantic_space.md"
+        },
+        {
+          "title": "`concept/00_meta/00_framework/methodology.md`",
+          "path": "../00_framework/methodology.md"
+        },
+        {
+          "title": "`concept/00_meta/02_sources/01_authority_source_map.md`",
+          "path": "../02_sources/01_authority_source_map.md"
+        },
+        {
+          "title": "`concept/00_meta/01_terminology/01_terminology_glossary.md`",
+          "path": "../01_terminology/01_terminology_glossary.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "`concept/00_meta/kg_data_v3.json`",
+          "path": "../kg_data_v3.json"
+        },
+        {
+          "title": "`concept/00_meta/kg_shapes.ttl`",
+          "path": "../kg_shapes.ttl"
+        },
+        {
+          "title": "`tools/kg_rag/llm_semantic_retriever.py`",
+          "path": "../../../../tools/kg_rag/llm_semantic_retriever.py"
+        }
+      ],
       "theorems": [],
       "related_crates": []
     },
@@ -14754,7 +14784,7 @@
       "path": "06_ecosystem/05_systems_and_embedded/34_embassy_framework_deep_dive.md",
       "title": "",
       "en": "Embassy Async Framework Deep Dive",
-      "summary": "Architectural deep dive into the Embassy embedded async runtime: executor, time driver, networking, USB, and hardware abstraction integration.",
+      "summary": "Architectural deep dive into the Embassy embedded async runtime: executor, time driver, networking, USB, BLE, HAL integration, and async/await semantics under `no_std`.",
       "bloom": "L3-L4",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [
@@ -14827,8 +14857,8 @@
       "id": "concept:06_ecosystem/05_systems_and_embedded/36_defmt_probe_rs_architecture.md",
       "path": "06_ecosystem/05_systems_and_embedded/36_defmt_probe_rs_architecture.md",
       "title": "",
-      "en": "defmt / probe-rs / Knurling Debugging Architecture",
-      "summary": "Architecture and protocol principles of the defmt log frame format, probe-rs DAP/JTAG/SWD probe protocol, and Knurling tooling ecosystem.",
+      "en": "defmt and probe-rs Debugging Architecture",
+      "summary": "Architecture and protocol principles of the defmt log frame format, host-side decoding, probe-rs probe/flash/RTT/SWO abstractions, and trade-offs against ITM, semihosting, and UART logging.",
       "bloom": "L3",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [
@@ -14867,6 +14897,65 @@
       "related_crates": []
     },
     {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/38_no_std_bare_metal_rust.md",
+      "path": "06_ecosystem/05_systems_and_embedded/38_no_std_bare_metal_rust.md",
+      "title": "",
+      "en": "no_std and Bare-Metal Rust",
+      "summary": "A canonical reference for `#![no_std]` and bare-metal Rust: semantic boundary with `std`, core/alloc split, reset-to-main boot flow, linker-script memory layout, panic/abort/error handling, target specification and custom target JSON, with mindmap, anti-patterns, and decision trees.",
+      "bloom": "L3",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 嵌入式系统开发",
+          "path": "03_embedded_systems.md"
+        },
+        {
+          "title": "交叉编译",
+          "path": "02_cross_compilation.md"
+        },
+        {
+          "title": "Unsafe Rust",
+          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
+        },
+        {
+          "title": "Cargo build-std",
+          "path": "../01_cargo/22_build_std.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "裸机启动与链接脚本",
+          "path": "13_bare_metal_boot_linker_script.md"
+        },
+        {
+          "title": "no_std 启动流程与运行时深度解析",
+          "path": "27_no_std_startup_runtime_deep_dive.md"
+        },
+        {
+          "title": "panic_handler 与 no_std 运行时",
+          "path": "18_panic_runtime_no_std.md"
+        },
+        {
+          "title": "嵌入式内存布局与堆安全",
+          "path": "29_embedded_memory_layout_and_heap_safety.md"
+        },
+        {
+          "title": "no_std 同步原语",
+          "path": "15_no_std_synchronization_primitives.md"
+        },
+        {
+          "title": "嵌入式内存分配器",
+          "path": "16_embedded_memory_allocators.md"
+        },
+        {
+          "title": "no_std 与裸机惯用法",
+          "path": "23_no_std_and_bare_metal_idioms.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:06_ecosystem/05_systems_and_embedded/39_no_std_hardware_measurement_and_validation.md",
       "path": "06_ecosystem/05_systems_and_embedded/39_no_std_hardware_measurement_and_validation.md",
       "title": "",
@@ -14879,6 +14968,99 @@
         {
           "title": "Embassy 框架深度解析",
           "path": "34_embassy_framework_deep_dive.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/43_rust_safety_critical_systems.md",
+      "path": "06_ecosystem/05_systems_and_embedded/43_rust_safety_critical_systems.md",
+      "title": "",
+      "en": "Rust in Safety-Critical Systems",
+      "summary": "A canonical synthesis of Rust's role in safety-critical systems, covering functional-safety standards mapping (IEC 61508, ISO 26262, DO-178C, EN 50128/50129), Rust semantic advantages, unsafe audit strategies, formal verification interfaces (Kani, MIRI, Prusti, Gillian-Rust), no_std constraints, certified industrial toolchains, counterexamples, and decision guidance.",
+      "bloom": "L5-L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "安全关键裸机操作系统与 Rust",
+          "path": "19_safety_critical_bare_metal_os.md"
+        },
+        {
+          "title": "安全关键系统工程",
+          "path": "../11_domain_applications/23_safety_critical_systems_engineering.md"
+        },
+        {
+          "title": "MISRA-Rust 与安全关键嵌入式指南",
+          "path": "30_misra_rust_safety_critical_guidelines.md"
+        },
+        {
+          "title": "认证工具链与认证包清单",
+          "path": "../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md"
+        },
+        {
+          "title": "Unsafe Rust",
+          "path": "../../03_advanced/02_unsafe/01_unsafe.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "嵌入式 RTOS 与安全关键框架对比",
+          "path": "26_embedded_rtos_and_safety_critical_frameworks.md"
+        },
+        {
+          "title": "no_std 启动流程与运行时",
+          "path": "27_no_std_startup_runtime_deep_dive.md"
+        },
+        {
+          "title": "Rust vs Ada/SPARK",
+          "path": "../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/45_embedded_hardware_validation.md",
+      "path": "06_ecosystem/05_systems_and_embedded/45_embedded_hardware_validation.md",
+      "title": "",
+      "en": "Embedded Hardware End-to-End Validation",
+      "summary": "A canonical workflow for validating `#![no_std]` firmware on real hardware or QEMU using probe-rs, defmt, and Embassy, with minimal runnable examples, expected outputs, and decision trees.",
+      "bloom": "L3-L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "no_std 与裸机 Rust",
+          "path": "38_no_std_bare_metal_rust.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "嵌入式测试与 CI 策略",
+          "path": "32_embedded_testing_and_ci_strategies.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/46_rtos_and_scheduling_in_rust.md",
+      "path": "06_ecosystem/05_systems_and_embedded/46_rtos_and_scheduling_in_rust.md",
+      "title": "",
+      "en": "RTOS and Scheduling Models in Rust",
+      "summary": "A comparative analysis of scheduling models in Rust embedded frameworks: RTIC, Tock, Hubris, and Embassy, with decision trees, anti-patterns, and semantic mappings.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 嵌入式系统开发",
+          "path": "03_embedded_systems.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "no_std 与裸机 Rust",
+          "path": "38_no_std_bare_metal_rust.md"
         }
       ],
       "theorems": [],
@@ -15815,45 +15997,6 @@
       "related_crates": []
     },
     {
-      "id": "concept:06_ecosystem/11_domain_applications/09_data_structures_in_rust.md",
-      "path": "06_ecosystem/11_domain_applications/09_data_structures_in_rust.md",
-      "title": "",
-      "en": "Data Structures in Rust",
-      "summary": "Core data structures in Rust's standard library and common custom implementations: vectors, queues, trees, hash tables, graphs, and advanced structures, with selection guidance and ownership-aware design patterns.",
-      "bloom": "L5-L6",
-      "rust_version": "1.97.0+ (Edition 2024)",
-      "prerequisites": [
-        {
-          "title": "Ownership",
-          "path": "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
-        },
-        {
-          "title": "Borrowing",
-          "path": "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md"
-        },
-        {
-          "title": "Generics",
-          "path": "../../02_intermediate/01_generics/01_generics.md"
-        },
-        {
-          "title": "Collections",
-          "path": "../../01_foundation/05_collections/01_collections.md"
-        }
-      ],
-      "postrequisites": [
-        {
-          "title": "算法工程实践",
-          "path": "08_algorithm_engineering_practice.md"
-        },
-        {
-          "title": "算法与竞赛编程",
-          "path": "07_algorithms_competitive_programming.md"
-        }
-      ],
-      "theorems": [],
-      "related_crates": []
-    },
-    {
       "id": "concept:06_ecosystem/11_domain_applications/10_algorithm_complexity_analysis.md",
       "path": "06_ecosystem/11_domain_applications/10_algorithm_complexity_analysis.md",
       "title": "",
@@ -16780,6 +16923,53 @@
       "related_crates": []
     },
     {
+      "id": "concept:06_ecosystem/14_enterprise_architecture/09_observability_and_sre_patterns.md",
+      "path": "06_ecosystem/14_enterprise_architecture/09_observability_and_sre_patterns.md",
+      "title": "",
+      "en": "Observability for AI / LLM Systems",
+      "summary": null,
+      "bloom": "L5-L6",
+      "rust_version": "1.97.1+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Microservices Patterns in Rust",
+          "path": "08_microservices_patterns_in_rust.md"
+        },
+        {
+          "title": "API Gateway & Service Mesh",
+          "path": "../03_design_patterns/38_api_gateway_and_service_mesh_patterns.md"
+        },
+        {
+          "title": "High-Performance Network Service Architecture",
+          "path": "../04_web_and_networking/08_high_performance_network_service_architecture.md"
+        },
+        {
+          "title": "Performance Engineering Architecture",
+          "path": "../10_performance/02_performance_engineering_architecture.md"
+        },
+        {
+          "title": "Error Handling",
+          "path": "../../02_intermediate/03_error_handling/01_error_handling.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Cloud Native",
+          "path": "../04_web_and_networking/02_cloud_native.md"
+        },
+        {
+          "title": "Kubernetes Rust",
+          "path": "../04_web_and_networking/11_kubernetes_rust.md"
+        },
+        {
+          "title": "Data-Intensive Systems Design",
+          "path": "../06_data_and_distributed/10_data_intensive_systems_design.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:06_ecosystem/14_enterprise_architecture/README.md",
       "path": "06_ecosystem/14_enterprise_architecture/README.md",
       "title": "",
@@ -17394,7 +17584,7 @@
       "en": "Rust 1.98.0 Stabilized Features",
       "summary": "Rust 1.98.0 (stable 2026-08-20) 完整稳定特性汇总：语言语义、编译器/平台、标准库 API、宏/derive 与兼容性变更，均附权威来源与迁移要点。",
       "bloom": "L2-L3",
-      "rust_version": "**1.98.0 stable**（基于 beta/RC；预计 2026-08-20 发布）",
+      "rust_version": "**1.98.0 stable**（基于 1.98.0 beta/RC；预计 2026-08-20 发布）",
       "prerequisites": [
         {
           "title": "Rust 版本跟踪",

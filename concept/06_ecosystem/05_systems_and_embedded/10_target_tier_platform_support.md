@@ -76,7 +76,39 @@ Rust 官方支持的平台（target）按保证强度分为三层，以 **target
 
 ---
 
-## 四、判定表：我的目标在哪一层、意味着什么
+## 四、1.98 RISC-V `d`/`e`/`f` target features 进入稳定 `cfg`
+
+RISC-V 目标此前已在稳定 `cfg(target_feature = "...")` 中支持大量 feature，但 `d`（双精度浮点）、`e`（嵌入式 RV32E 基线）和 `f`（单精度浮点）长期处于不稳定状态。Rust 1.98.0 将这三个 feature 提升为稳定可探测，使嵌入式与 HPC 目标能够在稳定 Rust 下根据实际硬件能力做条件编译（[PR #156188](https://github.com/rust-lang/rust/pull/156188) · [#157534](https://github.com/rust-lang/rust/issues/157534)）。
+
+### 语义影响
+
+- 稳定 `cfg(target_feature = "d")`、`cfg(target_feature = "e")`、`cfg(target_feature = "f")` 现在可在 RISC-V target 上直接使用，无需 nightly feature gate。
+- 与 1.94 稳定的 29 个 RISC-V feature（含 RVA22U64 / RVA23U64 profile 大部）共同构成完整的 RV32I/RV64I 基础扩展探测集。
+- 仅扩展条件编译可用标识符集合，不改变代码生成本身。
+
+### 代码示例
+
+```rust,ignore
+#[cfg(all(target_arch = "riscv64", target_feature = "d"))]
+fn double_precision_math(x: f64) -> f64 {
+    x.sqrt()
+}
+
+#[cfg(all(target_arch = "riscv32", target_feature = "e"))]
+fn embedded_only() {
+    // RV32E 基线代码：仅 16 个整数寄存器可用
+}
+```
+
+### 迁移注意
+
+- 如果之前使用 nightly `#![feature(cfg_target_feature)]` 来探测这些 feature，可移除对应的 feature gate。
+- 在 `#[cfg(target_feature = "d")]` 分支中假设双精度浮点寄存器存在时，仍需确认目标 ABI 确实包含 `D` 扩展。
+- 完整列表与权威来源见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md) §1.1。
+
+---
+
+## 五、判定表：我的目标在哪一层、意味着什么
 
 ```text
 目标 triple 查询：
@@ -105,6 +137,7 @@ mindmap
     一、Tier 分层结构每一层保证什么
     二、1.90–1.97 Tier
     三、1.97 nvptx64-nvidia-cuda
+    四、1.98 RISC-V d/e/f target features
 ```
 
 ## ⚠️ 反例与陷阱
@@ -148,6 +181,7 @@ fn main() {
 - **[Rust 1.97](../../07_future/00_version_tracking/rust_1_97_stabilized.md)**
   - `nvptx64-nvidia-cuda` 基线提升
 - **[Rust 1.98](../../07_future/00_version_tracking/rust_1_98_stabilized.md)**
+  - RISC-V `d`/`e`/`f` target features 进入稳定 `cfg(target_feature = "...")`
   - Windows GNU 目标（`x86_64-pc-windows-gnu` / `i686-pc-windows-gnu`）mingw-w64 工具链更新
   - Solaris/Illumos 上 `std::fs::File::lock` 实现移除
   - `-Zemscripten-wasm-eh` 移除

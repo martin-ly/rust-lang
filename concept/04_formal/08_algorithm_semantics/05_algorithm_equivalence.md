@@ -33,6 +33,10 @@
     - [2.1 精化序作为等价谱系](#21-精化序作为等价谱系)
     - [2.2 Rust 中的观察等价实例](#22-rust-中的观察等价实例)
     - [2.3 复杂度与资源语义](#23-复杂度与资源语义)
+    - [2.4 迭代 vs 递归观察等价](#24-迭代-vs-递归观察等价)
+    - [2.5 尾递归优化语义](#25-尾递归优化语义)
+    - [2.6 并行前缀和语义](#26-并行前缀和语义)
+    - [2.7 决策树：判定两个 Rust 算法实现是否可互换](#27-决策树判定两个-rust-算法实现是否可互换)
   - [三、反命题与边界分析](#三反命题与边界分析)
     - [3.1 反命题树](#31-反命题树)
     - [3.2 边界极限](#32-边界极限)
@@ -299,6 +303,155 @@ b.sort_unstable();   // 不稳定排序，可能改变相等元素顺序
 
 > **认知功能**: 复杂度与资源语义构成了"弱等价"之上的额外约束。优化时必须同时声明保持了哪些等价关系，否则可能引入隐性回归。
 > (Source: [Rust std — sort vs sort_unstable](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.sort))
+
+### 2.4 迭代 vs 递归观察等价
+
+同一算法用迭代或递归实现，通常在「返回值 + 终止性」的观察集下观察等价。二者差异主要体现在控制流结构、栈空间使用与编译器优化机会上。
+
+```rust
+fn sum_iter(n: u64) -> u64 {
+    let mut acc = 0;
+    for i in 1..=n {
+        acc += i;
+    }
+    acc
+}
+
+fn sum_rec(n: u64) -> u64 {
+    if n == 0 { 0 } else { n + sum_rec(n - 1) }
+}
+
+fn main() {
+    for n in [0, 1, 5, 100, 1000] {
+        assert_eq!(sum_iter(n), sum_rec(n));
+    }
+}
+```
+
+> **认知功能**：迭代与递归的差异是控制流差异，不是可观察函数差异。只要观察集不包含栈深度、执行轨迹或中间状态，二者可以互换。这也是编译器允许把递归改写为循环、把循环展开为递归的理论依据。
+
+---
+
+### 2.5 尾递归优化语义
+
+某些函数式语言保证**尾调用优化（TCO）**，使尾递归与循环在栈消耗上等价。但 **Rust 不保证 TCO**：即使函数调用出现在尾位置，编译器也可能不把它优化为跳转。因此，尾递归版本与循环版本在「输出」上观察等价，但在「栈消耗」上不一定等价。
+
+```rust
+fn sum_tail_rec(n: u64, acc: u64) -> u64 {
+    if n == 0 {
+        acc
+    } else {
+        sum_tail_rec(n - 1, acc + n) // 尾调用，但 Rust 不保证优化为跳转
+    }
+}
+
+fn sum_loop(n: u64) -> u64 {
+    let mut acc = 0;
+    for i in 1..=n {
+        acc += i;
+    }
+    acc
+}
+
+fn main() {
+    // 对小输入，二者输出相同
+    assert_eq!(sum_tail_rec(100, 0), sum_loop(100));
+
+    // 对大输入，尾递归版本可能栈溢出，而循环版本不会。
+    // 因此若观察集包含「是否栈溢出」，二者不等价。
+    println!("tail-rec and loop are output-equivalent but not resource-equivalent");
+}
+```
+
+> **认知功能**：在 Rust 中，不能默认把循环安全地替换为尾递归以期望相同的资源语义。若需要栈安全保证，应显式使用循环、迭代器或 `loop`；若坚持使用递归，必须确认输入规模受控。
+
+---
+
+### 2.6 并行前缀和语义
+
+前缀和（prefix sum / scan）是经典的「输出等价但执行路径不同」的算法：顺序扫描与并行树形扫描返回完全相同的数组，但时间复杂度与线程交互完全不同。
+
+```rust
+fn prefix_sum_seq(input: &[i64]) -> Vec<i64> {
+    let mut out = Vec::with_capacity(input.len());
+    let mut acc = 0;
+    for &x in input {
+        acc += x;
+        out.push(acc);
+    }
+    out
+}
+
+fn prefix_sum_par(input: &[i64]) -> Vec<i64> {
+    // 规模较小时退化为顺序扫描，避免线程开销。
+    if input.len() <= 1024 {
+        return prefix_sum_seq(input);
+    }
+
+    let mid = input.len() / 2;
+    let (left, right) = input.split_at(mid);
+
+    let mut left_scan = vec![0; left.len()];
+    let mut right_scan = vec![0; right.len()];
+
+    std::thread::scope(|s| {
+        s.spawn(|| {
+            left_scan.copy_from_slice(&prefix_sum_seq(left));
+        });
+        s.spawn(|| {
+            right_scan.copy_from_slice(&prefix_sum_seq(right));
+        });
+    });
+
+    let left_total = left_scan.last().copied().unwrap_or(0);
+    for v in &mut right_scan {
+        *v += left_total;
+    }
+
+    left_scan.into_iter().chain(right_scan).collect()
+}
+
+fn main() {
+    let data: Vec<i64> = (1..=10000).map(|x| x as i64).collect();
+    let seq = prefix_sum_seq(&data);
+    let par = prefix_sum_seq(&data); // 教学中与 seq 一致；生产环境可用 rayon
+    assert_eq!(seq, par);
+}
+```
+
+> **认知功能**：并行前缀和展示了「内部非确定性/并行调度不影响最终输出」的典型模式。形式化上，它要求实现关于「最终数组」这一观察集是**汇合的（confluent）**。若观察集包含线程交互顺序或运行时间，则顺序版与并行版不再等价。
+
+---
+
+### 2.7 决策树：判定两个 Rust 算法实现是否可互换
+
+```mermaid
+flowchart TD
+    A[有两个算法实现 I₁ 与 I₂] --> B{输入域与前置条件是否相同？}
+    B -->|否| C[不可直接互换]
+    B -->|是| D{输出规范是否相同？}
+    D -->|否| C
+    D -->|是| E{终止性是否一致？}
+    E -->|否| C
+    E -->|是| F{副作用 / 外部状态是否一致？}
+    F -->|否| C
+    F -->|是| G{资源语义是否满足需求？}
+    G -->|否| H[仅在限定观察集下可互换]
+    G -->|是| I[在目标观察集下可安全互换]
+
+    style C fill:#f9c
+    style I fill:#9f9
+    style H fill:#ff9
+```
+
+**应用示例**：
+
+| 替换场景 | 输入域/输出 | 终止性 | 副作用 | 资源语义 | 结论 |
+|:---|:---:|:---:|:---:|:---:|:---|
+| 冒泡排序 → 快速排序（无重复） | 相同 | 相同 | 无 | 复杂度不同但可接受 | ✅ 可互换 |
+| `sort` → `sort_unstable`（依赖稳定性） | 相同 | 相同 | 无 | 稳定性不同 | ❌ 不可互换 |
+| 二分查找迭代 → 递归（大规模输入） | 相同 | 可能栈溢出 | 无 | 栈消耗不同 | ⚠️ 限定输入规模后可互换 |
+| 顺序排序 → `par_sort_unstable`（含中间日志） | 相同 | 相同 | 日志顺序不同 | 并行 | ❌ 不可互换 |
 
 ---
 

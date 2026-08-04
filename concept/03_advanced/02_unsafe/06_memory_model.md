@@ -67,6 +67,8 @@
     - [4. 跨平台边界与旧名废弃说明](#4-跨平台边界与旧名废弃说明)
   - [Rust 1.98.0 交叉语义](#rust-1980-交叉语义)
     - [1. `Box::as_ptr` / `Box::as_mut_ptr` 的别名模型意义](#1-boxas_ptr--boxas_mut_ptr-的别名模型意义)
+    - [2. `repr(transparent)` 对 trivial 布局字段更严格](#2-reprtransparent-对-trivial-布局字段更严格)
+    - [3. `transmute()` 在涉及 `repr` 属性时更严格地检查等大小](#3-transmute-在涉及-repr-属性时更严格地检查等大小)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
   - [国际权威参考 / International Authority References（P1 学术 · P2 生态）](#国际权威参考--international-authority-referencesp1-学术--p2-生态)
@@ -74,6 +76,13 @@
     - [测验 1：抽象字节（🟢 基础）](#测验-1抽象字节-基础)
     - [测验 2：未初始化内存与 MaybeUninit（🟡 进阶）](#测验-2未初始化内存与-maybeuninit-进阶)
     - [测验 3：Provenance 与别名模型（🔴 专家）](#测验-3provenance-与别名模型-专家)
+  - [Rust 1.98.0 交叉语义](#rust-1980-交叉语义-1)
+    - [`repr(transparent)` 对 trivial 布局字段更严格](#reprtransparent-对-trivial-布局字段更严格)
+      - [反例：使用 `repr(C)` 的 ZST 作为辅助字段](#反例使用-reprc-的-zst-作为辅助字段)
+      - [✅ 修正：使用 `PhantomData<T>` 作为标记字段](#-修正使用-phantomdatat-作为标记字段)
+    - [`transmute()` 在涉及 `repr` 属性时更严格地检查等大小](#transmute-在涉及-repr-属性时更严格地检查等大小)
+      - [反例：通过 `repr(transparent)` newtype 绕过大小检查](#反例通过-reprtransparent-newtype-绕过大小检查)
+      - [迁移注意](#迁移注意)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
 
 ---
@@ -477,6 +486,7 @@ struct GoodWrapper<T>(T, PhantomData<T>);
 - **与本文的关系**：transparent ABI 依赖「只有一个非 ZST 字段，其余字段布局完全确定」的前提；本文 §七（内存对齐与 Layout）是理解该规则的基础。
 - **迁移提示**：搜索项目中的 `#[repr(transparent)]`，确保辅助字段仅为 `PhantomData` 等明确 ZST，或改用 `#[repr(C)]` 显式布局。
 - **来源**:
+
 > [Rust 1.98.0 Release Notes — Language](https://releases.rs/docs/1.98.0/) ·
 > 版本页 [`rust_1_98_stabilized.md`](../../07_future/00_version_tracking/rust_1_98_stabilized.md)（§1.7）·
 > [1.98 beta 深度解析](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-repr-transparent-stricter)
@@ -504,6 +514,7 @@ fn bad(w: Wrap8) -> Wrap4 {
 - **与本文的关系**：`transmute` 是 unsafe 代码中 layout 假设最密集的操作之一；本文 §二（抽象字节）、§七（Layout）、§九（常见反模式）共同构成其安全使用前提。
 - **迁移提示**：用 `std::mem::size_of` 校验源/目标类型大小，或改用 `transmute_copy` / 显式字段映射。
 - **来源**:
+
 > [Rust 1.98.0 Release Notes — Compatibility Notes](https://releases.rs/docs/1.98.0/) ·
 > 版本页 [`rust_1_98_stabilized.md`](../../07_future/00_version_tracking/rust_1_98_stabilized.md)（§5.5）·
 > [1.98 beta 深度解析](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-transmute-repr-size)
@@ -602,6 +613,66 @@ C 错：本页明确警告"Rust 的内存模型目前尚不完整，部分细节
 > `ptr::with_exposed_provenance(_mut)` 稳定（const 上下文 1.91.0 起），为整数↔指针往返提供显式 provenance 暴露路径；
 > **1.96 起**「valid for read/write」定义重构（排除 null，由各方法单独声明例外），统一指针有效性契约。
 > 详见 [Rust 1.84.0 Release Notes](https://blog.rust-lang.org/2025/01/09/Rust-1.84.0.html) 与 [1.96 版本页](../../07_future/00_version_tracking/rust_1_96_stabilized.md)（特性矩阵节）。
+
+## Rust 1.98.0 交叉语义
+
+### `repr(transparent)` 对 trivial 布局字段更严格
+
+`#[repr(transparent)]` 要求类型只有一个非零大小（non-ZST）字段，其余字段必须具有可被安全忽略的 "trivial" 布局。Rust 1.98.0 收紧了 trivial 定义：`repr(C)` 类型、带私有字段的类型和 `#[non_exhaustive]` 类型不再被视为 trivial，因为它们的外部布局可能随编译器或版本变化（[PR #155299](https://github.com/rust-lang/rust/pull/155299) · [#157730](https://github.com/rust-lang/rust/issues/157730)）。
+
+#### 反例：使用 `repr(C)` 的 ZST 作为辅助字段
+
+```rust,ignore
+#[repr(C)]
+struct ZstTag; // 实际为零大小，但外部布局承诺不足
+
+#[repr(transparent)]
+struct Wrapper<T>(T, ZstTag); // 1.98 前可能被接受，1.98 后硬错误
+```
+
+#### ✅ 修正：使用 `PhantomData<T>` 作为标记字段
+
+```rust
+use std::marker::PhantomData;
+
+#[repr(transparent)]
+struct SafeWrapper<T>(T, PhantomData<T>);
+
+fn main() {
+    let _ = SafeWrapper(42, PhantomData);
+}
+```
+
+> **语义要点**：transparent ABI 要求辅助字段的外部布局稳定可忽略；只有明确已知的 ZST（如 `PhantomData<T>`、`()`）才能安全地作为忽略字段。
+
+### `transmute()` 在涉及 `repr` 属性时更严格地检查等大小
+
+`std::mem::transmute` 要求源类型与目标类型大小相等。Rust 1.98.0 修复了当类型带有 `repr` 属性时，大小相等检查在某些 newtype 场景下的缺陷（[PR #155418](https://github.com/rust-lang/rust/pull/155418) · [#156852](https://github.com/rust-lang/rust/issues/156852)）。
+
+#### 反例：通过 `repr(transparent)` newtype 绕过大小检查
+
+```rust,ignore
+#[repr(C)]
+struct Inner([u8; 8]);
+
+#[repr(transparent)]
+struct Wrap8(Inner);
+
+#[repr(transparent)]
+struct Wrap4(u32);
+
+// 1.98 前：可能错误地允许
+// 1.98 后：正确拒绝，因为 Wrap8 与 Wrap4 大小不同
+fn bad(w: Wrap8) -> Wrap4 {
+    unsafe { std::mem::transmute(w) }
+}
+```
+
+#### 迁移注意
+
+- 搜索项目中的 `#[repr(transparent)]`，确保只有一个 non-ZST 字段，其余字段为 `PhantomData` 等明确 ZST。
+- 用 `std::mem::size_of` 在编译期或运行期校验转换双方大小；优先考虑 `transmute_copy` 或显式字段映射。
+- 完整分析见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md) §1.7 / §5.2 / §5.5 与 [1.98 beta 深度解析](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-repr-transparent-stricter)。
 
 ## 🧭 思维导图（Mindmap）
 

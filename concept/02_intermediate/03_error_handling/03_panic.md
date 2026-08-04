@@ -164,6 +164,36 @@ Panic 可以是可恢复的，也可以是不可恢复的，具体取决于 pani
 
 > 本节汇总与本概念相关的 Rust 稳定版本变更。完整列表见对应版本跟踪页。
 
+### Rust 1.98.0：`PanicHookInfo::location()` 返回 `'static` 引用
+
+panic 发生位置（文件、行号、列）本质上是编译期静态字符串。Rust 1.98.0 将 `std::panic::PanicHookInfo::location()`（以及 `PanicInfo::location()`）的返回类型从与 `&self` 绑定的 `Option<&Location<'_>>` 收紧为 `Option<&'static Location<'static>>`（[PR #146561](https://github.com/rust-lang/rust/pull/146561) · [#148297](https://github.com/rust-lang/rust/issues/148297)）。
+
+#### 代码示例
+
+```rust,ignore
+std::panic::set_hook(Box::new(|info| {
+    // 1.98 后返回 &'static Location<'static>，可直接存入全局状态或跨 await 传递
+    let loc: &'static std::panic::Location<'static> = info.location().unwrap();
+    eprintln!("panic at {}:{}", loc.file(), loc.line());
+}));
+```
+
+#### 语义影响
+
+- 简单调用者无需改动；`'static` 引用可协变为任何更短生命周期。
+- 若代码把 `Location` 的生命周期与 `PanicInfo` 局部生命周期精确绑定（如 trait 实现要求 `&'a Location<'a>`），1.98 后会产生生命周期不匹配错误。
+- 全局 panic hook 可以把位置信息存入 `'static` 日志队列，无需人工延长生命周期。
+
+#### 迁移注意
+
+- 更新自定义 panic hook 的签名以匹配新的 `'static` 生命周期。
+- 封装 panic location 的泛型 API 应把相关生命周期统一为 `'static`。
+- 完整分析见 [Rust 1.98.0 稳定特性](../../07_future/00_version_tracking/rust_1_98_stabilized.md) §1.12 与 [1.98 beta 深度解析](../../07_future/00_version_tracking/rust_1_98_preview.md#beta-panichookinfo-static)。
+
+### Rust 1.98.0：`todo!()` 不再触发 `unreachable_code` lint
+
+Rust 1.98.0 起，`todo!()` 后面的代码不再产生 `unreachable_code` lint；同时新增 `todo_macro_calls` warn-by-default lint，可在开发期关闭、发布前启用（RFC #3928）。
+
 - **[Rust 1.98](../../07_future/00_version_tracking/rust_1_98_stabilized.md)**
   - `PanicHookInfo::location()` / `PanicInfo::location()` 返回类型收紧为 `Option<&'static Location<'static>>`
   - `todo!()` 不再触发 `unreachable_code` lint

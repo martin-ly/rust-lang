@@ -47,6 +47,22 @@
     - [4.5 State](#45-state)
     - [4.6 Visitor](#46-visitor)
     - [4.7 Builder](#47-builder)
+    - [4.8 其他 GoF 模式在 Rust 中的语义映射](#48-其他-gof-模式在-rust-中的语义映射)
+      - [4.8.1 Singleton](#481-singleton)
+      - [4.8.2 Factory Method / Abstract Factory](#482-factory-method--abstract-factory)
+      - [4.8.3 Prototype](#483-prototype)
+      - [4.8.4 Bridge](#484-bridge)
+      - [4.8.5 Composite](#485-composite)
+      - [4.8.6 Decorator](#486-decorator)
+      - [4.8.7 Facade](#487-facade)
+      - [4.8.8 Flyweight](#488-flyweight)
+      - [4.8.9 Proxy](#489-proxy)
+      - [4.8.10 Chain of Responsibility](#4810-chain-of-responsibility)
+      - [4.8.11 Mediator](#4811-mediator)
+      - [4.8.12 Memento](#4812-memento)
+      - [4.8.13 Interpreter](#4813-interpreter)
+      - [4.8.14 Template Method](#4814-template-method)
+      - [4.8.15 Iterator](#4815-iterator)
   - [五、架构模式](#五架构模式)
     - [5.1 Microservices](#51-microservices)
     - [5.2 Event-Driven](#52-event-driven)
@@ -756,6 +772,334 @@ fn main() {
 **与 Rust 的契合点**：消费型 `self` 实现链式调用；Typestate Builder 可用泛型在编译期保证必填字段。
 
 > 深度阅读：[Patterns — Builder](01_patterns.md)
+
+---
+
+### 4.8 其他 GoF 模式在 Rust 中的语义映射
+
+以下模式在 Rust 中常以 trait、enum、`Arc`/生命周期或编译期抽象实现，与 C++/Java 的运行时继承形态有显著差异。
+
+#### 4.8.1 Singleton
+
+**意图**：全局唯一实例。
+
+**Rust 惯用实现**：
+
+- 优先用常量或模块级 `static`/`lazy_static`/`OnceLock`；
+- 避免手写 `get_instance()` 可变全局状态。
+
+```rust
+use std::sync::OnceLock;
+
+fn global_config() -> &'static Config {
+    static CONFIG: OnceLock<Config> = OnceLock::new();
+    CONFIG.get_or_init(|| Config { timeout: 30 })
+}
+
+struct Config { timeout: u64 }
+```
+
+**语义差异**: Rust 通过类型系统区分 `&T` 与 `&mut T`，因此「全局可变单例」需要 `Mutex`/`RwLock`，这与 C++ 的 `static` 默认可变相悖。
+
+---
+
+#### 4.8.2 Factory Method / Abstract Factory
+
+**意图**：将对象创建延迟到子类/具体实现。
+
+**Rust 惯用实现**：
+
+- 用关联函数 `Type::new(...)` 或 `Default`；
+- 需要运行时异构时用 `dyn Trait` + 工厂 trait；
+- 需要闭合类型集时用 enum。
+
+```rust
+trait WidgetFactory {
+    fn make_button(&self) -> Box<dyn Button>;
+}
+
+trait Button { fn label(&self) -> &str; }
+
+struct GtkFactory;
+impl WidgetFactory for GtkFactory {
+    fn make_button(&self) -> Box<dyn Button> {
+        Box::new(GtkButton)
+    }
+}
+struct GtkButton;
+impl Button for GtkButton { fn label(&self) -> &str { "GTK" } }
+```
+
+---
+
+#### 4.8.3 Prototype
+
+**意图**：通过复制现有对象创建新对象。
+
+**Rust 惯用实现**：
+
+- 实现 `Clone` trait（浅拷贝语义）；
+- 深拷贝需求显式命名为 `clone_deep()` 或 `duplicate()`。
+
+```rust
+#[derive(Clone)]
+struct Template { fields: Vec<String> }
+
+fn main() {
+    let t1 = Template { fields: vec!["a".into()] };
+    let t2 = t1.clone();
+    assert_eq!(t1.fields, t2.fields);
+}
+```
+
+---
+
+#### 4.8.4 Bridge
+
+**意图**：将抽象与实现解耦，使二者可独立变化。
+
+**Rust 惯用实现**：抽象为 trait，实现为具体类型；泛型参数承载实现。
+
+```rust
+trait Renderer { fn render_circle(&self, x: f64, y: f64, r: f64); }
+
+struct SvgRenderer;
+impl Renderer for SvgRenderer {
+    fn render_circle(&self, x: f64, y: f64, r: f64) {
+        println!("<circle cx='{x}' cy='{y}' r='{r}'/>");
+    }
+}
+
+struct Circle<R: Renderer> { x: f64, y: f64, r: f64, renderer: R }
+impl<R: Renderer> Circle<R> {
+    fn draw(&self) { self.renderer.render_circle(self.x, self.y, self.r); }
+}
+```
+
+---
+
+#### 4.8.5 Composite
+
+**意图**：将对象组合成树形结构以表示「部分-整体」层次。
+
+**Rust 惯用实现**：递归 enum 表达节点/叶子。
+
+```rust
+#[derive(Debug)]
+enum Expr {
+    Literal(i32),
+    Add(Box<Expr>, Box<Expr>),
+}
+
+impl Expr {
+    fn eval(&self) -> i32 {
+        match self {
+            Expr::Literal(n) => *n,
+            Expr::Add(a, b) => a.eval() + b.eval(),
+        }
+    }
+}
+```
+
+---
+
+#### 4.8.6 Decorator
+
+**意图**：动态地给对象添加额外职责。
+
+**Rust 惯用实现**：
+
+- 静态泛型包装（零成本）；
+- 运行时 `dyn Trait` 包装（有 vtable 开销）。
+
+```rust
+trait DataSource { fn read(&self) -> String; }
+
+struct FileSource;
+impl DataSource for FileSource { fn read(&self) -> String { "raw".into() } }
+
+struct Compressed<D: DataSource>(D);
+impl<D: DataSource> DataSource for Compressed<D> {
+    fn read(&self) -> String { format!("compressed({})", self.0.read()) }
+}
+```
+
+---
+
+#### 4.8.7 Facade
+
+**意图**：为子系统中的一组接口提供统一的高层接口。
+
+**Rust 惯用实现**：模块 + 公开 API 函数/类型，隐藏内部子模块。
+
+```rust
+pub type Error = Box<dyn std::error::Error>;
+
+pub mod facade {
+    use super::*;
+    pub fn compile(src: &str) -> Result<String, Error> {
+        let tokens = lexer::tokenize(src)?;
+        let ast = parser::parse(tokens)?;
+        codegen::generate(ast)
+    }
+}
+
+mod lexer {
+    pub fn tokenize(src: &str) -> Result<Vec<&str>, Box<dyn std::error::Error>> {
+        Ok(src.split_whitespace().collect())
+    }
+}
+mod parser {
+    pub fn parse(tokens: Vec<&str>) -> Result<Vec<&str>, Box<dyn std::error::Error>> {
+        Ok(tokens)
+    }
+}
+mod codegen {
+    pub fn generate(ast: Vec<&str>) -> Result<String, Box<dyn std::error::Error>> {
+        Ok(ast.join(" "))
+    }
+}
+```
+
+---
+
+#### 4.8.8 Flyweight
+
+**意图**：运用共享技术有效地支持大量细粒度对象。
+
+**Rust 惯用实现**：
+
+- `&'static str` 或 intern pool（如 `string_cache` crate）；
+- `Rc<str>` / `Arc<str>` 共享不可变数据。
+
+```rust
+use std::sync::Arc;
+
+#[derive(Clone)]
+struct Particle { color: Arc<str>, x: f64, y: f64 }
+```
+
+---
+
+#### 4.8.9 Proxy
+
+**意图**：为其他对象提供一种代理以控制访问。
+
+**Rust 惯用实现**：
+
+- 智能指针（`Box`/`Rc`/`Arc`）即常见代理；
+- 自定义代理实现 `Deref`。
+
+```rust
+use std::ops::Deref;
+
+struct Lazy<T>(std::cell::OnceCell<T>);
+impl<T> Deref for Lazy<T> {
+    type Target = T;
+    fn deref(&self) -> &T { self.0.get().expect("uninitialized") }
+}
+```
+
+---
+
+#### 4.8.10 Chain of Responsibility
+
+**意图**：使多个对象都有机会处理请求，从而避免请求发送者与接收者耦合。
+
+**Rust 惯用实现**：链表/数组 + `Option<Box<dyn Handler>>` 或迭代器过滤链。
+
+```rust
+trait Handler { fn handle(&self, req: &str) -> Option<String>; }
+
+struct HandlerChain { handlers: Vec<Box<dyn Handler>> }
+impl HandlerChain {
+    fn handle(&self, req: &str) -> Option<String> {
+        self.handlers.iter().find_map(|h| h.handle(req))
+    }
+}
+```
+
+---
+
+#### 4.8.11 Mediator
+
+**意图**：用一个中介对象封装一系列对象交互。
+
+**Rust 惯用实现**：
+
+- Actor/消息总线（如 `tokio::sync::mpsc`）；
+- 集中式协调器持有 `HashMap<ID, Sender<Event>>`。
+
+---
+
+#### 4.8.12 Memento
+
+**意图**：在不破坏封装的前提下捕获对象的内部状态。
+
+**Rust 惯用实现**：
+
+- 暴露 `Snapshot` 新类型；
+- 使用 `serde` 序列化；
+- 撤销栈保存可 `Clone` 的状态副本。
+
+```rust
+#[derive(Clone)]
+struct Editor { text: String }
+#[derive(Clone)]
+struct Snapshot(String);
+
+impl Editor {
+    fn save(&self) -> Snapshot { Snapshot(self.text.clone()) }
+    fn restore(&mut self, s: Snapshot) { self.text = s.0; }
+}
+```
+
+---
+
+#### 4.8.13 Interpreter
+
+**意图**：为语言创建解释器。
+
+**Rust 惯用实现**：递归 enum AST + `eval` 方法；结合 `nom`/`lalrpop` 等解析器生成器。
+
+---
+
+#### 4.8.14 Template Method
+
+**意图**：定义算法骨架，将某些步骤延迟到子类。
+
+**Rust 惯用实现**：
+
+- trait 默认方法 + 必需方法；
+- 或 Strategy 模式显式注入步骤。
+
+```rust
+trait ReportGenerator {
+    fn header(&self) -> String;
+    fn body(&self) -> String;
+    fn render(&self) -> String {
+        format!("{}\n{}", self.header(), self.body())
+    }
+}
+```
+
+---
+
+#### 4.8.15 Iterator
+
+**意图**：提供一种顺序访问聚合对象元素的方法，而无需暴露其内部表示。
+
+**Rust 惯用实现**：实现 `Iterator` trait；`IntoIterator` 支持 `for` 循环。
+
+```rust
+struct Countdown(u32);
+impl Iterator for Countdown {
+    type Item = u32;
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.0 > 0 { self.0 -= 1; Some(self.0) } else { None }
+    }
+}
+```
 
 ---
 

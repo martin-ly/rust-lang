@@ -1,25 +1,25 @@
 {
   "summary": {
     "date": "2026-08-04",
-    "scanned": 745,
+    "scanned": 758,
     "counts": {
       "D1": 0,
-      "D2": 13,
+      "D2": 16,
       "D3": 0,
       "D4": 0,
       "D5": 0,
-      "D6": 0
+      "D6": 2
     },
     "pct": {
       "D1": 0.0,
-      "D2": 1.7,
+      "D2": 2.1,
       "D3": 0.0,
       "D4": 0.0,
       "D5": 0.0,
-      "D6": 0.0
+      "D6": 0.3
     },
-    "D2_base_files_with_asp_and_bloom": 446,
-    "flagged_files": 13
+    "D2_base_files_with_asp_and_bloom": 452,
+    "flagged_files": 18
   },
   "examples": {
     "D1": [],
@@ -33,6 +33,10 @@
         "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
       ],
       [
+        "concept/06_ecosystem/03_design_patterns/49_gof_patterns_in_rust.md",
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [6] 无交集"
+      ],
+      [
         "concept/06_ecosystem/05_systems_and_embedded/31_embedded_networking_and_iot_protocols.md",
         "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5, 6] 无交集"
       ],
@@ -42,6 +46,14 @@
       ],
       [
         "concept/06_ecosystem/14_enterprise_architecture/09_observability_and_sre_patterns.md",
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
+      ],
+      [
+        "concept/06_ecosystem/14_enterprise_architecture/11_event_driven_and_cqrs_patterns.md",
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
+      ],
+      [
+        "concept/06_ecosystem/14_enterprise_architecture/12_cloud_native_and_serverless_patterns.md",
         "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
       ],
       [
@@ -59,24 +71,21 @@
       [
         "concept/06_ecosystem/16_algorithm_patterns/05_greedy_and_approximation_algorithms.md",
         "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/16_algorithm_patterns/06_dynamic_programming_in_rust.md",
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/16_algorithm_patterns/07_string_algorithms_in_rust.md",
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/16_algorithm_patterns/10_computational_geometry_algorithms.md",
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
       ]
     ],
     "D3": [],
     "D4": [],
     "D5": [],
-    "D6": []
+    "D6": [
+      [
+        "concept/06_ecosystem/05_systems_and_embedded/41_embedded_hal_and_mmio.md",
+        "套话: A comprehensive guide to the `embedded-hal` trait ecosystem,"
+      ],
+      [
+        "concept/06_ecosystem/05_systems_and_embedded/42_interrupts_and_concurrency_on_bare_metal.md",
+        "套话: A comprehensive guide to bare-metal concurrency on Cortex-M/"
+      ]
+    ]
   },
   "per_file": {
     "concept/06_ecosystem/03_design_patterns/37_event_sourcing_engine_patterns.md": {
@@ -89,6 +98,11 @@
         "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
       ]
     },
+    "concept/06_ecosystem/03_design_patterns/49_gof_patterns_in_rust.md": {
+      "D2": [
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [6] 无交集"
+      ]
+    },
     "concept/06_ecosystem/05_systems_and_embedded/31_embedded_networking_and_iot_protocols.md": {
       "D2": [
         "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5, 6] 无交集"
@@ -99,7 +113,27 @@
         "A/S/P=A 允许 [1, 2] 与 Bloom [5] 无交集"
       ]
     },
+    "concept/06_ecosystem/05_systems_and_embedded/41_embedded_hal_and_mmio.md": {
+      "D6": [
+        "套话: A comprehensive guide to the `embedded-hal` trait ecosystem,"
+      ]
+    },
+    "concept/06_ecosystem/05_systems_and_embedded/42_interrupts_and_concurrency_on_bare_metal.md": {
+      "D6": [
+        "套话: A comprehensive guide to bare-metal concurrency on Cortex-M/"
+      ]
+    },
     "concept/06_ecosystem/14_enterprise_architecture/09_observability_and_sre_patterns.md": {
+      "D2": [
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
+      ]
+    },
+    "concept/06_ecosystem/14_enterprise_architecture/11_event_driven_and_cqrs_patterns.md": {
+      "D2": [
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
+      ]
+    },
+    "concept/06_ecosystem/14_enterprise_architecture/12_cloud_native_and_serverless_patterns.md": {
       "D2": [
         "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
       ]

@@ -40,6 +40,8 @@
   - [二、Rust 实现惯用法](#二rust-实现惯用法)
     - [2.1 标准库实现的窗口化 SLO 追踪器](#21-标准库实现的窗口化-slo-追踪器)
     - [2.2 与 tracing / metrics 生态集成](#22-与-tracing--metrics-生态集成)
+    - [2.3 OpenTelemetry / Prometheus / Grafana / Jaeger / Loki 集成模式](#23-opentelemetry--prometheus--grafana--jaeger--loki-集成模式)
+    - [2.4 混沌工程（Chaos Engineering）](#24-混沌工程chaos-engineering)
   - [三、反例与边界](#三反例与边界)
     - [3.1 编译错误：在 async 检测代码中持有 `MutexGuard` 跨越 await](#31-编译错误在-async-检测代码中持有-mutexguard-跨越-await)
     - [3.2 SRE 反模式（文本）](#32-sre-反模式文本)
@@ -355,6 +357,98 @@ async fn handler(req: axum::extract::Request) -> impl axum::response::IntoRespon
 
 ---
 
+### 2.3 OpenTelemetry / Prometheus / Grafana / Jaeger / Loki 集成模式
+
+企业级可观测性通常由“采集 → 存储 → 查询 → 可视化 → 告警”五层组成。Rust 生态通过 `opentelemetry`、`prometheus`、`metrics`、`tracing` 等 crate 与这五层对接。
+
+| 组件 | 职责 | Rust 生态对接 | 典型输出 |
+|:---|:---|:---|:---|
+| **OpenTelemetry** | 统一埋点 API 与 OTLP 导出 | `opentelemetry`, `opentelemetry-otlp`, `tracing-opentelemetry` | Traces / Metrics / Logs |
+| **Prometheus** | 时序指标拉取/存储 | `metrics` + `metrics-exporter-prometheus` | Counter / Gauge / Histogram |
+| **Grafana** | 可视化与告警面板 | 无直接 SDK；对接 Prometheus / Loki / Tempo 数据源 | Dashboard / Alert |
+| **Jaeger** | 分布式追踪存储与查询 | `opentelemetry-jaeger`（或 OTLP → Jaeger） | Trace / Span |
+| **Loki** | 日志聚合（标签索引而非全文） | `tracing-subscriber` JSON / `tracing-loki` | 结构化日志流 |
+
+**Rust 集成语义要点**:
+
+1. **单一 Trace 上下文贯穿**: `tracing` 的 span 通过 `tracing-opentelemetry` 自动映射为 OpenTelemetry span，保证跨线程/跨服务的 `trace_id` 一致。
+2. **指标标签低基数**: Prometheus label 必须是有限集合；禁止把用户 ID、时间戳、提示文本放入 label。
+3. **日志结构化**: Loki 偏好 JSON 结构化日志；`tracing-subscriber` 的 `json` feature 可直接输出兼容格式。
+4. ** exporter 批处理**: OpenTelemetry SDK 默认批量导出，避免每次 span 都触发网络请求。
+
+```rust,ignore
+// 典型 OpenTelemetry + Prometheus + tracing 集成骨架
+// [dependencies]
+// opentelemetry = "0.28"
+// opentelemetry_sdk = { version = "0.28", features = ["rt-tokio"] }
+// opentelemetry-otlp = "0.28"
+// tracing = "0.1"
+// tracing-opentelemetry = "0.29"
+// tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+// metrics = "0.24"
+// metrics-exporter-prometheus = "0.16"
+
+use tracing::{info, instrument};
+
+#[instrument(fields(user_id = %user_id))]
+async fn process_order(user_id: String, order_id: String) {
+    info!(order_id = %order_id, "processing order");
+    // 业务逻辑...
+}
+```
+
+> **关键洞察**: OpenTelemetry 提供**统一语义约定**，而 Prometheus / Grafana / Jaeger / Loki 提供**后端存储与可视化**。Rust 层的核心工作是保证埋点 API 与这些约定对齐，避免各工具链的 label/key 命名碎片化。
+
+---
+
+### 2.4 混沌工程（Chaos Engineering）
+
+**Chaos Engineering**: 通过**主动注入故障**来验证系统在面对异常时的韧性，从而建立对系统可靠性的实证信心。由 Netflix Chaos Monkey 推广，现为 SRE 体系的重要组成部分。
+
+**混沌实验的 4 步循环**:
+
+```text
+1. 定义稳态假设（Steady State Hypothesis）
+   → 系统在正常情况下的可观测行为是什么？
+2. 注入真实故障（Inject Real-World Failures）
+   → 节点失效、网络延迟、依赖超时、磁盘满、CPU 饥饿
+3. 观察偏差（Observe Deviation）
+   → 指标是否超出 SLO？告警是否按预期触发？
+4. 修复与自动化（Remediate & Automatize）
+   → 修复发现的弱点；将实验纳入 CI/CD 常态化运行
+```
+
+**Rust 服务常见混沌实验**:
+
+| 故障类型 | 注入方式 | 观察指标 | Rust 关注点 |
+|:---|:---|:---|:---|
+| **进程崩溃** | `kill -9` Pod / 容器 | 可用性、重启时间 | panic 处理、优雅关闭 |
+| **网络延迟** | `tc qdisc add dev eth0 delay 200ms` | P99 延迟、超时率 | `tokio::time::timeout`、重试策略 |
+| **依赖不可用** | 阻断下游服务 DNS / 端口 | 错误率、降级行为 | 断路器、fallback |
+| **CPU / 内存饥饿** | cgroup limit | 吞吐量、GC/调度停顿 | 无 GC、资源感知 |
+| **时钟漂移** | 修改容器时间 | 超时、token 过期 | 单调时钟 vs 墙上时钟 |
+
+```rust
+use std::time::{Duration, Instant};
+
+/// 稳态假设示例：处理请求应在 100ms 内完成。
+/// 混沌实验注入 200ms 网络延迟后，该假设应被违反并触发告警。
+pub fn is_within_slo(start: Instant, slo: Duration) -> bool {
+    start.elapsed() <= slo
+}
+
+fn main() {
+    let start = Instant::now();
+    // 模拟被注入延迟后的请求处理
+    std::thread::sleep(Duration::from_millis(50));
+    println!("Within SLO? {}", is_within_slo(start, Duration::from_millis(100)));
+}
+```
+
+> **来源**: [Principles of Chaos Engineering](https://principlesofchaos.org/) · [Netflix Tech Blog — Chaos Engineering](https://netflixtechblog.com/tagged/chaos-engineering) · [AWS Fault Injection Simulator](https://docs.aws.amazon.com/fis/latest/userguide/what-is.html)
+
+---
+
 ## 三、反例与边界
 
 ### 3.1 编译错误：在 async 检测代码中持有 `MutexGuard` 跨越 await
@@ -604,6 +698,81 @@ graph TD
 
 ---
 
-> **文档版本**: 1.0
-> **最后更新**: 2026-08-03
-> **状态**: ✅ 新建权威页
+## 九、AI / LLM 系统可观测性
+
+> **EN**: Observability for AI / LLM Systems
+
+生成式 AI 服务的可观测性在经典三支柱之上新增了两个核心维度：**提示与响应语义（prompt/response semantics）** 与 **模型行为经济学（token cost / latency / quality）**。本节对齐 OpenTelemetry GenAI Semantic Conventions 与业界最新实践，给出 Rust 实现模式。
+
+### 9.1 观测对象与信号
+
+| 信号类别 | 关键指标 | 典型属性 | Rust 实现要点 |
+|:---|:---|:---|:---|
+| **Prompt 追踪** | 提示长度、模板版本、渲染后 token 数 | `gen_ai.prompt`, `gen_ai.system`, `gen_ai.usage.input_tokens` | 使用 `tracing` span 包裹 LLM 调用，避免在 span 中记录完整提示（PII 风险） |
+| **Response 追踪** | 响应 token 数、首个 token 延迟（TTFT）、总延迟 | `gen_ai.usage.output_tokens`, `gen_ai.response.model`, `gen_ai.finish_reason` | 通过 `OpenTelemetry` `Counter`/`Histogram` 上报； finish_reason 作为低基数属性 |
+| **质量与评估** | 幻觉率、相关性、毒性、用户满意度 | `gen_ai.eval.score`, `gen_ai.eval.name` | 将离线/在线 eval 结果作为独立 span event 或 metric 上报 |
+| **成本与配额** | 每请求成本、RPM/TPM 利用率 | `gen_ai.usage.total_tokens`, `gen_ai.client.operation` | 结合 provider 价目表在本地计算预估成本 |
+| **Guardrails** | 策略触发次数、拦截率 | `gen_ai.guardrail.name`, `gen_ai.guardrail.triggered` | 在输入/输出层统一埋点，保证审计链完整 |
+
+### 9.2 OpenTelemetry GenAI Semantic Conventions
+
+OpenTelemetry 于 2024–2025 年发布 [GenAI Semantic Conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/)，核心约定包括：
+
+- **Span kind**: `CLIENT`（应用调用模型）或 `SERVER`（模型服务提供方）。
+- **Operation name**: `gen_ai.chat`、`gen_ai.embeddings`、`gen_ai.completions`。
+- **Model attributes**: `gen_ai.request.model`、`gen_ai.response.model`、`gen_ai.usage.*`。
+- **Events**: `gen_ai.content.prompt`、`gen_ai.content.completion` 事件用于记录消息内容，但**应避免记录敏感数据**。
+
+### 9.3 Rust 实现：最小可观测 LLM 客户端
+
+```rust
+use tracing::{info, instrument};
+
+#[derive(Debug)]
+pub struct LlmRequest {
+    pub model: String,
+    pub prompt_tokens: u64,
+}
+
+#[derive(Debug)]
+pub struct LlmResponse {
+    pub output_tokens: u64,
+    pub finish_reason: String,
+}
+
+#[instrument(skip(req), fields(gen_ai.operation = "chat", gen_ai.request.model = %req.model))]
+pub async fn call_llm(req: LlmRequest) -> Result<LlmResponse, std::io::Error> {
+    // 模拟异步模型调用
+    let resp = LlmResponse {
+        output_tokens: 42,
+        finish_reason: "stop".into(),
+    };
+    tracing::info!(
+        gen_ai.usage.input_tokens = req.prompt_tokens,
+        gen_ai.usage.output_tokens = resp.output_tokens,
+        gen_ai.response.finish_reason = %resp.finish_reason,
+        "llm response received"
+    );
+    Ok(resp)
+}
+```
+
+### 9.4 反模式
+
+1. **在 metric label 中放置完整提示或用户 ID**：导致高基数、成本爆炸，并泄露 PII。
+2. **仅在日志中记录 token 数，不记录 eval 分数**：无法把观测信号与模型质量关联。
+3. **忽略 TTFT（Time-To-First-Token）**：流式场景下端到端延迟会掩盖首 token 延迟问题。
+4. **Guardrail 触发不记录上下文**：审计与复盘时无法还原拦截原因。
+
+### 9.5 权威来源
+
+- [OpenTelemetry GenAI Semantic Conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/)
+- [OpenTelemetry LLM Observability Best Practices](https://opentelemetry.io/docs/specs/semconv/gen-ai/)
+- [OpenAI Usage Best Practices](https://platform.openai.com/docs/guides/production-best-practices)
+- [LangSmith / Langfuse Tracing Patterns](https://langfuse.com/docs/tracing)
+
+---
+
+> **文档版本**: 1.2
+> **最后更新**: 2026-08-04
+> **状态**: ✅ P6-E 扩展：新增 AI/LLM 可观测性；P7 WS-D 增强：新增 OpenTelemetry/Prometheus/Grafana/Jaeger/Loki 集成模式与混沌工程

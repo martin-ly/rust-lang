@@ -323,7 +323,22 @@ mindmap
 
 ---
 
-## 六、来源与延伸阅读
+## 六、语义注入映射速查
+
+| 1.99 周期特性 | `concept/` 权威页 | 语义注入方向 |
+|---|---|---|
+| `gen` blocks / `yield_expr` | `02_preview_features/25_gen_blocks_preview.md` | 语言级生成器语义 |
+| `async_drop` | `02_preview_features/22_async_drop_preview.md` | 异步资源析构语义 |
+| RTN / ATPIT / TAIT | `02_preview_features/09_return_type_notation_preview.md` · `17_type_alias_impl_trait_preview.md` | 不透明返回类型约束 |
+| Specialization | `02_preview_features/31_specialization_preview.md` | 泛型特化与类型安全 |
+| Effects system | `02_preview_features/01_effects_system.md` | 关键字泛型与效果系统 |
+| Safety tags / Contracts | `02_preview_features/03_safety_tags_preview.md` · `04_formal/04_model_checking/12_rust_contracts.md` | 机器可读安全契约 |
+| `f16` / `f128` | `02_preview_features/35_f16_f128_preview.md` | 扩展浮点 ABI 与精度 |
+| Portable SIMD / SVE / SME | `02_preview_features/29_aarch64_sve_sme_preview.md` | 可移植向量语义 |
+| In-place initialization | `03_advanced/02_unsafe/11_in_place_pinned_initialization.md` | Pin 不动性与安全初始化 |
+| Rust Language Specification | `04_formal/15_language_specification/00_language_specification_overview.md` | 形式化规范进程 |
+
+## 七、来源与延伸阅读
 
 - [Rust Forge](https://forge.rust-lang.org/)
 - [releases.rs](https://releases.rs/)
