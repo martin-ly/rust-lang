@@ -702,7 +702,7 @@ graph TD
 | [TRPL — Async](https://doc.rust-lang.org/book/ch17-00-async-await.html) | ✅ 一级 | 基础教程 |
 | [tokio::select!](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html) | ✅ 一级 | 并发原语 |
 | [Rust Reference — Await](https://doc.rust-lang.org/reference/expressions/await-expr.html) | ✅ 一级 | 语言参考 |
-| [RFC 2592 — Pin](https://rust-lang.github.io/rfcs//2592-futures.html) | ✅ 一级 | Pin 设计 RFC |
+| [RFC 2349 — Pin](https://rust-lang.github.io/rfcs//2349-pin.html) | ✅ 一级 | Pin 设计 RFC |
 | [std::task::Waker](https://doc.rust-lang.org/std/task/struct.Waker.html) | ✅ 一级 | 标准库 API |
 
 ---

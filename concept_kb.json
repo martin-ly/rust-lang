@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 790,
-    "generated_at": "2026-08-04T13:57:34.441668+00:00"
+    "generated_at": "2026-08-04T14:12:03.933494+00:00"
   },
   "files": [
     {
@@ -4613,7 +4613,7 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
-        "../../../../reports/P10_SEMANTIC_DOMAIN_GAP_ANALYSIS_2026_08.md",
+        "../../../reports/P10_SEMANTIC_DOMAIN_GAP_ANALYSIS_2026_08.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
         "../02_sources/04_topic_authority_alignment_map.md",
@@ -34895,7 +34895,7 @@
       "layer": "L3",
       "title": "原地初始化与固定初始化模式",
       "positioning": "",
-      "line_count": 628,
+      "line_count": 634,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -47098,7 +47098,7 @@
       "layer": "L4",
       "title": "原地初始化的操作语义",
       "positioning": "",
-      "line_count": 290,
+      "line_count": 291,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59441,8 +59441,8 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../01_foundation/05_collections/01_collections.md",
-        "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
+        "../../../01_foundation/05_collections/01_collections.md",
+        "../../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
         "../02_algorithms/README.md"
       ],
       "transitions": 0,
@@ -59451,7 +59451,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[集合](../../01_foundation/05_collections/01_collections.md) · [闭包与迭代器](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)"
+          "[集合](../../../01_foundation/05_collections/01_collections.md) · [闭包与迭代器](../../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)"
         ],
         "post": [
           "[算法表达](../02_algorithms/README.md)"
@@ -59491,8 +59491,8 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../01_foundation/08_error_handling/01_error_handling_basics.md",
-        "../../02_intermediate/03_error_handling/01_result_option.md",
+        "../../../01_foundation/08_error_handling/01_error_handling_basics.md",
+        "../../../02_intermediate/03_error_handling/01_result_option.md",
         "./03_into_from_asref.md"
       ],
       "transitions": 0,
@@ -59501,7 +59501,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[错误处理基础](../../01_foundation/08_error_handling/01_error_handling_basics.md) · [Result 与 Option](../../02_intermediate/03_error_handling/01_result_option.md)"
+          "[错误处理基础](../../../01_foundation/08_error_handling/01_error_handling_basics.md) · [Result 与 Option](../../../02_intermediate/03_error_handling/01_result_option.md)"
         ],
         "post": [
           "[Into/From/AsRef](./03_into_from_asref.md)"
@@ -59541,8 +59541,8 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../02_intermediate/00_traits/01_traits.md",
-        "../../02_intermediate/01_generics/01_generics.md",
+        "../../../02_intermediate/00_traits/01_traits.md",
+        "../../../02_intermediate/01_generics/01_generics.md",
         "./02_error_propagation.md",
         "./04_newtype.md"
       ],
@@ -59552,7 +59552,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[Trait](../../02_intermediate/00_traits/01_traits.md) · [泛型](../../02_intermediate/01_generics/01_generics.md)"
+          "[Trait](../../../02_intermediate/00_traits/01_traits.md) · [泛型](../../../02_intermediate/01_generics/01_generics.md)"
         ],
         "post": [
           "[错误传播](./02_error_propagation.md) · [Newtype](./04_newtype.md)"
@@ -59598,8 +59598,8 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../01_foundation/02_type_system/03_structs.md",
-        "../../02_intermediate/00_traits/01_traits.md",
+        "../../../01_foundation/02_type_system/03_structs.md",
+        "../../../02_intermediate/00_traits/01_traits.md",
         "./03_into_from_asref.md"
       ],
       "transitions": 0,
@@ -59608,7 +59608,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[结构体](../../01_foundation/02_type_system/03_structs.md) · [Trait](../../02_intermediate/00_traits/01_traits.md)"
+          "[结构体](../../../01_foundation/02_type_system/03_structs.md) · [Trait](../../../02_intermediate/00_traits/01_traits.md)"
         ],
         "post": [
           "[Into/From/AsRef](./03_into_from_asref.md)"
@@ -59648,8 +59648,8 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../02_intermediate/01_generics/01_generics.md",
-        "../../03_advanced/04_unsafe/02_phantom_data.md",
+        "../../../02_intermediate/01_generics/01_generics.md",
+        "../../../03_advanced/04_unsafe/02_phantom_data.md",
         "../03_design_patterns/04_state_machine.md"
       ],
       "transitions": 0,
@@ -59658,7 +59658,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[泛型](../../02_intermediate/01_generics/01_generics.md) · [PhantomData](../../03_advanced/04_unsafe/02_phantom_data.md)"
+          "[泛型](../../../02_intermediate/01_generics/01_generics.md) · [PhantomData](../../../03_advanced/04_unsafe/02_phantom_data.md)"
         ],
         "post": [
           "[状态机模式](../03_design_patterns/04_state_machine.md)"
@@ -59707,8 +59707,8 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
-        "../../02_intermediate/02_memory_management/02_drop.md",
+        "../../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../../02_intermediate/02_memory_management/02_drop.md",
         "./08_defer.md"
       ],
       "transitions": 0,
@@ -59717,7 +59717,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[所有权与借用](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Drop trait](../../02_intermediate/02_memory_management/02_drop.md)"
+          "[所有权与借用](../../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Drop trait](../../../02_intermediate/02_memory_management/02_drop.md)"
         ],
         "post": [
           "[Defer](./08_defer.md)"
@@ -59757,8 +59757,8 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../01_foundation/02_type_system/03_structs.md",
-        "../../01_foundation/08_error_handling/01_error_handling_basics.md",
+        "../../../01_foundation/02_type_system/03_structs.md",
+        "../../../01_foundation/08_error_handling/01_error_handling_basics.md",
         "./05_typestate.md"
       ],
       "transitions": 0,
@@ -59767,7 +59767,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[结构体](../../01_foundation/02_type_system/03_structs.md) · [错误处理](../../01_foundation/08_error_handling/01_error_handling_basics.md)"
+          "[结构体](../../../01_foundation/02_type_system/03_structs.md) · [错误处理](../../../01_foundation/08_error_handling/01_error_handling_basics.md)"
         ],
         "post": [
           "[Typestate](./05_typestate.md)"
@@ -59807,7 +59807,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../02_intermediate/02_memory_management/02_drop.md",
+        "../../../02_intermediate/02_memory_management/02_drop.md",
         "./02_error_propagation.md",
         "./06_raii_cleanup.md"
       ],
@@ -59817,7 +59817,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[RAII / Cleanup](./06_raii_cleanup.md) · [Drop trait](../../02_intermediate/02_memory_management/02_drop.md)"
+          "[RAII / Cleanup](./06_raii_cleanup.md) · [Drop trait](../../../02_intermediate/02_memory_management/02_drop.md)"
         ],
         "post": [
           "[错误传播](./02_error_propagation.md)"
@@ -60113,8 +60113,8 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../03_advanced/00_concurrency/01_concurrency.md",
-        "../../03_advanced/00_concurrency/02_send_sync.md",
+        "../../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../../03_advanced/00_concurrency/02_send_sync.md",
         "./04_graph_algorithms.md"
       ],
       "transitions": 0,
@@ -60123,7 +60123,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[并发基础](../../03_advanced/00_concurrency/01_concurrency.md) · [Send / Sync](../../03_advanced/00_concurrency/02_send_sync.md)"
+          "[并发基础](../../../03_advanced/00_concurrency/01_concurrency.md) · [Send / Sync](../../../03_advanced/00_concurrency/02_send_sync.md)"
         ],
         "post": [
           "[图算法](./04_graph_algorithms.md)"
@@ -60532,9 +60532,9 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../03_advanced/00_concurrency/01_concurrency.md",
-        "../../03_advanced/01_async/01_async.md",
-        "../../03_advanced/04_ffi/01_rust_ffi.md",
+        "../../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../../03_advanced/01_async/01_async.md",
+        "../../../03_advanced/04_ffi/01_rust_ffi.md",
         "../03_design_patterns/01_strategy.md",
         "../03_design_patterns/05_adapter.md",
         "../03_design_patterns/06_decorator.md"
@@ -60548,7 +60548,7 @@
           "[策略模式](../03_design_patterns/01_strategy.md) · [适配器模式](../03_design_patterns/05_adapter.md) · [装饰器模式](../03_design_patterns/06_decorator.md)"
         ],
         "post": [
-          "[并发原语](../../03_advanced/00_concurrency/01_concurrency.md) · [异步运行时](../../03_advanced/01_async/01_async.md) · [FFI 基础](../../03_advanced/04_ffi/01_rust_ffi.md)"
+          "[并发原语](../../../03_advanced/00_concurrency/01_concurrency.md) · [异步运行时](../../../03_advanced/01_async/01_async.md) · [FFI 基础](../../../03_advanced/04_ffi/01_rust_ffi.md)"
         ]
       },
       "backward_chains": 0,
@@ -60680,8 +60680,8 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../03_advanced/00_concurrency/01_concurrency.md",
-        "../../03_advanced/00_concurrency/03_channels.md",
+        "../../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../../03_advanced/00_concurrency/03_channels.md",
         "./03_microservices.md",
         "./06_event_bus.md"
       ],
@@ -60691,7 +60691,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[并发基础](../../03_advanced/00_concurrency/01_concurrency.md) · [Channel](../../03_advanced/00_concurrency/03_channels.md)"
+          "[并发基础](../../../03_advanced/00_concurrency/01_concurrency.md) · [Channel](../../../03_advanced/00_concurrency/03_channels.md)"
         ],
         "post": [
           "[事件总线](./06_event_bus.md) · [微服务](./03_microservices.md)"
@@ -60731,8 +60731,8 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../01_foundation/07_modules_and_items/01_modules_and_paths.md",
-        "../../02_intermediate/00_traits/01_traits.md",
+        "../../../01_foundation/07_modules_and_items/01_modules_and_paths.md",
+        "../../../02_intermediate/00_traits/01_traits.md",
         "./06_event_bus.md"
       ],
       "transitions": 0,
@@ -60741,7 +60741,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[Trait](../../02_intermediate/00_traits/01_traits.md) · [模块系统](../../01_foundation/07_modules_and_items/01_modules_and_paths.md)"
+          "[Trait](../../../02_intermediate/00_traits/01_traits.md) · [模块系统](../../../01_foundation/07_modules_and_items/01_modules_and_paths.md)"
         ],
         "post": [
           "[事件总线](./06_event_bus.md)"
@@ -60778,7 +60778,7 @@
       ],
       "sources": [],
       "cross_references": [
-        "../../03_advanced/00_concurrency/03_channels.md",
+        "../../../03_advanced/00_concurrency/03_channels.md",
         "./02_cqrs_event_sourcing.md",
         "./04_actor.md"
       ],
@@ -60788,7 +60788,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[Channel](../../03_advanced/00_concurrency/03_channels.md) · [Actor](./04_actor.md)"
+          "[Channel](../../../03_advanced/00_concurrency/03_channels.md) · [Actor](./04_actor.md)"
         ],
         "post": [
           "[CQRS / Event Sourcing](./02_cqrs_event_sourcing.md)"
@@ -60798,11 +60798,11 @@
       "templated_chains": 0
     },
     {
-      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\05_quizzes\\01_quiz_idioms_patterns_architecture.md",
+      "path": "E:\\_src\\rust-lang\\concept\\05_comparative\\06_quizzes\\01_quiz_idioms_patterns_architecture.md",
       "layer": "L5",
       "title": "测验：Rust 惯用法、算法、设计模式与架构模式",
       "positioning": "覆盖 P10-3 新增权威页的交互测验。",
-      "line_count": 306,
+      "line_count": 301,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [

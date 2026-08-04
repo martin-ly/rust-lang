@@ -23,7 +23,7 @@
 > [Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html) ·
 > [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) ·
 > [Rustonomicon — Working With Uninitialized Memory](https://doc.rust-lang.org/nomicon/uninitialized.html) ·
-> [Rustonomicon — Pinning](https://doc.rust-lang.org/nomicon/pin.html) ·
+> [Rustonomicon — Pinning](https://doc.rust-lang.org/std/pin/index.html) ·
 > [RFC 1892 — MaybeUninit](https://rust-lang.github.io/rfcs/1892-uninitialized-uninhabited.html) ·
 > [Alice Ryhl — Init expressions](https://hackmd.io/@aliceryhl/BJutRcPblx) ·
 > [pin-init crate docs](https://rust.docs.kernel.org/pin_init/)
@@ -37,6 +37,7 @@
 
 > **Bloom 层级**: L4
 > **变更日志**:
+>
 > - v1.0 (2026-08-03): 初始形式化 companion，覆盖初始化不变式、部分初始化、panic safety、PinInit/Init 语义
 
 ---
@@ -223,7 +224,7 @@ fn build() -> impl Init<SelfReferential> { ... }
 | Initialization invariant | Rust Reference / Rustonomicon | <https://doc.rust-lang.org/reference/memory-model.html> · <https://doc.rust-lang.org/nomicon/uninitialized.html> |
 | MaybeUninit 形式化状态 | std docs | <https://doc.rust-lang.org/std/mem/union.MaybeUninit.html> |
 | PinInit / Init | Alice Ryhl / pin-init | <https://hackmd.io/@aliceryhl/BJutRcPblx> · <https://rust.docs.kernel.org/pin_init/> |
-| Pin 形式语义 | RFC 2349 / Rustonomicon | <https://rust-lang.github.io/rfcs/2349-pin.html> · <https://doc.rust-lang.org/nomicon/pin.html> |
+| Pin 形式语义 | RFC 2349 / Rustonomicon | <https://rust-lang.github.io/rfcs/2349-pin.html> · <https://doc.rust-lang.org/std/pin/index.html> |
 
 ---
 

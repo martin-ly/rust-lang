@@ -34,7 +34,7 @@
 > [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html) ·
 > [std::mem::MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html) ·
 > [Rustonomicon — Working With Uninitialized Memory](https://doc.rust-lang.org/nomicon/uninitialized.html) ·
-> [Rustonomicon — Pinning](https://doc.rust-lang.org/nomicon/pin.html) ·
+> [Rustonomicon — Pinning](https://doc.rust-lang.org/std/pin/index.html) ·
 > [Rust-for-Linux — The Safe Pinned Initialization Problem](https://rust-for-linux.com/the-safe-pinned-initialization-problem) ·
 > [pin-init crate docs](https://rust.docs.kernel.org/pin_init/) ·
 > [pinned-init on crates.io](https://crates.io/crates/pinned-init) ·
@@ -51,6 +51,7 @@
 
 > **Bloom 层级**: L3-L4
 > **变更日志**:
+>
 > - v1.0 (2026-08-03): 初始权威页，覆盖 `MaybeUninit`、std in-place API、手动 `PhantomPinned`、`pin-init` 模式、`zeroize` 模式、决策树与反例
 
 ---
@@ -78,8 +79,13 @@
   - [九、`zeroize` 安全清零模式](#九zeroize-安全清零模式)
   - [十、选型决策树](#十选型决策树)
   - [十一、反例与边界](#十一反例与边界)
+    - [反例 1：在未初始化内存上调用 `assume_init()` / `assume_init_ref()`](#反例-1在未初始化内存上调用-assume_init--assume_init_ref)
+    - [反例 3：先 `set_len` 后写入](#反例-3先-set_len-后写入)
+    - [反例 4：`zeroed().assume_init()` 对非零类型](#反例-4zeroedassume_init-对非零类型)
+    - [反例 6：`zeroize` 无法阻止 `Vec` realloc 残留](#反例-6zeroize-无法阻止-vec-realloc-残留)
   - [十二、国际来源对齐表](#十二国际来源对齐表)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [国际权威来源（P1 补充）](#国际权威来源p1-补充)
 
 ---
 
@@ -572,7 +578,7 @@ fn main() {
 | `MaybeUninit` 引入 | RFC 1892 | <https://rust-lang.github.io/rfcs/1892-uninitialized-uninhabited.html> |
 | 未初始化内存语义 | Rustonomicon | <https://doc.rust-lang.org/nomicon/uninitialized.html> |
 | `MaybeUninit` API | std docs | <https://doc.rust-lang.org/std/mem/union.MaybeUninit.html> |
-| `Pin` 语义 | Rustonomicon / RFC 2349 | <https://doc.rust-lang.org/nomicon/pin.html> |
+| `Pin` 语义 | Rustonomicon / RFC 2349 | <https://doc.rust-lang.org/std/pin/index.html> |
 | 安全 pinned init 问题 | Rust-for-Linux | <https://rust-for-linux.com/the-safe-pinned-initialization-problem> |
 | `pin-init` crate | kernel.org docs / GitHub | <https://rust.docs.kernel.org/pin_init/> · <https://github.com/Rust-for-Linux/pin-init> |
 | `pinned-init` 用户空间版 | crates.io / docs.rs | <https://crates.io/crates/pinned-init> · <https://docs.rs/pinned-init/latest/pinned_init/> |

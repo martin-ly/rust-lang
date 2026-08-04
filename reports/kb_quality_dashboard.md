@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-08-04T13:57:34.440668+00:00
+> 生成时间: 2026-08-04T14:12:03.932494+00:00
 > 扫描文件数: 790
 
 ## 全局指标
@@ -13,7 +13,7 @@
 | 总 Mermaid 图 | 1562 | ≥50 | ✅ |
 | 编译验证代码块 | 7795 | ≥150 | ✅ |
 | 定理矩阵总行 | 31482 | — | — |
-| 死链数量 | 26 | 0 | ❌ |
+| 死链数量 | 9 | 0 | ❌ |
 | docs/content/knowledge 死链数量 | 0 | 0 | ✅ |
 | 反向推理 (⟸) | 361 | ≥50 | ✅ |
 | 模板化 ⟹ | 0 | 0 | ✅ |
@@ -305,7 +305,7 @@
 | E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\04_architecture\04_actor.md | L5 | 缺失认知路径; 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\04_architecture\05_plugin_system.md | L5 | 缺失认知路径; 缺失受众标签; 缺失内容分级标签 |
 | E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\04_architecture\06_event_bus.md | L5 | 缺失认知路径; 缺失受众标签; 缺失内容分级标签 |
-| E:\_src\rust-lang\concept\05_comparative\05_quizzes\01_quiz_idioms_patterns_architecture.md | L5 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失前置概念; 缺失后置概念; 缺失受众标签 |
+| E:\_src\rust-lang\concept\05_comparative\06_quizzes\01_quiz_idioms_patterns_architecture.md | L5 | 缺失认知路径; 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失前置概念; 缺失后置概念; 缺失受众标签 |
 | E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\02_logging_observability.md | L6 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\03_devops_and_ci_cd.md | L6 | 过渡段落不足 (0 < 3) |
 | E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\04_compiler_internals.md | L6 | 过渡段落不足 (0 < 3) |
@@ -601,32 +601,15 @@
 
 | 来源文件 | 引用路径 | 解析后的绝对路径 |
 |:---|:---|:---|
-| E:\_src\rust-lang\concept\00_meta\05_ai_semantic_engineering\04_semantic_domain_alignment_matrix.md | ../../../../reports/P10_SEMANTIC_DOMAIN_GAP_ANALYSIS_2026_08.md | E:\_src\reports\P10_SEMANTIC_DOMAIN_GAP_ANALYSIS_2026_08.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\01_iterator_chains.md | ../../01_foundation/05_collections/01_collections.md | E:\_src\rust-lang\concept\05_comparative\01_foundation\05_collections\01_collections.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\01_iterator_chains.md | ../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md | E:\_src\rust-lang\concept\05_comparative\02_intermediate\07_iterators_and_closures\01_iterator_patterns.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\02_error_propagation.md | ../../01_foundation/08_error_handling/01_error_handling_basics.md | E:\_src\rust-lang\concept\05_comparative\01_foundation\08_error_handling\01_error_handling_basics.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\02_error_propagation.md | ../../02_intermediate/03_error_handling/01_result_option.md | E:\_src\rust-lang\concept\05_comparative\02_intermediate\03_error_handling\01_result_option.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\03_into_from_asref.md | ../../02_intermediate/00_traits/01_traits.md | E:\_src\rust-lang\concept\05_comparative\02_intermediate\00_traits\01_traits.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\03_into_from_asref.md | ../../02_intermediate/01_generics/01_generics.md | E:\_src\rust-lang\concept\05_comparative\02_intermediate\01_generics\01_generics.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\04_newtype.md | ../../01_foundation/02_type_system/03_structs.md | E:\_src\rust-lang\concept\05_comparative\01_foundation\02_type_system\03_structs.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\04_newtype.md | ../../02_intermediate/00_traits/01_traits.md | E:\_src\rust-lang\concept\05_comparative\02_intermediate\00_traits\01_traits.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\05_typestate.md | ../../02_intermediate/01_generics/01_generics.md | E:\_src\rust-lang\concept\05_comparative\02_intermediate\01_generics\01_generics.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\05_typestate.md | ../../03_advanced/04_unsafe/02_phantom_data.md | E:\_src\rust-lang\concept\05_comparative\03_advanced\04_unsafe\02_phantom_data.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\06_raii_cleanup.md | ../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md | E:\_src\rust-lang\concept\05_comparative\01_foundation\01_ownership_borrow_lifetime\01_ownership.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\06_raii_cleanup.md | ../../02_intermediate/02_memory_management/02_drop.md | E:\_src\rust-lang\concept\05_comparative\02_intermediate\02_memory_management\02_drop.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\07_builder.md | ../../01_foundation/02_type_system/03_structs.md | E:\_src\rust-lang\concept\05_comparative\01_foundation\02_type_system\03_structs.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\07_builder.md | ../../01_foundation/08_error_handling/01_error_handling_basics.md | E:\_src\rust-lang\concept\05_comparative\01_foundation\08_error_handling\01_error_handling_basics.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\08_defer.md | ../../02_intermediate/02_memory_management/02_drop.md | E:\_src\rust-lang\concept\05_comparative\02_intermediate\02_memory_management\02_drop.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\02_algorithms\05_lock_free_data_structures.md | ../../03_advanced/00_concurrency/01_concurrency.md | E:\_src\rust-lang\concept\05_comparative\03_advanced\00_concurrency\01_concurrency.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\02_algorithms\05_lock_free_data_structures.md | ../../03_advanced/00_concurrency/02_send_sync.md | E:\_src\rust-lang\concept\05_comparative\03_advanced\00_concurrency\02_send_sync.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\04_architecture\01_hexagonal_clean_architecture.md | ../../03_advanced/00_concurrency/01_concurrency.md | E:\_src\rust-lang\concept\05_comparative\03_advanced\00_concurrency\01_concurrency.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\04_architecture\01_hexagonal_clean_architecture.md | ../../03_advanced/01_async/01_async.md | E:\_src\rust-lang\concept\05_comparative\03_advanced\01_async\01_async.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\04_architecture\01_hexagonal_clean_architecture.md | ../../03_advanced/04_ffi/01_rust_ffi.md | E:\_src\rust-lang\concept\05_comparative\03_advanced\04_ffi\01_rust_ffi.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\04_architecture\04_actor.md | ../../03_advanced/00_concurrency/01_concurrency.md | E:\_src\rust-lang\concept\05_comparative\03_advanced\00_concurrency\01_concurrency.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\04_architecture\04_actor.md | ../../03_advanced/00_concurrency/03_channels.md | E:\_src\rust-lang\concept\05_comparative\03_advanced\00_concurrency\03_channels.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\04_architecture\05_plugin_system.md | ../../01_foundation/07_modules_and_items/01_modules_and_paths.md | E:\_src\rust-lang\concept\05_comparative\01_foundation\07_modules_and_items\01_modules_and_paths.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\04_architecture\05_plugin_system.md | ../../02_intermediate/00_traits/01_traits.md | E:\_src\rust-lang\concept\05_comparative\02_intermediate\00_traits\01_traits.md |
-| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\04_architecture\06_event_bus.md | ../../03_advanced/00_concurrency/03_channels.md | E:\_src\rust-lang\concept\05_comparative\03_advanced\00_concurrency\03_channels.md |
+| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\02_error_propagation.md | ../../../02_intermediate/03_error_handling/01_result_option.md | E:\_src\rust-lang\concept\02_intermediate\03_error_handling\01_result_option.md |
+| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\04_newtype.md | ../../../01_foundation/02_type_system/03_structs.md | E:\_src\rust-lang\concept\01_foundation\02_type_system\03_structs.md |
+| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\05_typestate.md | ../../../03_advanced/04_unsafe/02_phantom_data.md | E:\_src\rust-lang\concept\03_advanced\04_unsafe\02_phantom_data.md |
+| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\06_raii_cleanup.md | ../../../02_intermediate/02_memory_management/02_drop.md | E:\_src\rust-lang\concept\02_intermediate\02_memory_management\02_drop.md |
+| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\07_builder.md | ../../../01_foundation/02_type_system/03_structs.md | E:\_src\rust-lang\concept\01_foundation\02_type_system\03_structs.md |
+| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\01_idioms\08_defer.md | ../../../02_intermediate/02_memory_management/02_drop.md | E:\_src\rust-lang\concept\02_intermediate\02_memory_management\02_drop.md |
+| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\02_algorithms\05_lock_free_data_structures.md | ../../../03_advanced/00_concurrency/02_send_sync.md | E:\_src\rust-lang\concept\03_advanced\00_concurrency\02_send_sync.md |
+| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\04_architecture\04_actor.md | ../../../03_advanced/00_concurrency/03_channels.md | E:\_src\rust-lang\concept\03_advanced\00_concurrency\03_channels.md |
+| E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\04_architecture\06_event_bus.md | ../../../03_advanced/00_concurrency/03_channels.md | E:\_src\rust-lang\concept\03_advanced\00_concurrency\03_channels.md |
 
 ## docs/content/knowledge 死链检查
 
@@ -861,7 +844,7 @@
 | E:\_src\rust-lang\concept\03_advanced\02_unsafe\08_async_in_unsafe_contexts.md | L3 | 285 | 0 | 0 | 0 | 4 | 2 | 5 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\03_advanced\02_unsafe\09_sanitizers.md | L3 | 426 | 0 | 0 | 0 | 3 | 1 | 3 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\03_advanced\02_unsafe\10_std_unsafe_internals.md | L3 | 571 | 0 | 0 | 0 | 4 | 2 | 13 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
-| E:\_src\rust-lang\concept\03_advanced\02_unsafe\11_in_place_pinned_initialization.md | L3 | 628 | 0 | 0 | 0 | 5 | 2 | 15 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
+| E:\_src\rust-lang\concept\03_advanced\02_unsafe\11_in_place_pinned_initialization.md | L3 | 634 | 0 | 0 | 0 | 5 | 2 | 15 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\03_advanced\03_proc_macros\01_macros.md | L3 | 2573 | 26 | 3 | 0 | 8 | 9 | 59 | 8 | ✅ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\03_advanced\03_proc_macros\02_proc_macro.md | L3 | 11 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\03_advanced\03_proc_macros\03_proc_macro_code_generation_optimization.md | L3 | 447 | 7 | 2 | 0 | 1 | 1 | 13 | 6 | ✅ | ✅ | ✅ | 专家 | 专家级 |
@@ -943,7 +926,7 @@
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\10_minirust.md | L4 | 269 | 0 | 0 | 0 | 1 | 1 | 4 | 0 | ❌ | ✅ | ✅ | None | None |
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\11_async_state_machine_semantics.md | L4 | 313 | 1 | 0 | 0 | 1 | 1 | 7 | 0 | ❌ | ✅ | ✅ | None | None |
 | E:\_src\rust-lang\concept\04_formal\03_operational_semantics\12_pin_and_self_referential_semantics.md | L4 | 252 | 0 | 0 | 0 | 1 | 1 | 7 | 0 | ❌ | ✅ | ✅ | None | None |
-| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\13_in_place_initialization_semantics.md | L4 | 290 | 0 | 0 | 0 | 3 | 1 | 1 | 0 | ❌ | ✅ | ✅ | 形式化 / 专家 | 形式化 |
+| E:\_src\rust-lang\concept\04_formal\03_operational_semantics\13_in_place_initialization_semantics.md | L4 | 291 | 0 | 0 | 0 | 3 | 1 | 1 | 0 | ❌ | ✅ | ✅ | 形式化 / 专家 | 形式化 |
 | E:\_src\rust-lang\concept\04_formal\04_model_checking\01_verification_toolchain.md | L4 | 1601 | 3 | 0 | 0 | 0 | 5 | 17 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
 | E:\_src\rust-lang\concept\04_formal\04_model_checking\02_formal_methods.md | L4 | 34 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 研究者 | 研究者级 |
 | E:\_src\rust-lang\concept\04_formal\04_model_checking\03_aerospace_certification_formal_methods.md | L4 | 1155 | 3 | 0 | 0 | 1 | 2 | 7 | 0 | ✅ | ✅ | ✅ | 研究者 | 专家级 |
@@ -1089,7 +1072,7 @@
 | E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\04_architecture\04_actor.md | L5 | 146 | 0 | 0 | 0 | 1 | 1 | 2 | 0 | ❌ | ✅ | ✅ | None | None |
 | E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\04_architecture\05_plugin_system.md | L5 | 144 | 0 | 0 | 0 | 1 | 1 | 2 | 0 | ❌ | ✅ | ✅ | None | None |
 | E:\_src\rust-lang\concept\05_comparative\05_idioms_patterns_architecture\04_architecture\06_event_bus.md | L5 | 144 | 0 | 0 | 0 | 1 | 1 | 2 | 0 | ❌ | ✅ | ✅ | None | None |
-| E:\_src\rust-lang\concept\05_comparative\05_quizzes\01_quiz_idioms_patterns_architecture.md | L5 | 306 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | ❌ | ❌ | ❌ | None | 测验级 |
+| E:\_src\rust-lang\concept\05_comparative\06_quizzes\01_quiz_idioms_patterns_architecture.md | L5 | 301 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | ❌ | ❌ | ❌ | None | 测验级 |
 | E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\01_toolchain.md | L6 | 2068 | 13 | 0 | 0 | 2 | 10 | 16 | 8 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\02_logging_observability.md | L6 | 784 | 3 | 0 | 0 | 2 | 4 | 9 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | E:\_src\rust-lang\concept\06_ecosystem\00_toolchain\03_devops_and_ci_cd.md | L6 | 1148 | 3 | 0 | 0 | 2 | 3 | 7 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |

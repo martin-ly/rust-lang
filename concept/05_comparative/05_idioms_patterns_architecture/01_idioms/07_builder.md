@@ -22,7 +22,7 @@ mindmap
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **前置概念**: [结构体](../../01_foundation/02_type_system/03_structs.md) · [错误处理](../../01_foundation/08_error_handling/01_error_handling_basics.md)
+> **前置概念**: [结构体](../../../01_foundation/02_type_system/03_structs.md) · [错误处理](../../../01_foundation/08_error_handling/01_error_handling_basics.md)
 > **后置概念**: [Typestate](./05_typestate.md)
 
 ---

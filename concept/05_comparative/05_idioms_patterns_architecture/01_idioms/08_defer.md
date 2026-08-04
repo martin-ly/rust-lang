@@ -22,7 +22,7 @@ mindmap
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **前置概念**: [RAII / Cleanup](./06_raii_cleanup.md) · [Drop trait](../../02_intermediate/02_memory_management/02_drop.md)
+> **前置概念**: [RAII / Cleanup](./06_raii_cleanup.md) · [Drop trait](../../../02_intermediate/02_memory_management/02_drop.md)
 > **后置概念**: [错误传播](./02_error_propagation.md)
 
 ---

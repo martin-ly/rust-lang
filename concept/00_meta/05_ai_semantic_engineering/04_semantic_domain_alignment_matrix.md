@@ -71,7 +71,7 @@ mindmap
 
 ## 4. P10 主要缺口与骨架页
 
-完整缺口分析见 [`reports/P10_SEMANTIC_DOMAIN_GAP_ANALYSIS_2026_08.md`](../../../../reports/P10_SEMANTIC_DOMAIN_GAP_ANALYSIS_2026_08.md)。
+完整缺口分析见 [`reports/P10_SEMANTIC_DOMAIN_GAP_ANALYSIS_2026_08.md`](../../../reports/P10_SEMANTIC_DOMAIN_GAP_ANALYSIS_2026_08.md)。
 
 ### 4.1 剩余缺口（RAG 生产化工件）
 
@@ -130,7 +130,7 @@ mindmap
 - [`concept/00_meta/02_sources/04_topic_authority_alignment_map.md`](../02_sources/04_topic_authority_alignment_map.md) — 主题-权威来源对齐图谱
 - [`concept/00_meta/02_sources/05_international_authority_index.md`](../02_sources/05_international_authority_index.md) — 国际化权威来源索引
 - [`concept/00_meta/05_ai_semantic_engineering/03_rag_evaluation_for_rust_kg.md`](03_rag_evaluation_for_rust_kg.md) — Rust KG 的 RAG 评估
-- [`reports/P10_SEMANTIC_DOMAIN_GAP_ANALYSIS_2026_08.md`](../../../../reports/P10_SEMANTIC_DOMAIN_GAP_ANALYSIS_2026_08.md) — P10 语义领域缺口完整分析报告
+- [`reports/P10_SEMANTIC_DOMAIN_GAP_ANALYSIS_2026_08.md`](../../../reports/P10_SEMANTIC_DOMAIN_GAP_ANALYSIS_2026_08.md) — P10 语义领域缺口完整分析报告
 
 ---
 

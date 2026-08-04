@@ -268,7 +268,7 @@ Step 6: "什么时候会阻塞？"
 > **[TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html)** A future is an asynchronous computation that can produce a value. `async fn` returns a future. When you call an `async fn`, it returns a future that is a suspended computation, not the result. Futures are lazy: they don't do any work until you await them.
 > **[Rust Reference: Async await](https://doc.rust-lang.org/reference/expressions/await-expr.html)** `async fn` 被编译器转换为返回 `impl Future<Output = T>` 的函数，`.await` 被转换为对 `Future::poll` 的循环调用。✅ 已验证
 > **[RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html)** async/await 语法糖的设计基于生成器（generator）状态机转换，语义等价于显式 Future 组合。 ✅ 已验证
-> **[RFC 2592: Futures 0.3](https://github.com/rust-lang/rfcs/pull/2592)** The `Future` trait and `async/await` syntax were stabilized based on [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html), with the `Pin` type introduced in [RFC 2349](https://rust-lang.github.io/rfcs//2349-pin.html) to support self-referential async state machines. ✅ 已验证
+> **[RFC 2349 — Pin](https://rust-lang.github.io/rfcs/2349-pin.html)** The `Pin` type was introduced to support self-referential async state machines; `async/await` desugaring is based on [RFC 2394](https://rust-lang.github.io/rfcs//2394-async_await.html) and the `Future` trait on [RFC 2592](https://rust-lang.github.io/rfcs/2592-futures.html). ✅ 已验证
 
 ### 1.3 形式化定义
 
@@ -780,7 +780,7 @@ async 状态机的 Pin 验证场景:
     // 后果：若状态机含自引用，恢复后引用悬垂 → UB
 ```
 
-> **来源**: [Rustonomicon: Pin projection and structural pinning](https://doc.rust-lang.org/nomicon/pin.html) · [Miri Book](https://github.com/rust-lang/miri) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
+> **来源**: [Rust Reference: Pin projection and structural pinning](https://doc.rust-lang.org/std/pin/index.html) · [Miri Book](https://github.com/rust-lang/miri) · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/)
 
 #### 与 §3.1b 操作语义的衔接
 
@@ -2493,7 +2493,7 @@ Miri 的局限（与 loom 互补）:
 | 异步计算与 Futures | [Wikipedia: Futures and promises](https://en.wikipedia.org/wiki/Futures_and_promises) · [CMU 17-350: Safe Systems Programming] | ✅ |
 | async/await 语法 | [Rust Reference: Await expressions](https://doc.rust-lang.org/reference/expressions/await-expr.html) · [TRPL Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) | ✅ |
 | Future trait 语义 | [Rust Reference: Future trait](https://doc.rust-lang.org/reference/introduction.html) · [std::future::Future] | ✅ |
-| Pin 不动性保证 | [Rust Reference: Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html) · [RFC 2592](https://github.com/rust-lang/rfcs/pull/2592) | ✅ |
+| Pin 不动性保证 | [Rust Reference: Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html) · [RFC 2349 — Pin](https://rust-lang.github.io/rfcs/2349-pin.html) | ✅ |
 | 取消安全设计 | [Tokio Docs: Cancellation] · [Async Book: Cancellation](https://rust-lang.github.io/async-book/06_multiple_futures/01_chapter.html) | ✅ |
 | Waker 契约 | [Rust Reference: Waker](https://doc.rust-lang.org/std/task/struct.Waker.html) · [std::task::Waker] | ✅ |
 | Stream trait | [futures-rs docs] · [Rust Async Book: Streams](https://rust-lang.github.io/async-book/05_streams/01_chapter.html) | ✅ |

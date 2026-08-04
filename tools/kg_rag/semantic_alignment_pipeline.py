@@ -2,12 +2,14 @@
 """Semantic Alignment Pipeline — evaluate KG-RAG retrieval against annotated queries.
 
 This script implements a lightweight RAG evaluation framework for the Rust
-knowledge graph.  It supports three retrieval modes:
+knowledge graph.  It supports multiple retrieval modes:
 
 1. **Structural** (stdlib only): entity linking via SKOS label token overlap.
 2. **Local vector**: dense embeddings from ``sentence-transformers``.
 3. **OpenAI-compatible API**: embeddings from any OpenAI-compatible endpoint
    (OpenAI, Azure OpenAI, vLLM, Ollama with OpenAI compatibility, etc.).
+4. **Hybrid BM25 + vector**: sparse lexical retrieval fused with dense retrieval.
+5. **Optional reranker**: a cross-encoder reranks the hybrid candidate pool.
 
 Metrics include standard RAG/IR metrics: recall@k, MRR, NDCG, precision,
 faithfulness, and source recall.
@@ -39,6 +41,19 @@ Example (OpenAI-compatible endpoint):
         --embed-provider openai \
         --embed-model text-embedding-3-small \
         --top-k 10
+
+Example (hybrid with optional reranker):
+
+    tools/kg_rag/.venv/Scripts/python tools/kg_rag/semantic_alignment_pipeline.py \
+        --kg concept/00_meta/kg_data_v3.json \
+        --eval tools/kg_rag/eval/golden_queries_v1.json \
+        --embed-provider sentence-transformers \
+        --embed-model all-MiniLM-L6-v2 \
+        --hybrid --bm25-weight 0.3 \
+        --reranker cross-encoder/ms-marco-MiniLM-L-6-v2 \
+        --reranker-top-k 20 \
+        --top-k 5 \
+        --markdown reports/P10_RAG_PRODUCTION_EVALUATION_2026_08.md
 """
 from __future__ import annotations
 
@@ -46,6 +61,7 @@ import argparse
 import json
 import math
 import os
+import re
 import sys
 from abc import ABC, abstractmethod
 from pathlib import Path
@@ -82,6 +98,20 @@ try:
     _OPENAI_AVAILABLE = True
 except Exception:  # pragma: no cover
     _OPENAI_AVAILABLE = False
+
+try:
+    from rank_bm25 import BM25Okapi
+
+    _BM25_AVAILABLE = True
+except Exception:  # pragma: no cover
+    _BM25_AVAILABLE = False
+
+try:
+    from sentence_transformers.cross_encoder import CrossEncoder
+
+    _RERANKER_AVAILABLE = True
+except Exception:  # pragma: no cover
+    _RERANKER_AVAILABLE = False
 
 
 ROOT = Path(__file__).resolve().parent
@@ -253,6 +283,146 @@ class VectorIndex:
         ]
         ranked = sorted(enumerate(scores), key=lambda x: x[1], reverse=True)[:top_k]
         return [{"entity": self.entities[i], "score": round(float(s), 4)} for i, s in ranked]
+
+
+# ---------------------------------------------------------------------------
+# BM25 lexical index
+# ---------------------------------------------------------------------------
+
+
+def _tokenize(text: str) -> list[str]:
+    """Simple whitespace/token-based tokenizer for BM25."""
+    return re.findall(r"[a-z0-9_]+", text.lower())
+
+
+class BM25Index:
+    """Sparse lexical index over KG entity texts (requires ``rank-bm25``)."""
+
+    def __init__(self, entities: list[dict[str, Any]], corpus: list[list[str]]):
+        self.entities = entities
+        self.corpus = corpus
+        if _BM25_AVAILABLE:
+            self.index = BM25Okapi(corpus)
+        else:
+            self.index = None
+
+    @classmethod
+    def build(cls, kg: dict[str, Any]) -> "BM25Index":
+        entities = iter_entities(kg)
+        corpus = [_tokenize(entity_text(e)) for e in entities]
+        return cls(entities, corpus)
+
+    def search(self, query: str, top_k: int = 5) -> list[dict[str, Any]]:
+        if not _BM25_AVAILABLE or self.index is None:
+            return []
+        tokens = _tokenize(query)
+        scores = self.index.get_scores(tokens)
+        if _NUMPY_AVAILABLE:
+            top_indices = np.argsort(-scores)[:top_k]
+        else:
+            indexed = sorted(enumerate(scores), key=lambda x: x[1], reverse=True)[:top_k]
+            top_indices = [i for i, _ in indexed]
+        return [
+            {"entity": self.entities[i], "score": round(float(scores[i]), 4)}
+            for i in top_indices
+        ]
+
+
+# ---------------------------------------------------------------------------
+# Hybrid retriever (BM25 + vector + optional reranker)
+# ---------------------------------------------------------------------------
+
+
+class HybridRetriever:
+    """Combine dense, sparse, and optional cross-encoder reranking."""
+
+    def __init__(
+        self,
+        vector_index: VectorIndex,
+        bm25_index: BM25Index | None,
+        provider: EmbeddingProvider,
+        bm25_weight: float = 0.3,
+        reranker: Any | None = None,
+        reranker_top_k: int = 20,
+    ):
+        self.vector_index = vector_index
+        self.bm25_index = bm25_index
+        self.provider = provider
+        self.bm25_weight = bm25_weight
+        self.reranker = reranker
+        self.reranker_top_k = reranker_top_k
+
+    def _fuse(
+        self,
+        vector_hits: list[dict[str, Any]],
+        bm25_hits: list[dict[str, Any]],
+        top_k: int,
+    ) -> list[dict[str, Any]]:
+        """Fuse vector and BM25 rankings with reciprocal rank / min-max score fusion."""
+        by_id: dict[str, dict[str, Any]] = {}
+
+        def _min_max_scale(values: list[float]) -> list[float]:
+            if not values:
+                return []
+            lo, hi = min(values), max(values)
+            if hi - lo < 1e-9:
+                return [0.5 for _ in values]
+            return [(v - lo) / (hi - lo) for v in values]
+
+        vec_scores = [h["score"] for h in vector_hits]
+        vec_scaled = _min_max_scale(vec_scores)
+        for hit, sc in zip(vector_hits, vec_scaled):
+            eid = hit["entity"]["@id"]
+            by_id[eid] = {
+                "entity": hit["entity"],
+                "vector_score": sc,
+                "bm25_score": 0.0,
+            }
+
+        bm25_scores = [h["score"] for h in bm25_hits]
+        bm25_scaled = _min_max_scale(bm25_scores)
+        for hit, sc in zip(bm25_hits, bm25_scaled):
+            eid = hit["entity"]["@id"]
+            if eid in by_id:
+                by_id[eid]["bm25_score"] = sc
+            else:
+                by_id[eid] = {
+                    "entity": hit["entity"],
+                    "vector_score": 0.0,
+                    "bm25_score": sc,
+                }
+
+        alpha = self.bm25_weight
+        for item in by_id.values():
+            item["score"] = round(
+                (1 - alpha) * item["vector_score"] + alpha * item["bm25_score"], 4
+            )
+
+        ranked = sorted(by_id.values(), key=lambda x: x["score"], reverse=True)
+        return ranked[:top_k]
+
+    def _rerank(
+        self, query: str, candidates: list[dict[str, Any]]
+    ) -> list[dict[str, Any]]:
+        if self.reranker is None or not candidates:
+            return candidates
+        texts = [entity_text(c["entity"]) for c in candidates]
+        pairs = [[query, t] for t in texts]
+        scores = self.reranker.predict(pairs)
+        for c, sc in zip(candidates, scores):
+            c["reranker_score"] = round(float(sc), 4)
+        return sorted(candidates, key=lambda x: x.get("reranker_score", x["score"]), reverse=True)
+
+    def search(self, query: str, top_k: int = 5) -> list[dict[str, Any]]:
+        vector_hits = self.vector_index.search(query, self.provider, top_k=self.reranker_top_k)
+        bm25_hits: list[dict[str, Any]] = []
+        if self.bm25_index is not None:
+            bm25_hits = self.bm25_index.search(query, top_k=self.reranker_top_k)
+
+        fused = self._fuse(vector_hits, bm25_hits, top_k=self.reranker_top_k)
+        if self.reranker is not None:
+            fused = self._rerank(query, fused)
+        return fused[:top_k]
 
 
 # ---------------------------------------------------------------------------
@@ -507,6 +677,7 @@ def evaluate_sample(
     index: VectorIndex | None = None,
     provider: EmbeddingProvider | None = None,
     predicates: tuple[str, ...] | None = None,
+    hybrid_retriever: HybridRetriever | None = None,
 ) -> dict[str, Any]:
     """Compute retrieval metrics for a single evaluation sample."""
     query = sample.get("query", "")
@@ -517,8 +688,20 @@ def evaluate_sample(
     linked = entity_linking(kg, query, top_n=top_k)
     seed_ranked: list[dict[str, Any]] = [{"entity": e, "score": 1.0 - (i * 0.01)} for i, e in enumerate(linked)]
 
-    # Optional dense retrieval: merge vector hits into the ranked seed list.
-    if index is not None and provider is not None:
+    # Optional hybrid dense+sparse+rerank retrieval.
+    if hybrid_retriever is not None:
+        try:
+            hybrid_hits = hybrid_retriever.search(query, top_k=top_k)
+            seen = {item["entity"]["@id"] for item in seed_ranked}
+            for hit in hybrid_hits:
+                eid = hit["entity"]["@id"]
+                if eid not in seen:
+                    seed_ranked.append(hit)
+                    seen.add(eid)
+            seed_ranked.sort(key=lambda x: x["score"], reverse=True)
+        except Exception as exc:  # pragma: no cover
+            print(f"[warn] hybrid retrieval failed: {exc}", file=sys.stderr)
+    elif index is not None and provider is not None:
         try:
             vector_hits = index.search(query, provider, top_k=top_k)
             seen = {item["entity"]["@id"] for item in seed_ranked}
@@ -642,6 +825,7 @@ def run_evaluation(
     index: VectorIndex | None = None,
     provider: EmbeddingProvider | None = None,
     predicates: tuple[str, ...] | None = None,
+    hybrid_retriever: HybridRetriever | None = None,
 ) -> dict[str, Any]:
     results: list[dict[str, Any]] = []
     for sample in samples:
@@ -654,6 +838,7 @@ def run_evaluation(
                 index=index,
                 provider=provider,
                 predicates=predicates,
+                hybrid_retriever=hybrid_retriever,
             )
         )
 
@@ -666,6 +851,9 @@ def run_evaluation(
     aggregates: dict[str, Any] = {
         "n_samples": len(results),
         "embedding_provider": provider.name if provider else "structural",
+        "retrieval_mode": "hybrid" if hybrid_retriever else ("vector" if provider else "structural"),
+        "bm25_weight": hybrid_retriever.bm25_weight if hybrid_retriever else None,
+        "reranker": hybrid_retriever.reranker.__class__.__name__ if hybrid_retriever and hybrid_retriever.reranker else None,
     }
     for key in results[0]:
         if key in ("query", "retrieved_entities", "retrieved_sources", "expected_entities", "expected_sources", "n_retrieved"):
@@ -684,18 +872,26 @@ def write_report(report: dict[str, Any], output: Path) -> None:
 
 def _format_markdown(report: dict[str, Any]) -> str:
     agg = report.get("aggregates", {})
+    retrieval_mode = agg.get("retrieval_mode", "structural")
     lines = [
         "# KG-RAG Semantic Alignment Evaluation Report",
         "",
         f"**Generated**: {__import__('datetime').datetime.now().isoformat(timespec='minutes')}",
         f"**Embedding provider**: {agg.get('embedding_provider', 'structural')}",
+        f"**Retrieval mode**: {retrieval_mode}",
         f"**Samples**: {agg.get('n_samples', 0)}",
+    ]
+    if agg.get("bm25_weight") is not None:
+        lines.append(f"**BM25 weight**: {agg['bm25_weight']}")
+    if agg.get("reranker"):
+        lines.append(f"**Reranker**: {agg['reranker']}")
+    lines.extend([
         "",
         "## Aggregates",
         "",
         "| Metric | Value |",
         "|:---|---:|",
-    ]
+    ])
 
     # Group metrics by category and k.
     metric_keys = [k for k in agg if k not in ("n_samples", "embedding_provider")]
@@ -744,6 +940,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--embed-model", help="Model name for the embedding provider")
     parser.add_argument("--embed-api-key", help="API key for OpenAI-compatible provider (or set OPENAI_API_KEY)")
     parser.add_argument("--embed-base-url", help="Base URL for OpenAI-compatible provider (or set OPENAI_BASE_URL)")
+    # Hybrid + reranker options.
+    parser.add_argument("--hybrid", action="store_true", help="Enable BM25 + vector hybrid retrieval (requires rank-bm25)")
+    parser.add_argument("--bm25-weight", type=float, default=0.3, help="Weight of BM25 score in hybrid fusion (0=vector only, 1=BM25 only)")
+    parser.add_argument("--reranker", help="Cross-encoder model name for reranking (requires sentence-transformers)")
+    parser.add_argument("--reranker-top-k", type=int, default=20, help="Number of hybrid candidates to feed to reranker")
+    parser.add_argument("--sample", type=int, default=0, help="If >0, randomly sample N queries for quick evaluation")
     args = parser.parse_args(argv)
 
     kg = load_kg(args.kg)
@@ -751,10 +953,16 @@ def main(argv: list[str] | None = None) -> int:
     if not samples:
         print(f"[warn] no eval samples found in {args.eval}; use --builtin", file=sys.stderr)
 
+    if args.sample and args.sample < len(samples):
+        import random
+        random.seed(20260804)
+        samples = random.sample(samples, args.sample)
+
     predicate_set = tuple(p.strip() for p in args.predicates.split(",") if p.strip())
 
     provider: EmbeddingProvider | None = None
     index: VectorIndex | None = None
+    hybrid_retriever: HybridRetriever | None = None
     if args.embed_provider != "none":
         try:
             provider = create_embedding_provider(
@@ -768,6 +976,32 @@ def main(argv: list[str] | None = None) -> int:
         except Exception as exc:  # pragma: no cover
             print(f"[warn] embedding provider unavailable: {exc}", file=sys.stderr)
 
+    if index is not None and args.hybrid:
+        bm25_index: BM25Index | None = None
+        try:
+            bm25_index = BM25Index.build(kg)
+            print(f"[semantic_alignment_pipeline] built BM25 index over {len(bm25_index.entities)} entities", file=sys.stderr)
+        except Exception as exc:  # pragma: no cover
+            print(f"[warn] BM25 index unavailable: {exc}", file=sys.stderr)
+
+        reranker: Any | None = None
+        if args.reranker:
+            try:
+                from sentence_transformers.cross_encoder import CrossEncoder
+                reranker = CrossEncoder(args.reranker)
+                print(f"[semantic_alignment_pipeline] loaded reranker {args.reranker}", file=sys.stderr)
+            except Exception as exc:  # pragma: no cover
+                print(f"[warn] reranker unavailable: {exc}", file=sys.stderr)
+
+        hybrid_retriever = HybridRetriever(
+            vector_index=index,
+            bm25_index=bm25_index,
+            provider=provider,
+            bm25_weight=args.bm25_weight,
+            reranker=reranker,
+            reranker_top_k=args.reranker_top_k,
+        )
+
     report = run_evaluation(
         kg,
         samples,
@@ -776,6 +1010,7 @@ def main(argv: list[str] | None = None) -> int:
         index=index,
         provider=provider,
         predicates=predicate_set,
+        hybrid_retriever=hybrid_retriever,
     )
 
     print(json.dumps(report["aggregates"], ensure_ascii=False, indent=2))

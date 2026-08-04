@@ -7,7 +7,7 @@
 > **Bloom 层级**: L5-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **前置概念**: [策略模式](../03_design_patterns/01_strategy.md) · [适配器模式](../03_design_patterns/05_adapter.md) · [装饰器模式](../03_design_patterns/06_decorator.md)
-> **后置概念**: [并发原语](../../03_advanced/00_concurrency/01_concurrency.md) · [异步运行时](../../03_advanced/01_async/01_async.md) · [FFI 基础](../../03_advanced/04_ffi/01_rust_ffi.md)
+> **后置概念**: [并发原语](../../../03_advanced/00_concurrency/01_concurrency.md) · [异步运行时](../../../03_advanced/01_async/01_async.md) · [FFI 基础](../../../03_advanced/04_ffi/01_rust_ffi.md)
 
 ```mermaid
 mindmap

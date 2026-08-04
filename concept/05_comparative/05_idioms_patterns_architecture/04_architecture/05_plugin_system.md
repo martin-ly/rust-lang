@@ -23,7 +23,7 @@ mindmap
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **前置概念**: [Trait](../../02_intermediate/00_traits/01_traits.md) · [模块系统](../../01_foundation/07_modules_and_items/01_modules_and_paths.md)
+> **前置概念**: [Trait](../../../02_intermediate/00_traits/01_traits.md) · [模块系统](../../../01_foundation/07_modules_and_items/01_modules_and_paths.md)
 > **后置概念**: [事件总线](./06_event_bus.md)
 
 ---

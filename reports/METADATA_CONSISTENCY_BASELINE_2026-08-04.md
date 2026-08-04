@@ -1,17 +1,17 @@
 # 元数据一致性基线（语义质量门 P0-1）
 
-**日期**: 2026-08-04  **扫描**: 780 concept 活跃文件（排除 archive）  **模式**: strict
+**日期**: 2026-08-04  **扫描**: 823 concept 活跃文件（排除 archive）  **模式**: strict
 
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
 | D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥 | 0 | 0.0% | >0 | pass |
-| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 23 (基=464) | 2.9% | >=5% | pass |
+| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 23 (基=469) | 2.8% | >=5% | pass |
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
-| D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
-| D6 Summary 低信息量模板套话 | 2 | 0.3% | >=3% | pass |
+| D5 稳定层正文残留 nightly/preview/unstable | 2 | 0.2% | >0 | FAIL |
+| D6 Summary 低信息量模板套话 | 2 | 0.2% | >=3% | pass |
 
-**受影响文件总数**: 25 / 780
+**受影响文件总数**: 27 / 823
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -137,7 +137,6 @@
 
 ### D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥（0）
 
-
 ### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（23）
 
 - `concept/00_meta/05_ai_semantic_engineering/01_knowledge_graph_design.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [0] 无交集
@@ -155,12 +154,12 @@
 
 ### D3 关键字段同文件重声明（0）
 
-
 ### D4 文首块 Rust 版本号自矛盾（0）
 
+### D5 稳定层正文残留 nightly/preview/unstable（2）
 
-### D5 稳定层正文残留 nightly/preview/unstable（0）
-
+- `concept/04_formal/11_computational_models/15_refinement_types_and_flux.md` — 稳定层 nightly/preview 关键词 2 处
+- `concept/06_ecosystem/05_systems_and_embedded/56_rust_for_linux_kernel_module_basics.md` — 稳定层 nightly/preview 关键词 1 处
 
 ### D6 Summary 低信息量模板套话（2）
 
@@ -169,7 +168,7 @@
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 
-- 无（全部通过）
+- D5 稳定层nightly残留 2 (>0)
 
 ## 机器可读
 

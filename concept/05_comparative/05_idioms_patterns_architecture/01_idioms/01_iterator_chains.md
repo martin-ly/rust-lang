@@ -24,7 +24,7 @@ mindmap
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **前置概念**: [集合](../../01_foundation/05_collections/01_collections.md) · [闭包与迭代器](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)
+> **前置概念**: [集合](../../../01_foundation/05_collections/01_collections.md) · [闭包与迭代器](../../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md)
 > **后置概念**: [算法表达](../02_algorithms/README.md)
 
 ---

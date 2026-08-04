@@ -210,7 +210,7 @@ fn pin_stack() -> Pin<&mut i32> {
 - [std::marker::Unpin](https://doc.rust-lang.org/std/marker/trait.Unpin.html)
 - [RFC 2349 — Pin](https://github.com/rust-lang/rfcs/pull/2349)
 - [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html)
-- [Rustonomicon — Pin](https://doc.rust-lang.org/nomicon/pin.html)
+- [Rustonomicon — Pin](https://doc.rust-lang.org/std/pin/index.html)
 
 ---
 
@@ -241,11 +241,11 @@ mindmap
 
 ## 国际化权威来源补充（International Authority Sources）
 
-- https://dl.acm.org/doi/10.1145/3158154
-- https://arxiv.org/abs/1804.07608
-- https://doc.rust-lang.org/reference/introduction.html
+- <https://dl.acm.org/doi/10.1145/3158154>
+- <https://arxiv.org/abs/1804.07608>
+- <https://doc.rust-lang.org/reference/introduction.html>
 
 ## 国际化权威来源补充（International Authority Sources）
 
-- https://rust-unofficial.github.io/patterns/
-- https://blog.rust-lang.org/
+- <https://rust-unofficial.github.io/patterns/>
+- <https://blog.rust-lang.org/>

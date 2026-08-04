@@ -7,6 +7,7 @@
 **范围**: `concept/**/*.md`（824 页）
 **工具**: `scripts/semantic_domain_inventory.py`
 **前置输入**:
+
 - `reports/PLAN_P10_Semantic_Domain_International_Alignment_2026_08_04.md`
 - `reports/P9_International_Alignment_Hardening_COMPLETION_2026_08_04.md`
 - `concept/00_meta/02_sources/06_external_authority_topic_index.md`

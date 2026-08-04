@@ -25,7 +25,7 @@ mindmap
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **前置概念**: [Trait](../../02_intermediate/00_traits/01_traits.md) · [泛型](../../02_intermediate/01_generics/01_generics.md)
+> **前置概念**: [Trait](../../../02_intermediate/00_traits/01_traits.md) · [泛型](../../../02_intermediate/01_generics/01_generics.md)
 > **后置概念**: [错误传播](./02_error_propagation.md) · [Newtype](./04_newtype.md)
 
 ---

@@ -22,7 +22,7 @@ mindmap
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **前置概念**: [泛型](../../02_intermediate/01_generics/01_generics.md) · [PhantomData](../../03_advanced/04_unsafe/02_phantom_data.md)
+> **前置概念**: [泛型](../../../02_intermediate/01_generics/01_generics.md) · [PhantomData](../../../03_advanced/04_unsafe/02_phantom_data.md)
 > **后置概念**: [状态机模式](../03_design_patterns/04_state_machine.md)
 
 ---
