@@ -377,8 +377,8 @@ impl SendName {
 fn main() {
     let (tx, _) = channel::<String>();
     let client = SendName(tx);
-    let client = client.send_name("apple".into());
-    // client.send_name("banana".into()); // ❌ client 已被消费
+    client.send_name("apple".into());
+    client.send_name("banana".into()); // ❌ client 已被消费
 }
 ```
 

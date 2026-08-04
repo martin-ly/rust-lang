@@ -24,7 +24,7 @@ mindmap
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **前置概念**: [Channel](../../../03_advanced/00_concurrency/03_channels.md) · [Actor](./04_actor.md)
+> **前置概念**: [Channel](../../../03_advanced/00_concurrency/03_concurrency_patterns.md) · [Actor](./04_actor.md)
 > **后置概念**: [CQRS / Event Sourcing](./02_cqrs_event_sourcing.md)
 
 ---

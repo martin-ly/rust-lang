@@ -132,6 +132,10 @@ pub trait Plugin {
     fn execute<T>(&self, input: T) -> String; // ❌ 泛型方法不能成为对象安全
 }
 
+fn use_plugin(p: &dyn Plugin) {
+    let _ = p.name();
+}
+
 fn main() {}
 ```
 

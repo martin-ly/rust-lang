@@ -23,7 +23,7 @@ mindmap
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **前置概念**: [错误处理基础](../../../01_foundation/08_error_handling/01_error_handling_basics.md) · [Result 与 Option](../../../02_intermediate/03_error_handling/01_result_option.md)
+> **前置概念**: [错误处理基础](../../../01_foundation/08_error_handling/01_error_handling_basics.md) · [Result 与 Option](../../../02_intermediate/03_error_handling/01_error_handling.md)
 > **后置概念**: [Into/From/AsRef](./03_into_from_asref.md)
 
 ---

@@ -23,7 +23,7 @@
 
 ## 📑 目录
 
-- [Effect Handlers 与 Rust 的受限效应](#effect-handlers-与-rust-的受限效应)
+- [Effect Handlers 与 Rust 的受限效应：作为计算模型的控制流抽象（Effect Handlers and Rust's Limited Effects: Control-Flow Abstractions as a Computational Model）](#effect-handlers-与-rust-的受限效应作为计算模型的控制流抽象effect-handlers-and-rusts-limited-effects-control-flow-abstractions-as-a-computational-model)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 代数效应与处理器作为计算模型](#11-代数效应与处理器作为计算模型)
@@ -418,7 +418,7 @@ fn main() {
 
 ### 反例 2：在 async 中跨 await 持有非 Send 值
 
-```rust,compile_fail,E0277
+```rust,compile_fail
 use std::rc::Rc;
 use std::future::Future;
 use std::pin::Pin;
@@ -444,7 +444,7 @@ fn main() {
 }
 ```
 
-> **错误诊断**: `error[E0277]: `Rc<i32>` cannot be sent between threads safely`。async 状态机在挂起时可能跨线程迁移，因此跨 await 持用的值必须实现 `Send`。
+> **错误诊断**: `error[E0277]:`Rc<i32>`cannot be sent between threads safely`。async 状态机在挂起时可能跨线程迁移，因此跨 await 持用的值必须实现 `Send`。
 > **修正**: 使用 `Arc` 替代 `Rc`，或限制 Future 在单线程执行器上运行。
 
 ### 反例 3：试图用闭包实现通用 resumption

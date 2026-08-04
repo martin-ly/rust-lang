@@ -411,7 +411,8 @@ class HybridRetriever:
         scores = self.reranker.predict(pairs)
         for c, sc in zip(candidates, scores):
             c["reranker_score"] = round(float(sc), 4)
-        return sorted(candidates, key=lambda x: x.get("reranker_score", x["score"]), reverse=True)
+            c["score"] = round(float(sc), 4)
+        return sorted(candidates, key=lambda x: x["score"], reverse=True)
 
     def search(self, query: str, top_k: int = 5) -> list[dict[str, Any]]:
         vector_hits = self.vector_index.search(query, self.provider, top_k=self.reranker_top_k)

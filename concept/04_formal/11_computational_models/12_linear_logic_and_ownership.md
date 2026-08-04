@@ -421,7 +421,8 @@ fn main() {
 fn main() {
     let s = String::from("not copy");
     let r = &s;
-    let _ = *r; // ❌ 不能 move 出共享引用
+    let s2 = *r; // ❌ 不能 move 出共享引用
+    drop(s2);
 }
 ```
 

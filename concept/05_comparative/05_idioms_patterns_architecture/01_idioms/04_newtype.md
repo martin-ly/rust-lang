@@ -22,7 +22,7 @@ mindmap
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **前置概念**: [结构体](../../../01_foundation/02_type_system/03_structs.md) · [Trait](../../../02_intermediate/00_traits/01_traits.md)
+> **前置概念**: [结构体](../../../01_foundation/07_modules_and_items/04_structs.md) · [Trait](../../../02_intermediate/00_traits/01_traits.md)
 > **后置概念**: [Into/From/AsRef](./03_into_from_asref.md)
 
 ---

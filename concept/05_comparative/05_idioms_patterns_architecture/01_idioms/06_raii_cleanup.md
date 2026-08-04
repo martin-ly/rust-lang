@@ -22,7 +22,7 @@ mindmap
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **前置概念**: [所有权与借用](../../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Drop trait](../../../02_intermediate/02_memory_management/02_drop.md)
+> **前置概念**: [所有权与借用](../../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Drop trait](../../../02_intermediate/02_memory_management/01_memory_management.md)
 > **后置概念**: [Defer](./08_defer.md)
 
 ---
@@ -108,7 +108,7 @@ struct Guard;
 fn main() {
     let guard = Guard;
     drop(guard);
-    let _ = guard; // ❌ guard 已被 move 进 drop
+    let _used = guard; // ❌ guard 已被 move 进 drop
 }
 ```
 

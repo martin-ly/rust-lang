@@ -7,7 +7,7 @@
       "D2": 23,
       "D3": 0,
       "D4": 0,
-      "D5": 2,
+      "D5": 0,
       "D6": 2
     },
     "pct": {
@@ -15,11 +15,11 @@
       "D2": 2.8,
       "D3": 0.0,
       "D4": 0.0,
-      "D5": 0.2,
+      "D5": 0.0,
       "D6": 0.2
     },
     "D2_base_files_with_asp_and_bloom": 469,
-    "flagged_files": 27
+    "flagged_files": 25
   },
   "examples": {
     "D1": [],
@@ -75,16 +75,7 @@
     ],
     "D3": [],
     "D4": [],
-    "D5": [
-      [
-        "concept/04_formal/11_computational_models/15_refinement_types_and_flux.md",
-        "稳定层 nightly/preview 关键词 2 处"
-      ],
-      [
-        "concept/06_ecosystem/05_systems_and_embedded/56_rust_for_linux_kernel_module_basics.md",
-        "稳定层 nightly/preview 关键词 1 处"
-      ]
-    ],
+    "D5": [],
     "D6": [
       [
         "concept/06_ecosystem/05_systems_and_embedded/41_embedded_hal_and_mmio.md",
@@ -110,11 +101,6 @@
     "concept/00_meta/05_ai_semantic_engineering/03_rag_evaluation_for_rust_kg.md": {
       "D2": [
         "A/S/P=S 允许 [2, 3, 4] 与 Bloom [0] 无交集"
-      ]
-    },
-    "concept/04_formal/11_computational_models/15_refinement_types_and_flux.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 2 处"
       ]
     },
     "concept/06_ecosystem/03_design_patterns/37_event_sourcing_engine_patterns.md": {
@@ -165,11 +151,6 @@
     "concept/06_ecosystem/05_systems_and_embedded/51_probe_rs_and_embedded_debugging.md": {
       "D2": [
         "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/05_systems_and_embedded/56_rust_for_linux_kernel_module_basics.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 1 处"
       ]
     },
     "concept/06_ecosystem/14_enterprise_architecture/09_observability_and_sre_patterns.md": {

@@ -357,6 +357,15 @@ D5_WHITELIST_FILES = {
         "no_std alloc crate 生态页：nightly/preview/unstable 为 `-Z build-std`、自定义 target、allocator_api 等工具链事实陈述",
     "concept/06_ecosystem/05_systems_and_embedded/49_embedded_hal_driver_patterns.md":
         "Embedded-HAL 驱动模式页：nightly/preview/unstable 为 `-Z build-std`、nightly-only 目标或嵌入式实验特性的客观边界陈述",
+    # ---- 2026-08-04 P10-4 形式方法深化：精化类型与 Flux 页。Flux 工具链本身需要 nightly，
+    # 页面文首已声明 Rust 版本与 nightly 要求；nightly 为工具链事实陈述。
+    "concept/04_formal/11_computational_models/15_refinement_types_and_flux.md":
+        "精化类型与 Flux 页：Flux 研究原型依赖 nightly toolchain，文首已显式声明；nightly 为工具链事实陈述",
+    # ---- 2026-08-04 P10-2 no_std/嵌入式扩展：Rust for Linux 内核模块基础页。页面示例包含
+    # `#![feature(allocator_api)]`，为 Rust-for-Linux 内核模块开发当前必需的 nightly 特性门控，
+    # 属工具链事实陈述。
+    "concept/06_ecosystem/05_systems_and_embedded/56_rust_for_linux_kernel_module_basics.md":
+        "Rust for Linux 内核模块基础页：`#![feature(allocator_api)]` 为当前 RfL 开发必需的 nightly 特性门控，属工具链事实陈述",
 }
 
 

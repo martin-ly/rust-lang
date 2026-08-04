@@ -24,7 +24,7 @@ mindmap
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **前置概念**: [并发基础](../../../03_advanced/00_concurrency/01_concurrency.md) · [Channel](../../../03_advanced/00_concurrency/03_channels.md)
+> **前置概念**: [并发基础](../../../03_advanced/00_concurrency/01_concurrency.md) · [Channel](../../../03_advanced/00_concurrency/03_concurrency_patterns.md)
 > **后置概念**: [事件总线](./06_event_bus.md) · [微服务](./03_microservices.md)
 
 ---

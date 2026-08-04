@@ -8,10 +8,10 @@
 | D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 23 (基=469) | 2.8% | >=5% | pass |
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
-| D5 稳定层正文残留 nightly/preview/unstable | 2 | 0.2% | >0 | FAIL |
+| D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
 | D6 Summary 低信息量模板套话 | 2 | 0.2% | >=3% | pass |
 
-**受影响文件总数**: 27 / 823
+**受影响文件总数**: 25 / 823
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -130,6 +130,8 @@
 - `concept/06_ecosystem/05_systems_and_embedded/47_bare_metal_rust.md` — 裸机 Rust 页：nightly/preview/unstable 为 `-Z build-std`、nightly-only 目标、自定义 target 的工具链事实陈述
 - `concept/06_ecosystem/05_systems_and_embedded/48_no_std_alloc_crate_ecosystem.md` — no_std alloc crate 生态页：nightly/preview/unstable 为 `-Z build-std`、自定义 target、allocator_api 等工具链事实陈述
 - `concept/06_ecosystem/05_systems_and_embedded/49_embedded_hal_driver_patterns.md` — Embedded-HAL 驱动模式页：nightly/preview/unstable 为 `-Z build-std`、nightly-only 目标或嵌入式实验特性的客观边界陈述
+- `concept/04_formal/11_computational_models/15_refinement_types_and_flux.md` — 精化类型与 Flux 页：Flux 研究原型依赖 nightly toolchain，文首已显式声明；nightly 为工具链事实陈述
+- `concept/06_ecosystem/05_systems_and_embedded/56_rust_for_linux_kernel_module_basics.md` — Rust for Linux 内核模块基础页：`#![feature(allocator_api)]` 为当前 RfL 开发必需的 nightly 特性门控，属工具链事实陈述
 
 另有两类规则级排除：WASI Preview 1/2/3（WASM 规范版本专名）与 URL 路径中的 nightly（官方文档固定托管路径）。
 
@@ -156,10 +158,7 @@
 
 ### D4 文首块 Rust 版本号自矛盾（0）
 
-### D5 稳定层正文残留 nightly/preview/unstable（2）
-
-- `concept/04_formal/11_computational_models/15_refinement_types_and_flux.md` — 稳定层 nightly/preview 关键词 2 处
-- `concept/06_ecosystem/05_systems_and_embedded/56_rust_for_linux_kernel_module_basics.md` — 稳定层 nightly/preview 关键词 1 处
+### D5 稳定层正文残留 nightly/preview/unstable（0）
 
 ### D6 Summary 低信息量模板套话（2）
 
@@ -168,7 +167,7 @@
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 
-- D5 稳定层nightly残留 2 (>0)
+- 无（全部通过）
 
 ## 机器可读
 

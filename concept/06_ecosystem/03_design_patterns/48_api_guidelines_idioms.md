@@ -484,8 +484,14 @@ where
 **语义**: `Into<T>` 提供隐式转换，使 API 接受更广泛的输入类型而不增加运行时成本。
 
 ```rust
-pub fn set_name(&mut self, name: impl Into<String>) {
-    self.name = name.into();
+pub struct NameSetter {
+    name: String,
+}
+
+impl NameSetter {
+    pub fn set_name(&mut self, name: impl Into<String>) {
+        self.name = name.into();
+    }
 }
 ```
 
