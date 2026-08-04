@@ -40,6 +40,8 @@
 | 07 | `07_type_theory_and_rust.md` | 类型论与 Rust：作为计算模型的类型系统 | ✅ 已创建 |
 | 08 | `08_separation_logic_for_rust.md` | 分离逻辑与 Rust：Iris / RustBelt 视角 | ✅ 已创建 |
 | 09 | `09_concurrency_models_actors_csp.md` | 并发计算模型：CSP、Actor、TLA+ 与 Rust | ✅ 已创建 |
+| 10 | `10_category_theory_and_rust.md` | 范畴论与 Rust：作为计算模型的结构语义 | ✅ 已创建 |
+| 11 | `11_modal_logic_and_rust_effects.md` | 模态逻辑与 Rust 计算效应 | ✅ 已创建 |
 
 ---
 
@@ -68,5 +70,7 @@ semantic_space.md §3 能表达边界 / §4 等价表达
             ├── 模型等价：图灵等价与 Felleisen 表达力
             ├── 类型模型：System Fω / 仿射类型 / 生命周期 / Curry-Howard
             ├── 分离逻辑模型：own / shr / Iris / RustBelt
-            └── 并发模型：CSP / Actor / TLA+ 与 Rust 工程投影
+            ├── 并发模型：CSP / Actor / TLA+ 与 Rust 工程投影
+            ├── 范畴模型：CCC / 积和 / 指数 / 函子 / 单子
+            └── 模态模型：Kripke / Iris □▷ / 生命周期 / unsafe / async
 ```

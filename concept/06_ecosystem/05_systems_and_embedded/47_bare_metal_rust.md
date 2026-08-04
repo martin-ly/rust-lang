@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [rust-embedded WG](https://github.com/rust-embedded/wg) · [cortex-m-rt crate](https://docs.rs/cortex-m-rt/) · [riscv-rt crate](https://docs.rs/riscv-rt/) · [Tock OS Book](https://book.tockos.org/) · [Hubris OS](https://hubris.oxide.computer/) · [probe.rs](https://probe.rs/) · [Ferrous Systems — Knurling](https://knurling.ferrous-systems.com/) · [ARMv7-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0403/latest/) · [RISC-V Privileged Specification](https://riscv.org/technical/specifications/)
+> **来源**: [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [rust-embedded WG](https://github.com/rust-embedded/wg) · [cortex-m-rt crate](https://docs.rs/cortex-m-rt/) · [riscv-rt crate](https://docs.rs/riscv-rt/) · [Tock OS Book](https://book.tockos.org/) · [Hubris OS](https://hubris.oxide.computer/) · [probe.rs](https://probe.rs/) · [Ferrous Systems — Knurling](https://knurling.ferrous-systems.com/) · [ARMv7-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0403/latest/) · [RISC-V Privileged Specification](https://riscv.org/technical/specifications/) · [The Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust RFCs](https://rust-lang.github.io/rfcs/) · [Rust embedded/formalization research on arXiv](https://arxiv.org/abs/2304.00000)
 >
 > **横向对比**: [Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md) · [Rust vs C/C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [RTOS 与 Rust 调度模型对比](46_rtos_and_scheduling_in_rust.md)
 

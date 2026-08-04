@@ -100,7 +100,7 @@
 - **Clone** (Clone) [L2] — 显式深拷贝的 trait，用于堆数据复制 — [std](https://doc.rust-lang.org/std/clone/trait.Clone.html)
 - **Eq / PartialEq** (Eq / PartialEq) [L2] — 定义等价关系的比较 trait 组合 — [std](https://doc.rust-lang.org/std/cmp/trait.Eq.html)
 - **impl Trait** (impl Trait) [L2] — 在参数或返回位置声明匿名但具体类型的语法糖，编译器自动推导具体类型 — [Reference](https://doc.rust-lang.org/reference/types/impl-trait.html)
-- **对象安全性** (Object Safety) [L2] — trait 能否作为 dyn Trait 对象使用的判定条件，涉及 Sized  Self 等约束 — [Reference](https://doc.rust-lang.org/reference/items/traits.html#object-safety)
+- **dyn 兼容性** (dyn compatibility) [L2] — trait 能否作为 dyn Trait 对象使用的判定条件，涉及 supertrait、关联常量、关联类型泛型、receiver 类型、泛型方法、AsyncFn* 等约束 — [Reference](https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility)
 - **动态大小类型** (DST) [L2] — 编译期大小未知的类型（如 `[T]`、`dyn Trait`），只能通过指针或引用使用 — [Reference](https://doc.rust-lang.org/reference/dynamically-sized-types.html)
 - **胖指针** (Fat Pointer) [L2] — 携带额外元数据（如长度或 vtable 指针）的宽指针，用于 DST — [Reference](https://doc.rust-lang.org/reference/types.html)
 - **关联常量** (Associated Constants) [L2] — 在 trait 或 impl 块中定义的常量，与类型相关联 — [Reference](https://doc.rust-lang.org/reference/items/associated-items.html#associated-constants)

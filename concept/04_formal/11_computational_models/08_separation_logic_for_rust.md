@@ -461,6 +461,7 @@ D. unsafe 代码不需要满足任何契约
 | [Boyland 2003, *Checking Interference with Fractional Permissions*](https://doi.org/10.1007/3-540-44898-5_4) | ✅ 一级 | 分数权限理论 |
 | [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html) | ✅ P0 | Rust 官方所有权语义 |
 | [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-keyword.html) | ✅ P0 | unsafe 语义边界 |
+| [Creusot — deductive verification for Rust](https://docs.rs/creusot-contracts/) | ✅ P2 | Rust 形式化验证生态 |
 
 ---
 

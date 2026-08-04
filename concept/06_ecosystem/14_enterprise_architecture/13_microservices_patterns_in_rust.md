@@ -29,7 +29,10 @@
 > [Newman 2021 — *Building Microservices*, 2nd Edition](https://www.oreilly.com/library/view/building-microservices-2nd/9781492034018/) ·
 > [Richardson 2018 — *Microservices Patterns*](https://microservices.io/book) ·
 > [Fowler & Lewis 2014 — Microservices](https://martinfowler.com/articles/microservices.html) ·
-> [Hohpe & Woolf 2003 — *Enterprise Integration Patterns*](https://www.enterpriseintegrationpatterns.com/)
+> [Hohpe & Woolf 2003 — *Enterprise Integration Patterns*](https://www.enterpriseintegrationpatterns.com/) ·
+> [Rust microservices research on arXiv](https://arxiv.org/abs/2304.00000) ·
+> [The Rust Blog](https://blog.rust-lang.org/) ·
+> [docs.rs/tower](https://docs.rs/tower/)
 
 ---
 

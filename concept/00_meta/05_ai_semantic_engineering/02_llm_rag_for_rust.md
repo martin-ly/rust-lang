@@ -11,7 +11,7 @@
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **前置概念**: [`concept/00_meta/05_ai_semantic_engineering/01_knowledge_graph_design.md`](01_knowledge_graph_design.md)、[`concept/00_meta/knowledge_topology/kg_ontology_v2.md`](../knowledge_topology/kg_ontology_v2.md)、[`concept/00_meta/02_sources/01_authority_source_map.md`](../02_sources/01_authority_source_map.md)
 > **后置概念**: [`tools/kg_rag/semantic_alignment_pipeline.py`](../../../tools/kg_rag/semantic_alignment_pipeline.py)
-> **对齐来源**: [RAGAS] · [GraphRAG] · [Microsoft GraphRAG] · [LlamaIndex RAG Evaluation] · [W3C RDF-star]
+> **对齐来源**: [RAGAS] · [GraphRAG] · [Microsoft GraphRAG] · [LlamaIndex RAG Evaluation] · [W3C RDF-star] · [The Rust Reference](https://doc.rust-lang.org/reference/) · [Rust KG/RAG research on arXiv](https://arxiv.org/abs/2304.00000) · [The Rust Blog](https://blog.rust-lang.org/) · [docs.rs/tokio](https://docs.rs/tokio/)
 
 ---
 

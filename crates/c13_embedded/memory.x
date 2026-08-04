@@ -1,0 +1,8 @@
+/* STM32F446RE 示例内存布局（512 KiB Flash / 128 KiB RAM）
+ * 真实项目中应根据具体 MCU 数据手册调整。
+ */
+MEMORY
+{
+  FLASH : ORIGIN = 0x08000000, LENGTH = 512K
+  RAM   : ORIGIN = 0x20000000, LENGTH = 128K
+}

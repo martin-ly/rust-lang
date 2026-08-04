@@ -1,9 +1,9 @@
 # 概念一致性审计报告 (Concept Consistency Audit)
 
-> 生成时间: 2026-08-04T13:22:22.209753
+> 生成时间: 2026-08-04T20:53:06.732658
 > 生成脚本: `scripts/concept_consistency_auditor.py`(扩展后监控 22 个核心概念)
-> 扫描文件数: 746
-> 提取概念定义数: 5277
+> 扫描文件数: 753
+> 提取概念定义数: 5287
 > 跨文件引用数: 340
 
 ## 目录
@@ -70,8 +70,8 @@
 | 概念 | 提取次数 | 涉及文件数 |
 |:---|:---|:---|
 | unsafe-UB | 558 | 159 |
-| RPITIT-RTN-TAIT-定义 | 490 | 55 |
-| effects-system-定义 | 368 | 43 |
+| RPITIT-RTN-TAIT-定义 | 491 | 55 |
+| effects-system-定义 | 369 | 44 |
 | Pin-自引用 | 286 | 79 |
 | 所有权-Move语义 | 276 | 98 |
 | allocator-api-GlobalAlloc | 231 | 51 |
@@ -82,14 +82,14 @@
 | 所有权-作用域绑定 | 133 | 67 |
 | 借用-可变独占 | 119 | 48 |
 | async-Future-状态机 | 117 | 53 |
+| 生命周期-子类型-outlives | 110 | 31 |
 | unsafe-extern-块 | 110 | 20 |
 | 内部可变性-运行时检查 | 109 | 36 |
 | 变型-定义 | 108 | 24 |
 | let-chains-守卫 | 107 | 37 |
-| 生命周期-子类型-outlives | 105 | 29 |
 | unsafe-extern-safe | 102 | 21 |
 | let-chains-链式 | 93 | 11 |
-| const-trait-impl-效果 | 89 | 20 |
+| const-trait-impl-效果 | 90 | 21 |
 | RPITIT-RTN-TAIT-捕获 | 86 | 28 |
 | GAT-async-生命周期 | 83 | 20 |
 | 变型-规则 | 77 | 19 |
@@ -107,8 +107,8 @@
 | 生命周期-子类型-static | 40 | 15 |
 | 借用-引用有效 | 40 | 25 |
 | temporary-scope-临时作用域 | 38 | 14 |
-| unsafe-语义 | 26 | 18 |
-| 生命周期-定义 | 25 | 14 |
+| unsafe-语义 | 27 | 19 |
+| 生命周期-定义 | 26 | 15 |
 | Send | 24 | 13 |
 | Pin-定义 | 23 | 17 |
 | Send/Sync边界-充分必要 | 23 | 7 |

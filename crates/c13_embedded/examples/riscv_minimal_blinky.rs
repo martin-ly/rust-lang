@@ -48,6 +48,9 @@ fn main() {
 // ---------------------------------------------------------------------------
 #[cfg(all(target_arch = "riscv32", target_os = "none"))]
 mod target_impl {
+    // 由 panic-halt crate 提供 #[panic_handler]
+    use panic_halt as _;
+
     use core::sync::atomic::{AtomicU32, Ordering};
 
     // 通用 GPIO 输出寄存器占位地址（真实项目替换为具体芯片地址）

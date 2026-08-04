@@ -4,7 +4,7 @@
     "generated": "2026-07-11",
     "rust_version": "1.97.0+",
     "source": "concept/",
-    "entity_count": 704,
+    "entity_count": 709,
     "schema": "simple KG index"
   },
   "entities": [
@@ -1127,6 +1127,41 @@
         {
           "title": "`tools/kg_rag/semantic_alignment_pipeline.py`",
           "path": "../../../tools/kg_rag/semantic_alignment_pipeline.py"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:00_meta/05_ai_semantic_engineering/03_rag_evaluation_for_rust_kg.md",
+      "path": "00_meta/05_ai_semantic_engineering/03_rag_evaluation_for_rust_kg.md",
+      "title": "面向 Rust 知识图谱的 RAG 评估",
+      "en": "RAG Evaluation for the Rust Knowledge Graph",
+      "summary": "A production-oriented guide to evaluating retrieval-augmented generation over the Rust knowledge graph, covering IR metrics (recall@k, MRR, NDCG), embedding providers (local sentence-transformers and OpenAI-compatible APIs), source attribution, and the `semantic_alignment_pipeline.py` tooling.",
+      "bloom": "L0 / Meta",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "`concept/00_meta/05_ai_semantic_engineering/01_knowledge_graph_design.md`",
+          "path": "01_knowledge_graph_design.md"
+        },
+        {
+          "title": "`concept/00_meta/05_ai_semantic_engineering/02_llm_rag_for_rust.md`",
+          "path": "02_llm_rag_for_rust.md"
+        },
+        {
+          "title": "`concept/00_meta/knowledge_topology/kg_ontology_v2.md`",
+          "path": "../knowledge_topology/kg_ontology_v2.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "`tools/kg_rag/semantic_alignment_pipeline.py`",
+          "path": "../../../tools/kg_rag/semantic_alignment_pipeline.py"
+        },
+        {
+          "title": "`reports/RAG_EVALUATION_BASELINE_2026_08.md`",
+          "path": "../../../reports/RAG_EVALUATION_BASELINE_2026_08.md"
         }
       ],
       "theorems": [],
@@ -3224,7 +3259,7 @@
       "path": "02_intermediate/00_traits/01_traits.md",
       "title": "",
       "en": "Traits",
-      "summary": "Traits define shared behavior in Rust: interfaces with methods, associated types, and default implementations that can be composed through trait bounds. The chapter explores implementing traits, trait objects, object safety, the orphan rule, coherence, and advanced patterns such as associated types and blanket impls.",
+      "summary": "Traits define shared behavior in Rust: interfaces with methods, associated types, and default implementations that can be composed through trait bounds. The chapter explores implementing traits, trait objects, dyn compatibility, the orphan rule, coherence, and advanced patterns such as associated types and blanket impls.",
       "bloom": "L2-L5",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [
@@ -9959,6 +9994,52 @@
       "related_crates": []
     },
     {
+      "id": "concept:04_formal/11_computational_models/10_category_theory_and_rust.md",
+      "path": "04_formal/11_computational_models/10_category_theory_and_rust.md",
+      "title": "",
+      "en": "Category Theory and Rust: Structural Semantics as a Computational Model",
+      "summary": "Treats category theory as a computational model for Rust's type system, mapping Cartesian closed categories, limits/colimits, exponentials, and monads to Rust's product/sum/function types, ownership constraints, and effectful computations, while distinguishing categorical semantics from programming-pattern analogies.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Type Theory and Rust",
+          "path": "07_type_theory_and_rust.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Modal Logic and Rust Effects",
+          "path": "11_modal_logic_and_rust_effects.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:04_formal/11_computational_models/11_modal_logic_and_rust_effects.md",
+      "path": "04_formal/11_computational_models/11_modal_logic_and_rust_effects.md",
+      "title": "",
+      "en": "Modal Logic and Rust Effects",
+      "summary": "Treats modal logic and Iris modal separation logic as computational models for Rust effects, mapping Kripke necessity/possibility, temporal modalities, and Iris's persistently/later/update modalities to lifetimes, unsafe boundaries, async/await, and formal reasoning about ownership.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Category Theory and Rust",
+          "path": "10_category_theory_and_rust.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Iris",
+          "path": "../02_separation_logic/01_rustbelt.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:04_formal/11_computational_models/README.md",
       "path": "04_formal/11_computational_models/README.md",
       "title": "",
@@ -15446,6 +15527,52 @@
         {
           "title": "Rust vs Ada/SPARK",
           "path": "../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/50_embedded_hardware_test_matrix.md",
+      "path": "06_ecosystem/05_systems_and_embedded/50_embedded_hardware_test_matrix.md",
+      "title": "",
+      "en": "Embedded Hardware Test Matrix",
+      "summary": "A decision-oriented matrix and CI recipe for validating `#![no_std]` firmware across STM32/Nordic/RP2040 hardware with probe-rs, defmt, RTIC and Embassy.",
+      "bloom": "L4–L5",
+      "rust_version": "1.97.1+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 嵌入式系统开发",
+          "path": "03_embedded_systems.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "probe-rs 与嵌入式调试实战",
+          "path": "51_probe_rs_and_embedded_debugging.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/51_probe_rs_and_embedded_debugging.md",
+      "path": "06_ecosystem/05_systems_and_embedded/51_probe_rs_and_embedded_debugging.md",
+      "title": "",
+      "en": "probe-rs and Embedded Debugging in Practice",
+      "summary": "Practical guide to using probe-rs for flashing, RTT/SWO logging, scripting, and CI-based hardware debugging of no_std Rust firmware.",
+      "bloom": "L4–L5",
+      "rust_version": "1.97.1+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "defmt / probe-rs / Knurling 调试架构与原理",
+          "path": "36_defmt_probe_rs_architecture.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "嵌入式硬件端到端验证",
+          "path": "45_embedded_hardware_validation.md"
         }
       ],
       "theorems": [],

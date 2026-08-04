@@ -46,11 +46,21 @@ linker = "clang"
 
 # ============ 裸机交叉编译目标配置（Wave H） ============
 # 覆盖 [build] 中针对 host 的 `target-cpu=native`，避免破坏 ARM/RISC-V 交叉编译。
+# 2026-08-04 P9-3: 为 c13_embedded 的 no_std 示例补充 `-Tlink.x`，使 cortex-m-rt
+# 链接脚本与 memory.x 在 thumb 目标下自动生效。
 [target.thumbv7em-none-eabihf]
-rustflags = ["-C", "target-cpu=cortex-m4"]
+rustflags = ["-C", "target-cpu=cortex-m4", "-C", "link-arg=-Tlink.x"]
+
+[target.thumbv7m-none-eabi]
+rustflags = ["-C", "target-cpu=cortex-m3", "-C", "link-arg=-Tlink.x"]
 
 [target.riscv32imac-unknown-none-elf]
-rustflags = ["-C", "target-cpu=generic-rv32", "-C", "target-feature=+m,+a,+c"]
+rustflags = [
+    "-C", "target-cpu=generic-rv32",
+    "-C", "target-feature=+m,+a,+c",
+    "-C", "link-arg=-Tmemory.x",
+    "-C", "link-arg=-Tlink.x",
+]
 
 [registries.crates-io]
 # 稀疏索引协议 - 大幅减少索引下载时间

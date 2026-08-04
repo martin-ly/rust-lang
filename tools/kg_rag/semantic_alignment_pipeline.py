@@ -2,11 +2,15 @@
 """Semantic Alignment Pipeline — evaluate KG-RAG retrieval against annotated queries.
 
 This script implements a lightweight RAG evaluation framework for the Rust
-knowledge graph.  It does **not** require an LLM endpoint: alignment is measured
-structurally by comparing retrieved KG entities / sources with a gold set.
+knowledge graph.  It supports three retrieval modes:
 
-Optional vector retrieval from ``kg_rag.py`` is imported lazily so the pipeline
-remains runnable in any Python environment for smoke tests.
+1. **Structural** (stdlib only): entity linking via SKOS label token overlap.
+2. **Local vector**: dense embeddings from ``sentence-transformers``.
+3. **OpenAI-compatible API**: embeddings from any OpenAI-compatible endpoint
+   (OpenAI, Azure OpenAI, vLLM, Ollama with OpenAI compatibility, etc.).
+
+Metrics include standard RAG/IR metrics: recall@k, MRR, NDCG, precision,
+faithfulness, and source recall.
 
 Example (structural evaluation, stdlib only):
 
@@ -15,18 +19,35 @@ Example (structural evaluation, stdlib only):
         --eval tools/kg_rag/eval/rag_eval_set.json \
         --output reports/RAG_EVAL_2026_08_04.json
 
-Example (with vector hybrid retrieval, requires venv):
+Example (local sentence-transformer model):
 
     tools/kg_rag/.venv/Scripts/python tools/kg_rag/semantic_alignment_pipeline.py \
         --kg concept/00_meta/kg_data_v3.json \
         --eval tools/kg_rag/eval/rag_eval_set.json \
-        --vector --top-k 10
+        --embed-provider sentence-transformers \
+        --embed-model all-MiniLM-L6-v2 \
+        --top-k 10 \
+        --markdown reports/RAG_EVALUATION_BASELINE_2026_08.md
+
+Example (OpenAI-compatible endpoint):
+
+    export OPENAI_API_KEY=...
+    export OPENAI_BASE_URL=https://api.openai.com/v1
+    tools/kg_rag/.venv/Scripts/python tools/kg_rag/semantic_alignment_pipeline.py \
+        --kg concept/00_meta/kg_data_v3.json \
+        --eval tools/kg_rag/eval/rag_eval_set.json \
+        --embed-provider openai \
+        --embed-model text-embedding-3-small \
+        --top-k 10
 """
 from __future__ import annotations
 
 import argparse
 import json
+import math
+import os
 import sys
+from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any
 
@@ -40,13 +61,27 @@ from kg_core import (
     short_id,
 )
 
-# Lazy import vector retrieval so stdlib-only smoke tests always work.
+# Optional dependencies are loaded lazily so stdlib-only smoke tests always work.
 try:
-    from kg_rag import hybrid_search
+    import numpy as np
 
-    _VECTOR_AVAILABLE = True
+    _NUMPY_AVAILABLE = True
 except Exception:  # pragma: no cover
-    _VECTOR_AVAILABLE = False
+    _NUMPY_AVAILABLE = False
+
+try:
+    from sentence_transformers import SentenceTransformer
+
+    _ST_AVAILABLE = True
+except Exception:  # pragma: no cover
+    _ST_AVAILABLE = False
+
+try:
+    import openai
+
+    _OPENAI_AVAILABLE = True
+except Exception:  # pragma: no cover
+    _OPENAI_AVAILABLE = False
 
 
 ROOT = Path(__file__).resolve().parent
@@ -61,6 +96,168 @@ DEFAULT_PREDICATES = (
     "ex:equivalentTo",
     "ex:counterExample",
 )
+
+METRIC_KS = (1, 3, 5, 10)
+
+
+# ---------------------------------------------------------------------------
+# Embedding providers
+# ---------------------------------------------------------------------------
+
+
+class EmbeddingProvider(ABC):
+    """Abstract base for embedding providers."""
+
+    @abstractmethod
+    def encode(self, texts: list[str]) -> Any:
+        """Return an array-like of shape (n_texts, dim)."""
+        ...
+
+    @property
+    @abstractmethod
+    def name(self) -> str:
+        ...
+
+
+class SentenceTransformerProvider(EmbeddingProvider):
+    """Local embeddings via ``sentence-transformers``."""
+
+    def __init__(self, model_name: str = "all-MiniLM-L6-v2"):
+        if not _ST_AVAILABLE or not _NUMPY_AVAILABLE:
+            raise RuntimeError(
+                "sentence-transformers and numpy are required for local embeddings; "
+                "install tools/kg_rag/requirements.txt"
+            )
+        self.model_name = model_name
+        self.model = SentenceTransformer(model_name)
+
+    def encode(self, texts: list[str]) -> Any:
+        return self.model.encode(texts, convert_to_numpy=True, show_progress_bar=False)
+
+    @property
+    def name(self) -> str:
+        return f"sentence-transformers:{self.model_name}"
+
+
+class OpenAICompatibleProvider(EmbeddingProvider):
+    """Embeddings from any OpenAI-compatible ``/embeddings`` endpoint."""
+
+    def __init__(
+        self,
+        api_key: str | None = None,
+        base_url: str | None = None,
+        model: str = "text-embedding-3-small",
+    ):
+        if not _OPENAI_AVAILABLE:
+            raise RuntimeError(
+                "openai package is required for OpenAI-compatible embeddings; "
+                "install it with: pip install openai"
+            )
+        self.model = model
+        self.client = openai.OpenAI(api_key=api_key, base_url=base_url)
+
+    def encode(self, texts: list[str]) -> Any:
+        response = self.client.embeddings.create(input=texts, model=self.model)
+        vectors = [item.embedding for item in response.data]
+        if _NUMPY_AVAILABLE:
+            return np.asarray(vectors, dtype=np.float32)
+        return vectors
+
+    @property
+    def name(self) -> str:
+        return f"openai:{self.model}"
+
+
+def create_embedding_provider(
+    provider: str | None = None,
+    model: str | None = None,
+    api_key: str | None = None,
+    base_url: str | None = None,
+) -> EmbeddingProvider | None:
+    """Factory selecting an embedding provider by name or environment variables.
+
+    Environment variables:
+      - ``KG_RAG_EMBED_PROVIDER``: ``sentence-transformers`` (default), ``openai``, ``none``
+      - ``KG_RAG_EMBED_MODEL``: model name (provider-specific default applies if unset)
+      - ``OPENAI_API_KEY`` / ``OPENAI_BASE_URL``: OpenAI-compatible endpoint credentials
+    """
+    provider = provider or os.environ.get("KG_RAG_EMBED_PROVIDER", "sentence-transformers")
+    if provider == "none":
+        return None
+    if provider == "sentence-transformers":
+        model = model or os.environ.get("KG_RAG_EMBED_MODEL", "all-MiniLM-L6-v2")
+        return SentenceTransformerProvider(model)
+    if provider == "openai":
+        model = model or os.environ.get("KG_RAG_EMBED_MODEL", "text-embedding-3-small")
+        api_key = api_key or os.environ.get("OPENAI_API_KEY")
+        base_url = base_url or os.environ.get("OPENAI_BASE_URL")
+        return OpenAICompatibleProvider(api_key=api_key, base_url=base_url, model=model)
+    raise ValueError(f"Unknown embedding provider: {provider}")
+
+
+# ---------------------------------------------------------------------------
+# Vector index
+# ---------------------------------------------------------------------------
+
+
+class VectorIndex:
+    """Simple L2-normalised dense index over KG entities."""
+
+    def __init__(
+        self,
+        entities: list[dict[str, Any]],
+        vectors: Any,
+        provider_name: str,
+    ):
+        self.entities = entities
+        self.vectors = vectors
+        self.provider_name = provider_name
+        if _NUMPY_AVAILABLE:
+            self.vectors = np.asarray(vectors, dtype=np.float32)
+            norms = np.linalg.norm(self.vectors, axis=1, keepdims=True)
+            norms[norms == 0] = 1.0
+            self.vectors = self.vectors / norms
+
+    @classmethod
+    def build(
+        cls,
+        kg: dict[str, Any],
+        provider: EmbeddingProvider,
+    ) -> "VectorIndex":
+        entities = iter_entities(kg)
+        texts = [entity_text(e) for e in entities]
+        print(f"[semantic_alignment_pipeline] encoding {len(texts)} entities with {provider.name}", file=sys.stderr)
+        vectors = provider.encode(texts)
+        return cls(entities, vectors, provider.name)
+
+    def search(self, query: str, provider: EmbeddingProvider, top_k: int = 5) -> list[dict[str, Any]]:
+        query_vec = provider.encode([query])
+        if _NUMPY_AVAILABLE:
+            query_vec = np.asarray(query_vec, dtype=np.float32)
+            qnorm = np.linalg.norm(query_vec)
+            if qnorm > 0:
+                query_vec = query_vec / qnorm
+            scores = np.dot(self.vectors, query_vec.T).flatten()
+            top_indices = np.argsort(-scores)[:top_k]
+            return [
+                {
+                    "entity": self.entities[i],
+                    "score": round(float(scores[i]), 4),
+                }
+                for i in top_indices
+            ]
+        # Fallback for rare no-numpy OpenAI-only environments.
+        scores = [
+            sum(a * b for a, b in zip(vec, query_vec[0]))
+            for vec in self.vectors
+        ]
+        ranked = sorted(enumerate(scores), key=lambda x: x[1], reverse=True)[:top_k]
+        return [{"entity": self.entities[i], "score": round(float(s), 4)} for i, s in ranked]
+
+
+# ---------------------------------------------------------------------------
+# Entity linking and graph retrieval
+# ---------------------------------------------------------------------------
 
 
 def _normalize(text: str) -> str:
@@ -166,69 +363,212 @@ def _extract_sources(kg: dict[str, Any], entity_ids: set[str]) -> set[str]:
     return sources
 
 
+# ---------------------------------------------------------------------------
+# Metrics
+# ---------------------------------------------------------------------------
+
+
+def _label_key(label: str) -> str:
+    return _normalize(label).replace(" ", "_")
+
+
+def _source_key(path: str) -> str:
+    """Normalize source paths by stripping a leading ``concept/`` prefix."""
+    return path.removeprefix("concept/")
+
+
+def _ranked_concepts(kg: dict[str, Any], ranked_entities: list[dict[str, Any]]) -> list[str]:
+    """Return normalized concept labels in rank order."""
+    by_id = {e["@id"]: e for e in iter_entities(kg)}
+    seen: set[str] = set()
+    out: list[str] = []
+    for item in ranked_entities:
+        entity = item.get("entity") or item
+        eid = entity.get("@id")
+        if not eid:
+            continue
+        entity = by_id.get(eid, entity)
+        label = get_lang_value(entity.get("skos:prefLabel", []), "en") or short_id(eid)
+        key = _label_key(label)
+        if key not in seen:
+            seen.add(key)
+            out.append(key)
+    return out
+
+
+def _ranked_sources(kg: dict[str, Any], ranked_entities: list[dict[str, Any]]) -> list[str]:
+    """Return source paths in rank order (entities first, then relation annotations)."""
+    by_id = {e["@id"]: e for e in iter_entities(kg)}
+    seen: set[str] = set()
+    out: list[str] = []
+    for item in ranked_entities:
+        entity = item.get("entity") or item
+        eid = entity.get("@id")
+        if not eid:
+            continue
+        entity = by_id.get(eid, entity)
+        path = _entity_path(entity)
+        if path:
+            key = _source_key(path)
+            if key not in seen:
+                seen.add(key)
+                out.append(key)
+        for rel in kg.get("relations", []):
+            if rel.get("ex:subject") == eid or rel.get("ex:object") == eid:
+                annotation = rel.get("@annotation") or {}
+                src = annotation.get("ex:source") or annotation.get("source")
+                if src:
+                    key = _source_key(str(src))
+                    if key not in seen:
+                        seen.add(key)
+                        out.append(key)
+    return out
+
+
+def recall_at_k(retrieved: list[str], expected: set[str], k: int) -> float:
+    if not expected:
+        return 1.0
+    top = set(retrieved[:k])
+    return len(top & expected) / len(expected)
+
+
+def precision_at_k(retrieved: list[str], expected: set[str], k: int) -> float:
+    top = retrieved[:k]
+    if not top:
+        return 0.0
+    return len(set(top) & expected) / len(top)
+
+
+def mrr(retrieved: list[str], expected: set[str]) -> float:
+    """Mean Reciprocal Rank of the first relevant item."""
+    for i, item in enumerate(retrieved, start=1):
+        if item in expected:
+            return 1.0 / i
+    return 0.0
+
+
+def ndcg_at_k(retrieved: list[str], expected: set[str], k: int) -> float:
+    """NDCG with binary relevance: 1 if item is in expected set, else 0."""
+    if not expected:
+        return 1.0
+    top = retrieved[:k]
+    dcg = sum(
+        (1.0 if item in expected else 0.0) / math.log2(i + 1)
+        for i, item in enumerate(top, start=1)
+    )
+    # Ideal ranking places all expected items first.
+    ideal_hits = min(len(expected), k)
+    idcg = sum(1.0 / math.log2(i + 1) for i in range(1, ideal_hits + 1))
+    return dcg / idcg if idcg > 0 else 0.0
+
+
+def compute_metrics(
+    retrieved_concepts: list[str],
+    expected_concepts: set[str],
+    retrieved_sources: list[str],
+    expected_sources: set[str],
+) -> dict[str, Any]:
+    """Compute recall@k, precision@k, MRR, NDCG@k for concepts and sources."""
+    metrics: dict[str, Any] = {}
+
+    # Concepts
+    for k in METRIC_KS:
+        metrics[f"concept_recall@{k}"] = round(recall_at_k(retrieved_concepts, expected_concepts, k), 3)
+        metrics[f"concept_precision@{k}"] = round(precision_at_k(retrieved_concepts, expected_concepts, k), 3)
+        metrics[f"concept_ndcg@{k}"] = round(ndcg_at_k(retrieved_concepts, expected_concepts, k), 3)
+    metrics["concept_mrr"] = round(mrr(retrieved_concepts, expected_concepts), 3)
+
+    # Sources
+    for k in METRIC_KS:
+        metrics[f"source_recall@{k}"] = round(recall_at_k(retrieved_sources, expected_sources, k), 3)
+        metrics[f"source_precision@{k}"] = round(precision_at_k(retrieved_sources, expected_sources, k), 3)
+        metrics[f"source_ndcg@{k}"] = round(ndcg_at_k(retrieved_sources, expected_sources, k), 3)
+    metrics["source_mrr"] = round(mrr(retrieved_sources, expected_sources), 3)
+
+    # Legacy aggregate names for backward compatibility.
+    metrics["concept_recall"] = metrics["concept_recall@5"]
+    metrics["concept_precision"] = metrics["concept_precision@5"]
+    metrics["source_recall"] = metrics["source_recall@5"]
+    metrics["faithfulness"] = metrics["source_recall@5"]
+
+    return metrics
+
+
+# ---------------------------------------------------------------------------
+# Evaluation
+# ---------------------------------------------------------------------------
+
+
 def evaluate_sample(
     kg: dict[str, Any],
     sample: dict[str, Any],
     top_k: int = 5,
     hops: int = 2,
-    use_vector: bool = False,
+    index: VectorIndex | None = None,
+    provider: EmbeddingProvider | None = None,
+    predicates: tuple[str, ...] | None = None,
 ) -> dict[str, Any]:
     """Compute retrieval metrics for a single evaluation sample."""
     query = sample.get("query", "")
-    expected_concepts = set(sample.get("expected_concepts", []))
-    expected_sources = set(sample.get("expected_sources", []))
+    expected_concepts = {_label_key(c) for c in sample.get("expected_concepts", [])}
+    expected_sources = {_source_key(s) for s in sample.get("expected_sources", [])}
 
     # Seed entities via deterministic linking (always run).
     linked = entity_linking(kg, query, top_n=top_k)
-    seed_ids = [e["@id"] for e in linked]
+    seed_ranked: list[dict[str, Any]] = [{"entity": e, "score": 1.0 - (i * 0.01)} for i, e in enumerate(linked)]
 
-    retrieved_ids: set[str] = set(seed_ids)
-    if use_vector and _VECTOR_AVAILABLE:
+    # Optional dense retrieval: merge vector hits into the ranked seed list.
+    if index is not None and provider is not None:
         try:
-            vector_hits = hybrid_search(query, top_k=top_k)
-            retrieved_ids |= {h["@id"] for h in vector_hits}
+            vector_hits = index.search(query, provider, top_k=top_k)
+            seen = {item["entity"]["@id"] for item in seed_ranked}
+            for hit in vector_hits:
+                eid = hit["entity"]["@id"]
+                if eid not in seen:
+                    seed_ranked.append(hit)
+                    seen.add(eid)
+            seed_ranked.sort(key=lambda x: x["score"], reverse=True)
         except Exception as exc:  # pragma: no cover
             print(f"[warn] vector retrieval failed: {exc}", file=sys.stderr)
 
-    # Expand graph around all retrieved seeds.
-    graph_ids = graph_retrieval(kg, list(retrieved_ids), hops=hops)
-    all_ids = retrieved_ids | graph_ids
+    seed_ids = [item["entity"]["@id"] for item in seed_ranked]
 
-    # Convert IDs to short human-readable labels for reporting.
+    # Expand graph around all retrieved seeds.
+    graph_ids = graph_retrieval(kg, seed_ids, hops=hops, predicates=predicates)
+    graph_ranked = [{"entity": {"@id": gid}, "score": 0.0} for gid in graph_ids if gid not in seed_ids]
+    all_ranked = seed_ranked + graph_ranked
+
+    all_ids = {item["entity"]["@id"] for item in all_ranked}
+
+    # Convert IDs to short human-readable labels / sources for reporting.
     by_id = {e["@id"]: e for e in iter_entities(kg)}
-    retrieved_labels = {
-        short_id(eid)
-        for eid in all_ids
-        if eid in by_id
-    }
-    expected_labels = {
-        c.lower().replace(" ", "_") for c in expected_concepts
-    }
+    retrieved_labels = _ranked_concepts(kg, all_ranked)
+    expected_labels = set(expected_concepts)
 
     # Sources.
-    retrieved_sources = _extract_sources(kg, all_ids)
+    retrieved_sources = _ranked_sources(kg, all_ranked)
 
-    # Metrics.
-    concept_hits = retrieved_labels & expected_labels
-    source_hits = retrieved_sources & expected_sources
+    # Per-item debug lists.
+    retrieved_entities = sorted(
+        {short_id(eid) for eid in all_ids if eid in by_id}
+    )
+    expected_entities = sorted(expected_labels)
 
-    concept_recall = len(concept_hits) / len(expected_labels) if expected_labels else 1.0
-    concept_precision = len(concept_hits) / len(retrieved_labels) if retrieved_labels else 0.0
-    source_recall = len(source_hits) / len(expected_sources) if expected_sources else 1.0
-
-    # Faithfulness proxy: do retrieved sources cover the expected sources?
-    faithfulness = source_recall
+    metrics = compute_metrics(
+        retrieved_labels,
+        expected_labels,
+        retrieved_sources,
+        expected_sources,
+    )
 
     return {
         "query": query,
-        "concept_recall": round(concept_recall, 3),
-        "concept_precision": round(concept_precision, 3),
-        "source_recall": round(source_recall, 3),
-        "faithfulness": round(faithfulness, 3),
-        "retrieved_entities": sorted(retrieved_labels),
-        "retrieved_sources": sorted(retrieved_sources),
-        "expected_entities": sorted(expected_labels),
+        **metrics,
+        "retrieved_entities": retrieved_entities,
+        "retrieved_sources": sorted(set(retrieved_sources)),
+        "expected_entities": expected_entities,
         "expected_sources": sorted(expected_sources),
+        "n_retrieved": len(all_ids),
     }
 
 
@@ -257,8 +597,38 @@ def default_eval_set() -> list[dict[str, Any]]:
             "query": "why does async fn need Pin",
             "expected_concepts": ["async fn", "Future", "Pin", "self-referential"],
             "expected_sources": [
-                "concept/03_advanced/01_async/01_async_await.md",
-                "concept/03_advanced/01_async/02_pin_unpin.md",
+                "concept/03_advanced/01_async/01_async.md",
+                "concept/03_advanced/01_async/08_pin_unpin.md",
+            ],
+        },
+        {
+            "query": "difference between Send and Sync traits",
+            "expected_concepts": ["Send", "Sync", "trait"],
+            "expected_sources": [
+                "concept/03_advanced/00_concurrency/02_send_sync_auto_traits.md",
+            ],
+        },
+        {
+            "query": "what is unsafe Rust used for",
+            "expected_concepts": ["unsafe", "raw pointer", "FFI"],
+            "expected_sources": [
+                "concept/03_advanced/02_unsafe/01_unsafe.md",
+                "concept/03_advanced/04_ffi/01_rust_ffi.md",
+            ],
+        },
+        {
+            "query": "how do generics work with trait bounds",
+            "expected_concepts": ["generics", "trait bound", "where clause"],
+            "expected_sources": [
+                "concept/02_intermediate/01_generics/01_generics.md",
+                "concept/02_intermediate/00_traits/01_traits.md",
+            ],
+        },
+        {
+            "query": "what is interior mutability",
+            "expected_concepts": ["interior mutability", "RefCell", "Cell"],
+            "expected_sources": [
+                "concept/02_intermediate/02_memory_management/02_interior_mutability.md",
             ],
         },
     ]
@@ -269,7 +639,9 @@ def run_evaluation(
     samples: list[dict[str, Any]],
     top_k: int = 5,
     hops: int = 2,
-    use_vector: bool = False,
+    index: VectorIndex | None = None,
+    provider: EmbeddingProvider | None = None,
+    predicates: tuple[str, ...] | None = None,
 ) -> dict[str, Any]:
     results: list[dict[str, Any]] = []
     for sample in samples:
@@ -279,20 +651,27 @@ def run_evaluation(
                 sample,
                 top_k=top_k,
                 hops=hops,
-                use_vector=use_vector,
+                index=index,
+                provider=provider,
+                predicates=predicates,
             )
         )
 
     if not results:
         return {"samples": [], "aggregates": {}}
 
-    aggregates = {
-        "concept_recall": round(sum(r["concept_recall"] for r in results) / len(results), 3),
-        "concept_precision": round(sum(r["concept_precision"] for r in results) / len(results), 3),
-        "source_recall": round(sum(r["source_recall"] for r in results) / len(results), 3),
-        "faithfulness": round(sum(r["faithfulness"] for r in results) / len(results), 3),
+    def avg(key: str) -> float:
+        return round(sum(r[key] for r in results) / len(results), 3)
+
+    aggregates: dict[str, Any] = {
         "n_samples": len(results),
+        "embedding_provider": provider.name if provider else "structural",
     }
+    for key in results[0]:
+        if key in ("query", "retrieved_entities", "retrieved_sources", "expected_entities", "expected_sources", "n_retrieved"):
+            continue
+        aggregates[key] = avg(key)
+
     return {"samples": results, "aggregates": aggregates}
 
 
@@ -308,29 +687,39 @@ def _format_markdown(report: dict[str, Any]) -> str:
     lines = [
         "# KG-RAG Semantic Alignment Evaluation Report",
         "",
+        f"**Generated**: {__import__('datetime').datetime.now().isoformat(timespec='minutes')}",
+        f"**Embedding provider**: {agg.get('embedding_provider', 'structural')}",
+        f"**Samples**: {agg.get('n_samples', 0)}",
+        "",
         "## Aggregates",
         "",
         "| Metric | Value |",
         "|:---|---:|",
-        f'| Concept Recall | {agg.get("concept_recall", 0.0)} |',
-        f'| Concept Precision | {agg.get("concept_precision", 0.0)} |',
-        f'| Source Recall | {agg.get("source_recall", 0.0)} |',
-        f'| Faithfulness | {agg.get("faithfulness", 0.0)} |',
-        f'| Samples | {agg.get("n_samples", 0)} |',
+    ]
+
+    # Group metrics by category and k.
+    metric_keys = [k for k in agg if k not in ("n_samples", "embedding_provider")]
+    concept_metrics = sorted([k for k in metric_keys if k.startswith("concept_")])
+    source_metrics = sorted([k for k in metric_keys if k.startswith("source_")])
+
+    for key in concept_metrics + source_metrics:
+        lines.append(f"| {key} | {agg[key]} |")
+
+    lines.extend([
         "",
         "## Per-Sample Results",
         "",
-    ]
+    ])
     for sample in report.get("samples", []):
         lines.append(f"### {sample['query']}")
         lines.append("")
-        lines.append(f"- concept_recall: {sample['concept_recall']}")
-        lines.append(f"- concept_precision: {sample['concept_precision']}")
-        lines.append(f"- source_recall: {sample['source_recall']}")
-        lines.append(f"- faithfulness: {sample['faithfulness']}")
+        lines.append(f"- n_retrieved: {sample['n_retrieved']}")
+        for key in concept_metrics + source_metrics:
+            lines.append(f"- {key}: {sample[key]}")
         lines.append(f"- retrieved_entities: {', '.join(sample['retrieved_entities'])}")
         lines.append(f"- expected_entities: {', '.join(sample['expected_entities'])}")
         lines.append("")
+
     return "\n".join(lines)
 
 
@@ -342,10 +731,19 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--eval", type=Path, default=DEFAULT_EVAL, help="Path to eval JSON")
     parser.add_argument("--output", type=Path, help="JSON output path")
     parser.add_argument("--markdown", type=Path, help="Optional Markdown report path")
-    parser.add_argument("--top-k", type=int, default=5, help="Top-K entities from linking")
+    parser.add_argument("--top-k", type=int, default=5, help="Top-K entities from linking/vector retrieval")
     parser.add_argument("--hops", type=int, default=2, help="Graph expansion hops")
-    parser.add_argument("--vector", action="store_true", help="Enable vector hybrid retrieval")
+    parser.add_argument("--predicates", default=",".join(DEFAULT_PREDICATES), help="Comma-separated predicates for graph expansion")
     parser.add_argument("--builtin", action="store_true", help="Use built-in tiny eval set")
+    # Embedding provider options.
+    parser.add_argument(
+        "--embed-provider",
+        choices=["sentence-transformers", "openai", "none"],
+        help="Embedding provider. Defaults to sentence-transformers if deps available; 'none' disables vector retrieval.",
+    )
+    parser.add_argument("--embed-model", help="Model name for the embedding provider")
+    parser.add_argument("--embed-api-key", help="API key for OpenAI-compatible provider (or set OPENAI_API_KEY)")
+    parser.add_argument("--embed-base-url", help="Base URL for OpenAI-compatible provider (or set OPENAI_BASE_URL)")
     args = parser.parse_args(argv)
 
     kg = load_kg(args.kg)
@@ -353,19 +751,31 @@ def main(argv: list[str] | None = None) -> int:
     if not samples:
         print(f"[warn] no eval samples found in {args.eval}; use --builtin", file=sys.stderr)
 
-    if args.vector and not _VECTOR_AVAILABLE:
-        print(
-            "[warn] --vector requested but kg_rag.py unavailable; "
-            "install tools/kg_rag/requirements.txt",
-            file=sys.stderr,
-        )
+    predicate_set = tuple(p.strip() for p in args.predicates.split(",") if p.strip())
+
+    provider: EmbeddingProvider | None = None
+    index: VectorIndex | None = None
+    if args.embed_provider != "none":
+        try:
+            provider = create_embedding_provider(
+                provider=args.embed_provider,
+                model=args.embed_model,
+                api_key=args.embed_api_key,
+                base_url=args.embed_base_url,
+            )
+            if provider is not None:
+                index = VectorIndex.build(kg, provider)
+        except Exception as exc:  # pragma: no cover
+            print(f"[warn] embedding provider unavailable: {exc}", file=sys.stderr)
 
     report = run_evaluation(
         kg,
         samples,
         top_k=args.top_k,
         hops=args.hops,
-        use_vector=args.vector,
+        index=index,
+        provider=provider,
+        predicates=predicate_set,
     )
 
     print(json.dumps(report["aggregates"], ensure_ascii=False, indent=2))

@@ -461,6 +461,8 @@ D. TLA+ 只能验证单线程程序
 | [Tokio Documentation](https://tokio.rs/) | ✅ P0 | Rust 异步运行时官方文档 |
 | [Actix Documentation](https://actix.rs/) | ✅ 二级 | Rust Actor 框架 |
 | [Rust Reference — Threads](https://doc.rust-lang.org/reference/items/associated-items.html) | ✅ P0 | Rust 线程与并发参考 |
+| [docs.rs/tokio](https://docs.rs/tokio/) | ✅ P2 | Rust 异步运行时生态 |
+| [The Rust Blog](https://blog.rust-lang.org/) | ✅ P2 | Rust 官方社区博客 |
 
 ---
 

@@ -47,6 +47,7 @@
 ## 附录 A：权威来源列表
 
 ### 官方文档
+
 - [The Rust Programming Language](https://doc.rust-lang.org/book)
 - [The Rust Reference](https://doc.rust-lang.org/reference)
 - [The Rustonomicon](https://doc.rust-lang.org/nomicon)
@@ -59,6 +60,7 @@
 - [Rust and WebAssembly](https://rustwasm.github.io/docs/book)
 
 ### 形式化/验证生态
+
 - [RustBelt: Logical Relations for Rust](https://plv.mpi-sws.org/rustbelt/)
 - [Iris: Higher-Order Concurrent Separation Logic Framework](https://iris-project.org/)
 - [Aeneas: Symbolic Semantics for Rust](https://github.com/AeneasVerif/aeneas)
@@ -73,6 +75,7 @@
 - [Rust Specification (lang-spec-rust-lang-org)](https://github.com/rust-lang/spec)
 
 ### 工业/应用生态
+
 - [Tokio](https://tokio.rs/) — Async Runtime
 - [Axum](https://docs.rs/axum/latest/axum/) — Web Framework
 - [Actix-web](https://actix.rs/) — Web Framework
@@ -100,6 +103,7 @@
 - [ring / rustls](https://github.com/briansmith/ring) — Crypto
 
 ### 项目路线图
+
 - [Rust Project Goals 2025 H1](https://rust-lang.github.io/rust-project-goals/2025h1/index.html) — Project Goals 2025 H1
 - [Rust 2024 Edition](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) — Edition
 - [Async Closures / Async Fn in Traits](https://rust-lang.github.io/rfcs/3185-static-async-fn-in-trait.html) — Async
@@ -124,4 +128,3 @@
 - `tmp/topic_inventory_authoritative.json`：权威来源主题结构化数据。
 - `tmp/topic_symmetric_diff.json`：完整对称差数据。
 - `tmp/topic_alignment_matrix.tsv`：对齐矩阵（可用于电子表格透视）。
-

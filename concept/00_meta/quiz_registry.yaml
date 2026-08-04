@@ -439,8 +439,8 @@ standalone_quizzes:
   concept_to_quiz_backlink: true
 embedded_quizzes:
   description: concept/ 页面内嵌入式测验（### 测验 N + <details> 答题块），按页聚合
-  pages: 350
-  total_blocks: 1512
+  pages: 354
+  total_blocks: 1522
   items:
   - path: concept/00_meta/00_framework/bloom_taxonomy.md
     blocks: 3
@@ -824,6 +824,10 @@ embedded_quizzes:
     blocks: 3
   - path: concept/04_formal/11_computational_models/09_concurrency_models_actors_csp.md
     blocks: 3
+  - path: concept/04_formal/11_computational_models/10_category_theory_and_rust.md
+    blocks: 3
+  - path: concept/04_formal/11_computational_models/11_modal_logic_and_rust_effects.md
+    blocks: 3
   - path: concept/04_formal/12_concurrency_models/02_expressiveness_of_concurrent_models.md
     blocks: 5
   - path: concept/04_formal/13_semantic_engineering/06_ai_ontology_and_rust_semantics.md
@@ -1036,6 +1040,10 @@ embedded_quizzes:
     blocks: 5
   - path: concept/06_ecosystem/14_enterprise_architecture/03_architecture_standards_alignment.md
     blocks: 5
+  - path: concept/06_ecosystem/14_enterprise_architecture/16_rust_in_financial_services.md
+    blocks: 2
+  - path: concept/06_ecosystem/14_enterprise_architecture/17_rust_in_iot_and_edge.md
+    blocks: 2
   - path: concept/06_ecosystem/16_algorithm_patterns/01_algorithmic_paradigms.md
     blocks: 5
   - path: concept/06_ecosystem/16_algorithm_patterns/09_randomized_and_probabilistic_algorithms.md

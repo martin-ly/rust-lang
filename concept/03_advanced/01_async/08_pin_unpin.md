@@ -26,7 +26,7 @@
 > [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
 > [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [TRPL Ch17 — Pin](https://doc.rust-lang.org/book/ch17-02-concurrency-with-async.html) ·
-> [Rustonomicon — Pin](https://doc.rust-lang.org/nomicon/pin.html) ·
+> [Rustonomicon — Pin](https://doc.rust-lang.org/std/pin/index.html) ·
 > [RFC 2349 — Pin](https://github.com/rust-lang/rfcs/pull/2349) ·
 > [Tracking Issue #55766](https://github.com/rust-lang/rust/issues/55766)
 > **对应 Crate**: [`c06_async`](../../crates/c06_async)
@@ -151,7 +151,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Pin 的**核心契约**——通过类型系统（Type System）承诺值不会被移动，从而使自引用在安全前提下成为可能。
-> [来源: [RFC 2592 — Pin](https://github.com/rust-lang/rfcs/pull/2592)]
+> [来源: [RFC 2349 — Pin](https://github.com/rust-lang/rfcs/pull/2349)]
 > **使用建议**: 绝大多数 Rust 代码不需要直接操作 Pin。Pin 主要在 async/await、生成器和特定 unsafe 代码中使用。
 > **关键洞察**: Pin 不是"阻止移动"，而是**"承诺不移动"**——如果违反了承诺（通过 unsafe），结果是 UB。
 > [来源: [Rust Reference — Pin](https://doc.rust-lang.org/std/pin/index.html)]

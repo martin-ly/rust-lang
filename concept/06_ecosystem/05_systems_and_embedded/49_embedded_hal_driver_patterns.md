@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [embedded-hal 1.0](https://docs.rs/embedded-hal/1.0.0/embedded_hal/) · [embedded-hal-async](https://docs.rs/embedded-hal-async/latest/embedded_hal_async/) · [embedded-io](https://docs.rs/embedded-io/latest/embedded_io/) · [shared-bus](https://docs.rs/shared-bus/) · [embassy-embedded-hal](https://docs.rs/embassy-embedded-hal/) · [defmt](https://docs.rs/defmt/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [Embassy Book](https://embassy.dev/book/) · [Knurling](https://knurling.ferrous-systems.com/) · [Ferrous Systems](https://ferrous-systems.com/)
+> **来源**: [embedded-hal 1.0](https://docs.rs/embedded-hal/1.0.0/embedded_hal/) · [embedded-hal-async](https://docs.rs/embedded-hal-async/latest/embedded_hal_async/) · [embedded-io](https://docs.rs/embedded-io/latest/embedded_io/) · [shared-bus](https://docs.rs/shared-bus/) · [embassy-embedded-hal](https://docs.rs/embassy-embedded-hal/) · [defmt](https://docs.rs/defmt/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [Embassy Book](https://embassy.dev/book/) · [Knurling](https://knurling.ferrous-systems.com/) · [Ferrous Systems](https://ferrous-systems.com/) · [The Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html) · [Rust RFCs](https://rust-lang.github.io/rfcs/) · [Rust embedded/formalization research on arXiv](https://arxiv.org/abs/2304.00000) · [docs.rs/embedded-hal](https://docs.rs/embedded-hal/)
 >
 > **横向对比**: [Rust vs C/C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)
 

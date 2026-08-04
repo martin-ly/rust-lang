@@ -18,10 +18,13 @@ cxx = { version = "1.0.198", optional = true }
 # 仅在 ARM 嵌入式目标下启用真实硬件依赖
 # host 环境 (x86_64 Windows) 下不使用这些依赖，确保 cargo check 通过
 [target.'cfg(target_arch = "arm")'.dependencies]
-cortex-m = { workspace = true }
+# `critical-section-single-core` feature 提供 `_critical_section_1_0_acquire/release` 实现。
+cortex-m = { workspace = true, features = ["critical-section-single-core"] }
 cortex-m-rt = { workspace = true }
 panic-halt = { workspace = true }
 volatile-register = { workspace = true }
+# critical-section 是 no_std 并发事实标准；显式声明便于示例使用。
+critical-section = "1.2"
 # defmt / RTT 日志依赖未进入 workspace 依赖表，默认注释以保持 host `cargo check` 通过。
 # 需要在真实 ARM 目标上运行 `no_std_defmt_rtt` 示例时取消注释：
 # defmt = "0.3"
@@ -30,9 +33,12 @@ volatile-register = { workspace = true }
 
 # 仅在 RISC-V 嵌入式目标下启用真实硬件依赖
 [target.'cfg(target_arch = "riscv32")'.dependencies]
-riscv = { workspace = true }
+# `critical-section-single-hart` feature 提供 `_critical_section_1_0_acquire/release` 实现。
+riscv = { workspace = true, features = ["critical-section-single-hart"] }
 riscv-rt = { workspace = true }
 panic-halt = { workspace = true }
+# critical-section 是 no_std 并发事实标准；显式声明便于示例使用。
+critical-section = "1.2"
 
 [build-dependencies]
 bindgen = { workspace = true }

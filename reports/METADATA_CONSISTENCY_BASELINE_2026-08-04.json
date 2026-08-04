@@ -1,10 +1,10 @@
 {
   "summary": {
     "date": "2026-08-04",
-    "scanned": 773,
+    "scanned": 780,
     "counts": {
       "D1": 0,
-      "D2": 20,
+      "D2": 23,
       "D3": 0,
       "D4": 0,
       "D5": 0,
@@ -12,14 +12,14 @@
     },
     "pct": {
       "D1": 0.0,
-      "D2": 2.6,
+      "D2": 2.9,
       "D3": 0.0,
       "D4": 0.0,
       "D5": 0.0,
       "D6": 0.3
     },
-    "D2_base_files_with_asp_and_bloom": 461,
-    "flagged_files": 22
+    "D2_base_files_with_asp_and_bloom": 464,
+    "flagged_files": 25
   },
   "examples": {
     "D1": [],
@@ -30,6 +30,10 @@
       ],
       [
         "concept/00_meta/05_ai_semantic_engineering/02_llm_rag_for_rust.md",
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [0] 无交集"
+      ],
+      [
+        "concept/00_meta/05_ai_semantic_engineering/03_rag_evaluation_for_rust_kg.md",
         "A/S/P=S 允许 [2, 3, 4] 与 Bloom [0] 无交集"
       ],
       [
@@ -57,19 +61,15 @@
         "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5] 无交集"
       ],
       [
+        "concept/06_ecosystem/05_systems_and_embedded/50_embedded_hardware_test_matrix.md",
+        "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5] 无交集"
+      ],
+      [
+        "concept/06_ecosystem/05_systems_and_embedded/51_probe_rs_and_embedded_debugging.md",
+        "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5] 无交集"
+      ],
+      [
         "concept/06_ecosystem/14_enterprise_architecture/09_observability_and_sre_patterns.md",
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/14_enterprise_architecture/11_event_driven_and_cqrs_patterns.md",
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/14_enterprise_architecture/12_cloud_native_and_serverless_patterns.md",
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/16_algorithm_patterns/02_ownership_aware_data_structures.md",
         "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
       ]
     ],
@@ -94,6 +94,11 @@
       ]
     },
     "concept/00_meta/05_ai_semantic_engineering/02_llm_rag_for_rust.md": {
+      "D2": [
+        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [0] 无交集"
+      ]
+    },
+    "concept/00_meta/05_ai_semantic_engineering/03_rag_evaluation_for_rust_kg.md": {
       "D2": [
         "A/S/P=S 允许 [2, 3, 4] 与 Bloom [0] 无交集"
       ]
@@ -136,6 +141,16 @@
     "concept/06_ecosystem/05_systems_and_embedded/49_embedded_hal_driver_patterns.md": {
       "D2": [
         "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5] 无交集"
+      ]
+    },
+    "concept/06_ecosystem/05_systems_and_embedded/50_embedded_hardware_test_matrix.md": {
+      "D2": [
+        "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5] 无交集"
+      ]
+    },
+    "concept/06_ecosystem/05_systems_and_embedded/51_probe_rs_and_embedded_debugging.md": {
+      "D2": [
+        "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5] 无交集"
       ]
     },
     "concept/06_ecosystem/14_enterprise_architecture/09_observability_and_sre_patterns.md": {

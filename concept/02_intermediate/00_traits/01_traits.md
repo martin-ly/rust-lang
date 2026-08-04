@@ -1,12 +1,12 @@
 > **内容分级**: [综述级]
 > [综述级]
-> **本节关键术语**: 特征 (Trait) · 实现 (Implement) · 孤儿规则 (Orphan Rule) · 一致性 (Coherence) · 对象安全 (Object Safety) — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
+> **本节关键术语**: 特征 (Trait) · 实现 (Implement) · 孤儿规则 (Orphan Rule) · 一致性 (Coherence) · dyn 兼容性 (dyn compatibility) — [完整对照表](../../00_meta/01_terminology/01_terminology_glossary.md)
 >
 
 # Trait 系统
 >
 > **EN**: Traits
-> **Summary**: Traits define shared behavior in Rust: interfaces with methods, associated types, and default implementations that can be composed through trait bounds. The chapter explores implementing traits, trait objects, object safety, the orphan rule, coherence, and advanced patterns such as associated types and blanket impls.
+> **Summary**: Traits define shared behavior in Rust: interfaces with methods, associated types, and default implementations that can be composed through trait bounds. The chapter explores implementing traits, trait objects, dyn compatibility, the orphan rule, coherence, and advanced patterns such as associated types and blanket impls.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **📎 交叉引用（Reference）**
 >
@@ -107,7 +107,8 @@ mindmap
       - [Orphan Rule 的数学边界条件](#orphan-rule-的数学边界条件)
       - [与 System F 子类型化的对接](#与-system-f-子类型化的对接)
       - [Blanket impl 与 Horn 子句可满足性](#blanket-impl-与-horn-子句可满足性)
-    - [4.2 定理：Trait 对象安全条件 ⟹ dyn Trait 可行性](#42-定理trait-对象安全条件--dyn-trait-可行性)
+    - [4.2 定理：Trait dyn 兼容性条件 ⟹ dyn Trait 可行性](#42-定理trait-dyn-兼容性条件--dyn-trait-可行性)
+      - [4.2a Dyn compatibility 判定矩阵（Reference 最新规则）](#42a-dyn-compatibility-判定矩阵reference-最新规则)
     - [4.3 推论：Auto Trait 结构化推导 ⟹ Send/Sync 自动实现](#43-推论auto-trait-结构化推导--sendsync-自动实现)
       - [定义与语法](#定义与语法)
       - [自动推导规则](#自动推导规则)
@@ -149,10 +150,10 @@ mindmap
     - [6.1 反命题 1: "Trait 实现总是无冲突的"](#61-反命题-1-trait-实现总是无冲突的)
     - [6.2 反命题 2: "Blanket impl 覆盖所有类型"](#62-反命题-2-blanket-impl-覆盖所有类型)
     - [6.3 反命题 3: "`dyn Trait` 和 `impl Trait` 等价"](#63-反命题-3-dyn-trait-和-impl-trait-等价)
-    - [6.4 反命题 4: "Trait 对象安全等价于 Trait 可用"](#64-反命题-4-trait-对象安全等价于-trait-可用)
+    - [6.4 反命题 4: "Trait dyn 兼容性等价于 Trait 可用"](#64-反命题-4-trait-dyn-兼容性等价于-trait-可用)
   - [七、边界极限测试代码（Boundary Limit Tests）](#七边界极限测试代码boundary-limit-tests)
     - [7.1 测试 1: Orphan Rule + Coherence 多层嵌套边界](#71-测试-1-orphan-rule--coherence-多层嵌套边界)
-    - [7.2 测试 2: Trait 对象安全 + dyn/impl 分发边界](#72-测试-2-trait-对象安全--dynimpl-分发边界)
+    - [7.2 测试 2: Trait dyn 兼容性 + dyn/impl 分发边界](#72-测试-2-trait-dyn-兼容性--dynimpl-分发边界)
     - [7.3 测试 3: Blanket impl + 关联类型递归 + Auto Trait 推导边界](#73-测试-3-blanket-impl--关联类型递归--auto-trait-推导边界)
     - [7.5 编译错误示例](#75-编译错误示例)
   - [八、认知路径（Cognitive Path）](#八认知路径cognitive-path)
@@ -272,7 +273,8 @@ Trait 是 Rust 的「类型类」（type class）机制，三个权威定义视�
 > **[TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html)** A trait defines functionality a particular type has and can share with other types.
 > We can use traits to define shared behavior in an abstract way. We can use trait bounds to specify that a generic type can be any type that has certain behavior.
 > **[Rust Reference: Traits](https://doc.rust-lang.org/reference/items/traits.html)** A trait describes an abstract interface that types can implement. This interface is made up of associated items, which come in three varieties: functions, types, and constants. All traits define an implicit type parameter `Self` that refers to the type implementing the trait.
-> **[RFC 255: Object Safety](https://rust-lang.github.io/rfcs//0255-object-safety.html)** A trait is object safe if it has a sensible vtable representation. Object safety rules ensure that trait objects (`dyn Trait`) can be constructed and that method dispatch through vtables is well-defined.
+> **[RFC 255](https://rust-lang.github.io/rfcs//0255-object-safety.html)** (historically titled *Object Safety*, now referred to as **dyn compatibility**) introduced the original vtable-based rules for trait objects.
+> **[Rust Reference: Dyn Compatibility](https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility)** A trait is *dyn compatible* if it can be the base trait of a trait object. The rules require all supertraits to be dyn compatible, forbid `Self: Sized` superbounds and associated constants, restrict associated functions to vtable-dispatchable signatures, and explicitly exclude the `AsyncFn*` family. This concept was formerly known as *object safety*.
 
 ### 1.3 形式化定义
 
@@ -410,7 +412,7 @@ graph TD
 > **使用建议**: 作为学习导航锚点，每掌握一个子概念后回到图中定位其拓扑位置，避免碎片化记忆。
 > **关键洞察**: Trait 系统的设计精髓是"接口定义、泛型约束、分发机制"的三层正交分离，Orphan Rule 是连接三层的保险装置。
 > **过渡到定理推理链**: 思维导图呈现了 Trait 系统的概念拓扑，但缺乏严格的逻辑推导关系。
-> 下一节通过"⟹"标注的定理链，将 Orphan Rule、Coherence、对象安全、Auto Trait 推导等核心命题形式化为可验证的推理网络，建立从编译规则到运行行为的完整因果链。
+> 下一节通过"⟹"标注的定理链，将 Orphan Rule、Coherence、dyn 兼容性、Auto Trait 推导等核心命题形式化为可验证的推理网络，建立从编译规则到运行行为的完整因果链。
 
 ---
 
@@ -467,19 +469,77 @@ impl<P₁...Pn> Trait<T₁...Tm> for Type
 
 ---
 
-### 4.2 定理：Trait 对象安全条件 ⟹ dyn Trait 可行性
+### 4.2 定理：Trait dyn 兼容性条件 ⟹ dyn Trait 可行性
 
-> **[RFC 255](https://rust-lang.github.io/rfcs//0255-object-safety.html)** · **[Rust Reference: Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)** Trait 对象安全是 `dyn Trait` 类型的充要条件，违反任一条件即触发 E0038。 ✅ 已验证
+> **[RFC 255](https://rust-lang.github.io/rfcs//0255-object-safety.html)** · **[Rust Reference: Dyn Compatibility](https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility)** Trait dyn 兼容性是 `dyn Trait` 类型的充要条件，违反任一条件即触发 E0038。 ✅ 已验证
 
 ```text
-前提 1: Trait 的所有方法满足对象安全条件（无 Self: Sized、无泛型方法等）
-前提 2: Trait 本身或其 supertrait 不依赖 Sized
+前提 1: Trait 的所有方法满足 dyn 兼容性条件（可分发方法无泛型参数、 receiver 合法、无 `Self` 返回/参数等）
+前提 2: Trait 不含关联常量，且关联类型不带泛型参数
+前提 3: `Self: Sized` 不是 supertrait 约束，且所有 supertrait 本身 dyn 兼容
+前提 4: `AsyncFn`、`AsyncFnMut`、`AsyncFnOnce`  inherently 非 dyn 兼容
     ↓
-定理: Trait 对象安全 ⟹ dyn Trait 是合法类型
+定理: Trait dyn 兼容 ⟹ dyn Trait 是合法类型
     ↓
-推论 1: 不满足对象安全的 Trait 不能构造 trait object（如 Iterator 是对象安全的，但 Clone 不是）
-推论 2: 对象安全 Trait 可通过 vtable 实现运行时多态
+推论 1: 不满足 dyn 兼容的 Trait 不能构造 trait object（如 Iterator 是 dyn 兼容的，但 Clone 不是）
+推论 2: dyn 兼容 Trait 可通过 vtable 实现运行时多态
 ```
+
+#### 4.2a Dyn compatibility 判定矩阵（Reference 最新规则）
+
+以下矩阵整理自 [Rust Reference: Dyn Compatibility](https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility)（Rust 1.97+），用于快速判定 trait 是否可作为 `dyn Trait` 的基 trait：
+
+| 判定项 | 允许 / 禁止 | 说明与示例 |
+| :--- | :---: | :--- |
+| **Supertrait 必须 dyn 兼容** | ✅ 必须 | `trait A: B` 要求 `B` 本身 dyn 兼容；否则 `dyn A` 非法。 |
+| **`Self: Sized` supertrait** | ❌ 禁止 | 如 `trait T where Self: Sized {}` 不能构造 `dyn T`。 |
+| **关联常量** | ❌ 禁止 | `trait T { const C: i32; }` 不能作为 `dyn T`。 |
+| **带泛型的关联类型** | ❌ 禁止 | `type Item<'a>;` 等带自身泛型的关联类型会破坏 vtable 布局。 |
+| **可分发方法的 receiver** | ✅ 允许 | `&Self`、`&mut Self`、`Box<Self>`、`Rc<Self>`、`Arc<Self>`、`Pin<P>`（其中 `P` 为前述 receiver）。 |
+| **泛型方法** | ❌ 禁止 | `fn f<T>(&self, x: T)` 无法实例化为单一 vtable 条目。 |
+| **返回 `Self` 或使用 `Self` 作为参数/返回类型** | ❌ 禁止（除非 `where Self: Sized`） | vtable 在运行时不知道具体 `Self` 类型的大小。 |
+| **不透明返回类型** | ❌ 禁止 | `async fn` 与返回位置 `impl Trait`（RPITIT）不能作为可分发方法。 |
+| **`AsyncFn*` trait 族** | ❌ 非 dyn 兼容 | `AsyncFn`、`AsyncFnMut`、`AsyncFnOnce` 本身不能作为 `dyn AsyncFn*`。 |
+| **`where Self: Sized` 方法** | ✅ 显式排除 | 此类方法不参与 vtable，可存在于 dyn 兼容 trait 中（如 `Clone::clone` 的拆分模式）。 |
+
+```rust
+use std::pin::Pin;
+
+// ✅ dyn 兼容：合法 receiver 与可分发签名
+trait Dispatchable {
+    fn by_ref(self: &Self);
+    fn by_mut(self: &mut Self);
+    fn by_box(self: Box<Self>);
+    fn by_pin(self: Pin<&mut Self>);
+    fn with_lifetime<'a>(self: &'a Self);
+}
+
+struct S;
+impl Dispatchable for S {
+    fn by_ref(self: &Self) {}
+    fn by_mut(self: &mut Self) {}
+    fn by_box(self: Box<Self>) {}
+    fn by_pin(self: Pin<&mut Self>) {}
+    fn with_lifetime<'a>(self: &'a Self) {}
+}
+
+fn main() {
+    let _: Box<dyn Dispatchable> = Box::new(S);
+}
+```
+
+```rust,compile_fail
+// ❌ 非 dyn 兼容：关联常量
+trait HasConst { const C: i32 = 1; }
+fn use_dyn(_: &dyn HasConst) {}
+```
+
+```rust,compile_fail
+// ❌ 非 dyn 兼容：AsyncFn* trait 族
+fn async_fn_object(_: &dyn std::ops::AsyncFn(i32) -> i32) {}
+```
+
+> **关键洞察**: Reference 已将 "object safety" 重命名为 **dyn compatibility**，但判定逻辑保持一致：trait 必须能在 vtable 中表达所有可分发方法；任何要求编译期知道 `Self` 具体大小或泛型实例化的条目都会破坏 dyn 兼容性。
 
 ### 4.3 推论：Auto Trait 结构化推导 ⟹ Send/Sync 自动实现
 
@@ -604,18 +664,18 @@ impl !Sync for RawFd {}  // 显式阻止自动 Sync
 | **定理/引理/推论** | **前提** | **结论** | **依赖的 L4 公理** | **被哪些定理依赖** | **失效条件** | **典型错误码** |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **引理**: Orphan Rule ⟹ Coherence | crate 边界清晰；至少一方本地 | impl 声明位置受限，无跨 crate 孤儿 impl | 类型论一致性；模块（Module）化封装 | 全局唯一 impl；Blanket impl 可满足 | `#[fundamental]` 类型例外（`&T`, `Box<T>`, `&mut T`） | E0117 |
-| **定理**: 全局唯一 impl | Orphan Rule + 无重叠 impl | 调用目标唯一确定；单态化（Monomorphization）可行 | Coherence 公理 | 单态化零成本；Trait 对象安全 | specialization（min_specialization 不稳定） | E0119 |
-| **定理**: Trait 对象安全 | 方法无 `Self: Sized`；无泛型方法；无静态方法 | `dyn Trait` 是合法类型；vtable 可构造 | 存在类型 + vtable 理论 | 运行时（Runtime）多态分发；`Box<dyn Trait>` | `Self: Sized` superbound；泛型方法 | E0038 |
+| **定理**: 全局唯一 impl | Orphan Rule + 无重叠 impl | 调用目标唯一确定；单态化（Monomorphization）可行 | Coherence 公理 | 单态化零成本；Trait dyn 兼容性 | specialization（min_specialization 不稳定） | E0119 |
+| **定理**: Trait dyn 兼容性 | 方法可分发（无泛型参数、合法 receiver、无 `Self` 返回/参数）；无关联常量；关联类型不带泛型；supertrait 均 dyn 兼容；非 `AsyncFn*` | `dyn Trait` 是合法类型；vtable 可构造 | 存在类型 + vtable 理论 | 运行时（Runtime）多态分发；`Box<dyn Trait>` | `Self: Sized` superbound；泛型方法；关联常量；supertrait 非 dyn 兼容；`AsyncFn*` | E0038 |
 | **推论**: Auto Trait 结构化推导 | 所有字段满足 Auto Trait；类型非 `!Trait` 覆盖 | 复合类型自动实现 Send/Sync/Sized/Unpin | 结构化推导规则；归纳定义 | 并发安全（Concurrency Safety）分析；类型布局推导 | `unsafe impl !Send for T` 手动否定；原始指针（Raw Pointer）保守 | — |
-| **引理**: Supertrait 传递 | `trait A: B` 声明 | A 的实现者必须实现 B | 子类型传递性；偏序关系 | Trait 层次设计；对象安全传递 | 循环 supertrait（`trait A: B; trait B: A`） | E0399 / E0398 |
+| **引理**: Supertrait 传递 | `trait A: B` 声明 | A 的实现者必须实现 B | 子类型传递性；偏序关系 | Trait 层次设计；dyn 兼容性传递 | 循环 supertrait（`trait A: B; trait B: A`） | E0399 / E0398 |
 | **定理**: Trait + 泛型零成本 | 单态化（Monomorphization） + LLVM 内联优化 | 无运行时（Runtime）开销；直接函数调用 | Parametricity；β-归约 | 性能敏感代码路径优化 | `dyn Trait` 动态分发选择 | — |
 | **引理**: Blanket impl 可满足 | `impl<T: A> B for T` 形式 | 全称量词 + 蕴含；Horn 子句可满足 | Horn 子句逻辑；一阶可满足性 | 默认行为提供；组合子设计 | 与具体 impl 重叠（如 `impl Foo for Vec<T>` + `impl<T> Foo for T`） | E0119 |
 | **推论**: GATs 约束可满足 | 关联类型参数合法；无递归约束 | 泛型关联类型可实例化 | System Fω 约束；类型族 | HKT 模拟；类型级编程 | 无界递归归一化；不一致约束 | E0275 / E0049 |
 | **引理**: `impl Trait` 存在类型 | 返回类型满足 Trait；单一具体类型 | 抽象返回类型；隐藏实现细节 | 存在量化 ∃T.Trait(T) | API 设计；版本兼容性 | 多分支返回不同类型（除非 `dyn Trait`） | E0746 / E0706 |
 | **定理**: Negative impl 语义 | `impl !Trait for T` 声明 | 显式排除自动实现；类型不实现 Trait | 否定信息逻辑；非单调推理 | Auto Trait 手动控制；unsafe 边界 | 与正 impl 冲突；与 blanket impl 交互复杂 | E0751 |
 
-> **一致性检查**: Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl（链 A），且 Trait 对象安全 ⟹ dyn Trait 可行性（链 B），形成**从定义约束到使用能力**的两条正交推理链。
-> Auto Trait 推导是编译器对结构性质的自动证明，Blanket impl 提供全称量词的默认行为，`impl Trait` 引入存在量化——三者与对象安全共同构成 Trait 系统的"静动两面"。
+> **一致性检查**: Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl（链 A），且 Trait dyn 兼容性 ⟹ dyn Trait 可行性（链 B），形成**从定义约束到使用能力**的两条正交推理链。
+> Auto Trait 推导是编译器对结构性质的自动证明，Blanket impl 提供全称量词的默认行为，`impl Trait` 引入存在量化——三者与dyn 兼容性共同构成 Trait 系统的"静动两面"。
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../../00_meta/04_navigation/04_inter_layer_map.md) §4.2 "类型系统（Type System）一致性（Coherence）"
 > **过渡到示例与反例**:
 > 定理链提供了形式化保证，但工程实践中这些保证的边界在哪里？
@@ -1303,7 +1363,7 @@ fn main() {
 
 ## 六、反命题与边界分析（Counter-proposition & Boundary Analysis）
 
-> **[RFC 1023](https://rust-lang.github.io/rfcs//1023-rebalancing-coherence.html)** · **[Rust Reference: Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)** · **[Rust Reference: Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)** 反命题分析基于 Trait 系统的形式化语义和已知边界案例，按四层（编译期/运行时（Runtime）/语义/工程）系统分类。反例节点用 `fill:#f66`，定理成立用 `fill:#6f6`。 ✅ 已验证
+> **[RFC 1023](https://rust-lang.github.io/rfcs//1023-rebalancing-coherence.html)** · **[Rust Reference: Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)** · **[Rust Reference: Dyn Compatibility](https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility)** 反命题分析基于 Trait 系统的形式化语义和已知边界案例，按四层（编译期/运行时（Runtime）/语义/工程）系统分类。反例节点用 `fill:#f66`，定理成立用 `fill:#6f6`。 ✅ 已验证
 
 ### 6.1 反命题 1: "Trait 实现总是无冲突的"
 
@@ -1384,9 +1444,9 @@ graph TD
     Q2 -->|是| F2["反例: impl Trait 无法构造 Vec<impl Display><br/>→ 需 Vec<Box<dyn Display>> 或 Vec<&dyn Display>"]
     Q2 -->|否| Q3{"需要 vtable 间接调用?"}
     Q3 -->|是| F3["反例: impl Trait 是静态分发零成本<br/>→ dyn Trait 有 vtable 指针间接开销"]
-    Q3 -->|否| Q4{"Trait 满足对象安全?"}
-    Q4 -->|否| F4["反例: 非对象安全 Trait 不能 dyn<br/>→ Clone 不能 dyn，但可用 impl Clone"]
-    Q4 -->|是| T1["定理局部成立: 单一类型 + 对象安全时<br/>功能等价但机制不同<br/>✅ 静态分发 vs 动态分发"]
+    Q3 -->|否| Q4{"Trait 满足 dyn 兼容性?"}
+    Q4 -->|否| F4["反例: 非 dyn 兼容 Trait 不能 dyn<br/>→ Clone 不能 dyn，但可用 impl Clone"]
+    Q4 -->|是| T1["定理局部成立: 单一类型 + dyn 兼容性时<br/>功能等价但机制不同<br/>✅ 静态分发 vs 动态分发"]
 
     style F1 fill:#f66
     style F2 fill:#f66
@@ -1408,22 +1468,22 @@ graph TD
 | 语义 | `impl Trait` = ∃T.Trait(T) + 编译期已知；`dyn Trait` = 存在类型 + 运行时已知 | ⚠️ 不等价 |
 | 工程 | 返回类型用 `impl Trait`，异构集合用 `dyn Trait` | ✅ 互补 |
 
-### 6.4 反命题 4: "Trait 对象安全等价于 Trait 可用"
+### 6.4 反命题 4: "Trait dyn 兼容性等价于 Trait 可用"
 
-> 编译期层 — 非对象安全 Trait 不能构造 `dyn Trait`，但仍可用于泛型约束。对象安全是 `dyn Trait` 的充要条件，不是 Trait 本身的可用性条件。
-> **来源: [RFC 255; Rust Reference: Object Safety](https://github.com/rust-lang/rfcs/pull/255)** 对象安全是 `dyn Trait` 的充要条件，不是 Trait 可用性的充要条件。Clone 等非对象安全 Trait 在泛型约束 `<T: Clone>` 中完全可用。
+> 编译期层 — 非 dyn 兼容 Trait 不能构造 `dyn Trait`，但仍可用于泛型约束。dyn 兼容性是 `dyn Trait` 的充要条件，不是 Trait 本身的可用性条件。
+> **来源: [RFC 255](https://rust-lang.github.io/rfcs//0255-object-safety.html) · [Rust Reference: Dyn Compatibility](https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility)** dyn 兼容性是 `dyn Trait` 的充要条件，不是 Trait 可用性的充要条件。Clone 等非 dyn 兼容 Trait 在泛型约束 `<T: Clone>` 中完全可用。
 
 ```mermaid
 graph TD
-    P["命题: Trait 对象安全等价于 Trait 可用"] --> Q1{"需要 dyn Trait?"}
-    Q1 -->|否| T1["定理成立: 非对象安全 Trait 仍可用于泛型约束<br/>✅ 如 Clone 可用于 <T: Clone>"]
+    P["命题: Trait dyn 兼容性等价于 Trait 可用"] --> Q1{"需要 dyn Trait?"}
+    Q1 -->|否| T1["定理成立: 非 dyn 兼容 Trait 仍可用于泛型约束<br/>✅ 如 Clone 可用于 <T: Clone>"]
     Q1 -->|是| Q2{"Trait 方法含 Self: Sized?"}
     Q2 -->|是| F1["反例: Clone::clone 返回 Self，dyn Clone 不可行<br/>→ E0038: the trait `Clone` cannot be made into an object"]
     Q2 -->|否| Q3{"Trait 含泛型方法?"}
     Q3 -->|是| F2["反例: 泛型方法在 vtable 中无法确定大小<br/>→ E0038"]
     Q3 -->|否| Q4{"Trait 含静态方法?"}
-    Q4 -->|是| F3["反例: 静态方法无 self，vtable 无法 dispatch<br/>→ 非对象安全"]
-    Q4 -->|否| T2["定理成立: dyn Trait 可用<br/>✅ 满足所有对象安全条件"]
+    Q4 -->|是| F3["反例: 静态方法无 self，vtable 无法 dispatch<br/>→ 非 dyn 兼容"]
+    Q4 -->|否| T2["定理成立: dyn Trait 可用<br/>✅ 满足所有dyn 兼容性条件"]
 
     style F1 fill:#f66
     style F2 fill:#f66
@@ -1432,18 +1492,18 @@ graph TD
     style T2 fill:#6f6
 ```
 
-> **认知功能**: 概念纠偏工具——破除"对象安全 = Trait 可用"的直觉谬误，明确对象安全仅为 dyn Trait 的充要条件。
+> **认知功能**: 概念纠偏工具——破除"dyn 兼容性 = Trait 可用"的直觉谬误，明确dyn 兼容性仅为 dyn Trait 的充要条件。
 > **使用建议**: 设计 Trait 时若需支持 dyn，将 `Self: Sized` 方法拆分到独立 Trait（如 Iterator vs ExactSizeIterator）。
-> **关键洞察**: Clone 等非对象安全 Trait 在泛型约束中完全可用——对象安全限制的是运行时多态能力，而非编译期接口契约能力。
+> **关键洞察**: Clone 等非 dyn 兼容 Trait 在泛型约束中完全可用——dyn 兼容性限制的是运行时多态能力，而非编译期接口契约能力。
 
 **四层分析**:
 
 | **层面** | **分析** | **结果** |
 |:---|:---|:---|
-| 编译期 | E0038 阻止非对象安全 Trait 构造 dyn | ✅ 安全 |
+| 编译期 | E0038 阻止非 dyn 兼容 Trait 构造 dyn | ✅ 安全 |
 | 运行时 | 无运行时影响 | ✅ 安全 |
-| 语义 | 对象安全是 dyn 的充要条件，不是 Trait 可用性的充要条件 | ⚠️ 概念区分 |
-| 工程 | 拆分为对象安全部分 + Sized 部分（如 Iterator + ExactSizeIterator） | ✅ 可解 |
+| 语义 | dyn 兼容性是 dyn 的充要条件，不是 Trait 可用性的充要条件 | ⚠️ 概念区分 |
+| 工程 | 拆分为dyn 兼容性部分 + Sized 部分（如 Iterator + ExactSizeIterator） | ✅ 可解 |
 
 > **过渡到边界极限测试**: 反命题决策树揭示了定理失效的逻辑路径，但极限测试将定理推向边界——通过代码展示编译器在极端约束下的精确行为，验证理论预测与编译器实现的一致性（Coherence）。
 
@@ -1454,7 +1514,7 @@ graph TD
 本节收集 trait 系统的边界用例——每段代码都精确压在某条编译器规则的分界线上：
 
 - **孤儿规则边界**：`impl ForeignTrait for ForeignType` 必然失败（E0117），但只要任一参数是本地类型（包括 `Wrapper<ForeignType>` 形式的覆盖类型，covered type 规则）即可通过；
-- **对象安全边界**：带泛型方法或返回 `Self` 的 trait 不能做成 `dyn Trait`（E0038），用 `where Self: Sized` 把单个方法移出 vtable 可修复；
+- **dyn 兼容性边界**：带泛型方法或返回 `Self` 的 trait 不能做成 `dyn Trait`（E0038），用 `where Self: Sized` 把单个方法移出 vtable 可修复；
 - **重叠 impl 边界**：`impl<T> Trait for T` 与 `impl Trait for SpecificType` 冲突（E0119）——一致性检查在 impl 定义处而非使用处报错；
 - **自动 trait 边界**：`Send`/`Sync` 的自动实现可被 `unsafe impl` 手动接管，但错误接管是健全性（soundness）漏洞而非编译错误。
 
@@ -1488,38 +1548,38 @@ impl<T> LocalTrait for Vec<T> {}
 // impl std::fmt::Display for &mut MyExternalType { ... } // 可能允许
 ```
 
-### 7.2 测试 2: Trait 对象安全 + dyn/impl 分发边界
+### 7.2 测试 2: Trait dyn 兼容性 + dyn/impl 分发边界
 
-> **来源: [RFC 255; Rust Reference: Object Safety](https://github.com/rust-lang/rfcs/pull/255)** 对象安全的三类典型违规：返回 Self（隐含 Sized）、泛型方法（vtable 无法实例化）、静态方法（无 self 无法 dispatch）。
+> **来源: [RFC 255](https://rust-lang.github.io/rfcs//0255-object-safety.html) · [Rust Reference: Dyn Compatibility](https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility)** dyn 兼容性的三类典型违规：返回 Self（隐含 Sized）、泛型方法（vtable 无法实例化）、静态方法（无 self 无法 dispatch）。
 
 ```rust
-// 边界: 对象安全条件的精确测试与分发方式差异
+// 边界: dyn 兼容性条件的精确测试与分发方式差异
 
-// ✅ 对象安全: 方法返回引用，不涉及 Self
+// ✅ dyn 兼容性: 方法返回引用，不涉及 Self
 trait SafeTrait {
     fn name(&self) -> &str;
     fn process(&self, x: i32) -> i32;
 }
 
-// ❌ 非对象安全 1: 方法返回 Self
+// ❌ 非 dyn 兼容 1: 方法返回 Self
 trait NotSafe1 {
     fn clone_self(&self) -> Self;  // Self: Sized 隐式要求
 }
 // dyn NotSafe1 非法 → E0038
 
-// ❌ 非对象安全 2: 泛型方法
+// ❌ 非 dyn 兼容 2: 泛型方法
 trait NotSafe2 {
     fn process<T>(&self, x: T) -> T;  // 泛型方法无法放入 vtable
 }
 // dyn NotSafe2 非法 → E0038
 
-// ❌ 非对象安全 3: 静态方法（无 self）
+// ❌ 非 dyn 兼容 3: 静态方法（无 self）
 trait NotSafe3 {
     fn create() -> Self;  // 无 self，vtable 无法 dispatch
 }
 // dyn NotSafe3 非法 → E0038
 
-// ✅ 修正: 将非对象安全方法移到独立 Trait
+// ✅ 修正: 将非 dyn 兼容方法移到独立 Trait
 trait SafeObject {
     fn name(&self) -> &str;
 }
@@ -1602,13 +1662,13 @@ impl std::fmt::Display for Vec<i32> {
 ```
 
 ```rust,compile_fail
-// 错误: Trait 对象安全冲突 —— 返回 Self
+// 错误: Trait dyn 兼容性冲突 —— 返回 Self
 trait CloneSelf {
     fn clone_self(&self) -> Self;
 }
 
 fn use_dyn_clone(obj: &dyn CloneSelf) {
-    // ❌ 编译错误: E0038 —— `CloneSelf` 不是对象安全的
+    // ❌ 编译错误: E0038 —— `CloneSelf` 不是dyn 兼容性的
     // 因为 `clone_self` 返回 `Self`（Sized），vtable 无法实例化
 }
 ```
@@ -1620,7 +1680,7 @@ trait GenericMethod {
 }
 
 fn use_dyn_generic(obj: &dyn GenericMethod) {
-    // ❌ 编译错误: E0038 —— `GenericMethod` 不是对象安全的
+    // ❌ 编译错误: E0038 —— `GenericMethod` 不是dyn 兼容性的
     // 泛型方法无法在 vtable 中存储（单态化需要编译期知道 T）
 }
 ```
@@ -1696,7 +1756,7 @@ fn notify<T: Summary>(item: &T) { ... }
 
 **核心问题**: "什么时候用 dyn Trait？什么时候用泛型约束？"
 
-**过渡解释**: 类型论提供了静态分发的零成本保证，但工程中有异构集合、递归类型、隐藏实现细节等场景需要动态分发。这一步要求学习者在性能（零成本抽象）、二进制体积（单态化（Monomorphization）膨胀）、灵活性（运行时多态）之间做工程决策。Trait 对象安全条件是这一决策的硬性边界——不是所有 Trait 都能 dyn。从 Step 5 到 Step 6 的过渡是"从使用到设计"——不仅会选择分发方式，还能设计符合对象安全条件的 Trait，将对象安全规则内化为设计直觉。
+**过渡解释**: 类型论提供了静态分发的零成本保证，但工程中有异构集合、递归类型、隐藏实现细节等场景需要动态分发。这一步要求学习者在性能（零成本抽象）、二进制体积（单态化（Monomorphization）膨胀）、灵活性（运行时多态）之间做工程决策。Trait dyn 兼容性条件是这一决策的硬性边界——不是所有 Trait 都能 dyn。从 Step 5 到 Step 6 的过渡是"从使用到设计"——不仅会选择分发方式，还能设计符合dyn 兼容性条件的 Trait，将dyn 兼容性规则内化为设计直觉。
 
 ```text
 决策框架:
@@ -1710,13 +1770,13 @@ fn notify<T: Summary>(item: &T) { ... }
 
 **核心问题**: "我设计的 Trait 体系在逻辑上自洽吗？"
 
-**过渡解释**: 认知路径的最终目标是让学习者具备自主验证能力。通过定理链（Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl；Trait 对象安全 ⟹ dyn Trait 可行性），可以预判设计决策的远期后果。Auto Trait 的结构化推导、Supertrait 的传递性、Blanket impl 的 Horn 子句语义、`impl Trait` 的存在量化——这些不再是孤立的语法点，而是构成一个可推理的形式系统。掌握定理链后，学习者能在编码前预判编译器的行为，从"试错编程"进化为"推理编程"。
+**过渡解释**: 认知路径的最终目标是让学习者具备自主验证能力。通过定理链（Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl；Trait dyn 兼容性 ⟹ dyn Trait 可行性），可以预判设计决策的远期后果。Auto Trait 的结构化推导、Supertrait 的传递性、Blanket impl 的 Horn 子句语义、`impl Trait` 的存在量化——这些不再是孤立的语法点，而是构成一个可推理的形式系统。掌握定理链后，学习者能在编码前预判编译器的行为，从"试错编程"进化为"推理编程"。
 
 ```text
 设计验证清单:
   □ Orphan Rule: impl 中至少一方是本地定义？
   □ Coherence: 不存在与其他 impl 重叠的可能？
-  □ 对象安全: 如果需要 dyn Trait，方法是否满足条件？
+  □ dyn 兼容性: 如果需要 dyn Trait，方法是否满足条件？
   □ Supertrait: 是否存在循环依赖？
   □ Auto Trait: 字段类型是否自动推导 Send/Sync？
   □ 零成本: 性能敏感路径是否避免 dyn Trait？
@@ -1738,7 +1798,7 @@ fn notify<T: Summary>(item: &T) { ... }
 | 单态化实现零成本抽象 | [TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html) · [Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/glossary.html#monomorphization) | ✅ |
 | Coherence 保证全局唯一性 | [RFC 1023](https://rust-lang.github.io/rfcs//1023-rebalancing-coherence.html) | ✅ |
 | 关联类型对比泛型参数 | [TRPL: Ch19.3](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) | ✅ |
-| Trait 对象安全规则 | [RFC 255](https://rust-lang.github.io/rfcs//0255-object-safety.html) · [Rust Reference: Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety) | ✅ |
+| Trait dyn 兼容性规则 | [RFC 255](https://rust-lang.github.io/rfcs//0255-object-safety.html) · [Rust Reference: Dyn Compatibility](https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility) | ✅ |
 | Auto Trait 结构化推导 | [Rust Reference: Auto Traits](https://doc.rust-lang.org/reference/special-types-and-traits.html#auto-traits) | ✅ |
 | Trait 作为逻辑命题 | [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/) · 原创分析 | 💡 |
 | Type Classes 原始论文 | [Wadler & Blott 1989 — POPL](http://ropas.snu.ac.kr/~bruno/papers/TypeClasses.pdf) | ✅ |
@@ -1859,7 +1919,7 @@ trait FactoryFixed {
 
 **原因**：`dyn Factory` 的 vtable 需要知道 `create` 返回类型的**大小**才能正确分配栈空间。AFIT 的返回类型由每个实现者独立决定，vtables 无法统一表示。
 
-> **[Rust Reference: Object Safety](https://doc.rust-lang.org/reference/introduction.html)** 含 RPITIT 的方法使 trait 不满足对象安全（object safety），因为 vtable 无法存储异构返回类型的大小信息。✅ 已验证
+> **[Rust Reference: Dyn Compatibility](https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility)** 含 RPITIT 的方法使 trait 不满足 dyn 兼容性（dyn compatibility），因为 vtable 无法存储异构返回类型的大小信息。✅ 已验证
 
 #### 形式化语义：存在类型 vs 全称类型
 
@@ -2621,13 +2681,13 @@ fn main() {}
 >
 > ```text
 > 单态化零成本 ⟸ Coherence ⟸ Orphan Rule
-> dyn Trait 可行性 ⟸ Trait 对象安全条件
+> dyn Trait 可行性 ⟸ Trait dyn 兼容性条件
 > ```
 >
 > **诊断方法**：
 >
 > - E0117 (only traits defined in the current crate can be implemented for arbitrary types) → Orphan Rule 违反
-> - E0038 (trait cannot be made into an object) → Trait 对象安全条件不满足 → 检查 `Self: Sized` 方法
+> - E0038 (trait cannot be made into an object) → Trait dyn 兼容性条件不满足 → 检查 `Self: Sized` 方法
 > - E0283 (type annotations needed) → 单态化类型推断（Type Inference）歧义 → 显式指定类型参数
 
 ## 参考来源
@@ -2787,9 +2847,9 @@ fn render(item: &dyn Drawable) {
 
 **编译错误**。
 
-`create() -> Self` 方法返回 `Self`，这使得 trait 不是**对象安全**的（object-safe），因为 `dyn Drawable` 在编译时不知道具体类型的大小。
+`create() -> Self` 方法返回 `Self`，这使得 trait 不是**dyn 兼容性**的（dyn-compatible），因为 `dyn Drawable` 在编译时不知道具体类型的大小。
 
-对象安全的 trait 不能有以下方法：
+dyn 兼容性的 trait 不能有以下方法：
 
 - 返回 `Self`
 - 使用 `Self: Sized` 之外的泛型参数
@@ -2851,7 +2911,7 @@ trait Drawable {
     - 4.2 返回不同类型
   - [5. Trait 对象](#测验-5trait-对象分析层)
     - 5.1 动态分发
-    - 5.2 对象安全
+    - 5.2 dyn 兼容性
     - 5.3 性能考虑
   - [6. 派生 Trait](#11-什么是-trait)
     - [6.1 常用派生 Trait](#11-什么是-trait)
@@ -2947,7 +3007,7 @@ trait Drawable {
 - **Trait 定义**: 方法签名、默认实现、关联类型
 - **Trait 实现**: 为类型实现 Trait、孤儿规则
 - **Trait Bound**: 泛型约束、impl Trait、where 子句
-- **Trait 对象**: 动态分发、对象安全、性能考虑
+- **Trait 对象**: 动态分发、dyn 兼容性、性能考虑
 
 **性能特征**:
 
@@ -3001,7 +3061,7 @@ Trait 系统指南
 | 2. 定义和实现   | Trait 定义和实现   | 🟢 简单 | 40分钟   |
 | 3. Trait 参数   | 参数中的 Trait     | 🟡 中等 | 40分钟   |
 | 4. Trait 返回   | 返回类型中的 Trait | 🟡 中等 | 30分钟   |
-| 5. Trait 对象   | 动态分发和对象安全 | 🔴 高级 | 60分钟   |
+| 5. Trait 对象   | 动态分发和dyn 兼容性 | 🔴 高级 | 60分钟   |
 | 6. 派生 Trait   | 自动派生机制       | 🟡 中等 | 30分钟   |
 | 7. 运算符重载   | 运算符 Trait       | 🟡 中等 | 40分钟   |
 | 8. 高级特性     | 关联类型等高级特性 | 🔴 高级 | 60分钟   |
@@ -3145,7 +3205,7 @@ let parsed: ParsedData = raw.into();
 | :--- | :--- | :--- |
 | E0117 违反孤儿规则 | 同时为外部类型实现外部 trait | 使用 Newtype 包装 |
 | E0119 重叠实现 | 两个 impl 条件可能同时满足 | 利用特化或收紧 bound |
-| 对象安全错误 | trait 含泛型方法或 `Self: Sized` | 拆分 `MyTrait` 与 `MyTraitObj` |
+| dyn 兼容性错误 | trait 含泛型方法或 `Self: Sized` | 拆分 `MyTrait` 与 `MyTraitObj` |
 | 过度抽象 | 单一实现仍引入 trait | 先写具体代码，需要多态时再抽象 |
 
 ---

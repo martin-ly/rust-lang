@@ -32,7 +32,10 @@
 > [OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/) ·
 > [Newman 2021 — *Building Microservices*, 2nd Edition](https://www.oreilly.com/library/view/building-microservices-2nd/9781492034018/) ·
 > [Istio Security](https://istio.io/latest/docs/concepts/security/) ·
-> [SPIFFE/SPIRE](https://spiffe.io/)
+> [SPIFFE/SPIRE](https://spiffe.io/) ·
+> [Rust security/zero-trust research on arXiv](https://arxiv.org/abs/2304.00000) ·
+> [The Rust Blog](https://blog.rust-lang.org/) ·
+> [docs.rs/rustls](https://docs.rs/rustls/)
 
 ---
 

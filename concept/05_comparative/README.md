@@ -158,6 +158,7 @@ L1-L4 知识                L5 综合                L6-L7 决策
 - [Rust vs Elixir](02_managed_languages/07_rust_vs_elixir.md)
 - [Rust vs TypeScript：静态类型系统（Type System）的两种哲学 —— 编译期证明与渐进式工程](02_managed_languages/08_rust_vs_typescript.md)
 - [测验：Rust vs 系统编程语言（嵌入式互动试点）](03_domain_comparisons/02_quiz_rust_vs_systems.md)
+- [Rust 惯用法、算法、设计模式与架构模式](05_idioms_patterns_architecture/README.md)
 
 ## 三、原 `01.md` 的结构化索引
 

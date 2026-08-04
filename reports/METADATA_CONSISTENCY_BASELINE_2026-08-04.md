@@ -1,17 +1,17 @@
 # 元数据一致性基线（语义质量门 P0-1）
 
-**日期**: 2026-08-04  **扫描**: 773 concept 活跃文件（排除 archive）  **模式**: strict
+**日期**: 2026-08-04  **扫描**: 780 concept 活跃文件（排除 archive）  **模式**: strict
 
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
 | D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥 | 0 | 0.0% | >0 | pass |
-| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 20 (基=461) | 2.6% | >=5% | pass |
+| D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 23 (基=464) | 2.9% | >=5% | pass |
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
 | D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
 | D6 Summary 低信息量模板套话 | 2 | 0.3% | >=3% | pass |
 
-**受影响文件总数**: 22 / 773
+**受影响文件总数**: 25 / 780
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -138,20 +138,20 @@
 ### D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥（0）
 
 
-### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（20）
+### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（23）
 
 - `concept/00_meta/05_ai_semantic_engineering/01_knowledge_graph_design.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [0] 无交集
 - `concept/00_meta/05_ai_semantic_engineering/02_llm_rag_for_rust.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [0] 无交集
+- `concept/00_meta/05_ai_semantic_engineering/03_rag_evaluation_for_rust_kg.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [0] 无交集
 - `concept/06_ecosystem/03_design_patterns/37_event_sourcing_engine_patterns.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
 - `concept/06_ecosystem/03_design_patterns/38_api_gateway_and_service_mesh_patterns.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
 - `concept/06_ecosystem/03_design_patterns/49_gof_patterns_in_rust.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [6] 无交集
 - `concept/06_ecosystem/05_systems_and_embedded/31_embedded_networking_and_iot_protocols.md` — A/S/P=A 允许 [1, 2] 与 Bloom [4, 5, 6] 无交集
 - `concept/06_ecosystem/05_systems_and_embedded/32_embedded_testing_and_ci_strategies.md` — A/S/P=A 允许 [1, 2] 与 Bloom [5] 无交集
 - `concept/06_ecosystem/05_systems_and_embedded/49_embedded_hal_driver_patterns.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5] 无交集
+- `concept/06_ecosystem/05_systems_and_embedded/50_embedded_hardware_test_matrix.md` — A/S/P=A 允许 [1, 2] 与 Bloom [4, 5] 无交集
+- `concept/06_ecosystem/05_systems_and_embedded/51_probe_rs_and_embedded_debugging.md` — A/S/P=A 允许 [1, 2] 与 Bloom [4, 5] 无交集
 - `concept/06_ecosystem/14_enterprise_architecture/09_observability_and_sre_patterns.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
-- `concept/06_ecosystem/14_enterprise_architecture/11_event_driven_and_cqrs_patterns.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
-- `concept/06_ecosystem/14_enterprise_architecture/12_cloud_native_and_serverless_patterns.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
-- `concept/06_ecosystem/16_algorithm_patterns/02_ownership_aware_data_structures.md` — A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集
 
 ### D3 关键字段同文件重声明（0）
 

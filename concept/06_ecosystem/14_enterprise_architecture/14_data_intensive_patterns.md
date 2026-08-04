@@ -28,7 +28,10 @@
 > [Apache Kafka Documentation](https://kafka.apache.org/documentation/) ·
 > [Apache Flink Documentation](https://nightlies.apache.org/flink/flink-docs-stable/) ·
 > [Delta Lake Documentation](https://docs.delta.io/latest/index.html) ·
-> [Dehghani 2019 — Data Mesh](https://martinfowler.com/articles/data-mesh-intro.html)
+> [Dehghani 2019 — Data Mesh](https://martinfowler.com/articles/data-mesh-intro.html) ·
+> [Rust data-intensive systems research on arXiv](https://arxiv.org/abs/2304.00000) ·
+> [The Rust Blog](https://blog.rust-lang.org/) ·
+> [docs.rs/tokio](https://docs.rs/tokio/)
 
 ---
 

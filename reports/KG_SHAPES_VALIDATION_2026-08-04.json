@@ -1,8 +1,8 @@
 {
   "summary": {
     "date": "2026-08-04",
-    "entities": 704,
-    "relations": 10512,
+    "entities": 709,
+    "relations": 10547,
     "decision_trees": 3,
     "fault_trees": 2,
     "K1_missing_required": 0,
@@ -16,14 +16,14 @@
   },
   "relation_sample": {
     "@id": "_:rel1",
-    "@type": "ex:RelationAnnotation",
+    "@type": "ex:dependsOn",
     "ex:subject": "ex:ComprehensiveRustMapping",
     "ex:predicate": "ex:dependsOn",
     "ex:object": "ex:LearningGuide",
     "ex:source": "prerequisite:../04_navigation/07_learning_guide.md",
     "ex:confidence": 1.0,
     "ex:version": "1.97.0",
-    "ex:reviewed": false,
+    "ex:reviewed": true,
     "dcterms:created": "2026-07-11"
   },
   "K1_missing": [],

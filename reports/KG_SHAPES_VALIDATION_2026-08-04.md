@@ -1,6 +1,6 @@
 # KG SHACL 子集校验（语义质量门 P3-4）
 
-**日期**: 2026-08-04  **实体**: 704  **关系**: 10512  **决策树**: 3  **故障树**: 2
+**日期**: 2026-08-04  **实体**: 709  **关系**: 10547  **决策树**: 3  **故障树**: 2
 
 | 规则 | 命中 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|
@@ -13,7 +13,7 @@
 | K6 树节点不完整 | 0 | 0 | pass |
 | K7 缺 ex:layer/ex:domain | 0 | 0 | pass |
 
-关系结构样例: `{"@id": "_:rel1", "@type": "ex:RelationAnnotation", "ex:subject": "ex:ComprehensiveRustMapping", "ex:predicate": "ex:dependsOn", "ex:object": "ex:LearningGuide", "ex:source": "prerequisite:../04_navigation/07_learning_guide.md", "ex:confidence": 1.0, "ex:version": "1.97.0", "ex:reviewed": false, "dc`
+关系结构样例: `{"@id": "_:rel1", "@type": "ex:dependsOn", "ex:subject": "ex:ComprehensiveRustMapping", "ex:predicate": "ex:dependsOn", "ex:object": "ex:LearningGuide", "ex:source": "prerequisite:../04_navigation/07_learning_guide.md", "ex:confidence": 1.0, "ex:version": "1.97.0", "ex:reviewed": true, "dcterms:crea`
 
 ## WOULD-FAIL（--strict 阻断）
 

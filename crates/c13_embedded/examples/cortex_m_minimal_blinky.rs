@@ -48,6 +48,9 @@ fn main() {
 // ---------------------------------------------------------------------------
 #[cfg(all(target_arch = "arm", target_os = "none"))]
 mod target_impl {
+    // 由 panic-halt crate 提供 #[panic_handler]
+    use panic_halt as _;
+
     use core::sync::atomic::{AtomicU32, Ordering};
 
     // STM32F4 GPIOA ODR 地址（仅作示例）

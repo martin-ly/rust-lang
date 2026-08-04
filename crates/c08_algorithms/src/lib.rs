@@ -125,6 +125,9 @@ pub mod rust_198_features;
 
 pub mod algorithm_decision_trees;
 
+// P10-3 语义覆盖：惯用法 / 算法 / 设计模式 / 架构模式
+pub mod p10_algorithms;
+
 // LeetCode 分类算法模块（结合 Rust 1.95 特性）
 pub mod leetcode;
 

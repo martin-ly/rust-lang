@@ -55,6 +55,9 @@ pub mod pattern_combinations;
 pub mod functional_patterns;
 pub mod rust_idioms;
 
+// P10-3 语义覆盖：惯用法 / 设计模式 / 架构模式
+pub mod p10_idioms_patterns;
+
 // 示例程序
 // pub mod bin; // 暂时注释掉，避免编译错误
 

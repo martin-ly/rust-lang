@@ -3,45 +3,43 @@
 **EN**: Concept-layer International Authority Coverage
 **Summary**: 复用 maintenance P0/P1/P2 权威域分级，把审计扩展到 concept/ 权威层；量化覆盖率与缺口，为『对齐网络上的国际化权威相关内容』提供机器可复核基线。仅审计，不改正文。
 
-> 生成: 2026-08-04 · 扫描 concept/ 活跃 md: **735**（排除 archive/SUMMARY/README）
+> 生成: 2026-08-04 · 扫描 concept/ 活跃 md: **742**（排除 archive/SUMMARY/README）
 > P0 官方 / P1 学术形式化 / P2 社区生态，域定义复用 `scripts/maintenance/authority_coverage_dashboard.py`
 
 ## 总体覆盖率
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 724 | 98.5% |
-| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 687 | 93.5% |
-| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 655 | 89.1% |
-| **任一权威（P0∪P1∪P2）** | **732** | **99.6%** |
-| 无任何国际权威引用（缺口） | 3 | 0.4% |
+| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 736 | 99.2% |
+| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 701 | 94.5% |
+| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 666 | 89.8% |
+| **任一权威（P0∪P1∪P2）** | **742** | **100.0%** |
+| 无任何国际权威引用（缺口） | 0 | 0.0% |
 
 ## 内容页口径覆盖率（排除 00_meta 工具页 / quiz / placeholders / sources 索引）
 
-> 内容页 **637** 页。00_meta 为知识库内部工具/导航/审计页，非 Rust 概念内容，其权威基线为 P0 官方文档；P1/P2 学术生态来源对其不适用，故单列口径。
+> 内容页 **643** 页。00_meta 为知识库内部工具/导航/审计页，非 Rust 概念内容，其权威基线为 P0 官方文档；P1/P2 学术生态来源对其不适用，故单列口径。
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方 | 633 | 99.4% |
-| P1 学术/形式化 | 630 | 98.9% |
-| P2 社区/生态 | 634 | 99.5% |
-| **任一权威** | **636** | **99.8%** |
+| P0 官方 | 642 | 99.8% |
+| P1 学术/形式化 | 642 | 99.8% |
+| P2 社区/生态 | 643 | 100.0% |
+| **任一权威** | **643** | **100.0%** |
 
-内容页 P1 缺口（7）: `concept/06_ecosystem/05_systems_and_embedded/47_bare_metal_rust.md` · `concept/06_ecosystem/05_systems_and_embedded/48_no_std_alloc_crate_ecosystem.md` · `concept/06_ecosystem/05_systems_and_embedded/49_embedded_hal_driver_patterns.md` · `concept/06_ecosystem/14_enterprise_architecture/08_microservices_patterns_in_rust.md` · `concept/06_ecosystem/14_enterprise_architecture/13_microservices_patterns_in_rust.md` · `concept/06_ecosystem/14_enterprise_architecture/14_data_intensive_patterns.md` · `concept/06_ecosystem/14_enterprise_architecture/15_security_and_zero_trust_patterns.md`
-
-内容页 P2 缺口（3）: `concept/04_formal/11_computational_models/08_separation_logic_for_rust.md` · `concept/04_formal/11_computational_models/09_concurrency_models_actors_csp.md` · `concept/06_ecosystem/14_enterprise_architecture/08_microservices_patterns_in_rust.md`
+内容页 P1 缺口（1）: `concept/06_ecosystem/14_enterprise_architecture/08_microservices_patterns_in_rust.md`
 
 ## 按层级覆盖率
 
 | 层级 | 页数 | P0 命中 | P0% | 任一权威 | 任一% |
 |:---|---:|---:|---:|---:|---:|
-| L0 | 74 | 72 | 97.3% | 72 | 97.3% |
+| L0 | 75 | 75 | 100.0% | 75 | 100.0% |
 | L1 | 60 | 60 | 100.0% | 60 | 100.0% |
 | L2 | 45 | 45 | 100.0% | 45 | 100.0% |
 | L3 | 78 | 78 | 100.0% | 78 | 100.0% |
-| L4 | 123 | 123 | 100.0% | 123 | 100.0% |
+| L4 | 125 | 125 | 100.0% | 125 | 100.0% |
 | L5 | 29 | 29 | 100.0% | 29 | 100.0% |
-| L6 | 248 | 240 | 96.8% | 247 | 99.6% |
+| L6 | 252 | 247 | 98.0% | 252 | 100.0% |
 | L7 | 75 | 74 | 98.7% | 75 | 100.0% |
 | L? | 3 | 3 | 100.0% | 3 | 100.0% |
 

@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 745,
-    "generated_at": "2026-08-04T05:20:54.830751+00:00"
+    "total_files": 752,
+    "generated_at": "2026-08-04T13:03:31.138270+00:00"
   },
   "files": [
     {
@@ -4566,6 +4566,37 @@
         ],
         "post": [
           "[`tools/kg_rag/semantic_alignment_pipeline.py`](../../../tools/kg_rag/semantic_alignment_pipeline.py)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\00_meta\\05_ai_semantic_engineering\\03_rag_evaluation_for_rust_kg.md",
+      "layer": "L0",
+      "title": "面向 Rust 知识图谱的 RAG 评估",
+      "positioning": "",
+      "line_count": 251,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../../reports/RAG_EVALUATION_BASELINE_2026_08.md",
+        "../knowledge_topology/kg_ontology_v2.md",
+        "01_knowledge_graph_design.md",
+        "02_llm_rag_for_rust.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": true,
+      "mermaid_blocks": 0,
+      "matrix_rows": 11,
+      "pre_post": {
+        "pre": [
+          "[`concept/00_meta/05_ai_semantic_engineering/01_knowledge_graph_design.md`](01_knowledge_graph_design.md)、[`concept/00_meta/05_ai_semantic_engineering/02_llm_rag_for_rust.md`](02_llm_rag_for_rust.md)、[`concept/00_meta/knowledge_topology/kg_ontology_v2.md`](../knowledge_topology/kg_ontology_v2.md)"
+        ],
+        "post": [
+          "[`tools/kg_rag/semantic_alignment_pipeline.py`](../../../tools/kg_rag/semantic_alignment_pipeline.py)、[`reports/RAG_EVALUATION_BASELINE_2026_08.md`](../../../reports/RAG_EVALUATION_BASELINE_2026_08.md)"
         ]
       },
       "backward_chains": 0,
@@ -19680,7 +19711,7 @@
       "layer": "L2",
       "title": "Trait 系统",
       "positioning": "",
-      "line_count": 3264,
+      "line_count": 3324,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -19691,7 +19722,7 @@
           "type": "paragraph"
         },
         {
-          "text": "- [4.2 定理：Trait 对象安全条件 ⟹ dyn Trait 可行性](#42-定理trait-对象安全条件--dyn-trait-可行性)",
+          "text": "- [4.2 定理：Trait dyn 兼容性条件 ⟹ dyn Trait 可行性](#42-定理trait-dyn-兼容性条件--dyn-trait-可行性)",
           "type": "paragraph"
         },
         {
@@ -19703,7 +19734,7 @@
           "type": "paragraph"
         },
         {
-          "text": "> 下一节通过\"⟹\"标注的定理链，将 Orphan Rule、Coherence、对象安全、Auto Trait 推导等核心命题形式化为可验证的推理网络，建立从编译规则到运行行为的完整因果链。",
+          "text": "> 下一节通过\"⟹\"标注的定理链，将 Orphan Rule、Coherence、dyn 兼容性、Auto Trait 推导等核心命题形式化为可验证的推理网络，建立从编译规则到运行行为的完整因果链。",
           "type": "paragraph"
         },
         {
@@ -19715,7 +19746,7 @@
           "type": "paragraph"
         },
         {
-          "text": "### 4.2 定理：Trait 对象安全条件 ⟹ dyn Trait 可行性",
+          "text": "### 4.2 定理：Trait dyn 兼容性条件 ⟹ dyn Trait 可行性",
           "type": "paragraph"
         },
         {
@@ -19735,11 +19766,11 @@
           "type": "table_row"
         },
         {
-          "text": "> **一致性检查**: Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl（链 A），且 Trait 对象安全 ⟹ dyn Trait 可行性（链 B），形成**从定义约束到使用能力**的两条正交推理链。",
+          "text": "> **一致性检查**: Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl（链 A），且 Trait dyn 兼容性 ⟹ dyn Trait 可行性（链 B），形成**从定义约束到使用能力**的两条正交推理链。",
           "type": "paragraph"
         },
         {
-          "text": "**过渡解释**: 认知路径的最终目标是让学习者具备自主验证能力。通过定理链（Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl；Trait 对象安全 ⟹ dyn Trait 可行性），可以预判设计决策的远期后果。Auto Trait 的结构化推导、Supertrait 的传递性、Blanket impl 的 Horn 子句语义、`impl Trait` 的存在量化——这些不再是孤立的语法点，而是构成一个可推理的形式系统。掌握定理链后，学习者能在编码前预判编译器的行为，从\"试错编程\"进化为\"推理编程\"。",
+          "text": "**过渡解释**: 认知路径的最终目标是让学习者具备自主验证能力。通过定理链（Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl；Trait dyn 兼容性 ⟹ dyn Trait 可行性），可以预判设计决策的远期后果。Auto Trait 的结构化推导、Supertrait 的传递性、Blanket impl 的 Horn 子句语义、`impl Trait` 的存在量化——这些不再是孤立的语法点，而是构成一个可推理的形式系统。掌握定理链后，学习者能在编码前预判编译器的行为，从\"试错编程\"进化为\"推理编程\"。",
           "type": "paragraph"
         }
       ],
@@ -19774,6 +19805,28 @@
           "lines": 3,
           "should_fail": false,
           "code_preview": "> // 概念性语法（尚未稳定） > #![coherence_domain(\"kernel\")] > ..."
+        },
+        {
+          "flags": [],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "use std::pin::Pin;  // ✅ dyn 兼容：合法 receiver 与可分发签名 trait Dispatchable {     fn b..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "// ❌ 非 dyn 兼容：关联常量 trait HasConst { const C: i32 = 1; } fn use_dyn(_: &dyn HasCo..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 3,
+          "should_fail": true,
+          "code_preview": "// ❌ 非 dyn 兼容：AsyncFn* trait 族 fn async_fn_object(_: &dyn std::ops::AsyncFn(i32)..."
         },
         {
           "flags": [
@@ -19959,7 +20012,7 @@
           "flags": [],
           "lines": 43,
           "should_fail": false,
-          "code_preview": "// 边界: 对象安全条件的精确测试与分发方式差异  // ✅ 对象安全: 方法返回引用，不涉及 Self trait SafeTrait {     fn n..."
+          "code_preview": "// 边界: dyn 兼容性条件的精确测试与分发方式差异  // ✅ dyn 兼容性: 方法返回引用，不涉及 Self trait SafeTrait {   ..."
         },
         {
           "flags": [],
@@ -19981,7 +20034,7 @@
           ],
           "lines": 10,
           "should_fail": true,
-          "code_preview": "// 错误: Trait 对象安全冲突 —— 返回 Self trait CloneSelf {     fn clone_self(&self) -> Sel..."
+          "code_preview": "// 错误: Trait dyn 兼容性冲突 —— 返回 Self trait CloneSelf {     fn clone_self(&self) -> ..."
         },
         {
           "flags": [
@@ -20337,7 +20390,7 @@
       "transitions": 10,
       "has_cognitive_path": true,
       "mermaid_blocks": 6,
-      "matrix_rows": 185,
+      "matrix_rows": 196,
       "pre_post": {
         "pre": [
           "L1 类型系统（Type System） ·",
@@ -53397,7 +53450,7 @@
       "layer": "L4",
       "title": "分离逻辑与 Rust：Iris / RustBelt 视角（Separation Logic for Rust）",
       "positioning": "从**计算模型**视角组织分离逻辑与 Rust 的关系：把堆内存、所有权、借用、并发原语都视为**可组合、可分离的资源**，并说明 Iris/RustBelt 如何用这些资源证明 Rust 程序的安全契约。",
-      "line_count": 506,
+      "line_count": 507,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -53502,7 +53555,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 28,
+      "matrix_rows": 29,
       "pre_post": {
         "pre": [
           "> [Separation Logic](../02_separation_logic/02_separation_logic.md) ·"
@@ -53519,7 +53572,7 @@
       "layer": "L4",
       "title": "并发计算模型：CSP、Actor、TLA+ 与 Rust（Concurrency Models: CSP, Actors, TLA+, and Rust）",
       "positioning": "从**计算模型**视角比较 CSP、Actor、TLA+ 三种并发形式化方法，并把它们投影到 Rust 的通道、Actor 框架、异步运行时与形式化规约上，避免把工程原语直接等同于理论模型。",
-      "line_count": 502,
+      "line_count": 504,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -53614,13 +53667,283 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 21,
+      "matrix_rows": 23,
       "pre_post": {
         "pre": [
           "> [Concurrency](../../03_advanced/00_concurrency/01_concurrency.md) ·"
         ],
         "post": [
           "> [Distributed Systems Semantics](../09_system_semantics/04_distributed_systems_semantics.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\11_computational_models\\10_category_theory_and_rust.md",
+      "layer": "L4",
+      "title": "范畴论与 Rust：作为计算模型的结构语义（Category Theory and Rust: Structural Semantics as a Computational Model）",
+      "positioning": "从**计算模型**视角把范畴论当作 Rust 类型系统的**结构语义**：不停留在「Functor/Monad 编程模式」，而是说明积类型、和类型、函数类型、初始/终止对象如何在范畴论语义中构成一个可推理的计算模型，并为 [模态逻辑与 Rust 计算效应](11_modal_logic_and_rust_effects.md) 提供范畴基础。",
+      "line_count": 572,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 四、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "## 五、反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "fn id<T>(x: T) -> T { x }  fn compose<A, B, C>(f: impl Fn(A) -> B, g: impl Fn(B)..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "fn pair_from<A, B, C>(f: impl Fn(C) -> A, g: impl Fn(C) -> B, c: C) -> (A, B) { ..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "enum Either<A, B> { Left(A), Right(B) }  fn fold_either<A, B, C>(e: Either<A, B>..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "fn uncurried(a: i32, b: i32) -> i32 { a + b }  fn curried(a: i32) -> impl Fn(i32..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "fn to_unit<T>(_: T) -> () { () }  enum Void {}  fn from_void<T>(v: Void) -> T { ..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "fn main() {     let x: Option<i32> = Some(5);     let f = |v| v + 1;     let g =..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "fn main() {     let x: Option<i32> = Some(5);      // η: A → M<A>     let _unit:..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "fn consume(s: String) -> usize { s.len() }  fn main() {     let s = String::from..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "fn pair<A, B>(a: A, b: B) -> (A, B) { (a, b) } fn fst<A, B>(p: (A, B)) -> A { p...."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "enum Either<A, B> { Left(A), Right(B) }  fn left<A, B>(a: A) -> Either<A, B> { E..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "fn curry<A, B, C>(f: impl Fn(A, B) -> C) -> impl Fn(A) -> impl Fn(B) -> C {     ..."
+        },
+        {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "fn main() {     let x = 5;     let f = |v: i32| Some(v + 1);     let g = |v: i32..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "// Rust 不支持 \"F<A>\" 作为类型参数，因此无法定义跨 Option/Result/Vec 的通用 Functor trait Functor<F<..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "// 同样因为缺少 HKT，无法定义通用 Monad trait trait Monad<M<A>> {     fn bind<B, F>(self, f: ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "fn from_unit_to_any<T>(x: ()) -> T {     // () 不是初始对象：无法通过穷尽匹配从 unit 构造任意 T     ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/01_async/01_async.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../00_type_theory/04_category_theory.md",
+        "../00_type_theory/05_lambda_calculus.md",
+        "../02_separation_logic/01_rustbelt.md",
+        "../07_concurrency_semantics/04_algebraic_effects.md",
+        "01_computational_semantics_framework.md",
+        "06_computational_equivalence_in_rust.md",
+        "07_type_theory_and_rust.md",
+        "11_modal_logic_and_rust_effects.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 29,
+      "pre_post": {
+        "pre": [
+          "> [Type Theory and Rust](07_type_theory_and_rust.md) ·"
+        ],
+        "post": [
+          "> [Modal Logic and Rust Effects](11_modal_logic_and_rust_effects.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\04_formal\\11_computational_models\\11_modal_logic_and_rust_effects.md",
+      "layer": "L4",
+      "title": "模态逻辑与 Rust 计算效应（Modal Logic and Rust Effects）",
+      "positioning": "从**计算模型**视角把模态逻辑当作 Rust 计算效应的语义框架：将生命周期、unsafe、`async/await` 等工程机制解释为**模态算子**，并说明 Iris 的 □ / ▷ / update 模态如何在机械证明中建模这些效应，与 [范畴论与 Rust](10_category_theory_and_rust.md) 共同构成「结构语义 + 效应语义」的形式化双翼。",
+      "line_count": 572,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 四、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "## 五、反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {     if x.len() > y.len() { x..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "fn main() {     let mut x = 5;     let r = &mut x as *mut i32;      unsafe {    ..."
+        },
+        {
+          "flags": [],
+          "lines": 38,
+          "should_fail": false,
+          "code_preview": "use std::future::Future; use std::pin::Pin; use std::task::{Context, Poll, RawWa..."
+        },
+        {
+          "flags": [],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "use std::marker::PhantomData;  // 用一个类型层恒等标记来编码 \"N == M\" struct Eq<N, M>(Phantom..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "fn always_valid<'a>(s: &'a str) -> &'a str {     // 返回的引用在所有 'a 可达世界都有效     &s[0..."
+        },
+        {
+          "flags": [],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "fn main() {     let mut data = [1, 2, 3];     let ptr = data.as_mut_ptr();      ..."
+        },
+        {
+          "flags": [],
+          "lines": 41,
+          "should_fail": false,
+          "code_preview": "use std::future::Future; use std::pin::Pin; use std::task::{Context, Poll, RawWa..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0106"
+          ],
+          "lines": 10,
+          "should_fail": true,
+          "code_preview": "fn dangling() -> &i32 {     let x = 42;     &x // x 的世界在函数返回后结束，返回的引用失去 □(有效) } ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// 错误直觉：加了 unsafe 块就自动安全 fn main() {     let ptr: *mut i32 = std::ptr::null_mut(..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0728"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "async fn async_value() -> i32 { 42 }  fn main() {     let _ = async_value().awai..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md",
+        "../../03_advanced/01_async/01_async.md",
+        "../../03_advanced/02_unsafe/01_unsafe.md",
+        "../02_separation_logic/01_rustbelt.md",
+        "../03_operational_semantics/11_async_state_machine_semantics.md",
+        "../07_concurrency_semantics/04_algebraic_effects.md",
+        "../07_concurrency_semantics/08_send_sync_semantics.md",
+        "07_type_theory_and_rust.md",
+        "08_separation_logic_for_rust.md",
+        "10_category_theory_and_rust.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 38,
+      "pre_post": {
+        "pre": [
+          "> [Category Theory and Rust](10_category_theory_and_rust.md) ·"
+        ],
+        "post": [
+          "> [Iris](../02_separation_logic/01_rustbelt.md) ·"
         ]
       },
       "backward_chains": 0,
@@ -77859,6 +78182,127 @@
       "templated_chains": 0
     },
     {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\05_systems_and_embedded\\50_embedded_hardware_test_matrix.md",
+      "layer": "L6",
+      "title": "嵌入式硬件测试矩阵",
+      "positioning": "提供一张可操作的“目标 × 工具链 × 运行时”三维矩阵，把 probe-rs、defmt、RTIC、Embassy 的国际最佳实践映射到 STM32、Nordic nRF、Raspberry Pi RP2040 等真实硬件；并给出可在 `thumbv7em-none-eabihf` 上编译运行的最小骨架与 GitHub Actions CI 模板。",
+      "line_count": 358,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 七、反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 27,
+          "should_fail": false,
+          "code_preview": "//! 可在 thumbv7em-none-eabihf 上编译的最小 bare-metal 示例。 //! 完整代码与编译命令见 crates/c13_emb..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md",
+        "../13_quizzes/03_quiz_security_testing.md",
+        "03_embedded_systems.md",
+        "30_misra_rust_safety_critical_guidelines.md",
+        "32_embedded_testing_and_ci_strategies.md",
+        "34_embassy_framework_deep_dive.md",
+        "35_rtic_framework_deep_dive.md",
+        "36_defmt_probe_rs_architecture.md",
+        "38_no_std_bare_metal_rust.md",
+        "45_embedded_hardware_validation.md",
+        "51_probe_rs_and_embedded_debugging.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 35,
+      "pre_post": {
+        "pre": [
+          "> [Rust 嵌入式系统开发](03_embedded_systems.md) ·"
+        ],
+        "post": [
+          "> [probe-rs 与嵌入式调试实战](51_probe_rs_and_embedded_debugging.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\05_systems_and_embedded\\51_probe_rs_and_embedded_debugging.md",
+      "layer": "L6",
+      "title": "probe-rs 与嵌入式调试实战",
+      "positioning": "聚焦 probe-rs 的实际操作面：从环境安装、target YAML 校准、`cargo embed`/`probe-rs run`/`probe-rs attach` 命令矩阵，到 defmt 帧解码、RTT/SWO/semihosting 选型、脚本化 HIL 与 CI 模板。配套示例已在 `thumbv7em-none-eabihf` 上验证编译。",
+      "line_count": 435,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 八、反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 22,
+          "should_fail": false,
+          "code_preview": "// 目标端代码（需依赖 defmt、defmt-rtt、panic-probe） #![no_std] #![no_main]  use defmt_rtt ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 33,
+          "should_fail": false,
+          "code_preview": "//! 在目标端用 DWT CYCCNT 测量周期并触发硬件断点。 //! 完整代码见 crates/c13_embedded/examples/probe_r..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "// build-dependency 或独立测试工具 use probe_rs::{Probe, Session};  fn run_hil_test(chi..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md",
+        "../13_quizzes/03_quiz_security_testing.md",
+        "14_interrupt_and_exception_model.md",
+        "20_embedded_debugging_logging.md",
+        "27_no_std_startup_runtime_deep_dive.md",
+        "30_misra_rust_safety_critical_guidelines.md",
+        "32_embedded_testing_and_ci_strategies.md",
+        "34_embassy_framework_deep_dive.md",
+        "35_rtic_framework_deep_dive.md",
+        "36_defmt_probe_rs_architecture.md",
+        "45_embedded_hardware_validation.md",
+        "50_embedded_hardware_test_matrix.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 2,
+      "matrix_rows": 21,
+      "pre_post": {
+        "pre": [
+          "> [defmt / probe-rs / Knurling 调试架构与原理](36_defmt_probe_rs_architecture.md) ·"
+        ],
+        "post": [
+          "> [嵌入式硬件端到端验证](45_embedded_hardware_validation.md) ·"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\06_data_and_distributed\\01_application_domains.md",
       "layer": "L6",
       "title": "Application Domains（软件工程应用主题）",
@@ -85881,7 +86325,7 @@
       "layer": "L6",
       "title": "微服务架构模式在 Rust 中的实践（已合并）",
       "positioning": "",
-      "line_count": 12,
+      "line_count": 14,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -86278,7 +86722,7 @@
       "layer": "L6",
       "title": "企业级微服务架构模式：AWS Well-Architected 与 CNCF 对齐",
       "positioning": "",
-      "line_count": 536,
+      "line_count": 539,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -86368,7 +86812,7 @@
       "layer": "L6",
       "title": "企业级数据密集型模式（Enterprise Data-Intensive Patterns）",
       "positioning": "",
-      "line_count": 461,
+      "line_count": 464,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -86447,7 +86891,7 @@
       "layer": "L6",
       "title": "企业级安全与零信任模式（Enterprise Security and Zero Trust Patterns）",
       "positioning": "",
-      "line_count": 465,
+      "line_count": 468,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -86522,6 +86966,128 @@
         ],
         "post": [
           "[微服务架构模式](13_microservices_patterns_in_rust.md) · [数据密集型模式](14_data_intensive_patterns.md) · [云原生与 Serverless 模式](12_cloud_native_and_serverless_patterns.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\14_enterprise_architecture\\16_rust_in_financial_services.md",
+      "layer": "L6",
+      "title": "Rust 在金融服务业（Rust in Financial Services）",
+      "positioning": "",
+      "line_count": 377,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 七、反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 26,
+          "should_fail": false,
+          "code_preview": "#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)] struct Money(i64);..."
+        },
+        {
+          "flags": [],
+          "lines": 52,
+          "should_fail": false,
+          "code_preview": "use std::time::SystemTime;  #[derive(Debug, Clone)] enum OrderSide { Buy, Sell }..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "fn parse_tag_value(input: &[u8]) -> Option<(&[u8], &[u8])> {     let eq = input...."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// [dependencies] // rust_decimal = \"1.36\"  use rust_decimal::Decimal;  fn quote..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
+        "../06_data_and_distributed/11_distributed_systems_protocols.md",
+        "../11_domain_applications/14_industrial_case_studies.md",
+        "11_event_driven_and_cqrs_patterns.md",
+        "15_security_and_zero_trust_patterns.md",
+        "17_rust_in_iot_and_edge.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 18,
+      "pre_post": {
+        "pre": [
+          "[Industrial Rust Adoption Case Studies](../11_domain_applications/14_industrial_case_studies.md) · [Event-Driven, CQRS & Enterprise Integration Patterns](11_event_driven_and_cqrs_patterns.md) · [Enterprise Security and Zero Trust Patterns](15_security_and_zero_trust_patterns.md)"
+        ],
+        "post": [
+          "[Rust in IoT and Edge Computing](17_rust_in_iot_and_edge.md) · [Distributed Systems Protocols](../06_data_and_distributed/11_distributed_systems_protocols.md) · [Safety Boundaries](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "E:\\_src\\rust-lang\\concept\\06_ecosystem\\14_enterprise_architecture\\17_rust_in_iot_and_edge.md",
+      "layer": "L6",
+      "title": "Rust 在物联网与边缘计算（Rust in IoT and Edge Computing）",
+      "positioning": "",
+      "line_count": 363,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 七、反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 34,
+          "should_fail": false,
+          "code_preview": "#[derive(Debug, Clone, Copy, PartialEq, Eq)] enum SensorState {     Idle,     Sa..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 23,
+          "should_fail": false,
+          "code_preview": "// [dependencies] // embedded-hal = \"1.0\"  use embedded_hal::digital::OutputPin;..."
+        },
+        {
+          "flags": [],
+          "lines": 42,
+          "should_fail": false,
+          "code_preview": "use std::collections::VecDeque;  struct SensorReading {     sensor_id: u32,     ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
+        "../05_systems_and_embedded/03_embedded_systems.md",
+        "../05_systems_and_embedded/36_defmt_probe_rs_architecture.md",
+        "../05_systems_and_embedded/46_rtos_and_scheduling_in_rust.md",
+        "../11_domain_applications/14_industrial_case_studies.md",
+        "16_rust_in_financial_services.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 18,
+      "pre_post": {
+        "pre": [
+          "[Embedded Systems](../05_systems_and_embedded/03_embedded_systems.md) · [RTOS and Scheduling in Rust](../05_systems_and_embedded/46_rtos_and_scheduling_in_rust.md) · [defmt and probe-rs](../05_systems_and_embedded/36_defmt_probe_rs_architecture.md)"
+        ],
+        "post": [
+          "[Rust in Financial Services](16_rust_in_financial_services.md) · [Industrial Rust Adoption Case Studies](../11_domain_applications/14_industrial_case_studies.md) · [Safety Boundaries](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md)"
         ]
       },
       "backward_chains": 0,
