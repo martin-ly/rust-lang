@@ -81,6 +81,11 @@ criteria = "safe-to-deploy"
 version = "0.2.5"
 notes = 'Formal audit stub for RUSTSEC-2026-0110. bare-metal is only pulled in by c13_embedded when target_arch = "arm"; it is not compiled on the host. Risk is limited to embedded targets and the crate is a low-level target-abstraction library with no network or crypto surface.'
 
+[[audits.base64]]
+criteria = "safe-to-run"
+version = "0.23.1"
+notes = "2026-08-04: base64 0.23.1 (marshallpierce 官方维护) 为 cargo update 补丁升级 (0.23.0 -> 0.23.1)，仅用于本地 base64 编解码示例与 salvo_core 等传递依赖，不处理不可信网络输入。"
+
 [[audits.candle-core]]
 criteria = "safe-to-run"
 version = "0.11.0"
@@ -195,6 +200,11 @@ notes = "Formal audit stub for RUSTSEC-2024-0436. paste is a compile-time proc-m
 criteria = "safe-to-run"
 version = "0.7.3"
 notes = "2026-07-27: polyval 0.7.3 (RustCrypto 官方维护) 为 aes-gcm 0.11 升级后的 POLYVAL 传递依赖，仅用于 benchmark 中的本地加密示例。"
+
+[[audits.regex-automata]]
+criteria = "safe-to-run"
+version = "0.4.18"
+notes = "2026-08-04: regex-automata 0.4.18 (BurntSushi/Andrew Gallant 官方维护) 为 cargo update 补丁升级 (0.4.16 -> 0.4.18)，为 regex/matchers/tracing-subscriber 的底层自动机实现，仅用于本地文本匹配示例与测试路径。"
 
 [[audits.rustls-connector]]
 criteria = "safe-to-run"
