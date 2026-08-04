@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 790,
-    "generated_at": "2026-08-04T15:56:42.440340+00:00"
+    "generated_at": "2026-08-04T16:39:16.272169+00:00"
   },
   "files": [
     {
@@ -60174,7 +60174,7 @@
       "layer": "L5",
       "title": "策略模式",
       "positioning": "",
-      "line_count": 209,
+      "line_count": 213,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60239,7 +60239,7 @@
       "layer": "L5",
       "title": "命令模式",
       "positioning": "",
-      "line_count": 231,
+      "line_count": 235,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60304,7 +60304,7 @@
       "layer": "L5",
       "title": "访问者模式",
       "positioning": "",
-      "line_count": 225,
+      "line_count": 229,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60369,7 +60369,7 @@
       "layer": "L5",
       "title": "状态机模式",
       "positioning": "",
-      "line_count": 204,
+      "line_count": 208,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60434,7 +60434,7 @@
       "layer": "L5",
       "title": "适配器模式",
       "positioning": "",
-      "line_count": 190,
+      "line_count": 194,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60499,7 +60499,7 @@
       "layer": "L5",
       "title": "装饰器模式",
       "positioning": "",
-      "line_count": 201,
+      "line_count": 205,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -80531,7 +80531,7 @@
       "layer": "L6",
       "title": "裸机临界区与同步",
       "positioning": "",
-      "line_count": 419,
+      "line_count": 428,
       "theorem_chains": [],
       "anti_propositions": [
         {

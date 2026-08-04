@@ -195,8 +195,12 @@ fn main() {}
 
 ## 来源与延伸阅读
 
-> 以下链接按 P1（学术/形式化）与 P2（社区/生态）分级，用于补全本页的国际化权威来源覆盖。
+> 以下链接按 P0（官方/语言级）、P1（学术/形式化）与 P2（社区/生态）分级，用于补全本页的国际化权威来源覆盖。
 
+- **P0**: [The Rust Programming Language — Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html)
+- **P0**: [The Rust Reference — Enumerations](https://doc.rust-lang.org/reference/items/enumerations.html)
+- **P0**: [The Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)
+- **P0**: [The Rust API Guidelines — C-TRAITS (traits for flexible, composable APIs)](https://rust-lang.github.io/api-guidelines/flexibility.html#c-traits)
 - **P1**: DeLine, R., Fähndrich, M. *Typestates for Objects*. In ECOOP 2004, Springer, 2004. [Springer](https://link.springer.com/chapter/10.1007/978-3-540-24851-4_21)
 - **P1**: Strom, R. E., Yemini, S. *Typestate: A Programming Language Concept for Enhancing Software Reliability*. IEEE Transactions on Software Engineering, 1986. [IEEE Xplore](https://ieeexplore.ieee.org/document/6312929)
 - **P2**: [Rust Design Patterns - Generics as Type Classes (Type State discussion)](https://rust-unofficial.github.io/patterns/functional/generics-type-classes.html)

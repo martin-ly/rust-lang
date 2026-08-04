@@ -1,12 +1,13 @@
 {
   "metadata": {
-    "generated": "2026-08-04",
-    "count": 2413,
+    "generated": "2026-08-05",
+    "count": 2513,
     "augmented_count": 263,
     "kg_version": "3.1",
     "kg_entity_count": 709,
     "seed": 20260804,
-    "generator": "tools/kg_rag/eval/generate_golden_queries.py + tools/kg_rag/eval/augment_golden_queries.py"
+    "generator": "tools/kg_rag/eval/generate_golden_queries.py + tools/kg_rag/eval/augment_golden_queries.py",
+    "manual_added": 100
   },
   "samples": [
     {
@@ -29693,6 +29694,1638 @@
       "origin": "augmented",
       "difficulty": "intermediate",
       "reasoning_type": "application"
+    },
+    {
+      "query": "What is Rust ownership and how does it prevent use-after-free?",
+      "expected_concepts": [
+        "concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "concept/01_foundation/01_ownership_borrow_lifetime/05_move_semantics.md",
+        "concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html",
+        "https://doc.rust-lang.org/reference/ownership.html"
+      ],
+      "difficulty": "🟢",
+      "domain": "ownership_borrow_lifetime",
+      "reasoning_type": "definition",
+      "layer": "L1",
+      "origin": "manual"
+    },
+    {
+      "query": "Compare immutable and mutable borrowing in Rust.",
+      "expected_concepts": [
+        "concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+        "concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html",
+        "https://doc.rust-lang.org/nomicon/references.html"
+      ],
+      "difficulty": "🟢",
+      "domain": "ownership_borrow_lifetime",
+      "reasoning_type": "comparison",
+      "layer": "L1",
+      "origin": "manual"
+    },
+    {
+      "query": "Explain lifetime elision rules for function signatures.",
+      "expected_concepts": [
+        "concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+        "concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md",
+        "concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/reference/lifetime-elision.html",
+        "https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html"
+      ],
+      "difficulty": "🟡",
+      "domain": "ownership_borrow_lifetime",
+      "reasoning_type": "definition",
+      "layer": "L2",
+      "origin": "manual"
+    },
+    {
+      "query": "Why does returning a reference to a local variable cause a compile error?",
+      "expected_concepts": [
+        "concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+        "concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md",
+        "concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/error-index.html#E0106",
+        "https://doc.rust-lang.org/reference/items/functions.html"
+      ],
+      "difficulty": "🔴",
+      "domain": "ownership_borrow_lifetime",
+      "reasoning_type": "analysis",
+      "layer": "L3",
+      "origin": "manual"
+    },
+    {
+      "query": "Design a self-referential struct using Pin in Rust.",
+      "expected_concepts": [
+        "concept/03_advanced/01_async/08_pin_unpin.md",
+        "concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md",
+        "concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/std/pin/struct.Pin.html",
+        "https://doc.rust-lang.org/nomicon/pins-and-futures.html"
+      ],
+      "difficulty": "🔴",
+      "domain": "ownership_borrow_lifetime",
+      "reasoning_type": "application",
+      "layer": "L4",
+      "origin": "manual"
+    },
+    {
+      "query": "What is a trait in Rust and how does it enable polymorphism?",
+      "expected_concepts": [
+        "concept/02_intermediate/00_traits/01_traits.md",
+        "concept/01_foundation/02_type_system/01_type_system.md",
+        "concept/02_intermediate/01_generics/01_generics.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/book/ch10-02-traits.html",
+        "https://doc.rust-lang.org/reference/items/traits.html"
+      ],
+      "difficulty": "🟢",
+      "domain": "type_system_traits",
+      "reasoning_type": "definition",
+      "layer": "L1",
+      "origin": "manual"
+    },
+    {
+      "query": "Compare dyn Trait and impl Trait return types.",
+      "expected_concepts": [
+        "concept/02_intermediate/00_traits/02_dispatch_mechanisms.md",
+        "concept/02_intermediate/00_traits/01_traits.md",
+        "concept/02_intermediate/00_traits/04_advanced_traits.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/book/ch17-02-trait-objects.html",
+        "https://doc.rust-lang.org/reference/types/trait-object.html"
+      ],
+      "difficulty": "🟡",
+      "domain": "type_system_traits",
+      "reasoning_type": "comparison",
+      "layer": "L2",
+      "origin": "manual"
+    },
+    {
+      "query": "Explain associated types and generic associated types (GATs) in traits.",
+      "expected_concepts": [
+        "concept/02_intermediate/00_traits/07_generic_associated_types.md",
+        "concept/02_intermediate/00_traits/04_advanced_traits.md",
+        "concept/02_intermediate/00_traits/01_traits.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/reference/items/associated-items.html",
+        "https://blog.rust-lang.org/2022/10/28/gats-stabilization.html"
+      ],
+      "difficulty": "🟡",
+      "domain": "type_system_traits",
+      "reasoning_type": "definition",
+      "layer": "L3",
+      "origin": "manual"
+    },
+    {
+      "query": "When should I add Send + Sync bounds to a generic type?",
+      "expected_concepts": [
+        "concept/03_advanced/00_concurrency/02_send_sync_auto_traits.md",
+        "concept/02_intermediate/00_traits/01_traits.md",
+        "concept/03_advanced/00_concurrency/04_send_sync_boundaries.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/nomicon/send-and-sync.html",
+        "https://doc.rust-lang.org/reference/special-types-and-traits.html"
+      ],
+      "difficulty": "🟡",
+      "domain": "type_system_traits",
+      "reasoning_type": "application",
+      "layer": "L3",
+      "origin": "manual"
+    },
+    {
+      "query": "Analyze trait object safety for async traits.",
+      "expected_concepts": [
+        "concept/03_advanced/01_async/13_async_trait_object_safety.md",
+        "concept/02_intermediate/00_traits/04_advanced_traits.md",
+        "concept/02_intermediate/00_traits/02_dispatch_mechanisms.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/reference/items/traits.html#object-safety",
+        "https://rust-lang.github.io/async-book/"
+      ],
+      "difficulty": "🔴",
+      "domain": "type_system_traits",
+      "reasoning_type": "analysis",
+      "layer": "L4",
+      "origin": "manual"
+    },
+    {
+      "query": "What is an unsafe block and when is it required?",
+      "expected_concepts": [
+        "concept/03_advanced/02_unsafe/01_unsafe.md",
+        "concept/03_advanced/02_unsafe/02_unsafe_boundary_panorama.md",
+        "concept/03_advanced/02_unsafe/04_unsafe_rust_patterns.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/reference/unsafe-blocks.html",
+        "https://doc.rust-lang.org/nomicon/meet-safe-and-unsafe.html"
+      ],
+      "difficulty": "🟢",
+      "domain": "unsafe_ffi_memory",
+      "reasoning_type": "definition",
+      "layer": "L2",
+      "origin": "manual"
+    },
+    {
+      "query": "Compare *const T and *mut T raw pointers.",
+      "expected_concepts": [
+        "concept/03_advanced/02_unsafe/04_unsafe_rust_patterns.md",
+        "concept/03_advanced/02_unsafe/06_memory_model.md",
+        "concept/03_advanced/02_unsafe/01_unsafe.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/reference/types.html#raw-pointers",
+        "https://doc.rust-lang.org/std/primitive.pointer.html"
+      ],
+      "difficulty": "🟢",
+      "domain": "unsafe_ffi_memory",
+      "reasoning_type": "comparison",
+      "layer": "L2",
+      "origin": "manual"
+    },
+    {
+      "query": "Explain pointer provenance and why it matters for LLVM optimizations.",
+      "expected_concepts": [
+        "concept/03_advanced/02_unsafe/06_memory_model.md",
+        "concept/03_advanced/02_unsafe/04_unsafe_rust_patterns.md",
+        "concept/04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/std/primitive.pointer.html",
+        "https://plv.mpi-sws.org/rustbelt/"
+      ],
+      "difficulty": "🟡",
+      "domain": "unsafe_ffi_memory",
+      "reasoning_type": "definition",
+      "layer": "L4",
+      "origin": "manual"
+    },
+    {
+      "query": "How do I safely expose a C library API through Rust FFI?",
+      "expected_concepts": [
+        "concept/03_advanced/04_ffi/01_rust_ffi.md",
+        "concept/03_advanced/04_ffi/05_unsafe_extern_blocks.md",
+        "concept/03_advanced/04_ffi/07_ffi_patterns.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/nomicon/ffi.html",
+        "https://doc.rust-lang.org/reference/items/external-blocks.html"
+      ],
+      "difficulty": "🟡",
+      "domain": "unsafe_ffi_memory",
+      "reasoning_type": "application",
+      "layer": "L3",
+      "origin": "manual"
+    },
+    {
+      "query": "Analyze undefined behavior when creating aliasing mutable references in unsafe code.",
+      "expected_concepts": [
+        "concept/03_advanced/02_unsafe/06_memory_model.md",
+        "concept/03_advanced/02_unsafe/04_unsafe_rust_patterns.md",
+        "concept/03_advanced/02_unsafe/02_unsafe_boundary_panorama.md",
+        "concept/04_formal/01_ownership_logic/06_behavior_considered_undefined.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/nomicon/what-unsafe-does.html",
+        "https://plv.mpi-sws.org/rustbelt/"
+      ],
+      "difficulty": "🔴",
+      "domain": "unsafe_ffi_memory",
+      "reasoning_type": "analysis",
+      "layer": "L4",
+      "origin": "manual"
+    },
+    {
+      "query": "Explain the difference between OS threads, async tasks, and parallel iterators.",
+      "expected_concepts": [
+        "concept/03_advanced/00_concurrency/01_concurrency.md",
+        "concept/03_advanced/01_async/01_async.md",
+        "concept/03_advanced/00_concurrency/08_parallel_distributed_pattern_spectrum.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/book/ch16-00-concurrency.html",
+        "https://rust-lang.github.io/async-book/"
+      ],
+      "difficulty": "🟡",
+      "domain": "concurrency_async_parallel",
+      "reasoning_type": "comparison",
+      "layer": "L2",
+      "origin": "manual"
+    },
+    {
+      "query": "What do Send and Sync auto traits guarantee?",
+      "expected_concepts": [
+        "concept/03_advanced/00_concurrency/02_send_sync_auto_traits.md",
+        "concept/03_advanced/00_concurrency/04_send_sync_boundaries.md",
+        "concept/03_advanced/00_concurrency/01_concurrency.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/nomicon/send-and-sync.html",
+        "https://doc.rust-lang.org/reference/special-types-and-traits.html"
+      ],
+      "difficulty": "🟢",
+      "domain": "concurrency_async_parallel",
+      "reasoning_type": "definition",
+      "layer": "L2",
+      "origin": "manual"
+    },
+    {
+      "query": "When should I choose async/await over threads for I/O-bound work?",
+      "expected_concepts": [
+        "concept/03_advanced/01_async/01_async.md",
+        "concept/03_advanced/00_concurrency/01_concurrency.md",
+        "concept/03_advanced/01_async/03_async_patterns.md"
+      ],
+      "expected_sources": [
+        "https://rust-lang.github.io/async-book/",
+        "https://doc.rust-lang.org/book/ch16-00-concurrency.html"
+      ],
+      "difficulty": "🟡",
+      "domain": "concurrency_async_parallel",
+      "reasoning_type": "application",
+      "layer": "L3",
+      "origin": "manual"
+    },
+    {
+      "query": "Analyze cancellation safety in async Rust.",
+      "expected_concepts": [
+        "concept/03_advanced/01_async/05_async_cancellation_safety.md",
+        "concept/03_advanced/01_async/03_async_patterns.md",
+        "concept/03_advanced/01_async/04_future_and_executor_mechanisms.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/std/future/trait.Future.html",
+        "https://rust-lang.github.io/async-book/"
+      ],
+      "difficulty": "🔴",
+      "domain": "concurrency_async_parallel",
+      "reasoning_type": "analysis",
+      "layer": "L4",
+      "origin": "manual"
+    },
+    {
+      "query": "How does an executor schedule and wake async futures?",
+      "expected_concepts": [
+        "concept/03_advanced/01_async/04_future_and_executor_mechanisms.md",
+        "concept/03_advanced/01_async/10_executor_fairness_and_scheduling.md",
+        "concept/03_advanced/01_async/15_state_machine_semantics.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/std/future/trait.Future.html",
+        "https://rust-lang.github.io/async-book/02_execution/01_chapter.html"
+      ],
+      "difficulty": "🔴",
+      "domain": "concurrency_async_parallel",
+      "reasoning_type": "application",
+      "layer": "L4",
+      "origin": "manual"
+    },
+    {
+      "query": "What is #![no_std] and when should I use it?",
+      "expected_concepts": [
+        "concept/06_ecosystem/05_systems_and_embedded/38_no_std_bare_metal_rust.md",
+        "concept/06_ecosystem/05_systems_and_embedded/03_embedded_systems.md",
+        "concept/06_ecosystem/05_systems_and_embedded/47_bare_metal_rust.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/embedded-book/",
+        "https://docs.rust-embedded.org/book/intro/no-std.html"
+      ],
+      "difficulty": "🟢",
+      "domain": "no_std_embedded",
+      "reasoning_type": "definition",
+      "layer": "L2",
+      "origin": "manual"
+    },
+    {
+      "query": "Compare the Embassy and RTIC real-time frameworks.",
+      "expected_concepts": [
+        "concept/06_ecosystem/05_systems_and_embedded/55_rtic_vs_embassy_real_time_frameworks.md",
+        "concept/06_ecosystem/05_systems_and_embedded/34_embassy_framework_deep_dive.md",
+        "concept/06_ecosystem/05_systems_and_embedded/35_rtic_framework_deep_dive.md"
+      ],
+      "expected_sources": [
+        "https://embassy.dev/",
+        "https://rtic.rs/"
+      ],
+      "difficulty": "🟡",
+      "domain": "no_std_embedded",
+      "reasoning_type": "comparison",
+      "layer": "L4",
+      "origin": "manual"
+    },
+    {
+      "query": "How do I implement a panic handler and global allocator for no_std?",
+      "expected_concepts": [
+        "concept/06_ecosystem/05_systems_and_embedded/52_no_std_allocators_and_panic_handlers.md",
+        "concept/06_ecosystem/05_systems_and_embedded/18_panic_runtime_no_std.md",
+        "concept/06_ecosystem/05_systems_and_embedded/38_no_std_bare_metal_rust.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/embedded-book/",
+        "https://doc.rust-lang.org/core/panic/trait.PanicHandler.html"
+      ],
+      "difficulty": "🟡",
+      "domain": "no_std_embedded",
+      "reasoning_type": "application",
+      "layer": "L3",
+      "origin": "manual"
+    },
+    {
+      "query": "Explain memory-mapped I/O and the typestate pattern in embedded Rust.",
+      "expected_concepts": [
+        "concept/06_ecosystem/05_systems_and_embedded/41_embedded_hal_and_mmio.md",
+        "concept/06_ecosystem/05_systems_and_embedded/25_memory_mapped_peripherals_and_typestate.md",
+        "concept/05_comparative/05_idioms_patterns_architecture/01_idioms/05_typestate.md"
+      ],
+      "expected_sources": [
+        "https://docs.rust-embedded.org/book/",
+        "https://doc.rust-lang.org/reference/items/structs.html"
+      ],
+      "difficulty": "🟡",
+      "domain": "no_std_embedded",
+      "reasoning_type": "definition",
+      "layer": "L4",
+      "origin": "manual"
+    },
+    {
+      "query": "Analyze safety-critical constraints when using bare-metal Rust.",
+      "expected_concepts": [
+        "concept/06_ecosystem/05_systems_and_embedded/43_rust_safety_critical_systems.md",
+        "concept/06_ecosystem/05_systems_and_embedded/19_safety_critical_bare_metal_os.md",
+        "concept/06_ecosystem/05_systems_and_embedded/47_bare_metal_rust.md",
+        "concept/06_ecosystem/05_systems_and_embedded/30_misra_rust_safety_critical_guidelines.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/embedded-book/",
+        "https://rust-lang.github.io/unsafe-code-guidelines/"
+      ],
+      "difficulty": "🔴",
+      "domain": "no_std_embedded",
+      "reasoning_type": "analysis",
+      "layer": "L5",
+      "origin": "manual"
+    },
+    {
+      "query": "What is the Result type and how does the ? operator work?",
+      "expected_concepts": [
+        "concept/01_foundation/08_error_handling/01_error_handling_basics.md",
+        "concept/01_foundation/08_error_handling/02_error_handling_control_flow.md",
+        "concept/05_comparative/05_idioms_patterns_architecture/01_idioms/02_error_propagation.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/book/ch09-00-error-handling.html",
+        "https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator"
+      ],
+      "difficulty": "🟢",
+      "domain": "error_handling_idioms",
+      "reasoning_type": "definition",
+      "layer": "L1",
+      "origin": "manual"
+    },
+    {
+      "query": "Compare Option and Result for representing failure.",
+      "expected_concepts": [
+        "concept/01_foundation/08_error_handling/01_error_handling_basics.md",
+        "concept/01_foundation/02_type_system/01_type_system.md",
+        "concept/01_foundation/08_error_handling/02_error_handling_control_flow.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/book/ch09-01-panic.html",
+        "https://doc.rust-lang.org/std/option/enum.Option.html"
+      ],
+      "difficulty": "🟢",
+      "domain": "error_handling_idioms",
+      "reasoning_type": "comparison",
+      "layer": "L1",
+      "origin": "manual"
+    },
+    {
+      "query": "When should I panic instead of returning Result?",
+      "expected_concepts": [
+        "concept/01_foundation/08_error_handling/03_panic_and_abort.md",
+        "concept/01_foundation/08_error_handling/01_error_handling_basics.md",
+        "concept/01_foundation/08_error_handling/02_error_handling_control_flow.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/book/ch09-03-to-panic-or-not-to-panic.html",
+        "https://rust-lang.github.io/api-guidelines/"
+      ],
+      "difficulty": "🟡",
+      "domain": "error_handling_idioms",
+      "reasoning_type": "application",
+      "layer": "L2",
+      "origin": "manual"
+    },
+    {
+      "query": "Compare thiserror, anyhow, and eyre for error handling.",
+      "expected_concepts": [
+        "concept/01_foundation/08_error_handling/01_error_handling_basics.md",
+        "concept/05_comparative/05_idioms_patterns_architecture/01_idioms/02_error_propagation.md",
+        "concept/06_ecosystem/03_design_patterns/48_api_guidelines_idioms.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html",
+        "https://rust-lang.github.io/api-guidelines/interoperability.html"
+      ],
+      "difficulty": "🟡",
+      "domain": "error_handling_idioms",
+      "reasoning_type": "comparison",
+      "layer": "L3",
+      "origin": "manual"
+    },
+    {
+      "query": "Analyze error propagation idioms across crate boundaries.",
+      "expected_concepts": [
+        "concept/05_comparative/05_idioms_patterns_architecture/01_idioms/02_error_propagation.md",
+        "concept/01_foundation/08_error_handling/02_error_handling_control_flow.md",
+        "concept/06_ecosystem/03_design_patterns/48_api_guidelines_idioms.md"
+      ],
+      "expected_sources": [
+        "https://rust-lang.github.io/api-guidelines/",
+        "https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html"
+      ],
+      "difficulty": "🔴",
+      "domain": "error_handling_idioms",
+      "reasoning_type": "analysis",
+      "layer": "L4",
+      "origin": "manual"
+    },
+    {
+      "query": "What is a declarative macro and how does macro_rules! work?",
+      "expected_concepts": [
+        "concept/02_intermediate/06_macros_and_metaprogramming/04_declarative_macros.md",
+        "concept/02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
+        "concept/02_intermediate/06_macros_and_metaprogramming/01_assert_matches.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/book/ch19-06-macros.html",
+        "https://doc.rust-lang.org/reference/macros-by-example.html"
+      ],
+      "difficulty": "🟢",
+      "domain": "macros_metaprogramming",
+      "reasoning_type": "definition",
+      "layer": "L2",
+      "origin": "manual"
+    },
+    {
+      "query": "Compare declarative macros and procedural macros.",
+      "expected_concepts": [
+        "concept/02_intermediate/06_macros_and_metaprogramming/04_declarative_macros.md",
+        "concept/02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
+        "concept/02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/book/ch19-06-macros.html",
+        "https://doc.rust-lang.org/reference/procedural-macros.html"
+      ],
+      "difficulty": "🟡",
+      "domain": "macros_metaprogramming",
+      "reasoning_type": "comparison",
+      "layer": "L3",
+      "origin": "manual"
+    },
+    {
+      "query": "Explain macro hygiene and why it matters.",
+      "expected_concepts": [
+        "concept/03_advanced/03_proc_macros/09_macro_hygiene.md",
+        "concept/02_intermediate/06_macros_and_metaprogramming/04_declarative_macros.md",
+        "concept/02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/reference/macros-by-example.html#hygiene",
+        "https://doc.rust-lang.org/reference/procedural-macros.html"
+      ],
+      "difficulty": "🟡",
+      "domain": "macros_metaprogramming",
+      "reasoning_type": "definition",
+      "layer": "L3",
+      "origin": "manual"
+    },
+    {
+      "query": "How do I write a custom derive procedural macro?",
+      "expected_concepts": [
+        "concept/02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
+        "concept/03_advanced/03_proc_macros/08_syn_quote_reference.md",
+        "concept/03_advanced/03_proc_macros/03_proc_macro_code_generation_optimization.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/reference/procedural-macros.html",
+        "https://doc.rust-lang.org/book/ch19-06-macros.html"
+      ],
+      "difficulty": "🟡",
+      "domain": "macros_metaprogramming",
+      "reasoning_type": "application",
+      "layer": "L3",
+      "origin": "manual"
+    },
+    {
+      "query": "Analyze compile-time metaprogramming trade-offs in Rust.",
+      "expected_concepts": [
+        "concept/02_intermediate/06_macros_and_metaprogramming/06_metaprogramming.md",
+        "concept/03_advanced/03_proc_macros/03_proc_macro_code_generation_optimization.md",
+        "concept/02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/reference/procedural-macros.html",
+        "https://doc.rust-lang.org/reference/macros-by-example.html"
+      ],
+      "difficulty": "🔴",
+      "domain": "macros_metaprogramming",
+      "reasoning_type": "analysis",
+      "layer": "L4",
+      "origin": "manual"
+    },
+    {
+      "query": "What is the typestate pattern and how does it use ownership?",
+      "expected_concepts": [
+        "concept/05_comparative/05_idioms_patterns_architecture/01_idioms/05_typestate.md",
+        "concept/06_ecosystem/03_design_patterns/32_typestate_deep_dive.md",
+        "concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md"
+      ],
+      "expected_sources": [
+        "https://rust-lang.github.io/api-guidelines/",
+        "https://doc.rust-lang.org/book/ch05-00-structs.html"
+      ],
+      "difficulty": "🟢",
+      "domain": "design_patterns_architecture",
+      "reasoning_type": "definition",
+      "layer": "L2",
+      "origin": "manual"
+    },
+    {
+      "query": "Compare actor model and message-passing concurrency patterns.",
+      "expected_concepts": [
+        "concept/06_ecosystem/03_design_patterns/42_actor_model_and_message_passing_patterns.md",
+        "concept/05_comparative/05_idioms_patterns_architecture/04_architecture/04_actor.md",
+        "concept/03_advanced/00_concurrency/01_concurrency.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/book/ch16-02-message-passing.html",
+        "https://doc.rust-lang.org/std/sync/mpsc/"
+      ],
+      "difficulty": "🟡",
+      "domain": "design_patterns_architecture",
+      "reasoning_type": "comparison",
+      "layer": "L3",
+      "origin": "manual"
+    },
+    {
+      "query": "Explain hexagonal architecture / ports and adapters in Rust.",
+      "expected_concepts": [
+        "concept/05_comparative/05_idioms_patterns_architecture/04_architecture/01_hexagonal_clean_architecture.md",
+        "concept/06_ecosystem/03_design_patterns/25_hexagonal_ports_and_adapters.md",
+        "concept/06_ecosystem/03_design_patterns/47_rust_design_and_architecture_patterns_semantic_atlas.md"
+      ],
+      "expected_sources": [
+        "https://rust-lang.github.io/api-guidelines/",
+        "https://doc.rust-lang.org/book/"
+      ],
+      "difficulty": "🟡",
+      "domain": "design_patterns_architecture",
+      "reasoning_type": "definition",
+      "layer": "L3",
+      "origin": "manual"
+    },
+    {
+      "query": "How do I implement the builder idiom in Rust?",
+      "expected_concepts": [
+        "concept/05_comparative/05_idioms_patterns_architecture/01_idioms/07_builder.md",
+        "concept/06_ecosystem/03_design_patterns/48_api_guidelines_idioms.md",
+        "concept/05_comparative/05_idioms_patterns_architecture/01_idioms/03_into_from_asref.md"
+      ],
+      "expected_sources": [
+        "https://rust-lang.github.io/api-guidelines/",
+        "https://doc.rust-lang.org/rust-by-example/trait/builder.html"
+      ],
+      "difficulty": "🟢",
+      "domain": "design_patterns_architecture",
+      "reasoning_type": "application",
+      "layer": "L2",
+      "origin": "manual"
+    },
+    {
+      "query": "Analyze when to apply CQRS/event sourcing instead of CRUD.",
+      "expected_concepts": [
+        "concept/05_comparative/05_idioms_patterns_architecture/04_architecture/02_cqrs_event_sourcing.md",
+        "concept/06_ecosystem/03_design_patterns/37_event_sourcing_engine_patterns.md",
+        "concept/06_ecosystem/03_design_patterns/05_microservice_patterns.md"
+      ],
+      "expected_sources": [
+        "https://rust-lang.github.io/api-guidelines/",
+        "https://doc.rust-lang.org/book/"
+      ],
+      "difficulty": "🔴",
+      "domain": "design_patterns_architecture",
+      "reasoning_type": "analysis",
+      "layer": "L4",
+      "origin": "manual"
+    },
+    {
+      "query": "What is separation logic and how does it model Rust ownership?",
+      "expected_concepts": [
+        "concept/04_formal/11_computational_models/08_separation_logic_for_rust.md",
+        "concept/04_formal/01_ownership_logic/01_linear_logic.md",
+        "concept/04_formal/01_ownership_logic/02_ownership_formal.md"
+      ],
+      "expected_sources": [
+        "https://plv.mpi-sws.org/rustbelt/",
+        "https://doc.rust-lang.org/nomicon/"
+      ],
+      "difficulty": "🟡",
+      "domain": "formal_methods_verification",
+      "reasoning_type": "definition",
+      "layer": "L5",
+      "origin": "manual"
+    },
+    {
+      "query": "Compare Kani and Miri as Rust verification tools.",
+      "expected_concepts": [
+        "concept/04_formal/04_model_checking/09_kani.md",
+        "concept/04_formal/04_model_checking/08_miri.md",
+        "concept/04_formal/04_model_checking/07_autoverus.md"
+      ],
+      "expected_sources": [
+        "https://model-checking.github.io/kani/",
+        "https://github.com/rust-lang/miri"
+      ],
+      "difficulty": "🟡",
+      "domain": "formal_methods_verification",
+      "reasoning_type": "comparison",
+      "layer": "L4",
+      "origin": "manual"
+    },
+    {
+      "query": "Explain the RustBelt ownership logic and its predicates.",
+      "expected_concepts": [
+        "concept/04_formal/11_computational_models/16_rustbelt_ownership_logic.md",
+        "concept/04_formal/01_ownership_logic/02_ownership_formal.md",
+        "concept/04_formal/01_ownership_logic/03_linear_logic_applications.md"
+      ],
+      "expected_sources": [
+        "https://plv.mpi-sws.org/rustbelt/",
+        "https://arxiv.org/abs/1706.03863"
+      ],
+      "difficulty": "🔴",
+      "domain": "formal_methods_verification",
+      "reasoning_type": "definition",
+      "layer": "L5",
+      "origin": "manual"
+    },
+    {
+      "query": "How can I use Miri to detect undefined behavior in unsafe code?",
+      "expected_concepts": [
+        "concept/04_formal/04_model_checking/08_miri.md",
+        "concept/03_advanced/02_unsafe/01_unsafe.md",
+        "concept/04_formal/01_ownership_logic/06_behavior_considered_undefined.md"
+      ],
+      "expected_sources": [
+        "https://github.com/rust-lang/miri",
+        "https://doc.rust-lang.org/nomicon/"
+      ],
+      "difficulty": "🟡",
+      "domain": "formal_methods_verification",
+      "reasoning_type": "application",
+      "layer": "L4",
+      "origin": "manual"
+    },
+    {
+      "query": "Analyze tree borrows versus stacked borrows for aliasing models.",
+      "expected_concepts": [
+        "concept/04_formal/01_ownership_logic/05_tree_borrows_deep_dive.md",
+        "concept/03_advanced/02_unsafe/06_memory_model.md",
+        "concept/04_formal/01_ownership_logic/06_behavior_considered_undefined.md"
+      ],
+      "expected_sources": [
+        "https://plv.mpi-sws.org/rustbelt/",
+        "https://arxiv.org/abs/2008.05123"
+      ],
+      "difficulty": "🔴",
+      "domain": "formal_methods_verification",
+      "reasoning_type": "analysis",
+      "layer": "L5",
+      "origin": "manual"
+    },
+    {
+      "query": "What is Cargo and how does dependency resolution work?",
+      "expected_concepts": [
+        "concept/06_ecosystem/01_cargo/06_cargo_dependency_resolution.md",
+        "concept/06_ecosystem/01_cargo/15_cargo_getting_started.md",
+        "concept/06_ecosystem/01_cargo/20_cargo_manifest_targets.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/cargo/",
+        "https://doc.rust-lang.org/cargo/reference/resolver.html"
+      ],
+      "difficulty": "🟢",
+      "domain": "toolchain_cargo_editions",
+      "reasoning_type": "definition",
+      "layer": "L1",
+      "origin": "manual"
+    },
+    {
+      "query": "Compare Cargo resolver v2 and resolver v3.",
+      "expected_concepts": [
+        "concept/06_ecosystem/01_cargo/03_resolver_v3_public_feature_unification.md",
+        "concept/06_ecosystem/01_cargo/06_cargo_dependency_resolution.md",
+        "concept/06_ecosystem/01_cargo/04_cargo_196_features.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/cargo/reference/resolver.html",
+        "https://doc.rust-lang.org/cargo/reference/features.html"
+      ],
+      "difficulty": "🟡",
+      "domain": "toolchain_cargo_editions",
+      "reasoning_type": "comparison",
+      "layer": "L3",
+      "origin": "manual"
+    },
+    {
+      "query": "Explain the differences between Rust Edition 2021 and Edition 2024.",
+      "expected_concepts": [
+        "concept/07_future/03_edition_differences/01_edition_2021_to_2024.md",
+        "concept/07_future/00_version_tracking/02_editions.md",
+        "concept/07_future/01_edition_roadmap/03_rust_edition_guide.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/edition-guide/",
+        "https://doc.rust-lang.org/reference/introduction.html"
+      ],
+      "difficulty": "🟡",
+      "domain": "toolchain_cargo_editions",
+      "reasoning_type": "comparison",
+      "layer": "L3",
+      "origin": "manual"
+    },
+    {
+      "query": "How do I configure Cargo workspaces and shared features?",
+      "expected_concepts": [
+        "concept/06_ecosystem/01_cargo/14_cargo_workspaces.md",
+        "concept/06_ecosystem/01_cargo/20_cargo_manifest_targets.md",
+        "concept/06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/cargo/reference/workspaces.html",
+        "https://doc.rust-lang.org/cargo/reference/features.html"
+      ],
+      "difficulty": "🟢",
+      "domain": "toolchain_cargo_editions",
+      "reasoning_type": "application",
+      "layer": "L2",
+      "origin": "manual"
+    },
+    {
+      "query": "Analyze security risks when using crates.io dependencies.",
+      "expected_concepts": [
+        "concept/06_ecosystem/01_cargo/13_cargo_security_cves.md",
+        "concept/06_ecosystem/01_cargo/08_cargo_registries_and_publishing.md",
+        "concept/06_ecosystem/01_cargo/07_cargo_source_replacement.md"
+      ],
+      "expected_sources": [
+        "https://doc.rust-lang.org/cargo/reference/registry.html",
+        "https://doc.rust-lang.org/cargo/reference/source-replacement.html"
+      ],
+      "difficulty": "🔴",
+      "domain": "toolchain_cargo_editions",
+      "reasoning_type": "analysis",
+      "layer": "L4",
+      "origin": "manual"
+    },
+    {
+      "query": "what is lifetime variance in rust",
+      "expected_concepts": [
+        "subtype_and_variance",
+        "lifetimes"
+      ],
+      "expected_sources": [
+        "concept/04_formal/00_type_theory/02_subtype_variance.md",
+        "concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md"
+      ],
+      "layer": "L3",
+      "domain": "lifetime_variance",
+      "origin": "manual",
+      "difficulty": "basic",
+      "reasoning_type": "recall"
+    },
+    {
+      "query": "covariance and contravariance of references and mutable references",
+      "expected_concepts": [
+        "subtype_and_variance",
+        "lifetimes_advanced"
+      ],
+      "expected_sources": [
+        "concept/04_formal/00_type_theory/02_subtype_variance.md",
+        "concept/01_foundation/01_ownership_borrow_lifetime/04_lifetimes_advanced.md"
+      ],
+      "layer": "L4",
+      "domain": "lifetime_variance",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "analysis"
+    },
+    {
+      "query": "why does &mut T require invariant lifetime subtyping",
+      "expected_concepts": [
+        "subtype_and_variance",
+        "borrowing"
+      ],
+      "expected_sources": [
+        "concept/04_formal/00_type_theory/02_subtype_variance.md",
+        "concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md"
+      ],
+      "layer": "L4",
+      "domain": "lifetime_variance",
+      "origin": "manual",
+      "difficulty": "advanced",
+      "reasoning_type": "analysis"
+    },
+    {
+      "query": "how does variance affect lifetime coercion in generic structs",
+      "expected_concepts": [
+        "subtype_and_variance",
+        "generics"
+      ],
+      "expected_sources": [
+        "concept/04_formal/00_type_theory/02_subtype_variance.md",
+        "concept/02_intermediate/01_generics/01_generics.md"
+      ],
+      "layer": "L3",
+      "domain": "lifetime_variance",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "application"
+    },
+    {
+      "query": "explain subtype variance rules for fn pointers and cell types",
+      "expected_concepts": [
+        "subtype_and_variance",
+        "interior_mutability"
+      ],
+      "expected_sources": [
+        "concept/04_formal/00_type_theory/02_subtype_variance.md",
+        "concept/02_intermediate/02_memory_management/02_interior_mutability.md"
+      ],
+      "layer": "L5",
+      "domain": "lifetime_variance",
+      "origin": "manual",
+      "difficulty": "advanced",
+      "reasoning_type": "recall"
+    },
+    {
+      "query": "what is a trait object in rust and how does dyn work",
+      "expected_concepts": [
+        "dispatch_mechanisms",
+        "trait_objects"
+      ],
+      "expected_sources": [
+        "concept/02_intermediate/00_traits/02_dispatch_mechanisms.md",
+        "concept/02_intermediate/01_generics/05_const_generics_and_trait_objects.md"
+      ],
+      "layer": "L2",
+      "domain": "trait_objects_dyn",
+      "origin": "manual",
+      "difficulty": "basic",
+      "reasoning_type": "recall"
+    },
+    {
+      "query": "difference between impl Trait and dyn Trait return types",
+      "expected_concepts": [
+        "dispatch_mechanisms",
+        "trait_objects"
+      ],
+      "expected_sources": [
+        "concept/02_intermediate/00_traits/02_dispatch_mechanisms.md"
+      ],
+      "layer": "L3",
+      "domain": "trait_objects_dyn",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "analysis"
+    },
+    {
+      "query": "when is a trait not object safe",
+      "expected_concepts": [
+        "dispatch_mechanisms",
+        "object_safety"
+      ],
+      "expected_sources": [
+        "concept/02_intermediate/00_traits/02_dispatch_mechanisms.md",
+        "concept/03_advanced/01_async/13_async_trait_object_safety.md"
+      ],
+      "layer": "L3",
+      "domain": "trait_objects_dyn",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "analysis"
+    },
+    {
+      "query": "explain vtable layout and dynamic dispatch for dyn Trait",
+      "expected_concepts": [
+        "dispatch_mechanisms",
+        "trait_objects"
+      ],
+      "expected_sources": [
+        "concept/02_intermediate/00_traits/02_dispatch_mechanisms.md",
+        "concept/04_formal/05_rustc_internals/07_special_types_and_traits.md"
+      ],
+      "layer": "L4",
+      "domain": "trait_objects_dyn",
+      "origin": "manual",
+      "difficulty": "advanced",
+      "reasoning_type": "recall"
+    },
+    {
+      "query": "using trait objects with async functions and object safety",
+      "expected_concepts": [
+        "async_trait_object_safety",
+        "dispatch_mechanisms"
+      ],
+      "expected_sources": [
+        "concept/03_advanced/01_async/13_async_trait_object_safety.md",
+        "concept/02_intermediate/00_traits/02_dispatch_mechanisms.md"
+      ],
+      "layer": "L4",
+      "domain": "trait_objects_dyn",
+      "origin": "manual",
+      "difficulty": "advanced",
+      "reasoning_type": "application"
+    },
+    {
+      "query": "what does Pin guarantee in rust",
+      "expected_concepts": [
+        "pin_and_unpin"
+      ],
+      "expected_sources": [
+        "concept/03_advanced/01_async/08_pin_unpin.md"
+      ],
+      "layer": "L3",
+      "domain": "pin_unpin",
+      "origin": "manual",
+      "difficulty": "basic",
+      "reasoning_type": "recall"
+    },
+    {
+      "query": "when is Unpin automatically implemented",
+      "expected_concepts": [
+        "pin_and_unpin",
+        "unpin"
+      ],
+      "expected_sources": [
+        "concept/03_advanced/01_async/08_pin_unpin.md"
+      ],
+      "layer": "L3",
+      "domain": "pin_unpin",
+      "origin": "manual",
+      "difficulty": "basic",
+      "reasoning_type": "recall"
+    },
+    {
+      "query": "how to safely implement pin projection",
+      "expected_concepts": [
+        "pin_projection",
+        "pin_and_unpin"
+      ],
+      "expected_sources": [
+        "concept/03_advanced/01_async/11_pin_projection_counterexamples.md",
+        "concept/03_advanced/01_async/08_pin_unpin.md"
+      ],
+      "layer": "L4",
+      "domain": "pin_unpin",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "application"
+    },
+    {
+      "query": "why do futures require pinning in async rust",
+      "expected_concepts": [
+        "pin_and_unpin",
+        "async_programming"
+      ],
+      "expected_sources": [
+        "concept/03_advanced/01_async/08_pin_unpin.md",
+        "concept/03_advanced/01_async/01_async.md"
+      ],
+      "layer": "L3",
+      "domain": "pin_unpin",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "analysis"
+    },
+    {
+      "query": "common mistakes with self-referential structs and Pin",
+      "expected_concepts": [
+        "pin_projection",
+        "pin_and_unpin"
+      ],
+      "expected_sources": [
+        "concept/03_advanced/01_async/11_pin_projection_counterexamples.md",
+        "concept/03_advanced/01_async/08_pin_unpin.md"
+      ],
+      "layer": "L4",
+      "domain": "pin_unpin",
+      "origin": "manual",
+      "difficulty": "advanced",
+      "reasoning_type": "analysis"
+    },
+    {
+      "query": "what determines drop order for local variables in rust",
+      "expected_concepts": [
+        "destructors",
+        "drop_order"
+      ],
+      "expected_sources": [
+        "concept/04_formal/05_rustc_internals/09_destructors.md"
+      ],
+      "layer": "L2",
+      "domain": "drop_order_destructors",
+      "origin": "manual",
+      "difficulty": "basic",
+      "reasoning_type": "recall"
+    },
+    {
+      "query": "how does temporary lifetime extension affect destructor timing",
+      "expected_concepts": [
+        "destructors",
+        "temporary_lifetime_extension"
+      ],
+      "expected_sources": [
+        "concept/04_formal/05_rustc_internals/09_destructors.md"
+      ],
+      "layer": "L3",
+      "domain": "drop_order_destructors",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "analysis"
+    },
+    {
+      "query": "drop order of struct fields and tuple elements",
+      "expected_concepts": [
+        "destructors",
+        "drop_order"
+      ],
+      "expected_sources": [
+        "concept/04_formal/05_rustc_internals/09_destructors.md"
+      ],
+      "layer": "L2",
+      "domain": "drop_order_destructors",
+      "origin": "manual",
+      "difficulty": "basic",
+      "reasoning_type": "recall"
+    },
+    {
+      "query": "what is async drop and its current status",
+      "expected_concepts": [
+        "async_drop",
+        "destructors"
+      ],
+      "expected_sources": [
+        "concept/07_future/02_preview_features/22_async_drop_preview.md",
+        "concept/04_formal/05_rustc_internals/09_destructors.md"
+      ],
+      "layer": "L3",
+      "domain": "drop_order_destructors",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "recall"
+    },
+    {
+      "query": "how to suppress or control destructor execution with ManuallyDrop",
+      "expected_concepts": [
+        "destructors",
+        "manuallydrop"
+      ],
+      "expected_sources": [
+        "concept/04_formal/05_rustc_internals/09_destructors.md",
+        "concept/03_advanced/02_unsafe/01_unsafe.md"
+      ],
+      "layer": "L3",
+      "domain": "drop_order_destructors",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "application"
+    },
+    {
+      "query": "how to use const generics for array sizes in rust",
+      "expected_concepts": [
+        "const_generics"
+      ],
+      "expected_sources": [
+        "concept/02_intermediate/01_generics/02_const_generics.md"
+      ],
+      "layer": "L2",
+      "domain": "const_generics",
+      "origin": "manual",
+      "difficulty": "basic",
+      "reasoning_type": "application"
+    },
+    {
+      "query": "what are the limitations of const generic parameters",
+      "expected_concepts": [
+        "const_generics"
+      ],
+      "expected_sources": [
+        "concept/02_intermediate/01_generics/02_const_generics.md"
+      ],
+      "layer": "L3",
+      "domain": "const_generics",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "analysis"
+    },
+    {
+      "query": "difference between const generics and type-level programming",
+      "expected_concepts": [
+        "const_generics",
+        "type_level_programming"
+      ],
+      "expected_sources": [
+        "concept/02_intermediate/01_generics/02_const_generics.md",
+        "concept/02_intermediate/01_generics/03_type_level_programming.md"
+      ],
+      "layer": "L3",
+      "domain": "const_generics",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "analysis"
+    },
+    {
+      "query": "can const generics be combined with trait objects",
+      "expected_concepts": [
+        "const_generics_and_trait_objects",
+        "const_generics"
+      ],
+      "expected_sources": [
+        "concept/02_intermediate/01_generics/05_const_generics_and_trait_objects.md",
+        "concept/02_intermediate/01_generics/02_const_generics.md"
+      ],
+      "layer": "L4",
+      "domain": "const_generics",
+      "origin": "manual",
+      "difficulty": "advanced",
+      "reasoning_type": "analysis"
+    },
+    {
+      "query": "using const generics to implement generic fixed-size matrices",
+      "expected_concepts": [
+        "const_generics",
+        "type_level_programming"
+      ],
+      "expected_sources": [
+        "concept/02_intermediate/01_generics/02_const_generics.md",
+        "concept/02_intermediate/01_generics/03_type_level_programming.md"
+      ],
+      "layer": "L3",
+      "domain": "const_generics",
+      "origin": "manual",
+      "difficulty": "advanced",
+      "reasoning_type": "application"
+    },
+    {
+      "query": "how does macro_rules hygiene prevent name collisions",
+      "expected_concepts": [
+        "declarative_macros",
+        "macro_hygiene"
+      ],
+      "expected_sources": [
+        "concept/02_intermediate/06_macros_and_metaprogramming/04_declarative_macros.md",
+        "concept/03_advanced/03_proc_macros/09_macro_hygiene.md"
+      ],
+      "layer": "L3",
+      "domain": "macro_rules_hygiene",
+      "origin": "manual",
+      "difficulty": "basic",
+      "reasoning_type": "recall"
+    },
+    {
+      "query": "what is the $crate metavariable used for in declarative macros",
+      "expected_concepts": [
+        "declarative_macros",
+        "macro_rules"
+      ],
+      "expected_sources": [
+        "concept/02_intermediate/06_macros_and_metaprogramming/04_declarative_macros.md"
+      ],
+      "layer": "L2",
+      "domain": "macro_rules_hygiene",
+      "origin": "manual",
+      "difficulty": "basic",
+      "reasoning_type": "recall"
+    },
+    {
+      "query": "explain TT-munching pattern in macro_rules",
+      "expected_concepts": [
+        "declarative_macros",
+        "macro_patterns"
+      ],
+      "expected_sources": [
+        "concept/02_intermediate/06_macros_and_metaprogramming/04_declarative_macros.md",
+        "concept/02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md"
+      ],
+      "layer": "L3",
+      "domain": "macro_rules_hygiene",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "application"
+    },
+    {
+      "query": "how do fragment specifiers work in macro_rules definitions",
+      "expected_concepts": [
+        "declarative_macros"
+      ],
+      "expected_sources": [
+        "concept/02_intermediate/06_macros_and_metaprogramming/04_declarative_macros.md"
+      ],
+      "layer": "L3",
+      "domain": "macro_rules_hygiene",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "analysis"
+    },
+    {
+      "query": "best practices for writing maintainable declarative macros",
+      "expected_concepts": [
+        "declarative_macros",
+        "macro_patterns"
+      ],
+      "expected_sources": [
+        "concept/02_intermediate/06_macros_and_metaprogramming/04_declarative_macros.md",
+        "concept/02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md"
+      ],
+      "layer": "L4",
+      "domain": "macro_rules_hygiene",
+      "origin": "manual",
+      "difficulty": "advanced",
+      "reasoning_type": "application"
+    },
+    {
+      "query": "how to write a custom derive procedural macro",
+      "expected_concepts": [
+        "procedural_macros",
+        "derive_macros"
+      ],
+      "expected_sources": [
+        "concept/02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md"
+      ],
+      "layer": "L3",
+      "domain": "proc_macro_attribute",
+      "origin": "manual",
+      "difficulty": "basic",
+      "reasoning_type": "application"
+    },
+    {
+      "query": "what is the difference between attribute and function-like proc macros",
+      "expected_concepts": [
+        "procedural_macros",
+        "attribute_macros",
+        "function_like_macros"
+      ],
+      "expected_sources": [
+        "concept/02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md"
+      ],
+      "layer": "L3",
+      "domain": "proc_macro_attribute",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "analysis"
+    },
+    {
+      "query": "how does TokenStream parsing work with syn and quote",
+      "expected_concepts": [
+        "procedural_macros",
+        "syn",
+        "quote"
+      ],
+      "expected_sources": [
+        "concept/02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
+        "concept/03_advanced/03_proc_macros/08_syn_quote_reference.md"
+      ],
+      "layer": "L4",
+      "domain": "proc_macro_attribute",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "application"
+    },
+    {
+      "query": "common patterns for attribute macros on structs and functions",
+      "expected_concepts": [
+        "procedural_macros",
+        "attribute_macros"
+      ],
+      "expected_sources": [
+        "concept/02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
+        "concept/03_advanced/03_proc_macros/03_proc_macro_code_generation_optimization.md"
+      ],
+      "layer": "L4",
+      "domain": "proc_macro_attribute",
+      "origin": "manual",
+      "difficulty": "advanced",
+      "reasoning_type": "application"
+    },
+    {
+      "query": "debugging and testing procedural macros in rust",
+      "expected_concepts": [
+        "procedural_macros",
+        "macro_debugging"
+      ],
+      "expected_sources": [
+        "concept/02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md",
+        "concept/03_advanced/03_proc_macros/04_macro_debugging_and_diagnostics.md"
+      ],
+      "layer": "L4",
+      "domain": "proc_macro_attribute",
+      "origin": "manual",
+      "difficulty": "advanced",
+      "reasoning_type": "application"
+    },
+    {
+      "query": "how to compile rust to wasm32-unknown-unknown",
+      "expected_concepts": [
+        "webassembly_ecosystem"
+      ],
+      "expected_sources": [
+        "concept/06_ecosystem/11_domain_applications/03_webassembly.md"
+      ],
+      "layer": "L2",
+      "domain": "wasm_rust",
+      "origin": "manual",
+      "difficulty": "basic",
+      "reasoning_type": "application"
+    },
+    {
+      "query": "what is wasm-bindgen and how does it bridge rust and javascript",
+      "expected_concepts": [
+        "webassembly_ecosystem",
+        "wasm_javascript_interop"
+      ],
+      "expected_sources": [
+        "concept/06_ecosystem/11_domain_applications/03_webassembly.md",
+        "concept/06_ecosystem/11_domain_applications/20_wasm_javascript_interop.md"
+      ],
+      "layer": "L3",
+      "domain": "wasm_rust",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "recall"
+    },
+    {
+      "query": "difference between wasm32-wasip1 and wasm32-unknown-unknown targets",
+      "expected_concepts": [
+        "webassembly_ecosystem",
+        "wasi"
+      ],
+      "expected_sources": [
+        "concept/06_ecosystem/11_domain_applications/03_webassembly.md",
+        "concept/06_ecosystem/05_systems_and_embedded/01_wasi.md"
+      ],
+      "layer": "L3",
+      "domain": "wasm_rust",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "analysis"
+    },
+    {
+      "query": "how to call javascript functions from rust in wasm",
+      "expected_concepts": [
+        "wasm_javascript_interop",
+        "webassembly_ecosystem"
+      ],
+      "expected_sources": [
+        "concept/06_ecosystem/11_domain_applications/20_wasm_javascript_interop.md",
+        "concept/06_ecosystem/11_domain_applications/03_webassembly.md"
+      ],
+      "layer": "L3",
+      "domain": "wasm_rust",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "application"
+    },
+    {
+      "query": "advanced patterns for rust webassembly modules in production",
+      "expected_concepts": [
+        "webassembly_advanced",
+        "webassembly_ecosystem"
+      ],
+      "expected_sources": [
+        "concept/06_ecosystem/11_domain_applications/17_webassembly_advanced.md",
+        "concept/06_ecosystem/11_domain_applications/03_webassembly.md"
+      ],
+      "layer": "L4",
+      "domain": "wasm_rust",
+      "origin": "manual",
+      "difficulty": "advanced",
+      "reasoning_type": "application"
+    },
+    {
+      "query": "what is embedded-hal and how does it abstract peripherals",
+      "expected_concepts": [
+        "embedded_hal_and_driver_idioms"
+      ],
+      "expected_sources": [
+        "concept/06_ecosystem/05_systems_and_embedded/24_embedded_hal_and_driver_idioms.md"
+      ],
+      "layer": "L3",
+      "domain": "embedded_hal",
+      "origin": "manual",
+      "difficulty": "basic",
+      "reasoning_type": "recall"
+    },
+    {
+      "query": "how to write a portable embedded driver using embedded-hal traits",
+      "expected_concepts": [
+        "embedded_hal_and_driver_idioms",
+        "embedded_hal_driver_patterns"
+      ],
+      "expected_sources": [
+        "concept/06_ecosystem/05_systems_and_embedded/24_embedded_hal_and_driver_idioms.md",
+        "concept/06_ecosystem/05_systems_and_embedded/49_embedded_hal_driver_patterns.md"
+      ],
+      "layer": "L4",
+      "domain": "embedded_hal",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "application"
+    },
+    {
+      "query": "key changes when migrating from embedded-hal 0.2 to 1.0",
+      "expected_concepts": [
+        "embedded_hal_1_0_migration"
+      ],
+      "expected_sources": [
+        "concept/06_ecosystem/05_systems_and_embedded/09_embedded_hal_1_0_migration.md"
+      ],
+      "layer": "L3",
+      "domain": "embedded_hal",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "analysis"
+    },
+    {
+      "query": "using type-state pins with embedded-hal digital io traits",
+      "expected_concepts": [
+        "embedded_hal_and_driver_idioms",
+        "embedded_hal_and_mmio"
+      ],
+      "expected_sources": [
+        "concept/06_ecosystem/05_systems_and_embedded/24_embedded_hal_and_driver_idioms.md",
+        "concept/06_ecosystem/05_systems_and_embedded/41_embedded_hal_and_mmio.md"
+      ],
+      "layer": "L4",
+      "domain": "embedded_hal",
+      "origin": "manual",
+      "difficulty": "advanced",
+      "reasoning_type": "application"
+    },
+    {
+      "query": "patterns for sharing spi and i2c buses across multiple drivers",
+      "expected_concepts": [
+        "embedded_hal_driver_patterns",
+        "embedded_hal_and_driver_idioms"
+      ],
+      "expected_sources": [
+        "concept/06_ecosystem/05_systems_and_embedded/49_embedded_hal_driver_patterns.md",
+        "concept/06_ecosystem/05_systems_and_embedded/24_embedded_hal_and_driver_idioms.md"
+      ],
+      "layer": "L4",
+      "domain": "embedded_hal",
+      "origin": "manual",
+      "difficulty": "advanced",
+      "reasoning_type": "application"
+    },
+    {
+      "query": "how does cargo resolver v3 differ from resolver v2",
+      "expected_concepts": [
+        "resolver_v3",
+        "cargo_dependency_resolution"
+      ],
+      "expected_sources": [
+        "concept/06_ecosystem/01_cargo/03_resolver_v3_public_feature_unification.md",
+        "concept/06_ecosystem/01_cargo/06_cargo_dependency_resolution.md"
+      ],
+      "layer": "L3",
+      "domain": "cargo_resolver_editions",
+      "origin": "manual",
+      "difficulty": "basic",
+      "reasoning_type": "recall"
+    },
+    {
+      "query": "what is feature unification in cargo dependency resolution",
+      "expected_concepts": [
+        "cargo_dependency_resolution",
+        "resolver_v3"
+      ],
+      "expected_sources": [
+        "concept/06_ecosystem/01_cargo/06_cargo_dependency_resolution.md",
+        "concept/06_ecosystem/01_cargo/03_resolver_v3_public_feature_unification.md"
+      ],
+      "layer": "L2",
+      "domain": "cargo_resolver_editions",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "recall"
+    },
+    {
+      "query": "how do public and private dependencies affect cargo resolver behavior",
+      "expected_concepts": [
+        "public_private_dependencies",
+        "resolver_v3"
+      ],
+      "expected_sources": [
+        "concept/06_ecosystem/01_cargo/02_public_private_deps.md",
+        "concept/06_ecosystem/01_cargo/03_resolver_v3_public_feature_unification.md"
+      ],
+      "layer": "L3",
+      "domain": "cargo_resolver_editions",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "analysis"
+    },
+    {
+      "query": "how to migrate a crate to a new rust edition with cargo fix",
+      "expected_concepts": [
+        "rust_editions"
+      ],
+      "expected_sources": [
+        "concept/07_future/00_version_tracking/02_editions.md"
+      ],
+      "layer": "L2",
+      "domain": "cargo_resolver_editions",
+      "origin": "manual",
+      "difficulty": "intermediate",
+      "reasoning_type": "application"
+    },
+    {
+      "query": "interaction between rust edition and cargo resolver version in workspaces",
+      "expected_concepts": [
+        "rust_editions",
+        "resolver_v3",
+        "cargo_workspaces"
+      ],
+      "expected_sources": [
+        "concept/07_future/00_version_tracking/02_editions.md",
+        "concept/06_ecosystem/01_cargo/03_resolver_v3_public_feature_unification.md",
+        "concept/06_ecosystem/01_cargo/14_cargo_workspaces.md"
+      ],
+      "layer": "L3",
+      "domain": "cargo_resolver_editions",
+      "origin": "manual",
+      "difficulty": "advanced",
+      "reasoning_type": "analysis"
     }
   ]
 }

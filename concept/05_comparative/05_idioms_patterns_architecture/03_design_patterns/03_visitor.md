@@ -216,8 +216,12 @@ fn main() {}
 
 ## 来源与延伸阅读
 
-> 以下链接按 P1（学术/形式化）与 P2（社区/生态）分级，用于补全本页的国际化权威来源覆盖。
+> 以下链接按 P0（官方/语言级）、P1（学术/形式化）与 P2（社区/生态）分级，用于补全本页的国际化权威来源覆盖。
 
+- **P0**: [The Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html)
+- **P0**: [The Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)
+- **P0**: [The Rust Programming Language — Object-Oriented Programming Features of Rust](https://doc.rust-lang.org/book/ch17-00-oop.html)
+- **P0**: [The Rust API Guidelines — C-TRAITS (traits for flexible, composable APIs)](https://rust-lang.github.io/api-guidelines/flexibility.html#c-traits)
 - **P1**: Palsberg, J., Jay, C. B. *The Essence of the Visitor Pattern*. In COMPSAC '98, IEEE, 1998. [IEEE Xplore](https://ieeexplore.ieee.org/document/716629)
 - **P1**: Gamma, E., Helm, R., Johnson, R., Vlissides, J. *Design Patterns: Abstraction and Reuse of Object-Oriented Design*. In *Software Pioneers*, Springer, 2002. [PDF](https://link.springer.com/content/pdf/10.1007/978-3-642-59412-0_40.pdf)
 - **P2**: [Rust Design Patterns - Visitor](https://rust-unofficial.github.io/patterns/patterns/behavioural/visitor.html)

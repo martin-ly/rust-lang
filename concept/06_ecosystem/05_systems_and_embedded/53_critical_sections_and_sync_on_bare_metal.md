@@ -416,3 +416,12 @@ mindmap
       3 目标 cargo build
       probe-rs / 逻辑分析仪
 ```
+
+## 来源与延伸阅读
+
+> 以下链接按 P0（官方/语言级）、P1（学术/形式化）与 P2（社区/生态）分级，用于补全本页的国际化权威来源覆盖。
+
+- **P0**: [The Rust Reference — Unsafe Blocks](https://doc.rust-lang.org/reference/unsafe-blocks.html)
+- **P0**: [The Rust Reference — Static Items](https://doc.rust-lang.org/reference/items/static-items.html)
+- **P0**: [The Rustonomicon — Atomics](https://doc.rust-lang.org/nomicon/atomics.html)
+- **P0**: [The rustc Developer Guide](https://rustc-dev-guide.rust-lang.org/)

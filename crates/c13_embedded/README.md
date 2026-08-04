@@ -22,6 +22,7 @@
 - **ARM**: `thumbv7em-none-eabihf`（ARM Cortex-M4F，如 STM32F4 / Nucleo-F446RE）
 - **RISC-V**: `riscv32imac-unknown-none-elf`（通用 32-bit RISC-V MCU，如 SiFive FE310 / GD32VF103）
 - **ESP32-C3 (RISC-V no_std)**: `riscv32imc-unknown-none-elf`（ESP32-C3 等 RISC-V 内核 Espressif 芯片，通过 `esp-hal` 构建）
+- **ESP32-C3/C6 (ESP-IDF std)**: `riscv32imc-esp-espidf` / `riscv32imac-esp-espidf` — **待验证**（当前 Windows 上 `stable-x86_64-pc-windows-msvc` 工具链没有该 target 的预构建产物，无法通过 `rustup target add` 安装）
 
 ## 功能特性
 
@@ -66,6 +67,28 @@ cargo build -p c13_embedded --target thumbv7m-none-eabi --example no_std_qemu_bl
 # RISC-V
 cargo build -p c13_embedded --target riscv32imac-unknown-none-elf --example riscv_minimal_blinky
 ```
+
+## ESP32-IDF 支持状态（待验证）
+
+计划在 `crates/c13_embedded` 中增加 ESP-IDF（`std`）目标支持，预期使用：
+
+- `riscv32imc-esp-espidf`（ESP32-C3）
+- `riscv32imac-esp-espidf`（ESP32-C6 / 更高性能 RISC-V 内核，若工具链提供）
+
+当前状态：**工具链不可用**。在 Windows 上执行 `rustup target add riscv32imc-esp-espidf` 与 `rustup target add riscv32imac-esp-espidf` 均返回：
+
+```text
+error: toolchain 'stable-x86_64-pc-windows-msvc' has no prebuilt artifacts available for target '...-esp-espidf'
+```
+
+因此尚未添加 `esp-idf-svc` / `esp-idf-hal` / `esp-idf-sys` 依赖、`.cargo/config.toml` runner 配置及示例。待后续在支持该 target 的环境（如 Linux + `espup` 或 Espressif 自定义 Rust 工具链）中验证后再补齐：
+
+- `Cargo.toml` 中按 `target_os = "espidf"` 添加条件依赖
+- `.cargo/config.toml` 中追加 ESP-IDF target 的 runner / link 参数
+- `examples/esp32_minimal_main.rs` 最小 ESP-IDF 入口示例
+- 在对应目标上执行 `cargo build --target riscv32imc-esp-espidf -p c13_embedded`
+
+本状态记录不影响现有 host / ARM / RISC-V 裸机构建。
 
 ## no_std 硬件实测工作台
 

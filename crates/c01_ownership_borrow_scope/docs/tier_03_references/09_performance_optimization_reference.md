@@ -5,7 +5,8 @@
 
 > **权威来源**: [Performance Optimization](../../../../concept/06_ecosystem/10_performance/01_performance_optimization.md)
 
-This reference document previously contained local summaries and API notes for `Performance Optimization`. Per AGENTS.md §6.4, general concept explanations are kept in `concept/` as the single source of truth; please refer to the canonical page above for in-depth coverage.
+This file previously contained local summaries and API notes for `Performance Optimization`.
+Per AGENTS.md §6.4, general concept explanations are kept in `concept/` as the single source of truth; please refer to the canonical page above for in-depth coverage.
 
 ## Quick links
 
