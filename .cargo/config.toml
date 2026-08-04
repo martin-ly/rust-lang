@@ -55,6 +55,7 @@ rustflags = ["-C", "target-cpu=cortex-m4", "-C", "link-arg=-Tlink.x"]
 rustflags = ["-C", "target-cpu=cortex-m3", "-C", "link-arg=-Tlink.x"]
 
 [target.riscv32imac-unknown-none-elf]
+runner = "qemu-system-riscv32 -machine virt -nographic -kernel"
 rustflags = [
     "-C", "target-cpu=generic-rv32",
     "-C", "target-feature=+m,+a,+c",
