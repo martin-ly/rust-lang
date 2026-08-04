@@ -11,11 +11,11 @@
 > **内容分级**: [实验级]
 > **权威来源**: 本文件为 `concept/` 权威页（1.98+ **周期跟踪** canonical）。
 > **Canonical 分工**: 本页 = 周期跟踪（nightly 特性 / RFC 进展 / API 探测，随两周巡检滚动）；1.98.0 **稳定特性权威汇总** = [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md)（2026-08-20 稳定后生效，当前为跟踪骨架）。
-> **跟踪版本**: nightly 1.99.0+ (2026-07-28)；**1.98.0 已于 2026-07-03 分支进入 beta**（[releases.rs 1.98.0 beta](https://releases.rs/docs/1.98.0/)，2026-07-28 curl 实测 200）
-> **预计稳定时间**: **1.98.0 = 2026-08-20**（releases.rs 实测；截至 2026-07-28 约 3 周后发布）；1.99+ 及以后
-> **当前阶段**: 🧪 Nightly 实验性 / 设计或 MCP 阶段
+> **跟踪版本**: nightly 1.99.0+ (2026-08-04)；**1.98.0 已于 2026-07-03 分支进入 beta**（[releases.rs 1.98.0 beta](https://releases.rs/docs/1.98.0/)，2026-08-04 curl 实测 200）
+> **预计稳定时间**: **1.98.0 = 2026-08-20**（releases.rs 实测；截至 2026-08-04 约 16 天后发布）；1.99+ 及以后
+> **当前阶段**: 🔄 1.98.0 beta 已冻结 / nightly 1.99+ 实验性
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
-> **状态**: 特性集高度不确定，稳定时间和具体内容以官方发布为准
+> **状态**: 39 项 beta 特性已全部映射到 `concept/` 权威页；特性集已在 beta 分支锁定，stable 发布前仅做 backport/文档修正
 >
 > **权威来源**:
 >
@@ -37,9 +37,9 @@
 > **前置概念**: N/A
 ---
 
-## 当前状态：1.98.0 beta 已冻结，stable 约 3 周后发布（2026-07-28）
+## 当前状态：1.98.0 beta 已冻结，stable 约 16 天后发布（2026-08-04）
 
-> **状态摘要**：1.98.0 已于 **2026-07-03** 从 master 切分进入 beta 通道，预计 **2026-08-20** 转正为 stable。截至 2026-07-28，特性集已在 beta 分支锁定；最终 release notes 通常会在 stable 发布前 1–2 周由 release team 定稿。本页继续跟踪 beta 已知项与 nightly 1.99+ 前瞻项，stable 发布后将把已稳定内容迁移至 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md)。
+> **状态摘要**：1.98.0 已于 **2026-07-03** 从 master 切分进入 beta 通道，预计 **2026-08-20** 转正为 stable。截至 **2026-08-04**，特性集已在 beta 分支锁定；**39 项 beta 特性已完成与 `concept/` 权威页的双向语义注入**（验证：`python scripts/check_version_semantic_injection.py --strict` 通过）。最终 release notes 通常会在 stable 发布前 1–2 周由 release team 定稿。本页继续跟踪 beta 已知项与 nightly 1.99+ 前瞻项，stable 发布后将把已稳定内容迁移至 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md)。
 
 ### 官方跟踪来源
 
@@ -55,10 +55,10 @@
 
 ---
 
-## 零、1.98 周期跟踪清单（2026-07-28 更新）
+## 零、1.98 周期跟踪清单（2026-08-04 更新）
 
 > **状态取值**：`stabilized in 1.98 beta`（已随 1.98.0 beta 分支合入，2026-08-20 转正）/ `RFC merged`（RFC 已合并，实现跟踪中）/ `FCP`（最终评论期）/ `nightly only`（nightly 可用，未排期）。
-> **实测来源**：[releases.rs 1.98.0 beta](https://releases.rs/docs/1.98.0/)（curl 200，2026-07-28）· §1.7 RFC 表（2026-07-28 实测）
+> **实测来源**：[releases.rs 1.98.0 beta](https://releases.rs/docs/1.98.0/)（curl 200，2026-08-04）· §1.7 RFC 表（2026-08-04 实测）
 
 | 特性 | 状态 | 语义影响 / 迁移注意 | 跟踪链接 |
 |:---|:---|:---|:---|
@@ -75,6 +75,8 @@
 | Return Type Notation（RTN） | nightly only | 允许在 bound 中约束 `impl Trait` 返回类型的关联项，是 `async fn` in traits 替代 `#[async_trait]` 的关键拼图。 | [预览页](../02_preview_features/09_return_type_notation_preview.md) |
 | Public/Private Dependencies（RFC #3516） | RFC merged，Cargo 实现跟踪中 | 区分公共 API 依赖与实现细节依赖，使 cargo 能机器判定依赖变化是否构成 SemVer 破坏。 | [RFC Book](https://rust-lang.github.io/rfcs/3516-public-private-dependencies.html) |
 
+> **完整映射**：39 项 beta 特性的上游 PR/issue 链接、`concept/` 权威页前向链接与回链，已统一维护在 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md) §0 特性矩阵，并在 [`feature_domain_matrix_198.md`](feature_domain_matrix_198.md) 中按 9 大领域做交叉反查。本表仅保留周期跟踪入口与 nightly 前瞻项。
+>
 > **维护约定**：每两周按 §7.1 频率核对本表；1.98.0 发布（2026-08-20）后将 beta 行迁移至 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md)（骨架已建，2026-07-14），本页滚动为 1.99+ 跟踪。
 
 ---

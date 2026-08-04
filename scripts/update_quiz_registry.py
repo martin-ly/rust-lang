@@ -33,7 +33,7 @@ spec.loader.exec_module(cqs)
 # 其余字段由本脚本从文件重算）。
 SEED = [
     {
-        "path": "concept/00_meta/05_quizzes/01_quiz_meta_framework.md",
+        "path": "concept/00_meta/09_quizzes/01_quiz_meta_framework.md",
         "layer": "L0",
         "topic": "元层框架与知识体系架构（L0–L7 分层、Bloom 映射、A/S/P 标记、canonical 规则）",
         "concept_pages": [

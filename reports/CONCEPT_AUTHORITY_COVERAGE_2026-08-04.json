@@ -1,49 +1,61 @@
 {
   "date": "2026-08-04",
-  "scanned": 720,
+  "scanned": 735,
   "coverage": {
     "P0": [
-      715,
-      99.3
+      724,
+      98.5
     ],
     "P1": [
-      681,
-      94.6
+      687,
+      93.5
     ],
     "P2": [
-      645,
-      89.6
+      655,
+      89.1
     ],
     "any": [
-      720,
-      100.0
+      732,
+      99.6
     ],
-    "none": 0
+    "none": 3
   },
   "content_scope": {
-    "scanned": 624,
+    "scanned": 637,
     "P0": [
-      624,
-      100.0
+      633,
+      99.4
     ],
     "P1": [
-      624,
-      100.0
+      630,
+      98.9
     ],
     "P2": [
-      624,
-      100.0
+      634,
+      99.5
     ],
     "any": [
-      624,
-      100.0
+      636,
+      99.8
     ],
-    "gaps_p1": [],
-    "gaps_p2": []
+    "gaps_p1": [
+      "concept/06_ecosystem/05_systems_and_embedded/47_bare_metal_rust.md",
+      "concept/06_ecosystem/05_systems_and_embedded/48_no_std_alloc_crate_ecosystem.md",
+      "concept/06_ecosystem/05_systems_and_embedded/49_embedded_hal_driver_patterns.md",
+      "concept/06_ecosystem/14_enterprise_architecture/08_microservices_patterns_in_rust.md",
+      "concept/06_ecosystem/14_enterprise_architecture/13_microservices_patterns_in_rust.md",
+      "concept/06_ecosystem/14_enterprise_architecture/14_data_intensive_patterns.md",
+      "concept/06_ecosystem/14_enterprise_architecture/15_security_and_zero_trust_patterns.md"
+    ],
+    "gaps_p2": [
+      "concept/04_formal/11_computational_models/08_separation_logic_for_rust.md",
+      "concept/04_formal/11_computational_models/09_concurrency_models_actors_csp.md",
+      "concept/06_ecosystem/14_enterprise_architecture/08_microservices_patterns_in_rust.md"
+    ]
   },
   "by_layer": {
     "L0": {
-      "n": 72,
+      "n": 74,
       "P0": 72,
       "any": 72
     },
@@ -63,9 +75,9 @@
       "any": 78
     },
     "L4": {
-      "n": 120,
-      "P0": 120,
-      "any": 120
+      "n": 123,
+      "P0": 123,
+      "any": 123
     },
     "L5": {
       "n": 29,
@@ -73,9 +85,9 @@
       "any": 29
     },
     "L6": {
-      "n": 238,
-      "P0": 234,
-      "any": 238
+      "n": 248,
+      "P0": 240,
+      "any": 247
     },
     "L7": {
       "n": 75,
@@ -89,7 +101,11 @@
     }
   },
   "core_gaps_l1_l4_no_p0": [],
-  "none_any": [],
+  "none_any": [
+    "concept/00_meta/05_ai_semantic_engineering/01_knowledge_graph_design.md",
+    "concept/00_meta/05_ai_semantic_engineering/02_llm_rag_for_rust.md",
+    "concept/06_ecosystem/14_enterprise_architecture/08_microservices_patterns_in_rust.md"
+  ],
   "crates_docs": {
     "total": 569,
     "kinds": {

@@ -4,7 +4,7 @@
     "generated": "2026-07-11",
     "rust_version": "1.97.0+",
     "source": "concept/",
-    "entity_count": 693,
+    "entity_count": 704,
     "schema": "simple KG index"
   },
   "entities": [
@@ -1067,20 +1067,68 @@
       "related_crates": []
     },
     {
-      "id": "concept:00_meta/05_quizzes/01_quiz_meta_framework.md",
-      "path": "00_meta/05_quizzes/01_quiz_meta_framework.md",
-      "title": "测验：元层框架与知识体系架构（L0）",
-      "en": "Meta Framework and Knowledge Architecture Quiz",
-      "summary": "L0 standalone quiz on the knowledge-base architecture itself: the L0–L7 layered structure, Bloom taxonomy mapping, A/S/P cognitive marking, and the canonical single-source-of-truth rules.",
-      "bloom": "L2-L3",
+      "id": "concept:00_meta/05_ai_semantic_engineering/01_knowledge_graph_design.md",
+      "path": "00_meta/05_ai_semantic_engineering/01_knowledge_graph_design.md",
+      "title": "知识图谱设计：W3C SHACL/OWL 对齐与本体工程方法",
+      "en": "Knowledge Graph Design: W3C SHACL/OWL Alignment and Ontology Engineering Methods",
+      "summary": "Design principles and engineering workflows for building maintainable Rust knowledge graphs aligned with W3C SHACL, OWL2, SKOS, and RDF-star, including class/property modeling, shape constraints, provenance, and evaluation gates.",
+      "bloom": "L0 / Meta",
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [
         {
-          "title": "Concept 元层",
-          "path": "../README.md"
+          "title": "`concept/00_meta/knowledge_topology/kg_ontology_v2.md`",
+          "path": "../knowledge_topology/kg_ontology_v2.md"
+        },
+        {
+          "title": "`concept/00_meta/03_audit/09_kg_shacl_engine_validation.md`",
+          "path": "../03_audit/09_kg_shacl_engine_validation.md"
+        },
+        {
+          "title": "`concept/00_meta/02_sources/01_authority_source_map.md`",
+          "path": "../02_sources/01_authority_source_map.md"
         }
       ],
-      "postrequisites": [],
+      "postrequisites": [
+        {
+          "title": "`concept/00_meta/05_ai_semantic_engineering/02_llm_rag_for_rust.md`",
+          "path": "02_llm_rag_for_rust.md"
+        },
+        {
+          "title": "`tools/kg_rag/semantic_alignment_pipeline.py`",
+          "path": "../../../tools/kg_rag/semantic_alignment_pipeline.py"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:00_meta/05_ai_semantic_engineering/02_llm_rag_for_rust.md",
+      "path": "00_meta/05_ai_semantic_engineering/02_llm_rag_for_rust.md",
+      "title": "LLM 与 RAG 在 Rust 知识库中的应用：本体工程与检索增强生成",
+      "en": "LLM and RAG for Rust Knowledge Bases: Ontology Engineering and Retrieval-Augmented Generation",
+      "summary": "Engineering methods for using LLMs to build and query Rust knowledge graphs, covering ontology extraction, semantic retrieval, GraphRAG patterns, and RAG evaluation frameworks including recall, precision, faithfulness, and source attribution.",
+      "bloom": "L0 / Meta",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "`concept/00_meta/05_ai_semantic_engineering/01_knowledge_graph_design.md`",
+          "path": "01_knowledge_graph_design.md"
+        },
+        {
+          "title": "`concept/00_meta/knowledge_topology/kg_ontology_v2.md`",
+          "path": "../knowledge_topology/kg_ontology_v2.md"
+        },
+        {
+          "title": "`concept/00_meta/02_sources/01_authority_source_map.md`",
+          "path": "../02_sources/01_authority_source_map.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "`tools/kg_rag/semantic_alignment_pipeline.py`",
+          "path": "../../../tools/kg_rag/semantic_alignment_pipeline.py"
+        }
+      ],
       "theorems": [],
       "related_crates": []
     },
@@ -1132,6 +1180,24 @@
       "bloom": "L0",
       "rust_version": "1.96.0+ (Edition 2024)",
       "prerequisites": [],
+      "postrequisites": [],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:00_meta/09_quizzes/01_quiz_meta_framework.md",
+      "path": "00_meta/09_quizzes/01_quiz_meta_framework.md",
+      "title": "测验：元层框架与知识体系架构（L0）",
+      "en": "Meta Framework and Knowledge Architecture Quiz",
+      "summary": "L0 standalone quiz on the knowledge-base architecture itself: the L0–L7 layered structure, Bloom taxonomy mapping, A/S/P cognitive marking, and the canonical single-source-of-truth rules.",
+      "bloom": "L2-L3",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Concept 元层",
+          "path": "../README.md"
+        }
+      ],
       "postrequisites": [],
       "theorems": [],
       "related_crates": []
@@ -9824,6 +9890,75 @@
       "related_crates": []
     },
     {
+      "id": "concept:04_formal/11_computational_models/07_type_theory_and_rust.md",
+      "path": "04_formal/11_computational_models/07_type_theory_and_rust.md",
+      "title": "",
+      "en": "Type Theory and Rust: The Type System as a Computational Model",
+      "summary": "Examines Rust's type system as a substructural computational model spanning affine/linear ownership, System Fω-style polymorphism, lifetimes as modal constraints, and the Curry-Howard correspondence, and maps these formal foundations to mechanized verification frameworks such as Iris and RustBelt.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Type Theory",
+          "path": "../00_type_theory/01_type_theory.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Separation Logic for Rust",
+          "path": "08_separation_logic_for_rust.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:04_formal/11_computational_models/08_separation_logic_for_rust.md",
+      "path": "04_formal/11_computational_models/08_separation_logic_for_rust.md",
+      "title": "",
+      "en": "Separation Logic for Rust: An Iris and RustBelt Perspective",
+      "summary": "Presents separation logic and concurrent separation logic as computational models for Rust ownership, borrowing, and thread-shared resources, with a focus on the Iris framework and RustBelt's mechanized soundness proof for safe and unsafe Rust abstractions.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Separation Logic",
+          "path": "../02_separation_logic/02_separation_logic.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Type Theory and Rust",
+          "path": "07_type_theory_and_rust.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:04_formal/11_computational_models/09_concurrency_models_actors_csp.md",
+      "path": "04_formal/11_computational_models/09_concurrency_models_actors_csp.md",
+      "title": "",
+      "en": "Concurrency Models as Computational Models: CSP, Actors, TLA+, and Rust",
+      "summary": "Surveys three foundational concurrency models — Communicating Sequential Processes, the Actor model, and TLA+ — and maps them to Rust engineering artifacts such as std channels, Actix actors, Tokio tasks/select, and state-machine specifications.",
+      "bloom": "L4-L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Concurrency",
+          "path": "../../03_advanced/00_concurrency/01_concurrency.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Distributed Systems Semantics",
+          "path": "../09_system_semantics/04_distributed_systems_semantics.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:04_formal/11_computational_models/README.md",
       "path": "04_formal/11_computational_models/README.md",
       "title": "",
@@ -13436,6 +13571,95 @@
       "related_crates": []
     },
     {
+      "id": "concept:06_ecosystem/03_design_patterns/50_rust_idioms_atlas.md",
+      "path": "06_ecosystem/03_design_patterns/50_rust_idioms_atlas.md",
+      "title": "Rust 惯用法全面图谱（Rust Idioms Atlas）",
+      "en": "Rust Idioms Atlas",
+      "summary": "A cross-authority navigation atlas that maps Rust idioms to the Rust API Guidelines, The Rustonomicon, This Week in Rust, and the Rust Performance Book, linking each idiom to its canonical concept page and semantic domain.",
+      "bloom": "L6",
+      "rust_version": "1.97.1+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 惯用法谱系全景",
+          "path": "02_idioms_spectrum.md"
+        },
+        {
+          "title": "Rust API Guidelines 惯用法语义映射",
+          "path": "48_api_guidelines_idioms.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Rust 反模式与陷阱图谱",
+          "path": "51_anti_patterns_and_pitfalls.md"
+        },
+        {
+          "title": "Rust 性能惯用法",
+          "path": "52_performance_idioms.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/03_design_patterns/51_anti_patterns_and_pitfalls.md",
+      "path": "06_ecosystem/03_design_patterns/51_anti_patterns_and_pitfalls.md",
+      "title": "Rust 反模式与陷阱图谱（Anti-patterns and Pitfalls Atlas）",
+      "en": "Rust Anti-patterns and Pitfalls Atlas",
+      "summary": "An atlas of subtle and advanced Rust anti-patterns and pitfalls drawn from The Rustonomicon, Rust API Guidelines, This Week in Rust, and the Rust Performance Book, with cross-references to the common anti-patterns page.",
+      "bloom": "L5–L6",
+      "rust_version": "1.97.1+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 反模式",
+          "path": "33_anti_patterns.md"
+        },
+        {
+          "title": "Rust 惯用法谱系全景",
+          "path": "02_idioms_spectrum.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Rust 性能惯用法",
+          "path": "52_performance_idioms.md"
+        },
+        {
+          "title": "Unsafe Rust 模式",
+          "path": "../../03_advanced/02_unsafe/04_unsafe_rust_patterns.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/03_design_patterns/52_performance_idioms.md",
+      "path": "06_ecosystem/03_design_patterns/52_performance_idioms.md",
+      "title": "Rust 性能惯用法（Performance Idioms）",
+      "en": "Rust Performance Idioms",
+      "summary": "A catalog of performance-oriented Rust idioms aligned with the Rust Performance Book: allocation avoidance, cache-friendly layout, branch hints, inlining, atomics, SIMD, and measurement-first optimization.",
+      "bloom": "L4–L6",
+      "rust_version": "1.97.1+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 惯用法谱系全景",
+          "path": "02_idioms_spectrum.md"
+        },
+        {
+          "title": "所有权性能优化",
+          "path": "../../03_advanced/06_low_level_patterns/06_ownership_performance_optimization.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Rust 反模式与陷阱图谱",
+          "path": "51_anti_patterns_and_pitfalls.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
       "id": "concept:06_ecosystem/04_web_and_networking/01_distributed_systems.md",
       "path": "06_ecosystem/04_web_and_networking/01_distributed_systems.md",
       "title": "",
@@ -15061,6 +15285,167 @@
         {
           "title": "no_std 与裸机 Rust",
           "path": "38_no_std_bare_metal_rust.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/47_bare_metal_rust.md",
+      "path": "06_ecosystem/05_systems_and_embedded/47_bare_metal_rust.md",
+      "title": "",
+      "en": "Bare-Metal Rust",
+      "summary": "A systems-level canonical reference for bare-metal Rust: the hardware-software boundary, layered architecture from chip to application, reset-to-main boot contract, vector table and memory layout, no_std runtime obligations, and how to choose between bare-metal, RTOS, and OS-based stacks.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "Rust 嵌入式系统开发",
+          "path": "03_embedded_systems.md"
+        },
+        {
+          "title": "no_std 与裸机 Rust",
+          "path": "38_no_std_bare_metal_rust.md"
+        },
+        {
+          "title": "交叉编译",
+          "path": "02_cross_compilation.md"
+        },
+        {
+          "title": "裸机启动与链接脚本",
+          "path": "13_bare_metal_boot_linker_script.md"
+        },
+        {
+          "title": "panic_handler 与 no_std 运行时",
+          "path": "18_panic_runtime_no_std.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "no_std 启动流程与运行时深度解析",
+          "path": "27_no_std_startup_runtime_deep_dive.md"
+        },
+        {
+          "title": "嵌入式内存布局与堆安全",
+          "path": "29_embedded_memory_layout_and_heap_safety.md"
+        },
+        {
+          "title": "RTOS 与 Rust 调度模型对比",
+          "path": "46_rtos_and_scheduling_in_rust.md"
+        },
+        {
+          "title": "Embassy 异步框架深度解析",
+          "path": "34_embassy_framework_deep_dive.md"
+        },
+        {
+          "title": "RTIC 实时任务调度框架深度解析",
+          "path": "35_rtic_framework_deep_dive.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/48_no_std_alloc_crate_ecosystem.md",
+      "path": "06_ecosystem/05_systems_and_embedded/48_no_std_alloc_crate_ecosystem.md",
+      "title": "",
+      "en": "The no_std + alloc Crate Ecosystem",
+      "summary": "A canonical survey of the Rust crate ecosystem for `#![no_std]` environments that use `alloc`: allocators, collections, strings, serialization, async/sync, logging, time, and error-handling crates, with selection criteria and compatibility checks.",
+      "bloom": "L4",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "no_std 与裸机 Rust",
+          "path": "38_no_std_bare_metal_rust.md"
+        },
+        {
+          "title": "嵌入式内存分配器",
+          "path": "16_embedded_memory_allocators.md"
+        },
+        {
+          "title": "失败可恢复分配与 no_alloc 集合",
+          "path": "37_fallible_allocation_and_no_alloc_collections.md"
+        },
+        {
+          "title": "Cargo build-std",
+          "path": "../01_cargo/22_build_std.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "Embassy 异步框架深度解析",
+          "path": "34_embassy_framework_deep_dive.md"
+        },
+        {
+          "title": "嵌入式协议与外设驱动",
+          "path": "22_embedded_protocol_drivers.md"
+        },
+        {
+          "title": "安全关键型裸机/OS",
+          "path": "19_safety_critical_bare_metal_os.md"
+        },
+        {
+          "title": "Rust vs C/C++",
+          "path": "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md"
+        },
+        {
+          "title": "Rust vs Zig",
+          "path": "../../05_comparative/01_systems_languages/06_rust_vs_zig.md"
+        }
+      ],
+      "theorems": [],
+      "related_crates": []
+    },
+    {
+      "id": "concept:06_ecosystem/05_systems_and_embedded/49_embedded_hal_driver_patterns.md",
+      "path": "06_ecosystem/05_systems_and_embedded/49_embedded_hal_driver_patterns.md",
+      "title": "",
+      "en": "Embedded-HAL Driver Patterns",
+      "summary": "Design patterns for writing portable, type-safe device drivers on top of `embedded-hal` 1.0: state-machine drivers, register-map modeling, SPI/I2C transaction composition, bus ownership, shared-bus integration, async patterns, DMA lifecycle, error design, and testable mocks.",
+      "bloom": "L5",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "embedded-hal 与驱动惯用法",
+          "path": "24_embedded_hal_and_driver_idioms.md"
+        },
+        {
+          "title": "PAC 与 HAL 实现",
+          "path": "17_pac_hal_implementation.md"
+        },
+        {
+          "title": "Memory-Mapped Peripherals 与 Typestate 设计",
+          "path": "25_memory_mapped_peripherals_and_typestate.md"
+        },
+        {
+          "title": "no_std 与裸机惯用法",
+          "path": "23_no_std_and_bare_metal_idioms.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "嵌入式协议与外设驱动",
+          "path": "22_embedded_protocol_drivers.md"
+        },
+        {
+          "title": "异步 no_std 嵌入式",
+          "path": "11_async_no_std_embedded.md"
+        },
+        {
+          "title": "嵌入式测试与 CI 策略",
+          "path": "32_embedded_testing_and_ci_strategies.md"
+        },
+        {
+          "title": "安全关键嵌入式 Rust 指南",
+          "path": "30_misra_rust_safety_critical_guidelines.md"
+        },
+        {
+          "title": "Rust vs C/C++",
+          "path": "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md"
+        },
+        {
+          "title": "Rust vs Ada/SPARK",
+          "path": "../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md"
         }
       ],
       "theorems": [],

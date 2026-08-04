@@ -126,8 +126,11 @@ D5_WHITELIST_FILES = {
     "concept/sources/INDEX.md":
         "来源索引：Unstable Book(UNB) 作为权威来源条目及其 nightly 状态标注即索引内容本身",
     # ---- 2026-07-13 逐文件复核登记（W0-W5 新建/扩展页 + 既有页补登记）----
-    "concept/00_meta/05_quizzes/01_quiz_meta_framework.md":
+    "concept/00_meta/09_quizzes/01_quiz_meta_framework.md":
         "L0 测验框架页：quiz 题目/解析以 nightly feature(custom_borrowck)、rustc 插件 unstable 为概念辨析考点，非正文依赖",
+    # ---- 2026-08-04 P8-7 新增页登记 ----
+    "concept/00_meta/05_ai_semantic_engineering/02_llm_rag_for_rust.md":
+        "L0 元框架页：nightly/preview 作为 LLM 抽取与 RAG 评估中必须标注的版本边界维度被引用，非稳定层正文依赖",
     "concept/01_foundation/02_type_system/02_never_type.md":
         "never_type feature 截至 1.97 仍未稳定，页面主题即 `!` 类型及其稳定化路径（含 nightly 边界标注）",
     "concept/02_intermediate/00_traits/02_dispatch_mechanisms.md":
@@ -345,6 +348,15 @@ D5_WHITELIST_FILES = {
     # 开发工具链事实。
     "concept/06_ecosystem/05_systems_and_embedded/45_embedded_hardware_validation.md":
         "嵌入式硬件端到端验证页：nightly/preview/unstable 为 `-Z build-std`、nightly-only 目标或 Embassy 实验特性的客观边界陈述",
+    # ---- 2026-08-04 P8-2 no_std/裸机/嵌入式硬件深度梳理：新增三页均讨论 no_std + alloc +
+    # embedded-hal 驱动模式，其中 nightly/preview/unstable 提及为 `-Z build-std`、nightly-only
+    # 目标、自定义 target、compiler_builtins 或嵌入式实验工具链事实，属裸机开发客观边界陈述。
+    "concept/06_ecosystem/05_systems_and_embedded/47_bare_metal_rust.md":
+        "裸机 Rust 页：nightly/preview/unstable 为 `-Z build-std`、nightly-only 目标、自定义 target 的工具链事实陈述",
+    "concept/06_ecosystem/05_systems_and_embedded/48_no_std_alloc_crate_ecosystem.md":
+        "no_std alloc crate 生态页：nightly/preview/unstable 为 `-Z build-std`、自定义 target、allocator_api 等工具链事实陈述",
+    "concept/06_ecosystem/05_systems_and_embedded/49_embedded_hal_driver_patterns.md":
+        "Embedded-HAL 驱动模式页：nightly/preview/unstable 为 `-Z build-std`、nightly-only 目标或嵌入式实验特性的客观边界陈述",
 }
 
 

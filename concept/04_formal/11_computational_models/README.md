@@ -22,6 +22,8 @@
 2. 图灵机、递归函数、λ 演算、形式语言层级如何刻画「可计算」？
 3. 可计算函数作为数学对象与 Rust 函数/闭包有何对应与差异？
 4. 不同计算模型之间的等价性与表达能力边界是什么？
+5. 类型系统、分离逻辑、并发模型作为计算模型如何具体投影到 Rust？
+6. CSP、Actor、TLA+ 等并发形式模型与 Rust 通道/Actor 框架/异步运行时的关系是什么？
 
 ---
 
@@ -34,6 +36,10 @@
 | 03 | `03_formal_languages_and_automata.md` | 形式语言与自动机：正则/上下文无关/图灵可识别层级 | ✅ 已创建 |
 | 04 | `04_mathematical_functions_of_computation.md` | 计算的数学函数：μ-递归、λ-可定义、Scott 域与指称语义 | ✅ 已创建 |
 | 05 | `05_equivalence_of_computational_models.md` | 计算模型等价性：图灵等价、表达能力、Felleisen 框架 | ✅ 已创建 |
+| 06 | `06_computational_equivalence_in_rust.md` | Rust 中的计算等价与表达力边界 | ✅ 已创建 |
+| 07 | `07_type_theory_and_rust.md` | 类型论与 Rust：作为计算模型的类型系统 | ✅ 已创建 |
+| 08 | `08_separation_logic_for_rust.md` | 分离逻辑与 Rust：Iris / RustBelt 视角 | ✅ 已创建 |
+| 09 | `09_concurrency_models_actors_csp.md` | 并发计算模型：CSP、Actor、TLA+ 与 Rust | ✅ 已创建 |
 
 ---
 
@@ -59,5 +65,8 @@ semantic_space.md §3 能表达边界 / §4 等价表达
             ├── 可计算性：图灵机 / 递归函数 / 停机问题
             ├── 形式语言：自动机层级与 Rust 语法子集
             ├── 数学函数：可计算函数的数学模型
-            └── 模型等价：图灵等价与 Felleisen 表达力
+            ├── 模型等价：图灵等价与 Felleisen 表达力
+            ├── 类型模型：System Fω / 仿射类型 / 生命周期 / Curry-Howard
+            ├── 分离逻辑模型：own / shr / Iris / RustBelt
+            └── 并发模型：CSP / Actor / TLA+ 与 Rust 工程投影
 ```

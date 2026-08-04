@@ -22,11 +22,11 @@
 > W3-b（2026-07-12）新增 L0/L7 各 1 个、L6 子领域 3 个独立 quiz（各 10 题），并批量完成 concept→quiz 回链；
 > 2026-07-13 上述 5 个 quiz 各扩展至 15 题（10+5），并新增 L6 领域应用 quiz（15 题）。
 
-### L0 元层（`concept/00_meta/05_quizzes/`）
+### L0 元层（`concept/00_meta/09_quizzes/`）
 
 | Quiz | 主题 | 题数 | 题型构成 | 难度分布（🟢/🟡/🔴） | 回链 |
 |:---|:---|:---:|:---|:---:|:---:|
-| [01_quiz_meta_framework](../05_quizzes/01_quiz_meta_framework.md) | 元层框架与知识体系架构 | 15 | 代码阅读/单选/多选/判断 | 3/7/5 | ✅ |
+| [01_quiz_meta_framework](../09_quizzes/01_quiz_meta_framework.md) | 元层框架与知识体系架构 | 15 | 代码阅读/单选/多选/判断 | 3/7/5 | ✅ |
 
 ### L1 基础层（`concept/01_foundation/11_quizzes/`）
 

@@ -232,7 +232,7 @@ def main() -> int:
             "00_meta/02_sources",
             "00_meta/03_audit",
             "00_meta/04_navigation",
-            "00_meta/05_quizzes",
+            "00_meta/09_quizzes",
             "00_meta/06_trpl_3rd_ed_mapping",
             "00_meta/07_placeholders",
         }
@@ -255,7 +255,7 @@ def main() -> int:
             "00_meta/00_framework",
             "00_meta/01_terminology",
             "00_meta/02_sources",
-            "00_meta/05_quizzes",
+            "00_meta/09_quizzes",
         }
         META_CONSUMER_DIRS = {
             "00_meta/03_audit",

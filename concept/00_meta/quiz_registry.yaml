@@ -1,5 +1,5 @@
 schema_version: 1
-generated: '2026-07-31'
+generated: '2026-07-12'
 purpose: 全库测验资产机器可读注册表（W3-a）。人类可读索引见 concept/00_meta/04_navigation/15_quiz_registry.md；一致性由 scripts/check_quiz_system.py 校验。
 standalone_quizzes:
 - path: concept/01_foundation/11_quizzes/01_quiz_type_system.md
@@ -312,7 +312,7 @@ standalone_quizzes:
   concept_pages:
   - concept/06_ecosystem/00_toolchain/01_toolchain.md
   concept_to_quiz_backlink: true
-- path: concept/00_meta/05_quizzes/01_quiz_meta_framework.md
+- path: concept/00_meta/09_quizzes/01_quiz_meta_framework.md
   layer: L0
   topic: 元层框架与知识体系架构（L0–L7 分层、Bloom 映射、A/S/P 标记、canonical 规则）
   concept_pages:
@@ -439,8 +439,8 @@ standalone_quizzes:
   concept_to_quiz_backlink: true
 embedded_quizzes:
   description: concept/ 页面内嵌入式测验（### 测验 N + <details> 答题块），按页聚合
-  pages: 347
-  total_blocks: 1503
+  pages: 350
+  total_blocks: 1512
   items:
   - path: concept/00_meta/00_framework/bloom_taxonomy.md
     blocks: 3
@@ -816,6 +816,14 @@ embedded_quizzes:
     blocks: 7
   - path: concept/04_formal/11_computational_models/05_equivalence_of_computational_models.md
     blocks: 7
+  - path: concept/04_formal/11_computational_models/06_computational_equivalence_in_rust.md
+    blocks: 4
+  - path: concept/04_formal/11_computational_models/07_type_theory_and_rust.md
+    blocks: 3
+  - path: concept/04_formal/11_computational_models/08_separation_logic_for_rust.md
+    blocks: 3
+  - path: concept/04_formal/11_computational_models/09_concurrency_models_actors_csp.md
+    blocks: 3
   - path: concept/04_formal/12_concurrency_models/02_expressiveness_of_concurrent_models.md
     blocks: 5
   - path: concept/04_formal/13_semantic_engineering/06_ai_ontology_and_rust_semantics.md

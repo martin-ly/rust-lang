@@ -9,7 +9,11 @@
 > **受众**: [进阶]
 > **权威来源**: 本文件为 `concept/` 权威页。
 >
-> **来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) · [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+> **来源**:
+> [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) ·
+> [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
+> [Brown University — Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
+> [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 ---
 
 > **层级**: L5 对比分析
@@ -2071,7 +2075,15 @@ fn main() {
 }
 ```
 
-> **修正**: Rust **禁止所有隐式类型转换**（除少数自动强制：`&T` → `&U` 若 `T: U`、`&mut T` → `&T`、自动解引用）。数值类型转换必须显式：`as`（强制转换，可能截断/溢出）或 `From`/`TryFrom`（安全转换）。C++ 的隐式转换链：`short` → `int` → `long` → `long long`，可能意外提升或截断。Rust 的设计哲学：**显式优于隐式**，所有可能丢失信息的操作需开发者明确承担。C++ 的替代：`explicit` 构造函数（防止隐式转换）、`= delete`（删除转换运算符）、`narrow_cast`（GSL 的显式窄化转换）。这与 Go 的隐式转换（无，所有转换需显式）或 Java 的隐式转换（数值提升允许，但需注意溢出）不同——Rust 在类型转换上最保守，编译期排除所有隐式转换。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] · [来源: [Rust Reference — Type Cast Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions)]
+> **修正**:
+> Rust **禁止所有隐式类型转换**（除少数自动强制：`&T` → `&U` 若 `T: U`、`&mut T` → `&T`、自动解引用）。
+> 数值类型转换必须显式：`as`（强制转换，可能截断/溢出）或 `From`/`TryFrom`（安全转换）。
+> C++ 的隐式转换链：`short` → `int` → `long` → `long long`，可能意外提升或截断。
+> Rust 的设计哲学：**显式优于隐式**，所有可能丢失信息的操作需开发者明确承担。
+> C++ 的替代：`explicit` 构造函数（防止隐式转换）、`= delete`（删除转换运算符）、`narrow_cast`（GSL 的显式窄化转换）。
+> 这与 Go 的隐式转换（无，所有转换需显式）或 Java 的隐式转换（数值提升允许，但需注意溢出）不同——Rust 在类型转换上最保守，编译期排除所有隐式转换。
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch03-02-data-types.html)] ·
+> [来源: [Rust Reference — Type Cast Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions)]
 
 ### 10.4 边界测试：C++ 的模板特化与 Rust 的 trait 实现的冲突解决（编译错误）
 
@@ -2096,7 +2108,29 @@ fn main() {
 }
 ```
 
-> **修正**: Rust 的 trait 实现**一致性检查**：1) 无冲突实现（同一类型不能有同一 trait 的两个实现）；2) 孤儿规则（Orphan Rule）（实现者或 trait 定义在当前 crate）；3) 重叠检查（blanket impl 与具体 impl 不能冲突）。C++ 的模板特化：1) 允许任意地方的特化；2) 部分特化（`template<class T> class Foo<T*>`）；3) 特化可能冲突（ODR 违规，链接错误）。Rust 更严格但更安全：编译期排除冲突，无链接期惊喜。替代方案：1) 使用具体类型包装（newtype）；2) 使用 trait object（运行时分发）；3) 使用 `min_specialization`（每日构建版，限制性子集）。这与 Haskell 的 overlapping instances（可控制重叠）或 Scala 的 implicit resolution（最具体匹配）不同——Rust 宁可拒绝合法程序也不允许冲突。[来源: [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)] · [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)]
+> **修正**:
+> Rust 的 trait 实现**一致性检查**：
+>
+> 1) 无冲突实现（同一类型不能有同一 trait 的两个实现）；
+> 2) 孤儿规则（Orphan Rule）（实现者或 trait 定义在当前 crate）；
+> 3) 重叠检查（blanket impl 与具体 impl 不能冲突）。
+>
+> C++ 的模板特化：
+>
+> 1) 允许任意地方的特化；
+> 2) 部分特化（`template<class T> class Foo<T*>`）；
+> 3) 特化可能冲突（ODR 违规，链接错误）。
+>
+> Rust 更严格但更安全：编译期排除冲突，无链接期惊喜。
+> 替代方案：
+>
+> 1) 使用具体类型包装（newtype）；
+> 2) 使用 trait object（运行时分发）；
+> 3) 使用 `min_specialization`（每日构建版，限制性子集）。
+>
+> 这与 Haskell 的 overlapping instances（可控制重叠）或 Scala 的 implicit resolution（最具体匹配）不同——Rust 宁可拒绝合法程序也不允许冲突。
+> [来源: [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)] ·
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 
 ---
 

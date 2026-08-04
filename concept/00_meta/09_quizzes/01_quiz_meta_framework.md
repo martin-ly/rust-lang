@@ -310,14 +310,14 @@ concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md 正文重复�
 - A. `00_framework/` — Bloom 分类法、方法论等框架性规范
 - B. `01_terminology/` — 术语表（glossary 对齐检查的权威表）
 - C. `03_audit/` — 审计指南、A/S/P 标记规范等质量治理
-- D. `05_quizzes/` — L1–L7 全部独立 quiz 的统一存放处
+- D. `09_quizzes/` — L1–L7 全部独立 quiz 的统一存放处
 
 <details>
 <summary>✅ 答案与解析</summary>
 
 **答案：A、B、C**
 
-**解析**：A/B/C 与 [Concept 元层](../README.md) 的子目录职责表一致：框架规范、术语权威表、质量治理分属三个目录。D 错：`05_quizzes/` 只存放 **L0 元层自身**的独立 quiz；L1–L7 的 quiz 分布在各层的 `NN_quizzes/` 子目录（如 `01_foundation/11_quizzes/`、`06_ecosystem/13_quizzes/`），统一视图由 quiz 注册表提供而非物理集中。
+**解析**：A/B/C 与 [Concept 元层](../README.md) 的子目录职责表一致：框架规范、术语权威表、质量治理分属三个目录。D 错：`09_quizzes/` 只存放 **L0 元层自身**的独立 quiz；L1–L7 的 quiz 分布在各层的 `NN_quizzes/` 子目录（如 `01_foundation/11_quizzes/`、`06_ecosystem/13_quizzes/`），统一视图由 quiz 注册表提供而非物理集中。
 
 </details>
 

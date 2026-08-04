@@ -310,7 +310,9 @@ pub enum Operation<'a> {
 }
 
 pub trait AddressMode: Copy + PartialEq {}
+#[derive(Copy, Clone, PartialEq)]
 pub enum SevenBitAddress {}
+#[derive(Copy, Clone, PartialEq)]
 pub enum TenBitAddress {}
 impl AddressMode for SevenBitAddress {}
 impl AddressMode for TenBitAddress {}

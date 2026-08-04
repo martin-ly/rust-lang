@@ -8,7 +8,7 @@
 # Rust 中的动态规划
 
 **EN**: Dynamic Programming in Rust
-**Summary**: Memoization vs tabulation, 0/1 knapsack, LCS, edit distance, and matrix chain multiplication implemented in Rust, with ownership-aware DP tables, rolling arrays, and complexity-aware idioms.
+**Summary**: Memoization vs tabulation, 0/1 knapsack, LCS, edit distance, matrix chain multiplication, and competitive-programming patterns (tree DP, digit DP, bitmask DP, SOS DP, LIS, grid paths) implemented in Rust, with ownership-aware DP tables, rolling arrays, and CP-algorithms/USACO Guide alignment.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5-L6
@@ -47,6 +47,13 @@ mindmap
       最长公共子序列 LCS
       编辑距离
       矩阵链乘法
+    竞赛编程模式
+      树形 DP
+      数位 DP
+      状态压缩 DP / TSP
+      SOS DP
+      最长上升子序列 LIS
+      网格路径
     空间优化
       滚动数组
       状态压缩
@@ -412,7 +419,231 @@ graph TD
 
 ---
 
-## 五、权威来源索引
+## 五、竞赛编程动态规划模式
+
+本节对齐 **USACO Guide** 与 **CP-algorithms** 中高频的 DP 模式。它们与 2.1–2.6 的经典模型互补，覆盖树、数位、子集、网格等竞赛常见结构。
+
+> **来源**: [USACO Guide — Dynamic Programming](https://usaco.guide/plat/dp-introduction?lang=cpp) · [CP-algorithms — Dynamic Programming](https://cp-algorithms.com/dynamic_programming/index.html)
+
+### 5.1 树形 DP
+
+树形 DP 通过一次 DFS 自底向上收集子树信息。下面的例子计算每个节点的子树大小。
+
+```rust
+fn subtree_sizes(adj: &[Vec<usize>], root: usize) -> Vec<usize> {
+    let n = adj.len();
+    let mut size = vec![1; n];
+
+    fn dfs(u: usize, p: usize, adj: &[Vec<usize>], size: &mut [usize]) {
+        for &v in &adj[u] {
+            if v != p {
+                dfs(v, u, adj, size);
+                size[u] += size[v];
+            }
+        }
+    }
+
+    dfs(root, root, adj, &mut size);
+    size
+}
+
+fn main() {
+    let adj = vec![
+        vec![1, 2],
+        vec![3],
+        vec![],
+        vec![],
+    ];
+    assert_eq!(subtree_sizes(&adj, 0), vec![4, 2, 1, 1]);
+}
+```
+
+**Rust 注意**：父节点参数 `p` 避免 DFS 回到父节点，消除了对 `visited` 数组的依赖；`size` 作为单独可变借用传入，与只读 `adj` 不冲突。
+
+### 5.2 数位 DP
+
+数位 DP 用于统计满足某种性质的数字个数，典型场景是「区间 `[0, n]` 中不含某一位的数」。
+
+```rust
+fn count_without_digit_4(n: u64) -> u64 {
+    let digits: Vec<u8> = n.to_string()
+        .bytes()
+        .map(|b| b - b'0')
+        .collect();
+    let len = digits.len();
+    // dp[pos][tight]：处理到第 pos 位，是否仍紧贴 n 前缀的方案数
+    let mut dp = vec![vec![0u64; 2]; len + 1];
+    dp[0][1] = 1;
+
+    for pos in 0..len {
+        for tight in 0..2 {
+            let limit = if tight == 1 { digits[pos] } else { 9 };
+            for d in 0..=limit {
+                let next_tight = if tight == 1 && d == limit { 1 } else { 0 };
+                if d != 4 {
+                    dp[pos + 1][next_tight] += dp[pos][tight];
+                }
+            }
+        }
+    }
+    dp[len][0] + dp[len][1]
+}
+
+fn main() {
+    // 0..=100 中不含 4 的数：100 - {4, 14, 24, 34, 40-49, 54, 64, 74, 84, 94}
+    let ans = count_without_digit_4(100);
+    assert_eq!(ans, 81);
+}
+```
+
+**关键点**：`tight` 状态区分「前缀已小于 n」与「仍等于 n 前缀」，保证不重复、不遗漏。
+
+### 5.3 状态压缩 DP：旅行商问题（TSP）
+
+当状态可以用一个小集合的子集表示时，可用位掩码 DP。TSP 是经典例子。
+
+```rust
+fn tsp_shortest_tour(dist: &[Vec<u64>]) -> u64 {
+    let n = dist.len();
+    let full = 1 << n;
+    let mut dp = vec![vec![u64::MAX; n]; full];
+    dp[1][0] = 0; // 从 0 出发
+
+    for mask in 1..full {
+        for u in 0..n {
+            if dp[mask][u] == u64::MAX {
+                continue;
+            }
+            for v in 0..n {
+                if mask & (1 << v) == 0 {
+                    let next = mask | (1 << v);
+                    dp[next][v] = dp[next][v].min(dp[mask][u].saturating_add(dist[u][v]));
+                }
+            }
+        }
+    }
+
+    let full_mask = full - 1;
+    (0..n)
+        .map(|i| dp[full_mask][i].saturating_add(dist[i][0]))
+        .min()
+        .unwrap_or(u64::MAX)
+}
+
+fn main() {
+    let dist = vec![
+        vec![0, 10, 15, 20],
+        vec![10, 0, 35, 25],
+        vec![15, 35, 0, 30],
+        vec![20, 25, 30, 0],
+    ];
+    assert_eq!(tsp_shortest_tour(&dist), 80);
+}
+```
+
+**溢出防护**：使用 `saturating_add` 避免 `u64::MAX` 参与加法时回绕。
+
+### 5.4 SOS DP（Sum Over Subsets）
+
+给定 `f[mask]`，计算 `F[mask] = Σ f[submask]`（对所有 `submask ⊆ mask`）。
+
+```rust
+fn sos_dp(f: &mut [i64]) {
+    let n = f.len().trailing_zeros() as usize;
+    for i in 0..n {
+        for mask in 0..f.len() {
+            if mask & (1 << i) != 0 {
+                f[mask] += f[mask ^ (1 << i)];
+            }
+        }
+    }
+}
+
+fn main() {
+    let mut f = vec![1i64; 8]; // 3 位，每个掩码初始为 1
+    sos_dp(&mut f);
+    // mask = 0b111 的子集有 8 个，每个贡献 1
+    assert_eq!(f[0b111], 8);
+    assert_eq!(f[0b001], 2);
+}
+```
+
+**来源**: [CP-algorithms — Submask Enumeration & SOS DP](https://cp-algorithms.com/algebra/all-submasks.html)
+
+### 5.5 最长上升子序列（LIS）
+
+`O(n log n)` 的耐心排序法使用二分查找维护 `tails` 数组。
+
+```rust
+fn lis_length(nums: &[i64]) -> usize {
+    let mut tails = Vec::new();
+    for &x in nums {
+        let pos = tails.partition_point(|&v| v < x);
+        if pos == tails.len() {
+            tails.push(x);
+        } else {
+            tails[pos] = x;
+        }
+    }
+    tails.len()
+}
+
+fn main() {
+    assert_eq!(lis_length(&[10, 9, 2, 5, 3, 7, 101, 18]), 4);
+}
+```
+
+### 5.6 网格路径 DP
+
+计数从左上角到右下角、只能向下/向右且不经过障碍的路径数。
+
+```rust
+fn count_grid_paths(grid: &[Vec<bool>]) -> i64 {
+    let rows = grid.len();
+    let cols = grid[0].len();
+    let mut dp = vec![vec![0i64; cols]; rows];
+    dp[0][0] = if grid[0][0] { 1 } else { 0 };
+
+    for r in 0..rows {
+        for c in 0..cols {
+            if !grid[r][c] {
+                continue;
+            }
+            if r > 0 {
+                dp[r][c] += dp[r - 1][c];
+            }
+            if c > 0 {
+                dp[r][c] += dp[r][c - 1];
+            }
+        }
+    }
+    dp[rows - 1][cols - 1]
+}
+
+fn main() {
+    let grid = vec![
+        vec![true, true, true],
+        vec![true, false, true],
+        vec![true, true, true],
+    ];
+    assert_eq!(count_grid_paths(&grid), 2);
+}
+```
+
+**选型提示**：
+
+| 模式 | 适用场景 | 时间复杂度 | Rust 实现要点 |
+|:---|:---|:---:|:---|
+| 树形 DP | 子树信息聚合 | `O(n)` | 父节点参数防回退 |
+| 数位 DP | 数字计数/统计 | `O(位数 × 状态数 × 10)` | `tight` 状态 + `Vec<Vec<u64>>` |
+| 状态压缩 DP | `n ≤ 20` 的集合选择 | `O(2^n · n²)` | 位运算枚举状态 |
+| SOS DP | 子集和查询 | `O(n · 2^n)` | 按位迭代累加 |
+| LIS | 最长上升子序列 | `O(n log n)` | `partition_point` 二分 |
+| 网格路径 | 二维 DAG 计数 | `O(RC)` | 二维 `Vec` 滚动或完整表 |
+
+---
+
+## 六、权威来源索引
 
 - **P0 官方**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 - **P0 官方**: [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
@@ -420,14 +651,18 @@ graph TD
 - **P1 学术**: [Cormen, Leiserson, Rivest & Stein — *Introduction to Algorithms*, 4th ed.](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)（DP、背包、LCS、编辑距离、矩阵链乘法）
 - **P1 学术**: [Kleinberg & Tardos — *Algorithm Design*](https://www.cs.princeton.edu/~wayne/kleinberg-tardos/)（最优子结构与交换论证）
 - **P1 学术**: [Dynamic Programming Optimizations — arXiv:2004.01309](https://arxiv.org/abs/2004.01309)
+- **P1 竞赛**: [USACO Guide — Dynamic Programming](https://usaco.guide/plat/dp-introduction?lang=cpp)（树形 DP、数位 DP、状态压缩 DP、LIS、网格路径）
+- **P1 竞赛**: [CP-algorithms — Dynamic Programming](https://cp-algorithms.com/dynamic_programming/index.html)（SOS DP、子集 DP、DP 优化）
 - **P2 生态**: [docs.rs — itertools](https://docs.rs/itertools/latest/itertools/)（迭代器扩展，常用于 DP 辅助）
 - **P2 生态**: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
 
-> **文档版本**: 1.0 ｜ **最后更新**: 2026-08-03 ｜ **状态**: ✅ 新建权威页
+> **文档版本**: 1.1 ｜ **最后更新**: 2026-08-04 ｜ **状态**: ✅ 扩展 CP/USACO DP 模式
 
 ## 国际化权威来源补充（International Authority Sources）
 
 - <https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/>
 - <https://www.cs.princeton.edu/~wayne/kleinberg-tardos/>
 - <https://arxiv.org/abs/2004.01309>
+- <https://usaco.guide/plat/dp-introduction?lang=cpp>
+- <https://cp-algorithms.com/dynamic_programming/index.html>
 - <https://doc.rust-lang.org/std/collections/struct.HashMap.html>

@@ -1370,6 +1370,7 @@ GoF 模式在 Rust 企业级系统中的典型组合：
 | 微服务 | Facade + Proxy + Circuit Breaker + Event Sourcing | [`../14_enterprise_architecture/08_microservices_patterns_in_rust.md`](../14_enterprise_architecture/08_microservices_patterns_in_rust.md) |
 | 事件驱动系统 | Observer + Mediator + Saga + Outbox | [`../14_enterprise_architecture/11_event_driven_and_cqrs_patterns.md`](../14_enterprise_architecture/11_event_driven_and_cqrs_patterns.md) |
 | 云原生/Serverless | Adapter + Decorator + Sidecar | [`../14_enterprise_architecture/12_cloud_native_and_serverless_patterns.md`](../14_enterprise_architecture/12_cloud_native_and_serverless_patterns.md) |
+| 跨语言范式对比 | Rust 与 C++/Go/Java 的模式实现差异 | [`../../05_comparative/01_systems_languages/01_rust_vs_cpp.md`](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) |
 
 ---
 

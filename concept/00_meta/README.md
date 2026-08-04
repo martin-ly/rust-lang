@@ -43,18 +43,21 @@ graph TD
 | `02_sources/` | 权威来源映射 | [权威来源映射表](02_sources/01_authority_source_map.md) |
 | `03_audit/` | 质量审计与治理 | [Concept Audit Guide](03_audit/01_concept_audit_guide.md) · [分级体系](03_audit/06_grading_system.md) · [模板去同质化](03_audit/05_template_deduplication_guide.md) |
 | `04_navigation/` | 索引与交叉引用 | [全局概念索引](04_navigation/03_concept_index.md) · [交叉引用矩阵](04_navigation/01_cross_reference_matrix.md) |
+| `05_ai_semantic_engineering/` | AI 本体论、语义工程与 KG 增强 | [知识图谱设计](05_ai_semantic_engineering/01_knowledge_graph_design.md) · [LLM RAG for Rust](05_ai_semantic_engineering/02_llm_rag_for_rust.md) |
 | `knowledge_topology/` | 知识体系拓扑图谱集（无序号专题系列，见下） | [拓扑图谱集 README](knowledge_topology/README.md) |
 | `07_placeholders/` | SUMMARY.md 导航占位文件 | 待创建主题的导航入口 |
+| `09_quizzes/` | L0 元层独立测验 | [元层框架与知识体系架构测验](09_quizzes/01_quiz_meta_framework.md) |
 
 ## 编号说明
 
 `concept/00_meta/` 采用以下编号策略（AGENTS.md §4.0）：
 
-- `00_`–`05_` 为常规编号子目录。
+- `00_`–`05_` 为常规编号子目录；`05_ai_semantic_engineering/` 为 P8-7 新增 AI 本体论与语义工程目录。
 - `06_trpl_3rd_ed_mapping.md` 原与 `01_terminology/` 同号，已迁移到空号 `06_`，避免重复。
 - `07_trpl_3rd_edition_alignment.md` 为 TRPL 第 3 版对照审计页，使用 `07_` 前缀。
 - `08_usability_testing_framework.md` 为知识库可用性测试框架页，使用 `08_` 前缀。
 - `07_placeholders/` 由未编号目录重命名而来，保持目录内连续序号。
+- `09_quizzes/` 为 L0 元层独立测验目录，由原 `05_quizzes/` 迁移而来（P8-7 释放 `05_` 给 `05_ai_semantic_engineering/`）。
 - `knowledge_topology/` 是**大型无序号专题系列目录**，内部已按 `01_`–`10_` 编号，并附 [README 索引](knowledge_topology/README.md)；按 AGENTS.md §4.0-4 保留为无序号系列目录，不再额外赋予顶层序号。
 - `00_framework/` 同样为注册的无序号专题系列目录，其文件保持无序号以兼容系列约定。
 
@@ -164,4 +167,4 @@ graph LR
 
 ## 相关概念
 
-- [对应测验](05_quizzes/01_quiz_meta_framework.md) — 元层框架与知识体系架构（L0–L7 分层、Bloom 映射、A/S/P 标记、canonical 规则）
+- [对应测验](09_quizzes/01_quiz_meta_framework.md) — 元层框架与知识体系架构（L0–L7 分层、Bloom 映射、A/S/P 标记、canonical 规则）

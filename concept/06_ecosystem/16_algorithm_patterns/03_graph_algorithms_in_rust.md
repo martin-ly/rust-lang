@@ -4,7 +4,7 @@
 # Rust 中的图算法
 
 **EN**: Graph Algorithms in Rust
-**Summary**: BFS, DFS, Dijkstra, and Bellman-Ford implemented in Rust with index-based adjacency lists, explicit borrowing discipline, error handling for invalid edges, and parallel frontier expansions.
+**Summary**: BFS, DFS, Dijkstra, Bellman-Ford, and competitive-programming patterns (topological sort, SCC, LCA, tree diameter, Floyd-Warshall, 2-SAT, flood fill) implemented in Rust with index-based adjacency lists, explicit borrowing discipline, and CP-algorithms/USACO Guide alignment.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5-L6
@@ -42,7 +42,15 @@ mindmap
     最短路
       Dijkstra：BinaryHeap<Reverse>
       Bellman-Ford：边列表 + 松弛
+      Floyd-Warshall：全源最短路
       负环检测
+    竞赛编程模式
+      拓扑排序：Kahn
+      强连通分量：Tarjan
+      LCA：倍增法
+      树直径
+      2-SAT
+      Flood Fill
     借用与并发
       &self 遍历
       &mut self 修改
@@ -642,23 +650,444 @@ graph TD
 
 ---
 
-## 五、权威来源索引
+## 五、竞赛编程图算法模式
+
+本节对齐 **CP-algorithms** 与 **USACO Guide** 的高频图模式，重点展示如何在 Rust 中安全、可复用地实现这些模式。这些模式与 2.1–2.7 的基础算法互补：当问题具有特定结构（有向无环、树、2-SAT、网格）时，可快速定位到对应算法。
+
+> **来源**: [CP-algorithms — Graph](https://cp-algorithms.com/graph/index.html) · [USACO Guide — Graphs](https://usaco.guide/silver/graph-traversal?lang=cpp)
+
+### 5.1 拓扑排序（Kahn 算法）
+
+拓扑排序适用于有向无环图（DAG）。Kahn 算法通过维护入度为 0 的顶点集合，逐步释放依赖。
+
+```rust
+use std::collections::VecDeque;
+
+fn topological_sort(adj: &[Vec<usize>]) -> Option<Vec<usize>> {
+    let n = adj.len();
+    let mut indeg = vec![0; n];
+    for u in 0..n {
+        for &v in &adj[u] {
+            indeg[v] += 1;
+        }
+    }
+
+    let mut q: VecDeque<usize> = (0..n).filter(|&u| indeg[u] == 0).collect();
+    let mut order = Vec::with_capacity(n);
+
+    while let Some(u) = q.pop_front() {
+        order.push(u);
+        for &v in &adj[u] {
+            indeg[v] -= 1;
+            if indeg[v] == 0 {
+                q.push_back(v);
+            }
+        }
+    }
+
+    if order.len() == n { Some(order) } else { None }
+}
+
+fn main() {
+    let adj = vec![
+        vec![1, 2],
+        vec![3],
+        vec![3],
+        vec![],
+    ];
+    assert_eq!(topological_sort(&adj), Some(vec![0, 1, 2, 3]));
+
+    // 含环：0 -> 1 -> 2 -> 0
+    let cyclic = vec![vec![1], vec![2], vec![0]];
+    assert!(topological_sort(&cyclic).is_none());
+}
+```
+
+**Rust 注意**：`indeg` 与 `adj` 分离，遍历时只读 `adj`，避免借用冲突；返回 `Option` 显式表达「图非 DAG」这一失败模式。
+
+### 5.2 强连通分量（Tarjan 算法）
+
+强连通分量（SCC）缩点是竞赛中处理有向图环结构的核心工具。Tarjan 算法一次 DFS 即可求出所有 SCC。
+
+```rust
+fn tarjan_scc(adj: &[Vec<usize>]) -> Vec<Vec<usize>> {
+    let n = adj.len();
+    let mut index = 0usize;
+    let mut indices = vec![None; n];
+    let mut low = vec![0; n];
+    let mut stack = Vec::new();
+    let mut on_stack = vec![false; n];
+    let mut sccs: Vec<Vec<usize>> = Vec::new();
+
+    fn dfs(
+        u: usize,
+        adj: &[Vec<usize>],
+        index: &mut usize,
+        indices: &mut [Option<usize>],
+        low: &mut [usize],
+        stack: &mut Vec<usize>,
+        on_stack: &mut [bool],
+        sccs: &mut Vec<Vec<usize>>,
+    ) {
+        indices[u] = Some(*index);
+        low[u] = *index;
+        *index += 1;
+        stack.push(u);
+        on_stack[u] = true;
+
+        for &v in &adj[u] {
+            if indices[v].is_none() {
+                dfs(v, adj, index, indices, low, stack, on_stack, sccs);
+                low[u] = low[u].min(low[v]);
+            } else if on_stack[v] {
+                low[u] = low[u].min(indices[v].unwrap());
+            }
+        }
+
+        if low[u] == indices[u].unwrap() {
+            let mut comp = Vec::new();
+            loop {
+                let v = stack.pop().unwrap();
+                on_stack[v] = false;
+                comp.push(v);
+                if v == u { break; }
+            }
+            sccs.push(comp);
+        }
+    }
+
+    for u in 0..n {
+        if indices[u].is_none() {
+            dfs(u, adj, &mut index, &mut indices, &mut low, &mut stack, &mut on_stack, &mut sccs);
+        }
+    }
+    sccs
+}
+
+fn main() {
+    let adj = vec![
+        vec![1],
+        vec![2, 4],
+        vec![3, 5],
+        vec![0, 6],
+        vec![5],
+        vec![4],
+        vec![],
+    ];
+    let sccs = tarjan_scc(&adj);
+    // SCC 内部顺序可能不同，但分量集合应为 {0,1,2,3,6}, {4,5}
+    let mut sorted: Vec<Vec<usize>> = sccs
+        .into_iter()
+        .map(|mut c| { c.sort(); c })
+        .collect();
+    sorted.sort_by_key(|c| c[0]);
+    assert_eq!(sorted, vec![vec![0, 1, 2, 3, 6], vec![4, 5]]);
+}
+```
+
+**借用纪律**：递归辅助函数 `dfs` 接收多个独立可变引用（`indices`、`low`、`stack`、`on_stack`、`sccs`），它们与只读 `adj` 不冲突。`Vec<Option<usize>>` 既记录访问状态，又保存 DFS 序号。
+
+### 5.3 最近公共祖先（LCA，倍增法）
+
+倍增法 LCA 在 `O(n log n)` 预处理后每次查询 `O(log n)`，适合静态树。
+
+```rust
+struct Lca {
+    up: Vec<Vec<usize>>,
+    depth: Vec<usize>,
+}
+
+impl Lca {
+    fn new(adj: &[Vec<usize>], root: usize) -> Self {
+        let n = adj.len();
+        let log = (n + 1).next_power_of_two().trailing_zeros() as usize;
+        let mut up = vec![vec![root; log]; n];
+        let mut depth = vec![0; n];
+
+        fn dfs(
+            u: usize,
+            p: usize,
+            d: usize,
+            adj: &[Vec<usize>],
+            up: &mut [Vec<usize>],
+            depth: &mut [usize],
+        ) {
+            depth[u] = d;
+            up[u][0] = p;
+            for v in &adj[u] {
+                if *v != p {
+                    dfs(*v, u, d + 1, adj, up, depth);
+                }
+            }
+        }
+
+        dfs(root, root, 0, adj, &mut up, &mut depth);
+
+        for k in 1..log {
+            for u in 0..n {
+                up[u][k] = up[up[u][k - 1]][k - 1];
+            }
+        }
+
+        Self { up, depth }
+    }
+
+    fn lca(&self, mut u: usize, mut v: usize) -> usize {
+        let log = self.up[0].len();
+        if self.depth[u] < self.depth[v] {
+            std::mem::swap(&mut u, &mut v);
+        }
+        // 将 u 上提到与 v 同深
+        let diff = self.depth[u] - self.depth[v];
+        for k in 0..log {
+            if diff & (1 << k) != 0 {
+                u = self.up[u][k];
+            }
+        }
+        if u == v {
+            return u;
+        }
+        for k in (0..log).rev() {
+            if self.up[u][k] != self.up[v][k] {
+                u = self.up[u][k];
+                v = self.up[v][k];
+            }
+        }
+        self.up[u][0]
+    }
+}
+
+fn main() {
+    let adj = vec![
+        vec![1, 2],
+        vec![3, 4],
+        vec![5],
+        vec![],
+        vec![],
+        vec![],
+    ];
+    let lca = Lca::new(&adj, 0);
+    assert_eq!(lca.lca(3, 4), 1);
+    assert_eq!(lca.lca(3, 5), 0);
+    assert_eq!(lca.lca(2, 5), 2);
+}
+```
+
+**空间注意**：`up` 是 `n × log n` 的二维 `Vec`，对 `n ≤ 2×10^5` 竞赛规模约需 16–32 MB，通常可接受；对更大规模可改用 Euler Tour + RMQ。
+
+### 5.4 树直径
+
+树直径可在两次 DFS/BFS 内求出：先从任意点找到最远点 `u`，再从 `u` 找到最远点 `v`，`u–v` 距离即为直径。
+
+```rust
+use std::collections::VecDeque;
+
+fn tree_diameter(adj: &[Vec<usize>]) -> usize {
+    if adj.is_empty() {
+        return 0;
+    }
+    fn bfs_farthest(adj: &[Vec<usize>], start: usize) -> (usize, Vec<usize>) {
+        let n = adj.len();
+        let mut dist = vec![usize::MAX; n];
+        let mut q = VecDeque::new();
+        dist[start] = 0;
+        q.push_back(start);
+
+        while let Some(u) = q.pop_front() {
+            for &v in &adj[u] {
+                if dist[v] == usize::MAX {
+                    dist[v] = dist[u] + 1;
+                    q.push_back(v);
+                }
+            }
+        }
+
+        let far = (0..n).max_by_key(|&u| dist[u]).unwrap();
+        (far, dist)
+    }
+
+    let (u, _) = bfs_farthest(adj, 0);
+    let (v, dist_u) = bfs_farthest(adj, u);
+    dist_u[v]
+}
+
+fn main() {
+    let adj = vec![
+        vec![1, 2],
+        vec![0, 3],
+        vec![0],
+        vec![1],
+    ];
+    assert_eq!(tree_diameter(&adj), 3);
+}
+```
+
+### 5.5 全源最短路（Floyd-Warshall）
+
+Floyd-Warshall 用动态规划思想求所有顶点对最短路，适合稠密图或需要多次查询的场景。
+
+```rust
+const INF: i64 = i64::MAX / 4;
+
+fn floyd_warshall(n: usize, edges: &[(usize, usize, i64)]) -> Vec<Vec<i64>> {
+    let mut dist = vec![vec![INF; n]; n];
+    for i in 0..n {
+        dist[i][i] = 0;
+    }
+    for &(u, v, w) in edges {
+        dist[u][v] = dist[u][v].min(w);
+    }
+
+    for k in 0..n {
+        for i in 0..n {
+            for j in 0..n {
+                if dist[i][k] + dist[k][j] < dist[i][j] {
+                    dist[i][j] = dist[i][k] + dist[k][j];
+                }
+            }
+        }
+    }
+    dist
+}
+
+fn main() {
+    let edges = vec![(0, 1, 5), (1, 2, 3), (0, 2, 10)];
+    let dist = floyd_warshall(3, &edges);
+    assert_eq!(dist[0][2], 8);
+}
+```
+
+**边界**：若图中存在负环，则 `dist[i][i]` 最终会变成负数，可据此检测。
+
+### 5.6 2-SAT
+
+2-SAT 问题可通过蕴含图 + SCC 在 `O(n + m)` 内判定。每个布尔变量 `x_i` 拆成 `2i`（真）与 `2i+1`（假）两个顶点。
+
+```rust,ignore
+// 依赖本节 5.2 的 tarjan_scc 函数；此处展示 2-SAT 的变量拆点与赋值逻辑
+fn two_sat(n: usize, clauses: &[(i32, bool, i32, bool)]) -> Option<Vec<bool>> {
+    // 变量 i 的真节点 = 2*i, 假节点 = 2*i+1
+    let mut adj = vec![Vec::new(); 2 * n];
+    let mut add_implication = |a: usize, b: usize| {
+        adj[a].push(b);
+    };
+
+    for &(x, xv, y, yv) in clauses {
+        let (tx, fx) = (2 * x as usize, 2 * x as usize + 1);
+        let (ty, fy) = (2 * y as usize, 2 * y as usize + 1);
+        let (a, na) = if xv { (tx, fx) } else { (fx, tx) };
+        let (b, nb) = if yv { (ty, fy) } else { (fy, ty) };
+        add_implication(na, b); // ¬a => b
+        add_implication(nb, a); // ¬b => a
+    }
+
+    let sccs = tarjan_scc(&adj);
+    let mut comp_id = vec![0; 2 * n];
+    for (id, comp) in sccs.iter().enumerate() {
+        for &u in comp {
+            comp_id[u] = id;
+        }
+    }
+
+    let mut assignment = vec![false; n];
+    for i in 0..n {
+        if comp_id[2 * i] == comp_id[2 * i + 1] {
+            return None;
+        }
+        // Tarjan 的 SCC 按逆后序给出，ID 越大代表拓扑序越前
+        assignment[i] = comp_id[2 * i] > comp_id[2 * i + 1];
+    }
+    Some(assignment)
+}
+
+fn main() {
+    // (x0 = true) OR (x1 = true), (x0 = false) OR (x1 = false)
+    let clauses = vec![(0, true, 1, true), (0, false, 1, false)];
+    let sol = two_sat(2, &clauses).unwrap();
+    assert!(sol[0] || sol[1]);
+    assert!(!sol[0] || !sol[1]);
+}
+```
+
+> 注意：上面的 `tarjan_scc` 即 5.2 中定义的函数；在竞赛代码中通常把二者写在同一文件。
+
+### 5.7 网格图与 Flood Fill
+
+USACO Guide 将 flood fill 视为图遍历的特例：每个网格单元是顶点，四邻接是边。
+
+```rust
+fn flood_fill(grid: &mut [Vec<u8>], sr: usize, sc: usize, target: u8, fill: u8) {
+    if grid[sr][sc] != target {
+        return;
+    }
+    let rows = grid.len();
+    let cols = grid[0].len();
+    let mut stack = vec![(sr, sc)];
+    while let Some((r, c)) = stack.pop() {
+        if grid[r][c] != target {
+            continue;
+        }
+        grid[r][c] = fill;
+        let dirs = [(-1, 0), (1, 0), (0, -1), (0, 1)];
+        for (dr, dc) in dirs {
+            let nr = r as i32 + dr;
+            let nc = c as i32 + dc;
+            if nr >= 0 && nr < rows as i32 && nc >= 0 && nc < cols as i32 {
+                let (nr, nc) = (nr as usize, nc as usize);
+                if grid[nr][nc] == target {
+                    stack.push((nr, nc));
+                }
+            }
+        }
+    }
+}
+
+fn main() {
+    let mut grid = vec![
+        vec![b'1', b'1', b'0'],
+        vec![b'1', b'0', b'0'],
+        vec![b'0', b'0', b'1'],
+    ];
+    flood_fill(&mut grid, 0, 0, b'1', b'X');
+    assert_eq!(grid[0][0], b'X');
+    assert_eq!(grid[2][2], b'1');
+}
+```
+
+**选型提示**：
+
+| 模式 | 适用场景 | 时间复杂度 | Rust 实现要点 |
+|:---|:---|:---:|:---|
+| 拓扑排序 | DAG 依赖/任务调度 | `O(V + E)` | `VecDeque` + 入度数组 |
+| SCC / 2-SAT | 有向图环、布尔约束 | `O(V + E)` | Tarjan；变量拆点 |
+| LCA 倍增 | 静态树多次查询 | 预处理 `O(n log n)`，查询 `O(log n)` | 二维 `up` 表 |
+| 树直径 | 树的最长路径 | `O(V)` | 两次 BFS |
+| Floyd-Warshall | 稠密图全源最短路 | `O(V³)` | 二维 `Vec`，注意 `INF` 防溢出 |
+| Flood Fill | 网格连通块 | `O(RC)` | 显式栈避免递归深度问题 |
+
+---
+
+## 六、权威来源索引
 
 - **P0 官方**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
 - **P0 官方**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
 - **P1 学术**: [Cormen, Leiserson, Rivest & Stein — *Introduction to Algorithms*, 4th ed.](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)（BFS、DFS、Dijkstra、Bellman-Ford）
 - **P1 学术**: [Sedgewick & Wayne — *Algorithms*, 4th ed.](https://algs4.cs.princeton.edu/home/)（图算法实现导向）
 - **P1 学术**: [Blanuša, Ienne & Atasu — *Scalable Fine-Grained Parallel Cycle Enumeration Algorithms*](https://arxiv.org/abs/2202.09685)（SPAA '22；细粒度并行图搜索与负载均衡）
+- **P1 竞赛**: [CP-algorithms — Graph](https://cp-algorithms.com/graph/index.html)（拓扑排序、SCC、LCA、2-SAT、Floyd-Warshall）
+- **P1 竞赛**: [USACO Guide — Graphs](https://usaco.guide/silver/graph-traversal?lang=cpp)（Flood fill、拓扑排序、树直径、最短路径）
 - **P2 生态**: [petgraph docs](https://docs.rs/petgraph/latest/petgraph/)
 - **P2 生态**: [Rayon docs](https://docs.rs/rayon/latest/rayon/)
 - **P2 生态**: [Rust Algorithm Club — Graph Algorithms](https://rust-algo.club/)
 
-> **文档版本**: 1.0 ｜ **最后更新**: 2026-08-03 ｜ **状态**: ✅ 新建权威页
+> **文档版本**: 1.1 ｜ **最后更新**: 2026-08-04 ｜ **状态**: ✅ 扩展 CP/USACO 图模式
 
 ## 国际化权威来源补充（International Authority Sources）
 
 - <https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/>
 - <https://algs4.cs.princeton.edu/home/>
 - <https://arxiv.org/abs/2202.09685>
+- <https://cp-algorithms.com/graph/index.html>
+- <https://usaco.guide/silver/graph-traversal?lang=cpp>
 - <https://docs.rs/petgraph/latest/petgraph/>
 - <https://docs.rs/rayon/latest/rayon/>

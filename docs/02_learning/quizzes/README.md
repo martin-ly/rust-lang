@@ -18,7 +18,7 @@
 
 | 主题 | 测验文件 | 题数 |
 | :--- | :--- | :---: |
-| 元层框架与知识体系架构 | [01_quiz_meta_framework.md](../../../concept/00_meta/05_quizzes/01_quiz_meta_framework.md) | 15 |
+| 元层框架与知识体系架构 | [01_quiz_meta_framework.md](../../../concept/00_meta/09_quizzes/01_quiz_meta_framework.md) | 15 |
 
 ### L1 基础层（01_foundation）
 
