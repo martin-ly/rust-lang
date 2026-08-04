@@ -15,6 +15,10 @@ categories = ["embedded", "no-std"]
 # C++ 互操作（可选）
 cxx = { version = "1.0.198", optional = true }
 
+# ESP32 系列 bare-metal HAL 与日志打印（可选，通过 `esp32c3-hal` feature 启用）
+esp-hal = { workspace = true, optional = true, features = ["esp32c3", "rt"] }
+esp-println = { workspace = true, optional = true, features = ["esp32c3", "uart"] }
+
 # 仅在 ARM 嵌入式目标下启用真实硬件依赖
 # host 环境 (x86_64 Windows) 下不使用这些依赖，确保 cargo check 通过
 [target.'cfg(target_arch = "arm")'.dependencies]
@@ -33,12 +37,15 @@ critical-section = "1.2"
 
 # 仅在 RISC-V 嵌入式目标下启用真实硬件依赖
 [target.'cfg(target_arch = "riscv32")'.dependencies]
-# `critical-section-single-hart` feature 提供 `_critical_section_1_0_acquire/release` 实现。
-riscv = { workspace = true, features = ["critical-section-single-hart"] }
+# 注意：不启用 `critical-section-single-hart` feature。esp-hal 1.x 会自行提供
+# ESP32-C3 的 critical-section 实现；启用该 feature 会与 esp-hal 的 restore-state
+# 选择冲突。裸机 RISC-V 示例如需 critical-section，请在独立 crate 中单独配置。
+riscv = { workspace = true }
 riscv-rt = { workspace = true }
 panic-halt = { workspace = true }
 # critical-section 是 no_std 并发事实标准；显式声明便于示例使用。
-critical-section = "1.2"
+# 禁用 default-features 避免与 esp-hal 的 restore-state 选择冲突。
+critical-section = { version = "1.2", default-features = false }
 
 [build-dependencies]
 bindgen = { workspace = true }
@@ -66,6 +73,8 @@ default = []
 embedded = []
 # cxx 互操作支持
 cxx-interop = ["dep:cxx"]
+# ESP32-C3 bare-metal HAL 示例支持（启用 esp-hal / esp-println）
+esp32c3-hal = ["dep:esp-hal", "dep:esp-println"]
 
 [lints.rust]
 # bare-metal 编程必须允许 unsafe 代码（内存映射寄存器、原始指针操作）

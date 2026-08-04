@@ -6,7 +6,7 @@
 > **Rust 版本**: 1.97.1+ (Edition 2024)
 > **Bloom 层级**: L0
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **来源**: 由 `scripts/semantic_domain_inventory.py` 根据 `concept/**/*.md` 自动生成并人工复核。
+> **来源**: 由 `scripts/semantic_domain_inventory.py` 根据 `concept/**/*.md` 自动生成并人工复核。方法论与 Rust 官方概念基线对齐：[Rust Reference](https://doc.rust-lang.org/reference/) · [The Rust Programming Language](https://doc.rust-lang.org/book/)。
 
 ---
 

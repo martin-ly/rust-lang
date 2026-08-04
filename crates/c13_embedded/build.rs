@@ -17,7 +17,13 @@ fn main() {
     println!("cargo:rerun-if-env-changed=RUSTUP_TOOLCHAIN");
     println!("cargo:rerun-if-env-changed=RUSTC_BOOTSTRAP");
 
-    // 为裸机目标生成 memory.x；host 目标跳过
+    // 为裸机目标生成 memory.x；host 目标跳过。
+    // 当启用 `esp32c3-hal` feature 时，esp-hal 1.x 会自行提供 ESP32-C3 专用的
+    // memory.x / linkall.x，本 build.rs 不再生成通用 memory.x，避免链接器冲突。
+    if env::var_os("CARGO_FEATURE_ESP32C3_HAL").is_some() {
+        return;
+    }
+
     if let Ok(arch) = env::var("CARGO_CFG_TARGET_ARCH") {
         match arch.as_str() {
             "arm" => generate_memory_x_arm(),

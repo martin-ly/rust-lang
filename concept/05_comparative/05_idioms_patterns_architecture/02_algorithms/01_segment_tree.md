@@ -252,7 +252,8 @@ fn main() {
 
 ## 来源与延伸阅读
 
-- [The Rust Reference](https://doc.rust-lang.org/reference/)
-- [std::collections](https://doc.rust-lang.org/std/collections/)
-- [Rust RFCs](https://rust-lang.github.io/rfcs/)
-- [The Rust Programming Language](https://doc.rust-lang.org/book/)
+- [Multidimensional segment trees can do range updates in poly-logarithmic time](https://arxiv.org/abs/1811.01226) — P1：多维线段树的形式化分析与复杂度结论。
+- [BITS-Tree: an efficient data structure for segment storage and query processing](https://arxiv.org/abs/1501.03435) — P1：线段树变体的学术实现参考。
+- [segment-tree on crates.io](https://crates.io/crates/segment-tree) — P2：Rust 区间查询 crate。
+- [segment-tree docs on docs.rs](https://docs.rs/segment-tree/latest/segment_tree/) — P2：Rust 线段树 API 文档。
+- [cp-algorithms: Segment Tree](https://cp-algorithms.com/data_structures/segment_tree.html) — 区间查询与懒标记的竞赛编程参考。

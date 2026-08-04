@@ -431,3 +431,19 @@ mindmap
       insmod/rmmod
       dmesg
 ```
+
+---
+
+## 来源与延伸阅读
+
+### P1 学术/形式化来源
+
+- [Rusty Linux: Advances in Rust for Linux Kernel Development](https://arxiv.org/abs/2407.18431)
+
+### P2 社区/生态来源
+
+- [Rust for Linux](https://rust-for-linux.com/)
+- [Linux Kernel Rust Documentation](https://www.kernel.org/doc/html/latest/rust/index.html)
+- [Rust for Linux on GitHub](https://github.com/Rust-for-Linux/linux)
+- [Inside Rust — Program Management Update (Rust for Linux)](https://blog.rust-lang.org/inside-rust/2025/10/14/program-management-update-2025-09/)
+- [rfl-template on docs.rs](https://docs.rs/rfl-template/latest/rfl_template/)

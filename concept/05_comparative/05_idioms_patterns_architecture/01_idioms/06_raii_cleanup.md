@@ -138,6 +138,14 @@ fn main() {
 - [Rust Reference — Destructor](https://doc.rust-lang.org/reference/destructors.html)
 - [Rust API Guidelines — RAII](https://rust-lang.github.io/api-guidelines/flexibility.html#c-raii)
 
+## 来源与延伸阅读
+
+- [RustBelt — Logical Foundations for Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/)（P1 形式化基础）
+- [Resource Polymorphism](https://arxiv.org/abs/1803.02796)（P1 资源管理 / RAII 理论）
+- [scopeguard — Scope Guards and Defer](https://docs.rs/scopeguard/latest/scopeguard/)（P2 生态）
+- [scopeguard on crates.io](https://crates.io/crates/scopeguard)
+- [Announcing Rust 1.82.0](https://blog.rust-lang.org/2024/10/17/Rust-1.82.0/)（P2 官方博客）
+
 ## 形式化基础
 
 本页的工程模式可追溯到以下 L4 形式化/理论权威页：

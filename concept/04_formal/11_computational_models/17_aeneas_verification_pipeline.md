@@ -53,6 +53,9 @@
     - [测验 3：Aeneas 与 RustBelt 的主要区别是什么？](#测验-3aeneas-与-rustbelt-的主要区别是什么)
   - [七、权威来源 / International Authority References](#七权威来源--international-authority-references)
   - [八、🧭 思维导图（Mindmap）](#八-思维导图mindmap)
+  - [来源与延伸阅读](#来源与延伸阅读)
+    - [P1（学术/形式化）](#p1学术形式化)
+    - [P2（社区/生态）](#p2社区生态)
 
 ---
 
@@ -501,3 +504,19 @@ mindmap
       Aeneas POPL 2024
       RustBelt POPL 2018
 ```
+
+## 来源与延伸阅读
+
+### P1（学术/形式化）
+
+- [Ho & Protzenko, *Aeneas: Rust Verification by Functional Translation*, ICFP 2022](https://dl.acm.org/doi/10.1145/3547627) — Aeneas 奠基论文
+- [Ho et al., *Sound Borrow-Checking for Rust via Symbolic Semantics*, POPL 2024](https://dl.acm.org/doi/10.1145/3571192) — LLBC 符号化执行与声音性
+- [Aeneas Project](https://aeneasverif.github.io/aeneas/) — Aeneas 官方文档
+- [Jung et al., *RustBelt*](https://dl.acm.org/doi/10.1145/3158154) — 互补的 Iris 分离逻辑证明（ACM）
+
+### P2（社区/生态）
+
+- [Aeneas GitHub](https://github.com/AeneasVerif/aeneas) — Aeneas 官方仓库
+- [Verus](https://github.com/verus-lang/verus) — Rust 自动化验证工具
+- [Creusot](https://github.com/creusot-rs/creusot) — Rust 演绎验证器
+- [Rocq of Rust / formal.land](https://github.com/formal-land/coq-of-rust) — Rust → Rocq 形式化翻译

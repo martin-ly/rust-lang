@@ -163,3 +163,7 @@ fn get_user_email_from_user_db(user_id: u64) -> String {
 - [crates.io](https://crates.io/)
 - [docs.rs](https://docs.rs/)
 - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+- [Microservices: Yesterday, Today, and Tomorrow — arXiv:1606.04036](https://arxiv.org/abs/1606.04036)
+- [Circuit Breakers, Discovery, and API Gateways in Microservices — arXiv:1609.05830](https://arxiv.org/abs/1609.05830)
+- [Microservices.io patterns catalog](https://microservices.io/)
+- [axum — web application framework for Rust](https://docs.rs/axum)

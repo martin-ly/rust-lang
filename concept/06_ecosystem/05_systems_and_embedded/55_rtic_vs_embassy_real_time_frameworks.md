@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [RTIC Book](https://rtic.rs/2/book/en/) · [RTIC GitHub](https://github.com/rtic-rs/rtic) · [Embassy Book](https://embassy.dev/book/) · [Embassy GitHub](https://github.com/embassy-rs/embassy) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [Rust Embedded Working Group](https://github.com/rust-embedded/wg) · [Ferrous Systems — Rust Training](https://rust-training.ferrous-systems.com/latest/book/) · [Awesome Embedded Rust](https://github.com/rust-embedded/awesome-embedded-rust)
+> **来源**: [RTIC Book](https://rtic.rs/2/book/en/) · [RTIC GitHub](https://github.com/rtic-rs/rtic) · [RTIC on crates.io](https://crates.io/crates/rtic) · [RTIC docs.rs](https://docs.rs/rtic) · [Embassy Book](https://embassy.dev/book/) · [Embassy GitHub](https://github.com/embassy-rs/embassy) · [Embassy Executor on crates.io](https://crates.io/crates/embassy-executor) · [Embassy docs.rs](https://docs.rs/embassy-executor) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [Rust Embedded Working Group](https://github.com/rust-embedded/wg) · [Ferrous Systems — Rust Training](https://rust-training.ferrous-systems.com/latest/book/) · [Awesome Embedded Rust](https://github.com/rust-embedded/awesome-embedded-rust) · [Rust Reference](https://doc.rust-lang.org/reference/)
 >
 > **横向对比**: [RTOS 与 Rust 调度模型对比](46_rtos_and_scheduling_in_rust.md) · [裸机 Rust](47_bare_metal_rust.md) · [Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)
 
@@ -411,3 +411,20 @@ mindmap
       复杂 IO → Embassy
       混合 → 分层架构
 ```
+
+---
+
+## 来源与延伸阅读
+
+### P1 学术/形式化来源
+
+- [Eriksson et al. — Real-time for the masses, step 1 (IEEE SIES 2013)](https://ieeexplore.ieee.org/document/6601482)
+
+### P2 社区/生态来源
+
+- [RTIC Book](https://rtic.rs/2/book/en/)
+- [Embassy Book](https://embassy.dev/book/)
+- [RTIC on docs.rs](https://docs.rs/rtic/latest/rtic/)
+- [embassy-executor on docs.rs](https://docs.rs/embassy-executor/latest/embassy_executor/)
+- [rtic-rs/rtic on GitHub](https://github.com/rtic-rs/rtic)
+- [embassy-rs/embassy on GitHub](https://github.com/embassy-rs/embassy)

@@ -132,6 +132,14 @@ fn main() {}
 - [The Rust Programming Language — Tuple Structs](https://doc.rust-lang.org/book/ch05-01-defining-structs.html#using-tuple-structs-without-named-fields-to-create-different-types)
 - [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)
 
+## 来源与延伸阅读
+
+- [RustBelt — Logical Foundations for Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/)（P1 形式化基础）
+- [TYPEPULSE: Detecting Type Confusion Bugs in Rust Programs](https://arxiv.org/abs/2502.03271)（P1 类型安全）
+- [derive_more — Derive Helpers](https://docs.rs/derive_more/latest/derive_more/)（P2 生态：Newtype 派生工具）
+- [derive_more on crates.io](https://crates.io/crates/derive_more)
+- [Changes to `impl Trait` in Rust 2024](https://blog.rust-lang.org/2024/09/05/impl-trait-capture-rules/)（P2 官方博客）
+
 ## 形式化基础
 
 本页的工程模式可追溯到以下 L4 形式化/理论权威页：

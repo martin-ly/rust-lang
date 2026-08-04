@@ -11,3 +11,10 @@
 > 根据 AGENTS.md §2 Canonical 规则，通用 Rust 微服务模式解释统一维护在 `concept/06_ecosystem/14_enterprise_architecture/13_microservices_patterns_in_rust.md`；本文件仅保留路径与导航链接。
 >
 > **来源**: [The Rust Blog](https://blog.rust-lang.org/)
+
+## 来源与延伸阅读
+
+- [The Rust Programming Language](https://doc.rust-lang.org/book/)
+- [Microservices: Yesterday, Today, and Tomorrow — arXiv:1606.04036](https://arxiv.org/abs/1606.04036)
+- [Actor Model of Computation: Scalable Robust Information Systems — arXiv:1008.1459](https://arxiv.org/abs/1008.1459)
+- [axum — web application framework for Rust](https://docs.rs/axum)

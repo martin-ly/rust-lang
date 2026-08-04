@@ -124,6 +124,14 @@ fn main() {}
 - [Rust API Guidelines — Type Conversions](https://rust-lang.github.io/api-guidelines/naming.html#c-conv)
 - [Rust Reference — The From trait](https://doc.rust-lang.org/std/convert/trait.From.html)
 
+## 来源与延伸阅读
+
+- [RustBelt — Logical Foundations for Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/)（P1 形式化基础）
+- [TYPEPULSE: Detecting Type Confusion Bugs in Rust Programs](https://arxiv.org/abs/2502.03271)（P1 类型转换分析）
+- [serde — Serialization Framework](https://docs.rs/serde/latest/serde/)（P2 生态：泛型转换实践）
+- [serde on crates.io](https://crates.io/crates/serde)
+- [Changes to `impl Trait` in Rust 2024](https://blog.rust-lang.org/2024/09/05/impl-trait-capture-rules/)（P2 官方博客）
+
 ## 形式化基础
 
 本页的工程模式可追溯到以下 L4 形式化/理论权威页：

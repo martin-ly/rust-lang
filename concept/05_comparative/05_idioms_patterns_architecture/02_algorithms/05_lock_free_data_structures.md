@@ -162,3 +162,12 @@ fn use_stack<T>(s: &Stack<T>) {
 - [算法语义与霍尔逻辑](../../../04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md)
 - [算法等价性](../../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md)
 - [形式化算法理论](../../../04_formal/00_type_theory/13_formal_algorithm_theory.md)
+
+## 来源与延伸阅读
+
+- [How Lock-free Data Structures Perform in Dynamic Environments: Models and Analyses](https://arxiv.org/abs/1611.05793) — P1：无锁数据结构性能与形式化模型分析。
+- [No Cords Attached: Coordination-Free Concurrent Lock-Free Queues](https://arxiv.org/abs/2511.09410) — P1：无锁队列的最新学术研究。
+- [Michael & Scott, Simple, fast, and practical non-blocking and blocking concurrent queue algorithms](https://dl.acm.org/doi/10.1145/248052.248106) — P1：Michael-Scott 无锁队列经典论文。
+- [crossbeam on crates.io](https://crates.io/crates/crossbeam) — P2：Rust 无锁并发原语与 epoch 回收 crate。
+- [crossbeam-epoch docs on docs.rs](https://docs.rs/crossbeam-epoch) — P2：Rust epoch-based 内存回收 API。
+- [crossbeam-rs/crossbeam repository](https://github.com/crossbeam-rs/crossbeam) — P2：crossbeam 无锁数据结构官方仓库。

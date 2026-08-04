@@ -159,6 +159,14 @@ fn main() {
 - [The Rust Programming Language — Phantom Data](https://doc.rust-lang.org/book/ch19-04-advanced-types.html#dynamically-sized-types-and-the-sized-trait)
 - [Typestate Programming (Wikipedia)](https://en.wikipedia.org/wiki/Typestate_analysis)
 
+## 来源与延伸阅读
+
+- [RustBelt — Logical Foundations for Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/)（P1 形式化基础）
+- [SquirrelFS: Using the Rust Compiler to Check File-System Crash Consistency](https://arxiv.org/abs/2406.09649)（P1 Typestate 应用）
+- [typestate — Proc-macro Typestate DSL](https://docs.rs/typestate/latest/typestate/)（P2 生态）
+- [typestate on crates.io](https://crates.io/crates/typestate)
+- [Stabilizing async fn in traits in 2023](https://blog.rust-lang.org/inside-rust/2023/05/03/stabilizing-async-fn-in-trait.html)（P2 官方博客，提及 builder-provider 模式）
+
 ## 形式化基础
 
 本页的工程模式可追溯到以下 L4 形式化/理论权威页：

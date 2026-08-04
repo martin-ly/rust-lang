@@ -58,7 +58,7 @@ mindmap
 - [02 算法（Algorithms）](./02_algorithms/README.md)
 - [03 设计模式（Design Patterns）](./03_design_patterns/README.md)
 - [04 架构模式（Architecture Patterns）](./04_architecture/README.md)
-- [测验：Rust 惯用法、算法、设计模式与架构模式](../05_quizzes/01_quiz_idioms_patterns_architecture.md)
+- [测验：Rust 惯用法、算法、设计模式与架构模式](../06_quizzes/01_quiz_idioms_patterns_architecture.md)
 
 ## 与国际权威来源的对齐
 

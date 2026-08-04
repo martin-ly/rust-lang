@@ -135,6 +135,14 @@ fn main() {
 - [The Rust Programming Language — Drop Trait](https://doc.rust-lang.org/book/ch15-03-drop.html)
 - [Go Blog — Defer, Panic, and Recover](https://go.dev/blog/defer-panic-and-recover)（概念对比）
 
+## 来源与延伸阅读
+
+- [RustBelt — Logical Foundations for Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/)（P1 形式化基础）
+- [Resource Polymorphism](https://arxiv.org/abs/1803.02796)（P1 资源管理 / 作用域退出语义）
+- [scopeguard — Scope Guards and `defer!`](https://docs.rs/scopeguard/latest/scopeguard/)（P2 生态）
+- [scopeguard on crates.io](https://crates.io/crates/scopeguard)
+- [What the Error Handling Project Group is Working On](https://blog.rust-lang.org/inside-rust/2020/11/23/What-the-error-handling-project-group-is-working-on/)（P2 官方博客，defer 与错误处理）
+
 ## 形式化基础
 
 本页的工程模式可追溯到以下 L4 形式化/理论权威页：

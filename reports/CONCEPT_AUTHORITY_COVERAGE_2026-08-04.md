@@ -3,45 +3,41 @@
 **EN**: Concept-layer International Authority Coverage
 **Summary**: 复用 maintenance P0/P1/P2 权威域分级，把审计扩展到 concept/ 权威层；量化覆盖率与缺口，为『对齐网络上的国际化权威相关内容』提供机器可复核基线。仅审计，不改正文。
 
-> 生成: 2026-08-04 · 扫描 concept/ 活跃 md: **780**（排除 archive/SUMMARY/README）
+> 生成: 2026-08-04 · 扫描 concept/ 活跃 md: **779**（排除 archive/SUMMARY/README）
 > P0 官方 / P1 学术形式化 / P2 社区生态，域定义复用 `scripts/maintenance/authority_coverage_dashboard.py`
 
 ## 总体覆盖率
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 764 | 97.9% |
-| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 708 | 90.8% |
-| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 687 | 88.1% |
-| **任一权威（P0∪P1∪P2）** | **777** | **99.6%** |
-| 无任何国际权威引用（缺口） | 3 | 0.4% |
+| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 767 | 98.5% |
+| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 737 | 94.6% |
+| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 702 | 90.1% |
+| **任一权威（P0∪P1∪P2）** | **779** | **100.0%** |
+| 无任何国际权威引用（缺口） | 0 | 0.0% |
 
 ## 内容页口径覆盖率（排除 00_meta 工具页 / quiz / placeholders / sources 索引）
 
-> 内容页 **679** 页。00_meta 为知识库内部工具/导航/审计页，非 Rust 概念内容，其权威基线为 P0 官方文档；P1/P2 学术生态来源对其不适用，故单列口径。
+> 内容页 **678** 页。00_meta 为知识库内部工具/导航/审计页，非 Rust 概念内容，其权威基线为 P0 官方文档；P1/P2 学术生态来源对其不适用，故单列口径。
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方 | 669 | 98.5% |
-| P1 学术/形式化 | 649 | 95.6% |
-| P2 社区/生态 | 663 | 97.6% |
-| **任一权威** | **677** | **99.7%** |
-
-内容页 P1 缺口（30）: `concept/04_formal/11_computational_models/17_aeneas_verification_pipeline.md` · `concept/05_comparative/05_idioms_patterns_architecture/01_idioms/01_iterator_chains.md` · `concept/05_comparative/05_idioms_patterns_architecture/01_idioms/02_error_propagation.md` · `concept/05_comparative/05_idioms_patterns_architecture/01_idioms/03_into_from_asref.md` · `concept/05_comparative/05_idioms_patterns_architecture/01_idioms/04_newtype.md` · `concept/05_comparative/05_idioms_patterns_architecture/01_idioms/05_typestate.md` · `concept/05_comparative/05_idioms_patterns_architecture/01_idioms/06_raii_cleanup.md` · `concept/05_comparative/05_idioms_patterns_architecture/01_idioms/07_builder.md` · `concept/05_comparative/05_idioms_patterns_architecture/01_idioms/08_defer.md` · `concept/05_comparative/05_idioms_patterns_architecture/02_algorithms/01_segment_tree.md` · `concept/05_comparative/05_idioms_patterns_architecture/02_algorithms/02_trie.md` · `concept/05_comparative/05_idioms_patterns_architecture/02_algorithms/03_union_find.md` · `concept/05_comparative/05_idioms_patterns_architecture/02_algorithms/04_graph_algorithms.md` · `concept/05_comparative/05_idioms_patterns_architecture/02_algorithms/05_lock_free_data_structures.md` · `concept/05_comparative/05_idioms_patterns_architecture/03_design_patterns/01_strategy.md` · `concept/05_comparative/05_idioms_patterns_architecture/03_design_patterns/02_command.md` · `concept/05_comparative/05_idioms_patterns_architecture/03_design_patterns/03_visitor.md` · `concept/05_comparative/05_idioms_patterns_architecture/03_design_patterns/04_state_machine.md` · `concept/05_comparative/05_idioms_patterns_architecture/03_design_patterns/05_adapter.md` · `concept/05_comparative/05_idioms_patterns_architecture/03_design_patterns/06_decorator.md` · `concept/05_comparative/05_idioms_patterns_architecture/04_architecture/01_hexagonal_clean_architecture.md` · `concept/05_comparative/05_idioms_patterns_architecture/04_architecture/02_cqrs_event_sourcing.md` · `concept/05_comparative/05_idioms_patterns_architecture/04_architecture/03_microservices.md` · `concept/05_comparative/05_idioms_patterns_architecture/04_architecture/05_plugin_system.md` · `concept/05_comparative/05_idioms_patterns_architecture/04_architecture/06_event_bus.md` · `concept/06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md` · `concept/06_ecosystem/05_systems_and_embedded/54_linker_scripts_and_memory_layout.md` · `concept/06_ecosystem/05_systems_and_embedded/55_rtic_vs_embassy_real_time_frameworks.md` · `concept/06_ecosystem/05_systems_and_embedded/56_rust_for_linux_kernel_module_basics.md` · `concept/06_ecosystem/14_enterprise_architecture/08_microservices_patterns_in_rust.md`
-
-内容页 P2 缺口（16）: `concept/04_formal/11_computational_models/12_linear_logic_and_ownership.md` · `concept/04_formal/11_computational_models/14_effect_handlers_and_rust_limited_effects.md` · `concept/04_formal/11_computational_models/15_refinement_types_and_flux.md` · `concept/04_formal/11_computational_models/16_rustbelt_ownership_logic.md` · `concept/05_comparative/05_idioms_patterns_architecture/01_idioms/02_error_propagation.md` · `concept/05_comparative/05_idioms_patterns_architecture/01_idioms/03_into_from_asref.md` · `concept/05_comparative/05_idioms_patterns_architecture/01_idioms/04_newtype.md` · `concept/05_comparative/05_idioms_patterns_architecture/01_idioms/06_raii_cleanup.md` · `concept/05_comparative/05_idioms_patterns_architecture/02_algorithms/01_segment_tree.md` · `concept/05_comparative/05_idioms_patterns_architecture/02_algorithms/02_trie.md` · `concept/05_comparative/05_idioms_patterns_architecture/02_algorithms/03_union_find.md` · `concept/05_comparative/05_idioms_patterns_architecture/02_algorithms/04_graph_algorithms.md` · `concept/05_comparative/05_idioms_patterns_architecture/04_architecture/04_actor.md` · `concept/06_ecosystem/03_design_patterns/07_cqrs_event_sourcing.md` · `concept/06_ecosystem/05_systems_and_embedded/55_rtic_vs_embassy_real_time_frameworks.md` · `concept/06_ecosystem/05_systems_and_embedded/56_rust_for_linux_kernel_module_basics.md`
+| P0 官方 | 671 | 99.0% |
+| P1 学术/形式化 | 678 | 100.0% |
+| P2 社区/生态 | 678 | 100.0% |
+| **任一权威** | **678** | **100.0%** |
 
 ## 按层级覆盖率
 
 | 层级 | 页数 | P0 命中 | P0% | 任一权威 | 任一% |
 |:---|---:|---:|---:|---:|---:|
-| L0 | 76 | 75 | 98.7% | 75 | 98.7% |
+| L0 | 76 | 76 | 100.0% | 76 | 100.0% |
 | L1 | 60 | 60 | 100.0% | 60 | 100.0% |
 | L2 | 45 | 45 | 100.0% | 45 | 100.0% |
 | L3 | 78 | 78 | 100.0% | 78 | 100.0% |
 | L4 | 131 | 131 | 100.0% | 131 | 100.0% |
 | L5 | 55 | 49 | 89.1% | 55 | 100.0% |
-| L6 | 257 | 249 | 96.9% | 255 | 99.2% |
+| L6 | 256 | 251 | 98.0% | 256 | 100.0% |
 | L7 | 75 | 74 | 98.7% | 75 | 100.0% |
 | L? | 3 | 3 | 100.0% | 3 | 100.0% |
 
@@ -60,3 +56,35 @@
 
 ---
 *由 `scripts/check_concept_authority_coverage.py` 生成*
+
+## 附：crates/*/docs 权威覆盖（--include-crates 扩展）
+
+> 扫描 crates docs md **569**（含嵌套子 crate）；stub/重定向 504，纯索引 README 2，代码清单页 0，quiz 0。
+
+- 非 stub 内容页 **63** 个，有国际权威来源引用 **63** 个（**100.0%**）。
+- 权威域口径为 crates 扩展集（P0/P1/P2 超集 + tokio.rs/rustwasm/rust-embedded/webassembly.org/w3.org/egui/kani/aeneas 等生态权威），见脚本 `CRATES_AUTH_RE`。
+- 分类口径（stub 标记/纯索引 README/代码清单豁免）与 `tmp/crates_docs_authority_full.py` 一致。
+
+| crate | 内容页 | 已覆盖 |
+|:---|---:|---:|
+| c01_ownership_borrow_scope | 5 | 5 |
+| c02_type_system | 4 | 4 |
+| c03_control_fn | 5 | 5 |
+| c04_generic | 2 | 2 |
+| c05_threads | 4 | 4 |
+| c06_async | 4 | 4 |
+| c07_process | 13 | 13 |
+| c08_algorithms | 6 | 6 |
+| c09_design_pattern | 4 | 4 |
+| c10_networks | 10 | 10 |
+| c11_macro_system_proc | 1 | 1 |
+| c12_wasm | 3 | 3 |
+| c13_embedded | 1 | 1 |
+| c17_resolver_v3_public_demo | 1 | 1 |
+
+
+### crates stub canonical 链接健康度
+
+- **dead_canonical = 0** ✅ 所有 stub 中的 `concept/` canonical 链接均解析到真实文件。
+
+登记跳过（非 stub 但不计入内容页分母）: `crates/c15_verification_tools/docs/README.md`（index_readme） · `crates/c16_gui/docs/README.md`（index_readme）

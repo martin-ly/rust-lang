@@ -153,3 +153,11 @@ fn main() {}
 - [架构模式语义](../../../04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md)
 - [分布式系统语义](../../../04_formal/09_system_semantics/04_distributed_systems_semantics.md)
 - [软件架构形式化](../../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md)
+
+## 来源与延伸阅读
+
+- [Evaluating the Language-Based Security for Plugin Development — arXiv:2405.07448](https://arxiv.org/abs/2405.07448)
+- [Omnisolver: an extensible interface to Ising spin-glass and QUBO solvers — arXiv:2112.11131](https://arxiv.org/abs/2112.11131)
+- [libloading — dynamic library loading for Rust](https://docs.rs/libloading/)
+- [wasmtime — WebAssembly runtime for sandboxed plugins](https://docs.rs/wasmtime/)
+- [Rust API Guidelines — Traits](https://rust-lang.github.io/api-guidelines/flexibility.html#c-traits)

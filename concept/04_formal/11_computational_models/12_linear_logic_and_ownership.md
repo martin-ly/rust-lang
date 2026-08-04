@@ -580,8 +580,17 @@ mindmap
 
 ## 来源与延伸阅读
 
-- [RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
-- [Aeneas Project](https://aeneasverif.github.io/)
-- [Flux Refinement Types](https://flux-rs.github.io/)
-- [arXiv](https://arxiv.org/)
-- [ACM Digital Library](https://dl.acm.org/)
+### P1（学术/形式化）
+
+- [Girard 1987, *Linear Logic*](https://www.sciencedirect.com/science/article/pii/0304397587900454) — 线性逻辑奠基论文
+- [Wadler 1990, *Linear Types can Change the World!*](https://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html) — 线性类型资源视角经典文
+- [Weiss et al. 2019, *Oxide: The Essence of Rust*](https://arxiv.org/abs/1903.00982) — 用子结构类型系统刻画 Rust 借用检查
+- [Jung et al., *RustBelt: Securing the Foundations of Rust*, POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) — Rust 所有权与内存安全的 Iris 机械证明
+- [Jung et al., *RustBelt*](https://dl.acm.org/doi/10.1145/3158154) — ACM Digital Library 版本
+
+### P2（社区/生态）
+
+- [Fearless Concurrency](https://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html) — Rust 官方博客：所有权如何支撑并发安全
+- [The Rust Reference: Copy](https://doc.rust-lang.org/std/marker/trait.Copy.html) — 官方文档：Copy 与 move 语义
+- [refinement crate](https://crates.io/crates/refinement) — 社区实现的轻量精化类型库
+- [refinement docs](https://docs.rs/refinement/latest/refinement/) — docs.rs 文档

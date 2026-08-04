@@ -149,3 +149,11 @@ fn main() {
 - [架构模式语义](../../../04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md)
 - [分布式系统语义](../../../04_formal/09_system_semantics/04_distributed_systems_semantics.md)
 - [软件架构形式化](../../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md)
+
+## 来源与延伸阅读
+
+- [A Publish/Subscribe Event Bus based Framework for IoT — arXiv:1801.02154](https://arxiv.org/abs/1801.02154)
+- [The many faces of publish/subscribe — ACM Computing Surveys](https://dl.acm.org/doi/10.1145/858051.858052)
+- [tokio::sync::broadcast — multi-consumer event channel](https://docs.rs/tokio/latest/tokio/sync/broadcast/index.html)
+- [event-bus — in-process event bus crate for Rust](https://docs.rs/event-bus)
+- [NATS — cloud native messaging](https://nats.io/)

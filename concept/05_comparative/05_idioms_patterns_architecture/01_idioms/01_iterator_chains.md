@@ -110,6 +110,14 @@ fn main() {
 - [The Rust Programming Language — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html)
 - [Rust API Guidelines — Iterators](https://rust-lang.github.io/api-guidelines/flexibility.html#c-iter)
 
+## 来源与延伸阅读
+
+- [RustBelt — Logical Foundations for Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/)（P1 形式化基础）
+- [Rust for Functional Programmers](https://arxiv.org/abs/1407.5670)（P1 函数式/迭代器风格）
+- [itertools — Extra Iterator Adaptors](https://docs.rs/itertools/latest/itertools/)（P2 生态）
+- [itertools on crates.io](https://crates.io/crates/itertools)
+- [Fearless Concurrency with Rust](https://blog.rust-lang.org/2015/04/10/Fearless-Concurrency/)（P2 官方博客）
+
 ## 形式化基础
 
 本页的工程模式可追溯到以下 L4 形式化/理论权威页：

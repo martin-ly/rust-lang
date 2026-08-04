@@ -412,3 +412,19 @@ mindmap
       rust-size
       rust-objdump
 ```
+
+---
+
+## 来源与延伸阅读
+
+### P1 学术/形式化来源
+
+- [Rust for Embedded Systems: Current State and Open Problems (ACM CCS 2024)](https://doi.org/10.1145/3658644.3690275)
+- [Bringing Rust to Safety-Critical Systems in Space](https://arxiv.org/abs/2405.18135)
+
+### P2 社区/生态来源
+
+- [The Embedonomicon — Memory Layout](https://docs.rust-embedded.org/embedonomicon/memory-layout.html)
+- [cortex-m-rt on docs.rs](https://docs.rs/cortex-m-rt/latest/cortex_m_rt/)
+- [riscv-rt on docs.rs](https://docs.rs/riscv-rt/latest/riscv_rt/)
+- [rust-embedded/cortex-m-rt on GitHub](https://github.com/rust-embedded/cortex-m-rt)

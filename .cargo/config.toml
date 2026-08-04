@@ -62,6 +62,15 @@ rustflags = [
     "-C", "link-arg=-Tlink.x",
 ]
 
+[target.riscv32imc-unknown-none-elf]
+rustflags = [
+    "-C", "target-cpu=generic-rv32",
+    "-C", "target-feature=+m,+c",
+    # ESP32-C3 no_std 使用 esp-hal 1.x 自带的 linkall.x（含 memory.x / device.x / stack.x）。
+    # 注意：c13_embedded 的 build.rs 在启用 `esp32c3-hal` feature 时会跳过通用 memory.x 生成。
+    "-C", "link-arg=-Tlinkall.x",
+]
+
 [registries.crates-io]
 # 稀疏索引协议 - 大幅减少索引下载时间
 protocol = "sparse"

@@ -239,3 +239,11 @@ fn main() {
 - [算法语义与霍尔逻辑](../../../04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md)
 - [算法等价性](../../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md)
 - [形式化算法理论](../../../04_formal/00_type_theory/13_formal_algorithm_theory.md)
+
+## 来源与延伸阅读
+
+- [Exploring the Trie of Rules: a fast data structure for the representation of association rules](https://arxiv.org/abs/2310.17355) — P1：前缀树/字典树结构的学术论文参考。
+- [trie on crates.io](https://crates.io/crates/trie) — P2：通用 Trie Rust crate。
+- [trie docs on docs.rs](https://docs.rs/trie/latest/trie/) — P2：Trie crate API 文档。
+- [radix_trie on crates.io](https://crates.io/crates/radix_trie) — P2：压缩 Trie（Radix Tree）Rust 实现。
+- [radix_trie docs on docs.rs](https://docs.rs/radix_trie/latest/radix_trie/) — P2：压缩 Trie API 文档。

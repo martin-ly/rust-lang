@@ -54,6 +54,8 @@
   - [七、权威来源 / International Authority References](#七权威来源--international-authority-references)
   - [八、🧭 思维导图（Mindmap）](#八-思维导图mindmap)
   - [来源与延伸阅读](#来源与延伸阅读)
+    - [P1（学术/形式化）](#p1学术形式化)
+    - [P2（社区/生态）](#p2社区生态)
 
 ---
 
@@ -597,8 +599,16 @@ mindmap
 
 ## 来源与延伸阅读
 
-- [RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
-- [Aeneas Project](https://aeneasverif.github.io/)
-- [Flux Refinement Types](https://flux-rs.github.io/)
-- [arXiv](https://arxiv.org/)
-- [ACM Digital Library](https://dl.acm.org/)
+### P1（学术/形式化）
+
+- [Plotkin & Pretnar 2013, *Handling Algebraic Effects*](https://arxiv.org/abs/1312.1399) — 代数效应处理器奠基论文
+- [Bauer & Pretnar 2012, *Programming with Algebraic Effects and Handlers*](https://arxiv.org/abs/1203.1539) — 代数效应编程教程
+- [Dolan et al. 2015, *Effective Concurrency with Algebraic Effects*](https://dl.acm.org/doi/10.1145/2858945) — Multicore OCaml 中的效应处理器
+- [Kammar, Lindley & Oury 2013, *Handlers in Action*](https://dl.acm.org/doi/10.1145/2500365.2500590) — 效应处理器实践
+
+### P2（社区/生态）
+
+- [Async-await hits stable!](https://blog.rust-lang.org/2019/11/07/Async-await-stable.html) — Rust 官方博客：async/await 稳定化
+- [tokio](https://crates.io/crates/tokio) — 异步运行时生态
+- [Tokio docs](https://docs.rs/tokio/latest/tokio/) — docs.rs 文档
+- [Rust RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html) — 官方设计来源

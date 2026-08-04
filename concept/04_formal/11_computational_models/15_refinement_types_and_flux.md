@@ -465,3 +465,22 @@ mindmap
       Liquid Types 2008
       Flux PLDI 2023
 ```
+
+## 来源与延伸阅读
+
+### P1（学术/形式化）
+
+- [Freeman & Pfenning 1991, *Refinement Types for ML*](https://dl.acm.org/doi/10.1145/115865.115880) — 精化类型奠基论文
+- [Rondon, Kawaguchi & Jhala 2008, *Liquid Types*](https://dl.acm.org/doi/10.1145/1375581.1375602) — Liquid Types 自动推断
+- [Vazou et al. 2014, *Liquid Haskell*](https://dl.acm.org/doi/10.1145/2628136.2628160) — Liquid Types 在 Haskell 中的实现
+- [Lehmann et al. 2022, *Flux: Liquid Types for Rust*](https://arxiv.org/pdf/2207.04034.pdf) — Flux 早期论文
+- [Lehmann et al. 2023, *Flux: Liquid Types for Rust*, PLDI](https://ranjitjhala.github.io/static/flux-pldi23.pdf) — Flux PLDI 论文
+
+### P2（社区/生态）
+
+- [Flux GitHub](https://github.com/flux-rs/flux) — Flux 官方仓库
+- [Verus](https://github.com/verus-lang/verus) — Rust 自动化验证工具
+- [Creusot](https://github.com/creusot-rs/creusot) — Rust 演绎验证器
+- [Rocq of Rust / formal.land](https://github.com/formal-land/coq-of-rust) — Rust → Rocq 形式化翻译
+- [refinement crate](https://crates.io/crates/refinement) — 轻量精化类型库
+- [refinement docs](https://docs.rs/refinement/latest/refinement/) — docs.rs 文档

@@ -1,0 +1,14 @@
+{
+  "base_model": "all-MiniLM-L6-v2",
+  "output_dir": "E:\\_src\\rust-lang\\tools\\kg_rag\\.cache\\fine_tuned_augmented",
+  "training_pairs": 3294,
+  "epochs": 1,
+  "batch_size": 16,
+  "learning_rate": 2e-05,
+  "seed": 20260804,
+  "device": "cpu",
+  "lora": false,
+  "lora_r": null,
+  "lora_alpha": null,
+  "lora_dropout": null
+}

@@ -198,3 +198,11 @@ fn main() {}
 - [形式化设计模式理论](../../../04_formal/00_type_theory/11_formal_design_pattern_theory.md)
 - [模式组合代数](../../../04_formal/00_type_theory/12_pattern_composition_algebra.md)
 - [类型系统进阶](../../../04_formal/00_type_theory/01_type_theory.md)
+
+## 来源与延伸阅读
+
+> 以下链接按 P1（学术/形式化）与 P2（社区/生态）分级，用于补全本页的国际化权威来源覆盖。
+
+- **P1**: Gamma, E., Helm, R., Johnson, R., Vlissides, J. *Design Patterns: Abstraction and Reuse of Object-Oriented Design*. In *Software Pioneers*, Springer, 2002. [PDF](https://link.springer.com/content/pdf/10.1007/978-3-642-59412-0_40.pdf)
+- **P2**: [Rust Design Patterns - Strategy](https://rust-unofficial.github.io/patterns/patterns/behavioural/strategy.html)
+- **P2**: [Refactoring Guru - Strategy Pattern](https://refactoring.guru/design-patterns/strategy)

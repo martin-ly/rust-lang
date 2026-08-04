@@ -729,7 +729,15 @@ volatile-register = "0.2.2"
 
 # RISC-V 裸机运行时/CSR 访问（2026-07-31 Wave H 新增）
 riscv = "0.16.1"
-riscv-rt = "0.18.0"
+# 锁定 0.16.0：esp-hal 1.x 通过 esp-riscv-rt 依赖 riscv-rt ^0.16.0，
+# 若使用 0.18.0 会与 esp-hal 的 `rt` feature 产生 native `riscv-rt` links 冲突。
+riscv-rt = "0.16.0"
+
+# ESP32 系列 bare-metal HAL 与日志打印（2026-08-04 新增）
+# esp-hal 1.x 支持 stable Rust >= 1.88，覆盖 ESP32-C3/C6 等 RISC-V 内核芯片。
+# 仅在启用 `esp32c3-hal` feature 的示例中编译，不进入默认构建路径。
+esp-hal = { version = "1.1.1", default-features = false }
+esp-println = { version = "0.17.0", default-features = false }
 
 # 工作区特性标志配置 - 优化编译时间和依赖管理
 # 注意: 工作区依赖不能设为可选，特性标志在各crate中配置

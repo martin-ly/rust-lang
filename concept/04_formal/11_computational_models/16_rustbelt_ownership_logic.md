@@ -55,6 +55,8 @@
   - [七、权威来源 / International Authority References](#七权威来源--international-authority-references)
   - [八、🧭 思维导图（Mindmap）](#八-思维导图mindmap)
   - [来源与延伸阅读](#来源与延伸阅读)
+    - [P1（学术/形式化）](#p1学术形式化)
+    - [P2（社区/生态）](#p2社区生态)
 
 ---
 
@@ -534,8 +536,16 @@ mindmap
 
 ## 来源与延伸阅读
 
-- [RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
-- [Aeneas Project](https://aeneasverif.github.io/)
-- [Flux Refinement Types](https://flux-rs.github.io/)
-- [arXiv](https://arxiv.org/)
-- [ACM Digital Library](https://dl.acm.org/)
+### P1（学术/形式化）
+
+- [Jung et al., *RustBelt: Securing the Foundations of Rust*, POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) — RustBelt 项目主页
+- [Jung et al., *RustBelt*](https://dl.acm.org/doi/10.1145/3158154) — ACM Digital Library 版本
+- [Iris from the Ground Up](https://iris-project.org/pdfs/2018-jfp-iris-ground-up.pdf) — Iris 高阶并发分离逻辑教程
+- [Reynolds 2002, *Separation Logic*](https://www.cs.cmu.edu/~jcr/seplogic.pdf) — 分离逻辑奠基论文
+
+### P2（社区/生态）
+
+- [Verus](https://github.com/verus-lang/verus) — Rust 自动化验证工具
+- [Creusot](https://github.com/creusot-rs/creusot) — Rust 演绎验证器
+- [Rocq of Rust / formal.land](https://github.com/formal-land/coq-of-rust) — Rust → Rocq 形式化翻译
+- [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-keyword.html) — 官方 unsafe 语义

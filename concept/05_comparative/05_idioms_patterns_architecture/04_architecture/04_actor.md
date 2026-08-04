@@ -151,3 +151,20 @@ fn main() {
 - [架构模式语义](../../../04_formal/10_architecture_semantics/02_architecture_pattern_semantics.md)
 - [分布式系统语义](../../../04_formal/09_system_semantics/04_distributed_systems_semantics.md)
 - [软件架构形式化](../../../04_formal/10_architecture_semantics/01_software_architecture_formalization.md)
+
+---
+
+## 来源与延伸阅读
+
+### P1 学术/形式化来源
+
+- [Hewitt, Bishop & Steiger — A Universal Modular Actor Formalism](https://dl.acm.org/doi/10.1145/1624775.1624804)
+- [Hewitt — Actor Model of Computation](https://arxiv.org/abs/1008.1459)
+
+### P2 社区/生态来源
+
+- [actix on crates.io](https://crates.io/crates/actix)
+- [actix on docs.rs](https://docs.rs/actix/latest/actix/)
+- [actix/actix on GitHub](https://github.com/actix/actix)
+- [tokio::sync::mpsc on docs.rs](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html)
+- [Akka Documentation — Actor Model](https://akka.io/docs/)

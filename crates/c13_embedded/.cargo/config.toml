@@ -19,3 +19,10 @@ rustflags = [
     "-C", "link-arg=-Tmemory.x",
     "-C", "link-arg=-Tlink.x",
 ]
+
+[target.riscv32imc-unknown-none-elf]
+runner = "qemu-system-riscv32 -machine virt -nographic -kernel"
+rustflags = [
+    # ESP32-C3 no_std 使用 esp-hal 1.x 自带的 linkall.x。
+    "-C", "link-arg=-Tlinkall.x",
+]

@@ -257,3 +257,11 @@ fn main() {
 - [算法语义与霍尔逻辑](../../../04_formal/08_algorithm_semantics/01_hoare_logic_for_rust.md)
 - [算法等价性](../../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md)
 - [形式化算法理论](../../../04_formal/00_type_theory/13_formal_algorithm_theory.md)
+
+## 来源与延伸阅读
+
+- [A Survey of Shortest-Path Algorithms](https://arxiv.org/abs/1705.02044) — P1：最短路径算法学术综述。
+- [Sanders, Mehlhorn & Dietzfelbinger, Algorithms and Data Structures: The Basic Toolbox](https://link.springer.com/book/10.1007/978-3-540-77978-0) — P1：图算法与数据结构教材。
+- [petgraph on crates.io](https://crates.io/crates/petgraph) — P2：Rust 图数据结构与算法库。
+- [petgraph docs on docs.rs](https://docs.rs/petgraph/latest/petgraph/) — P2：petgraph API 文档。
+- [cp-algorithms: Graphs](https://cp-algorithms.com/graph/index.html) — 图遍历、最短路径与生成树实现参考。

@@ -231,7 +231,8 @@ fn main() {
 
 ## 来源与延伸阅读
 
-- [The Rust Reference](https://doc.rust-lang.org/reference/)
-- [std::collections](https://doc.rust-lang.org/std/collections/)
-- [Rust RFCs](https://rust-lang.github.io/rfcs/)
-- [The Rust Programming Language](https://doc.rust-lang.org/book/)
+- [Concurrent Disjoint Set Union](https://arxiv.org/abs/2003.01203) — P1：并发并查集算法的学术分析。
+- [Tarjan, Efficiency of a good but not linear set union algorithm](https://dl.acm.org/doi/10.1145/321879.321884) — P1：经典并查集复杂度理论来源。
+- [union-find on crates.io](https://crates.io/crates/union-find) — P2：Rust Union-Find crate。
+- [union-find docs on docs.rs](https://docs.rs/union-find/latest/union_find/) — P2：Union-Find API 文档。
+- [disjoint-set on crates.io](https://crates.io/crates/disjoint-set) — P2：Tarjan Union-Find 的 Rust 实现。

@@ -169,3 +169,6 @@ fn main() {
 - [crates.io](https://crates.io/)
 - [docs.rs](https://docs.rs/)
 - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+- [Reusability in MLOps: Leveraging Ports and Adapters — arXiv:2512.08657](https://arxiv.org/abs/2512.08657)
+- [shaku — compile-time dependency injection for Rust](https://docs.rs/shaku)
+- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)

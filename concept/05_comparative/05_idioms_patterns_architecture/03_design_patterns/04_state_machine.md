@@ -192,3 +192,12 @@ fn main() {}
 - [形式化设计模式理论](../../../04_formal/00_type_theory/11_formal_design_pattern_theory.md)
 - [模式组合代数](../../../04_formal/00_type_theory/12_pattern_composition_algebra.md)
 - [类型系统进阶](../../../04_formal/00_type_theory/01_type_theory.md)
+
+## 来源与延伸阅读
+
+> 以下链接按 P1（学术/形式化）与 P2（社区/生态）分级，用于补全本页的国际化权威来源覆盖。
+
+- **P1**: DeLine, R., Fähndrich, M. *Typestates for Objects*. In ECOOP 2004, Springer, 2004. [Springer](https://link.springer.com/chapter/10.1007/978-3-540-24851-4_21)
+- **P1**: Strom, R. E., Yemini, S. *Typestate: A Programming Language Concept for Enhancing Software Reliability*. IEEE Transactions on Software Engineering, 1986. [IEEE Xplore](https://ieeexplore.ieee.org/document/6312929)
+- **P2**: [Rust Design Patterns - Generics as Type Classes (Type State discussion)](https://rust-unofficial.github.io/patterns/functional/generics-type-classes.html)
+- **P2**: [Refactoring Guru - State Pattern](https://refactoring.guru/design-patterns/state)

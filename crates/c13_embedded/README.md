@@ -21,6 +21,7 @@
 - **Host**: `x86_64`（模拟/文档构建）
 - **ARM**: `thumbv7em-none-eabihf`（ARM Cortex-M4F，如 STM32F4 / Nucleo-F446RE）
 - **RISC-V**: `riscv32imac-unknown-none-elf`（通用 32-bit RISC-V MCU，如 SiFive FE310 / GD32VF103）
+- **ESP32-C3 (RISC-V no_std)**: `riscv32imc-unknown-none-elf`（ESP32-C3 等 RISC-V 内核 Espressif 芯片，通过 `esp-hal` 构建）
 
 ## 功能特性
 
@@ -28,6 +29,7 @@
 |:---|:---|
 | `embedded` | 启用 ARM 目标硬件相关代码路径 |
 | `cxx-interop` | 启用 C++ 互操作支持 |
+| `esp32c3-hal` | 启用 ESP32-C3 `esp-hal` / `esp-println` 示例依赖 |
 
 ## 硬件依赖（ARM 目标）
 
