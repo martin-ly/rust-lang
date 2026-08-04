@@ -67,7 +67,7 @@ impl Miles {
     }
 
     pub fn to_kilometers(&self) -> Kilometers {
-        Kilometers((self.0 as u32) * 161 / 100)
+        Kilometers(self.0 * 161 / 100)
     }
 }
 
@@ -727,12 +727,14 @@ mod tests {
 
     #[test]
     fn defer_guard() {
-        let mut flag = false;
+        use std::cell::Cell;
+        let flag = Cell::new(false);
         {
-            let _guard = ScopeGuard::new(|| flag = true);
-            assert!(!flag);
+            let f = &flag;
+            let _guard = ScopeGuard::new(move || f.set(true));
+            assert!(!f.get());
         }
-        assert!(flag);
+        assert!(flag.get());
     }
 
     #[test]

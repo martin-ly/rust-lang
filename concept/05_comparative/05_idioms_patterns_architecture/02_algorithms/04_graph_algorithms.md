@@ -197,13 +197,13 @@ fn main() {
 
 若用自定义类型作为 `HashMap` 的键，必须实现 `Eq` 与 `Hash`，否则会触发 `E0277`。
 
-```rust,compile_fail,E0277
+```rust,compile_fail,E0599
 use std::collections::HashMap;
 
 struct NodeId(u32);
 
 fn main() {
-    // 错误：NodeId 没有实现 Eq + Hash
+    // 错误：NodeId 没有实现 Eq + Hash，因此 HashMap::insert 不可用
     let mut dist: HashMap<NodeId, i32> = HashMap::new();
     dist.insert(NodeId(0), 0);
 }

@@ -18,7 +18,8 @@
 > [Session Types and Rust Channels](13_session_types_and_rust_channels.md) ·
 > [RustBelt Ownership Logic](16_rustbelt_ownership_logic.md) ·
 > [Effect Handlers and Rust Limited Effects](14_effect_handlers_and_rust_limited_effects.md) ·
-> [Unsafe Contracts Formal](../01_ownership_logic/07_unsafe_contracts_formal.md)
+> [Unsafe Contracts Formal](../01_ownership_logic/07_unsafe_contracts_formal.md) ·
+> [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
 
 ---
 

@@ -164,19 +164,27 @@ fn main() {
 `Trie::root` 是私有的，外部代码直接访问会触发编译错误 `E0616`。
 
 ```rust,compile_fail,E0616
-use std::collections::HashMap;
+mod trie {
+    use std::collections::HashMap;
 
-struct Node {
-    children: HashMap<char, Node>,
-    is_end: bool,
-}
+    pub struct Node {
+        children: HashMap<char, Node>,
+        is_end: bool,
+    }
 
-struct Trie {
-    root: Node,
+    pub struct Trie {
+        root: Node, // private field
+    }
+
+    impl Trie {
+        pub fn new() -> Self {
+            Self { root: Node { children: HashMap::new(), is_end: false } }
+        }
+    }
 }
 
 fn main() {
-    let trie = Trie { root: Node { children: HashMap::new(), is_end: false } };
+    let trie = trie::Trie::new();
     // 错误：root 字段私有
     let _ = trie.root;
 }

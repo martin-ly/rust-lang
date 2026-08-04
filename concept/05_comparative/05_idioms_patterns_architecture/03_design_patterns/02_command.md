@@ -92,14 +92,16 @@ flowchart TD
 ## 五、Rust 零成本表达与示例
 
 ```rust
+use std::cell::RefCell;
+
 fn main() {
-    let mut light = Light::new();
+    let light = Light::new();
     let mut invoker = Invoker::new();
 
-    invoker.run(Box::new(TurnOn(&mut light)));
+    invoker.run(Box::new(TurnOn(&light)));
     assert!(light.is_on());
 
-    invoker.run(Box::new(TurnOff(&mut light)));
+    invoker.run(Box::new(TurnOff(&light)));
     assert!(!light.is_on());
 
     invoker.undo_all();
@@ -114,24 +116,24 @@ trait Command {
     fn undo(&mut self);
 }
 
-// 接收者
-struct Light(bool);
+// 接收者：使用内部可变性，让多个命令共享同一份引用
+struct Light(RefCell<bool>);
 impl Light {
-    fn new() -> Self { Self(false) }
-    fn turn_on(&mut self) { self.0 = true; }
-    fn turn_off(&mut self) { self.0 = false; }
-    fn is_on(&self) -> bool { self.0 }
+    fn new() -> Self { Self(RefCell::new(false)) }
+    fn turn_on(&self) { *self.0.borrow_mut() = true; }
+    fn turn_off(&self) { *self.0.borrow_mut() = false; }
+    fn is_on(&self) -> bool { *self.0.borrow() }
 }
 
 // 具体命令：开灯
-struct TurnOn<'a>(&'a mut Light);
+struct TurnOn<'a>(&'a Light);
 impl<'a> Command for TurnOn<'a> {
     fn execute(&mut self) { self.0.turn_on(); }
     fn undo(&mut self) { self.0.turn_off(); }
 }
 
 // 具体命令：关灯
-struct TurnOff<'a>(&'a mut Light);
+struct TurnOff<'a>(&'a Light);
 impl<'a> Command for TurnOff<'a> {
     fn execute(&mut self) { self.0.turn_off(); }
     fn undo(&mut self) { self.0.turn_on(); }
@@ -190,14 +192,14 @@ fn main() {}
 
 ### 错误 2：命令借用接收者，却把接收者与命令同时可变借用
 
-```rust,compile_fail,E0499
+```rust,compile_fail,E0506
 struct Light(bool);
 struct TurnOn<'a>(&'a mut Light);
 
 fn main() {
     let mut light = Light(false);
     let cmd = TurnOn(&mut light);
-    light.0 = true; // ERROR: 已经借出 &mut light 给 cmd
+    light.0 = true; // ERROR: `light.0` 已经被 `&mut light` 借用
     let _ = cmd;
 }
 ```

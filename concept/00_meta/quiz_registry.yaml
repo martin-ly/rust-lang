@@ -294,6 +294,24 @@ standalone_quizzes:
   - concept/05_comparative/01_systems_languages/01_rust_vs_cpp.md
   - concept/05_comparative/01_systems_languages/03_rust_vs_go.md
   concept_to_quiz_backlink: true
+- path: concept/05_comparative/05_quizzes/01_quiz_idioms_patterns_architecture.md
+  layer: L5
+  topic: Rust 惯用法、算法、设计模式与架构模式
+  questions: 15
+  meta_questions: 0
+  question_types:
+  - code_reading
+  - multiple_choice
+  - single_choice
+  - true_false
+  difficulty:
+    basic: 5
+    intermediate: 8
+    expert: 2
+  quiz_to_concept: true
+  concept_pages:
+  - concept/05_comparative/05_idioms_patterns_architecture/README.md
+  concept_to_quiz_backlink: true
 - path: concept/06_ecosystem/00_toolchain/06_quiz_toolchain.md
   layer: L6
   topic: Rust 工具链（Cargo、Clippy、Miri、rustfmt、发布流程）

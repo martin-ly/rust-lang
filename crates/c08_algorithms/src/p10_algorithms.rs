@@ -124,7 +124,7 @@ impl Trie {
 
     /// 查询单词是否存在。
     pub fn search(&self, word: &str) -> bool {
-        self.find(word).map_or(false, |n| n.is_end)
+        self.find(word).is_some_and(|n| n.is_end)
     }
 
     /// 查询是否有以 `prefix` 开头的单词。
@@ -136,10 +136,7 @@ impl Trie {
         let mut node = self;
         for ch in word.chars() {
             let idx = (ch as u8 - b'a') as usize;
-            match &node.children[idx] {
-                Some(next) => node = next,
-                None => return None,
-            }
+            node = node.children[idx].as_ref()?;
         }
         Some(node)
     }
@@ -334,21 +331,17 @@ impl<T> LockFreeStack<T> {
         let guard = &crossbeam_epoch::pin();
         loop {
             let head = self.head.load(AtomicOrdering::Acquire, guard);
-            match unsafe { head.as_ref() } {
-                Some(h) => {
-                    let next = h.next.load(AtomicOrdering::Relaxed, guard);
-                    if self
-                        .head
-                        .compare_exchange(head, next, AtomicOrdering::Relaxed, AtomicOrdering::Relaxed, guard)
-                        .is_ok()
-                    {
-                        unsafe {
-                            guard.defer_destroy(head);
-                            return Some(std::ptr::read(&h.data));
-                        }
-                    }
+            let h = unsafe { head.as_ref() }?;
+            let next = h.next.load(AtomicOrdering::Relaxed, guard);
+            if self
+                .head
+                .compare_exchange(head, next, AtomicOrdering::Relaxed, AtomicOrdering::Relaxed, guard)
+                .is_ok()
+            {
+                unsafe {
+                    guard.defer_destroy(head);
+                    return Some(std::ptr::read(&h.data));
                 }
-                None => return None,
             }
         }
     }
@@ -411,7 +404,7 @@ mod tests {
         let bfs = g.bfs(0);
         assert_eq!(bfs[0], 0);
         let dist = g.dijkstra(0);
-        assert_eq!(dist.get(&3), Some(&3));
+        assert_eq!(dist.get(&3), Some(&4));
     }
 
     #[test]

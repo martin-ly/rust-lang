@@ -42,6 +42,12 @@
 | 09 | `09_concurrency_models_actors_csp.md` | 并发计算模型：CSP、Actor、TLA+ 与 Rust | ✅ 已创建 |
 | 10 | `10_category_theory_and_rust.md` | 范畴论与 Rust：作为计算模型的结构语义 | ✅ 已创建 |
 | 11 | `11_modal_logic_and_rust_effects.md` | 模态逻辑与 Rust 计算效应 | ✅ 已创建 |
+| 12 | `12_linear_logic_and_ownership.md` | 线性逻辑与所有权：资源演算计算模型 | ✅ 已创建 |
+| 13 | `13_session_types_and_rust_channels.md` | 会话类型与 Rust 通道：通信协议计算模型 | ✅ 已创建 |
+| 14 | `14_effect_handlers_and_rust_limited_effects.md` | Effect Handlers 与 Rust 受限效应：控制流计算模型 | ✅ 已创建 |
+| 15 | `15_refinement_types_and_flux.md` | 精化类型与 Flux：约束演算计算模型 | ✅ 已创建 |
+| 16 | `16_rustbelt_ownership_logic.md` | RustBelt 所有权逻辑：内存安全证明计算模型 | ✅ 已创建 |
+| 17 | `17_aeneas_verification_pipeline.md` | Aeneas 验证流水线：符号化借用演算计算模型 | ✅ 已创建 |
 
 ---
 
@@ -72,5 +78,11 @@ semantic_space.md §3 能表达边界 / §4 等价表达
             ├── 分离逻辑模型：own / shr / Iris / RustBelt
             ├── 并发模型：CSP / Actor / TLA+ 与 Rust 工程投影
             ├── 范畴模型：CCC / 积和 / 指数 / 函子 / 单子
-            └── 模态模型：Kripke / Iris □▷ / 生命周期 / unsafe / async
+            ├── 模态模型：Kripke / Iris □▷ / 生命周期 / unsafe / async
+            ├── 线性资源模型：⊗ / ⊸ / ! / 仿射 ownership
+            ├── 会话协议模型：! / ? / ⊕ / & / 对偶 / 多党投影
+            ├── 效应模型：effect handlers / Result / async / panic / unsafe
+            ├── 约束模型：精化类型 / Liquid Types / Flux / SMT
+            ├── RustBelt 模型：own/shr/uniq / 生命周期分数权限 / 不变量
+            └── Aeneas 模型：LLBC / 符号执行 / 区域抽象 / 函数式翻译
 ```

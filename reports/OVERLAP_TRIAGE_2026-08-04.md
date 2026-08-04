@@ -1,13 +1,13 @@
 # 重叠对分类（P1 改写执行清单）
 
-**来源**: `reports/CONTENT_OVERLAP_V2_2026-08-04.json`  **总对数**: 492
+**来源**: `reports/CONTENT_OVERLAP_V2_2026-08-04.json`  **总对数**: 555
 
 | 分类 | 数量 | 处置 |
 |---|:---:|:---|
 | MERGE | 0 | 应合并近克隆（留一删余或 stub 化） |
 | DOCS_INTERNAL | 0 | docs/ 内同主题互抄（合并或互链） |
-| SERIES | 109 | 保留但标注为版本系列/分章（白名单） |
-| REVIEWED | 381 | 已批量复核确认非重复（stub/模板系列/同领域术语共现，白名单） |
+| SERIES | 106 | 保留但标注为版本系列/分章（白名单） |
+| REVIEWED | 447 | 已批量复核确认非重复（stub/模板系列/同领域术语共现，白名单） |
 | REVIEW | 2 | 人工复核 |
 
 ## MERGE（0）Top 25
@@ -20,7 +20,7 @@
 | sim | 文件1 | 文件2 |
 |:---:|:---|:---|
 
-## SERIES（109）Top 25
+## SERIES（106）Top 25
 
 | sim | 文件1 | 文件2 |
 |:---:|:---|:---|
@@ -50,19 +50,23 @@
 | 0.719 | `docs/05_practice/04_project_03_calculator.md` | `docs/05_practice/12_project_11_web_server.md` |
 | 0.719 | `docs/05_practice/04_project_03_calculator.md` | `docs/05_practice/15_project_14_async_runtime.md` |
 
-## REVIEWED（381）Top 25
+## REVIEWED（447）Top 25
 
 | sim | 文件1 | 文件2 |
 |:---:|:---|:---|
 | 0.846 | `crates/c08_algorithms/docs/tier_01_foundations/01_project_overview.md` | `crates/c08_algorithms/docs/tier_01_foundations/02_navigation.md` |
 | 0.846 | `crates/c01_ownership_borrow_scope/docs/tier_03_references/03_lifetimes_reference.md` | `crates/c01_ownership_borrow_scope/docs/tier_04_advanced/01_advanced_lifetime_patterns.md` |
-| 0.818 | `crates/c05_threads/docs/tier_01_foundations/02_navigation.md` | `crates/c05_threads/docs/tier_01_foundations/03_glossary.md` |
 | 0.818 | `crates/c04_generic/docs/00_master_index.md` | `crates/c04_generic/docs/tier_01_foundations/01_project_overview.md` |
 | 0.818 | `crates/c04_generic/docs/00_master_index.md` | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md` |
 | 0.818 | `crates/c04_generic/docs/00_master_index.md` | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md` |
+| 0.818 | `crates/c04_generic/docs/00_master_index.md` | `crates/c04_generic/docs/tier_01_foundations/04_faq.md` |
 | 0.818 | `crates/c04_generic/docs/tier_01_foundations/01_project_overview.md` | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md` |
 | 0.818 | `crates/c04_generic/docs/tier_01_foundations/01_project_overview.md` | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md` |
+| 0.818 | `crates/c04_generic/docs/tier_01_foundations/01_project_overview.md` | `crates/c04_generic/docs/tier_01_foundations/04_faq.md` |
 | 0.818 | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md` | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md` |
+| 0.818 | `crates/c04_generic/docs/tier_01_foundations/02_navigation.md` | `crates/c04_generic/docs/tier_01_foundations/04_faq.md` |
+| 0.818 | `crates/c04_generic/docs/tier_01_foundations/03_glossary.md` | `crates/c04_generic/docs/tier_01_foundations/04_faq.md` |
+| 0.818 | `crates/c05_threads/docs/tier_01_foundations/02_navigation.md` | `crates/c05_threads/docs/tier_01_foundations/03_glossary.md` |
 | 0.8 | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md` | `crates/c01_ownership_borrow_scope/docs/03_mind_map.md` |
 | 0.8 | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md` | `crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md` |
 | 0.8 | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md` | `crates/c01_ownership_borrow_scope/docs/15_visualization_index.md` |
@@ -75,10 +79,6 @@
 | 0.75 | `crates/c05_threads/docs/tier_01_foundations/02_navigation.md` | `crates/c05_threads/docs/tier_01_foundations/04_faq.md` |
 | 0.75 | `crates/c05_threads/docs/tier_01_foundations/03_glossary.md` | `crates/c05_threads/docs/tier_01_foundations/04_faq.md` |
 | 0.727 | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md` | `crates/c01_ownership_borrow_scope/docs/07_role_based_navigation.md` |
-| 0.727 | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md` | `crates/c01_ownership_borrow_scope/docs/tier_01_foundations/03_glossary.md` |
-| 0.727 | `crates/c01_ownership_borrow_scope/docs/03_mind_map.md` | `crates/c01_ownership_borrow_scope/docs/07_role_based_navigation.md` |
-| 0.727 | `crates/c01_ownership_borrow_scope/docs/03_mind_map.md` | `crates/c01_ownership_borrow_scope/docs/tier_01_foundations/03_glossary.md` |
-| 0.727 | `crates/c01_ownership_borrow_scope/docs/04_multidimensional_matrix.md` | `crates/c01_ownership_borrow_scope/docs/tier_01_foundations/03_glossary.md` |
 
 ## REVIEW（2）Top 25
 
