@@ -336,4 +336,72 @@ scripts/rust_1_98_0_release_response.py
 
 ---
 
+---
+
+## 12. 第五轮推进记录（2026-08-05 末期）
+
+### 12.1 更多嵌入式硬件目标验证
+
+为 `crates/c13_embedded` 新增以下目标构建验证：
+
+| 目标 | 说明 | 状态 |
+|:---|:---|:---|
+| `aarch64-unknown-none-softfloat` | ARM Cortex-A 裸机 | ✅ 构建通过 |
+| `wasm32-unknown-unknown` | WebAssembly 裸机 | ✅ 构建通过 |
+| `thumbv8m.main-none-eabihf` | ARM Cortex-M33 | ✅ 构建通过 |
+
+新增示例：
+- `crates/c13_embedded/examples/aarch64_minimal_main.rs`
+- `crates/c13_embedded/examples/wasm_minimal_main.rs`
+- `crates/c13_embedded/examples/thumbv8m_minimal_main.rs`
+
+关键改动：
+- 根目录 `.cargo/config.toml` 与 `crates/c13_embedded/.cargo/config.toml` 新增 target 配置。
+- `crates/c13_embedded/Cargo.toml` 新增 AArch64 / WASM 条件依赖。
+- `src/lib.rs` / `src/main.rs` 使用统一的 `cfg(bare_metal)` 标记裸机目标。
+- `Cargo.toml` workspace 注册 `cfg(bare_metal)` 到 `unexpected_cfgs`。
+- `crates/c13_embedded/README.md` 更新支持目标列表。
+
+验证：
+- `cargo build --workspace` ✅
+- `cargo test -p c13_embedded` ✅（16 测试 + 2 ignored doctests）
+- `bash scripts/run_quality_gates.sh` ✅
+
+当前 `c13_embedded` 已验证目标：
+- `thumbv7em-none-eabihf`
+- `thumbv7m-none-eabi`
+- `thumbv6m-none-eabi`
+- `thumbv8m.main-none-eabihf`
+- `riscv32imac-unknown-none-elf`
+- `riscv32imc-unknown-none-elf`
+- `aarch64-unknown-none-softfloat`
+- `wasm32-unknown-unknown`
+- ESP32-IDF（待 toolchain 可用后验证）
+
+### 12.2 报告归档清理
+
+将 41 个 2026-08-04 的重复/临时质量门基线报告迁移到：
+
+```
+archive/09_special_collections/quality_gate_baselines_2026_08/
+```
+
+迁移内容：
+- 2026-08-04 的 daily gate 报告（authority coverage、consistency audit、overlap、KG shapes/precision/SHACL、metadata、semantic health、topology）
+- 临时代码块检查报告（CODE_BLOCKS_INTERIM*、DEFAULT*、FINAL、FULL 等）
+- `CB_CHECK_WS_F_2026_08_04.md`、`CB_P8_6_2026_08_04.md`、`IDIOMS_CODE_BLOCKS_CHECK_2026_08_04.md`
+
+保留在 `reports/` 中的：
+- 最新 2026-08-05 daily gate 基线
+- P10 / P7 / P8 / P9 完成报告与计划
+- `P10_Semantic_Domain_Alignment_COMPLETION_2026_08_04.md`
+
+### 12.3 质量门状态
+
+`bash scripts/run_quality_gates.sh` 2026-08-05 复测（嵌入式扩展 + 报告归档后）：
+
+> ✅ **All 23 quality gates passed (23 blocking + 5 semantic observe).**
+
+---
+
 *由 P10 全面推进任务生成 · 完成时间 2026-08-04 · 更新 2026-08-05*
