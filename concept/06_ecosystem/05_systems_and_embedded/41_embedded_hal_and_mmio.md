@@ -1,7 +1,7 @@
 # 嵌入式 HAL 与 MMIO：从 trait 语义到类型安全的寄存器访问
 
 **EN**: Embedded HAL and MMIO: Trait Semantics and Type-Safe Register Access
-**Summary**: A comprehensive guide to the `embedded-hal` trait ecosystem, PAC/SVD-generated register blocks, memory-mapped I/O type safety, read-modify-write semantics, typestate peripherals, and their integration with `no_std`, Embassy, and RTIC.
+**Summary**: Explains how `embedded-hal` traits decouple portable drivers from MCU-specific HALs, how PAC/SVD-generated register blocks provide type-safe MMIO access, and how read-modify-write semantics and typestate peripherals integrate with `no_std`, Embassy, and RTIC.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5
@@ -1092,6 +1092,12 @@ rcc.ahb1rstr.modify(|_, w| w.gpioarst().clear_bit());
 ## 权威来源与延伸阅读（International Authority Sources）
 
 - `embedded-hal` docs：<https://docs.rs/embedded-hal/latest/embedded_hal/>
+- `embedded-hal-async` docs：<https://docs.rs/embedded-hal-async/latest/embedded_hal_async/>
+- `embedded-io` docs：<https://docs.rs/embedded-io/latest/embedded_io/>
+- `svd2rust` docs（PAC 生成参考）：<https://docs.rs/svd2rust/latest/svd2rust/>
 - The Rust Embedded Book：<https://docs.rust-embedded.org/book/>
+- Embassy 官方文档：<https://embassy.dev/>
+- RTIC Book：<https://rtic.rs/2/book/en/>
+- The Rust Reference：<https://doc.rust-lang.org/reference/>
 - The Rust Programming Language（TRPL）：<https://doc.rust-lang.org/book/>
 - RustBelt（Rust 形式化基础）：<https://plv.mpi-sws.org/rustbelt/>

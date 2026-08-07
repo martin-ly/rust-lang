@@ -61,6 +61,11 @@ criteria = "safe-to-run"
 version = "10.6.3"
 notes = "2026-08-04: amq-protocol-uri 10.6.3 为 lapin 4.10.0 的 AMQP URI 解析传递依赖版本升级，仅用于 AMQP 示例/测试路径。"
 
+[[audits.android_system_properties]]
+criteria = "safe-to-run"
+version = "0.1.6"
+notes = "2026-08-04: android_system_properties 0.1.6 (nical 官方维护) 为 cargo update 补丁升级 (0.1.5 -> 0.1.6)，为 os_info/wgpu-hal/iana-time-zone 的 Android 系统属性传递依赖，无网络暴露面。"
+
 [[audits.async-compat]]
 criteria = "safe-to-run"
 version = "0.2.5"
@@ -105,6 +110,16 @@ notes = "2026-07-11: cc 1.2.67 (rust-lang/cc-rs 官方维护) 为构建脚本通
 criteria = "safe-to-run"
 version = "0.5.2"
 notes = "2026-07-27: cipher 0.5.2 (RustCrypto 官方维护) 为 aes-gcm 0.11 升级后的传递依赖，仅用于 benchmark 中的本地加密示例。"
+
+[[audits.clap]]
+criteria = "safe-to-run"
+version = "4.6.6"
+notes = "2026-08-04: clap 4.6.6 (epage 官方维护) 为 cargo update 补丁升级 (4.6.5 -> 4.6.6)，为 criterion 等传递依赖的命令行解析库，仅用于本地 benchmark/测试路径。"
+
+[[audits.clap_builder]]
+criteria = "safe-to-run"
+version = "4.6.6"
+notes = "2026-08-04: clap_builder 4.6.6 (epage 官方维护) 为 cargo update 补丁升级 (4.6.5 -> 4.6.6)，clap 命令行解析核心构建器，仅用于本地示例/测试路径。"
 
 [[audits.cpubits]]
 criteria = "safe-to-run"
@@ -176,15 +191,30 @@ criteria = "safe-to-run"
 version = "8.0.0"
 notes = "2026-07-27: nom 8.0.0 (Geal 官方维护) 为 lapin 4.10.0 / x509-parser 的解析器传递依赖，仅用于 AMQP 示例/测试路径。"
 
+[[audits.ntex]]
+criteria = "safe-to-run"
+version = "3.12.2"
+notes = "2026-08-04: ntex 3.12.2 (fafhrd91 官方维护) 为 cargo update 补丁升级 (3.12.0 -> 3.12.2)，为 c06_async 的本地异步网络服务示例依赖，不处理不可信网络输入。"
+
 [[audits.ntex-net]]
 criteria = "safe-to-run"
 version = "3.14.0"
 notes = "2026-08-04: ntex-net 3.14.0 (ntex 官方维护) 为 ntex 网络框架传递依赖，仅用于本地网络服务示例与测试路径。"
 
+[[audits.ntex-net]]
+criteria = "safe-to-run"
+version = "3.14.1"
+notes = "2026-08-04: ntex-net 3.14.1 (ntex 官方维护) 为 cargo update 补丁升级 (3.14.0 -> 3.14.1)，为 ntex 网络框架传递依赖，仅用于本地网络服务示例与测试路径。"
+
 [[audits.ntex-rt]]
 criteria = "safe-to-run"
 version = "3.16.0"
 notes = "2026-08-04: ntex-rt 3.16.0 (ntex 官方维护) 为 ntex 运行时传递依赖，仅用于本地异步网络示例与测试路径。"
+
+[[audits.ntex-rt]]
+criteria = "safe-to-run"
+version = "3.16.1"
+notes = "2026-08-04: ntex-rt 3.16.1 (ntex 官方维护) 为 cargo update 补丁升级 (3.16.0 -> 3.16.1)，为 ntex 运行时传递依赖，仅用于本地异步网络示例与测试路径。"
 
 [[audits.p12-keystore]]
 criteria = "safe-to-run"
@@ -231,6 +261,11 @@ criteria = "safe-to-run"
 version = "0.95.0"
 notes = "2026-07-18: salvo 0.95.0 (salvo-rs 官方维护) 仅作为 c06_async 的 dev-dependency 用于 Web 框架示例，不参与默认构建产物。"
 
+[[audits.salvo]]
+criteria = "safe-to-run"
+version = "0.95.2"
+notes = "2026-08-04: salvo 0.95.2 (salvo-rs 官方维护) 为 cargo update 补丁升级 (0.95.1 -> 0.95.2)，仅作为 c06_async 的 dev-dependency 用于 Web 框架示例，不参与默认构建产物。"
+
 [[audits.salvo-proxy]]
 criteria = "safe-to-run"
 version = "0.94.0"
@@ -240,6 +275,11 @@ notes = "2026-07-11: salvo-proxy 0.94.0 (salvo-rs 官方维护) 为 salvo 0.94 �
 criteria = "safe-to-run"
 version = "0.95.0"
 notes = "2026-07-18: salvo-proxy 0.95.0 (salvo-rs 官方维护) 为 salvo 0.95 传递依赖，dev 示例用途。"
+
+[[audits.salvo-proxy]]
+criteria = "safe-to-run"
+version = "0.95.2"
+notes = "2026-08-04: salvo-proxy 0.95.2 (salvo-rs 官方维护) 为 cargo update 补丁升级 (0.95.1 -> 0.95.2)，为 salvo 0.95 传递依赖，dev 示例用途。"
 
 [[audits.salvo-serde-util]]
 criteria = "safe-to-run"
@@ -251,6 +291,11 @@ criteria = "safe-to-run"
 version = "0.95.0"
 notes = "2026-07-18: salvo-serde-util 0.95.0 (salvo-rs 官方维护) 为 salvo 0.95 传递依赖，dev 示例用途。"
 
+[[audits.salvo-serde-util]]
+criteria = "safe-to-run"
+version = "0.95.2"
+notes = "2026-08-04: salvo-serde-util 0.95.2 (salvo-rs 官方维护) 为 cargo update 补丁升级 (0.95.1 -> 0.95.2)，为 salvo 0.95 传递依赖，dev 示例用途。"
+
 [[audits.salvo_core]]
 criteria = "safe-to-run"
 version = "0.94.0"
@@ -261,6 +306,11 @@ criteria = "safe-to-run"
 version = "0.95.0"
 notes = "2026-07-18: salvo_core 0.95.0 (salvo-rs 官方维护) 为 salvo 0.95 核心传递依赖，dev 示例用途。"
 
+[[audits.salvo_core]]
+criteria = "safe-to-run"
+version = "0.95.2"
+notes = "2026-08-04: salvo_core 0.95.2 (salvo-rs 官方维护) 为 cargo update 补丁升级 (0.95.1 -> 0.95.2)，为 salvo 0.95 核心传递依赖，dev 示例用途。"
+
 [[audits.salvo_macros]]
 criteria = "safe-to-run"
 version = "0.94.0"
@@ -270,6 +320,11 @@ notes = "2026-07-11: salvo_macros 0.94.0 (salvo-rs 官方维护) 为 salvo 0.94 
 criteria = "safe-to-run"
 version = "0.95.0"
 notes = "2026-07-18: salvo_macros 0.95.0 (salvo-rs 官方维护) 为 salvo 0.95 过程宏传递依赖，编译期执行。"
+
+[[audits.salvo_macros]]
+criteria = "safe-to-run"
+version = "0.95.2"
+notes = "2026-08-04: salvo_macros 0.95.2 (salvo-rs 官方维护) 为 cargo update 补丁升级 (0.95.1 -> 0.95.2)，为 salvo 0.95 过程宏传递依赖，编译期执行。"
 
 [[audits.schemars]]
 criteria = "safe-to-run"
@@ -311,20 +366,45 @@ criteria = "safe-to-run"
 version = "1.2.3"
 notes = "2026-08-04: webbrowser 1.2.3 (amodm 官方维护) 为打开系统浏览器传递依赖，仅用于本地文档/链接示例，不处理网络输入。"
 
+[[audits.webbrowser]]
+criteria = "safe-to-run"
+version = "1.2.4"
+notes = "2026-08-04: webbrowser 1.2.4 (amodm 官方维护) 为 cargo update 补丁升级 (1.2.3 -> 1.2.4)，为打开系统浏览器传递依赖，仅用于本地文档/链接示例，不处理网络输入。"
+
 [[audits.x509-parser]]
 criteria = "safe-to-run"
 version = "0.18.1"
 notes = "2026-07-27: x509-parser 0.18.1 为 lapin 4.10.0 的 TLS/X.509 证书解析传递依赖，仅用于 AMQP 示例/测试路径。"
+
+[[audits.xml]]
+criteria = "safe-to-run"
+version = "1.4.0"
+notes = "2026-08-04: xml 1.4.0 (kornelski 官方维护) 为 cargo update 补丁升级 (1.3.0 -> 1.4.0)，为 serde-xml-rs 的 XML 解析传递依赖，仅用于本地 XML 示例/测试路径。"
+
+[[audits.xml-rs]]
+criteria = "safe-to-run"
+version = "0.8.29"
+notes = "2026-08-04: xml-rs 0.8.29 (kornelski 官方维护) 为 cargo update 补丁升级 (0.8.28 -> 0.8.29)，为 xmltree/gl_generator 的 XML 解析传递依赖，仅用于本地 XML 示例/测试路径。"
 
 [[audits.zerocopy]]
 criteria = "safe-to-run"
 version = "0.8.54"
 notes = "Local exemption for zerocopy 0.8.54. This is a safe-to-run (test/dev) dependency used transitively by ahash/ppv-lite86/half. Patch update from 0.8.53 with minimal changes."
 
+[[audits.zerocopy]]
+criteria = "safe-to-run"
+version = "0.8.56"
+notes = "2026-08-04: zerocopy 0.8.56 (joshlf 官方维护) 为 cargo update 补丁升级 (0.8.55 -> 0.8.56)，为 ahash/ppv-lite86/half/candle-core 的传递依赖，safe-to-run (test/dev) only。"
+
 [[audits.zerocopy-derive]]
 criteria = "safe-to-run"
 version = "0.8.54"
 notes = "Local exemption for zerocopy-derive 0.8.54. Proc-macro derive companion to zerocopy; safe-to-run (test/dev) only."
+
+[[audits.zerocopy-derive]]
+criteria = "safe-to-run"
+version = "0.8.56"
+notes = "2026-08-04: zerocopy-derive 0.8.56 (joshlf 官方维护) 为 cargo update 补丁升级 (0.8.55 -> 0.8.56)，为 zerocopy 的过程宏派生伴侣，safe-to-run (test/dev) only。"
 
 [[audits.zip]]
 criteria = "safe-to-run"

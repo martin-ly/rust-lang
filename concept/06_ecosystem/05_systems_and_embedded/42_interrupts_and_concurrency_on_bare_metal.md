@@ -1,7 +1,7 @@
 # 裸机并发：中断、NVIC、临界区与异步执行器
 
 **EN**: Interrupts and Concurrency on Bare Metal
-**Summary**: A comprehensive guide to bare-metal concurrency on Cortex-M/RISC-V, covering NVIC priorities, critical sections, atomics and memory barriers, RTIC static scheduling versus Embassy async executors, DMA buffer ownership, and common lifetime/atomicity pitfalls.
+**Summary**: Analyzes bare-metal concurrency on Cortex-M/RISC-V microcontrollers, covering NVIC priority inversion and preemption, critical-section primitives, atomic ordering and memory barriers, RTIC static scheduling versus Embassy async executors, DMA buffer ownership, and lifetime/atomicity pitfalls.
 
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5
@@ -1087,6 +1087,10 @@ gpioa.moder.modify(|_, w| w.moder5().output());
 ## 权威来源与延伸阅读（International Authority Sources）
 
 - The Rust Embedded Book：<https://docs.rust-embedded.org/book/>
-- RTIC：<https://rtic.rs/>
+- Embassy 官方文档：<https://embassy.dev/>
+- RTIC Book：<https://rtic.rs/2/book/en/>
+- `cortex-m` crate 文档（NVIC、异常、寄存器访问）：<https://docs.rs/cortex-m/latest/cortex_m/>
+- `critical-section` crate 文档：<https://docs.rs/critical-section/latest/critical_section/>
+- ARM Cortex-M 系列处理器通用用户指南（NVIC 与中断语义）：<https://developer.arm.com/documentation/dui0553/latest/>
 - The Rust Programming Language（TRPL）：<https://doc.rust-lang.org/book/>
 - Stacked Borrows：Rust 别名模型与并发内存安全的形式化：<https://plv.mpi-sws.org/rustbelt/stacked-borrows/>
