@@ -17,19 +17,21 @@
 
 > **来源**:
 > [std::string::String](https://doc.rust-lang.org/std/string/struct.String.html) ·
-> · [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
+> [std::str](https://doc.rust-lang.org/std/str/index.html) ·
+> [TRPL Ch8 — Strings](https://doc.rust-lang.org/book/ch08-02-strings.html) ·
+> [Rust Reference — Textual Types](https://doc.rust-lang.org/reference/types/textual.html) ·
+> [Rust Std — OsString](https://doc.rust-lang.org/std/ffi/struct.OsString.html) ·
+> [UTF-8 RFC 3629](https://tools.ietf.org/html/rfc3629) ·
+> [RFC 504 — CString](https://github.com/rust-lang/rfcs/pull/504) ·
+> [Unicode Standard](https://www.unicode.org/versions/latest/) ·
+> [Unicode TR29 — Text Segmentation](https://www.unicode.org/reports/tr29/) ·
+> [Unicode TR15 — Normalization](https://www.unicode.org/reports/tr15/) ·
+> [unicode-segmentation crate](https://docs.rs/unicode-segmentation/latest/unicode_segmentation/) ·
+> [RustBelt — POPL 2018](https://plv.mpi-sws.org/rustbelt/popl18/) ·
 > [O'Hearn — Separation Logic and Shared Mutable Data](https://doi.org/10.1017/S0960129501001003) ·
 > [Brown University — Concepts in Rust Programming](https://cel.cs.brown.edu/crp/) ·
 > [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
-> [Unicode Standard](https://www.unicode.org/versions/latest/)
-> [std::str](https://doc.rust-lang.org/std/str/index.html) ·
-> [TRPL Ch8 — Strings](https://doc.rust-lang.org/book/ch08-02-strings.html) ·
-> [Unicode Standard](https://www.unicode.org/standard/standard.html) ·
-> [UTF-8 RFC 3629](https://tools.ietf.org/html/rfc3629) ·
-> [RFC 504 — CString](https://github.com/rust-lang/rfcs/pull/504) ·
-> [unicode-segmentation crate](https://docs.rs/unicode-segmentation/latest/unicode_segmentation/) ·
-> [Wikipedia — Unicode](https://en.wikipedia.org/wiki/Unicode) ·
-> [Rust Std — OsString](https://doc.rust-lang.org/std/ffi/struct.OsString.html)
+> [Wikipedia — Unicode](https://en.wikipedia.org/wiki/Unicode)
 
 ## 🧠 知识结构图
 
@@ -111,6 +113,8 @@ mindmap
 ## 一、核心概念
 >
 >
+
+Rust 的字符串体系以所有权（Ownership）和编码不变量为基石：`String` 拥有可变缓冲区，`&str` 是借用的 UTF-8 视图，`OsString` 与 `CString` 则分别处理操作系统和 C FFI 边界的平台约定。理解这些核心类型的差异，是避免索引 panic、编码损失和 FFI 不安全的前提。本节从所有权谱系、UTF-8 选择以及平台字符串抽象三个角度，建立后续技术细节的语境。
 
 ### 1.1 String vs &str：所有权谱系
 >
@@ -246,6 +250,8 @@ Rust 的字符串类型全景:
 ## 二、技术细节
 >
 >
+
+在掌握类型概览后，需要深入字符串切片的字节边界、Unicode 标量值与 grapheme cluster 的层次，以及规范化对比较和存储的影响。Rust 把 UTF-8 验证从“可选检查”提升为“类型不变量”，使 `str` 的任何切片都必须落在合法字符边界上。本节的技术细节解释了为什么字符串操作常比数组操作更昂贵，也说明了何时需要借助外部 crate 处理用户感知字符。
 
 ### 2.1 字符串切片与字符边界
 >
@@ -896,6 +902,8 @@ fn main() {
 > 零拷贝解析 ⟸ 字符串切片（String Slice） ⟸ 生命周期（Lifetimes）借用（Borrowing）
 
 ## Rust 1.98.0 兼容性注意
+
+Rust 1.98.0 对字符串与 where 子句语法做了若干收紧：显式字节序 UTF-16 解码、`str::strip_circumfix` 的引入，以及可打印字符表替换为官方 Unicode 数据。这些变更大多保持向后兼容，但在宏生成代码、跨版本 MSRV 边界或依赖隐式 trait 对象生命周期推断的 API 中需要留意。本节列出关键变更点、代码示例和迁移建议，帮助在升级工具链时避免意外破坏。
 
 ### 显式字节序 UTF-16 解码：`from_utf16le` / `from_utf16be`
 

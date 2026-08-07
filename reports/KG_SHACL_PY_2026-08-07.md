@@ -12,7 +12,7 @@
 
 ## 验证结果
 
-**SHACL conforms**: ✅ 通过
+**SHACL conforms**: ✅ 通过  
 **Violation 总数**: 0
 
 未发现 SHACL violation。

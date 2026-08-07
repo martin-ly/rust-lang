@@ -39,7 +39,9 @@
 > [pin-init crate docs](https://rust.docs.kernel.org/pin_init/) ·
 > [pinned-init on crates.io](https://crates.io/crates/pinned-init) ·
 > [zeroize crate docs](https://docs.rs/zeroize/latest/zeroize/) ·
-> [std::boxed::Box](https://doc.rust-lang.org/std/boxed/struct.Box.html)
+> [std::boxed::Box](https://doc.rust-lang.org/std/boxed/struct.Box.html) ·
+> [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html) ·
+> [std::pin::pin! macro](https://doc.rust-lang.org/std/pin/macro.pin.html)
 >
 > **内容去重提示**:
 > 本文是 In-place / Pinned Initialization 的 `concept/` 唯一权威来源。
@@ -115,6 +117,8 @@ Rust 的 **Initialization Invariant** 规定：任何类型为 `T` 的值的内�
 
 ## 三、`MaybeUninit<T>` 语义
 
+`MaybeUninit<T>` 是 Rust 安全处理未初始化内存的核心原语，也是原地初始化的基石。它把「分配内存」与「构造有效值」两个步骤解耦，让程序员可以先在 safe Rust 中准备类型化槽位，再在 unsafe 边界上一次性宣称初始化完成。理解其读写、借用与状态转换规则，是避免 `assume_init()` 相关 UB 的前提。
+
 ### 3.1 基本 API
 
 ```rust
@@ -175,6 +179,8 @@ fn main() {
 ---
 
 ## 四、数组与结构体逐字段初始化
+
+复合类型的原地初始化不能简单调用单个构造函数，而需要逐个元素或逐个字段写入。数组与结构体的部分初始化状态尤其危险：一旦中间步骤 panic，已构造的字段必须被正确 drop，否则既泄漏资源又破坏类型系统的不变量。本节展示如何用 `MaybeUninit` 配合逐字段投影安全地完成这一过程，并讨论 panic safety 的应对策略。
 
 ### 4.1 数组初始化与 panic safety
 
@@ -281,6 +287,8 @@ fn main() {
 
 ## 六、标准库 In-place 分配 API
 
+标准库在稳定 Rust 中提供了一系列无需先把值构造到栈上再 move 的分配 API。这些 API 把分配与初始化合并为一次堆操作，既减少了大对象的栈拷贝开销，也避免了大值在 move 过程中触发额外临时副本。掌握 `Box::new_uninit` 与 `Arc::new_uninit` 的使用契约，是高性能容器和 FFI 边界代码的常用技能。
+
 ### 6.1 `Box::new_uninit` 与 `Box::write`
 
 `Box::<T>::new_uninit()`（稳定于 1.82）返回 `Box<MaybeUninit<T>>`，允许在堆上未初始化内存中直接构造 `T`，避免大对象栈分配。
@@ -325,6 +333,8 @@ fn main() {
 ---
 
 ## 七、固定原地初始化
+
+当类型包含自引用字段时，值在内存中的地址必须在初始化后保持不变；任何 move 都会使自引用指针悬垂。Rust 通过 `Pin` 与 `PhantomPinned` 提供固定语义，而原地初始化确保自引用字段在最终地址上建立。本节对比手动 `PhantomPinned` 构造与栈固定宏 `pin!` 的适用场景与风险边界。
 
 ### 7.1 手动 `PhantomPinned` 自引用结构
 
@@ -507,6 +517,8 @@ graph TD
 ---
 
 ## 十一、反例与边界
+
+原地初始化与固定初始化虽然能提升性能并解决自引用问题，但每一步 unsafe 边界都对应着明确的 validity invariant。一旦在内存尚未有效时就调用 `assume_init`、错误使用 `zeroed()`，或在 panic 后忘记 drop 已初始化字段，都会立即引入未定义行为。以下反例展示工程中最常见、也最容易被忽视的边界错误。
 
 ### 反例 1：在未初始化内存上调用 `assume_init()` / `assume_init_ref()`
 

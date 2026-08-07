@@ -66,6 +66,8 @@
   - [🔗 概念关系](#-概念关系)
   - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [国际化权威来源补充（International Authority Sources）](#国际化权威来源补充international-authority-sources)
+  - [国际化权威来源补充（International Authority Sources）](#国际化权威来源补充international-authority-sources-1)
 
 ---
 
@@ -193,6 +195,8 @@ f();
 ---
 
 ## 二、技术细节
+
+在掌握了闭包的捕获语义与 `Fn`/`FnMut`/`FnOnce` 层级之后，本节将进一步深入编译器实现层面的关键细节：Rust 2021 如何按最小权限独立推断每个被捕获变量、闭包为什么是不可比较与不可命名的匿名类型、环境 Drop 顺序如何影响资源管理、不捕获闭包如何零成本强转为函数指针，以及异步闭包如何在普通闭包之上叠加 `async` 块的语义。这些细节不仅是面试与源码阅读中的高频考点，也直接决定了 API 设计时能否在零成本抽象、类型安全和可组合性之间做出正确权衡。
 
 ### 2.1 编译器如何推断捕获模式
 
@@ -381,6 +385,8 @@ fn main() -> std::io::Result<()> {
 
 ## 四、反命题与边界分析
 
+理解闭包不能只停留在“能跑通”，还要知道哪些看似合理的命题在 Rust 类型系统中并不成立。本节通过反命题树和边界极限表格，把“所有匿名函数都应使用闭包”“捕获引用可以随闭包返回”“`move` 一定改变 trait”等常见直觉形式化地推翻，并给出对应的类型系统解释与工程缓解策略。
+
 ### 4.1 反命题树
 
 ```mermaid
@@ -505,6 +511,8 @@ graph TD
 
 ## 十、边界测试：闭包的编译错误
 
+光知道规则不足以避免犯错；本节把闭包在实际代码中最容易触发编译错误的场景抽取成边界测试。每个示例都对应一个具体的类型系统冲突——从 `FnMut` 误用、到 `FnOnce` 多次调用、到引用逃逸生命期、再到闭包强转函数指针失败——通过编译期失败来反向巩固对捕获语义与 trait 约束的理解。
+
 ### 10.1 边界测试：在需要 `Fn` 的上下文中使用 `FnMut`（编译错误）
 
 ```rust,compile_fail
@@ -605,6 +613,8 @@ async fn example() {
 
 ## 嵌入式测验（Embedded Quiz）
 
+以下嵌入式测验覆盖本概念文件的四个核心判定点：trait 选择、`move` 语义、函数指针转换以及捕获模式推导。建议在完成阅读后先独立思考，再展开答案，以检验是否已将捕获规则与 trait 层级内化为可迁移的推理能力。
+
 ### 测验 1：`Fn`/`FnMut`/`FnOnce` 的选择（理解层）
 
 **题目**: 闭包体只读取环境变量时应实现哪个 trait？修改环境变量呢？将环境变量 move 出闭包体呢？
@@ -700,6 +710,7 @@ let f3 = || drop(v);
 | RFC 1558 — Closures | P1 设计文档 | <https://github.com/rust-lang/rfcs/pull/1558> | `Fn`/`FnMut`/`FnOnce` 设计 |
 | RFC 3668 — Async Closures | P1 设计文档 | <https://github.com/rust-lang/rfcs/pull/3668> | 异步闭包 |
 | Rustonomicon — Functions & Closures | P2 高级资料 | <https://doc.rust-lang.org/nomicon/hrtb.html> | 生命周期、高阶 trait bound |
+| Rust Reference — Destructors | P1 官方参考 | <https://doc.rust-lang.org/reference/destructors.html> | 闭包环境 Drop 顺序与析构规则 |
 | Landin, P. J. “The Mechanical Evaluation of Expressions.” *The Computer Journal*, 1964. | P1 学术 | <https://doi.org/10.1093/comjnl/6.4.308> | 闭包概念起源（SECD 机 + 环境捕获） |
 | Plotkin, G. D. “Call-by-Name, Call-by-Value and the λ-Calculus.” *Theoretical Computer Science*, 1975. | P1 学术 | <https://doi.org/10.1016/0304-3975(75)90017-1> | λ-演算与调用约定，Rust `Fn` 层级语义基础 |
 | Jung, R. et al. “RustBelt: Securing the Foundations of the Rust Programming Language.” *POPL 2018*. | P1 学术 | <https://plv.mpi-sws.org/rustbelt/> | Rust 高阶函数与闭包的形式化安全基础 |
@@ -774,10 +785,10 @@ mindmap
 
 ## 国际化权威来源补充（International Authority Sources）
 
-- https://dl.acm.org/doi/10.1145/237721.237791
-- https://doc.rust-lang.org/reference/introduction.html
+- <https://dl.acm.org/doi/10.1145/237721.237791>
+- <https://doc.rust-lang.org/reference/introduction.html>
 
 ## 国际化权威来源补充（International Authority Sources）
 
-- https://rust-unofficial.github.io/patterns/
-- https://blog.rust-lang.org/
+- <https://rust-unofficial.github.io/patterns/>
+- <https://blog.rust-lang.org/>

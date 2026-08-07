@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 790,
-    "generated_at": "2026-08-07T03:57:58.194319+00:00"
+    "generated_at": "2026-08-07T04:37:22.633494+00:00"
   },
   "files": [
     {
@@ -15649,7 +15649,7 @@
       "layer": "L1",
       "title": "迭代器惯用组合（Iterator Idioms）",
       "positioning": "本页系统讲解 Rust 标准库 `Iterator` trait 的常用组合子，帮助读者用惰性求值链替代命令式循环，写出更短、更快、更安全的代码。",
-      "line_count": 525,
+      "line_count": 539,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -16040,7 +16040,7 @@
       "layer": "L1",
       "title": "字符串与编码：Rust 的文本处理类型系统",
       "positioning": "系统分析 Rust **字符串类型体系**的设计——String 与 str 的所有权（Ownership）语义、UTF-8 编码约束、OsString/OsStr 的平台抽象、CString/CStr 的 FFI 互操作，以及 grapheme clusters、unicode normalization 等高级文本处理概念。",
-      "line_count": 979,
+      "line_count": 987,
       "theorem_chains": [
         {
           "text": "- **反命题 2：「`from_utf8_lossy` 是安全的默认选择」** —— 有代价：损失转换静默替换无效字节，数据完整性场景（哈希、加密、协议解析）中静默损坏比报错更糟。判定准则：数据必须完整 ⟹ `from_utf8` 返回 `Result`；仅展示用途 ⟹ lossy 可接受。",
@@ -19741,7 +19741,7 @@
       "layer": "L2",
       "title": "Trait 系统",
       "positioning": "",
-      "line_count": 3324,
+      "line_count": 3351,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -19765,6 +19765,10 @@
         },
         {
           "text": "> 下一节通过\"⟹\"标注的定理链，将 Orphan Rule、Coherence、dyn 兼容性、Auto Trait 推导等核心命题形式化为可验证的推理网络，建立从编译规则到运行行为的完整因果链。",
+          "type": "paragraph"
+        },
+        {
+          "text": "Trait 系统的设计目标不仅是提供接口抽象，还要保证全局唯一、可判定的方法解析。定理推理链把 Orphan Rule、Coherence、dyn 兼容性、Auto Trait 推导和零成本抽象等命题组织成带有 `⟹` 因果标注的逻辑网络。通过这组定理，可以把编译器报错（E0117、E0119、E0038 等）还原为形式规则的失效条件，从而在编码前预判设计是否自洽。",
           "type": "paragraph"
         },
         {
@@ -21242,7 +21246,7 @@
       "layer": "L2",
       "title": "可派生 Trait（Derive Traits）",
       "positioning": "",
-      "line_count": 471,
+      "line_count": 473,
       "theorem_chains": [
         {
           "text": "| 哈希 | `Hash` | 派生版按字段序喂入 hasher——`Eq` 与 `Hash` 必须一致（相等 ⟹ 同哈希），自定义一个就必须同步另一个 |",
@@ -21637,7 +21641,7 @@
       "layer": "L2",
       "title": "关联类型默认值（Associated Type Defaults）",
       "positioning": "",
-      "line_count": 440,
+      "line_count": 442,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -25141,7 +25145,7 @@
       "layer": "L2",
       "title": "Rust 错误处理惯用法（Error Idioms）",
       "positioning": "本页聚焦 Rust 错误处理的**惯用组合子与工程分层**，是 `01_error_handling.md` 的进阶补充与 `02_error_handling_deep_dive.md` 的实战聚焦页。",
-      "line_count": 487,
+      "line_count": 495,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -26178,7 +26182,7 @@
       "layer": "L2",
       "title": "模块系统高级主题：可见性规则与工程实践",
       "positioning": "深入分析 Rust **模块系统**（module system）的设计——从文件系统映射、可见性规则（pub/use/super/self）、到 crate 边界与 workspace 组织，揭示 Rust 模块系统与 C++/Java/Python 的本质差异。",
-      "line_count": 967,
+      "line_count": 973,
       "theorem_chains": [
         {
           "text": "| 公开 API 项 | `pub` | §3.1 反命题树 TRUE | 过度 `pub` ⟹ API 表面积过大、破坏变更风险上升 |",
@@ -26988,7 +26992,7 @@
       "layer": "L2",
       "title": "声明宏：`macro_rules!`、卫生性与 TT-munching",
       "positioning": "系统讲解 `macro_rules!` 的语法、卫生性、重复模式、TT-munching 等高级技术，以及声明宏与过程宏的选型边界。",
-      "line_count": 666,
+      "line_count": 676,
       "theorem_chains": [
         {
           "text": "| 理解片段分类符 ⟹ 正确匹配输入 | 知道 expr/tt/ident 等差异 | 能写出稳健的宏规则 | 高 |",
@@ -27143,7 +27147,7 @@
       "layer": "L2",
       "title": "过程宏：derive、attribute、function-like 与 TokenStream 操作",
       "positioning": "系统讲解过程宏的三种类型、编译期执行模型、`TokenStream` 操作、`syn`/`quote` 工作流，以及 span/hygiene 的工程实践。",
-      "line_count": 666,
+      "line_count": 677,
       "theorem_chains": [
         {
           "text": "| 理解三种过程宏 ⟹ 正确选型 | 知道 derive/attribute/function-like 的差异 | 能为场景选择合适宏类型 | 高 |",
@@ -27898,7 +27902,7 @@
       "layer": "L2",
       "title": "Rust 闭包：捕获语义、Trait 层级与工程实践",
       "positioning": "系统阐述 Rust 闭包的语法、捕获机制、`Fn`/`FnMut`/`FnOnce` 语义层级、`move` 闭包、函数指针强制转换、异步闭包与典型反模式，覆盖从基础使用到工程决策的完整链条。",
-      "line_count": 784,
+      "line_count": 795,
       "theorem_chains": [
         {
           "text": "| 理解捕获模式 ⟹ 正确选择 trait | 知道环境如何使用 | 能写出正确的泛型约束 | 高 |",
@@ -28058,7 +28062,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 46,
+      "matrix_rows": 47,
       "pre_post": {
         "pre": [
           "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Traits](../00_traits/01_traits.md)"
@@ -28949,7 +28953,7 @@
       "layer": "L3",
       "title": "Send/Sync 边界判定",
       "positioning": "",
-      "line_count": 517,
+      "line_count": 520,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -34757,7 +34761,7 @@
       "layer": "L3",
       "title": "标准库 unsafe 内部实现概念解析",
       "positioning": "从**概念层面**解析标准库如何在 `unsafe` 原语之上构建安全抽象，重点说明内部不变量（invariants）与 public API 之间的信任边界；不追求完整重实现，而是建立阅读、审查和扩展 std 风格代码的心智模型。",
-      "line_count": 571,
+      "line_count": 580,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -34895,7 +34899,7 @@
       "layer": "L3",
       "title": "原地初始化与固定初始化模式",
       "positioning": "",
-      "line_count": 634,
+      "line_count": 646,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -38359,7 +38363,7 @@
       "layer": "L3",
       "title": "FFI 深度解析：C ABI、调用约定与链接",
       "positioning": "系统剖析 Rust 与 C 世界交互的**机械层**：从 ABI/调用约定到 `repr(C)` 布局，从 `unsafe extern` 函数到 `cdylib`/`staticlib` 链接产物，从符号修饰到 panic 边界，建立 FFI 代码审查与工程决策的完整 checklist。",
-      "line_count": 722,
+      "line_count": 733,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -38543,7 +38547,7 @@
       "layer": "L3",
       "title": "Unknown",
       "positioning": "在 [`01_rust_ffi.md`](01_rust_ffi.md) 的基础上，聚焦 Rust FFI 的**可复用设计模式**：如何把 Rust 类型安全地暴露给 C，如何管理跨语言所有权，以及如何在 FFI 边界上保留 Rust 的线程安全保证。",
-      "line_count": 635,
+      "line_count": 651,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -38972,7 +38976,7 @@
       "layer": "L3",
       "title": "内联汇编扩展主题：`no_std`、内核与跨平台向量约束",
       "positioning": "在 [内联汇编基础](01_inline_assembly.md) 之上，聚焦 `no_std`、裸机启动、中断上下文、PowerPC/LoongArch 等扩展架构，以及 `core::arch` 与 Miri 验证边界，形成面向系统级开发的内联汇编决策框架。",
-      "line_count": 558,
+      "line_count": 564,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -45055,7 +45059,7 @@
       "layer": "L4",
       "title": "Tree Borrows 深度解析",
       "positioning": "",
-      "line_count": 309,
+      "line_count": 313,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -87452,7 +87456,7 @@
       "layer": "L6",
       "title": "Rust 所有权感知算法",
       "positioning": "系统讲解 Rust 所有权模型如何决定算法接口设计，覆盖原地修改、写时复制、借用检查友好的双指针/滑动窗口、基于索引的图/树算法等实战模式。",
-      "line_count": 487,
+      "line_count": 489,
       "theorem_chains": [],
       "anti_propositions": [
         {

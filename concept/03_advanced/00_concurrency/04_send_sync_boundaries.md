@@ -447,12 +447,15 @@ assert_sync::<MyType>();
 
 ## 八、来源与延伸阅读
 
+准确判断 `Send`/`Sync` 边界需要回到官方文档与形式化工作本身。本节列出直接支撑前文推理的国际权威来源，涵盖语言参考、unsafe 语义视角、async 状态机文档以及 RustBelt 形式化论文；延伸阅读则指向知识库内更系统的并发、async 与 trait object 概念页，便于在“快速查结论”与“深入理解契约”之间自由切换。
+
 ### 国际权威来源
 
 - [RustBelt: Securing the Foundations of the Rust Programming Language](https://arxiv.org/abs/1804.01568) — `arxiv.org`；Rust 类型系统（含 `Send`/`Sync`）形式化奠基论文。
 - [Rust Reference — Send and Sync](https://doc.rust-lang.org/reference/special-types-and-traits.html) — `doc.rust-lang.org`；官方语言参考对特殊 trait 的精确定义。
 - [Rustonomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html) — `doc.rust-lang.org`； unsafe 语义视角下的 Send/Sync 契约与实践。
 - [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html) — `rust-lang.github.io`；官方 async book，覆盖 async 状态机与 Send 边界。
+- [std::sync::MutexGuard](https://doc.rust-lang.org/std/sync/struct.MutexGuard.html) — `doc.rust-lang.org`；`MutexGuard` 为 `!Send` 与跨 `await` 持有导致 Future 失去 `Send` 的直接依据。
 
 ### 延伸阅读
 

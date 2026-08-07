@@ -55,7 +55,12 @@ FALSE_POSITIVE_RE = re.compile(
     r"占位符（Placeholder）|"  # 中文技术术语：format/type placeholder
     r"Placeholder Generic|"  # 占位符模板页名
     r"todo\s+vs\s+unreachable|"  # 比较 panic 系列宏
-    r"placeholder\s+view\s+of\s+a\s+variable",  # future/promise 技术术语
+    r"placeholder\s+view\s+of\s+a\s+variable|"  # future/promise 技术术语
+    r"C-PLACEHOLDER|"  # Rust API Guidelines 约定名
+    r"placeholder\s+words|"  # API Guidelines 规则原文
+    r"valid\s+placeholder\s+behind|"  # 惯用法英文表达
+    r"❌\s*[—\-]\s*真正缺口|"  # 外部来源索引方法论图例
+    r"(?:RFC\s+)?merged\s+跟踪项",  # 版本跟踪状态标签
     re.IGNORECASE,
 )
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*\S)\s*$")

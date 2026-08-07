@@ -62,10 +62,13 @@
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [国际化权威来源补充（International Authority Sources）](#国际化权威来源补充international-authority-sources)
 
 ---
 
 ## 一、核心概念
+
+过程宏是 Rust 在编译期执行的元编程机制，与声明宏的模式匹配不同，它以命令式方式操作 `TokenStream`，因而能够进行更复杂的语法解析和代码生成。理解过程宏的本质、三种形态及其执行模型，是区分 derive、attribute、function-like 宏适用场景的前提，也是后续学习 `syn`/`quote` 工作流的基础。
 
 ### 1.1 过程宏的本质
 
@@ -139,6 +142,8 @@ pub fn sql(input: TokenStream) -> TokenStream { todo!() }
 ---
 
 ## 二、技术细节
+
+过程宏的开发围绕 `TokenStream` 的解析与生成展开。本节从原始 token 操作入手，逐步介绍 `syn`/`quote` 工作流、三种过程宏的具体实现方式，以及 `Span` 与卫生性如何保证错误定位准确和命名空间隔离。掌握这些技术细节，才能把过程宏从「能跑」提升到「可维护、用户友好」。
 
 ### 2.1 TokenStream 操作
 
@@ -353,6 +358,8 @@ quote_spanned! { field.span()=>
 
 ## 四、反命题与边界分析
 
+过程宏虽然功能强大，但会引入额外的编译时间、工程复杂度和调试成本。本节通过反命题树明确「何时不该用过程宏」，并总结其能力边界，包括编译时间开销、错误定位难度、无法修改外部 crate 的项，以及对 `syn` 等依赖的稳定性依赖。理解这些边界有助于在声明宏、过程宏与泛型之间做出合理选择。
+
 ### 4.1 反命题树
 
 ```mermaid
@@ -450,6 +457,8 @@ graph TD
 
 ## 十、边界测试：过程宏的编译错误
 
+过程宏的边界测试聚焦于编译器对 proc-macro crate 的特殊约束，以及展开后行为的常见误区。这些约束包括：proc-macro crate 不能导出普通 API、derive 宏不能修改被标注项、span 丢失会削弱错误定位、属性宏参数必须自行解析。通过观察这些失败场景，可以建立对过程宏能力边界的直观认识。
+
 ### 10.1 边界测试：过程宏 crate 导出普通 API（编译错误）
 
 ```rust,ignore
@@ -505,6 +514,8 @@ struct Item;
 ---
 
 ## 嵌入式测验（Embedded Quiz）
+
+本节测验覆盖过程宏的四个核心维度：类型区分、执行时机、`syn`/`quote` 工作流，以及 span 与卫生性。作答时应注意过程宏在编译期执行、只能看到 token 不能访问运行时值这一根本限制，并理解为什么保留输入 span 对用户体验至关重要。
 
 ### 测验 1：过程宏的类型（理解层）
 
@@ -661,5 +672,5 @@ mindmap
 
 ## 国际化权威来源补充（International Authority Sources）
 
-- https://dl.acm.org/doi/10.1145/319838.319859
-- https://doc.rust-lang.org/reference/introduction.html
+- <https://dl.acm.org/doi/10.1145/319838.319859>
+- <https://doc.rust-lang.org/reference/introduction.html>

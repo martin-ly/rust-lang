@@ -36,8 +36,11 @@
 > [Brown Interactive Rust Book](https://rust-book.cs.brown.edu/) ·
 > [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Rust Reference: Traits](https://doc.rust-lang.org/reference/items/traits.html) ·
+> [Rust Reference: Auto Traits](https://doc.rust-lang.org/reference/special-types-and-traits.html#auto-traits) ·
 > [Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class) ·
-> [RFC 255](https://rust-lang.github.io/rfcs//0255-object-safety.html)
+> [RFC 255](https://rust-lang.github.io/rfcs//0255-object-safety.html) ·
+> [RFC 1023 — Rebalancing Coherence](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html) ·
+> [RFC 1598 — Generic Associated Types](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)
 
 ---
 
@@ -417,6 +420,8 @@ graph TD
 ---
 
 ## 四、定理推理链（Theorem Chain）
+
+Trait 系统的设计目标不仅是提供接口抽象，还要保证全局唯一、可判定的方法解析。定理推理链把 Orphan Rule、Coherence、dyn 兼容性、Auto Trait 推导和零成本抽象等命题组织成带有 `⟹` 因果标注的逻辑网络。通过这组定理，可以把编译器报错（E0117、E0119、E0038 等）还原为形式规则的失效条件，从而在编码前预判设计是否自洽。
 
 > **[来源: [RFC 1023](https://rust-lang.github.io/rfcs//1023-rebalancing-coherence.html); Rust Reference: Coherence]** Orphan Rule 是 Coherence 的工程实现机制，二者共同保证单态化（Monomorphization）的确定性。
 
@@ -834,6 +839,8 @@ fn returns_iter() -> impl Iterator<Item = u32> {
 
 ### 5.6 正确示例：Generic Associated Types (GATs)
 
+泛型关联类型（GATs）把关联类型从“每个实现一个固定类型”扩展到“每个实现一个带参数的族”，从而在不引入完整高阶类型（HKT）的情况下表达 lending iterator 等高级模式。GATs 让 trait 签名保持简洁，却把泛型参数下放到关联类型，实现“一对一 vs 一对多”的精确建模。本节通过语法、动机和 lending iterator 示例，展示 GATs 如何解决传统关联类型与泛型参数之间的张力。
+
 > **权威来源**: GAT 的完整论述（语法规则、与 HRTB 边界、稳定化历程、选型判定表）集中于
 > [07_generic_associated_types.md](07_generic_associated_types.md)；本节保留入门示例。
 
@@ -940,6 +947,8 @@ trait Convert {
 ---
 
 ### 5.7 正确示例：Specialization（特化）的语义与边界
+
+Specialization 允许为更具体的类型子集提供优化的 trait 实现，同时保留对更广泛类型的默认实现。它与 C++ 模板特化在工程动机上相似，但受 Rust Coherence 和 `always applicable` 约束的限制，避免链接期冲突。本节讨论默认实现、特化实现、编译器裁决逻辑以及非法重叠的边界，帮助理解当前 `min_specialization` 子集的能力与风险。
 
 > **[RFC 1210](https://rust-lang.github.io/rfcs//1210-impl-specialization.html)** ·
 > **[Rust Reference: Implementation](https://doc.rust-lang.org/reference/items/implementations.html)**
@@ -1363,6 +1372,8 @@ fn main() {
 
 ## 六、反命题与边界分析（Counter-proposition & Boundary Analysis）
 
+形式定理只在特定假设下成立；工程实践中这些假设常被误读。本节以反命题决策树的形式，系统检验“trait 实现总是无冲突”“blanket impl 覆盖所有类型”“`dyn Trait` 与 `impl Trait` 等价”等常见误判。每个反命题都连接到一个具体的编译期或语义边界，帮助读者把抽象规则转化为可遍历的诊断路径。
+
 > **[RFC 1023](https://rust-lang.github.io/rfcs//1023-rebalancing-coherence.html)** · **[Rust Reference: Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)** · **[Rust Reference: Dyn Compatibility](https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility)** 反命题分析基于 Trait 系统的形式化语义和已知边界案例，按四层（编译期/运行时（Runtime）/语义/工程）系统分类。反例节点用 `fill:#f66`，定理成立用 `fill:#6f6`。 ✅ 已验证
 
 ### 6.1 反命题 1: "Trait 实现总是无冲突的"
@@ -1689,6 +1700,8 @@ fn use_dyn_generic(obj: &dyn GenericMethod) {
 
 ## 八、认知路径（Cognitive Path）
 
+从“trait 像接口”的直觉到能独立验证 trait 设计自洽，需要经过六个递进的认知台阶。本节把学习过程映射为：直觉类比、语法熟悉、规则困惑、类型论映射、工程权衡和形式化掌控。每一步都指出前置理解与后续跃迁，使学习者能把零散的语法点整合成可推理的心智模型。
+
 > **[原创分析]** · **[TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html)** 认知路径从直觉困惑到形式规则的渐进映射，基于 TRPL 教学顺序和类型论知识结构，六步形成"感性→知性→理性"的完整认知螺旋。 💡 原创分析
 
 ### Step 1: 直觉类比 — "Trait 像岗位描述"
@@ -1832,6 +1845,8 @@ fn notify<T: Summary>(item: &T) { ... }
 ---
 
 ### 补充章节：`impl Trait` 在 Trait 定义中的使用（RPITIT / AFIT）
+
+Rust 1.75 引入的 RPITIT（Return Position Impl Trait In Traits）允许在 trait 方法签名中使用 `-> impl Trait`，编译器会自动为每个实现者推导匿名关联类型。它在隐藏实现细节的同时保持零成本抽象，但由于 vtable 无法表示异构返回类型，含 RPITIT 的方法会破坏 trait object 的 dyn 兼容性。本节介绍 AFIT 语法、与显式关联类型的对比、编译器去糖机制，以及存在类型与全称类型的形式化语义。
 
 > **[Rust Reference: Return Position Impl Trait In Traits](https://doc.rust-lang.org/reference/types/impl-trait.html)** Rust 1.75 稳定了 RPITIT（Return Position Impl Trait In Traits），允许在 trait 方法签名中使用 `-> impl Trait`，编译器自动为每个实现者推导具体的关联类型。✅ 已验证
 > **[RFC 2289](https://rust-lang.github.io/rfcs/2289-associated-type-bounds.html)** AFIT（Abstracted Function In Trait）将 `impl Trait` 从函数参数/返回位置扩展到 trait 定义内部，简化关联类型的使用。✅ 已验证
@@ -1984,6 +1999,8 @@ trait Builder {
 ---
 
 ### 补充章节：Const Trait 与 `~const` 实验特性
+
+`const_trait_impl` 是 Rust 为 `const fn` 支持泛型 trait bound 而设计的实验性机制，核心语法包括 `#[const_trait]`、`impl const Trait` 和 `T: ~const Trait`。它解决的是稳定 Rust 无法在编译期上下文中调用 trait 方法的问题，把 const 安全性从特殊内建规则扩展到用户自定义抽象。本节说明问题背景、语法差异、编译器保证，以及在稳定版中可用的替代方案。
 
 > **[Tracking Issue #143874](https://github.com/rust-lang/rust/issues/143874)** · **[RFC 3762](https://github.com/rust-lang/rfcs/pull/3762)** `~const`（及演进中的 `[const]` 语法）是 Rust 为支持在 const context 中使用泛型 trait bound 而引入的实验性机制，目的是让 `const fn` 能接受受 trait 约束的泛型参数。⚠️ 当前为 nightly only，语法仍在迭代。
 
@@ -2183,6 +2200,8 @@ const fn double_i64(x: i64) -> i64 { x + x }
 
 ### 补充章节：`#[fundamental]` Attribute 与 Orphan Rule 例外
 
+`#[fundamental]` 是 Rust 编译器为少数透明包装类型（`Box<T>`、`&T`、`&mut T`、`Pin<P>`）保留的内部属性，用于在 Orphan Rule 判定中把内部类型“裸露”出来。它使标准库能够为这些包装器实现外部 trait（如 `impl Add for &str`），而不破坏全局一致性。本节解释其目的、类型列表、透明性原理，以及与 `#[non_exhaustive]` 的互补关系。
+
 > **[RFC 1023](https://rust-lang.github.io/rfcs//1023-rebalancing-coherence.html)** · **[Rust Reference: Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)** `#[fundamental]` 是 Rust 编译器内部使用的 unstable attribute，用于标记某些类型在 Orphan Rule 判定中具有"透明性"——其泛型参数被视为裸露的本地类型。⚠️ 当前为编译器内部特性，用户代码不建议使用。
 
 #### 目的：为智能指针和引用打开 impl 空间
@@ -2327,6 +2346,8 @@ struct Wrapper<T>(T);
 ---
 
 ### 补充章节：Negative Impls（`impl !Trait for T`）的形式化语义
+
+Negative impls 通过 `impl !Trait for T` 显式声明某类型不实现某 trait，是 coherence 系统的负向公理补充。它最常用于 auto trait，以阻止编译器的结构化自动推导（如 `!Send`/`!Sync`），为 unsafe 抽象提供不可推翻的证据。本节给出形式化语义、auto trait 应用、与 coherence 的交互，以及与普通正向 impl 重叠的限制。
 
 > **[RFC 683](https://github.com/rust-lang/rfcs/pull/683)** · **[Tracking Issue #68318](https://github.com/rust-lang/rust/issues/68318)** · **[Rust Reference: Negative Impls](https://doc.rust-lang.org/beta/unstable-book/language-features/negative-impls.html)** Negative impl 显式声明某类型**不**实现某 trait，是 coherence 系统的负向公理补充。⚠️ 当前需 `#![feature(negative_impls)]`，稳定版不支持。
 
@@ -3154,6 +3175,8 @@ impl Drawable for Rectangle {
 
 ## 补充视角：crate 实践中的 Trait 系统设计模式
 
+本节从真实 crate 实践中提炼三种 Trait 系统设计模式：插件注册表、类型转换管道和常见错误速查。它们展示了如何把 trait object、泛型约束和 `From`/`Into` 等机制组合成可维护的架构。这些模式是前面形式化规则的工程落地，也提供了可复用的代码模板。
+
 > 本节选编自 `crates/c04_generic/docs/tier_02_guides/02_trait_system.md`，
 > 作为 canonical Trait 概念页的工程实践补充。
 
@@ -3212,6 +3235,8 @@ let parsed: ParsedData = raw.into();
 
 ## 补充视角：关联类型的工程实践场景
 
+关联类型不仅是类型系统技巧，也是数据库抽象层、解析器组合子等场景的核心设计工具。通过把“一个后端对应一种行类型”或“解析输出依赖输入生命周期”的关系编码进 trait，API 可以避免调用方反复标注泛型参数。本节用具体示例比较关联类型与泛型参数的选型差异。
+
 > 本节选编自 `crates/c04_generic/docs/tier_02_guides/03_associated_types.md`，
 > 作为 canonical Trait 概念页的工程实践补充。
 
@@ -3264,6 +3289,8 @@ trait Parser<'a> {
 ---
 
 ## Rust 1.98.0 兼容性注意
+
+Rust 1.98.0 进一步收紧了 where 子句类型等式语法、把 `dyn` 视为严格关键字，并修正了 trait object 默认生命周期推断的边界情况。这些变更主要影响宏生成代码和依赖隐式推断的公开 API。本节给出反例、修正方案和迁移注意，确保现有 trait 相关代码在新工具链下仍能获得清晰的编译诊断。
 
 ### where 子句拒绝 `Type = Type` / `Type == Type`
 

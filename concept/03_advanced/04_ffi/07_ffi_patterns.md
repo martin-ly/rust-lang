@@ -20,7 +20,9 @@
 > [Rust Design Patterns — Type Consolidation into Wrappers](https://rust-unofficial.github.io/patterns/patterns/ffi/wrappers.html) ·
 > [Rust Design Patterns — Idiomatic Errors in FFI](https://rust-unofficial.github.io/patterns/idioms/ffi/errors.html) ·
 > [Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) ·
-> [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/)
+> [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/) ·
+> [std::boxed::Box](https://doc.rust-lang.org/std/boxed/struct.Box.html) ·
+> [std::slice::from_raw_parts](https://doc.rust-lang.org/std/slice/fn.from_raw_parts.html)
 
 ---
 
@@ -50,6 +52,7 @@ mindmap
 
 ## 📑 目录
 
+- [🧠 知识结构图](#-知识结构图)
 - [📑 目录](#-目录)
 - [一、设计原则](#一设计原则)
 - [二、对象式 API：不透明指针 + 虚表](#二对象式-api不透明指针--虚表)
@@ -83,6 +86,7 @@ mindmap
 - [八、反模式速查](#八反模式速查)
 - [九、决策树：选择哪种 FFI 模式](#九决策树选择哪种-ffi-模式)
 - [十、权威来源与延伸阅读](#十权威来源与延伸阅读)
+- [国际化权威来源补充（International Authority Sources）](#国际化权威来源补充international-authority-sources)
 
 ---
 
@@ -98,6 +102,8 @@ Rust FFI 代码的可靠性取决于能否在**语言边界**上维持以下四�
 ---
 
 ## 二、对象式 API：不透明指针 + 虚表
+
+对象式 API 是 Rust 向 C 暴露复杂状态机的最常用模式：Rust 类型被压缩成一个不透明指针，C 代码只能通过你提供的构造、操作、销毁函数与之交互。这样可以把生命周期、借用规则和安全不变量保留在 Rust 侧，同时给 C 侧一个类似面向对象句柄的接口。虚表扩展则进一步支持运行时多态和插件回调。
 
 ### 模式描述
 
@@ -225,6 +231,8 @@ impl Drop for CPlugin {
 
 ## 三、类型合并包装器
 
+Rust 的借用系统常常把「集合」和「迭代器」表达为两个互相关联的类型，但 C 无法表达这种借用关系。类型合并包装器把多个相关 Rust 对象收进单一 opaque 类型，把跨类型的生命周期问题转化为单一对象的生命周期问题，从而避免 C 侧持有悬垂迭代器或越界游标。
+
 ### 模式描述
 
 当 Rust 的“相关类型组”（如集合 + 迭代器）需要暴露给 C 时，不要把每个 Rust 类型单独导出为指针，而是把它们**合并进一个包装类型**。这样可以避免跨类型生命周期被 C 代码误用，例如让迭代器存活超过集合。
@@ -317,6 +325,8 @@ pub unsafe extern "C" fn myset_iter_new(set: *const MySet) -> *mut MySetIter {
 
 ## 四、`Box::into_raw` / `Box::from_raw` 生命周期
 
+跨语言所有权转移的本质，是把 Rust 堆上值的所有权通过裸指针交给 C，再由 C 在适当时机交还 Rust 释放。`Box::into_raw` 与 `Box::from_raw` 是这一转移的规范桥梁：二者必须成对使用，且释放路径必须在文档中明确。错误地返回局部变量引用、重复释放，或用 C 的 `free` 释放 Rust 分配，都会直接引入 UB。
+
 ### 模式描述
 
 `Box::into_raw` 把堆上值转化为裸指针并**转移所有权**给 C；`Box::from_raw` 把裸指针转回 `Box` 以便 Rust 释放。二者必须成对出现，且只能用同一分配器。
@@ -375,6 +385,8 @@ pub unsafe extern "C" fn bad_object_free(obj: *mut MyObject) {
 
 ## 五、零拷贝切片传递
 
+FFI 边界上的数据拷贝常常是性能瓶颈。Rust 的切片 `&[T]` 与字符串切片 `&str` 可以安全地映射为 C 的「指针 + 长度」对，只要调用期间底层内存保持有效且不被修改。掌握这一模式能在不牺牲 Rust 借用安全的前提下，实现跨语言零拷贝数据传输。
+
 ### 模式描述
 
 在 FFI 中，Rust 的 `&[T]` 应映射为 C 的“指针 + 长度”对。Rust 侧用 `std::slice::from_raw_parts` 将其还原为借用切片，避免复制数据。
@@ -426,6 +438,8 @@ pub unsafe extern "C" fn sum_cstring(data: *const c_char) -> c_int {
 ---
 
 ## 六、跨 FFI 边界的错误处理
+
+C 没有 `Result<T, E>`，因此 Rust 侧必须把丰富的错误语义压缩成 C 可消费的整数返回码、哨兵指针或详情字符串。设计良好的 FFI 错误处理不仅要在失败时给出可诊断信息，更要保证不在 FFI 函数内部 panic——因为 panic 跨越 ABI 边界是未定义行为。本节给出错误码映射与线程局部/对象关联错误详情的典型模式。
 
 ### 模式描述
 
@@ -511,6 +525,8 @@ pub unsafe extern "C" fn db_write(db: *mut MyDb, key: *const c_char) {
 ---
 
 ## 七、线程安全标注：`Send` / `Sync`
+
+FFI 句柄往往包含裸指针或 C 库资源，编译器无法自动判断其是否可跨线程移动或共享。当 C 库文档明确保证线程安全时，可以通过 `unsafe impl Send/Sync` 在类型系统上表达这一承诺，使 `Arc<T>`、`Mutex<T>` 和线程池能够正常工作。该标注必须附带清晰的安全论证，因为一旦 C 侧保证不成立，就会在高并发场景下引入数据竞争。
 
 ### 模式描述
 
@@ -630,5 +646,5 @@ graph TD
 
 ## 国际化权威来源补充（International Authority Sources）
 
-- https://dl.acm.org/doi/10.1145/3158154
-- https://doc.rust-lang.org/reference/introduction.html
+- <https://dl.acm.org/doi/10.1145/3158154>
+- <https://doc.rust-lang.org/reference/introduction.html>

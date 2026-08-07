@@ -99,6 +99,8 @@ mindmap
     - [测验 4：Miri 与内联汇编](#测验-4miri-与内联汇编)
   - [九、国际权威参考](#九国际权威参考)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
+  - [国际化权威来源补充（International Authority Sources）](#国际化权威来源补充international-authority-sources)
+  - [国际化权威来源补充（International Authority Sources）](#国际化权威来源补充international-authority-sources-1)
 
 ---
 
@@ -349,6 +351,8 @@ fn read_tsc_safe() -> u64 {
 
 ## 七、边界测试 / 反例
 
+内联汇编的强大能力伴随着同等程度的责任：一个错误的约束或选项声明可能绕过 Rust 的类型系统与所有权检查，在运行时表现为难以定位的未定义行为。本节通过典型反例展示 `global_asm!` 操作数限制、中断上下文保存义务以及 `options(nomem)` 误用等边界场景，帮助读者建立“声明必须匹配真实副作用”的工程直觉，并理解为什么汇编块周围的 Rust 代码仍需满足借用与生命周期规则。
+
 ### 7.1 反例：在 `global_asm!` 中使用 `in`/`out` 操作数
 
 ```rust,compile_fail
@@ -408,6 +412,8 @@ unsafe fn broken_copy(src: *const u8, dst: *mut u8) {
 ---
 
 ## 八、嵌入式测验
+
+前面的章节分别介绍了 `no_std` 汇编、`global_asm!`、中断处理、向量约束与 Miri 局限等独立主题。本节通过四道嵌入式测验检验你是否能在具体场景中正确选择约束、识别限制并规避常见陷阱，从而将这些片段整合为系统级开发中的决策能力。
 
 ### 测验 1：`global_asm!` 的限制
 
@@ -548,10 +554,10 @@ mindmap
 
 ## 国际化权威来源补充（International Authority Sources）
 
-- https://dl.acm.org/doi/10.1145/3158154
-- https://doc.rust-lang.org/reference/introduction.html
+- <https://dl.acm.org/doi/10.1145/3158154>
+- <https://doc.rust-lang.org/reference/introduction.html>
 
 ## 国际化权威来源补充（International Authority Sources）
 
-- https://rust-unofficial.github.io/patterns/
-- https://blog.rust-lang.org/
+- <https://rust-unofficial.github.io/patterns/>
+- <https://blog.rust-lang.org/>

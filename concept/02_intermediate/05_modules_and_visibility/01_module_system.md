@@ -73,8 +73,8 @@
 ---
 
 ## 一、核心概念
->
->
+
+Rust 的模块系统负责在编译期组织代码、控制可见性，并将源代码文件映射为可供编译器解析的模块树。理解 Crate、Module 与 Package 三层结构，是掌握可见性规则、路径解析和 Workspace 组织的前提。 Rust 的可见性默认私有，这种设计与所有权模型相呼应：默认最小暴露，显式授权后再扩大访问范围。
 
 ### 1.1 Crate、Module、Package 的三层结构
 >
@@ -927,6 +927,12 @@ fn main() {
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
+- **P0 官方**: [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) — 模块声明、文件映射与路径规则
+- **P0 官方**: [Rust Reference — Visibility and Privacy](https://doc.rust-lang.org/reference/visibility-and-privacy.html) — `pub`/`pub(crate)`/`pub(super)`/`pub(in path)` 语义
+- **P0 官方**: [TRPL Ch7 — Packages, Crates and Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) — 入门与工程组织
+- **P0 官方**: [Rust Edition Guide — Path Changes](https://doc.rust-lang.org/edition-guide/rust-2018/path-changes.html) — Edition 2018 路径澄清
+- **P0 官方**: [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) — Workspace 结构与依赖管理
+- **P1 官方**: [RFC 2126 — Path Clarity](https://rust-lang.github.io/rfcs/2126-path-clarity.html) — 路径与可见性澄清 RFC
 - **P2 生态/社区**: [docs.rs/toml — 生态权威 API 文档](https://docs.rs/toml) · [docs.rs/cargo_metadata — 生态权威 API 文档](https://docs.rs/cargo_metadata)
 
 ## 📋 关键属性

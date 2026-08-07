@@ -125,6 +125,8 @@ safe public API
 
 ## 二、核心 unsafe 原语
 
+标准库的所有安全抽象最终都建立在少数几个不可再分的 unsafe 原语之上。本节聚焦 `UnsafeCell`、`MaybeUninit`、原始指针与原始切片——它们分别解决内部可变性、未初始化内存、去别名化引用和内存视图构造的问题。掌握这些原语的契约与误用后果，是理解 `Vec`、`HashMap` 等集合内部实现、以及后续自行编写安全封装的前提。
+
 ### 2.1 `UnsafeCell`：内部可变性的编译器原语
 
 `UnsafeCell<T>` 是 Rust 内部可变性的**底层原语**。它告诉编译器：“这块内存即使通过共享引用（`&T`）也可能被修改，不要基于 `noalias` 做激进优化”。
@@ -343,6 +345,8 @@ fn main() {
 
 ## 七、边界测试 / 反例
 
+理论不变量只有在违反时才能真正被理解。本节通过四个典型反例，展示破坏 `MaybeUninit` 初始化契约、`Vec::set_len` 长度契约、原始切片构造条件，以及错误地手动实现 `Send`/`Sync` 会如何让安全抽象崩溃。每个示例都对应一种真实调试中可能遇到的 UB 风险，并给出修正思路。
+
 ### 7.1 反例：读取未初始化的 `MaybeUninit`
 
 ```rust,no_run
@@ -427,6 +431,8 @@ unsafe impl Sync for Bad {}
 ---
 
 ## 八、嵌入式测验
+
+以下四道测验分别对应 unsafe 原语、`MaybeUninit`、`Vec` 不变量、原始切片构造条件的核心判断点。通过选择—解析的形式，可以快速定位自己是否还停留在“记得 API 名字”，还是已经掌握了 API 背后的不变量契约。
 
 ### 测验 1：`UnsafeCell` 的作用
 
@@ -524,6 +530,9 @@ unsafe impl Sync for Bad {}
   - [std::cell::UnsafeCell](https://doc.rust-lang.org/std/cell/struct.UnsafeCell.html)
   - [std::slice](https://doc.rust-lang.org/std/slice/index.html)
   - [docs.rs/hashbrown](https://docs.rs/hashbrown)（SwissTable 参考实现）
+  - [std::vec::Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html) — 公共 API 与 `len`/`cap` 语义
+  - [std::collections::HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html) — 标准库 `HashMap` API 文档
+  - [std::collections::BTreeMap](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html) — 标准库 `BTreeMap` API 文档
 
 > **权威来源对齐变更日志**: 2026-07-31 创建，对齐 Rust 1.97.0+ (Edition 2024)。
 

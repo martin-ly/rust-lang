@@ -708,6 +708,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "cargo-vet 豁免更新：延续 1.10.2 豁免策略，尚未正式代码审计。"
 
+[[exemptions.bytemuck_derive]]
+version = "1.12.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-07 cargo update 补丁升级 (1.11.0 -> 1.12.0)；本 crate 尚未经过正式代码审计。"
+
 [[exemptions.byteorder-lite]]
 version = "0.1.0"
 criteria = "safe-to-run"

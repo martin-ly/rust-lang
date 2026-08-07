@@ -412,6 +412,8 @@ fn main() { println!("{:?}", Wrapper { inner: NoDebug }); }
 
 ## Rust 1.98.0 兼容性注意
 
+Rust 1.98.0 对 `#[derive]` 的生成代码进行了两处重要调整：派生 `StructuralPartialEq` 时增加了对泛型参数的 `PartialEq` bound，并优化了同时派生 `PartialOrd` 与 `Ord` 时的比较路径。这些改动虽然提升了内部一致性，却可能让依赖旧生成行为的代码在升级后出现编译错误或测试失败。本节说明变更细节、提供迁移示例，并强调统一派生与统一手写实现的重要性，以避免派生与手动 impl 语义不一致导致的静默行为变化。
+
 ### 派生 `StructuralPartialEq` 增加 `T: PartialEq` bound
 
 `#[derive(PartialEq)]` 自动实现的 `StructuralPartialEq` trait（用于 `const` 比较和结构匹配）此前对泛型参数没有 `PartialEq` bound，导致某些常量求值场景下出现不一致。Rust 1.98.0 为 derived `StructuralPartialEq` impl 增加 `T: PartialEq` bound，使其与 `PartialEq` 派生实现保持一致（[PR #156807](https://github.com/rust-lang/rust/pull/156807) · [#157865](https://github.com/rust-lang/rust/issues/157865)）。

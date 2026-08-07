@@ -37,6 +37,7 @@
 > [RFC 3484 — unsafe extern blocks](https://rust-lang.github.io/rfcs/3484-unsafe-extern-blocks.html) ·
 > [RFC 3722 — Explicit extern ABIs](https://rust-lang.github.io/rfcs/3722-explicit-extern-abis.html) ·
 > [libc crate docs](https://docs.rs/libc/latest/libc/) ·
+> [std::ffi — FFI types](https://doc.rust-lang.org/std/ffi/index.html) ·
 > [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html) ·
 > Turcotte, A., Arteca, E. & Richards, G. “Reasoning About Foreign Function Interfaces Without Modelling the Foreign Language.” *ECOOP 2019*. [https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ECOOP.2019.16](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ECOOP.2019.16) ·
 > Matthews, J. & Findler, R. B. “Operational Semantics for Multi-Language Programs.” *ACM TOPLAS 31(3)*, 2009. [https://dl.acm.org/doi/10.1145/1498926.1498930](https://dl.acm.org/doi/10.1145/1498926.1498930)
@@ -133,6 +134,8 @@ mindmap
 
 ## 一、C ABI 基础
 
+C ABI 是 Rust FFI 的地基：它规定了函数调用时参数如何进寄存器、返回值如何传递、结构体如何对齐，以及符号名如何暴露。Rust 编译器只检查源代码层面的类型签名，二进制契约必须由程序员显式声明。理解 ABI 与 API 的边界，是避免跨语言调用时出现静默 UB 的第一步。
+
 ### 1.1 ABI 与 API 的边界
 
 **API（Application Programming Interface）** 是源代码层面的契约：函数名、参数类型、返回值类型、文档化的前置条件。
@@ -182,6 +185,8 @@ API 契约          ABI 契约
 ---
 
 ## 二、`repr(C)` 与内存布局
+
+即使调用约定一致，Rust 默认的结构体布局也不保证字段顺序、填充大小或枚举表示，这对 FFI 是致命的。`#[repr(C)]`、`#[repr(transparent)]` 等属性把类型布局显式绑定到 C ABI 规则上，使两侧对同一块内存有相同的解读。正确选择 repr 属性并验证对齐，是跨语言传递复合类型的核心审查项。
 
 ### 2.1 字段顺序与填充
 
@@ -249,6 +254,8 @@ pub union Value {
 ---
 
 ## 三、`extern` 块与 `unsafe extern` 函数
+
+`extern` 块是 Rust 声明外部符号的入口，而自 Rust 1.82 / Edition 2024 起，其语法与安全语义被进一步显式化：`unsafe extern` 强调整个块都是人工审计契约，块内可进一步将已审计函数标记为 `safe`。同时，`unsafe extern "C" fn` 允许 Rust 暴露对 C 调用者有额外前置条件的函数。本节厘清这些边界，帮助读者写出可被安全审计的 FFI 声明。
 
 ### 3.1 `unsafe extern "ABI" {}` 声明
 
@@ -468,6 +475,8 @@ unsafe extern "C" {
 
 ## 十、边界测试 / 反例
 
+FFI 的 bug 往往在编译期无法捕获，直到运行时才以 ABI 错配、悬垂指针或分配器混用的形式爆发。以下反例覆盖最常见的高危场景：未加 `#[repr(C)]`、C 字符串生命周期管理失误、变长参数类型错配，以及跨语言释放内存。每个反例都给出错误原因与修正方案，作为代码审查 checklist 的实例。
+
 ### 10.1 反例：未加 `#[repr(C)]` 的结构体传给 C
 
 ```rust,compile_fail
@@ -565,6 +574,8 @@ unsafe {
 ---
 
 ## 十一、嵌入式测验
+
+本节通过四道选择题巩固 FFI 机械层的核心判断：ABI 字符串在不同平台如何映射、`#[repr(C)]` 的真实作用、panic 跨越边界的后果，以及符号可见性属性的选择。这些测验对应本节最重要的工程决策点，建议在学习后自测。
 
 ### 测验 1：ABI 字符串的选择
 
