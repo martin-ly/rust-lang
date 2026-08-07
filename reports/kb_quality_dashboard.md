@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-08-04T20:52:35.128915+00:00
+> 生成时间: 2026-08-07T03:57:58.192947+00:00
 > 扫描文件数: 790
 
 ## 全局指标
@@ -1206,8 +1206,8 @@
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\37_fallible_allocation_and_no_alloc_collections.md | L6 | 451 | 0 | 0 | 0 | 5 | 2 | 12 | 0 | ❌ | ✅ | ✅ | None | 进阶级 |
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\38_no_std_bare_metal_rust.md | L6 | 1987 | 0 | 0 | 0 | 9 | 4 | 46 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\39_no_std_hardware_measurement_and_validation.md | L6 | 751 | 0 | 0 | 0 | 6 | 3 | 12 | 0 | ❌ | ✅ | ✅ | 进阶/专家 | 进阶/专家 |
-| E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\41_embedded_hal_and_mmio.md | L6 | 1098 | 0 | 0 | 0 | 8 | 2 | 48 | 0 | ❌ | ❌ | ❌ | None | None |
-| E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\42_interrupts_and_concurrency_on_bare_metal.md | L6 | 1093 | 0 | 0 | 0 | 9 | 3 | 37 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\41_embedded_hal_and_mmio.md | L6 | 1104 | 0 | 0 | 0 | 8 | 2 | 48 | 0 | ❌ | ❌ | ❌ | None | None |
+| E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\42_interrupts_and_concurrency_on_bare_metal.md | L6 | 1097 | 0 | 0 | 0 | 9 | 3 | 37 | 0 | ❌ | ❌ | ❌ | None | None |
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\43_rust_safety_critical_systems.md | L6 | 1362 | 0 | 0 | 0 | 1 | 3 | 24 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\45_embedded_hardware_validation.md | L6 | 635 | 0 | 0 | 0 | 6 | 4 | 5 | 0 | ❌ | ✅ | ✅ | 进阶/专家 | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\46_rtos_and_scheduling_in_rust.md | L6 | 558 | 0 | 0 | 0 | 5 | 4 | 9 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |
@@ -1291,7 +1291,7 @@
 | E:\_src\rust-lang\concept\06_ecosystem\14_enterprise_architecture\06_clean_architecture_in_rust.md | L6 | 186 | 0 | 0 | 0 | 2 | 2 | 3 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\14_enterprise_architecture\07_hexagonal_architecture_in_rust.md | L6 | 178 | 0 | 0 | 0 | 2 | 2 | 3 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\14_enterprise_architecture\08_microservices_patterns_in_rust.md | L6 | 21 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | None | 专家级 |
-| E:\_src\rust-lang\concept\06_ecosystem\14_enterprise_architecture\09_observability_and_sre_patterns.md | L6 | 779 | 0 | 0 | 0 | 1 | 3 | 7 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| E:\_src\rust-lang\concept\06_ecosystem\14_enterprise_architecture\09_observability_and_sre_patterns.md | L6 | 785 | 0 | 0 | 0 | 1 | 3 | 7 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\14_enterprise_architecture\10_production_rust_web_service_patterns.md | L6 | 417 | 0 | 0 | 0 | 4 | 2 | 5 | 0 | ❌ | ✅ | ✅ | None | 进阶级 |
 | E:\_src\rust-lang\concept\06_ecosystem\14_enterprise_architecture\11_event_driven_and_cqrs_patterns.md | L6 | 698 | 0 | 0 | 0 | 4 | 3 | 6 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
 | E:\_src\rust-lang\concept\06_ecosystem\14_enterprise_architecture\12_cloud_native_and_serverless_patterns.md | L6 | 572 | 0 | 0 | 0 | 4 | 3 | 5 | 0 | ❌ | ✅ | ✅ | None | 专家级 |

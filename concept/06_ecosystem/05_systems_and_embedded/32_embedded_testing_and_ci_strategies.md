@@ -12,7 +12,7 @@
 > **受众**: [进阶/专家]
 > **Bloom 层级**: L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+P** — Application + Procedure
+> **A/S/P 标记**: **P+A** — Procedure + Application — Application + Procedure
 > **双维定位**: P×App — 将测试与 CI 策略应用于 no_std 嵌入式项目
 > **定位**: 系统梳理 `#![no_std]` 嵌入式项目的验证分层——如何在 host 上快速回归、如何在 QEMU 中仿真启动与外设、如何在真实芯片上做硬件在环（HIL）测试、如何把 Miri / Kani / cargo-vet 等静态/供应链工具嵌入 CI，并给出可落地的 GitHub Actions 矩阵与决策流程。
 > **前置概念**:

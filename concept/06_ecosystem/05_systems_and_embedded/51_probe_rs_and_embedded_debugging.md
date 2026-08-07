@@ -13,7 +13,7 @@
 > **受众**: [进阶/专家]
 > **Bloom 层级**: L4–L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+P** — Application + Procedure
+> **A/S/P 标记**: **P+A** — Procedure + Application — Application + Procedure
 > **双维定位**: P×App — 在真实硬件上把 probe-rs 调试链路跑通并纳入 CI
 > **定位**: 聚焦 probe-rs 的实际操作面：从环境安装、target YAML 校准、`cargo embed`/`probe-rs run`/`probe-rs attach` 命令矩阵，到 defmt 帧解码、RTT/SWO/semihosting 选型、脚本化 HIL 与 CI 模板。配套示例已在 `thumbv7em-none-eabihf` 上验证编译。
 > **前置概念**:

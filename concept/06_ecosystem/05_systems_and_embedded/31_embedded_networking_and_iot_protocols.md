@@ -8,7 +8,7 @@
 > **内容分级**: [专题深度]
 > **Bloom 层级**: L4-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+S+P** — Application + Structure + Procedure
+> **A/S/P 标记**: **P+A+S** — Procedure + Application + Structure — Application + Structure + Procedure
 > **双维定位**: P×Cre — 设计并实现资源受限设备的网络协议栈
 > **定位**: 系统讲解在 `no_std`/裸机环境中实现网络连接的约束、协议选型、栈实现与安全实践；与 [`01_advanced_network_protocols.md`](../12_networking/01_advanced_network_protocols.md) 互补，后者聚焦 `std` 生态，本页聚焦 `no_std`/嵌入式生态。
 > **前置概念**: [no_std 与裸机惯用法](23_no_std_and_bare_metal_idioms.md) ·

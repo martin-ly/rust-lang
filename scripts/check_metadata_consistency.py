@@ -82,6 +82,14 @@ D2_WHITELIST_FILES = {
     # Bloom L0（元信息层）天然不在 P 的 L4-7 区间内，属页面性质使然。
     "concept/00_meta/03_audit/09_kg_shacl_engine_validation.md":
         "L0 元框架审计页，A/S/P=P 描述维护者验证程序，Bloom L0 不在概念页分级区间",
+    # L0 元框架页：AI 语义工程/KG/RAG 方法论页，内容为跨层知识工程流程说明；
+    # A/S/P 描述其方法论属性，Bloom L0（元信息层）不在概念页分级区间。
+    "concept/00_meta/05_ai_semantic_engineering/01_knowledge_graph_design.md":
+        "L0 元框架页：A/S/P 描述知识工程方法论属性，Bloom L0 不在概念页分级区间",
+    "concept/00_meta/05_ai_semantic_engineering/02_llm_rag_for_rust.md":
+        "L0 元框架页：A/S/P 描述 LLM/RAG 工程方法属性，Bloom L0 不在概念页分级区间",
+    "concept/00_meta/05_ai_semantic_engineering/03_rag_evaluation_for_rust_kg.md":
+        "L0 元框架页：A/S/P 描述 RAG 评估方法属性，Bloom L0 不在概念页分级区间",
 }
 
 # D5 显式登记白名单（2026-07-12 逐文件复核）：以下稳定层页面的 nightly/preview/unstable

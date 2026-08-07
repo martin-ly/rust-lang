@@ -13,7 +13,7 @@
 > **受众**: [进阶/专家]
 > **Bloom 层级**: L4–L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **A+P** — Application + Procedure
+> **A/S/P 标记**: **P+A** — Procedure + Application — Application + Procedure
 > **双维定位**: P×App — 为不同 MCU 家族与运行时组合选择可重复的硬件验证策略
 > **定位**: 提供一张可操作的“目标 × 工具链 × 运行时”三维矩阵，把 probe-rs、defmt、RTIC、Embassy 的国际最佳实践映射到 STM32、Nordic nRF、Raspberry Pi RP2040 等真实硬件；并给出可在 `thumbv7em-none-eabihf` 上编译运行的最小骨架与 GitHub Actions CI 模板。
 > **前置概念**:

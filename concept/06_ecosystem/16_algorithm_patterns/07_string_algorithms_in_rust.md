@@ -9,7 +9,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **A/S/P 标记**: **P+S** — Procedure + Structure — Structure + Procedure
 > **定位**: 在 Rust 字符串所有权与 UTF-8 安全模型下实现经典字符串算法，重点解决“何时按字节、何时按字符、如何零拷贝切片”的问题。
 > **前置概念**: [算法模式概述](00_algorithm_patterns_overview.md) · [算法范式深潜](01_algorithmic_paradigms.md) · [动态规划 Rust 实现](06_dynamic_programming_in_rust.md)
 > **后置概念**: [缓存友好与 SIMD 算法](04_cache_friendly_and_simd_algorithms.md) · [零拷贝解析](../11_domain_applications/26_zero_copy_parsing_in_rust.md) · [所有权感知算法](../11_domain_applications/27_ownership_aware_algorithms.md)

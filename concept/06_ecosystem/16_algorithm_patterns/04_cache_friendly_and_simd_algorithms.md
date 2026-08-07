@@ -9,7 +9,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **A/S/P 标记**: **P+S** — Procedure + Structure — Structure + Procedure
 > **定位**: 将体系结构感知算法优化映射到 Rust：从数据布局（SOA/AOS）、循环分块、预取到 SIMD 向量化，强调在 safe Rust 与 `unsafe` 边界之间做最小侵入式选择。
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) · [性能优化](../10_performance/01_performance_optimization.md) · [算法与复杂度惯用法](../10_performance/03_algorithms_and_complexity_idioms.md)
 > **后置概念**: [并行与并发算法](../11_domain_applications/25_parallel_algorithms.md) · [图算法 Rust 实现](03_graph_algorithms_in_rust.md) · [c08_algorithms crate docs](../../../crates/c08_algorithms/docs/README.md)

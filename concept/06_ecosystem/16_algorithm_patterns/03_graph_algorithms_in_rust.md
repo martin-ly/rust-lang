@@ -9,7 +9,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **A/S/P 标记**: **P+S** — Procedure + Structure — Structure + Procedure
 > **定位**: 将经典图算法映射到 Rust 所有权模型，重点解决「遍历图的同时如何安全借用图」的问题，覆盖串行实现、错误处理与并行 frontier 扩展。
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [所有权感知算法](../11_domain_applications/27_ownership_aware_algorithms.md) · [所有权感知的数据结构](02_ownership_aware_data_structures.md)
 > **后置概念**: [缓存友好与 SIMD 算法](04_cache_friendly_and_simd_algorithms.md) · [并行与并发算法](../11_domain_applications/25_parallel_algorithms.md) · [c08_algorithms crate docs](../../../crates/c08_algorithms/docs/README.md)

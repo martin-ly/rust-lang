@@ -5,7 +5,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
+> **A/S/P 标记**: **P+S+A** — Procedure + Structure + Application — Structure + Application + Procedure
 > **内容分级**: [专家级]
 > **代码状态**: ✅ 含可编译示例
 > **定位**: 本文件聚焦**微服务入口层与边车基础设施**的工程模式，与 [`05_microservice_patterns.md`](05_microservice_patterns.md) 形成互补：后者覆盖微服务全谱，本文件深入 API 网关实现、服务网格 sidecar 与可观测性横切关注点。

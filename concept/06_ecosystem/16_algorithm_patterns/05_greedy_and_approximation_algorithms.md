@@ -13,7 +13,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **A/S/P 标记**: **P+S** — Procedure + Structure — Structure + Procedure
 > **定位**: 在 Rust 类型系统与所有权模型下实现贪心/近似算法，强调“为什么贪心在此刻正确”以及“何时贪心会失败”。
 > **前置概念**: [算法模式概述](00_algorithm_patterns_overview.md) · [算法范式深潜](01_algorithmic_paradigms.md) · [所有权感知的数据结构](02_ownership_aware_data_structures.md)
 > **后置概念**: [动态规划 Rust 实现](06_dynamic_programming_in_rust.md) · [字符串算法 Rust 实现](07_string_algorithms_in_rust.md) · [图算法 Rust 实现](03_graph_algorithms_in_rust.md)

@@ -1,6 +1,6 @@
 > **内容分级**: [专家级]
 > **代码状态**: ✅ 含可编译示例与标注块
-> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
+> **A/S/P 标记**: **P+S+A** — Procedure + Structure + Application — Structure + Application + Procedure
 >
 # 云原生与 Serverless 模式（Cloud Native & Serverless Patterns）
 

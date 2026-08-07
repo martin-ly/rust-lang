@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 790,
-    "generated_at": "2026-08-04T20:52:35.129914+00:00"
+    "generated_at": "2026-08-07T03:57:58.194319+00:00"
   },
   "files": [
     {
@@ -78617,7 +78617,7 @@
       "layer": "L6",
       "title": "嵌入式 HAL 与 MMIO：从 trait 语义到类型安全的寄存器访问",
       "positioning": "",
-      "line_count": 1098,
+      "line_count": 1104,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -79034,7 +79034,7 @@
       "layer": "L6",
       "title": "裸机并发：中断、NVIC、临界区与异步执行器",
       "positioning": "",
-      "line_count": 1093,
+      "line_count": 1097,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -89056,7 +89056,7 @@
       "layer": "L6",
       "title": "Rust 中的可观测性与 SRE 模式（Observability and SRE Patterns）",
       "positioning": "从企业架构视角对齐 Google SRE 体系与 Rust 工程实践，覆盖可观测性三支柱、SLO 生命周期、错误预算、告警治理、事故响应与可观测性驱动开发。Rust 工具链细节参见 [`02_logging_observability.md`](../00_toolchain/02_logging_observability.md) 与 [`05_tracing.md`](../02_core_crates/05_tracing.md)。",
-      "line_count": 779,
+      "line_count": 785,
       "theorem_chains": [],
       "anti_propositions": [
         {

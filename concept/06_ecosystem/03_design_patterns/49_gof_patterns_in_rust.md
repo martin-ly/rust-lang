@@ -6,7 +6,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: S+A — Structure + Application
+> **A/S/P 标记**: **P+S+A** — Procedure + Structure + Application
 > **前置概念**:
 > [Patterns](01_patterns.md) ·
 > [Idioms Spectrum](02_idioms_spectrum.md) ·

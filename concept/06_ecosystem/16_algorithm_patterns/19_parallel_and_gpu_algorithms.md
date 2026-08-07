@@ -8,7 +8,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L6-L7
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **A/S/P 标记**: **P+S** — Procedure + Structure — Structure + Procedure
 > **定位**: 从「算法模式」视角讲解 Rust 中 CPU 并行与 GPU 加速的选型与实现，重点覆盖 Rayon 数据并行惯用法、rust-gpu/SPIR-V 着色器入口、wgpu 计算管线，以及何时应该把算法 offload 到 GPU。
 > **前置概念**: [算法模式概述](00_algorithm_patterns_overview.md) · [并行与并发算法](../11_domain_applications/25_parallel_algorithms.md) · [缓存友好与 SIMD 算法](04_cache_friendly_and_simd_algorithms.md) · [Send/Sync](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md)
 > **后置概念**: [c08_algorithms crate docs](../../../crates/c08_algorithms/docs/README.md) · [Rust 算法模式语义图谱](17_rust_algorithm_patterns_semantic_atlas.md)

@@ -1,6 +1,6 @@
 > **内容分级**: [专家级]
 > **代码状态**: ✅ 含可编译示例与标注块
-> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
+> **A/S/P 标记**: **P+S+A** — Procedure + Structure + Application — Structure + Application + Procedure
 >
 # 事件驱动架构、CQRS 与企业集成模式（Event-Driven, CQRS & Enterprise Integration Patterns）
 

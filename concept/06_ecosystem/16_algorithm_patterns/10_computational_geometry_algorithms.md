@@ -13,7 +13,7 @@
 > **Rust 版本**: 1.97.1+ (Edition 2024)
 > **Bloom 层级**: L5-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **A/S/P 标记**: **P+S** — Procedure + Structure — Structure + Procedure
 > **定位**: 在 Rust 所有权、类型系统与零拷贝抽象下实现经典计算几何算法，强调精度控制、借用纪律与可复用几何原语。
 > **前置概念**: [算法模式概述](00_algorithm_patterns_overview.md) · [所有权感知的数据结构](02_ownership_aware_data_structures.md) · [贪心与近似算法](05_greedy_and_approximation_algorithms.md) · [借用](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [泛型](../../02_intermediate/01_generics/01_generics.md)
 > **后置概念**: [字符串算法 Rust 实现](07_string_algorithms_in_rust.md) · [图算法 Rust 实现](03_graph_algorithms_in_rust.md) · [算法与复杂度惯用法](../10_performance/03_algorithms_and_complexity_idioms.md) · [算法与竞赛编程](../11_domain_applications/07_algorithms_competitive_programming.md)

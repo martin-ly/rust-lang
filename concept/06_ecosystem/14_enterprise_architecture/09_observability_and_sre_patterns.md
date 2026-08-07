@@ -9,7 +9,7 @@
 > **Rust 版本**: 1.97.1+ (Edition 2024)
 > **Bloom 层级**: L5-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
+> **A/S/P 标记**: **P+S+A** — Procedure + Structure + Application — Structure + Application + Procedure
 > **定位**: 从企业架构视角对齐 Google SRE 体系与 Rust 工程实践，覆盖可观测性三支柱、SLO 生命周期、错误预算、告警治理、事故响应与可观测性驱动开发。Rust 工具链细节参见 [`02_logging_observability.md`](../00_toolchain/02_logging_observability.md) 与 [`05_tracing.md`](../02_core_crates/05_tracing.md)。
 > **前置概念**: [Microservices Patterns in Rust](08_microservices_patterns_in_rust.md) · [API Gateway & Service Mesh](../03_design_patterns/38_api_gateway_and_service_mesh_patterns.md) · [High-Performance Network Service Architecture](../04_web_and_networking/08_high_performance_network_service_architecture.md) · [Performance Engineering Architecture](../10_performance/02_performance_engineering_architecture.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md)
 > **后置概念**: [Cloud Native](../04_web_and_networking/02_cloud_native.md) · [Kubernetes Rust](../04_web_and_networking/11_kubernetes_rust.md) · [Data-Intensive Systems Design](../06_data_and_distributed/10_data_intensive_systems_design.md)
@@ -62,6 +62,12 @@
     - [P1 — 学术与行业权威](#p1--学术与行业权威)
     - [P2 — 生态权威与参考实现](#p2--生态权威与参考实现)
   - [八、相关概念链接](#八相关概念链接)
+  - [九、AI / LLM 系统可观测性](#九ai--llm-系统可观测性)
+    - [9.1 观测对象与信号](#91-观测对象与信号)
+    - [9.2 OpenTelemetry GenAI Semantic Conventions](#92-opentelemetry-genai-semantic-conventions)
+    - [9.3 Rust 实现：最小可观测 LLM 客户端](#93-rust-实现最小可观测-llm-客户端)
+    - [9.4 反模式](#94-反模式)
+    - [9.5 权威来源](#95-权威来源)
 
 ---
 
@@ -374,7 +380,7 @@ async fn handler(req: axum::extract::Request) -> impl axum::response::IntoRespon
 1. **单一 Trace 上下文贯穿**: `tracing` 的 span 通过 `tracing-opentelemetry` 自动映射为 OpenTelemetry span，保证跨线程/跨服务的 `trace_id` 一致。
 2. **指标标签低基数**: Prometheus label 必须是有限集合；禁止把用户 ID、时间戳、提示文本放入 label。
 3. **日志结构化**: Loki 偏好 JSON 结构化日志；`tracing-subscriber` 的 `json` feature 可直接输出兼容格式。
-4. ** exporter 批处理**: OpenTelemetry SDK 默认批量导出，避免每次 span 都触发网络请求。
+4. **exporter 批处理**: OpenTelemetry SDK 默认批量导出，避免每次 span 都触发网络请求。
 
 ```rust,ignore
 // 典型 OpenTelemetry + Prometheus + tracing 集成骨架

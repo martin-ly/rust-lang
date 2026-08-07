@@ -9,7 +9,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **A/S/P 标记**: **P+S** — Procedure + Structure — Structure + Procedure
 > **定位**: 将 Rust 算法实现的全部语义空间组织为可检索、可比较、可演进的图谱，连接语言特性、经典算法思想与工程实践，作为 `concept/06_ecosystem/16_algorithm_patterns/` 子页的聚合入口。
 > **前置概念**: [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Iterator](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) · [Send/Sync](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md) · [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md)
 > **后置概念**: [算法与复杂度惯用法](../10_performance/03_algorithms_and_complexity_idioms.md) · [c08_algorithms crate docs](../../../crates/c08_algorithms/docs/README.md)

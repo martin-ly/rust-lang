@@ -11,7 +11,7 @@
 > **受众**: [专家]
 > **Bloom 层级**: L5
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
+> **A/S/P 标记**: **P+S+A** — Procedure + Structure + Application — Structure + Application + Procedure
 > **双维定位**: P×Eva/Cre — 编写可移植、可测试、可组合的嵌入式设备驱动
 > **前置概念**: [embedded-hal 与驱动惯用法](24_embedded_hal_and_driver_idioms.md) · [PAC 与 HAL 实现](17_pac_hal_implementation.md) · [Memory-Mapped Peripherals 与 Typestate 设计](25_memory_mapped_peripherals_and_typestate.md) · [no_std 与裸机惯用法](23_no_std_and_bare_metal_idioms.md)
 > **后置概念**: [嵌入式协议与外设驱动](22_embedded_protocol_drivers.md) · [异步 no_std 嵌入式](11_async_no_std_embedded.md) · [嵌入式测试与 CI 策略](32_embedded_testing_and_ci_strategies.md) · [安全关键嵌入式 Rust 指南](30_misra_rust_safety_critical_guidelines.md) · [Rust vs C/C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)

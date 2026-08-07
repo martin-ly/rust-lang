@@ -1,0 +1,172 @@
+{
+  "date": "2026-08-07",
+  "scanned": 779,
+  "coverage": {
+    "P0": [
+      774,
+      99.4
+    ],
+    "P1": [
+      737,
+      94.6
+    ],
+    "P2": [
+      702,
+      90.1
+    ],
+    "any": [
+      779,
+      100.0
+    ],
+    "none": 0
+  },
+  "content_scope": {
+    "scanned": 678,
+    "P0": [
+      678,
+      100.0
+    ],
+    "P1": [
+      678,
+      100.0
+    ],
+    "P2": [
+      678,
+      100.0
+    ],
+    "any": [
+      678,
+      100.0
+    ],
+    "gaps_p1": [],
+    "gaps_p2": []
+  },
+  "by_layer": {
+    "L0": {
+      "n": 76,
+      "P0": 76,
+      "any": 76
+    },
+    "L1": {
+      "n": 60,
+      "P0": 60,
+      "any": 60
+    },
+    "L2": {
+      "n": 45,
+      "P0": 45,
+      "any": 45
+    },
+    "L3": {
+      "n": 78,
+      "P0": 78,
+      "any": 78
+    },
+    "L4": {
+      "n": 131,
+      "P0": 131,
+      "any": 131
+    },
+    "L5": {
+      "n": 55,
+      "P0": 55,
+      "any": 55
+    },
+    "L6": {
+      "n": 256,
+      "P0": 252,
+      "any": 256
+    },
+    "L7": {
+      "n": 75,
+      "P0": 74,
+      "any": 75
+    },
+    "L?": {
+      "n": 3,
+      "P0": 3,
+      "any": 3
+    }
+  },
+  "core_gaps_l1_l4_no_p0": [],
+  "none_any": [],
+  "crates_docs": {
+    "total": 569,
+    "kinds": {
+      "stub": 504,
+      "content": 63,
+      "index_readme": 2
+    },
+    "content": 63,
+    "covered": 63,
+    "pct": 100.0,
+    "gaps": [],
+    "per_crate": {
+      "c01_ownership_borrow_scope": {
+        "content": 5,
+        "covered": 5
+      },
+      "c02_type_system": {
+        "content": 4,
+        "covered": 4
+      },
+      "c03_control_fn": {
+        "content": 5,
+        "covered": 5
+      },
+      "c04_generic": {
+        "content": 2,
+        "covered": 2
+      },
+      "c05_threads": {
+        "content": 4,
+        "covered": 4
+      },
+      "c06_async": {
+        "content": 4,
+        "covered": 4
+      },
+      "c07_process": {
+        "content": 13,
+        "covered": 13
+      },
+      "c08_algorithms": {
+        "content": 6,
+        "covered": 6
+      },
+      "c09_design_pattern": {
+        "content": 4,
+        "covered": 4
+      },
+      "c10_networks": {
+        "content": 10,
+        "covered": 10
+      },
+      "c11_macro_system_proc": {
+        "content": 1,
+        "covered": 1
+      },
+      "c12_wasm": {
+        "content": 3,
+        "covered": 3
+      },
+      "c13_embedded": {
+        "content": 1,
+        "covered": 1
+      },
+      "c17_resolver_v3_public_demo": {
+        "content": 1,
+        "covered": 1
+      }
+    },
+    "skipped": {
+      "index_readme": [
+        "crates/c15_verification_tools/docs/README.md",
+        "crates/c16_gui/docs/README.md"
+      ],
+      "code_listing": [],
+      "quiz": []
+    },
+    "dead_canonical": []
+  }
+}

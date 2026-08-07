@@ -4,7 +4,7 @@
     "scanned": 823,
     "counts": {
       "D1": 0,
-      "D2": 23,
+      "D2": 0,
       "D3": 0,
       "D4": 0,
       "D5": 0,
@@ -12,187 +12,22 @@
     },
     "pct": {
       "D1": 0.0,
-      "D2": 2.8,
+      "D2": 0.0,
       "D3": 0.0,
       "D4": 0.0,
       "D5": 0.0,
       "D6": 0.0
     },
     "D2_base_files_with_asp_and_bloom": 468,
-    "flagged_files": 23
+    "flagged_files": 0
   },
   "examples": {
     "D1": [],
-    "D2": [
-      [
-        "concept/00_meta/05_ai_semantic_engineering/01_knowledge_graph_design.md",
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [0] 无交集"
-      ],
-      [
-        "concept/00_meta/05_ai_semantic_engineering/02_llm_rag_for_rust.md",
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [0] 无交集"
-      ],
-      [
-        "concept/00_meta/05_ai_semantic_engineering/03_rag_evaluation_for_rust_kg.md",
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [0] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/03_design_patterns/37_event_sourcing_engine_patterns.md",
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/03_design_patterns/38_api_gateway_and_service_mesh_patterns.md",
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/03_design_patterns/49_gof_patterns_in_rust.md",
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [6] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/05_systems_and_embedded/31_embedded_networking_and_iot_protocols.md",
-        "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5, 6] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/05_systems_and_embedded/32_embedded_testing_and_ci_strategies.md",
-        "A/S/P=A 允许 [1, 2] 与 Bloom [5] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/05_systems_and_embedded/49_embedded_hal_driver_patterns.md",
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/05_systems_and_embedded/50_embedded_hardware_test_matrix.md",
-        "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/05_systems_and_embedded/51_probe_rs_and_embedded_debugging.md",
-        "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5] 无交集"
-      ],
-      [
-        "concept/06_ecosystem/14_enterprise_architecture/09_observability_and_sre_patterns.md",
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ]
-    ],
+    "D2": [],
     "D3": [],
     "D4": [],
     "D5": [],
     "D6": []
   },
-  "per_file": {
-    "concept/00_meta/05_ai_semantic_engineering/01_knowledge_graph_design.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [0] 无交集"
-      ]
-    },
-    "concept/00_meta/05_ai_semantic_engineering/02_llm_rag_for_rust.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [0] 无交集"
-      ]
-    },
-    "concept/00_meta/05_ai_semantic_engineering/03_rag_evaluation_for_rust_kg.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [0] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/03_design_patterns/37_event_sourcing_engine_patterns.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/03_design_patterns/38_api_gateway_and_service_mesh_patterns.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/03_design_patterns/49_gof_patterns_in_rust.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/05_systems_and_embedded/31_embedded_networking_and_iot_protocols.md": {
-      "D2": [
-        "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/05_systems_and_embedded/32_embedded_testing_and_ci_strategies.md": {
-      "D2": [
-        "A/S/P=A 允许 [1, 2] 与 Bloom [5] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/05_systems_and_embedded/49_embedded_hal_driver_patterns.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/05_systems_and_embedded/50_embedded_hardware_test_matrix.md": {
-      "D2": [
-        "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/05_systems_and_embedded/51_probe_rs_and_embedded_debugging.md": {
-      "D2": [
-        "A/S/P=A 允许 [1, 2] 与 Bloom [4, 5] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/14_enterprise_architecture/09_observability_and_sre_patterns.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/14_enterprise_architecture/11_event_driven_and_cqrs_patterns.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/14_enterprise_architecture/12_cloud_native_and_serverless_patterns.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/16_algorithm_patterns/02_ownership_aware_data_structures.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/16_algorithm_patterns/03_graph_algorithms_in_rust.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/16_algorithm_patterns/04_cache_friendly_and_simd_algorithms.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/16_algorithm_patterns/05_greedy_and_approximation_algorithms.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/16_algorithm_patterns/06_dynamic_programming_in_rust.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/16_algorithm_patterns/07_string_algorithms_in_rust.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/16_algorithm_patterns/10_computational_geometry_algorithms.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/16_algorithm_patterns/17_rust_algorithm_patterns_semantic_atlas.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [5, 6] 无交集"
-      ]
-    },
-    "concept/06_ecosystem/16_algorithm_patterns/19_parallel_and_gpu_algorithms.md": {
-      "D2": [
-        "A/S/P=S 允许 [2, 3, 4] 与 Bloom [6, 7] 无交集"
-      ]
-    }
-  }
+  "per_file": {}
 }

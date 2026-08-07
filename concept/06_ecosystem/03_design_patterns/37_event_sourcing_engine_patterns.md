@@ -5,7 +5,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **Bloom 层级**: L5-L6
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
+> **A/S/P 标记**: **P+S+A** — Procedure + Structure + Application — Structure + Application + Procedure
 > **内容分级**: [专家级]
 > **代码状态**: ✅ 含可编译示例
 > **定位**: 本文件聚焦**事件溯源存储引擎的工程实现模式**，与 [`07_cqrs_event_sourcing.md`](07_cqrs_event_sourcing.md) 的 CQRS+ES 概念权威页形成互补：后者解释「是什么」与「为什么」，本文件解释「如何用一个 Rust 引擎实现」。
