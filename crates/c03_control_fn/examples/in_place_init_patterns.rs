@@ -23,8 +23,8 @@ fn maybeuninit_write_assume_init() {
 /// 示例 2: 数组原地初始化
 fn array_in_place_init() -> [i32; 5] {
     let mut arr: [MaybeUninit<i32>; 5] = [const { MaybeUninit::uninit() }; 5];
-    for i in 0..5 {
-        arr[i].write((i * i) as i32);
+    for (i, slot) in arr.iter_mut().enumerate() {
+        slot.write((i * i) as i32);
     }
     // Safety: 每个元素都已写入有效 i32
     unsafe { std::mem::transmute_copy(&arr) }
