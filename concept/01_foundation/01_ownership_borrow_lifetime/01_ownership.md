@@ -722,7 +722,8 @@ fn main() {
 
 ### 7.7 修复所有权错误（Fixing Ownership Errors）
 
-> 🎓 **Brown 书强化**: 本节概念与框架直接来自 [Brown University Interactive Book — Fixing Ownership Errors](https://rust-book.cs.brown.edu/ch04-03-fixing-ownership-errors.html) 与 Will Crichton 等人的 OOPSLA 2023 论文 *A Grounded Conceptual Model for Ownership Types in Rust*。Brown 团队的研究表明，将编译器错误归类为“所有权转移”“借用（Borrowing）冲突”“生命周期不匹配”三类，可显著提升学习者修复效率。
+> 🎓 **Brown 书强化**: 本节概念与框架直接来自 [Brown University Interactive Book — Fixing Ownership Errors](https://rust-book.cs.brown.edu/ch04-03-fixing-ownership-errors.html) 与 Will Crichton 等人的 OOPSLA 2023 论文 *A Grounded Conceptual Model for Ownership Types in Rust*。
+> Brown 团队的研究表明，将编译器错误归类为“所有权转移”“借用（Borrowing）冲突”“生命周期不匹配”三类，可显著提升学习者修复效率。
 
 所有权错误通常表现为三类编译器信息。修复时遵循以下诊断流程：
 
@@ -774,7 +775,8 @@ fn main() {
 
 ## 八、认知路径（Cognitive Path）
 
-> 本章节为读者提供从**直觉困惑**到**形式化理解**的六步渐进式桥梁。每步之间的过渡解释说明了"为什么需要这下一步"。
+> 本章节为读者提供从**直觉困惑**到**形式化理解**的六步渐进式桥梁。
+> 每步之间的过渡解释说明了"为什么需要这下一步"。
 
 ### 8.1 六步递进框架
 
@@ -2021,11 +2023,9 @@ let word = get_first_word(s.clone()); // s 仍有效
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
-
 > **过渡**: 从所有权（Ownership）的三条规则到借用（Borrowing）与生命周期（Lifetimes），核心变化是从「唯一绑定」过渡到「临时访问 + 时效约束」。
 > **过渡**: 理解 move 语义后，下一步应学习 `Copy`/`Clone` 的边界与 `Drop` 的确定性释放，并注意循环引用导致的泄漏。
 > **过渡**: 所有权（Ownership）规则是借用检查器（Borrow Checker）的根基；离开所有权而直接讨论借用会丢失内存安全的形式化来源。
-
 > 类型安全 ⟸ 所有权唯一性 ⟸ 借用检查器
 > 无数据竞争 ⟸ 可变借用（Mutable Borrow）独占性 ⟸ Send/Sync 自动推导
 
