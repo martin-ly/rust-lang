@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 790,
-    "generated_at": "2026-08-07T04:37:22.633494+00:00"
+    "generated_at": "2026-08-10T23:52:51.001805+00:00"
   },
   "files": [
     {
@@ -4781,7 +4781,7 @@
       "layer": "L0",
       "title": "概念定义图谱（Concept Definition Atlas）",
       "positioning": "",
-      "line_count": 567,
+      "line_count": 569,
       "theorem_chains": [
         {
           "text": "| `05_logical_reasoning_atlas` | [逻辑推理图谱](../../00_meta/knowledge_topology/05_logical_reasoning_atlas.md) | Logical Reasoning Atlas | A navigational index of theorem chains, inference rules, proof/verification paths, and formal correspondences across the Rust concept hierarchy. 定理链（⟹/⟸）、推理规则、证明/验证路径、形式化对应。 | 2 |",
@@ -21641,7 +21641,7 @@
       "layer": "L2",
       "title": "关联类型默认值（Associated Type Defaults）",
       "positioning": "",
-      "line_count": 442,
+      "line_count": 444,
       "theorem_chains": [],
       "anti_propositions": [
         {
