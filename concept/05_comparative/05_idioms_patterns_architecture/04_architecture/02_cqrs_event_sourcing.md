@@ -1,7 +1,12 @@
 # CQRS / Event Sourcing
 
-**EN**: CQRS and Event Sourcing
-**Summary**: Separate read and write models and persist domain state as an immutable stream of events.
+> **EN**: CQRS and Event Sourcing
+> **Summary**: Separate read and write models and persist domain state as an immutable stream of events.
+> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Bloom 层级**: L6
+> **权威来源**: 本文件为 `concept/` 权威页。
+> **前置概念**: [错误传播](../01_idioms/02_error_propagation.md) · [设计模式](../03_design_patterns/README.md)
+> **后置概念**: [微服务](./03_microservices.md) · [事件总线](./06_event_bus.md)
 
 ```mermaid
 mindmap
@@ -19,12 +24,6 @@ mindmap
       eventual consistency
       event schema evolution
 ```
-
-> **Rust 版本**: 1.97.0+ (Edition 2024)
-> **Bloom 层级**: L6
-> **权威来源**: 本文件为 `concept/` 权威页。
-> **前置概念**: [错误传播](../01_idioms/02_error_propagation.md) · [设计模式](../03_design_patterns/README.md)
-> **后置概念**: [微服务](./03_microservices.md) · [事件总线](./06_event_bus.md)
 
 ---
 
@@ -139,6 +138,8 @@ fn main() {
 直接在命令处理中修改读模型，跳过事件持久化，会破坏事件溯源的审计能力：
 
 ```rust
+use std::collections::HashMap;
+
 // 反例：命令直接修改状态，没有生成事件。
 pub fn add_stock_directly(state: &mut HashMap<String, u32>, sku: &str, qty: u32) {
     *state.entry(sku.to_string()).or_insert(0) += qty;

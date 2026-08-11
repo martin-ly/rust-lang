@@ -204,9 +204,10 @@ fn main_loop() {
 
 编译器为了优化可能重排内存访问顺序。对于 MMIO，重排会导致硬件看到错误的写入顺序。`core::sync::atomic::compiler_fence` 阻止编译器重排，但不生成 CPU 指令：
 
-```rust
+```rust,ignore
 use core::sync::atomic::{compiler_fence, Ordering};
 
+// 以下寄存器访问依赖具体 MCU 的 PAC/svd2rust 生成类型，示意用
 unsafe { (*RCC).ahb1enr.write(|w| w.gpioaen().set_bit()); }
 compiler_fence(Ordering::SeqCst);
 unsafe { (*GPIOA).moder.write(|w| w.moder0().output()); }

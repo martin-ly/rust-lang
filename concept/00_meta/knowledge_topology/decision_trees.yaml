@@ -1845,7 +1845,7 @@ trees:
       [
         ex:DistributedSystems,
         ex:DistributedConsensus,
-        ex:CqrsEventSourcing,
+        ex:CQRSAndEventSourcing,
         ex:MicroservicePatterns,
         ex:ApplicationDomains,
       ]

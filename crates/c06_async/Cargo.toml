@@ -68,6 +68,11 @@ env_logger = { workspace = true }
 metrics = { workspace = true }
 salvo = { workspace = true }
 ntex = { workspace = true }
+# 2026-08-10: ntex-server 3.11.0 / ntex-rt 3.17.x 在 Windows 上编译失败
+# (Signal 枚举不匹配 / cannot move out of `*sig`)。
+# 通过直接声明 dev-dependency 强制锁定兼容版本，等待上游修复后移除。
+ntex-server = "=3.10.4"
+ntex-rt = "=3.16.1"
 askama = { workspace = true }
 maud = { workspace = true }
 

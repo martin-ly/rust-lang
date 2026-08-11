@@ -160,7 +160,7 @@ fn wait_for_button<P: InputPin>(btn: &mut P) -> Result<(), P::Error> {
 
 ### 3.2 `OutputPin`：输出驱动
 
-```rust
+```rust,ignore
 pub trait OutputPin: ErrorType {
     fn set_high(&mut self) -> Result<(), Self::Error>;
     fn set_low(&mut self) -> Result<(), Self::Error>;
@@ -186,7 +186,7 @@ fn set_led<P: OutputPin>(led: &mut P, on: bool) -> Result<(), P::Error> {
 
 ### 3.3 `StatefulOutputPin` 与 `ToggleableOutputPin`
 
-```rust
+```rust,ignore
 pub trait StatefulOutputPin: OutputPin {
     fn is_set_high(&self) -> Result<bool, Self::Error>;
     fn is_set_low(&self) -> Result<bool, Self::Error> {
@@ -370,7 +370,7 @@ let sample: u16 = adc.read(&mut pin)?;
 
 ### 5.2 PWM：`SetDutyCycle`
 
-```rust
+```rust,ignore
 pub trait SetDutyCycle: ErrorType {
     fn max_duty_cycle(&self) -> u16;
     fn set_duty_cycle(&mut self, duty: u16) -> Result<(), Self::Error>;
@@ -413,7 +413,7 @@ pub trait DelayNs {
 
 在 `embedded-hal` 0.2.x 中，串口由 `serial::Read` / `serial::Write` trait 描述。1.0 版本把这些能力移到了独立的 `embedded-io` crate，因为字符流 IO 与“数字/总线外设”的语义差异较大：
 
-```rust
+```rust,ignore
 // embedded-io 示意（教学用）
 pub trait Read {
     fn read(&mut self, buf: &mut [u8]) -> Result<usize, Self::Error>;

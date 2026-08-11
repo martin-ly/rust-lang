@@ -3312,7 +3312,7 @@ trait HasItem {
 }
 
 // 关联类型等式约束仍可用
-fn ok<T: HasItem>() where T::Item = u32 {}
+fn ok<T: HasItem<Item = u32>>() {}
 ```
 
 > **注意**：关联类型等式 `T::Assoc = U` 不受影响；被拒绝的只是「普通类型之间直接写等号」的语法。

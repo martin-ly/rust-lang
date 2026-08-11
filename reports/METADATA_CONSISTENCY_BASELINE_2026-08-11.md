@@ -1,6 +1,6 @@
 # 元数据一致性基线（语义质量门 P0-1）
 
-**日期**: 2026-08-11  **扫描**: 823 concept 活跃文件（排除 archive）  **模式**: warning（不阻断）
+**日期**: 2026-08-11  **扫描**: 823 concept 活跃文件（排除 archive）  **模式**: strict
 
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
@@ -9,9 +9,9 @@
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
 | D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
-| D6 Summary 低信息量模板套话 | 1 | 0.1% | >=3% | pass |
+| D6 Summary 低信息量模板套话 | 0 | 0.0% | >=3% | pass |
 
-**受影响文件总数**: 1 / 823
+**受影响文件总数**: 0 / 823
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -143,13 +143,22 @@
 ### D1 Bloom 层级 ↔ 层次定位/层级 同文件互斥（0）
 
 
+### D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7）（0）
+
+
 ### D3 关键字段同文件重声明（0）
+
+
 ### D4 文首块 Rust 版本号自矛盾（0）
 
 
-### D6 Summary 低信息量模板套话（1）
-- `concept/02_intermediate/00_traits/09_associated_type_defaults.md` — Summary 为空
+### D5 稳定层正文残留 nightly/preview/unstable（0）
 
+
+### D6 Summary 低信息量模板套话（0）
+
+
+## WOULD-FAIL（接入 CI strict 时将阻断）
 
 - 无（全部通过）
 

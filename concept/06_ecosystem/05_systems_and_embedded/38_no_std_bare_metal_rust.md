@@ -288,6 +288,9 @@ panic = "abort"
 panic handler 的签名必须是：
 
 ```rust
+#![no_std]
+#![no_main]
+
 use core::panic::PanicInfo;
 
 #[panic_handler]
@@ -753,11 +756,15 @@ pub unsafe fn enable_clock() {
 `#[panic_handler]` 是 `no_std` 下唯一稳定的 panic 处理机制。函数签名固定：
 
 ```rust
+#![no_std]
+#![no_main]
+
 use core::panic::PanicInfo;
 
 #[panic_handler]
-fn panic(info: &PanicInfo) -> ! {
+fn panic(_info: &PanicInfo) -> ! {
     // 不可返回
+    loop {}
 }
 ```
 

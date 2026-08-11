@@ -143,6 +143,8 @@ fn fetch_user(id: UserId) {}    // snake_case for values/functions
 
 ```rust
 // ✅ 惯用：使用社区通用名称
+use std::time::Duration;
+
 #[derive(Default, Clone, Debug)]
 pub struct Config {
     timeout: Duration,
@@ -466,6 +468,8 @@ where
 
 ```rust
 // ✅ 惯用
+use std::collections::HashMap;
+
 pub fn merge<K, V>(a: &HashMap<K, V>, b: &HashMap<K, V>) -> HashMap<K, V>
 where
     K: Eq + std::hash::Hash + Clone,
@@ -645,10 +649,16 @@ impl std::error::Error for ConfigError {}
 
 ```rust
 // ✅ 向后兼容：新增方法，不改旧签名
+use std::time::Duration;
+
+pub struct Config {
+    timeout: Duration,
+}
+
 impl Config {
-    pub fn new() -> Self { /* ... */ }
+    pub fn new() -> Self { Self { timeout: Duration::from_secs(30) } }
     // 1.1 新增
-    pub fn with_timeout(self, timeout: Duration) -> Self { /* ... */ }
+    pub fn with_timeout(self, timeout: Duration) -> Self { Self { timeout } }
 }
 ```
 
@@ -673,9 +683,17 @@ pub trait PublicTrait: sealed::Sealed {}
 **语义**: `#[deprecated]` 在编译期产生警告，为用户提供迁移窗口，是 API 演进的缓释机制。
 
 ```rust
-#[deprecated(since = "2.0.0", note = "use Config::with_timeout instead")]
-pub fn set_timeout(&mut self, _timeout: Duration) {
-    // 保留旧实现或委托给新方法
+use std::time::Duration;
+
+pub struct Config {
+    timeout: Duration,
+}
+
+impl Config {
+    #[deprecated(since = "2.0.0", note = "use Config::with_timeout instead")]
+    pub fn set_timeout(&mut self, _timeout: Duration) {
+        // 保留旧实现或委托给新方法
+    }
 }
 ```
 

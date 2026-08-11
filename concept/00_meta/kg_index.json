@@ -4,7 +4,7 @@
     "generated": "2026-07-11",
     "rust_version": "1.97.0+",
     "source": "concept/",
-    "entity_count": 719,
+    "entity_count": 720,
     "schema": "simple KG index"
   },
   "entities": [
@@ -11677,6 +11677,39 @@
       "rust_version": "1.97.0+ (Edition 2024)",
       "prerequisites": [],
       "postrequisites": [],
+      "theorems": [],
+      "related_crates": [
+        "c14_semantic_web"
+      ]
+    },
+    {
+      "id": "concept:05_comparative/05_idioms_patterns_architecture/04_architecture/02_cqrs_event_sourcing.md",
+      "path": "05_comparative/05_idioms_patterns_architecture/04_architecture/02_cqrs_event_sourcing.md",
+      "title": "CQRS / Event Sourcing",
+      "en": "CQRS and Event Sourcing",
+      "summary": "Separate read and write models and persist domain state as an immutable stream of events.",
+      "bloom": "L6",
+      "rust_version": "1.97.0+ (Edition 2024)",
+      "prerequisites": [
+        {
+          "title": "错误传播",
+          "path": "../01_idioms/02_error_propagation.md"
+        },
+        {
+          "title": "设计模式",
+          "path": "../03_design_patterns/README.md"
+        }
+      ],
+      "postrequisites": [
+        {
+          "title": "微服务",
+          "path": "./03_microservices.md"
+        },
+        {
+          "title": "事件总线",
+          "path": "./06_event_bus.md"
+        }
+      ],
       "theorems": [],
       "related_crates": [
         "c14_semantic_web"

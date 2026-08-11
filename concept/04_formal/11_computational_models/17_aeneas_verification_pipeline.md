@@ -103,6 +103,7 @@ LLBC 核心指令（教学类比）
 例如：
 
 ```rust
+let mut v = 0;
 let x = &mut v;
 *x = 42;
 // x 隐式结束

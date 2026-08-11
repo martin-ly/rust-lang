@@ -122,8 +122,8 @@ fn main() {
 ```
 
 ```rust
-fn pair_from<A, B, C>(f: impl Fn(C) -> A, g: impl Fn(C) -> B, c: C) -> (A, B) {
-    (f(c), g(c))
+fn pair_from<A, B, C: Clone>(f: impl Fn(C) -> A, g: impl Fn(C) -> B, c: C) -> (A, B) {
+    (f(c.clone()), g(c))
 }
 
 fn main() {
@@ -355,11 +355,16 @@ fn main() {
 ### 示例 3：函数类型作为指数对象
 
 ```rust
-fn curry<A, B, C>(f: impl Fn(A, B) -> C) -> impl Fn(A) -> impl Fn(B) -> C {
-    move |a| move |b| f(a, b)
+fn curry<A: Clone + 'static, B: Clone + 'static, C: Clone + 'static>(
+    f: impl Fn(A, B) -> C + Clone + 'static,
+) -> impl Fn(A) -> Box<dyn Fn(B) -> C> {
+    move |a| {
+        let f = f.clone();
+        Box::new(move |b| f(a.clone(), b.clone()))
+    }
 }
 
-fn uncurry<A, B, C>(f: impl Fn(A) -> impl Fn(B) -> C) -> impl Fn(A, B) -> C {
+fn uncurry<A, B, C>(f: impl Fn(A) -> Box<dyn Fn(B) -> C>) -> impl Fn(A, B) -> C {
     move |a, b| f(a)(b)
 }
 

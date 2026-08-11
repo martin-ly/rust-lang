@@ -6,13 +6,13 @@
 
 - KG 文件: `concept/00_meta/kg_data_v3.json`
 - SHACL 形状: `concept/00_meta/kg_shapes.ttl`
-- RDF 三元组: 137567
-- 实体数: 719
-- 关系数: 10621
+- RDF 三元组: 123820
+- 实体数: 720
+- 关系数: 10625
 
 ## 验证结果
 
-**SHACL conforms**: ✅ 通过
+**SHACL conforms**: ✅ 通过  
 **Violation 总数**: 0
 
 未发现 SHACL violation。

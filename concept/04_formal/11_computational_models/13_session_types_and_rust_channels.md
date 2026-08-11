@@ -221,6 +221,8 @@ fn main() {
 Rust 中典型的多党协议场景是**微服务编排**或 **actor 系统**。虽然没有原生 MPST 支持，但可以通过代码生成或类型状态机实现静态检查：
 
 ```rust
+use std::sync::mpsc::{Receiver, Sender};
+
 // 教学级：角色 B 的本地类型状态机
 pub struct B_AwaitName;
 pub struct B_SendPrice {
@@ -337,6 +339,8 @@ fn main() {
 ### 示例 3：多党协议投影
 
 ```rust
+use std::sync::mpsc::Sender;
+
 // 角色 A: 先向 B 发 String，再向 C 发 bool
 pub struct A_To_B(Sender<String>);
 pub struct A_To_C(Sender<bool>);

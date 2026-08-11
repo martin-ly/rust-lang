@@ -324,20 +324,20 @@ Rust 语言设计 deliberate 地不提供通用 effect handlers，主要原因�
 ### 示例 1：用枚举模拟状态效应
 
 ```rust
-enum StateOp<'a, T> {
-    Get(&'a mut dyn FnMut() -> T),
+enum StateOp<T> {
+    Get(Box<dyn FnMut() -> T>),
     Set(T),
 }
 
-fn use_state() -> Vec<StateOp<'static, i32>> {
-    vec![StateOp::Get(&mut || 0), StateOp::Set(42)]
+fn use_state() -> Vec<StateOp<i32>> {
+    vec![StateOp::Get(Box::new(|| 0)), StateOp::Set(42)]
 }
 
 fn main() {
     let ops = use_state();
     for op in ops {
         match op {
-            StateOp::Get(f) => println!("get {}", f()),
+            StateOp::Get(mut f) => println!("get {}", f()),
             StateOp::Set(v) => println!("set {}", v),
         }
     }

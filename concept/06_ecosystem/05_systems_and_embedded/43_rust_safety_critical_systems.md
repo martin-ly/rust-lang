@@ -585,7 +585,7 @@ fn main() {
 FFI 是安全关键 Rust 项目中常见的 unsafe 来源，必须文档化边界契约：
 
 ```rust
-extern "C" {
+unsafe extern "C" {
     /// 初始化 C 驱动。
     ///
     /// # Safety
@@ -598,6 +598,11 @@ extern "C" {
 pub struct DriverConfig {
     pub baud_rate: u32,
     pub mode: u8,
+}
+
+#[derive(Debug)]
+pub enum DriverError {
+    InitFailed,
 }
 
 pub fn init_driver(config: &DriverConfig) -> Result<(), DriverError> {

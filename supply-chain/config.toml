@@ -498,6 +498,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
 
+[[exemptions.async-trait]]
+version = "0.1.92"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (0.1.91 -> 0.1.92)；dtolnay 维护的 async trait 辅助宏，仅编译期执行，后续应逐步转为 audits.toml 正式审计条目。"
+
 [[exemptions.atoi_simd]]
 version = "0.18.1"
 criteria = "safe-to-run"
@@ -540,11 +546,23 @@ criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-18 cargo update 补丁升级 (1.17.1 -> 1.17.3)；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.aws-lc-rs]]
+version = "1.18.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (1.17.3 -> 1.18.0)；aws-lc-rs 为 rustls 的加密后端传递依赖，safe-to-run (test/dev) only。"
+
 [[exemptions.aws-lc-sys]]
 version = "0.43.0"
 criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-18 cargo update 补丁升级 (0.42.0 -> 0.43.0)；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.aws-lc-sys]]
+version = "0.44.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (0.43.0 -> 0.44.0)；aws-lc-rs 的系统绑定与构建脚本，仅构建期执行。"
 
 [[exemptions.axum]]
 version = "0.8.9"
@@ -774,6 +792,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-27 cargo update 补丁升级 (1.3.0 -> 1.4.0)；本 crate 尚未经过正式代码审计。"
 
+[[exemptions.cc]]
+version = "1.4.2"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (1.4.0 -> 1.4.2)；rust-lang/cc-rs 维护的 C 编译驱动，仅构建期执行。"
+
 [[exemptions.cfg-if]]
 version = "1.0.4"
 criteria = "safe-to-run"
@@ -984,6 +1008,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.cookie]]
+version = "0.18.2"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (0.18.1 -> 0.18.2)；HTTP cookie 解析库，仅用于本地示例/测试路径，不处理不可信网络输入。"
+
 [[exemptions.cookie-factory]]
 version = "0.3.3"
 criteria = "safe-to-run"
@@ -1175,6 +1205,24 @@ version = "0.1.4"
 criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-27 cargo update 新增传递依赖；本 crate 尚未经过正式代码审计。"
+
+[[exemptions.defmt]]
+version = "1.1.1"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (1.0.1 -> 1.1.1)；嵌入式日志框架，由 jiff 生态传递依赖引入，safe-to-run (test/dev) only。"
+
+[[exemptions.defmt-macros]]
+version = "1.1.1"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (0.2.3 -> 1.1.1)；defmt 过程宏伴侣，仅编译期执行。"
+
+[[exemptions.defmt-parser]]
+version = "1.0.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 重大升级 (0.2.2 -> 1.0.0)；defmt 格式字符串解析器，仅编译期/构建期使用。"
 
 [[exemptions.der]]
 version = "0.7.10"
@@ -1523,6 +1571,12 @@ version = "0.1.9"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.find-msvc-tools]]
+version = "0.1.10"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (0.1.9 -> 0.1.10)；cc-rs 维护的 MSVC 工具查找辅助库，仅构建期执行。"
 
 [[exemptions.flagset]]
 version = "0.4.7"
@@ -2176,6 +2230,36 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.jiff]]
+version = "0.2.35"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (0.2.34 -> 0.2.35)；BurntSushi 维护的现代时间库，由 kube/serde_with 等传递依赖引入，safe-to-run (test/dev) only。"
+
+[[exemptions.jiff-core]]
+version = "0.1.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 新增传递依赖；jiff 核心无 std 时间计算库，safe-to-run (test/dev) only。"
+
+[[exemptions.jiff-static]]
+version = "0.2.35"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 新增传递依赖；jiff 的编译期时区数据生成辅助 crate，仅构建期执行。"
+
+[[exemptions.jiff-tzdb]]
+version = "0.1.8"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 新增传递依赖；IANA 时区数据库分发 crate，safe-to-run (test/dev) only。"
+
+[[exemptions.jiff-tzdb-platform]]
+version = "0.1.3"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 新增传递依赖；jiff-tzdb 平台特化子 crate，safe-to-run (test/dev) only。"
+
 [[exemptions.jni]]
 version = "0.22.4"
 criteria = "safe-to-run"
@@ -2217,6 +2301,12 @@ version = "0.3.103"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.js-sys]]
+version = "0.3.104"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (0.3.103 -> 0.3.104)；wasm-bindgen 维护的 JavaScript 全局绑定，仅用于 WASM 示例/测试路径。"
 
 [[exemptions.khronos-egl]]
 version = "6.0.0"
@@ -2490,6 +2580,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.moka]]
+version = "0.12.16"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (0.12.15 -> 0.12.16)；本地缓存数据结构，由 hickory-resolver 等传递依赖引入，safe-to-run (test/dev) only。"
+
 [[exemptions.mongocrypt]]
 version = "0.4.0"
 criteria = "safe-to-run"
@@ -2616,6 +2712,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-30 workspace 依赖同步升级 (3.10.1 -> 3.12.0)；本 crate 尚未经过正式代码审计。"
 
+[[exemptions.ntex]]
+version = "3.12.3"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (3.12.2 -> 3.12.3)；fafhrd91 维护的异步网络服务框架，仅用于 c06_async 本地示例，不处理不可信网络输入。"
+
 [[exemptions.ntex-bytes]]
 version = "1.7.6"
 criteria = "safe-to-run"
@@ -2651,6 +2753,12 @@ version = "2.3.0"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.ntex-error]]
+version = "2.4.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (2.3.0 -> 2.4.0)；ntex 错误类型传递依赖，safe-to-run (test/dev) only。"
 
 [[exemptions.ntex-h2]]
 version = "3.12.0"
@@ -2705,6 +2813,12 @@ version = "3.4.0"
 criteria = "safe-to-run"
 suggest = false
 notes = "2026-08-01 cargo update 补丁升级 (3.3.0 -> 3.4.0)；本 crate 尚未经过正式代码审计。"
+
+[[exemptions.ntex-macros]]
+version = "3.5.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (3.4.0 -> 3.5.0)；ntex 过程宏，仅编译期执行。"
 
 [[exemptions.ntex-net]]
 version = "3.13.0"
@@ -3339,6 +3453,12 @@ version = "1.14.0"
 criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-17 cargo update 补丁升级 (1.13.1 -> 1.14.0)；本 crate 尚未经过正式代码审计。"
+
+[[exemptions.portable-atomic]]
+version = "1.15.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (1.14.0 -> 1.15.0)；taiki-e 维护的原子操作 polyfill，由嵌入式/WASM 生态传递依赖引入，safe-to-run (test/dev) only。"
 
 [[exemptions.portable-atomic-util]]
 version = "0.2.7"
@@ -4065,11 +4185,23 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.serde_with]]
+version = "3.22.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (3.21.0 -> 3.22.0)；serde 序列化辅助宏与工具，仅用于本地示例/测试路径。"
+
 [[exemptions.serde_with_macros]]
 version = "3.21.0"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.serde_with_macros]]
+version = "3.22.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (3.21.0 -> 3.22.0)；serde_with 过程宏伴侣，仅编译期执行。"
 
 [[exemptions.sha1]]
 version = "0.10.7"
@@ -4386,6 +4518,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
 
+[[exemptions.thiserror]]
+version = "2.0.20"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (2.0.19 -> 2.0.20)；dtolnay 维护的错误派生宏库，仅用于本地示例/测试路径。"
+
 [[exemptions.thiserror-impl]]
 version = "1.0.69"
 criteria = "safe-to-run"
@@ -4403,6 +4541,12 @@ version = "2.0.19"
 criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-18 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
+
+[[exemptions.thiserror-impl]]
+version = "2.0.20"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (2.0.19 -> 2.0.20)；thiserror 过程宏实现，仅编译期执行。"
 
 [[exemptions.thread_local]]
 version = "1.1.10"
@@ -4870,11 +5014,23 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.wasm-bindgen]]
+version = "0.2.127"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (0.2.126 -> 0.2.127)；wasm-bindgen 维护的 WASM/JS 绑定生成器，仅用于 c12_wasm 示例。"
+
 [[exemptions.wasm-bindgen-futures]]
 version = "0.4.76"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.wasm-bindgen-futures]]
+version = "0.4.77"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (0.4.76 -> 0.4.77)；wasm-bindgen 维护的 WASM 异步 Future 支持，仅用于 c12_wasm 示例。"
 
 [[exemptions.wasm-bindgen-macro]]
 version = "0.2.126"
@@ -4882,17 +5038,35 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.wasm-bindgen-macro]]
+version = "0.2.127"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (0.2.126 -> 0.2.127)；wasm-bindgen 过程宏入口，仅编译期执行。"
+
 [[exemptions.wasm-bindgen-macro-support]]
 version = "0.2.126"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.wasm-bindgen-macro-support]]
+version = "0.2.127"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (0.2.126 -> 0.2.127)；wasm-bindgen 过程宏内部支持库，仅编译期执行。"
+
 [[exemptions.wasm-bindgen-shared]]
 version = "0.2.126"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.wasm-bindgen-shared]]
+version = "0.2.127"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (0.2.126 -> 0.2.127)；wasm-bindgen 共享元数据 crate，仅编译期/构建期使用。"
 
 [[exemptions.wasm-streams]]
 version = "0.5.0"
@@ -4989,6 +5163,12 @@ version = "0.3.103"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.web-sys]]
+version = "0.3.104"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (0.3.103 -> 0.3.104)；wasm-bindgen 维护的 Web API 绑定，仅用于 c12_wasm 示例。"
 
 [[exemptions.web-time]]
 version = "1.1.0"
@@ -5500,6 +5680,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-18 cargo update 补丁升级 (5.17.0 -> 5.18.0)；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.zbus]]
+version = "5.19.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (5.18.0 -> 5.19.0)；D-Bus 客户端库，由 zbus 生态传递依赖引入，仅用于本地示例/测试路径。"
+
 [[exemptions.zbus-lockstep]]
 version = "0.5.2"
 criteria = "safe-to-run"
@@ -5518,6 +5704,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-18 cargo update 补丁升级 (5.17.0 -> 5.18.0)；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.zbus_macros]]
+version = "5.19.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (5.18.0 -> 5.19.0)；zbus 过程宏伴侣，仅编译期执行。"
+
 [[exemptions.zbus_names]]
 version = "4.3.4"
 criteria = "safe-to-run"
@@ -5529,6 +5721,12 @@ version = "5.2.1"
 criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-18 cargo update 补丁升级 (5.2.0 -> 5.2.1)；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.zcheapstr]]
+version = "1.1.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (1.0.0 -> 1.1.0)；zvariant 的压缩字符串辅助 crate，safe-to-run (test/dev) only。"
 
 [[exemptions.zerocopy]]
 version = "0.8.55"
@@ -5620,6 +5818,12 @@ criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.zune-core]]
+version = "0.5.3"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (0.5.1 -> 0.5.3)；zune-jpeg 图像解码核心，safe-to-run (test/dev) only。"
+
 [[exemptions.zune-jpeg]]
 version = "0.5.15"
 criteria = "safe-to-run"
@@ -5632,14 +5836,32 @@ criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-18 cargo update 补丁升级 (5.13.0 -> 5.13.1)；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.zvariant]]
+version = "5.14.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (5.13.1 -> 5.14.0)；zbus 的 D-Bus 类型系统，safe-to-run (test/dev) only。"
+
 [[exemptions.zvariant_derive]]
 version = "5.13.1"
 criteria = "safe-to-run"
 suggest = false
 notes = "2026-07-18 cargo update 补丁升级 (5.13.0 -> 5.13.1)；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
 
+[[exemptions.zvariant_derive]]
+version = "5.14.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 补丁升级 (5.13.1 -> 5.14.0)；zvariant 过程宏伴侣，仅编译期执行。"
+
 [[exemptions.zvariant_utils]]
 version = "3.5.0"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
+
+[[exemptions.zvariant_utils]]
+version = "4.0.0"
+criteria = "safe-to-run"
+suggest = false
+notes = "2026-08-10 cargo update 重大升级 (3.5.0 -> 4.0.0)；zvariant/zbus 的共享工具宏，仅编译期执行。"

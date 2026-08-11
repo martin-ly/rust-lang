@@ -328,7 +328,6 @@ Embassy 不依赖 RTOS 内核，而是把 Rust 的 `Future` + `Waker` 机制直�
 ### 6.1 Future 状态机
 
 ```rust
-use core::future::Future;
 use core::pin::Pin;
 use core::task::{Context, Poll};
 
