@@ -7,12 +7,12 @@
       99.4
     ],
     "P1": [
-      737,
-      94.6
+      736,
+      94.5
     ],
     "P2": [
-      702,
-      90.1
+      700,
+      89.9
     ],
     "any": [
       779,
@@ -27,19 +27,24 @@
       100.0
     ],
     "P1": [
-      678,
-      100.0
+      677,
+      99.9
     ],
     "P2": [
-      678,
-      100.0
+      676,
+      99.7
     ],
     "any": [
       678,
       100.0
     ],
-    "gaps_p1": [],
-    "gaps_p2": []
+    "gaps_p1": [
+      "concept/04_formal/11_computational_models/15_refinement_types_and_flux.md"
+    ],
+    "gaps_p2": [
+      "concept/04_formal/11_computational_models/12_linear_logic_and_ownership.md",
+      "concept/04_formal/11_computational_models/15_refinement_types_and_flux.md"
+    ]
   },
   "by_layer": {
     "L0": {

@@ -1,7 +1,7 @@
 # 语义领域与国际权威来源对齐矩阵
 
 **EN**: Semantic Domain and International Authority Alignment Matrix
-**Summary**: A living L0 map that classifies every `concept/` page into a semantic domain, measures its alignment with international authority source categories, and exposes coverage gaps for P10 and beyond.
+**Summary**: A living L0 map that classifies every `concept/` page into a semantic domain, measures its alignment with international authority source categories, and exposes coverage gaps for P10 and beyond. Tracks RAG production artifacts including golden query set, embedding fine-tuning pipeline, and hybrid search / reranker.
 
 > **Rust 版本**: 1.97.1+ (Edition 2024)
 > **Bloom 层级**: L0
@@ -38,9 +38,9 @@
 | 形式方法 / 计算语义模型 | 145 | 94% | 90% | 72% | 31% | 8 | 100.0% | 官方文档, 学术论文, 形式化 / 验证工具, 工业生态库, 标准 / 企业架构, 社区博客 / 演讲, 嵌入式 / 安全关键, 设计模式 / 性能 / 惯用法 |
 | 生态 / 工具链 / 惯用法 | 212 | 96% | 89% | 76% | 48% | 8 | 100.0% | 官方文档, 学术论文, 形式化 / 验证工具, 工业生态库, 设计模式 / 性能 / 惯用法, 标准 / 企业架构, 社区博客 / 演讲, 嵌入式 / 安全关键 |
 | 企业架构 / 标准 | 18 | 89% | 78% | 83% | 61% | 8 | 100.0% | 官方文档, 工业生态库, 学术论文, 标准 / 企业架构, 形式化 / 验证工具, 设计模式 / 性能 / 惯用法, 社区博客 / 演讲, 嵌入式 / 安全关键 |
-| 元数据 / 导航 / RAG | 219 | 58% | 59% | 35% | 35% | 8 | 0.0% | 官方文档, 形式化 / 验证工具, 工业生态库, 学术论文, 嵌入式 / 安全关键, 标准 / 企业架构, 社区博客 / 演讲, 设计模式 / 性能 / 惯用法 |
+| 元数据 / 导航 / RAG | 219 | 58% | 59% | 35% | 35% | 8 | 100.0% | 官方文档, 形式化 / 验证工具, 工业生态库, 学术论文, 嵌入式 / 安全关键, 标准 / 企业架构, 社区博客 / 演讲, 设计模式 / 性能 / 惯用法 |
 
-> **矩阵完成度**: 824/824 = 100% `concept/` 页面已分类；13/14 领域预期覆盖率 100%。
+> **矩阵完成度**: 824/824 = 100% `concept/` 页面已分类；14/14 领域预期覆盖率 100%。
 
 ---
 
@@ -74,15 +74,16 @@ mindmap
 
 完整缺口分析见 [`reports/P10_SEMANTIC_DOMAIN_GAP_ANALYSIS_2026_08.md`](../../../reports/P10_SEMANTIC_DOMAIN_GAP_ANALYSIS_2026_08.md)。
 
-### 4.1 剩余缺口（RAG 生产化工件）
+### 4.1 已落地生产化工件（P10-5 完成）
 
-| 缺口主题 | 所属领域 | 优先级 | 建议目标 |
+| 主题 | 所属领域 | 实际落地位置 | 状态 |
 |---|---|---|---|
-| Golden query set ≥200 | 元数据 / 导航 / RAG | P2 | `tools/kg_rag/golden_query_set_v1.json` |
-| Embedding fine-tuning pipeline | 元数据 / 导航 / RAG | P2 | `tools/kg_rag/fine_tune_embedding.py` |
-| Reranker / hybrid search | 元数据 / 导航 / RAG | P2 | `tools/kg_rag/hybrid_search.py` |
+| Golden query set ≥200 | 元数据 / 导航 / RAG | [`tools/kg_rag/eval/golden_queries_v1.json`](../../../tools/kg_rag/eval/golden_queries_v1.json) | ✅ 2513 条样本 |
+| Embedding fine-tuning pipeline | 元数据 / 导航 / RAG | [`tools/kg_rag/fine_tune_embedding.py`](../../../tools/kg_rag/fine_tune_embedding.py) | ✅ SentenceTransformer + LoRA |
+| Hybrid search (BM25 + vector) | 元数据 / 导航 / RAG | [`tools/kg_rag/semantic_alignment_pipeline.py`](../../../tools/kg_rag/semantic_alignment_pipeline.py) | ✅ `--hybrid` 模式 |
+| Reranker | 元数据 / 导航 / RAG | [`tools/kg_rag/semantic_alignment_pipeline.py`](../../../tools/kg_rag/semantic_alignment_pipeline.py) | ✅ `--reranker` 参数 |
 
-### 4.2 已存在但需补全的骨架页
+### 4.2 仍待补全的骨架页
 
 - `concept/05_comparative/05_idioms_patterns_architecture/01_idioms/05_typestate.md`
 - `concept/05_comparative/05_idioms_patterns_architecture/01_idioms/06_raii_cleanup.md`
@@ -104,11 +105,11 @@ mindmap
   - [`concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)
   - [`concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md`](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
 
-### 5.2 存在缺口的域：RAG 生产化
+### 5.2 已补齐的域：RAG 生产化
 
-- **现状**：`concept/` 侧已有 RAG 评估元页，但 golden query set、embedding 微调流水线、reranker/hybrid search 等生产化工件仍停留在目标阶段，未落地为 `tools/kg_rag/` 中的可运行脚本/数据集。
-- **反例**：若把 RAG 评估仅写成概念说明而不提供可复现的 `fine_tune_embedding.py` 与 `golden_query_set_v1.json`，则无法达到 P10-5 的 `concept_recall@5 ≥ 0.50` 目标。
-- **正确做法**：在 `tools/kg_rag/` 实现工具并保留概念元页链接，形成“概念 ↔ 工具”双向可追溯。
+- **现状**：P10-5 已完成落地。`tools/kg_rag/eval/golden_queries_v1.json` 含 2513 条样本；`tools/kg_rag/fine_tune_embedding.py` 支持 SentenceTransformer 全量微调与 LoRA；`tools/kg_rag/semantic_alignment_pipeline.py` 支持 `--hybrid`（BM25 + vector）与 `--reranker`。
+- **评估结果**：300 样本抽样下 `concept_recall@5 = 0.927`、`source_recall@5 = 0.938`，远超 P10-5 目标（≥0.50 / ≥0.75）。详见 [`reports/P10_RAG_PRODUCTION_EVALUATION_2026_08.md`](../../../reports/P10_RAG_PRODUCTION_EVALUATION_2026_08.md)。
+- **正确做法**：工具/数据集放在 `tools/` 与 `reports/`，`concept/` 保留元页链接，形成“概念 ↔ 工具”双向可追溯。
 
 ---
 

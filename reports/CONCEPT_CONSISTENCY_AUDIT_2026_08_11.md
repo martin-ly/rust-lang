@@ -1,9 +1,9 @@
 # 概念一致性审计报告 (Concept Consistency Audit)
 
-> 生成时间: 2026-08-11T12:58:02.475013
+> 生成时间: 2026-08-11T14:07:37.756807
 > 生成脚本: `scripts/concept_consistency_auditor.py`(扩展后监控 22 个核心概念)
 > 扫描文件数: 791
-> 提取概念定义数: 5344
+> 提取概念定义数: 5347
 > 跨文件引用数: 340
 
 ## 目录
@@ -71,16 +71,16 @@
 |:---|:---|:---|
 | unsafe-UB | 562 | 162 |
 | RPITIT-RTN-TAIT-定义 | 492 | 55 |
-| effects-system-定义 | 384 | 45 |
+| effects-system-定义 | 389 | 46 |
 | Pin-自引用 | 287 | 79 |
-| 所有权-Move语义 | 278 | 99 |
+| 所有权-Move语义 | 277 | 98 |
 | allocator-api-GlobalAlloc | 243 | 53 |
 | Pin-投影-结构 | 189 | 41 |
 | const-trait-impl-定义 | 181 | 35 |
 | effects-system-现有 | 173 | 23 |
 | Send+Sync | 148 | 73 |
 | 所有权-作用域绑定 | 137 | 69 |
-| 借用-可变独占 | 120 | 49 |
+| 借用-可变独占 | 121 | 50 |
 | async-Future-状态机 | 117 | 53 |
 | 生命周期-子类型-outlives | 113 | 32 |
 | unsafe-extern-块 | 111 | 20 |
@@ -92,7 +92,7 @@
 | const-trait-impl-效果 | 90 | 21 |
 | RPITIT-RTN-TAIT-捕获 | 86 | 28 |
 | GAT-async-生命周期 | 84 | 20 |
-| 变型-规则 | 80 | 21 |
+| 变型-规则 | 78 | 20 |
 | 所有权-唯一所有权 | 74 | 39 |
 | GAT-async-边界 | 74 | 20 |
 | unsafe-契约 | 66 | 37 |

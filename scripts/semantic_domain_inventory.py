@@ -243,9 +243,9 @@ EXPECTED_TOPICS: list[dict[str, Any]] = [
     {"group": "formal_computational_models", "domain": "formal_methods", "topic": "Aeneas verification pipeline", "keywords": ["aeneas"], "priority": "P1", "source": "Aeneas ICFP 2022 / Charon", "target": "concept/04_formal/11_computational_models/17_aeneas_verification_pipeline.md"},
 
     # RAG production
-    {"group": "rag_production", "domain": "meta_navigation", "topic": "golden query set ≥200", "keywords": ["golden query"], "priority": "P2", "source": "P10 RAG evaluation plan", "target": "tools/kg_rag/golden_query_set_v1.json"},
+    {"group": "rag_production", "domain": "meta_navigation", "topic": "golden query set ≥200", "keywords": ["golden query"], "priority": "P2", "source": "P10 RAG evaluation plan", "target": "tools/kg_rag/eval/golden_queries_v1.json"},
     {"group": "rag_production", "domain": "meta_navigation", "topic": "embedding fine-tuning pipeline", "keywords": ["embedding fine-tun", "fine_tune_embedding"], "priority": "P2", "source": "SentenceTransformers / LoRA contrastive learning", "target": "tools/kg_rag/fine_tune_embedding.py"},
-    {"group": "rag_production", "domain": "meta_navigation", "topic": "reranker / hybrid search", "keywords": ["reranker", "hybrid search"], "priority": "P2", "source": "BM25 + vector reranking literature", "target": "tools/kg_rag/hybrid_search.py"},
+    {"group": "rag_production", "domain": "meta_navigation", "topic": "reranker / hybrid search", "keywords": ["reranker", "hybrid search"], "priority": "P2", "source": "BM25 + vector reranking literature", "target": "tools/kg_rag/semantic_alignment_pipeline.py"},
 
     # core baseline (used to keep coverage metric meaningful for well-populated domains)
     {"group": "core", "domain": "ownership_borrow_lifetime", "topic": "Ownership", "keywords": ["ownership"], "priority": "P0", "source": "TRPL / Reference", "target": "concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md"},

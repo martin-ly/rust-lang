@@ -18,7 +18,8 @@
 > [Cockburn 2005 — Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/) ·
 > [Fowler 2005 — Dependency Injection](https://martinfowler.com/articles/injection.html) ·
 > [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) ·
-> [The Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html)
+> [The Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) ·
+> [P10-3 Hexagonal / Clean Architecture canonical](../../05_comparative/05_idioms_patterns_architecture/04_architecture/01_hexagonal_clean_architecture.md)
 
 ---
 
@@ -184,4 +185,4 @@ mindmap
 
 ## 国际化权威来源补充（International Authority Sources）
 
-- https://dl.acm.org/doi/book/10.5555/186897
+- <https://dl.acm.org/doi/book/10.5555/186897>

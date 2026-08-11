@@ -11,8 +11,8 @@
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
 | P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 774 | 99.4% |
-| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 737 | 94.6% |
-| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 702 | 90.1% |
+| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 736 | 94.5% |
+| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 700 | 89.9% |
 | **任一权威（P0∪P1∪P2）** | **779** | **100.0%** |
 | 无任何国际权威引用（缺口） | 0 | 0.0% |
 
@@ -23,9 +23,13 @@
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
 | P0 官方 | 678 | 100.0% |
-| P1 学术/形式化 | 678 | 100.0% |
-| P2 社区/生态 | 678 | 100.0% |
+| P1 学术/形式化 | 677 | 99.9% |
+| P2 社区/生态 | 676 | 99.7% |
 | **任一权威** | **678** | **100.0%** |
+
+内容页 P1 缺口（1）: `concept/04_formal/11_computational_models/15_refinement_types_and_flux.md`
+
+内容页 P2 缺口（2）: `concept/04_formal/11_computational_models/12_linear_logic_and_ownership.md` · `concept/04_formal/11_computational_models/15_refinement_types_and_flux.md`
 
 ## 按层级覆盖率
 

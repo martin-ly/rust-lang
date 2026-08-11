@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 790,
-    "generated_at": "2026-08-11T05:34:12.385457+00:00"
+    "generated_at": "2026-08-11T06:05:34.625303+00:00"
   },
   "files": [
     {
@@ -4608,12 +4608,13 @@
       "layer": "L0",
       "title": "语义领域与国际权威来源对齐矩阵",
       "positioning": "",
-      "line_count": 150,
+      "line_count": 151,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../../../reports/P10_RAG_PRODUCTION_EVALUATION_2026_08.md",
         "../../../reports/P10_SEMANTIC_DOMAIN_GAP_ANALYSIS_2026_08.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
@@ -4625,7 +4626,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 26,
+      "matrix_rows": 27,
       "pre_post": {
         "pre": [],
         "post": []
@@ -53988,25 +53989,13 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\04_formal\\11_computational_models\\12_linear_logic_and_ownership.md",
       "layer": "L4",
-      "title": "线性逻辑与所有权：作为计算模型的资源演算（Linear Logic and Ownership: Resource Calculus as a Computational Model）",
-      "positioning": "从**计算模型**视角把线性/仿射逻辑当作 Rust 所有权的**资源演算**：不重复介绍 Girard 的 sequent calculus，而是说明 `⊗, ⊸, !, &` 等连接词如何精确对应 Rust 的值移动、函数调用、共享借用、引用计数等工程机制，并为 [范畴论与 Rust](10_category_theory_and_rust.md) 的「仿射范畴直觉」与 [RustBelt 所有权逻辑](16_rustbelt_ownership_logic.md) 提供证明论语义基础。",
-      "line_count": 634,
+      "title": "线性逻辑与 Rust 所有权",
+      "positioning": "",
+      "line_count": 184,
       "theorem_chains": [],
       "anti_propositions": [
         {
-          "title": "## 四、反例"
-        },
-        {
-          "title": "### 反例"
-        },
-        {
-          "title": "### 反例"
-        },
-        {
-          "title": "### 反例"
-        },
-        {
-          "title": "## 五、反命题"
+          "title": "## 5. 反例"
         }
       ],
       "code_blocks": [
@@ -54014,127 +54003,64 @@
           "flags": [],
           "lines": 9,
           "should_fail": false,
-          "code_preview": "#[derive(Clone)] struct Resource(String);  fn main() {     let r = Resource(Stri..."
+          "code_preview": "// A ⊸ B：消耗 String，返回其长度（usize） fn consume(s: String) -> usize {     s.len() }  ..."
         },
         {
           "flags": [],
-          "lines": 14,
+          "lines": 4,
           "should_fail": false,
-          "code_preview": "struct Pair<A, B> { first: A, second: B }  fn split<A, B>(p: Pair<A, B>) -> (A, ..."
+          "code_preview": "// A ⊗ B：同时持有 String 与 Vec<u8> let pair: (String, Vec<u8>) = (String::from(\"data..."
         },
         {
           "flags": [],
-          "lines": 11,
+          "lines": 6,
           "should_fail": false,
-          "code_preview": "fn consume_string(s: String) -> usize {     s.len() // 消费 String，产出 usize }  fn ..."
+          "code_preview": "// !A：实现 Copy 的 i32 可被任意复制 let n: i32 = 42; let a = n; let b = n; // 仍然可用，因为 i32..."
         },
         {
           "flags": [],
-          "lines": 14,
+          "lines": 6,
           "should_fail": false,
-          "code_preview": "fn main() {     let n: i32 = 42; // i32: Copy ⇒ n 等价于 !i32     let a = n;     le..."
-        },
-        {
-          "flags": [],
-          "lines": 15,
-          "should_fail": false,
-          "code_preview": "// ⊕: 内部选择，值的创建者决定分支 enum Choice<A, B> { Left(A), Right(B) }  fn make_choice(fla..."
-        },
-        {
-          "flags": [],
-          "lines": 15,
-          "should_fail": false,
-          "code_preview": "// &: 外部选择，调用者选择使用哪种能力 trait Readable { fn read(&self) -> String; } trait Writab..."
-        },
-        {
-          "flags": [],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "fn main() {     let s = String::from(\"will be dropped\");     // s 未被显式使用，但 Rust ..."
+          "code_preview": "// A & B：通过 & 同时只读访问多个视图 let data = vec![1, 2, 3]; let r1: &Vec<i32> = &data; le..."
         },
         {
           "flags": [],
           "lines": 7,
           "should_fail": false,
-          "code_preview": "use std::mem;  fn main() {     let s = String::from(\"leaked\");     mem::forget(s..."
-        },
-        {
-          "flags": [],
-          "lines": 12,
-          "should_fail": false,
-          "code_preview": "use std::thread;  fn main() {     let s = String::from(\"move to thread\");     le..."
-        },
-        {
-          "flags": [],
-          "lines": 15,
-          "should_fail": false,
-          "code_preview": "struct Line { start: String, end: String }  fn take_both(l: Line) -> (String, St..."
-        },
-        {
-          "flags": [],
-          "lines": 14,
-          "should_fail": false,
-          "code_preview": "struct Token;  fn consume_token(t: Token) -> String {     let _ = t;     String:..."
-        },
-        {
-          "flags": [],
-          "lines": 8,
-          "should_fail": false,
-          "code_preview": "fn main() {     let x: u64 = 7;     let a = x;     let b = x;     let c = x;    ..."
-        },
-        {
-          "flags": [],
-          "lines": 14,
-          "should_fail": false,
-          "code_preview": "enum Action { Run(i32), Stop }  fn dispatch(a: Action) -> String {     match a {..."
+          "code_preview": "let mut s = String::from(\"hello\"); {     let r: &mut String = &mut s;     r.push..."
         },
         {
           "flags": [
             "compile_fail",
             "E0382"
           ],
-          "lines": 7,
+          "lines": 6,
           "should_fail": true,
-          "code_preview": "fn main() {     let s = String::from(\"owned\");     let t = s; // move     printl..."
-        },
-        {
-          "flags": [
-            "compile_fail",
-            "E0507"
-          ],
-          "lines": 7,
-          "should_fail": true,
-          "code_preview": "fn main() {     let s = String::from(\"not copy\");     let r = &s;     let s2 = *..."
-        },
-        {
-          "flags": [],
-          "lines": 18,
-          "should_fail": false,
-          "code_preview": "use std::sync::mpsc::{channel, Sender};  struct SendOnce<T>(Sender<T>);  impl<T>..."
+          "code_preview": "fn main() {     let s = String::from(\"owned\");     let t = s;     println!(\"{}\",..."
         }
       ],
       "sources": [],
       "cross_references": [
-        "../../03_advanced/02_unsafe/01_unsafe.md",
-        "../01_ownership_logic/01_linear_logic.md",
-        "../01_ownership_logic/02_ownership_formal.md",
-        "../01_ownership_logic/07_unsafe_contracts_formal.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md",
+        "../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md",
+        "../../03_advanced/02_unsafe/06_memory_model.md",
+        "../../03_advanced/06_low_level_patterns/08_memory_allocation_and_lifetime.md",
+        "06_computational_equivalence_in_rust.md",
         "08_separation_logic_for_rust.md",
-        "10_category_theory_and_rust.md",
         "13_session_types_and_rust_channels.md",
-        "14_effect_handlers_and_rust_limited_effects.md",
         "16_rustbelt_ownership_logic.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
-      "matrix_rows": 30,
+      "mermaid_blocks": 2,
+      "matrix_rows": 8,
       "pre_post": {
         "pre": [
-          "> [Linear Logic](../01_ownership_logic/01_linear_logic.md) ·"
+          "[`01_ownership.md`](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md)、[`03_lifetimes.md`](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)、[`02_borrowing.md`](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md)、[`06_memory_model.md`](../../03_advanced/02_unsafe/06_memory_model.md)、[`08_memory_allocation_and_lifetime.md`](../../03_advanced/06_low_level_patterns/08_memory_allocation_and_lifetime.md)"
         ],
         "post": [
-          "> [Session Types and Rust Channels](13_session_types_and_rust_channels.md) ·"
+          "[`16_rustbelt_ownership_logic.md`](16_rustbelt_ownership_logic.md)、[`06_computational_equivalence_in_rust.md`](06_computational_equivalence_in_rust.md)、[`08_separation_logic_for_rust.md`](08_separation_logic_for_rust.md)"
         ]
       },
       "backward_chains": 0,
@@ -54145,7 +54071,7 @@
       "layer": "L4",
       "title": "会话类型与 Rust 通道：作为计算模型的通信协议（Session Types and Rust Channels: Communication Protocols as a Computational Model）",
       "positioning": "从**计算模型**视角把会话类型当作 Rust 通信通道的**协议演算**：说明通道不仅是数据传输管道，而是带有状态演化的线性对象；把 Honda/Wadler 的形式语法投影到 Rust 的 `std::sync::mpsc`、`tokio::sync::mpsc` 以及基于所有权的状态机编码，并与 [线性逻辑与所有权](12_linear_logic_and_ownership.md) 形成「资源演算 → 协议演算」的递进。",
-      "line_count": 588,
+      "line_count": 595,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -54253,7 +54179,7 @@
       "layer": "L4",
       "title": "Effect Handlers 与 Rust 的受限效应：作为计算模型的控制流抽象（Effect Handlers and Rust's Limited Effects: Control-Flow Abstractions as a Computational Model）",
       "positioning": "从**计算模型**视角把代数效应/处理器当作 Rust 中各类「受控效应」的统一语义框架：说明 `Result`、`Option`、`async/await`、`panic`、`unsafe` 都是**受限的效应实例**，而真正的代数效应处理器提供了更一般的「可恢复控制流」抽象；同时解释 Rust 语言设计为何止步于受限效应而非通用 effect handlers。",
-      "line_count": 646,
+      "line_count": 651,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -54355,7 +54281,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 40,
+      "matrix_rows": 41,
       "pre_post": {
         "pre": [
           "> [Algebraic Effects](../07_concurrency_semantics/04_algebraic_effects.md) ·"
@@ -54370,136 +54296,70 @@
     {
       "path": "E:\\_src\\rust-lang\\concept\\04_formal\\11_computational_models\\15_refinement_types_and_flux.md",
       "layer": "L4",
-      "title": "精化类型与 Flux：作为计算模型的约束演算（Refinement Types and Flux: Constraint Calculus as a Computational Model）",
-      "positioning": "从**计算模型**视角把精化类型当作 Rust 类型系统的**约束扩展**：说明如何在现有类型上叠加逻辑谓词，把「值满足某性质」编码为类型，并说明 Flux 如何利用 Rust 所有权解决命令式语言中精化类型的别名/可变性问题，与 [Effect Handlers and Rust Limited Effects](14_effect_handlers_and_rust_limited_effects.md) 形成「效应模型 → 约束模型」的递进。",
-      "line_count": 520,
+      "title": "精化类型与 Flux",
+      "positioning": "",
+      "line_count": 191,
       "theorem_chains": [],
       "anti_propositions": [
         {
-          "title": "## 四、反例"
-        },
-        {
-          "title": "### 反例"
-        },
-        {
-          "title": "### 反例"
-        },
-        {
-          "title": "### 反例"
-        },
-        {
-          "title": "## 五、反命题"
+          "title": "## 5. 反例"
         }
       ],
       "code_blocks": [
         {
-          "flags": [
-            "ignore"
-          ],
+          "flags": [],
           "lines": 6,
           "should_fail": false,
-          "code_preview": "// Flux 示例：强更新 #[flux::sig(fn(x: i32{v: v > 0}) -> i32{v: v > x})] fn inc(x: i32..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "#[flux::sig(fn(x: &strg i32, y: i32) ensures x: i32{v: v == y})] fn set(x: &mut ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "#[flux::sig(fn(x: i32[@n]) -> i32{v: v == n + 1})] fn succ(n: i32) -> i32 {     ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "#[flux::sig(fn() -> i32{v: v > 0})] fn one() -> i32 {     1 } ..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "#[flux::sig(fn(x: &strg i32, y: i32) ensures x: i32{v: v == old(x) + y})] fn add..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 6,
-          "should_fail": false,
-          "code_preview": "// Flux 可验证：索引 i 在向量长度内 #[flux::sig(fn(vec: &RVec<i32>, i: usize{i < vec.len()})..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 5,
-          "should_fail": false,
-          "code_preview": "#[flux::sig(fn(vec: &RVec<i32>{v: v.len() > 0}) -> i32)] fn first(vec: &RVec<i32..."
+          "code_preview": "// 普通类型 fn head(arr: &[i32]) -> i32 { arr[0] } // 运行时可能 panic  // 精化类型（概念示意） // ..."
         },
         {
           "flags": [],
-          "lines": 14,
+          "lines": 16,
           "should_fail": false,
-          "code_preview": "struct Counter { value: i32 }  impl Counter {     fn new() -> Self { Counter { v..."
-        },
-        {
-          "flags": [
-            "ignore"
-          ],
-          "lines": 6,
-          "should_fail": false,
-          "code_preview": "// 假设 Flux 遇到非线性或量化的谓词 #[flux::sig(fn(x: i32) -> i32{v: forall y. y * y != v})] ..."
+          "code_preview": "#![feature(register_tool)] #![register_tool(flux)]  #[flux::sig(fn(&[i32] @ n) -..."
         },
         {
           "flags": [],
-          "lines": 9,
+          "lines": 5,
           "should_fail": false,
-          "code_preview": "fn main() {     let mut x = 5;     let r = &mut x as *mut i32;     unsafe {     ..."
+          "code_preview": "#[flux::sig(fn(x: i32{x >= 0}) -> i32{x >= 0})] fn abs(n: i32) -> i32 {     if n..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "#[flux::sig(fn(vec: Vec<i32> @ n) -> Vec<i32> @ n + 1)] fn push_one(mut v: Vec<i..."
         },
         {
           "flags": [
-            "compile_fail",
-            "E0502"
+            "should_panic"
           ],
-          "lines": 7,
-          "should_fail": true,
-          "code_preview": "fn main() {     let mut x = 5;     let r1 = &x;     let r2 = &mut x; // ❌ 共享引用与可..."
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn buggy(arr: &[i32]) -> i32 {     arr[arr.len()] // 越界：运行时 panic }  fn main() {..."
         }
       ],
       "sources": [],
       "cross_references": [
-        "../../03_advanced/02_unsafe/01_unsafe.md",
-        "../../06_ecosystem/08_formal_verification/02_formal_verification_tools.md",
-        "../00_type_theory/10_dependent_refinement_types.md",
-        "../00_type_theory/14_flux.md",
-        "07_type_theory_and_rust.md",
-        "12_linear_logic_and_ownership.md",
-        "14_effect_handlers_and_rust_limited_effects.md",
+        "../../01_foundation/02_type_system/01_type_system.md",
+        "../../02_intermediate/00_traits/01_traits.md",
+        "../../02_intermediate/01_generics/01_generics.md",
+        "../../02_intermediate/02_memory_management/02_interior_mutability.md",
+        "../../03_advanced/02_unsafe/06_memory_model.md",
+        "08_separation_logic_for_rust.md",
         "16_rustbelt_ownership_logic.md",
         "17_aeneas_verification_pipeline.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
-      "matrix_rows": 30,
+      "mermaid_blocks": 2,
+      "matrix_rows": 10,
       "pre_post": {
         "pre": [
-          "> [Dependent Types and Refinement Types](../00_type_theory/10_dependent_refinement_types.md) ·"
+          "[`01_type_system.md`](../../01_foundation/02_type_system/01_type_system.md)、[`01_generics.md`](../../02_intermediate/01_generics/01_generics.md)、[`01_traits.md`](../../02_intermediate/00_traits/01_traits.md)、[`06_memory_model.md`](../../03_advanced/02_unsafe/06_memory_model.md)、[`02_interior_mutability.md`](../../02_intermediate/02_memory_management/02_interior_mutability.md)"
         ],
         "post": [
-          "> [RustBelt Ownership Logic](16_rustbelt_ownership_logic.md) ·"
+          "[`16_rustbelt_ownership_logic.md`](16_rustbelt_ownership_logic.md)、[`17_aeneas_verification_pipeline.md`](17_aeneas_verification_pipeline.md)、[`08_separation_logic_for_rust.md`](08_separation_logic_for_rust.md)"
         ]
       },
       "backward_chains": 0,
@@ -54510,7 +54370,7 @@
       "layer": "L4",
       "title": "RustBelt 所有权逻辑：作为计算模型的内存安全证明（RustBelt Ownership Logic: Memory Safety Proof as a Computational Model）",
       "positioning": "从**计算模型**视角把 RustBelt 当作 Rust 安全性的**逻辑证明机器**：不重复介绍 Iris 分离逻辑的完整规则，而是说明 RustBelt 如何把 Rust 程序翻译成 λRust 操作语义，并用 Iris 断言证明 safe Rust 的内存安全与无数据竞争，以及 unsafe 抽象如何以「协议契约」形式被纳入证明。",
-      "line_count": 584,
+      "line_count": 593,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -54618,7 +54478,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 25,
+      "matrix_rows": 30,
       "pre_post": {
         "pre": [
           "> [RustBelt](../02_separation_logic/01_rustbelt.md) ·"
@@ -54635,7 +54495,7 @@
       "layer": "L4",
       "title": "Aeneas 验证流水线：作为计算模型的符号化借用演算（Aeneas Verification Pipeline: Symbolic Borrow Calculus as a Computational Model）",
       "positioning": "从**计算模型**视角把 Aeneas 当作 Rust 验证的**符号化借用演算**：说明 LLBC 如何把 Rust 的隐式借用显式化为 loan/borrow 指令，符号执行如何枚举所有路径并生成证明助手（Coq/Lean/HOL4）可验证的函数式规范，与 [RustBelt Ownership Logic](16_rustbelt_ownership_logic.md) 形成「分离逻辑证明 → 符号化翻译证明」的对比。",
-      "line_count": 557,
+      "line_count": 561,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59474,7 +59334,7 @@
       "layer": "L5",
       "title": "错误传播与 `?` 运算符",
       "positioning": "",
-      "line_count": 134,
+      "line_count": 135,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59527,7 +59387,7 @@
       "layer": "L5",
       "title": "Into / From / AsRef 转换惯用法",
       "positioning": "",
-      "line_count": 143,
+      "line_count": 144,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59581,7 +59441,7 @@
       "layer": "L5",
       "title": "Newtype 惯用法",
       "positioning": "",
-      "line_count": 151,
+      "line_count": 152,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59640,7 +59500,7 @@
       "layer": "L5",
       "title": "Typestate 惯用法",
       "positioning": "",
-      "line_count": 178,
+      "line_count": 179,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59693,7 +59553,7 @@
       "layer": "L5",
       "title": "RAII 与 Cleanup 惯用法",
       "positioning": "",
-      "line_count": 157,
+      "line_count": 158,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59808,7 +59668,7 @@
       "layer": "L5",
       "title": "Defer 惯用法",
       "positioning": "",
-      "line_count": 154,
+      "line_count": 155,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -68635,7 +68495,7 @@
       "layer": "L6",
       "title": "六边形架构 / 端口与适配器模式（Hexagonal / Ports & Adapters）",
       "positioning": "将 Cockburn 的六边形架构（又称 Ports & Adapters）与 Rust 的 trait/workspace/Cargo 特性对齐，建立可测试、可替换的领域核心。",
-      "line_count": 188,
+      "line_count": 189,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -68683,6 +68543,7 @@
       "cross_references": [
         "../../02_intermediate/00_traits/01_traits.md",
         "../../05_comparative/00_paradigms/01_paradigm_matrix.md",
+        "../../05_comparative/05_idioms_patterns_architecture/04_architecture/01_hexagonal_clean_architecture.md",
         "../14_enterprise_architecture/04_domain_driven_design_in_rust.md",
         "../14_enterprise_architecture/06_clean_architecture_in_rust.md",
         "07_cqrs_event_sourcing.md",
@@ -70354,7 +70215,7 @@
       "layer": "L6",
       "title": "Actor 模型与消息传递模式（Actor Model and Message Passing Patterns）",
       "positioning": "",
-      "line_count": 382,
+      "line_count": 383,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -70401,6 +70262,7 @@
         "../../04_formal/07_concurrency_semantics/03_actor_semantics.md",
         "../../04_formal/12_concurrency_models/01_models_of_concurrency.md",
         "../../05_comparative/00_paradigms/04_five_models_definition_matrix.md",
+        "../../05_comparative/05_idioms_patterns_architecture/04_architecture/04_actor.md",
         "../04_web_and_networking/01_distributed_systems.md",
         "05_microservice_patterns.md",
         "06_event_driven_architecture.md"
@@ -71672,6 +71534,7 @@
         "../../03_advanced/04_ffi/07_ffi_patterns.md",
         "../../03_advanced/06_low_level_patterns/06_ownership_performance_optimization.md",
         "../../05_comparative/00_paradigms/05_language_semantic_model_matrix.md",
+        "../../05_comparative/05_idioms_patterns_architecture/01_idioms/README.md",
         "../../06_ecosystem/05_systems_and_embedded/34_embassy_framework_deep_dive.md",
         "../../07_future/00_version_tracking/01_rust_version_tracking.md",
         "../../07_future/00_version_tracking/rust_1_97_stabilized.md",
@@ -71697,7 +71560,7 @@
           "[Rust 惯用法谱系全景](02_idioms_spectrum.md) · [Rust API Guidelines 惯用法语义映射](48_api_guidelines_idioms.md)"
         ],
         "post": [
-          "[Rust 反模式与陷阱图谱](51_anti_patterns_and_pitfalls.md) · [Rust 性能惯用法](52_performance_idioms.md)"
+          "[Rust 反模式与陷阱图谱](51_anti_patterns_and_pitfalls.md) · [Rust 性能惯用法](52_performance_idioms.md) · [P10-3 惯用法体系 canonical](../../05_comparative/05_idioms_patterns_architecture/01_idioms/README.md)"
         ]
       },
       "backward_chains": 0,
@@ -78450,7 +78313,10 @@
         "27_no_std_startup_runtime_deep_dive.md",
         "29_embedded_memory_layout_and_heap_safety.md",
         "45_embedded_hardware_validation.md",
-        "46_rtos_and_scheduling_in_rust.md"
+        "46_rtos_and_scheduling_in_rust.md",
+        "52_no_std_allocators_and_panic_handlers.md",
+        "53_critical_sections_and_sync_on_bare_metal.md",
+        "54_linker_scripts_and_memory_layout.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -78461,7 +78327,7 @@
           "[Rust 嵌入式系统开发](03_embedded_systems.md) · [交叉编译](02_cross_compilation.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Cargo build-std](../01_cargo/22_build_std.md)"
         ],
         "post": [
-          "[裸机启动与链接脚本](13_bare_metal_boot_linker_script.md) · [no_std 启动流程与运行时深度解析](27_no_std_startup_runtime_deep_dive.md) · [panic_handler 与 no_std 运行时](18_panic_runtime_no_std.md) · [嵌入式内存布局与堆安全](29_embedded_memory_layout_and_heap_safety.md) · [no_std 同步原语](15_no_std_synchronization_primitives.md) · [嵌入式内存分配器](16_embedded_memory_allocators.md) · [no_std 与裸机惯用法](23_no_std_and_bare_metal_idioms.md)"
+          "[裸机启动与链接脚本](13_bare_metal_boot_linker_script.md) · [no_std 启动流程与运行时深度解析](27_no_std_startup_runtime_deep_dive.md) · [panic_handler 与 no_std 运行时](18_panic_runtime_no_std.md) · [嵌入式内存布局与堆安全](29_embedded_memory_layout_and_heap_safety.md) · [no_std 同步原语](15_no_std_synchronization_primitives.md) · [嵌入式内存分配器](16_embedded_memory_allocators.md) · [no_std 与裸机惯用法](23_no_std_and_bare_metal_idioms.md) · [no_std 分配器与 panic handler](52_no_std_allocators_and_panic_handlers.md) · [临界区与裸机同步](53_critical_sections_and_sync_on_bare_metal.md) · [链接脚本与内存布局](54_linker_scripts_and_memory_layout.md)"
         ]
       },
       "backward_chains": 0,
@@ -79032,7 +78898,10 @@
         "09_embedded_hal_1_0_migration.md",
         "17_pac_hal_implementation.md",
         "24_embedded_hal_and_driver_idioms.md",
-        "25_memory_mapped_peripherals_and_typestate.md"
+        "25_memory_mapped_peripherals_and_typestate.md",
+        "52_no_std_allocators_and_panic_handlers.md",
+        "53_critical_sections_and_sync_on_bare_metal.md",
+        "55_rtic_vs_embassy_real_time_frameworks.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -79381,7 +79250,9 @@
         "28_custom_bare_metal_async_executor.md",
         "34_embassy_framework_deep_dive.md",
         "35_rtic_framework_deep_dive.md",
-        "41_embedded_hal_and_mmio.md"
+        "41_embedded_hal_and_mmio.md",
+        "53_critical_sections_and_sync_on_bare_metal.md",
+        "55_rtic_vs_embassy_real_time_frameworks.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -79582,7 +79453,9 @@
         "19_safety_critical_bare_metal_os.md",
         "26_embedded_rtos_and_safety_critical_frameworks.md",
         "27_no_std_startup_runtime_deep_dive.md",
-        "30_misra_rust_safety_critical_guidelines.md"
+        "30_misra_rust_safety_critical_guidelines.md",
+        "52_no_std_allocators_and_panic_handlers.md",
+        "56_rust_for_linux_kernel_module_basics.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -79593,7 +79466,7 @@
           "[安全关键裸机操作系统与 Rust](19_safety_critical_bare_metal_os.md) · [安全关键系统工程](../11_domain_applications/23_safety_critical_systems_engineering.md) · [MISRA-Rust 与安全关键嵌入式指南](30_misra_rust_safety_critical_guidelines.md) · [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)"
         ],
         "post": [
-          "[嵌入式 RTOS 与安全关键框架对比](26_embedded_rtos_and_safety_critical_frameworks.md) · [no_std 启动流程与运行时](27_no_std_startup_runtime_deep_dive.md) · [Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)"
+          "[嵌入式 RTOS 与安全关键框架对比](26_embedded_rtos_and_safety_critical_frameworks.md) · [no_std 启动流程与运行时](27_no_std_startup_runtime_deep_dive.md) · [no_std 分配器与 panic handler](52_no_std_allocators_and_panic_handlers.md) · [Rust for Linux 内核模块基础](56_rust_for_linux_kernel_module_basics.md) · [Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)"
         ]
       },
       "backward_chains": 0,
@@ -79604,7 +79477,7 @@
       "layer": "L6",
       "title": "嵌入式硬件端到端验证",
       "positioning": "",
-      "line_count": 635,
+      "line_count": 637,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -79678,7 +79551,9 @@
         "38_no_std_bare_metal_rust.md",
         "39_no_std_hardware_measurement_and_validation.md",
         "43_rust_safety_critical_systems.md",
-        "46_rtos_and_scheduling_in_rust.md"
+        "46_rtos_and_scheduling_in_rust.md",
+        "52_no_std_allocators_and_panic_handlers.md",
+        "53_critical_sections_and_sync_on_bare_metal.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -88959,6 +88834,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../05_comparative/05_idioms_patterns_architecture/04_architecture/01_hexagonal_clean_architecture.md",
         "../../05_comparative/README.md",
         "../03_design_patterns/24_repository_and_unit_of_work.md",
         "../03_design_patterns/25_hexagonal_ports_and_adapters.md",
@@ -88972,7 +88848,7 @@
       "matrix_rows": 5,
       "pre_post": {
         "pre": [
-          "[Enterprise Architecture Frameworks](01_enterprise_architecture_frameworks.md) · [Hexagonal / Ports & Adapters](../03_design_patterns/25_hexagonal_ports_and_adapters.md) · [DDD Tactical Patterns](04_domain_driven_design_in_rust.md) · [Comparative Layer README](../../05_comparative/README.md)"
+          "[Enterprise Architecture Frameworks](01_enterprise_architecture_frameworks.md) · [Hexagonal / Ports & Adapters](../03_design_patterns/25_hexagonal_ports_and_adapters.md) · [DDD Tactical Patterns](04_domain_driven_design_in_rust.md) · [Comparative Layer README](../../05_comparative/README.md) · [P10-3 Hexagonal / Clean Architecture canonical](../../05_comparative/05_idioms_patterns_architecture/04_architecture/01_hexagonal_clean_architecture.md)"
         ],
         "post": [
           "[Microservices Patterns in Rust](08_microservices_patterns_in_rust.md) · [Repository and Unit of Work](../03_design_patterns/24_repository_and_unit_of_work.md)"
@@ -89024,6 +88900,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../05_comparative/05_idioms_patterns_architecture/04_architecture/01_hexagonal_clean_architecture.md",
         "../../05_comparative/README.md",
         "../03_design_patterns/25_hexagonal_ports_and_adapters.md",
         "01_enterprise_architecture_frameworks.md",
@@ -89037,7 +88914,7 @@
       "matrix_rows": 6,
       "pre_post": {
         "pre": [
-          "[Hexagonal / Ports & Adapters](../03_design_patterns/25_hexagonal_ports_and_adapters.md) · [Enterprise Architecture Frameworks](01_enterprise_architecture_frameworks.md) · [Strategic DDD](05_strategic_domain_driven_design_in_rust.md) · [Comparative Layer README](../../05_comparative/README.md)"
+          "[Hexagonal / Ports & Adapters](../03_design_patterns/25_hexagonal_ports_and_adapters.md) · [Enterprise Architecture Frameworks](01_enterprise_architecture_frameworks.md) · [Strategic DDD](05_strategic_domain_driven_design_in_rust.md) · [Comparative Layer README](../../05_comparative/README.md) · [P10-3 Hexagonal / Clean Architecture canonical](../../05_comparative/05_idioms_patterns_architecture/04_architecture/01_hexagonal_clean_architecture.md)"
         ],
         "post": [
           "[Clean Architecture in Rust](06_clean_architecture_in_rust.md) · [Microservices Patterns in Rust](08_microservices_patterns_in_rust.md)"
@@ -89264,7 +89141,7 @@
       "layer": "L6",
       "title": "事件驱动架构、CQRS 与企业集成模式（Event-Driven, CQRS & Enterprise Integration Patterns）",
       "positioning": "",
-      "line_count": 698,
+      "line_count": 700,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -89327,6 +89204,8 @@
         "../../03_advanced/01_async/01_async.md",
         "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
         "../../05_comparative/02_managed_languages/01_rust_vs_java.md",
+        "../../05_comparative/05_idioms_patterns_architecture/04_architecture/02_cqrs_event_sourcing.md",
+        "../../05_comparative/05_idioms_patterns_architecture/04_architecture/06_event_bus.md",
         "../03_design_patterns/06_event_driven_architecture.md",
         "../03_design_patterns/07_cqrs_event_sourcing.md",
         "../03_design_patterns/29_saga.md",
@@ -89504,6 +89383,7 @@
       "cross_references": [
         "../../03_advanced/01_async/01_async.md",
         "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
+        "../../05_comparative/05_idioms_patterns_architecture/04_architecture/03_microservices.md",
         "../03_design_patterns/05_microservice_patterns.md",
         "../03_design_patterns/29_saga.md",
         "../03_design_patterns/30_outbox.md",
@@ -89524,7 +89404,7 @@
       "matrix_rows": 33,
       "pre_post": {
         "pre": [
-          "[领域驱动设计战术模式](04_domain_driven_design_in_rust.md) · [战略 DDD](05_strategic_domain_driven_design_in_rust.md) · [六边形架构](07_hexagonal_architecture_in_rust.md) · [Async](../../03_advanced/01_async/01_async.md)"
+          "[领域驱动设计战术模式](04_domain_driven_design_in_rust.md) · [战略 DDD](05_strategic_domain_driven_design_in_rust.md) · [六边形架构](07_hexagonal_architecture_in_rust.md) · [Async](../../03_advanced/01_async/01_async.md) · [P10-3 Microservices canonical](../../05_comparative/05_idioms_patterns_architecture/04_architecture/03_microservices.md)"
         ],
         "post": [
           "[数据密集型模式](14_data_intensive_patterns.md) · [安全与零信任模式](15_security_and_zero_trust_patterns.md)"
@@ -89959,6 +89839,7 @@
         "../../04_formal/08_algorithm_semantics/05_algorithm_equivalence.md",
         "../../04_formal/11_computational_models/05_equivalence_of_computational_models.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../05_comparative/05_idioms_patterns_architecture/02_algorithms/README.md",
         "../10_performance/03_algorithms_and_complexity_idioms.md",
         "../11_domain_applications/25_parallel_algorithms.md",
         "../11_domain_applications/26_zero_copy_parsing_in_rust.md",
