@@ -374,6 +374,10 @@ D5_WHITELIST_FILES = {
     # 属工具链事实陈述。
     "concept/06_ecosystem/05_systems_and_embedded/56_rust_for_linux_kernel_module_basics.md":
         "Rust for Linux 内核模块基础页：`#![feature(allocator_api)]` 为当前 RfL 开发必需的 nightly 特性门控，属工具链事实陈述",
+    # ---- 2026-08-11 P10-4 形式方法深化：Aeneas 验证流水线页。Aeneas 从 MIR 提取规范需要
+    # nightly toolchain，为工具链事实陈述；页面文首已声明 Rust 版本与 nightly 要求。
+    "concept/04_formal/11_computational_models/17_aeneas_verification_pipeline.md":
+        "Aeneas 验证流水线页：Aeneas 从 MIR 提取规范需要 nightly toolchain，为工具链事实陈述，文首已显式声明",
 }
 
 

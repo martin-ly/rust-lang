@@ -3,10 +3,10 @@
 **EN**: Interrupts and Concurrency on Bare Metal
 **Summary**: Analyzes bare-metal concurrency on Cortex-M/RISC-V microcontrollers, covering NVIC priority inversion and preemption, critical-section primitives, atomic ordering and memory barriers, RTIC static scheduling versus Embassy async executors, DMA buffer ownership, and lifetime/atomicity pitfalls.
 
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 > **Bloom 层级**: L5
 > **权威来源**: 本文件为 `concept/06_ecosystem/05_systems_and_embedded/` 下裸机中断与并发模型的 `concept/` 权威页。
-> **相关页**: 中断异常模型见 [`14_interrupt_and_exception_model.md`](14_interrupt_and_exception_model.md)，no_std 同步原语见 [`15_no_std_synchronization_primitives.md`](15_no_std_synchronization_primitives.md)，自定义裸机异步执行器见 [`28_custom_bare_metal_async_executor.md`](28_custom_bare_metal_async_executor.md)，RTIC 深度解析见 [`35_rtic_framework_deep_dive.md`](35_rtic_framework_deep_dive.md)，Embassy 深度解析见 [`34_embassy_framework_deep_dive.md`](34_embassy_framework_deep_dive.md)；跨层对比见 [`Rust vs Ada/SPARK`](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)。
+> **相关页**: 中断异常模型见 [`14_interrupt_and_exception_model.md`](14_interrupt_and_exception_model.md)，no_std 同步原语见 [`15_no_std_synchronization_primitives.md`](15_no_std_synchronization_primitives.md)，自定义裸机异步执行器见 [`28_custom_bare_metal_async_executor.md`](28_custom_bare_metal_async_executor.md)，RTIC 深度解析见 [`35_rtic_framework_deep_dive.md`](35_rtic_framework_deep_dive.md)，Embassy 深度解析见 [`34_embassy_framework_deep_dive.md`](34_embassy_framework_deep_dive.md)，临界区与裸机同步见 [`53_critical_sections_and_sync_on_bare_metal.md`](53_critical_sections_and_sync_on_bare_metal.md)，RTIC 与 Embassy 实时框架对比见 [`55_rtic_vs_embassy_real_time_frameworks.md`](55_rtic_vs_embassy_real_time_frameworks.md)；跨层对比见 [`Rust vs Ada/SPARK`](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)。
 
 ## Mindmap
 

@@ -9,7 +9,7 @@
 > **定位**: 本页是「Rust 惯用法」主题的**导航型权威页**，不重复展开各惯用法的完整语义，而是从四大国际权威来源的视角建立索引、语义域映射与选型路径。每个惯用法的深度解释请参见 [`02_idioms_spectrum.md`](02_idioms_spectrum.md) 或对应专题页。
 
 > **前置概念**: [Rust 惯用法谱系全景](02_idioms_spectrum.md) · [Rust API Guidelines 惯用法语义映射](48_api_guidelines_idioms.md)
-> **后置概念**: [Rust 反模式与陷阱图谱](51_anti_patterns_and_pitfalls.md) · [Rust 性能惯用法](52_performance_idioms.md)
+> **后置概念**: [Rust 反模式与陷阱图谱](51_anti_patterns_and_pitfalls.md) · [Rust 性能惯用法](52_performance_idioms.md) · [P10-3 惯用法体系 canonical](../../05_comparative/05_idioms_patterns_architecture/01_idioms/README.md)
 
 > **来源**:
 > [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) ·

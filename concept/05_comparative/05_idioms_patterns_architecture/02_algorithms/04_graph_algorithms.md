@@ -265,3 +265,9 @@ fn main() {
 - [petgraph on crates.io](https://crates.io/crates/petgraph) — P2：Rust 图数据结构与算法库。
 - [petgraph docs on docs.rs](https://docs.rs/petgraph/latest/petgraph/) — P2：petgraph API 文档。
 - [cp-algorithms: Graphs](https://cp-algorithms.com/graph/index.html) — 图遍历、最短路径与生成树实现参考。
+
+- [Rust Algorithm Club](https://github.com/weihanglo/rust-algorithm-club)
+
+- [CLRS — Introduction to Algorithms](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)
+
+- [Sedgewick & Wayne — Algorithms](https://algs4.cs.princeton.edu/home/)

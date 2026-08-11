@@ -6,7 +6,7 @@
 >
 > **EN**: Rust in Safety-Critical Systems
 > **Summary**: A canonical synthesis of Rust's role in safety-critical systems, covering functional-safety standards mapping (IEC 61508, ISO 26262, DO-178C, EN 50128/50129), Rust semantic advantages, unsafe audit strategies, formal verification interfaces (Kani, MIRI, Prusti, Gillian-Rust), no_std constraints, certified industrial toolchains, counterexamples, and decision guidance.
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 >
 > **受众**: [专家]
 > **Bloom 层级**: L5-L6
@@ -14,7 +14,7 @@
 > **A/S/P 标记**: **P+S+A+Eva** — Procedure + Structure + Application + Evaluation
 > **双维定位**: C×Eva — 比较与评价 Rust 在安全关键标准下的语义优势、工具链证据与工程落地方法
 > **前置概念**: [安全关键裸机操作系统与 Rust](19_safety_critical_bare_metal_os.md) · [安全关键系统工程](../11_domain_applications/23_safety_critical_systems_engineering.md) · [MISRA-Rust 与安全关键嵌入式指南](30_misra_rust_safety_critical_guidelines.md) · [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)
-> **后置概念**: [嵌入式 RTOS 与安全关键框架对比](26_embedded_rtos_and_safety_critical_frameworks.md) · [no_std 启动流程与运行时](27_no_std_startup_runtime_deep_dive.md) · [Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)
+> **后置概念**: [嵌入式 RTOS 与安全关键框架对比](26_embedded_rtos_and_safety_critical_frameworks.md) · [no_std 启动流程与运行时](27_no_std_startup_runtime_deep_dive.md) · [no_std 分配器与 panic handler](52_no_std_allocators_and_panic_handlers.md) · [Rust for Linux 内核模块基础](56_rust_for_linux_kernel_module_basics.md) · [Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)
 
 ---
 

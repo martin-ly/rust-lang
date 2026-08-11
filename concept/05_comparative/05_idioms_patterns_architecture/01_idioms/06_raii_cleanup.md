@@ -138,6 +138,8 @@ fn main() {
 - [Rust Reference — Destructor](https://doc.rust-lang.org/reference/destructors.html)
 - [Rust API Guidelines — RAII](https://rust-lang.github.io/api-guidelines/flexibility.html#c-raii)
 
+- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+
 ## 来源与延伸阅读
 
 - [RustBelt — Logical Foundations for Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/)（P1 形式化基础）

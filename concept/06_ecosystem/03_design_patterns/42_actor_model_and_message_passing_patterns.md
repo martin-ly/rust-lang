@@ -17,7 +17,8 @@
 > [微服务架构模式](05_microservice_patterns.md) ·
 > [事件驱动架构](06_event_driven_architecture.md) ·
 > [分布式系统](../04_web_and_networking/01_distributed_systems.md) ·
-> [五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md)
+> [五模型定义矩阵](../../05_comparative/00_paradigms/04_five_models_definition_matrix.md) ·
+> [P10-3 Actor canonical](../../05_comparative/05_idioms_patterns_architecture/04_architecture/04_actor.md)
 >
 > **来源**:
 > [TRPL — Message Passing](https://doc.rust-lang.org/book/ch16-02-message-passing.html) ·

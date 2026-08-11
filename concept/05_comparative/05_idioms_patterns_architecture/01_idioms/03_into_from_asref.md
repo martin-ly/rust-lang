@@ -124,6 +124,8 @@ fn main() {}
 - [Rust API Guidelines — Type Conversions](https://rust-lang.github.io/api-guidelines/naming.html#c-conv)
 - [Rust Reference — The From trait](https://doc.rust-lang.org/std/convert/trait.From.html)
 
+- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+
 ## 来源与延伸阅读
 
 - [RustBelt — Logical Foundations for Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/)（P1 形式化基础）

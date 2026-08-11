@@ -6,7 +6,7 @@
 >
 > **EN**: Critical Sections and Synchronization on Bare Metal
 > **Summary**: A canonical guide to safe shared-state synchronization in single-core and multi-core bare-metal Rust: disabling interrupts, the `critical-section` crate, `Mutex<RefCell<T>>`, atomic rings, priority ceilings, and hardware-validated examples for ARM Cortex-M and RISC-V.
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 >
 > **受众**: [专家]
 > **Bloom 层级**: L4
@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [critical-section crate](https://docs.rs/critical-section/) · [cortex-m crate](https://docs.rs/cortex-m/) · [riscv crate](https://docs.rs/riscv/) · [Rust Atomics and Locks](https://marabos.nl/atomics/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [RTIC Book](https://rtic.rs/2/book/en/) · [Embassy Book](https://embassy.dev/book/) · [Ferrous Systems — Rust Training](https://rust-training.ferrous-systems.com/latest/book/)
+> **来源**: [critical-section crate](https://docs.rs/critical-section/) · [cortex-m crate](https://docs.rs/cortex-m/) · [riscv crate](https://docs.rs/riscv/) · [Rust Atomics and Locks](https://marabos.nl/atomics/) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [RTIC Book](https://rtic.rs/2/book/en/) · [Embassy Book](https://embassy.dev/book/) · [Ferrous Systems — Rust Training](https://rust-training.ferrous-systems.com/latest/book/) · [Knurling Books](https://knurling-books.org/) · [probe-rs](https://probe.rs/)
 >
 > **横向对比**: [Rust vs C/C++ 并发模型](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [RTOS 与 Rust 调度模型对比](46_rtos_and_scheduling_in_rust.md)
 

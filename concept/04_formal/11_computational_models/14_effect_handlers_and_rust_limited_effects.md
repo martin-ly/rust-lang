@@ -53,6 +53,10 @@
     - [测验 3：Rust 为什么没有通用 effect handlers？](#测验-3rust-为什么没有通用-effect-handlers)
   - [七、权威来源 / International Authority References](#七权威来源--international-authority-references)
   - [八、🧭 思维导图（Mindmap）](#八-思维导图mindmap)
+  - [附录：计算等价与观察等价分析](#附录计算等价与观察等价分析)
+    - [A.1 代数效应处理器的观察等价](#a1-代数效应处理器的观察等价)
+    - [A.2 Rust 受限效应与通用 effect handlers 的计算等价](#a2-rust-受限效应与通用-effect-handlers-的计算等价)
+    - [A.3 工具链可复现性说明](#a3-工具链可复现性说明)
   - [来源与延伸阅读](#来源与延伸阅读)
     - [P1（学术/形式化）](#p1学术形式化)
     - [P2（社区/生态）](#p2社区生态)
@@ -563,6 +567,7 @@ D. 已有 panic 足够
 | [Rust Reference — async/await](https://doc.rust-lang.org/reference/expressions/await-expr.html) | ✅ P0 | Rust 异步表达式语义 |
 | [Rust Reference — The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator) | ✅ P0 | ? 操作符语义 |
 | [Rust RFC 2394 — async/await](https://rust-lang.github.io/rfcs/2394-async_await.html) | ✅ P0 | async/await 设计来源 |
+| [Milewski, *Category Theory for Programmers*](https://github.com/hmemcpy/milewski-ctfp-pdf) | ✅ P2 | 单子/Functor 范畴直觉，受限效应的语义背景 |
 
 ---
 
@@ -596,6 +601,37 @@ mindmap
       Plotkin & Pretnar 2009
       Lindley 2014
 ```
+
+## 附录：计算等价与观察等价分析
+
+### A.1 代数效应处理器的观察等价
+
+在代数效应理论中，两个表达式 `e₁`、`e₂` 是**观察等价**的，当把它们放在任意 handler 上下文 `H[·]` 中时，最终返回值或 perform 出的效应操作序列相同：
+
+```text
+e₁ ≈obs e₂  ⇔  ∀H[·]. H[e₁] ⇓ v  ⟺  H[e₂] ⇓ v
+```
+
+这一等价关系比纯 λ 演算的 β/η 等价更粗糙：它允许不同的内部计算路径，只要外部可观察的「值 + 效应迹」一致。
+
+### A.2 Rust 受限效应与通用 effect handlers 的计算等价
+
+Rust 没有通用 `perform`/`handle` 语法，但其受限效应可以在特定场景下编码通用效应：
+
+| Rust 机制 | 可编码的通用效应 | 计算等价性 |
+|---|---|---|
+| `Result<T, E>` + `?` | 可失败/异常效应 | 等价于带有单一 `raise` 操作的 shallow handler |
+| `async/await` | 挂起/恢复效应 | 等价于单一 `await` 操作的 deep handler（由 executor 解释） |
+| `panic!` + `catch_unwind` | 非恢复性中止 | **不等价**于可恢复 handler，因为无法 resume |
+| 手动状态机 | 状态/选择效应 | 在有限状态下可等价于浅层 handler |
+
+关键结论是：Rust 的受限效应是通用 effect handlers 的**可判定、零成本片段**。它们牺牲了表达力（不能自定义任意效应操作），换取了与借用检查器、零成本抽象目标的兼容性。
+
+### A.3 工具链可复现性说明
+
+- `async` 示例使用标准库 `std::future`、`std::pin`、`std::task`，可在 Rust 1.97 上直接运行；`compile_fail` 反例已验证。
+- 若需体验完整 effect handlers，可使用 [eff](https://github.com/matijapretnar/eff)（OCaml 风格）或 [koka](https://koka-lang.github.io/) 作为对照。
+- 理论来源：[Plotkin & Power 2002](https://doi.org/10.1007/3-540-45931-6_24)、[Plotkin & Pretnar 2009](https://doi.org/10.1007/978-3-642-00590-9_7)、[Lindley 2014](https://doi.org/10.4230/LIPIcs.SNAPL.2019.7)。
 
 ## 来源与延伸阅读
 

@@ -6,7 +6,7 @@
 >
 > **EN**: no_std and Bare-Metal Rust
 > **Summary**: A canonical reference for `#![no_std]` and bare-metal Rust: semantic boundary with `std`, core/alloc split, reset-to-main boot flow, linker-script memory layout, panic/abort/error handling, target specification and custom target JSON, with mindmap, anti-patterns, and decision trees.
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 >
 > **受众**: [专家]
 > **Bloom 层级**: L3
@@ -14,7 +14,7 @@
 > **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Cre — 在资源受限硬件上构建可移植、可维护的裸机 Rust 系统
 > **前置概念**: [Rust 嵌入式系统开发](03_embedded_systems.md) · [交叉编译](02_cross_compilation.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [Cargo build-std](../01_cargo/22_build_std.md)
-> **后置概念**: [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md) · [no_std 启动流程与运行时深度解析](27_no_std_startup_runtime_deep_dive.md) · [panic_handler 与 no_std 运行时](18_panic_runtime_no_std.md) · [嵌入式内存布局与堆安全](29_embedded_memory_layout_and_heap_safety.md) · [no_std 同步原语](15_no_std_synchronization_primitives.md) · [嵌入式内存分配器](16_embedded_memory_allocators.md) · [no_std 与裸机惯用法](23_no_std_and_bare_metal_idioms.md)
+> **后置概念**: [裸机启动与链接脚本](13_bare_metal_boot_linker_script.md) · [no_std 启动流程与运行时深度解析](27_no_std_startup_runtime_deep_dive.md) · [panic_handler 与 no_std 运行时](18_panic_runtime_no_std.md) · [嵌入式内存布局与堆安全](29_embedded_memory_layout_and_heap_safety.md) · [no_std 同步原语](15_no_std_synchronization_primitives.md) · [嵌入式内存分配器](16_embedded_memory_allocators.md) · [no_std 与裸机惯用法](23_no_std_and_bare_metal_idioms.md) · [no_std 分配器与 panic handler](52_no_std_allocators_and_panic_handlers.md) · [临界区与裸机同步](53_critical_sections_and_sync_on_bare_metal.md) · [链接脚本与内存布局](54_linker_scripts_and_memory_layout.md)
 
 ---
 

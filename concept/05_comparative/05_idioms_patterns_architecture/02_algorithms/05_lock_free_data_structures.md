@@ -155,6 +155,9 @@ fn use_stack<T>(s: &Stack<T>) {
 - [Rust Atomics and Locks — Mara Bos](https://marabos.nl/atomics/)
 - [The Rust Reference — Memory Model](https://doc.rust-lang.org/reference/memory-model.html)
 
+- [Rust Algorithm Club](https://github.com/weihanglo/rust-algorithm-club)
+- [CLRS — Introduction to Algorithms](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)
+- [Sedgewick & Wayne — Algorithms](https://algs4.cs.princeton.edu/home/)
 ## 形式化基础
 
 本页的工程模式可追溯到以下 L4 形式化/理论权威页：

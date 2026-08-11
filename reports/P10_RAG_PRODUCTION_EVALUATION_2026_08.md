@@ -1,247 +1,10543 @@
-# P10-5 AI 语义检索（RAG）生产化评估报告
+# KG-RAG Semantic Alignment Evaluation Report
 
-**EN**: P10-5 KG-RAG Production Evaluation Report
-**Summary**: 构建 ≥200 条 golden query set，增强 KG-RAG pipeline（hybrid BM25+vector、可选 reranker、embedding 微调骨架），并在 golden query set 上评估 recall@5 等核心指标。
+**Generated**: 2026-08-11T13:22
+**Embedding provider**: sentence-transformers:tools/kg_rag/.cache/fine_tuned_augmented
+**Retrieval mode**: hybrid
+**Samples**: 300
+**BM25 weight**: 0.3
 
-**日期**: 2026-08-04
-**计划来源**: `reports/PLAN_P10_Semantic_Domain_International_Alignment_2026_08_04.md` P10-5
-**评估命令**: `tools/kg_rag/semantic_alignment_pipeline.py`
-**KG**: `concept/00_meta/kg_data_v3.json`（709 实体 / 10547 关系）
+## Aggregates
 
----
-
-## 1. 交付物
-
-| 文件 | 说明 | 状态 |
-|:---|:---|:---|
-| `tools/kg_rag/eval/generate_golden_queries.py` | golden query set 生成器（可复现） | ✅ |
-| `tools/kg_rag/eval/golden_queries_v1.json` | ≥200 条 golden queries（实际 2150 条） | ✅ |
-| `tools/kg_rag/fine_tune_embedding.py` | Embedding 微调/LoRA 训练脚本 | ✅ |
-| `tools/kg_rag/semantic_alignment_pipeline.py` | 增强版评估 pipeline（hybrid + reranker） | ✅ |
-| `reports/P10_RAG_PRODUCTION_EVALUATION_2026_08.md` | 本报告 | ✅ |
-| `reports/P10_RAG_PROD_EVAL_HYBRID_2026_08_04.json/.md` | 全量 hybrid 评估原始结果 | ✅/✅ |
-| `reports/P10_RAG_PROD_EVAL_FINETUNED_2026_08_04.json` | 微调 embedding 全量评估原始结果 | ✅ |
-
----
-
-## 2. Golden Query Set
-
-**生成命令**:
-
-```bash
-python tools/kg_rag/eval/generate_golden_queries.py
-```
-
-**统计**:
-
-| 维度 | 数值 |
+| Metric | Value |
 |:---|---:|
-| 总 query 数 | 2150 |
-| 来源：KG 模板派生 | 2112 |
-| 来源：人工精选（跨域/错误码/版本/embedded/形式方法） | 38 |
-| 覆盖 L0 | 263 |
-| 覆盖 L1 | 188 |
-| 覆盖 L2 | 145 |
-| 覆盖 L3 | 246 |
-| 覆盖 L4 | 359 |
-| 覆盖 L5 | 94 |
-| 覆盖 L6 | 621 |
-| 覆盖 L7 | 234 |
-| 领域 top3 | formal_methods (361), meta_framework (263), version_evolution (239) |
+| concept_mrr | 0.891 |
+| concept_ndcg@1 | 0.843 |
+| concept_ndcg@10 | 0.902 |
+| concept_ndcg@3 | 0.89 |
+| concept_ndcg@5 | 0.892 |
+| concept_precision | 0.189 |
+| concept_precision@1 | 0.843 |
+| concept_precision@10 | 0.098 |
+| concept_precision@3 | 0.313 |
+| concept_precision@5 | 0.189 |
+| concept_recall | 0.927 |
+| concept_recall@1 | 0.83 |
+| concept_recall@10 | 0.953 |
+| concept_recall@3 | 0.922 |
+| concept_recall@5 | 0.927 |
+| source_mrr | 0.898 |
+| source_ndcg@1 | 0.843 |
+| source_ndcg@10 | 0.909 |
+| source_ndcg@3 | 0.896 |
+| source_ndcg@5 | 0.899 |
+| source_precision@1 | 0.843 |
+| source_precision@10 | 0.101 |
+| source_precision@3 | 0.319 |
+| source_precision@5 | 0.193 |
+| source_recall | 0.938 |
+| source_recall@1 | 0.828 |
+| source_recall@10 | 0.967 |
+| source_recall@3 | 0.932 |
+| source_recall@5 | 0.938 |
 
-精选查询覆盖：
+## Per-Sample Results
 
-- **跨域**: ownership + data race、Send/Sync、async + Pin、interior mutability、unsafe + FFI、lifetime elision、drop semantics
-- **错误码**: E0502、E0499、E0596、E0382、E0308、E0277
-- **版本特性**: Rust 1.98、1.97、1.96 稳定特性
-- **no_std/embedded**: no_std、panic handler/allocator、RTIC vs Embassy、Rust for Linux、critical sections、linker scripts、target tier
-- **形式方法**: separation logic / tree borrows、RustBelt、Aeneas、Verus、linear logic、session types、effect handlers、refinement types、Kani、Miri
+### rust MIR, Codegen, and LLVM IR Primer tutorial
 
----
+- n_retrieved: 59
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, AUTOSARAndRust, ActorModelSystemSemantics, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AerospaceCertificationFormalMethods, AsyncProgramming, AutoVerusAndVerusAutomatedVerificationEcosystem, BorrowSanitizerBSanDynamicAliasingRuleVerificationForRust, BorrowSanitizerRuntimeTreeBorrowsViolationDetection, CategoryTheoryAndRustStructuralSemanticsAsAComputationalModel, CertifiedToolchainsAndCertifiedPackageInventory, CompilerDiagnosticsAndUITests, CompilerInfrastructure, ComponentBasedSystemSemantics, ConcurrencyModels, ConcurrencyPatterns, CreusotRustDeductiveVerifierOnWhy3, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystemsSemantics, EmbeddedSystems, FormalMethodsIndustrialization, HoareLogic, KaniRustBoundedModelChecker, LLVMBackendAndCodeGenerationInRustc, LinearizabilityAndTheConsistencySpectrum, MIRCodegenAndLLVMIRPrimer, MicroservicePatterns, MiriRustUndefinedBehaviorDetector, ModalLogicAndRustEffects, ModernVerificationTools, Ownership, OwnershipFormalization, PoisonUndefinedBehaviorAndFreezeInLLVMIR, ProcessCalculiForRustCSPCCSAndThePiCalculus, ReactiveProgramming, ReactiveSystemsSemantics, Roadmap, RustBeltAndVerificationToolchain, RustCompilerInternalsAndDriverArchitecture, RustLanguageContractsPreconditionsPostconditionsAndOwnershipAssertions, RustVsAdaSPARK, RustVsC, RustcDriverRustc_interfaceAndStableMIR, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalRustTopicIndex, SafetyCriticalSystemsEngineering, SafetyTagsPreview, StreamAlgebraAndBackpressure, SystemComposability, SystemsEngineeringStandardsAndRustMapping, TheRustcQuerySystemAndIncrementalCompilation, ToolchainAndCargo, TreeBorrowsDeepDive, TypeSystemBasics, TypeTheoryAndRustTheTypeSystemAsAComputationalModel, VerificationAndContractsEcosystemOverview, VerificationToolchain
+- expected_entities: mir,_codegen,_and_llvm_ir_primer
 
-## 3. 评估指标对比
+### rust C Preprocessor vs Rust Macros tutorial
 
-### 3.1 基线（P9 结构检索）
+- n_retrieved: 42
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncProgramming, Borrowing, CPreprocessorVsRustMacros, ConcurrencyModels, CoreCratesIndex, CrossCompilation, DeclarativeMacros, DesignPatternsOverview, DslAndEmbedding, Evolution, Generics, Lifetimes, LinearAndAffineLogic, MacroPatterns, MacrosAdvanced, MacrosBasics, MemoryManagement, Metaprogramming, ModulesAndPaths, OperationalSemantics, Ownership, OwnershipFormalization, ParadigmMatrix, ProceduralMacros, Roadmap, RustBeltAndVerificationToolchain, RustVsC, RustVsGo, RustVsJava, RustVsPython, RustVsRuby, RustVsSwift, SafeAndEffectiveUnsafeRust, SeparationLogic, SerdePatterns, ToolchainAndCargo, Traits, TypeSystemBasics, TypeTheory, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: c_preprocessor_vs_rust_macros
 
-使用仅依赖 stdlib 的 SKOS 标签 token overlap + 图扩展：
+### when should I use AutoVerus and Verus Automated Verification Ecosystem in rust
 
-| 指标 | Value |
-|:---|---:|
-| concept_recall@5 | 0.167 |
-| concept_mrr | 0.389 |
-| source_recall@5 | 0.583 |
-| source_mrr | 0.644 |
+- n_retrieved: 31
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationDomains, AsyncProcessManagementInRust, AutoVerusAndVerusAutomatedVerificationEcosystem, Borrowing, ConcurrencyModels, ErrorHandlingIntermediate, FormalMethodsIndustrialization, FormalVerificationEcosystemTower, HoareLogic, InterProcessCommunicationMechanismsInRust, Lifetimes, MacrosAdvanced, MemoryManagement, ModernProcessManagementLibrariesInRust, ModernVerificationTools, Ownership, OwnershipFormalization, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, RustBeltAndVerificationToolchain, RustVsC, SafeAndEffectiveUnsafeRust, SeparationLogic, TestingEcosystem, ToolchainAndCargo, TypeSystemBasics, VerificationToolchain
+- expected_entities: autoverus_and_verus_automated_verification_ecosystem
 
-### 3.2 Hybrid BM25 + Dense Vector（本报告主结果）
+### how does Distributed Systems work
 
-配置：`all-MiniLM-L6-v2` 向量模型，`BM25Okapi` 稀疏检索，`bm25_weight=0.3`，`top-k=5`。
+- n_retrieved: 59
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AsyncCancellationSafety, AsyncPatterns, AsyncProgramming, BlockchainDevelopmentInRust, CRDTTypeZooStateBasedOpBasedAndTheMergeLattice, CausalOrderingAndVectorClocks, CloudNative, ComponentBasedSystemSemantics, ConcurrencyModels, ConcurrencyPatterns, DataEngineering, DataIntensiveSystemsDesign, DatabaseSystemsInRust, DesignPatternsOverview, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystems, DistributedSystemsProtocols, DistributedSystemsSemantics, Evolution, ExecutorFairnessAndScheduling, FiveExecutionModelsDefinitionMatrix, FormalMethodsIndustrialization, FormalVerificationEcosystemTower, FutureAndExecutorMechanisms, HoareLogic, Iterators, LambdaCalculus, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MicroservicePatterns, NetworkProtocols, Ownership, ParadigmMatrix, ParallelDistributedPatternSpectrum, PatternCompositionAlgebra, PerformanceEngineeringArchitecture, PerformanceOptimization, PinAndUnpin, ProcessCalculiForRustCSPCCSAndThePiCalculus, ReactiveProgramming, ReactiveSystemsSemantics, Roadmap, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, StreamAlgebraAndBackpressure, StreamProcessingEcosystem, SystemComposability, SystemDesignPrinciples, SystemSemantics, ToolchainAndCargo, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: distributed_systems
 
-**200 条抽样结果**:
+### how does Rust API Guidelines Canonical Guide work
 
-| 指标 | Value |
-|:---|---:|
-| concept_recall@1 | 0.680 |
-| concept_recall@3 | 0.765 |
-| **concept_recall@5** | **0.765** |
-| concept_recall@10 | 0.790 |
-| concept_mrr | 0.722 |
-| source_recall@1 | 0.875 |
-| source_recall@3 | 0.968 |
-| **source_recall@5** | **0.968** |
-| source_recall@10 | 0.995 |
-| source_mrr | 0.922 |
+- n_retrieved: 42
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AlgorithmEngineeringPractice, ApplicationDomains, AsyncProgramming, BloomTaxonomy, Borrowing, CategoryTheory, Collections, ComprehensiveRustMapping, ConcurrencyModels, DesignPatternsOverview, EditionGuide, ErrorHandlingIntermediate, Evolution, Generics, HowRustIsMadeAndNightlyRust, IdiomaticRustAPINamingConventions, IdiomsSpectrum, IteratorIdiomsInRust, LearningGuide, Lifetimes, NLLAndPolonius, Ownership, OwnershipPerformanceOptimization, PerformanceOptimization, Roadmap, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustAPIGuidelinesCanonicalGuide, RustAntiPatterns, RustAntiPatternsAndPitfallsAtlas, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustIdiomsAtlas, RustPerformanceIdioms, RustVersionTracking, SafeAndEffectiveUnsafeRust, Traits, TypeConversions, TypeSystemAdvanced, TypeSystemBasics, UnsafeRustPatterns
+- expected_entities: rust_api_guidelines_canonical_guide
 
-**目标达成度**:
+### what is Const Items and Const Functions
 
-- ✅ `concept_recall@5 ≥ 0.50`（实际 0.765，较 P9 基线 0.167 提升 **358%**）
-- ✅ `source_recall@5 ≥ 0.75`（实际 0.968，较 P9 基线 0.583 提升 **66%**）
+- n_retrieved: 40
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncCancellationSafety, AsyncProgramming, Borrowing, ClosureBasics, ConceptMetaLayer, ConstGenericsAndTraitObjects, ConstGenericsValuesAsTypeParameters, ConstItemsAndConstFunctions, ConstTraitImplPreview, ConstantEvaluation, ControlFlow, CrossLayerDependencyAndImplicationTopology, DispatchMechanisms, EffectSystem, EffectsAndPurity, EvaluationStrategies, Evolution, GenericAssociatedTypesGATs, Generics, HowRustIsMadeAndNightlyRust, InlineConstPatternPreview, Lifetimes, LifetimesAdvanced, MemoryManagement, MetaFrameworkAndKnowledgeArchitectureQuiz, Ownership, PerformanceOptimization, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustVersionTracking, SafeAndEffectiveUnsafeRust, StatementsAndExpressions, Traits, TypeInference, TypeLevelProgramming, TypeSystemBasics, TypeTheory, VariableModel
+- expected_entities: const_items_and_const_functions
 
-**全量 2150 条结果**:
+### explain Const Items and Const Functions in rust
 
-| 指标 | Value |
-|:---|---:|
-| concept_recall@1 | 0.688 |
-| concept_recall@3 | 0.770 |
-| **concept_recall@5** | **0.781** |
-| concept_recall@10 | 0.798 |
-| concept_mrr | 0.733 |
-| source_recall@1 | 0.866 |
-| source_recall@3 | 0.952 |
-| **source_recall@5** | **0.963** |
-| source_recall@10 | 0.983 |
-| source_mrr | 0.914 |
+- n_retrieved: 35
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncProcessManagementInRust, AsyncProgramming, Borrowing, ClosureBasics, ConstGenericsValuesAsTypeParameters, ConstItemsAndConstFunctions, ConstTraitImplPreview, ConstantEvaluation, ControlFlow, EffectSystem, EffectsAndPurity, EvaluationStrategies, Evolution, Generics, InlineConstPatternPreview, InterProcessCommunicationMechanismsInRust, Lifetimes, MemoryManagement, ModernProcessManagementLibrariesInRust, Ownership, PerformanceOptimization, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, SafeAndEffectiveUnsafeRust, StatementsAndExpressions, Traits, TypeLevelProgramming, TypeSystemBasics, TypeTheory, VariableModel
+- expected_entities: const_items_and_const_functions
 
-完整原始结果：
-- JSON: `reports/P10_RAG_PROD_EVAL_HYBRID_2026_08_04.json`
-- Markdown: `reports/P10_RAG_PROD_EVAL_HYBRID_2026_08_04.md`
+### what is Cargo Workspaces
 
-### 3.3 可选 Cross-Encoder Reranker
+- n_retrieved: 34
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: Borrowing, Cargo196FeatureHighlights, CargoAuthenticationAndBuildCache, CargoBuildScriptsBuildRs, CargoConfiguration, CargoDependencyResolution, CargoGettingStarted, CargoGuidePractices, CargoManifestReference, CargoProfilesAndLints, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CargoSourceReplacement, CargoWorkflow, CargoWorkspaces, CloudNative, CoreCratesIndex, CrossCompilation, DevOpsAndCICD, LearningMvpPath, Lifetimes, MacrosAdvanced, MemoryManagement, ModulesAndPaths, Ownership, PerformanceOptimization, RustVersionTracking, RustVsC, SecurityPractices, TerminologyGlossary, TestingStrategies, ToolchainAndCargo, TypeSystemBasics
+- expected_entities: cargo_workspaces
 
-配置：在 hybrid Top-20 候选池上用 `cross-encoder/ms-marco-MiniLM-L-6-v2` 重排。
+### explain Quiz: C/C++ to Rust Foundations in rust
 
-**200 条抽样结果**: 见 `tmp/rag_hybrid_rerank_v2_sample_200.json`。
+- n_retrieved: 42
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedTraits, ApplicationDomains, AsyncFFIBoundary, Borrowing, CAbiObjectModel, CCToRustEngineeringComparisonRoadmap, CVsRustConstructionOperatorsRTTIAndFriends, CoercionAndCasting, Collections, ConcurrencyModels, DesignPatternsOverview, ErrorHandlingDeepDive, ErrorHandlingIntermediate, EvaluationStrategies, Generics, IdiomsSpectrum, IteratorIdiomsInRust, Lifetimes, MemoryManagement, NewtypeAndWrapperTypes, Ownership, OwnershipFormalization, PatternCompositionAlgebra, PatternSemanticSpaceIndex, QuizCCToRustFoundations, QuizGeneralPLFoundations, QuizRustVsSystems, RTTIAndDynamicTypeIdentification, Roadmap, RustFFI, RustVsC, SafeAndEffectiveUnsafeRust, SelfAssessment, SmartPointers, SubtypeAndVariance, Traits, TypeConversions, TypeErasure, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, VariableModel
+- expected_entities: quiz:_c/c++_to_rust_foundations
 
-> 注：200 条抽样实测 reranker 概念 recall@5 ≈ 0.76、source recall@5 ≈ 0.963，与 hybrid 持平；但 MRR 明显下降（concept_mrr 0.469 vs 0.722），说明通用 ms-marco cross-encoder 会错排高相关项。保留为可选开关，未来可在微调后的 cross-encoder 上复测。
+### rust Useful Development Tools (Foundation) tutorial
 
-### 3.4 Embedding 微调
+- n_retrieved: 44
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AlgorithmEngineeringPractice, ApplicationDomains, AsyncProgramming, BloomTaxonomy, Borrowing, CAbiObjectModel, CCToRustEngineeringComparisonRoadmap, CLIDevelopment, CargoAuthenticationAndBuildCache, CargoProfilesAndLints, Collections, ComprehensiveRustMapping, ConcurrencyModels, CrossCompilation, DesignPatternsOverview, DevOpsAndCICD, DevelopmentToolsEcosystem, ErrorHandlingIntermediate, EvaluationStrategies, Generics, GettingStartedWithRust, IdiomsSpectrum, IteratorIdiomsInRust, LearningGuide, MemoryManagement, Ownership, PatternCompositionAlgebra, PatternSemanticSpaceIndex, PerformanceOptimization, Roadmap, RustAPIGuidelinesCanonicalGuide, RustForOperatingSystemKernelDevelopment, RustVsC, TestingBasics, TestingEcosystem, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, UsefulDevelopmentToolsFoundation, VariableModel, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: useful_development_tools_(foundation)
 
-- 脚本：`tools/kg_rag/fine_tune_embedding.py`
-- 训练数据：3294 对（KG 语义关系 + 同义改写）
-- 训练配置：全量微调（非 LoRA），2 epochs，batch-size 32，学习率 2e-5
-- 输出：`tools/kg_rag/.cache/fine_tuned_model/`
-- 状态：✅ 已完成（保存了 model.safetensors / tokenizer / 1_Pooling / 2_Normalize）
+### explain Strings and Encoding in rust
 
-> 训练末尾出现 `jinja2.exceptions.TemplateSyntaxError: unexpected '>'`，来自 `sentence-transformers` 自动生成 model card 的模板渲染失败，不影响模型权重保存（日志已打印 "model saved"）。
+- n_retrieved: 45
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationDomains, AsyncProcessManagementInRust, AsyncProgramming, Borrowing, ClosureBasics, ClosureTypes, Collections, CompilerInfrastructure, ConcurrencyModels, ConstantEvaluation, Generics, InterProcessCommunicationMechanismsInRust, Iterators, LLVMBackendAndCodeGenerationInRustc, Lifetimes, MacrosAdvanced, MemoryManagement, ModernProcessManagementLibrariesInRust, NLLAndPolonius, NameResolutionAndHIRInRustc, Ownership, OwnershipFormalization, PerformanceOptimization, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, RustBeltAndVerificationToolchain, RustFFI, RustcDriverRustc_interfaceAndStableMIR, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SmartPointers, StringsAndEncoding, StringsAndText, SubtypeAndVariance, TheRustcQuerySystemAndIncrementalCompilation, TheTraitSolverInRustc, Traits, TypeCheckingAndInferenceInRustc, TypeInference, TypeSystemBasics, TypeTheory
+- expected_entities: strings_and_encoding
 
-**200 条抽样结果**（`tmp/rag_finetuned_sample_200.json`）：
+### Pl Prerequisites overview
 
-| 指标 | Value |
-|:---|---:|
-| concept_recall@5 | 0.775 |
-| concept_mrr | 0.726 |
-| source_recall@5 | 0.978 |
-| source_mrr | 0.926 |
+- n_retrieved: 28
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, Borrowing, CAbiObjectModel, CCToRustEngineeringComparisonRoadmap, DesignPatternsOverview, Evolution, FormalMethodsIndustrialization, FormalMethodsLayerOverview, GeneralPLFoundationsRoadmap, Generics, GettingStartedWithRust, LearningGuide, Lifetimes, MemoryManagement, Ownership, PatternCompositionAlgebra, PatternSemanticSpaceIndex, PlPrerequisites, QuizGeneralPLFoundations, Roadmap, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, RustVsC, SelfAssessment, Traits, TypeSystemBasics, VariableModel
+- expected_entities: pl_prerequisites
 
-**全量 2150 条结果**（`reports/P10_RAG_PROD_EVAL_FINETUNED_2026_08_04.json`）：
+### how to test Architecture Styles Formal Constraints in rust
 
-| 指标 | Value |
-|:---|---:|
-| concept_recall@1 | 0.688 |
-| concept_recall@3 | 0.778 |
-| **concept_recall@5** | **0.788** |
-| concept_recall@10 | 0.803 |
-| concept_mrr | 0.737 |
-| source_recall@1 | 0.866 |
-| source_recall@3 | 0.960 |
-| **source_recall@5** | **0.970** |
-| source_recall@10 | 0.989 |
-| source_mrr | 0.918 |
+- n_retrieved: 80
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AdvancedProcessManagementInRust, ApplicationBinaryInterface, ApplicationDomains, ArchitecturePatternSemantics, ArchitecturePatterns, ArchitectureRefinement, ArchitectureSemantics, ArchitectureStylesFormalConstraints, AsyncFFIBoundary, AsyncPatterns, AsyncProcessManagementInRust, AsyncProgramming, Borrowing, CargoDependencyResolution, CargoManifestReference, CargoProfilesAndLints, CargoRegistriesAndPublishing, CargoWorkspaces, CategoryTheory, CoercionAndCasting, Collections, ComponentBasedSystemSemantics, ConcurrencyModels, ConcurrencyPatterns, DesignPatternsOverview, DistributedSystems, EnterpriseAndSoftwareArchitectureAlignmentInRust, ErrorHandlingIntermediate, Evolution, FFIPatternsInRust, FormalAlgorithmTheory, FormalMethodsIndustrialization, Generics, HoareLogic, IdiomsSpectrum, InlineAssembly, InterProcessCommunicationMechanismsInRust, IteratorCorrectnessSemantics, IteratorIdiomsInRust, Lifetimes, MacrosAdvanced, MemoryManagement, MicroservicePatterns, ModernProcessManagementLibrariesInRust, ModuleSystemAdvanced, NewtypeAndWrapperTypes, ObservationalEquivalenceOfAlgorithmImplementations, Ownership, ParadigmMatrix, PatternCompositionAlgebra, ProcessCalculiForRustCSPCCSAndThePiCalculus, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ReactiveProgramming, RefinementCalculusForRustAlgorithms, Roadmap, RustArchitectureSemanticsConstraints, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustVersionTracking, RustVsC, RustVsGo, SafeAndEffectiveUnsafeRust, SemanticInvariantsOfUnsafeAlgorithms, SemanticSpace, SmartPointers, SoftwareArchitectureFormalization, SystemComposability, SystemDesignPrinciples, TerminologyGlossary, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts
+- expected_entities: architecture_styles_formal_constraints
 
-**与 baseline 对比**（全量 2150 条）：
+### how to test Application Binary Interface in rust
 
-| 指标 | all-MiniLM-L6-v2 | fine-tuned | Δ |
-|:---|---:|---:|---:|
-| concept_recall@5 | 0.781 | **0.788** | +0.7 pp |
-| concept_mrr | 0.733 | **0.737** | +0.4 pp |
-| source_recall@5 | 0.963 | **0.970** | +0.7 pp |
-| source_mrr | 0.914 | **0.918** | +0.4 pp |
+- n_retrieved: 52
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationBinaryInterface, ApplicationDomains, AsyncFFIBoundary, AsyncProcessManagementInRust, BorrowSanitizerRuntimeTreeBorrowsViolationDetection, Borrowing, CoercionAndCasting, Collections, CompilerInfrastructure, ConcurrencyModels, CrossCompilation, DesignPatternsOverview, ErrorHandlingIntermediate, FFIPatternsInRust, Generics, HoareLogic, IdiomsSpectrum, InlineAssembly, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, Lifetimes, MemoryManagement, MiriRustUndefinedBehaviorDetector, ModernProcessManagementLibrariesInRust, ModernVerificationTools, NewtypeAndWrapperTypes, OperatingSystems, Ownership, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, Roadmap, RustBeltAndVerificationToolchain, RustFFI, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SmartPointers, StableApplicationBinaryInterfaceABIPreview, TestingEcosystem, TestingTheRustCompiler, ToolchainAndCargo, Traits, TreeBorrowsDeepDive, TypeConversions, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, UnsafeRustPatterns, VerificationToolchain
+- expected_entities: application_binary_interface
 
-微调模型在全部四项核心指标上均有小幅但一致的提升，且仍高于目标阈值。
+### CLI Development overview
 
----
+- n_retrieved: 35
+- concept_mrr: 0.333
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.5
+- concept_ndcg@3: 0.5
+- concept_ndcg@5: 0.5
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.333
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.5
+- source_ndcg@3: 0.5
+- source_ndcg@5: 0.5
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, CLIDevelopment, CargoAuthenticationAndBuildCache, CargoProfilesAndLints, CompilerInfrastructure, ConcurrencyModels, CrossCompilation, DesignPatternsOverview, DevOpsAndCICD, DevelopmentToolsEcosystem, ErrorHandlingIntermediate, Evolution, FormalMethodsIndustrialization, GameDevelopmentEcosystem, Generics, MacrosAdvanced, Ownership, PerformanceOptimization, Readme_06ecosystem, Roadmap, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, TestingBasics, TestingEcosystem, ToolchainAndCargo, Traits, TypeSystemBasics, UsefulDevelopmentToolsFoundation, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: cli_developmen
 
-## 4. Hybrid 检索实现要点
+### how does Rust Language Contracts: Preconditions, Postconditions, and Ownership Assertions work
 
-`tools/kg_rag/semantic_alignment_pipeline.py` 新增：
+- n_retrieved: 73
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncCancellationSafety, AsyncProgramming, AtomicsAndMemoryOrdering, AuthoritySourceMap, BorrowSanitizerBSanDynamicAliasingRuleVerificationForRust, BorrowSanitizerRuntimeTreeBorrowsViolationDetection, Borrowing, CargoManifestReference, CargoWorkspaces, CategoryTheory, ClosureBasics, ConcurrencyModels, CratesAndSourceFiles, EffectSystem, EffectsAndPurity, Evolution, ExecutorFairnessAndScheduling, FormalAlgorithmTheory, FormalMethodsIndustrialization, FutureAndExecutorMechanisms, Generics, HoareLogic, HoareLogicForRustAlgorithms, HowRustIsMadeAndNightlyRust, Items, IteratorCorrectnessSemantics, Iterators, KGSHACLEngineValidation, KaniRustBoundedModelChecker, KnowledgeGraphDesignW3CSHACLOWLAlignmentAndOntologyEngineeringMethods, KnowledgeGraphOntologyV20, LLMAndRAGForRustKnowledgeBasesOntologyEngineeringAndRetrievalAugmentedGeneration, LinearAndAffineLogic, Linkage, MemoryModel, Methodology, MiriRustUndefinedBehaviorDetector, ObservationalEquivalenceOfAlgorithmImplementations, Ownership, OwnershipFormalization, ParadigmMatrix, PatternCompositionAlgebra, PerformanceOptimization, PinAndUnpin, ProcessCalculiForRustCSPCCSAndThePiCalculus, RefinementCalculusForRustAlgorithms, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustBeltAndVerificationToolchain, RustLanguageContractsPreconditionsPostconditionsAndOwnershipAssertions, RustLanguageFeatureInventoryMethodology, RustVersionTracking, RustVsC, RustVsGo, RustVsOCamlOwnershipAndAlgebraicEffectsInSystemsAndFunctionalProgramming, SafeAndEffectiveUnsafeRust, SafetyTagsPreview, SemanticInvariantsOfUnsafeAlgorithms, SemanticSpace, SeparationLogic, StreamAlgebraAndBackpressure, SubtypeAndVariance, TerminologyGlossary, TheRustRuntime, Traits, TypeSystemBasics, TypeTheory, VerificationAndContractsEcosystemOverview, VerificationToolchain
+- expected_entities: rust_language_contracts:_preconditions,_postconditions,_and_ownership_assertions
 
-1. **BM25Index**: 基于 `rank_bm25.BM25Okapi`，对 709 个实体的英文 label+summary 做稀疏索引。
-2. **HybridRetriever**: 对 vector score 与 BM25 score 分别 min-max 归一化后加权融合：
-   `score = (1 - bm25_weight) * vector_score + bm25_weight * bm25_score`。
-3. **可选 reranker**: `sentence_transformers.cross_encoder.CrossEncoder`，在 Top-20 候选上重排。
-4. **新 CLI 参数**: `--hybrid`, `--bm25-weight`, `--reranker`, `--reranker-top-k`, `--sample`。
+### explain Quiz Registry — Human-readable index of all assessment assets in the knowledge base. in rust
 
-**可复现命令**:
+- n_retrieved: 43
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncFFIBoundary, AsyncProgramming, AuthoritySourceMap, Borrowing, CoercionAndCasting, Collections, ConceptMetaLayer, ConcurrencyModels, DesignPatternsOverview, ErrorHandlingIntermediate, FFIPatternsInRust, Generics, IdiomsSpectrum, IteratorIdiomsInRust, KGSHACLEngineValidation, KnowledgeGraphDesignW3CSHACLOWLAlignmentAndOntologyEngineeringMethods, KnowledgeGraphOntologyV20, LLMAndRAGForRustKnowledgeBasesOntologyEngineeringAndRetrievalAugmentedGeneration, Lifetimes, MemoryManagement, MetaFrameworkAndKnowledgeArchitectureQuiz, Methodology, NewtypeAndWrapperTypes, Ownership, OwnershipBorrowingAndLifetimesQuiz, QuizRegistryHumanReadableIndexOfAllAssessmentAssetsInTheKnowledgeBase, RAGEvaluationForTheRustKnowledgeGraph, Roadmap, RustFFI, RustVsC, SafeAndEffectiveUnsafeRust, SemanticSpace, SmartPointers, TerminologyGlossary, ToolchainQuiz, Traits, TraitsAndGenericsQuiz, TypeConversions, TypeSystemBasics, TypeSystemQuiz, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts
+- expected_entities: quiz_registry_—_human-readable_index_of_all_assessment_assets_in_the_knowledge_base
 
-```bash
-cd tools/kg_rag
-.venv/Scripts/pip install -r requirements.txt
+### how does Asp Marking Guide work
 
-# 全量 hybrid 评估
-.venv/Scripts/python semantic_alignment_pipeline.py \
-  --eval eval/golden_queries_v1.json \
-  --embed-provider sentence-transformers --embed-model all-MiniLM-L6-v2 \
-  --hybrid --bm25-weight 0.3 \
-  --top-k 5 \
-  --output ../../reports/P10_RAG_PROD_EVAL_HYBRID_2026_08_04.json \
-  --markdown ../../reports/P10_RAG_PROD_EVAL_HYBRID_2026_08_04.md
+- n_retrieved: 33
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, AlgorithmEngineeringPractice, AspMarkingGuide, BilingualConceptTemplate, BorrowSanitizerBSanDynamicAliasingRuleVerificationForRust, Collections, ConceptAuditGuide, ConceptConsistencyAuditChecklist, ConcurrencyModels, DesignPatternsOverview, ErrorHandlingIntermediate, FormalMethodsIndustrialization, Generics, IdiomsSpectrum, IteratorIdiomsInRust, LearningGuide, Ownership, OwnershipFormalization, PerformanceOptimization, Placeholder, QualityDashboardV2, Readme_06ecosystem, Roadmap, RustAPIGuidelinesCanonicalGuide, RustBeltAndVerificationToolchain, SafeAndEffectiveUnsafeRust, SafetyTagsInFormalVerificationRedirectStub, SafetyTagsPreview, TemplateDeduplicationGuide, Traits, TypeConversions, TypeSystemBasics, VerificationToolchain
+- expected_entities: asp_marking_guide
 
-# 快速抽样评估
-.venv/Scripts/python semantic_alignment_pipeline.py \
-  --eval eval/golden_queries_v1.json \
-  --embed-provider sentence-transformers --embed-model all-MiniLM-L6-v2 \
-  --hybrid --bm25-weight 0.3 \
-  --sample 200 --top-k 5
+### what is Zero Cost Abstractions
 
-# 带 reranker
-.venv/Scripts/python semantic_alignment_pipeline.py \
-  --eval eval/golden_queries_v1.json \
-  --embed-provider sentence-transformers --embed-model all-MiniLM-L6-v2 \
-  --hybrid --bm25-weight 0.3 \
-  --reranker cross-encoder/ms-marco-MiniLM-L-6-v2 \
-  --reranker-top-k 20 \
-  --sample 200 --top-k 5
+- n_retrieved: 41
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncProgramming, Borrowing, CategoryTheory, ConcurrencyModels, EffectHandlersAndRustSLimitedEffectsControlFlowAbstractionsAsAComputationalModel, EffectSystem, EffectsAndPurity, ErrorHandlingIntermediate, FearlessRefactoring, FormalMethodsIndustrialization, FutureAndExecutorMechanisms, Generics, HowRustIsMadeAndNightlyRust, Lifetimes, LinearAndAffineLogic, LinearLogicAndOwnershipResourceCalculusAsAComputationalModel, MacrosAdvanced, MemoryManagement, Ownership, OwnershipFormalization, ParametricityAndTheoremsForFree, PerformanceOptimization, ProcessCalculiForRustCSPCCSAndThePiCalculus, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustBeltAndVerificationToolchain, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SessionTypesAndRustChannelsCommunicationProtocolsAsAComputationalModel, SubtypeAndVariance, TerminologyGlossary, ToolchainAndCargo, Traits, TypeSystemBasics, TypeTheory, ZeroCopyParsing, ZeroCostAbstractions
+- expected_entities: zero_cost_abstractions
 
-# Embedding 微调（全量示例）
-.venv/Scripts/python fine_tune_embedding.py \
-  --epochs 2 --batch-size 32 --output-dir .cache/fine_tuned_model
+### how does Embedded-HAL and Driver Idioms work
 
-# 用微调模型评估
-.venv/Scripts/python semantic_alignment_pipeline.py \
-  --eval eval/golden_queries_v1.json \
-  --embed-provider sentence-transformers \
-  --embed-model .cache/fine_tuned_model \
-  --hybrid --bm25-weight 0.3 \
-  --top-k 5 \
-  --output ../../reports/P10_RAG_PROD_EVAL_FINETUNED_2026_08_04.json
-```
+- n_retrieved: 65
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: APIDesignAndSemVerIdiomsInRust, AerospaceCertificationFormalMethods, AlgorithmEngineeringPractice, ApplicationDomains, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, AtomicsAndMemoryOrdering, BareMetalBootAndLinkerScripts, CRDTTypeZooStateBasedOpBasedAndTheMergeLattice, CargoBuildStd, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoSemVerChecksPreview, CausalOrderingAndVectorClocks, CertifiedToolchainsAndCertifiedPackageInventory, ConcurrencyModels, CrossCompilation, CustomBareMetalAsyncExecutor, EmbeddedDebuggingAndLogging, EmbeddedFormalMemoryModel, EmbeddedHAL10MigrationAndEmbassyProductionStatus, EmbeddedHALAndDriverIdioms, EmbeddedHALDriverPatterns, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedProtocolAndPeripheralDrivers, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, EmbeddedTestingAndCIStrategiesForNo_stdRust, ErrorHandlingIntermediate, Evolution, FormalMethodsIndustrialization, Generics, HoareLogic, IdiomsSpectrum, InterruptAndExceptionModel, IteratorIdiomsInRust, LinearizabilityAndTheConsistencySpectrum, MISRARustAndSafetyCriticalEmbeddedGuidelines, MemoryManagement, MemoryMappedPeripheralsAndTypestateProgramming, No_stdAndBareMetalIdioms, No_stdSynchronizationPrimitives, Ownership, PACAndHALImplementation, Panic_handlerAndNo_stdRuntime, ParallelDistributedPatternSpectrum, PinAndUnpin, ProcessCalculiForRustCSPCCSAndThePiCalculus, Roadmap, RustAPIGuidelinesCanonicalGuide, RustCompilerInternalsAndDriverArchitecture, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, RustVsAdaSPARK, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, ToolchainAndCargo, Traits, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: embedded-hal_and_driver_idioms
 
----
+### rust MC/DC Coverage Preview tutorial
 
-## 5. 关键发现
+- n_retrieved: 50
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, ApplicationDomains, BorrowSanitizerBSanDynamicAliasingRuleVerificationForRust, Borrowing, CargoDependencyResolution, CargoGettingStarted, CargoManifestReference, CargoWorkflow, ConcurrencyModels, Documentation, ErrorHandlingIntermediate, Evolution, FormalMethodsIndustrialization, Generics, LearningMvpPath, Lifetimes, MCDCCoveragePreview, MacroPatterns, MacrosAdvanced, MemoryManagement, ModuleSystemAdvanced, NameResolutionAndHIRInRustc, OpenEnumsPreview, Ownership, OwnershipFormalization, Roadmap, Rust1100Preview, Rust196StabilizedFeaturesCurrentPatch1961, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust1971StablePatch, Rust198Preview, Rust199Preview, RustBeltAndVerificationToolchain, RustCompilerInternalsAndDriverArchitecture, RustVersionTracking, RustVsPython, Rustdoc196197Changes, RustdocInternals, SafeAndEffectiveUnsafeRust, SafetyTagsPreview, TestingBasics, TestingEcosystem, TheRustcQuerySystemAndIncrementalCompilation, TheTraitSolverInRustc, ToolchainAndCargo, Traits, TypeInference, TypeSystemBasics, WebAssemblyEcosystem
+- expected_entities: mc/dc_coverage_preview
 
-1. **Hybrid 检索显著优于纯结构/纯向量**：BM25 补偿了 dense embedding 对罕见术语（如错误码 `E0502`、crate 名 `Verus`、RISC-V target feature）的匹配不足。
-2. **source_recall@5 接近饱和**：0.970（微调后全量）说明 top-5 几乎总能命中期望的 `concept/` 权威页。
-3. **concept_recall@5 超过目标**：0.788（微调后全量）较 P9 基线 0.167 提升 **372%**，但边际增益已收窄，继续提升需更大模型或领域内重排。
-4. **Reranker 当前收益有限**：ms-marco cross-encoder 面向 passage ranking，对 KG 实体短文本的区分度有限；建议后续训练领域内 cross-encoder。
-5. **Embedding 微调带来一致但小幅提升**：在 MiniLM 架构上微调 2 epochs 后，concept_recall@5 从 0.781 提升至 0.788，source_recall@5 从 0.963 提升至 0.970。提升受限主因是基础模型容量有限及训练对规模较小；若需突破，应使用更大模型或更多 epochs。
-6. **Golden query 质量影响评估**：将 `expected_concepts` 从 "short_id + label" 修正为仅 "label key" 后，指标更真实且大幅提升（从 0.40 升至 0.765）。
+### RustBelt ownership logic and verification
 
----
+- n_retrieved: 38
+- concept_mrr: 0.0
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.0
+- concept_ndcg@3: 0.0
+- concept_ndcg@5: 0.0
+- concept_precision: 0.0
+- concept_precision@1: 0.0
+- concept_precision@10: 0.0
+- concept_precision@3: 0.0
+- concept_precision@5: 0.0
+- concept_recall: 0.0
+- concept_recall@1: 0.0
+- concept_recall@10: 0.0
+- concept_recall@3: 0.0
+- concept_recall@5: 0.0
+- source_mrr: 0.0
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.0
+- source_ndcg@3: 0.0
+- source_ndcg@5: 0.0
+- source_precision@1: 0.0
+- source_precision@10: 0.0
+- source_precision@3: 0.0
+- source_precision@5: 0.0
+- source_recall: 0.0
+- source_recall@1: 0.0
+- source_recall@10: 0.0
+- source_recall@3: 0.0
+- source_recall@5: 0.0
+- retrieved_entities: AeneasSymbolicSemantics, AeneasVerificationPipelineSymbolicBorrowCalculusAsAComputationalModel, AtomicsAndMemoryOrdering, Borrowing, CategoryTheoryAndRustStructuralSemanticsAsAComputationalModel, ConcurrencyModels, DescriptionLogicAndOWL, FormalMethodsIndustrialization, FormalMethodsLayerOverview, FormalVerificationTools, Generics, KnowledgeGraphConstruction, KnowledgeGraphOntologyV20, Lifetimes, LinearAndAffineLogic, MemoryManagement, MemoryModel, ModalLogicAndRustEffects, NetworkProgramming, OntologyEngineeringMethodologies, Ownership, OwnershipFormalization, RustBeltAndVerificationToolchain, RustBeltOwnershipLogicMemorySafetyProofAsAComputationalModel, SafeAndEffectiveUnsafeRust, SemanticEngineeringAndOntology, SemanticInteroperability, SemanticSpace, SeparationLogic, SeparationLogicForRustAnIrisAndRustBeltPerspective, StreamProcessingSemantics, SubtypeAndVariance, TypeErasure, TypeSystemBasics, TypeTheory, TypeTheoryAndRustTheTypeSystemAsAComputationalModel, VerificationAndContractsEcosystemOverview, VerificationToolchain
+- expected_entities: ownership_logic, rustbel, verification
 
-## 6. 剩余工作
+### what is Custom Bare-Metal Async Executor
 
-- [x] 完成 embedding 微调并评估其对 `concept_recall@5` 的进一步提升。
-- [x] 在全量 2150 条 golden queries 上确认 hybrid 指标稳定性。
-- [ ] 探索不同 `bm25_weight`（0.2/0.3/0.5）的最优值。
-- [ ] 训练/微调领域内 cross-encoder reranker，替代通用 ms-marco 模型。
-- [ ] 将 RAG pipeline 评估接入 CI（作为观察门，不阻断）。
+- n_retrieved: 41
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncAdvanced, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncPatterns, AsyncProgramming, AtomicsAndMemoryOrdering, Borrowing, CertifiedToolchainsAndCertifiedPackageInventory, ConcurrencyAndAsyncQuiz, ConcurrencyModels, CustomBareMetalAsyncExecutor, DistributedSystems, EmbassyAsyncFrameworkDeepDive, EmbeddedDebuggingAndLogging, EmbeddedFormalMemoryModel, EmbeddedMemoryAllocators, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, FutureAndExecutorMechanisms, GenBlocksPreview, Generics, InterruptAndExceptionModel, Lifetimes, MemoryManagement, No_stdAndBareMetalIdioms, No_stdSynchronizationPrimitives, Ownership, OwnershipFormalization, PACAndHALImplementation, PerformanceOptimization, PinAndUnpin, RustFFI, RustVsAdaSPARK, SafeAndEffectiveUnsafeRust, SafetyCriticalBareMetalOperatingSystemsInRust, SubtypeAndVariance, TypeSystemBasics, UnsafeInAsyncContexts, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: custom_bare-metal_async_executor
+
+### when should I use API Design Patterns in rust
+
+- n_retrieved: 58
+- concept_mrr: 0.25
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.431
+- concept_ndcg@3: 0.0
+- concept_ndcg@5: 0.431
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.0
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 0.0
+- concept_recall@5: 1.0
+- source_mrr: 0.25
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.431
+- source_ndcg@3: 0.0
+- source_ndcg@5: 0.431
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.0
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 0.0
+- source_recall@5: 1.0
+- retrieved_entities: APIDesignAndSemVerIdiomsInRust, APIDesignPatterns, APIGatewayAndServiceMeshPatternsInRust, AlgorithmEngineeringPractice, ApplicationDomains, ArchitecturePatterns, AsyncFFIBoundary, AsyncPatterns, AsyncProgramming, Borrowing, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoSemVerChecksPreview, ClosureTypes, CloudNative, ConcurrencyModels, ConcurrencyPatterns, DesignPatternsOverview, DistributedSystems, EngineeringPracticeAndProductionGradePatterns, ErrorHandlingBasics, ErrorHandlingIntermediate, EventDrivenArchitecture, EventSourcingEnginePatternsInRust, Evolution, FFIPatternsInRust, FormalMethodsIndustrialization, Generics, IdiomsSpectrum, IteratorIdiomsInRust, Lifetimes, MemoryManagement, MicroservicePatterns, Ownership, ParadigmMatrix, PatternCompositionAlgebra, PatternImplementationComparison, PatternSelectionBestPractices, PerformanceOptimization, PinAndUnpin, Roadmap, RustAPIGuidelinesCanonicalGuide, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustVersionTracking, RustVsC, RustVsGo, SafeAndEffectiveUnsafeRust, StateMachineSemanticsAndWorkflowModels, SystemDesignPrinciples, ToolchainAndCargo, Traits, TypeSystemBasics, TypeTheory, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, WebAssemblyEcosystem, WorkflowTheoryFormalization
+- expected_entities: api_design_patterns
+
+### explain Type Aliases in rust
+
+- n_retrieved: 55
+- concept_mrr: 0.167
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.356
+- concept_ndcg@3: 0.0
+- concept_ndcg@5: 0.0
+- concept_precision: 0.0
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.0
+- concept_precision@5: 0.0
+- concept_recall: 0.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 0.0
+- concept_recall@5: 0.0
+- source_mrr: 0.167
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.356
+- source_ndcg@3: 0.0
+- source_ndcg@5: 0.0
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.0
+- source_precision@5: 0.0
+- source_recall: 0.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 0.0
+- source_recall@5: 0.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationDomains, AsyncFFIBoundary, AsyncProcessManagementInRust, AsyncProgramming, Borrowing, CoercionAndCasting, Collections, CompilerInfrastructure, ConcurrencyModels, CrossPlatformProcessManagementInRust, DesignPatternsOverview, ErrorHandlingIntermediate, FFIPatternsInRust, Generics, IdiomsSpectrum, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, LLVMBackendAndCodeGenerationInRustc, Lifetimes, MacrosAdvanced, MemoryManagement, ModernProcessManagementLibrariesInRust, NLLAndPolonius, NameResolutionAndHIRInRustc, NewtypeAndWrapperTypes, Ownership, OwnershipFormalization, PerformanceOptimization, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, Roadmap, RustBeltAndVerificationToolchain, RustFFI, RustcDriverRustc_interfaceAndStableMIR, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SmartPointers, SubtypeAndVariance, TheRustcQuerySystemAndIncrementalCompilation, TheTraitSolverInRustc, Traits, TypeAliasImplTraitTAITPreview, TypeAliases, TypeCheckingAndInferenceInRustc, TypeConversions, TypeErasure, TypeInference, TypeSystemBasics, TypeTheory, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, ZeroCostAbstractions
+- expected_entities: ype_aliases
+
+### what is Rust 1.97.0 Stabilized Features
+
+- n_retrieved: 29
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, Borrowing, CargoGettingStarted, ControlFlow, Generics, Lifetimes, MemoryManagement, NetworkProtocols, NetworkingBasics, Ownership, Rust190StabilizedFeatures, Rust191StabilizedFeatures, Rust192StabilizedFeatures, Rust193StabilizedFeatures, Rust196StabilizedFeaturesCurrentPatch1961, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust1971StablePatch, Rust1980StabilizedFeatures, Rust198Preview, Rust199Preview, RustFFI, RustVersionTracking, SafeAndEffectiveUnsafeRust, ToolchainAndCargo, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, WebFrameworks
+- expected_entities: rust_1.97.0_stabilized_features
+
+### Rust 1.98.0 Stabilized Features overview
+
+- n_retrieved: 30
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, Borrowing, CargoGettingStarted, ControlFlow, Generics, Lifetimes, MemoryManagement, NetworkProtocols, NetworkingBasics, Ownership, Rust190StabilizedFeatures, Rust191StabilizedFeatures, Rust192StabilizedFeatures, Rust193StabilizedFeatures, Rust1950StabilizedFeatures, Rust196StabilizedFeaturesCurrentPatch1961, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust1971StablePatch, Rust1980StabilizedFeatures, Rust198Preview, Rust199Preview, RustFFI, RustVersionTracking, SafeAndEffectiveUnsafeRust, ToolchainAndCargo, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, WebFrameworks
+- expected_entities: rust_1.98.0_stabilized_features
+
+### rust Standard Library Unsafe Internals tutorial
+
+- n_retrieved: 24
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, CompilerInfrastructure, ConcurrencyModels, CustomAllocators, ErrorHandlingIntermediate, Evolution, FormalMethodsIndustrialization, MacrosAdvanced, MemoryManagement, Ownership, PerformanceOptimization, Roadmap, RustCompilerInternalsAndDriverArchitecture, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, SafeAndEffectiveUnsafeRust, StandardLibraryUnsafeInternals, ToolchainAndCargo, TypeSystemBasics, UnsafeCollectionsInternals, UnsafeRustPatterns, UnsafeRustQuiz, UnsafeRustTopicIndex
+- expected_entities: standard_library_unsafe_internals
+
+### Analyze when to apply CQRS/event sourcing instead of CRUD.
+
+- n_retrieved: 47
+- concept_mrr: 0.0
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.0
+- concept_ndcg@3: 0.0
+- concept_ndcg@5: 0.0
+- concept_precision: 0.0
+- concept_precision@1: 0.0
+- concept_precision@10: 0.0
+- concept_precision@3: 0.0
+- concept_precision@5: 0.0
+- concept_recall: 0.0
+- concept_recall@1: 0.0
+- concept_recall@10: 0.0
+- concept_recall@3: 0.0
+- concept_recall@5: 0.0
+- source_mrr: 0.0
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.0
+- source_ndcg@3: 0.0
+- source_ndcg@5: 0.0
+- source_precision@1: 0.0
+- source_precision@10: 0.0
+- source_precision@3: 0.0
+- source_precision@5: 0.0
+- source_recall: 0.0
+- source_recall@1: 0.0
+- source_recall@10: 0.0
+- source_recall@3: 0.0
+- source_recall@5: 0.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AsyncProgramming, Borrowing, CAbiObjectModel, CCToRustEngineeringComparisonRoadmap, CQRSAndEventSourcing, CRDTTypeZooStateBasedOpBasedAndTheMergeLattice, CausalOrderingAndVectorClocks, ConcurrencyModels, ConcurrencySemanticsFormalModelsOfConcurrentComputation, DesignPatternsOverview, DistributedConsensus, DistributedSystems, ErrorHandlingIntermediate, EvaluationStrategies, EventDrivenArchitecture, EventSourcingEnginePatternsInRust, ExecutionModelIsomorphism, FieldProjectionsPreview, FiveExecutionModelsDefinitionMatrix, HoareLogic, InPlaceAndPinnedInitializationPatterns, LambdaCalculus, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, LoggingObservability, MemoryManagement, OperationalSemanticsOfInPlaceInitialization, Ownership, ParallelDistributedPatternSpectrum, PatternCompositionAlgebra, PatternSemanticSpaceIndex, ProcessCalculiForRustCSPCCSAndThePiCalculus, QuizCCToRustFoundations, Readme_06ecosystem, Roadmap, RustFFI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, StateMachineSemanticsAndWorkflowModels, ToolchainAndCargo, TypeSystemBasics, VariableModel, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, WorkflowTheoryFormalization
+- expected_entities: concept/05_comparative/05_idioms_patterns_architecture/04_architecture/02_cqrs_event_sourcing.md, concept/06_ecosystem/03_design_patterns/05_microservice_patterns.md, concept/06_ecosystem/03_design_patterns/37_event_sourcing_engine_patterns.md
+
+### how does Structured Concurrency work
+
+- n_retrieved: 44
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AsyncCancellationSafety, AsyncDropPreview, AsyncIOUringAndCompletionBasedAsyncIOPreview, AsyncProgramming, AtomicsAndMemoryOrdering, Borrowing, ClosureTypes, ComponentBasedSystemSemantics, ConcurrencyAndAsyncQuiz, ConcurrencyModels, ConcurrencyModelsAsComputationalModelsCSPActorsTLAAndRust, ConcurrencyPatterns, CrossCompilation, CrossPlatformConcurrency, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystems, DistributedSystemsSemantics, ErrorHandlingIntermediate, Evolution, ExecutorFairnessAndScheduling, FutureAndExecutorMechanisms, GlommioAndThreadPerCoreAsyncRuntimes, HighPerformanceNetworkServiceArchitecture, Lifetimes, LinearizabilityAndTheConsistencySpectrum, MemoryManagement, NetworkProgramming, OperatingSystems, Ownership, OwnershipFormalization, PerformanceOptimization, PinAndUnpin, ProcessCalculiForRustCSPCCSAndThePiCalculus, RustBeltAndVerificationToolchain, RustFFI, SafeAndEffectiveUnsafeRust, StreamAlgebraAndBackpressure, StructuredConcurrency, TokioRuntimeInternals, TypeSystemBasics, WakerContractDeepDive, WebAssemblyEcosystem
+- expected_entities: structured_concurrency
+
+### version tracking for rust 1.97 stable features
+
+- n_retrieved: 43
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 0.832
+- concept_ndcg@3: 0.613
+- concept_ndcg@5: 0.613
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.2
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 0.5
+- concept_recall@1: 0.5
+- concept_recall@10: 1.0
+- concept_recall@3: 0.5
+- concept_recall@5: 0.5
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 0.818
+- source_ndcg@3: 0.613
+- source_ndcg@5: 0.613
+- source_precision@1: 1.0
+- source_precision@10: 0.2
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 0.5
+- source_recall@1: 0.5
+- source_recall@10: 1.0
+- source_recall@3: 0.5
+- source_recall@5: 0.5
+- retrieved_entities: AsyncProgramming, AuthoritySourceMap, Borrowing, ControlFlow, FormalAlgorithmTheory, Generics, HoareLogic, HoareLogicForRustAlgorithms, IteratorCorrectnessSemantics, KGSHACLEngineValidation, KnowledgeGraphDesignW3CSHACLOWLAlignmentAndOntologyEngineeringMethods, KnowledgeGraphOntologyV20, LLMAndRAGForRustKnowledgeBasesOntologyEngineeringAndRetrievalAugmentedGeneration, Lifetimes, MemoryManagement, MemoryModel, Methodology, ObservationalEquivalenceOfAlgorithmImplementations, Ownership, OwnershipFormalization, PatternCompositionAlgebra, RAGEvaluationForTheRustKnowledgeGraph, RefinementCalculusForRustAlgorithms, Rust191StabilizedFeatures, Rust192StabilizedFeatures, Rust196StabilizedFeaturesCurrentPatch1961, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust1971StablePatch, Rust198Preview, RustBeltAndVerificationToolchain, RustVersionTracking, RustVersionTracking_00versiontra, SafeAndEffectiveUnsafeRust, SemanticInvariantsOfUnsafeAlgorithms, SemanticSpace, SeparationLogic, SubtypeAndVariance, TerminologyGlossary, ToolchainAndCargo, TopLevelOntologyAlignmentForRustKnowledgeGraph, TypeSystemBasics, VerificationToolchain
+- expected_entities: rust_1.97.0_stabilized_features, rust_version_tracking
+
+### rust Five Execution Models Definition Matrix tutorial
+
+- n_retrieved: 52
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, ApplicationDomains, AsyncProgramming, BloomTaxonomy, Borrowing, CRDTTypeZooStateBasedOpBasedAndTheMergeLattice, CausalOrderingAndVectorClocks, CognitiveDimensionMatrix, ComprehensiveRustMapping, ConcurrencyModels, DataEngineering, DistributedConsensus, Evolution, ExecutionModelIsomorphism, FiveExecutionModelsDefinitionMatrix, Generics, HoareLogic, LambdaCalculus, LearningGuide, Lifetimes, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MacrosAdvanced, MemoryManagement, OperationalSemantics, Ownership, OwnershipFormalization, ParadigmMatrix, ParallelDistributedPatternSpectrum, PerformanceOptimization, ProcessCalculiForRustCSPCCSAndThePiCalculus, Rust196StabilizedFeaturesCurrentPatch1961, Rust1970FeatureDomainReverseLookupMatrix, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust1971StablePatch, Rust197CompatibilityMigrationDecisionTrees, Rust1980FeatureDomainReverseLookupMatrix, Rust1980StabilizedFeatures, Rust198CompatibilityMigrationDecisionTrees, Rust198Preview, Rust199Preview, RustBeltAndVerificationToolchain, RustVersionTracking, RustVsC, RustVsGo, RustVsJava, ToolchainAndCargo, Traits, TypeSystemBasics, TypeTheory, ZeroCostAbstractions
+- expected_entities: five_execution_models_definition_matrix
+
+### explain Database and Storage Ecosystem Quiz in rust
+
+- n_retrieved: 37
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationDomains, AsyncProcessManagementInRust, AsyncProgramming, Borrowing, ConcurrencyModels, DatabaseAccessEcosystem, DatabaseAndStorageEcosystemQuiz, DatabaseSystemsInRust, DistributedSystems, ErrorHandlingIntermediate, Evolution, FormalMethodsIndustrialization, InterProcessCommunicationMechanismsInRust, Lifetimes, MemoryManagement, ModernProcessManagementLibrariesInRust, Ownership, PerformanceOptimization, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, Readme_06ecosystem, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustForDataScienceAndScientificComputing, RustInAI, RustVersionTracking, StreamProcessingEcosystem, StreamProcessingSemantics, TypeSystemBasics, VerificationToolchain, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: database_and_storage_ecosystem_quiz
+
+### rust Computational Models and Computability tutorial
+
+- n_retrieved: 89
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIOntologyAndRustSemantics, AUTOSARAndRust, ActorModelSystemSemantics, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AeneasSymbolicSemantics, AeneasVerificationPipelineSymbolicBorrowCalculusAsAComputationalModel, AerospaceCertificationFormalMethods, AsyncProgramming, AtomicsAndMemoryOrdering, AxiomaticSemantics, CategoryTheory, CertifiedToolchainsAndCertifiedPackageInventory, ClosureTypes, ComponentBasedSystemSemantics, ComputationalModelsAndComputability, ComputationalSemanticModels, ConcurrencyModelComparison, ConcurrencyModels, ConcurrencyPatterns, ControlFlow, CrossPlatformConcurrency, DenotationalSemantics, DescriptionLogicAndOWL, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystems, DistributedSystemsSemantics, EmbeddedSystems, EquivalenceOfComputationalModels, FiveExecutionModelsDefinitionMatrix, FormalMethodsIndustrialization, FormalMethodsLayerOverview, FormalVerificationTools, Generics, HoareLogic, KGOWLSHACLSemantics, KnowledgeGraphConstruction, KnowledgeGraphOntologyV20, LLMSystemArchitecture, LambdaCalculus, Lifetimes, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MemoryModel, MicroservicePatterns, ObservationalEquivalenceOfAlgorithmImplementations, OntologyEngineeringMethodologies, OperationalSemantics, Ownership, OwnershipFormalization, Patterns, PerformanceOptimization, ProcessCalculiForRustCSPCCSAndThePiCalculus, ReactiveProgramming, ReactiveSystemsSemantics, RefinementCalculusForRustAlgorithms, Roadmap, RustBeltAndVerificationToolchain, RustBeltOwnershipLogicMemorySafetyProofAsAComputationalModel, RustVsAdaSPARK, RustVsC, SafeAndEffectiveUnsafeRust, SafetyCriticalRustTopicIndex, SafetyCriticalSystemsEngineering, SemanticEngineeringAndOntology, SemanticInteroperability, SemanticModelAtlas, SemanticModelsAndCrossLanguageComparisonsQuiz, SemanticSpace, SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts, SendSyncBoundaryJudgmentTraitObjectsClosuresAndAsyncStateMachines, SeparationLogic, SeparationLogicForRustAnIrisAndRustBeltPerspective, StateMachineSemanticsAndWorkflowModels, StatementsAndExpressions, StreamAlgebraAndBackpressure, StreamProcessingSemantics, SystemComposability, SystemsEngineeringStandardsAndRustMapping, Traits, TreeBorrowsDeepDive, TypeErasure, TypeLevelProgramming, TypeSystemBasics, TypeTheory, TypeTheoryAndRustTheTypeSystemAsAComputationalModel, VerificationToolchain, WorkflowTheoryFormalization, ZeroCostAbstractions
+- expected_entities: computational_models_and_computability
+
+### rust Macro FAQ tutorial
+
+- n_retrieved: 43
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, Assert_matchesMacro, AsyncProgramming, BloomTaxonomy, BootstrappingTheRustCompiler, CargoSemVerChecksPreview, CoercionAndCasting, CompilerDiagnosticsAndUITests, CompilerInfrastructure, ComprehensiveRustMapping, ConcurrencyModels, CoreCratesIndex, DeclarativeMacros, DesignPatternsOverview, DslAndEmbedding, ErrorHandlingBasics, ErrorHandlingDeepDive, ErrorHandlingIntermediate, Generics, LearningGuide, LoggingObservability, MacroDebuggingAndDiagnostics, MacroFAQ, MacroHygiene, MacroPatterns, MacrosAdvanced, MacrosBasics, Metaprogramming, ModulesAndPaths, NewtypeAndWrapperTypes, Ownership, ProceduralMacros, ProductionGradeMacroDevelopment, Roadmap, RustErrorHandlingIdioms, RustVersionTracking, SafetyBoundaries, SerdePatterns, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, WebAssemblyEcosystem
+- expected_entities: macro_faq
+
+### explain Comparative Contracts: Rust, C++26, Ada/SPARK, and Deductive Verifiers in rust
+
+- n_retrieved: 42
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, AdvancedTraits, AerospaceCertificationFormalMethods, AsyncProcessManagementInRust, Borrowing, CAbiObjectModel, CVsRustConstructionOperatorsRTTIAndFriends, CargoVetAndSupplyChainAuditing, CertifiedToolchainsAndCertifiedPackageInventory, ComparativeContractsRustC26AdaSPARKAndDeductiveVerifiers, ConcurrencyModels, ErrorHandlingDeepDive, EvaluationStrategies, FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems, FormalMethodsIndustrialization, FormalMethodsMergedRedirect, Generics, InterProcessCommunicationMechanismsInRust, MemoryManagement, ModernProcessManagementLibrariesInRust, Ownership, OwnershipFormalization, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, RTTIAndDynamicTypeIdentification, Readme_05comparativ, RustBeltAndVerificationToolchain, RustVsAdaSPARK, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalRustTopicIndex, SubtypeAndVariance, ToolchainAndCargo, Traits, TypeErasure, TypeSystemBasics, VariableModel, VerificationToolchain
+- expected_entities: comparative_contracts:_rust,_c++26,_ada/spark,_and_deductive_verifiers
+
+### what is Macros (Quiz)
+
+- n_retrieved: 27
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, Borrowing, CoreCratesIndex, DeclarativeMacros, DesignPatternsOverview, DslAndEmbedding, ErrorHandlingBasics, ErrorHandlingIntermediate, ErrorHandlingQuiz, Generics, MacroPatterns, MacrosAdvanced, MacrosBasics, MacrosQuiz, Metaprogramming, ModulesAndPaths, ModulesAndTestingQuiz, Ownership, OwnershipBorrowingAndLifetimesQuiz, ProceduralMacros, Roadmap, SerdePatterns, ToolchainAndCargo, Traits, TypeSystemBasics, TypeSystemQuiz, WebAssemblyEcosystem
+- expected_entities: macros_(quiz)
+
+### Cognitive Dimension Matrix overview
+
+- n_retrieved: 40
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AerospaceCertificationFormalMethods, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncProgramming, BloomTaxonomy, CategoryTheory, CertifiedToolchainsAndCertifiedPackageInventory, CognitiveDimensionMatrix, ConcurrencyModels, ConstGenericsValuesAsTypeParameters, CratesAndSourceFiles, CrossReferenceMatrix, DependentTypesAndRefinementTypes, EffectSystem, EffectsAndPurity, Evolution, FormalMethodsIndustrialization, FormalMethodsLayerOverview, FormalVerificationEcosystemTower, Generics, KnowledgeMindmap, MemoryManagement, OperationalSemantics, Ownership, OwnershipFormalization, ParadigmMatrix, ParadigmTransitionMatrix, ProcessCalculiForRustCSPCCSAndThePiCalculus, RustBeltAndVerificationToolchain, RustVsAdaSPARK, RustVsC, RustVsGo, RustVsHaskell, RustVsOCamlOwnershipAndAlgebraicEffectsInSystemsAndFunctionalProgramming, SafeAndEffectiveUnsafeRust, SafetyBoundaries, Traits, TypeSystemBasics, TypeTheory, UnifiedLanguageSemanticModelExpressivenessMatrix
+- expected_entities: cognitive_dimension_matrix
+
+### what is Async Boundary Panorama
+
+- n_retrieved: 51
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncBoundaryPanorama, AsyncCancellationSafety, AsyncClosures, AsyncDropPreview, AsyncFFIBoundary, AsyncIOUringAndCompletionBasedAsyncIOPreview, AsyncProgramming, AsyncTraitObjectSafety, AtomicsAndMemoryOrdering, BorrowSanitizerRuntimeTreeBorrowsViolationDetection, Borrowing, BoundaryExtensionTree, ConcurrencyModels, ExecutorFairnessAndScheduling, FutureAndExecutorMechanisms, GenBlocksPreview, GenericAssociatedTypesGATs, GenericAssociatedTypesGATsAtTheAsyncBoundary, Generics, GlommioAndThreadPerCoreAsyncRuntimes, HighPerformanceNetworkServiceArchitecture, Iterators, KaniRustBoundedModelChecker, Lifetimes, LifetimesAdvanced, LockingPrimitives, MemoryManagement, MemoryModel, MiriRustUndefinedBehaviorDetector, ModernVerificationTools, NLLAndPolonius, NetworkProgramming, Ownership, OwnershipFormalization, PerformanceOptimization, PinAndUnpin, RustBeltAndVerificationToolchain, RustFFI, RustVersionTracking, SafeAndEffectiveUnsafeRust, StreamAlgebraAndBackpressure, TokioRuntimeInternals, Traits, TreeBorrowsDeepDive, TypeInference, TypeSystemBasics, UnsafeBoundaryPanorama, UnsafeInAsyncContexts, WakerContractDeepDive, WebFrameworks
+- expected_entities: async_boundary_panorama
+
+### what is Logical Reasoning Atlas
+
+- n_retrieved: 49
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, AIOntologyAndRustSemantics, AISafetyAndAlignment, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncProgramming, AttributeRelationshipAtlas, AuthoritySourceMap, CategoryTheory, ConceptDefinitionAtlas, ConcurrencyModels, ConstGenericsValuesAsTypeParameters, DependentTypesAndRefinementTypes, EffectSystem, EffectsAndPurity, FiveExecutionModelsDefinitionMatrix, FormalMethodsIndustrialization, FormalVerificationEcosystemTower, Generics, InterLayerMappingAtlas, KnowledgeGraphOntologyV20, LLMSystemArchitecture, LambdaCalculus, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, LogicalReasoningAtlas, MLOpsAndLLMOps, MachineLearningEcosystem, Methodology, OperationalSemantics, Ownership, OwnershipFormalization, ParadigmMatrix, ProcessCalculiForRustCSPCCSAndThePiCalculus, ReasoningJudgmentTreeAtlas, RustBeltAndVerificationToolchain, RustInAI, RustVsAdaSPARK, RustVsHaskell, RustVsOCamlOwnershipAndAlgebraicEffectsInSystemsAndFunctionalProgramming, SafeAndEffectiveUnsafeRust, SemanticModelAtlas, SemanticModelReasoningMethodology, SemanticSpace, SeparationLogic, TerminologyGlossary, TypeSystemBasics, TypeTheory, UnifiedLanguageSemanticModelExpressivenessMatrix
+- expected_entities: logical_reasoning_atlas
+
+### explain FFI Advanced Topics in rust
+
+- n_retrieved: 44
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedDataStructuresImplementationInRust, AdvancedNetworkProtocolsInRust, AdvancedProcessManagementInRust, AlgorithmEngineeringPractice, ApplicationDomains, AsyncFFIBoundary, AsyncProcessManagementInRust, AsyncProgramming, Borrowing, ClosureTypes, ConcurrencyModels, ConcurrencyPatterns, CrossCompilation, DistributedSystems, FFIAdvancedTopics, FFIDeepDiveCABICallingConventionsAndLinking, FFIPatternsInRust, FormalMethodsBeforeEnteringL4, Generics, HighPerformanceNetworkServiceArchitecture, InterProcessCommunicationMechanismsInRust, Lifetimes, MemoryManagement, ModernProcessManagementLibrariesInRust, NetworkProtocols, NetworkSecurityInRust, Ownership, ParallelAndConcurrentAlgorithmsInRust, PerformanceOptimization, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, RustFFI, RustVsC, SafeAndEffectiveUnsafeRust, StreamProcessingEcosystem, ToolchainAndCargo, Traits, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: ffi_advanced_topics
+
+### how does Scenario Decision Tree Atlas work
+
+- n_retrieved: 41
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncPatterns, AsyncProgramming, BoundaryExtensionTree, CategoryTheory, ConceptDefinitionAtlas, ConceptDefinitionDecisionForest, ConcurrencyModels, ConcurrencyPatterns, ConstGenericsValuesAsTypeParameters, DependentTypesAndRefinementTypes, DesignPatternsOverview, DistributedSystems, EffectSystem, EffectsAndPurity, FaultTreeAnalysisCollection, FiveExecutionModelsDefinitionMatrix, FormalVerificationEcosystemTower, Generics, InterLayerMappingAtlas, LambdaCalculus, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, Ownership, ParadigmMatrix, PatternCompositionAlgebra, PatternSemanticSpaceIndex, ProcessCalculiForRustCSPCCSAndThePiCalculus, ReasoningJudgmentTreeAtlas, Roadmap, RustVsAdaSPARK, RustVsHaskell, RustVsOCamlOwnershipAndAlgebraicEffectsInSystemsAndFunctionalProgramming, ScenarioDecisionTreeAtlas, SemanticModelAtlas, SystemDesignPrinciples, Traits, TypeSystemBasics, TypeTheory, UnifiedLanguageSemanticModelExpressivenessMatrix
+- expected_entities: scenario_decision_tree_atlas
+
+### how does Competency Graph work
+
+- n_retrieved: 25
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AuthoritySourceMap, CompetencyGraph, DescriptionLogicAndOWL, FormalMethodsLayerOverview, KGSHACLEngineValidation, KnowledgeFrameworkMetaModel, KnowledgeGraphConstruction, KnowledgeGraphDesignW3CSHACLOWLAlignmentAndOntologyEngineeringMethods, KnowledgeGraphOntologyV20, LLMAndRAGForRustKnowledgeBasesOntologyEngineeringAndRetrievalAugmentedGeneration, MemoryModel, Methodology, NetworkProgramming, OntologyEngineeringMethodologies, Ownership, ProblemGraph, RAGEvaluationForTheRustKnowledgeGraph, SemanticEngineeringAndOntology, SemanticInteroperability, SemanticSpace, StreamProcessingEcosystem, StreamProcessingSemantics, TerminologyGlossary, TypeErasure, TypeSystemBasics
+- expected_entities: competency_graph
+
+### explain Rust in Space Preview in rust
+
+- n_retrieved: 48
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, AdvancedProcessManagementInRust, ApplicationDomains, AsyncFFIBoundary, AsyncProcessManagementInRust, AsyncProgramming, BorrowSanitizerBSanDynamicAliasingRuleVerificationForRust, Borrowing, CoercionAndCasting, Collections, ConcurrencyModels, DesignPatternsOverview, ErrorHandlingIntermediate, Evolution, FFIPatternsInRust, FormalMethodsIndustrialization, Generics, IdiomsSpectrum, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, Lifetimes, MCDCCoveragePreview, MachineLearningEcosystem, MemoryManagement, ModernProcessManagementLibrariesInRust, NewtypeAndWrapperTypes, OpenEnumsPreview, Ownership, OwnershipFormalization, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, Roadmap, RustBeltAndVerificationToolchain, RustFFI, RustInSpacePreview, RustVersionTracking, SafeAndEffectiveUnsafeRust, SafetyTagsPreview, SmartPointers, StdAutodiffPreview, Traits, TypeConversions, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts
+- expected_entities: rust_in_space_preview
+
+### Testing Ecosystem overview
+
+- n_retrieved: 39
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, BlockchainDevelopmentInRust, Borrowing, CargoAuthenticationAndBuildCache, CargoProfilesAndLints, CompilerInfrastructure, ConcurrencyModels, DesignPatternsOverview, DevOpsAndCICD, DevelopmentToolsEcosystem, ErrorHandlingDeepDive, ErrorHandlingIntermediate, Evolution, FormalMethodsIndustrialization, Generics, Lifetimes, MacrosAdvanced, MemoryManagement, Ownership, OwnershipFormalization, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SecurityAndTestingEcosystemQuiz, SecurityPractices, TestingBasics, TestingEcosystem, TestingStrategies, TestingTheRustCompiler, ToolchainAndCargo, Traits, TypeSystemBasics, VerificationAndContractsEcosystemOverview
+- expected_entities: esting_ecosystem
+
+### Construction and Initialization overview
+
+- n_retrieved: 28
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedTraits, Borrowing, CAbiObjectModel, CVsRustConstructionOperatorsRTTIAndFriends, ConstructionAndInitialization, ErrorHandlingDeepDive, EvaluationStrategies, ExampleAndCounterexampleAtlas, FieldProjectionsPreview, GapAndActionPlan, Generics, InPlaceAndPinnedInitializationPatterns, Lifetimes, MemoryManagement, OperationalSemanticsOfInPlaceInitialization, Ownership, OwnershipFormalization, PinAndUnpin, RTTIAndDynamicTypeIdentification, Readme, RustVsC, SafeAndEffectiveUnsafeRust, SubtypeAndVariance, Traits, TypeErasure, TypeSystemBasics, VariableModel, VerificationAndContractsEcosystemOverview
+- expected_entities: construction_and_initialization
+
+### how does Embedded Formal Memory Model work
+
+- n_retrieved: 70
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, ApplicationDomains, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, AtomicsAndMemoryOrdering, BareMetalBootAndLinkerScripts, BareMetalRust, Borrowing, CRDTTypeZooStateBasedOpBasedAndTheMergeLattice, CargoBuildStd, CargoConfiguration, CategoryTheory, CausalOrderingAndVectorClocks, ClosureTypes, ConcurrencyModels, ConcurrencyPatterns, CriticalSectionsAndSynchronizationOnBareMetal, CrossCompilation, CustomBareMetalAsyncExecutor, DependentTypesAndRefinementTypes, DistributedConsensus, DistributedSystems, EffectSystem, EffectsAndPurity, EmbassyAsyncFrameworkDeepDive, EmbeddedDebuggingAndLogging, EmbeddedFormalMemoryModel, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedSystems, FiveExecutionModelsDefinitionMatrix, Generics, HoareLogic, InterruptAndExceptionModel, LambdaCalculus, Lifetimes, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, LinkerScriptsAndMemoryLayoutForEmbeddedRust, MemoryManagement, MemoryMappedPeripheralsAndTypestateProgramming, MemoryModel, No_stdAllocatorsAndPanicHandlers, No_stdAndBareMetalRust, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, Ownership, PACAndHALImplementation, Panic_handlerAndNo_stdRuntime, ParadigmMatrix, ParallelDistributedPatternSpectrum, ProcessCalculiForRustCSPCCSAndThePiCalculus, RISCVAndAVREmbeddedRustDevelopment, RTICRealTimeTaskSchedulingFrameworkDeepDive, RTOSAndSchedulingModelsInRust, RustVsAdaSPARK, RustVsHaskell, RustVsOCamlOwnershipAndAlgebraicEffectsInSystemsAndFunctionalProgramming, SafeAndEffectiveUnsafeRust, SafetyCriticalBareMetalOperatingSystemsInRust, SafetyCriticalSystemsEngineering, SoftwareTransactionalMemorySemanticsFromHerlihyMossToRustSNoSTMDesign, TheNo_stdAllocCrateEcosystem, ToolchainAndCargo, TypeSystemBasics, TypeTheory, UnifiedLanguageSemanticModelExpressivenessMatrix, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: embedded_formal_memory_model
+
+### rust Arbitrary Self Types Preview tutorial
+
+- n_retrieved: 29
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ArbitrarySelfTypesPreview, AsyncProgramming, CargoDependencyResolution, CargoGettingStarted, CargoManifestReference, CargoWorkflow, ConcurrencyModels, DeriveCoercePointeePreview, ErrorHandlingIntermediate, Evolution, Generics, LearningMvpPath, Lifetimes, OpenEnumsPreview, Ownership, Rust1100Preview, Rust196StabilizedFeaturesCurrentPatch1961, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust1971StablePatch, Rust198Preview, Rust199Preview, RustVersionTracking, SafeAndEffectiveUnsafeRust, SpecializationPreview, ToolchainAndCargo, Traits, TypeAliasImplTraitTAITPreview, TypeSystemBasics
+- expected_entities: arbitrary_self_types_preview
+
+### rust Modern Process Management Libraries in Rust tutorial
+
+- n_retrieved: 16
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationDomains, AsyncFFIBoundary, AsyncProcessManagementInRust, CrossPlatformProcessManagementInRust, InterProcessCommunicationMechanismsInRust, ModernProcessManagementLibrariesInRust, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, RustFFI, SafeAndEffectiveUnsafeRust, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts
+- expected_entities: modern_process_management_libraries_in_rus
+
+### rust Associated Type Defaults tutorial
+
+- n_retrieved: 35
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedTraits, AlgorithmEngineeringPractice, ApplicationDomains, AssociatedTypeDefaults, AsyncCancellationSafety, AsyncProgramming, BloomTaxonomy, Borrowing, Collections, ComprehensiveRustMapping, ConcurrencyModels, DesignPatternsOverview, ErrorHandlingIntermediate, GenericAssociatedTypesGATs, Generics, IdiomsSpectrum, IteratorIdiomsInRust, LearningGuide, Lifetimes, LifetimesAdvanced, MemoryManagement, Ownership, PerformanceOptimization, Roadmap, RustAPIGuidelinesCanonicalGuide, RustBeltAndVerificationToolchain, RustLanguageFeatureInventoryMethodology, RustMinimumViableLearningPath, SpecializationPreview, Traits, TypeConversions, TypeErasure, TypeInference, TypeSystemBasics, ZeroCostAbstractions
+- expected_entities: associated_type_defaults
+
+### Compare dyn Trait and impl Trait return types.
+
+- n_retrieved: 43
+- concept_mrr: 0.0
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.0
+- concept_ndcg@3: 0.0
+- concept_ndcg@5: 0.0
+- concept_precision: 0.0
+- concept_precision@1: 0.0
+- concept_precision@10: 0.0
+- concept_precision@3: 0.0
+- concept_precision@5: 0.0
+- concept_recall: 0.0
+- concept_recall@1: 0.0
+- concept_recall@10: 0.0
+- concept_recall@3: 0.0
+- concept_recall@5: 0.0
+- source_mrr: 0.0
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.0
+- source_ndcg@3: 0.0
+- source_ndcg@5: 0.0
+- source_precision@1: 0.0
+- source_precision@10: 0.0
+- source_precision@3: 0.0
+- source_precision@5: 0.0
+- source_recall: 0.0
+- source_recall@1: 0.0
+- source_recall@10: 0.0
+- source_recall@3: 0.0
+- source_recall@5: 0.0
+- retrieved_entities: ApplicationDomains, AsyncCancellationSafety, AsyncProgramming, ClosureTypes, ConcurrencyModels, ConcurrencyPatterns, ConstGenericsAndTraitObjects, ConstGenericsValuesAsTypeParameters, ConstTraitImplPreview, CowAndBorrowed, CrossPlatformConcurrency, DependentTypesAndRefinementTypes, DesignPatternsOverview, DispatchMechanisms, DistributedSystems, FormalVerificationEcosystemTower, GenBlocksPreview, GenericAssociatedTypesGATs, Generics, Lifetimes, LifetimesAdvanced, NewtypeAndWrapperTypes, OperatingSystems, Ownership, OwnershipFormalization, PerformanceOptimization, PinAndUnpin, ReturnPositionImplTraitInTraitsRPITITPreview, Roadmap, RustBeltAndVerificationToolchain, SafeAndEffectiveUnsafeRust, SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts, SendSyncBoundaryJudgmentTraitObjectsClosuresAndAsyncStateMachines, SmartPointers, SpecialTypesAndTraits, SpecializationPreview, StatementsAndExpressions, ToolchainAndCargo, Traits, TypeInference, TypeLevelProgramming, TypeSystemBasics, TypeTheory
+- expected_entities: concept/02_intermediate/00_traits/01_traits.md, concept/02_intermediate/00_traits/02_dispatch_mechanisms.md, concept/02_intermediate/00_traits/04_advanced_traits.md
+
+### How do I write a custom derive procedural macro?
+
+- n_retrieved: 36
+- concept_mrr: 0.0
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.0
+- concept_ndcg@3: 0.0
+- concept_ndcg@5: 0.0
+- concept_precision: 0.0
+- concept_precision@1: 0.0
+- concept_precision@10: 0.0
+- concept_precision@3: 0.0
+- concept_precision@5: 0.0
+- concept_recall: 0.0
+- concept_recall@1: 0.0
+- concept_recall@10: 0.0
+- concept_recall@3: 0.0
+- concept_recall@5: 0.0
+- source_mrr: 0.0
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.0
+- source_ndcg@3: 0.0
+- source_ndcg@5: 0.0
+- source_precision@1: 0.0
+- source_precision@10: 0.0
+- source_precision@3: 0.0
+- source_precision@5: 0.0
+- source_recall: 0.0
+- source_recall@1: 0.0
+- source_recall@10: 0.0
+- source_recall@3: 0.0
+- source_recall@5: 0.0
+- retrieved_entities: ApplicationDomains, Assert_matchesMacro, AsyncProgramming, BootstrappingTheRustCompiler, CargoSemVerChecksPreview, CompilerDiagnosticsAndUITests, CompilerInfrastructure, ConcurrencyModels, CoreCratesIndex, DeclarativeMacros, DeriveCoercePointeePreview, DesignPatternsOverview, DslAndEmbedding, ErrorHandlingIntermediate, Evolution, Generics, Lifetimes, MacroDebuggingAndDiagnostics, MacroPatterns, MacrosAdvanced, MacrosBasics, Metaprogramming, ModulesAndPaths, Ownership, ProceduralMacroCodeGenerationOptimization, ProceduralMacros, ProceduralMacros_03procmacros, ProductionGradeMacroDevelopment, Roadmap, RustVersionTracking, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SerdePatterns, Traits, TypeSystemBasics, WebAssemblyEcosystem
+- expected_entities: concept/02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md, concept/03_advanced/03_proc_macros/03_proc_macro_code_generation_optimization.md, concept/03_advanced/03_proc_macros/08_syn_quote_reference.md
+
+### how does Functions work
+
+- n_retrieved: 57
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, AxiomaticSemantics, BlockchainDevelopmentInRust, Borrowing, CargoAuthenticationAndBuildCache, CargoCommandsReference, CargoConfiguration, CargoGettingStarted, CargoManifestTargets, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoRegistryInternals, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CargoWorkflow, CategoryTheory, ClosureBasics, ClosureTypes, ComputabilityTheory, ConcurrencyModels, ConstItemsAndConstFunctions, ConstantEvaluation, ControlFlow, CrossCompilation, DenotationalSemantics, DevOpsAndCICD, EquivalenceOfComputationalModels, ErrorHandlingDeepDive, EvaluationStrategies, Functions, Generics, HowRustIsMadeAndNightlyRust, Iterators, LambdaCalculus, Lifetimes, MacrosAdvanced, MathematicalFunctionsOfComputation, MemoryManagement, ObservationalEquivalence, ObservationalEquivalenceOfAlgorithmImplementations, OperationalSemantics, Ownership, OwnershipFormalization, PerformanceOptimization, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustBeltAndVerificationToolchain, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SecurityPractices, SeparationLogic, ToolchainAndCargo, Traits, TreeBorrowsDeepDive, TypeSystemBasics, TypeTheory
+- expected_entities: functions
+
+### explain Expressiveness of Concurrent Models in rust
+
+- n_retrieved: 59
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AdvancedDataStructuresImplementationInRust, AlgorithmEngineeringPractice, AsyncProgramming, BareMetalBootAndLinkerScripts, Borrowing, CRDTTypeZooStateBasedOpBasedAndTheMergeLattice, CargoBuildStd, CoercionAndCasting, Collections, ComponentBasedSystemSemantics, ConcurrencyModels, ConcurrencySemanticsFormalModelsOfConcurrentComputation, CrossCompilation, DesignPatternsOverview, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystemsSemantics, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedSystems, ErrorHandlingIntermediate, ExecutionModelIsomorphism, ExpressivenessMultiview, ExpressivenessOfConcurrentModels, FiveExecutionModelsDefinitionMatrix, Generics, HoareLogic, IdiomsSpectrum, IteratorIdiomsInRust, LambdaCalculus, Lifetimes, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MemoryManagement, ModelsOfConcurrency, NewtypeAndWrapperTypes, No_stdAndBareMetalIdioms, No_stdAndBareMetalRust, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, ObservationalEquivalenceOfAlgorithmImplementations, Ownership, Panic_handlerAndNo_stdRuntime, ParallelAndConcurrentAlgorithmsInRust, ParallelDistributedPatternSpectrum, PerformanceOptimization, ProcessCalculiForRustCSPCCSAndThePiCalculus, RTOSAndSchedulingModelsInRust, ReactiveProgramming, ReactiveSystemsSemantics, RefinementCalculusForRustAlgorithms, Roadmap, SafeAndEffectiveUnsafeRust, SmartPointers, StreamAlgebraAndBackpressure, Traits, TypeConversions, TypeSystemBasics
+- expected_entities: expressiveness_of_concurrent_models
+
+### how does TRPL 3rd Ed Chapter Mapping work
+
+- n_retrieved: 17
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AuthoritySourceMap, BloomTaxonomy, ComprehensiveRustMapping, ConceptIndex, ExternalAuthorityTopicIndex, InterLayerMappingAtlas, InternationalAuthorityIndex, IntraLayerMappingAtlas, KnowledgeMindmap, LearningGuide, RustBeltPredicateMap, Sources, TRPL3rdEdChapterMapping, TRPL3rdEditionAlignmentAudit, Todos, TopicAuthorityAlignmentMap
+- expected_entities: rpl_3rd_ed_chapter_mapping
+
+### how does Event Sourcing Engine Patterns in Rust work
+
+- n_retrieved: 33
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncFFIBoundary, AsyncProgramming, Borrowing, CQRSAndEventSourcing, CoreCratesIndex, DistributedSystems, EventDrivenArchitecture, EventSourcingEnginePatternsInRust, Evolution, FFIPatternsInRust, FormalMethodsIndustrialization, Generics, Lifetimes, MacrosAdvanced, MemoryManagement, Ownership, ReactiveProgramming, Roadmap, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustVersionTracking, SafeAndEffectiveUnsafeRust, SerdePatterns, StateMachineSemanticsAndWorkflowModels, Traits, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, UnsafeRustPatterns, WebAssemblyEcosystem, WorkflowTheoryFormalization
+- expected_entities: event_sourcing_engine_patterns_in_rus
+
+### how does Machine Learning Ecosystem work
+
+- n_retrieved: 44
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, AISafetyAndAlignment, AlgorithmComplexityAnalysisInRust, AlgorithmEngineeringPractice, AlgorithmsCompetitiveProgramming, AsyncProgramming, Borrowing, ClosureTypes, Collections, ConcurrencyModels, ConcurrencyPatterns, ControlFlow, CuttingEdgeAlgorithmTechnologies, DistributedSystems, Evolution, FormalMethodsIndustrialization, Functions, Generics, LLMSystemArchitecture, LearningGuide, LearningMvpPath, Lifetimes, MLOpsAndLLMOps, MachineLearningEcosystem, MemoryManagement, Ownership, Patterns, PerformanceOptimization, Roadmap, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustInQuantumComputingEcosystems, RustMinimumViableLearningPath, RustVersionTracking, SafeAndEffectiveUnsafeRust, StateMachineSemanticsAndWorkflowModels, StatementsAndExpressions, ToolchainAndCargo, Traits, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, WorkflowTheoryFormalization
+- expected_entities: machine_learning_ecosystem
+
+### what is Pattern Selection Best Practices
+
+- n_retrieved: 54
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, ArchitecturePatterns, AsyncPatterns, AsyncProgramming, Borrowing, ClosureBasics, ClosureTypes, ConcurrencyModels, ConcurrencyPatterns, ControlFlow, CoreCratesIndex, DesignPatternsOverview, DistributedSystems, EngineeringPracticeAndProductionGradePatterns, ErrorHandlingDeepDive, ErrorHandlingIntermediate, EventDrivenArchitecture, Evolution, FormalDesignPatternTheory, FormalMethodsIndustrialization, FrontierResearchAndInnovativePatterns, Generics, IndustrialRustAdoptionCaseStudies, Iterators, LetChainsAndIfLetGuards, LetElseEarlyReturnOnPatternMismatch, Lifetimes, LoggingObservability, MacrosAdvanced, MicroservicePatterns, Ownership, ParadigmMatrix, ParallelDistributedPatternSpectrum, PatternCompositionAlgebra, PatternSelectionBestPractices, PatternSemanticSpaceIndex, Patterns, PerformanceOptimization, PinAndUnpin, Roadmap, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, RustVsC, RustVsGo, SerdePatterns, StatementsAndExpressions, SystemDesignPrinciples, TerminologyGlossary, Traits, TypeSystemBasics, TypeTheory, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: pattern_selection_best_practices
+
+### rust Conditional Compilation tutorial
+
+- n_retrieved: 42
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncProgramming, BloomTaxonomy, BootstrappingTheRustCompiler, CoercionAndCasting, CompileTimeCorrectness, CompileTimeExecution, CompilerDiagnosticsAndUITests, CompilerInfrastructure, ComprehensiveRustMapping, ConcurrencyModels, ConditionalCompilation, CrossCompilation, ErrorHandlingBasics, ErrorHandlingDeepDive, ErrorHandlingIntermediate, FFIAdvancedTopics, Generics, LearningGuide, Lifetimes, LoggingObservability, MacrosAdvanced, NewtypeAndWrapperTypes, Ownership, Roadmap, RustErrorHandlingIdioms, RustFFI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, TerminologyGlossary, TestingTheRustCompiler, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, UnsafeRustPatterns, UnsafeRustQuiz, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: conditional_compilation
+
+### explain Display and Debug Formatting in rust
+
+- n_retrieved: 48
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationDomains, AsyncProcessManagementInRust, BootstrappingTheRustCompiler, Borrowing, CargoProfilesAndLints, CargoSemVerChecksPreview, Collections, CompilerDiagnosticsAndUITests, CompilerInfrastructure, ConcurrencyModels, DeclarativeMacros, DesignPatternsOverview, DevelopmentToolsEcosystem, DisplayAndDebugFormatting, DslAndEmbedding, ErrorHandlingIntermediate, Generics, InterProcessCommunicationMechanismsInRust, Lifetimes, MacroDebuggingAndDiagnostics, MacroPatterns, MacrosBasics, MemoryManagement, Metaprogramming, ModernProcessManagementLibrariesInRust, Ownership, ProceduralMacros, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, ProductionGradeMacroDevelopment, Roadmap, RustBeltPredicateMap, RustFFI, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SerdePatterns, SmartPointers, StringsAndText, TestingBasics, TestingTheRustCompiler, ToolchainAndCargo, Traits, TypeSystemBasics
+- expected_entities: display_and_debug_formatting
+
+### Async Boundary Panorama pitfalls and how to avoid them
+
+- n_retrieved: 50
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncBoundaryPanorama, AsyncCancellationSafety, AsyncClosures, AsyncDropPreview, AsyncFFIBoundary, AsyncProgramming, AsyncTraitObjectSafety, AtomicsAndMemoryOrdering, BorrowSanitizerRuntimeTreeBorrowsViolationDetection, Borrowing, ClosureTypes, ConcurrencyAndAsyncQuiz, ConcurrencyModels, ConcurrencyPatterns, CrossPlatformConcurrency, DistributedSystems, ExecutorFairnessAndScheduling, FutureAndExecutorMechanisms, GenBlocksPreview, GenericAssociatedTypesGATs, GenericAssociatedTypesGATsAtTheAsyncBoundary, Generics, Iterators, KaniRustBoundedModelChecker, Lifetimes, LifetimesAdvanced, MemoryManagement, MemoryModel, MiriRustUndefinedBehaviorDetector, ModernVerificationTools, NLLAndPolonius, OperatingSystems, Ownership, OwnershipFormalization, PerformanceOptimization, PinAndUnpin, RustBeltAndVerificationToolchain, RustFFI, SafeAndEffectiveUnsafeRust, SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts, SendSyncBoundaryJudgmentTraitObjectsClosuresAndAsyncStateMachines, StreamAlgebraAndBackpressure, Traits, TreeBorrowsDeepDive, TypeInference, TypeSystemBasics, UnsafeBoundaryPanorama, UnsafeInAsyncContexts, WakerContractDeepDive
+- expected_entities: async_boundary_panorama
+
+### how does Attributes work
+
+- n_retrieved: 47
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedTraits, AsyncProgramming, Attributes, AttributesByCategory, Borrowing, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, ClosureBasics, ClosureTypes, ConcurrencyModels, ConditionalCompilation, CoreCratesIndex, CrossCompilation, DeclarativeMacros, DerivableTraits, DesignPatternsOverview, DevOpsAndCICD, DslAndEmbedding, FFIAdvancedTopics, Generics, HowRustIsMadeAndNightlyRust, InlineAssembly, Iterators, Lifetimes, MacrosAdvanced, MacrosBasics, MemoryManagement, ModulesAndPaths, OperatingSystems, Ownership, PerformanceOptimization, ProceduralMacros, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustFFI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SecurityPractices, SerdePatterns, ToolchainAndCargo, Traits, TypeSystemBasics, UnsafeRustPatterns, WebAssemblyEcosystem
+- expected_entities: attributes
+
+### explain Top-level Ontology Alignment for Rust Knowledge Graph in rust
+
+- n_retrieved: 48
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, AIOntologyAndRustSemantics, AISafetyAndAlignment, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncProgramming, AuthoritySourceMap, ConceptDefinitionAtlas, ConcurrencyModels, DependentTypesAndRefinementTypes, DescriptionLogicAndOWL, FormalMethodsIndustrialization, FormalMethodsLayerOverview, InterLayerMappingAtlas, KGSHACLEngineValidation, KnowledgeGraphConstruction, KnowledgeGraphDesignW3CSHACLOWLAlignmentAndOntologyEngineeringMethods, KnowledgeGraphOntologyV20, LLMAndRAGForRustKnowledgeBasesOntologyEngineeringAndRetrievalAugmentedGeneration, LLMSystemArchitecture, LinearAndAffineLogic, LockingPrimitives, MLOpsAndLLMOps, MachineLearningEcosystem, MemoryModel, Methodology, NetworkProgramming, OntologyEngineeringMethodologies, OperationalSemantics, Ownership, OwnershipFormalization, ProcessCalculiForRustCSPCCSAndThePiCalculus, RAGEvaluationForTheRustKnowledgeGraph, RustBeltAndVerificationToolchain, RustInAI, SafeAndEffectiveUnsafeRust, SemanticEngineeringAndOntology, SemanticInteroperability, SemanticModelAtlas, SemanticSpace, SeparationLogic, StreamProcessingSemantics, TerminologyGlossary, TopLevelOntologyAlignmentForRustKnowledgeGraph, Traits, TypeSystemBasics, TypeTheory, UnifiedLanguageSemanticModelExpressivenessMatrix, WebFrameworks
+- expected_entities: op-level_ontology_alignment_for_rust_knowledge_graph
+
+### explain AutoVerus / Verus Preview Tracking in rust
+
+- n_retrieved: 55
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationDomains, AsyncCancellationSafety, AsyncFFIBoundary, AsyncIOUringAndCompletionBasedAsyncIOPreview, AsyncProcessManagementInRust, AsyncProgramming, AutoVerusAndVerusAutomatedVerificationEcosystem, AutoVerusVerusPreviewTracking, Borrowing, CoercionAndCasting, Collections, ConcurrencyModels, DesignPatternsOverview, ErrorHandlingIntermediate, ExecutorFairnessAndScheduling, FFIPatternsInRust, FutureAndExecutorMechanisms, Generics, GlommioAndThreadPerCoreAsyncRuntimes, HighPerformanceNetworkServiceArchitecture, IdiomsSpectrum, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, Iterators, Lifetimes, LockingPrimitives, MachineLearningEcosystem, MemoryManagement, ModernProcessManagementLibrariesInRust, NetworkProgramming, NewtypeAndWrapperTypes, Ownership, PerformanceOptimization, PinAndUnpin, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, Roadmap, RustFFI, RustVersionTracking, SafeAndEffectiveUnsafeRust, SmartPointers, StdAutodiffPreview, StreamAlgebraAndBackpressure, TokioRuntimeInternals, Traits, TypeConversions, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, WakerContractDeepDive, WebFrameworks
+- expected_entities: autoverus_/_verus_preview_tracking
+
+### advanced Architecture Patterns techniques
+
+- n_retrieved: 53
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: APIDesignPatterns, ApplicationBinaryInterface, ApplicationDomains, ArchitecturePatternSemantics, ArchitecturePatterns, ArchitectureRefinement, AsyncPatterns, AsyncProgramming, Borrowing, CargoWorkspaces, CategoryTheory, ClosureBasics, Collections, CollectionsAdvanced, ComponentBasedSystemSemantics, ConcurrencyModels, ConcurrencyPatterns, CoreCratesIndex, CowAndBorrowed, DesignPatternsOverview, DistributedSystems, Evolution, FormalMethodsIndustrialization, Generics, Lifetimes, LifetimesAdvanced, MacrosAdvanced, MemoryManagement, ModuleSystemAdvanced, Ownership, ParadigmMatrix, PatternCompositionAlgebra, Patterns, PerformanceOptimization, PinAndUnpin, RefinementCalculusForRustAlgorithms, Roadmap, RustArchitectureSemanticsConstraints, RustDesignPatternAndArchitecturePatternSemanticAtlas, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, RustVsGo, SemanticSpace, SerdePatterns, SmartPointers, SoftwareArchitectureFormalization, StatementsAndExpressions, SystemComposability, SystemDesignPrinciples, Traits, TypeSystemBasics, ZeroCostAbstractions
+- expected_entities: architecture_patterns
+
+### rust Rust vs Ruby tutorial
+
+- n_retrieved: 39
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncProgramming, Borrowing, ConcurrencyModels, CoreCratesIndex, CrossCompilation, EditionGuide, ErrorHandlingIntermediate, Evolution, Generics, GettingStartedWithRust, Lifetimes, LinearAndAffineLogic, MemoryManagement, NLLAndPolonius, OperationalSemantics, Ownership, OwnershipFormalization, ParadigmMatrix, Readme_05comparativ, RustBeltAndVerificationToolchain, RustVersionTracking, RustVsC, RustVsGo, RustVsJava, RustVsPython, RustVsRuby, RustVsSwift, RustVsZig, SafeAndEffectiveUnsafeRust, SeparationLogic, TestingBasics, TestingEcosystem, ToolchainAndCargo, Traits, TypeSystemBasics, TypeTheory, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: rust_vs_ruby
+
+### how does Intra Layer Model Map work
+
+- n_retrieved: 19
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ArchitectureGovernanceAndArchitectureDecisionRecords, ArchitecturePatterns, ArchitectureStandardsAlignment, AuthoritySourceMap, EnterpriseArchitectureFrameworks, InterLayerMap, InterLayerMappingAtlas, IntraLayerMappingAtlas, IntraLayerModelMap, OwnershipFormalization, RustBeltAndVerificationToolchain, SafetyBoundaries, SemanticLayerAlignmentIndex, SemanticModelReasoningMethodology, SemanticSpace, SoftwareArchitectureFormalization, SystemDesignPrinciples, TypeSystemBasics, TypeTheory
+- expected_entities: intra_layer_model_map
+
+### rust Procedural Macros tutorial
+
+- n_retrieved: 35
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncProgramming, BloomTaxonomy, BootstrappingTheRustCompiler, CPreprocessorVsRustMacros, CargoSemVerChecksPreview, CompilerDiagnosticsAndUITests, CompilerInfrastructure, ComprehensiveRustMapping, CoreCratesIndex, DeclarativeMacros, DesignPatternsOverview, DslAndEmbedding, Generics, LearningGuide, Lifetimes, MacroDebuggingAndDiagnostics, MacroPatterns, MacrosAdvanced, MacrosBasics, MacrosQuiz, Metaprogramming, ModulesAndPaths, Ownership, ProceduralMacroCodeGenerationOptimization, ProceduralMacros, ProceduralMacros_03procmacros, ProductionGradeMacroDevelopment, Roadmap, SafetyBoundaries, SerdePatterns, ToolchainAndCargo, Traits, TypeSystemBasics, WebAssemblyEcosystem
+- expected_entities: procedural_macros
+
+### how does WebAssembly Target Evolution Preview work
+
+- n_retrieved: 33
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedWebAssemblyDevelopmentWithRust, ApplicationDomains, AsyncProgramming, Borrowing, CloudNative, ConcurrencyModels, DesignPatternsOverview, Evolution, FormalMethodsIndustrialization, Lifetimes, MacrosAdvanced, MemoryManagement, Ownership, OwnershipFormalization, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustFFI, RustForWebAssemblyResearch, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, ToolchainAndCargo, Traits, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, WebAssemblyFAQ, WebAssemblyGlossary, WebAssemblyJavaScriptInterop, WebAssemblyTargetEvolutionPreview, WebFrameworks
+- expected_entities: webassembly_target_evolution_preview
+
+### how does Memory Model work
+
+- n_retrieved: 56
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncProgramming, AtomicsAndMemoryOrdering, BareMetalBootAndLinkerScripts, Borrowing, CAbiObjectModel, CRDTTypeZooStateBasedOpBasedAndTheMergeLattice, CargoBuildStd, CategoryTheory, CausalOrderingAndVectorClocks, ConceptDefinitionAtlas, ConcurrencyModels, ConstGenericsValuesAsTypeParameters, CrossCompilation, CustomBareMetalAsyncExecutor, DependentTypesAndRefinementTypes, DistributedSystems, EffectSystem, EffectsAndPurity, EmbeddedFormalMemoryModel, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedSystems, FiveExecutionModelsDefinitionMatrix, FormalVerificationEcosystemTower, Generics, HoareLogic, InterLayerMappingAtlas, InterruptAndExceptionModel, IntraLayerModelMap, LambdaCalculus, Lifetimes, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MemoryManagement, MemoryModel, No_stdSynchronizationPrimitives, Ownership, OwnershipFormalization, PACAndHALImplementation, Panic_handlerAndNo_stdRuntime, ParadigmMatrix, ParallelDistributedPatternSpectrum, ProcessCalculiForRustCSPCCSAndThePiCalculus, RustBeltAndVerificationToolchain, RustVsAdaSPARK, RustVsHaskell, RustVsOCamlOwnershipAndAlgebraicEffectsInSystemsAndFunctionalProgramming, SafeAndEffectiveUnsafeRust, SemanticModelAtlas, SemanticModelReasoningMethodology, SemanticSpace, TypeSystemBasics, TypeTheory, UnifiedLanguageSemanticModelExpressivenessMatrix
+- expected_entities: memory_model
+
+### explain Rustdoc 1.96–1.97 Changes in rust
+
+- n_retrieved: 58
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationDomains, AsyncFFIBoundary, AsyncProcessManagementInRust, AsyncProgramming, Borrowing, Cargo196FeatureHighlights, CoercionAndCasting, Collections, ConcurrencyModels, ControlFlow, DesignPatternsOverview, Documentation, DslAndEmbedding, ErrorHandlingIntermediate, FFIPatternsInRust, Generics, IdiomsSpectrum, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, Lifetimes, MacroPatterns, MacrosAdvanced, MacrosBasics, MemoryManagement, Metaprogramming, ModernProcessManagementLibrariesInRust, ModuleSystemAdvanced, NewtypeAndWrapperTypes, Ownership, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, Roadmap, Rust191StabilizedFeatures, Rust192StabilizedFeatures, Rust196StabilizedFeaturesCurrentPatch1961, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust1971StablePatch, Rust198Preview, RustFFI, RustVersionTracking, RustVsGo, RustVsJava, RustVsPython, Rustdoc196197Changes, SafeAndEffectiveUnsafeRust, SmartPointers, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, WebAssemblyEcosystem
+- expected_entities: rustdoc_1.96–1.97_changes
+
+### Process Security and Sandboxing in Rust overview
+
+- n_retrieved: 34
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationDomains, AsyncProcessManagementInRust, ConcurrencyModels, CrossCompilation, EmbeddedSystems, IndustrialRustAdoptionCaseStudies, IntegratingRustIntoExistingPlatformsAndCodebases, InterProcessCommunicationMechanismsInRust, LLVMBackendAndCodeGenerationInRustc, MemoryManagement, ModernProcessManagementLibrariesInRust, OperationalSemantics, Ownership, ParadigmMatrix, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, RustFFI, RustForOperatingSystemKernelDevelopment, RustVsC, RustVsGo, RustcAndCargoZUnstableFlagsReference, RustcDriverRustc_interfaceAndStableMIR, SafeAndEffectiveUnsafeRust, SafetyBoundaries, TargetTierPlatformSupportGuaranteesAndChangesInRust190197, TestingTheRustCompiler, ToolchainAndCargo, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: process_security_and_sandboxing_in_rus
+
+### explain Mathematical Functions of Computation in rust
+
+- n_retrieved: 77
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AdvancedProcessManagementInRust, AerospaceCertificationFormalMethods, AlgorithmComplexityAnalysisInRust, AlgorithmEngineeringPractice, AlgorithmsCompetitiveProgramming, ApplicationDomains, AsyncFFIBoundary, AsyncProcessManagementInRust, AxiomaticSemantics, Borrowing, CategoryTheory, CoercionAndCasting, Collections, ComputabilityTheory, ComputationalModelsAndComputability, ConcurrencyModelComparison, ConcurrencyModels, DenotationalSemantics, DesignPatternsOverview, DistributedSystemsSemantics, EquivalenceOfComputationalModels, ErrorHandlingIntermediate, EvaluationStrategies, FFIPatternsInRust, FiveExecutionModelsDefinitionMatrix, FormalAlgorithmTheory, FormalMethodsMergedRedirect, Functions, Generics, HoareLogic, IdiomsSpectrum, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, LambdaCalculus, Lifetimes, LinearAndAffineLogic, MathematicalFunctionsOfComputation, MemoryManagement, ModernProcessManagementLibrariesInRust, ModernVerificationTools, NewtypeAndWrapperTypes, Numerics, ObservationalEquivalence, ObservationalEquivalenceOfAlgorithmImplementations, OperationalSemantics, Ownership, OwnershipFormalization, PerformanceOptimization, ProcessCalculiForRustCSPCCSAndThePiCalculus, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, ReactiveSystemsSemantics, RefinementCalculusForRustAlgorithms, Roadmap, RustBeltAndVerificationToolchain, RustFFI, RustVsC, SafeAndEffectiveUnsafeRust, SemanticSpace, SeparationLogic, SmartPointers, StreamAlgebraAndBackpressure, ToolchainAndCargo, Traits, TreeBorrowsDeepDive, TypeConversions, TypeSystemBasics, TypeTheory, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, UnsafeRustPatterns, VerificationToolchain, ZeroCostAbstractions
+- expected_entities: mathematical_functions_of_computation
+
+### RTOS and Scheduling Models in Rust overview
+
+- n_retrieved: 86
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AerospaceCertificationFormalMethods, ApplicationDomains, AsyncCancellationSafety, AsyncDropPreview, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, AtomicsAndMemoryOrdering, BareMetalBootAndLinkerScripts, CargoBuildStd, CargoVetAndSupplyChainAuditing, CertifiedToolchainsAndCertifiedPackageInventory, ClosureTypes, ConcurrencyModels, ConcurrencyPatterns, ControlFlow, CriticalSectionsAndSynchronizationOnBareMetal, CrossCompilation, CrossPlatformConcurrency, CustomBareMetalAsyncExecutor, DistributedSystems, EmbassyAsyncFrameworkDeepDive, EmbeddedDebuggingAndLogging, EmbeddedFormalMemoryModel, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, ExecutorFairnessAndScheduling, FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems, FormalMethodsIndustrialization, FutureAndExecutorMechanisms, GenBlocksPreview, Generics, IndustrialRustAdoptionCaseStudies, IntegratingRustIntoExistingPlatformsAndCodebases, InterruptAndExceptionModel, Iterators, LLVMBackendAndCodeGenerationInRustc, MISRARustAndSafetyCriticalEmbeddedGuidelines, MemoryManagement, No_stdAndBareMetalIdioms, No_stdAndBareMetalRust, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, OperationalSemantics, Ownership, OwnershipFormalization, PACAndHALImplementation, Panic_handlerAndNo_stdRuntime, ParadigmMatrix, Patterns, PerformanceOptimization, PinAndUnpin, RTICRealTimeTaskSchedulingFrameworkDeepDive, RTICVsEmbassyRealTimeFrameworksInRust, RTOSAndSchedulingModelsInRust, Roadmap, RustFFI, RustForOperatingSystemKernelDevelopment, RustVsAdaSPARK, RustVsC, RustVsGo, RustcAndCargoZUnstableFlagsReference, RustcDriverRustc_interfaceAndStableMIR, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, SafetyCriticalRustTopicIndex, SafetyCriticalSystemsEngineering, SemanticModelsAndCrossLanguageComparisonsQuiz, SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts, SendSyncBoundaryJudgmentTraitObjectsClosuresAndAsyncStateMachines, StateMachineSemanticsAndWorkflowModels, StatementsAndExpressions, StreamAlgebraAndBackpressure, TargetTierPlatformSupportGuaranteesAndChangesInRust190197, TestingTheRustCompiler, ToolchainAndCargo, TypeSystemBasics, VerificationToolchain, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, WorkflowTheoryFormalization, ZeroCostAbstractions
+- expected_entities: rtos_and_scheduling_models_in_rus
+
+### what is Toolchain and Cargo
+
+- n_retrieved: 38
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: Borrowing, CargoAuthenticationAndBuildCache, CargoBuildScriptsBuildRs, CargoDependencyResolution, CargoGettingStarted, CargoGuidePractices, CargoManifestReference, CargoProfilesAndLints, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CargoSourceReplacement, CargoSubcommandsAndPlugins, CargoWorkflow, CargoWorkspaces, CloudNative, ConcurrencyModels, CrossCompilation, DevOpsAndCICD, FormalMethodsIndustrialization, LearningMvpPath, Lifetimes, MacrosAdvanced, MemoryManagement, ModulesAndPaths, Ownership, OwnershipFormalization, RustBeltAndVerificationToolchain, RustVsC, SafeAndEffectiveUnsafeRust, SecurityPractices, SubtypeAndVariance, TestingBasics, TestingEcosystem, ToolchainAndCargo, ToolchainQuiz, TypeSystemBasics, UsefulDevelopmentToolsFoundation
+- expected_entities: oolchain_and_cargo
+
+### explain Cargo Build Scripts (`build.rs`) in rust
+
+- n_retrieved: 67
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationDomains, AsyncFFIBoundary, AsyncProcessManagementInRust, AsyncProgramming, Borrowing, CargoAuthenticationAndBuildCache, CargoBuildScriptsBuildRs, CargoCommandsReference, CargoConfiguration, CargoDependencyResolution, CargoGettingStarted, CargoGuidePractices, CargoManifestReference, CargoManifestTargets, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoRegistryInternals, CargoScriptWritingAndRunningRustScripts, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CargoWorkflow, CargoWorkspaces, CloudNative, CoercionAndCasting, Collections, ConcurrencyModels, CrossCompilation, DesignPatternsOverview, DevOpsAndCICD, ErrorHandlingIntermediate, Evolution, FFIPatternsInRust, FormalMethodsIndustrialization, Generics, IdiomsSpectrum, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, LearningMvpPath, Lifetimes, MemoryManagement, ModernProcessManagementLibrariesInRust, ModulesAndPaths, NewtypeAndWrapperTypes, Ownership, PerformanceOptimization, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, Roadmap, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SecurityPractices, SmartPointers, TestingStrategies, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, ZeroCostAbstractions
+- expected_entities: cargo_build_scripts_(`build.rs`)
+
+### what is Security Practices
+
+- n_retrieved: 58
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ArchitecturePatterns, AsyncProgramming, BlockchainDevelopmentInRust, CargoAuthenticationAndBuildCache, CargoBuildScriptsBuildRs, CargoCommandsReference, CargoConfiguration, CargoDependencyResolution, CargoGettingStarted, CargoGuidePractices, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CargoVetAndSupplyChainAuditing, CargoWorkflow, CargoWorkspaces, CertifiedToolchainsAndCertifiedPackageInventory, CloudNative, ConcurrencyModels, CrossCompilation, DevOpsAndCICD, DistributedSystems, EngineeringPracticeAndProductionGradePatterns, ErrorHandlingBasics, ErrorHandlingDeepDive, ErrorHandlingIntermediate, EventDrivenArchitecture, Evolution, FormalMethodsIndustrialization, FormalVerificationEcosystemTower, Generics, LoggingObservability, MacrosAdvanced, MicroservicePatterns, ModulesAndPaths, Ownership, OwnershipFormalization, PatternSelectionBestPractices, PerformanceOptimization, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SecurityAndCryptography, SecurityArchitecture, SecurityPractices, TestingStrategies, ToolchainAndCargo, Traits, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: security_practices
+
+### rust Compile Time Execution tutorial
+
+- n_retrieved: 42
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AlgorithmEngineeringPractice, ApplicationDomains, AsyncProgramming, BloomTaxonomy, Collections, CompileTimeCorrectness, CompileTimeExecution, CompilerInfrastructure, ComprehensiveRustMapping, ConcurrencyModels, CrossCompilation, DesignPatternsOverview, ErrorHandlingIntermediate, Evolution, FormalMethodsIndustrialization, Generics, IdiomsSpectrum, IteratorIdiomsInRust, LearningGuide, Lifetimes, MacrosAdvanced, Ownership, PerformanceOptimization, Roadmap, RustAPIGuidelinesCanonicalGuide, RustCompilerInternalsAndDriverArchitecture, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustLanguageFeatureInventoryMethodology, RustMinimumViableLearningPath, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, TerminologyGlossary, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: compile_time_execution
+
+### how to call javascript functions from rust in wasm
+
+- n_retrieved: 63
+- concept_mrr: 0.059
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.0
+- concept_ndcg@3: 0.0
+- concept_ndcg@5: 0.0
+- concept_precision: 0.0
+- concept_precision@1: 0.0
+- concept_precision@10: 0.0
+- concept_precision@3: 0.0
+- concept_precision@5: 0.0
+- concept_recall: 0.0
+- concept_recall@1: 0.0
+- concept_recall@10: 0.0
+- concept_recall@3: 0.0
+- concept_recall@5: 0.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.387
+- source_ndcg@3: 0.387
+- source_ndcg@5: 0.387
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 0.5
+- source_recall@1: 0.0
+- source_recall@10: 0.5
+- source_recall@3: 0.5
+- source_recall@5: 0.5
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AdvancedWebAssemblyDevelopmentWithRust, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, ApplicationDomains, AsyncFFIBoundary, AsyncProgramming, Borrowing, CAbiObjectModel, CCToRustEngineeringComparisonRoadmap, CRDTTypeZooStateBasedOpBasedAndTheMergeLattice, CategoryTheory, CausalOrderingAndVectorClocks, CloudNative, ConcurrencyModels, CrossCompilation, DesignPatternsOverview, DistributedConsensus, EffectSystem, EffectsAndPurity, EvaluationStrategies, Evolution, ExecutionModelIsomorphism, FiveExecutionModelsDefinitionMatrix, FormalMethodsIndustrialization, Functions, Generics, HoareLogic, InlineAssembly, LambdaCalculus, Lifetimes, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MemoryManagement, OperatingSystems, Ownership, OwnershipFormalization, ParallelDistributedPatternSpectrum, PatternCompositionAlgebra, PatternSemanticSpaceIndex, ProcessCalculiForRustCSPCCSAndThePiCalculus, QuizCCToRustFoundations, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustFFI, RustForWebAssemblyResearch, RustInAI, RustVersionTracking, RustVsC, RustVsJavaScript, SafeAndEffectiveUnsafeRust, ToolchainAndCargo, Traits, TypeSystemBasics, TypeTheory, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, UnsafeRustPatterns, VariableModel, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, WebAssemblyJavaScriptInterop, WebFrameworks
+- expected_entities: wasm_javascript_interop, webassembly_ecosystem
+
+### rust Preludes tutorial
+
+- n_retrieved: 28
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncProgramming, BloomTaxonomy, Borrowing, ComprehensiveRustMapping, ConcurrencyModels, EditionGuide, ErrorHandlingIntermediate, Evolution, Generics, GettingStartedWithRust, LearningGuide, Lifetimes, Linkage, MemoryManagement, NLLAndPolonius, Ownership, Preludes, RustBeltAndVerificationToolchain, RustFFI, RustVersionTracking, SafeAndEffectiveUnsafeRust, TestingBasics, TestingEcosystem, Traits, TypeSystemBasics, UnsafeRustPatterns, UnsafeRustQuiz
+- expected_entities: preludes
+
+### rust Embedded Systems tutorial
+
+- n_retrieved: 66
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AUTOSARAndRust, ActorModelSystemSemantics, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AerospaceCertificationFormalMethods, ApplicationDomains, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, BareMetalBootAndLinkerScripts, Borrowing, CargoVetAndSupplyChainAuditing, CertifiedToolchainsAndCertifiedPackageInventory, ComponentBasedSystemSemantics, ConcurrencyModels, ConcurrencyPatterns, CrossCompilation, CustomBareMetalAsyncExecutor, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystemsSemantics, EmbeddedDebuggingAndLogging, EmbeddedGraphicsDevelopmentWithRust, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSafetyCriticalPatterns, EmbeddedSystems, Evolution, FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems, FormalMethodsIndustrialization, InterruptAndExceptionModel, Lifetimes, LinearizabilityAndTheConsistencySpectrum, MISRARustAndSafetyCriticalEmbeddedGuidelines, MemoryManagement, MicroservicePatterns, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, OperatingSystems, Ownership, OwnershipFormalization, Panic_handlerAndNo_stdRuntime, PerformanceOptimization, ProcessCalculiForRustCSPCCSAndThePiCalculus, QuizRustVsSystems, ReactiveProgramming, ReactiveSystemsSemantics, RustBeltAndVerificationToolchain, RustFFI, RustForOperatingSystemKernelDevelopment, RustInSafetyCriticalSystems, RustVsAdaSPARK, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, SafetyCriticalRustTopicIndex, SafetyCriticalSystemsEngineering, StreamAlgebraAndBackpressure, SubtypeAndVariance, SystemComposability, SystemsAndEmbeddedTopicIndex, SystemsEngineeringStandardsAndRustMapping, ToolchainAndCargo, TypeSystemBasics, VerificationToolchain, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: embedded_systems
+
+### explain Idiomatic Rust API Naming Conventions in rust
+
+- n_retrieved: 46
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: APIDesignAndSemVerIdiomsInRust, APIGatewayAndServiceMeshPatternsInRust, AlgorithmEngineeringPractice, AsyncProgramming, Borrowing, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoSemVerChecksPreview, CategoryTheory, ClosureBasics, CloudNative, CoercionAndCasting, Collections, ConcurrencyModels, DesignPatternsOverview, DistributedSystems, ErrorHandlingBasics, ErrorHandlingIntermediate, EventDrivenArchitecture, Generics, IdiomaticRustAPINamingConventions, IdiomsSpectrum, IteratorIdiomsInRust, Lifetimes, MacrosAdvanced, MemoryManagement, MicroservicePatterns, NameResolutionAndHIRInRustc, NamesScopesAndResolution, NewtypeAndWrapperTypes, Ownership, Patterns, PerformanceOptimization, Roadmap, RustAPIGuidelinesCanonicalGuide, RustBeltAndVerificationToolchain, SmartPointers, StatementsAndExpressions, TheRustcQuerySystemAndIncrementalCompilation, TheTraitSolverInRustc, ToolchainAndCargo, Traits, TypeConversions, TypeInference, TypeSystemAdvanced, TypeSystemBasics, WebAssemblyEcosystem
+- expected_entities: idiomatic_rust_api_naming_conventions
+
+### advanced C To Rust Translation techniques
+
+- n_retrieved: 44
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, BorrowSanitizerRuntimeTreeBorrowsViolationDetection, Borrowing, CAbiObjectModel, CCToRustEngineeringComparisonRoadmap, CPreprocessorVsRustMacros, CToRustTranslation, CertifiedToolchainsAndCertifiedPackageInventory, CrossCompilation, DeclarativeMacros, DesignPatternsOverview, DslAndEmbedding, EmbeddedDebuggingAndLogging, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, EvaluationStrategies, FormalVerificationTools, Generics, Lifetimes, MacrosAdvanced, MacrosBasics, MemoryManagement, Ownership, PatternCompositionAlgebra, PatternSemanticSpaceIndex, PerformanceOptimization, ProceduralMacros, QuizCCToRustFoundations, Readme_05comparativ, Roadmap, RustFFI, RustVsAdaSPARK, RustVsC, SEICERTCToRustRuleMapping, SafetyCriticalBareMetalOperatingSystemsInRust, SerdePatterns, ToolchainAndCargo, Traits, TypeSystemBasics, VariableModel, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: c_to_rust_translation
+
+### what is Exception Safety: C++ vs Rust
+
+- n_retrieved: 57
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedTraits, ApplicationDomains, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, AtomicsAndMemoryOrdering, Borrowing, CAbiObjectModel, CVsRustConstructionOperatorsRTTIAndFriends, CertifiedToolchainsAndCertifiedPackageInventory, ConcurrencyModels, CoreCratesIndex, CriticalSectionsAndSynchronizationOnBareMetal, CrossCompilation, CustomBareMetalAsyncExecutor, EmbassyAsyncFrameworkDeepDive, EmbeddedDebuggingAndLogging, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, ErrorHandlingBasics, ErrorHandlingDeepDive, ErrorHandlingIntermediate, EvaluationStrategies, ExceptionSafetyCVsRust, Generics, GettingStartedWithRust, InterruptAndExceptionModel, Lifetimes, LoggingObservability, MISRARustAndSafetyCriticalEmbeddedGuidelines, MemoryManagement, No_stdAndBareMetalIdioms, No_stdAndBareMetalRust, No_stdSynchronizationPrimitives, Ownership, OwnershipFormalization, PerformanceOptimization, PinAndUnpin, QuizCCToRustFoundations, RTICRealTimeTaskSchedulingFrameworkDeepDive, RTICVsEmbassyRealTimeFrameworksInRust, RTOSAndSchedulingModelsInRust, RTTIAndDynamicTypeIdentification, RustVsAdaSPARK, RustVsC, RustVsC_02managedlan, SafetyCriticalBareMetalOperatingSystemsInRust, SubtypeAndVariance, ToolchainAndCargo, Traits, TypeErasure, TypeSystemBasics, VariableModel, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: exception_safety:_c++_vs_rus
+
+### how does `must_not_suspend` Lint Preview work
+
+- n_retrieved: 41
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncCancellationSafety, AsyncClosures, AsyncDropPreview, AsyncProgramming, AtomicsAndMemoryOrdering, BehaviorConsideredUndefined, Borrowing, CargoDependencyResolution, CargoGettingStarted, CargoManifestReference, CargoWorkflow, CrossCompilation, EmbeddedSystems, FutureAndExecutorMechanisms, GenBlocksPreview, Generics, InlineAssembly, LearningMvpPath, MemoryModel, MiriRustUndefinedBehaviorDetector, Must_not_suspendLintPreview, Ownership, OwnershipFormalization, PerformanceOptimization, PinAndUnpin, PreciseLifetimeCaptureInImplTraitPreview, Rust1100Preview, Rust196StabilizedFeaturesCurrentPatch1961, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust1971StablePatch, Rust198Preview, Rust199Preview, RustVersionTracking, SafeAndEffectiveUnsafeRust, SubtypeAndVariance, ToolchainAndCargo, Traits, TreeBorrowsDeepDive, TypeSystemBasics, UnsafePinnedPreview
+- expected_entities: `must_not_suspend`_lint_preview
+
+### explain Version Evolution, Editions and Preview Features Quiz in rust
+
+- n_retrieved: 28
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, AsyncAdvanced, AsyncProcessManagementInRust, AsyncProgramming, ConcurrencyModels, EditionGuide, ErrorHandlingIntermediate, Evolution, Generics, InterProcessCommunicationMechanismsInRust, Lifetimes, ModernProcessManagementLibrariesInRust, NLLAndPolonius, OpenEnumsPreview, Ownership, OwnershipFormalization, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, Rust2024EditionPreviewAndMigrationNotes, RustEditionMechanismAndMigrationGuide, RustEditions, RustVersionTracking, Traits, TypeSystemBasics, VersionEvolutionEditionsAndPreviewFeaturesQuiz
+- expected_entities: version_evolution,_editions_and_preview_features_quiz
+
+### what is WebAssembly Ecosystem
+
+- n_retrieved: 44
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedWebAssemblyDevelopmentWithRust, ApplicationDomains, AsyncProgramming, Borrowing, CargoAuthenticationAndBuildCache, CargoProfilesAndLints, CloudNative, ConcurrencyModels, DatabaseAccessEcosystem, DesignPatternsOverview, DevOpsAndCICD, DevelopmentToolsEcosystem, DistributedSystems, ErrorHandlingIntermediate, Evolution, FormalMethodsIndustrialization, FormalVerificationEcosystemTower, Lifetimes, MacrosAdvanced, MemoryManagement, Ownership, OwnershipFormalization, PerformanceOptimization, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustFFI, RustForWebAssemblyResearch, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, StreamProcessingEcosystem, StreamProcessingSemantics, TestingBasics, TestingEcosystem, ToolchainAndCargo, Traits, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, WebAssemblyTargetEvolutionPreview, WebFrameworks, ZeroCostAbstractions
+- expected_entities: webassembly_ecosystem
+
+### how does Learning Mvp Path work
+
+- n_retrieved: 17
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: Evolution, FormalMethodsIndustrialization, HowRustIsMadeAndNightlyRust, KnowledgeMindmap, LearningGuide, LearningMvpPath, MachineLearningEcosystem, Navigation, Roadmap, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustEditionMechanismAndMigrationGuide, RustInAI, RustMinimumViableLearningPath, RustVersionTracking, TRPL3rdEdChapterMapping
+- expected_entities: learning_mvp_path
+
+### rust result and option combinators
+
+- n_retrieved: 99
+- concept_mrr: 0.143
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.333
+- concept_ndcg@3: 0.0
+- concept_ndcg@5: 0.0
+- concept_precision: 0.0
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.0
+- concept_precision@5: 0.0
+- concept_recall: 0.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 0.0
+- concept_recall@5: 0.0
+- source_mrr: 0.143
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.333
+- source_ndcg@3: 0.0
+- source_ndcg@5: 0.0
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.0
+- source_precision@5: 0.0
+- source_recall: 0.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 0.0
+- source_recall@5: 0.0
+- retrieved_entities: AIIntegration, AIOntologyAndRustSemantics, AISafetyAndAlignment, APIDesignPatterns, AUTOSARAndRust, ActorModelSystemSemantics, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AerospaceCertificationFormalMethods, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncProgramming, AuthoritySourceMap, Borrowing, CategoryTheoryAndRustStructuralSemanticsAsAComputationalModel, CertifiedToolchainsAndCertifiedPackageInventory, CoercionAndCasting, Collections, ComponentBasedSystemSemantics, ConceptDefinitionAtlas, ConcurrencyModels, ConcurrencyPatterns, DependentTypesAndRefinementTypes, DesignPatternsOverview, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystemsSemantics, EmbeddedSystems, Enumerations, ErrorHandlingBasics, ErrorHandlingDeepDive, ErrorHandlingIntermediate, Evolution, FFIPatternsInRust, FormalMethodsIndustrialization, Functions, Generics, IdiomsSpectrum, Implementations, InterLayerMappingAtlas, IteratorIdiomsInRust, KnowledgeGraphOntologyV20, LLMSystemArchitecture, Lifetimes, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, LoggingObservability, MLOpsAndLLMOps, MachineLearningEcosystem, MacrosAdvanced, MemoryManagement, Methodology, MicroservicePatterns, ModalLogicAndRustEffects, NameResolutionAndHIRInRustc, NewtypeAndWrapperTypes, OperationalSemantics, Ownership, OwnershipFormalization, OwnershipPerformanceOptimization, ParadigmMatrix, Patterns, ProcessCalculiForRustCSPCCSAndThePiCalculus, ReactiveProgramming, ReactiveSystemsSemantics, Roadmap, RustAntiPatterns, RustAntiPatternsAndPitfallsAtlas, RustBeltAndVerificationToolchain, RustCompilerInternalsAndDriverArchitecture, RustEditionMechanismAndMigrationGuide, RustInAI, RustPerformanceIdioms, RustVersionTracking, RustVsAdaSPARK, SafeAndEffectiveUnsafeRust, SafetyCriticalRustTopicIndex, SafetyCriticalSystemsEngineering, SemanticModelAtlas, SemanticSpace, SeparationLogic, SmartPointers, StatementsAndExpressions, StreamAlgebraAndBackpressure, Structs, SubtypeAndVariance, SystemComposability, SystemsEngineeringStandardsAndRustMapping, TerminologyGlossary, TheRustcQuerySystemAndIncrementalCompilation, TheTraitSolverInRustc, Traits, TypeConversions, TypeInference, TypeSystemBasics, TypeTheory, TypeTheoryAndRustTheTypeSystemAsAComputationalModel, UnifiedLanguageSemanticModelExpressivenessMatrix, UnsafeRustPatterns, VerificationToolchain, WebAssemblyEcosystem
+- expected_entities: error_handling_basics
+
+### Algorithms Competitive Programming overview
+
+- n_retrieved: 36
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedDataStructuresImplementationInRust, AlgorithmEngineeringPractice, AlgorithmicParadigmsInRust, AlgorithmsCompetitiveProgramming, ApplicationDomains, AsyncProgramming, Borrowing, CloudNative, Collections, ConcurrencyModels, ConcurrencyPatterns, CowAndBorrowed, DesignPatternsOverview, FormalVerificationEcosystemTower, Generics, Lifetimes, LockingPrimitives, MemoryManagement, NetworkProgramming, Ownership, OwnershipAwareAlgorithmsInRust, OwnershipFormalization, ParallelAndConcurrentAlgorithmsInRust, PerformanceOptimization, PinAndUnpin, ProgrammingLanguageFoundations, RustBeltAndVerificationToolchain, RustVsC, SmartPointers, ToolchainAndCargo, Traits, TypeLevelProgramming, TypeSystemBasics, TypeTheory, WebFrameworks, ZeroCostAbstractions
+- expected_entities: algorithms_competitive_programming
+
+### what is Design Patterns FAQ
+
+- n_retrieved: 39
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: APIDesignPatterns, ArchitecturePatterns, AsyncPatterns, AsyncProgramming, ClosureBasics, ClosureTypes, ConcurrencyModels, ConcurrencyPatterns, DesignPatternsFAQ, DesignPatternsGlossary, DesignPatternsOverview, DistributedSystems, EngineeringPracticeAndProductionGradePatterns, ErrorHandlingIntermediate, EventDrivenArchitecture, Evolution, FormalDesignPatternTheory, FormalMethodsIndustrialization, FrontierResearchAndInnovativePatterns, Generics, MicroservicePatterns, Ownership, ParadigmMatrix, PatternCompositionAlgebra, PatternSelectionBestPractices, Patterns, PinAndUnpin, Roadmap, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, RustVsC, RustVsGo, StatementsAndExpressions, SystemDesignPrinciples, Traits, TypeSystemBasics, TypeTheory, WebAssemblyEcosystem
+- expected_entities: design_patterns_faq
+
+### Zero Copy Parsing overview
+
+- n_retrieved: 36
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedNetworkProtocolsInRust, AlgorithmEngineeringPractice, AsyncProgramming, Borrowing, CargoScriptWritingAndRunningRustScripts, ClapCommandLineArgumentParserForRust, ConcurrencyModels, CowAndBorrowed, CustomNetworkProtocolImplementationInRust, DesignPatternsOverview, DistributedSystems, ErrorHandlingIntermediate, Evolution, FormalMethodsIndustrialization, FormalMethodsLayerOverview, Generics, Lifetimes, MacrosAdvanced, MemoryManagement, NetworkProgramming, Ownership, OwnershipPerformanceOptimization, PerformanceOptimization, PinAndUnpin, Roadmap, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, RustVsC, SmartPointers, ToolchainAndCargo, Traits, TypeSystemBasics, ZeroCopyParsing, ZeroCopyParsingInRust, ZeroCostAbstractions
+- expected_entities: zero_copy_parsing
+
+### using type-state pins with embedded-hal digital io traits
+
+- n_retrieved: 59
+- concept_mrr: 0.0
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.0
+- concept_ndcg@3: 0.0
+- concept_ndcg@5: 0.0
+- concept_precision: 0.0
+- concept_precision@1: 0.0
+- concept_precision@10: 0.0
+- concept_precision@3: 0.0
+- concept_precision@5: 0.0
+- concept_recall: 0.0
+- concept_recall@1: 0.0
+- concept_recall@10: 0.0
+- concept_recall@3: 0.0
+- concept_recall@5: 0.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.387
+- source_ndcg@3: 0.387
+- source_ndcg@5: 0.387
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 0.5
+- source_recall@1: 0.0
+- source_recall@10: 0.5
+- source_recall@3: 0.5
+- source_recall@5: 0.5
+- retrieved_entities: AdvancedTraits, AerospaceCertificationFormalMethods, ApplicationDomains, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, AtomicsAndMemoryOrdering, BareMetalBootAndLinkerScripts, CargoBuildStd, CertifiedToolchainsAndCertifiedPackageInventory, ConcurrencyModels, CrossCompilation, CustomBareMetalAsyncExecutor, DeclarativeMacros, DerivableTraits, DesignPatternsOverview, EmbeddedDebuggingAndLogging, EmbeddedFormalMemoryModel, EmbeddedHAL10MigrationAndEmbassyProductionStatus, EmbeddedHALAndDriverIdioms, EmbeddedHALDriverPatterns, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedProtocolAndPeripheralDrivers, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, EmbeddedTestingAndCIStrategiesForNo_stdRust, FormalMethodsIndustrialization, GenBlocksPreview, Generics, GettingStartedWithRust, InterruptAndExceptionModel, Lifetimes, MISRARustAndSafetyCriticalEmbeddedGuidelines, MacrosBasics, MemoryManagement, MemoryMappedPeripheralsAndTypestateProgramming, No_stdAndBareMetalIdioms, No_stdSynchronizationPrimitives, Ownership, OwnershipFormalization, PACAndHALImplementation, Panic_handlerAndNo_stdRuntime, PinAndUnpin, ProceduralMacros, RustBeltAndVerificationToolchain, RustVsAdaSPARK, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, SerdePatterns, SpecialTypesAndTraits, StructuredApplicationTracingWithTracing, SubtypeAndVariance, Traits, TypeInference, TypeSystemBasics, TypeTheory
+- expected_entities: embedded_hal_and_driver_idioms, embedded_hal_and_mmio
+
+### common mistakes with self-referential structs and Pin
+
+- n_retrieved: 45
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 0.613
+- concept_ndcg@3: 0.613
+- concept_ndcg@5: 0.613
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 0.5
+- concept_recall@1: 0.5
+- concept_recall@10: 0.5
+- concept_recall@3: 0.5
+- concept_recall@5: 0.5
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 0.818
+- source_ndcg@3: 0.613
+- source_ndcg@5: 0.613
+- source_precision@1: 1.0
+- source_precision@10: 0.2
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 0.5
+- source_recall@1: 0.5
+- source_recall@10: 1.0
+- source_recall@3: 0.5
+- source_recall@5: 0.5
+- retrieved_entities: ApplicationDomains, AsyncCancellationSafety, AsyncDropPreview, AsyncProgramming, AtomicsAndMemoryOrdering, BehaviorConsideredUndefined, Borrowing, ConceptMetaLayer, CowAndBorrowed, CrossCompilation, CrossLayerDependencyAndImplicationTopology, EmbeddedSystems, ExampleAndCounterexampleAtlas, FieldProjectionsPreview, FutureAndExecutorMechanisms, GPUProgrammingAndHighPerformanceComputingWithRust, GenBlocksPreview, Generics, InPlaceAndPinnedInitializationPatterns, InlineAssembly, Lifetimes, MachineLearningEcosystem, MemoryManagement, MemoryModel, MetaFrameworkAndKnowledgeArchitectureQuiz, MiriRustUndefinedBehaviorDetector, Ownership, OwnershipFormalization, PerformanceOptimization, PinAndUnpin, PinProjectionCounterexamples, Roadmap, RustFFI, RustVersionTracking, SafeAndEffectiveUnsafeRust, SerdePatterns, SmartPointers, ToolchainAndCargo, Traits, TreeBorrowsDeepDive, TypeSystemBasics, UnsafePinnedPreview, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: pin_and_unpin, pin_projection
+
+### rust Cargo Authentication and Build Cache tutorial
+
+- n_retrieved: 91
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, AIOntologyAndRustSemantics, AISafetyAndAlignment, AUTOSARAndRust, ActorModelSystemSemantics, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AerospaceCertificationFormalMethods, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncProgramming, AuthoritySourceMap, BlockchainDevelopmentInRust, CargoAuthenticationAndBuildCache, CargoBuildScriptsBuildRs, CargoCommandsReference, CargoConfiguration, CargoDependencyResolution, CargoGettingStarted, CargoGuidePractices, CargoManifestTargets, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoRegistryInternals, CargoScriptWritingAndRunningRustScripts, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CargoWorkflow, CargoWorkspaces, CategoryTheoryAndRustStructuralSemanticsAsAComputationalModel, CertifiedToolchainsAndCertifiedPackageInventory, CloudNative, ComponentBasedSystemSemantics, ConceptDefinitionAtlas, ConcurrencyModels, ConcurrencyPatterns, CrossCompilation, DependentTypesAndRefinementTypes, DevOpsAndCICD, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystemsSemantics, EmbeddedSystems, ErrorHandlingDeepDive, Evolution, FormalMethodsIndustrialization, InterLayerMappingAtlas, KnowledgeGraphOntologyV20, LLMSystemArchitecture, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MLOpsAndLLMOps, MachineLearningEcosystem, MacrosAdvanced, Methodology, MicroservicePatterns, ModalLogicAndRustEffects, ModulesAndPaths, OperationalSemantics, Ownership, OwnershipFormalization, PerformanceOptimization, ProcessCalculiForRustCSPCCSAndThePiCalculus, ReactiveProgramming, ReactiveSystemsSemantics, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustVersionTracking, RustVsAdaSPARK, RustVsC, SafeAndEffectiveUnsafeRust, SafetyCriticalRustTopicIndex, SafetyCriticalSystemsEngineering, SecurityPractices, SemanticModelAtlas, SemanticSpace, SeparationLogic, StreamAlgebraAndBackpressure, SystemComposability, SystemsEngineeringStandardsAndRustMapping, TerminologyGlossary, TestingStrategies, ToolchainAndCargo, TypeSystemBasics, TypeTheory, TypeTheoryAndRustTheTypeSystemAsAComputationalModel, UnifiedLanguageSemanticModelExpressivenessMatrix, VerificationToolchain, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: cargo_authentication_and_build_cache
+
+### what is Database and Storage Ecosystem Quiz
+
+- n_retrieved: 46
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncProgramming, BlockchainDevelopmentInRust, Borrowing, CloudNative, ConceptMetaLayer, ConcurrencyModels, ConcurrencyPatterns, CrossPlatformConcurrency, DatabaseAccessEcosystem, DatabaseAndStorageEcosystemQuiz, DatabaseSystemsInRust, DesignPatternsOverview, DistributedSystems, DomainApplicationsEcosystemQuiz, ErrorHandlingDeepDive, ErrorHandlingIntermediate, Evolution, FormalMethodsIndustrialization, IndustrialRustAdoptionCaseStudies, Lifetimes, MemoryManagement, MetaFrameworkAndKnowledgeArchitectureQuiz, NetworkingAndAsyncEcosystemQuiz, Ownership, PerformanceOptimization, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustForDataScienceAndScientificComputing, RustInAI, RustVersionTracking, SafeAndEffectiveUnsafeRust, SecurityAndTestingEcosystemQuiz, SecurityPractices, SemanticModelsAndCrossLanguageComparisonsQuiz, SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts, SendSyncBoundaryJudgmentTraitObjectsClosuresAndAsyncStateMachines, StreamProcessingEcosystem, StreamProcessingSemantics, Traits, TypeSystemBasics, VerificationToolchain, WebAssemblyEcosystem, WebFrameworks, ZeroCostAbstractions
+- expected_entities: database_and_storage_ecosystem_quiz
+
+### how does Semantic Invariants of Unsafe Algorithms work
+
+- n_retrieved: 55
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedDataStructuresImplementationInRust, AeneasSymbolicSemantics, AeneasVerificationPipelineSymbolicBorrowCalculusAsAComputationalModel, AlgorithmComplexityAnalysisInRust, AlgorithmEngineeringPractice, AlgorithmSemantics, AlgorithmsCompetitiveProgramming, AlgorithmsPatternsSemanticBridge, AsyncPatterns, AsyncProgramming, AtomicsAndMemoryOrdering, Borrowing, ConcurrencyModels, ConcurrencyPatterns, DesignPatternsOverview, DistributedSystems, FormalAlgorithmTheory, FormalMethodsIndustrialization, FormalMethodsMergedRedirect, FormalVerificationEcosystemTower, FormalVerificationTools, Generics, HoareLogic, HoareLogicForRustAlgorithms, IteratorCorrectnessSemantics, Iterators, Lifetimes, LinearAndAffineLogic, MemoryManagement, MemoryModel, OperationalSemantics, Ownership, OwnershipFormalization, ParadigmMatrix, ParallelAndConcurrentAlgorithmsInRust, PatternCompositionAlgebra, PatternSemanticSpaceIndex, PerformanceOptimization, RefinementCalculusForRustAlgorithms, Roadmap, RustBeltAndVerificationToolchain, RustBeltOwnershipLogicMemorySafetyProofAsAComputationalModel, RustVsC, SafeAndEffectiveUnsafeRust, SemanticExpressiveness, SemanticInvariantsOfUnsafeAlgorithms, SeparationLogic, StreamAlgebraAndBackpressure, SystemDesignPrinciples, Traits, TypeSystemBasics, TypeTheory, UnsafeAlgorithmInvariantsInRust, UnsafeRustPatterns, VerificationToolchain
+- expected_entities: semantic_invariants_of_unsafe_algorithms
+
+### rust Enterprise Architecture tutorial
+
+- n_retrieved: 58
+- concept_mrr: 0.333
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.5
+- concept_ndcg@3: 0.5
+- concept_ndcg@5: 0.5
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.333
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.5
+- source_ndcg@3: 0.5
+- source_ndcg@5: 0.5
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: APIDesignPatterns, ActorModelSystemSemantics, AdvancedWebAssemblyDevelopmentWithRust, ApplicationBinaryInterface, ArchitectureGovernanceAndArchitectureDecisionRecords, ArchitecturePatternSemantics, ArchitecturePatterns, ArchitectureRefinement, ArchitectureStandardsAlignment, AsyncProgramming, CargoDependencyResolution, CargoManifestReference, CargoProfilesAndLints, CargoRegistriesAndPublishing, CargoWorkspaces, ComponentBasedSystemSemantics, ConcurrencyModels, DesignPatternsOverview, DistributedSystemsSemantics, EmbeddedSystems, EnterpriseAndSoftwareArchitectureAlignmentInRust, EnterpriseArchitecture, EnterpriseArchitectureFrameworks, Evolution, FormalDesignPatternTheoryRedirectStub, FormalMethodsIndustrialization, GameECSArchitecture, InlineAssembly, MacrosAdvanced, Metaprogramming, ModelDrivenEngineering, ModuleSystemAdvanced, Ownership, PatternCompositionAlgebra, PatternCompositionAlgebraRedirectStub, ReactiveSystemsSemantics, RefinementCalculusForRustAlgorithms, Roadmap, RustArchitectureSemanticsConstraints, RustCompilerInternalsAndDriverArchitecture, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalSystemsEngineering, SemanticSpace, SoftwareArchitectureFormalization, SystemComposability, SystemDesignPrinciples, SystemsEngineeringStandardsAndRustMapping, TerminologyGlossary, ToolchainAndCargo, Traits, TypeSystemBasics, UnifiedLanguageSemanticModelExpressivenessMatrix, WorkflowTheoryFormalization
+- expected_entities: enterprise_architecture
+
+### explain WebSocket Real-Time Communication in rust
+
+- n_retrieved: 69
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, ApplicationDomains, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, AtomicsAndMemoryOrdering, Borrowing, CertifiedToolchainsAndCertifiedPackageInventory, CloudNative, CoercionAndCasting, Collections, ConcurrencyModels, CriticalSectionsAndSynchronizationOnBareMetal, CustomBareMetalAsyncExecutor, DesignPatternsOverview, DistributedSystems, EffectHandlersAndRustSLimitedEffectsControlFlowAbstractionsAsAComputationalModel, EmbassyAsyncFrameworkDeepDive, EmbeddedDebuggingAndLogging, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, ErrorHandlingIntermediate, FFIPatternsInRust, Generics, HighPerformanceNetworkServiceArchitecture, IdiomsSpectrum, InterProcessCommunicationMechanismsInRust, InterruptAndExceptionModel, IteratorIdiomsInRust, Lifetimes, LinearAndAffineLogic, LinearLogicAndOwnershipResourceCalculusAsAComputationalModel, MISRARustAndSafetyCriticalEmbeddedGuidelines, MemoryManagement, ModernProcessManagementLibrariesInRust, NetworkProtocols, NewtypeAndWrapperTypes, No_stdAndBareMetalIdioms, No_stdAndBareMetalRust, No_stdSynchronizationPrimitives, Ownership, PerformanceOptimization, PinAndUnpin, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, RTICRealTimeTaskSchedulingFrameworkDeepDive, RTICVsEmbassyRealTimeFrameworksInRust, RTOSAndSchedulingModelsInRust, Roadmap, RustFFI, RustNetworkProgrammingQuickStart, RustVsAdaSPARK, SafeAndEffectiveUnsafeRust, SafetyCriticalBareMetalOperatingSystemsInRust, SessionTypesAndRustChannelsCommunicationProtocolsAsAComputationalModel, SmartPointers, StreamProcessingEcosystem, Traits, TypeConversions, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, WebAssemblyEcosystem, WebFrameworks, WebSocketRealTimeCommunication
+- expected_entities: websocket_real-time_communication
+
+### explain Stable Application Binary Interface (ABI) Preview in rust
+
+- n_retrieved: 41
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationBinaryInterface, ApplicationDomains, AsyncFFIBoundary, AsyncProcessManagementInRust, Borrowing, CAbiObjectModel, CoercionAndCasting, Collections, ConcurrencyModels, CrossCompilation, DesignPatternsOverview, ErrorHandlingIntermediate, FFIPatternsInRust, Generics, IdiomsSpectrum, InlineAssembly, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, Lifetimes, MemoryManagement, ModernProcessManagementLibrariesInRust, NewtypeAndWrapperTypes, OperatingSystems, Ownership, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, Roadmap, RustFFI, SafeAndEffectiveUnsafeRust, SmartPointers, StableApplicationBinaryInterfaceABIPreview, Traits, TypeConversions, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, UnsafeRustPatterns, WebAssemblyTargetEvolutionPreview
+- expected_entities: stable_application_binary_interface_(abi)_preview
+
+### Async Cancellation Safety overview
+
+- n_retrieved: 37
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncAdvanced, AsyncBoundaryPanorama, AsyncCancellationSafety, AsyncClosures, AsyncDropPreview, AsyncFFIBoundary, AsyncPatterns, AsyncProgramming, AsyncTraitObjectSafety, Borrowing, ConcurrencyAndAsyncQuiz, ConcurrencyModels, DistributedSystems, ExecutorFairnessAndScheduling, FutureAndExecutorMechanisms, GenBlocksPreview, Generics, KaniRustBoundedModelChecker, Lifetimes, MemoryManagement, MemoryModel, MiriRustUndefinedBehaviorDetector, NLLAndPolonius, Ownership, OwnershipFormalization, PerformanceOptimization, PinAndUnpin, RustFFI, SafeAndEffectiveUnsafeRust, SubtypeAndVariance, TokioRuntimeInternals, Traits, TypeSystemBasics, UnsafeBoundaryPanorama, UnsafeInAsyncContexts, WakerContractDeepDive, WebAssemblyEcosystem
+- expected_entities: async_cancellation_safety
+
+### rust Programming Language Foundations tutorial
+
+- n_retrieved: 46
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, AsyncProgramming, BorrowSanitizerBSanDynamicAliasingRuleVerificationForRust, BorrowSanitizerRuntimeTreeBorrowsViolationDetection, Borrowing, CAbiObjectModel, CCToRustEngineeringComparisonRoadmap, DesignPatternsOverview, DistributedSystems, EditionGuide, Evolution, FormalMethodsIndustrialization, GeneralPLFoundationsRoadmap, Generics, HighPerformanceNetworkServiceArchitecture, KaniRustBoundedModelChecker, Lifetimes, MemoryManagement, MiriRustUndefinedBehaviorDetector, NLLAndPolonius, NetworkProtocols, Ownership, OwnershipFormalization, PatternCompositionAlgebra, PatternSemanticSpaceIndex, PerformanceOptimization, PlPrerequisites, ProgrammingLanguageFoundations, QuizCCToRustFoundations, QuizGeneralPLFoundations, RustBeltAndVerificationToolchain, RustLanguageContractsPreconditionsPostconditionsAndOwnershipAssertions, RustLanguageFeatureInventoryMethodology, RustNetworkProgrammingQuickStart, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SafetyTagsPreview, SelfAssessment, StreamProcessingEcosystem, Traits, TypeSystemBasics, TypeTheory, VariableModel, VerificationAndContractsEcosystemOverview, WebAssemblyEcosystem
+- expected_entities: programming_language_foundations
+
+### what is In-place and Pinned Initialization Patterns
+
+- n_retrieved: 39
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, ArchitecturePatterns, AsyncCancellationSafety, AsyncDropPreview, AsyncProgramming, Borrowing, CloudNative, ConcurrencyModels, ConstructionAndInitialization, CustomAllocators, DistributedSystems, EngineeringPracticeAndProductionGradePatterns, ErrorHandlingBasics, ErrorHandlingIntermediate, EvaluationStrategies, EventDrivenArchitecture, FieldProjectionsPreview, FrontierResearchAndInnovativePatterns, FutureAndExecutorMechanisms, GenBlocksPreview, Generics, InPlaceAndPinnedInitializationPatterns, IndustrialRustAdoptionCaseStudies, Lifetimes, MemoryManagement, MicroservicePatterns, OperationalSemanticsOfInPlaceInitialization, Ownership, OwnershipFormalization, PerformanceOptimization, PinAndUnpin, PinProjectionCounterexamples, Roadmap, RustVsC, SafeAndEffectiveUnsafeRust, TypeSystemBasics, UnsafeCollectionsInternals, UnsafeRustTopicIndex, VariableModel
+- expected_entities: in-place_and_pinned_initialization_patterns
+
+### explain Embedded Safety-Critical Patterns in rust
+
+- n_retrieved: 60
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: APIGatewayAndServiceMeshPatternsInRust, AUTOSARAndRust, AerospaceCertificationFormalMethods, ApplicationDomains, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, BareMetalBootAndLinkerScripts, Borrowing, BoundaryExtensionTree, CargoVetAndSupplyChainAuditing, CertifiedToolchainsAndCertifiedPackageInventory, CloudNative, CrossCompilation, CustomBareMetalAsyncExecutor, DistributedSystems, EmbeddedDebuggingAndLogging, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSafetyCriticalPatterns, EmbeddedSystems, ErrorHandlingBasics, EventDrivenArchitecture, EventSourcingEnginePatternsInRust, FFIPatternsInRust, FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems, FormalMethodsIndustrialization, Generics, InterruptAndExceptionModel, Lifetimes, MISRARustAndSafetyCriticalEmbeddedGuidelines, MacrosAdvanced, MemoryManagement, MicroservicePatterns, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, Ownership, Panic_handlerAndNo_stdRuntime, PerformanceOptimization, Roadmap, RustFFI, RustInSafetyCriticalSystems, RustVsAdaSPARK, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, SafetyCriticalRustTopicIndex, SafetyCriticalSystemsEngineering, StateMachineSemanticsAndWorkflowModels, ToolchainAndCargo, Traits, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, VerificationToolchain, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, WorkflowTheoryFormalization
+- expected_entities: embedded_safety-critical_patterns
+
+### Semantics Boundaries of Parallel, Concurrent, Async, and Distributed Computation overview
+
+- n_retrieved: 55
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AdvancedDataStructuresImplementationInRust, AlgorithmEngineeringPractice, AsyncCancellationSafety, AsyncProgramming, CRDTTypeZooStateBasedOpBasedAndTheMergeLattice, CausalOrderingAndVectorClocks, ClosureTypes, ComponentBasedSystemSemantics, ConcurrencyModelComparison, ConcurrencyModels, ConcurrencyPatterns, ConcurrencySemanticsFormalModelsOfConcurrentComputation, ControlFlow, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystems, DistributedSystemsSemantics, ExecutionModelIsomorphism, ExecutorFairnessAndScheduling, ExpressivenessOfConcurrentModels, FieldProjectionsPreview, FiveExecutionModelsDefinitionMatrix, FutureAndExecutorMechanisms, Generics, HoareLogic, InPlaceAndPinnedInitializationPatterns, Iterators, LambdaCalculus, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MicroservicePatterns, ModelsOfConcurrency, ObservationalEquivalenceOfAlgorithmImplementations, OperationalSemanticsOfInPlaceInitialization, Ownership, ParallelAndConcurrentAlgorithmsInRust, ParallelDistributedPatternSpectrum, Patterns, PerformanceOptimization, PinAndUnpin, ProcessCalculiForRustCSPCCSAndThePiCalculus, ReactiveProgramming, ReactiveSystemsSemantics, Roadmap, SafeAndEffectiveUnsafeRust, SemanticSpace, SemanticsBoundariesOfParallelConcurrentAsyncAndDistributedComputation, StateMachineSemanticsAndWorkflowModels, StatementsAndExpressions, StreamAlgebraAndBackpressure, SystemComposability, Traits, TypeSystemBasics, WorkflowTheoryFormalization
+- expected_entities: semantics_boundaries_of_parallel,_concurrent,_async,_and_distributed_computation
+
+### Process Monitoring and Diagnostics in Rust overview
+
+- n_retrieved: 34
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationDomains, AsyncProcessManagementInRust, ConcurrencyModels, CrossCompilation, EmbeddedSystems, IndustrialRustAdoptionCaseStudies, IntegratingRustIntoExistingPlatformsAndCodebases, InterProcessCommunicationMechanismsInRust, LLVMBackendAndCodeGenerationInRustc, MemoryManagement, ModernProcessManagementLibrariesInRust, OperationalSemantics, Ownership, ParadigmMatrix, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, RustFFI, RustForOperatingSystemKernelDevelopment, RustVsC, RustVsGo, RustcAndCargoZUnstableFlagsReference, RustcDriverRustc_interfaceAndStableMIR, SafeAndEffectiveUnsafeRust, SafetyBoundaries, TargetTierPlatformSupportGuaranteesAndChangesInRust190197, TestingTheRustCompiler, ToolchainAndCargo, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: process_monitoring_and_diagnostics_in_rus
+
+### Macro Debugging and Diagnostics in production codebases
+
+- n_retrieved: 56
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, AsyncProcessManagementInRust, AsyncProgramming, BootstrappingTheRustCompiler, Borrowing, CargoProfilesAndLints, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoSemVerChecksPreview, Collections, CompilerDiagnosticsAndUITests, CompilerInfrastructure, ConcurrencyModels, DeclarativeMacros, DefmtAndProbeRsDebuggingArchitecture, DesignPatternsOverview, DevelopmentToolsEcosystem, DisplayAndDebugFormatting, DslAndEmbedding, EmbeddedDebuggingAndLogging, EmbeddedHardwareEndToEndValidation, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedSystems, EmbeddedTestingAndCIStrategiesForNo_stdRust, ErrorHandlingIntermediate, Generics, InterProcessCommunicationMechanismsInRust, Lifetimes, MISRARustAndSafetyCriticalEmbeddedGuidelines, MacroDebuggingAndDiagnostics, MacroPatterns, MacrosAdvanced, MacrosBasics, Metaprogramming, ModernProcessManagementLibrariesInRust, No_stdAndBareMetalRust, No_stdStartupAndRuntimeDeepDive, Ownership, ProbeRsAndEmbeddedDebuggingInPractice, ProceduralMacroCodeGenerationOptimization, ProceduralMacros, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, ProductionGradeMacroDevelopment, RustFFI, RustVsAdaSPARK, RustVsC, SafetyBoundaries, SerdePatterns, StringsAndText, TestingBasics, ToolchainAndCargo, Traits, TypeSystemBasics
+- expected_entities: macro_debugging_and_diagnostics
+
+### how does Rust vs Zig work
+
+- n_retrieved: 47
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, ApplicationDomains, AsyncProgramming, Borrowing, CPreprocessorVsRustMacros, ConcurrencyModels, CoreCratesIndex, CrossCompilation, DeclarativeMacros, DesignPatternsOverview, DslAndEmbedding, EffectSystem, EffectsAndPurity, ErrorHandlingIntermediate, EvaluationStrategies, Evolution, Generics, Lifetimes, LinearAndAffineLogic, MacrosAdvanced, MacrosBasics, MemoryManagement, OperationalSemantics, Ownership, OwnershipAsResourceManagement, OwnershipFormalization, ParadigmMatrix, ProceduralMacros, RustBeltAndVerificationToolchain, RustVsC, RustVsGo, RustVsJava, RustVsPython, RustVsRuby, RustVsSwift, RustVsZig, SafeAndEffectiveUnsafeRust, ScopeGuardAndDeferredCleanup, SeparationLogic, SerdePatterns, ToolchainAndCargo, Traits, TypeSystemBasics, TypeTheory, VariableModel, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: rust_vs_zig
+
+### why does async fn need Pin
+
+- n_retrieved: 40
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.387
+- concept_ndcg@3: 0.387
+- concept_ndcg@5: 0.387
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 0.5
+- concept_recall@1: 0.0
+- concept_recall@10: 0.5
+- concept_recall@3: 0.5
+- concept_recall@5: 0.5
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.387
+- source_ndcg@3: 0.387
+- source_ndcg@5: 0.387
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 0.5
+- source_recall@1: 0.0
+- source_recall@10: 0.5
+- source_recall@3: 0.5
+- source_recall@5: 0.5
+- retrieved_entities: ApplicationDomains, AsyncAdvanced, AsyncBoundaryPanorama, AsyncCancellationSafety, AsyncClosures, AsyncDropPreview, AsyncFFIBoundary, AsyncPatterns, AsyncProgramming, AsyncTraitObjectSafety, Borrowing, ConcurrencyAndAsyncQuiz, ConcurrencyModels, DistributedSystems, ExecutorFairnessAndScheduling, FutureAndExecutorMechanisms, GenBlocksPreview, GenericAssociatedTypesGATs, GenericAssociatedTypesGATsAtTheAsyncBoundary, Generics, Iterators, Lifetimes, LifetimesAdvanced, MemoryManagement, Ownership, OwnershipFormalization, PerformanceOptimization, PinAndUnpin, RustFFI, SafeAndEffectiveUnsafeRust, StreamAlgebraAndBackpressure, SubtypeAndVariance, TokioRuntimeInternals, Traits, TypeInference, TypeSystemBasics, UnsafeBoundaryPanorama, UnsafeInAsyncContexts, WakerContractDeepDive, WebAssemblyEcosystem
+- expected_entities: async_programming, pin_and_unpin
+
+### The Rust Runtime overview
+
+- n_retrieved: 42
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncAdvanced, AsyncProgramming, BehaviorConsideredUndefined, BloomTaxonomy, Borrowing, CoercionAndCasting, CompileTimeExecution, ComprehensiveRustMapping, ConcurrencyModels, CrossCompilation, EmbeddedSystems, ErrorHandlingBasics, ErrorHandlingDeepDive, ErrorHandlingIntermediate, FFIAdvancedTopics, Generics, LearningGuide, Lifetimes, LoggingObservability, MacrosAdvanced, MemoryManagement, NewtypeAndWrapperTypes, Ownership, OwnershipFormalization, Panic, PerformanceOptimization, RustErrorHandlingIdioms, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SubtypeAndVariance, TheRustRuntime, ToolchainAndCargo, Traits, TypeConversions, TypeErasure, TypeSystemBasics, UnsafeRustPatterns, UnsafeRustQuiz, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: he_rust_runtime
+
+### how does Readme work
+
+- n_retrieved: 15
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CrossCompilation, DevOpsAndCICD, MacrosAdvanced, Ownership, Readme, Readme_02intermedia, Readme_03advanced, Readme_05comparativ, Readme_06ecosystem, RustVsC, SecurityPractices, ToolchainAndCargo
+- expected_entities: readme
+
+### Async in no_std and Embedded Systems and Async Programming common patterns
+
+- n_retrieved: 59
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 0.807
+- concept_ndcg@3: 0.613
+- concept_ndcg@5: 0.613
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.2
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 0.5
+- concept_recall@1: 0.5
+- concept_recall@10: 1.0
+- concept_recall@3: 0.5
+- concept_recall@5: 0.5
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 0.807
+- source_ndcg@3: 0.613
+- source_ndcg@5: 0.613
+- source_precision@1: 1.0
+- source_precision@10: 0.2
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 0.5
+- source_recall@1: 0.5
+- source_recall@10: 1.0
+- source_recall@3: 0.5
+- source_recall@5: 0.5
+- retrieved_entities: APIGatewayAndServiceMeshPatternsInRust, ActorModelAndMessagePassingPatternsInRust, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncPatterns, AsyncProgramming, Borrowing, CargoManifestReference, CargoWorkspaces, CategoryTheory, CertifiedToolchainsAndCertifiedPackageInventory, ClosureTypes, CloudNative, ConcurrencyModels, ConcurrencyPatterns, CratesAndSourceFiles, CrossCompilation, DistributedSystems, EffectSystem, EffectsAndPurity, EmbassyAsyncFrameworkDeepDive, EmbeddedDebuggingAndLogging, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, ErrorHandlingBasics, EventDrivenArchitecture, Evolution, GenBlocksPreview, Generics, Items, Lifetimes, Linkage, MemoryManagement, MicroservicePatterns, No_stdAndBareMetalIdioms, Ownership, PACAndHALImplementation, ParadigmMatrix, PerformanceOptimization, PinAndUnpin, ProcessCalculiForRustCSPCCSAndThePiCalculus, RustFFI, RustVsAdaSPARK, RustVsC, RustVsGo, RustVsOCamlOwnershipAndAlgebraicEffectsInSystemsAndFunctionalProgramming, SafeAndEffectiveUnsafeRust, SafetyCriticalBareMetalOperatingSystemsInRust, TheRustRuntime, ToolchainAndCargo, Traits, TypeSystemBasics, TypeTheory, UnsafeInAsyncContexts, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: async_in_no_std_and_embedded_systems, async_programming
+
+### explain Rust 1.97.0 Stabilized Features in rust
+
+- n_retrieved: 30
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, Borrowing, CargoGettingStarted, ControlFlow, Generics, Lifetimes, MemoryManagement, NetworkProtocols, NetworkingBasics, Ownership, Rust190StabilizedFeatures, Rust191StabilizedFeatures, Rust192StabilizedFeatures, Rust193StabilizedFeatures, Rust1950StabilizedFeatures, Rust196StabilizedFeaturesCurrentPatch1961, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust1971StablePatch, Rust1980StabilizedFeatures, Rust198Preview, Rust199Preview, RustFFI, RustVersionTracking, SafeAndEffectiveUnsafeRust, ToolchainAndCargo, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, WebFrameworks
+- expected_entities: rust_1.97.0_stabilized_features
+
+### Stream Processing Semantics overview
+
+- n_retrieved: 53
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AsyncCancellationSafety, AsyncProgramming, BlockchainDevelopmentInRust, Borrowing, CRDTTypeZooStateBasedOpBasedAndTheMergeLattice, CausalOrderingAndVectorClocks, CloudNative, ConcurrencyModels, ConstructionAndInitialization, DataEngineering, DataIntensiveSystemsDesign, DatabaseSystemsInRust, DistributedConsensus, DistributedSystems, DistributedSystemsProtocols, EvaluationStrategies, ExecutorFairnessAndScheduling, FiveExecutionModelsDefinitionMatrix, FutureAndExecutorMechanisms, Generics, Iterators, LambdaCalculus, LearningGuide, Lifetimes, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MemoryManagement, MicroservicePatterns, MoveSemantics, NetworkProtocols, OnlineAndStreamingAlgorithmsInRust, Ownership, ParallelDistributedPatternSpectrum, PerformanceEngineeringArchitecture, PerformanceOptimization, PinAndUnpin, ProcessCalculiForRustCSPCCSAndThePiCalculus, ReactiveProgramming, ReactiveSystemsSemantics, ReferenceSemantics, Roadmap, RustVsC, SafeAndEffectiveUnsafeRust, StreamAlgebraAndBackpressure, StreamProcessingEcosystem, StreamProcessingSemantics, Traits, TypeSystemBasics, ValueSemanticsVsReferenceSemantics, VariableModel, VerificationToolchain, WebAssemblyEcosystem
+- expected_entities: stream_processing_semantics
+
+### Pattern Implementation Comparison overview
+
+- n_retrieved: 43
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, ArchitecturePatterns, AsyncPatterns, AsyncProgramming, Borrowing, ClosureBasics, ClosureTypes, ConcurrencyModels, ConcurrencyPatterns, CoreCratesIndex, DesignPatternsOverview, DistributedSystems, EngineeringPracticeAndProductionGradePatterns, ErrorHandlingIntermediate, EventDrivenArchitecture, Evolution, FormalDesignPatternTheory, FrontierResearchAndInnovativePatterns, Generics, IndustrialRustAdoptionCaseStudies, Iterators, Lifetimes, MacrosAdvanced, MicroservicePatterns, Ownership, ParadigmMatrix, ParallelDistributedPatternSpectrum, PatternCompositionAlgebra, PatternImplementationComparison, PatternSelectionBestPractices, PatternSemanticSpaceIndex, PerformanceOptimization, PinAndUnpin, Roadmap, RustVsC, RustVsGo, SerdePatterns, SystemDesignPrinciples, Traits, TypeSystemBasics, TypeTheory, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: pattern_implementation_comparison
+
+### what is Traits and Generics (Quiz)
+
+- n_retrieved: 41
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedTraits, AsyncCancellationSafety, AsyncProgramming, Borrowing, ClosureBasics, ClosureTypes, ClosuresAndIteratorsQuiz, ConstGenericsAndTraitObjects, ConstGenericsValuesAsTypeParameters, ConstTraitImplPreview, CoreCratesIndex, CowAndBorrowed, DesignPatternsOverview, DispatchMechanisms, FormalMethodsIndustrialization, GenericAssociatedTypesGATs, Generics, Iterators, Lifetimes, LifetimesAdvanced, ModulesAndPaths, ModulesAndTestingQuiz, NewtypeAndWrapperTypes, Ownership, OwnershipBorrowingAndLifetimesQuiz, OwnershipFormalization, PerformanceOptimization, PinAndUnpin, Readme_02intermedia, Roadmap, RustBeltAndVerificationToolchain, SmartPointers, StatementsAndExpressions, SubtypeAndVariance, ToolchainAndCargo, Traits, TraitsAndGenericsQuiz, TypeInference, TypeLevelProgramming, TypeSystemBasics, TypeTheory
+- expected_entities: raits_and_generics_(quiz)
+
+### what is Component-Based System Semantics
+
+- n_retrieved: 53
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorModelSystemSemantics, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, ApplicationBinaryInterface, ArchitecturePatternSemantics, ArchitecturePatterns, ArchitectureRefinement, AsyncProgramming, CargoDependencyResolution, CargoManifestReference, CargoProfilesAndLints, CargoRegistriesAndPublishing, CargoWorkspaces, CategoryTheory, ClosureTypes, CloudNative, ComponentBasedSystemSemantics, ConcurrencyModels, ConcurrencyPatterns, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystems, DistributedSystemsSemantics, ErrorHandlingBasics, EventDrivenArchitecture, FiveExecutionModelsDefinitionMatrix, GradingSystem, InlineAssembly, LambdaCalculus, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MacrosAdvanced, MicroservicePatterns, ModuleSystemAdvanced, Ownership, ParallelDistributedPatternSpectrum, PatternCompositionAlgebra, PiCalculusForRustSystemSemantics, ProcessCalculiForRustCSPCCSAndThePiCalculus, ReactiveProgramming, RefinementCalculusForRustAlgorithms, Roadmap, RustArchitectureSemanticsConstraints, RustVsC, RustVsGo, SafeAndEffectiveUnsafeRust, SemanticSpace, SoftwareArchitectureFormalization, SystemComposability, SystemSemantics, TerminologyGlossary, ToolchainAndCargo, TypeSemantics, TypeSystemBasics
+- expected_entities: component-based_system_semantics
+
+### how does Let Chains and If-Let Guards work
+
+- n_retrieved: 39
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncProgramming, Borrowing, CategoryTheory, ClosureBasics, ConceptMetaLayer, ConcurrencyModels, ControlFlow, CrossLayerDependencyAndImplicationTopology, EffectHandlersAndRustSLimitedEffectsControlFlowAbstractionsAsAComputationalModel, EffectSystem, EffectsAndPurity, ErrorHandlingDeepDive, ErrorHandlingIntermediate, ExampleAndCounterexampleAtlas, Generics, HowRustIsMadeAndNightlyRust, LetChainsAndIfLetGuards, LetElseEarlyReturnOnPatternMismatch, Lifetimes, LinearLogicAndOwnershipResourceCalculusAsAComputationalModel, LoggingObservability, MemoryManagement, MetaFrameworkAndKnowledgeArchitectureQuiz, Ownership, Patterns, ProcessCalculiForRustCSPCCSAndThePiCalculus, Rust1950StabilizedFeatures, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustVersionTracking, SessionTypesAndRustChannelsCommunicationProtocolsAsAComputationalModel, StatementsAndExpressions, TerminologyGlossary, Traits, TypeSystemBasics, TypeTheory
+- expected_entities: let_chains_and_if-let_guards
+
+### explain Cargo Authentication and Build Cache in rust
+
+- n_retrieved: 38
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, AsyncProcessManagementInRust, BlockchainDevelopmentInRust, CargoAuthenticationAndBuildCache, CargoCommandsReference, CargoConfiguration, CargoDependencyResolution, CargoGettingStarted, CargoGuidePractices, CargoManifestTargets, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoRegistryInternals, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CargoWorkflow, CargoWorkspaces, CloudNative, CrossCompilation, DevOpsAndCICD, ErrorHandlingDeepDive, InterProcessCommunicationMechanismsInRust, MacrosAdvanced, ModernProcessManagementLibrariesInRust, ModulesAndPaths, Ownership, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, RustBeltAndVerificationToolchain, RustVsC, SafeAndEffectiveUnsafeRust, SecurityPractices, ToolchainAndCargo, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: cargo_authentication_and_build_cache
+
+### rust Concept Meta Layer tutorial
+
+- n_retrieved: 41
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AlgorithmEngineeringPractice, ApplicationDomains, AsyncProgramming, BloomTaxonomy, Borrowing, Collections, ComprehensiveRustMapping, ConceptDefinitionDecisionForest, ConceptMetaLayer, ConcurrencyModels, DeclarativeMacros, DesignPatternsOverview, DslAndEmbedding, EditionGuide, ErrorHandlingIntermediate, Evolution, Generics, IdiomsSpectrum, IteratorIdiomsInRust, LearningGuide, Lifetimes, MacroPatterns, MacrosAdvanced, MacrosBasics, Metaprogramming, ModulesAndPaths, NLLAndPolonius, Ownership, PerformanceOptimization, ProceduralMacros, Roadmap, RustAPIGuidelinesCanonicalGuide, RustBeltAndVerificationToolchain, RustConceptKnowledgeSystem, RustVersionTracking, SafeAndEffectiveUnsafeRust, SerdePatterns, Traits, TypeConversions, TypeSystemBasics, WebAssemblyEcosystem
+- expected_entities: concept_meta_layer
+
+### rust Bootstrapping the Rust Compiler tutorial
+
+- n_retrieved: 51
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, ApplicationDomains, AsyncProgramming, AuthoritySourceMap, BootstrappingTheRustCompiler, CRDTTypeZooStateBasedOpBasedAndTheMergeLattice, CausalOrderingAndVectorClocks, CompileTimeExecution, CompilerInfrastructure, ConcurrencyModels, CrossCompilation, DistributedConsensus, Evolution, ExecutionModelIsomorphism, FiveExecutionModelsDefinitionMatrix, FormalMethodsIndustrialization, Generics, HoareLogic, KGSHACLEngineValidation, KnowledgeGraphDesignW3CSHACLOWLAlignmentAndOntologyEngineeringMethods, KnowledgeGraphOntologyV20, LLMAndRAGForRustKnowledgeBasesOntologyEngineeringAndRetrievalAugmentedGeneration, LambdaCalculus, Lifetimes, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MacrosAdvanced, Methodology, Ownership, ParallelDistributedPatternSpectrum, PatternCompositionAlgebra, ProcessCalculiForRustCSPCCSAndThePiCalculus, RAGEvaluationForTheRustKnowledgeGraph, Roadmap, RustCompilerInternalsAndDriverArchitecture, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SemanticSpace, TerminologyGlossary, TestingTheRustCompiler, ToolchainAndCargo, Traits, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: bootstrapping_the_rust_compiler
+
+### Panic overview
+
+- n_retrieved: 62
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncProgramming, AtomicsAndMemoryOrdering, BareMetalBootAndLinkerScripts, BareMetalRust, BehaviorConsideredUndefined, Borrowing, CargoBuildStd, ConcurrencyModels, CriticalSectionsAndSynchronizationOnBareMetal, CrossCompilation, DesignPatternsOverview, EmbassyAsyncFrameworkDeepDive, EmbeddedDebuggingAndLogging, EmbeddedFormalMemoryModel, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedProtocolAndPeripheralDrivers, EmbeddedSystems, ErrorHandlingDeepDive, ErrorHandlingIntermediate, Evolution, FFIAdvancedTopics, FormalMethodsIndustrialization, FormalMethodsLayerOverview, Generics, InlineAssembly, InterruptAndExceptionModel, Lifetimes, LinearizabilityAndTheConsistencySpectrum, LinkerScriptsAndMemoryLayoutForEmbeddedRust, LoggingObservability, MemoryManagement, MiriRustUndefinedBehaviorDetector, No_stdAllocatorsAndPanicHandlers, No_stdAndBareMetalIdioms, No_stdAndBareMetalRust, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, Ownership, PACAndHALImplementation, Panic, PanicAndAbort, Panic_handlerAndNo_stdRuntime, RISCVAndAVREmbeddedRustDevelopment, RTICVsEmbassyRealTimeFrameworksInRust, Roadmap, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustVersionTracking, RustVsC, RustVsZig, SafeAndEffectiveUnsafeRust, SafetyCriticalBareMetalOperatingSystemsInRust, TheNo_stdAllocCrateEcosystem, Traits, TreeBorrowsDeepDive, TypeSystemBasics, UnsafeRustTopicIndex, VerificationAndContractsEcosystemOverview, WASIAndWebAssemblyComponentModel
+- expected_entities: panic
+
+### what is Mathematical Functions of Computation
+
+- n_retrieved: 63
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AerospaceCertificationFormalMethods, AlgorithmComplexityAnalysisInRust, AlgorithmEngineeringPractice, AlgorithmsCompetitiveProgramming, AsyncProgramming, AxiomaticSemantics, Borrowing, CategoryTheory, CategoryTheoryAndRustStructuralSemanticsAsAComputationalModel, Collections, ComputabilityTheory, ComputationalModelsAndComputability, ConcurrencyModelComparison, ConcurrencyModels, ConstItemsAndConstFunctions, ConstantEvaluation, ControlFlow, DenotationalSemantics, DistributedSystemsSemantics, EquivalenceOfComputationalModels, EvaluationStrategies, FieldProjectionsPreview, FiveExecutionModelsDefinitionMatrix, FormalAlgorithmTheory, FormalMethodsMergedRedirect, Functions, Generics, HoareLogic, InPlaceAndPinnedInitializationPatterns, LambdaCalculus, Lifetimes, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MathematicalFunctionsOfComputation, MemoryManagement, ModalLogicAndRustEffects, ModernVerificationTools, ObservationalEquivalence, ObservationalEquivalenceOfAlgorithmImplementations, OperationalSemantics, OperationalSemanticsOfInPlaceInitialization, Ownership, OwnershipFormalization, PerformanceOptimization, ProcessCalculiForRustCSPCCSAndThePiCalculus, ReactiveSystemsSemantics, RefinementCalculusForRustAlgorithms, RustBeltAndVerificationToolchain, RustVsC, SafeAndEffectiveUnsafeRust, SemanticSpace, SemanticsBoundariesOfParallelConcurrentAsyncAndDistributedComputation, SeparationLogic, SeparationLogicForRustAnIrisAndRustBeltPerspective, StreamAlgebraAndBackpressure, Traits, TreeBorrowsDeepDive, TypeSystemBasics, TypeTheory, TypeTheoryAndRustTheTypeSystemAsAComputationalModel, UnsafeRustPatterns, VerificationToolchain
+- expected_entities: mathematical_functions_of_computation
+
+### what is International Authority Index
+
+- n_retrieved: 30
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ArchitectureGovernanceAndArchitectureDecisionRecords, ArchitecturePatterns, ArchitectureStandardsAlignment, AsyncPatterns, AuthoritySourceIndex, AuthoritySourceMap, ConceptIndex, ConcurrencyPatterns, CrossReferenceMatrix, DesignPatternsOverview, DistributedSystems, EnterpriseArchitectureFrameworks, ExternalAuthorityTopicIndex, InternationalAuthorityIndex, KnowledgeMindmap, Ownership, ParadigmMatrix, PatternCompositionAlgebra, PatternSemanticSpaceIndex, Roadmap, SafetyBoundaries, SemanticLayerAlignmentIndex, SemanticSpace, SoftwareArchitectureFormalization, Sources, SystemDesignPrinciples, Todos, TopicAuthorityAlignmentMap, Traits, TypeSystemBasics
+- expected_entities: international_authority_index
+
+### how does eBPF Rust work
+
+- n_retrieved: 58
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AlgorithmEngineeringPractice, ApplicationDomains, AsyncProgramming, BlockchainDevelopmentInRust, BloomTaxonomy, CargoAuthenticationAndBuildCache, CargoCommandsReference, CargoConfiguration, CargoGettingStarted, CargoManifestTargets, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoRegistryInternals, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CargoWorkflow, CloudNative, Collections, ComprehensiveRustMapping, ConcurrencyModels, CrossCompilation, DesignPatternsOverview, DevOpsAndCICD, DistributedSystems, EBPFRust, ErrorHandlingDeepDive, ErrorHandlingIntermediate, Generics, HowRustIsMadeAndNightlyRust, IdiomsSpectrum, ItemsReference, IteratorIdiomsInRust, Keywords, LearningGuide, LexicalStructure, MacrosAdvanced, NamesScopesAndResolution, NetworkingAndAsyncEcosystemQuiz, Notation, Ownership, PerformanceOptimization, Roadmap, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustAPIGuidelinesCanonicalGuide, RustBeltAndVerificationToolchain, RustLanguageFeatureInventoryMethodology, RustMinimumViableLearningPath, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SecurityPractices, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, WebAssemblyEcosystem, WebFrameworks
+- expected_entities: ebpf_rus
+
+### how does Ownership, Borrowing and Lifetimes (Quiz) work
+
+- n_retrieved: 29
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, Borrowing, ClosureBasics, ClosureTypes, ClosuresAndIteratorsQuiz, ConcurrencyModels, CoreCratesIndex, CowAndBorrowed, FormalMethodsIndustrialization, Generics, Iterators, Lifetimes, MemoryManagement, ModulesAndPaths, ModulesAndTestingQuiz, NLLAndPolonius, Ownership, OwnershipBorrowingAndLifetimesQuiz, OwnershipBorrowingLifetimesKnowledgeMap, OwnershipFormalization, PinAndUnpin, Readme, RustBeltAndVerificationToolchain, SafeAndEffectiveUnsafeRust, SmartPointers, ToolchainAndCargo, Traits, TraitsAndGenericsQuiz, TypeSystemBasics
+- expected_entities: ownership,_borrowing_and_lifetimes_(quiz)
+
+### Aerospace Certification & Formal Methods vs AI Ontology and Rust Semantics: trade-offs
+
+- n_retrieved: 59
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.4
+- concept_precision@1: 1.0
+- concept_precision@10: 0.2
+- concept_precision@3: 0.667
+- concept_precision@5: 0.4
+- concept_recall: 1.0
+- concept_recall@1: 0.5
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.2
+- source_precision@3: 0.667
+- source_precision@5: 0.4
+- source_recall: 1.0
+- source_recall@1: 0.5
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, AIOntologyAndRustSemantics, AISafetyAndAlignment, AerospaceCertificationFormalMethods, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncProgramming, AuthoritySourceMap, ConceptDefinitionAtlas, ConcurrencyModels, DependentTypesAndRefinementTypes, DescriptionLogicAndOWL, Evolution, FormalMethodsIndustrialization, FormalMethodsLayerOverview, FormalMethodsMergedRedirect, InterLayerMappingAtlas, KGSHACLEngineValidation, KnowledgeGraphConstruction, KnowledgeGraphDesignW3CSHACLOWLAlignmentAndOntologyEngineeringMethods, KnowledgeGraphOntologyV20, LLMAndRAGForRustKnowledgeBasesOntologyEngineeringAndRetrievalAugmentedGeneration, LLMSystemArchitecture, LinearAndAffineLogic, LockingPrimitives, MLOpsAndLLMOps, MachineLearningEcosystem, MemoryManagement, MemoryModel, Methodology, ModernVerificationTools, NetworkProgramming, OntologyEngineeringMethodologies, OperationalSemantics, Ownership, OwnershipFormalization, ParadigmMatrix, PerformanceOptimization, ProcessCalculiForRustCSPCCSAndThePiCalculus, RustBeltAndVerificationToolchain, RustConceptKnowledgeSystem, RustInAI, RustVsC, RustVsElixirConcurrencyAndFaultToleranceComparison, RustVsGo, SafeAndEffectiveUnsafeRust, SemanticEngineeringAndOntology, SemanticInteroperability, SemanticModelAtlas, SemanticSpace, SeparationLogic, StreamProcessingSemantics, TerminologyGlossary, Traits, TypeErasure, TypeSystemBasics, TypeTheory, UnifiedLanguageSemanticModelExpressivenessMatrix, VerificationToolchain, WebFrameworks
+- expected_entities: aerospace_certification_&_formal_methods, ai_ontology_and_rust_semantics
+
+### how does Bloom Taxonomy work
+
+- n_retrieved: 23
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, BloomTaxonomy, Borrowing, ConceptIndex, ConcurrencyModels, DistributedSystems, Generics, HowRustIsMadeAndNightlyRust, Lifetimes, MemoryManagement, Ownership, PerformanceOptimization, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustVersionTracking, StreamProcessingEcosystem, StreamProcessingSemantics, TerminologyGlossary, Traits, TypeErasure, TypeSystemBasics, ZeroCostAbstractions
+- expected_entities: bloom_taxonomy
+
+### rust Pattern Composition Algebra (Redirect Stub) tutorial
+
+- n_retrieved: 27
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ArchitecturePatterns, AsyncPatterns, AsyncProgramming, ClosureTypes, ConcurrencyModels, ConcurrencyPatterns, DesignPatternsOverview, DistributedSystems, Evolution, FormalAlgorithmTheoryRedirectStub, FormalDesignPatternTheoryRedirectStub, Ownership, ParadigmMatrix, PatternCompositionAlgebra, PatternCompositionAlgebraRedirectStub, PinAndUnpin, Roadmap, RustDesignPatternAndArchitecturePatternSemanticAtlas, RustVsC, RustVsGo, SafeAndEffectiveUnsafeRust, SystemDesignPrinciples, Traits, TypeSystemBasics, TypeTheory, UnsafeRustPatterns, WebAssemblyEcosystem
+- expected_entities: pattern_composition_algebra_(redirect_stub)
+
+### how does Data Abstraction Spectrum work
+
+- n_retrieved: 62
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AsyncPatterns, AsyncProgramming, Borrowing, CRDTTypeZooStateBasedOpBasedAndTheMergeLattice, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CausalOrderingAndVectorClocks, ConcurrencyModels, ConcurrencyPatterns, CrossCompilation, DataAbstractionSpectrum, DataEngineering, DecidabilitySpectrum, DesignPatternsOverview, DevOpsAndCICD, DistributedConsensus, DistributedSystems, EvaluationStrategies, Evolution, ExpressivenessMultiview, FiveExecutionModelsDefinitionMatrix, FormalMethodsIndustrialization, Generics, HoareLogic, IdiomsSpectrum, LambdaCalculus, Lifetimes, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MacrosAdvanced, MemoryManagement, Ownership, OwnershipFormalization, ParadigmMatrix, ParallelDistributedPatternSpectrum, PatternCompositionAlgebra, PerformanceOptimization, ProcessCalculiForRustCSPCCSAndThePiCalculus, QuizGeneralPLFoundations, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SecurityPractices, SelfAssessment, SeparationLogic, SeparationLogicForRustAnIrisAndRustBeltPerspective, StreamProcessingEcosystem, SystemDesignPrinciples, ToolchainAndCargo, Traits, TypeErasure, TypeSystemBasics, TypeTheory, TypeTheoryAndRustTheTypeSystemAsAComputationalModel, VariableModel, VerificationToolchain
+- expected_entities: data_abstraction_spectrum
+
+### what is Send and Sync — Auto Traits as Compile-Time Concurrency Contracts
+
+- n_retrieved: 41
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AsyncAdvanced, AsyncProgramming, Borrowing, ClosureBasics, ClosureTypes, CompileTimeExecution, ComponentBasedSystemSemantics, ConcurrencyAndAsyncQuiz, ConcurrencyModels, ConcurrencyModelsAsComputationalModelsCSPActorsTLAAndRust, ConcurrencyPatterns, ConstGenericsValuesAsTypeParameters, ConstTraitImplPreview, CrossPlatformConcurrency, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystems, DistributedSystemsSemantics, Evolution, Generics, Lifetimes, LinearizabilityAndTheConsistencySpectrum, MacrosAdvanced, MemoryManagement, OperatingSystems, Ownership, OwnershipFormalization, PerformanceOptimization, ProcessCalculiForRustCSPCCSAndThePiCalculus, RustVsC, SafeAndEffectiveUnsafeRust, SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts, SendSyncBoundaryJudgmentTraitObjectsClosuresAndAsyncStateMachines, StatementsAndExpressions, SubtypeAndVariance, ToolchainAndCargo, Traits, TypeLevelProgramming, TypeSystemBasics, ZeroCostAbstractions
+- expected_entities: send_and_sync_—_auto_traits_as_compile-time_concurrency_contracts
+
+### what is Network Security in Rust
+
+- n_retrieved: 60
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedNetworkProtocolsInRust, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, BlockchainDevelopmentInRust, Borrowing, CertifiedToolchainsAndCertifiedPackageInventory, ClosureTypes, CloudNative, CoercionAndCasting, Collections, ConcurrencyModels, ConcurrencyPatterns, CustomNetworkProtocolImplementationInRust, DesignPatternsOverview, DistributedSystems, EmbeddedDebuggingAndLogging, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, ErrorHandlingDeepDive, ErrorHandlingIntermediate, FormalMethodsIndustrialization, FormalVerificationEcosystemTower, Generics, HighPerformanceNetworkServiceArchitecture, IdiomsSpectrum, IteratorIdiomsInRust, Lifetimes, LockingPrimitives, LoggingObservability, MemoryManagement, ModernProcessManagementLibrariesInRust, NetworkProgramming, NetworkProtocols, NetworkSecurityInRust, NewtypeAndWrapperTypes, No_stdAndBareMetalIdioms, Ownership, OwnershipFormalization, PACAndHALImplementation, PerformanceOptimization, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, Roadmap, RustBeltAndVerificationToolchain, RustVsAdaSPARK, RustVsC, SafeAndEffectiveUnsafeRust, SafetyCriticalBareMetalOperatingSystemsInRust, SecurityPractices, SmartPointers, StreamProcessingEcosystem, StreamProcessingSemantics, Traits, TypeConversions, TypeSystemBasics, WebAssemblyEcosystem, WebFrameworks
+- expected_entities: network_security_in_rus
+
+### how does Getting Started with Rust work
+
+- n_retrieved: 58
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, ApplicationDomains, BloomTaxonomy, Borrowing, CAbiObjectModel, CCToRustEngineeringComparisonRoadmap, CToRustTranslation, CargoBuildScriptsBuildRs, CargoDependencyResolution, CargoGettingStarted, CargoGuidePractices, CargoManifestReference, CargoProfilesAndLints, CargoRegistriesAndPublishing, CargoSourceReplacement, CargoWorkflow, CargoWorkspaces, ComprehensiveRustMapping, ConcurrencyModels, CoreCratesIndex, CowAndBorrowed, DesignPatternsOverview, EditionGuide, EvaluationStrategies, Evolution, FormalMethodsIndustrialization, FormalVerificationTools, Generics, GettingStartedWithRust, HowRustIsMadeAndNightlyRust, LearningGuide, LearningMvpPath, Lifetimes, MacrosAdvanced, MemoryManagement, Methodology, ModulesAndPaths, Ownership, OwnershipFormalization, PatternCompositionAlgebra, PatternSemanticSpaceIndex, Roadmap, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SerdePatterns, ToolchainAndCargo, Traits, TypeSystemBasics, VariableModel, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: getting_started_with_rus
+
+### what is System Semantics
+
+- n_retrieved: 32
+- concept_mrr: 0.333
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.5
+- concept_ndcg@3: 0.5
+- concept_ndcg@5: 0.5
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.333
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.5
+- source_ndcg@3: 0.5
+- source_ndcg@5: 0.5
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorModelSystemSemantics, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AsyncProgramming, CategoryTheory, ClosureTypes, CloudNative, ComponentBasedSystemSemantics, ConcurrencyModels, ConcurrencyPatterns, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystems, DistributedSystemsSemantics, ErrorHandlingBasics, EventDrivenArchitecture, FiveExecutionModelsDefinitionMatrix, GradingSystem, LambdaCalculus, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MicroservicePatterns, Ownership, ParallelDistributedPatternSpectrum, PiCalculusForRustSystemSemantics, ProcessCalculiForRustCSPCCSAndThePiCalculus, ReactiveProgramming, Roadmap, RustVsGo, SemanticSpace, SystemComposability, SystemSemantics, TypeSystemBasics
+- expected_entities: system_semantics
+
+### rust Rust vs C++ tutorial
+
+- n_retrieved: 49
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedTraits, ApplicationDomains, AsyncProgramming, Borrowing, CAbiObjectModel, CCToRustEngineeringComparisonRoadmap, CVsRustConstructionOperatorsRTTIAndFriends, ConcurrencyModels, CoreCratesIndex, CrossCompilation, DesignPatternsOverview, ErrorHandlingBasics, ErrorHandlingDeepDive, ErrorHandlingIntermediate, EvaluationStrategies, Evolution, ExceptionSafetyCVsRust, Generics, Lifetimes, LinearAndAffineLogic, LoggingObservability, MemoryManagement, OperationalSemantics, Ownership, OwnershipFormalization, ParadigmMatrix, PatternCompositionAlgebra, PatternSemanticSpaceIndex, QuizCCToRustFoundations, RTTIAndDynamicTypeIdentification, RustBeltAndVerificationToolchain, RustVsC, RustVsGo, RustVsJava, RustVsPython, RustVsRuby, RustVsSwift, RustVsZig, SafeAndEffectiveUnsafeRust, SeparationLogic, SubtypeAndVariance, ToolchainAndCargo, Traits, TypeErasure, TypeSystemBasics, TypeTheory, VariableModel, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: rust_vs_c++
+
+### how does Rust vs Ruby work
+
+- n_retrieved: 54
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncProgramming, BlockchainDevelopmentInRust, Borrowing, CPreprocessorVsRustMacros, CargoAuthenticationAndBuildCache, CargoCommandsReference, CargoConfiguration, CargoGettingStarted, CargoManifestTargets, CargoRegistriesAndPublishing, CargoRegistryInternals, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CargoWorkflow, ConcurrencyModels, CoreCratesIndex, CrossCompilation, DeclarativeMacros, DesignPatternsOverview, DevOpsAndCICD, DslAndEmbedding, ErrorHandlingDeepDive, Evolution, Generics, Lifetimes, LinearAndAffineLogic, MacrosAdvanced, MacrosBasics, MemoryManagement, OperationalSemantics, Ownership, OwnershipFormalization, ParadigmMatrix, ProceduralMacros, Readme_05comparativ, RustBeltAndVerificationToolchain, RustFFI, RustVsC, RustVsGo, RustVsJava, RustVsJavaScript, RustVsPython, RustVsRuby, RustVsSwift, SafeAndEffectiveUnsafeRust, SecurityPractices, SeparationLogic, SerdePatterns, ToolchainAndCargo, Traits, TypeSystemBasics, TypeTheory, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: rust_vs_ruby
+
+### how do public and private dependencies affect cargo resolver behavior
+
+- n_retrieved: 57
+- concept_mrr: 0.0
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.0
+- concept_ndcg@3: 0.0
+- concept_ndcg@5: 0.0
+- concept_precision: 0.0
+- concept_precision@1: 0.0
+- concept_precision@10: 0.0
+- concept_precision@3: 0.0
+- concept_precision@5: 0.0
+- concept_recall: 0.0
+- concept_recall@1: 0.0
+- concept_recall@10: 0.0
+- concept_recall@3: 0.0
+- concept_recall@5: 0.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 0.85
+- source_ndcg@3: 0.613
+- source_ndcg@5: 0.85
+- source_precision@1: 1.0
+- source_precision@10: 0.2
+- source_precision@3: 0.333
+- source_precision@5: 0.4
+- source_recall: 1.0
+- source_recall@1: 0.5
+- source_recall@10: 1.0
+- source_recall@3: 0.5
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, Borrowing, Cargo196FeatureHighlights, CargoAuthenticationAndBuildCache, CargoBuildScriptsBuildRs, CargoCommandsReference, CargoConfiguration, CargoDependencyResolution, CargoGettingStarted, CargoGuidePractices, CargoManifestReference, CargoProfilesAndLints, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoScriptWritingAndRunningRustScripts, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CargoSourceReplacement, CargoWorkflow, CargoWorkspaces, CloudNative, CompilerDiagnosticsAndUITests, CompilerInfrastructure, ConcurrencyModels, CrossCompilation, DevOpsAndCICD, Evolution, FormalMethodsIndustrialization, IntegratingRustIntoExistingPlatformsAndCodebases, LLVMBackendAndCodeGenerationInRustc, Lifetimes, MacrosAdvanced, MemoryManagement, ModulesAndPaths, Ownership, PerformanceOptimization, ResolverV3AndPublicTrueFeatureUnificationDemo, Roadmap, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustVersionTracking, RustVsC, RustVsGo, RustcAndCargoZUnstableFlagsReference, RustcDriverRustc_interfaceAndStableMIR, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SecurityPractices, TargetTierPlatformSupportGuaranteesAndChangesInRust190197, TerminologyGlossary, TestingStrategies, TestingTheRustCompiler, ToolchainAndCargo, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: public_private_dependencies, resolver_v3
+
+### rust Data-Intensive Systems Design tutorial
+
+- n_retrieved: 86
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AUTOSARAndRust, ActorModelSystemSemantics, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AerospaceCertificationFormalMethods, ArchitecturePatterns, AsyncInNo_stdAndEmbeddedSystems, AsyncPatterns, AsyncProgramming, BareMetalBootAndLinkerScripts, BlockchainDevelopmentInRust, Borrowing, CRDTTypeZooStateBasedOpBasedAndTheMergeLattice, CargoVetAndSupplyChainAuditing, CausalOrderingAndVectorClocks, CertifiedToolchainsAndCertifiedPackageInventory, CloudNative, ComponentBasedSystemSemantics, ConcurrencyModels, ConcurrencyPatterns, CrossCompilation, CustomBareMetalAsyncExecutor, DataEngineering, DataIntensiveSystemsDesign, DatabaseSystemsInRust, DesignPatternsOverview, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystems, DistributedSystemsProtocols, DistributedSystemsSemantics, EmbeddedDebuggingAndLogging, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, Evolution, FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems, FormalMethodsIndustrialization, InterruptAndExceptionModel, Lifetimes, LinearizabilityAndTheConsistencySpectrum, MISRARustAndSafetyCriticalEmbeddedGuidelines, MemoryManagement, MicroservicePatterns, NetworkProtocols, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, Ownership, OwnershipFormalization, Panic_handlerAndNo_stdRuntime, ParadigmMatrix, PatternCompositionAlgebra, PerformanceEngineeringArchitecture, PerformanceOptimization, ProcessCalculiForRustCSPCCSAndThePiCalculus, QuizRustVsSystems, ReactiveProgramming, ReactiveSystemsSemantics, Roadmap, RustBeltAndVerificationToolchain, RustDesignPatternAndArchitecturePatternSemanticAtlas, RustEditionMechanismAndMigrationGuide, RustFFI, RustForDataScienceAndScientificComputing, RustInAI, RustInSafetyCriticalSystems, RustVersionTracking, RustVsAdaSPARK, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, SafetyCriticalRustTopicIndex, SafetyCriticalSystemsEngineering, StreamAlgebraAndBackpressure, StreamProcessingEcosystem, StreamProcessingSemantics, SubtypeAndVariance, SystemComposability, SystemDesignPrinciples, SystemsEngineeringStandardsAndRustMapping, ToolchainAndCargo, Traits, TypeSystemBasics, VerificationToolchain, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: data-intensive_systems_design
+
+### rust Rust 1.95.0 Stabilized Features tutorial
+
+- n_retrieved: 30
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, Borrowing, CargoGettingStarted, ControlFlow, Generics, Lifetimes, MemoryManagement, NetworkProtocols, NetworkingBasics, Ownership, Rust190StabilizedFeatures, Rust191StabilizedFeatures, Rust192StabilizedFeatures, Rust193StabilizedFeatures, Rust1950StabilizedFeatures, Rust196StabilizedFeaturesCurrentPatch1961, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust1971StablePatch, Rust1980StabilizedFeatures, Rust198Preview, Rust199Preview, RustFFI, RustVersionTracking, SafeAndEffectiveUnsafeRust, ToolchainAndCargo, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, WebFrameworks
+- expected_entities: rust_1.95.0_stabilized_features
+
+### what is CLI Development
+
+- n_retrieved: 50
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, CLIDevelopment, CargoAuthenticationAndBuildCache, CargoProfilesAndLints, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoSemVerChecksPreview, CompilerInfrastructure, ConcurrencyModels, CrossCompilation, DeclarativeMacros, DesignPatternsOverview, DevOpsAndCICD, DevelopmentToolsEcosystem, EmbeddedSystems, ErrorHandlingIntermediate, Evolution, FormalMethodsIndustrialization, Generics, HowRustIsMadeAndNightlyRust, MacrosAdvanced, MacrosBasics, Ownership, PerformanceOptimization, PinAndUnpin, ProceduralMacros, ProductionGradeMacroDevelopment, RISCVAndAVREmbeddedRustDevelopment, Roadmap, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustEditionMechanismAndMigrationGuide, RustForOperatingSystemKernelDevelopment, RustInAI, RustMinimumViableLearningPath, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SerdePatterns, TestingBasics, TestingEcosystem, ToolchainAndCargo, Traits, TypeSystemBasics, UsefulDevelopmentToolsFoundation, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: cli_developmen
+
+### what is Process Model and Lifecycle in Rust
+
+- n_retrieved: 20
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorModelAndMessagePassingPatternsInRust, AdvancedProcessManagementInRust, AsyncProcessManagementInRust, AsyncProgramming, ClosureTypes, CloudNative, ConcurrencyModels, ConcurrencyPatterns, DistributedSystems, ErrorHandlingBasics, EventDrivenArchitecture, InterProcessCommunicationMechanismsInRust, MicroservicePatterns, ModernProcessManagementLibrariesInRust, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, TypeSystemBasics
+- expected_entities: process_model_and_lifecycle_in_rus
+
+### rust Friend vs Module Privacy tutorial
+
+- n_retrieved: 58
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: APIDesignPatterns, AdvancedTraits, ApplicationDomains, AsyncProgramming, Borrowing, CAbiObjectModel, CPreprocessorVsRustMacros, CVsRustConstructionOperatorsRTTIAndFriends, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoSemVerChecksPreview, ConcurrencyModels, CoreCratesIndex, DeclarativeMacros, DesignPatternsOverview, DslAndEmbedding, EditionGuide, ErrorHandlingDeepDive, EvaluationStrategies, Evolution, FriendVsModulePrivacy, Generics, IdiomaticRustAPINamingConventions, Items, Lifetimes, LinearAndAffineLogic, MacrosAdvanced, MacrosBasics, MemoryManagement, ModuleSystemAdvanced, NLLAndPolonius, OperationalSemantics, Ownership, OwnershipFormalization, ParadigmMatrix, ProceduralMacros, RTTIAndDynamicTypeIdentification, Roadmap, RustBeltAndVerificationToolchain, RustVersionTracking, RustVsC, RustVsGo, RustVsJava, RustVsPython, RustVsRuby, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SeparationLogic, SerdePatterns, SubtypeAndVariance, ToolchainAndCargo, Traits, TypeErasure, TypeSystemAdvanced, TypeSystemBasics, TypeTheory, VariableModel, VisibilityAndPrivacy, WebAssemblyEcosystem
+- expected_entities: friend_vs_module_privacy
+
+### explain Rust vs Nim in rust
+
+- n_retrieved: 72
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, AtomicsAndMemoryOrdering, Borrowing, CPreprocessorVsRustMacros, CertifiedToolchainsAndCertifiedPackageInventory, CoercionAndCasting, Collections, ConcurrencyModels, CoreCratesIndex, CriticalSectionsAndSynchronizationOnBareMetal, CrossCompilation, CustomBareMetalAsyncExecutor, DeclarativeMacros, DesignPatternsOverview, DslAndEmbedding, EmbassyAsyncFrameworkDeepDive, EmbeddedDebuggingAndLogging, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, ErrorHandlingBasics, ErrorHandlingDeepDive, ErrorHandlingIntermediate, Evolution, ExceptionSafetyCVsRust, Generics, IdiomsSpectrum, InterruptAndExceptionModel, IteratorIdiomsInRust, Lifetimes, LoggingObservability, MISRARustAndSafetyCriticalEmbeddedGuidelines, MacrosAdvanced, MacrosBasics, MemoryManagement, NewtypeAndWrapperTypes, No_stdAndBareMetalIdioms, No_stdAndBareMetalRust, No_stdSynchronizationPrimitives, Ownership, ParadigmMatrix, PerformanceOptimization, PinAndUnpin, ProceduralMacros, RTICRealTimeTaskSchedulingFrameworkDeepDive, RTICVsEmbassyRealTimeFrameworksInRust, RTOSAndSchedulingModelsInRust, Roadmap, RustVsAdaSPARK, RustVsC, RustVsGo, RustVsJava, RustVsNim, RustVsPython, RustVsRuby, RustVsSwift, RustVsZig, SafeAndEffectiveUnsafeRust, SafetyCriticalBareMetalOperatingSystemsInRust, SerdePatterns, SmartPointers, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, TypeTheory, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: rust_vs_nim
+
+### Metaprogramming pitfalls and how to avoid them
+
+- n_retrieved: 64
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: APIDesignPatterns, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncProgramming, Borrowing, CAbiObjectModel, CCToRustEngineeringComparisonRoadmap, CPreprocessorVsRustMacros, CategoryTheory, ConcurrencyModels, CrossLayerDependencyAndImplicationTopology, DeclarativeMacros, DesignPatternsOverview, DistributedConsensus, DslAndEmbedding, EffectSystem, EffectsAndPurity, EvaluationStrategies, Evolution, FFIPatternsInRust, FiveExecutionModelsDefinitionMatrix, Generics, HowRustIsMadeAndNightlyRust, IdiomsSpectrum, LambdaCalculus, Lifetimes, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MacroPatterns, MacrosAdvanced, MacrosBasics, MemoryManagement, Metaprogramming, ModulesAndPaths, Ownership, OwnershipFormalization, OwnershipPerformanceOptimization, ParadigmMatrix, ParallelDistributedPatternSpectrum, PatternCompositionAlgebra, PatternSemanticSpaceIndex, ProceduralMacros, ProcessCalculiForRustCSPCCSAndThePiCalculus, Readme_03advanced, Roadmap, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustAntiPatterns, RustAntiPatternsAndPitfallsAtlas, RustBeltAndVerificationToolchain, RustPerformanceIdioms, RustVersionTracking, RustVsC, RustVsD, RustVsGo, SafeAndEffectiveUnsafeRust, SerdePatterns, Traits, TypeSystemBasics, TypeTheory, UnsafeRustPatterns, VariableModel, WebAssemblyEcosystem
+- expected_entities: metaprogramming
+
+### `unsafe extern blocks` in Rust Edition 2024 overview
+
+- n_retrieved: 62
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AUTOSARAndRust, AerospaceCertificationFormalMethods, ApplicationDomains, AsyncClosures, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, BareMetalBootAndLinkerScripts, CargoVetAndSupplyChainAuditing, CertifiedToolchainsAndCertifiedPackageInventory, CrossCompilation, CustomAllocators, CustomBareMetalAsyncExecutor, EditionGuide, EmbeddedDebuggingAndLogging, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, Evolution, FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems, FormalMethodsIndustrialization, Generics, InterruptAndExceptionModel, LetChainsAndIfLetGuards, Lifetimes, MISRARustAndSafetyCriticalEmbeddedGuidelines, MemoryManagement, NLLAndPolonius, NetworkingBasics, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, Ownership, Panic_handlerAndNo_stdRuntime, PerformanceOptimization, Roadmap, Rust190StabilizedFeatures, Rust191StabilizedFeatures, Rust2024EditionPreviewAndMigrationNotes, RustEdition20212024Differences, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustInQuantumComputingEcosystems, RustInSafetyCriticalSystems, RustVersionTracking, RustVsAdaSPARK, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, SafetyCriticalRustTopicIndex, SafetyCriticalSystemsEngineering, StandardLibraryUnsafeInternals, StatementsAndExpressions, TerminologyGlossary, Traits, TypeSystemBasics, UnsafeCollectionsInternals, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, UnsafeRustTopicIndex, VerificationToolchain
+- expected_entities: `unsafe_extern_blocks`_in_rust_edition_2024
+
+### how does macro_rules hygiene prevent name collisions
+
+- n_retrieved: 43
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 0.85
+- concept_ndcg@3: 0.613
+- concept_ndcg@5: 0.85
+- concept_precision: 0.4
+- concept_precision@1: 1.0
+- concept_precision@10: 0.2
+- concept_precision@3: 0.333
+- concept_precision@5: 0.4
+- concept_recall: 1.0
+- concept_recall@1: 0.5
+- concept_recall@10: 1.0
+- concept_recall@3: 0.5
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 0.85
+- source_ndcg@3: 0.613
+- source_ndcg@5: 0.85
+- source_precision@1: 1.0
+- source_precision@10: 0.2
+- source_precision@3: 0.333
+- source_precision@5: 0.4
+- source_recall: 1.0
+- source_recall@1: 0.5
+- source_recall@10: 1.0
+- source_recall@3: 0.5
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncProgramming, CPreprocessorVsRustMacros, CargoSemVerChecksPreview, CompilerDiagnosticsAndUITests, CoreCratesIndex, DeclarativeMacros, DesignPatternsOverview, DslAndEmbedding, Generics, HowRustIsMadeAndNightlyRust, Lifetimes, MacroDebuggingAndDiagnostics, MacroHygiene, MacroPatterns, MacrosAdvanced, MacrosBasics, MacrosQuiz, Metaprogramming, ModulesAndPaths, NameResolutionAndHIRInRustc, Ownership, OwnershipFormalization, ProceduralMacros, ProductionGradeMacroDevelopment, Roadmap, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustBeltAndVerificationToolchain, RustCompilerInternalsAndDriverArchitecture, RustVersionTracking, SafeAndEffectiveUnsafeRust, SerdePatterns, SubtypeAndVariance, TheRustcQuerySystemAndIncrementalCompilation, TheTraitSolverInRustc, ToolchainAndCargo, Traits, TypeInference, TypeSystemBasics, TypeTheory, WebAssemblyEcosystem
+- expected_entities: declarative_macros, macro_hygiene
+
+### Ontology Engineering Methodologies overview
+
+- n_retrieved: 35
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, AuthoritySourceMap, ConcurrencyModels, DescriptionLogicAndOWL, DesignPatternsOverview, Evolution, FormalMethodsIndustrialization, FormalMethodsLayerOverview, Generics, KGSHACLEngineValidation, KnowledgeGraphConstruction, KnowledgeGraphDesignW3CSHACLOWLAlignmentAndOntologyEngineeringMethods, KnowledgeGraphOntologyV20, LLMAndRAGForRustKnowledgeBasesOntologyEngineeringAndRetrievalAugmentedGeneration, LockingPrimitives, MemoryModel, Methodology, NetworkProgramming, OntologyEngineeringMethodologies, Ownership, PerformanceOptimization, Roadmap, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, SemanticEngineeringAndOntology, SemanticInteroperability, SemanticSpace, StreamProcessingSemantics, TerminologyGlossary, TopLevelOntologyAlignmentForRustKnowledgeGraph, Traits, TypeErasure, TypeSystemBasics, WebFrameworks
+- expected_entities: ontology_engineering_methodologies
+
+### rust Embedded Debugging and Logging tutorial
+
+- n_retrieved: 75
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AUTOSARAndRust, ActorModelSystemSemantics, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AerospaceCertificationFormalMethods, ApplicationDomains, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, BootstrappingTheRustCompiler, Borrowing, CargoProfilesAndLints, CargoSemVerChecksPreview, CertifiedToolchainsAndCertifiedPackageInventory, Collections, CompilerDiagnosticsAndUITests, CompilerInfrastructure, ComponentBasedSystemSemantics, ConcurrencyModels, ConcurrencyPatterns, CrossCompilation, DeclarativeMacros, DefmtAndProbeRsDebuggingArchitecture, DesignPatternsOverview, DevelopmentToolsEcosystem, DisplayAndDebugFormatting, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystemsSemantics, DslAndEmbedding, EmbeddedDebuggingAndLogging, EmbeddedHardwareEndToEndValidation, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedSystems, EmbeddedTestingAndCIStrategiesForNo_stdRust, ErrorHandlingIntermediate, Generics, LinearizabilityAndTheConsistencySpectrum, LoggingObservability, MISRARustAndSafetyCriticalEmbeddedGuidelines, MacroDebuggingAndDiagnostics, MacroPatterns, MacrosBasics, Metaprogramming, MicroservicePatterns, No_stdAndBareMetalRust, No_stdStartupAndRuntimeDeepDive, Ownership, PinAndUnpin, ProbeRsAndEmbeddedDebuggingInPractice, ProceduralMacros, ProcessCalculiForRustCSPCCSAndThePiCalculus, ProductionGradeMacroDevelopment, RISCVAndAVREmbeddedRustDevelopment, ReactiveProgramming, ReactiveSystemsSemantics, RustFFI, RustVersionTracking, RustVsAdaSPARK, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalRustTopicIndex, SafetyCriticalSystemsEngineering, SerdePatterns, StreamAlgebraAndBackpressure, StringsAndText, SystemComposability, SystemsEngineeringStandardsAndRustMapping, TestingBasics, ToolchainAndCargo, Traits, TypeSystemBasics, VerificationToolchain, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: embedded_debugging_and_logging
+
+### how does Rust 1.98.0 Stabilized Features work
+
+- n_retrieved: 30
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, Borrowing, CargoGettingStarted, ControlFlow, Generics, Lifetimes, MemoryManagement, NetworkProtocols, NetworkingBasics, Ownership, Rust190StabilizedFeatures, Rust191StabilizedFeatures, Rust192StabilizedFeatures, Rust193StabilizedFeatures, Rust1950StabilizedFeatures, Rust196StabilizedFeaturesCurrentPatch1961, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust1971StablePatch, Rust1980StabilizedFeatures, Rust198Preview, Rust199Preview, RustFFI, RustVersionTracking, SafeAndEffectiveUnsafeRust, ToolchainAndCargo, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, WebFrameworks
+- expected_entities: rust_1.98.0_stabilized_features
+
+### rust Lexical Structure tutorial
+
+- n_retrieved: 43
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncProgramming, Attributes, BloomTaxonomy, Borrowing, CToRustTranslation, CoercionAndCasting, ComprehensiveRustMapping, ConcurrencyModels, EditionGuide, ErrorHandlingBasics, ErrorHandlingDeepDive, ErrorHandlingIntermediate, Evolution, FormalVerificationTools, Generics, ItemsReference, Keywords, LearningGuide, LexicalStructure, Lifetimes, LoggingObservability, MacrosBasics, MemoryManagement, ModulesAndPaths, NLLAndPolonius, NameResolutionAndHIRInRustc, NamesScopesAndResolution, NewtypeAndWrapperTypes, Ownership, Readme_02intermedia, Roadmap, RustBeltAndVerificationToolchain, RustErrorHandlingIdioms, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, Traits, TypeConversions, TypeSystemBasics, UnsafeRustPatterns, UnsafeRustQuiz, WebAssemblyEcosystem
+- expected_entities: lexical_structure
+
+### how does Type Theory and Rust: The Type System as a Computational Model work
+
+- n_retrieved: 27
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncProgramming, Borrowing, CategoryTheory, CategoryTheoryAndRustStructuralSemanticsAsAComputationalModel, EffectHandlersAndRustSLimitedEffectsControlFlowAbstractionsAsAComputationalModel, EffectSystem, EffectsAndPurity, FormalMethodsIndustrialization, Lifetimes, LinearAndAffineLogic, LinearLogicAndOwnershipResourceCalculusAsAComputationalModel, MemoryManagement, ModalLogicAndRustEffects, Ownership, OwnershipFormalization, ProcessCalculiForRustCSPCCSAndThePiCalculus, Readme, RustBeltAndVerificationToolchain, SeparationLogic, SeparationLogicForRustAnIrisAndRustBeltPerspective, SessionTypesAndRustChannelsCommunicationProtocolsAsAComputationalModel, SubtypeAndVariance, TypeSystemBasics, TypeTheory, TypeTheoryAndRustTheTypeSystemAsAComputationalModel
+- expected_entities: ype_theory_and_rust:_the_type_system_as_a_computational_model
+
+### what is Structured Application Tracing with `tracing`
+
+- n_retrieved: 60
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationBinaryInterface, ApplicationDomains, AsyncCancellationSafety, AsyncDropPreview, AsyncIOUringAndCompletionBasedAsyncIOPreview, AsyncProgramming, BootstrappingTheRustCompiler, Borrowing, CargoSemVerChecksPreview, CompileTimeExecution, CompilerDiagnosticsAndUITests, CompilerInfrastructure, ConcurrencyModels, CrossCompilation, DeclarativeMacros, DesignPatternsOverview, DslAndEmbedding, EmbeddedGraphicsDevelopmentWithRust, ErrorHandlingIntermediate, ExecutorFairnessAndScheduling, FutureAndExecutorMechanisms, Generics, GettingStartedWithRust, GlommioAndThreadPerCoreAsyncRuntimes, HighPerformanceNetworkServiceArchitecture, InlineAssembly, Lifetimes, LoggingObservability, MacroDebuggingAndDiagnostics, MacroPatterns, MacrosAdvanced, MacrosBasics, MemoryManagement, Metaprogramming, NetworkProgramming, OperatingSystems, Ownership, OwnershipFormalization, PerformanceOptimization, PinAndUnpin, ProceduralMacros, ProductionGradeMacroDevelopment, RustFFI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SerdePatterns, StreamAlgebraAndBackpressure, StructuredApplicationTracingWithTracing, StructuredConcurrency, TokioRuntimeInternals, ToolchainAndCargo, Traits, TypeSystemBasics, UnsafeRustPatterns, WASIAndWebAssemblyComponentModel, WakerContractDeepDive, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: structured_application_tracing_with_`tracing`
+
+### explain Ownership, Borrowing & Lifetimes Knowledge Map in rust
+
+- n_retrieved: 39
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationDomains, AsyncFFIBoundary, AsyncProcessManagementInRust, AsyncProgramming, Borrowing, CoercionAndCasting, Collections, ConcurrencyModels, CowAndBorrowed, DesignPatternsOverview, ErrorHandlingIntermediate, FFIPatternsInRust, Generics, IdiomsSpectrum, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, Lifetimes, MemoryManagement, ModernProcessManagementLibrariesInRust, NewtypeAndWrapperTypes, Ownership, OwnershipBorrowingAndLifetimesQuiz, OwnershipBorrowingLifetimesKnowledgeMap, PinAndUnpin, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, Readme, Roadmap, RustFFI, SafeAndEffectiveUnsafeRust, SmartPointers, Traits, TypeConversions, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts
+- expected_entities: ownership,_borrowing_&_lifetimes_knowledge_map
+
+### rust Safety Tags Preview tutorial
+
+- n_retrieved: 39
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, AUTOSARAndRust, BorrowSanitizerBSanDynamicAliasingRuleVerificationForRust, CargoDependencyResolution, CargoGettingStarted, CargoManifestReference, CargoVetAndSupplyChainAuditing, CargoWorkflow, CertifiedToolchainsAndCertifiedPackageInventory, ConcurrencyModels, ErrorHandlingIntermediate, Evolution, FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems, FormalMethodsIndustrialization, Generics, IndustrialRustAdoptionCaseStudies, LearningMvpPath, OpenEnumsPreview, Ownership, OwnershipFormalization, Rust1100Preview, Rust196StabilizedFeaturesCurrentPatch1961, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust1971StablePatch, Rust198Preview, Rust199Preview, RustBeltAndVerificationToolchain, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SafetyCriticalRustTopicIndex, SafetyTagsInFormalVerificationRedirectStub, SafetyTagsPreview, ToolchainAndCargo, Traits, TypeSystemBasics, UnsafeRustQuiz, VerificationToolchain
+- expected_entities: safety_tags_preview
+
+### what is Type Checking and Inference in rustc
+
+- n_retrieved: 50
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, AdvancedTraits, AsyncProcessManagementInRust, AsyncProgramming, Borrowing, CompileTimeCorrectness, CompilerDiagnosticsAndUITests, CompilerInfrastructure, ErrorHandlingBasics, ErrorHandlingDeepDive, ErrorHandlingIntermediate, FormalMethodsIndustrialization, Generics, InterProcessCommunicationMechanismsInRust, LLVMBackendAndCodeGenerationInRustc, Lifetimes, LoggingObservability, MacrosAdvanced, MemoryManagement, ModernProcessManagementLibrariesInRust, NLLAndPolonius, NameResolutionAndHIRInRustc, NeverType, Ownership, OwnershipFormalization, PerformanceOptimization, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, RTTIAndDynamicTypeIdentification, Roadmap, RustBeltAndVerificationToolchain, RustCompilerInternalsAndDriverArchitecture, RustVsC, RustcDriverRustc_interfaceAndStableMIR, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SubtypeAndVariance, TerminologyGlossary, TheRustcQuerySystemAndIncrementalCompilation, TheTraitSolverInRustc, ToolchainAndCargo, Traits, TypeCheckingAndInferenceInRustc, TypeErasure, TypeInference, TypeInferenceComplexity, TypeSystemBasics, TypeTheory
+- expected_entities: ype_checking_and_inference_in_rustc
+
+### how does AI Ontology and Rust Semantics work
+
+- n_retrieved: 63
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, AIOntologyAndRustSemantics, AISafetyAndAlignment, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncProgramming, AuthoritySourceMap, ClosureTypes, ConceptDefinitionAtlas, ConcurrencyModels, ConcurrencyPatterns, ControlFlow, DependentTypesAndRefinementTypes, DescriptionLogicAndOWL, DistributedSystems, FormalMethodsIndustrialization, FormalMethodsLayerOverview, Generics, HowRustIsMadeAndNightlyRust, InterLayerMappingAtlas, KGSHACLEngineValidation, KnowledgeGraphConstruction, KnowledgeGraphDesignW3CSHACLOWLAlignmentAndOntologyEngineeringMethods, KnowledgeGraphOntologyV20, LLMAndRAGForRustKnowledgeBasesOntologyEngineeringAndRetrievalAugmentedGeneration, LLMSystemArchitecture, LinearAndAffineLogic, MLOpsAndLLMOps, MachineLearningEcosystem, MemoryModel, Methodology, NetworkProgramming, OntologyEngineeringMethodologies, OperationalSemantics, Ownership, OwnershipFormalization, Patterns, PerformanceOptimization, ProcessCalculiForRustCSPCCSAndThePiCalculus, Roadmap, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustBeltAndVerificationToolchain, RustInAI, RustVersionTracking, SafeAndEffectiveUnsafeRust, SemanticEngineeringAndOntology, SemanticExpressiveness, SemanticInteroperability, SemanticModelAtlas, SemanticSpace, SeparationLogic, StateMachineSemanticsAndWorkflowModels, StatementsAndExpressions, StreamProcessingSemantics, TerminologyGlossary, TopLevelOntologyAlignmentForRustKnowledgeGraph, Traits, TypeErasure, TypeSystemBasics, TypeTheory, UnifiedLanguageSemanticModelExpressivenessMatrix, WorkflowTheoryFormalization
+- expected_entities: ai_ontology_and_rust_semantics
+
+### Rust in Safety-Critical Systems overview
+
+- n_retrieved: 60
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AUTOSARAndRust, AerospaceCertificationFormalMethods, ApplicationDomains, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, BareMetalBootAndLinkerScripts, Borrowing, CargoVetAndSupplyChainAuditing, CertifiedToolchainsAndCertifiedPackageInventory, ConcurrencyModels, CrossCompilation, CustomBareMetalAsyncExecutor, DatabaseSystemsInRust, DistributedSystems, EmbeddedDebuggingAndLogging, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSafetyCriticalPatterns, EmbeddedSystems, Evolution, FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems, FormalMethodsIndustrialization, FormalMethodsMergedRedirect, IndustrialRustAdoptionCaseStudies, InterruptAndExceptionModel, Lifetimes, MISRARustAndSafetyCriticalEmbeddedGuidelines, MacrosAdvanced, MemoryManagement, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, Ownership, OwnershipFormalization, Panic_handlerAndNo_stdRuntime, PerformanceOptimization, QuizRustVsSystems, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustInQuantumComputingEcosystems, RustInSafetyCriticalSystems, RustVersionTracking, RustVsAdaSPARK, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, SafetyCriticalRustTopicIndex, SafetyCriticalSystemsEngineering, StreamProcessingEcosystem, StreamProcessingSemantics, SubtypeAndVariance, ToolchainAndCargo, TypeSystemBasics, VerificationToolchain, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: rust_in_safety-critical_systems
+
+### Custom Network Protocol Implementation in Rust overview
+
+- n_retrieved: 73
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AUTOSARAndRust, AdvancedDataStructuresImplementationInRust, AdvancedNetworkProtocolsInRust, AerospaceCertificationFormalMethods, AlgorithmEngineeringPractice, ApplicationDomains, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, BareMetalBootAndLinkerScripts, BorrowSanitizerRuntimeTreeBorrowsViolationDetection, Borrowing, CargoVetAndSupplyChainAuditing, CertifiedToolchainsAndCertifiedPackageInventory, ClosureTypes, ConcurrencyModels, ConcurrencyPatterns, CrossCompilation, CustomBareMetalAsyncExecutor, CustomNetworkProtocolImplementationInRust, DistributedSystems, EmbeddedDebuggingAndLogging, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, ErrorHandlingIntermediate, Evolution, FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems, FormalMethodsIndustrialization, FormalNetworkProtocolTheory, Generics, HighPerformanceNetworkServiceArchitecture, InterruptAndExceptionModel, KaniRustBoundedModelChecker, Lifetimes, LockingPrimitives, MISRARustAndSafetyCriticalEmbeddedGuidelines, MemoryManagement, MiriRustUndefinedBehaviorDetector, NetworkProgramming, NetworkProtocols, NetworkSecurityInRust, NetworkingTopicIndex, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, Ownership, Panic_handlerAndNo_stdRuntime, ParallelAndConcurrentAlgorithmsInRust, PerformanceOptimization, Roadmap, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustInQuantumComputingEcosystems, RustInSafetyCriticalSystems, RustVersionTracking, RustVsAdaSPARK, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, SafetyCriticalRustTopicIndex, SafetyCriticalSystemsEngineering, StreamProcessingEcosystem, StreamProcessingSemantics, Traits, TypeLevelProgramming, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, VerificationToolchain, WebAssemblyEcosystem, WebFrameworks
+- expected_entities: custom_network_protocol_implementation_in_rus
+
+### explain Architecture Patterns in rust
+
+- n_retrieved: 78
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationBinaryInterface, ApplicationDomains, ArchitecturePatternSemantics, ArchitecturePatterns, ArchitectureRefinement, AsyncFFIBoundary, AsyncPatterns, AsyncProcessManagementInRust, AsyncProgramming, Borrowing, CargoDependencyResolution, CargoManifestReference, CargoProfilesAndLints, CargoRegistriesAndPublishing, CargoWorkspaces, CategoryTheory, CoercionAndCasting, Collections, ComponentBasedSystemSemantics, ConcurrencyModels, ConcurrencyPatterns, DesignPatternsOverview, DistributedSystems, EnterpriseAndSoftwareArchitectureAlignmentInRust, ErrorHandlingIntermediate, EventSourcingEnginePatternsInRust, Evolution, FFIPatternsInRust, FormalAlgorithmTheory, FormalMethodsIndustrialization, Generics, HoareLogic, IdiomsSpectrum, InlineAssembly, InterProcessCommunicationMechanismsInRust, IteratorCorrectnessSemantics, IteratorIdiomsInRust, Lifetimes, MacrosAdvanced, MemoryManagement, ModernProcessManagementLibrariesInRust, ModuleSystemAdvanced, NewtypeAndWrapperTypes, ObservationalEquivalenceOfAlgorithmImplementations, Ownership, ParadigmMatrix, PatternCompositionAlgebra, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, RefinementCalculusForRustAlgorithms, Roadmap, RustArchitectureSemanticsConstraints, RustDesignPatternAndArchitecturePatternSemanticAtlas, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustVersionTracking, RustVsC, RustVsGo, SafeAndEffectiveUnsafeRust, SemanticInvariantsOfUnsafeAlgorithms, SemanticSpace, SmartPointers, SoftwareArchitectureFormalization, StateMachineSemanticsAndWorkflowModels, SystemComposability, SystemDesignPrinciples, TerminologyGlossary, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, WorkflowTheoryFormalization
+- expected_entities: architecture_patterns
+
+### rust Networking Basics tutorial
+
+- n_retrieved: 60
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncProgramming, BareMetalBootAndLinkerScripts, BloomTaxonomy, Borrowing, CToRustTranslation, CargoBuildStd, CertifiedToolchainsAndCertifiedPackageInventory, ClosureBasics, ClosureTypes, CloudNative, ComprehensiveRustMapping, ConcurrencyModels, ConcurrencyPatterns, CrossCompilation, DesignPatternsOverview, DistributedSystems, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, Evolution, FormalVerificationTools, Generics, HighPerformanceNetworkServiceArchitecture, Iterators, LearningGuide, Lifetimes, LockingPrimitives, MISRARustAndSafetyCriticalEmbeddedGuidelines, MemoryManagement, NetworkProgramming, NetworkProtocols, NetworkingAndAsyncEcosystemQuiz, NetworkingBasics, No_stdAndBareMetalIdioms, No_stdAndBareMetalRust, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, OperatingSystems, Ownership, Panic_handlerAndNo_stdRuntime, PerformanceOptimization, RustBeltAndVerificationToolchain, RustFFI, RustForLinuxKernelModuleBasics, RustForOperatingSystemKernelDevelopment, RustInSafetyCriticalSystems, RustNetworkProgrammingQuickStart, RustVsAdaSPARK, RustVsC, SafeAndEffectiveUnsafeRust, SafetyCriticalBareMetalOperatingSystemsInRust, SafetyCriticalSystemsEngineering, StreamProcessingEcosystem, StreamProcessingSemantics, Traits, TypeSystemBasics, WebAssemblyEcosystem, WebFrameworks
+- expected_entities: networking_basics
+
+### explain Safe and Effective Unsafe Rust in rust
+
+- n_retrieved: 36
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, AdvancedProcessManagementInRust, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncProcessManagementInRust, AsyncProgramming, BorrowSanitizerBSanDynamicAliasingRuleVerificationForRust, Borrowing, ConcurrencyModels, CustomAllocators, EffectSystem, EffectsAndPurity, ErrorHandlingIntermediate, EvaluationStrategies, FormalMethodsIndustrialization, Generics, InterProcessCommunicationMechanismsInRust, Lifetimes, MemoryManagement, ModernProcessManagementLibrariesInRust, Ownership, OwnershipFormalization, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, RustBeltAndVerificationToolchain, SafeAndEffectiveUnsafeRust, SafetyTagsPreview, StandardLibraryUnsafeInternals, Traits, TypeSystemBasics, TypeTheory, UnsafeCollectionsInternals, UnsafeRustQuiz, VariableModel
+- expected_entities: safe_and_effective_unsafe_rus
+
+### explain Items Reference in rust
+
+- n_retrieved: 42
+- concept_mrr: 0.167
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.356
+- concept_ndcg@3: 0.0
+- concept_ndcg@5: 0.0
+- concept_precision: 0.0
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.0
+- concept_precision@5: 0.0
+- concept_recall: 0.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 0.0
+- concept_recall@5: 0.0
+- source_mrr: 0.167
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.356
+- source_ndcg@3: 0.0
+- source_ndcg@5: 0.0
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.0
+- source_precision@5: 0.0
+- source_recall: 0.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 0.0
+- source_recall@5: 0.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationDomains, AsyncFFIBoundary, AsyncProcessManagementInRust, AsyncProgramming, Attributes, Borrowing, CoercionAndCasting, Collections, ConcurrencyModels, ConditionalCompilation, CrossPlatformProcessManagementInRust, DerivableTraits, DesignPatternsOverview, ErrorHandlingIntermediate, FFIPatternsInRust, Generics, IdiomsSpectrum, InterProcessCommunicationMechanismsInRust, InteriorMutability, Items, ItemsReference, IteratorIdiomsInRust, Lifetimes, MemoryManagement, ModernProcessManagementLibrariesInRust, NewtypeAndWrapperTypes, Ownership, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, Roadmap, RustFFI, SafeAndEffectiveUnsafeRust, SmartPointers, StaticItems, Traits, TypeConversions, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts
+- expected_entities: items_reference
+
+### rust Aeneas Symbolic Semantics tutorial
+
+- n_retrieved: 82
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, AIOntologyAndRustSemantics, AISafetyAndAlignment, APIDesignAndSemVerIdiomsInRust, ActorModelSystemSemantics, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AeneasSymbolicSemantics, AeneasVerificationPipelineSymbolicBorrowCalculusAsAComputationalModel, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AlgorithmEngineeringPractice, ApplicationBinaryInterface, ApplicationDomains, ArchitecturePatternSemantics, ArchitecturePatterns, ArchitectureRefinement, AsyncProgramming, AuthoritySourceMap, BloomTaxonomy, CargoDependencyResolution, CargoManifestReference, CargoProfilesAndLints, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoSemVerChecksPreview, CargoWorkspaces, ComponentBasedSystemSemantics, ComprehensiveRustMapping, ConceptDefinitionAtlas, ConcurrencyModels, ConcurrencyPatterns, DependentTypesAndRefinementTypes, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystemsSemantics, ErrorHandlingIntermediate, FiveExecutionModelsDefinitionMatrix, FormalMethodsIndustrialization, FormalVerificationTools, IdiomsSpectrum, InlineAssembly, InterLayerMappingAtlas, IteratorIdiomsInRust, KnowledgeGraphOntologyV20, LLMSystemArchitecture, LambdaCalculus, LearningGuide, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MLOpsAndLLMOps, MachineLearningEcosystem, MacrosAdvanced, Methodology, MicroservicePatterns, ModuleSystemAdvanced, OperationalSemantics, Ownership, OwnershipFormalization, PatternCompositionAlgebra, PiCalculusForRustSystemSemantics, ProcessCalculiForRustCSPCCSAndThePiCalculus, ReactiveProgramming, RefinementCalculusForRustAlgorithms, Roadmap, RustAPIGuidelinesCanonicalGuide, RustArchitectureSemanticsConstraints, RustBeltAndVerificationToolchain, RustBeltPredicateMap, RustInAI, RustVsC, SafeAndEffectiveUnsafeRust, SemanticModelAtlas, SemanticSpace, SeparationLogic, SoftwareArchitectureFormalization, SystemComposability, TerminologyGlossary, ToolchainAndCargo, Traits, TypeSemantics, TypeSystemBasics, TypeTheory, UnifiedLanguageSemanticModelExpressivenessMatrix
+- expected_entities: aeneas_symbolic_semantics
+
+### Locking Primitives overview
+
+- n_retrieved: 55
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AeneasSymbolicSemantics, AeneasVerificationPipelineSymbolicBorrowCalculusAsAComputationalModel, ApplicationDomains, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, AtomicsAndMemoryOrdering, BareMetalBootAndLinkerScripts, Borrowing, CargoBuildStd, ClosureTypes, ConcurrencyModels, ConcurrencyPatterns, CoreCratesIndex, CrossCompilation, CustomAllocators, CustomBareMetalAsyncExecutor, DesignPatternsOverview, DistributedSystems, EmbeddedFormalMemoryModel, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, Evolution, FormalMethodsIndustrialization, FormalMethodsLayerOverview, FormalVerificationTools, Generics, InterruptAndExceptionModel, Lifetimes, LinearizabilityAndTheConsistencySpectrum, LockingPrimitives, MemoryManagement, No_stdSynchronizationPrimitives, Ownership, OwnershipFormalization, PACAndHALImplementation, Panic_handlerAndNo_stdRuntime, PerformanceOptimization, PinAndUnpin, Roadmap, RustBeltAndVerificationToolchain, RustBeltOwnershipLogicMemorySafetyProofAsAComputationalModel, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, RustVsZig, SafeAndEffectiveUnsafeRust, ToolchainAndCargo, Traits, TypeSystemBasics, UnsafeCollectionsInternals, VerificationAndContractsEcosystemOverview, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: locking_primitives
+
+### how does panic_handler and no_std Runtime work
+
+- n_retrieved: 50
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, AtomicsAndMemoryOrdering, BareMetalBootAndLinkerScripts, BareMetalRust, CargoBuildStd, CargoConfiguration, ConcurrencyModels, CriticalSectionsAndSynchronizationOnBareMetal, CrossCompilation, CustomBareMetalAsyncExecutor, EmbassyAsyncFrameworkDeepDive, EmbeddedDebuggingAndLogging, EmbeddedFormalMemoryModel, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedProtocolAndPeripheralDrivers, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, GenBlocksPreview, Generics, InterruptAndExceptionModel, LinearizabilityAndTheConsistencySpectrum, LinkerScriptsAndMemoryLayoutForEmbeddedRust, MemoryManagement, No_stdAllocatorsAndPanicHandlers, No_stdAndBareMetalIdioms, No_stdAndBareMetalRust, No_stdHardwareMeasurementAndValidation, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, Ownership, PACAndHALImplementation, Panic_handlerAndNo_stdRuntime, PinAndUnpin, RISCVAndAVREmbeddedRustDevelopment, RTICVsEmbassyRealTimeFrameworksInRust, RustFFI, RustVsC, RustVsZig, SafeAndEffectiveUnsafeRust, SafetyCriticalBareMetalOperatingSystemsInRust, TheNo_stdAllocCrateEcosystem, ToolchainAndCargo, TypeSystemBasics, UnsafeInAsyncContexts, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: panic_handler_and_no_std_runtime
+
+### rust Competency Graph tutorial
+
+- n_retrieved: 41
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedDataStructuresImplementationInRust, AlgorithmEngineeringPractice, ApplicationDomains, AsyncProgramming, AuthoritySourceMap, BloomTaxonomy, Borrowing, Collections, CompetencyGraph, ComprehensiveRustMapping, ConcurrencyModels, CowAndBorrowed, Evolution, FormalMethodsIndustrialization, Generics, KGSHACLEngineValidation, KnowledgeGraphDesignW3CSHACLOWLAlignmentAndOntologyEngineeringMethods, KnowledgeGraphOntologyV20, LLMAndRAGForRustKnowledgeBasesOntologyEngineeringAndRetrievalAugmentedGeneration, LearningGuide, Lifetimes, MemoryManagement, Methodology, Ownership, OwnershipAwareAlgorithmsInRust, ParallelAndConcurrentAlgorithmsInRust, PerformanceOptimization, PinAndUnpin, ProblemGraph, RAGEvaluationForTheRustKnowledgeGraph, Roadmap, RustEditionMechanismAndMigrationGuide, RustForDataScienceAndScientificComputing, RustInAI, RustVersionTracking, SemanticSpace, SmartPointers, TerminologyGlossary, TopLevelOntologyAlignmentForRustKnowledgeGraph, Traits, TypeSystemBasics
+- expected_entities: competency_graph
+
+### rust Async Patterns tutorial
+
+- n_retrieved: 43
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: APIDesignPatterns, ApplicationDomains, AsyncAdvanced, AsyncFFIBoundary, AsyncPatterns, AsyncProgramming, BloomTaxonomy, Borrowing, ClosureBasics, ComprehensiveRustMapping, ConcurrencyModels, CoreCratesIndex, DesignPatternsOverview, DistributedSystems, Evolution, FFIPatternsInRust, GenBlocksPreview, Generics, IdiomsSpectrum, LearningGuide, Lifetimes, MacrosAdvanced, MemoryManagement, Ownership, OwnershipFormalization, ParadigmMatrix, Patterns, PinAndUnpin, Roadmap, RustAntiPatterns, RustFFI, RustVsC, RustVsGo, SafeAndEffectiveUnsafeRust, SerdePatterns, StatementsAndExpressions, SubtypeAndVariance, Traits, TypeSystemBasics, TypeTheory, UnsafeExternBlocksInRustEdition2024, UnsafeRustPatterns, WebAssemblyEcosystem
+- expected_entities: async_patterns
+
+### rust Linear Logic Applications tutorial
+
+- n_retrieved: 35
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, BloomTaxonomy, Borrowing, CategoryTheoryAndRustStructuralSemanticsAsAComputationalModel, ComprehensiveRustMapping, EffectHandlersAndRustSLimitedEffectsControlFlowAbstractionsAsAComputationalModel, FormalAlgorithmTheory, FormalMethodsIndustrialization, HoareLogic, HoareLogicForRustAlgorithms, IteratorCorrectnessSemantics, LearningGuide, Lifetimes, LinearAndAffineLogic, LinearLogicAndOwnershipResourceCalculusAsAComputationalModel, LinearLogicApplications, MemoryManagement, MemoryModel, ModalLogicAndRustEffects, ObservationalEquivalenceOfAlgorithmImplementations, Ownership, OwnershipFormalization, PatternCompositionAlgebra, RefinementCalculusForRustAlgorithms, RustBeltAndVerificationToolchain, SafeAndEffectiveUnsafeRust, SemanticInvariantsOfUnsafeAlgorithms, SeparationLogic, SeparationLogicForRustAnIrisAndRustBeltPerspective, SessionTypesAndRustChannelsCommunicationProtocolsAsAComputationalModel, SubtypeAndVariance, TypeSystemBasics, TypeTheory, TypeTheoryAndRustTheTypeSystemAsAComputationalModel, VerificationToolchain
+- expected_entities: linear_logic_applications
+
+### Cross Compilation overview
+
+- n_retrieved: 34
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncProgramming, CompileTimeExecution, CompilerInfrastructure, ConditionalCompilation, CraneliftBackendPreview, CrossCompilation, CrossPlatformConcurrency, CrossReferenceMatrix, DesignPatternsOverview, Evolution, FFIAdvancedTopics, FormalMethodsIndustrialization, FormalMethodsLayerOverview, Generics, Lifetimes, MacrosAdvanced, OperatingSystems, Ownership, ParallelFrontendPreview, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, ToolchainAndCargo, Traits, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: cross_compilation
+
+### how does Todos work
+
+- n_retrieved: 24
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, AxumTokioSErgonomicWebFramework, Borrowing, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, ConcurrencyModels, CrossCompilation, DevOpsAndCICD, HowRustIsMadeAndNightlyRust, Lifetimes, MacrosAdvanced, MemoryManagement, Ownership, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SecurityPractices, Todos, TokioAsynchronousRuntime, ToolchainAndCargo
+- expected_entities: odos
+
+### how does Useful Development Tools (Foundation) work
+
+- n_retrieved: 43
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, Borrowing, CLIDevelopment, CargoAuthenticationAndBuildCache, CargoProfilesAndLints, CloudNative, ConcurrencyModels, CrossCompilation, DesignPatternsOverview, DevOpsAndCICD, DevelopmentToolsEcosystem, DistributedSystems, EmbeddedGraphicsDevelopmentWithRust, ErrorHandlingIntermediate, FormalMethodsIndustrialization, Generics, HTTPClientDevelopmentInRust, HoareLogic, Lifetimes, LockingPrimitives, MacrosAdvanced, MemoryManagement, ModernVerificationTools, NetworkProgramming, Ownership, OwnershipFormalization, PerformanceOptimization, RustBeltAndVerificationToolchain, RustForOperatingSystemKernelDevelopment, RustVsC, SafeAndEffectiveUnsafeRust, SeparationLogic, TestingBasics, TestingEcosystem, ToolchainAndCargo, Traits, TypeSystemBasics, UsefulDevelopmentToolsFoundation, VerificationToolchain, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, WebFrameworks, ZeroCostAbstractions
+- expected_entities: useful_development_tools_(foundation)
+
+### what is Error Handling Intermediate
+
+- n_retrieved: 18
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, Borrowing, ConcurrencyModels, ErrorHandlingBasics, ErrorHandlingControlFlow, ErrorHandlingDeepDive, ErrorHandlingIntermediate, ErrorHandlingQuiz, Generics, Lifetimes, LoggingObservability, MemoryManagement, Ownership, Readme_02intermedia, RustVersionTracking, Traits, TypeSystemBasics, WebAssemblyEcosystem
+- expected_entities: error_handling_intermediate
+
+### Rust API Guidelines Canonical Guide overview
+
+- n_retrieved: 47
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AlgorithmEngineeringPractice, ApplicationDomains, AsyncProgramming, BloomTaxonomy, Borrowing, CAbiObjectModel, CCToRustEngineeringComparisonRoadmap, CategoryTheory, Collections, ComprehensiveRustMapping, ConcurrencyModels, DesignPatternsOverview, EditionGuide, ErrorHandlingIntermediate, EvaluationStrategies, Evolution, Generics, IdiomaticRustAPINamingConventions, IdiomsSpectrum, IteratorIdiomsInRust, LearningGuide, Lifetimes, MemoryManagement, NLLAndPolonius, Ownership, OwnershipPerformanceOptimization, PatternCompositionAlgebra, PatternSemanticSpaceIndex, PerformanceOptimization, Roadmap, RustAPIGuidelinesCanonicalGuide, RustAntiPatterns, RustAntiPatternsAndPitfallsAtlas, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustIdiomsAtlas, RustPerformanceIdioms, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, Sources, Traits, TypeConversions, TypeSystemAdvanced, TypeSystemBasics, UnsafeRustPatterns, VariableModel
+- expected_entities: rust_api_guidelines_canonical_guide
+
+### rust Model-Driven Engineering tutorial
+
+- n_retrieved: 90
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, APIDesignPatterns, AUTOSARAndRust, ActorModelSystemSemantics, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AerospaceCertificationFormalMethods, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, ApplicationDomains, AsyncProgramming, BloomTaxonomy, BorrowSanitizerRuntimeTreeBorrowsViolationDetection, Borrowing, CAbiObjectModel, CCToRustEngineeringComparisonRoadmap, CertifiedToolchainsAndCertifiedPackageInventory, CoercionAndCasting, ComponentBasedSystemSemantics, ComprehensiveRustMapping, ConcurrencyModels, ConcurrencyPatterns, CrossCompilation, DependentTypesAndRefinementTypes, DesignPatternsOverview, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystems, DistributedSystemsSemantics, DslAndEmbedding, EditionGuide, EmbeddedSystems, ErrorHandlingBasics, ErrorHandlingDeepDive, ErrorHandlingIntermediate, EvaluationStrategies, EventDrivenArchitecture, Evolution, FormalDesignPatternTheoryRedirectStub, FormalMethodsIndustrialization, Generics, KaniRustBoundedModelChecker, LearningGuide, Lifetimes, LinearizabilityAndTheConsistencySpectrum, LoggingObservability, MacroPatterns, MacrosBasics, MemoryManagement, Metaprogramming, MicroservicePatterns, MiriRustUndefinedBehaviorDetector, ModelDrivenEngineering, ModernVerificationTools, NewtypeAndWrapperTypes, Ownership, OwnershipFormalization, ParadigmMatrix, PatternCompositionAlgebra, PatternCompositionAlgebraRedirectStub, PatternSemanticSpaceIndex, ProceduralMacros, ProcessCalculiForRustCSPCCSAndThePiCalculus, ReactiveProgramming, ReactiveSystemsSemantics, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustErrorHandlingIdioms, RustInAI, RustVersionTracking, RustVsAdaSPARK, RustVsC, RustVsHaskell, RustVsOCamlOwnershipAndAlgebraicEffectsInSystemsAndFunctionalProgramming, SafeAndEffectiveUnsafeRust, SafetyCriticalRustTopicIndex, SafetyCriticalSystemsEngineering, StateMachineSemanticsAndWorkflowModels, StreamAlgebraAndBackpressure, SystemComposability, SystemsEngineeringStandardsAndRustMapping, Traits, TreeBorrowsDeepDive, TypeConversions, TypeSystemBasics, TypeTheory, UnifiedLanguageSemanticModelExpressivenessMatrix, VariableModel, VerificationToolchain, WebAssemblyEcosystem, WorkflowTheoryFormalization
+- expected_entities: model-driven_engineering
+
+### how does Names Reference work
+
+- n_retrieved: 36
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, Attributes, Borrowing, ConstructionAndInitialization, CrossReferenceMatrix, Destructors, EvaluationStrategies, Generics, ItemsReference, LearningGuide, Lifetimes, MacrosAdvanced, MemoryManagement, MoveSemantics, NameResolutionAndHIRInRustc, NamesReference, NamesScopesAndResolution, Ownership, OwnershipFormalization, PatternsReference, QuickReference, ReferenceSemantics, RustBeltAndVerificationToolchain, RustCompilerInternalsAndDriverArchitecture, RustVsC, SafeAndEffectiveUnsafeRust, StatementsAndExpressionsReference, SubtypeAndVariance, TheRustcQuerySystemAndIncrementalCompilation, TheTraitSolverInRustc, Traits, TypeInference, TypeSystemBasics, TypeTheory, ValueSemanticsVsReferenceSemantics, VariableModel
+- expected_entities: names_reference
+
+### how does Semantic Models and Cross-Language Comparisons Quiz work
+
+- n_retrieved: 69
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIOntologyAndRustSemantics, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AeneasSymbolicSemantics, AsyncProgramming, AtomicsAndMemoryOrdering, AxiomaticSemantics, Borrowing, CategoryTheory, ClosureTypes, ComputationalModelsAndComputability, ComputationalSemanticModels, ConceptMetaLayer, ConcurrencyModelComparison, ConcurrencyModels, ConcurrencyPatterns, ControlFlow, CrossPlatformConcurrency, DenotationalSemantics, DescriptionLogicAndOWL, DistributedSystems, DistributedSystemsSemantics, FiveExecutionModelsDefinitionMatrix, FormalMethodsIndustrialization, FormalMethodsLayerOverview, Generics, HoareLogic, KGOWLSHACLSemantics, KnowledgeGraphConstruction, KnowledgeGraphOntologyV20, LLMSystemArchitecture, LambdaCalculus, LinearAndAffineLogic, MemoryModel, MetaFrameworkAndKnowledgeArchitectureQuiz, ObservationalEquivalenceOfAlgorithmImplementations, OntologyEngineeringMethodologies, OperationalSemantics, Ownership, OwnershipBorrowingAndLifetimesQuiz, OwnershipFormalization, Patterns, ProcessCalculiForRustCSPCCSAndThePiCalculus, QuizRegistryHumanReadableIndexOfAllAssessmentAssetsInTheKnowledgeBase, ReactiveSystemsSemantics, RefinementCalculusForRustAlgorithms, Roadmap, RustBeltAndVerificationToolchain, RustVsC, SafeAndEffectiveUnsafeRust, SemanticEngineeringAndOntology, SemanticInteroperability, SemanticModelAtlas, SemanticModelsAndCrossLanguageComparisonsQuiz, SemanticSpace, SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts, SendSyncBoundaryJudgmentTraitObjectsClosuresAndAsyncStateMachines, SeparationLogic, StateMachineSemanticsAndWorkflowModels, StatementsAndExpressions, StreamAlgebraAndBackpressure, StreamProcessingSemantics, Traits, TraitsAndGenericsQuiz, TreeBorrowsDeepDive, TypeErasure, TypeSystemBasics, TypeSystemQuiz, TypeTheory, WorkflowTheoryFormalization
+- expected_entities: semantic_models_and_cross-language_comparisons_quiz
+
+### what is Expressiveness Multiview
+
+- n_retrieved: 69
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AerospaceCertificationFormalMethods, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncProgramming, AxiomaticSemantics, Borrowing, CRDTTypeZooStateBasedOpBasedAndTheMergeLattice, CategoryTheory, CertifiedToolchainsAndCertifiedPackageInventory, ComponentBasedSystemSemantics, ConcurrencyModels, ConstGenericsValuesAsTypeParameters, CratesAndSourceFiles, DenotationalSemantics, DependentTypesAndRefinementTypes, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystemsSemantics, EffectSystem, EffectsAndPurity, EvaluationStrategies, Evolution, ExecutionModelIsomorphism, ExpressivenessMultiview, ExpressivenessOfConcurrentModels, FelleisenExpressivePower, FiveExecutionModelsDefinitionMatrix, FormalMethodsIndustrialization, FormalVerificationEcosystemTower, Generics, HoareLogic, HowRustIsMadeAndNightlyRust, LambdaCalculus, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, ModelsOfConcurrency, ObservationalEquivalence, ObservationalEquivalenceOfAlgorithmImplementations, OperationalSemantics, Ownership, OwnershipFormalization, ParadigmMatrix, ParallelDistributedPatternSpectrum, ProcessCalculiForRustCSPCCSAndThePiCalculus, ReactiveProgramming, ReactiveSystemsSemantics, RefinementCalculusForRustAlgorithms, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustBeltAndVerificationToolchain, RustVersionTracking, RustVsAdaSPARK, RustVsC, RustVsGo, RustVsHaskell, RustVsOCamlOwnershipAndAlgebraicEffectsInSystemsAndFunctionalProgramming, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SemanticExpressiveness, SeparationLogic, StreamAlgebraAndBackpressure, SubtypeAndVariance, Traits, TreeBorrowsDeepDive, TypeSystemBasics, TypeTheory, UnifiedLanguageSemanticModelExpressivenessMatrix, VerificationToolchain
+- expected_entities: expressiveness_multiview
+
+### how to test Const Generics and Trait Objects in rust
+
+- n_retrieved: 34
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, AsyncCancellationSafety, AsyncProcessManagementInRust, AsyncProgramming, Borrowing, ClosureBasics, ConstGenericsAndTraitObjects, ConstGenericsValuesAsTypeParameters, ConstItemsAndConstFunctions, ConstTraitImplPreview, ConstTraitImplementationPreview, ConstantEvaluation, ControlFlow, DispatchMechanisms, Evolution, GenericAssociatedTypesGATs, Generics, InterProcessCommunicationMechanismsInRust, Lifetimes, LifetimesAdvanced, ModernProcessManagementLibrariesInRust, Ownership, PerformanceOptimization, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, SafeAndEffectiveUnsafeRust, StatementsAndExpressions, Traits, TypeInference, TypeLevelProgramming, TypeSystemBasics
+- expected_entities: const_generics_and_trait_objects
+
+### explain axum — Tokio's Ergonomic Web Framework in rust
+
+- n_retrieved: 60
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, AdvancedWebAssemblyDevelopmentWithRust, ApplicationDomains, AsyncFFIBoundary, AsyncProcessManagementInRust, AsyncProgramming, AxumTokioSErgonomicWebFramework, Borrowing, CloudNative, CoercionAndCasting, Collections, ConcurrencyModels, CoreCratesIndex, CrossCompilation, DesignPatternsOverview, DistributedSystems, ErgonomicRefCountingPreview, ErrorHandlingIntermediate, Evolution, FFIPatternsInRust, FormalMethodsIndustrialization, Generics, HTTPClientDevelopmentInRust, IdiomsSpectrum, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, Lifetimes, MemoryManagement, ModernProcessManagementLibrariesInRust, NetworkProgramming, NewtypeAndWrapperTypes, OperatingSystems, Ownership, OwnershipFormalization, PerformanceOptimization, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ReqwestErgonomicAsyncHTTPClientForRust, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustFFI, RustForWebAssemblyResearch, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SmartPointers, TokioAsynchronousRuntime, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, WebFrameworks
+- expected_entities: axum_—_tokio's_ergonomic_web_framework
+
+### rust Embedded-HAL Driver Patterns tutorial
+
+- n_retrieved: 46
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AerospaceCertificationFormalMethods, ApplicationDomains, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, BareMetalBootAndLinkerScripts, BloomTaxonomy, CertifiedToolchainsAndCertifiedPackageInventory, ComprehensiveRustMapping, CrossCompilation, EmbeddedDebuggingAndLogging, EmbeddedHAL10MigrationAndEmbassyProductionStatus, EmbeddedHALAndDriverIdioms, EmbeddedHALDriverPatterns, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedProtocolAndPeripheralDrivers, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, EmbeddedTestingAndCIStrategiesForNo_stdRust, Evolution, FormalMethodsIndustrialization, Generics, InterruptAndExceptionModel, LearningGuide, MISRARustAndSafetyCriticalEmbeddedGuidelines, MemoryMappedPeripheralsAndTypestateProgramming, No_stdAndBareMetalIdioms, No_stdSynchronizationPrimitives, Ownership, PACAndHALImplementation, Panic_handlerAndNo_stdRuntime, PinAndUnpin, RISCVAndAVREmbeddedRustDevelopment, Roadmap, RustCompilerInternalsAndDriverArchitecture, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, RustVsAdaSPARK, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, Traits, UnsafeRustPatterns
+- expected_entities: embedded-hal_driver_patterns
+
+### rust Panic tutorial
+
+- n_retrieved: 38
+- concept_mrr: 0.333
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.5
+- concept_ndcg@3: 0.5
+- concept_ndcg@5: 0.5
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.333
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.5
+- source_ndcg@3: 0.5
+- source_ndcg@5: 0.5
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, ApplicationDomains, AsyncProgramming, BehaviorConsideredUndefined, BloomTaxonomy, BorrowSanitizerBSanDynamicAliasingRuleVerificationForRust, Borrowing, ComprehensiveRustMapping, ConcurrencyModels, CrossCompilation, ErrorHandlingDeepDive, ErrorHandlingIntermediate, FFIAdvancedTopics, FormalMethodsIndustrialization, Generics, GettingStartedWithRust, InlineAssembly, LearningGuide, Lifetimes, LoggingObservability, MemoryManagement, MiriRustUndefinedBehaviorDetector, Ownership, OwnershipFormalization, Panic, PanicAndAbort, RustBeltAndVerificationToolchain, RustFFI, SafeAndEffectiveUnsafeRust, SafetyTagsPreview, TestingBasics, TestingEcosystem, Traits, TreeBorrowsDeepDive, TypeSystemBasics, UnsafeRustPatterns, UnsafeRustQuiz, WASIAndWebAssemblyComponentModel
+- expected_entities: panic
+
+### Explain the differences between Rust Edition 2021 and Edition 2024.
+
+- n_retrieved: 39
+- concept_mrr: 0.0
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.0
+- concept_ndcg@3: 0.0
+- concept_ndcg@5: 0.0
+- concept_precision: 0.0
+- concept_precision@1: 0.0
+- concept_precision@10: 0.0
+- concept_precision@3: 0.0
+- concept_precision@5: 0.0
+- concept_recall: 0.0
+- concept_recall@1: 0.0
+- concept_recall@10: 0.0
+- concept_recall@3: 0.0
+- concept_recall@5: 0.0
+- source_mrr: 0.0
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.0
+- source_ndcg@3: 0.0
+- source_ndcg@5: 0.0
+- source_precision@1: 0.0
+- source_precision@10: 0.0
+- source_precision@3: 0.0
+- source_precision@5: 0.0
+- source_recall: 0.0
+- source_recall@1: 0.0
+- source_recall@10: 0.0
+- source_recall@3: 0.0
+- source_recall@5: 0.0
+- retrieved_entities: ApplicationDomains, AsyncAdvanced, AsyncClosures, AsyncFFIBoundary, AsyncProgramming, AuthoritySourceMap, Borrowing, EditionGuide, Evolution, Generics, KGSHACLEngineValidation, KnowledgeGraphDesignW3CSHACLOWLAlignmentAndOntologyEngineeringMethods, KnowledgeGraphOntologyV20, LLMAndRAGForRustKnowledgeBasesOntologyEngineeringAndRetrievalAugmentedGeneration, LetChainsAndIfLetGuards, Lifetimes, Methodology, NLLAndPolonius, NetworkingBasics, Ownership, OwnershipFormalization, RAGEvaluationForTheRustKnowledgeGraph, Rust190StabilizedFeatures, Rust191StabilizedFeatures, Rust2024EditionPreviewAndMigrationNotes, RustBeltAndVerificationToolchain, RustEdition20212024Differences, RustEditionMechanismAndMigrationGuide, RustEditions, RustFFI, RustVersionTracking, SafeAndEffectiveUnsafeRust, SemanticSpace, StatementsAndExpressions, TerminologyGlossary, Traits, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts
+- expected_entities: concept/07_future/00_version_tracking/02_editions.md, concept/07_future/01_edition_roadmap/03_rust_edition_guide.md, concept/07_future/03_edition_differences/01_edition_2021_to_2024.md
+
+### what is defmt and probe-rs Debugging Architecture
+
+- n_retrieved: 59
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AerospaceCertificationFormalMethods, ApplicationDomains, BareMetalBootAndLinkerScripts, BootstrappingTheRustCompiler, CargoBuildStd, CargoSemVerChecksPreview, CertifiedToolchainsAndCertifiedPackageInventory, CompilerDiagnosticsAndUITests, CompilerInfrastructure, ConceptMetaLayer, CrossCompilation, CustomBareMetalAsyncExecutor, DeclarativeMacros, DefmtAndProbeRsDebuggingArchitecture, DesignPatternsOverview, DslAndEmbedding, EmbeddedDebuggingAndLogging, EmbeddedFormalMemoryModel, EmbeddedHardwareEndToEndValidation, EmbeddedHardwareTestMatrix, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, EmbeddedTestingAndCIStrategiesForNo_stdRust, Evolution, FormalMethodsIndustrialization, Generics, InterruptAndExceptionModel, LinearizabilityAndTheConsistencySpectrum, MISRARustAndSafetyCriticalEmbeddedGuidelines, MacroDebuggingAndDiagnostics, MacroPatterns, MacrosBasics, MemoryManagement, MetaFrameworkAndKnowledgeArchitectureQuiz, Metaprogramming, No_stdAndBareMetalIdioms, No_stdAndBareMetalRust, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, Ownership, PACAndHALImplementation, Panic_handlerAndNo_stdRuntime, ProbeRsAndEmbeddedDebuggingInPractice, ProceduralMacros, ProductionGradeMacroDevelopment, Roadmap, RustCompilerInternalsAndDriverArchitecture, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, RustVsAdaSPARK, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, SerdePatterns, Traits
+- expected_entities: defmt_and_probe-rs_debugging_architecture
+
+### Resolver v3 and `public = true` Feature-Unification Demo overview
+
+- n_retrieved: 39
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, Cargo196FeatureHighlights, CargoAuthenticationAndBuildCache, CargoBuildScriptsBuildRs, CargoCommandsReference, CargoConfiguration, CargoDependencyResolution, CargoGettingStarted, CargoGuidePractices, CargoManifestReference, CargoProfilesAndLints, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CargoWorkflow, CargoWorkspaces, CloudNative, ConceptMetaLayer, ConcurrencyModels, CrossCompilation, CrossLayerDependencyAndImplicationTopology, DevOpsAndCICD, FormalMethodsBeforeEnteringL4, FormalMethodsIndustrialization, MetaFrameworkAndKnowledgeArchitectureQuiz, ModulesAndPaths, Ownership, PerformanceOptimization, ResolverV3AndPublicTrueFeatureUnificationDemo, RustFFI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SecurityPractices, TerminologyGlossary, TestingStrategies, ToolchainAndCargo, VerificationAndContractsEcosystemOverview, ZeroCostAbstractions
+- expected_entities: resolver_v3_and_`public_=_true`_feature-unification_demo
+
+### rust Formal Algorithm Theory tutorial
+
+- n_retrieved: 56
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedNetworkProtocolsInRust, AerospaceCertificationFormalMethods, AlgorithmComplexityAnalysisInRust, AlgorithmEngineeringPractice, AlgorithmSemantics, AlgorithmsCompetitiveProgramming, AsyncPatterns, AsyncProgramming, BorrowSanitizerRuntimeTreeBorrowsViolationDetection, Collections, ConcurrencyModels, ConcurrencyPatterns, CustomNetworkProtocolImplementationInRust, DesignPatternsOverview, DistributedSystems, EngineeringPracticeAndProductionGradePatterns, ErrorHandlingIntermediate, FormalAlgorithmTheory, FormalAlgorithmTheoryRedirectStub, FormalDesignPatternTheory, FormalDesignPatternTheoryRedirectStub, FormalMethodsMergedRedirect, FormalNetworkProtocolTheory, FrontierResearchAndInnovativePatterns, Functions, Generics, HoareLogic, IndustrialRustAdoptionCaseStudies, KaniRustBoundedModelChecker, Lifetimes, LinearAndAffineLogic, MiriRustUndefinedBehaviorDetector, ModernVerificationTools, NetworkProgramming, NetworkProtocols, NetworkSecurityInRust, OperationalSemantics, Ownership, OwnershipFormalization, ParadigmMatrix, PatternCompositionAlgebra, PerformanceOptimization, ProgrammingLanguageFoundations, RustBeltAndVerificationToolchain, RustVsC, SafeAndEffectiveUnsafeRust, SeparationLogic, StreamProcessingEcosystem, SystemDesignPrinciples, Traits, TypeLevelProgramming, TypeSystemBasics, TypeTheory, UnsafeRustPatterns, VerificationToolchain, ZeroCostAbstractions
+- expected_entities: formal_algorithm_theory
+
+### explain Cargo Registries and Publishing in rust
+
+- n_retrieved: 36
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, AsyncProcessManagementInRust, BlockchainDevelopmentInRust, Cargo196FeatureHighlights, CargoAuthenticationAndBuildCache, CargoCommandsReference, CargoConfiguration, CargoGettingStarted, CargoManifestTargets, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoRegistryInternals, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CargoSourceReplacement, CargoSubcommandsAndPlugins, CargoWorkflow, CloudNative, CrossCompilation, DevOpsAndCICD, ErrorHandlingDeepDive, InterProcessCommunicationMechanismsInRust, MacrosAdvanced, ModernProcessManagementLibrariesInRust, Ownership, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, RustBeltAndVerificationToolchain, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SecurityPractices, ToolchainAndCargo, TypeSystemBasics
+- expected_entities: cargo_registries_and_publishing
+
+### Borrowing and Methodology common patterns
+
+- n_retrieved: 47
+- concept_mrr: 0.143
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.398
+- concept_ndcg@3: 0.0
+- concept_ndcg@5: 0.0
+- concept_precision: 0.0
+- concept_precision@1: 0.0
+- concept_precision@10: 0.2
+- concept_precision@3: 0.0
+- concept_precision@5: 0.0
+- concept_recall: 0.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 0.0
+- concept_recall@5: 0.0
+- source_mrr: 0.143
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.398
+- source_ndcg@3: 0.0
+- source_ndcg@5: 0.0
+- source_precision@1: 0.0
+- source_precision@10: 0.2
+- source_precision@3: 0.0
+- source_precision@5: 0.0
+- source_recall: 0.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 0.0
+- source_recall@5: 0.0
+- retrieved_entities: APIGatewayAndServiceMeshPatternsInRust, ApplicationDomains, ArchitecturePatterns, AsyncPatterns, AsyncProgramming, Borrowing, ClosureTypes, CloudNative, ConcurrencyModels, ConcurrencyPatterns, CoreCratesIndex, CowAndBorrowed, DesignPatternsOverview, DistributedSystems, EngineeringPracticeAndProductionGradePatterns, ErrorHandlingBasics, ErrorHandlingIntermediate, EventDrivenArchitecture, Evolution, FieldProjectionsPreview, FrontierResearchAndInnovativePatterns, Generics, InPlaceAndPinnedInitializationPatterns, IndustrialRustAdoptionCaseStudies, Lifetimes, MacrosAdvanced, MemoryManagement, Methodology, MicroservicePatterns, Ownership, OwnershipBorrowingAndLifetimesQuiz, ParadigmMatrix, PatternCompositionAlgebra, PerformanceOptimization, PinAndUnpin, Roadmap, RustVsC, RustVsGo, SafeAndEffectiveUnsafeRust, SerdePatterns, SystemDesignPrinciples, ToolchainAndCargo, Traits, TypeSystemBasics, TypeTheory, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: borrowing, methodology
+
+### explain Formal Languages and Automata in rust
+
+- n_retrieved: 56
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AdvancedProcessManagementInRust, AsyncProcessManagementInRust, AsyncProgramming, AxiomaticSemantics, CategoryTheory, ComputabilityTheory, ComputationalModelsAndComputability, ConcurrencyModelComparison, ConcurrencyModels, DecidabilitySpectrum, DenotationalSemantics, DistributedSystemsSemantics, EquivalenceOfComputationalModels, EvaluationStrategies, Evolution, FiveExecutionModelsDefinitionMatrix, FormalLanguagesAndAutomata, Generics, HoareLogic, InterProcessCommunicationMechanismsInRust, LambdaCalculus, LinearAndAffineLogic, MathematicalFunctionsOfComputation, ModernProcessManagementLibrariesInRust, ObservationalEquivalence, ObservationalEquivalenceOfAlgorithmImplementations, OperationalSemantics, Ownership, OwnershipFormalization, ParadigmMatrix, ProcessCalculiForRustCSPCCSAndThePiCalculus, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, ProgrammingLanguageFoundations, ReactiveSystemsSemantics, RefinementCalculusForRustAlgorithms, RustBeltAndVerificationToolchain, RustVsC, RustVsGo, RustVsHaskell, SafeAndEffectiveUnsafeRust, SemanticSpace, SeparationLogic, SeparationLogicForRustAnIrisAndRustBeltPerspective, StreamAlgebraAndBackpressure, SubtypeAndVariance, Traits, TreeBorrowsDeepDive, TypeInference, TypeSystemBasics, TypeTheory, TypeTheoryAndRustTheTypeSystemAsAComputationalModel
+- expected_entities: formal_languages_and_automata
+
+### explain Operators and Symbols in rust
+
+- n_retrieved: 34
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, AsyncProcessManagementInRust, AsyncProgramming, BehaviorConsideredUndefined, Borrowing, ClosureBasics, ClosureTypes, ConcurrencyModels, ConstantEvaluation, Destructors, Functions, Generics, InterProcessCommunicationMechanismsInRust, Iterators, Lifetimes, MacrosAdvanced, MemoryManagement, MemoryModel, ModernProcessManagementLibrariesInRust, OperatorsAndSymbols, Ownership, Panic, PatternsReference, PerformanceOptimization, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, RustBeltPredicateMap, SafeAndEffectiveUnsafeRust, StatementsAndExpressionsReference, Traits, TypeSystemBasics
+- expected_entities: operators_and_symbols
+
+### Closures overview
+
+- n_retrieved: 27
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedTraits, AsyncClosures, AsyncProgramming, Borrowing, ClosureBasics, ClosureTypes, Closures, ClosuresAndIteratorsQuiz, ConcurrencyModels, DesignPatternsOverview, Evolution, FormalMethodsIndustrialization, FormalMethodsLayerOverview, Generics, Iterators, Lifetimes, MemoryManagement, Ownership, PerformanceOptimization, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, Traits, TypeInference, TypeSystemBasics
+- expected_entities: closures
+
+### Rust 1.98+ Preview overview
+
+- n_retrieved: 21
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, CargoDependencyResolution, CargoGettingStarted, CargoManifestReference, CargoWorkflow, EditionGuide, Evolution, Generics, LearningMvpPath, NLLAndPolonius, Rust1100Preview, Rust196StabilizedFeaturesCurrentPatch1961, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust1971StablePatch, Rust198Preview, Rust199Preview, RustInSpacePreview, RustVersionTracking, ToolchainAndCargo, VersionEvolutionEditionsAndPreviewFeaturesQuiz
+- expected_entities: rust_1.98+_preview
+
+### What do Send and Sync auto traits guarantee?
+
+- n_retrieved: 36
+- concept_mrr: 0.0
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.0
+- concept_ndcg@3: 0.0
+- concept_ndcg@5: 0.0
+- concept_precision: 0.0
+- concept_precision@1: 0.0
+- concept_precision@10: 0.0
+- concept_precision@3: 0.0
+- concept_precision@5: 0.0
+- concept_recall: 0.0
+- concept_recall@1: 0.0
+- concept_recall@10: 0.0
+- concept_recall@3: 0.0
+- concept_recall@5: 0.0
+- source_mrr: 0.0
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.0
+- source_ndcg@3: 0.0
+- source_ndcg@5: 0.0
+- source_precision@1: 0.0
+- source_precision@10: 0.0
+- source_precision@3: 0.0
+- source_precision@5: 0.0
+- source_recall: 0.0
+- source_recall@1: 0.0
+- source_recall@10: 0.0
+- source_recall@3: 0.0
+- source_recall@5: 0.0
+- retrieved_entities: AsyncBoundaryPanorama, AsyncCancellationSafety, AsyncClosures, AsyncDropPreview, AsyncProgramming, AsyncTraitObjectSafety, Borrowing, ClosureTypes, ConceptMetaLayer, ConcurrencyModels, ConcurrencyPatterns, CrossLayerDependencyAndImplicationTopology, CrossPlatformConcurrency, DistributedSystems, ExampleAndCounterexampleAtlas, ExecutorFairnessAndScheduling, FutureAndExecutorMechanisms, GenBlocksPreview, Generics, Lifetimes, MemoryManagement, MetaFrameworkAndKnowledgeArchitectureQuiz, NegativeImpls, OperatingSystems, Ownership, PinAndUnpin, Rust198Preview, SafeAndEffectiveUnsafeRust, SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts, SendSyncBoundaryJudgmentTraitObjectsClosuresAndAsyncStateMachines, SpecialTypesAndTraits, TokioRuntimeInternals, Traits, TypeSystemBasics, UnsafeBoundaryPanorama, WakerContractDeepDive
+- expected_entities: concept/03_advanced/00_concurrency/01_concurrency.md, concept/03_advanced/00_concurrency/02_send_sync_auto_traits.md, concept/03_advanced/00_concurrency/04_send_sync_boundaries.md
+
+### how does Resolver v3 and `public = true` Feature-Unification Demo work
+
+- n_retrieved: 60
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, AuthoritySourceMap, Borrowing, Cargo196FeatureHighlights, CargoAuthenticationAndBuildCache, CargoBuildScriptsBuildRs, CargoCommandsReference, CargoConfiguration, CargoDependencyResolution, CargoGettingStarted, CargoGuidePractices, CargoManifestReference, CargoProfilesAndLints, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CargoWorkflow, CargoWorkspaces, CloudNative, ConcurrencyModels, CrossCompilation, CrossLayerDependencyAndImplicationTopology, DevOpsAndCICD, FormalMethodsIndustrialization, Generics, HowRustIsMadeAndNightlyRust, KGSHACLEngineValidation, KnowledgeGraphDesignW3CSHACLOWLAlignmentAndOntologyEngineeringMethods, KnowledgeGraphOntologyV20, LLMAndRAGForRustKnowledgeBasesOntologyEngineeringAndRetrievalAugmentedGeneration, MacrosAdvanced, Methodology, ModulesAndPaths, NameResolutionAndHIRInRustc, Ownership, OwnershipFormalization, PerformanceOptimization, ResolverV3AndPublicTrueFeatureUnificationDemo, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustBeltAndVerificationToolchain, RustCompilerInternalsAndDriverArchitecture, RustFFI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SecurityPractices, SemanticSpace, SubtypeAndVariance, TerminologyGlossary, TestingStrategies, TheRustcQuerySystemAndIncrementalCompilation, TheTraitSolverInRustc, ToolchainAndCargo, Traits, TypeInference, TypeSystemBasics, TypeTheory, ZeroCostAbstractions
+- expected_entities: resolver_v3_and_`public_=_true`_feature-unification_demo
+
+### rust Game Development (Merged Redirect) tutorial
+
+- n_retrieved: 44
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AerospaceCertificationFormalMethods, ApplicationDomains, AsyncProgramming, BloomTaxonomy, Borrowing, CAbiObjectModel, CCToRustEngineeringComparisonRoadmap, ComprehensiveRustMapping, ConcurrencyModels, DesignPatternsOverview, EditionGuide, EvaluationStrategies, Evolution, FormalMethodsIndustrialization, FormalMethodsMergedRedirect, GameDevelopmentEcosystem, GameDevelopmentMergedRedirect, GameECSArchitecture, GameEngineInternals, Generics, HoareLogic, LearningGuide, Lifetimes, MemoryManagement, ModernVerificationTools, NLLAndPolonius, Ownership, OwnershipFormalization, PatternCompositionAlgebra, PatternSemanticSpaceIndex, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustFFI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, ToolchainAndCargo, Traits, TypeSystemBasics, VariableModel, VerificationToolchain, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: game_development_(merged_redirect)
+
+### Exception Safety: C++ vs Rust vs Panic: trade-offs
+
+- n_retrieved: 44
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 0.613
+- concept_ndcg@3: 0.613
+- concept_ndcg@5: 0.613
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 0.5
+- concept_recall@1: 0.5
+- concept_recall@10: 0.5
+- concept_recall@3: 0.5
+- concept_recall@5: 0.5
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 0.613
+- source_ndcg@3: 0.613
+- source_ndcg@5: 0.613
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 0.5
+- source_recall@1: 0.5
+- source_recall@10: 0.5
+- source_recall@3: 0.5
+- source_recall@5: 0.5
+- retrieved_entities: ApplicationDomains, AsyncProgramming, Borrowing, CPreprocessorVsRustMacros, ConcurrencyModels, CoreCratesIndex, CrossCompilation, DeclarativeMacros, DesignPatternsOverview, DslAndEmbedding, ErrorHandlingBasics, ErrorHandlingDeepDive, ErrorHandlingIntermediate, Evolution, ExceptionSafetyCVsRust, Generics, Lifetimes, LinearAndAffineLogic, LoggingObservability, MacrosAdvanced, MacrosBasics, MemoryManagement, OperationalSemantics, Ownership, OwnershipFormalization, ParadigmMatrix, ProceduralMacros, RustBeltAndVerificationToolchain, RustVsC, RustVsC_02managedlan, RustVsGo, RustVsJava, RustVsPython, RustVsRuby, RustVsZig, SafeAndEffectiveUnsafeRust, SeparationLogic, SerdePatterns, ToolchainAndCargo, Traits, TypeSystemBasics, TypeTheory, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: exception_safety:_c++_vs_rus, panic
+
+### what is Cargo Subcommands and Plugins
+
+- n_retrieved: 32
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: Borrowing, CargoAuthenticationAndBuildCache, CargoBuildScriptsBuildRs, CargoCommandsReference, CargoConfiguration, CargoDependencyResolution, CargoGettingStarted, CargoGuidePractices, CargoManifestReference, CargoManifestTargets, CargoProfilesAndLints, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoRegistryInternals, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CargoSourceReplacement, CargoSubcommandsAndPlugins, CargoWorkflow, CargoWorkspaces, CloudNative, CrossCompilation, DevOpsAndCICD, LearningMvpPath, Lifetimes, MacrosAdvanced, MemoryManagement, ModulesAndPaths, Ownership, RustVsC, SecurityPractices, ToolchainAndCargo, TypeSystemBasics
+- expected_entities: cargo_subcommands_and_plugins
+
+### explain Authority Source Index in rust
+
+- n_retrieved: 26
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AuthoritySourceIndex, AuthoritySourceMap, Borrowing, CoercionAndCasting, Collections, ConceptIndex, ConcurrencyModels, DesignPatternsOverview, ErrorHandlingIntermediate, ExternalAuthorityTopicIndex, IdiomsSpectrum, InternationalAuthorityIndex, IteratorIdiomsInRust, KnowledgeMindmap, Lifetimes, MemoryManagement, NewtypeAndWrapperTypes, Ownership, Roadmap, SmartPointers, Sources, Todos, TopicAuthorityAlignmentMap, Traits, TypeConversions, TypeSystemBasics
+- expected_entities: authority_source_index
+
+### rust Async FFI Boundary tutorial
+
+- n_retrieved: 40
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncBoundaryPanorama, AsyncCancellationSafety, AsyncClosures, AsyncDropPreview, AsyncFFIBoundary, AsyncProgramming, AsyncTraitObjectSafety, Borrowing, BoundaryExtensionTree, ExecutorFairnessAndScheduling, FFIPatternsInRust, FutureAndExecutorMechanisms, GenBlocksPreview, GenericAssociatedTypesGATs, GenericAssociatedTypesGATsAtTheAsyncBoundary, Generics, Iterators, KaniRustBoundedModelChecker, Lifetimes, LifetimesAdvanced, MemoryManagement, MemoryModel, MiriRustUndefinedBehaviorDetector, NLLAndPolonius, Ownership, OwnershipFormalization, PerformanceOptimization, PinAndUnpin, RustFFI, SafeAndEffectiveUnsafeRust, StreamAlgebraAndBackpressure, TokioRuntimeInternals, Traits, TypeInference, TypeSystemBasics, UnsafeBoundaryPanorama, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, WakerContractDeepDive
+- expected_entities: async_ffi_boundary
+
+### best practices for Const Generics — Values as Type Parameters
+
+- n_retrieved: 41
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncCancellationSafety, AsyncProgramming, CargoScriptWritingAndRunningRustScripts, CategoryTheory, ClapCommandLineArgumentParserForRust, ClosureBasics, ConcurrencyModels, ConstGenericsAndTraitObjects, ConstGenericsValuesAsTypeParameters, ConstItemsAndConstFunctions, ConstTraitImplPreview, ConstantEvaluation, ControlFlow, DispatchMechanisms, DistributedSystems, ErrorHandlingIntermediate, Evolution, FormalMethodsIndustrialization, GenericAssociatedTypesGATs, Generics, HTTPClientDevelopmentInRust, Lifetimes, LifetimesAdvanced, LinearAndAffineLogic, NetworkProgramming, Ownership, OwnershipFormalization, PerformanceOptimization, ReqwestErgonomicAsyncHTTPClientForRust, Roadmap, RustBeltAndVerificationToolchain, SafeAndEffectiveUnsafeRust, SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts, StatementsAndExpressions, Traits, TypeInference, TypeLevelProgramming, TypeSystemAdvanced, TypeSystemBasics, TypeTheory, WebFrameworks
+- expected_entities: const_generics_—_values_as_type_parameters
+
+### explain Machine Learning Ecosystem in rust
+
+- n_retrieved: 49
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, AdvancedProcessManagementInRust, ApplicationDomains, AsyncFFIBoundary, AsyncProcessManagementInRust, AsyncProgramming, Borrowing, CoercionAndCasting, Collections, ConcurrencyModels, DesignPatternsOverview, EditionGuide, ErrorHandlingIntermediate, Evolution, FFIPatternsInRust, FormalMethodsIndustrialization, Generics, IdiomsSpectrum, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, Lifetimes, MachineLearningEcosystem, MemoryManagement, ModernProcessManagementLibrariesInRust, NewtypeAndWrapperTypes, Ownership, OwnershipFormalization, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustFFI, RustForDataScienceAndScientificComputing, RustInAI, RustVersionTracking, SafeAndEffectiveUnsafeRust, SmartPointers, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: machine_learning_ecosystem
+
+### how does Evolution work
+
+- n_retrieved: 31
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, ApplicationDomains, AsyncProgramming, Borrowing, ConcurrencyModels, CoreCratesIndex, CowAndBorrowed, Evolution, Generics, HowRustIsMadeAndNightlyRust, Lifetimes, MacrosAdvanced, MemoryManagement, Ownership, Readme_03advanced, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustFFI, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SerdePatterns, ToolchainAndCargo, Traits, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, WebAssemblyTargetEvolutionPreview, ZeroCostAbstractions
+- expected_entities: evolution
+
+### what is WebAssembly FAQ
+
+- n_retrieved: 45
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedWebAssemblyDevelopmentWithRust, ApplicationDomains, ArchitecturePatterns, AsyncProgramming, Borrowing, CargoSemVerChecksPreview, CloudNative, ConcurrencyModels, DesignPatternsFAQ, DesignPatternsOverview, EngineeringPracticeAndProductionGradePatterns, ErrorHandlingIntermediate, EventDrivenArchitecture, Evolution, FormalMethodsIndustrialization, Lifetimes, MacroDebuggingAndDiagnostics, MacroFAQ, MacroHygiene, MacrosAdvanced, MemoryManagement, MicroservicePatterns, Ownership, OwnershipFormalization, PatternSelectionBestPractices, ProceduralMacros, ProductionGradeMacroDevelopment, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustFFI, RustForWebAssemblyResearch, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, ToolchainAndCargo, Traits, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, WebAssemblyFAQ, WebAssemblyGlossary, WebAssemblyJavaScriptInterop, WebFrameworks
+- expected_entities: webassembly_faq
+
+### rust Panic and Abort tutorial
+
+- n_retrieved: 93
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, AIOntologyAndRustSemantics, AISafetyAndAlignment, APIDesignPatterns, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, ApplicationDomains, AsyncProgramming, AtomicsAndMemoryOrdering, AuthoritySourceMap, BareMetalBootAndLinkerScripts, BareMetalRust, BehaviorConsideredUndefined, Borrowing, CargoBuildStd, CategoryTheoryAndRustStructuralSemanticsAsAComputationalModel, ConceptDefinitionAtlas, ConcurrencyModels, CriticalSectionsAndSynchronizationOnBareMetal, CrossCompilation, DependentTypesAndRefinementTypes, DesignPatternsOverview, EmbassyAsyncFrameworkDeepDive, EmbeddedDebuggingAndLogging, EmbeddedFormalMemoryModel, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedProtocolAndPeripheralDrivers, EmbeddedSystems, ErrorHandlingDeepDive, ErrorHandlingIntermediate, FFIAdvancedTopics, FFIPatternsInRust, FormalMethodsIndustrialization, Generics, IdiomsSpectrum, InlineAssembly, InterLayerMappingAtlas, InterruptAndExceptionModel, KnowledgeGraphOntologyV20, LLMSystemArchitecture, Lifetimes, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, LinkerScriptsAndMemoryLayoutForEmbeddedRust, LoggingObservability, MLOpsAndLLMOps, MachineLearningEcosystem, MemoryManagement, Methodology, MiriRustUndefinedBehaviorDetector, ModalLogicAndRustEffects, No_stdAllocatorsAndPanicHandlers, No_stdAndBareMetalIdioms, No_stdAndBareMetalRust, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, OperationalSemantics, Ownership, OwnershipFormalization, OwnershipPerformanceOptimization, PACAndHALImplementation, Panic, PanicAndAbort, Panic_handlerAndNo_stdRuntime, ParadigmMatrix, PoisonUndefinedBehaviorAndFreezeInLLVMIR, ProcessCalculiForRustCSPCCSAndThePiCalculus, RISCVAndAVREmbeddedRustDevelopment, RTICVsEmbassyRealTimeFrameworksInRust, Roadmap, RustAntiPatterns, RustAntiPatternsAndPitfallsAtlas, RustBeltAndVerificationToolchain, RustFFI, RustInAI, RustPerformanceIdioms, RustVsC, RustVsZig, SafeAndEffectiveUnsafeRust, SafetyCriticalBareMetalOperatingSystemsInRust, SemanticModelAtlas, SemanticSpace, SeparationLogic, TerminologyGlossary, TheNo_stdAllocCrateEcosystem, Traits, TreeBorrowsDeepDive, TypeSystemBasics, TypeTheory, TypeTheoryAndRustTheTypeSystemAsAComputationalModel, UnifiedLanguageSemanticModelExpressivenessMatrix, UnsafeRustPatterns, WASIAndWebAssemblyComponentModel
+- expected_entities: panic_and_abor
+
+### rust Ownership as Resource Management tutorial
+
+- n_retrieved: 39
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, AeneasSymbolicSemantics, AeneasVerificationPipelineSymbolicBorrowCalculusAsAComputationalModel, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncProgramming, BorrowSanitizerBSanDynamicAliasingRuleVerificationForRust, BorrowSanitizerRuntimeTreeBorrowsViolationDetection, Borrowing, ConcurrencyModels, CowAndBorrowed, EffectHandlersAndRustSLimitedEffectsControlFlowAbstractionsAsAComputationalModel, ErrorHandlingIntermediate, FormalMethodsIndustrialization, FormalVerificationTools, KaniRustBoundedModelChecker, Lifetimes, LinearAndAffineLogic, LinearLogicAndOwnershipResourceCalculusAsAComputationalModel, MemoryManagement, MiriRustUndefinedBehaviorDetector, Ownership, OwnershipAsResourceManagement, OwnershipBorrowingLifetimesKnowledgeMap, OwnershipFormalization, OwnershipPerformanceOptimization, PerformanceOptimization, PinAndUnpin, RustBeltAndVerificationToolchain, RustBeltOwnershipLogicMemorySafetyProofAsAComputationalModel, RustLanguageContractsPreconditionsPostconditionsAndOwnershipAssertions, SafeAndEffectiveUnsafeRust, SafetyTagsPreview, ScopeGuardAndDeferredCleanup, SessionTypesAndRustChannelsCommunicationProtocolsAsAComputationalModel, SmartPointers, TypeSystemBasics, VerificationAndContractsEcosystemOverview, ZeroCopyParsing, ZeroCostAbstractions
+- expected_entities: ownership_as_resource_managemen
+
+### Effects and Purity overview
+
+- n_retrieved: 38
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncProgramming, Borrowing, CategoryTheory, CategoryTheoryAndRustStructuralSemanticsAsAComputationalModel, ConcurrencyModels, DistributedConsensus, EffectHandlersAndRustSLimitedEffectsControlFlowAbstractionsAsAComputationalModel, EffectSystem, EffectsAndPurity, EvaluationStrategies, ExampleAndCounterexampleAtlas, FiveExecutionModelsDefinitionMatrix, FormalMethodsIndustrialization, GapAndActionPlan, Generics, LambdaCalculus, Lifetimes, LinearAndAffineLogic, LinearLogicAndOwnershipResourceCalculusAsAComputationalModel, LinearizabilityAndTheConsistencySpectrum, MemoryManagement, ModalLogicAndRustEffects, Ownership, OwnershipFormalization, ParallelDistributedPatternSpectrum, ProcessCalculiForRustCSPCCSAndThePiCalculus, QuizGeneralPLFoundations, RustBeltAndVerificationToolchain, SelfAssessment, SessionTypesAndRustChannelsCommunicationProtocolsAsAComputationalModel, Traits, TypeSystemBasics, TypeTheory, TypeTheoryAndRustTheTypeSystemAsAComputationalModel, VariableModel, VerificationAndContractsEcosystemOverview
+- expected_entities: effects_and_purity
+
+### explain Type Conversions in rust
+
+- n_retrieved: 56
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationDomains, AsyncFFIBoundary, AsyncProcessManagementInRust, AsyncProgramming, Borrowing, CoercionAndCasting, Collections, CompilerInfrastructure, ConcurrencyModels, CrossPlatformProcessManagementInRust, DesignPatternsOverview, ErrorHandlingIntermediate, FFIPatternsInRust, Generics, IdiomsSpectrum, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, LLVMBackendAndCodeGenerationInRustc, Lifetimes, MacrosAdvanced, MemoryManagement, ModernProcessManagementLibrariesInRust, NLLAndPolonius, NameResolutionAndHIRInRustc, NewtypeAndWrapperTypes, Numerics, Ownership, OwnershipFormalization, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, RangeTypes, Roadmap, RustBeltAndVerificationToolchain, RustFFI, RustVersionTracking, RustVsC, RustcDriverRustc_interfaceAndStableMIR, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SmartPointers, SubtypeAndVariance, TheRustcQuerySystemAndIncrementalCompilation, TheTraitSolverInRustc, ToolchainAndCargo, Traits, TypeCheckingAndInferenceInRustc, TypeConversions, TypeInference, TypeSystemBasics, TypeTheory, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, ZeroCostAbstractions
+- expected_entities: ype_conversions
+
+### Atomics and Memory Ordering overview
+
+- n_retrieved: 60
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncProgramming, AtomicsAndMemoryOrdering, BareMetalBootAndLinkerScripts, Borrowing, CRDTTypeZooStateBasedOpBasedAndTheMergeLattice, CargoBuildStd, CausalOrderingAndVectorClocks, ClosureTypes, ConcurrencyModels, ConcurrencyPatterns, CowAndBorrowed, CrossCompilation, CustomAllocators, CustomBareMetalAsyncExecutor, DataEngineering, DesignPatternsOverview, DistributedConsensus, DistributedSystems, EmbeddedDebuggingAndLogging, EmbeddedFormalMemoryModel, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedSystems, ExecutionModelIsomorphism, FiveExecutionModelsDefinitionMatrix, HoareLogic, IdiomsSpectrum, InterruptAndExceptionModel, LinearizabilityAndTheConsistencySpectrum, LockingPrimitives, MemoryAllocationAndLifetime, MemoryManagement, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, Ownership, OwnershipPerformanceOptimization, PACAndHALImplementation, Panic, Panic_handlerAndNo_stdRuntime, ParallelDistributedPatternSpectrum, PerformanceOptimization, PinAndUnpin, ProcessCalculiForRustCSPCCSAndThePiCalculus, Roadmap, RustAntiPatterns, RustAntiPatternsAndPitfallsAtlas, RustPerformanceIdioms, SafeAndEffectiveUnsafeRust, SafetyCriticalBareMetalOperatingSystemsInRust, SafetyCriticalSystemsEngineering, SmartPointers, StreamProcessingEcosystem, StreamProcessingSemantics, TheRustRuntime, TypeSystemBasics, UnsafeRustPatterns, VerificationAndContractsEcosystemOverview, WebAssemblyEcosystem, ZeroCopyParsing
+- expected_entities: atomics_and_memory_ordering
+
+### explain TRPL 3rd Edition Alignment Audit in rust
+
+- n_retrieved: 38
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncFFIBoundary, BorrowSanitizerBSanDynamicAliasingRuleVerificationForRust, Borrowing, CoercionAndCasting, Collections, ConceptSourceAlignmentAtlas, ConcurrencyModels, DesignPatternsOverview, EnterpriseAndSoftwareArchitectureAlignmentInRust, ErrorHandlingIntermediate, Evolution, FFIPatternsInRust, FormalMethodsIndustrialization, Generics, IdiomsSpectrum, IteratorIdiomsInRust, Lifetimes, MemoryManagement, NewtypeAndWrapperTypes, Ownership, OwnershipFormalization, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SmartPointers, TRPL3rdEdChapterMapping, TRPL3rdEditionAlignmentAudit, Traits, TypeConversions, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts
+- expected_entities: rpl_3rd_edition_alignment_audi
+
+### what is Metaprogramming
+
+- n_retrieved: 33
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, CPreprocessorVsRustMacros, DeclarativeMacros, DesignPatternsOverview, DslAndEmbedding, Evolution, Generics, HowRustIsMadeAndNightlyRust, Lifetimes, MacroPatterns, MacrosAdvanced, MacrosBasics, MemoryManagement, Metaprogramming, ModulesAndPaths, Ownership, ParadigmMatrix, ProceduralMacros, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustVersionTracking, RustVsC, RustVsD, RustVsGo, RustVsNim, SafeAndEffectiveUnsafeRust, SemanticSpace, SerdePatterns, Traits, TypeSystemBasics, TypeTheory, WebAssemblyEcosystem
+- expected_entities: metaprogramming
+
+### practical guide to Macro Patterns
+
+- n_retrieved: 34
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AlgorithmEngineeringPractice, ApplicationDomains, AspMarkingGuide, BilingualConceptTemplate, Collections, ConceptAuditGuide, ConceptConsistencyAuditChecklist, ConcurrencyModels, CoreCratesIndex, DeclarativeMacros, DesignPatternsOverview, DslAndEmbedding, ErrorHandlingIntermediate, Generics, IdiomsSpectrum, IteratorIdiomsInRust, MacroPatterns, MacrosAdvanced, MacrosBasics, Metaprogramming, ModulesAndPaths, Ownership, PerformanceOptimization, ProceduralMacros, QualityDashboardV2, Roadmap, RustAPIGuidelinesCanonicalGuide, SerdePatterns, TemplateDeduplicationGuide, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, WebAssemblyEcosystem
+- expected_entities: macro_patterns
+
+### HTTP Client Development in Rust overview
+
+- n_retrieved: 65
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AUTOSARAndRust, AdvancedNetworkProtocolsInRust, AdvancedWebAssemblyDevelopmentWithRust, AerospaceCertificationFormalMethods, ApplicationDomains, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, BareMetalBootAndLinkerScripts, BlockchainDevelopmentInRust, CargoVetAndSupplyChainAuditing, CertifiedToolchainsAndCertifiedPackageInventory, ClosureTypes, CloudNative, ConcurrencyModels, ConcurrencyPatterns, CrossCompilation, CustomBareMetalAsyncExecutor, DesignPatternsOverview, DistributedSystems, EmbeddedDebuggingAndLogging, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, ErrorHandlingIntermediate, Evolution, FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems, FormalMethodsIndustrialization, FormalVerificationEcosystemTower, Generics, HTTPClientDevelopmentInRust, HighPerformanceNetworkServiceArchitecture, InterruptAndExceptionModel, LockingPrimitives, MISRARustAndSafetyCriticalEmbeddedGuidelines, NetworkProgramming, NetworkProtocols, NetworkSecurityInRust, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, Ownership, Panic_handlerAndNo_stdRuntime, PerformanceOptimization, ReqwestErgonomicAsyncHTTPClientForRust, Roadmap, RustEditionMechanismAndMigrationGuide, RustInAI, RustInQuantumComputingEcosystems, RustInSafetyCriticalSystems, RustInSpacePreview, RustVersionTracking, RustVsAdaSPARK, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, SafetyCriticalRustTopicIndex, SafetyCriticalSystemsEngineering, StreamProcessingEcosystem, ToolchainAndCargo, Traits, TypeSystemBasics, VerificationToolchain, WebAssemblyEcosystem, WebFrameworks
+- expected_entities: http_client_development_in_rus
+
+### explain Effect System in rust
+
+- n_retrieved: 66
+- concept_mrr: 0.167
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.356
+- concept_ndcg@3: 0.0
+- concept_ndcg@5: 0.0
+- concept_precision: 0.0
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.0
+- concept_precision@5: 0.0
+- concept_recall: 0.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 0.0
+- concept_recall@5: 0.0
+- source_mrr: 0.167
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.356
+- source_ndcg@3: 0.0
+- source_ndcg@5: 0.0
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.0
+- source_precision@5: 0.0
+- source_recall: 0.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 0.0
+- source_recall@5: 0.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AdvancedProcessManagementInRust, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, ApplicationDomains, AsyncFFIBoundary, AsyncProcessManagementInRust, AsyncProgramming, Borrowing, CargoManifestReference, CargoWorkspaces, CategoryTheory, CoercionAndCasting, Collections, ConcurrencyModels, CratesAndSourceFiles, CrossPlatformProcessManagementInRust, DesignPatternsOverview, DistributedConsensus, EffectHandlersAndRustSLimitedEffectsControlFlowAbstractionsAsAComputationalModel, EffectSystem, EffectsAndPurity, ErrorHandlingIntermediate, EvaluationStrategies, Evolution, FFIPatternsInRust, FiveExecutionModelsDefinitionMatrix, Generics, IdiomsSpectrum, InterProcessCommunicationMechanismsInRust, Items, IteratorIdiomsInRust, LambdaCalculus, Lifetimes, LinearAndAffineLogic, LinearLogicAndOwnershipResourceCalculusAsAComputationalModel, LinearizabilityAndTheConsistencySpectrum, Linkage, MemoryManagement, ModernProcessManagementLibrariesInRust, NewtypeAndWrapperTypes, Ownership, OwnershipFormalization, ParadigmMatrix, ParallelDistributedPatternSpectrum, ProcessCalculiForRustCSPCCSAndThePiCalculus, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, Roadmap, RustBeltAndVerificationToolchain, RustFFI, RustVsC, RustVsGo, RustVsOCamlOwnershipAndAlgebraicEffectsInSystemsAndFunctionalProgramming, SafeAndEffectiveUnsafeRust, SessionTypesAndRustChannelsCommunicationProtocolsAsAComputationalModel, SmartPointers, TheRustRuntime, Traits, TypeConversions, TypeSystemBasics, TypeTheory, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, VariableModel
+- expected_entities: effect_system
+
+### Async Patterns in production codebases
+
+- n_retrieved: 51
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, ArchitecturePatterns, AsyncAdvanced, AsyncBoundaryPanorama, AsyncCancellationSafety, AsyncDropPreview, AsyncFFIBoundary, AsyncPatterns, AsyncProcessManagementInRust, AsyncProgramming, Borrowing, CloudNative, ConcurrencyModels, DistributedSystems, EngineeringPracticeAndProductionGradePatterns, ErrorHandlingBasics, ErrorHandlingIntermediate, EventDrivenArchitecture, EventSourcingEnginePatternsInRust, ExecutorFairnessAndScheduling, FFIPatternsInRust, FutureAndExecutorMechanisms, GenBlocksPreview, Generics, InterProcessCommunicationMechanismsInRust, Lifetimes, MemoryManagement, MicroservicePatterns, ModernProcessManagementLibrariesInRust, Ownership, OwnershipFormalization, PinAndUnpin, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, Readme_06ecosystem, Roadmap, RustFFI, SafeAndEffectiveUnsafeRust, StateMachineSemanticsAndWorkflowModels, SubtypeAndVariance, TokioRuntimeInternals, Traits, TypeSystemBasics, UnsafeBoundaryPanorama, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, WakerContractDeepDive, WebAssemblyEcosystem, WorkflowTheoryFormalization
+- expected_entities: async_patterns
+
+### what is Gap and Action Plan
+
+- n_retrieved: 41
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorModelAndMessagePassingPatternsInRust, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AsyncProgramming, CAbiObjectModel, CCToRustEngineeringComparisonRoadmap, ClosureTypes, CloudNative, ComponentBasedSystemSemantics, ConceptAuditGuide, ConceptMetaLayer, ConcurrencyModels, ConcurrencyModelsAsComputationalModelsCSPActorsTLAAndRust, ConcurrencyPatterns, CrossLayerDependencyAndImplicationTopology, DesignPatternsOverview, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystems, DistributedSystemsSemantics, ErrorHandlingBasics, EventDrivenArchitecture, FoundationsGapClosureIndex, GapAndActionPlan, GeneralPLFoundationsRoadmap, HowRustIsMadeAndNightlyRust, LinearizabilityAndTheConsistencySpectrum, MetaFrameworkAndKnowledgeArchitectureQuiz, MicroservicePatterns, Ownership, PatternCompositionAlgebra, PatternSemanticSpaceIndex, ProcessCalculiForRustCSPCCSAndThePiCalculus, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustVersionTracking, RustVsC, TRPL3rdEditionAlignmentAudit, TypeSystemBasics, VariableModel, VerificationAndContractsEcosystemOverview
+- expected_entities: gap_and_action_plan
+
+### when should I use C Preprocessor vs Rust Macros in rust
+
+- n_retrieved: 79
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, ApplicationDomains, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, AtomicsAndMemoryOrdering, Borrowing, CPreprocessorVsRustMacros, CargoManifestReference, CargoWorkspaces, CategoryTheory, CertifiedToolchainsAndCertifiedPackageInventory, CoercionAndCasting, Collections, ConcurrencyModels, CoreCratesIndex, CratesAndSourceFiles, CriticalSectionsAndSynchronizationOnBareMetal, CustomBareMetalAsyncExecutor, DeclarativeMacros, DesignPatternsOverview, DslAndEmbedding, EffectSystem, EffectsAndPurity, EmbassyAsyncFrameworkDeepDive, EmbeddedDebuggingAndLogging, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, ErrorHandlingBasics, ErrorHandlingDeepDive, ErrorHandlingIntermediate, Evolution, ExceptionSafetyCVsRust, Generics, IdiomsSpectrum, InterruptAndExceptionModel, Items, IteratorIdiomsInRust, Lifetimes, Linkage, LoggingObservability, MISRARustAndSafetyCriticalEmbeddedGuidelines, MacroPatterns, MacrosAdvanced, MacrosBasics, MemoryManagement, Metaprogramming, ModulesAndPaths, NewtypeAndWrapperTypes, No_stdAndBareMetalIdioms, No_stdAndBareMetalRust, No_stdSynchronizationPrimitives, Ownership, ParadigmMatrix, PerformanceOptimization, PinAndUnpin, ProceduralMacros, ProcessCalculiForRustCSPCCSAndThePiCalculus, RTICRealTimeTaskSchedulingFrameworkDeepDive, RTICVsEmbassyRealTimeFrameworksInRust, RTOSAndSchedulingModelsInRust, Roadmap, RustVsAdaSPARK, RustVsC, RustVsGo, RustVsOCamlOwnershipAndAlgebraicEffectsInSystemsAndFunctionalProgramming, SafetyCriticalBareMetalOperatingSystemsInRust, SerdePatterns, SmartPointers, TheRustRuntime, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, TypeTheory, WebAssemblyEcosystem
+- expected_entities: c_preprocessor_vs_rust_macros
+
+### what is Theorem Tier Spec
+
+- n_retrieved: 35
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, ConceptMetaLayer, ConcurrencyModels, CrossCompilation, EmbeddedSystems, GlobalTheoremChainRegistry, HowRustIsMadeAndNightlyRust, IndustrialRustAdoptionCaseStudies, IntegratingRustIntoExistingPlatformsAndCodebases, LLVMBackendAndCodeGenerationInRustc, MemoryManagement, MetaFrameworkAndKnowledgeArchitectureQuiz, OperationalSemantics, Ownership, ParadigmMatrix, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustFFI, RustForOperatingSystemKernelDevelopment, RustVersionTracking, RustVsC, RustVsGo, RustcAndCargoZUnstableFlagsReference, RustcDriverRustc_interfaceAndStableMIR, SafeAndEffectiveUnsafeRust, SafetyBoundaries, TargetTierPlatformSupportGuaranteesAndChangesInRust190197, TestingTheRustCompiler, TheoremInferenceForest, TheoremTierSpec, ToolchainAndCargo, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: heorem_tier_spec
+
+### explain Async Drop Preview in rust
+
+- n_retrieved: 58
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncAdvanced, AsyncBoundaryPanorama, AsyncCancellationSafety, AsyncClosures, AsyncDropPreview, AsyncFFIBoundary, AsyncIOUringAndCompletionBasedAsyncIOPreview, AsyncProcessManagementInRust, AsyncProgramming, Borrowing, CoercionAndCasting, Collections, ConcurrencyModels, DesignPatternsOverview, ErrorHandlingIntermediate, ExecutorFairnessAndScheduling, FFIPatternsInRust, FutureAndExecutorMechanisms, GenBlocksPreview, Generics, GlommioAndThreadPerCoreAsyncRuntimes, HighPerformanceNetworkServiceArchitecture, IdiomsSpectrum, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, Iterators, Lifetimes, LockingPrimitives, MemoryManagement, ModernProcessManagementLibrariesInRust, NetworkProgramming, NewtypeAndWrapperTypes, Ownership, OwnershipFormalization, PerformanceOptimization, PinAndUnpin, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, ReturnTypeNotationPreview, Roadmap, RustFFI, RustVersionTracking, SafeAndEffectiveUnsafeRust, SmartPointers, StreamAlgebraAndBackpressure, SubtypeAndVariance, TokioRuntimeInternals, Traits, TypeConversions, TypeSystemBasics, UnsafeBoundaryPanorama, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, WakerContractDeepDive, WebFrameworks
+- expected_entities: async_drop_preview
+
+### best practices for Architecture Pattern Semantics
+
+- n_retrieved: 62
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorModelSystemSemantics, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, ApplicationBinaryInterface, ArchitecturePatternSemantics, ArchitecturePatterns, ArchitectureRefinement, ArchitectureSemantics, ArchitectureStylesFormalConstraints, AsyncPatterns, AsyncProgramming, CargoDependencyResolution, CargoManifestReference, CargoProfilesAndLints, CargoRegistriesAndPublishing, CargoWorkspaces, CategoryTheory, ComponentBasedSystemSemantics, ConcurrencyModels, ConcurrencyPatterns, DesignPatternsOverview, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystems, DistributedSystemsSemantics, EngineeringPracticeAndProductionGradePatterns, ErrorHandlingIntermediate, EventDrivenArchitecture, Evolution, FiveExecutionModelsDefinitionMatrix, FormalMethodsIndustrialization, InlineAssembly, LambdaCalculus, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MacrosAdvanced, MicroservicePatterns, ModuleSystemAdvanced, Ownership, ParadigmMatrix, PatternCompositionAlgebra, PatternSelectionBestPractices, PiCalculusForRustSystemSemantics, ProcessCalculiForRustCSPCCSAndThePiCalculus, ReactiveProgramming, RefinementCalculusForRustAlgorithms, Roadmap, RustArchitectureSemanticsConstraints, RustDesignPatternAndArchitecturePatternSemanticAtlas, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, RustVsC, RustVsGo, SafeAndEffectiveUnsafeRust, SemanticSpace, SoftwareArchitectureFormalization, SystemComposability, SystemDesignPrinciples, TerminologyGlossary, ToolchainAndCargo, Traits, TypeSystemBasics
+- expected_entities: architecture_pattern_semantics
+
+### rust Cargo 1.97 Feature Highlights tutorial
+
+- n_retrieved: 52
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, Cargo196FeatureHighlights, Cargo197FeatureHighlights, CargoAuthenticationAndBuildCache, CargoBuildScriptsBuildRs, CargoCommandsReference, CargoConfiguration, CargoDependencyResolution, CargoGettingStarted, CargoGuidePractices, CargoManifestReference, CargoManifestTargets, CargoProfilesAndLints, CargoRegistriesAndPublishing, CargoRegistryInternals, CargoScriptWritingAndRunningRustScripts, CargoSourceReplacement, CargoWorkflow, CargoWorkspaces, CloudNative, ConcurrencyModels, CrossCompilation, DevOpsAndCICD, Evolution, FormalMethodsIndustrialization, LearningMvpPath, MacrosAdvanced, MemoryManagement, ModulesAndPaths, OperationalSemantics, Ownership, ParadigmMatrix, PerformanceOptimization, Roadmap, Rust196StabilizedFeaturesCurrentPatch1961, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust1971StablePatch, Rust197CompatibilityMigrationDecisionTrees, Rust198Preview, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustLanguageFeatureInventoryMethodology, RustVersionTracking, RustVsC, RustVsGo, SafeAndEffectiveUnsafeRust, SecurityPractices, TestingStrategies, ToolchainAndCargo, ZeroCostAbstractions
+- expected_entities: cargo_1.97_feature_highlights
+
+### explain Field Projections Preview in rust
+
+- n_retrieved: 68
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, AdvancedProcessManagementInRust, AdvancedTraits, ApplicationDomains, AsyncClosures, AsyncDropPreview, AsyncFFIBoundary, AsyncProcessManagementInRust, AsyncProgramming, AtomicsAndMemoryOrdering, BehaviorConsideredUndefined, BorrowSanitizerBSanDynamicAliasingRuleVerificationForRust, Borrowing, CoercionAndCasting, Collections, ConcurrencyModels, ConstructionAndInitialization, CrossCompilation, DefaultFieldValuesPreview, DerivableTraits, DesignPatternsOverview, EmbeddedSystems, Enumerations, ErrorHandlingIntermediate, FFIPatternsInRust, FieldProjectionsPreview, FormalMethodsIndustrialization, Functions, GenBlocksPreview, Generics, IdiomsSpectrum, Implementations, InlineAssembly, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, Lifetimes, MemoryManagement, MemoryModel, MiriRustUndefinedBehaviorDetector, ModernProcessManagementLibrariesInRust, NewtypeAndWrapperTypes, Ownership, PinAndUnpin, ProceduralMacros, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, ReturnTypeNotationPreview, Roadmap, RustFFI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SafetyTagsPreview, SmartPointers, Structs, TerminologyGlossary, Traits, TreeBorrowsDeepDive, TypeConversions, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeFieldsPreview, UnsafeInAsyncContexts, UnsafePinnedPreview, VariableModel
+- expected_entities: field_projections_preview
+
+### how does Rust 1.100+ Preview work
+
+- n_retrieved: 17
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: CargoDependencyResolution, CargoGettingStarted, CargoManifestReference, CargoWorkflow, LearningMvpPath, PreciseLifetimeCaptureInImplTraitPreview, Rust1100Preview, Rust196StabilizedFeaturesCurrentPatch1961, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust1971StablePatch, Rust198Preview, Rust199Preview, RustInSpacePreview, RustVersionTracking, ToolchainAndCargo, TypeAliasImplTraitTAITPreview
+- expected_entities: rust_1.100+_preview
+
+### how does Waker Contract Deep Dive work
+
+- n_retrieved: 54
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncBoundaryPanorama, AsyncCancellationSafety, AsyncDropPreview, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, AtomicsAndMemoryOrdering, BareMetalBootAndLinkerScripts, CargoBuildStd, ConcurrencyModels, CrossCompilation, CustomBareMetalAsyncExecutor, EmbassyAsyncFrameworkDeepDive, EmbeddedFormalMemoryModel, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, ErrorHandlingDeepDive, ErrorHandlingIntermediate, ExecutorFairnessAndScheduling, FFIDeepDiveCABICallingConventionsAndLinking, FutureAndExecutorMechanisms, GenBlocksPreview, Generics, GlommioAndThreadPerCoreAsyncRuntimes, HighPerformanceNetworkServiceArchitecture, InterruptAndExceptionModel, Lifetimes, LoggingObservability, MemoryManagement, No_stdAndBareMetalIdioms, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, Ownership, PACAndHALImplementation, Panic_handlerAndNo_stdRuntime, PerformanceOptimization, PinAndUnpin, RustFFI, RustVersionTracking, SafeAndEffectiveUnsafeRust, StreamAlgebraAndBackpressure, TokioRuntimeInternals, Traits, TreeBorrowsDeepDive, TypeSystemBasics, UnsafeBoundaryPanorama, UnsafeInAsyncContexts, WakerContractDeepDive, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: waker_contract_deep_dive
+
+### Knowledge Graph Ontology v2.0 overview
+
+- n_retrieved: 25
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AuthoritySourceMap, DescriptionLogicAndOWL, FormalMethodsLayerOverview, KGSHACLEngineValidation, KnowledgeGraphConstruction, KnowledgeGraphDesignW3CSHACLOWLAlignmentAndOntologyEngineeringMethods, KnowledgeGraphOntologyV20, LLMAndRAGForRustKnowledgeBasesOntologyEngineeringAndRetrievalAugmentedGeneration, MemoryModel, Methodology, NetworkProgramming, OntologyEngineeringMethodologies, Ownership, PerformanceOptimization, RAGEvaluationForTheRustKnowledgeGraph, SemanticEngineeringAndOntology, SemanticInteroperability, SemanticSpace, StreamProcessingEcosystem, StreamProcessingSemantics, TerminologyGlossary, TopLevelOntologyAlignmentForRustKnowledgeGraph, Traits, TypeErasure, TypeSystemBasics
+- expected_entities: knowledge_graph_ontology_v2.0
+
+### rust Never Type tutorial
+
+- n_retrieved: 47
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedTraits, AlgorithmEngineeringPractice, ApplicationDomains, AssociatedTypeDefaults, AsyncCancellationSafety, AsyncProgramming, BloomTaxonomy, Borrowing, CoercionAndCasting, Collections, ComprehensiveRustMapping, ConcurrencyModels, DesignPatternsOverview, EditionGuide, ErrorHandlingBasics, ErrorHandlingDeepDive, ErrorHandlingIntermediate, Evolution, GenericAssociatedTypesGATs, Generics, GettingStartedWithRust, IdiomsSpectrum, IteratorIdiomsInRust, LearningGuide, Lifetimes, LifetimesAdvanced, LoggingObservability, MemoryManagement, NLLAndPolonius, NeverType, NewtypeAndWrapperTypes, Ownership, PerformanceOptimization, PlPrerequisites, Roadmap, RustAPIGuidelinesCanonicalGuide, RustBeltAndVerificationToolchain, RustErrorHandlingIdioms, RustVersionTracking, SafeAndEffectiveUnsafeRust, SpecializationPreview, Traits, TypeConversions, TypeInference, TypeSystemBasics, UnsafeRustPatterns, WebAssemblyEcosystem
+- expected_entities: never_type
+
+### advanced Event Driven Architecture techniques
+
+- n_retrieved: 59
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedTraits, ApplicationBinaryInterface, ArchitecturePatternSemantics, ArchitecturePatterns, ArchitectureRefinement, AsyncPatterns, AsyncProgramming, Borrowing, CQRSAndEventSourcing, CargoWorkspaces, CategoryTheory, Collections, CollectionsAdvanced, ComponentBasedSystemSemantics, ConcurrencyModels, ConcurrencyPatterns, CowAndBorrowed, DesignPatternsOverview, DistributedSystems, EventDrivenArchitecture, EventSourcingEnginePatternsInRust, Evolution, FormalMethodsIndustrialization, Generics, Lifetimes, LifetimesAdvanced, LinearAndAffineLogic, MemoryManagement, ModuleSystemAdvanced, Ownership, OwnershipFormalization, ParadigmMatrix, PatternCompositionAlgebra, PerformanceOptimization, PinAndUnpin, ReactiveProgramming, RefinementCalculusForRustAlgorithms, Roadmap, RustArchitectureSemanticsConstraints, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, RustVsGo, SemanticSpace, SmartPointers, SoftwareArchitectureFormalization, StateMachineSemanticsAndWorkflowModels, SubtypeAndVariance, SystemComposability, SystemDesignPrinciples, Traits, TypeInference, TypeSystemAdvanced, TypeSystemBasics, TypeTheory, WebAssemblyEcosystem, WorkflowTheoryFormalization, ZeroCostAbstractions
+- expected_entities: event_driven_architecture
+
+### rust Type System (Quiz) tutorial
+
+- n_retrieved: 38
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorModelSystemSemantics, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AsyncProgramming, Borrowing, ComponentBasedSystemSemantics, ConcurrencyModels, ConcurrencyPatterns, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystemsSemantics, ErrorHandlingIntermediate, FiveExecutionModelsDefinitionMatrix, Generics, LambdaCalculus, Lifetimes, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MemoryManagement, MicroservicePatterns, Ownership, OwnershipBorrowingAndLifetimesQuiz, OwnershipFormalization, PerformanceOptimization, PiCalculusForRustSystemSemantics, ProcessCalculiForRustCSPCCSAndThePiCalculus, QuizRustVsSystems, ReactiveProgramming, RustConceptKnowledgeSystem, RustForOperatingSystemKernelDevelopment, SubtypeAndVariance, SystemComposability, Traits, TraitsAndGenericsQuiz, TypeLevelProgramming, TypeSystemBasics, TypeSystemQuiz, UnsafeRustQuiz, ZeroCostAbstractions
+- expected_entities: ype_system_(quiz)
+
+### what is Negative Impls
+
+- n_retrieved: 42
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedTraits, ApplicationDomains, AsyncProgramming, Borrowing, CoercionAndCasting, ConcurrencyModels, CustomAllocators, Enumerations, ErrorHandlingBasics, ErrorHandlingIntermediate, FormalMethodsIndustrialization, Functions, GenBlocksPreview, Generics, HowRustIsMadeAndNightlyRust, Implementations, Lifetimes, MemoryManagement, NegativeImpls, NewtypeAndWrapperTypes, Ownership, OwnershipFormalization, Patterns, PerformanceOptimization, PinAndUnpin, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustBeltAndVerificationToolchain, RustVersionTracking, SafeAndEffectiveUnsafeRust, SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts, SpecializationPreview, Structs, SubtypeAndVariance, TerminologyGlossary, Traits, TypeConversions, TypeInference, TypeSystemBasics, TypeTheory, UnsafeCollectionsInternals
+- expected_entities: negative_impls
+
+### Certified Toolchains and Certified Package Inventory overview
+
+- n_retrieved: 53
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AUTOSARAndRust, AerospaceCertificationFormalMethods, AsyncProgramming, BlockchainDevelopmentInRust, Borrowing, CargoAuthenticationAndBuildCache, CargoBuildScriptsBuildRs, CargoCommandsReference, CargoConfiguration, CargoDependencyResolution, CargoGettingStarted, CargoGuidePractices, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CargoVetAndSupplyChainAuditing, CargoWorkflow, CargoWorkspaces, CertifiedToolchainsAndCertifiedPackageInventory, CloudNative, ConceptMetaLayer, ConcurrencyModels, CrossCompilation, CrossLayerDependencyAndImplicationTopology, DevOpsAndCICD, ErrorHandlingDeepDive, FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems, FormalMethodsIndustrialization, FormalMethodsMergedRedirect, Lifetimes, MCDCCoveragePreview, MacrosAdvanced, MemoryManagement, MetaFrameworkAndKnowledgeArchitectureQuiz, ModulesAndPaths, Ownership, PerformanceOptimization, Readme_06ecosystem, RustBeltAndVerificationToolchain, RustFFI, RustLanguageFeatureInventoryMethodology, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalRustTopicIndex, SecurityPractices, TestingStrategies, ToolchainAndCargo, TypeSystemBasics, VerificationAndContractsEcosystemOverview, VerificationToolchain, ZeroCostAbstractions
+- expected_entities: certified_toolchains_and_certified_package_inventory
+
+### best practices for writing maintainable declarative macros
+
+- n_retrieved: 42
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 0.818
+- concept_ndcg@3: 0.613
+- concept_ndcg@5: 0.613
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.2
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 0.5
+- concept_recall@1: 0.5
+- concept_recall@10: 1.0
+- concept_recall@3: 0.5
+- concept_recall@5: 0.5
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 0.818
+- source_ndcg@3: 0.613
+- source_ndcg@5: 0.613
+- source_precision@1: 1.0
+- source_precision@10: 0.2
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 0.5
+- source_recall@1: 0.5
+- source_recall@10: 1.0
+- source_recall@3: 0.5
+- source_recall@5: 0.5
+- retrieved_entities: ArchitecturePatterns, AuthoritySourceMap, BootstrappingTheRustCompiler, CargoSemVerChecksPreview, CompilerDiagnosticsAndUITests, CompilerInfrastructure, ConcurrencyModels, CoreCratesIndex, DeclarativeMacros, DesignPatternsOverview, DslAndEmbedding, EngineeringPracticeAndProductionGradePatterns, ErrorHandlingIntermediate, EventDrivenArchitecture, Generics, KGSHACLEngineValidation, KnowledgeGraphDesignW3CSHACLOWLAlignmentAndOntologyEngineeringMethods, KnowledgeGraphOntologyV20, LLMAndRAGForRustKnowledgeBasesOntologyEngineeringAndRetrievalAugmentedGeneration, MacroDebuggingAndDiagnostics, MacroPatterns, MacrosAdvanced, MacrosBasics, Metaprogramming, Methodology, MicroservicePatterns, ModulesAndPaths, Ownership, PatternSelectionBestPractices, ProceduralMacros, ProductionGradeMacroDevelopment, RAGEvaluationForTheRustKnowledgeGraph, Roadmap, SafetyBoundaries, SemanticSpace, SerdePatterns, TerminologyGlossary, ToolchainAndCargo, TopLevelOntologyAlignmentForRustKnowledgeGraph, Traits, TypeSystemBasics, WebAssemblyEcosystem
+- expected_entities: declarative_macros, macro_patterns
+
+### what is Macro Debugging and Diagnostics
+
+- n_retrieved: 67
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AerospaceCertificationFormalMethods, ApplicationDomains, AsyncProgramming, BareMetalBootAndLinkerScripts, BootstrappingTheRustCompiler, Borrowing, CargoProfilesAndLints, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoSemVerChecksPreview, CertifiedToolchainsAndCertifiedPackageInventory, Collections, CompilerDiagnosticsAndUITests, CompilerInfrastructure, ConcurrencyModels, CrossCompilation, CustomBareMetalAsyncExecutor, DeclarativeMacros, DefmtAndProbeRsDebuggingArchitecture, DesignPatternsOverview, DevelopmentToolsEcosystem, DisplayAndDebugFormatting, DslAndEmbedding, EmbeddedDebuggingAndLogging, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, EmbeddedTestingAndCIStrategiesForNo_stdRust, ErrorHandlingIntermediate, FormalMethodsIndustrialization, Generics, InterruptAndExceptionModel, Lifetimes, MISRARustAndSafetyCriticalEmbeddedGuidelines, MacroDebuggingAndDiagnostics, MacroPatterns, MacrosAdvanced, MacrosBasics, Metaprogramming, ModernProcessManagementLibrariesInRust, No_stdAndBareMetalIdioms, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, Ownership, Panic_handlerAndNo_stdRuntime, ProceduralMacroCodeGenerationOptimization, ProceduralMacros, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, ProductionGradeMacroDevelopment, Roadmap, RustFFI, RustVsAdaSPARK, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, SerdePatterns, StringsAndText, TestingBasics, TestingTheRustCompiler, ToolchainAndCargo, Traits, TypeSystemBasics
+- expected_entities: macro_debugging_and_diagnostics
+
+### explain Patterns in rust
+
+- n_retrieved: 63
+- concept_mrr: 0.0
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.0
+- concept_ndcg@3: 0.0
+- concept_ndcg@5: 0.0
+- concept_precision: 0.0
+- concept_precision@1: 0.0
+- concept_precision@10: 0.0
+- concept_precision@3: 0.0
+- concept_precision@5: 0.0
+- concept_recall: 0.0
+- concept_recall@1: 0.0
+- concept_recall@10: 0.0
+- concept_recall@3: 0.0
+- concept_recall@5: 0.0
+- source_mrr: 0.0
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.0
+- source_ndcg@3: 0.0
+- source_ndcg@5: 0.0
+- source_precision@1: 0.0
+- source_precision@10: 0.0
+- source_precision@3: 0.0
+- source_precision@5: 0.0
+- source_recall: 0.0
+- source_recall@1: 0.0
+- source_recall@10: 0.0
+- source_recall@3: 0.0
+- source_recall@5: 0.0
+- retrieved_entities: APIDesignPatterns, ApplicationDomains, ArchitecturePatterns, AsyncFFIBoundary, AsyncPatterns, AsyncProgramming, BlockchainDevelopmentInRust, Borrowing, ClosureTypes, CoercionAndCasting, Collections, ConcurrencyModels, ConcurrencyPatterns, CoreCratesIndex, CowAndBorrowed, DatabaseSystemsInRust, DesignPatternsOverview, DistributedSystems, ErrorHandlingIntermediate, EventSourcingEnginePatternsInRust, Evolution, FFIPatternsInRust, FormalMethodsIndustrialization, FormalVerificationEcosystemTower, Generics, IdiomsSpectrum, IteratorIdiomsInRust, Lifetimes, MacrosAdvanced, MemoryManagement, NewtypeAndWrapperTypes, Ownership, OwnershipPerformanceOptimization, ParadigmMatrix, PatternCompositionAlgebra, PinAndUnpin, Roadmap, RustAntiPatterns, RustAntiPatternsAndPitfallsAtlas, RustBeltAndVerificationToolchain, RustFFI, RustPerformanceIdioms, RustVsC, RustVsGo, SafeAndEffectiveUnsafeRust, SerdePatterns, SmartPointers, StateMachineSemanticsAndWorkflowModels, StreamProcessingEcosystem, StreamProcessingSemantics, SystemDesignPrinciples, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, TypeTheory, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, UnsafeRustPatterns, VerificationToolchain, WebAssemblyEcosystem, WorkflowTheoryFormalization, ZeroCostAbstractions
+- expected_entities: patterns
+
+### what is Lifetimes
+
+- n_retrieved: 36
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncProgramming, AtomicsAndMemoryOrdering, BehaviorConsideredUndefined, Borrowing, ConcurrencyModels, CowAndBorrowed, CustomAllocators, Destructors, EmbeddedSystems, ErrorHandlingIntermediate, FFIAdvancedTopics, HowRustIsMadeAndNightlyRust, InlineAssembly, Lifetimes, LifetimesAdvanced, MemoryAllocationAndLifetime, MemoryManagement, MemoryModel, MiriRustUndefinedBehaviorDetector, Ownership, OwnershipBorrowingAndLifetimesQuiz, OwnershipBorrowingLifetimesKnowledgeMap, Panic, PerformanceOptimization, PinAndUnpin, PreciseLifetimeCaptureInImplTraitPreview, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustVersionTracking, SafeAndEffectiveUnsafeRust, SmartPointers, TheRustRuntime, TreeBorrowsDeepDive, TypeSystemBasics
+- expected_entities: lifetimes
+
+### explain Formal Network Protocol Theory in rust
+
+- n_retrieved: 46
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedNetworkProtocolsInRust, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncProgramming, BorrowSanitizerRuntimeTreeBorrowsViolationDetection, Borrowing, ClosureTypes, CloudNative, CoercionAndCasting, Collections, ConcurrencyModels, ConcurrencyPatterns, CustomNetworkProtocolImplementationInRust, DesignPatternsOverview, DistributedSystems, EffectHandlersAndRustSLimitedEffectsControlFlowAbstractionsAsAComputationalModel, ErrorHandlingIntermediate, FormalNetworkProtocolTheory, Generics, HighPerformanceNetworkServiceArchitecture, IdiomsSpectrum, IteratorIdiomsInRust, KaniRustBoundedModelChecker, Lifetimes, LinearAndAffineLogic, LinearLogicAndOwnershipResourceCalculusAsAComputationalModel, LockingPrimitives, MemoryManagement, MiriRustUndefinedBehaviorDetector, NetworkProgramming, NetworkProtocols, NetworkSecurityInRust, NewtypeAndWrapperTypes, Ownership, PerformanceOptimization, Roadmap, SafeAndEffectiveUnsafeRust, SessionTypesAndRustChannelsCommunicationProtocolsAsAComputationalModel, SmartPointers, StreamProcessingEcosystem, StreamProcessingSemantics, Traits, TypeConversions, TypeLevelProgramming, TypeSystemBasics, WebAssemblyEcosystem, WebFrameworks
+- expected_entities: formal_network_protocol_theory
+
+### what is Rust Editions
+
+- n_retrieved: 37
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncAdvanced, AsyncProgramming, BloomTaxonomy, Borrowing, CoercionAndCasting, ComprehensiveRustMapping, EditionGuide, ErrorHandlingBasics, ErrorHandlingDeepDive, ErrorHandlingIntermediate, Evolution, Generics, HowRustIsMadeAndNightlyRust, LearningGuide, Lifetimes, LoggingObservability, NLLAndPolonius, NewtypeAndWrapperTypes, Ownership, OwnershipFormalization, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, Rust2024EditionPreviewAndMigrationNotes, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustEditions, RustErrorHandlingIdioms, RustVersionTracking, SafeAndEffectiveUnsafeRust, Traits, TypeConversions, TypeSystemBasics, UnsafeRustPatterns, VersionEvolutionEditionsAndPreviewFeaturesQuiz, WebAssemblyEcosystem
+- expected_entities: rust_editions
+
+### explain Knowledge Mindmap in rust
+
+- n_retrieved: 42
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationDomains, AsyncFFIBoundary, AsyncProcessManagementInRust, AsyncProgramming, BloomTaxonomy, Borrowing, CoercionAndCasting, Collections, ComprehensiveRustMapping, ConcurrencyModels, CowAndBorrowed, DesignPatternsOverview, ErrorHandlingIntermediate, FFIPatternsInRust, Generics, IdiomsSpectrum, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, KnowledgeMindmap, LearningGuide, Lifetimes, MemoryManagement, ModernProcessManagementLibrariesInRust, NewtypeAndWrapperTypes, Ownership, OwnershipBorrowingLifetimesKnowledgeMap, PinAndUnpin, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, Roadmap, RustConceptKnowledgeSystem, RustFFI, SafeAndEffectiveUnsafeRust, SmartPointers, Traits, TypeConversions, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts
+- expected_entities: knowledge_mindmap
+
+### how does Toolchain (Quiz) work
+
+- n_retrieved: 24
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, Borrowing, ClosureBasics, ClosureTypes, ClosuresAndIteratorsQuiz, CoreCratesIndex, ErrorHandlingBasics, ErrorHandlingIntermediate, ErrorHandlingQuiz, Iterators, Lifetimes, MacrosAdvanced, MemoryManagement, ModulesAndPaths, ModulesAndTestingQuiz, Ownership, OwnershipBorrowingAndLifetimesQuiz, Readme_06ecosystem, RustVsC, ToolchainAndCargo, ToolchainQuiz, Traits, TypeSystemBasics, TypeSystemQuiz
+- expected_entities: oolchain_(quiz)
+
+### explain Cutting-Edge Algorithm Technologies in rust
+
+- n_retrieved: 52
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedDataStructuresImplementationInRust, AlgorithmComplexityAnalysisInRust, AlgorithmEngineeringPractice, AlgorithmicParadigmsInRust, AlgorithmsCompetitiveProgramming, ApplicationDomains, AsyncFFIBoundary, AsyncProgramming, AtomicsAndMemoryOrdering, Borrowing, CoercionAndCasting, Collections, ConcurrencyModels, CowAndBorrowed, CuttingEdgeAlgorithmTechnologies, DesignPatternsOverview, ErrorHandlingIntermediate, FFIPatternsInRust, FormalVerificationEcosystemTower, Functions, Generics, HoareLogic, IdiomsSpectrum, IteratorCorrectnessSemantics, IteratorIdiomsInRust, Lifetimes, MachineLearningEcosystem, MemoryManagement, MemoryModel, NewtypeAndWrapperTypes, Ownership, OwnershipAwareAlgorithmsInRust, ParallelAndConcurrentAlgorithmsInRust, PerformanceOptimization, PinAndUnpin, Roadmap, RustBeltAndVerificationToolchain, RustFFI, RustInQuantumComputingEcosystems, RustVsC, SafeAndEffectiveUnsafeRust, SemanticInvariantsOfUnsafeAlgorithms, SeparationLogic, SmartPointers, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, UnsafeAlgorithmInvariantsInRust, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, ZeroCostAbstractions
+- expected_entities: cutting-edge_algorithm_technologies
+
+### best practices for Custom Bare-Metal Async Executor
+
+- n_retrieved: 57
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ArchitecturePatterns, AsyncAdvanced, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, AtomicsAndMemoryOrdering, AuthoritySourceMap, Borrowing, CertifiedToolchainsAndCertifiedPackageInventory, ConcurrencyModels, CustomBareMetalAsyncExecutor, DistributedSystems, EmbassyAsyncFrameworkDeepDive, EmbeddedDebuggingAndLogging, EmbeddedFormalMemoryModel, EmbeddedMemoryAllocators, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, EngineeringPracticeAndProductionGradePatterns, ErrorHandlingIntermediate, EventDrivenArchitecture, FutureAndExecutorMechanisms, GenBlocksPreview, Generics, HTTPClientDevelopmentInRust, InterruptAndExceptionModel, KGSHACLEngineValidation, KnowledgeGraphDesignW3CSHACLOWLAlignmentAndOntologyEngineeringMethods, KnowledgeGraphOntologyV20, LLMAndRAGForRustKnowledgeBasesOntologyEngineeringAndRetrievalAugmentedGeneration, Methodology, MicroservicePatterns, NetworkProgramming, No_stdAndBareMetalIdioms, No_stdSynchronizationPrimitives, Ownership, OwnershipFormalization, PACAndHALImplementation, PatternSelectionBestPractices, PerformanceOptimization, PinAndUnpin, RAGEvaluationForTheRustKnowledgeGraph, ReqwestErgonomicAsyncHTTPClientForRust, Roadmap, RustFFI, RustVsAdaSPARK, SafeAndEffectiveUnsafeRust, SafetyCriticalBareMetalOperatingSystemsInRust, SemanticSpace, SubtypeAndVariance, TerminologyGlossary, TopLevelOntologyAlignmentForRustKnowledgeGraph, TypeSystemBasics, UnsafeInAsyncContexts, WebFrameworks, ZeroCostAbstractions
+- expected_entities: custom_bare-metal_async_executor
+
+### rust Cargo Workspaces tutorial
+
+- n_retrieved: 56
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncProgramming, BloomTaxonomy, CargoAuthenticationAndBuildCache, CargoBuildScriptsBuildRs, CargoConfiguration, CargoDependencyResolution, CargoGettingStarted, CargoGuidePractices, CargoManifestReference, CargoProfilesAndLints, CargoRegistriesAndPublishing, CargoScriptWritingAndRunningRustScripts, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CargoSourceReplacement, CargoWorkflow, CargoWorkspaces, CloudNative, CoercionAndCasting, ComprehensiveRustMapping, CoreCratesIndex, CrossCompilation, DevOpsAndCICD, ErrorHandlingBasics, ErrorHandlingDeepDive, ErrorHandlingIntermediate, Evolution, FormalMethodsIndustrialization, Generics, LearningGuide, LearningMvpPath, LoggingObservability, MacrosAdvanced, ModulesAndPaths, NewtypeAndWrapperTypes, Ownership, PerformanceOptimization, Roadmap, RustEditionMechanismAndMigrationGuide, RustErrorHandlingIdioms, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SecurityPractices, TerminologyGlossary, TestingBasics, TestingEcosystem, TestingStrategies, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, UnsafeRustPatterns, UsefulDevelopmentToolsFoundation, WebAssemblyEcosystem
+- expected_entities: cargo_workspaces
+
+### what is Edition Guide
+
+- n_retrieved: 36
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AspMarkingGuide, AsyncAdvanced, AsyncClosures, AsyncFFIBoundary, AsyncProgramming, BilingualConceptTemplate, Borrowing, ConceptAuditGuide, ConceptConsistencyAuditChecklist, EditionGuide, Evolution, Generics, LearningGuide, LetChainsAndIfLetGuards, Lifetimes, NLLAndPolonius, NetworkingBasics, Ownership, OwnershipFormalization, QualityDashboardV2, Rust190StabilizedFeatures, Rust191StabilizedFeatures, RustBeltAndVerificationToolchain, RustEdition20212024Differences, RustEditionMechanismAndMigrationGuide, RustEditions, RustFFI, RustVersionTracking, SafeAndEffectiveUnsafeRust, StatementsAndExpressions, TemplateDeduplicationGuide, TerminologyGlossary, Traits, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024
+- expected_entities: edition_guide
+
+### Cargo Profiles and Lints pitfalls and how to avoid them
+
+- n_retrieved: 57
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, Borrowing, CargoAuthenticationAndBuildCache, CargoBuildScriptsBuildRs, CargoCommandsReference, CargoConfiguration, CargoDependencyResolution, CargoGettingStarted, CargoGuidePractices, CargoManifestReference, CargoProfilesAndLints, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoScriptWritingAndRunningRustScripts, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CargoSourceReplacement, CargoSubcommandsAndPlugins, CargoWorkflow, CargoWorkspaces, CloudNative, CompilerDiagnosticsAndUITests, CompilerInfrastructure, ConcurrencyModels, CrossCompilation, DevOpsAndCICD, Evolution, FormalMethodsIndustrialization, IntegratingRustIntoExistingPlatformsAndCodebases, LLVMBackendAndCodeGenerationInRustc, LearningMvpPath, Lifetimes, MacrosAdvanced, MemoryManagement, ModulesAndPaths, Ownership, PerformanceOptimization, Roadmap, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustVersionTracking, RustVsC, RustVsGo, RustcAndCargoZUnstableFlagsReference, RustcDriverRustc_interfaceAndStableMIR, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SecurityPractices, TargetTierPlatformSupportGuaranteesAndChangesInRust190197, TerminologyGlossary, TestingStrategies, TestingTheRustCompiler, ToolchainAndCargo, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: cargo_profiles_and_lints
+
+### what is C++ vs Rust: Construction, Operators, RTTI, and Friends
+
+- n_retrieved: 50
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AdvancedTraits, AsyncProgramming, Borrowing, CAbiObjectModel, CRDTTypeZooStateBasedOpBasedAndTheMergeLattice, CVsRustConstructionOperatorsRTTIAndFriends, CategoryTheory, CategoryTheoryAndRustStructuralSemanticsAsAComputationalModel, CausalOrderingAndVectorClocks, ConcurrencyModels, ConstructionAndInitialization, DenotationalSemantics, DistributedConsensus, ErrorHandlingBasics, ErrorHandlingDeepDive, ErrorHandlingIntermediate, EvaluationStrategies, ExceptionSafetyCVsRust, ExecutionModelIsomorphism, FiveExecutionModelsDefinitionMatrix, Generics, HoareLogic, LambdaCalculus, Lifetimes, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, LoggingObservability, MemoryManagement, ModalLogicAndRustEffects, OperationalSemantics, Ownership, OwnershipFormalization, ParallelDistributedPatternSpectrum, ProcessCalculiForRustCSPCCSAndThePiCalculus, QuizCCToRustFoundations, RTTIAndDynamicTypeIdentification, RustBeltAndVerificationToolchain, RustVsC, SafeAndEffectiveUnsafeRust, SeparationLogic, SeparationLogicForRustAnIrisAndRustBeltPerspective, SubtypeAndVariance, Traits, TypeErasure, TypeSystemBasics, TypeTheory, TypeTheoryAndRustTheTypeSystemAsAComputationalModel, VariableModel, VerificationToolchain
+- expected_entities: c++_vs_rust:_construction,_operators,_rtti,_and_friends
+
+### Inter-Process Communication Mechanisms in Rust overview
+
+- n_retrieved: 57
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, AUTOSARAndRust, AdvancedProcessManagementInRust, AerospaceCertificationFormalMethods, AsyncInNo_stdAndEmbeddedSystems, AsyncProcessManagementInRust, AsyncProgramming, BareMetalBootAndLinkerScripts, Borrowing, CargoVetAndSupplyChainAuditing, CertifiedToolchainsAndCertifiedPackageInventory, ConcurrencyModels, CrossCompilation, CustomBareMetalAsyncExecutor, EmbeddedDebuggingAndLogging, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, Evolution, FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems, FormalMethodsIndustrialization, InterProcessCommunicationMechanismsInRust, InterruptAndExceptionModel, Lifetimes, MISRARustAndSafetyCriticalEmbeddedGuidelines, MemoryManagement, ModernProcessManagementLibrariesInRust, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, Ownership, Panic_handlerAndNo_stdRuntime, PerformanceOptimization, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, Roadmap, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustInQuantumComputingEcosystems, RustInSafetyCriticalSystems, RustInSpacePreview, RustVersionTracking, RustVsAdaSPARK, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, SafetyCriticalRustTopicIndex, SafetyCriticalSystemsEngineering, ToolchainAndCargo, TypeSystemBasics, VerificationToolchain, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: inter-process_communication_mechanisms_in_rus
+
+### explain Constant Evaluation in rust
+
+- n_retrieved: 42
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, ApplicationDomains, AsyncFFIBoundary, AsyncProcessManagementInRust, AsyncProgramming, Borrowing, CoercionAndCasting, Collections, ConcurrencyModels, ConstantEvaluation, CrossPlatformProcessManagementInRust, DesignPatternsOverview, EffectSystem, EffectsAndPurity, ErrorHandlingIntermediate, EvaluationStrategies, FFIPatternsInRust, Generics, IdiomsSpectrum, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, Lifetimes, MemoryManagement, ModernProcessManagementLibrariesInRust, NewtypeAndWrapperTypes, Ownership, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, Roadmap, RustFFI, SafeAndEffectiveUnsafeRust, SmartPointers, Traits, TypeConversions, TypeSystemBasics, TypeTheory, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, VariableModel
+- expected_entities: constant_evaluation
+
+### when should I use Associated Type Defaults in rust
+
+- n_retrieved: 61
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, AdvancedTraits, ApplicationDomains, AssociatedTypeDefaults, AsyncCancellationSafety, AsyncFFIBoundary, AsyncProcessManagementInRust, AsyncProgramming, Attributes, Borrowing, CoercionAndCasting, Collections, ConcurrencyModels, ConditionalCompilation, ConstructionAndInitialization, DefaultFieldValuesPreview, DerivableTraits, DesignPatternsOverview, Enumerations, ErrorHandlingIntermediate, FFIPatternsInRust, Functions, GenericAssociatedTypesGATs, Generics, IdiomsSpectrum, Implementations, InterProcessCommunicationMechanismsInRust, ItemsReference, IteratorIdiomsInRust, Lifetimes, LifetimesAdvanced, MemoryManagement, ModernProcessManagementLibrariesInRust, NewtypeAndWrapperTypes, Ownership, PerformanceOptimization, ProceduralMacros, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, Roadmap, RustBeltAndVerificationToolchain, RustFFI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SmartPointers, SpecializationPreview, Structs, TerminologyGlossary, Traits, TypeConversions, TypeErasure, TypeInference, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, VariableModel, ZeroCostAbstractions
+- expected_entities: associated_type_defaults
+
+### rust Collections tutorial
+
+- n_retrieved: 33
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AlgorithmEngineeringPractice, ApplicationDomains, AsyncProgramming, BloomTaxonomy, Borrowing, Collections, CollectionsAdvanced, ComprehensiveRustMapping, ConcurrencyModels, CowAndBorrowed, DesignPatternsOverview, ErrorHandlingIntermediate, Generics, GettingStartedWithRust, IdiomsSpectrum, IteratorIdiomsInRust, LearningGuide, Lifetimes, MemoryManagement, Ownership, PerformanceOptimization, PinAndUnpin, Roadmap, RustAPIGuidelinesCanonicalGuide, SafeAndEffectiveUnsafeRust, SmartPointers, Sources, Traits, TypeConversions, TypeSystemBasics, UnsafeRustPatterns, UnsafeRustQuiz, ZeroCostAbstractions
+- expected_entities: collections
+
+### Generic Associated Types (GATs) at the Async Boundary overview
+
+- n_retrieved: 49
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncAdvanced, AsyncBoundaryPanorama, AsyncCancellationSafety, AsyncClosures, AsyncDropPreview, AsyncFFIBoundary, AsyncProgramming, AsyncTraitObjectSafety, Borrowing, ClosureTypes, ConcurrencyModels, ConcurrencyPatterns, CrossPlatformConcurrency, DistributedSystems, ExecutorFairnessAndScheduling, FutureAndExecutorMechanisms, GenBlocksPreview, GenericAssociatedTypesGATs, GenericAssociatedTypesGATsAtTheAsyncBoundary, Generics, Iterators, KaniRustBoundedModelChecker, Lifetimes, LifetimesAdvanced, MemoryManagement, MemoryModel, MiriRustUndefinedBehaviorDetector, NLLAndPolonius, OperatingSystems, Ownership, OwnershipFormalization, PerformanceOptimization, PinAndUnpin, RustBeltAndVerificationToolchain, RustFFI, SafeAndEffectiveUnsafeRust, SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts, SendSyncBoundaryJudgmentTraitObjectsClosuresAndAsyncStateMachines, StreamAlgebraAndBackpressure, SubtypeAndVariance, TokioRuntimeInternals, Traits, TypeInference, TypeSystemBasics, TypeTheory, UnsafeBoundaryPanorama, UnsafeInAsyncContexts, WakerContractDeepDive
+- expected_entities: generic_associated_types_(gats)_at_the_async_boundary
+
+### Formal Methods (Quiz) overview
+
+- n_retrieved: 34
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AerospaceCertificationFormalMethods, AsyncProgramming, Borrowing, CategoryTheory, ConcurrencyModels, DenotationalSemantics, Evolution, FormalMethodsBeforeEnteringL4, FormalMethodsIndustrialization, FormalMethodsLayerOverview, FormalMethodsMergedRedirect, FormalMethodsQuiz, FormalVerificationTools, Generics, HoareLogic, LambdaCalculus, LinearAndAffineLogic, ModernVerificationTools, OperationalSemantics, Ownership, OwnershipFormalization, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SeparationLogic, SubtypeAndVariance, Traits, TypeSystemBasics, TypeTheory, VerificationToolchain
+- expected_entities: formal_methods_(quiz)
+
+### how does Formal Algorithm Theory work
+
+- n_retrieved: 69
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AdvancedNetworkProtocolsInRust, AerospaceCertificationFormalMethods, AlgorithmComplexityAnalysisInRust, AlgorithmEngineeringPractice, AlgorithmSemantics, AlgorithmsCompetitiveProgramming, AsyncPatterns, AsyncProgramming, AxiomaticSemantics, BorrowSanitizerRuntimeTreeBorrowsViolationDetection, CategoryTheory, Collections, ComputationalModelsAndComputability, ConcurrencyModelComparison, ConcurrencyPatterns, CustomNetworkProtocolImplementationInRust, DenotationalSemantics, DesignPatternsOverview, DistributedSystems, DistributedSystemsSemantics, EngineeringPracticeAndProductionGradePatterns, ErrorHandlingIntermediate, FiveExecutionModelsDefinitionMatrix, FormalAlgorithmTheory, FormalAlgorithmTheoryRedirectStub, FormalDesignPatternTheory, FormalDesignPatternTheoryRedirectStub, FormalMethodsMergedRedirect, FormalNetworkProtocolTheory, FrontierResearchAndInnovativePatterns, Functions, Generics, HoareLogic, IndustrialRustAdoptionCaseStudies, KaniRustBoundedModelChecker, LambdaCalculus, LinearAndAffineLogic, MiriRustUndefinedBehaviorDetector, ModernVerificationTools, NetworkProgramming, NetworkProtocols, NetworkSecurityInRust, ObservationalEquivalenceOfAlgorithmImplementations, OperationalSemantics, Ownership, OwnershipFormalization, ParadigmMatrix, PatternCompositionAlgebra, PerformanceOptimization, ProcessCalculiForRustCSPCCSAndThePiCalculus, ReactiveSystemsSemantics, RefinementCalculusForRustAlgorithms, RustBeltAndVerificationToolchain, RustVsC, SafeAndEffectiveUnsafeRust, SemanticSpace, SeparationLogic, SeparationLogicForRustAnIrisAndRustBeltPerspective, StreamAlgebraAndBackpressure, StreamProcessingEcosystem, SystemDesignPrinciples, Traits, TypeLevelProgramming, TypeSystemBasics, TypeTheory, TypeTheoryAndRustTheTypeSystemAsAComputationalModel, UnsafeRustPatterns, VerificationToolchain
+- expected_entities: formal_algorithm_theory
+
+### how does Computability Theory work
+
+- n_retrieved: 63
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AerospaceCertificationFormalMethods, AlgorithmComplexityAnalysisInRust, AlgorithmEngineeringPractice, AlgorithmsCompetitiveProgramming, AsyncPatterns, AsyncProgramming, AxiomaticSemantics, Borrowing, CategoryTheory, Collections, ComputabilityTheory, ComputationalModelsAndComputability, ConcurrencyModelComparison, ConcurrencyModels, ConcurrencyPatterns, DenotationalSemantics, DesignPatternsOverview, DistributedSystems, DistributedSystemsSemantics, EngineeringPracticeAndProductionGradePatterns, EquivalenceOfComputationalModels, EvaluationStrategies, FiveExecutionModelsDefinitionMatrix, FormalAlgorithmTheory, FormalDesignPatternTheory, FormalMethodsIndustrialization, FormalMethodsMergedRedirect, FrontierResearchAndInnovativePatterns, Functions, Generics, HoareLogic, IndustrialRustAdoptionCaseStudies, LambdaCalculus, Lifetimes, LinearAndAffineLogic, MathematicalFunctionsOfComputation, ModernVerificationTools, ObservationalEquivalence, ObservationalEquivalenceOfAlgorithmImplementations, OperationalSemantics, Ownership, OwnershipFormalization, ParadigmMatrix, PatternCompositionAlgebra, PerformanceOptimization, ProcessCalculiForRustCSPCCSAndThePiCalculus, ReactiveSystemsSemantics, RefinementCalculusForRustAlgorithms, RustBeltAndVerificationToolchain, RustVsC, SafeAndEffectiveUnsafeRust, SemanticSpace, SeparationLogic, StreamAlgebraAndBackpressure, SubtypeAndVariance, SystemDesignPrinciples, Traits, TreeBorrowsDeepDive, TypeSystemBasics, TypeTheory, UnsafeRustPatterns, VerificationToolchain
+- expected_entities: computability_theory
+
+### explain Pin Projection Counterexamples in rust
+
+- n_retrieved: 50
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationDomains, AsyncCancellationSafety, AsyncDropPreview, AsyncFFIBoundary, AsyncProcessManagementInRust, AsyncProgramming, Borrowing, CloudNative, CoercionAndCasting, Collections, ConcurrencyModels, DesignPatternsOverview, DistributedSystems, ErrorHandlingIntermediate, FFIPatternsInRust, FieldProjectionsPreview, FutureAndExecutorMechanisms, GenBlocksPreview, Generics, IdiomsSpectrum, InPlaceAndPinnedInitializationPatterns, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, Lifetimes, MemoryManagement, ModernProcessManagementLibrariesInRust, NewtypeAndWrapperTypes, Ownership, OwnershipFormalization, PerformanceOptimization, PinAndUnpin, PinErgonomicsPreview, PinProjectionCounterexamples, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, Roadmap, RustFFI, RustVersionTracking, SafeAndEffectiveUnsafeRust, SmartPointers, Traits, TypeConversions, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, WebAssemblyEcosystem
+- expected_entities: pin_projection_counterexamples
+
+### Theorem Tier Spec overview
+
+- n_retrieved: 25
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, Borrowing, ConceptMetaLayer, DesignPatternsOverview, Evolution, FormalMethodsIndustrialization, FormalMethodsLayerOverview, FormalVerificationEcosystemTower, Generics, GlobalTheoremChainRegistry, Lifetimes, MacrosAdvanced, MemoryManagement, MetaFrameworkAndKnowledgeArchitectureQuiz, Ownership, Roadmap, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, TheoremInferenceForest, TheoremTierSpec, ToolchainAndCargo, Traits, TypeSystemBasics, VerificationAndContractsEcosystemOverview
+- expected_entities: heorem_tier_spec
+
+### what is Dispatch Mechanisms
+
+- n_retrieved: 45
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, ApplicationDomains, AsyncProgramming, CategoryTheory, ConcurrencyModels, CoreCratesIndex, DeclarativeMacros, DesignPatternsOverview, DispatchMechanisms, DslAndEmbedding, EffectHandlersAndRustSLimitedEffectsControlFlowAbstractionsAsAComputationalModel, EffectSystem, EffectsAndPurity, FutureAndExecutorMechanisms, Generics, HowRustIsMadeAndNightlyRust, InterProcessCommunicationMechanismsInRust, Lifetimes, LinearLogicAndOwnershipResourceCalculusAsAComputationalModel, MacroPatterns, MacrosAdvanced, MacrosBasics, Metaprogramming, ModernProcessManagementLibrariesInRust, ModulesAndPaths, Ownership, PerformanceOptimization, ProceduralMacros, ProcessCalculiForRustCSPCCSAndThePiCalculus, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustVersionTracking, SerdePatterns, SessionTypesAndRustChannelsCommunicationProtocolsAsAComputationalModel, Traits, TypeSystemBasics, TypeTheory, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: dispatch_mechanisms
+
+### explain Methodology in rust
+
+- n_retrieved: 53
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedNetworkProtocolsInRust, AlgorithmEngineeringPractice, ApplicationDomains, AsyncFFIBoundary, AsyncProgramming, BlockchainDevelopmentInRust, Borrowing, CoercionAndCasting, Collections, ConcurrencyModels, CoreCratesIndex, CowAndBorrowed, CustomNetworkProtocolImplementationInRust, DatabaseSystemsInRust, DesignPatternsOverview, DistributedSystems, ErrorHandlingIntermediate, EvaluationStrategies, FFIPatternsInRust, FormalMethodsBeforeEnteringL4, FormalMethodsIndustrialization, FormalVerificationEcosystemTower, Generics, IdiomsSpectrum, IteratorIdiomsInRust, Lifetimes, MacrosAdvanced, MemoryManagement, Methodology, NetworkProgramming, NewtypeAndWrapperTypes, Ownership, PerformanceOptimization, Roadmap, RustBeltAndVerificationToolchain, RustFFI, RustVsC, SafeAndEffectiveUnsafeRust, SerdePatterns, SmartPointers, StreamProcessingEcosystem, StreamProcessingSemantics, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, VerificationToolchain, WebAssemblyEcosystem, ZeroCopyParsing, ZeroCopyParsingInRust, ZeroCostAbstractions
+- expected_entities: methodology
+
+### rust Concurrency and Async (Quiz) tutorial
+
+- n_retrieved: 36
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncAdvanced, AsyncPatterns, AsyncProgramming, Borrowing, ClosureBasics, ClosureTypes, ClosuresAndIteratorsQuiz, ConcurrencyAndAsyncQuiz, ConcurrencyModels, CoreCratesIndex, DistributedSystems, Evolution, GenBlocksPreview, Generics, Iterators, Lifetimes, MemoryManagement, ModulesAndPaths, ModulesAndTestingQuiz, OperationalSemantics, Ownership, OwnershipBorrowingAndLifetimesQuiz, OwnershipFormalization, ParadigmMatrix, PinAndUnpin, RustConceptKnowledgeSystem, RustVsC, RustVsElixirConcurrencyAndFaultToleranceComparison, RustVsGo, SafeAndEffectiveUnsafeRust, SubtypeAndVariance, ToolchainAndCargo, Traits, TypeSystemBasics, TypeTheory, WebAssemblyEcosystem
+- expected_entities: concurrency_and_async_(quiz)
+
+### rust Serde tutorial
+
+- n_retrieved: 37
+- concept_mrr: 0.167
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.356
+- concept_ndcg@3: 0.0
+- concept_ndcg@5: 0.0
+- concept_precision: 0.0
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.0
+- concept_precision@5: 0.0
+- concept_recall: 0.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 0.0
+- concept_recall@5: 0.0
+- source_mrr: 0.167
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.356
+- source_ndcg@3: 0.0
+- source_ndcg@5: 0.0
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.0
+- source_precision@5: 0.0
+- source_recall: 0.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 0.0
+- source_recall@5: 0.0
+- retrieved_entities: ApplicationDomains, AsyncProgramming, AxumTokioSErgonomicWebFramework, BloomTaxonomy, Borrowing, CloudNative, ComprehensiveRustMapping, ConcurrencyModels, CoreCratesIndex, DesignPatternsOverview, DistributedSystems, EditionGuide, ErrorHandlingIntermediate, Evolution, Generics, GettingStartedWithRust, LearningGuide, Lifetimes, MacrosAdvanced, MemoryManagement, NLLAndPolonius, Ownership, PerformanceOptimization, Roadmap, RustBeltAndVerificationToolchain, RustFFI, RustVersionTracking, SafeAndEffectiveUnsafeRust, Serde, SerdePatterns, TokioAsynchronousRuntime, Traits, TypeSystemBasics, UnsafeRustPatterns, UnsafeRustQuiz, WebAssemblyEcosystem, WebFrameworks
+- expected_entities: serde
+
+### explain Concept Audit Guide in rust
+
+- n_retrieved: 38
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationDomains, AsyncFFIBoundary, AsyncProcessManagementInRust, AuditChecklist, Borrowing, CoercionAndCasting, Collections, ConceptAuditGuide, ConceptConsistencyAuditChecklist, ConceptMetaLayer, ConcurrencyModels, DesignPatternsOverview, ErrorHandlingIntermediate, FFIPatternsInRust, Generics, IdiomsSpectrum, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, LearningGuide, Lifetimes, MemoryManagement, ModernProcessManagementLibrariesInRust, NewtypeAndWrapperTypes, Ownership, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, Roadmap, RustFFI, SafeAndEffectiveUnsafeRust, SmartPointers, Traits, TypeConversions, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts
+- expected_entities: concept_audit_guide
+
+### what is Semantic Model Reasoning Methodology
+
+- n_retrieved: 72
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, AIOntologyAndRustSemantics, AISafetyAndAlignment, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AerospaceCertificationFormalMethods, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncPatterns, AsyncProgramming, AuthoritySourceMap, CategoryTheory, CertifiedToolchainsAndCertifiedPackageInventory, ConceptDefinitionAtlas, ConcurrencyModels, ConcurrencyPatterns, ConstGenericsValuesAsTypeParameters, CratesAndSourceFiles, DependentTypesAndRefinementTypes, DescriptionLogicAndOWL, DesignPatternsOverview, DistributedSystems, EffectSystem, EffectsAndPurity, Evolution, FiveExecutionModelsDefinitionMatrix, FormalMethodsIndustrialization, FormalMethodsLayerOverview, FormalVerificationEcosystemTower, Generics, InterLayerMappingAtlas, KnowledgeGraphConstruction, KnowledgeGraphOntologyV20, LLMSystemArchitecture, LambdaCalculus, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MLOpsAndLLMOps, MachineLearningEcosystem, MemoryModel, Methodology, NetworkProgramming, OntologyEngineeringMethodologies, OperationalSemantics, Ownership, OwnershipFormalization, ParadigmMatrix, PatternCompositionAlgebra, PatternSemanticSpaceIndex, ProcessCalculiForRustCSPCCSAndThePiCalculus, Roadmap, RustBeltAndVerificationToolchain, RustInAI, RustVsAdaSPARK, RustVsC, RustVsGo, RustVsHaskell, RustVsOCamlOwnershipAndAlgebraicEffectsInSystemsAndFunctionalProgramming, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SemanticEngineeringAndOntology, SemanticInteroperability, SemanticModelAtlas, SemanticModelReasoningMethodology, SemanticSpace, SeparationLogic, StreamProcessingSemantics, SystemDesignPrinciples, TerminologyGlossary, Traits, TypeErasure, TypeSystemBasics, TypeTheory, UnifiedLanguageSemanticModelExpressivenessMatrix
+- expected_entities: semantic_model_reasoning_methodology
+
+### Keywords overview
+
+- n_retrieved: 30
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AuthoritySourceMap, ConceptIndex, ConceptMetaLayer, CoreCratesIndex, DesignPatternsOverview, DslAndEmbedding, Evolution, ExternalAuthorityTopicIndex, FormalMethodsIndustrialization, FormalMethodsLayerOverview, Generics, InternationalAuthorityIndex, Keywords, KnowledgeMindmap, MacrosBasics, ModulesAndPaths, Ownership, ProceduralMacros, Roadmap, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, Sources, TerminologyGlossary, Todos, ToolchainAndCargo, TopicAuthorityAlignmentMap, Traits, TypeSystemBasics, VerificationAndContractsEcosystemOverview
+- expected_entities: keywords
+
+### explain Semantic Model Atlas in rust
+
+- n_retrieved: 56
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorModelAndMessagePassingPatternsInRust, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AdvancedProcessManagementInRust, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncProcessManagementInRust, AsyncProgramming, CategoryTheory, ClosureTypes, CloudNative, ConceptDefinitionAtlas, ConcurrencyModels, ConcurrencyPatterns, ConstGenericsValuesAsTypeParameters, DependentTypesAndRefinementTypes, DesignPatternsOverview, DistributedSystems, EffectSystem, EffectsAndPurity, ErrorHandlingBasics, EventDrivenArchitecture, FiveExecutionModelsDefinitionMatrix, FormalVerificationEcosystemTower, Generics, IdiomsSpectrum, InterLayerMappingAtlas, InterProcessCommunicationMechanismsInRust, LambdaCalculus, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MicroservicePatterns, ModernProcessManagementLibrariesInRust, OwnershipFormalization, OwnershipPerformanceOptimization, ParadigmMatrix, ProcessCalculiForRustCSPCCSAndThePiCalculus, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, Roadmap, RustAntiPatterns, RustAntiPatternsAndPitfallsAtlas, RustBeltAndVerificationToolchain, RustIdiomsAtlas, RustPerformanceIdioms, RustVsAdaSPARK, RustVsHaskell, RustVsOCamlOwnershipAndAlgebraicEffectsInSystemsAndFunctionalProgramming, SemanticModelAtlas, SemanticModelReasoningMethodology, SemanticPropertiesAtlas, SemanticSpace, TypeSystemBasics, TypeTheory, UnifiedLanguageSemanticModelExpressivenessMatrix, UnsafeRustPatterns
+- expected_entities: semantic_model_atlas
+
+### what is Database Systems in Rust
+
+- n_retrieved: 64
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AUTOSARAndRust, AdvancedProcessManagementInRust, AerospaceCertificationFormalMethods, ApplicationDomains, AsyncFFIBoundary, AsyncProcessManagementInRust, AsyncProgramming, Borrowing, CertifiedToolchainsAndCertifiedPackageInventory, CoercionAndCasting, Collections, ConcurrencyModels, CoreCratesIndex, CrossCompilation, DatabaseAccessEcosystem, DatabaseAndStorageEcosystemQuiz, DatabaseSystemsInRust, DesignPatternsOverview, DistributedSystems, EmbeddedSystems, ErrorHandlingIntermediate, Evolution, FFIPatternsInRust, FormalMethodsIndustrialization, Generics, IdiomsSpectrum, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, Lifetimes, MemoryManagement, ModernProcessManagementLibrariesInRust, NewtypeAndWrapperTypes, Ownership, PerformanceOptimization, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustFFI, RustForDataScienceAndScientificComputing, RustInAI, RustVersionTracking, RustVsAdaSPARK, SafeAndEffectiveUnsafeRust, SafetyCriticalBareMetalOperatingSystemsInRust, SafetyCriticalRustTopicIndex, SafetyCriticalSystemsEngineering, SmartPointers, SqlxCompileTimeCheckedAsyncSQLToolkit, StreamProcessingEcosystem, StreamProcessingSemantics, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, VerificationToolchain, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: database_systems_in_rus
+
+### what is WebSocket Real-Time Communication
+
+- n_retrieved: 70
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedNetworkProtocolsInRust, AerospaceCertificationFormalMethods, ApplicationDomains, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, AtomicsAndMemoryOrdering, BareMetalBootAndLinkerScripts, CertifiedToolchainsAndCertifiedPackageInventory, ClosureTypes, CloudNative, ConcurrencyModels, ConcurrencyPatterns, CriticalSectionsAndSynchronizationOnBareMetal, CrossCompilation, CustomBareMetalAsyncExecutor, DesignPatternsOverview, DistributedSystems, EmbassyAsyncFrameworkDeepDive, EmbeddedDebuggingAndLogging, EmbeddedFormalMemoryModel, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, ErrorHandlingIntermediate, FormalMethodsIndustrialization, Generics, HTTPClientDevelopmentInRust, HighPerformanceNetworkServiceArchitecture, HowRustIsMadeAndNightlyRust, InterProcessCommunicationMechanismsInRust, InterruptAndExceptionModel, MISRARustAndSafetyCriticalEmbeddedGuidelines, ModernProcessManagementLibrariesInRust, NetworkProgramming, NetworkProtocols, NetworkSecurityInRust, No_stdAndBareMetalIdioms, No_stdAndBareMetalRust, No_stdSynchronizationPrimitives, Ownership, PACAndHALImplementation, Panic_handlerAndNo_stdRuntime, PerformanceOptimization, PinAndUnpin, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, RTICRealTimeTaskSchedulingFrameworkDeepDive, RTICVsEmbassyRealTimeFrameworksInRust, RTOSAndSchedulingModelsInRust, ReqwestErgonomicAsyncHTTPClientForRust, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustNetworkProgrammingQuickStart, RustVersionTracking, RustVsAdaSPARK, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, StreamProcessingEcosystem, Traits, TypeSystemBasics, WebAssemblyEcosystem, WebFrameworks, WebSocketRealTimeCommunication
+- expected_entities: websocket_real-time_communication
+
+### rust no_std Startup and Runtime Deep Dive tutorial
+
+- n_retrieved: 65
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncCancellationSafety, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, AtomicsAndMemoryOrdering, BareMetalBootAndLinkerScripts, BareMetalRust, BehaviorConsideredUndefined, CargoBuildStd, CargoConfiguration, ConcurrencyModels, CriticalSectionsAndSynchronizationOnBareMetal, CrossCompilation, CustomBareMetalAsyncExecutor, EmbassyAsyncFrameworkDeepDive, EmbeddedDebuggingAndLogging, EmbeddedFormalMemoryModel, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedProtocolAndPeripheralDrivers, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, ErrorHandlingDeepDive, ErrorHandlingIntermediate, ExecutorFairnessAndScheduling, FFIAdvancedTopics, FutureAndExecutorMechanisms, GenBlocksPreview, Generics, GlommioAndThreadPerCoreAsyncRuntimes, HighPerformanceNetworkServiceArchitecture, InterruptAndExceptionModel, Lifetimes, LinearizabilityAndTheConsistencySpectrum, LinkerScriptsAndMemoryLayoutForEmbeddedRust, LoggingObservability, MemoryManagement, No_stdAllocatorsAndPanicHandlers, No_stdAndBareMetalIdioms, No_stdAndBareMetalRust, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, Ownership, PACAndHALImplementation, Panic, Panic_handlerAndNo_stdRuntime, PerformanceOptimization, PinAndUnpin, RISCVAndAVREmbeddedRustDevelopment, RTICVsEmbassyRealTimeFrameworksInRust, RustVersionTracking, RustVsC, RustVsZig, SafeAndEffectiveUnsafeRust, SafetyCriticalBareMetalOperatingSystemsInRust, StreamAlgebraAndBackpressure, TheNo_stdAllocCrateEcosystem, TheRustRuntime, TokioRuntimeInternals, ToolchainAndCargo, Traits, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WakerContractDeepDive, WebAssemblyEcosystem
+- expected_entities: no_std_startup_and_runtime_deep_dive
+
+### rust Unsafe Boundary Panorama tutorial
+
+- n_retrieved: 37
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncBoundaryPanorama, AsyncCancellationSafety, AsyncClosures, AsyncDropPreview, AsyncProgramming, AtomicsAndMemoryOrdering, BorrowSanitizerRuntimeTreeBorrowsViolationDetection, Borrowing, BoundaryExtensionTree, ConcurrencyModels, ErrorHandlingIntermediate, FutureAndExecutorMechanisms, GenBlocksPreview, Generics, KaniRustBoundedModelChecker, Lifetimes, MacrosAdvanced, MemoryManagement, MemoryModel, MiriRustUndefinedBehaviorDetector, ModernVerificationTools, NLLAndPolonius, Ownership, OwnershipFormalization, PerformanceOptimization, PinAndUnpin, RustBeltAndVerificationToolchain, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, ToolchainAndCargo, TreeBorrowsDeepDive, TypeSystemBasics, UnsafeBoundaryPanorama, UnsafeRustPatterns, UnsafeRustQuiz, UnsafeRustTopicIndex
+- expected_entities: unsafe_boundary_panorama
+
+### Safety-Critical Systems Engineering overview
+
+- n_retrieved: 69
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AUTOSARAndRust, ActorModelSystemSemantics, ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AerospaceCertificationFormalMethods, ApplicationDomains, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, BareMetalBootAndLinkerScripts, Borrowing, CRDTTypeZooStateBasedOpBasedAndTheMergeLattice, CargoVetAndSupplyChainAuditing, CausalOrderingAndVectorClocks, CertifiedToolchainsAndCertifiedPackageInventory, ComponentBasedSystemSemantics, ConcurrencyModels, ConcurrencyPatterns, CrossCompilation, CustomBareMetalAsyncExecutor, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystemsSemantics, EmbeddedDebuggingAndLogging, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSafetyCriticalPatterns, EmbeddedSystems, FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems, FiveExecutionModelsDefinitionMatrix, FormalMethodsIndustrialization, FormalMethodsMergedRedirect, HoareLogic, IndustrialRustAdoptionCaseStudies, InterruptAndExceptionModel, LambdaCalculus, Lifetimes, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MISRARustAndSafetyCriticalEmbeddedGuidelines, MemoryManagement, MicroservicePatterns, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, Ownership, Panic_handlerAndNo_stdRuntime, ParallelDistributedPatternSpectrum, PerformanceOptimization, ProcessCalculiForRustCSPCCSAndThePiCalculus, ReactiveProgramming, ReactiveSystemsSemantics, Roadmap, RustBeltAndVerificationToolchain, RustFFI, RustInSafetyCriticalSystems, RustVsAdaSPARK, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, SafetyCriticalRustTopicIndex, SafetyCriticalSystemsEngineering, StreamAlgebraAndBackpressure, SystemComposability, SystemsEngineeringStandardsAndRustMapping, ToolchainAndCargo, TypeSystemBasics, VerificationToolchain, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: safety-critical_systems_engineering
+
+### explain NLL and Polonius in rust
+
+- n_retrieved: 43
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationDomains, AsyncProcessManagementInRust, BorrowCheckingDecidability, Borrowing, CoreCratesIndex, DeclarativeMacros, DesignPatternsOverview, DslAndEmbedding, FormalMethodsIndustrialization, Generics, InterProcessCommunicationMechanismsInRust, Lifetimes, MacrosAdvanced, MacrosBasics, ModernProcessManagementLibrariesInRust, ModulesAndPaths, NLLAndPolonius, NameResolutionAndHIRInRustc, Ownership, OwnershipFormalization, ProceduralMacros, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, RustBeltAndVerificationToolchain, RustCompilerInternalsAndDriverArchitecture, RustFFI, SafeAndEffectiveUnsafeRust, SemanticSpace, SerdePatterns, SubtypeAndVariance, TheRustcQuerySystemAndIncrementalCompilation, TheTraitSolverInRustc, ToolchainAndCargo, Traits, TypeInference, TypeSystemBasics, TypeTheory, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: nll_and_polonius
+
+### rust Rust vs Nim tutorial
+
+- n_retrieved: 36
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncProgramming, Borrowing, ConcurrencyModels, CoreCratesIndex, CrossCompilation, EditionGuide, Evolution, Generics, Lifetimes, LinearAndAffineLogic, MacrosAdvanced, MemoryManagement, NLLAndPolonius, OperationalSemantics, Ownership, OwnershipFormalization, ParadigmMatrix, Readme_05comparativ, RustBeltAndVerificationToolchain, RustVersionTracking, RustVsC, RustVsGo, RustVsJava, RustVsNim, RustVsPython, RustVsRuby, RustVsSwift, SafeAndEffectiveUnsafeRust, SeparationLogic, ToolchainAndCargo, Traits, TypeSystemBasics, TypeTheory, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: rust_vs_nim
+
+### practical guide to assert_matches! Macro
+
+- n_retrieved: 42
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AlgorithmEngineeringPractice, AspMarkingGuide, Assert_matchesMacro, BilingualConceptTemplate, BootstrappingTheRustCompiler, CargoSemVerChecksPreview, Collections, CompilerDiagnosticsAndUITests, CompilerInfrastructure, ConceptAuditGuide, ConceptConsistencyAuditChecklist, ConcurrencyModels, CoreCratesIndex, DeclarativeMacros, DesignPatternsOverview, DslAndEmbedding, ErrorHandlingIntermediate, Generics, IdiomsSpectrum, IteratorIdiomsInRust, MacroDebuggingAndDiagnostics, MacroPatterns, MacrosAdvanced, MacrosBasics, Metaprogramming, ModulesAndPaths, Ownership, PerformanceOptimization, ProceduralMacros, ProductionGradeMacroDevelopment, QualityDashboardV2, Roadmap, RustAPIGuidelinesCanonicalGuide, RustVersionTracking, SafetyBoundaries, SerdePatterns, TemplateDeduplicationGuide, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, WebAssemblyEcosystem
+- expected_entities: assert_matches!_macro
+
+### what is Patterns
+
+- n_retrieved: 48
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: APIDesignPatterns, ApplicationDomains, ArchitecturePatterns, AsyncPatterns, AsyncProgramming, ClosureBasics, ClosureTypes, ConcurrencyModels, ConcurrencyPatterns, CoreCratesIndex, DesignPatternsOverview, DistributedSystems, DslAndEmbedding, EngineeringPracticeAndProductionGradePatterns, ErrorHandlingIntermediate, EventDrivenArchitecture, Evolution, FormalMethodsIndustrialization, GenBlocksPreview, Generics, Lifetimes, MacroPatterns, MacrosAdvanced, MacrosBasics, Metaprogramming, MicroservicePatterns, ModulesAndPaths, Ownership, ParadigmMatrix, PatternCompositionAlgebra, PatternSelectionBestPractices, Patterns, PinAndUnpin, ProceduralMacros, Roadmap, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, RustVsC, RustVsGo, SafeAndEffectiveUnsafeRust, SerdePatterns, StatementsAndExpressions, SystemDesignPrinciples, Traits, TypeSystemBasics, TypeTheory, WebAssemblyEcosystem
+- expected_entities: patterns
+
+### explain Event Driven Architecture in rust
+
+- n_retrieved: 51
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, ApplicationDomains, AsyncFFIBoundary, AsyncProgramming, Borrowing, CQRSAndEventSourcing, CategoryTheory, CoercionAndCasting, Collections, ConcurrencyModels, DesignPatternsOverview, DistributedSystems, EffectHandlersAndRustSLimitedEffectsControlFlowAbstractionsAsAComputationalModel, EffectSystem, EffectsAndPurity, EnterpriseAndSoftwareArchitectureAlignmentInRust, ErrorHandlingIntermediate, EventDrivenArchitecture, EventSourcingEnginePatternsInRust, Evolution, FFIPatternsInRust, FormalMethodsIndustrialization, Generics, IdiomsSpectrum, IteratorIdiomsInRust, Lifetimes, LinearLogicAndOwnershipResourceCalculusAsAComputationalModel, MemoryManagement, NewtypeAndWrapperTypes, Ownership, ProcessCalculiForRustCSPCCSAndThePiCalculus, ReactiveProgramming, Roadmap, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, SessionTypesAndRustChannelsCommunicationProtocolsAsAComputationalModel, SmartPointers, StateMachineSemanticsAndWorkflowModels, Traits, TypeConversions, TypeSystemBasics, TypeTheory, UnsafeExternBlocksInRustEdition2024, UnsafeInAsyncContexts, WebAssemblyEcosystem, WorkflowTheoryFormalization
+- expected_entities: event_driven_architecture
+
+### explain Cargo Subcommands and Plugins with examples
+
+- n_retrieved: 51
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: Borrowing, CargoAuthenticationAndBuildCache, CargoBuildScriptsBuildRs, CargoCommandsReference, CargoConfiguration, CargoDependencyResolution, CargoGettingStarted, CargoGuidePractices, CargoManifestReference, CargoManifestTargets, CargoProfilesAndLints, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoRegistryInternals, CargoScriptWritingAndRunningRustScripts, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CargoSourceReplacement, CargoSubcommandsAndPlugins, CargoWorkflow, CargoWorkspaces, CloudNative, CompilerDiagnosticsAndUITests, CompilerInfrastructure, CrossCompilation, DevOpsAndCICD, Evolution, FormalMethodsIndustrialization, IntegratingRustIntoExistingPlatformsAndCodebases, LLVMBackendAndCodeGenerationInRustc, LearningMvpPath, Lifetimes, MacrosAdvanced, MemoryManagement, ModulesAndPaths, Ownership, Roadmap, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, RustVsC, RustVsGo, RustcAndCargoZUnstableFlagsReference, RustcDriverRustc_interfaceAndStableMIR, SafetyBoundaries, SecurityPractices, TargetTierPlatformSupportGuaranteesAndChangesInRust190197, TestingTheRustCompiler, ToolchainAndCargo, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: cargo_subcommands_and_plugins
+
+### what is Quiz: C/C++ to Rust Foundations
+
+- n_retrieved: 37
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedTraits, AsyncInNo_stdAndEmbeddedSystems, Borrowing, CAbiObjectModel, CCToRustEngineeringComparisonRoadmap, CToRustTranslation, CVsRustConstructionOperatorsRTTIAndFriends, CertifiedToolchainsAndCertifiedPackageInventory, DesignPatternsOverview, EmbeddedDebuggingAndLogging, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, ErrorHandlingDeepDive, EvaluationStrategies, FormalVerificationTools, Generics, MemoryManagement, Ownership, OwnershipFormalization, PatternCompositionAlgebra, PatternSemanticSpaceIndex, PerformanceOptimization, QuizCCToRustFoundations, QuizGeneralPLFoundations, QuizRustVsSystems, RTTIAndDynamicTypeIdentification, Roadmap, RustVsAdaSPARK, RustVsC, SEICERTCToRustRuleMapping, SafetyCriticalBareMetalOperatingSystemsInRust, SelfAssessment, SubtypeAndVariance, Traits, TypeErasure, TypeSystemBasics, VariableModel
+- expected_entities: quiz:_c/c++_to_rust_foundations
+
+### when should I use Async Advanced in rust
+
+- n_retrieved: 54
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedDataStructuresImplementationInRust, AdvancedNetworkProtocolsInRust, AdvancedProcessManagementInRust, AlgorithmEngineeringPractice, AsyncAdvanced, AsyncBoundaryPanorama, AsyncCancellationSafety, AsyncClosures, AsyncDropPreview, AsyncProcessManagementInRust, AsyncProgramming, AsyncTraitObjectSafety, Borrowing, ClosureTypes, CoercionAndCasting, Collections, ConcurrencyModels, ConcurrencyPatterns, DesignPatternsOverview, DistributedSystems, ErrorHandlingIntermediate, ExecutorFairnessAndScheduling, FutureAndExecutorMechanisms, Generics, HighPerformanceNetworkServiceArchitecture, IdiomsSpectrum, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, Lifetimes, MemoryManagement, ModernProcessManagementLibrariesInRust, NetworkProtocols, NetworkSecurityInRust, NewtypeAndWrapperTypes, Ownership, OwnershipFormalization, ParallelAndConcurrentAlgorithmsInRust, PerformanceOptimization, PinAndUnpin, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, Roadmap, SafeAndEffectiveUnsafeRust, SmartPointers, StreamProcessingEcosystem, SubtypeAndVariance, TokioRuntimeInternals, Traits, TypeConversions, TypeSystemBasics, UnsafeBoundaryPanorama, WakerContractDeepDive
+- expected_entities: async_advanced
+
+### what is WebAssembly Target Evolution Preview
+
+- n_retrieved: 33
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedWebAssemblyDevelopmentWithRust, ApplicationDomains, AsyncProgramming, Borrowing, CloudNative, ConcurrencyModels, DesignPatternsOverview, Evolution, FormalMethodsIndustrialization, Lifetimes, MacrosAdvanced, MemoryManagement, Ownership, OwnershipFormalization, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustFFI, RustForWebAssemblyResearch, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, ToolchainAndCargo, Traits, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, WebAssemblyFAQ, WebAssemblyGlossary, WebAssemblyJavaScriptInterop, WebAssemblyTargetEvolutionPreview, WebFrameworks
+- expected_entities: webassembly_target_evolution_preview
+
+### rust Getting Started with Rust tutorial
+
+- n_retrieved: 46
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AlgorithmEngineeringPractice, ApplicationDomains, AsyncProgramming, BloomTaxonomy, Borrowing, CargoBuildScriptsBuildRs, CargoDependencyResolution, CargoGettingStarted, CargoGuidePractices, CargoManifestReference, CargoProfilesAndLints, CargoRegistriesAndPublishing, CargoSourceReplacement, CargoWorkflow, CargoWorkspaces, Collections, ComprehensiveRustMapping, ConcurrencyModels, DesignPatternsOverview, EditionGuide, ErrorHandlingIntermediate, Evolution, Generics, GettingStartedWithRust, IdiomsSpectrum, IteratorIdiomsInRust, LearningGuide, LearningMvpPath, Lifetimes, MacrosAdvanced, ModulesAndPaths, NLLAndPolonius, Ownership, PerformanceOptimization, PlPrerequisites, Roadmap, RustAPIGuidelinesCanonicalGuide, RustBeltAndVerificationToolchain, RustLanguageFeatureInventoryMethodology, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics
+- expected_entities: getting_started_with_rus
+
+### how does Async Cancellation Safety work
+
+- n_retrieved: 44
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncAdvanced, AsyncBoundaryPanorama, AsyncCancellationSafety, AsyncClosures, AsyncDropPreview, AsyncFFIBoundary, AsyncPatterns, AsyncProcessManagementInRust, AsyncProgramming, AsyncTraitObjectSafety, Borrowing, ConcurrencyAndAsyncQuiz, ConcurrencyModels, DistributedSystems, ExecutorFairnessAndScheduling, FutureAndExecutorMechanisms, GenBlocksPreview, Generics, InterProcessCommunicationMechanismsInRust, KaniRustBoundedModelChecker, Lifetimes, MemoryManagement, MemoryModel, MiriRustUndefinedBehaviorDetector, ModernProcessManagementLibrariesInRust, NLLAndPolonius, Ownership, OwnershipFormalization, PerformanceOptimization, PinAndUnpin, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, RustFFI, SafeAndEffectiveUnsafeRust, SubtypeAndVariance, TokioRuntimeInternals, Traits, TypeSystemBasics, UnsafeBoundaryPanorama, UnsafeInAsyncContexts, WakerContractDeepDive, WebAssemblyEcosystem
+- expected_entities: async_cancellation_safety
+
+### rust Semantic Space tutorial
+
+- n_retrieved: 30
+- concept_mrr: 0.5
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.631
+- concept_ndcg@3: 0.631
+- concept_ndcg@5: 0.631
+- concept_precision: 0.2
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 0.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.631
+- source_ndcg@3: 0.631
+- source_ndcg@5: 0.631
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ApplicationDomains, AsyncPatterns, BloomTaxonomy, CategoryTheory, ComprehensiveRustMapping, ConcurrencyPatterns, DenotationalSemantics, DesignPatternsOverview, DistributedSystems, Generics, LearningGuide, LinearAndAffineLogic, Ownership, OwnershipFormalization, ParadigmMatrix, PatternCompositionAlgebra, PatternSemanticSpaceIndex, Roadmap, RustBeltAndVerificationToolchain, RustDesignPatternAndArchitecturePatternSemanticAtlas, RustInSpacePreview, RustVsC, SemanticExpressiveness, SemanticPropertiesAtlas, SemanticSpace, SystemDesignPrinciples, Traits, TypeSemantics, TypeSystemBasics, TypeTheory
+- expected_entities: semantic_space
+
+### rtic vs embassy real time framework comparison
+
+- n_retrieved: 64
+- concept_mrr: 0.0
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.0
+- concept_ndcg@3: 0.0
+- concept_ndcg@5: 0.0
+- concept_precision: 0.0
+- concept_precision@1: 0.0
+- concept_precision@10: 0.0
+- concept_precision@3: 0.0
+- concept_precision@5: 0.0
+- concept_recall: 0.0
+- concept_recall@1: 0.0
+- concept_recall@10: 0.0
+- concept_recall@3: 0.0
+- concept_recall@5: 0.0
+- source_mrr: 0.333
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.5
+- source_ndcg@3: 0.5
+- source_ndcg@5: 0.5
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 0.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AerospaceCertificationFormalMethods, ApplicationDomains, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, AtomicsAndMemoryOrdering, BareMetalBootAndLinkerScripts, Borrowing, CAbiObjectModel, CCToRustEngineeringComparisonRoadmap, CargoBuildStd, CargoVetAndSupplyChainAuditing, CertifiedToolchainsAndCertifiedPackageInventory, ConcurrencyModels, CriticalSectionsAndSynchronizationOnBareMetal, CrossCompilation, CustomBareMetalAsyncExecutor, DesignPatternsOverview, EmbassyAsyncFrameworkDeepDive, EmbeddedDebuggingAndLogging, EmbeddedFormalMemoryModel, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, EvaluationStrategies, Evolution, FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems, FormalMethodsIndustrialization, InterruptAndExceptionModel, MISRARustAndSafetyCriticalEmbeddedGuidelines, MemoryManagement, No_stdAndBareMetalIdioms, No_stdAndBareMetalRust, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, OperationalSemantics, Ownership, PACAndHALImplementation, Panic_handlerAndNo_stdRuntime, ParadigmMatrix, PatternCompositionAlgebra, PatternSemanticSpaceIndex, PerformanceOptimization, PinAndUnpin, RTICRealTimeTaskSchedulingFrameworkDeepDive, RTICVsEmbassyRealTimeFrameworksInRust, RTOSAndSchedulingModelsInRust, RustConceptKnowledgeSystem, RustVsAdaSPARK, RustVsC, RustVsElixirConcurrencyAndFaultToleranceComparison, RustVsGo, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, SafetyCriticalRustTopicIndex, SafetyCriticalSystemsEngineering, TypeSystemBasics, TypeTheory, VariableModel, VerificationToolchain, ZeroCostAbstractions
+- expected_entities: embassy, real_time, rtic
+
+### what is Rust 1.92 Stabilized Features
+
+- n_retrieved: 33
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, Borrowing, CargoGettingStarted, ControlFlow, DistributedSystems, Generics, Lifetimes, MemoryManagement, NetworkProtocols, NetworkingBasics, Ownership, Rust190StabilizedFeatures, Rust191StabilizedFeatures, Rust192StabilizedFeatures, Rust193StabilizedFeatures, Rust194StabilizedFeatures, Rust1950StabilizedFeatures, Rust196StabilizedFeaturesCurrentPatch1961, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust1971StablePatch, Rust1980StabilizedFeatures, Rust198Preview, Rust199Preview, RustFFI, RustVersionTracking, SafeAndEffectiveUnsafeRust, StreamProcessingEcosystem, ToolchainAndCargo, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, WebFrameworks
+- expected_entities: rust_1.92_stabilized_features
+
+### rust Send and Sync — Auto Traits as Compile-Time Concurrency Contracts tutorial
+
+- n_retrieved: 52
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, ApplicationDomains, AsyncAdvanced, AsyncProgramming, AuthoritySourceMap, Borrowing, CompileTimeExecution, ComponentBasedSystemSemantics, ConcurrencyModels, ConcurrencyModelsAsComputationalModelsCSPActorsTLAAndRust, CoreCratesIndex, CrossCompilation, DistributedConsensus, DistributedConsensusAndImpossibilityTheoryFLPCAPPaxosRaftAndByzantineFaultTolerance, DistributedSystemsSemantics, EffectHandlersAndRustSLimitedEffectsControlFlowAbstractionsAsAComputationalModel, Evolution, Generics, KGSHACLEngineValidation, KnowledgeGraphDesignW3CSHACLOWLAlignmentAndOntologyEngineeringMethods, KnowledgeGraphOntologyV20, LLMAndRAGForRustKnowledgeBasesOntologyEngineeringAndRetrievalAugmentedGeneration, Lifetimes, LinearAndAffineLogic, LinearLogicAndOwnershipResourceCalculusAsAComputationalModel, LinearizabilityAndTheConsistencySpectrum, MacrosAdvanced, MemoryManagement, Methodology, OperationalSemantics, Ownership, OwnershipFormalization, ParadigmMatrix, ProcessCalculiForRustCSPCCSAndThePiCalculus, RustConceptKnowledgeSystem, RustVsC, RustVsElixirConcurrencyAndFaultToleranceComparison, RustVsGo, RustVsZig, SemanticSpace, SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts, SessionTypesAndRustChannelsCommunicationProtocolsAsAComputationalModel, SubtypeAndVariance, TerminologyGlossary, ToolchainAndCargo, Traits, TypeSystemBasics, TypeTheory, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: send_and_sync_—_auto_traits_as_compile-time_concurrency_contracts
+
+### explain Error Handling Control Flow in rust
+
+- n_retrieved: 27
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, Borrowing, CoercionAndCasting, Collections, ConcurrencyModels, ControlFlow, DesignPatternsOverview, ErrorHandlingBasics, ErrorHandlingControlFlow, ErrorHandlingDeepDive, ErrorHandlingIntermediate, ErrorHandlingQuiz, Generics, IdiomsSpectrum, IteratorIdiomsInRust, Lifetimes, LoggingObservability, MemoryManagement, NewtypeAndWrapperTypes, Ownership, Roadmap, RustVersionTracking, SmartPointers, Traits, TypeConversions, TypeSystemBasics, WebAssemblyEcosystem
+- expected_entities: error_handling_control_flow
+
+### Microkernel Architecture Pattern overview
+
+- n_retrieved: 72
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AerospaceCertificationFormalMethods, ApplicationBinaryInterface, ArchitecturePatternSemantics, ArchitecturePatterns, ArchitectureRefinement, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncPatterns, AsyncProgramming, BareMetalBootAndLinkerScripts, CargoWorkspaces, CategoryTheory, CertifiedToolchainsAndCertifiedPackageInventory, CloudNative, ComponentBasedSystemSemantics, ConcurrencyModels, ConcurrencyPatterns, DesignPatternsOverview, DistributedSystems, EmbeddedDebuggingAndLogging, EmbeddedHAL10MigrationAndEmbassyProductionStatus, EmbeddedHALAndDriverIdioms, EmbeddedHALDriverPatterns, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedProtocolAndPeripheralDrivers, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, EmbeddedTestingAndCIStrategiesForNo_stdRust, ErrorHandlingBasics, ErrorHandlingIntermediate, EventDrivenArchitecture, Evolution, FormalMethodsIndustrialization, Generics, InterruptAndExceptionModel, MISRARustAndSafetyCriticalEmbeddedGuidelines, MemoryMappedPeripheralsAndTypestateProgramming, MicrokernelArchitecturePattern, MicroservicePatterns, ModuleSystemAdvanced, No_stdAndBareMetalIdioms, No_stdSynchronizationPrimitives, Ownership, PACAndHALImplementation, Panic_handlerAndNo_stdRuntime, ParadigmMatrix, ParallelDistributedPatternSpectrum, PatternCompositionAlgebra, PatternSemanticSpaceIndex, PerformanceOptimization, PinAndUnpin, RefinementCalculusForRustAlgorithms, Roadmap, RustArchitectureSemanticsConstraints, RustDesignPatternAndArchitecturePatternSemanticAtlas, RustEditionMechanismAndMigrationGuide, RustInAI, RustVersionTracking, RustVsAdaSPARK, RustVsC, RustVsGo, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, SemanticSpace, SoftwareArchitectureFormalization, SystemComposability, SystemDesignPrinciples, Traits, TypeSystemBasics, WebAssemblyEcosystem
+- expected_entities: microkernel_architecture_pattern
+
+### Embedded-HAL 1.0 Migration and Embassy Production Status overview
+
+- n_retrieved: 58
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AerospaceCertificationFormalMethods, ApplicationDomains, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, BareMetalBootAndLinkerScripts, CargoVetAndSupplyChainAuditing, CertifiedToolchainsAndCertifiedPackageInventory, ConcurrencyModels, CrossCompilation, EditionGuide, EmbassyAsyncFrameworkDeepDive, EmbeddedDebuggingAndLogging, EmbeddedHAL10MigrationAndEmbassyProductionStatus, EmbeddedHALAndDriverIdioms, EmbeddedHALDriverPatterns, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedProtocolAndPeripheralDrivers, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, EmbeddedTestingAndCIStrategiesForNo_stdRust, Evolution, FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems, FormalMethodsIndustrialization, Generics, InterruptAndExceptionModel, Lifetimes, MISRARustAndSafetyCriticalEmbeddedGuidelines, MemoryMappedPeripheralsAndTypestateProgramming, NLLAndPolonius, No_stdAndBareMetalIdioms, No_stdSynchronizationPrimitives, Ownership, PACAndHALImplementation, Panic_handlerAndNo_stdRuntime, PerformanceOptimization, PinAndUnpin, Rust2024EditionPreviewAndMigrationNotes, RustEditionMechanismAndMigrationGuide, RustVersionTracking, RustVsAdaSPARK, RustVsC, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, SafetyCriticalRustTopicIndex, SafetyCriticalSystemsEngineering, SystemsAndEmbeddedTopicIndex, ToolchainAndCargo, Traits, TypeSystemBasics, VerificationAndContractsEcosystemOverview, VerificationToolchain, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, ZeroCostAbstractions
+- expected_entities: embedded-hal_1.0_migration_and_embassy_production_status
+
+### Causal Ordering and Vector Clocks overview
+
+- n_retrieved: 57
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, ApplicationDomains, AsyncProgramming, AtomicsAndMemoryOrdering, BlockchainDevelopmentInRust, CRDTTypeZooStateBasedOpBasedAndTheMergeLattice, CausalOrderingAndVectorClocks, ClosureTypes, CloudNative, ConcurrencyModels, ConcurrencyPatterns, CrossCompilation, CrossLayerDependencyAndImplicationTopology, CrossPlatformConcurrency, CustomAllocators, DataEngineering, DataIntensiveSystemsDesign, DatabaseSystemsInRust, DistributedConsensus, DistributedSystems, DistributedSystemsProtocols, ExecutionModelIsomorphism, FiveExecutionModelsDefinitionMatrix, FormalVerificationEcosystemTower, Generics, HoareLogic, InlineAssembly, InlineAssemblyExtendedTopicsNo_stdKernelCodeAndCrossPlatformVectorConstraints, LambdaCalculus, LinearAndAffineLogic, LinearizabilityAndTheConsistencySpectrum, MemoryManagement, NetworkProtocols, OperatingSystems, Ownership, OwnershipFormalization, ParallelDistributedPatternSpectrum, PatternCompositionAlgebra, PerformanceEngineeringArchitecture, PerformanceOptimization, ProcessCalculiForRustCSPCCSAndThePiCalculus, Roadmap, RustBeltAndVerificationToolchain, RustFFI, RustVsC, SafeAndEffectiveUnsafeRust, SendAndSyncAutoTraitsAsCompileTimeConcurrencyContracts, SendSyncBoundaryJudgmentTraitObjectsClosuresAndAsyncStateMachines, SeparationLogic, StreamProcessingEcosystem, StreamProcessingSemantics, Traits, TypeSystemBasics, UnsafeRustPatterns, VerificationAndContractsEcosystemOverview, VerificationToolchain, WebAssemblyEcosystem
+- expected_entities: causal_ordering_and_vector_clocks
+
+### how to test Generic Associated Types (GATs) at the Async Boundary in rust
+
+- n_retrieved: 58
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncBoundaryPanorama, AsyncCancellationSafety, AsyncClosures, AsyncDropPreview, AsyncFFIBoundary, AsyncProcessManagementInRust, AsyncProgramming, AsyncTraitObjectSafety, Borrowing, CoercionAndCasting, Collections, ConcurrencyModels, DesignPatternsOverview, ErrorHandlingIntermediate, ExecutorFairnessAndScheduling, FutureAndExecutorMechanisms, GenBlocksPreview, GenericAssociatedTypesGATs, GenericAssociatedTypesGATsAtTheAsyncBoundary, Generics, IdiomsSpectrum, InterProcessCommunicationMechanismsInRust, IteratorIdiomsInRust, Iterators, KaniRustBoundedModelChecker, Lifetimes, LifetimesAdvanced, MemoryManagement, MemoryModel, MiriRustUndefinedBehaviorDetector, ModernProcessManagementLibrariesInRust, NLLAndPolonius, NewtypeAndWrapperTypes, Ownership, OwnershipFormalization, PerformanceOptimization, PinAndUnpin, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust, QuizRegistryHumanReadableIndexOfAllAssessmentAssetsInTheKnowledgeBase, Roadmap, RustBeltAndVerificationToolchain, RustFFI, SafeAndEffectiveUnsafeRust, SmartPointers, StreamAlgebraAndBackpressure, SubtypeAndVariance, TokioRuntimeInternals, Traits, TypeConversions, TypeInference, TypeSystemBasics, TypeTheory, UnsafeBoundaryPanorama, UnsafeInAsyncContexts, WakerContractDeepDive
+- expected_entities: generic_associated_types_(gats)_at_the_async_boundary
+
+### practical guide to Cargo Guide Practices
+
+- n_retrieved: 53
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AlgorithmEngineeringPractice, AspMarkingGuide, AsyncProgramming, BilingualConceptTemplate, Borrowing, CargoAuthenticationAndBuildCache, CargoBuildScriptsBuildRs, CargoCommandsReference, CargoConfiguration, CargoDependencyResolution, CargoGettingStarted, CargoGuidePractices, CargoManifestReference, CargoProfilesAndLints, CargoRegistriesAndPublishing, CargoSourceReplacement, CargoWorkflow, CargoWorkspaces, CloudNative, Collections, ConceptAuditGuide, ConceptConsistencyAuditChecklist, ConcurrencyModels, CrossCompilation, DesignPatternsOverview, DevOpsAndCICD, ErrorHandlingIntermediate, FormalMethodsIndustrialization, Generics, IdiomsSpectrum, IteratorIdiomsInRust, LearningMvpPath, Lifetimes, MacrosAdvanced, MemoryManagement, ModulesAndPaths, Ownership, PerformanceOptimization, QualityDashboardV2, Readme_06ecosystem, Roadmap, RustAPIGuidelinesCanonicalGuide, RustFFI, RustVsC, SafeAndEffectiveUnsafeRust, SecurityPractices, TemplateDeduplicationGuide, TestingStrategies, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, ZeroCostAbstractions
+- expected_entities: cargo_guide_practices
+
+### what is Statements and Expressions
+
+- n_retrieved: 37
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedTraits, AsyncProgramming, Attributes, BehaviorConsideredUndefined, Borrowing, ClosureBasics, ClosureTypes, ConcurrencyModels, ConditionalCompilation, ConstantEvaluation, ControlFlow, CrossLayerDependencyAndImplicationTopology, DerivableTraits, Destructors, ErrorHandlingBasics, ErrorHandlingIntermediate, ExampleAndCounterexampleAtlas, FFIAdvancedTopics, Generics, HowRustIsMadeAndNightlyRust, Iterators, Lifetimes, MemoryManagement, MemoryModel, Ownership, Panic, PatternsReference, ProceduralMacros, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust198Preview, RustVersionTracking, SafeAndEffectiveUnsafeRust, StatementsAndExpressions, StatementsAndExpressionsReference, Traits, TypeSystemBasics
+- expected_entities: statements_and_expressions
+
+### rustc error E0277 trait bound not satisfied
+
+- n_retrieved: 37
+- concept_mrr: 0.125
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.193
+- concept_ndcg@3: 0.0
+- concept_ndcg@5: 0.0
+- concept_precision: 0.0
+- concept_precision@1: 0.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.0
+- concept_precision@5: 0.0
+- concept_recall: 0.0
+- concept_recall@1: 0.0
+- concept_recall@10: 0.5
+- concept_recall@3: 0.0
+- concept_recall@5: 0.0
+- source_mrr: 0.125
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.193
+- source_ndcg@3: 0.0
+- source_ndcg@5: 0.0
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.0
+- source_precision@5: 0.0
+- source_recall: 0.0
+- source_recall@1: 0.0
+- source_recall@10: 0.5
+- source_recall@3: 0.0
+- source_recall@5: 0.0
+- retrieved_entities: AsyncCancellationSafety, AsyncProgramming, Borrowing, ConcurrencyModels, ConstGenericsAndTraitObjects, ConstGenericsValuesAsTypeParameters, ConstTraitImplPreview, DispatchMechanisms, ErrorHandlingBasics, ErrorHandlingControlFlow, ErrorHandlingIntermediate, ErrorHandlingQuiz, GenericAssociatedTypesGATs, Generics, Lifetimes, LifetimesAdvanced, MacrosAdvanced, MemoryManagement, NameResolutionAndHIRInRustc, Ownership, OwnershipFormalization, PerformanceOptimization, ReturnPositionImplTraitInTraitsRPITITPreview, RustBeltAndVerificationToolchain, RustCompilerInternalsAndDriverArchitecture, SafeAndEffectiveUnsafeRust, SpecializationPreview, StatementsAndExpressions, SubtypeAndVariance, TheRustcQuerySystemAndIncrementalCompilation, TheTraitSolverInRustc, Traits, TypeInference, TypeInferenceComplexity, TypeLevelProgramming, TypeSystemBasics, TypeTheory
+- expected_entities: generics, raits
+
+### rust Scenario Decision Tree Atlas tutorial
+
+- n_retrieved: 28
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: APIDesignPatterns, AsyncProgramming, ConceptDefinitionDecisionForest, DesignPatternsOverview, FFIPatternsInRust, IdiomsSpectrum, LogicalReasoningAtlas, Ownership, OwnershipPerformanceOptimization, ParadigmMatrix, ReasoningJudgmentTreeAtlas, Roadmap, Rust196StabilizedFeaturesCurrentPatch1961, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust1971StablePatch, Rust197CompatibilityMigrationDecisionTrees, Rust198Preview, RustAntiPatterns, RustAntiPatternsAndPitfallsAtlas, RustBeltPredicateMap, RustIdiomsAtlas, RustPerformanceIdioms, RustVersionTracking, SafeAndEffectiveUnsafeRust, ScenarioDecisionTreeAtlas, Traits, UnsafeRustPatterns
+- expected_entities: scenario_decision_tree_atlas
+
+### explain Process Monitoring and Diagnostics in Rust in rust
+
+- n_retrieved: 9
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.111
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.111
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedProcessManagementInRust, AsyncProcessManagementInRust, InterProcessCommunicationMechanismsInRust, ModernProcessManagementLibrariesInRust, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, ProcessTestingAndBenchmarkingInRust
+- expected_entities: process_monitoring_and_diagnostics_in_rus
+
+### rust Poison, Undefined Behavior, and Freeze in LLVM IR tutorial
+
+- n_retrieved: 65
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ActorSemanticsFromHewittSAxiomsToTheRustEcosystem, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, ApplicationDomains, AsyncProgramming, BehaviorConsideredUndefined, BorrowSanitizerRuntimeTreeBorrowsViolationDetection, CargoManifestReference, CargoWorkspaces, CategoryTheory, CompilerDiagnosticsAndUITests, CompilerInfrastructure, ConcurrencyModels, CratesAndSourceFiles, CrossCompilation, EffectSystem, EffectsAndPurity, EmbeddedSystems, Evolution, Generics, IndustrialRustAdoptionCaseStudies, InlineAssembly, IntegratingRustIntoExistingPlatformsAndCodebases, Items, LLVMBackendAndCodeGenerationInRustc, Linkage, MIRCodegenAndLLVMIRPrimer, MacrosAdvanced, MemoryManagement, MiriRustUndefinedBehaviorDetector, ModernVerificationTools, OperatingSystems, OperationalSemantics, Ownership, ParadigmMatrix, PoisonUndefinedBehaviorAndFreezeInLLVMIR, ProcessCalculiForRustCSPCCSAndThePiCalculus, Roadmap, Rust196StabilizedFeaturesCurrentPatch1961, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust1971StablePatch, Rust198Preview, RustCompilerInternalsAndDriverArchitecture, RustFFI, RustForOperatingSystemKernelDevelopment, RustVersionTracking, RustVsC, RustVsGo, RustVsOCamlOwnershipAndAlgebraicEffectsInSystemsAndFunctionalProgramming, RustcAndCargoZUnstableFlagsReference, RustcDriverRustc_interfaceAndStableMIR, SafeAndEffectiveUnsafeRust, SafetyBoundaries, TargetTierPlatformSupportGuaranteesAndChangesInRust190197, TestingTheRustCompiler, TheRustRuntime, TheRustcQuerySystemAndIncrementalCompilation, ToolchainAndCargo, Traits, TreeBorrowsDeepDive, TypeSystemBasics, TypeTheory, UnsafeRustPatterns, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: poison,_undefined_behavior,_and_freeze_in_llvm_ir
+
+### difference between `no_std` and Bare-Metal Idioms and Target Tier Platform Support: Guarantees and Changes in Rust 1.90–1.97 in rust
+
+- n_retrieved: 83
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 0.92
+- concept_ndcg@3: 0.92
+- concept_ndcg@5: 0.92
+- concept_precision: 0.4
+- concept_precision@1: 1.0
+- concept_precision@10: 0.2
+- concept_precision@3: 0.667
+- concept_precision@5: 0.4
+- concept_recall: 1.0
+- concept_recall@1: 0.5
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 0.92
+- source_ndcg@3: 0.92
+- source_ndcg@5: 0.92
+- source_precision@1: 1.0
+- source_precision@10: 0.2
+- source_precision@3: 0.667
+- source_precision@5: 0.4
+- source_recall: 1.0
+- source_recall@1: 0.5
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: APIDesignAndSemVerIdiomsInRust, AdvancedProcessManagementInRust, AlgorithmEngineeringPractice, ApplicationDomains, AsyncInNo_stdAndEmbeddedSystems, AsyncProcessManagementInRust, AsyncProgramming, AtomicsAndMemoryOrdering, BareMetalBootAndLinkerScripts, BareMetalRust, Borrowing, CargoAuthenticationAndBuildCache, CargoBuildStd, CargoCommandsReference, CargoConfiguration, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoSemVerChecksPreview, CargoWorkflow, CoercionAndCasting, Collections, ConcurrencyModels, CrossCompilation, CustomBareMetalAsyncExecutor, DesignPatternsOverview, EmbassyAsyncFrameworkDeepDive, EmbeddedDebuggingAndLogging, EmbeddedFormalMemoryModel, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, ErrorHandlingIntermediate, Generics, IdiomsSpectrum, IndustrialRustAdoptionCaseStudies, IntegratingRustIntoExistingPlatformsAndCodebases, InterProcessCommunicationMechanismsInRust, InterruptAndExceptionModel, IteratorIdiomsInRust, LLVMBackendAndCodeGenerationInRustc, Lifetimes, MISRARustAndSafetyCriticalEmbeddedGuidelines, MemoryManagement, ModernProcessManagementLibrariesInRust, NewtypeAndWrapperTypes, No_stdAndBareMetalIdioms, No_stdAndBareMetalRust, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, OperationalSemantics, Ownership, PACAndHALImplementation, Panic_handlerAndNo_stdRuntime, ParadigmMatrix, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, RTICRealTimeTaskSchedulingFrameworkDeepDive, RTOSAndSchedulingModelsInRust, Roadmap, RustAPIGuidelinesCanonicalGuide, RustFFI, RustForOperatingSystemKernelDevelopment, RustVsAdaSPARK, RustVsC, RustVsGo, RustcAndCargoZUnstableFlagsReference, RustcDriverRustc_interfaceAndStableMIR, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, SmartPointers, TargetTierPlatformSupportGuaranteesAndChangesInRust190197, TestingTheRustCompiler, ToolchainAndCargo, Traits, TypeConversions, TypeSystemBasics, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: `no_std`_and_bare-metal_idioms, arget_tier_platform_support:_guarantees_and_changes_in_rust_1.90–1.97
+
+### best practices for Cargo Dependency Resolution
+
+- n_retrieved: 43
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: ArchitecturePatterns, AsyncProgramming, CargoAuthenticationAndBuildCache, CargoBuildScriptsBuildRs, CargoCommandsReference, CargoConfiguration, CargoDependencyResolution, CargoGettingStarted, CargoGuidePractices, CargoManifestReference, CargoProfilesAndLints, CargoPublicTrueDependencyVisibilityAndResolverV3, CargoRegistriesAndPublishing, CargoSecurityAdvisoriesCVE20265222AndCVE20265223, CargoSourceReplacement, CargoWorkflow, CargoWorkspaces, CloudNative, ConcurrencyModels, CoreCratesIndex, CrossCompilation, CrossLayerDependencyAndImplicationTopology, DevOpsAndCICD, EngineeringPracticeAndProductionGradePatterns, ErrorHandlingIntermediate, EventDrivenArchitecture, FormalMethodsIndustrialization, LearningMvpPath, MicroservicePatterns, ModulesAndPaths, Ownership, PatternSelectionBestPractices, PerformanceOptimization, Roadmap, RustFFI, RustVsC, SafeAndEffectiveUnsafeRust, SecurityPractices, TerminologyGlossary, TestingStrategies, ToolchainAndCargo, TypeSystemBasics, ZeroCostAbstractions
+- expected_entities: cargo_dependency_resolution
+
+### rust Async Drop Preview tutorial
+
+- n_retrieved: 51
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncAdvanced, AsyncCancellationSafety, AsyncClosures, AsyncDropPreview, AsyncIOUringAndCompletionBasedAsyncIOPreview, AsyncProgramming, Borrowing, CargoDependencyResolution, CargoGettingStarted, CargoManifestReference, CargoWorkflow, ConcurrencyModels, CraneliftBackendPreview, Evolution, ExecutorFairnessAndScheduling, FutureAndExecutorMechanisms, GenBlocksPreview, Generics, GlommioAndThreadPerCoreAsyncRuntimes, HighPerformanceNetworkServiceArchitecture, Iterators, LearningMvpPath, Lifetimes, LockingPrimitives, MachineLearningEcosystem, MacrosAdvanced, NetworkProgramming, Ownership, OwnershipFormalization, ParallelFrontendPreview, PerformanceOptimization, PinAndUnpin, Roadmap, Rust1100Preview, Rust196StabilizedFeaturesCurrentPatch1961, Rust1970PreviewArchive, Rust1970StabilizedFeatures, Rust1971StablePatch, Rust198Preview, Rust199Preview, RustVersionTracking, SafeAndEffectiveUnsafeRust, StdAutodiffPreview, StreamAlgebraAndBackpressure, SubtypeAndVariance, TokioRuntimeInternals, ToolchainAndCargo, Traits, TypeSystemBasics, WakerContractDeepDive, WebFrameworks
+- expected_entities: async_drop_preview
+
+### how does Type Inference Complexity work
+
+- n_retrieved: 41
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedTraits, AssociatedTypeDefaults, AsyncCancellationSafety, AsyncProgramming, Borrowing, CompilerInfrastructure, ErrorHandlingBasics, ErrorHandlingDeepDive, ErrorHandlingIntermediate, FormalMethodsIndustrialization, GenericAssociatedTypesGATs, Generics, LLVMBackendAndCodeGenerationInRustc, Lifetimes, LifetimesAdvanced, LoggingObservability, MacrosAdvanced, MemoryManagement, NLLAndPolonius, NameResolutionAndHIRInRustc, NeverType, Ownership, OwnershipFormalization, PerformanceOptimization, RTTIAndDynamicTypeIdentification, RustBeltAndVerificationToolchain, RustcDriverRustc_interfaceAndStableMIR, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SpecializationPreview, SubtypeAndVariance, TheRustcQuerySystemAndIncrementalCompilation, TheTraitSolverInRustc, TheoremInferenceForest, Traits, TypeCheckingAndInferenceInRustc, TypeErasure, TypeInference, TypeInferenceComplexity, TypeSystemBasics, TypeTheory
+- expected_entities: ype_inference_complexity
+
+### what is Rust Idioms Atlas
+
+- n_retrieved: 43
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: APIDesignPatterns, AsyncPatterns, AsyncProgramming, Borrowing, CoercionAndCasting, ConcurrencyPatterns, DesignPatternsOverview, DistributedSystems, ErrorHandlingBasics, ErrorHandlingDeepDive, ErrorHandlingIntermediate, Evolution, FFIPatternsInRust, FormalMethodsIndustrialization, Generics, IdiomsSpectrum, LoggingObservability, NewtypeAndWrapperTypes, Ownership, OwnershipPerformanceOptimization, ParadigmMatrix, ParadigmTransitionMatrix, PatternCompositionAlgebra, PerformanceOptimization, Roadmap, RustAntiPatterns, RustAntiPatternsAndPitfallsAtlas, RustDesignPatternAndArchitecturePatternSemanticAtlas, RustEditionMechanismAndMigrationGuide, RustErrorHandlingIdioms, RustIdiomsAtlas, RustInAI, RustPerformanceIdioms, RustVersionTracking, SafeAndEffectiveUnsafeRust, SmartPointers, SystemDesignPrinciples, Traits, TypeConversions, TypeSystemBasics, UnsafeRustPatterns, WebAssemblyEcosystem, ZeroCopyParsing
+- expected_entities: rust_idioms_atlas
+
+### how does Rust In AI work
+
+- n_retrieved: 73
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AIIntegration, AIOntologyAndRustSemantics, AISafetyAndAlignment, AUTOSARAndRust, AerospaceCertificationFormalMethods, AlgebraicEffectsAndEffectHandlersFromFreeMonadsToRustKeywordEffects, AsyncInNo_stdAndEmbeddedSystems, AsyncProgramming, AuthoritySourceMap, BareMetalBootAndLinkerScripts, Borrowing, CargoVetAndSupplyChainAuditing, CertifiedToolchainsAndCertifiedPackageInventory, ConceptDefinitionAtlas, ConcurrencyModels, CrossCompilation, CustomBareMetalAsyncExecutor, DependentTypesAndRefinementTypes, EmbeddedDebuggingAndLogging, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, Evolution, FerroceneTheDeliveredQualifiedRustToolchainForSafetyCriticalSystems, FormalMethodsIndustrialization, Futures, InterLayerMappingAtlas, InterruptAndExceptionModel, KnowledgeGraphOntologyV20, L7ResearchAndExperimental, LLMSystemArchitecture, Lifetimes, LinearAndAffineLogic, MISRARustAndSafetyCriticalEmbeddedGuidelines, MLOpsAndLLMOps, MachineLearningEcosystem, MemoryManagement, Methodology, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, OperationalSemantics, Ownership, OwnershipFormalization, Panic_handlerAndNo_stdRuntime, PerformanceOptimization, ProcessCalculiForRustCSPCCSAndThePiCalculus, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustFFI, RustInAI, RustInQuantumComputingEcosystems, RustInSafetyCriticalSystems, RustInSpacePreview, RustVersionTracking, RustVsAdaSPARK, SafeAndEffectiveUnsafeRust, SafetyBoundaries, SafetyCriticalBareMetalOperatingSystemsInRust, SafetyCriticalRustTopicIndex, SafetyCriticalSystemsEngineering, SemanticModelAtlas, SemanticSpace, SeparationLogic, TerminologyGlossary, ToolchainAndCargo, TypeSystemBasics, TypeTheory, UnifiedLanguageSemanticModelExpressivenessMatrix, VerificationToolchain, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem
+- expected_entities: rust_in_ai
+
+### Error Handling Basics overview
+
+- n_retrieved: 21
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AsyncProgramming, Borrowing, CoercionAndCasting, ConcurrencyModels, ErrorHandlingBasics, ErrorHandlingControlFlow, ErrorHandlingDeepDive, ErrorHandlingIntermediate, ErrorHandlingQuiz, Generics, Lifetimes, LoggingObservability, MemoryManagement, NewtypeAndWrapperTypes, Ownership, RustErrorHandlingIdioms, RustVersionTracking, Traits, TypeConversions, TypeSystemBasics, WebAssemblyEcosystem
+- expected_entities: error_handling_basics
+
+### panic handler and allocator in no_std
+
+- n_retrieved: 64
+- concept_mrr: 0.0
+- concept_ndcg@1: 0.0
+- concept_ndcg@10: 0.0
+- concept_ndcg@3: 0.0
+- concept_ndcg@5: 0.0
+- concept_precision: 0.0
+- concept_precision@1: 0.0
+- concept_precision@10: 0.0
+- concept_precision@3: 0.0
+- concept_precision@5: 0.0
+- concept_recall: 0.0
+- concept_recall@1: 0.0
+- concept_recall@10: 0.0
+- concept_recall@3: 0.0
+- concept_recall@5: 0.0
+- source_mrr: 0.5
+- source_ndcg@1: 0.0
+- source_ndcg@10: 0.387
+- source_ndcg@3: 0.387
+- source_ndcg@5: 0.387
+- source_precision@1: 0.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 0.5
+- source_recall@1: 0.0
+- source_recall@10: 0.5
+- source_recall@3: 0.5
+- source_recall@5: 0.5
+- retrieved_entities: AdvancedProcessManagementInRust, ApplicationDomains, AsyncFFIBoundary, AsyncInNo_stdAndEmbeddedSystems, AsyncProcessManagementInRust, AsyncProgramming, AtomicsAndMemoryOrdering, BareMetalBootAndLinkerScripts, BareMetalRust, Borrowing, CargoBuildStd, CargoConfiguration, CertifiedToolchainsAndCertifiedPackageInventory, ConcurrencyModels, CriticalSectionsAndSynchronizationOnBareMetal, CrossCompilation, CustomBareMetalAsyncExecutor, EmbassyAsyncFrameworkDeepDive, EmbeddedDebuggingAndLogging, EmbeddedFormalMemoryModel, EmbeddedMemoryAllocators, EmbeddedMemoryLayoutAndHeapSafety, EmbeddedNetworkingAndIoTProtocolsInNo_stdRust, EmbeddedProtocolAndPeripheralDrivers, EmbeddedRTOSAndSafetyCriticalFrameworks, EmbeddedSystems, ErrorHandlingDeepDive, GenBlocksPreview, Generics, InterProcessCommunicationMechanismsInRust, InterruptAndExceptionModel, Lifetimes, LinearizabilityAndTheConsistencySpectrum, LinkerScriptsAndMemoryLayoutForEmbeddedRust, LoggingObservability, MemoryManagement, ModernProcessManagementLibrariesInRust, No_stdAllocatorsAndPanicHandlers, No_stdAndBareMetalIdioms, No_stdAndBareMetalRust, No_stdStartupAndRuntimeDeepDive, No_stdSynchronizationPrimitives, Ownership, PACAndHALImplementation, PanicAndAbort, Panic_handlerAndNo_stdRuntime, PerformanceOptimization, PinAndUnpin, ProcessModelAndLifecycleInRust, ProcessMonitoringAndDiagnosticsInRust, ProcessPerformanceEngineeringInRust, ProcessSecurityAndSandboxingInRust, RISCVAndAVREmbeddedRustDevelopment, RTICVsEmbassyRealTimeFrameworksInRust, RustFFI, RustVsAdaSPARK, RustVsC, RustVsZig, SafeAndEffectiveUnsafeRust, SafetyCriticalBareMetalOperatingSystemsInRust, TheNo_stdAllocCrateEcosystem, Traits, TypeSystemBasics, UnsafeInAsyncContexts
+- expected_entities: global_allocator, no_std, panic_handler
+
+### Advanced WebAssembly Development with Rust overview
+
+- n_retrieved: 42
+- concept_mrr: 1.0
+- concept_ndcg@1: 1.0
+- concept_ndcg@10: 1.0
+- concept_ndcg@3: 1.0
+- concept_ndcg@5: 1.0
+- concept_precision: 0.2
+- concept_precision@1: 1.0
+- concept_precision@10: 0.1
+- concept_precision@3: 0.333
+- concept_precision@5: 0.2
+- concept_recall: 1.0
+- concept_recall@1: 1.0
+- concept_recall@10: 1.0
+- concept_recall@3: 1.0
+- concept_recall@5: 1.0
+- source_mrr: 1.0
+- source_ndcg@1: 1.0
+- source_ndcg@10: 1.0
+- source_ndcg@3: 1.0
+- source_ndcg@5: 1.0
+- source_precision@1: 1.0
+- source_precision@10: 0.1
+- source_precision@3: 0.333
+- source_precision@5: 0.2
+- source_recall: 1.0
+- source_recall@1: 1.0
+- source_recall@10: 1.0
+- source_recall@3: 1.0
+- source_recall@5: 1.0
+- retrieved_entities: AdvancedWebAssemblyDevelopmentWithRust, ApplicationDomains, AsyncProgramming, BloomTaxonomy, Borrowing, CAbiObjectModel, CCToRustEngineeringComparisonRoadmap, CloudNative, ComprehensiveRustMapping, ConcurrencyModels, DesignPatternsOverview, DistributedSystems, EmbeddedGraphicsDevelopmentWithRust, EvaluationStrategies, Evolution, FormalMethodsIndustrialization, Generics, LearningGuide, Lifetimes, MacrosAdvanced, MemoryManagement, Ownership, OwnershipFormalization, PatternCompositionAlgebra, PatternSemanticSpaceIndex, PerformanceOptimization, Roadmap, RustBeltAndVerificationToolchain, RustEditionMechanismAndMigrationGuide, RustFFI, RustForWebAssemblyResearch, RustInAI, RustVersionTracking, RustVsC, SafeAndEffectiveUnsafeRust, ToolchainAndCargo, Traits, TypeSystemBasics, VariableModel, WASIAndWebAssemblyComponentModel, WebAssemblyEcosystem, WebFrameworks
+- expected_entities: advanced_webassembly_development_with_rus

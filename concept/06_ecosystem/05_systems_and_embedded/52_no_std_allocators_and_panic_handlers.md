@@ -6,7 +6,7 @@
 >
 > **EN**: no_std Allocators and Panic Handlers
 > **Summary**: A canonical integration guide for `#![no_std]` runtimes: implementing `#[global_allocator]`, selecting embedded allocators, writing custom `#[panic_handler]`, handling OOM, and validating the resulting firmware on ARM Cortex-M and RISC-V hardware.
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 >
 > **受众**: [专家]
 > **Bloom 层级**: L4
@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [Rust Reference — Panic Handler](https://doc.rust-lang.org/reference/runtime.html#the-panic_handler-attribute) · [Rust Reference — The no_std attribute](https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute) · [embedded-alloc crate](https://docs.rs/embedded-alloc/) · [linked_list_allocator crate](https://docs.rs/linked_list_allocator/) · [critical-section crate](https://docs.rs/critical-section/) · [Ferrous Systems — Knurling](https://knurling.ferrous-systems.com/) · [Rust for Linux — Kernel Rust](https://www.kernel.org/doc/html/latest/rust/index.html)
+> **来源**: [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [Rust Reference — Panic Handler](https://doc.rust-lang.org/reference/runtime.html#the-panic_handler-attribute) · [Rust Reference — The no_std attribute](https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute) · [embedded-alloc crate](https://docs.rs/embedded-alloc/) · [linked_list_allocator crate](https://docs.rs/linked_list_allocator/) · [critical-section crate](https://docs.rs/critical-section/) · [Ferrous Systems — Knurling](https://knurling.ferrous-systems.com/) · [Knurling Books](https://knurling-books.org/) · [Rust for Linux — Kernel Rust](https://www.kernel.org/doc/html/latest/rust/index.html) · [probe-rs](https://probe.rs/) · [Tock OS](https://www.tockos.org/) · [Hubris](https://hubris.oxide.computer/)
 >
 > **横向对比**: [C/C++ 嵌入式堆管理](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [Rust vs Zig 裸机生态](../../05_comparative/01_systems_languages/06_rust_vs_zig.md)
 

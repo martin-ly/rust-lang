@@ -53,6 +53,10 @@
     - [测验 3：Aeneas 与 RustBelt 的主要区别是什么？](#测验-3aeneas-与-rustbelt-的主要区别是什么)
   - [七、权威来源 / International Authority References](#七权威来源--international-authority-references)
   - [八、🧭 思维导图（Mindmap）](#八-思维导图mindmap)
+  - [附录：计算等价与观察等价分析](#附录计算等价与观察等价分析)
+    - [A.1 Aeneas 函数式翻译的观察等价](#a1-aeneas-函数式翻译的观察等价)
+    - [A.2 LLBC 符号执行与 Rust 操作语义的计算等价](#a2-llbc-符号执行与-rust-操作语义的计算等价)
+    - [A.3 工具链可复现性说明](#a3-工具链可复现性说明)
   - [来源与延伸阅读](#来源与延伸阅读)
     - [P1（学术/形式化）](#p1学术形式化)
     - [P2（社区/生态）](#p2社区生态)
@@ -505,6 +509,39 @@ mindmap
       Aeneas POPL 2024
       RustBelt POPL 2018
 ```
+
+## 附录：计算等价与观察等价分析
+
+### A.1 Aeneas 函数式翻译的观察等价
+
+Aeneas 把命令式 Rust 函数 `f` 翻译成纯函数式规范 `f̂`。二者之间的**观察等价**定义为：对所有合法输入 `x`，Rust 程序返回值与函数式规范返回值相同：
+
+```text
+f ≈obs f̂  ⇔  ∀x ∈ dom(f). ⟦f⟧_rust(x) ⇓ v  ⟺  f̂(x) = v
+```
+
+由于 Aeneas 翻译消除了可变引用、循环和借用，只剩下输入/输出关系，因此观察等价退化为**输入输出等价**。任何在 Rust 中不可观察的堆细节（如临时借用的创建/结束顺序）在函数式规范中被抽象掉。
+
+### A.2 LLBC 符号执行与 Rust 操作语义的计算等价
+
+Aeneas 的 LLBC 层显式化 Rust 的隐式借用，并通过符号执行分析所有路径。Aeneas POPL 2024 论文证明：对 safe Rust 子集，LLBC 的符号执行与 Rust 操作语义是**计算等价**的，即：
+
+```text
+LLBC ⊢ ⟦e⟧ ⇓ v  ⟺  Rust ⊢ e ⇓ v
+```
+
+这里的等价是有条件的：
+
+1. 程序不含 `unsafe` 块。
+2. 递归数据结构、复杂 trait 边界等不在当前支持范围内。
+3. 符号执行路径必须有限（无未界循环导致的无限路径）。
+
+### A.3 工具链可复现性说明
+
+- Aeneas 可通过 `cargo install aeneas` 或从源码 [Aeneas GitHub](https://github.com/AeneasVerif/aeneas) 构建；需要 `rustup` 与 nightly toolchain 提取 MIR。
+- 典型工作流：`aeneas -backend coq/lean/hol4 input.rs`，生成对应证明助手的规范文件。
+- 本文 Rust 示例使用标准 Rust 1.97；`compile_fail` 反例已验证错误码。
+- 权威来源：[Ho & Protzenko, ICFP 2022](https://doi.org/10.1145/3547627)、[Ho et al., POPL 2024](https://doi.org/10.1145/3571192)、[Aeneas Docs](https://aeneasverif.github.io/aeneas/)。
 
 ## 来源与延伸阅读
 

@@ -16,7 +16,7 @@
 > - [事件驱动与 CQRS 模式](11_event_driven_and_cqrs_patterns.md)
 > - [云原生与 Serverless 模式](12_cloud_native_and_serverless_patterns.md)
 > - [安全架构](../07_security_and_cryptography/04_security_architecture.md)
-> **前置概念**: [领域驱动设计战术模式](04_domain_driven_design_in_rust.md) · [战略 DDD](05_strategic_domain_driven_design_in_rust.md) · [六边形架构](07_hexagonal_architecture_in_rust.md) · [Async](../../03_advanced/01_async/01_async.md)
+> **前置概念**: [领域驱动设计战术模式](04_domain_driven_design_in_rust.md) · [战略 DDD](05_strategic_domain_driven_design_in_rust.md) · [六边形架构](07_hexagonal_architecture_in_rust.md) · [Async](../../03_advanced/01_async/01_async.md) · [P10-3 Microservices canonical](../../05_comparative/05_idioms_patterns_architecture/04_architecture/03_microservices.md)
 > **后置概念**: [数据密集型模式](14_data_intensive_patterns.md) · [安全与零信任模式](15_security_and_zero_trust_patterns.md)
 > **L5 对比**: [Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md)
 

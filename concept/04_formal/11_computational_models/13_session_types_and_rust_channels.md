@@ -51,6 +51,10 @@
     - [测验 3：多党会话类型的核心操作是什么？](#测验-3多党会话类型的核心操作是什么)
   - [七、权威来源 / International Authority References](#七权威来源--international-authority-references)
   - [八、🧭 思维导图（Mindmap）](#八-思维导图mindmap)
+  - [附录：计算等价与观察等价分析](#附录计算等价与观察等价分析)
+    - [A.1 会话类型程序的观察等价](#a1-会话类型程序的观察等价)
+    - [A.2 Rust 通道与会话类型演算的计算等价](#a2-rust-通道与会话类型演算的计算等价)
+    - [A.3 工具链可复现性说明](#a3-工具链可复现性说明)
   - [来源与延伸阅读](#来源与延伸阅读)
 
 ---
@@ -551,10 +555,40 @@ mindmap
       Caires & Pfenning 2010
 ```
 
+## 附录：计算等价与观察等价分析
+
+### A.1 会话类型程序的观察等价
+
+两个会话类型程序 `P` 与 `Q` 是**观察等价**的，当且仅当它们与任意兼容环境交互时产生相同的**通信迹**（communication trace）：即发送/接收的消息序列、分支选择顺序完全一致。形式化地：
+
+```text
+P ≈obs Q  ⇔  ∀C[·].  trace(C[P]) = trace(C[Q])
+```
+
+其中 `C[·]` 是与会话端点兼容的上下文。会话类型的对偶性保证：若客户端遵守 `S`、服务端遵守 `S̄`，则二者交互不会出现消息类型不匹配或方向错误。
+
+### A.2 Rust 通道与会话类型演算的计算等价
+
+Rust 标准库通道 `std::sync::mpsc` 本身只保证：
+
+1. 消息类型在编译期匹配（对偶的静态部分）。
+2. 每个 `Sender`/`Receiver` 不实现 `Copy`（线性资源的部分保证）。
+
+通过**类型状态机**把 `!T.?U.end` 等协议编码为 Rust 类型后，可以得到一个与会话类型演算**计算等价**的子集：任何良类型的 Rust 程序都对应一个良类型的会话进程，且二者消息迹相同。但这种等价是**部分**的：Rust 类型状态机无法静态保证协议一定执行到 `end`（例如通道被提前 `drop`），因此只得到「类型安全」而非「进度/死锁自由」。
+
+### A.3 工具链可复现性说明
+
+- 正向示例使用 `std::sync::mpsc`（Rust 1.97，Edition 2024），无需额外依赖；反例中的 `compile_fail` 块已由 `check_concept_code_blocks.py` 验证错误码。
+- 完整会话类型静态检查可使用 [session_types](https://docs.rs/session_types) crate 或 [mpst-rust](https://github.com/NicolasLagaillardie/mpst-rust) 复现。
+- 理论来源：[Honda 1993](https://doi.org/10.1007/3-540-58043-3_19)、[Honda, Yoshida & Carbone 2008](https://doi.org/10.1145/1328438.1328472)、[Wadler 2012, *Propositions as Sessions*](https://doi.org/10.1145/2103656.2103661)。
+
 ## 来源与延伸阅读
 
 - [RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Aeneas Project](https://aeneasverif.github.io/)
 - [Flux Refinement Types](https://flux-rs.github.io/)
+- [MiniRust](https://github.com/RalfJung/minirust) — Rust 核心语言可执行操作语义
+- [Tree Borrows](https://perso.crans.org/vanile/treebor/) — Rust 别名模型形式化
+- [Kani Rust Verifier](https://model-checking.github.io/kani/) — 可用于验证通道协议属性
 - [arXiv](https://arxiv.org/)
 - [ACM Digital Library](https://dl.acm.org/)

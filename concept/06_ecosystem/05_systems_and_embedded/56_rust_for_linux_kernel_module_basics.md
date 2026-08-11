@@ -6,7 +6,7 @@
 >
 > **EN**: Rust for Linux Kernel Module Basics
 > **Summary**: A hands-on canonical introduction to writing Linux kernel modules in Rust: module declaration, no_std/no_main runtime, panic handler, alloc configuration, C FFI bindings, kernel abstractions, and build/insmod/rmmod workflows aligned with the upstream Rust for Linux project.
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 >
 > **受众**: [专家]
 > **Bloom 层级**: L4
@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [Rust for Linux](https://rust-for-linux.com/) · [Linux Kernel Rust Documentation](https://www.kernel.org/doc/html/latest/rust/index.html) · [Rust for Linux Samples](https://github.com/Rust-for-Linux/linux/tree/rust-next/samples/rust) · [LWN — Rust in the Linux Kernel](https://lwn.net/Articles/829858/) · [Google Security Blog — Rust in Linux](https://security.googleblog.com/2021/04/rust-in-linux-kernel.html) · [The Rust Reference — no_std](https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute) · [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/)
+> **来源**: [Rust for Linux](https://rust-for-linux.com/) · [Linux Kernel Rust Documentation](https://www.kernel.org/doc/html/latest/rust/index.html) · [Rust for Linux Samples](https://github.com/Rust-for-Linux/linux/tree/rust-next/samples/rust) · [LWN — Rust in the Linux Kernel](https://lwn.net/Articles/829858/) · [Google Security Blog — Rust in Linux](https://security.googleblog.com/2021/04/rust-in-linux-kernel.html) · [The Rust Reference — no_std](https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute) · [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [probe-rs](https://probe.rs/) · [Tock OS](https://www.tockos.org/) · [Hubris](https://hubris.oxide.computer/)
 >
 > **横向对比**: [Rust vs C/C++ 内核开发](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)
 

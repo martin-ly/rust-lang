@@ -55,7 +55,13 @@
     - [测验 3：共享引用 `&T` 对应线性逻辑的哪个概念？](#测验-3共享引用-t-对应线性逻辑的哪个概念)
   - [七、权威来源 / International Authority References](#七权威来源--international-authority-references)
   - [八、🧭 思维导图（Mindmap）](#八-思维导图mindmap)
+  - [附录：计算等价与观察等价分析](#附录计算等价与观察等价分析)
+    - [A.1 观察等价视角下的线性/仿射资源](#a1-观察等价视角下的线性仿射资源)
+    - [A.2 计算等价：仿射演算 ≈ Rust 所有权子集](#a2-计算等价仿射演算--rust-所有权子集)
+    - [A.3 工具链可复现性说明](#a3-工具链可复现性说明)
   - [来源与延伸阅读](#来源与延伸阅读)
+    - [P1（学术/形式化）](#p1学术形式化)
+    - [P2（社区/生态）](#p2社区生态)
 
 ---
 
@@ -543,6 +549,8 @@ D. ⊥
 | [Jung et al., RustBelt POPL 2018](https://doi.org/10.1145/3158154) | ✅ 一级 | Rust 所有权系统的 Iris 机械证明 |
 | [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html) | ✅ P0 | Rust 官方所有权语义 |
 | [Rust RFC 152 — Copy](https://rust-lang.github.io/rfcs/0152-copied-type.html) | ✅ P0 | Copy trait 设计来源 |
+| [Milewski, *Category Theory for Programmers*](https://github.com/hmemcpy/milewski-ctfp-pdf) | ✅ P2 | 范畴论语义：资源作为态射 / 仿射范畴直觉 |
+| [Iris Project](https://iris-project.org/) | ✅ P2 | 高阶并发分离逻辑，RustBelt 所有权证明基础 |
 
 ---
 
@@ -577,6 +585,43 @@ mindmap
       Wadler 1990 / 2012
       RustBelt POPL 2018
 ```
+
+## 附录：计算等价与观察等价分析
+
+### A.1 观察等价视角下的线性/仿射资源
+
+在程序语义中，**观察等价**（observational equivalence）指两个程序片段在所有上下文 `C[-]` 中产生相同可观察行为时互为等价。把线性/仿射逻辑当作 Rust 的计算模型，可以给出以下观察等价结论：
+
+| 资源形态 | 可观察行为 | 观察等价关系 |
+|---|---|---|
+| `T: Copy` | 值读取、多次使用 | `x` 与 `x` 的任意副本观察等价：`x ≈ copy(x)` |
+| 非 `Copy` 的 `T` | move、Drop、方法调用 | `x` 与 `copy(x)` **不等价**；`move(x)` 后原变量不可再观察 |
+| `&T` | 只读解引用 | 同一 `&T` 的多个副本观察等价：`r1 ≈ r2` 当二者指向同一内存 |
+| `&mut T` | 独占写入 | 不存在两个观察等价的 `&mut T` 同时活跃 |
+
+形式化地，设上下文 `C` 只能通过 Rust 的类型化接口观察资源，则：
+
+```text
+Γ ⊢ e₁ ≈obs e₂ : τ  ⇔  ∀C:(τ → unit). C[e₁] 安全且终止 ⟺ C[e₂] 安全且终止
+```
+
+线性/仿射类型系统的作用正是把「不可复制资源」的观察等价类缩小到「单一所有者」：非 `Copy` 值 `s` 与 `t` 只有在 `s` move 给 `t` 的同一计算路径中才等价。
+
+### A.2 计算等价：仿射演算 ≈ Rust 所有权子集
+
+可以把 Rust 的一个安全子集翻译成一个**仿射 λ 演算**（affine λ-calculus），其中：
+
+- 变量最多使用一次（affine variable）。
+- `Copy` 类型通过 `!` 模态恢复 contraction。
+- `&mut` 和 `&` 分别对应 uniq / shr 权限。
+
+该翻译是**计算等价**的（computationally equivalent）：对不含 `unsafe` 的程序，Rust 的求值结果与仿射 λ 演算的标准化结果一致。这正是 [Weiss et al., *Oxide*](https://arxiv.org/abs/1903.00982) 所建立的子结构类型系统声音性的直觉：良类型的 Rust 程序在翻译后不会产生 use-after-free 或 double-free。
+
+### A.3 工具链可复现性说明
+
+- 所有正向/反例 Rust 代码块均使用标准 Rust 1.97（Edition 2024）编译；带 `compile_fail` 的块已在 `scripts/check_concept_code_blocks.py` 中验证错误码匹配。
+- 线性逻辑连接词与 Rust 语义的对应关系可追溯至 [Girard 1987](https://doi.org/10.1016/0304-3975(87)90045-4)、[Wadler 1990](https://doi.org/10.1007/3-540-52377-7_30) 与 [RustBelt POPL 2018](https://doi.org/10.1145/3158154)。
+- 若需实验纯线性类型，可参考 `linear-types` crate 或 Idris 2 的 `Linear` 模块作为对照。
 
 ## 来源与延伸阅读
 

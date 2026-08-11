@@ -9,7 +9,7 @@
 > **定位**: 为 Rust 算法实现提供模式级概览，连接语言特性（所有权、借用、迭代器、并发）与经典算法思想。
 > **前置概念**: [Iterator](../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md) · [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Generics](../../02_intermediate/01_generics/01_generics.md) · [Send/Sync](../../03_advanced/00_concurrency/02_send_sync_auto_traits.md)
 > **后置概念**: [算法与复杂度惯用法](../10_performance/03_algorithms_and_complexity_idioms.md) · [零拷贝解析](../11_domain_applications/26_zero_copy_parsing_in_rust.md) · [所有权感知算法](../11_domain_applications/27_ownership_aware_algorithms.md) · [并行与并发算法](../11_domain_applications/25_parallel_algorithms.md) · [c08_algorithms crate docs](../../../crates/c08_algorithms/docs/README.md)
-> **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
+> **L5 对比**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [P10-3 算法体系 canonical](../../05_comparative/05_idioms_patterns_architecture/02_algorithms/README.md)
 
 ---
 

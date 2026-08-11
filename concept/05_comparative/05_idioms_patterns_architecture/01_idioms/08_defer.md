@@ -135,6 +135,8 @@ fn main() {
 - [The Rust Programming Language — Drop Trait](https://doc.rust-lang.org/book/ch15-03-drop.html)
 - [Go Blog — Defer, Panic, and Recover](https://go.dev/blog/defer-panic-and-recover)（概念对比）
 
+- [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+
 ## 来源与延伸阅读
 
 - [RustBelt — Logical Foundations for Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/)（P1 形式化基础）

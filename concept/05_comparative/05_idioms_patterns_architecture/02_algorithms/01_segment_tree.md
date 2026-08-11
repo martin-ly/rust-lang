@@ -257,3 +257,9 @@ fn main() {
 - [segment-tree on crates.io](https://crates.io/crates/segment-tree) — P2：Rust 区间查询 crate。
 - [segment-tree docs on docs.rs](https://docs.rs/segment-tree/latest/segment_tree/) — P2：Rust 线段树 API 文档。
 - [cp-algorithms: Segment Tree](https://cp-algorithms.com/data_structures/segment_tree.html) — 区间查询与懒标记的竞赛编程参考。
+
+- [Rust Algorithm Club](https://github.com/weihanglo/rust-algorithm-club)
+
+- [CLRS — Introduction to Algorithms](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)
+
+- [Sedgewick & Wayne — Algorithms](https://algs4.cs.princeton.edu/home/)

@@ -153,6 +153,9 @@ pub fn add_stock_directly(state: &mut HashMap<String, u32>, sku: &str, qty: u32)
 - [Martin Fowler — Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html)
 - [Greg Young — CQRS Documents](https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf)
 
+- [Azure Architecture Center](https://learn.microsoft.com/azure/architecture/)
+- [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html)
+- [CNCF Cloud Native Interactive Landscape](https://www.cncf.io/)
 ## 形式化基础
 
 本页的工程模式可追溯到以下 L4 形式化/理论权威页：

@@ -236,3 +236,9 @@ fn main() {
 - [union-find on crates.io](https://crates.io/crates/union-find) — P2：Rust Union-Find crate。
 - [union-find docs on docs.rs](https://docs.rs/union-find/latest/union_find/) — P2：Union-Find API 文档。
 - [disjoint-set on crates.io](https://crates.io/crates/disjoint-set) — P2：Tarjan Union-Find 的 Rust 实现。
+
+- [Rust Algorithm Club](https://github.com/weihanglo/rust-algorithm-club)
+
+- [CLRS — Introduction to Algorithms](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)
+
+- [Sedgewick & Wayne — Algorithms](https://algs4.cs.princeton.edu/home/)

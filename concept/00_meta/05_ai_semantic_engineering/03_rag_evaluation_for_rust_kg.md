@@ -203,7 +203,48 @@ python tools/kg_rag/semantic_alignment_pipeline.py \
 
 ---
 
-## 六、指标解读与调优方向
+## 六、P10 生产化评估基线
+
+在 P10 中，我们使用本地 fine-tuned SentenceTransformer + BM25 混合检索，对 2513 条 golden queries 抽样 300 条进行生产化评估。
+
+```bash
+tools/kg_rag/.venv/Scripts/python tools/kg_rag/semantic_alignment_pipeline.py \
+  --kg concept/00_meta/kg_data_v3.json \
+  --eval tools/kg_rag/eval/golden_queries_v1.json \
+  --embed-provider sentence-transformers \
+  --embed-model tools/kg_rag/.cache/fine_tuned_augmented \
+  --hybrid --bm25-weight 0.3 \
+  --top-k 5 --sample 300 \
+  --markdown reports/P10_RAG_PRODUCTION_EVALUATION_2026_08.md
+```
+
+### 6.1 关键指标（300 样本）
+
+| 指标 | P9 基线 | P10 生产化 | 变化 |
+|---|---:|---:|---|
+| concept_recall@5 | 0.167 | **0.927** | +0.760 |
+| source_recall@5 | 0.583 | **0.938** | +0.355 |
+| concept_mrr | 0.389 | **0.891** | +0.502 |
+| source_mrr | 0.643 | **0.898** | +0.255 |
+| concept_ndcg@5 | — | **0.892** | — |
+| source_ndcg@5 | — | **0.899** | — |
+
+### 6.2 达成目标
+
+- golden query set：`tools/kg_rag/eval/golden_queries_v1.json` 含 2513 条样本，覆盖 L0–L7、跨域、错误码、版本特性、no_std/embedded、形式方法，远超 ≥200 目标。
+- `concept_recall@5 ≥ 0.50`：✅ 0.927
+- `source_recall@5 ≥ 0.75`：✅ 0.938
+- 完整报告：[`reports/P10_RAG_PRODUCTION_EVALUATION_2026_08.md`](../../../reports/P10_RAG_PRODUCTION_EVALUATION_2026_08.md)
+
+### 6.3 关键改进点
+
+1. **本地 fine-tuned embedding**：在 KG 实体标签与 scope notes 上使用对比学习微调，使 Rust 术语的向量表示更贴合概念层级。
+2. **BM25 + vector 混合检索**：BM25 捕获精确术语匹配，向量捕获语义泛化，两者加权融合（BM25 weight 0.3）。
+3. **SKOS 多语言归一化**：同时匹配中文查询与英文实体标签，降低语言漂移。
+
+---
+
+## 七、指标解读与调优方向
 
 | 指标偏低 | 可能原因 | 调优方向 |
 |---|---|---|
@@ -215,7 +256,7 @@ python tools/kg_rag/semantic_alignment_pipeline.py \
 
 ---
 
-## 七、与质量门的集成
+## 八、与质量门的集成
 
 RAG 评估产出应作为项目语义健康度量的补充观察项：
 
@@ -226,25 +267,26 @@ RAG 评估产出应作为项目语义健康度量的补充观察项：
 
 ---
 
-## 八、常见反例
+## 九、常见反例
 
-### 8.1 用 LLM 自动生成黄金标注却不校验
+### 9.1 用 LLM 自动生成黄金标注却不校验
 
 自动标注容易把"相关"当作"必需"，导致 recall 被人为抬高。黄金标注应由维护者按 AGENTS.md canonical 规则逐条确认。
 
-### 8.2 只看 aggregate 忽略 per-sample
+### 9.2 只看 aggregate 忽略 per-sample
 
 某些概念（如 `unsafe`、`Pin`）的检索难度远高于所有权。aggregate 达标可能掩盖特定主题的持续失败，应同时检查 per-sample 表格。
 
-### 8.3 混合不同嵌入模型却用同一基线对比
+### 9.3 混合不同嵌入模型却用同一基线对比
 
 `all-MiniLM-L6-v2` 与 `text-embedding-3-large` 的维度、训练分布不同，不能直接比较同一基线。每次基线报告必须注明嵌入提供者。
 
 ---
 
-## 九、延伸阅读
+## 十、延伸阅读
 
 - 概念权威页：[`concept/00_meta/05_ai_semantic_engineering/02_llm_rag_for_rust.md`](02_llm_rag_for_rust.md)
 - 工具脚本：[`tools/kg_rag/semantic_alignment_pipeline.py`](../../../tools/kg_rag/semantic_alignment_pipeline.py)
-- 当前基线：[`reports/RAG_EVALUATION_BASELINE_2026_08.md`](../../../reports/RAG_EVALUATION_BASELINE_2026_08.md)
+- P9 基线：[`reports/RAG_EVALUATION_BASELINE_2026_08.md`](../../../reports/RAG_EVALUATION_BASELINE_2026_08.md)
+- P10 生产化评估：[`reports/P10_RAG_PRODUCTION_EVALUATION_2026_08.md`](../../../reports/P10_RAG_PRODUCTION_EVALUATION_2026_08.md)
 - KG 谓词精度观察门：[`scripts/check_kg_relation_precision.py`](../../../scripts/check_kg_relation_precision.py)

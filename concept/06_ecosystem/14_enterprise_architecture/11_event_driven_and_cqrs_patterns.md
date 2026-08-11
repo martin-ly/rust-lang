@@ -17,6 +17,8 @@
 > - [Saga 模式](../03_design_patterns/29_saga.md)、[Outbox 模式](../03_design_patterns/30_outbox.md)
 > - [Actor 模型与消息传递模式](../03_design_patterns/42_actor_model_and_message_passing_patterns.md)
 > - [数据密集型系统设计](../06_data_and_distributed/10_data_intensive_systems_design.md)
+> - [P10-3 CQRS / Event Sourcing canonical](../../05_comparative/05_idioms_patterns_architecture/04_architecture/02_cqrs_event_sourcing.md)
+> - [P10-3 Event Bus canonical](../../05_comparative/05_idioms_patterns_architecture/04_architecture/06_event_bus.md)
 > **前置概念**: [微服务架构模式](08_microservices_patterns_in_rust.md) · [DDD 战术模式](04_domain_driven_design_in_rust.md) · [战略 DDD](05_strategic_domain_driven_design_in_rust.md) · [Async](../../03_advanced/01_async/01_async.md)
 > **L5 对比**: [Rust vs Java](../../05_comparative/02_managed_languages/01_rust_vs_java.md) · [Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md)
 > **后置概念**: [云原生与 Serverless 模式](12_cloud_native_and_serverless_patterns.md) · [可观测性与 SRE 模式](09_observability_and_sre_patterns.md)

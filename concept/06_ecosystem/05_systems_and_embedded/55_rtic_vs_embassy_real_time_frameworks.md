@@ -6,7 +6,7 @@
 >
 > **EN**: RTIC vs Embassy: Real-Time Frameworks in Rust
 > **Summary**: A comparative canonical reference for RTIC and Embassy in embedded Rust: scheduling models, resource sharing, timing guarantees, hardware abstraction, memory footprint, and selection criteria for bare-metal real-time systems.
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 >
 > **受众**: [专家]
 > **Bloom 层级**: L4
@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [RTIC Book](https://rtic.rs/2/book/en/) · [RTIC GitHub](https://github.com/rtic-rs/rtic) · [RTIC on crates.io](https://crates.io/crates/rtic) · [RTIC docs.rs](https://docs.rs/rtic) · [Embassy Book](https://embassy.dev/book/) · [Embassy GitHub](https://github.com/embassy-rs/embassy) · [Embassy Executor on crates.io](https://crates.io/crates/embassy-executor) · [Embassy docs.rs](https://docs.rs/embassy-executor) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [Rust Embedded Working Group](https://github.com/rust-embedded/wg) · [Ferrous Systems — Rust Training](https://rust-training.ferrous-systems.com/latest/book/) · [Awesome Embedded Rust](https://github.com/rust-embedded/awesome-embedded-rust) · [Rust Reference](https://doc.rust-lang.org/reference/)
+> **来源**: [RTIC Book](https://rtic.rs/2/book/en/) · [RTIC GitHub](https://github.com/rtic-rs/rtic) · [RTIC on crates.io](https://crates.io/crates/rtic) · [RTIC docs.rs](https://docs.rs/rtic) · [Embassy Book](https://embassy.dev/book/) · [Embassy GitHub](https://github.com/embassy-rs/embassy) · [Embassy Executor on crates.io](https://crates.io/crates/embassy-executor) · [Embassy docs.rs](https://docs.rs/embassy-executor) · [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [Rust Embedded Working Group](https://github.com/rust-embedded/wg) · [Ferrous Systems — Rust Training](https://rust-training.ferrous-systems.com/latest/book/) · [Knurling Books](https://knurling-books.org/) · [Awesome Embedded Rust](https://github.com/rust-embedded/awesome-embedded-rust) · [probe-rs](https://probe.rs/) · [Rust Reference](https://doc.rust-lang.org/reference/)
 >
 > **横向对比**: [RTOS 与 Rust 调度模型对比](46_rtos_and_scheduling_in_rust.md) · [裸机 Rust](47_bare_metal_rust.md) · [Rust vs Ada/SPARK](../../05_comparative/01_systems_languages/07_rust_vs_ada_spark.md)
 

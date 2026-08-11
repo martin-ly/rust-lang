@@ -840,6 +840,8 @@ fn elect(state: Arc<Mutex<NodeState>>) {
 
 ## 相关概念
 
+- [对应测验](../../03_advanced/00_concurrency/10_quiz_semantic_models.md) — 语义模型与跨语言对比（代数效应、依赖/细化类型、STM、分布式共识、GPU/HPC、语言语义模型矩阵）
+
 - [分布式系统](../04_web_and_networking/01_distributed_systems.md) — CAP 定理、一致性（Coherence）模型、分区容错
 - [区块链](../11_domain_applications/01_blockchain.md) — 智能合约、共识激励、密码学原语
 - [微服务架构](../03_design_patterns/05_microservice_patterns.md) — 服务发现、配置中心、领导者选举

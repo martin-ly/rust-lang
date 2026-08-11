@@ -6,7 +6,7 @@
 >
 > **EN**: Linker Scripts and Memory Layout for Embedded Rust
 > **Summary**: A canonical reference for embedded linker scripts: MEMORY and SECTIONS commands, load vs. runtime addresses, `#[link_section]`, stack/heap placement, ARM CCM/DTCM/ITCM, RISC-V RAM-only boot, and build-validated examples for ARM Cortex-M and RISC-V targets.
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 >
 > **受众**: [专家]
 > **Bloom 层级**: L4
@@ -18,7 +18,7 @@
 
 ---
 
-> **来源**: [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [GNU ld Manual](https://sourceware.org/binutils/docs/ld/) · [LLD Documentation](https://lld.llvm.org/) · [ARMv7-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0403/latest/) · [ARMv8-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0553/latest/) · [RISC-V Privileged Specification](https://riscv.org/technical/specifications/) · [cortex-m-rt crate](https://docs.rs/cortex-m-rt/) · [riscv-rt crate](https://docs.rs/riscv-rt/) · [Ferrocene Language Specification](https://spec.ferrocene.dev/)
+> **来源**: [The Embedonomicon](https://docs.rust-embedded.org/embedonomicon/) · [GNU ld Manual](https://sourceware.org/binutils/docs/ld/) · [LLD Documentation](https://lld.llvm.org/) · [ARMv7-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0403/latest/) · [ARMv8-M Architecture Reference Manual](https://developer.arm.com/documentation/ddi0553/latest/) · [RISC-V Privileged Specification](https://riscv.org/technical/specifications/) · [cortex-m-rt crate](https://docs.rs/cortex-m-rt/) · [riscv-rt crate](https://docs.rs/riscv-rt/) · [Ferrocene Language Specification](https://spec.ferrocene.dev/) · [probe-rs](https://probe.rs/)
 >
 > **横向对比**: [Rust vs C/C++ 嵌入式启动](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md) · [Rust vs Zig 裸机生态](../../05_comparative/01_systems_languages/06_rust_vs_zig.md)
 

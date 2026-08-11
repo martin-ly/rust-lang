@@ -114,6 +114,8 @@ fn main() {
 - [Rust Reference — The ? operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator)
 - [Rust API Guidelines — Error Types](https://rust-lang.github.io/api-guidelines/interoperability.html#c-err-msg)
 
+- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+
 ## 来源与延伸阅读
 
 - [RustBelt — Logical Foundations for Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/)（P1 形式化基础）

@@ -14,7 +14,8 @@
 > **后置概念**:
 > [Pattern Composition Algebra](../../04_formal/00_type_theory/12_pattern_composition_algebra.md) ·
 > [Anti-patterns](33_anti_patterns.md) ·
-> [API Design Patterns](18_api_design_patterns.md)
+> [API Design Patterns](18_api_design_patterns.md) ·
+> [P10-3 设计模式对比页](../../05_comparative/05_idioms_patterns_architecture/03_design_patterns/README.md)
 > **主要来源**:
 > [GoF — Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) ·
 > [Rust Design Patterns](https://rust-unofficial.github.io/patterns/) ·

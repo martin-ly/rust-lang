@@ -6,7 +6,7 @@
 >
 > **EN**: The no_std + alloc Crate Ecosystem
 > **Summary**: A canonical survey of the Rust crate ecosystem for `#![no_std]` environments that use `alloc`: allocators, collections, strings, serialization, async/sync, logging, time, and error-handling crates, with selection criteria and compatibility checks.
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 >
 > **受众**: [专家]
 > **Bloom 层级**: L4

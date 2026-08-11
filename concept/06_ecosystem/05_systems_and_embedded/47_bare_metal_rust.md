@@ -6,7 +6,7 @@
 >
 > **EN**: Bare-Metal Rust
 > **Summary**: A systems-level canonical reference for bare-metal Rust: the hardware-software boundary, layered architecture from chip to application, reset-to-main boot contract, vector table and memory layout, no_std runtime obligations, and how to choose between bare-metal, RTOS, and OS-based stacks.
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 >
 > **受众**: [专家]
 > **Bloom 层级**: L4

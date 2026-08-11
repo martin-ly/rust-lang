@@ -6,7 +6,7 @@
 >
 > **EN**: Embedded-HAL Driver Patterns
 > **Summary**: Design patterns for writing portable, type-safe device drivers on top of `embedded-hal` 1.0: state-machine drivers, register-map modeling, SPI/I2C transaction composition, bus ownership, shared-bus integration, async patterns, DMA lifecycle, error design, and testable mocks.
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 >
 > **受众**: [专家]
 > **Bloom 层级**: L5

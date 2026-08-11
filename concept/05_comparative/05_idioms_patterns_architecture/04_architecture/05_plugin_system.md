@@ -146,6 +146,9 @@ fn main() {}
 - [wasmtime — Sandboxed Plugins in Rust](https://docs.wasmtime.dev/)
 - [Dynamic Loading in Rust — The Rust Reference](https://doc.rust-lang.org/reference/linkage.html)
 
+- [Azure Architecture Center](https://learn.microsoft.com/azure/architecture/)
+- [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html)
+- [CNCF Cloud Native Interactive Landscape](https://www.cncf.io/)
 ## 形式化基础
 
 本页的工程模式可追溯到以下 L4 形式化/理论权威页：

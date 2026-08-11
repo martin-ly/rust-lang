@@ -52,6 +52,13 @@
     - [测验 3：Flux 为什么不能验证 unsafe 代码？](#测验-3flux-为什么不能验证-unsafe-代码)
   - [七、权威来源 / International Authority References](#七权威来源--international-authority-references)
   - [八、🧭 思维导图（Mindmap）](#八-思维导图mindmap)
+  - [附录：计算等价与观察等价分析](#附录计算等价与观察等价分析)
+    - [A.1 精化类型的观察等价](#a1-精化类型的观察等价)
+    - [A.2 Flux 验证程序与普通 Rust 程序的计算等价](#a2-flux-验证程序与普通-rust-程序的计算等价)
+    - [A.3 工具链可复现性说明](#a3-工具链可复现性说明)
+  - [来源与延伸阅读](#来源与延伸阅读)
+    - [P1（学术/形式化）](#p1学术形式化)
+    - [P2（社区/生态）](#p2社区生态)
 
 ---
 
@@ -430,6 +437,9 @@ D. unsafe 代码没有类型
 | [Flux Documentation](https://flux-rs.github.io/flux/) | ✅ P0 | Flux 官方文档 |
 | [Z3 Theorem Prover](https://github.com/Z3Prover/z3) | ✅ P2 | Flux 的 SMT 后端 |
 | [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) | ✅ P0 | Rust 官方类型参考 |
+| [Verus](https://verus-lang.github.io/verus/guide/) | ✅ P2 | Rust 系统级形式化验证工具（对比生态） |
+| [Kani](https://model-checking.github.io/kani/) | ✅ P2 | Rust 模型检测工具（数组边界等属性自动验证） |
+| [Creusot](https://creusot-rs.github.io/) | ✅ P2 | Rust 演绎验证器（Why3 后端） |
 
 ---
 
@@ -465,6 +475,39 @@ mindmap
       Liquid Types 2008
       Flux PLDI 2023
 ```
+
+## 附录：计算等价与观察等价分析
+
+### A.1 精化类型的观察等价
+
+在精化类型系统中，两个值 `v₁`、`v₂` 对观察上下文 `C[·]` 等价，当且仅当它们在所有合法上下文中产生相同结果。由于精化类型 `{v: τ | φ(v)}` 把谓词 `φ` 编码进类型，观察等价可以细化为：
+
+```text
+v₁ ≈obs v₂ : {v: τ | φ(v)}  ⇔  φ(v₁) ∧ φ(v₂) ∧ ∀C. C[v₁] ⇓ r ⟺ C[v₂] ⇓ r
+```
+
+例如，所有满足 `{v: i32 | v > 0}` 的正值在「不依赖具体数值」的上下文中彼此等价；但在 `if v == 1 { ... } else { ... }` 这类上下文中，`1` 与 `2` 不再等价。
+
+### A.2 Flux 验证程序与普通 Rust 程序的计算等价
+
+Flux 在类型检查阶段把 Rust 函数翻译成**约束生成问题**。对 safe Rust 子集，Flux 的精化类型判断是**计算等价保持**的：
+
+- 若 Flux 证明 `f: (x: {v | φ}) -> {v | ψ}`，则运行时对所有满足 `φ` 的输入，`f` 的输出满足 `ψ`。
+- Flux 不改变程序运行语义；它只是拒绝某些在运行时可能违反规约的程序。
+
+形式化上，设 `⟦f⟧_rust` 为 Rust 操作语义，`⟦f⟧_flux` 为 Flux 的约束语义，则：
+
+```text
+Flux ⊢ f : φ → ψ   ⟹   ∀x. φ(x) ⟹ ψ(⟦f⟧_rust(x))
+```
+
+这与霍尔逻辑的部分正确性 `{φ} f {ψ}` 同构。
+
+### A.3 工具链可复现性说明
+
+- Flux 需要 **nightly Rust toolchain** 和 [Z3](https://github.com/Z3Prover/z3) SMT 求解器。安装后执行 `cargo flux` 即可对带 `#[flux::sig(...)]` 注解的 crate 进行验证。
+- 本文中 `#[flux::sig(...)]` 示例标注为 `rust,ignore`，因为它们依赖 Flux 编译器；纯 Rust 正向/反例块已在 `check_concept_code_blocks.py` 中验证。
+- 权威来源：[Flux GitHub](https://github.com/flux-rs/flux)、[Flux Docs](https://flux-rs.github.io/flux/)、[Lehmann et al., PLDI 2023](https://ranjitjhala.github.io/static/flux-pldi23.pdf)。
 
 ## 来源与延伸阅读
 

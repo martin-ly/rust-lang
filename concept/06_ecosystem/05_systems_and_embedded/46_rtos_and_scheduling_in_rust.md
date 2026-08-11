@@ -6,7 +6,7 @@
 >
 > **EN**: RTOS and Scheduling Models in Rust
 > **Summary**: A comparative analysis of scheduling models in Rust embedded frameworks: RTIC, Tock, Hubris, and Embassy, with decision trees, anti-patterns, and semantic mappings.
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 >
 > **受众**: [专家]
 > **Bloom 层级**: L4

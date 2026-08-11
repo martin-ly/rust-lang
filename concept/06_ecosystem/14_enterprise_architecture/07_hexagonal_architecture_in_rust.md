@@ -9,7 +9,7 @@
 > **Bloom 层级**: L6
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **定位**: 从企业架构视角扩展六边形架构：如何将多个 bounded context 的六边形通过共享内核、 anticorruption layer 和开放主机服务组合成企业级系统。
-> **前置概念**: [Hexagonal / Ports & Adapters](../03_design_patterns/25_hexagonal_ports_and_adapters.md) · [Enterprise Architecture Frameworks](01_enterprise_architecture_frameworks.md) · [Strategic DDD](05_strategic_domain_driven_design_in_rust.md) · [Comparative Layer README](../../05_comparative/README.md)
+> **前置概念**: [Hexagonal / Ports & Adapters](../03_design_patterns/25_hexagonal_ports_and_adapters.md) · [Enterprise Architecture Frameworks](01_enterprise_architecture_frameworks.md) · [Strategic DDD](05_strategic_domain_driven_design_in_rust.md) · [Comparative Layer README](../../05_comparative/README.md) · [P10-3 Hexagonal / Clean Architecture canonical](../../05_comparative/05_idioms_patterns_architecture/04_architecture/01_hexagonal_clean_architecture.md)
 > **后置概念**: [Clean Architecture in Rust](06_clean_architecture_in_rust.md) · [Microservices Patterns in Rust](08_microservices_patterns_in_rust.md)
 
 ---

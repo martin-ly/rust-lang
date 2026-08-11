@@ -247,3 +247,9 @@ fn main() {
 - [trie docs on docs.rs](https://docs.rs/trie/latest/trie/) — P2：Trie crate API 文档。
 - [radix_trie on crates.io](https://crates.io/crates/radix_trie) — P2：压缩 Trie（Radix Tree）Rust 实现。
 - [radix_trie docs on docs.rs](https://docs.rs/radix_trie/latest/radix_trie/) — P2：压缩 Trie API 文档。
+
+- [Rust Algorithm Club](https://github.com/weihanglo/rust-algorithm-club)
+
+- [CLRS — Introduction to Algorithms](https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/)
+
+- [Sedgewick & Wayne — Algorithms](https://algs4.cs.princeton.edu/home/)

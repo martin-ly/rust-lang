@@ -148,6 +148,9 @@ fn get_user_email_from_user_db(user_id: u64) -> String {
 - [AWS — Microservices on AWS](https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/introduction.html)
 - [Rust Async Book — Building a Service](https://rust-lang.github.io/async-book/)
 
+- [Azure Architecture Center](https://learn.microsoft.com/azure/architecture/)
+- [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html)
+- [CNCF Cloud Native Interactive Landscape](https://www.cncf.io/)
 ## 形式化基础
 
 本页的工程模式可追溯到以下 L4 形式化/理论权威页：

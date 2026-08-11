@@ -185,6 +185,8 @@ fn main() {}
 - GoF, *Design Patterns: Elements of Reusable Object-Oriented Software*, State pattern.
 - The Rust Programming Language, Chapter 6: Enums and Pattern Matching.
 
+- [Refactoring Guru — Design Patterns in Rust](https://refactoring.guru/design-patterns/rust)
+- [design-patterns-rust (fadeevab)](https://github.com/fadeevab/design-patterns-rust)
 ## 形式化基础
 
 本页的工程模式可追溯到以下 L4 形式化/理论权威页：

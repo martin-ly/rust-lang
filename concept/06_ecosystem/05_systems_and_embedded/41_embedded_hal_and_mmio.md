@@ -3,10 +3,10 @@
 **EN**: Embedded HAL and MMIO: Trait Semantics and Type-Safe Register Access
 **Summary**: Explains how `embedded-hal` traits decouple portable drivers from MCU-specific HALs, how PAC/SVD-generated register blocks provide type-safe MMIO access, and how read-modify-write semantics and typestate peripherals integrate with `no_std`, Embassy, and RTIC.
 
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 > **Bloom 层级**: L5
 > **权威来源**: 本文件为 `concept/06_ecosystem/05_systems_and_embedded/` 下嵌入式 HAL trait 与 MMIO 类型安全的 `concept/` 权威页。
-> **相关页**: 本页聚焦 trait 语义与寄存器安全；嵌入式系统概览见 [`03_embedded_systems.md`](03_embedded_systems.md)，embedded-hal 1.0 迁移背景见 [`09_embedded_hal_1_0_migration.md`](09_embedded_hal_1_0_migration.md)，PAC/HAL 实现细节见 [`17_pac_hal_implementation.md`](17_pac_hal_implementation.md)，Memory-Mapped Peripherals 与 Typestate 设计见 [`25_memory_mapped_peripherals_and_typestate.md`](25_memory_mapped_peripherals_and_typestate.md)，驱动惯用法见 [`24_embedded_hal_and_driver_idioms.md`](24_embedded_hal_and_driver_idioms.md)；跨层对比见 [`Rust vs C++`](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)。
+> **相关页**: 本页聚焦 trait 语义与寄存器安全；嵌入式系统概览见 [`03_embedded_systems.md`](03_embedded_systems.md)，embedded-hal 1.0 迁移背景见 [`09_embedded_hal_1_0_migration.md`](09_embedded_hal_1_0_migration.md)，PAC/HAL 实现细节见 [`17_pac_hal_implementation.md`](17_pac_hal_implementation.md)，Memory-Mapped Peripherals 与 Typestate 设计见 [`25_memory_mapped_peripherals_and_typestate.md`](25_memory_mapped_peripherals_and_typestate.md)，驱动惯用法见 [`24_embedded_hal_and_driver_idioms.md`](24_embedded_hal_and_driver_idioms.md)，no_std 分配器与 panic handler 见 [`52_no_std_allocators_and_panic_handlers.md`](52_no_std_allocators_and_panic_handlers.md)，临界区与裸机同步见 [`53_critical_sections_and_sync_on_bare_metal.md`](53_critical_sections_and_sync_on_bare_metal.md)，RTIC 与 Embassy 实时框架对比见 [`55_rtic_vs_embassy_real_time_frameworks.md`](55_rtic_vs_embassy_real_time_frameworks.md)；跨层对比见 [`Rust vs C++`](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)。
 
 ## Mindmap
 

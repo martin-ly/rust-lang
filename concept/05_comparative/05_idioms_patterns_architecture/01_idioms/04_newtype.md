@@ -132,6 +132,8 @@ fn main() {}
 - [The Rust Programming Language — Tuple Structs](https://doc.rust-lang.org/book/ch05-01-defining-structs.html#using-tuple-structs-without-named-fields-to-create-different-types)
 - [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)
 
+- [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)
+
 ## 来源与延伸阅读
 
 - [RustBelt — Logical Foundations for Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/)（P1 形式化基础）

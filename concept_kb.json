@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 790,
-    "generated_at": "2026-08-11T04:55:56.249317+00:00"
+    "generated_at": "2026-08-11T05:34:12.385457+00:00"
   },
   "files": [
     {
@@ -4576,12 +4576,13 @@
       "layer": "L0",
       "title": "面向 Rust 知识图谱的 RAG 评估",
       "positioning": "",
-      "line_count": 251,
+      "line_count": 293,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../../../reports/P10_RAG_PRODUCTION_EVALUATION_2026_08.md",
         "../../../reports/RAG_EVALUATION_BASELINE_2026_08.md",
         "../knowledge_topology/kg_ontology_v2.md",
         "01_knowledge_graph_design.md",
@@ -4590,7 +4591,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 0,
-      "matrix_rows": 11,
+      "matrix_rows": 18,
       "pre_post": {
         "pre": [
           "[`concept/00_meta/05_ai_semantic_engineering/01_knowledge_graph_design.md`](01_knowledge_graph_design.md)、[`concept/00_meta/05_ai_semantic_engineering/02_llm_rag_for_rust.md`](02_llm_rag_for_rust.md)、[`concept/00_meta/knowledge_topology/kg_ontology_v2.md`](../knowledge_topology/kg_ontology_v2.md)"
@@ -4607,7 +4608,7 @@
       "layer": "L0",
       "title": "语义领域与国际权威来源对齐矩阵",
       "positioning": "",
-      "line_count": 149,
+      "line_count": 150,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -27147,7 +27148,7 @@
       "layer": "L2",
       "title": "过程宏：derive、attribute、function-like 与 TokenStream 操作",
       "positioning": "系统讲解过程宏的三种类型、编译期执行模型、`TokenStream` 操作、`syn`/`quote` 工作流，以及 span/hygiene 的工程实践。",
-      "line_count": 677,
+      "line_count": 679,
       "theorem_chains": [
         {
           "text": "| 理解三种过程宏 ⟹ 正确选型 | 知道 derive/attribute/function-like 的差异 | 能为场景选择合适宏类型 | 高 |",
@@ -27288,6 +27289,7 @@
       "cross_references": [
         "../../00_meta/01_terminology/01_terminology_glossary.md",
         "../../01_foundation/09_macros_basics/01_attributes_and_macros.md",
+        "../../03_advanced/03_proc_macros/10_quiz_macros.md",
         "../../06_ecosystem/03_design_patterns/01_patterns.md",
         "../00_traits/01_traits.md",
         "../00_traits/03_serde_patterns.md",
@@ -53988,7 +53990,7 @@
       "layer": "L4",
       "title": "线性逻辑与所有权：作为计算模型的资源演算（Linear Logic and Ownership: Resource Calculus as a Computational Model）",
       "positioning": "从**计算模型**视角把线性/仿射逻辑当作 Rust 所有权的**资源演算**：不重复介绍 Girard 的 sequent calculus，而是说明 `⊗, ⊸, !, &` 等连接词如何精确对应 Rust 的值移动、函数调用、共享借用、引用计数等工程机制，并为 [范畴论与 Rust](10_category_theory_and_rust.md) 的「仿射范畴直觉」与 [RustBelt 所有权逻辑](16_rustbelt_ownership_logic.md) 提供证明论语义基础。",
-      "line_count": 597,
+      "line_count": 634,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -54126,7 +54128,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 25,
+      "matrix_rows": 30,
       "pre_post": {
         "pre": [
           "> [Linear Logic](../01_ownership_logic/01_linear_logic.md) ·"
@@ -54143,7 +54145,7 @@
       "layer": "L4",
       "title": "会话类型与 Rust 通道：作为计算模型的通信协议（Session Types and Rust Channels: Communication Protocols as a Computational Model）",
       "positioning": "从**计算模型**视角把会话类型当作 Rust 通信通道的**协议演算**：说明通道不仅是数据传输管道，而是带有状态演化的线性对象；把 Honda/Wadler 的形式语法投影到 Rust 的 `std::sync::mpsc`、`tokio::sync::mpsc` 以及基于所有权的状态机编码，并与 [线性逻辑与所有权](12_linear_logic_and_ownership.md) 形成「资源演算 → 协议演算」的递进。",
-      "line_count": 561,
+      "line_count": 588,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -54251,7 +54253,7 @@
       "layer": "L4",
       "title": "Effect Handlers 与 Rust 的受限效应：作为计算模型的控制流抽象（Effect Handlers and Rust's Limited Effects: Control-Flow Abstractions as a Computational Model）",
       "positioning": "从**计算模型**视角把代数效应/处理器当作 Rust 中各类「受控效应」的统一语义框架：说明 `Result`、`Option`、`async/await`、`panic`、`unsafe` 都是**受限的效应实例**，而真正的代数效应处理器提供了更一般的「可恢复控制流」抽象；同时解释 Rust 语言设计为何止步于受限效应而非通用 effect handlers。",
-      "line_count": 615,
+      "line_count": 646,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -54353,7 +54355,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 35,
+      "matrix_rows": 40,
       "pre_post": {
         "pre": [
           "> [Algebraic Effects](../07_concurrency_semantics/04_algebraic_effects.md) ·"
@@ -54370,7 +54372,7 @@
       "layer": "L4",
       "title": "精化类型与 Flux：作为计算模型的约束演算（Refinement Types and Flux: Constraint Calculus as a Computational Model）",
       "positioning": "从**计算模型**视角把精化类型当作 Rust 类型系统的**约束扩展**：说明如何在现有类型上叠加逻辑谓词，把「值满足某性质」编码为类型，并说明 Flux 如何利用 Rust 所有权解决命令式语言中精化类型的别名/可变性问题，与 [Effect Handlers and Rust Limited Effects](14_effect_handlers_and_rust_limited_effects.md) 形成「效应模型 → 约束模型」的递进。",
-      "line_count": 487,
+      "line_count": 520,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -54508,7 +54510,7 @@
       "layer": "L4",
       "title": "RustBelt 所有权逻辑：作为计算模型的内存安全证明（RustBelt Ownership Logic: Memory Safety Proof as a Computational Model）",
       "positioning": "从**计算模型**视角把 RustBelt 当作 Rust 安全性的**逻辑证明机器**：不重复介绍 Iris 分离逻辑的完整规则，而是说明 RustBelt 如何把 Rust 程序翻译成 λRust 操作语义，并用 Iris 断言证明 safe Rust 的内存安全与无数据竞争，以及 unsafe 抽象如何以「协议契约」形式被纳入证明。",
-      "line_count": 552,
+      "line_count": 584,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -54633,7 +54635,7 @@
       "layer": "L4",
       "title": "Aeneas 验证流水线：作为计算模型的符号化借用演算（Aeneas Verification Pipeline: Symbolic Borrow Calculus as a Computational Model）",
       "positioning": "从**计算模型**视角把 Aeneas 当作 Rust 验证的**符号化借用演算**：说明 LLBC 如何把 Rust 的隐式借用显式化为 loan/borrow 指令，符号执行如何枚举所有路径并生成证明助手（Coq/Lean/HOL4）可验证的函数式规范，与 [RustBelt Ownership Logic](16_rustbelt_ownership_logic.md) 形成「分离逻辑证明 → 符号化翻译证明」的对比。",
-      "line_count": 524,
+      "line_count": 557,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -56612,7 +56614,7 @@
       "layer": "L5",
       "title": "统一语言 × 语义模型表达力矩阵",
       "positioning": "",
-      "line_count": 625,
+      "line_count": 631,
       "theorem_chains": [
         {
           "text": "**定理链 1: 所有权 ⟹ 仿射类型 ⟹ 编译期内存安全**",
@@ -56672,6 +56674,7 @@
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/00_framework/semantic_space.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../03_advanced/00_concurrency/10_quiz_semantic_models.md",
         "../../03_advanced/01_async/01_async.md",
         "../../04_formal/00_type_theory/01_type_theory.md",
         "../../04_formal/00_type_theory/10_dependent_refinement_types.md",
@@ -59471,7 +59474,7 @@
       "layer": "L5",
       "title": "错误传播与 `?` 运算符",
       "positioning": "",
-      "line_count": 133,
+      "line_count": 134,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59524,7 +59527,7 @@
       "layer": "L5",
       "title": "Into / From / AsRef 转换惯用法",
       "positioning": "",
-      "line_count": 142,
+      "line_count": 143,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59578,7 +59581,7 @@
       "layer": "L5",
       "title": "Newtype 惯用法",
       "positioning": "",
-      "line_count": 150,
+      "line_count": 151,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59637,7 +59640,7 @@
       "layer": "L5",
       "title": "Typestate 惯用法",
       "positioning": "",
-      "line_count": 177,
+      "line_count": 178,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59690,7 +59693,7 @@
       "layer": "L5",
       "title": "RAII 与 Cleanup 惯用法",
       "positioning": "",
-      "line_count": 156,
+      "line_count": 157,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59805,7 +59808,7 @@
       "layer": "L5",
       "title": "Defer 惯用法",
       "positioning": "",
-      "line_count": 153,
+      "line_count": 154,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59858,7 +59861,7 @@
       "layer": "L5",
       "title": "线段树",
       "positioning": "",
-      "line_count": 260,
+      "line_count": 266,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59920,7 +59923,7 @@
       "layer": "L5",
       "title": "字典树",
       "positioning": "",
-      "line_count": 250,
+      "line_count": 256,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -59988,7 +59991,7 @@
       "layer": "L5",
       "title": "并查集",
       "positioning": "",
-      "line_count": 239,
+      "line_count": 245,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60055,7 +60058,7 @@
       "layer": "L5",
       "title": "图算法",
       "positioning": "",
-      "line_count": 268,
+      "line_count": 274,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60123,7 +60126,7 @@
       "layer": "L5",
       "title": "无锁数据结构",
       "positioning": "",
-      "line_count": 174,
+      "line_count": 177,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60178,7 +60181,7 @@
       "layer": "L5",
       "title": "策略模式",
       "positioning": "",
-      "line_count": 213,
+      "line_count": 215,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60243,7 +60246,7 @@
       "layer": "L5",
       "title": "命令模式",
       "positioning": "",
-      "line_count": 235,
+      "line_count": 237,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60308,7 +60311,7 @@
       "layer": "L5",
       "title": "访问者模式",
       "positioning": "",
-      "line_count": 229,
+      "line_count": 231,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60373,7 +60376,7 @@
       "layer": "L5",
       "title": "状态机模式",
       "positioning": "",
-      "line_count": 208,
+      "line_count": 210,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60438,7 +60441,7 @@
       "layer": "L5",
       "title": "适配器模式",
       "positioning": "",
-      "line_count": 194,
+      "line_count": 196,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60503,7 +60506,7 @@
       "layer": "L5",
       "title": "装饰器模式",
       "positioning": "",
-      "line_count": 205,
+      "line_count": 207,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60565,7 +60568,7 @@
       "layer": "L5",
       "title": "六边形架构与整洁架构",
       "positioning": "",
-      "line_count": 175,
+      "line_count": 178,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60621,7 +60624,7 @@
       "layer": "L5",
       "title": "CQRS / Event Sourcing",
       "positioning": "",
-      "line_count": 174,
+      "line_count": 177,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60672,7 +60675,7 @@
       "layer": "L5",
       "title": "微服务",
       "positioning": "",
-      "line_count": 170,
+      "line_count": 173,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60722,7 +60725,7 @@
       "layer": "L5",
       "title": "Actor 模型",
       "positioning": "",
-      "line_count": 171,
+      "line_count": 174,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60776,7 +60779,7 @@
       "layer": "L5",
       "title": "插件系统",
       "positioning": "",
-      "line_count": 164,
+      "line_count": 167,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -60829,7 +60832,7 @@
       "layer": "L5",
       "title": "事件总线",
       "positioning": "",
-      "line_count": 160,
+      "line_count": 163,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -71407,7 +71410,7 @@
       "layer": "L6",
       "title": "GoF 23 设计模式 Rust 语义映射速查与深度指南",
       "positioning": "",
-      "line_count": 1383,
+      "line_count": 1384,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -71610,6 +71613,7 @@
       "cross_references": [
         "../../04_formal/00_type_theory/12_pattern_composition_algebra.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
+        "../../05_comparative/05_idioms_patterns_architecture/03_design_patterns/README.md",
         "../14_enterprise_architecture/08_microservices_patterns_in_rust.md",
         "../14_enterprise_architecture/10_production_rust_web_service_patterns.md",
         "../14_enterprise_architecture/11_event_driven_and_cqrs_patterns.md",
@@ -81791,7 +81795,7 @@
       "layer": "L6",
       "title": "Distributed Consensus（分布式共识）",
       "positioning": "",
-      "line_count": 994,
+      "line_count": 996,
       "theorem_chains": [
         {
           "text": "> **形式理论分工（Canonical）**: 共识的**形式理论**——FLP 不可能性证明骨架、部分同步与故障检测器、CAP/PACELC 形式化、Paxos/Raft/PBFT 不变量与安全性论证、所有权类型系统 ⟹ 共识实现安全的机制分析——以 [L4 分布式共识与不可能性理论](../../04_formal/07_concurrency_semantics/06_distributed_consensus_theory.md) 为权威页；本页保留**算法机制教程、Rust 生态对比、选型决策树与边界测试**视角，理论推导不再展开。",
@@ -81886,6 +81890,7 @@
       "cross_references": [
         "../../01_foundation/02_type_system/01_type_system.md",
         "../../03_advanced/00_concurrency/01_concurrency.md",
+        "../../03_advanced/00_concurrency/10_quiz_semantic_models.md",
         "../../04_formal/00_type_theory/01_type_theory.md",
         "../../04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md",
         "../../04_formal/07_concurrency_semantics/06_distributed_consensus_theory.md",

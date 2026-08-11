@@ -159,6 +159,8 @@ fn main() {
 - [The Rust Programming Language — Phantom Data](https://doc.rust-lang.org/book/ch19-04-advanced-types.html#dynamically-sized-types-and-the-sized-trait)
 - [Typestate Programming (Wikipedia)](https://en.wikipedia.org/wiki/Typestate_analysis)
 
+- [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+
 ## 来源与延伸阅读
 
 - [RustBelt — Logical Foundations for Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/)（P1 形式化基础）

@@ -6,7 +6,7 @@
 >
 > **EN**: Embedded Hardware End-to-End Validation
 > **Summary**: A canonical workflow for validating `#![no_std]` firmware on real hardware or QEMU using probe-rs, defmt, and Embassy, with minimal runnable examples, expected outputs, and decision trees.
-> **Rust 版本**: 1.97.0+ (Edition 2024)
+> **Rust 版本**: 1.97.1+ (Edition 2024)
 >
 > **受众**: [进阶/专家]
 > **Bloom 层级**: L3-L4
@@ -21,7 +21,9 @@
 > **后置概念**:
 > [嵌入式测试与 CI 策略](32_embedded_testing_and_ci_strategies.md) ·
 > [RTOS 与 Rust 调度模型对比](46_rtos_and_scheduling_in_rust.md) ·
-> [Rust 在安全关键系统中的应用](43_rust_safety_critical_systems.md)
+> [Rust 在安全关键系统中的应用](43_rust_safety_critical_systems.md) ·
+> [no_std 分配器与 panic handler](52_no_std_allocators_and_panic_handlers.md) ·
+> [临界区与裸机同步](53_critical_sections_and_sync_on_bare_metal.md)
 
 ---
 

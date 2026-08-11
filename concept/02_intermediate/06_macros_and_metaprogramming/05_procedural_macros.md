@@ -437,6 +437,8 @@ graph TD
 
 ## 相关概念
 
+- [对应测验](../../03_advanced/03_proc_macros/10_quiz_macros.md) — 宏系统（macro_rules!、卫生性、过程宏）
+
 - **前置概念**: [Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) · [Declarative Macros](04_declarative_macros.md)
 - **应用**: [Serde Patterns](../00_traits/03_serde_patterns.md) · [Builder Pattern](../../06_ecosystem/03_design_patterns/01_patterns.md)
 - **对比**: [Declarative Macros](04_declarative_macros.md) · [C Preprocessor vs Rust Macros](07_c_preprocessor_vs_rust_macros.md)

@@ -54,6 +54,10 @@
     - [测验 3：unsafe 代码在 RustBelt 中如何被验证？](#测验-3unsafe-代码在-rustbelt-中如何被验证)
   - [七、权威来源 / International Authority References](#七权威来源--international-authority-references)
   - [八、🧭 思维导图（Mindmap）](#八-思维导图mindmap)
+  - [附录：计算等价与观察等价分析](#附录计算等价与观察等价分析)
+    - [A.1 Iris 断言下的观察等价](#a1-iris-断言下的观察等价)
+    - [A.2 λRust 与 Rust 安全子集的计算等价](#a2-λrust-与-rust-安全子集的计算等价)
+    - [A.3 工具链可复现性说明](#a3-工具链可复现性说明)
   - [来源与延伸阅读](#来源与延伸阅读)
     - [P1（学术/形式化）](#p1学术形式化)
     - [P2（社区/生态）](#p2社区生态)
@@ -491,6 +495,11 @@ D. 通过借用检查器
 | [O'Hearn 2007, *Resources, Concurrency and Local Reasoning*](https://doi.org/10.1016/j.tcs.2006.12.035) | ✅ 一级 | 并发分离逻辑 |
 | [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-keyword.html) | ✅ P0 | Rust 官方 unsafe 语义 |
 | [Rust Reference — Interior Mutability](https://doc.rust-lang.org/reference/interior-mutability.html) | ✅ P0 | 内部可变性官方说明 |
+| [MiniRust](https://github.com/RalfJung/minirust) | ✅ P2 | Rust 核心语言可执行操作语义 |
+| [Tree Borrows](https://perso.crans.org/vanile/treebor/) | ✅ P2 | Rust 别名模型形式化，与所有权谓词互补 |
+| [Verus](https://verus-lang.github.io/verus/guide/) | ✅ P2 | Rust 系统级形式化验证工具 |
+| [Kani](https://model-checking.github.io/kani/) | ✅ P2 | Rust 模型检测工具 |
+| [Creusot](https://creusot-rs.github.io/) | ✅ P2 | Rust 演绎验证器 |
 
 ---
 
@@ -533,6 +542,38 @@ mindmap
       Iris Project
       Reynolds / O'Hearn
 ```
+
+## 附录：计算等价与观察等价分析
+
+### A.1 Iris 断言下的观察等价
+
+在 RustBelt/Iris 框架中，两个程序状态 `σ₁`、`σ₂` 对某断言 `P` 是**观察等价**的，当它们满足相同的所有权集合时：
+
+```text
+σ₁ ≈P σ₂  ⇔  σ₁ ⊨ P  ⟺  σ₂ ⊨ P
+```
+
+更具体地，对堆状态而言，若两个堆在 `own(x, τ)`、`shr{α}(x, τ)`、`uniq{α}(x, τ)` 等断言上不可区分，则它们对相关上下文不可区分。例如：
+
+- 两个堆都满足 `own(s, String) * own(t, i32)` 时，对只访问 `s` 与 `t` 的程序观察等价。
+- 若一个堆额外包含 `own(u, Vec<i32>)` 而另一个没有，则对读取 `u` 的上下文不等价（分离逻辑的 **frame rule** 保证无关资源不影响）。
+
+### A.2 λRust 与 Rust 安全子集的计算等价
+
+RustBelt 把 Rust 程序翻译成 λRust，并证明：
+
+```text
+Γ ⊢_rust e : τ   ⟹   Γ ⊢_λRust ⟦e⟧ : τ   ⟹   e 无 UB / 无数据竞争
+```
+
+这一翻译是**计算等价**的：对不含 `unsafe` 且良类型的程序，λRust 的操作语义与 Rust 操作语义在可观察值上一致。`unsafe` 代码则通过**语义模型**被纳入：只要 `unsafe` 实现满足其 Iris 规约，翻译后的程序仍保持计算等价性。
+
+### A.3 工具链可复现性说明
+
+- RustBelt 论文中的 Coq/Iris 证明可在 [RustBelt 项目主页](https://plv.mpi-sws.org/rustbelt/popl18/) 获取；其代码基于 Iris 3.x 与 Coq 8.x。
+- 本文 Rust 示例使用标准 Rust 1.97；`compile_fail` 反例已验证错误码匹配。
+- 若要实际体验 Iris 分离逻辑，可参考 [Iris Tutorial](https://iris-project.org/tutorial-material.html) 与 [Perennial](https://github.com/mit-pdos/perennial) 项目。
+- 权威来源：[Jung et al., POPL 2018](https://doi.org/10.1145/3158154)、[Iris Project](https://iris-project.org/)、[Reynolds 2002, *Separation Logic*](https://www.cs.cmu.edu/~jcr/seplogic.pdf)。
 
 ## 来源与延伸阅读
 
