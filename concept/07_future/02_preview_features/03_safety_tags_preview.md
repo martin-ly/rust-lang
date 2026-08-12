@@ -40,6 +40,7 @@
     - [1.1 问题定义：Unsafe 契约的表达缺口](#11-问题定义unsafe-契约的表达缺口)
     - [1.2 Safety Tags 的设计目标](#12-safety-tags-的设计目标)
     - [1.3 与 `#[safety]` 属性的关系](#13-与-safety-属性的关系)
+    - [1.4 与语言级 Contracts（MCP-759）的关系](#14-与语言级-contractsmcp-759的关系)
   - [二、形式化语义](#二形式化语义)
     - [2.1 契约的谓词逻辑表示](#21-契约的谓词逻辑表示)
     - [2.2 与 BorrowSanitizer 的互补](#22-与-borrowsanitizer-的互补)
