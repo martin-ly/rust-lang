@@ -188,7 +188,7 @@ SeaORM:
 
   代码示例:
 
-  use sea_orm::{entity::*, query::*};
+  use sea_orm::prelude::*; // 2.0 推荐 prelude（含 ExprTrait；1.x 惯用 entity::*, query::*）
 
   let cake: Option<cake::Model> = Cake::find_by_id(1)
       .one(&db)
@@ -214,6 +214,9 @@ SeaORM:
 
 > **SeaORM 洞察**: **SeaORM 是 Rust 异步（Async） ORM 的首选**——牺牲了部分类型安全换取开发效率。
 > [来源: [SeaORM](https://www.sea-ql.org/SeaORM/)] · [来源: [Tokio Docs](https://tokio.rs/)]
+
+> **SeaORM 2.0 版本注记（2026-10-12 刷新）**: workspace 已升级至 `sea-orm 2.0.1`（2.0 stable 于 2026-01 发布，2.0.1 发布于 2026-08-02；`cargo check` 实测通过）。对照 2.0 实际 API 核对上文示例：`find_by_id` / `find_related` / `find_also_related` / `filter(Column::X.eq(..))` / `order_by_asc` / `db.transaction(|txn| Box::pin(async move { .. }))` 在 2.0 中仍然有效。2.0 破坏性变更需知悉：① `.eq()` / `.like()` / `.contains()` 等表达式方法需 `use sea_orm::ExprTrait;` 在作用域（`prelude::*` 已含）；② `execute` / `query_one` / `query_all` / `stream` 改为接收 SeaQuery 语句，裸 SQL 变体更名为 `execute_raw` / `query_one_raw` / `query_all_raw` / `stream_raw`（`execute_unprepared` 保留）；③ 新增 entity-first 实体形态 `#[sea_orm::model]`，旧 `DeriveEntityModel` 仍受支持；④ 移除 `runtime-actix` feature 别名（用 `runtime-tokio`）。
+> [来源: [SeaORM 2.0.0 Release Notes](https://github.com/SeaQL/sea-orm/releases/tag/2.0.0)] · [来源: [1.0→2.0 Migration Guide](https://www.sea-ql.org/blog/2026-01-12-sea-orm-2.0/)]
 
 ---
 

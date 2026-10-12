@@ -147,7 +147,10 @@ def main() -> int:
         return bool(candidates & path_set)
 
     for r in relations:
-        if r.get("@type") != "ex:relatedTo":
+        # 2026-10-12 修复：KG v3 数据中谓词存于 ex:predicate（@type 恒为
+        # ex:RelationAnnotation），旧过滤条件按 @type 匹配导致 dry-run 恒为 0。
+        # 兼容两种形态：@type 或 ex:predicate 任一为 ex:relatedTo 即候选。
+        if r.get("@type") != "ex:relatedTo" and r.get("ex:predicate") != "ex:relatedTo":
             continue
         subject = r.get("ex:subject", "")
         obj = r.get("ex:object", "")

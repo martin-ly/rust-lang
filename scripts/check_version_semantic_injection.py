@@ -24,7 +24,7 @@ ROOT = Path(__file__).resolve().parent.parent
 VERSION_DIR = ROOT / "concept" / "07_future" / "00_version_tracking"
 CONCEPT_DIR = ROOT / "concept"
 
-# 1.90–1.97 stable version tracking pages
+# 1.90–1.99 stable version tracking pages
 VERSION_FILES: list[tuple[str, str]] = [
     ("1.90", "rust_1_90_stabilized.md"),
     ("1.91", "rust_1_91_stabilized.md"),
@@ -34,11 +34,12 @@ VERSION_FILES: list[tuple[str, str]] = [
     ("1.95", "rust_1_95_stabilized.md"),
     ("1.96", "rust_1_96_stabilized.md"),
     ("1.97", "rust_1_97_stabilized.md"),
+    ("1.98", "rust_1_98_stabilized.md"),
+    ("1.99", "rust_1_99_stabilized.md"),
 ]
 
 # Beta/preview version tracking pages: scanned and reported, but do not affect --strict.
 BETA_FILES: list[tuple[str, str]] = [
-    ("1.98", "rust_1_98_stabilized.md"),
 ]
 
 # Patch release pages that need bidirectional semantic links to concept/ authority pages.
@@ -350,11 +351,11 @@ def format_report(result: dict, date_str: str) -> str:
     lines = [
         f"# Version Semantic Injection Baseline Report ({date_str})",
         "",
-        "> 检查 Rust 1.90–1.97 稳定特性、1.98 beta 特性及补丁版本页在版本跟踪页与 `concept/` 权威页之间的双向链接覆盖。",
+        "> 检查 Rust 1.90–1.99 稳定特性及补丁版本页在版本跟踪页与 `concept/` 权威页之间的双向链接覆盖。",
         "",
         "## 汇总（稳定版本）",
         "",
-        f"- 版本范围：1.90 – 1.97（共 {len(VERSION_FILES)} 个稳定版本）",
+        f"- 版本范围：1.90 – 1.99（共 {len(VERSION_FILES)} 个稳定版本）",
         f"- 提取特性数：{result['total']}",
         f"- 已映射：{result['mapped_count']} ({result['coverage_rate']}%)",
         f"- 未映射：{result['unmapped_count']}",
@@ -430,7 +431,7 @@ def format_report(result: dict, date_str: str) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="检查 Rust 1.90–1.97 稳定特性、1.98 beta 特性及补丁版本的版本语义注入双向链接覆盖"
+        description="检查 Rust 1.90–1.99 稳定特性及补丁版本的版本语义注入双向链接覆盖"
     )
     parser.add_argument("--strict", action="store_true", help="覆盖率 < 80%% 或补丁双向链接不完整时 exit 1")
     parser.add_argument("--json", action="store_true", help="仅输出 JSON 到 stdout")

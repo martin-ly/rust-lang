@@ -514,7 +514,7 @@ cargo --version  # >= 1.97.1
 
 ## 10. 项目构建说明
 
-本项目 `rust-toolchain.toml` 保持 `channel = "stable"`，由 rustup 自动解析当前 latest stable。Rust 1.97.1 已发布，`stable` 通道当前解析到 1.97.1；`Cargo.toml` 中的 `rust-version = "1.97.1"` 为项目 MSRV。
+本项目 `rust-toolchain.toml` 保持 `channel = "stable"`，由 rustup 自动解析当前 latest stable。本页为 1.97 周期历史参考页；当前项目根 `Cargo.toml` 的 `rust-version` 已随 1.99.0 stable（2026-10-01）滚动至 `"1.99.0"`。
 
 `#[cfg(nightly)]` 分支仅在 nightly 工具链下启用，文档中标记为 `rust,ignore` 的 nightly 专属示例不会参与默认 stable 构建。
 

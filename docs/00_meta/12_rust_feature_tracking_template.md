@@ -53,7 +53,7 @@
 | `core::range` | 1.95.0 | ✅ 稳定 | ✅ 已覆盖 | - | - | c02_type_system |
 | Async Closures | 1.85.0 | ✅ 稳定 | ⚠️ 代码有，指南缺 | P1 | - | 需完善指南 |
 | `use<..>` precise capturing | 2024 Ed | ✅ 部分稳定 | 🔴 未覆盖 | P1 | - | 需创建指南 |
-| AFIDT (dyn async trait) | 1.97+ | 🧪 Nightly 实验中（暂无稳定时间表） | ⚠️ 跟踪中 | P2 | - | c06_async；`dyn Trait` 场景继续用 `async_trait` |
+| AFIDT (dyn async trait) | 1.97+ | 🧪 Nightly 实验中（暂无稳定时间表；2026-10-12 核对 #133119：open，实验已批准并在 nightly 实现，RFC 未接受；Project Goals 2026 "AFIDT/.box" 已立项，2026 目标为定型设计） | ⚠️ 跟踪中 | P2 | - | c06_async；`dyn Trait` 场景继续用 `async_trait` |
 | Gen blocks | 1.98+ | 📋 RFC | 🔴 未覆盖 | P2 | - | 预留关键词 |
 | Never type `!` | 1.97+ | 🔄 PFCP | 🔴 未覆盖 | P2 | - | - |
 | Pattern types | 1.98+ | 📋 RFC | 🔴 未覆盖 | P3 | - | - |
@@ -121,6 +121,7 @@
 | 2026-05-28 | Rust 1.96.0 已发布 | Cargo Script 未进入 stable |
 | 2026-06-xx | Rust Project Goals 2026H1 中期评审 | 可能影响趋势优先级 |
 | 2026-07-09 | Rust 1.97.0 预计发布 | Never type 可能进展；AFIDT 仍为实验性，暂无稳定时间表 |
+| 2026-10-12 | AFIDT 跟踪刷新（rust-lang/rust#133119） | Issue 仍 open（最后更新 2026-02-14）：实验批准 + nightly 实现完成，RFC/文档/稳定化步骤未完成；Rust Project Goals 2026 "Native async fn dynamic dispatch in traits"（[goals.rust-lang.org/2026/afidt-box.html](https://goals.rust-lang.org/2026/afidt-box.html)，Accepted，2026-2027）Phase 1 制定 method-scope dyn 兼容 RFC，Phase 2 编译器支持；2026 仅目标定型设计 |
 
 ---
 

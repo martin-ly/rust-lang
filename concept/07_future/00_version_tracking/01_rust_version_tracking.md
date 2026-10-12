@@ -20,8 +20,8 @@
 > **定位**: 本文件从**形式模型维度**跟踪 Rust 语言特性的演进，而非版本特性清单。仅收录对 Rust 的**所有权（Ownership）模型、类型系统（Type System）、异步（Async）语义、Unsafe 边界**有结构性影响的特性。
 > **原则**: 琐碎语法糖点到为止，聚焦"形式化语义发生了什么变化"。
 > **更新频率**: 每 6 周对齐 stable release，每季度审计。
-> **状态**: v1.75（2026-07-31 更新，对齐 Rust 1.97.1 stable；1.98.0 beta 已冻结，预计 2026-08-20 进入 stable；已新增 `feature_domain_matrix_198.md` 与 `migration_198_decision_tree.md` 进行 1.98 语义对齐）。
-> Rust 1.97.1 已于 2026-07-16 进入 stable；`rust_1_97_stabilized.md` 为 1.97.0 特性参考入口，`rust_1_97_1.md` 为 1.97.1 补丁跟踪页，`rust_1_97_preview.md` 仅保留未稳定候选；`rust_1_98_stabilized.md`、`feature_domain_matrix_198.md`、`migration_198_decision_tree.md` 为 1.98 周期跟踪矩阵与迁移判定权威页。
+> **状态**: v1.76（2026-10-12 更新，对齐 Rust 1.99.0 stable（2026-10-01 发布）；已新增 `rust_1_99_stabilized.md` 权威页与本页 §十之二 1.99 跟踪节；1.98.0 已于 2026-08-20 转正 stable，周期档案见 `rust_1_98_preview.md`；Beta 1.100.0 预计 2026-11-12 进入 stable）。
+> Rust 1.99.0 已于 2026-10-01 进入 stable；`rust_1_99_stabilized.md` 为 1.99.0 特性 canonical 汇总页；`rust_1_99_preview.md` 已滚动为 1.100+ 周期跟踪页；`rust_1_100_preview.md` 为 1.100+ 远期跟踪页。Rust 1.97.1 已于 2026-07-16 进入 stable；`rust_1_97_stabilized.md` 为 1.97.0 特性参考入口，`rust_1_97_1.md` 为 1.97.1 补丁跟踪页，`rust_1_97_preview.md` 仅保留未稳定候选；`rust_1_98_stabilized.md`、`feature_domain_matrix_198.md`、`migration_198_decision_tree.md` 为 1.98 周期跟踪矩阵与迁移判定权威页。
 > 新增 Rust 1.98 nightly 前瞻代码示例（4 crates: c02/c06/c08/c13）。
 > 核心概念来源标注率 100% 达标。全项目 Bloom 层级标注 1567/1567（100%）。
 > **本次对齐**:
@@ -822,6 +822,33 @@ PTX 是 NVIDIA GPU 的中间表示（类似 LLVM IR），Rust 通过 `nvptx64-nv
 > **来源**: [Rust Blog — Raising the baseline for nvptx64-nvidia-cuda](https://blog.rust-lang.org/) · 可信度: ✅
 
 **Miri 验证状态**: 12 个 crate 2,212+ 测试通过（Tree Borrows），详见 `reports/MIRI_VALIDATION_2026_05_18_COMPREHENSIVE.md`
+
+---
+
+## 十之二、Rust 1.99.0 发布跟踪（已 stable）
+
+**稳定发布日期**: 2026-10-01（branched 2026-08-14）
+
+**1.99 状态速览**：
+
+- Rust 1.99.0 已于 **2026-10-01** 发布 stable。权威稳定内容见 [`rust_1_99_stabilized.md`](rust_1_99_stabilized.md)（canonical 汇总页，2026-10-12 建立）。
+- 截至本更新，**Rust 1.99.0 为当前最新 stable 版本**；Beta 1.100.0（预计 stable 2026-11-12）、Nightly 1.101.0（releases.rs 实测 2026-10-08）。
+- 已确认进入 1.99.0 stable 的主要变更（形式模型视角摘要，完整清单见 `rust_1_99_stabilized.md`）：
+
+| **变更** | **说明** |
+| :--- | :--- |
+| C-variadic 函数定义 | `extern "C"`/`"C-unwind"` 的 `...` 参数列表 + `VaList` 稳定（Unsafe/FFI 边界扩展） |
+| `#[unsafe(naked)]` variadic | naked 函数支持变参（`c_variadic_naked_functions`） |
+| Never type 方法解析 | adjusted never type 上解析 trait methods（产生 FCW） |
+| Trait object 强制 | 推理变量与已知 `Sized` 类型 subtyping 相关时强制为 trait objects |
+| 宏 outlined modules | `#[my_macro] mod foo;` 在宏体内稳定 |
+| Raw pointer layout 三件套 | `Layout::for_value_raw` / `size_of_val_raw` / `align_of_val_raw` |
+| PIE 默认化 | `static_position_independent_executables` 全 gnu/musl 目标启用 |
+| Cargo | 新内置 profile `debug`；workspace 依赖 `default-features` 覆盖（RFC 3945） |
+| 兼容性 | legacy integral modules 完全弃用；`no_mangle_generic_items` 硬错误 |
+| 工具链 | rustc 升级到 LLVM 23 |
+
+> **来源**: [Rust 1.99.0 Release Notes](https://releases.rs/docs/1.99.0/) · [Rust Blog 1.99.0](https://blog.rust-lang.org/2026/10/01/Rust-1.99.0) · 可信度: ✅
 
 ---
 
@@ -2292,6 +2319,7 @@ Cargo 1.96 稳定了 `target.cfg.rustdocflags`、嵌套子命令 man page、`ter
 | v1.68 | 2026-06-20 | 权威内容对齐 Batch 33：① Rust Foundation 2025 年度报告与 2026-2028 战略（$5.1M 筹款 / $2.7M 直接投入 / 五大优先领域）；② RustConf 2026 早期信息（蒙特利尔 9.8–9.11、线上线下混合）；③ RustConf 2026 CFP（2025-12-16 至 2026-02-16、匿名评审、八类主题）；④ RustConf 2026 Program Committee（10 人五大洲、4+4+2 组成机制） [Rust Foundation 2025/2026](https://foundation.rust-lang.org/) |
 | v1.69 | 2026-06-20 | 权威内容对齐 Batch 34：① Rust for Linux 实验结束（Maintainers Summit 2025-12 共识、Kernel 7.0 stable）；② Compiler Team 七名新成员；③ Clippy 功能冻结复盘；④ 基础设施团队 2025 Q3 复盘与 Q4 计划；⑤ Rust All Hands 2026（Utrecht 5.21–5.23）；⑥ `hint-mostly-unused` 测试征集；⑦ Project Directors 2025 选举 [LWN/LKML/Inside Rust 2025-07/08/09/10/12](https://blog.rust-lang.org/inside-rust/) |
 | v1.70 | 2026-06-20 | 权威内容对齐 Batch 35：rustup 1.29.0 beta/正式发布、Cargo 1.94 开发周期（Target Dir 细粒度锁、Structured Logging、TOML 1.1、cargo-cargofmt、lockfile-path）、Cargo 1.96 稳定版工具链亮点 来源: [Rust Blog](https://blog.rust-lang.org/) / Inside Rust 2025-12 / 2026-02 / 03 |
+| v1.76 | 2026-10-12 | Rust 1.99 版本对齐：① 新建 `rust_1_99_stabilized.md` canonical 权威页（1.99.0 stable 2026-10-01）；② 本页新增 §十之二 1.99.0 发布跟踪节；③ `rust_1_98_preview.md` beta 行迁移为已稳定链接行（1.98.0 stable 2026-08-20）；④ `rust_1_99_preview.md` 滚动为 1.100+ 周期跟踪；⑤ `rust_1_100_preview.md` 改写为 1.100+ 远期跟踪页（去重）；⑥ 根 `Cargo.toml` rust-version 1.97.1→1.99.0 来源: [releases.rs 1.99.0](https://releases.rs/docs/1.99.0/) / [Rust Blog](https://blog.rust-lang.org/2026/10/01/Rust-1.99.0) |
 
 ---
 

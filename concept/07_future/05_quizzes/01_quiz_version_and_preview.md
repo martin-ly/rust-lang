@@ -123,7 +123,7 @@ rust-version = "1.94"
 
 **答案**：B。
 
-**解析**：`rust-version = "1.97.1"` 声明该 crate 要求的**最低 rustc 版本**（MSRV），工具链低于此版本时 Cargo 拒绝构建；`edition = "2024"` 选择**语法/语义版本**，决定 `gen` 关键字保留、`if let` 作用域等语言行为。两者是不同维度的约束，混用是常见配置错误。(Source: [Rust Editions](../00_version_tracking/02_editions.md) 反命题 3)
+**解析**：`rust-version = "1.99.0"` 声明该 crate 要求的**最低 rustc 版本**（MSRV），工具链低于此版本时 Cargo 拒绝构建；`edition = "2024"` 选择**语法/语义版本**，决定 `gen` 关键字保留、`if let` 作用域等语言行为。两者是不同维度的约束，混用是常见配置错误。(Source: [Rust Editions](../00_version_tracking/02_editions.md) 反命题 3)
 
 </details>
 

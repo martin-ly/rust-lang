@@ -37,9 +37,9 @@
 > **前置概念**: N/A
 ---
 
-## 当前状态：1.98.0 beta 已冻结，stable 约 16 天后发布（2026-08-04）
+## 当前状态：1.98.0 已发布 stable（2026-08-20），本页保留 1.98 周期跟踪档案（2026-10-12 核对）
 
-> **状态摘要**：1.98.0 已于 **2026-07-03** 从 master 切分进入 beta 通道，预计 **2026-08-20** 转正为 stable。截至 **2026-08-04**，特性集已在 beta 分支锁定；**39 项 beta 特性已完成与 `concept/` 权威页的双向语义注入**（验证：`python scripts/check_version_semantic_injection.py --strict` 通过）。最终 release notes 通常会在 stable 发布前 1–2 周由 release team 定稿。本页继续跟踪 beta 已知项与 nightly 1.99+ 前瞻项，stable 发布后将把已稳定内容迁移至 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md)。
+> **状态摘要**：1.98.0 已于 **2026-08-20** 转正为 stable（branched 2026-07-03）。截至 **2026-10-12**，**39 项 beta 特性已全部落实至 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md)**（验证：`python scripts/check_version_semantic_injection.py --strict` 通过）；本页 §0 表中的 beta 行已改写为「已稳定，见 rust_1_98_stabilized.md」链接行，本页保留为 1.98 周期跟踪档案与 nightly 前瞻项入口。
 
 ### 官方跟踪来源
 
@@ -57,15 +57,15 @@
 
 ## 零、1.98 周期跟踪清单（2026-08-04 更新）
 
-> **状态取值**：`stabilized in 1.98 beta`（已随 1.98.0 beta 分支合入，2026-08-20 转正）/ `RFC merged`（RFC 已合并，实现跟踪中）/ `FCP`（最终评论期）/ `nightly only`（nightly 可用，未排期）。
+> **状态取值**：`已稳定（随 1.98.0 beta 分支合入，2026-08-20 转正 stable）` / `RFC merged`（RFC 已合并，实现跟踪中）/ `FCP`（最终评论期）/ `nightly only`（nightly 可用，未排期）。
 > **实测来源**：[releases.rs 1.98.0 beta](https://releases.rs/docs/1.98.0/)（curl 200，2026-08-04）· §1.7 RFC 表（2026-08-04 实测）
 
 | 特性 | 状态 | 语义影响 / 迁移注意 | 跟踪链接 |
 |:---|:---|:---|:---|
-| `Panic[Hook]Info` 中 `Location<'_>` 生命周期改为 `'static` | stabilized in 1.98 beta | **语义等价**：调用点行为不变；签名严格化可能破坏依赖旧生命周期的泛型/Trait 实现。迁移见 §0.1。 | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
-| mingw-w64 C 工具链更新 | stabilized in 1.98 beta | **构建行为变化**：Windows GNU target 的链接行为、运行时依赖与产物布局可能改变；需重新验证 FFI/静态链接产物。 | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
-| 移除 Solaris 上 `File::lock` 实现（语义错误） | stabilized in 1.98 beta | **观察行为变化**：原实现语义错误，现明确不可用。Solaris 用户需迁移至 `fcntl` 或平台特定文件锁。 | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
-| 移除 `-Zemscripten-wasm-eh` | stabilized in 1.98 beta | **命令行选项移除**：原使用该 flag 的构建脚本/CI 需改用新的异常处理配置或移除；否则 `rustc` 报错「未知 option」。 | [releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) |
+| `Panic[Hook]Info` 中 `Location<'_>` 生命周期改为 `'static` | ✅ 已稳定（随 1.98.0 stable 2026-08-20 生效） | 见 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md) §0 矩阵 #12 与对应小节 | [rust_1_98_stabilized.md](rust_1_98_stabilized.md) |
+| mingw-w64 C 工具链更新（Windows-gnu baseline tools） | ✅ 已稳定（随 1.98.0 stable 2026-08-20 生效） | 见 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md) §0 矩阵 #13 与对应小节 | [rust_1_98_stabilized.md](rust_1_98_stabilized.md) |
+| 移除 Solaris 上 `File::lock` 实现（语义错误） | ✅ 已稳定（随 1.98.0 stable 2026-08-20 生效） | 见 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md) §0 矩阵 #16 与对应小节 | [rust_1_98_stabilized.md](rust_1_98_stabilized.md) |
+| 移除 `-Zemscripten-wasm-eh`（Emscripten WASM EH ABI 无条件启用） | ✅ 已稳定（随 1.98.0 stable 2026-08-20 生效） | 见 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md) §0 矩阵 #14 与对应小节 | [rust_1_98_stabilized.md](rust_1_98_stabilized.md) |
 | Named `Fn` trait parameters（RFC #3955） | RFC merged（2026-07-08） | **语法糖，无语义/ABI 影响**：名称仅用于文档与 LSP 提示，不改变对象安全、调用语法或 ABI。详见 §0.2。 | [RFC Book](https://rust-lang.github.io/rfcs/3955-named-fn-trait-parameters.html) |
 | `#![register_{attribute,lint}_tool]`（RFC #3808） | RFC merged（2026-06-10） | **命名空间扩展**：新增 crate 级工具命名空间注册，允许外部工具使用 `tool::lint`/`#[tool::attr]` 语法而不报错；与同名 crate 可能产生歧义错误。 | [RFC Book](https://rust-lang.github.io/rfcs/3808-register-tool.html) |
 | `todo!()` 不再触发 `unreachable_code`（RFC #3928） | RFC merged（2026-06-25） | **观察行为变化**：`todo!()` 后代码不再产生 `unreachable_code` lint；新增 `todo_macro_calls` warn-by-default lint，可在开发期关闭、发布前启用。 | [RFC Book](https://rust-lang.github.io/rfcs/3928-todo-overreach.html) |
@@ -77,7 +77,7 @@
 
 > **完整映射**：39 项 beta 特性的上游 PR/issue 链接、`concept/` 权威页前向链接与回链，已统一维护在 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md) §0 特性矩阵，并在 [`feature_domain_matrix_198.md`](feature_domain_matrix_198.md) 中按 9 大领域做交叉反查。本表仅保留周期跟踪入口与 nightly 前瞻项。
 >
-> **维护约定**：每两周按 §7.1 频率核对本表；1.98.0 发布（2026-08-20）后将 beta 行迁移至 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md)（骨架已建，2026-07-14），本页滚动为 1.99+ 跟踪。
+> **维护约定**：每两周按 §7.1 频率核对本表；1.98.0 发布（2026-08-20）后 beta 行已迁移至 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md)（2026-10-12 完成核对），本页保留 1.98 周期跟踪档案；1.99+ 周期跟踪见 [`rust_1_99_preview.md`](rust_1_99_preview.md)。
 
 ---
 
@@ -819,17 +819,19 @@ mindmap
 
 ## ⚠️ 反例与陷阱：在 stable 上直接调用预览 API
 
-**反例**：看到本页 `float_algebraic` 等 API 预览后，在 stable 项目里直接使用：
+**反例**：看到本页 `#[optimize]` 等预览特性后，在 stable 项目里直接使用：
 
-```rust,compile_fail
+```rust,compile_fail,E0658
+#[optimize(size)] // 1.98 周期预览特性（PFCP / Blocked，PR #157273）：
+                  // stable 上仍是 experimental feature gate
+fn f() {}
+
 fn main() {
-    // 1.98 预览 API：f32::algebraic_add（浮点代数运算，允许重排优化）
-    let x = 1.0f32.algebraic_add(2.0);
-    println!("{x}");
+    f();
 }
 ```
 
-实测（rustc 1.97.0 stable, edition 2024）：`error[E0658]: use of unstable library feature`float_algebraic``。
+实测（rustc 1.99.0 stable, edition 2024）：`error[E0658]: the `optimize` attribute is an experimental feature`。（旧版示例 `f32::algebraic_add` 在 rustc 1.99 下已编译通过——`float_algebraic` 已随 1.98 周期进入 stable，故本反例改用 §2.2 表中仍在等待稳定的 `#[optimize]`。）
 
 **陷阱本质**：预览页列出的 nightly-only API 在 stable 上没有入口。E0658 与 E0554 的区别在于：前者是「库 API 未稳定」，后者是「编译器拒绝 feature gate」——两者都不能靠配置绕过。
 
@@ -909,7 +911,7 @@ nightly 通道直接跟踪 master。1.97.1 的修复在合并进 master 后，�
 
 ### 11.1 `PanicHookInfo` 中 `Location<'_>` 生命周期 `'static` 化
 
-**状态**: ✅ stabilized in 1.98.0 beta · **来源**: [PR #146561](https://github.com/rust-lang/rust/pull/146561) · **跟踪 issue**: [#148297](https://github.com/rust-lang/rust/issues/148297)
+**状态**: ✅ 已稳定（1.98.0 stable，2026-08-20 生效），见 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md) · **来源**: [PR #146561](https://github.com/rust-lang/rust/pull/146561) · **跟踪 issue**: [#148297](https://github.com/rust-lang/rust/issues/148297)
 **相关概念**: [panic / error handling](../../02_intermediate/03_error_handling/03_panic.md) · [lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md)
 
 panic 发生位置（文件、行号、列）本质上是编译期静态字符串，因此 `PanicHookInfo::location()` 的返回类型从 `Option<&Location<'_>>` 收紧为 `Option<&'static Location<'static>>`。
@@ -930,7 +932,7 @@ std::panic::set_hook(Box::new(|info| {
 
 ### 11.2 新增运行时符号定义 lint：`invalid_runtime_symbol_definitions` / `suspicious_runtime_symbol_definitions`
 
-**状态**: ✅ stabilized in 1.98.0 beta · **来源**: [PR #155521](https://github.com/rust-lang/rust/pull/155521) · **跟踪 issue**: [#156519](https://github.com/rust-lang/rust/issues/156519)
+**状态**: ✅ 已稳定（1.98.0 stable，2026-08-20 生效），见 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md) · **来源**: [PR #155521](https://github.com/rust-lang/rust/pull/155521) · **跟踪 issue**: [#156519](https://github.com/rust-lang/rust/issues/156519)
 **相关概念**: [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) · [linkage](../../03_advanced/04_ffi/03_linkage.md)
 
 Rust 运行时依赖 `memcmp`、`memset`、`memmove`、`strlen` 等 C 运行时符号。若 crate 用 `#[no_mangle]` 定义同名符号，会静默覆盖运行时实现，导致未定义行为。
@@ -952,7 +954,7 @@ pub extern "C" fn memset(dest: *mut u8, c: i32, n: usize) -> *mut u8 {
 
 ### 11.3 unsizing coercion 中 `&mut` 生命周期缩短扩展到不变位置
 
-**状态**: ✅ stabilized in 1.98.0 beta · **来源**: [PR #149219](https://github.com/rust-lang/rust/pull/149219) · **跟踪 issue**: [#156457](https://github.com/rust-lang/rust/issues/156457)
+**状态**: ✅ 已稳定（1.98.0 stable，2026-08-20 生效），见 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md) · **来源**: [PR #149219](https://github.com/rust-lang/rust/pull/149219) · **跟踪 issue**: [#156457](https://github.com/rust-lang/rust/issues/156457)
 **相关概念**: [lifetimes](../../01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md) · [coercions](../../02_intermediate/04_types_and_conversions/07_type_conversions.md)
 
 此前 `&mut T` 在逆变/协变位置可以通过 unsizing coercion 缩短生命周期，但在不变位置（如 `Cell<&mut T>`）被禁止。1.98 统一了 `&mut` 与 `&` 的缩短规则。
@@ -979,7 +981,7 @@ fn caller<'long>(c: Cell<&'long mut i32>) {
 
 ### 11.4 `ambiguous_glob_imports` 部分转为硬错误
 
-**状态**: ✅ stabilized in 1.98.0 beta（兼容性变更） · **来源**: [PR #149195](https://github.com/rust-lang/rust/pull/149195) · **跟踪 issue**: [#156648](https://github.com/rust-lang/rust/issues/156648)
+**状态**: ✅ 已稳定（1.98.0 stable，2026-08-20 生效；兼容性变更），见 [rust_1_98_stabilized.md](rust_1_98_stabilized.md) · **来源**: [PR #149195](https://github.com/rust-lang/rust/pull/149195) · **跟踪 issue**: [#156648](https://github.com/rust-lang/rust/issues/156648)
 **相关概念**: [module system](../../02_intermediate/05_modules_and_visibility/01_module_system.md)
 
 `use module::*;` 可能一次性引入多个同名项。此前最直接的歧义只产生 lint，1.98 将其提升为硬错误。
@@ -1005,7 +1007,7 @@ fn main() {
 
 ### 11.5 `core::ffi::c_void` 作为返回类型触发 lint
 
-**状态**: ✅ stabilized in 1.98.0 beta · **来源**: [PR #156379](https://github.com/rust-lang/rust/pull/156379) · **跟踪 issue**: [#156853](https://github.com/rust-lang/rust/issues/156853)
+**状态**: ✅ 已稳定（1.98.0 stable，2026-08-20 生效），见 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md) · **来源**: [PR #156379](https://github.com/rust-lang/rust/pull/156379) · **跟踪 issue**: [#156853](https://github.com/rust-lang/rust/issues/156853)
 **相关概念**: [FFI](../../03_advanced/04_ffi/01_rust_ffi.md)
 
 `c_void` 是不完整类型，直接作为函数返回类型会丢失类型信息，并诱导调用者错误地使用 `transmute`。
@@ -1032,7 +1034,7 @@ unsafe extern "C" {
 
 ### 11.6 where 子句拒绝 `Type = Type` / `Type == Type`
 
-**状态**: ⚠ compatibility change in 1.98.0 beta · **来源**: [PR #153513](https://github.com/rust-lang/rust/pull/153513) · **跟踪 issue**: [#154816](https://github.com/rust-lang/rust/issues/154816)
+**状态**: ⚠ 已稳定为兼容性变更（1.98.0 stable，2026-08-20 生效），见 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md) · **来源**: [PR #153513](https://github.com/rust-lang/rust/pull/153513) · **跟踪 issue**: [#154816](https://github.com/rust-lang/rust/issues/154816)
 **相关概念**: [traits / generic bounds](../../02_intermediate/00_traits/01_traits.md)
 
 Rust 的 where 子句从未支持普通类型等式约束，但解析器此前延迟到类型检查阶段才报错，诊断位置模糊。
@@ -1053,7 +1055,7 @@ fn ok<T>() where T::Item = u32 {}
 
 ### 11.7 `repr(transparent)` 对 trivial 布局字段更严格
 
-**状态**: ⚠ compatibility change in 1.98.0 beta · **来源**: [PR #155299](https://github.com/rust-lang/rust/pull/155299) · **跟踪 issue**: [#157730](https://github.com/rust-lang/rust/issues/157730)
+**状态**: ⚠ 已稳定为兼容性变更（1.98.0 stable，2026-08-20 生效），见 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md) · **来源**: [PR #155299](https://github.com/rust-lang/rust/pull/155299) · **跟踪 issue**: [#157730](https://github.com/rust-lang/rust/issues/157730)
 **相关概念**: [memory model / layout](../../03_advanced/02_unsafe/06_memory_model.md)
 
 `#[repr(transparent)]` 要求类型只有一个非零大小字段，其余字段必须具有 "trivial" 布局。1.98 收紧 trivial 定义：`repr(C)` 类型、私有字段类型和 `#[non_exhaustive]` 类型不再被视为 trivial。
@@ -1078,7 +1080,7 @@ struct SafeWrapper<T>(T, PhantomData<T>);
 
 ### 11.8 派生 `StructuralPartialEq` 增加 `T: PartialEq` bound
 
-**状态**: ✅ stabilized in 1.98.0 beta · **来源**: [PR #156807](https://github.com/rust-lang/rust/pull/156807) · **跟踪 issue**: [#157865](https://github.com/rust-lang/rust/issues/157865)
+**状态**: ✅ 已稳定（1.98.0 stable，2026-08-20 生效），见 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md) · **来源**: [PR #156807](https://github.com/rust-lang/rust/pull/156807) · **跟踪 issue**: [#157865](https://github.com/rust-lang/rust/issues/157865)
 **相关概念**: [derive traits](../../02_intermediate/00_traits/06_derive_traits.md)
 
 `#[derive(PartialEq)]` 自动实现的 `StructuralPartialEq` trait 此前对泛型参数没有 `PartialEq` bound，导致 const 比较/结构匹配场景下出现不一致。
@@ -1101,7 +1103,7 @@ struct Packet<T> {
 
 ### 11.9 Windows TLS 析构切换到 FLS；`ManuallyDrop<Box<T>>` 交互修复
 
-**状态**: ✅ stabilized in 1.98.0 beta · **来源**: [PR #148799](https://github.com/rust-lang/rust/pull/148799)（FLS）· [PR #155750](https://github.com/rust-lang/rust/pull/155750)（ManuallyDrop Box）
+**状态**: ✅ 已稳定（1.98.0 stable，2026-08-20 生效），见 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md) · **来源**: [PR #148799](https://github.com/rust-lang/rust/pull/148799)（FLS）· [PR #155750](https://github.com/rust-lang/rust/pull/155750)（ManuallyDrop Box）
 **相关概念**: [destructors](../../04_formal/05_rustc_internals/09_destructors.md)
 
 Windows 上 `thread_local!` 析构从 TLS 回调改为 FLS（Fiber Local Storage），解决了 DLL 卸载/纤程场景下析构时序和重复析构问题。同时，`ManuallyDrop<Box<T>>` 的显式 drop 路径得到修复，消除了双重释放/泄漏风险。
@@ -1123,7 +1125,7 @@ drop(b);
 
 ### 11.10 `transmute()` 在涉及 `repr` 属性时更严格地检查等大小
 
-**状态**: ⚠ compatibility change in 1.98.0 beta · **来源**: [PR #155418](https://github.com/rust-lang/rust/pull/155418) · **跟踪 issue**: [#156852](https://github.com/rust-lang/rust/issues/156852)
+**状态**: ⚠ 已稳定为兼容性变更（1.98.0 stable，2026-08-20 生效），见 [`rust_1_98_stabilized.md`](rust_1_98_stabilized.md) · **来源**: [PR #155418](https://github.com/rust-lang/rust/pull/155418) · **跟踪 issue**: [#156852](https://github.com/rust-lang/rust/issues/156852)
 **相关概念**: [memory model / transmute](../../03_advanced/02_unsafe/06_memory_model.md) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md)
 
 `std::mem::transmute` 要求源类型与目标类型大小相等。当类型带有 `repr` 属性时，旧实现的大小相等检查在某些 newtype 场景下存在缺陷。

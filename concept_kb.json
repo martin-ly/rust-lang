@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 790,
-    "generated_at": "2026-10-12T10:01:26.208079+00:00"
+    "total_files": 791,
+    "generated_at": "2026-10-12T11:56:09.397582+00:00"
   },
   "files": [
     {
@@ -52584,7 +52584,7 @@
       "layer": "L4",
       "title": "计算语义统一框架（A Unified Framework of Computational Semantics）",
       "positioning": "把操作、指称、公理、类型四种语义统一为观察同一程序行为的四种互补视角，为后续可计算性、形式语言与程序等价性讨论奠定共同语言。",
-      "line_count": 363,
+      "line_count": 364,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -52609,9 +52609,9 @@
             "compile_fail",
             "E0015"
           ],
-          "lines": 5,
+          "lines": 6,
           "should_fail": true,
-          "code_preview": "const fn heap_alloc_in_const() -> Vec<i32> {     vec![1, 2, 3] // ERROR: vec! 宏在..."
+          "code_preview": "const fn heap_alloc_in_const() -> String {     String::from(\"hello\") // ERROR E0..."
         },
         {
           "flags": [
@@ -81083,7 +81083,7 @@
       "layer": "L6",
       "title": "Rust 数据库访问生态",
       "positioning": "分析 Rust 的数据库访问生态——从 SQLx 的编译期检查到 Diesel 的 ORM [来源: [Wikipedia — ORM](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping)]，探讨类型安全如何消除运行时（Runtime）查询错误。",
-      "line_count": 883,
+      "line_count": 886,
       "theorem_chains": [
         {
           "text": "| Rust 数据库访问生态 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -92517,7 +92517,7 @@
       "layer": "L7",
       "title": "Rust 形式模型演进跟踪（1.79–1.97+）",
       "positioning": "本文件从**形式模型维度**跟踪 Rust 语言特性的演进，而非版本特性清单。仅收录对 Rust 的**所有权（Ownership）模型、类型系统（Type System）、异步（Async）语义、Unsafe 边界**有结构性影响的特性。",
-      "line_count": 2699,
+      "line_count": 2727,
       "theorem_chains": [
         {
           "text": "| Rust 形式模型演进跟踪（1.79–1.97+） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -92641,12 +92641,13 @@
         "../04_research_and_experimental/03_evolution.md",
         "https://github.com/rust-lang/cargo/blob/master/CHANGELOG.md",
         "rust_1_95_stabilized.md",
-        "rust_1_97_stabilized.md"
+        "rust_1_97_stabilized.md",
+        "rust_1_99_stabilized.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 3,
-      "matrix_rows": 484,
+      "matrix_rows": 496,
       "pre_post": {
         "pre": [
           ">"
@@ -93365,9 +93366,9 @@
     {
       "path": "G:\\_src\\rust-lang\\concept\\07_future\\00_version_tracking\\rust_1_100_preview.md",
       "layer": "L7",
-      "title": "Rust 1.100+ 前沿特性预览",
+      "title": "Rust 1.100+ 远期特性预览",
       "positioning": "",
-      "line_count": 277,
+      "line_count": 204,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -93381,33 +93382,23 @@
         "../../06_ecosystem/01_cargo/15_cargo_getting_started.md",
         "../02_preview_features/01_effects_system.md",
         "../02_preview_features/03_safety_tags_preview.md",
-        "../02_preview_features/05_derive_coerce_pointee_preview.md",
-        "../02_preview_features/06_const_trait_impl_preview.md",
-        "../02_preview_features/09_return_type_notation_preview.md",
-        "../02_preview_features/16_cranelift_backend_preview.md",
-        "../02_preview_features/17_type_alias_impl_trait_preview.md",
-        "../02_preview_features/18_arbitrary_self_types_preview.md",
-        "../02_preview_features/22_async_drop_preview.md",
         "../02_preview_features/23_field_projections_preview.md",
         "../02_preview_features/24_borrow_sanitizer.md",
-        "../02_preview_features/25_gen_blocks_preview.md",
         "../02_preview_features/27_cargo_semver_checks_preview.md",
-        "../02_preview_features/29_aarch64_sve_sme_preview.md",
-        "../02_preview_features/31_specialization_preview.md",
-        "../02_preview_features/35_f16_f128_preview.md",
         "01_rust_version_tracking.md",
-        "rust_1_99_preview.md"
+        "rust_1_99_preview.md",
+        "rust_1_99_stabilized.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 39,
+      "matrix_rows": 26,
       "pre_post": {
         "pre": [
-          "[Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.99+ 前沿特性预览](rust_1_99_preview.md) · [Cargo 入门](../../06_ecosystem/01_cargo/15_cargo_getting_started.md)"
+          "[Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.99+ 前沿特性预览（周期滚动）](rust_1_99_preview.md) · [Rust 1.99.0 稳定特性](rust_1_99_stabilized.md) · [Cargo 入门](../../06_ecosystem/01_cargo/15_cargo_getting_started.md)"
         ],
         "post": [
-          "Rust 1.101+ 前沿特性预览（待 1.100.0 进入 beta 后建立）"
+          "Rust 1.101+ 前沿特性预览（待 1.101.0 进入 beta 后建立）"
         ]
       },
       "backward_chains": 0,
@@ -95569,7 +95560,7 @@
       "layer": "L7",
       "title": "Rust 1.98+ 前沿特性预览",
       "positioning": "",
-      "line_count": 1156,
+      "line_count": 1158,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -95653,11 +95644,12 @@
         },
         {
           "flags": [
-            "compile_fail"
+            "compile_fail",
+            "E0658"
           ],
-          "lines": 6,
+          "lines": 8,
           "should_fail": true,
-          "code_preview": "fn main() {     // 1.98 预览 API：f32::algebraic_add（浮点代数运算，允许重排优化）     let x = 1.0..."
+          "code_preview": "#[optimize(size)] // 1.98 周期预览特性（PFCP / Blocked，PR #157273）：                   /..."
         },
         {
           "flags": [
@@ -95765,7 +95757,8 @@
         "feature_domain_matrix_198.md",
         "rust_1_97_1.md",
         "rust_1_97_preview.md",
-        "rust_1_98_stabilized.md"
+        "rust_1_98_stabilized.md",
+        "rust_1_99_preview.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -95877,7 +95870,8 @@
         "../02_preview_features/35_f16_f128_preview.md",
         "01_rust_version_tracking.md",
         "rust_1_98_preview.md",
-        "rust_1_98_stabilized.md"
+        "rust_1_98_stabilized.md",
+        "rust_1_99_stabilized.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
@@ -95889,6 +95883,72 @@
         ],
         "post": [
           "Rust 1.100+ 前沿特性预览（待 1.99.0 进入 beta 后建立）"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "G:\\_src\\rust-lang\\concept\\07_future\\00_version_tracking\\rust_1_99_stabilized.md",
+      "layer": "L7",
+      "title": "Rust 1.99.0 稳定特性",
+      "positioning": "",
+      "line_count": 360,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../01_foundation/02_type_system/02_never_type.md",
+        "../../01_foundation/02_type_system/03_numerics.md",
+        "../../01_foundation/02_type_system/04_coercion_and_casting.md",
+        "../../01_foundation/05_collections/01_collections.md",
+        "../../01_foundation/05_collections/02_collections_advanced.md",
+        "../../01_foundation/06_strings_and_text/02_strings_and_encoding.md",
+        "../../01_foundation/09_macros_basics/01_attributes_and_macros.md",
+        "../../02_intermediate/01_generics/05_const_generics_and_trait_objects.md",
+        "../../02_intermediate/02_memory_management/04_smart_pointers.md",
+        "../../02_intermediate/03_error_handling/03_panic.md",
+        "../../02_intermediate/04_types_and_conversions/01_range_types.md",
+        "../../02_intermediate/04_types_and_conversions/06_unions.md",
+        "../../02_intermediate/05_modules_and_visibility/01_module_system.md",
+        "../../02_intermediate/06_macros_and_metaprogramming/04_declarative_macros.md",
+        "../../02_intermediate/07_iterators_and_closures/01_iterator_patterns.md",
+        "../../03_advanced/01_async/08_pin_unpin.md",
+        "../../03_advanced/02_unsafe/06_memory_model.md",
+        "../../03_advanced/02_unsafe/07_unsafe_reference.md",
+        "../../03_advanced/03_proc_macros/01_macros.md",
+        "../../03_advanced/04_ffi/01_rust_ffi.md",
+        "../../03_advanced/04_ffi/02_ffi_advanced.md",
+        "../../03_advanced/04_ffi/03_linkage.md",
+        "../../03_advanced/05_inline_assembly/01_inline_assembly.md",
+        "../../03_advanced/05_inline_assembly/02_inline_assembly_extended.md",
+        "../../03_advanced/06_low_level_patterns/01_custom_allocators.md",
+        "../../04_formal/05_rustc_internals/08_type_layout.md",
+        "../../06_ecosystem/00_toolchain/01_toolchain.md",
+        "../../06_ecosystem/00_toolchain/03_devops_and_ci_cd.md",
+        "../../06_ecosystem/00_toolchain/07_rustdoc_196_changes.md",
+        "../../06_ecosystem/00_toolchain/16_rustdoc_internals.md",
+        "../../06_ecosystem/01_cargo/06_cargo_dependency_resolution.md",
+        "../../06_ecosystem/01_cargo/11_cargo_profiles_and_lints.md",
+        "../../06_ecosystem/01_cargo/14_cargo_workspaces.md",
+        "../../06_ecosystem/05_systems_and_embedded/10_target_tier_platform_support.md",
+        "../03_edition_differences/01_edition_2021_to_2024.md",
+        "01_rust_version_tracking.md",
+        "rust_1_100_preview.md",
+        "rust_1_98_stabilized.md",
+        "rust_1_99_preview.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 32,
+      "pre_post": {
+        "pre": [
+          "[Rust 版本跟踪](01_rust_version_tracking.md) · [Rust 1.98 稳定特性](rust_1_98_stabilized.md)"
+        ],
+        "post": [
+          "[Rust 1.99+ 前沿特性预览](rust_1_99_preview.md) · [Rust 1.100+ 远期跟踪](rust_1_100_preview.md)"
         ]
       },
       "backward_chains": 0,

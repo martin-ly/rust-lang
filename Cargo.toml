@@ -35,7 +35,7 @@ exclude = [
 [workspace.package]
 version = "3.1.0"
 edition = "2024"
-rust-version = "1.97.1"
+rust-version = "1.99.0"
 license = "MIT OR Apache-2.0"
 authors = ["Rust Learning Community"]
 repository = "https://github.com/martin-ly/rust-lang"
@@ -183,8 +183,8 @@ codegen-units = 1024
 panic = "abort"
 
 # 工作区级别的依赖版本统一
-# 2026-07-22: Rust 1.97.1 stable / 1.98.0-beta / 1.99.0-nightly 同步更新
-# rust-version: 1.97.1
+# 2026-10-12: Rust 1.99.0 stable / 1.100.0-beta / 1.101.0-nightly 同步更新
+# rust-version: 1.99.0
 # 注意: 优先选择稳定成熟的版本，避免使用 alpha/RC 版本导致的破坏性变更
 [workspace.dependencies]
 # 本地 crate

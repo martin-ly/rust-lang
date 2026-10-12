@@ -185,9 +185,10 @@ Rust 的 **const 求值（const evaluation）** 是 Church-Turing 论题在工�
 | 未定义行为 / 任意 I/O | ❌ | const 求值必须是纯函数式的 |
 
 ```rust,compile_fail,E0015
-const fn heap_alloc_in_const() -> Vec<i32> {
-    vec![1, 2, 3] // ERROR: vec! 宏在 const fn 中会触发堆分配，
-                  // 其底层调用（如 Box::new_uninit）不是 const fn
+const fn heap_alloc_in_const() -> String {
+    String::from("hello") // ERROR E0015: String::from 在 const fn 中触发堆分配，
+                          // 其底层调用不是 const fn（vec!/Vec::push 同理，
+                          // 诊断文案为 "not yet stable as a const fn"）
 }
 ```
 
