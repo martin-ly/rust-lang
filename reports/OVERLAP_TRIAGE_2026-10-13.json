@@ -3,8 +3,8 @@
     "SERIES": 104,
     "MERGE": 0,
     "DOCS_INTERNAL": 0,
-    "REVIEWED": 509,
-    "REVIEW": 2,
+    "REVIEWED": 511,
+    "REVIEW": 0,
     "total": 615,
     "source": "reports/CONTENT_OVERLAP_V2_2026-10-13.json"
   },
@@ -7803,6 +7803,32 @@
       },
       {
         "sim": 0.5,
+        "kw_sim": 0.367,
+        "title_sim": 0.5,
+        "shared": 17,
+        "same_dir": true,
+        "f1": "concept/06_ecosystem/05_systems_and_embedded/49_embedded_hal_driver_patterns.md",
+        "f2": "concept/06_ecosystem/05_systems_and_embedded/24_embedded_hal_and_driver_idioms.md",
+        "t1": "Embedded-HAL 驱动模式",
+        "t2": "`embedded-hal` 与驱动惯用法",
+        "lines1": 596,
+        "lines2": 621
+      },
+      {
+        "sim": 0.5,
+        "kw_sim": 0.367,
+        "title_sim": 0.5,
+        "shared": 13,
+        "same_dir": true,
+        "f1": "concept/06_ecosystem/05_systems_and_embedded/24_embedded_hal_and_driver_idioms.md",
+        "f2": "concept/06_ecosystem/05_systems_and_embedded/49_embedded_hal_driver_patterns.md",
+        "t1": "`embedded-hal` 与驱动惯用法",
+        "t2": "Embedded-HAL 驱动模式",
+        "lines1": 621,
+        "lines2": 596
+      },
+      {
+        "sim": 0.5,
         "kw_sim": 0.5,
         "title_sim": 0.0,
         "shared": 12,
@@ -7984,33 +8010,6 @@
         "lines2": 15
       }
     ],
-    "REVIEW": [
-      {
-        "sim": 0.5,
-        "kw_sim": 0.367,
-        "title_sim": 0.5,
-        "shared": 17,
-        "same_dir": true,
-        "f1": "concept/06_ecosystem/05_systems_and_embedded/49_embedded_hal_driver_patterns.md",
-        "f2": "concept/06_ecosystem/05_systems_and_embedded/24_embedded_hal_and_driver_idioms.md",
-        "t1": "Embedded-HAL 驱动模式",
-        "t2": "`embedded-hal` 与驱动惯用法",
-        "lines1": 596,
-        "lines2": 621
-      },
-      {
-        "sim": 0.5,
-        "kw_sim": 0.367,
-        "title_sim": 0.5,
-        "shared": 13,
-        "same_dir": true,
-        "f1": "concept/06_ecosystem/05_systems_and_embedded/24_embedded_hal_and_driver_idioms.md",
-        "f2": "concept/06_ecosystem/05_systems_and_embedded/49_embedded_hal_driver_patterns.md",
-        "t1": "`embedded-hal` 与驱动惯用法",
-        "t2": "Embedded-HAL 驱动模式",
-        "lines1": 621,
-        "lines2": 596
-      }
-    ]
+    "REVIEW": []
   }
 }

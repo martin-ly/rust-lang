@@ -7,8 +7,8 @@
 | MERGE | 0 | 应合并近克隆（留一删余或 stub 化） |
 | DOCS_INTERNAL | 0 | docs/ 内同主题互抄（合并或互链） |
 | SERIES | 104 | 保留但标注为版本系列/分章（白名单） |
-| REVIEWED | 509 | 已批量复核确认非重复（stub/模板系列/同领域术语共现，白名单） |
-| REVIEW | 2 | 人工复核 |
+| REVIEWED | 511 | 已批量复核确认非重复（stub/模板系列/同领域术语共现，白名单） |
+| REVIEW | 0 | 人工复核 |
 
 ## MERGE（0）Top 25
 
@@ -50,7 +50,7 @@
 | 0.719 | `docs/05_practice/05_project_04_password_generator.md` | `docs/05_practice/09_project_08_cache_system.md` |
 | 0.719 | `docs/05_practice/05_project_04_password_generator.md` | `docs/05_practice/10_project_09_log_parser.md` |
 
-## REVIEWED（509）Top 25
+## REVIEWED（511）Top 25
 
 | sim | 文件1 | 文件2 |
 |:---:|:---|:---|
@@ -80,12 +80,10 @@
 | 0.75 | `crates/c05_threads/docs/tier_01_foundations/03_glossary.md` | `crates/c05_threads/docs/tier_01_foundations/04_faq.md` |
 | 0.727 | `crates/c01_ownership_borrow_scope/docs/01_concept_relationship_network.md` | `crates/c01_ownership_borrow_scope/docs/07_role_based_navigation.md` |
 
-## REVIEW（2）Top 25
+## REVIEW（0）Top 25
 
 | sim | 文件1 | 文件2 |
 |:---:|:---|:---|
-| 0.5 | `concept/06_ecosystem/05_systems_and_embedded/49_embedded_hal_driver_patterns.md` | `concept/06_ecosystem/05_systems_and_embedded/24_embedded_hal_and_driver_idioms.md` |
-| 0.5 | `concept/06_ecosystem/05_systems_and_embedded/24_embedded_hal_and_driver_idioms.md` | `concept/06_ecosystem/05_systems_and_embedded/49_embedded_hal_driver_patterns.md` |
 
 ## 机器可读
 

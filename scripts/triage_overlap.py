@@ -177,6 +177,17 @@ REVIEWED_PAIRS = {
         "concept/02_intermediate/04_types_and_conversions/02_closure_types.md",
         "concept/02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md",
     }),
+    # 复核 2026-10-13（族 L）：embedded_hal 一对（sim 0.5，REVIEW 桶长期残留）。逐节核验：
+    # 24_embedded_hal_and_driver_idioms.md（620 行，Bloom L4，Summary=embedded-hal 1.0 trait 契约/
+    # 类型状态引脚/DMA 所有权/defmt 调试等惯用法）与 49_embedded_hal_driver_patterns.md（595 行，
+    # Bloom L5，Summary=驱动设计模式：状态机驱动/寄存器映射建模/事务组合/Mock 可测试性/完整传感器
+    # 驱动示例）为同领域不同抽象层：前者讲 trait 契约惯用法，后者讲上层设计模式，H2 主体节仅
+    # 共享「反模式/决策树/相关概念」骨架节（模板结构），核心节（trait 矩阵 vs 状态机/寄存器建模）
+    # 无正文互抄。属合理分层重复，登记 REVIEWED 不再计入 REVIEW。
+    frozenset({
+        "concept/06_ecosystem/05_systems_and_embedded/24_embedded_hal_and_driver_idioms.md",
+        "concept/06_ecosystem/05_systems_and_embedded/49_embedded_hal_driver_patterns.md",
+    }),
 }
 
 
