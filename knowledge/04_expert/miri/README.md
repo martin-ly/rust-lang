@@ -8,4 +8,4 @@
 
 ## 权威来源
 
-> [`concept/04_formal/04_model_checking/08_miri.md`](../../concept/04_formal/04_model_checking/08_miri.md)
+> [`concept/04_formal/04_model_checking/08_miri.md`](../../../concept/04_formal/04_model_checking/08_miri.md)

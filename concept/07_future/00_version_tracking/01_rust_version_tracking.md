@@ -909,7 +909,7 @@ PTX 是 NVIDIA GPU 的中间表示（类似 LLVM IR），Rust 通过 `nvptx64-nv
 [来源: [Rust Blog — Project goals update December 2025](https://blog.rust-lang.org/)]
 
 - **旗舰目标进展**:
-  - **"Beyond the `&"**（字段投影 / Virtual Places）：确定采用 **one-shot projections** 方向；引入`CanonicalReborrow` trait 与 `@$place_expr` 语法草图；为 `MaybeUninit<T>` / `Cell<T>` / `RefCell<T>` 等**非间接容器**引入 `PlaceWrapper` trait 以支持投影；建立 wiki [rust-lang.github.io/beyond-refs](https://rust-lang.github.io/beyond-refs) 作为方案空间单一事实来源。
+  - **"Beyond the `&"**（字段投影 / Virtual Places）：确定采用 **one-shot projections** 方向；引入`CanonicalReborrow` trait 与 `@$place_expr` 语法草图；为 `MaybeUninit&lt;T&gt;` / `Cell&lt;T&gt;` / `RefCell&lt;T&gt;` 等**非间接容器**引入 `PlaceWrapper` trait 以支持投影；建立 wiki [rust-lang.github.io/beyond-refs](https://rust-lang.github.io/beyond-refs) 作为方案空间单一事实来源。
   - **"Reborrow traits"**：`Reborrow` trait 已基本可用（存在 `let mut` marker 绑定的小 bug）；`CoerceShared<Target: Copy>` trait 形式简化，放弃 `type Target` ADT。
   - **"Flexible, fast(er) compilation"（Cranelift 生产级后端）**：**因未获得所需资金，目标正式关闭**。 Folkert de Vries 指出 Cranelift 对真实代码改动的 codegen 时间改善低于预期，团队不愿承诺硬数字。
   - **"Higher-level Rust"**（cargo-script / frontmatter）：frontmatter 围栏长度限制已加入（#149358）；frontmatter 在 rustdoc doctest 中的处理方式仍在讨论。
