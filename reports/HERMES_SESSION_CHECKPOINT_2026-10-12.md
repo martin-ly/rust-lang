@@ -30,6 +30,8 @@
 
 ## 3. 未完成项（新会话续做清单）
 
+> **勘误 2026-10-13**：原 §3-6『knowledge/ 82 大型文件迁移』经 git 实证已完成（2026-07-10 `5cb654956` 迁入 content/，2026-07-19 `86e06ba37` 清 knowledge/ 143 文件）。现 knowledge/ 仅 15 文件（14 stub + INDEX），大型非 stub=0，零迁移。详见 `reports/F_TRACK_PLAN_2026-10-13.md`。F 轨道剩余动作：① move_ledger.csv 初始化（尚不存在）；② 38 个非构建空目录保留+登记；③ 3 个已删除主题缺口（keywords 速查 / cargo_basics 总览 / k8s 部署）未来以新建 canonical 页补齐。
+
 1. **clippy 1.99 新 lint + 性能测试修复**：子代理 `sa-0-9a2ba591`（deleg_fadf2120）关机时被中断。已知失败清单：c04_generic 4×approx_constant（rust_194_features.rs 里 EULER_GAMMA/GOLDEN_RATIO 等手写常量）、c05_threads 6×、c08_algorithms 2×manual_isolate_lowest_one（bit_manipulation.rs:367、binary_indexed_tree.rs:33 的 `x & (-x)`）、c10_networks performance_tests.rs 3 个 wall-clock 阈值失败（实测 1922/1318.7/169 ns）。子代理已改 13 个源文件（见 git status）**但未跑完最终验收**——新会话第一步：`cargo clippy --workspace -- -D warnings` + `cargo test --workspace` 复跑，按结果收尾或补修。
 2. **cargo audit 剩 2 漏洞**：rkyv（升级 rust_decimal/surrealdb 或按 .cargo/audit.toml 惯例登记带评估的忽略）、lockfree/owned-alloc（glommio 传递，仅 Linux；倾向按既有 instant 先例登记忽略）。
 3. **cargo-vet 不可用**：0.10.2 上游编译失败（windows-sys `LockFileEx` 导入解析不到，`--locked` 未再试）。`.cargo/audit.toml` 注释称 cargo-vet 是主要供应链治理工具——需试 `cargo install cargo-vet --locked` 或旧版 0.9.x，或在基线报告如实登记为环境不可用门。
