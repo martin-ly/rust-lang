@@ -177,14 +177,14 @@ pub fn demonstrate_math_constants() {
     println!("\n=== 数学常量演示 ===\n");
 
     // 欧拉-马歇罗尼常数
-    let euler_gamma_f32: f32 = 0.5772157; // std::f32::consts::EULER_GAMMA
-    let euler_gamma_f64: f64 = 0.5772156649015329; // std::f64::consts::EULER_GAMMA
+    let euler_gamma_f32: f32 = std::f32::consts::EULER_GAMMA;
+    let euler_gamma_f64: f64 = std::f64::consts::EULER_GAMMA;
     println!("欧拉-马歇罗尼常数 (f32): {}", euler_gamma_f32);
     println!("欧拉-马歇罗尼常数 (f64): {}", euler_gamma_f64);
 
     // 黄金比例
-    let golden_ratio_f32: f32 = 1.618034; // std::f32::consts::GOLDEN_RATIO
-    let golden_ratio_f64: f64 = 1.618033988749895; // std::f64::consts::GOLDEN_RATIO
+    let golden_ratio_f32: f32 = std::f32::consts::GOLDEN_RATIO;
+    let golden_ratio_f64: f64 = std::f64::consts::GOLDEN_RATIO;
     println!("黄金比例 (f32): {}", golden_ratio_f32);
     println!("黄金比例 (f64): {}", golden_ratio_f64);
 
@@ -209,7 +209,7 @@ pub fn demonstrate_math_constants() {
 /// 使用黄金比例的计算
 /// Use黄金比例Calculate
 pub fn golden_ratio_calculation(n: u32) -> f64 {
-    let phi = 1.618033988749895_f64; // std::f64::consts::GOLDEN_RATIO
+    let phi = std::f64::consts::GOLDEN_RATIO;
     phi.powi(n as i32)
 }
 
@@ -218,7 +218,7 @@ pub fn golden_ratio_calculation(n: u32) -> f64 {
 /// Use欧拉常数to数Calculate
 /// Rust 1.94.0: EULER_GAMMA in数值analysisinapplication
 pub fn euler_gamma_approximation(n: u64) -> f64 {
-    let gamma = 0.5772156649015329_f64; // std::f64::consts::EULER_GAMMA
+    let gamma = std::f64::consts::EULER_GAMMA;
     (n as f64).ln() + gamma
 }
 
@@ -640,6 +640,7 @@ mod tests {
     }
 
     #[test]
+    #[allow(clippy::approx_constant)] // 刻意用字面量断言黄金比例近似值
     fn test_golden_ratio_calculation() {
         let result = golden_ratio_calculation(1);
         assert!((result - 1.618033988749895).abs() < 0.0001);

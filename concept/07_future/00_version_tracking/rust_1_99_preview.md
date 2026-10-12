@@ -4,7 +4,7 @@
 >
 > **EN**: Rust 1.99+ Preview
 > **Summary**: Rust 1.100 and beyond: nightly language features, compiler infrastructure, stabilized-in-progress APIs, and ecosystem trends tracked for future stabilization.
-> **Rust 版本**: 1.100.0 beta / 1.101.0 nightly（周期跟踪滚动）
+> **Rust 版本**: 1.100.0（周期跟踪滚动目标版本；nightly 通道版本见『跟踪版本』字段）
 >
 > **受众**: [专家]
 > **Bloom 层级**: L2-L3

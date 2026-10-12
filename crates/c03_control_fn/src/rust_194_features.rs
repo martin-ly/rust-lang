@@ -864,9 +864,9 @@ where
 pub mod math_consts {
     /// 欧拉-马歇罗尼常数
     /// -
-    pub const EULER_GAMMA: f64 = 0.5772156649015329_f64;
+    pub const EULER_GAMMA: f64 = std::f64::consts::EULER_GAMMA;
     /// 黄金比例
-    pub const GOLDEN_RATIO: f64 = 1.618033988749895_f64;
+    pub const GOLDEN_RATIO: f64 = std::f64::consts::GOLDEN_RATIO;
 }
 
 /// 使用数学常数的收敛控制器

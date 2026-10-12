@@ -378,6 +378,11 @@ D5_WHITELIST_FILES = {
     # nightly toolchain，为工具链事实陈述；页面文首已声明 Rust 版本与 nightly 要求。
     "concept/04_formal/11_computational_models/17_aeneas_verification_pipeline.md":
         "Aeneas 验证流水线页：Aeneas 从 MIR 提取规范需要 nightly toolchain，为工具链事实陈述，文首已显式声明",
+    # ---- 2026-10-12 轨道E AFIDT 刷新复核登记 ----
+    "concept/03_advanced/01_async/01_async.md":
+        "AFIDT(async_fn_in_dyn_trait) 截至 2026-10-12 仍为 nightly incomplete feature（rust-lang/rust#133119 open），『nightly 上仍需启用实验特性门』为跟踪状态事实陈述；另含 07_future 预览页跨层链接路径（preview_features 目录名），非稳定层残留依赖",
+    "concept/03_advanced/01_async/07_async_closures.md":
+        "AFIDT 跟踪小节：『实验已批准并在 nightly 实现』为 rust-lang/rust#133119 状态事实陈述（2026-10-12 核对），与 13_async_trait_object_safety.md 同质，非稳定层残留依赖",
 }
 
 

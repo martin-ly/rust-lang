@@ -849,6 +849,7 @@ mod tests {
     // ==================== 数学常量测试 ====================
 
     #[test]
+    #[allow(clippy::approx_constant)] // 刻意用字面量验证标准库常量精度
     fn test_math_constants_precision() {
         // 验证标准库常量的精度
         assert!((std::f64::consts::EULER_GAMMA - 0.5772156649015329).abs() < 1e-15);

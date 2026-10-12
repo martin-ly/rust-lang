@@ -25,7 +25,8 @@
 //! - 作者: Rust 类型系统项目组
 //! - Author: Rust Type System Project Team
 //! - : Rust type system project
-use std::{f32, f64};
+// Rust 1.99 起 `std::f32`/`std::f64` 模块常量弃用：移除该导入后，
+// 下文 `f32::MAX`、`f64::EPSILON` 等自动解析到原始类型关联常量（非弃用路径）。
 
 /// Rust 1.89 浮点数类型系统
 /// Rust 1.89 point type system
@@ -33,8 +34,6 @@ use std::{f32, f64};
 /// Includes best practices for type safety, performance optimization, error handling, etc.
 /// type 、performance optimization 、error handling etc. 。
 pub mod float_types {
-    use super::*;
-
     /// 32位浮点数类型 (f32)
     /// 32bitfloating pointtype (f32)
     /// 32point type (f32)
@@ -59,7 +58,6 @@ pub mod float_types {
     /// let min: f32 = f32::MIN;
     /// ```
     pub mod f32_operations {
-        use super::*;
 
         /// 基本 f32 操作
         /// this f32
@@ -186,7 +184,6 @@ pub mod float_types {
     /// let min: f64 = f64::MIN;
     /// ```
     pub mod f64_operations {
-        use super::*;
 
         /// 基本 f64 操作
         /// this f64
@@ -297,7 +294,6 @@ pub mod float_types {
     /// 本模块提供了安全的浮点数比较方法。
     /// This module provides point method 。
     pub mod comparison {
-        use super::*;
 
         /// 近似相等比较
         /// etc.
@@ -389,7 +385,6 @@ pub mod float_types {
     /// - 整数conversion
     /// - integerconversion
     pub mod conversion {
-        use super::*;
 
         /// 显式类型转换
         /// type conversion
@@ -481,7 +476,6 @@ pub mod float_types {
     /// 包括不同精度、科学计数法、对齐等。
     /// 、、to etc. 。
     pub mod formatting {
-        use super::*;
 
         /// 精度格式化
         /// 精度Format
@@ -544,7 +538,6 @@ pub mod float_types {
     /// 包括溢出、下溢、除零等。
     /// 、under 、etc. 。
     pub mod error_handling {
-        use super::*;
 
         /// 溢出检查
         /// 溢出Check
@@ -645,7 +638,6 @@ pub mod float_types {
 /// 帮助开发者选择最适合的浮点数类型。
 /// point type 。
 pub mod performance_tests {
-    use super::*;
     use std::time::Instant;
 
     /// 算术运算性能测试

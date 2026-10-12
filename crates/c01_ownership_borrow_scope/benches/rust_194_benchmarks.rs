@@ -128,8 +128,11 @@ fn bench_lazylock_get_vs_deref(c: &mut Criterion) {
 fn bench_math_constants(c: &mut Criterion) {
     let mut group = c.benchmark_group("math_constants");
 
-    // 硬编码常量
+    // 硬编码常量（刻意保留硬编码值用于与标准库常量做性能对比演示，
+    // 1.99 新 lint approx_constant 在此基准语境下不适用）
+    #[allow(clippy::approx_constant)]
     const GOLDEN_RATIO_HARDCODED: f64 = 1.618033988749895_f64;
+    #[allow(clippy::approx_constant)]
     const EULER_GAMMA_HARDCODED: f64 = 0.5772156649015329_f64;
 
     group.bench_function("hardcoded_golden_ratio", |b| {

@@ -29,6 +29,9 @@ impl BinaryIndexedTree {
         }
     }
 
+    // 刻意展示 `x & -x` 低比特隔离惯用法（BIT/lowbit 教学语境），
+    // 1.99 新 lint manual_isolate_lowest_one 不适用于此处教学示例。
+    #[allow(clippy::manual_isolate_lowest_one)]
     fn lowbit(x: i32) -> i32 {
         x & (-x)
     }

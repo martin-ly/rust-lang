@@ -182,7 +182,7 @@ def validate_tree(tree: dict, kg_ids: set[str], errors: list[str], warnings: lis
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0] if __doc__ else "")
     ap.add_argument("--file", default=DEFAULT_YAML, help="决策树 YAML 路径")
-    ap.add_argument("--strict", action="store_true", help="死端/缺失概念/定量占比<50%/节点歧义 ⟹ exit 1")
+    ap.add_argument("--strict", action="store_true", help="死端/缺失概念/定量占比<50%%/节点歧义 ⟹ exit 1")
     ap.add_argument("--generate-index", nargs="?", const=DEFAULT_INDEX, metavar="PATH",
                     help="生成错误码 → 决策树索引 JSON（默认路径：%s）" % DEFAULT_INDEX)
     args = ap.parse_args()

@@ -364,6 +364,9 @@ pub fn single_number_iii(nums: Vec<i32>) -> Vec<i32> {
     let xor_all = nums.iter().fold(0, |acc, &x| acc ^ x);
 
     // 找到 XOR 结果中最低位的 1（这两个数在这一位上不同）
+    // 刻意展示 `x & -x` 低比特隔离惯用法（教学语境），
+    // 1.99 新 lint manual_isolate_lowest_one 不适用于此处 leetcode 教学示例。
+    #[allow(clippy::manual_isolate_lowest_one)]
     let diff = xor_all & (-xor_all);
 
     // 根据这一位将数组分成两组

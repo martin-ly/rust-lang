@@ -266,14 +266,14 @@ pub trait MathConstants {
 }
 
 impl MathConstants for f32 {
-    const EULER_GAMMA: Self = 0.577_215_7_f32;
-    const GOLDEN_RATIO: Self = 1.618034_f32;
+    const EULER_GAMMA: Self = std::f32::consts::EULER_GAMMA;
+    const GOLDEN_RATIO: Self = std::f32::consts::GOLDEN_RATIO;
     const GOLDEN_RATIO_CONJUGATE: Self = -0.618034_f32;
 }
 
 impl MathConstants for f64 {
-    const EULER_GAMMA: Self = 0.5772156649015329_f64;
-    const GOLDEN_RATIO: Self = 1.618033988749895_f64;
+    const EULER_GAMMA: Self = std::f64::consts::EULER_GAMMA;
+    const GOLDEN_RATIO: Self = std::f64::consts::GOLDEN_RATIO;
     const GOLDEN_RATIO_CONJUGATE: Self = -0.6180339887498949_f64;
 }
 

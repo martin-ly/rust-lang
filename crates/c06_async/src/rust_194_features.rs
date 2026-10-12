@@ -191,7 +191,7 @@ pub struct AsyncMathCalculator;
 impl AsyncMathCalculator {
     /// 异步计算黄金比例逼近
     pub async fn golden_ratio_approximation(iterations: u32) -> f64 {
-        let phi = 1.618033988749895_f64; // std::f64::consts::GOLDEN_RATIO
+        let phi = std::f64::consts::GOLDEN_RATIO;
         let mut result = 1.0;
 
         for _ in 0..iterations {
@@ -205,7 +205,7 @@ impl AsyncMathCalculator {
 
     /// 异步计算欧拉-马歇罗尼常数逼近
     pub async fn euler_gamma_approximation(n: u64) -> f64 {
-        let gamma = 0.5772156649015329_f64; // std::f64::consts::EULER_GAMMA
+        let gamma = std::f64::consts::EULER_GAMMA;
 
         // 计算调和级数 H_n
         let harmonic: f64 = (1..=n).map(|i| 1.0 / i as f64).sum();
@@ -217,7 +217,7 @@ impl AsyncMathCalculator {
 
     /// 异步斐波那契数计算（使用黄金比例）
     pub async fn fibonacci_approximation(n: u32) -> f64 {
-        let phi = 1.618033988749895_f64; // std::f64::consts::GOLDEN_RATIO
+        let phi = std::f64::consts::GOLDEN_RATIO;
         let psi = 1.0 - phi; // -1/phi
 
         // F_n ≈ φ^n / √5

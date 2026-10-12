@@ -4,7 +4,7 @@
 >
 > **EN**: Rust 1.100+ Long-Range Preview
 > **Summary**: Rust 1.100 and beyond 的**远期跟踪**页：只登记 RFC 阶段 / 长期 nightly 的深水位特性（Safety Tags、BorrowSanitizer、Public/Private Dependencies、cargo-script、Field projections、Effects system 等）及其 RFC/设计进展；随 6 周周期滚动的当前周期跟踪（gen blocks、async drop、RTN、Specialization、TAIT、f16/f128、Portable SIMD 等）已统一收敛到 rust_1_99_preview.md。
-> **Rust 版本**: 1.100.0 beta / 1.101.0 nightly（远期跟踪）
+> **Rust 版本**: 1.100.0（远期跟踪锚定版本；beta/nightly 通道版本见『跟踪版本』字段）
 >
 > **受众**: [专家]
 > **Bloom 层级**: L2-L3

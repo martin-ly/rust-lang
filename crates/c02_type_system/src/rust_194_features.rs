@@ -71,7 +71,7 @@ pub mod math_consts_f32 {
     /// # Mathematical Definition
     /// # definition
     /// # 数学definition
-    pub const EULER_GAMMA: f32 = 0.577_215_7_f32;
+    pub const EULER_GAMMA: f32 = std::f32::consts::EULER_GAMMA;
 
     /// 黄金比例 (Golden Ratio)
     /// 约等于 1.6180339887
@@ -82,7 +82,7 @@ pub mod math_consts_f32 {
     /// # Mathematical Definition
     /// # definition
     /// # 数学definition
-    pub const GOLDEN_RATIO: f32 = 1.618034_f32;
+    pub const GOLDEN_RATIO: f32 = std::f32::consts::GOLDEN_RATIO;
 
     /// 黄金比例的共轭
     /// 约等于 -0.6180339887
@@ -109,7 +109,7 @@ pub mod math_consts_f64 {
     /// # Mathematical Definition
     /// # definition
     /// # 数学definition
-    pub const EULER_GAMMA: f64 = 0.5772156649015329_f64;
+    pub const EULER_GAMMA: f64 = std::f64::consts::EULER_GAMMA;
 
     /// 黄金比例 (Golden Ratio)
     /// 约等于 1.618033988749895
@@ -120,7 +120,7 @@ pub mod math_consts_f64 {
     /// # Mathematical Definition
     /// # definition
     /// # 数学definition
-    pub const GOLDEN_RATIO: f64 = 1.618033988749895_f64;
+    pub const GOLDEN_RATIO: f64 = std::f64::consts::GOLDEN_RATIO;
 
     /// 黄金比例的共轭
     /// 约等于 -0.6180339887498949
@@ -1136,6 +1136,7 @@ mod tests {
     // ==================== 数学常量测试 ====================
 
     #[test]
+    #[allow(clippy::approx_constant)] // 刻意用近似字面量做宽松断言
     fn test_euler_gamma_f64() {
         // 欧拉-马歇罗尼常数的近似值检查
         assert!((math_consts_f64::EULER_GAMMA - 0.5772).abs() < 0.001);
