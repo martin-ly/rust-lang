@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-10-12T18:18:30.121136+00:00
+> 生成时间: 2026-10-12T20:52:27.858375+00:00
 > 扫描文件数: 791
 
 ## 全局指标
@@ -8,10 +8,10 @@
 | 指标 | 数值 | 目标 | 状态 |
 |:---|:---|:---|:---|
 | 总文件数 | 791 | 27 | ✅ |
-| 总定理链 (⟹) | 2179 | ≥270 | ✅ |
+| 总定理链 (⟹) | 2180 | ≥270 | ✅ |
 | 总反命题 | 1451 | ≥40 | ✅ |
 | 总 Mermaid 图 | 1562 | ≥50 | ✅ |
-| 编译验证代码块 | 7759 | ≥150 | ✅ |
+| 编译验证代码块 | 7760 | ≥150 | ✅ |
 | 定理矩阵总行 | 31455 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
 | docs/content/knowledge 死链数量 | 0 | 0 | ✅ |
@@ -662,7 +662,7 @@
 | G:\_src\rust-lang\concept\00_meta\04_navigation\09_navigation.md | L0 | 295 | 1 | 0 | 0 | 1 | 0 | 0 | 6 | ✅ | ❌ | ❌ | 初学者 | 综述级 |
 | G:\_src\rust-lang\concept\00_meta\04_navigation\10_problem_graph.md | L0 | 552 | 1 | 0 | 0 | 1 | 7 | 0 | 6 | ✅ | ❌ | ❌ | 进阶 | 综述级 |
 | G:\_src\rust-lang\concept\00_meta\04_navigation\11_quick_reference.md | L0 | 859 | 1 | 0 | 0 | 1 | 0 | 25 | 6 | ✅ | ❌ | ❌ | 进阶 | 综述级 |
-| G:\_src\rust-lang\concept\00_meta\04_navigation\12_self_assessment.md | L0 | 2298 | 0 | 0 | 0 | 1 | 0 | 57 | 6 | ✅ | ❌ | ❌ | 初学者 | 综述级 |
+| G:\_src\rust-lang\concept\00_meta\04_navigation\12_self_assessment.md | L0 | 2298 | 1 | 0 | 0 | 1 | 0 | 58 | 6 | ✅ | ❌ | ❌ | 初学者 | 综述级 |
 | G:\_src\rust-lang\concept\00_meta\04_navigation\13_foundations_gap_closure_index.md | L0 | 147 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
 | G:\_src\rust-lang\concept\00_meta\04_navigation\14_learning_mvp_path_en.md | L0 | 293 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 初学者 | 综述级 |
 | G:\_src\rust-lang\concept\00_meta\04_navigation\15_quiz_registry.md | L0 | 152 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ❌ | ❌ | 初学者 | 综述级 |
@@ -748,7 +748,7 @@
 | G:\_src\rust-lang\concept\01_foundation\11_quizzes\03_quiz_modules_testing.md | L1 | 828 | 3 | 2 | 0 | 1 | 0 | 22 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | G:\_src\rust-lang\concept\01_foundation\11_quizzes\04_quiz_closures_iterators.md | L1 | 816 | 3 | 2 | 0 | 1 | 0 | 33 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | G:\_src\rust-lang\concept\01_foundation\11_quizzes\05_quiz_pl_foundations.md | L1 | 297 | 3 | 2 | 0 | 1 | 0 | 0 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
-| G:\_src\rust-lang\concept\01_foundation\11_quizzes\06_quiz_ownership_borrowing.md | L1 | 625 | 3 | 2 | 0 | 1 | 0 | 18 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
+| G:\_src\rust-lang\concept\01_foundation\11_quizzes\06_quiz_ownership_borrowing.md | L1 | 626 | 3 | 2 | 0 | 1 | 0 | 18 | 6 | ✅ | ✅ | ✅ | 初学者 | 综述级 |
 | G:\_src\rust-lang\concept\02_intermediate\00_traits\01_traits.md | L2 | 3351 | 16 | 2 | 0 | 7 | 6 | 81 | 10 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | G:\_src\rust-lang\concept\02_intermediate\00_traits\02_dispatch_mechanisms.md | L2 | 2338 | 14 | 2 | 0 | 1 | 1 | 42 | 6 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | G:\_src\rust-lang\concept\02_intermediate\00_traits\03_serde_patterns.md | L2 | 941 | 3 | 3 | 0 | 2 | 3 | 9 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
@@ -761,13 +761,13 @@
 | G:\_src\rust-lang\concept\02_intermediate\01_generics\01_generics.md | L2 | 3358 | 23 | 2 | 0 | 7 | 7 | 74 | 8 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | G:\_src\rust-lang\concept\02_intermediate\01_generics\02_const_generics.md | L2 | 618 | 2 | 0 | 0 | 4 | 1 | 15 | 0 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
 | G:\_src\rust-lang\concept\02_intermediate\01_generics\03_type_level_programming.md | L2 | 885 | 8 | 2 | 0 | 1 | 1 | 13 | 6 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
-| G:\_src\rust-lang\concept\02_intermediate\01_generics\04_quiz_traits_and_generics.md | L2 | 762 | 0 | 0 | 0 | 0 | 0 | 20 | 0 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
+| G:\_src\rust-lang\concept\02_intermediate\01_generics\04_quiz_traits_and_generics.md | L2 | 763 | 0 | 0 | 0 | 0 | 0 | 20 | 0 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
 | G:\_src\rust-lang\concept\02_intermediate\01_generics\05_const_generics_and_trait_objects.md | L2 | 249 | 0 | 0 | 0 | 1 | 2 | 4 | 0 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
 | G:\_src\rust-lang\concept\02_intermediate\02_memory_management\01_memory_management.md | L2 | 2266 | 23 | 3 | 0 | 7 | 6 | 55 | 7 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | G:\_src\rust-lang\concept\02_intermediate\02_memory_management\02_interior_mutability.md | L2 | 973 | 9 | 3 | 0 | 2 | 3 | 11 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | G:\_src\rust-lang\concept\02_intermediate\02_memory_management\03_cow_and_borrowed.md | L2 | 819 | 4 | 3 | 0 | 2 | 3 | 8 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | G:\_src\rust-lang\concept\02_intermediate\02_memory_management\04_smart_pointers.md | L2 | 993 | 9 | 3 | 0 | 2 | 3 | 12 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
-| G:\_src\rust-lang\concept\02_intermediate\02_memory_management\05_quiz_memory_management.md | L2 | 810 | 0 | 0 | 0 | 0 | 0 | 27 | 0 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
+| G:\_src\rust-lang\concept\02_intermediate\02_memory_management\05_quiz_memory_management.md | L2 | 811 | 0 | 0 | 0 | 0 | 0 | 27 | 0 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
 | G:\_src\rust-lang\concept\02_intermediate\03_error_handling\01_error_handling.md | L2 | 2935 | 22 | 4 | 0 | 7 | 9 | 63 | 7 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | G:\_src\rust-lang\concept\02_intermediate\03_error_handling\02_error_handling_deep_dive.md | L2 | 861 | 3 | 3 | 0 | 2 | 2 | 9 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | G:\_src\rust-lang\concept\02_intermediate\03_error_handling\03_panic.md | L2 | 309 | 0 | 0 | 0 | 0 | 1 | 5 | 0 | ❌ | ✅ | ✅ | 专家 | 专家级 |

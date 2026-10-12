@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 791,
-    "generated_at": "2026-10-12T18:18:30.124277+00:00"
+    "generated_at": "2026-10-12T20:52:27.862481+00:00"
   },
   "files": [
     {
@@ -3919,7 +3919,12 @@
       "title": "Rust 知识体系自测题库（Self-Assessment）",
       "positioning": "每个层级配套的自测题，用于验证知识掌握程度。答案和解析附在每题之后（可折叠）。",
       "line_count": 2298,
-      "theorem_chains": [],
+      "theorem_chains": [
+        {
+          "text": "| Self Assessment 结构化定义 ⟹ 学习者认知锚点可建立 | 本文件定义了元层结构 | 支持上层概念定位 | 高 |",
+          "type": "table_row"
+        }
+      ],
       "anti_propositions": [
         {
           "title": "### 反命题"
@@ -4124,6 +4129,14 @@
           "lines": 5,
           "should_fail": false,
           "code_preview": "fn longest(x: &str, y: &str) -> &str {     if x.len() > y.len() { x } else { y }..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "fn longest<'a>(x: &'a str, y: &'a str) -> &'a str  ..."
         },
         {
           "flags": [],
@@ -19561,7 +19574,7 @@
       "layer": "L1",
       "title": "测验：所有权、借用与生命周期（试点）",
       "positioning": "> 本文件为**嵌入式互动测验试点**，采用 `<details>` 交互标签实现\"自测-展开-核对\"的轻量级学习闭环。",
-      "line_count": 625,
+      "line_count": 626,
       "theorem_chains": [
         {
           "text": "| 所有权单一 ⟹ 资源释放可预测 | 理解 `let` 创建所有者 | 无悬挂引用与重复释放 | 高 |",
@@ -22790,7 +22803,7 @@
       "layer": "L2",
       "title": "测验：Trait 与泛型（试点扩展）",
       "positioning": "嵌入式互动测验扩展——验证 L2 Trait 与泛型（Generics）核心概念（trait 定义与实现、泛型约束、关联类型、trait 对象）的掌握程度。",
-      "line_count": 762,
+      "line_count": 763,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -23075,7 +23088,7 @@
           "type": "inline"
         },
         {
-          "text": "### 4.1 引理：Box<T> ⟹ 堆分配 + 唯一所有权",
+          "text": "### 4.1 引理：`Box<T>` ⟹ 堆分配 + 唯一所有权",
           "type": "paragraph"
         },
         {
@@ -24019,7 +24032,7 @@
       "layer": "L2",
       "title": "测验：内存管理（L2 试点扩展）",
       "positioning": "L2 嵌入式互动测验——验证智能指针（Smart Pointer）核心概念（Box、Rc/Arc、RefCell/Mutex、内部可变性模式）的掌握程度。",
-      "line_count": 810,
+      "line_count": 811,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -61388,7 +61401,8 @@
         "../../07_future/02_preview_features/04_parallel_frontend_preview.md",
         "../../07_future/02_preview_features/16_cranelift_backend_preview.md",
         "../10_performance/01_performance_optimization.md",
-        "01_toolchain.md"
+        "01_toolchain.md",
+        "04_compiler_internals.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
@@ -76282,7 +76296,8 @@
         "27_no_std_startup_runtime_deep_dive.md",
         "28_custom_bare_metal_async_executor.md",
         "29_embedded_memory_layout_and_heap_safety.md",
-        "30_misra_rust_safety_critical_guidelines.md"
+        "30_misra_rust_safety_critical_guidelines.md",
+        "38_no_std_bare_metal_rust.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,

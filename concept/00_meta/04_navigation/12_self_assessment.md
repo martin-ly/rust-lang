@@ -1133,7 +1133,7 @@ fn longest(x: &str, y: &str) -> &str {
 
 **不能编译**。多输入引用时，生命周期省略规则**不适用**，必须显式标注：
 
-rust,ignore
+```rust,ignore
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 
 ```

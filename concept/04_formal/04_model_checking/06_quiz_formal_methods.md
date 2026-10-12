@@ -5,7 +5,7 @@
 > **EN**: Formal Methods (Quiz)
 > **Summary**: Formal Methods — An interactive quiz checking L4 formal methods: separation logic, RustBelt, type safety, and verification tooling.
 > ``` P * Q ``` <details> <summary>💡 点击展开答案与解析</summary> **答案**：`P * Q` 表示memory堆可以**分割**为两个不相交的部分，一部分满足 `P`，另一部分满足 `Q`。
-> **formal methods定义（教学类比）**： ``` h ⊨ P * Q   ⟺   ∃h₁, h₂.  h = h₁ ⊎ h₂  ∧  h₁ ⊨ P  ∧  h₂ ⊨ Q ``` - `h` 是整个memory堆（heap） - `h₁ ⊎ h₂` 表示 `h₁` 和 `h₂` 的**不相交并集**（disjoint union） - `h₁` 和 `h₂` 没有重叠的memory地址 **
+> **formal methods定义（教学类比）**： ``` h ⊨ P * Q   ⟺   ∃h₁, h₂.  h = h₁ ⊎ h₂  ∧  h₁ ⊨ P  ∧  h₂ ⊨ Q ``` - `h` 是整个memory堆（heap） - `h₁ ⊎ h₂` 表示 `h₁` 和 `h₂` 的**不相交并集**（disjoint union） - `h₁` 和 `h₂` 没有重叠的memory地址  </details>
 > **受众**: [研究者]
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **权威来源**: 本文件为 `concept/` 权威页。

@@ -203,7 +203,7 @@ fn main() {
 }
 ```
 
-**实测错误**：`error[E0507]: cannot move out of index of`Vec<String>``。
+**实测错误**：`error[E0507]: cannot move out of index of Vec<String>`。
 
 ### ✅ 修正：借用元素（`&r[0]`）或先 clone
 

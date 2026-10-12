@@ -255,7 +255,7 @@ fn upcast(dog: &dyn Dog) -> &dyn Animal {
 
 选型判定：需要方法调用 ⟹ `dyn Trait`；需要类型查询/存储 ⟹ `Any`；需要零依赖/`no_std` ⟹ 手写。擦除的代价统一是「静态信息丢失」——编译器优化（内联、单态化（Monomorphization））在擦除边界终止。
 
-### 2.1 Box<dyn Trait>
+### 2.1 `Box<dyn Trait>`
 >
 
 ```text
@@ -315,7 +315,7 @@ fn main() {
 }
 ```
 
-> **Box 洞察**: **Box<dyn Trait> 是最常用的类型擦除**——简单、安全、灵活。
+> **Box 洞察**: **`Box<dyn Trait>` 是最常用的类型擦除**——简单、安全、灵活。
 > [来源: [std::boxed::Box](https://doc.rust-lang.org/std/boxed/struct.Box.html)]
 
 ---

@@ -303,9 +303,9 @@ graph TD
 
 关键判定：Rust 的内存安全是**编译期定理 + 运行期零检查**（除边界检查与溢出检查这类显式标注的运行时断言）。
 
-### 4.1 引理：Box<T> ⟹ 堆分配 + 唯一所有权
+### 4.1 引理：`Box<T>` ⟹ 堆分配 + 唯一所有权
 >
-> **[TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Reference: Box](https://doc.rust-lang.org/reference/introduction.html)** Box<T> 的语义是堆分配与唯一所有权的组合，对应线性逻辑中的资源唯一拥有。 ✅ 已验证
+> **[TRPL Ch15](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Reference: Box](https://doc.rust-lang.org/reference/introduction.html)** `Box<T>` 的语义是堆分配与唯一所有权的组合，对应线性逻辑中的资源唯一拥有。 ✅ 已验证
 
 ```text
 前提 1: Box::new(x) 在堆上分配 size_of::<T>() 字节并写入 x
@@ -657,9 +657,9 @@ struct String {
 assert_eq!(mem::size_of::<String>(), 24);  // 同 Vec<u8>
 ```
 
-| 特性 | String | Vec<u8> |
+| 特性 | String | `Vec<u8>` |
 |:---|:---|:---|
-| 内存布局 | 同 Vec<u8> | 连续字节数组 |
+| 内存布局 | 同 `Vec<u8>` | 连续字节数组 |
 | 有效性约束 | 必须是合法 UTF-8 | 任意字节 |
 | `push` | 追加一个 UTF-8 字符（1-4 字节） | 追加单个字节 |
 | `capacity` | 按字节计 | 按字节计 |
@@ -828,7 +828,7 @@ graph TD
     style T2 fill:#6f6
 ```
 
-> **认知功能**: 并发安全（Concurrency Safety）决策树——区分"内存安全（Memory Safety）"（无数据竞争）与"并发正确性"（无死锁、无 poisoning）两个层次。读者设计多线程共享状态时，应以此图为检查清单：排查锁嵌套顺序、panic 处理策略、锁粒度合理性。关键洞察：Arc<Mutex<T>> 的线程安全是有条件的——它阻止数据竞争，但死锁属于不可编译期判定（Halting Problem）的工程问题，需通过锁顺序约定与 try_lock 来缓解。[💡 原创分析](../../00_meta/00_framework/methodology.md)
+> **认知功能**: 并发安全（Concurrency Safety）决策树——区分"内存安全（Memory Safety）"（无数据竞争）与"并发正确性"（无死锁、无 poisoning）两个层次。读者设计多线程共享状态时，应以此图为检查清单：排查锁嵌套顺序、panic 处理策略、锁粒度合理性。关键洞察：`Arc<Mutex<T>>` 的线程安全是有条件的——它阻止数据竞争，但死锁属于不可编译期判定（Halting Problem）的工程问题，需通过锁顺序约定与 try_lock 来缓解。[💡 原创分析](../../00_meta/00_framework/methodology.md)
 
 **四层分析**:
 
@@ -847,9 +847,9 @@ graph TD
 
 ## 七、边界极限测试代码（Boundary Limit Tests）
 
-本节把「Memory Management（内存管理）」的规则推到编译器与运行时的边界上逐一实测：测试 1: Rc<RefCell<T>> 循环引用极限、测试 2: RefCell 嵌套借用边界、测试 3: Box::leak 与 ManuallyDrop 边界与测试 4: Arc 跨线程原子序边界。每个用例标注预期结果（编译错误 / 运行时 panic / 逻辑错误），并用 rustc 1.97 验证：能复现的给出诊断信息与触发条件，不能复现的说明原因。这些用例共同回答一个问题——规则在极限处是否仍然成立，以及违反时编译器能否兜底。
+本节把「Memory Management（内存管理）」的规则推到编译器与运行时的边界上逐一实测：测试 1: `Rc<RefCell<T>>` 循环引用极限、测试 2: RefCell 嵌套借用边界、测试 3: Box::leak 与 ManuallyDrop 边界与测试 4: Arc 跨线程原子序边界。每个用例标注预期结果（编译错误 / 运行时 panic / 逻辑错误），并用 rustc 1.97 验证：能复现的给出诊断信息与触发条件，不能复现的说明原因。这些用例共同回答一个问题——规则在极限处是否仍然成立，以及违反时编译器能否兜底。
 
-### 7.1 测试 1: Rc<RefCell<T>> 循环引用极限
+### 7.1 测试 1: `Rc<RefCell<T>>` 循环引用极限
 
 ```rust
 use std::rc::Rc;

@@ -400,8 +400,8 @@ graph TD
 | **定理**: ? 运算符传播 | 函数返回兼容 Result/Option | 自动错误短路 | Monad bind (>>=) | 异步（Async）错误传播 | 在闭包（Closures）/回调中误用 | E0277 |
 | **推论**: panic 边界 | 不可恢复状态 | 显式程序终止 | —（运行时（Runtime）机制） | 设计决策 | 滥用 panic 处理预期错误 | panic |
 | **定理**: Error trait 一致性（Coherence） | 自定义错误实现 Error | 可与 ? 和其他错误互操作 | 类型类一致性 | 错误链、报告 | 未实现 Source | — |
-| **引理**: Option 空值安全 | 使用 Option<T> | 无 null 解引用（Reference） | Maybe Monad | 所有可空场景 | `unwrap()` on None | — |
-| **推论**: From 转换链 | E1: From<E2> | 错误类型自动统一 | 类型类传递性 | ? 运算符 | 未实现 From | E0277 |
+| **引理**: Option 空值安全 | 使用 `Option<T>` | 无 null 解引用（Reference） | Maybe Monad | 所有可空场景 | `unwrap()` on None | — |
+| **推论**: From 转换链 | E1: `From<E2>` | 错误类型自动统一 | 类型类传递性 | ? 运算符 | 未实现 From | E0277 |
 | **定理**: 类型状态编码 | enum 表达状态 | 非法状态不可表示 | 代数类型穷尽性 | Typestate 模式 | 状态转换遗漏 | — |
 | **引理**: catch_unwind 隔离 | 闭包（Closures）内 panic | 线程级别隔离 | —（运行时（Runtime）机制） | FFI 边界 | 跨线程 panic 传播 | panic |
 
@@ -814,7 +814,7 @@ graph TD
 
 > (Source: [TRPL — To panic! or Not to panic!](https://doc.rust-lang.org/book/ch09-03-to-panic-or-not-to-panic.html))
 
-### 6.4 反命题 4: "Option<T> 完全替代 null"
+### 6.4 反命题 4: "`Option<T>` 完全替代 null"
 
 > 语义层 — Option 替代了空指针，但 unwrap 重新引入了 null 解引用（Reference）的等价风险。
 
@@ -2781,7 +2781,7 @@ Rust 的设计选择：
 
 > 本节由原 `crates/c03_control_fn/docs/tier_03_references/05_error_handling_reference.md` 合并而来，保留 `Option` / `Result` 核心方法速查。
 
-### Option<T> 常用方法
+### `Option<T>` 常用方法
 
 | 方法 | 签名 | 行为 |
 | :--- | :--- | :--- |

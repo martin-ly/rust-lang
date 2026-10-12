@@ -595,7 +595,7 @@ fn main() {
 
 ## 嵌入式测验（Embedded Quiz）
 
-「嵌入式测验（Embedded Quiz）」涉及测验 1：Rust 的 target triple 格式是什么？请举例…、测验 2：`rustup target add aarch64-unk…、测验 3：`cargo build --target <triple>…、测验 4：为什么在 Windows 上交叉编译到 Linux 比在 L…等5个方面，本节逐一说明其要点。
+「嵌入式测验（Embedded Quiz）」涉及测验 1：Rust 的 target triple 格式是什么？请举例…、测验 2：`rustup target add aarch64-unk…、测验 3：`cargo build --target &lt;triple&gt;…、测验 4：为什么在 Windows 上交叉编译到 Linux 比在 L…等5个方面，本节逐一说明其要点。
 
 ### 测验 1：Rust 的 target triple 格式是什么？请举例说明。（理解层）
 

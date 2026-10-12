@@ -3284,7 +3284,7 @@ trait Parser<'a> {
 | 实现次数 | 每个类型只能实现一次 | 同一类型可多次实现 |
 | 调用方标注 | 不需要 | 通常需要 |
 | 表达关系 | 一对一 | 一对多 |
-| 典型场景 | Iterator::Item、Backend::Row | Container<T>、Map<K, V> |
+| 典型场景 | Iterator::Item、Backend::Row | `Container<T>`、`Map<K, V>` |
 
 ---
 

@@ -5,7 +5,7 @@
 # no_std 同步原语
 >
 > **EN**: no_std Synchronization Primitives
-> **Summary**: Synchronization in bare-metal no_std: critical-section single/multi-core implementations, Mutex<RefCell<T>>, spinlocks, bare_metal::Mutex, priority ceiling, priority inversion, and lock-free ring buffers.
+> **Summary**: Synchronization in bare-metal no_std: critical-section single/multi-core implementations, `Mutex<RefCell<T>>`, spinlocks, bare_metal::Mutex, priority ceiling, priority inversion, and lock-free ring buffers.
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 >
 > **受众**: [专家]

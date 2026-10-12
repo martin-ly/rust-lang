@@ -196,7 +196,7 @@ graph TD
 
 | 安全保证 | 编译期机制 | 边界条件 | 突破方式 | 后果 | 文件 |
 |:---|:---|:---|:---|:---|:---|
-| **无空指针** | Option<T> | `unwrap()` | Safe | panic（非 UB） | L2 Error |
+| **无空指针** | `Option<T>` | `unwrap()` | Safe | panic（非 UB） | L2 Error |
 | | | `unsafe` 解引用 null | Unsafe | 空指针解引用（UB） | L3 Unsafe |
 | **match 穷尽性** | 穷尽检查 | `#[non_exhaustive]` | Safe | 需 `_ =>` 分支 | L1 Type System |
 | | | `unsafe` 直接访问 enum tag | Unsafe | 可能访问非法变体（UB） | L3 Unsafe |

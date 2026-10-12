@@ -224,7 +224,7 @@ flowchart TD
 |---|---|---|
 | `dyn Trait<{N}>` 编译错误 | const generic 使 trait 非 object-safe | 用关联常量或泛型枚举 |
 | trait object 上访问关联常量混淆 | `<dyn Trait as Trait>::CONST` 无具体类型 | 通过 downcast 或枚举分发 |
-| 为每个 N 单态化（Monomorphization）导致代码膨胀 | 过度使用 const generic + 动态集合 | 改用枚举或 Box<dyn Trait> |
+| 为每个 N 单态化（Monomorphization）导致代码膨胀 | 过度使用 const generic + 动态集合 | 改用枚举或 `Box<dyn Trait>` |
 | vtable 方法签名含 `&[u8; N]` | N 进入方法签名，无法擦除 | 改为 `&[u8]` 并在运行期校验长度 |
 
 ---

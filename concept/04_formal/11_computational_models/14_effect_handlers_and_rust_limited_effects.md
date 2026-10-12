@@ -451,7 +451,7 @@ fn main() {
 }
 ```
 
-> **错误诊断**: `error[E0277]:`Rc<i32>`cannot be sent between threads safely`。async 状态机在挂起时可能跨线程迁移，因此跨 await 持用的值必须实现 `Send`。
+> **错误诊断**: `error[E0277]: Rc<i32> cannot be sent between threads safely`。async 状态机在挂起时可能跨线程迁移，因此跨 await 持用的值必须实现 `Send`。
 > **修正**: 使用 `Arc` 替代 `Rc`，或限制 Future 在单线程执行器上运行。
 
 ### 反例 3：试图用闭包实现通用 resumption

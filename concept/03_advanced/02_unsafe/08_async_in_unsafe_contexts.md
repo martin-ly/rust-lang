@@ -233,7 +233,7 @@ extern "C" fn c_callback(waker: *const Waker) {
 - 可能并发调用导致 use-after-free；
 - 未克隆的 Waker 被 wake_by_ref 后再次使用。
 
-**修正**：使用 `Waker::clone` 创建独立所有权（Ownership），或使用 Arc<Waker> 等线程安全包装。
+**修正**：使用 `Waker::clone` 创建独立所有权（Ownership），或使用 `Arc<Waker>` 等线程安全包装。
 
 ---
 
