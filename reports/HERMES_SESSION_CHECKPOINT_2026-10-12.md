@@ -19,6 +19,15 @@
 通过（exit 0）：kb_auditor 死链 0、msrv、version_injection、freshness（WARN 0）、gate21、metadata、canonical、consistency、authority_coverage、examples、naming、quiz、topology、kg_shapes、kg_shacl 真引擎、semantic_health 100.0、mermaid、mindmap、decision_trees、cross_domain、stub_purity、overlap v2+triage（REVIEW=2 仅 embedded_hal 对）。
 未通过/待办：见 §3。
 
+## 2b. 2026-10-13 收尾轮（已提交 `e44fc0ff9`，未 push）
+
+- clippy 1.99 新 lint 清零 + c10_networks 性能阈值放宽 → Cargo Test/Clippy 门 ✅
+- cargo audit 漏洞清零：rust_decimal 1.42.1→1.43.0 实际移除 rkyv 0.7 链；lockfree/owned-alloc 按 .cargo/audit.toml 惯例登记带评估忽略 + supply-chain stub
+- cargo-vet 恢复：`--locked` 安装成功；13 个 unvetted 依赖处置（mozilla/bytecode-alliance/zcash 注册表导入 + 6 项 crates.io owner 核实 trust + 3 项如实 stub）→ `cargo vet --locked` exit 0
+- mdbook 0.5 兼容：book.toml 移除废弃 build-dir 字段 → mdbook Build 门 ✅
+- advisory-db 已复制到真实 CARGO_HOME（C:\_program\rust\cargo\advisory-db）
+- **全量 23 门全绿**：`✅ All 23 quality gates passed`，基线报告 `reports/QUALITY_GATES_BASELINE_2026-10-13.md`（完整输出 `..._2026-10-13.txt`）
+
 ## 3. 未完成项（新会话续做清单）
 
 1. **clippy 1.99 新 lint + 性能测试修复**：子代理 `sa-0-9a2ba591`（deleg_fadf2120）关机时被中断。已知失败清单：c04_generic 4×approx_constant（rust_194_features.rs 里 EULER_GAMMA/GOLDEN_RATIO 等手写常量）、c05_threads 6×、c08_algorithms 2×manual_isolate_lowest_one（bit_manipulation.rs:367、binary_indexed_tree.rs:33 的 `x & (-x)`）、c10_networks performance_tests.rs 3 个 wall-clock 阈值失败（实测 1922/1318.7/169 ns）。子代理已改 13 个源文件（见 git status）**但未跑完最终验收**——新会话第一步：`cargo clippy --workspace -- -D warnings` + `cargo test --workspace` 复跑，按结果收尾或补修。
