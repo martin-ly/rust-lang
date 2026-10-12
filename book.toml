@@ -12,7 +12,9 @@ language = "zh"
 default-theme = "rust"
 preferred-dark-theme = "ayu"
 mathjax-support = true
-copy-fonts = true
+# NOTE 2026-10-13: mdbook 0.5.x 移除了 [output.html] copy-fonts 字段（字体复制改由
+# additional-css / 主题资源承担）。旧字段导致 "Failed to deserialize output.html"，
+# 构建静默回退默认 HTML 配置，已移除以恢复显式配置生效。
 additional-js = ["theme/mermaid-init.js"]
 
 [output.html.search]
