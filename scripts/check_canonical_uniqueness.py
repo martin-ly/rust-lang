@@ -64,6 +64,23 @@ MIN_STEM_LEN = 4
 # 进阶关系豁免后缀：词干 = 基础词干 + 后缀 视为合法分层（如 L1 basics → L2 主页 → deep dive）
 PROGRESSION_SUFFIXES = ("basics", "basic", "advanced", "deep_dive")
 
+# 模式级词干豁免（2026-10-13，复核依据 reports/CANONICAL_WARN_TRIAGE_2026-10-13.md）：
+# 384 条 WARN 实测全部为同目录词干相似度 ≥0.6 的系统性误报——版本号系列、
+# 语言对比系列、目录内共享泛后缀惯例。逐对 IGNORE_PAIRS 无法覆盖 ~300 边，
+# 故增加正则级豁免。仅豁免 warn 级；error 级（词干完全相同）不受影响。
+STEM_PATTERN_EXEMPTIONS = [
+    (re.compile(r"^rust_1_\d+(_[a-z0-9_]+)?$"), "版本号系列页（rust_1_9x_preview/stabilized 等）为独立版本跟踪页，词干相似属编号惯例（复核 2026-10-13，triage 报告 C1/C2）"),
+    (re.compile(r"^rust_vs_[a-z0-9_]+$"), "语言对比系列页（rust_vs_cpp/go/zig…）为独立对比页（复核 2026-10-13，triage 报告 C4/C8）"),
+    (re.compile(r".*_preview$"), "目录内共享 _preview 后缀的独立 nightly 特性页（复核 2026-10-13，triage 报告 C1；先例 2026-08-01 W317）"),
+    (re.compile(r".*_stabilized$"), "目录内共享 _stabilized 后缀的版本特性页（复核 2026-10-13，triage 报告 C2）"),
+    (re.compile(r".*_(semantics|algorithms|patterns)$"), "目录内共享泛后缀（_semantics/_algorithms/_patterns）的不同主题页（复核 2026-10-13，triage 报告 C7/C9/C6 长尾）"),
+]
+
+
+def stem_pattern_exempt(s1: str, s2: str) -> bool:
+    """两词干命中同一豁免模式 → 词干撞键误报，不产 warn。"""
+    return any(rx.match(s1) and rx.match(s2) for rx, _ in STEM_PATTERN_EXEMPTIONS)
+
 # 人工复核白名单：确认为主题不同的误报对（路径为仓库相对路径，正斜杠）。
 # 登记格式：frozenset({file1, file2})。判定顺序在相似度比较之前。
 IGNORE_PAIRS = {
@@ -81,6 +98,41 @@ IGNORE_PAIRS = {
         "concept/07_future/04_research_and_experimental/04_rust_for_linux.md",
         "concept/07_future/04_research_and_experimental/11_rust_for_ai_model_serving.md",
     }),
+    # 复核 2026-10-13（triage 报告 C6）：33_anti_patterns（日常常见反模式总览）与
+    # 51_anti_patterns_and_pitfalls（Unsafe/API/异步/性能深坑专题）——51 头部已显式
+    # 声明与 33 互补，属 (b) 合法分层；词干不匹配 PROGRESSION_SUFFIXES 形态，登记豁免。
+    frozenset({
+        "concept/06_ecosystem/03_design_patterns/33_anti_patterns.md",
+        "concept/06_ecosystem/03_design_patterns/51_anti_patterns_and_pitfalls.md",
+    }),
+    # 复核 2026-10-13（triage 报告 C6）：18_api_design_patterns（42 个 API 模式总览）与
+    # 39_api_design_and_semver_idioms（SemVer 兼容性惯用法专题）——主题域不同，(b) 互补。
+    frozenset({
+        "concept/06_ecosystem/03_design_patterns/18_api_design_patterns.md",
+        "concept/06_ecosystem/03_design_patterns/39_api_design_and_semver_idioms.md",
+    }),
+    # 复核 2026-10-13（triage 报告 C9）：07_string_algorithms_in_rust（经典算法
+    # KMP/Rabin-Karp/Trie）与 13_advanced_string_algorithms（高级算法 Z-function/
+    # Aho-Corasick/后缀自动机）——(b) 合法 basics→advanced 分层，但 advanced 在前缀位
+    # 不满足 PROGRESSION_SUFFIXES 形态，登记豁免。
+    frozenset({
+        "concept/06_ecosystem/16_algorithm_patterns/07_string_algorithms_in_rust.md",
+        "concept/06_ecosystem/16_algorithm_patterns/13_advanced_string_algorithms.md",
+    }),
+    # 复核 2026-10-13（triage 报告 C10）：type_inference 主题域三切面——03（HM 理论，
+    # 受众[研究者]）、07（rustc typeck 实现，受众[专家]）、08（PSPACE 复杂度）——
+    # 各自声明权威页且互有前置/后置链，(b) 合法分层，登记豁免（互链定位声明见报告建议）。
+    frozenset({
+        "concept/04_formal/00_type_theory/03_type_inference.md",
+        "concept/04_formal/00_type_theory/07_type_checking_and_inference.md",
+    }),
+    frozenset({
+        "concept/04_formal/00_type_theory/03_type_inference.md",
+        "concept/04_formal/00_type_theory/08_type_inference_complexity.md",
+    }),
+    # 注：(a) 真重复候选 23_no_std_and_bare_metal_idioms vs 38_no_std_bare_metal_rust
+    # 与 04/05 compiler_internals/infrastructure 一对【故意不登记豁免】——保留 WARN
+    # 直至人工裁决（triage 报告 §6.2-4）。
 }
 
 
@@ -213,6 +265,8 @@ def check_a(pages: list[dict]) -> list[dict]:
 
         if stem_ratio < STEM_SIMILARITY:
             continue
+        if stem_pattern_exempt(s1, s2):
+            continue  # 模式级词干豁免（系列页/泛后缀惯例，见 STEM_PATTERN_EXEMPTIONS）
         hit = None
         if p1["en"] and p2["en"] and similar(p1["en"], p2["en"], TITLE_SIMILARITY):
             hit = f"EN 标题相似: '{p1['en']}' ~ '{p2['en']}'"
@@ -261,6 +315,8 @@ def check_b(pages: list[dict]) -> list[dict]:
                     }
                 )
             elif difflib.SequenceMatcher(None, s1, s2).ratio() >= STEM_SIMILARITY:
+                if stem_pattern_exempt(s1, s2):
+                    continue  # 模式级词干豁免（系列页/泛后缀惯例）
                 findings.append(
                     {
                         "type": "same_dir_topic_duplicate",
@@ -312,7 +368,7 @@ def main() -> int:
                         print(f"      - {fp}")
                     print(f"      原因: {f['reason']}\n")
             if warns:
-                print(f"⚠️  WARN {len(warns)} 处（疑似跨层同主题，需人工确认，不阻断）:\n")
+                print(f"⚠️  WARN {len(warns)} 处（疑似同目录同主题，需人工确认，不阻断）:\n")
                 for i, f in enumerate(warns, 1):
                     label = "双权威页声明" if f["type"] == "dual_canonical" else "同目录同主题重复"
                     print(f"  [W{i}] {label}")
