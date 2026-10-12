@@ -53,6 +53,35 @@ ignore = [
     # [已由 cargo-vet 覆盖/管理] instant 0.1.13 已在 supply-chain/audits.toml 中登记审计 stub
     "RUSTSEC-2024-0384",
 
+    # RUSTSEC-2026-0284: lockfree - Map::into_iter 双重释放 + SharedIncin::clear 未初始化 Arc（unsound）
+    # 影响评估: LOW（深层传递依赖，本项目代码不直接使用）
+    # - 攻击向量: 需要调用 lockfree::map::Map::into_iter（自定义 hasher Drop panic）
+    #   或 lockfree::*::SharedIncin::clear；均为 panic-safety 型内存破坏，非远程攻击面
+    # - 实际状态:
+    #     * 唯一上游为 glommio 0.9.0（Cargo.lock: glommio -> lockfree 0.5.1 -> owned-alloc 0.2.0）
+    #     * glommio 仅在 c06_async 的 [target.'cfg(target_os = "linux")'.dependencies] 声明
+    #       （crates/c06_async/Cargo.toml 第 61-62 行），Windows/host 编译不进入依赖树
+    #     * 已 grep 验证: glommio 0.9.0 的 src/ 全部 75 个 .rs 文件 0 处引用 lockfree
+    #       （依赖声明存在但源码未使用，属遗留声明依赖）；本项目 crates/ 无任何
+    #       `use lockfree` / `lockfree::` 直接引用（c05_threads 的 lockfree_* 示例实际用
+    #       crossbeam_epoch，与本 crate 无关）
+    #     * 受影响函数（Map::into_iter / SharedIncin::clear）不被本项目或 glommio 调用
+    # - 上游状态: lockfree 0.5.1 是 crates.io 最新版（index 核实）；advisory patched = []，
+    #   维护者 bzim 对 lockfree 与 owned-alloc 的报告均无响应，无修复版本
+    # - 升级路径: glommio 0.9.0 已是 crates.io 最新版（index 核实），无法通过升级摆脱
+    # [待上游发布修复版本后移除]
+    "RUSTSEC-2026-0284",
+
+    # RUSTSEC-2026-0291: owned-alloc - Drop panic 时 OwnedAlloc::drop_in_place 双重释放
+    # 影响评估: LOW（与 RUSTSEC-2026-0284 同路径：glommio 0.9.0 -> lockfree 0.5.1 -> owned-alloc 0.2.0）
+    # - 攻击向量: 需要调用 OwnedAlloc/MaybeUninitAlloc::drop_in_place 且存放的 T 的 Drop panic
+    # - 实际状态: 本项目代码与 glommio 源码均不直接引用 owned_alloc（见 0284 评估）；
+    #   仅经 lockfree 内部使用，且仅在 Linux 下 glommio 编译时进入依赖树
+    # - 上游状态: owned-alloc 0.2.0 是 crates.io 最新版（index 核实，2018 年后无发布）；
+    #   advisory 明确 "No fixed upgrade is available"，维护者无响应
+    # [待上游发布修复版本后移除]
+    "RUSTSEC-2026-0291",
+
     # RUSTSEC-2026-0194: quick-xml - 检查重复属性名时二次时间复杂度
     # 影响评估: MEDIUM -> LOW（传递依赖，非默认编译路径）
     # - 攻击向量: 需要解析攻击者控制的 XML 文档

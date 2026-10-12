@@ -949,6 +949,15 @@ const-hex = "=1.19.1"
 #     futures-task: 0.3.33 -> 0.3.34
 #     num-integer: 0.1.46 -> 0.1.47
 #     whoami: 2.1.2 -> 2.1.3
+# - 传递依赖 (cargo update --precise 2026-10-13, 修复 RUSTSEC-2026-0235):
+#     rust_decimal: 1.42.1 -> 1.43.0 (surrealdb-core/surrealdb-types/surrealdb-protocol/revision
+#       传递依赖; 1.43.0 起移除 rkyv 0.7 依赖，rkyv 0.7.46/bytecheck/rend/ptr_meta/seahash 等
+#       7 个 crate 从 Cargo.lock 移除; c10_networks --features surrealdb cargo check 通过)
+#   - RUSTSEC-2026-0235 (rkyv 0.7.46 out-of-bounds reads): 已修复 ✅ (rust_decimal 1.43.0 升级)
+#   - RUSTSEC-2026-0284 (lockfree 0.5.1 unsound) / RUSTSEC-2026-0291 (owned-alloc 0.2.0 double free):
+#     已忽略 (glommio 0.9.0 -> lockfree 0.5.1 -> owned-alloc 0.2.0 传递依赖; glommio 仅 Linux
+#     target 编译且其源码 0 处使用 lockfree; 上游无修复版本; 详见 .cargo/audit.toml 与
+#     supply-chain/audits.toml 审计 stub)
 
 # 安全审计状态 (2026-07-08)
 # 已修复:

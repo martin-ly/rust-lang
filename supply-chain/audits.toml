@@ -181,6 +181,11 @@ criteria = "safe-to-run"
 version = "4.10.0"
 notes = "2026-07-27: lapin 4.10.0 (AMQP 官方 Rust 客户端) 为 c10_networks 的 AMQP 示例依赖，仅用于本地 RabbitMQ 示例，不处理不可信网络输入。"
 
+[[audits.lockfree]]
+criteria = "safe-to-deploy"
+version = "0.5.1"
+notes = "2026-10-13: audit stub for RUSTSEC-2026-0284 (unsound, no patched release). lockfree 0.5.1 is only reachable via glommio 0.9.0 (Linux-only target dependency of c06_async); grep of glommio 0.9.0 src/ shows zero uses of lockfree, and no project code references lockfree APIs. Affected functions (Map::into_iter, SharedIncin::clear) are never called in this project."
+
 [[audits.lru]]
 criteria = "safe-to-run"
 version = "0.18.2"
@@ -216,6 +221,11 @@ criteria = "safe-to-run"
 version = "3.16.1"
 notes = "2026-08-04: ntex-rt 3.16.1 (ntex 官方维护) 为 cargo update 补丁升级 (3.16.0 -> 3.16.1)，为 ntex 运行时传递依赖，仅用于本地异步网络示例与测试路径。"
 
+[[audits.owned-alloc]]
+criteria = "safe-to-deploy"
+version = "0.2.0"
+notes = "2026-10-13: audit stub for RUSTSEC-2026-0291 (double free on Drop panic, no fixed upgrade). owned-alloc 0.2.0 is reached only through lockfree 0.5.1 <- glommio 0.9.0 (Linux-only); neither glommio source nor project code calls OwnedAlloc::drop_in_place. See .cargo/audit.toml entry for full assessment."
+
 [[audits.p12-keystore]]
 criteria = "safe-to-run"
 version = "0.2.1"
@@ -231,10 +241,25 @@ criteria = "safe-to-run"
 version = "0.7.3"
 notes = "2026-07-27: polyval 0.7.3 (RustCrypto 官方维护) 为 aes-gcm 0.11 升级后的 POLYVAL 传递依赖，仅用于 benchmark 中的本地加密示例。"
 
+[[audits.proc-macro-crate]]
+criteria = "safe-to-run"
+version = "1.3.1"
+notes = "未做人工代码审计，2026-10-13 登记为 stub，待人工复核。依据：proc-macro-crate 1.3.1 (bkchr/Bastian Köcher 官方维护，crates.io 唯一 owner) 为构建期 proc-macro 辅助库，读取 Cargo.toml 解析 crate 名，仅由 num_enum_derive/gtk3-macros 等过程宏在编译期调用，不进入运行时、不处理网络输入。"
+
+[[audits.proc-macro-crate]]
+criteria = "safe-to-run"
+version = "2.0.2"
+notes = "未做人工代码审计，2026-10-13 登记为 stub，待人工复核。依据：proc-macro-crate 2.0.2 (bkchr/Bastian Köcher 官方维护，crates.io 唯一 owner) 为构建期 proc-macro 辅助库，读取 Cargo.toml 解析 crate 名，仅由 glib-macros/salvo_macros 等过程宏在编译期调用，不进入运行时、不处理网络输入。"
+
 [[audits.regex-automata]]
 criteria = "safe-to-run"
 version = "0.4.18"
 notes = "2026-08-04: regex-automata 0.4.18 (BurntSushi/Andrew Gallant 官方维护) 为 cargo update 补丁升级 (0.4.16 -> 0.4.18)，为 regex/matchers/tracing-subscriber 的底层自动机实现，仅用于本地文本匹配示例与测试路径。"
+
+[[audits.rustls]]
+criteria = "safe-to-run"
+version = "0.23.45"
+notes = "未做人工代码审计，2026-10-13 登记为 stub，待人工复核。依据：rustls 0.23.45 (rustls 官方团队 ctz/djc 维护，crates.io owner 为 rustls:publishers) 为纯 Rust TLS 库，是 ureq/quinn/sentry/mongodb 等 c10_networks 示例的传递依赖；上游为业界广泛审计的 TLS 实现，本仓库未对其源码做人工审计，仅按 safe-to-run (test/dev) 路径登记。"
 
 [[audits.rustls-connector]]
 criteria = "safe-to-run"
@@ -410,3 +435,75 @@ notes = "2026-08-04: zerocopy-derive 0.8.56 (joshlf 官方维护) 为 cargo upda
 criteria = "safe-to-run"
 version = "8.6.0"
 notes = "2026-07-11: zip 8.6.0 (zip-rs 官方维护) 为 candle-core 0.11 传递依赖，仅用于本地权重文件读取；已知解压路径问题不影响本项目本地可信文件场景。"
+
+[[trusted.h2]]
+criteria = "safe-to-deploy"
+user-id = 359 # Sean McArthur (seanmonstar)
+start = "2019-03-13"
+end = "2027-10-12"
+
+[[trusted.h2]]
+criteria = "safe-to-run"
+user-id = 359 # Sean McArthur (seanmonstar)
+start = "2019-03-13"
+end = "2027-10-12"
+
+[[trusted.serde_spanned]]
+criteria = "safe-to-deploy"
+user-id = 6743 # Ed Page (epage)
+start = "2023-01-20"
+end = "2027-10-12"
+
+[[trusted.serde_spanned]]
+criteria = "safe-to-run"
+user-id = 6743 # Ed Page (epage)
+start = "2023-01-20"
+end = "2027-10-12"
+
+[[trusted.socket2]]
+criteria = "safe-to-deploy"
+user-id = 6025 # Thomas de Zeeuw (Thomasdezeeuw)
+start = "2020-09-09"
+end = "2027-10-12"
+
+[[trusted.socket2]]
+criteria = "safe-to-run"
+user-id = 6025 # Thomas de Zeeuw (Thomasdezeeuw)
+start = "2020-09-09"
+end = "2027-10-12"
+
+[[trusted.toml_datetime]]
+criteria = "safe-to-deploy"
+user-id = 6743 # Ed Page (epage)
+start = "2022-10-21"
+end = "2027-10-12"
+
+[[trusted.toml_datetime]]
+criteria = "safe-to-run"
+user-id = 6743 # Ed Page (epage)
+start = "2022-10-21"
+end = "2027-10-12"
+
+[[trusted.toml_edit]]
+criteria = "safe-to-deploy"
+user-id = 6743 # Ed Page (epage)
+start = "2021-09-13"
+end = "2027-10-12"
+
+[[trusted.toml_edit]]
+criteria = "safe-to-run"
+user-id = 6743 # Ed Page (epage)
+start = "2021-09-13"
+end = "2027-10-12"
+
+[[trusted.winnow]]
+criteria = "safe-to-deploy"
+user-id = 6743 # Ed Page (epage)
+start = "2023-02-22"
+end = "2027-10-12"
+
+[[trusted.winnow]]
+criteria = "safe-to-run"
+user-id = 6743 # Ed Page (epage)
+start = "2023-02-22"
+end = "2027-10-12"

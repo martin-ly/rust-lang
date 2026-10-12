@@ -3,7 +3,9 @@ title = "Rust 分层概念知识体系"
 authors = ["Rust Concept Knowledge Base Team"]
 description = "Rust 分层概念知识体系 — 从入门直觉到形式化验证"
 src = "concept"
-build-dir = "book"
+# NOTE 2026-10-13: mdbook 0.5.x 移除了 [book] build-dir 字段（构建输出目录改由
+# `mdbook build -d/--dest-dir` 指定，默认 ./book，与旧 build-dir 值一致）。
+# 旧配置在 mdbook 0.5.3 下报 "unknown field build-dir"，已移除以保持默认 ./book。
 language = "zh"
 
 [output.html]
