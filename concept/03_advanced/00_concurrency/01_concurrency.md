@@ -7,7 +7,7 @@
 > **Rust 版本**: 1.97.0+ (Edition 2024)
 > **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[并发](../../../knowledge/03_advanced/concurrency)
+> 本主题在 knowledge 中的就近 stub 索引：[Unsafe 学习入口](../../../knowledge/03_advanced/unsafe/README.md)（原 `knowledge/03_advanced/concurrency/` 索引已删除，86e06ba37；并发权威页即本页）
 > **受众**: [专家]
 > **权威来源**: 本文件为 `concept/` 权威页。
 > **Send/Sync 契约权威页**: Send/Sync 的形式化契约、auto 推导规则与判定矩阵已收敛至 [Send 与 Sync：Auto Trait 的并发安全（Concurrency Safety）契约](02_send_sync_auto_traits.md)，本页保留并发模型全景与场景章节。

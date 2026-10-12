@@ -28,6 +28,17 @@
 - advisory-db 已复制到真实 CARGO_HOME（C:\_program\rust\cargo\advisory-db）
 - **全量 23 门全绿**：`✅ All 23 quality gates passed`，基线报告 `reports/QUALITY_GATES_BASELINE_2026-10-13.md`（完整输出 `..._2026-10-13.txt`）
 
+## 2c. 2026-10-13 下午轮（G/H/I 轨道，提交中）
+
+- **canonical WARN 121→0 清零**（提交 `146aff92d`）：round-2 报告入库；(a) 两对人工裁决落地（38_no_std canonical / 23 头部收敛；05 定制 Summary 为 04 基础设施补充）；门脚本追加 46 条 round-2 正则 + 16 对 (b) 类 + (a) 两对登记。复测 `✅ 未发现双权威页或同目录同主题重复文件`。
+- **mdbook WARN unclosed HTML 35→0**（提交 `6feb9aee8`）：24 文件泛型文本行内围栏化；5 处 `<details>` 真缺闭合补齐（含 12_self_assessment L1136 围栏配对修复）；实跑 `mdbook build` 无 unclosed WARN。
+- **全量门复跑全绿**：`✅ All 23 quality gates passed`（GATES_EXIT=0，落盘 reports 存档本轮追加）。
+- **G 轨道台账落地**：`move_ledger.csv` 初始化（18 条登记，历史三笔 git 实证补录：86e06ba37 实测删 140 非 143、f3585bd9f 实测移 23 非 26）；`reports/EMPTY_DIR_REGISTRY_2026-10-13.md`（非构建空目录实测 38 吻合，formal_rust 口径差异如实登记）；悬空 knowledge/ 引用实测 13 处（草案 24 不可复现），修 12 处/6 文件；miri 修链核验通过（草案称需修的断链实测不存在）。
+- **H 轨道**：`24_cargo_basics.md` 扩充 +127 行（既有页）；新建 `04_web_and_networking/12_container_build_and_delivery_pipeline.md` 454 行（与 11_kubernetes_rust canonical 边界分工）；**keywords 缺口勘误：已覆盖**——`01_foundation/00_start/06_keywords.md` 322 行合规 canonical 已存在，不新建重复页（keywords 子代理失败无落盘，按 F 轨道禁重复原则关闭该缺口）。
+- **I 轨道**：3 个 vet stub 全部升级为如实审计条目（zcash/Google/bytecodealliance 上游链 + 本地 delta diff：pmc 2.0.1→2.0.2、rustls 0.23.43→0.23.45）；`cargo vet --locked` exit 0（1126 fully / 5 partially / 667 exempted）。遗留观察：`cargo vet` 非 --locked 形态报 proc-macro-error2:2.0.1 需 policy audit-as-crates-io（path-vendor 相关，未处理）。
+- **J 轨道**：mdbook `WARN search index is very large (~76MB)` 登记为已知非阻断项，不改配置。
+- 新页跨层修复：24_cargo_basics 与 12_container 各补 1 条 L5 向下引用，link-check 跨层问题 2→0。
+
 ## 3. 未完成项（新会话续做清单）
 
 > **勘误 2026-10-13**：原 §3-6『knowledge/ 82 大型文件迁移』经 git 实证已完成（2026-07-10 `5cb654956` 迁入 content/，2026-07-19 `86e06ba37` 清 knowledge/ 143 文件）。现 knowledge/ 仅 15 文件（14 stub + INDEX），大型非 stub=0，零迁移。详见 `reports/F_TRACK_PLAN_2026-10-13.md`。F 轨道剩余动作：① move_ledger.csv 初始化（尚不存在）；② 38 个非构建空目录保留+登记；③ 3 个已删除主题缺口（keywords 速查 / cargo_basics 总览 / k8s 部署）未来以新建 canonical 页补齐。

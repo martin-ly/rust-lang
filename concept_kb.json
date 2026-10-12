@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 791,
-    "generated_at": "2026-10-12T21:06:36.172610+00:00"
+    "total_files": 793,
+    "generated_at": "2026-10-12T22:39:16.095600+00:00"
   },
   "files": [
     {
@@ -28425,6 +28425,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../../knowledge/03_advanced/unsafe/README.md",
         "../../00_meta/00_framework/methodology.md",
         "../../00_meta/02_sources/05_international_authority_index.md",
         "../../00_meta/04_navigation/04_inter_layer_map.md",
@@ -32222,6 +32223,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../../knowledge/03_advanced/unsafe/README.md",
         "../../00_meta/04_navigation/08_learning_mvp_path.md",
         "../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md",
         "../../01_foundation/02_type_system/04_coercion_and_casting.md",
@@ -63636,6 +63638,55 @@
       "templated_chains": 0
     },
     {
+      "path": "G:\\_src\\rust-lang\\concept\\06_ecosystem\\01_cargo\\24_cargo_basics.md",
+      "layer": "L6",
+      "title": "Cargo 基础总览（Cargo Basics）",
+      "positioning": "提供一张 Cargo「基础地图」：先建立命令与 manifest 的整体心智模型，再按边界表跳转到各专题权威页深读。",
+      "line_count": 242,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../00_meta/01_terminology/01_terminology_glossary.md",
+        "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
+        "../00_toolchain/01_toolchain.md",
+        "03_resolver_v3_public_feature_unification.md",
+        "05_cargo_build_scripts.md",
+        "06_cargo_dependency_resolution.md",
+        "10_cargo_manifest_reference.md",
+        "14_cargo_workspaces.md",
+        "15_cargo_getting_started.md",
+        "16_cargo_workflow.md",
+        "18_cargo_configuration.md",
+        "19_cargo_commands_reference.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 1,
+      "matrix_rows": 43,
+      "pre_post": {
+        "pre": [
+          "[Toolchain](../00_toolchain/01_toolchain.md) · [Cargo 入门](15_cargo_getting_started.md)"
+        ],
+        "post": [
+          "[Cargo Workspaces](14_cargo_workspaces.md) · [Cargo Manifest Reference](10_cargo_manifest_reference.md) · [Cargo Commands Reference](19_cargo_commands_reference.md) · [Cargo Dependency Resolution](06_cargo_dependency_resolution.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "G:\\_src\\rust-lang\\concept\\06_ecosystem\\02_core_crates\\01_core_crates.md",
       "layer": "L6",
       "title": "Core Crates（核心开源库谱系索引）",
@@ -73344,6 +73395,79 @@
         ],
         "post": [
           "[Service Mesh](../../06_ecosystem/07_security_and_cryptography/04_security_architecture.md) · [Observability](../00_toolchain/02_logging_observability.md)"
+        ]
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "G:\\_src\\rust-lang\\concept\\06_ecosystem\\04_web_and_networking\\12_container_build_and_delivery_pipeline.md",
+      "layer": "L6",
+      "title": "Kubernetes 上的 Rust 服务：容器化构建与交付流水线",
+      "positioning": "系统梳理 Rust 服务交付到 Kubernetes 的完整流水线：源码 → 依赖缓存 → 静态链接 → 最小运行时镜像 → 探针契约 → 资源约束 → 优雅停机。建立「构建侧」与「运行侧」两段式决策框架，与既有 K8s 部署实践页互补。",
+      "line_count": 456,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 四、反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "use std::sync::atomic::{AtomicBool, Ordering}; use axum::{routing::get, Router, ..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// 容器内实测：limits.cpu=1 时返回 1（Linux cgroup v1/v2 均生效） let workers = std::thread::a..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 28,
+          "should_fail": false,
+          "code_preview": "use tokio::signal::unix::{signal, SignalKind};  async fn shutdown_signal() {    ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../../05_comparative/05_idioms_patterns_architecture/04_architecture/03_microservices.md",
+        "../05_systems_and_embedded/02_cross_compilation.md",
+        "../14_enterprise_architecture/09_observability_and_sre_patterns.md",
+        "../14_enterprise_architecture/12_cloud_native_and_serverless_patterns.md",
+        "02_cloud_native.md",
+        "10_tokio_runtime_internals.md",
+        "11_kubernetes_rust.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 21,
+      "pre_post": {
+        "pre": [
+          "[云原生生态](02_cloud_native.md) · [Rust 服务与 Kubernetes](11_kubernetes_rust.md) · [Tokio 运行时内部机制](10_tokio_runtime_internals.md) · [交叉编译](../05_systems_and_embedded/02_cross_compilation.md)"
+        ],
+        "post": [
+          "[云原生与 Serverless 模式](../14_enterprise_architecture/12_cloud_native_and_serverless_patterns.md) · [可观测性与 SRE 模式](../14_enterprise_architecture/09_observability_and_sre_patterns.md)"
         ]
       },
       "backward_chains": 0,

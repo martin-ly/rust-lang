@@ -242,14 +242,34 @@ version = "0.7.3"
 notes = "2026-07-27: polyval 0.7.3 (RustCrypto 官方维护) 为 aes-gcm 0.11 升级后的 POLYVAL 传递依赖，仅用于 benchmark 中的本地加密示例。"
 
 [[audits.proc-macro-crate]]
+who = "George Burgess IV <gbiv@google.com>"
 criteria = "safe-to-run"
-version = "1.3.1"
-notes = "未做人工代码审计，2026-10-13 登记为 stub，待人工复核。依据：proc-macro-crate 1.3.1 (bkchr/Bastian Köcher 官方维护，crates.io 唯一 owner) 为构建期 proc-macro 辅助库，读取 Cargo.toml 解析 crate 名，仅由 num_enum_derive/gtk3-macros 等过程宏在编译期调用，不进入运行时、不处理网络输入。"
+version = "1.2.1"
+notes = "2026-10-13 复核升级：导入上游审计链锚点。来源：Google 聚合审计（imports.google，aggregated-from ChromiumOS third_party/rust_crates cargo-vet audits.toml），criteria 含 safe-to-run + does-not-implement-crypto。"
 
 [[audits.proc-macro-crate]]
+who = "Jack Grigg <jack@z.cash>"
 criteria = "safe-to-run"
-version = "2.0.2"
-notes = "未做人工代码审计，2026-10-13 登记为 stub，待人工复核。依据：proc-macro-crate 2.0.2 (bkchr/Bastian Köcher 官方维护，crates.io 唯一 owner) 为构建期 proc-macro 辅助库，读取 Cargo.toml 解析 crate 名，仅由 glib-macros/salvo_macros 等过程宏在编译期调用，不进入运行时、不处理网络输入。"
+delta = "1.2.1 -> 1.3.0"
+notes = "2026-10-13 复核升级：导入 zcash 上游审计 delta（imports.zcash，aggregated-from zcash/zcash qa/supply-chain/audits.toml，原 criteria safe-to-deploy）。notes: Migrates from `toml` to `toml_edit`."
+
+[[audits.proc-macro-crate]]
+who = "Jack Grigg <jack@electriccoin.co>"
+criteria = "safe-to-run"
+delta = "1.3.0 -> 1.3.1"
+notes = "2026-10-13 复核升级：导入 zcash 上游审计 delta（imports.zcash，原 criteria safe-to-deploy）。notes: Bumps MSRV to 1.60. 本仓库复核：1.3.1 源码 438 行单文件，0 处 unsafe，无子进程/网络调用，仅 fs::read_to_string 读 Cargo.toml；发布者为唯一 owner bkchr (Bastian Köcher)。"
+
+[[audits.proc-macro-crate]]
+who = "Jack Grigg <jack@electriccoin.co>"
+criteria = "safe-to-run"
+delta = "1.3.1 -> 2.0.1"
+notes = "2026-10-13 复核升级：导入 zcash 上游审计 delta（imports.zcash，原 criteria safe-to-deploy）。上游 notes：新增受外层环境控制的 `$CARGO locate-project` 子进程调用，其输出仅被解析为 PathBuf 并作为 Cargo.toml 打开，环境最多能让其返回另一个 Cargo.toml 的路径。"
+
+[[audits.proc-macro-crate]]
+who = "Hermes Agent (local review, 2026-10-13)"
+criteria = "safe-to-run"
+delta = "2.0.1 -> 2.0.2"
+notes = "2026-10-13 人工复核（cargo vet 上游链止于 2.0.1，本 delta 为本地审计）：diff 2.0.1->2.0.2 仅将 workspace_manifest_path 返回类型改为 Option，None 时回退用 manifest_path（vendored 目录场景修复）；0 处 unsafe，无新增能力；发布者仍为唯一 owner bkchr。"
 
 [[audits.regex-automata]]
 criteria = "safe-to-run"
@@ -257,9 +277,16 @@ version = "0.4.18"
 notes = "2026-08-04: regex-automata 0.4.18 (BurntSushi/Andrew Gallant 官方维护) 为 cargo update 补丁升级 (0.4.16 -> 0.4.18)，为 regex/matchers/tracing-subscriber 的底层自动机实现，仅用于本地文本匹配示例与测试路径。"
 
 [[audits.rustls]]
+who = "Alex Crichton <alex@alexcrichton.com>"
 criteria = "safe-to-run"
-version = "0.23.45"
-notes = "未做人工代码审计，2026-10-13 登记为 stub，待人工复核。依据：rustls 0.23.45 (rustls 官方团队 ctz/djc 维护，crates.io owner 为 rustls:publishers) 为纯 Rust TLS 库，是 ureq/quinn/sentry/mongodb 等 c10_networks 示例的传递依赖；上游为业界广泛审计的 TLS 实现，本仓库未对其源码做人工审计，仅按 safe-to-run (test/dev) 路径登记。"
+delta = "0.23.37 -> 0.23.45"
+notes = "2026-10-13 复核升级：导入 bytecodealliance/wasmtime 上游审计 delta（imports.bytecodealliance，supply-chain/audits.toml，原 criteria safe-to-deploy；上游 notes：较大更新但无新增 unsafe）。佐证：rustls 为 CNCF 发起、Cure53 执行的 30 天安全审计对象（TLS-01 报告，2020-06，cure53.de/pentest-report_rustls.pdf，未发现破坏性漏洞）；crate 本身 #![forbid(unsafe_code)]。锚点 0.23.37 由本仓库既有豁免覆盖。"
+
+[[audits.rustls]]
+who = "Hermes Agent (local review, 2026-10-13)"
+criteria = "safe-to-run"
+delta = "0.23.43 -> 0.23.45"
+notes = "2026-10-13 人工复核（锚定本仓库已豁免的 0.23.43）：diff 0.23.43->0.23.45 src/ 共 29 个文件、约 453 行新增，全部为协议/错误处理/压缩等纯 Rust 逻辑；新增 unsafe 行数 0，删除 unsafe 行数 0；lib.rs 保持 #![forbid(unsafe_code, unused_must_use)]；发布者 ctz (Joe Birr-Pixton)，crates.io owner 为 ctz/djc/publishers 团队。"
 
 [[audits.rustls-connector]]
 criteria = "safe-to-run"

@@ -151,11 +151,11 @@
 
 | 主题 | 保留位置 | `docs/` 处理方式 | `knowledge/` 处理方式 |
 |------|----------|------------------|----------------------|
-| 异步编程 | `knowledge/03_advanced/async/` | `05_guides/` 保留专题指南 | 保留教程 |
-| 线程并发 | `knowledge/03_advanced/concurrency/` | `05_guides/` 保留专题指南 | 保留教程 |
+| 异步编程 | `concept/03_advanced/01_async/01_async.md`（原 `knowledge/03_advanced/async/` 已删除，86e06ba37） | `05_guides/` 保留专题指南 | 保留教程 |
+| 线程并发 | `concept/03_advanced/00_concurrency/01_concurrency.md`（原 `knowledge/03_advanced/concurrency/` 已删除，86e06ba37） | `05_guides/` 保留专题指南 | 保留教程 |
 | Unsafe Rust | `knowledge/03_advanced/unsafe/` | `05_guides/` 保留专题指南 | 保留教程 |
-| 宏系统 | `knowledge/03_advanced/macros/` | `05_guides/` 保留专题指南 | 保留教程 |
-| 性能优化 | `knowledge/03_advanced/performance_optimization.md` | `05_guides/` 保留专题指南 | 保留教程 |
+| 宏系统 | `concept/03_advanced/03_proc_macros/01_macros.md`（原 `knowledge/03_advanced/macros/` 已删除，86e06ba37） | `05_guides/` 保留专题指南 | 保留教程 |
+| 性能优化 | `knowledge/03_advanced/05_performance_optimization.md`（stub；原 `knowledge/03_advanced/performance_optimization.md` 已 stub 化；canonical `concept/06_ecosystem/10_performance/01_performance_optimization.md`） | `05_guides/` 保留专题指南 | 保留教程 |
 | 设计模式 | `knowledge/04_expert/` | `05_guides/` 保留专题指南 | 保留教程 |
 
 ### 3.2 交叉引用规范 {#32-交叉引用规范}
@@ -185,7 +185,7 @@
 - `docs/00_meta/17_terminology_standard.md`
 - `docs/00_meta/16_authoritative_sources_and_citations.md`
 - `knowledge/INDEX.md`
-- `knowledge/README.md`
+- `knowledge/README.md`（已删除，86e06ba37；入口现为 `knowledge/INDEX.md`）
 - 所有 `docs/08_usage_guides/*_GUIDE.md`
 - 所有 `docs/02_reference/quick_reference/*.md`
 - 所有 `docs/06_toolchain/rust_1.*_*.md`

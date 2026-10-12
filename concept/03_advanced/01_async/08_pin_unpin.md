@@ -7,7 +7,7 @@
 > **Rust 版本**: 1.97.1+ (Edition 2024)
 > **📎 交叉引用（Reference）**
 >
-> 本主题在 knowledge 中有系统化的知识索引：[Pin/Unpin](../../../knowledge/03_advanced/async)
+> 本主题在 knowledge 中的就近 stub 索引：[Unsafe 学习入口](../../../knowledge/03_advanced/unsafe/README.md)（原 `knowledge/03_advanced/async/` 索引已删除，86e06ba37；异步权威页见 `concept/03_advanced/01_async/01_async.md`）
 > **受众**: [专家]
 > **Bloom 层级**: L4-L5
 > **权威来源**: 本文件为 `concept/` 权威页。

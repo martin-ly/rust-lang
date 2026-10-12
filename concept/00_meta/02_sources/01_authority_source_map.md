@@ -137,7 +137,7 @@ dtolnay:               https://github.com/dtolnay
 | 批次 | 目标文件 | 核心补全内容 |
 |:---|:---|:---|
 | **Batch 1** | `concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md` | 深化 RustBelt / COR 论证摘要，补全 C++ RAII vs Rust Ownership 形式化差异 |
-| **Batch 1** | `knowledge/01_fundamentals/ownership.md` | 补全 TRPL / Wikipedia 来源标注，添加 C++ / Go 内存管理对比来源 |
+| **Batch 1** | `concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`（原 `knowledge/01_fundamentals/ownership.md` 已删除，86e06ba37） | 补全 TRPL / Wikipedia 来源标注，添加 C++ / Go 内存管理对比来源 |
 | **Batch 1** | `docs/02_reference/CROSS_LANGUAGE_COMPARISON.md` | 全篇补来源标注（cppreference / Go Spec / Haskell Wiki） |
 | **Batch 2** | `concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md` + 对应 knowledge/docs | Stacked Borrows → Tree Borrows 演进论证，C++ 引用语义对比 |
 | **Batch 3** | `concept/01_foundation/01_ownership_borrow_lifetime/03_lifetimes.md` + 对应 knowledge/docs | NLL / Polonius / Tree Borrows 来源链，形式化区域类型论证 |

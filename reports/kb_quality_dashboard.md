@@ -1,25 +1,25 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-10-12T21:06:36.168580+00:00
-> 扫描文件数: 791
+> 生成时间: 2026-10-12T22:39:16.092595+00:00
+> 扫描文件数: 793
 
 ## 全局指标
 
 | 指标 | 数值 | 目标 | 状态 |
 |:---|:---|:---|:---|
-| 总文件数 | 791 | 27 | ✅ |
+| 总文件数 | 793 | 27 | ✅ |
 | 总定理链 (⟹) | 2180 | ≥270 | ✅ |
-| 总反命题 | 1451 | ≥40 | ✅ |
-| 总 Mermaid 图 | 1562 | ≥50 | ✅ |
-| 编译验证代码块 | 7760 | ≥150 | ✅ |
-| 定理矩阵总行 | 31455 | — | — |
+| 总反命题 | 1459 | ≥40 | ✅ |
+| 总 Mermaid 图 | 1563 | ≥50 | ✅ |
+| 编译验证代码块 | 7763 | ≥150 | ✅ |
+| 定理矩阵总行 | 31519 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
 | docs/content/knowledge 死链数量 | 0 | 0 | ✅ |
 | 反向推理 (⟸) | 361 | ≥50 | ✅ |
 | 模板化 ⟹ | 0 | 0 | ✅ |
-| 前置概念覆盖率 | 689/711 | 100% | ⚠️ |
-| 后置概念覆盖率 | 689/711 | 100% | ⚠️ |
-| 双标签覆盖率 | 552/711 | >=95% | ⚠️ |
+| 前置概念覆盖率 | 691/713 | 100% | ⚠️ |
+| 后置概念覆盖率 | 691/713 | 100% | ⚠️ |
+| 双标签覆盖率 | 554/713 | >=95% | ⚠️ |
 | 非法标签组合 | 0 | 0 | ✅ |
 
 ## 按层级分布
@@ -32,7 +32,7 @@
 | L3 | 79 | 5.2 | 2.0 | 54/79 (68%) | 1.4 | 0 | 78/79 | 78/79 | 78/79 |
 | L4 | 132 | 1.8 | 0.8 | 40/132 (30%) | 0.1 | 0 | 124/132 | 124/132 | 80/132 |
 | L5 | 55 | 1.5 | 0.7 | 19/55 (34%) | 0.0 | 0 | 52/55 | 52/55 | 27/55 |
-| L6 | 261 | 1.2 | 0.6 | 58/261 (22%) | 0.0 | 0 | 253/261 | 253/261 | 186/261 |
+| L6 | 263 | 1.2 | 0.6 | 58/263 (22%) | 0.0 | 0 | 255/263 | 255/263 | 188/263 |
 | L7 | 79 | 1.7 | 0.6 | 40/79 (50%) | 0.0 | 0 | 78/79 | 78/79 | 76/79 |
 
 ## 风险文件
@@ -341,6 +341,7 @@
 | G:\_src\rust-lang\concept\06_ecosystem\01_cargo\20_cargo_manifest_targets.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | G:\_src\rust-lang\concept\06_ecosystem\01_cargo\21_cargo_registry_internals.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | G:\_src\rust-lang\concept\06_ecosystem\01_cargo\23_cargo_197_features.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
+| G:\_src\rust-lang\concept\06_ecosystem\01_cargo\24_cargo_basics.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | G:\_src\rust-lang\concept\06_ecosystem\02_core_crates\01_core_crates.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | G:\_src\rust-lang\concept\06_ecosystem\02_core_crates\02_serde.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签; 缺失内容分级标签 |
 | G:\_src\rust-lang\concept\06_ecosystem\02_core_crates\03_tokio.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签; 缺失内容分级标签 |
@@ -400,6 +401,7 @@
 | G:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\09_reactive_programming.md | L6 | 过渡段落不足 (0 < 3) |
 | G:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\10_tokio_runtime_internals.md | L6 | 过渡段落不足 (0 < 3) |
 | G:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\11_kubernetes_rust.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
+| G:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\12_container_build_and_delivery_pipeline.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | G:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\01_wasi.md | L6 | 过渡段落不足 (0 < 3) |
 | G:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\02_cross_compilation.md | L6 | 过渡段落不足 (0 < 3) |
 | G:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\03_embedded_systems.md | L6 | 过渡段落不足 (0 < 3) |
@@ -1099,6 +1101,7 @@
 | G:\_src\rust-lang\concept\06_ecosystem\01_cargo\21_cargo_registry_internals.md | L6 | 203 | 0 | 0 | 0 | 1 | 1 | 2 | 0 | ❌ | ✅ | ✅ | 专家 | 综述级 |
 | G:\_src\rust-lang\concept\06_ecosystem\01_cargo\22_build_std.md | L6 | 380 | 3 | 0 | 0 | 0 | 3 | 3 | 6 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
 | G:\_src\rust-lang\concept\06_ecosystem\01_cargo\23_cargo_197_features.md | L6 | 304 | 0 | 0 | 0 | 1 | 1 | 2 | 0 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
+| G:\_src\rust-lang\concept\06_ecosystem\01_cargo\24_cargo_basics.md | L6 | 242 | 0 | 0 | 0 | 3 | 1 | 0 | 0 | ❌ | ✅ | ✅ | 初学者 | 综述级 |
 | G:\_src\rust-lang\concept\06_ecosystem\02_core_crates\01_core_crates.md | L6 | 413 | 0 | 0 | 0 | 1 | 3 | 0 | 0 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
 | G:\_src\rust-lang\concept\06_ecosystem\02_core_crates\02_serde.md | L6 | 452 | 0 | 0 | 0 | 0 | 1 | 10 | 0 | ❌ | ✅ | ✅ | None | None |
 | G:\_src\rust-lang\concept\06_ecosystem\02_core_crates\03_tokio.md | L6 | 412 | 0 | 0 | 0 | 0 | 1 | 11 | 0 | ❌ | ✅ | ✅ | None | None |
@@ -1168,6 +1171,7 @@
 | G:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\09_reactive_programming.md | L6 | 1142 | 3 | 0 | 0 | 2 | 1 | 14 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | G:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\10_tokio_runtime_internals.md | L6 | 358 | 8 | 0 | 0 | 1 | 2 | 8 | 0 | ✅ | ✅ | ✅ | 进阶 | 专家级 |
 | G:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\11_kubernetes_rust.md | L6 | 669 | 0 | 0 | 0 | 4 | 1 | 4 | 0 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
+| G:\_src\rust-lang\concept\06_ecosystem\04_web_and_networking\12_container_build_and_delivery_pipeline.md | L6 | 456 | 0 | 0 | 0 | 5 | 0 | 3 | 0 | ❌ | ✅ | ✅ | 进阶 | 综述级 |
 | G:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\01_wasi.md | L6 | 699 | 4 | 0 | 0 | 4 | 3 | 11 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | G:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\02_cross_compilation.md | L6 | 696 | 3 | 0 | 0 | 2 | 2 | 5 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |
 | G:\_src\rust-lang\concept\06_ecosystem\05_systems_and_embedded\03_embedded_systems.md | L6 | 1038 | 3 | 0 | 0 | 2 | 2 | 10 | 0 | ✅ | ✅ | ✅ | 进阶 | 综述级 |

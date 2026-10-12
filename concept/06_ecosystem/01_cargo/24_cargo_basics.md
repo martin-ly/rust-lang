@@ -107,3 +107,135 @@ mylib = { path = "../mylib" }                      # path 依赖（本地 crate�
 ```
 
 > **版本要求语义**: `"1.2.3"` 是 caret 要求 `>=1.2.3, <2.0.0`；`"~1.2.3"` 是 tilde 要求 `>=1.2.3, <1.3.0`；`"*"` 接受任意版本。详见 [Cargo Book — Specifying Dependencies](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html)。
+
+---
+
+## 四、Workspace 简介
+
+Workspace 把多个 package 组织在一起共享一个 `Cargo.lock`、一个 `target/` 目录和一套继承配置（[Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html)）。最小声明：
+
+```toml
+[workspace]
+members = ["crates/*"]
+resolver = "3"
+
+[workspace.package]
+edition = "2024"
+rust-version = "1.99.0"
+
+[workspace.dependencies]
+serde = "1"
+```
+
+成员 package 通过 `version.workspace = true` 等写法继承根配置。两种拓扑：**root package**（根 `Cargo.toml` 同时有 `[package]` 与 `[workspace]`）与 **virtual workspace**（只有 `[workspace]`，必须显式写 `resolver`）。`cargo build --workspace`、`cargo test --workspace` 让命令作用于全部成员。
+
+> 本页只建立「workspace 是什么、何时用」的第一印象；`members`/`exclude`/`default-members`、lint 继承、`[patch]` 只在 root manifest 生效等完整语义见权威页 [Cargo Workspaces](14_cargo_workspaces.md)。
+
+## 五、Feature 简介
+
+Feature 是 package 自我声明的**条件编译开关**（[Cargo Book — Features](https://doc.rust-lang.org/cargo/reference/features.html)）。库作者用它切分子集功能，消费者按需开启：
+
+```toml
+[features]
+default = ["std"]
+std = []
+serde_support = ["dep:serde"]
+
+[dependencies]
+serde = { version = "1", optional = true }
+```
+
+命令行侧：`cargo build --features serde_support`、`cargo test --no-default-features`。`dep:xxx` 语法表示「启用该 feature 才引入可选依赖」。feature 命名规范为 kebab-case，且不能与 Rust 关键字冲突。
+
+> **边界提示**: feature 在依赖图中的**合并（feature unification）语义**、resolver v3 下的 feature 传播与 `public = true` 属于专题内容，见 [Cargo Dependency Resolution](06_cargo_dependency_resolution.md) 与 [Resolver v3 与 `public = true` 的 feature unification 演示](03_resolver_v3_public_feature_unification.md)。
+
+---
+
+## 六、常见错误诊断
+
+初学者最常撞到的 Cargo 层错误及第一反应（错误文本以 Cargo Book 命令页与 rustc 诊断惯例为准）：
+
+| 症状 | 典型报错 | 根因 | 第一反应 |
+|:---|:---|:---|:---|
+| 找不到命令目标 | `error: no VCS found for this package`（`cargo new` 时） | 环境无版本控制后端 | 加 `--vcs none` 或先 `git init` |
+| 依赖版本无匹配 | `error: failed to select a version for the requirement ...` | SemVer 要求与 registry 现有版本冲突 | 放宽版本要求或 `cargo update`；深读 [Cargo Dependency Resolution](06_cargo_dependency_resolution.md) |
+| lockfile 过期/冲突 | `error: the lock file ... needs to be updated but --locked was passed` | `Cargo.lock` 与 manifest 不一致 | 不带 `--locked` 跑一次 `cargo generate-lockfile` 或 `cargo update` |
+| 包名/目录不符 | `error: no `Cargo.toml` found`（在错误目录执行命令） | 当前目录不在 package 内 | `cd` 到含 `Cargo.toml` 的目录，或用 `--manifest-path` |
+| MSRV 不满足 | `error: package ... cannot be built because it requires rustc 1.99.0 or newer` | 本机 toolchain 低于依赖声明的 `rust-version` | `rustup update` 或降低该依赖版本 |
+| feature 拼错 | `error: none of the selected packages contains these features: ...` | `--features` 名单与 manifest 不符 | 核对 `[features]` 段拼写与 kebab-case |
+| 循环 path 依赖 | `error: cyclic package dependency: package ... depends on itself` | workspace 内 path 依赖成环 | 抽出公共 crate 打破环 |
+| 二进制歧义 | `error: `cargo run` could not determine which binary to run` | 多个 `[[bin]]` 目标 | `cargo run --bin <name>` 显式指定 |
+
+### 诊断顺序（通用流程）
+
+1. **先读第一行错误**：Cargo 层错误（`failed to select`、`failed to download`）发生在编译之前，问题在 manifest/网络/lockfile；rustc 层错误（`error[E0xxx]`）发生在编译期，问题在源码。
+2. **最小化复现**：`cargo check` 比 `cargo build` 快，先用它定位；必要时 `cargo build -v` 看 Cargo 实际传给 `rustc` 的调用。
+3. **区分「解析失败」与「编译失败」**：前者修 `Cargo.toml`/`Cargo.lock`，后者修源码——这是 Cargo 新手最常见的混淆点。
+
+---
+
+## 七、本页边界：与专题权威页的分工
+
+本页只覆盖「Cargo 基础总览」这一范围（核心命令、manifest 核心字段、workspace/feature 的第一印象、常见错误诊断）。以下主题各有专题权威页，本页不重复其正文：
+
+| 主题 | 专题权威页 |
+|:---|:---|
+| 从零创建并运行第一个 package | [Cargo 入门](15_cargo_getting_started.md) |
+| 日常开发流程、`Cargo.toml` vs `Cargo.lock`、项目布局 | [Cargo 工作流](16_cargo_workflow.md) |
+| 全部子命令分类速查 | [Cargo 命令参考](19_cargo_commands_reference.md) |
+| manifest 全字段参考 | [Cargo Manifest 参考速查](10_cargo_manifest_reference.md) |
+| workspace 完整语义（`members`/继承/`[patch]`） | [Cargo Workspaces](14_cargo_workspaces.md) |
+| 依赖解析算法与 resolver 版本 | [Cargo 依赖解析](06_cargo_dependency_resolution.md) |
+| 配置文件与环境变量 | [Cargo 配置与环境变量](18_cargo_configuration.md) |
+| 构建脚本 `build.rs` | [Cargo Build Scripts](05_cargo_build_scripts.md) |
+
+---
+
+## 相关概念
+
+- [Rust vs Go](../../05_comparative/01_systems_languages/03_rust_vs_go.md) — 工具链对比视角（L5）：Go 单二进制工具链 vs Rust cargo/rustup 分层
+- [Cargo Workspaces](14_cargo_workspaces.md) · [Cargo Manifest Reference](10_cargo_manifest_reference.md)
+
+## 🧭 思维导图（Mindmap）
+
+```mermaid
+mindmap
+  root((Cargo 基础总览))
+    工具链定位
+      rustc vs cargo vs rustup
+    核心命令
+      new / build / run / check / test
+    Cargo.toml 核心字段
+      package 段
+      dependencies 三形态
+    Workspace 简介
+    Feature 简介
+    常见错误诊断
+      解析失败 vs 编译失败
+```
+
+## ⚠️ 反例与陷阱
+
+### 反例 1：把「解析失败」当「编译失败」去改源码
+
+`cargo build` 报 `error: failed to select a version for the requirement "serde = \"2.0\""` 时，源码没有任何问题——crates.io 上不存在满足 `>=2.0.0, <3.0.0` 的 serde 版本。正确动作是修 `Cargo.toml` 的版本要求（如改回 `"1"`），而不是改 `src/` 下的代码。
+
+### 反例 2：用 `cargo check` 通过后直接 `cargo run --release` 期待产物
+
+`cargo check` 不生成二进制也不做链接；类型检查通过不代表 release 链接阶段（如缺失系统库）能通过。发布验证应跑 `cargo build --release`。
+
+### 反例 3：库 crate 提交 `Cargo.lock` 的默认预期
+
+纯库 package 通常不提交 `Cargo.lock`（下游用自己的解析结果）；二进制 package 则应提交以保证可复现构建。判据与理由见 [Cargo 工作流](16_cargo_workflow.md)。
+
+### ✅ 正确姿势：先 `check` 后 `build`，报错先分层
+
+```bash
+cargo check            # 第一步：快速验证源码可通过编译
+cargo build --release  # 第二步：产出正式二进制
+cargo test             # 第三步：测试
+```
+
+---
+
+> **权威来源**: [Cargo Book — Commands](https://doc.rust-lang.org/cargo/commands/index.html) · [Cargo Book — The Manifest Format](https://doc.rust-lang.org/cargo/reference/manifest.html) · [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) · [Cargo Book — Features](https://doc.rust-lang.org/cargo/reference/features.html) · [TRPL — Getting Started](https://doc.rust-lang.org/book/ch01-00-getting-started.html)

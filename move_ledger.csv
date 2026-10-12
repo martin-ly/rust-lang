@@ -1,0 +1,19 @@
+date,action,source,target,reason,risk,verified_by
+2026-07-10,历史迁移补录,knowledge/ 大型专题正文（safety_critical/deep_dives 等）,content/safety_critical/ 与 content/ecosystem/deep_dives/,"git commit 5cb654956：140 files changed, 1740 insertions(+), 908 deletions(-)；原路径保留为重定向 stub",低,git show --name-status 5cb654956 实测（本台账补录）
+2026-07-19,历史迁移补录,knowledge/ 140 个文件（全部 D 删除）,无（git 历史可恢复）；正文此前已迁 content/,git commit 86e06ba37：192 files changed；其中 knowledge/ 删除 140 个（计划草案称 143，实测 140，如实登记）,低,git show --name-status 86e06ba37 实测计数
+2026-07-19,历史迁移补录,archive/knowledge/ 23 个残留副本,archive/03_concept_history/knowledge/（R100 纯移动）,git commit f3585bd9f：151 files changed；archive/knowledge/ 重命名 23 个（计划草案称 26，实测 23，如实登记）,无,git show --name-status f3585bd9f 实测计数
+2026-10-13,ledger_init,,move_ledger.csv,F 轨道启动：台账此前不存在（工作区与 git 历史均无），本行为初始化登记,无,F_TRACK_PLAN_2026-10-13 §0/§6 + git 历史检索
+2026-10-13,勘误登记,reports/HERMES_SESSION_CHECKPOINT_2026-10-12.md §3-6,本台账 L2-L4 行,『82 个大型非 stub』为 2026-07-10 历史口径（todos.md@0a1dabf07）；迁移已于 2026-07-19 完成；当前 knowledge/ 大型非 stub=0,低,git show 复算 + STUB_PURITY_BASELINE_2026_07_15
+2026-10-13,保留登记,knowledge/ 15 个 .md（14 stub + INDEX.md）,原地保留,全部满足 AGENTS.md §6 红线 7；canonical 目标页 11/11 实测存在,无,check_stub_purity 口径复算
+2026-10-13,保留登记,formal_rust/ 全树 40 个目录（0 文件；纯叶子空目录 25 个）,原地保留（可选：整体移动至 archive/formal_rust_skeleton_2026-10/）,vestigial 骨架；git 0 文件；无引用；只移动不删除原则下不得删除。注：计划草案称 27，实测纯叶子 25 / 全树 40，均不等于 27，如实登记,低,os.walk 实测 + git ls-files 0
+2026-10-13,保留登记,crates/c11_frameworks/src/api/ 6 个空目录（auth/graphql/grpc/openapi/rest/sercurity）,原地保留（可选：整体移动至 archive/）,不在 workspace members；git 0 文件；api/sercurity 为拼写错误目录,低,os.walk 实测 + git ls-files 0
+2026-10-13,保留登记,"crates/c14_workflow/src/ 5 个空目录（benchmarks/tests/rust189/{async,concurrency,features}）",原地保留（可选：整体移动至 archive/）,不在 workspace members；git 0 文件,低,os.walk 实测 + git ls-files 0
+2026-10-13,保留登记,book/05_comparative/06_quizzes 与 book/07_future/archive,原地保留,mdbook 构建骨架，随构建再生成,无,AGENTS.md §2.1 book/ 定位
+2026-10-13,修链,docs/11_project/04_hierarchy_mapping_master.md L128-133,改链至 concept/ canonical（ownership/borrowing/traits/generics/concurrency/async）或现存 knowledge/ stub（traits 行）,悬空 knowledge/ 引用 6 处；unsafe 行（L134）实测有效未改,悬空 knowledge/ 引用 7 处（含草案未列的 macros/README.md 行）；unsafe 行（L134）实测有效未改,逐路径 os.path.exists 预验证 + kb_auditor 复跑
+2026-10-13,修链,docs/00_meta/04_documentation_division_of_labor.md L154/155/158/188,async/concurrency 行改 concept/ canonical；performance_optimization 行改现存 knowledge/ stub；L188 knowledge/README.md 标注已删除（86e06ba37）,悬空 knowledge/ 引用 4 处；unsafe 行实测有效未改,悬空 knowledge/ 引用 5 处（async/concurrency/macros/performance_optimization/README.md）；unsafe 行实测有效未改,同上
+2026-10-13,修链,concept/00_meta/02_sources/01_authority_source_map.md L140,knowledge/01_fundamentals/ownership.md 标注已删除（86e06ba37）并注 canonical concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md,悬空 knowledge/ 引用 1 处,低,同上
+2026-10-13,修链,concept/03_advanced/00_concurrency/01_concurrency.md L10,../../../knowledge/03_advanced/concurrency 改链至现存 knowledge/03_advanced/unsafe/README.md 就近 stub 索引（无并发主题 stub）,悬空 knowledge/ 链接 1 处,低,同上
+2026-10-13,修链,concept/03_advanced/01_async/08_pin_unpin.md L10,../../../knowledge/03_advanced/async 改链至现存 knowledge/03_advanced/unsafe/README.md 就近 stub 索引（无 async 主题 stub）,悬空 knowledge/ 链接 1 处,低,同上
+2026-10-13,修链,docs/03_reference/quick_reference/19_rust_195_features_cheatsheet.md L89,knowledge/02_intermediate/control_flow/01_if_let_guards.md 改链至 canonical concept/01_foundation/04_control_flow/01_control_flow.md（含 let_chains）,悬空 knowledge/ 链接 2 处（同一行文本+链接）,低,同上
+2026-10-13,保留登记,CHANGELOG.md 历史条目中的 knowledge/ 路径提及,原文保留不改写,历史叙述性条目；F 轨道原则：不改写历史,无,F_TRACK_PLAN §5
+2026-10-13,修链核验,knowledge/04_expert/miri/README.md L11,无需修改,F 轨道草案称 ../../ 断链需改 ../../../；实测该文件已是 ../../../concept/04_formal/04_model_checking/08_miri.md 且目标存在，链接有效（草案口径滞后）,无,os.path.exists 实测 + kb_auditor 复跑

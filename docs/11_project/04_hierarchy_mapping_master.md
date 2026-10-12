@@ -125,14 +125,14 @@ graph TB
 | 6 | `concept/03_advanced/01_async/01_async.md` | L3 高级 / 异步（Async） | L2 泛型 · L2 Trait · L1 生命周期（Lifetimes） | L4 异步语义 · L6 Tokio · L7 效果 | L3→L4 Future ↔ continuation monad | T-050 → T-051 → T-052 |
 | 7 | `concept/04_formal/03_ownership_formal.md` | L4 形式化 / 所有权 | L1 所有权 · L1 借用 · L4 线性逻辑 | L4 RustBelt · L7 形式化 · L3 Unsafe | L4↔L1 形式化 ↔ 直觉 双射 | T-100 → T-101 → T-102 |
 | 8 | `concept/04_formal/04_rustbelt.md` | L4 形式化 / RustBelt | L4 所有权形式化 · L4 类型论 · L4 线性逻辑 | L7 形式化 · L6 工具链 | L4→L7 机械证明 → 自动化 | T-110 → T-111 → T-112 |
-| 9 | `knowledge/01_fundamentals/ownership.md` | L1 基础 / 所有权 | 无 | knowledge 借用 · concept L1 | knowledge→concept 直觉映射 | T-001 |
-| 10 | `knowledge/01_fundamentals/borrowing.md` | L1 基础 / 借用 | knowledge 所有权 | knowledge Trait · concept L1 | knowledge→concept 直觉映射 | T-010 → T-011 |
-| 11 | `knowledge/02_intermediate/traits.md` | L2 进阶 / Trait | knowledge 所有权 · 借用 | knowledge 泛型 · concept L2 | knowledge→concept 直觉映射 | T-020 |
-| 12 | `knowledge/02_intermediate/generics.md` | L2 进阶 / 泛型 | knowledge Trait | knowledge 并发 · concept L2 | knowledge→concept 直觉映射 | T-030 |
-| 13 | `knowledge/03_advanced/concurrency/README.md` | L3 高级 / 并发索引 | knowledge 泛型 · Trait | knowledge Async · concept L3 | knowledge→concept 直觉映射 | T-040 → T-041 |
-| 14 | `knowledge/03_advanced/async/README.md` | L3 高级 / 异步（Async）索引 | knowledge 泛型 · Trait | knowledge Unsafe · concept L3 | knowledge→concept 直觉映射 | T-050 → T-051 |
+| 9 | `concept/01_foundation/01_ownership_borrow_lifetime/01_ownership.md`（原 `knowledge/01_fundamentals/ownership.md` 已删除，86e06ba37） | L1 基础 / 所有权 | 无 | knowledge 借用 · concept L1 | knowledge→concept 直觉映射 | T-001 |
+| 10 | `concept/01_foundation/01_ownership_borrow_lifetime/02_borrowing.md`（原 `knowledge/01_fundamentals/borrowing.md` 已删除，86e06ba37） | L1 基础 / 借用 | knowledge 所有权 | knowledge Trait · concept L1 | knowledge→concept 直觉映射 | T-010 → T-011 |
+| 11 | `knowledge/02_intermediate/06_traits.md`（stub；原 `knowledge/02_intermediate/traits.md` 已删除，86e06ba37；canonical `concept/02_intermediate/00_traits/01_traits.md`） | L2 进阶 / Trait | knowledge 所有权 · 借用 | knowledge 泛型 · concept L2 | knowledge→concept 直觉映射 | T-020 |
+| 12 | `concept/02_intermediate/01_generics/01_generics.md`（原 `knowledge/02_intermediate/generics.md` 已删除，86e06ba37） | L2 进阶 / 泛型 | knowledge Trait | knowledge 并发 · concept L2 | knowledge→concept 直觉映射 | T-030 |
+| 13 | `concept/03_advanced/00_concurrency/01_concurrency.md`（原 `knowledge/03_advanced/concurrency/README.md` 已删除，86e06ba37） | L3 高级 / 并发索引 | knowledge 泛型 · Trait | knowledge Async · concept L3 | knowledge→concept 直觉映射 | T-040 → T-041 |
+| 14 | `concept/03_advanced/01_async/01_async.md`（原 `knowledge/03_advanced/async/README.md` 已删除，86e06ba37） | L3 高级 / 异步（Async）索引 | knowledge 泛型 · Trait | knowledge Unsafe · concept L3 | knowledge→concept 直觉映射 | T-050 → T-051 |
 | 15 | `knowledge/03_advanced/unsafe/README.md` | L3 高级 / Unsafe 索引 | knowledge 所有权 · 借用 | knowledge 专家层 · concept L3 | knowledge→concept 直觉映射 | T-060 |
-| 16 | `knowledge/03_advanced/macros/README.md` | L3 高级 / 宏（Macro）索引 | knowledge Trait · 泛型 | knowledge 编译器内部 · concept L3 | knowledge→concept 直觉映射 | T-070 → T-071 |
+| 16 | `concept/03_advanced/03_proc_macros/01_macros.md`（原 `knowledge/03_advanced/macros/README.md` 已删除，86e06ba37） | L3 高级 / 宏（Macro）索引 | knowledge Trait · 泛型 | knowledge 编译器内部 · concept L3 | knowledge→concept 直觉映射 | T-070 → T-071 |
 | 17 | `docs/01_core/README.md` | L1-L2 基础-进阶 / 总览 | 无 | docs 指南 · 参考 · concept | docs→concept 工程映射 | T-001 → T-010 → T-020 → T-030 |
 | 18 | `docs/03_reference/03_error_code_mapping.md` | L1-L3 诊断参考 | docs 核心概念 · concept L1 | docs 性能 · concept L3 | docs→concept 诊断映射 | E0502↔T-010 · E0597↔T-011 |
 | 19 | `docs/03_guides/05_embedded_rust_guide.md` | L3-L6 嵌入式 | concept L3 Async · Unsafe · docs 核心 | docs RfL · knowledge Unsafe | L3→L6 工程映射 | T-050 → T-060 |
