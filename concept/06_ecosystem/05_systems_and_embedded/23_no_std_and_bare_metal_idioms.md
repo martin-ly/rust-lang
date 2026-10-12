@@ -10,7 +10,7 @@
 >
 > **受众**: [专家]
 > **Bloom 层级**: L4
-> **权威来源**: 本文件为 `concept/` 权威页。
+> **权威来源**: 本页为 `no_std` 惯用法/工作流专题页；`no_std` 与裸机 Rust 的 `concept/` 权威定义页为 [`38_no_std_bare_metal_rust.md`](38_no_std_bare_metal_rust.md)（2026-10-13 canonical 裁决，见 `reports/CANONICAL_WARN_TRIAGE_ROUND2_2026-10-13.md` §1-A1）。
 > **A/S/P 标记**: **S+A+P** — Structure + Application + Procedure
 > **双维定位**: P×Cre — 在资源受限硬件上组装可运行、可维护的裸机 crate
 > **前置概念**:
@@ -156,7 +156,7 @@ mindmap
 
 ---
 
-## 一、权威定义
+## 一、核心概念速览（权威定义见 [38_no_std_bare_metal_rust](38_no_std_bare_metal_rust.md)）
 
 > **The Embedded Rust Book**: `#![no_std]` tells the Rust compiler not to automatically import the standard library (`std`) prelude. It does not disable the `core` library, and `alloc` can still be used if a global allocator is provided.
 

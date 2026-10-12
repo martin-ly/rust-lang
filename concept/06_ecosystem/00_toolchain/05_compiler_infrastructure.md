@@ -6,7 +6,7 @@
 # Rust 编译器基础设施深度解析
 >
 > **EN**: Compiler Infrastructure
-> **Summary**: Compiler Internals: Rust ecosystem tools, crates, and engineering practices.
+> **Summary**: Compiler infrastructure selection and toolchain layer: parallel front-end, Cranelift, build-std, sanitizer ecosystem — the infrastructure complement to [04_compiler_internals](04_compiler_internals.md) (rustc pipeline internals canonical page).
 > **Rust 版本**: 1.97.0+ (nightly for Cranelift/build-std/sanitizer)
 > **权威来源**: 本文件为 `concept/` 权威页。
 Compiler Internals. Core Rust concept covering mechanism analysis, parallel programming, compiler internals.

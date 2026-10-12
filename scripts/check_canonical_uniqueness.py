@@ -74,6 +74,54 @@ STEM_PATTERN_EXEMPTIONS = [
     (re.compile(r".*_preview$"), "目录内共享 _preview 后缀的独立 nightly 特性页（复核 2026-10-13，triage 报告 C1；先例 2026-08-01 W317）"),
     (re.compile(r".*_stabilized$"), "目录内共享 _stabilized 后缀的版本特性页（复核 2026-10-13，triage 报告 C2）"),
     (re.compile(r".*_(semantics|algorithms|patterns)$"), "目录内共享泛后缀（_semantics/_algorithms/_patterns）的不同主题页（复核 2026-10-13，triage 报告 C7/C9/C6 长尾）"),
+    # ── round-2 扩充（复核 2026-10-13，triage 报告 CANONICAL_WARN_TRIAGE_ROUND2 §3；
+    #    已逐条校验无一会同时命中 (a) 两对词干；.*bare_metal_rust$ 刻意收紧保留 23~38 WARN）──
+    (re.compile(r".*_reference$"), "目录内共享 _reference 后缀的规范参考页（Rust Reference 各章规范页 vs 实现页）（round-2）"),
+    (re.compile(r".*_theory$"), "目录内共享 _theory 后缀的不同理论主题页（type_theory/category_theory 等）（round-2）"),
+    (re.compile(r".*_and_rust$"), "『X 与 Rust』映射系列页（type_theory_and_rust/category_theory_and_rust）（round-2）"),
+    (re.compile(r".*architecture.*"), "架构主题族页（architecture_pattern_semantics/clean_architecture_in_rust 等）（round-2）"),
+    (re.compile(r".*_in_rust$"), "『X in Rust』领域应用系列页（graph/string_algorithms_in_rust、DDD 页）（round-2）"),
+    (re.compile(r".*_data_structures.*"), "数据结构族页（ownership_aware/probabilistic/persistent_data_structures）（round-2）"),
+    (re.compile(r".*generics.*"), "泛型族页（generics/const_generics/const_generics_and_trait_objects），基础+进阶分层（round-2）"),
+    (re.compile(r".*traits$"), "trait 族页（traits/derive_traits/advanced_traits）（round-2）"),
+    (re.compile(r".*associated_type.*"), "关联类型族页（generic_associated_types/associated_type_defaults）（round-2）"),
+    (re.compile(r".*concurrency.*"), "并发族页（concurrency/concurrency_patterns/interrupts_and_concurrency_on_bare_metal）（round-2）"),
+    (re.compile(r".*send_sync.*"), "Send/Sync 族页（auto_traits 语义 vs 边界判定）（round-2）"),
+    (re.compile(r".*async.*"), "async 族页（cancellation_safety/trait_object_safety/boundary_panorama/gat_async_boundary）（round-2）"),
+    (re.compile(r".*linear_logic.*"), "线性逻辑族页（理论页 vs 应用页）（round-2）"),
+    (re.compile(r".*knowledge_graph.*"), "知识图谱族页（construction vs reasoning）（round-2）"),
+    (re.compile(r".*language_specification.*"), "语言规范族页（overview vs Ferrocene 规范）（round-2）"),
+    (re.compile(r".*database.*"), "数据库族页（database_access vs database_systems）（round-2）"),
+    (re.compile(r".*distributed.*"), "分布式族页（consensus vs protocols）（round-2）"),
+    (re.compile(r".*security.*"), "安全族页（practices/cryptography/architecture/network_security）（round-2）"),
+    (re.compile(r".*network.*"), "网络族页（advanced_network_protocols/formal_network_protocol_theory/networking_basics）（round-2）"),
+    (re.compile(r".*rust_in_.*"), "『Rust in X』行业应用系列页（financial_services/iot_and_edge）（round-2）"),
+    (re.compile(r".*safety_critical.*"), "功能安全族页（misra 指南/safety_critical_systems/topic_index）（round-2）"),
+    (re.compile(r".*interrupt.*"), "中断族页（exception_model vs interrupts_and_concurrency_on_bare_metal）（round-2）"),
+    (re.compile(r"^embedded_"), "embedded_* 前缀族页（graphics/hal/memory/debugging 等），嵌入式命名惯例（round-2）"),
+    (re.compile(r".*hardware.*"), "硬件验证族页（hardware_validation/hardware_test_matrix/hardware_measurement）（round-2）"),
+    (re.compile(r".*_deep_dive$"), "共享 _deep_dive 后缀的框架专题页（embassy/rtic）（round-2）"),
+    (re.compile(r".*_internals$"), "共享 _internals 后缀的实现剖析页（compiler_internals/rustdoc_internals）（round-2）"),
+    (re.compile(r".*_map$"), "meta 导航族页（authority_source_map/inter_layer_map 等）（round-2）"),
+    (re.compile(r".*_index$"), "meta 索引族页（authority_index/topic_index/semantic_space_index）（round-2）"),
+    (re.compile(r".*_1\d\d.*"), "版本号系列页（cargo_196/197_features、migration_197/198 中缀形态；与 rust_1_\\d+ 模式互补）（round-2）"),
+    (re.compile(r".*cargo.*"), "cargo 族页（script/build_scripts/manifest/registries/workspaces 等）（round-2）"),
+    (re.compile(r".*edition.*"), "edition 族页（edition_preview/edition_guide）（round-2）"),
+    (re.compile(r".*_faq$"), "共享 _faq 后缀的 FAQ 页（macro_faq/design_patterns_faq）（round-2）"),
+    (re.compile(r".*_guide$"), "共享 _guide 后缀的指南页（rust_edition_guide 等）（round-2）"),
+    (re.compile(r".*macro.*"), "宏族页（macros/macro_faq）（round-2）"),
+    (re.compile(r".*error.*"), "错误处理族页（error_handling_basics/control_flow/idioms）（round-2）"),
+    (re.compile(r".*type.*"), "类型族页（type_theory/type_inference/type_system_reference/subtype_variance）（round-2）"),
+    (re.compile(r".*memory.*"), "内存族页（memory_allocators/memory_layout_and_heap_safety）（round-2）"),
+    (re.compile(r".*unsafe.*"), "unsafe 族页（unsafe_reference/std_unsafe_internals）（round-2）"),
+    (re.compile(r".*process.*"), "进程族页（process_security_and_sandboxing/process_testing_and_benchmarking）（round-2）"),
+    (re.compile(r".*semantic.*"), "语义族页（semantic_space/pattern_semantic_space_index）（round-2）"),
+    (re.compile(r".*theorem.*"), "定理族页（theorem_inference_forest/theorem_registry）（round-2）"),
+    (re.compile(r".*strings_and.*"), "字符串族页（strings_and_text/strings_and_encoding）（round-2）"),
+    (re.compile(r".*_safety$"), "共享 _safety 后缀的专题页（cancellation_safety/heap_safety）（round-2）"),
+    (re.compile(r".*verification.*"), "验证工具族页（verification_toolchain/modern_verification_tools）（round-2）"),
+    (re.compile(r".*debugging.*"), "调试族页（embedded_debugging_logging/probe_rs_and_embedded_debugging）（round-2）"),
+    (re.compile(r".*bare_metal_rust$"), "bare_metal_rust 命名系列；刻意不匹配 no_std_and_bare_metal_idioms，保留 (a) 对 23~38 WARN（round-2）"),
 ]
 
 
@@ -130,9 +178,102 @@ IGNORE_PAIRS = {
         "concept/04_formal/00_type_theory/03_type_inference.md",
         "concept/04_formal/00_type_theory/08_type_inference_complexity.md",
     }),
-    # 注：(a) 真重复候选 23_no_std_and_bare_metal_idioms vs 38_no_std_bare_metal_rust
-    # 与 04/05 compiler_internals/infrastructure 一对【故意不登记豁免】——保留 WARN
-    # 直至人工裁决（triage 报告 §6.2-4）。
+    # ── round-2 登记（复核 2026-10-13，triage 报告 CANONICAL_WARN_TRIAGE_ROUND2 §2，16 对）──
+    # 08 中文版 MVP 学习路径 vs 14 英文版（EN 标题/受众独立成页），双语版本非重复权威页
+    frozenset({
+        "concept/00_meta/04_navigation/08_learning_mvp_path.md",
+        "concept/00_meta/04_navigation/14_learning_mvp_path_en.md",
+    }),
+    # use 声明 vs 枚举：主题完全不同，仅共享复数泛词干，纯词干误报
+    frozenset({
+        "concept/01_foundation/07_modules_and_items/03_use_declarations.md",
+        "concept/01_foundation/07_modules_and_items/05_enumerations.md",
+    }),
+    # 01 基础 asm! 语法 vs 02 no_std/内核向扩展：基础+进阶合法分层
+    frozenset({
+        "concept/03_advanced/05_inline_assembly/01_inline_assembly.md",
+        "concept/03_advanced/05_inline_assembly/02_inline_assembly_extended.md",
+    }),
+    # 操作语义规则 vs 观察等价概念：形式语义两个不同子主题
+    frozenset({
+        "concept/04_formal/03_operational_semantics/03_operational_semantics.md",
+        "concept/04_formal/03_operational_semantics/06_observational_equivalence.md",
+    }),
+    # rustc 两阶段名称解析实现(HIR lowering) vs Rust Reference 名称系统规范：实现层 vs 规范层互补
+    frozenset({
+        "concept/04_formal/05_rustc_internals/04_name_resolution_and_hir.md",
+        "concept/04_formal/05_rustc_internals/06_names_and_resolution.md",
+    }),
+    # rustc 内部架构(AST/HIR/MIR) vs rustc 测试基础设施(compiletest/Crater)：不同主题
+    frozenset({
+        "concept/06_ecosystem/00_toolchain/04_compiler_internals.md",
+        "concept/06_ecosystem/00_toolchain/13_compiler_testing.md",
+    }),
+    # 01 设计模式总览 vs 33 反模式：正/反模式互补（33 头部已声明互补）
+    frozenset({
+        "concept/06_ecosystem/03_design_patterns/01_patterns.md",
+        "concept/06_ecosystem/03_design_patterns/33_anti_patterns.md",
+    }),
+    # 架构模式总览 vs 拒绝类型领域验证模式：不同主题
+    frozenset({
+        "concept/06_ecosystem/03_design_patterns/08_architecture_patterns.md",
+        "concept/06_ecosystem/03_design_patterns/43_rejection_type_pattern.md",
+    }),
+    # 设计模式 FAQ 页 vs API 设计模式总览：不同主题
+    frozenset({
+        "concept/06_ecosystem/03_design_patterns/15_design_patterns_faq.md",
+        "concept/06_ecosystem/03_design_patterns/18_api_design_patterns.md",
+    }),
+    # 设计模式 FAQ 页 vs 反模式总览：不同主题
+    frozenset({
+        "concept/06_ecosystem/03_design_patterns/15_design_patterns_faq.md",
+        "concept/06_ecosystem/03_design_patterns/33_anti_patterns.md",
+    }),
+    # API/SemVer 演进惯用法 vs 测试/Mock 惯用法：同目录两个不同惯用法专题
+    frozenset({
+        "concept/06_ecosystem/03_design_patterns/39_api_design_and_semver_idioms.md",
+        "concept/06_ecosystem/03_design_patterns/40_testing_and_mocking_idioms.md",
+    }),
+    # 23 惯用法页 vs 39 硬件测量技术：不同子主题（与 (a) 对 23~38 无关）
+    frozenset({
+        "concept/06_ecosystem/05_systems_and_embedded/23_no_std_and_bare_metal_idioms.md",
+        "concept/06_ecosystem/05_systems_and_embedded/39_no_std_hardware_measurement_and_validation.md",
+    }),
+    # 42 中断/抢占并发 vs 53 临界区/同步原语：裸机并发两个子主题
+    frozenset({
+        "concept/06_ecosystem/05_systems_and_embedded/42_interrupts_and_concurrency_on_bare_metal.md",
+        "concept/06_ecosystem/05_systems_and_embedded/53_critical_sections_and_sync_on_bare_metal.md",
+    }),
+    # 数据库生态工具 vs 数据密集系统设计(B-tree/LSM)：不同主题
+    frozenset({
+        "concept/06_ecosystem/06_data_and_distributed/04_database_systems.md",
+        "concept/06_ecosystem/06_data_and_distributed/10_data_intensive_systems_design.md",
+    }),
+    # 字符串算法 vs 在线/流式算法：算法目录内共享 _algorithms 泛词干的不同主题
+    frozenset({
+        "concept/06_ecosystem/16_algorithm_patterns/07_string_algorithms_in_rust.md",
+        "concept/06_ecosystem/16_algorithm_patterns/11_online_and_streaming_algorithms.md",
+    }),
+    # 数据结构总览 vs 持久化数据结构专题：总览+专题合法分层
+    frozenset({
+        "concept/06_ecosystem/16_algorithm_patterns/08_data_structures_in_rust.md",
+        "concept/06_ecosystem/16_algorithm_patterns/16_persistent_data_structures.md",
+    }),
+    # (a) 两对已于 2026-10-13 完成人工裁决（round-2 报告 §1）：
+    # A1: 38_no_std_bare_metal_rust 为 canonical（自称 canonical reference + 显式权威声明），
+    #     23 已收敛为惯用法/工作流专题页（头部权威指向 38 + 权威定义节改写）；无正文互抄
+    #     （51×59 代码块相似度>0.85 对 0 个），登记为分层互补豁免。
+    frozenset({
+        "concept/06_ecosystem/05_systems_and_embedded/23_no_std_and_bare_metal_idioms.md",
+        "concept/06_ecosystem/05_systems_and_embedded/38_no_std_bare_metal_rust.md",
+    }),
+    # A2: 04_compiler_internals 为 canonical（918 行 rustc 编译管线）；05 判定互补分层
+    #     （实质重叠节 0、互抄 0；Summary 逐字符相同属泛化样板注入，已定制改写为
+    #     『04 的基础设施补充』定位）。登记豁免。
+    frozenset({
+        "concept/06_ecosystem/00_toolchain/04_compiler_internals.md",
+        "concept/06_ecosystem/00_toolchain/05_compiler_infrastructure.md",
+    }),
 }
 
 
