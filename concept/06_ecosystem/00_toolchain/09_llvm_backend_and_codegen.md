@@ -234,7 +234,7 @@ cargo rustc -- --emit=asm -C llvm-args=-x86-asm-syntax=intel
 
 ### 反例：safe 代码调用 `#[target_feature]` 函数被硬拒绝（rustc 1.99.0 实测，E0133）
 
-```rust
+```rust,compile_fail
 #[target_feature(enable = "avx2")]
 fn f() {}
 fn main(){ f(); }

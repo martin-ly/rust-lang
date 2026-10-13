@@ -522,7 +522,7 @@ async fn bad_once() {
 
 **反例 A：`Box<dyn AsyncFn()>` 不是合法类型（页内"dyn 不可用"论断的编译实证）。**
 
-```rust
+```rust,compile_fail
 fn main() {
     let f: Box<dyn AsyncFn()> = Box::new(async || {}); // ❌
 }
@@ -540,7 +540,7 @@ note: for a trait to be dyn compatible it needs to allow building a vtable
 
 **反例 B：递归 async 调用需要装箱（E0733）。** async 闭包/async fn 的 Future 是匿名类型，递归调用会让 Future 尺寸无限展开：
 
-```rust
+```rust,compile_fail
 async fn rec(n: u32) -> u32 { if n == 0 { 0 } else { rec(n - 1).await } }
 fn main() { let _ = rec(3); }
 ```
@@ -555,7 +555,7 @@ error[E0733]: recursion in an async fn requires boxing
 
 **反例 C：返回引用参数的 async 闭包撞上生命周期墙。** async 闭包返回 `Future`，而 `Future::Output` 里的引用必须比 Future 本身活得更久——借用参数的生命周期推断在此处比同步闭包严格得多：
 
-```rust
+```rust,compile_fail
 fn main() {
     let f = async |s: &str| s;   // 返回类型是 Future，Output = &'? str
     let v = String::from("x");

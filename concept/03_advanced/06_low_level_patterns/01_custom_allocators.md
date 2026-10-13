@@ -794,7 +794,7 @@ fn main() {}
 
 **反例 A：一个 crate 只能有一个 `#[global_allocator]`（重复定义直接拒绝）。** "按模块挂不同分配器"的设想不成立：
 
-```rust
+```rust,compile_fail
 use std::alloc::{GlobalAlloc, Layout, System};
 struct MyAlloc;
 unsafe impl GlobalAlloc for MyAlloc {
@@ -825,7 +825,7 @@ error: cannot define multiple global allocators
 
 **反例 B：分配器 static 的初始化器必须是 const 可求值表达式（E0015）。** 分配器在 `main` 之前运行，构造不能调用普通函数：
 
-```rust
+```rust,compile_fail
 use std::alloc::{GlobalAlloc, Layout, System};
 fn init() -> usize { 1 }
 struct MyAlloc { offset: usize }
@@ -847,7 +847,7 @@ error[E0015]: cannot call non-const function `init` in statics
 
 **反例 C：`#[global_allocator]` 只能标注 static，不能标注函数。**
 
-```rust
+```rust,compile_fail
 #[global_allocator]
 fn bad() -> MyAlloc { MyAlloc } // ❌
 ```

@@ -520,7 +520,7 @@ struct Item;
 
 **反例 A：`#[proc_macro]` 出现在非 proc-macro crate 中。** 以下代码用 `rustc --edition 2021 --crate-type lib` 编译（即普通 crate）：
 
-```rust
+```rust,compile_fail
 #[proc_macro]
 pub fn nothing(_: proc_macro::TokenStream) -> proc_macro::TokenStream { Default::default() }
 ```
@@ -534,7 +534,7 @@ error[E0433]: cannot find module or crate `proc_macro` in this scope
 
 **反例 B：声明宏卫生性对调用方可见性的硬边界。** 过程宏的 span/hygiene 讨论常引用声明宏卫生性作为基线，此处实测该基线：
 
-```rust
+```rust,compile_fail
 macro_rules! helper { () => { let hidden = 1; } }
 fn main() {
     helper!();

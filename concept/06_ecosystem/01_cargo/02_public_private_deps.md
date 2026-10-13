@@ -305,7 +305,7 @@ pub struct Widget(pub u32);
 pub(crate) fn secret() -> Widget { Widget(7) }
 ```
 
-```rust
+```rust,ignore
 // a/src/lib.rs —— 想复用 b 的内部函数
 pub fn make() -> b::Widget { b::secret() }
 ```

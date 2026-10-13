@@ -94,7 +94,7 @@ fn main() {
 
 ### 3.2 整数范围约束
 
-```rust
+```rust,ignore
 #[flux::sig(fn(x: i32{x >= 0}) -> i32{x >= 0})]
 fn abs(n: i32) -> i32 {
     if n >= 0 { n } else { -n }
@@ -103,7 +103,7 @@ fn abs(n: i32) -> i32 {
 
 ### 3.3 向量追加后长度
 
-```rust
+```rust,ignore
 #[flux::sig(fn(vec: Vec<i32> @ n) -> Vec<i32> @ n + 1)]
 fn push_one(mut v: Vec<i32>) -> Vec<i32> {
     v.push(0);

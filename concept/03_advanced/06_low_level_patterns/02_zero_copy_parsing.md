@@ -751,7 +751,7 @@ fn main() {
 
 **反例 A：返回 `&str` 切片的解析器无法连续取两个 token（E0499）。** 零拷贝解析的惯用签名 `fn token(&mut self) -> &str` 把 `&mut self` 借用与返回切片的生命周期绑在一起——返回切片默认被推断为借用 `self`，于是"先取两个 token 再使用"直接撞墙：
 
-```rust
+```rust,compile_fail
 struct Parser<'a> { input: &'a str, pos: usize }
 impl<'a> Parser<'a> {
     fn parse_token(&mut self) -> &str {
@@ -785,7 +785,7 @@ error[E0499]: cannot borrow `p` as mutable more than once at a time
 
 **反例 B：解析中途规范化（unescape）后返回借用切片（E0515）。** 零拷贝承诺在"需要改写输入"的场景失效，编译器直接点破所有权：
 
-```rust
+```rust,compile_fail
 fn parse(s: &str) -> &str {
     let t = s.to_string(); // 规范化副本（局部所有权）
     &t[1..]                // ❌ 返回对局部变量的借用

@@ -782,7 +782,7 @@ fn main() {
 
 **反例 A：trait 带泛型方法即不可 `dyn` 化（E0038）。** 类型擦除的第一道硬边界——"对象安全"在 1.99 的诊断文案已改称 dyn compatible：
 
-```rust
+```rust,compile_fail
 trait Render { fn render<T: std::fmt::Display>(&self, v: T); }
 fn main() {
     let b: Box<dyn Render> = Box::new(()); // ❌
@@ -801,7 +801,7 @@ note: for a trait to be dyn compatible it needs to allow building a vtable
 
 **反例 B：`&dyn Trait` 自身不实现 `Trait`，不能塞进另一个 `Box<dyn Trait>`（E0277）。** 类型擦除的"套娃"直觉在借用检查处破产：
 
-```rust
+```rust,compile_fail
 trait Render { fn render(&self); }
 struct S;
 impl Render for S { fn render(&self) {} }

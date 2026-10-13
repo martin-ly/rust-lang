@@ -8,10 +8,10 @@
 | D2 A/S/P 标记与 Bloom 脱节（A->L1-2,S->L2-4,P->L4-7） | 0 (基=470) | 0.0% | >=5% | pass |
 | D3 关键字段同文件重声明 | 0 | 0.0% | >0 | pass |
 | D4 文首块 Rust 版本号自矛盾 | 0 | 0.0% | >0 | pass |
-| D5 稳定层正文残留 nightly/preview/unstable | 2 | 0.2% | >0 | FAIL |
+| D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
 | D6 Summary 低信息量模板套话 | 0 | 0.0% | >=3% | pass |
 
-**受影响文件总数**: 2 / 826
+**受影响文件总数**: 0 / 826
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -138,6 +138,9 @@
 - `concept/04_formal/11_computational_models/17_aeneas_verification_pipeline.md` — Aeneas 验证流水线页：Aeneas 从 MIR 提取规范需要 nightly toolchain，为工具链事实陈述，文首已显式声明
 - `concept/03_advanced/01_async/01_async.md` — AFIDT(async_fn_in_dyn_trait) 截至 2026-10-12 仍为 nightly incomplete feature（rust-lang/rust#133119 open），『nightly 上仍需启用实验特性门』为跟踪状态事实陈述；另含 07_future 预览页跨层链接路径（preview_features 目录名），非稳定层残留依赖
 - `concept/03_advanced/01_async/07_async_closures.md` — AFIDT 跟踪小节：『实验已批准并在 nightly 实现』为 rust-lang/rust#133119 状态事实陈述（2026-10-12 核对），与 13_async_trait_object_safety.md 同质，非稳定层残留依赖
+- `concept/06_ecosystem/11_domain_applications/04_licensing_and_compliance.md` — §10.7 实测反例：E0554 反例本身以『stable 拒绝 #![feature]』为论证对象，nightly/incomplete 为 generic_const_exprs 状态事实陈述（1.99.0 实测 warning 文本），非稳定层残留依赖
+- `concept/06_ecosystem/11_domain_applications/16_quantum_computing_rust.md` — §8.4 实测反例：portable_simd 截至 1.99.0 仍为 unstable 库特性（rust-lang/rust#86656 open，2026-10-14 实测 E0658 文本），『nightly + feature 门』为生态路线的事实陈述，非稳定层残留依赖
+- `concept/06_ecosystem/00_toolchain/08_platform_rust_integration.md` — §实测反例的 rustc 实测输出逐字引用（`= help: using nightly cargo, use -Zbuild-std...`）为编译器诊断文本本身，属工具链事实陈述，非稳定层残留依赖
 
 另有两类规则级排除：WASI Preview 1/2/3（WASM 规范版本专名）与 URL 路径中的 nightly（官方文档固定托管路径）。
 
@@ -155,17 +158,15 @@
 ### D4 文首块 Rust 版本号自矛盾（0）
 
 
-### D5 稳定层正文残留 nightly/preview/unstable（2）
+### D5 稳定层正文残留 nightly/preview/unstable（0）
 
-- `concept/06_ecosystem/11_domain_applications/04_licensing_and_compliance.md` — 稳定层 nightly/preview 关键词 7 处
-- `concept/06_ecosystem/11_domain_applications/16_quantum_computing_rust.md` — 稳定层 nightly/preview 关键词 4 处
 
 ### D6 Summary 低信息量模板套话（0）
 
 
 ## WOULD-FAIL（接入 CI strict 时将阻断）
 
-- D5 稳定层nightly残留 2 (>0)
+- 无（全部通过）
 
 ## 机器可读
 

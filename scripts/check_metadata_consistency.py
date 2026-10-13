@@ -383,6 +383,13 @@ D5_WHITELIST_FILES = {
         "AFIDT(async_fn_in_dyn_trait) 截至 2026-10-12 仍为 nightly incomplete feature（rust-lang/rust#133119 open），『nightly 上仍需启用实验特性门』为跟踪状态事实陈述；另含 07_future 预览页跨层链接路径（preview_features 目录名），非稳定层残留依赖",
     "concept/03_advanced/01_async/07_async_closures.md":
         "AFIDT 跟踪小节：『实验已批准并在 nightly 实现』为 rust-lang/rust#133119 状态事实陈述（2026-10-12 核对），与 13_async_trait_object_safety.md 同质，非稳定层残留依赖",
+    # ---- 2026-10-14 domain 反例轮复核登记 ----
+    "concept/06_ecosystem/11_domain_applications/04_licensing_and_compliance.md":
+        "§10.7 实测反例：E0554 反例本身以『stable 拒绝 #![feature]』为论证对象，nightly/incomplete 为 generic_const_exprs 状态事实陈述（1.99.0 实测 warning 文本），非稳定层残留依赖",
+    "concept/06_ecosystem/11_domain_applications/16_quantum_computing_rust.md":
+        "§8.4 实测反例：portable_simd 截至 1.99.0 仍为 unstable 库特性（rust-lang/rust#86656 open，2026-10-14 实测 E0658 文本），『nightly + feature 门』为生态路线的事实陈述，非稳定层残留依赖",
+    "concept/06_ecosystem/00_toolchain/08_platform_rust_integration.md":
+        "§实测反例的 rustc 实测输出逐字引用（`= help: using nightly cargo, use -Zbuild-std...`）为编译器诊断文本本身，属工具链事实陈述，非稳定层残留依赖",
 }
 
 

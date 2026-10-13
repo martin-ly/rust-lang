@@ -496,7 +496,7 @@ Rust 元编程的演进方向:
 
 **反例 A：const fn 递归在编译期求值触达栈帧上限。** 元编程章节常把"const eval 图灵完备"当作乐观结论，此处实测其硬边界：
 
-```rust
+```rust,compile_fail
 const fn f(n: u32) -> u32 { if n == 0 { 0 } else { f(n - 1) } }
 const V: u32 = f(1_000_000);
 fn main() { let _ = V; }
@@ -513,7 +513,7 @@ error[E0080]: reached the configured maximum number of stack frames
 
 **反例 B：const generic 参数类型白名单排除浮点。** 元编程设计里"用 const generic 编码配置常量"是常见设想，浮点参数直接被封死：
 
-```rust
+```rust,compile_fail
 struct Foo<const F: f64>;
 fn main() { let _: Foo<3.14>; }
 ```

@@ -135,7 +135,9 @@ fn embedded_only() {
 
 **反例：Tier 3 target 不提供预编译 `std`——`String`/`Vec` 在 Tier 3 上直接编译失败**。Tier 1/2 target 的 `std` 由 rustup 预编译分发；Tier 3（如 `mipsel-unknown-linux-gnu`、`x86_64-unknown-hermit`）只保证 `core`/`alloc` 可编译：
 
-```rust,compile_fail
+```rust,ignore
+// 仅在 `rustc --target mipsel-unknown-linux-gnu`（未安装该 target）下失败——
+// 宿主默认 target 编译通过，故标注 ignore；实测错误见下方代码块
 pub fn f() { let _s = String::from("x"); }
 ```
 

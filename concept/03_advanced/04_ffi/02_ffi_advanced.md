@@ -843,7 +843,7 @@ fn main() {}
 
 **反例 A：`#[repr(C)]` 结构里 unsized 字段不在末位（E0277）。** 与 C 柔性数组对应的设计在 Rust 里只允许"末位 unsized"：
 
-```rust
+```rust,compile_fail
 #[repr(C)]
 struct Mid { head: str, tail: u8 } // ❌ str 不在末位
 ```
@@ -857,7 +857,7 @@ error[E0277]: the size for values of type `str` cannot be known at compilation t
 
 **反例 B：variadic FFI 传 Rust 引用/非整数类型是静默 UB（编译通过、无警告）。** 这是比编译错误更危险的一类边界——rustc 不拦，ABI 直接错：
 
-```rust
+```rust,compile_fail
 extern "C" { fn printf(fmt: *const i8, ...); }
 fn main() {
     let x = 1i32;

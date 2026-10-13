@@ -616,7 +616,7 @@ async fn example() {
 
 **反例 A：捕获变量的闭包不能强制转换为 `fn` 指针。** 闭包章节常声称"无捕获闭包可退化为函数指针"，此处实测其反面——一旦捕获即失败：
 
-```rust
+```rust,compile_fail
 fn apply(f: fn(i32) -> i32, x: i32) -> i32 { f(x) }
 fn main() {
     let base = 10;
@@ -638,7 +638,7 @@ note: closures can only be coerced to `fn` types if they do not capture any vari
 
 **反例 B：捕获可变状态的闭包绑定必须是 `mut`。** "闭包是值"这一模型在调用侧同样受借用规则约束：
 
-```rust
+```rust,compile_fail
 struct S { x: i32 }
 fn main() {
     let mut s = S { x: 1 };

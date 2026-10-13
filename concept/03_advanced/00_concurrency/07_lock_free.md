@@ -490,7 +490,7 @@ graph TD
 
 **边界案例 A：`compare_exchange` 失败序禁止 `Release`/`AcqRel`（编译期硬拒绝）。** 无锁代码里"给失败路径也加 AcqRel 以求保险"是常见误写，std 在编译期直接封死：
 
-```rust
+```rust,compile_fail
 use std::sync::atomic::{AtomicUsize, Ordering};
 fn main() {
     let a = AtomicUsize::new(0);

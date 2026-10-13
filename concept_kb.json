@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 793,
-    "generated_at": "2026-10-13T18:26:10.338814+00:00"
+    "generated_at": "2026-10-13T19:14:40.516535+00:00"
   },
   "files": [
     {
@@ -28061,15 +28061,19 @@
           "code_preview": "#[my_attr(foo = )] // ❌ 属性参数不是合法表达式/元属性 struct Item; ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 3,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "#[proc_macro] pub fn nothing(_: proc_macro::TokenStream) -> proc_macro::TokenStr..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 6,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "macro_rules! helper { () => { let hidden = 1; } } fn main() {     helper!();    ..."
         }
       ],
@@ -28144,15 +28148,19 @@
           "code_preview": "// Derive 宏示例骨架 [syn docs](https://docs.rs/syn/latest/syn/) use proc_macro::Toke..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 4,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "const fn f(n: u32) -> u32 { if n == 0 { 0 } else { f(n - 1) } } const V: u32 = f..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 3,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "struct Foo<const F: f64>; fn main() { let _: Foo<3.14>; } ..."
         },
         {
@@ -28841,15 +28849,19 @@
           "code_preview": "// 需要 Rust 1.85+ async fn example() {     let s = String::from(\"async\");     let..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 6,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "fn apply(f: fn(i32) -> i32, x: i32) -> i32 { f(x) } fn main() {     let base = 1..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 7,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "struct S { x: i32 } fn main() {     let mut s = S { x: 1 };     let c = move || ..."
         },
         {
@@ -30301,9 +30313,11 @@
       ],
       "code_blocks": [
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 6,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "use std::sync::atomic::{AtomicUsize, Ordering}; fn main() {     let a = AtomicUs..."
         },
         {
@@ -32750,21 +32764,27 @@
           "code_preview": "async fn bad_once() {     let data = vec![1, 2, 3];      let f = async move |x: ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 4,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "fn main() {     let f: Box<dyn AsyncFn()> = Box::new(async || {}); // ❌ } ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 3,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "async fn rec(n: u32) -> u32 { if n == 0 { 0 } else { rec(n - 1).await } } fn mai..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 6,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "fn main() {     let f = async |s: &str| s;   // 返回类型是 Future，Output = &'? str   ..."
         },
         {
@@ -38793,15 +38813,19 @@
           "code_preview": "fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {     // ❌ 编译错误: 不能返回 y，因为..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 3,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "#[repr(C)] struct Mid { head: str, tail: u8 } // ❌ str 不在末位 ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 6,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "extern \"C\" { fn printf(fmt: *const i8, ...); } fn main() {     let x = 1i32;    ..."
         },
         {
@@ -40084,21 +40108,27 @@
           "code_preview": "fn duplicate() {} fn duplicate() {}  fn main() {} ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 14,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "use std::alloc::{GlobalAlloc, Layout, System}; struct MyAlloc; unsafe impl Globa..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 11,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "use std::alloc::{GlobalAlloc, Layout, System}; fn init() -> usize { 1 } struct M..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 3,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "#[global_allocator] fn bad() -> MyAlloc { MyAlloc } // ❌ ..."
         }
       ],
@@ -40246,15 +40276,19 @@
           "code_preview": "fn main() {     // ❌ 编译错误: 类型不匹配     let x: i32 = \"hello\"; } ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 16,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "struct Parser<'a> { input: &'a str, pos: usize } impl<'a> Parser<'a> {     fn pa..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 6,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "fn parse(s: &str) -> &str {     let t = s.to_string(); // 规范化副本（局部所有权）     &t[1...."
         },
         {
@@ -40411,15 +40445,19 @@
           "code_preview": "fn main() {     let s = String::from(\"hello\");     let s2 = s;     // ❌ 编译错误: s ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 5,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "trait Render { fn render<T: std::fmt::Display>(&self, v: T); } fn main() {     l..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail"
+          ],
           "lines": 9,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "trait Render { fn render(&self); } struct S; impl Render for S { fn render(&self..."
         }
       ],
@@ -55273,13 +55311,17 @@
           "code_preview": "#![feature(register_tool)] #![register_tool(flux)]  #[flux::sig(fn(&[i32] @ n) -..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 5,
           "should_fail": false,
           "code_preview": "#[flux::sig(fn(x: i32{x >= 0}) -> i32{x >= 0})] fn abs(n: i32) -> i32 {     if n..."
         },
         {
-          "flags": [],
+          "flags": [
+            "ignore"
+          ],
           "lines": 6,
           "should_fail": false,
           "code_preview": "#[flux::sig(fn(vec: Vec<i32> @ n) -> Vec<i32> @ n + 1)] fn push_one(mut v: Vec<i..."
@@ -62438,7 +62480,7 @@
       "layer": "L6",
       "title": "Rust 编译器基础设施深度解析",
       "positioning": "系统梳理 Rust 编译器（rustc）的核心基础设施——并行前端、Cranelift 后端（两主题深度正文分别以 [04_parallel_frontend_preview](../../07_future/02_preview_features/04_parallel_frontend_preview.md)、[16_cranelift_backend_preview](../../07_future/02_preview_features/16_cranelift_backend_preview.md) 为权威页，本页仅保留摘要）、build-std、Sanitizer——分析其对编译速度、目标平台和开发体验的影响。",
-      "line_count": 334,
+      "line_count": 363,
       "theorem_chains": [
         {
           "text": "| Rust 编译器基础设施深度解析 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -62456,6 +62498,9 @@
       "anti_propositions": [
         {
           "title": "## 六、反命题"
+        },
+        {
+          "title": "### 反例"
         }
       ],
       "code_blocks": [
@@ -62598,9 +62643,13 @@
       "layer": "L6",
       "title": "Rustdoc 1.96–1.97 变更",
       "positioning": "",
-      "line_count": 368,
+      "line_count": 401,
       "theorem_chains": [],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -62627,6 +62676,12 @@
           "lines": 4,
           "should_fail": false,
           "code_preview": "/// 详见 [`NonExistentType`]。   // rustdoc 发出 /// warning: unresolved link to `Non..."
+        },
+        {
+          "flags": [],
+          "lines": 1,
+          "should_fail": false,
+          "code_preview": "/// ..."
         }
       ],
       "sources": [],
@@ -62643,7 +62698,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 18,
+      "matrix_rows": 19,
       "pre_post": {
         "pre": [
           "· [Rust vs Python](../../05_comparative/02_managed_languages/02_rust_vs_python.md) [Toolchain](01_toolchain.md) · [Documentation](../09_testing_and_quality/02_documentation.md) · [Macro Patterns](../../02_intermediate/06_macros_and_metaprogramming/03_macro_patterns.md)"
@@ -62660,9 +62715,12 @@
       "layer": "L6",
       "title": "将 Rust 集成到现有平台",
       "positioning": "系统对比 Android AOSP、Chromium、Bare Metal 三个典型场景中 Rust 的集成方式、构建系统、互操作模式与常见陷阱。",
-      "line_count": 361,
+      "line_count": 398,
       "theorem_chains": [],
       "anti_propositions": [
+        {
+          "title": "### 反例"
+        },
         {
           "title": "### 反例"
         }
@@ -62701,6 +62759,12 @@
           "code_preview": "use core::ptr::{read_volatile, write_volatile};  const UART_DR: *mut u32 = 0x090..."
         },
         {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "#![no_std] fn main(){ panic!(\"x\"); } ..."
+        },
+        {
           "flags": [
             "compile_fail"
           ],
@@ -62729,7 +62793,7 @@
       "transitions": 2,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 31,
+      "matrix_rows": 33,
       "pre_post": {
         "pre": [
           "[Cross Compilation](../05_systems_and_embedded/02_cross_compilation.md) · [Embedded Systems](../05_systems_and_embedded/03_embedded_systems.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) · [安全边界](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md)"
@@ -62746,9 +62810,13 @@
       "layer": "L6",
       "title": "Rust 编译器的 LLVM 后端与代码生成",
       "positioning": "把“MIR 之后发生了什么”讲清楚：从 LLVM IR 生成、代码优化到目标文件与链接，覆盖 rustc 代码生成层的核心机制。",
-      "line_count": 368,
+      "line_count": 406,
       "theorem_chains": [],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [
@@ -62757,6 +62825,20 @@
           "lines": 7,
           "should_fail": false,
           "code_preview": "// MIR 中可能是泛型 fn foo<T>(x: T) { ... }  // codegen 前会被单态化为多个具体副本 fn foo_i32(x: i3..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "#[target_feature(enable = \"avx2\")] fn f() {} fn main(){ f(); } ..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "#[target_feature(enable = \"avx2\")] unsafe fn f() {} fn main(){     #[cfg(target_..."
         }
       ],
       "sources": [],
@@ -62772,7 +62854,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 16,
+      "matrix_rows": 18,
       "pre_post": {
         "pre": [
           "[安全边界](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md)"
@@ -63032,10 +63114,27 @@
       "layer": "L6",
       "title": "rustc 编译器测试体系",
       "positioning": "把“rustc 如何保证每次修改不破坏生态”讲清楚，覆盖从单元测试到全生态系统回归的多层测试策略。",
-      "line_count": 309,
+      "line_count": 340,
       "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "pub fn f(){} ..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "pub fn f(){} fn main(){ f(); } ..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../00_meta/01_terminology/01_terminology_glossary.md",
@@ -63045,7 +63144,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 13,
+      "matrix_rows": 15,
       "pre_post": {
         "pre": [
           "[安全边界](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md)"
@@ -63148,9 +63247,12 @@
       "layer": "L6",
       "title": "rustc / Cargo `-Z` 不稳定选项参考清单",
       "positioning": "",
-      "line_count": 198,
+      "line_count": 232,
       "theorem_chains": [],
       "anti_propositions": [
+        {
+          "title": "### 反例"
+        },
         {
           "title": "### 反例"
         }
@@ -63185,7 +63287,7 @@
       "layer": "L6",
       "title": "Rustdoc 内部实现",
       "positioning": "揭示 `rustdoc` 作为 `rustc` 子系统的完整数据流，从源码经 `clean` AST、多轮 pass，到 HTML/JSON 渲染与 doctest 提取，服务于需要调试、扩展或贡献 rustdoc 的 toolchain 内部开发者。",
-      "line_count": 655,
+      "line_count": 682,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -63193,6 +63295,9 @@
         },
         {
           "title": "### 反命题"
+        },
+        {
+          "title": "### 反例"
         },
         {
           "title": "### 反例"
@@ -63302,6 +63407,12 @@
           "lines": 10,
           "should_fail": false,
           "code_preview": "// crate_a/src/lib.rs pub mod inner {     /// See [Foo]     pub struct Bar;     ..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "//! A crate.  pub struct Bar;  /// Link to [Foo]. pub fn f() {} ..."
         }
       ],
       "sources": [],
@@ -63318,7 +63429,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 26,
+      "matrix_rows": 28,
       "pre_post": {
         "pre": [
           "[Toolchain](01_toolchain.md) · [Documentation](../09_testing_and_quality/02_documentation.md) · [rustc Query System](../../04_formal/05_rustc_internals/01_rustc_query_system.md) · [Name Resolution and HIR](../../04_formal/05_rustc_internals/04_name_resolution_and_hir.md)"
@@ -63486,7 +63597,7 @@
       "layer": "L6",
       "title": "Cargo `public = true` 与 Resolver v3",
       "positioning": "解决 Rust crate 图中“依赖泄漏”问题的核心机制，使 API 稳定性与依赖演进解耦；同时说明 resolver v3 在版本选择上的 MSRV-aware 行为。",
-      "line_count": 317,
+      "line_count": 363,
       "theorem_chains": [
         {
           "text": "| Resolver v3 启用 `fallback` ⟹ MSRV 兼容版本优先 | workspace 存在 `rust-version` 约束 | 依赖解析不会选择超过成员 MSRV 的版本 | 高 |",
@@ -63526,6 +63637,20 @@
           "lines": 5,
           "should_fail": false,
           "code_preview": "// 依赖 internal_crate 未声明为 public dependency， // 但其类型出现在公共签名中： pub fn connect() -..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "// b/src/lib.rs pub struct Widget(pub u32); pub(crate) fn secret() -> Widget { W..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "// a/src/lib.rs —— 想复用 b 的内部函数 pub fn make() -> b::Widget { b::secret() } ..."
         }
       ],
       "sources": [],
@@ -63538,7 +63663,7 @@
       "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 2,
-      "matrix_rows": 14,
+      "matrix_rows": 18,
       "pre_post": {
         "pre": [
           "[Cargo Workspaces](14_cargo_workspaces.md) · [Cargo Dependency Resolution](06_cargo_dependency_resolution.md)",
@@ -63556,7 +63681,7 @@
       "layer": "L6",
       "title": "Resolver v3 与 `public = true` 的 feature unification 演示",
       "positioning": "把“resolver v3 + public dependency”从概念落到可运行的 Cargo workspace，观察 `cargo tree -e features` 的实际输出。",
-      "line_count": 231,
+      "line_count": 269,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -63856,7 +63981,7 @@
       "layer": "L6",
       "title": "Cargo Source Replacement 与 Vendoring",
       "positioning": "把“怎么让 Cargo 从镜像/本地目录/离线缓存下载依赖”系统化，区分 source replacement、`[patch]` 与私有 registry 的适用边界。",
-      "line_count": 325,
+      "line_count": 360,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -64042,7 +64167,7 @@
       "layer": "L6",
       "title": "Cargo Profiles 与 Lints",
       "positioning": "把“如何调优编译参数”和“如何在 Cargo.toml 中统一管理 lint”讲清楚，覆盖 Profile 与 Cargo 自有 lint 两层机制。",
-      "line_count": 363,
+      "line_count": 405,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -64056,7 +64181,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 27,
+      "matrix_rows": 29,
       "pre_post": {
         "pre": [
           "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
@@ -64212,7 +64337,7 @@
       "layer": "L6",
       "title": "Cargo Workspaces（工作区）",
       "positioning": "把“何时该用 workspace、如何组织多 crate 项目、如何统一依赖与 lint 配置”讲清楚。",
-      "line_count": 306,
+      "line_count": 337,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -64574,7 +64699,7 @@
       "layer": "L6",
       "title": "Cargo Manifest 目标与元数据（Cargo Manifest Targets）",
       "positioning": "补充 `10_cargo_manifest_reference.md` 未涉及的 target、rust-version、pkgid 等子主题。",
-      "line_count": 221,
+      "line_count": 268,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -64698,7 +64823,7 @@
       "layer": "L6",
       "title": "Cargo build-std",
       "positioning": "",
-      "line_count": 380,
+      "line_count": 413,
       "theorem_chains": [
         {
           "text": "| 源码构建 std ⟹ 自定义目标支持 | 编译目标平台未预编译的标准库 | 支持新硬件与操作系统 |",
@@ -75850,7 +75975,7 @@
       "layer": "L6",
       "title": "Target Tier 平台支持全景：分层保证与 1.90–1.97 变迁",
       "positioning": "",
-      "line_count": 290,
+      "line_count": 292,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -75871,11 +75996,11 @@
         },
         {
           "flags": [
-            "compile_fail"
+            "ignore"
           ],
-          "lines": 2,
-          "should_fail": true,
-          "code_preview": "pub fn f() { let _s = String::from(\"x\"); } ..."
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "// 仅在 `rustc --target mipsel-unknown-linux-gnu`（未安装该 target）下失败—— // 宿主默认 target..."
         },
         {
           "flags": [

@@ -7,7 +7,7 @@
       "D2": 0,
       "D3": 0,
       "D4": 0,
-      "D5": 2,
+      "D5": 0,
       "D6": 0
     },
     "pct": {
@@ -15,39 +15,19 @@
       "D2": 0.0,
       "D3": 0.0,
       "D4": 0.0,
-      "D5": 0.2,
+      "D5": 0.0,
       "D6": 0.0
     },
     "D2_base_files_with_asp_and_bloom": 470,
-    "flagged_files": 2
+    "flagged_files": 0
   },
   "examples": {
     "D1": [],
     "D2": [],
     "D3": [],
     "D4": [],
-    "D5": [
-      [
-        "concept/06_ecosystem/11_domain_applications/04_licensing_and_compliance.md",
-        "稳定层 nightly/preview 关键词 7 处"
-      ],
-      [
-        "concept/06_ecosystem/11_domain_applications/16_quantum_computing_rust.md",
-        "稳定层 nightly/preview 关键词 4 处"
-      ]
-    ],
+    "D5": [],
     "D6": []
   },
-  "per_file": {
-    "concept/06_ecosystem/11_domain_applications/04_licensing_and_compliance.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 7 处"
-      ]
-    },
-    "concept/06_ecosystem/11_domain_applications/16_quantum_computing_rust.md": {
-      "D5": [
-        "稳定层 nightly/preview 关键词 4 处"
-      ]
-    }
-  }
+  "per_file": {}
 }
