@@ -5165,19 +5165,6 @@
       {
         "sim": 0.553,
         "kw_sim": 0.553,
-        "title_sim": 0.25,
-        "shared": 26,
-        "same_dir": true,
-        "f1": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/01_creational/01_abstract_factory.md",
-        "f2": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/06_memento.md",
-        "t1": "Abstract Factory 形式化分析 {#abstract-factor",
-        "t2": "Memento 形式化分析 {#memento-形式化分析}",
-        "lines1": 853,
-        "lines2": 769
-      },
-      {
-        "sim": 0.553,
-        "kw_sim": 0.553,
         "title_sim": 0.333,
         "shared": 26,
         "same_dir": true,
@@ -5200,6 +5187,19 @@
         "t2": "Iterator 形式化分析 {#iterator-形式化分析}",
         "lines1": 891,
         "lines2": 784
+      },
+      {
+        "sim": 0.553,
+        "kw_sim": 0.553,
+        "title_sim": 0.25,
+        "shared": 26,
+        "same_dir": true,
+        "f1": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/01_creational/01_abstract_factory.md",
+        "f2": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/06_memento.md",
+        "t1": "Abstract Factory 形式化分析 {#abstract-factor",
+        "t2": "Memento 形式化分析 {#memento-形式化分析}",
+        "lines1": 853,
+        "lines2": 769
       },
       {
         "sim": 0.553,
@@ -5896,12 +5896,12 @@
         "title_sim": 0.333,
         "shared": 24,
         "same_dir": true,
-        "f1": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/02_structural/02_bridge.md",
-        "f2": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/06_memento.md",
-        "t1": "Bridge 形式化分析 {#bridge-形式化分析}",
-        "t2": "Memento 形式化分析 {#memento-形式化分析}",
-        "lines1": 836,
-        "lines2": 769
+        "f1": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/02_structural/04_decorator.md",
+        "f2": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/07_observer.md",
+        "t1": "Decorator 形式化分析 {#decorator-形式化分析}",
+        "t2": "Observer 形式化分析 {#observer-形式化分析}",
+        "lines1": 899,
+        "lines2": 821
       },
       {
         "sim": 0.543,
@@ -5909,12 +5909,12 @@
         "title_sim": 0.333,
         "shared": 24,
         "same_dir": true,
-        "f1": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/02_structural/04_decorator.md",
-        "f2": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/07_observer.md",
-        "t1": "Decorator 形式化分析 {#decorator-形式化分析}",
-        "t2": "Observer 形式化分析 {#observer-形式化分析}",
-        "lines1": 899,
-        "lines2": 821
+        "f1": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/02_structural/02_bridge.md",
+        "f2": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/06_memento.md",
+        "t1": "Bridge 形式化分析 {#bridge-形式化分析}",
+        "t2": "Memento 形式化分析 {#memento-形式化分析}",
+        "lines1": 836,
+        "lines2": 769
       },
       {
         "sim": 0.542,
@@ -6156,12 +6156,12 @@
         "title_sim": 0.333,
         "shared": 21,
         "same_dir": true,
-        "f1": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/01_creational/02_builder.md",
-        "f2": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/11_visitor.md",
-        "t1": "Builder 形式化分析 {#builder-形式化分析}",
-        "t2": "Visitor 形式化分析 {#visitor-形式化分析}",
-        "lines1": 1044,
-        "lines2": 824
+        "f1": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/01_creational/05_singleton.md",
+        "f2": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/02_command.md",
+        "t1": "Singleton 形式化分析 {#singleton-形式化分析}",
+        "t2": "Command 形式化分析 {#command-形式化分析}",
+        "lines1": 821,
+        "lines2": 918
       },
       {
         "sim": 0.538,
@@ -6169,12 +6169,12 @@
         "title_sim": 0.333,
         "shared": 21,
         "same_dir": true,
-        "f1": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/01_creational/05_singleton.md",
-        "f2": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/02_command.md",
-        "t1": "Singleton 形式化分析 {#singleton-形式化分析}",
-        "t2": "Command 形式化分析 {#command-形式化分析}",
-        "lines1": 821,
-        "lines2": 918
+        "f1": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/01_creational/02_builder.md",
+        "f2": "docs/12_research_notes/08_software_design_theory/01_design_patterns_formal/03_behavioral/11_visitor.md",
+        "t1": "Builder 形式化分析 {#builder-形式化分析}",
+        "t2": "Visitor 形式化分析 {#visitor-形式化分析}",
+        "lines1": 1044,
+        "lines2": 824
       },
       {
         "sim": 0.537,
@@ -7881,19 +7881,6 @@
       },
       {
         "sim": 0.5,
-        "kw_sim": 0.315,
-        "title_sim": 0.5,
-        "shared": 20,
-        "same_dir": true,
-        "f1": "docs/12_research_notes/08_software_design_theory/08_crate_architectures/33_vector_architecture.md",
-        "f2": "docs/12_research_notes/08_software_design_theory/08_crate_architectures/35_metrics_architecture.md",
-        "t1": "vector Crate 架构解构 {#vector-crate-架构解构}",
-        "t2": "metrics Crate 架构解构 {#metrics-crate-架构解构}",
-        "lines1": 232,
-        "lines2": 235
-      },
-      {
-        "sim": 0.5,
         "kw_sim": 0.432,
         "title_sim": 0.5,
         "shared": 20,
@@ -7904,6 +7891,19 @@
         "t2": "Rust安全关键生态系统文档集",
         "lines1": 443,
         "lines2": 382
+      },
+      {
+        "sim": 0.5,
+        "kw_sim": 0.315,
+        "title_sim": 0.5,
+        "shared": 20,
+        "same_dir": true,
+        "f1": "docs/12_research_notes/08_software_design_theory/08_crate_architectures/33_vector_architecture.md",
+        "f2": "docs/12_research_notes/08_software_design_theory/08_crate_architectures/35_metrics_architecture.md",
+        "t1": "vector Crate 架构解构 {#vector-crate-架构解构}",
+        "t2": "metrics Crate 架构解构 {#metrics-crate-架构解构}",
+        "lines1": 232,
+        "lines2": 235
       },
       {
         "sim": 0.5,
@@ -8012,58 +8012,6 @@
       {
         "sim": 0.5,
         "kw_sim": 0.5,
-        "title_sim": 0.0,
-        "shared": 5,
-        "same_dir": true,
-        "f1": "crates/c08_algorithms/docs/02_knowledge_graph.md",
-        "f2": "crates/c08_algorithms/docs/tier_01_foundations/01_project_overview.md",
-        "t1": "算法知识图谱系统 (Algorithm Knowledge Graph)",
-        "t2": "C08 算法与数据结构 - 项目概览",
-        "lines1": 15,
-        "lines2": 22
-      },
-      {
-        "sim": 0.5,
-        "kw_sim": 0.5,
-        "title_sim": 0.0,
-        "shared": 5,
-        "same_dir": true,
-        "f1": "crates/c08_algorithms/docs/02_knowledge_graph.md",
-        "f2": "crates/c08_algorithms/docs/tier_01_foundations/02_navigation.md",
-        "t1": "算法知识图谱系统 (Algorithm Knowledge Graph)",
-        "t2": "C08 算法与数据结构 - 主索引导航",
-        "lines1": 15,
-        "lines2": 22
-      },
-      {
-        "sim": 0.5,
-        "kw_sim": 0.5,
-        "title_sim": 0.0,
-        "shared": 5,
-        "same_dir": true,
-        "f1": "crates/c08_algorithms/docs/05_multidimensional_matrix_comparison.md",
-        "f2": "crates/c08_algorithms/docs/tier_01_foundations/01_project_overview.md",
-        "t1": "算法多维矩阵对比分析 (Multidimensional Algorithm M",
-        "t2": "C08 算法与数据结构 - 项目概览",
-        "lines1": 15,
-        "lines2": 22
-      },
-      {
-        "sim": 0.5,
-        "kw_sim": 0.5,
-        "title_sim": 0.0,
-        "shared": 5,
-        "same_dir": true,
-        "f1": "crates/c08_algorithms/docs/05_multidimensional_matrix_comparison.md",
-        "f2": "crates/c08_algorithms/docs/tier_01_foundations/02_navigation.md",
-        "t1": "算法多维矩阵对比分析 (Multidimensional Algorithm M",
-        "t2": "C08 算法与数据结构 - 主索引导航",
-        "lines1": 15,
-        "lines2": 22
-      },
-      {
-        "sim": 0.5,
-        "kw_sim": 0.5,
         "title_sim": 0.3,
         "shared": 5,
         "same_dir": true,
@@ -8086,6 +8034,58 @@
         "t2": "内存分配与生命周期（Memory Allocation and Lifetime",
         "lines1": 24,
         "lines2": 24
+      },
+      {
+        "sim": 0.5,
+        "kw_sim": 0.5,
+        "title_sim": 0.0,
+        "shared": 5,
+        "same_dir": true,
+        "f1": "crates/c08_algorithms/docs/02_knowledge_graph.md",
+        "f2": "crates/c08_algorithms/docs/tier_01_foundations/01_project_overview.md",
+        "t1": "算法知识图谱系统 (Algorithm Knowledge Graph)",
+        "t2": "C08 算法与数据结构 - 项目概览",
+        "lines1": 15,
+        "lines2": 22
+      },
+      {
+        "sim": 0.5,
+        "kw_sim": 0.5,
+        "title_sim": 0.0,
+        "shared": 5,
+        "same_dir": true,
+        "f1": "crates/c08_algorithms/docs/02_knowledge_graph.md",
+        "f2": "crates/c08_algorithms/docs/tier_01_foundations/02_navigation.md",
+        "t1": "算法知识图谱系统 (Algorithm Knowledge Graph)",
+        "t2": "C08 算法与数据结构 - 主索引导航",
+        "lines1": 15,
+        "lines2": 22
+      },
+      {
+        "sim": 0.5,
+        "kw_sim": 0.5,
+        "title_sim": 0.0,
+        "shared": 5,
+        "same_dir": true,
+        "f1": "crates/c08_algorithms/docs/05_multidimensional_matrix_comparison.md",
+        "f2": "crates/c08_algorithms/docs/tier_01_foundations/01_project_overview.md",
+        "t1": "算法多维矩阵对比分析 (Multidimensional Algorithm M",
+        "t2": "C08 算法与数据结构 - 项目概览",
+        "lines1": 15,
+        "lines2": 22
+      },
+      {
+        "sim": 0.5,
+        "kw_sim": 0.5,
+        "title_sim": 0.0,
+        "shared": 5,
+        "same_dir": true,
+        "f1": "crates/c08_algorithms/docs/05_multidimensional_matrix_comparison.md",
+        "f2": "crates/c08_algorithms/docs/tier_01_foundations/02_navigation.md",
+        "t1": "算法多维矩阵对比分析 (Multidimensional Algorithm M",
+        "t2": "C08 算法与数据结构 - 主索引导航",
+        "lines1": 15,
+        "lines2": 22
       },
       {
         "sim": 0.5,
