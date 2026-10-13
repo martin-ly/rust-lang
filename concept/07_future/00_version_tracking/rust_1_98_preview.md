@@ -81,6 +81,39 @@
 
 ---
 
+### §0.0 判定树：1.98 周期条目现在处于哪个可用状态？
+
+> 周期跟踪页的条目状态会随发布漂移，逐条手查极易出错。本树把"能不能用"压缩成三个可机检的问题；权威源：[releases.rs 1.98.0](https://releases.rs/docs/1.98.0/) · [Rust Forge 发布日历](https://forge.rust-lang.org/)。
+
+```mermaid
+flowchart TD
+    Q0{目标条目} --> Q1{1.98.0 stable 已发布<br/>（2026-08-20）且条目在<br/>rust_1_98_stabilized.md？}
+    Q1 -->|是| A1[stable 直接可用（≥1.98.0）：<br/>删掉旧代码里的 #![feature(...)]<br/>与 cfg 双轨适配层]
+    Q1 -->|否| Q2{条目状态是 RFC merged /<br/>nightly only？}
+    Q2 -->|RFC merged 未实现| A2[无 API 面：按 RFC 文本预写<br/>适配层，禁止猜测签名]
+    Q2 -->|nightly only| Q3{nightly 上有 feature gate？}
+    Q3 -->|有（如 pin_ergonomics）| A3[#![feature(...)] + pin 工具链日期；<br/>incomplete_features 警告可接受<br/>但 API 可能随时变]
+    Q3 -->|无（仅 RFC/FCP 讨论）| A4[不可用：只读设计文档，<br/>等待 tracking issue 出现]
+```
+
+**判定树自检**（rustc 1.99.0 stable 实测编译并运行通过，对应叶子 A1）：§0 表中"已稳定"路径上的 1.98 API 在 1.99.0 stable 上无需任何 feature gate：
+
+```rust
+use std::path::PathBuf;
+
+fn main() {
+    let pb = PathBuf::from("abc");
+    let s: String = pb.into_string().unwrap();      // 1.98 稳定项：零成本 PathBuf -> String
+    let r: Result<i32, ()> = Ok(1);
+    let d = r.map_or_default(|x| x + 1);            // 1.98 稳定项：便捷默认值映射
+    println!("{s} {d}"); // 输出: abc 2
+}
+```
+
+> 反向自检：若某条目在 1.99.0 stable 上调用报 `E0658`（unstable feature），说明它实际停在叶子 A2/A3/A4，应回到本页 §0 表核对状态而不是照抄清单。
+
+---
+
 ### §0.1 `Panic[Hook]Info` 中 `Location<'_>` 生命周期 `'static` 化的语义影响
 
 在 1.98 beta 中，`std::panic::PanicInfo::location()`（以及对应的 `PanicHookInfo::location()`）的返回类型从与 `&self` 绑定的 `Option<&Location<'_>>` 收紧为 `Option<&'static Location<'static>>`。这一变更的表面动机很简单：panic 发生位置是编译期静态数据（文件、行号、列号），其生命周期本就可以是 `'static`；对全局 panic hook 等需要把位置信息持久化或跨借用边界转发的场景，`'static` 生命周期消除了不必要的人为限制。

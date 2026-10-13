@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 793,
-    "generated_at": "2026-10-13T09:14:55.402307+00:00"
+    "generated_at": "2026-10-13T13:38:12.274127+00:00"
   },
   "files": [
     {
@@ -2875,11 +2875,13 @@
       "code_blocks": [],
       "sources": [],
       "cross_references": [
+        "../../../reports/PLACEHOLDER_CLEANUP_R1A_2026_07_14.md",
         "../00_framework/methodology.md",
         "../02_sources/01_authority_source_map.md",
         "../02_sources/03_sources.md",
         "../02_sources/05_international_authority_index.md",
         "../04_navigation/04_inter_layer_map.md",
+        "../04_navigation/13_foundations_gap_closure_index.md",
         "07_quality_dashboard_v2.md"
       ],
       "transitions": 6,
@@ -4369,13 +4371,14 @@
       "layer": "L0",
       "title": "基础知识缺口补全总索引",
       "positioning": "",
-      "line_count": 147,
+      "line_count": 149,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
       "sources": [],
       "cross_references": [
         "../../../archive/08_quality_audits/08_reports_by_time/2026_07/SEMANTIC_SPACE_CRITICAL_AUDIT_2026_05_24.md",
+        "../../../reports/PLACEHOLDER_CLEANUP_R1A_2026_07_14.md",
         "../../01_foundation/00_start/04_effects_and_purity.md",
         "../../01_foundation/02_type_system/05_data_abstraction_spectrum.md",
         "../../01_foundation/03_values_and_references/03_variable_model.md",
@@ -4392,12 +4395,14 @@
         "../../05_comparative/00_paradigms/03_cpp_rust_surface_features.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../05_comparative/01_systems_languages/02_cpp_abi_object_model.md",
+        "../../SUMMARY.md",
         "../00_framework/cpp_rust_engineering_roadmap.md",
         "../00_framework/pattern_semantic_space_index.md",
         "../00_framework/pl_foundations_roadmap.md",
         "../00_framework/semantic_bridge_algorithms_patterns.md",
         "../01_terminology/01_terminology_glossary.md",
         "../03_audit/01_concept_audit_guide.md",
+        "../03_audit/03_audit_checklist.md",
         "13_foundations_gap_closure_index.md"
       ],
       "transitions": 0,
@@ -17516,7 +17521,7 @@
       "layer": "L1",
       "title": "Preludes（预导入模块）",
       "positioning": "",
-      "line_count": 295,
+      "line_count": 377,
       "theorem_chains": [
         {
           "text": "| 标准库 prelude 自动注入 ⟹ 常用类型零样板使用 | `std` 可用 | `Vec`、`String`、`Option` 等无需显式 use | 高 |",
@@ -17532,6 +17537,9 @@
         }
       ],
       "anti_propositions": [
+        {
+          "title": "### 反例"
+        },
         {
           "title": "## 反命题"
         }
@@ -17563,6 +17571,51 @@
         },
         {
           "flags": [
+            "compile_fail",
+            "E0425"
+          ],
+          "lines": 3,
+          "should_fail": true,
+          "code_preview": "#![no_std] pub fn f() -> Box<u8> { Box::new(1) } ..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "#![no_std] extern crate alloc; use alloc::boxed::Box; pub fn f() -> Box<u8> { Bo..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0425"
+          ],
+          "lines": 3,
+          "should_fail": true,
+          "code_preview": "#![no_implicit_prelude] pub fn f() -> Option<u8> { Some(1) } ..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "#![no_implicit_prelude] pub fn f() -> ::core::option::Option<u8> { ::core::optio..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0433"
+          ],
+          "lines": 3,
+          "should_fail": true,
+          "code_preview": "#![no_implicit_prelude] pub fn f() { std::process::exit(0); } ..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "#![no_implicit_prelude] pub fn f() { ::std::process::exit(0); } ..."
+        },
+        {
+          "flags": [
             "compile_fail"
           ],
           "lines": 9,
@@ -17588,7 +17641,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 12,
+      "matrix_rows": 19,
       "pre_post": {
         "pre": [
           "[Modules and Paths](01_modules_and_paths.md) · [Attributes and Macros](../09_macros_basics/01_attributes_and_macros.md) · [Terminology Glossary](../../00_meta/01_terminology/01_terminology_glossary.md)"
@@ -38727,7 +38780,7 @@
       "layer": "L3",
       "title": "内联汇编 (Inline Assembly)",
       "positioning": "深入分析 Rust `asm!` 宏（Macro）的语法、约束系统、寄存器管理，以及 x86_64、aarch64、RISC-V、s390x 四大平台的差异，重点覆盖 Rust 1.96 为 s390x 引入的向量寄存器支持。",
-      "line_count": 998,
+      "line_count": 999,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -39569,7 +39622,7 @@
       "layer": "L3",
       "title": "Rust 网络编程：Tokio TCP/UDP、异步 IO 与 Tower 服务抽象",
       "positioning": "系统分析 Rust **网络编程**的核心范式——从 Tokio 运行时（Runtime）下的 TCP/UDP 异步（Async） IO，到 socket 编程的底层细节，再到 Tower 服务抽象的设计哲学，建立从\"怎么写\"到\"为什么这样设计\"的完整认知框架。",
-      "line_count": 1111,
+      "line_count": 1114,
       "theorem_chains": [
         {
           "text": "| Rust 网络编程：Tokio TCP/UDP、异步（Async） IO 与 Tower 服务抽象 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -45629,10 +45682,61 @@
       "layer": "L4",
       "title": "Safety Tags（安全标签）",
       "positioning": "",
-      "line_count": 23,
+      "line_count": 129,
       "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
+      "anti_propositions": [
+        {
+          "title": "## 3. 反例"
+        },
+        {
+          "title": "### 3.1 反例"
+        },
+        {
+          "title": "### 3.2 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "// safe 侧：error[E0499]: cannot borrow `x` as mutable more than once at a time fn..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// unsafe 侧：rustc 1.99.0 编译通过、无警告（调用点包在 unsafe 块内， // Edition 2024 下裸调用会是 error[..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "#[deny(unsafe_op_in_unsafe_fn)] unsafe fn deref(p: *const i32) -> i32 {     *p /..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "/// # Safety /// - `f` must not read more than `n` elements from `ptr` pub unsaf..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "// error[E0515]: cannot return reference to local variable `local` unsafe fn bad..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../03_advanced/02_unsafe/01_unsafe.md",
@@ -48848,7 +48952,7 @@
       "layer": "L4",
       "title": "Application Binary Interface（ABI）",
       "positioning": "> 本小节把上方「Rust 1.97.0 变更提示」横幅**展开**为 v0 × debuginfo demangle × linker_messages × backtrace 的交互矩阵，并阐明空 `export_name`/`link_name` 校验对 ABI 契约的意义；",
-      "line_count": 311,
+      "line_count": 313,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -55739,14 +55843,26 @@
       "layer": "L4",
       "title": "Rust 语言规范生态总览",
       "positioning": "",
-      "line_count": 142,
+      "line_count": 226,
       "theorem_chains": [],
       "anti_propositions": [
         {
           "title": "## 4. 反命题"
+        },
+        {
+          "title": "## 6. 反例"
         }
       ],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "// Edition 2021：编译通过（仅 dead_code 类警告） // Edition 2024：error[E0133]: use of mutab..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../03_advanced/02_unsafe/01_unsafe.md",
@@ -55759,7 +55875,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 18,
+      "matrix_rows": 37,
       "pre_post": {
         "pre": [],
         "post": []
@@ -55772,11 +55888,26 @@
       "layer": "L4",
       "title": "Rust Reference 与规范性缺口",
       "positioning": "",
-      "line_count": 159,
+      "line_count": 254,
       "theorem_chains": [],
       "anti_propositions": [
         {
-          "title": "## 5. 反命题"
+          "title": "## 4. 反例"
+        },
+        {
+          "title": "### 4.1 反例"
+        },
+        {
+          "title": "### 4.2 反例"
+        },
+        {
+          "title": "### 4.3 反例"
+        },
+        {
+          "title": "### 4.4 反例"
+        },
+        {
+          "title": "## 8. 反命题"
         }
       ],
       "code_blocks": [
@@ -55787,6 +55918,44 @@
           "lines": 7,
           "should_fail": true,
           "code_preview": "fn main() {     let mut x = 0;     let r1 = &mut x;     let r2 = &mut x; // ❌ Re..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "fn main() {     let mut x = 0;     let r1 = &mut x;     *r1 += 1;          // r1..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// 编译通过（rustc 1.99.0 无错误无警告）；cargo miri run 报错： // \"Undefined Behavior: derefere..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "// Edition 2021：通过（仅警告）。Edition 2024：error[E0133] ×2 static mut COUNTER: i32 = 0..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "// error[E0515]: cannot return reference to local variable `local` unsafe fn bad..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "#[deny(unsafe_op_in_unsafe_fn)] unsafe fn deref(p: *const i32) -> i32 {     *p /..."
         },
         {
           "flags": [],
@@ -55805,7 +55974,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 6,
+      "matrix_rows": 11,
       "pre_post": {
         "pre": [],
         "post": []
@@ -55818,11 +55987,20 @@
       "layer": "L4",
       "title": "Ferrocene 语言规范（FLS）",
       "positioning": "",
-      "line_count": 186,
+      "line_count": 268,
       "theorem_chains": [],
       "anti_propositions": [
         {
-          "title": "## 6. 反命题"
+          "title": "## 5. 反例"
+        },
+        {
+          "title": "### 5.1 反例"
+        },
+        {
+          "title": "### 5.2 反例"
+        },
+        {
+          "title": "## 9. 反命题"
         }
       ],
       "code_blocks": [
@@ -55832,7 +56010,19 @@
           ],
           "lines": 9,
           "should_fail": true,
-          "code_preview": "#![forbid(unsafe_code)]  fn main() {     // ❌ 违反 FLS-C-0001 风格限制：该子集禁止 unsafe   ..."
+          "code_preview": "#![forbid(unsafe_code)]  fn main() {     // ❌ 违反 Ferrocene 认证子集限制（对应 FLS 19 章 un..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "union U { i: u32, f: f32 } fn main() {     let u = U { f: 1.0 };     unsafe { pr..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "#![forbid(unsafe_code)] fn bounded(i: u32) -> u32 {     if i == 0 { 0 } else { b..."
         },
         {
           "flags": [
@@ -55854,7 +56044,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 13,
+      "matrix_rows": 23,
       "pre_post": {
         "pre": [],
         "post": []
@@ -55925,11 +56115,20 @@
       "layer": "L4",
       "title": "a-mir-formality：MIR / 类型系统 / trait 求解的形式化模型",
       "positioning": "",
-      "line_count": 199,
+      "line_count": 279,
       "theorem_chains": [],
       "anti_propositions": [
         {
-          "title": "## 6. 反命题"
+          "title": "## 6. 反例"
+        },
+        {
+          "title": "### 6.1 反例"
+        },
+        {
+          "title": "### 6.2 反例"
+        },
+        {
+          "title": "## 9. 反命题"
         }
       ],
       "code_blocks": [
@@ -55943,11 +56142,25 @@
         },
         {
           "flags": [
+            "ignore"
+          ],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "// 摘自 a-mir-formality book（formality_rust 章），prove 模块主入口签名 prove_wc(_decls: Prog..."
+        },
+        {
+          "flags": [
             "compile_fail"
           ],
-          "lines": 11,
+          "lines": 8,
           "should_fail": true,
-          "code_preview": "use std::fmt;  // ❌ E0117: cannot implement foreign trait `Display` for foreign ..."
+          "code_preview": "use std::fmt; // ❌ error[E0117]: only traits defined in the current crate can be..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use std::fmt; struct Wrapper(Vec<i32>);            // ✅ Self 是本地类型 → 满足 orphan r..."
         }
       ],
       "sources": [],
@@ -55961,7 +56174,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 6,
+      "matrix_rows": 17,
       "pre_post": {
         "pre": [],
         "post": []
@@ -55974,11 +56187,20 @@
       "layer": "L4",
       "title": "从 rustc 测试套件提取规范证据",
       "positioning": "",
-      "line_count": 171,
+      "line_count": 263,
       "theorem_chains": [],
       "anti_propositions": [
         {
-          "title": "## 5. 反命题"
+          "title": "## 5. 反例"
+        },
+        {
+          "title": "### 5.1 反例"
+        },
+        {
+          "title": "### 5.2 反例"
+        },
+        {
+          "title": "## 8. 反命题"
         }
       ],
       "code_blocks": [
@@ -55989,6 +56211,22 @@
           "lines": 9,
           "should_fail": false,
           "code_preview": "//@ edition: 2024 //@ check-pass //@ stderr-per-bitwidth //@ normalize-stderr-te..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "//@ edition: 2024 //@ check-pass #![crate_type = \"lib\"] #![deny(unused_unsafe)] ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "#[deny(unsafe_op_in_unsafe_fn)] unsafe fn deref(p: *const i32) -> i32 {     *p /..."
         }
       ],
       "sources": [],
@@ -56002,7 +56240,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 14,
+      "matrix_rows": 19,
       "pre_post": {
         "pre": [],
         "post": []
@@ -61778,9 +62016,13 @@
       "layer": "L6",
       "title": "rustc 编译器诊断与 UI Tests",
       "positioning": "把“rustc 的错误信息是怎么构造的、如何测试错误输出”讲清楚，为贡献 rustc 或编写自定义 lint 打下基础。",
-      "line_count": 308,
+      "line_count": 378,
       "theorem_chains": [],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [
@@ -61821,6 +62063,41 @@
           "lines": 6,
           "should_fail": true,
           "code_preview": "// tests/ui/my_feature/error.rs fn main() {     let x: u32 = \"hello\";     //~^ E..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0453"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "#![forbid(non_snake_case)] #![allow(non_snake_case)] // ❌ forbid 不可覆盖 pub fn Bad..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "#![deny(non_snake_case)] #[allow(non_snake_case)] // ✅ deny 可被局部 allow 覆盖 pub fn..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 3,
+          "should_fail": true,
+          "code_preview": "#![forbid(unsafe_code)] pub fn f() { unsafe { } } // ❌ error: usage of an `unsaf..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "#![deny(unsafe_code)] #[allow(unsafe_code)] pub fn f() { unsafe { } } // ✅ 局部豁免生..."
+        },
+        {
+          "flags": [],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "pub fn f() -> i32 { (1 + 2) } // warning: unnecessary parentheses（unused_parens）..."
         }
       ],
       "sources": [],
@@ -61833,7 +62110,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 34,
+      "matrix_rows": 39,
       "pre_post": {
         "pre": [
           "[安全边界](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md)"
@@ -61850,9 +62127,12 @@
       "layer": "L6",
       "title": "rustc 自举（Bootstrap）",
       "positioning": "把“Rust 编译器如何用 Rust 写、又用 Rust 编译自己”这一自举过程讲清楚，帮助理解 rustc 开发工作流。",
-      "line_count": 293,
+      "line_count": 341,
       "theorem_chains": [],
       "anti_propositions": [
+        {
+          "title": "### 反例"
+        },
         {
           "title": "### 反例"
         }
@@ -61865,6 +62145,15 @@
           "lines": 6,
           "should_fail": false,
           "code_preview": "#[cfg(bootstrap)] fn old_impl() { ... }  #[cfg(not(bootstrap))] fn new_impl() { ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0554"
+          ],
+          "lines": 3,
+          "should_fail": true,
+          "code_preview": "#![feature(never_type)] pub fn f(x: !) -> ! { x } ..."
         },
         {
           "flags": [
@@ -61891,7 +62180,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 21,
+      "matrix_rows": 26,
       "pre_post": {
         "pre": [
           "[安全边界](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md)"
@@ -62763,7 +63052,7 @@
       "layer": "L6",
       "title": "Cargo Registry 与包发布",
       "positioning": "把“怎么把 crate 发布到 crates.io / 私有 registry、registry 内部如何索引、认证如何工作”系统化。",
-      "line_count": 373,
+      "line_count": 418,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -62799,7 +63088,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 12,
+      "matrix_rows": 16,
       "pre_post": {
         "pre": [
           "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
@@ -62816,7 +63105,7 @@
       "layer": "L6",
       "title": "Cargo 认证与构建缓存",
       "positioning": "把“Cargo 如何安全地存 token、如何组织缓存、如何加速构建”系统化，补齐 registry 之后的工程实践闭环。",
-      "line_count": 345,
+      "line_count": 394,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -62850,7 +63139,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 11,
+      "matrix_rows": 18,
       "pre_post": {
         "pre": [
           "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
@@ -63122,14 +63411,32 @@
       "layer": "L6",
       "title": "Cargo 入门（Cargo Getting Started）",
       "positioning": "让初学者在 5 分钟内理解 Cargo 是什么、能做什么、如何创建并运行第一个 Rust package。",
-      "line_count": 215,
+      "line_count": 271,
       "theorem_chains": [],
       "anti_propositions": [
+        {
+          "title": "### 反例"
+        },
         {
           "title": "### 反例"
         }
       ],
       "code_blocks": [
+        {
+          "flags": [
+            "compile_fail",
+            "E0277"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "fn main() {     let name: &str = \"cargo\";     let first_byte: u8 = name[0]; // ❌..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "fn main() {     let name: &str = \"cargo\";     let first_byte: u8 = name.as_bytes..."
+        },
         {
           "flags": [
             "compile_fail",
@@ -63162,7 +63469,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 2,
-      "matrix_rows": 20,
+      "matrix_rows": 27,
       "pre_post": {
         "pre": [
           "[Toolchain](../00_toolchain/01_toolchain.md) · [Rust Installation](../../00_meta/04_navigation/08_learning_mvp_path.md)"
@@ -63179,14 +63486,32 @@
       "layer": "L6",
       "title": "Cargo 工作流（Cargo Workflow）",
       "positioning": "覆盖从“创建 package”到“在团队中维护依赖锁定”的完整日常流程。",
-      "line_count": 223,
+      "line_count": 279,
       "theorem_chains": [],
       "anti_propositions": [
+        {
+          "title": "### 反例"
+        },
         {
           "title": "### 反例"
         }
       ],
       "code_blocks": [
+        {
+          "flags": [
+            "compile_fail",
+            "E0502"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "fn main() {     let mut v = vec![1, 2, 3];     let snapshot = &v;        // 共享借用..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "fn main() {     let mut v = vec![1, 2, 3];     let snapshot = v.clone(); // ✅ 快照..."
+        },
         {
           "flags": [
             "compile_fail",
@@ -63217,7 +63542,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 24,
+      "matrix_rows": 30,
       "pre_post": {
         "pre": [
           "[Cargo Getting Started](15_cargo_getting_started.md) · [Modules and Paths](../../01_foundation/07_modules_and_items/01_modules_and_paths.md)"
@@ -63464,14 +63789,32 @@
       "layer": "L6",
       "title": "Cargo Registry 内部机制（Cargo Registry Internals）",
       "positioning": "为需要自建 registry、审计依赖来源或集成内部凭证系统的团队提供权威参考。",
-      "line_count": 203,
+      "line_count": 283,
       "theorem_chains": [],
       "anti_propositions": [
+        {
+          "title": "### 反例"
+        },
         {
           "title": "### 反例"
         }
       ],
       "code_blocks": [
+        {
+          "flags": [
+            "compile_fail",
+            "E0515"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "fn index_shard(name: &str) -> &str {     let lower = name.to_lowercase();   // 局..."
+        },
+        {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "fn index_shard(name: &str) -> String {     let lower = name.to_lowercase();     ..."
+        },
         {
           "flags": [
             "compile_fail",
@@ -63503,7 +63846,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 28,
+      "matrix_rows": 33,
       "pre_post": {
         "pre": [
           "[Cargo Registries and Publishing](08_cargo_registries_and_publishing.md) · [Cargo Authentication and Cache](09_cargo_authentication_and_cache.md) · [Cargo Configuration](18_cargo_configuration.md)"
@@ -73631,7 +73974,7 @@
       "layer": "L6",
       "title": "交叉编译：多目标平台支持与条件编译",
       "positioning": "分析 Rust **交叉编译**生态——从 target triple 的语义、条件编译（cfg）、到不同架构（x86_64/ARM/RISC-V/WASM）的编译策略，揭示 Rust 如何在不修改源代码的情况下支持从嵌入式到服务器的全谱系平台。",
-      "line_count": 696,
+      "line_count": 698,
       "theorem_chains": [
         {
           "text": "| 交叉编译：多目标平台支持与条件编译 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -74608,9 +74951,12 @@
       "layer": "L6",
       "title": "Target Tier 平台支持全景：分层保证与 1.90–1.97 变迁",
       "positioning": "",
-      "line_count": 197,
+      "line_count": 268,
       "theorem_chains": [],
       "anti_propositions": [
+        {
+          "title": "### 反例"
+        },
         {
           "title": "### 反例"
         }
@@ -74623,6 +74969,21 @@
           "lines": 10,
           "should_fail": false,
           "code_preview": "#[cfg(all(target_arch = \"riscv64\", target_feature = \"d\"))] fn double_precision_m..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0425"
+          ],
+          "lines": 3,
+          "should_fail": true,
+          "code_preview": "#![no_std] pub fn f() -> Vec<u8> { Vec::new() } // ❌ no_std 的 prelude 只有 core，没有..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "#![no_std] extern crate alloc; use alloc::vec::Vec;  pub fn f() -> Vec<u8> { Vec..."
         },
         {
           "flags": [
@@ -74655,7 +75016,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 17,
+      "matrix_rows": 24,
       "pre_post": {
         "pre": [
           "[交叉编译与 target 三元组](02_cross_compilation.md) · [将 Rust 集成到现有平台](../00_toolchain/08_platform_rust_integration.md)"
@@ -84967,10 +85328,30 @@
       "layer": "L6",
       "title": "Rust 游戏开发（已合并）",
       "positioning": "",
-      "line_count": 34,
+      "line_count": 102,
       "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 24,
+          "should_fail": false,
+          "code_preview": "use std::time::{Duration, Instant};  fn main() {     let dt = 1.0 / 60.0; // 固定模..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0382"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "struct Position { x: f32 } fn draw(p: Position) { let _ = p.x; } // p 按值接收 → mov..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "02_game_ecs.md",
@@ -85517,9 +85898,13 @@
       "layer": "L6",
       "title": "Rust 算法复杂度分析",
       "positioning": "",
-      "line_count": 335,
+      "line_count": 414,
       "theorem_chains": [],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -85560,6 +85945,27 @@
           "code_preview": "use criterion::{black_box, criterion_group, criterion_main, Criterion};  fn fibo..."
         },
         {
+          "flags": [
+            "compile_fail",
+            "E0502"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "fn main() {     let mut v = vec![1, 2, 3];     for x in &v {                    ..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "fn main() {     let mut v = vec![1, 2, 3];     let n = v.len();                 ..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "fn main() {     // O(n^2)：每次 insert(0, x) 搬移全部已有元素     let mut head_inserts = Ve..."
+        },
+        {
           "flags": [],
           "lines": 7,
           "should_fail": false,
@@ -85584,7 +85990,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 2,
-      "matrix_rows": 18,
+      "matrix_rows": 26,
       "pre_post": {
         "pre": [
           "[Type System Basics](../../01_foundation/02_type_system/01_type_system.md) · [Functions](../../01_foundation/07_modules_and_items/02_functions.md) · [Collections](../../01_foundation/05_collections/01_collections.md)"
@@ -93039,14 +93445,29 @@
       "layer": "L7",
       "title": "Rust 1.97.0 特性 × 领域反查矩阵",
       "positioning": "",
-      "line_count": 305,
+      "line_count": 350,
       "theorem_chains": [],
       "anti_propositions": [
         {
           "title": "## 反例"
         }
       ],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "use std::pin::pin; fn main() {     let mut x = 1i32;     let p: std::pin::Pin<&m..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use std::pin::pin; fn main() {     let mut x = 1i32;     let p: std::pin::Pin<&m..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../../reports/GLOBAL_SEMANTIC_CRITICAL_AUDIT_2026_07_11.md",
@@ -93077,7 +93498,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 51,
       "pre_post": {
         "pre": [
@@ -95174,7 +95595,7 @@
       "layer": "L7",
       "title": "Rust 1.95.0 稳定特性",
       "positioning": "",
-      "line_count": 422,
+      "line_count": 464,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -95261,6 +95682,20 @@
           "code_preview": "use std::cell::Cell;  let cell_arr: Cell<[i32; 3]> = Cell::new([1, 2, 3]); let r..."
         },
         {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "fn main() {     let mut v = vec![1, 2];     let e: &mut i32 = v.push_mut(3); // ..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "fn main() {     let mut v = vec![1, 2];     {         let e: &mut i32 = v.push_m..."
+        },
+        {
           "flags": [],
           "lines": 5,
           "should_fail": false,
@@ -95290,7 +95725,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 32,
       "pre_post": {
         "pre": [
@@ -95308,7 +95743,7 @@
       "layer": "L7",
       "title": "Rust 1.96 稳定特性（当前 patch 1.96.1）",
       "positioning": "",
-      "line_count": 432,
+      "line_count": 466,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -95339,6 +95774,12 @@
           "lines": 8,
           "should_fail": false,
           "code_preview": "use std::cell::LazyCell; use std::panic::AssertUnwindSafe; use std::sync::LazyLo..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use std::range::Range;  fn sum_twice(r: Range<usize>) -> usize {     // core::ra..."
         },
         {
           "flags": [],
@@ -95380,7 +95821,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 61,
       "pre_post": {
         "pre": [
@@ -95476,7 +95917,7 @@
       "layer": "L7",
       "title": "Rust 1.97.0 前沿特性预览（已归档）",
       "positioning": "",
-      "line_count": 147,
+      "line_count": 168,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -95513,7 +95954,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 17,
       "pre_post": {
         "pre": [
@@ -95699,10 +96140,16 @@
       "layer": "L7",
       "title": "Rust 1.98+ 前沿特性预览",
       "positioning": "",
-      "line_count": 1158,
+      "line_count": 1191,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use std::path::PathBuf;  fn main() {     let pb = PathBuf::from(\"abc\");     let ..."
+        },
         {
           "flags": [
             "ignore"
@@ -95901,7 +96348,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 63,
       "pre_post": {
         "pre": [
@@ -96098,7 +96545,7 @@
       "layer": "L7",
       "title": "Rust 2024 Edition (1.85.0+ stable)",
       "positioning": "",
-      "line_count": 166,
+      "line_count": 182,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -96151,7 +96598,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 17,
       "pre_post": {
         "pre": [
@@ -96169,7 +96616,7 @@
       "layer": "L7",
       "title": "Edition 2024 完全指南：新特性与迁移策略",
       "positioning": "全面讲解 Rust **Edition 2024** 的新特性——从 gen blocks、async closures 到 never type 和 lifetime captures，揭示 Edition 机制如何在不破坏兼容性的前提下推进语言演进。",
-      "line_count": 1062,
+      "line_count": 1115,
       "theorem_chains": [
         {
           "text": "| Edition 2024 完全指南：新特性与迁移策略 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -96232,6 +96679,18 @@
           "lines": 6,
           "should_fail": false,
           "code_preview": "> // 自动迁移后的代码: > let temp = get_string(); > if let Some(x) = temp.as_ref() { >  ..."
+        },
+        {
+          "flags": [],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "use std::sync::RwLock;  fn f(value: &RwLock<Option<bool>>) {     if let Some(x) ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "struct D(#[allow(dead_code)] &'static str); impl Drop for D { fn drop(&mut self)..."
         },
         {
           "flags": [],
@@ -96324,7 +96783,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": true,
-      "mermaid_blocks": 2,
+      "mermaid_blocks": 3,
       "matrix_rows": 36,
       "pre_post": {
         "pre": [
@@ -99249,7 +99708,7 @@
       "layer": "L7",
       "title": "cargo-semver-checks：从社区工具到 Cargo 官方集成",
       "positioning": "跟踪 `cargo-semver-checks` 从独立社区工具向 Cargo 官方生态集成的演进过程，分析其对 Rust 供应链稳定性和 API 兼容性验证的结构性影响。",
-      "line_count": 269,
+      "line_count": 287,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -99277,7 +99736,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 28,
       "pre_post": {
         "pre": [
@@ -99350,7 +99809,7 @@
       "layer": "L7",
       "title": "AArch64 SVE / SME：可伸缩向量扩展预览",
       "positioning": "跟踪 Rust 对 ARM AArch64 **SVE（Scalable Vector Extension，可伸缩向量扩展）** 和 **SME（Scalable Matrix Extension，可伸缩矩阵扩展）** 的支持进展。SVE/SME 是 ARMv9-A 的关键特性，代表向量计算从固定长度向硬件自适应长度的范式转变。",
-      "line_count": 338,
+      "line_count": 378,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -99369,6 +99828,14 @@
           "lines": 2,
           "should_fail": false,
           "code_preview": "#![feature(stdarch_aarch64_sve)] ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "#![feature(stdarch_aarch64_sve)] use std::arch::aarch64::*;  #[target_feature(en..."
         },
         {
           "flags": [],
@@ -99400,7 +99867,7 @@
       ],
       "transitions": 0,
       "has_cognitive_path": false,
-      "mermaid_blocks": 1,
+      "mermaid_blocks": 2,
       "matrix_rows": 35,
       "pre_post": {
         "pre": [
@@ -100471,7 +100938,7 @@
       "layer": "L7",
       "title": "形式化方法工业化",
       "positioning": "",
-      "line_count": 1754,
+      "line_count": 1775,
       "theorem_chains": [
         {
           "text": "> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。",
@@ -100527,6 +100994,12 @@
           "lines": 4,
           "should_fail": false,
           "code_preview": "fn add(a: i32, b: i32) -> i32 {     a - b  // 编译通过！类型正确，但逻辑错误 } ..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "fn first_odd(v: &[i32]) -> Option<i32> {     // 内存安全：rustc / Miri 均无告警；功能错误：返回第一..."
         },
         {
           "flags": [],

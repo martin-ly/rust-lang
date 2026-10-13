@@ -27,6 +27,8 @@
 > [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 > [Cargo Book — Targets](https://doc.rust-lang.org/cargo/reference/config.html#target) ·
 > [RFC 0131 — Target Specification](https://github.com/rust-lang/rfcs/pull/131) ·
+> [Rust Target Tier Policy（rustc-dev-guide — Target Tiers）](https://rustc-dev-guide.rust-lang.org/targets.html) ·
+> [ELF — Executable and Linkable Format Specification (Tool Interface Standards)](https://refspecs.linuxbase.org/elf/elf.pdf) ·
 > [The rustc Book — Targets](https://doc.rust-lang.org/rustc/targets/index.html) ·
 > [cross crate](https://github.com/cross-rs/cross)
 > **前置依赖**: [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
@@ -484,7 +486,7 @@ graph TD
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) · [LLVM Target Triples](https://clang.llvm.org/docs/CrossCompilation.html#target-triple)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) · [Rust Target Tier Policy（rustc-dev-guide — Target Tiers）](https://rustc-dev-guide.rust-lang.org/targets.html) · [ELF — Executable and Linkable Format Specification (Tool Interface Standards)](https://refspecs.linuxbase.org/elf/elf.pdf) · [LLVM Target Triples](https://clang.llvm.org/docs/CrossCompilation.html#target-triple)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/05_international_authority_index.md)
 

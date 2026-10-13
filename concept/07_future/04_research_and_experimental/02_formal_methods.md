@@ -460,6 +460,27 @@ fn add(a: i32, b: i32) -> i32 {
 
 > **权威引用（Reference）**: RustBelt（Jung et al., POPL 2018）在 Iris 框架中形式化了 Rust 的核心语义，证明了 safe 子集的内存安全（Memory Safety）和线程安全。Prusti 将 Viper 分离逻辑后端直接应用于 Rust 代码，实现了类型系统到逻辑命题的自动翻译。
 
+**可验证反例（内存安全 ≠ 功能正确，rustc 1.99.0 实测）**：上表"已证明 / 待证明"的分界线可以用一个具体函数钉死。以下函数通过 rustc 类型检查、通过 Miri（无任何 UB 报告），却违反功能规格"返回切片中第一个奇数"——只有模型检测/定理证明工具能发现它：
+
+```rust
+fn first_odd(v: &[i32]) -> Option<i32> {
+    // 内存安全：rustc / Miri 均无告警；功能错误：返回第一个元素而非第一个奇数
+    v.first().copied()
+}
+
+fn main() {
+    let v = [2, 3, 5];
+    let got = first_odd(&v);
+    // 功能规格要求 got == Some(3)；实测 got == Some(2)，规格被证伪。
+    // 写成 assert_eq!(got, Some(3)) 会 panic——Kani 的 kani::any() 与
+    // Verus 的 ensures 规约给出的是同一个反例，且无需运行程序。
+    assert_ne!(got, Some(3));
+    println!("got={got:?} expected=Some(3)");
+}
+```
+
+实测（rustc 1.99.0，edition 2024）：编译、运行均成功，输出 `got=Some(2)`。工具分工由此可判定：rustc/Miri 的"全绿"只覆盖左列；右列命题必须交给 [AWS Kani](https://github.com/model-checking/kani)（符号执行自动找反例）或 [Verus](https://github.com/verus-lang/verus)（`ensures` 规约 + Z3 证明）。
+
 ---
 
 ## 五、形式化验证工具链

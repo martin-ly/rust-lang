@@ -217,6 +217,76 @@ fn main() {
 
 ---
 
+## 知识表征：lint 等级决策树与诊断矩阵
+
+> 依据 [Rust Reference — Lint Check Attributes](https://doc.rust-lang.org/reference/attributes/diagnostics.html#lint-check-attributes) 与 rustc 1.99.0（Edition 2024）实测整理。
+
+### 决策树：这条诊断该用哪个 lint 等级处理？
+
+```text
+收到一条 warning 级诊断，如何处置？
+├─ 想让 CI 直接失败？
+│    ├─ 全仓库永久禁止、不允许任何局部豁免 → #![forbid(lint)]（覆盖即 E0453）
+│    └─ 允许个别模块豁免 → #![deny(lint)] + 局部 #[allow(lint)]
+├─ 只想修当前函数/当前项？ → 项级 #[deny(lint)] 或 #[warn(lint)]
+├─ 想临时压掉一次警告继续开发？ → #[allow(lint)]（局部）或命令行 -A lint
+└─ 想自动修复而不是手改？ → 看诊断是否带 `help:` 且可被 cargo fix 应用
+     ├─ 带机器可应用建议（Applicability::MachineApplicable）→ cargo fix 直接改源码
+     └─ 只有文字提示（Unspecified/HasPlaceholders）→ 人工修改
+```
+
+### 属性矩阵：四个 lint 等级的行为差异（rustc 1.99.0 实测）
+
+| 等级 | 诊断输出 | 能否被下层 `allow` 覆盖 | 覆盖尝试的实测结果 |
+|:---|:---|:---:|:---|
+| `forbid` | error，编译失败 | ❌ 不可覆盖 | `#![forbid(non_snake_case)]` + `#![allow(non_snake_case)]` → `error[E0453]: allow(non_snake_case) incompatible with previous forbid` |
+| `deny` | error，编译失败 | ✅ 可被 `allow` 覆盖 | `#[deny(unused_variables)]` 去掉后同一代码只剩 warning |
+| `warn` | warning，编译继续 | ✅ | `dead_code` 默认 warn：`warning: function \`hidden\` is never used` |
+| `allow` | 无输出 | — | — |
+
+### 反例组（rustc 1.99.0，`--edition 2024` 实测）
+
+**反例 A**：`forbid` 之后任何 `allow` 都无效（预期 E0453）：
+
+```rust,compile_fail,E0453
+#![forbid(non_snake_case)]
+#![allow(non_snake_case)] // ❌ forbid 不可覆盖
+pub fn BadName() {}
+```
+
+**修正 A**：需要豁免能力时改用 `deny`：
+
+```rust
+#![deny(non_snake_case)]
+#[allow(non_snake_case)] // ✅ deny 可被局部 allow 覆盖
+pub fn BadName() {}
+```
+
+**反例 B**：`forbid(unsafe_code)` 是安全审计常用闸门，任何 unsafe 块直接报错（无错误码，lint 级 error）：
+
+```rust,compile_fail
+#![forbid(unsafe_code)]
+pub fn f() { unsafe { } } // ❌ error: usage of an `unsafe` block
+```
+
+**可编译对照**（同一 lint 降为 deny 后局部豁免）：
+
+```rust
+#![deny(unsafe_code)]
+#[allow(unsafe_code)]
+pub fn f() { unsafe { } } // ✅ 局部豁免生效
+```
+
+**机器可应用建议示例**（可编译，但带 `help:` 建议，`cargo fix` 可自动删除括号——对应 `Applicability::MachineApplicable`）：
+
+```rust
+pub fn f() -> i32 { (1 + 2) } // warning: unnecessary parentheses（unused_parens）
+```
+
+> **来源**: [Rust Reference — Lint Check Attributes](https://doc.rust-lang.org/reference/attributes/diagnostics.html#lint-check-attributes) · [rustc-dev-guide — Diagnostic structs（Applicability）](https://rustc-dev-guide.rust-lang.org/diagnostics/diagnostic-structs.html) · [Cargo Book — cargo fix](https://doc.rust-lang.org/cargo/commands/cargo-fix.html)
+
+---
+
 ## 嵌入式测验
 
 理解「嵌入式测验」需要把握测验 1：一条 rustc 诊断至少包含哪三个核心部分？、测验 2：`Applicability::MachineApplica…、测验 3：Late lint pass 相比 Early lint p…与测验 4：`--bless` 在 UI testing 中的作用是什么？，本节依次展开。

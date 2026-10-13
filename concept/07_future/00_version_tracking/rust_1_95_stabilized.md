@@ -326,6 +326,48 @@ rustc --remap-path-scope=macro,sysroot -Z remap-path-prefix=/home/user=/project
 - **`#[non_exhaustive]` enum matching**：现在读取 discriminant，可能影响闭包（Closures）捕获分析。
 - **`Eq::assert_receiver_is_total_eq`**：已废弃，手动实现会触发未来兼容性警告。
 
+### 3.4 判定树：1.95 新特性是否影响你的代码？
+
+> 权威源：[Rust 1.95.0 Release Blog](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/) · [releases.rs 1.95.0](https://releases.rs/docs/1.95.0/)。叶子全部给可执行动作。
+
+```mermaid
+flowchart TD
+    Q0{你在 1.95 上有编译 warning<br/>或手写 unsafe 封装？} -->|否| N0[无破坏：1.95 语言层全部是<br/>放宽语法，旧代码照常编译]
+    Q0 -->|是| Q1{哪一类？}
+    Q1 -->|手写 CAS 循环| A1[替换为 Atomic*::update/try_update；<br/>注意闭包必须是纯函数（见反例与陷阱）]
+    Q1 -->|手写 ptr.as_ref() + 有效性论证| A2[替换为 as_ref_unchecked/as_mut_unchecked<br/>并把论证移进文档注释]
+    Q1 -->|嵌套 #[cfg]/cfg_if crate| A3[cfg_select! 重写多分支选择；<br/>依赖 cfg_if 的 crate 可保留，无强制]
+    Q1 -->|自定义 target JSON 构建| A4[必改：stable 已移除该能力，<br/>迁 nightly -Z unstable-options 或改用 tier-2 目标]
+    Q1 -->|push().then(index_mut) 两段式| A5[替换为 push_mut/insert_mut 原地构造；<br/>注意返回借用会锁住容器（见反例）]
+```
+
+**判定树自检反例**（rustc 1.99.0 实测，对应叶子 A5）：`push_mut` 返回的 `&mut` 借用存活期间，容器不可再被可变借用：
+
+```rust,compile_fail
+fn main() {
+    let mut v = vec![1, 2];
+    let e: &mut i32 = v.push_mut(3); // 1.95 稳定 API：插入即得 &mut
+    v.push(4);                       // ❌ E0499：&mut v 已被 e 占用
+    *e += 1;
+}
+```
+
+实测错误：`error[E0499]: cannot borrow 'v' as mutable more than once at a time`。
+
+**修正**（编译通过）：先结束插入借用的作用域，或改用两段式：
+
+```rust
+fn main() {
+    let mut v = vec![1, 2];
+    {
+        let e: &mut i32 = v.push_mut(3);
+        *e += 10; // 13
+    } // 借用在此结束
+    v.push(4);
+    assert_eq!(v, [1, 2, 13, 4]);
+}
+```
+
 ---
 
 ## 4. Const 上下文新稳定 API

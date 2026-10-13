@@ -166,6 +166,8 @@ pub fn name_in_rust() {}
 > **权威来源**:
 > [Rust Reference — Application Binary Interface](https://doc.rust-lang.org/reference/items/external-blocks.html#abi) ·
 > [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/) ·
+> [System V AMD64 ABI](https://gitlab.com/x86-psABIs/x86-64-ABI) ·
+> [AAPCS64 — Arm64 Procedure Call Standard (IHI0042)](https://developer.arm.com/documentation/ihi0042/latest/) ·
 > [Pierce — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) ·
 > [Jung et al. — RustBelt: Securing the Foundations of Rust](https://plv.mpi-sws.org/rustbelt/popl18/) ·
 > [TRPL](https://doc.rust-lang.org/book/title-page.html) ·

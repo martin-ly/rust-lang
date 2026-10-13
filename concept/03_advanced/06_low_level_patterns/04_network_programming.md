@@ -35,6 +35,9 @@
 > [RFC 2394 — async/await](https://rust-lang.github.io/rfcs//2394-async_await.html) ·
 > [RFC 793 — TCP](https://tools.ietf.org/html/rfc793) ·
 > [RFC 768 — UDP](https://tools.ietf.org/html/rfc768) ·
+> [RFC 9112 — HTTP/1.1](https://datatracker.ietf.org/doc/html/rfc9112) ·
+> [RFC 9000 — QUIC](https://datatracker.ietf.org/doc/html/rfc9000) ·
+> [RFC 8446 — TLS 1.3](https://datatracker.ietf.org/doc/html/rfc8446) ·
 > [Linux socket man pages](https://man7.org/linux/man-pages/man2/socket.2.html) ·
 > [mio crate](https://docs.rs/mio/latest/mio/) ·
 > [AFIT（async fn in trait，Rust 1.75.0+ 稳定） crate](https://docs.rs/async-trait/latest/async_trait/) ·
@@ -775,7 +778,7 @@ graph LR
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Tokio Documentation](https://tokio.rs/) · [IETF RFC 793 — TCP](https://tools.ietf.org/html/rfc793) · [IETF RFC 768 — UDP](https://tools.ietf.org/html/rfc768)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html), [Tokio Documentation](https://tokio.rs/) · [IETF RFC 793 — TCP](https://tools.ietf.org/html/rfc793) · [IETF RFC 768 — UDP](https://tools.ietf.org/html/rfc768) · [IETF RFC 9112 — HTTP/1.1](https://datatracker.ietf.org/doc/html/rfc9112) · [IETF RFC 9000 — QUIC](https://datatracker.ietf.org/doc/html/rfc9000) · [IETF RFC 8446 — TLS 1.3](https://datatracker.ietf.org/doc/html/rfc8446)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/05_international_authority_index.md)
 

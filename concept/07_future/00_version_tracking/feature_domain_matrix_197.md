@@ -272,6 +272,51 @@ flowchart LR
 
 > 判定依据：反查矩阵的价值在于**定位**和**关联**，不在于**解释**。任何把符号当成完整语义保障的推断都是误读。
 
+## 6a. 单特性迁移判定树（给定 1.97 特性，是否影响你的代码？）
+
+> 与 §1 反查矩阵互补：矩阵回答"特性→领域"，本树回答"特性→**你的仓库**是否需要动作"。判定叶子全部给迁移动作，不给 `[[见…]]`。权威源：[Rust 1.97.0 Release Blog](https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/) · [releases.rs 1.97.0](https://releases.rs/docs/1.97.0/)。
+
+```mermaid
+flowchart TD
+    Q0{该特性出现在你的 CI 日志<br/>或代码审查清单中？} -->|否| N0[无需动作<br/>矩阵 ○/✗ 行]
+    Q0 -->|是| Q1{属于哪类？}
+    Q1 -->|诊断类 #3 #11 #23 #25 #27<br/>新 warning| Q2{warning 出现在你的代码？}
+    Q2 -->|否| N1[仅记录：升级后跑一次<br/>cargo build 确认零命中]
+    Q2 -->|是| A1[按 lint 名修复；<br/>临时可用 lint 级别降级<br/>但禁止对 #23/#25 长期 allow]
+    Q1 -->|硬错误类 #22 #28 #29 #31<br/>属性/路径校验| A2[必改：空 export_name、非法<br/>link_section/link_name、泛型路径段<br/>在 1.97 直接编译失败]
+    Q1 -->|语义类 #21 pin! #30 enum 编码| Q3{代码依赖旧语义？}
+    Q3 -->|pin!(&mut x) 曾 coerce 成<br/>Pin<&mut T>| A3[显式写 Pin<&mut &mut T><br/>或 pin!(x) 而非 pin!(&mut x)]
+    Q3 -->|对 enum 做 transmute/<br/>二进制序列化| A4[必改：不得依赖判别式编码；<br/>改用显式 tag 或 bytemuck 有布局保证的类型]
+    Q3 -->|否| N2[无需动作]
+    Q1 -->|能力类 #1 #12 #13 #15 #16-#19<br/>新 API/目标/Cargo| Q4{你的目标/工作流用到该能力？}
+    Q4 -->|是| A5[采用新能力：v0 demangle 工具链更新、<br/>cfg(target_has_atomic_primitive_alignment)<br/>门控、resolver.lockfile-path 配置]
+    Q4 -->|否| N3[可选：不采用无成本]
+```
+
+**判定树自检反例**（rustc 1.99.0 实测，对应叶子 A3）：`pin!(&mut x)` 在 1.97 起不再 deref coerce，旧写法直接编译失败：
+
+```rust,compile_fail
+use std::pin::pin;
+fn main() {
+    let mut x = 1i32;
+    let p: std::pin::Pin<&mut i32> = pin!(&mut x); // ❌ E0308：1.97 起得到 Pin<&mut &mut i32>
+    let _ = p;
+}
+```
+
+**修正**（编译通过）：
+
+```rust
+use std::pin::pin;
+fn main() {
+    let mut x = 1i32;
+    let p: std::pin::Pin<&mut &mut i32> = pin!(&mut x); // 显式接受双层引用
+    let _ = p;
+}
+```
+
+> 来源：[Rust 1.97.0 Release Blog — `pin!` no longer performs deref coercions](https://blog.rust-lang.org/2026/07/09/Rust-1.97.0/)；反例/修正均在 rustc 1.99.0（edition 2024）实测。
+
 ## 7. 范围与边界声明
 
 - 本矩阵覆盖 Rust **1.97.0 stable** 的 **31** 项特性（编号严格对齐 `reports/RUST_197_CONTENT_GAP_ANALYSIS_2026_07_11.md` §2）；Rustdoc（#20）不在 9 域口径内，归入 Cargo 间接，不单独成域。

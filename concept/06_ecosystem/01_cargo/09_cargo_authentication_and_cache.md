@@ -225,6 +225,55 @@ rustc-wrapper = "sccache"
 
 ---
 
+## 知识表征：credential provider 决策树与 provider 属性矩阵
+
+> 依据 [Cargo Book — Registry Authentication](https://doc.rust-lang.org/cargo/reference/registry-authentication.html) 与 [Cargo Book — Credential Provider Protocol](https://doc.rust-lang.org/cargo/reference/credential-provider-protocol.html)，cargo 1.99.0 对齐。
+
+### 决策树：token 该存在哪里？
+
+```text
+需要向 registry 提供 token？
+├─ 开发者本机，追求安全 → 平台密钥环 provider
+│    ├─ Windows → cargo:wincred（存为 "cargo-registry:<index-url>"）
+│    ├─ macOS   → cargo:macos-keychain
+│    └─ Linux   → cargo:libsecret（GNOME Keyring / KDE Wallet / KeePassXC）
+├─ CI/CD 流水线 → 环境变量 CARGO_REGISTRY_TOKEN / CARGO_REGISTRIES_<NAME>_TOKEN
+│    ⚠ 前提：global-credential-providers 必须包含 "cargo:token"，
+│      否则 *_TOKEN 环境变量被忽略（Cargo Book 明确此约束）
+├─ 企业统一密钥管理 → 外部插件 provider（如 cargo-credential-1password）
+│    或 cargo:token-from-stdout <cmd>（子进程 stdout 返回 token）
+│    ⚠ token-from-stdout 不支持 cargo login / cargo logout（会直接报错）
+└─ 临时/教学/无密钥环环境 → cargo:token（明文 credentials.toml，兼容性最好）
+```
+
+### 属性矩阵：内置 provider 能力对比
+
+| Provider | 存储位置 | 明文落盘 | 支持 `*_TOKEN` 环境变量 | 支持 `cargo login`/`logout` | 平台 |
+|:---|:---|:---:|:---:|:---:|:---|
+| `cargo:token` | `credentials.toml` | ✅ 明文 | ✅（唯一支持） | ✅ | 全平台 |
+| `cargo:wincred` | Windows Credential Manager | ❌ | ❌ | ✅ | Windows |
+| `cargo:macos-keychain` | macOS Keychain | ❌ | ❌ | ✅ | macOS |
+| `cargo:libsecret` | libsecret 后端（GNOME/KDE/KeePassXC） | ❌ | ❌ | ✅ | Linux |
+| `cargo:token-from-stdout <cmd>` | 不落盘（子进程 stdout） | ❌ | ❌ | ❌ 报错 | 全平台 |
+| 外部插件（如 `cargo-credential-1password`） | 由插件决定 | 由插件决定 | ❌ | 由插件决定 | 全平台 |
+
+> **优先级陷阱**：`global-credential-providers` 列表中**越靠后的 provider 优先级越高**（Cargo Book 原文：later entries have higher precedence）。官方推荐顺序 `["cargo:token", "cargo:libsecret", "cargo:macos-keychain", "cargo:wincred"]` 把系统密钥环放在后面，`cargo:token` 只作兜底——若把 `cargo:token` 写到最后，会退化成明文存储。
+
+### 缓存层决策树：哪一层缓存该进 CI？
+
+```text
+构建慢，要加缓存？
+├─ 同一工作区重复构建 → target/ 增量缓存（须连 .d 指纹文件一起缓存，否则失效）
+├─ 多工作区 / 多分支共享编译结果 → RUSTC_WRAPPER=sccache（rustc-wrapper 配置）
+├─ 避免重复下载 crate 源码 → 缓存 $CARGO_HOME/registry/{cache,index,src}
+├─ 多 workspace 共享同一份编译产物 → CARGO_TARGET_DIR 指向共享目录
+└─ 想把大体积中间产物放快盘 → build.build-dir / CARGO_BUILD_BUILD_DIR（与 target dir 分离）
+```
+
+> **来源**: [Cargo Book — Registry Authentication（Built-in providers / Recommended configuration）](https://doc.rust-lang.org/cargo/reference/registry-authentication.html) · [Cargo Book — Config: registry.global-credential-providers](https://doc.rust-lang.org/cargo/reference/config.html#registryglobal-credential-providers) · [Cargo Book — Cargo Home](https://doc.rust-lang.org/cargo/guide/cargo-home.html) · [Cargo Book — Build Cache](https://doc.rust-lang.org/cargo/reference/build-cache.html)
+
+---
+
 ## 嵌入式测验
 
 「嵌入式测验」涉及测验 1：为什么认证 registry 必须配置 credential…、测验 2：`cargo:token` provider 有什么安全注意…、测验 3：`CARGO_REGISTRIES_<NAME>_TOKEN…与测验 4：`sccache` 与普通 Cargo 缓存有什么区别？，本节逐一说明其要点。

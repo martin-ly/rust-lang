@@ -177,6 +177,54 @@ Bootstrap 支持三种工具构建模式：
 
 ---
 
+## 知识表征：stage 选择决策树与 stage 属性矩阵
+
+> 依据 [Rustc Dev Guide — Bootstrapping](https://rustc-dev-guide.rust-lang.org/building/bootstrapping/what-bootstrapping-does.html) 与本机 rustc 1.99.0 实测整理。
+
+### 决策树：改 rustc 时该构建/测试到哪一层？
+
+```text
+你在 rustc 仓库里要做什么？
+├─ 只改文档/注释/格式 → ./x check（类型检查，不产二进制）
+├─ 改编译器代码，日常迭代
+│    ├─ 先验证类型 → ./x check compiler
+│    └─ 跑 UI 测试 → ./x test tests/ui（用 stage1 编译器）
+├─ 改标准库 → ./x build library（stage1 std，最快反馈）
+├─ 验证“新编译器能编译自己”（一致性）→ ./x build --stage 2 rustc
+└─ 发布前全量验证 → ./x test --stage 2（含 stage3 一致性检查的 CI 配置）
+```
+
+### 属性矩阵：各 stage 的来源、产物与用途
+
+| Stage | 编译器来源 | 编译的 std 来源 | 用途 | 典型命令 |
+|:---|:---|:---|:---|:---|
+| Stage 0 | rustup 下载的 beta（预编译） | 预编译 | 仅引导，不用于开发 | （自动下载） |
+| Stage 1 | stage0 编译当前源码 | 当前源码 | 日常开发、跑测试 | `./x build library` |
+| Stage 2 | stage1 编译当前源码 | stage1 构建的 std | 发布候选 | `./x build --stage 2 rustc` |
+| Stage 3 | stage2 再编译一次 | — | 一致性（Coherence）验证：stage2 与 stage1 输出应逐字节一致 | CI 专用 |
+
+### 反例组：`RUSTC_BOOTSTRAP` 的真实效果（本机 rustc 1.99.0 stable 实测）
+
+**反例**：stable 工具链上使用 unstable feature 直接失败（预期 E0554）：
+
+```rust,compile_fail,E0554
+#![feature(never_type)]
+pub fn f(x: !) -> ! { x }
+```
+
+**实测错误**：`error[E0554]: \`#![feature]\` may not be used on the stable release channel`。
+
+**`RUSTC_BOOTSTRAP=1` 解锁效果**（实测：同一文件在 stable + `RUSTC_BOOTSTRAP=1` 下编译通过）——这正是自举期间 stage0 缺新特性时的逃生门，也是它危险的原因：它让 stable 用户悄悄依赖未稳定语义，rustc 升级即可能破坏：
+
+```bash
+# 仅 rustc 自举合法使用；普通项目使用即破坏稳定性保证
+RUSTC_BOOTSTRAP=1 rustc --edition 2024 --crate-type lib probe.rs   # 实测 exit 0
+```
+
+> **来源**: [Rustc Dev Guide — What Bootstrapping does](https://rustc-dev-guide.rust-lang.org/building/bootstrapping/what-bootstrapping-does.html) · [Rustc Dev Guide — cfg(bootstrap) in dependencies](https://rustc-dev-guide.rust-lang.org/building/bootstrapping/what-bootstrapping-does.html#cfgbootstrap-in-dependencies) · [Rustc Dev Guide — Writing tools](https://rustc-dev-guide.rust-lang.org/building/bootstrapping.html)
+
+---
+
 ## 嵌入式测验
 
 本节将「嵌入式测验」分解为若干主题：测验 1：日常 rustc 开发通常需要构建到哪个 stage？、测验 2：Stage 2 编译器与 Stage 1 编译器的主要区别是…、测验 3：`cfg(bootstrap)` 的典型用途是什么？与测验 4：为什么普通项目不应该设置 `RUSTC_BOOTSTRAP=…。

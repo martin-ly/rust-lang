@@ -94,6 +94,22 @@ let x = match condition {
 
 ## 五、迁移策略
 
+### 5.0 判定树：这个 crate 该不该迁到 Edition 2024？
+
+> 权威源：[Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) · [cargo fix --edition](https://doc.rust-lang.org/cargo/commands/cargo-fix.html)。判定信号全部可机检。
+
+```mermaid
+flowchart TD
+    Q0{crate 当前 edition < 2024} --> Q1{在 1.99 stable 上跑<br/>cargo build 看未来兼容性 lint}
+    Q1 -->|出现 if_let_rescope /<br/>unused_imports 等 'changes meaning<br/>in Rust 2024' 警告| A1[先修警告再迁移：<br/>rustc --edition 2021 -W if_let_rescope<br/>可提前定位语义敏感点]
+    Q1 -->|零警告| Q2{依赖树里有 C ABI/<br/>unsafe/FFI 关键代码？}
+    Q2 -->|有| A2[迁移前跑 Miri + 目标平台回归：<br/>Edition 2024 的临时作用域收窄<br/>只改 drop 次序，不报编译错误]
+    Q2 -->|无| A3[cargo fix --edition 自动迁移<br/>+ edition = \"2024\"，CI 全绿即完成]
+    A1 --> A4[修复后回到 Q1 复跑；<br/>禁止用 allow 掩盖 if_let_rescope]
+```
+
+**判定树自检**（rustc 1.99.0 实测）：`rustc --edition 2021 -W if_let_rescope` 对 Edition Guide 官方 RwLock 例发出 `` `if let` assigns a shorter lifetime since Edition 2024 ``——即 Q1 的警告信号真实存在，可在迁移前机检定位；而同一代码在 `--edition 2024` 下静默通过且修复死锁（详见 02_edition_guide.md §2.4.1 实测）。
+
 从 2021 Edition 迁移到 2024 Edition 的推荐流程：
 
 ```bash

@@ -132,6 +132,46 @@ SME 在 SVE 基础上增加**二维可伸缩矩阵运算**：
 | `sve_zeroinitializer` | 🔧 开发中 | #157110，2026-05-29 新提出 |
 | SME / Streaming SVE | 🔴 未开始 | 无公开 RFC 或 tracking issue |
 
+### 2.6 判定树 + 可编译示例：今天能在 Rust 里写 SVE 代码吗？
+
+> 权威源：[Tracking Issue #145052](https://github.com/rust-lang/rust/issues/145052) · [RFC #3838](https://github.com/rust-lang/rfcs/pull/3838) · [std::arch 文档](https://doc.rust-lang.org/std/arch/)。
+
+```mermaid
+flowchart TD
+    Q0{想用 SVE 加速代码} --> Q1{目标硬件是 aarch64<br/>且带 SVE？（Graviton3+/Apple M4+<br/>部分服务器 ARM）}
+    Q1 -->|否| N0[不可用：x86 上 SVE intrinsic<br/>无法运行（见本页反例）]
+    Q1 -->|是| Q2{接受 nightly 工具链？}
+    Q2 -->|否| A1[今天不可用：SVE intrinsics 全部<br/>在 #![feature(stdarch_aarch64_sve)] 之后，<br/>stable 无入口；退到 NEON（stable）]
+    Q2 -->|是| Q3{需要可移植的向量长度？}
+    Q3 -->|是| A2[用 whilelt 谓词 + svcntb 步进写<br/>VL-agnostic 循环（见下例）；<br/>禁止硬编码 128/256 位]
+    Q3 -->|否| A3[直接 intrinsic 组合；<br/>注意 API 随 RFC #3838 定稿可能变]
+```
+
+**判定树自检示例**（nightly 1.101.0 实测：`rustc +nightly --edition 2024 --target aarch64-unknown-linux-gnu --crate-type lib` 编译零错误零警告，对应叶子 A2）——VL-agnostic 点积，谓词处理尾部不足一个向量的元素，步进用运行时 `svcntb()` 而非编译期常量：
+
+```rust,ignore
+#![feature(stdarch_aarch64_sve)]
+use std::arch::aarch64::*;
+
+#[target_feature(enable = "sve")]
+pub unsafe fn dot_vl(a: *const f32, b: *const f32, n: usize) -> f32 {
+    unsafe {
+        let mut acc = svdup_n_f32(0.0);
+        let mut i = 0usize;
+        while i < n {
+            let pred = svwhilelt_b32_u32(i as u32, n as u32); // 尾部谓词：不足一整向量时自动掩蔽
+            let va = svld1_f32(pred, a.add(i));
+            let vb = svld1_f32(pred, b.add(i));
+            acc = svmla_f32_m(pred, acc, va, vb);
+            i += (svcntb() / 4) as usize; // svcntb(): 当前硬件 VL 字节数，运行时值
+        }
+        svaddv_f32(svptrue_b32(), acc)
+    }
+}
+```
+
+> 该例同时演示 SVE 与固定宽度 ISA（NEON/AVX）的本质区别：`svwhilelt` 谓词与 `svcntb()` 步进让同一份二进制在 128–2048 位任意 VL 上正确运行——这正是 §3.1 "类型大小是编译期常量" 冲突的运行时解法。`rust,ignore` 标注仅因本机为 x86_64，无法执行 aarch64 目标码；编译验证已在 aarch64-unknown-linux-gnu 目标完成。
+
 ---
 
 ## 三、技术挑战

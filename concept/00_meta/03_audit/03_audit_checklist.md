@@ -476,7 +476,7 @@ python scripts/cross_concept_diff.py
 |:---|:---|
 | “Rust 没有运行时” | 说明 Rust 的零成本抽象与特定运行时（如 async executor）的区别 |
 | “C++ 不安全” | 区分 C++ 的未定义行为类别与 Rust 的所有权检查 |
-| 大量 `LINK_PLACEHOLDER` | 替换为真实链接或纯文本 |
+| 大量 `LINK_PLACEHOLDER` | 替换为真实链接或纯文本（本项目已按 [PLACEHOLDER_CLEANUP_R1A 报告](../../../reports/PLACEHOLDER_CLEANUP_R1A_2026_07_14.md) 与 [Gap Closure Index §6.2](../04_navigation/13_foundations_gap_closure_index.md) 完成收敛，死链 0） |
 
 ---
 

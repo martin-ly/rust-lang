@@ -182,6 +182,88 @@ mod example {
 
 ---
 
+## 知识表征：prelude 选择决策树与属性矩阵
+
+> 依据 [Rust Reference — Preludes](https://doc.rust-lang.org/reference/names/preludes.html) 与 rustc 1.99.0（Edition 2024）实测整理。
+
+### 决策树：该用哪种 prelude 配置？
+
+```text
+你的 crate 运行在哪里、需要多大依赖面？
+├─ 常规应用/库（有 OS、可用 std）
+│    → 默认：std::prelude::rust_2024 自动注入，无需任何属性
+├─ 嵌入式裸机 / 内核 / 无 OS
+│    → crate root 加 #![no_std]（prelude 切换为 core::prelude::rust_2024）
+│    ├─ 需要 Box/Vec/Rc/Arc 等堆分配？ → extern crate alloc; use alloc::vec::Vec;
+│    └─ 需要 String？ → core 无 String，改用 alloc::string::String 或 &str
+├─ 宏生成代码 / 教学 / 极致显式命名空间控制
+│    → #![no_implicit_prelude]（或模块级），全部路径写 ::core::/::std:: 全限定
+└─ 2015 Edition 遗留代码引用外部 crate 失败
+     → 升级 Edition 2018+ 后删除 extern crate，直接 use foo::bar;
+```
+
+### 属性矩阵：各 prelude 在关键配置下的可用性（rustc 1.99.0 实测）
+
+| 名字 / 路径 | 默认 (Edition 2024) | `#![no_std]` | `#![no_implicit_prelude]` | 语言 prelude 兜底 |
+|:---|:---:|:---:|:---:|:---:|
+| `Option` / `Some` | ✅ `std::prelude` | ✅ `core::prelude` | ❌ E0425 | ❌ |
+| `Vec` | ✅ | ✅（core prelude 含 `Vec`） | ❌ E0425 | ❌ |
+| `Box` | ✅ | ❌ E0425/E0433（须 `extern crate alloc`） | ❌ | ❌ |
+| `i32` / `bool` / `str` | ✅ | ✅ | ✅ | ✅（始终保留） |
+| `std::` 路径（未 use） | ✅ extern prelude | ✅ extern prelude | ❌ E0433 | ❌ |
+| `println!`（写全限定 `::std::println!`） | ✅ | ❌（无 std） | ✅（全限定可调用） | ❌ |
+
+### 反例组（rustc 1.99.0，`--edition 2024` 实测）
+
+**反例 A**：`#![no_std]` 后 `Box` 不在 core prelude（预期 E0425 + E0433）：
+
+```rust,compile_fail,E0425
+#![no_std]
+pub fn f() -> Box<u8> { Box::new(1) }
+```
+
+**修正 A**：显式引入 `alloc`（[Rust Reference — `no_std`](https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute)）：
+
+```rust
+#![no_std]
+extern crate alloc;
+use alloc::boxed::Box;
+pub fn f() -> Box<u8> { Box::new(1) }
+```
+
+**反例 B**：`#![no_implicit_prelude]` 连 `Option`/`Some` 都不可用（预期 E0425）：
+
+```rust,compile_fail,E0425
+#![no_implicit_prelude]
+pub fn f() -> Option<u8> { Some(1) }
+```
+
+**修正 B**：全限定路径 + 语言 prelude 类型不受影响（可编译）：
+
+```rust
+#![no_implicit_prelude]
+pub fn f() -> ::core::option::Option<u8> { ::core::option::Option::Some(1) }
+pub fn g(x: i32) -> bool { x > 0 } // i32/bool 属语言 prelude，始终可用
+```
+
+**反例 C**：`#![no_implicit_prelude]` 同时移除 extern prelude，裸 `std::` 路径失效（预期 E0433）：
+
+```rust,compile_fail,E0433
+#![no_implicit_prelude]
+pub fn f() { std::process::exit(0); }
+```
+
+**修正 C**：写 `::std::` 全局路径（可编译）：
+
+```rust
+#![no_implicit_prelude]
+pub fn f() { ::std::process::exit(0); }
+```
+
+> **来源**: [Rust Reference — Preludes](https://doc.rust-lang.org/reference/names/preludes.html) · [std::prelude 模块文档](https://doc.rust-lang.org/std/prelude/index.html) · [core::prelude 模块文档](https://doc.rust-lang.org/core/prelude/index.html)
+
+---
+
 ## 八、实践建议
 
 1. **大多数代码不需要关注 prelude**：日常 Rust 代码依赖 `std::prelude` 自动导入的常用类型（`Option`、`Result`、`Vec`、`String` 等）。

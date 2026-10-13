@@ -620,9 +620,9 @@ classDiagram
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Unicode Standard](https://unicode.org/versions/latest/) · [Unicode TR31 — Identifier and Pattern Syntax](https://unicode.org/reports/tr31/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html), [The Rust Programming Language](https://doc.rust-lang.org/book/ch08-02-strings.html), [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Unicode Standard](https://unicode.org/versions/latest/) · [Unicode Standard 16.0](https://www.unicode.org/versions/Unicode16.0.0/) · [Unicode TR15 — Normalization (UTS#15)](https://www.unicode.org/reports/tr15/) · [Unicode TR29 — Text Segmentation (UTS#29)](https://www.unicode.org/reports/tr29/) · [Unicode TR31 — Identifier and Pattern Syntax](https://unicode.org/reports/tr31/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/05_international_authority_index.md)
+> **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 9](../../00_meta/02_sources/05_international_authority_index.md) · 2026-10-13 P2 国际标准引用补全（Unicode 16.0 / UTS#15）
 
 **文档版本**: 1.0
 **最后更新**: 2026-05-22

@@ -94,17 +94,19 @@
 
 ### 6.1 SUMMARY.md 占位文件 ✅ 已解决
 
-`concept/SUMMARY.md` 中的 22 个 `LINK_PLACEHOLDER` 条目已替换为 `00_meta/placeholders/placeholder-N.md`。
+`concept/SUMMARY.md` 中的 22 个导航占位条目已替换为占位文件，占位文件后续已进一步替换为真实 concept 页面。
 
 - **解决方案**: 创建了 22 个占位文件，保留导航结构，同时使 `mdbook build` 成功通过。
-- **状态**: 占位文件保留待创建主题的标题和说明，未来可逐步替换为真实内容。
+- **状态**: ✅ 已清零。2026-10-13 复测：`concept/SUMMARY.md` 中占位条目 0、占位文件引用 0；现行导航结构见 [SUMMARY](../../SUMMARY.md)。
+- **勘误**: 原述 `00_meta/placeholders/placeholder-N.md` 已不存在，该路径不再作为目标。
 
-### 6.2 内容文件中的 LINK_PLACEHOLDER
+### 6.2 内容文件中的链接占位
 
-除 `SUMMARY.md` 外，`concept/` 其他 Markdown 文件中仍有约 688 个 `LINK_PLACEHOLDER` 链接（分布在 212 个文件中）。这些链接指向尚未创建的 concept 文件或外部资源。
+除 `SUMMARY.md` 外，`concept/` 其他 Markdown 文件中曾有约 688 个链接占位（分布在 212 个文件中），指向尚未创建的 concept 文件或外部资源。
 
 - **影响**: 不影响 `mdbook build`（mdbook 只检查 `SUMMARY.md` 中的文件路径），但会降低内容导航体验。
-- **建议**: 作为长期工程债务，分批替换为真实文件路径或移除链接。
+- **状态**: ✅ 基本清零。2026-10-13 复测：`concept/` 下残留占位字样仅 5 处（本页 4 处 + [Audit Checklist](../03_audit/03_audit_checklist.md) 1 处），均为对本遗留问题的**描述性文字**而非可点击链接；`scripts/kb_auditor.py --link-check` 死链 0。
+- **勘误**: 原「约 688 个」为 2026-07 快照数字，经 PLACEHOLDER_CLEANUP_R1A（见 [清理报告](../../../reports/PLACEHOLDER_CLEANUP_R1A_2026_07_14.md)）等批次后已收敛至上述 5 处描述性残留。
 
 ### 6.2 自动双语标注残留
 
@@ -118,7 +120,7 @@
 
 ## 七、下一步建议
 
-1. **处理 SUMMARY.md 占位文件**：决定是为每个 LINK_PLACEHOLDER 创建文件，还是重构为纯文本列表。
+1. **处理 SUMMARY.md 占位文件**：✅ 已完成——占位条目已全部替换为真实 concept 页面（见 §6.1 勘误），无需再创建占位文件。
 2. **模板去同质化**：为 23 个形式化模式文件设计差异化结构（L4 证明导向 / L6 工程导向 / L7 前沿导向）。
 3. **反向链接增强**：在已有概念文件中添加指向新创建基座/对比文件的交叉引用。
 4. **练习与测验**：为新创建的文件设计配套测验，纳入 `exercises/` 或 `concept/XX_quiz_*.md`。

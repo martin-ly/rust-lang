@@ -201,6 +201,40 @@ my-crate = { version = "1.2", registry = "internal", git = "https://github.com/m
 - `avr` 目标 `c_double` 调整为 `f32`。
 - 最低外部 LLVM 版本为 21。
 
+### 4.1 判定树：1.96 变更是否影响你的代码？
+
+> 权威源：[Rust 1.96.0 Release Blog](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/) · [releases.rs 1.96.0](https://releases.rs/docs/1.96.0/) · [RFC 3550](https://github.com/rust-lang/rfcs/pull/3550)。叶子全部给可执行动作。
+
+```mermaid
+flowchart TD
+    Q0{你的代码/CI 触及 1.96 变更面？} -->|否| N0[常规升级，无动作]
+    Q0 -->|是| Q1{哪一类？}
+    Q1 -->|手写 assert!(matches!(..))| A1[替换为 assert_matches!；<br/>需 use std::assert_matches 显式导入]
+    Q1 -->|Range 类型被 move 后复用<br/>触发 clone| A2[改用 std::range::Range（Copy）；<br/>注意字面量 1..5 仍是 std::ops::Range，<br/>需 Range::from 转换]
+    Q1 -->|unsafe 代码自证指针有效性| A3[重读 1.96 'valid for read/write' 定义：<br/>默认排除 null，各方法单独声明例外]
+    Q1 -->|Wasm 链接报 undefined symbol| A4[必改：不再默认 --allow-undefined，<br/>显式声明导入或修链接脚本]
+    Q1 -->|avr 上依赖 c_double=f64| A5[必改：avr c_double 现为 f32，<br/>审计 FFI 结构体布局]
+    Q1 -->|[patch]+私有 registry 混用| A6[验证 git+registry 共存新解析规则；<br/>并尽快升级拿 CVE-2026-5222/5223 修复]
+```
+
+**判定树自检示例**（rustc 1.99.0 实测编译并运行通过，对应叶子 A2）：`std::range::Range` 实现 `Copy`，同一值可两次消费而无需 `clone`；同时暴露关键边界——字面量 `1..5` 的类型仍是 `std::ops::Range`，必须经 `From` 转换：
+
+```rust
+use std::range::Range;
+
+fn sum_twice(r: Range<usize>) -> usize {
+    // core::range::Range 实现 Copy：两次 into_iter 消费同一值，无需 clone
+    r.into_iter().sum::<usize>() + r.into_iter().sum::<usize>()
+}
+
+fn main() {
+    let r: Range<usize> = Range::from(1..5); // 字面量是 std::ops::Range，需 From 转换
+    assert_eq!(sum_twice(r), 20); // (1+2+3+4) * 2
+}
+```
+
+> 若直接写 `sum_twice(1..5)`，rustc 1.99.0 报 `error[E0308]: expected std::range::Range<usize>, found std::ops::Range<usize>`——两个 `Range` 是不同类型，这是 1.96 范围类型迁移中最常见的踩坑点。
+
 ---
 
 ## 5. 练习与验证

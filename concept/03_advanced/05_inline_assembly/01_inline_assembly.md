@@ -949,6 +949,7 @@ unsafe {
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
 
 - **P2 生态/社区**: [docs.rs/libc — 生态权威 API 文档](https://docs.rs/libc) · [docs.rs/nix — 生态权威 API 文档](https://docs.rs/nix)
+- **P2 国际标准**: [Intel 64 and IA-32 Architectures Software Developer Manuals](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html) · [ARM Architecture Reference Manual (ARM ARM, DDI 0487)](https://developer.arm.com/documentation/ddi0487/latest/)
 
 ## ⚠️ 反例与陷阱
 

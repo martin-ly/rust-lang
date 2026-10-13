@@ -274,6 +274,85 @@ criterion_main!(benches);
 
 ---
 
+## 知识表征：集合操作复杂度矩阵与算法选型决策树
+
+> 依据 [Rust std 文档 — Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html)、[BTreeMap](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html)、[HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html) 与 rustc 1.99.0（Edition 2024）实测整理。
+
+### 属性矩阵：std 集合关键操作的保证复杂度（std 文档明示的保证）
+
+| 操作 | `Vec` | `BTreeMap`/`BTreeSet` | `HashMap`/`HashSet`（std） | `BinaryHeap` |
+|:---|:---|:---|:---|:---|
+| 随机访问 `v[i]` | **O(1)** | — | — | — |
+| 尾部 push | **摊销 O(1)**（文档明示 amortized） | — | — | 摊销 O(log n) |
+| 中间 `insert(i, x)` | **O(n)**（搬移后续元素） | — | — | — |
+| 查找 | 线性 O(n)（`iter().find`） | **O(log n)** | 平均 **O(1)**、最坏 O(n) | — |
+| 有序遍历 | 需先 `sort_unstable` O(n log n) | **天然有序**，遍历 O(n) | 无序 | 弹出序 O(n log n) |
+| 去重语义 | 手动 `sort + dedup` | key 天然唯一 | key 天然唯一（需 `Hash + Eq`） | — |
+| 迭代器稳定性 | push 使旧迭代器失效（realloc） | 结构修改安全 | 结构修改安全 | — |
+
+### 决策树：这段代码该选哪个容器/算法？
+
+```text
+需要按 key 检索数据？
+├─ key 是整数小范围（0..n）？ → Vec 直接索引，O(1) 且缓存友好
+├─ key 需要有序遍历 / 范围查询（区间树、前驱后继）？
+│    → BTreeMap：O(log n) 保证，无哈希碰撞退化
+├─ key 只需等值查找、追求平均 O(1)？
+│    → HashMap（默认 SipHash-1-3，抗 HashDoS；
+│      性能敏感且 key 可信时换 FxHashMap 等第三方 hasher）
+├─ 只要"当前最小/最大"反复取？ → BinaryHeap（push/pop O(log n)）
+└─ 一次性查询、数据量小（< ~100）？
+     → Vec + 线性扫描往往比任何 map 都快（常数因子主导）
+```
+
+### 反例组（rustc 1.99.0，`--edition 2024` 实测）
+
+**反例**：写"原地"算法时忽略借用规则——边遍历边修改同一容器（预期 E0502）：
+
+```rust,compile_fail,E0502
+fn main() {
+    let mut v = vec![1, 2, 3];
+    for x in &v {                      // 共享借用贯穿整个循环
+        if *x % 2 == 0 { v.push(*x); } // ❌ 循环体内可变借用同一 Vec
+    }
+}
+```
+
+**实测错误**：`error[E0502]: cannot borrow \`v\` as mutable because it is also borrowed as immutable`（rustc 还标注 `immutable borrow later used here`——借用生命周期跨迭代）。
+
+**修正**：索引式循环或先收集再合并（可编译）：
+
+```rust
+fn main() {
+    let mut v = vec![1, 2, 3];
+    let n = v.len();                   // 快照长度，避免借用冲突
+    for i in 0..n {
+        if v[i] % 2 == 0 { v.push(v[i]); } // ✅ 只借用单个元素
+    }
+    assert_eq!(v, vec![1, 2, 3, 2]);
+}
+```
+
+**复杂度陷阱实证**（可编译）：`Vec` 头部插入是 O(n)，循环 n 次构造即 O(n²)——选型矩阵第一行就该避开：
+
+```rust
+fn main() {
+    // O(n^2)：每次 insert(0, x) 搬移全部已有元素
+    let mut head_inserts = Vec::new();
+    for i in 0..100_000u64 { head_inserts.insert(0, i); }
+
+    // O(n)：尾部 push 摊销 O(1)，需要头序时最后 reverse 一次
+    let mut tail_pushes = Vec::with_capacity(100_000); // 预分配，消除 realloc
+    for i in 0..100_000u64 { tail_pushes.push(i); }
+    tail_pushes.reverse(); // O(n) 一次
+    assert_eq!(head_inserts, tail_pushes);
+}
+```
+
+> **来源**: [std::vec::Vec（push 摊销 O(1)、insert O(n) 文档明示）](https://doc.rust-lang.org/std/vec/struct.Vec.html) · [std::collections::BTreeMap（O(log n) 保证）](https://doc.rust-lang.org/std/collections/struct.BTreeMap.html) · [std::collections::HashMap（平均 O(1)）](https://doc.rust-lang.org/std/collections/struct.HashMap.html) · [std::collections::BinaryHeap](https://doc.rust-lang.org/std/collections/struct.BinaryHeap.html) · [E0502 错误解释](https://doc.rust-lang.org/error_codes/E0502.html)
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

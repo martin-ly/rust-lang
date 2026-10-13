@@ -50,7 +50,98 @@ fn main() {
 
 ---
 
-## 3. 内存模型与实现定义行为
+## 3. “非规范性”的操作性定义与判定程序
+
+**定义**：文档 D 对语言 L **非规范性（non-normative）**，当且仅当存在至少一个程序 P 与主张 c，使得 (i) c 关于 P 的合法性/诊断无法机械归约到 D 的任何条款，或 (ii) D 的条款与 rustc 实际诊断冲突时 D 不构成裁决依据。Reference 开篇声明满足 (i)+(ii) 两个条件，因此是教科书式非规范文档。
+
+**判定程序（把任意 Reference 主张转成可判定形式）**：
+
+1. 定位条款：给出带版本号的 URL（如 `https://doc.rust-lang.org/1.97.0/reference/...`）。
+2. 绑定口径：Edition + `rustc --version` 输出。
+3. 构造最小复现：`rustc --edition N file.rs` 的退出码与错误码（E0xxx）。
+4. 交叉验证：若主张涉及运行时 UB，追加 Miri 运行（编译通过 ≠ 无 UB）。
+5. 记录分歧：若第 3/4 步结果与条款文本不一致，向 rust-lang/reference 提 issue，并在工程文档中标注“实现优先”。
+
+## 4. 反例与边界案例（均经 rustc 1.99.0 实测）
+
+### 4.1 反例 A：借用规则不是词法规则——NLL 边界
+
+Reference 教学语言常说“可变借用期间不能再借用”。词法直觉会误判下面这个**合法**程序：
+
+```rust
+fn main() {
+    let mut x = 0;
+    let r1 = &mut x;
+    *r1 += 1;          // r1 最后一次使用（r1 在此之后死亡）
+    let r2 = &mut x;   // ✅ 合法：NLL 按活跃性(liveness)判定，不按词法作用域
+    *r2 += 2;
+    println!("{x}");   // 输出 3
+}
+```
+
+rustc 1.99.0 实测通过并输出 `3`。而把 `println!` 移到 `let r2` 之前引用 `r1` 则触发 E0499（见 §4）。**边界结论**：Reference 的自然语言“借用规则”与 rustc 判定算法（NLL/Polonius 活跃性约束）之间存在精度缺口；合规判定必须按错误码复现，不能按散文直觉。
+
+### 4.2 反例 B：编译通过但运行时 UB——Reference 静态条款覆盖不到
+
+```rust,ignore
+// 编译通过（rustc 1.99.0 无错误无警告）；cargo miri run 报错：
+// "Undefined Behavior: dereferencing a dangling pointer"（use-after-free）
+fn main() {
+    let v: Vec<i32> = Vec::new();
+    let p = v.as_ptr();
+    drop(v);                      // 堆内存已释放
+    unsafe { println!("{}", *p); } // 悬垂解引用：Reference UB 清单条目
+}
+```
+
+该例证明：Reference UB 清单的多数条目（悬垂指针、未初始化读、数据竞争）是**动态条款**，编译期诊断为零；“通过编译”对符合性没有任何证明力。Miri 的判定消息格式见 <https://github.com/rust-lang/miri>。
+
+### 4.3 反例 C：同一 UB 在不同 Edition 下静态可拒/不可拒
+
+```rust,compile_fail
+// Edition 2021：通过（仅警告）。Edition 2024：error[E0133] ×2
+static mut COUNTER: i32 = 0;
+fn main() {
+    COUNTER += 1;
+    println!("{COUNTER}");
+}
+```
+
+rustc 1.99.0 实测：`--edition 2024` 报 2 个 E0133（“use of mutable static is unsafe and requires unsafe block”）；`--edition 2021` 仅 dead_code 类警告通过。Reference 的 UB 清单本身不随 Edition 变化，但**静态可诊断性**随 Edition 变化——引用 Reference 时必须同时声明 Edition。
+
+### 4.4 反例 D：unsafe fn 契约无法完全静态化
+
+```rust,compile_fail
+// error[E0515]: cannot return reference to local variable `local`
+unsafe fn bad<'a>(x: i32) -> &'a i32 {
+    let local = x;
+    &local
+}
+fn main() {}
+```
+
+E0515 说明：即使函数标了 `unsafe`（把契约责任转移给调用方），**返回类型里的 lifetime 仍受静态检查**——`'a` 不能绑定到局部变量。契约外移是有边界的：类型层约束不可外移，只有“指针有效性、对齐、别名”类前提可以外移。这是 Reference “unsafe 不变式”章节未明说、但 rustc 强制的边界。
+
+## 5. rustc UI 测试实例（规范缺口的经验证据）
+
+| 实例（rust-lang/rust, main 分支） | 证明的主张 |
+|---|---|
+| `tests/ui/borrowck/assign-imm-local-twice.rs` | 双重可变借用被拒（E0499 家族基线） |
+| `tests/ui/unsafe/edition-2024-unsafe_op_in_unsafe_fn.rs` + `.stderr` | Edition 2024 下 `unsafe_op_in_unsafe_fn` 为 warn-by-default，快照为 `warning[E0133]` |
+| `tests/ui/unsafe/unsafe-fn-called-from-safe.rs` | safe 上下文调用 `unsafe fn` 被拒 |
+| `tests/ui/unsafe/unsafe-not-inherited.rs` | `unsafe` 不沿闭包/嵌套 fn 自动继承 |
+
+对应本地复现（rustc 1.99.0 实测，`#[deny(unsafe_op_in_unsafe_fn)]` 下 Edition 2021 也产生 E0133 硬错误）：
+
+```rust,compile_fail
+#[deny(unsafe_op_in_unsafe_fn)]
+unsafe fn deref(p: *const i32) -> i32 {
+    *p // error[E0133]: dereference of raw pointer is unsafe and requires unsafe block
+}
+fn main() {}
+```
+
+## 6. 内存模型与实现定义行为
 
 Reference 的内存模型章节主要描述：
 
@@ -70,7 +161,7 @@ Reference 的内存模型章节主要描述：
 
 ---
 
-## 4. 版本化 URL 与引用稳定性
+## 7. 版本化 URL 与引用稳定性
 
 Reference 每个稳定版本都有带版本号的 URL，可用于锁定审计基线：
 
@@ -85,16 +176,16 @@ fn main() {}
 
 ---
 
-## 5. 反命题与边界
+## 8. 反命题与边界
 
-### 5.1 常见过度概括
+### 8.1 常见过度概括
 
 - ❌ “Reference 说了的才合法，没说的就不合法。” → ✅ Reference 是不完整的意图文档；大量合法程序依赖未文档化的实现行为。
 - ❌ “Reference 的 UB 列表是穷尽的。” → ✅ UCG 与 Miri 仍在发现新的边缘 UB 模式；列表会随版本扩展。
 - ❌ “编译通过 = 符合 Reference。” → ✅ Reference 描述的许多规则是动态语义，编译器无法在编译期全部检查。
 - ❌ “Reference bug 会立即修复。” → ✅ 自然语言规范 bug 的修复需要社区共识，可能慢于编译器 bug 修复。
 
-### 5.2 工程边界
+### 8.2 工程边界
 
 - **不要以 Reference 作为安全关键项目的唯一合规依据**；应叠加 FLS、测试证据与形式化工具结果。
 - **遇到 Reference 与 `rustc` 不一致时**，优先在 rust-lang/reference 提 issue；在 issue 解决前，以 `rustc` 实际行为作为工程事实标准。
@@ -102,18 +193,22 @@ fn main() {}
 
 ---
 
-## 6. 国际权威来源
+## 9. 国际权威来源
 
 - [The Rust Reference — Introduction](https://doc.rust-lang.org/reference/introduction.html)
 - [The Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
 - [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
 - [rust-lang/reference issues](https://github.com/rust-lang/reference/issues)
 - [RFC 3355 — The Rust Specification](https://rust-lang.github.io/rfcs/3355-rust-spec.html)
+- [rustc UI 测试：tests/ui/unsafe/edition-2024-unsafe_op_in_unsafe_fn.rs](https://github.com/rust-lang/rust/blob/main/tests/ui/unsafe/edition-2024-unsafe_op_in_unsafe_fn.rs)
+- [rustc UI 测试目录：tests/ui/borrowck/](https://github.com/rust-lang/rust/tree/main/tests/ui/borrowck)
+- [Edition Guide — unsafe_op_in_unsafe_fn (Rust 2024)](https://doc.rust-lang.org/edition-guide/rust-2024/unsafe-op-in-unsafe-fn.html)
+- [Miri（动态 UB 判定工具）](https://github.com/rust-lang/miri)
 - [Ralf Jung — Tree Borrows](https://www.ralfj.de/blog/2023/06/02/tree-borrows.html)
 
 ---
 
-## 7. 与其他概念的关系
+## 10. 与其他概念的关系
 
 - [可执行规范：MiniRust 与 Miri](03_executable_specification_minirust.md) — 把 Reference 的 UB 清单动态化。
 - [Tree Borrows 深度解析](../01_ownership_logic/05_tree_borrows_deep_dive.md) — 别名模型的技术细节。

@@ -149,6 +149,24 @@ pub fn example(x: String) {}
 
 ## 五、已知限制与风险
 
+### 5.1 判定树：这次改动需要 / 能被 cargo-semver-checks 拦住吗？
+
+> 权威源：[cargo-semver-checks 官方仓库](https://github.com/obi1kenobi/cargo-semver-checks) · [docs.rs API 文档](https://docs.rs/cargo-semver-checks/latest/cargo_semver_checks/)（2026-10-13 实测均 200）。本树区分"工具能判"与"工具判不了"，防止把 CI 绿灯误当 SemVer 安全证明。
+
+```mermaid
+flowchart TD
+    Q0{准备发布 patch/minor} --> Q1{改动触及公开 API 面？<br/>（pub 项/特征/泛型边界）}
+    Q1 -->|否（纯内部/私有）| N0[通常安全；仍需检查<br/>宏展开与 sealed trait 泄漏]
+    Q1 -->|是| Q2{属于哪类变更？}
+    Q2 -->|签名/类型变更| A1[cargo-semver-checks 可判<br/>（如 fn-returns-changed）；<br/>CI 跑 cargo semver-checks 拦截]
+    Q2 -->|trait 新增方法 / 移除 impl| A2[可判（trait-method-added 等）；<br/>注意下游 #[derive] 与 blanket impl 连锁]
+    Q2 -->|语义/行为变更（签名不变）| A3[工具判不了——type-checking lints<br/>正是本页 §2.1 的能力缺口；<br/>只能靠测试与 changelog 纪律]
+    Q2 -->|泛型约束放宽/收紧| A4[部分可判；收紧必破坏，<br/>放宽对多数下游安全但需实测<br/>infer 影响（见本页反例）]
+    A1 --> A5[拦截后：升主版本，或保留旧 API<br/>+ #[deprecated] 过渡]
+```
+
+**判定树自检**（rustc 1.99.0 实测，对应叶子 A1）：本页"⚠️ 反例与陷阱"的签名变更例（`parse` 从 `-> i32` 变为 `-> Result<i32, ()>`）在下游 crate 上产生 `error[E0308]`——这正是 cargo-semver-checks 在发布前（而非下游编译时）应报出的类别；叶子 A3 的反例则相反：把 `fn parse(s: &str) -> i32` 的实现从 `s.len()` 改成 `s.len() + 1`，类型面完全不变，cargo-semver-checks 全绿，下游静默拿到错误值——工具盲区只能由 §2.1 的 type-checking lints 方向补上。
+
 | 风险 | 说明 | 缓解措施 |
 |:---|:---|:---|
 | **资金可持续性** | 开源赞助不足以维持高强度开发 | 寻求重大企业资助；GSoC 补充人力 |

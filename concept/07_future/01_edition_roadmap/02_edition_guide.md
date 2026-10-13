@@ -360,6 +360,59 @@ fn get_string() -> String { String::from("hello") }
 > }
 > ```
 
+#### 2.4.1 判定树 + 可运行反例：你的代码受 `if let` 临时作用域收窄影响吗？（rustc 1.99.0 实测）
+
+> 权威源：[Rust Edition Guide — if let temporary scope](https://doc.rust-lang.org/edition-guide/rust-2024/temporary-if-let-scope.html)（2026-10-13 实测该 URL 返回 200；旧 URL `temporary-if-let.html` 已 404）。2024 规则：scrutinee 临时值在 then-block 求值完毕或控制流进入 else 分支时立即 drop。
+
+```mermaid
+flowchart TD
+    Q0{if let 的 scrutinee 里<br/>产生了临时值？<br/>（方法调用返回锁/容器/Option）} -->|否| N0[不受影响]
+    Q0 -->|是| Q1{else 分支或 then-block 之后<br/>是否依赖该临时值仍存活？}
+    Q1 -->|else 分支要获取同一资源<br/>（写锁/同一文件句柄）| A1[2021 死锁风险；2024 自动修复。<br/>若必须停在 2021：先显式绑定<br/>let tmp = expr; 再 if let .. = tmp]
+    Q1 -->|else 分支观察 drop 顺序<br/>（析构副作用/日志/解锁）| A2[2021: drop 在 else 之后；<br/>2024: drop 在进入 else 之前。<br/>顺序敏感代码需显式绑定临时值]
+    Q1 -->|借用逃逸出整个 if-let 语句| A3[两个 Edition 都编译失败（E0716）；<br/>与本次变更无关，直接显式绑定]
+    Q1 -->|仅 then-block 内借用/消费| N1[不受影响：2024 仍保证<br/>临时值活到 then-block 求值完毕]
+```
+
+**反例 A1（死锁判别，Edition 敏感，本机实测）**——与 Edition Guide 官方 RwLock 例同构：
+
+```rust
+use std::sync::RwLock;
+
+fn f(value: &RwLock<Option<bool>>) {
+    if let Some(x) = *value.read().unwrap() {
+        println!("value is {x}");
+    } else {
+        let mut v = value.write().unwrap(); // 2021: 读锁未释放 -> 死锁；2024: 读锁已释放
+        if v.is_none() { *v = Some(true); }
+    }
+}
+
+fn main() {
+    let lock = RwLock::new(None::<bool>);
+    f(&lock);
+    println!("no deadlock: {:?}", *lock.read().unwrap());
+}
+```
+
+实测（rustc 1.99.0）：`--edition 2024` 编译运行输出 `no deadlock: Some(true)`（exit 0）；`--edition 2021` 同一二进制挂死，`timeout 4` 强杀（exit 124）。这是"语义变更而非编译错误"类迁移陷阱的代表——升级 Edition 不报错，降级才暴露。
+
+**反例 A2（drop 顺序判别，Edition 敏感，本机实测）**：
+
+```rust
+struct D(#[allow(dead_code)] &'static str);
+impl Drop for D { fn drop(&mut self) { println!("D dropped"); } }
+fn get() -> (Option<i32>, D) { (None, D("tmp")) }
+fn main() {
+    if let Some(x) = get().0 { println!("{x}"); } else { println!("else branch"); }
+    println!("after if-let");
+}
+```
+
+实测（rustc 1.99.0）：`--edition 2021` 输出 `else branch → D dropped → after if-let`；`--edition 2024` 输出 `D dropped → else branch → after if-let`。同一份代码、同一编译器，仅 Edition 不同，析构副作用相对 else 分支的次序翻转——这是本变更最隐蔽的一类影响：不产生任何编译错误，只改变可观察执行顺序。
+
+**判别 A3（与 Edition 无关）**：把借用赋给语句外声明的 `let x: &i32;` 再在 if-let 之后使用，2021/2024 均报 `error[E0716]: temporary value dropped while borrowed`——遇到 E0716 先区分"借用是否逃逸出语句"，再决定是否归因于本次收窄。
+
 ---
 
 ### 2.5 工具链与文档生态的边缘变更

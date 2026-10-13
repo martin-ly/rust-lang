@@ -170,6 +170,62 @@ flowchart TD
 
 ---
 
+## 知识表征：项目形态决策树与 cargo new 选项矩阵
+
+> 依据 [Cargo Book — cargo new](https://doc.rust-lang.org/cargo/commands/cargo-new.html)、[Cargo Book — cargo init](https://doc.rust-lang.org/cargo/commands/cargo-init.html) 与 rustc 1.99.0 实测整理。
+
+### 决策树：新项目该用哪条命令、哪种形态？
+
+```text
+要开始一个 Rust 项目？
+├─ 空目录 / 新目录 → cargo new <path>（--bin 是默认，自动建 VCS 仓库）
+├─ 已有代码/已有 git 仓库 → cargo init（只补 Cargo.toml 与入口文件）
+├─ 产物要被别的 crate use？ → cargo new --lib（入口 src/lib.rs）
+├─ 一次性脚本、单文件原型 → Cargo Script（直接 rustc 或 cargo 跑单 .rs 文件）
+├─ 内部 crate 防止误发布到 crates.io？
+│    → cargo new --registry my-company（把 publish 字段写死到 Cargo.toml）
+└─ 想固定语言版本 → cargo new --edition 2024（cargo 1.99 默认即 2024）
+```
+
+### 属性矩阵：cargo new 关键选项（cargo 1.99.0 官方文档）
+
+| 选项 | 效果 | 默认值 |
+|:---|:---|:---|
+| `--bin` | 生成二进制 target（`src/main.rs`） | ✅ 默认行为 |
+| `--lib` | 生成库 target（`src/lib.rs`） | — |
+| `--edition` | 写入 `edition` 字段（2015/2018/2021/2024） | 2024 |
+| `--name` | 覆盖 `package.name` | 目录名 |
+| `--vcs` | 初始化 git/hg/pijul/fossil 或 `none` | git（已在 VCS 仓库内则 none） |
+| `--registry` | 把 `publish` 字段限制为指定 registry | 不限制 |
+
+### 反例组（rustc 1.99.0，`--edition 2024` 实测）
+
+**反例**：入门常见错误——对 `&str` 做整数索引取「第一个字节」（预期 E0277：`str` 未实现该 `Index`）：
+
+```rust,compile_fail,E0277
+fn main() {
+    let name: &str = "cargo";
+    let first_byte: u8 = name[0]; // ❌ &str 不支持整数索引
+    println!("{first_byte}");
+}
+```
+
+**实测错误**：`error[E0277]: the type \`str\` cannot be indexed by \`{integer}\``（`str` 的索引只能是 `usize` 范围）。
+
+**修正**：字符串按字节遍历（可编译）：
+
+```rust
+fn main() {
+    let name: &str = "cargo";
+    let first_byte: u8 = name.as_bytes()[0]; // ✅ 先 as_bytes 再索引
+    println!("{first_byte}");
+}
+```
+
+> **来源**: [Cargo Book — cargo new](https://doc.rust-lang.org/cargo/commands/cargo-new.html) · [Rust Reference — 索引表达式](https://doc.rust-lang.org/reference/expressions/index-expr.html) · [Cargo Book — Cargo Script](https://doc.rust-lang.org/cargo/reference/cargo-script.html)
+
+---
+
 ## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

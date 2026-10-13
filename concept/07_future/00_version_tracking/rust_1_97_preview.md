@@ -82,6 +82,27 @@ fn demo() {
 
 ---
 
+## 三a、判定树：本页条目今天能不能用？
+
+> 预览页最大的误用是把"清单里有条目"当成"代码里可用"。本树给出逐条判定路径；权威源：各条目跟踪 PR/issue（见上表）· [releases.rs 1.97.0](https://releases.rs/docs/1.97.0/)。
+
+```mermaid
+flowchart TD
+    Q0{想使用本页某条目} --> Q1{它已合并进哪个分支？}
+    Q1 -->|已进 1.98.0 beta 分支<br/>（PR merged 且 milestone 1.98）| A1[用 1.98.0 stable（2026-08-20 起）<br/>或 beta 直接调用，无需 feature gate]
+    Q1 -->|PR merged 但未进当前 beta| A2[nightly 可用：加对应<br/>#![feature(...)]；stable 调用得 E0658]
+    Q1 -->|FCP / 等待评审 / PFCP| A3[不可用：无 API 面可依赖；<br/>只可按其签名预写适配层<br/>（用 cfg 双轨，见下）]
+    A2 --> Q2{需要跨 stable 兼容？}
+    Q2 -->|是| A4[cfg_attr 双轨写法：<br/>nightly 走新 API，stable 走等效旧写法<br/>（如 truncate_front -> drain(..n)）]
+    Q2 -->|否| A5[直接 nightly，pin 工具链日期]
+```
+
+**判定树自检**（rustc 1.99.0 stable 实测）：上表"已合并，1.98"路径上的 API（如 `PathBuf::into_string`、`Result::map_or_default`，见 [`rust_1_98_preview.md`](rust_1_98_preview.md) §0.0 自检代码）在 1.99.0 stable 上直接调用不再需要 feature gate——判定树第一问的正确姿势是查 **beta 分支归属**，而不是查 RFC 状态。反例见本页"⚠️ 反例与陷阱"（E0658）。
+
+> 维护规则：每次 1.98/1.99 巡检后，把已转正条目从本页移入对应 `rust_1_XX_stabilized.md`，本树叶子 A1 的分支集合随之更新。
+
+---
+
 ## 四、形式化与生态前瞻
 
 与 1.97 周期相关的长期项目仍在继续：

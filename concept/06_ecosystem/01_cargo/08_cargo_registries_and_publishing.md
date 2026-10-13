@@ -162,6 +162,51 @@ cargo owner --list
 
 ---
 
+## 知识表征：发布决策树与 yank 影响矩阵
+
+> 依据 [Cargo Book — cargo yank](https://doc.rust-lang.org/cargo/commands/cargo-yank.html) 与 [Cargo Book — Publishing](https://doc.rust-lang.org/cargo/reference/publishing.html)，cargo 1.99.0 对齐。
+
+### 决策树：发现问题版本，该 yank 还是发补丁？
+
+```text
+已发布版本出问题，如何处置？
+├─ 安全漏洞（CVE）？
+│    → 优先走 RustSec advisory（rustsec.org），不轻易 yank
+│      （cargo yank 文档：yank 会造成与漏洞无关的下游破坏）
+├─ 意外发布 / 非故意 SemVer 破坏 / 完全不可用的坏版本？
+│    ├─ 先发布 SemVer 兼容补丁（如 1.5.0 坏 → 先发 1.5.1）
+│    └─ 再 cargo yank --vers 1.5.0（顺序反了会卡死下游解析）
+├─ 版权/许可/个人数据问题？
+│    → yank 不够，联系 registry（crates.io: help@crates.io，见 crates.io/policies）
+└─ 凭证泄露？
+     → 立即撤销 token；yank 只阻止新解析选中该版本，
+       已有 lockfile/直接下载不受影响（yank 文档明确此边界）
+```
+
+### 属性矩阵：yank 一个版本后，无 lockfile 项目的解析结果（cargo yank 官方表，bar 有 1.5.0/1.5.1/1.5.2/2.0.0/3.0.0）
+
+| 被 yank 的版本 | 依赖写 `bar = "1.5.0"`（兼容区间） | 依赖写 `bar = "=1.5.0"`（精确） | 依赖写 `bar = "2.0.0"` |
+|:---|:---|:---|:---|
+| `1.5.0` | 改用 1.5.1 或 1.5.2 | **解析报错**（无兼容版本） | 不受影响，用 2.0.0 |
+| `1.5.1` | 改用 1.5.0 或 1.5.2 | 改用 1.5.0 | 不受影响 |
+| `2.0.0` | 不受影响（1.5.x 仍兼容） | 改用 1.5.0 | **解析报错** |
+
+关键结论：`=` 精确依赖 + yank 的组合是下游最脆弱的场景；这也是「先补丁后 yank」工作流的根本原因。
+
+### 决策树：私有分发选哪条路？
+
+```text
+企业需要控制 crate 来源？
+├─ 要发布内部 crate 给内部消费 → [registries.name] 私有 registry（长期方案）
+├─ 只想镜像/加速 crates.io 下载 → [source.crates-io] replace-with 镜像
+├─ 完全离线构建 / 审计固化 → cargo vendor + directory source
+└─ 三者可组合：内部 crate 走私有 registry，公开依赖走 source replacement
+```
+
+> **来源**: [Cargo Book — cargo yank（How yank works / When to yank）](https://doc.rust-lang.org/cargo/commands/cargo-yank.html) · [Cargo Book — Registries](https://doc.rust-lang.org/cargo/reference/registries.html) · [Cargo Book — Source Replacement](https://doc.rust-lang.org/cargo/reference/source-replacement.html) · [RustSec](https://rustsec.org/)
+
+---
+
 ## 五、认证与 Token
 
 Cargo 支持多种 token 存储方式：

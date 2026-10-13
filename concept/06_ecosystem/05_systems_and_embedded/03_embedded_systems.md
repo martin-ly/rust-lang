@@ -757,7 +757,7 @@ fn main() {
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [IEEE 802.1 — Time-Sensitive Networking](https://www.ieee802.org/1/pages/tsn.html) · [Cortex-M Devices Generic User Guide](https://developer.arm.com/documentation/dui0552/latest/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [IEEE 802.1 — Time-Sensitive Networking](https://www.ieee802.org/1/pages/tsn.html) · [Cortex-M Devices Generic User Guide](https://developer.arm.com/documentation/dui0552/latest/) · [ARM Architecture Reference Manual (ARM ARM, DDI 0487)](https://developer.arm.com/documentation/ddi0487/latest/) · [RISC-V Unprivileged ISA Specification](https://riscv.org/technical/specifications/)
 >
 > **权威来源对齐变更日志**: 2026-05-22 创建 [Authority Source Sprint Batch 11](../../00_meta/02_sources/05_international_authority_index.md)
 

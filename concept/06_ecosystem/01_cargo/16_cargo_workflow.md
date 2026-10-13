@@ -171,6 +171,62 @@ cargo doc --no-deps  # 生成文档
 
 ---
 
+## 知识表征：依赖更新决策树与 cargo update 选项矩阵
+
+> 依据 [Cargo Book — cargo update](https://doc.rust-lang.org/cargo/commands/cargo-update.html) 与 [Cargo Book — cargo toml vs lock](https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html)，cargo 1.99.0 对齐。
+
+### 决策树：出问题时该跑哪条 update 命令？
+
+```text
+依赖需要处理，选哪条命令？
+├─ 例行升级全部依赖 → cargo update（重写整个 Cargo.lock）
+├─ 只想动一个包，其余保持锁定 → cargo update <spec>
+│    （保守更新：仅 SPEC 包更新；其传递依赖只在必须时才动）
+├─ 升级一个包且强制其依赖一起升 → cargo update <spec> --recursive
+├─ 回滚/钉死到特定版本（供应链事故响应）→ cargo update <spec> --precise 1.2.3
+│    （--precise 可与 --recursive 同用：钉死 SPEC 并递归钉死其依赖）
+├─ 改了 Cargo.toml 版本号后只更新 workspace 成员 → cargo update -w
+└─ 先看会更新什么、不写 lockfile → cargo update --dry-run
+```
+
+### 属性矩阵：Cargo.toml vs Cargo.lock 职责边界
+
+| 维度 | `Cargo.toml` | `Cargo.lock` |
+|:---|:---|:---|
+| 谁写 | 人（声明意图，如 `regex = "1.5"`） | Cargo 维护（不应手改） |
+| 记录内容 | 宽泛版本区间、features、元数据 | 精确版本 + source + checksum |
+| git 依赖场景 | 不写 rev 则每次取默认分支最新 commit（不可复现） | 锁定精确 commit SHA（如 `#9f9f693…`） |
+| 提交 VCS | 永远提交 | 官方建议：有疑问就提交（二进制必提交；纯库通常不提交） |
+| 更新入口 | 手改版本号 + `cargo update -w` | `cargo update` / `--precise` |
+
+> **来源**: [Cargo Book — cargo update（spec 保守更新 / --precise / --recursive / -w / --dry-run）](https://doc.rust-lang.org/cargo/commands/cargo-update.html) · [Cargo Book — Cargo.toml vs Cargo.lock](https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html) · [Cargo FAQ — Why have Cargo.lock in version control?](https://doc.rust-lang.org/cargo/faq.html#why-have-cargolock-in-version-control)
+
+### 反例组（rustc 1.99.0，`--edition 2024` 实测）
+
+**反例**：工作流脚本里对同一 `Vec` 先取快照借用又继续可变借用（预期 E0502：借用期间不可再可变借用）：
+
+```rust,compile_fail,E0502
+fn main() {
+    let mut v = vec![1, 2, 3];
+    let snapshot = &v;        // 共享借用仍存活
+    v.push(4);                // ❌ 共享借用存在时不可可变借用
+    println!("{snapshot:?}");
+}
+```
+
+**修正**：先结束共享借用（或先克隆快照）：
+
+```rust
+fn main() {
+    let mut v = vec![1, 2, 3];
+    let snapshot = v.clone(); // ✅ 快照独立，不再持有借用
+    v.push(4);
+    println!("{snapshot:?}");
+}
+```
+
+---
+
 ## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

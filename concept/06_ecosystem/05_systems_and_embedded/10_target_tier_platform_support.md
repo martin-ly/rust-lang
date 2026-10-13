@@ -129,6 +129,77 @@ fn embedded_only() {
 > - [rustc book — nvptx64-nvidia-cuda](https://doc.rust-lang.org/nightly/rustc/platform-support/nvptx64-nvidia-cuda.html)（SM/PTX 最低版本表）
 > - 反链：[交叉编译](02_cross_compilation.md) · [`-Z` 选项参考清单](../00_toolchain/15_z_flags_reference.md) · [将 Rust 集成到现有平台](../00_toolchain/08_platform_rust_integration.md)
 
+---
+
+## 知识表征：target 选择决策树与 cfg 属性矩阵
+
+> 依据 [rustc book — Target Tier Policy](https://doc.rust-lang.org/rustc/target-tier-policy.html)、[rustc book — Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) 与本机 rustc 1.99.0 实测整理。
+
+### 决策树：选 target 时如何定位层级与故障？
+
+```text
+要为一个 target 构建/评估支持？
+├─ rustc --print target-list 里有这个名字？
+│    ├─ 有 → rustup target list --installed 里有 std？
+│    │    ├─ 有 → Tier 1/Tier 2：rustup target add <t> 即可用
+│    │    └─ 没有 → Tier 3：rustup 不提供 std 预编译
+│    │         实测错误：error[E0463]: can't find crate for `core`
+│    │         （rustc 1.99.0 对 riscv64gc-unknown-none-elf 实测；
+│    │           Tier 3 出路：nightly + -Z build-std 自编译 core/std）
+│    └─ 没有 → 名字打错或自定义 target：
+│         实测错误：error: error loading target specification:
+│         could not find specification for target "..."
+│         （rustc 1.99.0 对不存在的 triple 实测；
+│           出路：-Z json-target-spec 提供自定义 JSON，或走 Tier 3 提案）
+├─ 需要 CI 全平台矩阵？
+│    → 只把 Tier 1 当免费保证（官方 std 二进制 + 每版测试）
+│    → Tier 2 需自建测试基础设施（rustup 有 std 但官方不跑测试）
+└─ 评估"这个平台能不能升 Tier"？ → 查 Target Tier Policy 的准入条件
+     （Tier 1 要求：每 release 周期跑测试、维护者承诺、CI 覆盖）
+```
+
+### 属性矩阵：跨平台 cfg 键的真实取值（rustc 1.99.0 `--print cfg` 实测）
+
+| cfg 键 | `x86_64-pc-windows-msvc` | `x86_64-unknown-linux-gnu` | `wasm32-unknown-unknown` | `riscv64gc-unknown-none-elf` |
+|:---|:---|:---|:---|:---|
+| `target_os` | `windows` | `linux` | `unknown` | `none` |
+| `target_family` | `windows` | `unix` | `wasm` | （无 family 键） |
+| `target_env` | `msvc` | `gnu` | `""`（空值） | `""`（空值） |
+| `target_vendor` | `pc` | `unknown` | `unknown` | `unknown` |
+| `target_endian` | `little` | `little` | `little` | `little` |
+| `target_pointer_width` | `64` | `64` | `32` | `64` |
+
+要点：分支平台差异优先用 `target_family`（`unix`/`windows`/`wasm` 三值聚合），只有需要区分 `apple` vs `linux` 这类 OS 细节时才用 `target_os`；裸机 target（`*-none-*`）没有 `target_family`，用 `target_os = "none"` 判定。
+
+### 反例组（rustc 1.99.0，`--edition 2024` 实测）
+
+**反例**：裸机思维错误——`#![no_std]` 后直接假设 `Vec` 还在 prelude（预期 E0425）：
+
+```rust,compile_fail,E0425
+#![no_std]
+pub fn f() -> Vec<u8> { Vec::new() } // ❌ no_std 的 prelude 只有 core，没有 Vec
+```
+
+**实测错误**：`error[E0425]: cannot find type \`Vec\` in this scope`（伴随 E0433）。
+
+**修正**：显式引入 `alloc`（可编译，`--crate-type lib` 验证通过）：
+
+```rust
+#![no_std]
+extern crate alloc;
+use alloc::vec::Vec;
+
+pub fn f() -> Vec<u8> { Vec::new() } // ✅ core+alloc 路径，不依赖 std
+```
+
+**target 层故障的实测错误文本**（rustc 1.99.0 本机，供决策树对照）：
+- 未安装 std 的 target：`error[E0463]: can't find crate for \`core\`` + `help: consider downloading the target with \`rustup target add ...\``（对 `--target riscv64gc-unknown-none-elf` 实测）；
+- 不存在的 triple：`error: error loading target specification: could not find specification for target "..."` + `help: run \`rustc --print target-list\``。
+
+> **来源**: [rustc book — Target Tier Policy（Tier 1/2/3 定义与准入）](https://doc.rust-lang.org/rustc/target-tier-policy.html) · [rustc book — Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) · [rustc book — rustc-targets（cfg 键）](https://doc.rust-lang.org/rustc/rustc-targets/index.html) · [E0463 错误解释](https://doc.rust-lang.org/error_codes/E0463.html)
+
+---
+
 ## 🧭 思维导图（Mindmap）
 
 ```mermaid

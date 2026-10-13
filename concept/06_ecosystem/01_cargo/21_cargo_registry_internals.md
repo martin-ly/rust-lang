@@ -161,6 +161,86 @@ cargo publish
 
 ---
 
+## 知识表征：自建 registry 决策树与 index 分片规则矩阵
+
+> 依据 [Cargo Book — Registry Index](https://doc.rust-lang.org/cargo/reference/registry-index.html) 与 rustc 1.99.0（Edition 2024）实测整理。
+
+### 决策树：自建 registry 该选哪种 index 协议与配置？
+
+```text
+要自建/运营一个 Cargo registry？
+├─ 面向普通用户、在意首次解析速度？
+│    → sparse index（HTTP 按需拉取；Cargo 1.70+ 对 crates.io 默认）
+├─ 需要离线浏览完整版本历史 / 内网 git 基础设施现成？
+│    → git index（[registries.<name>] protocol = "git"）
+├─ 两种协议都想提供？
+│    ⚠ Cargo Book 明确不推荐：lockfile 里存的是 registry URL，
+│      协议切换会让已有 lockfile 失效；crates.io 是内部特例
+│      （Cargo 把 sparse URL 内部替换为等价 git URL）
+├─ 私有 registry（下载也要鉴权）？
+│    → config.json 设 "auth-required": true
+│      （Cargo 会在 http(s) 下载请求上带 Authorization 头，
+│        且 sparse index 更新也要求鉴权）
+└─ 不想提供 Web API？
+     → 省略 config.json 的 "api" 键可以，但 cargo publish / owner
+       等命令直接不可用（Cargo Book 明确此约束）
+```
+
+### 属性矩阵：index 分片路径规则（Cargo Book 原文规则，按小写包名计算）
+
+| 包名长度 | 目录规则 | 实例 |
+|:---|:---|:---|
+| 1 字符 | `1/` | `a` → `1/a` |
+| 2 字符 | `2/` | `cc` → `2/cc` |
+| 3 字符 | `3/{首字符}/` | `syn` → `3/s/syn` |
+| ≥4 字符 | `{前2}/{3-4字符}/` | `cargo` → `ca/rg/cargo`、`serde` → `se/rd/serde` |
+
+配套硬约束（同一文档）：
+- **版本唯一性**：每个包每个版本只能出现一次，且**忽略 SemVer build metadata**——`1.0.7` 与 `1.0.7+extra` 不得同时出现在 index 中；
+- **文件名小写、JSON 内包名大小写敏感**：文件名 `foo` 对应的 JSON `"name"` 可以是 `Foo`；
+- **`{prefix}` vs `{lowerprefix}`**：`MyCrate` 的 `{prefix}` 是 `My/Cr`、`{lowerprefix}` 是 `my/cr`；`{lowerprefix}` 避免 Windows 大小写不敏感文件系统的目录别名（`crate`/`CrateTwo` → `cr/at` 与 `Cr/at` 在 Windows 上撞目录），但 nginx 类 rewrite 规则只能构造 `{prefix}`、无法做大小写转换；
+- **不存在的 crate**：应返回 404 / 410 / 451；
+- **缓存**：Cargo 记录 `ETag`/`Last-Modified`，刷新时发 `If-None-Match`/`If-Modified-Since`，服务器可回 304；两者同时存在时 Cargo 只用 `ETag`。
+
+### 反例组（rustc 1.99.0，`--edition 2024` 实测）
+
+实现分片逻辑时把局部 `String` 的借用返回出去（预期 E0515：返回引用指向函数内局部值）：
+
+```rust,compile_fail,E0515
+fn index_shard(name: &str) -> &str {
+    let lower = name.to_lowercase();   // 局部 String
+    &lower[..2.min(lower.len())]       // ❌ 返回指向局部值的引用
+}
+```
+
+**实测错误**：`error[E0515]: cannot return value referencing local variable \`lower\``。
+
+**修正**：返回 owned `String`，并覆盖 1/2/3 字符特例（可编译，且与 Cargo Book 分片规则一致）：
+
+```rust
+fn index_shard(name: &str) -> String {
+    let lower = name.to_lowercase();
+    match lower.len() {
+        1 => format!("1/{lower}"),
+        2 => format!("2/{lower}"),
+        3 => format!("3/{}/{lower}", &lower[..1]),
+        _ => format!("{}/{}/{}", &lower[..2], &lower[2..4], lower),
+    }
+}
+
+fn main() {
+    assert_eq!(index_shard("a"), "1/a");
+    assert_eq!(index_shard("cc"), "2/cc");
+    assert_eq!(index_shard("syn"), "3/s/syn");
+    assert_eq!(index_shard("cargo"), "ca/rg/cargo");
+    assert_eq!(index_shard("MyCrate"), "my/cr/mycrate"); // 文件名按小写计算
+}
+```
+
+> **来源**: [Cargo Book — Registry Index（Index Configuration / Index files / Version uniqueness / Sparse Limitations）](https://doc.rust-lang.org/cargo/reference/registry-index.html) · [Cargo Book — Running a Registry](https://doc.rust-lang.org/cargo/reference/running-a-registry.html)
+
+---
+
 ## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
