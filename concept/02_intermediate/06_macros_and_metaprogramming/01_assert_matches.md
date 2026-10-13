@@ -59,7 +59,7 @@
     - [10.1b 实测反例：模式与值类型不匹配（rustc 1.99.0 实测 E0308）](#101b-实测反例模式与值类型不匹配rustc-1990-实测-e0308)
     - [10.2 边界测试：嵌套模式匹配中的绑定冲突（编译错误）](#102-边界测试嵌套模式匹配中的绑定冲突编译错误)
     - [10.2b 实测反例：同一模式内重复绑定（rustc 1.99.0 实测 E0416）](#102b-实测反例同一模式内重复绑定rustc-1990-实测-e0416)
-    - [10.3 边界测试：`assert_matches!` 与嵌套模式的绑定（编译错误）](#103-边界测试assert_matches-与嵌套模式的绑定编译错误)
+    - [10.3 边界测试：`assert_matches!` 与嵌套模式的绑定（编译错误，rustc 1.99 实测）](#103-边界测试assert_matches-与嵌套模式的绑定编译错误rustc-199-实测)
     - [10.4 边界测试：自定义断言失败消息的类型约束（编译错误）](#104-边界测试自定义断言失败消息的类型约束编译错误)
     - [10.4 边界测试：所有权移动后的再次使用](#104-边界测试所有权移动后的再次使用)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -175,7 +175,7 @@ assert_matches!(result, Ok(n) if n > 10);
 与 `assert!` / `debug_assert!` 的关系一致：
 
 ```rust,ignore
-use std::assert_matches::debug_assert_matches;
+use std::debug_assert_matches;
 
 // release 模式下被消除（零运行时开销）
 let config = Some(true);
@@ -302,7 +302,7 @@ if let Message::Coord { x, y } = msg {
 >
 
 ```rust,ignore
-use std::assert_matches::assert_matches;
+use std::assert_matches;
 
 #[derive(Debug, PartialEq)]
 struct Config { port: u16, host: String }
@@ -329,7 +329,7 @@ fn parse_config() {
 >
 
 ```rust,ignore
-use std::assert_matches::assert_matches;
+use std::assert_matches;
 
 #[derive(Debug)]
 enum State {
@@ -419,7 +419,7 @@ graph TD
 ### 4.2 边界极限
 
 ```rust,ignore
-use std::assert_matches::assert_matches;
+use std::assert_matches;
 
 // 边界 1: 嵌套模式
 let x = Some(Some(42));
@@ -547,8 +547,8 @@ fn main() {
 ```
 
 ```rust
-// ✅ 正确: 从模块路径导入（rustc 1.99.0 实测编译并运行通过）
-use std::assert_matches::assert_matches;
+// ✅ 正确: 显式导入（rustc 1.99.0 实测编译并运行通过）
+use std::assert_matches;
 
 fn main() {
     let result: Result<i32, &str> = Ok(42);
@@ -556,15 +556,15 @@ fn main() {
 }
 ```
 
-> **修正**: `assert_matches!`（Rust 长期未稳定，于 Rust 1.96.1 稳定化）专门用于测试枚举（Enum）变体匹配。
-> 注意导入路径：正确写法是 `use std::assert_matches::assert_matches;`——写成 `use std::assert_matches;` 在 rustc 1.99.0 实测报 **E0432**（unresolved import `std::assert_matches`），因为 `std::assert_matches` 是模块而非宏本身。
-> 它不同于 `assert_eq!`——后者要求值实现 `PartialEq`，而 `assert_matches!` 使用模式匹配，不要求 `PartialEq`。
-> 在 `assert_matches!` 稳定前，使用 `matches!` 宏（Macro）或 `if let` 进行测试断言。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
+> **修正**: `assert_matches!` 于 **Rust 1.96.0**（2026-05-28）稳定化，专门用于测试枚举（Enum）变体匹配。
+> 关键陷阱：它**故意不进 prelude**——官方理由是同名第三方 crate 太多，加入 prelude 会造成大面积破坏；因此必须 `use std::assert_matches;`（或 `use core::assert_matches;`）显式导入，否则 rustc 1.99.0 实测报 `cannot find macro assert_matches in this scope`。也可全路径调用 `std::assert_matches!(..)`（实测可编译）。
+> 它不同于 `assert_eq!`——后者要求值实现 `PartialEq`，而 `assert_matches!` 使用模式匹配，不要求 `PartialEq`；失败时打印被测值的 `Debug` 表示，这是它优于 `assert!(matches!(..))` 的地方。
+> 在 `assert_matches!` 稳定前，使用 `matches!` 宏（Macro）或 `if let` 进行测试断言。[来源: [Rust Blog — Announcing Rust 1.96.0](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0)] · [来源: [Rust Standard Library](https://doc.rust-lang.org/std/macro.assert_matches.html)]
 
 ### 10.1b 实测反例：模式与值类型不匹配（rustc 1.99.0 实测 E0308）
 
 ```rust,compile_fail
-use std::assert_matches::assert_matches;
+use std::assert_matches;
 
 fn main() {
     let x: i32 = 5;
@@ -602,7 +602,7 @@ fn fixed() {
 ### 10.2b 实测反例：同一模式内重复绑定（rustc 1.99.0 实测 E0416）
 
 ```rust,compile_fail
-use std::assert_matches::assert_matches;
+use std::assert_matches;
 
 fn main() {
     let v = (1, (1, 2));
@@ -612,19 +612,19 @@ fn main() {
 
 > **为什么**: 同一模式里 `a` 绑定两次，rustc 1.99.0 实测报 **E0416**。工程上想表达"两个位置值相等"应改用守卫：`assert_matches!(v, (a, (b, _)) if a == b)`——把相等约束从绑定名移到运行时守卫，语义显式且可编译。[来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)]
 
-### 10.3 边界测试：`assert_matches!` 与嵌套模式的绑定（编译错误）
+### 10.3 边界测试：`assert_matches!` 与嵌套模式的绑定（编译错误，rustc 1.99 实测）
 
-```rust,ignore
-#[test]
-fn test_nested_match() {
+```rust,compile_fail
+use std::assert_matches;
+
+fn main() {
     let result: Result<Option<i32>, ()> = Ok(Some(42));
-    // ⚠️ 设计限制: assert_matches! 是宏，绑定不可导出到宏外部
-    // assert_matches!(result, Ok(Some(x)) if x > 0);
-    // 如需在断言后使用 x，应改用 if let
+    assert_matches!(result, Ok(Some(x)) if x > 0);
+    println!("{x}"); // ❌ error[E0425]: cannot find value `x` in this scope
 }
 ```
 
-> **修正**: `assert_matches!`（Rust 1.97.0 stable，当前 patch 1.97.0）检查值是否匹配给定模式，但**模式中的绑定**（`x`）在宏（Macro）外部不可见。
+> **修正**: `assert_matches!`（Rust 1.96.0 稳定化）检查值是否匹配给定模式，但**模式中的绑定**（`x`）在宏（Macro）外部不可见——rustc 1.99.0 实测：断言行本身编译通过，断言后使用 `x` 报 **E0425**（cannot find value `x` in this scope）。
 > `assert_matches!(result, Ok(Some(x)))` 中 `x` 只在宏（Macro）内部有效，测试代码不能后续使用 `x`。
 > 若需提取绑定值，使用 `if let`：`if let Ok(Some(x)) = result { assert!(x > 0); } else { panic!("match failed"); }`。
 > `assert_matches!` 的优势是简洁和良好的失败消息（打印不匹配的值），劣势是绑定不可导出。

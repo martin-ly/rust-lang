@@ -174,3 +174,12 @@ error[E0080]: attempt to divide `1_usize` by zero
 | 干扰自由分区 | ISO 26262-6 / DO-178C 分区论证 | 类型系统 Send/Sync、no_std 静态分区、内存布局审查 | [安全关键系统工程](23_safety_critical_systems_engineering.md) |
 
 > 使用顺序：先按 §5 决策树定路径，再按本表逐项收集证据；每项证据缺失即 safety case 的 open issue。
+
+## 11. 按角色的阅读路线（30 分钟上手）
+
+| 角色 | 路线 | 目标产出 |
+|:---|:---|:---|
+| 系统工程师（定级阶段） | §8 等级对照 → §5 决策树 Q1–Q4 → [SIL 选择指南](../../../content/safety_critical/03_decision_trees/02_safety_integrity_level_selection_guide.md) | 目标 DAL/ASIL/SIL + 工具链预算决策 |
+| 软件架构师（选型阶段） | §4 属性矩阵 → §9 已知缺口 → [认证工具链清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) | 语言/工具链/依赖三层边界草案 |
+| 开发工程师（实现阶段） | §6 编译期门禁反例 → §10 证据速查 → [22_autosar_and_rust.md](22_autosar_and_rust.md) 收窄转换反例 | lint 门禁配置 + 编码规则偏离记录模板 |
+| 评估/审计方（确认阶段） | §10 证据速查 → §9 缺口清单 → content 案例套件（[Ferrocene](../../../content/safety_critical/07_case_studies/01_case_study_01_ferrocene_certification.md) / [铁路信号](../../../content/safety_critical/07_case_studies/05_case_study_05_railway_signaling.md)） | safety case open issue 列表 |

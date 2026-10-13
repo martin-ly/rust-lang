@@ -53,10 +53,11 @@
   - [十、边界测试：DSL 与嵌入的编译错误](#十边界测试dsl-与嵌入的编译错误)
     - [10.1 边界测试：构建器模式的链式调用与所有权（编译错误）](#101-边界测试构建器模式的链式调用与所有权编译错误)
     - [10.2 边界测试：状态机 DSL 的非法状态转换（编译错误）](#102-边界测试状态机-dsl-的非法状态转换编译错误)
-    - [10.3 边界测试：宏递归深度限制（编译错误）](#103-边界测试宏递归深度限制编译错误)
+    - [10.3 边界测试：宏递归深度限制（编译错误，rustc 1.99 实测）](#103-边界测试宏递归深度限制编译错误rustc-199-实测)
     - [10.4 边界测试：DSL 的类型安全与运行时错误（运行时 panic）](#104-边界测试dsl-的类型安全与运行时错误运行时-panic)
     - [10.3 边界测试：DSL 宏的优先级与歧义解析（编译错误）](#103-边界测试dsl-宏的优先级与歧义解析编译错误)
     - [10.4 边界测试：DSL 宏的优先级与运算符结合性（编译错误）](#104-边界测试dsl-宏的优先级与运算符结合性编译错误)
+    - [10.5 实测反例：DSL 宏参数多次求值的副作用放大（rustc 1.99.0 实测）](#105-实测反例dsl-宏参数多次求值的副作用放大rustc-1990-实测)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：在 Rust 中嵌入 DSL 的常见技术有哪些？（理解层）](#测验-1在-rust-中嵌入-dsl-的常见技术有哪些理解层)
     - [测验 2：Builder 模式在 Rust 中为什么特别受欢迎？与构造函数相比有什么优势？（理解层）](#测验-2builder-模式在-rust-中为什么特别受欢迎与构造函数相比有什么优势理解层)
@@ -659,25 +660,37 @@ fn fixed() {
 
 > **修正**: 类型状态模式（Typestate Pattern）将状态机的状态编码为类型参数，非法的状态转换在编译期被拒绝。`Machine<Idle>` 有 `start()` 方法，`Machine<Running>` 有 `stop()` 方法，但 `Machine<Running>` 没有 `start()` 方法——从 Running 再次 start 是非法的。这是 Rust 类型系统（Type System）的强大应用：将运行时（Runtime）状态机验证转为编译期类型检查，消除整类状态转换错误。这与 Erlang 的 gen_fsm 或 C 的枚举（Enum）+switch 实现形成对比——Rust 在编译期保证状态转换的合法性。[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
 
-### 10.3 边界测试：宏递归深度限制（编译错误）
+### 10.3 边界测试：宏递归深度限制（编译错误，rustc 1.99 实测）
 
-```rust,ignore
-macro_rules! recursive {
+```rust,compile_fail
+macro_rules! sum {
     () => { 0 };
-    ($e:expr $(, $rest:expr)*) => {
-        $e + recursive!($($rest),*)
-    };
+    ($head:expr $(, $rest:expr)*) => { $head + sum!($($rest),*) };
 }
 
 fn main() {
-    // ❌ 编译错误: 宏递归超过默认限制（64 层）
-    // let x = recursive!(1, 2, 3, ..., 100);
-    let x = recursive!(1, 2, 3);
-    println!("{}", x);
+    // ❌ error: recursion limit reached while expanding `sum!`
+    // 150 个参数 → 150 层递归 > 默认 recursion_limit = 128
+    let x = sum!(1,2,3 /* …共 150 个… */,150);
 }
 ```
 
-> **修正**: Rust 的过程宏（Procedural Macro）和声明宏（Declarative Macro）都有**递归深度限制**（默认 64 层），防止宏展开导致编译器栈溢出或无限循环。复杂 DSL（如 `vec![1, 2, ..., 1000]`）的宏实现需考虑此限制：`vec!` 使用内置语法支持（非纯宏递归），因此无此限制。自定义宏的应对：1) 使用迭代而非递归（`$()*` 重复而非递归调用）；2) 增加递归限制 `#![recursion_limit = "256"]`；3) 将工作转移到运行时（Runtime）（宏生成循环代码而非展开所有元素）。这与 C 的预处理器（无递归限制，但宏展开深度有限）或 Lisp 的宏（Turing 完全，无限制，但可能无限展开）不同——Rust 的宏系统是"半图灵完全"的：有限递归但可表达大多数模式。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch19-06-macros.html)] · [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
+```rust
+// ✅ 正确: crate 根部提高递归限制（rustc 1.99.0 实测编译并运行，输出 11325）
+#![recursion_limit = "256"]
+
+macro_rules! sum {
+    () => { 0 };
+    ($head:expr $(, $rest:expr)*) => { $head + sum!($($rest),*) };
+}
+
+fn main() {
+    let v = sum!(1,2,3 /* …共 150 个… */,150);
+    println!("{v}"); // 11325
+}
+```
+
+> **修正**: `macro_rules!` 递归受 **`recursion_limit`（默认 128，非 64）** 约束——rustc 1.99.0 实测：150 层宏递归报 `error: recursion limit reached while expanding 'sum!'`，在 crate 根部加 `#![recursion_limit = "256"]` 后编译运行通过。自定义宏的应对：1) 使用迭代而非递归（`$()*` 重复而非递归调用）；2) 增加递归限制 `#![recursion_limit = "N"]`（注意：该 inner attribute 必须放在 crate 根部、宏定义之前——放在 `main` 前任意位置会报 `an inner attribute is not permitted in this context`，实测）；3) 将工作转移到运行时（Runtime）（宏生成循环代码而非展开所有元素）。这与 C 的预处理器（无递归限制，但宏展开深度有限）或 Lisp 的宏（Turing 完全，无限制，但可能无限展开）不同——Rust 的宏系统是"半图灵完全"的：有限递归但可表达大多数模式。[来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
 
 ### 10.4 边界测试：DSL 的类型安全与运行时错误（运行时 panic）
 
@@ -734,6 +747,26 @@ fn main() {
 ```
 
 > **修正**: `macro_rules!` 的**规则顺序**：从上到下依次尝试匹配，第一个匹配的规则被使用。长模式（含 WHERE）应放在短模式之前，否则短模式提前匹配导致错误。`macro_rules!` 的限制：1) 无优先级/结合性控制（不像 yacc/bison）；2) 无左递归（规则不能自引用（Reference）左部）；3) 模式是 token 树（`tt`），不是完整表达式。复杂 DSL 建议：1) 过程宏（Procedural Macro）（`proc_macro`）解析完整语法；2) `syn` crate 解析 Rust 表达式；3) 外部 DSL parser（`nom`、`pest`）。这与 Lisp 的宏（代码即数据，无模式匹配（Pattern Matching）限制）或 Template Haskell（编译期元编程，类型安全）不同——Rust 的 `macro_rules!` 是受限但高效的文本替换机制。来源: [The Little Book of Rust Macros] · 来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)
+
+### 10.5 实测反例：DSL 宏参数多次求值的副作用放大（rustc 1.99.0 实测）
+
+```rust
+// rustc 1.99.0 实测运行输出: a=1 b=2 total=2
+use std::cell::Cell;
+
+macro_rules! twice {
+    ($x:expr) => { ($x, $x) }; // $x 出现两次 → 参数被求值两次
+}
+
+fn main() {
+    let c = Cell::new(0);
+    let inc = || { c.set(c.get() + 1); c.get() };
+    let (a, b) = twice!(inc());
+    println!("a={a} b={b} total={}", c.get()); // a=1 b=2 total=2
+}
+```
+
+> **为什么/怎么避**: DSL 宏的每个 `$x:expr` 出现位置都是一次独立的表达式求值——副作用（计数器、IO、`Result` 检查）会被静默放大。rustc 1.99.0 实测：`twice!(inc())` 中 `inc()` 执行两次，`a=1` 而 `b=2`。工程对策：宏体内把参数绑定到局部 `let` 一次（`($x:expr) => {{ let v = $x; (v, v) }}`），或让 DSL 入口函数而非宏承担求值。[来源: [Rust Reference — Macros by Example](https://doc.rust-lang.org/reference/macros-by-example.html)]
 
 ## 嵌入式测验（Embedded Quiz）
 

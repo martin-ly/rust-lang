@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 793,
-    "generated_at": "2026-10-13T14:39:13.086340+00:00"
+    "generated_at": "2026-10-13T18:10:14.797805+00:00"
   },
   "files": [
     {
@@ -12534,7 +12534,7 @@
       "layer": "L1",
       "title": "所有权清单自测：Brown University Ownership Inventory",
       "positioning": "> 本文档为 **Brown University Interactive Book** 中「Ownership Inventory」概念清单的本地映射。",
-      "line_count": 254,
+      "line_count": 288,
       "theorem_chains": [
         {
           "text": "| 所有权清单节点覆盖 move/borrow/lifetime ⟹ 能识别错误 | 逐题分析 Brown Book 样例 | 预测编译器拒绝原因 | 高 |",
@@ -12547,11 +12547,21 @@
         {
           "text": "| 清单自测通过 ⟹ 所有权心智模型成形 | 能解释 E0502/E0499 等错误 | 修复真实代码中的所有权 bug | 高 |",
           "type": "table_row"
+        },
+        {
+          "text": "**为什么/怎么避**：`push` 可能重新分配整个缓冲区，`first` 会悬垂；清单练习里这是「写权限进入 ⟹ 既有读权限失效」的典型节点。修复：先取出值（`let first = v[0];`），或先 `reserve` 再借用。",
+          "type": "paragraph"
         }
       ],
       "anti_propositions": [
         {
           "title": "## 反命题"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
         }
       ],
       "code_blocks": [
@@ -12576,6 +12586,22 @@
           "lines": 13,
           "should_fail": true,
           "code_preview": "fn first_word(s: &str) -> &str {     &s[0..1] }  fn main() {     let result;    ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "fn main() {     let s = String::from(\"hello\");     let borrow = &s;      // 共享借用..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "fn main() {     let mut v = vec![1, 2, 3];     let first = &v[0];    // 共享借用整个 v..."
         }
       ],
       "sources": [],
@@ -13194,7 +13220,7 @@
       "layer": "L1",
       "title": "Never Type (`!`)：底类型与穷尽性",
       "positioning": "系统讲解 Rust 中 `!` (never type) 的形式语义、类型推导规则、控制流应用和穷尽性检查机制。",
-      "line_count": 690,
+      "line_count": 723,
       "theorem_chains": [
         {
           "text": "| Never Type (`!`)：底类型与穷尽性 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -13336,6 +13362,28 @@
           "lines": 7,
           "should_fail": true,
           "code_preview": "// ❌ 编译错误：match 不穷尽 fn incomplete_match(result: Result<i32, !>) -> i32 {     mat..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "// ❌ error[E0658]: the `!` type is experimental fn main() {     let x: ! = panic..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "// ❌ error[E0658]: the `!` type is experimental fn main() {     let r: Result<i3..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "fn die() -> ! { panic!(\"die\") } fn main() {     let s: String = die(); // 在 pani..."
         }
       ],
       "sources": [],
@@ -14489,7 +14537,7 @@
       "layer": "L1",
       "title": "控制流：表达式导向的流程控制",
       "positioning": "分析 Rust **控制流结构**的设计哲学——从表达式导向（expression-oriented）的 `if`/`match`/`loop`，到 `if let`/`while let` 的模式匹配（Pattern Matching）集成，揭示 Rust 如何将控制流转化为**值生成**而非**副作用执行**。",
-      "line_count": 1755,
+      "line_count": 1805,
       "theorem_chains": [
         {
           "text": "| 控制流：表达式导向的流程控制 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -14510,6 +14558,15 @@
         },
         {
           "title": "### 4.1 反命题"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
         }
       ],
       "code_blocks": [
@@ -14552,6 +14609,28 @@
           "lines": 37,
           "should_fail": false,
           "code_preview": "// 块表达式 {} 的值是其最后一个表达式 let value = {     let x = 1;     let y = 2;     x + y  //..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "fn main() {     let x: i32 = loop {         break \"done\";   // ❌ E0308: mismatch..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "fn main() {     let n = 5;     let x = if n > 3 { 1 } else { println!(\"no\") }; /..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// 编译通过；运行时 exit 101 fn main() {     let v = vec![1, 2, 3];     for i in 0..4 { ..."
         },
         {
           "flags": [
@@ -15210,7 +15289,7 @@
       "layer": "L1",
       "title": "let-else：失败分支提前返回",
       "positioning": "",
-      "line_count": 408,
+      "line_count": 444,
       "theorem_chains": [
         {
           "text": "| 模式匹配成功 ⟹ 绑定在后续作用域可用 | `let-else` 左侧匹配 | 成功路径扁平表达 | 高 |",
@@ -15304,6 +15383,20 @@
           "lines": 10,
           "should_fail": false,
           "code_preview": "fn read_config(path: &str) -> Result<String, std::io::Error> {     let contents ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "fn main() {     let opt = Some(1);     let Some(x) = opt else {         println!..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "fn f(opt: Option<i32>) -> i32 {     let Some(x) = opt else { return -1 };     x ..."
         }
       ],
       "sources": [],
@@ -15319,7 +15412,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 19,
+      "matrix_rows": 22,
       "pre_post": {
         "pre": [
           "[Control Flow](01_control_flow.md) · [Patterns](02_patterns.md) · [Let Chains](03_let_chains.md) · [Error Handling](../../02_intermediate/03_error_handling/01_error_handling.md) · [术语表](../../00_meta/01_terminology/01_terminology_glossary.md)"
@@ -15336,7 +15429,7 @@
       "layer": "L1",
       "title": "集合类型：Rust 标准库的数据结构谱系",
       "positioning": "系统分析 Rust **标准库集合类型**的设计——从 Vec/VecDeque 的顺序容器，到 HashMap/BTreeMap 的关联容器，再到 HashSet/BTreeSet 的集合类型，揭示每种数据结构的所有权（Ownership）语义、性能特征和选型策略。",
-      "line_count": 942,
+      "line_count": 994,
       "theorem_chains": [
         {
           "text": "| 集合类型：Rust 标准库的数据结构谱系 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -15357,6 +15450,15 @@
         },
         {
           "title": "### 4.1 反命题"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
         }
       ],
       "code_blocks": [
@@ -15387,6 +15489,28 @@
           "lines": 11,
           "should_fail": false,
           "code_preview": "use std::collections::{LinkedList, VecDeque};  // 单次 collect 拆分到三个不同类型的集合 let (s..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "use std::collections::HashMap; #[derive(Debug)] struct K(i32); fn main() {     l..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "use std::collections::HashMap; fn main() {     let mut m = HashMap::new();     m..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// 编译通过；运行时 exit 101 fn main() {     let mut v = vec![1, 2, 3];     v.drain(0..5..."
         },
         {
           "flags": [
@@ -15868,7 +15992,7 @@
       "layer": "L1",
       "title": "字符串与文本：Rust 的 Unicode 处理与格式化系统",
       "positioning": "> 系统分析 Rust **字符串类型**的设计——String [来源: [Rust String](https://doc.rust-lang.org/std/string/struct.String.html)] 与",
-      "line_count": 951,
+      "line_count": 1017,
       "theorem_chains": [
         {
           "text": "| 字符串与文本：Rust 的 Unicode 处理与格式化系统 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -15889,6 +16013,18 @@
         },
         {
           "title": "### 4.1 反命题"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
         }
       ],
       "code_blocks": [
@@ -15929,6 +16065,36 @@
           "lines": 5,
           "should_fail": false,
           "code_preview": "> // edition = \"2024\", rust = \"1.97\" —— rustc 1.97.0 实测 > fn takes_copy<T: Copy>..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "fn main() {     let s = String::from(\"hello\");     let r = &s[1..3];  // r 借用 s ..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// 编译通过；运行时 exit 101 fn main() {     let s = String::from(\"你好世界\");     println!(..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "fn main() {     let a = String::from(\"hello\");     let b = a + \" world\";  // `+`..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "use std::collections::HashMap; fn main() {     let mut m = HashMap::new();     m..."
         },
         {
           "flags": [
@@ -16060,7 +16226,7 @@
       "layer": "L1",
       "title": "字符串与编码：Rust 的文本处理类型系统",
       "positioning": "系统分析 Rust **字符串类型体系**的设计——String 与 str 的所有权（Ownership）语义、UTF-8 编码约束、OsString/OsStr 的平台抽象、CString/CStr 的 FFI 互操作，以及 grapheme clusters、unicode normalization 等高级文本处理概念。",
-      "line_count": 987,
+      "line_count": 1062,
       "theorem_chains": [
         {
           "text": "- **反命题 2：「`from_utf8_lossy` 是安全的默认选择」** —— 有代价：损失转换静默替换无效字节，数据完整性场景（哈希、加密、协议解析）中静默损坏比报错更糟。判定准则：数据必须完整 ⟹ `from_utf8` 返回 `Result`；仅展示用途 ⟹ lossy 可接受。",
@@ -16085,6 +16251,18 @@
         },
         {
           "title": "### 4.1 反命题"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
         }
       ],
       "code_blocks": [
@@ -16099,6 +16277,32 @@
           "lines": 11,
           "should_fail": false,
           "code_preview": "// 安全字符串处理示例 [来源: Rust Standard Library] fn safe_slice(s: &str, start: usize, en..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "fn main() {     let os = std::ffi::OsString::from(\"hello\");     let s = String::..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// 编译通过；实测输出如下 fn main() {     let precomposed = \"\\u{00E1}\";  // á 单码点（NFC）     ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// 编译通过；实测输出如下 fn main() {     let emoji = \"\\u{1F600}\";                 // 😀    ..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// 编译通过；实测输出如下 fn main() {     let bytes: Vec<u8> = vec![0xE4, 0xBD, 0xA0, 0xFF,..."
         },
         {
           "flags": [],
@@ -17923,7 +18127,7 @@
       "layer": "L1",
       "title": "Rust 错误处理基础",
       "positioning": "系统讲解 Rust 的错误处理（Error Handling）机制——从 `Result` 和 `Option` 到 `?` 运算符，分析 Rust 如何将错误处理融入类型系统（Type System），实现编译期安全。",
-      "line_count": 1082,
+      "line_count": 1131,
       "theorem_chains": [
         {
           "text": "| Rust 错误处理基础 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -17944,6 +18148,15 @@
         },
         {
           "title": "### 4.1 反命题"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
         }
       ],
       "code_blocks": [
@@ -17964,6 +18177,28 @@
           "lines": 12,
           "should_fail": false,
           "code_preview": "fn parse_add_one(s: &str) -> Result<i32, std::num::ParseIntError> {     let n: i..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "fn parse(s: &str) -> i32 {     let n: i32 = s.parse()?; // ❌ E0277: `?` 只能用于返回 R..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// 编译通过；运行时 exit 101 fn main() {     let r: Result<i32, std::num::ParseIntError>..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "use std::panic::catch_unwind; fn main() {     let mut v = vec![1];     let r = c..."
         },
         {
           "flags": [],
@@ -18388,7 +18623,7 @@
       "layer": "L1",
       "title": "属性与声明宏：编译期元编程基础",
       "positioning": "系统讲解 Rust **属性（attributes）**和**声明宏（macro_rules!）**——从编译期元编程的基础语法到模式匹配（Pattern Matching）、递归宏和卫生性，揭示 Rust 如何在编译期生成代码同时保持类型安全。",
-      "line_count": 1000,
+      "line_count": 1053,
       "theorem_chains": [
         {
           "text": "| 属性与声明宏（Declarative Macro）：编译期元编程基础 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -18409,6 +18644,18 @@
         },
         {
           "title": "### 4.1 反命题"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
         }
       ],
       "code_blocks": [
@@ -18435,6 +18682,38 @@
           "lines": 39,
           "should_fail": false,
           "code_preview": "// 递归宏: 通过模式匹配实现递归  // 计算参数个数 macro_rules! count {     () => { 0 };     ($head:t..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "macro_rules! set_x { () => { let x = 1; } } fn main() {     set_x!();     printl..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "macro_rules! boom {     () => { boom!() }; } fn main() { boom!(); } ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "#[derive(Eq)] struct P(f64); fn main() { println!(\"{}\", P(1.0) == P(1.0)); } ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "#[cfg(unix)] fn only_unix() { println!(\"unix\"); } fn main() { only_unix(); } // ..."
         },
         {
           "flags": [
@@ -18547,7 +18826,7 @@
       "layer": "L1",
       "title": "测试基础：从单元测试到集成测试",
       "positioning": "系统讲解 Rust **测试机制**——从单元测试、集成测试到文档测试和基准测试，揭示 Rust 如何内置测试文化并支持多种测试层级。",
-      "line_count": 819,
+      "line_count": 881,
       "theorem_chains": [
         {
           "text": "| 测试基础：从单元测试到集成测试 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -18568,6 +18847,15 @@
         },
         {
           "title": "### 4.1 反命题"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
         }
       ],
       "code_blocks": [
@@ -18602,6 +18890,24 @@
           "lines": 8,
           "should_fail": false,
           "code_preview": "// 文档测试: 代码即文档，文档即测试  /// 计算斐波那契数列的第 n 项。 /// /// # Examples /// /// 基本情况: /// ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// src/lib.rs pub fn divide(a: i32, b: i32) -> i32 { a / b }  // tests/integrati..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "#[test] #[should_panic] fn no_panic_expected_but_none() { let _ = divide(6, 2); ..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// src/lib.rs mod hidden { pub fn secret() -> i32 { 7 } }  // tests/visibility.r..."
         },
         {
           "flags": [
@@ -20864,7 +21170,7 @@
       "layer": "L2",
       "title": "Serde 序列化模式：Rust 的类型驱动数据转换",
       "positioning": "深入分析 **Serde** —— Rust 生态中主导的序列化/反序列化框架，探讨 `Serialize [来源: [serde::Serialize](https://docs.rs/serde/latest/serde/)]`/`Deserialize` derive 宏（Macro）、自定义序列化逻辑、以及类型系统（Type System）如何保障数据转换的安全性。",
-      "line_count": 941,
+      "line_count": 1025,
       "theorem_chains": [
         {
           "text": "| Serde 序列化模式：Rust 的类型驱动数据转换 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -20885,6 +21191,21 @@
         },
         {
           "title": "### 4.1 反命题"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
         }
       ],
       "code_blocks": [
@@ -20957,6 +21278,40 @@
           "lines": 19,
           "should_fail": true,
           "code_preview": "use serde::{Deserialize, Serialize};  #[derive(Serialize, Deserialize)] #[serde(..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测（serde::Serialize 的纯 std 等价） trait Serialize { fn seria..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测 trait Serialize { fn serialize(&self) -> String; } str..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "// rustc 1.99.0 stable 实测：assert 全部通过 #[derive(Debug, PartialEq)] enum Value { N..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "// rustc 1.99.0 stable 实测：assert 通过 fn parse_point(obj: &std::collections::HashM..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// rustc 1.99.0 stable 实测：assert 通过 fn skip_none(v: Option<i32>) -> Option<Strin..."
         }
       ],
       "sources": [],
@@ -20993,7 +21348,7 @@
       "layer": "L2",
       "title": "高级 Trait 主题：从关联类型到特化",
       "positioning": "深入分析 Rust **Trait 系统的高级特性**——从关联类型、泛型（Generics）关联类型（GATs）到特化（Specialization）和负实现，揭示 Trait 系统如何支持复杂抽象和零成本多态。",
-      "line_count": 1152,
+      "line_count": 1220,
       "theorem_chains": [
         {
           "text": "| 高级 Trait 主题：从关联类型到特化 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -21014,6 +21369,21 @@
         },
         {
           "title": "### 4.1 反命题"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
         }
       ],
       "code_blocks": [
@@ -21102,6 +21472,46 @@
           "lines": 27,
           "should_fail": true,
           "code_preview": "trait Container {     type Item<'a>;     fn get<'a>(&'a self) -> Self::Item<'a>;..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测 trait Container { type Item; fn get(&self) -> Self::It..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "#![feature(specialization)] // error[E0554]: `#![feature]` may not be safe to us..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "#![feature(trait_alias)] // error[E0554]: `#![feature]` may not be used on the s..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测 trait Tr { type Out; fn out(&self) -> Self::Out; } str..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测 trait Lending { type Item<'a>; fn next<'a>(&'a mut sel..."
         },
         {
           "flags": [],
@@ -21456,9 +21866,22 @@
       "layer": "L2",
       "title": "泛型关联类型（Generic Associated Types, GATs）",
       "positioning": "深入分析 Rust 1.65 稳定化的 **泛型（Generics）关联类型（GATs）**——从 `LendingIterator` 动机、语法规则、与 HRTB 的表达力边界，到稳定化历程与 1.97 的已知限制，给出可操作的选型判定表。",
-      "line_count": 676,
+      "line_count": 731,
       "theorem_chains": [],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -21547,6 +21970,36 @@
           "lines": 7,
           "should_fail": false,
           "code_preview": "trait Stream {     type Chunk<'a> where Self: 'a;     fn poll_chunk(&mut self) -..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测 trait Lending { type Item<'a>; fn next<'a>(&'a mut sel..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测 trait Lending { type Item<'a> where Self: 'a; fn next<..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测 trait Lending { type Item<'a> where Self: 'a; fn next<..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// rustc 1.99.0 stable 实测：编译通过（仅 dead_code 警告） trait Lending { type Item<'a> whe..."
         }
       ],
       "sources": [],
@@ -21581,7 +22034,7 @@
       "layer": "L2",
       "title": "负实现（Negative Impls）",
       "positioning": "",
-      "line_count": 381,
+      "line_count": 477,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -21589,6 +22042,24 @@
         },
         {
           "title": "### 4.1 反命题"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
         }
       ],
       "code_blocks": [
@@ -21679,6 +22150,50 @@
           "lines": 14,
           "should_fail": false,
           "code_preview": "#![feature(negative_bounds)]  use std::marker::PhantomData;  struct NotSendNotSy..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测 trait Foo {} struct Bar; impl !Foo for Bar {} // error..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测 struct Bar(std::rc::Rc<()>); impl !Send for Bar {} // ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "#![feature(negative_impls)] // rustc +nightly 实测 struct Bar; impl !Send for Bar ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "#![feature(negative_impls)] // rustc +nightly 实测 struct Bar; trait Marker {} imp..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "#![feature(negative_impls)] // rustc +nightly 实测：编译通过（仅 dead_code 警告） trait Foo ..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// rustc 1.99.0 stable 实测：assert 通过 use std::marker::PhantomData; struct NotSend..."
         }
       ],
       "sources": [],
@@ -24926,7 +25441,7 @@
       "layer": "L2",
       "title": "错误处理深入：从 Result 到自定义错误生态",
       "positioning": "深入分析 Rust **错误处理（Error Handling）机制**——从 `Result`/`Option` 的组合子到 `?` 运算符、错误转换、自定义错误类型和错误处理框架，揭示 Rust 如何将错误处理融入类型系统（Type System）实现编译期安全。",
-      "line_count": 861,
+      "line_count": 941,
       "theorem_chains": [
         {
           "text": "| 错误处理深入：从 Result 到自定义错误生态 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -24947,6 +25462,21 @@
         },
         {
           "title": "### 4.1 反命题"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
         }
       ],
       "code_blocks": [
@@ -25021,6 +25551,42 @@
           "lines": 26,
           "should_fail": false,
           "code_preview": "use std::error::Error; use std::fmt;  #[derive(Debug)] struct CyclicError {     ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测 #[derive(Debug)] struct MyErr; impl std::fmt::Display ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测 fn f() -> Option<i32> { let x = \"x\".parse::<i32>()?; S..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// rustc 1.99.0 stable 实测：编译通过，运行得到 // thread 'main' has overflowed its stack（进程..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// rustc 1.99.0 stable 实测：assert 通过 use std::error::Error; fn read() -> Result<S..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测 fn inner() -> Result<Result<i32, std::num::ParseIntErr..."
         }
       ],
       "sources": [],
@@ -25372,7 +25938,7 @@
       "layer": "L2",
       "title": "Rust 范围类型语义：`std::ops::Range` → `core::range`",
       "positioning": "探讨 Rust 范围类型从**运行时（Runtime）迭代器（Iterator）**到**编译期可复制的值类型**的语义演进，以及 `IntoIterator` vs `Iterator` 的设计权衡。",
-      "line_count": 723,
+      "line_count": 807,
       "theorem_chains": [
         {
           "text": "| Rust 范围类型语义：`std::ops::Range` → `core::range` 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -25393,6 +25959,24 @@
         },
         {
           "title": "### 4.1 反命题"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
         }
       ],
       "code_blocks": [
@@ -25479,6 +26063,50 @@
           "lines": 8,
           "should_fail": true,
           "code_preview": "fn main() {     let mut v = vec![1, 2, 3];     let r = &v;     // ❌ 编译错误: 已存在不可变..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 3,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测 fn main(){ let x = 5; if x == 1..5 { println!(\"y\"); } ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测 fn takes_inc(r: std::ops::RangeInclusive<i32>) { let _..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测 fn main(){     let r = 1..=5;     let a: Vec<i32> = r...."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// rustc 1.99.0 stable 实测：assert 全部通过 fn main() {     assert_eq!((0..3u32).size_..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// rustc 1.99.0 stable 实测：编译通过，运行 panic fn main(){     let v = vec![1, 2, 3];   ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测 fn classify(x: i32) -> &'static str {     match x {   ..."
         }
       ],
       "sources": [],
@@ -25695,7 +26323,7 @@
       "layer": "L2",
       "title": "高级类型系统：从关联类型到类型级编程",
       "positioning": "深入分析 Rust **类型系统（Type System）的高级特性**——从 GATs、impl Trait 到类型级计算和 const generics，揭示 Rust 如何在保持编译期安全的同时提供强大的抽象能力。",
-      "line_count": 1307,
+      "line_count": 1375,
       "theorem_chains": [
         {
           "text": "| 高级类型系统：从关联类型到类型级编程 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -25716,6 +26344,21 @@
         },
         {
           "title": "### 4.1 反命题"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
+        },
+        {
+          "title": "### 反例"
         }
       ],
       "code_blocks": [
@@ -25846,6 +26489,44 @@
           "lines": 5,
           "should_fail": true,
           "code_preview": "fn duplicate() {} fn duplicate() {}  fn main() {} ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测 fn make() -> impl Iterator<Item = i32> {     let v = v..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "// rustc 1.99.0 stable 实测：编译通过，输出 22 fn f(x: impl Fn(i32) -> i32) -> i32 { x(1) ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测 fn apply<F: for<'a> Fn(&'a i32) -> &'a i32>(f: F, x: &..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测 use std::marker::PhantomData; struct Co<T> { _p: Phant..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "// rustc 1.99.0 stable 实测 trait Tr { type Out = i32; } // error[E0658]: associat..."
         },
         {
           "flags": [
@@ -26682,7 +27363,7 @@
       "layer": "L2",
       "title": "`assert_matches!`：模式匹配断言的形式化语义",
       "positioning": "将 Rust 的**模式匹配（Pattern Matching）**能力从\"表达式求值\"扩展到\"测试断言\"的工程机制，实现编译期模式检查与运行时（Runtime）断言的统一。",
-      "line_count": 786,
+      "line_count": 815,
       "theorem_chains": [
         {
           "text": "| `assert_matches!`：模式匹配断言的形式化语义 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -26750,7 +27431,7 @@
           ],
           "lines": 17,
           "should_fail": false,
-          "code_preview": "use std::assert_matches::assert_matches;  #[derive(Debug, PartialEq)] struct Con..."
+          "code_preview": "use std::assert_matches;  #[derive(Debug, PartialEq)] struct Config { port: u16,..."
         },
         {
           "flags": [
@@ -26758,7 +27439,7 @@
           ],
           "lines": 17,
           "should_fail": false,
-          "code_preview": "use std::assert_matches::assert_matches;  #[derive(Debug)] enum State {     Idle..."
+          "code_preview": "use std::assert_matches;  #[derive(Debug)] enum State {     Idle,     Processing..."
         },
         {
           "flags": [
@@ -26766,7 +27447,7 @@
           ],
           "lines": 20,
           "should_fail": false,
-          "code_preview": "use std::assert_matches::assert_matches;  // 边界 1: 嵌套模式 let x = Some(Some(42)); ..."
+          "code_preview": "use std::assert_matches;  // 边界 1: 嵌套模式 let x = Some(Some(42)); assert_matches!(..."
         },
         {
           "flags": [],
@@ -26792,13 +27473,21 @@
           ],
           "lines": 6,
           "should_fail": true,
-          "code_preview": "// ❌ 编译错误: assert_matches! 未导入 fn main() {     let result: Result<i32, &str> = O..."
+          "code_preview": "// ❌ 编译错误: cannot find macro `assert_matches` in this scope fn main() {     let ..."
         },
         {
           "flags": [],
           "lines": 8,
           "should_fail": false,
-          "code_preview": "// ✅ 正确: 导入后使用 use std::assert_matches;  fn main() {     let result: Result<i32,..."
+          "code_preview": "// ✅ 正确: 显式导入（rustc 1.99.0 实测编译并运行通过） use std::assert_matches;  fn main() {     ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "use std::assert_matches;  fn main() {     let x: i32 = 5;     assert_matches!(x,..."
         },
         {
           "flags": [
@@ -26807,6 +27496,14 @@
           "lines": 19,
           "should_fail": true,
           "code_preview": "fn main() {     let opt = Some(Some(5));     // ❌ 编译错误: identifier `x` is bound ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "use std::assert_matches;  fn main() {     let v = (1, (1, 2));     assert_matche..."
         },
         {
           "flags": [
@@ -27215,7 +27912,7 @@
       "layer": "L2",
       "title": "过程宏：derive、attribute、function-like 与 TokenStream 操作",
       "positioning": "系统讲解过程宏的三种类型、编译期执行模型、`TokenStream` 操作、`syn`/`quote` 工作流，以及 span/hygiene 的工程实践。",
-      "line_count": 679,
+      "line_count": 718,
       "theorem_chains": [
         {
           "text": "| 理解三种过程宏 ⟹ 正确选型 | 知道 derive/attribute/function-like 的差异 | 能为场景选择合适宏类型 | 高 |",
@@ -27350,6 +28047,18 @@
           "lines": 3,
           "should_fail": false,
           "code_preview": "#[my_attr(foo = )] // ❌ 属性参数不是合法表达式/元属性 struct Item; ..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "#[proc_macro] pub fn nothing(_: proc_macro::TokenStream) -> proc_macro::TokenStr..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "macro_rules! helper { () => { let hidden = 1; } } fn main() {     helper!();    ..."
         }
       ],
       "sources": [],
@@ -27384,7 +28093,7 @@
       "layer": "L2",
       "title": "元编程：Rust 的编译期代码生成与变换",
       "positioning": "深入分析 Rust **元编程（Metaprogramming）**的技术体系——从声明式宏的模式匹配（Pattern Matching）、过程宏（Procedural Macro）的语法树操作，到 derive 宏的代码生成、quote/syn 工具体系，揭示 Rust 如何在编译期实现类型安全的代码变换同时保持宏卫生性（Hygiene）。",
-      "line_count": 923,
+      "line_count": 962,
       "theorem_chains": [
         {
           "text": "| 元编程：Rust 的编译期代码生成与变换 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -27421,6 +28130,18 @@
           "lines": 21,
           "should_fail": false,
           "code_preview": "// Derive 宏示例骨架 [syn docs](https://docs.rs/syn/latest/syn/) use proc_macro::Toke..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "const fn f(n: u32) -> u32 { if n == 0 { 0 } else { f(n - 1) } } const V: u32 = f..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "struct Foo<const F: f64>; fn main() { let _: Foo<3.14>; } ..."
         },
         {
           "flags": [],
@@ -27486,7 +28207,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 3,
-      "matrix_rows": 44,
+      "matrix_rows": 46,
       "pre_post": {
         "pre": [
           "[Attributes and Macros](../../01_foundation/09_macros_basics/01_attributes_and_macros.md) · [Macro Patterns](03_macro_patterns.md)"
@@ -27971,7 +28692,7 @@
       "layer": "L2",
       "title": "Rust 闭包：捕获语义、Trait 层级与工程实践",
       "positioning": "系统阐述 Rust 闭包的语法、捕获机制、`Fn`/`FnMut`/`FnOnce` 语义层级、`move` 闭包、函数指针强制转换、异步闭包与典型反模式，覆盖从基础使用到工程决策的完整链条。",
-      "line_count": 795,
+      "line_count": 844,
       "theorem_chains": [
         {
           "text": "| 理解捕获模式 ⟹ 正确选择 trait | 知道环境如何使用 | 能写出正确的泛型约束 | 高 |",
@@ -28109,6 +28830,18 @@
         },
         {
           "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "fn apply(f: fn(i32) -> i32, x: i32) -> i32 { f(x) } fn main() {     let base = 1..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "struct S { x: i32 } fn main() {     let mut s = S { x: 1 };     let c = move || ..."
+        },
+        {
+          "flags": [],
           "lines": 5,
           "should_fail": false,
           "code_preview": "let mut v = vec![1, 2, 3]; let f1 = || v.len(); let f2 = || v.push(4); let f3 = ..."
@@ -28131,7 +28864,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 47,
+      "matrix_rows": 48,
       "pre_post": {
         "pre": [
           "[Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) · [Borrowing](../../01_foundation/01_ownership_borrow_lifetime/02_borrowing.md) · [Traits](../00_traits/01_traits.md)"
@@ -29531,7 +30264,7 @@
       "layer": "L3",
       "title": "无锁编程与内存模型",
       "positioning": "深入探讨 Rust 中的**无锁编程**——从原子操作（Atomic Operations）到内存序，分析 lock-free 算法的内存安全（Memory Safety）保证与性能优势。",
-      "line_count": 1272,
+      "line_count": 1315,
       "theorem_chains": [
         {
           "text": "| 无锁编程与内存模型 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -29555,6 +30288,18 @@
         }
       ],
       "code_blocks": [
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "use std::sync::atomic::{AtomicUsize, Ordering}; fn main() {     let a = AtomicUs..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use std::sync::atomic::{AtomicUsize, Ordering}; fn main() {     let flag = Atomi..."
+        },
         {
           "flags": [
             "compile_fail"
@@ -31833,7 +32578,7 @@
       "layer": "L3",
       "title": "Async Closures（异步闭包）",
       "positioning": "",
-      "line_count": 673,
+      "line_count": 735,
       "theorem_chains": [
         {
           "text": "| async closures 提供原生异步闭包 ⟹ 简化高阶异步回调 | 掌握旧写法 `\\|x\\| async move {}` | 能用 `async \\|x\\| {}` 编写更简洁的异步回调 | 高 |",
@@ -31993,6 +32738,24 @@
           "code_preview": "async fn bad_once() {     let data = vec![1, 2, 3];      let f = async move |x: ..."
         },
         {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "fn main() {     let f: Box<dyn AsyncFn()> = Box::new(async || {}); // ❌ } ..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "async fn rec(n: u32) -> u32 { if n == 0 { 0 } else { rec(n - 1).await } } fn mai..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "fn main() {     let f = async |s: &str| s;   // 返回类型是 Future，Output = &'? str   ..."
+        },
+        {
           "flags": [
             "ignore"
           ],
@@ -32024,7 +32787,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 31,
+      "matrix_rows": 36,
       "pre_post": {
         "pre": [
           "Closures、async/await、Future、Pin"
@@ -37899,7 +38662,7 @@
       "layer": "L3",
       "title": "FFI 高级主题：跨语言边界的安全与性能",
       "positioning": "深入分析 Rust **FFI（外部函数接口）**的高级主题——从复杂类型映射、回调函数、到线程安全和内存布局控制，揭示如何在不安全边界上维持 Rust 的安全保证。",
-      "line_count": 983,
+      "line_count": 1029,
       "theorem_chains": [
         {
           "text": "| FFI 高级主题：跨语言边界的安全与性能 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -38016,6 +38779,24 @@
           "lines": 7,
           "should_fail": true,
           "code_preview": "fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {     // ❌ 编译错误: 不能返回 y，因为..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "#[repr(C)] struct Mid { head: str, tail: u8 } // ❌ str 不在末位 ..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "extern \"C\" { fn printf(fmt: *const i8, ...); } fn main() {     let x = 1i32;    ..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "trait T { extern \"C\" fn f(&self); } struct S; impl T for S { extern \"C\" fn f(&se..."
         }
       ],
       "sources": [],
@@ -39180,7 +39961,7 @@
       "layer": "L3",
       "title": "自定义分配器与内存布局优化",
       "positioning": "深入探讨 Rust 的**自定义分配器**机制——从 `GlobalAlloc` Trait 到 `allocator_api` 不稳定特性，分析内存布局对齐、分配策略与性能优化。",
-      "line_count": 912,
+      "line_count": 986,
       "theorem_chains": [
         {
           "text": "| 自定义分配器与内存布局优化 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -39289,6 +40070,24 @@
           "lines": 5,
           "should_fail": true,
           "code_preview": "fn duplicate() {} fn duplicate() {}  fn main() {} ..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "use std::alloc::{GlobalAlloc, Layout, System}; struct MyAlloc; unsafe impl Globa..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "use std::alloc::{GlobalAlloc, Layout, System}; fn init() -> usize { 1 } struct M..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "#[global_allocator] fn bad() -> MyAlloc { MyAlloc } // ❌ ..."
         }
       ],
       "sources": [],
@@ -39307,7 +40106,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 17,
+      "matrix_rows": 19,
       "pre_post": {
         "pre": [
           "[Memory Management](../../02_intermediate/02_memory_management/01_memory_management.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md) · [Unsafe Rust](../02_unsafe/01_unsafe.md)"
@@ -39324,7 +40123,7 @@
       "layer": "L3",
       "title": "零拷贝解析与序列化优化",
       "positioning": "探讨 Rust 中的**零拷贝**（Zero-Copy）技术——从字节切片（Slice）直接解析结构化数据，无需中间复制，分析内存安全（Memory Safety）与性能权衡。",
-      "line_count": 952,
+      "line_count": 1011,
       "theorem_chains": [
         {
           "text": "| 零拷贝解析与序列化优化 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -39435,6 +40234,18 @@
           "code_preview": "fn main() {     // ❌ 编译错误: 类型不匹配     let x: i32 = \"hello\"; } ..."
         },
         {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "struct Parser<'a> { input: &'a str, pos: usize } impl<'a> Parser<'a> {     fn pa..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "fn parse(s: &str) -> &str {     let t = s.to_string(); // 规范化副本（局部所有权）     &t[1...."
+        },
+        {
           "flags": [
             "ignore"
           ],
@@ -39461,7 +40272,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 17,
+      "matrix_rows": 21,
       "pre_post": {
         "pre": [
           "> [Ownership](../../01_foundation/01_ownership_borrow_lifetime/01_ownership.md) ·"
@@ -39478,7 +40289,7 @@
       "layer": "L3",
       "title": "类型擦除与动态分发",
       "positioning": "深入探讨 Rust 中的**类型擦除**技术——从 trait object 到 vtable，分析动态分发如何在保持类型安全的同时实现运行时（Runtime）多态。",
-      "line_count": 923,
+      "line_count": 971,
       "theorem_chains": [
         {
           "text": "选型判定：需要方法调用 ⟹ `dyn Trait`；需要类型查询/存储 ⟹ `Any`；需要零依赖/`no_std` ⟹ 手写。擦除的代价统一是「静态信息丢失」——编译器优化（内联、单态化（Monomorphization））在擦除边界终止。",
@@ -39586,6 +40397,18 @@
           "lines": 7,
           "should_fail": true,
           "code_preview": "fn main() {     let s = String::from(\"hello\");     let s2 = s;     // ❌ 编译错误: s ..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "trait Render { fn render<T: std::fmt::Display>(&self, v: T); } fn main() {     l..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "trait Render { fn render(&self); } struct S; impl Render for S { fn render(&self..."
         }
       ],
       "sources": [],
@@ -56426,7 +57249,7 @@
       "layer": "L5",
       "title": "Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行",
       "positioning": "本文件从**数学模型同构性**视角系统梳理 Rust 的执行模型（同步/异步（Async）/并发/并行），并与 Go、理论模型（CSP/Actor/π 演算/进程代数）建立精确的对应关系。",
-      "line_count": 1059,
+      "line_count": 1062,
       "theorem_chains": [
         {
           "text": "| Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行 基础定义 ⟹ 正确用法 | 理解语法与语义 | 能写出符合惯用法的代码 | 高 |",
@@ -72298,7 +73121,7 @@
       "layer": "L6",
       "title": "分布式 系统：Rust 在微服务 与集群中的工程实践",
       "positioning": "分析 Rust 在**分布式系统**中的独特价值——从 gRPC 服务网格、分布式共识到消息队列和 actor 模型，揭示 Rust 如何在云原生基础设施中提供 C++ 的性能和 Go 的开发效率。",
-      "line_count": 853,
+      "line_count": 882,
       "theorem_chains": [
         {
           "text": "| 分布式 系统：Rust 在微服务 与集群中的工程实践 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -72351,6 +73174,14 @@
           "lines": 24,
           "should_fail": true,
           "code_preview": "use std::rc::Rc;  struct Transaction {     state: Rc<TransactionState>, }  struc..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 18,
+          "should_fail": true,
+          "code_preview": "use std::rc::Rc; use std::future::Future;  async fn idle() {}  async fn fetch_st..."
         },
         {
           "flags": [
@@ -72427,7 +73258,7 @@
       "layer": "L6",
       "title": "Rust 云原生生态",
       "positioning": "分析 Rust 在云原生领域的应用——从微服务框架到容器化部署，探讨 Rust 的内存安全（Memory Safety）与性能优势如何重塑云基础设施。",
-      "line_count": 848,
+      "line_count": 877,
       "theorem_chains": [
         {
           "text": "| Rust 云原生生态 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -72482,6 +73313,14 @@
           "lines": 14,
           "should_fail": true,
           "code_preview": "use serde::Deserialize;  #[derive(Deserialize)] struct Config<'a> {     // ❌ 编译错..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 18,
+          "should_fail": true,
+          "code_preview": "struct AppConfig<'a> {     host: &'a str,     port: u16, }  impl<'a> AppConfig<'..."
         },
         {
           "flags": [
@@ -72698,7 +73537,7 @@
       "layer": "L6",
       "title": "HTTP 客户端开发",
       "positioning": "",
-      "line_count": 247,
+      "line_count": 285,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -72771,6 +73610,22 @@
           "lines": 6,
           "should_fail": false,
           "code_preview": "fn read_response(mut stream: TcpStream) -> std::io::Result<String> {     let mut..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 13,
+          "should_fail": true,
+          "code_preview": "struct Request<'a> {     url: &'a str, }  fn main() {     let id = 42;     // ❌ ..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// 修正 A：先绑定，临时 String 延长到作用域结束 fn build_request(id: u64) {     let url = format!..."
         }
       ],
       "sources": [],
@@ -72896,7 +73751,7 @@
       "layer": "L6",
       "title": "C10 Networks - Tier 2: WebSocket 实时通信",
       "positioning": "",
-      "line_count": 857,
+      "line_count": 884,
       "theorem_chains": [
         {
           "text": "> **定理链**: Real-Time Requirement ⟹ Connection State ⟹ Message Delivery",
@@ -72992,6 +73847,14 @@
           "lines": 4,
           "should_fail": false,
           "code_preview": "let stale: Vec<u64> = clients.iter()     .filter(|(_, n)| n.is_empty()).map(|(id..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 16,
+          "should_fail": true,
+          "code_preview": "use std::future::Future; use std::sync::Mutex;  async fn send_frame() {}  fn mai..."
         }
       ],
       "sources": [],
@@ -73385,7 +74248,7 @@
       "layer": "L6",
       "title": "Reactive Programming & FRP（响应式编程与函数式响应编程）",
       "positioning": "",
-      "line_count": 1142,
+      "line_count": 1177,
       "theorem_chains": [
         {
           "text": "| Reactive Programming & FRP（响应式编程与函数式响应编程） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -73500,6 +74363,22 @@
           "lines": 26,
           "should_fail": true,
           "code_preview": "// ❌ 错误：包含非 Send 类型的 Stream 不能跨线程 use std::rc::Rc; use futures::stream::{self, S..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 10,
+          "should_fail": true,
+          "code_preview": "fn main() {     let ticks = vec![1, 2, 3, 4];     // 把组合管道当\"信号\"存下来，想订阅两次     let..."
+        },
+        {
+          "flags": [
+            "ignore"
+          ],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "// 修正：把管道写成工厂函数，每次订阅重建冷流 fn signal<'a>(ticks: &'a [i32]) -> impl Iterator<Item =..."
         },
         {
           "flags": [
@@ -74068,7 +74947,7 @@
       "layer": "L6",
       "title": "Rust 嵌入式系统开发",
       "positioning": "探讨 Rust 在嵌入式系统领域的应用——从 `no_std` 到裸机编程，分析内存安全（Memory Safety）如何保证关键系统的可靠性。",
-      "line_count": 1038,
+      "line_count": 1069,
       "theorem_chains": [
         {
           "text": "| Rust 嵌入式系统开发 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -74165,6 +75044,14 @@
           "lines": 11,
           "should_fail": false,
           "code_preview": "#![no_std] extern crate alloc;  use alloc::vec::Vec;  fn main() {     // ❌ 编译错误:..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "#![no_std] use core::panic::PanicInfo;  #[panic_handler] fn panic1(_: &PanicInfo..."
         }
       ],
       "sources": [],
@@ -74188,7 +75075,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 28,
+      "matrix_rows": 31,
       "pre_post": {
         "pre": [
           "[Unsafe](../../03_advanced/02_unsafe/01_unsafe.md) ·",
@@ -74951,7 +75838,7 @@
       "layer": "L6",
       "title": "Target Tier 平台支持全景：分层保证与 1.90–1.97 变迁",
       "positioning": "",
-      "line_count": 268,
+      "line_count": 290,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -74969,6 +75856,14 @@
           "lines": 10,
           "should_fail": false,
           "code_preview": "#[cfg(all(target_arch = \"riscv64\", target_feature = \"d\"))] fn double_precision_m..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 2,
+          "should_fail": true,
+          "code_preview": "pub fn f() { let _s = String::from(\"x\"); } ..."
         },
         {
           "flags": [
@@ -75016,7 +75911,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 1,
-      "matrix_rows": 24,
+      "matrix_rows": 25,
       "pre_post": {
         "pre": [
           "[交叉编译与 target 三元组](02_cross_compilation.md) · [将 Rust 集成到现有平台](../00_toolchain/08_platform_rust_integration.md)"
@@ -80075,7 +80970,7 @@
       "layer": "L6",
       "title": "RTOS 与 Rust 调度模型对比",
       "positioning": "",
-      "line_count": 557,
+      "line_count": 597,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -80164,6 +81059,20 @@
           "lines": 3,
           "should_fail": false,
           "code_preview": "// Hubris 不允许 let task = hubris::spawn(new_task_code); // 运行时错误 / 不支持 ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 12,
+          "should_fail": true,
+          "code_preview": "struct Scheduler { tasks: Vec<Box<dyn FnMut(&mut Scheduler)>> }  impl Scheduler ..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "struct Scheduler { tasks: Vec<Box<dyn FnMut(&mut Scheduler)>> }  impl Scheduler ..."
         }
       ],
       "sources": [],
@@ -81845,7 +82754,7 @@
       "layer": "L6",
       "title": "数据库系统：Rust 在存储引擎中的语义",
       "positioning": "深入分析 Rust 实现的数据库系统——TiKV（分布式事务）、Materialize（流式 SQL）、Meilisearch（搜索引擎）、SurrealDB（多模型）——的架构语义、正确性保证与选型策略。",
-      "line_count": 617,
+      "line_count": 642,
       "theorem_chains": [
         {
           "text": "| 数据库系统：Rust 在存储引擎中的语义 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -81935,6 +82844,14 @@
           "lines": 14,
           "should_fail": false,
           "code_preview": "// 概念代码: Sea-ORM 的实体定义 // #[derive(Clone, Debug, PartialEq, DeriveEntityModel)] ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 15,
+          "should_fail": true,
+          "code_preview": "struct Conn { data: Vec<u8> } struct Row<'a>(&'a [u8]); // 借用连接的数据，等价 rusqlite 的..."
         },
         {
           "flags": [
@@ -84988,7 +85905,7 @@
       "layer": "L6",
       "title": "WebAssembly 生态：Rust 的浏览器外运行时",
       "positioning": "> 系统分析 Rust 在 **WebAssembly (Wasm)** 生态中的核心地位，",
-      "line_count": 716,
+      "line_count": 770,
       "theorem_chains": [
         {
           "text": "| WebAssembly 生态：Rust 的浏览器外运行时 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -85075,6 +85992,22 @@
           "lines": 8,
           "should_fail": false,
           "code_preview": "#![no_std]  fn main() {     // ❌ 运行时陷阱: no_std WASM 中 panic 默认调用 `unreachable`  ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 3,
+          "should_fail": true,
+          "code_preview": "use core::arch::wasm32::unreachable; fn main() { unsafe { unreachable() } } ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "use std::os::unix::fs::PermissionsExt; fn main() {     let m = std::fs::metadata..."
         }
       ],
       "sources": [],
@@ -85090,7 +86023,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 4,
-      "matrix_rows": 35,
+      "matrix_rows": 40,
       "pre_post": {
         "pre": [
           "[Toolchain](../00_toolchain/01_toolchain.md) · [FFI](../../03_advanced/04_ffi/01_rust_ffi.md) · [Type System](../../01_foundation/02_type_system/01_type_system.md)",
@@ -85108,7 +86041,7 @@
       "layer": "L6",
       "title": "许可证与合规：Rust 项目的法律工程",
       "positioning": "系统讲解 Rust **开源许可证选择**、**依赖合规**和**版权管理**",
-      "line_count": 706,
+      "line_count": 750,
       "theorem_chains": [
         {
           "text": "| 许可证与合规：Rust 项目的法律工程 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -85177,6 +86110,22 @@
           "lines": 11,
           "should_fail": false,
           "code_preview": "// ❌ 法律风险: 静态链接 GPL-3.0 crate 可能使整个项目变为 GPL // Cargo.toml: // [dependencies] // ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "#![feature(generic_const_exprs)] struct Buf<const N: usize>([u8; N]); fn main() ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 3,
+          "should_fail": true,
+          "code_preview": "#![forbid(unsafe_code)] fn main() { unsafe { let _x = 1; } } ..."
         }
       ],
       "sources": [],
@@ -85192,7 +86141,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 2,
-      "matrix_rows": 14,
+      "matrix_rows": 18,
       "pre_post": {
         "pre": [
           "[Toolchain](../00_toolchain/01_toolchain.md) · [Cargo](../00_toolchain/01_toolchain.md) · [Security Practices](../07_security_and_cryptography/01_security_practices.md)",
@@ -86113,7 +87062,7 @@
       "layer": "L6",
       "title": "Machine Learning Ecosystem（机器学习生态）",
       "positioning": "",
-      "line_count": 1141,
+      "line_count": 1200,
       "theorem_chains": [
         {
           "text": "| Machine Learning Ecosystem（机器学习生态） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -86258,6 +87207,22 @@
           "lines": 28,
           "should_fail": false,
           "code_preview": "// ❌ 错误：运行时维度不匹配 use burn::tensor::Tensor; use burn::backend::NdArray;  type B =..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "trait Layer {     fn forward<T: Copy>(&self, input: T) -> T; } fn build(l: Box<d..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 10,
+          "should_fail": true,
+          "code_preview": "struct Tensor<const N: usize>([f32; N]); fn dot<const N: usize>(a: &Tensor<N>, b..."
         }
       ],
       "sources": [],
@@ -86280,7 +87245,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 76,
+      "matrix_rows": 82,
       "pre_post": {
         "pre": [
           "[类型系统（Type System）](../../01_foundation/02_type_system/01_type_system.md) · [泛型（Generics）](../../02_intermediate/01_generics/01_generics.md) · [Trait](../../02_intermediate/00_traits/01_traits.md) · [Unsafe Rust](../../03_advanced/02_unsafe/01_unsafe.md)",
@@ -86563,7 +87528,7 @@
       "layer": "L6",
       "title": "Rust 量子计算生态",
       "positioning": "",
-      "line_count": 1082,
+      "line_count": 1130,
       "theorem_chains": [
         {
           "text": "| Quantum Computing in Rust（量子计算与 Rust） 基础原理 ⟹ 正确选型 | 理解核心概念与适用边界 | 能在实际项目中做出合理决策 | 高 |",
@@ -86678,6 +87643,22 @@
           "lines": 32,
           "should_fail": true,
           "code_preview": "// ❌ 错误：在强制要求厄米性的类型系统中传入非厄米算符 // 量子演化算符 e^{-iHt} 必须是幺正的，而幺正性的前提是 H 为厄米算符（H = H†）..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 5,
+          "should_fail": true,
+          "code_preview": "fn main() {     let amp: f64 = 1.0i;     println!(\"{amp}\"); } ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 7,
+          "should_fail": true,
+          "code_preview": "use std::simd::f32x4; fn main() {     let a = f32x4::splat(1.0);     let b: [f32..."
         }
       ],
       "sources": [],
@@ -86699,7 +87680,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 39,
+      "matrix_rows": 44,
       "pre_post": {
         "pre": [
           "[Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)",
@@ -87184,32 +88165,48 @@
       "layer": "L6",
       "title": "安全关键 Rust 专题索引",
       "positioning": ">",
-      "line_count": 60,
+      "line_count": 186,
       "theorem_chains": [],
       "anti_propositions": [],
-      "code_blocks": [],
+      "code_blocks": [
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 4,
+          "should_fail": true,
+          "code_preview": "// ❌ 安全参数越界：栈深度上限被写成非法表达式 const STACK_DEPTH: usize = 1 / 0; fn main() { println!..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../../../content/safety_critical/02_rust_safety_critical_ecosystem_master_index.md",
+        "../../../content/safety_critical/03_decision_trees/02_safety_integrity_level_selection_guide.md",
         "../../../content/safety_critical/07_case_studies/01_case_study_01_ferrocene_certification.md",
+        "../../../content/safety_critical/07_case_studies/02_case_study_02_nasa_cfs_rust.md",
         "../../../content/safety_critical/07_case_studies/03_case_study_03_automotive_ecus.md",
+        "../../../content/safety_critical/07_case_studies/04_case_study_04_medical_devices.md",
+        "../../../content/safety_critical/07_case_studies/05_case_study_05_railway_signaling.md",
         "../../../content/safety_critical/10_standards/01_do_178c_rust_compliance_pathway.md",
         "../../../content/safety_critical/10_standards/02_iec_61508_rust_implementation_guide.md",
         "../../../content/safety_critical/10_standards/03_iso_26262_rust_implementation_guide.md",
         "../../../content/safety_critical/10_standards/04_misra_c_2025_addendum_6_guide.md",
+        "../../../content/safety_critical/10_standards/05_regulatory_landscape_and_approvals.md",
         "../../04_formal/04_model_checking/01_verification_toolchain.md",
         "../../04_formal/04_model_checking/03_aerospace_certification_formal_methods.md",
         "../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md",
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../07_future/02_preview_features/02_mcdc_coverage_preview.md",
         "../../07_future/02_preview_features/03_safety_tags_preview.md",
         "../../07_future/02_preview_features/12_ferrocene_preview.md",
+        "../07_security_and_cryptography/03_cargo_vet_supply_chain.md",
         "22_autosar_and_rust.md",
         "23_safety_critical_systems_engineering.md"
       ],
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 17,
+      "matrix_rows": 51,
       "pre_post": {
         "pre": [
           ">"
@@ -87226,7 +88223,7 @@
       "layer": "L6",
       "title": "AUTOSAR 与 Rust",
       "positioning": "",
-      "line_count": 215,
+      "line_count": 246,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -87235,11 +88232,20 @@
           "lines": 12,
           "should_fail": false,
           "code_preview": "#![deny(unsafe_code)] // 安全关键 crate 的入口约束：拒绝 unsafe， // 迫使 unsafe 边界集中到少数经评审、有形式..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "fn main() {     let raw: u16 = 300;      // 传感器原始值（> u8::MAX）     let sig: u8 = ..."
         }
       ],
       "sources": [],
       "cross_references": [
         "../../../content/safety_critical/07_case_studies/03_case_study_03_automotive_ecus.md",
+        "../../../content/safety_critical/10_standards/04_misra_c_2025_addendum_6_guide.md",
         "../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md",
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../../07_future/02_preview_features/12_ferrocene_preview.md",
@@ -87251,7 +88257,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 2,
-      "matrix_rows": 26,
+      "matrix_rows": 31,
       "pre_post": {
         "pre": [
           "[Ferrocene](../../07_future/02_preview_features/12_ferrocene_preview.md) · [认证工具链与认证包清单](../../04_formal/04_model_checking/10_certified_toolchains_and_packages.md) · [安全关键 Rust 专题索引](21_safety_critical_topic_index.md) · [Rust vs C++](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
@@ -88142,7 +89148,7 @@
       "layer": "L6",
       "title": "Rust 高级网络协议概览",
       "positioning": "",
-      "line_count": 332,
+      "line_count": 362,
       "theorem_chains": [
         {
           "text": "| 类型状态 ⟹ 更少运行时（Runtime）错误 | 将协议阶段编码为类型 | 非法状态转移被编译器拦截 |",
@@ -88208,6 +89214,20 @@
           "lines": 4,
           "should_fail": false,
           "code_preview": "fn parse_len(frame: &[u8]) -> Option<u32> {     Some(u32::from_be_bytes(frame.ge..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 6,
+          "should_fail": true,
+          "code_preview": "async fn read_frame() -> u32 { 42 }  fn handle() -> u32 { read_frame().await } /..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "async fn read_frame() -> u32 { 42 }  async fn handle() -> u32 { read_frame().awa..."
         }
       ],
       "sources": [],
