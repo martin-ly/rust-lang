@@ -172,6 +172,35 @@ RUSTFLAGS="-Z sanitizer=memory -Z build-std" \
 
 ---
 
+## ⚠️ 实测反例
+
+### 反例：stable rustc 拒绝 sanitizer 旗标（rustc 1.99.0 实测）
+
+```text
+> rustc +stable-x86_64-pc-windows-msvc -Csanitizer=address t.rs
+error: unknown codegen option: `sanitizer`
+
+> rustc +stable-x86_64-pc-windows-msvc -Zsanitizer=address t.rs
+error: the option `Z` is only accepted on the nightly compiler
+
+help: consider switching to a nightly toolchain: `rustup default nightly`
+note: selecting a toolchain with `+toolchain` arguments require a rustup proxy; see <https://rust-lang.github.io/rustup/concepts/index.html>
+note: for more information about Rust's stability policy, see <https://doc.rust-lang.org/book/appendix-07-nightly-rust.html#unstable-features>
+
+error: 1 nightly option were parsed
+```
+
+复现：任意 `hello.rs` 加上述两条命令即可，无需额外依赖。
+
+修正：在 nightly 工具链上该旗标可用（需组件与构建标准库配合）：
+
+```text
+rustup component add rust-src --toolchain nightly
+cargo +nightly build -Zbuild-std -Zsanitizer=address
+```
+
+工程解释：AddressSanitizer 通过 `-Zsanitizer=...`（unstable 选项）接入 LLVM 的 instrumentation pass，而非稳定 `-C` codegen 白名单，因此 stable rustc 对 `-Csanitizer` 报 "unknown codegen option"（`-C` 只接受已稳定选项），对 `-Zsanitizer` 报 "the option `Z` is only accepted on the nightly compiler"。两条都是命令行参数诊断，没有 `Exxxx` 错误码——它们属于稳定性策略闸门，发生在任何编译阶段之前。CI 要跑 ASan/LSan/TSan 必须把该 stage 固定到 nightly 工具链（通常配合 `-Zbuild-std`），stable 流水线则改用 Miri 或预构建镜像中的 sanitizer 作替代。
+
 ## 七、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |

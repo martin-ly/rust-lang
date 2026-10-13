@@ -345,6 +345,39 @@ build-std = ["core", "alloc"]
 
 ---
 
+## ⚠️ 实测反例
+
+**cargo/rustc 1.99.0 实测：stable 上 `-Z build-std` 的三条进入路径全部被拦，且报错文案各不相同。**
+
+路径一——命令行直接传 `-Z`（cargo 层拦截）：
+
+```text
+$ cargo build -Z build-std
+error: the `-Z` flag is only accepted on the nightly channel of Cargo, but this is the `stable` channel
+```
+
+路径二——绕过 cargo、直接 rustc（rustc 层拦截）：
+
+```text
+$ rustc -Z build-std=core,alloc src/main.rs
+error: the option `Z` is only accepted on the nightly compiler
+help: consider switching to a nightly toolchain: `rustup default nightly`
+```
+
+路径三——藏进 `RUSTFLAGS`（或 `.cargo/config.toml` 的 `build.rustflags`）试图偷渡：cargo 在更早的「探测 target 信息」阶段就崩，报错完全看不出与 build-std 有关：
+
+```text
+$ RUSTFLAGS="-Zbuild-std" cargo build
+error: failed to run `rustc` to learn about target-specific information
+  ...
+  --- stderr
+  error: the option `Z` is only accepted on the nightly compiler
+```
+
+**工程解释**：`-Z` 门禁在 cargo 与 rustc 两层各自独立实施，环境变量偷渡不会「骗过」检查，只会把错误挪到 cargo 的 target 探测阶段、以「failed to run rustc」这种误导性形态出现。stable 工具链上不存在任何合法的 build-std 用法——嵌入式 CI 若 pinned stable，必须改用预编译 target 或在 `rust-toolchain.toml` 显式声明 nightly + `rust-src`。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

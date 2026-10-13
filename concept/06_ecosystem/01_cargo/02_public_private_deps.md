@@ -285,6 +285,52 @@ pub fn connect() -> internal_crate::Connection { ... }
 
 ---
 
+## ⚠️ 实测反例
+
+**rustc/cargo 1.99.0 实测：中间层直接调用私有依赖的 `pub(crate)` 项，得到 E0603 硬错误。**
+
+三个 path 依赖 crate（`c → a → b`），`b` 未声明 `public = true`，`a` 试图把 `b` 的 `pub(crate)` 函数包进自己的公共 API：
+
+```toml
+# b/Cargo.toml（无 public = true）
+[package]
+name = "b"
+version = "0.1.0"
+edition = "2021"
+```
+
+```rust
+// b/src/lib.rs
+pub struct Widget(pub u32);
+pub(crate) fn secret() -> Widget { Widget(7) }
+```
+
+```rust
+// a/src/lib.rs —— 想复用 b 的内部函数
+pub fn make() -> b::Widget { b::secret() }
+```
+
+`cargo build`（cargo 1.99.0 / rustc 1.99.0）编译 `a` 时失败：
+
+```text
+error[E0603]: function `secret` is private
+ --> a\src\lib.rs:1:33
+  |
+1 | pub fn make() -> b::Widget { b::secret() }
+  |                                 ^^^^^^ private function
+  |
+note: the function `secret` is defined here
+ --> b\src\lib.rs:2:1
+  |
+2 | pub(crate) fn secret() -> Widget { Widget(7) }
+```
+
+把 `b/Cargo.toml` 加上 `[lib] public = true` 后同一套代码编译通过，且下游 `c` 通过 `a::secret()` 正常调用——这正是 public dependency 机制把「隐私边界」与「API 边界」对齐的直接证据。
+
+**工程解释**：E0603 说明 crate 边界在链接前就被 rustc 强制执行——`public = true` 不是文档约定，而是改变下游可见性的编译开关；反过来，若只是 `pub use b::helper` 式的纯转发，即使不加 `public = true` 也能编译（实测通过），此时泄漏的是 API 面而非编译失败，需要靠 SemVer 纪律兜底。
+
+---
+
 ## 国际权威参考 / International Authority References（P0 官方 · P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

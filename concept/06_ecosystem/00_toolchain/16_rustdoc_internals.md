@@ -594,6 +594,33 @@ pub use crate_a::inner::*; // 扁平 reexport
 
 ---
 
+## ⚠️ 实测反例
+
+### 反例：`--deny broken_intra_doc_links` 下悬空 intra-doc link 使 rustdoc 退出码非 0（rustc 1.99.0 实测）
+
+```rust
+//! A crate.
+
+pub struct Bar;
+
+/// Link to [Foo].
+pub fn f() {}
+```
+
+```text
+> rustdoc +stable-x86_64-pc-windows-msvc --deny broken_intra_doc_links -o rdx t5.rs
+warning: lint `broken_intra_doc_links` has been renamed to `rustdoc::broken_intra_doc_links`
+error: unresolved link to `Foo`
+ --> t5.rs:5:14
+  |
+5 | /// Link to [Foo].
+  |              ^^^ no item named `Foo` in scope
+  = note: `-D rustdoc::broken-intra-doc-links` implied by `-D broken_intra_doc_links`
+error: aborting due to 1 previous error; 1 warning emitted
+```
+
+工程解释：rustdoc 的 lint 命名空间是 `rustdoc::` 前缀的独立 lint 集，bare 旧名 `broken_intra_doc_links` 仍可用但触发 `renamed_and_removed_lints` 警告——CI 脚本里的旧旗标写法本身就是待清理的技术债。该诊断没有 `Exxxx` 数字码（rustdoc lint 走 lint 机制而非 rustc 错误码体系），但 `-D` 把它升格为 error 后 rustdoc 退出码 1，文档构建门禁据此失败。链接目标 `Foo` 不存在时 rustdoc 只在文档里留纯文本，肉眼难发现，必须靠 deny 级 lint 在 CI 拦截。
+
 ## 🧭 思维导图（Mindmap）
 
 ```mermaid

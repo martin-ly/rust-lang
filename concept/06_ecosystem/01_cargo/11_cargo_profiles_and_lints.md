@@ -237,6 +237,48 @@ workspace = true
 
 ---
 
+## ⚠️ 实测反例
+
+**cargo/rustc 1.99.0 实测：`[lints] workspace = true` 与成员自定义 lint 表混用直接 manifest 解析失败；纯继承时 `forbid` 是硬错误。**
+
+workspace root 声明 `[workspace.lints.rust] unsafe_code = "forbid"`，成员 `w` 只写 `[lints] workspace = true`：
+
+```toml
+# 根 Cargo.toml
+[workspace]
+members = ["w"]
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+# w/Cargo.toml
+[lints]
+workspace = true
+```
+
+`cargo build` 对 `pub unsafe fn bad()` 报：
+
+```text
+error: declaration of an `unsafe` function
+ --> w\src\lib.rs:1:1
+  |
+1 | pub unsafe fn bad() -> i32 { ... }
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+```
+
+若成员试图「继承 + 覆盖」同一 lint（`workspace = true` 同时再写 `[lints.rust] unsafe_code = "warn"`），cargo 连编译都不开始：
+
+```text
+error: failed to parse manifest at `w\Cargo.toml`
+
+Caused by:
+  cannot override `workspace.lints` in `lints`, either remove the overrides
+  or `lints.workspace = true` and manually specify the lints
+```
+
+**工程解释**：lint 继承是「全有或全无」——cargo 不允许部分覆盖，想放宽某条 lint 必须放弃 `workspace = true` 并完整手写成员 lint 表（此时与 workspace 其余成员漂移，正是 monorepo lint 审计要防的事）。另外实测顺带暴露：virtual workspace 不写 `resolver` 时 cargo 1.99 会 warning 并退回 resolver "1"，与成员 edition 不一致。
+
+---
+
 ## 嵌入式测验
 
 本节将「嵌入式测验」分解为若干主题：测验 1：`cargo test` 默认使用哪个 profile？、测验 2：自定义 profile 必须指定哪个字段？、测验 3：Profile override 不能设置哪三个字段？与测验 4：Cargo lints 在 Rust 1.96 上是什么状态？。

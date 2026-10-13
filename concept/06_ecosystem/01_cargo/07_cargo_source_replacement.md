@@ -309,6 +309,41 @@ vendored 源码附带 `.cargo-checksum.json`，cargo 逐文件校验，任何手
 
 ---
 
+## ⚠️ 实测反例
+
+**cargo 1.99.0 实测：`[patch.crates-io]` 版本与依赖要求不兼容时补丁被静默忽略，只留一条 warning。**
+
+包 `w` 依赖 `serde = "1.0"`，同时 `[patch.crates-io]` 指向本地 fork，但 fork 版本号写成 `9.9.9`：
+
+```toml
+# w/Cargo.toml
+[dependencies]
+serde = "1.0"
+[patch.crates-io]
+serde = { path = "../patch/serde_local" }   # fork 的 version = "9.9.9"
+```
+
+`cargo build` 输出：
+
+```text
+warning: patch `serde v9.9.9 (...serde_local)` was not used in the crate graph
+help: Check that the patched package version and available features are compatible
+      with the dependency requirements. ...
+   Compiling serde v1.0.229          # 实际编译的仍是 crates.io 原版！
+error[E0425]: cannot find function `patched_marker` in crate `serde`
+```
+
+把 fork 版本改为 `1.0.99`（与 `"1.0"` 需求 SemVer 兼容）后重跑，补丁立即生效：
+
+```text
+   Compiling w v0.1.0
+patched = 1                          # 调用的是本地 fork 的函数
+```
+
+**工程解释**：`[patch]` 不是「无条件替换」——替换候选仍要过版本需求过滤，`9.9.9` 不满足 `^1.0` 所以被丢弃，而 cargo 只 warning 不报错。CI 里若不禁用 warning，「打了补丁」的构建实际跑的还是上游原版，这是供应链场景里最隐蔽的失效模式：补丁静默失效比编译失败更危险。
+
+---
+
 ## 🧭 思维导图（Mindmap）
 
 ```mermaid

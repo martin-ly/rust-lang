@@ -284,6 +284,37 @@ serde = { workspace = true }
 
 ---
 
+## ⚠️ 实测反例
+
+**cargo 1.99.0 实测：workspace 目录下未列入 members 的 crate，是否报错取决于有没有 path 依赖把它「拉进」workspace。**
+
+workspace root 只写 `members = ["app"]`，目录树里还有 `libs/helper`（被 app path 依赖）和 `libs/orphan`（无人依赖）：
+
+```toml
+# 根 Cargo.toml
+[workspace]
+members = ["app"]
+resolver = "2"
+```
+
+在 `libs/orphan` 里执行 `cargo build`，直接失败：
+
+```text
+error: current package believes it's in a workspace when it's not:
+current:   ...\p14\libs\orphan\Cargo.toml
+workspace: ...\p14\Cargo.toml
+
+this may be fixable by adding `libs\orphan` to the `workspace.members` array ...
+Alternatively, to keep it out of the workspace, add the package to the
+`workspace.exclude` array, or add an empty `[workspace]` table ...
+```
+
+而 `libs/helper` 虽然同样不在 members 列表，`cargo metadata --no-deps` 实测的 `workspace_members` 却是 `["app", "libs/helper"]`——path 依赖让它被自动纳入；`cargo build -p helper` 在 root 也能直接构建。
+
+**工程解释**：workspace 成员资格 = 显式 members ∪ 传递 path 依赖闭包。CI 脚本按 `members` 列表遍历构建时会静默漏掉「靠 path 依赖入伙」的 crate，而新人手动进入 orphan 目录又会被硬错误拦住——两种失效方向相反。治理办法是显式列出全部成员（或用 glob `members = ["crates/*"]`），并把真正不想纳入的目录写进 `exclude`。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

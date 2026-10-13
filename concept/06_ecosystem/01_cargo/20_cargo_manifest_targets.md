@@ -207,6 +207,53 @@ fn main() {
 }
 ```
 
+---
+
+## ⚠️ 实测反例
+
+**cargo 1.99.0 实测：`[[bin]]` 配置错误的三种失效形态各有不同的报错位置。**
+
+形态一——`path` 指向不存在的文件，报错发生在 target 解析阶段，连 rustc 都没启动：
+
+```toml
+[[bin]]
+name = "ghost"
+path = "src/nonexistent_main.rs"
+```
+
+```text
+error: can't find bin `ghost` at path `...\src\nonexistent_main.rs`
+ --> Cargo.toml
+error: could not compile due to 1 previous target resolution error
+```
+
+形态二——两个 `[[bin]` 同名，manifest 解析直接失败：
+
+```text
+error: failed to parse manifest at `Cargo.toml`
+
+Caused by:
+  found duplicate binary name dup, but all binary targets must have a unique name
+```
+
+形态三——`required-features` 未开启时该 bin 被静默跳过，显式请求才报错：
+
+```toml
+[[bin]]
+name = "cli_tool"
+path = "src/cli.rs"
+required-features = ["cli"]
+```
+
+`cargo build` 正常 Finished（cli_tool 根本没构建）；`cargo run --bin cli_tool` 才报：
+
+```text
+error: target `cli_tool` in package `w` requires the features: `cli`
+Consider enabling them by passing, e.g., `--features="cli"`
+```
+
+**工程解释**：target 配置错误分三层——manifest 解析层（重名）、target 解析层（路径缺失）、构建选择层（required-features）。第三层最隐蔽：默认 `cargo build`/CI 不报错，二进制「消失」在产物里，只有运行侧才发现，发布脚本应显式 `--features` 或校验产物清单。
+
 ## 🧭 思维导图（Mindmap）
 
 ```mermaid

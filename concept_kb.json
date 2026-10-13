@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 793,
-    "generated_at": "2026-10-13T18:10:14.797805+00:00"
+    "generated_at": "2026-10-13T18:26:10.338814+00:00"
   },
   "files": [
     {
@@ -27417,7 +27417,7 @@
           ],
           "lines": 6,
           "should_fail": false,
-          "code_preview": "use std::assert_matches::debug_assert_matches;  // release 模式下被消除（零运行时开销） let co..."
+          "code_preview": "use std::debug_assert_matches;  // release 模式下被消除（零运行时开销） let config = Some(true..."
         },
         {
           "flags": [],
@@ -27507,11 +27507,11 @@
         },
         {
           "flags": [
-            "ignore"
+            "compile_fail"
           ],
           "lines": 8,
-          "should_fail": false,
-          "code_preview": "#[test] fn test_nested_match() {     let result: Result<Option<i32>, ()> = Ok(So..."
+          "should_fail": true,
+          "code_preview": "use std::assert_matches;  fn main() {     let result: Result<Option<i32>, ()> = ..."
         },
         {
           "flags": [
@@ -27565,7 +27565,7 @@
       "layer": "L2",
       "title": "DSL 与嵌入 式设计：Rust 中的领域特定语言",
       "positioning": "分析 Rust 中 **DSL（领域特定语言）**的构建方法——从宏（Macro）驱动的内嵌 DSL（如 html!、sql!）、到外部 DSL 的解析器 [来源: [Parsing in Rust](https://rustc-dev-guide.rust-lang.org/)]组合子（parser combinators），再到 Rust 作为宿主语言的嵌入策略，揭示类型安全 DSL 的设计模式。",
-      "line_count": 893,
+      "line_count": 926,
       "theorem_chains": [
         {
           "text": "- **反命题 1：「类型状态机（typestate）DSL 总是值得」** —— 有边界。typestate 把非法状态转为编译错误的代价是类型数量爆炸与错误信息晦涩——状态数 × 转换数超过 ~20 时，泛型（Generics）签名的可读性崩溃。判定准则：状态机是 API 的核心契约（如协议握手、构建器必填字段）⟹ typestate 值得；内部实现细节 ⟹ 运行期 `enum` + 断言更简单。",
@@ -27655,11 +27655,17 @@
         },
         {
           "flags": [
-            "ignore"
+            "compile_fail"
           ],
-          "lines": 14,
+          "lines": 11,
+          "should_fail": true,
+          "code_preview": "macro_rules! sum {     () => { 0 };     ($head:expr $(, $rest:expr)*) => { $head..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
           "should_fail": false,
-          "code_preview": "macro_rules! recursive {     () => { 0 };     ($e:expr $(, $rest:expr)*) => {   ..."
+          "code_preview": "// ✅ 正确: crate 根部提高递归限制（rustc 1.99.0 实测编译并运行，输出 11325） #![recursion_limit = \"256..."
         },
         {
           "flags": [
@@ -27684,6 +27690,12 @@
           "lines": 14,
           "should_fail": false,
           "code_preview": "macro_rules! sql {     (SELECT $col:tt FROM $table:tt) => { format!(\"SELECT {} F..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "// rustc 1.99.0 实测运行输出: a=1 b=2 total=2 use std::cell::Cell;  macro_rules! twice..."
         }
       ],
       "sources": [],

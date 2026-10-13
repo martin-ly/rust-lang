@@ -230,6 +230,44 @@ cargo rustc -- --emit=asm -C llvm-args=-x86-asm-syntax=intel
 
 ---
 
+## ⚠️ 实测反例
+
+### 反例：safe 代码调用 `#[target_feature]` 函数被硬拒绝（rustc 1.99.0 实测，E0133）
+
+```rust
+#[target_feature(enable = "avx2")]
+fn f() {}
+fn main(){ f(); }
+```
+
+```text
+> rustc +stable-x86_64-pc-windows-msvc --edition 2021 t.rs
+error[E0133]: call to function `f` with `#[target_feature]` is unsafe and requires unsafe function or block
+ --> t.rs:3:12
+  |
+3 | fn main(){ f(); }
+  |            ^^^ call to function with `#[target_feature]`
+```
+
+修正：把函数声明为 `unsafe fn f()` 并在调用处包 `unsafe { ... }`，或用 `#[cfg(target_feature = "avx2")]` 把调用限制在已启用该特性的编译单元内：
+
+```rust
+#[target_feature(enable = "avx2")]
+unsafe fn f() {}
+fn main(){
+    #[cfg(target_feature = "avx2")]
+    unsafe { f(); }
+}
+```
+
+```text
+> rustc +stable-x86_64-pc-windows-msvc --edition 2021 t_fixed.rs
+warning: function `f` is never used        # cfg 块在未启用 avx2 的默认 target 下被剔除
+error[E0133] 消失，编译通过（rc=0）
+```
+
+工程解释：`#[target_feature]` 是 codegen 层属性——它指示 LLVM 后端为该函数发射目标 CPU 未必支持的指令（如 AVX2），safe 代码无条件调用会在不支持的 CPU 上触发 SIGILL。E0133 把这一 codegen 事实泄漏进类型系统：属性改变了函数的"可调用性"，调用点必须显式 unsafe 证明目标特性已启用。这是"后端属性影响前端安全契约"的教科书案例。
+
 ## 嵌入式测验
 
 本节围绕「嵌入式测验」展开，依次讨论测验 1：`rustc` 默认使用哪个后端生成机器码？、测验 2：Codegen unit 的作用是什么？、测验 3：Fat LTO 和 Thin LTO 的主要权衡是什么？与测验 4：Cranelift 后端适合什么场景？。

@@ -184,6 +184,40 @@ cargo +nightly rustc -- -Ztime-passes      # 显式 nightly
 cargo build --timings                      # stable 等价的构建耗时报告
 ```
 
+## ⚠️ 实测反例
+
+### 反例：cargo config 中 source replacement 语法冲突（cargo 1.99 实测）
+
+在 `ws/.cargo/config.toml` 写：
+
+```toml
+[source.crates-io]
+replace-with = "vendored-sources"
+
+[source.vendored-sources]
+directory = "vendor"
+local-registry = "vendor"
+```
+
+```text
+> cargo +stable-x86_64-pc-windows-msvc build
+error: more than one source location specified for `source.vendored-sources`
+```
+
+复现：任意 cargo 包 + 上述 config 即可，无需真实 vendor 目录——错误在配置解析阶段触发，先于任何网络或编译动作。
+
+修正：一个 source 只声明一种位置，删掉 `local-registry` 行后配置解析通过（cargo 1.99 实测，构建继续进入编译阶段）：
+
+```toml
+[source.crates-io]
+replace-with = "vendored-sources"
+
+[source.vendored-sources]
+directory = "vendor"
+```
+
+工程解释：一个 source 定义只能声明一种位置（`directory` / `local-registry` / `registry` 三者其一），`directory` 与 `local-registry` 并存时 cargo 直接拒绝，这是配置语法错误而非 `-Z` 不稳定选项问题——与本页 `-Z` 反例互为镜像：`-Z` 管"功能是否稳定"，config 语法管"配置是否自洽"。离线构建流水线里这类错误常来自把 vendored 目录同时写成 `directory` 和 `local-registry` 的复制粘贴，CI 应在构建前用 `cargo config get source` 预检配置。
+
 ## 🧭 思维导图（Mindmap）
 
 ```mermaid

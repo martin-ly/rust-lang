@@ -334,6 +334,39 @@ RUSTDOCFLAGS="-D warnings" cargo doc --workspace --no-deps
 
 ---
 
+## ⚠️ 实测反例
+
+### 反例：文档示例类型错误使 `rustdoc --test` 失败（rustc 1.99.0 实测，E0308）
+
+被测源文件 `t.rs`：
+
+```rust
+/// ```
+/// let x: i32 = "s";
+/// ```
+pub fn f() {}
+```
+
+```text
+> rustdoc +stable-x86_64-pc-windows-msvc --test t4.rs
+running 1 test
+test t4.rs - f (line 3) ... FAILED
+
+---- t4.rs - f (line 3) stdout ----
+error[E0308]: mismatched types
+ --> t4.rs:4:14
+  |
+4 | let x: i32 = "s";
+  |        ---   ^^^ expected `i32`, found `&str`
+
+error: aborting due to 1 previous error
+
+Couldn't compile the test.
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
+```
+
+工程解释：doctest 会被 rustdoc 提取后作为独立 crate 编译并执行，文档示例里的类型错误（E0308）与单元测试失败一样让 CI 退出码非 0。`missing_doc_code_examples` lint 的改进只能发现"没有示例"，防不住"示例写错"——所以文档示例必须与单元测试一样纳入 `cargo test --doc` 门禁，示例漂移（API 变更后示例未更新）正是 CI 最先暴露的 rustdoc 回归。
+
 ## 🧭 思维导图（Mindmap）
 
 ```mermaid

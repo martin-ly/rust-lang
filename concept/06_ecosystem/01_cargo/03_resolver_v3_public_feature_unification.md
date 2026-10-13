@@ -211,6 +211,44 @@ resolver = "3"   # edition 2024 默认；旧 edition 需显式声明
 
 ---
 
+## ⚠️ 实测反例
+
+**cargo 1.99.0 实测：resolver v3 的 MSRV-aware 解析（`incompatible-rust-versions` 默认从 `allow` 变 `fallback`）会让同一份 manifest 锁到完全不同的版本。**
+
+workspace 成员 `w` 声明 `rust-version = "1.60"`，依赖 `serde_with = "3"`。只改 `[workspace] resolver`，manifest 其余部分不动：
+
+```toml
+[workspace]
+members = ["w"]
+resolver = "3"   # 或 "2"，唯一变量
+
+# w/Cargo.toml
+[package]
+name = "w"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.60"
+[dependencies]
+serde_with = "3"
+```
+
+`cargo generate-lockfile`（cargo 1.99.0）两次实测输出：
+
+```text
+# resolver = "3"
+Adding time v0.3.17 (available: v0.3.55, requires Rust 1.88.0)
+Adding wasm-bindgen v0.2.105 (available: v0.2.129, requires Rust 1.81)
+Cargo.lock: serde_with 3.0.0        # 全部依赖回退到兼容 Rust 1.60 的版本
+
+# resolver = "2"
+Locking 84 packages to highest compatible versions
+Cargo.lock: serde_with 3.24.0       # 直接锁最高版，无视 rust-version
+```
+
+**工程解释**：resolver v3 把「依赖要求更高 Rust 版本」从静默允许降级为 fallback——只有当不存在兼容 MSRV 的版本时才接受不兼容版本并告警。升级 resolver 不只是 feature 统一域变化，Cargo.lock 整棵树会随之漂移；CI 里 resolver 版本与 `rust-version` 字段必须一起评审，否则「升级 resolver 后 MSRV 突然被满足」是假象，实际是解析器替你降级了依赖。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。

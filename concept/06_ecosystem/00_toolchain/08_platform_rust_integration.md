@@ -290,6 +290,43 @@ unsafe fn uart_putc(c: u8) {
 
 ---
 
+## ⚠️ 实测反例
+
+### 反例：未安装的 bare-metal target 触发 E0463（rustc 1.99.0 实测）
+
+```text
+> rustc +stable-x86_64-pc-windows-msvc --target thumbv7em-none-eabihf --edition 2021 t.rs
+error[E0463]: can't find crate for `std`
+  |
+  = note: the `thumbv7em-none-eabihf` target may not be installed
+  = help: consider downloading the target with `rustup target add thumbv7em-none-eabihf`
+
+error: aborting due to 1 previous error
+```
+
+修正：`rustup target add thumbv7em-none-eabihf` 后，bare-metal 入口 crate 应写 `#![no_std]` 并提供 `#[panic_handler]`（否则报 "`#[panic_handler]` function required, but not found"）。
+
+补 `#![no_std]` 但缺 `#[panic_handler]` 时的第二层诊断（rustc 1.99.0 实测）：
+
+```rust
+#![no_std]
+fn main(){ panic!("x"); }
+```
+
+```text
+> rustc +stable-x86_64-pc-windows-msvc --edition 2021 t6.rs
+error: `#[panic_handler]` function required, but not found
+
+error: unwinding panics are not supported without std
+  |
+  = help: using nightly cargo, use -Zbuild-std with panic="abort" to avoid unwinding
+  = note: since the core library is usually precompiled with panic="unwind", rebuilding your crate with panic="abort" may not be enough to fix the problem
+
+error: aborting due to 2 previous errors
+```
+
+工程解释：`thumbv7em-none-eabihf` 这类 `*-none-*` 目标不提供预编译 `std`，rustc 把"找不到 std rlib"报告为 E0463 并附带 rustup 提示——错误码本身不区分"target 未安装"与"该 target 根本没有 std"，需要看 note 行判断。嵌入式 CI 的常见坑正是漏装 target 组件或镜像里 rustup 组件清单不全，本地能编译、CI 报 E0463；对策是在 CI 缓存键里包含 `rustup component list --installed` 快照。
+
 ## 七、来源与延伸阅读
 
 | 资源 | 适用场景 |

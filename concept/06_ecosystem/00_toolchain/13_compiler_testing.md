@@ -208,6 +208,37 @@ crater run start=master end=pr-branch
 
 ---
 
+## ⚠️ 实测反例
+
+### 反例：UI 测试源文件缺少 `main` 时 rustc 的 E0601 诊断（rustc 1.99.0 实测）
+
+```rust
+pub fn f(){}
+```
+
+```text
+> rustc +stable-x86_64-pc-windows-msvc --edition 2021 t.rs
+error[E0601]: `main` function not found in crate `t`
+ --> t.rs:1:13
+  |
+1 | pub fn f(){}
+  |             ^ consider adding a `main` function to `t.rs`
+```
+
+修正：补上 `fn main()` 后同一文件编译通过（rustc 1.99.0 实测）：
+
+```rust
+pub fn f(){}
+fn main(){ f(); }
+```
+
+```text
+> rustc +stable-x86_64-pc-windows-msvc --edition 2021 t7.rs
+（无输出，rc=0）
+```
+
+工程解释：`src/test/ui/`（现 `tests/ui/`）的每个 `.rs` 都按可执行 crate 编译，`compiletest` 用 `//~ ERROR` 注解逐行比对诊断文本——E0601 这类"crate 结构级"错误同样是被测试的诊断面。反例的教训：写 UI 测试时若忘了 `fn main()`，`//~ ERROR` 注解与真实诊断错位，测试以"预期错误不匹配"失败；反之，纯类型检查类测试应加 `//~ check`（只编译不链接运行）避免被 E0601 干扰。诊断文本、行号、列号全部进入 `.stderr` 快照，任何 rustc 诊断措辞变更都会批量打红 UI 测试套件。
+
 ## 嵌入式测验
 
 本节围绕「嵌入式测验」展开，依次讨论测验 1：`compiletest` 主要用于测试什么？、测验 2：UI 测试的独特价值是什么？、测验 3：Crater 在 Rust 生态中扮演什么角色？与测验 4：`./x test tidy` 主要检查什么？。
