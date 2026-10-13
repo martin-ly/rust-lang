@@ -58,6 +58,7 @@
     - [10.2 边界测试：`wasm-bindgen` 的类型映射（编译错误）](#102-边界测试wasm-bindgen-的类型映射编译错误)
     - [10.3 边界测试：WASM 的线性内存与 Rust 引用的不兼容性（编译错误）](#103-边界测试wasm-的线性内存与-rust-引用的不兼容性编译错误)
     - [10.4 边界测试：`wasm32-unknown-unknown` 的 panic 处理（编译错误/运行时陷阱）](#104-边界测试wasm32-unknown-unknown-的-panic-处理编译错误运行时陷阱)
+    - [10.5 rustc 1.99 实测反例：WASM 目标边界的三个编译错误](#105-rustc-199-实测反例wasm-目标边界的三个编译错误)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：WebAssembly（WASM）相比 JavaScript 在性能上的主要优势是什么？（理解层）](#测验-1webassemblywasm相比-javascript-在性能上的主要优势是什么理解层)
     - [测验 2：Rust 编译为 WASM 时，为什么需要 `wasm-bindgen`？（理解层）](#测验-2rust-编译为-wasm-时为什么需要-wasm-bindgen理解层)
@@ -582,6 +583,59 @@ fn main() {
 ```
 
 > **修正**: `wasm32-unknown-unknown` 目标无默认 panic handler（`no_std` 环境）。panic 时调用 `core::panicking::panic`，默认实现是 `loop {}`（无限循环）或 `unreachable`（WASM 陷阱）。调试困难：浏览器控制台显示 `RuntimeError: unreachable`，无 Rust panic 消息。解决方案：1) 使用 `console_error_panic_hook` crate（将 panic 消息输出到浏览器 console）；2) 自定义 panic handler `#![feature(panic_handler)]` + `#[panic_handler]`；3) 使用 `wasm32-wasip1` 或 `wasm32-wasip2` 目标（有标准 panic 输出）。这与 C 的 WASM（`abort()` 同样产生陷阱）或 AssemblyScript（有内置 panic 处理）类似——`wasm32-unknown-unknown` 是最小化目标，需手动配置错误处理（Error Handling）。[来源: [console_error_panic_hook](https://github.com/rustwasm/console_error_panic_hook)] · [来源: [Rust WASM Book](https://rustwasm.github.io/docs/book/index.html)]
+
+### 10.5 rustc 1.99 实测反例：WASM 目标边界的三个编译错误
+
+以下三个反例均在 rustc 1.99.0（Windows x86_64 宿主，`rustup target list --installed` 含 `wasm32-unknown-unknown`/`wasm32-wasip1`）本机实测，错误码为编译器实际输出：
+
+**反例 A — wasm32 内在函数用在宿主目标（E0432）**：`core::arch::wasm32` 模块只在 wasm32 目标下存在，宿主编译直接失败：
+
+```rust,compile_fail
+use core::arch::wasm32::unreachable;
+fn main() { unsafe { unreachable() } }
+```
+
+```text
+error[E0432]: unresolved import `core::arch::wasm32`
+  |
+2 | use core::arch::wasm32::unreachable;
+  |                 ^^^^^^ could not find `wasm32` in `arch`
+```
+
+> 含义：架构内在函数按 `#[cfg(target_arch)]` 门控——跨目标共享代码必须用 cfg 隔离 wasm32 专用 intrinsic，否则宿主构建（含 CI 的 `cargo test`）先崩。[来源: Rust Reference — intrinsics](https://doc.rust-lang.org/reference/inline-assembly.html)
+
+**反例 B — `wasm32v1-none` 无标准库（E0463）**：该目标刻意不提供 std（面向裸 wasm 模块）。`rustup target add wasm32v1-none` 安装后编译仍失败：
+
+```text
+error[E0463]: can't find crate for `std`
+  |
+  = note: the `wasm32v1-none` target may not support the standard library
+  = note: `std` is required by `<unknown>` because it does not declare `#![no_std]`
+
+error: `#[panic_handler]` function required, but not found
+```
+
+> 含义：`wasm32v1-none` 是"无 std、无 WASI"的最小目标；在此目标编译必须 `#![no_std]` + 自建 `#[panic_handler]`（两条错误缺一不可地暴露该约束）。目标清单见 `rustc --print target-list`（1.99.0 实测含 wasm32-wasip1/2/3、wasm64-unknown-unknown 等 9 个 wasm 目标）。[来源: Rust Platform 目标文档](https://doc.rust-lang.org/rustc/platform.html)
+
+**反例 C — wasm32-unknown-unknown 上的 Unix 专属 API（E0433）**：`std::os::unix` 在 wasm 目标不存在：
+
+```rust,compile_fail
+use std::os::unix::fs::PermissionsExt;
+fn main() {
+    let m = std::fs::metadata("x").unwrap().permissions().mode();
+    println!("{m}");
+}
+```
+
+```text
+error[E0433]: cannot find `unix` in `os`
+  |
+2 | use std::os::unix::fs::PermissionsExt;
+  |              ^^^^ could not find `unix` in `os`
+error[E0599]: no method named `mode` found for struct `Permissions`
+```
+
+> 含义：`std::fs` 本身在 wasm32-unknown-unknown 可编译（实测通过），但权限模型等平台扩展按 OS 门控——浏览器 WASM 没有 POSIX 权限概念。移植 C 风格文件权限代码到 WASM 时此类 E0433/E0599 是高频第一现场。[来源: std::os 模块文档](https://doc.rust-lang.org/std/os/index.html)
 
 ## 嵌入式测验（Embedded Quiz）
 

@@ -71,6 +71,7 @@
     - [9.1 边界测试：未初始化张量内存导致信息泄露（安全漏洞）](#91-边界测试未初始化张量内存导致信息泄露安全漏洞)
     - [9.2 边界测试：单线程 DataFrame 操作在并发场景下竞争（运行时错误）](#92-边界测试单线程-dataframe-操作在并发场景下竞争运行时错误)
     - [9.3 边界测试：模型输入维度不匹配导致 panic（逻辑错误）](#93-边界测试模型输入维度不匹配导致-panic逻辑错误)
+    - [9.4 rustc 1.99 实测反例：ML 框架抽象的两个编译期边界](#94-rustc-199-实测反例ml-框架抽象的两个编译期边界)
   - [相关概念](#相关概念)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 在机器学习领域目前的主要定位是什么？（理解层）](#测验-1rust-在机器学习领域目前的主要定位是什么理解层)
@@ -1027,6 +1028,64 @@ fn safe_inference(model: &impl Module<B>, input: Tensor<B, 2>) {
 ```
 
 > **来源**: [burn Tensor](https://burn.dev/books/burn/building-blocks/tensor.html) · [Defensive Programming](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html)
+
+### 9.4 rustc 1.99 实测反例：ML 框架抽象的两个编译期边界
+
+以下反例在 rustc 1.99.0（Windows x86_64，`--edition 2024`）本机实测，错误码为编译器实际输出。它们对应 ML 框架设计中最常见的两个抽象陷阱。
+
+**反例 A — 泛型方法使 Layer trait 不可 dyn 化（E0038）**：自动微分/神经网络框架常用 `Box<dyn Layer>` 组装异构层序列，但若 trait 方法带泛型参数（如支持多种张量元素类型），vtable 无法构建：
+
+```rust,compile_fail
+trait Layer {
+    fn forward<T: Copy>(&self, input: T) -> T;
+}
+fn build(l: Box<dyn Layer>) { let _ = l; }
+fn main() {}
+```
+
+```text
+error[E0038]: the trait `Layer` is not dyn compatible
+ --> src/main.rs:5:17
+  |
+5 | fn build(l: Box<dyn Layer>) { let _ = l; }
+  |                 ^^^^^^^^^ `Layer` is not dyn compatible
+  = note: for a trait to be dyn compatible it needs to allow building a vtable
+2 | trait Layer {
+  |       ----- this trait is not dyn compatible...
+3 |     fn forward<T: Copy>(&self, input: T) -> T;
+  |        ^^^^^^^ ...because method `forward` has generic type parameters
+  = help: consider moving `forward` to another trait
+```
+
+> 设计含义：这正是 burn/candle 等框架把 `forward` 签名固定为具体 `Tensor<B, D>`（后端与维度做类型参数、方法本身不泛型）的原因——要么单态化（`impl Trait` 静态分发，编译期爆炸但零开销），要么牺牲方法级泛型换取 `dyn` 动态组装。1.99.0 的措辞已从 "object safe" 改为 "dyn compatible"。[来源: Rust Reference — dyn compatibility](https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility)
+
+**反例 B — const 泛型张量维度不匹配（E0308）**：用 `const` 泛型把特征维度编码进类型（9.3 节"更好的修正"的落地形态）时，维度错误从运行时 panic 前移为编译错误：
+
+```rust,compile_fail
+struct Tensor<const N: usize>([f32; N]);
+fn dot<const N: usize>(a: &Tensor<N>, b: &Tensor<N>) -> f32 {
+    a.0.iter().zip(b.0).map(|(x, y)| x * y).sum()
+}
+fn main() {
+    let a = Tensor::<3>([1.0, 2.0, 3.0]);
+    let b = Tensor::<4>([1.0, 2.0, 3.0, 4.0]);
+    println!("{}", dot(&a, &b));
+}
+```
+
+```text
+error[E0308]: mismatched types
+ --> src/main.rs:9:28
+  |
+9 |     println!("{}", dot(&a, &b));
+  |                    ---     ^^ expected `3`, found `4`
+  |                    |
+  |                    arguments to this function are incorrect
+  = note: expected reference `&Tensor<3>`
+             found reference `&Tensor<4>`
+```
+
+> 工程含义：`Tensor<const N>` 让 784-vs-785 这类特征维度错误在编译期即暴露（对比 9.3 节运行时 assert）。代价：维度进入类型后，动态 reshape 需要 `Tensor<N>` 之间的显式转换函数，且 N 不同的层无法共用同一泛型实例——这是"类型编码维度"方案的真实成本，ML 框架只在静态形状路径（推理）采用它。[来源: Rust Reference — const generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics)
 
 ---
 

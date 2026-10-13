@@ -131,6 +131,27 @@ fn embedded_only() {
 
 ---
 
+## ⚠️ 实测反例
+
+**反例：Tier 3 target 不提供预编译 `std`——`String`/`Vec` 在 Tier 3 上直接编译失败**。Tier 1/2 target 的 `std` 由 rustup 预编译分发；Tier 3（如 `mipsel-unknown-linux-gnu`、`x86_64-unknown-hermit`）只保证 `core`/`alloc` 可编译：
+
+```rust,compile_fail
+pub fn f() { let _s = String::from("x"); }
+```
+
+rustc 1.99.0 实测（`rustc --target mipsel-unknown-linux-gnu`）：
+
+```text
+error[E0463]: can't find crate for `std`
+  |
+  = note: the `mipsel-unknown-linux-gnu` target may not be installed
+  = help: consider building the standard library from source with `cargo build -Zbuild-std`
+```
+
+**工程解释**：E0463 是分层保证最直接的实证——Tier 3 target 没有任何预编译库分发：本机 rustc 1.99.0 实测显示，未安装的 `mipsel-unknown-linux-gnu` 连 `#![no_std]` + `core` 也报同一个 E0463，必须 `-Zbuild-std`（nightly）自建 `core`/`alloc`/`std`；而 Tier 1/2 target 的 `std` 由 rustup 直接分发。按 Target Tier Policy，Tier 3 即便自建成功也不保证 `std` 通过官方 CI——想用 `String`/线程属于自担风险，Tier 3 的正确姿势是 `#![no_std]` 只用 `core`/`alloc`。另注意拼错的三元组（如 `x86_64-unknown-lnux`）报的是 `error: could not find specification for target` 而非 E0463——前者是拼写问题，后者才是分层保证问题。
+
+---
+
 ## 知识表征：target 选择决策树与 cfg 属性矩阵
 
 > 依据 [rustc book — Target Tier Policy](https://doc.rust-lang.org/rustc/target-tier-policy.html)、[rustc book — Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) 与本机 rustc 1.99.0 实测整理。
@@ -193,7 +214,8 @@ pub fn f() -> Vec<u8> { Vec::new() } // ✅ core+alloc 路径，不依赖 std
 ```
 
 **target 层故障的实测错误文本**（rustc 1.99.0 本机，供决策树对照）：
-- 未安装 std 的 target：`error[E0463]: can't find crate for \`core\`` + `help: consider downloading the target with \`rustup target add ...\``（对 `--target riscv64gc-unknown-none-elf` 实测）；
+
+- 未安装 std 的 target：`error[E0463]: can't find crate for \`core\`` + `help: consider downloading the target with \`rustup target add ...\``（对`--target riscv64gc-unknown-none-elf` 实测）；
 - 不存在的 triple：`error: error loading target specification: could not find specification for target "..."` + `help: run \`rustc --print target-list\``。
 
 > **来源**: [rustc book — Target Tier Policy（Tier 1/2/3 定义与准入）](https://doc.rust-lang.org/rustc/target-tier-policy.html) · [rustc book — Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) · [rustc book — rustc-targets（cfg 键）](https://doc.rust-lang.org/rustc/rustc-targets/index.html) · [E0463 错误解释](https://doc.rust-lang.org/error_codes/E0463.html)

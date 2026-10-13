@@ -65,6 +65,7 @@
     - [10.3 边界测试：临界区的中断禁用与 `unsafe` 的误用（运行时数据竞争）](#103-边界测试临界区的中断禁用与-unsafe-的误用运行时数据竞争)
     - [10.4 边界测试：`no_std` 中的 `panic` 处理与固件大小（编译错误/链接错误）](#104-边界测试no_std-中的-panic-处理与固件大小编译错误链接错误)
     - [10.4 边界测试：裸机（`no_std`）中的 `alloc` 与全局分配器缺失（编译错误）](#104-边界测试裸机no_std中的-alloc-与全局分配器缺失编译错误)
+  - [⚠️ 实测反例](#️-实测反例)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`no_std` 在 Rust 嵌入式开发中意味着什么？（理解层）](#测验-1no_std-在-rust-嵌入式开发中意味着什么理解层)
     - [测验 2：Rust 的 `embedded-hal`（硬件抽象层）项目解决了什么问题？（理解层）](#测验-2rust-的-embedded-hal硬件抽象层项目解决了什么问题理解层)
@@ -929,6 +930,36 @@ fn main() {
 > `#[global_allocator]` 标记静态分配器实例。
 > 这与 C 的 `malloc`（依赖 libc 或自定义实现）或 FreeRTOS 的 `pvPortMalloc`（RTOS 提供）类似——Rust 的 `alloc` crate 提供标准接口，但底层分配器需嵌入式开发者提供。
 > [来源: [The Embedded Rust Book](https://docs.rust-embedded.org/book/index.html)] · [来源: [alloc crate](https://doc.rust-lang.org/alloc/index.html)]
+
+## ⚠️ 实测反例
+
+**反例：同一 crate 里出现两个 `#[panic_handler]`**。`no_std` 固件必须提供且只能提供一个 panic 处理器；常见事故是应用自己写了一个 handler，同时又引入了带 handler 的依赖（如 `panic-halt`），或调试时复制粘贴了第二份：
+
+```rust,compile_fail
+#![no_std]
+use core::panic::PanicInfo;
+
+#[panic_handler]
+fn panic1(_: &PanicInfo) -> ! { loop {} }
+
+#[panic_handler]
+fn panic2(_: &PanicInfo) -> ! { loop {} }
+```
+
+rustc 1.99.0 实测（`rustc --edition 2024 --crate-type lib`）：
+
+```text
+error[E0152]: found duplicate lang item `panic_impl`
+ --> src/lib.rs:6:1
+  |
+6 | fn panic2(_: &PanicInfo) -> ! { loop {} }
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+note: the lang item is first defined here
+ --> src/lib.rs:4:1
+```
+
+**工程解释**：`panic_impl` 是 lang item，编译器强制全局唯一实现——它决定 panic 后固件的行为（halt / reset / unwind），链接期必须只有一份。修正：整个依赖图只保留一个 handler，要么依赖 `panic-halt`/`panic-reset` 且不再自己写，要么自己写时不引入提供 handler 的 crate。
 
 ## 嵌入式测验（Embedded Quiz）
 

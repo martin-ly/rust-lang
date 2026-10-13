@@ -61,6 +61,7 @@
     - [10.6 边界测试：Copyleft 许可证的静态链接传染（法律合规风险）](#106-边界测试copyleft-许可证的静态链接传染法律合规风险)
     - [10.5 边界测试：GPL 传染与动态链接的边界（法律风险）](#105-边界测试gpl-传染与动态链接的边界法律风险)
     - [10.3 边界测试：GPL 传染与静态链接的法律风险（编译错误/法律问题）](#103-边界测试gpl-传染与静态链接的法律风险编译错误法律问题)
+    - [10.7 rustc 1.99 实测反例：合规门禁的编译期强制](#107-rustc-199-实测反例合规门禁的编译期强制)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：Rust 生态中最常见的许可证是什么？为什么 MIT/Apache-2.0 双许可很流行？（理解层）](#测验-1rust-生态中最常见的许可证是什么为什么-mitapache-20-双许可很流行理解层)
     - [测验 2：`cargo-deny` 工具在许可证合规中起什么作用？（理解层）](#测验-2cargo-deny-工具在许可证合规中起什么作用理解层)
@@ -616,6 +617,49 @@ fn main() {
 ```
 
 > **修正**: Rust **默认静态链接**所有依赖（包括 std），这与 C/C++ 默认动态链接不同。GPL/AGPL 的"传染"条款：包含 GPL 代码的程序必须以 GPL 兼容许可证发布。缓解：1) 避免使用 GPL 依赖，选择 MIT/Apache-2.0 替代品；2) 使用 `cargo-deny` 自动审计许可证兼容性；3) `cargo-about` 生成许可证清单。许可证兼容矩阵：MIT ↔ Apache-2.0（兼容）；MIT + GPL（MIT 可被 GPL 包含，但反之不行）；Apache-2.0 + GPL-2.0（不兼容，GPL-3.0 兼容）。企业合规是 Rust 生产部署的必要步骤，尤其医疗、金融、航空等受监管行业。[来源: [GNU GPL FAQ](https://www.gnu.org/licenses/gpl-faq.html)] · [来源: [cargo-deny](https://github.com/EmbarkStudios/cargo-deny)] · [来源: [cargo-about](https://github.com/EmbarkStudios/cargo-about)]
+
+### 10.7 rustc 1.99 实测反例：合规门禁的编译期强制
+
+合规策略（发布通道纪律、unsafe 禁令）不是文档约定，rustc 可以在编译期机械执行。以下两个反例在 rustc 1.99.0（Windows x86_64，`--edition 2024`）本机实测，错误码为编译器实际输出：
+
+**反例 A — 稳定通道使用 `#![feature]`（E0554）**：企业合规基线通常锁定 stable 通道；任何依赖 nightly 特性的代码在 stable 构建直接失败：
+
+```rust,compile_fail
+#![feature(generic_const_exprs)]
+struct Buf<const N: usize>([u8; N]);
+fn main() {}
+```
+
+```text
+error[E0554]: `#![feature]` may not be used on the stable release channel
+ --> src/main.rs:2:1
+  |
+2 | #![feature(generic_const_exprs)]
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: remove the attribute
+
+warning: the feature `generic_const_exprs` is incomplete and may not be safe to use and/or cause compiler crashes
+```
+
+> 合规含义：1) 供应链尽调时"该 crate 是否要求 nightly"是可机械检查项（grep `#![feature` 或看 CI 通道）；2) 注意 warning 的第二层信息——`generic_const_exprs` 至今（1.99.0）仍是 incomplete 特性，即便在 nightly 也标注"may cause compiler crashes"，受监管项目应把 incomplete 特性列入禁用清单。[来源: Rust Unstable Book — feature gates](https://doc.rust-lang.org/unstable-book/language-features/generic-const-exprs.html) · [E0554 解释页](https://doc.rust-lang.org/error_codes/E0554.html)
+
+**反例 B — `#![forbid(unsafe_code)]` 被 crate 内 unsafe 触发（硬错误，无错误码）**：`forbid` 比 `deny` 更严——下游无法用 `#[allow]` 或 `RUSTFLAGS` 覆盖，这是安全关键/合规 crate 的标准门禁写法：
+
+```rust,compile_fail
+#![forbid(unsafe_code)]
+fn main() { unsafe { let _x = 1; } }
+```
+
+```text
+error: usage of an `unsafe` block
+ --> src/main.rs:3:13
+  |
+3 | fn main() { unsafe { let _x = 1; } }
+  |             ^^^^^^^^^^^^^^^^^^^^^^
+note: the lint level is defined here
+2 | #![forbid(unsafe_code)]
+```
+
+> 合规含义：`forbid` 的不可覆盖性正是它相对 `deny` 的审计价值——`deny` 可被 crate 内任意 `#![allow(unsafe_code)]` 局部推翻，`forbid` 则使整个 crate 的 unsafe 禁令成为编译期不变量（对比：10.2 节讨论的 `deny` + 依赖 unsafe 场景）。安全关键编码指南（Safety-Critical Rust Consortium）推荐入口 crate 用 `forbid`，仅允许经评审的独立 unsafe crate 提供边界。[来源: Rust Reference — Lint attributes](https://doc.rust-lang.org/reference/attributes/diagnostics.html#lint-check-attributes) · [Safety-Critical Rust Consortium](https://rustfoundation.org/safety-critical-rust-consortium/)
 
 ## 嵌入式测验（Embedded Quiz）
 

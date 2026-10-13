@@ -211,6 +211,44 @@ fn read_response(mut stream: TcpStream) -> std::io::Result<String> {
 }
 ```
 
+### ⚠️ 实测反例：`format!(...).as_str()` 拼 URL 时临时值提前析构
+
+HTTP 客户端代码里最高频的构造是动态拼 URL：`format!` 产生临时 `String`，`.as_str()` 立刻借用它——临时值在语句结束即释放，而 `Request`/builder 还持有这个 `&str`。rustc 1.99 实测：
+
+```rust,compile_fail
+struct Request<'a> {
+    url: &'a str,
+}
+
+fn main() {
+    let id = 42;
+    // ❌ 编译错误: temporary value dropped while borrowed
+    let req = Request {
+        url: format!("https://api.example.com/v1/orders/{}", id).as_str(),
+    };
+    println!("{}", req.url);
+}
+```
+
+rustc 1.99.0 实测：`error[E0716]: temporary value dropped while borrowed`，诊断同时标出 `creates a temporary value which is freed while still in use` 与 `borrow later used here`，并直接建议 "consider using a `let` binding to create a longer lived value"。
+
+工程解释：reqwest / ureq 的 `get(url)` 接收 `&str` 或 `IntoUrl`，把 `format!` 内联进调用参数时临时 `String` 活到调用结束所以安全；一旦 URL 被存进结构体、闭包或跨 `.await` 复用（重试循环里常见），借用就悬空。修正模式：先 `let url = format!(...);` 绑定再传 `url.as_str()`，或让持有方字段直接用 `String`/`Url`（reqwest 的 `IntoUrl` 对 `String`/`Url` 均有实现，零改动迁移）。
+
+```rust,ignore
+// 修正 A：先绑定，临时 String 延长到作用域结束
+fn build_request(id: u64) {
+    let url = format!("https://api.example.com/v1/orders/{}", id);
+    let req = Request { url: url.as_str() };
+    println!("{}", req.url);
+}
+
+// 修正 B：持有方拥有 String，借用问题整体消失
+struct OwnedRequest { url: String }
+fn build_request_owned(id: u64) -> OwnedRequest {
+    OwnedRequest { url: format!("https://api.example.com/v1/orders/{}", id) }
+}
+```
+
 ## 相关概念
 
 - [Rust 网络编程](../../03_advanced/06_low_level_patterns/04_network_programming.md)

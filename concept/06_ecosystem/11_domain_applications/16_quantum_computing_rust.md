@@ -54,6 +54,7 @@
     - [8.1 边界测试：尝试克隆量子态（不可克隆定理违反）](#81-边界测试尝试克隆量子态不可克隆定理违反)
     - [8.2 边界测试：在笔记本上模拟 30 量子比特（内存爆炸）](#82-边界测试在笔记本上模拟-30-量子比特内存爆炸)
     - [8.3 边界测试：使用非厄米算符进行量子演化（类型/逻辑错误）](#83-边界测试使用非厄米算符进行量子演化类型逻辑错误)
+    - [8.4 rustc 1.99 实测反例：量子振幅表示的两个编译期边界](#84-rustc-199-实测反例量子振幅表示的两个编译期边界)
   - [相关概念](#相关概念)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：量子计算中的"量子比特"（Qubit）与经典比特有什么根本区别？（理解层）](#测验-1量子计算中的量子比特qubit与经典比特有什么根本区别理解层)
@@ -963,6 +964,53 @@ fn main() {
 > **修正**: 概率守恒要求 $\langle\psi(t)|\psi(t)\rangle = 1$ 对所有 $t$ 成立。若哈密顿量 $H \neq H^\dagger$，则 $U = e^{-iHt}$ 不是幺正的，$\langle\psi(t)|\psi(t)\rangle$ 将随时间指数增长或衰减，违反量子力学的基本公设。
 >
 > **来源**: [Nielsen & Chuang — Unitary Evolution](https://www.cambridge.org/highereducation/books/quantum-computation-and-quantum-information/01E10196D0A682A6AEFFEA52D53BE9AE) · [Quantum Mechanics Postulates](https://en.wikipedia.org/wiki/Mathematical_formulation_of_quantum_mechanics)
+
+### 8.4 rustc 1.99 实测反例：量子振幅表示的两个编译期边界
+
+以下反例在 rustc 1.99.0（Windows x86_64，`--edition 2024`）本机实测，错误码为编译器实际输出。
+
+**反例 A — 数学记法 `1.0i` 直接写进 Rust 源码（词法错误，无 E 码）**：量子振幅 $\alpha = 1.0i$ 的教科书记法不是 Rust 字面量——Rust 没有虚数后缀：
+
+```rust,compile_fail
+fn main() {
+    let amp: f64 = 1.0i;
+    println!("{amp}");
+}
+```
+
+```text
+error: invalid suffix `i` for float literal
+ --> src/main.rs:3:20
+  |
+3 |     let amp: f64 = 1.0i;
+  |                    ^^^^ invalid suffix `i`
+  |
+  = help: valid suffixes are `f32` and `f64`
+```
+
+> 工程含义：Rust 核心语言无复数字面量；量子模拟 crate（roqoqo、qoqo 等）一律用 `num-complex::Complex<f64>` 或自建 `struct Amplitude { re, im }`。从 Qiskit/Cirq 教程移植代码时这类词法错误是第一现场——复数必须显式建模，反而迫使振幅的实虚部在类型层可见。[来源: num-complex crate](https://docs.rs/num-complex/latest/num_complex/) · [roqoqo](https://github.com/e-quantum/roqoqo)
+
+**反例 B — 稳定通道使用 `std::simd` 做态向量 SIMD 收缩（E0658）**：量子模拟器常用 SIMD 加速态向量运算（4.3 节主张的性能优势），但 `portable_simd` 在 1.99.0 仍是 unstable 库特性，stable 编译直接拒绝：
+
+```rust,compile_fail
+use std::simd::f32x4;
+fn main() {
+    let a = f32x4::splat(1.0);
+    let b: [f32; 4] = a;
+    println!("{b:?}");
+}
+```
+
+```text
+error[E0658]: use of unstable library feature `portable_simd`
+ --> src/main.rs:2:5
+  |
+2 | use std::simd::f32x4;
+  |     ^^^^^^^^^^^^^^^^
+  = note: see issue #86656 <https://github.com/rust-lang/rust/issues/86656> for more information
+```
+
+> 工程含义：这解释了 Rust 量子模拟生态（rustqip、q1tsim）为何走两条替代路线：1) nightly + `#![feature(portable_simd)]`（放弃 stable 可复现性）；2) stable 上用 `#[cfg(target_feature)]` 门控的 `core::arch` 内在函数或纯标量 + rayon 并行。SIMD 加速主张（4.3 节）在 stable 工具链上有真实的语言成熟度边界。[来源: rust-lang tracking issue #86656](https://github.com/rust-lang/rust/issues/86656) · [std::simd 文档](https://doc.rust-lang.org/std/simd/index.html)
 
 ---
 

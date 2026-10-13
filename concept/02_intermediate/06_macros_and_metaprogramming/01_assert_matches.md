@@ -55,8 +55,10 @@
   - [逆向推理链（Backward Reasoning）](#逆向推理链backward-reasoning)
   - [权威来源索引](#权威来源索引)
   - [十、边界测试：assert\_matches 的编译错误](#十边界测试assert_matches-的编译错误)
-    - [10.1 边界测试：`assert_matches!` 在非 Option/Result 上使用（编译错误）](#101-边界测试assert_matches-在非-optionresult-上使用编译错误)
+    - [10.1 边界测试：`assert_matches!` 在未导入时不可用（编译错误，rustc 1.99 实测）](#101-边界测试assert_matches-在未导入时不可用编译错误rustc-199-实测)
+    - [10.1b 实测反例：模式与值类型不匹配（rustc 1.99.0 实测 E0308）](#101b-实测反例模式与值类型不匹配rustc-1990-实测-e0308)
     - [10.2 边界测试：嵌套模式匹配中的绑定冲突（编译错误）](#102-边界测试嵌套模式匹配中的绑定冲突编译错误)
+    - [10.2b 实测反例：同一模式内重复绑定（rustc 1.99.0 实测 E0416）](#102b-实测反例同一模式内重复绑定rustc-1990-实测-e0416)
     - [10.3 边界测试：`assert_matches!` 与嵌套模式的绑定（编译错误）](#103-边界测试assert_matches-与嵌套模式的绑定编译错误)
     - [10.4 边界测试：自定义断言失败消息的类型约束（编译错误）](#104-边界测试自定义断言失败消息的类型约束编译错误)
     - [10.4 边界测试：所有权移动后的再次使用](#104-边界测试所有权移动后的再次使用)
@@ -534,10 +536,10 @@ fn main() {
 
 每个用例附最小修复版本，对照学习可同时复习模式匹配规则本身。
 
-### 10.1 边界测试：`assert_matches!` 在非 Option/Result 上使用（编译错误）
+### 10.1 边界测试：`assert_matches!` 在未导入时不可用（编译错误，rustc 1.99 实测）
 
 ```rust,compile_fail
-// ❌ 编译错误: assert_matches! 未导入
+// ❌ 编译错误: cannot find macro `assert_matches` in this scope
 fn main() {
     let result: Result<i32, &str> = Ok(42);
     assert_matches!(result, Ok(_)); // 错误: 找不到宏 assert_matches!
@@ -545,8 +547,8 @@ fn main() {
 ```
 
 ```rust
-// ✅ 正确: 导入后使用
-use std::assert_matches;
+// ✅ 正确: 从模块路径导入（rustc 1.99.0 实测编译并运行通过）
+use std::assert_matches::assert_matches;
 
 fn main() {
     let result: Result<i32, &str> = Ok(42);
@@ -555,8 +557,22 @@ fn main() {
 ```
 
 > **修正**: `assert_matches!`（Rust 长期未稳定，于 Rust 1.96.1 稳定化）专门用于测试枚举（Enum）变体匹配。
+> 注意导入路径：正确写法是 `use std::assert_matches::assert_matches;`——写成 `use std::assert_matches;` 在 rustc 1.99.0 实测报 **E0432**（unresolved import `std::assert_matches`），因为 `std::assert_matches` 是模块而非宏本身。
 > 它不同于 `assert_eq!`——后者要求值实现 `PartialEq`，而 `assert_matches!` 使用模式匹配，不要求 `PartialEq`。
 > 在 `assert_matches!` 稳定前，使用 `matches!` 宏（Macro）或 `if let` 进行测试断言。[来源: [Rust Standard Library](https://doc.rust-lang.org/std/index.html)]
+
+### 10.1b 实测反例：模式与值类型不匹配（rustc 1.99.0 实测 E0308）
+
+```rust,compile_fail
+use std::assert_matches::assert_matches;
+
+fn main() {
+    let x: i32 = 5;
+    assert_matches!(x, Some(_)); // ❌ error[E0308]: mismatched types
+}
+```
+
+> **为什么**: `assert_matches!` 的模式必须与被断言值的类型一致——对裸 `i32` 写 `Some(_)` 模式，编译器实测报 **E0308**（mismatched types）。工程上这提示你：断言失败形态先于运行发生，模式写错不会"静默通过"，而是编译期拦截。[来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)]
 
 ### 10.2 边界测试：嵌套模式匹配中的绑定冲突（编译错误）
 
@@ -582,6 +598,19 @@ fn fixed() {
 ```
 
 > **修正**: 在 Rust 模式匹配的 `|`（或模式）中，所有分支必须绑定**相同的变量名和类型**。若一个分支绑定 `x: i32`，另一个分支绑定 `x: Option<i32>`，编译器报错。这是 Rust 模式匹配（Pattern Matching）"穷尽性检查"的一部分——确保每个绑定在所有分支中具有一致性（Coherence）。[来源: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html)]
+
+### 10.2b 实测反例：同一模式内重复绑定（rustc 1.99.0 实测 E0416）
+
+```rust,compile_fail
+use std::assert_matches::assert_matches;
+
+fn main() {
+    let v = (1, (1, 2));
+    assert_matches!(v, (a, (a, _))); // ❌ error[E0416]: identifier `a` is bound more than once in the same pattern
+}
+```
+
+> **为什么**: 同一模式里 `a` 绑定两次，rustc 1.99.0 实测报 **E0416**。工程上想表达"两个位置值相等"应改用守卫：`assert_matches!(v, (a, (b, _)) if a == b)`——把相等约束从绑定名移到运行时守卫，语义显式且可编译。[来源: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html)]
 
 ### 10.3 边界测试：`assert_matches!` 与嵌套模式的绑定（编译错误）
 

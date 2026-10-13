@@ -273,6 +273,36 @@ fn parse_len(frame: &[u8]) -> Option<u32> {
 }
 ```
 
+## ⚠️ 实测反例
+
+**反例：在同步帧解析函数里 `await` 异步读帧——gRPC/QUIC 处理链最常见的"半异步"结构错误**。协议 handler 里"读一帧→解析→回写"常写成同步函数，再顺手对 `read_frame()` 加 `.await`：
+
+```rust,compile_fail
+async fn read_frame() -> u32 { 42 }
+
+fn handle() -> u32 { read_frame().await } // ❌ 非 async 函数里 await
+
+fn main() {}
+```
+
+rustc 1.99.0 实测：`error[E0728]: 'await' is only allowed inside 'async' functions and blocks`，并直接标注 `this is not async`。
+
+**工程解释**：`await` 只能出现在 async 函数/块内，因为 await 需要把当前函数改写成状态机——同步函数没有这个执行框架。修正有两条路：把 `handle` 标成 `async fn`（推荐，与 tokio/quinn 的 handler 栈一致），或同步边界处用 `futures::executor::block_on` 桥接（仅限测试/CLI，异步运行时内 block_on 会死锁）。
+
+修正版（rustc 1.99.0 实测编译通过）——handler 全链 async 化：
+
+```rust
+async fn read_frame() -> u32 { 42 }
+
+async fn handle() -> u32 { read_frame().await } // ✅ async 边界一致
+
+fn main() {
+    let _ = handle(); // 只构造 Future；真正驱动交给 block_on/执行器
+}
+```
+
+注意 `main` 里 `let _ = handle();` 只构造 Future 而不执行——这是 E0728 背后的另一半课：`.await` 缺失时异步调用只是"造了个状态机没人跑"，gRPC/QUIC 服务里表现为 handler 看似返回成功却从未读帧。真正的入口应是 `#[tokio::main]` 或手写 block_on。
+
 ## 12. 相关概念
 
 - [并发模型](../../03_advanced/00_concurrency/01_concurrency.md)

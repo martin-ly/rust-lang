@@ -50,6 +50,7 @@
     - [6.1 聊天室](#61-聊天室)
     - [6.2 实时数据推送](#62-实时数据推送)
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
+    - [⚠️ 实测反例：`MutexGuard` 跨 `.await` 持有，广播 future 失去 `Send`](#️-实测反例mutexguard-跨-await-持有广播-future-失去-send)
   - [7. 总结](#7-总结)
     - [核心要点](#核心要点)
     - [最佳实践](#最佳实践)
@@ -752,6 +753,32 @@ let stale: Vec<u64> = clients.iter()
     .filter(|(_, n)| n.is_empty()).map(|(id, _)| *id).collect();
 for id in stale { clients.remove(&id); }
 ```
+
+### ⚠️ 实测反例：`MutexGuard` 跨 `.await` 持有，广播 future 失去 `Send`
+
+广播服务器另一条高频死路：用 `std::sync::Mutex` 保护连接表，在 async 广播里 `lock()` 后**跨 `.await` 持有 guard** 再投递给运行时。rustc 1.99 实测：
+
+```rust,compile_fail
+use std::future::Future;
+use std::sync::Mutex;
+
+async fn send_frame() {}
+
+fn main() {
+    let clients = Mutex::new(vec!["conn-1".to_string()]);
+    // ❌ 编译错误: future created by async block is not `Send`
+    let boxed: Box<dyn Future<Output = ()> + Send> = Box::new(async {
+        let guard = clients.lock().unwrap();
+        send_frame().await;          // guard 横跨 await 点存活
+        println!("{}", guard[0]);
+    });
+    let _ = boxed;
+}
+```
+
+rustc 1.99.0 实测：`error: future cannot be sent between threads safely`，诊断给出 `the trait Send is not implemented for std::sync::MutexGuard<'_, Vec<String>>` 与 `future is not Send as this value is used across an await`——无 `Exxxx` 编号，属 async lowering 专用诊断。
+
+工程解释：`MutexGuard` 内部是 `&Mutex`，`Mutex` 本身可以 `Sync`，但 guard 把锁的持有状态编码进了类型——让它跨过 `.await` 意味着一个可能挂起的任务占着同步锁，tokio 的多线程调度无法保证 await 恢复后仍在同一线程，于是整个 future 被判定非 `Send`，`tokio::spawn`/装箱边界直接拒绝编译。这正是"同步锁 + 异步代码"的经典错配：修正要么用 `tokio::sync::Mutex`（其 guard 是 `Send`），要么把临界区收窄到 await 之前——先 `let snapshot: Vec<_> = clients.lock().unwrap().clone();` 出作用域释放锁，再逐个 await 发送。
 
 ## 7. 总结
 

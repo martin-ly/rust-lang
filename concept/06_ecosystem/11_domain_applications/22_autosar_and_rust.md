@@ -42,6 +42,7 @@
   - [相关概念](#相关概念)
   - [🧭 思维导图（Mindmap）](#-思维导图mindmap)
   - [⚠️ 反例与陷阱](#️-反例与陷阱)
+  - [⚙️ rustc 1.99 实测反例：AUTOSAR 信号转换的隐式收窄被拒（E0308）](#️-rustc-199-实测反例autosar-信号转换的隐式收窄被拒e0308)
 
 ---
 
@@ -212,3 +213,33 @@ fn main() {
 ```
 
 > 工程做法：依赖白名单 + `cargo vet` 供应链评审 + 认证工具链（Ferrocene）三者缺一不可；详见 WG-SAF 与 R23-11 文档对 ARA 应用的要求。
+
+## ⚙️ rustc 1.99 实测反例：AUTOSAR 信号转换的隐式收窄被拒（E0308）
+
+AUTOSAR SWC 之间以固定宽度基本类型（`uint8`/`uint16`）交换信号；把传感器总线 16 位原始值直接赋给 8 位 ASIL 信号变量，在 C（MISRA 10.1 违规但可编译）里是经典缺陷，在 Rust 里是编译错误。rustc 1.99.0（Windows x86_64，`--edition 2024`）本机实测：
+
+```rust,compile_fail
+fn main() {
+    let raw: u16 = 300;      // 传感器原始值（> u8::MAX）
+    let sig: u8 = raw;       // ❌ 直接赋给 8 位信号
+    println!("{sig}");
+}
+```
+
+```text
+error[E0308]: mismatched types
+ --> src/main.rs:4:19
+  |
+4 |     let sig: u8 = raw;
+  |              --   ^^^ expected `u8`, found `u16`
+  |              |
+  |              expected due to this
+help: you can convert a `u16` to a `u8` and panic if the converted value doesn't fit
+  |
+4 |     let sig: u8 = raw.try_into().unwrap();
+```
+
+> **修正与工程含义**：Rust 强制显式转换，把 MISRA C:2012 Rule 10.1（essential，"隐式窄化转换"）从"评审 + 静态分析工具"层级前移到编译器层级——AUTOSAR 移植代码里所有 u16→u8 收窄点必须显式声明语义。三种显式写法对应三种安全语义：`raw as u8`（截断，300→44，需偏离记录）、`raw.try_into()`（越界即 panic，运行时失败）、饱和/钳位（`raw.min(u8::MAX as u16) as u8`，ASIL 场景常用，配合 DO-178C/ISO 26262 的"无运行时异常"要求选钳位而非 panic）。编译器 help 文本本身推荐 `try_into().unwrap()`，但安全关键代码不应照抄——unwrap 在 ASIL C/D 路径违反"无 panic"约束，应选钳位或返回 `Result` 给监控层。
+> **来源**: [MISRA C:2025 Addendum 6 指南（本库 content 套件）](../../../content/safety_critical/10_standards/04_misra_c_2025_addendum_6_guide.md) · [Rust Reference — 类型转换](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-cast-operator) · [Safety-Critical Rust Consortium](https://rustfoundation.org/safety-critical-rust-consortium/)
+
+**配套 lint 门禁（编译通过，实测）**：把"禁止 `as` 收窄"落为 CI 门禁的惯用组合——`#![deny(clippy::cast_possible_truncation)]`（需 clippy 驱动）或最小可复现的 `#![forbid(unsafe_code)]` + 显式 `try_into` 审查清单；本页入口 crate 的 `#![deny(unsafe_code)]` 示例（上一节）与之构成同一门禁族。

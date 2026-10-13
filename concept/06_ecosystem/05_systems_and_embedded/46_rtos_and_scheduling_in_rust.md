@@ -103,6 +103,7 @@ mindmap
     - [反例 2：在 RTIC 中把共享资源放入 `#[local]`](#反例-2在-rtic-中把共享资源放入-local)
     - [反例 3：在 Hubris 中动态创建任务](#反例-3在-hubris-中动态创建任务)
     - [反例 4：把 Tock 当作硬实时系统使用](#反例-4把-tock-当作硬实时系统使用)
+  - [⚠️ 实测反例](#️-实测反例)
   - [九、决策树：选择调度模型](#九决策树选择调度模型)
     - [决策节点说明](#决策节点说明)
   - [十、权威来源索引](#十权威来源索引)
@@ -449,6 +450,45 @@ let task = hubris::spawn(new_task_code); // 运行时错误 / 不支持
 **原因**：Tock 内核调度虽然抢占，但用户态进程是协作回调，且系统调用路径有一定延迟，难以提供严格 deadline 保证。
 
 **修复**：硬实时控制放在 RTIC/Hubris 中，Tock 负责隔离与非实时协议栈。
+
+---
+
+## ⚠️ 实测反例
+
+**反例：手写裸机执行器的重入——迭代任务表的同时让任务回调可变借用调度器**。手写 Embassy 风格协作执行器时，任务常需要回调调度器（reschedule / spawn），借用检查器会直接拒绝这种"边遍历边改"：
+
+```rust,compile_fail
+struct Scheduler { tasks: Vec<Box<dyn FnMut(&mut Scheduler)>> }
+
+impl Scheduler {
+    fn run(&mut self) {
+        for t in &mut self.tasks {
+            t(self); // ❌ 迭代 &mut self.tasks 的同时再次可变借用 self
+        }
+    }
+}
+
+fn main() { let mut s = Scheduler { tasks: vec![] }; s.run(); }
+```
+
+rustc 1.99.0 实测：`error[E0499]: cannot borrow *self as mutable more than once at a time`——第一个可变借用 `&mut self.tasks` 在 for 循环期间仍然活跃，`t(self)` 是第二个。
+
+**工程解释**：这正是 Embassy/RTIC 执行器不直接迭代 `&mut self.tasks` 的原因——它们按索引访问任务表，或先把任务表从 `self` 上摘下来。以下修正在 rustc 1.99.0 实测编译通过：
+
+```rust
+struct Scheduler { tasks: Vec<Box<dyn FnMut(&mut Scheduler)>> }
+
+impl Scheduler {
+    fn run(&mut self) {
+        let tasks = std::mem::take(&mut self.tasks); // 先摘走任务表，解除对 self 的借用
+        for mut t in tasks { t(self); } // ✅ 借用冲突解除
+    }
+}
+
+fn main() { let mut s = Scheduler { tasks: vec![] }; s.run(); }
+```
+
+借用检查器在这里不是吹毛求疵：若执行器真允许任务在迭代期间修改任务表，就是 C RTOS 里典型的迭代器失效/悬垂指针 bug——Rust 把它变成编译错误。
 
 ---
 

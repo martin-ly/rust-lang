@@ -54,6 +54,7 @@
   - [十、边界测试：分布式系统的编译错误](#十边界测试分布式系统的编译错误)
     - [10.1 边界测试：序列化消息的类型兼容性（运行时错误）](#101-边界测试序列化消息的类型兼容性运行时错误)
     - [10.2 边界测试：分布式事务的 `Send` 约束（编译错误）](#102-边界测试分布式事务的-send-约束编译错误)
+    - [⚠️ 实测反例：跨 `.await` 持有 `Rc` 的 future 无法装箱为 `Send`](#️-实测反例跨-await-持有-rc-的-future-无法装箱为-send)
     - [10.3 边界测试：序列化消息的大小限制（运行时错误）](#103-边界测试序列化消息的大小限制运行时错误)
     - [10.4 边界测试：分布式共识的时钟偏差（逻辑错误）](#104-边界测试分布式共识的时钟偏差逻辑错误)
     - [10.5 边界测试：Raft 共识中的网络分区与脑裂（运行时一致性破坏）](#105-边界测试raft-共识中的网络分区与脑裂运行时一致性破坏)
@@ -636,6 +637,34 @@ struct TransactionFixed {
 ```
 
 > **修正**: 分布式事务协调器通常需要将事务状态传递给线程池中的工作者。`Rc<T>` 不能跨线程，`Arc<T>` 可以。Rust 编译器在编译期验证这些约束，阻止将非 Send 类型传递到多线程环境中。这与 Java 的 `ExecutorService.submit()`（运行时才可能报错）或 Go 的 goroutine（自动共享，但可能数据竞争）不同——Rust 在编译期消除并发错误。分布式系统中的 Saga 模式、2PC（两阶段提交）等算法在 Rust 中实现时，类型系统（Type System）保证事务状态的线程安全传递。[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)]
+
+### ⚠️ 实测反例：跨 `.await` 持有 `Rc` 的 future 无法装箱为 `Send`
+
+上一节的 `Rc` 反例停留在闭包层；真实的分布式协调器里更常见的形态是——异步函数把 `Rc` 状态**跨 `.await` 持有**，再装箱进 `Box<dyn Future + Send>` 投递给工作池。rustc 1.99 实测该形态同样被编译期拒绝：
+
+```rust,compile_fail
+use std::rc::Rc;
+use std::future::Future;
+
+async fn idle() {}
+
+async fn fetch_state(shared: Rc<u64>) -> u64 {
+    // 模拟一次网络往返：shared 跨 .await 存活
+    idle().await;
+    *shared
+}
+
+fn main() {
+    let shared = Rc::new(7u64);
+    // ❌ 编译错误: future returned by `fetch_state` is not `Send`
+    let boxed: Box<dyn Future<Output = u64> + Send> = Box::new(fetch_state(shared));
+    let _ = boxed;
+}
+```
+
+rustc 1.99.0 实测：`error: future cannot be sent between threads safely`，诊断明确给出 `the trait Send is not implemented for Rc<u64>` 与 `captured value is not Send`——该错误无 `Exxxx` 编号，是 async  lowering 产生的专用诊断。
+
+工程解释：装箱边界（`Box<dyn Future + Send>`、`tokio::spawn`、`JoinSet`）是分布式代码把任务派发给多线程运行时的标准入口，编译器在这里检查的是 **future 整个存活期** 的跨线程安全性，而不只是函数入口参数——所以哪怕 `Rc` 只在 `.await` 前解引用，只要它横跨 await 点被捕获，派发的 future 就整体失去 `Send`。修正模式：协调器状态一律用 `Arc`，或把解引用提前到 await 之前（`let v = *shared;` 后再 await），让非 `Send` 值在第一个 await 点前结束生命周期。
 
 ### 10.3 边界测试：序列化消息的大小限制（运行时错误）
 

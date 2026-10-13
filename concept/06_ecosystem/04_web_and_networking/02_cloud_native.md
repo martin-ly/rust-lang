@@ -64,6 +64,7 @@
   - [十、边界测试：云原生开发的编译错误](#十边界测试云原生开发的编译错误)
     - [10.1 边界测试：异步运行时混用（编译错误）](#101-边界测试异步运行时混用编译错误)
     - [10.2 边界测试：配置结构的反序列化生命周期（编译错误）](#102-边界测试配置结构的反序列化生命周期编译错误)
+    - [⚠️ 实测反例：`from_env` 返回借用局部变量的配置结构](#️-实测反例from_env-返回借用局部变量的配置结构)
     - [10.6 边界测试：Kubernetes 的优雅关闭与 `SIGTERM` 处理（运行时数据丢失）](#106-边界测试kubernetes-的优雅关闭与-sigterm-处理运行时数据丢失)
     - [10.5 边界测试：Kubernetes 探针配置不当导致的级联重启（运行时可用性下降）](#105-边界测试kubernetes-探针配置不当导致的级联重启运行时可用性下降)
     - [10.3 边界测试：Kubernetes 的 readiness 与 liveness 探针混淆（运行时可用性下降）](#103-边界测试kubernetes-的-readiness-与-liveness-探针混淆运行时可用性下降)
@@ -640,6 +641,34 @@ fn main() {
 > ——Rust 的生命周期（Lifetimes）系统强制区分"拥有"和"借用（Borrowing）"，在反序列化场景中通常要求"拥有"。
 > [来源: [Serde Documentation](https://serde.rs/)] ·
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
+
+### ⚠️ 实测反例：`from_env` 返回借用局部变量的配置结构
+
+上一节的 `Config<'a>` 反例展示了带生命周期的结构无法从 `from_str` 借数据；云原生服务更常踩的坑是**从环境变量构造配置时返回对局部变量的借用**——`std::env::var` 返回的是新分配的 `String`，函数返回后即刻析构，而配置结构里存的还是 `&str`。rustc 1.99 实测：
+
+```rust,compile_fail
+struct AppConfig<'a> {
+    host: &'a str,
+    port: u16,
+}
+
+impl<'a> AppConfig<'a> {
+    // ❌ 常见云原生写法：从环境变量临时构造配置，返回借用
+    fn from_env() -> AppConfig<'a> {
+        let host = std::env::var("APP_HOST").unwrap_or_else(|_| "0.0.0.0".into());
+        AppConfig { host: &host, port: 8080 }
+    }
+}
+
+fn main() {
+    let cfg = AppConfig::from_env();
+    println!("{}:{}", cfg.host, cfg.port);
+}
+```
+
+rustc 1.99.0 实测：`error[E0515]: cannot return value referencing local variable 'host'`——编译器把返回结构、被借用的局部变量和"returns a value referencing data owned by the current function"逐段标出。
+
+工程解释：容器里配置几乎都来自环境变量/挂载文件，`env::var`、`fs::read_to_string` 每次都产生**新的拥有值**，任何 `&'a str` 字段都无法合法引用它们。这是 Go `os.Getenv`（值拷贝、无生命周期概念）与 Rust 的关键差异点。修正模式：配置结构字段用 `String`/`PathBuf` 拥有数据，或让 `from_env` 接收调用方持有的 `&'a str` 输入（`Cow<'a, str>` 折中）；Kubernetes 探针端点、优雅关闭回调这类长生命周期组件尤其不能持有启动期临时缓冲的引用。
 
 ### 10.6 边界测试：Kubernetes 的优雅关闭与 `SIGTERM` 处理（运行时数据丢失）
 

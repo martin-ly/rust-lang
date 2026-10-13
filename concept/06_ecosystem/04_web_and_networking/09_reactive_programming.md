@@ -67,6 +67,7 @@
   - [九、边界测试](#九边界测试)
     - [9.1 边界测试：无背压导致内存溢出（运行时错误）](#91-边界测试无背压导致内存溢出运行时错误)
     - [9.2 边界测试：跨线程 Stream 发送违反 Send（编译错误）](#92-边界测试跨线程-stream-发送违反-send编译错误)
+    - [⚠️ 实测反例：冷流（迭代器适配器）被第一个消费者移动后不可复用](#️-实测反例冷流迭代器适配器被第一个消费者移动后不可复用)
     - [9.3 边界测试：FRP 信号循环引用导致死锁（运行时错误）](#93-边界测试frp-信号循环引用导致死锁运行时错误)
   - [相关概念](#相关概念)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
@@ -956,6 +957,40 @@ fn good_stream_send() {
 
 > **来源**: [Rust Send/Sync](https://doc.rust-lang.org/std/marker/trait.Send.html) ·
 > [futures-rs Stream](https://docs.rs/futures/latest/futures/stream/trait.Stream.html)
+
+### ⚠️ 实测反例：冷流（迭代器适配器）被第一个消费者移动后不可复用
+
+响应式代码常把 `map`/`filter` 组合出的"信号管道"当作可多次订阅的 Observable——但 Rust 迭代器适配器是**冷流**：本身即消费状态机，`for` 循环隐式 `into_iter()` 会把它整体移动。rustc 1.99 实测：
+
+```rust,compile_fail
+fn main() {
+    let ticks = vec![1, 2, 3, 4];
+    // 把组合管道当"信号"存下来，想订阅两次
+    let signal = ticks.iter().map(|x| x * 2).filter(|x| *x > 2);
+
+    for v in signal { println!("{}", v); }   // 第一次消费：signal 被移动
+    let rest: Vec<_> = signal.collect();     // ❌ 编译错误: use of moved value
+    println!("{:?}", rest);
+}
+```
+
+rustc 1.99.0 实测：`error[E0382]: use of moved value: 'signal'`，诊断给出 `which does not implement the 'Copy' trait`、`'for' loop is desugared into a call to 'std::iter::IntoIterator::into_iter', which takes ownership of the receiver`。
+
+工程解释：这正是 Reactive Streams 里冷流（Cold Stream）与热流（Hot Stream）的分界在类型系统里的显形——`Iterator` 是单发订阅，`Filter`/`Map` 不实现 `Copy`，第二次订阅在编译期就被拒。RxJava 的 `Observable` 每次 `subscribe` 重放源，Rust 要同一语义必须显式选择：可重放就用函数 `fn signal() -> impl Iterator` 每次重建管道，多播/共享推送则换 `tokio::sync::broadcast` 或 `watch`（热流），而不是复用同一个适配器实例。
+
+```rust,ignore
+// 修正：把管道写成工厂函数，每次订阅重建冷流
+fn signal<'a>(ticks: &'a [i32]) -> impl Iterator<Item = i32> + 'a {
+    ticks.iter().map(|x| x * 2).filter(|x| *x > 2)
+}
+
+fn main() {
+    let ticks = vec![1, 2, 3, 4];
+    for v in signal(&ticks) { println!("{}", v); }      // 订阅 1
+    let rest: Vec<_> = signal(&ticks).collect();        // 订阅 2：合法
+    println!("{:?}", rest);
+}
+```
 
 ### 9.3 边界测试：FRP 信号循环引用导致死锁（运行时错误）
 

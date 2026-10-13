@@ -461,6 +461,31 @@ fn main() {}
 
 > **修正**: Rust 的 ORM 生态（`Sea-ORM`、`Diesel`、`sqlx`）的 schema 验证：1) **Sea-ORM** — 运行时（Runtime）验证，代码优先（entity 生成 migration）；2) **Diesel** — 编译期验证（`table!` 宏（Macro）从 migration 生成 Rust 代码，schema 变更需重新运行 migration）；3) **sqlx** — 编译期验证（`query!` 宏在编译时连接数据库检查 SQL）。`sqlx` 的 compile-time checked queries 是 Rust 数据库访问的独特优势：SQL 语法、列名、类型在编译期验证，避免运行时错误。但这要求编译时数据库可访问（CI 中需配置 `SQLX_OFFLINE` + query 缓存文件）。这与 Python 的 SQLAlchemy（运行时反射）或 Java 的 Hibernate（注解 + 运行时验证）不同——Rust 的 ORM 趋向编译期安全。来源: [Sea-ORM] · 来源: [Diesel] · 来源: [sqlx]
 
+## ⚠️ 实测反例
+
+**反例：结果集借用连接存活时移动连接——存储引擎层的"游标生命周期"在编译期被拒**。数据库层最常见的 C/C++ bug 是 connection 析构后继续读 cursor/row。Rust 用生命周期把这类 use-after-free 变成编译错误（`rusqlite` 的 `Row<'conn>` 正是这个模型）：
+
+```rust,compile_fail
+struct Conn { data: Vec<u8> }
+struct Row<'a>(&'a [u8]); // 借用连接的数据，等价 rusqlite 的 Row<'conn>
+
+impl Conn {
+    fn query(&self) -> Row<'_> { Row(&self.data) }
+}
+
+fn main() {
+    let conn = Conn { data: vec![1, 2, 3] };
+    let row = conn.query();
+    let conn2 = conn;      // ❌ row 还借用着 conn 就移动 conn
+    println!("{:?}", conn2.data);
+    let _ = row.0;         // borrow later used here
+}
+```
+
+rustc 1.99.0 实测：`error[E0505]: cannot move out of 'conn' because it is borrowed`——编译器同时给出"borrow of `conn` occurs here"与"borrow later used here"两条定位。
+
+**工程解释**：`Row<'a>` 携带连接的生命周期参数，就是"游标不能比连接活得久"这条数据库不变量的类型化表达；C 里同一 bug 是 use-after-free，Rust 里是 E0505。修正：先消费完 row（或 `row` 与 `conn` 同作用域自然 drop），再转移连接所有权；需要跨函数持有结果就 `Row` 内立即克隆出 owned 数据。
+
 ## 嵌入式测验（Embedded Quiz）
 
 以下测验检验本章五个 Rust 数据库生态判断点：
