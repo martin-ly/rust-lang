@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 793,
-    "generated_at": "2026-10-13T13:38:12.274127+00:00"
+    "generated_at": "2026-10-13T14:39:13.086340+00:00"
   },
   "files": [
     {
@@ -85328,7 +85328,7 @@
       "layer": "L6",
       "title": "Rust 游戏开发（已合并）",
       "positioning": "",
-      "line_count": 102,
+      "line_count": 106,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -85354,6 +85354,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
         "02_game_ecs.md",
         "05_game_development.md",
         "15_game_engine_internals.md"

@@ -17,7 +17,7 @@ concept_definition_decision_forest.md 的判定树提供可遍历结构。
       （质量问题：默认 warning；--strict 时缺失 > 0 ⟹ exit 1）
   S4 判定定量占比 —— quantitative=true 的 decision 节点占比，报告并与 50% 基线对比。
       （质量问题：默认 warning；--strict 时 < 50% ⟹ exit 1）
-  S5 rustc 错误码 —— tree/节点级别的 rustc_error_codes（可选）格式须为 E\d{4}；
+  S5 rustc 错误码 —— tree/节点级别的 rustc_error_codes（可选）格式须为 E\\d{4}；
       节点级跨节点重复映射视为「歧义」并阻断；tree 级跨树重复仍视为「合并」并报告。
       同时报告 Top 30 常见 rustc 错误码的覆盖率。
 

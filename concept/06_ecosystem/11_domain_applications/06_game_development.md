@@ -99,3 +99,7 @@ fn main() {
 **实测错误**：`error[E0382]: use of moved value: \`p\``。游戏循环里每帧复用组件时，参数应写 `&Position` 或让组件实现 `Copy`。
 
 > **来源**: [Bevy 官方书](https://bevyengine.org/learn/) · [docs.rs/wgpu](https://docs.rs/wgpu) · [docs.rs/winit](https://docs.rs/winit) · [docs.rs/hecs](https://docs.rs/hecs) · [E0382 错误解释](https://doc.rust-lang.org/error_codes/E0382.html)
+
+## 相关概念
+
+- [游戏与交互领域的语言安全边界](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md)（L5 跨语言对比：游戏领域 Rust vs C++/C# 的安全边界差异）

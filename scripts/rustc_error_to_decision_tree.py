@@ -237,7 +237,7 @@ def main() -> int:
 
     code = args.code.upper()
     if not RUSTC_ERROR_CODE_RE.match(code):
-        print(f"ERROR: invalid rustc error code format: {args.code!r}（expected E\d{{4}}）")
+        print(f"ERROR: invalid rustc error code format: {args.code!r}（expected E\\d{{4}}）")
         return 1
 
     result = lookup(code, node_index, tree_index)
