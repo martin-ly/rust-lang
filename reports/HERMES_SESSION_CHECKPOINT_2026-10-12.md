@@ -39,6 +39,13 @@
 - **J 轨道**：mdbook `WARN search index is very large (~76MB)` 登记为已知非阻断项，不改配置。
 - 新页跨层修复：24_cargo_basics 与 12_container 各补 1 条 L5 向下引用，link-check 跨层问题 2→0。
 
+## 2d. 2026-10-13 晚间轮（L 轨道：KG 刷新 + vet 遗留观察处置）
+
+- **KG 刷新流水线**（AGENTS.md §7，`scripts/refresh_kg_pipeline.sh` 全 5 步实跑）：新页入图后 entities 720→721、relations 10678→10689；`ex:relatedTo` 占比 8.1%→8.2%（<50% 目标保持）；generic_ratio 0.00%；KG shapes K1-K7 全 0；precision core_lacking_semantic=0。12_container 页 EN/Summary 头部改为 blockquote 样板格式后被索引器正确收录。
+- **cargo vet 遗留观察处置**：`cargo vet`（非 --locked）报 proc-macro-error2:2.0.1（[patch.crates-io] path-vendor 到 vendor/，E0365 一行修复）→ `supply-chain/config.toml` 新增 `[policy.proc-macro-error2] audit-as-crates-io = false`，附本地复核注记（forbid(unsafe_code) 保持、全 crate unsafe 出现 1 次即 forbid 声明本身、仅编译期过程宏）。`cargo vet` 与 `cargo vet --locked` 双形态均 exit 0。
+- **cargo vet prune**：清理冗余 exemption/import（config.toml -12/+3 行），prune 后双形态复跑仍 exit 0（1126 fully / 5 partially / 667 exempted）。
+- mdbook 复跑：无 unclosed WARN；76MB search index WARN 维持登记（J 轨道决定）。
+
 ## 3. 未完成项（新会话续做清单）
 
 > **勘误 2026-10-13**：原 §3-6『knowledge/ 82 大型文件迁移』经 git 实证已完成（2026-07-10 `5cb654956` 迁入 content/，2026-07-19 `86e06ba37` 清 knowledge/ 143 文件）。现 knowledge/ 仅 15 文件（14 stub + INDEX），大型非 stub=0，零迁移。详见 `reports/F_TRACK_PLAN_2026-10-13.md`。F 轨道剩余动作：① move_ledger.csv 初始化（尚不存在）；② 38 个非构建空目录保留+登记；③ 3 个已删除主题缺口（keywords 速查 / cargo_basics 总览 / k8s 部署）未来以新建 canonical 页补齐。

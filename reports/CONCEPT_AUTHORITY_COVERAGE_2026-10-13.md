@@ -3,31 +3,31 @@
 **EN**: Concept-layer International Authority Coverage
 **Summary**: 复用 maintenance P0/P1/P2 权威域分级，把审计扩展到 concept/ 权威层；量化覆盖率与缺口，为『对齐网络上的国际化权威相关内容』提供机器可复核基线。仅审计，不改正文。
 
-> 生成: 2026-10-13 · 扫描 concept/ 活跃 md: **780**（排除 archive/SUMMARY/README）
+> 生成: 2026-10-13 · 扫描 concept/ 活跃 md: **782**（排除 archive/SUMMARY/README）
 > P0 官方 / P1 学术形式化 / P2 社区生态，域定义复用 `scripts/maintenance/authority_coverage_dashboard.py`
 
 ## 总体覆盖率
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 775 | 99.4% |
-| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 736 | 94.4% |
-| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 701 | 89.9% |
-| **任一权威（P0∪P1∪P2）** | **780** | **100.0%** |
+| P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 777 | 99.4% |
+| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 736 | 94.1% |
+| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 703 | 89.9% |
+| **任一权威（P0∪P1∪P2）** | **782** | **100.0%** |
 | 无任何国际权威引用（缺口） | 0 | 0.0% |
 
 ## 内容页口径覆盖率（排除 00_meta 工具页 / quiz / placeholders / sources 索引）
 
-> 内容页 **679** 页。00_meta 为知识库内部工具/导航/审计页，非 Rust 概念内容，其权威基线为 P0 官方文档；P1/P2 学术生态来源对其不适用，故单列口径。
+> 内容页 **681** 页。00_meta 为知识库内部工具/导航/审计页，非 Rust 概念内容，其权威基线为 P0 官方文档；P1/P2 学术生态来源对其不适用，故单列口径。
 
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
-| P0 官方 | 679 | 100.0% |
-| P1 学术/形式化 | 677 | 99.7% |
-| P2 社区/生态 | 677 | 99.7% |
-| **任一权威** | **679** | **100.0%** |
+| P0 官方 | 681 | 100.0% |
+| P1 学术/形式化 | 677 | 99.4% |
+| P2 社区/生态 | 679 | 99.7% |
+| **任一权威** | **681** | **100.0%** |
 
-内容页 P1 缺口（2）: `concept/04_formal/11_computational_models/15_refinement_types_and_flux.md` · `concept/07_future/00_version_tracking/rust_1_99_stabilized.md`
+内容页 P1 缺口（4）: `concept/04_formal/11_computational_models/15_refinement_types_and_flux.md` · `concept/06_ecosystem/01_cargo/24_cargo_basics.md` · `concept/06_ecosystem/04_web_and_networking/12_container_build_and_delivery_pipeline.md` · `concept/07_future/00_version_tracking/rust_1_99_stabilized.md`
 
 内容页 P2 缺口（2）: `concept/04_formal/11_computational_models/12_linear_logic_and_ownership.md` · `concept/04_formal/11_computational_models/15_refinement_types_and_flux.md`
 
@@ -41,7 +41,7 @@
 | L3 | 78 | 78 | 100.0% | 78 | 100.0% |
 | L4 | 131 | 131 | 100.0% | 131 | 100.0% |
 | L5 | 55 | 55 | 100.0% | 55 | 100.0% |
-| L6 | 256 | 252 | 98.4% | 256 | 100.0% |
+| L6 | 258 | 254 | 98.4% | 258 | 100.0% |
 | L7 | 76 | 75 | 98.7% | 76 | 100.0% |
 | L? | 3 | 3 | 100.0% | 3 | 100.0% |
 

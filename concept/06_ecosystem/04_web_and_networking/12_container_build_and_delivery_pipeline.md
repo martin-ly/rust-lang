@@ -4,8 +4,8 @@
 
 # Kubernetes 上的 Rust 服务：容器化构建与交付流水线
 
-**EN**: Container Build and Delivery Pipeline for Rust Services on Kubernetes
-**Summary**: Build-side and runtime-side engineering for shipping Rust services to Kubernetes: multi-stage Dockerfiles, cargo-chef dependency caching, musl static linking, distroless images, probe contracts, cgroup-aware resource limits, and graceful shutdown with tokio signal handling.
+> **EN**: Container Build and Delivery Pipeline for Rust Services on Kubernetes
+> **Summary**: Build-side and runtime-side engineering for shipping Rust services to Kubernetes: multi-stage Dockerfiles, cargo-chef dependency caching, musl static linking, distroless images, probe contracts, cgroup-aware resource limits, and graceful shutdown with tokio signal handling.
 
 > **Rust 版本**: 1.99.0+ (Edition 2024)
 > **Bloom 层级**: L4-L5

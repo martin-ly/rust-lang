@@ -1,45 +1,47 @@
 {
   "date": "2026-10-13",
-  "scanned": 780,
+  "scanned": 782,
   "coverage": {
     "P0": [
-      775,
+      777,
       99.4
     ],
     "P1": [
       736,
-      94.4
+      94.1
     ],
     "P2": [
-      701,
+      703,
       89.9
     ],
     "any": [
-      780,
+      782,
       100.0
     ],
     "none": 0
   },
   "content_scope": {
-    "scanned": 679,
+    "scanned": 681,
     "P0": [
-      679,
+      681,
       100.0
     ],
     "P1": [
       677,
-      99.7
+      99.4
     ],
     "P2": [
-      677,
+      679,
       99.7
     ],
     "any": [
-      679,
+      681,
       100.0
     ],
     "gaps_p1": [
       "concept/04_formal/11_computational_models/15_refinement_types_and_flux.md",
+      "concept/06_ecosystem/01_cargo/24_cargo_basics.md",
+      "concept/06_ecosystem/04_web_and_networking/12_container_build_and_delivery_pipeline.md",
       "concept/07_future/00_version_tracking/rust_1_99_stabilized.md"
     ],
     "gaps_p2": [
@@ -79,9 +81,9 @@
       "any": 55
     },
     "L6": {
-      "n": 256,
-      "P0": 252,
-      "any": 256
+      "n": 258,
+      "P0": 254,
+      "any": 258
     },
     "L7": {
       "n": 76,

@@ -99,6 +99,9 @@ criteria = []
 audit-as-crates-io = false
 criteria = []
 
+[policy.proc-macro-error2]
+audit-as-crates-io = false
+
 [[exemptions.ab_glyph]]
 version = "0.2.32"
 criteria = "safe-to-run"
@@ -2797,18 +2800,6 @@ version = "1.1.4"
 criteria = "safe-to-run"
 suggest = false
 notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
-
-[[exemptions.rustls]]
-version = "0.23.41"
-criteria = "safe-to-run"
-suggest = false
-notes = "初始化 cargo-vet 豁免；本 crate 尚未经过正式代码审计，后续应逐步转为 audits.toml 中的正式审计条目。"
-
-[[exemptions.rustls]]
-version = "0.23.42"
-criteria = "safe-to-run"
-suggest = false
-notes = "2026-07-15 cargo update 补丁升级；本 crate 尚未经过正式代码审计。"
 
 [[exemptions.rustls]]
 version = "0.23.43"
