@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-10-13T19:48:05.611271+00:00
+> 生成时间: 2026-10-13T20:17:03.391897+00:00
 > 扫描文件数: 793
 
 ## 全局指标
@@ -11,8 +11,8 @@
 | 总定理链 (⟹) | 2181 | ≥270 | ✅ |
 | 总反命题 | 1555 | ≥40 | ✅ |
 | 总 Mermaid 图 | 1572 | ≥50 | ✅ |
-| 编译验证代码块 | 7940 | ≥150 | ✅ |
-| 定理矩阵总行 | 31725 | — | — |
+| 编译验证代码块 | 7945 | ≥150 | ✅ |
+| 定理矩阵总行 | 31728 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
 | docs/content/knowledge 死链数量 | 0 | 0 | ✅ |
 | 反向推理 (⟸) | 361 | ≥50 | ✅ |
@@ -366,8 +366,8 @@
 | G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\21_microkernel_architecture.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\22_embedded_safety_critical_patterns.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\23_pipeline_filter_blackboard_interpreter.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
-| G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\24_repository_and_unit_of_work.md | L6 | 缺失受众标签 |
-| G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\25_hexagonal_ports_and_adapters.md | L6 | 缺失受众标签 |
+| G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\24_repository_and_unit_of_work.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
+| G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\25_hexagonal_ports_and_adapters.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
 | G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\26_circuit_breaker.md | L6 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3); 缺失受众标签 |
 | G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\27_bulkhead.md | L6 | 缺失受众标签 |
 | G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\28_retry.md | L6 | 缺失受众标签 |
@@ -1134,13 +1134,13 @@
 | G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\21_microkernel_architecture.md | L6 | 320 | 0 | 0 | 0 | 0 | 1 | 5 | 0 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
 | G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\22_embedded_safety_critical_patterns.md | L6 | 475 | 0 | 0 | 0 | 0 | 1 | 11 | 0 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
 | G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\23_pipeline_filter_blackboard_interpreter.md | L6 | 460 | 0 | 0 | 0 | 0 | 1 | 7 | 0 | ❌ | ✅ | ✅ | 进阶 | 专家级 |
-| G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\24_repository_and_unit_of_work.md | L6 | 189 | 0 | 0 | 0 | 2 | 2 | 3 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\25_hexagonal_ports_and_adapters.md | L6 | 189 | 0 | 0 | 0 | 2 | 2 | 4 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\26_circuit_breaker.md | L6 | 234 | 0 | 0 | 0 | 2 | 2 | 2 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\27_bulkhead.md | L6 | 182 | 0 | 0 | 0 | 2 | 2 | 3 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\24_repository_and_unit_of_work.md | L6 | 219 | 0 | 0 | 0 | 2 | 2 | 4 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\25_hexagonal_ports_and_adapters.md | L6 | 217 | 0 | 0 | 0 | 2 | 2 | 5 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\26_circuit_breaker.md | L6 | 270 | 0 | 0 | 0 | 2 | 2 | 3 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\27_bulkhead.md | L6 | 200 | 0 | 0 | 0 | 2 | 2 | 4 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
 | G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\28_retry.md | L6 | 183 | 0 | 0 | 0 | 2 | 2 | 2 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
 | G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\29_saga.md | L6 | 198 | 0 | 0 | 0 | 2 | 2 | 3 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
-| G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\30_outbox.md | L6 | 203 | 0 | 0 | 0 | 2 | 2 | 3 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
+| G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\30_outbox.md | L6 | 243 | 0 | 0 | 0 | 2 | 2 | 4 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
 | G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\31_object_pool.md | L6 | 169 | 0 | 0 | 0 | 2 | 2 | 2 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
 | G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\32_typestate_deep_dive.md | L6 | 201 | 0 | 0 | 0 | 2 | 2 | 3 | 0 | ❌ | ✅ | ✅ | None | 专家级 |
 | G:\_src\rust-lang\concept\06_ecosystem\03_design_patterns\33_anti_patterns.md | L6 | 776 | 0 | 0 | 0 | 8 | 2 | 21 | 0 | ❌ | ✅ | ✅ | 进阶 | 进阶 |

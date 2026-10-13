@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "total_files": 793,
-    "generated_at": "2026-10-13T19:48:05.619776+00:00"
+    "generated_at": "2026-10-13T20:17:03.396014+00:00"
   },
   "files": [
     {
@@ -69798,7 +69798,7 @@
       "layer": "L6",
       "title": "仓储与单元工作模式（Repository & Unit of Work）",
       "positioning": "将 Evans / Vernon 的 DDD 战术模式（Repository、Aggregate、Domain Event）与 Rust 的所有权、trait、错误处理模型对齐，提供可在生产落地的实现策略。",
-      "line_count": 189,
+      "line_count": 219,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -69832,6 +69832,14 @@
           "lines": 7,
           "should_fail": false,
           "code_preview": "// ❌ 错误：Repository 越界处理领域规则 impl OrderRepository for SqlOrderRepository {     as..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 20,
+          "should_fail": true,
+          "code_preview": "use std::sync::Arc;  trait OrderRepository {     fn save(&self, id: u64); }  str..."
         }
       ],
       "sources": [],
@@ -69863,7 +69871,7 @@
       "layer": "L6",
       "title": "六边形架构 / 端口与适配器模式（Hexagonal / Ports & Adapters）",
       "positioning": "将 Cockburn 的六边形架构（又称 Ports & Adapters）与 Rust 的 trait/workspace/Cargo 特性对齐，建立可测试、可替换的领域核心。",
-      "line_count": 189,
+      "line_count": 217,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -69905,6 +69913,14 @@
           "lines": 5,
           "should_fail": false,
           "code_preview": "// ❌ 错误：领域 crate 依赖 actix-web use actix_web::HttpRequest;  pub fn place_order(re..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 18,
+          "should_fail": true,
+          "code_preview": "trait EventPublisher {     fn publish<T>(&self, event: T); }  struct LoggingAdap..."
         }
       ],
       "sources": [],
@@ -69938,7 +69954,7 @@
       "layer": "L6",
       "title": "断路器模式（Circuit Breaker）",
       "positioning": "将 Michael Nygard 的 Release It! 断路器模式与 Rust 的并发原语、类型系统对齐，实现线程安全的弹性中间件。",
-      "line_count": 234,
+      "line_count": 270,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -69964,6 +69980,14 @@
           "lines": 6,
           "should_fail": false,
           "code_preview": "// ❌ 错误：把 4xx 业务错误也记为依赖故障 match response.status() {     400..=499 => self.cb.rec..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 26,
+          "should_fail": true,
+          "code_preview": "use std::sync::atomic::{AtomicUsize, Ordering};  #[repr(usize)] enum State {    ..."
         }
       ],
       "sources": [],
@@ -69996,7 +70020,7 @@
       "layer": "L6",
       "title": "舱壁隔离模式（Bulkhead）",
       "positioning": "将 Nygard 的舱壁模式映射到 Rust 的线程池、异步任务、内存配额与容器资源限制，建立多层次的故障隔离。",
-      "line_count": 182,
+      "line_count": 200,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -70030,6 +70054,14 @@
           "lines": 6,
           "should_fail": false,
           "code_preview": "// ❌ 错误：所有依赖共享同一个 Tokio runtime，慢依赖阻塞快依赖 #[tokio::main] async fn main() {     //..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "fn main() {     let task = String::from(\"slow-dependency\");     let handle = std..."
         }
       ],
       "sources": [],
@@ -70183,7 +70215,7 @@
       "layer": "L6",
       "title": "事务性发件箱模式（Transactional Outbox）",
       "positioning": "将 Chris Richardson 的 Transactional Outbox 模式与 Rust 的异步数据库访问、消息发布、幂等消费对齐，保证事件驱动架构中的数据一致性。",
-      "line_count": 203,
+      "line_count": 243,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -70212,6 +70244,14 @@
         },
         {
           "flags": [
+            "compile_fail"
+          ],
+          "lines": 17,
+          "should_fail": true,
+          "code_preview": "pub struct Outbox { events: Vec<String> }  impl Outbox {     pub fn drain(&mut s..."
+        },
+        {
+          "flags": [
             "ignore"
           ],
           "lines": 4,
@@ -70230,7 +70270,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 2,
-      "matrix_rows": 5,
+      "matrix_rows": 8,
       "pre_post": {
         "pre": [
           "[Saga](29_saga.md) · [Event-Driven Architecture](06_event_driven_architecture.md) · [CQRS and Event Sourcing](07_cqrs_event_sourcing.md) · [Comparative Layer README](../../05_comparative/README.md)"

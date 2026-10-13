@@ -119,6 +119,46 @@ pub async fn run_relay(pool: &PgPool, publisher: &dyn EventPublisher) {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.0 实编译）
+
+Relay 常想「把一批事件打包成闭包延迟发布」。若闭包以 `&mut self` 借用 outbox 内部字段并逃逸出方法，调用方在 Relay 消费前再写入 outbox，就会被借用检查直接拒绝——这正是「入队与中继共享同一可变状态」这一常见设计缺陷在类型层的暴露。
+
+```rust,compile_fail
+pub struct Outbox { events: Vec<String> }
+
+impl Outbox {
+    pub fn drain(&mut self) -> impl FnOnce() -> Vec<String> + '_ {
+        let pending = &mut self.events;
+        move || pending.drain(..).collect()
+    }
+}
+
+fn main() {
+    let mut o = Outbox { events: vec!["a".into()] };
+    let relay = o.drain();
+    o.events.push("b".into());
+    let batch = relay();
+    println!("{batch:?}");
+}
+```
+
+**实测错误码**: `E0499`（rustc 1.99.0, stable-x86_64-pc-windows-msvc, Edition 2024）
+
+```text
+error[E0499]: cannot borrow `o.events` as mutable more than once at a time
+   |
+13 |     let relay = o.drain();
+   |                 - first mutable borrow occurs here
+14 |     o.events.push("b".into());
+   |     ^^^^^^^^ second mutable borrow occurs here
+15 |     let batch = relay();
+   |                 ----- first borrow later used here
+```
+
+工程解释：`drain` 返回的闭包通过 `'_` 捕获了 `&mut self.events`，该可变借用直到 `relay()` 调用才结束；期间任何对 outbox 的再写入都是第二次可变借用。地道做法是让 `drain` 直接 `std::mem::take(&mut self.events)` 返回所有权（快照式移交），Relay 与业务写入因此互不干涉，也天然支持重试语义。
+
+---
+
 ## 四、关系
 
 - **Outbox ↔ Saga**: Saga 的补偿事件与步骤事件都可通过 Outbox 原子发布。

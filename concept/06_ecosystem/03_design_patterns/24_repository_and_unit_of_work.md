@@ -130,6 +130,36 @@ impl OrderRepository for SqlOrderRepository {
 
 Repository 通常跨越线程池与网络边界，因此 trait 方法必须返回 `Send` Future。Rust 1.75+ 原生 `async fn` in trait 已支持，但返回 `impl Future<...> + Send` 更稳定可控。
 
+### ⚠️ 实测反例：删掉 `Send + Sync` 超界后，`Arc<dyn Trait>` 注入工作线程直接编译失败
+
+正文 3.1 的端口声明写作 `trait OrderRepository: Send + Sync`。这个超界不是风格偏好：一旦省略，「把仓储适配器装进 `Arc<dyn OrderRepository>` 再交给工作线程」这一最常见的注入方式在编译期即崩溃。以下全量源码在 rustc 1.99.0（stable-x86_64-pc-windows-msvc）实测：
+
+```rust,compile_fail
+use std::sync::Arc;
+
+trait OrderRepository {
+    fn save(&self, id: u64);
+}
+
+struct SqlOrderRepository;
+
+impl OrderRepository for SqlOrderRepository {
+    fn save(&self, _id: u64) {}
+}
+
+fn main() {
+    let repo: Arc<dyn OrderRepository> = Arc::new(SqlOrderRepository);
+    let handle = std::thread::spawn(move || {
+        repo.save(42);
+    });
+    handle.join().unwrap();
+}
+```
+
+**实测结果**：``error[E0277]: `dyn OrderRepository` cannot be shared between threads safely``（伴随同源的 `cannot be sent between threads safely`）。
+
+**工程解释**：trait 对象只在 trait 声明显式承诺 `Send + Sync` 时才携带这两个 auto trait；否则 `Arc<dyn Trait>` 无法进入 `thread::spawn`，适配器注入点在编译期失败。这正是正文把 `Send + Sync` 写进端口契约的原因——它把「仓储可跨线程池复用」变成类型系统可证明的约束，而不是运行时才发现的事故。
+
 ---
 
 ## 六、决策树

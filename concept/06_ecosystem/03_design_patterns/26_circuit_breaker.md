@@ -174,6 +174,42 @@ match response.status() {
 
 幂等读操作适合；非幂等写操作需要配合幂等键或 Saga，避免 Half-Open 探测造成副作用。
 
+### ⚠️ 实测反例：`#[repr(usize)]` 枚举变体不是整数，直接写进 `AtomicUsize` 编译失败
+
+正文状态机用 `AtomicUsize` 存状态、`#[repr(usize)]` 声明 `State` 枚举。`#[repr(usize)]` 只规定枚举的内存布局，不改变类型：变体仍是 `State` 类型而非 `usize`，漏写 `as usize` 的 `store` 直接编译失败。以下全量源码在 rustc 1.99.0（stable-x86_64-pc-windows-msvc）实测：
+
+```rust,compile_fail
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+#[repr(usize)]
+enum State {
+    Closed = 0,
+    Open = 1,
+    HalfOpen = 2,
+}
+
+struct CircuitBreaker {
+    state: AtomicUsize,
+}
+
+impl CircuitBreaker {
+    fn trip(&self) {
+        self.state.store(State::Open, Ordering::Relaxed);
+    }
+}
+
+fn main() {
+    let cb = CircuitBreaker {
+        state: AtomicUsize::new(State::Closed as usize),
+    };
+    cb.trip();
+}
+```
+
+**实测结果**：``error[E0308]: mismatched types``（expected `usize`, found `State`）。
+
+**工程解释**：原子状态机把枚举压进 `AtomicUsize` 时，每个写入点都必须显式 `State::Open as usize`，读取侧则要靠 `s if s == State::Open as usize` 这类比较还原语义——漏一处就是类型错误。这也是正文 `record_failure` 里 `store(State::Open as usize, ...)` 写法必须逐点保持的原因；更安全的替代是 `AtomicU8` + `try_from` 或把状态收进 `Mutex<State>`，代价换可读性。
+
 ---
 
 ## 六、决策树

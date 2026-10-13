@@ -123,6 +123,24 @@ async fn main() {
 
 过细的舱壁会增加管理复杂度；过粗的舱壁失去隔离意义。通常按依赖服务或业务路径划分。
 
+### ⚠️ 实测反例：舱壁线程闭包借用局部变量，E0373 拒绝「可能逃逸」的引用
+
+线程级舱壁（每依赖一个 `thread::spawn` 隔舱）最常见的编译期坑：闭包只借用主函数的局部状态而没有 `move`，编译器无法证明引用活得过线程，直接拒绝。以下全量源码在 rustc 1.99.0（stable-x86_64-pc-windows-msvc）实测：
+
+```rust,compile_fail
+fn main() {
+    let task = String::from("slow-dependency");
+    let handle = std::thread::spawn(|| {
+        println!("bulkhead compartment running: {task}");
+    });
+    handle.join().unwrap();
+}
+```
+
+**实测结果**：``error[E0373]: closure may outlive the current function, but it borrows `task`, which is owned by the current function``。
+
+**工程解释**：`thread::spawn` 要求闭包满足 `'static`，借用局部变量天然违反该约束；编译器给出的建议正是修复方向——加 `move` 把所有权移交隔舱线程，或改用 `Arc`/`scope` 结构化共享。舱壁按线程划分时，每个隔舱的上下文（连接参数、请求体）必须在 spawn 点完成所有权移交，这是 Rust 把「跨舱室数据竞争」前移到编译期的典型体现。
+
 ---
 
 ## 六、决策树

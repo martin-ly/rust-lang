@@ -130,6 +130,34 @@ pub fn place_order(req: HttpRequest) { /* ... */ }
 
 六边形架构的收益在需要替换技术栈或大量测试时最明显。对于一次性脚本或原型，完整端口/适配器结构可能是过度工程。
 
+### ⚠️ 实测反例：带泛型方法的端口 trait 不是 dyn compatible，运行时多态注入失败
+
+端口常想「对任意事件类型开放」，于是有人把端口方法写成泛型（`fn publish<T>(&self, event: T)`）。这样的 trait 无法做成 trait 对象——六边形里「构造期注入 `&dyn Port`」的适配器接线方式当场失效。以下全量源码在 rustc 1.99.0（stable-x86_64-pc-windows-msvc）实测：
+
+```rust,compile_fail
+trait EventPublisher {
+    fn publish<T>(&self, event: T);
+}
+
+struct LoggingAdapter;
+
+impl EventPublisher for LoggingAdapter {
+    fn publish<T>(&self, _event: T) {}
+}
+
+fn run(publisher: &dyn EventPublisher) {
+    publisher.publish("OrderPlaced");
+}
+
+fn main() {
+    run(&LoggingAdapter);
+}
+```
+
+**实测结果**：``error[E0038]: the trait `EventPublisher` is not dyn compatible``（旧文案为 "not object safe"）。
+
+**工程解释**：泛型方法会在每个具体类型单态化出无限多个 vtable 条目，trait 对象无法为其建立单一调度表。端口契约应把「事件」收敛为具体类型（如 `DomainEvent` enum）或改用泛型参数在调用点单态化（`fn run<P: EventPublisher>(p: &P)`），二者都能恢复 dyn 兼容或静态分发，且都不破坏「领域只依赖端口」的依赖方向。
+
 ---
 
 ## 六、决策树
