@@ -586,6 +586,59 @@ graph TD
 > **陷阱总结**: 宏的陷阱主要与**表达式上下文**、**多次求值**、**优先级**、**卫生性**和**宏类型选择**相关。
 > [来源: [The Little Book of Rust Macros — Pitfalls](https://veykril.github.io/tlborm/)]
 
+## ⚠️ 反例与陷阱（rustc 1.99.0 实测）
+
+### 反例 1：宏内 `let` 绑定泄漏到调用方 → E0425（卫生性反证）
+
+```rust,compile_fail
+macro_rules! set_x { () => { let x = 1; } }
+fn main() {
+    set_x!();
+    println!("{}", x); // ❌ E0425: cannot find value `x` in this scope
+}
+```
+
+实测：`error[E0425]: cannot find value 'x' in this scope`。
+
+**为什么/怎么避**：声明宏是 hygienic 的——宏内引入的 `x` 带着宏定义处的语法上下文，调用方看不见。想让宏「定义外部可见的变量」，用宏生成完整语句（`set_x!(); use_it!();` 一起生成），或改用返回值的宏；别指望宏像 C 文本替换那样泄漏标识符。
+
+### 反例 2：自递归宏 → 递归展开上限（无错误码）
+
+```rust,compile_fail
+macro_rules! boom {
+    () => { boom!() };
+}
+fn main() { boom!(); }
+```
+
+实测：`error: recursion limit reached while expanding 'boom!'`（该错误**没有 E 编号**，并提示 `#[recursion_limit]`/`-Zrecursion-limit` 可调）。
+
+**为什么/怎么避**：`macro_rules!` 递归没有编译期终止证明，展开到 recursion limit 直接 abort。递归宏必须有可静态到达的空终结臂（如 `($t:tt) => {...}` 到 `() => {}`），调试时用 `cargo expand` 看展开树。
+
+### 反例 3：`#[derive(Eq)]` 用于含 `f64` 的 struct → E0277 + E0369
+
+```rust,compile_fail
+#[derive(Eq)]
+struct P(f64);
+fn main() { println!("{}", P(1.0) == P(1.0)); }
+```
+
+实测（同一程序 3 条错误）：`error[E0277]: the trait bound 'f64: Eq' is not satisfied`、`error[E0277]: can't compare 'P' with 'P'`、`error[E0369]: binary operation '==' cannot be applied to type 'P'`。
+
+**为什么/怎么避**：`Eq` 要求每个字段都 `Eq`，而 `f64` 因 NaN ≠ NaN 只有 `PartialEq`——derive 链在字段层断掉，连 `==` 本身都不可用。浮点键改用定点整数（如厘单位）、`total_cmp` 自建 `Eq`，或干脆只留 `PartialEq`。
+
+### 反例 4：`#[cfg(unix)]` 函数在 Windows 上调用 → E0425
+
+```rust,compile_fail
+#[cfg(unix)]
+fn only_unix() { println!("unix"); }
+fn main() { only_unix(); } // ❌ Windows 上 E0425: cannot find function `only_unix`
+```
+
+实测（本机 Windows）：`error[E0425]: cannot find function 'only_unix' in this scope`。
+
+**为什么/怎么避**：`cfg` 在编译前就删掉了整个函数，调用点不会得到「存在但禁用」的提示，只报找不到。跨平台函数为每个 cfg 分支提供 fallback（`#[cfg(not(unix))] fn only_unix() { ... }`），或用 `#[cfg]` 包住调用点本身。
+
 ---
 
 ## 六、来源与延伸阅读

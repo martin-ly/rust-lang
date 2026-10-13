@@ -53,6 +53,7 @@
     - [10.3 边界测试：C 可变参数函数的不安全绑定（运行时 UB）](#103-边界测试c-可变参数函数的不安全绑定运行时-ub)
     - [10.4 边界测试：C 结构体的内存对齐与 Rust 的 `#[repr(C)]`（运行时 ABI 不匹配）](#104-边界测试c-结构体的内存对齐与-rust-的-reprc运行时-abi-不匹配)
     - [10.7 边界测试：生命周期参数的不匹配返回](#107-边界测试生命周期参数的不匹配返回)
+    - [10.5 实测反例：unsized 参数、variadic 传引用与 `extern` trait 方法的 dyn 陷阱（rustc 1.99.0 实编译）](#105-实测反例unsized-参数variadic-传引用与-extern-trait-方法的-dyn-陷阱rustc-1990-实编译)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`extern "C"` 块中声明的函数在调用时为什么通常需要 `unsafe` 块？（理解层）](#测验-1extern-c-块中声明的函数在调用时为什么通常需要-unsafe-块理解层)
     - [测验 2：`#[repr(C)]` 对 struct 的内存布局有什么影响？（理解层）](#测验-2reprc-对-struct-的内存布局有什么影响理解层)
@@ -837,6 +838,51 @@ fn main() {}
 ```
 
 > **修正**: **生命周期标注**：1) `&'a str` 表示引用（Reference）至少存活 `'a`；2) 返回 `'a` 要求数据存活至少 `'a`；3) `y` 的 lifetime `'b` 可能短于 `'a`，返回会导致悬垂引用。
+
+### 10.5 实测反例：unsized 参数、variadic 传引用与 `extern` trait 方法的 dyn 陷阱（rustc 1.99.0 实编译）
+
+**反例 A：`#[repr(C)]` 结构里 unsized 字段不在末位（E0277）。** 与 C 柔性数组对应的设计在 Rust 里只允许"末位 unsized"：
+
+```rust
+#[repr(C)]
+struct Mid { head: str, tail: u8 } // ❌ str 不在末位
+```
+
+rustc 1.99.0 实测输出（错误码实测得到）：
+
+```text
+error[E0277]: the size for values of type `str` cannot be known at compilation time
+  = note: only the last field of a struct may have a dynamically sized type
+```
+
+**反例 B：variadic FFI 传 Rust 引用/非整数类型是静默 UB（编译通过、无警告）。** 这是比编译错误更危险的一类边界——rustc 不拦，ABI 直接错：
+
+```rust
+extern "C" { fn printf(fmt: *const i8, ...); }
+fn main() {
+    let x = 1i32;
+    unsafe { printf(b"%d\0".as_ptr() as *const i8, &x); } // 传的是 &i32（指针），C 侧按 int 读
+}
+```
+
+rustc 1.99.0 实测：编译通过（仅 dead_code 警告，无 variadic 类型检查）。`improper_ctypes` lint 只检查 extern 声明上的类型，**不检查 variadic 实参**——`&x` 以 8 字节指针过栈，C 的 `%d` 只读 4 字节，结果取决于调用约定与字节序。
+
+**反例 C：trait 里的 `extern "C" fn` 方法放进 `dyn Trait` 后调用被静默降级为 Rust ABI。** `extern` 修饰在 trait 方法上合法，但 vtable 分发时 ABI 由 Rust 侧决定，跨语言回调不能依赖它：
+
+```rust
+trait T { extern "C" fn f(&self); }
+struct S;
+impl T for S { extern "C" fn f(&self) {} }
+fn call(t: &dyn T) { t.f(); }   // 经 vtable 调用
+fn main() { call(&S); }
+```
+
+rustc 1.99.0 实测：编译通过（`--crate-type lib` 复核时仅 dead_code 警告）——`extern "C"` 在 trait 方法上不产生 FFI 保证，把它当"C 可见入口"是错觉；导出给 C 的入口必须是 free function 或显式 `Box::into_raw` + `extern "C" fn` 回调对。
+
+> **工程解释**: 反例 A 的边界来自 DST 布局规则：unsized 尾部携带元数据（长度/vtable），插在中间会让前缀字段偏移不可计算，柔性数组式 C 模式在 Rust 中只能写成 `struct { head: u8, tail: [u8] }` 末位形态。反例 B 提醒 variadic 是 Rust 类型系统的"法外之地"——正确姿势是把参数先拆成 `c_int`/`c_double` 标量再传入。反例 C 说明 ABI 标注只在链接边界生效，vtable 内部调用是 Rust 调用约定；需要 C 回调时应导出 `extern "C" fn trampoline(user_data, args)` 显式跳板。
+> [来源: [Rust Reference — FFI](https://doc.rust-lang.org/reference/items/external-blocks.html) · [Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html)]
+
+---
 
 ## 嵌入式测验（Embedded Quiz）
 

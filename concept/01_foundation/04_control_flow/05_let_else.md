@@ -65,6 +65,7 @@ mindmap
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 常见错误](#42-常见错误)
+    - [4.3 实测反例（rustc 1.99.0）](#43-实测反例rustc-1990)
   - [五、风格建议](#五风格建议)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [认知路径](#认知路径)
@@ -352,6 +353,41 @@ fn main() {}
 | 不可反驳模式 | `let n = x else { return; };` | 模式必须可反驳 |
 | 误用 `\|` | `let A(x) | B(x) = e else { return; };` | let-else 不支持或模式 |
 | 绑定泄漏到 else | 在 else 块访问匹配变量 | else 块内无绑定 |
+
+### 4.3 实测反例（rustc 1.99.0）
+
+上表逐条在本机 rustc 1.99.0 编译验证。「else 不发散」的真实编译器输出（rustc 直接点名 never type）：
+
+```rust,compile_fail
+fn main() {
+    let opt = Some(1);
+    let Some(x) = opt else {
+        println!("none");   // ❌ else 块值为 ()，不发散
+    };
+    println!("{}", x);
+}
+```
+
+```text
+error[E0308]: `else` clause of `let...else` does not diverge
+  |     expected `!`, found `()`
+  |     = help: try adding a diverging expression, such as `return` or `panic!(..)`
+  |     = help: ...or use `match` instead of `let...else`
+```
+
+模式类型写错时同样是 E0308 但病因不同——`let Some(x) = 42;` 报 `mismatched types`（expected Option, found i32），与「else 不发散」共用一个错误码。
+
+正例（编译 + 运行均通过，实测输出 `2 -1`）：
+
+```rust
+fn f(opt: Option<i32>) -> i32 {
+    let Some(x) = opt else { return -1 };
+    x + 1
+}
+fn main() { println!("{} {}", f(Some(1)), f(None)); }
+```
+
+**为什么/怎么避**：`let-else` 的语义契约是「失败路径必须离开当前作用域」，rustc 用类型 `!` 强制执行。看到 E0308 时先看 help 行区分「else 不发散」还是「模式类型不匹配」，再对症修复；失败分支逻辑超过一行时改用 `match`，可读性更好。
 
 ---
 

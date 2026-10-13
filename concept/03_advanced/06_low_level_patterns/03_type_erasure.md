@@ -36,7 +36,7 @@
     - [1.3 对象安全](#13-对象安全)
     - [1.4 Trait Object Upcasting（1.86 stable）](#14-trait-object-upcasting186-stable)
   - [二、类型擦除模式](#二类型擦除模式)
-    - [2.1 Box](#21-box)
+    - [2.1 `Box<dyn Trait>`](#21-boxdyn-trait)
     - [2.2 自定义类型擦除](#22-自定义类型擦除)
   - [三、性能权衡](#三性能权衡)
     - [3.1 静态 vs 动态分发](#31-静态-vs-动态分发)
@@ -56,6 +56,7 @@
     - [10.3 边界测试：`dyn Trait` 与 `Sized` 边界的冲突（编译错误）](#103-边界测试dyn-trait-与-sized-边界的冲突编译错误)
     - [10.4 边界测试：dyn Trait 的 Sized 要求与泛型约束（编译错误）](#104-边界测试dyn-trait-的-sized-要求与泛型约束编译错误)
     - [10.6 边界测试：所有权移动后的再次使用](#106-边界测试所有权移动后的再次使用)
+    - [10.5 实测反例：泛型方法使 trait 失去 dyn 兼容性，且 `&dyn Trait` 不能自我装箱（rustc 1.99.0 实编译）](#105-实测反例泛型方法使-trait-失去-dyn-兼容性且-dyn-trait-不能自我装箱rustc-1990-实编译)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`dyn Trait` 的大小为什么在编译时未知？它如何被实际使用？（理解层）](#测验-1dyn-trait-的大小为什么在编译时未知它如何被实际使用理解层)
     - [测验 2：`&dyn Trait` 在内存中的布局是什么？（理解层）](#测验-2dyn-trait-在内存中的布局是什么理解层)
@@ -776,6 +777,53 @@ fn main() {
 > **修正**: **Move 语义**：1) `String` 非 `Copy`，赋值时 move 所有权（Ownership）；2) move 后原变量无效；3) 解决：使用 `.clone()` 或引用（Reference） `&s`。
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
+
+### 10.5 实测反例：泛型方法使 trait 失去 dyn 兼容性，且 `&dyn Trait` 不能自我装箱（rustc 1.99.0 实编译）
+
+**反例 A：trait 带泛型方法即不可 `dyn` 化（E0038）。** 类型擦除的第一道硬边界——"对象安全"在 1.99 的诊断文案已改称 dyn compatible：
+
+```rust
+trait Render { fn render<T: std::fmt::Display>(&self, v: T); }
+fn main() {
+    let b: Box<dyn Render> = Box::new(()); // ❌
+}
+```
+
+rustc 1.99.0 实测输出（错误码实测得到）：
+
+```text
+error[E0038]: the trait `Render` is not dyn compatible
+note: for a trait to be dyn compatible it needs to allow building a vtable
+2 | trait Render { fn render<T: std::fmt::Display>(&self, v: T); }
+  |       ------      ^^^^^^ ...because method `render` has generic type parameters
+  = help: consider moving `render` to another trait
+```
+
+**反例 B：`&dyn Trait` 自身不实现 `Trait`，不能塞进另一个 `Box<dyn Trait>`（E0277）。** 类型擦除的"套娃"直觉在借用检查处破产：
+
+```rust
+trait Render { fn render(&self); }
+struct S;
+impl Render for S { fn render(&self) {} }
+fn main() {
+    let b: Box<dyn Render> = Box::new(S);
+    let r: &dyn Render = &*b;
+    let c: Box<dyn Render> = Box::new(r); // ❌ &dyn Render 不实现 Render
+}
+```
+
+rustc 1.99.0 实测输出：
+
+```text
+error[E0277]: the trait bound `&dyn Render: Render` is not satisfied
+  = note: required for the cast from `Box<&dyn Render>` to `Box<dyn Render>`
+help: the trait `Render` is implemented for `S`
+```
+
+> **工程解释**: 反例 A 的根因是 vtable 是**静态表**：泛型方法要求为每个 `T` 生成一个单态化入口，条目数在编译期不可枚举，所以擦除只能保留 Sized 且无泛型参数的方法——标准出路是把泛型方法拆到独立 trait（编译器 help 也如此建议），或把参数改为 `&dyn Display` 把泛型换成另一层擦除。反例 B 说明 `dyn Trait` 的"实现了 Trait"性质只属于 trait object 本身（`dyn Render` 自动实现 `Render`），借用形式 `&dyn Render` 是另一个类型且默认不转发实现；要再装箱应直接传递 `Box<dyn Render>` 所有权，或让 `Render` 继承 `Clone` 后 `b.clone()`。
+> [来源: [Rust Reference — Dyn Compatibility](https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility)]
+
+---
 
 ## 嵌入式测验（Embedded Quiz）
 

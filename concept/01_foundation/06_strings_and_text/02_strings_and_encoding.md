@@ -79,6 +79,11 @@ mindmap
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
+  - [⚠️ 反例与陷阱（rustc 1.99.0 实测）](#️-反例与陷阱rustc-1990-实测)
+    - [反例 1：`OsString == String` 直接比较 → E0277](#反例-1osstring--string-直接比较--e0277)
+    - [反例 2：NFC/NFD 规范化不同的「同一个字符」不相等](#反例-2nfcnfd-规范化不同的同一个字符不相等)
+    - [反例 3：grapheme cluster ≠ char：国旗 emoji 是 2 个 char](#反例-3grapheme-cluster--char国旗-emoji-是-2-个-char)
+    - [反例 4：`from_utf8_lossy` 静默替换坏字节](#反例-4from_utf8_lossy-静默替换坏字节)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -555,6 +560,76 @@ Unicode Normalization（规范化）:
 
 > **陷阱总结**: 字符串处理的陷阱集中在**索引语义**、**编码假设**、**性能模式**、**规范化**和**FFI 边界**五个方面——每个都源于 Unicode 的复杂性与 Rust 类型安全设计之间的张力。
 > [来源: [TRPL — Common Collections](https://doc.rust-lang.org/book/ch08-00-common-collections.html)]
+
+## ⚠️ 反例与陷阱（rustc 1.99.0 实测）
+
+### 反例 1：`OsString == String` 直接比较 → E0277
+
+```rust,compile_fail
+fn main() {
+    let os = std::ffi::OsString::from("hello");
+    let s = String::from("hello");
+    if os == s { println!("equal"); } // ❌ E0277: can't compare `OsString` with `String`
+}
+```
+
+实测：`error[E0277]: can't compare 'OsString' with 'String'`。
+
+**为什么/怎么避**：`OsString` 在 Windows 上是 WTF-16、Unix 上是原始字节，与 UTF-8 的 `String` 语义不同域，标准库故意不提供跨域 `PartialEq`。比较前显式收敛：`os == std::ffi::OsStr::new(&s)` 或 `os.to_string_lossy() == s`。
+
+### 反例 2：NFC/NFD 规范化不同的「同一个字符」不相等
+
+```rust
+// 编译通过；实测输出如下
+fn main() {
+    let precomposed = "\u{00E1}";  // á 单码点（NFC）
+    let decomposed  = "a\u{0301}"; // a + 组合重音符（NFD）
+    println!("precomposed chars={} bytes={}", precomposed.chars().count(), precomposed.len());
+    println!("decomposed  chars={} bytes={}", decomposed.chars().count(), decomposed.len());
+    println!("string equality: {}", precomposed == decomposed);
+}
+```
+
+实测运行输出：
+
+```text
+precomposed chars=1 bytes=2
+decomposed  chars=2 bytes=3
+string equality: false
+```
+
+**为什么/怎么避**：Rust 的 `==` 是码点序列逐字节比较，不做 Unicode 规范化——肉眼相同的「á」可能是 1 或 2 个 `char`。用户输入去重/查表前先经 `unicase`/`unicode-normalization` 之类 crate 归一化，别假设 `chars().count()` 等于「用户看到的字符数」。
+
+### 反例 3：grapheme cluster ≠ char：国旗 emoji 是 2 个 char
+
+```rust
+// 编译通过；实测输出如下
+fn main() {
+    let emoji = "\u{1F600}";                 // 😀
+    let flag  = "\u{1F1EF}\u{1F1F5}";       // 🇯🇵（两个区域指示符）
+    println!("emoji chars={} bytes={}", emoji.chars().count(), emoji.len());
+    println!("flag  chars={} bytes={}", flag.chars().count(), flag.len());
+}
+```
+
+实测运行输出：`emoji chars=1 bytes=4`、`flag chars=2 bytes=8`。
+
+**为什么/怎么避**：`chars()` 迭代 Unicode 标量值，不是字素簇；组合 emoji、变体选择符、ZWJ 序列都会让「一个显示字符」变成多个 `char`。按「显示字符」计数/截断需要 `unicode-segmentation` crate 的 grapheme 迭代器。
+
+### 反例 4：`from_utf8_lossy` 静默替换坏字节
+
+```rust
+// 编译通过；实测输出如下
+fn main() {
+    let bytes: Vec<u8> = vec![0xE4, 0xBD, 0xA0, 0xFF, 0x41]; // 你 + 坏字节 0xFF + A
+    println!("lossy={}", String::from_utf8_lossy(&bytes));
+    println!("strict: {:?}", std::str::from_utf8(&bytes).map_err(|e| e.valid_up_to()));
+}
+```
+
+实测运行输出：`lossy=你�A`、`strict: Err(3)`。
+
+**为什么/怎么避**：lossy 把非法字节替换成 U+FFFD 且不报错——坏数据会一路漂到下游。校验型场景用 `from_utf8` 拿 `Utf8Error.valid_up_to` 定位坏点；只在日志/展示层用 lossy。
 
 ---
 

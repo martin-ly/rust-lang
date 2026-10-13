@@ -63,6 +63,12 @@
     - [10.5 边界测试：`thiserror` 的 `#[from]` 与类型歧义（编译错误）](#105-边界测试thiserror-的-from-与类型歧义编译错误)
     - [10.6 边界测试：`eyre` 与 `anyhow` 的混用导致上下文丢失（编译错误）](#106-边界测试eyre-与-anyhow-的混用导致上下文丢失编译错误)
     - [10.4 边界测试：错误类型的 `source()` 链与 `Display` 的循环（运行时栈溢出）](#104-边界测试错误类型的-source-链与-display-的循环运行时栈溢出)
+  - [十一、实测反例（rustc 1.99.0 编译/运行验证）](#十一实测反例rustc-1990-编译运行验证)
+    - [反例 A：`?` 无法转换错误类型 → E0277（带专用文案）](#反例-a-无法转换错误类型--e0277带专用文案)
+    - [反例 B：`Option` 返回类型里对 `Result` 用 `?` → E0277（带修复建议）](#反例-boption-返回类型里对-result-用---e0277带修复建议)
+    - [反例 C：`source()` 自引用造成 Display 无限递归 → 实测栈溢出](#反例-csource-自引用造成-display-无限递归--实测栈溢出)
+    - [反例 D：正向对照——`Box<dyn Error>` 让 `?` 自动转换成立（运行时断言实证）](#反例-d正向对照boxdyn-error-让--自动转换成立运行时断言实证)
+    - [反例 E：`inner()??` 双层解包的第二个 `?` 仍需 From → E0277](#反例-einner-双层解包的第二个--仍需-from--e0277)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`?` 运算符可以自动进行错误类型转换，它依赖哪个 trait？（理解层）](#测验-1-运算符可以自动进行错误类型转换它依赖哪个-trait理解层)
     - [测验 2：`thiserror` 和 `anyhow` 在错误处理中各自适合什么场景？（理解层）](#测验-2thiserror-和-anyhow-在错误处理中各自适合什么场景理解层)
@@ -733,6 +739,80 @@ fn main() {
 > 3) 使用 `anyhow`/`eyre` 自动管理错误链。
 > 这与 Java 的 `Throwable.getCause()`（同样可能循环，但 JVM 不检测）或 Go 的 `errors.Unwrap`（Go 1.13+ 的链式错误，手动管理）不同——Rust 的 `Error` trait 提供标准化错误链接口。
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/error/trait.Error.html)] · [来源: [anyhow](https://docs.rs/anyhow/)]
+
+## 十一、实测反例（rustc 1.99.0 编译/运行验证）
+
+以下错误码与运行时行为均为 rustc 1.99.0 stable 实测。
+
+### 反例 A：`?` 无法转换错误类型 → E0277（带专用文案）
+
+```rust,compile_fail
+// rustc 1.99.0 stable 实测
+#[derive(Debug)]
+struct MyErr;
+impl std::fmt::Display for MyErr { fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result { write!(f, "my") } }
+impl std::error::Error for MyErr {}
+fn parse() -> Result<i32, MyErr> { let s = "x".parse::<i32>()?; Ok(s) }
+fn main() {}
+```
+
+实测：`error[E0277]:`?` couldn't convert the error to `MyErr``，note 指出 `the trait `From<ParseIntError>` is not implemented for `MyErr``。工程含义：1.99 的 `?` 报错已不是泛泛的 trait bound 失败，而是直接命名"couldn't convert"——修复路径唯一：给 `MyErr` 写 `impl From<ParseIntError> for MyErr`，或改返回类型。
+
+### 反例 B：`Option` 返回类型里对 `Result` 用 `?` → E0277（带修复建议）
+
+```rust,compile_fail
+// rustc 1.99.0 stable 实测
+fn f() -> Option<i32> { let x = "x".parse::<i32>()?; Some(x) }
+fn main() {}
+```
+
+实测：`error[E0277]: the`?` operator can only be used on `Option`s, not`Result`s, in a function that returns`Option``，help 直接给出 `.ok()?`。工程含义：`?` 的跨类型转换只沿 `From`/`FromResidual` 在 `Result` 家族内部发生；`Result -> Option` 是**有损**转换（丢弃错误信息），所以编译器拒绝隐式做，必须手写 `.ok()?` 表态。
+
+### 反例 C：`source()` 自引用造成 Display 无限递归 → 实测栈溢出
+
+```rust
+// rustc 1.99.0 stable 实测：编译通过，运行得到
+// thread 'main' has overflowed its stack（进程中止）
+use std::error::Error;
+#[derive(Debug)]
+struct A;
+impl std::fmt::Display for A {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        let mut cur: Option<&(dyn Error + 'static)> = self.source();
+        while let Some(e) = cur { write!(f, "{}", e)?; cur = e.source(); }
+        Ok(())
+    }
+}
+impl Error for A { fn source(&self) -> Option<&(dyn Error + 'static)> { Some(self) } }
+fn main() { println!("{}", A); }
+```
+
+实测运行输出：`thread 'main' (pid) has overflowed its stack`。§10.4 说"直接循环困难、只能逻辑上可能"——实测证明 `fn source(&self) -> Some(self)` 一行即可造出真循环，且 `Display` 遍历链时立即栈溢出。工程含义：错误链的无环性是 `Error` trait 的**未检查契约**，标准库不做环检测；`source()` 返回 `self` 或返回任何祖先错误都是 UB 级设计错误。
+
+### 反例 D：正向对照——`Box<dyn Error>` 让 `?` 自动转换成立（运行时断言实证）
+
+```rust
+// rustc 1.99.0 stable 实测：assert 通过
+use std::error::Error;
+fn read() -> Result<String, Box<dyn Error>> {
+    let s = "42".parse::<i32>()?; // From<ParseIntError> for Box<dyn Error> 由标准库提供
+    Ok(format!("{s}"))
+}
+fn main() { assert_eq!(read().unwrap(), "42"); }
+```
+
+实测断言通过。工程含义：与反例 A 对照——`Box<dyn Error>` 之所以是"万能错误返回类型"，是因为标准库为它预置了 `impl From<E> for Box<dyn Error> where E: Error`；自定义错误类型没有这份免费午餐。
+
+### 反例 E：`inner()??` 双层解包的第二个 `?` 仍需 From → E0277
+
+```rust,compile_fail
+// rustc 1.99.0 stable 实测
+fn inner() -> Result<Result<i32, std::num::ParseIntError>, std::io::Error> { Ok("x".parse::<i32>()) }
+fn outer() -> Result<i32, std::io::Error> { let v = inner()??; Ok(v) }
+fn main() {}
+```
+
+实测：`error[E0277]:`?` couldn't convert the error to `std::io::Error``，note：`the trait `From<ParseIntError>` is not implemented for `std::io::Error``。工程含义：嵌套 `Result` 的第二个 `?` 与第一个走完全相同的 `From` 机制；`io::Error` 只预置了少数 `From`（如 `io::Error::from(InterruptedError)` 类），不会兜底任意内层错误——嵌套错误应尽早 `map_err` 扁平化。
 
 ## 嵌入式测验（Embedded Quiz）
 

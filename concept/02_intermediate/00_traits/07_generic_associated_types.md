@@ -78,6 +78,11 @@ mindmap
     - [8.2 implied bounds 限制（1.97 仍在）](#82-implied-bounds-限制197-仍在)
     - [8.3 非对象安全与 async trait 的联动后果](#83-非对象安全与-async-trait-的联动后果)
     - [8.4 不应对 GAT 做的事](#84-不应对-gat-做的事)
+  - [8.5 实测反例（rustc 1.99.0 编译验证）](#85-实测反例rustc-1990-编译验证)
+    - [反例 A：trait 声明侧漏写 `where Self: 'a` → 无编号硬错误](#反例-atrait-声明侧漏写-where-self-a--无编号硬错误)
+    - [反例 B：带 GAT 的 trait 做 `dyn` → E0038（dyn compatible 新文案）](#反例-b带-gat-的-trait-做-dyn--e0038dyn-compatible-新文案)
+    - [反例 C：泛型函数消费 GAT 输出时约束不自动传递 → E0277](#反例-c泛型函数消费-gat-输出时约束不自动传递--e0277)
+    - [反例 D：实现侧 `Item<'a> = &'static str` 合法——`where Self: 'a` 不约束实现的具体化](#反例-d实现侧-itema--static-str-合法where-self-a-不约束实现的具体化)
   - [📋 关键属性](#-关键属性)
   - [🔗 概念关系](#-概念关系)
   - [九、来源](#九来源)
@@ -583,7 +588,57 @@ trait Stream {
 - 不要在 GAT 上堆叠多层 HRTB 约束来模拟完整 HKT——超出求解器能力的代码会以难解的错误信息失败，而非优雅降级；
 - 库作者注意：给已发布 trait 的关联类型**增加**泛型参数是破坏性变更（breaking change）。
 
----
+## 8.5 实测反例（rustc 1.99.0 编译验证）
+
+以下错误码均为 rustc 1.99.0 stable 实测输出。
+
+### 反例 A：trait 声明侧漏写 `where Self: 'a` → 无编号硬错误
+
+```rust,compile_fail
+// rustc 1.99.0 stable 实测
+trait Lending { type Item<'a>; fn next<'a>(&'a mut self) -> Self::Item<'a>; }
+struct S;
+impl Lending for S { type Item<'a> = &'a i32; fn next<'a>(&'a mut self) -> Self::Item<'a> { &1 } }
+```
+
+实测：`error: missing required bound on`Item``，help 直接给出 `add the required where clause: `where Self: 'a``，并引用 issue #87479。该诊断**没有 E 编号**，是 GAT 良构性检查的专用错误——印证 §2.2 "`where Self: 'a` 是必需项"：漏写不是风格问题，而是编译不过。
+
+### 反例 B：带 GAT 的 trait 做 `dyn` → E0038（dyn compatible 新文案）
+
+```rust,compile_fail
+// rustc 1.99.0 stable 实测
+trait Lending { type Item<'a> where Self: 'a; fn next<'a>(&'a mut self) -> Self::Item<'a>; }
+struct Win(Vec<i32>);
+impl Lending for Win { type Item<'a> = &'a [i32]; fn next<'a>(&'a mut self) -> Self::Item<'a> { &self.0 } }
+fn main(){ let b: Box<dyn Lending> = Box::new(Win(vec![1])); }
+```
+
+实测：`error[E0038]: the trait`Lending`is not dyn compatible`，note 明确指向"because it contains generic associated type `Item`"，help 建议"consider moving `Item` to another trait"。注意 1.99 的措辞已是 **dyn compatible**（替代旧"object safe"）。工程含义：§8.3 的"带 GAT 不可 object"结论在 1.99 依旧成立，且报错直接点名 GAT 本身。
+
+### 反例 C：泛型函数消费 GAT 输出时约束不自动传递 → E0277
+
+```rust,compile_fail
+// rustc 1.99.0 stable 实测
+trait Lending { type Item<'a> where Self: 'a; fn next<'a>(&'a mut self) -> Self::Item<'a>; }
+struct Win(Vec<i32>);
+impl Lending for Win { type Item<'a> = &'a [i32]; fn next<'a>(&'a mut self) -> Self::Item<'a> { &self.0 } }
+fn drain<C: Lending>(mut c: C) { let x = c.next(); println!("{:?}", x); } // E0277
+fn main(){ drain(Win(vec![1,2])); }
+```
+
+实测：`error[E0277]:`<C as Lending>::Item<'_>` doesn't implement `Debug``，help 给出修复：`where <C as Lending>::Item<'_>: Debug`。工程含义：具体实现里 `Item<'a> = &'a [i32]` 明明实现了 `Debug`，但泛型调用点只看 trait 声明——这正是 §8.2 implied bounds 限制的日常形态，调用方必须显式重复约束。
+
+### 反例 D：实现侧 `Item<'a> = &'static str` 合法——`where Self: 'a` 不约束实现的具体化
+
+```rust
+// rustc 1.99.0 stable 实测：编译通过（仅 dead_code 警告）
+trait Lending { type Item<'a> where Self: 'a; }
+struct Win;
+impl Lending for Win { type Item<'a> = &'static str; }
+fn main() {}
+```
+
+实测通过。工程含义：required bound 约束的是**类型族的良构性**（Self 必须活过 `'a`），而非要求实现"用到"`'a`；把 GAT 具体化成与 `'a` 无关的 `'static` 类型完全合法，此时 GAT 退化为常量类型族。判断"是否需要 GAT"时应看借用是否真的随 `'a` 变化。
 
 ## 📋 关键属性
 

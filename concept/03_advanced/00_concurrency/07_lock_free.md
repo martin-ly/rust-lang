@@ -54,6 +54,7 @@
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
+    - [4.3 实测边界案例：std 原子 CAS 的失败序约束与 Relaxed 语义实证（rustc 1.99.0 实编译/实运行）](#43-实测边界案例std-原子-cas-的失败序约束与-relaxed-语义实证rustc-1990-实编译实运行)
   - [五、常见陷阱](#五常见陷阱)
     - [编译错误示例](#编译错误示例)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
@@ -482,6 +483,48 @@ graph TD
 
 > **边界要点**: 无锁编程的边界与**内存回收**、**调试**、**内存序**、**平台差异**和**性能**相关。
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)]
+
+---
+
+### 4.3 实测边界案例：std 原子 CAS 的失败序约束与 Relaxed 语义实证（rustc 1.99.0 实编译/实运行）
+
+**边界案例 A：`compare_exchange` 失败序禁止 `Release`/`AcqRel`（编译期硬拒绝）。** 无锁代码里"给失败路径也加 AcqRel 以求保险"是常见误写，std 在编译期直接封死：
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+fn main() {
+    let a = AtomicUsize::new(0);
+    let _ = a.compare_exchange(0, 1, Ordering::Relaxed, Ordering::AcqRel); // ❌
+}
+```
+
+rustc 1.99.0 实测输出（无错误码，deny-by-default lint 实测得到）：
+
+```text
+error: `compare_exchange`'s failure ordering may not be `Release` or `AcqRel`,
+       since a failed `compare_exchange` does not result in a write
+  = help: consider using `Acquire` or `Relaxed` failure ordering instead
+  = note: `#[deny(invalid_atomic_ordering)]` on by default
+```
+
+**边界案例 B：Relaxed CAS 的原子性与"无 happens-before"运行时实证。** 无等待性（lock-free progress）与内存序是两个正交维度——Relaxed CAS 仍是无锁原子操作，但不提供任何跨线程可见性保证：
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+fn main() {
+    let flag = AtomicUsize::new(0);
+    let ok = flag.compare_exchange(0, 1, Ordering::Relaxed, Ordering::Relaxed).is_ok();
+    assert!(ok);                                  // 断言 1：Relaxed CAS 成功路径成立
+    let fail = flag.compare_exchange(0, 2, Ordering::Relaxed, Ordering::Relaxed);
+    assert_eq!(fail.unwrap_err(), 1);            // 断言 2：失败时返回当前值而非 panic
+    println!("RELAXED-CAS-OK");
+}
+```
+
+rustc 1.99.0 编译并运行实测：两条断言全部通过，输出 `RELAXED-CAS-OK`。
+
+> **工程解释**: 案例 A 的语义根据是：CAS 失败即"未写入"，而 `Release`/`AcqRel` 的核心语义是写侧的先行发生（happens-before）发布——对不存在的写谈发布是病态组合，所以 rustc 以 `invalid_atomic_ordering` 直接拒绝，而非警告；这同时说明失败序只应表达"读侧观察"（`Acquire`/`Relaxed`）。案例 B 则把 ABA 讨论拉回地基：CAS 的**原子性**（不可分割的比较-交换）与**序**（可见性顺序）是独立属性——Relaxed 保住前者、放弃后者，无锁结构的正确性必须靠 CAS 循环 + 显式 Acquire/Release 配对（或 epoch/hazard 回收）补齐，而不是指望默认序"顺便"保证。
+> [来源: [std::sync::atomic::AtomicUsize::compare_exchange](https://doc.rust-lang.org/std/sync/atomic/struct.AtomicUsize.html#method.compare_exchange) · [Rustonomicon](https://doc.rust-lang.org/nomicon/atomics.html)]
 
 ---
 

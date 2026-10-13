@@ -91,6 +91,11 @@ mindmap
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
+  - [⚠️ 反例与陷阱（rustc 1.99.0 实测）](#️-反例与陷阱rustc-1990-实测)
+    - [反例 1：`String` 被 `drop` 后切片引用仍在用 → E0505](#反例-1string-被-drop-后切片引用仍在用--e0505)
+    - [反例 2：多字节字符中间切片是运行时 panic，不是编译错误](#反例-2多字节字符中间切片是运行时-panic不是编译错误)
+    - [反例 3：`+` 拼接消耗左操作数 → E0382](#反例-3-拼接消耗左操作数--e0382)
+    - [反例 4：`HashMap<String, _>` 用 `&String` 查询 → E0277](#反例-4hashmapstring-_-用-string-查询--e0277)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
   - [相关概念](#相关概念)
@@ -522,6 +527,67 @@ graph TD
 
 > **陷阱总结**: 字符串处理的陷阱主要与**性能假设**、**编码转换**、**NUL 处理**、**API 设计**和**所有权（Ownership）**相关。
 > [来源: [Rust Compiler Error E0277](https://doc.rust-lang.org/error_codes/E0277.html)]
+
+## ⚠️ 反例与陷阱（rustc 1.99.0 实测）
+
+### 反例 1：`String` 被 `drop` 后切片引用仍在用 → E0505
+
+```rust,compile_fail
+fn main() {
+    let s = String::from("hello");
+    let r = &s[1..3];  // r 借用 s
+    drop(s);           // ❌ E0505: cannot move out of `s` because it is borrowed
+    println!("{}", r);
+}
+```
+
+实测：`error[E0505]: cannot move out of 's' because it is borrowed`。
+
+**为什么/怎么避**：`&s[1..3]` 得到的是 `&str`，其生命周期挂在 `s` 上；`drop(s)` 是移动，借用检查器直接拒绝。需要独立存活的切片就 `s[1..3].to_string()` 克隆一份。
+
+### 反例 2：多字节字符中间切片是运行时 panic，不是编译错误
+
+```rust
+// 编译通过；运行时 exit 101
+fn main() {
+    let s = String::from("你好世界");
+    println!("{}", &s[1..2]); // ❌ 字节 1 落在 '你'（字节 0..3）内部
+}
+```
+
+实测运行输出：`start byte index 1 is not a char boundary; it is inside '你' (bytes 0..3 of string)`。
+
+**为什么/怎么避**：`s[a..b]` 按**字节**索引，编译器无法静态证明边界合法。跨字符截取用 `s.chars().take(n).collect::<String>()`，或先 `is_char_boundary()` 断言。
+
+### 反例 3：`+` 拼接消耗左操作数 → E0382
+
+```rust,compile_fail
+fn main() {
+    let a = String::from("hello");
+    let b = a + " world";  // `+` 按值接收 String，a 被移动
+    println!("{}", a);     // ❌ E0382: borrow of moved value: `a`
+}
+```
+
+实测：`error[E0382]: borrow of moved value: 'a'`。
+
+**为什么/怎么避**：`String + &str` 的所有者是 `impl Add<&str> for String`，左操作数按值进入。之后还要用 `a` 就写 `&a + " world"`（生成新 String）或 `a.push_str(" world")`（原地追加）。
+
+### 反例 4：`HashMap<String, _>` 用 `&String` 查询 → E0277
+
+```rust,compile_fail
+use std::collections::HashMap;
+fn main() {
+    let mut m = HashMap::new();
+    m.insert("k", 1);              // 键类型是 &str
+    let s = String::from("k");
+    if let Some(v) = m.get(&s) {}  // ❌ E0277: the trait bound `&str: Borrow<String>` is not satisfied
+}
+```
+
+实测：`error[E0277]: the trait bound '&str: Borrow<String>' is not satisfied`。
+
+**为什么/怎么避**：`get(&Q)` 要求 `K: Borrow<Q>`；这里 `K=&str`、`Q=String`，方向反了。统一键类型（都用 `String` 或都用 `&str`），跨 `String`/`&str` 查询时把键定为 `String`（`String: Borrow<&str>` 成立）。
 
 ---
 

@@ -88,6 +88,12 @@ mindmap
     - [10.6 边界测试：trait alias 与 bound 的冗余（编译错误）](#106-边界测试trait-alias-与-bound-的冗余编译错误)
     - [10.3 边界测试：关联类型在 trait 边界中的不一致（编译错误）](#103-边界测试关联类型在-trait-边界中的不一致编译错误)
     - [10.4 边界测试：GAT（泛型关联类型）的缺失约束（编译错误）](#104-边界测试gat泛型关联类型的缺失约束编译错误)
+  - [十一、实测反例（rustc 1.99.0 编译验证）](#十一实测反例rustc-1990-编译验证)
+    - [反例 A：实现 trait 时漏写关联类型 → E0046](#反例-a实现-trait-时漏写关联类型--e0046)
+    - [反例 B：stable 上使用 specialization → E0554；nightly 上仍可能 E0119](#反例-bstable-上使用-specialization--e0554nightly-上仍可能-e0119)
+    - [反例 C：trait alias 在 stable 被拒 → E0554](#反例-ctrait-alias-在-stable-被拒--e0554)
+    - [反例 D：同一类型对同一 trait 写两个 impl（含不同关联类型）→ E0119](#反例-d同一类型对同一-trait-写两个-impl含不同关联类型-e0119)
+    - [反例 E：GAT 声明缺 `where Self: 'a` → 无错误码的硬错误（实测文案）](#反例-egat-声明缺-where-self-a--无错误码的硬错误实测文案)
   - [实践](#实践)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：关联类型 vs 泛型参数（理解层）](#测验-1关联类型-vs-泛型参数理解层)
@@ -741,6 +747,68 @@ fn main() {
 ```
 
 > **修正**: **GAT**（Generic Associated Types，Rust 1.65+）允许关联类型带泛型参数：`type Item<'a>`。但 GAT 的使用常需额外约束：1) `where Self: 'a` — 保证 `self` 的生命周期（Lifetimes）覆盖 `'a`；2) `Item<'a>: 'a` — 保证输出类型在 `'a` 内有效。GAT 的应用：1)  lending iterator（`LendingIterator` trait，返回与自身绑定的引用）；2) 类型级函数（`type Family<T>`）；3) 替代部分 HKT（Higher-Kinded Types）用例。GAT 的编译错误信息可能复杂，因涉及多个生命周期和关联类型约束。这与 Haskell 的 associated type families（`type family Item c :: * -> *`）或 C++ 的模板模板参数（`template<template<typename> class F>`）类似——Rust 的 GAT 是类型系统（Type System）的重要扩展，但学习曲线陡。来源: [Rust Reference — Generic Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html) · 来源: [RFC 1598 — GAT](https://github.com/rust-lang/rfcs/pull/1598)
+
+## 十一、实测反例（rustc 1.99.0 编译验证）
+
+以下错误码均为 rustc 1.99.0（stable）或对应 nightly 实测输出。
+
+### 反例 A：实现 trait 时漏写关联类型 → E0046
+
+```rust,compile_fail
+// rustc 1.99.0 stable 实测
+trait Container { type Item; fn get(&self) -> Self::Item; }
+struct VecC(Vec<i32>);
+impl Container for VecC {
+    fn get(&self) -> Self::Item { self.0[0] } // error[E0046]: not all trait items implemented, missing: `Item`
+}
+```
+
+实测错误：`error[E0046]: not all trait items implemented, missing:`Item``，并在 trait 定义处标注 `---------`Item`from trait`。工程含义：关联类型是**必须实现的 trait 项**，不是可省略的元数据；漏写时 rustc 直接指回 trait 定义行，这是"关联类型 vs 泛型参数"最直观的报错差异——泛型参数漏写发生在调用侧（E0282/E0308），关联类型漏写发生在实现侧（E0046）。
+
+### 反例 B：stable 上使用 specialization → E0554；nightly 上仍可能 E0119
+
+```rust,compile_fail
+#![feature(specialization)] // error[E0554]: `#![feature]` may not be safe to use on the stable release channel（实测文案：may not be used on the stable release channel）
+trait Trait { fn foo(&self) {} }
+struct S;
+impl Trait for S {}
+impl Trait for S { default fn foo(&self) {} }
+```
+
+stable 实测：`error[E0554]`。nightly 实测：`E0554` 消失，但得到 `error[E0119]: conflicting implementations of trait`Trait` for type `S``——`default fn` 只有在存在**更泛的正实现**（如 blanket impl）时才合法，对同一具体类型写"正实现 + default 实现"仍是 Coherence 冲突。工程含义：specialization 不是"给同一类型写两个 impl"的语法糖；1.99 的 nightly 还额外警告该特性"incomplete and may cause compiler crashes"，并建议改用 `min_specialization`。
+
+### 反例 C：trait alias 在 stable 被拒 → E0554
+
+```rust,compile_fail
+#![feature(trait_alias)] // error[E0554]: `#![feature]` may not be used on the stable release channel
+trait Foo = Send + Sync;
+fn main() {}
+```
+
+实测确认：截至 rustc 1.99.0，trait alias 仍未稳定，§2.3 的任何 trait alias 示例都必须标注 nightly。
+
+### 反例 D：同一类型对同一 trait 写两个 impl（含不同关联类型）→ E0119
+
+```rust,compile_fail
+// rustc 1.99.0 stable 实测
+trait Tr { type Out; fn out(&self) -> Self::Out; }
+struct S;
+impl Tr for S { type Out = i32; fn out(&self) -> i32 { 1 } }
+impl Tr for S { type Out = u8;  fn out(&self) -> u8 { 2 } } // error[E0119]: conflicting implementations of trait `Tr` for type `S`
+```
+
+实测：`error[E0119]: conflicting implementations of trait`Tr` for type `S``。工程含义：关联类型"能否在 impl 侧被具体化成不同值"取决于**类型是否不同**，同一具体类型的重复 impl 在关联类型差异之前就被 Coherence 拒绝。
+
+### 反例 E：GAT 声明缺 `where Self: 'a` → 无错误码的硬错误（实测文案）
+
+```rust,compile_fail
+// rustc 1.99.0 stable 实测
+trait Lending { type Item<'a>; fn next<'a>(&'a mut self) -> Self::Item<'a>; }
+struct S;
+impl Lending for S { type Item<'a> = &'a i32; fn next<'a>(&'a mut self) -> Self::Item<'a> { &1 } }
+```
+
+实测输出：`error: missing required bound on`Item``，help 提示 `add the required where clause: `where Self: 'a``，并引用 issue #87479。注意该错误**没有 E 编号**——它是 GAT 良构性检查的专用诊断，不是普通错误码。工程含义：`where Self: 'a` 在 trait 声明侧是语法级强制项，写 GAT 时先加它再谈其他。
 
 ## 实践
 

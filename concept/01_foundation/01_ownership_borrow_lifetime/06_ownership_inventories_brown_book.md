@@ -251,3 +251,37 @@ mindmap
 
 > **反命题**: "Brown Book 清单只适用于初学者，对经验丰富的 Rust 开发者没有价值。" —— 错误。清单中的部分重借用、返回值生命周期、嵌套借用等样题同样能暴露对 Tree Borrows 等最新模型的理解偏差。
 > **边界**: 清单侧重编译期所有权规则，不覆盖运行期内存分配、并发数据竞争或 unsafe 指针规则；后者需要 [Rustonomicon](https://doc.rust-lang.org/nomicon/) 等进阶资料。
+
+## ⚠️ 反例与陷阱（rustc 1.99.0 实测）
+
+> 以下反例均在本机 rustc 1.99.0 实编译验证，错误码为编译器实际输出。
+
+### 反例 1：借用存活期间移动原值 → E0505
+
+```rust,compile_fail
+fn main() {
+    let s = String::from("hello");
+    let borrow = &s;      // 共享借用开始
+    let owned = s;        // ❌ E0505: cannot move out of `s` because it is borrowed
+    println!("{}", borrow);
+}
+```
+
+实测输出：`error[E0505]: cannot move out of 's' because it is borrowed`。
+
+**为什么/怎么避**：在 Brown Book 许可图上，`s` 处于 Borrowed(ReadOnly) 状态时 `=` 移动会把它置为 Invalid，而 `borrow` 之后还要读它——许可图直接拒绝。修复：把 `println!` 移到移动之前结束借用，或改用 `s.clone()`。
+
+### 反例 2：切片引用 + `push` 扩容 → E0502
+
+```rust,compile_fail
+fn main() {
+    let mut v = vec![1, 2, 3];
+    let first = &v[0];    // 共享借用整个 v
+    v.push(4);            // ❌ E0502: cannot borrow `v` as mutable because it is also borrowed as immutable
+    println!("{}", first);
+}
+```
+
+实测输出：`error[E0502]: cannot borrow 'v' as mutable because it is also borrowed as immutable`。
+
+**为什么/怎么避**：`push` 可能重新分配整个缓冲区，`first` 会悬垂；清单练习里这是「写权限进入 ⟹ 既有读权限失效」的典型节点。修复：先取出值（`let first = v[0];`），或先 `reserve` 再借用。

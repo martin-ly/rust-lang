@@ -53,6 +53,7 @@
     - [10.4 边界测试：误将捕获闭包转换为函数指针（编译错误）](#104-边界测试误将捕获闭包转换为函数指针编译错误)
     - [10.5 边界测试：`move` 闭包与 `Copy` 类型的陷阱（逻辑错误）](#105-边界测试move-闭包与-copy-类型的陷阱逻辑错误)
     - [10.6 边界测试：异步闭包与 `async move` 的捕获差异（编译错误）](#106-边界测试异步闭包与-async-move-的捕获差异编译错误)
+    - [10.5 实测反例：闭包到 fn 指针的强制转换边界与可变调用边界（rustc 1.99.0 实编译）](#105-实测反例闭包到-fn-指针的强制转换边界与可变调用边界rustc-1990-实编译)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`Fn`/`FnMut`/`FnOnce` 的选择（理解层）](#测验-1fnfnmutfnonce-的选择理解层)
     - [测验 2：`move` 关键字的作用（应用层）](#测验-2move-关键字的作用应用层)
@@ -608,6 +609,54 @@ async fn example() {
 
 > **修正**: 异步闭包默认按借用捕获。跨 await 或跨任务传递时，通常需要 `async move ||` 将所有权移入闭包。
 > [来源: [RFC 3668 — Async Closures](https://github.com/rust-lang/rfcs/pull/3668)]
+
+---
+
+### 10.5 实测反例：闭包到 fn 指针的强制转换边界与可变调用边界（rustc 1.99.0 实编译）
+
+**反例 A：捕获变量的闭包不能强制转换为 `fn` 指针。** 闭包章节常声称"无捕获闭包可退化为函数指针"，此处实测其反面——一旦捕获即失败：
+
+```rust
+fn apply(f: fn(i32) -> i32, x: i32) -> i32 { f(x) }
+fn main() {
+    let base = 10;
+    println!("{}", apply(|x| x + base, 1)); // ❌ 捕获了 base
+}
+```
+
+rustc 1.99.0 实测输出（错误码实测得到）：
+
+```text
+error[E0308]: mismatched types
+  |
+5 |     println!("{}", apply(|x| x + base, 1));
+  |                    ----- ^^^^^^^^^^^^ expected fn pointer, found closure
+  = note: expected fn pointer `fn(i32) -> i32`
+                found closure `{closure@p3_fnptr.rs:5:26: 5:29}`
+note: closures can only be coerced to `fn` types if they do not capture any variables
+```
+
+**反例 B：捕获可变状态的闭包绑定必须是 `mut`。** "闭包是值"这一模型在调用侧同样受借用规则约束：
+
+```rust
+struct S { x: i32 }
+fn main() {
+    let mut s = S { x: 1 };
+    let c = move || { s.x += 1; }; // 捕获 s.x 用于写入
+    c(); // ❌ E0596
+}
+```
+
+rustc 1.99.0 实测输出：
+
+```text
+error[E0596]: cannot borrow `c` as mutable, as it is not declared as mutable
+help: consider changing this to be mutable
+5 |     let mut c = move || { s.x += 1; };
+```
+
+> **工程解释**: 反例 A 的边界在于 `fn` 指针是裸代码地址、不携带环境——闭包一旦实现 `Fn*` 三兄弟中的捕获语义就不再是"函数"，FFI 回调、函数表等只接受 `fn` 指针的场景必须把环境显式外置（上下文指针 + `extern "C" fn`）。反例 B 说明 `FnMut` 的"mut"不只发生在闭包内部：调用 `c()` 本身是对 `c` 的 `&mut` 借用，所以 `let c = ...` 的不可变绑定直接封死 `FnMut` 调用，这是把闭包存进结构体字段后再"自增计数"类代码最常见的第一道编译墙。
+> [来源: [Rust Reference — Closures](https://doc.rust-lang.org/reference/closures.html)]
 
 ---
 

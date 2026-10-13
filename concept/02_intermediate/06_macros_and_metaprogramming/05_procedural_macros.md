@@ -50,6 +50,7 @@
     - [10.2 边界测试：Derive 宏修改被标注项（编译错误）](#102-边界测试derive-宏修改被标注项编译错误)
     - [10.3 边界测试：Span 丢失导致错误定位模糊（调试困难）](#103-边界测试span-丢失导致错误定位模糊调试困难)
     - [10.4 边界测试：属性宏参数解析失败（编译错误）](#104-边界测试属性宏参数解析失败编译错误)
+    - [10.5 实测反例：proc-macro crate 类型约束与卫生性边界（rustc 1.99.0 实编译）](#105-实测反例proc-macro-crate-类型约束与卫生性边界rustc-1990-实编译)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：过程宏的类型（理解层）](#测验-1过程宏的类型理解层)
     - [测验 2：过程宏的执行时机（应用层）](#测验-2过程宏的执行时机应用层)
@@ -512,6 +513,44 @@ struct Item;
 
 > **修正**: 属性宏应明确文档化支持的参数格式，并在解析失败时返回 `syn::Error`。常见做法是使用 `syn::AttributeArgs` 或自定义 `Parse` 实现。
 > [来源: [Rust Reference — Attribute Macros](https://doc.rust-lang.org/reference/procedural-macros.html#attribute-macros)]
+
+---
+
+### 10.5 实测反例：proc-macro crate 类型约束与卫生性边界（rustc 1.99.0 实编译）
+
+**反例 A：`#[proc_macro]` 出现在非 proc-macro crate 中。** 以下代码用 `rustc --edition 2021 --crate-type lib` 编译（即普通 crate）：
+
+```rust
+#[proc_macro]
+pub fn nothing(_: proc_macro::TokenStream) -> proc_macro::TokenStream { Default::default() }
+```
+
+rustc 1.99.0 实测输出（错误码实测得到）：
+
+```text
+error: the `proc_macro` attribute is only usable with crates of the `proc-macro` crate type
+error[E0433]: cannot find module or crate `proc_macro` in this scope
+```
+
+**反例 B：声明宏卫生性对调用方可见性的硬边界。** 过程宏的 span/hygiene 讨论常引用声明宏卫生性作为基线，此处实测该基线：
+
+```rust
+macro_rules! helper { () => { let hidden = 1; } }
+fn main() {
+    helper!();
+    let _ = hidden; // ❌
+}
+```
+
+rustc 1.99.0 实测输出：
+
+```text
+error[E0425]: cannot find value `hidden` in this scope
+help: an identifier with the same name is defined here, but is not accessible due to macro hygiene
+```
+
+> **工程解释**: 反例 A 说明过程宏不是"语法糖开关"而是**crate 级 ABI 契约**——`proc-macro = true` 决定编译器是否链接 `proc_macro` API 并允许属性展开，报错发生在 crate 类型检查阶段而非宏展开阶段，因此排错时应先查 Cargo.toml 而非宏体。反例 B 说明卫生性是**默认不可关闭的安全边界**：宏内绑定对调用方不可见，若过程宏需要向调用方注入可引用名称，必须显式使用 `Span::call_site()`，代价是放弃卫生性保护、引入命名冲突风险。
+> [来源: [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)]
 
 ---
 

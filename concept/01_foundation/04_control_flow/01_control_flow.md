@@ -71,6 +71,10 @@ mindmap
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
+  - [⚠️ 反例与陷阱（rustc 1.99.0 实测）](#️-反例与陷阱rustc-1990-实测)
+    - [反例 1：`loop` 的 `break` 值与声明类型不符 → E0308](#反例-1loop-的-break-值与声明类型不符--e0308)
+    - [反例 2：`if`/`else` 一个分支是值、一个是语句 → E0308](#反例-2ifelse-一个分支是值一个是语句--e0308)
+    - [反例 3：`for` 越界索引是运行时 panic，不是编译错误](#反例-3for-越界索引是运行时-panic不是编译错误)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -606,6 +610,52 @@ graph TD
 
 > **陷阱总结**: 控制流的陷阱主要与**类型一致性（Coherence）**、**穷尽性**、**尾部值规则**和**作用域**相关。
 > [来源: [Rust Compiler Error E0308](https://doc.rust-lang.org/error_codes/E0308.html)]
+
+## ⚠️ 反例与陷阱（rustc 1.99.0 实测）
+
+### 反例 1：`loop` 的 `break` 值与声明类型不符 → E0308
+
+```rust,compile_fail
+fn main() {
+    let x: i32 = loop {
+        break "done";   // ❌ E0308: mismatched types（expected i32, found &str）
+    };
+}
+```
+
+实测：`error[E0308]: mismatched types`。`loop` 作为表达式时，所有 `break` 值的公共类型必须与接收侧一致。
+
+**为什么/怎么避**：表达式导向的控制流要求「分支汇合点类型统一」。给 `loop` 显式标注类型，或让所有 `break` 携带同一类型；需要多形态结果时用 enum/`Result` 收口。
+
+### 反例 2：`if`/`else` 一个分支是值、一个是语句 → E0308
+
+```rust,compile_fail
+fn main() {
+    let n = 5;
+    let x = if n > 3 { 1 } else { println!("no") }; // ❌ E0308: expected i32, found ()
+    println!("{}", x);
+}
+```
+
+实测：`error[E0308]: mismatched types`（else 分支块值为 `()`）。
+
+**为什么/怎么避**：`println!(...)` 返回 `()`，两个分支必须汇合到同一类型。副作用分支应移出 `if` 表达式，或让两个分支都返回 `()`。
+
+### 反例 3：`for` 越界索引是运行时 panic，不是编译错误
+
+```rust
+// 编译通过；运行时 exit 101
+fn main() {
+    let v = vec![1, 2, 3];
+    for i in 0..4 {          // 边界写错：应为 0..3
+        println!("{}", v[i]);
+    }
+}
+```
+
+实测运行输出：`thread 'main' panicked at ...: index out of bounds: the len is 3 but the index is 3`。
+
+**为什么/怎么避**：借用检查器不验证运行时索引，off-by-one 只有运行时才暴露。用 `0..v.len()` 或直接 `for x in &v`，让边界由集合自身提供。
 
 ---
 

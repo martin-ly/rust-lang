@@ -58,6 +58,7 @@
     - [10.3 边界测试：全局分配器与 `#[global_allocator]` 重复定义（编译错误）](#103-边界测试全局分配器与-global_allocator-重复定义编译错误)
     - [10.4 边界测试：自定义分配器的 Layout 不匹配与内存安全（运行时 UB）](#104-边界测试自定义分配器的-layout-不匹配与内存安全运行时-ub)
     - [10.3 边界测试：函数重复定义](#103-边界测试函数重复定义)
+    - [10.5 实测反例：全局分配器的三条编译期硬边界（rustc 1.99.0 实编译）](#105-实测反例全局分配器的三条编译期硬边界rustc-1990-实编译)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`GlobalAlloc` trait 需要实现哪两个核心方法？（理解层）](#测验-1globalalloc-trait-需要实现哪两个核心方法理解层)
     - [测验 2：`#[global_allocator]` 属性的作用是什么？使用时有什么限制？（理解层）](#测验-2global_allocator-属性的作用是什么使用时有什么限制理解层)
@@ -788,6 +789,79 @@ fn main() {}
 
 > **修正**: **名称唯一性**：1) 同一作用域内不能有两个同名函数；2) trait 方法可同名（通过 trait 区分）；3) 重载（overloading）不支持（除 trait 外）。
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/introduction.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) · [Rust Standard Library](https://doc.rust-lang.org/std/index.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/index.html)
+
+### 10.5 实测反例：全局分配器的三条编译期硬边界（rustc 1.99.0 实编译）
+
+**反例 A：一个 crate 只能有一个 `#[global_allocator]`（重复定义直接拒绝）。** "按模块挂不同分配器"的设想不成立：
+
+```rust
+use std::alloc::{GlobalAlloc, Layout, System};
+struct MyAlloc;
+unsafe impl GlobalAlloc for MyAlloc {
+    unsafe fn alloc(&self, l: Layout) -> *mut u8 { System.alloc(l) }
+    unsafe fn dealloc(&self, p: *mut u8, l: Layout) { System.dealloc(p, l) }
+}
+#[global_allocator]
+static A: MyAlloc = MyAlloc;
+mod inner {
+    #[global_allocator]
+    static B: super::MyAlloc = super::MyAlloc; // ❌
+}
+fn main() {}
+```
+
+rustc 1.99.0 实测输出（无错误码的硬错误，实测得到）：
+
+```text
+error: cannot define multiple global allocators
+  |
+ 9 | static A: MyAlloc = MyAlloc;
+   | ---------------------------- previous global allocator defined here
+11 |     #[global_allocator]
+   |     ------------------- in this attribute macro expansion
+12 |     static B: super::MyAlloc = super::MyAlloc;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ cannot define a new global allocator
+```
+
+**反例 B：分配器 static 的初始化器必须是 const 可求值表达式（E0015）。** 分配器在 `main` 之前运行，构造不能调用普通函数：
+
+```rust
+use std::alloc::{GlobalAlloc, Layout, System};
+fn init() -> usize { 1 }
+struct MyAlloc { offset: usize }
+unsafe impl GlobalAlloc for MyAlloc {
+    unsafe fn alloc(&self, l: Layout) -> *mut u8 { System.alloc(l) }
+    unsafe fn dealloc(&self, p: *mut u8, l: Layout) { System.dealloc(p, l) }
+}
+#[global_allocator]
+static A: MyAlloc = MyAlloc { offset: init() }; // ❌
+fn main() {}
+```
+
+rustc 1.99.0 实测输出（错误码实测得到）：
+
+```text
+error[E0015]: cannot call non-const function `init` in statics
+  = note: calls in statics are limited to constant functions, tuple structs and tuple variants
+```
+
+**反例 C：`#[global_allocator]` 只能标注 static，不能标注函数。**
+
+```rust
+#[global_allocator]
+fn bad() -> MyAlloc { MyAlloc } // ❌
+```
+
+rustc 1.99.0 实测输出：
+
+```text
+error: allocators must be statics
+```
+
+> **工程解释**: 三条边界同源——全局分配器是链接期选定的**进程级单例**，在 CRT 初始化阶段、任何用户代码（含 `const fn` 求值器）之前接管 `malloc` 语义，所以它必须唯一、必须 const 构造、必须是 static 项。工程上想"分模块用不同池"只能走 per-container 的 `Allocator` trait（nightly）或手写 arena 包装，而不是多挂 global allocator；想延迟初始化分配器状态，惯用法是 const 构造 + 内部 `UnsafeCell`/原子懒初始化。
+> [来源: [std::alloc::GlobalAlloc](https://doc.rust-lang.org/std/alloc/trait.GlobalAlloc.html)]
+
+---
 
 ## 嵌入式测验（Embedded Quiz）
 

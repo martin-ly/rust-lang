@@ -87,6 +87,10 @@ mindmap
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
+  - [⚠️ 反例与陷阱（cargo 1.99.0 / rustc 1.99.0 实测）](#️-反例与陷阱cargo-1990--rustc-1990-实测)
+    - [反例 1：`should_panic(expected=...)` 子串不匹配 → 测试 FAILED](#反例-1should_panicexpected-子串不匹配--测试-failed)
+    - [反例 2：`#[should_panic]` 但函数不 panic → FAILED](#反例-2should_panic-但函数不-panic--failed)
+    - [反例 3：集成测试访问私有模块 → E0603](#反例-3集成测试访问私有模块--e0603)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -589,6 +593,64 @@ graph TD
 
 > **陷阱总结**: 测试的陷阱主要与**共享状态**、**文档测试属性**、**错误信息**、**耦合**和**速度**相关。
 > [来源: [Rust Testing Guide](https://doc.rust-lang.org/rust-by-example/testing/unit_testing.html)]
+
+## ⚠️ 反例与陷阱（cargo 1.99.0 / rustc 1.99.0 实测）
+
+以下在一个真实 crate（`src/lib.rs` + `tests/`）里实跑 `cargo test` 验证。
+
+### 反例 1：`should_panic(expected=...)` 子串不匹配 → 测试 FAILED
+
+```rust
+// src/lib.rs
+pub fn divide(a: i32, b: i32) -> i32 { a / b }
+
+// tests/integration.rs
+#[test]
+#[should_panic(expected = "division by zero")]
+fn mismatch_message() { let _ = divide(1, 0); }
+```
+
+实测 `cargo test` 输出：
+
+```text
+test mismatch_message - should panic ... FAILED
+thread 'mismatch_message' panicked at src\lib.rs:5:40:
+attempt to divide by zero
+note: panic did not contain expected string
+      panic message: "attempt to divide by zero"
+ expected substring: "division by zero"
+```
+
+**为什么/怎么避**：`expected` 是**子串包含**检查，不是正则也不是全等；内置算术 panic 消息是 `attempt to divide by zero`，凭记忆写文案必翻车。先跑一次看真实 panic 消息，或让被测代码 `panic!("...")` 自带可控文案。
+
+### 反例 2：`#[should_panic]` 但函数不 panic → FAILED
+
+```rust
+#[test]
+#[should_panic]
+fn no_panic_expected_but_none() { let _ = divide(6, 2); }
+```
+
+实测输出：`test no_panic_expected_but_none - should panic ... FAILED`，附注 `note: test did not panic as expected at tests\integration.rs:9:4`。
+
+**为什么/怎么避**：`should_panic` 断言的是「必须发散」——重构后代码不再 panic 时测试静默失效的反面（假阴性变假阳性失败）。panic 条件依赖输入时，把输入写死在测试里而不是来自共享 fixture。
+
+### 反例 3：集成测试访问私有模块 → E0603
+
+```rust
+// src/lib.rs
+mod hidden { pub fn secret() -> i32 { 7 } }
+
+// tests/visibility.rs
+#[test]
+fn try_private() {
+    assert_eq!(p10::hidden::secret(), 7); // ❌ E0603
+}
+```
+
+实测：`error[E0603]: module 'hidden' is private`（note 指出私有模块定义在 `src/lib.rs`）。注意：集成测试是**外部 crate**，即使 `hidden` 内函数是 `pub`，模块本身不 `pub` 就整体不可见。
+
+**为什么/怎么避**：`tests/` 目录下的每个文件都是独立 crate，只能走 crate 的公开 API。测私有逻辑就放进 `#[cfg(test)] mod tests`（单元测试，同 crate 内可见），或把模块标 `pub` 并用 `#[doc(hidden)]` 表明非公共 API。
 
 ---
 

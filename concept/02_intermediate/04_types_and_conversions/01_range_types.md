@@ -62,6 +62,13 @@
     - [10.4 边界测试：`Iterator::size_hint` 与无限范围（逻辑错误）](#104-边界测试iteratorsize_hint-与无限范围逻辑错误)
     - [10.3 边界测试：范围模式的穷尽性检查（编译错误）](#103-边界测试范围模式的穷尽性检查编译错误)
     - [10.5 边界测试：不可变借用与可变借用的冲突](#105-边界测试不可变借用与可变借用的冲突)
+  - [十一、实测反例（rustc 1.99.0 编译/运行验证）](#十一实测反例rustc-1990-编译运行验证)
+    - [反例 A：范围模式写进 `if` 条件 → E0308（且推断出荒谬的 `Range<bool>`）](#反例-a范围模式写进-if-条件--e0308且推断出荒谬的-rangebool)
+    - [反例 B：`Range` 传给要 `RangeInclusive` 的函数 → E0308](#反例-brange-传给要-rangeinclusive-的函数--e0308)
+    - [反例 C：`RangeInclusive` 无 `Copy`，二次使用 → E0382](#反例-crangeinclusive-无-copy二次使用--e0382)
+    - [反例 D：空范围与 size\_hint 边界（运行时断言实证）](#反例-d空范围与-size_hint-边界运行时断言实证)
+    - [反例 E：`Range` 作切片索引越界 → 运行时 panic（实测文案）](#反例-erange-作切片索引越界--运行时-panic实测文案)
+    - [反例 F：范围 match 穷尽性 → E0004（补集以范围形式列出）](#反例-f范围-match-穷尽性--e0004补集以范围形式列出)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`1..5` 与 `1..=5` 的类型和范围有什么区别？（理解层）](#测验-115-与-15-的类型和范围有什么区别理解层)
     - [测验 2：`Range` 类型本身是否实现了 `Iterator`？可以直接 `for i in 0..10` 吗？（理解层）](#测验-2range-类型本身是否实现了-iterator可以直接-for-i-in-010-吗理解层)
@@ -580,6 +587,83 @@ fn main() {
 ```
 
 > **修正**: **借用（Borrowing）规则**：1) 任意数量的 `&T` 或一个 `&mut T`；2) 不能同时存在；3) NLL 使借用仅在**使用点**检查，非作用域结束。
+
+## 十一、实测反例（rustc 1.99.0 编译/运行验证）
+
+以下错误码与 panic 文案均为 rustc 1.99.0 stable 实测输出。
+
+### 反例 A：范围模式写进 `if` 条件 → E0308（且推断出荒谬的 `Range<bool>`）
+
+```rust,compile_fail
+// rustc 1.99.0 stable 实测
+fn main(){ let x = 5; if x == 1..5 { println!("y"); } }
+```
+
+实测：两条 `error[E0308]: mismatched types`，其中一条 note 为 `expected type`bool`, found struct`std::ops::Range<bool>``。工程含义：`1..5` 只在模式位置是"范围模式"，在表达式位置就是普通 `Range` 构造；由于 `==` 要求两侧同型，编译器把 `1..5` 的端点类型反推成 `bool`——报错里的 `Range<bool>` 看似荒谬，实为类型推断从使用点回推的直接证据。
+
+### 反例 B：`Range` 传给要 `RangeInclusive` 的函数 → E0308
+
+```rust,compile_fail
+// rustc 1.99.0 stable 实测
+fn takes_inc(r: std::ops::RangeInclusive<i32>) { let _ = r; }
+fn main(){ takes_inc(1..5); }
+```
+
+实测：`error[E0308]`，note：`expected struct`std::ops::RangeInclusive<i32>`, found struct`std::ops::Range<{integer}>``。工程含义：`..` 与 `..=` 是**不同类型**而非同一类型的两种形态，API 接收哪种范围必须在签名处写死；泛型函数想同时接受两者需要 `RangeBounds`（不稳定）或重载式 builder。
+
+### 反例 C：`RangeInclusive` 无 `Copy`，二次使用 → E0382
+
+```rust,compile_fail
+// rustc 1.99.0 stable 实测
+fn main(){
+    let r = 1..=5;
+    let a: Vec<i32> = r.collect();
+    let b: Vec<i32> = r.collect(); // error[E0382]: use of moved value: `r`
+}
+```
+
+实测：`error[E0382]: use of moved value:`r``，note 明确 "`RangeInclusive<i32>`, which does not implement the `Copy` trait"，并附 `collect` 拿走 receiver 的出处。对照实测：`r.clone().collect()` 两次均成功（输出 `[1,2,3,4,5]` 两遍）。工程含义：`RangeInclusive` 内部要记录"是否已产出上界"的迭代状态，无法按位复制——这是它不 `Copy` 而 `Range` 可 `Copy` 的根因。
+
+### 反例 D：空范围与 size_hint 边界（运行时断言实证）
+
+```rust
+// rustc 1.99.0 stable 实测：assert 全部通过
+fn main() {
+    assert_eq!((0..3u32).size_hint(), (3, Some(3)));
+    assert_eq!((0u32..u32::MAX).size_hint(), (4294967295, Some(4294967295))); // 上界排除
+    assert_eq!(Vec::<i32>::from_iter(5..5), vec![]);   // 空
+    assert_eq!(Vec::<i32>::from_iter(5..=4), vec![]);  // 反向 inclusive 也是空，合法不报错
+}
+```
+
+实测断言全部通过。工程含义：`5..=4` 静默产生空迭代而不报错——inclusive 的"空"判定靠内部 done 标志而非端点比较；依赖"范围非空"的代码应在构造处显式校验，否则错误会漂移到下游的"结果为空"。
+
+### 反例 E：`Range` 作切片索引越界 → 运行时 panic（实测文案）
+
+```rust
+// rustc 1.99.0 stable 实测：编译通过，运行 panic
+fn main(){
+    let v = vec![1, 2, 3];
+    let _s = &v[1..5]; // panic: range end index 5 out of range for slice of length 3
+}
+```
+
+实测 panic 文案：`range end index 5 out of range for slice of length 3`。工程含义：范围切片的越界检查发生在运行时且**只报越界的那一端**；`v.get(1..5)` 返回 `None` 是同一检查的非 panic 版本，库代码应优先 `get`。
+
+### 反例 F：范围 match 穷尽性 → E0004（补集以范围形式列出）
+
+```rust,compile_fail
+// rustc 1.99.0 stable 实测
+fn classify(x: i32) -> &'static str {
+    match x {
+        1..=5 => "mid",
+        6..=10 => "high",
+    }
+}
+fn main(){ println!("{}", classify(2)); }
+```
+
+实测：`error[E0004]: non-exhaustive patterns:`i32::MIN..=0_i32` and `11_i32..=i32::MAX`not covered`，help 直接给出补臂 `i32::MIN..=0_i32 | 11_i32..=i32::MAX => todo!()`。工程含义：穷尽性检查把未覆盖区间算成**范围补集**并原样展示——读 E0004 的补集比加 `_ =>` 更能暴露"你以为覆盖了全体其实漏了两头"的意图错误。
 
 ## 嵌入式测验（Embedded Quiz）
 

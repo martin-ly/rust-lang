@@ -51,6 +51,7 @@
     - [5.3 递归调用](#53-递归调用)
     - [5.4 与 `tokio::spawn` 的生命周期冲突](#54-与-tokiospawn-的生命周期冲突)
     - [5.5 `async move ||` 的 FnOnce 语义](#55-async-move--的-fnonce-语义)
+    - [5.5 实测反例：dyn 不可用、递归 E0733 与返回借用参数的生命周期墙（rustc 1.99.0 实编译）](#55-实测反例dyn-不可用递归-e0733-与返回借用参数的生命周期墙rustc-1990-实编译)
   - [6. 版本演进与前沿](#6-版本演进与前沿)
   - [7. 与官方资源的映射](#7-与官方资源的映射)
   - [8. 认知路径](#8-认知路径)
@@ -514,6 +515,67 @@ async fn bad_once() {
 ```
 
 若需多次调用，应改用 `async ||`（按引用（Reference）捕获）或在 `async move ||` 中捕获 `Arc<Mutex<T>>` 等共享所有权（Ownership）类型。
+
+---
+
+### 5.5 实测反例：dyn 不可用、递归 E0733 与返回借用参数的生命周期墙（rustc 1.99.0 实编译）
+
+**反例 A：`Box<dyn AsyncFn()>` 不是合法类型（页内"dyn 不可用"论断的编译实证）。**
+
+```rust
+fn main() {
+    let f: Box<dyn AsyncFn()> = Box::new(async || {}); // ❌
+}
+```
+
+rustc 1.99.0 实测输出（错误码实测得到）：
+
+```text
+error[E0038]: the trait `AsyncFn` is not dyn compatible
+note: for a trait to be dyn compatible it needs to allow building a vtable
+28 |     type CallRefFuture<'a>: Future<Output = Self::Output>
+   |          ^^^^^^^^^^^^^ the trait is not dyn compatible because it contains
+                            generic associated type `CallRefFuture`
+```
+
+**反例 B：递归 async 调用需要装箱（E0733）。** async 闭包/async fn 的 Future 是匿名类型，递归调用会让 Future 尺寸无限展开：
+
+```rust
+async fn rec(n: u32) -> u32 { if n == 0 { 0 } else { rec(n - 1).await } }
+fn main() { let _ = rec(3); }
+```
+
+rustc 1.99.0 实测输出：
+
+```text
+error[E0733]: recursion in an async fn requires boxing
+  = note: a recursive `async fn` call must introduce indirection such as
+          `Box::pin` to avoid an infinitely sized future
+```
+
+**反例 C：返回引用参数的 async 闭包撞上生命周期墙。** async 闭包返回 `Future`，而 `Future::Output` 里的引用必须比 Future 本身活得更久——借用参数的生命周期推断在此处比同步闭包严格得多：
+
+```rust
+fn main() {
+    let f = async |s: &str| s;   // 返回类型是 Future，Output = &'? str
+    let v = String::from("x");
+    let _r = f(&v);              // ❌
+}
+```
+
+rustc 1.99.0 实测输出（无错误码的裸 lifetime 错误，实测得到）：
+
+```text
+error: lifetime may not live long enough
+3 |     let f = async |s: &str| s;
+  |                       -   - ^ returning this value requires that `'1` must outlive `'2`
+  |                       |   |
+  |                       |   return type of async closure is &'2 str
+  |                       let's call the lifetime of this reference `'1`
+```
+
+> **工程解释**: 反例 A 的根因是 `AsyncFn` 家族带 GAT（`CallRefFuture<'a>`）——vtable 无法为"每个生命周期生成一个 Future 类型"布局，所以动态异步分发只能手写 `Box<dyn Fn() -> Pin<Box<dyn Future<Output = _>>>>` 双层包装，代价是每次调用一次堆分配。反例 B 说明 Future 尺寸在编译期静态展开，递归点必须用 `Box::pin` 切断尺寸链。反例 C 是本页 E0597 变体论断的直接实证：修复方向是把输出改为拥有型（`async |s: &str| s.to_string()`）或让调用方保证输入 outlive Future。另注：`async_closure` 已于 1.85 稳定，本组反例在 stable 1.99.0 即可复现（用 `+nightly` 复核时 rustc 提示 `feature async_closure has been stable since 1.85.0`）。
+> [来源: [Rust Reference — Async Closures](https://doc.rust-lang.org/reference/closures.html#async-closures)]
 
 ---
 

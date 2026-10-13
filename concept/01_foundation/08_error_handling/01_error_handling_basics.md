@@ -90,6 +90,10 @@ mindmap
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
+  - [⚠️ 反例与陷阱（rustc 1.99.0 实测）](#️-反例与陷阱rustc-1990-实测)
+    - [反例 1：`?` 用在返回 `()` 的函数 → E0277](#反例-1-用在返回--的函数--e0277)
+    - [反例 2：`unwrap()` 命中 Err 是运行时 panic](#反例-2unwrap-命中-err-是运行时-panic)
+    - [反例 3：闭包捕获 `&mut` 变量过不了 `catch_unwind` → E0277（UnwindSafe）](#反例-3闭包捕获-mut-变量过不了-catch_unwind--e0277unwindsafe)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
@@ -654,6 +658,51 @@ graph TD
 
 > **陷阱总结**: 错误处理的陷阱主要与**unwrap**、**忽略错误**、**类型匹配**、**闭包（Closures）**和**嵌套**相关。
 > [来源: [Rust By Example — Error Handling](https://doc.rust-lang.org/rust-by-example/error.html)]
+
+## ⚠️ 反例与陷阱（rustc 1.99.0 实测）
+
+### 反例 1：`?` 用在返回 `()` 的函数 → E0277
+
+```rust,compile_fail
+fn parse(s: &str) -> i32 {
+    let n: i32 = s.parse()?; // ❌ E0277: `?` 只能用于返回 Result/Option 的函数
+    n
+}
+fn main() { println!("{}", parse("42")); }
+```
+
+实测：`error[E0277]: the '?' operator can only be used in a function that returns 'Result' or 'Option' (or another type that implements 'FromResidual')`。
+
+**为什么/怎么避**：`?` 的失败分支要把错误「上抛」，返回类型必须能接收 residual。把签名改成 `Result<i32, ParseIntError>`，或在 `main` 里用 `Result<(), Box<dyn Error>>`。
+
+### 反例 2：`unwrap()` 命中 Err 是运行时 panic
+
+```rust
+// 编译通过；运行时 exit 101
+fn main() {
+    let r: Result<i32, std::num::ParseIntError> = "abc".parse();
+    println!("{}", r.unwrap()); // ❌ 运行时 panic
+}
+```
+
+实测运行输出：`called 'Result::unwrap()' on an 'Err' value: ParseIntError { kind: InvalidDigit }`。
+
+**为什么/怎么避**：`unwrap` 把可恢复错误升级成进程级 panic。库代码返回 `Result`；确知不会失败时用 `expect("带上下文的理由")`，让 panic 消息可定位。
+
+### 反例 3：闭包捕获 `&mut` 变量过不了 `catch_unwind` → E0277（UnwindSafe）
+
+```rust,compile_fail
+use std::panic::catch_unwind;
+fn main() {
+    let mut v = vec![1];
+    let r = catch_unwind(|| { v.push(2); panic!("boom"); }); // ❌ E0277
+    println!("caught={}", r.is_err());
+}
+```
+
+实测：`error[E0277]: the type '&mut Vec<i32>' may not be safely transferred across an unwind boundary`。
+
+**为什么/怎么避**：panic 可能发生在 `v.push` 中途，外部 `&mut Vec` 可能处于半修改状态——`UnwindSafe` 默认拒绝。用 `AssertUnwindSafe` 显式声明「我知道 panic 点在哪、状态可接受」，或把可变状态移进闭包内部。
 
 ---
 

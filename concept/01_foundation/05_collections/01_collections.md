@@ -78,6 +78,10 @@ mindmap
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
+  - [⚠️ 反例与陷阱（rustc 1.99.0 实测）](#️-反例与陷阱rustc-1990-实测)
+    - [反例 1：HashMap 键缺 Hash/Eq——错误不在 `new()` 而在 `insert()` → E0599](#反例-1hashmap-键缺-hasheq错误不在-new-而在-insert--e0599)
+    - [反例 2：`for` 消费 HashMap 后再用 → E0382](#反例-2for-消费-hashmap-后再用--e0382)
+    - [反例 3：`Vec::drain` 范围越界是运行时 panic](#反例-3vecdrain-范围越界是运行时-panic)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [版本兼容性 / Version Compatibility](#版本兼容性--version-compatibility)
   - [相关概念](#相关概念)
@@ -505,6 +509,54 @@ graph TD
 
 > **陷阱总结**: 集合类型的陷阱主要与**迭代修改**、**Trait 实现**、**删除模式**、**容量管理**和**性能假设**相关。
 > [来源: [Rust Performance Book — Collections](https://nnethercote.github.io/perf-book/print.html#reusing-collections)]
+
+## ⚠️ 反例与陷阱（rustc 1.99.0 实测）
+
+### 反例 1：HashMap 键缺 Hash/Eq——错误不在 `new()` 而在 `insert()` → E0599
+
+```rust,compile_fail
+use std::collections::HashMap;
+#[derive(Debug)]
+struct K(i32);
+fn main() {
+    let mut m: HashMap<K, i32> = HashMap::new(); // ✅ 这一行能编译！
+    m.insert(K(1), 10);                          // ❌ E0599
+}
+```
+
+实测：`error[E0599]: the method 'insert' exists for struct 'HashMap<K, i32>', but its trait bounds were not satisfied`（伴随 `K: Hash` / `K: Eq` 不满足的说明）。
+
+**为什么/怎么避**：trait bound 按**方法调用点**检查，仅声明变量不触发——所以错误延迟到第一次 `insert` 才出现。见到 E0599「trait bounds were not satisfied」直接给键补 `#[derive(Hash, Eq, PartialEq)]`。
+
+### 反例 2：`for` 消费 HashMap 后再用 → E0382
+
+```rust,compile_fail
+use std::collections::HashMap;
+fn main() {
+    let mut m = HashMap::new();
+    m.insert(1, "a");
+    for (k, v) in m { println!("{} {}", k, v); } // for 默认按值移动 m
+    println!("{}", m.len());                      // ❌ E0382: borrow of moved value: `m`
+}
+```
+
+实测：`error[E0382]: borrow of moved value: 'm'`。
+
+**为什么/怎么避**：`for x in iter` 对 Vec/HashMap 是 move 语义。之后还要用集合就写 `for (k, v) in &m`（借用）或 `m.iter()`。
+
+### 反例 3：`Vec::drain` 范围越界是运行时 panic
+
+```rust
+// 编译通过；运行时 exit 101
+fn main() {
+    let mut v = vec![1, 2, 3];
+    v.drain(0..5); // ❌ 运行时 panic
+}
+```
+
+实测运行输出：`range end index 5 out of range for slice of length 3`。
+
+**为什么/怎么避**：范围合法性只有运行时才知道。用 `drain(..)` 全清，或先把外部计数钳制进 `v.len()`（`v.drain(0..k.min(v.len()))`），不要把未校验的计数直接当索引上界。
 
 ---
 

@@ -46,6 +46,7 @@
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
+    - [4.3 实测反例：const eval 的递归深度上限与 const generic 类型白名单（rustc 1.99.0 实编译）](#43-实测反例const-eval-的递归深度上限与-const-generic-类型白名单rustc-1990-实编译)
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念](#相关概念)
@@ -488,6 +489,44 @@ Rust 元编程的演进方向:
 > **认知功能**: 边界极限定义了元编程的**能力疆域**——理解"宏不能做什么"（访问类型信息、全局代码变换、无限递归）与理解"宏能做什么"同等重要。
 > (Source: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html))
 > [来源: [Rust Analyzer — Macro Expansion](https://rust-analyzer.github.io/manual.html#macro-expansion)]
+
+---
+
+### 4.3 实测反例：const eval 的递归深度上限与 const generic 类型白名单（rustc 1.99.0 实编译）
+
+**反例 A：const fn 递归在编译期求值触达栈帧上限。** 元编程章节常把"const eval 图灵完备"当作乐观结论，此处实测其硬边界：
+
+```rust
+const fn f(n: u32) -> u32 { if n == 0 { 0 } else { f(n - 1) } }
+const V: u32 = f(1_000_000);
+fn main() { let _ = V; }
+```
+
+rustc 1.99.0 实测输出（错误码实测得到）：
+
+```text
+error[E0080]: reached the configured maximum number of stack frames
+  |
+3 | const V: u32 = f(1_000_000);
+  |                ^^^^^^^^^^^^ evaluation of `V` failed inside this call
+```
+
+**反例 B：const generic 参数类型白名单排除浮点。** 元编程设计里"用 const generic 编码配置常量"是常见设想，浮点参数直接被封死：
+
+```rust
+struct Foo<const F: f64>;
+fn main() { let _: Foo<3.14>; }
+```
+
+rustc 1.99.0 实测输出：
+
+```text
+error: `f64` is forbidden as the type of a const generic parameter
+  = note: the only supported types are integers, `bool`, and `char`
+```
+
+> **工程解释**: 反例 A 表明 const eval 的递归受 `const_eval_stack_frame_limit`（默认 128）约束——编译期"图灵完备"在实践中是**带资源配额的解释器**，深度元编程（如递归展开的 DSL）需要迭代化改写或显式调高 limit，否则错误以 E0080 形式在 monomorphization 阶段爆出。反例 B 的根因是浮点没有结构相等（`NaN != NaN`），const generic 依赖单态化时的值等价判定，因此工程上惯用定点整数（如 `const SCALE: i32 = 314`）绕过。
+> [来源: [Rust Reference — Const Generics](https://doc.rust-lang.org/reference/const_eval.html)]
 
 ---
 

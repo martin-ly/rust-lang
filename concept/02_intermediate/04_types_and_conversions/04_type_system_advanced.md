@@ -61,6 +61,12 @@
     - [10.3 边界测试：impl Trait 的自动 trait 捕获规则（编译错误）](#103-边界测试impl-trait-的自动-trait-捕获规则编译错误)
     - [10.4 边界测试：关联类型的默认实现与具体化冲突（编译错误）](#104-边界测试关联类型的默认实现与具体化冲突编译错误)
     - [10.2 边界测试：函数重复定义](#102-边界测试函数重复定义)
+  - [十一、实测反例（rustc 1.99.0 编译验证）](#十一实测反例rustc-1990-编译验证)
+    - [反例 A：`impl Trait` 返回类型捕获局部引用 → E0597](#反例-aimpl-trait-返回类型捕获局部引用--e0597)
+    - [反例 B：`impl Trait` 参数位置是单态化糖，不是 HRTB → 正向通过、类型不同则 E0308](#反例-bimpl-trait-参数位置是单态化糖不是-hrtb--正向通过类型不同则-e0308)
+    - [反例 C：HRTB 下闭包捕获局部变量 → E0597（`'static` 要求）](#反例-chrtb-下闭包捕获局部变量--e0597static-要求)
+    - [反例 D：`PhantomData<fn(T) -> T>` 强制不变性 → 无编号硬错误（实测文案）](#反例-dphantomdatafnt---t-强制不变性--无编号硬错误实测文案)
+    - [反例 E：关联类型默认值在 stable 被拒 → E0658](#反例-e关联类型默认值在-stable-被拒--e0658)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：关联类型（Associated Type）与泛型参数的区别是什么？什么时候更适合用关联类型？（理解层）](#测验-1关联类型associated-type与泛型参数的区别是什么什么时候更适合用关联类型理解层)
     - [测验 2：`type Output = i32;` 这种语法出现在哪里？它有什么约束？（理解层）](#测验-2type-output--i32-这种语法出现在哪里它有什么约束理解层)
@@ -933,6 +939,68 @@ fn main() {}
 > 1) 同一作用域内不能有两个同名函数；
 > 2) trait 方法可同名（通过 trait 区分）；
 > 3) 重载（overloading）不支持（除 trait 外）。
+
+## 十一、实测反例（rustc 1.99.0 编译验证）
+
+以下错误码均为 rustc 1.99.0 stable 实测输出。
+
+### 反例 A：`impl Trait` 返回类型捕获局部引用 → E0597
+
+```rust,compile_fail
+// rustc 1.99.0 stable 实测
+fn make() -> impl Iterator<Item = i32> {
+    let v = vec![1, 2, 3];
+    v.iter().map(|x| *x) // error[E0597]: `v` does not live long enough
+}
+fn main(){ println!("{:?}", make().collect::<Vec<_>>()); }
+```
+
+实测：`error[E0597]:`v`does not live long enough`，note 指出 "argument requires that `v` is borrowed for `'static`"。工程含义：RPIT（含 edition 2024 的隐式捕获）下，返回的隐藏类型若借用局部变量，编译器按 `'static` 要求检查——`impl Trait` 返回值没有地方写生命周期，想返回借用必须改用带显式生命周期的 `impl Iterator + '_`。
+
+### 反例 B：`impl Trait` 参数位置是单态化糖，不是 HRTB → 正向通过、类型不同则 E0308
+
+```rust
+// rustc 1.99.0 stable 实测：编译通过，输出 22
+fn f(x: impl Fn(i32) -> i32) -> i32 { x(1) }
+fn main(){ let a = f(|x| x + 1); let b = f(|x| x * 2); println!("{a}{b}"); }
+```
+
+实测通过。工程含义：两次调用生成两个**不同的单态化函数**，各自绑定各自的闭包类型——`impl Trait` 参数看似"任意 Fn"，实际每个调用点类型固定；把 `f(|x| x+1)` 的结果赋给期望另一 opaque 类型的变量即 E0308。这与 `F: Fn(i32)->i32` 泛型参数等价，但与 `for<'a>` HRTB 完全不同。
+
+### 反例 C：HRTB 下闭包捕获局部变量 → E0597（`'static` 要求）
+
+```rust,compile_fail
+// rustc 1.99.0 stable 实测
+fn apply<F: for<'a> Fn(&'a i32) -> &'a i32>(f: F, x: &i32) -> &i32 { f(x) }
+fn main(){ let local = 5; let r = apply(|v| &local, &5); println!("{}", r); }
+```
+
+实测：`error[E0597]:`local`does not live long enough`，note："returning this value requires that `local` is borrowed for `'static`"，并标注 "value captured here"。工程含义：`for<'a>` 要求闭包对**任意** `'a` 都成立，捕获局部引用的闭包只对特定生命周期成立——HRTB 失败时 rustc 把"任意"翻译成 `'static` 反例来报错，诊断行直接指向捕获点。
+
+### 反例 D：`PhantomData<fn(T) -> T>` 强制不变性 → 无编号硬错误（实测文案）
+
+```rust,compile_fail
+// rustc 1.99.0 stable 实测
+use std::marker::PhantomData;
+struct Co<T> { _p: PhantomData<T> }
+struct In<T> { _p: PhantomData<fn(T) -> T> }
+fn coerce_co<'a, 'b: 'a>(c: Co<&'b i32>) -> Co<&'a i32> { c } // 协变：通过
+fn coerce_in<'a, 'b: 'a>(i: In<&'b i32>) -> In<&'a i32> { i } // 不变：拒绝
+fn main() {}
+```
+
+实测：`Co` 版编译通过；`In` 版报 `error: lifetime may not live long enough`（无 E 编号），note 明确 "requirement occurs because of the type `In<&i32>`, which makes the generic argument `&i32` invariant" 与 "the struct `In<T>` is invariant over the parameter `T`"，help 链接到 Nomicon 的 subtyping 章节。工程含义：型变不是注释而是**类型的一部分**——`PhantomData<fn(T)->T>` 一行就改变子类型规则，1.99 的诊断已能直接点名"哪个类型参数被谁钉成不变"。
+
+### 反例 E：关联类型默认值在 stable 被拒 → E0658
+
+```rust,compile_fail
+// rustc 1.99.0 stable 实测
+trait Tr { type Out = i32; } // error[E0658]: associated type defaults are unstable
+struct S; impl Tr for S {}
+fn main() {}
+```
+
+实测：`error[E0658]: associated type defaults are unstable`（issue #29661）。工程含义：§10.4 讨论的"关联类型默认实现"在 1.99 仍是 nightly 特性（`associated_type_defaults`）；stable 的替代是让 impl 侧必须显式给出 `type Out = ...`（否则 E0046，见高级 Traits 页反例 A）。
 
 ## 嵌入式测验（Embedded Quiz）
 

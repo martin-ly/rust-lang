@@ -83,6 +83,7 @@ mindmap
     - [6.1 边界测试：尝试构造 `!` 的值（编译错误）](#61-边界测试尝试构造--的值编译错误)
     - [6.2 边界测试：`Some(!)` 不可构造（编译错误）](#62-边界测试some-不可构造编译错误)
     - [6.3 边界测试：忘记处理 `Ok` 分支（编译错误）](#63-边界测试忘记处理-ok-分支编译错误)
+    - [6.4 实测反例：stable 上显式 `!` 类型仍被拒（rustc 1.99.0 实测）](#64-实测反例stable-上显式--类型仍被拒rustc-1990-实测)
   - [嵌入式测验（Embedded Quiz）](#嵌入式测验embedded-quiz)
     - [测验 1：`!`（never type）在 Rust 类型系统中被称为底类型。它有一个特殊性质：它是任何类型的子类型。请问，`Result<i32, !>` 的 `Err` 分支在 match 中需要处理吗？（理解层）](#测验-1never-type在-rust-类型系统中被称为底类型它有一个特殊性质它是任何类型的子类型请问resulti32--的-err-分支在-match-中需要处理吗理解层)
     - [测验 2：以下代码是否合法？`let x: String = panic!("abort");`。如果合法，运行时会发生什么？（理解层）](#测验-2以下代码是否合法let-x-string--panicabort如果合法运行时会发生什么理解层)
@@ -550,6 +551,38 @@ fn incomplete_match(result: Result<i32, !>) -> i32 {
 ```
 
 > **修正**: 即使 `Err(!)` 不需要处理，`Ok(v)` 分支仍然必须存在。编译器只"删除"包含 `!` 的变体，不删除其他变体。
+
+### 6.4 实测反例：stable 上显式 `!` 类型仍被拒（rustc 1.99.0 实测）
+
+本页按「`!` 逐步稳定化」叙述；在本机 **stable rustc 1.99.0** 上实测，把 `!` 写进绑定或泛型参数仍然被拒：
+
+```rust,compile_fail
+// ❌ error[E0658]: the `!` type is experimental
+fn main() {
+    let x: ! = panic!("boom");
+}
+```
+
+```rust,compile_fail
+// ❌ error[E0658]: the `!` type is experimental
+fn main() {
+    let r: Result<i32, !> = Ok(1);
+}
+```
+
+而**发散函数的返回类型位置**在 stable 上合法（隐式 never coercion）——编译通过、运行时 panic（exit 101）：
+
+```rust
+fn die() -> ! { panic!("die") }
+fn main() {
+    let s: String = die(); // 在 panic 处短路，s 永远不会真正存在
+    println!("{}", s);
+}
+```
+
+尝试在 stable 打开 feature 门同样失败：`#![feature(never_type)]` 报 `error[E0554]: '#![feature]' may not be used on the stable release channel`。
+
+**为什么/怎么避**：stable 已可用的是 `-> !` 返回类型与空枚举 `match v {}` 零臂；`let x: !`、`Vec<!>`、`Result<T, !>` 仍需 nightly。写生产代码时：发散用 `-> !` 或 `panic!`，「不可能失败」用具体错误类型 + `unreachable!()`，不要依赖 `Result<T, !>` 签名。
 
 ---
 

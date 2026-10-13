@@ -73,6 +73,13 @@ mindmap
     - [4.1 反命题树](#41-反命题树)
     - [4.2 常见错误](#42-常见错误)
   - [五、Stable 替代方案](#五stable-替代方案)
+  - [五点五、实测反例（rustc 1.99.0 编译验证）](#五点五实测反例rustc-1990-编译验证)
+    - [反例 A：stable 上写负实现 → E0658](#反例-astable-上写负实现--e0658)
+    - [反例 B：stable 上对 auto trait 写负实现 → 同样 E0658](#反例-bstable-上对-auto-trait-写负实现--同样-e0658)
+    - [反例 C：正负实现共存 → E0751（nightly 实测）](#反例-c正负实现共存--e0751nightly-实测)
+    - [反例 D：负实现与 blanket 正实现冲突 → E0751（nightly 实测）](#反例-d负实现与-blanket-正实现冲突--e0751nightly-实测)
+    - [反例 E：实测修正——nightly 上负实现并不限于 auto trait](#反例-e实测修正nightly-上负实现并不限于-auto-trait)
+    - [反例 F：stable 毒化字段的运行时断言实证](#反例-fstable-毒化字段的运行时断言实证)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
     - [国际权威来源](#国际权威来源)
   - [补充国际权威来源（P1/P2 覆盖）](#补充国际权威来源p1p2-覆盖)
@@ -357,6 +364,95 @@ fn main() {
 ```
 
 > 注意：`!Send` / `!Sync` 在 trait bound 中写为 `T: !Send` 需要 nightly 的 `negative_bounds` 特性；stable 上通常通过 `T: Send` 不成立来间接表达。
+
+---
+
+## 五点五、实测反例（rustc 1.99.0 编译验证）
+
+以下反例均在 rustc 1.99.0（stable）与对应 nightly 上实际编译取得，错误码为实测输出。
+
+### 反例 A：stable 上写负实现 → E0658
+
+```rust,compile_fail
+// rustc 1.99.0 stable 实测
+trait Foo {}
+struct Bar;
+impl !Foo for Bar {} // error[E0658]: negative impls are experimental
+fn main() {}
+```
+
+实测输出：`error[E0658]: negative impls are experimental`，并附带 `help: use marker types for now`。工程含义：stable 迁移路径就是 rustc 自己给出的提示——用 marker 类型（毒化字段）而不是负实现。
+
+### 反例 B：stable 上对 auto trait 写负实现 → 同样 E0658
+
+```rust,compile_fail
+// rustc 1.99.0 stable 实测
+struct Bar(std::rc::Rc<()>);
+impl !Send for Bar {} // error[E0658]: negative impls are experimental
+fn main() {}
+```
+
+即使目标是 auto trait（`Send`），stable 也不会放行；特性门控检查发生在 trait 种类检查之前。
+
+### 反例 C：正负实现共存 → E0751（nightly 实测）
+
+```rust,compile_fail
+#![feature(negative_impls)]
+// rustc +nightly 实测
+struct Bar;
+impl !Send for Bar {}
+impl Send for Bar {}  // error[E0751]: found both positive and negative implementation of trait `Send` for type `Bar`
+```
+
+实测同时触发第二个错误 `E0200`（`Send` 是 unsafe auto trait，正实现需要 `unsafe impl`）。工程含义：Coherence 检查把"同一类型既正又负"视为逻辑矛盾，直接拒绝，而不是让负实现覆盖正实现。
+
+### 反例 D：负实现与 blanket 正实现冲突 → E0751（nightly 实测）
+
+```rust,compile_fail
+#![feature(negative_impls)]
+// rustc +nightly 实测
+struct Bar;
+trait Marker {}
+impl<T> Marker for T {}      // blanket 正实现
+impl !Marker for Bar {}      // error[E0751]: found both positive and negative implementation
+```
+
+工程含义：冲突不限于同一类型的直接正实现——任何覆盖该类型的 blanket impl 都会与负实现相撞。想让某个类型从 blanket impl 中"逃逸"，负实现不是逃生门，必须收窄 blanket impl 的 bound。
+
+### 反例 E：实测修正——nightly 上负实现并不限于 auto trait
+
+页面 §1.2 表格称"普通 trait 不能写负实现"。1.99.0 工具链实测：
+
+```rust
+#![feature(negative_impls)]
+// rustc +nightly 实测：编译通过（仅 dead_code 警告）
+trait Foo {}
+struct Bar;
+impl !Foo for Bar {}
+fn main() {}
+```
+
+`impl !Foo for Bar`（普通 trait）在 nightly 上编译通过。当前实现真正拦截的是 Coherence 冲突（反例 C/D），而非"非 auto trait"本身；表格中的限制描述应理解为设计意图而非当前 rustc 的硬校验。
+
+### 反例 F：stable 毒化字段的运行时断言实证
+
+```rust
+// rustc 1.99.0 stable 实测：assert 通过
+use std::marker::PhantomData;
+struct NotSend(PhantomData<*mut ()>);
+fn needs_send<T: Send>(t: T) -> bool { let _ = t; true }
+fn main() {
+    // 正向：普通类型可过
+    assert!(needs_send(1i32));
+    // 反向：needs_send(NotSend(...)) 在 stable 实测报
+    // error[E0277]: `NotSend` cannot be shared between threads safely /
+    // `NotSend` cannot be sent between threads safely
+    // （此处以编译失败形式实证，运行期只验证正向）
+    println!("PhantomData<*mut ()> 毒化生效");
+}
+```
+
+实测：正向断言通过；对 `NotSend` 调用 `needs_send` 得到 `E0277`（"cannot be sent between threads safely"）。工程含义：stable 上 `!Send` 的表达能力完全来自字段组合的自动推导，报错点从"声明处"移到了"使用处"。
 
 ---
 
