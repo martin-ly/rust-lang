@@ -75,6 +75,21 @@
     "concept/06_ecosystem/05_systems_and_embedded/52_no_std_allocators_and_panic_handlers.md"
    ],
    "evidence": "no_std missing panic_handler hard error + E0308 signature + E0152 duplicate lang item + E0277 UnsafeCell alloc chain + unsafe impl Sync cheat passes compile"
+  },
+  {
+   "batch": 5,
+   "serial_wave": "W5-04_formal",
+   "commit": "76d35b528",
+   "pushed": true,
+   "pages": [
+    "concept/04_formal/01_ownership_logic/07_unsafe_contracts_formal.md",
+    "concept/04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md",
+    "concept/04_formal/03_operational_semantics/09_llvm_ir_poison_ub.md",
+    "concept/04_formal/03_operational_semantics/10_minirust.md",
+    "concept/04_formal/03_operational_semantics/13_in_place_initialization_semantics.md"
+   ],
+   "evidence": "Miri 0.1.0(8006091eb7 2026-10-17): TB/SB双模式别名诊断逐字; padding alloc[0x1..0x2] uninitialized(zeroed亦UB); assume_init逐字段.b.vec.buf.inner.cap.0; PartialGuard修正全绿; niche None=-1本机复现18446744073709551615; BSAN盲区: 地址复用+整数往返TB静默放行(实跑2 reused addr 141568); E0506对照; 修12_waker块candidate腐烂",
+   "gates": "check_concept_code_blocks --strict --sample 0 全量4403块: candidate 3109/0 fail, compile_fail 1288 ok/0 unexpected_pass/0 wrong_code, rot=0"
   }
  ],
  "version_baseline": {
@@ -97,5 +112,6 @@
  "rescan_2026_10_19_post_batch5": {
   "strict_gaps": 133,
   "note": "530 tracked concept pages; 239→133 closed via S2-R3 batches 1-5 plus pre-existing coverage"
- }
+ },
+ "note_2026_10_19_W5": "重扫严格口径166页(排除00_meta 68页与已收走组)；sibling在途batch6/7(async 16/08/04_ffi、embedded 52_no_std)各自提交收走，本代理串行线切04_formal避免冲突。04_formal 组本批后剩 15。"
 }
