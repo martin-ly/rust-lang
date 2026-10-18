@@ -370,7 +370,47 @@ fn main() {
 }
 ```
 
----
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）
+
+上节反例 1/2 的本机编译锚点（host `x86_64-pc-windows-msvc`，`rustc --edition 2021 -C panic=abort`，无需真实嵌入式 target 即可触发这些语言级检查）。
+
+### 实测 1（反例 1 坐实）：`#![no_std]` 缺 `#[panic_handler]` —— 硬错误
+
+```text
+error: `#[panic_handler]` function required, but not found
+error: unwinding panics are not supported without std
+  = help: using nightly cargo, use -Zbuild-std with panic="abort" to avoid unwinding
+```
+
+`no_std` crate 一旦有任何 panic 可达路径，缺 handler 是**编译期硬错误**（不是链接期），且编译器直接给出 `panic="abort"` 出路——这是 `panic-halt`/`panic-abort` 等 crate 存在的根因。附带实测：handler 签名写错（`fn() -> !` 而非 `fn(&PanicInfo) -> !`）报 E0308 并打印期望签名；两个 `#[panic_handler]` 报 `error[E0152]: found duplicate lang item panic_impl`。反例 1 的「同时使用 panic-halt 和自定义 handler」冲突正是 E0152 这条 lang item 唯一性规则。
+
+### 实测 2（反例 2 坐实）：非 `Sync` 分配器进 `#[global_allocator]` —— E0277 精确推导链
+
+```rust,compile_fail
+#![no_std]
+use core::alloc::{GlobalAlloc, Layout};
+use core::cell::UnsafeCell; // NOT Sync
+struct MyAlloc(UnsafeCell<u32>);
+unsafe impl GlobalAlloc for MyAlloc {
+    unsafe fn alloc(&self, _l: Layout) -> *mut u8 { core::ptr::null_mut() }
+    unsafe fn dealloc(&self, _p: *mut u8, _l: Layout) {}
+}
+#[global_allocator]
+static A: MyAlloc = MyAlloc(UnsafeCell::new(0));
+```
+
+```text
+error[E0277]: `UnsafeCell<u32>` cannot be shared between threads safely
+   = help: within `MyAlloc`, the trait `Sync` is not implemented for `UnsafeCell<u32>`
+   = note: required because it appears within the type `MyAlloc`
+   = note: shared static variables must have a type that implements `Sync`
+```
+
+对照实测：同一分配器改用 `AtomicBool` 重入标志（`busy.swap(true, AcqRel)` / `store(false, Release)`——嵌入式分配器标准形态）编译干净 exit 0。
+
+### 实测 3（反例 2 的陷阱深化）：`unsafe impl Sync` 可以「作弊」过编译门
+
+给上述 `MyAlloc` 补一行 `unsafe impl Sync for MyAlloc {}` 后**编译通过（仅 field-never-read 警告）**。编译器只查 `Sync` 标记存在，不查「并发调用安全」这一**unsafe 契约**——这正是本页「分配器非 Sync」条目真正的危险层级：E0277 拦的是无意失误，拦不住有意撒谎；中断/多线程环境下 `UnsafeCell` 分配器的数据竞争要靠 `unsafe impl Sync` 作者的自我论证（或 Miri/硬件实测），语言层无兜底。
 
 ## 七、硬件实测与 CI 验证
 

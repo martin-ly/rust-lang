@@ -68,6 +68,13 @@
     "concept/06_ecosystem/05_systems_and_embedded/37_fallible_allocation_and_no_alloc_collections.md"
    ],
    "evidence": "no_std E0433 + alloc fix compile; try_reserve strong guarantee: capacity=0 after MAX/4 failure, original-page claim corrected (勘误)"
+  },
+  {
+   "batch": 7,
+   "pages": [
+    "concept/06_ecosystem/05_systems_and_embedded/52_no_std_allocators_and_panic_handlers.md"
+   ],
+   "evidence": "no_std missing panic_handler hard error + E0308 signature + E0152 duplicate lang item + E0277 UnsafeCell alloc chain + unsafe impl Sync cheat passes compile"
   }
  ],
  "version_baseline": {
