@@ -377,7 +377,25 @@ fn process(data: &[u8], debug_mode: bool) {
 
 **教训**：Sanitizers 只能证明“执行到的路径上未发现某类错误”，不能证明“代码不存在 UB”。
 
----
+## ⚠️ 实测反例（rustc 1.99.1 + Miri/nightly 本机对照，2026-10-19）
+
+同一份 UB 源码，本机三工具对照（Windows x86_64）：
+
+```rust
+use std::mem::MaybeUninit;
+fn main() {
+    let x: MaybeUninit<String> = MaybeUninit::uninit();
+    let _s: String = unsafe { x.assume_init() }; // UB: reading uninit
+}
+```
+
+| 工具 | 本机实测结果 |
+|:---|:---|
+| `rustc 1.99.1`（stable） | **编译通过、运行不报错**（`_s` 未使用，UB 被优化路径吞掉）——「编译器不拦」的直接证据 |
+| `cargo +nightly miri run`（2026-10-19 本机新装 `cargo-miri`） | **精确定位**：`Undefined Behavior occurred here` 打在 `4:31` 的 `x.assume_init()` 上，报「it performed an invalid operation, and caused Undefined Behavior」，exit 1 |
+| `-Z sanitizer=address`（nightly） | 本机未启用（需 `-Zbuild-std` 重链，成本高）；本页边界陷阱表「必须重链 std」条为此口径的成因说明 |
+
+**对照结论**：这正是 §「Sanitizers vs Miri vs Kani」表的本机实例——Miri 在 **MIR 语义层**捕获了 rustc 与运行期双双放过的 validity UB（未初始化 `String` 的 niche 检查）。诊断粒度上 Miri 给出**表达式级定位 + UB 类别**，比 ASan 的「运行时二进制内存视图」更早、更准，且不依赖平台运行时。反命题 2「能发现所有 UB」的反面同样被本机佐证：Miri 只跑执行到的路径，上面 §反例 的 `debug_mode` 分支若不执行，Miri 同样沉默。
 
 ## 🧭 思维导图（Mindmap）
 

@@ -577,7 +577,48 @@ fn main() {
 
 > **修正**：敏感数据应使用固定大小的栈数组或 `Zeroizing<Box<[u8]>>`，避免 `Vec` 扩容导致旧缓冲区残留。
 
----
+## ⚠️ 实测反例（rustc 1.99.1 + cargo-miri/nightly 本机实跑，2026-10-19）
+
+上方反例的本机量化证据（stable `rustc 1.99.1 (58cf8f9c3)` 与 `cargo +nightly miri`，Windows x86_64）。
+
+### 实测 1（反例 3 坐实）：先 `set_len` 后读——stable 输出垃圾值，Miri 精确抓 UB
+
+```rust
+fn main() {
+    let mut v: Vec<i32> = Vec::with_capacity(4);
+    unsafe { v.set_len(4); } // ❌ premature length claim: slots uninitialized
+    let x: i32 = v[0];      // reads uninit memory
+    println!("{}", x);
+}
+```
+
+本机双跑对照：
+
+- `cargo run`（stable 1.99.1，debug）：打印 **`5439557`**——一个未初始化堆槽的残留值，无任何警告；
+- `cargo +nightly miri run`：报 **`Uninitialized memory occurred at alloc146[0x0..0x4]`**，并把该分配整块标为 `░░░░…`（uninit），exit 1。
+
+**为什么这组对照重要**：`set_len` 的 UB 在 stable 下是「静默错误数据」——比 panic 更危险的失败模式（错误数值直接进入下游计算）。Miri 的定位精度到**分配+字节区间**级。同页反例 1 的 `MaybeUninit::uninit().assume_init()` 本机同样编译通过（`_s` 未用时运行静默 exit 0）、Miri 报 `Undefined Behavior occurred here` 打在 `assume_init` 调用点。
+
+### 实测 2（反例 4 坐实）：`zeroed().assume_init()` 造引用——编译期 invalid_value lint + Miri 双保险
+
+```rust,should_compile
+use std::mem::MaybeUninit;
+fn main() {
+    let _b: bool = unsafe { MaybeUninit::<bool>::zeroed().assume_init() }; // bool: zeroed 在本机可用但不该依赖
+    let _r: &i32 = unsafe { MaybeUninit::<&i32>::zeroed().assume_init() }; // UB: null reference（本机为 warning 级，见下）
+}
+```
+
+本机实测双层拦截（编译层为 warning 级，运行层为 Miri 硬错误）：
+
+- **编译期**：warning `invalid_value`（deny 候选）「references must be non-null」——`&T` 的 niche 在零位是 null，常量层就能看出非法值；
+- **运行期（Miri）**：`error: Undefined Behavior: constructing invalid value of type &i32: encountered a null reference`，定位 `assume_init` 调用表达式，exit 1。
+
+**为什么**：`bool` 行在本机 zeroed 侥幸可用（0=false 落在合法值集内），`&i32` 行则证明「zeroed 对带 validity invariant 的类型是系统性 UB」不是保守说法而是**可复现的编译器诊断**。zeroed 的正确安全域只有 `Integer`/无 niche 约束的 `Pod` 类（unsafe-zeroable 提案的讨论正是为划定这个域）。
+
+### 实测 3：类型安全护栏的意外收获——`Vec<MaybeUninit<T>>` + set_len 不逃逸类型系统
+
+试图在 `Vec<MaybeUninit<i32>>` 上 `set_len` 后按 `i32` 读取（`let x: i32 = v[0];`）本机报 **E0308**「expected `i32`, found union `MaybeUninit<i32>`」——泛型参数层保留 `MaybeUninit` 包装时，未初始化槽**在类型层就不可解引用**，必须先过 `assume_init` 这道显式 unsafe 门。真正的漏洞形态是实测 1 的 `Vec<i32>`（元素类型无包装、`set_len` 撒谎即通吃）。这解释了为什么 `spare_capacity_mut()` 返回 `&mut [MaybeUninit<T>]`：API 用类型包装把「未初始化」状态携带到每一次访问。
 
 ## 十二、国际来源对齐表
 

@@ -451,6 +451,95 @@ flowchart TD
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实运行，2026-10-19）
+
+本节为本 panorama 各安全边界的本机可复现锚点（`rustc 1.99.1 (58cf8f9c3 2026-10-13)`）。
+
+### 实测 1：Pin 防「移动」，不防「就地突变」——`get_mut` 双重面（E0277 / 逃逸成功）
+
+`PhantomPinned` 使类型 `!Unpin` 时，`Pin<Box<T>>` 直接取出可变引用被拒：
+
+```rust,compile_fail
+use std::pin::Pin;
+use std::marker::PhantomPinned;
+struct SelfRef { data: String, ptr: *const String, _p: PhantomPinned }
+fn main() {
+    let mut p: Pin<Box<SelfRef>> = Box::pin(SelfRef { data: String::from("x"), ptr: std::ptr::null(), _p: PhantomPinned });
+    let r: &mut SelfRef = p.as_mut().get_mut();
+    println!("{}", r.data);
+}
+```
+
+```text
+error[E0277]: `PhantomPinned` cannot be unpinned
+  |                                      ^^^^^^^ within `SelfRef`, the trait `Unpin` is not implemented for `PhantomPinned`
+note: required by a bound in `Pin::<&'a mut T>::get_mut`
+1602 |         T: Unpin,
+```
+
+但**手动 `impl Unpin`（安全 trait，无需 unsafe）即合法绕过**，即使结构体自引用：
+
+```rust
+use std::pin::Pin;
+struct SelfRef2 { data: String, ptr: *const String, _p: std::marker::PhantomPinned }
+impl Unpin for SelfRef2 {} // legal: compiler cannot know the struct is self-referential
+fn main() {
+    let mut p: Pin<Box<SelfRef2>> = Box::pin(SelfRef2 { data: String::from("hello"), ptr: std::ptr::null(), _p: std::marker::PhantomPinned });
+    let r = p.as_mut().get_mut();
+    r.data = String::from("world!"); // mutation through get_mut despite PhantomPinned
+    println!("loophole: {}", r.data);
+}
+```
+
+实运行输出 `loophole: world!`。**为什么这是边界全景的关键条目**：Pin 是「移动禁令」而非「自引用保护」——`Unpin` 是编译器可信任的安全标记，自引用正确性完全由库作者负责（§四「依赖层」的活例）。同时 `*p` 直接移动 `!Unpin` 值报 **E0507**「cannot move out of dereference of `Pin<Box<NoUnpin>>`」，禁令的另一半坐实。
+
+### 实测 2：`unsafe impl Unpin` 被拒——E0199 语义反向
+
+```rust,compile_fail
+unsafe impl Unpin for SelfRef2 {}
+```
+
+```text
+error[E0199]: implementing the trait `Unpin` is not unsafe
+help: remove `unsafe` from this trait implementation
+```
+
+**为什么**：`Unpin` 在 core 中声明为 `pub auto trait Unpin {}`——它不是 unsafe trait，实现它**不需要**承诺任何不变量（承诺的是「可安全移动」这种弱性质）。unsafe-ness 与「是否危险」不成正比：真正的危险（自引用失效）恰好落在类型系统看不见的地方。这是「unsafe 边界 ≠ UB 边界」命题的最锐利反例锚点。
+
+### 实测 3：ManuallyDrop 双 drop——编译器只防「误忘」，不防「误 drop」
+
+```rust
+use std::mem::ManuallyDrop;
+struct D;
+impl Drop for D { fn drop(&mut self) { println!("dropped once"); } }
+fn main() {
+    let mut m = ManuallyDrop::new(D);
+    unsafe {
+        std::ptr::drop_in_place(&mut *m as *mut D); // manual drop #1
+        std::ptr::drop_in_place(&mut *m as *mut D); // manual drop #2: double-drop UB
+    }
+}
+```
+
+实运行：`dropped once` 打印**两次**（exit 0）——双重 drop 编译与运行都不拦（本例 D 无资源故表面无害，真实场景即 use-after-free）。反向保护存在：`drop(m)`（m 为 ManuallyDrop）触发 **deny-by-default** lint `undropped_manually_drops`「calls to `std::mem::drop` with `std::mem::ManuallyDrop` instead of the inner value does nothing」并给出 `into_inner` 修正。两个方向合起来正是 §四「工具能防的/不能防的」分界。
+
+### 实测 4：`MaybeUninit` 未初始化绑定直接被拒——E0381（初值检查先于 unsafe）
+
+```rust,compile_fail
+fn main() {
+    let x: std::mem::MaybeUninit<i32>;
+    unsafe { println!("{}", x.assume_init()); } // reading uninit
+}
+```
+
+```text
+error[E0381]: used binding `x` isn't initialized
+  |         - binding declared here but left uninitialized
+  |                             ^ `x` used here but it isn't initialized
+```
+
+**为什么**：即使 `assume_init` 包在 unsafe 块里，借用检查的初始化流分析先一步拒绝——**uninit 内存必须显式构造**（`MaybeUninit::uninit()` 是一个值）。E0381 拦的是「Rust 变量未初始化」而非「MaybeUninit 内部未初始化」；后者（`MaybeUninit::uninit().assume_init()`）编译通过且属 UB，须靠 Miri 捕获（§五 Q-M2 路径）。这条「哪层检查拦哪层 UB」的分层正是边界全景的方法论本身。
+
 ## 十二、演进方向
 
 - **MiniRust / 形式化规范进展**: Rust 官方规范（Ferrocene Language Specification）对 UB 清单的逐项确认，可能移动 §四"依赖层"中若干条目的归属。

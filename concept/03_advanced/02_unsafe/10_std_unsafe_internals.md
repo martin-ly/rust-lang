@@ -430,6 +430,39 @@ unsafe impl Sync for Bad {}
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 + cargo-miri/nightly 本机实跑，2026-10-19）
+
+§7 反例的本机量化证据（`rustc 1.99.1 (58cf8f9c3)` + `cargo +nightly miri`，Windows x86_64）。
+
+### 实测 1（7.2 坐实）：`Vec<String>::set_len(10)` 未初始化即宣称长度——Miri 抓 std 内部读垃圾
+
+```rust
+fn main() {
+    let mut v = Vec::<String>::with_capacity(10);
+    unsafe { v.set_len(10); } // ❌ UB: 后续任何触碰 len 的路径都会读 uninit String 槽
+}
+```
+
+Miri 实跑诊断：
+
+```text
+error: Undefined Behavior: reading memory at alloc145[0x8..0x10], but memory is uninitialized at [0x8..0x10], and this operation requires initialized memory
+   --> library/alloc/src/raw_vec/mod.rs:635:9
+    |         ^^^^^^^^ Undefined Behavior occurred here
+    0: alloc::raw_vec::RawVecInner::non_null::<u8>
+    1: alloc::raw_vec::RawVecInner::ptr::<u8>
+```
+
+**为什么这条 backtrace 价值极高**：UB 的触发点不在用户代码，而在 **std 自己的 `RawVec::ptr`**（drop/ dealloc 路径要拿 buffer 指针）。这正是本页主旨的活证据：`Vec` 的安全 API 建立在「len 之前的槽都有 valid `String`」这条内部不变量上——`set_len` 撒谎后，第一个读垃圾的不是用户逻辑而是 std 抽象自身。用户代码只有一行 unsafe，崩溃面却横贯整个 std 抽象层。
+
+### 实测 2（7.1 坐实）：uninit `assume_init` 双跑
+
+`MaybeUninit::<i32>::uninit().assume_init()`：编译通过；`String` 版在值不被使用时 stable 运行静默 exit 0（错误被死代码消除吞掉），Miri 一律报 `Undefined Behavior occurred here` 定位 `assume_init`。7.1 的修正模式（`as_mut_ptr().write(42)` 后 `assume_init`）本机实跑通过并 assert 成立。
+
+### 实测 3（联动 11 号页）：`Vec<i32>::set_len` 静默垃圾值
+
+同型 `set_len` 陷阱换 `i32` 元素：stable `cargo run` 直接打印未初始化槽的残留整数 `5439557`，无警告（详见 [11_in_place_pinned_initialization.md 实测 1](11_in_place_pinned_initialization.md)）。`i32` 无 validity invariant 故「读到垃圾」不违例，`String` 有 niche/ptr 不变量故 Miri 立刻炸——**同一 API 误用在不同元素类型上的可检测性完全不同**，这是 std unsafe 不变量分层（本页 §6）最直接的对照实验。
+
 ## 八、嵌入式测验
 
 以下四道测验分别对应 unsafe 原语、`MaybeUninit`、`Vec` 不变量、原始切片构造条件的核心判断点。通过选择—解析的形式，可以快速定位自己是否还停留在“记得 API 名字”，还是已经掌握了 API 背后的不变量契约。
