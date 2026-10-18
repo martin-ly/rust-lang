@@ -14,6 +14,7 @@
 > **前置概念**: [Const Generics](../../02_intermediate/01_generics/02_const_generics.md)
 > **后置概念**: [Const Trait Impl Preview](06_const_trait_impl_preview.md) · [Const Items and Const Fn](../../01_foundation/07_modules_and_items/09_const_items_and_const_fn.md)
 >
+> **⚠️ 实测反例（按 Canonical 规则指向权威页）**：本 stub 不重复代码。const trait 的 2026-10-19 本机实测反例（stable E0015 硬拒 + nightly E0379 语法半衰期 + `const trait`/`[const]` 当前语法正例实跑）见权威页 [`06_const_trait_impl_preview.md` §实测反例](06_const_trait_impl_preview.md)，含 2 个 `rust,compile_fail` 围栏；该页已勘误旧 `~const` 口径。
 >
 > **受众**: [专家]
 > **内容分级**: [实验级]

@@ -434,6 +434,45 @@ graph TD
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 stable + rustc 1.101.0-nightly 实编译，2026-10-19）
+
+**反例 1：stable 上 const fn 调用 trait 方法被硬拒**（`rustc 1.99.1`，无 feature 门）：
+
+```rust,compile_fail
+trait ConstFn { fn call(&self) -> i32; }
+const fn use_it<T: ConstFn>(x: &T) -> i32 { x.call() } // const fn calling trait method
+fn main() {}
+```
+
+```text
+error[E0015]: cannot call non-const method `<T as ConstFn>::call` in constant functions
+note: method `call` is not const because trait `ConstFn` is not const
+```
+
+**反例 2：nightly 上语法半衰期——旧式 `const fn` 写在 `const impl` 里被拒**（`rustc 1.101.0-nightly (8006091eb 2026-10-17)`，`#![feature(const_trait_impl)]`）：
+
+```rust,compile_fail
+#![feature(const_trait_impl)]
+trait ConstFn { fn call(&self) -> i32; }
+const impl ConstFn for i32 { const fn call(&self) -> i32 { *self + 1 } } // ❌
+
+// error[E0379]: functions in trait impls cannot be declared const
+//   help: remove the `const`  —— const impl 已隐式使全部关联函数 const
+```
+
+**正例（本机 nightly 可编译可运行）**——当前语法是 `const trait` 声明 + `[const]` bound + impl 内不写 `const`：
+
+```rust
+#![feature(const_trait_impl)]
+const trait ConstFn { fn call(&self) -> i32; }
+const impl ConstFn for i32 { fn call(&self) -> i32 { *self + 1 } }
+const fn use_it<T: [const] ConstFn>(x: &T) -> i32 { x.call() }
+const V: i32 = use_it(&41);
+fn main() { println!("V={V}"); } // nightly 实跑输出 V=42；stable 编译直接 E0554（feature 门）
+```
+
+**实测勘误**：本页旧口径写作 `~const Trait`（RFC 2632 原始语法）。2026-10-19 本机 nightly 实测表明落地语法已演进为 `const trait` + `[const]` bound + `const impl`（`~const` 写法已被取代，`const_traits` feature 名也已不存在——E0635 unknown feature）。上表「`~const` 交互」行保留为历史口径。
+
 ## 十、边界测试：const trait impl 的编译错误
 
 const trait impl 的边界测试围绕一条核心规则：**const 上下文只能调用标记为 const 的操作**。每个用例验证编译器在以下哪个检查点拒绝：

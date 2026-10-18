@@ -208,7 +208,7 @@ let device = Arc::clone(&self.device);
 
 Ergonomic ref-counting 可显著降低内核绑定的样板代码量，提升可维护性。
 
-## ⚠️ 反例与陷阱
+## ⚠️ 实测反例与陷阱
 
 **陷阱：`Rc` 双向引用成环导致永久泄漏**。引用计数无法回收环——这正是 ergonomic ref-counting 预研试图用类型级手段缓解的经典人机工程学缺陷：
 
@@ -230,6 +230,8 @@ fn leak_cycle() -> Weak<Node> {
 ```
 
 rustc 1.97.0 实测：`leak_cycle().upgrade().is_some()` 为 `true`——外部句柄全部 drop 后节点仍存活，内存泄漏复现。
+
+**2026-10-19 复核（rustc 1.99.1 本机实运行）**：同程序复跑，输出 `after full drop, upgrade().is_some() = true`（EXIT=0）——该泄漏行为在 1.99.1 仍未变化，ergonomic ref-counting 预研要解决的正是这类「不 panic、不报错、只是永久泄漏」的静默失效。
 
 **修正**：环中至少一条边用 `Weak`（反向引用、父指针等），`upgrade()` 返回 `None` 即证明可回收：
 

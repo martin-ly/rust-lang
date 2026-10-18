@@ -130,6 +130,15 @@
     "concept/03_advanced/08_process_ipc/09_process_testing_and_benchmarking.md"
    ],
    "evidence": "get_unchecked OOB three-layer (debug precondition abort / -O silent garbage 5570639 EXIT0 / Miri precise UB) + abs_weak spec-satisfies-but-wrong EXIT0 + i64::MAX+1 debug101 vs -O -9223372036854775808 EXIT0 + IPC 2 pages heading normalization; 04_formal group cleared to 0 gap"
+  },
+  {
+   "batch": 11,
+   "pages": [
+    "concept/07_future/02_preview_features/06_const_trait_impl_preview.md",
+    "concept/07_future/02_preview_features/19_const_trait_preview.md",
+    "concept/07_future/02_preview_features/20_ergonomic_ref_counting_preview.md"
+   ],
+   "evidence": "const trait nightly 实测: stable E0015 + nightly E0379 语法半衰期 + const trait/[const] 正例 V=42 实跑 + E0635 const_traits 不存在 勘误旧~const口径; Rc cycle upgrade().is_some()=true 1.99.1 复核 EXIT0"
   }
  ],
  "version_baseline": {
