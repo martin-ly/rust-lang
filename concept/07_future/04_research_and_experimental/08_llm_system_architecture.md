@@ -428,6 +428,27 @@ async fn inference_handler(
 | 工具调用延迟 | 模型生成 + 工具执行串行 | 可并行调用独立工具 |
 | 多 Agent 协调 | 通信开销和角色冲突 | 需要严格的消息协议和超时机制 |
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）：Agent 共享「模型句柄」的线程边界硬拒
+
+本页主张 LLM 系统质量取决于契约与边界，而非模型规模。其 Rust 层边界本机坐实：多个 Agent worker 共享同一模型状态句柄，用 `Rc`（单线程引用计数）直接跨 `thread::spawn`——硬拒：
+
+```rust,compile_fail
+use std::rc::Rc;
+use std::cell::RefCell;
+fn main() {
+    let model = Rc::new(RefCell::new(vec![1.0f32; 4])); // 「模型状态」句柄
+    let m2 = model.clone();
+    let h = std::thread::spawn(move || { let _ = m2.borrow(); }); // worker 线程借用
+    h.join().unwrap();
+}
+```
+
+```text
+error[E0277]: `Rc<RefCell<Vec<f32>>>` cannot be sent between threads safely
+```
+
+口径：上表「多 Agent 协调需要严格的消息协议」在 Rust 里有类型层 enforcement——跨线程共享必须是 `Send`（`Arc`/channel），`Rc<RefCell<…>>` 伪装成跨线程共享即编译失败。LLM 系统架构中「共享可变模型状态」的并发正确性不是运维约定问题，而是这里的一条 bound：要么消息传递（channel 转移 owned 状态），要么显式同步协议（`Arc<Mutex<…>>`/`Arc<RwLock<…>>`）。契约先于规模，从这条 E0277 开始。
+
 ---
 
 ## 反例与边界

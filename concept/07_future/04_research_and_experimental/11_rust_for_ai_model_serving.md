@@ -358,6 +358,34 @@ INT4 量化可能显著降低模型能力；对于需要高精度推理的任务
 
 虽然 Rust 有 `cust`/`cudarc` 等 CUDA 绑定，但高性能 kernel 开发仍以 CUDA C++/Triton 为主。Rust 更适合编排这些 kernel。
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实运行，2026-10-19）：`_` 兜底臂把「新请求类型未适配」变成静默 fallback，穷尽匹配才是 serving 层的真守卫
+
+本页主张 Rust 的价值在服务编排层。编排层最典型的静默事故——新请求类型上线、旧 dispatch 的 `_` 臂把它吞进 fallback——本机双跑坐实。
+
+**事故形态**（编译通过、静默降级）：
+
+```rust
+enum Req { Chat, Embed } // Embed = 新上线的请求类型
+fn handle(r: Req) -> &'static str { match r { Req::Chat => "chat", _ => "fallback" } }
+fn main() { println!("embed request handled as: {}", handle(Req::Embed)); }
+```
+
+实跑（EXIT=0）：`embed request handled as: fallback`——新变体进 fallback 分支无任何报警。
+
+**守卫形态**（同一变体新增，无 `_` 臂的旧 handler 当场编译失败）：
+
+```rust,compile_fail
+enum Req { Chat, Embed } // 新变体加入后
+fn handle(r: Req) -> &'static str { match r { Req::Chat => "chat" } } // 旧 handler 无 _ 臂
+fn main() { println!("{}", handle(Req::Chat)); }
+```
+
+```text
+error[E0004]: non-exhaustive patterns: `Req::Embed` not covered
+```
+
+口径：模型服务语义里「请求类型 × 调度路径」的矩阵正确性，在 Rust 是穷尽匹配问题——写 `_` 臂等于自愿放弃编译期守卫（事故形态 EXIT=0），不写则每个未适配变体都是 E0004 构建失败。这正是「Rust 适合编排」命题的可机检部分：编排错误不靠线上监控发现，靠 match 穷尽性在 CI 发现。
+
 ---
 
 ## 八、国际权威参考

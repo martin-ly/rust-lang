@@ -271,3 +271,20 @@ pub struct Config { pub name: String, pub retries: u32 } // 默认 repr(Rust)
 **陷阱本质**：`repr(Rust)` 的字段顺序、对齐、`String`/`Vec` 内部表示**不做任何跨版本、跨编译单元保证**；同一 rustc 版本下编译选项变化也可能改变布局。跨 dylib 传递引发的是未定义行为而非编译错误——这正是 stable ABI 提案要解决的核心问题。
 
 **修正对照**：跨动态库边界只用 `#[repr(C)]` 类型 + `extern "C"` 签名；需要富类型时用 `abi_stable` / `stabby` 等 crate 的稳定 ABI 包装；在提案稳定化之前，不要在生产插件系统中依赖 `repr(Rust)` 布局。
+
+## ⚠️ 实测反例（rustc 1.99.1 实编译 cdylib + ctypes 实链接，2026-10-19）：`pub extern "C"` 不等于「导出」
+
+上节修正对照的第一环——「`extern "C"` 签名就够了吗」——本机坐实为**不够**：
+
+```rust,should_compile
+// cdylib 编译通过，但宿主侧 ctypes 取不到符号
+pub extern "C" fn add(a: i32, b: i32) -> i32 { a + b }
+```
+
+`rustc --crate-type cdylib` EXIT=0 产出行 `n2_abi.dll`；宿主 Python `ctypes` 加载后取 `add` 直接失败：
+
+```text
+AttributeError: function 'add' not found
+```
+
+加上 `#[no_mangle]` 重编译后同一宿主实调成功：`n2_add(2,3) = 5`、`n2_version_tag = 19901`。实测结论：`extern "C"` 只约束**调用约定**（参数布局/callee 规则），不约束**符号名**——name mangling 依旧发生，ABI 稳定三要素（calling convention、layout、symbol name）里 Rust 语言层只送第一个。这正是 stable-ABI 提案（`#[export]` / extern ABI 扩展讨论）存在的实测理由：今天的稳定跨边界契约必须手写三件套 `#[no_mangle] + pub extern "C" + #[repr(C)]`，缺一即运行期链接错误而非编译错误。

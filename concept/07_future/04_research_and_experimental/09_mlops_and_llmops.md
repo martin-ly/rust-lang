@@ -430,6 +430,19 @@ Rust 生态目前缺少成熟的开源 Feature Store，但可以用 Redis/Postgr
 | 成本可观测性 | 第三方 API 计费粒度有限 | 需要按请求/用户归因 |
 | Rust 训练生态 | 不成熟 | Rust 聚焦部署与服务 |
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）：ID 类型别名不防「模型/数据集接错线」——MLOps 接线错误编译期零信号
+
+本页主张 MLOps 核心是闭环与归因，而 pipeline 接线错误（把 dataset id 传进 model id 参数位）正是最典型的闭环外事故。Rust 侧本机坐实「别名不是类型」：
+
+```rust
+type ModelId = u64;
+type DatasetId = u64;
+fn load_model(id: ModelId) -> String { format!("model#{id}") }
+fn main() { let d: DatasetId = 77; println!("{}", load_model(d)); } // dataset id 喂进 model 参数
+```
+
+实跑（EXIT=0）：`model#77`——两个「语义不同」的 ID 是同一个 `u64` 的两个名字，接错线无任何编译警告，错误只在未来某次推理结果异常时暴露（即本页「部署只是生命周期中点」所防的那类晚期事故）。修正口径：MLOps 级 Rust 代码必须用 newtype（`struct ModelId(u64)`）或 enum 让接错线变 E0308，而非 `type` 别名；上表「成本可观测性需要按请求/用户归因」同理——归因键若全是裸 `u64`/`String`，归因本身在类型层就不可验证。
+
 ---
 
 ## 反例与边界

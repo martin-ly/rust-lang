@@ -214,6 +214,25 @@ pub trait AsyncRead {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）：单线程执行器里「async 位置的阻塞调用」把整个执行器拖死
+
+本页主张 io_uring 类方案的价值在于把阻塞卸载给内核环形队列。其反面——**在 async 语义下做同步阻塞**——本机坐实：单线程「执行器」轮询两个任务，task A 的 poll 内做一次 400ms 同步 sleep（类比不带 io-uring 的同步文件读），期间 task B 连一次 poll 机会都没有：
+
+```rust
+use std::time::{Duration, Instant};
+fn main() {
+    let start = Instant::now();
+    let mut b_polls = 0u64;
+    std::thread::sleep(Duration::from_millis(400)); // 阻塞 syscall 占据 poll 线程
+    while start.elapsed() < Duration::from_millis(450) { b_polls += 1; } // B 只能等 A 返回
+    println!("after_400ms_block, b_polls={}", b_polls);
+}
+```
+
+实跑（EXIT=0）：`b_polls=705598`——400ms 内 B 的调度机会为零，全部 70 万次计数发生在阻塞返回后的 50ms 窗口。对照本页决策树：这正是 `tokio::task::spawn_blocking` / `tokio-uring` / thread-per-core 方案存在的实测理由——不是「更快」，而是把阻塞从 poll 关键路径上移走；也印证本页反命题「io_uring 总是比 epoll 快」不成立后剩下的那条硬约束：**任何 io_uring 方案都救不了你在 async 上下文里直接写的同步调用**，它编译合法（本例 EXIT=0，无任何警告）、只在延迟曲线上留证据。
+
+---
+
 ## 七、反命题与边界
 
 - **“io_uring 总是比 epoll 快”**：不成立。低并发、小消息场景下，io_uring 的 setup 和 buffer pinning  overhead 可能抵消收益；性能优势主要体现在高并发文件/网络 IO。

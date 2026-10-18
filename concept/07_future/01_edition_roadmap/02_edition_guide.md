@@ -748,6 +748,24 @@ Edition 边界测试关注**同一 crate 跨 edition 编译**时的行为差：�
 
 判定原则：能被 `cargo fix` 覆盖的差异属于低风险迁移；需要人工的只有语义变更与宏展开差异两类。
 
+## ⚠️ 实测反例（rustc 1.99.1 双 edition 实编译，2026-10-19）：reserved keyword 的 edition 硬边界
+
+同一份源码，edition 决定它是否存在——`gen`（Edition 2024 reserved keyword）本机双跑：
+
+```rust,compile_fail
+// rustc 1.99.1 --edition 2024：同一代码 --edition 2021 编译通过
+fn gen() -> i32 { 1 }
+fn main() { println!("{}", gen()); }
+```
+
+```text
+error: expected identifier, found reserved keyword `gen`
+help: escape `gen` to use it as an identifier
+1 | fn r#gen() -> i32 { 1 }
+```
+
+实测口径：`--edition 2021` 编译 EXIT=0 正常运行；`--edition 2024` 两处硬拒（函数名 + 调用点），EXIT=1，且 rustc 直接给出 `r#gen` 逃生通道。这正是本节判定原则的第一类边界（编译期硬错误、`cargo fix --edition` 可自动改写为 raw identifier），与 10.1 的尾表达式变更（同为 compile_fail 硬错误）构成 edition 迁移的两大可机检信号；剩下的静默语义变更（drop 时机等）才是 `cargo fix` 覆盖不到、必须双 edition CI 矩阵的部分。
+
 ### 10.1 边界测试：Edition 2024 的尾表达式模式变更（编译错误）
 
 ```rust,compile_fail

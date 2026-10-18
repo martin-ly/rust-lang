@@ -1216,6 +1216,28 @@ graph TD
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实运行，2026-10-19）：本页「生成-验证闭环」命题的可机检锚点
+
+本页为归档页（历史口径保留，不删除）。追加本机实测口径，验证「生成-验证闭环」主张中 Rust 侧的核心断言——**验证层必须在生成侧引入新变体时当场拒绝**，而非静默放行：
+
+**闭环成立形态**（穷尽匹配：新变体 = 编译失败）：
+
+```rust,compile_fail
+enum Req { Chat, Embed } // 生成侧新增 Embed 变体
+fn verify(r: Req) -> &'static str { match r { Req::Chat => "ok" } } // 验证层未适配
+fn main() { println!("{}", verify(Req::Chat)); }
+```
+
+```text
+error[E0004]: non-exhaustive patterns: `Req::Embed` not covered
+```
+
+**闭环失效形态**（`_` 兜底臂：验证层静默吞掉新变体，EXIT=0 输出 `fallback`）——同一实测详见 canonical：[11_rust_for_ai_model_serving.md §实测反例](../04_research_and_experimental/11_rust_for_ai_model_serving.md)。
+
+口径：本页 2026-05 撰写的「生成-验证闭环」策略成立与否，不取决于流程文档写得多细，而取决于验证层有没有 E0004 这类硬门——有则闭环由编译器代持，无（`_` 臂）则闭环名存实亡。此为 S2-R3 反例补全对本归档页的追加勘误，历史正文全部保留。
+
+---
+
 ## 权威来源索引
 
 > **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**

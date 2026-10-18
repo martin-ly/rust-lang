@@ -329,3 +329,11 @@ mindmap
 **陷阱本质**：Ferrocene 的认证对象是 **rustc/cargo 工具链本身**（含核心库），不覆盖第三方 crate；未审计依赖仍需按行业流程（如 ISO 26262 的软件组件鉴定）单独处理。把工具链认证外推为生态认证，是安全关键审计中的典型不符合项。
 
 **修正对照**：依赖白名单制——仅允许经鉴定的 crate 与固定版本（提交 `Cargo.lock` + `cargo vet`）；以 Ferrocene 交付的认证包（合格证、安全手册）界定工具链边界，并在认证计划中显式声明「第三方依赖另行鉴定」；升级 Ferrocene 版本时同步更新认证证据，而非跟随上游 stable 自动升级。
+
+## ⚠️ 实测反例（rustc 1.99.1 本机 + 权威来源核对，2026-10-19）：认证边界在「本机工具链一行配置都换不掉」处显形
+
+本页认证口径的本机可检锚点：
+
+1. **本机没有任何 Ferrocene 产物**：`ferrocene` 不在 PATH，`rustup toolchain list` 无 Ferrocene 条目，本机跑的是上游 `rustc 1.99.1 (58cf8f9c3 2026-10-13)`——即「采用 Rust」与「采用认证工具链」是两个独立采购动作，本机状态就是多数团队的真实起点。
+2. **版本滞后是认证的设计特征**（2026-10-19 权威核对）：Ferrous Systems 官方发布 *Ferrocene 26.02.0*（TÜV SÜD qualified，支持 ISO 26262 / IEC 61508 / IEC 62304，并入 Rust 1.91/1.92 的变更）[来源: [Ferrous Systems — Ferrocene 26.02.0 now available](https://ferrous-systems.com/blog/ferrocene-26-02-0/) · [ferrocene.dev](https://ferrocene.dev/)]。对照本机：上游 stable 已到 1.99.1（2026-10-15 补丁线）。**认证工具链落后上游 stable 约 7 个版本**——上节「升级 Ferrocene 版本时同步更新认证证据，而非跟随上游自动升级」的口径由此坐实：认证证据绑定的是 26.02.0 对应快照，直接 `rustup update` 到 1.99.1 即离开认证覆盖域。
+3. **依赖侧边界可机检**：本机仓库 `Cargo.lock` 含 tokio/axum/candle-core/ort 等第三方 crate——这些全部不在 Ferrocene 认证对象（rustc/cargo + certified core/minimal 子集）范围内；把 12_ferrocene 的任一生态示例搬进认证项目，按上节白名单制即属不符合项。[来源: [Ferrocene GitHub 源码仓库](https://github.com/ferrocene/ferrocene)（proper downstream of main Rust）]

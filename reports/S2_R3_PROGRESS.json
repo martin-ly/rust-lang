@@ -173,6 +173,24 @@
     "04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md"
    ],
    "evidence": "非原子计数130306/135107丢更新+Miri data race+SeqCst 400000精确 + Edition2024 static mut硬拒 + Rc跨线程channel E0277 + 脑裂divergence/quorum收敛 + 负面积-15 + 别名无量纲区分 + FnOnce twice E0382 + PositiveShape谓词穿透 + MMIO poll_plain jmp自环汇编直读"
+  },
+  {
+   "batch": 14,
+   "pages": [
+    "07_future/01_edition_roadmap/02_edition_guide.md (canonical)",
+    "07_future/01_edition_roadmap/03_rust_edition_guide.md",
+    "07_future/02_preview_features/07_stable_abi_preview.md",
+    "07_future/02_preview_features/12_ferrocene_preview.md",
+    "07_future/02_preview_features/21_rust_specification_preview.md",
+    "07_future/02_preview_features/28_wasm_target_evolution.md",
+    "07_future/02_preview_features/39_async_ioring_preview.md",
+    "07_future/04_research_and_experimental/08_llm_system_architecture.md",
+    "07_future/04_research_and_experimental/09_mlops_and_llmops.md",
+    "07_future/04_research_and_experimental/10_ai_safety_and_alignment.md",
+    "07_future/04_research_and_experimental/11_rust_for_ai_model_serving.md",
+    "07_future/archive/01_ai_integration_original.md"
+   ],
+   "evidence": "gen reserved keyword 双edition(2021 EXIT0/2024硬拒 r#gen逃生) + E0080 const OOB编译期拒 vs get_unchecked运行UB + pub extern C ctypes 'add' not found vs no_mangle n2_add=5 + wasip2 E0463/wasip1导出wadd/unknown-unknown无导出 + Ferrocene 26.02.0权威核对(落后1.99.1约7版本) + async阻塞b_polls=705598 + Rc模型句柄E0277 + ModelId别名接错线EXIT0 model#77 + 后验过滤全绿out=0 + _臂fallback vs E0004守卫"
   }
  ],
  "version_baseline": {
@@ -227,5 +245,13 @@
    "07_future": 11
   },
   "note": "04_formal 组清零(10页落地); s2_gaps_fresh5.json 权威"
+ },
+ "rescan_2026_10_19_post_batch14": {
+  "strict_gaps": 96,
+  "tracked": 600,
+  "by_group": {
+   "06_ecosystem": 96
+  },
+  "note": "07_future 组清零(11页+canonical版); s2_gaps_fresh6.json 权威; 剩余全部 06_ecosystem"
  }
 }

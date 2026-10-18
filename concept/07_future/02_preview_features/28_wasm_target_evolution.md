@@ -288,3 +288,13 @@ cargo build --target wasm32-wasi
 | 需要组件模型 | `wasm32-wasip2`（配合 `cargo component`） |
 
 同步更新 CI、`.cargo/config.toml` 与 rust-toolchain 文件中的 target 字符串。
+
+## ⚠️ 实测反例（rustc 1.99.1 实编译 + wasm 产物直读，2026-10-19）：target 演进三态本机坐实
+
+本机 `rustup target list --installed` 实态：`wasm32-unknown-unknown`、`wasm32-wasip1` 已装；`wasm32-wasip2` 未装。三态实测：
+
+1. **target 名义与 std 可用性绑定**（上节陷阱复现）：`rustc --target wasm32-wasip2`（未装）报 `error[E0463]: can't find crate for 'std'`——「target 名义存在但 std 缺失」与「target 不存在」报错同形，佐证上节「极易误判为 std 损坏」论断。
+2. **wasip1 cdylib 成功**：`#[no_mangle] pub extern "C" fn wadd(a: i32, b: i32) -> i32` 编译 EXIT=0，产物 magic `b'\x00asm'`（2.24MB），二进制内含导出名 `wadd`——WASI Preview1 路径下 C ABI 导出可用。
+3. **unknown-unknown 不导出**：同一函数不加 `#[no_mangle]` 编 `wasm32-unknown-unknown` cdylib，1.67MB 产物中既无 `wadd` 也无 `_ZN` mangled 符号——host 侧取不到入口，须靠 wasm-bindgen 层重建导出。
+
+结论口径：WASM target 演进不是文档叙事而是三处硬边界——target 名（旧名移除）、std 可用性（E0463 与 target 安装状态绑定）、导出可见性（unknown-unknown 无 C 导出、wasip1 有）。CI 矩阵必须按 target 逐个实测，不能按「wasm 都差不多」写。
