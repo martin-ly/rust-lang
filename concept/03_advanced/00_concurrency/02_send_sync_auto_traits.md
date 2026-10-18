@@ -489,6 +489,50 @@ fn correct_version() {
 
 对照要点：**编译期能拒绝的（反例 1、2）绝不靠 unsafe 绕过；必须用 unsafe 时（反例 3），正确性判据是"公开 API 是否把所有内部可变性访问都定序"**，这正是 `Mutex` 的 `unsafe impl Sync` 合法而 `Counter` 的不合法之别。
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）
+
+本节把 §6「编译期拒绝」的断言坐实为本机错误码（`rustc 1.99.1 (58cf8f9c3 2026-10-13)` 实编译）。
+
+### 实测 1：`Rc` 跨线程 → E0277 `Send` 缺失（错误文本含自动推导路径）
+
+```rust,compile_fail
+use std::rc::Rc;
+fn main() { let r = Rc::new(5); std::thread::spawn(move || println!("{}", r)).join().unwrap(); }
+```
+
+```text
+error[E0277]: `Rc<i32>` cannot be sent between threads safely
+   |                                 ------------------ -------^^^^^^^^^^^^^^^^^^
+   |                                  `Rc<i32>` cannot be sent between threads safely
+   |                                  within this `{closure@...}`
+   = help: within `{closure@...}`, the trait `Send` is not implemented for `Rc<i32>`
+note: required because it's used within this closure
+note: required by a bound in `spawn`
+```
+
+**为什么**：诊断三段式完整展示 auto trait 推导链——closure 因**捕获** `Rc` 而不成 `Send`，`spawn` 的 `F: Send` 界在第三段点名。这就是 §2 形式化契约（`spawn` 前置条件 `F: Send`）+ §3 auto 推导（`Rc` 无 `Send` impl）的编译期联合证据。
+
+### 实测 2：`Arc<RefCell<T>>` → E0277 且给出「用 RwLock」替代建议
+
+```rust,compile_fail
+use std::cell::RefCell;
+use std::sync::Arc;
+fn main() { let c = Arc::new(RefCell::new(0)); let c2 = c.clone(); std::thread::spawn(move || { *c2.borrow_mut() += 1; }).join().unwrap(); }
+```
+
+```text
+error[E0277]: `RefCell<i32>` cannot be shared between threads safely
+   = help: the trait `Sync` is not implemented for `RefCell<i32>`
+   = note: if you want to do aliasing and mutation between multiple threads, use `std::sync::RwLock` instead
+   = note: required for `Arc<RefCell<i32>>` to implement `Send`
+```
+
+**为什么**：编译器把 §5 判定矩阵中最常见的错误组合（Arc+RefCell）连同**官方推荐替代**一起打印——`Sync` 缺失沿 `Arc: Send ⟸ T: Sync` 推导（第三行 note 就是这条规则原文），与 §2 的 `Arc<T>: Send ⟺ T: Send + Sync` 契约逐字对应。修正即 §7 决策树分支：`Arc<Mutex<T>>` 或 `Arc<RwLock<T>>`。
+
+### 实测 3：对照组合的正面锚点
+
+`Arc<Mutex<i32>>` 同位替换实测通过编译并运行（`Mutex<i32>: Send + Sync` 成立，§5 矩阵行「Mutex<T> 当 T: Send」为真）；`Rc` 单线程克隆运行通过。反例与对照同批编译，排除环境噪音。
+
 ## 七、决策树：类型需要跨线程时怎么办
 
 ```mermaid

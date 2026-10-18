@@ -324,6 +324,17 @@ fn main() {
 }
 ```
 
+### ⚠️ 实测反例（rustc 1.99.1 实编译/实运行，2026-10-19）
+
+上方陷阱的本机量化证据（`rustc 1.99.1 (58cf8f9c3 2026-10-13)`，Windows x86_64）：
+
+| profile | 编译命令 | 运行结果 | 退出码 |
+|:---|:---|:---|:---|
+| debug 语义（默认） | `rustc --edition 2021 o1_overflow.rs` | panic：`attempt to add with overflow`（定位 `1:82`，即 `a + b` 表达式） | **101** |
+| release 语义 | `rustc --edition 2021 -O o1_overflow.rs` | 静默输出 **44**（回绕） | 0 |
+
+关键观测：同一份源码、同一编译器，仅 profile 不同 → 结局一个是 panic、一个是错误数据。`black_box` 阻常量折叠后溢出确实发生在运行时（诊断行号即加法表达式位置，而非编译期拒绝）。这就是「本地 `cargo test`（debug）全绿、CI release 构建出错误数值」这类事故的机制原型；工具链口径上 `cargo test` 默认 debug profile（`overflow-checks = true`，见 §1 cargo profiles），`--release` 关闭检查。工程防线：对边界算术用 `checked_/wrapping_/saturating_` 显式声明意图，并在 CI 同时跑 debug 与 release 两套测试。
+
 ## 🧭 思维导图（Mindmap）
 
 ```mermaid

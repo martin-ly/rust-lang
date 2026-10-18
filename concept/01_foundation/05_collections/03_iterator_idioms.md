@@ -489,6 +489,68 @@ fn main() {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）
+
+本节把 §7「反例与陷阱」的迭代器消耗语义升级为实编译证据（错误码均本机 `rustc 1.99.1 (58cf8f9c3 2026-10-13)` 得到）。
+
+### 实测 1：迭代器被 for 循环隐式 move（E0382 + desugar 注记）
+
+```rust,compile_fail
+fn main() { let v = vec![1,2,3]; let it = v.iter(); for x in it {} for x in it {} }
+```
+
+```text
+error[E0382]: use of moved value: `it`
+   |                                      `it` moved due to this implicit call to `.into_iter()`
+   | move occurs because `it` has type `std::slice::Iter<'_, i32>`, which does not implement the `Copy` trait
+note: the `for` loop is desugared into a call to `std::iter::IntoIterator::into_iter`, which takes ownership of the receiver `self`
+```
+
+**为什么**：编译器直接把「for = into_iter sugar」写进诊断——迭代器一次性消费不是约定而是类型事实（`into_iter(self)` 按值接收）。§7「二次遍历陷阱」的编译期坐实。
+
+### 实测 2：`next()` 需要 `mut` 绑定（E0596）
+
+```rust,compile_fail
+fn main() { let v = vec![1,2,3]; let it = v.iter(); println!("{:?}", it.next()); for x in it { println!("{}", x); } }
+```
+
+```text
+error[E0596]: cannot borrow `it` as mutable, as it is not declared as mutable
+help: consider changing this to be mutable
+  | let mut it = v.iter();
+```
+
+**为什么**：`next(&mut self)` 是 `&mut` 接收——状态化推进在类型层可见。修正后可运行：`for` 从 `next()` 停下的位置继续（游标共享），这是「手工驱动 + 循环驱动混用」的正确姿势。
+
+### 实测 3：`collect()` 目标类型不可推断（E0283）
+
+```rust,compile_fail
+fn main() { let v = vec![1,2,3]; let c: _ = v.iter().map(|x| x*2).collect(); }
+```
+
+```text
+error[E0283]: type annotations needed
+   |                                                                   ^^^^^^^ cannot infer type of the type parameter `B` declared on the method `collect`
+   = note: the type must implement `FromIterator<i32>`
+```
+
+**为什么**：`collect` 的多目标性（Vec/HashMap/String…）由 `FromIterator` 反向选择，目标类型是推断链的**输入**而非输出。`_` 占位在 collect 处失败是设计使然，不是推断器缺陷。
+
+### 实测 4：`into_iter` 移走容器本身（E0382 ownership 注记）
+
+```rust,compile_fail
+fn main() { let v = vec![String::from("a")]; for s in v.into_iter() { drop(s); } println!("{}", v.len()); }
+```
+
+```text
+error[E0382]: borrow of moved value: `v`
+   | `v` moved due to this method call
+   | move occurs because `v` has type `Vec<String>`, which does not implement the `Copy` trait
+note: `std::iter::IntoIterator::into_iter` takes ownership of the receiver `self`, which moves `v`
+```
+
+**为什么**：`iter()` 借、`iter_mut()` 可变借、`into_iter()` 移动——三态在诊断注记里各自点名 receiver 语义，与 §1 三态表逐行对应。
+
 ## 九、思维导图
 
 ```mermaid
