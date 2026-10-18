@@ -7,9 +7,9 @@
 > **Bloom 层级**: L2-L3
 > **内容分级**: [综述级]
 > **权威来源**: 本文件为 `concept/` 权威页（Rust 1.99 稳定特性的 canonical 汇总；基于 2026-10-01 已发布的 1.99.0 stable 官方 release notes 与 Rust Blog 公告核对）。
-> **Rust 版本**: **1.99.0 stable**（2026-10-01 发布；branched from master 2026-08-14）
-> **最后更新**: 2026-10-12
-> **状态**: ✅ 已对齐 1.99.0 stable（官方 release notes 最终核对）
+> **Rust 版本**: **1.99.1 stable**（1.99.0 于 2026-10-01 发布，branched from master 2026-08-14；补丁版 1.99.1 于 2026-10-15 发布）
+> **最后更新**: 2026-10-19
+> **状态**: ✅ 已对齐 1.99.1 stable（官方 release notes 最终核对；补丁条目见文末「补丁线 1.99.1」）
 >
 > **权威来源**:
 >
@@ -357,3 +357,17 @@ edition 2024 或更新的 workspace 成员现在可以覆盖继承的 workspace 
 **状态**: ✅ internal · **来源**: [PR #158734](https://github.com/rust-lang/rust/pull/158734)
 
 rustc 后端升级到 LLVM 23。第三方报道基准显示平均编译 wall time 下降约 1.2%（两个月累计约 4.57% 提升，含其他优化）。不影响公共接口，但影响 codegen 质量与 `-Ctarget-cpu` 等选项的可用特性集。
+
+---
+
+## 8. 补丁线 1.99.1（2026-10-15）
+
+**状态**: ✅ patch release · **来源**: [Rust 1.99.1 Release Notes](https://releases.rs/docs/1.99.1/) · [Rust Release Notes](https://doc.rust-lang.org/stable/releases.html)
+
+| 条目 | 组件 | 说明 |
+|---|---|---|
+| 修复 UEFI 与 embedded targets 缺失符号 `wcslen` | library | 影响 no_std/UEFI 目标链接 |
+| 修复 x86_64 上 FFI `bool` 返回值误编译（miscompilation） | rustc | 1.99.0 codegen 回归；FFI 边界 bool  ABI 相关 |
+| macOS 上为 `libLLVM` 增加 rpath | rust-lld | 影响 macOS 链接流程 |
+
+> **升级建议**: 1.99.0 用户应升 1.99.1——其中 x86_64 FFI bool miscompilation 属正确性修复，与本库 [FFI 权威页](../../03_advanced/04_ffi/01_rust_ffi.md) 主题直接相关。本机工具链实测：rustc/cargo 1.99.1（2026-10-13 构建）。

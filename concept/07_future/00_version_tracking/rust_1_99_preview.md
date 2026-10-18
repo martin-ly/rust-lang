@@ -11,8 +11,8 @@
 > **内容分级**: [实验级]
 > **权威来源**: 本文件为 `concept/` 权威页（1.99+ **周期跟踪** canonical；1.99.0 stable 后滚动为 1.100+ 周期跟踪）。
 > **Canonical 分工**: 本页 = 周期跟踪（nightly 特性 / RFC 进展 / API 探测，随两周巡检滚动）；1.99.0 **稳定特性权威汇总** = [`rust_1_99_stabilized.md`](rust_1_99_stabilized.md)（已建立，2026-10-12）。
-> **跟踪版本**: nightly 1.101.0（beta 1.100.0；releases.rs 实测 2026-10-08：Stable 1.99.0 / Beta 1.100.0 / Nightly 1.101.0）
-> **预计稳定时间**: **1.100.0 = 2026-11-12**（releases.rs 实测：Beta 1.100.0，剩 35 天）；1.101.0 = 2026-12-24（nightly）
+> **跟踪版本**: nightly 1.101.0（beta 1.100.0-beta.7；releases.rs 实测 2026-10-19：Stable 1.99.1 / Beta 1.100.0 / Nightly 1.101.0）
+> **预计稳定时间**: **1.100.0 = 2026-11-12**（releases.rs 实测 2026-10-19：Beta 1.100.0，剩 26 天）；1.101.0 = 2026-12-24（nightly）
 > **当前阶段**: 🧪 Nightly 实验性 / 设计或 MCP 阶段
 > **Rust 属性标记**: `#[experimental]` `#[nightly_only]`
 > **状态**: 1.99.0 已于 2026-10-01 发布 stable（稳定特性汇总见 [`rust_1_99_stabilized.md`](rust_1_99_stabilized.md)）；本页滚动为 1.100+ 周期跟踪。特性集高度不确定，稳定时间和具体内容以官方发布为准

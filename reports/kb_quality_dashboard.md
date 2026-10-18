@@ -1,6 +1,6 @@
 # 知识体系质量仪表盘 (KB Quality Dashboard)
 
-> 生成时间: 2026-10-13T20:17:03.391897+00:00
+> 生成时间: 2026-10-18T17:24:11.694468+00:00
 > 扫描文件数: 793
 
 ## 全局指标
@@ -12,7 +12,7 @@
 | 总反命题 | 1555 | ≥40 | ✅ |
 | 总 Mermaid 图 | 1572 | ≥50 | ✅ |
 | 编译验证代码块 | 7945 | ≥150 | ✅ |
-| 定理矩阵总行 | 31728 | — | — |
+| 定理矩阵总行 | 31732 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
 | docs/content/knowledge 死链数量 | 0 | 0 | ✅ |
 | 反向推理 (⟸) | 361 | ≥50 | ✅ |
@@ -1349,7 +1349,7 @@
 | G:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_98_preview.md | L7 | 1191 | 0 | 0 | 0 | 0 | 2 | 22 | 0 | ❌ | ✅ | ✅ | 专家 | 实验级 |
 | G:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_98_stabilized.md | L7 | 1086 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | ❌ | ✅ | ✅ | 专家 | 综述级 |
 | G:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_99_preview.md | L7 | 358 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | ❌ | ✅ | ✅ | 专家 | 实验级 |
-| G:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_99_stabilized.md | L7 | 360 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 专家 | 综述级 |
+| G:\_src\rust-lang\concept\07_future\00_version_tracking\rust_1_99_stabilized.md | L7 | 374 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 专家 | 综述级 |
 | G:\_src\rust-lang\concept\07_future\01_edition_roadmap\01_rust_edition_preview.md | L7 | 182 | 0 | 0 | 0 | 0 | 2 | 5 | 0 | ❌ | ✅ | ✅ | 进阶 | 研究者级 |
 | G:\_src\rust-lang\concept\07_future\01_edition_roadmap\02_edition_guide.md | L7 | 1115 | 3 | 0 | 0 | 2 | 3 | 16 | 0 | ✅ | ✅ | ✅ | 专家 | 综述级 |
 | G:\_src\rust-lang\concept\07_future\01_edition_roadmap\03_rust_edition_guide.md | L7 | 20 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | ❌ | ✅ | ✅ | 研究者 | 研究者级 |
