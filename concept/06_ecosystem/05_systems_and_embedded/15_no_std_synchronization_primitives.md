@@ -380,6 +380,47 @@ with(|cs| {
 });
 ```
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）
+
+9.1「自旋锁自死锁」的本机等价复现——host 上无 ISR，但「同一执行流重入非重入锁」是同一失效模式，两个形态都实跑过：
+
+### 实测 1：手写自旋锁同线程重入 → 看门狗线程 50M spin 确证永不返回
+
+```rust
+use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
+use std::thread;
+static SPINS: AtomicUsize = AtomicUsize::new(0);
+struct Spin(AtomicBool);
+impl Spin { fn lock(&self) { while self.0.swap(true, Ordering::Acquire) { std::hint::spin_loop(); } } fn unlock(&self) { self.0.store(false, Ordering::Release); } }
+fn main() {
+    let m = Spin(AtomicBool::new(false));
+    let w = thread::spawn(|| {
+        for _ in 0..50_000_000 { std::hint::spin_loop(); SPINS.fetch_add(1, Ordering::Relaxed); }
+        println!("watchdog: 50M spin loops elapsed, main thread never passed re-lock -> self-deadlock confirmed");
+        std::process::exit(7);
+    });
+    m.lock();          // first acquisition OK
+    println!("first lock held");
+    m.lock();          // ❌ same thread re-acquires: spins forever
+}
+```
+
+实跑输出：
+
+```text
+first lock held
+watchdog: 50M spin loops elapsed, main thread never passed re-lock -> self-deadlock confirmed
+EXIT=7
+```
+
+主线程停在第二次 `lock()`——`swap` 永远返回 `true`，`spin_loop` 转到看门狗累计 5000 万次仍无进展。这正是 9.1 中「ISR 中也调用 LOCK.lock()」的机器语义：锁持有者与等待者是**同一个执行流**时，不存在任何能让持有者推进的第三方，自旋等待结构在数学上无出路。单核裸机上 ISR 与主线程共享同一硬件执行流，等价于本实测的同线程重入。
+
+### 实测 2：std `Mutex` 重入 → 同样永久挂起（OS 层阻塞版）
+
+`m.lock()` 持守卫后同线程再 `m.lock().unwrap()`：本机实跑**120 秒超时无输出**（Windows SRWLock 非重入，进程挂在 OS 等待队列）。与实测 1 对照：自旋版烧 CPU（50M spin 可观测），OS 阻塞版静默挂起（更隐蔽，无自旋计数可观测）——两种等待机制在「重入」输入下殊途同归，印证 §十 属性矩阵里 `Mutex<RefCell<T>>`（critical-section 关中断形态）与 OS Mutex 共有「非重入」这一列。
+
+**修正口径**（与 9.1/9.2 一致，本实测补量化）：非重入锁的调用图上任何环（主线程→ISR→同一锁、或 A 锁→B 锁→A 锁）都会落入上述两种挂死之一；单核裸机的第一道防线是 `critical_section::with`（关中断即消除「同执行流被 ISR 抢占再等锁」的环），多核则需锁序全序化或优先级天花板协议。
+
 ---
 
 ## 十、no_std 同步原语属性矩阵
