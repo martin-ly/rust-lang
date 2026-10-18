@@ -288,6 +288,27 @@ let shared = Arc::new(Mutex::new(HashMap::new()));
 
 OTP 重启把 actor 状态重置为初值；若崩溃前 actor 已把**不一致的状态通过消息扩散**出去，重启本身无法撤回 ⟹ 监督保证的是进程级恢复，不是系统级一致性（那是 [线性化](02_linearizability_and_consistency.md) 或共识协议的任务）。
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）：Rust「actor 等价物」的边界由 Send 硬划
+
+把 channel 当 actor 邮箱、把非 Send 的 `Rc` 当消息发进跨线程 actor——编译期直接硬拒：
+
+```rust,compile_fail
+use std::rc::Rc;
+use std::sync::mpsc;
+fn main() {
+    let (tx, rx) = mpsc::channel::<Rc<i32>>();
+    let h = std::thread::spawn(move || { let m = rx.recv().unwrap(); println!("{}", *m); });
+    tx.send(Rc::new(7)).unwrap();
+    h.join().unwrap();
+}
+```
+
+```text
+error[E0277]: `Rc<i32>` cannot be sent between threads safely
+```
+
+这正对应本页「无共享状态 ⟹ 无数据竞争」定理（T-AC-01）在 Rust 里的形态：actor 模型要求消息传递取代共享，而 Rust 把「消息必须可跨执行流转移」形式化为 `Send` bound——`Rc`（非原子引用计数，本质是共享可变协议）作为消息即破坏该前提，编译器替你守住模型不变量，而不是等运行时信箱语义去发现。换 `Arc<i32>` 即通过（原子计数，转移合法）。对照 Erlang/Elixir actor：那里的消息复制是运行时语义，Rust 的等价保证前移到类型层；两个方向的边界（合法消息用 `Arc`/owned 值、非法消息 E0277）构成 Actor 语义在 Rust 的完整实测口径。
+
 ---
 
 ## 八、定理链与相关概念

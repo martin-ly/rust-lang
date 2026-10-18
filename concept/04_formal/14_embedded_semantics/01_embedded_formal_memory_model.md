@@ -311,6 +311,24 @@ unsafe {
 start_dma_transfer(unsafe { DMA_BUF.as_ptr() });
 ```
 
+## ⚠️ 实测反例（rustc 1.99.1 + `--emit asm` 直读，2026-10-19）：8.1 的「普通读可被优化掉」本机汇编坐实
+
+8.1/8.2 的 `rust,ignore` 断言已在 x86_64 宿主上用 `-O --crate-type lib --emit asm` 直接读生成汇编转正（与 canonical 页 [41_embedded_hal_and_mmio 实测反节](../../06_ecosystem/05_systems_and_embedded/41_embedded_hal_and_mmio.md) 同一实验族，此处摘录结论口径）：
+
+```rust
+#![allow(dead_code)]
+pub fn poll_plain(flag: *const u32) -> bool {
+    while unsafe { *flag } == 0 {}
+    true
+}
+pub fn poll_volatile(flag: *const u32) -> bool {
+    while unsafe { core::ptr::read_volatile(flag) } == 0 {}
+    true
+}
+```
+
+`-O` 生成汇编中 `poll_plain` 的循环体只做了**一次** load+compare，随后退化为 `jmp` 自环——编译器合法假设非 volatile 内存无人改写，轮询被整体消灭；`poll_volatile` 则每圈都保留 load+compare。「DMA 前不 clean cache、寄存器轮询用普通读」在这类语义下不是「可能出错」而是**语义上必然失去重复访问**，因为重复访问本身被合法优化掉了。形式口径对应本页主张：Device/Strongly-ordered 内存区域的正确性依赖 volatile 语义 + fence，Rust 内存模型（Relaxed/SeqCst 层级）只约束 Rust 可见的抽象机操作，MMIO 区域的设备侧行为必须靠 `read_volatile`/`write_volatile` 显式进入语义——这层边界没有任何编译期检查替你兜底（本页 8.x 表格的每行都是这个缺口的实例）。
+
 ---
 
 ## 九、相关概念

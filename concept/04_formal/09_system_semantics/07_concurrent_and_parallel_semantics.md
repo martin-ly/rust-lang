@@ -200,6 +200,16 @@ fn main() {
 
 建议先掌握 [L3 并发编程](../../03_advanced/00_concurrency/01_concurrency.md) 中的 `Mutex`、`Arc`、`channel`，再读本页理解其形式基础；随后学习 [L4 π 演算](02_pi_calculus_for_rust.md) 与 [L4 Actor 语义](01_actor_model_semantics.md) 的进程代数表达。
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行 + Miri，2026-10-19）：「并发」与「并行」混淆的代价
+
+本页核心区分——concurrency（逻辑结构，可单执行流交错）vs parallelism（多个执行流同时推进）——的反例本机坐实。把「并行执行流」直接压在未同步共享状态上，4 线程 × 100,000 次 `static mut COUNT += 1` 实跑得 `COUNT=130306` / `135107`（期望 400000）：随机丢更新，且两次运行结果不同。Miri 给出形式判定：
+
+```text
+error: Undefined Behavior: Data race detected between (1) non-atomic write on thread `unnamed-1` and (2) non-atomic read on thread `unnamed-2` at alloc1
+```
+
+同一逻辑改成 `AtomicUsize::fetch_add(1, SeqCst)` 后 `COUNT=400000` 精确——并行合法化的前提是每个操作有原子生效点。教训对应本页定义：数据竞争不是「并发设计」问题而是「并行执行流 + 无协议共享」问题；`Send`/`Sync` 与原子类型是把并行性约束回逻辑结构的机制。edition 2024 起 `static mut` 引用直接 `error: creating a shared reference to mutable static` 硬拒，语言层正在封堵这条混淆入口。
+
 ---
 
 ## 权威来源索引

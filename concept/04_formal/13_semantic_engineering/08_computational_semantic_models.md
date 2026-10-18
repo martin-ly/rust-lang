@@ -524,6 +524,32 @@ fn double_once(v: i32) -> i32 { v + v }
 
 Rust 的**所有权与效应**（panic、I/O、移动语义）使程序等价比纯 λ 演算更精细。
 
+### 实测反例（rustc 1.99.1 实编译，2026-10-19）：反例 4 的 E0382 坐实
+
+反例 4 的 `rust,ignore` 用例本机实编译转正——`β` 等价假设「函数可任意重放」，Rust 的 `FnOnce` 移动消费直接拒绝：
+
+```rust,compile_fail
+fn call_twice(f: impl FnOnce() -> i32) -> i32 { f() + f() }
+fn main() { let v = 2; println!("{}", call_twice(|| v + v)); }
+```
+
+```text
+error[E0382]: use of moved value: `f`
+  value used here after move
+```
+
+λ 演算里 `(λx. x + x) 2 ≡ 2 + 2` 依赖「λ 项可复制」这一免费假设；Rust 把「可复制性」变成显式类型信息（`Fn` 可重复调用、`FnOnce` 消费一次），复制不成立时程序**不通过编译**而非静默产生不同行为。对照 `fn double_once(v: i32) -> i32 { v + v }`（`i32: Copy`）可编译——等价的成立域被类型系统重新划定：β 等价在 Rust 只在 `Copy`/`Clone` 边界内安全搬迁。另配运行时侧实测（同页反例 1 方向的 shape-invariant  analogue）：trait 承诺「约定」不承诺「谓词」——
+
+```rust
+trait PositiveShape { fn value(&self) -> i32; } // 语义约定: value()>0，类型不携带
+struct Sneaky(i32);
+impl PositiveShape for Sneaky { fn value(&self) -> i32 { self.0 } }
+fn consume(p: &dyn PositiveShape) { assert!(p.value() > 0, "shape invariant violated at runtime"); }
+fn main() { consume(&Sneaky(-1)); }
+```
+
+实跑：`panicked at ... shape invariant violated at runtime`——trait 是名义形状契约，谓词违约只在运行时暴露；形式语义层（SHACL/精化/契约）与类型层的这一缝隙即本页「语义工程」存在的理由。
+
 ---
 
 ## 九、国际权威来源

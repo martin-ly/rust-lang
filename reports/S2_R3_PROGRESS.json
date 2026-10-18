@@ -144,7 +144,7 @@
   },
   {
    "batch": 12,
-   "commit": null,
+   "commit": "1463bb56c",
    "pages": [
     "concept/05_comparative/01_systems_languages/07_rust_vs_ada_spark.md",
     "concept/05_comparative/01_systems_languages/08_rust_vs_d.md",
@@ -157,6 +157,22 @@
     "concept/05_comparative/05_idioms_patterns_architecture/04_architecture/06_event_bus.md"
    ],
    "evidence": "ABBA死锁EXIT124看门狗 + E0502读写别名x2 + E0382 move + Bus-Sub Rc环DROPS=0 + fold溢出101定位 + future惰性单poll + E0597跨await借用局部值 + recv_timeout孤儿响应 + send closed payload返还 + rustc_contracts保留字+E0433 nightly实测"
+  },
+  {
+   "batch": 13,
+   "pages": [
+    "04_formal/07_concurrency_semantics/02_linearizability_and_consistency.md",
+    "04_formal/07_concurrency_semantics/03_actor_semantics.md",
+    "04_formal/07_concurrency_semantics/06_distributed_consensus_theory.md",
+    "04_formal/09_system_semantics/01_actor_model_semantics.md",
+    "04_formal/09_system_semantics/07_concurrent_and_parallel_semantics.md",
+    "04_formal/11_computational_models/15_refinement_types_and_flux.md",
+    "04_formal/13_semantic_engineering/06_ai_ontology_and_rust_semantics.md",
+    "04_formal/13_semantic_engineering/07_kg_owl_shacl_semantics.md",
+    "04_formal/13_semantic_engineering/08_computational_semantic_models.md",
+    "04_formal/14_embedded_semantics/01_embedded_formal_memory_model.md"
+   ],
+   "evidence": "非原子计数130306/135107丢更新+Miri data race+SeqCst 400000精确 + Edition2024 static mut硬拒 + Rc跨线程channel E0277 + 脑裂divergence/quorum收敛 + 负面积-15 + 别名无量纲区分 + FnOnce twice E0382 + PositiveShape谓词穿透 + MMIO poll_plain jmp自环汇编直读"
   }
  ],
  "version_baseline": {
@@ -202,5 +218,14 @@
    "04_formal": 10
   },
   "note": "tracked口径微调(排除规则变化530->600): 05_comparative 9页+07_future 2页清零; 04_formal 出现10页新露出(07_concurrency_semantics/09_system_semantics/13_semantic_engineering 等语义工程子组, fresh3口径曾覆盖4页); 权威文件 s2_gaps_fresh4.json"
+ },
+ "rescan_2026_10_19_post_batch13": {
+  "strict_gaps": 107,
+  "tracked": 600,
+  "by_group": {
+   "06_ecosystem": 96,
+   "07_future": 11
+  },
+  "note": "04_formal 组清零(10页落地); s2_gaps_fresh5.json 权威"
  }
 }

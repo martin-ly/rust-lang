@@ -539,6 +539,21 @@ ex:assuredBy a owl:ObjectProperty ;
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）：本体区分若无语言层承载，Rust 侧只有名义类型才成立
+
+本页主张「KG 本体要落到 Rust 语义才有工程价值」。其反例本机坐实：本体上的两个不同概念（`Meters`/`Seconds`）若只以 Rust `type` 别名落地，语言层没有任何区分——
+
+```rust
+type Meters = i64;
+type Seconds = i64;
+fn distance_traveled(v: Meters) -> Meters { v * 2 }
+fn main() { let t: Seconds = 5; println!("{}", distance_traveled(t)); } // 时间当速度：零警告
+```
+
+实跑输出 `10`，EXIT=0。结论：KG 的 `skos:broader`/disjointness 断言若不在 Rust 侧用 newtype/enum/泛型 bound 重建，本体语义在代码边界即蒸发；同一实测量另见 canonical：[15_refinement_types_and_flux §实测反例](../11_computational_models/15_refinement_types_and_flux.md)。
+
+---
+
 ## 十六、KG v3 刷新流程与国际对齐
 
 ### 16.1 标准刷新管线

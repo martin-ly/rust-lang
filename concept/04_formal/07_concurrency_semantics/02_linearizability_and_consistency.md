@@ -301,6 +301,31 @@ fn pop_wrong(&self) -> Option<T> {
 
 教学骨架省略了 ABA 问题（head 被 pop 又 push 回同一地址时 CAS 误判）与安全内存回收（pop 后 `Box::from_raw` 时他线程仍可能持有该指针）。工程实现必须用 `crossbeam-epoch` 的世代回收或 tagged pointer——这属于实现细节，不改变线性化点的位置，但决定代码的**内存安全（Memory Safety）性**。
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行 + Miri 实跑，2026-10-19）：非原子计数破坏线性化点
+
+「线性化 = 每个操作有单一原子生效点」的最直接反例本机坐实。4 线程各自对共享计数器做 100,000 次 `+= 1`：
+
+```rust
+use std::thread;
+static mut COUNT: usize = 0;
+fn main() {
+    let mut hs = vec![];
+    for _ in 0..4 {
+        hs.push(thread::spawn(|| { for _ in 0..100_000 { unsafe { COUNT += 1; } } }));
+    }
+    for h in hs { h.join().unwrap(); }
+    unsafe { println!("COUNT={COUNT} (expected 400000)"); }
+}
+```
+
+两次实跑得 `COUNT=130306`、`COUNT=135107`（期望 400000）——丢更新随机且巨大。`+= 1` 不是单个生效点：读-改-写三步之间存在他线程插入窗口，操作根本不线性化。Miri 对同一程序给出形式判定：
+
+```text
+error: Undefined Behavior: Data race detected between (1) non-atomic write on thread `unnamed-1` and (2) non-atomic read on thread `unnamed-2` at alloc1
+```
+
+替换为 `AtomicUsize::fetch_add(1, Ordering::SeqCst)` 后实跑 `COUNT=400000` 精确命中——每次 fetch_add 有单一 SeqCst 生效点，40 万条操作可排成一台合法串行机器。另注：该 `static mut` 写法在 **edition 2024** 已直接硬拒（`error: creating a shared reference to mutable static`），语言演化正在把这类非线性化写法从「UB 但能编译」推向「不能编译」。
+
 ---
 
 ## 七、定理链与相关概念

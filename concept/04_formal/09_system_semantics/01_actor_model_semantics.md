@@ -61,6 +61,29 @@ fn main() {
 
 **判定依据**：在 Actor 模型中，状态只能通过消息异步修改；任何直接共享可变状态的实现都退化为共享内存并发，丢失了 Actor 的故障隔离与位置透明性保证。
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）
+
+本页为索引页，完整实测见 canonical：[07_concurrency_semantics/03_actor_semantics.md §实测反例](../07_concurrency_semantics/03_actor_semantics.md)。
+
+摘要口径：把非 `Send` 的 `Rc<i32>` 作为跨线程 channel 消息，rustc 1.99.1 硬拒——
+
+```rust,compile_fail
+use std::rc::Rc;
+use std::sync::mpsc;
+fn main() {
+    let (tx, rx) = mpsc::channel::<Rc<i32>>();
+    let h = std::thread::spawn(move || { let m = rx.recv().unwrap(); println!("{}", *m); });
+    tx.send(Rc::new(7)).unwrap();
+    h.join().unwrap();
+}
+```
+
+```text
+error[E0277]: `Rc<i32>` cannot be sent between threads safely
+```
+
+即上节「退化为共享内存并发」的判定在 Rust 中有类型层对应物：`Send` bound 使「不可跨执行流转移的共享协议」（非原子引用计数）无法伪装成 actor 消息；换 `Arc` 或 owned 值即合法。上节的 `Arc<Mutex<T>>` 错误示范本身可编译（共享内存路径语言不禁止），其「不是 Actor」是语义判定而非编译判定——这正是本页与 canonical 页共同强调的边界：Rust 只保证消息路径的类型正确性，Actor 封装边界仍需架构纪律。
+
 ---
 
 ## 🧭 思维导图（Mindmap）

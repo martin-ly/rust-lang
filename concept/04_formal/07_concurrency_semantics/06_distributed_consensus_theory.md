@@ -779,6 +779,30 @@ Paxos 论文对此完全诚实：Synod 只证安全性。活性来自协议外�
 共享内存世界的平行理论：Loui & Abu-Amara 1987 证明异步读写寄存器 + 单崩溃下共识不可解；Herlihy 1991 的**共识数**（consensus number）把同步原语按「能解决几进程共识」分层——读写寄存器为 1，test-and-set/队列等为 2，compare-and-swap 为 ∞。
 这条线与 [线性化页](./02_linearizability_and_consistency.md) 的无锁结构谱系直接衔接，构成「单机并发」与「分布式共识」在不可能性层面的镜像。
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）：无 quorum 即脑裂——共识是协议不变量而非代码巧合
+
+本页不可能性结论的宿主层等价演示：两个节点各自自认 leader，同一 term 提交不同值——无任何检查时程序「正常运行」，分歧静默进入日志：
+
+```rust
+fn main() {
+    let mut logs = vec![vec![], vec![]];
+    logs[0].push("A@term1"); logs[1].push("B@term1"); // 分区：同一 term 不同值
+    println!("partitioned commit: {:?} vs {:?} -> divergence", logs[0], logs[1]);
+    let mut acks = 0; let chosen = "A@term2";
+    for n in logs.iter_mut() { if acks < 2 { n.push(chosen); acks += 1; } }
+    println!("quorum(2/2) at term2: {:?} -> converged, acks={acks}", logs);
+}
+```
+
+实跑（EXIT=0）：
+
+```text
+partitioned commit: ["A@term1"] vs ["B@term1"] -> divergence
+quorum(2/2) at term2: [["A@term1", "A@term2"], ["B@term1", "A@term2"]] -> converged, acks=2
+```
+
+关键观察：脑裂阶段**没有任何错误**——语言/类型系统对「谁有权提交」零表态，分歧只能由协议层（多数派 ack 后新 term 覆盖旧 term）收敛。这正是本页 FLP/共识数理论的反向印证：共识不是更强的类型能送你的东西（它跨进程、跨崩溃域，超出单机类型系统作用域），只能作为显式协议存在；Rust 的价值在于把协议写对后的状态机部分做得可验证（对照本机 `Rc` 线程边界 E0277——进程内的东西类型系统管，跨崩溃域的必须靠 quorum）。
+
 ---
 
 ## 八、来源与延伸阅读

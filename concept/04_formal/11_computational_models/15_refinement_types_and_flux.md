@@ -157,6 +157,31 @@ fn main() {
 
 Flux 最适合 **数值密集型、数组操作密集** 的 Rust 代码，如系统编程、嵌入式驱动、密码学原语。
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）：本机无 Flux 时，「精化缺失」的代价直接可测
+
+本机未装 Flux 验证器（诚实口径：以下不是 Flux 输出，而是「同一代码在没有精化类型层的 Rust 基线上的真实行为」，即 Flux 声称要在编译期消灭的那类 bug 的实测定量）。
+
+**负宽度矩形**（精化类型 `w: {i32 | i32::MIN < i32 && i32 <= i32::MAX/i32}` 要拦的对象）：
+
+```rust
+struct Rect { w: i32, h: i32 }
+impl Rect { fn area(&self) -> i32 { self.w * self.h } }
+fn main() { let r = Rect { w: -5, h: 3 }; println!("area={}", r.area()); }
+```
+
+实跑：`area=-15`，EXIT=0——物理上不可能为负的几何量带着负值静默流向下游；类型系统只看到 `i32`，「宽度必须为正」这条精化不存在于任何编译期产物中。
+
+**类型别名不是名义类型**（精化/单位系统的另一半需求）：
+
+```rust
+type Meters = i64;
+type Seconds = i64;
+fn distance_traveled(v: Meters) -> Meters { v * 2 }
+fn main() { let t: Seconds = 5; println!("{}", distance_traveled(t)); } // 时间当速度传入，零警告
+```
+
+实跑输出 `10`，EXIT=0：`Seconds` 与 `Meters` 是同一类型的两个名字，编译器对量纲混淆完全无感——这正是 Flux/refinement-types 主张「谓词附着在类型上」而别名体系给不了的区分（Rust 侧替代只有 newtype 包装 + 手写检查，且谓词仍不进编译期）。
+
 ---
 
 ## 7. 与其他形式化工具对比

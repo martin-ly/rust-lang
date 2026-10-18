@@ -393,6 +393,22 @@ mindmap
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）：SHACL 式「形状约束」在 Rust 类型层的等价物只是名义形状，谓词会静默穿透
+
+本页论证 pySHACL 对 KG 导出执行 `sh:minInclusive` 类**谓词级**验证。对照 Rust 类型层：trait 只能声明形状（有哪些方法），不能声明谓词（值域），违约只能运行时暴露——
+
+```rust
+trait PositiveShape { fn value(&self) -> i32; } // 语义约定: value()>0，类型不携带该约束
+struct Sneaky(i32);
+impl PositiveShape for Sneaky { fn value(&self) -> i32 { self.0 } } // -1 照样 impl 成功
+fn consume(p: &dyn PositiveShape) { assert!(p.value() > 0, "shape invariant violated at runtime"); }
+fn main() { consume(&Sneaky(-1)); }
+```
+
+实跑：`thread 'main' panicked at ...: shape invariant violated at runtime`（assert 崩溃）。编译层对「违反本体形状约定的实现」**全盘接受**——`impl` 检查的只有方法签名矩阵，与 SHACL `NodeShape`+`sh:Severity` 检查的谓词矩阵不是同一层。这正是本项目 KG 线要跑 pySHACL `--strict` 质量门的原因：谓词级违约（缺 `definition`、范围越界、mutex 冲突）在类型层不可见，必须在 RDF/SHACL 导出层外挂验证。同一实测的 λ 等价版本见 canonical：[08_computational_semantic_models §实测反例](08_computational_semantic_models.md)。
+
+---
+
 ## 九、国际权威来源
 
 ### 标准与规范
