@@ -876,6 +876,48 @@ let state = if active_low ^ on { PinState::Low } else { PinState::High };
 pin.set_state(state).unwrap();
 ```
 
+## ⚠️ 实测反例（rustc 1.99.1 `-O` 实编译 + 本机 x86-64 汇编直读，2026-10-19）
+
+反例 1「非 volatile MMIO 被优化」的直接机器证据——host `x86_64-pc-windows-msvc` 上 `rustc --edition 2021 -O --emit asm` 两个同构轮询函数的实际生成代码：
+
+```rust
+#[no_mangle]
+pub unsafe extern "C" fn poll_plain(p: *const u32) -> bool {
+    while *p == 0 {} // ❌ 非 volatile MMIO 轮询
+    true
+}
+#[no_mangle]
+pub unsafe extern "C" fn poll_volatile(p: *const u32) -> bool {
+    while core::ptr::read_volatile(p) == 0 {} // ✅ volatile MMIO 轮询
+    true
+}
+```
+
+`poll_plain` 实际汇编：
+
+```asm
+poll_plain:
+    cmpl    $0, (%rcx)      ; 唯一一次 load + compare
+    je      .LBB0_1
+    movb    $1, %al
+    retq
+.LBB0_1:
+    jmp     .LBB0_1         ; 死循环里再也没有 load！
+```
+
+`poll_volatile` 实际汇编：
+
+```asm
+poll_volatile:
+.LBB1_1:
+    cmpl    $0, (%rcx)      ; 每圈重新读寄存器
+    je      .LBB1_1
+    movb    $1, %al
+    retq
+```
+
+差别在机器层面可视化：非 volatile 版把 load **提升出循环**（hoisting），进入等待循环后外设寄存器哪怕翻转 100 万次，CPU 也不会再看它一眼——`while *p == 0 {}` 退化为无条件 `jmp` 自环，等待外设就绪的循环永远不会因外设就绪而退出。volatile 版每圈都发 `cmpl $0, (%rcx)`，真正观测内存。这就是「MMIO 必须 volatile」不是风格建议而是正确性硬要求的原因：LLVM 依 C/C++-式 no-alias 假设有权证明「循环内无其他写者则内存值不变」，而 MMIO 的写者恰恰是**不在 Rust 别名模型里的硬件**。反例 1 的 `*GPIOA_ODR |= 1` 写侧同理可被合并/删除；`read_volatile`/`write_volatile` 与 PAC（其 `read()`/`modify()` 内部即 volatile 访问）是仅有的两道语言级保证。
+
 ## 12. 决策树
 
 ```mermaid

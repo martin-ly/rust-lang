@@ -97,6 +97,13 @@
     "concept/06_ecosystem/05_systems_and_embedded/15_no_std_synchronization_primitives.md"
    ],
    "evidence": "spinlock reentrant watchdog 50M spin EXIT7 + std Mutex reentrant 120s hang (SRWLock non-reentrant)"
+  },
+  {
+   "batch": 9,
+   "pages": [
+    "concept/06_ecosystem/05_systems_and_embedded/41_embedded_hal_and_mmio.md"
+   ],
+   "evidence": "-O --emit asm direct read: poll_plain load hoisted out of loop (jmp self-loop, zero loads) vs poll_volatile per-iteration cmpl"
   }
  ],
  "version_baseline": {
