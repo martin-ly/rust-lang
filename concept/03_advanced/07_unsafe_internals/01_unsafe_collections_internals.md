@@ -432,7 +432,33 @@ graph TD
 | 共享可变数据 | `Arc<Mutex<T>>` | `Arc<RefCell<T>>` 跨线程 | `RefCell` 不是 `Sync` |
 | 单线程共享 | `Rc<RefCell<T>>` | `Arc<Mutex<T>>` | 避免原子操作（Atomic Operations）开销 |
 
----
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）
+
+上表「单线程共享 `Rc<RefCell<T>>`」方案的经典失效模式——**引用计数环泄漏**——本机实跑锚点：
+
+```rust
+use std::rc::Rc;
+use std::cell::RefCell;
+use std::sync::atomic::{AtomicUsize, Ordering};
+static DROPS: AtomicUsize = AtomicUsize::new(0);
+struct Mx(RefCell<Option<Rc<Mx>>>);
+impl Drop for Mx { fn drop(&mut self) { DROPS.fetch_add(1, Ordering::SeqCst); println!("Mx dropped"); } }
+fn main() {
+    let a = Rc::new(Mx(RefCell::new(None)));
+    let b = Rc::new(Mx(RefCell::new(Some(Rc::clone(&a)))));
+    *a.0.borrow_mut() = Some(Rc::clone(&b)); // a <-> b reference cycle
+    drop(a); drop(b); // release all external handles
+    println!("drops observed after cycle release: {}", DROPS.load(Ordering::SeqCst)); // ❌ 0: memory leaked
+}
+```
+
+实运行输出（编译零警告，EXIT=0）：
+
+```text
+drops observed after cycle release: 0
+```
+
+外部句柄全部 drop 后 **两个 `Mx` 的 Drop 一次都没执行**——`a` 持 `Rc(b)`、`b` 持 `Rc(a)`，计数互锁成环，永远到不了 0。Rust 没有 GC 兜底：环泄漏是**静默的**（无 panic、无 warning、退出码 0）。这条边界正是本页 §7.2 辨析表的暗线——`Rc<RefCell<T>>` 适合「树形所有权 + 局部共享」，一旦数据图出现环就需要显式 `Weak` 破环（`Weak`  upgrade 失败返回 `None`，不阻碍析构），这也是 `Rc` 章节与 `Arc` 章节（weak 用于父指针/缓存）共同依赖的机制。
 
 ## 八、逆向推理链（Backward Reasoning）
 

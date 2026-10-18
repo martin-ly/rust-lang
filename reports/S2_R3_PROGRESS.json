@@ -51,6 +51,16 @@
     "concept/03_advanced/04_ffi/04_async_ffi_boundary.md"
    ],
    "evidence": "MutexGuard/Rc cross-await Send + future mid-flight drop + Miri waker Arc forget dangling + orphan thread EXIT0 + blocking poll 0.9s + FFI waker UAF retag"
+  },
+  {
+   "batch": 5,
+   "pages": [
+    "concept/03_advanced/03_proc_macros/02_proc_macro.md",
+    "concept/03_advanced/07_unsafe_internals/01_unsafe_collections_internals.md",
+    "concept/03_advanced/08_process_ipc/05_ipc_mechanisms.md",
+    "concept/03_advanced/08_process_ipc/09_process_testing_and_benchmarking.md"
+   ],
+   "evidence": "canonical stub pointer + Rc cycle leak drops=0 EXIT0 + recv-after-drop 101 vs 0 + float eq 101 left=0.30000000000000004"
   }
  ],
  "version_baseline": {

@@ -299,6 +299,15 @@ fn main() {
 
 mpsc 通道在所有发送端关闭后 `recv` 返回 `Err(RecvError)`，盲目 `unwrap` 会 panic；IPC 代码必须区分「暂时无数据」与「通道已关闭」。
 
+**实测锚点（rustc 1.99.1 实运行，2026-10-19）**：上述反例本机编译通过、实运行 panic，进程退出码 **101**：
+
+```text
+thread 'main' panicked at ip1_recv_after_drop.rs:5:30:
+called `Result::unwrap()` on an `Err` value: RecvError
+```
+
+修正版实运行输出 `channel closed`，退出码 **0**。「通道已关闭」与「暂无数据」在 `recv()` 返回类型上就是 `Err(RecvError)` vs 阻塞等待两种可判定状态，unwrap 把可判定状态塌缩成了 panic。
+
 **修正**：
 
 ```rust
