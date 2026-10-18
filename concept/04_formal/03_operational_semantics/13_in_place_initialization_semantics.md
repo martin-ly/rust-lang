@@ -217,6 +217,69 @@ fn build() -> impl Init<SelfReferential> { ... }
 
 ---
 
+## ⚠️ 实测反例（cargo +nightly miri 本机实跑，2026-10-19）
+
+本页 std 层反例（反例 1 与反例 2 的可本机复现核）以 `miri 0.1.0 (8006091eb7 2026-10-17)`，Windows x86_64 实跑取证；`pin-init` 本体需 nightly 外部 crate，本机未装，其形态用 std `MaybeUninit` 手写等价物复现（块均标 `ignore`，实测条件见块内注释）。
+
+### 实测 1（反例 1 坐实）：`assume_init_ref` 造 `&T` 于未初始化内存——UB 在使用点暴露，不在造引用点
+
+```rust,ignore
+// 实测条件：rustc 1.99.1 编译全绿；cargo +nightly miri run 实跑 exit 1 报 UB
+use std::mem::MaybeUninit;
+fn main() {
+    let x: MaybeUninit<i32> = MaybeUninit::uninit();
+    let r: &i32 = unsafe { x.assume_init_ref() }; // 造 &i32 于未初始化内存
+    println!("{}", r); // UB 经由读取暴露
+}
+```
+
+Miri 诊断逐字（截选）：
+
+```text
+error: Undefined Behavior: reading memory at alloc112[0x0..0x4],
+but memory is uninitialized at [0x0..0x4], and this operation requires initialized memory
+```
+
+量化点：诊断落点在 `core::fmt`（读取处）而非 `assume_init_ref` 调用处——Miri 当前的 noundef 违规在使用侧显影，而非引用构造侧。对形式化叙事的含义：`&T` 的「指向已初始化 T」是**类型层承诺 + 操作语义层执法**的组合——`assume_init_ref` 把执法义务转交给程序员，转交后借用检查器不再介入，只有 Miri/形式化模型能事后追惩。
+
+### 实测 2（反例 2 坐实）：部分初始化后 `assume_init`——UB 定位精确到失败字段路径
+
+用 std 手写「`field_a` 成功、`field_b` 失败后强行 `assume_init`」的泄漏/UB 核：
+
+```rust,ignore
+// 实测条件：rustc 1.99.1 编译全绿；cargo +nightly miri run 实跑 exit 1 报 UB
+use std::mem::MaybeUninit;
+struct Device { a: String, b: String }
+fn main() {
+    let mut slot = MaybeUninit::<Device>::uninit();
+    unsafe {
+        std::ptr::addr_of_mut!((*slot.as_mut_ptr()).a).write(String::from("acquired-resource"));
+        let err = true; // 模拟 field_b 初始化失败
+        if err {
+            let dev = slot.assume_init(); // b 从未初始化 → UB
+            println!("{:?}", dev.b);
+        }
+    }
+}
+```
+
+Miri 诊断逐字：
+
+```text
+error: Undefined Behavior: constructing invalid value of type Device:
+at .b.vec.buf.inner.cap.0, encountered uninitialized memory, but expected an integer
+11 |             let dev = slot.assume_init();
+   |                       ^^^^^^^^^^^^^^^^^^ Undefined Behavior occurred here
+```
+
+三点含义：① 诊断路径 `.b.vec.buf.inner.cap.0` 逐字段深入——MiniRust「每个类型有值不变量，`assume_init` 是逐字段递归校验」的机器呈现，不是笼统的「这段内存有问题」；② 该失败路径程序结构上同时欠两条债：UB（读未初始化 `b`，Miri 实锤）与泄漏（已初始化的 `a` 无 drop 路径；Miri 在 UB 处即中止，泄漏检查未执行到，属结构性推论而非本样本的直接报告）——这正是 §五 反例 2「失败后未回滚」的两笔账；③ 修正形态实测：手写 `PartialGuard`（`Drop` 里按「已初始化字段位图」回滚 `a`，失败经 `?` 早返、成功路径 `forget` 交还所有权）跑 Miri 干净通过（输出 `guard rollback: dropping field a` + `init result = true`，exit 0）——「drop guard + 已初始化位图」就是 pin-init 宏自动生成物的人工最小等价物，panicsafety 义务可被如此机械化履行。
+
+### 实测 3（对照：正确初始化序列全绿）
+
+同一 `Device` 按「全部字段写入 → `assume_init` → 正常 drop」执行时 Miri 全程无诊断——初始化不变量（§一）的正反两侧在本机各取一样本：UB 不是「unsafe 块」的属性，而是「不变量履行与否」的属性，这正是本页把 in-place init 当作形式化对象（而非 API 细节）的立论点。
+
+---
+
 ## 六、形式化来源对齐
 
 | 概念 | 来源 | 链接 |

@@ -330,11 +330,17 @@ impl BadSource {
 复刻 §5.2 的破实现（`wake_by_ref` 里 `Arc::from_raw` 后不 `forget`，函数尾自然 drop ⟹ 无配对的计数递减）：
 
 ```rust
+use std::sync::Arc;
+
+struct WakerData; // §5.2 示意类型
+
 fn wake_by_ref_broken(data: *const ()) {
     // ❌ UB pattern: reconstruct Arc, use it, let it DROP at end of function
     let arc = unsafe { Arc::from_raw(data as *const Arc<WakerData>) };
     println!("wake fired"); // arc dropped here: decrements WITHOUT forget()
 }
+
+fn main() { wake_by_ref_broken(std::ptr::null()); } // 演示编译形态；UB 实测见下方 Miri 诊断
 ```
 
 `cargo +nightly miri run` 诊断：

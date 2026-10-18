@@ -172,6 +172,78 @@ unsafe fn bad_ffi() -> *const i8 {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 + cargo-miri 本机实跑，2026-10-19）
+
+§5.2/§5.3 与 §3 的别名反例本机逐条获得 Miri 级证据（`rustc 1.99.1 (58cf8f9c3)` 编译全绿；UB 检测 `miri 0.1.0 (8006091eb7 2026-10-17)`，Windows x86_64；Tree Borrows 经 `MIRIFLAGS=-Zmiri-tree-borrows`）。
+
+### 实测 1（§5.2 坐实）：`assume_init` 读未初始化内存
+
+```rust,ignore
+// 实测条件：rustc 1.99.1 本身编译通过；UB 需 cargo +nightly miri run 才暴露（非宿主直编译失败样本）
+use std::mem::MaybeUninit;
+
+fn main() {
+    let x: MaybeUninit<i32> = MaybeUninit::uninit();
+    let _ = unsafe { x.assume_init() }; // 读取未初始化内存：UB
+}
+```
+
+Miri 诊断逐字：
+
+```text
+error: Undefined Behavior: constructing invalid value of type i32:
+encountered uninitialized memory, but expected an integer
+4 |     let _ = unsafe { x.assume_init() };
+  |                      ^^^^^^^^^^^^^^^ Undefined Behavior occurred here
+```
+
+MiniRust 视角（§2）的对应：`assume_init` 是「把 `Uninit` 视图强制提升为 `Init`」的操作语义越权——Miri 报的是**值层**错误（构造 `i32` 时撞上未初始化字节），不是别名层错误。
+
+### 实测 2（§5.3 坐实）：整数往返重建悬垂指针——provenance 直接失效
+
+```rust,ignore
+// 本机 rustc 1.99.1 编译全绿 + cargo +nightly miri run 实跑 UB（非 candidate 直编译样本）
+fn main() {
+    let v = vec![1, 2, 3];
+    let addr = v.as_ptr() as usize;
+    drop(v);
+    let ptr = addr as *const i32;
+    unsafe { let x = *ptr; println!("read back: {}", x); } // provenance 失效：UB
+}
+```
+
+Miri 诊断逐字：
+
+```text
+error: Undefined Behavior: memory access failed: attempting to access 4 bytes,
+but got 0x2096c[noalloc] which is a dangling pointer (it has no provenance)
+7 |     unsafe { let x = *ptr; println!("read back: {}", x); }
+  |                      ^^^^ Undefined Behavior occurred here
+```
+
+关键量化点：Miri 不需要「读到脏数据」才报错——`usize → *const i32` 重建的指针**连 provenance 都没有**（`noalloc`），第一次解引用即被拒。这坐实 §6 清单第 4 项：地址数值相同不代表指针合法，provenance 是指针的第二半身份。
+
+### 实测 3（§3 坐实）：父裸指针写、子 `&mut` 存活——两本别名账本各抓到不同错误
+
+§3 反例本机实跑（rustc 编译全绿），默认 Stacked Borrows 与 `-Zmiri-tree-borrows` **双模式对照**：
+
+```rust,ignore
+// 本机 rustc 1.99.1 编译全绿 + Miri 两种别名模型均实跑报 UB
+fn main() {
+    let mut x = 0;
+    let r1 = &mut x;                      // tag t0
+    let raw = r1 as *mut i32;             // t0 的裸指针化身
+    let r2 = unsafe { &mut *raw };        // 子 tag t1
+    unsafe { *raw = 1; }                  // 通过父写，t1 仍存活
+    println!("read via r2: {}", *r2);
+}
+```
+
+- **Stacked Borrows（默认）**：在**读 `r2`** 处报 `trying to retag from <276> for SharedReadOnly permission at alloc111[0x0], but that tag does not exist in the borrow stack`，并给出两段因果链——`<276>` 由 `Unique` retag 创建（第 5 行），**被第 6 行的写访问无效化**。
+- **Tree Borrows（`-Zmiri-tree-borrows`）**：在同一读点报 `reborrow through <256> ... is forbidden`，诊断更贴 §3 的表述——tag `<256>` 状态 **Reserved → Disabled**，迁移原因正是「foreign write access at offsets [0x0..0.4]」（第 6 行父写），Disabled 态禁止一切子访问。
+
+两本账本在同一处 UB、两套叙事：SB 说「borrow stack 里 tag 已不存在」，TB 说「tag 权限状态被写操作降为 Disabled」——与 §3 「契约即 tag 权限状态」的形式化定义逐词对应。另一个对照价值：同一逻辑写成 safe 形态（`*r1 = 1;` 而 `r2` 借用未结束）被 rustc **E0506** 编译期直接拦截（本机实跑确认）；unsafe 裸指针形态编译全绿、只有 Miri 能抓——「借用检查器放弃守护之处，形式化模型接管守护」就是本页三个视角（Iris/MiniRust/TB）存在的工程理由。
+
 ## 6. 审查清单
 
 对任何包含 unsafe 的模块，按以下清单逐项确认：

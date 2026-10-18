@@ -225,6 +225,50 @@ Rust 1.97.0 将 `None` 的判别值改为 `-1`。LLVM 将其解释为大无符�
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实运行 + 官方事实源交叉核实，2026-10-19）
+
+### 实测 1（§5.3 触发面坐实）：`Option<Level>` niche 编码在当前 stable 仍是 `-1`——本机复现出与事故断言完全相同的数值
+
+复刻 1.97.0 事故的低层形态（tracing-core 的 `struct LevelFilter(Option<Level>)` niche 布局，`rustc 1.99.1 (58cf8f9c3)`，Windows x86_64；`transmute` 仅用于**观察**编码，崩溃本体不需要 unsafe）：
+
+```rust
+#[derive(Clone, Copy, PartialEq)]
+#[repr(usize)]
+enum Level { Error = 0, Warn = 1, Info = 2 }
+
+#[derive(Clone, Copy)]
+struct LevelFilter(Option<Level>);
+
+const OFF: LevelFilter = LevelFilter(None);
+
+fn main() {
+    let as_usize = unsafe { std::mem::transmute::<LevelFilter, usize>(OFF) };
+    println!("LevelFilter(None) niche bits = {} (as i64 = {})", as_usize, as_usize as i64);
+    println!("size_of::<Option<Level>>() = {}", std::mem::size_of::<Option<Level>>());
+    let on = LevelFilter(Some(Level::Info));
+    println!("LevelFilter(Some(Info)) bits = {}", unsafe { std::mem::transmute::<LevelFilter, usize>(on) });
+}
+```
+
+实运行输出（逐字）：
+
+```text
+LevelFilter(None) niche bits = 18446744073709551615 (as i64 = -1)
+size_of::<Option<Level>>() = 8
+LevelFilter(Some(Info)) bits = 2
+```
+
+三点量化含义：① 判别值 `-1`（即无符号 `2^64-1`）**在 1.99.1 仍是现行编码**——1.97.1 修复的是 LLVM fold 本身，`None → -1` 的 niche 策略保留，说明「poison 判别值」这个攻击面长期存在，防线只能在 IR 变换侧（`freeze`）；② `size_of == 8` 证明 niche 优化确实在用值域空洞编码 `None`，而非附加判别字节——这正是 select-of-load fold 能把判别值当无符号偏移用的前提；③ 本机读出的 `18446744073709551615` 与 Red Hat 跟踪单里 tracing-core 崩溃断言 `left: 5, right: 18446744073709551615` **数值逐位相同**——上游生态测试正是被这个编码变化打穿的（该 crate 假设 `None` 填「下一个未用值」的洞，这个假设从未被语言担保）。
+
+### 实测 2（事故事实链权威核实，2026-10-19 web 交叉核对）
+
+- rust-lang/rust **issue #159035**「segfault on Rust 1.97.0」（2026-07-09 立案）；1.97.1（2026-07-16）为 patch release，官方措辞 "fixes a miscompilation in an LLVM optimization"，且明示底层误编译"present since at least Rust 1.87"。
+- LLVM 侧修复为 llvm/llvm-project **PR #208683**「[SDAG] Freeze condition in select of load fold」（nikic）——修复手段恰是 §4 的 `freeze`：在 fold 前冻结 `cond`，使 poison 条件不再升级为解引用。本页 §4.2 的教科书机制与生产事故修复补丁在此直接对上。
+- 1.97.1 树内新增回归测试 `tests/ui/codegen/dont-miscompile-enums.rs`；rustc 侧同时 revert 了 1.97.0 增大触发概率的改动（"out of abundance of caution"）。
+- 下游影响面：Fedora 需要独立 backport LLVM（`llvm-22.1.8-4.fc44`），因为 rustc 内置 LLVM 与发行版 LLVM 是两份副本——印证 §7 第 1 条「编译器正确性是供应链风险」不是一句口号。
+
+---
+
 ## 8. 国际权威参考 / International Authority References
 
 - **P0 官方**: [LLVM Language Reference — Poison Values](https://llvm.org/docs/LangRef.html#poison-values)

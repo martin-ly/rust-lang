@@ -220,6 +220,47 @@ fn main() {
 
 ---
 
+## ⚠️ 实测反例（cargo +nightly miri 本机实跑，2026-10-19）
+
+§5 三例的本机 Miri 级证据（`miri 0.1.0 (8006091eb7 2026-10-17)`，Windows x86_64；rustc 1.99.1 编译全部全绿——这正是「类型系统不能、操作语义能」的机器演示）。
+
+### 实测 1（§5.2 坐实）：`repr(C)` padding 读取——Miri 精确报出未初始化字节区间
+
+`rustc 1.99.1` 本机实测布局：`#[repr(C)] struct WithPadding { a: u8, b: u32 }` 在 x86_64 上 `size_of = 8`、`align_of = 4`（`repr(packed)` 对照 `size_of = 5`），即 `bytes[1..4]` 三个字节是纯 padding：
+
+```rust,ignore
+// 实测条件：rustc 1.99.1 编译全绿；cargo +nightly miri run 实跑 exit 1 报 UB
+#[repr(C)]
+struct WithPadding { a: u8, b: u32 }
+
+fn main() {
+    let s: WithPadding = WithPadding { a: 1, b: 2 }; // 字段初始化不写 padding 字节
+    let bytes = unsafe {
+        std::slice::from_raw_parts(&s as *const _ as *const u8, std::mem::size_of::<WithPadding>())
+    };
+    println!("{:?}", &bytes[1..4]); // 读 padding：UB
+}
+```
+
+Miri 诊断逐字（截选）：
+
+```text
+error: Undefined Behavior: reading memory at alloc111[0x1..0x2],
+but memory is uninitialized at [0x1..0x2], and this operation requires initialized memory
+```
+
+量化点：① 报错区间 `[0x1..0x2]` 恰是第一个 padding 字节——Miri 的「值必须已初始化」规则（MiniRust 的 `Value = Int | Uninit | ...` 代数里 `Uninit` 不可投影为 `Int`）在字节级精确生效；② UB 触发点是 `println!` 格式化路径（backtrace 落在 `core::fmt::num`）而非 `from_raw_parts` 本身——构造 `&[u8]` 切片合法，**读字节**才越界，印证 §3 的「规则编码在操作语义层而非类型层」；③ 本页 §5.2 原文用 `zeroed()` 构造——本机对照实跑确认 **`zeroed()` 同样 UB**（`zeroed` 在 Miri 模型里不把 padding 字节置为已初始化的 0，`alloc127[0x1..0x2]` 同样报 uninitialized）：padding 是否 UB 与内存里"实际"是什么位无关，只取决于该字节是否有**已初始化的 Rust 值**——想安全读整结构体字节，须经 `MaybeUninit` + 对全部字节的显式写入（如 `write_bytes`/`ptr::copy_nonoverlapping`）建立初始化状态。
+
+### 实测 2（§5.1 坐实）：父裸指针写、子借用存活——Tree Borrows 叙事完整复现
+
+§5.1 反例本机实跑（默认 Stacked Borrows 与 `-Zmiri-tree-borrows` 双模式）：SB 报 `tag does not exist in the borrow stack`，TB 报 `reborrow through <tag> is forbidden`（tag 因 foreign write 由 Reserved 降为 Disabled）——完整逐字诊断链见 [unsafe 契约形式化 ⚠️ 实测反例 实测 3](../01_ownership_logic/07_unsafe_contracts_formal.md)，同一逻辑的 safe 形态则被 rustc **E0506** 编译期拦截（本机实跑确认），「safe 编译期可抓 / unsafe 只有 Miri 能抓」的分界在本机两侧都拿到了样本。
+
+### 实测 3（§5.3 坐实）：整数往返悬垂指针——`noalloc` 级 provenance 失效
+
+§5.3 反例本机 `cargo +nightly miri run` 实跑：`attempting to access 4 bytes, but got 0x...[noalloc] which is a dangling pointer (it has no provenance)`——逐字诊断见 [unsafe 契约形式化 ⚠️ 实测反例 实测 2](../01_ownership_logic/07_unsafe_contracts_formal.md)。与 [BorrowSanitizer 形式化 ⚠️ 实测反例](../02_separation_logic/04_borrow_sanitizer_in_formal.md) 实测 1 形成关键对照：**同一模式在「分配未被复用」时 Miri 必抓，在「新分配恰好复用旧地址」时 Miri 静默放行**——§5.3 的注释「解引用即 UB」在 Miri 的可判定边界内成立，但 Miri 只是 UB 的必要非充分检测器，这正是 MiniRust 形式化（UB 由语义定义）相对工具（UB 由采样路径暴露）的关系所在。
+
+---
+
 ## 6. 国际权威来源与延伸阅读
 
 - **MiniRust 实现**: [github.com/minirust/minirust](https://github.com/minirust/minirust)

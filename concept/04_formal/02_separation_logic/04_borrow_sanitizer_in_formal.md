@@ -202,6 +202,44 @@ Rust 与 C/C++ 的多语言互操作场景，可在原生执行速度下检测�
 
 ---
 
+## ⚠️ 实测反例（cargo +nightly miri -Zmiri-tree-borrows 本机实跑，2026-10-19）
+
+上述「盲区」论断的本机对照实验（`miri 0.1.0 (8006091eb7 2026-10-17)`，Windows x86_64；本机无 BorrowSanitizer 构建，故以 **Miri Tree Borrows 作为同类 retag 追踪模型的代理**做盲区实验——BSAN 的检测机制（retag intrinsic 插桩）与 Miri 的 tag 模型同源，盲区结构可直接类比）：
+
+### 实测 1（盲区坐实）：跨分配地址复用的整数往返指针——TB 静默放行且读到新分配的值
+
+```rust,ignore
+// 实测条件：rustc 1.99.1 编译全绿；cargo +nightly miri run（含 -Zmiri-tree-borrows）实跑 exit 0，无诊断
+fn main() {
+    for i in 0..50 {
+        let a = Box::new(1u64);
+        let addr = &*a as *const u64 as usize; // 整数往返：provenance 表面丢失
+        drop(a);                                // 原分配已释放
+        let b = Box::new(2u64);
+        if &*b as *const u64 as usize == addr { // 分配器恰好复用同一地址
+            let p = addr as *const u64;         // 由已死亡分配派生的"非法"指针
+            unsafe { println!("{} reused addr {} at iter {}", *p, addr, i); }
+            break;
+        }
+        drop(b);
+    }
+}
+```
+
+实运行输出（逐字）：
+
+```text
+2 reused addr 141568 at iter 3
+```
+
+关键量化点：指针 `p` 源自**已 drop 的分配 a**，语义上必然悬垂；但 Miri 的 exposed-provenance 查找把整数地址绑定到**当前占据该地址的新分配 b**，于是读出的 `2` 是 b 的值——Tree Borrows 全程无诊断、exit 0。这正是本节宣称的「跨分配重组的裸指针」盲区在别名模型上的同构体现：**retag 追踪类工具检查的是 tag 权限状态，不是"这条指针值在语义上是否合法"**——tag 合法（新分配上确有活的 SharedReadOnly 权限）而程序错误（读的是已释放对象的地址）。真实代码里这类读可能在别的分配布局/优化下读到垃圾，工具却全绿。
+
+### 实测 2（对照：非盲区形态被 TB 抓住）
+
+同一模型对「父裸指针写、子 `&mut` 存活」的经典别名违规立即报 `reborrow through <...> is forbidden`（tag 由 Reserved 因 foreign write 降为 Disabled）——完整诊断链见 [unsafe 契约形式化 ⚠️ 实测反例 实测 3](../01_ownership_logic/07_unsafe_contracts_formal.md)。两条实验合起来给出本页分层验证结论的机器边界：**TB 系工具能抓「tag 权限被破坏」，抓不住「tag 完好但指针语义已死」**——前者是别名模型内错误，后者跨越了模型边界，正是「sanitizer 通过 ≠ 无 UB」的具体实例。
+
+---
+
 ## 国际权威参考 / International Authority References（P1 学术 · P2 生态）
 
 > 依据 `AGENTS.md` §2「对齐网络国际化权威内容」补充：仅追加已验证可达的权威链接，不改动正文事实。
