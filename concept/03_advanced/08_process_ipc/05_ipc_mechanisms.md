@@ -283,7 +283,7 @@ fn main() -> std::io::Result<()> {
 
 ---
 
-## ⚠️ 反例与陷阱：发送端 drop 后 recv().unwrap() panic（运行时陷阱）
+## ⚠️ 实测反例：发送端 drop 后 recv().unwrap() panic（运行时陷阱）
 
 **反例**（运行时（Runtime）陷阱，代码可通过编译）：
 

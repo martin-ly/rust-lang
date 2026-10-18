@@ -425,6 +425,28 @@ Aeneas 的目标子集 LLBC（Low-Level Borrow Calculus）刻意排除了若干 
 
 **陷阱要点**：操作语义工具的「子集边界」是设计决定而非实现债务——绕开子集限制的改写必须先论证改写前后的语义等价，否则验证结论不覆盖原程序。
 
+## ⚠️ 实测反例（rustc 1.99.1 debug/-O + cargo-miri 三层对照实跑，2026-10-19）
+
+Aeneas 的存在动机——「编译器放行、运行时沉默的 UB 需要语义层拦截」——本机在同一行 UB 上三层全实测：
+
+```rust
+use std::hint::black_box;
+fn main() {
+    let v = black_box(vec![1, 2, 3]);
+    println!("len={}", black_box(v.len()));
+    let x = unsafe { *v.get_unchecked(5) }; // 越界：UB
+    println!("unreachable: {x}");
+}
+```
+
+| 层 | 本机实跑结果 |
+|:---|:---|
+| `rustc` debug | `unsafe precondition(s) violated: slice::get_unchecked requires that the index is within the slice` → non-unwinding panic abort（编译本身零错误） |
+| `rustc -O` | 静默输出垃圾值 `unreachable: 5570639`，**退出码 0** |
+| `cargo +nightly miri run` | 精确定位 UB 于 `src\main.rs:4:23`，backtrace 穿过 `panic_handler`，`error: aborting due to 1 previous error` |
+
+三层结论与本节论点直接对齐：编译层对 `get_unchecked` 的越界**从不拒绝**（前条件契约在类型系统外）；`-O` 运行层沉默放行并给出可继续参与计算的垃圾值——这是下游所有「看起来正常」的推理的污染源；只有语义分析层（Miri，以及 Aeneas 之于 LLBC 符号执行）能在**发生点**给出归因。debug 层的前条件检查「cannot be relied on for safety」（rustc 自己标注 optional），恰是 Aeneas/HLPL 这类工具存在的证明：安全关键验证不能建立在可选检查上，必须建立在可证明的语义模型上——而该模型只覆盖 LLBC 子集，子集外代码（如本例的 `unsafe` 惯用法）需要公理化 shim，回到上节反例的边界判定。
+
 ---
 
 ## 十、来源与延伸阅读

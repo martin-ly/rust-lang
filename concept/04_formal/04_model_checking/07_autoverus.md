@@ -227,6 +227,34 @@ fn abs(x: i32) -> (r: i32)
 
 **陷阱要点**：演绎验证的信任基础（TCB）包含规格、公理化 shim 与求解器；把「verified」徽章等同于「正确」是最常见的工程误读。
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）
+
+本机未装 Verus toolchain，无法直接编译 `verus!` 宏；但「弱规格放过错误实现」这一失效模式的**宿主层等价物**可实跑——把 `ensures r >= 0` 翻译成一个对全输入域都成立的运行时断言：
+
+```rust
+// spec 'r >= 0' satisfied by WRONG impl: verification-pass != correct
+fn abs_weak(x: i32) -> i32 { if x < 0 { 0 } else { x } } // ensures r>=0 only
+fn main() {
+    for x in [-3, -1, 2] {
+        let r = abs_weak(x);
+        assert!(r >= 0); // spec check PASSES for all inputs
+        println!("abs_weak({}) = {}  (spec 'r>=0' satisfied; intent r==|x| {})", x, r, if r == x.abs() {"ok"} else {"VIOLATED"});
+    }
+    println!("EXIT: all spec assertions passed, wrong impl sails through");
+}
+```
+
+实跑输出（exit 0）：
+
+```text
+abs_weak(-3) = 0  (spec 'r>=0' satisfied; intent r==|x| VIOLATED)
+abs_weak(-1) = 0  (spec 'r>=0' satisfied; intent r==|x| VIOLATED)
+abs_weak(2) = 2  (spec 'r>=0' satisfied; intent r==|x| ok)
+EXIT: all spec assertions passed, wrong impl sails through
+```
+
+`abs_weak(-3) = 0` 是错误实现（意图是 `|−3| = 3`），但规格断言 `r >= 0` 对每个输入都通过。这正是上节 `verus!` 反例的机制内核：证明器只证「实现 ⟹ 规格」，规格本身弱于意图时，证明越完备、假安全感越强。AutoVerus 这类 LLM 生成规格的工具恰恰放大此风险——规格由 LLM 顺手写出，紧致性（spec 的每个合取项都是必要的）没有任何机械检查兜底。上节「修正对照」第 2 条（为 spec 写可满足性/具体值检查，如 `abs(-3) == 3`）即本实测中 `VIOLATED` 标签所演示的手工紧致性检查。
+
 ---
 
 ## 🧭 思维导图（Mindmap）

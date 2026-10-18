@@ -118,6 +118,18 @@
    "evidence": "-O --emit asm direct read: poll_plain load hoisted out of loop (jmp self-loop, zero loads) vs poll_volatile per-iteration cmpl",
    "commit": "43b275a75",
    "pushed": true
+  },
+  {
+   "batch": 10,
+   "pages": [
+    "concept/04_formal/03_operational_semantics/07_aeneas_symbolic_semantics.md",
+    "concept/04_formal/04_model_checking/02_formal_methods.md",
+    "concept/04_formal/04_model_checking/07_autoverus.md",
+    "concept/04_formal/04_model_checking/11_creusot.md",
+    "concept/03_advanced/08_process_ipc/05_ipc_mechanisms.md",
+    "concept/03_advanced/08_process_ipc/09_process_testing_and_benchmarking.md"
+   ],
+   "evidence": "get_unchecked OOB three-layer (debug precondition abort / -O silent garbage 5570639 EXIT0 / Miri precise UB) + abs_weak spec-satisfies-but-wrong EXIT0 + i64::MAX+1 debug101 vs -O -9223372036854775808 EXIT0 + IPC 2 pages heading normalization; 04_formal group cleared to 0 gap"
   }
  ],
  "version_baseline": {

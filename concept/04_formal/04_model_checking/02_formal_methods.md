@@ -27,6 +27,8 @@
 > [RustBelt](../02_separation_logic/01_rustbelt.md)
 > **前置概念**: [Verification Toolchain](01_verification_toolchain.md) · [RustBelt](../02_separation_logic/01_rustbelt.md)
 > **后置概念**: [Modern Verification Tools](04_modern_verification_tools.md) · [Aerospace Certification](03_aerospace_certification_formal_methods.md)
+
+> **⚠️ 实测反例（按 Canonical 规则指向权威页）**：本重定向 stub 不重复代码；形式化方法层的编译/验证边界反例见权威页 [`§十、边界测试：形式化方法的编译错误`](../../07_future/04_research_and_experimental/02_formal_methods.md)（含 2 个 `rust,compile_fail` 围栏：Kani `unsafe` 假设冲突、Prusti 前置条件违反）。2026-10-19 本机（无 Kani/Verus/Creusot toolchain）已对三个 L4 子页落地宿主层等价实测：[Aeneas 三层 UB 对照](../03_operational_semantics/07_aeneas_symbolic_semantics.md)、[AutoVerus 弱规格放过错误实现](07_autoverus.md)、[Creusot 数学世界 vs 机器世界溢出](11_creusot.md)。
 >
 >
 > **受众**: [研究者]
