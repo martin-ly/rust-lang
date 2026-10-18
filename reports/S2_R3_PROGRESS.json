@@ -38,7 +38,9 @@
     "concept/03_advanced/02_unsafe/10_std_unsafe_internals.md",
     "concept/03_advanced/02_unsafe/11_in_place_pinned_initialization.md"
    ],
-   "evidence": "Pin E0277/E0199, ManuallyDrop double-drop, E0381, Miri uninit 5439557 vs alloc146, null reference UB"
+   "evidence": "Pin E0277/E0199, ManuallyDrop double-drop, E0381, Miri uninit 5439557 vs alloc146, null reference UB",
+   "commit": "629f7abed",
+   "pushed": true
   },
   {
    "batch": 4,
@@ -50,7 +52,9 @@
     "concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md",
     "concept/03_advanced/04_ffi/04_async_ffi_boundary.md"
    ],
-   "evidence": "MutexGuard/Rc cross-await Send + future mid-flight drop + Miri waker Arc forget dangling + orphan thread EXIT0 + blocking poll 0.9s + FFI waker UAF retag"
+   "evidence": "MutexGuard/Rc cross-await Send + future mid-flight drop + Miri waker Arc forget dangling + orphan thread EXIT0 + blocking poll 0.9s + FFI waker UAF retag",
+   "commit": "65a8e76ce",
+   "pushed": true
   },
   {
    "batch": 5,
@@ -60,21 +64,27 @@
     "concept/03_advanced/08_process_ipc/05_ipc_mechanisms.md",
     "concept/03_advanced/08_process_ipc/09_process_testing_and_benchmarking.md"
    ],
-   "evidence": "canonical stub pointer + Rc cycle leak drops=0 EXIT0 + recv-after-drop 101 vs 0 + float eq 101 left=0.30000000000000004"
+   "evidence": "canonical stub pointer + Rc cycle leak drops=0 EXIT0 + recv-after-drop 101 vs 0 + float eq 101 left=0.30000000000000004",
+   "commit": "78ec9e8c2",
+   "pushed": true
   },
   {
    "batch": 6,
    "pages": [
     "concept/06_ecosystem/05_systems_and_embedded/37_fallible_allocation_and_no_alloc_collections.md"
    ],
-   "evidence": "no_std E0433 + alloc fix compile; try_reserve strong guarantee: capacity=0 after MAX/4 failure, original-page claim corrected (勘误)"
+   "evidence": "no_std E0433 + alloc fix compile; try_reserve strong guarantee: capacity=0 after MAX/4 failure, original-page claim corrected (勘误)",
+   "commit": "a1578f10e",
+   "pushed": true
   },
   {
    "batch": 7,
    "pages": [
     "concept/06_ecosystem/05_systems_and_embedded/52_no_std_allocators_and_panic_handlers.md"
    ],
-   "evidence": "no_std missing panic_handler hard error + E0308 signature + E0152 duplicate lang item + E0277 UnsafeCell alloc chain + unsafe impl Sync cheat passes compile"
+   "evidence": "no_std missing panic_handler hard error + E0308 signature + E0152 duplicate lang item + E0277 UnsafeCell alloc chain + unsafe impl Sync cheat passes compile",
+   "commit": "4baed482e",
+   "pushed": true
   },
   {
    "batch": 5,
@@ -96,14 +106,18 @@
    "pages": [
     "concept/06_ecosystem/05_systems_and_embedded/15_no_std_synchronization_primitives.md"
    ],
-   "evidence": "spinlock reentrant watchdog 50M spin EXIT7 + std Mutex reentrant 120s hang (SRWLock non-reentrant)"
+   "evidence": "spinlock reentrant watchdog 50M spin EXIT7 + std Mutex reentrant 120s hang (SRWLock non-reentrant)",
+   "commit": "6d3e856c4",
+   "pushed": true
   },
   {
    "batch": 9,
    "pages": [
     "concept/06_ecosystem/05_systems_and_embedded/41_embedded_hal_and_mmio.md"
    ],
-   "evidence": "-O --emit asm direct read: poll_plain load hoisted out of loop (jmp self-loop, zero loads) vs poll_volatile per-iteration cmpl"
+   "evidence": "-O --emit asm direct read: poll_plain load hoisted out of loop (jmp self-loop, zero loads) vs poll_volatile per-iteration cmpl",
+   "commit": "43b275a75",
+   "pushed": true
   }
  ],
  "version_baseline": {
@@ -127,5 +141,17 @@
   "strict_gaps": 133,
   "note": "530 tracked concept pages; 239→133 closed via S2-R3 batches 1-5 plus pre-existing coverage"
  },
- "note_2026_10_19_W5": "重扫严格口径166页(排除00_meta 68页与已收走组)；sibling在途batch6/7(async 16/08/04_ffi、embedded 52_no_std)各自提交收走，本代理串行线切04_formal避免冲突。04_formal 组本批后剩 15。"
+ "note_2026_10_19_W5": "重扫严格口径166页(排除00_meta 68页与已收走组)；sibling在途batch6/7(async 16/08/04_ffi、embedded 52_no_std)各自提交收走，本代理串行线切04_formal避免冲突。04_formal 组本批后剩 15。",
+ "rescan_2026_10_19_post_batch9": {
+  "strict_gaps": 124,
+  "tracked": 530,
+  "by_group": {
+   "06_ecosystem": 96,
+   "07_future": 13,
+   "05_comparative": 9,
+   "04_formal": 4,
+   "03_advanced": 2
+  },
+  "note": "133->124 closed via batches 6-9 (embedded) + W5 04_formal batch; dominant remaining pool is 06_ecosystem embedded pages"
+ }
 }
