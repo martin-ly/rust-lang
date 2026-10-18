@@ -635,6 +635,47 @@ fn main() {
 - SPARK 子集之外的代码（C 驱动、汇编、完整 Ada 组件）不在证明范围内，成为 trusted computing base (TCB) 缺口。
 - 认证标准（DO-178C / DO-333）要求形式化证据与测试证据互补，而非互相替代。
 
+### 实测反例（rustc 1.99.1 实运行，2026-10-19）：safe Rust ABBA 死锁确证
+
+上述「Send/Sync 不排除死锁」的断言已本机坐实。两个执行流以相反顺序取两把锁（代码全部 safe Rust，`rustc 1.99.1` 编译零警告）：
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+use std::time::Duration;
+fn main() {
+    let a = Arc::new(Mutex::new(0));
+    let b = Arc::new(Mutex::new(0));
+    let a1 = Arc::clone(&a); let b1 = Arc::clone(&b);
+    let h1 = thread::spawn(move || {
+        let _ga = a1.lock().unwrap();
+        println!("t1 holds a");
+        thread::sleep(Duration::from_millis(300));
+        println!("t1 waiting for b...");
+        let _gb = b1.lock().unwrap();
+        println!("t1 got both");
+    });
+    thread::sleep(Duration::from_millis(100));
+    let _gb = b.lock().unwrap();          // main holds b
+    thread::sleep(Duration::from_millis(300));
+    println!("main waiting for a...");
+    let _ga = a.lock().unwrap();          // ABBA deadlock
+    println!("unreachable");
+    h1.join().unwrap();
+}
+```
+
+实跑（`timeout 6` 包裹）：
+
+```text
+t1 holds a
+t1 waiting for b...
+main waiting for a...
+EXIT=124   ← 外部 timeout 杀进程；两个「waiting for」永不返回
+```
+
+关键观察：死锁前一切「正常」——无 panic、无错误码、无诊断输出；进程只是静默挂起，必须靠外部看门狗才能发现。这正是本节论点的最强证据：编译期类型系统（Send/Sync）与运行期活性（liveness）完全正交，`unwrap()` 只处理锁中毒，对锁顺序错误零防护。Ada Ravenscar + Ceiling Protocol 的价值在此实测下更清晰——它在语言/运行时层禁止或规范化这类锁反转，而 Rust 把锁顺序留给程序员与 linter（如 `deadlock` crate、clippy 均不覆盖此模式）。
+
 > **边界总结**：Rust 的 `unsafe` 与 Ada/SPARK 的“退出 SPARK 子集”都是能力边界；两者都不能被自动证明覆盖。选型时应比较“需要多少代码留在可证明子集内”，而不是假设某一方天然更安全。
 
 ---

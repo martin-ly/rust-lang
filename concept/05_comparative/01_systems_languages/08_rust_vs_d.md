@@ -749,6 +749,36 @@ fn main() {
 
 - D 中类似的指针/切片别名问题仍可能通过 `@system` 代码或未启用 DIP 1000 的路径出现。
 
+### 实测反例（rustc 1.99.1 实编译，2026-10-19）：读写别名全局不变量坐实
+
+上节 `rust,ignore` 用例已本机实编译转正（`rustc 1.99.1 --edition 2021`）：
+
+```rust,compile_fail
+fn main() {
+    let mut s = String::from("D");
+    let r1 = &s;
+    let r2 = &mut s; // cannot borrow `s` as mutable because it is also borrowed as immutable
+    println!("{} {}", r1, r2);
+}
+```
+
+```text
+error[E0502]: cannot borrow `s` as mutable because it is also borrowed as immutable
+```
+
+同一不变量在迭代器场景同样硬拒（`v.iter()` 存活时 `v.push(4)`）：
+
+```rust,compile_fail
+fn main() {
+    let mut v = vec![1, 2, 3];
+    let it = v.iter();
+    v.push(4);      // error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immutable
+    for x in it {}
+}
+```
+
+这组实测把「Rust 借用规则是全局不变量」与「D DIP 1000 是局部注解」的对比落到可复现错误码：Rust 对**同一数据的读写别名**在任何持有路径（引用、迭代器、闭包捕获）上统一 E0502，无逃逸口；D 的 scope 检查不覆盖同类别名矩阵（须 `dmd -preview=dip1000` 且仅 `@safe` 域）。
+
 > **边界总结**：Rust 通过“默认安全 + 显式 unsafe”在类型系统中嵌入资源协议；D 通过“默认 @system + 可选 @safe + GC”保留 C++ 式灵活性。两者安全强度差异不是实现细节，而是设计语言的本体论差异。
 
 ---

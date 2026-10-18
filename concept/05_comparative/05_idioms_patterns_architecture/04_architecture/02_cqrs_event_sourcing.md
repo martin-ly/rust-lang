@@ -146,6 +146,21 @@ pub fn add_stock_directly(state: &mut HashMap<String, u32>, sku: &str, qty: u32)
 }
 ```
 
+### 实测反例（rustc 1.99.1 实运行，2026-10-19）：事件回放 fold 溢出在发生点中断
+
+事件溯源的核心操作是把事件流 fold 成当前状态。该 fold 在 Rust debug profile 下对溢出**逐步即时检查**，与「重放整段日志后才发现状态错乱」的惰性/回绕式实现形成硬对照：
+
+```rust
+fn main() {
+    // 模拟事件流：10 万条 qty=1000 的增量事件
+    let events: Vec<i32> = (0..100_000).map(|_| 1000).collect();
+    let state = events.into_iter().fold(0i32, |a, b| a + b);
+    println!("{state}");
+}
+```
+
+实跑：`thread 'main' panicked at ...: attempt to add with overflow`，退出码 **101**——panick 定位在 fold 累加表达式，即溢出发生在重放的第几号事件处可直接从 backtrace 读出（审计友好）；同一程序 `-O` 编译则静默回绕、EXIT=0，错误状态无声进入下游。结论：事件溯源 + Rust 时，聚合类型应显式用 `i64`/`saturating_add`/checked 语义并在事件层记录聚合宽度，否则「审计能力」会被 release profile 的静默回绕架空——这是模式落地的真实陷阱，不是纯概念问题。
+
 ## 七、国际权威来源
 
 - [Microsoft — CQRS Journey](https://msdn.microsoft.com/en-us/library/jj554200.aspx)

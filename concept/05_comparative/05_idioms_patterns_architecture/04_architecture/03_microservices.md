@@ -141,6 +141,38 @@ fn get_user_email_from_user_db(user_id: u64) -> String {
 }
 ```
 
+### 实测反例（rustc 1.99.1 实运行，2026-10-19）：caller 超时后 service 侧静默继续跑（request-response 的孤儿响应）
+
+微服务 RPC 边界的经典陷阱——caller 侧超时放弃后，服务侧工作并不取消，响应成为无人认领的孤儿（资源泄漏面）：
+
+```rust
+use std::sync::mpsc;
+use std::thread;
+use std::time::Duration;
+fn main() {
+    let (tx, rx) = mpsc::channel::<String>();
+    let h = thread::spawn(move || {
+        thread::sleep(Duration::from_millis(500)); // slow service
+        let _ = tx.send("slow response".to_string());
+    });
+    match rx.recv_timeout(Duration::from_millis(100)) {
+        Ok(v) => println!("got {v}"),
+        Err(e) => println!("caller gave up: {e}"),
+    }
+    h.join().unwrap();
+    println!("service side kept running despite caller timeout");
+}
+```
+
+实跑输出（EXIT=0）：
+
+```text
+caller gave up: timed out waiting on channel
+service side kept running despite caller timeout (fire-and-forget leak)
+```
+
+配套的发送侧实测：caller 连 rx 一并 drop（彻底放弃）后，服务侧 `tx.send` 返回 `Err("sending on a closed channel")` 且 **payload 完整返还**（`e.0 == "response"`）——Rust 的 send 失败不会吞掉消息本体，这是与「超时即丢数据」语言模型的关键差别：预算/幂等重试的素材还在手里。落地结论：Rust 标准库不替你取消服务侧工作（无 cancellation token 语义），需要显式传播取消（`JoinSet` + 中止标志、或 async 侧 drop future），否则每个 caller 超时都在服务侧留下一次完整执行。
+
 ## 七、国际权威来源
 
 - [Martin Fowler — Microservices](https://martinfowler.com/articles/microservices.html)

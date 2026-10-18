@@ -691,6 +691,44 @@ Nim 的优势场景：
 
 - Rust trait 更适合大型团队协作，因为接口契约在类型签名中显式声明；Nim concept 更灵活，但也更依赖文档与约定。
 
+### 实测反例（rustc 1.99.1 实编译/实运行，2026-10-19）
+
+**move 语义的编译期硬拒**（Nim `owned` 要模拟而只能部分覆盖的场景——Rust 的 move 是语言级全局规则）：
+
+```rust,compile_fail
+fn main() {
+    let s = String::from("hi");
+    let t = s;      // move
+    println!("{}", s); // borrow of moved value: `s`
+}
+```
+
+```text
+error[E0382]: borrow of moved value: `s`
+```
+
+**引用计数的循环泄漏**（对照表「循环引用泄漏」行——Rust 的 `Rc` 并不自动回收环，Nim ORC 有循环回收而 ARC 没有；此处坐实 Rust 侧「纯引用计数即使无 GC 也会泄漏，Rust 的答案是借用检查而非更强的计数器」）：
+
+```rust
+use std::cell::RefCell;
+use std::rc::Rc;
+use std::sync::atomic::{AtomicUsize, Ordering};
+static DROPS: AtomicUsize = AtomicUsize::new(0);
+struct Bus { subs: RefCell<Vec<Rc<Subscriber>>> }
+struct Subscriber { id: u32, bus: RefCell<Option<Rc<Bus>>> }
+impl Drop for Subscriber { fn drop(&mut self) { DROPS.fetch_add(1, Ordering::SeqCst); } }
+fn main() {
+    let bus = Rc::new(Bus { subs: RefCell::new(vec![]) });
+    let sub = Rc::new(Subscriber { id: 1, bus: RefCell::new(None) });
+    bus.subs.borrow_mut().push(Rc::clone(&sub));   // bus -> sub
+    *sub.bus.borrow_mut() = Some(Rc::clone(&bus)); // sub -> bus 回边成环
+    drop(sub); drop(bus);
+    println!("DROPS={}", DROPS.load(Ordering::SeqCst));
+}
+```
+
+实跑输出：`DROPS=0`（EXIT=0）——事件总线与其订阅者的互引用环在全部外部句柄 drop 后一个析构都没有触发，泄漏静默发生。结论与上表一致：Rust safe 子集对「计数型所有权」的环同样无编译期救济（`Rc` 在 safe 代码里合法），真正编译期排除 UAF/悬垂的是借用检查器；Nim ORC 的运行时循环回收解决的是另一类问题，两者保证机制不同层。
+
 > **边界总结**：Nim 通过“策略选择”让开发者按需切换安全级别；Rust 通过“默认安全 + 显式 unsafe”将安全证明嵌入类型系统。两者在快速原型与长期基础设施之间有明确的工程权衡。
 
 ---

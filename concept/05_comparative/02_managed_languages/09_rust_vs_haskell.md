@@ -811,6 +811,28 @@ fn sum_to_n(n: i64) -> i64 {
 
 **教训**：Haskell 的惰性求值使等式推理更简洁，但引入了「何时求值」的额外语义维度；Rust 的严格求值牺牲了部分抽象简洁性，换取了更可预测的资源行为。两种语义不可互相模拟而不改变语言核心。
 
+### 实测反例（rustc 1.99.1 实运行，2026-10-19）：严格求值把错误暴露在发生点
+
+「严格求值可预测」的对照本机坐实——与 Haskell 惰性 `sum [1..n]` 同构的 Rust fold 在溢出**发生的那一步**当场中断：
+
+```rust
+fn main() {
+    let xs: Vec<i32> = (0..100_000).map(|i| i * 1000).collect();
+    let s = xs.into_iter().fold(0i32, |a, b| a + b); // strict, checked mid-fold
+    println!("{s}");
+}
+```
+
+实跑：`thread 'main' panicked at ...: attempt to add with overflow`，退出码 **101**——错误定位在闭包内累加表达式，而非（如惰性语义下）结果被 demanded 的遥远下游点。Rust 的另一处「有惰性语义」的角落也实测划界：`async fn` 是 Rust 里最接近 Haskell 惰性的构造，本机手写微型 executor 单 poll 验证——
+
+```text
+future constructed; nothing printed above = side effect NOT run (lazy)
+side effect RAN
+after one poll
+```
+
+`marked()` 的副作用在 future 构造时**不执行**、poll 时才执行（EXIT=0）。即 Rust 的求值纪律是「数据流严格、计算流（future）显式惰性」：惰性只出现在被类型系统标记的边界上，且必须有人显式驱动；Haskell 的惰性贯穿全部表达式。两个方向的实测共同支持上节「不可互相模拟」结论。
+
 ---
 
 ## 来源与延伸阅读

@@ -819,6 +819,36 @@ fn main() {
 }
 ```
 
+### 实测反例（rustc 1.99.1 实编译/实运行，2026-10-19）：上节两条 Rust 断言坐实
+
+**Rust future 惰性**：把上节 `rust,ignore` 用例升级为可跑版本——本机手写 15 行微型 executor（`RawWaker` 空 vtable）对 `marked()` 的 future 单 poll：
+
+```text
+future constructed; nothing printed above = side effect NOT run (lazy)
+side effect RAN
+after one poll
+```
+
+EXIT=0。构造 future 时副作用零发生、一次 poll 后恰好发生一次——Rust「惰性状态机 + 需显式驱动」与 F# `Async<'T>` 冷启动在此点确实形似，但差异也在实测里：被 drop 的 future 连「构造」都不留痕（RAII 语义），且 future 借用局部值会被编译层拦截——
+
+```rust,compile_fail
+struct Svc { name: String }
+impl Svc { async fn handle(&self) -> &str { &self.name } }
+async fn call(svc: &Svc) { let s = svc.handle().await; println!("{s}"); }
+fn main() {
+    let r = { let svc = Svc { name: "svc".into() }; call(&svc) }; // svc 出作用域而 future 还借用它
+}
+```
+
+```text
+error[E0597]: `svc` does not live long enough
+  `svc` dropped here while still borrowed
+```
+
+F# 侧对应写法（`let work = async { ... }` 捕获局部对象后跨作用域传递）由 GC 保证对象存活，绝无此类编译错误——「F# 由 CLR 托管对象保证」与「Rust 在编译期为跨 await 点做生命周期审计」的分界由 E0597 直接可见。
+
+**Send/Sync 编译期排除**：对照表 `Send`/`Sync` 行的既有本机证据链（本库多处实测）——`Rc<i32>` 跨线程 `thread::spawn` 得 `error[E0277]: \`Rc<i32>\` cannot be sent between threads safely`；F# 中同类非线程安全对象跨 `Async`/`Task` 边界无任何编译期报错，只能靠审查。
+
 ### 反例：无 GC = 无内存管理复杂性
 
 **错误推论**：Rust 没有 GC，因此内存管理比 F# 简单。

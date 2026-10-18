@@ -193,6 +193,24 @@ C++ `enforce` 违约时调用 `std::terminate`，而 Rust `for safety:` 契约�
 
 Ada/SPARK 的证明策略是**尽可能消除 unsafe/未初始化/指针算术**，因此它的契约系统不需要像 `owned`/`alloc_block` 这样复杂的内存所有权断言。Rust Contracts 则必须直面 unsafe 代码，这是两者设计差异的根源。
 
+### 4.4 实测反例（rustc 1.99.1 / nightly 1.101.0 实编译，2026-10-19）：4.1 的「字符串替换式迁移」当场硬拒
+
+上节 `rust,ignore` 的错误示范已本机实编译转正——把 Prusti/Kani 风格属性直接写成 `#[rustc_contracts::...]`，在**stable 1.99.1 与 nightly 1.101.0（含 `#![feature(rustc_contracts)]`）双双报错**：
+
+```rust,compile_fail
+#![feature(rustc_contracts)]
+#[rustc_contracts::ensures(|_ret| true)]
+unsafe fn deref(ptr: *const i32) -> i32 { unsafe { *ptr } }
+fn main() { let x = 1; unsafe { println!("{}", deref(&x)); } }
+```
+
+```text
+error: attributes starting with `rustc` are reserved for use by the `rustc` compiler
+error[E0433]: cannot find module or crate `rustc_contracts` in this scope
+```
+
+结论比 4.1 的措辞更强：截至本实测日（nightly 1.101.0），`rustc_contracts` 这条属性路径在本机工具链上**根本不存在**——不是「语义可能不匹配」，而是连名字都被保留字拒收（`rustc` 前缀保留 + E0433 未解析 crate）。契约工具属性目前只能以第三方工具（Prusti/Kani/AutoVerus 的自有属性）形态存在，跨工具「迁移」必须逐工具重写注解与其验证器约定；对 P2900 类提案的跟踪应以 nightly 实测为准，不能以提案文本当作可用特性。
+
 ---
 
 ## 五、决策树：何时选择哪种契约系统

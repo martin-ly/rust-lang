@@ -135,6 +135,48 @@ fn main() {
 }
 ```
 
+### 实测反例（rustc 1.99.1 实运行，2026-10-19）：closed-channel 静默丢失 + 总线↔订阅者回边泄漏
+
+上节两个断言均已本机坐实。
+
+**(1) 订阅者退出后事件确实静默丢失/可检出**——`drop(rx)` 后总线仍持有 `Sender`：
+
+```rust
+use std::sync::mpsc;
+fn main() {
+    let (tx, rx) = mpsc::channel::<String>();
+    drop(rx); // 'service' 退出
+    match tx.send("response".to_string()) {
+        Ok(()) => println!("send ok"),
+        Err(e) => println!("send failed: {e} (payload returned: {:?})", e.0),
+    }
+}
+```
+
+实跑（EXIT=0）：`send failed: sending on a closed channel (payload returned: "response")`——`Err(TrySendError { kind: Disconnected, .. })` 携带 payload 本体；若总线代码写成 `let _ = tx.send(..)`，该事件即无声蒸发。清理策略（`tx.is_closed()` 探测 + 摘除订阅项）不是可选优化。
+
+**(2) 总线与订阅者互引用成环 → 全体析构不发生**（「用 `Weak` 引用」建议的量化依据）：
+
+```rust
+use std::cell::RefCell;
+use std::rc::Rc;
+use std::sync::atomic::{AtomicUsize, Ordering};
+static DROPS: AtomicUsize = AtomicUsize::new(0);
+struct Bus { subs: RefCell<Vec<Rc<Subscriber>>> }
+struct Subscriber { id: u32, bus: RefCell<Option<Rc<Bus>>> }
+impl Drop for Subscriber { fn drop(&mut self) { DROPS.fetch_add(1, Ordering::SeqCst); println!("subscriber {} dropped", self.id); } }
+fn main() {
+    let bus = Rc::new(Bus { subs: RefCell::new(vec![]) });
+    let sub = Rc::new(Subscriber { id: 1, bus: RefCell::new(None) });
+    bus.subs.borrow_mut().push(Rc::clone(&sub));   // bus -> sub 强引用
+    *sub.bus.borrow_mut() = Some(Rc::clone(&bus)); // sub -> bus 回边（订阅者常想回调总线）
+    drop(sub); drop(bus);
+    println!("DROPS={}", DROPS.load(Ordering::SeqCst));
+}
+```
+
+实跑：无任何 "dropped" 行，输出 `DROPS=0`（EXIT=0）——外部句柄全部 drop 后，总线与订阅者双双滞留。订阅者持总线回边是 event bus 的自然写法（handler 要 publish 回去），恰好构成 `Rc` 环；回边改 `Weak<Bus>` 则环断、析构正常。此为「应使用 `Weak` 引用」一句的本机证据。
+
 ## 七、国际权威来源
 
 - [Martin Fowler — Event Bus](https://martinfowler.com/articles/events.html)

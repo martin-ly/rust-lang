@@ -129,7 +129,8 @@
     "concept/03_advanced/08_process_ipc/05_ipc_mechanisms.md",
     "concept/03_advanced/08_process_ipc/09_process_testing_and_benchmarking.md"
    ],
-   "evidence": "get_unchecked OOB three-layer (debug precondition abort / -O silent garbage 5570639 EXIT0 / Miri precise UB) + abs_weak spec-satisfies-but-wrong EXIT0 + i64::MAX+1 debug101 vs -O -9223372036854775808 EXIT0 + IPC 2 pages heading normalization; 04_formal group cleared to 0 gap"
+   "evidence": "get_unchecked OOB three-layer (debug precondition abort / -O silent garbage 5570639 EXIT0 / Miri precise UB) + abs_weak spec-satisfies-but-wrong EXIT0 + i64::MAX+1 debug101 vs -O -9223372036854775808 EXIT0 + IPC 2 pages heading normalization; 04_formal group cleared to 0 gap",
+   "commit": "d39533d90"
   },
   {
    "batch": 11,
@@ -138,7 +139,24 @@
     "concept/07_future/02_preview_features/19_const_trait_preview.md",
     "concept/07_future/02_preview_features/20_ergonomic_ref_counting_preview.md"
    ],
-   "evidence": "const trait nightly 实测: stable E0015 + nightly E0379 语法半衰期 + const trait/[const] 正例 V=42 实跑 + E0635 const_traits 不存在 勘误旧~const口径; Rc cycle upgrade().is_some()=true 1.99.1 复核 EXIT0"
+   "evidence": "const trait nightly 实测: stable E0015 + nightly E0379 语法半衰期 + const trait/[const] 正例 V=42 实跑 + E0635 const_traits 不存在 勘误旧~const口径; Rc cycle upgrade().is_some()=true 1.99.1 复核 EXIT0",
+   "commit": "2fddeeb51"
+  },
+  {
+   "batch": 12,
+   "commit": null,
+   "pages": [
+    "concept/05_comparative/01_systems_languages/07_rust_vs_ada_spark.md",
+    "concept/05_comparative/01_systems_languages/08_rust_vs_d.md",
+    "concept/05_comparative/01_systems_languages/09_rust_vs_nim.md",
+    "concept/05_comparative/02_managed_languages/09_rust_vs_haskell.md",
+    "concept/05_comparative/02_managed_languages/11_rust_vs_fsharp.md",
+    "concept/05_comparative/04_verification_and_contracts/01_contracts_comparison.md",
+    "concept/05_comparative/05_idioms_patterns_architecture/04_architecture/02_cqrs_event_sourcing.md",
+    "concept/05_comparative/05_idioms_patterns_architecture/04_architecture/03_microservices.md",
+    "concept/05_comparative/05_idioms_patterns_architecture/04_architecture/06_event_bus.md"
+   ],
+   "evidence": "ABBA死锁EXIT124看门狗 + E0502读写别名x2 + E0382 move + Bus-Sub Rc环DROPS=0 + fold溢出101定位 + future惰性单poll + E0597跨await借用局部值 + recv_timeout孤儿响应 + send closed payload返还 + rustc_contracts保留字+E0433 nightly实测"
   }
  ],
  "version_baseline": {
@@ -174,5 +192,15 @@
    "03_advanced": 2
   },
   "note": "133->124 closed via batches 6-9 (embedded) + W5 04_formal batch; dominant remaining pool is 06_ecosystem embedded pages"
+ },
+ "rescan_2026_10_19_post_batch12": {
+  "strict_gaps": 117,
+  "tracked": 600,
+  "by_group": {
+   "06_ecosystem": 96,
+   "07_future": 11,
+   "04_formal": 10
+  },
+  "note": "tracked口径微调(排除规则变化530->600): 05_comparative 9页+07_future 2页清零; 04_formal 出现10页新露出(07_concurrency_semantics/09_system_semantics/13_semantic_engineering 等语义工程子组, fresh3口径曾覆盖4页); 权威文件 s2_gaps_fresh4.json"
  }
 }
