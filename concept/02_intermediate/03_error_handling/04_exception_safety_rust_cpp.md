@@ -319,6 +319,39 @@ f: S -> Result<S', E>
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实运行，2026-10-19）
+
+上方「Drop 中二次 panic」陷阱的**本机实测量化证据**（此前该节只有叙述，无退出码与进程行为记录）：
+
+### 实测 1：unwind 中 Drop 二次 panic → 进程 abort（实测退出码）
+
+```rust
+struct Guard;
+impl Drop for Guard {
+    fn drop(&mut self) { panic!("drop panic"); }
+}
+fn main() {
+    let _g = Guard;
+    panic!("first panic");
+}
+```
+
+实运行（Windows x86_64，rustc 1.99.1）观测：
+
+- stderr 先输出 `first panic`，unwind 析构时再输出 `drop panic` + 完整 stack backtrace（二次 panic 证据）；
+- 进程退出码 **3221226505**（0xC0000409，`STATUS_FAIL_FAST_EXCEPTION`——Windows 侧 abort/fastfail），而非普通 panic 的 101。
+
+**为什么这构成对比论证的关键证据**：Rust 对「Drop 中 panic」的处置不是语言级 try/catch 兜底，而是**直接终止进程**（`panic = "abort"` 语义下的 double-panic 路径）。这与本节 §2 的 C++ 规则「析构函数不得抛异常（违反即 UB / `std::terminate`）」在结局上同构——两种语言都把「unwind 期间的资源清理失败」升级到不可恢复层。
+
+### 实测 2：`std::thread::panicking()` 守门的对照组
+
+上方「修正」代码实运行：stderr 只有一条 `first panic`，退出码 **101**（正常 panic 退出），Drop 静默让路。`panicking()` 是 std 提供给「析构路径是否处于 unwind」的唯一运行时探针——它把 C++ 里靠 `std::uncaught_exceptions()` 的习惯映射到了 Rust 惯用法。
+
+### 边界说明（如实登记）
+
+- 退出码数值为 **Windows 平台观测**；Unix 下 double panic 同样 abort（SIGABRT），数值口径不同。
+- 若 crate 配置 `panic = "abort"`，首次 panic 即不 unwind，`drop panic` 不会出现——该形态本机可通过 `panic=abort` profile 复现，属构建配置维度，不改变「Drop 不得 panic」结论。
+
 ## ⚠️ 反例与陷阱：Drop 中二次 panic 导致 abort（运行时陷阱）
 
 **反例**（运行时陷阱，代码可通过编译）：

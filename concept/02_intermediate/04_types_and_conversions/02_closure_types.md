@@ -29,6 +29,13 @@
 
 后续编辑请直接修改上述权威页。
 
+## ⚠️ 实测反例（按 Canonical 规则指向权威页）
+
+本页为重定向 stub，依 AGENTS.md §2 不在 stub 内重复代码。实测反例维护在权威页：
+
+- [`02_closures.md` §10.5 实测反例](../07_iterators_and_closures/02_closures.md#105-实测反例闭包到-fn-指针的强制转换边界与可变调用边界rustc-1990-实编译)（rustc 实编译，7 个 `rust,compile_fail` 围栏）。
+- 本 stub 拆分来源页 `03_macro_patterns` 同类边界补充实测（rustc 1.99.1，2026-10-19）：捕获闭包传 `fn` 参数位报 **E0308**「closures can only be coerced to `fn` types if they do not capture any variables」；`move || drop(s)` 二次调用报 **E0382**「closure cannot be invoked more than once because it moves the variable」；`|| v.push(3)` 未 `mut c` 调用报 **E0596**。三码均本机实编译复现。
+
 ---
 
 ## 相关概念

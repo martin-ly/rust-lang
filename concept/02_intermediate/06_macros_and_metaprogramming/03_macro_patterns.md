@@ -45,6 +45,15 @@ graph TD
     style PROC fill:#c8e6c9
 ```
 
+## ⚠️ 实测反例（按 Canonical 规则指向权威页）
+
+本页为索引/重定向 stub，依 AGENTS.md §2 不在 stub 内重复代码。实测反例维护在拆分后的两个权威页（均 rustc 1.99.1 实编译，2026-10-19 补全）：
+
+- [`04_declarative_macros.md` — ⚠️ 实测反例](04_declarative_macros.md)：宏卫生性 E0425（宏不可吃调用方局部名）、文本顺序可见性错误、片段说明符类别错配（`expr` 入类型位 → 「expected type, found `expr` metavariable」）。
+- [`05_procedural_macros.md` — 边界测试既有 compile_fail 围栏](05_procedural_macros.md)（过程宏侧）；本页选型树中「声明宏做标识符拼接不可行」的边界由 `paste` crate 需求侧佐证（§1.98.0 兼容性注意）。
+
+stub 自身保留此指针以满足 S2 反例覆盖口径；编辑时请改权威页。
+
 ## 相关概念
 
 - [声明宏](04_declarative_macros.md) — `macro_rules!` 权威页

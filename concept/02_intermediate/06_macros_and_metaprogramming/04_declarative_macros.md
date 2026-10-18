@@ -411,6 +411,55 @@ graph TD
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）
+
+本节把 §5「常见陷阱」的三条关键断言升级为可复现实测证据（错误码均本机 `rustc 1.99.1 (58cf8f9c3 2026-10-13)` 实编译得到）。
+
+### 实测 1：宏卫生性阻断「宏引用调用方局部变量」→ E0425
+
+```rust,compile_fail
+macro_rules! show { () => { println!("{}", x); } }
+fn main() { let x = 1; show!(); }
+```
+
+```text
+error[E0425]: cannot find value `x` in this scope
+  |                                            ^ not found in this scope
+help: an identifier with the same name exists, but is not accessible due to macro hygiene
+  |                 ^
+```
+
+**为什么**：编译器明确提示「同名标识符存在，但因宏卫生性不可访问」——声明宏捕获的是**定义处**命名空间，不是调用处。这是与 C 预处理器（纯文本替换、直接吃到调用方名字）的本质分野（§4 对比命题的编译期证据）。要访问调用方变量只能通过元变量传入：`show!(x)` + `($v:expr)`。
+
+### 实测 2：文本顺序决定可见性——先调用后定义失败
+
+```rust,compile_fail
+fn main() { call!(); }
+macro_rules! call { () => { println!("hi"); } }
+```
+
+```text
+error: cannot find macro `call` in this scope
+  |             ^^^^ consider moving the definition of `call` before this call
+note: a macro with the same name exists, but it appears later
+```
+
+**为什么**：`macro_rules!` 在文本作用域内按出现顺序生效（无「先声明后使用」的前向可见性，除非 `#[macro_use]`/模块化导出）。§5 陷阱「宏定义顺序」的坐实。
+
+### 实测 3：片段说明符与语法类别错配 → 无 E 编号的类别错误
+
+```rust,compile_fail
+macro_rules! new_type { ($t:expr) => { struct W($t); } }
+fn main() { new_type!(u32); }
+```
+
+```text
+error: expected type, found `expr` metavariable
+  |                                                 ^^ expected type
+```
+
+**为什么**：`expr` 片段捕获的是表达式 AST，塞进 `struct W(_)` 的**类型**语法类别位直接被类别检查拒绝。修正用 `$t:ty`。这坐实 §2「片段说明符不是类型标注，而是语法类别捕获标签」的口径——`u32` 在 `expr` 位会被当作表达式路径解析失败前移，错误发生在**展开点**而非定义点。
+
 ## 六、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |

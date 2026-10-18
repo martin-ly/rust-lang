@@ -108,7 +108,7 @@ fn use_buffer(b: &dyn Buffer<16>) {
 
 1. `Buffer<const N: usize>` 的方法签名依赖 `N`；
 2. vtable 中每个方法只能有一个固定签名，无法为每个 `N` 单独生成条目；
-3. 即使指定 `Buffer<16>`，当前 Rust（1.97）也不支持在 trait object 路径中携带 const generic 参数。
+3. 即使指定 `Buffer<16>`，当前 Rust（1.97）也不支持在 trait object 路径中携带 const generic 参数。（**勘误 2026-10-19**：此条为 1.97 历史口径；rustc 1.99.1 实测 `dyn Buffer<16>` 可编译可运行，见「⚠️ 实测反例」实测 1。）
 
 ### 3.2 判定条件
 
@@ -228,6 +228,65 @@ flowchart TD
 | vtable 方法签名含 `&[u8; N]` | N 进入方法签名，无法擦除 | 改为 `&[u8]` 并在运行期校验长度 |
 
 ---
+
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实运行，2026-10-19）
+
+本节实测**勘误了本页 §3 的历史断言**：1.99.1 上 `dyn Trait<N>`（const 实参落在 trait 路径）已经可用；真正不可行的形态是「const 泛型出现在方法签名本身」。§3 引用的「当前 Rust（1.97）不支持 `dyn Trait<{N}>`」已随 const generics 完整化推进而失效——旧说法保留作为历史版本口径，以下为本机实测现状。
+
+### 实测 1：`dyn Buffer<16>` 实际可编译、可运行（推翻本页旧断言）
+
+```rust
+trait Buffer<const N: usize> {
+    fn data(&self) -> &[u8; N];
+}
+struct Buf16([u8; 16]);
+impl Buffer<16> for Buf16 {
+    fn data(&self) -> &[u8; 16] { &self.0 }
+}
+fn use_buffer(b: &dyn Buffer<16>) -> u8 {
+    b.data()[3]
+}
+fn main() {
+    let b = Buf16([7u8; 16]);
+    println!("dyn Buffer<16> ok: {}", use_buffer(&b));
+}
+```
+
+实运行输出：`dyn Buffer<16> ok: 7`。trait 声明处带 `const N`、方法签名里的 `N` 由 **trait 路径实参 `Buffer<16>` 绑定**后，vtable 每实例方法签名唯一确定——这正是 §3.2 判定条件第 1 条（const 不进入 vtable 签名**自由度**）成立的形态。§3.1 那句「the trait Buffer cannot be made into an object」在 1.99.1 已不复现（本页原示例代码原样编译通过，仅 dead_code warning）。
+
+### 实测 2：const 泛型进入方法签名本身 → E0038（真正的边界）
+
+```rust,compile_fail
+trait G { fn m<const N: usize>(&self, a: &[u8; N]); }
+fn f(b: &dyn G) {}
+fn main() {}
+```
+
+```text
+error[E0038]: the trait `G` is not dyn compatible
+  |       -      ^ ...because method `m` has generic type parameters
+  = help: consider moving `m` to another trait
+```
+
+**为什么**：vtable 条目必须签名固定。const 参数绑在 **trait 层**（每个 `dyn Trait<N>` 是一张独立 vtable）可以；绑在 **方法层**（同一 trait object 上按调用点任选 N）则 vtable 无法枚举，编译器直接拒绝。区分这两个位置是本页最重要的可操作结论，比「dyn Trait<{N}> 不工作」的笼统旧口径精确。
+
+### 实测 3：关联常量破坏 dyn 兼容性 → E0038
+
+```rust,compile_fail
+trait Sized2 { const VALUE: usize; fn data(&self) -> &[u8]; }
+struct B16([u8;16]);
+impl Sized2 for B16 { const VALUE: usize = 16; fn data(&self) -> &[u8] { &self.0 } }
+fn f(b: &dyn Sized2) { let _ = <dyn Sized2 as Sized2>::VALUE; }
+fn main() {}
+```
+
+```text
+error[E0038]: the trait `Sized2` is not dyn compatible
+  |       ------         ^^^^^ ...because it contains associated const `VALUE`
+  = help: consider moving `VALUE` to another trait
+```
+
+**为什么**：§6 失效模式表第 2 行的坐实——关联常量无 vtable 槽位，`<dyn Trait>::CONST` 无具体类型可解析。§4.1 workaround（`fn size(&self) -> usize` 方法替代关联常量）实测有效（4.1 代码块可编译）。
 
 ## 七、相关概念
 

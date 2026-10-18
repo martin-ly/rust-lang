@@ -539,6 +539,76 @@ fn scaled_demo() {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）
+
+本节全部错误码为本机 `rustc 1.99.1 (58cf8f9c3 2026-10-13)` 实编译得到，非文档转述。它们把 §7 的「stable 边界」从叙述升级为可复现证据。
+
+### 实测 1：类型参数不能占据常量位置（E0423）
+
+```rust,compile_fail
+fn f<T>(arr: [u8; T]) {}
+fn main() { f::<u32>(); }
+```
+
+实编译输出（截选）：
+
+```text
+error[E0423]: cannot find value `T` in this scope
+  |                   ^ not found in this scope
+  = note: a type parameter named `T` exists in another namespace
+help: you might have meant to write a const parameter here
+  | fn f<const T: /* Type */>(arr: [u8; T]) {}
+```
+
+**为什么**：类型命名空间与常量命名空间分离——`[u8; T]` 的 `T` 落在常量命名空间，编译器拒绝跨空间借用。这与 §2 的「值作为类型参数」互为镜像：const 参数是独立命名空间的一等公民。
+
+### 实测 2：const 参数参与运算被拒（无 E 编号，min_const_generics 硬边界）
+
+```rust,compile_fail
+fn f<const M: usize>() { let x: [u8; M + 1] = [0; 4]; }
+fn main() { f::<3>(); }
+```
+
+```text
+error: generic parameters may not be used in const operations
+  |                                      ^ cannot perform const operation using `M`
+  = help: const parameters may only be used as standalone arguments here, i.e. `M`
+```
+
+返回值位置同理（`fn f<const N: usize>() -> [u8; N * 2]` 报同型错误两处）。**为什么**：§7 反例 1/2 的口径坐实——stable 下 const 参数只能「原样」出现在类型位置，任何算术（`M+1`、`N*2`）都要求 `generic_const_exprs`（nightly）。
+
+### 实测 3：实参命名空间错配（E0747）
+
+```rust,compile_fail
+fn f<const N: usize>() {}
+fn main() { f::<usize>(); }
+```
+
+```text
+error[E0747]: type provided when a constant was expected
+help: if this generic argument was intended as a const parameter, surround it with braces
+  | fn main() { f::<{ usize }>(); }
+```
+
+**为什么**：调用点同样按命名空间分流；花括号 `{ }` 块表达式形态属于 nightly 的 `const_generics_range_of_int_float`/块表达式扩展，stable 下只能传字面常量值。
+
+### 实测 4：运行期变量进入长度位置（E0435）
+
+```rust,compile_fail
+fn main() { let n = 3usize; let a: [u8; n] = [0; 3]; }
+```
+
+```text
+error[E0435]: attempt to use a non-constant value in a constant
+help: consider using `const` instead of `let`
+```
+
+**为什么**：const 泛型实参必须是常量求值可达的值；`let` 绑定是运行期存储位置，从根上不构成类型输入。这是「数组长度抽象泄漏」动机（§1）的编译期证据。
+
+### 实测 5：合法边界的正面实测（对照组）
+
+同批实测的**通过**用例，锁定 stable 能力正面清单：`const N: usize = 4` 默认参数（struct 上，编译通过）；`const B: bool` / `const C: char` 参数（编译通过）；`const fn size() -> usize` 直接用于 `[u8; size()]`（编译通过，§5 单态化链成立）。反面组：`const SCALE: f64` 报 `f64 is forbidden as the type of a const generic parameter`（无 E 编号，note 明示「the only supported types are integers, bool, and char」——§2 边界原文实编译复现）。
+
 ## 十、来源与延伸阅读
 
 - [Rust Reference — Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html)：const 参数的规范语法与约束
