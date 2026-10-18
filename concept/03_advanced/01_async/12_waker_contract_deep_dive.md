@@ -321,6 +321,34 @@ impl BadSource {
 
 **与 C1 的区别**：C1 是注册了但唤醒路径竞态丢失；C3 是**根本没有注册**。二者现象相同（任务永久 Pending），区分方法：用 `tokio-console` / 自定义 waker 埋点统计「该任务最后一次 poll 后是否有任何 wake 调用」——C3 恒为 0，C1 在特定交织下才为 0。R4 的正模式见 futures `AtomicWaker`：`register`（保存最新 waker 克隆）/ `wake`（取出并唤醒）两步原语。
 
+## ⚠️ 实测反例（rustc 1.99.1 + cargo-miri/nightly 本机实跑，2026-10-19）
+
+§五 反例的本机量化补强。**口径更新**：本页撰写时 stable 工具链无 miri，只能以「miri 思路」注解；2026-10-19 本机已装 `nightly-x86_64-pc-windows-msvc` + `cargo-miri` 组件，C2 记账错误反例已获 Miri 实跑证据。
+
+### 实测（C2 坐实）：`wake_by_ref` 漏 `forget` 的 Arc 记账错误——Miri 直接抓 dangling
+
+复刻 §5.2 的破实现（`wake_by_ref` 里 `Arc::from_raw` 后不 `forget`，函数尾自然 drop ⟹ 无配对的计数递减）：
+
+```rust
+fn wake_by_ref_broken(data: *const ()) {
+    // ❌ UB pattern: reconstruct Arc, use it, let it DROP at end of function
+    let arc = unsafe { Arc::from_raw(data as *const Arc<WakerData>) };
+    println!("wake fired"); // arc dropped here: decrements WITHOUT forget()
+}
+```
+
+`cargo +nightly miri run` 诊断：
+
+```text
+error: Undefined Behavior: constructing invalid value of type &ArcInner<WakerData>:
+encountered a dangling reference (0x4[noalloc] has no provenance)
+    |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Undefined Behavior occurred here
+```
+
+**为什么这个诊断比预想更靠前**：§5.2 原本预测 Miri 会在**第二次释放**时报 `attempting to deallocate ... already freed`（double-free）。实测显示 Miri 的 provenance 检查在**记账错误的第一次越权 `Arc::from_raw`** 处即报 dangling reference——计数被偷一次后，后续 `from_raw` 拿到的裸指针指向的分配已不再具有合法 provenance。结论不变、定位更早：vtable 四槽（clone/wake/wake_by_ref/drop）的 clone-forget 配平一旦破坏，Miri 不需要等到真正 double-free 就能拒绝。Rust 1.99 的 Miri provenance 模型（"no provenance" 措辞）正是这类 raw-pointer 记账 bug 的机械化检测器，验证了本页「正确模式全集 §三」中 `wake_by_ref` 必须 `forget` 的铁律。
+
+C1（丢 wake 死锁）与 C3（未注册 waker）属活性/调度性质，本机静态复核与 `AtomicWaker` 注册-复查模式一致，无需 Miri；区分手段仍按 §5.3 的埋点统计法。
+
 ## 六、判定树与检查清单
 
 ```mermaid

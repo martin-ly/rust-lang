@@ -456,7 +456,52 @@ trait RepoDyn {
 | 运行时上下文缺失 | 运行时 | Q-E2 ≥1 | `no reactor running` panic | 运行即现 | 🟡 panic |
 | 非对象安全 trait | dyn 兼容 | Q-T1 ≥1 | `cannot be made into an object` | 编译器 | 编译期阻止 |
 
----
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实运行，2026-10-19）
+
+上表「Future 非 Send」「取消丢数据」两行的本机复现锚点（`rustc 1.99.1 (58cf8f9c3)`，Windows x86_64）。
+
+### 实测 1（边界四坐实）：`MutexGuard` 跨 await——future 非 Send 的完整诊断链
+
+```rust,compile_fail
+use std::sync::Mutex;
+async fn inner() -> i32 { 1 }
+async fn demo(m: &Mutex<i32>) -> i32 {
+    let g = m.lock().unwrap(); // MutexGuard held across await
+    let v = inner().await;
+    *g + v
+}
+fn main() {
+    let m = Mutex::new(0);
+    let f = demo(&m);
+    fn assert_send<T: Send>(_: &T) {}
+    assert_send(&f); // 模拟 runtime spawn 对 Send 的要求
+}
+```
+
+```text
+error: future cannot be sent between threads safely
+   = help: within `impl Future<Output = i32>`, the trait `Send` is not implemented for `std::sync::MutexGuard<'_, i32>`
+note: future is not `Send` as this value is used across an await
+ 4 |     let g = m.lock().unwrap();
+   |         - has type `std::sync::MutexGuard<'_, i32>` which is not `Send`
+ 5 |     let v = inner().await;
+   |                     ^^^^^ await occurs here, with `g` maybe used later
+```
+
+**为什么诊断值得逐字记录**：编译器给出**三段式定位**——非 Send 类型（`MutexGuard`）、持有者变量（`g`）、await 点（`^^^^^` 精确到 `.await` 五列）。`Rc<i32>` 跨 await 的同型版本本机同样报同一错误链（`trait Send is not implemented for Rc<i32>`），证明该机制对「状态机字段含非 Send 值」一视同仁。修法即判定表 Q-S2：await 前 `drop(g)` 或改用临界区内无 await 的结构。
+
+### 实测 2（取消语义坐实）：future 中途 drop——poll 状态丢弃 + 相邻 guard 正常析构
+
+手写 `Future`（poll 3 次才 Ready，每次 Pending 前 `wake_by_ref`），驱动 1 次 poll 后在中途 drop future（模拟 select! 落选分支被取消）：
+
+```text
+poll #1
+dropping future mid-flight after 1 polls (simulated cancellation)
+guard D dropped (cleanup ran despite mid-flight drop)
+done
+```
+
+实运行三事实：① 内部状态（`polls` 计数）随 future 析构**整体消失**——不存在「部分完成的 future 残留状态」；② future 生命周期内登记的 RAII guard（`Drop`）**照常执行**——取消不是泄漏而是完整析构；③ 「取消点 = await 边界」的底层机制就此显形：await 处 future 可被任意 drop，**你的中间状态是否可恢复完全取决于状态存在哪**——存在 future 内部即随 drop 蒸发（取消不安全），存在 future 外（`&mut` 借用/渠道/事务层）即可跨取消存活（取消安全）。这正是 §五 Tokio 判定表「非 cancel-safe」行的机器语义。
 
 ## 十一、边界判定总图
 

@@ -220,7 +220,43 @@ flowchart TD
 | FFI 错误码未映射到 Rust 错误 | errno 被后续调用覆盖 | 在 unsafe 块内立即读取并转换 |
 | 外部句柄在 Future drop 后泄漏 | 缺少 Drop 中关闭/注销 | 在 Future Drop 中调用 FFI 清理 |
 
----
+## ⚠️ 实测反例（rustc 1.99.1 + cargo-miri/nightly 本机实跑，2026-10-19）
+
+上表两行的本机复现锚点（`rustc 1.99.1 (58cf8f9c3)`，Windows x86_64；Miri 经 `cargo +nightly miri`）。
+
+### 实测 1（表行 2 坐实）：「C 回调唤醒已释放 Waker」——Miri stacked-borrows 精确定位 use-after-free
+
+模拟 §四 回调 FFI 模式：注册时 leak 一个 `Box<mpsc::Sender>` 作 waker data；C 侧「克隆」只是**直接复用同一 data 指针**（未调 vtable.clone、无计数配平——真实 C 绑定最常见的错误形态），Rust 侧 `drop(waker)` 触发 `drop_w` 释放该 Box，随后迟到回调对已释放 data 调 `wake_by_ref`：
+
+```text
+error: Undefined Behavior: trying to retag from <539> for Unique permission
+at alloc289[0x0], but that tag only grants SharedReadOnly permission for this location
+```
+
+Miri 在**释放后的首次触碰**即报 stacked-borrows retag 冲突（alloc289 已无 Unique 权限），无需等到真的二次释放。这正是修复列「使用 Box/Arc + 注销机制」的机器语义：clone 必须经 vtable 走计数（`Arc::clone`+`into_raw`/`forget` 配平，见 [Waker 契约深度解析 实测](../01_async/12_waker_contract_deep_dive.md)），且注销机制保证 drop 后不再有回调引用 data。
+
+### 实测 2（表行 2 的正方向对照）：正确的跨线程回调唤醒模式可实跑
+
+同一 vtable 模式但 clone 正确配平（每次 clone leak 一个新 `Sender` 克隆）+ C 回调线程 sleep 200ms 后 `Box::from_raw` 回收自己那份克隆再 `wake()`：
+
+```text
+cross-thread FFI wake delivered in 201ms (channel-backed Waker pattern works)
+```
+
+实运行 201ms——`Waker` 本身 `Sync`（文档契约：clone/wake 可跨线程），channel-backed data 让「非 Rust 线程发起唤醒」成为纯数据消息投递，避开一切运行时假设。两条对照坐实 §四 的核心命题：**Waker 跨 FFI 边界的可行性不取决于 Waker 类型，而取决于 data 的所有权协议是否配平**。
+
+### 实测 3（表行 1 量化）：poll 中阻塞——单线程执行器 0.9s 墙钟，quick 任务全程陪等
+
+手写两个 Future 共享一个 round-robin 驱动：`Busy` 每次 poll 内 `thread::sleep(300ms)`（模拟阻塞 FFI），`Quick` 每次 poll 成本 ~0ms：
+
+```text
+blocking task tick 1 (holds the executor thread for 300ms)
+quick task poll 1 sees executor blocked by CPU hog
+... (交替共 6 行)
+total wall: 0.9s for 3 blocking 300ms polls + 3 quick polls (quick polls cost ~0ms)
+```
+
+Quick 任务理论耗时 ~0ms，实测却被拖满 0.9s——**阻塞 poll 的成本由同执行器上所有任务分摊**。Tokio 多线程缓解但不根除（worker 数有限，阻塞任务占坑即减并发度），修复方向即判定树 A1：`spawn_blocking` 把阻塞 FFI 挪出 poll 契约。
 
 ## 八、相关概念
 

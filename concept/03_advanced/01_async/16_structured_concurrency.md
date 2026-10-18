@@ -204,7 +204,31 @@ async fn orphan_task() {
 
 结构化并发方案要求子任务句柄的生命周期绑定到父 `scope`，scope 退出前必须 join 或 cancel 所有子任务。
 
----
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）
+
+上节孤儿反例的 std 层本机量化（`rustc 1.99.1 (58cf8f9c3)`；tokio 版需 runtime，此处用 `std::thread::spawn` 呈现同一语义缺口）：
+
+```rust
+use std::thread;
+use std::time::Duration;
+fn main() {
+    thread::spawn(|| {
+        for i in 1..=5 {
+            thread::sleep(Duration::from_millis(100));
+            println!("orphan tick {}", i); // 计划共 500ms 的 5 次输出
+        }
+    });
+    println!("main returns now (no join, no cancellation scope)");
+}
+```
+
+实运行输出**只有一行**：
+
+```text
+main returns now (no join, no cancellation scope)
+```
+
+进程 `EXIT=0`——`main` 返回即进程退出，孤儿线程的 5 个 tick（计划 500ms 工作）**一行都没打印**就被硬杀。两个方向都有实测证据：① 反命题「spawn 后不 join 也没事」被证伪——子任务不是「继续跑」而是被静默截断，比 tokio 孤儿（进程被后台任务拖着不退出）更隐蔽：没有任何错误、没有 panic、exit code 还是 0；② 这正是本页 §二「子任务生命周期绑定父作用域」原则的反面基线——std 的 `JoinHandle` 提供了「等待」原语但没有「作用域」原语，`scope::scope` 提案 / async book structured concurrency 章节要补的正是「父退出前强制 join-or-cancel」这道编译器可见的闸门。
 
 ## 八、参考来源
 

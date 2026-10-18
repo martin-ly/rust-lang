@@ -482,6 +482,67 @@ Future 被 drop 时，其状态机内活跃局部变量按**声明逆序**析构
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）
+
+取消语义的本机最小复现（不依赖 Tokio，直接驱动手写 `Future`，`rustc 1.99.1 (58cf8f9c3)`，Windows x86_64）：poll 3 次才 Ready 的 future，每次 poll 内部携带一个临时 `Guard`（模拟一次 poll 内分配的中间缓冲），驱动 1 次 poll 后中途 drop（模拟 `select!` 落选分支被取消），随后**重新构造同一 future** 再完整驱动到完成：
+
+```rust
+use std::future::Future;
+use std::pin::Pin;
+use std::task::{Context, Poll, Wake, Waker};
+use std::sync::Arc;
+
+struct Counter;
+impl Wake for Counter { fn wake(self: Arc<Self>) {} }
+
+struct Guard(usize);
+impl Drop for Guard {
+    fn drop(&mut self) { println!("guard for poll #{} dropped", self.0); }
+}
+
+struct Counted { polls: usize }
+impl Future for Counted {
+    type Output = usize;
+    fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<usize> {
+        self.polls += 1;
+        let _g = Guard(self.polls); // 每次 poll 的临时缓冲
+        println!("poll #{} (internal state polls={})", self.polls, self.polls);
+        if self.polls >= 3 { Poll::Ready(self.polls) }
+        else { cx.waker().wake_by_ref(); Poll::Pending }
+    }
+}
+
+fn main() {
+    let waker = Waker::from(Arc::new(Counter));
+    let mut cx = Context::from_waker(&waker);
+    let mut f = Box::pin(Counted { polls: 0 });
+    let _ = f.as_mut().poll(&mut cx); // 只驱动 1 次
+    println!("dropping future mid-flight after 1 poll (simulated select! loser)");
+    drop(f);
+    let mut f2 = Box::pin(Counted { polls: 0 }); // 取消后重启
+    let _ = f2.as_mut().poll(&mut cx);
+    while f2.as_mut().poll(&mut cx).is_pending() {} // 完整驱动
+}
+```
+
+实运行输出（逐字）：
+
+```text
+poll #1 (internal state polls=1)
+guard for poll #1 dropped
+dropping future mid-flight after 1 poll (simulated select! loser)
+poll #1 (internal state polls=1)
+guard for poll #1 dropped
+poll #2 (internal state polls=2)
+guard for poll #2 dropped
+poll #3 (internal state polls=3)
+guard for poll #3 dropped
+```
+
+四事实坐实 §2.1 的形式定义（对应取消注入测试策略 §1.4）：① 每次 poll 的临时缓冲（`Guard`）随该次 poll 返回即析构，future 被 drop 时内部状态（`polls` 计数）**整体蒸发**——不存在「半完成 future」残留，落选分支的中间缓冲必然丢失，这就是 `read_line` 半帧陷阱的底层机制；② RAII guard 照常析构——取消 = 完整 drop，不是泄漏，故「用 Drop 做清理」在取消下安全，「用 future 内部状态做恢复」不安全；③ **重启即全新**：取消后重新构造的 future 从 `poll #1` 重新开始，`polls` 不延续——这正是 Tokio「每轮循环新建 Future」约定的机器语义，也解释了为什么 cancel-safe 的判据是「反复新建再调用 ≡ 一次连续调用」；④ 取消安全的充要条件由此显形：**中间状态必须存在 future 之外**（`&mut` 借用、channel、事务层），才可能跨取消存活——与 §五 判定表「cancel-safe ⟺ 状态在调用方」完全吻合。
+
+配套的 Send 边界实测（`MutexGuard` 与 `Rc` 跨 await 各触发 `future cannot be sent between threads safely`，完整诊断链见 [异步边界全景 实测 1](06_async_boundary_panorama.md)）：持锁跨 await 的「编译期拦得住」与取消丢数据的「编译期拦不住」形成对照——前者是类型系统边界，后者只能靠 §七 检查清单与取消注入测试。
+
 ## 九、来源
 
 - [Tokio docs — `tokio::select!`：Cancellation safety 章节](https://docs.rs/tokio/latest/tokio/macro.select.html#cancellation-safety)（方法级 cancel safe 约定的权威表述，以及各 API 文档中的 cancel-safety 标注）

@@ -39,6 +39,18 @@
     "concept/03_advanced/02_unsafe/11_in_place_pinned_initialization.md"
    ],
    "evidence": "Pin E0277/E0199, ManuallyDrop double-drop, E0381, Miri uninit 5439557 vs alloc146, null reference UB"
+  },
+  {
+   "batch": 4,
+   "pages": [
+    "concept/03_advanced/01_async/05_async_cancellation_safety.md",
+    "concept/03_advanced/01_async/06_async_boundary_panorama.md",
+    "concept/03_advanced/01_async/12_waker_contract_deep_dive.md",
+    "concept/03_advanced/01_async/16_structured_concurrency.md",
+    "concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md",
+    "concept/03_advanced/04_ffi/04_async_ffi_boundary.md"
+   ],
+   "evidence": "MutexGuard/Rc cross-await Send + future mid-flight drop + Miri waker Arc forget dangling + orphan thread EXIT0 + blocking poll 0.9s + FFI waker UAF retag"
   }
  ],
  "version_baseline": {

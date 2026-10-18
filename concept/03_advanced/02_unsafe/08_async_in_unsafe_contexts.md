@@ -237,6 +237,36 @@ extern "C" fn c_callback(waker: *const Waker) {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 + cargo-miri/nightly 本机实跑，2026-10-19）
+
+§4.2 与 §5.2 的本机量化证据（`rustc 1.99.1 (58cf8f9c3)`，Windows x86_64；UB 检测经 `cargo +nightly miri`）。
+
+### 实测 1（§4.2 坐实）：`mut self: Pin<&mut Self>` 破坏自引用——编译全绿，Miri 抓 stale 读
+
+§4.2 的 `BadFuture`（`data: String` + `ptr: *const String` 自引用，`poll(mut self: ...)` 内替换 `data` 后读旧 `ptr`）本机实测：
+
+- **rustc 1.99.1：零警告零错误编译**——`BadFuture` 未标 `PhantomPinned`，是 auto-`Unpin` 类型，`Pin` 对它不提供任何移动保护；`mut self` 模式本身合法；本实测经 `Pin::new_unchecked` 在栈上 pin 后 poll（自引用 `ptr` 指向栈上 `f` 的字段）。
+- **Miri**：
+
+```text
+error: Undefined Behavior: trying to retag from <418> for SharedReadOnly permission
+at alloc201[0x0], but that tag does not exist in the borrow stack for this location
+11 |         let stale: &String = unsafe { &*self.ptr };
+```
+
+**为什么这组证据决定性**：它把本页 §4.1 边界陈述「Pin 保护的是 Pin 契约，不是 unsafe 块里的每个动作」量化成三档光谱——① `PhantomPinned` + 安全 API：E0277 编译期拦（见 [unsafe 边界全景 实测 1](02_unsafe_boundary_panorama.md)）；② `Pin` 包裹但类型 `Unpin`：`Pin::new_unchecked` 后污染自引用，编译器全绿、Miri 才炸（本实测）；③ 手写 poll 用 `mut self` 重赋字段：连「自引用存在」都是运行时事实，静态无痕迹。async+unsafe 的真实防线只能前移到**契约审查**（poll 内禁止使 `ptr` 失效的字段写）+ Miri 后验。
+
+### 实测 2（§5.2 坐实）：FFI 回调唤醒已释放 Waker——Miri stacked-borrows retag 冲突
+
+§5.2 的 `c_callback` 反例（裸 `*const Waker` 迟到回调）本机以 data 层等价形态复现（C 侧共享 data 指针、Rust 侧先 drop、回调后 fire）：
+
+```text
+error: Undefined Behavior: trying to retag from <539> for Unique permission
+at alloc289[0x0], but that tag only grants SharedReadOnly permission for this location
+```
+
+完整复刻与正方向对照（channel-backed Waker 跨线程唤醒实跑 201ms 成功）见 [Async FFI Boundary ⚠️ 实测反例](../04_ffi/04_async_ffi_boundary.md) 实测 1/2——§5.2 「风险」三 bullet 中「waker 可能已被释放」一条由此获得 Miri 级证据，「修正」列的 clone/`Arc<Waker>` 配平方案则是被同组实测 2 验证的工作形态。
+
 ## 六、判定树
 
 ```mermaid
