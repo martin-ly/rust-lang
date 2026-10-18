@@ -357,6 +357,38 @@ fn main() {
 }
 ```
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实运行，2026-10-19）
+
+### 实测 1（反例 1 坐实）：`#![no_std]` 下 `use std::vec::Vec` 本机 E0433
+
+反例 1 源码本机 `rustc --edition 2021 --crate-type lib` 实编译：
+
+```text
+error[E0433]: cannot find module or crate `std` in this scope
+ --> e1_no_std_vec.rs:2:5
+  |
+2 | use std::vec::Vec;
+  |     ^^^ use of unresolved module or unlinked crate `std`
+```
+
+修正版（`extern crate alloc; use alloc::vec::Vec;`）同机编译干净（exit 0）。原文围栏是 `rust,ignore`（写作时无法本机验证跨 target）；本节把反例 1→修正对升级为本机 E0433 实测对——`no_std` 边界在纯 host 编译下即可复现，无需真实嵌入式 target。
+
+### 实测 2（反例 2 勘误）：「后续 push 仍可能 panic」在 rustc 1.99.1 下不成立——try_reserve 失败不污染容器
+
+本机两组实跑：
+
+1. **原反例原样**（`try_reserve(usize::MAX)` 忽略错误 + `push`）：default 与 `-O` 均实跑 **EXIT=0、无 panic**。
+2. **状态探测**（`try_reserve(usize::MAX/4)` + 读 `capacity` + `push(black_box(1))`）：
+
+```text
+try_reserve returned err: true
+capacity after ignored failure: 0
+push survived, len=1 cap=8
+EXIT=0
+```
+
+`capacity=0` 直接证明 `try_reserve` 的**强异常保证**：失败时 Vec 完全不变，不会留下被污染的巨容量。所以「忽略返回值」的真实危害不是「容器损坏」而是**语义失败**——你以为预分配已建立，实际下一 push 仍在 0 容量按需分配，届时若分配失败，嵌入式场景没有可恢复路径。匹配 `try_reserve` 结果的价值在于把 OOM 处理变成调用点的显式策略。原文断言保留于此作为历史口径，勘误以本实测为准。
+
 ### 反例 3：中断上下文中使用 `Vec::push`
 
 ```rust,ignore

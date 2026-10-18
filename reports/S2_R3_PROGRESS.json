@@ -61,6 +61,13 @@
     "concept/03_advanced/08_process_ipc/09_process_testing_and_benchmarking.md"
    ],
    "evidence": "canonical stub pointer + Rc cycle leak drops=0 EXIT0 + recv-after-drop 101 vs 0 + float eq 101 left=0.30000000000000004"
+  },
+  {
+   "batch": 6,
+   "pages": [
+    "concept/06_ecosystem/05_systems_and_embedded/37_fallible_allocation_and_no_alloc_collections.md"
+   ],
+   "evidence": "no_std E0433 + alloc fix compile; try_reserve strong guarantee: capacity=0 after MAX/4 failure, original-page claim corrected (勘误)"
   }
  ],
  "version_baseline": {
@@ -79,5 +86,9 @@
   "00_meta(68)",
   "sources(2)"
  ],
- "cron": "14459c312b92 (every 180m, 串行模式指令)"
+ "cron": "14459c312b92 (every 180m, 串行模式指令)",
+ "rescan_2026_10_19_post_batch5": {
+  "strict_gaps": 133,
+  "note": "530 tracked concept pages; 239→133 closed via S2-R3 batches 1-5 plus pre-existing coverage"
+ }
 }
