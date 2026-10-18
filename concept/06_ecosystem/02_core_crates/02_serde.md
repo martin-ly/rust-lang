@@ -278,6 +278,46 @@ fn main() {
 
 ---
 
+## ⚠️ 实测反例（serde 1.0.229 + serde_json 1.0.154 实编译/实运行，2026-10-19，本机 workspace Cargo.lock 版本）：反序列化边界全部是**运行时**错误，类型系统零参与
+
+serde 的「类型驱动反序列化」常被误读为「不匹配会在编译期被拦下」。本机全负例实跑（EXIT=0，五种失败全部在运行时以 `Result::Err` 返回）：
+
+```rust
+use serde::Deserialize;
+#[derive(Debug, Deserialize)]
+struct User { name: String, email: String }
+#[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct StrictUser { name: String }
+
+fn main() {
+    let r1: Result<User, _> = serde_json::from_str(r#"{"name":"a"}"#);
+    println!("1 missing-field: {:?}", r1.unwrap_err());
+    let u2: User = serde_json::from_str(r#"{"name":"a","email":"b","admin":true,"role":"superuser"}"#).unwrap();
+    println!("2 unknown-fields-accepted: {:?}", u2);
+    let r3: Result<StrictUser, _> = serde_json::from_str(r#"{"name":"a","admin":true}"#);
+    println!("3 deny_unknown_fields: {:?}", r3.unwrap_err());
+    let r4: Result<User, _> = serde_json::from_str(r#"{"name":"a","email":"b",}"#);
+    println!("4 trailing-comma: {:?}", r4.unwrap_err());
+    let r5: Result<User, _> = serde_json::from_str(r#"{"name":123,"email":"b"}"#);
+    println!("5 type-mismatch: {:?}", r5.unwrap_err());
+}
+```
+
+实跑输出：
+
+```text
+1 missing-field: Error("missing field `email`", line: 1, column: 12)
+2 unknown-fields-accepted: User { name: "a", email: "b" }
+3 deny_unknown_fields: Error("unknown field `admin`, expected `name`", line: 1, column: 19)
+4 trailing-comma: Error("trailing comma", line: 1, column: 25)
+5 type-mismatch: Error("invalid type: integer `123`, expected a string", line: 1, column: 11)
+```
+
+口径：①缺字段、③未知字段（开了 `deny_unknown_fields`）、⑤类型错配——只有显式开了守卫才报错；②默认策略是**静默丢弃未知字段**，`admin:true` 这类注入字段不报错也不进结构体，权限语义必须在 schema 或应用层自建；④JSON 语法层错误由 serde_json 报，serde 核心不管。serde 给的是「反序列化到强类型后」的编译期收益，输入边界本身 100% 运行时——与本页「常见陷阱」节互为印证。
+
+---
+
 ## 五、版本说明
 
 - **当前稳定版本**：serde 1.0.x（语义化主版本 1.0 已长期稳定；最新 patch 版本见 [crates.io/serde](https://crates.io/crates/serde)）。

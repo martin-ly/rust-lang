@@ -222,6 +222,22 @@ async fn handle_request() {
 
 ---
 
+## ⚠️ 实测反例（tracing 0.1.44 + tracing-subscriber 0.3.23 实编译/实运行，2026-10-19）：没有 subscriber 时「埋点全绿、日志全丢」——可观测性不在 emit 侧而在 install 侧
+
+本机三组实跑（EXIT=0，无 panic、无警告级提示丢日志）：
+
+```text
+1 no subscriber: above event output NOTHING (EXIT stays 0, silent loss)
+ INFO eco3: level=info target=eco3
+ INFO charge{card="card-1234" amount=99}: eco3: charging
+```
+
+对应代码要点：`tracing::info!("event-with-no-subscriber")` 在未 `init()` 任何 subscriber 的进程里**输出零字节**——宏正常展开、事件正常构造，然后蒸发；装了 `EnvFilter::new("info")` 的 fmt subscriber 后，同进程内 `debug!` 事件被静默丢弃（默认级别门），只有 `info!` 落地；`#[instrument(skip(secret))]` 修饰的函数自动生成 span，其余参数**按名字+值**进入结构化输出——`card="card-1234" amount=99` 直接可见。
+
+口径：①「打了日志」与「有日志」是两回事——忘记 install subscriber 是编译期完全合法的静默失败，CI 不拦、启动不报，只在想看日志那天暴露；②级别过滤默认吃掉 debug，排障时「日志不见了」第一查 env-filter 而非代码；③`#[instrument]` 自动记录函数参数是**默认行为**而非选项——PII/密钥参数必须显式 `skip`（本例 `secret` 被 skip 是刻意为之），这是 tracing 生态里最典型的日志侧数据泄露面，与本页「常见陷阱」节的结构化日志主张互为印证。
+
+---
+
 ## 五、版本说明
 
 | **项目** | **说明** |

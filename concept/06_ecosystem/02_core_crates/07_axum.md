@@ -299,6 +299,39 @@ let app = Router::new().route("/", get(good_handler));
 
 ---
 
+## ⚠️ 实测反例（axum 0.8.9 实编译，2026-10-19，本机 workspace 版本）：路由组合错误全部在**编译期**硬拒——`Handler` 束约就是守卫
+
+本机对照实编译：
+
+**通过组**（同一 handler 两个 `Path` 提取器，路由 `/b/:id/:name`）：编译 EXIT=0——`Path` 提取器可以组合，因为路径可拆分。
+
+```rust
+async fn two(id: Path<i32>, name: Path<String>) -> String { format!("{}/{}", id.0, name.0) }
+let app: Router = Router::new().route("/b/:id/:name", get(two)); // EXIT=0
+```
+
+**硬拒组**（两个 body 提取器）：
+
+```rust,compile_fail
+use axum::{routing::post, Router, extract::Json};
+async fn two_bodies(a: Json<i32>, b: Json<String>) -> String { format!("{}{}", a.0, b.0) } // 两个 body 提取器
+#[tokio::main]
+async fn main() {
+    let app: Router = Router::new().route("/x", post(two_bodies));
+    let _ = app;
+}
+```
+
+```text
+error[E0277]: the trait bound `fn(Json<i32>, Json<String>) -> impl Future<Output = String> {two_bodies}: Handler<_, _>` is not satisfied
+    = note: Consider using `#[axum::debug_handler]` to improve the error message
+note: required by a bound in `post`
+```
+
+口径：「一个请求只有一个 body」不是运行时约定而是类型层事实——第二个 `Json` 让函数不满足 `Handler` 束约，`post(...)` 调用处当场 E0277。「谁消费了请求 body」由提取器类型系统记账（`Json`/`Form`/提 body 的 extractor 只能有一个；`Path`/`Query`/`Header` 可组合）。代价是这类错误信息默认不可读（E0277 长串泛型），本页「macros」特性里的 `#[axum::debug_handler]` 就是为这类编译错误给出的官方逃生门——错误本身不发生在运行时，**可读性**才发生在工具层。
+
+---
+
 ## 五、版本说明
 
 | 项目 | 说明 |

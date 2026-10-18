@@ -135,6 +135,29 @@ Rust Core Crates
 
 ---
 
+## ⚠️ 实测反例（2026-10-19 本机实测，rustc 1.99.1 + workspace Cargo.lock 版本）：本索引页推荐的每个 crate 的「边界错误」都已在权威子页实编译坐实——选型结论的可机检锚点
+
+本页不重复 crate API（见「二」节声明），只给一个索引级守卫例：**crate 的 trait 束约错误发生在「接线」处而非「调用」处**——axum 0.8.9 实编译，把两个 body 提取器的函数接进路由：
+
+```rust,compile_fail
+use axum::{routing::post, Router, extract::Json};
+async fn two_bodies(a: Json<i32>, b: Json<String>) -> String { format!("{}{}", a.0, b.0) } // 两个 body 提取器
+#[tokio::main]
+async fn main() {
+    let app: Router = Router::new().route("/x", post(two_bodies));
+    let _ = app;
+}
+```
+
+```text
+error[E0277]: the trait bound `fn(Json<i32>, Json<String>) -> impl Future<Output = String> {two_bodies}: Handler<_, _>` is not satisfied
+note: required by a bound in `post`
+```
+
+同批本机实测覆盖：serde 1.0.229 反序列化五连运行时错（`02_serde.md`）、tokio 1.53.3 单线程阻塞饿死 sibling 0 poll（`03_tokio.md`）、tracing 无 subscriber 静默丢日志（`05_tracing.md`）、axum 双提取器 E0277（`07_axum.md`）、sqlx 0.9.0 `query!` 无 DATABASE_URL 编译硬拒 + 字符串 API 运行时解码错（`08_sqlx.md`）——「选 crate」的每条决策矩阵行，其失败模式都有子页实测节可对号验桩。
+
+---
+
 ## 五、Crate 选择决策树：标准库 vs 第三方
 
 ```mermaid

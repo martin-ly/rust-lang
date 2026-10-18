@@ -110,6 +110,30 @@ mylib = { path = "../mylib" }                      # path 依赖（本地 crate�
 
 ---
 
+## ⚠️ 实测反例（cargo 1.99.1 实运行，2026-10-19）：版本要求不是「装某个版本」而是「选一个版本」——semver 区间解析、不可满足要求、虚拟 workspace 三例坐实
+
+**例 1：不可满足的版本要求 = 依赖解析失败，报错列出候选**。`serde_json = "99999.0"`（caret 语义 `^99999.0`）：
+
+```text
+error: failed to select a version for the requirement `serde_json = "^99999.0"`
+candidate versions found which didn't match: 1.0.154, 1.0.151, 1.0.140
+location searched: crates.io index
+required by package `eco6 v0.1.0`
+```
+
+**例 2：区间要求解析出的是「满足区间的最高版」而非「区间边界」**。`serde_json = ">=1.0.150, <1.0.153"` → `Cargo.lock` 实解析 **1.0.151**（当时缓存里满足区间的最高可用版），EXIT=0。「写个范围就锁定了版本」是错觉——锁定靠的是 lock 文件，不是版本要求本身；范围内一旦发布新补丁版，全新解析会漂移到新版。
+
+**例 3：虚拟 workspace 根没有包可跑**。在本仓库根（virtual workspace，成员 `abf01…` 等）直接 `cargo run`：
+
+```text
+error: `cargo run` could not determine which binary to run. Use the `--bin` option to specify a binary, or the `default-run` manifest key.
+available binaries: abf01, abf02, actix_exp01, ...
+```
+
+口径：cargo 的版本语义是「约束→解析→锁定」三段，版本要求只喂第一段；「构建可复现」的载体是提交 `Cargo.lock`，与版本要求写法无关。虚拟 workspace（根 manifest 只有 `[workspace]` 无 `[package]`）下根目录命令必须指名成员——这正是本仓库 `cargo run` 必须带 `-p`/`--bin` 的原因。
+
+---
+
 ## 四、Workspace 简介
 
 Workspace 把多个 package 组织在一起共享一个 `Cargo.lock`、一个 `target/` 目录和一套继承配置（[Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html)）。最小声明：

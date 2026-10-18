@@ -200,6 +200,36 @@ let user = sqlx::query_as!(User, "SELECT id, name FROM users WHERE id = $1", 1i6
 
 或者在 SQL 中使用别名：`SELECT id, name AS username FROM users ...`。
 
+## ⚠️ 实测反例（sqlx 0.9.0 + SQLite 内存库实编译/实运行，2026-10-19）：sqlx 的两条边界——「编译期检查」需要 DATABASE_URL 才存在，「运行时路径」全部错误照旧晚到
+
+本机三组实测：
+
+**A. 编译期查询宏在无连接时直接硬拒**（这是 sqlx 卖点本身的存在条件）：
+
+```rust,compile_fail
+#[tokio::main]
+async fn main() {
+    let _q = sqlx::query!("SELECT id, name FROM users WHERE id = 1"); // 无 DATABASE_URL、无 .sqlx 离线快照
+}
+```
+
+```text
+error: set `DATABASE_URL` to use query macros online, or run `cargo sqlx prepare` to update the query cache
+  = note: this error originates in the macro `$crate::sqlx_macros::expand_query`
+```
+
+**B. 不用宏的运行时路径**（`sqlx::query` 字符串直通，EXIT=0 进程、错误全在 await 之后）：
+
+```text
+1 runtime-unknown-column: Some("error returned from database: (code: 1) no such column: nope")
+2 type-mismatch-FromRow: Some("error occurred while decoding column \"name\": mismatched types; Rust type `i64` (as SQL type `INTEGER`) is not compatible with SQL type `TEXT`")
+3 ok: id=1 name=ok
+```
+
+口径：sqlx 的「SQL 编译期检查」不是默认待遇而是**构建期基础设施**——`query!` 宏要么连着真库、要么吃 `cargo sqlx prepare` 生成的离线缓存，两者皆无时连编译都不让过（A 组硬错误）；而一旦退回字符串 API（B 组），列名拼错、`FromRow` 结构体字段类型与 SQL 列类型错配（`name: i64` 对 TEXT 列）全部是运行时解码错误，和「Rust 查库更安全」的直觉相反的部分正在这条路上。选 sqlx 就必须把 `prepare` 快照纳入 CI，否则编译期守卫形同虚设——这正是本页「离线校验」小节的本机量化版本。
+
+---
+
 ## 五、版本说明
 
 - **当前稳定版本**：`sqlx 0.9.0`（发布于 2026-05；crates.io 标注最低 Rust 版本为 1.94.0）。

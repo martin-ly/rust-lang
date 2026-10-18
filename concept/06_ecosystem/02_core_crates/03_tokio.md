@@ -212,6 +212,29 @@ async fn main() {
 
 ---
 
+## ⚠️ 实测反例（tokio 1.53.3 实编译/实运行，2026-10-19，`current_thread` runtime）：async 上下文里的同步阻塞把同线程全部任务饿死——poll 计数坐实
+
+本机三组对照（`#[tokio::main(flavor = "current_thread")]`）：
+
+```rust
+let polls = Arc::new(AtomicU64::new(0));
+// sibling 任务自旋计数 100ms；async main 里直接 std::thread::sleep(400ms)
+std::thread::sleep(Duration::from_millis(400)); // 阻塞调用写在 async fn 内——编译合法、无任何警告
+h.await.unwrap();
+```
+
+实跑（EXIT=0）：
+
+```text
+1 blocking-in-async on current_thread runtime: sibling task polled 0 times (all after sleep returned)
+2 with sleep in task + spawn_blocking: sibling polled 22396 times over 500ms
+3 orphan task STILL RAN after join handle dropped
+```
+
+口径坐实三条本页主张：①单线程 runtime 上一次同步阻塞 = 全部 sibling 任务 **0 次 poll**（不是「变慢」，是彻底停摆）；②正解不是「别阻塞」而是把阻塞挪出去——`spawn_blocking`/`tokio::time::sleep` 换到别处后，同一 sibling 在 500ms 内被 poll 22 396 次，两个数量级的差距纯由「阻塞在不在 poll 线程上」决定；③`spawn` 返回的 JoinHandle drop **不取消任务**——orphan 任务照跑（第 3 行输出），与本页「结构化并发需显式 join/abort」一致：tokio 的 join set 语义要自己搭，`spawn` 本身是 fire-and-forget。
+
+---
+
 ## 五、版本说明
 
 - **当前稳定版本**：`tokio` 1.53.1（以根 `Cargo.toml` workspace 依赖为准）。
