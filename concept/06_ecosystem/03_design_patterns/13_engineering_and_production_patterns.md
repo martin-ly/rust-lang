@@ -295,6 +295,46 @@ pub async fn server_loop(
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+### 实测 1：优雅关闭的「立即 break」形态——6 次实跑全部 drained=0，在途请求整批蒸发
+
+第八节的 tokio 骨架里 `drain_remaining(&mut requests).await` 只有一行，很容易被当成可省的可选项。std `mpsc` 等价模拟（`t20b_stop.rs`，实测条件：无 tokio 依赖，`try_recv` 语义与 `select!` 分支等价）把「收到停止信号立即 break」与「break 前排空队列」两个版本对照。无 drain 版实跑 6 次：
+
+```text
+drained=0 × 6（两个请求 10、20 全部丢失）
+```
+
+且**每次都全丢**——信号检查排在 recv 之前的循环结构让「先信号后请求」成为确定性顺序，不是偶发竞态。带 drain 的修正版（`t20_drain.rs`，break 前 `while let Ok(v) = rx.try_recv()`）实跑：
+
+```text
+drain 合计 = 30（10+20=30 才是完整排空；<30 即优雅关闭丢任务）
+```
+
+生产含义：优雅关闭的正确性不在「有没有信号处理分支」，而在**信号分支退出前是否穷尽排空接收队列**。检查顺序（先信号还是先消息）直接决定丢不丢任务——这是可以在单元里用 std channel 断言的确定性行为，不需要真实负载。
+
+### 实测 2：`process::exit` 跳过全部 `Drop`——「快速退出」捷径与 RAII 清理互斥
+
+第九节检查清单假定了 RAII 收尾（连接池 flush、WAL fsync）沿 `Drop` 自动执行。`t19_exit.rs` 给两个资源 Guard 实现 `Drop` 打印，对照两种退出路径：
+
+```text
+== main 自然返回 ==
+drop WAL fsync
+drop 连接池 flush
+Drop 执行次数 = 2
+
+== std::process::exit(0) ==
+（无任何 drop 行）
+```
+
+`process::exit` 路径下 Drop 计数 = **0**。带超时的关闭流程（「排空最多等 N 秒，超时就退出」）最常见的失败写法就是超时分支直接 `process::exit`——恰好把所有 RAII 清理跳干净，连接池没 flush、WAL 没 fsync，而进程退出码还是漂亮的 0。正确姿势：超时后也要让 `main` 自然返回（或结构化 return），让 Drop 沿栈执行；`process::exit` 只留给「状态已损毁、继续运行更危险」的 abort 场景。与 34_ownership 页实测的双 panic abort（exit 127）同族：**进程终止路径与资源清理是两套机制，rustc 不保证前者调用后者**。
+
+### 实测 3：`todo!()` 既有反例的补强——它能通过所有「编译即通过」的门
+
+既有反例节展示 `todo!()` 运行时 panic，但它对 CI 的真实欺骗性值得点名：`todo!()` 是类型完全合法的表达式（`!` 类型强制适配任何返回类型），`cargo build`、`cargo clippy`（默认 lint 级）、类型检查全部放行——本页第九节清单里的「CI 通过」项对它是绿字。防线只有两条：运行时测试触达该分支，或 clippy `clippy::todo` lint 升级 deny。对 `todo!()` 的警惕应该指向「测试覆盖没触达这条路径」，而不是「编译失败了吗」——编译永远不失败。
+
+---
+
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
 >
 > **权威来源对齐变更日志**: 2026-07-09 由 `crates/c09_design_pattern/docs/tier_04_advanced/04_engineering_and_production_patterns.md` 迁移整合；本次补全新增可编译 Rust 示例、弹性模式矩阵与决策树
