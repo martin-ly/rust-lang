@@ -443,6 +443,28 @@ probe-rs download --chip STM32F407VG target/thumbv7em-none-eabihf/release/app
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）：驱动 `new()` 消耗外设的所有权——之后再用外设句柄 E0382，「外设共享 vs 外设独占」必须当场选边
+
+```rust,compile_fail
+pub struct Periph { pub reg: u32 }
+pub struct Driver { p: Periph }
+impl Driver { pub fn new(p: Periph) -> Self { Self { p } } pub fn read(&self) -> u32 { self.p.reg } }
+fn main() {
+    let p = Periph { reg: 42 };
+    let d = Driver::new(p);
+    println!("reg={}", p.reg); // p 已移动进 d
+}
+```
+
+```text
+error[E0382]: borrow of moved value: `p`
+note: consider changing this parameter type in method `new` to borrow instead if owning the value isn't necessary
+```
+
+口径：驱动构造函数签名 `new(p: Periph)`（移动语义、独占所有权）与 `new(p: &mut Periph)`（借用、共享）是两种惯用法，Rust 不允许事后混用——移动后原句柄即刻失效。编译器连修复方向都给出（改借用签名）。驱动 idiom 页的「所有权型驱动 vs 借用型驱动」分野由此坐实：选独占则外设编译期不可再触及（安全），选共享则回到需要仲裁的世界（见 E0499 总线例）。
+
+---
+
 ## 十、常见驱动反模式
 
 | 反模式 | 问题 | 惯用修正 |

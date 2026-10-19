@@ -461,6 +461,34 @@ flowchart TD
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）：启动运行时的三道语言层硬门——`panic_handler` 缺失、`main` 找不到（E0601）、`no_std` 里 `fn main` 直接被拒
+
+同一份启动骨架，逐步加件，三道门逐一显形：
+
+第一步（`#![no_std]` + `#![no_main]`，无 panic handler）：
+
+```text
+error: `#[panic_handler]` function required, but not found
+error: unwinding panics are not supported without std
+  = help: using nightly cargo, use -Zbuild-std with panic="abort" to avoid unwinding
+```
+
+第二步（补 panic_handler，`--crate-type bin`，但入口是 `#[no_mangle] pub extern "C" fn app_main()`）：
+
+```text
+error[E0601]: `main` function not found in crate `b15b4_nostartup`
+```
+
+第三步（改用普通 `fn main` 但保持 `#![no_std]`，`panic=abort`）：
+
+```text
+error: using `fn main` requires the standard library
+```
+
+口径：`no_std` 启动运行时的入口不是「少个 libc」而是语言层的三处硬约束——panic 语言项必须有人实现（第一门）、rustc 的 bin 驱动只认 `main` 不认你的 `app_main`（第二门）、而 `main` 这个签名本身绑定 std 运行时（第三门）。cortex-m-rt / `#[entry]` 宏做的事就是把入口语言项重定向到启动段，链接器脚本再把它接到 RESET 向量；三道门全在 .ld 之前，诊断顺序即学习顺序。
+
+---
+
 ## 八、反例与失效模式
 
 | 失效模式 | 根因 | 后果 |

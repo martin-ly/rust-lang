@@ -231,6 +231,30 @@ Rust Foundation 于 2024 年成立 [Safety-Critical Rust Consortium](https://rus
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）：MISRA 禁止的两类转换在 Rust 里默认静默通过——窄化截断与符号重排都不报错、不警告
+
+```rust
+fn main() {
+    let big: u32 = 1000;
+    let small: u8 = big as u8; // MISRA 规则10.x: 宽->窄转换必须显式防护
+    println!("1 as-truncation: 1000u32 as u8 = {} (EXIT 0, 默认无警告截断)", small);
+    let neg: i32 = -1;
+    let u: u32 = neg as u32; // MISRA禁 signed->unsigned 的补码重解释
+    println!("2 two's-complement reinterpret: -1i32 as u32 = {}", u);
+}
+```
+
+实运行输出：
+
+```text
+1 as-truncation: 1000u32 as u8 = 232 (EXIT 0, 默认无警告截断)
+2 two's-complement reinterpret: -1i32 as u32 = 4294967295
+```
+
+口径：`1000u8 = 232` 是 `1000 mod 256`——值悄悄错掉，`as` 转换语言层零诊断；`-1 -> 4294967295` 是补码重解释，同样是默认语义。MISRA Rust 的 Rule 10.x（显式转换需防护）与 C 版同源：语言不拦，靠工具链拦——clippy 的 `cast_possible_truncation` 系 lint 默认不在 cargo 默认门里，须显式开 `-W clippy::cast_possible_truncation` 或配 clippy.toml。安全关键项目里「Rust 类型安全」不等于「转换安全」：`as` 是逃生舱级操作，替代路径 `try_into()`（返回 `Result`，越界运行时 Err）才是 MISRA 合规的窄化写法。
+
+---
+
 ## 七、反例与失效模式
 
 | 失效模式 | 根因 | 后果 |

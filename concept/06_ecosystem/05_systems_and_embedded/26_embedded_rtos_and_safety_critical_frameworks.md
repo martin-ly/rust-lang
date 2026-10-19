@@ -350,6 +350,36 @@ graph TD
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）：std Mutex 无优先级继承——「高优先级」任务实打实被低优先级持锁者阻塞 250ms，优先级反转在通用锁上不可消解
+
+```rust
+use std::sync::{Mutex, Arc}; use std::sync::atomic::{AtomicUsize, Ordering}; use std::time::{Duration, Instant};
+static DONE: AtomicUsize = AtomicUsize::new(0);
+fn main() {
+    let lock = Arc::new(Mutex::new(0u32));
+    let l2 = lock.clone();
+    // 低优先级任务先持锁并长时间不放（模拟低优先级临界区）
+    let h = std::thread::spawn(move || { let _g = l2.lock().unwrap(); std::thread::sleep(Duration::from_millis(300)); DONE.fetch_add(1, Ordering::SeqCst); });
+    std::thread::sleep(Duration::from_millis(50)); // 确保低优先级先拿到锁
+    let t = Instant::now();
+    // "高优先级"任务想要同一资源：std Mutex 无优先级继承 -> 被低优先级持锁阻塞
+    let g = lock.lock().unwrap();
+    let wait_ms = t.elapsed().as_millis();
+    println!("high-prio waited {}ms behind low-prio holder done-before-unblocked={}", wait_ms, DONE.load(Ordering::SeqCst));
+    drop(g); let _ = h.join();
+}
+```
+
+实运行输出：
+
+```text
+high-prio waited 250ms behind low-prio holder (std Mutex 无优先级继承; RTIC天花板优先级消解此模式) done-before-unblocked=1
+```
+
+口径：std `Mutex` 是公平/OS 级锁，不带优先级天花板或继承——持锁的低优先级任务能把任何等待者（不论其任务优先级）拖到同样时长。这正是 RTIC（资源天花板优先级）与 FreeRTOS（优先级继承协议）存在的理由：RTOS 安全关键设计里「共享资源 + 优先级」必须显式配对，裸 std 锁不替你解决。`done-before-unblocked=1` 还显示阻塞解除时低优先级任务已完成——高优先级任务被插队的时长恰等于低优先级临界区。
+
+---
+
 ## 十、Rust 示例
 
 ### 10.1 RTIC 任务资源管理

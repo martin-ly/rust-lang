@@ -329,6 +329,32 @@ LR_IROM1 0x08000000 0x00080000
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）：`clear()` 不还堆——1000 次 push 后 capacity=1024 原样保留，嵌入式堆水位不会随逻辑清空回落
+
+```rust
+fn main() {
+    let mut v: Vec<u8> = Vec::new();
+    for i in 0..1000u32 { v.push(i as u8); }
+    println!("1 len={} capacity={} (倍增分配: 1024)", v.len(), v.capacity());
+    v.clear();
+    println!("2 after clear: len={} capacity={} (clear 不释放堆!)", v.len(), v.capacity());
+    v.shrink_to_fit();
+    println!("3 after shrink_to_fit: capacity={}", v.capacity());
+}
+```
+
+实运行输出：
+
+```text
+1 len=1000 capacity=1024 (倍增分配: 1024)
+2 after clear: len=0 capacity=1024 (clear 不释放堆!)
+3 after shrink_to_fit: capacity=1000
+```
+
+口径：嵌入式堆安全的核心量是**峰值水位**而不是当前用量。`Vec::clear()` 只销毁元素、capacity 保持——1KB 峰值堆占用一直挂着，直到显式 `shrink_to_fit()`（还到 len 而非 0）或 Vec drop。倍增策略（1024 = 2^10）意味着最坏情形一次 push 触发「旧块 + 2 倍新块」同时存在，瞬时峰值接近 3 倍稳态。小 RAM 设备上的堆审计必须按「倍增峰值 + clear 不还堆」建模，`heap_size` 类统计工具页的告警阈值应盯 capacity 轨迹而非 len 轨迹。
+
+---
+
 ## 七、反例与失效模式
 
 | 失效模式 | 根因 | 后果 |

@@ -573,6 +573,33 @@ async fn consumer(rx: Receiver<'static, ThreadModeRawMutex, u32, 3>) {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）：有界通道的背压是「发送者停摆」不是「消息丢弃」——槽满时 send 阻塞 300ms 直到消费者排空
+
+embassy-sync 的 `Channel<_, N>` 是嵌入式版有界队列（无堆、静态容量）。其失效语义用 std `sync_channel(1)` 同构坐实（同一「满即背压」协议）：
+
+```rust
+use std::sync::mpsc::sync_channel; use std::time::Duration;
+fn main() {
+    let (tx, rx) = sync_channel::<u32>(1); // 容量1: 同构 embassy-sync Channel<_, 1>
+    let t0 = std::time::Instant::now();
+    tx.send(1).unwrap(); // 占满槽
+    let h = std::thread::spawn(move || { std::thread::sleep(Duration::from_millis(300)); let x = rx.recv().unwrap(); x });
+    tx.send(2).unwrap_or_default(); // 槽满: 发送者在此阻塞(背压)直到消费者 recv
+    println!("1 bounded: send(2) returned only after consumer drained, blocked {}ms", t0.elapsed().as_millis());
+    let _ = h.join();
+}
+```
+
+实运行输出：
+
+```text
+1 bounded: send(2) returned only after consumer drained, blocked 300ms
+```
+
+口径：有界通道（embassy-sync Channel / postcard 链路 / CAN 发送队列）满槽时的第一失效模式是**生产者停摆**：send 语义上不可失败（不丢包），代价转移为生产者被挂起。单 executor 裸机上这意味着「生产者任务被消费者节奏挟持」——消费者慢 300ms，生产者任务也停 300ms，连带同 executor 上其他任务一并延迟（见自建 executor 例）。设计判据：给生产者 send 路径选 `try_send`（满即 Err，生产者继续跑、显式处理丢包）还是 `send`（绝不丢包、接受停摆），这个选择决定整条任务图的实时性契约，不是通道实现的细节。
+
+---
+
 ## 十、与 embedded-hal 集成
 
 Embassy 各 MCU HAL 同时实现 `embedded-hal` 1.0 和 `embedded-hal-async` 1.0 trait。这意味着：

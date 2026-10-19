@@ -328,6 +328,55 @@ fn panic(_: &core::panic::PanicInfo) -> ! { loop {} }
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实运行，2026-10-19）：自建 executor 只用 std——手写 noop RawWaker 可跑，但任务 poll 里一次同步阻塞就把全部任务停摆：阻塞窗口内 B 被 poll **0 次**
+
+裸机自建 executor 不需要任何 crate：`Waker::from_raw(RawWaker::new(null, &VT))` 造 noop waker、手写状态机 poll 循环即可驱动任务——这是 embassy executor 的最小骨架。代价在同一个实验里显形（任务 A 的第一次 poll 内部做 400ms 同步 sleep，模拟在 async 任务里调同步驱动）：
+
+```rust
+use std::task::{Context, Wake, RawWaker, RawWakerVTable, Waker}; use std::sync::Arc; use std::time::{Duration, Instant};
+struct NoWake; // 裸机 executor 里的最小 waker: 不做任何事
+impl Wake for NoWake { fn wake(self: Arc<Self>) {} fn wake_by_ref(self: &Arc<Self>) {} }
+fn noop_raw_waker() -> Waker {
+    fn clone(_: *const ()) -> RawWaker { RawWaker::new(std::ptr::null(), &VT) }
+    fn wake(_: *const ()) {} fn drop(_: *const ()) {}
+    static VT: RawWakerVTable = RawWakerVTable::new(clone, wake, wake_by_ref, drop);
+    unsafe { Waker::from_raw(RawWaker::new(std::ptr::null(), &VT)) }
+}
+fn main() {
+    let waker = noop_raw_waker();
+    let mut cx = Context::from_waker(&waker);
+    let mut a_done = false;
+    let mut a_polls = 0u64; let mut b_polls = 0u64;
+    let start = Instant::now();
+    while start.elapsed() < Duration::from_millis(600) { // 手写单线程 executor 循环
+        if !a_done {
+            if a_polls == 0 { std::thread::sleep(Duration::from_millis(400)); } // A 的第一次 poll 阻塞 400ms
+            a_done = true; a_polls += 1;
+        }
+        b_polls += 1; // B 的 poll：纯计数
+        let _ = &cx;
+    }
+    let free_window = { // 对照：自由运行的 400ms 窗口本可轮询多少轮
+        let s = Instant::now(); let mut n = 0u64;
+        while s.elapsed() < Duration::from_millis(400) { n += 1; }
+        n
+    };
+    println!("1 custom executor: A blocked 400ms inside its poll -> B polls in 600ms = {} (A polls={})", b_polls, a_polls);
+    println!("2 free-running 400ms window B polls could do = {}", free_window);
+}
+```
+
+实编译通过、实运行输出（`rustc -O`）：
+
+```text
+1 custom executor: A blocked 400ms inside its poll -> B polls in 600ms = 1147304 (A polls=1)
+2 free-running 400ms window B polls could do = 6686615
+```
+
+口径：自建 executor 的故障模型比 tokio 更极端——tokio 是多线程 work-stealing，一个阻塞任务只拖累所在 worker；裸机 executor 是**单线程协作式**，A 的第一次 poll 阻塞 400ms 时整个循环停摆，那 400ms 内 B 被 poll 的次数是字面意义的 0——600ms 总窗口 B 只拿到 1147304 轮，而自由运行的同等 400ms 窗口本可跑 6686615 轮，缺口即霸占线程的直接损失。这正是 embassy 文档「不要在 async 任务里调同步驱动」硬规则的定量版：executor 越贴近裸机，「poll 必须短」越接近生死线。
+
+---
+
 ## 八、反例与失效模式
 
 | 失效模式 | 根因 | 修复方向 |

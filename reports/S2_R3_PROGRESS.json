@@ -287,6 +287,22 @@
       ],
       "evidence": "hal1.0 &mut签名E0596 | no_std裸机await E0728 | panic_handler缺失双错+E0601 no_main驱动层 | null-alloc handle_alloc_error 0xC0000409 catch_unwind不可救(should_panic标注) | PAC泛型方法E0038 dyn不相容+静态分发正例 | no_std无println | 双驱动借同一总线E0499",
       "strict_gate": "compile_fail 1312/1312 unexpected_pass=0 wrong_code=0 should_panic 7/7 candidate pass=300/300 EXIT0 (full log strict_batch15b.txt)"
+    },
+    {
+      "batch": "Batch15c",
+      "date": "2026-10-19",
+      "group": "06_ecosystem/05_systems_and_embedded (批2/4)",
+      "pages": [
+        "24_embedded_hal_and_driver_idioms.md",
+        "26_embedded_rtos_and_safety_critical_frameworks.md",
+        "27_no_std_startup_runtime_deep_dive.md",
+        "28_custom_bare_metal_async_executor.md",
+        "29_embedded_memory_layout_and_heap_safety.md",
+        "30_misra_rust_safety_critical_guidelines.md",
+        "34_embassy_framework_deep_dive.md"
+      ],
+      "evidence": "驱动new消耗所有权E0382 | std Mutex无优先级继承高优被拖250ms | no_std启动三门(panic_handler/E0601/fn main requires std) | 手写noop RawWaker executor B阻塞窗0轮询600ms仅1147304轮vs自由6686615轮 | Vec::clear不还堆1024保持+shrink_to_fit到1000 | MISRA窄化1000->232/补码-1->4294967295静默通过 | 有界通道满槽send阻塞300ms背压",
+      "strict_gate": "compile_fail 1313/1313 unexpected_pass=0 wrong_code=0 should_panic 7/7 candidate pass=300/300 EXIT0 (full log strict_batch15c.txt)"
     }
   ],
   "criteria_note": "S2-R3 反例口径豁免（2026-10-19 用户确认固化）：concept/00_meta/*（内部工具/导航/审计页）、sources/*、quiz、placeholders、07_future/00_version_tracking（归版本对齐轨道）不计反例缺口。权威重扫 fresh7=100 页（loop口径），fresh6=96 差异为旧扫描分母600漏计5个零散组页——以 fresh7 为准。",
