@@ -104,7 +104,7 @@ naive=2026-10-19 weekday=Mon
 ## 六、canonical 缺口登记（五要素④）
 
 - 库内此前 54 页顺带提及 chrono 而 0 专页 → 本页为 canonical 填补（对称差 T1 条目 `date-and-time(935)` 已闭环）。
-- **jiff（crates.io 实查 2026-10-19）**：**0.2.38**（2026-10-06 发布，0.2 线 70 个版本），累计 **2.32 亿** / 近期 **8,789 万** 下载，BurntSushi（Andrew Gallant）维护，categories = `date-and-time + no-std`，Temporal 风格 API（"jump into the pit of success"），特性体系含 `tz-system/tz-fat/static-tz/wasm-bindgen(js)`。近期下载已达 chrono 同期量级的一半，是 date-and-time 分类 2025-2026 最强上升者；chrono vs jiff 选型对比页登记为候选子页（W4 后续）。
+- **jiff（crates.io 实查 2026-10-19）**：**0.2.38**（2026-10-06 发布，0.2 线 70 个版本），累计 **2.32 亿** / 近期 **8,789 万** 下载，BurntSushi（Andrew Gallant）维护，categories = `date-and-time + no-std`，Temporal 风格 API（"jump into the pit of success"），特性体系含 `tz-system/tz-fat/static-tz/wasm-bindgen(js)`。近期下载已达 chrono 同期量级的一半，是 date-and-time 分类 2025-2026 最强上升者；chrono vs jiff 选型对比页 W4 裁决：**已建** `30_chrono_vs_jiff.md`（本机 cargo 1.99.1 实测对照：DST 模糊/缺失时刻两库姿态相反）。
 - `aws-iot-device-sdk` 实查：0.0.6（2022-09 最后更新，累计 8,944 下载，标注 unofficial）——印证 D3 登记的「IoT SDK 无 canonical crate」为**生态事实**而非库内缺口。
 - 未来候选子页：日历/业务时间（workday-calc 类 crate 实查待轮）。
 
