@@ -21,7 +21,8 @@
 > [Unsafe](../../03_advanced/02_unsafe/01_unsafe.md)
 > **后置概念**:
 > [Formal Ecosystem Tower](../08_formal_verification/01_formal_ecosystem_tower.md) ·
-> [Performance Optimization](../10_performance/01_performance_optimization.md)
+> [Performance Optimization](../10_performance/01_performance_optimization.md) ·
+> [竞赛编程惯用法专页（16 组，快读快写/题型模板深页）](../16_algorithm_patterns/18_competitive_programming_idioms.md)
 > **主要来源**:
 > [CLRS — Introduction to Algorithms] · [LeetCode] · [Codeforces] ·
 > [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html) ·
