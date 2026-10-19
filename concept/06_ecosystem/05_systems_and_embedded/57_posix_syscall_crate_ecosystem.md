@@ -49,3 +49,5 @@ crates.io 依赖实拆：`tempfile 3.27.0` 与 `fd-lock 4.0.4` 的正常依赖�
 - [rustix GitHub（ByteStringe-rustix）](https://github.com/bytecodealliance/rustix) · [linux-raw-sys](https://github.com/bytecodealliance/linux-raw-sys)
 - [nix GitHub（nix-rust/nix）](https://github.com/nix-rust/nix) · [caps GitHub（tails/rust-caps）](https://github.com/tails/rust-caps)
 - [Linux capabilities(7) man](https://man7.org/linux/man-pages/man7/capabilities.7.html) · [POSIX.1-2017](https://pubs.opengroup.org/onlinepubs/9699919799/)
+- 学术锚（2026-10-20 arXiv API 实核）：[Securing Mixed Rust with Hardware Capabilities (Yu, Han, Choudhury, Carlson, Saxena)](https://arxiv.org/abs/2507.03344)（2025-07-04 提交）——内存安全 Rust 与不安全底层组件混合时的硬件 capability 强制隔离，正对本页 rustix/nix「unsafe 直通 syscall 边界」与 capability 机制的交叉线。
+- 学术锚（2026-10-20 arXiv API 实核）：[Friend or Foe Inside? Exploring In-Process Isolation to Maintain Memory Safety for Unsafe Rust (Gülmez, Nyman, Baumann, Mühlberg)](https://arxiv.org/abs/2306.08127)（2023-06-13 提交，v2）——unsafe Rust 的进程内隔离缓解实证，与 caps/setuid/no_new_privs/seccomp 正交机制讨论互参（进程安全语义见 [07_process_security_and_sandboxing](../../03_advanced/08_process_ipc/07_process_security_and_sandboxing.md)）。

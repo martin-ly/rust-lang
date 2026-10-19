@@ -558,3 +558,9 @@ mindmap
 ## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
 
 cargo-audit **0.22.2**（RustSec 官方，https://rustsec.org · https://github.com/rustsec/rustsec）· cargo-vet **0.10.2**（Mozilla 供应链审计，https://mozilla.github.io/cargo-vet/）· cargo-deny **0.20.2**（Embark Studios，SPDX 许可证审计，近期下载 148 万）——crates.io API 2026-10-19 实查。RustSec advisory 数据库（https://rustsec.org/advisories/）为 CVE↔Rust crate 映射权威源。cargo-audit 0.22.2 MSRV 1.88 Edition 2024（版本元数据实查）。
+
+## 国际权威参考 / International Authority References（P1 学术锚）
+
+- 学术锚（2026-10-20 arXiv API 实核）：[A Closer Look at the Security Risks in the Rust Ecosystem (Zheng, Wan, Zhang, Chang, Lo)](https://arxiv.org/abs/2308.15046)（2023-08-29 提交）——crates.io 生态漏洞实证的系统研究，是「Cargo 工具链漏洞 + 依赖漏洞传播」双风险框架的学术侧对应物。
+- 学术锚（2026-10-20 arXiv API 实核）：[Cargo Ecosystem Dependency-Vulnerability Knowledge Graph Construction and Vulnerability Propagation Study (Jia, Liu, Sun, Sun et al.)](https://arxiv.org/abs/2210.07482)（2022-10-14 提交）——Cargo 依赖漏洞知识图谱与传播建模，佐证 cargo-audit/cargo-vet 依赖审计工具线的必要性口径。
+- 学术锚（2026-10-20 arXiv API 实核）：[An Empirical Study of Yanked Releases in the Rust Package Registry (Li, Cogo, Bezemer)](https://arxiv.org/abs/2201.11821)（2022-01-27 提交）——yank 机制（crate 下架/弃用路径）的实证研究，与本页 registry 完整性与 source replacement 信任边界主题直接相关。

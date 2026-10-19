@@ -115,4 +115,5 @@ naive=2026-10-19 weekday=Mon
 - P0: https://doc.rust-lang.org/std/time/index.html （std 时间原语边界——`Instant`/`SystemTime` 为 std 全部时间能力，chrono 真空填补论断的官方依据，2026-10-19 核验）
 - P0: 本机 rustc 1.99.1 + cargo 1.99.1 实测记录（Cargo.lock + cargo run + rustc --extern，2026-10-19）
 - P1: https://docs.rs/chrono/latest/chrono/ · IANA tz database https://www.iana.org/time-zones （中国 DST 1986–1991 记录）
+- P1 学术锚（2026-10-20 arXiv API 实核）: [Pitfalls and Guidelines for Using Time-Based Git Data (Flint, Chauhan, Dyer)](https://arxiv.org/abs/2209.04511)（2022-09-09 提交）——基于时间戳的开源数据研究中时区/时钟陷阱的实证指南，佐证本页「时间处理是全生态系统性 bug 温床」判读口径（口径限于 Git 时间数据取证，Rust 时间库结论仍以本页 crates.io 实查为准）。
 - P2: chrono GitHub issue #426（依赖负担议题，历史讨论）

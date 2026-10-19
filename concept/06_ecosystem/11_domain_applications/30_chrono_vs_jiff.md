@@ -46,5 +46,6 @@
 - [BurntSushi/jiff](https://github.com/BurntSushi/jiff)（P0：「pit of success」设计宣言与消歧策略文档）。
 - [std::time::SystemTime](https://doc.rust-lang.org/std/time/struct.SystemTime.html)（P0：std 挂钟语义基线——`duration_since(UNIX_EPOCH)` 返回 `Result`、早于 epoch 报 `Err`，两库对照的 std 锚点，2026-10-19 核验）。
 - [chrono-tz docs](https://docs.rs/chrono-tz)（P1：LocalResult 三态语义）。
+- 学术锚（2026-10-20 arXiv API 实核）：[Pitfalls and Guidelines for Using Time-Based Git Data (Flint, Chauhan, Dyer)](https://arxiv.org/abs/2209.04511)（2022-09-09 提交）——时间戳取证中 DST 歧义/时钟偏移陷阱的实证清单，与本页「消歧策略是两库分野核心」的裁决互参（口径限于 Git 时间数据，库对比结论以本页本机实测为准）。
 - crates.io API 版本/下载实查（P0，2026-10-19）：jiff 0.2.38（2026-10-06）· jiff-tzdb 0.1.9 · chrono 0.4.45 · chrono-tz 0.10.4。
 - 交叉页：`29_time_and_date_ecosystem.md`（chrono 主生态、jiff 版本实查锚、chrono-tz 三态实测）。

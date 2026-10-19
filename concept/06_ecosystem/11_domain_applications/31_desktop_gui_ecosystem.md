@@ -55,4 +55,5 @@ Tauri 栈（tao + wry + tray-icon 0.26.1/2026-10-07 实查）是「WebView 混�
 - [winit docs.rs](https://docs.rs/winit/latest/winit/)（窗口抽象层 API 口径——事件循环/`WindowAttributes`/跨平台后端清单，「底层 winit 收敛」论断的依据，2026-10-19 核验）。
 - [rustc platform support — wasm32-unknown-unknown](https://doc.rust-lang.org/rustc/platform-support/wasm32-unknown-unknown.html)（P0：官方 tier 2 目标页——yew/trunk 纯 wasm 路线与 GUI-to-wasm 移植线的 rustc 官方依据，2026-10-19 核验）。
 - [emilk/egui](https://github.com/emilk/egui) · [slint-slint/slint](https://slint.dev) · [iced](https://iced.rs)（P1 项目主页）。
+- 学术锚（2026-10-20 arXiv API 实核）：[Can LLMs Test Terminal User Interfaces? (Peng, Hu, Rajan, Bissyandé et al.)](https://arxiv.org/abs/2608.03743)（2026-08-04 提交）——197 个真实 TUI 应用的界面测试实证：Rust 侧 TUI 库高度收敛于 ratatui（可识别项目中 78%），且仅 12% 测试代码触及界面层。本页「GUI/TUI 是接口家族不同形态（GUI 暴露 accessibility 树、TUI 只有字符网格）」的口径依据；同时登记 **TUI/ratatui canonical 缺口**——concept/ 全库无 TUI 生态页，建页归下一波 D 轨道裁决。
 - 交叉页：`02_game_ecs.md`/`05_game_development.md`/`15_game_engine_internals.md`（W7 游戏锚，wgpu/winit 共用）、`05_systems_and_embedded/07_embedded_graphics.md`（嵌入式侧图形）。

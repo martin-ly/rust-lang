@@ -453,3 +453,4 @@ Kubernetes 上的 Rust 服务：容器化构建与交付流水线
 - <https://doc.rust-lang.org/cargo/reference/profiles.html>
 - <https://github.com/LukeMathWalker/cargo-chef>
 - <https://github.com/GoogleContainerTools/distroless>
+- 学术锚（2026-10-20 arXiv API 实核）：[The Promise and Reality of Continuous Integration Caching: An Empirical Study of Travis CI Builds (Ghaleb, da Costa, Zou)](https://arxiv.org/abs/2601.19146)（2026-01-27 提交，v2）——CI 缓存收益/失效/污染的实证量化，佐证本页「依赖层缓存（cargo-chef recipe）有收益但有失效陷阱」的工程判读口径；口径限于 CI 缓存现象学，Rust 容器专属结论仍以本页 crates.io/Docker 实查为准。

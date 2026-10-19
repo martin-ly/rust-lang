@@ -63,3 +63,4 @@
 - [rodio GitHub（RustAudio/rodio）](https://github.com/RustAudio/rodio) · [symphonia GitHub](https://github.com/pdelacour/symphonia) · [cpal GitHub（rustaudio/cpal）](https://github.com/rustaudio/cpal)
 - [kira GitHub（Kirithora/kira）](https://github.com/KiraAudio/kira) · [rustfft GitHub](https://github.com/GeneralChipo/rustfft)
 - [DASp 仓库状态页](https://github.com/RustAudio/DASp)（停更事实）· [lofty GitHub](https://github.com/Lazy-Farmer/lofty)
+- 学术锚（2026-10-20 arXiv API 实核）：[Compiling Differentiable Audio Graphs to Real-Time DSP (Franchino, Schlecht)](https://arxiv.org/abs/2606.21277)（2026-06-19 提交）——可微分音频模型 lowering 到实时 DSP 的编译器路线（ADAC→FAUST），佐证本页「DSP 计算层是独立选型层（rustfft/rubato 家族）」的分层裁决：ML 训练栈与实时音频生产栈之间的翻译断层正是 Rust 原生 DSP 层存在的动机（口径限于模型→DSP lowering，crate 选型仍以本页 crates.io 实查为准）。

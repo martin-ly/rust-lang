@@ -262,4 +262,8 @@ cargo test             # 第三步：测试
 
 ---
 
+## 国际权威参考 / International Authority References（P1 学术锚）
+
+- 学术锚（2026-10-20 arXiv API 实核，标题/作者/发表日均核验）：[Package Managers à la Carte: A Formal Model of Dependency Resolution (Gibb, Ferris, Allsopp, Gazagnaire et al.)](https://arxiv.org/abs/2602.18602)（2026-02-20 提交）与 [Solving Package Management via Hypergraph Dependency Resolution (Gibb, Ferris, Allsopp, Dales et al.)](https://arxiv.org/abs/2506.10803)（2025-06-12 提交）——依赖解析的形式化模型族：把「版本要求语义」（本页 caret/tilde 规则）抽象为跨包管理器可比较的解析问题，是 Cargo 解析行为在学术侧的对应物。解析算法细节归 [Cargo 依赖解析权威页](06_cargo_dependency_resolution.md)。
+
 > **权威来源**: [Cargo Book — Commands](https://doc.rust-lang.org/cargo/commands/index.html) · [Cargo Book — The Manifest Format](https://doc.rust-lang.org/cargo/reference/manifest.html) · [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) · [Cargo Book — Features](https://doc.rust-lang.org/cargo/reference/features.html) · [TRPL — Getting Started](https://doc.rust-lang.org/book/ch01-00-getting-started.html)

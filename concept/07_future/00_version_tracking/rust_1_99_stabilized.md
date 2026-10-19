@@ -358,6 +358,8 @@ edition 2024 或更新的 workspace 成员现在可以覆盖继承的 workspace 
 
 rustc 后端升级到 LLVM 23。第三方报道基准显示平均编译 wall time 下降约 1.2%（两个月累计约 4.57% 提升，含其他优化）。不影响公共接口，但影响 codegen 质量与 `-Ctarget-cpu` 等选项的可用特性集。
 
+> 学术锚（2026-10-20 arXiv API 实核）：[A Multi-Dimensional, Per-Pass Empirical Study of the LLVM Optimization Pipeline (Bruzzone, Cazzola)](https://arxiv.org/abs/2606.31238)（2026-06-30 提交）——LLVM 优化管线逐 pass 的实证剖面，为「rustc 大版本 LLVM major 升级影响 codegen 质量」这类内部变更提供学术侧的行为基线参照（口径限于 LLVM pass 现象学，rustc 基准数字仍以本页引用的第三方报道为准）。
+
 ---
 
 ## 8. 补丁线 1.99.1（2026-10-15）
