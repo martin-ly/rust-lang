@@ -145,6 +145,103 @@ Typestate 保证「不可调用非法转移方法」，但不能替代业务值�
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）
+
+Typestate 的安全保证完全取决于 impl 块怎么写。本机用 `File<Open>/File<Closed>` 三段最小复现，展示同一套状态类型在三种写法下的截然不同结果。
+
+### 反例 1：把方法写进泛型 `impl<S: Marker>` —— typestate 静默坍缩，编译与运行全绿但护栏为零
+
+§3.1 的正确写法是**每个状态一个专属 impl 块**。最常见的错误写法是把方法提升到泛型 impl：
+
+```rust
+use std::marker::PhantomData;
+trait Marker { fn id() -> &'static str; }
+struct Open; impl Marker for Open { fn id() -> &'static str { "Open" } }
+struct Closed; impl Marker for Closed { fn id() -> &'static str { "Closed" } }
+struct File<S: Marker> { data: Vec<u8>, _s: PhantomData<S> }
+impl<S: Marker> File<S> {
+    // ❌ 泛型 impl：不区分状态，所有状态都拿到全部方法
+    fn read(&self) -> Vec<u8> { println!("read allowed in state {}", S::id()); self.data.clone() }
+}
+fn main() {
+    let f = File::<Open> { data: vec![1, 2], _s: PhantomData };
+    println!("未关闭状态 read 成功: {:?}", f.read());
+}
+```
+
+**实编译通过、实跑输出（exit 0）**：
+
+```text
+read allowed in state Open
+未关闭状态 read 成功: [1, 2]
+```
+
+没有任何编译错误、没有 clippy 警告（只有一个 `Closed` 未构造的 dead_code 提示）。这是 typestate 最危险的失效模式：**模式看起来是 typestate（有 Marker、有 PhantomData、有状态参数），护栏却完全不存在**。泛型 impl 让 `read` 对每个状态可见，编译器从此永远抓不到「未连接就发送/未关闭就读」这类错误。
+
+### 反例 2：正确写法下跨状态调用被 E0599 硬拒——且诊断直接指名正确状态
+
+把方法放回状态专属 impl（§3.1 写法），同样的调用被编译期拒绝：
+
+```rust,compile_fail
+use std::marker::PhantomData;
+trait Marker {}
+struct Open; impl Marker for Open {}
+struct Closed; impl Marker for Closed {}
+struct File<S: Marker> { data: Vec<u8>, _s: PhantomData<S> }
+impl File<Closed> { fn read(&self) -> Vec<u8> { self.data.clone() } }
+impl File<Open> { fn close(self) -> File<Closed> { File { data: self.data, _s: PhantomData } } }
+fn main() {
+    let f = File::<Open> { data: vec![1, 2], _s: PhantomData };
+    let _ = f.read(); // 未 close 就 read
+}
+```
+
+**实测 rustc 1.99.1 输出（E0599）**：
+
+```text
+error[E0599]: no method named `read` found for struct `File<Open>` in the current scope
+  |
+5 | struct File<S: Marker> { data: Vec<u8>, _s: PhantomData<S> }
+  | ---------------------- method `read` not found for this struct
+10|     let _ = f.read(); // 未 close 就 read
+  |               ^^^^ method not found in `File<Open>`
+  |
+  = note: the method was found for `File<Closed>`
+```
+
+值得注意的诊断细节：`note: the method was found for File<Closed>` 直接告诉调用方「方法存在，但你在错误的状态上」——这是与反例 1 的本质区别，护栏存在且诊断可操作。附带效果：`Open` 上调不到的每个方法名都变成一次编译期事故报告。
+
+### 反例 3：状态标记漏 impl trait —— 错误不在调用点，而在 impl 块本身（E0277 双位置）
+
+状态类型 `struct Open;` 忘了 `impl Marker for Open {}` 时，报错点出乎许多人的预料——不在 `main`，而在你的专属 impl 块上，且一处语法位置报两条：
+
+```rust,compile_fail
+use std::marker::PhantomData;
+trait Marker {}
+struct Open; // ❌ 忘 impl Marker
+struct Closed; impl Marker for Closed {}
+struct File<S: Marker> { data: Vec<u8>, _s: PhantomData<S> }
+impl File<Open> { fn read(&self) -> Vec<u8> { self.data.clone() } }
+fn main() {}
+```
+
+**实测输出（两条 E0277，分别在 `impl File<Open>` 与 `fn read` 位置）**：
+
+```text
+error[E0277]: the trait bound `Open: Marker` is not satisfied
+7 | impl File<Open> { fn read(&self) -> Vec<u8> ...
+  |      ^^^^^^^^^^ unsatisfied trait bound
+  |
+help: the trait `Marker` is not implemented for `Open`
+3 | struct Open; // ❌ 忘 impl Marker
+  | ^^^^^^^^^^^
+help: the trait `Marker` is implemented for `Closed`
+```
+
+诊断质量很高：同时给出「哪个类型缺哪个 trait」「trait 已为哪个类型实现」两个对照锚点。但它暴露了 Marker-bound 模式的维护成本——每新增一个状态类型都要记得 impl，漏掉的失败方式是「该状态的专属 impl 块整块编译失败」，大型状态机上报错可能一次爆几十条。实践上可用 `impl Marker for Open {}` 集中放在状态类型定义紧邻处，或给 Marker 提供默认方法（如反例 1 的 `id()`）让漏 impl 更早被 use 现场发现。
+
+---
+
 ## 六、决策树
 
 ```mermaid

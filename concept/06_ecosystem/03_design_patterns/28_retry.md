@@ -124,6 +124,101 @@ for _ in 0..3 {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 + 本机 Windows 实跑，2026-10-19）
+
+### 反例 1：指数退避的 `2_u32.pow(attempt)` 是延迟炸弹——debug 崩、release 静默归零
+
+上文 §三 的 `compute_delay` 使用 `self.base_delay * 2_u32.pow(attempt)`。本机把 attempt 拉到 0..34 实跑同一表达式：
+
+```rust,should_panic
+use std::time::Duration;
+fn compute_delay(base: Duration, attempt: u32) -> Duration {
+    let exp = base * 2_u32.pow(attempt);   // 页内示例原表达式
+    exp.min(Duration::from_secs(30))
+}
+fn main() {
+    let base = Duration::from_millis(1);
+    for a in 0..34u32 {
+        let d = compute_delay(base, a);
+        println!("attempt {a}: {:?}", d.as_millis());
+    }
+}
+```
+
+**debug 构建实测**（attempt=32 处）：
+
+```text
+thread 'main' panicked at library/core/src/num/mod.rs:1290:5:
+attempt to exponentiate with overflow
+```
+
+**`rustc -O` 构建实测**：不 panic，`2^32` 按 wrapping 语义归零——
+
+```text
+attempt 31: 30000
+attempt 32: 0        ← 退避直接变 0ms
+attempt 33: 0        ← 之后每次重试都是零延迟
+```
+
+同一份代码，两种 profile 给出两种故障模式：开发期 panic 崩溃，生产期退避**静默失效为 0ms**，恰好落在最需要退避的长时间故障场景（attempt 累积超过 31）。这正是 §五「重试放大延迟」边界的镜像反例——不是延迟过大，而是退避机制本身在最坏路径上消失。
+
+**修正**：指数用 saturating 语义并限制在 `u32::BITS` 内：
+
+```rust
+use std::time::Duration;
+fn compute_delay_safe(base: Duration, attempt: u32) -> Duration {
+    let shift = attempt.min(31);                    // 越界前先封顶
+    let exp = base.saturating_mul(2_u32.pow(shift));
+    exp.min(Duration::from_secs(30))
+}
+fn main() {
+    let base = Duration::from_millis(1);
+    for a in [0u32, 15, 31, 32, 100] {
+        println!("attempt {a}: {:?}", compute_delay_safe(base, a).as_millis());
+    }
+}
+```
+
+实测输出（debug 与 `-O` 完全一致）：`0: 1 / 15: 30000（32768 被 max_delay 封顶） / 31: 30000 / 32: 30000 / 100: 30000`——退避永不归零。
+
+### 反例 2：重试放大了非幂等副作用（错误路径也会留下副作用）
+
+§五 说「重试必须配合幂等键」。本机实测一个「副作用先于校验」的常见 API 形态，看重试到底放大了什么：
+
+```rust
+struct Cart { items: Vec<u32> }
+impl Cart {
+    fn apply_coupon(&mut self, c: u32) -> Result<(), String> {
+        self.items.push(c);                       // 副作用先发生（真实 bug 常见形态）
+        if c > 100 { return Err("coupon too large".into()); }
+        Ok(())
+    }
+}
+fn main() {
+    let mut cart = Cart { items: vec![] };
+    for attempt in 0..3 {
+        match cart.apply_coupon(999) {
+            Ok(()) => break,
+            Err(e) => println!("attempt {attempt}: err={e}, items.len()={}", cart.items.len()),
+        }
+    }
+    println!("最终 items={:?} len={}", cart.items, cart.items.len());
+}
+```
+
+实测输出（exit 0）：
+
+```text
+attempt 0: err=coupon too large, items.len()=1
+attempt 1: err=coupon too large, items.len()=2
+attempt 2: err=coupon too large, items.len()=3
+最终 items=[999, 999, 999] len=3
+```
+
+三次「失败」的调用在状态里留下了三条记录。对 `Err` 分支无差别重试时，**每一次失败重试都完整执行了副作用半程**——这在真实系统对应「下单失败重试 3 次 → 用户被扣款 3 次」。结论：重试的前置条件不是「错误是瞬时的」，而是「操作在错误路径上也是幂等的」，或者副作用被推到校验之后/事务提交点之后。
+
+---
+
 ## 六、决策树
 
 ```mermaid

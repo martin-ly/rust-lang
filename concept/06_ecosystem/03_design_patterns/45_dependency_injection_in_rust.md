@@ -445,6 +445,109 @@ where
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+§四 的 `Box<dyn Trait>` 容器是最常用的运行时注入形态，本机实测它的三个真实失败面。
+
+### 反例 1：`Box<dyn Trait>` 隐含 `'static`——注入借用型适配器直接 E0597
+
+§四 示例里的容器 `Vec<Box<dyn Repo>>` 看起来什么实现都能塞。塞一个借用外部配置的适配器试试：
+
+```rust,compile_fail
+trait Repo { fn fetch(&self) -> String; }
+struct Ctx { services: Vec<Box<dyn Repo>> }
+struct FileRepo<'a> { cfg: &'a String }
+impl Repo for FileRepo<'_> { fn fetch(&self) -> String { self.cfg.clone() } }
+fn build_bad() -> Ctx {
+    let cfg = String::from("postgres://local");
+    Ctx { services: vec![Box::new(FileRepo { cfg: &cfg })] } // cfg 在函数末 drop
+}
+fn main() { let _ = build_bad(); }
+```
+
+**实测 rustc 1.99.1 输出（E0597）**：
+
+```text
+error[E0597]: `cfg` does not live long enough
+  --> t7f.rs:7:51
+   |
+ 6 |     let cfg = String::from("postgres://local");
+   |         --- binding `cfg` declared here
+ 7 |     Ctx { services: vec![Box::new(FileRepo { cfg: &cfg })] }
+   |                          -------------------------^^^^---
+   |                          |                        |
+   |                          |                        borrowed value does not live long enough
+   |                          coercion requires that `cfg` is borrowed for `'static`
+ 8 | }
+   | - `cfg` dropped here while still borrowed
+   |
+   = note: due to object lifetime defaults, `Box<dyn Repo>` actually means `Box<(dyn Repo + 'static)>`
+```
+
+关键在最后一行 note：`Box<dyn Repo>` 的**对象生命周期默认值**就是 `'static`。DI 容器字段只要没写 `Box<dyn Repo + 'a>`，借用型适配器就进不了容器——诊断把这条隐藏规则直接打印出来了。修法要么让适配器持有所有权（`cfg: String`），要么容器带生命周期参数 `Ctx<'a> { services: Vec<Box<dyn Repo + 'a>> }`。
+
+### 反例 2：trait 里有泛型方法 → 容器直接不可构造（E0038，1.99 术语「dyn compatible」）
+
+设计 trait 接口时顺手加泛型方法很常见，但它和 `Box<dyn Trait>` 容器互斥：
+
+```rust,compile_fail
+trait Svc { fn handle<T: std::fmt::Debug>(&self, x: T); }
+struct Impl; impl Svc for Impl { fn handle<T: std::fmt::Debug>(&self, _x: T) {} }
+fn main() {
+    let b: Box<dyn Svc> = Box::new(Impl);
+    b.handle(1);
+}
+```
+
+**实测输出（E0038）**：
+
+```text
+error[E0038]: the trait `Svc` is not dyn compatible
+  |
+4 |     let b: Box<dyn Svc> = Box::new(Impl);
+  |                    ^^^ `Svc` is not dyn compatible
+  |
+note: for a trait to be dyn compatible it needs to allow building a vtable
+  |
+1 | trait Svc { fn handle<T: std::fmt::Debug>(&self, x: T); }
+  |       ---      ^^^^^^ ...because method `handle` has generic type parameters
+  |
+  = help: consider moving `handle` to another trait
+  = help: only type `Impl` implements `Svc`; consider using it directly instead.
+```
+
+注意报错点在**容器声明处**而不是调用处：vtable 无法为泛型方法生成条目，整个 trait 立刻失去运行时注入能力。两个 help 各指一条出路：泛型方法挪去另一个 trait（静态泛型注入用），或者放弃 `dyn` 直接用具体类型（§三 的泛型参数注入）。E0038 的 1.99 措辞已从旧版 “object safe” 换为 “dyn compatible”，诊断文案与 Reference 同步。
+
+### 反例 3：手动 Registry 的服务互调回注形成 Rc 环——两个 Drop 都不执行（实测 0 行输出）
+
+§六 手动 Registry 与 §十 Service Locator 警示的组合陷阱：DI 图里「A 服务持有 B、装配器又把 A 句柄回注给 B」是常见装配手法（回调、事件订阅）。用 `Rc` 做单例装配时它变成内存环：
+
+```rust
+use std::rc::Rc;
+use std::cell::RefCell;
+struct Db { svc: RefCell<Option<Rc<Svc>>> }
+impl Drop for Db { fn drop(&mut self) { println!("Db dropped"); } }
+struct Svc { db: Rc<Db> }
+impl Drop for Svc { fn drop(&mut self) { println!("Svc dropped"); } }
+fn main() {
+    let db = Rc::new(Db { svc: RefCell::new(None) });
+    let svc = Rc::new(Svc { db: Rc::clone(&db) });
+    *db.svc.borrow_mut() = Some(Rc::clone(&svc));   // 装配器回注服务句柄 -> Rc 环
+    drop(svc); drop(db);
+    println!("若上面没有 'Svc dropped'/'Db dropped' 行 = 服务图循环引用泄漏");
+}
+```
+
+**实编译通过（仅 db 字段 dead_code 警告），实跑输出（exit 0）**：
+
+```text
+若上面没有 'Svc dropped'/'Db dropped' 行 = 服务图循环引用泄漏
+```
+
+`Svc dropped` 与 `Db dropped` 一行都没打印——两个对象连同整条服务图**静默泄漏**，`drop()` 调用全部「成功」但一个析构都没发生。长驻服务里每次请求重新装配一遍这张图，泄漏随请求数线性增长。对照实验（同代码把回注字段换成 `Weak<Svc>` + `Rc::downgrade`）实跑输出 `Svc dropped` + `Db dropped`，exit 0：环的方向必须恰好有一侧是 Weak 才会析构。规则：**沿所有权主方向用 Rc，回边一律 Weak**——这与 §十「禁止 Service Locator」同源：环往往就诞生在「组件自己回头找容器要依赖」的那一步。
+
+---
+
 ## 十一、决策树：选择注入方式
 
 ```mermaid

@@ -116,6 +116,115 @@ let pool = Pool::new(vec![0u8; 1024]);
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 + 本机 Windows 实跑，2026-10-19）
+
+把上文 §三 的 `Pool`/`Pooled` 完整代码本机实编译实跑，三个边界条款各自暴露出可复现的故障面。
+
+### 反例 1：LIFO 归还让「上一个借用者的脏状态」优先传染下一个借用者
+
+§五 说借出对象可能携带脏状态。实测表明这不是随机概率，而是 **LIFO 结构的最坏确定性路径**——最近归还的对象恰恰最脏（还没被时间稀释），`Vec::pop` 却优先把它发出去：
+
+```rust
+use std::ops::{Deref, DerefMut};
+use std::sync::{Arc, Mutex};
+pub struct Pool<T> { items: Arc<Mutex<Vec<T>>> }
+pub struct Pooled<T> { item: Option<T>, pool: Arc<Mutex<Vec<T>>> }
+impl<T> Deref for Pooled<T> { type Target = T; fn deref(&self) -> &T { self.item.as_ref().unwrap() } }
+impl<T> DerefMut for Pooled<T> { fn deref_mut(&mut self) -> &mut T { self.item.as_mut().unwrap() } }
+impl<T> Drop for Pooled<T> { fn drop(&mut self) { if let Some(item) = self.item.take() { let _ = self.pool.lock().unwrap().push(item); } } }
+impl<T> Pool<T> {
+    pub fn new(items: Vec<T>) -> Self { Self { items: Arc::new(Mutex::new(items)) } }
+    pub fn acquire(&self) -> Option<Pooled<T>> { let mut l = self.items.lock().unwrap(); l.pop().map(|i| Pooled { item: Some(i), pool: Arc::clone(&self.items) }) }
+}
+fn main() {
+    let pool: Pool<Vec<u8>> = Pool::new(vec![Vec::with_capacity(4096), Vec::with_capacity(4096)]);
+    { let mut a = pool.acquire().unwrap(); a.extend_from_slice(b"CART-42\x00DIRTY"); }
+    let b = pool.acquire().unwrap();
+    println!("LIFO: 第二个借用者拿到刚归还的对象: {:?} len={}", *b, b.len());
+}
+```
+
+实测输出（exit 0）：
+
+```text
+LIFO: 第二个借用者拿到刚归还的对象: [67, 65, 82, 84, 45, 52, 50, 0, 68, 73, 82, 84, 89] len=13
+```
+
+第二个借用者拿到的缓冲区里完整保留着前一个用户的业务数据 `CART-42\0DIRTY`。在连接池/会话池语境这就是跨请求数据泄漏；示例池没有任何 `reset` 钩子，脏状态是**默认成功路径**。
+
+### 反例 2：池耗尽是静默 `None`，而 `unwrap` 习惯写法把它变成 101 崩溃
+
+```rust
+use std::ops::{Deref, DerefMut};
+use std::sync::{Arc, Mutex};
+pub struct Pool<T> { items: Arc<Mutex<Vec<T>>> }
+pub struct Pooled<T> { item: Option<T>, pool: Arc<Mutex<Vec<T>>> }
+impl<T> Drop for Pooled<T> { fn drop(&mut self) { if let Some(item) = self.item.take() { let _ = self.pool.lock().unwrap().push(item); } } }
+impl<T> Pool<T> {
+    pub fn new(items: Vec<T>) -> Self { Self { items: Arc::new(Mutex::new(items)) } }
+    pub fn acquire(&self) -> Option<Pooled<T>> { let mut l = self.items.lock().unwrap(); l.pop().map(|i| Pooled { item: Some(i), pool: Arc::clone(&self.items) }) }
+}
+fn main() {
+    let pool: Pool<u32> = Pool::new(vec![1u32, 2]);
+    let a = pool.acquire().unwrap();
+    let b = pool.acquire().unwrap();
+    let d = pool.acquire();
+    println!("第三个借出请求: is_some()={}", d.is_some());
+    let _ = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| pool.acquire().unwrap()));
+    println!("unwrap 写法在池耗尽时 panic（catch_unwind 捕获）");
+    drop(a); drop(b);
+}
+```
+
+实测输出（exit 0，中间 panic 被捕获）：
+
+```text
+第三个借出请求: is_some()=false
+thread 'main' panicked at called `Option::unwrap()` on a `None` value   ← 无 block、无 timeout、无排队
+unwrap 写法在池耗尽时 panic（catch_unwind 捕获）
+```
+
+关键差异：这个手写池耗尽时**既不阻塞也不等待归还**——与真实连接池（tokio-rs/r2d2 的异步等待语义）不同，`acquire` 立即返回 `None`。调用方若不检查就 `unwrap`，池在高并发满载时表现为 exit 101 崩溃，而非背压。API 返回 `Option` 就是在声明「必须自行处理耗尽」，但 `unwrap` 惯用法恰好吞掉了这个信号。
+
+### 反例 3：池锁被外部 poison 后，`Drop` 里的 `lock().unwrap()` 二次 panic——catch_unwind 救不了归还路径
+
+§四 说池依赖 RAII 保证不泄漏。实测 RAII 的失效模式：
+
+```rust
+use std::sync::{Arc, Mutex};
+pub struct Pooled { item: Option<u32>, pool: Arc<Mutex<Vec<u32>>> }
+impl Drop for Pooled {
+    fn drop(&mut self) {
+        if let Some(item) = self.item.take() {
+            let _ = self.pool.lock().unwrap().push(item);   // 页内 §三 示例同款 unwrap
+        }
+    }
+}
+fn main() {
+    let pool = Arc::new(Mutex::new(vec![1u32]));
+    let p = Pooled { item: Some(7), pool: Arc::clone(&pool) };
+    let pool2 = Arc::clone(&pool);
+    let _ = std::panic::catch_unwind(move || {
+        let _guard = pool2.lock().unwrap();
+        panic!("持池锁线程 panic：Mutex 进入 poison 状态");
+    });
+    let res = std::panic::catch_unwind(move || { let _p = p; }); // p 在闭包内 drop -> 归还
+    println!("catch_unwind 结果 ok={}", res.is_ok());
+}
+```
+
+实测输出：
+
+```text
+thread 'main' panicked at 持池锁线程 panic：Mutex 进入 poison 状态
+thread 'main' panicked at called `Result::unwrap()` on an `Err` value: PoisonError { .. }
+catch_unwind 结果 ok=false
+```
+
+一个无关线程的 panic 污染池锁之后，所有归还路径（`Drop` 内 `unwrap`）连锁失败：借出的对象**回不到池**，且失败点在 `Drop` 内——若进程本来就在 unwind（如另一个 panic 触发 drop 链），`Drop` 内二次 panic 直接 abort，程序连清理日志的机会都没有。**修正**：归还用 `lock()` 返回的 `Result` 显式处理（`PoisonError::into_inner` 仍可取回 items 完成归还），绝不在 `Drop` 里 `unwrap`。
+
+---
+
 ## 六、决策树
 
 ```mermaid
