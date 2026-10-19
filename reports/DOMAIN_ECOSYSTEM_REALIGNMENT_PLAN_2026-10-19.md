@@ -71,3 +71,28 @@ cron `14459c312b92`（每 3h）随选定方案改写：A→cron 只跑语言语�
 - 治理权威 AGENTS.md（23 门、§6、只移动不删除）不动；语言语义组既有实测反例保留不拆。
 - P1/P2 权威覆盖微补（4+2 页）、F 轨道三 canonical、miri README 断链、move_ledger.csv 仍挂账。
 - 1.100 GA 对齐 cron `e463a69a99c9`（2026-11-13 后）不动。
+
+
+---
+
+## 状态更新（2026-10-19 收口，第 2 次）
+
+**D 队列 D1–D7 + V1/T1 全部落地并推送**（main 与 origin/main 同步，HEAD `53557f392`）：
+
+| 批 | 内容 | commit |
+|---|---|---|
+| D1 WASM | 8页版本实查锚 | `047f2ea3f` |
+| D2 算法 | 9页零锚补线 | `7542b629a` |
+| D3 企业 | EA 16页锚+工业P0引用 | `920c6a4fa` |
+| D4 合规 | 12页工具链锚+Ferrocene勘误 | `b884d548f` |
+| D5-D7 区块链/ML/游戏 | 7页锚+substrate口径勘误 | `80ac7442d` |
+| V1+T1 | chrono 专页新建(E0277实测)+pin勘误 | `53557f392` |
+
+## 后续队列（下一轮 loop 输入，按优先级）
+
+1. **W2 金融一手引用**：JPMorgan/ABN AMRO 等 Rust 金融采用的一手 P0 来源检索补链（D3 遗留）。
+2. **W3 IoT SDK 实查**：AWS IoT / embedded Rust SDK 组件族 crates.io 版本登记（D3 遗留）。
+3. **W4 jiff 评估页**：BurntSushi jiff（新一代日期时间库）实查后决定建 canonical 页或并入 29 页。
+4. **W5 automotive/AUTOSAR 权威口径**：crates.io automotive 分类（49 crates）逐 crate 实查，替换库内分析性 AUTOSAR 叙述的待核查标注。
+5. **语言语义组反例残余**（旧口径 fresh9=72，用户裁决 A）：排在 W 队列之后，仅语言语义组（01/02/03/04），06_ecosystem 永久豁免。
+6. **1.100.0 GA 对齐**（2026-11-12 后，cron `e463a69a99c9` 已排 11-13）：版本事实基线全库刷新。
