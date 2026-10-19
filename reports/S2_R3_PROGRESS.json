@@ -1,9 +1,9 @@
 {
   "loop": "S2-R3 实测反例补全（串行主代理模式）",
-  "updated": "2026-10-19-post-batch15d",
+  "updated": "2026-10-19-post-batch16-fresh9",
   "mode": "serial-main-agent (用户 2026-10-19 指令: 串行/落地为先/不派并行子代理)",
   "gap_definition": "concept/**/*.md 中既无『实测反例』也无 compile_fail 围栏（排除 SUMMARY/README/INDEX/00_ 前缀/quiz/sources）",
-  "strict_gap_total": 239,
+  "strict_gap_total": 72,
   "note": "2026-10-19 权威重扫=239（含 00_meta 框架页 68 页；旧 174 口径不含 00_meta 细分）。分组账本 scratch/s2_groups_fresh.json",
   "done": [
     {
@@ -372,5 +372,28 @@
     "F轨道三主题缺口从git历史取正文新建canonical",
     "00_meta按口径豁免固化"
   ],
-  "last_batch": "Batch15d"
+  "last_batch": "Batch15d",
+  "rescan_2026_10_19_post_batch16_fresh9": {
+    "file": "scratch/s2_gaps_fresh9.json",
+    "date": "2026-10-19-post-batch16",
+    "scanned_pages": 691,
+    "loop_gap_total": 72,
+    "criteria": "00_meta/sources/quiz/placeholders/07_future/00_version_tracking/README-INDEX-SUMMARY 豁免口径不变; fresh9 raw 79 含 7 个 quiz 文件, 按口径豁免后 72",
+    "groups": {
+      "03_design_patterns": 21,
+      "14_enterprise_architecture": 14,
+      "11_domain_applications": 10,
+      "16_algorithm_patterns": 8,
+      "06_data_and_distributed": 4,
+      "04_web_and_networking": 3,
+      "07_security_and_cryptography": 3,
+      "12_networking": 3,
+      "05_comparative/00_paradigms": 2,
+      "10_performance": 2,
+      "03_advanced/02_unsafe": 1,
+      "04_formal/00_type_theory": 1
+    },
+    "milestone": "05_systems_and_embedded 组清零 (fresh7 26 -> 批1-4共25页 + batch15c前既有1页口径)"
+  },
+  "batches_note_2026_10_19": "交互轮Batch15d落地11页与cron轮batch16(5c5e26b9e)内容合并提交, 工作树clean已推送origin; 两侧无冲突, strict门1322/1322 EXIT0在同一工作树上复验"
 }
