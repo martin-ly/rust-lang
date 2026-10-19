@@ -159,6 +159,57 @@ impl InventoryAcl {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+本页核心主张是「限界上下文需要显式边界」。本机实测给出一个 DDD 教科书反复警告、但在 Rust 里**默认形态完全不设防**的具体案例：**primitive obsession（裸原始类型跨上下文流转）——上下文边界若只写在目录/命名上，rustc 对语义错配零拦截；一旦边界建模为 newtype，同一错配立刻 E0308 硬拒。**
+
+**实测 1：两个上下文各建独立 crate，但实体 id 用裸 `u64`——把发票 id 当订单扣款全绿实跑**。workspace：`order_ctx` 暴露 `Order { id: u64 }` 与 `fn charge(o: Order) -> u64`；`invoice_ctx` 暴露 `Invoice { id: u64 }`。svc 里：
+
+```rust,ignore
+// 实测条件：workspace 三 member（order_ctx/invoice_ctx/svc），svc 依赖两 path crate 后 cargo run 实跑；
+// 单块不自带两 crate，故标 ignore（输出为本机实跑逐字）
+fn main() {
+    let invoice = invoice_ctx::Invoice { id: 999 };
+    // 把 Invoice 的 id 喂给 Order 上下文 —— 裸 u64 零防线
+    let charged = order_ctx::charge(order_ctx::Order { id: invoice.id });
+    println!("裸 u64 跨上下文: 把 invoice.id={} 当 order 扣款, 返回 {}", invoice.id, charged);
+}
+```
+
+实跑输出（0 错误 0 警告）：
+
+```text
+裸 u64 跨上下文: 把 invoice.id=999 当 order 扣款, 返回 999
+```
+
+「拆 crate = 有边界」在这里是幻觉：crate 边界守住了**类型名**的归属，但 `u64` 是全局共享的，跨上下文流动畅通无阻。真实事故形态——用户 ID 当订单 ID、租户 ID 当发票 ID——在 Rust 里与正确代码**长得一模一样且同样编译通过**。
+
+**实测 2：同一错配，上下文边界改用 newtype 即 E0308 逐字拒绝**。把两个实体的 id 建模为 `OrderId(u64)` / `InvoiceId(u64)` 后调用 `charge(inv)`：
+
+```rust,compile_fail
+#[derive(Debug)] struct OrderId(u64);
+#[derive(Debug)] struct InvoiceId(u64);
+fn charge(o: OrderId) -> u64 { o.0 }
+fn main() {
+    let inv = InvoiceId(999);
+    let charged = charge(inv);   // 上下文边界若建模为 newtype，同一错配在编译期被拒
+    println!("{}", charged);
+}
+```
+
+实编译输出（逐字）：
+
+```text
+error[E0308]: mismatched types
+  |     let charged = charge(inv);
+  |                   ------ ^^^ expected `OrderId`, found `InvoiceId`
+  |                   arguments to this function are incorrect
+```
+
+这给本页 1.2「Rust 中的边界映射」补上关键一层：**crate 只是物理边界，语义边界必须由 newtype/类型承载**。DDD 说的"显式边界"在 Rust 里的忠实翻译不是目录结构，而是"每个上下文的核心概念有自己的不相容类型"——否则 rustc 会把跨上下文的 id 错配当作完全合法的代码送进生产。
+
+---
+
 ## 六、国际权威参考
 
 - **P1 学术/方法学**

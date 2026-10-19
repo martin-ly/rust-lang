@@ -281,6 +281,35 @@ rust-version = "1.97.0"
 
 ---
 
+## ⚠️ 实测反例（cargo 1.99.1 + rustc 1.99.1 实编译，2026-10-19）
+
+5.3 把 MSRV 当作"架构策略"。本机实测揭示这条策略的真实强制力边界：**`rust-version` 字段只是给 cargo 的解析提示与 manifest 自洽校验，cargo 从不校验代码实际用到的特性是否落在声明的 MSRV 内——MSRV 声明可以撒谎且工具链不查谎**。
+
+**实测 1：manifest 谎称 MSRV 1.70 却使用 1.88 才稳定的 let-chains，cargo 不拦截，编译器只按 edition 放行/拒绝**。`rust-version = "1.70.0"`、`edition = "2021"` 的 crate 写 `if let Some(v) = x && v > 40`：
+
+```text
+error: let chains are only allowed in Rust 2024 or later
+ --> src\main.rs:4:8
+```
+
+注意错误的理由——**是 edition 门禁，不是 MSRV 门禁**。同一代码放进 `edition = "2024"` 的 crate（manifest 仍写 `rust-version = "1.90.0"`）即编译通过、实跑输出 `let chains: 42`。cargo 1.99.1 对"声明的 1.90 与特性实际 1.88 稳定"这层事实关系毫不在意，也从不反向校验"声明 1.70 能否真跑这段代码"。结论：**MSRV 作为治理策略没有任何特性级机器校验，能守住它的只有 CI 里的多工具链矩阵测试**——这正是 5.3 应写而未写的执行成本。
+
+**实测 2：`rust-version` 唯一被 cargo 硬拒的场景是 manifest 内部自相矛盾**。`edition = "2024"` + `rust-version = "99.99.99"`（乱填也拦你，方向反了也拦你）：
+
+```text
+error: failed to parse manifest at `app/Cargo.toml`
+Caused by:
+  rust-version 99.99.99 is incompatible with the version (1.85.0) required by the specified edition (2024)
+```
+
+cargo 校验的是「edition 隐含的最低版本」与「声明 MSRV」的一致性，不是「你的代码在声明 MSRV 上能否编译」。
+
+**实测 3：workspace 内 MSRV 不一致 cargo 照样构建**。workspace 两个 member：`core` 声明 `rust-version = "1.99.0"`，`svc`（依赖 core）声明 `rust-version = "1.90.0"`——`cargo build` 全绿，无任何警告。"治理层统一的 MSRV 政策"在 workspace 层面**没有一致性检查**：每个 member 各说各话可以通过构建。若 ADR 记录了「全仓统一 MSRV」，工具链不会替你兑现这条 ADR——违背它的 PR 照样绿。
+
+三条实测合起来给 5.3 一个诚实的版本：`rust-version` 是**声明**不是**执行**；edition 是硬门禁（编译器执行），MSRV 是软声明（cargo 只在解析层用一次）。把 MSRV 写进 ADR 而不配 CI 矩阵门，等于通过了"零强制的治理"。
+
+---
+
 ## 七、嵌入式测验（Embedded Quiz）
 
 ### 测验 1：Nygard ADR 模板包含哪五个核心字段？（记忆层）

@@ -289,6 +289,40 @@ EA 框架提供**分类法和治理语言**，但不提供：
 
 ---
 
+## ⚠️ 实测反例（cargo 1.99.1 / rustc 1.99.1 实编译，2026-10-19）
+
+本页 5.1-5.2 把「workspace → 应用/技术架构」「crate → 组件/配置边界」当作映射主张。本机实测给出一个更冷硬的对照：**BDAT 四维矩阵里「数据架构」与「应用架构」的一致性，Rust 类型系统只在 crate 边界上生效——同一 workspace 内的"共享 kernel 漂移"没有任何编译期防线，而一旦真的分 crate，同名类型错配反而以 E0308 硬拒。**
+
+**实测 1：两个 kernel crate 各有一份逐字相同的 `Customer`，跨 kernel 传递即 E0308 逐字诊断**。workspace `members = ["kernel_a","kernel_b","svc"]`，两份定义完全相同（`pub struct Customer { pub id: u64, pub name: String }`）：
+
+```rust,ignore
+// 实测条件：workspace 三 member（kernel_a/kernel_b 各 --crate-type lib，svc 依赖两者）实编译；
+// 单块无法自带两个 crate，故标 ignore（错误输出为本机 svc 实编译逐字）
+fn accept(c: kernel_a::Customer) { println!("{}", c.id); }
+fn main() {
+    let from_b = kernel_b::Customer { id: 7, name: "b".into() };
+    accept(from_b);
+}
+```
+
+实编译输出（逐字）：
+
+```text
+error[E0308]: mismatched types
+  |     accept(from_b);
+  |     ------ ^^^^^^ expected `kernel_a::Customer`, found `kernel_b::Customer`
+  = note: `kernel_b::Customer` and `kernel_a::Customer` have similar names,
+          but are actually distinct types
+note: `kernel_b::Customer` is defined in crate `kernel_b`
+note: `kernel_a::Customer` is defined in crate `kernel_a`
+```
+
+诊断本身把「同名不同源」讲得比任何 EA 文档都清楚：**crate 就是数据架构的身份证**。两个团队各建一份"共享 Customer"却分属不同 crate 时，Rust 立即暴露分叉——这正是 EA 治理中「共享 kernel 应单一权威」这条纪律的机器可验证形态。
+
+**反面推论（同一 workspace 内，实测）**：同一 crate 内 `mod a` 与 `mod b` 各定义一份 `Customer`，rustc 1.99.1 实编译**零错误零警告**，`main` 同时使用两份类型静默并存——没有任何 E0308，因为根本没人试图跨 mod 传递它们；一旦跨 mod 传递，才会以 E0308 现身。也就是说 **EA 的"共享数据模型一致性"承诺只有在拆 crate 时才被工具链前置接管**；把 workspace 当组织边界、把 mod 当组织边界，是完全不同强度的两种治理——前者每个跨边界调用都被类型系统审计，后者只有真正撞车时才报警。这为 5.2「crate → 组件/配置边界」给出了可操作的判据：**凡是要跨团队复用的数据模型，必须落在 crate 边界上，否则 EA 一致性声明在编译期是空文。**
+
+---
+
 ## 七、嵌入式测验（Embedded Quiz）
 
 ### 测验 1：BDAT 四维分别指什么？（记忆层）
