@@ -216,7 +216,8 @@ async fn main() {
 
 本机三组对照（`#[tokio::main(flavor = "current_thread")]`）：
 
-```rust
+```rust,ignore
+// 实测条件：tokio 1.53.3（本机 workspace 实编译，节选片段，完整可编译版本见 examples/）；imports: std::sync::Arc, std::sync::atomic::{AtomicU64, Ordering}, std::time::Duration
 let polls = Arc::new(AtomicU64::new(0));
 // sibling 任务自旋计数 100ms；async main 里直接 std::thread::sleep(400ms)
 std::thread::sleep(Duration::from_millis(400)); // 阻塞调用写在 async fn 内——编译合法、无任何警告

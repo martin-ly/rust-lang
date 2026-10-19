@@ -358,6 +358,53 @@ cargo check -p c13_embedded
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实运行，2026-10-19）：两条框架分野的宿主等价物——Embassy 共享外设双 `&mut` 直接 E0499；无天花板锁下「高优」任务被拖 170ms
+
+**分野一（Embassy 式「同一外设给两个任务」）**——把 UART 同时可变借用给两个任务句柄：
+
+```rust,compile_fail
+struct Uart;
+fn main() {
+    let mut u = Uart;
+    let a: &mut Uart = &mut u;
+    let b: &mut Uart = &mut u; // 两个 Embassy 任务声明同一外设
+    println!("{}", a as *const Uart as usize > 0);
+    let _ = b;
+}
+```
+
+```text
+error[E0499]: cannot borrow `u` as mutable more than once at a time
+4 |     let a: &mut Uart = &mut u;
+  |                        ------ first mutable borrow occurs here
+5 |     let b: &mut Uart = &mut u;
+  |                        ^^^^^^ second mutable borrow occurs here
+6 |     println!("{}", a as *const Uart as usize > 0);
+  |                   - first borrow later used here
+```
+
+**分野二（RTIC 资源天花板 vs std 锁）**——std Mutex 版优先级反转实测量：
+
+```rust
+use std::sync::{Mutex, Arc}; use std::time::Duration;
+fn main() {
+    let r = Arc::new(Mutex::new(0u8));
+    let r2 = r.clone();
+    let low = std::thread::spawn(move || { let _g = r2.lock().unwrap(); std::thread::sleep(Duration::from_millis(200)); });
+    std::thread::sleep(Duration::from_millis(30));
+    let t0 = std::time::Instant::now();
+    let _g = r.lock().unwrap();
+    println!("high-prio task blocked {}ms behind ceiling-less resource", t0.elapsed().as_millis());
+    low.join().unwrap();
+}
+```
+
+实运行输出：`high-prio task blocked 170ms behind ceiling-less resource`。
+
+口径：两例正是本页对比表两行的可编译化身。Embassy 把共享资源做成 `&mut` 传入任务——于是「同一外设进两个任务」在 Rust 借用层就是 E0499，框架用编译期错误替开发者执行「外设独占」纪律；要共享必须显式走 `RefCell`/通道/仲裁器。RTIC 侧则相反：资源绑定在 `#[lock_free]`/优先级天花板机制里，std Mutex 没有这层——170ms 阻塞就是「无天花板」的定量代价（低优持有 200ms，高优 30ms 后到达，恰等剩余窗口）。选型判据因此可机械化：外设独占性强、时序硬 → RTIC 天花板模型；流式共享多、并发任务多 → Embassy + 借用纪律。
+
+---
+
 ## 十、决策树
 
 ```text

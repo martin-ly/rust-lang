@@ -338,7 +338,7 @@ struct NoWake; // 裸机 executor 里的最小 waker: 不做任何事
 impl Wake for NoWake { fn wake(self: Arc<Self>) {} fn wake_by_ref(self: &Arc<Self>) {} }
 fn noop_raw_waker() -> Waker {
     fn clone(_: *const ()) -> RawWaker { RawWaker::new(std::ptr::null(), &VT) }
-    fn wake(_: *const ()) {} fn drop(_: *const ()) {}
+    fn wake(_: *const ()) {} fn wake_by_ref(_: *const ()) {} fn drop(_: *const ()) {}
     static VT: RawWakerVTable = RawWakerVTable::new(clone, wake, wake_by_ref, drop);
     unsafe { Waker::from_raw(RawWaker::new(std::ptr::null(), &VT)) }
 }

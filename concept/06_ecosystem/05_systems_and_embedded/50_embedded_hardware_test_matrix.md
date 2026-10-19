@@ -331,6 +331,46 @@ flowchart TD
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 --test 实运行，2026-10-19）：测试矩阵的「模型板」与真板能力错位——断言在 host 测试里当场红掉，exit 101
+
+硬件在环矩阵的第一道保险是「模型板（mock）与真板能力对齐」。最小复现——mock 的 ADC 通道数默认 0，测试按真板规格断言 4：
+
+```rust,should_panic
+#[derive(Debug, Default)]
+pub struct BoardModel { pub adc_channels: u8 }
+pub fn probe(board: &BoardModel) -> u8 { board.adc_channels }
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test] fn adc_present() { assert_eq!(probe(&BoardModel::default()), 4); } // 真板有 4 通道，模型默认 0
+}
+fn main() {}
+```
+
+实运行（`rustc --test` 后直接执行测试二进制）：
+
+```text
+running 1 test
+test tests::adc_present ... FAILED
+
+failures:
+
+---- tests::adc_present stdout ----
+
+thread 'tests::adc_present' (2648) panicked at src/main.rs:8:32:
+assertion `left == right` failed
+  left: 0
+ right: 4
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
+```
+
+进程退出码 101（assert 失败的标准码）。
+
+口径：本页矩阵设计主张「host 侧先跑 mock 测试，HIL 侧再跑真板」。这个反例坐实了矩阵失效的真实首因——不是真板挂了，而是**mock 的 Default 构造与真板规格悄悄漂移**：`Default::default()` 给所有字段填零，测试却按真板 datasheet 写死期望值。诊断质量值得记录：失败行直接指出源码位置（8:32）、left/right 逐值对照，测试矩阵 CI 里这类失败 30 秒定位。矩阵维护的正解是把 BoardModel 的期望值从 datasheet 生成（构建脚本注入），而不是在测试里手抄——手抄的期望值就是「断言真板却测了 mock」的温床。
+
+---
+
 ## 八、权威来源索引
 
 | 主题 | 权威来源 | 链接 |

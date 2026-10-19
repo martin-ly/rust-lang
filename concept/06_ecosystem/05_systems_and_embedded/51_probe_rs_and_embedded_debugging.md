@@ -408,6 +408,30 @@ flowchart TD
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）：probe-rs 工作流的第一道门不在 debugger 侧——host 没装 bare-metal target 时，连要下载的 ELF 都产不出来（E0463）
+
+probe-rs 调试链路的前提是「先有一份 target 产物」。本机默认只装 x86_64/wasm/aarch64 targets，用最常见的 Cortex-M target 直接编译：
+
+```rust,ignore
+// 实测条件：本机 rustup target list --installed 不含 thumbv7em-none-eabihf。
+// 该命令在装了 target 的机器上能编译通过——失败仅因 target 缺失，故标 ignore。
+fn main() { println!("hi"); }
+```
+
+```text
+$ rustc --edition 2024 --target thumbv7em-none-eabihf t51.rs
+error[E0463]: can't find crate for `std`
+  |
+  = note: the `thumbv7em-none-eabihf` target may not be installed
+  = help: consider downloading the target with `rustup target add thumbv7em-none-eabihf`
+
+error: aborting due to 1 previous error
+```
+
+口径：调试排障经验里「probe-rs 连不上板」多半先查接线与 chip 名，但 CI/新机器上更高频的失效在**更上游**：toolchain 没有该 target，构建产物根本不存在，`probe-rs download` 报的是「文件不存在」而不是任何调试协议错误。E0463 的诊断直接把修复命令写进 help（`rustup target add`），且对 bare-metal target 附带「can't find crate for `std`」线索——bare-metal 三级 target 本就没有 std，正确姿势是 `#![no_std]` + core。本页 HIL CI 清单的第一步应把「target 已安装」列为前置断言（`rustup target list --installed | grep`），比板级探针失败早一个数量级暴露问题。
+
+---
+
 ## 十、权威来源索引
 
 | 主题 | 权威来源 | 链接 |

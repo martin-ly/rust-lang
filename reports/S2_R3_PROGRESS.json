@@ -1,6 +1,6 @@
 {
   "loop": "S2-R3 实测反例补全（串行主代理模式）",
-  "updated": "2026-10-19",
+  "updated": "2026-10-19-post-batch15d",
   "mode": "serial-main-agent (用户 2026-10-19 指令: 串行/落地为先/不派并行子代理)",
   "gap_definition": "concept/**/*.md 中既无『实测反例』也无 compile_fail 围栏（排除 SUMMARY/README/INDEX/00_ 前缀/quiz/sources）",
   "strict_gap_total": 239,
@@ -191,6 +191,25 @@
         "07_future/archive/01_ai_integration_original.md"
       ],
       "evidence": "gen reserved keyword 双edition(2021 EXIT0/2024硬拒 r#gen逃生) + E0080 const OOB编译期拒 vs get_unchecked运行UB + pub extern C ctypes 'add' not found vs no_mangle n2_add=5 + wasip2 E0463/wasip1导出wadd/unknown-unknown无导出 + Ferrocene 26.02.0权威核对(落后1.99.1约7版本) + async阻塞b_polls=705598 + Rc模型句柄E0277 + ModelId别名接错线EXIT0 model#77 + 后验过滤全绿out=0 + _臂fallback vs E0004守卫"
+    },
+    {
+      "batch": "15d",
+      "pages": [
+        "36_defmt_probe_rs_architecture.md",
+        "39_no_std_hardware_measurement_and_validation.md",
+        "42_interrupts_and_concurrency_on_bare_metal.md",
+        "48_no_std_alloc_crate_ecosystem.md",
+        "49_embedded_hal_driver_patterns.md",
+        "50_embedded_hardware_test_matrix.md",
+        "51_probe_rs_and_embedded_debugging.md",
+        "53_critical_sections_and_sync_on_bare_metal.md",
+        "54_linker_scripts_and_memory_layout.md",
+        "55_rtic_vs_embassy_real_time_frameworks.md",
+        "56_rust_for_linux_kernel_module_basics.md"
+      ],
+      "evidence": "Miri数据竞态硬UB+E0133三重证据链(42页) | typestate未init read E0599 note指名Driver<Ready>(49页) | RwLock读守卫升级自锁try_write false×2(53页) | extern reset_handler LNK2019/LNK1120链接层硬拒(54页) | cargo test host红掉exit101模型板错位(50页) | probe-rs/defmt/embassy_executor缺crate E0433+本机无probe-rs CLI无thumbv7m目标(36/51/55页) | Instant分辨率100-200ns+500us sleep实测0.89-1.15ms(39页) | GlobalAlloc签名E0053完整expected/found+E0133 unsafe_op_in_unsafe_fn(48页) | E0499 Embassy双&mut外设+E0053 extern C trait方法+泛型extern C(56页) | 单执行器静态优先级H阻塞300ms: M 2/12 L 2/30 失10/28周期 + 无天花板Mutex高优被拖170ms(55页)",
+      "group": "06_ecosystem/05_systems_and_embedded (embedded组收尾批4/4)",
+      "note": "fresh8显示embedded组实际剩余7页(36/39/48/50/51/55/56); 42/49/53/54虽不在fresh8缺口名单但组内一并补至口径一致, 本批共11页落地"
     }
   ],
   "version_baseline": {
@@ -303,6 +322,27 @@
       ],
       "evidence": "驱动new消耗所有权E0382 | std Mutex无优先级继承高优被拖250ms | no_std启动三门(panic_handler/E0601/fn main requires std) | 手写noop RawWaker executor B阻塞窗0轮询600ms仅1147304轮vs自由6686615轮 | Vec::clear不还堆1024保持+shrink_to_fit到1000 | MISRA窄化1000->232/补码-1->4294967295静默通过 | 有界通道满槽send阻塞300ms背压",
       "strict_gate": "compile_fail 1313/1313 unexpected_pass=0 wrong_code=0 should_panic 7/7 candidate pass=300/300 EXIT0 (full log strict_batch15c.txt)"
+    },
+    {
+      "batch": "Batch15d",
+      "date": "2026-10-19",
+      "group": "06_ecosystem/05_systems_and_embedded (embedded组收尾批4/4)",
+      "pages": [
+        "36_defmt_probe_rs_architecture.md",
+        "39_no_std_hardware_measurement_and_validation.md",
+        "42_interrupts_and_concurrency_on_bare_metal.md",
+        "48_no_std_alloc_crate_ecosystem.md",
+        "49_embedded_hal_driver_patterns.md",
+        "50_embedded_hardware_test_matrix.md",
+        "51_probe_rs_and_embedded_debugging.md",
+        "53_critical_sections_and_sync_on_bare_metal.md",
+        "54_linker_scripts_and_memory_layout.md",
+        "55_rtic_vs_embassy_real_time_frameworks.md",
+        "56_rust_for_linux_kernel_module_basics.md"
+      ],
+      "note": "fresh8显示embedded组实际剩余7页(36/39/48/50/51/55/56); 42/49/53/54虽不在fresh8缺口名单但组内一并补至口径一致, 本批共11页落地",
+      "evidence": "Miri数据竞态硬UB+E0133三重证据链(42页) | typestate未init read E0599 note指名Driver<Ready>(49页) | RwLock读守卫升级自锁try_write false×2(53页) | extern reset_handler LNK2019/LNK1120链接层硬拒(54页) | cargo test host红掉exit101模型板错位(50页) | probe-rs/defmt/embassy_executor缺crate E0433+本机无probe-rs CLI无thumbv7m目标(36/51/55页) | Instant分辨率100-200ns+500us sleep实测0.89-1.15ms(39页) | GlobalAlloc签名E0053完整expected/found+E0133 unsafe_op_in_unsafe_fn(48页) | E0499 Embassy双&mut外设+E0053 extern C trait方法+泛型extern C(56页) | 单执行器静态优先级H阻塞300ms: M 2/12 L 2/30 失10/28周期 + 无天花板Mutex高优被拖170ms(55页)",
+      "strict_gate": "compile_fail 1322/1322 unexpected_pass=0 wrong_code=0 should_panic 8/8 candidate pass=300/300 timeout=0 EXIT0 (full log: strict_batch15d.txt)"
     }
   ],
   "criteria_note": "S2-R3 反例口径豁免（2026-10-19 用户确认固化）：concept/00_meta/*（内部工具/导航/审计页）、sources/*、quiz、placeholders、07_future/00_version_tracking（归版本对齐轨道）不计反例缺口。权威重扫 fresh7=100 页（loop口径），fresh6=96 差异为旧扫描分母600漏计5个零散组页——以 fresh7 为准。",
@@ -331,5 +371,6 @@
     "每批7页批门全绿即push",
     "F轨道三主题缺口从git历史取正文新建canonical",
     "00_meta按口径豁免固化"
-  ]
+  ],
+  "last_batch": "Batch15d"
 }

@@ -573,6 +573,33 @@ RTT up-buffer 是环形缓冲区。写入速度超过主机拉取速度时，新
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）：宏式日志字段引用不存在字段 → E0609 在展开点报错，错误指向宏内部表达式而非调用行——defmt「编译期校验」价值的最小等价复现
+
+defmt 的核心卖点是日志格式在**编译期**校验（`{tag:#str}` 与载荷类型逐字段匹配），而普通 `println!` 式运行期格式化把错配留到运行时。用一个最小宏即可复现 defmt 编译期校验的等价机制与诊断形态——宏参数展开后引用不存在字段：
+
+```rust,compile_fail
+#[derive(Debug, Default)]
+pub struct Stats { pub tx: u32 }
+macro_rules! log_field { ($s:expr) => { println!("{}", $s.rx) } }
+fn main() { let s = Stats::default(); log_field!(s); }
+```
+
+```text
+error[E0609]: no field `rx` on type `Stats`
+ --> src/main.rs:3:59
+  |
+3 | macro_rules! log_field { ($s:expr) => { println!("{}", $s.rx) } }
+  |                                                           ^^ unknown field
+4 | fn main() { let s = Stats::default(); log_field!(s); }
+  |                                       ------------- in this macro invocation
+  |
+  = note: this error originates in the macro `log_field` (in Nightly builds, run with -Z macro-backtrace for more info)
+```
+
+口径：诊断同时给出**宏定义位置**（错误表达式所在）与**宏调用位置**（`in this macro invocation`），这正是 defmt 宏把格式占位符展开成字段访问后的报错形态——`defmt::info!("tx={}", stats.tx)` 若拼错成 `stats.rx`，错误落点与这里逐字同构。对照实验（同页此前示例）：直接 `#[derive(Debug)]` + `println!("{:?}", cfg)` 实编译通过、实运行输出 `DeviceConfig { baud: 115200 } DefmtFrame { level: 1, tag: "cfg" }`——fmt 层不做字段级校验。defmt 的编译期字段校验本质就是把「运行期才发现的日志错配」前移成 E0609 级硬错误，代价即本节调试链路选型要权衡的宏展开复杂度。
+
+---
+
 ## 八、决策树：调试链路选型
 
 ```mermaid
@@ -656,6 +683,26 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从 defmt 编码、probe-rs 架构、调试协议、传输层对比、Knurling 工具链与反例六个维度组织调试链路知识，可作为裸机项目可观测性方案选型的快速导航索引。
+
+---
+
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）：defmt 不是「加个宏」而是全链路契约——crate 缺失时日志调用在编译期即不存在（E0433），且本机工具链里连 probe-rs CLI 与 ARM 目标都不存在
+
+```rust,compile_fail
+#![no_std]
+#[panic_handler]
+fn p(_: &core::panic::PanicInfo) -> ! { loop {} }
+pub fn log_temp(t: i16) { defmt::info!("temp = {}", t); }
+```
+
+实编译报错：
+
+```text
+error[E0433]: cannot find module or crate `defmt` in this scope
+  | use of unresolved module or unlinked crate `defmt`
+```
+
+本机环境实测（defmt 三段链路的每一段都需要独立安装，Cargo 依赖只覆盖第一段）：`which probe-rs` → 不存在；`rustup target list --installed` → 仅 `wasm32-unknown-unknown`、`wasm32-wasip1`，无任何 `thumbv*` ARM 目标；`defmt-print` → 不存在。含义：`defmt::info!` 在 Cargo.toml 没写 `defmt` 依赖时连编译都过不去（宏与解码格式表都是 crate 提供的），而即便编译过了，`probe-rs run`（传输段）和 `defmt print`（主机解码段）任一缺失，固件日志就停在 SWO/RTT 管线上出不来。defmt 的「零开销」前提是三段版本严格对齐：固件侧 defmt 版本、probe-rs 版本、格式表（`defmt-decoder`）三者协商失败时表现为链接期 `defmt` section 校验错或主机侧乱码——这是架构页 §2 三段模型的失效侧证据：每一段都是失败点。
 
 ---
 

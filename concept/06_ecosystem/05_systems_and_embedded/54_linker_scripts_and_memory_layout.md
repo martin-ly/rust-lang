@@ -360,6 +360,25 @@ rust-nm target/thumbv7em-none-eabihf/debug/examples/no_std_allocators_and_panic_
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 + MSVC link.exe 实链接，2026-10-19）：「声明了但没人定义」的启动符号——Rust 侧编译全绿，linker 侧硬拒，这正是 vector_table/reset_handler 错位的真实失效形态
+
+```rust,compile_fail
+extern "C" { fn reset_handler(); } // 声明由链接脚本/启动段提供的符号
+fn main() { unsafe { reset_handler(); } }
+```
+
+实编译到实链接结果：`rustc` 前端完全通过（extern 声明合法、unsafe 调用合法），失败发生在链接阶段：
+
+```text
+error: linking with `link.exe` failed: exit code: 1120
+  = note: d15d4_link_missing ... error LNK2019: 无法解析的外部符号 reset_handler
+          ... fatal error LNK1120: 1 个无法解析的外部命令
+```
+
+口径：裸机启动失败的最大来源不是「Rust 代码写错」而是「Rust 声明与链接脚本提供物的接缝错」：`extern "C"` 声明对 rustc 只是契约存在，链接器才验证契约兑现——`reset_handler` / `vector_table` 名字对不上、`MEMORY` 区块定义了 `PROVIDE` 缺失的符号、`EXTERN` 没写全，报错全部晚到 LNK2019/LNK1120（ARM GCC 侧同构：`undefined reference to 'Reset_Handler'`）。含义：写 `extern` 声明那一刻就该配对该符号在 `.ld`/`memory.x` 里的提供者，跨层核对名字拼写（大小写敏感：`Reset_Handler` vs `reset_handler` 是两个符号）。另一个同构教训：本页 §3 的 `memory.x` 分区错位（`.bss` 落进 FLASH 区）连 LNK 这一关都到不了——错在数据摆放，运行时才爆，比链接错更隐蔽。
+
+---
+
 ## 十、决策树
 
 ```text

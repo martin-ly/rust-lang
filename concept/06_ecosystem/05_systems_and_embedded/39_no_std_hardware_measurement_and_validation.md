@@ -651,6 +651,41 @@ graph TD
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）：host 时钟不是测量仪器——相邻两次 `Instant::now()` 分辨率约百纳秒，亚毫秒 sleep 实测放大 1.8 倍
+
+本页核心主张是「host 侧时间断言不能替代硬件测量」。反例直接量化 host 时钟的两个缺陷：
+
+```rust
+use std::time::{Duration, Instant};
+fn main() {
+    let mut min_gap = Duration::from_secs(9);
+    for _ in 0..20000 {
+        let t0 = Instant::now();
+        let _ = t0.elapsed();
+        let t1 = Instant::now();
+        let g = t1.checked_duration_since(t0).unwrap_or(Duration::ZERO);
+        if g < min_gap { min_gap = g; }
+    }
+    println!("1 min observable gap between two adjacent Instant::now() = {:?}", min_gap);
+    let t0 = Instant::now();
+    std::thread::sleep(Duration::from_micros(500)); // request sub-ms sleep
+    println!("2 requested 500us sleep, measured {:?}", t0.elapsed());
+}
+```
+
+同机连续两次实运行输出：
+
+```text
+1 min observable gap between two adjacent Instant::now() = 200ns
+2 requested 500us sleep, measured 1.1544ms
+1 min observable gap between two adjacent Instant::now() = 100ns
+2 requested 500us sleep, measured 887.6µs
+```
+
+口径：两个数字给出 host 计时作为「验证手段」的误差下限——① 相邻读钟的最小可观测间隔 100-200ns，意味着任何 host 侧小于微秒级的时间断言在噪声内，测出来的「稳定值」多半是量化假象；② 请求 500µs 的 sleep 实测量 0.89-1.15ms，OS 定时器粒度直接把亚毫秒延迟放大近 2 倍。于是「用 `Instant` 在 PC 上验证驱动时序」的测试矩阵行必须降级为存在性检查（是否返回、是否不超时），延迟数值断言只能落在 DWT CYCCNT / 逻辑分析仪 / `cortex-m-sysTick` 这类目标端计数源上（本页 §六 的组合）。这也是 §十一 反例表「时间断言在 CI 机器上偶发失败」的机理性根因：不是被测代码抖动，是 host 时钟本身有百纳秒台阶加毫秒级睡眠粒度。
+
+---
+
 ## 十三、相关概念
 
 - [`#![no_std]` 与裸机编程惯用法](23_no_std_and_bare_metal_idioms.md)

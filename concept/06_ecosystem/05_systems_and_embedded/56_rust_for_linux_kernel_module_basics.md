@@ -288,6 +288,47 @@ use bindings::*;
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）：内核 glue 层的两条 ABI 硬规则——trait 方法不能是 `extern "C"`（E0053），泛型 `extern "C"` fn 不能强制成普通函数指针（E0308）
+
+**反例一**：把模块初始化写成 trait 方法并顺手标 `extern "C"` + `no_mangle`（C 内核最常见的手感）：
+
+```rust,compile_fail
+trait Module { fn init(&self) -> i32; }
+struct Kmod;
+impl Module for Kmod { #[unsafe(no_mangle)] extern "C" fn init(&self) -> i32 { 0 } }
+fn main() {}
+```
+
+```text
+error[E0053]: method `init` has an incompatible type for trait
+4 | impl Module for Kmod { #[unsafe(no_mangle)] extern "C" fn init(&self) -> i32 { 0 } }
+  |                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected "Rust" fn, found "C" fn
+note: type in trait
+2 | trait Module { fn init(&self) -> i32; }
+  |                ^^^^^^^^^^^^^^^^^^^^^^
+  = note: expected signature `fn(&Kmod) -> _`
+             found signature `extern "C" fn(&Kmod) -> _`
+```
+
+**反例二**：给 C 侧回调留一个泛型 `extern "C"` shim，再试图塞进内核期望的普通函数指针表：
+
+```rust,compile_fail
+extern "C" fn init<T>(_arg: T) -> i32 { 0 }
+fn main() { let f: fn(u32) -> i32 = init; println!("coerced: {}", f(7)); }
+```
+
+```text
+error[E0308]: mismatched types
+2 | fn main() { let f: fn(u32) -> i32 = init; ... }
+  |                    --------------   ^^^^ expected "Rust" fn, found "C" fn
+```
+
+附带 2024 Edition 实测观察：`#[no_mangle]` 直接写在 impl 内还先报 `error: unsafe attribute used without unsafe`（须写 `#[unsafe(no_mangle)]`），rustc 给出整行 help——内核模块 glue 代码从 2021 迁 2024 时这条会成批触发。
+
+口径：Rust for Linux 的 FFI 面比「加个 extern "C"」严格：内核函数指针表（file_operations 等）期望的是具体 ABI 的**单态**函数——trait 方法（vtable 分发、Rust ABI）与泛型 shim（未单态化）都不满足。正解是「每内核回调 = 一个非泛型 `unsafe(no_mangle) extern "C"` 自由函数，内部再调 Rust 侧类型化 API」，即 bindgen 绑定 + 手写 shim 的双层结构（本页 §5/§6 的组合形态）。两条 E 编号把「为什么 shim 必须是自由函数」从约定升级为编译器强制。
+
+---
+
 ## 七、构建、加载与卸载
 
 ### 7.1 构建环境

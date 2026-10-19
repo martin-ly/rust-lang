@@ -363,6 +363,38 @@ interrupt::free(|_cs| {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）：RwLock「读完再升级写」——读守卫活着时自己阻塞自己，别的线程同时全被拒
+
+临界区直觉「先读检查、再写修改」在 RwLock 上是自锁陷阱：
+
+```rust
+use std::sync::{RwLock, Arc};
+fn main() {
+    let rw = Arc::new(RwLock::new(0u32));
+    let g1 = rw.read().unwrap();            // 本线程读者持读锁
+    let rw2 = rw.clone();
+    let h = std::thread::spawn(move || rw2.try_write().is_ok()); // 其他线程也进不来
+    let mine = rw.try_write().is_ok();      // 同线程 read->write 升级
+    println!("1 same-thread read->write upgrade: try_write() = {} (读守卫活着, 自己阻塞自己)", mine);
+    let other = h.join().unwrap();
+    println!("2 while read guard alive, other-thread try_write() = {}", other);
+    drop(g1);
+    println!("3 after dropping read guard: try_write() = {}", rw.try_write().is_ok());
+}
+```
+
+实运行输出：
+
+```text
+1 same-thread read->write upgrade: try_write() = false (读守卫活着, 自己阻塞自己)
+2 while read guard alive, other-thread try_write() = false
+3 after dropping read guard: try_write() = true
+```
+
+口径：`unwrap()` 版会直接死锁（升级前不 drop 读守卫，写等待要等自己释放——自己等自己）。Rust 的 RwLock 无升级语义、无递归读计数保证：正确写法只有「读段与写段显式分界」——`{ let g = rw.read(); /* 算出变更 */ drop(g); let g = rw.write(); /* 应用变更 */ }`，中间值拷出来传递。裸机等价物更严：临界区内屏蔽中断，任何「持锁再取锁」的嵌套（包括 ISR 打断主循环持锁点）都是优先级反转/死锁源，这也是 critical-section API 要求 `#[no_mangle]` 外部 critical-section 代码必须可被 static 证明无阻塞调用的原因（见 §5 与 portable atomic 讨论）。
+
+---
+
 ## 十、决策树
 
 ```text

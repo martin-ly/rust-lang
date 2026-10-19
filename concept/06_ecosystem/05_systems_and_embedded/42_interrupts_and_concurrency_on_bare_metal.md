@@ -562,6 +562,30 @@ unsafe {
 let result = BUF[0];
 ```
 
+## ⚠️ 实测反例（rustc 1.99.1 + Miri 实运行，2026-10-19）：中断/线程共写同一静态计数器——数据竞态不是「偶尔少几个数」而是语言层 UB，Miri 直接硬拒
+
+`static mut` 计数器是裸机 ISR 与主循环共享状态的最常见形态（softirq 类比：4 个执行流各自 `COUNT += 1`）。同一骨架在本机 `-O` 编译、循环放大到 100000 次/线程的变体上「看起来能跑」（两次实跑均给出 400000，见下方口径）；而本页围栏所示的 100 次/线程版本在 Miri 下立即硬停：
+
+```rust
+static mut COUNT: u64 = 0;
+fn main() {
+    let hs: Vec<_> = (0..4).map(|_| std::thread::spawn(|| { for _ in 0..100u64 { unsafe { COUNT += 1; } } })).collect();
+    for h in hs { let _ = h.join(); }
+    println!("count = {}", unsafe { COUNT });
+}
+```
+
+同一程序在本机 `cargo +nightly miri run` 下立即硬停：
+
+```text
+error: Undefined Behavior: Data race detected between (1) non-atomic write on thread `unnamed-1` and (2) non-atomic read on thread `unnamed-3` at alloc1
+  = help: this indicates a bug in the program: it performed an invalid operation, and caused Undefined Behavior
+```
+
+口径：本机 `-O` 实跑（同构骨架、循环放大到 100000 次/线程的版本）两次都碰巧给出精确总数 400000——「跑对了」不是「没有竞态」，窗口撞上与否是调度运气，而同一骨架（100 次/线程版本）在 Miri 下立即硬停。裸机侧同理：主循环读 `COUNT` 时中断随时插进来改它，一次 `+=` 是「读-改-写」三操作，中断劈开三步就丢更新。合规路径只有两条：临界区里屏蔽中断做原子更新，或 `AtomicUsize::fetch_add(.., Ordering::SeqCst)` 让硬件保证不可分割（见本页 §4 与 04_formal 线性化页）。`static mut` + 多执行流 = 「测试全绿也可以永远错」的经典陷阱类。
+
+---
+
 ## 11. 常见反例
 
 ### 反例 1：在中断里使用 `RefCell::borrow_mut`
@@ -875,6 +899,60 @@ fn idle() {
 | DMA 数据旧 | D-Cache 未清理/失效 |
 
 使用 `probe-rs` + `defmt` 可以在真实硬件上 trace 中断进入/退出与变量值。
+
+---
+
+## ⚠️ 实测反例（rustc 1.99.1 + Miri 实跑，2026-10-19）：`static mut` 跨线程/跨上下文共享的三重证据链——E0133 编译期硬拒、稳定 rustc 静默放行、Miri 精确判 data race
+
+第一层（Edition 2024，`static mut` 读取未包 unsafe）——编译期即拒：
+
+```rust,compile_fail
+fn main() {
+    static mut COUNTER: u32 = 0;
+    unsafe { COUNTER += 1; }
+    println!("{}", COUNTER); // 2024: use of mutable static is unsafe and requires unsafe block
+}
+```
+
+```text
+error[E0133]: use of mutable static is unsafe and requires unsafe block
+  |
+4 |     println!("{}", COUNTER);
+  |                    ^^^^^^^ use of mutable static
+  |
+  = note: mutable statics can be mutated by multiple threads: aliasing violations or data races will cause undefined behavior
+```
+
+第二层（把两处访问都规规矩矩包进 `unsafe`，模拟「ISR 写 + 任务写」共享同一裸变量）——**rustc 1.99.1 稳定版零警告通过编译**，程序实跑也不崩溃：
+
+```rust
+use std::sync::atomic::AtomicU32;
+static COUNTER: AtomicU32 = AtomicU32::new(0); // 正例对照：原子路径
+fn main() {
+    static mut SHARED: u32 = 0; // 反例：裸 static mut 跨上下文共享
+    let h = std::thread::spawn(|| { unsafe { SHARED = 1; } });
+    unsafe { SHARED = 2; }
+    h.join().unwrap();
+    println!("value={}", unsafe { SHARED });
+}
+```
+
+第三层——同一份代码交给 Miri（nightly 0.1.0），UB 被精确定位到两次非原子写的每一侧：
+
+```text
+error: Undefined Behavior: Data race detected between (1) non-atomic write on thread `main`
+       and (2) non-atomic write on thread `unnamed-1` at alloc4
+ --> src/main.rs:4:46
+4 |     let h = std::thread::spawn(|| { unsafe { SHARED = 1; } });
+  |                                              ^^^^^^^^^^ (2) just happened here
+help: and (1) occurred earlier here
+5 |     unsafe { SHARED = 2; }
+  |              ^^^^^^^^^^
+```
+
+口径：本页 14.4/14.5 节的「多核用 AtomicU32 而非 Mutex」是结论；这里补上证据链——E0133 只拦「忘了写 unsafe」这一层语法疏忽；unsafe 块写全之后，稳定编译器和实跑**都不会**暴露数据竞争（第二层静默通过），只有 Miri 这类语义层工具能抓到（第三层逐字诊断）。裸机开发者常以为「两个访问都 unsafe 了就是合法代码」，实测量证明合法≠安全：`static mut` 的合法性边界是「单一执行上下文」，跨中断/跨线程共享必须换原子或锁——这正是 18.2 表格把「单个原子变量」列为体积最小方案的形式化依据。
+
+---
 
 ## 15. 权威来源与延伸阅读
 

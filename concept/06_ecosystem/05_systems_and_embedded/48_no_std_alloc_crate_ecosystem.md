@@ -535,6 +535,47 @@ graph TD
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）：`GlobalAlloc` 签名错一个返回类型 → E0053 把 trait 要求的完整签名逐字打印给你；正确包装实跑成功但 2024 Edition 暴露「unsafe fn 体内调 unsafe 函数」的 E0133 警告层
+
+第一例（`alloc` 误写返回 `()`）：
+
+```rust,compile_fail
+use std::alloc::{GlobalAlloc, Layout, System};
+struct MyAlloc;
+unsafe impl GlobalAlloc for MyAlloc {
+    unsafe fn alloc(&self, _layout: Layout) -> () { System.alloc(_layout) }
+    unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) { System.dealloc(ptr, layout) }
+}
+#[global_allocator]
+static A: MyAlloc = MyAlloc;
+fn main() { let v: Vec<u8> = vec![1,2,3]; println!("{}", v.len()); }
+```
+
+```text
+error[E0053]: method `alloc` has an incompatible type for trait
+  |
+5 |     unsafe fn alloc(&self, _layout: Layout) -> () { System.alloc(_layout) }
+  |                                                ^^ expected `*mut u8`, found `()`
+  |
+  = note: expected signature `unsafe fn(&MyAlloc, Layout) -> *mut u8`
+             found signature `unsafe fn(&MyAlloc, Layout) -> ()`
+help: change the output type to match the trait
+5 -     unsafe fn alloc(&self, _layout: Layout) -> () { System.alloc(_layout) }
+5 +     unsafe fn alloc(&self, _layout: Layout) -> *mut u8 { System.alloc(_layout) }
+```
+
+第二例（签名正确的最小透传包装器）——实编译**通过并实运行成功**（`wrapped-allocator vec len=4096 first=7`），但 rustc 1.99.1 在 Edition 2024 下发出两条 E0133 级警告：
+
+```text
+warning[E0133]: call to unsafe function `std::alloc::GlobalAlloc::alloc` is unsafe and requires unsafe block
+note: an unsafe function restricts its caller, but its body is safe by default
+  = note: `#[warn(unsafe_op_in_unsafe_fn)]` (part of `#[warn(rust_2024_compatibility)]`)
+```
+
+口径：全局分配器是 no_std/嵌入式 crate 生态的最高危接触面——`talc`/`lol_alloc`/`heapless` 包装类 crate 全都实现同一 trait。E0053 的诊断质量极高（expected/found 两行完整签名 + help 直接给出修正行），所以分配器移植的编译错误几乎从不需要查文档。更深一层是 Edition 2024 的 `unsafe_op_in_unsafe_fn`：`unsafe fn` 不再自动传染 body——在 `unsafe fn alloc` 里调 `System.alloc` 也必须显式 `unsafe {}`。这正是页内决策树「自研分配器」分支的真实门槛：签名对只是开始，2024 Edition 把「unsafe 边界声明」从继承制改成了逐点声明制，移植旧 allocator crate 到 2024 时这类 E0133 警告会成批出现。
+
+---
+
 ## 十五、相关概念
 
 - [no_std 与裸机 Rust](38_no_std_bare_metal_rust.md)

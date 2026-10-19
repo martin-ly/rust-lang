@@ -878,9 +878,9 @@ pin.set_state(state).unwrap();
 
 ## ⚠️ 实测反例（rustc 1.99.1 `-O` 实编译 + 本机 x86-64 汇编直读，2026-10-19）
 
-反例 1「非 volatile MMIO 被优化」的直接机器证据——host `x86_64-pc-windows-msvc` 上 `rustc --edition 2021 -O --emit asm` 两个同构轮询函数的实际生成代码：
+反例 1「非 volatile MMIO 被优化」的直接机器证据——host `x86_64-pc-windows-msvc` 上 `rustc --edition 2021 -O --emit asm` 两个同构轮询函数的实际生成代码（围栏按 2021 编译，实测即该 edition）：
 
-```rust
+```rust,edition2021
 #[no_mangle]
 pub unsafe extern "C" fn poll_plain(p: *const u32) -> bool {
     while *p == 0 {} // ❌ 非 volatile MMIO 轮询

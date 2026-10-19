@@ -305,7 +305,8 @@ let app = Router::new().route("/", get(good_handler));
 
 **通过组**（同一 handler 两个 `Path` 提取器，路由 `/b/:id/:name`）：编译 EXIT=0——`Path` 提取器可以组合，因为路径可拆分。
 
-```rust
+```rust,ignore
+// 实测条件：axum 0.8.9 + tokio（本机 workspace 实编译，节选）；imports: axum::{routing::get, Router, extract::Path}
 async fn two(id: Path<i32>, name: Path<String>) -> String { format!("{}/{}", id.0, name.0) }
 let app: Router = Router::new().route("/b/:id/:name", get(two)); // EXIT=0
 ```

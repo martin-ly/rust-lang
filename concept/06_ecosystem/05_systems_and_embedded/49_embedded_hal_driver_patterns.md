@@ -378,6 +378,30 @@ impl ErrorType for MyDevice {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）：typestate 驱动「未 init 就 read」编译期硬拒——E0599 的 note 直接告诉你方法存在于哪个状态
+
+```rust,compile_fail
+pub struct Uninit; pub struct Ready;
+pub struct Driver<S> { s: S }
+impl Driver<Uninit> { pub fn init(self) -> Driver<Ready> { Driver { s: Ready } } }
+impl Driver<Ready> { pub fn read(&self) -> u32 { 42 } }
+fn main() {
+    let d = Driver { s: Uninit };
+    println!("{}", d.read()); // 未初始化就读寄存器
+}
+```
+
+实编译报错：
+
+```text
+error[E0599]: no method named `read` found for struct `Driver<Uninit>` in the current scope
+note: method `read` exists on `Driver<Ready>`
+```
+
+口径：类型状态模式（typestate）把「外设生命周期阶段」编码进类型参数：`Uninit -> Ready` 的迁移由 `init(self)` 消耗所有权完成，未迁移的句柄上 `read` 根本不存在。rustc 诊断质量值得记：它不是泛泛的「找不到方法」，note 直接点名方法存在于 `Driver<Ready>`——错误信息本身就在教迁移路径。这正是驱动模式相对「运行时 bool initialized 标志」的本质优势：忘调 init 是 E0599 编译错，不是运行时读到垃圾寄存器。代价（见本页 §6 讨论）：状态多时类型爆炸、跨状态共享字段要复制；`Builder` 模式同理——消耗式 `with_pin(self) -> Builder` 让「忘了配 pin」在 build() 的类型签名处显形。
+
+---
+
 ## 十、可测试性：Mock Trait
 
 驱动应面向 trait，以便在 host 端用 mock 测试。
