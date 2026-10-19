@@ -507,6 +507,66 @@ UML 是可视化符号系统，本身没有统一的执行语义：
 
 试图把普通类图当作源码执行，会得到未定义行为或根本无法编译的产物。
 
+---
+
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+「往返工程可无损同步」反例节是纯表格论述。本机把「再生成覆盖手写补丁」升级为两档机器证据——响响亮的那档编译就拦，静默的那档全绿出事：
+
+### 实测 1：手写补丁写进生成区，模型加字段再生成 → 补丁蒸发 → **E0599**
+
+`t21_gen.rs`：v1 生成物 `Order{name,qty}` 里混进手写补丁 `fast_total()`（违规但极常见——补丁作者只改了实现没动文件布局）。模型新增 `discount` 字段触发再生成，生成器重写整个 struct + impl，补丁消失，下游调用点当场编译失败：
+
+```rust,compile_fail
+mod generated_v2 {
+    #[derive(Debug)]
+    pub struct Order { pub name: String, pub qty: u32, pub discount: u32 }
+    impl Order { pub fn validate(&self) -> bool { self.qty > 0 } }
+    // fast_total 手写补丁在再生成中被覆盖消失
+}
+fn main() {
+    let o = generated_v2::Order { name: "x".into(), qty: 2, discount: 0 };
+    println!("{}", o.fast_total()); // ❌ 补丁蒸发
+}
+```
+
+**实测诊断**：
+
+```text
+error[E0599]: no method named `fast_total` found for struct `generated_v2::Order` in the current scope
+  |
+13 |     pub struct Order { pub name: String, pub qty: u32, pub discount: u32 }
+   |     ---------------- method `fast_total` not found for this struct
+19 |     println!("{}", o.fast_total()); // ❌ 补丁蒸发
+   |                      ^^^^^^^^^^ method not found in `generated_v2::Order`
+```
+
+注意诊断的第二行：rustc 直接指向**定义该 struct 的生成代码行**——E0599 在此场景等于「生成边界失守」的告警器，值得在 MDE 流水线上当守卫用。
+
+### 实测 2：更恶性的静默形态——新版生成器恰好也生成了同名方法 → 编译全绿、语义换血
+
+`t21b.rs`：再生成物 `Order` 自带新版 `fast_total()`（这次扣了 `discount`）。手写补丁被同名方法**静默替换**：
+
+```rust
+#[derive(Debug)]
+pub struct Order { pub name: String, pub qty: u32, pub discount: u32 }
+impl Order { pub fn fast_total(&self) -> u64 { (self.qty as u64) * 100 - self.discount as u64 } }
+fn main() {
+    let o = Order { name: "x".into(), qty: 2, discount: 30 };
+    println!("fast_total = {}（旧手写语义应为 200；新语义 170，编译零报错）", o.fast_total());
+}
+```
+
+实跑输出：
+
+```text
+fast_total = 170（旧手写语义应为 200；新语义 170，编译零报错）
+```
+
+方法名存活、签名兼容、类型全对——只有数值语义换了。MDE 的「往返无损」幻觉最怕的就是这档：编译器、clippy、类型系统全部绿灯，损失只在数值层面。防线不是编译器而是契约测试：对生成区公共方法钉死「输入→期望输出」的黄金用例（本例 `qty=2, discount=30 → 200`），再生成后先跑用例再生成产物进主干。表格行「除非显式隔离 HANDWRITTEN 区域」的正确性由此获得机器理由：隔离让 E0599 形态可见，契约测试让静默替换形态可见——两者缺一，往返工程就退化成赌运气。
+
+---
+
 ## 🧭 思维导图（Mindmap）
 
 ```mermaid
