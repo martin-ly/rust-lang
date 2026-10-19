@@ -873,7 +873,9 @@ error: environment variable `S2R3_DEFINITELY_NOT_SET_DB_URL` not defined at comp
 
 ### 实测 2：`env!` 把值**焊进二进制**——编译后改环境变量毫无作用（混淆的核心实锤）
 
-```rust
+```rust,ignore
+// 实测条件：编译前需先 export S2R3_MODE=prod（宿主默认环境无此变量，直编译会报 not defined，
+// 故标 ignore；本机按上述实操序列实编译/实跑通过）
 fn main() {
     let mode = env!("S2R3_MODE");
     println!("env! 固化值: {mode}");

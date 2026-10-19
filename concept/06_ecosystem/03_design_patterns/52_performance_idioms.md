@@ -460,6 +460,65 @@ fn main() {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+### 反例 1：false sharing 不是「扩展性差」——本机 8 线程实测放大 **19.70 倍**
+
+第九节表格把 false sharing 写成「多核扩展性差」，实际量化比这更狠。`t15_false_sharing.rs`：8 个 `AtomicU64` 相邻排在同一 `#[repr(C)]` 结构里（共 64 字节，正挤进同一缓存行），8 线程各刷自己那一个计数器 2×10⁷ 次；对照组把每个计数器包进 `#[repr(C, align(64))]` 独占行单元。`rustc -O` 本机实测：
+
+```text
+packed  sum=160000000 耗时=3.9231372s
+padded  sum=160000000 耗时=199.1623ms
+false sharing 放大倍数 = 19.70x
+size_of Packed = 64 bytes (8 计数器挤在同一批缓存行)
+size_of PaddedCell = 64 bytes
+```
+
+两组的原子操作次数、内存总量、最终结果完全相同——差异 100% 来自缓存行归属。`Ordering::Relaxed` 下不存在任何内存序开销，慢的全部是硬件缓存一致性协议在核间来回搬运同一行。6.3 节此前只有一段被注释掉的 crossbeam 示例；`repr(C, align(64))` 是零依赖的 std-only 替代，且它就是本页表格「修复」列的可执行形态：
+
+```rust
+#[repr(C, align(64))]
+struct PaddedCell(std::sync::atomic::AtomicU64, [u8; 56]);
+fn main() {
+    use std::sync::atomic::Ordering;
+    let c = PaddedCell(std::sync::atomic::AtomicU64::new(0), [0u8; 56]);
+    c.0.fetch_add(1, Ordering::Relaxed);
+    assert_eq!(c.0.load(Ordering::Relaxed), 1);
+    assert_eq!(std::mem::size_of::<PaddedCell>(), 64);
+}
+```
+
+判别口诀：**计数器数值相同 + 线程数 > 1 + 快慢差一个数量级 → 先查行对齐再查算法**。
+
+### 反例 2：`Vec::new()` 循环 push 的隐藏分配账单——19 次分配 / 16.7MB 对 1 次 / 8MB
+
+「预分配集合容量」（2.1 节）的常见辩解是「反正最后容量一样」。`GlobalAlloc` 计数器实测（`t15e_reserve.rs`，push 10⁶ 个 `i64`）：
+
+```text
+无 reserve    : 19 次分配 / 累计申请 16777184 bytes
+with_capacity : 1 次分配 / 累计申请 8000000 bytes
+```
+
+倍增扩容的累计申请字节是精确容量的 **2.10 倍**（8MB→16MB 的几何级数总和），且中途 18 次 realloc 每次都伴随 memcpy——瞬时内存峰值和拷贝流量都在账单里，只是 benchmark 总耗时里被平均掉了。`assert_eq!(v, w)` 通过：语义等价、机器成本差 2 倍。
+
+### 反例 3：装箱求和——「只多一层间接」的实测代价 3.6 倍
+
+第九节「把所有数据装箱」行给出的定性是「指针跳转、缓存不友好」。同规模对照（10⁷ 个 `f64`，`t15b_box.rs`）：
+
+```text
+unboxed: 49999995000000 10.7924ms
+boxed  : 49999995000000 38.5245ms
+装箱求和慢 3.6x
+```
+
+`sum` 逐字相同。代价来源：每个元素一次堆分配 + 遍历时 10⁷ 次 `downcast_ref` 的 TypeId 比较 + 数据散布在堆上导致的硬件预取失败。注意 3.6x 是在 `-O` 下测的——`Box<dyn Any>` 的虚间接对 LLVM 是硬边界，优化器无法穿透，这与「泛型单态化后近乎免费」（48 页实测 1）形成精确对照：**dynamic 的代价是机器可见的，monomorphized 的代价大多可被 ICF 折叠**。
+
+### 观察 4：`#[inline(always)]` 的反证——本机基准下它「无害」，别拿教条当数据
+
+第九节警告「过度 `#[inline(always)]` → 代码膨胀」。本机做了诚实的反向实验：60 个调用点的 30 行算术函数，`always` 与不标注两版——**exe 字节数完全相同（130560 = 130560）、编译时间差异在噪声内（0.497s vs 0.536s）、结果相同**。LLVM 在此形态下早已自行决定内联策略，`inline(always)` 没造成可观测膨胀。这条观察不是给「滥用无害」翻案（大函数 + 大调用点 + LTO 场景的膨胀真实存在），而是把第九节措辞钉回证据等级：`inline(always)` 的风险在多数小函数场景是**编译期提示被忽略**，真正需要它的是测量证明热路径未获内联的场合——与 1.1 节 Criterion 惯例配套使用，而不是凭表格恐惧或凭习惯滥用。
+
+---
+
 ## 十、决策树：选择性能惯用法
 
 ```mermaid

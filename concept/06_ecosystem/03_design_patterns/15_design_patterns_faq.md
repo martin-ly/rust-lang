@@ -563,3 +563,57 @@ fn main() {
 ```
 
 > 经验法则：所有权图必须是树/ DAG——环中的至少一条边降级为 `Weak`，或用索引（`Vec` + `usize`）替代指针式结构。
+
+---
+
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+### 反例 1（Q4 单例线）：`OnceLock::get_or_init` 初始化 panic 后**不留中毒标记**——与 `Mutex` 的中毒语义正好相反
+
+Q4 推荐 `OnceLock` 取代手写 double-checked locking。但 FAQ 没写它的失败语义：初始化闭包 panic 时，`OnceLock` **不会**记住这次失败。`t19c_once.rs` 实测：
+
+```text
+首次 get_or_init panic 被捕获: true
+再取: 42（第二次初始化成功，OnceLock 不携带首次 panic 的中毒标记）
+Mutex 中毒: poisoned lock: another task failed inside（is_poisoned = true）
+```
+
+两个单例原语对「初始化路径上出过错」的态度相反：`Mutex` 记住中毒并在后续 `lock()` 返回 `PoisonError`；`OnceLock` 允许重新初始化。设计含义：如果配置初始化失败是**不可恢复**的（连接串错误、证书缺失），`OnceLock` 让每个后续调用点都可能重试一次失败路径（每次调用重新读配置、重新失败），把一次性启动错误变成分布式请求路径上的慢性病。要 fail-fast 就把初始化放在 `main` 开头显式 `init().expect(...)`，`OnceLock` 只用于「初始化必然成功或失败可安全重试」的场合。
+
+### 反例 2（Q4 单例线）：`lazy_static!` 不是 std——直接编译报 **E0463**
+
+选型矩阵把「全局配置」推给 Singleton 后，社区旧惯用法 `lazy_static!` 常被当作 std 的一部分写进新代码。本机 rustc 1.99.1 直编：
+
+```rust,compile_fail
+// 常见"更简洁"写法：lazy_static! 宏 —— 但这是外部 crate，std 内不存在
+#[macro_use] extern crate lazy_static;
+use std::sync::Mutex;
+lazy_static! { static ref COUNT: Mutex<u32> = Mutex::new(0); }
+fn main() { *COUNT.lock().unwrap() += 1; println!("{}", *COUNT.lock().unwrap()); }
+```
+
+**实测诊断（E0463，无 E 编号外的宏展开噪音——失败在 crate 解析层，宏根本没机会展开）**：
+
+```text
+error[E0463]: can't find crate for `lazy_static`
+ --> src/main.rs:2:14
+  |
+2 | #[macro_use] extern crate lazy_static;
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^^ can't find crate
+```
+
+Edition 2024 起 std 的 `LazyLock`/`OnceLock` 已覆盖 lazy_static 的全部场景且无 `unsafe`、无 `Deref` 隐式转换（lazy_static 的 `Deref` 会把你惯用的 `.clone()` 悄悄变成对内部值的 deref-clone）。FAQ 口径应写成：新代码用 `LazyLock`/`OnceLock`，见到 `lazy_static` 是维护遗留代码的信号。
+
+### 反例 3（Q4 单例线）：单例「唯一实例」的可验证形式是一行指针比较
+
+`t19_singleton.rs`：`OnceLock<Config>` + `config() -> &'static Config` 两次调用——
+
+```text
+同一实例: 0x7ff7b6342000 == 0x7ff7b6342000 -> true
+```
+
+`std::ptr::eq(a, b)` 是单例不变量的机器级断言，测试里值得直接写出来；比「文档声称单例」强，比加运行时注册表弱得多——后者违反本页「避免过度抽象」条。
+
+### 反例 4（陷阱节强化）：Rc 环泄漏的「编译器不会报错」半句，补一个机器可见的侦测法
+
+既有陷阱节说环泄漏「运行期陷阱，编译器不会报错」——属实，但侦测并非没有办法。同一页 34_ownership 页已实测的 Drop 计数器法在此复用：给节点类型实现 `Drop` 递增静态计数器，作用域结束后计数 `< 对象数` 即环存在（本机实测 Rc 环版本计数 = 0、Weak 断环版本 = 2）。这比 `Rc::strong_count` 手检更可自动化，可直接写成单元测试断言。

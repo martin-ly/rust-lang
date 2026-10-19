@@ -525,6 +525,89 @@ async fn handler() -> Result<String, Error> {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+### 实测 1：中间件包裹顺序决定「谁被计数」——metrics 在外层才能看见 401
+
+网关层的第一性事实：**洋葱模型里谁包在外面，谁就拥有对内部全部失败的可见性**。`t18_gw_order.rs`（std-only 手写等价 tower 语义，实测条件：无 tower 依赖）把 metrics 包在 auth 外层：
+
+```rust
+type Handler = fn(&str, &mut Vec<String>) -> Result<u16, String>;
+fn metrics(h: Handler, req: &str, log: &mut Vec<String>) -> Result<u16, String> {
+    let r = h(req, log);
+    log.push(format!("metrics: {req} -> {:?}", r.as_ref().map(|c| *c)));
+    r
+}
+fn auth(req: &str, log: &mut Vec<String>) -> Result<u16, String> {
+    if req.contains("token=") { return Ok(200); }
+    log.push("auth: 拒绝".into());
+    Err("401 unauthorized".into())
+}
+fn main() {
+    let mut log = Vec::new();
+    let r = metrics(|rq, l| auth(rq, l), "GET /private", &mut log);
+    println!("metrics 外层看见被拒请求: {log:?} 返回 {r:?}");
+}
+```
+
+实跑输出（401 被外层 metrics 完整记录）：
+
+```text
+metrics 外层看见被拒请求: ["auth: 拒绝", "metrics: GET /private -> Err(\"401 unauthorized\")"] 返回 Err("401 unauthorized")
+```
+
+若把顺序反过来（auth 在外、metrics 在内），被 auth 拒绝的请求**永远不会进入 metrics 内层**——401 风暴在你的 QPS 曲线上完全隐身。网关告警体系的盲区往往不在采样率，而在中间件注册顺序：安全类中间件必须排在观测类内侧，这条约束在本页决策树里没有显式节点。
+
+### 实测 2：内层中间件 panic 时外层观测层「从未运行」——`catch_unwind` 救不回缺失的记录
+
+```rust
+use std::panic::{catch_unwind, AssertUnwindSafe};
+type Handler = fn(&str, &mut Vec<String>) -> Result<u16, String>;
+fn backend(_req: &str, log: &mut Vec<String>) -> Result<u16, String> { log.push("backend: 已到达".into()); Ok(200) }
+fn auth_panic(_h: Handler, _req: &str, log: &mut Vec<String>) -> Result<u16, String> {
+    log.push("auth: 进入".into());
+    panic!("auth middleware panic");
+}
+fn chain2(req: &str, log: &mut Vec<String>) -> Result<u16, String> {
+    // metrics 内层逻辑本应在 backend 返回后记录；auth panic 包在其外 → 内层记录路径整个蒸发
+    let r = catch_unwind(AssertUnwindSafe(|| { let mut l = vec!["auth-enter".to_string()]; auth_panic(backend, req, &mut l); }));
+    match r { Ok(()) => Ok(200), Err(_) => { log.push("网关层: panic 被捕获，但 metrics 内层从未运行".into()); Err("500".into()) } }
+}
+fn main() {
+    let mut log2 = Vec::new();
+    let _ = chain2("GET /boom", &mut log2);
+    println!("auth panic 在内层 metrics 之外: {log2:?}");
+}
+```
+
+实测（stderr 保留 panic 行，stdout 过滤后）：
+
+```text
+thread 'main' (24300) panicked at t18_gw_order.rs:29:9:
+auth middleware panic
+auth panic 在内层 metrics 之外: ["网关层: panic 被捕获，但 metrics 内层从未运行"]
+```
+
+ panic 被捕获≠观测链完整：内层的「响应后记录」代码路径随 panic 一起蒸发。这就是服务网格选型语境下 sidecar 方案的真实卖点之一——**观测发生在进程外**，应用进程内的 panic/abort 不可能吞掉自己的请求计数。自研 Rust 网关若观测层与业务层同进程，必须把记录点放到最外层 `main`（panic 捕获之后统一补记 5xx），而不是信任洋葱内层。
+
+### 实测 3：`process::exit` 跳过所有 `Drop`——网关优雅排空惯用的静默失效
+
+`13_engineering_and_production_patterns` 页的优雅停机清单假定了 RAII 清理必然执行。`t19_exit.rs` 实测两种退出路径（两个 Guard：连接池 flush / WAL fsync）：
+
+```text
+== 正常返回 main 末尾 ==
+drop WAL fsync
+drop 连接池 flush
+Drop 执行次数 = 2
+
+== std::process::exit(0) ==
+（无任何 drop 行）
+```
+
+`process::exit` 下 Drop 计数 = **0**。带超时排空的网关常用 `tokio::time::timeout(...).await` 后「超时就直接 exit」收尾——恰好把所有 RAII 清理（flush 连接池、fsync WAL、撤 deregister 钩子）全部跳过。正确收尾姿势是 `main` 自然返回（或收到信号后 return），让 Drop 沿栈执行；`process::exit` 只该用于「状态已损毁、清理反而危险」的 abort 场景，与 34_ownership 页实测的双 panic abort（exit 127）属于同一族语义：**进程终止路径与资源清理路径是两套机制，rustc 不保证前者调用后者**。
+
+---
+
 ## 四、选型决策树
 
 ```mermaid

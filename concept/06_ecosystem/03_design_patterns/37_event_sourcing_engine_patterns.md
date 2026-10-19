@@ -664,6 +664,62 @@ for stored in new_events {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+3.1/3.2 两个既有反例都标着 `rust,ignore`（示意级）。本机把它们升级为可编译实跑的机器证据：
+
+### 实测 1：schema 演进的三种漂移形态——两种当场炸裂，一种**静默注入默认值**（最恶性）
+
+`t16_es_drift.rs`（std-only 自描述行格式，语义与 JSON envelope 等价）：事件库存量事件是 v1 线格式 `BC:150`（`balance_changed: i64`）。代码演进后直接 fold 旧事件流的三种后果：
+
+```text
+字段改名后重放失败: unknown event form: "BC:150"
+类型收窄重放失败: parse: number too large to fit in target type
+新增字段带默认值重放'成功': balance=150 currency="CNY"（旧事件行里根本没有这个字段）
+```
+
+注意第三行的危险性排序与直觉相反：改名和收窄会**大声失败**（重放器当场报错，CI 里就是红测试）；带默认值的新增字段解析**成功**，但旧事件被凭空注入了 `currency="CNY"`——如果这个默认值不是当时的真实业务值（2019 年的事件用 2026 年的默认币种重放），聚合状态错误且没有任何报错点。这正是 3.2 节 envelope + upcaster 修正的具体存在理由：不是为了让旧事件「能解析」，而是为了让**默认值注入这件事显式化**（upcaster 函数里明写「旧事件没有 currency，当时默认是 X」）。
+
+### 实测 2：重放循环中注入新事件被借用检查直接拦住（E0502 逐字）
+
+3.1 节的「重放中调 mutating command」示意块，本机最小可编译等价形态（重放器持只读视图的同时 push 护栏事件）：
+
+```rust,compile_fail
+struct Account { balance: i64 }
+fn main() {
+    let mut events = vec![100i64, -30, 50];
+    // 重放器在 fold 过程中注入新事件（合法的业务诱惑：护栏事件）
+    let mut total = 0i64;
+    for e in &events {              // 不可变借用 events
+        total += e;
+        events.push(10);            // ❌ 可变借用 events（重放中注入护栏事件）
+    }
+    println!("{total}");
+}
+```
+
+**实测诊断**：
+
+```text
+error[E0502]: cannot borrow `events` as mutable because it is also borrowed as immutable
+  |
+6 |       for e in &events {              // 不可变借用 events
+  |       -        -------
+  |       |        immutable borrow occurs here
+7 | |         total += e;
+8 | |         events.push(10);            // ❌ 可变借用 events（重放中注入护栏事件）
+  | |         ^^^^^^^^^^^^^^^ mutable borrow occurs here
+  = help: consider using an index-based loop instead, or collecting modifications into a separate collection
+```
+
+rustc 的 help 行给出的两个「修复」——索引循环或把修改收集到独立集合——恰好对应事件溯源的正统解法：**新事件写入独立的 command 通道，由提交层追加，绝不在 fold 内联写入**。借用检查器是这个模式的免费守卫：「在重放中修改事件流」在 Rust 里不是纪律问题，是编译错误。3.1 节此前把它写成约定，实际它是类型系统级的保证。
+
+### 实测 3：重放纯函数式的可测试形态（对照 3.1 修正块的完整版）
+
+同一测试里 `events.into_iter().fold(Account { balance: 0 }, |a, e| a.apply(e))`（`apply(&self, delta) -> Account` 返回新值而非 `&mut self`）实跑输出 `纯 fold: 120`。签名形状本身就是「重放是纯 fold」的机器表达：`&self` + 返回新实例 = 聚合不可变；`&mut self` 版本才允许 fold 内注入——API 设计时选哪个签名，等于在编译期选择了是否可重放。
+
+---
+
 ## 四、选型决策树
 
 ```mermaid
