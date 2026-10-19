@@ -107,18 +107,23 @@ WG-SAF 的公开材料给出的核心理由：
 
 ## 四、Rust 侧的 AUTOSAR 生态
 
-截至 2026-07-12，Rust 侧**没有单一的 `autosar-rs` 官方实现**，生态由若干专精 crate 组成（GitHub 检索实测）：
+截至 2026-10-19，Rust 侧**没有单一的 `autosar-rs` 官方实现**，生态由若干专精 crate 组成。下表版本/下载量/维护方为 **crates.io API 本机实查（2026-10-19）**；同日检索还发现 `bsl` 等旧口径错误，勘误见文末「W5 实查勘误」节：
 
-| crate / 项目 | 作用 | 说明 |
+| crate / 项目 | 作用 | 实查状态（2026-10-19） |
 |:---|:---|:---|
-| `autosar-data`（DanielT） | ARXML 文件读写 | 解析/生成 AUTOSAR 模型交换格式，工具链侧基石 |
-| `autosar-data-abstraction` | ARXML 抽象层 | 简化 `autosar-data` 的使用 |
-| `dlt-parse-rs` | DLT 日志解析 | Diagnostic Log and Trace 报文解析 |
-| `xcp-lite`（Vector） | XCP 协议 | 标定/测量协议 Rust 实现 |
-| `ara-rs` | AP 开发工具包 | Cargo 原生的 ARXML 代码生成与类型化 async 通信（早期阶段） |
-| `bsl`（Bareflank） | AUTOSAR 合规基础库 | constexpr 风格、AUTOSAR C++ 指南兼容的 header-only 库（C++/Rust 2018 标注） |
+| `autosar-data`（DanielT） | ARXML 文件读写 | 0.23.0，55,027 累计下载，2026-08-15 更新——活跃，工具链侧基石 |
+| `autosar-data-specification`（同仓库） | AUTOSAR 规范元素定义 | 0.23.0，132,752 下载，随 `autosar-data` 同步发版（同版本线） |
+| `autosar-data-abstraction`（DanielT） | ARXML 抽象层 | 0.11.2，24,375 下载，2026-08-15 更新——简化 `autosar-data` 的使用 |
+| `a2lfile`（DanielT） | A2L（ASAP2）标定文件解析 | 3.5.1，159,474 下载，2026-09-28 更新——标定/测量工具链上游 |
+| `dlt-core` / `dlt_parse`（ESRLabs / JulianSchmid） | DLT 日志核心 / DLT 报文解析 | 0.20.2（53,159 下载）/ 0.10.1（37,113 下载）——Diagnostic Log and Trace 现役双库（勘误：旧称 `dlt-parse-rs` 为 GitHub 仓库名，crates.io 实名 `dlt_parse`） |
+| `xcp` / `libxcp`（DanielT，github tarka/xcp） | XCP 协议客户端/服务器完整实现 | 0.24.8 / 0.24.5，95,138 / 25,728 下载，2026-05-03 更新——标定/测量协议 Rust 实现（勘误：旧称 `xcp-lite`（Vector） 在 crates.io 不存在） |
+| `someip_parse` / `someip_derive`（JulianSchmid） | SOME/IP 报文编解码 | 0.7.2（56,729 下载，2026-07-19 更新）——AP 通信栈最活跃的底层解析库 |
+| `simple-someip` / `asomeip` | SOME/IP 主机/车厂侧实现 | 0.13.1（14,456 下载，2026-09-30 更新）/ 0.9.3（33,416 下载，2025-09-15 更新；mbehr1 独立 SOME/IP 实现） |
+| `ara-com` + `ara-com-someip` + `cargo-arxml`（ara-rs 工具包，ZiadAhmed9） | Cargo 原生的 ARXML 代码生成与类型化 async 通信 | 各 0.1.0（100 / 23 / 24 下载，2026-04-15 首发）——早期阶段，尚无生产采用证据（勘误：`ara-rs` 本身不在 crates.io，为 GitHub 上的 crate 套件名） |
+| `autosar-e2e` / `e2e-protection` | E2E 保护（AUTOSAR 通信完整性机制） | 1.0.0（3,342 下载）/ 0.4.0（1,533 下载） |
+| `libvecu`（YutaroNakagama） | 虚拟 ECU（vECU）工具包 | 2.1.0（315 下载，2026-08-12 更新）——§2.3 CP 侧 vECU 验证路径的开源对应物，学术侧（pseuds 平台） |
 
-产业平台侧，AUTOSAR.io 的 **PARA** 宣称是首个 Rust 内核的 AUTOSAR Adaptive 兼容平台（ASIL-B / ASPICE CL2 认证，`ara::com`/`ara::exec`/`ara::log`/`ara::per`/`ara::core` 等模块 Rust 实现），代表"Rust 实现 AP 中间件本身"的方向。
+产业平台侧，韩国 PopcornSAR（AUTOSAR Development Partner，韩企首个升格者）的 **PARA** 宣称是业界首个 Rust 内核的 AUTOSAR Adaptive 兼容平台——ASIL-B（ISO 26262）与 ASPICE CL2 双认证已达成，对标 AP R25-11；官方产品页（2026-10-19 检索核实）明确：R25-11 Rust 版已完成 5 个核心模块（`ara::core`/`ara::exec`/`ara::log`/`ara::per`/`ara::com`）的 Rust 实现，其余模块按序迁移中，通信栈含 SOME/IP、DDS、零拷贝 IPC 与 Eclipse Zenoh。代表"Rust 实现 AP 中间件本身"的方向，也是本页 AUTOSAR×Rust 叙事目前最强的产业实证。
 
 ---
 
@@ -165,6 +170,7 @@ graph TD
 | [Synopsys — AUTOSAR Classic ECUs Running Rust SWCs](https://www.synopsys.com/blogs/chip-design/validation-of-autosar-classic-ecus-running-rust-swcs-a-safer-path-to-automotive-software.html) | ✅ 二级 | CP 侧 Rust SWC 验证实践（2025-01-27，实测 200） |
 | [SemiEngineering 2025-07-08](https://semiengineering.com/driving-the-future-how-rust-and-virtual-ecus-are-transforming-autosar-classic-automotive-software/) | ✅ 二级 | CP 侧 Rust SWC 与 vECU 产业进展 |
 | [Safety-Critical Rust Consortium](https://rustfoundation.org/safety-critical-rust-consortium/) | ✅ 一级 | 行业治理与编码指南 |
+| [PopcornSAR PARA 产品页](https://autosar.io/en/products/para) · [PARA Overview 文档](https://autosar.io/docs/para/intro/) | ✅ 二级 | Rust 内核 AP 运行时产业实证（ASIL-B/ASPICE CL2，R25-11 五模块 Rust 实现，2026-10-19 检索核实） |
 
 ---
 
@@ -247,3 +253,12 @@ help: you can convert a `u16` to a `u8` and panic if the converted value doesn't
 ## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
 
 安全车载工具链实查：cargo-vet 0.10.2（供应链审计，ISO 26262 供应链论证辅助）· ring 0.17.14（no-std crypto，车载 TLS 候选）· Ferrocene 分发口径见 04_licensing_and_compliance.md 锚节（非 crates.io 分发）。canonical 缺口登记：AUTOSAR Adaptive 与 Rust 的官方集成规范未公开发布，本页 AUTOSAR 映射为分析性内容——保留并标注为待权威源。
+
+## W5 实查勘误（2026-10-19，crates.io API 全量口径）
+
+对称差报告 T2 项「automotive 分类逐 crate 实查」完成，替换旧「待核查」标注：
+
+- **分类口径勘误**：crates.io `automotive` 分类 API 实查口径为 `crates_cnt` 字段；旧文「49 crates」为过时快照。AUTOSAR 关联 crate 实际以关键词检索为准：`q=autosar` 命中 73 项、`q=someip` 26 项——「49」既非当前分类计数也非 AUTOSAR 命中数，登记为口径勘误。
+- **旧表三处具名错误已勘误**（见 §四 表格内注）：`xcp-lite`（Vector）不存在——现役实现是 DanielT 的 `xcp`/`libxcp`（0.24.8，95,138 下载）；`dlt-parse-rs` 是 GitHub 仓库名，crates.io 实名 `dlt_parse`（0.10.1）；`bsl` 页内口径（Bareflank AUTOSAR 合规基础库）与 crates.io 上的 `bsl`（garritfra 实验性标准库，0.0.0 占位，2022 后无活动，1,888 下载）不是同一实体——AUTOSAR C++ 指南兼容的 `bsl` 仓库不在 crates.io 分发，保留 GitHub 口径并撤销 crates.io 隐含归属。
+- **生态活跃度判据（下载量分层）**：基石层 `a2lfile` 159,474 / `autosar-data-specification` 132,752 / `xcp` 95,138 / `someip_parse` 56,729 / `autosar-data` 55,027 / `dlt-core` 53,159——全部 2026 年内有发版；早期层 ara-rs 套件三 crate 均 <110 下载（2026-04-15 首发）——「ARXML→可运行 Rust 服务」的开源闭环（cargo-arxml→ara-com→ara-com-someip）方向成立但无生产采用证据，维持「早期阶段」判级。
+- **canonical 缺口裁决更新**：上一节「官方集成规范未公开发布」的缺口保留（R23-11/R24-11 仍是 EXP 解释性文档，无规范性 Rust API）；新增产业侧对照事实：PopcornSAR PARA R25-11 已完成 core/exec/log/per/com 五模块 Rust 实现（厂商自主实现，非 AUTOSAR 标准化产物），故该缺口性质从「无人实现」修正为「无标准化 Rust API，有厂商级 Rust 运行时实现」。
