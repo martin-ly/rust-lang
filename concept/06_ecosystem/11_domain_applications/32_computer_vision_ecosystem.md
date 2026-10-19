@@ -59,3 +59,4 @@
 - [image-rs/image GitHub](https://github.com/image-rs/image) · [image-rs/imageproc](https://github.com/image-rs/imageproc)
 - [opencv-rust (ncxx)](https://github.com/Shnatsel/opencv) · [rust-lang 安全边界对比](../../05_comparative/03_domain_comparisons/01_safety_boundaries.md)
 - [RustGfx/resvg](https://github.com/RazrFalcon/resvg) · [QOI 格式官网](https://qoiformat.org/)（作者冻结声明）
+- 学术锚（2026-10-20 在线核验）：[Kornia-rs: A Low-Level 3D Computer Vision Library In Rust (Riba, Shi, Kumar, Shen, Bradski)](https://arxiv.org/abs/2505.12425)——Rust 原生 CV 库论文，含对 image-rs 系的基准对比（image 变换 3–5× 提速口径），正对本页「Rust-native vs wrapper 路线」裁决线。

@@ -11,8 +11,8 @@
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
 | P0 官方（doc.rust-lang.org / rust-lang.github.io / rustc-dev-guide / ferrocene） | 787 | 99.4% |
-| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 739 | 93.3% |
-| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 714 | 90.2% |
+| P1 学术/形式化（RustBelt/arxiv/acm/ieee/springer/aeneas …） | 741 | 93.6% |
+| P2 社区/生态（verus/creusot/docs.rs/crates.io/blog.rust-lang.org …） | 715 | 90.3% |
 | **任一权威（P0∪P1∪P2）** | **792** | **100.0%** |
 | 无任何国际权威引用（缺口） | 0 | 0.0% |
 
@@ -23,13 +23,11 @@
 | 维度 | 命中页 | 覆盖率 |
 |:---|---:|---:|
 | P0 官方 | 691 | 100.0% |
-| P1 学术/形式化 | 680 | 98.4% |
-| P2 社区/生态 | 690 | 99.9% |
+| P1 学术/形式化 | 682 | 98.7% |
+| P2 社区/生态 | 691 | 100.0% |
 | **任一权威** | **691** | **100.0%** |
 
-内容页 P1 缺口（11）: `concept/06_ecosystem/01_cargo/24_cargo_basics.md` · `concept/06_ecosystem/04_web_and_networking/12_container_build_and_delivery_pipeline.md` · `concept/06_ecosystem/04_web_and_networking/13_grpc_tonic_prost_ecosystem.md` · `concept/06_ecosystem/05_systems_and_embedded/57_posix_syscall_crate_ecosystem.md` · `concept/06_ecosystem/11_domain_applications/29_time_and_date_ecosystem.md` · `concept/06_ecosystem/11_domain_applications/30_chrono_vs_jiff.md` · `concept/06_ecosystem/11_domain_applications/31_desktop_gui_ecosystem.md` · `concept/06_ecosystem/11_domain_applications/32_computer_vision_ecosystem.md` · `concept/06_ecosystem/11_domain_applications/33_audio_dsp_ecosystem.md` · `concept/07_future/00_version_tracking/rust_1_99_stabilized.md` · `concept/07_future/02_preview_features/21_rust_specification_preview.md`
-
-内容页 P2 缺口（1）: `concept/04_formal/11_computational_models/12_linear_logic_and_ownership.md`
+内容页 P1 缺口（9）: `concept/06_ecosystem/01_cargo/24_cargo_basics.md` · `concept/06_ecosystem/04_web_and_networking/12_container_build_and_delivery_pipeline.md` · `concept/06_ecosystem/05_systems_and_embedded/57_posix_syscall_crate_ecosystem.md` · `concept/06_ecosystem/11_domain_applications/29_time_and_date_ecosystem.md` · `concept/06_ecosystem/11_domain_applications/30_chrono_vs_jiff.md` · `concept/06_ecosystem/11_domain_applications/31_desktop_gui_ecosystem.md` · `concept/06_ecosystem/11_domain_applications/32_computer_vision_ecosystem.md` · `concept/06_ecosystem/11_domain_applications/33_audio_dsp_ecosystem.md` · `concept/07_future/00_version_tracking/rust_1_99_stabilized.md`
 
 ## 按层级覆盖率
 

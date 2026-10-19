@@ -58,3 +58,4 @@ Go 是 gRPC 的「原生公民」（grpc-go 官方维护）；Rust 侧 tonic 是
 - [tonic GitHub（hyperium/tonic）](https://github.com/hyperium/tonic) · [prost GitHub](https://github.com/tokio-rs/prost)
 - [gRPC 官方文档](https://grpc.io/docs/) · [gRPC-Web 规范](https://github.com/grpc/grpc-web)
 - [Cap'n Proto 官网](https://capnproto.org/) · [tarpc（Google/tarpc）](https://github.com/google/tarpc)
+- 学术锚（2026-10-20 arXiv API 核验）：[Efficiency of REST and gRPC Realizing Communication Tasks in Microservice-Based Ecosystems (Bolanowski et al., SOMET 2022)](https://arxiv.org/abs/2208.00682) · [Hook-in Privacy Techniques for gRPC-based Microservice Communication (Loechel et al., ICWE 2024)](https://arxiv.org/abs/2404.05598)
