@@ -486,3 +486,9 @@ graph TD
 - <https://algs4.cs.princeton.edu/home/>
 - <https://dl.acm.org/doi/10.1145/321879.321884>
 - <https://rust-algo.club/data_structures/union_find/>
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+- 具名活跃项目：petgraph **0.8.3**（5.6 亿次累计下载，data-structures 类，https://crates.io/crates/petgraph）——图结构所有权建模事实标准；crossbeam **0.8.5**（https://crates.io/crates/crossbeam）——crossbeam-epoch 提供所有权感知的并发内存回收。
+- 可核验引用：petgraph 仓库 https://github.com/petgraph/petgraph · crossbeam 官方 https://github.com/crossbeam-rs/crossbeam。
+- canonical 缺口登记：纯函数式持久化数据结构（结构共享）在 Rust 生态无 crates.io 官方分类锚点，im（im-rs）为社区实现，版本实查登记待 D 后续轮。

@@ -521,3 +521,8 @@ graph TD
 ## 国际权威来源（P1 补充）
 
 - [Rivest, Shamir & Adleman — A Method for Obtaining Digital Signatures and Public-Key Cryptosystems (CACM 1978)](https://dl.acm.org/doi/10.1145/359340.359342)
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+- 具名活跃项目：num-bigint **0.5.1**（max_stable；6.6 亿次累计下载，algorithms/data-structures/science 三类，https://crates.io/crates/num-bigint）——Rust 大整数事实标准（rust-num 家族）。
+- 可核验引用：https://github.com/rust-num/num-bigint。注意 API 返回 newest_version=0.4.8 与 max_stable=0.5.1 并存（0.5 线为系列当前稳定线），引用时以 max_stable 口径为准。

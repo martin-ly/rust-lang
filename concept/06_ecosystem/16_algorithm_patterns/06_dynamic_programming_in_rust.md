@@ -666,3 +666,8 @@ fn main() {
 - <https://usaco.guide/plat/dp-introduction?lang=cpp>
 - <https://cp-algorithms.com/dynamic_programming/index.html>
 - <https://doc.rust-lang.org/std/collections/struct.HashMap.html>
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+- 具名活跃项目：DAG 上 DP 的生产实现锚 petgraph **0.8.3**（topological 排序与图 DP 工具集，https://crates.io/crates/petgraph）。
+- canonical 缺口登记：Rust 生态无专用 DP 框架 crate（DP 以手写/库内实现为主，crates.io 8,744 个 algorithms 类 crate 中无 DP 专用 canonical）——这是真实生态事实，非本库缺口；本页反例实测节保留。

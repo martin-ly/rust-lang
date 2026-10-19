@@ -659,3 +659,8 @@ graph TD
 ## 国际权威来源（P1 补充）
 
 - [Aho & Corasick — Efficient String Matching: An Aid to Bibliographic Search (CACM 1975)](https://dl.acm.org/doi/10.1145/360825.360855)
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+- 具名活跃项目：aho-corasick **1.1.5**（Aho-Corasick 自动机在 Rust 生态的 canonical 生产实现，https://crates.io/crates/aho-corasick）· patricia_tree **0.10.2**（radix trie 工业实现，https://crates.io/crates/patricia_tree）。
+- 权威对齐事实：crates.io text-processing 类 6,544 crates；后缀数组/BWT 无 canonical 高下载 crate——登记为生态级 canonical 缺口（理论节保留）。

@@ -420,3 +420,9 @@ graph TD
 - <https://www.akkadia.org/drepper/cpumemory.pdf>
 - <https://dl.acm.org/doi/10.1145/106972.106981>
 - <https://docs.rs/wide/latest/wide/>
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+- 具名活跃项目：simba **0.10.2**（SIMD 代数库，no-std/wasm/science/mathematics 四类标签，8,190 万累计下载，https://crates.io/crates/simba）· ndarray **0.17.2**（1.34 亿累计下载，rayon feature 提供并行迭代，https://crates.io/crates/ndarray）。
+- 权威生态事实：std 侧 SIMD 主路线仍是 portable_simd nightly（simba 的 portable_simd feature 即桥接此轨道）；稳定 portable_simd 缺口登记至 1.100/1.101 版本跟踪。
+- 可核验引用：https://github.com/dimforge/simba · https://github.com/rust-ndarray/ndarray。

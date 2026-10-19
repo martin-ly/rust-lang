@@ -309,3 +309,8 @@ flowchart TD
 - **在线算法**强调不可撤销的即时决策；**流式算法**强调顺序、亚线性内存与近似。
 - Rust 的 `Iterator`、`Stream` 与所有权模型天然支持一次性、低分配的流式处理，并在编译期排除“遍历中修改源”等经典错误。
 - 设计时应先回答决策树中的三个核心问题：数据是否超内存？是否只能单趟扫描？是否可接受近似？
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+- 具名活跃项目：crossbeam **0.8.5**（流式管道/consumer-producer 的通道原语，https://crates.io/crates/crossbeam）· rayon **1.12.0**（1,430 万近期下载，并行折叠即在线聚合的 parallel 形态，https://crates.io/crates/rayon）。
+- canonical 缺口登记：HyperLogLog/Count-Min 等概率流式摘要在 crates.io 无主流 canonical 实现（社区 crate 均低下载量、无工业背书）——登记为跟踪缺口，本页理论节保留。

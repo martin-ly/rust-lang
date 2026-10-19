@@ -461,3 +461,8 @@ flowchart TD
 ## 国际权威来源（P1 补充）
 
 - [Driscoll, Sarnak, Sleator & Tarjan — Making Data Structures Persistent](https://dl.acm.org/doi/10.1145/5925.5934)
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+- 具名活跃项目：crossbeam-epoch（crossbeam **0.8.5** 组件，https://crates.io/crates/crossbeam）——并发场景下「持久化+安全回收」的主流生产路线；im（im-rs，纯 Rust 持久化向量/集合）为社区 canonical 候选，版本实查与活跃度裁决登记待 D 后续轮。
+- canonical 缺口登记：Rust 无标准库级持久化数据结构；函数式持久化在 Rust 生态属小众（与本页所有权优先惯用法互为镜像），此结论本身即权威对齐口径。

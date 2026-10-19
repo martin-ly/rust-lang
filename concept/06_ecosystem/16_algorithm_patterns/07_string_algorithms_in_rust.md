@@ -480,3 +480,8 @@ graph TD
 - <https://doi.org/10.1137/0217053>
 - <https://arxiv.org/abs/2407.18753>
 - <https://doc.rust-lang.org/std/str/index.html>
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+- 具名活跃项目：aho-corasick **1.1.5**（12.6 亿次累计下载——Rust 下载量最大的字符串算法库，被 ripgrep 依赖，https://crates.io/crates/aho-corasick）· patricia_tree **0.10.2**（内存高效 Patricia 树，no-std 支持，https://crates.io/crates/patricia_tree）。
+- 工业采用可核验引用：ripgrep 多模式搜索基于 aho-corasick（https://github.com/BurntSushi/ripgrep · https://github.com/BurntSushi/aho-corasick）。

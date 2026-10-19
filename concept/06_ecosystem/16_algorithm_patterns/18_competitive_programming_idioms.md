@@ -580,3 +580,8 @@ graph TD
 - <https://github.com/rust-lang-ja/atcoder-rust-resources>
 - Rust Algorithm Club：<https://github.com/weihanglo/rust-algorithm-club>
 - *Introduction to Algorithms* (CLRS) — ACM Digital Library：<https://dl.acm.org/doi/10.5555/1614191>
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+- 具名活跃项目（竞赛常用快件）：rustc-hash **2.1.3**（9 亿次累计下载——rustc 自身使用的非加密哈希，竞赛/引擎场景事实标准，https://crates.io/crates/rustc-hash）· indexmap **2.14.0** · num-bigint **0.5.1** · patricia_tree **0.10.2**。
+- 可核验引用：https://github.com/rust-lang/rustc-hash（rust-lang org 背书）。
