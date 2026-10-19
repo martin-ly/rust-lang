@@ -296,22 +296,50 @@ mod fifo_tests {
 
 ---
 
-## ⚠️ 反例与陷阱：二分查找中点计算溢出（运行时陷阱）
+## ⚠️ 实测反例：二分查找中点计算溢出（rustc 1.99.1 实编译/实跑三 profile，2026-10-19）
 
-**反例**（运行时陷阱，代码可通过编译；实测 运行时 panic：attempt to add with overflow（debug））：
+**档 1：常量参数——rustc 编译期硬拒**（本机实测逐字，debug 与 `-O` 同样失败，无产物）：
 
-```rust
-fn mid(low: usize, high: usize) -> usize {
-    (low + high) / 2
-}
+```rust,compile_fail
 fn main() {
-    println!("{}", mid(usize::MAX - 1, usize::MAX));
+    let low: usize = usize::MAX - 1;
+    let high: usize = usize::MAX;
+    let mid = (low + high) / 2;
+    println!("{}", mid);
 }
 ```
 
-经典二分缺陷：`(low + high)` 在索引接近 `usize::MAX` 时溢出，debug 下 panic、release 下静默回绕给出错误下标；形式化验证视角下这是前置条件遗漏。
+实编译输出逐字：
 
-**修正**：
+```text
+error: this arithmetic operation will overflow
+ --> src/main.rs:4:15
+4 |     let mid = (low + high) / 2;
+  |             ^^^^^^^^^^^^ attempt to compute `18446744073709551614_usize + usize::MAX`, which would overflow
+  = note: `#[deny(arithmetic_overflow)]` on by default
+```
+
+旧版页面写「代码可通过编译」是**标注腐烂**：常量可直接判定时 `arithmetic_overflow` 是 deny 级 lint，这份代码在 1.99.1 上根本不产出二进制。真正能编译的是运行时变体——
+
+**档 2：变量参数（`black_box` 黑盒化）debug 实跑**：
+
+```text
+thread 'main' panicked at src/var.rs:2:44:
+attempt to add with overflow
+debug exit=101
+```
+
+**档 3：同一份变量代码 `rustc -O` 实跑**：
+
+```text
+mid(wrapped) = 9223372036854775806
+correct mid = 18446744073709551614
+release exit=0
+```
+
+回绕后的下标恰为正确值的一半，退出码 0。三档光谱给出形式化视角的实测注解：**前置条件静态可判定时编译器直接替你做证明（档 1）；一旦输入来自运行时，编译器保证立刻退场——debug 靠运行时检查 panic（档 2），release 静默给出错误下标（档 3）**。形式化验证讨论的「前置条件遗漏」在工程里的对应物就是档 3 这种全绿灯事故。
+
+**修正**（两种 profile 均实编译通过、结果一致）：
 
 ```rust
 fn mid(low: usize, high: usize) -> usize {

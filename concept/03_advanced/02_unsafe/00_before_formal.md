@@ -121,6 +121,44 @@ L4 中部分段落包含数学符号（⊗, ⊸, !, ∀, ∃），这些符号�
 > [Brown University — Ownership Learning Research](https://rust-book.cs.brown.edu/) ·
 > [RustBelt](https://plv.mpi-sws.org/rustbelt/)
 
+---
+
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+本页结论「形式化不是写 Rust 的必要条件」需要一个可测的边界：编译器保证到底覆盖到哪一行，超出部分该用什么工程习惯兜。本机用形式化验证的经典标本——二分中点 `(low + high) / 2`——打出三档 profile 的完整光谱：
+
+**档 1：调用参数是编译期常量** —— rustc 直接硬拒，连二进制都不产出：
+
+```text
+error: this arithmetic operation will overflow
+ --> src/main.rs:4:15
+4 |     let mid = (low + high) / 2;
+  |             ^^^^^^^^^^^^ attempt to compute `18446744073709551614_usize + usize::MAX`, which would overflow
+  = note: `#[deny(arithmetic_overflow)]` on by default
+```
+
+debug 与 `-O` 结果相同（exit 1）——前置条件可静态判定时，**编译器已经替形式化做完了证明**，你不需要 Iris。
+
+**档 2：参数来自运行时（`black_box` 黑盒化）** —— debug profile 实跑：
+
+```text
+thread 'main' panicked at src/var.rs:2:44:
+attempt to add with overflow
+debug exit=101
+```
+
+**档 3：同一份代码 `-O` 生产 profile** —— 全部绿灯，然后给出错误答案：
+
+```text
+mid(wrapped) = 9223372036854775806
+correct mid = 18446744073709551614
+release exit=0
+```
+
+返回的下标恰好是正确值的一半（u64 回绕），进程退出码 0——「能编译 + 正常退出」在生产 profile 下对语义错误**零断言**。
+
+**判据**：档 1 说明日常 Rust 里编译器接管的范围比传说中大（所以 L4 可跳过）；档 3 说明编译器接管的终点是「静态可判定」这条线，越过它的算法前置条件（索引域、时间戳单调性、环缓冲容量）必须由工程习惯接管——`checked_add`/`saturating_*`/`low + (high - low) / 2` 加边界测试。这就是「不学形式化也能安全写 Rust」的实测版本：安全的前提是你用显式数值边界把档 3 消灭掉，而不是编译器天然会帮你兜底。
+
 ## 嵌入式测验（Embedded Quiz）
 
 本节从测验 1：为什么 Rust 的形式化不是写 Rust 的必要条件？（理…、测验 2：形式化方法在 Rust 中主要服务于哪些人群？（理解层）与测验 3：如果发现形式化内容难以理解，正确的策略是什么？（理解层）切入，剖析「嵌入式测验（Embedded Quiz）」的核心内容。
