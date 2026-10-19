@@ -1,6 +1,6 @@
 {
   "loop": "S2-R3 实测反例补全（串行主代理模式）",
-  "updated": "2026-10-19-post-W17-design_patterns-batch4",
+  "updated": "2026-10-19-post-batch17",
   "mode": "serial-main-agent (用户 2026-10-19 指令: 串行/落地为先/不派并行子代理)",
   "gap_definition": "concept/**/*.md 中既无『实测反例』也无 compile_fail 围栏（排除 SUMMARY/README/INDEX/00_ 前缀/quiz/sources）",
   "strict_gap_total": 72,
@@ -210,6 +210,27 @@
       "evidence": "Miri数据竞态硬UB+E0133三重证据链(42页) | typestate未init read E0599 note指名Driver<Ready>(49页) | RwLock读守卫升级自锁try_write false×2(53页) | extern reset_handler LNK2019/LNK1120链接层硬拒(54页) | cargo test host红掉exit101模型板错位(50页) | probe-rs/defmt/embassy_executor缺crate E0433+本机无probe-rs CLI无thumbv7m目标(36/51/55页) | Instant分辨率100-200ns+500us sleep实测0.89-1.15ms(39页) | GlobalAlloc签名E0053完整expected/found+E0133 unsafe_op_in_unsafe_fn(48页) | E0499 Embassy双&mut外设+E0053 extern C trait方法+泛型extern C(56页) | 单执行器静态优先级H阻塞300ms: M 2/12 L 2/30 失10/28周期 + 无天花板Mutex高优被拖170ms(55页)",
       "group": "06_ecosystem/05_systems_and_embedded (embedded组收尾批4/4)",
       "note": "fresh8显示embedded组实际剩余7页(36/39/48/50/51/55/56); 42/49/53/54虽不在fresh8缺口名单但组内一并补至口径一致, 本批共11页落地"
+    },
+    {
+      "batch": "17",
+      "date": "2026-10-19",
+      "group": "06_ecosystem/03_design_patterns (批1/3) + 14_enterprise_architecture (cron在途3页收编)",
+      "pages": [
+        "07_cqrs_event_sourcing(stub指针)",
+        "28_retry",
+        "29_saga",
+        "31_object_pool",
+        "32_typestate_deep_dive",
+        "33_anti_patterns",
+        "34_ownership_as_resource_management",
+        "37_event_sourcing_engine_patterns",
+        "38_api_gateway_and_service_mesh_patterns",
+        "ea/01_frameworks",
+        "ea/02_governance_adrs",
+        "ea/05_sdds"
+      ],
+      "evidence": "CQRS重放fold i32 -O回绕 35亿->-794967296 EXIT0/debug panic101 | retry非幂等3次扣款balance -250 vs 幂等键req_id=7 -50 | saga补偿顺序: forward含未发生步骤/reverse正确, EXIT0可区分 | Rc池回收strong_count=3, C见[1,2,3,99]串数据 EXIT0 | typestate旧句柄E0599 no method read for Conn<Closed> | E0072 recursive Node infinite size + RefCell try_borrow_mut is_err=true运行期兜底 | RAII File move进函数drop即关闭, reopen ok=true | 事件日志seq2缺失投影50->150差一笔交易额 | 网关recv_timeout(100)101ms Elapsed而上游Ok(200)已执行",
+      "commit": "a978597f4 + batch17b"
     }
   ],
   "version_baseline": {
