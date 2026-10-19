@@ -746,6 +746,31 @@ graph TD
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）：事件重放的一致性前提是全序+完整——日志截断一条序号，同一套事件语义的投影直接差出一笔交易额
+
+```rust
+fn replay(events: &[(u64, &str)]) -> i64 {
+    events.iter().map(|(_, e)| e.parse::<i64>().unwrap()).sum()
+}
+fn main() {
+    let log: [(u64, &str); 3] = [(1, "+100"), (2, "-100"), (3, "+50")];
+    println!("1 full ordered replay: balance = {}", replay(&log));
+    let partial: [(u64, &str); 2] = [(1, "+100"), (3, "+50")]; // seq2 缺失(日志截断/投递丢失)
+    println!("2 replay with seq2 missing: balance = {} (投影差 {})", replay(&partial), replay(&log) - replay(&partial));
+}
+```
+
+实运行输出：
+
+```text
+1 full ordered replay: balance = 50
+2 replay with seq2 missing: balance = 150 (投影差 -100)
+```
+
+口径：事件溯源投影的「确定性」不是天然属性，而是三个前提的合取：日志不可变、序号全序、重放无跳号。本机实跑显示 seq2 一旦缺失（磁盘截断、快照与事件日志拼接错位、消息投递丢失），余额投影从 50 变 150——多出一笔从未被授权过的「余额」，且 EXIT 0、无任何报错：投影函数对「序号有洞」毫无感知。工程对策正是本页 §3-§4 讨论的快照+检查点协议：快照存 `(seq, balance)` 不变式，重放从检查点续起并校验 seq 连续；`if seq != expected { bail }` 必须写在投影循环里，因为 fold 本身不会替你发现洞。
+
+---
+
 ## 五、权威来源索引
 
 ### P0：Rust 官方与核心规范

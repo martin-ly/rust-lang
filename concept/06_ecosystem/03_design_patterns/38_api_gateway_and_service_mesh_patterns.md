@@ -633,6 +633,33 @@ graph TD
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）：网关超时必须与上游 p99 对齐——超时比上游短 100ms，调用方拿到 Err 时上游副作用已经完成，「失败」只是调用方视角
+
+```rust
+use std::sync::mpsc; use std::thread; use std::time::{Duration, Instant};
+fn main() {
+    let (tx, rx) = mpsc::channel::<u32>();
+    // 上游: 200ms 后返回 (且返回前已完成扣费副作用)
+    thread::spawn(move || { thread::sleep(Duration::from_millis(200)); tx.send(200).unwrap(); });
+    let t0 = Instant::now();
+    let r = rx.recv_timeout(Duration::from_millis(100)); // 网关侧超时 100ms < 上游 200ms
+    println!("1 gateway saw: timeout after {:?} (调用方视角: 请求失败)", t0.elapsed());
+    let late = rx.recv_timeout(Duration::from_millis(300));
+    println!("2 upstream actually completed: {:?} (上游视角: 已执行完成)", late);
+}
+```
+
+实运行输出：
+
+```text
+1 gateway saw: timeout after 101.1213ms (调用方视角: 请求失败)
+2 upstream actually completed: Ok(200) (上游视角: 已执行完成)
+```
+
+口径：`recv_timeout` 给出的 `Elapsed` 只声明「我没等到」，不声明「它没发生」——同一请求在两个视角下同时是「失败」和「成功」，这正是网关层超时预算与重试互锁产生重复扣款的机理（与 28_retry 实测反例同一失败族）。网关侧的正确姿势：超时值取自上游 p99 而非拍脑袋常数；对非幂等上游，超时后不能盲目重试，必须带幂等键让上游自己折叠；sidecar（service mesh）把超时下沉到基础设施时同样继承这个语义——`Elapsed` 永远是本地观测，不是分布式事实。
+
+---
+
 ## 五、权威来源索引
 
 ### P0：Rust 官方与核心规范

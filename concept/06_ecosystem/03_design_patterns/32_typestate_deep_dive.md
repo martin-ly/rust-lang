@@ -283,6 +283,30 @@ mindmap
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）：typestate 迁移消耗所有权——「用旧状态句柄」不是逻辑错而是 E0599，旧句柄在迁移那一刻已不复存在
+
+```rust,compile_fail
+struct Closed; struct Open;
+struct Conn<S>(S);
+impl Conn<Closed> { fn open(self) -> Conn<Open> { Conn(Open) } }
+impl Conn<Open> { fn read(&self) -> u32 { 42 } fn close(self) -> Conn<Closed> { Conn(Closed) } }
+fn main() {
+    let c = Conn(Closed);
+    let c2 = c.open();      // open(self) 消耗 c: c 此后不存在
+    println!("{}", c.read()); // 拿"迁移前"的旧句柄做事
+}
+```
+
+实编译报错：
+
+```text
+error[E0599]: no method named `read` found for struct `Conn<Closed>` in the current scope
+```
+
+口径：与运行时状态机（`enum State` + 每方法首行 assert）的本质区别在这里现形：运行时状态机允许「拿着旧对象继续调」，错在运行期才爆；typestate 的 `fn open(self)` 按值消耗句柄，迁移后旧句柄连变量都失效（借用检查器视其为 moved），于是「拿 Closed 句柄调 read」被拒之门外的方式是**方法根本不在该类型的动作集里**。E0599 的报错行指向 `Conn<Closed>`，编译器直接告诉你「这个状态没有这个动作」。代价侧（本页 §3 讨论）也随之可见：每次迁移必须写回 `let c = c.open()`，状态链是数据流的一部分，不能被旁路——想「跳状态」或「并行两个状态的句柄」都需要显式设计（复制状态机或通道），这正是 typestate 比 OOP 状态模式「多出来的纪律」，也正是它把一类整型 bug 从测试期搬到编译期的机制。
+
+---
+
 ## 八、权威来源索引
 
 - Strom, R. E. & Yemini, S. "Typestate: A Programming Language Concept for Enhancing Software Reliability." *IEEE TSE 1986*. [https://doi.org/10.1145/512644.512659](https://doi.org/10.1145/512644.512659)

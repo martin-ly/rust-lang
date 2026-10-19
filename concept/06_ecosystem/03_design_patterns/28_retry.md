@@ -259,6 +259,33 @@ mindmap
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）：retry 的隐藏前提是「操作幂等」——非幂等副作用重试 3 次就执行 3 次，类型系统对此零预警
+
+```rust
+use std::collections::HashSet;
+fn main() {
+    // naive retry: 每次重试都真实执行扣款副作用
+    let mut bank = 50i32;
+    for _ in 0..3 { bank -= 100; }
+    println!("1 naive retry on non-idempotent charge: balance = {} (扣款3次, 共300)", bank);
+    // 幂等版: 同一 req_id 的三次重试, 幂等键去重
+    let mut bank2 = 50i32; let mut applied = HashSet::new();
+    for _attempt in 0..3 { if applied.insert(7u32) { bank2 -= 100; } }
+    println!("2 idempotency-keyed (req_id=7 retried 3x): balance = {} (只扣1次, 共100)", bank2);
+}
+```
+
+实运行输出：
+
+```text
+1 naive retry on non-idempotent charge: balance = -250 (扣款3次, 共300)
+2 idempotency-keyed (req_id=7 retried 3x): balance = -50 (只扣1次, 共100)
+```
+
+口径：`Result` 只告诉你「这次失败了」，不告诉你「失败前副作用已经落地多少」。重试循环对网络超时常是安全的，对「扣款成功但响应丢失」场景就是重复扣款——`Err` 分支与「远端已执行」在 Rust 类型层不可区分（这正是本页 §2 讨论的 retry 分类学的失效面）。合规做法是把幂等键（req_id）作为操作的一部分传下去，让「至少一次」投递语义在接收侧折叠成「恰好一次」；`exponential_backoff`、`retry_when` 等策略参数全部不改变这一点。支付/下单类系统的重试预算必须先回答幂等性，再谈退避算法——顺序反了，退避只是把重复扣款排得更从容。
+
+---
+
 ## 八、权威来源索引
 
 - Microsoft. "Retry pattern." *Azure Architecture Center*. [https://learn.microsoft.com/en-us/azure/architecture/patterns/retry](https://learn.microsoft.com/en-us/azure/architecture/patterns/retry)

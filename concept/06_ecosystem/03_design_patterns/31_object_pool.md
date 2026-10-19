@@ -262,6 +262,34 @@ mindmap
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）：`Rc` 对象「归还」对象池不等于独占回收——引用计数 >1 时池回收的对象与旧持有者共享同一堆，跨使用者串数据
+
+```rust
+use std::rc::Rc; use std::cell::RefCell;
+fn main() {
+    let mut pool: Vec<Rc<RefCell<Vec<u8>>>> = Vec::new();
+    let obj = Rc::new(RefCell::new(vec![1u8, 2, 3]));
+    let held = obj.clone();               // 使用者A仍持有一份引用
+    pool.push(obj);                       // 使用者B"归还": 计数=2, 内存并未回收
+    let recycled = pool.pop().unwrap();   // 池以为拿到独占对象, 发还使用者C
+    let c_view = recycled.clone();
+    held.borrow_mut().push(99);           // A 写入
+    println!("1 C sees: {:?} (池'回收'对象与A共享同一堆)", c_view.borrow());
+    println!("2 Rc::strong_count = {} (>1: 归还≠独占归还)", Rc::strong_count(&held));
+}
+```
+
+实运行输出：
+
+```text
+1 C sees: [1, 2, 3, 99] (池'回收'对象与A共享同一堆)
+2 Rc::strong_count = 3 (>1: 归还≠独占归还)
+```
+
+口径：对象池的正确性前提是「归还即独占」，而 `Rc` 语义天然允许活引用共存——push 进池只减掉 B 自己那一份计数，A 的 clone 还活着，池 pop 出来的「新对象」和 A 指的是同一块内存，A 的后续写入直接出现在 C 的数据里（EXIT 0，无警告）。这是本页反对 `Rc<RefCell<T>>` 进池的定量证据：池化要求所有权型句柄（`Box`/`T` 直接进池、独占语义由类型保证），或在池边界做 `Rc::get_mut` 检查（`strong_count != 1` 即拒绝回收，把运行时陷阱前移成显式分支）。`bytes`/`pool` 类 crate 的 acquire/release 边界做的正是这件事。
+
+---
+
 ## 八、权威来源索引
 
 - Gamma, E. et al. *Design Patterns: Elements of Reusable Object-Oriented Software*. Addison-Wesley, 1994.

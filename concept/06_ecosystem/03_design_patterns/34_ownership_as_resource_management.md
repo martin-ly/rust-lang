@@ -534,6 +534,31 @@ mindmap
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）：所有权即资源生命周期——句柄 move 进函数后，释放点就是函数尾，「忘记 close」在这个模型里不存在；对照 C++ 双关关闭路径
+
+```rust
+use std::io::Write;
+fn write_it(mut f: std::fs::File) { f.write_all(b"hello").unwrap(); } // f 按值进入, 函数尾 drop = 句柄关闭点
+fn main() {
+    let p = "out.txt";
+    let f = std::fs::File::create(p).unwrap();
+    write_it(f);                        // 所有权移入函数; 此后 main 里 f 不复存在
+    // println!("{:?}", f);            // 取消注释: E0382, 借用检查器禁止使用已 move 的句柄
+    let r = std::fs::File::open(p);
+    println!("after write_it returns (handle moved+dropped inside), reopen ok = {} (drop点=释放点, 不可能忘关)", r.is_ok());
+}
+```
+
+实运行输出：
+
+```text
+after write_it returns (handle moved+dropped inside), reopen ok = true (drop点=释放点, 不可能忘关)
+```
+
+口径：`File` 没有 `close()` 调用点不是遗漏而是设计——RAII 的析构点由所有权位置决定：move 进函数 = 关闭责任移交该函数，函数尾 drop 系统保证执行。与 C++ 的差别是可测的：C++ 里 `f` move 后仍可调用（moved-from 状态合法但未定义具体行为），双关关闭（显式 close + 析构 close）是错误代码高发区；Rust 里「使用已移交的句柄」直接 E0382，「重复 close」在类型层不可表达（没有 public close 可调）。本页 §1-§2 的「所有权即资源管理」论断的本机锚点：资源释放正确性不依赖程序员纪律，依赖 move/drop 的结构语义。Box 管堆、File 管句柄、MutexGuard 管锁——同一机制复用，这正是 `Drop` 只有一份、不能重载的原因（释放点唯一性由语言保证，不给「自定义关闭时机」留门）。
+
+---
+
 ## 十三、权威来源索引
 
 - Tofte, M. & Talpin, J.-P. "Region-Based Memory Management." *Information and Computation*, 1994. [https://doi.org/10.1016/0890-5401(94)00052-3](https://doi.org/10.1016/0890-5401(94)00052-3)

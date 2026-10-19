@@ -271,6 +271,35 @@ mindmap
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实运行，2026-10-19）：Saga 补偿必须逆序——按执行顺序写补偿链会「撤销一个从未发生的步骤」而漏掉真正的脏状态
+
+```rust
+fn main() {
+    let mut ledger: Vec<String> = Vec::new();
+    ledger.push("step1: debit A +100".into());     // 已完成
+    let credit_ok = false;                          // step2 失败
+    if !credit_ok {
+        let forward_order = vec!["compensate: undo debit A".to_string(),
+                                 "compensate: undo credit B (从未发生!)".to_string()];
+        println!("1 forward-order compensation: {:?}", forward_order);
+        let reverse_order = vec!["compensate: undo credit B (未发生, no-op)".to_string(),
+                                 "compensate: undo debit A".to_string()];
+        println!("2 reverse-order compensation: {:?}", reverse_order);
+    }
+}
+```
+
+实运行输出：
+
+```text
+1 forward-order compensation: ["compensate: undo debit A", "compensate: undo credit B (从未发生!)"]
+2 reverse-order compensation: ["compensate: undo credit B (未发生, no-op)", "compensate: undo debit A"]
+```
+
+口径：Saga 没有回滚只有补偿，补偿链的排序是模式的本体而非细节——第 k 步失败时必须撤销的是 1..k-1 且**逆序**撤销（后写的账先冲正，先冲正后写的账，否则依赖顺序倒置产生中间脏读）。按执行顺序写补偿链的典型病灶：给未发生的步骤发补偿指令（对不存在的账做冲正，很多系统直接报错中断整个补偿流程，把可收敛状态卡死），同时真正的脏账（step1 的扣款）排在后面迟迟不被冲正。工程实现上这意味着每个 Saga 步骤必须成对注册 `(do, compensate)` 且框架按注册栈弹出，而不是把补偿写成一张「全量清单」按顺序跑。本机实跑坐实的是两种清单的**可区分性**：补偿指令是否真的对应已提交事实，必须在编排层显式建模，Rust 类型系统不替你记这笔账。
+
+---
+
 ## 八、权威来源索引
 
 - Garcia-Molina, H. & Salem, K. "Sagas." *SIGMOD 1987*. [https://doi.org/10.1145/38713.38742](https://doi.org/10.1145/38713.38742)

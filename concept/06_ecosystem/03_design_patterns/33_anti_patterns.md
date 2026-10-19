@@ -875,6 +875,43 @@ graph TD
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实运行，2026-10-19）：两条反模式的本机定量证据——直接递归结构 E0072 编译期硬拒；`RefCell` 越界借用是运行时兜底而非编译期保护
+
+**反例一（God-object 式「直接递归包含」，OOP 组合直觉在 Rust 的第一道墙）**：
+
+```rust,compile_fail
+struct Node { next: Node } // 无间接层的自包含: 尺寸方程 size = size(Node) 无解
+fn main() {}
+```
+
+```text
+error[E0072]: recursive type `Node` has infinite size
+  = note: recursive without indirection
+help: insert indirection (e.g., a box, reference, or `Rc`) to make `Node` sized
+```
+
+**反例二（到处 `RefCell` 把编译期借用检查降级成运行时检查）**：
+
+```rust
+use std::cell::RefCell;
+fn main() {
+    let c = RefCell::new(vec![1, 2, 3]);
+    let g = c.borrow();
+    println!("1 while borrow alive: try_borrow_mut().is_err() = {} (编译期毫无预警, 运行时BorrowMutError兜底)", c.try_borrow_mut().is_err());
+    drop(g);
+    println!("2 after drop: is_err() = {}", c.try_borrow_mut().is_err());
+}
+```
+
+```text
+1 while borrow alive: try_borrow_mut().is_err() = true (编译期毫无预警, 运行时BorrowMutError兜底)
+2 after drop: is_err() = false
+```
+
+口径：两个反例对应本页批评的两类退化。①「把 OO 的聚合直接搬过来」：`{ next: Node }` 在 C++ 里合法（成员是指针语义），在 Rust 里尺寸方程无解，E0072 且诊断直接给出修复方向（Box/&/Rc 间接层）——这不是风格建议是物理约束。②「用 `RefCell` 绕过借用检查」：`borrow()` 冲突在编译期**完全合法**（编译器看见的是两个合法的 `Ref`/`RefMut` 调用点），冲突延迟为 `BorrowMutError`——要么 panic 要么 `try_borrow_mut` 分支；等于把 Rust 的核心保证（数据竞争编译期清零）局部退化成「运行时记得检查」。判据：`RefCell` 只在单线程内确有共享可变别名需求时用（内部可变性），一旦为「让编译器闭嘴」而加，就是把一类编译期 bug 重新发明成运行时 bug。
+
+---
+
 ## 十二、权威来源与延伸阅读
 
 - **P0 官方**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)
