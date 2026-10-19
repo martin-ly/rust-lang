@@ -99,6 +99,8 @@ D2_WHITELIST_FILES = {
 # RUSTC_BOOTSTRAP / rustc -Z flags / Miri nightly toolchain）截至 Rust 1.97.0 stable 仍属
 # nightly-only，声明准确，保留白名单。
 D5_WHITELIST_FILES = {
+    "concept/03_advanced/03_proc_macros/07_macro_faq.md":
+        "实测反例逐字引用的 rustc 诊断文本（`= note: this error originates in the macro `value` (in Nightly builds, run with -Z macro-backtrace for more info)`），编译器诊断逐字保真是取证纪律，与 52_no_std 页 -Zbuild-std 诊断先例同质（2026-10-20 W9 轮复核登记）",
     "concept/00_meta/01_terminology/01_terminology_glossary.md":
         "术语表：『特性门控(Feature Gate)』词条本身描述 nightly 机制；另含 1.97 新特性 nightly 状态跟踪小节",
     "concept/02_intermediate/00_traits/01_traits.md":

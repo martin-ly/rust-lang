@@ -44,6 +44,7 @@
 - 本机实测（P0 级，可复现）：cargo 1.99.1 + jiff 0.2.38/chrono 0.4.45/chrono-tz 0.10.4 对照程序（§一表四行全部来自同一二进制 stdout）。
 - [jiff docs.rs 0.2.38](https://docs.rs/jiff/0.2.38/jiff/tz/struct.TimeZone.html)（P0：0.2.38 版本页、依赖树含 jiff-tzdb 0.1.9、dev-deps 含 chrono/chrono-tz/time——作者自设跨库对照测试面）。
 - [BurntSushi/jiff](https://github.com/BurntSushi/jiff)（P0：「pit of success」设计宣言与消歧策略文档）。
+- [std::time::SystemTime](https://doc.rust-lang.org/std/time/struct.SystemTime.html)（P0：std 挂钟语义基线——`duration_since(UNIX_EPOCH)` 返回 `Result`、早于 epoch 报 `Err`，两库对照的 std 锚点，2026-10-19 核验）。
 - [chrono-tz docs](https://docs.rs/chrono-tz)（P1：LocalResult 三态语义）。
 - crates.io API 版本/下载实查（P0，2026-10-19）：jiff 0.2.38（2026-10-06）· jiff-tzdb 0.1.9 · chrono 0.4.45 · chrono-tz 0.10.4。
 - 交叉页：`29_time_and_date_ecosystem.md`（chrono 主生态、jiff 版本实查锚、chrono-tz 三态实测）。

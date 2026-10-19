@@ -112,6 +112,7 @@ naive=2026-10-19 weekday=Mon
 
 - P0: https://crates.io/api/v1/crates/chrono · https://crates.io/api/v1/crates/chrono-tz · https://crates.io/api/v1/crates/time （2026-10-19 API 实查，版本/下载量口径）
 - P0: https://github.com/chronotope/chrono · https://github.com/chronotope/chrono-tz · https://github.com/time-rs/time
+- P0: https://doc.rust-lang.org/std/time/index.html （std 时间原语边界——`Instant`/`SystemTime` 为 std 全部时间能力，chrono 真空填补论断的官方依据，2026-10-19 核验）
 - P0: 本机 rustc 1.99.1 + cargo 1.99.1 实测记录（Cargo.lock + cargo run + rustc --extern，2026-10-19）
 - P1: https://docs.rs/chrono/latest/chrono/ · IANA tz database https://www.iana.org/time-zones （中国 DST 1986–1991 记录）
 - P2: chrono GitHub issue #426（依赖负担议题，历史讨论）

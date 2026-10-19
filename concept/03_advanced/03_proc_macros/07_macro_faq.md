@@ -868,3 +868,122 @@ fn main() {
     assert_eq!(c, 1);
 }
 ```
+
+### ⚠️ 实测反例：宏报错的四种失败形态（rustc 1.99.1 实编译，2026-10-19）
+
+宏错误难懂的根源是**报错定位横跨两个语法层**：调用点、展开体、卫生作用域各自独立报错。四类高频形态逐字实测如下（诊断输出为 rustc 逐字引用）：
+
+**形态 1：卫生作用域——宏内定义的变量在调用处不可见（E0425，rustc 自带 hygiene 提示）**
+
+```rust,compile_fail
+macro_rules! init {
+    () => { let count = 1; };
+}
+
+fn main() {
+    init!();
+    println!("{}", count);
+}
+```
+
+```text
+error[E0425]: cannot find value `count` in this scope
+ --> hx1.rs:8:20
+  |
+8 |     println!("{}", count);
+  |                    ^^^^^ not found in this scope
+  |
+help: an identifier with the same name is defined here, but is not accessible due to macro hygiene
+ --> hx1.rs:3:17
+  |
+3 |     () => { let count = 1; };
+  |                 ^^^^^
+```
+
+同名标识符「存在但不可见」——这就是 Q5 卫生性的硬后果：宏定义的任何名字都被密封在宏语法环境里。想让宏向调用处注入变量，唯一正路是把名字作为参数传入（`init!(count)` 形态）或返回表达式，而不是指望展开体里的 `let` 泄漏出去。1.99 的诊断已能直接说出「macro hygiene」，旧版 rustc 只报「not found」，这是宏 FAQ 中最容易被误判为编译器 bug 的一类。
+
+**形态 2：matcher 不匹配——传错语法类别（无 E 编号，`no rules expected`）**
+
+```rust,compile_fail
+macro_rules! name_of {
+    ($x:ident) => { stringify!($x) };
+}
+
+fn main() {
+    println!("{}", name_of!("not-an-ident"));
+}
+```
+
+```text
+error: no rules expected `"not-an-ident"`
+ --> hx2.rs:7:29
+  |
+2 | macro_rules! name_of {
+  | -------------------- when calling this macro
+...
+7 |     println!("{}", name_of!("not-an-ident"));
+  |                             ^^^^^^^^^^^^^^ no rules expected this token in macro call
+  |
+note: while trying to match meta-variable `$x:ident`
+ --> hx2.rs:3:6
+```
+
+注意此错误**没有 E 编号**——「macro 类诊断部分无错误码」在 Q16 里已提示，此处是实例：错因在调用点传了 `literal` 而 matcher 要 `ident`，报错却指向宏定义处「while trying to match」。修法：给 matcher 加正确 fragment 指定符（`:expr`/`:literal`）或改传标识符。
+
+**形态 3：展开体类型错——报错定位回展开体行（E0308 + in this macro invocation）**
+
+```rust,compile_fail
+macro_rules! value {
+    () => { "oops" };
+}
+
+fn main() {
+    let n: i32 = value!();
+    println!("{}", n);
+}
+```
+
+```text
+error[E0308]: mismatched types
+ --> hx3.rs:3:13
+  |
+3 |     () => { "oops" };
+  |             ^^^^^^ expected `i32`, found `&str`
+...
+7 |     let n: i32 = value!();
+  |            ---   -------- in this macro invocation
+  |
+  = note: this error originates in the macro `value` (in Nightly builds, run with -Z macro-backtrace for more info)
+```
+
+类型错的**主定位在宏定义体**（第 3 行）而不是调用处——与形态 1/2 的定位方向相反。Q12「错误消息优化」的可操作结论：宏输出类型敏感时，优先在展开体里加类型锚（如 `let v: i32 = $e;`）把错误「拉回」调用点上下文。
+
+**形态 4：多参数贪婪匹配——`$b:expr` 吃掉尾逗号后无规则可续（无 E 编号）**
+
+```rust,compile_fail
+macro_rules! pair {
+    ($a:expr, $b:expr) => { ($a, $b) };
+}
+
+fn main() {
+    let _ = pair!(1, 2, 3);
+}
+```
+
+```text
+error: no rules expected `,`
+ --> hx4.rs:7:23
+  |
+2 | macro_rules! pair {
+  | ----------------- when calling this macro
+...
+7 |     let _ = pair!(1, 2, 3);
+  |                       ^ no rules expected this token in macro call
+  |
+note: while trying to match meta-variable `$b:expr`
+ --> hx4.rs:3:15
+```
+
+`expr` matcher 匹配到 `2` 后停在 `,` 处——不是「参数太多」这么简单：`expr` 之后必须跟分隔符或收尾，第三个参数暴露的是「该宏没有第三分支」。修法见 Q6：加 `$($rest:expr),*` 尾巴分支或 `( $($args:expr),* )` 重复 matcher。
+
+**判读口径**：四类形态分别定位在**调用处名字域**（hygiene）、**宏定义 matcher**（no rules）、**宏定义展开体**（类型错）、**matcher 停止点**（贪婪匹配）——排查宏错误时先按报错指向的行猜形态，比读完整宏体快一个数量级。
