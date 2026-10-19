@@ -602,6 +602,25 @@ ARM Cortex-M 的 **FPB（Flash Patch and Breakpoint）** 提供有限数量的�
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）：`no_std` 里没有 `println!`——日志通道必须自己造，「先 println 调试」的桌面直觉在嵌入式第一行就失效
+
+```rust,compile_fail
+#![no_std]
+use core::panic::PanicInfo;
+#[panic_handler]
+fn ph(_: &PanicInfo) -> ! { loop {} }
+#[no_mangle]
+pub extern "C" fn app_main() -> ! { println!("hello uart?"); loop {} }
+```
+
+```text
+error: cannot find macro `println` in this scope
+```
+
+口径：桌面 Rust 的日志直觉（`println!`/`eprintln!` 零成本随手可用）依赖 std 的 IO 运行时；`no_std` 下连宏本身都不存在。嵌入式日志是一整套设施链：半主机/ITM/RTT/SWO 通道 + defmt 类紧凑编码 + panic handler 里的输出约定（见本页 defmt/probe-rs 正文）。反例的意义在标定起点：裸机第一行可观测性代码的成本不是「换个 logger」而是「先建立一条字节能出得去的物理通道」。
+
+---
+
 ## 七、反命题与边界分析
 
 ### 7.1 边界 1：defmt 不能用于通用 UART-only 场景

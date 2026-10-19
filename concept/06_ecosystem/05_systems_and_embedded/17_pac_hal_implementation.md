@@ -327,6 +327,36 @@ fn start_dma_tx(dp: &stm32f407::Peripherals, data: &[u8]) {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）：PAC trait 里带泛型方法立刻不可 `dyn`——E0038 把「寄存器抽象想做运行时多态」的路线当场判死
+
+```rust,compile_fail
+pub trait Peripheral { fn read_as<T>(&self) -> T; }
+pub struct Pac { pub bits: u32 }
+impl Peripheral for Pac { fn read_as<T>(&self) -> T { unimplemented!() } }
+fn drive(p: &dyn Peripheral) { let _: u32 = p.read_as(); } // 泛型方法无法进 vtable
+fn main() { let p = Pac { bits: 0 }; drive(&p); }
+```
+
+```text
+error[E0038]: the trait `Peripheral` is not dyn compatible
+note: for a trait to be dyn compatible it needs to allow building a vtable
+ ...because method `read_as` has generic type parameters
+```
+
+同一抽象的正例对照——编译期单态化（`P: Peripheral` 泛型容器）实编译通过：
+
+```rust
+pub trait Peripheral { fn read_as<T>(&self) -> T; }
+pub struct Pac { pub bits: u32 }
+impl Peripheral for Pac { fn read_as<T>(&self) -> T { unimplemented!() } }
+fn drive_static<P: Peripheral + Copy>(p: P) -> P { p } // 静态分发可行
+fn main() { let _ = drive_static(Pac { bits: 0 }); }
+```
+
+口径：PAC/svd2rust 生成的寄存器 API 惯用「按类型读寄存器」（`read::<R>` 风格），这类泛型方法与 `Box<dyn Peripheral>` 式运行时多态结构性不相容——不是「性能略差」而是**不可构造 vtable**。嵌入式 HAL 层要做设备池/动态外设列表，必须把单态化推到编译期（泛型容器 `P: Peripheral`）或改用 enum dispatch，`&dyn` 注入模式在 PAC 抽象上直接不可用。
+
+---
+
 ## 八、反例与失效模式
 
 | 失效模式 | 根因 | 修复方向 |

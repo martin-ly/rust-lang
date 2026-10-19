@@ -888,6 +888,31 @@ fn read_eeprom(i2c: &mut I2c1) {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）：两个驱动共享同一条总线——E0499 把「每设备一个 `&mut Bus`」的朴素设计判死，总线共享必须显式仲裁
+
+```rust,compile_fail
+pub struct Bus { pub log: u32 }
+impl Bus { pub fn write(&mut self, b: u8) { self.log |= b as u32; } }
+pub struct Dev<'a> { bus: &'a mut Bus }
+impl<'a> Dev<'a> { pub fn new(bus: &'a mut Bus) -> Self { Self { bus } } pub fn send(&mut self) { self.bus.write(1); } }
+fn main() {
+    let mut bus = Bus { log: 0 };
+    let mut d1 = Dev::new(&mut bus);
+    let mut d2 = Dev::new(&mut bus); // 第二个驱动借同一条总线
+    d1.send(); d2.send();
+}
+```
+
+```text
+error[E0499]: cannot borrow `bus` as mutable more than once at a time
+note: first mutable borrow occurs here (d1) / second mutable borrow occurs here (d2)
+note: first borrow later used here
+```
+
+口径：I2C/SPI 总线上挂多设备是嵌入式常态，「每个设备驱动持有 `&mut Bus`」的直觉在第一块第二块驱动处就撞 E0499。这不是障碍而是**设计提示**：总线并发必须显式建模——Mutex 包装总线、`RefCell` 单线程仲裁、或总线宏（bus device macro）静态分时。Rust 把「两个驱动同时写同一条总线会撕裂传输」这个协议层隐患前置成借用检查错误；C 里同样的共享写要等总线上出现第一帧撕裂波形才暴露。
+
+---
+
 ## 十五、权威来源索引
 
 | 来源 | 链接 | 用途 |

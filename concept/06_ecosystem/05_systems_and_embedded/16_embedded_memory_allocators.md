@@ -363,6 +363,35 @@ build-std-features = ["compiler-builtins-mem"]
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实运行，2026-10-19）：分配器契约的失败语义——`alloc` 返回 null 由运行时 handle_alloc_error 硬终止（0xC0000409），catch_unwind 都救不回来
+
+```rust,should_panic
+use std::alloc::{GlobalAlloc, Layout};
+struct FailingAlloc; // 模拟裸机上耗尽的 bump allocator
+unsafe impl GlobalAlloc for FailingAlloc {
+    unsafe fn alloc(&self, _l: Layout) -> *mut u8 { std::ptr::null_mut() }
+    unsafe fn dealloc(&self, _p: *mut u8, _l: Layout) {}
+}
+#[global_allocator]
+static A: FailingAlloc = FailingAlloc;
+fn main() {
+    let r = std::panic::catch_unwind(|| { let v = vec![0u8; 1024]; v.len() });
+    println!("vec under always-null allocator: {:?}", r.is_ok());
+}
+```
+
+本机实编译通过、实运行（EXIT=3221226505 = 0xC0000409 STATUS_STACK_BUFFER_OVERRUN 家族硬终止）：
+
+```text
+memory allocation of 1024 bytes failed
+memory allocation of 30 bytes failed
+skipping backtrace printing to avoid potential recursion
+```
+
+且 `catch_unwind` 输出行**没有出现**——`handle_alloc_error` 不走普通 panic 路径，可捕获假设失效。口径：嵌入式分配器页所有「OOM 处理策略」讨论的正确基线是：Rust 集合类型对 null 返回的默认反应是**进程级 abort**（不返回 Err、不经过用户 panic hook 的 backtrace——backtrace 本身被跳过以免递归）；想要「分配失败可恢复」必须用 `try_reserve`/裸 `alloc` 手检 null（见 `37_fallible_allocation` 页），把契约检查从运行时挪回调用点。
+
+---
+
 ## 八、反例与失效模式
 
 | 失效模式 | 根因 | 修复方向 |

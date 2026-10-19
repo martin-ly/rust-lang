@@ -238,6 +238,32 @@ impl SpiDevice<u8> for MySpi {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）：embedded-hal 1.0 的 `&mut self` 签名把「只读共享持有」直接变 E0596——迁移不是换 crate 版本号而是改持有方式
+
+本机对照：0.6 风格 trait 收 `&self`、1.0 风格收 `&mut self`，同一驱动结构体改接新 trait 后，旧的共享引用调用现场编译失败：
+
+```rust,compile_fail
+pub trait OutputPinNew { fn set_high(&mut self) -> Result<(), ()>; }
+pub struct LatchOld;
+impl OutputPinNew for LatchOld { fn set_high(&mut self) -> Result<(),()> { Ok(()) } }
+fn drive(p: &dyn OutputPinNew) { let _ = p; }
+fn main() {
+    let l = LatchOld;
+    let p: &dyn OutputPinNew = &l; // 0.6 时代惯用法：& 引用持有 pin
+    let _ = p.set_high();          // 1.0 签名要求 &mut self
+}
+```
+
+```text
+error[E0596]: cannot borrow `*p` as mutable, as it is behind a `&` reference
+help: consider changing this binding's type
+    | let p: &mut dyn OutputPinNew = &l;
+```
+
+口径：迁移成本不在 impl 侧（impl 加 `mut` 一行）而在**所有持有 `&pin` 的上游代码**——共享只读句柄语义被 1.0 的「驱动独占可变」设计取消，泛型消费者、`&dyn` 注入点全部要重审。编译器把迁移债务完整显式化，这比 C 头文件替换后静默行为漂移安全得多。
+
+---
+
 ## 五、来源与参考
 
 | 来源 | 说明 |

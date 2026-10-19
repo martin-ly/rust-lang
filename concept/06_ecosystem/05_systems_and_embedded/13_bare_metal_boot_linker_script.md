@@ -373,6 +373,26 @@ static mut CCM_BUFFER: [u8; 4096] = [0; 4096];
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）：裸机入口三连环——`panic_handler` 缺失、`no_main` 与 rustc 驱动 main 要求冲突（E0601）
+
+第一步（`#![no_std]` + `#![no_main]`，无 panic handler）：
+
+```text
+error: `#[panic_handler]` function required, but not found
+error: unwinding panics are not supported without std
+  = help: using nightly cargo, use -Zbuild-std with panic="abort" to avoid unwinding
+```
+
+第二步（补上 panic_handler 后 `--crate-type bin` 继续编译）：
+
+```text
+error[E0601]: `main` function not found in crate `b15b4_nostartup`
+```
+
+口径：自定义 `#[no_mangle] pub extern "C" fn app_main()` 对 rustc 的 **bin 驱动**不可见——E0601 是语言驱动层的检查，发生在链接器脚本之前。真正的裸机流程要么 `-C no-prelude-import`/`-Zno-landing-pads` 类 nightly 路径，要么 `--crate-type staticlib` + 自己的链接器脚本把 `app_main` 接成 RESET 向量（本页 linker script 正文路线）。两连错误说明：启动运行时问题分「rustc 驱动层」与「链接层」两级诊断，先把驱动层糊过去（E0601）才轮到 .ld 层说话。
+
+---
+
 ## 八、边界测试
 
 ### 8.1 边界测试：向量表未对齐（链接错误 / 启动崩溃）

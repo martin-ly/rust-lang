@@ -269,7 +269,51 @@
         "06_ecosystem/02_core_crates/08_sqlx.md"
       ],
       "evidence": "cargo semver解析99999硬拒+区间解析1.0.151+虚拟workspace cargo run硬拒 | serde1.0.229五连运行时错(缺字段/未知字段静默/deny_unknown_fields/trailing comma/类型错配) | tokio1.53.3 current_thread阻塞饿死sibling 0 polls vs spawn_blocking 22396 polls + orphan JoinHandle任务照跑 | tracing无subscriber静默丢日志+debug级别门+instrument参数默认入结构化日志(PII面) | axum0.8.9 双Json提取器E0277 Handler束约硬拒 vs 双Path提取器通过 | sqlx0.9.0 query!无DATABASE_URL编译硬拒 vs 字符串API运行时no such column+FromRow类型错配解码错",
-      "strict_gate": "compile_fail 1307/1307 unexpected_pass=0 wrong_code=0 should_panic 6/6 EXIT0 (full log strict_batch15.txt)"
+      "strict_gate": "compile_fail 1307/1307 unexpected_pass=0 wrong_code=0 should_panic 6/6 EXIT0 (full log strict_batch15.txt)",
+      "commit": "59cc7ec67"
+    },
+    {
+      "batch": "Batch15b",
+      "date": "2026-10-19",
+      "group": "06_ecosystem/05_systems_and_embedded (批1/4)",
+      "pages": [
+        "09_embedded_hal_1_0_migration.md",
+        "11_async_no_std_embedded.md",
+        "13_bare_metal_boot_linker_script.md",
+        "16_embedded_memory_allocators.md",
+        "17_pac_hal_implementation.md",
+        "20_embedded_debugging_logging.md",
+        "22_embedded_protocol_drivers.md"
+      ],
+      "evidence": "hal1.0 &mut签名E0596 | no_std裸机await E0728 | panic_handler缺失双错+E0601 no_main驱动层 | null-alloc handle_alloc_error 0xC0000409 catch_unwind不可救(should_panic标注) | PAC泛型方法E0038 dyn不相容+静态分发正例 | no_std无println | 双驱动借同一总线E0499",
+      "strict_gate": "compile_fail 1312/1312 unexpected_pass=0 wrong_code=0 should_panic 7/7 candidate pass=300/300 EXIT0 (full log strict_batch15b.txt)"
     }
+  ],
+  "criteria_note": "S2-R3 反例口径豁免（2026-10-19 用户确认固化）：concept/00_meta/*（内部工具/导航/审计页）、sources/*、quiz、placeholders、07_future/00_version_tracking（归版本对齐轨道）不计反例缺口。权威重扫 fresh7=100 页（loop口径），fresh6=96 差异为旧扫描分母600漏计5个零散组页——以 fresh7 为准。",
+  "fresh7": {
+    "date": "2026-10-19-post-batch15a",
+    "loop_gaps": 100,
+    "by_group": {
+      "06_ecosystem/05_systems_and_embedded": 26,
+      "06_ecosystem/03_design_patterns": 22,
+      "06_ecosystem/14_enterprise_architecture": 14,
+      "06_ecosystem/11_domain_applications": 10,
+      "06_ecosystem/16_algorithm_patterns": 8,
+      "06_ecosystem/06_data_and_distributed": 4,
+      "06_ecosystem/04_web_and_networking": 3,
+      "06_ecosystem/07_security_and_cryptography": 3,
+      "06_ecosystem/12_networking": 3,
+      "06_ecosystem/10_performance": 2,
+      "05_comparative/00_paradigms": 2,
+      "03_advanced/03_proc_macros": 1,
+      "04_formal/00_type_theory": 1,
+      "06_ecosystem/09_testing_and_quality": 1
+    }
+  },
+  "user_decisions_2026_10_19": [
+    "按A(反例主线)->B(权威微补/断链/勘误)->C(版本对齐等cron)->D(F轨道)顺序推进",
+    "每批7页批门全绿即push",
+    "F轨道三主题缺口从git历史取正文新建canonical",
+    "00_meta按口径豁免固化"
   ]
 }

@@ -215,6 +215,25 @@ flowchart TD
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译，2026-10-19）：`no_std` 裸机入口里 `await` 直接 E0728——裸机上没有 executor，async 语法本身不带来运行时
+
+```rust,compile_fail
+#![no_std]
+pub async fn tick() -> u32 { 1 }
+#[panic_handler]
+fn ph(_: &core::panic::PanicInfo) -> ! { loop {} }
+#[no_mangle]
+pub extern "C" fn app_main() -> ! { let v = tick().await; let _ = v; loop {} } // 裸机上没有 executor 帮它 poll
+```
+
+```text
+error[E0728]: `await` is only allowed inside `async` functions and blocks
+```
+
+口径：`no_std` 生态（embassy 等）解决的正是「谁来 poll」——`async fn` 在裸机上只是构造一个惰性 Future 值，没有 executor 驱动它就是死代码。E0728 拦的是「在非 async 上下文里 await」这一步；即便写进 `async fn`，不调 executor 也一样什么都不会发生（见本页与 `28_custom_bare_metal_async_executor` 的自建 executor 路线）。选 embassy/RTIC 的本质是把 executor 生命周期接进启动运行时，而不是让 await 魔法生效。
+
+---
+
 ## 七、反例与失效模式
 
 | 失效模式 | 根因 | 修复方向 |
