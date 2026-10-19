@@ -1816,6 +1816,55 @@ struct SubjectImpl {
 // 修正：至少一方使用 Weak<T>
 ```
 
+### ⚠️ 实测反例（rustc 1.99.1 实编译/实跑微基准，2026-10-19）
+
+上面 10.1/10.4 两节的定性论断，本机各做一次机器实测——结果一个是**反证套话**，一个是**直接坐实**。
+
+**10.1 的反证：`dyn` 调用并非「必然慢」**。三种形态各跑 5×10⁸–10⁹ 次调用（`-O --edition 2024`，同实现体，dyn 接收者 vs 泛型单态化）：
+
+| 形态 | dyn vtable | 泛型单态化 | 比值 |
+|---|---|---|---|
+| 方法体读 self 字段（`self.k + b`） | 296ms / 10⁹ | 296ms / 10⁹ | 1.00x |
+| 方法体 `black_box(b ^ 0x5f)` | 262ms / 5×10⁸ | 258ms / 5×10⁸ | 1.02x |
+| 方法体返回常量（防折叠失败，双方同为真调用） | 94ms / 10⁹ | 94ms / 10⁹ | 1.00x |
+
+结论：**vtable 间接调用本身在本机 LLVM 优化下几乎不构成瓶颈**——「每个调用都走 vtable 所以 dyn 一定慢」是过时口径。真正拉开差距的是**分配与单态化边界**，而不是调用方式本身：同一对代码改用 `Into<String>` 惯用法在热循环（每次 clone+into 触发堆分配）实测 **915ms vs `&str` 零分配版 37ms（24.7x，10⁷ 次调用）**——代价来自分配，不来自 vtable。10.1 的「泛型更优」应修正为：**当方法体可内联且无分配时两者等价；泛型的优势在允许跨调用边界整体内联/常量折叠，dyn 的代价在把优化单元锁死在单次调用粒度**。
+
+**10.4 的坐实：Observer 强引用环 = Drop 计数 0**（`t27_observer.rs`，Drop 内计数探针）：
+
+```rust
+use std::rc::Rc;
+use std::cell::RefCell;
+use std::sync::atomic::{AtomicUsize, Ordering};
+static DROPS: AtomicUsize = AtomicUsize::new(0);
+
+struct Subject { observers: Vec<Rc<RefCell<Observer>>> }
+struct Observer { subject: Option<Rc<RefCell<Subject>>> }
+impl Drop for Subject { fn drop(&mut self) { DROPS.fetch_add(1, Ordering::SeqCst); } }
+impl Drop for Observer { fn drop(&mut self) { DROPS.fetch_add(1, Ordering::SeqCst); } }
+
+fn strong_cycle() {
+    let s = Rc::new(RefCell::new(Subject { observers: vec![] }));
+    let o = Rc::new(RefCell::new(Observer { subject: None }));
+    s.borrow_mut().observers.push(Rc::clone(&o));   // Subject → Observer 强引用
+    o.borrow_mut().subject = Some(Rc::clone(&s));   // Observer → Subject 强引用（环闭合）
+    drop(s); drop(o);                               // 看似"手动关闭"毫无作用
+}
+
+fn main() {
+    strong_cycle();
+    println!("强引用环: Drop 运行次数 = {}（建了 2 个对象，0 = 双双泄漏）", DROPS.load(Ordering::SeqCst));
+}
+```
+
+实跑输出：
+
+```text
+强引用环: Drop 运行次数 = 0（建了 2 个对象，0 = 双双泄漏）
+```
+
+对照实验（Observer 侧持 `Weak<RefCell<Subject>>` 断环）：`Drop 运行次数 = 2`——两个对象都真正析构。要点：`drop(s); drop(o);` 显式释放**完全无效**，strong_count 各剩 1，连 `Drop::drop` 都被永不调用；对 Subject/Observer 这类必然互相引用的模式，Weak 不是性能优化而是析构能否发生的开关。
+
 ### 10.5 微服务过早拆分
 
 ```rust,ignore

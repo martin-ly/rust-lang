@@ -191,6 +191,68 @@ fn main() {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+上表三行误用，本机各给一条机器证据（前两条直接命中「忽视版本约束」与「来源混用」两行）。
+
+### 实测 1：「直接套用 TWiR 新特性」——let chains 在 Edition 2021 的逐字诊断
+
+TWiR 反复宣传的 let chains（Rust 1.88 稳定化，但**仅限 Edition 2024**——依赖 2024 Edition 的 `if let` 临时量作用域变更；1.90 起旧 edition 上的 `feature(let_chains)` 也彻底报错，rust-lang/rust#145878 确认为有意行为）。同一份代码 `rustc --edition 2021` 实编译：
+
+```rust,compile_fail,edition2021
+// 围栏 edition2021：本块以 --edition 2021 编译并实测失败（rustc 1.99.1 本机实跑）；
+// --edition 2024 下同样代码编译通过。
+fn main() {
+    let opt = Some(42);
+    if let Some(x) = opt && x > 40 { println!("{x}"); }
+}
+```
+
+```text
+error: let chains are only allowed in Rust 2024 or later
+ --> t25_letchain2021.rs:3:8
+  |
+3 |     if let Some(x) = opt && x > 40 { println!("{x}"); }
+  |        ^^^^^^^^^^^^^^^^^
+```
+
+注意这条诊断**没有 E 编号**（rustc 把 edition 门禁作为 plain error 报告）——照抄「E 编号清单」做迁移检查表会漏掉整类 edition-only 特性。企业 MSRV 混合 workspace 里，这正是「rustc 版本相同但 edition 不同 → 编译失败」的形态：版本对齐检查必须同时覆盖 rustc 版本**和** edition 两个维度。
+
+### 实测 2：「来源混用」的机器实锤——API Guidelines 惯用法在热路径输给 Performance Book 惯用法 24.7 倍
+
+第三节决策树把「跨 crate 互操作 → API Guidelines 的 `impl Into<T>`」与「性能优化 → Performance Book」列为两条分支；本机把两条惯用法放在同一热循环对撞（10⁷ 次调用，`-O --edition 2024`）：
+
+```rust
+use std::hint::black_box;
+use std::time::Instant;
+#[inline]
+fn takes_into<S: Into<String>>(name: S) -> String { black_box(name.into()) } // API Guidelines 式
+#[inline]
+fn takes_str(name: &str) -> &str { black_box(name) }                         // Performance Book 式
+fn main() {
+    let s = String::from("svc-name");
+    let t0 = Instant::now();
+    let mut acc = 0u64;
+    for _ in 0..10_000_000 { acc += takes_into(s.clone()).len() as u64; }
+    println!("Into<String> 热循环(每次 clone+into 分配): {:?} acc={}", t0.elapsed(), acc);
+    let t1 = Instant::now();
+    let mut acc2 = 0u64;
+    for _ in 0..10_000_000 { acc2 += takes_str(&s).len() as u64; }
+    println!("&str 版本(零分配): {:?} acc={}", t1.elapsed(), acc2);
+}
+```
+
+实跑输出：
+
+```text
+Into<String> 热循环(每次 clone+into 分配): 915.5024ms acc=80000000
+&str 版本(零分配): 37.0828ms acc=80000000
+```
+
+两个「官方推荐」在各自语义域都对，在对方的语义域就是反模式：`impl Into<String>` 的互操作收益（接受 `&str`/`String`/`Cow` 免显式转换）在热路径上变成每次调用一次堆分配，**24.7 倍**差距全部来自分配而非泛型本身。这就是表中「按来源 → 语义域 → 目标页三层决策」的量化理由：拿 API Guidelines 页的惯用法直接填性能热点（或反过来拿 `&str` 刚性签名去做对外 DSL API），都是图谱误用的真实成本。
+
+---
+
 ## 九、权威来源与延伸阅读
 
 - **Rust API Guidelines**: <https://rust-lang.github.io/api-guidelines/>

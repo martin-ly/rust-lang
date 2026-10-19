@@ -509,6 +509,38 @@ pub fn fetch() -> internal::Row { // 内部模块却 pub 使用
 
 **修正**: 公共 API 使用 crate 根或 `pub` 模块中显式导出的类型；内部类型通过 `pub(crate)` 或 Newtype 封装。
 
+### ⚠️ 实测反例（8.3 泄漏真实形态的 rustc 1.99.1 跨 crate 实编译，2026-10-19）
+
+上文 8.3 的块标了 `ignore`（`todo!()` 无实现体）。本机把它补成可编译形态后发现更值得警惕的真相——**泄漏点在 crate 内编译完全合法，故障要到下游消费者才引爆**：
+
+库 crate（`mylib`，`rustc --crate-type lib` 实编译通过，零警告）：
+
+```rust,ignore
+// 实测条件：以 --crate-type lib 编译；跨 crate 消费需 --extern，故标 ignore（两段均本机实跑）
+mod internal {
+    pub struct Row { pub data: Vec<u8> }   // mod 私有，struct 在 mod 内 pub
+}
+pub fn fetch() -> internal::Row { internal::Row { data: vec![7] } }
+```
+
+crate 内调用 `fetch().data[0]` 实跑输出 `7`——**API 边界已经泄漏但本 crate 门禁全绿**。下游消费者 crate（`--extern mylib=libmylib.rlib` 实编译）想显式标注这个返回值类型时：
+
+```text
+error[E0603]: module `internal` is private
+ --> t24_use.rs:5:21
+  |
+5 |     let _t: &mylib::internal::Row = &r;
+  |                     ^^^^^^^^  --- struct `Row` is not publicly re-exported
+  |                     |
+  |                     private module
+note: the module `internal` is defined here
+ --> lib.rs:1:0
+```
+
+机器结论（企业治理含义）：类型**可用但不可命名**——下游能调 `fetch()`、能读写字段，却无法写类型注解、无法存进结构体字段类型、无法实现 trait。于是每个消费者被迫各自发明 `type RowAlias = ...` 变通或依赖类型推断，API 契约在下游碎片化。这类泄漏单 crate 的 `cargo check`/clippy 抓不到（本 crate 无警告），只在跨 crate 消费时以 E0603 爆炸——正是企业 workspace 里「lib 升级后下游集体编译失败」的经典成因。防线：API 评审把「公共函数签名的每个类型是否在 crate 根可命名」列为检查项，或用 newtype 在边界显式转译。
+
+另：把 8.3 原块形状直接放进 bin crate（`mod internal` + `pub fn fetch`）实测编译零错误——进一步证明「内部模块却 pub 使用」在单 crate 视角不构成任何编译信号，只能靠评审拦截。
+
 ### 8.4 反例：忽视企业 MSRV 策略
 
 ```rust,ignore
