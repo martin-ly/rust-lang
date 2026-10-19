@@ -368,6 +368,36 @@ pub enum UnsubscribeRejection { /* 10+ 变体 */ }
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+本页服务模式索引声称生产服务需要「错误半径控制」与「优雅关闭」。本机两个 std-only 探针给出这两条的最小机器证据——**它们都不是框架赠品，而是必须显式写出来的代码；不写，默认行为就是事故本身**。
+
+**实测 1：handler 内 panic 的默认半径 = 整个进程（exit 101）**。模拟三个请求依次进 handler，请求 #2 内部 panic：
+
+无保护版（handler 直接调用，无 `catch_unwind` 层）实跑只打出 `请求#: 响应#1` 就终止，**退出码 101**——一个请求的业务 panic 把后续请求全部带走。Rust 的 panic 不像 Java 的异常止于线程边界内的 try/catch，它默认沿 unwind 直达进程出口。
+
+加一层 `panic::catch_unwind(|| handle(r))` 后同一程序实跑：
+
+```text
+请求#1: "响应#1"
+请求#2: "已被层捕获"
+请求#3: "响应#3"
+进程存活，退出码 0 —— catch_unwind 层把 panic 半径限制在单请求
+```
+
+这就是「生产级服务」与「demo」之间一条可编译验证的分界线：**panic 半径必须被中间件层显式限定**（axum/tower 的 CatchPanicLayer 之所以是生产标配，正因为 rustc 默认不给）。自己裸写线程池/任务循环的服务，没有框架替你装这道层。
+
+**实测 2：优雅关闭的 drain 不是语义而是你写的 join 循环——同一程序两种收场**。6 个 in-flight 请求（每请求 80ms），收到"关停信号"时：
+
+```text
+无 drain 版:  收到关停信号: in-flight=6 → 退出瞬间已完成: 0 / 6
+drain 版:     收到关停信号: in-flight=6 → 退出瞬间已完成: 6 / 6
+```
+
+两版唯一差别是关停路径有没有 `for h in handles { h.join(); }`。没有它，`drop(handles)` 即 detach，进程出口直接杀掉 6 个正在处理中的请求——0/6 全部丢失，且**没有任何警告或错误码**（进程退出码 0）。容器化部署里 SIGTERM 触发的正是这条路径：Kubernetes 发 SIGTERM 后你的 main 走到函数尾，in-flight 清零与否完全取决于你有没有写 drain 循环。「服务无请求丢失」在 Rust 里不是运行时保证，是一行 `join` 的存在性。
+
+---
+
 ## 七、权威来源索引
 
 - **P0 官方**: [The Rust Programming Language](https://doc.rust-lang.org/book/title-page.html)（错误处理、trait、泛型） · [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)

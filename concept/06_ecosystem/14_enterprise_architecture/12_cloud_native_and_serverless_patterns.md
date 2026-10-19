@@ -482,6 +482,43 @@ fn main() {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+4.2 声称「Lambda 实例持有状态导致扩容失效」，其代码只是示意。本机把 warm-start 状态残留做成可实跑的对照，坐实这条论断的两半：**同实例内状态跨 invoke 残留（编译级合法），跨实例一致性则完全不存在（不是 bug，是模型）**。
+
+同一进程模拟一个 warm 实例连续 4 次 invoke（`static WARM_CALLS: AtomicU64` + handler 递增）——探针源码本身：
+
+```rust
+use std::sync::atomic::{AtomicU64, Ordering};
+
+// 模拟 Lambda 实例内的"全局状态"：warm start 之间持久存在
+static WARM_CALLS: AtomicU64 = AtomicU64::new(0);
+
+fn handle(req: u64) -> String {
+    let n = WARM_CALLS.fetch_add(1, Ordering::SeqCst) + 1;
+    format!("req={} 第{}次调用（同实例） cache_hint={}", req, n, n * 100)
+}
+
+fn main() {
+    // 同一进程 = 同一 warm 实例，连续 4 次 invoke
+    for r in 1..=4 { println!("{}", handle(r)); }
+}
+```
+
+实跑输出：
+
+```text
+req=1 第1次调用（同实例） cache_hint=100
+req=2 第2次调用（同实例） cache_hint=200
+req=3 第3次调用（同实例） cache_hint=300
+req=4 第4次调用（同实例） cache_hint=400
+状态跨 invoke 残留: WARM_CALLS=4 —— 扩容到新实例时这份状态归零，跨实例一致性不存在
+```
+
+机器层面的含义：`static` 初始化只在进程首次进入时发生一次，warm 复用跳过它——第 2 次 invoke 看到的是第 1 次留下的 `WARM_CALLS=1` 现场。单元测试里「连续调用计数器递增」全绿通过，恰是该反模式最隐蔽的形态：**本地测试观察到的行为（单实例单调递增）与生产扩容器（多实例各有各的计数）在语言层无任何区别**。Rust 不提供「无状态 handler」的类型约束；冷启动假设（static 每 invoke 归零）一旦被 warm start 打破，所有依赖它的逻辑静默换轨。修正方向即 4.2 结论的状态外置，本机可补一条判据：凡 `static`/`thread_local` 承载**业务语义**（计数、缓存、限流配额），要么接受「每实例独立副本」语义并在外部聚合，要么移到外部存储——放在进程内的部分只能是可重建的性能缓存。
+
+---
+
 ## 五、决策树：云原生模式选型
 
 ```mermaid

@@ -245,6 +245,29 @@ ISO 标准和 SWEBOK 停留在**过程**和**概念**层面，不会规定：
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+本页七节把 25010 的「可靠性/安全」质量子特性映射到 Rust 的 assert/调试工具。本机实测给出一个标准映射里最容易踩空的落差：**Rust 的"不变量检查"默认形态（`debug_assert!`）在生产构建里被静默移除——ISO 25010 可靠性属性若只靠 debug_assert 兑现，认证审查看到的"有不变量检查"与生产二进制里的"没有检查"是同一段代码**。
+
+同一份源码，同一台机器，两种 profile 的实跑对照：
+
+```rust
+fn main() {
+    let v: u32 = 1;
+    debug_assert!(v > 1, "不变量: v 必须大于 1");
+    println!("debug_assert 在 -O 下消失: v={} 照常走完", v);
+}
+```
+
+- **debug profile（默认）**：`thread 'main' panicked at src/main.rs:3:5: 不变量: v 必须大于 1`，进程 abort。
+- **`rustc -O`（生产 profile）**：输出 `debug_assert 在 -O 下消失: v=1 照常走完`，**退出码 0**——违反的不变量静默通过，下游继续用 `v=1` 计算。
+
+同一份 `debug_assert!`，两种编译决策给出完全相反的可观察行为；差异仅由 profile 决定，源码与测试代码中没有任何标记提示"这条检查在生产里不存在"。
+
+结论对标准对齐的直接含义：映射 ISO 25010「功能性安全性/可靠性」到 Rust 时，**可交付的保证必须是 `assert!`、类型不变量（私有字段 + 构造校验）或 Miri/形式化门，`debug_assert!` 只能归入"开发期诊断"**。评审文档写"关键不变量已用断言覆盖"而代码里是 `debug_assert!`，就是本页反例表第一行「文档满足 viewpoint 要求但实现质量不达标」的字面实例——而且它在 CI 里也是绿的，因为 CI 默认也跑 debug profile。
+
+---
+
 ## 九、嵌入式测验（Embedded Quiz）
 
 ### 测验 1：ISO/IEC/IEEE 42010 中，viewpoint 和 view 的关系是什么？（记忆层）
