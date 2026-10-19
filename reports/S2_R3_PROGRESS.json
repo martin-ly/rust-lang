@@ -1,6 +1,6 @@
 {
   "loop": "S2-R3 实测反例补全（串行主代理模式）",
-  "updated": "2026-10-19-post-batch17",
+  "updated": "2026-10-19-post-W19",
   "mode": "serial-main-agent (用户 2026-10-19 指令: 串行/落地为先/不派并行子代理)",
   "gap_definition": "concept/**/*.md 中既无『实测反例』也无 compile_fail 围栏（排除 SUMMARY/README/INDEX/00_ 前缀/quiz/sources）",
   "strict_gap_total": 72,
@@ -231,6 +231,32 @@
       ],
       "evidence": "CQRS重放fold i32 -O回绕 35亿->-794967296 EXIT0/debug panic101 | retry非幂等3次扣款balance -250 vs 幂等键req_id=7 -50 | saga补偿顺序: forward含未发生步骤/reverse正确, EXIT0可区分 | Rc池回收strong_count=3, C见[1,2,3,99]串数据 EXIT0 | typestate旧句柄E0599 no method read for Conn<Closed> | E0072 recursive Node infinite size + RefCell try_borrow_mut is_err=true运行期兜底 | RAII File move进函数drop即关闭, reopen ok=true | 事件日志seq2缺失投影50->150差一笔交易额 | 网关recv_timeout(100)101ms Elapsed而上游Ok(200)已执行",
       "commit": "a978597f4 + batch17b"
+    },
+    {
+      "batch": "W18-ent4",
+      "date": "2026-10-19",
+      "group": "06_ecosystem/14_enterprise_architecture (批4/4收尾)",
+      "commit": "36e5bbbce",
+      "pushed": true,
+      "pages": [
+        "ea/14_data_intensive",
+        "ea/15_security_zero_trust",
+        "ea/16_financial_services",
+        "ea/17_iot_and_edge"
+      ],
+      "evidence": "HashMap迭代顺序跨进程指纹漂移(同进程一致/跨进程随机5次) | 短路比较65536B×200k次200-640x耗时比(black_box防DCE) | f64扣10个0.1余额0.00000000000000013878判>0全程绿灯 | NTP倒挂u64回绕18446744073709541秒 -O exit0, debug常量版编译期硬拒"
+    },
+    {
+      "batch": "W19-lang-residual",
+      "date": "2026-10-19",
+      "group": "03_advanced/02_unsafe + 04_formal/00_type_theory（语言语义组残余收尾）",
+      "commit": "6bd150f1e",
+      "pushed": true,
+      "pages": [
+        "03_advanced/02_unsafe/00_before_formal",
+        "04_formal/00_type_theory/13_formal_algorithm_theory"
+      ],
+      "evidence": "二分中点三profile光谱: 常量版rustc硬拒arithmetic_overflow逐字(-O同样拒,旧文称可编译=标注腐烂已修+compile_fail块重写)/变量debug panic101/-O回绕mid=9223372036854775806 exit0"
     }
   ],
   "version_baseline": {
@@ -239,16 +265,7 @@
     "beta": "1.100.0 GA预计2026-11-12",
     "nightly": "1.101.0"
   },
-  "next_queue": [
-    "01_foundation(2)",
-    "03_advanced(15)",
-    "04_formal(20)",
-    "05_comparative(12)",
-    "06_ecosystem(100)",
-    "07_future(19)",
-    "00_meta(68)",
-    "sources(2)"
-  ],
+  "next_queue": "D轨道批次顺序(用户指定): D1 WASM → D2 算法 → D3 企业 → D4 合规 → D5 区块链 → D6 ML → D7 游戏；cron 14459c312b92 应改写为D轨道生态批次驱动",
   "cron": "14459c312b92 (every 180m, 串行模式指令)",
   "rescan_2026_10_19_post_batch5": {
     "strict_gaps": 133,
@@ -466,5 +483,56 @@
     "design_patterns_remaining": 26,
     "note": "06_ecosystem/03_design_patterns 组本轮 W17 线累计落地 16 页（批1-4）；组剩余 26 页清单存 scratch/s2_gaps_loop12.json（24h 过期后下轮 git ls-files 重扫）。44_config S2R3_MODE 块改 ignore 修 1 处 CF 标注。19_mde 新增 E0599 逐字 + 同名静默替换 200→170 双形态。",
     "next_queue": "06_ecosystem/03_design_patterns 批5（候选：40_testing_and_mocking_idioms、42_actor_model、49_gof_patterns_in_rust、51_anti_patterns、39_api_design_and_semver）→ 14_enterprise_architecture(14) → 11_domain_applications(10)"
-  }
+  },
+  "realignment_2026_10_19": {
+    "authoritative_plan": "reports/DOMAIN_ECOSYSTEM_REALIGNMENT_PLAN_2026-10-19.md",
+    "user_ruling": "本项目针对Rust语言软件开源生态而非做测试；S2-R3反例loop降格收尾(方案A)",
+    "s2_r3_scope": "反例单仅语言语义组残余(01_foundation/02_intermediate/03_advanced/04_formal)；06_ecosystem domain组豁免反例单",
+    "domain_five_factor_gate": [
+      "具名活跃项目覆盖",
+      "版本事实crates.io/cargo实查",
+      "工业采用案例可核验P0引用",
+      "canonical缺口登记",
+      "组内stub/重复裁决"
+    ],
+    "d_queue": [
+      "D1 WASM",
+      "D2 算法",
+      "D3 企业",
+      "D4 合规/安全关键",
+      "D5 区块链",
+      "D6 ML",
+      "D7 游戏"
+    ],
+    "cron": "14459c312b92 已改写为D轨道生态批次驱动"
+  },
+  "rescan_2026_10_19_post_batch17_fresh10": {
+    "file": "scratch/s2_gaps_fresh10.json",
+    "scanned": 696,
+    "loop_gaps": 58,
+    "lang_semantic_residual": {
+      "03_advanced/02_unsafe": 1,
+      "04_formal/00_type_theory": 1
+    },
+    "note": "06_ecosystem残余组gap(46)按新口径转D轨道五要素线，不再派反例单"
+  },
+  "rescan_2026_10_19_post_W18_batch4_W19": {
+    "gap_total": 40,
+    "breakdown": {
+      "11_domain_applications": 10,
+      "16_algorithm_patterns": 8,
+      "06_data_and_distributed": 4,
+      "04_web_and_networking": 3,
+      "07_security_and_cryptography": 3,
+      "12_networking": 3,
+      "05_comparative": 2,
+      "03_design_patterns": 2,
+      "10_performance": 2,
+      "03_advanced": 1,
+      "04_formal": 1,
+      "14_enterprise_architecture": 1
+    },
+    "note": "W18批4(14/15/16/17)落盘后enterprise组非stub页清零(余1页为08_redirect stub合规豁免)。W19清掉03_advanced/04_formal残余2页。剩余38页全部位于06_ecosystem domain组——按用户2026-10-19方案A(DOMAIN_ECOSYSTEM_REALIGNMENT_PLAN_2026-10-19.md已确认生效)豁免反例单，转D轨道生态实证线。"
+  },
+  "s2_r3_status": "2026-10-19 W19后：语言语义组(01_foundation~04_formal)反例缺口=0，S2-R3降格收尾封账；domain组38页豁免项归D轨道五要素验收线管理"
 }
