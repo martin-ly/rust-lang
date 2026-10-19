@@ -696,3 +696,10 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「WASI WebAssembly Component」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+
+## 生态实证与版本实查（2026-10-19，crates.io API 实测）
+
+- 具名运行时当前版本：wasmtime **49.0.3**（WASIp2 参考实现）· wasmer **7.5.0**（https://crates.io/crates/wasmtime · https://crates.io/crates/wasmer）。
+- 本机 rustc 1.99.1 实测：`wasm32-wasip1` 目标已安装可用（Tier 2）；`wasm32-wasip2` 未随 stable 分发，须经 cargo-component/canary 工具链（见 `07_future/02_preview_features/28_wasm_target_evolution.md` E0463 实测）。
+- 工业采用：Fastly Compute（wasmtime 基座，https://www.fastly.com/products/compute）· Fermyon Spin（wasm 微框架，https://www.fermyon.com/spin）。
+- canonical 缺口登记：WASI Preview 3 提案轨道未固化（https://github.com/WebAssembly/WASI/blob/main/Proposals.md）。

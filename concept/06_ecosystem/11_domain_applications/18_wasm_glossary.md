@@ -479,3 +479,7 @@ mindmap
       Cargo
       rustc
 ```
+
+## 版本实查锚（2026-10-19，crates.io API 实测）
+
+术语对应的当前具名实现与版本：wasmtime **49.0.3** · wasmer **7.5.0** · wasm-bindgen **0.2.129** · wasm-pack **0.15.0**（https://crates.io/crates/{wasmtime,wasmer,wasm-bindgen,wasm-pack}）。术语条目本身不钉版本；版本事实以本锚节实查值为准，页内历史示例保留原世代标注。

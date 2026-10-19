@@ -767,3 +767,18 @@ mindmap
       4.2 边界极限
     五、工具链与运行时
 ```
+
+## 六、生态实证与版本实查（2026-10-19，crates.io API 实测）
+
+> D 轨道五要素口径：本页具名活跃项目覆盖 + 版本事实 crates.io 实查 + 工业采用可核验引用 + canonical 缺口登记。历史叙述保留，本节为 2026-10 权威对齐勘误锚。
+
+| 具名活跃项目 | crates.io 当前版本（2026-10-19 实查） | 定位 | 可核验引用 |
+|---|---|---|---|
+| wasmtime | **49.0.3** | Bytecode Alliance 旗舰运行时，生产级（Fastly Cloudflare 边缘方向） | https://crates.io/crates/wasmtime |
+| wasmer | **7.5.0** | 多后端（Cranelift/LLVM/singlepass）运行时 | https://crates.io/crates/wasmer |
+| wasm-bindgen | **0.2.129** | Rust↔JS 互操作事实标准 | https://crates.io/crates/wasm-bindgen |
+| wasm-pack | **0.15.0** | 构建/发布统一入口 | https://crates.io/crates/wasm-pack |
+
+**权威对齐事实（crates.io wasm 分类 top-downloads 实查，2026-10）**：WebAssembly 分类（4,960 crates）下载量前十全部是跨 wasm 目标的基础库——hashbrown 0.17.1（累计 27.6 亿次下载）、syn 3.0.9、getrandom 0.4.3、bitflags 2.13.0、rand 0.10.0、libc 0.2.191、proc-macro2 1.0.107、base64 0.23.0、windows-sys、indexmap 2.14.0。即：**Rust WASM 生态的主体是基础库跨 wasm 目标，而非 wasm 专用库**；引擎/互操作工具（wasmtime/wasmer/wasm-bindgen）位于第二梯队。本页此前以引擎/互操作叙事为主，本节补此权威口径。
+
+**canonical 缺口登记**（详见 `reports/AUTHORITATIVE_SYMMETRIC_DIFF_2026-10-19.md`）：crates.io 无独立 WIT/Component Model 分类，组件模型权威源为 component-model.wasmtime.dev 与 WASI Prop 2 官方文档；本库 17/18/19/20 页已覆盖，无重复 canonical。

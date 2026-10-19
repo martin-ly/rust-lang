@@ -1254,3 +1254,13 @@ mindmap
       6.1 JSWASM 边界穿越成本
       6.2 SIMD 与批量内存操作
 ```
+
+## 生态实证与版本实查（2026-10-19，crates.io API 实测）
+
+本页组件模型/WASIp2 叙述对应的活跃实现与当前版本（crates.io 实查）：wasmtime **49.0.3**（WASIp2/Component Model 参考实现，Bytecode Alliance）· wasmer **7.5.0** · cargo-component（WIT 驱动 crate 构建，https://crates.io/crates/cargo-component）· wasm-bindgen **0.2.129**（浏览器路线，与 WASIp2 服务器路线并行）。
+
+**版本事实勘误**：本页早期引用的 wasmtime 21.x 世代 API（`Store::call` 签名、`Config` 选项）在 49.x 已有演进；历史叙述保留，实证以 https://crates.io/crates/wasmtime 与 https://docs.wasmtime.dev/ 当前文档为准。
+
+**工业采用可核验引用**：Fastly Compute 基于 wasmtime（https://www.fastly.com/products/compute）；Deno 内置 V8 同时经 `deno_webassembly` 支持 Wasm 组件方向（https://deno.land）；Shopify Functions 运行于 wasm 隔离运行时（https://shopify.dev/docs/apps/build/functions）。
+
+**canonical 缺口登记**：WASI Preview 3（共享内存/线程方向）截至 2026-10 仍在 WASI Subgroup 提案轨道（https://github.com/WebAssembly/WASI/blob/main/Proposals.md），本库不提前固化，登记为跟踪缺口。

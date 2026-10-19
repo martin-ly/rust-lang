@@ -378,6 +378,8 @@ edge-bin v0.1.0 (examples/resolver_v3_practice/edge-bin)
 1. `clap 4.6.1` 可用，但 resolver 选择了 `clap 4.4.18`，因为 4.6.1 要求 Rust 1.85，高于 workspace 最低 MSRV 1.70。
 2. `indexmap` 同时存在 `1.9.3` 与 `2.11.4` 两个主版本，因为它们分别被不同成员以不兼容的主版本要求引入。
 
+> 权威对齐注记（2026-10-19 crates.io 实查）：本示例为 resolver MSRV 固定行为的历史样例，输出世代保留；当前 indexmap 最新为 **2.14.0**、hashbrown 最新为 **0.17.1**（https://crates.io/crates/indexmap · https://crates.io/crates/hashbrown）。示例演示的双主版本共存机制与版本无关，仍然成立。
+
 ### 9.3 切换解析策略
 
 默认 `fallback` 策略优先 MSRV 兼容版本。若要在 CI 中验证最新依赖，可临时覆盖为 `allow`：

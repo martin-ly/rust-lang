@@ -600,3 +600,7 @@ fn dispatch(t: &dyn Sink) {
     t.write(1);
 }
 ```
+
+## 版本实查锚（2026-10-19，crates.io API 实测）
+
+本页互操作机制的当前具名实现版本：wasm-bindgen **0.2.129** · wasm-pack **0.15.0** · js-sys/web-sys 同仓同步发布（https://crates.io/crates/js-sys）。权威对齐事实：crates.io WebAssembly 分类 top-downloads 前十为基础库（hashbrown 0.17.1、syn 3.0.9、getrandom 0.4.3、bitflags 2.13.0、rand 0.10.0、libc 0.2.191 等，2026-10 实查）——JS 互操作叙事之外，跨 wasm 目标的基础库才是 Rust WASM 生态下载量主体。可核验引用：https://crates.io/crates/wasm-bindgen · https://rustwasm.github.io/docs/wasm-bindgen/

@@ -298,3 +298,7 @@ cargo build --target wasm32-wasi
 3. **unknown-unknown 不导出**：同一函数不加 `#[no_mangle]` 编 `wasm32-unknown-unknown` cdylib，1.67MB 产物中既无 `wadd` 也无 `_ZN` mangled 符号——host 侧取不到入口，须靠 wasm-bindgen 层重建导出。
 
 结论口径：WASM target 演进不是文档叙事而是三处硬边界——target 名（旧名移除）、std 可用性（E0463 与 target 安装状态绑定）、导出可见性（unknown-unknown 无 C 导出、wasip1 有）。CI 矩阵必须按 target 逐个实测，不能按「wasm 都差不多」写。
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+本页 target 演进叙事对应的运行时侧当前版本：wasmtime **49.0.3**（wasip1/wasip2 支持矩阵权威实现，https://crates.io/crates/wasmtime）· wasm-pack **0.15.0** · wasmer **7.5.0**。语言侧基线：rustc 1.99.1 stable 本机已装 `wasm32-wasip1`；1.100.0（GA 2026-11-12）后需复扫 target 列表。

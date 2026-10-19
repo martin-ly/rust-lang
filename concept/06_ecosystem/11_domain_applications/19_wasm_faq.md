@@ -543,3 +543,7 @@ fn main() {
 ```
 
 > 经验法则：所有依赖 OS 能力（时钟/线程/文件系统/网络）的代码都要 `cfg` 隔离，并在 CI 增加 `cargo check --target wasm32-unknown-unknown`。
+
+## 版本实查锚（2026-10-19，crates.io API 实测）
+
+FAQ 各条涉及的具名工具当前版本：wasm-bindgen **0.2.129**（`#[wasm_bindgen]` 宏世代）· wasm-pack **0.15.0**（`wasm-pack build --target web`）· wasmtime **49.0.3**（WASIp2 运行）· wasmer **7.5.0**。rustc 侧：本机实测 `wasm32-unknown-unknown` 与 `wasm32-wasip1` 目标在 **1.99.1** 可用（Tier 2）。版本事实来源 https://crates.io/crates/wasmtime 等；历史 FAQ 叙述保留。
