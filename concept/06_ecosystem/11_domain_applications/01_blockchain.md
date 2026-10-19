@@ -978,4 +978,4 @@ Substrate 是 Parity 开发的区块链开发框架，完全用 Rust 编写。�
 
 ## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
 
-bitcoin(rust-bitcoin) **0.32.102**（stable 实查；newest 0.33.0-beta；1,763 万累计/489 万近期下载，https://github.com/rust-bitcoin/rust-bitcoin）· ord **0.29.0**（Ordinal 钱包/浏览器，Rust 单二进制，https://github.com/ordinals/ord）——crates.io API 2026-10-19 实查。canonical 缺口登记：substrate/polkadot 已于 2024-2025 转向 Parity 私有发布（不再 crates.io 公开发布主版本线），库内 substrate 叙述需按 https://github.com/paritytech 当前口径核查——历史叙述保留。
+bitcoin(rust-bitcoin) **0.32.102**（stable 实查；newest 0.33.0-beta；1,765 万累计，https://github.com/rust-bitcoin/rust-bitcoin）· ord **0.29.0**（Ordinal 钱包/浏览器，Rust 单二进制，https://github.com/ordinals/ord）——crates.io API 2026-10-19 实查。W7 口径勘误（2026-10-19 crates.io 复核）：旧「substrate/polkadot 转向 Parity 私有发布、不再 crates.io 公开主版本线」登记被实测推翻——Polkadot SDK 框架 crate 持续在 crates.io 发布：polkadot-sdk **2609.0.0**、sp-runtime **49.0.0**、frame-support **49.0.0**、sc-service **0.63.0**（均 2026-10-07/08 更新）；节点侧 polkadot crate 亦公开在架（39.0.0）。旧口径混淆点是名为 `substrate` 的 crates.io 占位 crate（0.1.0，2018 孤立版本）——它从不承载主版本线，主版本线载体一直是 paritytech 框架 crate 家族。库内 substrate 历史叙述按此框架 crate 口径核查。

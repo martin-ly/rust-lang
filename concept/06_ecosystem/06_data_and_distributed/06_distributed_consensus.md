@@ -996,4 +996,4 @@ mindmap
 
 ## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
 
-共识工程栈登记：Rust 共识实现 canonical 案例为 tendermint-rs（Informal Systems，https://github.com/informalsystems/tendermint-rs）与 substrate 系（私有发布口径同上）；rust-bitcoin 0.32.102 为比特币协议 Rust 互操作权威库。
+共识工程栈登记：Rust 共识实现 canonical 案例为 tendermint-rs（Informal Systems，https://github.com/informalsystems/tendermint-rs）与 substrate 系（Polkadot SDK 框架 crate 公开在 crates.io：polkadot-sdk 2609.0.0 / sp-runtime 49.0.0 / sc-service 0.63.0，2026-10-19 实查，W7 口径勘误见 01_blockchain.md）；rust-bitcoin 0.32.102 为比特币协议 Rust 互操作权威库。

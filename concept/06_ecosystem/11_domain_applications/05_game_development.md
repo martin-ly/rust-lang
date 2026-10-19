@@ -709,4 +709,4 @@ mindmap
 
 ## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
 
-bevy **0.19.1**（736 万累计/147 万近期下载，https://bevy.org）· wgpu **30.0.1**（4,191 万累计/1,343 万近期下载——Rust 跨平台 GPU API 事实标准，https://wgpu.rs）· macroquad **0.4.16**（188 万累计）· ggez **0.10.0**（game-engines 分类 1,348 crates 中轻量 2D 框架，https://ggez.rs）——实查 2026-10-19。stub 裁决：06_game_development.md 为 2026-07-12 合并后的 Redirect stub（五要素⑤已合规）。
+bevy **0.20.0**（814 万累计/176 万近期下载，https://bevy.org，0.20.0 于 2026-10-08 发布）· wgpu **30.0.1**（4,199 万累计/1,351 万近期下载——Rust 跨平台 GPU API 事实标准，https://wgpu.rs）· macroquad **0.4.16**（188 万累计）· ggez **0.10.0**（game-engines 分类 1,348 crates 中轻量 2D 框架，https://ggez.rs）——crates.io API 复核 2026-10-19。stub 裁决：06_game_development.md 为 2026-07-12 合并后的 Redirect stub（五要素⑤已合规）。
