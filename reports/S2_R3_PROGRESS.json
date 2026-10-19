@@ -1,6 +1,6 @@
 {
   "loop": "S2-R3 实测反例补全（串行主代理模式）",
-  "updated": "2026-10-20-post-W9",
+  "updated": "2026-10-20-W9+P0-closure-committed",
   "mode": "serial-main-agent (用户 2026-10-19 指令: 串行/落地为先/不派并行子代理)",
   "gap_definition": "concept/**/*.md 中既无『实测反例』也无 compile_fail 围栏（排除 SUMMARY/README/INDEX/00_ 前缀/quiz/sources）",
   "strict_gap_total": 72,
@@ -316,7 +316,7 @@
     "beta": "1.100.0 GA预计2026-11-12",
     "nightly": "1.101.0"
   },
-  "next_queue": "D/W队列(W1-W8+D1-D7+V1/T1)全清 → cron 14459c312b92 转每周巡检评估(全量门run_quality_gates.sh+KG刷新+腐烂检测); 语言语义组反例残余=0封账不动; 1.100.0 GA对齐轮挂cron e463a69a99c9(2026-11-13后)",
+  "next_queue": "D/W队列(W1-W9+D1-D7+V1/T1+P0-closure)全清 → cron 14459c312b92 转每周巡检评估(全量门run_quality_gates.sh+KG刷新+腐烂检测); 语言语义组反例残余=0封账不动(07_macro_faq已闭环); authority残余P1 gap 11页为跨层引用增强项(非strict缺口, 下轮巡检顺带消化); 1.100.0 GA对齐轮挂cron e463a69a99c9(2026-11-13后)",
   "cron": "14459c312b92 (every 180m, 串行模式指令)",
   "rescan_2026_10_19_post_batch5": {
     "strict_gaps": 133,
@@ -480,7 +480,7 @@
     "F轨道三主题缺口从git历史取正文新建canonical",
     "00_meta按口径豁免固化"
   ],
-  "last_batch": "W8 (computer-vision canonical页32建页+算法组重叠不合并裁决, commit ce49cb519 已push origin SSH)",
+  "last_batch": "P0-closure (W9三新页P0锚补齐+authority P0 100%封账, commit e956a706b 已push origin SSH)",
   "rescan_2026_10_19_post_batch16_fresh9": {
     "file": "scratch/s2_gaps_fresh9.json",
     "date": "2026-10-19-post-batch16",
@@ -656,6 +656,24 @@
       "track": "算法组④stub/重复裁决(11_domain_applications算法5页)",
       "verdict": "09_data_structures(683B)与12_formal_algorithm_theory(1.2K)为Redirect stub合规(五要素④已合规，权威页分别=16_algorithm_patterns/08与04_formal/00_type_theory/13)；07/11/24/26/28为实质内容页(9-64KB)，其中24/26/28已显式声明'应用视角权威页'并互链理论canonical(03_advanced/06_low_level_patterns/02与04_formal/08_algorithm_semantics/04)——符合仓库双页惯例(应用view+理论canonical)，判④合规不合并；07/11与16_algorithm_patterns组存在主题重叠(07 vs 18_competitive_programming_idioms; 11 vs 15_probabilistic/11_online)，登记为W8软性合并候选而非硬裁决",
       "gate": "无代码改动，纯账本裁决"
+    },
+    {
+      "batch": "W9-canonical-triple",
+      "date": "2026-10-20",
+      "track": "canonical缺口闭环建页(gap-scan 839页只读扫描, W9队列①②③)",
+      "pages": "04_web_and_networking/13_grpc_tonic_prost(新建) + 05_systems_and_embedded/57_posix_syscall(新建) + 11_domain_applications/33_audio_dsp(新建) + concept/SUMMARY三挂链",
+      "evidence": "crates.io API 2026-10-19实查38锚点: tonic 0.14.6(prost 0.14.4, 0.14系建于axum0.8+hyper1+h2 0.4)/rustix 1.1.5(linux-raw-sys直syscall, 12.7亿下载经tempfile/fd-lock依赖链传导实拆)/nix 0.31.3/caps 0.5.6/cpal 0.18.2/symphonia 0.6.1/rodio 0.23.0(依赖实拆: cpal+symphonia+hound+claxon+lewton+minimp3_fixed新旧解码栈并存)/rustfft 6.4.1/rubato 5.0.1/kira 0.12.5; 陷阱登记: grpc撞名/nix非默认feature门控/dasp停更组件存活",
+      "gate": "建页即时自查 + 批门: metadata D1-D6全零/dead-links 0(code-blocks strict candidate=0 rot=0 CF 1347/1347)/authority strict PASS",
+      "commit": "be1fddd1d(已push)"
+    },
+    {
+      "batch": "P0-closure-authority-microfix",
+      "date": "2026-10-20",
+      "track": "计划§6挂账项P1/P2权威覆盖微补 + W9三页P0缺口闭环",
+      "pages": "13_grpc(std::net P0锚) + 57_posix(Nomicon FFI P0锚) + 33_audio(Nomicon FFI P0锚) + 12_linear(RustBelt POPL18 Coq+Nomicon FFI锚) + 15_refinement(Flux PLDI2023 arXiv 2207.04034+docs.rs/flux锚) + 31_GUI(winit docs+wasm32 tier2官方页锚) + 32_CV(Nomicon FFI锚) + 29_time(std::time锚) + 30_jiff(SystemTime锚) + 21_rust_spec stub(RFC3355+Inside Rust spec-vision锚) + 07_macro_faq(rustc1.99.1四形态宏报错compile_fail反例节, W19残余1页闭环)",
+      "evidence": "authority content-scope P0 99.6%->100.0%, any=100% none=0 core L1-L4 gaps=0; 全部新增链接curl核验200; 残余P1 gap 11页均已有P0锚(增强项非strict缺口), P2 gap 1页(12_linear已有P1双锚)",
+      "gate": "authority strict --include-crates exit0 + dead-links 0 + metadata D1-D6全零 + semantic health 100.0 grade OK",
+      "commit": "8721cb9bb + e956a706b(已push origin SSH)"
     }
   ],
   "w_queue_status": {
@@ -674,6 +692,20 @@
         "11_cutting_edge_algorithms.md(挂链)"
       ],
       "evidence": "image 0.25.10/opencv 0.101.1 crates.io API复核一致; 门: metadata D1-D6全零+dead-links 0+code-blocks strict candidate3181 CF1343 rot=0 EXIT0+semantic_health 100.0+authority strict PASS(any=100 none=0 core=0)"
+    },
+    "W9_canonical_triple": {
+      "status": "done",
+      "date": "2026-10-20",
+      "commit": "be1fddd1d",
+      "pages": "13_grpc/57_posix/33_audio三新建页+SUMMARY挂链",
+      "evidence": "crates.io 38锚点实查; 门全绿"
+    },
+    "P0_authority_closure": {
+      "status": "done",
+      "date": "2026-10-20",
+      "commit": "e956a706b",
+      "pages": "11页权威锚微补+07_macro_faq反例节",
+      "evidence": "authority content-scope P0=100%/none=0/core=0 strict exit0"
     }
   }
 }
