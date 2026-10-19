@@ -582,6 +582,14 @@
    "evidence": "bitcoin 0.32.102(489万近期,0.33.0-beta在架)/ord 0.29.0/candle-core 0.11.0(HuggingFace)/burn 0.22.0(2026-10-06发布,四分类)/linfa 0.8.1/tch 0.26.0/bevy 0.19.1/wgpu 30.0.1(1343万近期)/macroquad 0.4.16/ggez 0.10.0 实查; substrate/polkadot转Parity私有发布口径勘误登记; tendermint-rs共识锚登记",
    "gate": "strict EXIT0",
    "d_queue_status": "D1-D7 全部落地"
+  },
+  {
+   "batch": "V1+T1",
+   "date": "2026-10-19",
+   "track": "对称差缺口清偿",
+   "pages": "新建 11_domain_applications/29_time_and_date_ecosystem.md (canonical专页, SUMMARY.md 已挂链) + 01_cargo/03 resolver页版本实查锚 + 01_cargo/06 pin勘误HTML注",
+   "evidence": "cargo add 实测 Cargo.lock: chrono 0.4.45/chrono-tz 0.10.4; cargo run EXIT0 实测: Asia/Shanghai 2026恒CST+08:00 / 1987-05-10 CDT+09:00(中国DST 1986-91 IANA记录) / NY fall-back Ambiguous -14400 EDT vs -18000 EST / spring-forward None; rustc --extern chrono 实测 E0277 x2 (NaiveDate+NaiveDate, NaiveDateTime+DateTime<Utc>); chrono/time 下载 7.77亿/8.64亿实查; jiff候选缺口登记",
+   "gate": "strict compile_fail 1341/1341 should_panic 10/10 EXIT0 (1651块复跑)"
   }
  ]
 }

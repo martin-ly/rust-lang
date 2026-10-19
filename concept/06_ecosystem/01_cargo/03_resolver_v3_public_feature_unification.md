@@ -266,3 +266,8 @@ mindmap
     五、稳定版行为说明
     六、验证命令
 ```
+
+
+## 版本实查锚（2026-10-19，crates.io API 实测）
+
+本页 MSRV 回退演示中的 `time v0.3.17 / available v0.3.55` 与 `wasm-bindgen v0.2.105 / available v0.2.129` 为历史演示快照；当前 crates.io 实查值：**time 0.3.55**（8.64 亿累计下载，no-std+date-and-time+value-formatting+parser-implementations 四分类）、**wasm-bindgen 0.2.129**。演示文本保留原 era（其机制演示不受版本演进影响）。日期时间生态展开见 [29_time_and_date_ecosystem.md](../11_domain_applications/29_time_and_date_ecosystem.md)。

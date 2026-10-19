@@ -66,3 +66,26 @@
 ## 6. 验收口径
 
 每批按 domain 五要素（已固化账本）：①具名活跃项目覆盖 ②版本事实 crates.io/cargo 实查 ③工业采用案例可核验 P0 引用 ④canonical 缺口登记 ⑤组内 stub/重复裁决。版本事实一律实查，禁止凭记忆；历史口径保留并追加勘误。
+
+
+---
+
+## 落地处置记录（2026-10-19 收口，D 队列 D1–D7 全部完成）
+
+| 对称差条目 | 处置 | 批次/commit |
+|---|---|---|
+| WASM 运行时/工具链版本差 | 8页补 crates.io 实查锚 + Fastly/Fermyon/Shopify 工业引用 | D1 `047f2ea3f` |
+| 算法组 11 页零生态锚 | 9 页补具名 crate 锚（petgraph 0.8.3 等），DP/HLL/BWT 缺口登记 | D2 `7542b629a` |
+| web-programming(16,407 crates) 缺 2026 版本事实 | 14_enterprise_architecture 16页补 tokio/axum/tracing/tower/sqlx 实查锚 + Discord/Figma/Prime Video/AWS Lambda/Firecracker P0 引用 | D3（strict 1341/1341 EXIT0） |
+| 合规/安全 12 页无版本锚 | cargo-audit 0.22.2 / cargo-vet 0.10.2 / cargo-deny 0.20.2 / rustls 0.23.43 / ring 0.17.14；Ferrocene 分发口径勘误 | D4 |
+| 区块链 rust-bitcoin 缺锚 + substrate 过时口径 | bitcoin 0.32.102 / ord 0.29.0 补锚；substrate/polkadot 转 Parity 私有发布勘误 | D5 |
+| ML 框架版本差 | candle-core 0.11.0 / burn 0.22.0 / linfa 0.8.1 / tch 0.26.0 | D6 |
+| 游戏引擎版本差 | bevy 0.19.1 / wgpu 30.0.1 / macroquad 0.4.16 / ggez 0.10.0 | D7 |
+
+## 未清缺口（下一轮队列输入）
+
+1. **date-and-time（chrono 系，935 crates）**：54 页仅顺带提及、0 专页——建议新建 canonical 专页 `06_ecosystem` 下 chrono 0.4.x 生态页（待 crates.io chrono 实查后建）。
+2. **版本 pin 勘误批（V1）**：全库 `hashbrown 0.12.3/16.1`、`indexmap 2.11.4` 共 24 处、`wasm-bindgen 0.2.x` 7 处历史 pin——逐页追加当前值勘误锚（当前值：hashbrown 0.17.1 / indexmap 2.14.0 / wasm-bindgen 0.2.129）。
+3. **金融一手引用**（D3 遗留）：JPMorgan/ABN AMRO Rust 公开一手来源待检索补 P0 级引用。
+4. **IoT SDK canonical**（D3 遗留）：AWS IoT Rust SDK 组件族版本实查登记。
+5. **语言语义组反例残余**（旧口径 fresh9=72）：按用户裁决 A，仅在语言语义组继续，排在 D 轨道缺口之后。

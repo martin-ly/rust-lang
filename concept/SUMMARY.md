@@ -538,6 +538,7 @@
   - [Rust 零拷贝解析（Zero-Copy Parsing）](06_ecosystem/11_domain_applications/26_zero_copy_parsing_in_rust.md)
   - [所有权感知算法（Ownership-Aware Algorithms）](06_ecosystem/11_domain_applications/27_ownership_aware_algorithms.md)
   - [unsafe 算法不变式（Unsafe Algorithm Invariants）](06_ecosystem/11_domain_applications/28_unsafe_algorithm_invariants.md)
+  - [Rust 日期与时间生态（chrono 系）](06_ecosystem/11_domain_applications/29_time_and_date_ecosystem.md)
   - [形式化算法理论 (Formal Algorithm Theory)](04_formal/00_type_theory/13_formal_algorithm_theory.md)
   - [系统可组合性 (System Composability)](06_ecosystem/03_design_patterns/04_system_composability.md)
   - [微服务架构模式 (Microservice Architecture Patterns)](06_ecosystem/03_design_patterns/05_microservice_patterns.md)
