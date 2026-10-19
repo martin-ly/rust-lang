@@ -7,8 +7,8 @@
       99.4
     ],
     "P1": [
-      741,
-      93.6
+      742,
+      93.7
     ],
     "P2": [
       715,
@@ -27,8 +27,8 @@
       100.0
     ],
     "P1": [
-      682,
-      98.7
+      683,
+      98.8
     ],
     "P2": [
       691,
@@ -45,7 +45,6 @@
       "concept/06_ecosystem/11_domain_applications/29_time_and_date_ecosystem.md",
       "concept/06_ecosystem/11_domain_applications/30_chrono_vs_jiff.md",
       "concept/06_ecosystem/11_domain_applications/31_desktop_gui_ecosystem.md",
-      "concept/06_ecosystem/11_domain_applications/32_computer_vision_ecosystem.md",
       "concept/06_ecosystem/11_domain_applications/33_audio_dsp_ecosystem.md",
       "concept/07_future/00_version_tracking/rust_1_99_stabilized.md"
     ],

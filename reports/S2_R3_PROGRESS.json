@@ -1,6 +1,6 @@
 {
   "loop": "S2-R3 实测反例补全（串行主代理模式）",
-  "updated": "2026-10-20-W9+P0-closure-committed",
+  "updated": "2026-10-20",
   "mode": "serial-main-agent (用户 2026-10-19 指令: 串行/落地为先/不派并行子代理)",
   "gap_definition": "concept/**/*.md 中既无『实测反例』也无 compile_fail 围栏（排除 SUMMARY/README/INDEX/00_ 前缀/quiz/sources）",
   "strict_gap_total": 72,
@@ -316,7 +316,12 @@
     "beta": "1.100.0 GA预计2026-11-12",
     "nightly": "1.101.0"
   },
-  "next_queue": "D/W队列(W1-W9+D1-D7+V1/T1+P0-closure)全清 → cron 14459c312b92 转每周巡检评估(全量门run_quality_gates.sh+KG刷新+腐烂检测); 语言语义组反例残余=0封账不动(07_macro_faq已闭环); authority残余P1 gap 11页为跨层引用增强项(非strict缺口, 下轮巡检顺带消化); 1.100.0 GA对齐轮挂cron e463a69a99c9(2026-11-13后)",
+  "next_queue": [
+    "波A 外链腐烂清扫: check_all_concept_links_health 148 FAIL 逐URL curl核验->换live锚->批dry-run->批内dead-links门+批末全量23门",
+    "波B authority P1残余9页锚补录(已核验锚池见 reports/SESSION_CHECKPOINT_2026-10-20.md §3 波B; 待核验项勿直接引用)",
+    "波C cargo/edition事实实测复核(rustc 1.99.1 工具链直调)",
+    "执行口径(用户2026-10-20): 主代理串行单线, 不并行子代理"
+  ],
   "cron": "14459c312b92 (every 180m, 串行模式指令)",
   "rescan_2026_10_19_post_batch5": {
     "strict_gaps": 133,
@@ -674,6 +679,17 @@
       "evidence": "authority content-scope P0 99.6%->100.0%, any=100% none=0 core L1-L4 gaps=0; 全部新增链接curl核验200; 残余P1 gap 11页均已有P0锚(增强项非strict缺口), P2 gap 1页(12_linear已有P1双锚)",
       "gate": "authority strict --include-crates exit0 + dead-links 0 + metadata D1-D6全零 + semantic health 100.0 grade OK",
       "commit": "8721cb9bb + e956a706b(已push origin SSH)"
+    },
+    {
+      "batch": "P1-anchor-cross-layer",
+      "date": "2026-10-20",
+      "track": "authority残余P1缺口跨层引用增强(已在线核验学术锚)",
+      "pages": "12_linear_logic(Aeneas arXiv 2206.07185 ICFP22 + Sound Borrow-Checking dl.acm 3674640 PLDI24 + Verus arXiv 2303.05491 OOPSLA23 + verus-lang GitHub P2锚) + 21_rust_spec stub(Aeneas+PLDI24锚) + 13_grpc(arXiv 2208.00682 SOMET22 REST-vs-gRPC + arXiv 2404.05598 ICWE24) + 32_CV(arXiv 2505.12425 Kornia-rs)",
+      "evidence": "全部锚经 web_extract/arXiv API 标题级在线核验; P2 gap归零(12_linear); authority content-scope P0 100% P1 98.4->98.7% P2 100% any 100%, core L1-L4 gaps 0; 门 --include-crates 复跑",
+      "gate": "authority --include-crates exit0 (P1 gaps 11->10->9)",
+      "commit": "384079391",
+      "pushed": true,
+      "side_finding": "外链健康门148 FAIL(5条curl复核属实: reference/ownership.html/book ch04-00/nomicon/raii/blog Rust-1.88日期错位/rustc-dev-guide targets)——外链腐烂清扫列为下一波主项(波A)"
     }
   ],
   "w_queue_status": {
