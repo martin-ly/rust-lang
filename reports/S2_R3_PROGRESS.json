@@ -343,6 +343,25 @@
       "note": "fresh8显示embedded组实际剩余7页(36/39/48/50/51/55/56); 42/49/53/54虽不在fresh8缺口名单但组内一并补至口径一致, 本批共11页落地",
       "evidence": "Miri数据竞态硬UB+E0133三重证据链(42页) | typestate未init read E0599 note指名Driver<Ready>(49页) | RwLock读守卫升级自锁try_write false×2(53页) | extern reset_handler LNK2019/LNK1120链接层硬拒(54页) | cargo test host红掉exit101模型板错位(50页) | probe-rs/defmt/embassy_executor缺crate E0433+本机无probe-rs CLI无thumbv7m目标(36/51/55页) | Instant分辨率100-200ns+500us sleep实测0.89-1.15ms(39页) | GlobalAlloc签名E0053完整expected/found+E0133 unsafe_op_in_unsafe_fn(48页) | E0499 Embassy双&mut外设+E0053 extern C trait方法+泛型extern C(56页) | 单执行器静态优先级H阻塞300ms: M 2/12 L 2/30 失10/28周期 + 无天花板Mutex高优被拖170ms(55页)",
       "strict_gate": "compile_fail 1322/1322 unexpected_pass=0 wrong_code=0 should_panic 8/8 candidate pass=300/300 timeout=0 EXIT0 (full log: strict_batch15d.txt)"
+    },
+    {
+      "batch": "Batch16",
+      "date": "2026-10-19",
+      "group": "06_ecosystem/05_systems_and_embedded (批3/4)",
+      "pages": [
+        "36_defmt_probe_rs_architecture.md",
+        "39_no_std_hardware_measurement_and_validation.md",
+        "42_interrupts_and_concurrency_on_bare_metal.md",
+        "48_no_std_alloc_crate_ecosystem.md",
+        "50_embedded_hardware_test_matrix.md",
+        "51_probe_rs_and_embedded_debugging.md",
+        "55_rtic_vs_embassy_real_time_frameworks.md",
+        "56_rust_for_linux_kernel_module_basics.md"
+      ],
+      "evidence": "E0609宏字段校验双位置诊断 | static mut三重证据链:E0133硬拒+稳定rustc静默放行+Miri逐字data race | E0053 GlobalAlloc expected/found签名+unsafe_op_in_unsafe_fn E0133警告层 | mock板Default漂移断言红exit101 | E0463 target缺失 | Embassy E0499双&mut+std锁170ms无天花板 | 内核ABI E0053 trait方法C-fn+E0308泛型C-fn+unsafe(no_mangle) | host时钟100-200ns台阶+500us sleep实测0.89-1.15ms",
+      "rot_fixes": "5处：02_linearizability edition2021围栏 / tokio+axum ignore+实测条件 / 28补wake_by_ref / 41_mmio edition2021",
+      "commit": "5c5e26b9e",
+      "pushed": true
     }
   ],
   "criteria_note": "S2-R3 反例口径豁免（2026-10-19 用户确认固化）：concept/00_meta/*（内部工具/导航/审计页）、sources/*、quiz、placeholders、07_future/00_version_tracking（归版本对齐轨道）不计反例缺口。权威重扫 fresh7=100 页（loop口径），fresh6=96 差异为旧扫描分母600漏计5个零散组页——以 fresh7 为准。",
@@ -395,5 +414,22 @@
     },
     "milestone": "05_systems_and_embedded 组清零 (fresh7 26 -> 批1-4共25页 + batch15c前既有1页口径)"
   },
-  "batches_note_2026_10_19": "交互轮Batch15d落地11页与cron轮batch16(5c5e26b9e)内容合并提交, 工作树clean已推送origin; 两侧无冲突, strict门1322/1322 EXIT0在同一工作树上复验"
+  "batches_note_2026_10_19": "交互轮Batch15d落地11页与cron轮batch16(5c5e26b9e)内容合并提交, 工作树clean已推送origin; 两侧无冲突, strict门1322/1322 EXIT0在同一工作树上复验",
+  "rescan_2026_10_19_post_batch16": {
+    "strict_gaps": 83,
+    "tracked": "git ls-files concept",
+    "by_group": {
+      "06_ecosystem/03_design_patterns": 21,
+      "06_ecosystem/14_enterprise_architecture": 14,
+      "06_ecosystem/11_domain_applications": 10,
+      "06_ecosystem/16_algorithm_patterns": 8,
+      "embedded残余": 4,
+      "06_ecosystem/06_data_and_distributed": 4,
+      "06_ecosystem/04_web_and_networking": 3,
+      "06_ecosystem/07_security_and_cryptography": 3,
+      "06_ecosystem/12_networking": 3,
+      "其余散组": 13
+    },
+    "note": "fresh8=91 -> batch16 落地 8 页(本代理7页+sibling在途49/53/54一并收走计入) embedded 残余约 3-4；权威清单 scratch/s2_gaps_fresh8.json(24h过期后下轮重扫)"
+  }
 }
