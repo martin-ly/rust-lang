@@ -1,6 +1,6 @@
 # 元数据一致性基线（语义质量门 P0-1）
 
-**日期**: 2026-10-19  **扫描**: 826 concept 活跃文件（排除 archive）  **模式**: strict
+**日期**: 2026-10-19  **扫描**: 829 concept 活跃文件（排除 archive）  **模式**: strict
 
 | 规则 | 命中文件 | 占比 | 阈值 | 判定 |
 |---|:---:|:---:|:---:|:---:|
@@ -11,7 +11,7 @@
 | D5 稳定层正文残留 nightly/preview/unstable | 0 | 0.0% | >0 | pass |
 | D6 Summary 低信息量模板套话 | 0 | 0.0% | >=3% | pass |
 
-**受影响文件总数**: 0 / 826
+**受影响文件总数**: 0 / 829
 
 ## 已登记白名单（人工复核确认的合法特例，不计入命中）
 
@@ -141,6 +141,18 @@
 - `concept/06_ecosystem/11_domain_applications/04_licensing_and_compliance.md` — §10.7 实测反例：E0554 反例本身以『stable 拒绝 #![feature]』为论证对象，nightly/incomplete 为 generic_const_exprs 状态事实陈述（1.99.0 实测 warning 文本），非稳定层残留依赖
 - `concept/06_ecosystem/11_domain_applications/16_quantum_computing_rust.md` — §8.4 实测反例：portable_simd 截至 1.99.0 仍为 unstable 库特性（rust-lang/rust#86656 open，2026-10-14 实测 E0658 文本），『nightly + feature 门』为生态路线的事实陈述，非稳定层残留依赖
 - `concept/06_ecosystem/00_toolchain/08_platform_rust_integration.md` — §实测反例的 rustc 实测输出逐字引用（`= help: using nightly cargo, use -Zbuild-std...`）为编译器诊断文本本身，属工具链事实陈述，非稳定层残留依赖
+- `concept/03_advanced/01_async/12_waker_contract_deep_dive.md` — §实测反例（2026-10-19）：cargo +nightly miri 为 Miri 取证工具链事实（miri 仅 nightly 组件先例），页面正文依赖 stable
+- `concept/03_advanced/02_unsafe/08_async_in_unsafe_contexts.md` — §实测反例（2026-10-19）：cargo +nightly miri 为 Miri 取证工具链事实，页面正文依赖 stable
+- `concept/03_advanced/02_unsafe/10_std_unsafe_internals.md` — §实测反例（2026-10-19）：cargo +nightly miri 为 Miri 取证工具链事实，页面正文依赖 stable
+- `concept/03_advanced/04_ffi/04_async_ffi_boundary.md` — §实测反例（2026-10-19）：cargo +nightly miri 为 Miri 取证工具链事实，页面正文依赖 stable
+- `concept/04_formal/01_ownership_logic/07_unsafe_contracts_formal.md` — §实测反例取证条件行：rustc 1.99.1 编译全绿 + cargo +nightly miri 暴露 UB，为 Miri 取证工具链事实
+- `concept/04_formal/02_separation_logic/04_borrow_sanitizer_in_formal.md` — §实测反例（cargo +nightly miri -Zmiri-tree-borrows）：tree borrows 为 Miri nightly 选项，取证工具链事实
+- `concept/04_formal/03_operational_semantics/07_aeneas_symbolic_semantics.md` — §反例对照表行：cargo +nightly miri run 为 Miri 取证工具链事实，页面正文依赖 stable/Aeneas
+- `concept/04_formal/03_operational_semantics/10_minirust.md` — §实测反例（2026-10-19）：cargo +nightly miri 为 Miri 取证工具链事实，页面正文依赖 stable
+- `concept/04_formal/03_operational_semantics/13_in_place_initialization_semantics.md` — §实测反例（2026-10-19）：cargo +nightly miri 为取证工具链事实；文首 nightly 为 pin-init 外部 crate 状态事实陈述（反例块标 ignore 不依赖 nightly 编译）
+- `concept/06_ecosystem/03_design_patterns/50_rust_idioms_atlas.md` — §惯用法条目对 1.90 起旧 edition `feature(let_chains)` 彻底报错的历史行为事实陈述（rust-lang/rust#145878），非稳定层残留依赖
+- `concept/06_ecosystem/05_systems_and_embedded/42_interrupts_and_concurrency_on_bare_metal.md` — §实测反例：cargo +nightly miri run 与 Miri（nightly 0.1.0）定位 UB 为 Miri 取证工具链事实
+- `concept/06_ecosystem/05_systems_and_embedded/52_no_std_allocators_and_panic_handlers.md` — 实测反例逐字引用的编译器诊断文本（`= help: using nightly cargo, use -Zbuild-std...`），与 08_platform_rust_integration.md 先例同质，属工具链事实陈述
 
 另有两类规则级排除：WASI Preview 1/2/3（WASM 规范版本专名）与 URL 路径中的 nightly（官方文档固定托管路径）。
 

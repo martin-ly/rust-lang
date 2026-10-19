@@ -1,9 +1,9 @@
 # 概念一致性审计报告 (Concept Consistency Audit)
 
-> 生成时间: 2026-10-19T01:27:28.780205
+> 生成时间: 2026-10-19T21:09:42.351096
 > 生成脚本: `scripts/concept_consistency_auditor.py`(扩展后监控 22 个核心概念)
-> 扫描文件数: 794
-> 提取概念定义数: 5422
+> 扫描文件数: 795
+> 提取概念定义数: 5503
 > 跨文件引用数: 346
 
 ## 目录
@@ -69,44 +69,44 @@
 
 | 概念 | 提取次数 | 涉及文件数 |
 |:---|:---|:---|
-| unsafe-UB | 581 | 168 |
-| RPITIT-RTN-TAIT-定义 | 491 | 55 |
+| unsafe-UB | 614 | 177 |
+| RPITIT-RTN-TAIT-定义 | 493 | 57 |
 | effects-system-定义 | 389 | 46 |
-| Pin-自引用 | 287 | 79 |
-| 所有权-Move语义 | 279 | 99 |
-| allocator-api-GlobalAlloc | 247 | 53 |
+| Pin-自引用 | 293 | 79 |
+| 所有权-Move语义 | 281 | 101 |
+| allocator-api-GlobalAlloc | 253 | 55 |
 | Pin-投影-结构 | 190 | 41 |
-| const-trait-impl-定义 | 181 | 35 |
+| const-trait-impl-定义 | 185 | 35 |
 | effects-system-现有 | 174 | 24 |
-| Send+Sync | 149 | 74 |
-| 所有权-作用域绑定 | 138 | 70 |
+| Send+Sync | 150 | 75 |
+| 所有权-作用域绑定 | 145 | 73 |
 | 借用-可变独占 | 121 | 50 |
+| async-Future-状态机 | 118 | 53 |
 | 生命周期-子类型-outlives | 117 | 34 |
-| async-Future-状态机 | 117 | 53 |
 | unsafe-extern-块 | 112 | 21 |
-| 内部可变性-运行时检查 | 109 | 36 |
+| 内部可变性-运行时检查 | 111 | 37 |
 | 变型-定义 | 109 | 24 |
 | let-chains-守卫 | 108 | 38 |
 | unsafe-extern-safe | 105 | 23 |
-| let-chains-链式 | 93 | 11 |
+| let-chains-链式 | 98 | 12 |
 | GAT-async-生命周期 | 92 | 20 |
-| const-trait-impl-效果 | 90 | 21 |
+| const-trait-impl-效果 | 92 | 23 |
 | RPITIT-RTN-TAIT-捕获 | 86 | 28 |
-| unsafe-superpowers-unsafe_op | 78 | 19 |
+| unsafe-superpowers-unsafe_op | 81 | 21 |
 | 变型-规则 | 78 | 20 |
 | GAT-async-边界 | 75 | 20 |
 | 所有权-唯一所有权 | 74 | 39 |
 | unsafe-契约 | 68 | 38 |
-| match-ergonomics-默认绑定 | 60 | 34 |
+| match-ergonomics-默认绑定 | 61 | 35 |
 | 内部可变性-定义 | 54 | 28 |
 | Sync | 52 | 26 |
-| unsafe-不变式 | 46 | 10 |
+| unsafe-不变式 | 48 | 10 |
 | Send/Sync边界-trait对象 | 45 | 15 |
+| 借用-引用有效 | 42 | 26 |
+| Unpin-定义 | 42 | 13 |
 | temporary-scope-临时作用域 | 41 | 14 |
 | async-Future-等价 | 41 | 25 |
 | 生命周期-子类型-static | 41 | 16 |
-| Unpin-定义 | 41 | 12 |
-| 借用-引用有效 | 40 | 25 |
 | unsafe-语义 | 27 | 19 |
 | 生命周期-定义 | 26 | 15 |
 | Send | 24 | 13 |
@@ -123,7 +123,7 @@
 | unsafe-superpowers-五种能力 | 4 | 3 |
 | 内部可变性-UnsafeCell | 2 | 2 |
 | match-ergonomics-引用 | 2 | 2 |
-| temporary-scope-tail | 1 | 1 |
+| temporary-scope-tail | 2 | 2 |
 
 ---
 

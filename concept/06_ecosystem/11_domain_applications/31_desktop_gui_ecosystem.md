@@ -1,5 +1,10 @@
 # Rust 桌面 GUI 生态（canonical 缺口闭环页）
 
+> **EN**: Rust Desktop GUI Ecosystem (canonical gap-closure page)
+> **Bloom 层级**: L3-L5
+> **Summary**: crates.io `gui` 分类（864 crates）的 canonical 生态页：egui/eframe 0.37.0 即时模式一极、Slint 1.18.1 声明式一极、iced 0.14.0 第三极，底层 winit 0.30.13/tao 0.37.1 与 wgpu 30.0.1 双收敛，wry 0.57.0 WebView 混合路线与 nwg 系停更陷阱，附 leptos/dioxus 与桌面 GUI 的边界裁决。
+> **受众**: [入门→进阶]
+> **内容分级**: [专题级]
 > **定位**: W6 裁决产物——本库此前全库检索（`git ls-files concept` 无 gui/egui/slint 页；`egui|Slint|iced` 仅散落在 11 个他页引文）坐实 **desktop-GUI canonical 缺口**，本页为该缺口登记的 canonical 页。
 > **版本事实基线**: crates.io API 2026-10-19 实查；rustc 1.99.1。
 

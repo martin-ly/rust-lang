@@ -9,6 +9,7 @@
 
 > **权威来源**: 本文件已转为重定向 stub。完整概念解释与规范生态映射请见：
 > [`concept/04_formal/15_language_specification/00_language_specification_overview.md`](../../04_formal/15_language_specification/00_language_specification_overview.md)
+> 上游规范工作权威入口：[rust-lang/rust-spec](https://github.com/rust-lang/rust-spec) 与 [Rust Reference](https://doc.rust-lang.org/reference/)。
 
 ## ⚠️ 实测反例：本页为索引页，完整实测见 canonical
 

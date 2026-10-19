@@ -1,5 +1,10 @@
 # chrono vs jiff：两代日期时间库的语义分野（实测对照）
 
+> **EN**: chrono vs jiff: Two Generations of Date-Time Libraries (measured comparison)
+> **Bloom 层级**: L3-L4
+> **Summary**: chrono 0.4.45 与 jiff 0.2.38 的选型对比页（本机 cargo 1.99.1 实测对照）：DST 模糊/缺失时刻的 chrono 三态 LocalResult vs jiff 自动消歧语义分野、jiff 严格 ISO 解析入口、往返偏移锁定消歧，附「chrono 默认选型 / jiff 严格 Temporal 场景」裁决条件。
+> **受众**: [入门→进阶]
+> **内容分级**: [专题级+实测]
 > **定位**: `29_time_and_date_ecosystem.md`（chrono 主生态页）的 W4 裁决子页——jiff 是否值得独立 canonical 页的评估结论：**建本页作为选型对比页**，jiff 不单开生态页（其版本实查锚已登记在 29 页 §二）。
 > **实测环境**: 本机 rustup toolchain 1.99.1-x86_64-pc-windows-msvc，cargo 1.99.1；依赖 `jiff 0.2.38` / `chrono 0.4.45` / `chrono-tz 0.10.4`（crates.io 2026-10-19 实查最新版）；实测日期 2026-10-19。
 

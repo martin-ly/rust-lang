@@ -179,7 +179,7 @@ fn main() { run_case(Box::new(LegacyPricingAcl)); }
 Box<dyn PricingService> 注入成立
 ```
 
-要点：这不是边角案例而是**六边形 + async 的结构性张力**——端口的可替换性依赖 dyn 兼容，而裸 `async fn` 天生 dyn 不兼容。企业 Rust 六边形实现要么上 `async_trait`/`trait-variant`（引入宏依赖，每次调用堆分配装箱），要么端口放弃 async 签名。诊断里的 `= help: only type LegacyPricingAcl implements ... consider using it directly instead` 还会把团队悄悄推向「直接用具体类型」——那正是六边形要消灭的适配器耦合。与 [`concept/03_advanced/01_async/13_async_trait_object_safety.md`](../03_advanced/01_async/13_async_trait_object_safety.md) 的 dyn 兼容章互为实证入口。
+要点：这不是边角案例而是**六边形 + async 的结构性张力**——端口的可替换性依赖 dyn 兼容，而裸 `async fn` 天生 dyn 不兼容。企业 Rust 六边形实现要么上 `async_trait`/`trait-variant`（引入宏依赖，每次调用堆分配装箱），要么端口放弃 async 签名。诊断里的 `= help: only type LegacyPricingAcl implements ... consider using it directly instead` 还会把团队悄悄推向「直接用具体类型」——那正是六边形要消灭的适配器耦合。与 [`concept/03_advanced/01_async/13_async_trait_object_safety.md`](../../03_advanced/01_async/13_async_trait_object_safety.md) 的 dyn 兼容章互为实证入口。
 
 ---
 
