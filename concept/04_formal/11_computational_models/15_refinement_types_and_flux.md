@@ -27,7 +27,7 @@ mindmap
 > **Rust 版本**: 1.97.1+ (Edition 2024)；Flux 工具链需 nightly
 > **Bloom 层级**: L4
 > **权威来源**: 本文件为 `concept/` 权威页。
-> **对齐来源**: [Flux OOPSLA 2023](https://flux-rs.github.io/flux/) · [Liquid Haskell (Vazou et al.)](https://ucsd-progsys.github.io/liquidhaskell-blog/) · [Refinement Types for ML (Freeman & Pfenning)](https://www.cs.cmu.edu/~fp/papers/pldi91.pdf) · [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) · [Flux GitHub](https://github.com/flux-rs/flux) · [Liquid Fixpoint](https://github.com/ucsd-progsys/liquid-fixpoint)
+> **对齐来源**: [Flux OOPSLA 2023](https://flux-rs.github.io/flux/) · [Flux: Liquid Types for Rust (Lehmann et al., PLDI 2023)](https://arxiv.org/abs/2207.04034) · [Flux crate docs](https://docs.rs/flux/) · [Liquid Haskell (Vazou et al.)](https://ucsd-progsys.github.io/liquidhaskell-blog/) · [Refinement Types for ML (Freeman & Pfenning)](https://www.cs.cmu.edu/~fp/papers/pldi91.pdf) · [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) · [Flux GitHub](https://github.com/flux-rs/flux) · [Liquid Fixpoint](https://github.com/ucsd-progsys/liquid-fixpoint)
 > **前置概念**: [`01_type_system.md`](../../01_foundation/02_type_system/01_type_system.md)、[`01_generics.md`](../../02_intermediate/01_generics/01_generics.md)、[`01_traits.md`](../../02_intermediate/00_traits/01_traits.md)、[`06_memory_model.md`](../../03_advanced/02_unsafe/06_memory_model.md)、[`02_interior_mutability.md`](../../02_intermediate/02_memory_management/02_interior_mutability.md)
 > **后置概念**: [`16_rustbelt_ownership_logic.md`](16_rustbelt_ownership_logic.md)、[`17_aeneas_verification_pipeline.md`](17_aeneas_verification_pipeline.md)、[`08_separation_logic_for_rust.md`](08_separation_logic_for_rust.md)
 

@@ -52,5 +52,7 @@ Tauri 栈（tao + wry + tray-icon 0.26.1/2026-10-07 实查）是「WebView 混�
 ## 五、来源索引
 
 - crates.io API `/crates/<name>` 逐 crate 实查（P0，2026-10-19）：egui/eframe/iced/slint/slint-build/dioxus/leptos/yew/trunk/native-windows-gui/tao/wry/tray-icon/winit/wgpu/image/imageproc/opencv/resvg/usvg/makepad-widget。
+- [winit docs.rs](https://docs.rs/winit/latest/winit/)（窗口抽象层 API 口径——事件循环/`WindowAttributes`/跨平台后端清单，「底层 winit 收敛」论断的依据，2026-10-19 核验）。
+- [rustc platform support — wasm32-unknown-unknown](https://doc.rust-lang.org/rustc/platform-support/wasm32-unknown-unknown.html)（P0：官方 tier 2 目标页——yew/trunk 纯 wasm 路线与 GUI-to-wasm 移植线的 rustc 官方依据，2026-10-19 核验）。
 - [emilk/egui](https://github.com/emilk/egui) · [slint-slint/slint](https://slint.dev) · [iced](https://iced.rs)（P1 项目主页）。
 - 交叉页：`02_game_ecs.md`/`05_game_development.md`/`15_game_engine_internals.md`（W7 游戏锚，wgpu/winit 共用）、`05_systems_and_embedded/07_embedded_graphics.md`（嵌入式侧图形）。

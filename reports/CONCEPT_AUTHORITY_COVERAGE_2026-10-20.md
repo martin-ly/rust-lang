@@ -60,3 +60,35 @@
 
 ---
 *由 `scripts/check_concept_authority_coverage.py` 生成*
+
+## 附：crates/*/docs 权威覆盖（--include-crates 扩展）
+
+> 扫描 crates docs md **569**（含嵌套子 crate）；stub/重定向 504，纯索引 README 2，代码清单页 0，quiz 0。
+
+- 非 stub 内容页 **63** 个，有国际权威来源引用 **63** 个（**100.0%**）。
+- 权威域口径为 crates 扩展集（P0/P1/P2 超集 + tokio.rs/rustwasm/rust-embedded/webassembly.org/w3.org/egui/kani/aeneas 等生态权威），见脚本 `CRATES_AUTH_RE`。
+- 分类口径（stub 标记/纯索引 README/代码清单豁免）与 `tmp/crates_docs_authority_full.py` 一致。
+
+| crate | 内容页 | 已覆盖 |
+|:---|---:|---:|
+| c01_ownership_borrow_scope | 5 | 5 |
+| c02_type_system | 4 | 4 |
+| c03_control_fn | 5 | 5 |
+| c04_generic | 2 | 2 |
+| c05_threads | 4 | 4 |
+| c06_async | 4 | 4 |
+| c07_process | 13 | 13 |
+| c08_algorithms | 6 | 6 |
+| c09_design_pattern | 4 | 4 |
+| c10_networks | 10 | 10 |
+| c11_macro_system_proc | 1 | 1 |
+| c12_wasm | 3 | 3 |
+| c13_embedded | 1 | 1 |
+| c17_resolver_v3_public_demo | 1 | 1 |
+
+
+### crates stub canonical 链接健康度
+
+- **dead_canonical = 0** ✅ 所有 stub 中的 `concept/` canonical 链接均解析到真实文件。
+
+登记跳过（非 stub 但不计入内容页分母）: `crates/c15_verification_tools/docs/README.md`（index_readme） · `crates/c16_gui/docs/README.md`（index_readme）

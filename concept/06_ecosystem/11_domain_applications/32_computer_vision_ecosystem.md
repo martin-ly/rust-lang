@@ -8,7 +8,7 @@
 > **定位**: W8 裁决产物——`DOMAIN_ECOSYSTEM_REALIGNMENT_PLAN_2026-10-19` 登记 computer-vision canonical 缺口（全库仅 13_machine_learning_ecosystem 顺带提及 CV 场景，无专页），本页为候选锚（image/imageproc/opencv/resvg）建页闭环裁决。
 > **版本事实基线**: crates.io API 2026-10-19 实查；rustc 1.99.1。
 > **前置概念**: [Rust 桌面 GUI 生态](31_desktop_gui_ecosystem.md) · [机器学习生态](13_machine_learning_ecosystem.md) · [并行算法](25_parallel_algorithms.md)
-> **权威来源**: [crates.io computer-vision 分类](https://crates.io/categories/computer-vision) · [image docs.rs](https://docs.rs/image/) · [imageproc](https://docs.rs/imageproc/) · [opencv rust 绑定](https://docs.rs/opencv/) · [resvg](https://docs.rs/resvg/)
+> **权威来源**: [crates.io computer-vision 分类](https://crates.io/categories/computer-vision) · [image docs.rs](https://docs.rs/image/) · [imageproc](https://docs.rs/imageproc/) · [opencv rust 绑定](https://docs.rs/opencv/) · [resvg](https://docs.rs/resvg/) · [Rustonomicon — FFI（系统绑定路线的 unsafe/ABI 风险官方口径）](https://doc.rust-lang.org/nomicon/ffi.html)
 
 ---
 

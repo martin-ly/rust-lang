@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 797,
-    "generated_at": "2026-10-19T15:10:31.214550+00:00"
+    "total_files": 800,
+    "generated_at": "2026-10-19T17:35:19.160756+00:00"
   },
   "files": [
     {
@@ -37465,7 +37465,7 @@
       "layer": "L3",
       "title": "常见问题 (FAQ) - C11 Macro System",
       "positioning": "",
-      "line_count": 871,
+      "line_count": 990,
       "theorem_chains": [
         {
           "text": "> **定理链**: Common Question ⟹ Mechanism Explanation ⟹ Best Practice",
@@ -37745,6 +37745,38 @@
           "lines": 13,
           "should_fail": false,
           "code_preview": "macro_rules! double_arg {     ($e:expr) => { {         let v = $e;         v + v..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "macro_rules! init {     () => { let count = 1; }; }  fn main() {     init!();   ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "macro_rules! name_of {     ($x:ident) => { stringify!($x) }; }  fn main() {     ..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 9,
+          "should_fail": true,
+          "code_preview": "macro_rules! value {     () => { \"oops\" }; }  fn main() {     let n: i32 = value..."
+        },
+        {
+          "flags": [
+            "compile_fail"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "macro_rules! pair {     ($a:expr, $b:expr) => { ($a, $b) }; }  fn main() {     l..."
         }
       ],
       "sources": [],
@@ -37760,7 +37792,7 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 1,
-      "matrix_rows": 11,
+      "matrix_rows": 25,
       "pre_post": {
         "pre": [
           "[过程宏（Procedural Macro）](../../02_intermediate/06_macros_and_metaprogramming/05_procedural_macros.md) · [宏术语表](06_macro_glossary.md)"
@@ -75846,6 +75878,40 @@
       "templated_chains": 0
     },
     {
+      "path": "G:\\_src\\rust-lang\\concept\\06_ecosystem\\04_web_and_networking\\13_grpc_tonic_prost_ecosystem.md",
+      "layer": "L6",
+      "title": "Rust gRPC / RPC 生态（canonical 缺口闭环页）",
+      "positioning": "W9 建页队列①（提及数最高）——全库 13 页顺带提及 tonic/gRPC 而无专页（01_distributed_systems、03_serde_patterns、01_async 等），本页为闭环裁决产物。",
+      "line_count": 61,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 五、反例"
+        }
+      ],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/01_async/01_async.md",
+        "../../05_comparative/01_systems_languages/03_rust_vs_go.md",
+        "01_distributed_systems.md",
+        "06_websocket_realtime_communication.md",
+        "07_network_protocols.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 12,
+      "pre_post": {
+        "pre": [
+          "[网络协议](07_network_protocols.md) · [分布式系统](01_distributed_systems.md) · [异步 I/O](../../03_advanced/01_async/01_async.md) · [Rust vs Go：gRPC 原生语言对比（L5）](../../05_comparative/01_systems_languages/03_rust_vs_go.md)"
+        ],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "G:\\_src\\rust-lang\\concept\\06_ecosystem\\05_systems_and_embedded\\01_wasi.md",
       "layer": "L6",
       "title": "WASI 与 WebAssembly 组件模型",
@@ -83694,6 +83760,36 @@
       "templated_chains": 0
     },
     {
+      "path": "G:\\_src\\rust-lang\\concept\\06_ecosystem\\05_systems_and_embedded\\57_posix_syscall_crate_ecosystem.md",
+      "layer": "L6",
+      "title": "Rust POSIX/系统调用 crate 生态（canonical 缺口闭环页）",
+      "positioning": "W9 建页队列②——全库 10 页顺带使用 nix/rustix 而无专页（01_process_model_and_lifecycle、07_process_security_and_sandboxing、02_advanced_process_management 等），本页为闭环裁决产物。",
+      "line_count": 52,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../03_advanced/08_process_ipc/01_process_model_and_lifecycle.md",
+        "../../03_advanced/08_process_ipc/07_process_security_and_sandboxing.md",
+        "../../05_comparative/01_systems_languages/06_rust_vs_zig.md",
+        "../04_web_and_networking/12_container_build_and_delivery_pipeline.md",
+        "56_rust_for_linux_kernel_module_basics.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 6,
+      "pre_post": {
+        "pre": [
+          "[进程模型与生命周期](../../03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) · [进程安全与沙箱](../../03_advanced/08_process_ipc/07_process_security_and_sandboxing.md) · [Rust vs Zig：系统级 ABI 对比（L5）](../../05_comparative/01_systems_languages/06_rust_vs_zig.md)"
+        ],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "G:\\_src\\rust-lang\\concept\\06_ecosystem\\06_data_and_distributed\\01_application_domains.md",
       "layer": "L6",
       "title": "Application Domains（软件工程应用主题）",
@@ -90533,7 +90629,7 @@
       "layer": "L6",
       "title": "Rust 日期与时间生态（chrono 系）",
       "positioning": "",
-      "line_count": 118,
+      "line_count": 119,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -90562,6 +90658,7 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../14_enterprise_architecture/09_observability_and_sre_patterns.md"
       ],
       "transitions": 0,
@@ -90570,7 +90667,7 @@
       "matrix_rows": 4,
       "pre_post": {
         "pre": [
-          "[标准库时间原语](../../04_formal/09_system_semantics)"
+          "[标准库时间原语](../../04_formal/09_system_semantics) · [系统语言时间处理对比（L5）](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)"
         ],
         "post": []
       },
@@ -90582,7 +90679,7 @@
       "layer": "L6",
       "title": "chrono vs jiff：两代日期时间库的语义分野（实测对照）",
       "positioning": "`29_time_and_date_ecosystem.md`（chrono 主生态页）的 W4 裁决子页——jiff 是否值得独立 canonical 页的评估结论：**建本页作为选型对比页**，jiff 不单开生态页（其版本实查锚已登记在 29 页 §二）。",
-      "line_count": 50,
+      "line_count": 51,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -90604,7 +90701,7 @@
       "layer": "L6",
       "title": "Rust 桌面 GUI 生态（canonical 缺口闭环页）",
       "positioning": "W6 裁决产物——本库此前全库检索（`git ls-files concept` 无 gui/egui/slint 页；`egui|Slint|iced` 仅散落在 11 个他页引文）坐实 **desktop-GUI canonical 缺口**，本页为该缺口登记的 canonical 页。",
-      "line_count": 57,
+      "line_count": 59,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [],
@@ -90648,6 +90745,36 @@
       "pre_post": {
         "pre": [
           "[Rust 桌面 GUI 生态](31_desktop_gui_ecosystem.md) · [机器学习生态](13_machine_learning_ecosystem.md) · [并行算法](25_parallel_algorithms.md)"
+        ],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "G:\\_src\\rust-lang\\concept\\06_ecosystem\\11_domain_applications\\33_audio_dsp_ecosystem.md",
+      "layer": "L6",
+      "title": "Rust 音频与 DSP 生态（canonical 缺口闭环页）",
+      "positioning": "W9 建页队列③（最后一项）——全库仅 01_application_domains 与 05_game_development 顺带列出 rodio/cpal/symphonia，无专页；本页为闭环裁决产物。",
+      "line_count": 66,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../05_comparative/02_managed_languages/02_rust_vs_python.md",
+        "05_game_development.md",
+        "13_machine_learning_ecosystem.md",
+        "25_parallel_algorithms.md",
+        "32_computer_vision_ecosystem.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 11,
+      "pre_post": {
+        "pre": [
+          "[游戏开发与音频集成](05_game_development.md) · [并行算法](25_parallel_algorithms.md) · [Rust vs Python：科学计算与音频栈对比（L5）](../../05_comparative/02_managed_languages/02_rust_vs_python.md) · [计算机视觉生态（信号处理同宗）](32_computer_vision_ecosystem.md)"
         ],
         "post": []
       },
