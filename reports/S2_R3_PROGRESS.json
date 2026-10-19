@@ -590,6 +590,14 @@
    "pages": "新建 11_domain_applications/29_time_and_date_ecosystem.md (canonical专页, SUMMARY.md 已挂链) + 01_cargo/03 resolver页版本实查锚 + 01_cargo/06 pin勘误HTML注",
    "evidence": "cargo add 实测 Cargo.lock: chrono 0.4.45/chrono-tz 0.10.4; cargo run EXIT0 实测: Asia/Shanghai 2026恒CST+08:00 / 1987-05-10 CDT+09:00(中国DST 1986-91 IANA记录) / NY fall-back Ambiguous -14400 EDT vs -18000 EST / spring-forward None; rustc --extern chrono 实测 E0277 x2 (NaiveDate+NaiveDate, NaiveDateTime+DateTime<Utc>); chrono/time 下载 7.77亿/8.64亿实查; jiff候选缺口登记",
    "gate": "strict compile_fail 1341/1341 should_panic 10/10 EXIT0 (1651块复跑)"
+  },
+  {
+   "batch": "W2-W4",
+   "date": "2026-10-19",
+   "track": "对称差缺口清偿(金融引用/IoT SDK/jiff)",
+   "pages": "14_enterprise_architecture/16 金融一手引用补链 + 14_enterprise_architecture/17 IoT SDK实查补链 + 11_domain_applications/13 & 06_data_and_distributed/07 candle组件锚 + 29页 jiff/aws-iot实查登记与compile_fail标注修正",
+   "evidence": "jiff 0.2.38(2026-10-06, 2.32亿累计/8789万近期, BurntSushi, date-and-time+no-std, Temporal API)实查; aws-iot-device-sdk 0.0.6 unofficial停更(IoT无canonical缺口闭环为生态事实); NautilusTrader官网P0 + efinancialcareers一手访谈P1 + NexusTrade 2年重写复盘P1; SEO农场页污染勘误方法论登记(版本与实查冲突一律P3); 29页 compile_fail 按仓库惯例去E码标注+rustc1.99.1 --extern实测E0277x2原文入页; chrono probe run实测输出全量到手(CST28800/1987CDT32400/NY Ambiguous-14400vs-18000/spring None)",
+   "gate": "strict candidate 300/300 compile_fail 1343/1343 should_panic 10/10 EXIT0 (1653块)"
   }
  ]
 }

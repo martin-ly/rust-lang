@@ -408,3 +408,10 @@ mindmap
 ## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
 
 金融服务案例栈：tokio **1.53.1**（2.16 亿近期下载）· axum **0.8.9**（1.11 亿近期下载）· tracing **0.1.44**（1.80 亿近期下载）· tower **0.5.3**（1.62 亿近期下载）· sqlx **0.9.0**（3,447 万近期下载）——crates.io API 2026-10-19 实查，https://crates.io/crates/{tokio,axum,tracing,tower,sqlx}。canonical 缺口登记：金融核心交易系统公开 Rust 案例以内部系统为主（JPMorgan/ABN AMRO 用 Rust 的公开报道为二级来源），P0 级一手引用待 D 合规批后续补。
+
+## 金融一手引用补链（W2，2026-10-19 权威检索）
+
+- **P0 — NautilusTrader**（https://nautilustrader.io/）：开源算法交易引擎官方口径「The fastest, most reliable open-source trading engine — Rust-native, deterministic event-driven core with nanosecond resolution, research-to-live parity」，官网统计口径 30,000+（星标）/ 2.9M+（下载量级）/ 6,000+（集成计数）——Rust 核心+Python 策略 API 的双语言架构是金融开源侧最活跃的具名 canonical 项目。
+- **P1 — eFinancialCareers 一手访谈**（https://www.efinancialcareers.com/news/rust-vs-c-plus-plus-financial-services-low-latency）：某大型银行 Rust 工程师 Steve Taylor 直接引语（低延迟 C++ 交易系统在改写中；"turns a very difficult to trace bugs into compile time bugs"），并含 Google 工程总监 Lars Bergstrom 的 2x 维护effort引述——银行侧采用为一手从业者口径而非二手博客转述。
+- **P1 — Austin Starks/NexusTrade 双阶段自述**（https://nexustrade.io/blog/i-spent-2-years-rebuilding-my-algorithmic-trading-platform-in-rust-i-have-noregrets-20241205）：TypeScript→Rust 全量重写的一手工程复盘（1000x backtest 提速、含反悔→转变的完整口径），是零售/个人量化侧最完整的一手案例。
+- **检索卫生勘误（对称差方法论登记）**：本轮检索出现多个 SEO 农场型页面（伪版本叙事如 "Rust 1.90 发布 2026-01 / Tokio 2.3 / Wasmtime 18.0" 与本机实查 stable 1.99.1、tokio 1.53.1、wasmtime 49.0.3 直接矛盾，并引用不可核验的 "Gartner 2025 fintech report" 数据表）——金融 Rust 主题 2025-2026 网络内容污染严重，**凡版本事实与 crates.io/releases.rs 实查冲突的来源一律判为 P3 不可采信**；本页既有分析性数字若未能在 P0/P1 复现应视为待核查。

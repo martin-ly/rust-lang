@@ -30,19 +30,38 @@ chrono 依赖链历史包袱（`why-chrono` 议题，chrono#426 系）：依赖 
 
 `NaiveDate`/`NaiveTime`/`NaiveDateTime` 无时区语义；`DateTime<Tz>`/`DateTime<FixedOffset>` 带 offset。类型系统禁止二者隐式混合——**类型即文档**，这是 chrono 相对 C `time_t` 混用传统的核心工程价值。
 
-```rust
-// compile_fail
+```rust,compile_fail
+use chrono::{NaiveDate, Utc};
+fn main() {
+    let nd1 = NaiveDate::from_ymd_opt(2026, 10, 19).unwrap();
+    let nd2 = NaiveDate::from_ymd_opt(2026, 10, 26).unwrap();
+    let _ = nd1 + nd2; // E0277: 两个日期不能相加; NaiveDate 只可加 TimeDelta/Months/Days
+}
+```
+
+```rust,compile_fail
 use chrono::{NaiveDate, Utc};
 fn main() {
     let nd = NaiveDate::from_ymd_opt(2026, 10, 19).unwrap();
     let now = Utc::now();
-    let _ = now.date_naive() + nd; // E0277: NaiveDate 只可加 TimeDelta/Months/Days
     let mixed = nd.and_hms_opt(0, 0, 0).unwrap() + now; // E0277: NaiveDateTime + DateTime<Utc> 无实现
     println!("{:?}", mixed);
 }
 ```
 
-本机 rustc 1.99.1 + chrono 0.4.45 实测（`--extern chrono=libchrono-*.rlib`）EXIT 1，两条 E0277 原文要点：
+对照可编译正例（chrono 0.4.45，本机 cargo 实测通过）：
+
+```rust
+use chrono::{NaiveDate, TimeDelta, Utc};
+fn main() {
+    let nd = NaiveDate::from_ymd_opt(2026, 10, 19).unwrap();
+    let later = nd + TimeDelta::days(7); // naive + delta 合法
+    let aware = Utc::now();
+    println!("{} / aware offset={}", later, aware.offset());
+}
+```
+
+本机 rustc 1.99.1 (58cf8f9c3 2026-10-13) + `--extern chrono=libchrono(0.4.45)` 全编译实测（EXIT 1），两条 E0277 原文要点：
 
 ```text
 error[E0277]: cannot add `NaiveDate` to `NaiveDate`
@@ -85,7 +104,9 @@ naive=2026-10-19 weekday=Mon
 ## 六、canonical 缺口登记（五要素④）
 
 - 库内此前 54 页顺带提及 chrono 而 0 专页 → 本页为 canonical 填补（对称差 T1 条目 `date-and-time(935)` 已闭环）。
-- 未来候选子页：日历/业务时间（workday-calc 类 crate 实查待轮）、`jiff`（BurntSushi 的新一代日期时间库，2025-2026 上升势头，crates.io 版本实查待轮）。
+- **jiff（crates.io 实查 2026-10-19）**：**0.2.38**（2026-10-06 发布，0.2 线 70 个版本），累计 **2.32 亿** / 近期 **8,789 万** 下载，BurntSushi（Andrew Gallant）维护，categories = `date-and-time + no-std`，Temporal 风格 API（"jump into the pit of success"），特性体系含 `tz-system/tz-fat/static-tz/wasm-bindgen(js)`。近期下载已达 chrono 同期量级的一半，是 date-and-time 分类 2025-2026 最强上升者；chrono vs jiff 选型对比页登记为候选子页（W4 后续）。
+- `aws-iot-device-sdk` 实查：0.0.6（2022-09 最后更新，累计 8,944 下载，标注 unofficial）——印证 D3 登记的「IoT SDK 无 canonical crate」为**生态事实**而非库内缺口。
+- 未来候选子页：日历/业务时间（workday-calc 类 crate 实查待轮）。
 
 ## 七、权威来源索引（P0/P1/P2）
 

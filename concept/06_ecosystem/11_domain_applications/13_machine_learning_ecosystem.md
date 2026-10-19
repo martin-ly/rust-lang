@@ -1201,3 +1201,5 @@ mindmap
 ## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
 
 candle-core **0.11.0**（HuggingFace，1,015 万累计/387 万近期下载，https://github.com/huggingface/candle）· burn **0.22.0**（tracel-ai，2026-10-06 最新发布，科学+wasm+no-std+embedded 四分类，https://github.com/tracel-ai/burn）· linfa **0.8.1**（rust-ml 组织，2025-12 仍活跃，https://github.com/rust-ml/linfa）· tch **0.26.0**（libtorch 绑定，836 万累计/252 万近期下载）——实查 2026-10-19。对称差勘误：库内 tch 相关历史版本叙述按 0.26.0 当前线核查；candle 0.11 线为 2026 当前主干。
+
+**版本实查锚补充（2026-10-19，crates.io API 实测）**：candle 家族组件版本一致口径：`candle-core 0.11.0` / `candle-nn 0.11.0` / `candle-transformers 0.11.0`（HuggingFace 同步发布，MIT OR Apache-2.0，feature 门 cuda/cudnn/metal/accelerate/mkl/flash-attn——CPU-first 默认无 GPU 依赖是其差异化设计实据）。

@@ -680,3 +680,5 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「Rust 数据科学与科学计算」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+
+**版本实查锚补充（2026-10-19）**：candle-transformers 0.11.0 feature 体系（cuda/cudnn/metal/accelerate/mkl/flash-attn）实测口径——Rust 数据科学/ML 推理后端的硬件适配矩阵以此为准（crates.io API 实查）。

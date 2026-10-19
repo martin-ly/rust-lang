@@ -386,3 +386,5 @@ mindmap
 ## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
 
 IoT/Edge 案例栈：tokio **1.53.1**（2.16 亿近期下载）· axum **0.8.9**（1.11 亿近期下载）· tracing **0.1.44**（1.80 亿近期下载）· tower **0.5.3**（1.62 亿近期下载）· sqlx **0.9.0**（3,447 万近期下载）——crates.io API 2026-10-19 实查，https://crates.io/crates/{tokio,axum,tracing,tower,sqlx}（IoT 侧 tokio-util/no_std 组合）。工业案例：AWS Greengrass Rust SDK（https://github.com/aws/aws-iot-device-sdk-rusts3 系组件族待实查登记）。canonical 缺口：IoT 设备 SDK 无 crates.io canonical 分类，登记跟踪。
+
+**IoT SDK 实查补链（2026-10-19，crates.io API）**：`aws-iot-device-sdk 0.0.6`（累计 8,944 下载，2022-09 后停更，作者自标 unofficial）——AWS 官方 IoT/云 Rust 支持实际走 smithy 生成的 `aws-sdk-rust` 路径；「IoT SDK 无 canonical crate」缺口登记获实测佐证，闭环为生态事实口径（本页 IoT 部分此前为待核查分析性叙述）。
