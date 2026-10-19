@@ -699,6 +699,85 @@ impl Config {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+### 反例 1：反命题 2「所有函数都应泛型化」的机器代价——每个调用点类型一份单态化副本
+
+「接收参数用 `impl Into<T>`」被无差别套用时，代价在二进制尺寸里可直接称量。同一份 `greet<S: Into<String>>` 源码，分别实例化 1 次与 30 次（`T0..T29` 各自实现 `From<Ti> for String`），`rustc -O` 本机实测：
+
+```text
+1 实例 exe  = 123904 bytes
+30 实例 exe = 129536 bytes
+膨胀 = 5632 bytes（每个额外单态化实例平均 ~194 bytes，这还只是 3 行函数体）
+```
+
+单态化副本数量由**调用点类型集合**决定，不由函数本身决定——库作者写一个「灵活」的泛型公开函数，等于把复制代码的成本转嫁给所有下游 crate。另一个方向的反证：本机让 4 个 `greet` 实例（`&str`/`String`/`Box<str>`/`Cow`）经函数指针取址对比，debug 与 `-O` 构建下四个入口地址**完全相同**（`0x936cdbfbd7`×4）——薄封装 + 相同后端代码时链接器的 identical-code-folding 会把可折叠副本合并。结论精确化为：泛型参数灵活性在**代码形状相同时近乎免费**（ICF 兜底），在**类型驱动行为差异时按调用点类型数付费**。反命题 2 的「最大化」错在把成本函数当成了常数。
+
+顺带一个泛型边界彩蛋：`greet::<&str>` 直接赋给 `fn(&str) -> String` 触发 **E0308**：
+
+```text
+error[E0308]: mismatched types
+  = note: expected fn pointer `for<'a> fn(&'a _) -> String`
+                found fn item `fn(&_) -> String {greet::<&str>}`
+```
+
+泛型 item 与高阶 fn pointer 的 lifetime 匹配不是同一回事——「泛型更灵活」连隐式 coercion 这一步都不是白拿的。
+
+### 反例 2：C-ASREF 的双刃——同一类型实现两个 `AsRef` 后裸 `as_ref()` 歧义（E0283）
+
+`AsRef<Path>` 是惯用法；但当你的类型同时符合两条惯用法（既像路径又像字符串）时，调用侧的推断会塌：
+
+```rust,compile_fail
+use std::path::Path;
+pub struct Name(String);
+impl AsRef<Path> for Name { fn as_ref(&self) -> &Path { Path::new(&self.0) } }
+impl AsRef<str> for Name { fn as_ref(&self) -> &str { &self.0 } }
+fn takes_path<P: AsRef<Path>>(p: P) { let _: &Path = p.as_ref(); }
+fn main() {
+    let n = Name(String::from("a.txt"));
+    takes_path(&n);              // OK: P 的 bound 提供了推断锚点
+    let s = n.as_ref();          // ❌ 歧义：as_ref() 该选哪个 trait?
+    println!("{s}");
+}
+```
+
+**实测输出（E0283）**：
+
+```text
+error[E0283]: type annotations needed for `&_`
+ --> src/main.rs:9:9
+  |
+9 |     let s = n.as_ref();
+  |         ^     ------ type must be known at this point
+  |
+note: multiple `impl`s satisfying `Name: AsRef<_>` found
+ --> src/main.rs:3:1
+  |
+3 | impl AsRef<Path> for Name { ... }
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^
+4 | impl AsRef<str> for Name { ... }
+  | ^^^^^^^^^^^^^^^^^^^^^^^^
+```
+
+注意诊断质量：rustc 把**两个候选 impl 的源码位置都列出来**，这是「实现太多 trait」这种「好事过头」少见的机器级反噬。对照实验：当调用点带 bound（`takes_path`/`takes_str`）时同一类型两条 `AsRef` 全绿运行（`path 视图: "a.txt"` / `str 视图: a.txt`）——歧义只发生在**目标类型不可推断的裸调用**。API 设计含义：给用户类型挂多个 `AsRef` 前，先给用户一个明确命名的方法（`as_path()`/`as_str()`）；`AsRef` 只留给泛型参数位。
+
+### 反例 3：C-DEBUG 与 C-COMMON-NAME 的组合泄漏面（与 43_rejection 页实测 2 同族的最小 API 版）
+
+本页 §三「为自定义类型实现 `Debug`」是普遍推荐。当类型同时承载敏感字段时，遵循该推荐的 `{:?}` 日志惯例会把字段原样公开——本机最小组合（详见 [43_rejection_type_pattern.md 实测反例](43_rejection_type_pattern.md) 的 E0277 半面对照）：
+
+```rust
+#[derive(Debug)]
+pub struct LoginRejected { pub user_input: String }
+fn main() {
+    let e = LoginRejected { user_input: "token=abc123secret".into() };
+    println!("error: {e:?}");
+}
+```
+
+实跑输出（exit 0）：`error: LoginRejected { user_input: "token=abc123secret" }`。Guidelines 的三条推荐（实现 Debug、错误保留原始上下文、`{e:?}` 记录）单独看都对，串联起来是合规事故的标准配方。API Guidelines 不是逐条打勾清单：§〇 全景图里「预期行为」一节的内部一致性需要设计者在敏感类型上刻意打破（手写脱敏 `Debug`），这属于 Guidelines 自己承认的「形式契约」层的判断，而不是可以机械执行的样式表。
+
+---
+
 ## 七、反命题与决策树
 
 ### 反命题 1: "API Guidelines 只是风格建议，不影响语义"

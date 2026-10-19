@@ -348,6 +348,99 @@ unsafe fn leak() {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+§九 三个陷阱各补一条机器证据，把「定性警告」变成可复现数字。
+
+### 实测 1（9.1 循环引用）：`Drop` 计数器证明环内两个节点的析构函数**一次都没跑**
+
+§9.1 示例加 `impl Drop` 计数（最直接的泄漏判据不是内存占用，而是 RAII 承诺的析构是否兑现）：
+
+```rust
+use std::cell::RefCell;
+use std::rc::{Rc, Weak};
+use std::sync::atomic::{AtomicUsize, Ordering};
+static DROP_COUNT: AtomicUsize = AtomicUsize::new(0);
+struct Node { val: u64, next: RefCell<Option<Rc<Node>>> }
+impl Drop for Node { fn drop(&mut self) { DROP_COUNT.fetch_add(1, Ordering::Relaxed); } }
+struct WNode { val: u64, next: RefCell<Option<Weak<WNode>>> }
+impl Drop for WNode { fn drop(&mut self) { DROP_COUNT.fetch_add(1, Ordering::Relaxed); } }
+fn main() {
+    {
+        let a = Rc::new(Node { val: 1, next: RefCell::new(None) });
+        let b = Rc::new(Node { val: 2, next: RefCell::new(Some(a.clone())) });
+        *a.next.borrow_mut() = Some(b.clone());
+        println!("Rc 环: strong_count a={} b={}", Rc::strong_count(&a), Rc::strong_count(&b));
+    }
+    println!("Rc 环出作用域后 Drop 运行次数 = {}", DROP_COUNT.load(Ordering::Relaxed));
+    DROP_COUNT.store(0, Ordering::Relaxed);
+    {
+        let x = Rc::new(WNode { val: 1, next: RefCell::new(None) });
+        let y = Rc::new(WNode { val: 2, next: RefCell::new(Some(Rc::downgrade(&x))) });
+        *x.next.borrow_mut() = Some(Rc::downgrade(&y));
+    }
+    println!("Weak 断环出作用域后 Drop 运行次数 = {}", DROP_COUNT.load(Ordering::Relaxed));
+}
+```
+
+实编译通过，实跑输出（exit 0）：
+
+```text
+Rc 环: strong_count a=2 b=2
+Rc 环出作用域后 Drop 运行次数 = 0
+Weak 断环出作用域后 Drop 运行次数 = 2
+```
+
+`strong_count` 停在 2 说明计数永不归零、`Drop` 从未被调用——**RAII 的「确定性析构」保证在环面前完全失效**：不是「析构延迟」，是一次都不跑。同型的 `Weak` 版本 Drop 计数 = 2，两个节点都正常释放。这组数字也是 §九 结论「RAII 不覆盖 Rc 环」的最短证明路径：任何带 `Rc` 的服务图（缓存、观察者、父子双向指针）上线前都值得挂一次这种 Drop 计数器冒烟测试。
+
+### 实测 2（9.3 Drop 内 panic）：unwind 中再 panic 直接 abort——进程退出码 127，`catch_unwind` 无从介入
+
+```rust,should_panic
+struct BoomA; impl Drop for BoomA { fn drop(&mut self) { panic!("Drop 内 panic"); } }
+fn main() { let _a = BoomA; panic!("first panic during unwind drops _a"); }
+```
+
+实跑（stderr 截选，去掉 backtrace 中段）：
+
+```text
+thread 'main' (29720) panicked at src/main.rs:2:5:
+first panic during unwind drops _a
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'main' (29720) panicked at src/main.rs:1:42:
+Drop 内 panic
+stack backtrace:
+   0: ... std::panicking::panic_with_hook ...
+```
+
+进程 shell 退出码实测 **127**（abort；普通单次 panic 是 101）。更严的对照：同样的双 panic 包进 `std::panic::catch_unwind`（`--test` harness 变体）依然 abort——测试进程跑到第二个测试时 shell 退出码仍是 **127**，`catch_unwind` 只接住了第一个 panic，unwind 中途 Drop 再 panic 时运行时直接终止进程，任何用户层捕获都在 abort 之前失效。对照实验：单次「纯 Drop 内 panic」（无外层 unwind 竞争）能被 `catch_unwind` 捕获（`ok=false` 但进程 exit 0 存活）。所以 §9.3 的工程含义是——**Drop 里 panic 的危险等级取决于是否有别的 panic 在飞行**：平时只是可捕获的异常，一旦与 panic 路径叠加就是整进程 abort。库代码里 Drop 只允许两种动作：不失败的操作，或 `let _ =` + 日志。
+
+### 实测 3（9.3 Drop 内吞错）：Drop 里的 `write_all` 确实落盘成功，但这是运气——失败分支完全无报告通道
+
+```rust
+use std::fs::File;
+use std::io::Write;
+struct FailingWriter { f: File }
+impl Drop for FailingWriter {
+    fn drop(&mut self) { let _ = self.f.write_all(b"tail"); } // 吞错版收尾
+}
+fn main() {
+    let path = std::env::temp_dir().join("s2r3_w10c.bin");
+    {
+        let _w = FailingWriter { f: File::create(&path).unwrap() };
+    } // Drop 内 write_all：成功与否无人知晓
+    println!("Drop 内 write 落盘字节数 = {}", std::fs::metadata(&path).unwrap().len());
+    let mut f2 = File::create(&path).unwrap();
+    f2.write_all(b"visible").unwrap();
+    f2.flush().unwrap(); // 显式 flush：错误走 Result，可测可报
+    println!("显式 flush 后字节数 = {}", std::fs::metadata(&path).unwrap().len());
+}
+```
+
+实跑输出（exit 0）：`Drop 内 write 落盘字节数 = 4`、`显式 flush 后字节数 = 7`。本例 Drop 写入碰巧成功，但 `let _ =` 已经把失败面整体删除：同样的代码在磁盘满/NFS 断开时静默截断数据，与成功路径**在观测上不可区分**。这正落在 §9.3 的处方上：可失败的收尾必须有显式 `close()`/`flush()` 返回 `Result`（第二段代码），Drop 只兜「丢了也不致命」的残余。
+
+---
+
 ## 九、RAII 与错误处理的协同
 
 `?` 运算符与 RAII 天然协同：函数中任意 early return 都会触发已创建守卫的 `Drop`。

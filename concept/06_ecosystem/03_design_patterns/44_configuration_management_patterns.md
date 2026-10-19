@@ -844,6 +844,72 @@ password = "super-secret-123"
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+§六「运行时配置与编译期配置混淆」是本页最抽象的一条反例。本机用三个最小实验把混淆的三种失效形态各钉死一次。
+
+### 实测 1：`env!` 变量缺失是**编译期**失败，且 rustc 的 help 直接教你混淆后的替代品
+
+```rust,compile_fail
+fn main() {
+    let db = env!("S2R3_DEFINITELY_NOT_SET_DB_URL");
+    println!("{db}");
+}
+```
+
+实编译输出（无变量环境，注意此错误无 E 编号）：
+
+```text
+error: environment variable `S2R3_DEFINITELY_NOT_SET_DB_URL` not defined at compile time
+ --> src/main.rs:2:14
+  |
+2 |     let db = env!("S2R3_DEFINITELY_NOT_SET_DB_URL");
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = help: use `std::env::var("S2R3_DEFINITELY_NOT_SET_DB_URL")` to read the variable at run time
+```
+
+诊断本身就在指路：`env!`（编译期）与 `std::env::var`（运行时）的界线由 rustc 亲口给出。开发者把「本该运行时的配置」写成 `env!` 时，CI 里缺变量的构建会直接挂——这其实是最良性的一类混淆（fail fast）；恶性形态见实测 2/3。
+
+### 实测 2：`env!` 把值**焊进二进制**——编译后改环境变量毫无作用（混淆的核心实锤）
+
+```rust
+fn main() {
+    let mode = env!("S2R3_MODE");
+    println!("env! 固化值: {mode}");
+}
+```
+
+实操作序列：编译前 `export S2R3_MODE=prod` → `rustc` 编译 → 编译后 `export S2R3_MODE=dev` → 运行同一 exe。实跑输出：
+
+```text
+env! 固化值: prod
+```
+
+**运行时明明设的是 `dev`，二进制打印 `prod`**。没有任何警告、错误，或任何可探测的差异——`env!` 展开成字符串字面量，原变量与程序从此再无关系。「为什么改了环境变量不生效」类事故的机器解释就是这一行：值不是被读取的，是被铸造的。要运行时可调必须用 `std::env::var`（返回 `Result`），要构建期注入必须让 CI 在**编译命令的同一进程环境**里 export（如 `build.rs` 或 `cargo rustc --`）。
+
+### 实测 3：`option_env!` 缺失时静默走 `None` 分支——「本地默认值」无声混进生产构建
+
+§2.3 的推荐写法 `option_env!("VERGEN_GIT_SHA")` 兜底 `"0.0.0-local"`，本机复刻（变量缺失时编译）：
+
+```rust
+pub const VERSION: &str = match option_env!("S2R3_MAYBE_GIT_SHA") {
+    Some(v) => v,
+    None => "unknown-local",
+};
+fn main() { println!("发布二进制自报版本: {VERSION}"); }
+```
+
+编译与实跑均 exit 0，输出：
+
+```text
+发布二进制自报版本: unknown-local
+```
+
+一次「忘了注入 git hash 的 CI 构建」产出的是一个**完全合法、全绿、自报版本为 unknown-local 的生产二进制**。事故事后无从追责到「哪次构建缺了注入」，因为构建日志与二进制都不区分「有意本地构建」与「CI 漏注入」。修正模式：CI 断言注入变量存在（`test -n "$VERGEN_GIT_SHA"` 前置步骤），或兜底值改为编译失败路径（用 `env!` 而非 `option_env!`）配合本地专用 feature，让「缺失」在正确的环境里是硬错误而不是默认值。
+
+---
+
 ## 七、决策树：选择配置管理方案
 
 ```mermaid

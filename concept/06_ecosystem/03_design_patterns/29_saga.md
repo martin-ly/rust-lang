@@ -140,6 +140,98 @@ async fn saga_step() {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+### 反例 1：§3.1 骨架的 `let _ = (s.compensate)(&prev);` 静默吞掉补偿失败——实跑演示「已扣款未退款」状态
+
+把 §3.1 骨架原样实编译，注入一个「补偿自身失败」的步骤（真实世界里 refund 网关超时极常见）：
+
+```rust
+use std::collections::VecDeque;
+pub struct SagaStep<T, E> {
+    name: &'static str,
+    action: Box<dyn Fn(&T) -> Result<T, E> + Send + Sync>,
+    compensate: Box<dyn Fn(&T) -> Result<(), E> + Send + Sync>,
+}
+pub struct Saga<T, E> { steps: Vec<SagaStep<T, E>> }
+impl<T: Clone, E: std::fmt::Debug> Saga<T, E> {
+    pub fn new() -> Self { Self { steps: vec![] } }
+    pub fn step(mut self, step: SagaStep<T, E>) -> Self { self.steps.push(step); self }
+    pub fn execute(&self, initial: T) -> Result<T, E> {
+        let mut state = initial;
+        let mut completed: VecDeque<(&SagaStep<T, E>, T)> = VecDeque::new();
+        for step in &self.steps {
+            match (step.action)(&state) {
+                Ok(new_state) => { completed.push_back((step, state)); state = new_state; }
+                Err(e) => {
+                    while let Some((s, prev)) = completed.pop_back() {
+                        let _ = (s.compensate)(&prev);   // 页内骨架原样
+                    }
+                    return Err(e);
+                }
+            }
+        }
+        Ok(state)
+    }
+}
+#[derive(Clone, Debug)]
+struct Order { reserved: bool, charged: bool }
+fn main() {
+    let saga: Saga<Order, String> = Saga::new()
+        .step(SagaStep { name: "reserve",
+            action: Box::new(|o: &Order| Ok(Order { reserved: true, ..o.clone() })),
+            compensate: Box::new(|_o: &Order| { println!("  释放库存 OK"); Ok(()) }) })
+        .step(SagaStep { name: "charge",
+            action: Box::new(|o: &Order| Ok(Order { charged: true, ..o.clone() })),
+            compensate: Box::new(|_o: &Order| Err("refund gateway timeout".to_string())) }) // 补偿自己失败
+        .step(SagaStep { name: "ship",
+            action: Box::new(|_o: &Order| Err("warehouse down".to_string())),
+            compensate: Box::new(|_o: &Order| Ok(())) });
+    let r = saga.execute(Order { reserved: false, charged: false });
+    println!("saga 返回: {r:?}");
+}
+```
+
+实编译通过，实跑输出（exit 0）：
+
+```text
+  释放库存 OK
+saga 返回: Err("warehouse down")
+```
+
+程序视角一切「正常」：库存释放成功、`Err` 正确传播、没有 panic。但 `charge` 的 refund 补偿返回的 `Err("refund gateway timeout")` 被 `let _ =` 当场丢弃——**调用方拿到的唯一错误是 warehouse down，永远不知道钱还挂在用户账上**。Saga 模式的全部价值在补偿链；补偿链里的 `let _` 正是 §五「无法补偿的操作」边界条目在最常见实现里的自毁开关。修正方向：补偿失败必须落盘（outbox/死信表 + 人工对账队列），至少聚合进返回错误（`CompensationFailed { trigger, compensations }`）。
+
+### 反例 2：骨架直接实例化时闭包参数推不出类型（E0282）——`Box<dyn Fn(&T)>` 字段无推断锚点
+
+§3.1 骨架看着能直接用，实际写一个最小装配就撞墙：
+
+```rust,compile_fail
+pub struct SagaStep<T, E> {
+    action: Box<dyn Fn(&T) -> Result<T, E> + Send + Sync>,
+}
+fn main() {
+    let s = SagaStep { action: Box::new(|o| Ok(o.clone())) }; // E0282
+}
+```
+
+**实测输出（E0282）**：
+
+```text
+error[E0282]: type annotations needed for `&_`
+ --> src/main.rs:5:42
+  |
+5 |     let s = SagaStep { action: Box::new(|o| Ok(o.clone())) };
+  |                                          ^     - type must be known at this point
+  |
+help: consider giving this closure parameter an explicit type, where the type for type parameter `T` is specified
+  |
+5 |     let s = SagaStep { action: Box::new(|o: &T| Ok(o.clone())) };
+```
+
+原因：`T` 只出现在 `Box` 内部（不是任何字段的直接类型），构造点没有其它锚点能让推断器反推闭包参数。真实装配代码里 `T` 通常被 `Saga<T,E>` 变量标注钉死（反例 1 的 `let saga: Saga<Order, String>` 就没触发），所以这个坑专挑「先写步骤工厂再拼容器」的写法。两种出路：装配点显式标注容器类型，或让 `step()` 收 `impl Fn(&T) -> ...` 泛型参数（推断从调用方回灌）。
+
+---
+
 ## 六、决策树
 
 ```mermaid

@@ -467,6 +467,81 @@ pub enum SubscribeRejection {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+### 反例 1：「审计保留原值」的 Rejection 常故意不 derive Debug——结果被 `unwrap` 习惯写法当场编译拒绝（E0277）
+
+§2.2 推荐 Rejection 保留原始输入供审计。一个合规敏感的项目会刻意**不给** Rejection 实现 `Debug`（防止原始请求被 `{:?}` 顺手打进日志），但这与测试代码里的 `unwrap` 冲突：
+
+```rust,compile_fail
+pub struct Rejection<T>(pub T);   // 刻意不 derive Debug
+fn validate_age(v: &str) -> Result<u8, Rejection<String>> {
+    match v.trim().parse::<u8>() { Ok(x) if x <= 120 => Ok(x), _ => Err(Rejection(v.to_string())) }
+}
+fn main() {
+    let x = validate_age("999").unwrap(); // Err 没实现 Debug
+}
+```
+
+**实测输出（E0277，节选）**：
+
+```text
+error[E0277]: `Rejection<String>` doesn't implement `Debug`
+   --> src/main.rs:6:33
+    |
+  6 |     let x = validate_age("999").unwrap();
+    |                                 ^^^^^^ the trait `Debug` is not implemented for `Rejection<String>`
+    |
+note: required by a bound in `Result::<T, E>::unwrap`
+   --> .../library/core/src/result.rs:1228:12
+    |
+1226 |     pub fn unwrap(self) -> T
+     |            ------ required by a bound in this associated function
+1228 |         E: fmt::Debug,
+```
+
+诊断直接钉在 `unwrap` 的 `E: fmt::Debug` 边界上。这是 Rejection 设计里真实存在的双向张力：`Debug` 派生让 §3.5 的测试写起来顺手，却让「原始输入进日志」的路径全线洞开（反例 3）；不派生则测试必须改用 `expect_err()` 之外的显式解构（`match Err(r) => r.0`）。正确姿势是自定义一个**脱敏的** `Debug`（掩码中间字段），而不是裸 derive。
+
+### 反例 2：同一个 Rejection 值 `derive(Debug)` 后，敏感原值被 `{:?}` 原样冲进日志——实跑可见
+
+```rust
+#[derive(Debug)]
+pub struct Rejection<T>(pub T);
+fn validate(r: Rejection<String>) -> Result<(), Rejection<String>> { Err(r) }
+fn main() {
+    let r = Rejection("card_no=4111111111111111 cvv=123".to_string()); // 模拟被拒的敏感请求体
+    if let Err(e) = validate(r) { println!("错误日志: {e:?}"); }
+}
+```
+
+实跑输出（exit 0）：
+
+```text
+错误日志: Rejection("card_no=4111111111111111 cvv=123")
+```
+
+Rejection 模式越「成功」（忠实保留原值），日志泄漏面越大——`Debug` derive + `{e:?}` 的错误处理惯例组合起来，把被拒绝的完整请求体原样写进访问日志。§五 反例「用 String 传递所有错误」只讨论了错误可读性；这里补上另一半：**类型化 Rejection 若不做脱敏 Debug，比 String 更糟**，因为它结构化地保证了原值可达。PCI/PII 场景下 Rejection 内应存 `redacted: String`（截断+掩码后）与 `hash: u64`（对账用），原值只进加密审计流。
+
+### 反例 3：「拒绝」被 `unwrap_or` 洗成合法默认值——编译全绿的语义坍缩
+
+```rust
+pub struct Rejection<T>(pub T);
+fn parse_age(input: &str) -> Result<u8, Rejection<&str>> {
+    match input.trim().parse::<u8>() {
+        Ok(v) if v <= 120 => Ok(v),
+        _ => Err(Rejection(input)),
+    }
+}
+fn main() {
+    let age = parse_age("999").map_err(|_| Rejection("999")).unwrap_or(0);
+    println!("非法输入 999 经 unwrap_or(0) 后 age={}", age);
+}
+```
+
+实跑输出（exit 0）：`非法输入 999 经 unwrap_or(0) 后 age=0`。Rejection 类型本身没有防住任何东西——调用方用 `unwrap_or(default)` 把「被拒绝」与「值为默认」合并成同一个可执行状态。这与 §边界「所有失败坍缩到同一变体」是同一失效模式的两面：**变体区分只存在于类型里，处理侧一次 `unwrap_or` 就抹平**。判据：凡是 `Result<_, Rejection<_>>` 的调用点出现 `unwrap_or`/`unwrap_or_default`，review 时应要求给出「为什么这个失败可以静默降级」的注释，或直接编译期禁止（clippy 自定义 lint / `#[must_use]` 包装）。
+
+---
+
 ## 六、决策树：何时以及如何引入 Rejection Type
 
 ```mermaid
