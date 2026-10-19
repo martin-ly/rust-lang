@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 794,
-    "generated_at": "2026-10-19T13:06:17.097649+00:00"
+    "total_files": 797,
+    "generated_at": "2026-10-19T15:10:31.214550+00:00"
   },
   "files": [
     {
@@ -87710,7 +87710,7 @@
       "layer": "L6",
       "title": "算法与竞赛编程 (Algorithms & Competitive Programming)",
       "positioning": "",
-      "line_count": 1366,
+      "line_count": 1367,
       "theorem_chains": [],
       "anti_propositions": [
         {
@@ -87936,7 +87936,8 @@
         "../../05_comparative/01_systems_languages/01_rust_vs_cpp.md",
         "../08_formal_verification/01_formal_ecosystem_tower.md",
         "../10_performance/01_performance_optimization.md",
-        "../13_quizzes/04_quiz_domain_applications.md"
+        "../13_quizzes/04_quiz_domain_applications.md",
+        "../16_algorithm_patterns/18_competitive_programming_idioms.md"
       ],
       "transitions": 0,
       "has_cognitive_path": true,
@@ -88393,6 +88394,8 @@
         "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
         "../03_design_patterns/12_frontier_research_and_innovative_patterns.md",
         "../03_design_patterns/13_engineering_and_production_patterns.md",
+        "../16_algorithm_patterns/09_randomized_and_probabilistic_algorithms.md",
+        "../16_algorithm_patterns/11_online_and_streaming_algorithms.md",
         "07_algorithms_competitive_programming.md",
         "08_algorithm_engineering_practice.md",
         "09_data_structures_in_rust.md",
@@ -88409,7 +88412,7 @@
           "[算法复杂度分析](10_algorithm_complexity_analysis.md) · [算法工程实践](08_algorithm_engineering_practice.md)"
         ],
         "post": [
-          "[量子计算生态](16_quantum_computing_rust.md) · [机器学习生态](13_machine_learning_ecosystem.md)"
+          "[量子计算生态](16_quantum_computing_rust.md) · [机器学习生态](13_machine_learning_ecosystem.md) · [随机化与概率算法专页（16 组深页）](../16_algorithm_patterns/09_randomized_and_probabilistic_algorithms.md) · [在线与流式算法专页（16 组深页）](../16_algorithm_patterns/11_online_and_streaming_algorithms.md)"
         ]
       },
       "backward_chains": 0,
@@ -90575,6 +90578,83 @@
       "templated_chains": 0
     },
     {
+      "path": "G:\\_src\\rust-lang\\concept\\06_ecosystem\\11_domain_applications\\30_chrono_vs_jiff.md",
+      "layer": "L6",
+      "title": "chrono vs jiff：两代日期时间库的语义分野（实测对照）",
+      "positioning": "`29_time_and_date_ecosystem.md`（chrono 主生态页）的 W4 裁决子页——jiff 是否值得独立 canonical 页的评估结论：**建本页作为选型对比页**，jiff 不单开生态页（其版本实查锚已登记在 29 页 §二）。",
+      "line_count": 50,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 5,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "G:\\_src\\rust-lang\\concept\\06_ecosystem\\11_domain_applications\\31_desktop_gui_ecosystem.md",
+      "layer": "L6",
+      "title": "Rust 桌面 GUI 生态（canonical 缺口闭环页）",
+      "positioning": "W6 裁决产物——本库此前全库检索（`git ls-files concept` 无 gui/egui/slint 页；`egui|Slint|iced` 仅散落在 11 个他页引文）坐实 **desktop-GUI canonical 缺口**，本页为该缺口登记的 canonical 页。",
+      "line_count": 57,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 15,
+      "pre_post": {
+        "pre": [],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
+      "path": "G:\\_src\\rust-lang\\concept\\06_ecosystem\\11_domain_applications\\32_computer_vision_ecosystem.md",
+      "layer": "L6",
+      "title": "Rust 计算机视觉生态（canonical 缺口闭环页）",
+      "positioning": "W8 裁决产物——`DOMAIN_ECOSYSTEM_REALIGNMENT_PLAN_2026-10-19` 登记 computer-vision canonical 缺口（全库仅 13_machine_learning_ecosystem 顺带提及 CV 场景，无专页），本页为候选锚（image/imageproc/opencv/resvg）建页闭环裁决。",
+      "line_count": 62,
+      "theorem_chains": [],
+      "anti_propositions": [
+        {
+          "title": "## 五、反例"
+        }
+      ],
+      "code_blocks": [],
+      "sources": [],
+      "cross_references": [
+        "../../05_comparative/03_domain_comparisons/01_safety_boundaries.md",
+        "13_machine_learning_ecosystem.md",
+        "25_parallel_algorithms.md",
+        "31_desktop_gui_ecosystem.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 11,
+      "pre_post": {
+        "pre": [
+          "[Rust 桌面 GUI 生态](31_desktop_gui_ecosystem.md) · [机器学习生态](13_machine_learning_ecosystem.md) · [并行算法](25_parallel_algorithms.md)"
+        ],
+        "post": []
+      },
+      "backward_chains": 0,
+      "templated_chains": 0
+    },
+    {
       "path": "G:\\_src\\rust-lang\\concept\\06_ecosystem\\12_networking\\01_advanced_network_protocols.md",
       "layer": "L6",
       "title": "Rust 高级网络协议概览",
@@ -91948,9 +92028,9 @@
       ],
       "sources": [],
       "cross_references": [
+        "../../03_advanced/01_async/13_async_trait_object_safety.md",
         "../../05_comparative/05_idioms_patterns_architecture/04_architecture/01_hexagonal_clean_architecture.md",
         "../../05_comparative/README.md",
-        "../03_advanced/01_async/13_async_trait_object_safety.md",
         "../03_design_patterns/25_hexagonal_ports_and_adapters.md",
         "01_enterprise_architecture_frameworks.md",
         "05_strategic_domain_driven_design_in_rust.md",
@@ -101719,7 +101799,7 @@
       "layer": "L7",
       "title": "Rust 语言规范预研：从参考文档到形式化规范",
       "positioning": "",
-      "line_count": 32,
+      "line_count": 33,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [

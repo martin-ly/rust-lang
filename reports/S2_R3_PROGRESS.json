@@ -1,6 +1,6 @@
 {
  "loop": "S2-R3 实测反例补全（串行主代理模式）",
- "updated": "2026-10-19-post-W8",
+ "updated": "2026-10-19-post-W8-committed",
  "mode": "serial-main-agent (用户 2026-10-19 指令: 串行/落地为先/不派并行子代理)",
  "gap_definition": "concept/**/*.md 中既无『实测反例』也无 compile_fail 围栏（排除 SUMMARY/README/INDEX/00_ 前缀/quiz/sources）",
  "strict_gap_total": 72,
@@ -304,7 +304,7 @@
   "beta": "1.100.0 GA预计2026-11-12",
   "nightly": "1.101.0"
  },
- "next_queue": "W8: computer-vision canonical缺口裁决(建页或豁免登记) → 算法组07/11与16_algorithm_patterns主题重叠处置 → cron 14459c312b92 每周巡检评估",
+ "next_queue": "D/W队列(W1-W8+D1-D7+V1/T1)全清 → cron 14459c312b92 转每周巡检评估(全量门run_quality_gates.sh+KG刷新+腐烂检测); 语言语义组反例残余=0封账不动; 1.100.0 GA对齐轮挂cron e463a69a99c9(2026-11-13后)",
  "cron": "14459c312b92 (every 180m, 串行模式指令)",
  "rescan_2026_10_19_post_batch5": {
   "strict_gaps": 133,
@@ -468,7 +468,7 @@
   "F轨道三主题缺口从git历史取正文新建canonical",
   "00_meta按口径豁免固化"
  ],
- "last_batch": "W5-automotive (22_autosar_and_rust 实查重写+勘误)",
+ "last_batch": "W8 (computer-vision canonical页32建页+算法组重叠不合并裁决, commit ce49cb519 已push origin SSH)",
  "rescan_2026_10_19_post_batch16_fresh9": {
   "file": "scratch/s2_gaps_fresh9.json",
   "date": "2026-10-19-post-batch16",
@@ -651,6 +651,17 @@
    "status": "done",
    "date": "2026-10-19",
    "commit": "pending"
+  },
+  "W8_computer_vision": {
+   "status": "done",
+   "date": "2026-10-19",
+   "commit": "ce49cb519",
+   "pages": [
+    "11_domain_applications/32_computer_vision_ecosystem.md(新建)",
+    "07_algorithms_competitive_programming.md(挂链)",
+    "11_cutting_edge_algorithms.md(挂链)"
+   ],
+   "evidence": "image 0.25.10/opencv 0.101.1 crates.io API复核一致; 门: metadata D1-D6全零+dead-links 0+code-blocks strict candidate3181 CF1343 rot=0 EXIT0+semantic_health 100.0+authority strict PASS(any=100 none=0 core=0)"
   }
  }
 }

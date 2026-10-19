@@ -5,7 +5,7 @@
 > **Summary**: crates.io `date-and-time` 分类（935 crates）的 canonical 生态页：std `Instant`/`SystemTime` 边界、chrono 0.4.45 类型体系、chrono-tz 0.10.4 IANA 语义（中国 DST 历史、歧义/跳表三态）、time 0.3.55 对比与 2038/单调钟工程边界。本页补齐对称差报告登记的「54 页顺带提及、0 专页」缺口（2026-10-19）。
 > **受众**: [入门→进阶]
 > **内容分级**: [综述级+实测]
-> **前置概念**: [标准库时间原语](../../04_formal/09_system_semantics)
+> **前置概念**: [标准库时间原语](../../04_formal/09_system_semantics) · [系统语言时间处理对比（L5）](../../05_comparative/01_systems_languages/01_rust_vs_cpp.md)
 > **关联**: [可观测性与 SRE 模式](../14_enterprise_architecture/09_observability_and_sre_patterns.md)
 
 ---
