@@ -573,6 +573,15 @@
    "pages": "12页: 11_domain_applications/04,22 + 05_systems_and_embedded/30 + 04_formal/15_language_specification/02 + 07_future/02_preview_features/12 + 01_cargo/13 + 07_security_and_cryptography/01-04 + 12_networking/02 + 03_advanced/08_process_ipc/07",
    "evidence": "cargo-audit 0.22.2/cargo-vet 0.10.2/cargo-deny 0.20.2/rustls 0.23.43(8.76亿累计)/ring 0.17.14(7.06亿累计) 实查; Ferrocene分发口径勘误(crates.io仅0.1.0命名空间占位1696下载,本体走Ferrous门户); RustSec/MISRA Ltd/crates.io policies权威轨道登记; AUTOSAR-Rust官方规范缺口登记",
    "gate": "strict 1341/1341 EXIT0"
+  },
+  {
+   "batch": "D5-D7",
+   "date": "2026-10-19",
+   "track": "区块链+ML+游戏",
+   "pages": "7页: 11_domain_applications/01,02,05,13,15 + 06_data_and_distributed/06 + 04_formal/07_concurrency_semantics/06 (06_game_development为2026-07-12 Redirect stub合规不补)",
+   "evidence": "bitcoin 0.32.102(489万近期,0.33.0-beta在架)/ord 0.29.0/candle-core 0.11.0(HuggingFace)/burn 0.22.0(2026-10-06发布,四分类)/linfa 0.8.1/tch 0.26.0/bevy 0.19.1/wgpu 30.0.1(1343万近期)/macroquad 0.4.16/ggez 0.10.0 实查; substrate/polkadot转Parity私有发布口径勘误登记; tendermint-rs共识锚登记",
+   "gate": "strict EXIT0",
+   "d_queue_status": "D1-D7 全部落地"
   }
  ]
 }

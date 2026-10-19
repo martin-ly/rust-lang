@@ -993,3 +993,7 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「Distributed Consensus 分布式共识」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+共识工程栈登记：Rust 共识实现 canonical 案例为 tendermint-rs（Informal Systems，https://github.com/informalsystems/tendermint-rs）与 substrate 系（私有发布口径同上）；rust-bitcoin 0.32.102 为比特币协议 Rust 互操作权威库。

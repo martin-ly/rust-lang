@@ -1412,3 +1412,7 @@ mindmap
       5.1 多线程渲染管线
       5.2 !Send / !Sync
 ```
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+bevy **0.19.1**（736 万累计/147 万近期下载，https://bevy.org）· wgpu **30.0.1**（4,191 万累计/1,343 万近期下载——Rust 跨平台 GPU API 事实标准，https://wgpu.rs）· macroquad **0.4.16**（188 万累计）· ggez **0.10.0**（game-engines 分类 1,348 crates 中轻量 2D 框架，https://ggez.rs）——实查 2026-10-19。ECS 生态锚：hecs/bevy_ecs 版本随 Bevy 0.19 线联动。

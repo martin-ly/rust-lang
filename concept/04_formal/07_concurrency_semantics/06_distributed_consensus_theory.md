@@ -926,3 +926,7 @@ mindmap
 ## 对应测验
 
 完成 [L3 语义模型与跨语言对比测验](../../03_advanced/00_concurrency/10_quiz_semantic_models.md) 验证对分布式共识、STM、代数效应、依赖/细化类型与语言语义模型矩阵的掌握程度（15 题：🟢3 / 🟡10 / 🔴2）。
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+理论页生态锚：Rust 共识实证案例同 06_ecosystem/06_data_and_distributed/06_distributed_consensus.md 锚节（tendermint-rs / rust-bitcoin 0.32.102 实查）。

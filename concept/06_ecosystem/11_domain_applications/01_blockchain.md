@@ -975,3 +975,7 @@ Solidity 是专为 EVM 设计的高级语言，有内置的合约和事件概念
 
 Substrate 是 Parity 开发的区块链开发框架，完全用 Rust 编写。它提供模块（Module）化组件（共识、P2P、存储），使开发者可以用 Rust 快速构建自定义区块链。
 </details>
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+bitcoin(rust-bitcoin) **0.32.102**（stable 实查；newest 0.33.0-beta；1,763 万累计/489 万近期下载，https://github.com/rust-bitcoin/rust-bitcoin）· ord **0.29.0**（Ordinal 钱包/浏览器，Rust 单二进制，https://github.com/ordinals/ord）——crates.io API 2026-10-19 实查。canonical 缺口登记：substrate/polkadot 已于 2024-2025 转向 Parity 私有发布（不再 crates.io 公开发布主版本线），库内 substrate 叙述需按 https://github.com/paritytech 当前口径核查——历史叙述保留。

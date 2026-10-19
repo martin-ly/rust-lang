@@ -1202,3 +1202,7 @@ mindmap
       5.1 Rapier纯 Rust 物理引擎
       5.2 物理与渲染的同步
 ```
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+bevy **0.19.1**（736 万累计/147 万近期下载，https://bevy.org）· wgpu **30.0.1**（4,191 万累计/1,343 万近期下载——Rust 跨平台 GPU API 事实标准，https://wgpu.rs）· macroquad **0.4.16**（188 万累计）· ggez **0.10.0**（game-engines 分类 1,348 crates 中轻量 2D 框架，https://ggez.rs）——实查 2026-10-19。工业案例：Bevy 为 Rust 游戏引擎旗舰（bevy.org，MIT/Apache-2.0）；wgpu 30.x 支撑 WebGPU 原生+浏览器双轨。
