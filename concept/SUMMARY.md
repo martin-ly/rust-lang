@@ -540,6 +540,7 @@
   - [unsafe 算法不变式（Unsafe Algorithm Invariants）](06_ecosystem/11_domain_applications/28_unsafe_algorithm_invariants.md)
   - [Rust 日期与时间生态（chrono 系）](06_ecosystem/11_domain_applications/29_time_and_date_ecosystem.md)
     - [chrono vs jiff：两代日期时间库的语义分野（实测对照）](06_ecosystem/11_domain_applications/30_chrono_vs_jiff.md)
+  - [Rust 桌面 GUI 生态（canonical 缺口闭环页）](06_ecosystem/11_domain_applications/31_desktop_gui_ecosystem.md)
   - [形式化算法理论 (Formal Algorithm Theory)](04_formal/00_type_theory/13_formal_algorithm_theory.md)
   - [系统可组合性 (System Composability)](06_ecosystem/03_design_patterns/04_system_composability.md)
   - [微服务架构模式 (Microservice Architecture Patterns)](06_ecosystem/03_design_patterns/05_microservice_patterns.md)

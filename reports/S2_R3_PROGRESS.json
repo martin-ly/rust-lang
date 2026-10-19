@@ -1,6 +1,6 @@
 {
   "loop": "S2-R3 实测反例补全（串行主代理模式）",
-  "updated": "2026-10-19-post-W19",
+  "updated": "2026-10-19-post-W4-W6",
   "mode": "serial-main-agent (用户 2026-10-19 指令: 串行/落地为先/不派并行子代理)",
   "gap_definition": "concept/**/*.md 中既无『实测反例』也无 compile_fail 围栏（排除 SUMMARY/README/INDEX/00_ 前缀/quiz/sources）",
   "strict_gap_total": 72,
@@ -257,6 +257,31 @@
         "04_formal/00_type_theory/13_formal_algorithm_theory"
       ],
       "evidence": "二分中点三profile光谱: 常量版rustc硬拒arithmetic_overflow逐字(-O同样拒,旧文称可编译=标注腐烂已修+compile_fail块重写)/变量debug panic101/-O回绕mid=9223372036854775806 exit0"
+    },
+    {
+      "batch": "W4-jiff-eval",
+      "date": "2026-10-19",
+      "group": "11_domain_applications (W4 jiff评估裁决)",
+      "pages": [
+        "新建30_chrono_vs_jiff.md",
+        "29页jiff候选裁决闭环",
+        "SUMMARY挂链"
+      ],
+      "evidence": "本机cargo1.99.1+jiff0.2.38/chrono0.4.45/chrono-tz0.10.4实测: NY模糊01:30 chrono->Ambiguous(EDT,EST)三态 vs jiff->Ok自动取EDT-04:00; 缺失02:30 chrono->None vs jiff->Ok平移03:30; jiff Timestamp拒date-only串Err; 往返05:30Z->01:30EDT锁定消歧偏移",
+      "commit": "b508dc17b",
+      "pushed": true
+    },
+    {
+      "batch": "W6-gui-canonical",
+      "date": "2026-10-19",
+      "group": "11_domain_applications (W6 GUI canonical缺口闭环)",
+      "pages": [
+        "新建31_desktop_gui_ecosystem.md",
+        "SUMMARY挂链"
+      ],
+      "evidence": "全库git ls-files无GUI页坐实缺口; crates.io实查: egui0.37.0(2696万/686万近期)/eframe0.37.0/slint1.18.1/iced0.14.0(2025-12-07发版放缓)/tao0.37.1/winit0.30.13/wgpu30.0.1/nwg1.0.13停更陷阱/leptos0.8.22/dioxus0.7.10/yew0.23.0衰减/wry0.57.0; 两强格局egui vs Slint+底层winit/tao+wgpu双收敛; computer-vision缺口仍开放登记候选锚image0.25.10/imageproc0.27.0/opencv0.101.1/resvg0.48.1归W8裁决",
+      "commit": null,
+      "pushed": false
     }
   ],
   "version_baseline": {
@@ -265,7 +290,7 @@
     "beta": "1.100.0 GA预计2026-11-12",
     "nightly": "1.101.0"
   },
-  "next_queue": "W6: GUI 生态 canonical 缺口页裁决(egui/iced/Slint 实查) + computer-vision canonical 缺口登记 → 挂账清扫(P1/P2权威微补4+2页) → cron 14459c312b92 转每周巡检评估",
+  "next_queue": "W8: computer-vision canonical缺口裁决(建页或豁免登记) → 算法组07/11与16_algorithm_patterns主题重叠处置 → cron 14459c312b92 每周巡检评估",
   "cron": "14459c312b92 (every 180m, 串行模式指令)",
   "rescan_2026_10_19_post_batch5": {
     "strict_gaps": 133,
@@ -534,7 +559,7 @@
     },
     "note": "W18批4(14/15/16/17)落盘后enterprise组非stub页清零(余1页为08_redirect stub合规豁免)。W19清掉03_advanced/04_formal残余2页。剩余38页全部位于06_ecosystem domain组——按用户2026-10-19方案A(DOMAIN_ECOSYSTEM_REALIGNMENT_PLAN_2026-10-19.md已确认生效)豁免反例单，转D轨道生态实证线。"
   },
-  "s2_r3_status": "2026-10-19 W19后：语言语义组(01_foundation~04_formal)反例缺口=0，S2-R3降格收尾封账；domain组38页豁免项归D轨道五要素验收线管理",
+  "s2_r3_status": "2026-10-19 W19后：语言语义组反例缺口=0封账；W5(automotive)/W7(freshness)/W4(jiff建页30)/W6(GUI建页31)闭环；剩余：computer-vision canonical缺口(W8)、算法组④裁决见下",
   "d_track_batches": [
     {
       "batch": "D1",
@@ -598,6 +623,13 @@
       "pages": "14_enterprise_architecture/16 金融一手引用补链 + 14_enterprise_architecture/17 IoT SDK实查补链 + 11_domain_applications/13 & 06_data_and_distributed/07 candle组件锚 + 29页 jiff/aws-iot实查登记与compile_fail标注修正",
       "evidence": "jiff 0.2.38(2026-10-06, 2.32亿累计/8789万近期, BurntSushi, date-and-time+no-std, Temporal API)实查; aws-iot-device-sdk 0.0.6 unofficial停更(IoT无canonical缺口闭环为生态事实); NautilusTrader官网P0 + efinancialcareers一手访谈P1 + NexusTrade 2年重写复盘P1; SEO农场页污染勘误方法论登记(版本与实查冲突一律P3); 29页 compile_fail 按仓库惯例去E码标注+rustc1.99.1 --extern实测E0277x2原文入页; chrono probe run实测输出全量到手(CST28800/1987CDT32400/NY Ambiguous-14400vs-18000/spring None)",
       "gate": "strict candidate 300/300 compile_fail 1343/1343 should_panic 10/10 EXIT0 (1653块)"
+    },
+    {
+      "batch": "W20-algo-dedup-audit",
+      "date": "2026-10-19",
+      "track": "算法组④stub/重复裁决(11_domain_applications算法5页)",
+      "verdict": "09_data_structures(683B)与12_formal_algorithm_theory(1.2K)为Redirect stub合规(五要素④已合规，权威页分别=16_algorithm_patterns/08与04_formal/00_type_theory/13)；07/11/24/26/28为实质内容页(9-64KB)，其中24/26/28已显式声明'应用视角权威页'并互链理论canonical(03_advanced/06_low_level_patterns/02与04_formal/08_algorithm_semantics/04)——符合仓库双页惯例(应用view+理论canonical)，判④合规不合并；07/11与16_algorithm_patterns组存在主题重叠(07 vs 18_competitive_programming_idioms; 11 vs 15_probabilistic/11_online)，登记为W8软性合并候选而非硬裁决",
+      "gate": "无代码改动，纯账本裁决"
     }
   ],
   "w_queue_status": {
