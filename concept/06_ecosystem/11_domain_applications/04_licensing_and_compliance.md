@@ -747,3 +747,7 @@ mindmap
       4.1 反命题树
       4.2 边界极限
 ```
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+cargo-audit **0.22.2**（RustSec 官方，https://rustsec.org · https://github.com/rustsec/rustsec）· cargo-vet **0.10.2**（Mozilla 供应链审计，https://mozilla.github.io/cargo-vet/）· cargo-deny **0.20.2**（Embark Studios，SPDX 许可证审计，近期下载 148 万）——crates.io API 2026-10-19 实查。许可证合规口径：cargo-deny 0.20.2 关键词即 advisories/ci/license/spdx，SPDX 许可证清单审计为其 canonical 工具。Ferrocene 分发事实（实查）：crates.io 上 `ferrocene` 命名空间 crate 仅 0.1.0 占位（1,696 累计下载），Ferrocene 编译器本体经 Ferrous Systems 门户按源访问许可分发，不走 crates.io——合规审查者获取渠道是 https://ferrous-systems.com/ferrocene 而非 crates.io。

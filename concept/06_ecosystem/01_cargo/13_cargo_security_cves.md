@@ -554,3 +554,7 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「Cargo 安全公告 CVE-2026-5222 与」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+cargo-audit **0.22.2**（RustSec 官方，https://rustsec.org · https://github.com/rustsec/rustsec）· cargo-vet **0.10.2**（Mozilla 供应链审计，https://mozilla.github.io/cargo-vet/）· cargo-deny **0.20.2**（Embark Studios，SPDX 许可证审计，近期下载 148 万）——crates.io API 2026-10-19 实查。RustSec advisory 数据库（https://rustsec.org/advisories/）为 CVE↔Rust crate 映射权威源。cargo-audit 0.22.2 MSRV 1.88 Edition 2024（版本元数据实查）。

@@ -565,6 +565,14 @@
    "pages": "14_enterprise_architecture 16页补版本实查锚 (08为Redirect stub不补,五要素⑤裁决记录在13)",
    "evidence": "tokio 1.53.1/axum 0.8.9/tracing 0.1.44/tower 0.5.3/sqlx 0.9.0 crates.io实查(近期下载2.16亿/1.11亿/1.8亿/1.62亿/3447万); 工业P0引用 Discord Read States/Figma multiplayer+2025内存优化/Amazon Prime Video 8000+设备Wasm/AWS Lambda Rust runtime/Firecracker; 缺口登记: DDD无canonical crate(生态事实)/金融一手引用待补/IoT SDK无canonical分类",
    "gate": "strict 1341/1341 EXIT0"
+  },
+  {
+   "batch": "D4",
+   "date": "2026-10-19",
+   "track": "合规/安全",
+   "pages": "12页: 11_domain_applications/04,22 + 05_systems_and_embedded/30 + 04_formal/15_language_specification/02 + 07_future/02_preview_features/12 + 01_cargo/13 + 07_security_and_cryptography/01-04 + 12_networking/02 + 03_advanced/08_process_ipc/07",
+   "evidence": "cargo-audit 0.22.2/cargo-vet 0.10.2/cargo-deny 0.20.2/rustls 0.23.43(8.76亿累计)/ring 0.17.14(7.06亿累计) 实查; Ferrocene分发口径勘误(crates.io仅0.1.0命名空间占位1696下载,本体走Ferrous门户); RustSec/MISRA Ltd/crates.io policies权威轨道登记; AUTOSAR-Rust官方规范缺口登记",
+   "gate": "strict 1341/1341 EXIT0"
   }
  ]
 }

@@ -265,3 +265,7 @@ mindmap
 ## 国际权威来源（P1 补充）
 
 - [Rust for Embedded Systems: Current State and Open Challenges](https://arxiv.org/abs/2311.05063)
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+Ferrocene 版本事实实查（2026-10-19）：Ferrocene 语言规范以 Ferrous Systems 门户为权威分发渠道（https://ferrous-systems.com/ferrocene）；crates.io `ferrocene` crate 为 2021 年命名空间占位（0.1.0，1,696 下载），非编译器分发渠道。ISO 26262 认证状态以 Ferrous 官方公告为准（https://ferrous-systems.com/blog/），页内历史认证叙述保留。

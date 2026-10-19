@@ -413,3 +413,7 @@ mindmap
       5.1 速率限制
       5.2 连接限制
 ```
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+TLS 栈实查：rustls **0.23.43**（0.24 线 dev 元数据同时在架，stable 引用用 0.23.43）· ring 0.17.14。可核验：rustls 为 Cloudflare/Fastly 边缘 TLS 的 Rust 侧选项之一（https://github.com/rustls/rustls 采用方叙述）。

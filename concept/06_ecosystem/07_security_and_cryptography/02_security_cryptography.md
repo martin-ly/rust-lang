@@ -1032,3 +1032,7 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「Security Cryptography 安全与密码学」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+rustls **0.23.43**（8.76 亿累计/1.89 亿近期下载——Rust 原生 TLS 事实标准，0.24 线开发中）· ring **0.17.14**（7.06 亿累计/1.49 亿近期下载，cryptography+no-std 双分类）· rand **0.10.0** ——实查 2026-10-19。RustCrypto 组织（https://github.com/RustCrypto）为算法实现聚合 canonical 源；sha2 等家族版本以该组织仓库为准（crates.io 单 crate 实查登记待后续轮）。

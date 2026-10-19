@@ -307,3 +307,7 @@ fn main() {
     unsafe { drop_privileges() };
 }
 ```
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+沙箱/IPC 侧实查锚：seccompiler（Firecracker 沙箱编译器，Rust 实现，https://github.com/firecracker-microvm/firecracker）· rustls 0.23.43（IPC over TLS 场景）。版本实查 2026-10-19。

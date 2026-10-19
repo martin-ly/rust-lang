@@ -1321,3 +1321,7 @@ mindmap
 ```
 
 > **认知功能**: 本 mindmap 从本页「安全 实践 Rust 代码的防御性编程」的章节结构提炼，一级分支对应核心主题，叶子节点为关键子概念，可作为本页的快速导航与复习索引。
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+cargo-audit **0.22.2**（RustSec 官方，https://rustsec.org · https://github.com/rustsec/rustsec）· cargo-vet **0.10.2**（Mozilla 供应链审计，https://mozilla.github.io/cargo-vet/）· cargo-deny **0.20.2**（Embark Studios，SPDX 许可证审计，近期下载 148 万）——crates.io API 2026-10-19 实查。加密库栈：rustls **0.23.43**（8.76 亿累计/1.89 亿近期下载——Rust 原生 TLS 事实标准，0.24 线开发中）· ring **0.17.14**（7.06 亿累计/1.49 亿近期下载，cryptography+no-std 双分类）· rand **0.10.0** ——实查 2026-10-19。

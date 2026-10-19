@@ -253,3 +253,7 @@ mindmap
       4.3 质量门 5 的语义
     五、cargo vet vs cargo
 ```
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+cargo-vet **0.10.2** 当前版本实查（2026-10-19，56.5 万累计/8.7 万近期下载；Apache-2.0/MIT 双许可）。canonical：Mozilla 官方文档 https://mozilla.github.io/cargo-vet/ 与 crates.io 审查政策（https://crates.io/policies）为供应链信任两条权威轨道。cargo-audit **0.22.2**（RustSec 官方，https://rustsec.org · https://github.com/rustsec/rustsec）· cargo-vet **0.10.2**（Mozilla 供应链审计，https://mozilla.github.io/cargo-vet/）· cargo-deny **0.20.2**（Embark Studios，SPDX 许可证审计，近期下载 148 万）——crates.io API 2026-10-19 实查

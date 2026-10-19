@@ -243,3 +243,7 @@ help: you can convert a `u16` to a `u8` and panic if the converted value doesn't
 > **来源**: [MISRA C:2025 Addendum 6 指南（本库 content 套件）](../../../content/safety_critical/10_standards/04_misra_c_2025_addendum_6_guide.md) · [Rust Reference — 类型转换](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-cast-operator) · [Safety-Critical Rust Consortium](https://rustfoundation.org/safety-critical-rust-consortium/)
 
 **配套 lint 门禁（编译通过，实测）**：把"禁止 `as` 收窄"落为 CI 门禁的惯用组合——`#![deny(clippy::cast_possible_truncation)]`（需 clippy 驱动）或最小可复现的 `#![forbid(unsafe_code)]` + 显式 `try_into` 审查清单；本页入口 crate 的 `#![deny(unsafe_code)]` 示例（上一节）与之构成同一门禁族。
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+安全车载工具链实查：cargo-vet 0.10.2（供应链审计，ISO 26262 供应链论证辅助）· ring 0.17.14（no-std crypto，车载 TLS 候选）· Ferrocene 分发口径见 04_licensing_and_compliance.md 锚节（非 crates.io 分发）。canonical 缺口登记：AUTOSAR Adaptive 与 Rust 的官方集成规范未公开发布，本页 AUTOSAR 映射为分析性内容——保留并标注为待权威源。

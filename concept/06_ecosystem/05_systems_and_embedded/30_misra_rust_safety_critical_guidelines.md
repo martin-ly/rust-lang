@@ -358,3 +358,7 @@ mindmap
 - [docs.rs](https://docs.rs/)
 - [crates.io](https://crates.io/)
 - [Rust Embedded Book](https://docs.rust-embedded.org/)
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+安全关键工具链实查：Ferrocene（Ferrous Systems，ISO 26262 ASIL-D 认证路径，非 crates.io 分发——crates.io `ferrocene` 仅 0.1.0 命名空间占位）· cargo-vet 0.10.2。MISRA 本身为闭源规范（MISRA Ltd），合规文本不可逐字转载——权威口径：https://www.misra.org.uk。
