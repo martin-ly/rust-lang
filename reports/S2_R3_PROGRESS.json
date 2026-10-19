@@ -1,6 +1,6 @@
 {
   "loop": "S2-R3 实测反例补全（串行主代理模式）",
-  "updated": "2026-10-19-post-batch16-fresh9",
+  "updated": "2026-10-19-post-W17-design_patterns-batch4",
   "mode": "serial-main-agent (用户 2026-10-19 指令: 串行/落地为先/不派并行子代理)",
   "gap_definition": "concept/**/*.md 中既无『实测反例』也无 compile_fail 围栏（排除 SUMMARY/README/INDEX/00_ 前缀/quiz/sources）",
   "strict_gap_total": 72,
@@ -391,7 +391,7 @@
     "F轨道三主题缺口从git历史取正文新建canonical",
     "00_meta按口径豁免固化"
   ],
-  "last_batch": "Batch15d",
+  "last_batch": "W17-design_patterns批4/5 (19_mde)",
   "rescan_2026_10_19_post_batch16_fresh9": {
     "file": "scratch/s2_gaps_fresh9.json",
     "date": "2026-10-19-post-batch16",
@@ -431,5 +431,19 @@
       "其余散组": 13
     },
     "note": "fresh8=91 -> batch16 落地 8 页(本代理7页+sibling在途49/53/54一并收走计入) embedded 残余约 3-4；权威清单 scratch/s2_gaps_fresh8.json(24h过期后下轮重扫)"
+  },
+  "rescan_2026_10_19_post_W17_batch4": {
+    "commits": [
+      "(批1)S2-R3 batch17 5页",
+      "03c17b1e5..(批2) 5页",
+      "1d877b43a(批3) 5页+1腐烂修复",
+      "b2f2cc457(批3收尾) 1页",
+      "599928cc5(批4) 1页"
+    ],
+    "pages_landed": 17,
+    "strict_gate": "check_concept_code_blocks --strict --sample 0: candidate 3164/0, compile_fail 1333/0/0, should_panic 10/10, rot=0, GATE_EXIT=0 (4507块)",
+    "design_patterns_remaining": 26,
+    "note": "06_ecosystem/03_design_patterns 组本轮 W17 线累计落地 16 页（批1-4）；组剩余 26 页清单存 scratch/s2_gaps_loop12.json（24h 过期后下轮 git ls-files 重扫）。44_config S2R3_MODE 块改 ignore 修 1 处 CF 标注。19_mde 新增 E0599 逐字 + 同名静默替换 200→170 双形态。",
+    "next_queue": "06_ecosystem/03_design_patterns 批5（候选：40_testing_and_mocking_idioms、42_actor_model、49_gof_patterns_in_rust、51_anti_patterns、39_api_design_and_semver）→ 14_enterprise_architecture(14) → 11_domain_applications(10)"
   }
 }
