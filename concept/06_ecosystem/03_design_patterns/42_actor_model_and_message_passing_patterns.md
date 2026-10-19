@@ -283,6 +283,71 @@ fn main() {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+上文反例处理的是「假冒 Actor」与「消息非 Send」。本机补两条 Actor **运行时**机器证据——编译全绿但体系级故障的形态。
+
+### 实测 1：ask-then-block 环形请求——两个 actor 都活着、邮箱非空、永久互等
+
+`t23a2.rs`（std `mpsc` 等价模拟，实测条件：无 actix/ractor 依赖；「同步提问+阻塞等回执」是各框架 `ask`/`request` API 的通用语义）：A 处理订单消息时向 B 提问并阻塞等回执；B 回答前反向向 A 提问并阻塞等回执；A 阻塞中永不消费自己的提问收件箱：
+
+```rust
+use std::sync::mpsc::channel;
+use std::thread;
+fn main() {
+    let (a_in_tx, a_in_rx) = channel::<String>();
+    let (a_q_tx, a_q_rx) = channel::<String>();   // A 的提问收件箱（无人消费）
+    let (b_q_tx, b_q_rx) = channel::<String>();
+    let (b_reply_tx, b_reply_rx) = channel::<String>();
+    let (a_reply_tx, a_reply_rx) = channel::<String>();
+    let (a_reply_tx2, a_q_tx2) = (a_reply_tx.clone(), a_q_tx.clone()); // 保活两通道=actor 体系活着
+    let h_a = thread::spawn(move || {
+        let m = a_in_rx.recv().unwrap();
+        b_q_tx.send(format!("A问B关于{m}")).unwrap();
+        let r = b_reply_rx.recv(); // 永挂：通道开着但无人发
+        println!("A 完成: {r:?}");
+    });
+    let h_b = thread::spawn(move || {
+        let q = b_q_rx.recv().unwrap();
+        a_q_tx.send(format!("B反问A关于{q}")).unwrap();
+        let r = a_reply_rx.recv(); // 永挂
+        println!("B 完成: {r:?}");
+    });
+    a_in_tx.send("订单#1".to_string()).unwrap();
+    let outcome = {
+        let (tx, rx) = channel::<()>();
+        thread::spawn(move || { let _ = h_a.join(); let _ = h_b.join(); let _ = tx.send(()); });
+        rx.recv_timeout(std::time::Duration::from_secs(2)).is_ok()
+    };
+    println!("双方 2s 内都完成? {outcome}");
+    println!("反问滞留 A 收件箱 = {}", !a_q_rx.try_recv().is_err());
+    let _ = (a_reply_tx2, a_q_tx2);
+    std::process::exit(0);
+}
+```
+
+实跑输出：
+
+```text
+双方 2s 内都完成? false
+反问滞留 A 收件箱 = true
+```
+
+**没有任何 panic、没有线程死亡、消息全部投递成功**——故障形态是「mailbox 非空 + actor 存活 + 零进展」。这比 Mutex 死锁更难检测：锁死锁至少能被锁序审计或 `try_lock` 探针抓到，actor 环形等待的现场特征是「一切正常」，只有 watchdog（join 超时/心跳）能揭穿。防线：actor 内禁止持处理线程同步 `ask` 下游（改 `tell` + 回执消息回调，或给 `ask` 强制超时——本例 `recv_timeout` 就是最小 watchdog 等价物）。
+
+### 实测 2：无界邮箱把背压全转嫁给内存——195MB 峰值驻留、send 零阻塞
+
+`t23b_unbounded.rs`（std `mpsc` = 无界队列，与多数 actor 框架默认 mailbox 同语义）：生产者 200,000 条 ×1KB、消费者先睡 150ms（模拟慢 handler）：
+
+```text
+生产者: 200,000 条×1KB 全部入队成功，用时 115.9757ms（无任何 send 阻塞/拒绝）
+消费者: 收到 200000 条 / 204800000 字节（195MB 峰值驻留），消费用时 67.1597ms
+```
+
+生产速率 > 消费速率时，无界邮箱**永远接受**：不阻塞、不拒绝、不告警，差异全部变成驻留内存。真实场景（慢数据库 handler + 突发流量）里这就是 OOM 路径，而且 OOM 点离肇事 actor 很远。第六节决策树选「Actor」时应同步追问：该框架 mailbox 是否有界？无界时必须在生产者侧自建节流（信号量/令牌桶），否则「消息传递解耦」只是把背压从队列搬进了堆。
+
+---
+
 ## 六、决策树：何时选用 Actor / Channel / 共享状态
 
 ```mermaid

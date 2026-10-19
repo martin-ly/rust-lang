@@ -767,6 +767,67 @@ fn flaky_timeout() {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+7.3「过度 Mock」谈的是量，本机补的是**质**：mock 与真实实现的签名/语义漂移的两档机器证据——响亮的编译拦，静默的全绿漏。
+
+### 实测 1：trait 演进加参数，手抄 mock 没跟进 → **E0050 逐字对比参数数**
+
+`t22a2.rs`：trait `Payment::charge` 演进为 `(amt, ctx)` 两参数，测试 mock 仍是旧单参数手抄：
+
+```rust,compile_fail
+trait Payment { fn charge(&self, amt: u32, ctx: &str) -> Result<u32, String>; }  // ← 演进后
+struct MockPayment { calls: std::cell::RefCell<Vec<u32>> }
+impl Payment for MockPayment {
+    fn charge(&self, amt: u32) -> Result<u32, String> {   // mock 手抄旧签名
+        self.calls.borrow_mut().push(amt); Ok(0)
+    }
+}
+fn main() {}
+```
+
+**实测诊断**：
+
+```text
+error[E0050]: method `charge` has 2 parameters but the declaration in trait `Payment::charge` has 3
+  |
+2 | trait Payment { fn charge(&self, amt: u32, ctx: &str) -> Result<u32, String>; }
+  |                           -------------------------- trait requires 3 parameters
+5 |     fn charge(&self, amt: u32) -> Result<u32, String> {
+  |               ^^^^^^^^^^^^^^^ expected 3 parameters, found 2
+```
+
+好消息档：手抄 mock 的签名漂移被 rustc 用「trait requires N parameters」逐字对比逮住——trait 加参数时所有 mock impl 点会一起红，这是「trait 即契约」的护栏红利。注意它只拦**形状**漂移，参数名/顺序相同但语义不同时编译全绿（见实测 2）。
+
+### 实测 2：形状全对、语义漂移——mock 全额退款 vs 生产收 3% 手续费 → 测试全绿、生产少收 30
+
+`t22b.rs`：`Real::charge` 返回 `amt * 97 / 100`（手续费），`MockPayment::charge` 返回全额；被测函数 `settle` 只看返回值，测试断言只检查 `calls == [1000]`：
+
+```rust
+trait Payment { fn charge(&self, amt: u32) -> Result<u32, String>; }
+struct Real;
+impl Payment for Real { fn charge(&self, amt: u32) -> Result<u32, String> { Ok(amt * 97 / 100) } } // 生产：收 3% 手续费
+struct MockPayment { calls: std::cell::RefCell<Vec<u32>> }
+impl Payment for MockPayment { fn charge(&self, amt: u32) -> Result<u32, String> { self.calls.borrow_mut().push(amt); Ok(amt) } } // mock：全额
+fn settle(p: &dyn Payment) -> u32 { p.charge(1000).unwrap() }
+fn main() {
+    let m = MockPayment { calls: Default::default() };
+    let via_mock = settle(&m);       // 测试里断言的是 calls==[1000]，返回值不检查
+    let via_real = settle(&Real);    // 生产真实值
+    println!("mock 路径 settle={via_mock}（测试全绿）; real 路径 settle={via_real}（生产实收）; 差额 = {}", via_mock - via_real);
+}
+```
+
+实跑输出：
+
+```text
+mock 路径 settle=1000（测试全绿）; real 路径 settle=970（生产实收）; 差额 = 30
+```
+
+签名、类型、trait 契约全部满足，测试套件全绿——差异只在数值语义。这是 mock 体系最贵的一类事故：**断言只验证交互（calls）不验证返回值语义时，mock 的「善意默认实现」就是生产账单误差**。缓解手段按代价排序：① 断言同时钉返回值黄金值；② 对关键结算路径加一档真实现 smoke（本例 `settle(&Real)==970` 一行即可拆穿）；③ mock 实现禁止自创逻辑，直接从真实实现的纯函数派生（`Real` 的公式复用而非手抄）。与 19_mde 页「同名静默替换」同族：**编译器只保证形状一致，语义一致必须有人（或黄金用例）负责**。
+
+---
+
 ## 八、决策树：选择测试/模拟策略
 
 ```mermaid
