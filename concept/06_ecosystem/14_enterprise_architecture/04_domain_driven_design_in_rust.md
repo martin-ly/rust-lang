@@ -351,3 +351,7 @@ pub struct Order {
 > - D. 用 `unsafe` 修改
 >
 > <details><summary>答案</summary>B. 聚合内部累积事件，仓储保存时取出并分发/持久化。</details>
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+DDD 战术模式落地栈：tokio **1.53.1**（2.16 亿近期下载）· axum **0.8.9**（1.11 亿近期下载）· tracing **0.1.44**（1.80 亿近期下载）· tower **0.5.3**（1.62 亿近期下载）· sqlx **0.9.0**（3,447 万近期下载）——crates.io API 2026-10-19 实查，https://crates.io/crates/{tokio,axum,tracing,tower,sqlx}。canonical 缺口登记：Rust 生态无 DDD 框架 canonical crate（DDD 以惯用法+crate 组合实现），此乃生态事实。

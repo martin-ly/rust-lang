@@ -258,3 +258,7 @@ error[E0308]: mismatched types
 - [axum docs](https://docs.rs/axum/latest/axum/)
 - [serde on crates.io](https://crates.io/crates/serde)
 - [tokio on crates.io](https://crates.io/crates/tokio)
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+战略 DDD 落地栈：tokio **1.53.1**（2.16 亿近期下载）· axum **0.8.9**（1.11 亿近期下载）· tracing **0.1.44**（1.80 亿近期下载）· tower **0.5.3**（1.62 亿近期下载）· sqlx **0.9.0**（3,447 万近期下载）——crates.io API 2026-10-19 实查，https://crates.io/crates/{tokio,axum,tracing,tower,sqlx}。工业采用可核验引用：Discord Read States 服务 Go→Rust 重写（tokio 运行时；p99 毫秒级→微秒级，https://blog.discordapp.com/why-discord-is-switching-from-go-to-rust）· Figma multiplayer 服务 Rust 子进程（序列化 10x 提速；2025-06 内存优化再省 20%，https://www.figma.com/blog/rust-in-production-at-figma · https://www.figma.com/blog/supporting-faster-file-load-times-with-memory-optimizations-in-rust）· Amazon Prime Video 跨 8,000+ 设备类型应用层 Rust+Wasm（https://www.amazon.science/blog/how-prime-video-updates-its-app-using-more-than-8-000-device-types-worldwide）

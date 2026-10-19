@@ -782,3 +782,7 @@ pub async fn call_llm(req: LlmRequest) -> Result<LlmResponse, std::io::Error> {
 > **文档版本**: 1.2
 > **最后更新**: 2026-08-04
 > **状态**: ✅ P6-E 扩展：新增 AI/LLM 可观测性；P7 WS-D 增强：新增 OpenTelemetry/Prometheus/Grafana/Jaeger/Loki 集成模式与混沌工程
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+可观测性栈当前版本：tracing 0.1.44（8.09 亿累计下载，no-std profiling/debugging 双分类）· tower 0.5.3 · opentelemetry-rust 组件族（OTLP 贡献者轨道，https://github.com/open-telemetry/opentelemetry-rust）。版本实查 2026-10-19。

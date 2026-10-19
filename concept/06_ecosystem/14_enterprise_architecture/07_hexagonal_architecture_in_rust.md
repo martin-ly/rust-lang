@@ -247,3 +247,7 @@ mindmap
 ## 国际化权威来源补充（International Authority Sources）
 
 - <https://blog.rust-lang.org/>
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+六边形架构示例栈：tokio **1.53.1**（2.16 亿近期下载）· axum **0.8.9**（1.11 亿近期下载）· tracing **0.1.44**（1.80 亿近期下载）· tower **0.5.3**（1.62 亿近期下载）· sqlx **0.9.0**（3,447 万近期下载）——crates.io API 2026-10-19 实查，https://crates.io/crates/{tokio,axum,tracing,tower,sqlx}。

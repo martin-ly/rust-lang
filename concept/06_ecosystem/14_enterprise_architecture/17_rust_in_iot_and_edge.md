@@ -382,3 +382,7 @@ mindmap
 > **文档版本**: 1.0
 > **最后更新**: 2026-08-04
 > **状态**: ✅ P9-6 新增权威页
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+IoT/Edge 案例栈：tokio **1.53.1**（2.16 亿近期下载）· axum **0.8.9**（1.11 亿近期下载）· tracing **0.1.44**（1.80 亿近期下载）· tower **0.5.3**（1.62 亿近期下载）· sqlx **0.9.0**（3,447 万近期下载）——crates.io API 2026-10-19 实查，https://crates.io/crates/{tokio,axum,tracing,tower,sqlx}（IoT 侧 tokio-util/no_std 组合）。工业案例：AWS Greengrass Rust SDK（https://github.com/aws/aws-iot-device-sdk-rusts3 系组件族待实查登记）。canonical 缺口：IoT 设备 SDK 无 crates.io canonical 分类，登记跟踪。

@@ -697,3 +697,7 @@ flowchart TD
 > **文档版本**: 1.0
 > **最后更新**: 2026-08-04
 > **状态**: ✅ P7 WS-D 新增权威页
+
+## 生态实证与版本实查锚（2026-10-19，crates.io API 实测）
+
+事件驱动/CQRS 示例栈：tokio **1.53.1**（2.16 亿近期下载）· axum **0.8.9**（1.11 亿近期下载）· tracing **0.1.44**（1.80 亿近期下载）· tower **0.5.3**（1.62 亿近期下载）· sqlx **0.9.0**（3,447 万近期下载）——crates.io API 2026-10-19 实查，https://crates.io/crates/{tokio,axum,tracing,tower,sqlx}。canonical：CQRS 权威实测反例见 05_comparative/...architecture/02_cqrs_event_sourcing.md（重放 -794967296 实测）。
