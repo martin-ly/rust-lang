@@ -109,6 +109,78 @@ pub struct User { id: Uuid, name: String }
 
 ACL 增加映射开销。当上下游模型频繁变化且高度一致时，Conformist 或 Shared Kernel 可能更合适。
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+本页 3.1 端口写法（`async fn` 直接在 trait 里）与六边形的核心卖点「适配器运行时可替换」在 Rust 里**直接冲突**——本机实编译坐实。
+
+**实测 1：按本页 3.1 原样写 async 端口，用例层 `Box<dyn PricingService>` 注入即 E0038**。端口 trait 照抄本页形态（去 axum 依赖、std 化）：
+
+```rust,compile_fail
+pub struct Sku(pub String);
+pub struct Money(pub u64);
+pub struct PricingError;
+
+pub trait PricingService {
+    async fn price(&self, sku: &Sku) -> Result<Money, PricingError>;
+}
+
+pub struct LegacyPricingAcl;
+impl PricingService for LegacyPricingAcl {
+    async fn price(&self, _sku: &Sku) -> Result<Money, PricingError> { Ok(Money(100)) }
+}
+
+// 六边形卖点：适配器运行时替换（测试替身/灰度切换）
+fn run_case(svc: Box<dyn PricingService>) { let _ = svc; }
+fn main() { run_case(Box::new(LegacyPricingAcl)); }
+```
+
+rustc 1.99.1 逐字诊断（两处 E0038——Box 与每个构造点各报一次）：
+
+```text
+error[E0038]: the trait `PricingService` is not dyn compatible
+  --> t29_hex.rs:16:22
+   |
+16 | fn run_case(svc: Box<dyn PricingService>) { let _ = svc; }
+   |                      ^^^^^^^^^^^^^^^^^^ `PricingService` is not dyn compatible
+   |
+note: for a trait to be dyn compatible it needs to allow building a vtable
+  --> t29_hex.rs:7:14
+   |
+ 6 | pub trait PricingService {
+   |           -------------- this trait is not dyn compatible...
+ 7 |     async fn price(&self, sku: &Sku) -> Result<Money, PricingError>;
+   |              ^^^^^ ...because method `price` is `async`
+   = help: consider moving `price` to another trait
+   = help: only type `LegacyPricingAcl` implements `PricingService` within this crate; consider using it directly instead.
+```
+
+**实测 2：修复形态实编译实跑通过**——端口改为显式返回 `Pin<Box<dyn Future + Send + 'a>>`（`async_trait` 宏的 std 手工等价），注入恢复：
+
+```rust
+use std::pin::Pin;
+use std::future::Future;
+pub struct Sku(pub String);
+pub struct Money(pub u64);
+pub struct PricingError;
+pub trait PricingService {
+    fn price<'a>(&'a self, sku: &'a Sku) -> Pin<Box<dyn Future<Output = Result<Money, PricingError>> + Send + 'a>>;
+}
+pub struct LegacyPricingAcl;
+impl PricingService for LegacyPricingAcl {
+    fn price<'a>(&'a self, _sku: &'a Sku) -> Pin<Box<dyn Future<Output = Result<Money, PricingError>> + Send + 'a>> {
+        Box::pin(async move { Ok(Money(100)) })
+    }
+}
+fn run_case(svc: Box<dyn PricingService>) { let _ = svc; println!("Box<dyn PricingService> 注入成立"); }
+fn main() { run_case(Box::new(LegacyPricingAcl)); }
+```
+
+```text
+Box<dyn PricingService> 注入成立
+```
+
+要点：这不是边角案例而是**六边形 + async 的结构性张力**——端口的可替换性依赖 dyn 兼容，而裸 `async fn` 天生 dyn 不兼容。企业 Rust 六边形实现要么上 `async_trait`/`trait-variant`（引入宏依赖，每次调用堆分配装箱），要么端口放弃 async 签名。诊断里的 `= help: only type LegacyPricingAcl implements ... consider using it directly instead` 还会把团队悄悄推向「直接用具体类型」——那正是六边形要消灭的适配器耦合。与 [`concept/03_advanced/01_async/13_async_trait_object_safety.md`](../03_advanced/01_async/13_async_trait_object_safety.md) 的 dyn 兼容章互为实证入口。
+
 ---
 
 ## 六、决策树

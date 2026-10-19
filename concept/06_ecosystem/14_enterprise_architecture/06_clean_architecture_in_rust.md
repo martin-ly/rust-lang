@@ -120,6 +120,53 @@ serde = { version = "1", features = ["derive"] }
 
 对于小型项目，四层 workspace 可能过重。可合并 Entities 与 Use Cases 为一个 `domain` crate，但需保持依赖向内。
 
+## ⚠️ 实测反例（rustc 1.99.1 + cargo 1.99 实编译，2026-10-19）
+
+上面「反例」节声称内层依赖外层框架是错误，但它默认了**有人拦截这种错误**。本机实测的结论更冷酷：**Rust 工具链对「依赖方向向内」这条 Clean Architecture 第一法则零强制**——违规要么全绿，要么以无关的错误码偶然暴露。
+
+**实测 1：crate 内伪分层——内层 mod 调外层 mod，rustc 全绿**。同一 crate 里 `mod` 之间没有任何方向语义：
+
+```rust
+mod db { pub fn query(id: u32) -> String { format!("row{id}") } }
+mod entities {
+    // 号称"内层"，同 crate 内直接调用"外层" db —— rustc 对方向零检查
+    pub fn load(id: u32) -> String { crate::db::query(id) }
+}
+fn main() { println!("单crate伪分层: entities→db 逆向依赖编译全绿: {}", entities::load(1)); }
+```
+
+实跑输出（0 错误、0 警告）：
+
+```text
+单crate伪分层: entities→db 逆向依赖编译全绿: row1
+```
+
+用「一个 crate + 若干 mod」模拟 Clean Architecture 分层的团队，架构法则被违反时**没有任何信号**——这是伪分层的机器定义：结构存在、执法缺席。
+
+**实测 2：真 crate 拆分后，`domain → infra` 逆向 workspace 依赖同样全绿**。`cargo new` 两个 crate，domain（内层）在 Cargo.toml 反向声明 `infra = { path = "../infra" }`：
+
+```text
+Checking infra v0.1.0 (...\\s2r3w17\\t28ws2\\infra)
+    Checking domain v0.1.0 (...\\s2r3w17\\t28ws2\\domain)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.60s
+```
+
+cargo 照单全收，rustc 不产生任何「内层不应依赖外层」的诊断——**分层方向在 Rust 里是文档纪律，不是编译纪律**（对比 Java 世界有 ArchUnit/dependency-checker 类工具；Rust 侧需 cargo deny/arch_guard 级别的外部执法）。
+
+**实测 3：唯一接近硬约束的是 crate 边界本身**。内层 crate 若试图 `use` 未声明依赖的外层 crate，失败以 **E0432** 落地——但诊断语义是「unresolved import」，只说明「你没声明这个依赖」，不说明「这个方向违规」：
+
+```text
+error[E0432]: unresolved import `use_cases`
+ --> t28_inner.rs:2:5
+  |
+2 | use use_cases::ports;
+  |     ^^^^^^^^^ use of unresolved module or unlinked crate `use_cases`
+  |
+  = help: you might be missing a crate named `use_cases`
+```
+
+结论：Clean Architecture 页的「修正」清单默认了拦截存在；实际上**声明依赖即合法**（实测 2 全绿），拦截必须显式引入工具或 review 流程。把 workspace crate 拆分当作「架构自动生效」的 team 会在实测 1/2 的全绿里腐化方向纪律。
+
 ---
 
 ## 六、决策树
