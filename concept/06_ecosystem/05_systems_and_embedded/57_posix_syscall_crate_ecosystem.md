@@ -8,7 +8,7 @@
 > **定位**: W9 建页队列②——全库 10 页顺带使用 nix/rustix 而无专页（01_process_model_and_lifecycle、07_process_security_and_sandboxing、02_advanced_process_management 等），本页为闭环裁决产物。
 > **版本事实基线**: crates.io API 2026-10-19 实查；rustc 1.99.1。
 > **前置概念**: [进程模型与生命周期](../../03_advanced/08_process_ipc/01_process_model_and_lifecycle.md) · [进程安全与沙箱](../../03_advanced/08_process_ipc/07_process_security_and_sandboxing.md) · [Rust vs Zig：系统级 ABI 对比（L5）](../../05_comparative/01_systems_languages/06_rust_vs_zig.md)
-> **权威来源**: [rustix docs.rs](https://docs.rs/rustix/) · [nix docs.rs](https://docs.rs/nix/) · [crates.io os 分类](https://crates.io/categories/os)
+> **权威来源**: [rustix docs.rs](https://docs.rs/rustix/) · [nix docs.rs](https://docs.rs/nix/) · [crates.io os 分类](https://crates.io/categories/os) · [Rustonomicon — FFI（libc 回退与系统库绑定的 unsafe/ABI 官方口径）](https://doc.rust-lang.org/nomicon/ffi.html)（P0，2026-10-20 核验）
 
 ---
 

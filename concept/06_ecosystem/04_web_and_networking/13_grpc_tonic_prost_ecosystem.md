@@ -8,7 +8,7 @@
 > **定位**: W9 建页队列①（提及数最高）——全库 13 页顺带提及 tonic/gRPC 而无专页（01_distributed_systems、03_serde_patterns、01_async 等），本页为闭环裁决产物。
 > **版本事实基线**: crates.io API 2026-10-19 实查；rustc 1.99.1。
 > **前置概念**: [网络协议](07_network_protocols.md) · [分布式系统](01_distributed_systems.md) · [异步 I/O](../../03_advanced/01_async/01_async.md) · [Rust vs Go：gRPC 原生语言对比（L5）](../../05_comparative/01_systems_languages/03_rust_vs_go.md)
-> **权威来源**: [tonic docs.rs](https://docs.rs/tonic/) · [prost docs.rs](https://docs.rs/prost/) · [gRPC 官方仓库](https://github.com/grpc/grpc) · [crates.io network-programming 分类](https://crates.io/categories/network-programming)
+> **权威来源**: [tonic docs.rs](https://docs.rs/tonic/) · [prost docs.rs](https://docs.rs/prost/) · [gRPC 官方仓库](https://github.com/grpc/grpc) · [crates.io network-programming 分类](https://crates.io/categories/network-programming) · [std::net — TCP/传输层 std 锚点](https://doc.rust-lang.org/std/net/)（P0：gRPC=HTTP/2 over TCP 的 std 传输语义基线，2026-10-20 核验）
 
 ---
 

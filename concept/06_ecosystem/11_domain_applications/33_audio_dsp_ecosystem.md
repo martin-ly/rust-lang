@@ -8,7 +8,7 @@
 > **定位**: W9 建页队列③（最后一项）——全库仅 01_application_domains 与 05_game_development 顺带列出 rodio/cpal/symphonia，无专页；本页为闭环裁决产物。
 > **版本事实基线**: crates.io API 2026-10-19 实查（含子代理批量取证 w9_crates.json 38 锚点）；rustc 1.99.1。
 > **前置概念**: [游戏开发与音频集成](05_game_development.md) · [并行算法](25_parallel_algorithms.md) · [Rust vs Python：科学计算与音频栈对比（L5）](../../05_comparative/02_managed_languages/02_rust_vs_python.md) · [计算机视觉生态（信号处理同宗）](32_computer_vision_ecosystem.md)
-> **权威来源**: [rodio docs.rs](https://docs.rs/rodio/) · [symphonia docs.rs](https://docs.rs/symphonia/) · [cpal docs.rs](https://docs.rs/cpal/) · [crates.io multimedia 分类](https://crates.io/categories/multimedia)
+> **权威来源**: [rodio docs.rs](https://docs.rs/rodio/) · [symphonia docs.rs](https://docs.rs/symphonia/) · [cpal docs.rs](https://docs.rs/cpal/) · [crates.io multimedia 分类](https://crates.io/categories/multimedia) · [Rustonomicon — FFI（cpal 后端 WASAPI/CoreAudio/ALSA/JACK 系统 API 绑定的 unsafe 官方口径）](https://doc.rust-lang.org/nomicon/ffi.html)（P0，2026-10-20 核验）
 
 ---
 
