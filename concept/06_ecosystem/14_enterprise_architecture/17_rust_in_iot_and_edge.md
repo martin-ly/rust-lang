@@ -255,6 +255,28 @@ fn main() {
 
 ---
 
+## ⚠️ 实测反例（rustc 1.99.1 实编译/实跑，2026-10-19）
+
+IoT 设备离线判定是「两个时间戳相减」这种一行代码。本机实测给出它的双 profile 分裂——**同一行 `(now_ms - last_seen_ms) / 1000`，NTP 向后校时造成时间戳倒挂时，debug 编译期就拒、生产二进制回绕出天文数字，且后者退出码 0**：
+
+```rust
+use std::hint::black_box;
+fn main() {
+    // IoT 场景: NTP 向后校时使 now < last_seen（时间戳倒挂）
+    let last_seen_ms: u64 = black_box(1_700_000_010_000);
+    let now_ms: u64 = black_box(1_700_000_000_000);
+    let offline_seconds = (now_ms - last_seen_ms) / 1000;
+    println!("离线判定: {} 秒 —— u64 回绕", offline_seconds);
+}
+```
+
+- **debug profile**：编译期 `error: this arithmetic operation will overflow`（常量可判定时 rustc 直接硬拒）；非常量路径运行时 `attempt to subtract with overflow` panic。
+- **`rustc -O` 生产 profile**：实跑输出 `离线判定: 18446744073709541 秒 —— u64 回绕`，**退出码 0** —— 一台离线 10 秒的设备被判定「离线约 5.8 亿年」。
+
+这条回绕在 fleet 管理里静默通过全部 CI：单元测试用单调 mock 时钟永远测不到它，真实 NTP 校时/蓝牙时钟漂移才会触发。设备侧判据：时间差一律 `i64`/`checked_sub`/`saturating_sub`，并把「now < last_seen」当作需要显式处置的异常状态（传感器时钟不可信是 IoT 的常态而非边角）。它与本页「静态分配防截止期限」是同一类教训：**IoT 的 Rust 安全红利不覆盖单位、时序与数值域，这些仍要架构层自己兜**。
+
+---
+
 ## 八、决策树：IoT/Edge Rust 技术选型
 
 ```text
