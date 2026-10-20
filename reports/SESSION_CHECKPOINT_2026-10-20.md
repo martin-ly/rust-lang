@@ -42,6 +42,12 @@
 ### 波C：cargo/edition 事实实测复核
 rustc 1.99.1 工具链（`C:/_program/rust/rustup/toolchains/1.99.1-x86_64-pc-windows-msvc/bin` 直调，`export CARGO_HOME=C:\_program\rust\cargo`）：cargo new 默认 edition 行、cargo add 写入门径与 features 语义、jiff 依赖树——对应 24_cargo_basics 页事实校验（探针被叫停未产出，主线重跑）。
 
+## 3b. 已停探针的实证结论（可采信，2026-10-20 送达）
+
+- **authority 重扫探针（完成）**：复刻门逻辑独立扫描 792/691 页，与 10-20 报告基线零漂移；确认 **USENIX 不在门 P1 正则域内**（仅 crates 扩展口径有），3 页含 usenix 链接不计 P1 命中——波B 选锚时勿用 USENIX 论文凑 P1。探针基于 HEAD 71bdbd839（早于 384079391）：其 11 页 P1 清单中 13_grpc/21_spec/32_CV 三页已在 384079391 补学术锚闭合，波B 实际剩余 = 波B 清单减去这三页。复刻脚本 `…\cache\scratch\rescan_authority.py`（24h 后清理，需复跑就主线重建）。
+- **cargo 实测探针（完成，波C 可直接引用）**：rustc/cargo 1.99.1 下 `cargo new` 默认 **edition = "2024"**；`cargo add jiff` → `jiff = "0.2.38"`（jiff-core 0.1.1 + jiff-tzdb-platform 0.1.3→jiff-tzdb 0.1.9 + windows-link 0.2.1）；`cargo add --features` 仅显式 features 落盘为内联表 `serde_json = { version = "1.0.154", features = ["preserve_order"] }`，默认 features 展示不落盘；dry-run 刷新 index + 预览 + `warning: aborting add due to dry run` 不改文件。→ 24_cargo_basics 页事实校验以此为准。
+- 学术锚两探针（中断，部分产出）：仅采信其中已经主线 web_extract/arXiv API 标题级核验过的条目（已入 §3 波B 锚池）；两探针 partial transcript 在 `…\cache\delegation\live\deleg_922e6c0c\`，若波B 需要更多候选可翻 task-1.log / task-2.log 提取候选再主线核验，未核验项不得引用。
+
 ## 4. 环境备忘
 
 - terminal 经 bash；原生工具（git/cargo/python）只认 `C:/` 正斜杠路径。
